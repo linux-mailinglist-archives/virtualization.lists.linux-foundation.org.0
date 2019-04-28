@@ -2,75 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5115822728
-	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:18:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D07122729
+	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:18:24 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DF2B5BB3;
-	Sun, 19 May 2019 16:17:23 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2D946BE4;
+	Sun, 19 May 2019 16:17:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id B357E272A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id EBF071B11
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Apr 2019 15:52:26 +0000 (UTC)
-X-Greylist: delayed 00:09:53 by SQLgrey-1.7.6
-Received: from pio-pvt-msa3.bahnhof.se (pio-pvt-msa3.bahnhof.se [79.136.2.42])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E1A4882A
+	Sun, 28 Apr 2019 01:50:12 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 80FBD71C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Apr 2019 15:52:25 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by pio-pvt-msa3.bahnhof.se (Postfix) with ESMTP id 945BE4391E;
-	Fri, 26 Apr 2019 17:42:30 +0200 (CEST)
-Authentication-Results: pio-pvt-msa3.bahnhof.se; dkim=pass (1024-bit key;
-	unprotected) header.d=shipmail.org header.i=@shipmail.org
-	header.b=Fmm8HafN; dkim-atps=neutral
-X-Virus-Scanned: Debian amavisd-new at bahnhof.se
-X-Spam-Score: -3.1
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-Received: from pio-pvt-msa3.bahnhof.se ([127.0.0.1])
-	by localhost (pio-pvt-msa3.bahnhof.se [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id VuvOqvhRsIjG; Fri, 26 Apr 2019 17:42:25 +0200 (CEST)
-Received: from mail1.shipmail.org (h-205-35.A357.priv.bahnhof.se
-	[155.4.205.35]) (Authenticated sender: mb878879)
-	by pio-pvt-msa3.bahnhof.se (Postfix) with ESMTPA id 65A473F2EF;
-	Fri, 26 Apr 2019 17:42:24 +0200 (CEST)
-Received: from localhost.localdomain (h-205-35.A357.priv.bahnhof.se
-	[155.4.205.35])
-	by mail1.shipmail.org (Postfix) with ESMTPSA id C746036030C;
-	Fri, 26 Apr 2019 17:42:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=shipmail.org; s=mail;
-	t=1556293343; bh=mJTS0CQsweYfMQdGyho/lewnbiCcAlZeP2iIfxcMNyM=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=Fmm8HafNbU9b2pNnz/IT3Otk/LE5bt0Z0vyZerlU+W/EcOoSLYSsoltEqI8+HUr9z
-	RYzI4Z5W3rs4woZXdEQmDeSAnNiBvCGF4gzRy+M5wTSdfj2HsJlkV+wn3sTfSaNJYT
-	P2pZ93DOKTFgJmFzLiMAuqR6azUqrNPGml1i3aZU=
-Subject: Re: [PATCH] Revert "drm/qxl: drop prime import/export callbacks"
-To: Daniel Vetter <daniel@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>
-References: <20190426053324.26443-1-kraxel@redhat.com>
-	<CAKMK7uG+vMU0hqqiKAswu=LqpkcXtLPqbYLRWgoAPpsQQV4qzA@mail.gmail.com>
-From: Thomas Hellstrom <thomas@shipmail.org>
-Message-ID: <8ae152fe-7811-4de3-e26f-350650a8f992@shipmail.org>
-Date: Fri, 26 Apr 2019 17:42:23 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <CAKMK7uG+vMU0hqqiKAswu=LqpkcXtLPqbYLRWgoAPpsQQV4qzA@mail.gmail.com>
-Content-Language: en-US
+	Sun, 28 Apr 2019 01:50:11 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id z8so3359886pln.4
+	for <virtualization@lists.linux-foundation.org>;
+	Sat, 27 Apr 2019 18:50:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=km6nvMFOsSwfEhLerIzEth+9iCizOTyYju+loT0I83o=;
+	b=jQLqlF84DIuvSU/M49N2V9MjXSTIvD8x3osrCxUMBbW2s6ihFsDPhgMO8+Qjp3zhjQ
+	wYXhJzfgmHDAMxRWTr55M2uPpVu+1DJpU18TdOKGPsXHb7vf43Aiifp/5Z8EUSavFa6O
+	o42G7iWrcv3jN39cbKtjbVj9GF1+mB3P5EAqR5PnQQyLg8SW8Xcn91ESiumoU2UfWmlL
+	i5+/lXnWnqGXetW1gqM4bxwP2HqJyhhMdytXAK5H41f9ZGTuwcj/Xd6ep5Qijs7NeRM7
+	fMyLIq73bA182xzs/IzAxPC9wDumw50ArG56A/6wtTZAg1SMfjy18sC2VnnpjfCAQdCA
+	32+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=km6nvMFOsSwfEhLerIzEth+9iCizOTyYju+loT0I83o=;
+	b=rtq/nXb7kgHRlRS514gnKY5uAa8eQJrVXqOH+1JAUBms6UxlrAt9CW3Z+FlHV0my/3
+	kgVxA5QO5XIUozSlJ7NjDlRs6HCOR0jCD0bPcMlq9jlInLNRZoChVmnZqsZe8BVmKv7U
+	oo0+mdCLQhIGTY8WnDt3bHKatcBTqzEdM1tEc/NIVCCRh6XOi5k0buElSE6A+nda3IT3
+	rvksCvMKvG/oNbkilDu0stNlPxjLceVSsE0LECrBh2s6KAs6GTWc/yA9M4N8wc81Ywdi
+	u3va+ypwV4GSMHawS0PSo+gX4QEQyEcVKpa5xzticeu8LEfOjVfWiHzoZhyctM9TORu7
+	ojCw==
+X-Gm-Message-State: APjAAAUFZ23r4PzpDQ/5qpqkZ0YJmQCALNz+U/RV6JmDvTOknl1vv0Gb
+	i4qm+LoU75H6kmQTk+6PfWs+sg==
+X-Google-Smtp-Source: APXvYqw3cjqwBUbWVRIw2KkzcON84vhFih1xRtKjnqg2bMnhFOcX1TpqmM5A6Ma6oxhNk1oJONB94Q==
+X-Received: by 2002:a17:902:2de4:: with SMTP id
+	p91mr54620308plb.191.1556416210711; 
+	Sat, 27 Apr 2019 18:50:10 -0700 (PDT)
+Received: from always-ThinkPad-T480.bytedance.net ([61.120.150.76])
+	by smtp.gmail.com with ESMTPSA id
+	l15sm37555522pfi.79.2019.04.27.18.50.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 27 Apr 2019 18:50:09 -0700 (PDT)
+From: zhenwei pi <pizhenwei@bytedance.com>
+To: amit@kernel.org,
+	arnd@arndb.de,
+	gregkh@linuxfoundation.org
+Subject: [PATCH] virtio_console: remove vq buf while unpluging port
+Date: Sun, 28 Apr 2019 09:50:04 +0800
+Message-Id: <1556416204-30311-1-git-send-email-pizhenwei@bytedance.com>
+X-Mailer: git-send-email 2.7.4
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
-	dri-devel <dri-devel@lists.freedesktop.org>,
-	"open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	David Airlie <airlied@redhat.com>,
-	"open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<spice-devel@lists.freedesktop.org>
+Cc: linux-kernel@vger.kernel.org, pizhenwei@bytedance.com,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -82,88 +80,87 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 4/26/19 4:21 PM, Daniel Vetter wrote:
-> On Fri, Apr 26, 2019 at 7:33 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
->> This reverts commit f4c34b1e2a37d5676180901fa6ff188bcb6371f8.
->>
->> Simliar to commit a0cecc23cfcb Revert "drm/virtio: drop prime
->> import/export callbacks".  We have to do the same with qxl,
->> for the same reasons (it breaks DRI3).
->>
->> Drop the WARN_ON_ONCE().
->>
->> Fixes: f4c34b1e2a37d5676180901fa6ff188bcb6371f8
->> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> Maybe we need some helpers for virtual drivers which only allow
-> self-reimport and nothing else at all? I think there's qxl, virgl,
-> vmwgfx and maybe also vbox one who could use this ... Just a quick
-> idea.
-> -Daniel
+A bug can be easily reproduced:
+Host# cat guest-agent.xml
+<channel type="unix">
+  <source mode="bind" path="/var/lib/libvirt/qemu/stretch.agent"/>
+  <target type="virtio" name="org.qemu.guest_agent.0" state="connected"/>
+</channel>
+Host# virsh attach-device instance guest-agent.xml
+Host# virsh detach-device instance guest-agent.xml
+Host# virsh attach-device instance guest-agent.xml
 
-I think vmwgfx could, in theory, support the full range of operations,
-at least for reasonably recent device versions. However, it wouldn't be 
-terribly efficient since the exported dma-buf sglist would basically be 
-a bounce-buffer.
+and guest report: virtio-ports vport0p1: Error allocating inbufs
 
-/Thomas
+The reason is that the port is unplugged and the vq buf still remained.
+So, fix two cases in this patch:
+1, fix memory leak with attach-device/detach-device.
+2, fix logic bug with attach-device/detach-device/attach-device.
 
+Signed-off-by: zhenwei pi <pizhenwei@bytedance.com>
+---
+ drivers/char/virtio_console.c | 21 +++++++++++++++------
+ 1 file changed, 15 insertions(+), 6 deletions(-)
 
->> ---
->>   drivers/gpu/drm/qxl/qxl_drv.c   |  4 ++++
->>   drivers/gpu/drm/qxl/qxl_prime.c | 12 ++++++++++++
->>   2 files changed, 16 insertions(+)
->>
->> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
->> index 578d867a81d5..f33e349c4ec5 100644
->> --- a/drivers/gpu/drm/qxl/qxl_drv.c
->> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
->> @@ -255,10 +255,14 @@ static struct drm_driver qxl_driver = {
->>   #if defined(CONFIG_DEBUG_FS)
->>          .debugfs_init = qxl_debugfs_init,
->>   #endif
->> +       .prime_handle_to_fd = drm_gem_prime_handle_to_fd,
->> +       .prime_fd_to_handle = drm_gem_prime_fd_to_handle,
->>          .gem_prime_export = drm_gem_prime_export,
->>          .gem_prime_import = drm_gem_prime_import,
->>          .gem_prime_pin = qxl_gem_prime_pin,
->>          .gem_prime_unpin = qxl_gem_prime_unpin,
->> +       .gem_prime_get_sg_table = qxl_gem_prime_get_sg_table,
->> +       .gem_prime_import_sg_table = qxl_gem_prime_import_sg_table,
->>          .gem_prime_vmap = qxl_gem_prime_vmap,
->>          .gem_prime_vunmap = qxl_gem_prime_vunmap,
->>          .gem_prime_mmap = qxl_gem_prime_mmap,
->> diff --git a/drivers/gpu/drm/qxl/qxl_prime.c b/drivers/gpu/drm/qxl/qxl_prime.c
->> index 8b448eca1cd9..114653b471c6 100644
->> --- a/drivers/gpu/drm/qxl/qxl_prime.c
->> +++ b/drivers/gpu/drm/qxl/qxl_prime.c
->> @@ -42,6 +42,18 @@ void qxl_gem_prime_unpin(struct drm_gem_object *obj)
->>          qxl_bo_unpin(bo);
->>   }
->>
->> +struct sg_table *qxl_gem_prime_get_sg_table(struct drm_gem_object *obj)
->> +{
->> +       return ERR_PTR(-ENOSYS);
->> +}
->> +
->> +struct drm_gem_object *qxl_gem_prime_import_sg_table(
->> +       struct drm_device *dev, struct dma_buf_attachment *attach,
->> +       struct sg_table *table)
->> +{
->> +       return ERR_PTR(-ENOSYS);
->> +}
->> +
->>   void *qxl_gem_prime_vmap(struct drm_gem_object *obj)
->>   {
->>          struct qxl_bo *bo = gem_to_qxl_bo(obj);
->> --
->> 2.18.1
->>
->
+diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
+index fbeb719..f6e37f4 100644
+--- a/drivers/char/virtio_console.c
++++ b/drivers/char/virtio_console.c
+@@ -251,6 +251,7 @@ struct port {
+ 
+ /* This is the very early arch-specified put chars function. */
+ static int (*early_put_chars)(u32, const char *, int);
++static void remove_vq(struct virtqueue *vq);
+ 
+ static struct port *find_port_by_vtermno(u32 vtermno)
+ {
+@@ -1550,6 +1551,9 @@ static void unplug_port(struct port *port)
+ 	}
+ 
+ 	remove_port_data(port);
++	spin_lock_irq(&port->inbuf_lock);
++	remove_vq(port->in_vq);
++	spin_unlock_irq(&port->inbuf_lock);
+ 
+ 	/*
+ 	 * We should just assume the device itself has gone off --
+@@ -1945,17 +1949,22 @@ static const struct file_operations portdev_fops = {
+ 	.owner = THIS_MODULE,
+ };
+ 
++static void remove_vq(struct virtqueue *vq)
++{
++	struct port_buffer *buf;
++
++	flush_bufs(vq, true);
++	while ((buf = virtqueue_detach_unused_buf(vq)))
++		free_buf(buf, true);
++}
++
+ static void remove_vqs(struct ports_device *portdev)
+ {
+ 	struct virtqueue *vq;
+ 
+-	virtio_device_for_each_vq(portdev->vdev, vq) {
+-		struct port_buffer *buf;
++	virtio_device_for_each_vq(portdev->vdev, vq)
++		remove_vq(vq);
+ 
+-		flush_bufs(vq, true);
+-		while ((buf = virtqueue_detach_unused_buf(vq)))
+-			free_buf(buf, true);
+-	}
+ 	portdev->vdev->config->del_vqs(portdev->vdev);
+ 	kfree(portdev->in_vqs);
+ 	kfree(portdev->out_vqs);
+-- 
+2.7.4
 
 _______________________________________________
 Virtualization mailing list
