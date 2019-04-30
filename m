@@ -2,67 +2,67 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABC8AFB74
-	for <lists.virtualization@lfdr.de>; Tue, 30 Apr 2019 16:28:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA220FBB2
+	for <lists.virtualization@lfdr.de>; Tue, 30 Apr 2019 16:41:12 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AA4A019D0;
-	Tue, 30 Apr 2019 14:27:57 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 668F01A06;
+	Tue, 30 Apr 2019 14:41:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2260317C7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5E76F19CD
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Apr 2019 14:27:15 +0000 (UTC)
+	Tue, 30 Apr 2019 14:40:29 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 37A155F4
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 47DEF608
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Apr 2019 14:27:12 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id l25so12467434eda.9
+	Tue, 30 Apr 2019 14:40:27 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id b8so3449386edm.11
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Apr 2019 07:27:12 -0700 (PDT)
+	Tue, 30 Apr 2019 07:40:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
 	h=sender:date:from:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=2uA4FCMtV7veVYkCm4SR/ZM9zk510EuJlH4kS5wcnq0=;
-	b=YBvCaRFI2+1RGFxdWKdOYo4WummaE/wAobZ8T8ixGRoJ1dOwI7XQKDgnhichoXLr2t
-	OHGl+PafbUSjime2IWtbp9ln+FQ8BSJqt4SeHnoOmV+TouQmFNTzGDn/i0yyW3jpgmut
-	r+t0EELqEnq9w82lwzJfHhd/D/RnGOK+MUh6E=
+	bh=qzS8U1udWuumNLhqijKrH6EpVwbNJamIThyuKRBVkzg=;
+	b=kY5TW30mYuaWWjMkDHyP3HX4TBN4Cv77OwZxwtRl8kkms4rkNEP0jz1QEbXqdYyxP2
+	h2QQZyzRO7rh3ku7g4UGmb/OGOH98w8xuBpHf+RlOZrhkX39ajCfKzGUXXv90KmVaf03
+	QSnMFLWzThvzSaO3N5WgRewDfpxXQKJva/j/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
 	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=2uA4FCMtV7veVYkCm4SR/ZM9zk510EuJlH4kS5wcnq0=;
-	b=CVsLZZHMlmp3H5f9lG3ycqTMxE7aqKaiEfW3gTDfhMact5jonPvhEqqUHth3uUXGlP
-	6hpTsY7UyaTACt2UAKz4JkQoOL6bY/uo35B37A7KAIPbMuWmnnkuLzv5aDihy0vATkBD
-	eGKWjDTC0dDhL2itQ4+qD5SfdhroqFoDVU5144JpIOc0pl4XFpw9wXAp4G5ePYugmvl8
-	wObXuaBv5NEv0shtOdJCBV7H32YPCEbykSHk7qNDB663Eu72KG6TDKBaA8lIL7hKswyQ
-	g0kLNR1XOhfV/r40X1MJJy+iVeLJyvAG9cjt3cs6+6t36Uxl+sBRtvH8/OFConY1iicm
-	6RaQ==
-X-Gm-Message-State: APjAAAWJJzT0o0jJNdxX5O8RC0Y7s2OAgQSkGX0XqsqpBuAIQPyUNycS
-	bQgT5ZMwfpAYWshIvA+rtW13vw==
-X-Google-Smtp-Source: APXvYqxu3TKCxqHBal43a4rWQ3fFu7fXEMzIIsz0cyNNdqm8Qk3B+JS6Raax/OWzxvswcsdqHuO4pQ==
-X-Received: by 2002:a17:906:6a8e:: with SMTP id
-	p14mr20112364ejr.295.1556634431410; 
-	Tue, 30 Apr 2019 07:27:11 -0700 (PDT)
+	bh=qzS8U1udWuumNLhqijKrH6EpVwbNJamIThyuKRBVkzg=;
+	b=iVQbLwcmZjy2aP0iRmQLMp+IFCVGLd7wGdD3YVwBfX+pBdRvoFgS9LS1TVEsdfQglM
+	RS0+bSBKYUydnMb43zefWIPRwaSjgJoyf5sjkYAdeeCPtmCYiYn7fnuqWhUJSiJYZMga
+	Y9GtVekMPG3x04jhL5kYlQemxHERsP/rS5zqAchD2s+WH5tf6Q+iDY0qpFD/biG2HS09
+	TZpFNfqclgTaI14u5mR58wC1hZTjRvkiErm1PsMgXHGkoBqqbSD6VhjiYLmqEolEwJZH
+	xvyK9aKigqMZ708UpnqBhPYgqhDUAEPVzJA5GGKKQ5UrbI/5cS47YsbN0AfhWjESblLD
+	b78w==
+X-Gm-Message-State: APjAAAXVvgwIJP33TOb3LBDR3hPpTsLcWQRo0cVdi29BK/SdNrwl0NnM
+	VvrEsgI/e1V0tdyh2Rt/fa3+qw==
+X-Google-Smtp-Source: APXvYqw8xupl4wbLfKNOoPyvTge0TyFMK0iRnii6MSNGfUQujtUA75q5uWnpqEK3NeQj2M6PWJeGgA==
+X-Received: by 2002:a50:87c7:: with SMTP id 7mr42373831edz.5.1556635225778;
+	Tue, 30 Apr 2019 07:40:25 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id d6sm9926497edq.65.2019.04.30.07.27.09
+	by smtp.gmail.com with ESMTPSA id
+	y12sm6303211ejr.75.2019.04.30.07.40.23
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 30 Apr 2019 07:27:10 -0700 (PDT)
-Date: Tue, 30 Apr 2019 16:27:06 +0200
+	Tue, 30 Apr 2019 07:40:24 -0700 (PDT)
+Date: Tue, 30 Apr 2019 16:40:20 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Sam Ravnborg <sam@ravnborg.org>
 Subject: Re: [PATCH v3 01/19] drm: Add |struct drm_gem_vram_object| and helpers
-Message-ID: <20190430142706.GV3271@phenom.ffwll.local>
+Message-ID: <20190430144020.GX3271@phenom.ffwll.local>
 References: <20190429144341.12615-1-tzimmermann@suse.de>
 	<20190429144341.12615-2-tzimmermann@suse.de>
 	<20190429195855.GA6610@ravnborg.org>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20190429195855.GA6610@ravnborg.org>
-X-Operating-System: Linux phenom 4.14.0-3-amd64
+X-Operating-System: Linux phenom 4.14.0-3-amd64 
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
@@ -193,9 +193,6 @@ On Mon, Apr 29, 2019 at 09:58:55PM +0200, Sam Ravnborg wrote:
 > > +
 > I cannot remember how select will deal with symbols whos has
 > a  "depends on".
-
-It doesn't, randomized builds will go kaboom.
-
 > But if I recall correct then the "depends on" will be ignored
 > or in best case trigger a warning.
 > In other words - when we have symbols we select they should not
@@ -219,15 +216,6 @@ It doesn't, randomized builds will go kaboom.
 > 
 > But maybe this rambling is irrelevant - maybe check what we do with
 > other selectable symbols in DRM.
-
-I'm not even clear on why you need 2 symbols here ... If the goal is to
-create a drm_gem_helper.ko module, then that's a bit more work. Plus
-anyone needed it would always need to select both Kconfig symbols (because
-select isn't recursive at all).
-
-I'd just ditch one of them for now and got with DRM_GEM_VRAM_HELPER.
--Daniel
-
 > 
 > 
 > > +/**
@@ -238,10 +226,19 @@ I'd just ditch one of them for now and got with DRM_GEM_VRAM_HELPER.
 > > + */
 > It is likely only me, but...
 > I could use a short explanation what is GEM and maybe also VRAM.
-> 
+
+It exists:
+
+https://dri.freedesktop.org/docs/drm/gpu/drm-mm.html#the-graphics-execution-manager-gem
+
+In the same chapter even where this will be added. I do agree that
+explaining a bit more what's meant with VRAM would be good though.
+-Daniel
+
 > VRAM as video RAM, but maybe there is more constraints?
 > (When I first looked at DRM I wondered what you used Virtual RAM for.
 > But thats a long time ago so it counts only as a funny story.
+
 > 
 > > + * Buffer-objects helpers
 > > + */
