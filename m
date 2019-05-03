@@ -2,86 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83FE712B2C
-	for <lists.virtualization@lfdr.de>; Fri,  3 May 2019 12:04:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79B0C12B56
+	for <lists.virtualization@lfdr.de>; Fri,  3 May 2019 12:15:42 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CAF8638CC;
-	Fri,  3 May 2019 10:04:19 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A8BAC38D4;
+	Fri,  3 May 2019 10:15:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5551338C2
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5E83338CB
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  3 May 2019 10:03:21 +0000 (UTC)
+	Fri,  3 May 2019 10:15:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0582F79
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8F02679
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  3 May 2019 10:03:19 +0000 (UTC)
+	Fri,  3 May 2019 10:15:00 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id D3219AEDB;
-	Fri,  3 May 2019 10:03:17 +0000 (UTC)
-Subject: Re: [PATCH 00/10] s390: virtio: support protected virtualization
-To: Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>
-References: <20190426183245.37939-1-pasic@linux.ibm.com>
-	<20190503115511.17a1f6d1.cohuck@redhat.com>
-From: Juergen Gross <jgross@suse.com>
+	by mx1.suse.de (Postfix) with ESMTP id 7A323AEB8;
+	Fri,  3 May 2019 10:14:58 +0000 (UTC)
+Subject: Re: [PATCH v3 01/19] drm: Add |struct drm_gem_vram_object| and helpers
+To: "Koenig, Christian" <Christian.Koenig@amd.com>,
+	Sam Ravnborg <sam@ravnborg.org>
+References: <20190429144341.12615-1-tzimmermann@suse.de>
+	<20190429144341.12615-2-tzimmermann@suse.de>
+	<20190429195855.GA6610@ravnborg.org>
+	<1d14ef87-e1cd-4f4a-3632-bc045a1981c6@suse.de>
+	<20190430092327.GA13757@ravnborg.org>
+	<6e07e6c9-2ce7-c39f-8d55-46e811c61510@amd.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
 Openpgp: preference=signencrypt
-Autocrypt: addr=jgross@suse.com; prefer-encrypt=mutual; keydata=
-	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
-Message-ID: <1eb4b501-b22a-bba6-d4f9-68a278f6bd64@suse.com>
-Date: Fri, 3 May 2019 12:03:16 +0200
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+	xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+	AAHNKFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmNvbT7CwJQEEwEIAD4W
+	IQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznTtgIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgID
+	AQIeAQIXgAAKCRBoDcEdUwt6I7D7CACBK42XW+7mCiK8ioXMEy1NzGbXC51RzGea8N83oEJS
+	1KVUtQxrkDxgrW/WLSl/TfqHFsJpdEFOv1XubWbleun3uKPy0e5vZCd5UjZPkeNjnqfCYTDy
+	hVVsdOuFbtWDppJyJrThLqr9AgSFmoCNNUt1SVpYEEOLNE6C32BhlnSq21VLC+YXTgO/ZHTa
+	YXkq54hHj63jwrcjkBSCkXLh37kHeqnl++GHpN+3R+o3w2OpwHAlvVjdKPT27v1tVkiydsFG
+	65Vd0n3m/ft+IOrGgxQM1C20uqKvsZGB4r3OGR50ekAybO7sjEJJ1Obl4ge/6RRqcvKz4LMb
+	tGs85D6tPIeFzsBNBFs50uABCADGJj+DP1fk+UWOWrf4O61HTbC4Vr9QD2K4fUUHnzg2B6zU
+	R1BPXqLGG0+lzK8kfYU/F5RjmEcClsIkAaFkg4kzKP14tvY1J5+AV3yNqcdg018HNtiyrSwI
+	E0Yz/qm1Ot2NMZ0DdvVBg22IMsiudQ1tx9CH9mtyTbIXgACvl3PW2o9CxiHPE/bohFhwZwh/
+	kXYYAE51lhinQ3oFEeQZA3w4OTvxSEspiQR8dg8qJJb+YOAc5IKk6sJmmM7JfFMWSr22satM
+	23oQ3WvJb4RV6HTRTAIEyyZS7g2DhiytgMG60t0qdABG5KXSQW+OKlZRpuWwKWaLh3if/p/u
+	69dvpanbABEBAAHCwHwEGAEIACYWIQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznS4AIbDAUJ
+	A8JnAAAKCRBoDcEdUwt6I6X3CACJ8D+TpXBCqJE5xwog08+Dp8uBpx0T9n1wE0GQisZruACW
+	NofYn8PTX9k4wmegDLwt7YQDdKxQ4+eTfZeLNQqWg6OCftH5Kx7sjWnJ09tOgniVdROzWJ7c
+	VJ/i0okazncsJ+nq48UYvRGE1Swh3A4QRIyphWX4OADOBmTFl9ZYNPnh23eaC9WrNvFr7yP7
+	iGjMlfEW8l6Lda//EC5VpXVNza0xeae0zFNst2R9pn+bLkihwDLWxOIyifGRxTqNxoS4I1aw
+	VhxPSVztPMSpIA/sOr/N/p6JrBLn+gui2K6mP7bGb8hF+szfArYqz3T1rv1VzUWAJf5Wre5U
+	iNx9uqqx
+Message-ID: <a2398439-3bb5-d1ef-db94-82f252f461c2@suse.de>
+Date: Fri, 3 May 2019 12:14:53 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Thunderbird/60.5.2
 MIME-Version: 1.0
-In-Reply-To: <20190503115511.17a1f6d1.cohuck@redhat.com>
-Content-Language: de-DE
+In-Reply-To: <6e07e6c9-2ce7-c39f-8d55-46e811c61510@amd.com>
 X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
-	Thomas Huth <thuth@redhat.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>, kvm@vger.kernel.org,
-	Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
-	Eric Farman <farman@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Martin Schwidefsky <schwidefsky@de.ibm.com>,
-	Claudio Imbrenda <imbrenda@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+Cc: "airlied@linux.ie" <airlied@linux.ie>,
+	"puck.chen@hisilicon.com" <puck.chen@hisilicon.com>,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	"z.liuxinliang@hisilicon.com" <z.liuxinliang@hisilicon.com>,
+	"hdegoede@redhat.com" <hdegoede@redhat.com>,
+	"kong.kongxinwei@hisilicon.com" <kong.kongxinwei@hisilicon.com>,
+	"Huang, Ray" <Ray.Huang@amd.com>,
+	"zourongrong@gmail.com" <zourongrong@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -93,31 +90,151 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0188429221719476067=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 03/05/2019 11:55, Cornelia Huck wrote:
-> On Fri, 26 Apr 2019 20:32:35 +0200
-> Halil Pasic <pasic@linux.ibm.com> wrote:
-> 
->> Enhanced virtualization protection technology may require the use of
->> bounce buffers for I/O. While support for this was built into the virtio
->> core, virtio-ccw wasn't changed accordingly.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0188429221719476067==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="vinSYn3Ek3VhSjo8J1G9S0Y4NUtZueyta"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--vinSYn3Ek3VhSjo8J1G9S0Y4NUtZueyta
+Content-Type: multipart/mixed; boundary="FnMk8yDTXVw7b8dZMfI9KgILEZkJNQ4wY";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: "Koenig, Christian" <Christian.Koenig@amd.com>,
+ Sam Ravnborg <sam@ravnborg.org>
+Cc: "airlied@linux.ie" <airlied@linux.ie>,
+ "puck.chen@hisilicon.com" <puck.chen@hisilicon.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "z.liuxinliang@hisilicon.com" <z.liuxinliang@hisilicon.com>,
+ "hdegoede@redhat.com" <hdegoede@redhat.com>,
+ "kong.kongxinwei@hisilicon.com" <kong.kongxinwei@hisilicon.com>,
+ "Huang, Ray" <Ray.Huang@amd.com>, "kraxel@redhat.com" <kraxel@redhat.com>,
+ "zourongrong@gmail.com" <zourongrong@gmail.com>
+Message-ID: <a2398439-3bb5-d1ef-db94-82f252f461c2@suse.de>
+Subject: Re: [PATCH v3 01/19] drm: Add |struct drm_gem_vram_object| and
+ helpers
+References: <20190429144341.12615-1-tzimmermann@suse.de>
+ <20190429144341.12615-2-tzimmermann@suse.de>
+ <20190429195855.GA6610@ravnborg.org>
+ <1d14ef87-e1cd-4f4a-3632-bc045a1981c6@suse.de>
+ <20190430092327.GA13757@ravnborg.org>
+ <6e07e6c9-2ce7-c39f-8d55-46e811c61510@amd.com>
+In-Reply-To: <6e07e6c9-2ce7-c39f-8d55-46e811c61510@amd.com>
+
+--FnMk8yDTXVw7b8dZMfI9KgILEZkJNQ4wY
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi Christian,
+
+would you review the whole patch set? Daniel mentioned that he'd prefer
+to leave the review to memory-mgmt developers.
+
+Best regards
+Thomas
+
+Am 30.04.19 um 11:35 schrieb Koenig, Christian:
+> Am 30.04.19 um 11:23 schrieb Sam Ravnborg:
+>> [CAUTION: External Email]
 >>
->> Some background on technology (not part of this series) and the
->> terminology used.
+>> Hi Thomas.
 >>
->> * Protected Virtualization (PV):
+>>>>> +
+>>>>> +/**
+>>>>> + * Returns the container of type &struct drm_gem_vram_object
+>>>>> + * for field bo.
+>>>>> + * @bo:           the VRAM buffer object
+>>>>> + * Returns:       The containing GEM VRAM object
+>>>>> + */
+>>>>> +static inline struct drm_gem_vram_object* drm_gem_vram_of_bo(
+>>>>> +  struct ttm_buffer_object *bo)
+>>>>> +{
+>>>>> +  return container_of(bo, struct drm_gem_vram_object, bo);
+>>>>> +}
+>>>> Indent funny. USe same indent as used in other parts of file for
+>>>> function arguments.
+>>> If I put the argument next to the function's name, it will exceed the=
 
-Uuh, you are aware that "PV" in virtualization environment is used as
-"Para-Virtualization" (e.g. in Xen) today? I believe you are risking a
-major mis-understanding here.
+>>> 80-character limit. From the coding-style document, I could not see w=
+hat
+>>> to do in this case. One solution would move the return type to a
+>>> separate line before the function name. I've not seen that anywhere i=
+n
+>>> the source code, so moving the argument onto a separate line and
+>>> indenting by one tab appears to be the next best solution. Please let=
+ me
+>>> know if there's if there's a preferred style for cases like this one.=
+
+>> Readability has IMO higher priority than some limit of 80 chars.
+>> And it hurts readability (at least my OCD) when style changes
+>> as you do with indent here. So my personal preference is to fix
+>> indent and accect longer lines.
+>=20
+> In this case the an often used convention (which is also kind of=20
+> readable) is to add a newline after the return values, but before the=20
+> function name. E.g. something like this:
+>=20
+> static inline struct drm_gem_vram_object*
+> drm_gem_vram_of_bo(struct ttm_buffer_object *bo)
+>=20
+> Regards,
+> Christian.
+>=20
+>>
+>> But you ask for a preferred style - which I do not think we have in th=
+is
+>> case. So it boils down to what you prefer.
+>>
+>> Enough bikeshedding, thanks for the quick response.
+>>
+>>          Sam
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah
+HRB 21284 (AG N=C3=BCrnberg)
 
 
-Juergen
+--FnMk8yDTXVw7b8dZMfI9KgILEZkJNQ4wY--
+
+--vinSYn3Ek3VhSjo8J1G9S0Y4NUtZueyta
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAlzMFJ0ACgkQaA3BHVML
+eiODzwf+MSQUU/Kb78xC7KULkP8K0t/v2EDctG4y3L95WeQV5Eatc3bLqVkDYSt+
+j9UYMT0XrYCsqUWJmJBOwTG3S2/v+tPKNMmcpKLyR3nm7aSyIBF8MWFm/EMeEMmZ
+LCTp9h7tpchF3zmSPdfvBgZdE7gG4sWLlw7r2zMYYx5c+TK6/yb28mIqG/Im/PQD
+dHgVpBsc3lJYk3ISc3UTE0Ek9CwP4yePqmP1ybF9i+ZkDRYctrltqWtGn+p7DONk
+LVEUElBN32Va31pPmQ7rHmmi2JgpfcyHwy0I972n1ByqECvIn22v1sdvMSyHJrnz
+YbTw0DSE/uqQlmi7z/upykVqFWyaQA==
+=O1HM
+-----END PGP SIGNATURE-----
+
+--vinSYn3Ek3VhSjo8J1G9S0Y4NUtZueyta--
+
+--===============0188429221719476067==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============0188429221719476067==--
