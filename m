@@ -2,47 +2,30 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id F256F12D29
-	for <lists.virtualization@lfdr.de>; Fri,  3 May 2019 14:08:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AC4012D82
+	for <lists.virtualization@lfdr.de>; Fri,  3 May 2019 14:28:44 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 349613951;
-	Fri,  3 May 2019 12:07:56 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id AB7893955;
+	Fri,  3 May 2019 12:28:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E8929394B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1259A3938
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  3 May 2019 12:07:18 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from NAM03-BY2-obe.outbound.protection.outlook.com
-	(mail-eopbgr780041.outbound.protection.outlook.com [40.107.78.41])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4367B79
+	Fri,  3 May 2019 12:27:48 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 303F779
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  3 May 2019 12:07:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=amdcloud.onmicrosoft.com; s=selector1-amd-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=urQ25czqrK0VDoGWsA8mo/WaN3+rS4S4CUTCwYxMBDk=;
-	b=tme5Oj6kWWGvcR4/1zMS1yN2Zs6oBX+2FEmRn9jnadEi9zyvInBTvEuSW35DEZDV1D1kQK66YRAyGg2KwCEY4s89PPuZBc3LHhbDnpyaYYi0wUXyjcVWL6TYoqikumpyZ0CsBUH3VkbhS9mNe8yHQSYODVS1GD/1JTW21M7eN6s=
-Received: from DM5PR12MB1546.namprd12.prod.outlook.com (10.172.36.23) by
-	DM5PR12MB2501.namprd12.prod.outlook.com (52.132.141.144) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1856.10; Fri, 3 May 2019 12:07:15 +0000
-Received: from DM5PR12MB1546.namprd12.prod.outlook.com
-	([fe80::70fc:f26c:1e22:73ba]) by
-	DM5PR12MB1546.namprd12.prod.outlook.com
-	([fe80::70fc:f26c:1e22:73ba%10]) with mapi id 15.20.1856.008;
-	Fri, 3 May 2019 12:07:14 +0000
-From: "Koenig, Christian" <Christian.Koenig@amd.com>
-To: Daniel Vetter <daniel@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>
+	Fri,  3 May 2019 12:27:47 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id 44BF9AD96;
+	Fri,  3 May 2019 12:27:45 +0000 (UTC)
 Subject: Re: [PATCH v3 01/19] drm: Add |struct drm_gem_vram_object| and helpers
-Thread-Topic: [PATCH v3 01/19] drm: Add |struct drm_gem_vram_object| and
-	helpers
-Thread-Index: AQHU/pojWq8imvWZyUydqtyEboEK56ZTjr6AgADg3NuAAANEAIAE3/+OgAABYYA=
-Date: Fri, 3 May 2019 12:07:14 +0000
-Message-ID: <c74362eb-c43a-a7be-5b52-106d207e8a8d@amd.com>
+To: "Koenig, Christian" <Christian.Koenig@amd.com>,
+	Daniel Vetter <daniel@ffwll.ch>
 References: <20190429144341.12615-1-tzimmermann@suse.de>
 	<20190429144341.12615-2-tzimmermann@suse.de>
 	<20190429195855.GA6610@ravnborg.org>
@@ -51,51 +34,42 @@ References: <20190429144341.12615-1-tzimmermann@suse.de>
 	<6e07e6c9-2ce7-c39f-8d55-46e811c61510@amd.com>
 	<a2398439-3bb5-d1ef-db94-82f252f461c2@suse.de>
 	<CAKMK7uGnUeeK-UPHZC+P5TsQTaOWPQd=LLV_Rr+VvPgNEEHhyg@mail.gmail.com>
-In-Reply-To: <CAKMK7uGnUeeK-UPHZC+P5TsQTaOWPQd=LLV_Rr+VvPgNEEHhyg@mail.gmail.com>
-Accept-Language: de-DE, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
-x-originating-ip: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
-x-clientproxiedby: AM5PR0102CA0033.eurprd01.prod.exchangelabs.com
-	(2603:10a6:206::46) To DM5PR12MB1546.namprd12.prod.outlook.com
-	(2603:10b6:4:8::23)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Christian.Koenig@amd.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: ad97c3cf-e1ba-4914-7595-08d6cfbfe12a
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600141)(711020)(4605104)(4618075)(2017052603328)(7193020);
-	SRVR:DM5PR12MB2501; 
-x-ms-traffictypediagnostic: DM5PR12MB2501:
-x-ms-exchange-purlcount: 2
-x-microsoft-antispam-prvs: <DM5PR12MB25014A0A4B83E178D50154D383350@DM5PR12MB2501.namprd12.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 0026334A56
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(396003)(39860400002)(366004)(136003)(346002)(376002)(189003)(51914003)(199004)(68736007)(6506007)(66574012)(14454004)(58126008)(476003)(54906003)(8936002)(7736002)(53546011)(73956011)(305945005)(66946007)(966005)(65826007)(46003)(64756008)(86362001)(52116002)(4326008)(76176011)(8676002)(66476007)(316002)(386003)(7416002)(99286004)(25786009)(66556008)(81166006)(31696002)(81156014)(66446008)(256004)(71190400001)(110136005)(102836004)(446003)(36756003)(6116002)(6306002)(6436002)(6512007)(64126003)(6246003)(53936002)(14444005)(229853002)(5660300002)(65956001)(65806001)(6486002)(71200400001)(11346002)(478600001)(486006)(2906002)(186003)(31686004)(2616005)(72206003);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DM5PR12MB2501;
-	H:DM5PR12MB1546.namprd12.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: amd.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: Pt5tZ9WUpos6IEnPhMxFPDiT6KQbbH29kNbcLUSxcXA0r/pIAN2FsuzhHVXlHuUXWSSf4CEmpea73JaWHSCYaKRwe+yXDiHAc4HWdHV0+paapYVR1YN+qqbtdlB1Utz29A1L4Kc2kUBXM+/YSUU9E8MfCinz4j2TdeXrDpXdeyXc2+6p6hhWkSZ2eeFXxZ4qQHEdg90zgyUhTrK4IYt9wbNgZSAGDeYiKik929KMWA+4ZKOJAZnYl3uIwZZpLTXiw/E2Nxrftp9yKCBNjo4FX6Cnaup/ZOO1yXas5zfzd/aNN5BTIvkn+UmjJE4yfwGPtMGT3prnuelYQOPuwDr4mR+Eih3mZG5IMwl30YRcPT8pmpejwXIZnNYkilHyxEXJJcNBVodiOrmGQwl8fk9f8sXiLu/HixkdiU9fFSvSess=
-Content-ID: <6DF2679DA14DA844A226D004228C778B@namprd12.prod.outlook.com>
+	<c74362eb-c43a-a7be-5b52-106d207e8a8d@amd.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Openpgp: preference=signencrypt
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+	xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+	AAHNKFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmNvbT7CwJQEEwEIAD4W
+	IQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznTtgIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgID
+	AQIeAQIXgAAKCRBoDcEdUwt6I7D7CACBK42XW+7mCiK8ioXMEy1NzGbXC51RzGea8N83oEJS
+	1KVUtQxrkDxgrW/WLSl/TfqHFsJpdEFOv1XubWbleun3uKPy0e5vZCd5UjZPkeNjnqfCYTDy
+	hVVsdOuFbtWDppJyJrThLqr9AgSFmoCNNUt1SVpYEEOLNE6C32BhlnSq21VLC+YXTgO/ZHTa
+	YXkq54hHj63jwrcjkBSCkXLh37kHeqnl++GHpN+3R+o3w2OpwHAlvVjdKPT27v1tVkiydsFG
+	65Vd0n3m/ft+IOrGgxQM1C20uqKvsZGB4r3OGR50ekAybO7sjEJJ1Obl4ge/6RRqcvKz4LMb
+	tGs85D6tPIeFzsBNBFs50uABCADGJj+DP1fk+UWOWrf4O61HTbC4Vr9QD2K4fUUHnzg2B6zU
+	R1BPXqLGG0+lzK8kfYU/F5RjmEcClsIkAaFkg4kzKP14tvY1J5+AV3yNqcdg018HNtiyrSwI
+	E0Yz/qm1Ot2NMZ0DdvVBg22IMsiudQ1tx9CH9mtyTbIXgACvl3PW2o9CxiHPE/bohFhwZwh/
+	kXYYAE51lhinQ3oFEeQZA3w4OTvxSEspiQR8dg8qJJb+YOAc5IKk6sJmmM7JfFMWSr22satM
+	23oQ3WvJb4RV6HTRTAIEyyZS7g2DhiytgMG60t0qdABG5KXSQW+OKlZRpuWwKWaLh3if/p/u
+	69dvpanbABEBAAHCwHwEGAEIACYWIQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznS4AIbDAUJ
+	A8JnAAAKCRBoDcEdUwt6I6X3CACJ8D+TpXBCqJE5xwog08+Dp8uBpx0T9n1wE0GQisZruACW
+	NofYn8PTX9k4wmegDLwt7YQDdKxQ4+eTfZeLNQqWg6OCftH5Kx7sjWnJ09tOgniVdROzWJ7c
+	VJ/i0okazncsJ+nq48UYvRGE1Swh3A4QRIyphWX4OADOBmTFl9ZYNPnh23eaC9WrNvFr7yP7
+	iGjMlfEW8l6Lda//EC5VpXVNza0xeae0zFNst2R9pn+bLkihwDLWxOIyifGRxTqNxoS4I1aw
+	VhxPSVztPMSpIA/sOr/N/p6JrBLn+gui2K6mP7bGb8hF+szfArYqz3T1rv1VzUWAJf5Wre5U
+	iNx9uqqx
+Message-ID: <a96ad14d-698b-ca7b-cbdb-347801c70ce0@suse.de>
+Date: Fri, 3 May 2019 14:27:39 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.5.2
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad97c3cf-e1ba-4914-7595-08d6cfbfe12a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 May 2019 12:07:14.7737 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR12MB2501
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+In-Reply-To: <c74362eb-c43a-a7be-5b52-106d207e8a8d@amd.com>
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: "airlied@linux.ie" <airlied@linux.ie>,
@@ -120,67 +94,190 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4102515004177848698=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-QW0gMDMuMDUuMTkgdW0gMTQ6MDEgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBbQ0FVVElPTjog
-RXh0ZXJuYWwgRW1haWxdDQo+DQo+IE9uIEZyaSwgTWF5IDMsIDIwMTkgYXQgMTI6MTUgUE0gVGhv
-bWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+IHdyb3RlOg0KPj4gSGkgQ2hyaXN0
-aWFuLA0KPj4NCj4+IHdvdWxkIHlvdSByZXZpZXcgdGhlIHdob2xlIHBhdGNoIHNldD8gRGFuaWVs
-IG1lbnRpb25lZCB0aGF0IGhlJ2QgcHJlZmVyDQo+PiB0byBsZWF2ZSB0aGUgcmV2aWV3IHRvIG1l
-bW9yeS1tZ210IGRldmVsb3BlcnMuDQo+IEkgdGhpbmsgTm9yYWxmIFRyb25uZXMgb3IgR2VyZCBI
-b2ZmbWFubiB3b3VsZCBhbHNvIG1ha2UgZ29vZCByZXZpZXdlcnMNCj4gZm9yIHRoaXMsIGZhaXJs
-eSBjbG9zZSB0byB3aGF0IHRoZXkndmUgYmVlbiB3b3JraW5nIG9uIGluIHRoZSBwYXN0Lg0KDQpJ
-IHdpbGwgdHJ5IHRvIHRha2UgYW5vdGhlciBsb29rIG5leHQgd2Vlay4gQnVzeSBhcyB1c3VhbCBo
-ZXJlLg0KDQpDaHJpc3RpYW4uDQoNCj4gLURhbmllbA0KPg0KPj4gQmVzdCByZWdhcmRzDQo+PiBU
-aG9tYXMNCj4+DQo+PiBBbSAzMC4wNC4xOSB1bSAxMTozNSBzY2hyaWViIEtvZW5pZywgQ2hyaXN0
-aWFuOg0KPj4+IEFtIDMwLjA0LjE5IHVtIDExOjIzIHNjaHJpZWIgU2FtIFJhdm5ib3JnOg0KPj4+
-PiBbQ0FVVElPTjogRXh0ZXJuYWwgRW1haWxdDQo+Pj4+DQo+Pj4+IEhpIFRob21hcy4NCj4+Pj4N
-Cj4+Pj4+Pj4gKw0KPj4+Pj4+PiArLyoqDQo+Pj4+Pj4+ICsgKiBSZXR1cm5zIHRoZSBjb250YWlu
-ZXIgb2YgdHlwZSAmc3RydWN0IGRybV9nZW1fdnJhbV9vYmplY3QNCj4+Pj4+Pj4gKyAqIGZvciBm
-aWVsZCBiby4NCj4+Pj4+Pj4gKyAqIEBibzogICAgICAgICAgIHRoZSBWUkFNIGJ1ZmZlciBvYmpl
-Y3QNCj4+Pj4+Pj4gKyAqIFJldHVybnM6ICAgICAgIFRoZSBjb250YWluaW5nIEdFTSBWUkFNIG9i
-amVjdA0KPj4+Pj4+PiArICovDQo+Pj4+Pj4+ICtzdGF0aWMgaW5saW5lIHN0cnVjdCBkcm1fZ2Vt
-X3ZyYW1fb2JqZWN0KiBkcm1fZ2VtX3ZyYW1fb2ZfYm8oDQo+Pj4+Pj4+ICsgIHN0cnVjdCB0dG1f
-YnVmZmVyX29iamVjdCAqYm8pDQo+Pj4+Pj4+ICt7DQo+Pj4+Pj4+ICsgIHJldHVybiBjb250YWlu
-ZXJfb2YoYm8sIHN0cnVjdCBkcm1fZ2VtX3ZyYW1fb2JqZWN0LCBibyk7DQo+Pj4+Pj4+ICt9DQo+
-Pj4+Pj4gSW5kZW50IGZ1bm55LiBVU2Ugc2FtZSBpbmRlbnQgYXMgdXNlZCBpbiBvdGhlciBwYXJ0
-cyBvZiBmaWxlIGZvcg0KPj4+Pj4+IGZ1bmN0aW9uIGFyZ3VtZW50cy4NCj4+Pj4+IElmIEkgcHV0
-IHRoZSBhcmd1bWVudCBuZXh0IHRvIHRoZSBmdW5jdGlvbidzIG5hbWUsIGl0IHdpbGwgZXhjZWVk
-IHRoZQ0KPj4+Pj4gODAtY2hhcmFjdGVyIGxpbWl0LiBGcm9tIHRoZSBjb2Rpbmctc3R5bGUgZG9j
-dW1lbnQsIEkgY291bGQgbm90IHNlZSB3aGF0DQo+Pj4+PiB0byBkbyBpbiB0aGlzIGNhc2UuIE9u
-ZSBzb2x1dGlvbiB3b3VsZCBtb3ZlIHRoZSByZXR1cm4gdHlwZSB0byBhDQo+Pj4+PiBzZXBhcmF0
-ZSBsaW5lIGJlZm9yZSB0aGUgZnVuY3Rpb24gbmFtZS4gSSd2ZSBub3Qgc2VlbiB0aGF0IGFueXdo
-ZXJlIGluDQo+Pj4+PiB0aGUgc291cmNlIGNvZGUsIHNvIG1vdmluZyB0aGUgYXJndW1lbnQgb250
-byBhIHNlcGFyYXRlIGxpbmUgYW5kDQo+Pj4+PiBpbmRlbnRpbmcgYnkgb25lIHRhYiBhcHBlYXJz
-IHRvIGJlIHRoZSBuZXh0IGJlc3Qgc29sdXRpb24uIFBsZWFzZSBsZXQgbWUNCj4+Pj4+IGtub3cg
-aWYgdGhlcmUncyBpZiB0aGVyZSdzIGEgcHJlZmVycmVkIHN0eWxlIGZvciBjYXNlcyBsaWtlIHRo
-aXMgb25lLg0KPj4+PiBSZWFkYWJpbGl0eSBoYXMgSU1PIGhpZ2hlciBwcmlvcml0eSB0aGFuIHNv
-bWUgbGltaXQgb2YgODAgY2hhcnMuDQo+Pj4+IEFuZCBpdCBodXJ0cyByZWFkYWJpbGl0eSAoYXQg
-bGVhc3QgbXkgT0NEKSB3aGVuIHN0eWxlIGNoYW5nZXMNCj4+Pj4gYXMgeW91IGRvIHdpdGggaW5k
-ZW50IGhlcmUuIFNvIG15IHBlcnNvbmFsIHByZWZlcmVuY2UgaXMgdG8gZml4DQo+Pj4+IGluZGVu
-dCBhbmQgYWNjZWN0IGxvbmdlciBsaW5lcy4NCj4+PiBJbiB0aGlzIGNhc2UgdGhlIGFuIG9mdGVu
-IHVzZWQgY29udmVudGlvbiAod2hpY2ggaXMgYWxzbyBraW5kIG9mDQo+Pj4gcmVhZGFibGUpIGlz
-IHRvIGFkZCBhIG5ld2xpbmUgYWZ0ZXIgdGhlIHJldHVybiB2YWx1ZXMsIGJ1dCBiZWZvcmUgdGhl
-DQo+Pj4gZnVuY3Rpb24gbmFtZS4gRS5nLiBzb21ldGhpbmcgbGlrZSB0aGlzOg0KPj4+DQo+Pj4g
-c3RhdGljIGlubGluZSBzdHJ1Y3QgZHJtX2dlbV92cmFtX29iamVjdCoNCj4+PiBkcm1fZ2VtX3Zy
-YW1fb2ZfYm8oc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0ICpibykNCj4+Pg0KPj4+IFJlZ2FyZHMs
-DQo+Pj4gQ2hyaXN0aWFuLg0KPj4+DQo+Pj4+IEJ1dCB5b3UgYXNrIGZvciBhIHByZWZlcnJlZCBz
-dHlsZSAtIHdoaWNoIEkgZG8gbm90IHRoaW5rIHdlIGhhdmUgaW4gdGhpcw0KPj4+PiBjYXNlLiBT
-byBpdCBib2lscyBkb3duIHRvIHdoYXQgeW91IHByZWZlci4NCj4+Pj4NCj4+Pj4gRW5vdWdoIGJp
-a2VzaGVkZGluZywgdGhhbmtzIGZvciB0aGUgcXVpY2sgcmVzcG9uc2UuDQo+Pj4+DQo+Pj4+ICAg
-ICAgICAgICBTYW0NCj4+IC0tDQo+PiBUaG9tYXMgWmltbWVybWFubg0KPj4gR3JhcGhpY3MgRHJp
-dmVyIERldmVsb3Blcg0KPj4gU1VTRSBMaW51eCBHbWJILCBNYXhmZWxkc3RyYXNzZSA1LCA5MDQw
-OSBOdWVybmJlcmcsIEdlcm1hbnkNCj4+IEdGOiBGZWxpeCBJbWVuZMO2cmZmZXIsIE1hcnkgSGln
-Z2lucywgU3JpIFJhc2lhaA0KPj4gSFJCIDIxMjg0IChBRyBOw7xybmJlcmcpDQo+Pg0KPj4gX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4+IGRyaS1kZXZl
-bCBtYWlsaW5nIGxpc3QNCj4+IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCj4+IGh0
-dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vZHJpLWRldmVsDQo+
-DQo+DQo+IC0tDQo+IERhbmllbCBWZXR0ZXINCj4gU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENv
-cnBvcmF0aW9uDQo+ICs0MSAoMCkgNzkgMzY1IDU3IDQ4IC0gaHR0cDovL2Jsb2cuZmZ3bGwuY2gN
-Cg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVh
-bGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRp
-b24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3ZpcnR1YWxpemF0aW9u
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============4102515004177848698==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="wso2WylJrYE5BAjCVStQkMEIaju382Ct5"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--wso2WylJrYE5BAjCVStQkMEIaju382Ct5
+Content-Type: multipart/mixed; boundary="4cdtrBoVZJR3xHpx49LzB45tdXPpojWto";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: "Koenig, Christian" <Christian.Koenig@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Cc: Sam Ravnborg <sam@ravnborg.org>, "airlied@linux.ie" <airlied@linux.ie>,
+ "puck.chen@hisilicon.com" <puck.chen@hisilicon.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "z.liuxinliang@hisilicon.com" <z.liuxinliang@hisilicon.com>,
+ "hdegoede@redhat.com" <hdegoede@redhat.com>,
+ "kong.kongxinwei@hisilicon.com" <kong.kongxinwei@hisilicon.com>,
+ "Huang, Ray" <Ray.Huang@amd.com>, "kraxel@redhat.com" <kraxel@redhat.com>,
+ "zourongrong@gmail.com" <zourongrong@gmail.com>
+Message-ID: <a96ad14d-698b-ca7b-cbdb-347801c70ce0@suse.de>
+Subject: Re: [PATCH v3 01/19] drm: Add |struct drm_gem_vram_object| and
+ helpers
+References: <20190429144341.12615-1-tzimmermann@suse.de>
+ <20190429144341.12615-2-tzimmermann@suse.de>
+ <20190429195855.GA6610@ravnborg.org>
+ <1d14ef87-e1cd-4f4a-3632-bc045a1981c6@suse.de>
+ <20190430092327.GA13757@ravnborg.org>
+ <6e07e6c9-2ce7-c39f-8d55-46e811c61510@amd.com>
+ <a2398439-3bb5-d1ef-db94-82f252f461c2@suse.de>
+ <CAKMK7uGnUeeK-UPHZC+P5TsQTaOWPQd=LLV_Rr+VvPgNEEHhyg@mail.gmail.com>
+ <c74362eb-c43a-a7be-5b52-106d207e8a8d@amd.com>
+In-Reply-To: <c74362eb-c43a-a7be-5b52-106d207e8a8d@amd.com>
+
+--4cdtrBoVZJR3xHpx49LzB45tdXPpojWto
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+cc: noralf@tronnes.org
+
+Am 03.05.19 um 14:07 schrieb Koenig, Christian:
+> Am 03.05.19 um 14:01 schrieb Daniel Vetter:
+>> [CAUTION: External Email]
+>>
+>> On Fri, May 3, 2019 at 12:15 PM Thomas Zimmermann <tzimmermann@suse.de=
+> wrote:
+>>> Hi Christian,
+>>>
+>>> would you review the whole patch set? Daniel mentioned that he'd pref=
+er
+>>> to leave the review to memory-mgmt developers.
+>> I think Noralf Tronnes or Gerd Hoffmann would also make good reviewers=
+
+>> for this, fairly close to what they've been working on in the past.
+>=20
+> I will try to take another look next week. Busy as usual here.
+
+Thanks, I'll post v4 of the patches early next week.
+
+> Christian.
+>=20
+>> -Daniel
+>>
+>>> Best regards
+>>> Thomas
+>>>
+>>> Am 30.04.19 um 11:35 schrieb Koenig, Christian:
+>>>> Am 30.04.19 um 11:23 schrieb Sam Ravnborg:
+>>>>> [CAUTION: External Email]
+>>>>>
+>>>>> Hi Thomas.
+>>>>>
+>>>>>>>> +
+>>>>>>>> +/**
+>>>>>>>> + * Returns the container of type &struct drm_gem_vram_object
+>>>>>>>> + * for field bo.
+>>>>>>>> + * @bo:           the VRAM buffer object
+>>>>>>>> + * Returns:       The containing GEM VRAM object
+>>>>>>>> + */
+>>>>>>>> +static inline struct drm_gem_vram_object* drm_gem_vram_of_bo(
+>>>>>>>> +  struct ttm_buffer_object *bo)
+>>>>>>>> +{
+>>>>>>>> +  return container_of(bo, struct drm_gem_vram_object, bo);
+>>>>>>>> +}
+>>>>>>> Indent funny. USe same indent as used in other parts of file for
+>>>>>>> function arguments.
+>>>>>> If I put the argument next to the function's name, it will exceed =
+the
+>>>>>> 80-character limit. From the coding-style document, I could not se=
+e what
+>>>>>> to do in this case. One solution would move the return type to a
+>>>>>> separate line before the function name. I've not seen that anywher=
+e in
+>>>>>> the source code, so moving the argument onto a separate line and
+>>>>>> indenting by one tab appears to be the next best solution. Please =
+let me
+>>>>>> know if there's if there's a preferred style for cases like this o=
+ne.
+>>>>> Readability has IMO higher priority than some limit of 80 chars.
+>>>>> And it hurts readability (at least my OCD) when style changes
+>>>>> as you do with indent here. So my personal preference is to fix
+>>>>> indent and accect longer lines.
+>>>> In this case the an often used convention (which is also kind of
+>>>> readable) is to add a newline after the return values, but before th=
+e
+>>>> function name. E.g. something like this:
+>>>>
+>>>> static inline struct drm_gem_vram_object*
+>>>> drm_gem_vram_of_bo(struct ttm_buffer_object *bo)
+>>>>
+>>>> Regards,
+>>>> Christian.
+>>>>
+>>>>> But you ask for a preferred style - which I do not think we have in=
+ this
+>>>>> case. So it boils down to what you prefer.
+>>>>>
+>>>>> Enough bikeshedding, thanks for the quick response.
+>>>>>
+>>>>>           Sam
+>>> --
+>>> Thomas Zimmermann
+>>> Graphics Driver Developer
+>>> SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
+>>> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah
+>>> HRB 21284 (AG N=C3=BCrnberg)
+>>>
+>>> _______________________________________________
+>>> dri-devel mailing list
+>>> dri-devel@lists.freedesktop.org
+>>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+>>
+>>
+>> --
+>> Daniel Vetter
+>> Software Engineer, Intel Corporation
+>> +41 (0) 79 365 57 48 - http://blog.ffwll.ch
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah
+HRB 21284 (AG N=C3=BCrnberg)
+
+
+--4cdtrBoVZJR3xHpx49LzB45tdXPpojWto--
+
+--wso2WylJrYE5BAjCVStQkMEIaju382Ct5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAlzMM7sACgkQaA3BHVML
+eiNqMggAv9r5WqFL9LGjuADBqLu3tKaTKc7I8UJXF1E+GwvGepKtxQ3uj/c8alcv
+IlMbVydXMyHqfMa1IcUmSaHOL89mucpR0QyYbVKdw/hENsN/qtHdVnnusanr1FbQ
+D5BXtE4JdZgLUsPr+G3nKJW0O8j3EXA8ZzK2P1kPgFut7D5vfwRBb9tS680d8I0+
+qJUGsmzQpL9jj4Iuoc1xctB1VtFZAj0wv3D8dcO+5ec4NbEKaZU/h211e/RxEwM7
+QDWB865KJaMjRY38REsyHZJfBf6AW6F0ngNcdpWbMu/NtI9j0o8IxLastIK4vsKS
+ORE/+kLmTmWpm858mh8PlZ8Zs9yM+A==
+=wQDH
+-----END PGP SIGNATURE-----
+
+--wso2WylJrYE5BAjCVStQkMEIaju382Ct5--
+
+--===============4102515004177848698==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============4102515004177848698==--
