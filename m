@@ -2,98 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D03213A8B
-	for <lists.virtualization@lfdr.de>; Sat,  4 May 2019 16:04:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6BCC2272E
+	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:19:13 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C70C94230;
-	Sat,  4 May 2019 14:04:31 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9EFDDA59;
+	Sun, 19 May 2019 16:17:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 578E3422C
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7491842AC
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  4 May 2019 14:03:52 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E25C2875
+	Sun,  5 May 2019 01:53:56 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9813987
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  4 May 2019 14:03:51 +0000 (UTC)
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x44E1SoM036925 for <virtualization@lists.linux-foundation.org>;
-	Sat, 4 May 2019 10:03:50 -0400
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
-	by mx0b-001b2d01.pphosted.com with ESMTP id 2s96xa18sr-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	Sun,  5 May 2019 01:53:55 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id t22so4643767pgi.10
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 04 May 2019 10:03:50 -0400
-Received: from localhost
-	by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Sat, 4 May 2019 15:03:48 +0100
-Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
-	by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Sat, 4 May 2019 15:03:44 +0100
-Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
-	by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x44E3gOq59965526
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Sat, 4 May 2019 14:03:42 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 8BD2442047;
-	Sat,  4 May 2019 14:03:42 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id CCA2B42041;
-	Sat,  4 May 2019 14:03:41 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.145.34.191])
-	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Sat,  4 May 2019 14:03:41 +0000 (GMT)
-Date: Sat, 4 May 2019 16:03:40 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>, Christian Borntraeger
-	<borntraeger@de.ibm.com>
-Subject: Re: [PATCH 01/10] virtio/s390: use vring_create_virtqueue
-In-Reply-To: <20190503160421-mutt-send-email-mst@kernel.org>
-References: <20190426183245.37939-1-pasic@linux.ibm.com>
-	<20190426183245.37939-2-pasic@linux.ibm.com>
-	<20190503111724.70c6ec37.cohuck@redhat.com>
-	<20190503160421-mutt-send-email-mst@kernel.org>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19050414-0012-0000-0000-0000031841BC
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19050414-0013-0000-0000-00002150B6D2
-Message-Id: <20190504160340.29f17b98.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-04_10:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1905040094
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+	Sat, 04 May 2019 18:53:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=km6nvMFOsSwfEhLerIzEth+9iCizOTyYju+loT0I83o=;
+	b=sQp6UxKr7uhqm11eKXZj0r3ycIeOua2uD3eP6V4NK0AXF1W2EmzjfumW2bnGLWFtAJ
+	02gmAu84af2WuLRdtuBKwWutQ1aQVLK0I8tjBJrTFG2WVYU6xM37A5vJIBbCnyBDiuXC
+	c2qjhB8MFx55OR/93NWkh8x1wyktKmAF8nWIcmRbA2FD4BQhWY//XHZEdeQtyK3VBTXx
+	T+VxBESrQFR+qWyryt1JDNIzmdKssaGjLhMg2hHsXTcVgdK0dAf2bz3W+f+NPJ08jDbL
+	qbufY2a42LT3n5T80W3XIFXa2Nb7XQtzkkH8wzhJz0qEXNkmEb96gmHyOKXOBOzf6nPM
+	JHmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=km6nvMFOsSwfEhLerIzEth+9iCizOTyYju+loT0I83o=;
+	b=fzhk3I8nB8Y6j6cuiEHLcCssUXhxlMU1IAFQa1LgNM7SFQlqth4cm7Nv1Lvbcrlto8
+	pzyPET2PuVVmgvOFzGyGauRDZw0Hjf37FYYhmOtCu/Pm+kY7+b466qOLvux0MprJzYff
+	irZ58bpqUnPMY3eAQxBpGTSdLsiKJx8vgJyGrQTKv0wuR1zLfGs59CldlQ37pvvQb7AA
+	Xey9CvQ2EjOxbtZapQ2O/wQoMB6nOD2BPZzAmvWe0f02D4VVTKNk+2efmAwks5sPRNom
+	aDfiQMSTfbu9gfTq+Kla5Azcb3NNXUEuO5rzA5usU2jRGN/GxLkqeYzlbEIDKJkVzFub
+	1rdQ==
+X-Gm-Message-State: APjAAAWzG+42rkR5EEfz1DZpruCBKzwvzYgkLOkzWWW7i2vPNkqgVHbQ
+	vGN5oGJsci3JGHkMs/qqYHY7Fg==
+X-Google-Smtp-Source: APXvYqyQtLpEoifSX/2dZlgVV/Kt/1fOK6SLnyj8gwJqY1dF3VPwiE14cIMt3z4H60jzjadH4YDE3w==
+X-Received: by 2002:a65:6688:: with SMTP id b8mr21704064pgw.81.1557021235040; 
+	Sat, 04 May 2019 18:53:55 -0700 (PDT)
+Received: from always-ThinkPad-T480.bytedance.net ([61.120.150.76])
+	by smtp.gmail.com with ESMTPSA id
+	b77sm14112877pfj.99.2019.05.04.18.53.51
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 04 May 2019 18:53:54 -0700 (PDT)
+From: zhenwei pi <pizhenwei@bytedance.com>
+To: amit@kernel.org,
+	arnd@arndb.de,
+	gregkh@linuxfoundation.org
+Subject: [PATCH] virtio_console: remove vq buf while unpluging port
+Date: Sun,  5 May 2019 09:53:42 +0800
+Message-Id: <1557021222-5133-1-git-send-email-pizhenwei@bytedance.com>
+X-Mailer: git-send-email 2.7.4
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
-	Thomas Huth <thuth@redhat.com>,
-	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
-	Sebastian Ott <sebott@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
-	Eric Farman <farman@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Martin Schwidefsky <schwidefsky@de.ibm.com>,
-	Farhan Ali <alifm@linux.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
+Cc: linux-kernel@vger.kernel.org, pizhenwei@bytedance.com,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -105,45 +79,87 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, 3 May 2019 16:04:48 -0400
-"Michael S. Tsirkin" <mst@redhat.com> wrote:
+A bug can be easily reproduced:
+Host# cat guest-agent.xml
+<channel type="unix">
+  <source mode="bind" path="/var/lib/libvirt/qemu/stretch.agent"/>
+  <target type="virtio" name="org.qemu.guest_agent.0" state="connected"/>
+</channel>
+Host# virsh attach-device instance guest-agent.xml
+Host# virsh detach-device instance guest-agent.xml
+Host# virsh attach-device instance guest-agent.xml
 
-> On Fri, May 03, 2019 at 11:17:24AM +0200, Cornelia Huck wrote:
-> > On Fri, 26 Apr 2019 20:32:36 +0200
-> > Halil Pasic <pasic@linux.ibm.com> wrote:
-> > 
-> > > The commit 2a2d1382fe9d ("virtio: Add improved queue allocation API")
-> > > establishes a new way of allocating virtqueues (as a part of the effort
-> > > that taught DMA to virtio rings).
-> > > 
-> > > In the future we will want virtio-ccw to use the DMA API as well.
-> > > 
-> > > Let us switch from the legacy method of allocating virtqueues to
-> > > vring_create_virtqueue() as the first step into that direction.
-> > > 
-> > > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-> > > ---
-> > >  drivers/s390/virtio/virtio_ccw.c | 30 +++++++++++-------------------
-> > >  1 file changed, 11 insertions(+), 19 deletions(-)
-> > 
-> > Reviewed-by: Cornelia Huck <cohuck@redhat.com>
-> > 
-> > I'd vote for merging this patch right away for 5.2.
-> 
-> So which tree is this going through? mine?
-> 
+and guest report: virtio-ports vport0p1: Error allocating inbufs
 
-Christian, what do you think? If the whole series is supposed to go in
-in one go (which I hope it is), via Martin's tree could be the simplest
-route IMHO.
+The reason is that the port is unplugged and the vq buf still remained.
+So, fix two cases in this patch:
+1, fix memory leak with attach-device/detach-device.
+2, fix logic bug with attach-device/detach-device/attach-device.
 
-Regards,
-Halil
+Signed-off-by: zhenwei pi <pizhenwei@bytedance.com>
+---
+ drivers/char/virtio_console.c | 21 +++++++++++++++------
+ 1 file changed, 15 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
+index fbeb719..f6e37f4 100644
+--- a/drivers/char/virtio_console.c
++++ b/drivers/char/virtio_console.c
+@@ -251,6 +251,7 @@ struct port {
+ 
+ /* This is the very early arch-specified put chars function. */
+ static int (*early_put_chars)(u32, const char *, int);
++static void remove_vq(struct virtqueue *vq);
+ 
+ static struct port *find_port_by_vtermno(u32 vtermno)
+ {
+@@ -1550,6 +1551,9 @@ static void unplug_port(struct port *port)
+ 	}
+ 
+ 	remove_port_data(port);
++	spin_lock_irq(&port->inbuf_lock);
++	remove_vq(port->in_vq);
++	spin_unlock_irq(&port->inbuf_lock);
+ 
+ 	/*
+ 	 * We should just assume the device itself has gone off --
+@@ -1945,17 +1949,22 @@ static const struct file_operations portdev_fops = {
+ 	.owner = THIS_MODULE,
+ };
+ 
++static void remove_vq(struct virtqueue *vq)
++{
++	struct port_buffer *buf;
++
++	flush_bufs(vq, true);
++	while ((buf = virtqueue_detach_unused_buf(vq)))
++		free_buf(buf, true);
++}
++
+ static void remove_vqs(struct ports_device *portdev)
+ {
+ 	struct virtqueue *vq;
+ 
+-	virtio_device_for_each_vq(portdev->vdev, vq) {
+-		struct port_buffer *buf;
++	virtio_device_for_each_vq(portdev->vdev, vq)
++		remove_vq(vq);
+ 
+-		flush_bufs(vq, true);
+-		while ((buf = virtqueue_detach_unused_buf(vq)))
+-			free_buf(buf, true);
+-	}
+ 	portdev->vdev->config->del_vqs(portdev->vdev);
+ 	kfree(portdev->in_vqs);
+ 	kfree(portdev->out_vqs);
+-- 
+2.7.4
 
 _______________________________________________
 Virtualization mailing list
