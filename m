@@ -2,107 +2,44 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9EA61408A
-	for <lists.virtualization@lfdr.de>; Sun,  5 May 2019 17:14:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 036BD14640
+	for <lists.virtualization@lfdr.de>; Mon,  6 May 2019 10:28:15 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3FC8A43EF;
-	Sun,  5 May 2019 15:14:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 14FB5451E;
+	Mon,  6 May 2019 08:27:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3476C43E9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5918E4520
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  5 May 2019 15:13:30 +0000 (UTC)
+	Mon,  6 May 2019 08:26:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C0603711
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 65A34FD
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  5 May 2019 15:13:29 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
-	[10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 26318307D857;
-	Sun,  5 May 2019 15:13:29 +0000 (UTC)
-Received: from thuth.remote.csb (ovpn-116-27.ams2.redhat.com [10.36.116.27])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 0896B60851;
-	Sun,  5 May 2019 15:13:21 +0000 (UTC)
-Subject: Re: [PATCH 03/10] virtio/s390: enable packed ring
-To: Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>
-References: <20190426183245.37939-1-pasic@linux.ibm.com>
-	<20190426183245.37939-4-pasic@linux.ibm.com>
-	<20190503114450.2512b121.cohuck@redhat.com>
-From: Thomas Huth <thuth@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=thuth@redhat.com; keydata=
-	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
-Organization: Red Hat
-Message-ID: <6743e19d-9824-5533-03e9-b7aa4e0e2cc1@redhat.com>
-Date: Sun, 5 May 2019 17:13:21 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Mon,  6 May 2019 08:26:56 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id 6B429ACBC;
+	Mon,  6 May 2019 08:26:54 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: daniel@ffwll.ch, airlied@linux.ie, kraxel@redhat.com,
+	christian.koenig@amd.com, ray.huang@amd.com, hdegoede@redhat.com,
+	noralf@tronnes.org, sam@ravnborg.org, z.liuxinliang@hisilicon.com,
+	zourongrong@gmail.com, kong.kongxinwei@hisilicon.com,
+	puck.chen@hisilicon.com
+Subject: [PATCH v4 00/19] Share TTM code among DRM framebuffer drivers
+Date: Mon,  6 May 2019 10:26:30 +0200
+Message-Id: <20190506082649.942-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <20190503114450.2512b121.cohuck@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.48]);
-	Sun, 05 May 2019 15:13:29 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
-	Eric Farman <farman@linux.ibm.com>,
-	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
-	Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Martin Schwidefsky <schwidefsky@de.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -119,48 +56,134 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 03/05/2019 11.44, Cornelia Huck wrote:
-> On Fri, 26 Apr 2019 20:32:38 +0200
-> Halil Pasic <pasic@linux.ibm.com> wrote:
-> 
->> Nothing precludes to accepting  VIRTIO_F_RING_PACKED any more.
-> 
-> "precludes us from accepting"
-> 
->>
->> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
->> ---
->>  drivers/s390/virtio/virtio_ccw.c | 4 +---
->>  1 file changed, 1 insertion(+), 3 deletions(-)
->>
->> diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
->> index 42832a164546..6d989c360f38 100644
->> --- a/drivers/s390/virtio/virtio_ccw.c
->> +++ b/drivers/s390/virtio/virtio_ccw.c
->> @@ -773,10 +773,8 @@ static u64 virtio_ccw_get_features(struct virtio_device *vdev)
->>  static void ccw_transport_features(struct virtio_device *vdev)
->>  {
->>  	/*
->> -	 * There shouldn't be anything that precludes supporting packed.
->> -	 * TODO: Remove the limitation after having another look into this.
->> +	 * Currently nothing to do here.
->>  	 */
->> -	__virtio_clear_bit(vdev, VIRTIO_F_RING_PACKED);
->>  }
->>  
->>  static int virtio_ccw_finalize_features(struct virtio_device *vdev)
-> 
-> Not sure whether we should merge this into the previous patch instead.
+Several simple framebuffer drivers copy most of the TTM code from each
+other. The implementation is always the same; except for the name of
+some data structures.
 
-In case you respin, I'd vote for squashing this into the previous patch
-instead, especially since you've just added the comment in that patch.
+As recently discussed, this patch set provides generic memory-management
+code for simple framebuffers with dedicated video memory. It further
+converts the respective drivers to the generic code. The shared code
+is basically the same implementation as the one copied among individual
+drivers.
 
-Also, what about removing that function now completely? It's a static
-function and only called once in this file, so IMHO it does not make
-much sense to keep an empty function around. Or do you plan to add new
-code here in the near future?
+The patch set contains two major changes: first, it introduces
+|struct drm_gem_vram_object| and helpers (GEM VRAM). It's a GEM object
+that is backed by VRAM. The type's purpose is somewhat similar to
+|struct drm_gem_{cma, shmem}_object|: it provides an commom implementation
+that handles all the basic cases. Second, the patch set introduces
+|struct drm_vram_mm| and helpers (VRAM MM). It's an implementation of a
+basic memory manager for VRAM.
 
- Thomas
+Both, GEM VRAM and VRAM MM, support buffer placement in VRAM and system
+memory. Both can be used independedly from each other if desired by the
+DRM driver.
+
+Currently ast, bochs, mgag200, vboxvideo and hisilicon/hibmc can use
+these helpers.
+
+Future directions: with these changes, the respective drivers can also
+share some of their mode-setting or fbdev code. GEM VRAM could implement
+PRIME helpers, which would allow for using the generic fbcon.
+
+The patch set is against a recent drm-tip.
+
+v4:
+	* cleanups from checkpatch.pl
+	* add more documentation for VRAM helpers
+	* remove several fixed-size types from interfaces
+	* don't make drivers depend on DRM_TTM; auto-selected if necessary
+	* use single config optiom DRM_VRAM_HELPER
+v3:
+	* share VRAM MM callback structure among drivers
+	* move VRAM MM instances to drm_device and share rsp. code
+v2:
+	* rename |struct drm_gem_ttm_object| to |struct drm_gem_vram_object|
+	* rename |struct drm_simple_ttm| to |struct drm_vram_mm|
+	* make drm_is_gem_ttm() an internal helper
+	* add drm_gem_vram_kmap_at()
+	* return is_iomem from kmap functions
+	* redefine TTM placement flags for public interface
+	* add drm_vram_mm_mmap() helper
+	* replace almost all of driver's TTM code with these helpers
+	* documentation fixes
+
+Thomas Zimmermann (19):
+  drm: Add |struct drm_gem_vram_object| and helpers
+  drm: Add |struct drm_gem_vram_object| callbacks for |struct
+    ttm_bo_driver|
+  drm: Add |struct drm_gem_vram_object| callbacks for |struct
+    drm_driver|
+  drm: Add drm_gem_vram_fill_create_dumb() to create dumb buffers
+  drm: Add VRAM MM, a simple memory manager for dedicated VRAM
+  drm: Add default instance for VRAM MM callback functions
+  drm: Integrate VRAM MM into struct drm_device
+  drm/ast: Convert AST driver to |struct drm_gem_vram_object|
+  drm/ast: Convert AST driver to VRAM MM
+  drm/ast: Replace mapping code with drm_gem_vram_{kmap/kunmap}()
+  drm/bochs: Convert bochs driver to |struct drm_gem_vram_object|
+  drm/bochs: Convert bochs driver to VRAM MM
+  drm/mgag200: Convert mgag200 driver to |struct drm_gem_vram_object|
+  drm/mgag200: Convert mgag200 driver to VRAM MM
+  drm/mgag200: Replace mapping code with drm_gem_vram_{kmap/kunmap}()
+  drm/vboxvideo: Convert vboxvideo driver to |struct
+    drm_gem_vram_object|
+  drm/vboxvideo: Convert vboxvideo driver to VRAM MM
+  drm/hisilicon: Convert hibmc-drm driver to |struct
+    drm_gem_vram_object|
+  drm/hisilicon: Convert hibmc-drm driver to VRAM MM
+
+ Documentation/gpu/drm-mm.rst                  |  34 +-
+ drivers/gpu/drm/Kconfig                       |   7 +
+ drivers/gpu/drm/Makefile                      |   5 +
+ drivers/gpu/drm/ast/Kconfig                   |   3 +-
+ drivers/gpu/drm/ast/ast_drv.c                 |  13 +-
+ drivers/gpu/drm/ast/ast_drv.h                 |  71 +-
+ drivers/gpu/drm/ast/ast_fb.c                  |  34 +-
+ drivers/gpu/drm/ast/ast_main.c                |  77 +--
+ drivers/gpu/drm/ast/ast_mode.c                | 124 ++--
+ drivers/gpu/drm/ast/ast_ttm.c                 | 302 +--------
+ drivers/gpu/drm/bochs/Kconfig                 |   2 +-
+ drivers/gpu/drm/bochs/bochs.h                 |  47 +-
+ drivers/gpu/drm/bochs/bochs_drv.c             |  13 +-
+ drivers/gpu/drm/bochs/bochs_kms.c             |  18 +-
+ drivers/gpu/drm/bochs/bochs_mm.c              | 408 +-----------
+ drivers/gpu/drm/drm_gem_vram_helper.c         | 615 ++++++++++++++++++
+ drivers/gpu/drm/drm_vram_helper_common.c      |  98 +++
+ drivers/gpu/drm/drm_vram_mm_helper.c          | 295 +++++++++
+ drivers/gpu/drm/hisilicon/hibmc/Kconfig       |   2 +-
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_de.c    |  21 +-
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   |  13 +-
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h   |  33 +-
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c |  30 +-
+ drivers/gpu/drm/hisilicon/hibmc/hibmc_ttm.c   | 341 +---------
+ drivers/gpu/drm/mgag200/Kconfig               |   2 +-
+ drivers/gpu/drm/mgag200/mgag200_cursor.c      |  88 +--
+ drivers/gpu/drm/mgag200/mgag200_drv.c         |  13 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.h         |  74 +--
+ drivers/gpu/drm/mgag200/mgag200_fb.c          |  34 +-
+ drivers/gpu/drm/mgag200/mgag200_main.c        |  87 +--
+ drivers/gpu/drm/mgag200/mgag200_mode.c        |  53 +-
+ drivers/gpu/drm/mgag200/mgag200_ttm.c         | 301 +--------
+ drivers/gpu/drm/vboxvideo/Kconfig             |   2 +-
+ drivers/gpu/drm/vboxvideo/vbox_drv.c          |  12 +-
+ drivers/gpu/drm/vboxvideo/vbox_drv.h          |  75 +--
+ drivers/gpu/drm/vboxvideo/vbox_fb.c           |  22 +-
+ drivers/gpu/drm/vboxvideo/vbox_main.c         |  75 +--
+ drivers/gpu/drm/vboxvideo/vbox_mode.c         |  36 +-
+ drivers/gpu/drm/vboxvideo/vbox_ttm.c          | 355 +---------
+ include/drm/drm_device.h                      |   4 +
+ include/drm/drm_gem_vram_helper.h             | 139 ++++
+ include/drm/drm_vram_mm_helper.h              | 101 +++
+ 42 files changed, 1693 insertions(+), 2386 deletions(-)
+ create mode 100644 drivers/gpu/drm/drm_gem_vram_helper.c
+ create mode 100644 drivers/gpu/drm/drm_vram_helper_common.c
+ create mode 100644 drivers/gpu/drm/drm_vram_mm_helper.c
+ create mode 100644 include/drm/drm_gem_vram_helper.h
+ create mode 100644 include/drm/drm_vram_mm_helper.h
+
+--
+2.21.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
