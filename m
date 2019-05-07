@@ -2,83 +2,84 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25D2422731
-	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:19:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D82C616B95
+	for <lists.virtualization@lfdr.de>; Tue,  7 May 2019 21:43:23 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 458D59F0;
-	Sun, 19 May 2019 16:17:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3242BDDE;
+	Tue,  7 May 2019 19:43:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 830FFD99
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8A748D95
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 19:24:46 +0000 (UTC)
+	Tue,  7 May 2019 19:43:12 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
-	[209.85.167.45])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 06495FD
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DB078FD
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 19:24:45 +0000 (UTC)
-Received: by mail-lf1-f45.google.com with SMTP id n22so5156737lfe.12
+	Tue,  7 May 2019 19:43:11 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id y42so1032823qtk.6
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 07 May 2019 12:24:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9VH2cI54WOtf0TgOVICv7YfH/dmJx9RgBuqx8oc1Mjk=;
-	b=F6ld+tZIKD1TRL0AE6fEb2WqRxcP76uZx0RNPDleIxyf5RJkwYPqK0Bs9zD4aODmmE
-	4NNavp1nVKPc4olfZNB0csbl8Mt2jrfw/4cvqI1dQpb6hDyRxWSjJ7Yy4Q29HBvFbOfA
-	JtYubFLJeY+4ZpX9T0ONIWuycTh2DIrMPc1SCGpQzEDby6c9B7ZikuGkc84pDR1T+N6M
-	9spwBfJp4nacEIzecHYOyudxpJIHO5m/IUkW4JFPQf66ZbDiyfZVU/nw8vjKyLhqtWer
-	9FWQL1ENLRVadfjFY2rI1CERtp+W1p4k6aV0bmDTRupY82fFnsyC2IcEpAqT8PcIv623
-	jo8Q==
+	Tue, 07 May 2019 12:43:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=Ee/vWvn/Ifzj7Fj8CJW5WypvdZbF3rI74RwswfNy3s8=;
+	b=SlqXQH6cdfmDcoXK151NvgNOEL8C9rtVLRGZYegxJ5pRaiMErghgNSEUNcm8XOgnBm
+	Q7Olw9WbgFBUGU2iDCkwi5y4P6LbPvssY/y8G7sAy2o/IDwVIW3UNJk3oNH5uTnEQBe6
+	xnWNiXRxQs3KTm02xrq9ERvEvl5ab/N6pff2NY2lmzVtA6niaZiWeWugHSt5nXVR8rAP
+	HfJg3A/UXegsz8XhYGpG7nzAqlNS2FaltaSNlZrWib25/KUPpoCEj3wQ43V8sDx7W81w
+	TwgyJAj04iwS6mmd+p6VlrrTRvtd2PQDCDNh26OQvcQ/YuDQgItrhSo51NDIJloaDsLp
+	l6xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=9VH2cI54WOtf0TgOVICv7YfH/dmJx9RgBuqx8oc1Mjk=;
-	b=dImHi6ZpJ+JgKBpLLUZ0Ea8Bb/8zlpfBI5ftuF+pz9AnkmK2DdPALs31Cft/77a8sc
-	lHu1WgYMcDv9g75dagC5mS+DenNR+myf8TaFkN9dnqRr+AAweAf2t2Osc2+ZLhBUyzLX
-	8CA/kuFRhrw9hZcRmzEvAZtCeNxKKzwF97rIBG0V5oFF/YfjbkggdedWgSdjC2kW565D
-	ysfXm6nC/CsVx9PbyOCemcqhxR/6fLCennQgY1saPd6usg4IOxIfwNLkX2okD/U3iDsd
-	Hefs76lhISJz/QYX83nte0+37HdIQzlZw8ysO1NCi9GKxopPSJBO9GzAdgjdtknr1eeF
-	qnLg==
-X-Gm-Message-State: APjAAAWNaLInil/HjapB94MgConeMr5lDZlxAlrTaWfwmMnv4YrnJbIV
-	aIAEJLp68MF6EA8og0zq23TKR96Jv5qrdh9M4nAmBg==
-X-Google-Smtp-Source: APXvYqyg8BJ0mWtUnVsZIHd1nlxtEq/TQoby+zEdt5YK0v6BrfynU4C4tehxKhziDkaheD+CcYQOn+z9h45ZgO05JFs=
-X-Received: by 2002:ac2:51a9:: with SMTP id f9mr9455271lfk.56.1557257083907;
-	Tue, 07 May 2019 12:24:43 -0700 (PDT)
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=Ee/vWvn/Ifzj7Fj8CJW5WypvdZbF3rI74RwswfNy3s8=;
+	b=XFQrUcOTHtuo7Ka5zxfBhwbXcmx2o9L6EPfPgN984PLoVTivrtZfRxy/ZpFUnHZwQa
+	KL/Y/9xzd3sDpvI5nYlVGetPrMxnhab3BHljJnmrkpu+muHPEcE58GLgsGMtcmKapDho
+	xVx18JckatRXLC7NjMnFYypfWHmpF2AmeU2ZqhLTrfo8w5OiqIeNFesDT1cFNmADH4BY
+	uacSo+hiwq5ONyDnAAacuYN/7/tX+k8ZFfoCJfWzPfkTLiQIS4WCoO+/OqRWDlAiDTSv
+	gvpUrw9+Ls4VSnm6jkcbxBb1FWvCoeIb3jVsPi1truhAN52THxG66hrPIMrs4jpIKH/t
+	CpFQ==
+X-Gm-Message-State: APjAAAXVywVostIbKJyEmXKTsF4cPtwjaJybcNTXLD1wB2qEA2fJus3R
+	eI3+up7jwLXZiTPdcy9Za7IZvw==
+X-Google-Smtp-Source: APXvYqw3KSJ3ehNU8RQ0M4ocEOtB2IpJ3gJQrhf2sWV4FOnrdHCkkwNpNrnHzJv7qop0/fuwyZ7GaA==
+X-Received: by 2002:ac8:2a10:: with SMTP id k16mr28126307qtk.220.1557258190850;
+	Tue, 07 May 2019 12:43:10 -0700 (PDT)
+Received: from ziepe.ca
+	(hlfxns017vw-156-34-49-251.dhcp-dynamic.fibreop.ns.bellaliant.net.
+	[156.34.49.251]) by smtp.gmail.com with ESMTPSA id
+	n21sm7704457qkk.30.2019.05.07.12.43.09
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 07 May 2019 12:43:09 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1hO5zY-0007dD-NA; Tue, 07 May 2019 16:43:08 -0300
+Date: Tue, 7 May 2019 16:43:08 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Yuval Shaia <yuval.shaia@oracle.com>
+Subject: Re: [Qemu-devel] [RFC 0/3] VirtIO RDMA
+Message-ID: <20190507194308.GK6201@ziepe.ca>
+References: <20190411110157.14252-1-yuval.shaia@oracle.com>
+	<20190411190215.2163572e.cohuck@redhat.com>
+	<20190415103546.GA6854@lap1>
+	<e73e03c2-ea2b-6ffc-cd23-e8e44d42ce80@suse.de>
+	<20190422164527.GF21588@ziepe.ca> <20190430171350.GA2763@lap1>
 MIME-Version: 1.0
-References: <20190426050039.17460-1-pagupta@redhat.com>
-	<20190426050039.17460-5-pagupta@redhat.com>
-In-Reply-To: <20190426050039.17460-5-pagupta@redhat.com>
-Date: Tue, 7 May 2019 12:24:32 -0700
-Message-ID: <CA+nGSuOgCAoS4MkbuSL2q5Gyi4jG2oyJqLu_sDgexm5fSBmPLQ@mail.gmail.com>
-Subject: Re: [Qemu-devel] [PATCH v7 4/6] dax: check synchronous mapping is
-	supported
-To: Pankaj Gupta <pagupta@redhat.com>
-X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
-	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190430171350.GA2763@lap1>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
-Cc: cohuck@redhat.com, jack@suse.cz, kvm@vger.kernel.org, mst@redhat.com,
-	david@fromorbit.com, qemu-devel@nongnu.org,
-	virtualization@lists.linux-foundation.org,
-	adilger.kernel@dilger.ca, Stephen Barber <smbarber@google.com>,
-	zwisler@kernel.org, aarcange@redhat.com, dave.jiang@intel.com,
-	linux-nvdimm@lists.01.org, vishal.l.verma@intel.com,
-	willy@infradead.org, hch@infradead.org,
-	linux-acpi@vger.kernel.org, jmoyer@redhat.com,
-	linux-ext4@vger.kernel.org, lenb@kernel.org, kilobyte@angband.pl,
-	riel@surriel.com, yuval.shaia@oracle.com, stefanha@redhat.com,
-	imammedo@redhat.com, dan.j.williams@intel.com,
-	lcapitulino@redhat.com, nilal@redhat.com, tytso@mit.edu,
-	xiaoguangrong.eric@gmail.com, darrick.wong@oracle.com,
-	rjw@rjwysocki.net, linux-kernel@vger.kernel.org,
-	linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	pbonzini@redhat.com
+Cc: mst@redhat.com, linux-rdma@vger.kernel.org,
+	Cornelia Huck <cohuck@redhat.com>, qemu-devel@nongnu.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -90,28 +91,64 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: =?UTF-8?Q?Jakub_Staro=C5=84?= via Virtualization
-	<virtualization@lists.linux-foundation.org>
-Reply-To: =?UTF-8?Q?Jakub_Staro=C5=84?= <jstaron@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-From: Pankaj Gupta <pagupta@redhat.com>
-Date: Thu, Apr 25, 2019 at 10:00 PM
+On Tue, Apr 30, 2019 at 08:13:54PM +0300, Yuval Shaia wrote:
+> On Mon, Apr 22, 2019 at 01:45:27PM -0300, Jason Gunthorpe wrote:
+> > On Fri, Apr 19, 2019 at 01:16:06PM +0200, Hannes Reinecke wrote:
+> > > On 4/15/19 12:35 PM, Yuval Shaia wrote:
+> > > > On Thu, Apr 11, 2019 at 07:02:15PM +0200, Cornelia Huck wrote:
+> > > > > On Thu, 11 Apr 2019 14:01:54 +0300
+> > > > > Yuval Shaia <yuval.shaia@oracle.com> wrote:
+> > > > > 
+> > > > > > Data center backends use more and more RDMA or RoCE devices and more and
+> > > > > > more software runs in virtualized environment.
+> > > > > > There is a need for a standard to enable RDMA/RoCE on Virtual Machines.
+> > > > > > 
+> > > > > > Virtio is the optimal solution since is the de-facto para-virtualizaton
+> > > > > > technology and also because the Virtio specification
+> > > > > > allows Hardware Vendors to support Virtio protocol natively in order to
+> > > > > > achieve bare metal performance.
+> > > > > > 
+> > > > > > This RFC is an effort to addresses challenges in defining the RDMA/RoCE
+> > > > > > Virtio Specification and a look forward on possible implementation
+> > > > > > techniques.
+> > > > > > 
+> > > > > > Open issues/Todo list:
+> > > > > > List is huge, this is only start point of the project.
+> > > > > > Anyway, here is one example of item in the list:
+> > > > > > - Multi VirtQ: Every QP has two rings and every CQ has one. This means that
+> > > > > >    in order to support for example 32K QPs we will need 64K VirtQ. Not sure
+> > > > > >    that this is reasonable so one option is to have one for all and
+> > > > > >    multiplex the traffic on it. This is not good approach as by design it
+> > > > > >    introducing an optional starvation. Another approach would be multi
+> > > > > >    queues and round-robin (for example) between them.
+> > > > > > 
+> > > Typically there will be a one-to-one mapping between QPs and CPUs (on the
+> > > guest). 
+> > 
+> > Er we are really overloading words here.. The typical expectation is
+> > that a 'RDMA QP' will have thousands and thousands of instances on a
+> > system.
+> > 
+> > Most likely I think mapping 1:1 a virtio queue to a 'RDMA QP, CQ, SRQ,
+> > etc' is a bad idea...
+> 
+> We have three options, no virtqueue for QP, 1 to 1 or multiplexing. What
+> would be your vote on that?
+> I think you are for option #1, right? but in this case there is actually no
+> use of having a virtio-driver, isn't it?
 
-> +static inline bool daxdev_mapping_supported(struct vm_area_struct *vma,
-> +                               struct dax_device *dax_dev)
-> +{
-> +       return !(vma->flags & VM_SYNC);
-> +}
+The virtio driver is supposed to be a standard, like a hardware
+standard, for doing the operation.
 
-Shouldn't it be rather `return !(vma->vm_flags & VM_SYNC);`? There is
-no field named `flags` in `struct vm_area_struct`.
+It doesn't mean that every single element under the driver needs to
+use the virtio format QP.
 
-Thank you,
-Jakub
+Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
