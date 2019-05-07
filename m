@@ -2,91 +2,62 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADFD716705
-	for <lists.virtualization@lfdr.de>; Tue,  7 May 2019 17:40:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3A4216729
+	for <lists.virtualization@lfdr.de>; Tue,  7 May 2019 17:48:03 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CF4FBCA8;
-	Tue,  7 May 2019 15:40:43 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E64F8B6C;
+	Tue,  7 May 2019 15:47:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CFC34CA8
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8F6FD9EE
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 15:40:42 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
-	[209.85.210.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 952337DB
+	Tue,  7 May 2019 15:47:57 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+	[198.137.202.133])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 371B4837
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 15:40:41 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id w6so15362436otl.7
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 07 May 2019 08:40:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eDjq30ddseBaIw6socWxfPv6NTtk+5QW4X1Ug5iEyJk=;
-	b=P0NmBCU8zUOfaF8xaYZsuZ8crvxFB33fl7wDNB9MZv5fgE9bufZ9uXOFacVBRIyhyk
-	7jy7cEut0ZZu1RaoDtrr50BVaB/CX/skGeBOtXxoGAGKW89ZemgDpFwl6g0BCyZNTY71
-	c96Bv/+lzcoe4YYcd5EMePUR4gTK7GrAqK6itLr2obeqWzYKb3Dql3mDDHzIv1x+/JnT
-	zIvYGvdBDonXfV8sEZV0PvMIvA63l1OoRV+8kWQPCfuhVRSXMOb+jYMxWFhFzCGAXSHH
-	RES21PeWYeTfPIbRNgVP3JVS3PVW0F6JNq0X1vpUrTbfXgSQ4Ev5ZlVumch1kGRMghci
-	mHRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=eDjq30ddseBaIw6socWxfPv6NTtk+5QW4X1Ug5iEyJk=;
-	b=oQzJHZ/q8j3nmxdMt6sgLnTjs3lNBZkpdfxJeQbmtjPogOSTQi9xXS67BXYL8Fw13s
-	83srfUjsCaeF+3hO9kP76+dVZSGI//nhVDTU2ErSQJAfIMOurhAtPTu7GgrWoANEZfhE
-	YvY6rGUUVl2El27FAk/8oPHeP1f6DFBUv1kvtW6BamrOKYcnVna5xscnsxpyYy8gXSJ7
-	35hZNZkucT5CDrowSodPUIjfxzD6UDW8Kd0l8HmqsHXQpn+gP+09xnUU53sV/bu7zTy0
-	TAgAKpjF5RhkJ7PXOqnZ5iP6suAdeiYGDbXR41BjbcwfEdC3xZ8iRVEQiovLjJHAjr2Y
-	FhUg==
-X-Gm-Message-State: APjAAAVgKfccclO3Y7pCOmR/+T4MxReiudiPpXnJESht/gdZSh2gXDzz
-	ersJlWQFkb/IJzlu5Ud+tZXLXilZg3/KITCGVoOJww==
-X-Google-Smtp-Source: APXvYqxgIWANkc/KHq9kAogc8tqlkqRrOccsWEIKbqAeeZcNH5LiQg3MPoGwMh9hdCCYG0LuKCXgqpIi0akzNLzuZFI=
-X-Received: by 2002:a9d:222c:: with SMTP id o41mr22033787ota.353.1557243640877;
-	Tue, 07 May 2019 08:40:40 -0700 (PDT)
+	Tue,  7 May 2019 15:47:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20170209;
+	h=In-Reply-To:Content-Type:MIME-Version
+	:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
+	:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=AEfE8EIktfS0Ycd7e0jTJYMFc8dseypamAWIWa0rG3o=;
+	b=bd6vFoKNSwXSMajhrl2bD5JXa+
+	949BQ9H3YwErJYagV4BhjxunsD2ny5YZ0430G0I+pOJn8YnxFkqxI9nKJYRGwM//vtTKOkzCjs4rt
+	8TespmFYFe4vdW6nb5LVXQproTVdS9nrkUy/1PbZCuB1gLukj8cQUktlRUmkmkhaefaGP/NglLqyi
+	AVoWhX6pf3805cm1K0+Z2sNFHotDwCWTEu6ZZJZDN/BD8+8d78uQYfs3UsaanMReFlxTUu8abglXo
+	PTUk5GNo/+qm4w1zaI/WrjI6RAH7axxHFyGbCE1v/JcMmsxF4NQuIm4cg+/nTaM2z+2dxlCG9JvOm
+	ptbq054Q==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.90_1 #2 (Red
+	Hat Linux)) id 1hO2Jt-0004Hj-Su; Tue, 07 May 2019 15:47:53 +0000
+Date: Tue, 7 May 2019 08:47:53 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH RFC] vhost: don't use kmap() to log dirty pages
+Message-ID: <20190507154753.GA8809@infradead.org>
 MIME-Version: 1.0
-References: <20190426050039.17460-1-pagupta@redhat.com>
-	<20190426050039.17460-4-pagupta@redhat.com>
-In-Reply-To: <20190426050039.17460-4-pagupta@redhat.com>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Tue, 7 May 2019 08:40:30 -0700
-Message-ID: <CAPcyv4hRdvypEj4LBTMfUFm80BdpRYbOugrkkj-3Kk_LErXPqQ@mail.gmail.com>
-Subject: Re: [PATCH v7 3/6] libnvdimm: add dax_dev sync flag
-To: Pankaj Gupta <pagupta@redhat.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <1557195809-12373-1-git-send-email-jasowang@redhat.com>
+User-Agent: Mutt/1.9.2 (2017-12-15)
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+	bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FAKE_REPLY_C,RCVD_IN_DNSWL_MED autolearn=ham
+	version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: cohuck@redhat.com, Jan Kara <jack@suse.cz>, KVM list <kvm@vger.kernel.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>, david <david@fromorbit.com>,
-	Qemu Developers <qemu-devel@nongnu.org>,
-	virtualization@lists.linux-foundation.org,
-	Andreas Dilger <adilger.kernel@dilger.ca>,
-	Ross Zwisler <zwisler@kernel.org>, Andrea Arcangeli <aarcange@redhat.com>,
-	Dave Jiang <dave.jiang@intel.com>,
-	linux-nvdimm <linux-nvdimm@lists.01.org>,
-	Vishal L Verma <vishal.l.verma@intel.com>,
-	Matthew Wilcox <willy@infradead.org>,
-	Christoph Hellwig <hch@infradead.org>,
-	Linux ACPI <linux-acpi@vger.kernel.org>, jmoyer <jmoyer@redhat.com>,
-	linux-ext4 <linux-ext4@vger.kernel.org>,
-	Len Brown <lenb@kernel.org>, kilobyte@angband.pl,
-	Rik van Riel <riel@surriel.com>, yuval shaia <yuval.shaia@oracle.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, lcapitulino@redhat.com,
-	Nitesh Narayan Lal <nilal@redhat.com>, Theodore Ts'o <tytso@mit.edu>,
-	Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
-	"Darrick J. Wong" <darrick.wong@oracle.com>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	linux-xfs <linux-xfs@vger.kernel.org>,
-	linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-	Igor Mammedov <imammedo@redhat.com>
+Cc: Andrea Arcangeli <aarcange@redhat.com>, kvm@vger.kernel.org, mst@redhat.com,
+	Peter Zijlstra <peterz@infradead.org>, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	James Bottomley <James.Bottomley@HansenPartnership.com>,
+	Ingo Molnar <mingo@redhat.com>, Darren Hart <dvhart@infradead.org>,
+	Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -103,30 +74,51 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Apr 25, 2019 at 10:02 PM Pankaj Gupta <pagupta@redhat.com> wrote:
->
-> This patch adds 'DAXDEV_SYNC' flag which is set
-> for nd_region doing synchronous flush. This later
-> is used to disable MAP_SYNC functionality for
-> ext4 & xfs filesystem for devices don't support
-> synchronous flush.
->
-> Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
-[..]
-> diff --git a/include/linux/dax.h b/include/linux/dax.h
-> index 0dd316a74a29..c97fc0cc7167 100644
-> --- a/include/linux/dax.h
-> +++ b/include/linux/dax.h
-> @@ -7,6 +7,9 @@
->  #include <linux/radix-tree.h>
->  #include <asm/pgtable.h>
->
-> +/* Flag for synchronous flush */
-> +#define DAXDEV_F_SYNC true
+On Mon, May 06, 2019 at 10:23:29PM -0400, Jason Wang wrote:
+> Note: there're archs (few non popular ones) that don't implement
+> futex helper, we can't log dirty pages. We can fix them on top or
+> simply disable LOG_ALL features of vhost.
 
-I'd feel better, i.e. it reads more canonically, if this was defined
-as (1UL << 0) and the argument to alloc_dax() was changed to 'unsigned
-long flags' rather than a bool.
+That means vhost now has to depend on HAVE_FUTEX_CMPXCHG to make
+sure we have a working implementation.
+
+
+>  #include <linux/sched/signal.h>
+>  #include <linux/interval_tree_generic.h>
+>  #include <linux/nospec.h>
+> +#include <asm/futex.h>
+
+Also please include the futex maintainers to make sure they are fine
+with this first usage of <asm/futex.h> outside of kernel/futex.c.
+
+
+> +static int set_bit_to_user(int nr, u32 __user *addr)
+>  {
+>  	unsigned long log = (unsigned long)addr;
+>  	struct page *page;
+> +	u32 old_log;
+>  	int r;
+>  
+>  	r = get_user_pages_fast(log, 1, 1, &page);
+>  	if (r < 0)
+>  		return r;
+>  	BUG_ON(r != 1);
+> +
+> +	r = futex_atomic_cmpxchg_inatomic(&old_log, addr, 0, 0);
+> +	if (r < 0)
+> +		return r;
+> +
+> +	old_log |= 1 << nr;
+> +	r = put_user(old_log, addr);
+> +	if (r < 0)
+> +		return r;
+
+And this just looks odd to me.  Why do we need the futex call to
+replace a 0 value with 0?  Why does it still duplicate the
+put_user?  This doesn't look like actually working code to me.
+
+Also don't we need a pagefault_disable() around
+futex_atomic_cmpxchg_inatomic?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
