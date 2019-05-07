@@ -2,71 +2,145 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D2BA163AD
-	for <lists.virtualization@lfdr.de>; Tue,  7 May 2019 14:25:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 865DF165AF
+	for <lists.virtualization@lfdr.de>; Tue,  7 May 2019 16:30:37 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 286D6E8B;
-	Tue,  7 May 2019 12:25:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7E3E8CB6;
+	Tue,  7 May 2019 14:30:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 50B38E8B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 46C25CB6
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 12:25:49 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 505167DB
+	Tue,  7 May 2019 14:30:31 +0000 (UTC)
+X-Greylist: delayed 00:32:07 by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0E9AF7DB
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 12:25:48 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id n25so19723974wmk.4
+	Tue,  7 May 2019 14:30:28 +0000 (UTC)
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x47DrHk0110507 for <virtualization@lists.linux-foundation.org>;
+	Tue, 7 May 2019 09:58:21 -0400
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2sb9vwmkf6-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 07 May 2019 05:25:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=RgWL/g6Ctb6576iEJfmm/zOjyy44S59/CosNUjRdC94=;
-	b=YECLHYYyKwK4DvxqZkDj/4KvAuVV11qcsSU8TI5npXZa7z/MjTgvkBL/rnDY0Mi447
-	3fZtsUCJ0NY7jBM+Er4pMvwyj+UfcNsBpLZFinqA1vI7WzB0ln/iQtr00c2yVMe71Xg3
-	7AUrtenxJoqd6P9TPCumjOfzJCX/GLCvar3nmQS4SgpHJevl09y0ykZcfiiH5vGIB/tq
-	hPT8LjkVRBHRmRWcEodZaXTBi22Kl7lftyWeMhxuTzKR2aAE39iq7JZUFQVG+WaZFjiI
-	gSbJk/FgvSFUB3VD/y7pC5qr9BLKg5nl1o5A3J+v7Gf0Yh8j4tTRYfmYfKvqz6ZhzO7E
-	lyjQ==
-X-Gm-Message-State: APjAAAVYvy+CN3IBnsUeqq9g2RNMd0fywQUn6kCXf/oEWpSHamdzKM/4
-	6px5fWYUQuM82+TflHrm89psVg==
-X-Google-Smtp-Source: APXvYqztk3D6FfQCag9V/IMayhuu5K++rq1Y1HFSbHtcWI7a6N2/K8T/6FbFqS0eSiDEbqlaP89Edg==
-X-Received: by 2002:a05:600c:2506:: with SMTP id
-	d6mr21690818wma.106.1557231946828; 
-	Tue, 07 May 2019 05:25:46 -0700 (PDT)
-Received: from steredhat (host151-251-static.12-87-b.business.telecomitalia.it.
-	[87.12.251.151]) by smtp.gmail.com with ESMTPSA id
-	c20sm14679885wre.28.2019.05.07.05.25.45
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 07 May 2019 05:25:45 -0700 (PDT)
-Date: Tue, 7 May 2019 14:25:43 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jorge Moreira Broche <jemoreira@google.com>
-Subject: Re: [PATCH] vsock/virtio: Initialize core virtio vsock before
-	registering the driver
-Message-ID: <20190507122543.kgh44rvaw7nwlhjn@steredhat>
-References: <20190501003001.186239-1-jemoreira@google.com>
-	<20190501190831.GF22391@stefanha-x1.localdomain>
-	<20190502082045.u3xypjbac5npbhtc@steredhat.homenet.telecomitalia.it>
-	<CAJi--POaVsfprbp5na5BvR=VNONKGfFya_BnmTzzcWmOQ1DM2Q@mail.gmail.com>
+	Tue, 07 May 2019 09:58:20 -0400
+Received: from localhost
+	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<borntraeger@de.ibm.com>; Tue, 7 May 2019 14:58:17 +0100
+Received: from b06cxnps4074.portsmouth.uk.ibm.com (9.149.109.196)
+	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Tue, 7 May 2019 14:58:14 +0100
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+	[9.149.105.62])
+	by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x47DwDXk49414372
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Tue, 7 May 2019 13:58:13 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 58A4DAE045;
+	Tue,  7 May 2019 13:58:13 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id C22D6AE078;
+	Tue,  7 May 2019 13:58:12 +0000 (GMT)
+Received: from oc7455500831.ibm.com (unknown [9.152.96.164])
+	by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Tue,  7 May 2019 13:58:12 +0000 (GMT)
+Subject: Re: [PATCH 01/10] virtio/s390: use vring_create_virtqueue
+To: Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>
+References: <20190426183245.37939-1-pasic@linux.ibm.com>
+	<20190426183245.37939-2-pasic@linux.ibm.com>
+	<20190503111724.70c6ec37.cohuck@redhat.com>
+	<20190503160421-mutt-send-email-mst@kernel.org>
+	<20190504160340.29f17b98.pasic@linux.ibm.com>
+	<20190505131523.159bec7c.cohuck@redhat.com>
+From: Christian Borntraeger <borntraeger@de.ibm.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
+	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
+	syiRa+UVlsKmx1hsEg==
+Date: Tue, 7 May 2019 15:58:12 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAJi--POaVsfprbp5na5BvR=VNONKGfFya_BnmTzzcWmOQ1DM2Q@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <20190505131523.159bec7c.cohuck@redhat.com>
+Content-Language: en-US
+X-TM-AS-GCONF: 00
+x-cbid: 19050713-0008-0000-0000-000002E42F17
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19050713-0009-0000-0000-00002250AC5C
+Message-Id: <ed6cbf63-f2ff-f259-ccb0-3b9ba60f2b35@de.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-07_08:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905070090
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>, kernel-team@android.com,
-	"David S. Miller" <davem@davemloft.net>
+Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
+	Sebastian Ott <sebott@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
+	virtualization@lists.linux-foundation.org,
+	Christoph Hellwig <hch@infradead.org>,
+	Martin Schwidefsky <schwidefsky@de.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -83,136 +157,60 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Hi Jorge,
 
-On Mon, May 06, 2019 at 01:19:55PM -0700, Jorge Moreira Broche wrote:
-> > On Wed, May 01, 2019 at 03:08:31PM -0400, Stefan Hajnoczi wrote:
-> > > On Tue, Apr 30, 2019 at 05:30:01PM -0700, Jorge E. Moreira wrote:
-> > > > Avoid a race in which static variables in net/vmw_vsock/af_vsock.c are
-> > > > accessed (while handling interrupts) before they are initialized.
-> > > >
-> > > >
-> > > > [    4.201410] BUG: unable to handle kernel paging request at ffffffffffffffe8
-> > > > [    4.207829] IP: vsock_addr_equals_addr+0x3/0x20
-> > > > [    4.211379] PGD 28210067 P4D 28210067 PUD 28212067 PMD 0
-> > > > [    4.211379] Oops: 0000 [#1] PREEMPT SMP PTI
-> > > > [    4.211379] Modules linked in:
-> > > > [    4.211379] CPU: 1 PID: 30 Comm: kworker/1:1 Not tainted 4.14.106-419297-gd7e28cc1f241 #1
-> > > > [    4.211379] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.10.2-1 04/01/2014
-> > > > [    4.211379] Workqueue: virtio_vsock virtio_transport_rx_work
-> > > > [    4.211379] task: ffffa3273d175280 task.stack: ffffaea1800e8000
-> > > > [    4.211379] RIP: 0010:vsock_addr_equals_addr+0x3/0x20
-> > > > [    4.211379] RSP: 0000:ffffaea1800ebd28 EFLAGS: 00010286
-> > > > [    4.211379] RAX: 0000000000000002 RBX: 0000000000000000 RCX: ffffffffb94e42f0
-> > > > [    4.211379] RDX: 0000000000000400 RSI: ffffffffffffffe0 RDI: ffffaea1800ebdd0
-> > > > [    4.211379] RBP: ffffaea1800ebd58 R08: 0000000000000001 R09: 0000000000000001
-> > > > [    4.211379] R10: 0000000000000000 R11: ffffffffb89d5d60 R12: ffffaea1800ebdd0
-> > > > [    4.211379] R13: 00000000828cbfbf R14: 0000000000000000 R15: ffffaea1800ebdc0
-> > > > [    4.211379] FS:  0000000000000000(0000) GS:ffffa3273fd00000(0000) knlGS:0000000000000000
-> > > > [    4.211379] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > > > [    4.211379] CR2: ffffffffffffffe8 CR3: 000000002820e001 CR4: 00000000001606e0
-> > > > [    4.211379] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-> > > > [    4.211379] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-> > > > [    4.211379] Call Trace:
-> > > > [    4.211379]  ? vsock_find_connected_socket+0x6c/0xe0
-> > > > [    4.211379]  virtio_transport_recv_pkt+0x15f/0x740
-> > > > [    4.211379]  ? detach_buf+0x1b5/0x210
-> > > > [    4.211379]  virtio_transport_rx_work+0xb7/0x140
-> > > > [    4.211379]  process_one_work+0x1ef/0x480
-> > > > [    4.211379]  worker_thread+0x312/0x460
-> > > > [    4.211379]  kthread+0x132/0x140
-> > > > [    4.211379]  ? process_one_work+0x480/0x480
-> > > > [    4.211379]  ? kthread_destroy_worker+0xd0/0xd0
-> > > > [    4.211379]  ret_from_fork+0x35/0x40
-> > > > [    4.211379] Code: c7 47 08 00 00 00 00 66 c7 07 28 00 c7 47 08 ff ff ff ff c7 47 04 ff ff ff ff c3 0f 1f 00 66 2e 0f 1f 84 00 00 00 00 00 8b 47 08 <3b> 46 08 75 0a 8b 47 04 3b 46 04 0f 94 c0 c3 31 c0 c3 90 66 2e
-> > > > [    4.211379] RIP: vsock_addr_equals_addr+0x3/0x20 RSP: ffffaea1800ebd28
-> > > > [    4.211379] CR2: ffffffffffffffe8
-> > > > [    4.211379] ---[ end trace f31cc4a2e6df3689 ]---
-> > > > [    4.211379] Kernel panic - not syncing: Fatal exception in interrupt
-> > > > [    4.211379] Kernel Offset: 0x37000000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
-> > > > [    4.211379] Rebooting in 5 seconds..
-> > > >
-> > > > Fixes: 22b5c0b63f32 ("vsock/virtio: fix kernel panic after device hot-unplug")
-> > > > Cc: Stefan Hajnoczi <stefanha@redhat.com>
-> > > > Cc: "David S. Miller" <davem@davemloft.net>
-> > > > Cc: kvm@vger.kernel.org
-> > > > Cc: virtualization@lists.linux-foundation.org
-> > > > Cc: netdev@vger.kernel.org
-> > > > Cc: kernel-team@android.com
-> > > > Cc: stable@vger.kernel.org [4.9+]
-> > > > Signed-off-by: Jorge E. Moreira <jemoreira@google.com>
-> > > > ---
-> > > >  net/vmw_vsock/virtio_transport.c | 13 ++++++-------
-> > > >  1 file changed, 6 insertions(+), 7 deletions(-)
-> > > >
-> > > > diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
-> > > > index 15eb5d3d4750..96ab344f17bb 100644
-> > > > --- a/net/vmw_vsock/virtio_transport.c
-> > > > +++ b/net/vmw_vsock/virtio_transport.c
-> > > > @@ -702,28 +702,27 @@ static int __init virtio_vsock_init(void)
-> > > >     if (!virtio_vsock_workqueue)
-> > > >             return -ENOMEM;
-> > > >
-> > > > -   ret = register_virtio_driver(&virtio_vsock_driver);
-> > > > +   ret = vsock_core_init(&virtio_transport.transport);
-> > >
-> > > Have you checked that all transport callbacks are safe even if another
-> > > CPU calls them while virtio_vsock_probe() is executing on another CPU?
-> > >
-> >
-> > I have the same doubt.
-> >
-> > What do you think to take the 'the_virtio_vsock_mutex' in the
-> > virtio_vsock_init(), keeping the previous order?
-> >
-> > This should prevent this issue because the virtio_vsock_probe() remains
-> > blocked in the mutex until the end of vsock_core_init().
-> >
-> > Cheers,
-> > Stefano
+
+On 05.05.19 13:15, Cornelia Huck wrote:
+> On Sat, 4 May 2019 16:03:40 +0200
+> Halil Pasic <pasic@linux.ibm.com> wrote:
 > 
-> Hi Stefan, Stefano,
-> Sorry for the late reply.
-
-Don't worry :)
-
+>> On Fri, 3 May 2019 16:04:48 -0400
+>> "Michael S. Tsirkin" <mst@redhat.com> wrote:
+>>
+>>> On Fri, May 03, 2019 at 11:17:24AM +0200, Cornelia Huck wrote:  
+>>>> On Fri, 26 Apr 2019 20:32:36 +0200
+>>>> Halil Pasic <pasic@linux.ibm.com> wrote:
+>>>>   
+>>>>> The commit 2a2d1382fe9d ("virtio: Add improved queue allocation API")
+>>>>> establishes a new way of allocating virtqueues (as a part of the effort
+>>>>> that taught DMA to virtio rings).
+>>>>>
+>>>>> In the future we will want virtio-ccw to use the DMA API as well.
+>>>>>
+>>>>> Let us switch from the legacy method of allocating virtqueues to
+>>>>> vring_create_virtqueue() as the first step into that direction.
+>>>>>
+>>>>> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+>>>>> ---
+>>>>>  drivers/s390/virtio/virtio_ccw.c | 30 +++++++++++-------------------
+>>>>>  1 file changed, 11 insertions(+), 19 deletions(-)  
+>>>>
+>>>> Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+>>>>
+>>>> I'd vote for merging this patch right away for 5.2.  
+>>>
+>>> So which tree is this going through? mine?
+>>>   
+>>
+>> Christian, what do you think? If the whole series is supposed to go in
+>> in one go (which I hope it is), via Martin's tree could be the simplest
+>> route IMHO.
 > 
-> @Stefan
-> The order of vsock_core_exit() does not need to be changed to fix the
-> bug I found, but not changing it means the exit function is not
-> symmetric to the init function.
 > 
-> @Stefano
-> Taking the mutex from virtio_vsock_init() could work too (I haven't
-> tried it yet), but it's unnecessary, all that needs to be done is
-> properly initialize vsock_core before attempting to use it.
+> The first three patches are virtio(-ccw) only and the those are the ones
+> that I think are ready to go.
 > 
-> I would prefer to change the order in virtio_vsock_init, while leaving
-> virtio_vsock_exit unchanged, but I'll leave the final decision to you
-> since I am not very familiar with the inner workings of these modules.
+> I'm not feeling comfortable going forward with the remainder as it
+> stands now; waiting for some other folks to give feedback. (They are
+> touching/interacting with code parts I'm not so familiar with, and lack
+> of documentation, while not the developers' fault, does not make it
+> easier.)
+> 
+> Michael, would you like to pick up 1-3 for your tree directly? That
+> looks like the easiest way.
 
-In order to fix your issue, IMO changing the order in virtio_vsock_init(),
-is enough.
+Agreed. Michael please pick 1-3.
+We will continue to review 4- first and then see which tree is best.
 
-I think also that is correct to change the order in the virtio_vsock_exit(),
-otherwise, we should have the same issue if an interrupt comes while we
-are removing the module.
-This should not lead to the problem that I tried to solve in 22b5c0b63f32,
-because the vsock_core_exit() should not be called if there are open sockets,
-since the virtio-vsock driver become the owner of AF_VSOCK protocol
-family.
-
-Not related to this patch, maybe there are some issues in the
-virtio_vsock_probe(). I'd check better if it is correct to set
-'the_virtio_vsock' before the end of the initialization (e.g. spinlocks
-are initialized later).
-
-Accordingly,
-
-Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
-
-Thanks,
-Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
