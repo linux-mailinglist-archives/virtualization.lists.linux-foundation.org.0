@@ -2,111 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4584A167A4
-	for <lists.virtualization@lfdr.de>; Tue,  7 May 2019 18:18:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25D2422731
+	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:19:40 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C6985AA5;
-	Tue,  7 May 2019 16:18:26 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 458D59F0;
+	Sun, 19 May 2019 16:17:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9E51925A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 830FFD99
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 16:18:25 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from userp2120.oracle.com (userp2120.oracle.com [156.151.31.85])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3678E883
+	Tue,  7 May 2019 19:24:46 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
+	[209.85.167.45])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 06495FD
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 16:18:25 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
-	by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
-	x47GE4tr157451; Tue, 7 May 2019 16:17:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
-	h=date : from : to : cc
-	: subject : message-id : references : mime-version : content-type :
-	in-reply-to; s=corp-2018-07-02;
-	bh=JFFlnWS0WxSMENUMsRBMs4+e/sfuzMFmGvWcjKKQQuc=;
-	b=TKQ0ZY42TnZrA9kUXuIIQxHZJtlgsPZc/HUlXzQ4TUAvfAYUIXRd3TufRkYlIsL/qYnH
-	gEOc/3eGhv+v8nTxOS8S21kRqbBtPYiYTEKBQBAnom75SF+6NN9JdMkr6m+iXE4suPUy
-	M8pk/1FBF18jWlrv22JoleV2scB2kxIrjAnXvCYleCsCB2wshmO8nENxJSX0+PxVJUiQ
-	ZYNWGbaeLaZaSTwok9d5T6R6aHykl/CLecrfPWn2A3d57LkaTuFX9ZNvyXgC4fQ28IyP
-	l2LCbcZAeGQ6QNp9COGNfS/FdR1duRVLEebs8Og572/1EJwAKTyBze4/M2itosUoGBUM
-	Pg== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
-	by userp2120.oracle.com with ESMTP id 2s94b0phet-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 07 May 2019 16:17:57 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
-	by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
-	x47GH2b6135005; Tue, 7 May 2019 16:17:56 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
-	by aserp3020.oracle.com with ESMTP id 2s9ayeyus1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 07 May 2019 16:17:56 +0000
-Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
-	by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x47GHiM0002137;
-	Tue, 7 May 2019 16:17:44 GMT
-Received: from localhost (/67.169.218.210)
-	by default (Oracle Beehive Gateway v4.0)
-	with ESMTP ; Tue, 07 May 2019 09:17:44 -0700
-Date: Tue, 7 May 2019 09:17:36 -0700
-From: "Darrick J. Wong" <darrick.wong@oracle.com>
-To: Dan Williams <dan.j.williams@intel.com>
-Subject: Re: [PATCH v7 6/6] xfs: disable map_sync for async flush
-Message-ID: <20190507161736.GV5207@magnolia>
-References: <20190426050039.17460-1-pagupta@redhat.com>
-	<20190426050039.17460-7-pagupta@redhat.com>
-	<CAPcyv4hCP4E4xPkQx25tqhznon6ADwrYJB1yujkrO-A7LUnsmg@mail.gmail.com>
+	Tue,  7 May 2019 19:24:45 +0000 (UTC)
+Received: by mail-lf1-f45.google.com with SMTP id n22so5156737lfe.12
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 07 May 2019 12:24:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=9VH2cI54WOtf0TgOVICv7YfH/dmJx9RgBuqx8oc1Mjk=;
+	b=F6ld+tZIKD1TRL0AE6fEb2WqRxcP76uZx0RNPDleIxyf5RJkwYPqK0Bs9zD4aODmmE
+	4NNavp1nVKPc4olfZNB0csbl8Mt2jrfw/4cvqI1dQpb6hDyRxWSjJ7Yy4Q29HBvFbOfA
+	JtYubFLJeY+4ZpX9T0ONIWuycTh2DIrMPc1SCGpQzEDby6c9B7ZikuGkc84pDR1T+N6M
+	9spwBfJp4nacEIzecHYOyudxpJIHO5m/IUkW4JFPQf66ZbDiyfZVU/nw8vjKyLhqtWer
+	9FWQL1ENLRVadfjFY2rI1CERtp+W1p4k6aV0bmDTRupY82fFnsyC2IcEpAqT8PcIv623
+	jo8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=9VH2cI54WOtf0TgOVICv7YfH/dmJx9RgBuqx8oc1Mjk=;
+	b=dImHi6ZpJ+JgKBpLLUZ0Ea8Bb/8zlpfBI5ftuF+pz9AnkmK2DdPALs31Cft/77a8sc
+	lHu1WgYMcDv9g75dagC5mS+DenNR+myf8TaFkN9dnqRr+AAweAf2t2Osc2+ZLhBUyzLX
+	8CA/kuFRhrw9hZcRmzEvAZtCeNxKKzwF97rIBG0V5oFF/YfjbkggdedWgSdjC2kW565D
+	ysfXm6nC/CsVx9PbyOCemcqhxR/6fLCennQgY1saPd6usg4IOxIfwNLkX2okD/U3iDsd
+	Hefs76lhISJz/QYX83nte0+37HdIQzlZw8ysO1NCi9GKxopPSJBO9GzAdgjdtknr1eeF
+	qnLg==
+X-Gm-Message-State: APjAAAWNaLInil/HjapB94MgConeMr5lDZlxAlrTaWfwmMnv4YrnJbIV
+	aIAEJLp68MF6EA8og0zq23TKR96Jv5qrdh9M4nAmBg==
+X-Google-Smtp-Source: APXvYqyg8BJ0mWtUnVsZIHd1nlxtEq/TQoby+zEdt5YK0v6BrfynU4C4tehxKhziDkaheD+CcYQOn+z9h45ZgO05JFs=
+X-Received: by 2002:ac2:51a9:: with SMTP id f9mr9455271lfk.56.1557257083907;
+	Tue, 07 May 2019 12:24:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAPcyv4hCP4E4xPkQx25tqhznon6ADwrYJB1yujkrO-A7LUnsmg@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9250
-	signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
-	malwarescore=0
-	phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
-	adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
-	engine=8.0.1-1810050000 definitions=main-1905070105
-X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9250
-	signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
-	priorityscore=1501 malwarescore=0
-	suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
-	lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999
-	adultscore=0
-	classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
-	definitions=main-1905070105
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	UNPARSEABLE_RELAY autolearn=ham version=3.3.1
+References: <20190426050039.17460-1-pagupta@redhat.com>
+	<20190426050039.17460-5-pagupta@redhat.com>
+In-Reply-To: <20190426050039.17460-5-pagupta@redhat.com>
+Date: Tue, 7 May 2019 12:24:32 -0700
+Message-ID: <CA+nGSuOgCAoS4MkbuSL2q5Gyi4jG2oyJqLu_sDgexm5fSBmPLQ@mail.gmail.com>
+Subject: Re: [Qemu-devel] [PATCH v7 4/6] dax: check synchronous mapping is
+	supported
+To: Pankaj Gupta <pagupta@redhat.com>
+X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Pankaj Gupta <pagupta@redhat.com>, Jan Kara <jack@suse.cz>,
-	KVM list <kvm@vger.kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
-	david <david@fromorbit.com>, Qemu Developers <qemu-devel@nongnu.org>,
+X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
+Cc: cohuck@redhat.com, jack@suse.cz, kvm@vger.kernel.org, mst@redhat.com,
+	david@fromorbit.com, qemu-devel@nongnu.org,
 	virtualization@lists.linux-foundation.org,
-	Andreas Dilger <adilger.kernel@dilger.ca>,
-	Ross Zwisler <zwisler@kernel.org>, Andrea Arcangeli <aarcange@redhat.com>,
-	Dave Jiang <dave.jiang@intel.com>,
-	linux-nvdimm <linux-nvdimm@lists.01.org>,
-	Vishal L Verma <vishal.l.verma@intel.com>,
-	Matthew Wilcox <willy@infradead.org>,
-	Christoph Hellwig <hch@infradead.org>,
-	Linux ACPI <linux-acpi@vger.kernel.org>, jmoyer <jmoyer@redhat.com>,
-	linux-ext4 <linux-ext4@vger.kernel.org>,
-	Len Brown <lenb@kernel.org>, kilobyte@angband.pl,
-	Rik van Riel <riel@surriel.com>, yuval shaia <yuval.shaia@oracle.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, lcapitulino@redhat.com,
-	Nitesh Narayan Lal <nilal@redhat.com>, Theodore Ts'o <tytso@mit.edu>,
-	Xiao Guangrong <xiaoguangrong.eric@gmail.com>, cohuck@redhat.com,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	linux-xfs <linux-xfs@vger.kernel.org>,
-	linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-	Igor Mammedov <imammedo@redhat.com>
+	adilger.kernel@dilger.ca, Stephen Barber <smbarber@google.com>,
+	zwisler@kernel.org, aarcange@redhat.com, dave.jiang@intel.com,
+	linux-nvdimm@lists.01.org, vishal.l.verma@intel.com,
+	willy@infradead.org, hch@infradead.org,
+	linux-acpi@vger.kernel.org, jmoyer@redhat.com,
+	linux-ext4@vger.kernel.org, lenb@kernel.org, kilobyte@angband.pl,
+	riel@surriel.com, yuval.shaia@oracle.com, stefanha@redhat.com,
+	imammedo@redhat.com, dan.j.williams@intel.com,
+	lcapitulino@redhat.com, nilal@redhat.com, tytso@mit.edu,
+	xiaoguangrong.eric@gmail.com, darrick.wong@oracle.com,
+	rjw@rjwysocki.net, linux-kernel@vger.kernel.org,
+	linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	pbonzini@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -118,62 +90,28 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: =?UTF-8?Q?Jakub_Staro=C5=84?= via Virtualization
+	<virtualization@lists.linux-foundation.org>
+Reply-To: =?UTF-8?Q?Jakub_Staro=C5=84?= <jstaron@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, May 07, 2019 at 08:37:01AM -0700, Dan Williams wrote:
-> On Thu, Apr 25, 2019 at 10:03 PM Pankaj Gupta <pagupta@redhat.com> wrote:
-> >
-> > Dont support 'MAP_SYNC' with non-DAX files and DAX files
-> > with asynchronous dax_device. Virtio pmem provides
-> > asynchronous host page cache flush mechanism. We don't
-> > support 'MAP_SYNC' with virtio pmem and xfs.
-> >
-> > Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
-> > ---
-> >  fs/xfs/xfs_file.c | 9 ++++++---
-> >  1 file changed, 6 insertions(+), 3 deletions(-)
-> 
-> Darrick, does this look ok to take through the nvdimm tree?
+From: Pankaj Gupta <pagupta@redhat.com>
+Date: Thu, Apr 25, 2019 at 10:00 PM
 
-<urk> forgot about this, sorry. :/
+> +static inline bool daxdev_mapping_supported(struct vm_area_struct *vma,
+> +                               struct dax_device *dax_dev)
+> +{
+> +       return !(vma->flags & VM_SYNC);
+> +}
 
-> >
-> > diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
-> > index a7ceae90110e..f17652cca5ff 100644
-> > --- a/fs/xfs/xfs_file.c
-> > +++ b/fs/xfs/xfs_file.c
-> > @@ -1203,11 +1203,14 @@ xfs_file_mmap(
-> >         struct file     *filp,
-> >         struct vm_area_struct *vma)
-> >  {
-> > +       struct dax_device       *dax_dev;
-> > +
-> > +       dax_dev = xfs_find_daxdev_for_inode(file_inode(filp));
-> >         /*
-> > -        * We don't support synchronous mappings for non-DAX files. At least
-> > -        * until someone comes with a sensible use case.
-> > +        * We don't support synchronous mappings for non-DAX files and
-> > +        * for DAX files if underneath dax_device is not synchronous.
-> >          */
-> > -       if (!IS_DAX(file_inode(filp)) && (vma->vm_flags & VM_SYNC))
-> > +       if (!daxdev_mapping_supported(vma, dax_dev))
-> >                 return -EOPNOTSUPP;
+Shouldn't it be rather `return !(vma->vm_flags & VM_SYNC);`? There is
+no field named `flags` in `struct vm_area_struct`.
 
-LGTM, and I'm fine with it going through nvdimm.  Nothing in
-xfs-5.2-merge touches that function so it should be clean.
-
-Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
-
---D
-
-> >
-> >         file_accessed(filp);
-> > --
-> > 2.20.1
-> >
+Thank you,
+Jakub
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
