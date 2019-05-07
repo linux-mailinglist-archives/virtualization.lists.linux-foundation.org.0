@@ -2,84 +2,91 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id D82C616B95
-	for <lists.virtualization@lfdr.de>; Tue,  7 May 2019 21:43:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E96B22732
+	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:19:52 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3242BDDE;
-	Tue,  7 May 2019 19:43:14 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 967CDC97;
+	Sun, 19 May 2019 16:17:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8A748D95
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 147E8255
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 19:43:12 +0000 (UTC)
+	Tue,  7 May 2019 20:25:59 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DB078FD
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 91276FD
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 19:43:11 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id y42so1032823qtk.6
+	Tue,  7 May 2019 20:25:58 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id d31so8870460pgl.7
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 07 May 2019 12:43:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=Ee/vWvn/Ifzj7Fj8CJW5WypvdZbF3rI74RwswfNy3s8=;
-	b=SlqXQH6cdfmDcoXK151NvgNOEL8C9rtVLRGZYegxJ5pRaiMErghgNSEUNcm8XOgnBm
-	Q7Olw9WbgFBUGU2iDCkwi5y4P6LbPvssY/y8G7sAy2o/IDwVIW3UNJk3oNH5uTnEQBe6
-	xnWNiXRxQs3KTm02xrq9ERvEvl5ab/N6pff2NY2lmzVtA6niaZiWeWugHSt5nXVR8rAP
-	HfJg3A/UXegsz8XhYGpG7nzAqlNS2FaltaSNlZrWib25/KUPpoCEj3wQ43V8sDx7W81w
-	TwgyJAj04iwS6mmd+p6VlrrTRvtd2PQDCDNh26OQvcQ/YuDQgItrhSo51NDIJloaDsLp
-	l6xA==
+	Tue, 07 May 2019 13:25:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=SDTbfUna34Qd79ay/PvHpXeLqKHYqAqzFBtMK1XzxGI=;
+	b=ON/NQjQWEi3fON/DDBAYu5HG4F3A9wQYYX3ZHXewW6rdfpyfN6GDeKnlxgf9/si9a9
+	9JHSodUWXjDvUXWyvoEwEE0DgwhDeKMop/6LDrDPkGLUCYR03QkkfX5S7JFJ8pfilSDZ
+	xvvi21rJRzAsyyhE+/kT6jH7WSjJD4+uklULukm2H+Pokk9wj1CJ1/NtVElLjBkK6KcS
+	JqikN21lQ/W3kOqZE29va5iKvC/1zmXoxZvy0PuN6Nh+lQFN6TTKu80Ldt+bYozlFh95
+	K/LSeCc2Mr0qC2NpnPv30EkDStUnE9M9IgeET/tA/SjNLgtMCQoX8YEn/nGCjEfLlQaU
+	jpyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Ee/vWvn/Ifzj7Fj8CJW5WypvdZbF3rI74RwswfNy3s8=;
-	b=XFQrUcOTHtuo7Ka5zxfBhwbXcmx2o9L6EPfPgN984PLoVTivrtZfRxy/ZpFUnHZwQa
-	KL/Y/9xzd3sDpvI5nYlVGetPrMxnhab3BHljJnmrkpu+muHPEcE58GLgsGMtcmKapDho
-	xVx18JckatRXLC7NjMnFYypfWHmpF2AmeU2ZqhLTrfo8w5OiqIeNFesDT1cFNmADH4BY
-	uacSo+hiwq5ONyDnAAacuYN/7/tX+k8ZFfoCJfWzPfkTLiQIS4WCoO+/OqRWDlAiDTSv
-	gvpUrw9+Ls4VSnm6jkcbxBb1FWvCoeIb3jVsPi1truhAN52THxG66hrPIMrs4jpIKH/t
-	CpFQ==
-X-Gm-Message-State: APjAAAXVywVostIbKJyEmXKTsF4cPtwjaJybcNTXLD1wB2qEA2fJus3R
-	eI3+up7jwLXZiTPdcy9Za7IZvw==
-X-Google-Smtp-Source: APXvYqw3KSJ3ehNU8RQ0M4ocEOtB2IpJ3gJQrhf2sWV4FOnrdHCkkwNpNrnHzJv7qop0/fuwyZ7GaA==
-X-Received: by 2002:ac8:2a10:: with SMTP id k16mr28126307qtk.220.1557258190850;
-	Tue, 07 May 2019 12:43:10 -0700 (PDT)
-Received: from ziepe.ca
-	(hlfxns017vw-156-34-49-251.dhcp-dynamic.fibreop.ns.bellaliant.net.
-	[156.34.49.251]) by smtp.gmail.com with ESMTPSA id
-	n21sm7704457qkk.30.2019.05.07.12.43.09
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 07 May 2019 12:43:09 -0700 (PDT)
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1hO5zY-0007dD-NA; Tue, 07 May 2019 16:43:08 -0300
-Date: Tue, 7 May 2019 16:43:08 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Yuval Shaia <yuval.shaia@oracle.com>
-Subject: Re: [Qemu-devel] [RFC 0/3] VirtIO RDMA
-Message-ID: <20190507194308.GK6201@ziepe.ca>
-References: <20190411110157.14252-1-yuval.shaia@oracle.com>
-	<20190411190215.2163572e.cohuck@redhat.com>
-	<20190415103546.GA6854@lap1>
-	<e73e03c2-ea2b-6ffc-cd23-e8e44d42ce80@suse.de>
-	<20190422164527.GF21588@ziepe.ca> <20190430171350.GA2763@lap1>
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=SDTbfUna34Qd79ay/PvHpXeLqKHYqAqzFBtMK1XzxGI=;
+	b=J3t9rY8vIzhMRZgUI5o+ERUkUTUFrDUZ/fu2f8o2qLUMPa2ZBd8jtXc13WavZBadl0
+	ivmox6+A4sIppTQjFOLllJwoxOMQ3JWTZAT1HS88Qqb3/z0hxu/s1vEPykdAhNzAzeD2
+	U7PmuQMKraxY0cJN2VmlphizG36tDOV35UibVMyvW5OxnvdLZjYjuziv9cbWZUsEfET+
+	shi+dNy5aNcg4SKtaxuwdOg/lJzfelN9E5MUKD6MBPw1DHnPKiYTW9W98kw0BoI1/9q0
+	6An6GJFuCpqqr2wxsS0UVyskLsaGSpIuG79HMDGhHtSSYTzHr13spVe2I3+tWTPyJZVS
+	pVXQ==
+X-Gm-Message-State: APjAAAVTSOlabxTzjA4M3yEj4HbckMCpacHuu89UX5+8ulLrFvgU3CzM
+	nanK69sQmM483CRhe2/HZL+Jiw==
+X-Google-Smtp-Source: APXvYqxbPfJ5tBulG/r6tvcVjjtvKQlgkwdEbMW3aGkGHvRkjNKPxepulcAi/TILththSdbF+vLDMw==
+X-Received: by 2002:aa7:8dc3:: with SMTP id j3mr43498542pfr.141.1557260757236; 
+	Tue, 07 May 2019 13:25:57 -0700 (PDT)
+Received: from jstaron2.mtv.corp.google.com
+	([2620:15c:202:201:b94f:2527:c39f:ca2d])
+	by smtp.gmail.com with ESMTPSA id
+	f5sm15855223pgo.75.2019.05.07.13.25.55
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Tue, 07 May 2019 13:25:56 -0700 (PDT)
+Subject: Re: [Qemu-devel] [PATCH v7 2/6] virtio-pmem: Add virtio pmem driver
+To: Pankaj Gupta <pagupta@redhat.com>, linux-nvdimm@lists.01.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	kvm@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	linux-acpi@vger.kernel.org, qemu-devel@nongnu.org,
+	linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org
+References: <20190426050039.17460-1-pagupta@redhat.com>
+	<20190426050039.17460-3-pagupta@redhat.com>
+Message-ID: <3d6479ae-6c39-d614-f1d9-aa1978e2e438@google.com>
+Date: Tue, 7 May 2019 13:25:54 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190430171350.GA2763@lap1>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+In-Reply-To: <20190426050039.17460-3-pagupta@redhat.com>
+Content-Language: en-US
+X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: mst@redhat.com, linux-rdma@vger.kernel.org,
-	Cornelia Huck <cohuck@redhat.com>, qemu-devel@nongnu.org,
-	virtualization@lists.linux-foundation.org
+X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
+Cc: jack@suse.cz, mst@redhat.com, david@fromorbit.com, lcapitulino@redhat.com,
+	adilger.kernel@dilger.ca, smbarber@google.com,
+	zwisler@kernel.org, aarcange@redhat.com, dave.jiang@intel.com,
+	darrick.wong@oracle.com, vishal.l.verma@intel.com,
+	willy@infradead.org, hch@infradead.org, jmoyer@redhat.com,
+	nilal@redhat.com, lenb@kernel.org, kilobyte@angband.pl,
+	riel@surriel.com, yuval.shaia@oracle.com, stefanha@redhat.com,
+	imammedo@redhat.com, dan.j.williams@intel.com, tytso@mit.edu,
+	xiaoguangrong.eric@gmail.com, cohuck@redhat.com,
+	rjw@rjwysocki.net, pbonzini@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -91,64 +98,135 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: =?UTF-8?Q?Jakub_Staro=c5=84?= via Virtualization
+	<virtualization@lists.linux-foundation.org>
+Reply-To: =?UTF-8?Q?Jakub_Staro=c5=84?= <jstaron@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Apr 30, 2019 at 08:13:54PM +0300, Yuval Shaia wrote:
-> On Mon, Apr 22, 2019 at 01:45:27PM -0300, Jason Gunthorpe wrote:
-> > On Fri, Apr 19, 2019 at 01:16:06PM +0200, Hannes Reinecke wrote:
-> > > On 4/15/19 12:35 PM, Yuval Shaia wrote:
-> > > > On Thu, Apr 11, 2019 at 07:02:15PM +0200, Cornelia Huck wrote:
-> > > > > On Thu, 11 Apr 2019 14:01:54 +0300
-> > > > > Yuval Shaia <yuval.shaia@oracle.com> wrote:
-> > > > > 
-> > > > > > Data center backends use more and more RDMA or RoCE devices and more and
-> > > > > > more software runs in virtualized environment.
-> > > > > > There is a need for a standard to enable RDMA/RoCE on Virtual Machines.
-> > > > > > 
-> > > > > > Virtio is the optimal solution since is the de-facto para-virtualizaton
-> > > > > > technology and also because the Virtio specification
-> > > > > > allows Hardware Vendors to support Virtio protocol natively in order to
-> > > > > > achieve bare metal performance.
-> > > > > > 
-> > > > > > This RFC is an effort to addresses challenges in defining the RDMA/RoCE
-> > > > > > Virtio Specification and a look forward on possible implementation
-> > > > > > techniques.
-> > > > > > 
-> > > > > > Open issues/Todo list:
-> > > > > > List is huge, this is only start point of the project.
-> > > > > > Anyway, here is one example of item in the list:
-> > > > > > - Multi VirtQ: Every QP has two rings and every CQ has one. This means that
-> > > > > >    in order to support for example 32K QPs we will need 64K VirtQ. Not sure
-> > > > > >    that this is reasonable so one option is to have one for all and
-> > > > > >    multiplex the traffic on it. This is not good approach as by design it
-> > > > > >    introducing an optional starvation. Another approach would be multi
-> > > > > >    queues and round-robin (for example) between them.
-> > > > > > 
-> > > Typically there will be a one-to-one mapping between QPs and CPUs (on the
-> > > guest). 
-> > 
-> > Er we are really overloading words here.. The typical expectation is
-> > that a 'RDMA QP' will have thousands and thousands of instances on a
-> > system.
-> > 
-> > Most likely I think mapping 1:1 a virtio queue to a 'RDMA QP, CQ, SRQ,
-> > etc' is a bad idea...
-> 
-> We have three options, no virtqueue for QP, 1 to 1 or multiplexing. What
-> would be your vote on that?
-> I think you are for option #1, right? but in this case there is actually no
-> use of having a virtio-driver, isn't it?
+On 4/25/19 10:00 PM, Pankaj Gupta wrote:
 
-The virtio driver is supposed to be a standard, like a hardware
-standard, for doing the operation.
+> +void host_ack(struct virtqueue *vq)
+> +{
+> +	unsigned int len;
+> +	unsigned long flags;
+> +	struct virtio_pmem_request *req, *req_buf;
+> +	struct virtio_pmem *vpmem = vq->vdev->priv;
+> +
+> +	spin_lock_irqsave(&vpmem->pmem_lock, flags);
+> +	while ((req = virtqueue_get_buf(vq, &len)) != NULL) {
+> +		req->done = true;
+> +		wake_up(&req->host_acked);
+> +
+> +		if (!list_empty(&vpmem->req_list)) {
+> +			req_buf = list_first_entry(&vpmem->req_list,
+> +					struct virtio_pmem_request, list);
+> +			list_del(&vpmem->req_list);
 
-It doesn't mean that every single element under the driver needs to
-use the virtio format QP.
+Shouldn't it be rather `list_del(vpmem->req_list.next)`? We are trying to unlink
+first element of the list and `vpmem->req_list` is just the list head.
 
-Jason
+> +int virtio_pmem_flush(struct nd_region *nd_region)
+> +{
+> +	int err;
+> +	unsigned long flags;
+> +	struct scatterlist *sgs[2], sg, ret;
+> +	struct virtio_device *vdev = nd_region->provider_data;
+> +	struct virtio_pmem *vpmem = vdev->priv;
+> +	struct virtio_pmem_request *req;
+> +
+> +	might_sleep();
+> +	req = kmalloc(sizeof(*req), GFP_KERNEL);
+> +	if (!req)
+> +		return -ENOMEM;
+> +
+> +	req->done = req->wq_buf_avail = false;
+> +	strcpy(req->name, "FLUSH");
+> +	init_waitqueue_head(&req->host_acked);
+> +	init_waitqueue_head(&req->wq_buf);
+> +	sg_init_one(&sg, req->name, strlen(req->name));
+> +	sgs[0] = &sg;
+> +	sg_init_one(&ret, &req->ret, sizeof(req->ret));
+> +	sgs[1] = &ret;
+> +
+> +	spin_lock_irqsave(&vpmem->pmem_lock, flags);
+> +	err = virtqueue_add_sgs(vpmem->req_vq, sgs, 1, 1, req, GFP_ATOMIC);
+> +	if (err) {
+> +		dev_err(&vdev->dev, "failed to send command to virtio pmem device\n");
+> +
+> +		list_add_tail(&vpmem->req_list, &req->list);
+> +		spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
+> +
+> +		/* When host has read buffer, this completes via host_ack */
+> +		wait_event(req->wq_buf, req->wq_buf_avail);
+> +		spin_lock_irqsave(&vpmem->pmem_lock, flags);
+> +	}
+
+Aren't the arguments in `list_add_tail` swapped? The element we are adding should
+be first, the list should be second. Also, shouldn't we resubmit the request after
+waking up from `wait_event(req->wq_buf, req->wq_buf_avail)`?
+
+I propose rewriting it like that:
+
+diff --git a/drivers/nvdimm/virtio_pmem.c b/drivers/nvdimm/virtio_pmem.c
+index 66b582f751a3..ff0556b04e86 100644
+--- a/drivers/nvdimm/virtio_pmem.c
++++ b/drivers/nvdimm/virtio_pmem.c
+@@ -25,7 +25,7 @@ void host_ack(struct virtqueue *vq)
+ 		if (!list_empty(&vpmem->req_list)) {
+ 			req_buf = list_first_entry(&vpmem->req_list,
+ 					struct virtio_pmem_request, list);
+-			list_del(&vpmem->req_list);
++			list_del(vpmem->req_list.next);
+ 			req_buf->wq_buf_avail = true;
+ 			wake_up(&req_buf->wq_buf);
+ 		}
+@@ -59,17 +59,33 @@ int virtio_pmem_flush(struct nd_region *nd_region)
+ 	sgs[1] = &ret;
+ 
+ 	spin_lock_irqsave(&vpmem->pmem_lock, flags);
+-	err = virtqueue_add_sgs(vpmem->req_vq, sgs, 1, 1, req, GFP_ATOMIC);
+-	if (err) {
+-		dev_err(&vdev->dev, "failed to send command to virtio pmem device\n");
++	/*
++	 * If virtqueue_add_sgs returns -ENOSPC then req_vq virtual queue does not
++	 * have free descriptor slots. We add the request to req_list and wait
++	 * for host_ack to wake us up when free slots are available.
++	 */
++	while ((err = virtqueue_add_sgs(vpmem->req_vq, sgs, 1, 1, req, GFP_ATOMIC)) == -ENOSPC) {
++		dev_err(&vdev->dev, "failed to send command to virtio pmem device, no free slots in the virtqueue, postponing request\n");
++		req->wq_buf_avail = false;
+ 
+-		list_add_tail(&vpmem->req_list, &req->list);
++		list_add_tail(&req->list, &vpmem->req_list);
+ 		spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
+ 
+ 		/* When host has read buffer, this completes via host_ack */
+ 		wait_event(req->wq_buf, req->wq_buf_avail);
+ 		spin_lock_irqsave(&vpmem->pmem_lock, flags);
+ 	}
++
++	/*
++	 * virtqueue_add_sgs failed with error different than -ENOSPC, we can't
++	 * do anything about that.
++	 */
++	if (err) {
++		dev_info(&vdev->dev, "failed to send command to virtio pmem device, error code %d\n", err);
++		spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
++		err = -EIO;
++		goto ret;
++	}
+ 	err = virtqueue_kick(vpmem->req_vq);
+ 	spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
+
+
+Let me know if it looks reasonable to you.
+
+Thank you,
+Jakub Staron
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
