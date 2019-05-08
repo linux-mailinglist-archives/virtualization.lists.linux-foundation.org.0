@@ -2,96 +2,100 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 295EB22739
-	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:21:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCCA1180DE
+	for <lists.virtualization@lfdr.de>; Wed,  8 May 2019 22:13:21 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AC130A7A;
-	Sun, 19 May 2019 16:17:31 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A75F9E46;
+	Wed,  8 May 2019 20:13:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6EF41C9B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0EA9AA70
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  8 May 2019 19:05:43 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0F3BA8A9
+	Wed,  8 May 2019 20:13:11 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8169D87E
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  8 May 2019 19:05:42 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id y11so478013pfm.13
+	Wed,  8 May 2019 20:13:10 +0000 (UTC)
+Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x48KCxGc060699 for <virtualization@lists.linux-foundation.org>;
+	Wed, 8 May 2019 16:13:09 -0400
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2sc3vr5rpb-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 08 May 2019 12:05:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=from:subject:to:cc:references:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=Xx1nBdwm/fMIaQ+XRMTVvJx4homKW8vOYVCrjJQah8c=;
-	b=u2CwdPBWUhvunu491lhDVH7O10yitnzRdNYTDcNKNGaaMw+pYsmkpn0J9MsT99d39Y
-	Q/Wk7PGyXcjoc1tha4UuyE89T0rOnD72kAWNnjYRKkjCa0DELX1ElQVVB5fGF3jmFGkX
-	uLZw9HuRYb+PEeZ/PPFrro1K3Iw9vCnd+ELZuZL2OKCDNAb8u9QKbTbbytR8kbwE4FBI
-	Zo/dlYVRRbaMO0EpBIfmHWL9EiKzdxDQc7t8r9e2EKWR9k2JLXoh6H4LfMbZMUTXsaF+
-	muQoMtmzSSBP8hE/rlSXFu27Me96rPxVPBbMGgvYpGy27lg+hjZKYMbf9BMngu5WO2ck
-	kXNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:subject:to:cc:references:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=Xx1nBdwm/fMIaQ+XRMTVvJx4homKW8vOYVCrjJQah8c=;
-	b=tE3mrXsnZeWsyvohOIv40Cx/61A3DOogii0VevjpEVjex2JgMnefPB0HRXZ0xjql5U
-	HKmTC6mYbbnlx6P8Eo+/MkTQY1BSfCuv2PkBbRUSIoAN2eTw2vNoYiOFY19mxtKMR5eI
-	rbxXRq0nKdtOHgoVwgZ3Aof1t4WS28Eecdh/1wdH5a/nBnTYh16UR4nen2gkmi1UUUvx
-	SQUp0oI5NzKdIwdIchew1FP8rH0BwV0Jy3bPEwmAXCfQoWfHEOCUBSLcYEEuit2Sf9kE
-	pCcY/DZ6JoWgOqxA99io5SJPXyDWMUUHFwSdZik7Wt63L7O8MGty0pqXd5wno3j3QOpo
-	OJYg==
-X-Gm-Message-State: APjAAAXu+KSLguVbIvYh3+jpBXtJU2ZVks2/lnyatwq7K0DBZbK+yRt8
-	l5ss8/RVkpxAv0OBAnqU/f3aDA==
-X-Google-Smtp-Source: APXvYqzypNLQt7uc54cFtZOQcJp0DaX+ClanYsAzKwneRj68EqOnfHTAe97HizrDj+ZvHjUmPOl5NA==
-X-Received: by 2002:a65:5cc8:: with SMTP id b8mr47363166pgt.36.1557342342253; 
-	Wed, 08 May 2019 12:05:42 -0700 (PDT)
-Received: from jstaron2.mtv.corp.google.com
-	([2620:15c:202:201:b94f:2527:c39f:ca2d])
-	by smtp.gmail.com with ESMTPSA id
-	129sm23470533pff.140.2019.05.08.12.05.40
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 May 2019 12:05:41 -0700 (PDT)
-Subject: Re: [Qemu-devel] [PATCH v7 2/6] virtio-pmem: Add virtio pmem driver
-To: Pankaj Gupta <pagupta@redhat.com>
-References: <20190426050039.17460-1-pagupta@redhat.com>
-	<20190426050039.17460-3-pagupta@redhat.com>
-	<3d6479ae-6c39-d614-f1d9-aa1978e2e438@google.com>
-	<1555943483.27247564.1557313967518.JavaMail.zimbra@redhat.com>
-Message-ID: <3d643ac5-ea1b-efba-9f42-31b2ed3ab5b0@google.com>
-Date: Wed, 8 May 2019 12:05:39 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Wed, 08 May 2019 16:13:08 -0400
+Received: from localhost
+	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pasic@linux.ibm.com>; Wed, 8 May 2019 21:13:07 +0100
+Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
+	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Wed, 8 May 2019 21:13:03 +0100
+Received: from d06av21.portsmouth.uk.ibm.com (d06av21.portsmouth.uk.ibm.com
+	[9.149.105.232])
+	by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x48KD1qK53215336
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Wed, 8 May 2019 20:13:01 GMT
+Received: from d06av21.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 74DE352052;
+	Wed,  8 May 2019 20:13:01 +0000 (GMT)
+Received: from oc2783563651 (unknown [9.145.71.200])
+	by d06av21.portsmouth.uk.ibm.com (Postfix) with ESMTP id 1B1315204F;
+	Wed,  8 May 2019 20:13:00 +0000 (GMT)
+Date: Wed, 8 May 2019 22:12:58 +0200
+From: Halil Pasic <pasic@linux.ibm.com>
+To: Christian Borntraeger <borntraeger@de.ibm.com>, Michael Mueller
+	<mimu@linux.ibm.com>
+Subject: Re: [PATCH 01/10] virtio/s390: use vring_create_virtqueue
+In-Reply-To: <ed6cbf63-f2ff-f259-ccb0-3b9ba60f2b35@de.ibm.com>
+References: <20190426183245.37939-1-pasic@linux.ibm.com>
+	<20190426183245.37939-2-pasic@linux.ibm.com>
+	<20190503111724.70c6ec37.cohuck@redhat.com>
+	<20190503160421-mutt-send-email-mst@kernel.org>
+	<20190504160340.29f17b98.pasic@linux.ibm.com>
+	<20190505131523.159bec7c.cohuck@redhat.com>
+	<ed6cbf63-f2ff-f259-ccb0-3b9ba60f2b35@de.ibm.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <1555943483.27247564.1557313967518.JavaMail.zimbra@redhat.com>
-Content-Language: en-US
-X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
-	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
+X-TM-AS-GCONF: 00
+x-cbid: 19050820-0008-0000-0000-000002E4A635
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19050820-0009-0000-0000-000022512922
+Message-Id: <20190508221258.6db20c81.pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-08_11:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905080124
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
-Cc: cohuck@redhat.com, jack@suse.cz, kvm@vger.kernel.org, mst@redhat.com,
-	david@fromorbit.com, qemu-devel@nongnu.org,
+Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
+	Sebastian Ott <sebott@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	adilger kernel <adilger.kernel@dilger.ca>, smbarber@google.com,
-	zwisler@kernel.org, aarcange@redhat.com,
-	dave jiang <dave.jiang@intel.com>, linux-nvdimm@lists.01.org,
-	vishal l verma <vishal.l.verma@intel.com>, willy@infradead.org,
-	hch@infradead.org, linux-acpi@vger.kernel.org, jmoyer@redhat.com,
-	linux-ext4@vger.kernel.org, lenb@kernel.org, kilobyte@angband.pl,
-	riel@surriel.com, yuval shaia <yuval.shaia@oracle.com>,
-	stefanha@redhat.com, imammedo@redhat.com,
-	dan j williams <dan.j.williams@intel.com>,
-	lcapitulino@redhat.com, nilal@redhat.com, tytso@mit.edu,
-	xiaoguangrong eric <xiaoguangrong.eric@gmail.com>,
-	darrick wong <darrick.wong@oracle.com>, rjw@rjwysocki.net,
-	linux-kernel@vger.kernel.org, linux-xfs@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, pbonzini@redhat.com
+	Christoph Hellwig <hch@infradead.org>,
+	Martin Schwidefsky <schwidefsky@de.ibm.com>,
+	Farhan Ali <alifm@linux.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -103,73 +107,82 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: =?UTF-8?Q?Jakub_Staro=c5=84?= via Virtualization
-	<virtualization@lists.linux-foundation.org>
-Reply-To: =?UTF-8?Q?Jakub_Staro=c5=84?= <jstaron@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 5/8/19 4:12 AM, Pankaj Gupta wrote:
-> 
->>
->> On 4/25/19 10:00 PM, Pankaj Gupta wrote:
->>
->>> +void host_ack(struct virtqueue *vq)
->>> +{
->>> +	unsigned int len;
->>> +	unsigned long flags;
->>> +	struct virtio_pmem_request *req, *req_buf;
->>> +	struct virtio_pmem *vpmem = vq->vdev->priv;
->>> +
->>> +	spin_lock_irqsave(&vpmem->pmem_lock, flags);
->>> +	while ((req = virtqueue_get_buf(vq, &len)) != NULL) {
->>> +		req->done = true;
->>> +		wake_up(&req->host_acked);
->>> +
->>> +		if (!list_empty(&vpmem->req_list)) {
->>> +			req_buf = list_first_entry(&vpmem->req_list,
->>> +					struct virtio_pmem_request, list);
->>> +			list_del(&vpmem->req_list);
->>
->> Shouldn't it be rather `list_del(vpmem->req_list.next)`? We are trying to
->> unlink
->> first element of the list and `vpmem->req_list` is just the list head.
-> 
-> This looks correct. We are not deleting head but first entry in 'req_list'
-> which is device corresponding list of pending requests.
-> 
-> Please see below:
-> 
-> /**
->  * Retrieve the first list entry for the given list pointer.
->  *
->  * Example:
->  * struct foo *first;
->  * first = list_first_entry(&bar->list_of_foos, struct foo, list_of_foos);
->  *
->  * @param ptr The list head
->  * @param type Data type of the list element to retrieve
->  * @param member Member name of the struct list_head field in the list element.
->  * @return A pointer to the first list element.
->  */
-> #define list_first_entry(ptr, type, member) \
->     list_entry((ptr)->next, type, member)
+On Tue, 7 May 2019 15:58:12 +0200
+Christian Borntraeger <borntraeger@de.ibm.com> wrote:
 
-Please look at this StackOverflow question:
-https://stackoverflow.com/questions/19675419/deleting-first-element-of-a-list-h-list
+> 
+> 
+> On 05.05.19 13:15, Cornelia Huck wrote:
+> > On Sat, 4 May 2019 16:03:40 +0200
+> > Halil Pasic <pasic@linux.ibm.com> wrote:
+> > 
+> >> On Fri, 3 May 2019 16:04:48 -0400
+> >> "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> >>
+> >>> On Fri, May 03, 2019 at 11:17:24AM +0200, Cornelia Huck wrote:  
+> >>>> On Fri, 26 Apr 2019 20:32:36 +0200
+> >>>> Halil Pasic <pasic@linux.ibm.com> wrote:
+> >>>>   
+> >>>>> The commit 2a2d1382fe9d ("virtio: Add improved queue allocation API")
+> >>>>> establishes a new way of allocating virtqueues (as a part of the effort
+> >>>>> that taught DMA to virtio rings).
+> >>>>>
+> >>>>> In the future we will want virtio-ccw to use the DMA API as well.
+> >>>>>
+> >>>>> Let us switch from the legacy method of allocating virtqueues to
+> >>>>> vring_create_virtqueue() as the first step into that direction.
+> >>>>>
+> >>>>> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> >>>>> ---
+> >>>>>  drivers/s390/virtio/virtio_ccw.c | 30 +++++++++++-------------------
+> >>>>>  1 file changed, 11 insertions(+), 19 deletions(-)  
+> >>>>
+> >>>> Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+> >>>>
+> >>>> I'd vote for merging this patch right away for 5.2.  
+> >>>
+> >>> So which tree is this going through? mine?
+> >>>   
+> >>
+> >> Christian, what do you think? If the whole series is supposed to go in
+> >> in one go (which I hope it is), via Martin's tree could be the simplest
+> >> route IMHO.
+> > 
+> > 
+> > The first three patches are virtio(-ccw) only and the those are the ones
+> > that I think are ready to go.
+> > 
+> > I'm not feeling comfortable going forward with the remainder as it
+> > stands now; waiting for some other folks to give feedback. (They are
+> > touching/interacting with code parts I'm not so familiar with, and lack
+> > of documentation, while not the developers' fault, does not make it
+> > easier.)
+> > 
+> > Michael, would you like to pick up 1-3 for your tree directly? That
+> > looks like the easiest way.
+> 
+> Agreed. Michael please pick 1-3.
+> We will continue to review 4- first and then see which tree is best.
 
-Author asks about deleting first element of the queue. In our case
-(and also in the question's author case), `vpmem->req_list` is not element
-of any request struct and not an element of the list. It's just a list head storing 
-`next` and `prev` pointers which are then pointing to respectively first and
-last element of the list. We want to unlink the first element of the list,
-so we need to pass pointer to the first element of the list to
-the `list_del` function - that is, the `vpmem->req_list.next`.
+Thanks Christian!
 
-Thank you,
-Jakub Staron
+Guys, I broke my right arm on last Thursday (2nd may). You may
+have noticed that I was not as responsive as I'm supposed to be.
+Unfortunately this less than responsiveness is about to persist for a
+couple more weeks. Fortunate the guys from IBM, and chiefly Michael
+Mueller is going to help me drive this -- thanks Michael! Due to this,
+I would generally prefer doing as few changes to this series as
+necessary, and deferring as many of the beautifying to patches on top
+(possibly authored by somebody else) as possible.
+
+Regards,
+Halil
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
