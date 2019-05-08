@@ -2,91 +2,62 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E96B22732
-	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:19:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29E5216F8C
+	for <lists.virtualization@lfdr.de>; Wed,  8 May 2019 05:43:34 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 967CDC97;
-	Sun, 19 May 2019 16:17:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id CF8B7B7D;
+	Wed,  8 May 2019 03:43:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 147E8255
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A0BBF9D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 20:25:59 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 91276FD
+	Wed,  8 May 2019 03:43:26 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 31F92196
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  7 May 2019 20:25:58 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id d31so8870460pgl.7
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 07 May 2019 13:25:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=SDTbfUna34Qd79ay/PvHpXeLqKHYqAqzFBtMK1XzxGI=;
-	b=ON/NQjQWEi3fON/DDBAYu5HG4F3A9wQYYX3ZHXewW6rdfpyfN6GDeKnlxgf9/si9a9
-	9JHSodUWXjDvUXWyvoEwEE0DgwhDeKMop/6LDrDPkGLUCYR03QkkfX5S7JFJ8pfilSDZ
-	xvvi21rJRzAsyyhE+/kT6jH7WSjJD4+uklULukm2H+Pokk9wj1CJ1/NtVElLjBkK6KcS
-	JqikN21lQ/W3kOqZE29va5iKvC/1zmXoxZvy0PuN6Nh+lQFN6TTKu80Ldt+bYozlFh95
-	K/LSeCc2Mr0qC2NpnPv30EkDStUnE9M9IgeET/tA/SjNLgtMCQoX8YEn/nGCjEfLlQaU
-	jpyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=SDTbfUna34Qd79ay/PvHpXeLqKHYqAqzFBtMK1XzxGI=;
-	b=J3t9rY8vIzhMRZgUI5o+ERUkUTUFrDUZ/fu2f8o2qLUMPa2ZBd8jtXc13WavZBadl0
-	ivmox6+A4sIppTQjFOLllJwoxOMQ3JWTZAT1HS88Qqb3/z0hxu/s1vEPykdAhNzAzeD2
-	U7PmuQMKraxY0cJN2VmlphizG36tDOV35UibVMyvW5OxnvdLZjYjuziv9cbWZUsEfET+
-	shi+dNy5aNcg4SKtaxuwdOg/lJzfelN9E5MUKD6MBPw1DHnPKiYTW9W98kw0BoI1/9q0
-	6An6GJFuCpqqr2wxsS0UVyskLsaGSpIuG79HMDGhHtSSYTzHr13spVe2I3+tWTPyJZVS
-	pVXQ==
-X-Gm-Message-State: APjAAAVTSOlabxTzjA4M3yEj4HbckMCpacHuu89UX5+8ulLrFvgU3CzM
-	nanK69sQmM483CRhe2/HZL+Jiw==
-X-Google-Smtp-Source: APXvYqxbPfJ5tBulG/r6tvcVjjtvKQlgkwdEbMW3aGkGHvRkjNKPxepulcAi/TILththSdbF+vLDMw==
-X-Received: by 2002:aa7:8dc3:: with SMTP id j3mr43498542pfr.141.1557260757236; 
-	Tue, 07 May 2019 13:25:57 -0700 (PDT)
-Received: from jstaron2.mtv.corp.google.com
-	([2620:15c:202:201:b94f:2527:c39f:ca2d])
-	by smtp.gmail.com with ESMTPSA id
-	f5sm15855223pgo.75.2019.05.07.13.25.55
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 May 2019 13:25:56 -0700 (PDT)
-Subject: Re: [Qemu-devel] [PATCH v7 2/6] virtio-pmem: Add virtio pmem driver
-To: Pankaj Gupta <pagupta@redhat.com>, linux-nvdimm@lists.01.org,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	kvm@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	linux-acpi@vger.kernel.org, qemu-devel@nongnu.org,
-	linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org
-References: <20190426050039.17460-1-pagupta@redhat.com>
-	<20190426050039.17460-3-pagupta@redhat.com>
-Message-ID: <3d6479ae-6c39-d614-f1d9-aa1978e2e438@google.com>
-Date: Tue, 7 May 2019 13:25:54 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Wed,  8 May 2019 03:43:26 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 94D853087944;
+	Wed,  8 May 2019 03:43:25 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+	(colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 82EFC60C4E;
+	Wed,  8 May 2019 03:43:25 +0000 (UTC)
+Received: from zmail21.collab.prod.int.phx2.redhat.com
+	(zmail21.collab.prod.int.phx2.redhat.com [10.5.83.24])
+	by colo-mx.corp.redhat.com (Postfix) with ESMTP id 28F5E65D13;
+	Wed,  8 May 2019 03:43:25 +0000 (UTC)
+Date: Tue, 7 May 2019 23:43:24 -0400 (EDT)
+From: Jason Wang <jasowang@redhat.com>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <1430527294.27174562.1557287004441.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20190507154753.GA8809@infradead.org>
+References: <20190507154753.GA8809@infradead.org>
+Subject: Re: [PATCH RFC] vhost: don't use kmap() to log dirty pages
 MIME-Version: 1.0
-In-Reply-To: <20190426050039.17460-3-pagupta@redhat.com>
-Content-Language: en-US
-X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
-	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
+X-Originating-IP: [10.68.5.20, 10.4.195.23]
+Thread-Topic: vhost: don't use kmap() to log dirty pages
+Thread-Index: K7z0d3UL1bhTV/QW5Sb3gPqIWKhUvg==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.45]);
+	Wed, 08 May 2019 03:43:25 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
-Cc: jack@suse.cz, mst@redhat.com, david@fromorbit.com, lcapitulino@redhat.com,
-	adilger.kernel@dilger.ca, smbarber@google.com,
-	zwisler@kernel.org, aarcange@redhat.com, dave.jiang@intel.com,
-	darrick.wong@oracle.com, vishal.l.verma@intel.com,
-	willy@infradead.org, hch@infradead.org, jmoyer@redhat.com,
-	nilal@redhat.com, lenb@kernel.org, kilobyte@angband.pl,
-	riel@surriel.com, yuval.shaia@oracle.com, stefanha@redhat.com,
-	imammedo@redhat.com, dan.j.williams@intel.com, tytso@mit.edu,
-	xiaoguangrong.eric@gmail.com, cohuck@redhat.com,
-	rjw@rjwysocki.net, pbonzini@redhat.com
+Cc: Andrea Arcangeli <aarcange@redhat.com>, kvm@vger.kernel.org, mst@redhat.com,
+	Peter Zijlstra <peterz@infradead.org>, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	James Bottomley <James.Bottomley@HansenPartnership.com>,
+	Ingo Molnar <mingo@redhat.com>, Darren Hart <dvhart@infradead.org>,
+	Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -98,136 +69,68 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: =?UTF-8?Q?Jakub_Staro=c5=84?= via Virtualization
-	<virtualization@lists.linux-foundation.org>
-Reply-To: =?UTF-8?Q?Jakub_Staro=c5=84?= <jstaron@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 4/25/19 10:00 PM, Pankaj Gupta wrote:
-
-> +void host_ack(struct virtqueue *vq)
-> +{
-> +	unsigned int len;
-> +	unsigned long flags;
-> +	struct virtio_pmem_request *req, *req_buf;
-> +	struct virtio_pmem *vpmem = vq->vdev->priv;
-> +
-> +	spin_lock_irqsave(&vpmem->pmem_lock, flags);
-> +	while ((req = virtqueue_get_buf(vq, &len)) != NULL) {
-> +		req->done = true;
-> +		wake_up(&req->host_acked);
-> +
-> +		if (!list_empty(&vpmem->req_list)) {
-> +			req_buf = list_first_entry(&vpmem->req_list,
-> +					struct virtio_pmem_request, list);
-> +			list_del(&vpmem->req_list);
-
-Shouldn't it be rather `list_del(vpmem->req_list.next)`? We are trying to unlink
-first element of the list and `vpmem->req_list` is just the list head.
-
-> +int virtio_pmem_flush(struct nd_region *nd_region)
-> +{
-> +	int err;
-> +	unsigned long flags;
-> +	struct scatterlist *sgs[2], sg, ret;
-> +	struct virtio_device *vdev = nd_region->provider_data;
-> +	struct virtio_pmem *vpmem = vdev->priv;
-> +	struct virtio_pmem_request *req;
-> +
-> +	might_sleep();
-> +	req = kmalloc(sizeof(*req), GFP_KERNEL);
-> +	if (!req)
-> +		return -ENOMEM;
-> +
-> +	req->done = req->wq_buf_avail = false;
-> +	strcpy(req->name, "FLUSH");
-> +	init_waitqueue_head(&req->host_acked);
-> +	init_waitqueue_head(&req->wq_buf);
-> +	sg_init_one(&sg, req->name, strlen(req->name));
-> +	sgs[0] = &sg;
-> +	sg_init_one(&ret, &req->ret, sizeof(req->ret));
-> +	sgs[1] = &ret;
-> +
-> +	spin_lock_irqsave(&vpmem->pmem_lock, flags);
-> +	err = virtqueue_add_sgs(vpmem->req_vq, sgs, 1, 1, req, GFP_ATOMIC);
-> +	if (err) {
-> +		dev_err(&vdev->dev, "failed to send command to virtio pmem device\n");
-> +
-> +		list_add_tail(&vpmem->req_list, &req->list);
-> +		spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
-> +
-> +		/* When host has read buffer, this completes via host_ack */
-> +		wait_event(req->wq_buf, req->wq_buf_avail);
-> +		spin_lock_irqsave(&vpmem->pmem_lock, flags);
-> +	}
-
-Aren't the arguments in `list_add_tail` swapped? The element we are adding should
-be first, the list should be second. Also, shouldn't we resubmit the request after
-waking up from `wait_event(req->wq_buf, req->wq_buf_avail)`?
-
-I propose rewriting it like that:
-
-diff --git a/drivers/nvdimm/virtio_pmem.c b/drivers/nvdimm/virtio_pmem.c
-index 66b582f751a3..ff0556b04e86 100644
---- a/drivers/nvdimm/virtio_pmem.c
-+++ b/drivers/nvdimm/virtio_pmem.c
-@@ -25,7 +25,7 @@ void host_ack(struct virtqueue *vq)
- 		if (!list_empty(&vpmem->req_list)) {
- 			req_buf = list_first_entry(&vpmem->req_list,
- 					struct virtio_pmem_request, list);
--			list_del(&vpmem->req_list);
-+			list_del(vpmem->req_list.next);
- 			req_buf->wq_buf_avail = true;
- 			wake_up(&req_buf->wq_buf);
- 		}
-@@ -59,17 +59,33 @@ int virtio_pmem_flush(struct nd_region *nd_region)
- 	sgs[1] = &ret;
- 
- 	spin_lock_irqsave(&vpmem->pmem_lock, flags);
--	err = virtqueue_add_sgs(vpmem->req_vq, sgs, 1, 1, req, GFP_ATOMIC);
--	if (err) {
--		dev_err(&vdev->dev, "failed to send command to virtio pmem device\n");
-+	/*
-+	 * If virtqueue_add_sgs returns -ENOSPC then req_vq virtual queue does not
-+	 * have free descriptor slots. We add the request to req_list and wait
-+	 * for host_ack to wake us up when free slots are available.
-+	 */
-+	while ((err = virtqueue_add_sgs(vpmem->req_vq, sgs, 1, 1, req, GFP_ATOMIC)) == -ENOSPC) {
-+		dev_err(&vdev->dev, "failed to send command to virtio pmem device, no free slots in the virtqueue, postponing request\n");
-+		req->wq_buf_avail = false;
- 
--		list_add_tail(&vpmem->req_list, &req->list);
-+		list_add_tail(&req->list, &vpmem->req_list);
- 		spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
- 
- 		/* When host has read buffer, this completes via host_ack */
- 		wait_event(req->wq_buf, req->wq_buf_avail);
- 		spin_lock_irqsave(&vpmem->pmem_lock, flags);
- 	}
-+
-+	/*
-+	 * virtqueue_add_sgs failed with error different than -ENOSPC, we can't
-+	 * do anything about that.
-+	 */
-+	if (err) {
-+		dev_info(&vdev->dev, "failed to send command to virtio pmem device, error code %d\n", err);
-+		spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
-+		err = -EIO;
-+		goto ret;
-+	}
- 	err = virtqueue_kick(vpmem->req_vq);
- 	spin_unlock_irqrestore(&vpmem->pmem_lock, flags);
-
-
-Let me know if it looks reasonable to you.
-
-Thank you,
-Jakub Staron
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gMjAxOS81Lzcg5LiL5Y2IMTE6NDcsIENocmlzdG9waCBIZWxsd2lnIHdyb3RlOgo+IE9uIE1v
+biwgTWF5IDA2LCAyMDE5IGF0IDEwOjIzOjI5UE0gLTA0MDAsIEphc29uIFdhbmcgd3JvdGU6Cj4+
+IE5vdGU6IHRoZXJlJ3JlIGFyY2hzIChmZXcgbm9uIHBvcHVsYXIgb25lcykgdGhhdCBkb24ndCBp
+bXBsZW1lbnQKPj4gZnV0ZXggaGVscGVyLCB3ZSBjYW4ndCBsb2cgZGlydHkgcGFnZXMuIFdlIGNh
+biBmaXggdGhlbSBvbiB0b3Agb3IKPj4gc2ltcGx5IGRpc2FibGUgTE9HX0FMTCBmZWF0dXJlcyBv
+ZiB2aG9zdC4KPgo+IFRoYXQgbWVhbnMgdmhvc3Qgbm93IGhhcyB0byBkZXBlbmQgb24gSEFWRV9G
+VVRFWF9DTVBYQ0hHIHRvIG1ha2UKPiBzdXJlIHdlIGhhdmUgYSB3b3JraW5nIGltcGxlbWVudGF0
+aW9uLgoKSSBmb3VuZCBIQVZFX0ZVVEVYX0NNUFhDSEcgaXMgbm90IGEgbXVzdCBmb3IgYXJjaCB0
+aGF0IGhhcyB0aGUKaW1wbGVtZW50YXRpb24gYW5kIGZ1dGV4IGRvZXMgc29tZSBraW5kIG9mIHJ1
+bnRpbWUgZGV0ZWN0aW9uIGxpa2U6CgpzdGF0aWMgdm9pZCBfX2luaXQgZnV0ZXhfZGV0ZWN0X2Nt
+cHhjaGcodm9pZCkKewojaWZuZGVmIENPTkZJR19IQVZFX0ZVVEVYX0NNUFhDSEcKCXUzMiBjdXJ2
+YWw7CgoJLyoKCSAqIFRoaXMgd2lsbCBmYWlsIGFuZCB3ZSB3YW50IGl0LiBTb21lIGFyY2ggaW1w
+bGVtZW50YXRpb25zIGRvCgkgKiBydW50aW1lIGRldGVjdGlvbiBvZiB0aGUgZnV0ZXhfYXRvbWlj
+X2NtcHhjaGdfaW5hdG9taWMoKQoJICogZnVuY3Rpb25hbGl0eS4gV2Ugd2FudCB0byBrbm93IHRo
+YXQgYmVmb3JlIHdlIGNhbGwgaW4gYW55CgkgKiBvZiB0aGUgY29tcGxleCBjb2RlIHBhdGhzLiBB
+bHNvIHdlIHdhbnQgdG8gcHJldmVudAoJICogcmVnaXN0cmF0aW9uIG9mIHJvYnVzdCBsaXN0cyBp
+biB0aGF0IGNhc2UuIE5VTEwgaXMKCSAqIGd1YXJhbnRlZWQgdG8gZmF1bHQgYW5kIHdlIGdldCAt
+RUZBVUxUIG9uIGZ1bmN0aW9uYWwKCSAqIGltcGxlbWVudGF0aW9uLCB0aGUgbm9uLWZ1bmN0aW9u
+YWwgb25lcyB3aWxsIHJldHVybgoJICogLUVOT1NZUy4KCSAqLwoJaWYgKGNtcHhjaGdfZnV0ZXhf
+dmFsdWVfbG9ja2VkKCZjdXJ2YWwsIE5VTEwsIDAsIDApID09IC1FRkFVTFQpCgkJZnV0ZXhfY21w
+eGNoZ19lbmFibGVkID0gMTsKI2VuZGlmCn0KCgo+Cj4KPj4gICNpbmNsdWRlIDxsaW51eC9zY2hl
+ZC9zaWduYWwuaD4KPj4gICNpbmNsdWRlIDxsaW51eC9pbnRlcnZhbF90cmVlX2dlbmVyaWMuaD4K
+Pj4gICNpbmNsdWRlIDxsaW51eC9ub3NwZWMuaD4KPj4gKyNpbmNsdWRlIDxhc20vZnV0ZXguaD4K
+Pgo+IEFsc28gcGxlYXNlIGluY2x1ZGUgdGhlIGZ1dGV4IG1haW50YWluZXJzIHRvIG1ha2Ugc3Vy
+ZSB0aGV5IGFyZSBmaW5lCj4gd2l0aCB0aGlzIGZpcnN0IHVzYWdlIG9mIDxhc20vZnV0ZXguaD4g
+b3V0c2lkZSBvZiBrZXJuZWwvZnV0ZXguYy4KPgoKVGhhbmtzIGZvciBjY2luZyB0aGVtLiBXaWxs
+IGRvIGZvciBuZXh0IHZlcnNpb24uCgpJZiB3ZSBkZWNpZGUgdG8gZ28gdGhpcyB3YXksIHdlIHBy
+b2JhYmx5IG5lZWQgdG8gbW92ZSBpdCB0byB1YWNjZXNzCmZvciBhIG1vcmUgZ2VuZXJpYyBoZWxw
+ZXIuCgo+Cj4+ICtzdGF0aWMgaW50IHNldF9iaXRfdG9fdXNlcihpbnQgbnIsIHUzMiBfX3VzZXIg
+KmFkZHIpCj4+ICB7Cj4+ICAJdW5zaWduZWQgbG9uZyBsb2cgPSAodW5zaWduZWQgbG9uZylhZGRy
+Owo+PiAgCXN0cnVjdCBwYWdlICpwYWdlOwo+PiArCXUzMiBvbGRfbG9nOwo+PiAgCWludCByOwo+
+PiAgCj4+ICAJciA9IGdldF91c2VyX3BhZ2VzX2Zhc3QobG9nLCAxLCAxLCAmcGFnZSk7Cj4+ICAJ
+aWYgKHIgPCAwKQo+PiAgCQlyZXR1cm4gcjsKPj4gIAlCVUdfT04ociAhPSAxKTsKPj4gKwo+PiAr
+CXIgPSBmdXRleF9hdG9taWNfY21weGNoZ19pbmF0b21pYygmb2xkX2xvZywgYWRkciwgMCwgMCk7
+Cj4+ICsJaWYgKHIgPCAwKQo+PiArCQlyZXR1cm4gcjsKPj4gKwo+PiArCW9sZF9sb2cgfD0gMSA8
+PCBucjsKPj4gKwlyID0gcHV0X3VzZXIob2xkX2xvZywgYWRkcik7Cj4+ICsJaWYgKHIgPCAwKQo+
+PiArCQlyZXR1cm4gcjsKPgo+IEFuZCB0aGlzIGp1c3QgbG9va3Mgb2RkIHRvIG1lLiAgV2h5IGRv
+IHdlIG5lZWQgdGhlIGZ1dGV4IGNhbGwgdG8KPiByZXBsYWNlIGEgMCB2YWx1ZSB3aXRoIDA/ICBX
+aHkgZG9lcyBpdCBzdGlsbCBkdXBsaWNhdGUgdGhlCj4gcHV0X3VzZXI/ICBUaGlzIGRvZXNuJ3Qg
+bG9vayBsaWtlIGFjdHVhbGx5IHdvcmtpbmcgY29kZSB0byBtZS4KClllcywgdGhpcyBpcyBhIGJ1
+Zy4gU2hvdWxkIGJlIHNvbWV0aGluZyBsaWtlOgoKc3RhdGljIGludCBzZXRfYml0X3RvX3VzZXIo
+aW50IG5yLCB1MzIgX191c2VyICphZGRyKQp7CiAgICAgICAgdW5zaWduZWQgbG9uZyBsb2cgPSAo
+dW5zaWduZWQgbG9uZylhZGRyOwogICAgICAgIHN0cnVjdCBwYWdlICpwYWdlOwogICAgICAgIHUz
+MiBvbGRfbG9nLCBuZXdfbG9nLCBsOwogICAgICAgIGludCByOwoKICAgICAgICByID0gZ2V0X3Vz
+ZXJfcGFnZXNfZmFzdChsb2csIDEsIDEsICZwYWdlKTsKICAgICAgICBpZiAociA8IDApCiAgICAg
+ICAgICAgICAgICByZXR1cm4gcjsKCUJVR19PTihyICE9IDEpOwoKICAgICAgICBkbyB7CiAgICAg
+ICAgICAgICAgICByID0gZ2V0X3VzZXIob2xkX2xvZywgYWRkcik7CiAgICAgICAgICAgICAgICBp
+ZiAociA8IDApCiAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByOwogICAgICAgICAgICAg
+ICAgbmV3X2xvZyA9IG9sZF9sb2cgfCAoMSA8PCBucik7CgkJciA9IGZ1dGV4X2F0b21pY19jbXB4
+Y2hnX2luYXRvbWljKCZsLCBhZGRyLCBvbGRfbG9nLCBuZXdfbG9nKTsKICAgICAgICAgICAgICAg
+IGlmIChyIDwgMCkKICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHI7CiAgICAgICAgfSB3
+aGlsZShsICE9IG5ld19sb2cpOwoKCXNldF9wYWdlX2RpcnR5X2xvY2socGFnZSk7CiAgICAgICAg
+cHV0X3BhZ2UocGFnZSk7CiAgICAgICAgcmV0dXJuIDA7Cn0KCj4KPiBBbHNvIGRvbid0IHdlIG5l
+ZWQgYSBwYWdlZmF1bHRfZGlzYWJsZSgpIGFyb3VuZAo+IGZ1dGV4X2F0b21pY19jbXB4Y2hnX2lu
+YXRvbWljPwoKU2luY2Ugd2UgZG9uJ3Qgd2FudCB0byBkZWFsIHdpdGggcGFnZWZhdWx0LCBzbyB0
+aGUgcGFnZSBoYXMgYmVlbgpwaW5uZWQgYmVmb3JlIGZ1dGV4X2F0b21pY19jbXB4Y2hnX2luYXRv
+bWljKCkuCgpUaGFua3MKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
+bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
