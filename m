@@ -2,89 +2,56 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C70CD17AFB
-	for <lists.virtualization@lfdr.de>; Wed,  8 May 2019 15:46:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9D1917B1D
+	for <lists.virtualization@lfdr.de>; Wed,  8 May 2019 15:55:08 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9130C2459;
-	Wed,  8 May 2019 13:46:53 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 205AC2465;
+	Wed,  8 May 2019 13:55:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 62ED023EA
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 43536FA3
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  8 May 2019 13:46:51 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
-	[148.163.156.1])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1F948881
+	Wed,  8 May 2019 13:55:02 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+	[198.137.202.133])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4AD0E87A
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  8 May 2019 13:46:51 +0000 (UTC)
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x48DMDFp056454 for <virtualization@lists.linux-foundation.org>;
-	Wed, 8 May 2019 09:46:50 -0400
-Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2sbyqn23vs-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 08 May 2019 09:46:50 -0400
-Received: from localhost
-	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<sebott@linux.ibm.com>; Wed, 8 May 2019 14:46:47 +0100
-Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
-	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Wed, 8 May 2019 14:46:44 +0100
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
-	[9.149.105.62])
-	by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x48DkhgB34144498
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Wed, 8 May 2019 13:46:43 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 199D0AE055;
-	Wed,  8 May 2019 13:46:43 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 8E1C4AE051;
-	Wed,  8 May 2019 13:46:42 +0000 (GMT)
-Received: from dyn-9-152-212-30.boeblingen.de.ibm.com (unknown [9.152.212.30])
-	by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
-	Wed,  8 May 2019 13:46:42 +0000 (GMT)
-Date: Wed, 8 May 2019 15:46:42 +0200 (CEST)
-From: Sebastian Ott <sebott@linux.ibm.com>
-X-X-Sender: sebott@schleppi
-To: Halil Pasic <pasic@linux.ibm.com>
+	Wed,  8 May 2019 13:55:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20170209;
+	h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=fZD1MoMGqALYimoOBuM5A+SPAn0BauM3Ob0ObHySi70=;
+	b=pfRLPHPlacy/hp+n76u0JY6mI
+	4m/hLoi6Ly6wgCX9gzT/2uhT5icYsNiZlBWeITMyrvRQKQntRWXQeRKSkpe+ubcd3uyG0VpPhUHaP
+	erhVHjXyRW63sPrezzVBV02W1sfIJMHmHc+vRqO/rodmHdurhZ0jUHdixYksIlEM5AcUd6RgIq4VK
+	mKNRe3/rCaX87BOFT831OPunNTQXZaHoVpYjeFby0CXQSfqYQK8tURT96pv3goljdkqbUoobfpzfI
+	scvnAZa72YPcwtFJcMA8y/I77+bzHQYYShKF6odr+B4W9bNP8lppWiZ00cDZ/tNxPH1WoLjP1VL+6
+	e37RamlHA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.90_1 #2 (Red
+	Hat Linux)) id 1hON29-0000xX-Uj; Wed, 08 May 2019 13:54:57 +0000
+Date: Wed, 8 May 2019 06:54:57 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Sebastian Ott <sebott@linux.ibm.com>
 Subject: Re: [PATCH 06/10] s390/cio: add basic protected virtualization support
-In-Reply-To: <20190426183245.37939-7-pasic@linux.ibm.com>
+Message-ID: <20190508135457.GA3530@infradead.org>
 References: <20190426183245.37939-1-pasic@linux.ibm.com>
 	<20190426183245.37939-7-pasic@linux.ibm.com>
-User-Agent: Alpine 2.21 (LFD 202 2017-01-01)
-Organization: =?ISO-8859-15?Q?=22IBM_Deutschland_Research_&_Development_GmbH?=
-	=?ISO-8859-15?Q?_=2F_Vorsitzende_des_Aufsichtsrats=3A_Matthias?=
-	=?ISO-8859-15?Q?_Hartmann_Gesch=E4ftsf=FChrung=3A_Dirk_Wittkopp?=
-	=?ISO-8859-15?Q?_Sitz_der_Gesellschaft=3A_B=F6blingen_=2F_Reg?=
-	=?ISO-8859-15?Q?istergericht=3A_Amtsgericht_Stuttgart=2C_HRB_2432?=
-	=?ISO-8859-15?Q?94=22?=
+	<alpine.LFD.2.21.1905081522300.1773@schleppi>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19050813-0008-0000-0000-000002E48C64
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19050813-0009-0000-0000-000022510DCF
-Message-Id: <alpine.LFD.2.21.1905081522300.1773@schleppi>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-08_07:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=3 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=783 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1905080086
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <alpine.LFD.2.21.1905081522300.1773@schleppi>
+User-Agent: Mutt/1.9.2 (2017-12-15)
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+	bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: Farhan Ali <alifm@linux.ibm.com>, linux-s390@vger.kernel.org,
@@ -93,7 +60,7 @@ Cc: Farhan Ali <alifm@linux.ibm.com>, linux-s390@vger.kernel.org,
 	"Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
 	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
+	Halil Pasic <pasic@linux.ibm.com>, Christoph Hellwig <hch@infradead.org>,
 	Martin Schwidefsky <schwidefsky@de.ibm.com>,
 	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
 	Janosch Frank <frankja@linux.ibm.com>
@@ -113,28 +80,17 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+On Wed, May 08, 2019 at 03:46:42PM +0200, Sebastian Ott wrote:
+> > +	io_priv->dma_area = dma_alloc_coherent(&sch->dev,
+> > +				sizeof(*io_priv->dma_area),
+> > +				&io_priv->dma_area_dma, GFP_KERNEL);
+> 
+> This needs GFP_DMA.
+> You use a genpool for ccw_private->dma and not for iopriv->dma - looks
+> kinda inconsistent.
 
-On Fri, 26 Apr 2019, Halil Pasic wrote:
->  static struct ccw_device * io_subchannel_allocate_dev(struct subchannel *sch)
->  {
-[..]
-> +	cdev->private = kzalloc(sizeof(struct ccw_device_private),
-> +				GFP_KERNEL | GFP_DMA);
-
-Do we still need GFP_DMA here (since we now have cdev->private->dma_area)?
-
-> @@ -1062,6 +1082,14 @@ static int io_subchannel_probe(struct subchannel *sch)
->  	if (!io_priv)
->  		goto out_schedule;
->  
-> +	io_priv->dma_area = dma_alloc_coherent(&sch->dev,
-> +				sizeof(*io_priv->dma_area),
-> +				&io_priv->dma_area_dma, GFP_KERNEL);
-
-This needs GFP_DMA.
-You use a genpool for ccw_private->dma and not for iopriv->dma - looks
-kinda inconsistent.
-
+dma_alloc_* never needs GFP_DMA.  It selects the zone to allocate
+from based on the dma_coherent_mask of the device.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
