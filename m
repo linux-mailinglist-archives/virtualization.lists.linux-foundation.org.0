@@ -2,62 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29E5216F8C
-	for <lists.virtualization@lfdr.de>; Wed,  8 May 2019 05:43:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 361CA16FDF
+	for <lists.virtualization@lfdr.de>; Wed,  8 May 2019 06:13:00 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CF8B7B7D;
-	Wed,  8 May 2019 03:43:28 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 28838CC7;
+	Wed,  8 May 2019 04:12:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A0BBF9D
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 62E8A9D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  8 May 2019 03:43:26 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 31F92196
+	Wed,  8 May 2019 04:12:54 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C266E831
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  8 May 2019 03:43:26 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 94D853087944;
-	Wed,  8 May 2019 03:43:25 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
-	(colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 82EFC60C4E;
-	Wed,  8 May 2019 03:43:25 +0000 (UTC)
-Received: from zmail21.collab.prod.int.phx2.redhat.com
-	(zmail21.collab.prod.int.phx2.redhat.com [10.5.83.24])
-	by colo-mx.corp.redhat.com (Postfix) with ESMTP id 28F5E65D13;
-	Wed,  8 May 2019 03:43:25 +0000 (UTC)
-Date: Tue, 7 May 2019 23:43:24 -0400 (EDT)
-From: Jason Wang <jasowang@redhat.com>
-To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <1430527294.27174562.1557287004441.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20190507154753.GA8809@infradead.org>
-References: <20190507154753.GA8809@infradead.org>
+	Wed,  8 May 2019 04:12:53 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id o7so9753177qtp.4
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 07 May 2019 21:12:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=Xwhy2yN3rc/R/GaGy+1UFq4MiREMOPekIWW9QNkmDr0=;
+	b=l13/tVok7Rw3Ms+SHnutbLlglwLAlFb191NHxMPD99nmAtuJZpExUlKOOQw/fwgvv+
+	XhPqoMdGPBkhinmFlivjbT8/JjRg0XZNh3oEo0FMZjl6fO7vS+MeNrsZNbYC3JEzVwXr
+	hMtGoEXALsqCh2IHx4hs9YEmUwRtR4GE+ETkNgMqUKgpqX7BucsEyuMvtXXgdMKv6WZN
+	CBjsRTNtnkVKtQlbcv7ybkzwi+sEZSaBjaCyV5Wyeb4wbHmO+9CYzNOm3G4egKYSUHxd
+	Q7XbaojdXBKRfwXZDR6+HXvXCwQKFsLCkggRHwmjKe0yexcsV+i5eOrsZVMvCsZHzk7L
+	/11Q==
+X-Gm-Message-State: APjAAAUneVJU/NHh0mgMbtoR8zqV0gXtGCL6iVD8GCIZ7aY+Cv/18//c
+	A+ZAQy6ZwWxHMjlpxqpwWEMxWQ==
+X-Google-Smtp-Source: APXvYqx0Vjhjwje7JRCwbHR2bgsffeWuD7uDRdzXBHVgbWnmt5fE0ab1QpEFLunM5VrcyQy1j/ZmKg==
+X-Received: by 2002:ac8:65cf:: with SMTP id t15mr16582014qto.12.1557288772916; 
+	Tue, 07 May 2019 21:12:52 -0700 (PDT)
+Received: from redhat.com (pool-173-76-105-71.bstnma.fios.verizon.net.
+	[173.76.105.71]) by smtp.gmail.com with ESMTPSA id
+	j25sm9725830qtc.24.2019.05.07.21.12.50
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Tue, 07 May 2019 21:12:51 -0700 (PDT)
+Date: Wed, 8 May 2019 00:12:49 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
 Subject: Re: [PATCH RFC] vhost: don't use kmap() to log dirty pages
+Message-ID: <20190507220526-mutt-send-email-mst@kernel.org>
+References: <1557195809-12373-1-git-send-email-jasowang@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.68.5.20, 10.4.195.23]
-Thread-Topic: vhost: don't use kmap() to log dirty pages
-Thread-Index: K7z0d3UL1bhTV/QW5Sb3gPqIWKhUvg==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.45]);
-	Wed, 08 May 2019 03:43:25 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+Content-Disposition: inline
+In-Reply-To: <1557195809-12373-1-git-send-email-jasowang@redhat.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Andrea Arcangeli <aarcange@redhat.com>, kvm@vger.kernel.org, mst@redhat.com,
-	Peter Zijlstra <peterz@infradead.org>, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	James Bottomley <James.Bottomley@HansenPartnership.com>,
-	Ingo Molnar <mingo@redhat.com>, Darren Hart <dvhart@infradead.org>,
-	Thomas Gleixner <tglx@linutronix.de>
+Cc: Andrea Arcangeli <aarcange@redhat.com>,
+	James Bottomley <James.Bottomley@hansenpartnership.com>,
+	kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Christoph Hellwig <hch@infradead.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,68 +73,110 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gMjAxOS81Lzcg5LiL5Y2IMTE6NDcsIENocmlzdG9waCBIZWxsd2lnIHdyb3RlOgo+IE9uIE1v
-biwgTWF5IDA2LCAyMDE5IGF0IDEwOjIzOjI5UE0gLTA0MDAsIEphc29uIFdhbmcgd3JvdGU6Cj4+
-IE5vdGU6IHRoZXJlJ3JlIGFyY2hzIChmZXcgbm9uIHBvcHVsYXIgb25lcykgdGhhdCBkb24ndCBp
-bXBsZW1lbnQKPj4gZnV0ZXggaGVscGVyLCB3ZSBjYW4ndCBsb2cgZGlydHkgcGFnZXMuIFdlIGNh
-biBmaXggdGhlbSBvbiB0b3Agb3IKPj4gc2ltcGx5IGRpc2FibGUgTE9HX0FMTCBmZWF0dXJlcyBv
-ZiB2aG9zdC4KPgo+IFRoYXQgbWVhbnMgdmhvc3Qgbm93IGhhcyB0byBkZXBlbmQgb24gSEFWRV9G
-VVRFWF9DTVBYQ0hHIHRvIG1ha2UKPiBzdXJlIHdlIGhhdmUgYSB3b3JraW5nIGltcGxlbWVudGF0
-aW9uLgoKSSBmb3VuZCBIQVZFX0ZVVEVYX0NNUFhDSEcgaXMgbm90IGEgbXVzdCBmb3IgYXJjaCB0
-aGF0IGhhcyB0aGUKaW1wbGVtZW50YXRpb24gYW5kIGZ1dGV4IGRvZXMgc29tZSBraW5kIG9mIHJ1
-bnRpbWUgZGV0ZWN0aW9uIGxpa2U6CgpzdGF0aWMgdm9pZCBfX2luaXQgZnV0ZXhfZGV0ZWN0X2Nt
-cHhjaGcodm9pZCkKewojaWZuZGVmIENPTkZJR19IQVZFX0ZVVEVYX0NNUFhDSEcKCXUzMiBjdXJ2
-YWw7CgoJLyoKCSAqIFRoaXMgd2lsbCBmYWlsIGFuZCB3ZSB3YW50IGl0LiBTb21lIGFyY2ggaW1w
-bGVtZW50YXRpb25zIGRvCgkgKiBydW50aW1lIGRldGVjdGlvbiBvZiB0aGUgZnV0ZXhfYXRvbWlj
-X2NtcHhjaGdfaW5hdG9taWMoKQoJICogZnVuY3Rpb25hbGl0eS4gV2Ugd2FudCB0byBrbm93IHRo
-YXQgYmVmb3JlIHdlIGNhbGwgaW4gYW55CgkgKiBvZiB0aGUgY29tcGxleCBjb2RlIHBhdGhzLiBB
-bHNvIHdlIHdhbnQgdG8gcHJldmVudAoJICogcmVnaXN0cmF0aW9uIG9mIHJvYnVzdCBsaXN0cyBp
-biB0aGF0IGNhc2UuIE5VTEwgaXMKCSAqIGd1YXJhbnRlZWQgdG8gZmF1bHQgYW5kIHdlIGdldCAt
-RUZBVUxUIG9uIGZ1bmN0aW9uYWwKCSAqIGltcGxlbWVudGF0aW9uLCB0aGUgbm9uLWZ1bmN0aW9u
-YWwgb25lcyB3aWxsIHJldHVybgoJICogLUVOT1NZUy4KCSAqLwoJaWYgKGNtcHhjaGdfZnV0ZXhf
-dmFsdWVfbG9ja2VkKCZjdXJ2YWwsIE5VTEwsIDAsIDApID09IC1FRkFVTFQpCgkJZnV0ZXhfY21w
-eGNoZ19lbmFibGVkID0gMTsKI2VuZGlmCn0KCgo+Cj4KPj4gICNpbmNsdWRlIDxsaW51eC9zY2hl
-ZC9zaWduYWwuaD4KPj4gICNpbmNsdWRlIDxsaW51eC9pbnRlcnZhbF90cmVlX2dlbmVyaWMuaD4K
-Pj4gICNpbmNsdWRlIDxsaW51eC9ub3NwZWMuaD4KPj4gKyNpbmNsdWRlIDxhc20vZnV0ZXguaD4K
-Pgo+IEFsc28gcGxlYXNlIGluY2x1ZGUgdGhlIGZ1dGV4IG1haW50YWluZXJzIHRvIG1ha2Ugc3Vy
-ZSB0aGV5IGFyZSBmaW5lCj4gd2l0aCB0aGlzIGZpcnN0IHVzYWdlIG9mIDxhc20vZnV0ZXguaD4g
-b3V0c2lkZSBvZiBrZXJuZWwvZnV0ZXguYy4KPgoKVGhhbmtzIGZvciBjY2luZyB0aGVtLiBXaWxs
-IGRvIGZvciBuZXh0IHZlcnNpb24uCgpJZiB3ZSBkZWNpZGUgdG8gZ28gdGhpcyB3YXksIHdlIHBy
-b2JhYmx5IG5lZWQgdG8gbW92ZSBpdCB0byB1YWNjZXNzCmZvciBhIG1vcmUgZ2VuZXJpYyBoZWxw
-ZXIuCgo+Cj4+ICtzdGF0aWMgaW50IHNldF9iaXRfdG9fdXNlcihpbnQgbnIsIHUzMiBfX3VzZXIg
-KmFkZHIpCj4+ICB7Cj4+ICAJdW5zaWduZWQgbG9uZyBsb2cgPSAodW5zaWduZWQgbG9uZylhZGRy
-Owo+PiAgCXN0cnVjdCBwYWdlICpwYWdlOwo+PiArCXUzMiBvbGRfbG9nOwo+PiAgCWludCByOwo+
-PiAgCj4+ICAJciA9IGdldF91c2VyX3BhZ2VzX2Zhc3QobG9nLCAxLCAxLCAmcGFnZSk7Cj4+ICAJ
-aWYgKHIgPCAwKQo+PiAgCQlyZXR1cm4gcjsKPj4gIAlCVUdfT04ociAhPSAxKTsKPj4gKwo+PiAr
-CXIgPSBmdXRleF9hdG9taWNfY21weGNoZ19pbmF0b21pYygmb2xkX2xvZywgYWRkciwgMCwgMCk7
-Cj4+ICsJaWYgKHIgPCAwKQo+PiArCQlyZXR1cm4gcjsKPj4gKwo+PiArCW9sZF9sb2cgfD0gMSA8
-PCBucjsKPj4gKwlyID0gcHV0X3VzZXIob2xkX2xvZywgYWRkcik7Cj4+ICsJaWYgKHIgPCAwKQo+
-PiArCQlyZXR1cm4gcjsKPgo+IEFuZCB0aGlzIGp1c3QgbG9va3Mgb2RkIHRvIG1lLiAgV2h5IGRv
-IHdlIG5lZWQgdGhlIGZ1dGV4IGNhbGwgdG8KPiByZXBsYWNlIGEgMCB2YWx1ZSB3aXRoIDA/ICBX
-aHkgZG9lcyBpdCBzdGlsbCBkdXBsaWNhdGUgdGhlCj4gcHV0X3VzZXI/ICBUaGlzIGRvZXNuJ3Qg
-bG9vayBsaWtlIGFjdHVhbGx5IHdvcmtpbmcgY29kZSB0byBtZS4KClllcywgdGhpcyBpcyBhIGJ1
-Zy4gU2hvdWxkIGJlIHNvbWV0aGluZyBsaWtlOgoKc3RhdGljIGludCBzZXRfYml0X3RvX3VzZXIo
-aW50IG5yLCB1MzIgX191c2VyICphZGRyKQp7CiAgICAgICAgdW5zaWduZWQgbG9uZyBsb2cgPSAo
-dW5zaWduZWQgbG9uZylhZGRyOwogICAgICAgIHN0cnVjdCBwYWdlICpwYWdlOwogICAgICAgIHUz
-MiBvbGRfbG9nLCBuZXdfbG9nLCBsOwogICAgICAgIGludCByOwoKICAgICAgICByID0gZ2V0X3Vz
-ZXJfcGFnZXNfZmFzdChsb2csIDEsIDEsICZwYWdlKTsKICAgICAgICBpZiAociA8IDApCiAgICAg
-ICAgICAgICAgICByZXR1cm4gcjsKCUJVR19PTihyICE9IDEpOwoKICAgICAgICBkbyB7CiAgICAg
-ICAgICAgICAgICByID0gZ2V0X3VzZXIob2xkX2xvZywgYWRkcik7CiAgICAgICAgICAgICAgICBp
-ZiAociA8IDApCiAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByOwogICAgICAgICAgICAg
-ICAgbmV3X2xvZyA9IG9sZF9sb2cgfCAoMSA8PCBucik7CgkJciA9IGZ1dGV4X2F0b21pY19jbXB4
-Y2hnX2luYXRvbWljKCZsLCBhZGRyLCBvbGRfbG9nLCBuZXdfbG9nKTsKICAgICAgICAgICAgICAg
-IGlmIChyIDwgMCkKICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHI7CiAgICAgICAgfSB3
-aGlsZShsICE9IG5ld19sb2cpOwoKCXNldF9wYWdlX2RpcnR5X2xvY2socGFnZSk7CiAgICAgICAg
-cHV0X3BhZ2UocGFnZSk7CiAgICAgICAgcmV0dXJuIDA7Cn0KCj4KPiBBbHNvIGRvbid0IHdlIG5l
-ZWQgYSBwYWdlZmF1bHRfZGlzYWJsZSgpIGFyb3VuZAo+IGZ1dGV4X2F0b21pY19jbXB4Y2hnX2lu
-YXRvbWljPwoKU2luY2Ugd2UgZG9uJ3Qgd2FudCB0byBkZWFsIHdpdGggcGFnZWZhdWx0LCBzbyB0
-aGUgcGFnZSBoYXMgYmVlbgpwaW5uZWQgYmVmb3JlIGZ1dGV4X2F0b21pY19jbXB4Y2hnX2luYXRv
-bWljKCkuCgpUaGFua3MKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
-bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+On Mon, May 06, 2019 at 10:23:29PM -0400, Jason Wang wrote:
+> Vhost log dirty pages directly to a userspace bitmap through GUP and
+> kmap_atomic() since kernel doesn't have a set_bit_to_user()
+> helper. This will cause issues for the arch that has virtually tagged
+> caches. The way to fix is to keep using userspace virtual address.
+> 
+> Fortunately, futex has a cmpxchg to userspace memory helper
+> futex_atomic_cmpxchg_inatomic(). So switch to use it to exchange the
+> userspace bitmap with zero, set the bit and then write it back through
+> put_user().
+> 
+> Note: there're archs (few non popular ones) that don't implement
+> futex helper, we can't log dirty pages. We can fix them on top or
+> simply disable LOG_ALL features of vhost.
+
+Or implement futex_atomic_cmpxchg using kmap if they don't have
+virtually tagged caches.
+
+> 
+> Cc: Christoph Hellwig <hch@infradead.org>
+> Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
+> Cc: Andrea Arcangeli <aarcange@redhat.com>
+> Fixes: 3a4d5c94e9593 ("vhost_net: a kernel-level virtio server")
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
+> ---
+>  drivers/vhost/vhost.c | 27 +++++++++++++++------------
+>  1 file changed, 15 insertions(+), 12 deletions(-)
+> 
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index 351af88..9c94c41 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -31,6 +31,7 @@
+>  #include <linux/sched/signal.h>
+>  #include <linux/interval_tree_generic.h>
+>  #include <linux/nospec.h>
+> +#include <asm/futex.h>
+>  
+>  #include "vhost.h"
+>  
+> @@ -1692,25 +1693,27 @@ long vhost_dev_ioctl(struct vhost_dev *d, unsigned int ioctl, void __user *argp)
+>  }
+>  EXPORT_SYMBOL_GPL(vhost_dev_ioctl);
+>  
+> -/* TODO: This is really inefficient.  We need something like get_user()
+> - * (instruction directly accesses the data, with an exception table entry
+> - * returning -EFAULT). See Documentation/x86/exception-tables.txt.
+> - */
+> -static int set_bit_to_user(int nr, void __user *addr)
+> +static int set_bit_to_user(int nr, u32 __user *addr)
+>  {
+>  	unsigned long log = (unsigned long)addr;
+>  	struct page *page;
+> -	void *base;
+> -	int bit = nr + (log % PAGE_SIZE) * 8;
+> +	u32 old_log;
+>  	int r;
+>  
+>  	r = get_user_pages_fast(log, 1, 1, &page);
+>  	if (r < 0)
+>  		return r;
+>  	BUG_ON(r != 1);
+> -	base = kmap_atomic(page);
+> -	set_bit(bit, base);
+> -	kunmap_atomic(base);
+> +
+> +	r = futex_atomic_cmpxchg_inatomic(&old_log, addr, 0, 0);
+> +	if (r < 0)
+> +		return r;
+
+So I think this is a great idea!
+
+However one issue here is that futex_atomic_cmpxchg_inatomic will fail if the
+page is swapped out. I suspect we need a variant that blocks the thread
+instead.
+
+> +
+> +	old_log |= 1 << nr;
+> +	r = put_user(old_log, addr);
+> +	if (r < 0)
+> +		return r;
+> +
+>  	set_page_dirty_lock(page);
+>  	put_page(page);
+>  	return 0;
+> @@ -1727,8 +1730,8 @@ static int log_write(void __user *log_base,
+>  	write_length += write_address % VHOST_PAGE_SIZE;
+>  	for (;;) {
+>  		u64 base = (u64)(unsigned long)log_base;
+> -		u64 log = base + write_page / 8;
+> -		int bit = write_page % 8;
+> +		u64 log = base + write_page / 32;
+> +		int bit = write_page % 32;
+>  		if ((u64)(unsigned long)log != log)
+>  			return -EFAULT;
+>  		r = set_bit_to_user(bit, (void __user *)(unsigned long)log);
+> -- 
+> 1.8.3.1
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
