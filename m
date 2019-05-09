@@ -2,68 +2,98 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0557018A76
-	for <lists.virtualization@lfdr.de>; Thu,  9 May 2019 15:18:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2F3F2273C
+	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:21:33 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C65CDDBE;
-	Thu,  9 May 2019 13:18:34 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 730A1A67;
+	Sun, 19 May 2019 16:17:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 755B5D7C
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 497A5DCB
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  9 May 2019 13:18:33 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 50988878
+	Thu,  9 May 2019 13:30:22 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D03D5709
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  9 May 2019 13:18:32 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id r3so2366741qtp.10
+	Thu,  9 May 2019 13:30:21 +0000 (UTC)
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x49DOGMF166528 for <virtualization@lists.linux-foundation.org>;
+	Thu, 9 May 2019 09:30:20 -0400
+Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2sck39wx6t-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 09 May 2019 06:18:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=uCSIDRtIChXyP2xLf4vlTl4TN+QeSJxgQq5xMSigZ5w=;
-	b=T6rfz72pVM9Fszaof8YnRRZhG/WFC5t5vSAe8o4oGHs7Po5vXAB6cfPCUVZiG7DJdN
-	pDbaFXIW/verMiFnSIZbnUH0vyFElEiMVq1NJ+YTALQnbh7MJijYHRFSiYQKrbGxO/RE
-	w86daJMf54WhfxXEhD4t+T+uybbWYGcpPnxPHcN/bAjkbnmC65M7bTJIdasnSMOdgmt0
-	9kGi8dpoTMEFFrcDXMlwAds5MqeXvCPwWV5J5YpiOXX77o3nXigWenF8rRhKYAgXKZDt
-	0o4Uio27uAhPhx6QLjBcRVKooa9uPRAHafq/bqXUfd3g9IYJPsabujVhXwHxKJbzd5Hs
-	0Rgg==
-X-Gm-Message-State: APjAAAV6XBf3l0LqzepS0np3JMhPeH3DRVCGXYN2Aiw/CJ2NxqMbG0sy
-	eXjozPy9u3BoRpzxgE7tvOY6ng==
-X-Google-Smtp-Source: APXvYqzuWDrp1vNxFhHyIepZh0BlL6Sk73vH5vDNAOlEraLrudzljNETMnRhgraKr8XDV4OMSkjv+w==
-X-Received: by 2002:ac8:610f:: with SMTP id a15mr3462116qtm.257.1557407911523; 
-	Thu, 09 May 2019 06:18:31 -0700 (PDT)
-Received: from redhat.com (pool-173-76-105-71.bstnma.fios.verizon.net.
-	[173.76.105.71])
-	by smtp.gmail.com with ESMTPSA id x3sm1232202qtk.75.2019.05.09.06.18.29
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 09 May 2019 06:18:30 -0700 (PDT)
-Date: Thu, 9 May 2019 09:18:22 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [RFC PATCH V2] vhost: don't use kmap() to log dirty pages
-Message-ID: <20190509090433-mutt-send-email-mst@kernel.org>
-References: <1557406680-4087-1-git-send-email-jasowang@redhat.com>
+	Thu, 09 May 2019 09:30:20 -0400
+Received: from localhost
+	by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pmorel@linux.ibm.com>; Thu, 9 May 2019 14:30:15 +0100
+Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
+	by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Thu, 9 May 2019 14:30:11 +0100
+Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
+	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x49DU9wK33882182
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Thu, 9 May 2019 13:30:09 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 8827E4204D;
+	Thu,  9 May 2019 13:30:09 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 98F5242054;
+	Thu,  9 May 2019 13:30:08 +0000 (GMT)
+Received: from [9.145.47.201] (unknown [9.145.47.201])
+	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Thu,  9 May 2019 13:30:08 +0000 (GMT)
+Subject: Re: [PATCH 09/10] virtio/s390: use DMA memory for ccw I/O and classic
+	notifiers
+From: Pierre Morel <pmorel@linux.ibm.com>
+To: Halil Pasic <pasic@linux.ibm.com>, kvm@vger.kernel.org,
+	linux-s390@vger.kernel.org, Cornelia Huck <cohuck@redhat.com>,
+	Martin Schwidefsky <schwidefsky@de.ibm.com>,
+	Sebastian Ott <sebott@linux.ibm.com>
+References: <20190426183245.37939-1-pasic@linux.ibm.com>
+	<20190426183245.37939-10-pasic@linux.ibm.com>
+	<a873909a-9846-d6d3-f03e-e86d53fd9c75@linux.ibm.com>
+Date: Thu, 9 May 2019 15:30:08 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1557406680-4087-1-git-send-email-jasowang@redhat.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <a873909a-9846-d6d3-f03e-e86d53fd9c75@linux.ibm.com>
+Content-Language: en-US
+X-TM-AS-GCONF: 00
+x-cbid: 19050913-0016-0000-0000-00000279F49B
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19050913-0017-0000-0000-000032D6A9C4
+Message-Id: <db036887-c238-9795-5f47-cfeb475074e4@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-09_02:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905090081
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Andrea Arcangeli <aarcange@redhat.com>,
-	James Bottomley <James.Bottomley@hansenpartnership.com>,
-	kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
+Cc: Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>, Ingo Molnar <mingo@redhat.com>,
-	Darren Hart <dvhart@infradead.org>, Thomas Gleixner <tglx@linutronix.de>
+	Christoph Hellwig <hch@infradead.org>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,145 +105,33 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: pmorel@linux.ibm.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, May 09, 2019 at 08:58:00AM -0400, Jason Wang wrote:
-> Vhost log dirty pages directly to a userspace bitmap through GUP and
-> kmap_atomic() since kernel doesn't have a set_bit_to_user()
-> helper. This will cause issues for the arch that has virtually tagged
-> caches. The way to fix is to keep using userspace virtual
-> address. Fortunately, futex has arch_futex_atomic_op_inuser() which
-> could be used for setting a bit to user.
-> 
-> Note:
-> - There're archs (few non popular ones) that don't implement futex
->   helper, we can't log dirty pages. We can fix them e.g for non
->   virtually tagged archs implement a kmap fallback on top or simply
->   disable LOG_ALL features of vhost.
-> - The helper also requires userspace pointer is located at 4-byte
->   boundary, need to check during dirty log setting
-
-Why check? Round it down.
-
-> Cc: Christoph Hellwig <hch@infradead.org>
-> Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
-> Cc: Andrea Arcangeli <aarcange@redhat.com>
-> Cc: Thomas Gleixner <tglx@linutronix.de>
-> Cc: Ingo Molnar <mingo@redhat.com>
-> Cc: Peter Zijlstra <peterz@infradead.org>
-> Cc: Darren Hart <dvhart@infradead.org>
-> Fixes: 3a4d5c94e9593 ("vhost_net: a kernel-level virtio server")
-> Signed-off-by: Jason Wang <jasowang@redhat.com>
-> ---
-> Changes from V1:
-> - switch to use arch_futex_atomic_op_inuser()
-> ---
->  drivers/vhost/vhost.c | 35 +++++++++++++++++------------------
->  1 file changed, 17 insertions(+), 18 deletions(-)
-> 
-> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-> index 351af88..4e5a004 100644
-> --- a/drivers/vhost/vhost.c
-> +++ b/drivers/vhost/vhost.c
-> @@ -31,6 +31,7 @@
->  #include <linux/sched/signal.h>
->  #include <linux/interval_tree_generic.h>
->  #include <linux/nospec.h>
-> +#include <asm/futex.h>
->  
->  #include "vhost.h"
->  
-> @@ -1652,6 +1653,10 @@ long vhost_dev_ioctl(struct vhost_dev *d, unsigned int ioctl, void __user *argp)
->  			r = -EFAULT;
->  			break;
->  		}
-> +		if (p & 0x3) {
-> +			r = -EINVAL;
-> +			break;
-> +		}
->  		for (i = 0; i < d->nvqs; ++i) {
->  			struct vhost_virtqueue *vq;
->  			void __user *base = (void __user *)(unsigned long)p;
-
-That's an ABI change and might break some userspace. I don't think
-it's necessary: you are changing individual bits anyway.
-
-> @@ -1692,31 +1697,27 @@ long vhost_dev_ioctl(struct vhost_dev *d, unsigned int ioctl, void __user *argp)
->  }
->  EXPORT_SYMBOL_GPL(vhost_dev_ioctl);
->  
-> -/* TODO: This is really inefficient.  We need something like get_user()
-> - * (instruction directly accesses the data, with an exception table entry
-> - * returning -EFAULT). See Documentation/x86/exception-tables.txt.
-> - */
-> -static int set_bit_to_user(int nr, void __user *addr)
-> +static int set_bit_to_user(int nr, u32 __user *addr)
->  {
->  	unsigned long log = (unsigned long)addr;
->  	struct page *page;
-> -	void *base;
-> -	int bit = nr + (log % PAGE_SIZE) * 8;
-> +	u32 old;
->  	int r;
->  
->  	r = get_user_pages_fast(log, 1, 1, &page);
-
-OK so the trick is that page is pinned so you don't expect
-arch_futex_atomic_op_inuser below to fail.  get_user_pages_fast
-guarantees page is not going away but does it guarantee PTE won't be
-invaidated or write protected?
-
->  	if (r < 0)
->  		return r;
->  	BUG_ON(r != 1);
-> -	base = kmap_atomic(page);
-> -	set_bit(bit, base);
-> -	kunmap_atomic(base);
-> +
-> +	r = arch_futex_atomic_op_inuser(FUTEX_OP_ADD, 1 << nr, &old, addr);
-> +	/* TODO: fallback to kmap() when -ENOSYS? */
-> +
-
-Add a comment why this won't fail? Maybe warn on EFAULT?
-
-Also down the road a variant that does not need tricks like this is
-still nice to have.
-
-
->  	set_page_dirty_lock(page);
->  	put_page(page);
-> -	return 0;
-> +	return r;
->  }
->  
-> -static int log_write(void __user *log_base,
-> +static int log_write(u32 __user *log_base,
->  		     u64 write_address, u64 write_length)
->  {
->  	u64 write_page = write_address / VHOST_PAGE_SIZE;
-> @@ -1726,12 +1727,10 @@ static int log_write(void __user *log_base,
->  		return 0;
->  	write_length += write_address % VHOST_PAGE_SIZE;
->  	for (;;) {
-> -		u64 base = (u64)(unsigned long)log_base;
-> -		u64 log = base + write_page / 8;
-> -		int bit = write_page % 8;
-> -		if ((u64)(unsigned long)log != log)
-> -			return -EFAULT;
-> -		r = set_bit_to_user(bit, (void __user *)(unsigned long)log);
-> +		u32 __user *log = log_base + write_page / 32;
-> +		int bit = write_page % 32;
-> +
-> +		r = set_bit_to_user(bit, log);
->  		if (r < 0)
->  			return r;
->  		if (write_length <= VHOST_PAGE_SIZE)
-> -- 
-> 1.8.3.1
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gMDgvMDUvMjAxOSAxNjo0NiwgUGllcnJlIE1vcmVsIHdyb3RlOgo+IE9uIDI2LzA0LzIwMTkg
+MjA6MzIsIEhhbGlsIFBhc2ljIHdyb3RlOgo+PiBCZWZvcmUgdmlydGlvLWNjdyBjb3VsZCBnZXQg
+YXdheSB3aXRoIG5vdCB1c2luZyBETUEgQVBJIGZvciB0aGUgcGllY2VzIG9mCj4+IG1lbW9yeSBp
+dCBkb2VzIGNjdyBJL08gd2l0aC4gV2l0aCBwcm90ZWN0ZWQgdmlydHVhbGl6YXRpb24gdGhpcyBo
+YXMgdG8KPj4gY2hhbmdlLCBzaW5jZSB0aGUgaHlwZXJ2aXNvciBuZWVkcyB0byByZWFkIGFuZCBz
+b21ldGltZXMgYWxzbyB3cml0ZSB0aGVzZQo+PiBwaWVjZXMgb2YgbWVtb3J5Lgo+Pgo+PiBUaGUg
+aHlwZXJ2aXNvciBpcyBzdXBwb3NlZCB0byBwb2tlIHRoZSBjbGFzc2ljIG5vdGlmaWVycywgaWYg
+dGhlc2UgYXJlCj4+IHVzZWQsIG91dCBvZiBiYW5kIHdpdGggcmVnYXJkcyB0byBjY3cgSS9PLiBT
+byB0aGVzZSBuZWVkIHRvIGJlIGFsbG9jYXRlZAo+PiBhcyBETUEgbWVtb3J5ICh3aGljaCBpcyBz
+aGFyZWQgbWVtb3J5IGZvciBwcm90ZWN0ZWQgdmlydHVhbGl6YXRpb24KPj4gZ3Vlc3RzKS4KPj4K
+Pj4gTGV0IHVzIGZhY3RvciBvdXQgZXZlcnl0aGluZyBmcm9tIHN0cnVjdCB2aXJ0aW9fY2N3X2Rl
+dmljZSB0aGF0IG5lZWRzIHRvCj4+IGJlIERNQSBtZW1vcnkgaW4gYSBzYXRlbGxpdGUgdGhhdCBp
+cyBhbGxvY2F0ZWQgYXMgc3VjaC4KPj4KLi4uCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBzaXplb2YoaW5kaWNhdG9ycyh2Y2RldikpKTsKPiAKPiBzaG91
+bGQgYmUgc2l6ZW9mKGxvbmcpID8KPiAKPiBUaGlzIGlzIGEgcmVjdXJyZW50IGVycm9yLCBidXQg
+aXQgaXMgbm90IGFuIGlzc3VlIGJlY2F1c2UgdGhlIHNpemUgb2YKPiB0aGUgaW5kaWNhdG9ycyBp
+cyB1bnNpZ25lZCBsb25nIGFzIHRoZSBzaXplIG9mIHRoZSBwb2ludGVyLgo+IAo+IFJlZ2FyZHMs
+Cj4gUGllcnJlCj4gCgpIZXJlIHRvbywgd2l0aCB0aGUgcHJvYmxlbSBvZiB0aGUgaW5kaWNhdG9y
+IHNpemUgaGFuZGxlZDoKUmV2aWV3ZWQtYnk6IFBpZXJyZSBNb3JlbDxwbW9yZWxAbGludXguaWJt
+LmNvbT4KCgotLSAKUGllcnJlIE1vcmVsCkxpbnV4L0tWTS9RRU1VIGluIELDtmJsaW5nZW4gLSBH
+ZXJtYW55CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpW
+aXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91
+bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlz
+dGluZm8vdmlydHVhbGl6YXRpb24=
