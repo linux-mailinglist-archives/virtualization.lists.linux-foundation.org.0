@@ -2,96 +2,59 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DBB419541
-	for <lists.virtualization@lfdr.de>; Fri, 10 May 2019 00:34:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 034AB196DE
+	for <lists.virtualization@lfdr.de>; Fri, 10 May 2019 04:59:17 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9221DDB6;
-	Thu,  9 May 2019 22:34:14 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3F365CBC;
+	Fri, 10 May 2019 02:59:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D5C0D25A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id C9090B9E
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  9 May 2019 22:34:12 +0000 (UTC)
+	Fri, 10 May 2019 02:59:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 454CF875
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 26A14709
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  9 May 2019 22:34:11 +0000 (UTC)
-Received: from pps.filterd (m0098413.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x49MW1vA141793 for <virtualization@lists.linux-foundation.org>;
-	Thu, 9 May 2019 18:34:10 -0400
-Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
-	by mx0b-001b2d01.pphosted.com with ESMTP id 2sctp253dq-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 09 May 2019 18:34:09 -0400
-Received: from localhost
-	by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Thu, 9 May 2019 23:34:08 +0100
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
-	by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Thu, 9 May 2019 23:34:05 +0100
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
-	[9.149.105.59])
-	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x49MY3iO46071960
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Thu, 9 May 2019 22:34:03 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9CA9FA407E;
-	Thu,  9 May 2019 22:34:03 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id D2842A4076;
-	Thu,  9 May 2019 22:34:02 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.145.181.188])
-	by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Thu,  9 May 2019 22:34:02 +0000 (GMT)
-Date: Fri, 10 May 2019 00:34:01 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Claudio Imbrenda <imbrenda@linux.ibm.com>
-Subject: Re: [PATCH 04/10] s390/mm: force swiotlb for protected virtualization
-In-Reply-To: <20190508151540.14ba1d90@p-imbrenda.boeblingen.de.ibm.com>
-References: <20190426183245.37939-1-pasic@linux.ibm.com>
-	<20190426183245.37939-5-pasic@linux.ibm.com>
-	<20190508151540.14ba1d90@p-imbrenda.boeblingen.de.ibm.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+	Fri, 10 May 2019 02:59:10 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 7A06920260;
+	Fri, 10 May 2019 02:59:09 +0000 (UTC)
+Received: from [10.72.12.54] (ovpn-12-54.pek2.redhat.com [10.72.12.54])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id D2B524F89;
+	Fri, 10 May 2019 02:59:00 +0000 (UTC)
+Subject: Re: [RFC PATCH V2] vhost: don't use kmap() to log dirty pages
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <1557406680-4087-1-git-send-email-jasowang@redhat.com>
+	<20190509090433-mutt-send-email-mst@kernel.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <d6d69a36-9a3a-2a21-924e-97fdcc6e6733@redhat.com>
+Date: Fri, 10 May 2019 10:59:01 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19050922-0020-0000-0000-0000033B1532
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19050922-0021-0000-0000-0000218DBE2D
-Message-Id: <20190510003401.4254f200.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-09_02:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=2 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1905090128
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+In-Reply-To: <20190509090433-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.29]);
+	Fri, 10 May 2019 02:59:09 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
-	Thomas Huth <thuth@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
-	kvm@vger.kernel.org, Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
-	Eric Farman <farman@linux.ibm.com>,
+Cc: Andrea Arcangeli <aarcange@redhat.com>,
+	James Bottomley <James.Bottomley@hansenpartnership.com>,
+	kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Martin Schwidefsky <schwidefsky@de.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+	Christoph Hellwig <hch@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+	Darren Hart <dvhart@infradead.org>, Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -103,213 +66,98 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, 8 May 2019 15:15:40 +0200
-Claudio Imbrenda <imbrenda@linux.ibm.com> wrote:
-
-> On Fri, 26 Apr 2019 20:32:39 +0200
-> Halil Pasic <pasic@linux.ibm.com> wrote:
-> 
-> > On s390, protected virtualization guests have to use bounced I/O
-> > buffers.  That requires some plumbing.
-> > 
-> > Let us make sure, any device that uses DMA API with direct ops
-> > correctly is spared from the problems, that a hypervisor attempting
-> > I/O to a non-shared page would bring.
-> > 
-> > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-> > ---
-> >  arch/s390/Kconfig                   |  4 +++
-> >  arch/s390/include/asm/mem_encrypt.h | 18 +++++++++++++
-> >  arch/s390/mm/init.c                 | 50
-> > +++++++++++++++++++++++++++++++++++++ 3 files changed, 72
-> > insertions(+) create mode 100644 arch/s390/include/asm/mem_encrypt.h
-> > 
-> > diff --git a/arch/s390/Kconfig b/arch/s390/Kconfig
-> > index 1c3fcf19c3af..5500d05d4d53 100644
-> > --- a/arch/s390/Kconfig
-> > +++ b/arch/s390/Kconfig
-> > @@ -1,4 +1,7 @@
-> >  # SPDX-License-Identifier: GPL-2.0
-> > +config ARCH_HAS_MEM_ENCRYPT
-> > +        def_bool y
-> > +
-> >  config MMU
-> >  	def_bool y
-> >  
-> > @@ -191,6 +194,7 @@ config S390
-> >  	select ARCH_HAS_SCALED_CPUTIME
-> >  	select VIRT_TO_BUS
-> >  	select HAVE_NMI
-> > +	select SWIOTLB
-> >  
-> >  
-> >  config SCHED_OMIT_FRAME_POINTER
-> > diff --git a/arch/s390/include/asm/mem_encrypt.h
-> > b/arch/s390/include/asm/mem_encrypt.h new file mode 100644
-> > index 000000000000..0898c09a888c
-> > --- /dev/null
-> > +++ b/arch/s390/include/asm/mem_encrypt.h
-> > @@ -0,0 +1,18 @@
-> > +/* SPDX-License-Identifier: GPL-2.0 */
-> > +#ifndef S390_MEM_ENCRYPT_H__
-> > +#define S390_MEM_ENCRYPT_H__
-> > +
-> > +#ifndef __ASSEMBLY__
-> > +
-> > +#define sme_me_mask	0ULL
-> 
-> This is rather ugly, but I understand why it's there
-> 
-
-Nod.
-
-> > +
-> > +static inline bool sme_active(void) { return false; }
-> > +extern bool sev_active(void);
-> > +
-> > +int set_memory_encrypted(unsigned long addr, int numpages);
-> > +int set_memory_decrypted(unsigned long addr, int numpages);
-> > +
-> > +#endif	/* __ASSEMBLY__ */
-> > +
-> > +#endif	/* S390_MEM_ENCRYPT_H__ */
-> > +
-> > diff --git a/arch/s390/mm/init.c b/arch/s390/mm/init.c
-> > index 3e82f66d5c61..7e3cbd15dcfa 100644
-> > --- a/arch/s390/mm/init.c
-> > +++ b/arch/s390/mm/init.c
-> > @@ -18,6 +18,7 @@
-> >  #include <linux/mman.h>
-> >  #include <linux/mm.h>
-> >  #include <linux/swap.h>
-> > +#include <linux/swiotlb.h>
-> >  #include <linux/smp.h>
-> >  #include <linux/init.h>
-> >  #include <linux/pagemap.h>
-> > @@ -29,6 +30,7 @@
-> >  #include <linux/export.h>
-> >  #include <linux/cma.h>
-> >  #include <linux/gfp.h>
-> > +#include <linux/dma-mapping.h>
-> >  #include <asm/processor.h>
-> >  #include <linux/uaccess.h>
-> >  #include <asm/pgtable.h>
-> > @@ -42,6 +44,8 @@
-> >  #include <asm/sclp.h>
-> >  #include <asm/set_memory.h>
-> >  #include <asm/kasan.h>
-> > +#include <asm/dma-mapping.h>
-> > +#include <asm/uv.h>
-> >  
-> >  pgd_t swapper_pg_dir[PTRS_PER_PGD] __section(.bss..swapper_pg_dir);
-> >  
-> > @@ -126,6 +130,50 @@ void mark_rodata_ro(void)
-> >  	pr_info("Write protected read-only-after-init data: %luk\n",
-> > size >> 10); }
-> >  
-> > +int set_memory_encrypted(unsigned long addr, int numpages)
-> > +{
-> > +	int i;
-> > +
-> > +	/* make all pages shared, (swiotlb, dma_free) */
-> 
-> this is a copypaste typo, I think? (should be UNshared?)
-> also, it doesn't make ALL pages unshared, but only those specified in
-> the parameters
-
-Right a copy paste error. Needs correction. The all was meant like all
-pages in the range specified by the arguments. But it is better changed
-since it turned out to be confusing.
-
-> 
-> with this fixed:
-> Reviewed-by: Claudio Imbrenda <imbrenda@linux.ibm.com>
-> 
-
-Thanks!
-
-> > +	for (i = 0; i < numpages; ++i) {
-> > +		uv_remove_shared(addr);
-> > +		addr += PAGE_SIZE;
-> > +	}
-> > +	return 0;
-> > +}
-> > +EXPORT_SYMBOL_GPL(set_memory_encrypted);
-> > +
-> > +int set_memory_decrypted(unsigned long addr, int numpages)
-> > +{
-> > +	int i;
-> > +	/* make all pages shared (swiotlb, dma_alloca) */
-> 
-> same here with ALL
-> 
-> > +	for (i = 0; i < numpages; ++i) {
-> > +		uv_set_shared(addr);
-> > +		addr += PAGE_SIZE;
-> > +	}
-> > +	return 0;
-> > +}
-> > +EXPORT_SYMBOL_GPL(set_memory_decrypted);
-> > +
-> > +/* are we a protected virtualization guest? */
-> > +bool sev_active(void)
-> 
-> this is also ugly. the correct solution would be probably to refactor
-> everything, including all the AMD SEV code.... let's not go there
-> 
-
-Nod. Maybe later.
-
-> > +{
-> > +	return is_prot_virt_guest();
-> > +}
-> > +EXPORT_SYMBOL_GPL(sev_active);
-> > +
-> > +/* protected virtualization */
-> > +static void pv_init(void)
-> > +{
-> > +	if (!sev_active())
-> 
-> can't you just use is_prot_virt_guest here?
-> 
-
-Sure! I guess it would be less confusing. It is something I did not
-remember to change when the interface for this provided by uv.h went
-from sketchy to nice.
-
-Thanks again!
-
-Regards,
-Halil
-
-> > +		return;
-> > +
-> > +	/* make sure bounce buffers are shared */
-> > +	swiotlb_init(1);
-> > +	swiotlb_update_mem_attributes();
-> > +	swiotlb_force = SWIOTLB_FORCE;
-> > +}
-> > +
-> >  void __init mem_init(void)
-> >  {
-> >  	cpumask_set_cpu(0, &init_mm.context.cpu_attach_mask);
-> > @@ -134,6 +182,8 @@ void __init mem_init(void)
-> >  	set_max_mapnr(max_low_pfn);
-> >          high_memory = (void *) __va(max_low_pfn * PAGE_SIZE);
-> >  
-> > +	pv_init();
-> > +
-> >  	/* Setup guest page hinting */
-> >  	cmma_init();
-> >  
-> 
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvNS85IOS4i+WNiDk6MTgsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToKPiBPbiBU
+aHUsIE1heSAwOSwgMjAxOSBhdCAwODo1ODowMEFNIC0wNDAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+
+PiBWaG9zdCBsb2cgZGlydHkgcGFnZXMgZGlyZWN0bHkgdG8gYSB1c2Vyc3BhY2UgYml0bWFwIHRo
+cm91Z2ggR1VQIGFuZAo+PiBrbWFwX2F0b21pYygpIHNpbmNlIGtlcm5lbCBkb2Vzbid0IGhhdmUg
+YSBzZXRfYml0X3RvX3VzZXIoKQo+PiBoZWxwZXIuIFRoaXMgd2lsbCBjYXVzZSBpc3N1ZXMgZm9y
+IHRoZSBhcmNoIHRoYXQgaGFzIHZpcnR1YWxseSB0YWdnZWQKPj4gY2FjaGVzLiBUaGUgd2F5IHRv
+IGZpeCBpcyB0byBrZWVwIHVzaW5nIHVzZXJzcGFjZSB2aXJ0dWFsCj4+IGFkZHJlc3MuIEZvcnR1
+bmF0ZWx5LCBmdXRleCBoYXMgYXJjaF9mdXRleF9hdG9taWNfb3BfaW51c2VyKCkgd2hpY2gKPj4g
+Y291bGQgYmUgdXNlZCBmb3Igc2V0dGluZyBhIGJpdCB0byB1c2VyLgo+Pgo+PiBOb3RlOgo+PiAt
+IFRoZXJlJ3JlIGFyY2hzIChmZXcgbm9uIHBvcHVsYXIgb25lcykgdGhhdCBkb24ndCBpbXBsZW1l
+bnQgZnV0ZXgKPj4gICAgaGVscGVyLCB3ZSBjYW4ndCBsb2cgZGlydHkgcGFnZXMuIFdlIGNhbiBm
+aXggdGhlbSBlLmcgZm9yIG5vbgo+PiAgICB2aXJ0dWFsbHkgdGFnZ2VkIGFyY2hzIGltcGxlbWVu
+dCBhIGttYXAgZmFsbGJhY2sgb24gdG9wIG9yIHNpbXBseQo+PiAgICBkaXNhYmxlIExPR19BTEwg
+ZmVhdHVyZXMgb2Ygdmhvc3QuCj4+IC0gVGhlIGhlbHBlciBhbHNvIHJlcXVpcmVzIHVzZXJzcGFj
+ZSBwb2ludGVyIGlzIGxvY2F0ZWQgYXQgNC1ieXRlCj4+ICAgIGJvdW5kYXJ5LCBuZWVkIHRvIGNo
+ZWNrIGR1cmluZyBkaXJ0eSBsb2cgc2V0dGluZwo+IFdoeSBjaGVjaz8gUm91bmQgaXQgZG93bi4K
+CgpXaWxsIGRvIHRoaXMuCgoKPgo+PiBDYzogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBpbmZyYWRl
+YWQub3JnPgo+PiBDYzogSmFtZXMgQm90dG9tbGV5IDxKYW1lcy5Cb3R0b21sZXlASGFuc2VuUGFy
+dG5lcnNoaXAuY29tPgo+PiBDYzogQW5kcmVhIEFyY2FuZ2VsaSA8YWFyY2FuZ2VAcmVkaGF0LmNv
+bT4KPj4gQ2M6IFRob21hcyBHbGVpeG5lciA8dGdseEBsaW51dHJvbml4LmRlPgo+PiBDYzogSW5n
+byBNb2xuYXIgPG1pbmdvQHJlZGhhdC5jb20+Cj4+IENjOiBQZXRlciBaaWpsc3RyYSA8cGV0ZXJ6
+QGluZnJhZGVhZC5vcmc+Cj4+IENjOiBEYXJyZW4gSGFydCA8ZHZoYXJ0QGluZnJhZGVhZC5vcmc+
+Cj4+IEZpeGVzOiAzYTRkNWM5NGU5NTkzICgidmhvc3RfbmV0OiBhIGtlcm5lbC1sZXZlbCB2aXJ0
+aW8gc2VydmVyIikKPj4gU2lnbmVkLW9mZi1ieTogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0
+LmNvbT4KPj4gLS0tCj4+IENoYW5nZXMgZnJvbSBWMToKPj4gLSBzd2l0Y2ggdG8gdXNlIGFyY2hf
+ZnV0ZXhfYXRvbWljX29wX2ludXNlcigpCj4+IC0tLQo+PiAgIGRyaXZlcnMvdmhvc3Qvdmhvc3Qu
+YyB8IDM1ICsrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tCj4+ICAgMSBmaWxlIGNo
+YW5nZWQsIDE3IGluc2VydGlvbnMoKyksIDE4IGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0
+IGEvZHJpdmVycy92aG9zdC92aG9zdC5jIGIvZHJpdmVycy92aG9zdC92aG9zdC5jCj4+IGluZGV4
+IDM1MWFmODguLjRlNWEwMDQgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvdmhvc3Qvdmhvc3QuYwo+
+PiArKysgYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmMKPj4gQEAgLTMxLDYgKzMxLDcgQEAKPj4gICAj
+aW5jbHVkZSA8bGludXgvc2NoZWQvc2lnbmFsLmg+Cj4+ICAgI2luY2x1ZGUgPGxpbnV4L2ludGVy
+dmFsX3RyZWVfZ2VuZXJpYy5oPgo+PiAgICNpbmNsdWRlIDxsaW51eC9ub3NwZWMuaD4KPj4gKyNp
+bmNsdWRlIDxhc20vZnV0ZXguaD4KPj4gICAKPj4gICAjaW5jbHVkZSAidmhvc3QuaCIKPj4gICAK
+Pj4gQEAgLTE2NTIsNiArMTY1MywxMCBAQCBsb25nIHZob3N0X2Rldl9pb2N0bChzdHJ1Y3Qgdmhv
+c3RfZGV2ICpkLCB1bnNpZ25lZCBpbnQgaW9jdGwsIHZvaWQgX191c2VyICphcmdwKQo+PiAgIAkJ
+CXIgPSAtRUZBVUxUOwo+PiAgIAkJCWJyZWFrOwo+PiAgIAkJfQo+PiArCQlpZiAocCAmIDB4Mykg
+ewo+PiArCQkJciA9IC1FSU5WQUw7Cj4+ICsJCQlicmVhazsKPj4gKwkJfQo+PiAgIAkJZm9yIChp
+ID0gMDsgaSA8IGQtPm52cXM7ICsraSkgewo+PiAgIAkJCXN0cnVjdCB2aG9zdF92aXJ0cXVldWUg
+KnZxOwo+PiAgIAkJCXZvaWQgX191c2VyICpiYXNlID0gKHZvaWQgX191c2VyICopKHVuc2lnbmVk
+IGxvbmcpcDsKPiBUaGF0J3MgYW4gQUJJIGNoYW5nZSBhbmQgbWlnaHQgYnJlYWsgc29tZSB1c2Vy
+c3BhY2UuIEkgZG9uJ3QgdGhpbmsKPiBpdCdzIG5lY2Vzc2FyeTogeW91IGFyZSBjaGFuZ2luZyBp
+bmRpdmlkdWFsIGJpdHMgYW55d2F5LgoKClJpZ2h0LgoKCj4KPj4gQEAgLTE2OTIsMzEgKzE2OTcs
+MjcgQEAgbG9uZyB2aG9zdF9kZXZfaW9jdGwoc3RydWN0IHZob3N0X2RldiAqZCwgdW5zaWduZWQg
+aW50IGlvY3RsLCB2b2lkIF9fdXNlciAqYXJncCkKPj4gICB9Cj4+ICAgRVhQT1JUX1NZTUJPTF9H
+UEwodmhvc3RfZGV2X2lvY3RsKTsKPj4gICAKPj4gLS8qIFRPRE86IFRoaXMgaXMgcmVhbGx5IGlu
+ZWZmaWNpZW50LiAgV2UgbmVlZCBzb21ldGhpbmcgbGlrZSBnZXRfdXNlcigpCj4+IC0gKiAoaW5z
+dHJ1Y3Rpb24gZGlyZWN0bHkgYWNjZXNzZXMgdGhlIGRhdGEsIHdpdGggYW4gZXhjZXB0aW9uIHRh
+YmxlIGVudHJ5Cj4+IC0gKiByZXR1cm5pbmcgLUVGQVVMVCkuIFNlZSBEb2N1bWVudGF0aW9uL3g4
+Ni9leGNlcHRpb24tdGFibGVzLnR4dC4KPj4gLSAqLwo+PiAtc3RhdGljIGludCBzZXRfYml0X3Rv
+X3VzZXIoaW50IG5yLCB2b2lkIF9fdXNlciAqYWRkcikKPj4gK3N0YXRpYyBpbnQgc2V0X2JpdF90
+b191c2VyKGludCBuciwgdTMyIF9fdXNlciAqYWRkcikKPj4gICB7Cj4+ICAgCXVuc2lnbmVkIGxv
+bmcgbG9nID0gKHVuc2lnbmVkIGxvbmcpYWRkcjsKPj4gICAJc3RydWN0IHBhZ2UgKnBhZ2U7Cj4+
+IC0Jdm9pZCAqYmFzZTsKPj4gLQlpbnQgYml0ID0gbnIgKyAobG9nICUgUEFHRV9TSVpFKSAqIDg7
+Cj4+ICsJdTMyIG9sZDsKPj4gICAJaW50IHI7Cj4+ICAgCj4+ICAgCXIgPSBnZXRfdXNlcl9wYWdl
+c19mYXN0KGxvZywgMSwgMSwgJnBhZ2UpOwo+IE9LIHNvIHRoZSB0cmljayBpcyB0aGF0IHBhZ2Ug
+aXMgcGlubmVkIHNvIHlvdSBkb24ndCBleHBlY3QKPiBhcmNoX2Z1dGV4X2F0b21pY19vcF9pbnVz
+ZXIgYmVsb3cgdG8gZmFpbC4gIGdldF91c2VyX3BhZ2VzX2Zhc3QKPiBndWFyYW50ZWVzIHBhZ2Ug
+aXMgbm90IGdvaW5nIGF3YXkgYnV0IGRvZXMgaXQgZ3VhcmFudGVlIFBURSB3b24ndCBiZQo+IGlu
+dmFpZGF0ZWQgb3Igd3JpdGUgcHJvdGVjdGVkPwoKCkdvb2QgcG9pbnQsIHRoZW4gSSB0aGluayB3
+ZSBwcm9iYWJseSBuZWVkIHRvIGRvIG1hbnVhbCBmaXh1cCB0aHJvdWdoIApmaXh1cF91c2VyX2Zh
+dWx0KCkgaWYgYXJjaF9mdXRleF9hdG9taWNfb3BfaW5fdXNlcigpIGZhaWwuCgoKPgo+PiAgIAlp
+ZiAociA8IDApCj4+ICAgCQlyZXR1cm4gcjsKPj4gICAJQlVHX09OKHIgIT0gMSk7Cj4+IC0JYmFz
+ZSA9IGttYXBfYXRvbWljKHBhZ2UpOwo+PiAtCXNldF9iaXQoYml0LCBiYXNlKTsKPj4gLQlrdW5t
+YXBfYXRvbWljKGJhc2UpOwo+PiArCj4+ICsJciA9IGFyY2hfZnV0ZXhfYXRvbWljX29wX2ludXNl
+cihGVVRFWF9PUF9BREQsIDEgPDwgbnIsICZvbGQsIGFkZHIpOwo+PiArCS8qIFRPRE86IGZhbGxi
+YWNrIHRvIGttYXAoKSB3aGVuIC1FTk9TWVM/ICovCj4+ICsKPiBBZGQgYSBjb21tZW50IHdoeSB0
+aGlzIHdvbid0IGZhaWw/IE1heWJlIHdhcm4gb24gRUZBVUxUPwo+Cj4gQWxzbyBkb3duIHRoZSBy
+b2FkIGEgdmFyaWFudCB0aGF0IGRvZXMgbm90IG5lZWQgdHJpY2tzIGxpa2UgdGhpcyBpcwo+IHN0
+aWxsIG5pY2UgdG8gaGF2ZS4KCgpPay4gTGV0IG1lIHBvc3QgYSBWMy4KClRoYW5rcwoKCj4KPgo+
+PiAgIAlzZXRfcGFnZV9kaXJ0eV9sb2NrKHBhZ2UpOwo+PiAgIAlwdXRfcGFnZShwYWdlKTsKPj4g
+LQlyZXR1cm4gMDsKPj4gKwlyZXR1cm4gcjsKPj4gICB9Cj4+ICAgCj4+IC1zdGF0aWMgaW50IGxv
+Z193cml0ZSh2b2lkIF9fdXNlciAqbG9nX2Jhc2UsCj4+ICtzdGF0aWMgaW50IGxvZ193cml0ZSh1
+MzIgX191c2VyICpsb2dfYmFzZSwKPj4gICAJCSAgICAgdTY0IHdyaXRlX2FkZHJlc3MsIHU2NCB3
+cml0ZV9sZW5ndGgpCj4+ICAgewo+PiAgIAl1NjQgd3JpdGVfcGFnZSA9IHdyaXRlX2FkZHJlc3Mg
+LyBWSE9TVF9QQUdFX1NJWkU7Cj4+IEBAIC0xNzI2LDEyICsxNzI3LDEwIEBAIHN0YXRpYyBpbnQg
+bG9nX3dyaXRlKHZvaWQgX191c2VyICpsb2dfYmFzZSwKPj4gICAJCXJldHVybiAwOwo+PiAgIAl3
+cml0ZV9sZW5ndGggKz0gd3JpdGVfYWRkcmVzcyAlIFZIT1NUX1BBR0VfU0laRTsKPj4gICAJZm9y
+ICg7Oykgewo+PiAtCQl1NjQgYmFzZSA9ICh1NjQpKHVuc2lnbmVkIGxvbmcpbG9nX2Jhc2U7Cj4+
+IC0JCXU2NCBsb2cgPSBiYXNlICsgd3JpdGVfcGFnZSAvIDg7Cj4+IC0JCWludCBiaXQgPSB3cml0
+ZV9wYWdlICUgODsKPj4gLQkJaWYgKCh1NjQpKHVuc2lnbmVkIGxvbmcpbG9nICE9IGxvZykKPj4g
+LQkJCXJldHVybiAtRUZBVUxUOwo+PiAtCQlyID0gc2V0X2JpdF90b191c2VyKGJpdCwgKHZvaWQg
+X191c2VyICopKHVuc2lnbmVkIGxvbmcpbG9nKTsKPj4gKwkJdTMyIF9fdXNlciAqbG9nID0gbG9n
+X2Jhc2UgKyB3cml0ZV9wYWdlIC8gMzI7Cj4+ICsJCWludCBiaXQgPSB3cml0ZV9wYWdlICUgMzI7
+Cj4+ICsKPj4gKwkJciA9IHNldF9iaXRfdG9fdXNlcihiaXQsIGxvZyk7Cj4+ICAgCQlpZiAociA8
+IDApCj4+ICAgCQkJcmV0dXJuIHI7Cj4+ICAgCQlpZiAod3JpdGVfbGVuZ3RoIDw9IFZIT1NUX1BB
+R0VfU0laRSkKPj4gLS0gCj4+IDEuOC4zLjEKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0
+aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0
+aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
