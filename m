@@ -2,70 +2,96 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC6891BC3F
-	for <lists.virtualization@lfdr.de>; Mon, 13 May 2019 19:51:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 906391BC49
+	for <lists.virtualization@lfdr.de>; Mon, 13 May 2019 19:52:57 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5A6F5F2C;
-	Mon, 13 May 2019 17:51:46 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C10D5F29;
+	Mon, 13 May 2019 17:52:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1353EE7F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 50841E7F
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 13 May 2019 17:51:44 +0000 (UTC)
+	Mon, 13 May 2019 17:52:52 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 797A342D
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+	[209.85.167.194])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A7AEC42D
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 13 May 2019 17:51:43 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id c66so512366wme.0
+	Mon, 13 May 2019 17:52:51 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id a132so10042890oib.2
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 13 May 2019 10:51:43 -0700 (PDT)
+	Mon, 13 May 2019 10:52:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Y9X01Pkq0XXte5z0O4rYu6NU6lcDo0STfPmFKCJpwI4=;
+	b=MeRY+QdGFjfDKUSuf7dAOysOfrk9IX/j0cXEQeRSHYHXItna9fFtGcb80/8yDKWYkg
+	kEPTsia824fjKznGv99pekCCmDAbBmu8zC8ES2wNtrw9iGNZzpMC40Dc0waTtukABlou
+	DiMjy3wekDMZv+rEku5zj5N9lua8h+E9NR26CrKLNtsmzHWBp5Dk25a7+ZFTFlXvp5bn
+	CKgC360dEZCMTiYCVvVNHBz83ANXriwcLt3Kp71GNpJ+aE+ylpXoUdrY8187QZo8pUjo
+	MSFx+LZTKoW3yj60OEeZpgD+/UaXJIXSDimXFG17gPEeJljKEDt4VY/2RYHjnGTmH4Sh
+	vvCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=YywBhd718B/DKtpyrTe7ekQZi7NNkVMxHXFs5r/UkzU=;
-	b=hUw5RrV+cbFAe1/JJqxxtBW+4GNhX0R5t/NaswyHXV3W3gct+4OJqicJvAXLZmVIeV
-	KduS13Y9rmjjv6MUj2/vdcF2jDhOAkN9Dqv4yQ5SVaoIBeTx5p4keokNQqMMhfPQYsQg
-	iOHVSiAPrfG13QM6QFfQqWwv/70E0NW9vB3s9JPj+69PU8r+32nxmg2hW0MHhzztG5Ri
-	WTsLv2oLZPsgtUlLFv/LTzpt2ef55WXSTbnKjiFs7fUKURSFK5833IRFdU8OUzSKyMJ5
-	1VSr/nTV1N42TUzVScecn7kPd3AYweMY05JJPfTPgdnLtpLSDA5DA6dreyGbpb32R7Yk
-	fcng==
-X-Gm-Message-State: APjAAAWlNNm9jIa2PUSJ9LpRFcPdB1X18tEXqLDpnQMaU5GdlZqEN9pm
-	en4+cvbsGDVQFdiDioPyyECm9g==
-X-Google-Smtp-Source: APXvYqwIUwuqMl8h+g4rfizOwGvKS5bfbCa0CnOcHXmQACgAyWBKmcpVwSB4wHSIlaL+ZzJ2dbSatQ==
-X-Received: by 2002:a1c:f910:: with SMTP id x16mr16414740wmh.114.1557769902025;
-	Mon, 13 May 2019 10:51:42 -0700 (PDT)
-Received: from steredhat (host151-251-static.12-87-b.business.telecomitalia.it.
-	[87.12.251.151]) by smtp.gmail.com with ESMTPSA id
-	y40sm14326745wrd.96.2019.05.13.10.51.40
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 13 May 2019 10:51:41 -0700 (PDT)
-Date: Mon, 13 May 2019 19:51:38 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v2 7/8] vsock/virtio: increase RX buffer size to 64 KiB
-Message-ID: <20190513175138.4yycad2xi65komw6@steredhat>
-References: <20190510125843.95587-1-sgarzare@redhat.com>
-	<20190510125843.95587-8-sgarzare@redhat.com>
-	<bf0416f1-0e69-722d-75ce-3d101e6d7d71@redhat.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Y9X01Pkq0XXte5z0O4rYu6NU6lcDo0STfPmFKCJpwI4=;
+	b=mf0/e5jnMBBJXRci6I7A2oEA4qKdV2YwYq1iTPVui5e0j7IjDMOvg0DdjrKzAxN5Xl
+	mk5/6f7kJ+/ShyiqX2awv8SMxkPBN2dA8vkTQ0lxIqa4B7pLSPKB3KibmBW9UW8WoQXh
+	LB75AV0qPryeM+DETXU8Ogp3kNtb5IeC+ztKpNcU2WkUkOLga0CbZqRn7+cmvA3KPNL2
+	AiyO8iMr70UUIEzWianaPRze6ZB9grCsOWPQ4365oXdOzz3ineARymEyKZBTwoBUVrP3
+	EDYZ+rPn6IdccSrC9pi5ngBUhAb24pdcdx16kE4+drVo9z67L0se4PjSxZqeyTCXDR2s
+	Zrtw==
+X-Gm-Message-State: APjAAAVQ8+AqBoWN+mnsEObHY6dfJF6hOtVKtLZnirXwplxRxH7ld3tk
+	PZ1hxI6InEswUxZEDrgYsoEH4COFcwfvxEbfpXVCgw==
+X-Google-Smtp-Source: APXvYqyHlb4HK4pDjcMSgSQt8NqfXMPz+kR7QQEkSBVnAow9XkYo/o3V5df/EMWF1DvMzRr9ptTlw2tfnEJV3YCdJtY=
+X-Received: by 2002:aca:dfc4:: with SMTP id w187mr254128oig.70.1557769970924; 
+	Mon, 13 May 2019 10:52:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <bf0416f1-0e69-722d-75ce-3d101e6d7d71@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+References: <20190510155202.14737-1-pagupta@redhat.com>
+	<20190510155202.14737-4-pagupta@redhat.com>
+	<CAPcyv4hbVNRFSyS2CTbmO88uhnbeH4eiukAng2cxgbDzLfizwg@mail.gmail.com>
+	<864186878.28040999.1557535549792.JavaMail.zimbra@redhat.com>
+	<CAPcyv4gL3ODfOr52Ztgq7BM4gVf1cih6cj0271gcpVvpi9aFSA@mail.gmail.com>
+	<2003480558.28042237.1557537797923.JavaMail.zimbra@redhat.com>
+	<116369545.28425569.1557768748009.JavaMail.zimbra@redhat.com>
+In-Reply-To: <116369545.28425569.1557768748009.JavaMail.zimbra@redhat.com>
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Mon, 13 May 2019 10:52:39 -0700
+Message-ID: <CAPcyv4genJtCt6dp6N07_6RfPTwC6xXMhLp-dr0GWQy5q52YoA@mail.gmail.com>
+Subject: Re: [Qemu-devel] [PATCH v8 3/6] libnvdimm: add dax_dev sync flag
+To: Pankaj Gupta <pagupta@redhat.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: Jan Kara <jack@suse.cz>, KVM list <kvm@vger.kernel.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>, david <david@fromorbit.com>,
+	Qemu Developers <qemu-devel@nongnu.org>,
 	virtualization@lists.linux-foundation.org,
+	Andreas Dilger <adilger.kernel@dilger.ca>,
+	Ross Zwisler <zwisler@kernel.org>, Andrea Arcangeli <aarcange@redhat.com>,
+	Dave Jiang <dave.jiang@intel.com>, jstaron@google.com,
+	linux-nvdimm <linux-nvdimm@lists.01.org>,
+	Vishal L Verma <vishal.l.verma@intel.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Christoph Hellwig <hch@infradead.org>,
+	Linux ACPI <linux-acpi@vger.kernel.org>, jmoyer <jmoyer@redhat.com>,
+	linux-ext4 <linux-ext4@vger.kernel.org>,
+	Len Brown <lenb@kernel.org>, Adam Borowski <kilobyte@angband.pl>,
+	Rik van Riel <riel@surriel.com>, yuval shaia <yuval.shaia@oracle.com>,
 	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+	Igor Mammedov <imammedo@redhat.com>, lcapitulino@redhat.com,
+	Nitesh Narayan Lal <nilal@redhat.com>, Theodore Ts'o <tytso@mit.edu>,
+	Xiao Guangrong <xiaoguangrong.eric@gmail.com>, cohuck@redhat.com,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	linux-xfs <linux-xfs@vger.kernel.org>,
+	linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	"Darrick J. Wong" <darrick.wong@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,45 +103,50 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gTW9uLCBNYXkgMTMsIDIwMTkgYXQgMDY6MDE6NTJQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDE5LzUvMTAg5LiL5Y2IODo1OCwgU3RlZmFubyBHYXJ6YXJlbGxhIHdyb3Rl
-Ogo+ID4gSW4gb3JkZXIgdG8gaW5jcmVhc2UgaG9zdCAtPiBndWVzdCB0aHJvdWdocHV0IHdpdGgg
-bGFyZ2UgcGFja2V0cywKPiA+IHdlIGNhbiB1c2UgNjQgS2lCIFJYIGJ1ZmZlcnMuCj4gPiAKPiA+
-IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gR2FyemFyZWxsYSA8c2dhcnphcmVAcmVkaGF0LmNvbT4K
-PiA+IC0tLQo+ID4gICBpbmNsdWRlL2xpbnV4L3ZpcnRpb192c29jay5oIHwgMiArLQo+ID4gICAx
-IGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKPiA+IAo+ID4gZGlm
-ZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvdmlydGlvX3Zzb2NrLmggYi9pbmNsdWRlL2xpbnV4L3Zp
-cnRpb192c29jay5oCj4gPiBpbmRleCA4NGI3MjAyNmQzMjcuLjVhOWQyNWJlNzJkZiAxMDA2NDQK
-PiA+IC0tLSBhL2luY2x1ZGUvbGludXgvdmlydGlvX3Zzb2NrLmgKPiA+ICsrKyBiL2luY2x1ZGUv
-bGludXgvdmlydGlvX3Zzb2NrLmgKPiA+IEBAIC0xMCw3ICsxMCw3IEBACj4gPiAgICNkZWZpbmUg
-VklSVElPX1ZTT0NLX0RFRkFVTFRfTUlOX0JVRl9TSVpFCTEyOAo+ID4gICAjZGVmaW5lIFZJUlRJ
-T19WU09DS19ERUZBVUxUX0JVRl9TSVpFCQkoMTAyNCAqIDI1NikKPiA+ICAgI2RlZmluZSBWSVJU
-SU9fVlNPQ0tfREVGQVVMVF9NQVhfQlVGX1NJWkUJKDEwMjQgKiAyNTYpCj4gPiAtI2RlZmluZSBW
-SVJUSU9fVlNPQ0tfREVGQVVMVF9SWF9CVUZfU0laRQkoMTAyNCAqIDQpCj4gPiArI2RlZmluZSBW
-SVJUSU9fVlNPQ0tfREVGQVVMVF9SWF9CVUZfU0laRQkoMTAyNCAqIDY0KQo+ID4gICAjZGVmaW5l
-IFZJUlRJT19WU09DS19NQVhfQlVGX1NJWkUJCTB4RkZGRkZGRkZVTAo+ID4gICAjZGVmaW5lIFZJ
-UlRJT19WU09DS19NQVhfUEtUX0JVRl9TSVpFCQkoMTAyNCAqIDY0KQo+IAo+IAo+IFdlIHByb2Jh
-Ymx5IGRvbid0IHdhbnQgc3VjaCBoaWdoIG9yZGVyIGFsbG9jYXRpb24uIEl0J3MgYmV0dGVyIHRv
-IHN3aXRjaCB0bwo+IHVzZSBvcmRlciAwIHBhZ2VzIGluIHRoaXMgY2FzZS4gU2VlIGFkZF9yZWN2
-YnVmX2JpZygpIGZvciB2aXJ0aW8tbmV0LiBJZiB3ZQo+IGdldCBkYXRhcGF0aCB1bmlmaWVkLCB3
-ZSB3aWxsIGdldCBtb3JlIHN0dWZmcyBzZXQuCgpJSVVDLCB5b3UgYXJlIHN1Z2dlc3RpbmcgdG8g
-YWxsb2NhdGUgb25seSBwYWdlcyBhbmQgcHV0IHRoZW0gaW4gYQpzY2F0dGVybGlzdCwgdGhlbiBh
-ZGQgdGhlbSB0byB0aGUgdmlydHF1ZXVlLgoKSXMgaXQgY29ycmVjdD8KClRoZSBpc3N1ZSB0aGF0
-IEkgaGF2ZSBoZXJlLCBpcyB0aGF0IHRoZSB2aXJ0aW8tdnNvY2sgZ3Vlc3QgZHJpdmVyLCBzZWUK
-dmlydGlvX3Zzb2NrX3J4X2ZpbGwoKSwgYWxsb2NhdGVzIGEgc3RydWN0IHZpcnRpb192c29ja19w
-a3QgdGhhdApjb250YWlucyB0aGUgcm9vbSBmb3IgdGhlIGhlYWRlciwgdGhlbiBhbGxvY2F0ZXMg
-dGhlIGJ1ZmZlciBmb3IgdGhlIHBheWxvYWQuCkF0IHRoaXMgcG9pbnQgaXQgZmlsbHMgdGhlIHNj
-YXR0ZXJsaXN0IHdpdGggdGhlICZ2aXJ0aW9fdnNvY2tfcGt0LmhkciBhbmQgdGhlCmJ1ZmZlciBm
-b3IgdGhlIHBheWxvYWQuCgpDaGFuZ2luZyB0aGlzIHdpbGwgcmVxdWlyZSBzZXZlcmFsIG1vZGlm
-aWNhdGlvbnMsIGFuZCBpZiB3ZSBnZXQgZGF0YXBhdGgKdW5pZmllZCwgSSdtIG5vdCBzdXJlIGl0
-J3Mgd29ydGggaXQuCk9mIGNvdXJzZSwgaWYgd2UgbGVhdmUgdGhlIGRhdGFwYXRocyBzZXBhcmF0
-ZWQsIEknZCBsaWtlIHRvIGRvIHRoYXQgbGF0ZXIuCgpXaGF0IGRvIHlvdSB0aGluaz8KClRoYW5r
-cywKU3RlZmFubwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgt
-Zm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4v
-bGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Mon, May 13, 2019 at 10:32 AM Pankaj Gupta <pagupta@redhat.com> wrote:
+>
+>
+> Hi Dan,
+>
+> While testing device mapper with DAX, I faced a bug with the commit:
+>
+> commit ad428cdb525a97d15c0349fdc80f3d58befb50df
+> Author: Dan Williams <dan.j.williams@intel.com>
+> Date:   Wed Feb 20 21:12:50 2019 -0800
+>
+> When I reverted the condition to old code[1] it worked for me. I
+> am thinking when we map two different devices (e.g with device mapper), will
+> start & end pfn still point to same pgmap? Or there is something else which
+> I am missing here.
+>
+> Note: I tested only EXT4.
+>
+> [1]
+>
+> -               if (pgmap && pgmap->type == MEMORY_DEVICE_FS_DAX)
+> +               end_pgmap = get_dev_pagemap(pfn_t_to_pfn(end_pfn), NULL);
+> +               if (pgmap && pgmap == end_pgmap && pgmap->type == MEMORY_DEVICE_FS_DAX
+> +                               && pfn_t_to_page(pfn)->pgmap == pgmap
+> +                               && pfn_t_to_page(end_pfn)->pgmap == pgmap
+> +                               && pfn_t_to_pfn(pfn) == PHYS_PFN(__pa(kaddr))
+> +                               && pfn_t_to_pfn(end_pfn) == PHYS_PFN(__pa(end_kaddr)))
+
+Ugh, yes, device-mapper continues to be an awkward fit for dax (or
+vice versa). We would either need a way to have a multi-level pfn to
+pagemap lookup for composite devices, or a way to discern that even
+though the pagemap is different that the result is still valid / not
+an indication that we have leaked into an unassociated address range.
+Perhaps a per-daxdev callback for ->dax_supported() so that
+device-mapper internals can be used for this validation.
+
+We need to get that fixed up, but I don't see it as a blocker /
+pre-requisite for virtio-pmem.
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
