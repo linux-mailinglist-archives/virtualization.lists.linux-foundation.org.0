@@ -2,47 +2,47 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37A3D1CB32
-	for <lists.virtualization@lfdr.de>; Tue, 14 May 2019 16:58:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A251D1CB3D
+	for <lists.virtualization@lfdr.de>; Tue, 14 May 2019 16:59:03 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2AFA9D8F;
-	Tue, 14 May 2019 14:58:36 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7CFDCD9E;
+	Tue, 14 May 2019 14:58:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 63EDAAA5
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 96318AA5
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 14 May 2019 14:58:34 +0000 (UTC)
+	Tue, 14 May 2019 14:58:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 18079893
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4EEB2893
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 14 May 2019 14:58:34 +0000 (UTC)
+	Tue, 14 May 2019 14:58:57 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
 	[10.5.11.15])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 40F99308623E;
-	Tue, 14 May 2019 14:58:33 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 6FD17307D980;
+	Tue, 14 May 2019 14:58:56 +0000 (UTC)
 Received: from dhcp201-121.englab.pnq.redhat.com (unknown [10.65.16.148])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 164E65D71E;
-	Tue, 14 May 2019 14:58:12 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B6F085D6A6;
+	Tue, 14 May 2019 14:58:33 +0000 (UTC)
 From: Pankaj Gupta <pagupta@redhat.com>
 To: linux-nvdimm@lists.01.org, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org, linux-acpi@vger.kernel.org,
 	qemu-devel@nongnu.org, linux-ext4@vger.kernel.org,
 	linux-xfs@vger.kernel.org
-Subject: [PATCH v9 6/7] ext4: disable map_sync for async flush
-Date: Tue, 14 May 2019 20:24:21 +0530
-Message-Id: <20190514145422.16923-7-pagupta@redhat.com>
+Subject: [PATCH v9 7/7] xfs: disable map_sync for async flush
+Date: Tue, 14 May 2019 20:24:22 +0530
+Message-Id: <20190514145422.16923-8-pagupta@redhat.com>
 In-Reply-To: <20190514145422.16923-1-pagupta@redhat.com>
 References: <20190514145422.16923-1-pagupta@redhat.com>
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.42]);
-	Tue, 14 May 2019 14:58:33 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.48]);
+	Tue, 14 May 2019 14:58:56 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -78,40 +78,36 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Dont support 'MAP_SYNC' with non-DAX files and DAX files
 with asynchronous dax_device. Virtio pmem provides
 asynchronous host page cache flush mechanism. We don't
-support 'MAP_SYNC' with virtio pmem and ext4.
+support 'MAP_SYNC' with virtio pmem and xfs.
 
 Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
-Reviewed-by: Jan Kara <jack@suse.cz>
+Reviewed-by: Darrick J. Wong <darrick.wong@oracle.com>
 ---
- fs/ext4/file.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ fs/xfs/xfs_file.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/fs/ext4/file.c b/fs/ext4/file.c
-index 98ec11f69cd4..dee549339e13 100644
---- a/fs/ext4/file.c
-+++ b/fs/ext4/file.c
-@@ -360,15 +360,17 @@ static const struct vm_operations_struct ext4_file_vm_ops = {
- static int ext4_file_mmap(struct file *file, struct vm_area_struct *vma)
+diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
+index a7ceae90110e..f17652cca5ff 100644
+--- a/fs/xfs/xfs_file.c
++++ b/fs/xfs/xfs_file.c
+@@ -1203,11 +1203,14 @@ xfs_file_mmap(
+ 	struct file	*filp,
+ 	struct vm_area_struct *vma)
  {
- 	struct inode *inode = file->f_mapping->host;
-+	struct ext4_sb_info *sbi = EXT4_SB(inode->i_sb);
-+	struct dax_device *dax_dev = sbi->s_daxdev;
- 
--	if (unlikely(ext4_forced_shutdown(EXT4_SB(inode->i_sb))))
-+	if (unlikely(ext4_forced_shutdown(sbi)))
- 		return -EIO;
- 
++	struct dax_device 	*dax_dev;
++
++	dax_dev = xfs_find_daxdev_for_inode(file_inode(filp));
  	/*
 -	 * We don't support synchronous mappings for non-DAX files. At least
 -	 * until someone comes with a sensible use case.
 +	 * We don't support synchronous mappings for non-DAX files and
 +	 * for DAX files if underneath dax_device is not synchronous.
  	 */
--	if (!IS_DAX(file_inode(file)) && (vma->vm_flags & VM_SYNC))
+-	if (!IS_DAX(file_inode(filp)) && (vma->vm_flags & VM_SYNC))
 +	if (!daxdev_mapping_supported(vma, dax_dev))
  		return -EOPNOTSUPP;
  
- 	file_accessed(file);
+ 	file_accessed(filp);
 -- 
 2.20.1
 
