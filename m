@@ -2,99 +2,111 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57EEA1F94B
-	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 19:24:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51EA41FBA2
+	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 22:46:26 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id A4F98CDE;
-	Wed, 15 May 2019 17:24:31 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 33CC6C3E;
+	Wed, 15 May 2019 20:46:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 47E7ECC8
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E0A6786D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 17:24:30 +0000 (UTC)
+	Wed, 15 May 2019 20:46:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DE3428D
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6714683A
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 17:24:29 +0000 (UTC)
-Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x4FHN1FA095164 for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 13:24:28 -0400
-Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2sgnshm9mf-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 13:24:28 -0400
-Received: from localhost
-	by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Wed, 15 May 2019 18:24:26 +0100
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
-	by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Wed, 15 May 2019 18:24:22 +0100
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
-	[9.149.105.62])
-	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x4FHOLOm58065140
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Wed, 15 May 2019 17:24:21 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E10E2AE056;
-	Wed, 15 May 2019 17:24:20 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 156E4AE059;
-	Wed, 15 May 2019 17:24:20 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.145.21.52])
-	by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Wed, 15 May 2019 17:24:20 +0000 (GMT)
-Date: Wed, 15 May 2019 19:23:44 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Michael Mueller <mimu@linux.ibm.com>
-Subject: Re: [PATCH 10/10] virtio/s390: make airq summary indicators DMA
-In-Reply-To: <7c21b646-df27-88b6-6b06-3aab7887ff0a@linux.ibm.com>
-References: <20190426183245.37939-1-pasic@linux.ibm.com>
-	<20190426183245.37939-11-pasic@linux.ibm.com>
-	<74ff9a63-891a-7e24-0865-8cc91a95cada@linux.ibm.com>
-	<7c21b646-df27-88b6-6b06-3aab7887ff0a@linux.ibm.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+	Wed, 15 May 2019 20:46:18 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+	[10.5.11.15])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 42E323082B46;
+	Wed, 15 May 2019 20:46:17 +0000 (UTC)
+Received: from [10.36.116.133] (ovpn-116-133.ams2.redhat.com [10.36.116.133])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4C6766266C;
+	Wed, 15 May 2019 20:46:01 +0000 (UTC)
+Subject: Re: [PATCH v9 2/7] virtio-pmem: Add virtio pmem driver
+To: Pankaj Gupta <pagupta@redhat.com>, linux-nvdimm@lists.01.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	kvm@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	linux-acpi@vger.kernel.org, qemu-devel@nongnu.org,
+	linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org, mst@redhat.com
+References: <20190514145422.16923-1-pagupta@redhat.com>
+	<20190514145422.16923-3-pagupta@redhat.com>
+From: David Hildenbrand <david@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+	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
+	SE+xAvmumFBY
+Organization: Red Hat GmbH
+Message-ID: <9f6b1d8e-ef90-7d8b-56da-61a426953ba3@redhat.com>
+Date: Wed, 15 May 2019 22:46:00 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19051517-0016-0000-0000-0000027C1307
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19051517-0017-0000-0000-000032D8E4CC
-Message-Id: <20190515192344.5c57724c.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-15_12:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=760 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1905150105
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+In-Reply-To: <20190514145422.16923-3-pagupta@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.45]);
+	Wed, 15 May 2019 20:46:17 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
-	Thomas Huth <thuth@redhat.com>,
-	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
-	Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>, pmorel@linux.ibm.com,
-	Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Martin Schwidefsky <schwidefsky@de.ibm.com>,
-	Farhan Ali <alifm@linux.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+Cc: jack@suse.cz, david@fromorbit.com, lcapitulino@redhat.com,
+	adilger.kernel@dilger.ca, zwisler@kernel.org,
+	aarcange@redhat.com, dave.jiang@intel.com, jstaron@google.com,
+	darrick.wong@oracle.com, vishal.l.verma@intel.com,
+	willy@infradead.org, hch@infradead.org, jmoyer@redhat.com,
+	nilal@redhat.com, lenb@kernel.org, kilobyte@angband.pl,
+	riel@surriel.com, yuval.shaia@oracle.com, stefanha@redhat.com,
+	pbonzini@redhat.com, dan.j.williams@intel.com, tytso@mit.edu,
+	xiaoguangrong.eric@gmail.com, cohuck@redhat.com,
+	rjw@rjwysocki.net, imammedo@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -106,26 +118,141 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gV2VkLCAxNSBNYXkgMjAxOSAxNTozMzowMiArMDIwMApNaWNoYWVsIE11ZWxsZXIgPG1pbXVA
-bGludXguaWJtLmNvbT4gd3JvdGU6Cgo+ID4+IEBAIC0yNzMsOCArMjgxLDkgQEAgc3RhdGljIHVu
-c2lnbmVkIGxvbmcgZ2V0X2FpcnFfaW5kaWNhdG9yKHN0cnVjdCAKPiA+PiB2aXJ0cXVldWUgKnZx
-c1tdLCBpbnQgbnZxcywKPiA+PiDCoMKgwqDCoMKgIHVuc2lnbmVkIGxvbmcgYml0LCBmbGFnczsK
-PiA+PiDCoMKgwqDCoMKgIGZvciAoaSA9IDA7IGkgPCBNQVhfQUlSUV9BUkVBUyAmJiAhaW5kaWNh
-dG9yX2FkZHI7IGkrKykgewo+ID4+ICvCoMKgwqDCoMKgwqDCoCAvKiBUT0RPOiB0aGlzIHNlZW1z
-IHRvIGJlIHJhY3kgKi8gIAo+ID4gCj4gPiB5ZXMsIG15IG9waW5pb25zIHRvbywgd2FzIGFscmVh
-ZHkgcmFjeSwgaW4gbXkgb3Bpbmlvbiwgd2UgbmVlZCBhbm90aGVyIAo+ID4gcGF0Y2ggaW4gYW5v
-dGhlciBzZXJpZXMgdG8gZml4IHRoaXMuCj4gPiAKPiA+IEhvd2V2ZXIsIG5vdCBzdXJlIGFib3V0
-IHRoZSBjb21tZW50LiAgCj4gCj4gSSB3aWxsIGRyb3AgdGhpcyBjb21tZW50IGZvciB2MiBvZiB0
-aGlzIHBhdGNoIHNlcmllcy4KPiBXZSBzaGFsbCBmaXggdGhlIHJhY2Ugd2l0aCBhIHNlcGFyYXRl
-IHBhdGNoLgoKVW5sZXNzIHRoZXJlIGlzIHNvbWVib2R5IGVhZ2VyIHRvIGFkZHJlc3MgdGhpcyBy
-ZWFsIHNvb24sIEkgd291bGQgcHJlZmVyCmtlZXBpbmcgdGhlIGNvbW1lbnQgYXMgYSByZW1pbmRl
-ci4KClRoYW5rcyBmb3Igc2hvdWxkZXJpbmcgdGhlIHYyIQoKUmVnYXJkcywKSGFsaWwKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9u
-IG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpo
-dHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFs
-aXphdGlvbg==
+> +	vpmem->vdev = vdev;
+> +	vdev->priv = vpmem;
+> +	err = init_vq(vpmem);
+> +	if (err) {
+> +		dev_err(&vdev->dev, "failed to initialize virtio pmem vq's\n");
+> +		goto out_err;
+> +	}
+> +
+> +	virtio_cread(vpmem->vdev, struct virtio_pmem_config,
+> +			start, &vpmem->start);
+> +	virtio_cread(vpmem->vdev, struct virtio_pmem_config,
+> +			size, &vpmem->size);
+> +
+> +	res.start = vpmem->start;
+> +	res.end   = vpmem->start + vpmem->size-1;
+
+nit: " - 1;"
+
+> +	vpmem->nd_desc.provider_name = "virtio-pmem";
+> +	vpmem->nd_desc.module = THIS_MODULE;
+> +
+> +	vpmem->nvdimm_bus = nvdimm_bus_register(&vdev->dev,
+> +						&vpmem->nd_desc);
+> +	if (!vpmem->nvdimm_bus) {
+> +		dev_err(&vdev->dev, "failed to register device with nvdimm_bus\n");
+> +		err = -ENXIO;
+> +		goto out_vq;
+> +	}
+> +
+> +	dev_set_drvdata(&vdev->dev, vpmem->nvdimm_bus);
+> +
+> +	ndr_desc.res = &res;
+> +	ndr_desc.numa_node = nid;
+> +	ndr_desc.flush = async_pmem_flush;
+> +	set_bit(ND_REGION_PAGEMAP, &ndr_desc.flags);
+> +	set_bit(ND_REGION_ASYNC, &ndr_desc.flags);
+> +	nd_region = nvdimm_pmem_region_create(vpmem->nvdimm_bus, &ndr_desc);
+> +	if (!nd_region) {
+> +		dev_err(&vdev->dev, "failed to create nvdimm region\n");
+> +		err = -ENXIO;
+> +		goto out_nd;
+> +	}
+> +	nd_region->provider_data = dev_to_virtio(nd_region->dev.parent->parent);
+> +	return 0;
+> +out_nd:
+> +	nvdimm_bus_unregister(vpmem->nvdimm_bus);
+> +out_vq:
+> +	vdev->config->del_vqs(vdev);
+> +out_err:
+> +	return err;
+> +}
+> +
+> +static void virtio_pmem_remove(struct virtio_device *vdev)
+> +{
+> +	struct nvdimm_bus *nvdimm_bus = dev_get_drvdata(&vdev->dev);
+> +
+> +	nvdimm_bus_unregister(nvdimm_bus);
+> +	vdev->config->del_vqs(vdev);
+> +	vdev->config->reset(vdev);
+> +}
+> +
+> +static struct virtio_driver virtio_pmem_driver = {
+> +	.driver.name		= KBUILD_MODNAME,
+> +	.driver.owner		= THIS_MODULE,
+> +	.id_table		= id_table,
+> +	.probe			= virtio_pmem_probe,
+> +	.remove			= virtio_pmem_remove,
+> +};
+> +
+> +module_virtio_driver(virtio_pmem_driver);
+> +MODULE_DEVICE_TABLE(virtio, id_table);
+> +MODULE_DESCRIPTION("Virtio pmem driver");
+> +MODULE_LICENSE("GPL");
+> diff --git a/drivers/nvdimm/virtio_pmem.h b/drivers/nvdimm/virtio_pmem.h
+> new file mode 100644
+> index 000000000000..ab1da877575d
+> --- /dev/null
+> +++ b/drivers/nvdimm/virtio_pmem.h
+> @@ -0,0 +1,60 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * virtio_pmem.h: virtio pmem Driver
+> + *
+> + * Discovers persistent memory range information
+> + * from host and provides a virtio based flushing
+> + * interface.
+> + **/
+> +
+> +#ifndef _LINUX_VIRTIO_PMEM_H
+> +#define _LINUX_VIRTIO_PMEM_H
+> +
+> +#include <linux/virtio_ids.h>
+> +#include <linux/module.h>
+> +#include <linux/virtio_config.h>
+> +#include <uapi/linux/virtio_pmem.h>
+> +#include <linux/libnvdimm.h>
+> +#include <linux/spinlock.h>
+> +
+> +struct virtio_pmem_request {
+> +	/* Host return status corresponding to flush request */
+> +	int ret;
+> +
+> +	/* command name*/
+> +	char name[16];
+
+So ... why are we sending string commands and expect native-endianess
+integers and don't define a proper request/response structure + request
+types in include/uapi/linux/virtio_pmem.h like
+
+struct virtio_pmem_resp {
+	__virtio32 ret;
+}
+
+#define VIRTIO_PMEM_REQ_TYPE_FLUSH	1
+struct virtio_pmem_req {
+	__virtio16 type;
+}
+
+... and this way we also define a proper endianess format for exchange
+and keep it extensible
+
+@MST, what's your take on this?
+
+
+-- 
+
+Thanks,
+
+David / dhildenb
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
