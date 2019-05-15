@@ -2,72 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C52371E8BF
-	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 09:06:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CEC91E9FC
+	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 10:22:44 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0656CB6C;
-	Wed, 15 May 2019 07:06:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 59350CB6;
+	Wed, 15 May 2019 08:22:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D03A19EE
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id AD9C0C74
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 07:06:00 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9DE3B82C
+	Wed, 15 May 2019 08:22:39 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1335B2C3
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 07:05:59 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id 5BCF9AE52;
-	Wed, 15 May 2019 07:05:57 +0000 (UTC)
-Subject: Re: [PATCH v5 00/20] Share TTM code among DRM framebuffer drivers
-To: daniel@ffwll.ch, airlied@linux.ie, kraxel@redhat.com,
-	christian.koenig@amd.com, ray.huang@amd.com, hdegoede@redhat.com,
-	noralf@tronnes.org, sam@ravnborg.org, z.liuxinliang@hisilicon.com,
-	zourongrong@gmail.com, kong.kongxinwei@hisilicon.com,
-	puck.chen@hisilicon.com
-References: <20190508082630.15116-1-tzimmermann@suse.de>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Openpgp: preference=signencrypt
-Autocrypt: addr=tzimmermann@suse.de; keydata=
-	xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
-	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
-	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
-	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
-	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
-	AAHNKFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmNvbT7CwJQEEwEIAD4W
-	IQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznTtgIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgID
-	AQIeAQIXgAAKCRBoDcEdUwt6I7D7CACBK42XW+7mCiK8ioXMEy1NzGbXC51RzGea8N83oEJS
-	1KVUtQxrkDxgrW/WLSl/TfqHFsJpdEFOv1XubWbleun3uKPy0e5vZCd5UjZPkeNjnqfCYTDy
-	hVVsdOuFbtWDppJyJrThLqr9AgSFmoCNNUt1SVpYEEOLNE6C32BhlnSq21VLC+YXTgO/ZHTa
-	YXkq54hHj63jwrcjkBSCkXLh37kHeqnl++GHpN+3R+o3w2OpwHAlvVjdKPT27v1tVkiydsFG
-	65Vd0n3m/ft+IOrGgxQM1C20uqKvsZGB4r3OGR50ekAybO7sjEJJ1Obl4ge/6RRqcvKz4LMb
-	tGs85D6tPIeFzsBNBFs50uABCADGJj+DP1fk+UWOWrf4O61HTbC4Vr9QD2K4fUUHnzg2B6zU
-	R1BPXqLGG0+lzK8kfYU/F5RjmEcClsIkAaFkg4kzKP14tvY1J5+AV3yNqcdg018HNtiyrSwI
-	E0Yz/qm1Ot2NMZ0DdvVBg22IMsiudQ1tx9CH9mtyTbIXgACvl3PW2o9CxiHPE/bohFhwZwh/
-	kXYYAE51lhinQ3oFEeQZA3w4OTvxSEspiQR8dg8qJJb+YOAc5IKk6sJmmM7JfFMWSr22satM
-	23oQ3WvJb4RV6HTRTAIEyyZS7g2DhiytgMG60t0qdABG5KXSQW+OKlZRpuWwKWaLh3if/p/u
-	69dvpanbABEBAAHCwHwEGAEIACYWIQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznS4AIbDAUJ
-	A8JnAAAKCRBoDcEdUwt6I6X3CACJ8D+TpXBCqJE5xwog08+Dp8uBpx0T9n1wE0GQisZruACW
-	NofYn8PTX9k4wmegDLwt7YQDdKxQ4+eTfZeLNQqWg6OCftH5Kx7sjWnJ09tOgniVdROzWJ7c
-	VJ/i0okazncsJ+nq48UYvRGE1Swh3A4QRIyphWX4OADOBmTFl9ZYNPnh23eaC9WrNvFr7yP7
-	iGjMlfEW8l6Lda//EC5VpXVNza0xeae0zFNst2R9pn+bLkihwDLWxOIyifGRxTqNxoS4I1aw
-	VhxPSVztPMSpIA/sOr/N/p6JrBLn+gui2K6mP7bGb8hF+szfArYqz3T1rv1VzUWAJf5Wre5U
-	iNx9uqqx
-Message-ID: <05884df3-207a-6c2f-226e-d01266f17b77@suse.de>
-Date: Wed, 15 May 2019 09:05:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Wed, 15 May 2019 08:22:39 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id 198so1635747wme.3
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 15 May 2019 01:22:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=PPQSJiwlVW1PE92NeJWVh3dDEhwcNImDy2Q5NEYn4yo=;
+	b=i5ViYn6xQiPCEgCk1y0IsFOugx+2JpTwToZeJT61Vt/lCY1lzDQBbjqzM3dUca7cGF
+	W5QkEvqGQq6hMgrDxkcFON1bAJx8kv0BaUdGSnAAQxaZTygmR97l97uD2DlpYdzbo0Ql
+	SgCDwD5PMajXVa+tEmAs8pN5PzHV6L72suFkyfY12ZJ1MqhrXzfrhF5FmVafgm2n44qJ
+	6aCZapdmmSJbSDSaclKTTmGB5frSzT2JRO3nZwqqvLEbEaIxm3Gp0lYvE94SwQrkWkRX
+	C0mI1LxpMWD/VBZ2ez0Ah+UM7ODNDl5V9XIF3zs51TLTZ8cI1pnxKUAo0NBZA0oHyZwx
+	3AZQ==
+X-Gm-Message-State: APjAAAV362e/ExvdGlclFpkIdDe/o1qUZ3UmXwXEfe8khZXctDHg8GOl
+	916CKeVrgZr8psR/BETHnFK2fw==
+X-Google-Smtp-Source: APXvYqwpXrWkAROlq0ytsK33r1VNVYl9awseeDiyNlDpFhZC69GGaWDX1zimAMr2LLpZz2MeWmJqQg==
+X-Received: by 2002:a1c:2104:: with SMTP id h4mr21953640wmh.146.1557908557541; 
+	Wed, 15 May 2019 01:22:37 -0700 (PDT)
+Received: from steredhat (host151-251-static.12-87-b.business.telecomitalia.it.
+	[87.12.251.151]) by smtp.gmail.com with ESMTPSA id
+	y184sm1579251wmg.7.2019.05.15.01.22.35
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 15 May 2019 01:22:36 -0700 (PDT)
+Date: Wed, 15 May 2019 10:22:33 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v2 7/8] vsock/virtio: increase RX buffer size to 64 KiB
+Message-ID: <20190515082233.iqaibtfdoblijb5z@steredhat>
+References: <20190510125843.95587-1-sgarzare@redhat.com>
+	<20190510125843.95587-8-sgarzare@redhat.com>
+	<bf0416f1-0e69-722d-75ce-3d101e6d7d71@redhat.com>
+	<20190513175138.4yycad2xi65komw6@steredhat>
+	<fd934a4c-f7d2-8a04-ed93-a3b690ed0d79@redhat.com>
+	<20190514162056.5aotcuzsi6e6wya7@steredhat>
+	<646275c5-3530-f428-98da-56da99d72fe1@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190508082630.15116-1-tzimmermann@suse.de>
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+Content-Disposition: inline
+In-Reply-To: <646275c5-3530-f428-98da-56da99d72fe1@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,229 +81,78 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6901261513078876138=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============6901261513078876138==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="KJTTDM2tRLl5hDaHbT7BFpqPcNGxPjHZh"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---KJTTDM2tRLl5hDaHbT7BFpqPcNGxPjHZh
-Content-Type: multipart/mixed; boundary="hPxYpMJ0U06bKQ6OnglNUguNq7CEZCcEa";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, kraxel@redhat.com,
- christian.koenig@amd.com, ray.huang@amd.com, hdegoede@redhat.com,
- noralf@tronnes.org, sam@ravnborg.org, z.liuxinliang@hisilicon.com,
- zourongrong@gmail.com, kong.kongxinwei@hisilicon.com, puck.chen@hisilicon.com
-Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-Message-ID: <05884df3-207a-6c2f-226e-d01266f17b77@suse.de>
-Subject: Re: [PATCH v5 00/20] Share TTM code among DRM framebuffer drivers
-References: <20190508082630.15116-1-tzimmermann@suse.de>
-In-Reply-To: <20190508082630.15116-1-tzimmermann@suse.de>
-
---hPxYpMJ0U06bKQ6OnglNUguNq7CEZCcEa
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-most of this patch set still needs reviews.
-
-If it's too large for merging or reviewing at once, I could move the
-driver changes into separate patch sets. The vbox driver's changes have
-been accepted by Hans already. So only keeping the core changes plus
-vbox would be an option.
-
-Best regards
-Thomas
-
-Am 08.05.19 um 10:26 schrieb Thomas Zimmermann:
-> Several simple framebuffer drivers copy most of the TTM code from each
-> other. The implementation is always the same; except for the name of
-> some data structures.
->=20
-> As recently discussed, this patch set provides generic memory-managemen=
-t
-> code for simple framebuffers with dedicated video memory. It further
-> converts the respective drivers to the generic code. The shared code
-> is basically the same implementation as the one copied among individual=
-
-> drivers.
->=20
-> The patch set contains two major changes: first, it introduces
-> |struct drm_gem_vram_object| and helpers (GEM VRAM). It's a GEM object
-> that is backed by VRAM. The type's purpose is somewhat similar to
-> |struct drm_gem_{cma, shmem}_object|: it provides an commom implementat=
-ion
-> that handles all the basic cases. Second, the patch set introduces
-> |struct drm_vram_mm| and helpers (VRAM MM). It's an implementation of a=
-
-> basic memory manager for VRAM.
->=20
-> Both, GEM VRAM and VRAM MM, support buffer placement in VRAM and system=
-
-> memory. Both can be used independedly from each other if desired by the=
-
-> DRM driver.
->=20
-> Currently ast, bochs, mgag200, vboxvideo and hisilicon/hibmc can use
-> these helpers.
->=20
-> Future directions: with these changes, the respective drivers can also
-> share some of their mode-setting or fbdev code. GEM VRAM's PRIME helper=
-s
-> allow for using the generic fbcon emulation.
->=20
-> The patch set is against a recent drm-tip.
->=20
-> v5:
-> 	* move bochs PRIME functions to GEM VRAM helpers
-> 	* always set struct file_operations.llseek to no_llseek()
-> 	* add WARN_ON_ONCE for pin-count mismatches
-> 	* only allocate 2 entries in placements array
-> v4:
-> 	* cleanups from checkpatch.pl
-> 	* add more documentation for VRAM helpers
-> 	* remove several fixed-size types from interfaces
-> 	* don't make drivers depend on DRM_TTM; auto-selected if necessary
-> 	* use single config optiom DRM_VRAM_HELPER
-> v3:
-> 	* share VRAM MM callback structure among drivers
-> 	* move VRAM MM instances to drm_device and share rsp. code
-> v2:
-> 	* rename |struct drm_gem_ttm_object| to |struct drm_gem_vram_object|
-> 	* rename |struct drm_simple_ttm| to |struct drm_vram_mm|
-> 	* make drm_is_gem_ttm() an internal helper
-> 	* add drm_gem_vram_kmap_at()
-> 	* return is_iomem from kmap functions
-> 	* redefine TTM placement flags for public interface
-> 	* add drm_vram_mm_mmap() helper
-> 	* replace almost all of driver's TTM code with these helpers
-> 	* documentation fixes
->=20
-> Thomas Zimmermann (20):
->   drm: Add |struct drm_gem_vram_object| and helpers
->   drm: Add |struct drm_gem_vram_object| callbacks for |struct
->     ttm_bo_driver|
->   drm: Add |struct drm_gem_vram_object| callbacks for |struct
->     drm_driver|
->   drm: Add drm_gem_vram_fill_create_dumb() to create dumb buffers
->   drm: Add simple PRIME helpers for GEM VRAM
->   drm: Add VRAM MM, a simple memory manager for dedicated VRAM
->   drm: Add default instance for VRAM MM callback functions
->   drm: Integrate VRAM MM into struct drm_device
->   drm/ast: Convert AST driver to |struct drm_gem_vram_object|
->   drm/ast: Convert AST driver to VRAM MM
->   drm/ast: Replace mapping code with drm_gem_vram_{kmap/kunmap}()
->   drm/bochs: Convert bochs driver to |struct drm_gem_vram_object|
->   drm/bochs: Convert bochs driver to VRAM MM
->   drm/mgag200: Convert mgag200 driver to |struct drm_gem_vram_object|
->   drm/mgag200: Convert mgag200 driver to VRAM MM
->   drm/mgag200: Replace mapping code with drm_gem_vram_{kmap/kunmap}()
->   drm/vboxvideo: Convert vboxvideo driver to |struct
->     drm_gem_vram_object|
->   drm/vboxvideo: Convert vboxvideo driver to VRAM MM
->   drm/hisilicon: Convert hibmc-drm driver to |struct
->     drm_gem_vram_object|
->   drm/hisilicon: Convert hibmc-drm driver to VRAM MM
->=20
->  Documentation/gpu/drm-mm.rst                  |  34 +-
->  drivers/gpu/drm/Kconfig                       |   7 +
->  drivers/gpu/drm/Makefile                      |   5 +
->  drivers/gpu/drm/ast/Kconfig                   |   3 +-
->  drivers/gpu/drm/ast/ast_drv.c                 |  13 +-
->  drivers/gpu/drm/ast/ast_drv.h                 |  71 +-
->  drivers/gpu/drm/ast/ast_fb.c                  |  34 +-
->  drivers/gpu/drm/ast/ast_main.c                |  77 +-
->  drivers/gpu/drm/ast/ast_mode.c                | 124 +--
->  drivers/gpu/drm/ast/ast_ttm.c                 | 302 +-------
->  drivers/gpu/drm/bochs/Kconfig                 |   2 +-
->  drivers/gpu/drm/bochs/bochs.h                 |  54 +-
->  drivers/gpu/drm/bochs/bochs_drv.c             |  22 +-
->  drivers/gpu/drm/bochs/bochs_kms.c             |  18 +-
->  drivers/gpu/drm/bochs/bochs_mm.c              | 426 +----------
->  drivers/gpu/drm/drm_gem_vram_helper.c         | 713 ++++++++++++++++++=
-
->  drivers/gpu/drm/drm_vram_helper_common.c      |  98 +++
->  drivers/gpu/drm/drm_vram_mm_helper.c          | 295 ++++++++
->  drivers/gpu/drm/hisilicon/hibmc/Kconfig       |   2 +-
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_de.c    |  21 +-
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   |  14 +-
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h   |  33 +-
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c |  30 +-
->  drivers/gpu/drm/hisilicon/hibmc/hibmc_ttm.c   | 341 +--------
->  drivers/gpu/drm/mgag200/Kconfig               |   2 +-
->  drivers/gpu/drm/mgag200/mgag200_cursor.c      |  88 ++-
->  drivers/gpu/drm/mgag200/mgag200_drv.c         |  13 +-
->  drivers/gpu/drm/mgag200/mgag200_drv.h         |  74 +-
->  drivers/gpu/drm/mgag200/mgag200_fb.c          |  34 +-
->  drivers/gpu/drm/mgag200/mgag200_main.c        |  87 +--
->  drivers/gpu/drm/mgag200/mgag200_mode.c        |  53 +-
->  drivers/gpu/drm/mgag200/mgag200_ttm.c         | 301 +-------
->  drivers/gpu/drm/vboxvideo/Kconfig             |   2 +-
->  drivers/gpu/drm/vboxvideo/vbox_drv.c          |  12 +-
->  drivers/gpu/drm/vboxvideo/vbox_drv.h          |  75 +-
->  drivers/gpu/drm/vboxvideo/vbox_fb.c           |  22 +-
->  drivers/gpu/drm/vboxvideo/vbox_main.c         |  75 +-
->  drivers/gpu/drm/vboxvideo/vbox_mode.c         |  36 +-
->  drivers/gpu/drm/vboxvideo/vbox_ttm.c          | 355 +--------
->  include/drm/drm_device.h                      |   4 +
->  include/drm/drm_gem_vram_helper.h             | 160 ++++
->  include/drm/drm_vram_mm_helper.h              | 102 +++
->  42 files changed, 1797 insertions(+), 2437 deletions(-)
->  create mode 100644 drivers/gpu/drm/drm_gem_vram_helper.c
->  create mode 100644 drivers/gpu/drm/drm_vram_helper_common.c
->  create mode 100644 drivers/gpu/drm/drm_vram_mm_helper.c
->  create mode 100644 include/drm/drm_gem_vram_helper.h
->  create mode 100644 include/drm/drm_vram_mm_helper.h
->=20
-> --
-> 2.21.0
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah
-HRB 21284 (AG N=C3=BCrnberg)
-
-
---hPxYpMJ0U06bKQ6OnglNUguNq7CEZCcEa--
-
---KJTTDM2tRLl5hDaHbT7BFpqPcNGxPjHZh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAlzbulIACgkQaA3BHVML
-eiOS6wf/TT7ypWHmYfT8+m6Hmr6tz4svrpSc6O3X2BDPy+oeIDUUjkOme5SdxiDG
-pqWNOUnBVCU+yHkP4MFL0W6lUR6MQOq5pbgCaMmCTp5zcHPPtv7qBU2YQLiUyylX
-K2uF07mAhMy3BHRk97O0hq5tbPHK/WecZluhtTAFHUh6byFgGClydOQqIM6ShfgZ
-ai5WCQ/b77ei0p4bbXx2G7jSCL5Th1Vs0O6Hoq1xcF2JQT2Pfwhp7eeKwSqX6vaQ
-Qp9HJ6dCL+EeeSEfZdDugTPUn8FJCuS05/yWzMaJ7Jv7drrI3TT3EDbFHdvCfRXX
-TXTemiaHod52IXBfvs570yiRurcNUA==
-=4EhR
------END PGP SIGNATURE-----
-
---KJTTDM2tRLl5hDaHbT7BFpqPcNGxPjHZh--
-
---===============6901261513078876138==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6901261513078876138==--
+T24gV2VkLCBNYXkgMTUsIDIwMTkgYXQgMTA6NTA6NDNBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiAKPiBPbiAyMDE5LzUvMTUg5LiK5Y2IMTI6MjAsIFN0ZWZhbm8gR2FyemFyZWxsYSB3cm90
+ZToKPiA+IE9uIFR1ZSwgTWF5IDE0LCAyMDE5IGF0IDExOjM4OjA1QU0gKzA4MDAsIEphc29uIFdh
+bmcgd3JvdGU6Cj4gPiA+IE9uIDIwMTkvNS8xNCDkuIrljYgxOjUxLCBTdGVmYW5vIEdhcnphcmVs
+bGEgd3JvdGU6Cj4gPiA+ID4gT24gTW9uLCBNYXkgMTMsIDIwMTkgYXQgMDY6MDE6NTJQTSArMDgw
+MCwgSmFzb24gV2FuZyB3cm90ZToKPiA+ID4gPiA+IE9uIDIwMTkvNS8xMCDkuIvljYg4OjU4LCBT
+dGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6Cj4gPiA+ID4gPiA+IEluIG9yZGVyIHRvIGluY3JlYXNl
+IGhvc3QgLT4gZ3Vlc3QgdGhyb3VnaHB1dCB3aXRoIGxhcmdlIHBhY2tldHMsCj4gPiA+ID4gPiA+
+IHdlIGNhbiB1c2UgNjQgS2lCIFJYIGJ1ZmZlcnMuCj4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiBT
+aWduZWQtb2ZmLWJ5OiBTdGVmYW5vIEdhcnphcmVsbGEgPHNnYXJ6YXJlQHJlZGhhdC5jb20+Cj4g
+PiA+ID4gPiA+IC0tLQo+ID4gPiA+ID4gPiAgICAgaW5jbHVkZS9saW51eC92aXJ0aW9fdnNvY2su
+aCB8IDIgKy0KPiA+ID4gPiA+ID4gICAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwg
+MSBkZWxldGlvbigtKQo+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gZGlmZiAtLWdpdCBhL2luY2x1
+ZGUvbGludXgvdmlydGlvX3Zzb2NrLmggYi9pbmNsdWRlL2xpbnV4L3ZpcnRpb192c29jay5oCj4g
+PiA+ID4gPiA+IGluZGV4IDg0YjcyMDI2ZDMyNy4uNWE5ZDI1YmU3MmRmIDEwMDY0NAo+ID4gPiA+
+ID4gPiAtLS0gYS9pbmNsdWRlL2xpbnV4L3ZpcnRpb192c29jay5oCj4gPiA+ID4gPiA+ICsrKyBi
+L2luY2x1ZGUvbGludXgvdmlydGlvX3Zzb2NrLmgKPiA+ID4gPiA+ID4gQEAgLTEwLDcgKzEwLDcg
+QEAKPiA+ID4gPiA+ID4gICAgICNkZWZpbmUgVklSVElPX1ZTT0NLX0RFRkFVTFRfTUlOX0JVRl9T
+SVpFCTEyOAo+ID4gPiA+ID4gPiAgICAgI2RlZmluZSBWSVJUSU9fVlNPQ0tfREVGQVVMVF9CVUZf
+U0laRQkJKDEwMjQgKiAyNTYpCj4gPiA+ID4gPiA+ICAgICAjZGVmaW5lIFZJUlRJT19WU09DS19E
+RUZBVUxUX01BWF9CVUZfU0laRQkoMTAyNCAqIDI1NikKPiA+ID4gPiA+ID4gLSNkZWZpbmUgVklS
+VElPX1ZTT0NLX0RFRkFVTFRfUlhfQlVGX1NJWkUJKDEwMjQgKiA0KQo+ID4gPiA+ID4gPiArI2Rl
+ZmluZSBWSVJUSU9fVlNPQ0tfREVGQVVMVF9SWF9CVUZfU0laRQkoMTAyNCAqIDY0KQo+ID4gPiA+
+ID4gPiAgICAgI2RlZmluZSBWSVJUSU9fVlNPQ0tfTUFYX0JVRl9TSVpFCQkweEZGRkZGRkZGVUwK
+PiA+ID4gPiA+ID4gICAgICNkZWZpbmUgVklSVElPX1ZTT0NLX01BWF9QS1RfQlVGX1NJWkUJCSgx
+MDI0ICogNjQpCj4gPiA+ID4gPiBXZSBwcm9iYWJseSBkb24ndCB3YW50IHN1Y2ggaGlnaCBvcmRl
+ciBhbGxvY2F0aW9uLiBJdCdzIGJldHRlciB0byBzd2l0Y2ggdG8KPiA+ID4gPiA+IHVzZSBvcmRl
+ciAwIHBhZ2VzIGluIHRoaXMgY2FzZS4gU2VlIGFkZF9yZWN2YnVmX2JpZygpIGZvciB2aXJ0aW8t
+bmV0LiBJZiB3ZQo+ID4gPiA+ID4gZ2V0IGRhdGFwYXRoIHVuaWZpZWQsIHdlIHdpbGwgZ2V0IG1v
+cmUgc3R1ZmZzIHNldC4KPiA+ID4gPiBJSVVDLCB5b3UgYXJlIHN1Z2dlc3RpbmcgdG8gYWxsb2Nh
+dGUgb25seSBwYWdlcyBhbmQgcHV0IHRoZW0gaW4gYQo+ID4gPiA+IHNjYXR0ZXJsaXN0LCB0aGVu
+IGFkZCB0aGVtIHRvIHRoZSB2aXJ0cXVldWUuCj4gPiA+ID4gCj4gPiA+ID4gSXMgaXQgY29ycmVj
+dD8KPiA+ID4gCj4gPiA+IFllcyBzaW5jZSB5b3UgYXJlIHVzaW5nOgo+ID4gPiAKPiA+ID4gIMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwa3QtPmJ1ZiA9IGttYWxsb2MoYnVmX2xlbiwg
+R0ZQX0tFUk5FTCk7Cj4gPiA+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKCFw
+a3QtPmJ1Zikgewo+ID4gPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCB2aXJ0aW9fdHJhbnNwb3J0X2ZyZWVfcGt0KHBrdCk7Cj4gPiA+ICDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwo+ID4gPiAgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0KPiA+ID4gCj4gPiA+IFRoaXMgaXMgbGlrZWx5IHRv
+IGZhaWwgd2hlbiB0aGUgbWVtb3J5IGlzIGZyYWdtZW50ZWQgd2hpY2ggaXMga2luZCBvZgo+ID4g
+PiBmcmFnaWxlLgo+ID4gPiAKPiA+ID4gCj4gPiBUaGFua3MgZm9yIHBvaW50aW5nIHRoYXQgb3V0
+Lgo+ID4gCj4gPiA+ID4gVGhlIGlzc3VlIHRoYXQgSSBoYXZlIGhlcmUsIGlzIHRoYXQgdGhlIHZp
+cnRpby12c29jayBndWVzdCBkcml2ZXIsIHNlZQo+ID4gPiA+IHZpcnRpb192c29ja19yeF9maWxs
+KCksIGFsbG9jYXRlcyBhIHN0cnVjdCB2aXJ0aW9fdnNvY2tfcGt0IHRoYXQKPiA+ID4gPiBjb250
+YWlucyB0aGUgcm9vbSBmb3IgdGhlIGhlYWRlciwgdGhlbiBhbGxvY2F0ZXMgdGhlIGJ1ZmZlciBm
+b3IgdGhlIHBheWxvYWQuCj4gPiA+ID4gQXQgdGhpcyBwb2ludCBpdCBmaWxscyB0aGUgc2NhdHRl
+cmxpc3Qgd2l0aCB0aGUgJnZpcnRpb192c29ja19wa3QuaGRyIGFuZCB0aGUKPiA+ID4gPiBidWZm
+ZXIgZm9yIHRoZSBwYXlsb2FkLgo+ID4gPiAKPiA+ID4gVGhpcyBwYXJ0IHNob3VsZCBiZSBmaW5l
+IHNpbmNlIHdoYXQgaXMgbmVlZGVkIGlzIGp1c3QgYWRkaW5nIG1vcmUgcGFnZXMgdG8KPiA+ID4g
+c2dbXSBhbmQgY2FsbCB2aXJ0dXFldWV1X2FkZF9zZygpLgo+ID4gPiAKPiA+ID4gCj4gPiBZZXMs
+IEkgYWdyZWUuCj4gPiAKPiA+ID4gPiBDaGFuZ2luZyB0aGlzIHdpbGwgcmVxdWlyZSBzZXZlcmFs
+IG1vZGlmaWNhdGlvbnMsIGFuZCBpZiB3ZSBnZXQgZGF0YXBhdGgKPiA+ID4gPiB1bmlmaWVkLCBJ
+J20gbm90IHN1cmUgaXQncyB3b3J0aCBpdC4KPiA+ID4gPiBPZiBjb3Vyc2UsIGlmIHdlIGxlYXZl
+IHRoZSBkYXRhcGF0aHMgc2VwYXJhdGVkLCBJJ2QgbGlrZSB0byBkbyB0aGF0IGxhdGVyLgo+ID4g
+PiA+IAo+ID4gPiA+IFdoYXQgZG8geW91IHRoaW5rPwo+ID4gPiAKPiA+ID4gRm9yIHRoZSBkcml2
+ZXIgaXQgc2VsZiwgaXQgc2hvdWxkIG5vdCBiZSBoYXJkLiBCdXQgSSB0aGluayB5b3UgbWVhbiB0
+aGUKPiA+ID4gaXNzdWUgb2YgZS5nIHZpcnRpb192c29ja19wa3QgaXRzZWxmIHdoaWNoIGRvZXNu
+J3Qgc3VwcG9ydCBzZy4gRm9yIHNob3J0Cj4gPiA+IHRpbWUsIG1heWJlIHdlIGNhbiB1c2Uga3Zl
+YyBpbnN0ZWFkLgo+ID4gSSdsbCB0cnkgdG8gdXNlIGt2ZWMgaW4gdGhlIHZpcnRpb192c29ja19w
+a3QuCj4gPiAKPiA+IFNpbmNlIHRoaXMgc3RydWN0IGlzIHNoYXJlZCBhbHNvIHdpdGggdGhlIGhv
+c3QgZHJpdmVyICh2aG9zdC12c29jayksCj4gPiBJIGhvcGUgdGhlIGNoYW5nZXMgY291bGQgYmUg
+bGltaXRlZCwgb3RoZXJ3aXNlIHdlIGNhbiByZW1vdmUgdGhlIGxhc3QgMgo+ID4gcGF0Y2hlcyBv
+ZiB0aGUgc2VyaWVzIGZvciBub3csIGxlYXZpbmcgdGhlIFJYIGJ1ZmZlciBzaXplIHRvIDRLQi4K
+PiAKPiAKPiBZZXMgYW5kIGlmIGl0IGludHJvZHVjZXMgdG9vIG11Y2ggY2hhbmdlcywgbWF5YmUg
+d2UgY2FuIGRvIHRoZSA2NEtCIGJ1ZmZlcgo+IGluIHRoZSBmdXR1cmUgd2l0aCB0aGUgY29udmVy
+c2lvbiBvZiB1c2luZyBza2Igd2hlcmUgc3VwcG9ydHMgcGFnZSBmcmFnCj4gbmF0aXZlbHkuCgpZ
+ZXMsIEkgY29tcGxldGVseSBhZ3JlZSEKClRoYW5rcywKU3RlZmFubwpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxp
+c3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0
+cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
