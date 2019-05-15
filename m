@@ -2,93 +2,97 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C86551FBB5
-	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 22:49:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FA021FBC3
+	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 22:52:49 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2C695D7A;
-	Wed, 15 May 2019 20:49:11 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id EEF7ED38;
+	Wed, 15 May 2019 20:52:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 54806265
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id EDFBE265
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 20:49:09 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
-	[209.85.167.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DC0678D
+	Wed, 15 May 2019 20:52:42 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5886D8D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 20:49:08 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id f4so862599oib.4
+	Wed, 15 May 2019 20:52:42 +0000 (UTC)
+Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x4FKgAxi074605 for <virtualization@lists.linux-foundation.org>;
+	Wed, 15 May 2019 16:52:41 -0400
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2sgpw0gv4u-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 13:49:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=e4kuu9yC2IGARpDlHp3ONWA+CXX8IcBRGF2a1wpOmUI=;
-	b=Xrsk/LtY64WEnj9luwHstQr/vldj3FFs0v4BjRZAzdGdLcSlF9SqwRFLIkegzPHAwK
-	4BwtJSHQVRbiUejXql7JFlZJLxJDitd+1N9vZBZp9AH7V4H3tF8C8YrWWR2scfqIvklg
-	K3++RgNbjyAcHvsO/gtBY9KzOiuwBdRxZ9uNTFcjGbcpIU3ySWcKBqx1i7aYED7uA8We
-	wfFf0dayHlB1izT9baOTeQixtzK3OgVjTQ6b6HX+qmLkPmX0ef8xTCNg+LPpZh1HotLT
-	NK2turIQ2FHb03Mu3tIJfJn8adJ/JeZmQFe6DvMuBLC9/f4qF9rSl3qlHKudtMX7ueMn
-	BOXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=e4kuu9yC2IGARpDlHp3ONWA+CXX8IcBRGF2a1wpOmUI=;
-	b=ETVodRAIoe1qlKr9O6D2vIMGSYHAO/gGhZjz39S5EhYnnxlQ5USod7/dF1v0EtXiua
-	dcivMmh7bxWujimWSj1gyimYTkmL6+CE7iSfRRL95WuIvmAgb5FwS1TIqrfxDKW0Tv5b
-	qKlnBsdP97p1b9cw5URGEMzSfvhhkEh0gJQ1kcSgCYXgRCY26m/BtttbvMqzHvqVoLk/
-	MPXNIAhXF4qFUun+gUXGmdlxe0DZKA7iLj7zgGSiVz6gZ8Lq6Lq1XWksaBh3CX/GE/B8
-	6qsfee1/24AxjNqg+s0vl6azj4QjV92pr2Hw45VdcZMPGmk47xKUEIfpTXoJH5yLGuFJ
-	SCCw==
-X-Gm-Message-State: APjAAAXIxjo8l1bz55uuwNGtxvRp1If4Ov5AM1kkOmWL2nhSrhhXOq4c
-	S3IkgEEfyFdNRncMkYZg/L5Yf2tbMT+71qANKdlmBA==
-X-Google-Smtp-Source: APXvYqyO6g2r/WhDKBmVOOTl4sYnhhJyyQJvRNxhfafK8+4MMPFpeaS+xqdpic/meUQecZLwA+0URassFkWkwJjqLWc=
-X-Received: by 2002:aca:b641:: with SMTP id g62mr5296871oif.149.1557953347952; 
-	Wed, 15 May 2019 13:49:07 -0700 (PDT)
+	Wed, 15 May 2019 16:52:41 -0400
+Received: from localhost
+	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pasic@linux.ibm.com>; Wed, 15 May 2019 21:52:38 +0100
+Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
+	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Wed, 15 May 2019 21:52:35 +0100
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
+	[9.149.105.58])
+	by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x4FKqYUb42860690
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Wed, 15 May 2019 20:52:34 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 27CA84C058;
+	Wed, 15 May 2019 20:52:34 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 602F04C04E;
+	Wed, 15 May 2019 20:52:33 +0000 (GMT)
+Received: from oc2783563651 (unknown [9.145.21.52])
+	by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Wed, 15 May 2019 20:52:33 +0000 (GMT)
+Date: Wed, 15 May 2019 22:51:58 +0200
+From: Halil Pasic <pasic@linux.ibm.com>
+To: Cornelia Huck <cohuck@redhat.com>
+Subject: Re: [PATCH 06/10] s390/cio: add basic protected virtualization support
+In-Reply-To: <20190513114136.783c851c.cohuck@redhat.com>
+References: <20190426183245.37939-1-pasic@linux.ibm.com>
+	<20190426183245.37939-7-pasic@linux.ibm.com>
+	<20190513114136.783c851c.cohuck@redhat.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20190514145422.16923-1-pagupta@redhat.com>
-	<20190514145422.16923-5-pagupta@redhat.com>
-In-Reply-To: <20190514145422.16923-5-pagupta@redhat.com>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Wed, 15 May 2019 13:48:57 -0700
-Message-ID: <CAPcyv4jp+9eBQMX+KXhT1oZRkxLeCp9r9g9hFUCRw=OcuQ9wmQ@mail.gmail.com>
-Subject: Re: [PATCH v9 4/7] dm: enable synchronous dax
-To: Mike Snitzer <snitzer@redhat.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-TM-AS-GCONF: 00
+x-cbid: 19051520-0008-0000-0000-000002E7156C
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19051520-0009-0000-0000-00002253B66C
+Message-Id: <20190515225158.301af387.pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-15_15:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=2 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905150126
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Pankaj Gupta <pagupta@redhat.com>, cohuck@redhat.com,
-	Jan Kara <jack@suse.cz>, KVM list <kvm@vger.kernel.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>, david <david@fromorbit.com>,
-	Qemu Developers <qemu-devel@nongnu.org>,
+Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
+	Sebastian Ott <sebott@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	device-mapper development <dm-devel@redhat.com>,
-	Andreas Dilger <adilger.kernel@dilger.ca>,
-	Ross Zwisler <zwisler@kernel.org>, Andrea Arcangeli <aarcange@redhat.com>,
-	Dave Jiang <dave.jiang@intel.com>, jstaron@google.com,
-	linux-nvdimm <linux-nvdimm@lists.01.org>,
-	Vishal L Verma <vishal.l.verma@intel.com>,
-	Matthew Wilcox <willy@infradead.org>,
 	Christoph Hellwig <hch@infradead.org>,
-	Linux ACPI <linux-acpi@vger.kernel.org>, jmoyer <jmoyer@redhat.com>,
-	linux-ext4 <linux-ext4@vger.kernel.org>,
-	Len Brown <lenb@kernel.org>, Adam Borowski <kilobyte@angband.pl>,
-	Rik van Riel <riel@surriel.com>, yuval shaia <yuval.shaia@oracle.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, lcapitulino@redhat.com,
-	Nitesh Narayan Lal <nilal@redhat.com>, Theodore Ts'o <tytso@mit.edu>,
-	Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
-	"Darrick J. Wong" <darrick.wong@oracle.com>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	linux-xfs <linux-xfs@vger.kernel.org>,
-	linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-	Igor Mammedov <imammedo@redhat.com>
+	Martin Schwidefsky <schwidefsky@de.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -105,63 +109,160 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-[ add Mike and dm-devel ]
+On Mon, 13 May 2019 11:41:36 +0200
+Cornelia Huck <cohuck@redhat.com> wrote:
 
-Mike, any concerns with the below addition to the device-mapper-dax
-implementation?
+> On Fri, 26 Apr 2019 20:32:41 +0200
+> Halil Pasic <pasic@linux.ibm.com> wrote:
+> 
+> > As virtio-ccw devices are channel devices, we need to use the dma area
+> > for any communication with the hypervisor.
+> > 
+> > This patch addresses the most basic stuff (mostly what is required for
+> > virtio-ccw), and does take care of QDIO or any devices.
+> 
+> "does not take care of QDIO", surely? 
 
-On Tue, May 14, 2019 at 7:58 AM Pankaj Gupta <pagupta@redhat.com> wrote:
->
->  This patch sets dax device 'DAXDEV_SYNC' flag if all the target
->  devices of device mapper support synchrononous DAX. If device
->  mapper consists of both synchronous and asynchronous dax devices,
->  we don't set 'DAXDEV_SYNC' flag.
->
-> Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
-> ---
->  drivers/md/dm-table.c | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->
-> diff --git a/drivers/md/dm-table.c b/drivers/md/dm-table.c
-> index cde3b49b2a91..1cce626ff576 100644
-> --- a/drivers/md/dm-table.c
-> +++ b/drivers/md/dm-table.c
-> @@ -886,10 +886,17 @@ static int device_supports_dax(struct dm_target *ti, struct dm_dev *dev,
->         return bdev_dax_supported(dev->bdev, PAGE_SIZE);
->  }
->
-> +static int device_synchronous(struct dm_target *ti, struct dm_dev *dev,
-> +                              sector_t start, sector_t len, void *data)
-> +{
-> +       return dax_synchronous(dev->dax_dev);
-> +}
-> +
->  static bool dm_table_supports_dax(struct dm_table *t)
->  {
->         struct dm_target *ti;
->         unsigned i;
-> +       bool dax_sync = true;
->
->         /* Ensure that all targets support DAX. */
->         for (i = 0; i < dm_table_get_num_targets(t); i++) {
-> @@ -901,7 +908,14 @@ static bool dm_table_supports_dax(struct dm_table *t)
->                 if (!ti->type->iterate_devices ||
->                     !ti->type->iterate_devices(ti, device_supports_dax, NULL))
->                         return false;
-> +
-> +               /* Check devices support synchronous DAX */
-> +               if (dax_sync &&
-> +                   !ti->type->iterate_devices(ti, device_synchronous, NULL))
-> +                       dax_sync = false;
->         }
-> +       if (dax_sync)
-> +               set_dax_synchronous(t->md->dax_dev);
->
->         return true;
->  }
-> --
-> 2.20.1
->
+I did not bother making the QDIO library code use dma memory for
+anything that is conceptually dma memory. AFAIK QDIO is out of scope for
+prot virt for now. If one were to do some emulated qdio with prot virt
+guests, one wound need to make a bunch of things shared.
+
+> (Also, what does "any devices"
+> mean? Do you mean "every arbitrary device", perhaps?)
+
+What I mean is: this patch takes care of the core stuff, but any
+particular device is likely to have to do more -- that is it ain't all
+the cio devices support prot virt with this patch. For example
+virtio-ccw needs to make sure that the ccws constituting the channel
+programs, as well as the data pointed by the ccws is shared. If one
+would want to make vfio-ccw DASD pass-through work under prot virt, one
+would need to make sure, that everything that needs to be shared is
+shared (data buffers, channel programs).
+
+Does is clarify things?
+
+> 
+> > 
+> > An interesting side effect is that virtio structures are now going to
+> > get allocated in 31 bit addressable storage.
+> 
+> Hm...
+> 
+> > 
+> > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> > ---
+> >  arch/s390/include/asm/ccwdev.h   |  4 +++
+> >  drivers/s390/cio/ccwreq.c        |  8 ++---
+> >  drivers/s390/cio/device.c        | 65 +++++++++++++++++++++++++++++++++-------
+> >  drivers/s390/cio/device_fsm.c    | 40 ++++++++++++-------------
+> >  drivers/s390/cio/device_id.c     | 18 +++++------
+> >  drivers/s390/cio/device_ops.c    | 21 +++++++++++--
+> >  drivers/s390/cio/device_pgid.c   | 20 ++++++-------
+> >  drivers/s390/cio/device_status.c | 24 +++++++--------
+> >  drivers/s390/cio/io_sch.h        | 21 +++++++++----
+> >  drivers/s390/virtio/virtio_ccw.c | 10 -------
+> >  10 files changed, 148 insertions(+), 83 deletions(-)
+> 
+> (...)
+> 
+> > diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
+> > index 6d989c360f38..bb7a92316fc8 100644
+> > --- a/drivers/s390/virtio/virtio_ccw.c
+> > +++ b/drivers/s390/virtio/virtio_ccw.c
+> > @@ -66,7 +66,6 @@ struct virtio_ccw_device {
+> >  	bool device_lost;
+> >  	unsigned int config_ready;
+> >  	void *airq_info;
+> > -	u64 dma_mask;
+> >  };
+> >  
+> >  struct vq_info_block_legacy {
+> > @@ -1255,16 +1254,7 @@ static int virtio_ccw_online(struct ccw_device *cdev)
+> >  		ret = -ENOMEM;
+> >  		goto out_free;
+> >  	}
+> > -
+> >  	vcdev->vdev.dev.parent = &cdev->dev;
+> > -	cdev->dev.dma_mask = &vcdev->dma_mask;
+> > -	/* we are fine with common virtio infrastructure using 64 bit DMA */
+> > -	ret = dma_set_mask_and_coherent(&cdev->dev, DMA_BIT_MASK(64));
+> > -	if (ret) {
+> > -		dev_warn(&cdev->dev, "Failed to enable 64-bit DMA.\n");
+> > -		goto out_free;
+> > -	}
+> 
+> This means that vring structures now need to fit into 31 bits as well,
+> I think?
+
+Nod.
+
+> Is there any way to reserve the 31 bit restriction for channel
+> subsystem structures and keep vring in the full 64 bit range? (Or am I
+> fundamentally misunderstanding something?)
+> 
+
+At the root of this problem is that the DMA API basically says devices
+may have addressing limitations expressed by the dma_mask, while our
+addressing limitations are not coming from the device but from the IO
+arch: e.g. orb.cpa and ccw.cda are 31 bit addresses. In our case it
+depends on how and for what is the device going to use the memory (e.g.
+buffers addressed by MIDA vs IDA vs direct).
+
+Virtio uses the DMA properties of the parent, that is in our case the
+struct device embedded in struct ccw_device.
+
+The previous version (RFC) used to allocate all the cio DMA stuff from
+this global cio_dma_pool using the css0.dev for the DMA API
+interactions. And we set *css0.dev.dma_mask == DMA_BIT_MASK(31) so
+e.g. the allocated ccws are 31 bit addressable.
+
+But I was asked to change this so that when I allocate DMA memory for a
+channel program of particular ccw device, a struct device of that ccw
+device is used as the first argument of dma_alloc_coherent().
+
+Considering
+
+void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
+                gfp_t flag, unsigned long attrs)
+{
+        const struct dma_map_ops *ops = get_dma_ops(dev);
+        void *cpu_addr;
+
+        WARN_ON_ONCE(dev && !dev->coherent_dma_mask);
+
+        if (dma_alloc_from_dev_coherent(dev, size, dma_handle, &cpu_addr))
+                return cpu_addr;
+
+        /* let the implementation decide on the zone to allocate from: */
+        flag &= ~(__GFP_DMA | __GFP_DMA32 | __GFP_HIGHMEM);
+
+that is the GFP flags dropped that implies that we really want
+cdev->dev restricted to 31 bit addressable memory because we can't tell
+(with the current common DMA code) hey but this piece of DMA mem you
+are abot to allocate for me must be 31 bit addressable (using GFP_DMA
+as we usually do).
+
+So, as described in the commit message, the vring stuff being forced
+into ZONE_DMA is an unfortunate consequence of this all.
+
+A side note: making the subchannel device 'own' the DMA stuff of a ccw
+device (something that was discussed in the RFC thread) is tricky
+because the ccw device may outlive the subchannel (all that orphan
+stuff).
+
+So the answer is: it is technically possible (e.g. see RFC) but it comes
+at a price, and I see no obviously brilliant solution.
+
+Regards,
+Halil
+
+> > -
+> >  	vcdev->config_block = kzalloc(sizeof(*vcdev->config_block),
+> >  				   GFP_DMA | GFP_KERNEL);
+> >  	if (!vcdev->config_block) {
+> 
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
