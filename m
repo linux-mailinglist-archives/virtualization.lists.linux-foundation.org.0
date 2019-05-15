@@ -2,93 +2,99 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D4D71FC14
-	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 23:07:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63DE61FC17
+	for <lists.virtualization@lfdr.de>; Wed, 15 May 2019 23:09:03 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 120BAD85;
-	Wed, 15 May 2019 21:07:39 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 98FE2D7F;
+	Wed, 15 May 2019 21:08:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 64E0B265
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id BDFE4265
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 21:07:37 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
-	[209.85.210.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D181383A
+	Wed, 15 May 2019 21:08:58 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DF10F83A
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 21:07:36 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id n14so1425051otk.2
+	Wed, 15 May 2019 21:08:56 +0000 (UTC)
+Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x4FL38sd147393 for <virtualization@lists.linux-foundation.org>;
+	Wed, 15 May 2019 17:08:56 -0400
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2sgsq9huej-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 15 May 2019 14:07:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=zEAiaEFTDEo5AHTXNi1igG//m3yl73MYATUt/TyQM/s=;
-	b=JldDYW+LTAR5BoMmvzt3GhFBKSNFCQljO95A7CQF8h7lezT59wkCmoZR8HlZNeo3ZX
-	ACz18is11PqZLJkpbZTbPrVApVsXuwCwQzpumDKhMYUGYyeEKSs4shc89Funjj7rmnrR
-	zPCblVOMVW4B/FdfDdDBm0eQtlDpcEoDreFJYHB2TrhXh9porw+VCF0gkgtOPIdPF4AY
-	hPK/m0cAXNVhKubNUJt+B+Ge41ks183CJ7yggGXayFgFqQhy+nfr59BSRoNiAIUor77P
-	UmqXqpMAHdjAUWsPGhNLbi9iUpZ9FsKZwds3Nd3zmasJxQ+15Rm38l4yGAgNrmpf7grH
-	OFBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=zEAiaEFTDEo5AHTXNi1igG//m3yl73MYATUt/TyQM/s=;
-	b=RP4qw5hblb9MuG4PjlmBkZv2BmpqZRtOC+D+yxnUFHy+vFN8aKIZrOSneUwIj+5jos
-	YcT33EXZpo2B609a4GHdJlyt6lZf0P7fIMgAJjCKHuwjr+Ndft/4GXUS80dCyiwfwomF
-	Elt5pL6QpjDuTM6fZnybSioMwlM3W+Cwmu1jGt4fVXBCGeblxzUl8wcPt6vHYW9zaFd0
-	xt0+lDNjlFYcb0vs30G/bs9qRmCPRkah4wdNBMHdB91jv7ivLB+6snJzaKz3t+5NOirL
-	SbWWuo4xagWWbZokAAWlfPDvqJdtJlepLHW1/9oU/7nr+nPSJX53lgOs8eUX51nZy8ek
-	bnCw==
-X-Gm-Message-State: APjAAAVuSSEF1i2KGN216toWySxBF1lqRv15c1oBuGo10bzQDiKg+u+F
-	NTsxSUtK2G9ddWmYqkIITT6fLZygE4UvJqoDTilBmA==
-X-Google-Smtp-Source: APXvYqyDA/EWUSXzmLh3QyRTwliJkHZQ726n1NRYV2Be3duzD6pV8jVLvRmpMo63mBrfvCQmmCONZIUwdUcOhHdo8aI=
-X-Received: by 2002:a05:6830:14d3:: with SMTP id
-	t19mr27993804otq.57.1557954454945; 
-	Wed, 15 May 2019 14:07:34 -0700 (PDT)
+	Wed, 15 May 2019 17:08:56 -0400
+Received: from localhost
+	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pasic@linux.ibm.com>; Wed, 15 May 2019 22:08:53 +0100
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
+	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Wed, 15 May 2019 22:08:49 +0100
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
+	[9.149.105.58])
+	by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x4FL8mis58261712
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Wed, 15 May 2019 21:08:48 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 169E94C052;
+	Wed, 15 May 2019 21:08:48 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 4FA2F4C059;
+	Wed, 15 May 2019 21:08:47 +0000 (GMT)
+Received: from oc2783563651 (unknown [9.145.21.52])
+	by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Wed, 15 May 2019 21:08:47 +0000 (GMT)
+Date: Wed, 15 May 2019 23:08:17 +0200
+From: Halil Pasic <pasic@linux.ibm.com>
+To: "Jason J. Herne" <jjherne@linux.ibm.com>
+Subject: Re: [PATCH 06/10] s390/cio: add basic protected virtualization support
+In-Reply-To: <d0ffefec-a14e-ee83-0aae-df288c3ffda4@linux.ibm.com>
+References: <20190426183245.37939-1-pasic@linux.ibm.com>
+	<20190426183245.37939-7-pasic@linux.ibm.com>
+	<20190513114136.783c851c.cohuck@redhat.com>
+	<d0ffefec-a14e-ee83-0aae-df288c3ffda4@linux.ibm.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20190514145422.16923-1-pagupta@redhat.com>
-	<20190514145422.16923-2-pagupta@redhat.com>
-In-Reply-To: <20190514145422.16923-2-pagupta@redhat.com>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Wed, 15 May 2019 14:07:23 -0700
-Message-ID: <CAPcyv4gEr_zPJEQp3k89v2UXfHp9PQwnJXY+W99HwXfxpvua_w@mail.gmail.com>
-Subject: Re: [PATCH v9 1/7] libnvdimm: nd_region flush callback support
-To: Pankaj Gupta <pagupta@redhat.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-TM-AS-GCONF: 00
+x-cbid: 19051521-0008-0000-0000-000002E71637
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19051521-0009-0000-0000-00002253B73F
+Message-Id: <20190515230817.2f8a8a5d.pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-15_15:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=2 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905150128
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: cohuck@redhat.com, Jan Kara <jack@suse.cz>, KVM list <kvm@vger.kernel.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>, david <david@fromorbit.com>,
-	Qemu Developers <qemu-devel@nongnu.org>,
+Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
+	Sebastian Ott <sebott@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	Andreas Dilger <adilger.kernel@dilger.ca>,
-	Ross Zwisler <zwisler@kernel.org>, Andrea Arcangeli <aarcange@redhat.com>,
-	Dave Jiang <dave.jiang@intel.com>, jstaron@google.com,
-	linux-nvdimm <linux-nvdimm@lists.01.org>,
-	Vishal L Verma <vishal.l.verma@intel.com>,
-	Matthew Wilcox <willy@infradead.org>,
 	Christoph Hellwig <hch@infradead.org>,
-	Linux ACPI <linux-acpi@vger.kernel.org>, jmoyer <jmoyer@redhat.com>,
-	linux-ext4 <linux-ext4@vger.kernel.org>,
-	Len Brown <lenb@kernel.org>, Adam Borowski <kilobyte@angband.pl>,
-	Rik van Riel <riel@surriel.com>, yuval shaia <yuval.shaia@oracle.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, lcapitulino@redhat.com,
-	Nitesh Narayan Lal <nilal@redhat.com>, Theodore Ts'o <tytso@mit.edu>,
-	Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
-	"Darrick J. Wong" <darrick.wong@oracle.com>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	linux-xfs <linux-xfs@vger.kernel.org>,
-	linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-	Igor Mammedov <imammedo@redhat.com>
+	Martin Schwidefsky <schwidefsky@de.ibm.com>,
+	Farhan Ali <alifm@linux.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -100,78 +106,120 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gVHVlLCBNYXkgMTQsIDIwMTkgYXQgNzo1NSBBTSBQYW5rYWogR3VwdGEgPHBhZ3VwdGFAcmVk
-aGF0LmNvbT4gd3JvdGU6Cj4KPiBUaGlzIHBhdGNoIGFkZHMgZnVuY3Rpb25hbGl0eSB0byBwZXJm
-b3JtIGZsdXNoIGZyb20gZ3Vlc3QKPiB0byBob3N0IG92ZXIgVklSVElPLiBXZSBhcmUgcmVnaXN0
-ZXJpbmcgYSBjYWxsYmFjayBiYXNlZAo+IG9uICduZF9yZWdpb24nIHR5cGUuIHZpcnRpb19wbWVt
-IGRyaXZlciByZXF1aXJlcyB0aGlzIHNwZWNpYWwKPiBmbHVzaCBmdW5jdGlvbi4gRm9yIHJlc3Qg
-b2YgdGhlIHJlZ2lvbiB0eXBlcyB3ZSBhcmUgcmVnaXN0ZXJpbmcKPiBleGlzdGluZyBmbHVzaCBm
-dW5jdGlvbi4gUmVwb3J0IGVycm9yIHJldHVybmVkIGJ5IGhvc3QgZnN5bmMKPiBmYWlsdXJlIHRv
-IHVzZXJzcGFjZS4KPgo+IFNpZ25lZC1vZmYtYnk6IFBhbmthaiBHdXB0YSA8cGFndXB0YUByZWRo
-YXQuY29tPgo+IC0tLQo+ICBkcml2ZXJzL2FjcGkvbmZpdC9jb3JlLmMgICAgIHwgIDQgKystLQo+
-ICBkcml2ZXJzL252ZGltbS9jbGFpbS5jICAgICAgIHwgIDYgKysrKy0tCj4gIGRyaXZlcnMvbnZk
-aW1tL25kLmggICAgICAgICAgfCAgMSArCj4gIGRyaXZlcnMvbnZkaW1tL3BtZW0uYyAgICAgICAg
-fCAxMyArKysrKysrKy0tLS0tCj4gIGRyaXZlcnMvbnZkaW1tL3JlZ2lvbl9kZXZzLmMgfCAyNiAr
-KysrKysrKysrKysrKysrKysrKysrKystLQo+ICBpbmNsdWRlL2xpbnV4L2xpYm52ZGltbS5oICAg
-IHwgIDggKysrKysrKy0KPiAgNiBmaWxlcyBjaGFuZ2VkLCA0NiBpbnNlcnRpb25zKCspLCAxMiBk
-ZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2FjcGkvbmZpdC9jb3JlLmMgYi9k
-cml2ZXJzL2FjcGkvbmZpdC9jb3JlLmMKPiBpbmRleCA1YTM4OWE0ZjRmNjUuLjA4ZGRlNzZjZjQ1
-OSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2FjcGkvbmZpdC9jb3JlLmMKPiArKysgYi9kcml2ZXJz
-L2FjcGkvbmZpdC9jb3JlLmMKPiBAQCAtMjQzNCw3ICsyNDM0LDcgQEAgc3RhdGljIHZvaWQgd3Jp
-dGVfYmxrX2N0bChzdHJ1Y3QgbmZpdF9ibGsgKm5maXRfYmxrLCB1bnNpZ25lZCBpbnQgYncsCj4g
-ICAgICAgICAgICAgICAgIG9mZnNldCA9IHRvX2ludGVybGVhdmVfb2Zmc2V0KG9mZnNldCwgbW1p
-byk7Cj4KPiAgICAgICAgIHdyaXRlcShjbWQsIG1taW8tPmFkZHIuYmFzZSArIG9mZnNldCk7Cj4g
-LSAgICAgICBudmRpbW1fZmx1c2gobmZpdF9ibGstPm5kX3JlZ2lvbik7Cj4gKyAgICAgICBudmRp
-bW1fZmx1c2gobmZpdF9ibGstPm5kX3JlZ2lvbiwgTlVMTCk7Cj4KPiAgICAgICAgIGlmIChuZml0
-X2Jsay0+ZGltbV9mbGFncyAmIE5GSVRfQkxLX0RDUl9MQVRDSCkKPiAgICAgICAgICAgICAgICAg
-cmVhZHEobW1pby0+YWRkci5iYXNlICsgb2Zmc2V0KTsKPiBAQCAtMjQ4Myw3ICsyNDgzLDcgQEAg
-c3RhdGljIGludCBhY3BpX25maXRfYmxrX3NpbmdsZV9pbyhzdHJ1Y3QgbmZpdF9ibGsgKm5maXRf
-YmxrLAo+ICAgICAgICAgfQo+Cj4gICAgICAgICBpZiAocncpCj4gLSAgICAgICAgICAgICAgIG52
-ZGltbV9mbHVzaChuZml0X2Jsay0+bmRfcmVnaW9uKTsKPiArICAgICAgICAgICAgICAgbnZkaW1t
-X2ZsdXNoKG5maXRfYmxrLT5uZF9yZWdpb24sIE5VTEwpOwo+Cj4gICAgICAgICByYyA9IHJlYWRf
-YmxrX3N0YXQobmZpdF9ibGssIGxhbmUpID8gLUVJTyA6IDA7Cj4gICAgICAgICByZXR1cm4gcmM7
-Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbnZkaW1tL2NsYWltLmMgYi9kcml2ZXJzL252ZGltbS9j
-bGFpbS5jCj4gaW5kZXggZmI2NjdiZjQ2OWM3Li4xMzUxMGJhZTFlNmYgMTAwNjQ0Cj4gLS0tIGEv
-ZHJpdmVycy9udmRpbW0vY2xhaW0uYwo+ICsrKyBiL2RyaXZlcnMvbnZkaW1tL2NsYWltLmMKPiBA
-QCAtMjYzLDcgKzI2Myw3IEBAIHN0YXRpYyBpbnQgbnNpb19yd19ieXRlcyhzdHJ1Y3QgbmRfbmFt
-ZXNwYWNlX2NvbW1vbiAqbmRucywKPiAgICAgICAgIHN0cnVjdCBuZF9uYW1lc3BhY2VfaW8gKm5z
-aW8gPSB0b19uZF9uYW1lc3BhY2VfaW8oJm5kbnMtPmRldik7Cj4gICAgICAgICB1bnNpZ25lZCBp
-bnQgc3pfYWxpZ24gPSBBTElHTihzaXplICsgKG9mZnNldCAmICg1MTIgLSAxKSksIDUxMik7Cj4g
-ICAgICAgICBzZWN0b3JfdCBzZWN0b3IgPSBvZmZzZXQgPj4gOTsKPiAtICAgICAgIGludCByYyA9
-IDA7Cj4gKyAgICAgICBpbnQgcmMgPSAwLCByZXQgPSAwOwo+Cj4gICAgICAgICBpZiAodW5saWtl
-bHkoIXNpemUpKQo+ICAgICAgICAgICAgICAgICByZXR1cm4gMDsKPiBAQCAtMzAxLDcgKzMwMSw5
-IEBAIHN0YXRpYyBpbnQgbnNpb19yd19ieXRlcyhzdHJ1Y3QgbmRfbmFtZXNwYWNlX2NvbW1vbiAq
-bmRucywKPiAgICAgICAgIH0KPgo+ICAgICAgICAgbWVtY3B5X2ZsdXNoY2FjaGUobnNpby0+YWRk
-ciArIG9mZnNldCwgYnVmLCBzaXplKTsKPiAtICAgICAgIG52ZGltbV9mbHVzaCh0b19uZF9yZWdp
-b24obmRucy0+ZGV2LnBhcmVudCkpOwo+ICsgICAgICAgcmV0ID0gbnZkaW1tX2ZsdXNoKHRvX25k
-X3JlZ2lvbihuZG5zLT5kZXYucGFyZW50KSwgTlVMTCk7Cj4gKyAgICAgICBpZiAocmV0KQo+ICsg
-ICAgICAgICAgICAgICByYyA9IHJldDsKPgo+ICAgICAgICAgcmV0dXJuIHJjOwo+ICB9Cj4gZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvbnZkaW1tL25kLmggYi9kcml2ZXJzL252ZGltbS9uZC5oCj4gaW5k
-ZXggYTVhYzNiMjQwMjkzLi4wYzc0ZDI0MjhiZDcgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9udmRp
-bW0vbmQuaAo+ICsrKyBiL2RyaXZlcnMvbnZkaW1tL25kLmgKPiBAQCAtMTU5LDYgKzE1OSw3IEBA
-IHN0cnVjdCBuZF9yZWdpb24gewo+ICAgICAgICAgc3RydWN0IGJhZGJsb2NrcyBiYjsKPiAgICAg
-ICAgIHN0cnVjdCBuZF9pbnRlcmxlYXZlX3NldCAqbmRfc2V0Owo+ICAgICAgICAgc3RydWN0IG5k
-X3BlcmNwdV9sYW5lIF9fcGVyY3B1ICpsYW5lOwo+ICsgICAgICAgaW50ICgqZmx1c2gpKHN0cnVj
-dCBuZF9yZWdpb24gKm5kX3JlZ2lvbiwgc3RydWN0IGJpbyAqYmlvKTsKClNvIHRoaXMgdHJpZ2dl
-cnM6CgpJbiBmaWxlIGluY2x1ZGVkIGZyb20gZHJpdmVycy9udmRpbW0vZTgyMC5jOjc6Ci4vaW5j
-bHVkZS9saW51eC9saWJudmRpbW0uaDoxNDA6NTE6IHdhcm5pbmc6IOKAmHN0cnVjdCBiaW/igJkg
-ZGVjbGFyZWQKaW5zaWRlIHBhcmFtZXRlciBsaXN0IHdpbGwgbm90IGJlIHZpc2libGUgb3V0c2lk
-ZSBvZiB0aGlzIGRlZmluaXRpb24Kb3IgZGVjbGFyYXRpb24KICBpbnQgKCpmbHVzaCkoc3RydWN0
-IG5kX3JlZ2lvbiAqbmRfcmVnaW9uLCBzdHJ1Y3QgYmlvICpiaW8pOwogICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn4KSSB3YXMgYWxyZWFkeSBmZWVs
-aW5nIHVuZWFzeSBhYm91dCB0cnlpbmcgdG8gc3F1ZWV6ZSB0aGlzIGludG8gdjUuMiwKYnV0IHRo
-aXMgd2FybmluZyBhbmQgdGhlIGNvbnRpbnVlZCBkcmlwIG9mIGNvbW1lbnRzIGxlYWRzIG1lIHRv
-CmNvbmNsdWRlIHRoYXQgdGhpcyBkcml2ZXIgd291bGQgZG8gd2VsbCB0byB3YWl0IG9uZSBtb3Jl
-IGRldmVsb3BtZW50CmN5Y2xlLiBMZXRzIGNsb3NlIG91dCB0aGUgZmluYWwgZml4dXBzIGFuZCBs
-ZXQgdGhpcyBkcml2ZXIgc29hayBpbgotbmV4dC4gVGhlbiBmb3IgdGhlIHY1LjMgY3ljbGUgSSds
-bCByZWRvdWJsZSBteSBlZmZvcnRzIHRvd2FyZHMgdGhlCmdvYWwgb2YgY2xvc2luZyBwYXRjaCBh
-Y2NlcHRhbmNlIGF0IHRoZSAtcmM2IC8gLXJjNyBkZXZlbG9wbWVudAptaWxlc3RvbmUuCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9u
-IG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpo
-dHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFs
-aXphdGlvbg==
+On Tue, 14 May 2019 10:47:34 -0400
+"Jason J. Herne" <jjherne@linux.ibm.com> wrote:
+
+> On 5/13/19 5:41 AM, Cornelia Huck wrote:
+> > On Fri, 26 Apr 2019 20:32:41 +0200
+> > Halil Pasic <pasic@linux.ibm.com> wrote:
+> > 
+> >> As virtio-ccw devices are channel devices, we need to use the dma area
+> >> for any communication with the hypervisor.
+> >>
+> >> This patch addresses the most basic stuff (mostly what is required for
+> >> virtio-ccw), and does take care of QDIO or any devices.
+> > 
+> > "does not take care of QDIO", surely? (Also, what does "any devices"
+> > mean? Do you mean "every arbitrary device", perhaps?)
+> > 
+> >>
+> >> An interesting side effect is that virtio structures are now going to
+> >> get allocated in 31 bit addressable storage.
+> > 
+> > Hm...
+> > 
+> >>
+> >> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> >> ---
+> >>   arch/s390/include/asm/ccwdev.h   |  4 +++
+> >>   drivers/s390/cio/ccwreq.c        |  8 ++---
+> >>   drivers/s390/cio/device.c        | 65 +++++++++++++++++++++++++++++++++-------
+> >>   drivers/s390/cio/device_fsm.c    | 40 ++++++++++++-------------
+> >>   drivers/s390/cio/device_id.c     | 18 +++++------
+> >>   drivers/s390/cio/device_ops.c    | 21 +++++++++++--
+> >>   drivers/s390/cio/device_pgid.c   | 20 ++++++-------
+> >>   drivers/s390/cio/device_status.c | 24 +++++++--------
+> >>   drivers/s390/cio/io_sch.h        | 21 +++++++++----
+> >>   drivers/s390/virtio/virtio_ccw.c | 10 -------
+> >>   10 files changed, 148 insertions(+), 83 deletions(-)
+> > 
+> > (...)
+> > 
+> >> diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
+> >> index 6d989c360f38..bb7a92316fc8 100644
+> >> --- a/drivers/s390/virtio/virtio_ccw.c
+> >> +++ b/drivers/s390/virtio/virtio_ccw.c
+> >> @@ -66,7 +66,6 @@ struct virtio_ccw_device {
+> >>   	bool device_lost;
+> >>   	unsigned int config_ready;
+> >>   	void *airq_info;
+> >> -	u64 dma_mask;
+> >>   };
+> >>   
+> >>   struct vq_info_block_legacy {
+> >> @@ -1255,16 +1254,7 @@ static int virtio_ccw_online(struct ccw_device *cdev)
+> >>   		ret = -ENOMEM;
+> >>   		goto out_free;
+> >>   	}
+> >> -
+> >>   	vcdev->vdev.dev.parent = &cdev->dev;
+> >> -	cdev->dev.dma_mask = &vcdev->dma_mask;
+> >> -	/* we are fine with common virtio infrastructure using 64 bit DMA */
+> >> -	ret = dma_set_mask_and_coherent(&cdev->dev, DMA_BIT_MASK(64));
+> >> -	if (ret) {
+> >> -		dev_warn(&cdev->dev, "Failed to enable 64-bit DMA.\n");
+> >> -		goto out_free;
+> >> -	}
+> > 
+> > This means that vring structures now need to fit into 31 bits as well,
+> > I think? Is there any way to reserve the 31 bit restriction for channel
+> > subsystem structures and keep vring in the full 64 bit range? (Or am I
+> > fundamentally misunderstanding something?)
+> > 
+> 
+> I hope I've understood everything... I'm new to virtio. But from what I'm understanding, 
+> the vring structure (a.k.a. the VirtQueue) needs to be accessed and modified by both host 
+> and guest. Therefore the page(s) holding that data need to be marked shared if using 
+> protected virtualization. This patch set makes use of DMA pages by way of swiotlb (always 
+> below 32-bit line right?) for shared memory.
+
+The last sentence is wrong. You have to differentiate between stuff that
+is mapped as DMA and that is allocated as DMA. The mapped stuff is
+handled via swiotlb and bouncing. But that can not work for vring stuff
+which needs to be allocated as DMA.
+
+> Therefore, a side effect is that all shared 
+> memory, including VirtQueue data will be in the DMA zone and in 32-bit memory.
+> 
+
+Consequently wrong. The reason I explained in a reply to Connie (see
+there).
+
+> I don't see any restrictions on sharing pages above the 32-bit line. So it seems possible. 
+> I'm not sure how much more work it would be. I wonder if Halil has considered this?
+
+I did consider this, the RFC was doing this (again see other mail).
+
+> Are we 
+> worried that virtio data structures are going to be a burden on the 31-bit address space?
+> 
+> 
+
+That is a good question I can not answer. Since it is currently at least
+a page per queue (because we use dma direct, right Mimu?), I am concerned
+about this.
+
+Connie, what is your opinion?
+
+Regards,
+Halil
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
