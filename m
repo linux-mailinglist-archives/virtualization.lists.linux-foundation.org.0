@@ -2,47 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAEA220CF3
-	for <lists.virtualization@lfdr.de>; Thu, 16 May 2019 18:28:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1A4422749
+	for <lists.virtualization@lfdr.de>; Sun, 19 May 2019 18:24:08 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 698B5CAB;
-	Thu, 16 May 2019 16:27:56 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 77007C3E;
+	Sun, 19 May 2019 16:17:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 22404C7C
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5ECFCA55
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 16 May 2019 16:27:54 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 05B5A896
+	Thu, 16 May 2019 20:51:11 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-pf1-f202.google.com (mail-pf1-f202.google.com
+	[209.85.210.202])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id ABFED82C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 16 May 2019 16:27:52 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id 5F98FAED4;
-	Thu, 16 May 2019 16:27:51 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, kraxel@redhat.com,
-	christian.koenig@amd.com, ray.huang@amd.com, hdegoede@redhat.com,
-	noralf@tronnes.org, sam@ravnborg.org, z.liuxinliang@hisilicon.com,
-	zourongrong@gmail.com, kong.kongxinwei@hisilicon.com,
-	puck.chen@hisilicon.com
-Subject: [PATCH 2/2] drm: Reserve/unreserve GEM VRAM BOs from within pin/unpin
-	functions
-Date: Thu, 16 May 2019 18:27:46 +0200
-Message-Id: <20190516162746.11636-3-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190516162746.11636-1-tzimmermann@suse.de>
-References: <20190516162746.11636-1-tzimmermann@suse.de>
-MIME-Version: 1.0
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.3.1
+	Thu, 16 May 2019 20:51:10 +0000 (UTC)
+Received: by mail-pf1-f202.google.com with SMTP id d9so2964234pfo.13
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 16 May 2019 13:51:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=date:message-id:mime-version:subject:from:to:cc;
+	bh=O0A3Y6O8QZ1jZo/IAcyQwbrOJctQs0ZeB/K1vYWmuBI=;
+	b=V3SH9UWTXhecnBvY9y5BQamRei5+qE2Sfjc4eidha3qPpIUKiFC2Za/3ErpPsnlN8W
+	2+YfB6DRHUxK86SVsJQ6HjeCgq/V+ywqPMuLW2kErg8FmTPzKnWZu3K3jboTADUzrV+/
+	zJHSv1CG9E1NrqB6ZtXofWvgyI/BMJDpbHgRgfXupGEBoOI6rca9n+8JFme6U3Z9NyOf
+	sil6q/xnC5ZppxoSW1dAZmXM51G91MNKXOu/ApqMaUGTEpL7g+Qw9gm8nm9uYsS0SrzG
+	WOp24BXJeHc9i1WyrUKHdAnHDB8xbzO44RPj+JlDVuyfvKCTZDppOjyT6w8dy5JqtqQe
+	uo/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+	bh=O0A3Y6O8QZ1jZo/IAcyQwbrOJctQs0ZeB/K1vYWmuBI=;
+	b=nYplFYW3kSD9jYQ7kS+3uakBVa13ktoneLGwRcwdkmqsrcADTkBtI5fnbAaksN2PZt
+	sdk2PWKCfzccQpb0m6G3iek12yq+O8HYUHwGRHed+5DC00ILBNbF2/6kx8eiKqyR5DL7
+	7Yqh381dcNAxrWrwDVoLEKzA6dSsXCTDpOq4fXy1e7U9I5ux3C+DvTR0aWhWG3geFDXp
+	OeGN6Uhtcq9MjGPlrwmHiIcIXtJNLtHsfygGr1K84bsyfU8PWjXjQYa9yslj437paly+
+	hSItVd9JkQ+Lq0VbZzCpzglweBg8ieX6+WNgkDZx5yCgaiettWnp0ADbLqQCPF8j9oDE
+	lX7Q==
+X-Gm-Message-State: APjAAAXqJCE/jkzY+nybHsRGeZ9+KObFtVGn1r8kCxhQtY0T6UGwScT+
+	M8MZbJ1YYQhU0eIKY56yT9ehKWOXbdBjMXM=
+X-Google-Smtp-Source: APXvYqwf41flQIat3KOIsyjjpw5N63ZvcHDik9EhfhYXCkBPgjXrtlDQs2OKDmjNAjHU9uyT/bCBM5OoUqnw6s4=
+X-Received: by 2002:a63:7552:: with SMTP id f18mr49259106pgn.234.1558039869914;
+	Thu, 16 May 2019 13:51:09 -0700 (PDT)
+Date: Thu, 16 May 2019 13:51:07 -0700
+Message-Id: <20190516205107.222003-1-jemoreira@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.21.0.1020.gf2820cf01a-goog
+Subject: [PATCH RESEND] vsock/virtio: Initialize core virtio vsock before
+	registering the driver
+To: linux-kernel@vger.kernel.org
+X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kernel test robot <lkp@intel.com>, Thomas Zimmermann <tzimmermann@suse.de>,
-	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+X-Mailman-Approved-At: Sun, 19 May 2019 16:17:22 +0000
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, stable@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>, kernel-team@android.com,
+	"David S. Miller" <davem@davemloft.net>,
+	Stefano Garzarella <sgarzare@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,369 +76,114 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: "Jorge E. Moreira via Virtualization"
+	<virtualization@lists.linux-foundation.org>
+Reply-To: "Jorge E. Moreira" <jemoreira@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-The original bochs and vbox implementations of pin and unpin functions
-automatically reserved BOs during validation. This functionality got lost
-while converting the code to a generic implementation. This may result
-in validating unlocked TTM BOs.
+Avoid a race in which static variables in net/vmw_vsock/af_vsock.c are
+accessed (while handling interrupts) before they are initialized.
 
-Adding the reserve and unreserve operations to GEM VRAM's pin and unpin
-functions fixes the bochs and vbox drivers. Additionally the patch changes
-the mgag200, ast and hibmc drivers to not reserve BOs by themselves.
+[    4.201410] BUG: unable to handle kernel paging request at ffffffffffffffe8
+[    4.207829] IP: vsock_addr_equals_addr+0x3/0x20
+[    4.211379] PGD 28210067 P4D 28210067 PUD 28212067 PMD 0
+[    4.211379] Oops: 0000 [#1] PREEMPT SMP PTI
+[    4.211379] Modules linked in:
+[    4.211379] CPU: 1 PID: 30 Comm: kworker/1:1 Not tainted 4.14.106-419297-gd7e28cc1f241 #1
+[    4.211379] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.10.2-1 04/01/2014
+[    4.211379] Workqueue: virtio_vsock virtio_transport_rx_work
+[    4.211379] task: ffffa3273d175280 task.stack: ffffaea1800e8000
+[    4.211379] RIP: 0010:vsock_addr_equals_addr+0x3/0x20
+[    4.211379] RSP: 0000:ffffaea1800ebd28 EFLAGS: 00010286
+[    4.211379] RAX: 0000000000000002 RBX: 0000000000000000 RCX: ffffffffb94e42f0
+[    4.211379] RDX: 0000000000000400 RSI: ffffffffffffffe0 RDI: ffffaea1800ebdd0
+[    4.211379] RBP: ffffaea1800ebd58 R08: 0000000000000001 R09: 0000000000000001
+[    4.211379] R10: 0000000000000000 R11: ffffffffb89d5d60 R12: ffffaea1800ebdd0
+[    4.211379] R13: 00000000828cbfbf R14: 0000000000000000 R15: ffffaea1800ebdc0
+[    4.211379] FS:  0000000000000000(0000) GS:ffffa3273fd00000(0000) knlGS:0000000000000000
+[    4.211379] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.211379] CR2: ffffffffffffffe8 CR3: 000000002820e001 CR4: 00000000001606e0
+[    4.211379] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+[    4.211379] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+[    4.211379] Call Trace:
+[    4.211379]  ? vsock_find_connected_socket+0x6c/0xe0
+[    4.211379]  virtio_transport_recv_pkt+0x15f/0x740
+[    4.211379]  ? detach_buf+0x1b5/0x210
+[    4.211379]  virtio_transport_rx_work+0xb7/0x140
+[    4.211379]  process_one_work+0x1ef/0x480
+[    4.211379]  worker_thread+0x312/0x460
+[    4.211379]  kthread+0x132/0x140
+[    4.211379]  ? process_one_work+0x480/0x480
+[    4.211379]  ? kthread_destroy_worker+0xd0/0xd0
+[    4.211379]  ret_from_fork+0x35/0x40
+[    4.211379] Code: c7 47 08 00 00 00 00 66 c7 07 28 00 c7 47 08 ff ff ff ff c7 47 04 ff ff ff ff c3 0f 1f 00 66 2e 0f 1f 84 00 00 00 00 00 8b 47 08 <3b> 46 08 75 0a 8b 47 04 3b 46 04 0f 94 c0 c3 31 c0 c3 90 66 2e
+[    4.211379] RIP: vsock_addr_equals_addr+0x3/0x20 RSP: ffffaea1800ebd28
+[    4.211379] CR2: ffffffffffffffe8
+[    4.211379] ---[ end trace f31cc4a2e6df3689 ]---
+[    4.211379] Kernel panic - not syncing: Fatal exception in interrupt
+[    4.211379] Kernel Offset: 0x37000000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+[    4.211379] Rebooting in 5 seconds..
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Fixes: a3232987fdbf0bede92a9d7c7e2db99a5084d31b ("drm/bochs: Convert [...]")
-Reported-by: kernel test robot <lkp@intel.com>
+Fixes: 22b5c0b63f32 ("vsock/virtio: fix kernel panic after device hot-unplug")
+Cc: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: Stefano Garzarella <sgarzare@redhat.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: kvm@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org
+Cc: netdev@vger.kernel.org
+Cc: kernel-team@android.com
+Cc: stable@vger.kernel.org [4.9+]
+Signed-off-by: Jorge E. Moreira <jemoreira@google.com>
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- drivers/gpu/drm/ast/ast_mode.c                | 24 +--------
- drivers/gpu/drm/drm_gem_vram_helper.c         | 54 ++++++++++++++-----
- .../gpu/drm/hisilicon/hibmc/hibmc_drm_de.c    |  6 ---
- .../gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c | 17 +-----
- drivers/gpu/drm/mgag200/mgag200_mode.c        | 19 +------
- 5 files changed, 45 insertions(+), 75 deletions(-)
+ net/vmw_vsock/virtio_transport.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/gpu/drm/ast/ast_mode.c b/drivers/gpu/drm/ast/ast_mode.c
-index 3475591a22c3..9aca9135a5cc 100644
---- a/drivers/gpu/drm/ast/ast_mode.c
-+++ b/drivers/gpu/drm/ast/ast_mode.c
-@@ -539,24 +539,16 @@ static int ast_crtc_do_set_base(struct drm_crtc *crtc,
- 		ast_fb = to_ast_framebuffer(fb);
- 		obj = ast_fb->obj;
- 		gbo = drm_gem_vram_of_gem(obj);
--		ret = drm_gem_vram_reserve(gbo, false);
--		if (ret)
--			return ret;
- 		drm_gem_vram_push_to_system(gbo);
--		drm_gem_vram_unreserve(gbo);
- 	}
+diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
+index 15eb5d3d4750..96ab344f17bb 100644
+--- a/net/vmw_vsock/virtio_transport.c
++++ b/net/vmw_vsock/virtio_transport.c
+@@ -702,28 +702,27 @@ static int __init virtio_vsock_init(void)
+ 	if (!virtio_vsock_workqueue)
+ 		return -ENOMEM;
  
- 	ast_fb = to_ast_framebuffer(crtc->primary->fb);
- 	obj = ast_fb->obj;
- 	gbo = drm_gem_vram_of_gem(obj);
- 
--	ret = drm_gem_vram_reserve(gbo, false);
--	if (ret)
--		return ret;
--
- 	ret = drm_gem_vram_pin(gbo, DRM_GEM_VRAM_PL_FLAG_VRAM);
+-	ret = register_virtio_driver(&virtio_vsock_driver);
++	ret = vsock_core_init(&virtio_transport.transport);
  	if (ret)
--		goto err_drm_gem_vram_unreserve;
-+		return ret;
- 	gpu_addr = drm_gem_vram_offset(gbo);
- 	if (gpu_addr < 0) {
- 		ret = (int)gpu_addr;
-@@ -573,7 +565,6 @@ static int ast_crtc_do_set_base(struct drm_crtc *crtc,
- 			ast_fbdev_set_base(ast, gpu_addr);
- 		}
- 	}
--	drm_gem_vram_unreserve(gbo);
+ 		goto out_wq;
  
- 	ast_set_offset_reg(crtc);
- 	ast_set_start_address_crt1(crtc, (u32)gpu_addr);
-@@ -582,8 +573,6 @@ static int ast_crtc_do_set_base(struct drm_crtc *crtc,
+-	ret = vsock_core_init(&virtio_transport.transport);
++	ret = register_virtio_driver(&virtio_vsock_driver);
+ 	if (ret)
+-		goto out_vdr;
++		goto out_vci;
  
- err_drm_gem_vram_unpin:
- 	drm_gem_vram_unpin(gbo);
--err_drm_gem_vram_unreserve:
--	drm_gem_vram_unreserve(gbo);
+ 	return 0;
+ 
+-out_vdr:
+-	unregister_virtio_driver(&virtio_vsock_driver);
++out_vci:
++	vsock_core_exit();
+ out_wq:
+ 	destroy_workqueue(virtio_vsock_workqueue);
  	return ret;
+-
  }
  
-@@ -630,8 +619,6 @@ static int ast_crtc_mode_set(struct drm_crtc *crtc,
- 
- static void ast_crtc_disable(struct drm_crtc *crtc)
+ static void __exit virtio_vsock_exit(void)
  {
--	int ret;
--
- 	DRM_DEBUG_KMS("\n");
- 	ast_crtc_dpms(crtc, DRM_MODE_DPMS_OFF);
- 	if (crtc->primary->fb) {
-@@ -639,11 +626,7 @@ static void ast_crtc_disable(struct drm_crtc *crtc)
- 		struct drm_gem_object *obj = ast_fb->obj;
- 		struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(obj);
- 
--		ret = drm_gem_vram_reserve(gbo, false);
--		if (ret)
--			return;
- 		drm_gem_vram_push_to_system(gbo);
--		drm_gem_vram_unreserve(gbo);
- 	}
- 	crtc->primary->fb = NULL;
- }
-@@ -939,12 +922,7 @@ static int ast_cursor_init(struct drm_device *dev)
- 	if (ret)
- 		return ret;
- 	gbo = drm_gem_vram_of_gem(obj);
--	ret = drm_gem_vram_reserve(gbo, false);
--	if (unlikely(ret != 0))
--		goto fail;
--
- 	ret = drm_gem_vram_pin(gbo, DRM_GEM_VRAM_PL_FLAG_VRAM);
--	drm_gem_vram_unreserve(gbo);
- 	if (ret)
- 		goto fail;
- 	gpu_addr = drm_gem_vram_offset(gbo);
-diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_gem_vram_helper.c
-index a002c03eaf4c..bde8237e8021 100644
---- a/drivers/gpu/drm/drm_gem_vram_helper.c
-+++ b/drivers/gpu/drm/drm_gem_vram_helper.c
-@@ -235,10 +235,12 @@ int drm_gem_vram_pin(struct drm_gem_vram_object *gbo, unsigned long pl_flag)
- 	int i, ret;
- 	struct ttm_operation_ctx ctx = { false, false };
- 
--	if (gbo->pin_count) {
--		++gbo->pin_count;
--		return 0;
--	}
-+	ret = ttm_bo_reserve(&gbo->bo, true, false, NULL);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (gbo->pin_count)
-+		goto out;
- 
- 	drm_gem_vram_placement(gbo, pl_flag);
- 	for (i = 0; i < gbo->placement.num_placement; ++i)
-@@ -246,11 +248,17 @@ int drm_gem_vram_pin(struct drm_gem_vram_object *gbo, unsigned long pl_flag)
- 
- 	ret = ttm_bo_validate(&gbo->bo, &gbo->placement, &ctx);
- 	if (ret < 0)
--		return ret;
-+		goto err_ttm_bo_unreserve;
- 
--	gbo->pin_count = 1;
-+out:
-+	++gbo->pin_count;
-+	ttm_bo_unreserve(&gbo->bo);
- 
- 	return 0;
-+
-+err_ttm_bo_unreserve:
-+	ttm_bo_unreserve(&gbo->bo);
-+	return ret;
- }
- EXPORT_SYMBOL(drm_gem_vram_pin);
- 
-@@ -308,21 +316,32 @@ int drm_gem_vram_unpin(struct drm_gem_vram_object *gbo)
- 	int i, ret;
- 	struct ttm_operation_ctx ctx = { false, false };
- 
-+	ret = ttm_bo_reserve(&gbo->bo, true, false, NULL);
-+	if (ret < 0)
-+		return ret;
-+
- 	if (WARN_ON_ONCE(!gbo->pin_count))
--		return 0;
-+		goto out;
- 
- 	--gbo->pin_count;
- 	if (gbo->pin_count)
--		return 0;
-+		goto out;
- 
- 	for (i = 0; i < gbo->placement.num_placement ; ++i)
- 		gbo->placements[i].flags &= ~TTM_PL_FLAG_NO_EVICT;
- 
- 	ret = ttm_bo_validate(&gbo->bo, &gbo->placement, &ctx);
- 	if (ret < 0)
--		return ret;
-+		goto err_ttm_bo_unreserve;
-+
-+out:
-+	ttm_bo_unreserve(&gbo->bo);
- 
- 	return 0;
-+
-+err_ttm_bo_unreserve:
-+	ttm_bo_unreserve(&gbo->bo);
-+	return ret;
- }
- EXPORT_SYMBOL(drm_gem_vram_unpin);
- 
-@@ -377,12 +396,16 @@ int drm_gem_vram_push_to_system(struct drm_gem_vram_object *gbo)
- 	int i, ret;
- 	struct ttm_operation_ctx ctx = { false, false };
- 
-+	ret = ttm_bo_reserve(&gbo->bo, true, false, NULL);
-+	if (ret < 0)
-+		return ret;
-+
- 	if (WARN_ON_ONCE(!gbo->pin_count))
--		return 0;
-+		goto out;
- 
- 	--gbo->pin_count;
- 	if (gbo->pin_count)
--		return 0;
-+		goto out;
- 
- 	if (gbo->kmap.virtual)
- 		ttm_bo_kunmap(&gbo->kmap);
-@@ -393,9 +416,16 @@ int drm_gem_vram_push_to_system(struct drm_gem_vram_object *gbo)
- 
- 	ret = ttm_bo_validate(&gbo->bo, &gbo->placement, &ctx);
- 	if (ret)
--		return ret;
-+		goto err_ttm_bo_unreserve;
-+
-+out:
-+	ttm_bo_unreserve(&gbo->bo);
- 
- 	return 0;
-+
-+err_ttm_bo_unreserve:
-+	ttm_bo_unreserve(&gbo->bo);
-+	return ret;
- }
- EXPORT_SYMBOL(drm_gem_vram_push_to_system);
- 
-diff --git a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_de.c b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_de.c
-index db0dfa57844e..fbdf495779e0 100644
---- a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_de.c
-+++ b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_de.c
-@@ -107,14 +107,8 @@ static void hibmc_plane_atomic_update(struct drm_plane *plane,
- 
- 	hibmc_fb = to_hibmc_framebuffer(state->fb);
- 	gbo = drm_gem_vram_of_gem(hibmc_fb->obj);
--	ret = drm_gem_vram_reserve(gbo, false);
--	if (ret) {
--		DRM_ERROR("failed to reserve BO: %d", ret);
--		return;
--	}
- 
- 	ret = drm_gem_vram_pin(gbo, DRM_GEM_VRAM_PL_FLAG_VRAM);
--	drm_gem_vram_unreserve(gbo);
- 	if (ret) {
- 		DRM_ERROR("failed to pin bo: %d", ret);
- 		return;
-diff --git a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c
-index 9d2025fa16f8..bd5fbb23973a 100644
---- a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c
-+++ b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c
-@@ -63,7 +63,6 @@ static int hibmc_drm_fb_create(struct drm_fb_helper *helper,
- 	struct drm_mode_fb_cmd2 mode_cmd;
- 	struct drm_gem_object *gobj = NULL;
- 	int ret = 0;
--	int ret1;
- 	size_t size;
- 	unsigned int bytes_per_pixel;
- 	struct drm_gem_vram_object *gbo = NULL;
-@@ -91,16 +90,10 @@ static int hibmc_drm_fb_create(struct drm_fb_helper *helper,
- 
- 	gbo = drm_gem_vram_of_gem(gobj);
- 
--	ret = drm_gem_vram_reserve(gbo, false);
--	if (ret) {
--		DRM_ERROR("failed to reserve bo: %d\n", ret);
--		goto out_unref_gem;
--	}
--
- 	ret = drm_gem_vram_pin(gbo, DRM_GEM_VRAM_PL_FLAG_VRAM);
- 	if (ret) {
- 		DRM_ERROR("failed to pin fbcon: %d\n", ret);
--		goto out_unreserve_ttm_bo;
-+		goto out_unref_gem;
- 	}
- 
- 	base = drm_gem_vram_kmap(gbo, true, NULL);
-@@ -109,7 +102,6 @@ static int hibmc_drm_fb_create(struct drm_fb_helper *helper,
- 		DRM_ERROR("failed to kmap fbcon: %d\n", ret);
- 		goto out_unpin_bo;
- 	}
--	drm_gem_vram_unreserve(gbo);
- 
- 	info = drm_fb_helper_alloc_fbi(helper);
- 	if (IS_ERR(info)) {
-@@ -141,16 +133,9 @@ static int hibmc_drm_fb_create(struct drm_fb_helper *helper,
- 	return 0;
- 
- out_release_fbi:
--	ret1 = drm_gem_vram_reserve(gbo, false);
--	if (ret1) {
--		DRM_ERROR("failed to rsv ttm_bo when release fbi: %d\n", ret1);
--		goto out_unref_gem;
--	}
- 	drm_gem_vram_kunmap(gbo);
- out_unpin_bo:
- 	drm_gem_vram_unpin(gbo);
--out_unreserve_ttm_bo:
--	drm_gem_vram_unreserve(gbo);
- out_unref_gem:
- 	drm_gem_object_put_unlocked(gobj);
- 
-diff --git a/drivers/gpu/drm/mgag200/mgag200_mode.c b/drivers/gpu/drm/mgag200/mgag200_mode.c
-index 3098bf5c1744..e79872c968bf 100644
---- a/drivers/gpu/drm/mgag200/mgag200_mode.c
-+++ b/drivers/gpu/drm/mgag200/mgag200_mode.c
-@@ -877,24 +877,16 @@ static int mga_crtc_do_set_base(struct drm_crtc *crtc,
- 		mga_fb = to_mga_framebuffer(fb);
- 		obj = mga_fb->obj;
- 		gbo = drm_gem_vram_of_gem(obj);
--		ret = drm_gem_vram_reserve(gbo, false);
--		if (ret)
--			return ret;
- 		drm_gem_vram_push_to_system(gbo);
--		drm_gem_vram_unreserve(gbo);
- 	}
- 
- 	mga_fb = to_mga_framebuffer(crtc->primary->fb);
- 	obj = mga_fb->obj;
- 	gbo = drm_gem_vram_of_gem(obj);
- 
--	ret = drm_gem_vram_reserve(gbo, false);
--	if (ret)
--		return ret;
--
- 	ret = drm_gem_vram_pin(gbo, DRM_GEM_VRAM_PL_FLAG_VRAM);
- 	if (ret)
--		goto err_drm_gem_vram_unreserve;
-+		return ret;
- 	gpu_addr = drm_gem_vram_offset(gbo);
- 	if (gpu_addr < 0) {
- 		ret = (int)gpu_addr;
-@@ -910,16 +902,12 @@ static int mga_crtc_do_set_base(struct drm_crtc *crtc,
- 		}
- 	}
- 
--	drm_gem_vram_unreserve(gbo);
--
- 	mga_set_start_address(crtc, (u32)gpu_addr);
- 
- 	return 0;
- 
- err_drm_gem_vram_unpin:
- 	drm_gem_vram_unpin(gbo);
--err_drm_gem_vram_unreserve:
--	drm_gem_vram_unreserve(gbo);
- 	return ret;
+-	vsock_core_exit();
+ 	unregister_virtio_driver(&virtio_vsock_driver);
++	vsock_core_exit();
+ 	destroy_workqueue(virtio_vsock_workqueue);
  }
  
-@@ -1434,7 +1422,6 @@ static void mga_crtc_destroy(struct drm_crtc *crtc)
- 
- static void mga_crtc_disable(struct drm_crtc *crtc)
- {
--	int ret;
- 	DRM_DEBUG_KMS("\n");
- 	mga_crtc_dpms(crtc, DRM_MODE_DPMS_OFF);
- 	if (crtc->primary->fb) {
-@@ -1442,11 +1429,7 @@ static void mga_crtc_disable(struct drm_crtc *crtc)
- 		struct drm_gem_object *obj = mga_fb->obj;
- 		struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(obj);
- 
--		ret = drm_gem_vram_reserve(gbo, false);
--		if (ret)
--			return;
- 		drm_gem_vram_push_to_system(gbo);
--		drm_gem_vram_unreserve(gbo);
- 	}
- 	crtc->primary->fb = NULL;
- }
 -- 
-2.21.0
+2.21.0.1020.gf2820cf01a-goog
 
 _______________________________________________
 Virtualization mailing list
