@@ -2,67 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 339C1208A7
-	for <lists.virtualization@lfdr.de>; Thu, 16 May 2019 15:55:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6DC1208C9
+	for <lists.virtualization@lfdr.de>; Thu, 16 May 2019 15:59:26 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 83777E2F;
-	Thu, 16 May 2019 13:54:56 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 45C3EE33;
+	Thu, 16 May 2019 13:59:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id ECF949E7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E0F909E7
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 16 May 2019 13:54:54 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 907CF878
+	Thu, 16 May 2019 13:59:20 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4EB07897
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 16 May 2019 13:54:54 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id E8F4C882FB;
-	Thu, 16 May 2019 13:54:53 +0000 (UTC)
-Received: from gondolin (dhcp-192-222.str.redhat.com [10.33.192.222])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 6CADA60BE5;
-	Thu, 16 May 2019 13:54:46 +0000 (UTC)
-Date: Thu, 16 May 2019 15:54:44 +0200
-From: Cornelia Huck <cohuck@redhat.com>
-To: Halil Pasic <pasic@linux.ibm.com>
-Subject: Re: [PATCH 06/10] s390/cio: add basic protected virtualization support
-Message-ID: <20190516155444.158867ac.cohuck@redhat.com>
-In-Reply-To: <20190516154245.4a0a84f7.pasic@linux.ibm.com>
-References: <20190426183245.37939-1-pasic@linux.ibm.com>
-	<20190426183245.37939-7-pasic@linux.ibm.com>
-	<20190513114136.783c851c.cohuck@redhat.com>
-	<d0ffefec-a14e-ee83-0aae-df288c3ffda4@linux.ibm.com>
-	<20190515230817.2f8a8a5d.pasic@linux.ibm.com>
-	<20190516083228.0cc5b489.cohuck@redhat.com>
-	<20190516154245.4a0a84f7.pasic@linux.ibm.com>
-Organization: Red Hat GmbH
+	Thu, 16 May 2019 13:59:20 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id f24so3924323qtk.11
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 16 May 2019 06:59:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=4W8nxk4k4MVtLI1JLQcZmk+Bl22d4lanY5c6NY2cMcc=;
+	b=nRI1cI+IB/vKSHSF53Zy8fVLGe0dGokhVqgRrvUm3fIxUZlg36ZbNEV/OnSu/CN4qe
+	JsWSC1rHt1k/PC6XzGy5BI3S6T4v054kq7EX7tnKmI1OQZ6+iGRROOgm0BbcfJb7jXgC
+	x/56+gFmS5kRS+L1XbYgBl/d8I9umAUAl1bcHJ/ULdsX44L27U5u6f0Z65wcTJfcTHdr
+	5IkJJSCHnWqfAmffHid44ioTCcuH/8TRdSd1YAlhB62h+FViWzgZAQiVdHQFYDHLchiY
+	YyBqCaFDl/6oGN5owl/EUDq+//QGEPvW1GdP5PTQ+QDrD/Qr0gBFDOfL5RFRruMO2atx
+	mo+g==
+X-Gm-Message-State: APjAAAXe9PHWcpAwiMzthxYdkopXHxfuxZhiby94mLlBDr/M+5c6B29h
+	Ty9+jFf6B7RsG8H080BDJQDNcA==
+X-Google-Smtp-Source: APXvYqwNqjWbg9ip//OmA0nM3GR5PQZt9aCGRYqOitDJVOvfxjGNt2YWHJMFjse5jwjGBTbN3j6Jnw==
+X-Received: by 2002:a0c:fe48:: with SMTP id u8mr39012393qvs.234.1558015159428; 
+	Thu, 16 May 2019 06:59:19 -0700 (PDT)
+Received: from redhat.com ([185.54.206.10]) by smtp.gmail.com with ESMTPSA id
+	o37sm3676500qta.86.2019.05.16.06.59.12
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 16 May 2019 06:59:18 -0700 (PDT)
+Date: Thu, 16 May 2019 09:59:09 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH v9 2/7] virtio-pmem: Add virtio pmem driver
+Message-ID: <20190516095618-mutt-send-email-mst@kernel.org>
+References: <20190514145422.16923-1-pagupta@redhat.com>
+	<20190514145422.16923-3-pagupta@redhat.com>
+	<9f6b1d8e-ef90-7d8b-56da-61a426953ba3@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.28]);
-	Thu, 16 May 2019 13:54:54 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+Content-Disposition: inline
+In-Reply-To: <9f6b1d8e-ef90-7d8b-56da-61a426953ba3@redhat.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Jason J. Herne" <jjherne@linux.ibm.com>, linux-s390@vger.kernel.org,
-	Thomas Huth <thuth@redhat.com>,
-	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
-	Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
-	Eric Farman <farman@linux.ibm.com>,
+Cc: Pankaj Gupta <pagupta@redhat.com>, cohuck@redhat.com, jack@suse.cz,
+	kvm@vger.kernel.org, david@fromorbit.com, qemu-devel@nongnu.org,
 	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Martin Schwidefsky <schwidefsky@de.ibm.com>,
-	Michael Mueller <mimu@linux.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Vasily Gorbik <gor@linux.ibm.com>, Janosch Frank <frankja@linux.ibm.com>
+	adilger.kernel@dilger.ca, zwisler@kernel.org,
+	aarcange@redhat.com, dave.jiang@intel.com, jstaron@google.com,
+	linux-nvdimm@lists.01.org, vishal.l.verma@intel.com,
+	willy@infradead.org, hch@infradead.org,
+	linux-acpi@vger.kernel.org, jmoyer@redhat.com,
+	linux-ext4@vger.kernel.org, lenb@kernel.org, kilobyte@angband.pl,
+	riel@surriel.com, yuval.shaia@oracle.com, stefanha@redhat.com,
+	pbonzini@redhat.com, dan.j.williams@intel.com,
+	lcapitulino@redhat.com, nilal@redhat.com, tytso@mit.edu,
+	xiaoguangrong.eric@gmail.com, darrick.wong@oracle.com,
+	rjw@rjwysocki.net, linux-kernel@vger.kernel.org,
+	linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	imammedo@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,55 +90,145 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, 16 May 2019 15:42:45 +0200
-Halil Pasic <pasic@linux.ibm.com> wrote:
+On Wed, May 15, 2019 at 10:46:00PM +0200, David Hildenbrand wrote:
+> > +	vpmem->vdev = vdev;
+> > +	vdev->priv = vpmem;
+> > +	err = init_vq(vpmem);
+> > +	if (err) {
+> > +		dev_err(&vdev->dev, "failed to initialize virtio pmem vq's\n");
+> > +		goto out_err;
+> > +	}
+> > +
+> > +	virtio_cread(vpmem->vdev, struct virtio_pmem_config,
+> > +			start, &vpmem->start);
+> > +	virtio_cread(vpmem->vdev, struct virtio_pmem_config,
+> > +			size, &vpmem->size);
+> > +
+> > +	res.start = vpmem->start;
+> > +	res.end   = vpmem->start + vpmem->size-1;
+> 
+> nit: " - 1;"
+> 
+> > +	vpmem->nd_desc.provider_name = "virtio-pmem";
+> > +	vpmem->nd_desc.module = THIS_MODULE;
+> > +
+> > +	vpmem->nvdimm_bus = nvdimm_bus_register(&vdev->dev,
+> > +						&vpmem->nd_desc);
+> > +	if (!vpmem->nvdimm_bus) {
+> > +		dev_err(&vdev->dev, "failed to register device with nvdimm_bus\n");
+> > +		err = -ENXIO;
+> > +		goto out_vq;
+> > +	}
+> > +
+> > +	dev_set_drvdata(&vdev->dev, vpmem->nvdimm_bus);
+> > +
+> > +	ndr_desc.res = &res;
+> > +	ndr_desc.numa_node = nid;
+> > +	ndr_desc.flush = async_pmem_flush;
+> > +	set_bit(ND_REGION_PAGEMAP, &ndr_desc.flags);
+> > +	set_bit(ND_REGION_ASYNC, &ndr_desc.flags);
+> > +	nd_region = nvdimm_pmem_region_create(vpmem->nvdimm_bus, &ndr_desc);
+> > +	if (!nd_region) {
+> > +		dev_err(&vdev->dev, "failed to create nvdimm region\n");
+> > +		err = -ENXIO;
+> > +		goto out_nd;
+> > +	}
+> > +	nd_region->provider_data = dev_to_virtio(nd_region->dev.parent->parent);
+> > +	return 0;
+> > +out_nd:
+> > +	nvdimm_bus_unregister(vpmem->nvdimm_bus);
+> > +out_vq:
+> > +	vdev->config->del_vqs(vdev);
+> > +out_err:
+> > +	return err;
+> > +}
+> > +
+> > +static void virtio_pmem_remove(struct virtio_device *vdev)
+> > +{
+> > +	struct nvdimm_bus *nvdimm_bus = dev_get_drvdata(&vdev->dev);
+> > +
+> > +	nvdimm_bus_unregister(nvdimm_bus);
+> > +	vdev->config->del_vqs(vdev);
+> > +	vdev->config->reset(vdev);
+> > +}
+> > +
+> > +static struct virtio_driver virtio_pmem_driver = {
+> > +	.driver.name		= KBUILD_MODNAME,
+> > +	.driver.owner		= THIS_MODULE,
+> > +	.id_table		= id_table,
+> > +	.probe			= virtio_pmem_probe,
+> > +	.remove			= virtio_pmem_remove,
+> > +};
+> > +
+> > +module_virtio_driver(virtio_pmem_driver);
+> > +MODULE_DEVICE_TABLE(virtio, id_table);
+> > +MODULE_DESCRIPTION("Virtio pmem driver");
+> > +MODULE_LICENSE("GPL");
+> > diff --git a/drivers/nvdimm/virtio_pmem.h b/drivers/nvdimm/virtio_pmem.h
+> > new file mode 100644
+> > index 000000000000..ab1da877575d
+> > --- /dev/null
+> > +++ b/drivers/nvdimm/virtio_pmem.h
+> > @@ -0,0 +1,60 @@
+> > +/* SPDX-License-Identifier: GPL-2.0 */
+> > +/*
+> > + * virtio_pmem.h: virtio pmem Driver
+> > + *
+> > + * Discovers persistent memory range information
+> > + * from host and provides a virtio based flushing
+> > + * interface.
+> > + **/
+> > +
+> > +#ifndef _LINUX_VIRTIO_PMEM_H
+> > +#define _LINUX_VIRTIO_PMEM_H
+> > +
+> > +#include <linux/virtio_ids.h>
+> > +#include <linux/module.h>
+> > +#include <linux/virtio_config.h>
+> > +#include <uapi/linux/virtio_pmem.h>
+> > +#include <linux/libnvdimm.h>
+> > +#include <linux/spinlock.h>
+> > +
+> > +struct virtio_pmem_request {
+> > +	/* Host return status corresponding to flush request */
+> > +	int ret;
+> > +
+> > +	/* command name*/
+> > +	char name[16];
+> 
+> So ... why are we sending string commands and expect native-endianess
+> integers and don't define a proper request/response structure + request
+> types in include/uapi/linux/virtio_pmem.h like
 
-> On Thu, 16 May 2019 08:32:28 +0200
-> Cornelia Huck <cohuck@redhat.com> wrote:
-> 
-> > On Wed, 15 May 2019 23:08:17 +0200
-> > Halil Pasic <pasic@linux.ibm.com> wrote:
-> >   
-> > > On Tue, 14 May 2019 10:47:34 -0400
-> > > "Jason J. Herne" <jjherne@linux.ibm.com> wrote:  
-> >   
-> > > > Are we 
-> > > > worried that virtio data structures are going to be a burden on the 31-bit address space?
-> > > > 
-> > > >     
-> > > 
-> > > That is a good question I can not answer. Since it is currently at least
-> > > a page per queue (because we use dma direct, right Mimu?), I am concerned
-> > > about this.
-> > > 
-> > > Connie, what is your opinion?  
-> > 
-> > Yes, running into problems there was one of my motivations for my
-> > question. I guess it depends on the number of devices and how many
-> > queues they use. The problem is that it affects not only protected virt
-> > guests, but all guests.
-> >   
-> 
-> Unless things are about to change only devices that have
-> VIRTIO_F_IOMMU_PLATFORM are affected. So it does not necessarily affect
-> not protected virt guests. (With prot virt we have to use
-> VIRTIO_F_IOMMU_PLATFORM.)
-> 
-> If it were not like this, I would be much more worried.
+passing names could be ok.
+I missed the fact we return a native endian int.
+Pls fix that.
 
-If we go forward with this approach, documenting this side effect of
-VIRTIO_F_IOMMU_PLATFORM is something that needs to happen.
 
 > 
-> @Mimu: Could you please discuss this problem with the team? It might be
-> worth considering to go back to the design of the RFC (i.e. cio/ccw stuff
-> allocated from a common cio dma pool which gives you 31 bit addressable
-> memory, and 64 bit dma mask for a ccw device of a virtio device).
+> struct virtio_pmem_resp {
+> 	__virtio32 ret;
+> }
 > 
-> Regards,
-> Halil
+> #define VIRTIO_PMEM_REQ_TYPE_FLUSH	1
+> struct virtio_pmem_req {
+> 	__virtio16 type;
+> }
 > 
+> ... and this way we also define a proper endianess format for exchange
+> and keep it extensible
+> 
+> @MST, what's your take on this?
 
+Extensions can always use feature bits so I don't think
+it's a problem.
+
+> 
+> -- 
+> 
+> Thanks,
+> 
+> David / dhildenb
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
