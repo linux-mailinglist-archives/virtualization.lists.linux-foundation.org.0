@@ -2,78 +2,108 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6DC1208C9
-	for <lists.virtualization@lfdr.de>; Thu, 16 May 2019 15:59:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D30A208CA
+	for <lists.virtualization@lfdr.de>; Thu, 16 May 2019 15:59:38 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 45C3EE33;
-	Thu, 16 May 2019 13:59:22 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A0D18E38;
+	Thu, 16 May 2019 13:59:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E0F909E7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 84C259E7
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 16 May 2019 13:59:20 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4EB07897
+	Thu, 16 May 2019 13:59:31 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 34BAF897
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 16 May 2019 13:59:20 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id f24so3924323qtk.11
+	Thu, 16 May 2019 13:59:30 +0000 (UTC)
+Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x4GDrgAQ109751 for <virtualization@lists.linux-foundation.org>;
+	Thu, 16 May 2019 09:59:29 -0400
+Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2sh8d6jh9y-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 16 May 2019 06:59:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=4W8nxk4k4MVtLI1JLQcZmk+Bl22d4lanY5c6NY2cMcc=;
-	b=nRI1cI+IB/vKSHSF53Zy8fVLGe0dGokhVqgRrvUm3fIxUZlg36ZbNEV/OnSu/CN4qe
-	JsWSC1rHt1k/PC6XzGy5BI3S6T4v054kq7EX7tnKmI1OQZ6+iGRROOgm0BbcfJb7jXgC
-	x/56+gFmS5kRS+L1XbYgBl/d8I9umAUAl1bcHJ/ULdsX44L27U5u6f0Z65wcTJfcTHdr
-	5IkJJSCHnWqfAmffHid44ioTCcuH/8TRdSd1YAlhB62h+FViWzgZAQiVdHQFYDHLchiY
-	YyBqCaFDl/6oGN5owl/EUDq+//QGEPvW1GdP5PTQ+QDrD/Qr0gBFDOfL5RFRruMO2atx
-	mo+g==
-X-Gm-Message-State: APjAAAXe9PHWcpAwiMzthxYdkopXHxfuxZhiby94mLlBDr/M+5c6B29h
-	Ty9+jFf6B7RsG8H080BDJQDNcA==
-X-Google-Smtp-Source: APXvYqwNqjWbg9ip//OmA0nM3GR5PQZt9aCGRYqOitDJVOvfxjGNt2YWHJMFjse5jwjGBTbN3j6Jnw==
-X-Received: by 2002:a0c:fe48:: with SMTP id u8mr39012393qvs.234.1558015159428; 
-	Thu, 16 May 2019 06:59:19 -0700 (PDT)
-Received: from redhat.com ([185.54.206.10]) by smtp.gmail.com with ESMTPSA id
-	o37sm3676500qta.86.2019.05.16.06.59.12
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 16 May 2019 06:59:18 -0700 (PDT)
-Date: Thu, 16 May 2019 09:59:09 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: David Hildenbrand <david@redhat.com>
-Subject: Re: [PATCH v9 2/7] virtio-pmem: Add virtio pmem driver
-Message-ID: <20190516095618-mutt-send-email-mst@kernel.org>
-References: <20190514145422.16923-1-pagupta@redhat.com>
-	<20190514145422.16923-3-pagupta@redhat.com>
-	<9f6b1d8e-ef90-7d8b-56da-61a426953ba3@redhat.com>
+	Thu, 16 May 2019 09:59:29 -0400
+Received: from localhost
+	by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<sebott@linux.ibm.com>; Thu, 16 May 2019 14:59:27 +0100
+Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
+	by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Thu, 16 May 2019 14:59:25 +0100
+Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
+	by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x4GDxNsh19726444
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Thu, 16 May 2019 13:59:23 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7E3274203F;
+	Thu, 16 May 2019 13:59:23 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id EB51042042;
+	Thu, 16 May 2019 13:59:22 +0000 (GMT)
+Received: from dyn-9-152-212-110.boeblingen.de.ibm.com (unknown
+	[9.152.212.110])
+	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
+	Thu, 16 May 2019 13:59:22 +0000 (GMT)
+Date: Thu, 16 May 2019 15:59:22 +0200 (CEST)
+From: Sebastian Ott <sebott@linux.ibm.com>
+X-X-Sender: sebott@schleppi
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: Re: [PATCH 05/10] s390/cio: introduce DMA pools to cio
+In-Reply-To: <20190512202256.5517592d.pasic@linux.ibm.com>
+References: <20190426183245.37939-1-pasic@linux.ibm.com>
+	<20190426183245.37939-6-pasic@linux.ibm.com>
+	<alpine.LFD.2.21.1905081447280.1773@schleppi>
+	<20190508232210.5a555caa.pasic@linux.ibm.com>
+	<20190509121106.48aa04db.cohuck@redhat.com>
+	<20190510001112.479b2fd7.pasic@linux.ibm.com>
+	<20190510161013.7e697337.cohuck@redhat.com>
+	<20190512202256.5517592d.pasic@linux.ibm.com>
+User-Agent: Alpine 2.21 (LFD 202 2017-01-01)
+Organization: =?ISO-8859-15?Q?=22IBM_Deutschland_Research_&_Development_GmbH?=
+	=?ISO-8859-15?Q?_=2F_Vorsitzende_des_Aufsichtsrats=3A_Matthias?=
+	=?ISO-8859-15?Q?_Hartmann_Gesch=E4ftsf=FChrung=3A_Dirk_Wittkopp?=
+	=?ISO-8859-15?Q?_Sitz_der_Gesellschaft=3A_B=F6blingen_=2F_Reg?=
+	=?ISO-8859-15?Q?istergericht=3A_Amtsgericht_Stuttgart=2C_HRB_2432?=
+	=?ISO-8859-15?Q?94=22?=
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <9f6b1d8e-ef90-7d8b-56da-61a426953ba3@redhat.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+X-TM-AS-GCONF: 00
+x-cbid: 19051613-0028-0000-0000-0000036E602A
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19051613-0029-0000-0000-0000242DFB1E
+Message-Id: <alpine.LFD.2.21.1905161517570.1767@schleppi>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-16_11:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=3 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=921 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905160092
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Pankaj Gupta <pagupta@redhat.com>, cohuck@redhat.com, jack@suse.cz,
-	kvm@vger.kernel.org, david@fromorbit.com, qemu-devel@nongnu.org,
+Cc: Farhan Ali <alifm@linux.ibm.com>, linux-s390@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>, kvm@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	adilger.kernel@dilger.ca, zwisler@kernel.org,
-	aarcange@redhat.com, dave.jiang@intel.com, jstaron@google.com,
-	linux-nvdimm@lists.01.org, vishal.l.verma@intel.com,
-	willy@infradead.org, hch@infradead.org,
-	linux-acpi@vger.kernel.org, jmoyer@redhat.com,
-	linux-ext4@vger.kernel.org, lenb@kernel.org, kilobyte@angband.pl,
-	riel@surriel.com, yuval.shaia@oracle.com, stefanha@redhat.com,
-	pbonzini@redhat.com, dan.j.williams@intel.com,
-	lcapitulino@redhat.com, nilal@redhat.com, tytso@mit.edu,
-	xiaoguangrong.eric@gmail.com, darrick.wong@oracle.com,
-	rjw@rjwysocki.net, linux-kernel@vger.kernel.org,
-	linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	imammedo@redhat.com
+	Christoph Hellwig <hch@infradead.org>,
+	Martin Schwidefsky <schwidefsky@de.ibm.com>,
+	Michael Mueller <mimu@linux.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -90,145 +120,37 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, May 15, 2019 at 10:46:00PM +0200, David Hildenbrand wrote:
-> > +	vpmem->vdev = vdev;
-> > +	vdev->priv = vpmem;
-> > +	err = init_vq(vpmem);
-> > +	if (err) {
-> > +		dev_err(&vdev->dev, "failed to initialize virtio pmem vq's\n");
-> > +		goto out_err;
-> > +	}
-> > +
-> > +	virtio_cread(vpmem->vdev, struct virtio_pmem_config,
-> > +			start, &vpmem->start);
-> > +	virtio_cread(vpmem->vdev, struct virtio_pmem_config,
-> > +			size, &vpmem->size);
-> > +
-> > +	res.start = vpmem->start;
-> > +	res.end   = vpmem->start + vpmem->size-1;
+On Sun, 12 May 2019, Halil Pasic wrote:
+> I've also got code that deals with AIRQ_IV_CACHELINE by turning the
+> kmem_cache into a dma_pool.
 > 
-> nit: " - 1;"
-> 
-> > +	vpmem->nd_desc.provider_name = "virtio-pmem";
-> > +	vpmem->nd_desc.module = THIS_MODULE;
-> > +
-> > +	vpmem->nvdimm_bus = nvdimm_bus_register(&vdev->dev,
-> > +						&vpmem->nd_desc);
-> > +	if (!vpmem->nvdimm_bus) {
-> > +		dev_err(&vdev->dev, "failed to register device with nvdimm_bus\n");
-> > +		err = -ENXIO;
-> > +		goto out_vq;
-> > +	}
-> > +
-> > +	dev_set_drvdata(&vdev->dev, vpmem->nvdimm_bus);
-> > +
-> > +	ndr_desc.res = &res;
-> > +	ndr_desc.numa_node = nid;
-> > +	ndr_desc.flush = async_pmem_flush;
-> > +	set_bit(ND_REGION_PAGEMAP, &ndr_desc.flags);
-> > +	set_bit(ND_REGION_ASYNC, &ndr_desc.flags);
-> > +	nd_region = nvdimm_pmem_region_create(vpmem->nvdimm_bus, &ndr_desc);
-> > +	if (!nd_region) {
-> > +		dev_err(&vdev->dev, "failed to create nvdimm region\n");
-> > +		err = -ENXIO;
-> > +		goto out_nd;
-> > +	}
-> > +	nd_region->provider_data = dev_to_virtio(nd_region->dev.parent->parent);
-> > +	return 0;
-> > +out_nd:
-> > +	nvdimm_bus_unregister(vpmem->nvdimm_bus);
-> > +out_vq:
-> > +	vdev->config->del_vqs(vdev);
-> > +out_err:
-> > +	return err;
-> > +}
-> > +
-> > +static void virtio_pmem_remove(struct virtio_device *vdev)
-> > +{
-> > +	struct nvdimm_bus *nvdimm_bus = dev_get_drvdata(&vdev->dev);
-> > +
-> > +	nvdimm_bus_unregister(nvdimm_bus);
-> > +	vdev->config->del_vqs(vdev);
-> > +	vdev->config->reset(vdev);
-> > +}
-> > +
-> > +static struct virtio_driver virtio_pmem_driver = {
-> > +	.driver.name		= KBUILD_MODNAME,
-> > +	.driver.owner		= THIS_MODULE,
-> > +	.id_table		= id_table,
-> > +	.probe			= virtio_pmem_probe,
-> > +	.remove			= virtio_pmem_remove,
-> > +};
-> > +
-> > +module_virtio_driver(virtio_pmem_driver);
-> > +MODULE_DEVICE_TABLE(virtio, id_table);
-> > +MODULE_DESCRIPTION("Virtio pmem driver");
-> > +MODULE_LICENSE("GPL");
-> > diff --git a/drivers/nvdimm/virtio_pmem.h b/drivers/nvdimm/virtio_pmem.h
-> > new file mode 100644
-> > index 000000000000..ab1da877575d
-> > --- /dev/null
-> > +++ b/drivers/nvdimm/virtio_pmem.h
-> > @@ -0,0 +1,60 @@
-> > +/* SPDX-License-Identifier: GPL-2.0 */
-> > +/*
-> > + * virtio_pmem.h: virtio pmem Driver
-> > + *
-> > + * Discovers persistent memory range information
-> > + * from host and provides a virtio based flushing
-> > + * interface.
-> > + **/
-> > +
-> > +#ifndef _LINUX_VIRTIO_PMEM_H
-> > +#define _LINUX_VIRTIO_PMEM_H
-> > +
-> > +#include <linux/virtio_ids.h>
-> > +#include <linux/module.h>
-> > +#include <linux/virtio_config.h>
-> > +#include <uapi/linux/virtio_pmem.h>
-> > +#include <linux/libnvdimm.h>
-> > +#include <linux/spinlock.h>
-> > +
-> > +struct virtio_pmem_request {
-> > +	/* Host return status corresponding to flush request */
-> > +	int ret;
-> > +
-> > +	/* command name*/
-> > +	char name[16];
-> 
-> So ... why are we sending string commands and expect native-endianess
-> integers and don't define a proper request/response structure + request
-> types in include/uapi/linux/virtio_pmem.h like
+> Cornelia, Sebastian which approach do you prefer:
+> 1) get rid of cio_dma_pool and AIRQ_IV_CACHELINE, and waste a page per
+> vector, or
+> 2) go with the approach taken by the patch below?
 
-passing names could be ok.
-I missed the fact we return a native endian int.
-Pls fix that.
+We only have a couple of users for airq_iv:
+
+virtio_ccw.c: 2K bits
+
+pci with floating IRQs: <= 2K (for the per-function bit vectors)
+                        1..4K (for the summary bit vector)
+
+pci with CPU directed IRQs: 2K (for the per-CPU bit vectors)
+                            1..nr_cpu (for the summary bit vector)
 
 
-> 
-> struct virtio_pmem_resp {
-> 	__virtio32 ret;
-> }
-> 
-> #define VIRTIO_PMEM_REQ_TYPE_FLUSH	1
-> struct virtio_pmem_req {
-> 	__virtio16 type;
-> }
-> 
-> ... and this way we also define a proper endianess format for exchange
-> and keep it extensible
-> 
-> @MST, what's your take on this?
+The options are:
+* page allocations for everything
+* dma_pool for AIRQ_IV_CACHELINE ,gen_pool for others
+* dma_pool for everything
 
-Extensions can always use feature bits so I don't think
-it's a problem.
+I think we should do option 3 and use a dma_pool with cachesize
+alignment for everything (as a prerequisite we have to limit
+config PCI_NR_FUNCTIONS to 2K - but that is not a real constraint).
 
-> 
-> -- 
-> 
-> Thanks,
-> 
-> David / dhildenb
+Sebastian
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
