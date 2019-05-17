@@ -2,60 +2,51 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33A492178C
-	for <lists.virtualization@lfdr.de>; Fri, 17 May 2019 13:17:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CD7F219F4
+	for <lists.virtualization@lfdr.de>; Fri, 17 May 2019 16:46:22 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2144EB7D;
-	Fri, 17 May 2019 11:17:19 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E4A66B8A;
+	Fri, 17 May 2019 14:46:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id ED07CAC8
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DC5ECAD1
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 17 May 2019 11:17:16 +0000 (UTC)
+	Fri, 17 May 2019 14:46:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AE977882
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 97008879
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 17 May 2019 11:17:16 +0000 (UTC)
+	Fri, 17 May 2019 14:46:15 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
 	[10.5.11.23])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 9EDC28553F;
-	Fri, 17 May 2019 11:17:09 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-117-74.ams2.redhat.com
-	[10.36.117.74])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id C417F348CE;
-	Fri, 17 May 2019 11:17:04 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id CDE9C11AA3; Fri, 17 May 2019 13:17:03 +0200 (CEST)
-Date: Fri, 17 May 2019 13:17:03 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 0/2] Add BO reservation to GEM VRAM
-	pin/unpin/push_to_system
-Message-ID: <20190517111703.j3qtk74awnnebupe@sirius.home.kraxel.org>
-References: <20190516162746.11636-1-tzimmermann@suse.de>
+	by mx1.redhat.com (Postfix) with ESMTPS id 8587030832E6;
+	Fri, 17 May 2019 14:45:50 +0000 (UTC)
+Received: from steredhat.redhat.com (ovpn-116-83.ams2.redhat.com
+	[10.36.116.83])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id EF84519C4F;
+	Fri, 17 May 2019 14:45:44 +0000 (UTC)
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: netdev@vger.kernel.org
+Subject: [PATCH v3] vsock/virtio: free packets during the socket release
+Date: Fri, 17 May 2019 16:45:43 +0200
+Message-Id: <20190517144543.362935-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190516162746.11636-1-tzimmermann@suse.de>
-User-Agent: NeoMutt/20180716
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.28]);
-	Fri, 17 May 2019 11:17:16 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.44]);
+	Fri, 17 May 2019 14:45:58 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: noralf@tronnes.org, airlied@linux.ie, puck.chen@hisilicon.com,
-	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
-	z.liuxinliang@hisilicon.com, hdegoede@redhat.com,
-	kong.kongxinwei@hisilicon.com, ray.huang@amd.com,
-	daniel@ffwll.ch, zourongrong@gmail.com, sam@ravnborg.org,
-	christian.koenig@amd.com
+Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -72,29 +63,50 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-  Hi,
+When the socket is released, we should free all packets
+queued in the per-socket list in order to avoid a memory
+leak.
 
-> It turns out that the bochs and vbox drivers automatically reserved and
-> unreserved the BO from within their pin and unpin functions. The other
-> drivers; ast, hibmc and mgag200; performed reservation explicitly. With the
-> GEM VRAM conversion, automatic BO reservation within pin and unpin functions
-> accidentally got lost. So for bochs and vbox, ttm_bo_validate() worked on
-> unlocked BOs.
-> 
-> This patch set fixes the problem by adding automatic reservation to the
-> implementation of drm_gem_vram_{pin,unpin,push_to_system}() to fix bochs
-> and vbox. It removes explicit BO reservation around the pin, unpin and
-> push-to-system calls in the ast, hibmc and mgag200 drivers.
-> 
-> The only exception is the cursor handling of mgag200. In this case, the
-> mgag200 driver now calls drm_gem_vram_{pin,unpin}_reserved(), which works
-> with reserved BOs. The respective code should be refactored in a future
-> patch to work with the regular pin and unpin functions.
+Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+---
+This patch was in the series "[PATCH v2 0/8] vsock/virtio: optimizations
+to increase the throughput" [1]. As Stefan suggested, I'm sending it as
+a separated patch.
 
-Looks good, pushed to drm-misc-next.
+v3:
+  - use list_for_each_entry_safe() [David]
 
-thanks,
-  Gerd
+[1] https://patchwork.kernel.org/cover/10938743/
+---
+ net/vmw_vsock/virtio_transport_common.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
+index 602715fc9a75..f3f3d06cb6d8 100644
+--- a/net/vmw_vsock/virtio_transport_common.c
++++ b/net/vmw_vsock/virtio_transport_common.c
+@@ -786,12 +786,19 @@ static bool virtio_transport_close(struct vsock_sock *vsk)
+ 
+ void virtio_transport_release(struct vsock_sock *vsk)
+ {
++	struct virtio_vsock_sock *vvs = vsk->trans;
++	struct virtio_vsock_pkt *pkt, *tmp;
+ 	struct sock *sk = &vsk->sk;
+ 	bool remove_sock = true;
+ 
+ 	lock_sock(sk);
+ 	if (sk->sk_type == SOCK_STREAM)
+ 		remove_sock = virtio_transport_close(vsk);
++
++	list_for_each_entry_safe(pkt, tmp, &vvs->rx_queue, list) {
++		list_del(&pkt->list);
++		virtio_transport_free_pkt(pkt);
++	}
+ 	release_sock(sk);
+ 
+ 	if (remove_sock)
+-- 
+2.20.1
 
 _______________________________________________
 Virtualization mailing list
