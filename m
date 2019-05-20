@@ -2,79 +2,67 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F8FB236D5
-	for <lists.virtualization@lfdr.de>; Mon, 20 May 2019 15:17:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 368612388A
+	for <lists.virtualization@lfdr.de>; Mon, 20 May 2019 15:44:06 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DB353D73;
-	Mon, 20 May 2019 13:17:04 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 00AB1EC8;
+	Mon, 20 May 2019 13:44:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4E095D39
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B735AEA2
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 20 May 2019 13:17:03 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DA8FCA3
+	Mon, 20 May 2019 13:44:00 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3DC517ED
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 20 May 2019 13:17:02 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id a64so8756483qkg.5
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 20 May 2019 06:17:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=bZcyqtPfiR8OnSe7X+YvU6P3WmrTts8Lp+0qyg4aj2M=;
-	b=IafgzrR3lK9Qk+QQlY4eRf7TWo7M//xczfE7S+BOCm+a2vLFAEVA480yEAhspsPmiL
-	DW9QFHSWr2Csp9LXNay8qGyh6foOqqtjV8t8BO+C3jcxk2ZRCXuYZFb2PsJ823S4dTLv
-	kqpq+58KSgARKctvCE5ER01AgnZ0SnXLbGqGtjF07zHNQr55/0QeILN8EMOLcPQhcoBo
-	Ux0KIfEsJngVJesCc4noevpYe2H+3ijDXmQyybBhmLTpZFfzvXBAwq5D/zY+MebYCqJO
-	WruPJwxJSH/vYx+7CM6BBz2cMIvVvR+kjwXrzQjMgIdBsR0ajhIdkaxqcEAcKSgkAO9k
-	svtA==
-X-Gm-Message-State: APjAAAWXz1pIdiZFLetaeJ/oAJz2QQ1JqCd84IUdK8bkF6ZXTA/OVQM4
-	PFQpomVvgEDu2zwLixpFyKa8Dw==
-X-Google-Smtp-Source: APXvYqw0FqLkxwDq3if4j/PtdUGJI5ox1BH3UIwaju3gNcXX5ayK/jpLunGqH+2wq+Rcle7lAXdfbA==
-X-Received: by 2002:a37:4c02:: with SMTP id z2mr46791719qka.1.1558358222050;
-	Mon, 20 May 2019 06:17:02 -0700 (PDT)
-Received: from redhat.com (pool-173-76-105-71.bstnma.fios.verizon.net.
-	[173.76.105.71]) by smtp.gmail.com with ESMTPSA id
-	d16sm11577917qtd.73.2019.05.20.06.16.59
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Mon, 20 May 2019 06:17:00 -0700 (PDT)
-Date: Mon, 20 May 2019 09:16:57 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Thiago Jung Bauermann <bauerman@linux.ibm.com>
-Subject: Re: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
-Message-ID: <20190520090939-mutt-send-email-mst@kernel.org>
-References: <87zhrj8kcp.fsf@morokweng.localdomain>
-	<87womn8inf.fsf@morokweng.localdomain>
-	<20190129134750-mutt-send-email-mst@kernel.org>
-	<877eefxvyb.fsf@morokweng.localdomain>
-	<20190204144048-mutt-send-email-mst@kernel.org>
-	<87ef71seve.fsf@morokweng.localdomain>
-	<20190320171027-mutt-send-email-mst@kernel.org>
-	<87tvfvbwpb.fsf@morokweng.localdomain>
-	<20190323165456-mutt-send-email-mst@kernel.org>
-	<87a7go71hz.fsf@morokweng.localdomain>
+	Mon, 20 May 2019 13:44:00 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 5B088325DC7A;
+	Mon, 20 May 2019 13:43:54 +0000 (UTC)
+Received: from gondolin (ovpn-204-110.brq.redhat.com [10.40.204.110])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 372B810ECC31;
+	Mon, 20 May 2019 13:43:50 +0000 (UTC)
+Date: Mon, 20 May 2019 15:43:46 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: Re: [PATCH 06/10] s390/cio: add basic protected virtualization support
+Message-ID: <20190520154346.4f95ab3a.cohuck@redhat.com>
+In-Reply-To: <20190520143411.15130af3.pasic@linux.ibm.com>
+References: <20190426183245.37939-1-pasic@linux.ibm.com>
+	<20190426183245.37939-7-pasic@linux.ibm.com>
+	<20190513114136.783c851c.cohuck@redhat.com>
+	<20190515225158.301af387.pasic@linux.ibm.com>
+	<20190516082928.1371696b.cohuck@redhat.com>
+	<20190518201100.0fd07d7f.pasic@linux.ibm.com>
+	<20190520122143.259ff8df.cohuck@redhat.com>
+	<20190520143411.15130af3.pasic@linux.ibm.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <87a7go71hz.fsf@morokweng.localdomain>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=unavailable version=3.3.1
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.40]);
+	Mon, 20 May 2019 13:43:54 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Mike Anderson <andmike@linux.ibm.com>,
-	Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Alexey Kardashevskiy <aik@linux.ibm.com>,
-	Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
+	Sebastian Ott <sebott@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	Paul Mackerras <paulus@ozlabs.org>,
-	iommu@lists.linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
-	Christoph Hellwig <hch@lst.de>, David Gibson <david@gibson.dropbear.id.au>
+	Christoph Hellwig <hch@infradead.org>,
+	Martin Schwidefsky <schwidefsky@de.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -91,34 +79,98 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Apr 17, 2019 at 06:42:00PM -0300, Thiago Jung Bauermann wrote:
-> I rephrased it in terms of address translation. What do you think of
-> this version? The flag name is slightly different too:
+On Mon, 20 May 2019 14:34:11 +0200
+Halil Pasic <pasic@linux.ibm.com> wrote:
+
+> On Mon, 20 May 2019 12:21:43 +0200
+> Cornelia Huck <cohuck@redhat.com> wrote:
 > 
+> > On Sat, 18 May 2019 20:11:00 +0200
+> > Halil Pasic <pasic@linux.ibm.com> wrote:
+> >   
+> > > On Thu, 16 May 2019 08:29:28 +0200
+> > > Cornelia Huck <cohuck@redhat.com> wrote:
+> > >   
+> > > > On Wed, 15 May 2019 22:51:58 +0200
+> > > > Halil Pasic <pasic@linux.ibm.com> wrote:  
+
+> > > > > A side note: making the subchannel device 'own' the DMA stuff of a
+> > > > > ccw device (something that was discussed in the RFC thread) is tricky
+> > > > > because the ccw device may outlive the subchannel (all that orphan
+> > > > > stuff).    
+> > > > 
+> > > > Yes, that's... eww. Not really a problem for virtio-ccw devices (which
+> > > > do not support the disconnected state), but can we make DMA and the
+> > > > subchannel moving play nice with each other at all?
+> > > >     
+> > > 
+> > > I don't quite understand the question. This series does not have any
+> > > problems with that AFAIU. Can you please clarify?  
+> > 
+> > Wait, weren't you saying that there actually is a problem?
+> >  
 > 
-> VIRTIO_F_ACCESS_PLATFORM_NO_TRANSLATION This feature has the same
->     meaning as VIRTIO_F_ACCESS_PLATFORM both when set and when not set,
->     with the exception that address translation is guaranteed to be
->     unnecessary when accessing memory addresses supplied to the device
->     by the driver. Which is to say, the device will always use physical
->     addresses matching addresses used by the driver (typically meaning
->     physical addresses used by the CPU) and not translated further. This
->     flag should be set by the guest if offered, but to allow for
->     backward-compatibility device implementations allow for it to be
->     left unset by the guest. It is an error to set both this flag and
->     VIRTIO_F_ACCESS_PLATFORM.
+> No, what I tried to say is: if we tried to make all the dma mem belong to
+> the subchannel device, we would have a problem. It appeared as a
+> tempting opportunity for consolidation, but I decided to not do it.
 
+Ok, that makes sense.
 
-OK so VIRTIO_F_ACCESS_PLATFORM is designed to allow unpriveledged
-drivers. This is why devices fail when it's not negotiated.
+> 
+> > We seem to have the following situation:
+> > - the device per se is represented by the ccw device
+> > - the subchannel is the means of communication, and dma is tied to the
+> >   (I/O ?) subchannel  
+> 
+> It is not. When for example a virtio-ccw device talks to the device
+> using a channel program, the dma mem hosting the channel program belongs
+> to the ccw device and not to the subchannel.
+> 
+> In fact everything but the stuff in io_priv->dma_area belongs to the ccw
+> device.
 
-This confuses me.
-If driver is unpriveledged then what happens with this flag?
-It can supply any address it wants. Will that corrupt kernel
-memory?
+Normal machine check handling hopefully should cover this one, then.
 
--- 
-MST
+> 
+> > - the machine check handling code may move a ccw device to a different
+> >   subchannel, or even to a fake subchannel (orphanage handling)
+> >   
+> 
+> Right!
+> 
+> > The moving won't happen with virtio-ccw devices (as they do not support
+> > the disconnected state, which is a prereq for being moved around), but
+> > at a glance, this looks like it is worth some more thought.
+> > 
+> > - Are all (I/O) subchannels using e.g. the same dma size? (TBH, that
+> >   question sounds a bit silly: that should be a property belonging to
+> >   the ccw device, shouldn't it?)
+> > - What dma properties does the fake subchannel have? (Probably none, as
+> >   its only purpose is to serve as a parent for otherwise parentless
+> >   disconnected ccw devices, and is therefore not involved in any I/O.)
+> > - There needs to be some kind of handling in the machine check code, I
+> >   guess? We would probably need a different allocation if we end up at
+> >   a different subchannel?
+> >   
+> 
+> Basically nothing changes with mem ownership, except that some bits are
+> dma memory now. Should I provide a more detailed answer to the
+> questions above?
+
+No real need, I simply did not understand your initial remark correctly.
+
+> 
+> > I think we can assume that the dma size is at most 31 bits (since that
+> > is what the common I/O layer needs); but can we also assume that it
+> > will always be at least 31 bits?
+> >   
+> 
+> You mean dma_mas by dma size?
+
+Whatever it is called :) IIUC, we need to go with 31 bit for any
+channel I/O related structures; I was mainly wondering whether any
+devices need a lower limit for some of the memory they use. I would be
+surprised if they did, but you never know :)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
