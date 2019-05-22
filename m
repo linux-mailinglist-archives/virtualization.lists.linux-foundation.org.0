@@ -2,112 +2,39 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D58F2636C
-	for <lists.virtualization@lfdr.de>; Wed, 22 May 2019 14:07:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEDF6264E5
+	for <lists.virtualization@lfdr.de>; Wed, 22 May 2019 15:39:45 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0466FCBF;
-	Wed, 22 May 2019 12:07:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 57934D9D;
+	Wed, 22 May 2019 13:38:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 82BB8C4E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2C34DD8E
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 22 May 2019 12:07:15 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 007A7102
+	Wed, 22 May 2019 13:38:44 +0000 (UTC)
+X-Greylist: delayed 00:35:45 by SQLgrey-1.7.6
+Received: from sipsolutions.net (s3.sipsolutions.net [144.76.43.62])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B4EA588E
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 22 May 2019 12:07:14 +0000 (UTC)
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x4MC5YTT113652 for <virtualization@lists.linux-foundation.org>;
-	Wed, 22 May 2019 08:07:14 -0400
-Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
-	by mx0b-001b2d01.pphosted.com with ESMTP id 2sn6018fey-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 22 May 2019 08:07:13 -0400
-Received: from localhost
-	by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<sebott@linux.ibm.com>; Wed, 22 May 2019 13:07:12 +0100
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
-	by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Wed, 22 May 2019 13:07:08 +0100
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
-	[9.149.105.59])
-	by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x4MC76kQ9502890
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Wed, 22 May 2019 12:07:06 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 99155A405F;
-	Wed, 22 May 2019 12:07:06 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 1A120A4055;
-	Wed, 22 May 2019 12:07:06 +0000 (GMT)
-Received: from dyn-9-152-212-204.boeblingen.de.ibm.com (unknown
-	[9.152.212.204])
-	by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
-	Wed, 22 May 2019 12:07:06 +0000 (GMT)
-Date: Wed, 22 May 2019 14:07:05 +0200 (CEST)
-From: Sebastian Ott <sebott@linux.ibm.com>
-X-X-Sender: sebott@schleppi
-To: Halil Pasic <pasic@linux.ibm.com>
-Subject: Re: [PATCH 05/10] s390/cio: introduce DMA pools to cio
-In-Reply-To: <20190520141312.4e3a2d36.pasic@linux.ibm.com>
-References: <20190426183245.37939-1-pasic@linux.ibm.com>
-	<20190426183245.37939-6-pasic@linux.ibm.com>
-	<alpine.LFD.2.21.1905081447280.1773@schleppi>
-	<20190508232210.5a555caa.pasic@linux.ibm.com>
-	<20190509121106.48aa04db.cohuck@redhat.com>
-	<20190510001112.479b2fd7.pasic@linux.ibm.com>
-	<20190510161013.7e697337.cohuck@redhat.com>
-	<20190512202256.5517592d.pasic@linux.ibm.com>
-	<alpine.LFD.2.21.1905161517570.1767@schleppi>
-	<20190520141312.4e3a2d36.pasic@linux.ibm.com>
-User-Agent: Alpine 2.21 (LFD 202 2017-01-01)
-Organization: =?ISO-8859-15?Q?=22IBM_Deutschland_Research_&_Development_GmbH?=
-	=?ISO-8859-15?Q?_=2F_Vorsitzende_des_Aufsichtsrats=3A_Matthias?=
-	=?ISO-8859-15?Q?_Hartmann_Gesch=E4ftsf=FChrung=3A_Dirk_Wittkopp?=
-	=?ISO-8859-15?Q?_Sitz_der_Gesellschaft=3A_B=F6blingen_=2F_Reg?=
-	=?ISO-8859-15?Q?istergericht=3A_Amtsgericht_Stuttgart=2C_HRB_2432?=
-	=?ISO-8859-15?Q?94=22?=
-MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19052212-0016-0000-0000-0000027E4FF1
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19052212-0017-0000-0000-000032DB415F
-Message-Id: <alpine.LFD.2.21.1905221344180.1782@schleppi>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-22_05:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=3 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1905220089
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+	Wed, 22 May 2019 13:38:43 +0000 (UTC)
+Received: by sipsolutions.net with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+	(envelope-from <johannes@sipsolutions.net>)
+	id 1hTQtE-0005go-Fa; Wed, 22 May 2019 15:02:40 +0200
+Message-ID: <0952696452f5ff4e38d2417029243fc60efa33d6.camel@sipsolutions.net>
+Subject: custom virt-io support (in user-mode-linux)
+From: Johannes Berg <johannes@sipsolutions.net>
+To: linux-um@lists.infradead.org, virtualization@lists.linux-foundation.org,
+	qemu-devel@nongnu.org
+Date: Wed, 22 May 2019 15:02:38 +0200
+X-Mailer: Evolution 3.28.5 (3.28.5-2.fc28) 
+Mime-Version: 1.0
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00
+	autolearn=unavailable version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Farhan Ali <alifm@linux.ibm.com>, linux-s390@vger.kernel.org,
-	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
-	Vasily Gorbik <gor@linux.ibm.com>, kvm@vger.kernel.org,
-	"Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
-	Eric Farman <farman@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Martin Schwidefsky <schwidefsky@de.ibm.com>,
-	Michael Mueller <mimu@linux.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -124,83 +51,53 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, 20 May 2019, Halil Pasic wrote:
-> On Thu, 16 May 2019 15:59:22 +0200 (CEST)
-> Sebastian Ott <sebott@linux.ibm.com> wrote:
-> > We only have a couple of users for airq_iv:
-> > 
-> > virtio_ccw.c: 2K bits
-> 
-> You mean a single allocation is 2k bits (VIRTIO_IV_BITS = 256 * 8)? My
-> understanding is that the upper bound is more like:
-> MAX_AIRQ_AREAS * VIRTIO_IV_BITS = 20 * 256 * 8 = 40960 bits.
-> 
-> In practice it is most likely just 2k.
-> 
-> > 
-> > pci with floating IRQs: <= 2K (for the per-function bit vectors)
-> >                         1..4K (for the summary bit vector)
-> >
-> 
-> As far as I can tell with virtio_pci arch_setup_msi_irqs() gets called
-> once per device and allocates a small number of bits (2 and 3 in my
-> test, it may depend on #virtqueues, but I did not check).
-> 
-> So for an upper bound we would have to multiply with the upper bound of
-> pci devices/functions. What is the upper bound on the number of
-> functions?
-> 
-> > pci with CPU directed IRQs: 2K (for the per-CPU bit vectors)
-> >                             1..nr_cpu (for the summary bit vector)
-> > 
-> 
-> I guess this is the same.
-> 
-> > 
-> > The options are:
-> > * page allocations for everything
-> 
-> Worst case we need 20 + #max_pci_dev pages. At the moment we allocate
-> from ZONE_DMA (!) and waste a lot.
-> 
-> > * dma_pool for AIRQ_IV_CACHELINE ,gen_pool for others
-> 
-> I prefer this. Explanation follows.
-> 
-> > * dma_pool for everything
-> > 
-> 
-> Less waste by factor factor 16.
-> 
-> > I think we should do option 3 and use a dma_pool with cachesize
-> > alignment for everything (as a prerequisite we have to limit
-> > config PCI_NR_FUNCTIONS to 2K - but that is not a real constraint).
-> 
-> I prefer option 3 because it is conceptually the smallest change, and
-                  ^
-                  2
-> provides the behavior which is closest to the current one.
+Hi,
 
-I can see that this is the smallest change on top of the current
-implementation. I'm good with doing that and looking for further
-simplification/unification later.
+While my main interest is mostly in UML right now [1] I've CC'ed the
+qemu and virtualization lists because something similar might actually
+apply to other types of virtualization.
 
+I'm thinking about adding virt-io support to UML, but the tricky part is
+that while I want to use the virt-io basics (because it's a nice
+interface from the 'inside'), I don't actually want the stock drivers
+that are part of the kernel now (like virtio-net etc.) but rather
+something that integrates with wifi (probably building on hwsim).
 
-> Commit  414cbd1e3d14 "s390/airq: provide cacheline aligned
-> ivs" (Sebastian Ott, 2019-02-27) could have been smaller had you implemented
-> 'kmem_cache for everything' (and I would have had just to replace kmem_cache with
-> dma_cache to achieve option 3). For some reason you decided to keep the
-> iv->vector = kzalloc(size, GFP_KERNEL) code-path and make the client code request
-> iv->vector = kmem_cache_zalloc(airq_iv_cache, GFP_KERNEL) explicitly, using a flag
-> which you only decided to use for directed pci irqs AFAICT.
-> 
-> My understanding of these decisions, and especially of the rationale
-> behind commit 414cbd1e3d14 is limited.
+The 'inside' interfaces aren't really a problem - just have a specific
+device ID for this, and then write a normal virtio kernel driver for it.
 
-I introduced per cpu interrupt vectors and wanted to prevent 2 CPUs from
-sharing data from the same cacheline. No other user of the airq stuff had
-this need. If I had been aware of the additional complexity we would add
-on top of that maybe I would have made a different decision.
+The 'outside' interfaces are where my thinking breaks down right now.
+
+Looking at lkl, the outside is just all implemented in lkl as code that
+gets linked to the library, so in UML terms it'd just be extra 'outside'
+code like the timer handling or other netdev stuff we have today.
+Looking at qemu, it's of course also implemented there, and then
+interfaces with the real network, console abstraction, etc.
+
+However, like I said above, I really need something very custom and not
+likely to make it upstream to any project (because what point is that if
+you cannot connect to the rest of the environment I'm building), so I'm
+thinking that perhaps it should be possible to write an abstract
+'outside' that lets you interact with it really from out-of-process?
+Perhaps through some kind of shared memory segment? I think that gets
+tricky with virt-io doing DMA (I think it does?) though, so that part
+would have to be implemented directly and not out-of-process?
+
+But really that's why I'm asking - is there a better way than to just
+link the device-side virt-io code into the same binary (be it lkl lib,
+uml binary, qemu binary)?
+
+Thanks,
+johannes
+
+[1] Actually, I've considered using qemu, but it doesn't have
+virtualized time and doesn't seem to support TSC virtualization. I guess
+I could remove TSC from the guest CPU and add a virtualized HPET, but
+I've yet to convince myself this works - on UML I made virtual time as a
+prototype already:
+https://patchwork.ozlabs.org/patch/1095814/
+(though my real goal isn't to just skip time forward when the host goes
+idle, it's to sync with other simulated components)
 
 _______________________________________________
 Virtualization mailing list
