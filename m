@@ -2,44 +2,44 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9D3F25E16
-	for <lists.virtualization@lfdr.de>; Wed, 22 May 2019 08:36:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42D6425E39
+	for <lists.virtualization@lfdr.de>; Wed, 22 May 2019 08:37:36 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C0775A7F;
-	Wed, 22 May 2019 06:36:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3BA11A55;
+	Wed, 22 May 2019 06:37:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D94517A9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id C564A3EE
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 22 May 2019 06:36:04 +0000 (UTC)
+	Wed, 22 May 2019 06:37:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 347277FB
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 325236C5
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 22 May 2019 06:36:03 +0000 (UTC)
+	Wed, 22 May 2019 06:37:30 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
 	[83.86.89.107])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id E24E820644;
-	Wed, 22 May 2019 06:36:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 7914E20856;
+	Wed, 22 May 2019 06:37:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1558506963;
-	bh=Rv3kec8hIGv+HIsgKCc6vibvaz5xYqIF3nu3hVvwjbc=;
+	s=default; t=1558507050;
+	bh=FmNlx7Vo1bIdQb6BqxEbbxYQt01++ODhLmfD+kTVN2E=;
 	h=Subject:To:Cc:From:Date:From;
-	b=JO6pqooIxUqdRMf0fzOCo9I4ueSS/nJKc/uIFKj8X3q1994Ak0Byxb9AtMV1MTRer
-	gAS6yU9Pe5dPRpEGSHyhE9VTGEEh0VtV/vhRSh9z6XcbvowGbL2eV7Y3PahDx5xMOw
-	1mvwqBOh3CUQuAda2QUNDkSzV8Q4qlrUvZLgH5dY=
+	b=wVDwCJKSfQf2hPICmNIOmpNUE2Zfz2oZfPBgQmXAFW4wy7Qp0QBqj9WtR7lwfrggH
+	2zRHFuDRhs3sBISiljrFldWJ89kEuTGTSPlMBOhi9f8iZdRL1RDYIyyr82Hqa3+/Iv
+	Dm0ILyCB38ysm1qRfqmuHBn7N//Wyg0HdyA9TYNc=
 Subject: Patch "vsock/virtio: Initialize core virtio vsock before registering
-	the driver" has been added to the 5.0-stable tree
+	the driver" has been added to the 5.1-stable tree
 To: davem@davemloft.net, gregkh@linuxfoundation.org, jemoreira@google.com,
 	kernel-team@android.com, sgarzare@redhat.com,
 	stefanha@redhat.com, virtualization@lists.linux-foundation.org
 From: <gregkh@linuxfoundation.org>
-Date: Wed, 22 May 2019 08:35:35 +0200
-Message-ID: <1558506935203136@kroah.com>
+Date: Wed, 22 May 2019 08:36:28 +0200
+Message-ID: <1558506988510@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
@@ -69,18 +69,18 @@ This is a note to let you know that I've just added the patch titled
 
     vsock/virtio: Initialize core virtio vsock before registering the driver
 
-to the 5.0-stable tree which can be found at:
+to the 5.1-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      vsock-virtio-initialize-core-virtio-vsock-before-registering-the-driver.patch
-and it can be found in the queue-5.0 subdirectory.
+and it can be found in the queue-5.1 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
 
 
-From foo@baz Wed 22 May 2019 08:35:12 AM CEST
+From foo@baz Wed 22 May 2019 08:34:59 AM CEST
 From: "Jorge E. Moreira" <jemoreira@google.com>
 Date: Thu, 16 May 2019 13:51:07 -0700
 Subject: vsock/virtio: Initialize core virtio vsock before registering the driver
@@ -192,7 +192,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from jemoreira@google.com are
 
-queue-5.0/vsock-virtio-initialize-core-virtio-vsock-before-registering-the-driver.patch
+queue-5.1/vsock-virtio-initialize-core-virtio-vsock-before-registering-the-driver.patch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
