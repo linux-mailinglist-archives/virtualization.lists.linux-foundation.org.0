@@ -2,66 +2,57 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 639B1284D0
-	for <lists.virtualization@lfdr.de>; Thu, 23 May 2019 19:22:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A296C28725
+	for <lists.virtualization@lfdr.de>; Thu, 23 May 2019 21:21:27 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D6240F00;
-	Thu, 23 May 2019 17:22:39 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id D859EF79;
+	Thu, 23 May 2019 19:21:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D79CAE53
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7FD47F81
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 23 May 2019 17:22:38 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7C7BF87D
+	Thu, 23 May 2019 19:21:09 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 02D5B7FB
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 23 May 2019 17:22:38 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id c15so4304571qkl.2
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 23 May 2019 10:22:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=orxdKAeTGhuAr1KDO8ykLR98bbgYAJIpSNP1r+lkby0=;
-	b=qsNf3h/OuG45+yuiksa35FjQUgsf+VYkVeHDQwqh/EgxFXgqmm2zR5TDpwNw95U1tm
-	2jl5+A2XuxYw78MWj2vsojWpA+jTDacu2mKb2YrKieMnnY7eRVUzTkeX9lslhZtPMWPx
-	2BE23S/Gp2eTIkWmJC/o1sdVhijHTTAITaeYiSvjfiP+T8in6uyOEGNLjoIirXIwd/mE
-	iOh7/R04OJfkZS8nqZQAw4BHeB71Hq80VB/P64zsB930q3HI89qlyhda2Zi2/yFxmz4L
-	knDx0AGhoHe9HuAvVtbprFpUX/m+A5A92MCxKvgV3nRXp3jgEHC5Fnuqd6LF681M5Ciy
-	H1LQ==
-X-Gm-Message-State: APjAAAUzM8r1R77J02+ceTp3bN3hiR6UklF+ZRTS2P+bQQcVOLGW9u/w
-	wzqVdlt3md5TYKrf5bH6lQqxsQ==
-X-Google-Smtp-Source: APXvYqykamv1Wqqs833PdyLZedOafUeo+CHIJkq0yhHSr/u9oMeUTX6fQlKnQFFG/JvpWeUzz3qZdw==
-X-Received: by 2002:a05:620a:1084:: with SMTP id
-	g4mr75399078qkk.228.1558632157708; 
-	Thu, 23 May 2019 10:22:37 -0700 (PDT)
-Received: from redhat.com (pool-173-76-105-71.bstnma.fios.verizon.net.
-	[173.76.105.71]) by smtp.gmail.com with ESMTPSA id
-	x30sm18102171qtx.35.2019.05.23.10.22.34
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 23 May 2019 10:22:36 -0700 (PDT)
-Date: Thu, 23 May 2019 13:22:32 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: David Miller <davem@davemloft.net>
-Subject: Re: [PATCH V2 0/4] Prevent vhost kthread from hogging CPU
-Message-ID: <20190523132228-mutt-send-email-mst@kernel.org>
-References: <1558067392-11740-1-git-send-email-jasowang@redhat.com>
-	<20190518.132712.1971625204431294331.davem@davemloft.net>
+	Thu, 23 May 2019 19:21:08 +0000 (UTC)
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+	[83.86.89.107])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 3B48F205ED;
+	Thu, 23 May 2019 19:21:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1558639268;
+	bh=k5a2uGeSV8BCZEQP5DMuv8ykv8Uyr3yo+lrxvYUCLfE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=jtk63p1Z7mS1/6whjVVFJtKGeqrqxQiaiGH04xbIwoN5m5fSIQWAScNxkNnDsB9Y4
+	xqWFQ5OU4IsymDUnHiXQYTGTtjJmALdEcGeGI3ViWvslwKhsYMAvQXp9rsY//hdWL7
+	NZWgl+Oh9WCK3vEGWocIvu2pE5WEkGYkh+zajOUQ=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH 5.0 014/139] vsock/virtio: Initialize core virtio vsock before
+	registering the driver
+Date: Thu, 23 May 2019 21:05:02 +0200
+Message-Id: <20190523181722.326937126@linuxfoundation.org>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190523181720.120897565@linuxfoundation.org>
+References: <20190523181720.120897565@linuxfoundation.org>
+User-Agent: quilt/0.66
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190518.132712.1971625204431294331.davem@davemloft.net>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, stefanha@redhat.com,
-	pbonzini@redhat.com
+Cc: kvm@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	stable@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	"Jorge E. Moreira" <jemoreira@google.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>, netdev@vger.kernel.org,
+	kernel-team@android.com, "David S. Miller" <davem@davemloft.net>,
+	Stefano Garzarella <sgarzare@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -78,30 +69,110 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sat, May 18, 2019 at 01:27:12PM -0700, David Miller wrote:
-> From: Jason Wang <jasowang@redhat.com>
-> Date: Fri, 17 May 2019 00:29:48 -0400
-> 
-> > Hi:
-> > 
-> > This series try to prevent a guest triggerable CPU hogging through
-> > vhost kthread. This is done by introducing and checking the weight
-> > after each requrest. The patch has been tested with reproducer of
-> > vsock and virtio-net. Only compile test is done for vhost-scsi.
-> > 
-> > Please review.
-> > 
-> > This addresses CVE-2019-3900.
-> > 
-> > Changs from V1:
-> > - fix user-ater-free in vosck patch
-> 
-> I am assuming that not only will mst review this, it will also go via
-> his tree rather than mine.
-> 
-> Thanks.
+From: "Jorge E. Moreira" <jemoreira@google.com>
 
-Will do.
+[ Upstream commit ba95e5dfd36647622d8897a2a0470dde60e59ffd ]
+
+Avoid a race in which static variables in net/vmw_vsock/af_vsock.c are
+accessed (while handling interrupts) before they are initialized.
+
+[    4.201410] BUG: unable to handle kernel paging request at ffffffffffffffe8
+[    4.207829] IP: vsock_addr_equals_addr+0x3/0x20
+[    4.211379] PGD 28210067 P4D 28210067 PUD 28212067 PMD 0
+[    4.211379] Oops: 0000 [#1] PREEMPT SMP PTI
+[    4.211379] Modules linked in:
+[    4.211379] CPU: 1 PID: 30 Comm: kworker/1:1 Not tainted 4.14.106-419297-gd7e28cc1f241 #1
+[    4.211379] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.10.2-1 04/01/2014
+[    4.211379] Workqueue: virtio_vsock virtio_transport_rx_work
+[    4.211379] task: ffffa3273d175280 task.stack: ffffaea1800e8000
+[    4.211379] RIP: 0010:vsock_addr_equals_addr+0x3/0x20
+[    4.211379] RSP: 0000:ffffaea1800ebd28 EFLAGS: 00010286
+[    4.211379] RAX: 0000000000000002 RBX: 0000000000000000 RCX: ffffffffb94e42f0
+[    4.211379] RDX: 0000000000000400 RSI: ffffffffffffffe0 RDI: ffffaea1800ebdd0
+[    4.211379] RBP: ffffaea1800ebd58 R08: 0000000000000001 R09: 0000000000000001
+[    4.211379] R10: 0000000000000000 R11: ffffffffb89d5d60 R12: ffffaea1800ebdd0
+[    4.211379] R13: 00000000828cbfbf R14: 0000000000000000 R15: ffffaea1800ebdc0
+[    4.211379] FS:  0000000000000000(0000) GS:ffffa3273fd00000(0000) knlGS:0000000000000000
+[    4.211379] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.211379] CR2: ffffffffffffffe8 CR3: 000000002820e001 CR4: 00000000001606e0
+[    4.211379] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+[    4.211379] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+[    4.211379] Call Trace:
+[    4.211379]  ? vsock_find_connected_socket+0x6c/0xe0
+[    4.211379]  virtio_transport_recv_pkt+0x15f/0x740
+[    4.211379]  ? detach_buf+0x1b5/0x210
+[    4.211379]  virtio_transport_rx_work+0xb7/0x140
+[    4.211379]  process_one_work+0x1ef/0x480
+[    4.211379]  worker_thread+0x312/0x460
+[    4.211379]  kthread+0x132/0x140
+[    4.211379]  ? process_one_work+0x480/0x480
+[    4.211379]  ? kthread_destroy_worker+0xd0/0xd0
+[    4.211379]  ret_from_fork+0x35/0x40
+[    4.211379] Code: c7 47 08 00 00 00 00 66 c7 07 28 00 c7 47 08 ff ff ff ff c7 47 04 ff ff ff ff c3 0f 1f 00 66 2e 0f 1f 84 00 00 00 00 00 8b 47 08 <3b> 46 08 75 0a 8b 47 04 3b 46 04 0f 94 c0 c3 31 c0 c3 90 66 2e
+[    4.211379] RIP: vsock_addr_equals_addr+0x3/0x20 RSP: ffffaea1800ebd28
+[    4.211379] CR2: ffffffffffffffe8
+[    4.211379] ---[ end trace f31cc4a2e6df3689 ]---
+[    4.211379] Kernel panic - not syncing: Fatal exception in interrupt
+[    4.211379] Kernel Offset: 0x37000000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+[    4.211379] Rebooting in 5 seconds..
+
+Fixes: 22b5c0b63f32 ("vsock/virtio: fix kernel panic after device hot-unplug")
+Cc: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: Stefano Garzarella <sgarzare@redhat.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: kvm@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org
+Cc: netdev@vger.kernel.org
+Cc: kernel-team@android.com
+Cc: stable@vger.kernel.org [4.9+]
+Signed-off-by: Jorge E. Moreira <jemoreira@google.com>
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/vmw_vsock/virtio_transport.c |   13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+
+--- a/net/vmw_vsock/virtio_transport.c
++++ b/net/vmw_vsock/virtio_transport.c
+@@ -702,28 +702,27 @@ static int __init virtio_vsock_init(void
+ 	if (!virtio_vsock_workqueue)
+ 		return -ENOMEM;
+ 
+-	ret = register_virtio_driver(&virtio_vsock_driver);
++	ret = vsock_core_init(&virtio_transport.transport);
+ 	if (ret)
+ 		goto out_wq;
+ 
+-	ret = vsock_core_init(&virtio_transport.transport);
++	ret = register_virtio_driver(&virtio_vsock_driver);
+ 	if (ret)
+-		goto out_vdr;
++		goto out_vci;
+ 
+ 	return 0;
+ 
+-out_vdr:
+-	unregister_virtio_driver(&virtio_vsock_driver);
++out_vci:
++	vsock_core_exit();
+ out_wq:
+ 	destroy_workqueue(virtio_vsock_workqueue);
+ 	return ret;
+-
+ }
+ 
+ static void __exit virtio_vsock_exit(void)
+ {
+-	vsock_core_exit();
+ 	unregister_virtio_driver(&virtio_vsock_driver);
++	vsock_core_exit();
+ 	destroy_workqueue(virtio_vsock_workqueue);
+ }
+ 
+
 
 _______________________________________________
 Virtualization mailing list
