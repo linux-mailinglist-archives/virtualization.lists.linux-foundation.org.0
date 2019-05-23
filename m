@@ -2,45 +2,45 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46D6728686
-	for <lists.virtualization@lfdr.de>; Thu, 23 May 2019 21:10:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 34913287EE
+	for <lists.virtualization@lfdr.de>; Thu, 23 May 2019 21:26:30 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 38A30F7B;
-	Thu, 23 May 2019 19:08:58 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 55F01F8E;
+	Thu, 23 May 2019 19:26:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id DB5F3F5A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E75AAF65
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 23 May 2019 19:08:56 +0000 (UTC)
+	Thu, 23 May 2019 19:26:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5F37D7FB
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DEB4A83A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 23 May 2019 19:08:56 +0000 (UTC)
+	Thu, 23 May 2019 19:26:23 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
 	[83.86.89.107])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 94A322133D;
-	Thu, 23 May 2019 19:08:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 2C88A21855;
+	Thu, 23 May 2019 19:26:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1558638536;
-	bh=Wl7opC0CjVbygYdQj18DNmpz8altT6vI1ljmtm2dfDE=;
+	s=default; t=1558639583;
+	bh=k5a2uGeSV8BCZEQP5DMuv8ykv8Uyr3yo+lrxvYUCLfE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=E6na2KSTsr9lAe65ql3OEhCh1HwOkwkxebW1uQBi/SHaeccuOnt/PziMB5mL8w0eh
-	Pi05qmtHc+Pr3q12Ngzl83ApFb/A1UKNfuNSydbQ+i05tPhOfuZCy7dR93j8cT+dUn
-	SZSUwF7oPsTKJQMw355UduOLEwwYPsJrBqTAW/qo=
+	b=yrb4Fu0/fWK+K7SsmBIR39UL9yw7wEpfdQdXrjsu+QHqiktSbtFgn5qUaovgQXybB
+	4x5Jz2DoRasXjzhpYZKtTHEZQQO4ciJzgxZ4E6H5nQxWdXC2LMWDvD14koabjktmHu
+	DdL8J7zlzE1kcUJjqNh3JNjV8Zh0zD39TgwQRk8Y=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 4.9 07/53] vsock/virtio: Initialize core virtio vsock before
+Subject: [PATCH 5.1 019/122] vsock/virtio: Initialize core virtio vsock before
 	registering the driver
-Date: Thu, 23 May 2019 21:05:31 +0200
-Message-Id: <20190523181712.037112440@linuxfoundation.org>
+Date: Thu, 23 May 2019 21:05:41 +0200
+Message-Id: <20190523181707.367273069@linuxfoundation.org>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190523181710.981455400@linuxfoundation.org>
-References: <20190523181710.981455400@linuxfoundation.org>
+In-Reply-To: <20190523181705.091418060@linuxfoundation.org>
+References: <20190523181705.091418060@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -137,7 +137,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/net/vmw_vsock/virtio_transport.c
 +++ b/net/vmw_vsock/virtio_transport.c
-@@ -600,28 +600,27 @@ static int __init virtio_vsock_init(void
+@@ -702,28 +702,27 @@ static int __init virtio_vsock_init(void
  	if (!virtio_vsock_workqueue)
  		return -ENOMEM;
  
