@@ -2,36 +2,36 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B97D298DE
-	for <lists.virtualization@lfdr.de>; Fri, 24 May 2019 15:27:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 083D3298DD
+	for <lists.virtualization@lfdr.de>; Fri, 24 May 2019 15:26:41 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 8B7C0F79;
-	Fri, 24 May 2019 13:26:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 149A9F8E;
+	Fri, 24 May 2019 13:26:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D538DDC5
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2F697AC8
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 24 May 2019 13:26:50 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+	Fri, 24 May 2019 13:26:27 +0000 (UTC)
+X-Greylist: delayed 00:56:08 by SQLgrey-1.7.6
 Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
 	[5.45.125.222])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5C307878
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7E5D7878
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 24 May 2019 13:26:46 +0000 (UTC)
+	Fri, 24 May 2019 13:26:22 +0000 (UTC)
 Received: from a89-154-146-113.cpe.netcabo.pt ([89.154.146.113]
 	helo=DESKTOP-DVRB5CC)
 	by s052d7dde.fastvps-server.com with esmtpa (Exim 4.89)
-	(envelope-from <marle@saisti.eu>) id 1hU8r5-0005Fo-5f
+	(envelope-from <marle@saisti.eu>) id 1hU92q-0005WG-2o
 	for virtualization@lists.linux-foundation.org;
-	Fri, 24 May 2019 14:59:23 +0300
+	Fri, 24 May 2019 15:11:32 +0300
 From: "Maria" <marialemos72@gmail.com>
 Subject: Call for Papers - ICOTTS'2019, Buenos Aires, Argentina
 To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-Date: Fri, 24 May 2019 12:59:22 +0100
-Message-ID: <11644684128140@gmail-com>
+Date: Fri, 24 May 2019 13:11:31 +0100
+Message-ID: <11648684857046@gmail-com>
 X-Antivirus: AVG (VPS 190524-0, 05/24/2019), Outbound message
 X-Antivirus-Status: Clean
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00, DKIM_ADSP_CUSTOM_MED,
@@ -50,18 +50,18 @@ List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=hel
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
 Reply-To: aistic@gmail.com
-Content-Type: multipart/mixed; boundary="===============8937024378100350626=="
+Content-Type: multipart/mixed; boundary="===============4722223331877165902=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
 This is a multi-part message in MIME format
 
---===============8937024378100350626==
-Content-Type: multipart/alternative; charset=utf-8; boundary="sQgX1id4nl3o6qF=_X8qLsKp3IVnr1Jziz"
+--===============4722223331877165902==
+Content-Type: multipart/alternative; charset=utf-8; boundary="PZC=_5Ak1pRct5oa1woFqCPQMCO1wOXc1L"
 
 This is a multi-part message in MIME format
 
---sQgX1id4nl3o6qF=_X8qLsKp3IVnr1Jziz
+--PZC=_5Ak1pRct5oa1woFqCPQMCO1wOXc1L
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
@@ -256,7 +256,7 @@ E-Mail: icotts.conf@gmail.com
 This email has been checked for viruses by AVG.
 https://www.avg.com
 
---sQgX1id4nl3o6qF=_X8qLsKp3IVnr1Jziz
+--PZC=_5Ak1pRct5oa1woFqCPQMCO1wOXc1L
 Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
@@ -1266,10 +1266,10 @@ source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
 t=3D"1"> </a></div></body>
 </html>
 
---sQgX1id4nl3o6qF=_X8qLsKp3IVnr1Jziz--
+--PZC=_5Ak1pRct5oa1woFqCPQMCO1wOXc1L--
 
 
---===============8937024378100350626==
+--===============4722223331877165902==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -1279,5 +1279,5 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8937024378100350626==--
+--===============4722223331877165902==--
 
