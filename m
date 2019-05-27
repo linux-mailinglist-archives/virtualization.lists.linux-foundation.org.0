@@ -2,103 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0436E2A3CB
-	for <lists.virtualization@lfdr.de>; Sat, 25 May 2019 11:51:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 881672AE47
+	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 07:47:39 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5ADB1DC2;
-	Sat, 25 May 2019 09:51:15 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0AE981492;
+	Mon, 27 May 2019 05:47:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D469CDB4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 01AA6148A
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 25 May 2019 09:51:13 +0000 (UTC)
+	Mon, 27 May 2019 05:47:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
-	[148.163.156.1])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B625AA9
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8703DA9
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 25 May 2019 09:51:12 +0000 (UTC)
-Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x4P9kZGU003541 for <virtualization@lists.linux-foundation.org>;
-	Sat, 25 May 2019 05:51:11 -0400
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2spxkxxwxs-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Sat, 25 May 2019 05:51:11 -0400
-Received: from localhost
-	by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<sebott@linux.ibm.com>; Sat, 25 May 2019 10:51:09 +0100
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
-	by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Sat, 25 May 2019 10:51:05 +0100
-Received: from d06av21.portsmouth.uk.ibm.com (d06av21.portsmouth.uk.ibm.com
-	[9.149.105.232])
-	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x4P9p4WE57409604
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Sat, 25 May 2019 09:51:04 GMT
-Received: from d06av21.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 1FDEF5204F;
-	Sat, 25 May 2019 09:51:04 +0000 (GMT)
-Received: from sig-9-145-26-217.uk.ibm.com (unknown [9.145.26.217])
-	by d06av21.portsmouth.uk.ibm.com (Postfix) with ESMTPS id 1DB9F5204E;
-	Sat, 25 May 2019 09:51:03 +0000 (GMT)
-Date: Sat, 25 May 2019 11:51:02 +0200 (CEST)
-From: Sebastian Ott <sebott@linux.ibm.com>
-X-X-Sender: sebott@schleppi
-To: Michael Mueller <mimu@linux.ibm.com>
-Subject: Re: [PATCH v2 4/8] s390/airq: use DMA memory for adapter
- interrupts
-In-Reply-To: <20190523162209.9543-5-mimu@linux.ibm.com>
-References: <20190523162209.9543-1-mimu@linux.ibm.com>
-	<20190523162209.9543-5-mimu@linux.ibm.com>
-User-Agent: Alpine 2.21 (LFD 202 2017-01-01)
-Organization: =?ISO-8859-15?Q?=22IBM_Deutschland_Research_&_Development_GmbH?=
-	=?ISO-8859-15?Q?_=2F_Vorsitzende_des_Aufsichtsrats=3A_Matthias?=
-	=?ISO-8859-15?Q?_Hartmann_Gesch=E4ftsf=FChrung=3A_Dirk_Wittkopp?=
-	=?ISO-8859-15?Q?_Sitz_der_Gesellschaft=3A_B=F6blingen_=2F_Reg?=
-	=?ISO-8859-15?Q?istergericht=3A_Amtsgericht_Stuttgart=2C_HRB_2432?=
-	=?ISO-8859-15?Q?94=22?=
+	Mon, 27 May 2019 05:47:16 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id 354B8AC84;
+	Mon, 27 May 2019 05:47:14 +0000 (UTC)
+Subject: Re: [PATCH v7 11/12] x86/paravirt: Adapt assembly for PIE support
+To: Thomas Garnier <thgarnie@chromium.org>, kernel-hardening@lists.openwall.com
+References: <20190520231948.49693-1-thgarnie@chromium.org>
+	<20190520231948.49693-12-thgarnie@chromium.org>
+From: Juergen Gross <jgross@suse.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=jgross@suse.com; prefer-encrypt=mutual; keydata=
+	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
+Message-ID: <1b53b8eb-5dd3-fb57-d8db-06eedd0ce49f@suse.com>
+Date: Mon, 27 May 2019 07:47:10 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19052509-0012-0000-0000-0000031F49A3
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19052509-0013-0000-0000-0000215808D5
-Message-Id: <alpine.LFD.2.21.1905251150350.3359@schleppi>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-25_07:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=3 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=604 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1905250070
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+In-Reply-To: <20190520231948.49693-12-thgarnie@chromium.org>
+Content-Language: de-DE
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Farhan Ali <alifm@linux.ibm.com>,
-	Linux-S390 Mailing List <linux-s390@vger.kernel.org>,
-	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
-	Vasily Gorbik <gor@linux.ibm.com>, KVM Mailing List <kvm@vger.kernel.org>,
-	"Michael S . Tsirkin" <mst@redhat.com>,
-	Pierre Morel <pmorel@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
-	Heiko Carstens <heiko.carstens@de.ibm.com>,
-	Eric Farman <farman@linux.ibm.com>,
+Cc: x86@kernel.org, linux-kernel@vger.kernel.org,
+	Thomas Garnier <thgarnie@google.com>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	kristen@linux.intel.com, "H. Peter Anvin" <hpa@zytor.com>,
+	Alok Kataria <akataria@vmware.com>,
 	virtualization@lists.linux-foundation.org,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Christoph Hellwig <hch@infradead.org>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+	Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -115,21 +94,22 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-
-On Thu, 23 May 2019, Michael Mueller wrote:
-> From: Halil Pasic <pasic@linux.ibm.com>
+On 21/05/2019 01:19, Thomas Garnier wrote:
+> From: Thomas Garnier <thgarnie@google.com>
 > 
-> Protected virtualization guests have to use shared pages for airq
-> notifier bit vectors, because hypervisor needs to write these bits.
+> if PIE is enabled, switch the paravirt assembly constraints to be
+> compatible. The %c/i constrains generate smaller code so is kept by
+> default.
 > 
-> Let us make sure we allocate DMA memory for the notifier bit vectors by
-> replacing the kmem_cache with a dma_cache and kalloc() with
-> cio_dma_zalloc().
+> Position Independent Executable (PIE) support will allow to extend the
+> KASLR randomization range below 0xffffffff80000000.
 > 
-> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> Signed-off-by: Thomas Garnier <thgarnie@google.com>
 
-Reviewed-by: Sebastian Ott <sebott@linux.ibm.com>
+Acked-by: Juergen Gross <jgross@suse.com>
 
+
+Juergen
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
