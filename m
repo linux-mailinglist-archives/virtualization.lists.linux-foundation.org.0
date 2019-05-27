@@ -2,79 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 082092B20B
-	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 12:22:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13D222B24F
+	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 12:38:51 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C29A21502;
-	Mon, 27 May 2019 10:22:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 4F17017E7;
+	Mon, 27 May 2019 10:38:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0AD071598
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 355D517C2
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 10:22:03 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7669C878
+	Mon, 27 May 2019 10:38:14 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id ADB0D83A
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 10:22:02 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id l17so7975439wrm.10
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 03:22:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=b21qaBk7xgBLkh/tR0jiPGLO6jWcDKAw7epKgIMYkgI=;
-	b=N1eCtaF91k5Si02FuqcNx2d9rtsg71keu1GXcQ9y6FWW4kcxPWJ01bbAZ0HjuQgLnJ
-	Vl6eyVXVB3oN4KMLlIRcgyJc2kovxCT1j8/72cDw9CMdQREQLCUgE1oFAdR5ACFz5gnW
-	Q6Uy9/0I+WHxLnMOJu25e8sf2YC93adT7Ohm/7XWQvvXe/NPH6hll6QHH9qkdWl/cZ1i
-	n2a9C25g7GEgWc5gtWwwERI4+omQJcE8xhWnPJvHpQ2o3+zEEKdHMqDCG5I/BuzeLwPD
-	4POXzhND3HjiVw+VeQ0B4VCjgpo7PeRdJ+A3vSeLTfegxfbNyUErd80qeJeE0BW13eRW
-	wQ1g==
-X-Gm-Message-State: APjAAAXzGOpYOaT7Sh9FypMhykAishIgbnGsLea2iwpmDJi4i2iExWwX
-	GQNp8dvUsiVnUBrP9u3HccUDRA==
-X-Google-Smtp-Source: APXvYqyHBiTtlTwjGNSoRY9mSrO2K+MXLJKpJDqJEZ9a29tUYpcW0gYHSxIWv7TusW+bveIx9CmIaw==
-X-Received: by 2002:adf:db87:: with SMTP id u7mr25167674wri.245.1558952521069; 
-	Mon, 27 May 2019 03:22:01 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:c43e:46a8:e962:cee8?
-	([2001:b07:6468:f312:c43e:46a8:e962:cee8])
-	by smtp.gmail.com with ESMTPSA id
-	a17sm8328827wrr.80.2019.05.27.03.21.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 May 2019 03:22:00 -0700 (PDT)
-Subject: Re: [RFC PATCH 5/6] x86/mm/tlb: Flush remote and local TLBs
-	concurrently
-To: Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>
-References: <20190525082203.6531-1-namit@vmware.com>
-	<20190525082203.6531-6-namit@vmware.com>
-	<08b21fb5-2226-7924-30e3-31e4adcfc0a3@suse.com>
-	<20190527094710.GU2623@hirez.programming.kicks-ass.net>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <e9c0dc1f-799a-b6e3-8d41-58f0a6b693cd@redhat.com>
-Date: Mon, 27 May 2019 12:21:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Mon, 27 May 2019 10:38:13 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 066B8821D8;
+	Mon, 27 May 2019 10:38:13 +0000 (UTC)
+Received: from gondolin (ovpn-204-109.brq.redhat.com [10.40.204.109])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 58E2C60C64;
+	Mon, 27 May 2019 10:38:06 +0000 (UTC)
+Date: Mon, 27 May 2019 12:38:02 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Michael Mueller <mimu@linux.ibm.com>
+Subject: Re: [PATCH v2 3/8] s390/cio: add basic protected virtualization
+	support
+Message-ID: <20190527123802.54cd3589.cohuck@redhat.com>
+In-Reply-To: <20190523162209.9543-4-mimu@linux.ibm.com>
+References: <20190523162209.9543-1-mimu@linux.ibm.com>
+	<20190523162209.9543-4-mimu@linux.ibm.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-In-Reply-To: <20190527094710.GU2623@hirez.programming.kicks-ass.net>
-Content-Language: en-US
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.28]);
+	Mon, 27 May 2019 10:38:13 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Stephen Hemminger <sthemmin@microsoft.com>, kvm@vger.kernel.org,
-	Haiyang Zhang <haiyangz@microsoft.com>, x86@kernel.org,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Andy Lutomirski <luto@kernel.org>,
-	xen-devel@lists.xenproject.org, Nadav Amit <namit@vmware.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Vasily Gorbik <gor@linux.ibm.com>,
+	Linux-S390 Mailing List <linux-s390@vger.kernel.org>,
+	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
+	KVM Mailing List <kvm@vger.kernel.org>,
+	Sebastian Ott <sebott@linux.ibm.com>,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Pierre Morel <pmorel@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Heiko Carstens <heiko.carstens@de.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
+	virtualization@lists.linux-foundation.org,
+	Halil Pasic <pasic@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Christoph Hellwig <hch@infradead.org>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -91,81 +78,99 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 27/05/19 11:47, Peter Zijlstra wrote:
-> On Sat, May 25, 2019 at 10:54:50AM +0200, Juergen Gross wrote:
->> On 25/05/2019 10:22, Nadav Amit wrote:
+On Thu, 23 May 2019 18:22:04 +0200
+Michael Mueller <mimu@linux.ibm.com> wrote:
+
+> From: Halil Pasic <pasic@linux.ibm.com>
 > 
->>> diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
->>> index 946f8f1f1efc..3a156e63c57d 100644
->>> --- a/arch/x86/include/asm/paravirt_types.h
->>> +++ b/arch/x86/include/asm/paravirt_types.h
->>> @@ -211,6 +211,12 @@ struct pv_mmu_ops {
->>>  	void (*flush_tlb_user)(void);
->>>  	void (*flush_tlb_kernel)(void);
->>>  	void (*flush_tlb_one_user)(unsigned long addr);
->>> +	/*
->>> +	 * flush_tlb_multi() is the preferred interface. When it is used,
->>> +	 * flush_tlb_others() should return false.
->>
->> This comment does not make sense. flush_tlb_others() return type is
->> void.
+> As virtio-ccw devices are channel devices, we need to use the dma area
+> for any communication with the hypervisor.
 > 
-> I suspect that is an artifact from before the static_key; an attempt to
-> make the pv interface less awkward.
+> It handles neither QDIO in the common code, nor any device type specific
+> stuff (like channel programs constructed by the DASD driver).
 > 
-> Something like the below would work for KVM I suspect, the others
-> (Hyper-V and Xen are more 'interesting').
+> An interesting side effect is that virtio structures are now going to
+> get allocated in 31 bit addressable storage.
 > 
+> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+
+[Side note: you really should add your s-o-b if you send someone else's
+patches... if Halil ends up committing them, it's fine, though.]
+
 > ---
-> --- a/arch/x86/kernel/kvm.c
-> +++ b/arch/x86/kernel/kvm.c
-> @@ -580,7 +580,7 @@ static void __init kvm_apf_trap_init(voi
+>  arch/s390/include/asm/ccwdev.h   |  4 +++
+>  drivers/s390/cio/ccwreq.c        |  9 +++---
+>  drivers/s390/cio/device.c        | 64 +++++++++++++++++++++++++++++++++-------
+>  drivers/s390/cio/device_fsm.c    | 53 ++++++++++++++++++++-------------
+>  drivers/s390/cio/device_id.c     | 20 +++++++------
+>  drivers/s390/cio/device_ops.c    | 21 +++++++++++--
+>  drivers/s390/cio/device_pgid.c   | 22 +++++++-------
+>  drivers/s390/cio/device_status.c | 24 +++++++--------
+>  drivers/s390/cio/io_sch.h        | 20 +++++++++----
+>  drivers/s390/virtio/virtio_ccw.c | 10 -------
+>  10 files changed, 164 insertions(+), 83 deletions(-)
+> 
+
+(...)
+
+> @@ -1593,20 +1622,31 @@ struct ccw_device * __init ccw_device_create_console(struct ccw_driver *drv)
+>  		return ERR_CAST(sch);
 >  
->  static DEFINE_PER_CPU(cpumask_var_t, __pv_tlb_mask);
->  
-> -static void kvm_flush_tlb_others(const struct cpumask *cpumask,
-> +static void kvm_flush_tlb_multi(const struct cpumask *cpumask,
->  			const struct flush_tlb_info *info)
->  {
->  	u8 state;
-> @@ -594,6 +594,9 @@ static void kvm_flush_tlb_others(const s
->  	 * queue flush_on_enter for pre-empted vCPUs
->  	 */
->  	for_each_cpu(cpu, flushmask) {
-> +		if (cpu == smp_processor_id())
-> +			continue;
-> +
+>  	io_priv = kzalloc(sizeof(*io_priv), GFP_KERNEL | GFP_DMA);
+> -	if (!io_priv) {
+> -		put_device(&sch->dev);
+> -		return ERR_PTR(-ENOMEM);
+> -	}
+> +	if (!io_priv)
+> +		goto err_priv;
+> +	io_priv->dma_area = dma_alloc_coherent(&sch->dev,
+> +				sizeof(*io_priv->dma_area),
+> +				&io_priv->dma_area_dma, GFP_KERNEL);
 
-Even this would be just an optimization; the vCPU you're running on
-cannot be preempted.  You can just change others to multi.
+Even though we'll only end up here for 3215 or 3270 consoles, this sent
+me looking.
 
-Paolo
+This code is invoked via console_init(). A few lines down in
+start_kernel(), we have
 
->  		src = &per_cpu(steal_time, cpu);
->  		state = READ_ONCE(src->preempted);
->  		if ((state & KVM_VCPU_PREEMPTED)) {
-> @@ -603,7 +606,7 @@ static void kvm_flush_tlb_others(const s
->  		}
+        /*                                                                       
+         * This needs to be called before any devices perform DMA                
+         * operations that might use the SWIOTLB bounce buffers. It will         
+         * mark the bounce buffers as decrypted so that their usage will         
+         * not cause "plain-text" data to be decrypted when accessed.            
+         */
+        mem_encrypt_init();
+
+So, I'm wondering if creating the console device interacts in any way
+with the memory encryption interface?
+
+[Does basic recognition work if you start a protected virt guest with a
+3270 console? I realize that the console is unlikely to work, but that
+should at least exercise this code path.]
+
+> +	if (!io_priv->dma_area)
+> +		goto err_dma_area;
+>  	set_io_private(sch, io_priv);
+>  	cdev = io_subchannel_create_ccwdev(sch);
+>  	if (IS_ERR(cdev)) {
+>  		put_device(&sch->dev);
+> +		dma_free_coherent(&sch->dev, sizeof(*io_priv->dma_area),
+> +				  io_priv->dma_area, io_priv->dma_area_dma);
+>  		kfree(io_priv);
+>  		return cdev;
 >  	}
->  
-> -	native_flush_tlb_others(flushmask, info);
-> +	native_flush_tlb_multi(flushmask, info);
+>  	cdev->drv = drv;
+>  	ccw_device_set_int_class(cdev);
+>  	return cdev;
+> +
+> +err_dma_area:
+> +		kfree(io_priv);
+> +err_priv:
+> +	put_device(&sch->dev);
+> +	return ERR_PTR(-ENOMEM);
 >  }
 >  
->  static void __init kvm_guest_init(void)
-> @@ -628,9 +631,8 @@ static void __init kvm_guest_init(void)
->  	if (kvm_para_has_feature(KVM_FEATURE_PV_TLB_FLUSH) &&
->  	    !kvm_para_has_hint(KVM_HINTS_REALTIME) &&
->  	    kvm_para_has_feature(KVM_FEATURE_STEAL_TIME)) {
-> -		pv_ops.mmu.flush_tlb_others = kvm_flush_tlb_others;
-> +		pv_ops.mmu.flush_tlb_multi = kvm_flush_tlb_multi;
->  		pv_ops.mmu.tlb_remove_table = tlb_remove_table;
-> -		static_key_disable(&flush_tlb_multi_enabled.key);
->  	}
->  
->  	if (kvm_para_has_feature(KVM_FEATURE_PV_EOI))
-> 
-
+>  void __init ccw_device_destroy_console(struct ccw_device *cdev)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
