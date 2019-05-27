@@ -2,46 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC23C2B28E
-	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 12:56:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 019042B2A2
+	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 13:01:24 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id B02291812;
-	Mon, 27 May 2019 10:55:58 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id AC0561817;
+	Mon, 27 May 2019 11:01:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 571E6180C
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 511CA180E
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 10:55:42 +0000 (UTC)
+	Mon, 27 May 2019 11:00:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 05F71A9
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 051C1A9
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 10:55:41 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
-	[10.5.11.14])
+	Mon, 27 May 2019 11:00:57 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 66E963082E09;
-	Mon, 27 May 2019 10:55:41 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 30E273002607;
+	Mon, 27 May 2019 11:00:52 +0000 (UTC)
 Received: from gondolin (ovpn-204-109.brq.redhat.com [10.40.204.109])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id D26545D9CA;
-	Mon, 27 May 2019 10:55:34 +0000 (UTC)
-Date: Mon, 27 May 2019 12:55:31 +0200
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4C4021017E37;
+	Mon, 27 May 2019 11:00:32 +0000 (UTC)
+Date: Mon, 27 May 2019 13:00:28 +0200
 From: Cornelia Huck <cohuck@redhat.com>
 To: Michael Mueller <mimu@linux.ibm.com>
-Subject: Re: [PATCH v2 5/8] virtio/s390: use cacheline aligned airq bit vectors
-Message-ID: <20190527125531.20038f59.cohuck@redhat.com>
-In-Reply-To: <20190523162209.9543-6-mimu@linux.ibm.com>
+Subject: Re: [PATCH v2 6/8] virtio/s390: add indirection to indicators access
+Message-ID: <20190527130028.62e1f7d7.cohuck@redhat.com>
+In-Reply-To: <20190523162209.9543-7-mimu@linux.ibm.com>
 References: <20190523162209.9543-1-mimu@linux.ibm.com>
-	<20190523162209.9543-6-mimu@linux.ibm.com>
+	<20190523162209.9543-7-mimu@linux.ibm.com>
 Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.46]);
-	Mon, 27 May 2019 10:55:41 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.40]);
+	Mon, 27 May 2019 11:00:52 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -77,35 +77,49 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, 23 May 2019 18:22:06 +0200
+On Thu, 23 May 2019 18:22:07 +0200
 Michael Mueller <mimu@linux.ibm.com> wrote:
 
 > From: Halil Pasic <pasic@linux.ibm.com>
 > 
-> The flag AIRQ_IV_CACHELINE was recently added to airq_iv_create(). Let
-> us use it! We actually wanted the vector to span a cacheline all along.
+> This will come in handy soon when we pull out the indicators from
+> virtio_ccw_device to a memory area that is shared with the hypervisor
+> (in particular for protected virtualization guests).
 > 
 > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> Reviewed-by: Pierre Morel <pmorel@linux.ibm.com>
 > ---
->  drivers/s390/virtio/virtio_ccw.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  drivers/s390/virtio/virtio_ccw.c | 40 +++++++++++++++++++++++++---------------
+>  1 file changed, 25 insertions(+), 15 deletions(-)
 > 
-> diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
-> index f995798bb025..1da7430f94c8 100644
-> --- a/drivers/s390/virtio/virtio_ccw.c
-> +++ b/drivers/s390/virtio/virtio_ccw.c
-> @@ -216,7 +216,8 @@ static struct airq_info *new_airq_info(void)
->  	if (!info)
->  		return NULL;
->  	rwlock_init(&info->lock);
-> -	info->aiv = airq_iv_create(VIRTIO_IV_BITS, AIRQ_IV_ALLOC | AIRQ_IV_PTR);
-> +	info->aiv = airq_iv_create(VIRTIO_IV_BITS, AIRQ_IV_ALLOC | AIRQ_IV_PTR
-> +				   | AIRQ_IV_CACHELINE);
->  	if (!info->aiv) {
->  		kfree(info);
->  		return NULL;
 
-This patch looks to be independent of the previous patches?
+> @@ -338,17 +348,17 @@ static void virtio_ccw_drop_indicator(struct virtio_ccw_device *vcdev,
+>  		ccw->cda = (__u32)(unsigned long) thinint_area;
+>  	} else {
+>  		/* payload is the address of the indicators */
+> -		indicatorp = kmalloc(sizeof(&vcdev->indicators),
+> +		indicatorp = kmalloc(sizeof(indicators(vcdev)),
+>  				     GFP_DMA | GFP_KERNEL);
+>  		if (!indicatorp)
+>  			return;
+>  		*indicatorp = 0;
+>  		ccw->cmd_code = CCW_CMD_SET_IND;
+> -		ccw->count = sizeof(&vcdev->indicators);
+> +		ccw->count = sizeof(indicators(vcdev));
+>  		ccw->cda = (__u32)(unsigned long) indicatorp;
+>  	}
+>  	/* Deregister indicators from host. */
+> -	vcdev->indicators = 0;
+> +	*indicators(vcdev) = 0;
+
+I'm not too hot about this notation, but it's not wrong and a minor
+thing :)
+
+>  	ccw->flags = 0;
+>  	ret = ccw_io_helper(vcdev, ccw,
+>  			    vcdev->is_thinint ?
+
+Patch looks reasonable and not dependent on the other patches here.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
