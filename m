@@ -2,60 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E2652B54C
-	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 14:32:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E65F12B5AE
+	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 14:45:40 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DD2A1184A;
-	Mon, 27 May 2019 12:32:33 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 463D918AB;
+	Mon, 27 May 2019 12:45:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E1ED91832
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E71C4189E
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 12:32:14 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 812AE821
+	Mon, 27 May 2019 12:45:21 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B630C13A
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 12:32:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=merlin.20170209;
-	h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=Bb4riJdUbAvU2dFDq22LE6R9qG/UUI43/Y/+y4V6Qvs=;
-	b=c4TDFTpHK0CYd1vWu7R1zqW+/
-	2vf2CkvycdZ1TOZgh6586+6hBSUOonS4izJJJLlU/laLZdtRg9vo/tFqP67DP/DrVq5GNeyOXkp8N
-	ExSQgN5WmAiXgiz9FXGhkb7sqDhbv1+1n9qPgIj2TuqbkRY8ULdb/xs9kniGA0ESzx0t8DJo/mrAl
-	uLK3C6fLgcCbWbFpO9EhXKZtWIcTmu+x6Co60LQwrkDHUOi8//21mfSvFniFvyuP82yQFaVkGwBIf
-	aK/OeehLVOOzYZiUm+0l62ODKjdgrXRftiZCRVCOymL15JzQ7yEwGoiNpC9TkUxMutHPzfpYZgiur
-	Nuu3rPt0w==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
-	helo=hirez.programming.kicks-ass.net)
-	by merlin.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
-	id 1hVEnP-0003D7-9F; Mon, 27 May 2019 12:32:07 +0000
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-	id 10A95202BF3E2; Mon, 27 May 2019 14:32:06 +0200 (CEST)
-Date: Mon, 27 May 2019 14:32:06 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Paolo Bonzini <pbonzini@redhat.com>
+	Mon, 27 May 2019 12:45:20 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id b18so16784806wrq.12
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 27 May 2019 05:45:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=q2cYYgwiWVJJBJqLCSUSB4vY9rqs6lWWDF70rTeYp2I=;
+	b=PQWa2nldpihqzaKCDlO9gyFpayvYZfTNsiqYor/TaIRtgzmQyy3VEc7/TDRqC2Qt0s
+	INZyRzRrSGV5gR+IE4N4Muc4r7vbpelSgLt4yPzGLzlj+sDIpxrjo/8izunImwX9JOSN
+	wTnygOX/2cNd9hvTRRIRihJx5HMVs2JSf3rHjSfWei7zOnIBhGgxaYDzZU7oVs5+Sh2A
+	2b/jh7K4vxdSji0ZjnQ5ZX5GBOMsjSzKMC9X+9pZHEqLUOHdzcW0Kv0NaviWDbJ9yfoh
+	GBkVWMbyBGcWTcnplS2B5ooig1XTTRD4taoeA8rR4E+PbujSLx2VO+PEda/+SDw+woYz
+	qy5g==
+X-Gm-Message-State: APjAAAUn+rS+U3PbbCDW2K9G2BFCUXSRIrZYso7MKzR26ueB1ktDqrjE
+	mRWu2ksbhPBnjh0d8s68/O37PA==
+X-Google-Smtp-Source: APXvYqygU7qP4o2dkcY70xoK+YyGPQ+ieDW7hA+ZGXuE8LRMvLdpuQeC+BnMGifi0won+RJCrdExpA==
+X-Received: by 2002:adf:bc94:: with SMTP id g20mr21574548wrh.206.1558961119322;
+	Mon, 27 May 2019 05:45:19 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:c92d:f9e8:f150:3553?
+	([2001:b07:6468:f312:c92d:f9e8:f150:3553])
+	by smtp.gmail.com with ESMTPSA id
+	o20sm13139362wro.2.2019.05.27.05.45.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 27 May 2019 05:45:18 -0700 (PDT)
 Subject: Re: [RFC PATCH 5/6] x86/mm/tlb: Flush remote and local TLBs
 	concurrently
-Message-ID: <20190527123206.GC2623@hirez.programming.kicks-ass.net>
+To: Peter Zijlstra <peterz@infradead.org>
 References: <20190525082203.6531-1-namit@vmware.com>
 	<20190525082203.6531-6-namit@vmware.com>
 	<08b21fb5-2226-7924-30e3-31e4adcfc0a3@suse.com>
 	<20190527094710.GU2623@hirez.programming.kicks-ass.net>
 	<e9c0dc1f-799a-b6e3-8d41-58f0a6b693cd@redhat.com>
+	<20190527123206.GC2623@hirez.programming.kicks-ass.net>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <81a67fa3-309d-79cc-5009-5c4908b18ba3@redhat.com>
+Date: Mon, 27 May 2019 14:45:17 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <e9c0dc1f-799a-b6e3-8d41-58f0a6b693cd@redhat.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+In-Reply-To: <20190527123206.GC2623@hirez.programming.kicks-ass.net>
+Content-Language: en-US
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: Juergen Gross <jgross@suse.com>, Sasha Levin <sashal@kernel.org>,
@@ -84,33 +93,38 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, May 27, 2019 at 12:21:59PM +0200, Paolo Bonzini wrote:
-> On 27/05/19 11:47, Peter Zijlstra wrote:
-
-> > --- a/arch/x86/kernel/kvm.c
-> > +++ b/arch/x86/kernel/kvm.c
-> > @@ -580,7 +580,7 @@ static void __init kvm_apf_trap_init(voi
-> >  
-> >  static DEFINE_PER_CPU(cpumask_var_t, __pv_tlb_mask);
-> >  
-> > -static void kvm_flush_tlb_others(const struct cpumask *cpumask,
-> > +static void kvm_flush_tlb_multi(const struct cpumask *cpumask,
-> >  			const struct flush_tlb_info *info)
-> >  {
-> >  	u8 state;
-> > @@ -594,6 +594,9 @@ static void kvm_flush_tlb_others(const s
-> >  	 * queue flush_on_enter for pre-empted vCPUs
-> >  	 */
-> >  	for_each_cpu(cpu, flushmask) {
-> > +		if (cpu == smp_processor_id())
-> > +			continue;
-> > +
+On 27/05/19 14:32, Peter Zijlstra wrote:
+> On Mon, May 27, 2019 at 12:21:59PM +0200, Paolo Bonzini wrote:
+>> On 27/05/19 11:47, Peter Zijlstra wrote:
 > 
-> Even this would be just an optimization; the vCPU you're running on
-> cannot be preempted.  You can just change others to multi.
+>>> --- a/arch/x86/kernel/kvm.c
+>>> +++ b/arch/x86/kernel/kvm.c
+>>> @@ -580,7 +580,7 @@ static void __init kvm_apf_trap_init(voi
+>>>  
+>>>  static DEFINE_PER_CPU(cpumask_var_t, __pv_tlb_mask);
+>>>  
+>>> -static void kvm_flush_tlb_others(const struct cpumask *cpumask,
+>>> +static void kvm_flush_tlb_multi(const struct cpumask *cpumask,
+>>>  			const struct flush_tlb_info *info)
+>>>  {
+>>>  	u8 state;
+>>> @@ -594,6 +594,9 @@ static void kvm_flush_tlb_others(const s
+>>>  	 * queue flush_on_enter for pre-empted vCPUs
+>>>  	 */
+>>>  	for_each_cpu(cpu, flushmask) {
+>>> +		if (cpu == smp_processor_id())
+>>> +			continue;
+>>> +
+>>
+>> Even this would be just an optimization; the vCPU you're running on
+>> cannot be preempted.  You can just change others to multi.
+> 
+> Yeah, I know, but it felt weird so I added the explicit skip. No strong
+> feelings though.
 
-Yeah, I know, but it felt weird so I added the explicit skip. No strong
-feelings though.
+Neither here, and it would indeed deserve a comment if you left the if out.
+
+Paolo
 
 _______________________________________________
 Virtualization mailing list
