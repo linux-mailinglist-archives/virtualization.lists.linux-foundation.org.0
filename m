@@ -2,83 +2,48 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C8802B375
-	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 13:48:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 177AB2B37D
+	for <lists.virtualization@lfdr.de>; Mon, 27 May 2019 13:50:25 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 243E51825;
-	Mon, 27 May 2019 11:48:23 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BC705182C;
+	Mon, 27 May 2019 11:50:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 99D3C1825
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id EE89A1826
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 11:48:07 +0000 (UTC)
+	Mon, 27 May 2019 11:49:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
-	[148.163.156.1])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1840FA9
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 71D17826
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 11:48:07 +0000 (UTC)
-Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x4RBgmuV086976 for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 07:48:06 -0400
-Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2srdydcprx-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 27 May 2019 07:48:05 -0400
-Received: from localhost
-	by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Mon, 27 May 2019 12:48:03 +0100
-Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
-	by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Mon, 27 May 2019 12:48:00 +0100
-Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com
-	[9.149.105.60])
-	by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x4RBlwsp37617850
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Mon, 27 May 2019 11:47:58 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 4755C42047;
-	Mon, 27 May 2019 11:47:58 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 6DA8D42045;
-	Mon, 27 May 2019 11:47:57 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.145.72.200])
-	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Mon, 27 May 2019 11:47:57 +0000 (GMT)
-Date: Mon, 27 May 2019 13:47:55 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [PATCH v2 2/8] s390/cio: introduce DMA pools to cio
-In-Reply-To: <20190527085718.10494ee2.cohuck@redhat.com>
+	Mon, 27 May 2019 11:49:58 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 93B633082231;
+	Mon, 27 May 2019 11:49:52 +0000 (UTC)
+Received: from gondolin (ovpn-204-109.brq.redhat.com [10.40.204.109])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 40D7560BEC;
+	Mon, 27 May 2019 11:49:46 +0000 (UTC)
+Date: Mon, 27 May 2019 13:49:41 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Michael Mueller <mimu@linux.ibm.com>
+Subject: Re: [PATCH v2 7/8] virtio/s390: use DMA memory for ccw I/O and
+	classic notifiers
+Message-ID: <20190527134941.5c7555a7.cohuck@redhat.com>
+In-Reply-To: <20190523162209.9543-8-mimu@linux.ibm.com>
 References: <20190523162209.9543-1-mimu@linux.ibm.com>
-	<20190523162209.9543-3-mimu@linux.ibm.com>
-	<20190527085718.10494ee2.cohuck@redhat.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+	<20190523162209.9543-8-mimu@linux.ibm.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19052711-0028-0000-0000-00000371E62D
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19052711-0029-0000-0000-00002431A286
-Message-Id: <20190527134755.4937238c.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-27_07:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=2 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1905270084
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.47]);
+	Mon, 27 May 2019 11:49:52 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
@@ -92,9 +57,9 @@ Cc: Vasily Gorbik <gor@linux.ibm.com>,
 	Heiko Carstens <heiko.carstens@de.ibm.com>,
 	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
+	Halil Pasic <pasic@linux.ibm.com>,
 	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Michael Mueller <mimu@linux.ibm.com>,
+	Christoph Hellwig <hch@infradead.org>,
 	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
 	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -113,173 +78,84 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, 27 May 2019 08:57:18 +0200
-Cornelia Huck <cohuck@redhat.com> wrote:
+On Thu, 23 May 2019 18:22:08 +0200
+Michael Mueller <mimu@linux.ibm.com> wrote:
 
-> On Thu, 23 May 2019 18:22:03 +0200
-> Michael Mueller <mimu@linux.ibm.com> wrote:
+> From: Halil Pasic <pasic@linux.ibm.com>
 > 
-> > From: Halil Pasic <pasic@linux.ibm.com>
-> > 
-> > To support protected virtualization cio will need to make sure the
-> > memory used for communication with the hypervisor is DMA memory.
-> > 
-> > Let us introduce one global cio, and some tools for pools seated
+> Before virtio-ccw could get away with not using DMA API for the pieces of
+> memory it does ccw I/O with. With protected virtualization this has to
+> change, since the hypervisor needs to read and sometimes also write these
+> pieces of memory.
 > 
-> "one global pool for cio"?
+> The hypervisor is supposed to poke the classic notifiers, if these are
+> used, out of band with regards to ccw I/O. So these need to be allocated
+> as DMA memory (which is shared memory for protected virtualization
+> guests).
 > 
-
-Nod.
-
-> > at individual devices.
-> > 
-> > Our DMA pools are implemented as a gen_pool backed with DMA pages. The
-> > idea is to avoid each allocation effectively wasting a page, as we
-> > typically allocate much less than PAGE_SIZE.
-> > 
-> > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-> > ---
-> >  arch/s390/Kconfig           |   1 +
-> >  arch/s390/include/asm/cio.h |  11 +++++
-> >  drivers/s390/cio/css.c      | 110 ++++++++++++++++++++++++++++++++++++++++++++
-> >  3 files changed, 122 insertions(+)
-> > 
+> Let us factor out everything from struct virtio_ccw_device that needs to
+> be DMA memory in a satellite that is allocated as such.
 > 
-> (...)
+> Note: The control blocks of I/O instructions do not need to be shared.
+> These are marshalled by the ultravisor.
 > 
-> > @@ -1018,6 +1024,109 @@ static struct notifier_block css_power_notifier = {
-> >  	.notifier_call = css_power_event,
-> >  };
-> >  
-> > +#define POOL_INIT_PAGES 1
-> > +static struct gen_pool *cio_dma_pool;
-> > +/* Currently cio supports only a single css */
-> 
-> This comment looks misplaced.
+> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> Reviewed-by: Pierre Morel <pmorel@linux.ibm.com>
+> ---
+>  drivers/s390/virtio/virtio_ccw.c | 177 +++++++++++++++++++++------------------
+>  1 file changed, 96 insertions(+), 81 deletions(-)
 
-Right! Move to ...
+(...)
 
-> 
-> > +#define  CIO_DMA_GFP (GFP_KERNEL | __GFP_ZERO)
-> > +
-> > +
+> @@ -176,6 +180,22 @@ static struct virtio_ccw_device *to_vc_device(struct virtio_device *vdev)
+>  	return container_of(vdev, struct virtio_ccw_device, vdev);
+>  }
+>  
+> +static inline void *__vc_dma_alloc(struct virtio_device *vdev, size_t size)
+> +{
+> +	return ccw_device_dma_zalloc(to_vc_device(vdev)->cdev, size);
+> +}
+> +
+> +static inline void __vc_dma_free(struct virtio_device *vdev, size_t size,
+> +				 void *cpu_addr)
+> +{
+> +	return ccw_device_dma_free(to_vc_device(vdev)->cdev, cpu_addr, size);
+> +}
+> +
+> +#define vc_dma_alloc_struct(vdev, ptr) \
+> +	({ptr = __vc_dma_alloc(vdev, sizeof(*(ptr))); })
+> +#define vc_dma_free_struct(vdev, ptr) \
+> +	__vc_dma_free(vdev, sizeof(*(ptr)), (ptr))
 
-... here?
+I really don't like these #defines.
 
-> > +struct device *cio_get_dma_css_dev(void)
-> > +{
-> > +	return &channel_subsystems[0]->device;
-> > +}
-> > +
-> > +struct gen_pool *cio_gp_dma_create(struct device *dma_dev, int nr_pages)
-> > +{
-> > +	struct gen_pool *gp_dma;
-> > +	void *cpu_addr;
-> > +	dma_addr_t dma_addr;
-> > +	int i;
-> > +
-> > +	gp_dma = gen_pool_create(3, -1);
-> > +	if (!gp_dma)
-> > +		return NULL;
-> > +	for (i = 0; i < nr_pages; ++i) {
-> > +		cpu_addr = dma_alloc_coherent(dma_dev, PAGE_SIZE, &dma_addr,
-> > +					      CIO_DMA_GFP);
-> > +		if (!cpu_addr)
-> > +			return gp_dma;
-> 
-> So, you may return here with no memory added to the pool at all (or
-> less than requested), but for the caller that is indistinguishable from
-> an allocation that went all right. May that be a problem?
-> 
+> +
+>  static void drop_airq_indicator(struct virtqueue *vq, struct airq_info *info)
+>  {
+>  	unsigned long i, flags;
+> @@ -336,8 +356,7 @@ static void virtio_ccw_drop_indicator(struct virtio_ccw_device *vcdev,
+>  	struct airq_info *airq_info = vcdev->airq_info;
+>  
+>  	if (vcdev->is_thinint) {
+> -		thinint_area = kzalloc(sizeof(*thinint_area),
+> -				       GFP_DMA | GFP_KERNEL);
+> +		vc_dma_alloc_struct(&vcdev->vdev, thinint_area);
 
-I do not think it can cause a problem: cio_gp_dma_zalloc() is going to
-try to allocate the memory required and put it in the pool. If that
-fails as well, we return a NULL pointer like kmalloc(). So I think we
-are clean.
+Any reason why this takes a detour via the virtio device? The ccw
+device is already referenced in vcdev, isn't it?
 
-> > +		gen_pool_add_virt(gp_dma, (unsigned long) cpu_addr,
-> > +				  dma_addr, PAGE_SIZE, -1);
-> > +	}
-> > +	return gp_dma;
-> > +}
-> > +
-> 
-> (...)
-> 
-> > +static void __init cio_dma_pool_init(void)
-> > +{
-> > +	/* No need to free up the resources: compiled in */
-> > +	cio_dma_pool = cio_gp_dma_create(cio_get_dma_css_dev(), 1);
-> 
-> Does it make sense to continue if you did not get a pool here? I don't
-> think that should happen unless things were really bad already?
-> 
+thinint_area = ccw_device_dma_zalloc(vcdev->cdev, sizeof(*thinint_area));
 
-I agree, this should not fail under any sane circumstances. I don't
-think it makes sense to continue. Shall we simply call panic()?
+looks much more obvious to me.
 
-> > +}
-> > +
-> > +void *cio_gp_dma_zalloc(struct gen_pool *gp_dma, struct device *dma_dev,
-> > +			size_t size)
-> > +{
-> > +	dma_addr_t dma_addr;
-> > +	unsigned long addr;
-> > +	size_t chunk_size;
-> > +
-> > +	addr = gen_pool_alloc(gp_dma, size);
-> > +	while (!addr) {
-> > +		chunk_size = round_up(size, PAGE_SIZE);
-> > +		addr = (unsigned long) dma_alloc_coherent(dma_dev,
-> > +					 chunk_size, &dma_addr, CIO_DMA_GFP);
-> > +		if (!addr)
-> > +			return NULL;
-> > +		gen_pool_add_virt(gp_dma, addr, dma_addr, chunk_size, -1);
-> > +		addr = gen_pool_alloc(gp_dma, size);
-> > +	}
-> > +	return (void *) addr;
-> > +}
-> > +
-> > +void cio_gp_dma_free(struct gen_pool *gp_dma, void *cpu_addr, size_t size)
-> > +{
-> > +	if (!cpu_addr)
-> > +		return;
-> > +	memset(cpu_addr, 0, size);
-> > +	gen_pool_free(gp_dma, (unsigned long) cpu_addr, size);
-> > +}
-> > +
-> > +/**
-> > + * Allocate dma memory from the css global pool. Intended for memory not
-> > + * specific to any single device within the css. The allocated memory
-> > + * is not guaranteed to be 31-bit addressable.
-> > + *
-> > + * Caution: Not suitable for early stuff like console.
-> > + *
-> > + */
-> > +void *cio_dma_zalloc(size_t size)
-> > +{
-> > +	return cio_gp_dma_zalloc(cio_dma_pool, cio_get_dma_css_dev(), size);
-> 
-> Ok, that looks like the failure I mentioned above should be
-> accommodated by the code. Still, I think it's a bit odd.
-> 
 
-I think the behavior is reasonable: if client code wants pre-allocate n
-page sized chunks we pre-allocate as may as we can. If we can't
-pre-allocate all n, it ain't necessarily bad. There is no guarantee we
-will hit a wall in a non-recoverable fashion.
+>  		if (!thinint_area)
+>  			return;
+>  		thinint_area->summary_indicator =
 
-But if you insist, I can get rid of the pre-allocation or fail create and
-do a rollback if it fails.
+(...)
 
-Thanks for having a look!
-
-Regards,
-Halil
-
-> > +}
-> 
-
+I did not spot anything obviously broken in the patch.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
