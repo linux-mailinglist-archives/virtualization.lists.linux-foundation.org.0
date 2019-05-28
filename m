@@ -2,53 +2,57 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 858AE2C4FA
-	for <lists.virtualization@lfdr.de>; Tue, 28 May 2019 12:58:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 147522C737
+	for <lists.virtualization@lfdr.de>; Tue, 28 May 2019 15:01:21 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3373D1C17;
-	Tue, 28 May 2019 10:58:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E1A891CD5;
+	Tue, 28 May 2019 13:01:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3D0C21C02
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DF4AF1CCE
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 28 May 2019 10:56:48 +0000 (UTC)
+	Tue, 28 May 2019 12:59:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EA3FB891
+Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7818313A
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 28 May 2019 10:56:47 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 70E1CF74CF;
-	Tue, 28 May 2019 10:56:47 +0000 (UTC)
-Received: from steredhat.redhat.com (ovpn-117-13.ams2.redhat.com
-	[10.36.117.13])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 8F19260BE2;
-	Tue, 28 May 2019 10:56:45 +0000 (UTC)
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: netdev@vger.kernel.org
-Subject: [PATCH 4/4] vsock/virtio: free used buffers during the .remove()
-Date: Tue, 28 May 2019 12:56:23 +0200
-Message-Id: <20190528105623.27983-5-sgarzare@redhat.com>
-In-Reply-To: <20190528105623.27983-1-sgarzare@redhat.com>
-References: <20190528105623.27983-1-sgarzare@redhat.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.38]);
-	Tue, 28 May 2019 10:56:47 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+	Tue, 28 May 2019 12:59:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=merlin.20170209;
+	h=Content-Transfer-Encoding:Mime-Version:
+	Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
+	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=l65emkDB6YfIx5Ve1iueFrhApsDtoK/gPzAciJVNODE=;
+	b=wpd7rWQeLaPU+zoeaHpc2R9x80
+	+3n5d3y2iBXjQIhbfzoz+jRn55C6z21KQ/A9RLFH59jMY6+GCMobkLkzOr6PTIbIrRMdlINMJFKaO
+	xuj5mjx1OyUKDQHVQ5D3IJ6cQ4HUQNAajZUTKTFLowP13NP8cBJBcIxZCF2kmNjSzPRGFcSPhCtO7
+	5P/Sd7W3JCL1KBX6dVxX/hV3SqnJD9af2qwwkswJ2292lg3ORsdhLYNDtsaLs7CwiKraVa4s1aF26
+	7uCWimLss7oL7zTu6Q4i27/3m08Wiue4QRox84Z+UInIVCZV7dMJQqG6JFPmaMnJpoWj1jZ2HXB0K
+	1yVSSrQQ==;
+Received: from [54.239.6.185] (helo=u9312026164465a.ant.amazon.com)
+	by merlin.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
+	id 1hVbhk-0003wi-Rj; Tue, 28 May 2019 12:59:49 +0000
+Message-ID: <f8fccc5745755e92077306189577da2fe591f586.camel@infradead.org>
+Subject: Re: [PATCH] virtio_console: remove vq buf while unpluging port
+From: Amit Shah <amit@infradead.org>
+To: Greg KH <gregkh@linuxfoundation.org>, amit@kernel.org, zhenwei pi
+	<pizhenwei@bytedance.com>
+Date: Tue, 28 May 2019 14:59:46 +0200
+In-Reply-To: <20190524185132.GA10695@kroah.com>
+References: <1556416204-30311-1-git-send-email-pizhenwei@bytedance.com>
+	<20190524185132.GA10695@kroah.com>
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+Cc: linux-kernel@vger.kernel.org, arnd@arndb.de,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,55 +69,42 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Before this patch, we only freed unused buffers, but there may
-still be used buffers to be freed.
+On Fri, 2019-05-24 at 20:51 +0200, Greg KH wrote:
+> On Sun, Apr 28, 2019 at 09:50:04AM +0800, zhenwei pi wrote:
+> > A bug can be easily reproduced:
+> > Host# cat guest-agent.xml
+> > <channel type="unix">
+> >   <source mode="bind" path="/var/lib/libvirt/qemu/stretch.agent"/>
+> >   <target type="virtio" name="org.qemu.guest_agent.0"
+> > state="connected"/>
+> > </channel>
+> > Host# virsh attach-device instance guest-agent.xml
+> > Host# virsh detach-device instance guest-agent.xml
+> > Host# virsh attach-device instance guest-agent.xml
+> > 
+> > and guest report: virtio-ports vport0p1: Error allocating inbufs
+> > 
+> > The reason is that the port is unplugged and the vq buf still
+> > remained.
+> > So, fix two cases in this patch:
+> > 1, fix memory leak with attach-device/detach-device.
+> > 2, fix logic bug with attach-device/detach-device/attach-device.
 
-Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
----
- net/vmw_vsock/virtio_transport.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+The "leak" happens because the host-side of the connection is still
+connected.  This is by design -- if a guest has written data before
+being unplugged, the port isn't released till the host connection goes
+down to ensure a host process reads all the data out of the port.
 
-diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
-index ad093ce96693..6a2afb989562 100644
---- a/net/vmw_vsock/virtio_transport.c
-+++ b/net/vmw_vsock/virtio_transport.c
-@@ -669,6 +669,18 @@ static void virtio_vsock_flush_works(struct virtio_vsock *vsock)
- 	flush_work(&vsock->send_pkt_work);
- }
- 
-+static void virtio_vsock_free_buf(struct virtqueue *vq)
-+{
-+	struct virtio_vsock_pkt *pkt;
-+	unsigned int len;
-+
-+	while ((pkt = virtqueue_detach_unused_buf(vq)))
-+		virtio_transport_free_pkt(pkt);
-+
-+	while ((pkt = virtqueue_get_buf(vq, &len)))
-+		virtio_transport_free_pkt(pkt);
-+}
-+
- static void virtio_vsock_remove(struct virtio_device *vdev)
- {
- 	struct virtio_vsock *vsock = vdev->priv;
-@@ -702,13 +714,11 @@ static void virtio_vsock_remove(struct virtio_device *vdev)
- 	vdev->config->reset(vdev);
- 
- 	mutex_lock(&vsock->rx_lock);
--	while ((pkt = virtqueue_detach_unused_buf(vsock->vqs[VSOCK_VQ_RX])))
--		virtio_transport_free_pkt(pkt);
-+	virtio_vsock_free_buf(vsock->vqs[VSOCK_VQ_RX]);
- 	mutex_unlock(&vsock->rx_lock);
- 
- 	mutex_lock(&vsock->tx_lock);
--	while ((pkt = virtqueue_detach_unused_buf(vsock->vqs[VSOCK_VQ_TX])))
--		virtio_transport_free_pkt(pkt);
-+	virtio_vsock_free_buf(vsock->vqs[VSOCK_VQ_TX]);
- 	mutex_unlock(&vsock->tx_lock);
- 
- 	spin_lock_bh(&vsock->send_pkt_list_lock);
--- 
-2.20.1
+Can you try similar, but also disconnecting the host side and see if
+that fixes things?
+
+> Amit, any ideas if this is valid or not and if this should be
+> applied?
+
+This had indeed been missed, thanks!
+
+
+			Amit
 
 _______________________________________________
 Virtualization mailing list
