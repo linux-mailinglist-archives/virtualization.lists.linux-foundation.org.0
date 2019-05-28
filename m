@@ -2,57 +2,101 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 147522C737
-	for <lists.virtualization@lfdr.de>; Tue, 28 May 2019 15:01:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDD382C8E2
+	for <lists.virtualization@lfdr.de>; Tue, 28 May 2019 16:36:03 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E1A891CD5;
-	Tue, 28 May 2019 13:01:15 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E2BBF1D31;
+	Tue, 28 May 2019 14:35:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id DF4AF1CCE
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 068731D19
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 28 May 2019 12:59:57 +0000 (UTC)
+	Tue, 28 May 2019 14:34:45 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7818313A
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8E231821
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 28 May 2019 12:59:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=merlin.20170209;
-	h=Content-Transfer-Encoding:Mime-Version:
-	Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=l65emkDB6YfIx5Ve1iueFrhApsDtoK/gPzAciJVNODE=;
-	b=wpd7rWQeLaPU+zoeaHpc2R9x80
-	+3n5d3y2iBXjQIhbfzoz+jRn55C6z21KQ/A9RLFH59jMY6+GCMobkLkzOr6PTIbIrRMdlINMJFKaO
-	xuj5mjx1OyUKDQHVQ5D3IJ6cQ4HUQNAajZUTKTFLowP13NP8cBJBcIxZCF2kmNjSzPRGFcSPhCtO7
-	5P/Sd7W3JCL1KBX6dVxX/hV3SqnJD9af2qwwkswJ2292lg3ORsdhLYNDtsaLs7CwiKraVa4s1aF26
-	7uCWimLss7oL7zTu6Q4i27/3m08Wiue4QRox84Z+UInIVCZV7dMJQqG6JFPmaMnJpoWj1jZ2HXB0K
-	1yVSSrQQ==;
-Received: from [54.239.6.185] (helo=u9312026164465a.ant.amazon.com)
-	by merlin.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
-	id 1hVbhk-0003wi-Rj; Tue, 28 May 2019 12:59:49 +0000
-Message-ID: <f8fccc5745755e92077306189577da2fe591f586.camel@infradead.org>
-Subject: Re: [PATCH] virtio_console: remove vq buf while unpluging port
-From: Amit Shah <amit@infradead.org>
-To: Greg KH <gregkh@linuxfoundation.org>, amit@kernel.org, zhenwei pi
-	<pizhenwei@bytedance.com>
-Date: Tue, 28 May 2019 14:59:46 +0200
-In-Reply-To: <20190524185132.GA10695@kroah.com>
-References: <1556416204-30311-1-git-send-email-pizhenwei@bytedance.com>
-	<20190524185132.GA10695@kroah.com>
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+	Tue, 28 May 2019 14:34:44 +0000 (UTC)
+Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x4SEMcWG062668 for <virtualization@lists.linux-foundation.org>;
+	Tue, 28 May 2019 10:34:43 -0400
+Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2ss3sxgaj8-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 28 May 2019 10:34:42 -0400
+Received: from localhost
+	by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pasic@linux.ibm.com>; Tue, 28 May 2019 15:34:39 +0100
+Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
+	by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Tue, 28 May 2019 15:34:36 +0100
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
+	[9.149.105.58])
+	by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x4SEYYts52691196
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Tue, 28 May 2019 14:34:34 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id EFBCE4C058;
+	Tue, 28 May 2019 14:34:33 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 239164C040;
+	Tue, 28 May 2019 14:34:33 +0000 (GMT)
+Received: from oc2783563651 (unknown [9.145.49.132])
+	by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Tue, 28 May 2019 14:34:33 +0000 (GMT)
+Date: Tue, 28 May 2019 16:33:42 +0200
+From: Halil Pasic <pasic@linux.ibm.com>
+To: Cornelia Huck <cohuck@redhat.com>
+Subject: Re: [PATCH v2 8/8] virtio/s390: make airq summary indicators DMA
+In-Reply-To: <20190527140018.7c2d34ff.cohuck@redhat.com>
+References: <20190523162209.9543-1-mimu@linux.ibm.com>
+	<20190523162209.9543-9-mimu@linux.ibm.com>
+	<20190527140018.7c2d34ff.cohuck@redhat.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
+x-cbid: 19052814-0016-0000-0000-000002804D23
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19052814-0017-0000-0000-000032DD5854
+Message-Id: <20190528163342.335eea0b.pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-28_06:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905280094
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: linux-kernel@vger.kernel.org, arnd@arndb.de,
-	virtualization@lists.linux-foundation.org
+Cc: Vasily Gorbik <gor@linux.ibm.com>,
+	Linux-S390 Mailing List <linux-s390@vger.kernel.org>,
+	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
+	KVM Mailing List <kvm@vger.kernel.org>,
+	Sebastian Ott <sebott@linux.ibm.com>,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Pierre Morel <pmorel@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Heiko Carstens <heiko.carstens@de.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
+	virtualization@lists.linux-foundation.org,
+	Christoph Hellwig <hch@infradead.org>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Michael Mueller <mimu@linux.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,42 +113,54 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, 2019-05-24 at 20:51 +0200, Greg KH wrote:
-> On Sun, Apr 28, 2019 at 09:50:04AM +0800, zhenwei pi wrote:
-> > A bug can be easily reproduced:
-> > Host# cat guest-agent.xml
-> > <channel type="unix">
-> >   <source mode="bind" path="/var/lib/libvirt/qemu/stretch.agent"/>
-> >   <target type="virtio" name="org.qemu.guest_agent.0"
-> > state="connected"/>
-> > </channel>
-> > Host# virsh attach-device instance guest-agent.xml
-> > Host# virsh detach-device instance guest-agent.xml
-> > Host# virsh attach-device instance guest-agent.xml
+On Mon, 27 May 2019 14:00:18 +0200
+Cornelia Huck <cohuck@redhat.com> wrote:
+
+> On Thu, 23 May 2019 18:22:09 +0200
+> Michael Mueller <mimu@linux.ibm.com> wrote:
+> 
+> > From: Halil Pasic <pasic@linux.ibm.com>
 > > 
-> > and guest report: virtio-ports vport0p1: Error allocating inbufs
+> > Hypervisor needs to interact with the summary indicators, so these
+> > need to be DMA memory as well (at least for protected virtualization
+> > guests).
 > > 
-> > The reason is that the port is unplugged and the vq buf still
-> > remained.
-> > So, fix two cases in this patch:
-> > 1, fix memory leak with attach-device/detach-device.
-> > 2, fix logic bug with attach-device/detach-device/attach-device.
+> > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> > ---
+> >  drivers/s390/virtio/virtio_ccw.c | 22 +++++++++++++++-------
+> >  1 file changed, 15 insertions(+), 7 deletions(-)
+> 
+> (...)
+> 
+> > @@ -1501,6 +1508,7 @@ static int __init virtio_ccw_init(void)
+> >  {
+> >  	/* parse no_auto string before we do anything further */
+> >  	no_auto_parse();
+> > +	summary_indicators = cio_dma_zalloc(MAX_AIRQ_AREAS);
+> 
+> What happens if this fails?
 
-The "leak" happens because the host-side of the connection is still
-connected.  This is by design -- if a guest has written data before
-being unplugged, the port isn't released till the host connection goes
-down to ensure a host process reads all the data out of the port.
+Bad things could happen!
 
-Can you try similar, but also disconnecting the host side and see if
-that fixes things?
+How about adding
 
-> Amit, any ideas if this is valid or not and if this should be
-> applied?
+if (!summary_indicators)
+	virtio_ccw_use_airq = 0; /* fall back to classic */
 
-This had indeed been missed, thanks!
+?
+
+Since it ain't very likely to happen, we could also just fail
+virtio_ccw_init() with -ENOMEM.
+
+Regards,
+Halil
 
 
-			Amit
+> 
+> >  	return ccw_driver_register(&virtio_ccw_driver);
+> >  }
+> >  device_initcall(virtio_ccw_init);
+> 
 
 _______________________________________________
 Virtualization mailing list
