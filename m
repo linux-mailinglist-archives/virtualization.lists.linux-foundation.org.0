@@ -2,48 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D187334B5
-	for <lists.virtualization@lfdr.de>; Mon,  3 Jun 2019 18:17:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8087333754
+	for <lists.virtualization@lfdr.de>; Mon,  3 Jun 2019 19:55:12 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6439AB7D;
-	Mon,  3 Jun 2019 16:17:34 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id ACDA3CD4;
+	Mon,  3 Jun 2019 17:55:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EF19AB7D
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DAF3ACD4
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  3 Jun 2019 16:17:32 +0000 (UTC)
+	Mon,  3 Jun 2019 17:55:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7C8C8A3
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5B520A3
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  3 Jun 2019 16:17:32 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
-	[10.5.11.22])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id AA7AF30860AD;
-	Mon,  3 Jun 2019 16:17:26 +0000 (UTC)
-Received: from gondolin (ovpn-204-96.brq.redhat.com [10.40.204.96])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id C92DD10013D9;
-	Mon,  3 Jun 2019 16:17:19 +0000 (UTC)
-Date: Mon, 3 Jun 2019 18:17:16 +0200
-From: Cornelia Huck <cohuck@redhat.com>
-To: Michael Mueller <mimu@linux.ibm.com>
-Subject: Re: [PATCH v3 7/8] virtio/s390: use DMA memory for ccw I/O and
-	classic notifiers
-Message-ID: <20190603181716.325101d9.cohuck@redhat.com>
-In-Reply-To: <20190529122657.166148-8-mimu@linux.ibm.com>
+	Mon,  3 Jun 2019 17:55:05 +0000 (UTC)
+Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x53HqCTp080650 for <virtualization@lists.linux-foundation.org>;
+	Mon, 3 Jun 2019 13:55:04 -0400
+Received: from e06smtp01.uk.ibm.com (e06smtp01.uk.ibm.com [195.75.94.97])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2sw68x5rvs-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 03 Jun 2019 13:55:04 -0400
+Received: from localhost
+	by e06smtp01.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pasic@linux.ibm.com>; Mon, 3 Jun 2019 18:55:02 +0100
+Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
+	by e06smtp01.uk.ibm.com (192.168.101.131) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Mon, 3 Jun 2019 18:55:00 +0100
+Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
+	by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x53Hsw6e62259234
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Mon, 3 Jun 2019 17:54:58 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 2B32042041;
+	Mon,  3 Jun 2019 17:54:58 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 943864203F;
+	Mon,  3 Jun 2019 17:54:57 +0000 (GMT)
+Received: from oc2783563651 (unknown [9.152.224.145])
+	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Mon,  3 Jun 2019 17:54:57 +0000 (GMT)
+Date: Mon, 3 Jun 2019 19:54:56 +0200
+From: Halil Pasic <pasic@linux.ibm.com>
+To: Cornelia Huck <cohuck@redhat.com>
+Subject: Re: [PATCH v3 8/8] virtio/s390: make airq summary indicators DMA
+In-Reply-To: <20190603180337.17723bcf.cohuck@redhat.com>
 References: <20190529122657.166148-1-mimu@linux.ibm.com>
-	<20190529122657.166148-8-mimu@linux.ibm.com>
-Organization: Red Hat GmbH
+	<20190529122657.166148-9-mimu@linux.ibm.com>
+	<20190603180337.17723bcf.cohuck@redhat.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.44]);
-	Mon, 03 Jun 2019 16:17:26 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-TM-AS-GCONF: 00
+x-cbid: 19060317-4275-0000-0000-0000033BD99D
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19060317-4276-0000-0000-0000384BE54A
+Message-Id: <20190603195456.6364fb53.pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-06-03_14:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=2 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1906030123
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
@@ -57,9 +91,9 @@ Cc: Vasily Gorbik <gor@linux.ibm.com>,
 	Heiko Carstens <heiko.carstens@de.ibm.com>,
 	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
 	Christoph Hellwig <hch@infradead.org>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Michael Mueller <mimu@linux.ibm.com>,
 	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
 	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -78,87 +112,51 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, 29 May 2019 14:26:56 +0200
-Michael Mueller <mimu@linux.ibm.com> wrote:
+On Mon, 3 Jun 2019 18:03:37 +0200
+Cornelia Huck <cohuck@redhat.com> wrote:
 
-> From: Halil Pasic <pasic@linux.ibm.com>
+> On Wed, 29 May 2019 14:26:57 +0200
+> Michael Mueller <mimu@linux.ibm.com> wrote:
 > 
-> Before virtio-ccw could get away with not using DMA API for the pieces of
-> memory it does ccw I/O with. With protected virtualization this has to
-> change, since the hypervisor needs to read and sometimes also write these
-> pieces of memory.
+> > From: Halil Pasic <pasic@linux.ibm.com>
+> > 
+> > Hypervisor needs to interact with the summary indicators, so these
+> > need to be DMA memory as well (at least for protected virtualization
+> > guests).
+> > 
+> > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> > Signed-off-by: Michael Mueller <mimu@linux.ibm.com>
+> > ---
+> >  drivers/s390/virtio/virtio_ccw.c | 26 +++++++++++++++++++-------
+> >  1 file changed, 19 insertions(+), 7 deletions(-)
 > 
-> The hypervisor is supposed to poke the classic notifiers, if these are
-> used, out of band with regards to ccw I/O. So these need to be allocated
-> as DMA memory (which is shared memory for protected virtualization
-> guests).
+> (...)
 > 
-> Let us factor out everything from struct virtio_ccw_device that needs to
-> be DMA memory in a satellite that is allocated as such.
+> > @@ -1501,6 +1508,11 @@ static int __init virtio_ccw_init(void)
+> >  {
+> >  	/* parse no_auto string before we do anything further */
+> >  	no_auto_parse();
+> > +
+> > +	summary_indicators = cio_dma_zalloc(MAX_AIRQ_AREAS);
+> > +	if (!summary_indicators)
+> > +		return -ENOMEM;
+> > +
+> >  	return ccw_driver_register(&virtio_ccw_driver);
 > 
-> Note: The control blocks of I/O instructions do not need to be shared.
-> These are marshalled by the ultravisor.
-> 
-> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-> Reviewed-by: Pierre Morel <pmorel@linux.ibm.com>
-> Signed-off-by: Michael Mueller <mimu@linux.ibm.com>
-> ---
->  drivers/s390/virtio/virtio_ccw.c | 177 +++++++++++++++++++++------------------
->  1 file changed, 96 insertions(+), 81 deletions(-)
+> Don't you need to free summary_indicators again if registering the
+> driver fails?
 > 
 
-(...)
+We do! BTW as of today I'm back and I intend to handle things
+regularly form now on ;).
 
-> @@ -176,6 +180,22 @@ static struct virtio_ccw_device *to_vc_device(struct virtio_device *vdev)
->  	return container_of(vdev, struct virtio_ccw_device, vdev);
->  }
->  
-> +static inline void *__vc_dma_alloc(struct virtio_device *vdev, size_t size)
-> +{
-> +	return ccw_device_dma_zalloc(to_vc_device(vdev)->cdev, size);
-> +}
-> +
-> +static inline void __vc_dma_free(struct virtio_device *vdev, size_t size,
-> +				 void *cpu_addr)
-> +{
-> +	return ccw_device_dma_free(to_vc_device(vdev)->cdev, cpu_addr, size);
-> +}
-> +
-> +#define vc_dma_alloc_struct(vdev, ptr) \
-> +	({ptr = __vc_dma_alloc(vdev, sizeof(*(ptr))); })
-> +#define vc_dma_free_struct(vdev, ptr) \
-> +	__vc_dma_free(vdev, sizeof(*(ptr)), (ptr))
-> +
+Regards,
+Halil
 
-I *still* don't like these #defines (and the __vc_dma_* functions), as I
-already commented last time. I think they make it harder to follow the
-code.
+> >  }
+> >  device_initcall(virtio_ccw_init);
+> 
 
->  static void drop_airq_indicator(struct virtqueue *vq, struct airq_info *info)
->  {
->  	unsigned long i, flags;
-> @@ -336,8 +356,7 @@ static void virtio_ccw_drop_indicator(struct virtio_ccw_device *vcdev,
->  	struct airq_info *airq_info = vcdev->airq_info;
->  
->  	if (vcdev->is_thinint) {
-> -		thinint_area = kzalloc(sizeof(*thinint_area),
-> -				       GFP_DMA | GFP_KERNEL);
-> +		vc_dma_alloc_struct(&vcdev->vdev, thinint_area);
-
-Last time I wrote:
-
-"Any reason why this takes a detour via the virtio device? The ccw
- device is already referenced in vcdev, isn't it?
-
-thinint_area = ccw_device_dma_zalloc(vcdev->cdev, sizeof(*thinint_area));
-
- looks much more obvious to me."
-
-It still seems more obvious to me.
-
->  		if (!thinint_area)
->  			return;
->  		thinint_area->summary_indicator =
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
