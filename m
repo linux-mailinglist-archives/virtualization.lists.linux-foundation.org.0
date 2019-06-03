@@ -2,100 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id D21AC33203
-	for <lists.virtualization@lfdr.de>; Mon,  3 Jun 2019 16:22:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5AAB33225
+	for <lists.virtualization@lfdr.de>; Mon,  3 Jun 2019 16:30:37 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4EB77E1D;
-	Mon,  3 Jun 2019 14:22:33 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 71ED8CC4;
+	Mon,  3 Jun 2019 14:30:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id B00D22F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CD581BB3
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  3 Jun 2019 14:22:31 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 34D54A3
+	Mon,  3 Jun 2019 14:30:30 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 76E045D3
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  3 Jun 2019 14:22:31 +0000 (UTC)
-Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x53EKSN8146943 for <virtualization@lists.linux-foundation.org>;
-	Mon, 3 Jun 2019 10:22:30 -0400
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2sw4xrh321-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	Mon,  3 Jun 2019 14:30:30 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id 14so9625713qtf.0
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 03 Jun 2019 10:22:29 -0400
-Received: from localhost
-	by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Mon, 3 Jun 2019 15:22:26 +0100
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
-	by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Mon, 3 Jun 2019 15:22:23 +0100
-Received: from d06av21.portsmouth.uk.ibm.com (d06av21.portsmouth.uk.ibm.com
-	[9.149.105.232])
-	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x53EMLl013303934
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Mon, 3 Jun 2019 14:22:21 GMT
-Received: from d06av21.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 65D2E5204F;
-	Mon,  3 Jun 2019 14:22:21 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.152.224.145])
-	by d06av21.portsmouth.uk.ibm.com (Postfix) with ESMTP id F156452052;
-	Mon,  3 Jun 2019 14:22:20 +0000 (GMT)
-Date: Mon, 3 Jun 2019 16:22:19 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Michael Mueller <mimu@linux.ibm.com>
-Subject: Re: [PATCH v3 2/8] s390/cio: introduce DMA pools to cio
-In-Reply-To: <20190603160428.2112077a.pasic@linux.ibm.com>
-References: <20190529122657.166148-1-mimu@linux.ibm.com>
-	<20190529122657.166148-3-mimu@linux.ibm.com>
-	<20190603133745.240c00a7.cohuck@redhat.com>
-	<035b4bd3-5856-e8e5-91bf-ba0b5c7c3736@linux.ibm.com>
-	<20190603160428.2112077a.pasic@linux.ibm.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+	Mon, 03 Jun 2019 07:30:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+	:content-disposition;
+	bh=gQn+opkBLJ7k/C3qZHsVRJKAD54wHEXBCLQZNaHpEEk=;
+	b=OEwFj29FD7bYVMZ+qE5XmQ18j2XMrCoJrU/QadCyAkLIv6Ef4bNr6/vAxmnE5R+8oC
+	vxmk4TOBl4R7SGBR4Km7wC164cN+CMpPZOW8ziDvW4N+MXt5HxMQtlgWwc85EcKLwWfu
+	aFM2MWjslZKmPqE+xUjlesCuJWSxk2UK+xjU/KPTiPKlaBGNFUPjAoqEibtWRlH+I21y
+	sYsG4I5M/TiKMUdi4B8Kh3bkGxiYJZiJFo71TQarQNI+/H7G204SQ1fJ1IrwtrJTNq06
+	jJpjowGWeIbU+ZXE1NH8W/M3EP1dw1f7BJd2l79jt+wGJX1Jd3vLtFl8FGkO/3Sp+KY+
+	Bj7A==
+X-Gm-Message-State: APjAAAUtbVnfwAmYKpQn/lRJ8j5+/3CFoLQE8rePmxvStPVPNVWQPqnm
+	BVHb9pQNojcEDqH+81gc7rEWvQ==
+X-Google-Smtp-Source: APXvYqynmgnzb+w8bUU39lzRRCvuGvLx9i0A1MLtbYk3Pg68IkNm66teD3X5Pu2eUYYljcP/hxDNUw==
+X-Received: by 2002:ac8:376e:: with SMTP id p43mr23617764qtb.354.1559572229588;
+	Mon, 03 Jun 2019 07:30:29 -0700 (PDT)
+Received: from redhat.com (pool-100-0-197-103.bstnma.fios.verizon.net.
+	[100.0.197.103])
+	by smtp.gmail.com with ESMTPSA id z12sm166896qkf.20.2019.06.03.07.30.28
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Mon, 03 Jun 2019 07:30:28 -0700 (PDT)
+Date: Mon, 3 Jun 2019 10:30:27 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: [PULL] vhost: cleanups and fixes
+Message-ID: <20190603103027-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19060314-0012-0000-0000-000003226217
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19060314-0013-0000-0000-0000215B3C9F
-Message-Id: <20190603162219.31de2df9.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-06-03_11:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1906030101
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+Content-Disposition: inline
+X-Mutt-Fcc: =sent
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Vasily Gorbik <gor@linux.ibm.com>,
-	Linux-S390 Mailing List <linux-s390@vger.kernel.org>,
-	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
-	KVM Mailing List <kvm@vger.kernel.org>,
-	Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S . Tsirkin" <mst@redhat.com>,
-	Pierre Morel <pmorel@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
-	Heiko Carstens <heiko.carstens@de.ibm.com>,
-	Eric Farman <farman@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Farhan Ali <alifm@linux.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+Cc: fabrizio.castro@bp.renesas.com, igor.stoppa@huawei.com, kvm@vger.kernel.org,
+	mst@redhat.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, stefanha@redhat.com,
+	pbonzini@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -112,40 +76,46 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, 3 Jun 2019 16:04:28 +0200
-Halil Pasic <pasic@linux.ibm.com> wrote:
+The following changes since commit cd6c84d8f0cdc911df435bb075ba22ce3c605b07:
 
-> On Mon, 3 Jun 2019 14:09:02 +0200
-> Michael Mueller <mimu@linux.ibm.com> wrote:
-> 
-> > >> @@ -1059,16 +1168,19 @@ static int __init css_bus_init(void)
-> > >>   	if (ret)
-> > >>   		goto out_unregister;
-> > >>   	ret = register_pm_notifier(&css_power_notifier);
-> > >> -	if (ret) {
-> > >> -		unregister_reboot_notifier(&css_reboot_notifier);
-> > >> -		goto out_unregister;
-> > >> -	}
-> > >> +	if (ret)
-> > >> +		goto out_unregister_rn;
-> > >> +	ret = cio_dma_pool_init();
-> > >> +	if (ret)
-> > >> +		goto out_unregister_rn;  
-> > > 
-> > > Don't you also need to unregister the pm notifier on failure here?  
-> > 
-> > Mmh, that was the original intention. Thanks!
-> 
-> I suppose we could also move cio_dma_pool_init() right before the
-> register_reboot_notifier() call and goto out_unregister on error.
-> 
+  Linux 5.2-rc2 (2019-05-26 16:49:19 -0700)
 
-Forget it, then we have to rollback the pool creation if the register
-stuff fails... Sorry for the noise.
+are available in the Git repository at:
 
-Regards,
-Halil
+  git://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
 
+for you to fetch changes up to c1ea02f15ab5efb3e93fc3144d895410bf79fcf2:
+
+  vhost: scsi: add weight support (2019-05-27 11:08:23 -0400)
+
+----------------------------------------------------------------
+virtio: fixes
+
+several fixes, some of them for CVEs.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+----------------------------------------------------------------
+Fabrizio Castro (1):
+      virtio: Fix indentation of VIRTIO_MMIO
+
+Igor Stoppa (1):
+      virtio: add unlikely() to WARN_ON_ONCE()
+
+Jason Wang (4):
+      vhost: introduce vhost_exceeds_weight()
+      vhost_net: fix possible infinite loop
+      vhost: vsock: add weight support
+      vhost: scsi: add weight support
+
+ drivers/vhost/net.c         | 41 ++++++++++++++---------------------------
+ drivers/vhost/scsi.c        | 21 ++++++++++++++-------
+ drivers/vhost/vhost.c       | 20 +++++++++++++++++++-
+ drivers/vhost/vhost.h       |  5 ++++-
+ drivers/vhost/vsock.c       | 28 +++++++++++++++++++++-------
+ drivers/virtio/Kconfig      |  8 ++++----
+ tools/virtio/linux/kernel.h |  2 +-
+ 7 files changed, 77 insertions(+), 48 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
