@@ -2,83 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02B9B34895
-	for <lists.virtualization@lfdr.de>; Tue,  4 Jun 2019 15:23:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ABAC348F6
+	for <lists.virtualization@lfdr.de>; Tue,  4 Jun 2019 15:36:45 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2AB90DA6;
-	Tue,  4 Jun 2019 13:23:09 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E7F0AC2C;
+	Tue,  4 Jun 2019 13:36:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6CCF2B1F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0DC58C03
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  4 Jun 2019 13:23:07 +0000 (UTC)
+	Tue,  4 Jun 2019 13:36:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 303036D6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8F9FA84C
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  4 Jun 2019 13:23:06 +0000 (UTC)
-Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x54DEuAt142851 for <virtualization@lists.linux-foundation.org>;
-	Tue, 4 Jun 2019 09:23:05 -0400
-Received: from e06smtp01.uk.ibm.com (e06smtp01.uk.ibm.com [195.75.94.97])
-	by mx0b-001b2d01.pphosted.com with ESMTP id 2swrv8201w-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 04 Jun 2019 09:23:04 -0400
-Received: from localhost
-	by e06smtp01.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Tue, 4 Jun 2019 14:23:03 +0100
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
-	by e06smtp01.uk.ibm.com (192.168.101.131) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Tue, 4 Jun 2019 14:23:01 +0100
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
-	[9.149.105.59])
-	by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x54DMwfd52559956
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Tue, 4 Jun 2019 13:22:58 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 7751CA4059;
-	Tue,  4 Jun 2019 13:22:58 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id C92A1A4051;
-	Tue,  4 Jun 2019 13:22:57 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.152.224.145])
-	by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Tue,  4 Jun 2019 13:22:57 +0000 (GMT)
-Date: Tue, 4 Jun 2019 15:22:56 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [PATCH v3 4/8] s390/airq: use DMA memory for adapter interrupts
-In-Reply-To: <20190603172740.1023e078.cohuck@redhat.com>
+	Tue,  4 Jun 2019 13:36:39 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id C43FFA3B60;
+	Tue,  4 Jun 2019 13:36:33 +0000 (UTC)
+Received: from gondolin (dhcp-192-222.str.redhat.com [10.33.192.222])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id CB1EA60C91;
+	Tue,  4 Jun 2019 13:36:27 +0000 (UTC)
+Date: Tue, 4 Jun 2019 15:36:25 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: Re: [PATCH v3 7/8] virtio/s390: use DMA memory for ccw I/O and
+	classic notifiers
+Message-ID: <20190604153625.6c03c232.cohuck@redhat.com>
+In-Reply-To: <20190604150819.1f8707b5.pasic@linux.ibm.com>
 References: <20190529122657.166148-1-mimu@linux.ibm.com>
-	<20190529122657.166148-5-mimu@linux.ibm.com>
-	<20190603172740.1023e078.cohuck@redhat.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+	<20190529122657.166148-8-mimu@linux.ibm.com>
+	<20190603181716.325101d9.cohuck@redhat.com>
+	<20190604150819.1f8707b5.pasic@linux.ibm.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19060413-4275-0000-0000-0000033C8EB0
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19060413-4276-0000-0000-0000384C9DAA
-Message-Id: <20190604152256.158d688c.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-06-04_09:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1906040090
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.30]);
+	Tue, 04 Jun 2019 13:36:34 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
@@ -113,54 +80,115 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, 3 Jun 2019 17:27:40 +0200
-Cornelia Huck <cohuck@redhat.com> wrote:
+On Tue, 4 Jun 2019 15:08:19 +0200
+Halil Pasic <pasic@linux.ibm.com> wrote:
 
-> On Wed, 29 May 2019 14:26:53 +0200
-> Michael Mueller <mimu@linux.ibm.com> wrote:
+> On Mon, 3 Jun 2019 18:17:16 +0200
+> Cornelia Huck <cohuck@redhat.com> wrote:
 > 
-> > From: Halil Pasic <pasic@linux.ibm.com>
+> > On Wed, 29 May 2019 14:26:56 +0200
+> > Michael Mueller <mimu@linux.ibm.com> wrote:
+
+> > (...)
+> >   
+> > > @@ -176,6 +180,22 @@ static struct virtio_ccw_device *to_vc_device(struct virtio_device *vdev)
+> > >  	return container_of(vdev, struct virtio_ccw_device, vdev);
+> > >  }
+> > >  
+> > > +static inline void *__vc_dma_alloc(struct virtio_device *vdev, size_t size)
+> > > +{
+> > > +	return ccw_device_dma_zalloc(to_vc_device(vdev)->cdev, size);
+> > > +}
+> > > +
+> > > +static inline void __vc_dma_free(struct virtio_device *vdev, size_t size,
+> > > +				 void *cpu_addr)
+> > > +{
+> > > +	return ccw_device_dma_free(to_vc_device(vdev)->cdev, cpu_addr, size);
+> > > +}
+> > > +
+> > > +#define vc_dma_alloc_struct(vdev, ptr) \
+> > > +	({ptr = __vc_dma_alloc(vdev, sizeof(*(ptr))); })
+> > > +#define vc_dma_free_struct(vdev, ptr) \
+> > > +	__vc_dma_free(vdev, sizeof(*(ptr)), (ptr))
+> > > +  
 > > 
-> > Protected virtualization guests have to use shared pages for airq
-> > notifier bit vectors, because hypervisor needs to write these bits.
+> > I *still* don't like these #defines (and the __vc_dma_* functions), as I
+> > already commented last time. I think they make it harder to follow the
+> > code.
+> >   
+> 
+> Sorry! I think we simply forgot to address this comment of yours. 
+> 
+> > >  static void drop_airq_indicator(struct virtqueue *vq, struct airq_info *info)
+> > >  {
+> > >  	unsigned long i, flags;
+> > > @@ -336,8 +356,7 @@ static void virtio_ccw_drop_indicator(struct virtio_ccw_device *vcdev,
+> > >  	struct airq_info *airq_info = vcdev->airq_info;
+> > >  
+> > >  	if (vcdev->is_thinint) {
+> > > -		thinint_area = kzalloc(sizeof(*thinint_area),
+> > > -				       GFP_DMA | GFP_KERNEL);
+> > > +		vc_dma_alloc_struct(&vcdev->vdev, thinint_area);  
 > > 
-> > Let us make sure we allocate DMA memory for the notifier bit vectors by
-> > replacing the kmem_cache with a dma_cache and kalloc() with
-> > cio_dma_zalloc().
+> > Last time I wrote:
 > > 
-> > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-> > Reviewed-by: Sebastian Ott <sebott@linux.ibm.com>
-> > Signed-off-by: Michael Mueller <mimu@linux.ibm.com>
-> > ---
-> >  arch/s390/include/asm/airq.h |  2 ++
-> >  drivers/s390/cio/airq.c      | 32 ++++++++++++++++++++------------
-> >  drivers/s390/cio/cio.h       |  2 ++
-> >  drivers/s390/cio/css.c       |  1 +
-> >  4 files changed, 25 insertions(+), 12 deletions(-)
+> > "Any reason why this takes a detour via the virtio device? The ccw
+> >  device is already referenced in vcdev, isn't it?
+> >
+> > thinint_area = ccw_device_dma_zalloc(vcdev->cdev, sizeof(*thinint_area));
+> > 
+> >  looks much more obvious to me."
+> > 
+> > It still seems more obvious to me.
+> >  
 > 
-> Apologies if that already has been answered (and I missed it in my mail
-> pile...), but two things had come to my mind previously:
 > 
-> - CHSC... does anything need to be done there? Last time I asked:
->   "Anyway, css_bus_init() uses some chscs
->    early (before cio_dma_pool_init), so we could not use the pools
->    there, even if we wanted to. Do chsc commands either work, or else
->    fail benignly on a protected virt guest?"
-
-Protected virt won't support all CHSC. The supported ones won't requre
-use of shared memory. So we are fine.
-
-> - PCI indicators... does this interact with any dma configuration on
->   the pci device? (I know pci is not supported yet, and I don't really
->   expect any problems.)
+> The reason why I decided to introduce __vc_dma_alloc() back then is
+> because I had no clarity what do we want to do there. If you take a look
+> the body of __vc_dma_alloc() changed quite a lot, while I the usage not
+> so much. 
 > 
+> Regarding why is the first argument a pointer struct virtio_device, the
+> idea was probably to keep the needs to be ZONE_DMA and can use the full
+> 64 bit address space separate. But I abandoned the ideal.
+> 
+> Also vc_dma_alloc_struct() started out more elaborate (I used to manage
+> a dma_addr_t as well -- see RFC).
 
-It does but, I'm pretty confident we don't have a problem with PCI. IMHO
-Sebastian is the guy who needs to be paranoid about this, and he r-b-ed
-the respective patches.
+Understood, history is often important :)
 
-Regards,
-Halil
+> 
+> I'm not quite sure what is your problem with the these. As far as I
+> understand, this is another of those matter of taste things. But it ain't
+> a big deal. 
+
+Two things:
+- The call path goes from the vcdev to the vdev, then back to the vcdev
+  and then to the cdev. Going from the vcdev to the cdev  directly
+  eliminates the roundtrip via the vdev, which I think does not add
+  anything.
+- I prefer
+	variable = function_returning_a_pointer(...);
+  over
+	function_setting_a_variable(..., variable);
+  The latter obscures the fact that we change the value of the
+  variable, unless named very obviously.
+
+> 
+> I will change this for v4 as you requested. Again sorry for missing it!
+
+np, can happen.
+
+> 
+> Regards,
+> Halil
+> 
+>  
+> > >  		if (!thinint_area)
+> > >  			return;
+> > >  		thinint_area->summary_indicator =  
+> >   
+> 
 
 _______________________________________________
 Virtualization mailing list
