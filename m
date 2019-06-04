@@ -2,101 +2,107 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFF8F33758
-	for <lists.virtualization@lfdr.de>; Mon,  3 Jun 2019 19:55:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6235E33CB2
+	for <lists.virtualization@lfdr.de>; Tue,  4 Jun 2019 03:15:09 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 11E5FC3E;
-	Mon,  3 Jun 2019 17:55:39 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0B3CDE2C;
+	Tue,  4 Jun 2019 01:14:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 156BBC3E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 05FC6DD8
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  3 Jun 2019 17:55:37 +0000 (UTC)
+	Tue,  4 Jun 2019 01:14:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
-	[148.163.156.1])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3FBAAA3
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6E8EA711
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  3 Jun 2019 17:55:35 +0000 (UTC)
-Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x53HqFME115718 for <virtualization@lists.linux-foundation.org>;
-	Mon, 3 Jun 2019 13:55:34 -0400
-Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2sw5u6ftr2-1
+	Tue,  4 Jun 2019 01:14:15 +0000 (UTC)
+Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x541CEEb124390 for <virtualization@lists.linux-foundation.org>;
+	Mon, 3 Jun 2019 21:14:14 -0400
+Received: from e32.co.us.ibm.com (e32.co.us.ibm.com [32.97.110.150])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2swdyk9mw9-1
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 03 Jun 2019 13:55:34 -0400
+	Mon, 03 Jun 2019 21:14:14 -0400
 Received: from localhost
-	by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
+	by e32.co.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+	Violators will be prosecuted
 	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Mon, 3 Jun 2019 18:55:31 +0100
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
-	by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
+	<bauerman@linux.ibm.com>; Tue, 4 Jun 2019 02:14:13 +0100
+Received: from b03cxnp08025.gho.boulder.ibm.com (9.17.130.17)
+	by e32.co.us.ibm.com (192.168.1.132) with IBM ESMTP SMTP Gateway:
 	Authorized Use Only! Violators will be prosecuted; 
 	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Mon, 3 Jun 2019 18:55:29 +0100
-Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
-	[9.149.105.61])
-	by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x53HtR1442336456
+	Tue, 4 Jun 2019 02:14:09 +0100
+Received: from b03ledav004.gho.boulder.ibm.com
+	(b03ledav004.gho.boulder.ibm.com [9.17.130.235])
+	by b03cxnp08025.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x541E8Gw18284804
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Mon, 3 Jun 2019 17:55:27 GMT
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9B96411C04A;
-	Mon,  3 Jun 2019 17:55:27 +0000 (GMT)
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 102FD11C050;
-	Mon,  3 Jun 2019 17:55:27 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.152.224.145])
-	by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Mon,  3 Jun 2019 17:55:26 +0000 (GMT)
-Date: Mon, 3 Jun 2019 19:55:26 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [PATCH v3 6/8] virtio/s390: add indirection to indicators access
-In-Reply-To: <20190603175554.3d8219f4.cohuck@redhat.com>
-References: <20190529122657.166148-1-mimu@linux.ibm.com>
-	<20190529122657.166148-7-mimu@linux.ibm.com>
-	<20190603175554.3d8219f4.cohuck@redhat.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+	verify=OK); Tue, 4 Jun 2019 01:14:08 GMT
+Received: from b03ledav004.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id EA40278064;
+	Tue,  4 Jun 2019 01:14:07 +0000 (GMT)
+Received: from b03ledav004.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 27B4E7805C;
+	Tue,  4 Jun 2019 01:14:04 +0000 (GMT)
+Received: from morokweng.localdomain (unknown [9.85.162.142])
+	by b03ledav004.gho.boulder.ibm.com (Postfix) with ESMTPS;
+	Tue,  4 Jun 2019 01:14:03 +0000 (GMT)
+References: <87zhrj8kcp.fsf@morokweng.localdomain>
+	<87womn8inf.fsf@morokweng.localdomain>
+	<20190129134750-mutt-send-email-mst@kernel.org>
+	<877eefxvyb.fsf@morokweng.localdomain>
+	<20190204144048-mutt-send-email-mst@kernel.org>
+	<87ef71seve.fsf@morokweng.localdomain>
+	<20190320171027-mutt-send-email-mst@kernel.org>
+	<87tvfvbwpb.fsf@morokweng.localdomain>
+	<20190323165456-mutt-send-email-mst@kernel.org>
+	<87a7go71hz.fsf@morokweng.localdomain>
+	<20190520090939-mutt-send-email-mst@kernel.org>
+User-agent: mu4e 1.0; emacs 26.2
+From: Thiago Jung Bauermann <bauerman@linux.ibm.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
+In-reply-to: <20190520090939-mutt-send-email-mst@kernel.org>
+Date: Mon, 03 Jun 2019 22:13:59 -0300
 MIME-Version: 1.0
 X-TM-AS-GCONF: 00
-x-cbid: 19060317-0020-0000-0000-000003445041
+x-cbid: 19060401-0004-0000-0000-00001517D37A
+X-IBM-SpamModules-Scores: 
+X-IBM-SpamModules-Versions: BY=3.00011210; HX=3.00000242; KW=3.00000007;
+	PH=3.00000004; SC=3.00000286; SDB=6.01212884; UDB=6.00637431;
+	IPR=6.00993944; 
+	MB=3.00027172; MTD=3.00000008; XFM=3.00000015; UTC=2019-06-04 01:14:12
 X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19060317-0021-0000-0000-0000219753B4
-Message-Id: <20190603195526.362e88c8.pasic@linux.ibm.com>
+x-cbparentid: 19060401-0005-0000-0000-00008BEB7B8D
+Message-Id: <877ea26tk8.fsf@morokweng.localdomain>
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-06-03_14:, , signatures=0
+	definitions=2019-06-04_01:, , signatures=0
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
 	priorityscore=1501
 	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
 	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=967 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1906030123
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1906040004
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Vasily Gorbik <gor@linux.ibm.com>,
-	Linux-S390 Mailing List <linux-s390@vger.kernel.org>,
-	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
-	KVM Mailing List <kvm@vger.kernel.org>,
-	Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S . Tsirkin" <mst@redhat.com>,
-	Pierre Morel <pmorel@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>,
-	Heiko Carstens <heiko.carstens@de.ibm.com>,
-	Eric Farman <farman@linux.ibm.com>,
+Cc: Mike Anderson <andmike@linux.ibm.com>,
+	Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Alexey Kardashevskiy <aik@linux.ibm.com>,
+	Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
-	Christoph Hellwig <hch@infradead.org>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Michael Mueller <mimu@linux.ibm.com>,
-	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>
+	Paul Mackerras <paulus@ozlabs.org>,
+	iommu@lists.linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
+	Christoph Hellwig <hch@lst.de>, David Gibson <david@gibson.dropbear.id.au>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -113,29 +119,59 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, 3 Jun 2019 17:55:54 +0200
-Cornelia Huck <cohuck@redhat.com> wrote:
 
-> On Wed, 29 May 2019 14:26:55 +0200
-> Michael Mueller <mimu@linux.ibm.com> wrote:
-> 
-> > From: Halil Pasic <pasic@linux.ibm.com>
-> > 
-> > This will come in handy soon when we pull out the indicators from
-> > virtio_ccw_device to a memory area that is shared with the hypervisor
-> > (in particular for protected virtualization guests).
-> > 
-> > Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-> > Reviewed-by: Pierre Morel <pmorel@linux.ibm.com>
-> > Signed-off-by: Michael Mueller <mimu@linux.ibm.com>
-> > ---
-> >  drivers/s390/virtio/virtio_ccw.c | 40 +++++++++++++++++++++++++---------------
-> >  1 file changed, 25 insertions(+), 15 deletions(-)
-> 
-> Reviewed-by: Cornelia Huck <cohuck@redhat.com>
-> 
 
-Thanks!
+Michael S. Tsirkin <mst@redhat.com> writes:
+
+> On Wed, Apr 17, 2019 at 06:42:00PM -0300, Thiago Jung Bauermann wrote:
+>> I rephrased it in terms of address translation. What do you think of
+>> this version? The flag name is slightly different too:
+>>
+>>
+>> VIRTIO_F_ACCESS_PLATFORM_NO_TRANSLATION This feature has the same
+>>     meaning as VIRTIO_F_ACCESS_PLATFORM both when set and when not set,
+>>     with the exception that address translation is guaranteed to be
+>>     unnecessary when accessing memory addresses supplied to the device
+>>     by the driver. Which is to say, the device will always use physical
+>>     addresses matching addresses used by the driver (typically meaning
+>>     physical addresses used by the CPU) and not translated further. This
+>>     flag should be set by the guest if offered, but to allow for
+>>     backward-compatibility device implementations allow for it to be
+>>     left unset by the guest. It is an error to set both this flag and
+>>     VIRTIO_F_ACCESS_PLATFORM.
+>
+>
+> OK so VIRTIO_F_ACCESS_PLATFORM is designed to allow unpriveledged
+> drivers. This is why devices fail when it's not negotiated.
+
+Just to clarify, what do you mean by unprivileged drivers? Is it drivers
+implemented in guest userspace such as with VFIO? Or unprivileged in
+some other sense such as needing to use bounce buffers for some reason?
+
+> This confuses me.
+> If driver is unpriveledged then what happens with this flag?
+> It can supply any address it wants. Will that corrupt kernel
+> memory?
+
+Not needing address translation doesn't necessarily mean that there's no
+IOMMU. On powerpc we don't use VIRTIO_F_ACCESS_PLATFORM but there's
+always an IOMMU present. And we also support VFIO drivers. The VFIO API
+for pseries (sPAPR section in Documentation/vfio.txt) has extra ioctls
+to program the IOMMU.
+
+For our use case, we don't need address translation because we set up an
+identity mapping in the IOMMU so that the device can use guest physical
+addresses.
+
+If the guest kernel is concerned that an unprivileged driver could
+jeopardize its integrity it should not negotiate this feature flag.
+Perhaps there should be a note about this in the flag definition? This
+concern is platform-dependant though. I don't believe it's an issue in
+pseries.
+
+--
+Thiago Jung Bauermann
+IBM Linux Technology Center
 
 _______________________________________________
 Virtualization mailing list
