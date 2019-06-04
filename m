@@ -2,86 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9A3034A6B
-	for <lists.virtualization@lfdr.de>; Tue,  4 Jun 2019 16:29:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D413A34AFB
+	for <lists.virtualization@lfdr.de>; Tue,  4 Jun 2019 16:52:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 1B812CC2;
-	Tue,  4 Jun 2019 14:29:21 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0C62E949;
+	Tue,  4 Jun 2019 14:52:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EDA289EE
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CEF0C5AA
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  4 Jun 2019 14:29:19 +0000 (UTC)
+	Tue,  4 Jun 2019 14:52:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8736C875
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 78D1784C
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  4 Jun 2019 14:29:19 +0000 (UTC)
-Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x54EOcr6060944 for <virtualization@lists.linux-foundation.org>;
-	Tue, 4 Jun 2019 10:29:18 -0400
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2swsnu2ryy-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 04 Jun 2019 10:29:18 -0400
-Received: from localhost
-	by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Tue, 4 Jun 2019 15:29:16 +0100
-Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
-	by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Tue, 4 Jun 2019 15:29:13 +0100
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com
-	(b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
-	by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x54ETB3d35389444
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Tue, 4 Jun 2019 14:29:11 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 59BE4A4064;
-	Tue,  4 Jun 2019 14:29:11 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id CC03EA4054;
-	Tue,  4 Jun 2019 14:29:10 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.152.224.145])
-	by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Tue,  4 Jun 2019 14:29:10 +0000 (GMT)
-Date: Tue, 4 Jun 2019 16:29:09 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [PATCH v3 7/8] virtio/s390: use DMA memory for ccw I/O and
-	classic notifiers
-In-Reply-To: <20190604153625.6c03c232.cohuck@redhat.com>
+	Tue,  4 Jun 2019 14:52:08 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 8CA5A30BB367;
+	Tue,  4 Jun 2019 14:51:29 +0000 (UTC)
+Received: from gondolin (dhcp-192-222.str.redhat.com [10.33.192.222])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 5D8F410013D9;
+	Tue,  4 Jun 2019 14:51:22 +0000 (UTC)
+Date: Tue, 4 Jun 2019 16:51:20 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: Re: [PATCH v3 4/8] s390/airq: use DMA memory for adapter interrupts
+Message-ID: <20190604165120.5afdce78.cohuck@redhat.com>
+In-Reply-To: <20190604152256.158d688c.pasic@linux.ibm.com>
 References: <20190529122657.166148-1-mimu@linux.ibm.com>
-	<20190529122657.166148-8-mimu@linux.ibm.com>
-	<20190603181716.325101d9.cohuck@redhat.com>
-	<20190604150819.1f8707b5.pasic@linux.ibm.com>
-	<20190604153625.6c03c232.cohuck@redhat.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+	<20190529122657.166148-5-mimu@linux.ibm.com>
+	<20190603172740.1023e078.cohuck@redhat.com>
+	<20190604152256.158d688c.pasic@linux.ibm.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19060414-0012-0000-0000-000003233B86
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19060414-0013-0000-0000-0000215C1B4E
-Message-Id: <20190604162909.54de39fb.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-06-04_10:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=864 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1810050000 definitions=main-1906040096
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.49]);
+	Tue, 04 Jun 2019 14:52:00 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
@@ -90,7 +53,8 @@ Cc: Vasily Gorbik <gor@linux.ibm.com>,
 	Thomas Huth <thuth@redhat.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>,
 	KVM Mailing List <kvm@vger.kernel.org>,
 	Sebastian Ott <sebott@linux.ibm.com>,
-	"Michael S . Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Pierre Morel <pmorel@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>,
 	Heiko Carstens <heiko.carstens@de.ibm.com>,
 	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
@@ -115,47 +79,48 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, 4 Jun 2019 15:36:25 +0200
-Cornelia Huck <cohuck@redhat.com> wrote:
+On Tue, 4 Jun 2019 15:22:56 +0200
+Halil Pasic <pasic@linux.ibm.com> wrote:
 
-> On Tue, 4 Jun 2019 15:08:19 +0200
-> Halil Pasic <pasic@linux.ibm.com> wrote:
-> 
+> On Mon, 3 Jun 2019 17:27:40 +0200
+> Cornelia Huck <cohuck@redhat.com> wrote:
 
-[..]
-
-> 
-> Two things:
-> - The call path goes from the vcdev to the vdev, then back to the vcdev
->   and then to the cdev. Going from the vcdev to the cdev  directly
->   eliminates the roundtrip via the vdev, which I think does not add
->   anything.
-> - I prefer
-> 	variable = function_returning_a_pointer(...);
->   over
-> 	function_setting_a_variable(..., variable);
->   The latter obscures the fact that we change the value of the
->   variable, unless named very obviously.
-> 
-
-I understand. Here it's especially bad because what looks like a
-function is actually a macro so it ain't even fn(..., &variable) but
-just fn(..., variable). I guess I'm a bit desensitized towards the latter
-because of my c++ background.
-
-
+> > Apologies if that already has been answered (and I missed it in my mail
+> > pile...), but two things had come to my mind previously:
 > > 
-> > I will change this for v4 as you requested. Again sorry for missing it!
+> > - CHSC... does anything need to be done there? Last time I asked:
+> >   "Anyway, css_bus_init() uses some chscs
+> >    early (before cio_dma_pool_init), so we could not use the pools
+> >    there, even if we wanted to. Do chsc commands either work, or else
+> >    fail benignly on a protected virt guest?"  
 > 
-> np, can happen.
+> Protected virt won't support all CHSC. The supported ones won't requre
+> use of shared memory. So we are fine.
 
-Thanks for the explanation. I will use
+I suppose the supported ones are the sync chscs that use the chsc area
+as a direct parameter (and therefore are handled similarly to the other
+I/O instructions that supply a direct parameter)? I don't think we care
+about async chscs in KVM/QEMU anyway, as we don't even emulate chsc
+subchannels :) (And IIRC, you don't get chsc subchannels in z/VM
+guests, either.)
 
-ccw_device_dma_zalloc() directly in v4.
+> 
+> > - PCI indicators... does this interact with any dma configuration on
+> >   the pci device? (I know pci is not supported yet, and I don't really
+> >   expect any problems.)
+> >   
+> 
+> It does but, I'm pretty confident we don't have a problem with PCI. IMHO
+> Sebastian is the guy who needs to be paranoid about this, and he r-b-ed
+> the respective patches.
 
-Regards,
-Halil
+Just wanted to make sure that this was on the radar. You guys are
+obviously in a better position than me to judge this :)
 
+Anyway, I do not intend to annoy with those questions, it's just hard
+to get a feel if there are areas that still need care if you don't have
+access to the documentation for this... if you tell me that you are
+aware of it and it should work, that's fine for me.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
