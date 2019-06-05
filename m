@@ -2,153 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 198C173744
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:05:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4449F73745
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:05:30 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 10DD114D1;
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 5595914D3;
 	Wed, 24 Jul 2019 18:59:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 25A13CC1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id AD29A2C
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  4 Jun 2019 10:01:40 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from bombadil.infradead.org (bombadil.infradead.org
-	[198.137.202.133])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 59C876D6
+	Wed,  5 Jun 2019 23:42:06 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-it1-f199.google.com (mail-it1-f199.google.com
+	[209.85.166.199])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 19A114C3
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  4 Jun 2019 10:01:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:
-	From:Date:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=Omh6TzV4Gmx81j5VEp+7dLuZclw2RBTzNTaS7uo9g/w=;
-	b=ahI9Qmwo3+3p7PXlpDr67Lf+f
-	exS3e8UxHuG/BT7M1ThoePbPfaJiWqASMOiDsQQ+hQ/1Exz3iBYEE8Oiup0jdHRHMpQtOVf51JPB5
-	wAUl11j91om/kx5A03GVcpYYKhGxYIGfY8P+FKa+/T4RtCnf6JbJ154w+GdxgtfRPwoMOX6/7k4tr
-	dhtH+IsR9vlCiEPhrn4WWtkkePrgGuLJJSSweQ26ld9L6uNGSkRHxxbtYgKYHomINREtkHjHRQHRj
-	Y6nXe/FiiILXkJQ4nx/d30EWvlqtmljmh3NWrZuBagGU4bOhYyNzK1bjyUHN4CjoGkcht4/og3vYJ
-	YpihbVGnQ==;
-Received: from [187.113.6.249] (helo=coco.lan)
-	by bombadil.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
-	id 1hY6D8-0008Uz-UV; Tue, 04 Jun 2019 09:58:31 +0000
-Date: Tue, 4 Jun 2019 06:58:02 -0300
-From: Mauro Carvalho Chehab <mchehab@infradead.org>
-To: Christophe Leroy <christophe.leroy@c-s.fr>
-Subject: Re: [PATCH 22/22] docs: fix broken documentation links
-Message-ID: <20190604065802.47a9d24b@coco.lan>
-In-Reply-To: <20190604064614.67cde821@coco.lan>
-References: <cover.1559171394.git.mchehab+samsung@kernel.org>
-	<f9fecacbe4ce0b2b3aed38d71ae3753f2daf3ce3.1559171394.git.mchehab+samsung@kernel.org>
-	<64e136de-1a7b-3436-9675-44ea9fa7b64a@c-s.fr>
-	<20190604064614.67cde821@coco.lan>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+	Wed,  5 Jun 2019 23:42:06 +0000 (UTC)
+Received: by mail-it1-f199.google.com with SMTP id e141so250838ita.5
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 05 Jun 2019 16:42:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
+	bh=If8zYrfgMvREoNxOF+APhy3YFYkcq8XTmIhwfd8Qif4=;
+	b=CWkDKT7flYzCDC/Whdc6AzZpLeaT3jkDJKr7LzjOdKbQ5tBFX0ldkGUOyPV4ZHsuib
+	FOWeta/XFu5lNxx6Xzl78XEX9PsCInBxwMQaZsSbnPuyzpD3SqKtq4/SeBCCrDtj8HnT
+	Z2YAFdmGGWZ0OnXDE9AOuvvLGcwn/sEbBKyPxpBFCHwnxI3KVzazT+0QwOsRp5EdISJR
+	if7s1HUqAqU2IL3w71Ocuk8dpDH+d9BkJ/r+gOc6ZxVJLMT5Q3fiVVWMZbfQks0fjGGg
+	yprNxzZb+plvSC5wlSKbtoEpYBbglcfAibl8g+xMAmUAfZaKr8hiJ3GfDLc5CJbZvbe5
+	tOgQ==
+X-Gm-Message-State: APjAAAWmE1xFgegCgEkpUjfrGhAlLbIisCpUpxUeoZTIWFnY1x3J/m3Z
+	DpZOTaXvG0IvN6iAkdp2Daq1ZRdCxByKiMVN+p808vRYNu0X
+X-Google-Smtp-Source: APXvYqyv7nsvHNrQ68UBjoE3uareCjq/xghIfL2qvARCjcEuGCVrReipnpbeK7ASMfANvkONy2j3ewcak6QZD9ptXz7gkQVpxpQw
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <mchehab@infradead.org> by
-	bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Received: by 2002:a24:7c45:: with SMTP id a66mr8223766itd.139.1559778125448; 
+	Wed, 05 Jun 2019 16:42:05 -0700 (PDT)
+Date: Wed, 05 Jun 2019 16:42:05 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <000000000000188da1058a9c25e3@google.com>
+Subject: memory leak in vhost_net_ioctl
+From: syzbot <syzbot+0789f0c7e45efd7bb643@syzkaller.appspotmail.com>
+To: ast@kernel.org, bpf@vger.kernel.org, daniel@iogearbox.net, 
+	davem@davemloft.net, hawk@kernel.org, jakub.kicinski@netronome.com, 
+	jasowang@redhat.com, john.fastabend@gmail.com, kvm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org, 
+	syzkaller-bugs@googlegroups.com,
+	virtualization@lists.linux-foundation.org, xdp-newbies@vger.kernel.org
+X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_00,FROM_LOCAL_HEX,
+	RCVD_IN_DNSWL_NONE,SORTED_RECIPS autolearn=no version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 X-Mailman-Approved-At: Wed, 24 Jul 2019 18:59:23 +0000
-Cc: Andrew Lunn <andrew@lunn.ch>,
-	Thomas Preston <thomas.preston@codethink.co.uk>,
-	Wolfram Sang <wsa@the-dreams.de>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Will Deacon <will.deacon@arm.com>, Russell King <linux@armlinux.org.uk>,
-	Paul Mackerras <paulus@samba.org>,
-	Alessia Mantegazza <amantegazza@vaga.pv.it>, Jakub Wilk <jwilk@jwilk.net>,
-	AKASHI Takahiro <takahiro.akashi@linaro.org>,
-	Kevin Hilman <khilman@baylibre.com>,
-	James Morris <jmorris@namei.org>, linux-acpi@vger.kernel.org,
-	Andy Gross <agross@kernel.org>, xen-devel@lists.xenproject.org,
-	Alexander Popov <alex.popov@linux.com>, Qian Cai <cai@lca.pw>,
-	Al Viro <viro@zeniv.linux.org.uk>, Andy Lutomirski <luto@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>, Kairui Song <kasong@redhat.com>,
-	Quentin Perret <quentin.perret@arm.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	linux-kernel@vger.kernel.org, Paul Burton <paul.burton@mips.com>,
-	Jiri Kosina <jkosina@suse.cz>, Casey Schaufler <casey@schaufler-ca.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Lu Baolu <baolu.lu@linux.intel.com>, Mark Rutland <mark.rutland@arm.com>,
-	Feng Tang <feng.tang@intel.com>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Mimi Zohar <zohar@linux.ibm.com>,
-	Kamalesh Babulal <kamalesh@linux.vnet.ibm.com>,
-	Masahiro Yamada <yamada.masahiro@socionext.com>,
-	Yannik Sembritzki <yannik@sembritzki.me>,
-	Harry Wei <harryxiyou@gmail.com>, linux-i2c@vger.kernel.org,
-	Shuah Khan <shuah@kernel.org>, Stephen Rothwell <sfr@canb.auug.org.au>,
-	"Paul E. McKenney" <paulmck@linux.ibm.com>,
-	Alexandre Ghiti <alex@ghiti.fr>, YueHaibing <yuehaibing@huawei.com>,
-	Robert Moore <robert.moore@intel.com>,
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	Len Brown <lenb@kernel.org>, David Brown <david.brown@linaro.org>,
-	Joerg Roedel <jroedel@suse.de>, linux-arm-msm@vger.kernel.org,
-	linux-gpio@vger.kernel.org, Claudiu Manoil <claudiu.manoil@nxp.com>,
-	Florian Fainelli <f.fainelli@gmail.com>,
-	Jacek Anaszewski <jacek.anaszewski@gmail.com>,
-	Bjorn Helgaas <bhelgaas@google.com>, linux-amlogic@lists.infradead.org,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	linux-arm-kernel@lists.infradead.org, Tony Luck <tony.luck@intel.com>,
-	Sean Christopherson <sean.j.christopherson@intel.com>,
-	Rob Herring <robh+dt@kernel.org>, James Morse <james.morse@arm.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Samuel Mendoza-Jonas <sam@mendozajonas.com>,
-	linux-pci@vger.kernel.org, Bhupesh Sharma <bhsharma@redhat.com>,
-	Josh Poimboeuf <jpoimboe@redhat.com>, platform-driver-x86@vger.kernel.org,
-	Ding Xiang <dingxiang@cmss.chinamobile.com>,
-	linux-kselftest@vger.kernel.org, Alex Shi <alex.shi@linux.alibaba.com>,
-	Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-	Baoquan He <bhe@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
-	Raphael Gault <raphael.gault@arm.com>, Joel Stanley <joel@jms.id.au>,
-	Federico Vaga <federico.vaga@vaga.pv.it>,
-	Darren Hart <dvhart@infradead.org>,
-	Erik Schmauss <erik.schmauss@intel.com>,
-	"Serge E. Hallyn" <serge@hallyn.com>, Palmer Dabbelt <palmer@sifive.com>,
-	Kees Cook <keescook@chromium.org>,
-	Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
-	Jonathan =?UTF-8?B?TmV1c2No?= =?UTF-8?B?w6RmZXI=?=
-	<j.neuschaefer@gmx.net>, SeongJae Park <sj38.park@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Borislav Petkov <bp@alien8.de>,
-	Sunil Muthuswamy <sunilmut@microsoft.com>,
-	virtualization@lists.linux-foundation.org, devel@acpica.org,
-	Ard Biesheuvel <ard.biesheuvel@linaro.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Sakari Ailus <sakari.ailus@linux.intel.com>,
-	Olof Johansson <olof@lixom.net>, Logan Gunthorpe <logang@deltatee.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
-	Sven Van Asbroeck <thesven73@gmail.com>,
-	Michal Hocko <mhocko@suse.com>, kvm@vger.kernel.org,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Thorsten Leemhuis <linux@leemhuis.info>,
-	David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
-	"H. Peter Anvin" <hpa@zytor.com>, devel@driverdev.osuosl.org,
-	Manfred Spraul <manfred@colorfullife.com>,
-	Luis Chamberlain <mcgrof@kernel.org>, x86@kernel.org,
-	Pavel Tatashin <pasha.tatashin@oracle.com>,
-	Mike Rapoport <rppt@linux.ibm.com>,
-	Ingo Molnar <mingo@redhat.com>, Dave Young <dyoung@redhat.com>,
-	devicetree@vger.kernel.org, Arnaldo Carvalho de Melo <acme@redhat.com>,
-	Jerome Glisse <jglisse@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-	Dmitry Vyukov <dvyukov@google.com>, linux-edac@vger.kernel.org,
-	Juergen Gross <jgross@suse.com>,
-	Denis Efremov <efremov@ispras.ru>, netdev@vger.kernel.org,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Changbin Du <changbin.du@intel.com>, linux-security-module@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, Andy Shevchenko <andy@infradead.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -160,158 +67,104 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"; DelSp="yes"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Em Tue, 4 Jun 2019 06:46:14 -0300
-Mauro Carvalho Chehab <mchehab+samsung@kernel.org> escreveu:
+Hello,
 
-> Em Mon, 3 Jun 2019 09:34:15 +0200
-> Christophe Leroy <christophe.leroy@c-s.fr> escreveu:
-> 
+syzbot found the following crash on:
 
-> > [...]
-> > 
-> > > diff --git a/arch/powerpc/Kconfig b/arch/powerpc/Kconfig
-> > > index 8c1c636308c8..e868d2bd48b8 100644
-> > > --- a/arch/powerpc/Kconfig
-> > > +++ b/arch/powerpc/Kconfig
-> > > @@ -898,7 +898,7 @@ config PPC_MEM_KEYS
-> > >   	  page-based protections, but without requiring modification of the
-> > >   	  page tables when an application changes protection domains.
-> > >   
-> > > -	  For details, see Documentation/vm/protection-keys.rst
-> > > +	  For details, see Documentation/x86/protection-keys.rst  
-> > 
-> > It looks strange to reference an x86 file, for powerpc arch.
-> 
-> Indeed. Yet, seeking for the API documented there:
-> 
->  $ git grep -l pkey_mprotect
-> Documentation/x86/protection-keys.rst
-> arch/alpha/kernel/syscalls/syscall.tbl
-> arch/arm/tools/syscall.tbl
-> arch/arm64/include/asm/unistd32.h
-> arch/ia64/kernel/syscalls/syscall.tbl
-> arch/m68k/kernel/syscalls/syscall.tbl
-> arch/microblaze/kernel/syscalls/syscall.tbl
-> arch/mips/kernel/syscalls/syscall_n32.tbl
-> arch/mips/kernel/syscalls/syscall_n64.tbl
-> arch/mips/kernel/syscalls/syscall_o32.tbl
-> arch/parisc/kernel/syscalls/syscall.tbl
-> arch/powerpc/kernel/syscalls/syscall.tbl
-> arch/s390/kernel/syscalls/syscall.tbl
-> arch/sh/kernel/syscalls/syscall.tbl
-> arch/sparc/kernel/syscalls/syscall.tbl
-> arch/x86/entry/syscalls/syscall_32.tbl
-> arch/x86/entry/syscalls/syscall_64.tbl
-> arch/xtensa/kernel/syscalls/syscall.tbl
-> include/linux/syscalls.h
-> include/uapi/asm-generic/unistd.h
-> kernel/sys_ni.c
-> mm/mprotect.c
-> tools/include/uapi/asm-generic/unistd.h
-> tools/perf/arch/powerpc/entry/syscalls/syscall.tbl
-> tools/perf/arch/x86/entry/syscalls/syscall_64.tbl
-> tools/perf/builtin-trace.c
-> tools/testing/selftests/x86/protection_keys.c
-> 
-> Despite being used on several archs, the only documentation for it
-> is inside the x86 directory, as it seems that this is not
-> arch-specific.
-> 
-> Perhaps the file should, instead, be moved to another book.
+HEAD commit:    788a0249 Merge tag 'arc-5.2-rc4' of git://git.kernel.org/p..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=15dc9ea6a00000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=d5c73825cbdc7326
+dashboard link: https://syzkaller.appspot.com/bug?extid=0789f0c7e45efd7bb643
+compiler:       gcc (GCC) 9.0.0 20181231 (experimental)
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=10b31761a00000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=124892c1a00000
 
-I guess the best is to have this inside the core-api book.
+IMPORTANT: if you fix the bug, please add the following tag to the commit:
+Reported-by: syzbot+0789f0c7e45efd7bb643@syzkaller.appspotmail.com
 
-Patch enclosed.
+udit: type=1400 audit(1559768703.229:36): avc:  denied  { map } for   
+pid=7116 comm="syz-executor330" path="/root/syz-executor330334897"  
+dev="sda1" ino=16461 scontext=unconfined_u:system_r:insmod_t:s0-s0:c0.c1023  
+tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file permissive=1
+executing program
+executing program
+BUG: memory leak
+unreferenced object 0xffff88812421fe40 (size 64):
+   comm "syz-executor330", pid 7117, jiffies 4294949245 (age 13.030s)
+   hex dump (first 32 bytes):
+     01 00 00 00 20 69 6f 63 00 00 00 00 64 65 76 2f  .... ioc....dev/
+     50 fe 21 24 81 88 ff ff 50 fe 21 24 81 88 ff ff  P.!$....P.!$....
+   backtrace:
+     [<00000000ae0c4ae0>] kmemleak_alloc_recursive  
+include/linux/kmemleak.h:55 [inline]
+     [<00000000ae0c4ae0>] slab_post_alloc_hook mm/slab.h:439 [inline]
+     [<00000000ae0c4ae0>] slab_alloc mm/slab.c:3326 [inline]
+     [<00000000ae0c4ae0>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
+     [<0000000079ebab38>] kmalloc include/linux/slab.h:547 [inline]
+     [<0000000079ebab38>] vhost_net_ubuf_alloc drivers/vhost/net.c:241  
+[inline]
+     [<0000000079ebab38>] vhost_net_set_backend drivers/vhost/net.c:1534  
+[inline]
+     [<0000000079ebab38>] vhost_net_ioctl+0xb43/0xc10  
+drivers/vhost/net.c:1716
+     [<000000009f6204a2>] vfs_ioctl fs/ioctl.c:46 [inline]
+     [<000000009f6204a2>] file_ioctl fs/ioctl.c:509 [inline]
+     [<000000009f6204a2>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+     [<00000000b45866de>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+     [<00000000dfb41eb8>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+     [<00000000dfb41eb8>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+     [<00000000dfb41eb8>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+     [<0000000049c1f547>] do_syscall_64+0x76/0x1a0  
+arch/x86/entry/common.c:301
+     [<0000000029cc8ca7>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
-Regards,
-Mauro
-
-
-[PATCH] docs: move protection-keys.rst to the core-api book
-
-This document is used by multiple architectures:
-
-	$ echo $(git grep -l  pkey_mprotect arch|cut -d'/' -f 2|sort|uniq)
-	alpha arm arm64 ia64 m68k microblaze mips parisc powerpc s390 sh sparc x86 xtensa
-
-So, let's move it to the core book and adjust the links to it
-accordingly.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-
-diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
-index ee1bb8983a88..2466a4c51031 100644
---- a/Documentation/core-api/index.rst
-+++ b/Documentation/core-api/index.rst
-@@ -34,6 +34,7 @@ Core utilities
-    timekeeping
-    boot-time-mm
-    memory-hotplug
-+   protection-keys
- 
- 
- Interfaces for kernel debugging
-diff --git a/Documentation/x86/protection-keys.rst b/Documentation/core-api/protection-keys.rst
-similarity index 100%
-rename from Documentation/x86/protection-keys.rst
-rename to Documentation/core-api/protection-keys.rst
-diff --git a/Documentation/x86/index.rst b/Documentation/x86/index.rst
-index ae36fc5fc649..f2de1b2d3ac7 100644
---- a/Documentation/x86/index.rst
-+++ b/Documentation/x86/index.rst
-@@ -19,7 +19,6 @@ x86-specific Documentation
-    tlb
-    mtrr
-    pat
--   protection-keys
-    intel_mpx
-    amd-memory-encryption
-    pti
-diff --git a/arch/powerpc/Kconfig b/arch/powerpc/Kconfig
-index 8c1c636308c8..3b795a0cab62 100644
---- a/arch/powerpc/Kconfig
-+++ b/arch/powerpc/Kconfig
-@@ -898,7 +898,7 @@ config PPC_MEM_KEYS
- 	  page-based protections, but without requiring modification of the
- 	  page tables when an application changes protection domains.
- 
--	  For details, see Documentation/vm/protection-keys.rst
-+	  For details, see Documentation/core-api/protection-keys.rst
- 
- 	  If unsure, say y.
- 
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 2bbbd4d1ba31..d87d53fcd261 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -1911,7 +1911,7 @@ config X86_INTEL_MEMORY_PROTECTION_KEYS
- 	  page-based protections, but without requiring modification of the
- 	  page tables when an application changes protection domains.
- 
--	  For details, see Documentation/x86/protection-keys.txt
-+	  For details, see Documentation/core-api/protection-keys.rst
- 
- 	  If unsure, say y.
- 
-diff --git a/tools/testing/selftests/x86/protection_keys.c b/tools/testing/selftests/x86/protection_keys.c
-index 5d546dcdbc80..480995bceefa 100644
---- a/tools/testing/selftests/x86/protection_keys.c
-+++ b/tools/testing/selftests/x86/protection_keys.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * Tests x86 Memory Protection Keys (see Documentation/x86/protection-keys.txt)
-+ * Tests x86 Memory Protection Keys (see Documentation/core-api/protection-keys.rst)
-  *
-  * There are examples in here of:
-  *  * how to set protection keys on memory
+BUG: memory leak
+unreferenced object 0xffff88812421fa80 (size 64):
+   comm "syz-executor330", pid 7130, jiffies 4294949755 (age 7.930s)
+   hex dump (first 32 bytes):
+     01 00 00 00 01 00 00 00 00 00 00 00 2f 76 69 72  ............/vir
+     90 fa 21 24 81 88 ff ff 90 fa 21 24 81 88 ff ff  ..!$......!$....
+   backtrace:
+     [<00000000ae0c4ae0>] kmemleak_alloc_recursive  
+include/linux/kmemleak.h:55 [inline]
+     [<00000000ae0c4ae0>] slab_post_alloc_hook mm/slab.h:439 [inline]
+     [<00000000ae0c4ae0>] slab_alloc mm/slab.c:3326 [inline]
+     [<00000000ae0c4ae0>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
+     [<0000000079ebab38>] kmalloc include/linux/slab.h:547 [inline]
+     [<0000000079ebab38>] vhost_net_ubuf_alloc drivers/vhost/net.c:241  
+[inline]
+     [<0000000079ebab38>] vhost_net_set_backend drivers/vhost/net.c:1534  
+[inline]
+     [<0000000079ebab38>] vhost_net_ioctl+0xb43/0xc10  
+drivers/vhost/net.c:1716
+     [<000000009f6204a2>] vfs_ioctl fs/ioctl.c:46 [inline]
+     [<000000009f6204a2>] file_ioctl fs/ioctl.c:509 [inline]
+     [<000000009f6204a2>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+     [<00000000b45866de>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+     [<00000000dfb41eb8>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+     [<00000000dfb41eb8>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+     [<00000000dfb41eb8>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+     [<0000000049c1f547>] do_syscall_64+0x76/0x1a0  
+arch/x86/entry/common.c:301
+     [<0000000029cc8ca7>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
 
 
+
+---
+This bug is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this bug report. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+syzbot can test patches for this bug, for details see:
+https://goo.gl/tpsmEJ#testing-patches
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
