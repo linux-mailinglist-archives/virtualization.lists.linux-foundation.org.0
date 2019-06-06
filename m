@@ -2,70 +2,57 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7111736851
-	for <lists.virtualization@lfdr.de>; Thu,  6 Jun 2019 01:45:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76A7A36D7A
+	for <lists.virtualization@lfdr.de>; Thu,  6 Jun 2019 09:41:30 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5A119B8F;
-	Wed,  5 Jun 2019 23:44:37 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0C855C11;
+	Thu,  6 Jun 2019 07:41:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 40593C91
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 99D40B65
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  5 Jun 2019 23:44:35 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EB95419B
+	Thu,  6 Jun 2019 07:41:24 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4634B34F
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  5 Jun 2019 23:44:34 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id c85so296601pfc.1
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 05 Jun 2019 16:44:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=O/rnPOIToTFx5TLEufnCNbUgXKKUEmLsHgR6/mZpdjU=;
-	b=MHtX30vwaCImP+Gi+3ZHA5YFvCgatPC5P2V/vbOYhAkd3uKWFpSwfQdIMqKJ1UN9mn
-	ubpHA9QgM0UPJc143fTWqiXbi4prMSZRarIR96MLM1tgPc563MWE5mRtsemIxnOR/+2i
-	tvCWi/hmoOEQ3lAIw8K9OJ6Tm6wuPY1LbOh44=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=O/rnPOIToTFx5TLEufnCNbUgXKKUEmLsHgR6/mZpdjU=;
-	b=C8pDGg79OEGP0Tj8nx31D3Gg4tyuVVXEsPcINmlUB6OGP4QxL0zbEY7LSACv+JHcAM
-	jSM8t6eiOp/YfLHnWQVPB5QC8610tejvyWhzuL6vCUCUT0KHC0foVGp836ctjZ6yo4x1
-	bHQp5j/1i2wTcHcqtIOGhtVdlGF0zu+TOFnA+BP0UMa+7Cvfjf9UNgJLMhoKFH1xAZqc
-	x85TrqLCN7w+yG85tXc3CK4nL0zhXkyQyL8aP7rWzMejm3JGtdD7bKkVqLg1S+VGDKmx
-	BZoXuoMHVP89wfmMczOdSE+rUu8Ene0py+8AvQZGWuewRSZLMLBj28/QHQMHDF+wYRyf
-	MZFw==
-X-Gm-Message-State: APjAAAU4hFtREDN9F8DYCM8fPw/qSYzob5Plx83h6a3Wdcd7G39spMnS
-	Ql/6AUH9SzGKihGHNYmrvV2Aew==
-X-Google-Smtp-Source: APXvYqx3zG9rCLgbcYNCrxQmCKphQkBdlVy6ZRX+tG+qVBLLyEt6Kt8hYiRlUljA7AErFG1Rw0gooQ==
-X-Received: by 2002:aa7:824b:: with SMTP id e11mr48252024pfn.33.1559778274578; 
-	Wed, 05 Jun 2019 16:44:34 -0700 (PDT)
-Received: from localhost ([2620:15c:202:1:e9ae:bd45:1bd9:e60d])
-	by smtp.gmail.com with ESMTPSA id n13sm73547pff.59.2019.06.05.16.44.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 05 Jun 2019 16:44:33 -0700 (PDT)
-From: davidriley@chromium.org
-To: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-Subject: [PATCH 4/4] drm/virtio: Add memory barriers for capset cache.
-Date: Wed,  5 Jun 2019 16:44:23 -0700
-Message-Id: <20190605234423.11348-4-davidriley@chromium.org>
-X-Mailer: git-send-email 2.22.0.rc1.311.g5d7573a151-goog
-In-Reply-To: <20190605234423.11348-1-davidriley@chromium.org>
+	Thu,  6 Jun 2019 07:41:24 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 73A11C04FFF1;
+	Thu,  6 Jun 2019 07:41:23 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-117-131.ams2.redhat.com
+	[10.36.117.131])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 233192E040;
+	Thu,  6 Jun 2019 07:41:23 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+	id 637F511AAF; Thu,  6 Jun 2019 09:41:22 +0200 (CEST)
+Date: Thu, 6 Jun 2019 09:41:22 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: davidriley@chromium.org
+Subject: Re: [PATCH 4/4] drm/virtio: Add memory barriers for capset cache.
+Message-ID: <20190606074122.csocqu6g3in7dgbj@sirius.home.kraxel.org>
 References: <20190605234423.11348-1-davidriley@chromium.org>
+	<20190605234423.11348-4-davidriley@chromium.org>
 MIME-Version: 1.0
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190605234423.11348-4-davidriley@chromium.org>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.31]);
+	Thu, 06 Jun 2019 07:41:23 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
-	linux-kernel@vger.kernel.org
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+	Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -82,47 +69,37 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-From: David Riley <davidriley@chromium.org>
+On Wed, Jun 05, 2019 at 04:44:23PM -0700, davidriley@chromium.org wrote:
+> From: David Riley <davidriley@chromium.org>
+> 
+> After data is copied to the cache entry, atomic_set is used indicate
+> that the data is the entry is valid without appropriate memory barriers.
+> Similarly the read side was missing the same memory barries.
+> 
+> Signed-off-by: David Riley <davidriley@chromium.org>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_ioctl.c | 3 +++
+>  drivers/gpu/drm/virtio/virtgpu_vq.c    | 2 ++
+>  2 files changed, 5 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> index 88c1ed57a3c5..502f5f7c2298 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> @@ -542,6 +542,9 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
+>  	if (!ret)
+>  		return -EBUSY;
+>  
+> +	/* is_valid check must proceed before copy of the cache entry. */
+> +	virt_rmb();
 
-After data is copied to the cache entry, atomic_set is used indicate
-that the data is the entry is valid without appropriate memory barriers.
-Similarly the read side was missing the same memory barries.
+I don't think you need virt_rmb() here.  This isn't guest <=> host
+communication, so a normal barrier should do.
 
-Signed-off-by: David Riley <davidriley@chromium.org>
----
- drivers/gpu/drm/virtio/virtgpu_ioctl.c | 3 +++
- drivers/gpu/drm/virtio/virtgpu_vq.c    | 2 ++
- 2 files changed, 5 insertions(+)
+The other three fixes are queued up for drm-misc-next.
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-index 88c1ed57a3c5..502f5f7c2298 100644
---- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-@@ -542,6 +542,9 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
- 	if (!ret)
- 		return -EBUSY;
- 
-+	/* is_valid check must proceed before copy of the cache entry. */
-+	virt_rmb();
-+
- 	ptr = cache_ent->caps_cache;
- 
- 	if (copy_to_user((void __user *)(unsigned long)args->addr, ptr, size))
-diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-index dd5ead2541c2..b974eba4fe7d 100644
---- a/drivers/gpu/drm/virtio/virtgpu_vq.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-@@ -583,6 +583,8 @@ static void virtio_gpu_cmd_capset_cb(struct virtio_gpu_device *vgdev,
- 		    cache_ent->id == le32_to_cpu(cmd->capset_id)) {
- 			memcpy(cache_ent->caps_cache, resp->capset_data,
- 			       cache_ent->size);
-+			/* Copy must occur before is_valid is signalled. */
-+			virt_wmb();
- 			atomic_set(&cache_ent->is_valid, 1);
- 			break;
- 		}
--- 
-2.22.0.rc1.311.g5d7573a151-goog
+cheers,
+  Gerd
 
 _______________________________________________
 Virtualization mailing list
