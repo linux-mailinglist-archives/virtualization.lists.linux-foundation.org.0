@@ -2,53 +2,81 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 857A173723
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:00:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7EC073724
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:01:05 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DD7A3149B;
-	Wed, 24 Jul 2019 18:59:26 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 249B0149E;
+	Wed, 24 Jul 2019 18:59:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id F227ACAD
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 86298D93
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  6 Jun 2019 14:40:28 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail7-214.sinamail.sina.com.cn (mail7-214.sinamail.sina.com.cn
-	[202.108.7.214])
-	by smtp1.linuxfoundation.org (Postfix) with SMTP id 8437AA8
+	Thu,  6 Jun 2019 16:12:48 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 794EDA8
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  6 Jun 2019 14:40:27 +0000 (UTC)
-Received: from unknown (HELO localhost.localdomain)([123.112.52.63])
-	by sina.com with ESMTP
-	id 5CF925D5000070D3; Thu, 6 Jun 2019 22:40:23 +0800 (CST)
-X-Sender: hdanton@sina.com
-X-Auth-ID: hdanton@sina.com
-X-SMAIL-MID: 788777397556
-From: Hillf Danton <hdanton@sina.com>
-To: syzbot <syzbot+0789f0c7e45efd7bb643@syzkaller.appspotmail.com>
-Subject: Re: memory leak in vhost_net_ioctl
-Date: Thu,  6 Jun 2019 22:40:13 +0800
-Message-Id: <20190606144013.9884-1-hdanton@sina.com>
+	Thu,  6 Jun 2019 16:12:47 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id r18so4116063edo.7
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 06 Jun 2019 09:12:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EeQzPWyfLPLO499adlJDfan1bRvgZPmICT/SWNrNy4s=;
+	b=DGqIi3CzTNVbmH4KLoxDMJJFD9ZQtkCXlV4NXk2BU4uD11S1XJP0IPDSaYOutEGYNq
+	LRbla4IHK4SYvx7fQ5PHKsJlcDxqGO5CTTxO3L7AAoALo+E3cJzi6+kFuII2lGf2FWW4
+	bEuVX5IRZiQ1AiKUJHS6oXFJJ05Xkt35JX66OSLPurafDr/K9endoL2s75UEe4D5IucQ
+	WNPiRFde+iM66YsjvNK/tn6gmCIjtPmFE4Cr39gokqQPzFYr9/RfCFqnucqmDOAchDfM
+	4fiiNTHrbXEcPqUfithvcHQ+aOBU0WR7chTD6jxM+gUgEfNEWCfFuXsTKm+aLz0YWp52
+	Fvmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EeQzPWyfLPLO499adlJDfan1bRvgZPmICT/SWNrNy4s=;
+	b=Zb0wK6CAkNhM1D1+0Oj3UABSiVTwuWekTBB0r/R28xaQgzjCuxGMMxTti+pikDgW+Z
+	zn4TyrT5oZlaud2Qq0IyrG3uSSwK4dbIJqw5Zou85jeuaszwup2/cgP/WRr6PXp0sAdR
+	hGZ+yMjXhvVYKGWhz3ux7mo7d/2F5Ee5NyhV7pKIcGmgliEUVwY9AJQEDx6WiMkkBepg
+	1VxWGV6zzm7XhkXQjpKMOoVuaQwQhtXOWs9Yynp0rV+Jno+GkK3m1oc86yQ30n4eH4qg
+	CE0L4arN0+5w0Mc+eRorEdZBbcSGXI8A0g5M1hQxtcmP2j9XUyf4qMnNTsSVEIo6ti54
+	tkmg==
+X-Gm-Message-State: APjAAAXBzdUsfRDtTuy9Hxnkv7KZp9eZ7YeDPbJ2No3A0IXBt7vuUDCp
+	W4a8n9y/McbHyT8NpUOdnN0=
+X-Google-Smtp-Source: APXvYqwjT5SoA+Z3tcVtWM2YamSgc73QnqumrWKnk+jYUOUvINGwYgA/8651jWG3tRGedByFd9J4UQ==
+X-Received: by 2002:a50:90c6:: with SMTP id d6mr30149485eda.19.1559837565859; 
+	Thu, 06 Jun 2019 09:12:45 -0700 (PDT)
+Received: from localhost.localdomain ([2a01:4f9:2b:2b15::2])
+	by smtp.gmail.com with ESMTPSA id d6sm407203ejb.31.2019.06.06.09.12.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Jun 2019 09:12:45 -0700 (PDT)
+From: Nathan Chancellor <natechancellor@gmail.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>
+Subject: [PATCH] vhost: Don't use defined in VHOST_ARCH_CAN_ACCEL_UACCESS
+	definition
+Date: Thu,  6 Jun 2019 09:12:23 -0700
+Message-Id: <20190606161223.67979-1-natechancellor@gmail.com>
+X-Mailer: git-send-email 2.22.0.rc3
 MIME-Version: 1.0
-Precedence: bulk
-X-Mailing-List: linux-kernel@vger.kernel.org
-Archived-At: <https://lore.kernel.org/lkml/000000000000188da1058a9c25e3@google.com/>
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,FREEMAIL_FROM,
-	MAILING_LIST_MULTI, RCVD_IN_DNSWL_LOW,
-	SORTED_RECIPS autolearn=no version=3.3.1
+X-Patchwork-Bot: notify
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-X-Mailman-Approved-At: Wed, 24 Jul 2019 18:59:22 +0000
-Cc: xdp-newbies@vger.kernel.org, jakub.kicinski@netronome.com, hawk@kernel.org,
-	daniel@iogearbox.net, mst@redhat.com, netdev@vger.kernel.org,
-	john.fastabend@gmail.com, ast@kernel.org,
-	linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com,
-	kvm@vger.kernel.org, bpf@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, davem@davemloft.net
+X-Mailman-Approved-At: Wed, 24 Jul 2019 18:59:23 +0000
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
+	Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	clang-built-linux@googlegroups.com,
+	Nathan Chancellor <natechancellor@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
+Precedence: list
 List-Id: Linux virtualization <virtualization.lists.linux-foundation.org>
 List-Unsubscribe: <https://lists.linuxfoundation.org/mailman/options/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=unsubscribe>
@@ -57,153 +85,260 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"; DelSp="yes"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+Clang warns:
 
-On Wed, 05 Jun 2019 16:42:05 -0700 (PDT) syzbot wrote:
-> Hello,
-> 
-> syzbot found the following crash on:
-> 
-> HEAD commit:    788a0249 Merge tag 'arc-5.2-rc4' of git://git.kernel.org/p..
-> git tree:       upstream
-> console output: https://syzkaller.appspot.com/x/log.txt?x=15dc9ea6a00000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=d5c73825cbdc7326
-> dashboard link: https://syzkaller.appspot.com/bug?extid=0789f0c7e45efd7bb643
-> compiler:       gcc (GCC) 9.0.0 20181231 (experimental)
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=10b31761a00000
-> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=124892c1a00000
-> 
-> IMPORTANT: if you fix the bug, please add the following tag to the commit:
-> Reported-by: syzbot+0789f0c7e45efd7bb643@syzkaller.appspotmail.com
-> 
-> udit: type=1400 audit(1559768703.229:36): avc:  denied  { map } for   
-> pid=7116 comm="syz-executor330" path="/root/syz-executor330334897"  
-> dev="sda1" ino=16461 scontext=unconfined_u:system_r:insmod_t:s0-s0:c0.c1023  
-> tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file permissive=1
-> executing program
-> executing program
-> BUG: memory leak
-> unreferenced object 0xffff88812421fe40 (size 64):
->    comm "syz-executor330", pid 7117, jiffies 4294949245 (age 13.030s)
->    hex dump (first 32 bytes):
->      01 00 00 00 20 69 6f 63 00 00 00 00 64 65 76 2f  .... ioc....dev/
->      50 fe 21 24 81 88 ff ff 50 fe 21 24 81 88 ff ff  P.!$....P.!$....
->    backtrace:
->      [<00000000ae0c4ae0>] kmemleak_alloc_recursive include/linux/kmemleak.h:55 [inline]
->      [<00000000ae0c4ae0>] slab_post_alloc_hook mm/slab.h:439 [inline]
->      [<00000000ae0c4ae0>] slab_alloc mm/slab.c:3326 [inline]
->      [<00000000ae0c4ae0>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
->      [<0000000079ebab38>] kmalloc include/linux/slab.h:547 [inline]
->      [<0000000079ebab38>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
->      [<0000000079ebab38>] vhost_net_set_backend drivers/vhost/net.c:1534 [inline]
->      [<0000000079ebab38>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1716
->      [<000000009f6204a2>] vfs_ioctl fs/ioctl.c:46 [inline]
->      [<000000009f6204a2>] file_ioctl fs/ioctl.c:509 [inline]
->      [<000000009f6204a2>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
->      [<00000000b45866de>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
->      [<00000000dfb41eb8>] __do_sys_ioctl fs/ioctl.c:720 [inline]
->      [<00000000dfb41eb8>] __se_sys_ioctl fs/ioctl.c:718 [inline]
->      [<00000000dfb41eb8>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
->      [<0000000049c1f547>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
->      [<0000000029cc8ca7>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> 
-> BUG: memory leak
-> unreferenced object 0xffff88812421fa80 (size 64):
->    comm "syz-executor330", pid 7130, jiffies 4294949755 (age 7.930s)
->    hex dump (first 32 bytes):
->      01 00 00 00 01 00 00 00 00 00 00 00 2f 76 69 72  ............/vir
->      90 fa 21 24 81 88 ff ff 90 fa 21 24 81 88 ff ff  ..!$......!$....
->    backtrace:
->      [<00000000ae0c4ae0>] kmemleak_alloc_recursive include/linux/kmemleak.h:55 [inline]
->      [<00000000ae0c4ae0>] slab_post_alloc_hook mm/slab.h:439 [inline]
->      [<00000000ae0c4ae0>] slab_alloc mm/slab.c:3326 [inline]
->      [<00000000ae0c4ae0>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
->      [<0000000079ebab38>] kmalloc include/linux/slab.h:547 [inline]
->      [<0000000079ebab38>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
->      [<0000000079ebab38>] vhost_net_set_backend drivers/vhost/net.c:1534 [inline]
->      [<0000000079ebab38>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1716
->      [<000000009f6204a2>] vfs_ioctl fs/ioctl.c:46 [inline]
->      [<000000009f6204a2>] file_ioctl fs/ioctl.c:509 [inline]
->      [<000000009f6204a2>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
->      [<00000000b45866de>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
->      [<00000000dfb41eb8>] __do_sys_ioctl fs/ioctl.c:720 [inline]
->      [<00000000dfb41eb8>] __se_sys_ioctl fs/ioctl.c:718 [inline]
->      [<00000000dfb41eb8>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
->      [<0000000049c1f547>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
->      [<0000000029cc8ca7>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> 
-> 
-> 
-> ---
-> This bug is generated by a bot. It may contain errors.
-> See https://goo.gl/tpsmEJ for more information about syzbot.
-> syzbot engineers can be reached at syzkaller@googlegroups.com.
-> 
-> syzbot will keep track of this bug report. See:
-> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-> syzbot can test patches for this bug, for details see:
-> https://goo.gl/tpsmEJ#testing-patches
-> 
-Ignore my noise if you have no interest seeing the syzbot report.
+  drivers/vhost/vhost.c:2085:5: warning: macro expansion producing
+  'defined' has undefined behavior [-Wexpansion-to-defined]
+  #if VHOST_ARCH_CAN_ACCEL_UACCESS
+      ^
+  drivers/vhost/vhost.h:98:38: note: expanded from macro
+  'VHOST_ARCH_CAN_ACCEL_UACCESS'
+  #define VHOST_ARCH_CAN_ACCEL_UACCESS defined(CONFIG_MMU_NOTIFIER) && \
+                                       ^
 
-After commit c38e39c378f46f ("vhost-net: fix use-after-free in
-vhost_net_flush") flush would no longer free ubuf, just wait until ubuf users
-disappear instead.
+Rework VHOST_ARCH_CAN_ACCEL_UACCESS to be defined under those conditions
+so that the meaning of the code doesn't change and clang no longer
+warns.
 
-The following diff, in hope that may perhaps help you handle the memory leak,
-makes flush able to free ubuf in the path of file release.
-
-Thanks
-Hillf
+Fixes: 7f466032dc9e ("vhost: access vq metadata through kernel virtual address")
+Link: https://github.com/ClangBuiltLinux/linux/issues/508
+Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
 ---
- drivers/vhost/net.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/vhost/vhost.c | 44 +++++++++++++++++++++----------------------
+ drivers/vhost/vhost.h |  7 ++++---
+ 2 files changed, 26 insertions(+), 25 deletions(-)
 
-diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-index 3beb401..dcf20b6 100644
---- a/drivers/vhost/net.c
-+++ b/drivers/vhost/net.c
-@@ -141,6 +141,7 @@ struct vhost_net {
- 	unsigned tx_zcopy_err;
- 	/* Flush in progress. Protected by tx vq lock. */
- 	bool tx_flush;
-+	bool ld;	/* Last dinner */
- 	/* Private page frag */
- 	struct page_frag page_frag;
- 	/* Refcount bias of page frag */
-@@ -1283,6 +1284,7 @@ static int vhost_net_open(struct inode *inode, struct file *f)
- 	n = kvmalloc(sizeof *n, GFP_KERNEL | __GFP_RETRY_MAYFAIL);
- 	if (!n)
- 		return -ENOMEM;
-+	n->ld = false;
- 	vqs = kmalloc_array(VHOST_NET_VQ_MAX, sizeof(*vqs), GFP_KERNEL);
- 	if (!vqs) {
- 		kvfree(n);
-@@ -1376,7 +1378,10 @@ static void vhost_net_flush(struct vhost_net *n)
- 		n->tx_flush = true;
- 		mutex_unlock(&n->vqs[VHOST_NET_VQ_TX].vq.mutex);
- 		/* Wait for all lower device DMAs done. */
--		vhost_net_ubuf_put_and_wait(n->vqs[VHOST_NET_VQ_TX].ubufs);
-+		if (n->ld)
-+			vhost_net_ubuf_put_wait_and_free(n->vqs[VHOST_NET_VQ_TX].ubufs);
-+		else
-+			vhost_net_ubuf_put_and_wait(n->vqs[VHOST_NET_VQ_TX].ubufs);
- 		mutex_lock(&n->vqs[VHOST_NET_VQ_TX].vq.mutex);
- 		n->tx_flush = false;
- 		atomic_set(&n->vqs[VHOST_NET_VQ_TX].ubufs->refcount, 1);
-@@ -1403,6 +1408,7 @@ static int vhost_net_release(struct inode *inode, struct file *f)
- 	synchronize_rcu();
- 	/* We do an extra flush before freeing memory,
- 	 * since jobs can re-queue themselves. */
-+	n->ld = true;
- 	vhost_net_flush(n);
- 	kfree(n->vqs[VHOST_NET_VQ_RX].rxq.queue);
- 	kfree(n->vqs[VHOST_NET_VQ_TX].xdp);
---
+diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+index dc9301d31f12..cc56d08b4275 100644
+--- a/drivers/vhost/vhost.c
++++ b/drivers/vhost/vhost.c
+@@ -299,7 +299,7 @@ static void vhost_vq_meta_reset(struct vhost_dev *d)
+ 		__vhost_vq_meta_reset(d->vqs[i]);
+ }
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ static void vhost_map_unprefetch(struct vhost_map *map)
+ {
+ 	kfree(map->pages);
+@@ -483,7 +483,7 @@ static void vhost_vq_reset(struct vhost_dev *dev,
+ 	vq->iotlb = NULL;
+ 	vq->invalidate_count = 0;
+ 	__vhost_vq_meta_reset(vq);
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	vhost_reset_vq_maps(vq);
+ #endif
+ }
+@@ -635,7 +635,7 @@ void vhost_dev_init(struct vhost_dev *dev,
+ 	INIT_LIST_HEAD(&dev->read_list);
+ 	INIT_LIST_HEAD(&dev->pending_list);
+ 	spin_lock_init(&dev->iotlb_lock);
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	vhost_init_maps(dev);
+ #endif
+ 
+@@ -726,7 +726,7 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
+ 	if (err)
+ 		goto err_cgroup;
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	err = mmu_notifier_register(&dev->mmu_notifier, dev->mm);
+ 	if (err)
+ 		goto err_mmu_notifier;
+@@ -734,7 +734,7 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
+ 
+ 	return 0;
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ err_mmu_notifier:
+ 	vhost_dev_free_iovecs(dev);
+ #endif
+@@ -828,7 +828,7 @@ static void vhost_clear_msg(struct vhost_dev *dev)
+ 	spin_unlock(&dev->iotlb_lock);
+ }
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ static void vhost_setup_uaddr(struct vhost_virtqueue *vq,
+ 			      int index, unsigned long uaddr,
+ 			      size_t size, bool write)
+@@ -959,12 +959,12 @@ void vhost_dev_cleanup(struct vhost_dev *dev)
+ 		dev->worker = NULL;
+ 	}
+ 	if (dev->mm) {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 		mmu_notifier_unregister(&dev->mmu_notifier, dev->mm);
+ #endif
+ 		mmput(dev->mm);
+ 	}
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	for (i = 0; i < dev->nvqs; i++)
+ 		vhost_uninit_vq_maps(dev->vqs[i]);
+ #endif
+@@ -1196,7 +1196,7 @@ static inline void __user *__vhost_get_user(struct vhost_virtqueue *vq,
+ 
+ static inline int vhost_put_avail_event(struct vhost_virtqueue *vq)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_used *used;
+ 
+@@ -1224,7 +1224,7 @@ static inline int vhost_put_used(struct vhost_virtqueue *vq,
+ 				 struct vring_used_elem *head, int idx,
+ 				 int count)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_used *used;
+ 	size_t size;
+@@ -1252,7 +1252,7 @@ static inline int vhost_put_used(struct vhost_virtqueue *vq,
+ static inline int vhost_put_used_flags(struct vhost_virtqueue *vq)
+ 
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_used *used;
+ 
+@@ -1278,7 +1278,7 @@ static inline int vhost_put_used_flags(struct vhost_virtqueue *vq)
+ static inline int vhost_put_used_idx(struct vhost_virtqueue *vq)
+ 
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_used *used;
+ 
+@@ -1342,7 +1342,7 @@ static void vhost_dev_unlock_vqs(struct vhost_dev *d)
+ static inline int vhost_get_avail_idx(struct vhost_virtqueue *vq,
+ 				      __virtio16 *idx)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_avail *avail;
+ 
+@@ -1367,7 +1367,7 @@ static inline int vhost_get_avail_idx(struct vhost_virtqueue *vq,
+ static inline int vhost_get_avail_head(struct vhost_virtqueue *vq,
+ 				       __virtio16 *head, int idx)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_avail *avail;
+ 
+@@ -1393,7 +1393,7 @@ static inline int vhost_get_avail_head(struct vhost_virtqueue *vq,
+ static inline int vhost_get_avail_flags(struct vhost_virtqueue *vq,
+ 					__virtio16 *flags)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_avail *avail;
+ 
+@@ -1418,7 +1418,7 @@ static inline int vhost_get_avail_flags(struct vhost_virtqueue *vq,
+ static inline int vhost_get_used_event(struct vhost_virtqueue *vq,
+ 				       __virtio16 *event)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_avail *avail;
+ 
+@@ -1441,7 +1441,7 @@ static inline int vhost_get_used_event(struct vhost_virtqueue *vq,
+ static inline int vhost_get_used_idx(struct vhost_virtqueue *vq,
+ 				     __virtio16 *idx)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_used *used;
+ 
+@@ -1466,7 +1466,7 @@ static inline int vhost_get_used_idx(struct vhost_virtqueue *vq,
+ static inline int vhost_get_desc(struct vhost_virtqueue *vq,
+ 				 struct vring_desc *desc, int idx)
+ {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	struct vhost_map *map;
+ 	struct vring_desc *d;
+ 
+@@ -1825,7 +1825,7 @@ static bool iotlb_access_ok(struct vhost_virtqueue *vq,
+ 	return true;
+ }
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ static void vhost_vq_map_prefetch(struct vhost_virtqueue *vq)
+ {
+ 	struct vhost_map __rcu *map;
+@@ -1846,7 +1846,7 @@ int vq_meta_prefetch(struct vhost_virtqueue *vq)
+ 	unsigned int num = vq->num;
+ 
+ 	if (!vq->iotlb) {
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 		vhost_vq_map_prefetch(vq);
+ #endif
+ 		return 1;
+@@ -2061,7 +2061,7 @@ static long vhost_vring_set_num_addr(struct vhost_dev *d,
+ 
+ 	mutex_lock(&vq->mutex);
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	/* Unregister MMU notifer to allow invalidation callback
+ 	 * can access vq->uaddrs[] without holding a lock.
+ 	 */
+@@ -2082,7 +2082,7 @@ static long vhost_vring_set_num_addr(struct vhost_dev *d,
+ 		BUG();
+ 	}
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	vhost_setup_vq_uaddr(vq);
+ 
+ 	if (d->mm)
+diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
+index c5d950cf7627..d9f36c479fa7 100644
+--- a/drivers/vhost/vhost.h
++++ b/drivers/vhost/vhost.h
+@@ -95,8 +95,9 @@ struct vhost_uaddr {
+ 	bool write;
+ };
+ 
+-#define VHOST_ARCH_CAN_ACCEL_UACCESS defined(CONFIG_MMU_NOTIFIER) && \
+-	ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE == 0
++#if defined(CONFIG_MMU_NOTIFIER) && ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE == 0
++#define VHOST_ARCH_CAN_ACCEL_UACCESS
++#endif
+ 
+ /* The virtqueue structure describes a queue attached to a device. */
+ struct vhost_virtqueue {
+@@ -109,7 +110,7 @@ struct vhost_virtqueue {
+ 	struct vring_avail __user *avail;
+ 	struct vring_used __user *used;
+ 
+-#if VHOST_ARCH_CAN_ACCEL_UACCESS
++#ifdef VHOST_ARCH_CAN_ACCEL_UACCESS
+ 	/* Read by memory accessors, modified by meta data
+ 	 * prefetching, MMU notifier and vring ioctl().
+ 	 * Synchonrized through mmu_lock (writers) and RCU (writers
+-- 
+2.22.0.rc3
 
 _______________________________________________
 Virtualization mailing list
