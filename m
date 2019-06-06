@@ -2,68 +2,93 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5338E3725E
-	for <lists.virtualization@lfdr.de>; Thu,  6 Jun 2019 13:01:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22C823736B
+	for <lists.virtualization@lfdr.de>; Thu,  6 Jun 2019 13:52:10 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2AB51C9B;
-	Thu,  6 Jun 2019 11:01:09 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3620ED3E;
+	Thu,  6 Jun 2019 11:51:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 248A5C59
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1C26FCDE
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  6 Jun 2019 11:01:08 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com
-	[209.85.217.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 70D6034F
+	Thu,  6 Jun 2019 11:51:45 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 48AC36D6
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  6 Jun 2019 11:01:07 +0000 (UTC)
-Received: by mail-vs1-f68.google.com with SMTP id v129so916340vsb.11
+	Thu,  6 Jun 2019 11:51:44 +0000 (UTC)
+Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x56BlwpG142360 for <virtualization@lists.linux-foundation.org>;
+	Thu, 6 Jun 2019 07:51:43 -0400
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2sy0d25pm7-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 06 Jun 2019 04:01:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZekiFWl9mslxTrTCyce83HsngFt4eZWdZDhWr1JguaA=;
-	b=q19fqTlmHuauaIWqFmyCBVnkbv8/3k4Ef3kwJTClG2NftrbW2djG61Pmst/IZbSNxJ
-	7meOiBZv42NVhCI1kzsfhEe5NjAkjcmqLQ8OnQnoyv/wAqtkP1NTK9mJJtAGys8u7Ftr
-	EK/YVGY9CLDEzmP7gI+7JZ1snhAn7hXf71cC/TBJK/oo+oKBTZpeXA2YjYrFKXmAGTG8
-	HskuUDD0gEwAFnXjfF2QOTPm/kD9NGGbAFra49mye2pPJtme1SqGznuddvbLi/yvhEai
-	se+LUFXHNdx0x5ic74boqhvp3zIZ8kexDzXiUqOKpFSb9SvddEw2casUxk8R1gaGEZjB
-	bjHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ZekiFWl9mslxTrTCyce83HsngFt4eZWdZDhWr1JguaA=;
-	b=cyV9Cg4jj+MNW2CkC7AuIcvM6XJ1bd6T5aX8A2jPMXCAZQaVI0JVMIiBNd1lP5Hjml
-	1yw81/cer/JGEftbFHgfuyMeNbTq7LswrmTSmGSUIAE9E0+Q3NqVY2Wl9EufeQOydd/w
-	WCFVVhS5BkRa1Qi4bbVEx5t++k0s+7Wr2AmYw+xYUE5UIXz2Q9PIMd+HdJXL3XzesC2A
-	n5Run5vcRK/DeZkq9uP4ZuMfsiE8Ut0h7uN1QXPtHkElRhNidER+Vyd4kTxEKW1UJGgB
-	TZgTAwmvuUCG/1l/1+Va1NikeVjNbD4Sf/uA7OHKMMYE6Y9MHfa51uBNAUOOq3fa5JYW
-	jyfw==
-X-Gm-Message-State: APjAAAU3TyuKvCOfRGgghrLlTCnmW+hc+zn447iiB+elpGzlKb6FbLGN
-	HMNK+2lEzD3u/lXoIXx+St4Icv9/QV48Me5mPpg=
-X-Google-Smtp-Source: APXvYqyEP4Jyz+lQ5+kt7k6xv/fUY3LILA9dk5deHrlNkH0/W4r1XNGIRCVrdwHHSP4aPeIH8D9w56O/PQiikCKzbTQ=
-X-Received: by 2002:a67:7fd8:: with SMTP id a207mr748723vsd.85.1559818866586; 
-	Thu, 06 Jun 2019 04:01:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190527081741.14235-1-emil.l.velikov@gmail.com>
-	<20190527081741.14235-12-emil.l.velikov@gmail.com>
-In-Reply-To: <20190527081741.14235-12-emil.l.velikov@gmail.com>
-From: Emil Velikov <emil.l.velikov@gmail.com>
-Date: Thu, 6 Jun 2019 11:59:15 +0100
-Message-ID: <CACvgo51+WknrTjzEhc6EitJV5EA0f9SXznQMkw3Y_ixPHSOLPQ@mail.gmail.com>
-Subject: Re: [PATCH 12/13] drm/virtio: drop DRM_AUTH usage from the driver
-To: ML dri-devel <dri-devel@lists.freedesktop.org>
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+	Thu, 06 Jun 2019 07:51:43 -0400
+Received: from localhost
+	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pasic@linux.ibm.com>; Thu, 6 Jun 2019 12:51:41 +0100
+Received: from b06avi18878370.portsmouth.uk.ibm.com (9.149.26.194)
+	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Thu, 6 Jun 2019 12:51:37 +0100
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+	[9.149.105.62])
+	by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x56BpZEu16253230
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Thu, 6 Jun 2019 11:51:35 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 8AEE0AE061;
+	Thu,  6 Jun 2019 11:51:35 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id DB8D6AE057;
+	Thu,  6 Jun 2019 11:51:34 +0000 (GMT)
+Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
+	by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Thu,  6 Jun 2019 11:51:34 +0000 (GMT)
+From: Halil Pasic <pasic@linux.ibm.com>
+To: kvm@vger.kernel.org, linux-s390@vger.kernel.org,
+	Cornelia Huck <cohuck@redhat.com>, Sebastian Ott <sebott@linux.ibm.com>,
+	Heiko Carstens <heiko.carstens@de.ibm.com>
+Subject: [PATCH v4 0/8] s390: virtio: support protected virtualization
+Date: Thu,  6 Jun 2019 13:51:19 +0200
+X-Mailer: git-send-email 2.17.1
+X-TM-AS-GCONF: 00
+x-cbid: 19060611-0008-0000-0000-000002F07A55
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19060611-0009-0000-0000-0000225D663D
+Message-Id: <20190606115127.55519-1-pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-06-06_10:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1906060087
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
-	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
+Cc: "Jason J. Herne" <jjherne@linux.ibm.com>,
+	Christoph Hellwig <hch@infradead.org>, Thomas Huth <thuth@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
+	virtualization@lists.linux-foundation.org,
+	Halil Pasic <pasic@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Michael Mueller <mimu@linux.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,86 +100,171 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, 27 May 2019 at 09:19, Emil Velikov <emil.l.velikov@gmail.com> wrote:
->
-> From: Emil Velikov <emil.velikov@collabora.com>
->
-> The authentication can be circumvented, by design, by using the render
-> node.
->
-> From the driver POV there is no distinction between primary and render
-> nodes, thus we can drop the token.
->
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Signed-off-by: Emil Velikov <emil.velikov@collabora.com>
-> ---
->  drivers/gpu/drm/virtio/virtgpu_ioctl.c | 18 +++++++++---------
->  1 file changed, 9 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-> index 949a264985fc..e72626faba52 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-> @@ -553,34 +553,34 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
->
->  struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS] = {
->         DRM_IOCTL_DEF_DRV(VIRTGPU_MAP, virtio_gpu_map_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->
->         DRM_IOCTL_DEF_DRV(VIRTGPU_EXECBUFFER, virtio_gpu_execbuffer_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->
->         DRM_IOCTL_DEF_DRV(VIRTGPU_GETPARAM, virtio_gpu_getparam_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->
->         DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_CREATE,
->                           virtio_gpu_resource_create_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->
->         DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_INFO, virtio_gpu_resource_info_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->
->         /* make transfer async to the main ring? - no sure, can we
->          * thread these in the underlying GL
->          */
->         DRM_IOCTL_DEF_DRV(VIRTGPU_TRANSFER_FROM_HOST,
->                           virtio_gpu_transfer_from_host_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->         DRM_IOCTL_DEF_DRV(VIRTGPU_TRANSFER_TO_HOST,
->                           virtio_gpu_transfer_to_host_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->
->         DRM_IOCTL_DEF_DRV(VIRTGPU_WAIT, virtio_gpu_wait_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->
->         DRM_IOCTL_DEF_DRV(VIRTGPU_GET_CAPS, virtio_gpu_get_caps_ioctl,
-> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
-> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
->  };
-> --
-> 2.21.0
->
+Enhanced virtualization protection technology may require the use of
+bounce buffers for I/O. While support for this was built into the virtio
+core, virtio-ccw wasn't changed accordingly.
 
-Humble poke?
+Some background on technology (not part of this series) and the
+terminology used.
 
-Thanks,
-Emil
+* Protected Virtualization (PV):
+
+Protected Virtualization guarantees, that non-shared memory of a  guest
+that operates in PV mode private to that guest. I.e. any attempts by the
+hypervisor or other guests to access it will result in an exception. If
+supported by the environment (machine, KVM, guest VM) a guest can decide
+to change into PV mode by doing the appropriate ultravisor calls.
+
+* Ultravisor:
+
+A hardware/firmware entity that manages PV guests, and polices access to
+their memory. A PV guest prospect needs to interact with the ultravisor,
+to enter PV mode, and potentially to share pages (for I/O which should
+be encrypted by the guest). A guest interacts with the ultravisor via so
+called ultravisor calls. A hypervisor needs to interact with the
+ultravisor to facilitate interpretation, emulation and swapping. A
+hypervisor  interacts with the ultravisor via ultravisor calls and via
+the SIE state description. Generally the ultravisor sanitizes hypervisor
+inputs so that the guest can not be corrupted (except for denial of
+service.
+
+
+What needs to be done
+=====================
+
+Thus what needs to be done to bring virtio-ccw up to speed with respect
+to protected virtualization is:
+* use some 'new' common virtio stuff
+* make sure that virtio-ccw specific stuff uses shared memory when
+  talking to the hypervisor (except control/communication blocks like ORB,
+  these are handled by the ultravisor)
+* make sure the DMA API does what is necessary to talk through shared
+  memory if we are a protected virtualization guest.
+* make sure the common IO layer plays along as well (airqs, sense).
+
+
+Important notes
+================
+
+* This patch set is based on Martins features branch
+ (git://git.kernel.org/pub/scm/linux/kernel/git/s390/linux.git branch
+ 'features').
+
+* Documentation is still very sketchy. I'm committed to improving this,
+  but I'm currently hampered by some dependencies currently.  
+
+* The existing naming in the common infrastructure (kernel internal
+  interfaces) is pretty much based on the AMD SEV terminology. Thus the
+  names aren't always perfect. There might be merit to changing these
+  names to more abstract ones. I did not put much thought into that at
+  the current stage.
+
+* Testing: Please use iommu_platform=on for any virtio devices you are
+  going to test this code with (so virtio actually uses the DMA API).
+
+@Sebastian: I kept your r-b on patch 2 "s390/cio: introduce DMA pools to
+cio" despite the small changes pointed out below. Please do complain if
+it ain't OK for you!
+
+Change log
+==========
+
+v3 --> v4
+* fixed cleanup in css_bus_init() (Connie)
+* made cio.h include genalloc.h instead of a forward declaration
+  (Connie)
+* added comments about dma_mask/coherent_dma_mask values (Connie)
+* fixed error handling in virtio_ccw_init() (Connie)
+* got rid of the *vc_dma* wrappers (Connie)
+* added some Reviewed-bys
+* rebased on top of current master, no changes were necessary
+
+v2 --> v3:
+* patch 2/8
+    potential cio_dma_pool_init() returning NULL issue fixed
+    potential cio_gp_dma_create() returning NULL issue fixed
+    warning issues with doc type comments fixed
+    unused define statement removed 
+* patch 3/8
+    potential cio_gp_dma_create() returning NULL issue fixed
+    whitespace issue fixed
+    warning issues with doc type comments fixed
+* patch 8/8
+    potential cio_dma_zalloc() returning NULL issue fixed
+
+v1 --> v2:
+* patch "virtio/s390: use vring_create_virtqueue" went already upstream
+* patch "virtio/s390: DMA support for virtio-ccw" went already upstream
+* patch "virtio/s390: enable packed ring" went already upstream
+* Made dev.dma_mask point to dev.coherent_dma_mask for css, subchannel
+  and ccw devices.
+* While rebasing 's390/airq: use DMA memory for adapter interrupts' the
+  newly introduced kmem_cache  was replaced with an equivalent dma_pool;
+  the kalloc() allocations are now replaced with cio_dma_zalloc()
+  allocations to avoid wasting almost a full page.
+* Made virtio-ccw use the new AIRQ_IV_CACHELINE flag.
+* fixed all remaining checkpatch issues
+
+RFC --> v1:
+* Fixed bugs found by Connie (may_reduce and handling reduced,  warning,
+  split move -- thanks Connie!).
+* Fixed console bug found by Sebastian (thanks Sebastian!).
+* Removed the completely useless duplicate of dma-mapping.h spotted by
+  Christoph (thanks Christoph!).
+* Don't use the global DMA pool for subchannel and ccw device
+  owned memory as requested by Sebastian. Consequences:
+	* Both subchannel and ccw devices have their dma masks
+	now (both specifying 31 bit addressable)
+	* We require at least 2 DMA pages per ccw device now, most of
+	this memory is wasted though.
+	* DMA memory allocated by virtio is also 31 bit addressable now
+        as virtio uses the parent (which is the ccw device).
+* Enabled packed ring.
+* Rebased onto Martins feature branch; using the actual uv (ultravisor)
+  interface instead of TODO comments.
+* Added some explanations to the cover letter (Connie, David).
+* Squashed a couple of patches together and fixed some text stuff. 
+
+Halil Pasic (8):
+  s390/mm: force swiotlb for protected virtualization
+  s390/cio: introduce DMA pools to cio
+  s390/cio: add basic protected virtualization support
+  s390/airq: use DMA memory for adapter interrupts
+  virtio/s390: use cacheline aligned airq bit vectors
+  virtio/s390: add indirection to indicators access
+  virtio/s390: use DMA memory for ccw I/O and classic notifiers
+  virtio/s390: make airq summary indicators DMA
+
+ arch/s390/Kconfig                   |   5 +
+ arch/s390/include/asm/airq.h        |   2 +
+ arch/s390/include/asm/ccwdev.h      |   4 +
+ arch/s390/include/asm/cio.h         |  11 ++
+ arch/s390/include/asm/mem_encrypt.h |  18 ++
+ arch/s390/mm/init.c                 |  47 ++++++
+ drivers/s390/cio/airq.c             |  32 ++--
+ drivers/s390/cio/ccwreq.c           |   9 +-
+ drivers/s390/cio/cio.h              |   2 +
+ drivers/s390/cio/css.c              | 132 ++++++++++++++-
+ drivers/s390/cio/device.c           |  68 ++++++--
+ drivers/s390/cio/device_fsm.c       |  49 +++---
+ drivers/s390/cio/device_id.c        |  20 ++-
+ drivers/s390/cio/device_ops.c       |  21 ++-
+ drivers/s390/cio/device_pgid.c      |  22 +--
+ drivers/s390/cio/device_status.c    |  24 +--
+ drivers/s390/cio/io_sch.h           |  20 ++-
+ drivers/s390/virtio/virtio_ccw.c    | 248 +++++++++++++++-------------
+ 18 files changed, 534 insertions(+), 200 deletions(-)
+ create mode 100644 arch/s390/include/asm/mem_encrypt.h
+
+-- 
+2.17.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
