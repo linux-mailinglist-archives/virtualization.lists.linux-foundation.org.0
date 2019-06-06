@@ -2,76 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43E9E36E36
-	for <lists.virtualization@lfdr.de>; Thu,  6 Jun 2019 10:11:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5338E3725E
+	for <lists.virtualization@lfdr.de>; Thu,  6 Jun 2019 13:01:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AD3A7C83;
-	Thu,  6 Jun 2019 08:11:16 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2AB51C9B;
+	Thu,  6 Jun 2019 11:01:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CB135C6D
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 248A5C59
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  6 Jun 2019 08:11:14 +0000 (UTC)
+	Thu,  6 Jun 2019 11:01:08 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 15540854
+Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com
+	[209.85.217.68])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 70D6034F
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  6 Jun 2019 08:11:14 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id e16so1388185wrn.1
+	Thu,  6 Jun 2019 11:01:07 +0000 (UTC)
+Received: by mail-vs1-f68.google.com with SMTP id v129so916340vsb.11
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 06 Jun 2019 01:11:13 -0700 (PDT)
+	Thu, 06 Jun 2019 04:01:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=ZekiFWl9mslxTrTCyce83HsngFt4eZWdZDhWr1JguaA=;
+	b=q19fqTlmHuauaIWqFmyCBVnkbv8/3k4Ef3kwJTClG2NftrbW2djG61Pmst/IZbSNxJ
+	7meOiBZv42NVhCI1kzsfhEe5NjAkjcmqLQ8OnQnoyv/wAqtkP1NTK9mJJtAGys8u7Ftr
+	EK/YVGY9CLDEzmP7gI+7JZ1snhAn7hXf71cC/TBJK/oo+oKBTZpeXA2YjYrFKXmAGTG8
+	HskuUDD0gEwAFnXjfF2QOTPm/kD9NGGbAFra49mye2pPJtme1SqGznuddvbLi/yvhEai
+	se+LUFXHNdx0x5ic74boqhvp3zIZ8kexDzXiUqOKpFSb9SvddEw2casUxk8R1gaGEZjB
+	bjHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=IvekH9F+MWJsOurnj1zZYn5MMsSALWjLPTIkoz8fkvM=;
-	b=jBXYYw9vo9+vNq7mwSMU1o8+KdtogJZfX1zz4KMpWGqtjcjaYsPHCrUZyuja5ydx56
-	Eo7WH4GRr7gNbwBDA7OTrRHwZd3B6XvwK/dajeuz+5nldc8ntQ+cbCMEwJDrkRLvXOtF
-	X+1dzwhyGagEATxkN9hUGslb9aZgLsARrq9huytivAck9DlenUdsncqnIgysRtRglojE
-	WMcPxwL9b8pcpqYn9+xpbvT2ZdIDOHN0K7PrxNS/5dLK/pjZ/0ToGhpjVnirsRTY32vD
-	IMQ3oQSbc3OKcEFIRDrRDvtmNv/yl4rq5WjcFtpuGsi7xlNgnNgoJxKqPoVye4bBj9+b
-	TOsw==
-X-Gm-Message-State: APjAAAVLQqsewqQQUDPrSgh/CvDbJ6/GSnOHLXLh0EHx2FO1jxkxo2Pv
-	jLQFvhOqRiSvqHwTyNo6oVwo0g==
-X-Google-Smtp-Source: APXvYqxkjm0rjsdB6ee8tNzTBSuC9b7sY4agRTTiv5VgQ04bmNVYSFcehkfNbrebXzvPuWlnxeS6ZQ==
-X-Received: by 2002:adf:ed44:: with SMTP id u4mr15429487wro.242.1559808672582; 
-	Thu, 06 Jun 2019 01:11:12 -0700 (PDT)
-Received: from steredhat (host253-229-dynamic.248-95-r.retail.telecomitalia.it.
-	[95.248.229.253])
-	by smtp.gmail.com with ESMTPSA id f2sm724438wme.12.2019.06.06.01.11.11
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 06 Jun 2019 01:11:11 -0700 (PDT)
-Date: Thu, 6 Jun 2019 10:11:09 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 3/4] vsock/virtio: fix flush of works during the .remove()
-Message-ID: <20190606081109.gdx4rsly5i6gtg57@steredhat>
-References: <20190528105623.27983-1-sgarzare@redhat.com>
-	<20190528105623.27983-4-sgarzare@redhat.com>
-	<9ac9fc4b-5c39-2503-dfbb-660a7bdcfbfd@redhat.com>
-	<20190529105832.oz3sagbne5teq3nt@steredhat>
-	<8c9998c8-1b9c-aac6-42eb-135fcb966187@redhat.com>
-	<20190530101036.wnjphmajrz6nz6zc@steredhat.homenet.telecomitalia.it>
-	<4c881585-8fee-0a53-865c-05d41ffb8ed1@redhat.com>
-	<20190531081824.p6ylsgvkrbckhqpx@steredhat>
-	<dbc9964c-65b1-0993-488b-cb44aea55e90@redhat.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=ZekiFWl9mslxTrTCyce83HsngFt4eZWdZDhWr1JguaA=;
+	b=cyV9Cg4jj+MNW2CkC7AuIcvM6XJ1bd6T5aX8A2jPMXCAZQaVI0JVMIiBNd1lP5Hjml
+	1yw81/cer/JGEftbFHgfuyMeNbTq7LswrmTSmGSUIAE9E0+Q3NqVY2Wl9EufeQOydd/w
+	WCFVVhS5BkRa1Qi4bbVEx5t++k0s+7Wr2AmYw+xYUE5UIXz2Q9PIMd+HdJXL3XzesC2A
+	n5Run5vcRK/DeZkq9uP4ZuMfsiE8Ut0h7uN1QXPtHkElRhNidER+Vyd4kTxEKW1UJGgB
+	TZgTAwmvuUCG/1l/1+Va1NikeVjNbD4Sf/uA7OHKMMYE6Y9MHfa51uBNAUOOq3fa5JYW
+	jyfw==
+X-Gm-Message-State: APjAAAU3TyuKvCOfRGgghrLlTCnmW+hc+zn447iiB+elpGzlKb6FbLGN
+	HMNK+2lEzD3u/lXoIXx+St4Icv9/QV48Me5mPpg=
+X-Google-Smtp-Source: APXvYqyEP4Jyz+lQ5+kt7k6xv/fUY3LILA9dk5deHrlNkH0/W4r1XNGIRCVrdwHHSP4aPeIH8D9w56O/PQiikCKzbTQ=
+X-Received: by 2002:a67:7fd8:: with SMTP id a207mr748723vsd.85.1559818866586; 
+	Thu, 06 Jun 2019 04:01:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <dbc9964c-65b1-0993-488b-cb44aea55e90@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+References: <20190527081741.14235-1-emil.l.velikov@gmail.com>
+	<20190527081741.14235-12-emil.l.velikov@gmail.com>
+In-Reply-To: <20190527081741.14235-12-emil.l.velikov@gmail.com>
+From: Emil Velikov <emil.l.velikov@gmail.com>
+Date: Thu, 6 Jun 2019 11:59:15 +0100
+Message-ID: <CACvgo51+WknrTjzEhc6EitJV5EA0f9SXznQMkw3Y_ixPHSOLPQ@mail.gmail.com>
+Subject: Re: [PATCH 12/13] drm/virtio: drop DRM_AUTH usage from the driver
+To: ML dri-devel <dri-devel@lists.freedesktop.org>
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -83,109 +75,87 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gRnJpLCBNYXkgMzEsIDIwMTkgYXQgMDU6NTY6MzlQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiBPbiAyMDE5LzUvMzEg5LiL5Y2INDoxOCwgU3RlZmFubyBHYXJ6YXJlbGxhIHdyb3RlOgo+
-ID4gT24gVGh1LCBNYXkgMzAsIDIwMTkgYXQgMDc6NTk6MTRQTSArMDgwMCwgSmFzb24gV2FuZyB3
-cm90ZToKPiA+ID4gT24gMjAxOS81LzMwIOS4i+WNiDY6MTAsIFN0ZWZhbm8gR2FyemFyZWxsYSB3
-cm90ZToKPiA+ID4gPiBPbiBUaHUsIE1heSAzMCwgMjAxOSBhdCAwNTo0NjoxOFBNICswODAwLCBK
-YXNvbiBXYW5nIHdyb3RlOgo+ID4gPiA+ID4gT24gMjAxOS81LzI5IOS4i+WNiDY6NTgsIFN0ZWZh
-bm8gR2FyemFyZWxsYSB3cm90ZToKPiA+ID4gPiA+ID4gT24gV2VkLCBNYXkgMjksIDIwMTkgYXQg
-MTE6MjI6NDBBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToKPiA+ID4gPiA+ID4gPiBPbiAyMDE5
-LzUvMjgg5LiL5Y2INjo1NiwgU3RlZmFubyBHYXJ6YXJlbGxhIHdyb3RlOgo+ID4gPiA+ID4gPiA+
-ID4gQEAgLTY5MCw2ICs2OTMsOSBAQCBzdGF0aWMgdm9pZCB2aXJ0aW9fdnNvY2tfcmVtb3ZlKHN0
-cnVjdCB2aXJ0aW9fZGV2aWNlICp2ZGV2KQo+ID4gPiA+ID4gPiA+ID4gICAgICAJdnNvY2stPmV2
-ZW50X3J1biA9IGZhbHNlOwo+ID4gPiA+ID4gPiA+ID4gICAgICAJbXV0ZXhfdW5sb2NrKCZ2c29j
-ay0+ZXZlbnRfbG9jayk7Cj4gPiA+ID4gPiA+ID4gPiArCS8qIEZsdXNoIGFsbCBwZW5kaW5nIHdv
-cmtzICovCj4gPiA+ID4gPiA+ID4gPiArCXZpcnRpb192c29ja19mbHVzaF93b3Jrcyh2c29jayk7
-Cj4gPiA+ID4gPiA+ID4gPiArCj4gPiA+ID4gPiA+ID4gPiAgICAgIAkvKiBGbHVzaCBhbGwgZGV2
-aWNlIHdyaXRlcyBhbmQgaW50ZXJydXB0cywgZGV2aWNlIHdpbGwgbm90IHVzZSBhbnkKPiA+ID4g
-PiA+ID4gPiA+ICAgICAgCSAqIG1vcmUgYnVmZmVycy4KPiA+ID4gPiA+ID4gPiA+ICAgICAgCSAq
-Lwo+ID4gPiA+ID4gPiA+ID4gQEAgLTcyNiw2ICs3MzIsMTEgQEAgc3RhdGljIHZvaWQgdmlydGlv
-X3Zzb2NrX3JlbW92ZShzdHJ1Y3QgdmlydGlvX2RldmljZSAqdmRldikKPiA+ID4gPiA+ID4gPiA+
-ICAgICAgCS8qIERlbGV0ZSB2aXJ0cXVldWVzIGFuZCBmbHVzaCBvdXRzdGFuZGluZyBjYWxsYmFj
-a3MgaWYgYW55ICovCj4gPiA+ID4gPiA+ID4gPiAgICAgIAl2ZGV2LT5jb25maWctPmRlbF92cXMo
-dmRldik7Cj4gPiA+ID4gPiA+ID4gPiArCS8qIE90aGVyIHdvcmtzIGNhbiBiZSBxdWV1ZWQgYmVm
-b3JlICdjb25maWctPmRlbF92cXMoKScsIHNvIHdlIGZsdXNoCj4gPiA+ID4gPiA+ID4gPiArCSAq
-IGFsbCB3b3JrcyBiZWZvcmUgdG8gZnJlZSB0aGUgdnNvY2sgb2JqZWN0IHRvIGF2b2lkIHVzZSBh
-ZnRlciBmcmVlLgo+ID4gPiA+ID4gPiA+ID4gKwkgKi8KPiA+ID4gPiA+ID4gPiA+ICsJdmlydGlv
-X3Zzb2NrX2ZsdXNoX3dvcmtzKHZzb2NrKTsKPiA+ID4gPiA+ID4gPiBTb21lIHF1ZXN0aW9ucyBh
-ZnRlciBhIHF1aWNrIGdsYW5jZToKPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiAxKSBJdCBs
-b29rcyB0byBtZSB0aGF0IHRoZSB3b3JrIGNvdWxkIGJlIHF1ZXVlZCBmcm9tIHRoZSBwYXRoIG9m
-Cj4gPiA+ID4gPiA+ID4gdnNvY2tfdHJhbnNwb3J0X2NhbmNlbF9wa3QoKSAuIElzIHRoYXQgc3lu
-Y2hyb25pemVkIGhlcmU/Cj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IEJvdGggdmlydGlvX3Ry
-YW5zcG9ydF9zZW5kX3BrdCgpIGFuZCB2c29ja190cmFuc3BvcnRfY2FuY2VsX3BrdCgpIGNhbgo+
-ID4gPiA+ID4gPiBxdWV1ZSB3b3JrIGZyb20gdGhlIHVwcGVyIGxheWVyIChzb2NrZXQpLgo+ID4g
-PiA+ID4gPiAKPiA+ID4gPiA+ID4gU2V0dGluZyB0aGVfdmlydGlvX3Zzb2NrIHRvIE5VTEwsIHNo
-b3VsZCBzeW5jaHJvbml6ZSwgYnV0IGFmdGVyIGEgY2FyZWZ1bCBsb29rCj4gPiA+ID4gPiA+IGEg
-cmFyZSBpc3N1ZSBjb3VsZCBoYXBwZW46Cj4gPiA+ID4gPiA+IHdlIGFyZSBzZXR0aW5nIHRoZV92
-aXJ0aW9fdnNvY2sgdG8gTlVMTCBhdCB0aGUgc3RhcnQgb2YgLnJlbW92ZSgpIGFuZCB3ZQo+ID4g
-PiA+ID4gPiBhcmUgZnJlZWluZyB0aGUgb2JqZWN0IHBvaW50ZWQgYnkgaXQgYXQgdGhlIGVuZCBv
-ZiAucmVtb3ZlKCksIHNvCj4gPiA+ID4gPiA+IHZpcnRpb190cmFuc3BvcnRfc2VuZF9wa3QoKSBv
-ciB2c29ja190cmFuc3BvcnRfY2FuY2VsX3BrdCgpIG1heSBzdGlsbCBiZQo+ID4gPiA+ID4gPiBy
-dW5uaW5nLCBhY2Nlc3NpbmcgdGhlIG9iamVjdCB0aGF0IHdlIGFyZSBmcmVlZC4KPiA+ID4gPiA+
-IFllcywgdGhhdCdzIG15IHBvaW50Lgo+ID4gPiA+ID4gCj4gPiA+ID4gPiAKPiA+ID4gPiA+ID4g
-U2hvdWxkIEkgdXNlIHNvbWV0aGluZyBsaWtlIFJDVSB0byBwcmV2ZW50IHRoaXMgaXNzdWU/Cj4g
-PiA+ID4gPiA+IAo+ID4gPiA+ID4gPiAgICAgICAgdmlydGlvX3RyYW5zcG9ydF9zZW5kX3BrdCgp
-IGFuZCB2c29ja190cmFuc3BvcnRfY2FuY2VsX3BrdCgpCj4gPiA+ID4gPiA+ICAgICAgICB7Cj4g
-PiA+ID4gPiA+ICAgICAgICAgICAgcmN1X3JlYWRfbG9jaygpOwo+ID4gPiA+ID4gPiAgICAgICAg
-ICAgIHZzb2NrID0gcmN1X2RlcmVmZXJlbmNlKHRoZV92aXJ0aW9fdnNvY2tfbXV0ZXgpOwo+ID4g
-PiA+ID4gUkNVIGlzIHByb2JhYmx5IGEgd2F5IHRvIGdvLiAoTGlrZSB3aGF0IHZob3N0X3RyYW5z
-cG9ydF9zZW5kX3BrdCgpIGRpZCkuCj4gPiA+ID4gPiAKPiA+ID4gPiBPa2F5LCBJJ20gZ29pbmcg
-dGhpcyB3YXkuCj4gPiA+ID4gCj4gPiA+ID4gPiA+ICAgICAgICAgICAgLi4uCj4gPiA+ID4gPiA+
-ICAgICAgICAgICAgcmN1X3JlYWRfdW5sb2NrKCk7Cj4gPiA+ID4gPiA+ICAgICAgICB9Cj4gPiA+
-ID4gPiA+IAo+ID4gPiA+ID4gPiAgICAgICAgdmlydGlvX3Zzb2NrX3JlbW92ZSgpCj4gPiA+ID4g
-PiA+ICAgICAgICB7Cj4gPiA+ID4gPiA+ICAgICAgICAgICAgcmN1X2Fzc2lnbl9wb2ludGVyKHRo
-ZV92aXJ0aW9fdnNvY2tfbXV0ZXgsIE5VTEwpOwo+ID4gPiA+ID4gPiAgICAgICAgICAgIHN5bmNo
-cm9uaXplX3JjdSgpOwo+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gICAgICAgICAgICAuLi4KPiA+
-ID4gPiA+ID4gCj4gPiA+ID4gPiA+ICAgICAgICAgICAgZnJlZSh2c29jayk7Cj4gPiA+ID4gPiA+
-ICAgICAgICB9Cj4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiBDb3VsZCB0aGVyZSBiZSBhIGJldHRl
-ciBhcHByb2FjaD8KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+IDIpIElm
-IHdlIGRlY2lkZSB0byBmbHVzaCBhZnRlciBkZXZfdnFzKCksIGlzIHR4X3J1bi9yeF9ydW4vZXZl
-bnRfcnVuIHN0aWxsCj4gPiA+ID4gPiA+ID4gbmVlZGVkPyBJdCBsb29rcyB0byBtZSB3ZSd2ZSBh
-bHJlYWR5IGRvbmUgZXhjZXB0IHRoYXQgd2UgbmVlZCBmbHVzaCByeF93b3JrCj4gPiA+ID4gPiA+
-ID4gaW4gdGhlIGVuZCBzaW5jZSBzZW5kX3BrdF93b3JrIGNhbiByZXF1ZXVlIHJ4X3dvcmsuCj4g
-PiA+ID4gPiA+IFRoZSBtYWluIHJlYXNvbiBvZiB0eF9ydW4vcnhfcnVuL2V2ZW50X3J1biBpcyB0
-byBwcmV2ZW50IHRoYXQgYSB3b3JrZXIKPiA+ID4gPiA+ID4gZnVuY3Rpb24gaXMgcnVubmluZyB3
-aGlsZSB3ZSBhcmUgY2FsbGluZyBjb25maWctPnJlc2V0KCkuCj4gPiA+ID4gPiA+IAo+ID4gPiA+
-ID4gPiBFLmcuIGlmIGFuIGludGVycnVwdCBjb21lcyBiZXR3ZWVuIHZpcnRpb192c29ja19mbHVz
-aF93b3JrcygpIGFuZAo+ID4gPiA+ID4gPiBjb25maWctPnJlc2V0KCksIGl0IGNhbiBxdWV1ZSBu
-ZXcgd29ya3MgdGhhdCBjYW4gYWNjZXNzIHRoZSBkZXZpY2Ugd2hpbGUKPiA+ID4gPiA+ID4gd2Ug
-YXJlIGluIGNvbmZpZy0+cmVzZXQoKS4KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IElNSE8gdGhl
-eSBhcmUgc3RpbGwgbmVlZGVkLgo+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gV2hhdCBkbyB5b3Ug
-dGhpbms/Cj4gPiA+ID4gPiBJIG1lYW4gY291bGQgd2Ugc2ltcGx5IGRvIGZsdXNoIGFmdGVyIHJl
-c2V0IG9uY2UgYW5kIHdpdGhvdXQgdHhfcngvcnhfcnVuCj4gPiA+ID4gPiB0cmlja3M/Cj4gPiA+
-ID4gPiAKPiA+ID4gPiA+IHJlc3QoKTsKPiA+ID4gPiA+IAo+ID4gPiA+ID4gdmlydGlvX3Zzb2Nr
-X2ZsdXNoX3dvcmsoKTsKPiA+ID4gPiA+IAo+ID4gPiA+ID4gdmlydGlvX3Zzb2NrX2ZyZWVfYnVm
-KCk7Cj4gPiA+ID4gTXkgb25seSBkb3VidCBpczoKPiA+ID4gPiBpcyBpdCBzYWZlIHRvIGNhbGwg
-Y29uZmlnLT5yZXNldCgpIHdoaWxlIGEgd29ya2VyIGZ1bmN0aW9uIGNvdWxkIGFjY2Vzcwo+ID4g
-PiA+IHRoZSBkZXZpY2U/Cj4gPiA+ID4gCj4gPiA+ID4gSSBoYWQgdGhpcyBkb3VidCByZWFkaW5n
-IHRoZSBNaWNoYWVsJ3MgYWR2aWNlWzFdIGFuZCBsb29raW5nIGF0Cj4gPiA+ID4gdmlydG5ldF9y
-ZW1vdmUoKSB3aGVyZSB0aGVyZSBhcmUgdGhlc2UgbGluZXMgYmVmb3JlIHRoZSBjb25maWctPnJl
-c2V0KCk6Cj4gPiA+ID4gCj4gPiA+ID4gCS8qIE1ha2Ugc3VyZSBubyB3b3JrIGhhbmRsZXIgaXMg
-YWNjZXNzaW5nIHRoZSBkZXZpY2UuICovCj4gPiA+ID4gCWZsdXNoX3dvcmsoJnZpLT5jb25maWdf
-d29yayk7Cj4gPiA+ID4gCj4gPiA+ID4gVGhhbmtzLAo+ID4gPiA+IFN0ZWZhbm8KPiA+ID4gPiAK
-PiA+ID4gPiBbMV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbmV0ZGV2LzIwMTkwNTIxMDU1NjUw
-LW11dHQtc2VuZC1lbWFpbC1tc3RAa2VybmVsLm9yZwo+ID4gPiAKPiA+ID4gR29vZCBwb2ludC4g
-VGhlbiBJIGFncmVlIHdpdGggeW91LiBCdXQgaWYgd2UgY2FuIHVzZSB0aGUgUkNVIHRvIGRldGVj
-dCB0aGUKPiA+ID4gZGV0YWNoIG9mIGRldmljZSBmcm9tIHNvY2tldCBmb3IgdGhlc2UsIGl0IHdv
-dWxkIGJlIGV2ZW4gYmV0dGVyLgo+ID4gPiAKPiA+IFdoYXQgYWJvdXQgY2hlY2tpbmcgJ3RoZV92
-aXJ0aW9fdnNvY2snIGluIHRoZSB3b3JrZXIgZnVuY3Rpb25zIGluIGEgUkNVCj4gPiBjcml0aWNh
-bCBzZWN0aW9uPwo+ID4gSW4gdGhpcyB3YXksIEkgY2FuIHJlbW92ZSB0aGUgcnhfcnVuL3R4X3J1
-bi9ldmVudF9ydW4uCj4gPiAKPiA+IERvIHlvdSB0aGluayBpdCdzIGNsZWFuZXI/Cj4gCj4gCj4g
-WWVzLCBJIHRoaW5rIHNvLgo+IAoKSGkgSmFzb24sCndoaWxlIEkgd2FzIHRyeWluZyB0byB1c2Ug
-UkNVIGFsc28gZm9yIHdvcmtlcnMsIEkgZGlzY292ZXJlZCB0aGF0IGl0IGNhbgpub3QgYmUgdXNl
-ZCBpZiB3ZSBjYW4gc2xlZXAuIChXb3JrZXJzIGhhdmUgbXV0ZXgsIG1lbW9yeSBhbGxvY2F0aW9u
-LCBldGMuKS4KVGhlcmUgaXMgU1JDVSwgYnV0IEkgdGhpbmsgdGhlIHJ4X3J1bi90eF9ydW4vZXZl
-bnRfcnVuIGlzIGNsZWFuZXIuCgpTbywgaWYgeW91IGFncmVlIEknZCBzZW5kIGEgdjIgdXNpbmcg
-UkNVIG9ubHkgZm9yIHRoZQp2aXJ0aW9fdHJhbnNwb3J0X3NlbmRfcGt0KCkgb3IgdnNvY2tfdHJh
-bnNwb3J0X2NhbmNlbF9wa3QoKSwgYW5kIGxlYXZlCnRoaXMgcGF0Y2ggYXMgaXMgdG8gYmUgc3Vy
-ZSB0aGF0IG5vIG9uZSBpcyBhY2Nlc3NpbmcgdGhlIGRldmljZSB3aGlsZSB3ZQpjYWxsIGNvbmZp
-Zy0+cmVzZXQoKS4KClRoYW5rcywKU3RlZmFubwpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6
-YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5k
-YXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Mon, 27 May 2019 at 09:19, Emil Velikov <emil.l.velikov@gmail.com> wrote:
+>
+> From: Emil Velikov <emil.velikov@collabora.com>
+>
+> The authentication can be circumvented, by design, by using the render
+> node.
+>
+> From the driver POV there is no distinction between primary and render
+> nodes, thus we can drop the token.
+>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Signed-off-by: Emil Velikov <emil.velikov@collabora.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_ioctl.c | 18 +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> index 949a264985fc..e72626faba52 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> @@ -553,34 +553,34 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
+>
+>  struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS] = {
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_MAP, virtio_gpu_map_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_EXECBUFFER, virtio_gpu_execbuffer_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_GETPARAM, virtio_gpu_getparam_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_CREATE,
+>                           virtio_gpu_resource_create_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_INFO, virtio_gpu_resource_info_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>
+>         /* make transfer async to the main ring? - no sure, can we
+>          * thread these in the underlying GL
+>          */
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_TRANSFER_FROM_HOST,
+>                           virtio_gpu_transfer_from_host_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_TRANSFER_TO_HOST,
+>                           virtio_gpu_transfer_to_host_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_WAIT, virtio_gpu_wait_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>
+>         DRM_IOCTL_DEF_DRV(VIRTGPU_GET_CAPS, virtio_gpu_get_caps_ioctl,
+> -                         DRM_AUTH | DRM_UNLOCKED | DRM_RENDER_ALLOW),
+> +                         DRM_UNLOCKED | DRM_RENDER_ALLOW),
+>  };
+> --
+> 2.21.0
+>
+
+Humble poke?
+
+Thanks,
+Emil
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
