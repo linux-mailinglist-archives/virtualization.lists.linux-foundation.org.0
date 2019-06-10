@@ -2,50 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85A4E3B1A9
-	for <lists.virtualization@lfdr.de>; Mon, 10 Jun 2019 11:11:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5EEA3B1B2
+	for <lists.virtualization@lfdr.de>; Mon, 10 Jun 2019 11:11:59 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 7E0B8C2C;
-	Mon, 10 Jun 2019 09:11:11 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id EE74ABDC;
+	Mon, 10 Jun 2019 09:11:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4B4FFB88
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 73A68B88
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 09:11:10 +0000 (UTC)
+	Mon, 10 Jun 2019 09:11:54 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 018CF174
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 64391174
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 09:11:09 +0000 (UTC)
+	Mon, 10 Jun 2019 09:11:53 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
 	[10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 4EC5B3084021;
-	Mon, 10 Jun 2019 09:11:09 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 99AC681E05;
+	Mon, 10 Jun 2019 09:11:47 +0000 (UTC)
 Received: from dhcp201-121.englab.pnq.redhat.com (ovpn-116-103.sin2.redhat.com
 	[10.67.116.103])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id C3D0160BF1;
-	Mon, 10 Jun 2019 09:10:33 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 7178D60BF1;
+	Mon, 10 Jun 2019 09:11:09 +0000 (UTC)
 From: Pankaj Gupta <pagupta@redhat.com>
 To: dm-devel@redhat.com, linux-nvdimm@lists.01.org,
 	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
 	kvm@vger.kernel.org, linux-fsdevel@vger.kernel.org,
 	linux-acpi@vger.kernel.org, qemu-devel@nongnu.org,
 	linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org
-Subject: [PATCH v11 4/7] dm: enable synchronous dax
-Date: Mon, 10 Jun 2019 14:37:27 +0530
-Message-Id: <20190610090730.8589-5-pagupta@redhat.com>
+Subject: [PATCH v11 5/7] dax: check synchronous mapping is supported
+Date: Mon, 10 Jun 2019 14:37:28 +0530
+Message-Id: <20190610090730.8589-6-pagupta@redhat.com>
 In-Reply-To: <20190610090730.8589-1-pagupta@redhat.com>
 References: <20190610090730.8589-1-pagupta@redhat.com>
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.40]);
-	Mon, 10 Jun 2019 09:11:09 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.25]);
+	Mon, 10 Jun 2019 09:11:48 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+	autolearn=unavailable version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: pagupta@redhat.com, rdunlap@infradead.org, jack@suse.cz, snitzer@redhat.com,
@@ -76,53 +76,54 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
- This patch sets dax device 'DAXDEV_SYNC' flag if all the target
- devices of device mapper support synchrononous DAX. If device
- mapper consists of both synchronous and asynchronous dax devices,
- we don't set 'DAXDEV_SYNC' flag.
+This patch introduces 'daxdev_mapping_supported' helper
+which checks if 'MAP_SYNC' is supported with filesystem
+mapping. It also checks if corresponding dax_device is
+synchronous. Virtio pmem device is asynchronous and
+does not not support VM_SYNC.
 
+Suggested-by: Jan Kara <jack@suse.cz>
 Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
+Reviewed-by: Jan Kara <jack@suse.cz>
 ---
- drivers/md/dm-table.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ include/linux/dax.h | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/drivers/md/dm-table.c b/drivers/md/dm-table.c
-index 350cf0451456..c5160d846fe6 100644
---- a/drivers/md/dm-table.c
-+++ b/drivers/md/dm-table.c
-@@ -890,10 +890,17 @@ static int device_supports_dax(struct dm_target *ti, struct dm_dev *dev,
- 			start, len);
- }
- 
-+static int device_synchronous(struct dm_target *ti, struct dm_dev *dev,
-+				       sector_t start, sector_t len, void *data)
+diff --git a/include/linux/dax.h b/include/linux/dax.h
+index 2b106752b1b8..267251a394fa 100644
+--- a/include/linux/dax.h
++++ b/include/linux/dax.h
+@@ -42,6 +42,18 @@ void dax_write_cache(struct dax_device *dax_dev, bool wc);
+ bool dax_write_cache_enabled(struct dax_device *dax_dev);
+ bool dax_synchronous(struct dax_device *dax_dev);
+ void set_dax_synchronous(struct dax_device *dax_dev);
++/*
++ * Check if given mapping is supported by the file / underlying device.
++ */
++static inline bool daxdev_mapping_supported(struct vm_area_struct *vma,
++					    struct dax_device *dax_dev)
 +{
-+	return dax_synchronous(dev->dax_dev);
++	if (!(vma->vm_flags & VM_SYNC))
++		return true;
++	if (!IS_DAX(file_inode(vma->vm_file)))
++		return false;
++	return dax_synchronous(dax_dev);
 +}
-+
- bool dm_table_supports_dax(struct dm_table *t, int blocksize)
+ #else
+ static inline struct dax_device *dax_get_by_host(const char *host)
  {
- 	struct dm_target *ti;
- 	unsigned i;
-+	bool dax_sync = true;
- 
- 	/* Ensure that all targets support DAX. */
- 	for (i = 0; i < dm_table_get_num_targets(t); i++) {
-@@ -906,7 +913,14 @@ bool dm_table_supports_dax(struct dm_table *t, int blocksize)
- 		    !ti->type->iterate_devices(ti, device_supports_dax,
- 			    &blocksize))
- 			return false;
-+
-+		/* Check devices support synchronous DAX */
-+		if (dax_sync &&
-+		    !ti->type->iterate_devices(ti, device_synchronous, NULL))
-+			dax_sync = false;
- 	}
-+	if (dax_sync)
-+		set_dax_synchronous(t->md->dax_dev);
- 
- 	return true;
+@@ -69,6 +81,11 @@ static inline bool dax_write_cache_enabled(struct dax_device *dax_dev)
+ {
+ 	return false;
  }
++static inline bool daxdev_mapping_supported(struct vm_area_struct *vma,
++				struct dax_device *dax_dev)
++{
++	return !(vma->vm_flags & VM_SYNC);
++}
+ #endif
+ 
+ struct writeback_control;
 -- 
 2.20.1
 
