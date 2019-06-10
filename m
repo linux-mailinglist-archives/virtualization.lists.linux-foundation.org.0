@@ -2,62 +2,62 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34E1D3BE3C
-	for <lists.virtualization@lfdr.de>; Mon, 10 Jun 2019 23:19:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B83C3BE3D
+	for <lists.virtualization@lfdr.de>; Mon, 10 Jun 2019 23:19:12 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CD1C3E7E;
-	Mon, 10 Jun 2019 21:18:27 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1F101E82;
+	Mon, 10 Jun 2019 21:18:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 602BCE78
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2377BE7A
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 21:18:26 +0000 (UTC)
+	Mon, 10 Jun 2019 21:18:29 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0A7F0174
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C9109174
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 21:18:25 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id 83so5676368pgg.8
+	Mon, 10 Jun 2019 21:18:28 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id g21so4160119plq.0
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 14:18:25 -0700 (PDT)
+	Mon, 10 Jun 2019 14:18:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=NP01C7FGf5lxdvTmoSCPFBCPy5Bu0zVjIzvG3I+uzsk=;
-	b=he+m3/R6d4WOz248hKEgrFo7XRgWBhY10YKEcExRTGj4loUd1d2D8qSf/4aeg5scMY
-	AyAJux2zPZ583C6cHkDjwiDONDughIB3f4nxO2RH6Pjjv9X6OcnkjLb5/yCxTDwDns1v
-	eH6ZyRxvCZ5YyXcJrIgIgdUBsJmOzPBY32ZzQ=
+	bh=8nq9Im362lbv4azULZvOC9Ag2G2ZekGR7CCYDprgGF8=;
+	b=FCNlBwOefmxV9kPIPrpaBd9HyXv2yEenUtOaw++Q3b8DYUHSXihBeppW/SIaMfVj5X
+	jP4AxfQTg5gmZCoy5a/s/T7DlqJANXVakIx9E4W7j2FILbiSvu0yUKGMDBpgoqSfIRkG
+	8f4i+L37sKl82vKcRN0id86xV7zHPQ7j7xd8s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=NP01C7FGf5lxdvTmoSCPFBCPy5Bu0zVjIzvG3I+uzsk=;
-	b=BJIl7acIQU0usBqti8iXwS9rkDO5wJ12o0Qhl+/MqmJX8QwtXNQVwLslzLV8rOlRZL
-	GRNxBEcjwxBycQIUCd2bjemNgnYTxCHi0qODzEq3rMvQcW0U2OoaRPgCZgMtHMhzxo8+
-	0FDf6APWW/NaDFIYn2sQl3B+J8cYPxgMNIhN2wT4S/VMPqheSYkiJGfXTBaVLaUdYJa6
-	7rcegiI8+sq2jVSU+5T77Pcxp48ZjGRIoQ0v8wMLPX49ctOGOJTYRWWSgK9JGtNDoOX/
-	2/kwNoFj37nRsHEfN7mQTyJXNY/sCL5pWV0Hh+8vJLndWocOyrcaXUSfuTMr+hwG2G8i
-	fN4w==
-X-Gm-Message-State: APjAAAUTV3rRvGv8yhLGxVNfWZM4YPYBGmeWq86A4c6rHijX0TW6CKsX
-	Kabl9crAwSIazDgsA6/rxKynSQ==
-X-Google-Smtp-Source: APXvYqyWCx2wwO3RZDWC6w+KkvtMx9THHvgIOX7vkYR2WNfySgWalTTwUj9doH3hsQm+oago2gRGvg==
-X-Received: by 2002:a17:90a:af8e:: with SMTP id
-	w14mr23816885pjq.89.1560201505577; 
-	Mon, 10 Jun 2019 14:18:25 -0700 (PDT)
+	bh=8nq9Im362lbv4azULZvOC9Ag2G2ZekGR7CCYDprgGF8=;
+	b=BZe4ZJYmY2WGMVHsKgLLAMwogK7zyPhiIVyhZR+elF1V7GgSpgKosaaRpdeeAjlZsO
+	kIOHzgDGJaCi4Am8j+EzBv4WCxKZFUsdQiozms5su7W2DSMtd5KHZiltAjX688mTNQ/m
+	QfN7Gcf//MyswPb2FQWS7ABCteokFr2KKV/k0DE/7RJgX68KsrdP+LFebTtH4PyeCDKS
+	v/X8TeNnIlc9vWR0kEMvxpN/ziYLAlzWv7VYZoEYa9mmO1k2uBvPyWaQOjUlGAgiaCss
+	WIw848c6Vvuj/LsPmfh1/EJjRWXO2FurMmCBjQyebY2hDHQJ+vVf6GTZ2tmMZyAn2M43
+	6/og==
+X-Gm-Message-State: APjAAAXxyVR7hxVAxFavUDAdeCNU9J4gqK8MzexAgFxNCeO64QfRpLEr
+	f5uF/XFtOkPuszoNJUueZ5onkw==
+X-Google-Smtp-Source: APXvYqyMASM4YCvHQ5Ip2z9vUnGHsH6b1vlzz/iXUjTKHtkcitMyf7/FMV1pmortsoFPZ6YfD+n6Cw==
+X-Received: by 2002:a17:902:5c5:: with SMTP id
+	f63mr72275000plf.176.1560201508490; 
+	Mon, 10 Jun 2019 14:18:28 -0700 (PDT)
 Received: from localhost ([2620:15c:202:1:e9ae:bd45:1bd9:e60d])
 	by smtp.gmail.com with ESMTPSA id
-	a7sm10762032pgj.42.2019.06.10.14.18.24
+	q20sm16377982pgq.66.2019.06.10.14.18.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Jun 2019 14:18:24 -0700 (PDT)
+	Mon, 10 Jun 2019 14:18:27 -0700 (PDT)
 From: davidriley@chromium.org
 To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org,
 	virtualization@lists.linux-foundation.org
-Subject: [PATCH v2 3/4] drm/virtio: Fix cache entry creation race.
-Date: Mon, 10 Jun 2019 14:18:09 -0700
-Message-Id: <20190610211810.253227-4-davidriley@chromium.org>
+Subject: [PATCH v2 4/4] drm/virtio: Add memory barriers for capset cache.
+Date: Mon, 10 Jun 2019 14:18:10 -0700
+Message-Id: <20190610211810.253227-5-davidriley@chromium.org>
 X-Mailer: git-send-email 2.22.0.rc2.383.gf4fbbf30c2-goog
 In-Reply-To: <20190605234423.11348-1-davidriley@chromium.org>
 References: <20190605234423.11348-1-davidriley@chromium.org>
@@ -87,68 +87,43 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 
 From: David Riley <davidriley@chromium.org>
 
-virtio_gpu_cmd_get_capset would check for the existence of an entry
-under lock.  If it was not found, it would unlock and call
-virtio_gpu_cmd_get_capset to create a new entry.  The new entry would
-be added it to the list without checking if it was added by another
-task during the period where the lock was not held resulting in
-duplicate entries.
-
-Compounding this issue, virtio_gpu_cmd_capset_cb would stop iterating
-after find the first matching entry.  Multiple callbacks would modify
-the first entry, but any subsequent entries and their associated waiters
-would eventually timeout since they don't become valid, also wasting
-memory along the way.
+After data is copied to the cache entry, atomic_set is used indicate
+that the data is the entry is valid without appropriate memory barriers.
+Similarly the read side was missing the corresponding memory barriers.
 
 Signed-off-by: David Riley <davidriley@chromium.org>
 ---
- drivers/gpu/drm/virtio/virtgpu_vq.c | 22 +++++++++++++++++++++-
- 1 file changed, 21 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/virtio/virtgpu_ioctl.c | 3 +++
+ drivers/gpu/drm/virtio/virtgpu_vq.c    | 2 ++
+ 2 files changed, 5 insertions(+)
 
+diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+index 88c1ed57a3c5..a50495083d6f 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
++++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+@@ -542,6 +542,9 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
+ 	if (!ret)
+ 		return -EBUSY;
+ 
++	/* is_valid check must proceed before copy of the cache entry. */
++	smp_rmb();
++
+ 	ptr = cache_ent->caps_cache;
+ 
+ 	if (copy_to_user((void __user *)(unsigned long)args->addr, ptr, size))
 diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-index da71568adb9a..dd5ead2541c2 100644
+index dd5ead2541c2..c7a5ca027245 100644
 --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
 +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-@@ -684,8 +684,11 @@ int virtio_gpu_cmd_get_capset(struct virtio_gpu_device *vgdev,
- 	struct virtio_gpu_vbuffer *vbuf;
- 	int max_size;
- 	struct virtio_gpu_drv_cap_cache *cache_ent;
-+	struct virtio_gpu_drv_cap_cache *search_ent;
- 	void *resp_buf;
- 
-+	*cache_p = NULL;
-+
- 	if (idx >= vgdev->num_capsets)
- 		return -EINVAL;
- 
-@@ -716,9 +719,26 @@ int virtio_gpu_cmd_get_capset(struct virtio_gpu_device *vgdev,
- 	atomic_set(&cache_ent->is_valid, 0);
- 	cache_ent->size = max_size;
- 	spin_lock(&vgdev->display_info_lock);
--	list_add_tail(&cache_ent->head, &vgdev->cap_cache);
-+	/* Search while under lock in case it was added by another task. */
-+	list_for_each_entry(search_ent, &vgdev->cap_cache, head) {
-+		if (search_ent->id == vgdev->capsets[idx].id &&
-+		    search_ent->version == version) {
-+			*cache_p = search_ent;
-+			break;
-+		}
-+	}
-+	if (!*cache_p)
-+		list_add_tail(&cache_ent->head, &vgdev->cap_cache);
- 	spin_unlock(&vgdev->display_info_lock);
- 
-+	if (*cache_p) {
-+		/* Entry was found, so free everything that was just created. */
-+		kfree(resp_buf);
-+		kfree(cache_ent->caps_cache);
-+		kfree(cache_ent);
-+		return 0;
-+	}
-+
- 	cmd_p = virtio_gpu_alloc_cmd_resp
- 		(vgdev, &virtio_gpu_cmd_capset_cb, &vbuf, sizeof(*cmd_p),
- 		 sizeof(struct virtio_gpu_resp_capset) + max_size,
+@@ -583,6 +583,8 @@ static void virtio_gpu_cmd_capset_cb(struct virtio_gpu_device *vgdev,
+ 		    cache_ent->id == le32_to_cpu(cmd->capset_id)) {
+ 			memcpy(cache_ent->caps_cache, resp->capset_data,
+ 			       cache_ent->size);
++			/* Copy must occur before is_valid is signalled. */
++			smp_wmb();
+ 			atomic_set(&cache_ent->is_valid, 1);
+ 			break;
+ 		}
 -- 
 2.22.0.rc2.383.gf4fbbf30c2-goog
 
