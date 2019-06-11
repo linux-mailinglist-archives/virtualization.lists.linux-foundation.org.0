@@ -2,87 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 377BE3BEB4
-	for <lists.virtualization@lfdr.de>; Mon, 10 Jun 2019 23:32:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8855E3C7BA
+	for <lists.virtualization@lfdr.de>; Tue, 11 Jun 2019 11:56:22 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 11017C8B;
-	Mon, 10 Jun 2019 21:32:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id AA57CE38;
+	Tue, 11 Jun 2019 09:56:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 995C5C8B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id AA42CE1F
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 21:32:49 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 43B6A174
+	Tue, 11 Jun 2019 09:56:14 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A4FAD79
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 21:32:49 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id s11so6009751pfm.12
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 10 Jun 2019 14:32:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to;
-	bh=u65kJhZ2c0w54Nc/i9RYT+l58N6im9e9Q29G/YH/uuc=;
-	b=ijZRqYOHAJLGYs5vVBH7AyvxnX3poiS7Ze8fMa8xMMZFUFQkNHIHUJuCZa0E+HU7KK
-	ZEEdHPDvfDlVSbqAvrXP3rviz6pH3j9htRBPT5NIqJKjGJE+FjxllNFI8RlkWV1QA19g
-	aArbTyQM1D+rcblnoPAFTe/gzDozuxJ5mSkQw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=u65kJhZ2c0w54Nc/i9RYT+l58N6im9e9Q29G/YH/uuc=;
-	b=NCFXjRnNouA/V3/UkYYZFOj3dcYfLpfxxYEPyOVFlZSNeMcEtNgUBq6D00MCjvf79L
-	+3o73ZXa+z/CPZ8yNFXvlKNbKFa/8f7gg+B9YCZtkmZHeQejVED5xFS4BiIw8YQsGt5M
-	LHGkWXrHya7bc/5g2uPVzidd+bSJl2lIA9GiapCtT5JVE+r46J4splymbRyO+ZnT/nz8
-	w3mwucH9o8dU1MH4sVJSxNZMzRG9/wmH13Op+kdmWiEiwVNdVw7xtv8iOtcKg2fNuSWN
-	DDrANThSZrkEbDHgK0LPAJsk4P76rTbuRA9UZh1JB6gtLnZG7ooYNr7mHQTaP0+gmxB5
-	L3iQ==
-X-Gm-Message-State: APjAAAU5RU2SymcX+O7/HN5KSlcOqZTns/qSQ0rPDaBPo8wmyyLQztOg
-	bcOi9Gt7zjrMQJhfQ8iIr7IL6w==
-X-Google-Smtp-Source: APXvYqyQzwsz4g4vXj8Aq9NRG67WJeqq4COKYtOvIJxo3DWxXcQEhMnNrnrMg8J5OGqUXm+tPqrSlw==
-X-Received: by 2002:aa7:8145:: with SMTP id d5mr77831178pfn.11.1560202368916; 
-	Mon, 10 Jun 2019 14:32:48 -0700 (PDT)
-Received: from www.outflux.net (173-164-112-133-Oregon.hfc.comcastbusiness.net.
-	[173.164.112.133]) by smtp.gmail.com with ESMTPSA id
-	q1sm18907954pfb.156.2019.06.10.14.32.47
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 10 Jun 2019 14:32:48 -0700 (PDT)
-Date: Mon, 10 Jun 2019 14:32:47 -0700
-From: Kees Cook <keescook@chromium.org>
-To: Thomas Garnier <thgarnie@chromium.org>
-Subject: Re: [PATCH v7 00/12] x86: PIE support to extend KASLR randomization
-Message-ID: <201906101432.B642E297F@keescook>
-References: <20190520231948.49693-1-thgarnie@chromium.org>
+	Tue, 11 Jun 2019 09:56:13 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id EC61B3092677;
+	Tue, 11 Jun 2019 09:56:10 +0000 (UTC)
+Received: from gondolin (ovpn-204-147.brq.redhat.com [10.40.204.147])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 78AF8600CC;
+	Tue, 11 Jun 2019 09:56:04 +0000 (UTC)
+Date: Tue, 11 Jun 2019 11:55:29 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: Re: [PATCH v4 2/8] s390/cio: introduce DMA pools to cio
+Message-ID: <20190611115529.6e3ae12d.cohuck@redhat.com>
+In-Reply-To: <20190606115127.55519-3-pasic@linux.ibm.com>
+References: <20190606115127.55519-1-pasic@linux.ibm.com>
+	<20190606115127.55519-3-pasic@linux.ibm.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190520231948.49693-1-thgarnie@chromium.org>
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.43]);
+	Tue, 11 Jun 2019 09:56:11 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Feng Tang <feng.tang@intel.com>, kristen@linux.intel.com,
-	kernel-hardening@lists.openwall.com, Peter Zijlstra <peterz@infradead.org>,
+Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>, kvm@vger.kernel.org,
+	Sebastian Ott <sebott@linux.ibm.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Farhan Ali <alifm@linux.ibm.com>,
+	Heiko Carstens <heiko.carstens@de.ibm.com>,
+	Eric Farman <farman@linux.ibm.com>,
 	virtualization@lists.linux-foundation.org,
-	Masahiro Yamada <yamada.masahiro@socionext.com>,
-	Jan Beulich <JBeulich@suse.com>, Nadav Amit <namit@vmware.com>,
-	Pavel Machek <pavel@ucw.cz>, "H. Peter Anvin" <hpa@zytor.com>,
-	Thomas Gleixner <tglx@linutronix.de>, Andi Kleen <ak@linux.intel.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>, x86@kernel.org,
-	Ingo Molnar <mingo@redhat.com>, Len Brown <len.brown@intel.com>,
-	Jann Horn <jannh@google.com>, Borislav Petkov <bp@alien8.de>,
-	Andy Lutomirski <luto@kernel.org>, Alok Kataria <akataria@vmware.com>,
-	Juergen Gross <jgross@suse.com>,
-	Ard Biesheuvel <ard.biesheuvel@linaro.org>,
-	linux-pm@vger.kernel.org, Maran Wilson <maran.wilson@oracle.com>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org,
-	"David S. Miller" <davem@davemloft.net>, linux-crypto@vger.kernel.org,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Thomas Garnier <thgarnie@google.com>
+	Christoph Hellwig <hch@infradead.org>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	"Jason J. Herne" <jjherne@linux.ibm.com>,
+	Michael Mueller <mimu@linux.ibm.com>,
+	Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -99,16 +76,43 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, May 20, 2019 at 04:19:25PM -0700, Thomas Garnier wrote:
-> Splitting the previous serie in two. This part contains assembly code
-> changes required for PIE but without any direct dependencies with the
-> rest of the patchset.
+On Thu,  6 Jun 2019 13:51:21 +0200
+Halil Pasic <pasic@linux.ibm.com> wrote:
 
-Thanks for doing this! It should be easier to land the "little" fixes so
-there's less to review for the big PIE changes down the road.
+> To support protected virtualization cio will need to make sure the
+> memory used for communication with the hypervisor is DMA memory.
+> 
+> Let us introduce one global pool for cio.
+> 
+> Our DMA pools are implemented as a gen_pool backed with DMA pages. The
+> idea is to avoid each allocation effectively wasting a page, as we
+> typically allocate much less than PAGE_SIZE.
+> 
+> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> Reviewed-by: Sebastian Ott <sebott@linux.ibm.com>
+> ---
+>  arch/s390/Kconfig           |   1 +
+>  arch/s390/include/asm/cio.h |  11 +++
+>  drivers/s390/cio/css.c      | 131 ++++++++++++++++++++++++++++++++++--
+>  3 files changed, 139 insertions(+), 4 deletions(-)
 
--- 
-Kees Cook
+(...)
+
+> +void cio_gp_dma_destroy(struct gen_pool *gp_dma, struct device *dma_dev)
+> +{
+> +	if (!gp_dma)
+> +		return;
+> +	/* this is qite ugly but no better idea */
+
+typo: s/qite/quite/
+
+> +	gen_pool_for_each_chunk(gp_dma, __gp_dma_free_dma, dma_dev);
+> +	gen_pool_destroy(gp_dma);
+> +}
+
+(...)
+
+Reviewed-by: Cornelia Huck <cohuck@redhat.com>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
