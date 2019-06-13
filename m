@@ -2,80 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2809435C2
-	for <lists.virtualization@lfdr.de>; Thu, 13 Jun 2019 14:12:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D919243755
+	for <lists.virtualization@lfdr.de>; Thu, 13 Jun 2019 16:48:17 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 38554E1B;
-	Thu, 13 Jun 2019 12:12:08 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C52B1AD7;
+	Thu, 13 Jun 2019 14:48:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 02277DD4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CDCBB941
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 13 Jun 2019 12:12:05 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f41.google.com (mail-io1-f41.google.com
-	[209.85.166.41])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E0F6563D
+	Thu, 13 Jun 2019 14:48:11 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8E10663D
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 13 Jun 2019 12:12:04 +0000 (UTC)
-Received: by mail-io1-f41.google.com with SMTP id e5so16309453iok.4
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 13 Jun 2019 05:12:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6TnqYw+JH0yXL0cYBb0DT/5cCjybbJ0FkJFzKrPy/Ks=;
-	b=V1kObx8WFKLXYMLDacaZYfPCx7cuX/IA1LFq0ZQgLWAhg1D+voGEfUagJ645qIod/k
-	zGsXPiqk/Lqd34ObQupyesy1ZWwYRn4JJgZYrUNAhinntdvRuvv/WKGNUQ1CzGo77vZI
-	HP27MV24tXmnPjITSM4yW0sUzQZ0bjDFAppf0fVDVLoyoOZEhMRz+m/JrdY2DmbhjqaB
-	/fj1ntsBGZHDRJj9F2KyBisjtbnbm1G19+nfPG0p3m1qvVVNLMemEyuCeVdMA0IngggG
-	vBjhGKmCmQKU4bEJ3/jtx+XCZqrxXvoxyG9f3sF4nQUxGgJ+AV93Oh/GUr/cB65beXrU
-	IHag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=6TnqYw+JH0yXL0cYBb0DT/5cCjybbJ0FkJFzKrPy/Ks=;
-	b=VSYUxVw4CeW9Na52Q8hbY8DJT7RFxsty1KH1oaMd0haCAMIdd8If4+NJQEabFHC2rW
-	aM/r2ldTRVS/SnGXGPKpAt7YsMLMQbfuJk37SnX1D7bY7cw8R/Gj4wj1A1Y4AQj8zu0r
-	qSFOU/N2LxVrZi+RB+spbC9a5wxY8AkxbOZZREYsyO76xZ5sih3J+PWgTXw6ikn/lzAh
-	lFvGSmIojmAJa/niS0/qgi45VAAGUkmAFHBGe7zbsDoOJCBQEpMFD4pOAboaWmF+Ba2F
-	t7JnKraMBHSj+fXeVCeMxyer95Tz4gGaSe01K42szPRvhl/6ylA3FtIN45ZicdmPoFCS
-	Cmyg==
-X-Gm-Message-State: APjAAAVSpTTjz6tfx8FaOkE8ThObJX/AgyHhOHVHrw/X0BjyACNuC7ej
-	nGrOvx2MKaGZsYUD2e1bU5TtQjb/KZlGh4sMVQn4Lg==
-X-Google-Smtp-Source: APXvYqyCTIGH2L4bZDuCnup/5Krt+juZXVarS330yujDiKA6yKNS0mtgMz1H4aP3TlXSLRHvxmG6k/hJzd4683l6yRQ=
-X-Received: by 2002:a6b:fb0f:: with SMTP id h15mr3118490iog.266.1560427923857; 
-	Thu, 13 Jun 2019 05:12:03 -0700 (PDT)
+	Thu, 13 Jun 2019 14:48:11 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 9726830BD1CC;
+	Thu, 13 Jun 2019 14:47:55 +0000 (UTC)
+Received: from localhost (ovpn-117-78.ams2.redhat.com [10.36.117.78])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id DE9E87BE6B;
+	Thu, 13 Jun 2019 14:47:53 +0000 (UTC)
+Date: Thu, 13 Jun 2019 15:47:50 +0100
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Sunil Muthuswamy <sunilmut@microsoft.com>
+Subject: Re: [PATCH net-next] vsock: correct removal of socket from the list
+Message-ID: <20190613144750.GA10708@stefanha-x1.localdomain>
+References: <MW2PR2101MB11162BBAEC52B232A7B1EFAFC0EF0@MW2PR2101MB1116.namprd21.prod.outlook.com>
 MIME-Version: 1.0
-References: <20190613120659.10680-1-hdanton@sina.com>
-In-Reply-To: <20190613120659.10680-1-hdanton@sina.com>
-Date: Thu, 13 Jun 2019 14:11:52 +0200
-Message-ID: <CACT4Y+ZaoM4c739MM5KXH7K0_oeRsQ8F4Erptv8bjbx0JFuS-w@mail.gmail.com>
-Subject: Re: memory leak in vhost_net_ioctl
-To: Hillf Danton <hdanton@sina.com>
-X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
-	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
+In-Reply-To: <MW2PR2101MB11162BBAEC52B232A7B1EFAFC0EF0@MW2PR2101MB1116.namprd21.prod.outlook.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.49]);
+	Thu, 13 Jun 2019 14:48:03 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "xdp-newbies@vger.kernel.org" <xdp-newbies@vger.kernel.org>,
-	"jakub.kicinski@netronome.com" <jakub.kicinski@netronome.com>,
-	"hawk@kernel.org" <hawk@kernel.org>,
-	"daniel@iogearbox.net" <daniel@iogearbox.net>,
-	"mst@redhat.com" <mst@redhat.com>,
-	syzbot <syzbot+0789f0c7e45efd7bb643@syzkaller.appspotmail.com>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"john.fastabend@gmail.com" <john.fastabend@gmail.com>,
-	"ast@kernel.org" <ast@kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"syzkaller-bugs@googlegroups.com" <syzkaller-bugs@googlegroups.com>,
+Cc: "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	Dexuan Cui <decui@microsoft.com>, "David S. Miller" <davem@davemloft.net>,
 	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	"bpf@vger.kernel.org" <bpf@vger.kernel.org>,
 	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	"davem@davemloft.net" <davem@davemloft.net>
+	<virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -87,34 +61,63 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Dmitry Vyukov via Virtualization
-	<virtualization@lists.linux-foundation.org>
-Reply-To: Dmitry Vyukov <dvyukov@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============5374647294567990292=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Jun 13, 2019 at 2:07 PM Hillf Danton <hdanton@sina.com> wrote:
->
->
-> Hello Jason
->
-> On Thu, 13 Jun 2019 17:10:39 +0800 Jason Wang wrote:
-> >
-> > This is basically a kfree(ubuf) after the second vhost_net_flush() in
-> > vhost_net_release().
-> >
-> Fairly good catch.
->
-> > Could you please post a formal patch?
-> >
-> I'd like very much to do that; but I wont, I am afraid, until I collect a
-> Tested-by because of reproducer without a cutting edge.
 
-You can easily collect Tested-by from syzbot for any bug with a reproducer ;)
-https://github.com/google/syzkaller/blob/master/docs/syzbot.md#testing-patches
+--===============5374647294567990292==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="IJpNTDwzlM2Ie8A6"
+Content-Disposition: inline
+
+
+--IJpNTDwzlM2Ie8A6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jun 13, 2019 at 03:52:27AM +0000, Sunil Muthuswamy wrote:
+> The current vsock code for removal of socket from the list is both
+> subject to race and inefficient. It takes the lock, checks whether
+> the socket is in the list, drops the lock and if the socket was on the
+> list, deletes it from the list. This is subject to race because as soon
+> as the lock is dropped once it is checked for presence, that condition
+> cannot be relied upon for any decision. It is also inefficient because
+> if the socket is present in the list, it takes the lock twice.
+>=20
+> Signed-off-by: Sunil Muthuswamy <sunilmut@microsoft.com>
+> ---
+>  net/vmw_vsock/af_vsock.c | 38 +++++++-------------------------------
+>  1 file changed, 7 insertions(+), 31 deletions(-)
+
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+
+--IJpNTDwzlM2Ie8A6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl0CYhYACgkQnKSrs4Gr
+c8iFswgAkhny+CmJw7mow5IOVXXncE2TxFf99EHKsOr8iDtwufjIL8hwWvTaUe6P
+RTvfmyV/gNWaNTeDS59vx2PjBj6lqFvNcSkHgxk2TedBTjYZuT9zVpxgaR35z8/+
+ijwiQDEUItPe/QTgLtGCe7cWonERvH8isScXPkJeRQwy6AM4VUgUA0BAp4UJ8d1C
+wSPJN9FCoxq23VteUc5K64rfZx/HJ9nQHSgXpaGs1HZUP4ZCt+d+IdnHQqwnMqcO
+StHv/E1Hw52VWDsuwnxBnabAj8upxLAAwz3fczAIBBv8Gzgcsm4mJ27kz1canPlv
+TYXCHiC/JJ9sj1U5f6ggZhXBCsY9+g==
+=426n
+-----END PGP SIGNATURE-----
+
+--IJpNTDwzlM2Ie8A6--
+
+--===============5374647294567990292==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============5374647294567990292==--
