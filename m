@@ -2,93 +2,59 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D31D73751
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:06:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0410173729
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:01:51 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 617A914E9;
-	Wed, 24 Jul 2019 18:59:35 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 59A011472;
+	Wed, 24 Jul 2019 18:59:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CEE7ADBC
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1C73ACC7
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 13 Jun 2019 22:39:46 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D0F8A775
+	Fri, 14 Jun 2019 02:45:33 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail7-215.sinamail.sina.com.cn (mail7-215.sinamail.sina.com.cn
+	[202.108.7.215])
+	by smtp1.linuxfoundation.org (Postfix) with SMTP id D96BB174
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 13 Jun 2019 22:39:44 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id p15so487108eds.8
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 13 Jun 2019 15:39:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=tcd-ie.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=FaCFxVfgQP5McbVWnVsoPjXbr3efETOs6+Wdgacd+8E=;
-	b=LIr0k+A714PbEePdzOuQmy/B+BvUVXWQocX7xS86aeXOpTr+Gb2z5PHhfX42+ijM/v
-	9ySyLlU023R3eSBxZTGUFVdoDxl7tDXQ6I1X7MS7CkCkBEa89zmKcuUX+Z6P+3dzgi3g
-	xLFkXTAtGCggJtBTWLUog3GrCK9V9hfg1hD+8Wol8lBHW5rzFFJj/uJ+30qgfpzUYZQD
-	zqDO88+JlK5XBr1psF6j7r2hboONTBC/0Nd+hRrgcRhKCsHVjTrrsdn6Qhl/o0zQ7Kx1
-	nlO91tviw3IlcFIPXJJwIUvGQNZVtiYuSVxyDqLIyB9LSq8Qt+6sqUqLd+2D7747ZGzH
-	2BsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=FaCFxVfgQP5McbVWnVsoPjXbr3efETOs6+Wdgacd+8E=;
-	b=OQT2RKLl0xvfEZBv4Y3N8n0iHP+V1sCLA+Q6ulKbCujHnQi3tYNw2tZHvxZdX/ZPAs
-	4yM+6kr52A+H0pG8+wua/bA2gMoKcAkAmwug7PKi0bVWZ8ryU9vDB5lE9cVPoME2/CPA
-	5W1K1UL4O3aPllf4Q7TiW20jHnBiQA29Z3DDu7yYoAmBaM42eeyqvpEAT6mc3mExfUwW
-	+yztNspGZx2faMnMTfGqDbuHqjUH7McN+wF1PS9WNB9qSFHcYZpX9osRgeZvWJDkfeQN
-	1h17X29tQr7vXw8xxJ01tPeBpVAkhR6ZLn4eq9gNFcFyTkAKjsRFulfGhqVYoH1NdfLo
-	ScFQ==
-X-Gm-Message-State: APjAAAUZn0+EClRVVPf2E+6xF3dw4HYVHlNSd08ipF2N94SXYVHGrHPw
-	h5ZJMjsEEFajjvT1Xzbr3zpe7w==
-X-Google-Smtp-Source: APXvYqziA83Y6fLVFK0fVVASPFLql/CB+jbi0PdvqdfuVPYOvBv9A61teoZtJN6W0qvpQQJ1y1vqtg==
-X-Received: by 2002:a17:906:b741:: with SMTP id
-	fx1mr77864769ejb.45.1560465583095; 
-	Thu, 13 Jun 2019 15:39:43 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:8084:a0:bc00:8042:d435:a754:1f22])
-	by smtp.googlemail.com with ESMTPSA id
-	s16sm216522eji.27.2019.06.13.15.39.41
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 13 Jun 2019 15:39:42 -0700 (PDT)
-From: Tom Murphy <murphyt7@tcd.ie>
-To: iommu@lists.linux-foundation.org
-Subject: [PATCH v4 5/5] iommu/amd: Convert AMD iommu driver to the dma-iommu
-	api
-Date: Thu, 13 Jun 2019 23:39:00 +0100
-Message-Id: <20190613223901.9523-6-murphyt7@tcd.ie>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190613223901.9523-1-murphyt7@tcd.ie>
-References: <20190613223901.9523-1-murphyt7@tcd.ie>
+	Fri, 14 Jun 2019 02:45:31 +0000 (UTC)
+Received: from unknown (HELO localhost.localdomain)([123.112.52.116])
+	by sina.com with ESMTP
+	id 5D030A4700004228; Fri, 14 Jun 2019 10:45:29 +0800 (CST)
+X-Sender: hdanton@sina.com
+X-Auth-ID: hdanton@sina.com
+X-SMAIL-MID: 38855395686
+From: Hillf Danton <hdanton@sina.com>
+To: syzbot <syzbot+0789f0c7e45efd7bb643@syzkaller.appspotmail.com>
+Subject: Re: memory leak in vhost_net_ioctl
+Date: Fri, 14 Jun 2019 10:45:19 +0800
+Message-Id: <20190614024519.6224-1-hdanton@sina.com>
 MIME-Version: 1.0
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+Thread-Topic: Re: memory leak in vhost_net_ioctl
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW,SORTED_RECIPS autolearn=no version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-X-Mailman-Approved-At: Wed, 24 Jul 2019 18:59:23 +0000
-Cc: Heiko Stuebner <heiko@sntech.de>, Will Deacon <will.deacon@arm.com>,
-	virtualization@lists.linux-foundation.org,
-	David Brown <david.brown@linaro.org>,
-	Thierry Reding <thierry.reding@gmail.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	linux-s390@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
-	Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
-	Joerg Roedel <joro@8bytes.org>, Krzysztof Kozlowski <krzk@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>, linux-rockchip@lists.infradead.org,
-	Andy Gross <agross@kernel.org>,
-	Gerald Schaefer <gerald.schaefer@de.ibm.com>,
-	linux-tegra@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-mediatek@lists.infradead.org,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	linux-arm-kernel@lists.infradead.org, Robin Murphy <robin.murphy@arm.com>,
-	linux-kernel@vger.kernel.org, Tom Murphy <murphyt7@tcd.ie>,
-	Rob Clark <robdclark@gmail.com>, Kukjin Kim <kgene@kernel.org>,
-	David Woodhouse <dwmw2@infradead.org>
+X-Mailman-Approved-At: Wed, 24 Jul 2019 18:59:22 +0000
+Cc: "xdp-newbies@vger.kernel.org" <xdp-newbies@vger.kernel.org>,
+	"hdanton@sina.com" <hdanton@sina.com>,
+	"jakub.kicinski@netronome.com" <jakub.kicinski@netronome.com>,
+	"hawk@kernel.org" <hawk@kernel.org>,
+	"daniel@iogearbox.net" <daniel@iogearbox.net>,
+	"mst@redhat.com" <mst@redhat.com>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	"john.fastabend@gmail.com" <john.fastabend@gmail.com>,
+	"ast@kernel.org" <ast@kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"syzkaller-bugs@googlegroups.com" <syzkaller-bugs@googlegroups.com>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	"bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	"davem@davemloft.net" <davem@davemloft.net>,
+	"dvyukov@google.com" <dvyukov@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -105,880 +71,228 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Convert the AMD iommu driver to the dma-iommu api. Remove the iova
-handling and reserve region code from the AMD iommu driver.
 
-Signed-off-by: Tom Murphy <murphyt7@tcd.ie>
+Hello Syzbot
+
+On Fri, 14 Jun 2019 02:26:02 +0800 syzbot wrote:
+>
+> Hello,
+>
+> syzbot has tested the proposed patch but the reproducer still triggered crash:
+> memory leak in vhost_net_ioctl
+>
+Oh sorry for my poor patch.
+
+> ANGE): hsr_slave_1: link becomes ready
+> 2019/06/13 18:24:57 executed programs: 18
+> BUG: memory leak
+> unreferenced object 0xffff88811cbc6ac0 (size 64):
+>    comm "syz-executor.0", pid 7196, jiffies 4294943804 (age 14.770s)
+>    hex dump (first 32 bytes):
+>      01 00 00 00 81 88 ff ff 00 00 00 00 82 88 ff ff  ................
+>      d0 6a bc 1c 81 88 ff ff d0 6a bc 1c 81 88 ff ff  .j.......j......
+>    backtrace:
+>      [<000000006c752978>] kmemleak_alloc_recursive include/linux/kmemleak.h:43 [inline]
+>      [<000000006c752978>] slab_post_alloc_hook mm/slab.h:439 [inline]
+>      [<000000006c752978>] slab_alloc mm/slab.c:3326 [inline]
+>      [<000000006c752978>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
+>      [<00000000b3825d52>] kmalloc include/linux/slab.h:547 [inline]
+>      [<00000000b3825d52>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
+>      [<00000000b3825d52>] vhost_net_set_backend drivers/vhost/net.c:1535 [inline]
+>      [<00000000b3825d52>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1717
+>      [<00000000700f02d7>] vfs_ioctl fs/ioctl.c:46 [inline]
+>      [<00000000700f02d7>] file_ioctl fs/ioctl.c:509 [inline]
+>      [<00000000700f02d7>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+>      [<000000009a0ec0a7>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+>      [<00000000d9416323>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+>      [<00000000d9416323>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+>      [<00000000d9416323>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+>      [<00000000e4407a23>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
+>      [<000000008715c149>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>
+> BUG: memory leak
+> unreferenced object 0xffff88810b1365c0 (size 64):
+>    comm "syz-executor.2", pid 7193, jiffies 4294943823 (age 14.580s)
+>    hex dump (first 32 bytes):
+>      01 00 00 00 81 88 ff ff 00 00 00 00 81 88 ff ff  ................
+>      d0 65 13 0b 81 88 ff ff d0 65 13 0b 81 88 ff ff  .e.......e......
+>    backtrace:
+>      [<000000006c752978>] kmemleak_alloc_recursive include/linux/kmemleak.h:43 [inline]
+>      [<000000006c752978>] slab_post_alloc_hook mm/slab.h:439 [inline]
+>      [<000000006c752978>] slab_alloc mm/slab.c:3326 [inline]
+>
+>      [<00000000b3825d52>] kmalloc include/linux/slab.h:547 [inline]
+>      [<00000000b3825d52>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
+>      [<00000000b3825d52>] vhost_net_set_backend drivers/vhost/net.c:1535 [inline]
+>      [<00000000b3825d52>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1717
+>      [<00000000700f02d7>] vfs_ioctl fs/ioctl.c:46 [inline]
+>      [<00000000700f02d7>] file_ioctl fs/ioctl.c:509 [inline]
+>      [<00000000700f02d7>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+>      [<000000009a0ec0a7>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+>      [<00000000d9416323>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+>      [<00000000d9416323>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+>      [<00000000d9416323>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+>      [<00000000e4407a23>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
+>      [<000000008715c149>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>
+> BUG: memory leak
+> unreferenced object 0xffff88810be23700 (size 64):
+>    comm "syz-executor.3", pid 7194, jiffies 4294943823 (age 14.580s)
+>    hex dump (first 32 bytes):
+>      01 00 00 00 00 00 00 00 00 00 00 00 00 c9 ff ff  ................
+>      10 37 e2 0b 81 88 ff ff 10 37 e2 0b 81 88 ff ff  .7.......7......
+>    backtrace:
+>      [<000000006c752978>] kmemleak_alloc_recursive include/linux/kmemleak.h:43 [inline]
+>      [<000000006c752978>] slab_post_alloc_hook mm/slab.h:439 [inline]
+>      [<000000006c752978>] slab_alloc mm/slab.c:3326 [inline]
+>      [<000000006c752978>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
+>      [<00000000b3825d52>] kmalloc include/linux/slab.h:547 [inline]
+>      [<00000000b3825d52>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
+>      [<00000000b3825d52>] vhost_net_set_backend drivers/vhost/net.c:1535 [inline]
+>      [<00000000b3825d52>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1717
+>      [<00000000700f02d7>] vfs_ioctl fs/ioctl.c:46 [inline]
+>      [<00000000700f02d7>] file_ioctl fs/ioctl.c:509 [inline]
+>      [<00000000700f02d7>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+>      [<000000009a0ec0a7>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+>      [<00000000d9416323>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+>      [<00000000d9416323>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+>      [<00000000d9416323>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+>      [<00000000e4407a23>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
+>      [<000000008715c149>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>
+> BUG: memory leak
+> unreferenced object 0xffff88810b136500 (size 64):
+>    comm "syz-executor.6", pid 7228, jiffies 4294943827 (age 14.540s)
+>    hex dump (first 32 bytes):
+>      01 00 00 00 20 69 6f 63 00 00 00 00 64 65 76 2f  .... ioc....dev/
+>      10 65 13 0b 81 88 ff ff 10 65 13 0b 81 88 ff ff  .e.......e......
+>    backtrace:
+>      [<000000006c752978>] kmemleak_alloc_recursive include/linux/kmemleak.h:43 [inline]
+>      [<000000006c752978>] slab_post_alloc_hook mm/slab.h:439 [inline]
+>      [<000000006c752978>] slab_alloc mm/slab.c:3326 [inline]
+>      [<000000006c752978>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
+>      [<00000000b3825d52>] kmalloc include/linux/slab.h:547 [inline]
+>      [<00000000b3825d52>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
+>      [<00000000b3825d52>] vhost_net_set_backend drivers/vhost/net.c:1535 [inline]
+>      [<00000000b3825d52>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1717
+>      [<00000000700f02d7>] vfs_ioctl fs/ioctl.c:46 [inline]
+>      [<00000000700f02d7>] file_ioctl fs/ioctl.c:509 [inline]
+>      [<00000000700f02d7>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+>      [<000000009a0ec0a7>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+>      [<00000000d9416323>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+>      [<00000000d9416323>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+>      [<00000000d9416323>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+>      [<00000000e4407a23>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
+>      [<000000008715c149>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>
+> BUG: memory leak
+> unreferenced object 0xffff88810b9cfec0 (size 64):
+>    comm "syz-executor.7", pid 7236, jiffies 4294943829 (age 14.520s)
+>    hex dump (first 32 bytes):
+>      01 00 00 00 20 69 6f 63 00 00 00 00 64 65 76 2f  .... ioc....dev/
+>      d0 fe 9c 0b 81 88 ff ff d0 fe 9c 0b 81 88 ff ff  ................
+>    backtrace:
+>      [<000000006c752978>] kmemleak_alloc_recursive
+> include/linux/kmemleak.h:43 [inline]
+>      [<000000006c752978>] slab_post_alloc_hook mm/slab.h:439 [inline]
+>      [<000000006c752978>] slab_alloc mm/slab.c:3326 [inline]
+>      [<000000006c752978>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
+>      [<00000000b3825d52>] kmalloc include/linux/slab.h:547 [inline]
+>      [<00000000b3825d52>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
+>      [<00000000b3825d52>] vhost_net_set_backend drivers/vhost/net.c:1535 [inline]
+>      [<00000000b3825d52>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1717
+>      [<00000000700f02d7>] vfs_ioctl fs/ioctl.c:46 [inline]
+>      [<00000000700f02d7>] file_ioctl fs/ioctl.c:509 [inline]
+>      [<00000000700f02d7>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+>      [<000000009a0ec0a7>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+>      [<00000000d9416323>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+>      [<00000000d9416323>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+>      [<00000000d9416323>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+>      [<00000000e4407a23>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
+>      [<000000008715c149>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>
+> BUG: memory leak
+> unreferenced object 0xffff88810b9cd380 (size 64):
+>    comm "syz-executor.4", pid 7218, jiffies 4294943834 (age 14.470s)
+>    hex dump (first 32 bytes):
+>      01 00 00 00 81 88 ff ff 00 00 00 00 81 88 ff ff  ................
+>      90 d3 9c 0b 81 88 ff ff 90 d3 9c 0b 81 88 ff ff  ................
+>    backtrace:
+>      [<000000006c752978>] kmemleak_alloc_recursive include/linux/kmemleak.h:43 [inline]
+>      [<000000006c752978>] slab_post_alloc_hook mm/slab.h:439 [inline]
+>      [<000000006c752978>] slab_alloc mm/slab.c:3326 [inline]
+>      [<000000006c752978>] kmem_cache_alloc_trace+0x13d/0x280 mm/slab.c:3553
+>      [<00000000b3825d52>] kmalloc include/linux/slab.h:547 [inline]
+>      [<00000000b3825d52>] vhost_net_ubuf_alloc drivers/vhost/net.c:241 [inline]
+>      [<00000000b3825d52>] vhost_net_set_backend drivers/vhost/net.c:1535 [inline]
+>      [<00000000b3825d52>] vhost_net_ioctl+0xb43/0xc10 drivers/vhost/net.c:1717
+>      [<00000000700f02d7>] vfs_ioctl fs/ioctl.c:46 [inline]
+>      [<00000000700f02d7>] file_ioctl fs/ioctl.c:509 [inline]
+>      [<00000000700f02d7>] do_vfs_ioctl+0x62a/0x810 fs/ioctl.c:696
+>      [<000000009a0ec0a7>] ksys_ioctl+0x86/0xb0 fs/ioctl.c:713
+>      [<00000000d9416323>] __do_sys_ioctl fs/ioctl.c:720 [inline]
+>      [<00000000d9416323>] __se_sys_ioctl fs/ioctl.c:718 [inline]
+>      [<00000000d9416323>] __x64_sys_ioctl+0x1e/0x30 fs/ioctl.c:718
+>      [<00000000e4407a23>] do_syscall_64+0x76/0x1a0 arch/x86/entry/common.c:301
+>      [<000000008715c149>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>
+>
+>
+> Tested on:
+>
+> commit:         c11fb13a Merge branch 'for-linus' of git://git.kernel.org/..
+> git tree:       upstream
+> console output: https://syzkaller.appspot.com/x/log.txt?x=11c6b666a00000
+> kernel config:  https://syzkaller.appspot.com/x/.config?x=cb38d33cd06d8d48
+> compiler:       gcc (GCC) 9.0.0 20181231 (experimental)
+> patch:          https://syzkaller.appspot.com/x/patch.diff?x=11ff0de1a00000
+>
+
+And I want to try again the following tiny diff made based on the logic:
+
+1_> vhost_net_ubuf_alloc() in the dump info suggests that it is ubuf leak.
+
+2_> commit c38e39c378f4 ("vhost-net: fix use-after-free in vhost_net_flush")
+makes vhost_net_flush() no longer release ubuf.
+
+3_> in both reset_owner and release pathes, see vhost_net_reset_owner() and
+vhost_net_release() please, vq is reset in wake of flush:
+
+        vhost_net_flush(n);
+        vhost_dev_stop(&n->dev);
+        vhost_dev_cleanup(&n->dev);
+        vhost_net_vq_reset(n);
+
+4_> the ubufs pointer is cleared in vhost_net_vq_reset()
+
+
+#syz test: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
+
+Can you give it a shoot please if there is not anything missed in the
+above logic?
+
+
+Thanks
+Hillf
+------->8---
 ---
- drivers/iommu/Kconfig     |   1 +
- drivers/iommu/amd_iommu.c | 677 ++++----------------------------------
- 2 files changed, 68 insertions(+), 610 deletions(-)
+ drivers/vhost/net.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
-index d47913883d1e..19f966db02a8 100644
---- a/drivers/iommu/Kconfig
-+++ b/drivers/iommu/Kconfig
-@@ -138,6 +138,7 @@ config AMD_IOMMU
- 	select PCI_PASID
- 	select IOMMU_API
- 	select IOMMU_IOVA
-+	select IOMMU_DMA
- 	depends on X86_64 && PCI && ACPI
- 	---help---
- 	  With this option you can enable support for AMD IOMMU hardware in
-diff --git a/drivers/iommu/amd_iommu.c b/drivers/iommu/amd_iommu.c
-index fd8da60f7359..ed881c2d8a6b 100644
---- a/drivers/iommu/amd_iommu.c
-+++ b/drivers/iommu/amd_iommu.c
-@@ -20,6 +20,7 @@
- #include <linux/scatterlist.h>
- #include <linux/dma-mapping.h>
- #include <linux/dma-direct.h>
-+#include <linux/dma-iommu.h>
- #include <linux/iommu-helper.h>
- #include <linux/iommu.h>
- #include <linux/delay.h>
-@@ -89,8 +90,6 @@ const struct iommu_ops amd_iommu_ops;
- static ATOMIC_NOTIFIER_HEAD(ppr_notifier);
- int amd_iommu_max_glx_val = -1;
- 
--static const struct dma_map_ops amd_iommu_dma_ops;
--
- /*
-  * general struct to manage commands send to an IOMMU
-  */
-@@ -103,21 +102,6 @@ struct kmem_cache *amd_iommu_irq_cache;
- static void update_domain(struct protection_domain *domain);
- static int protection_domain_init(struct protection_domain *domain);
- static void detach_device(struct device *dev);
--static void iova_domain_flush_tlb(struct iova_domain *iovad);
--
--/*
-- * Data container for a dma_ops specific protection domain
-- */
--struct dma_ops_domain {
--	/* generic protection domain information */
--	struct protection_domain domain;
--
--	/* IOVA RB-Tree */
--	struct iova_domain iovad;
--};
--
--static struct iova_domain reserved_iova_ranges;
--static struct lock_class_key reserved_rbtree_key;
- 
- /****************************************************************************
-  *
-@@ -188,12 +172,6 @@ static struct protection_domain *to_pdomain(struct iommu_domain *dom)
- 	return container_of(dom, struct protection_domain, domain);
- }
- 
--static struct dma_ops_domain* to_dma_ops_domain(struct protection_domain *domain)
--{
--	BUG_ON(domain->flags != PD_DMA_OPS_MASK);
--	return container_of(domain, struct dma_ops_domain, domain);
--}
--
- static struct iommu_dev_data *alloc_dev_data(u16 devid)
- {
- 	struct iommu_dev_data *dev_data;
-@@ -1267,12 +1245,6 @@ static void domain_flush_pages(struct protection_domain *domain,
- 	__domain_flush_pages(domain, address, size, 0);
- }
- 
--/* Flush the whole IO/TLB for a given protection domain */
--static void domain_flush_tlb(struct protection_domain *domain)
--{
--	__domain_flush_pages(domain, 0, CMD_INV_IOMMU_ALL_PAGES_ADDRESS, 0);
--}
--
- /* Flush the whole IO/TLB for a given protection domain - including PDE */
- static void domain_flush_tlb_pde(struct protection_domain *domain)
- {
-@@ -1674,43 +1646,6 @@ static unsigned long iommu_unmap_page(struct protection_domain *dom,
- 	return unmapped;
- }
- 
--/****************************************************************************
-- *
-- * The next functions belong to the address allocator for the dma_ops
-- * interface functions.
-- *
-- ****************************************************************************/
--
--
--static unsigned long dma_ops_alloc_iova(struct device *dev,
--					struct dma_ops_domain *dma_dom,
--					unsigned int pages, u64 dma_mask)
--{
--	unsigned long pfn = 0;
--
--	pages = __roundup_pow_of_two(pages);
--
--	if (dma_mask > DMA_BIT_MASK(32))
--		pfn = alloc_iova_fast(&dma_dom->iovad, pages,
--				      IOVA_PFN(DMA_BIT_MASK(32)), false);
--
--	if (!pfn)
--		pfn = alloc_iova_fast(&dma_dom->iovad, pages,
--				      IOVA_PFN(dma_mask), true);
--
--	return (pfn << PAGE_SHIFT);
--}
--
--static void dma_ops_free_iova(struct dma_ops_domain *dma_dom,
--			      unsigned long address,
--			      unsigned int pages)
--{
--	pages = __roundup_pow_of_two(pages);
--	address >>= PAGE_SHIFT;
--
--	free_iova_fast(&dma_dom->iovad, address, pages);
--}
--
- /****************************************************************************
-  *
-  * The next functions belong to the domain allocation. A domain is
-@@ -1787,38 +1722,23 @@ static void free_gcr3_table(struct protection_domain *domain)
- 	free_page((unsigned long)domain->gcr3_tbl);
- }
- 
--static void dma_ops_domain_flush_tlb(struct dma_ops_domain *dom)
--{
--	domain_flush_tlb(&dom->domain);
--	domain_flush_complete(&dom->domain);
--}
--
--static void iova_domain_flush_tlb(struct iova_domain *iovad)
--{
--	struct dma_ops_domain *dom;
--
--	dom = container_of(iovad, struct dma_ops_domain, iovad);
--
--	dma_ops_domain_flush_tlb(dom);
--}
--
- /*
-  * Free a domain, only used if something went wrong in the
-  * allocation path and we need to free an already allocated page table
-  */
--static void dma_ops_domain_free(struct dma_ops_domain *dom)
-+static void dma_ops_domain_free(struct protection_domain *domain)
- {
--	if (!dom)
-+	if (!domain)
- 		return;
- 
--	put_iova_domain(&dom->iovad);
-+	iommu_put_dma_cookie(&domain->domain);
- 
--	free_pagetable(&dom->domain);
-+	free_pagetable(domain);
- 
--	if (dom->domain.id)
--		domain_id_free(dom->domain.id);
-+	if (domain->id)
-+		domain_id_free(domain->id);
- 
--	kfree(dom);
-+	kfree(domain);
- }
- 
- /*
-@@ -1826,35 +1746,30 @@ static void dma_ops_domain_free(struct dma_ops_domain *dom)
-  * It also initializes the page table and the address allocator data
-  * structures required for the dma_ops interface
-  */
--static struct dma_ops_domain *dma_ops_domain_alloc(void)
-+static struct protection_domain *dma_ops_domain_alloc(void)
- {
--	struct dma_ops_domain *dma_dom;
-+	struct protection_domain *domain;
- 
--	dma_dom = kzalloc(sizeof(struct dma_ops_domain), GFP_KERNEL);
--	if (!dma_dom)
-+	domain = kzalloc(sizeof(struct protection_domain), GFP_KERNEL);
-+	if (!domain)
- 		return NULL;
- 
--	if (protection_domain_init(&dma_dom->domain))
--		goto free_dma_dom;
--
--	dma_dom->domain.mode = PAGE_MODE_3_LEVEL;
--	dma_dom->domain.pt_root = (void *)get_zeroed_page(GFP_KERNEL);
--	dma_dom->domain.flags = PD_DMA_OPS_MASK;
--	if (!dma_dom->domain.pt_root)
--		goto free_dma_dom;
--
--	init_iova_domain(&dma_dom->iovad, PAGE_SIZE, IOVA_START_PFN);
-+	if (protection_domain_init(domain))
-+		goto free_domain;
- 
--	if (init_iova_flush_queue(&dma_dom->iovad, iova_domain_flush_tlb, NULL))
--		goto free_dma_dom;
-+	domain->mode = PAGE_MODE_3_LEVEL;
-+	domain->pt_root = (void *)get_zeroed_page(GFP_KERNEL);
-+	domain->flags = PD_DMA_OPS_MASK;
-+	if (!domain->pt_root)
-+		goto free_domain;
- 
--	/* Initialize reserved ranges */
--	copy_reserved_iova(&reserved_iova_ranges, &dma_dom->iovad);
-+	if (iommu_get_dma_cookie(&domain->domain) == -ENOMEM)
-+		goto free_domain;
- 
--	return dma_dom;
-+	return domain;
- 
--free_dma_dom:
--	dma_ops_domain_free(dma_dom);
-+free_domain:
-+	dma_ops_domain_free(domain);
- 
- 	return NULL;
- }
-@@ -2233,8 +2148,8 @@ static int amd_iommu_add_device(struct device *dev)
- 	domain = iommu_get_domain_for_dev(dev);
- 	if (domain->type == IOMMU_DOMAIN_IDENTITY)
- 		dev_data->passthrough = true;
--	else
--		dev->dma_ops = &amd_iommu_dma_ops;
-+	else if (domain->type == IOMMU_DOMAIN_DMA)
-+		iommu_setup_dma_ops(dev, IOVA_START_PFN << PAGE_SHIFT, 0);
- 
- out:
- 	iommu_completion_wait(iommu);
-@@ -2268,43 +2183,32 @@ static struct iommu_group *amd_iommu_device_group(struct device *dev)
- 	return acpihid_device_group(dev);
- }
- 
-+static int amd_iommu_domain_get_attr(struct iommu_domain *domain,
-+		enum iommu_attr attr, void *data)
-+{
-+	switch (domain->type) {
-+	case IOMMU_DOMAIN_UNMANAGED:
-+		return -ENODEV;
-+	case IOMMU_DOMAIN_DMA:
-+		switch (attr) {
-+		case DOMAIN_ATTR_DMA_USE_FLUSH_QUEUE:
-+			*(int *)data = !amd_iommu_unmap_flush;
-+			return 0;
-+		default:
-+			return -ENODEV;
-+		}
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
- /*****************************************************************************
-  *
-  * The next functions belong to the dma_ops mapping/unmapping code.
-  *
-  *****************************************************************************/
- 
--/*
-- * In the dma_ops path we only have the struct device. This function
-- * finds the corresponding IOMMU, the protection domain and the
-- * requestor id for a given device.
-- * If the device is not yet associated with a domain this is also done
-- * in this function.
-- */
--static struct protection_domain *get_domain(struct device *dev)
--{
--	struct protection_domain *domain;
--	struct iommu_domain *io_domain;
--
--	if (!check_device(dev))
--		return ERR_PTR(-EINVAL);
--
--	domain = get_dev_data(dev)->domain;
--	if (domain == NULL && get_dev_data(dev)->defer_attach) {
--		get_dev_data(dev)->defer_attach = false;
--		io_domain = iommu_get_domain_for_dev(dev);
--		domain = to_pdomain(io_domain);
--		attach_device(dev, domain);
--	}
--	if (domain == NULL)
--		return ERR_PTR(-EBUSY);
--
--	if (!dma_ops_domain(domain))
--		return ERR_PTR(-EBUSY);
--
--	return domain;
--}
--
- static void update_device_table(struct protection_domain *domain)
- {
- 	struct iommu_dev_data *dev_data;
-@@ -2335,447 +2239,6 @@ static void update_domain(struct protection_domain *domain)
- 	domain->updated = false;
- }
- 
--static int dir2prot(enum dma_data_direction direction)
--{
--	if (direction == DMA_TO_DEVICE)
--		return IOMMU_PROT_IR;
--	else if (direction == DMA_FROM_DEVICE)
--		return IOMMU_PROT_IW;
--	else if (direction == DMA_BIDIRECTIONAL)
--		return IOMMU_PROT_IW | IOMMU_PROT_IR;
--	else
--		return 0;
--}
--
--/*
-- * This function contains common code for mapping of a physically
-- * contiguous memory region into DMA address space. It is used by all
-- * mapping functions provided with this IOMMU driver.
-- * Must be called with the domain lock held.
-- */
--static dma_addr_t __map_single(struct device *dev,
--			       struct dma_ops_domain *dma_dom,
--			       phys_addr_t paddr,
--			       size_t size,
--			       enum dma_data_direction direction,
--			       u64 dma_mask)
--{
--	dma_addr_t offset = paddr & ~PAGE_MASK;
--	dma_addr_t address, start, ret;
--	unsigned int pages;
--	int prot = 0;
--	int i;
--
--	pages = iommu_num_pages(paddr, size, PAGE_SIZE);
--	paddr &= PAGE_MASK;
--
--	address = dma_ops_alloc_iova(dev, dma_dom, pages, dma_mask);
--	if (!address)
--		goto out;
--
--	prot = dir2prot(direction);
--
--	start = address;
--	for (i = 0; i < pages; ++i) {
--		ret = iommu_map_page(&dma_dom->domain, start, paddr,
--				     PAGE_SIZE, prot, GFP_ATOMIC);
--		if (ret)
--			goto out_unmap;
--
--		paddr += PAGE_SIZE;
--		start += PAGE_SIZE;
--	}
--	address += offset;
--
--	domain_flush_np_cache(&dma_dom->domain, address, size);
--
--out:
--	return address;
--
--out_unmap:
--
--	for (--i; i >= 0; --i) {
--		start -= PAGE_SIZE;
--		iommu_unmap_page(&dma_dom->domain, start, PAGE_SIZE);
--	}
--
--	domain_flush_tlb(&dma_dom->domain);
--	domain_flush_complete(&dma_dom->domain);
--
--	dma_ops_free_iova(dma_dom, address, pages);
--
--	return DMA_MAPPING_ERROR;
--}
--
--/*
-- * Does the reverse of the __map_single function. Must be called with
-- * the domain lock held too
-- */
--static void __unmap_single(struct dma_ops_domain *dma_dom,
--			   dma_addr_t dma_addr,
--			   size_t size,
--			   int dir)
--{
--	dma_addr_t i, start;
--	unsigned int pages;
--
--	pages = iommu_num_pages(dma_addr, size, PAGE_SIZE);
--	dma_addr &= PAGE_MASK;
--	start = dma_addr;
--
--	for (i = 0; i < pages; ++i) {
--		iommu_unmap_page(&dma_dom->domain, start, PAGE_SIZE);
--		start += PAGE_SIZE;
--	}
--
--	if (amd_iommu_unmap_flush) {
--		domain_flush_tlb(&dma_dom->domain);
--		domain_flush_complete(&dma_dom->domain);
--		dma_ops_free_iova(dma_dom, dma_addr, pages);
--	} else {
--		pages = __roundup_pow_of_two(pages);
--		queue_iova(&dma_dom->iovad, dma_addr >> PAGE_SHIFT, pages, 0);
--	}
--}
--
--/*
-- * The exported map_single function for dma_ops.
-- */
--static dma_addr_t map_page(struct device *dev, struct page *page,
--			   unsigned long offset, size_t size,
--			   enum dma_data_direction dir,
--			   unsigned long attrs)
--{
--	phys_addr_t paddr = page_to_phys(page) + offset;
--	struct protection_domain *domain;
--	struct dma_ops_domain *dma_dom;
--	u64 dma_mask;
--
--	domain = get_domain(dev);
--	if (PTR_ERR(domain) == -EINVAL)
--		return (dma_addr_t)paddr;
--	else if (IS_ERR(domain))
--		return DMA_MAPPING_ERROR;
--
--	dma_mask = *dev->dma_mask;
--	dma_dom = to_dma_ops_domain(domain);
--
--	return __map_single(dev, dma_dom, paddr, size, dir, dma_mask);
--}
--
--/*
-- * The exported unmap_single function for dma_ops.
-- */
--static void unmap_page(struct device *dev, dma_addr_t dma_addr, size_t size,
--		       enum dma_data_direction dir, unsigned long attrs)
--{
--	struct protection_domain *domain;
--	struct dma_ops_domain *dma_dom;
--
--	domain = get_domain(dev);
--	if (IS_ERR(domain))
--		return;
--
--	dma_dom = to_dma_ops_domain(domain);
--
--	__unmap_single(dma_dom, dma_addr, size, dir);
--}
--
--static int sg_num_pages(struct device *dev,
--			struct scatterlist *sglist,
--			int nelems)
--{
--	unsigned long mask, boundary_size;
--	struct scatterlist *s;
--	int i, npages = 0;
--
--	mask          = dma_get_seg_boundary(dev);
--	boundary_size = mask + 1 ? ALIGN(mask + 1, PAGE_SIZE) >> PAGE_SHIFT :
--				   1UL << (BITS_PER_LONG - PAGE_SHIFT);
--
--	for_each_sg(sglist, s, nelems, i) {
--		int p, n;
--
--		s->dma_address = npages << PAGE_SHIFT;
--		p = npages % boundary_size;
--		n = iommu_num_pages(sg_phys(s), s->length, PAGE_SIZE);
--		if (p + n > boundary_size)
--			npages += boundary_size - p;
--		npages += n;
--	}
--
--	return npages;
--}
--
--/*
-- * The exported map_sg function for dma_ops (handles scatter-gather
-- * lists).
-- */
--static int map_sg(struct device *dev, struct scatterlist *sglist,
--		  int nelems, enum dma_data_direction direction,
--		  unsigned long attrs)
--{
--	int mapped_pages = 0, npages = 0, prot = 0, i;
--	struct protection_domain *domain;
--	struct dma_ops_domain *dma_dom;
--	struct scatterlist *s;
--	unsigned long address;
--	u64 dma_mask;
--	int ret;
--
--	domain = get_domain(dev);
--	if (IS_ERR(domain))
--		return 0;
--
--	dma_dom  = to_dma_ops_domain(domain);
--	dma_mask = *dev->dma_mask;
--
--	npages = sg_num_pages(dev, sglist, nelems);
--
--	address = dma_ops_alloc_iova(dev, dma_dom, npages, dma_mask);
--	if (address == DMA_MAPPING_ERROR)
--		goto out_err;
--
--	prot = dir2prot(direction);
--
--	/* Map all sg entries */
--	for_each_sg(sglist, s, nelems, i) {
--		int j, pages = iommu_num_pages(sg_phys(s), s->length, PAGE_SIZE);
--
--		for (j = 0; j < pages; ++j) {
--			unsigned long bus_addr, phys_addr;
--
--			bus_addr  = address + s->dma_address + (j << PAGE_SHIFT);
--			phys_addr = (sg_phys(s) & PAGE_MASK) + (j << PAGE_SHIFT);
--			ret = iommu_map_page(domain, bus_addr, phys_addr, PAGE_SIZE, prot, GFP_ATOMIC);
--			if (ret)
--				goto out_unmap;
--
--			mapped_pages += 1;
--		}
--	}
--
--	/* Everything is mapped - write the right values into s->dma_address */
--	for_each_sg(sglist, s, nelems, i) {
--		/*
--		 * Add in the remaining piece of the scatter-gather offset that
--		 * was masked out when we were determining the physical address
--		 * via (sg_phys(s) & PAGE_MASK) earlier.
--		 */
--		s->dma_address += address + (s->offset & ~PAGE_MASK);
--		s->dma_length   = s->length;
--	}
--
--	if (s)
--		domain_flush_np_cache(domain, s->dma_address, s->dma_length);
--
--	return nelems;
--
--out_unmap:
--	dev_err(dev, "IOMMU mapping error in map_sg (io-pages: %d reason: %d)\n",
--		npages, ret);
--
--	for_each_sg(sglist, s, nelems, i) {
--		int j, pages = iommu_num_pages(sg_phys(s), s->length, PAGE_SIZE);
--
--		for (j = 0; j < pages; ++j) {
--			unsigned long bus_addr;
--
--			bus_addr  = address + s->dma_address + (j << PAGE_SHIFT);
--			iommu_unmap_page(domain, bus_addr, PAGE_SIZE);
--
--			if (--mapped_pages == 0)
--				goto out_free_iova;
--		}
--	}
--
--out_free_iova:
--	free_iova_fast(&dma_dom->iovad, address >> PAGE_SHIFT, npages);
--
--out_err:
--	return 0;
--}
--
--/*
-- * The exported map_sg function for dma_ops (handles scatter-gather
-- * lists).
-- */
--static void unmap_sg(struct device *dev, struct scatterlist *sglist,
--		     int nelems, enum dma_data_direction dir,
--		     unsigned long attrs)
--{
--	struct protection_domain *domain;
--	struct dma_ops_domain *dma_dom;
--	unsigned long startaddr;
--	int npages;
--
--	domain = get_domain(dev);
--	if (IS_ERR(domain))
--		return;
--
--	startaddr = sg_dma_address(sglist) & PAGE_MASK;
--	dma_dom   = to_dma_ops_domain(domain);
--	npages    = sg_num_pages(dev, sglist, nelems);
--
--	__unmap_single(dma_dom, startaddr, npages << PAGE_SHIFT, dir);
--}
--
--/*
-- * The exported alloc_coherent function for dma_ops.
-- */
--static void *alloc_coherent(struct device *dev, size_t size,
--			    dma_addr_t *dma_addr, gfp_t flag,
--			    unsigned long attrs)
--{
--	u64 dma_mask = dev->coherent_dma_mask;
--	struct protection_domain *domain;
--	struct dma_ops_domain *dma_dom;
--	struct page *page;
--
--	domain = get_domain(dev);
--	if (PTR_ERR(domain) == -EINVAL) {
--		page = alloc_pages(flag, get_order(size));
--		*dma_addr = page_to_phys(page);
--		return page_address(page);
--	} else if (IS_ERR(domain))
--		return NULL;
--
--	dma_dom   = to_dma_ops_domain(domain);
--	size	  = PAGE_ALIGN(size);
--	dma_mask  = dev->coherent_dma_mask;
--	flag     &= ~(__GFP_DMA | __GFP_HIGHMEM | __GFP_DMA32);
--	flag     |= __GFP_ZERO;
--
--	page = alloc_pages(flag | __GFP_NOWARN,  get_order(size));
--	if (!page) {
--		if (!gfpflags_allow_blocking(flag))
--			return NULL;
--
--		page = dma_alloc_from_contiguous(dev, size >> PAGE_SHIFT,
--					get_order(size), flag & __GFP_NOWARN);
--		if (!page)
--			return NULL;
--	}
--
--	if (!dma_mask)
--		dma_mask = *dev->dma_mask;
--
--	*dma_addr = __map_single(dev, dma_dom, page_to_phys(page),
--				 size, DMA_BIDIRECTIONAL, dma_mask);
--
--	if (*dma_addr == DMA_MAPPING_ERROR)
--		goto out_free;
--
--	return page_address(page);
--
--out_free:
--
--	if (!dma_release_from_contiguous(dev, page, size >> PAGE_SHIFT))
--		__free_pages(page, get_order(size));
--
--	return NULL;
--}
--
--/*
-- * The exported free_coherent function for dma_ops.
-- */
--static void free_coherent(struct device *dev, size_t size,
--			  void *virt_addr, dma_addr_t dma_addr,
--			  unsigned long attrs)
--{
--	struct protection_domain *domain;
--	struct dma_ops_domain *dma_dom;
--	struct page *page;
--
--	page = virt_to_page(virt_addr);
--	size = PAGE_ALIGN(size);
--
--	domain = get_domain(dev);
--	if (IS_ERR(domain))
--		goto free_mem;
--
--	dma_dom = to_dma_ops_domain(domain);
--
--	__unmap_single(dma_dom, dma_addr, size, DMA_BIDIRECTIONAL);
--
--free_mem:
--	if (!dma_release_from_contiguous(dev, page, size >> PAGE_SHIFT))
--		__free_pages(page, get_order(size));
--}
--
--/*
-- * This function is called by the DMA layer to find out if we can handle a
-- * particular device. It is part of the dma_ops.
-- */
--static int amd_iommu_dma_supported(struct device *dev, u64 mask)
--{
--	if (!dma_direct_supported(dev, mask))
--		return 0;
--	return check_device(dev);
--}
--
--static const struct dma_map_ops amd_iommu_dma_ops = {
--	.alloc		= alloc_coherent,
--	.free		= free_coherent,
--	.map_page	= map_page,
--	.unmap_page	= unmap_page,
--	.map_sg		= map_sg,
--	.unmap_sg	= unmap_sg,
--	.dma_supported	= amd_iommu_dma_supported,
--};
--
--static int init_reserved_iova_ranges(void)
--{
--	struct pci_dev *pdev = NULL;
--	struct iova *val;
--
--	init_iova_domain(&reserved_iova_ranges, PAGE_SIZE, IOVA_START_PFN);
--
--	lockdep_set_class(&reserved_iova_ranges.iova_rbtree_lock,
--			  &reserved_rbtree_key);
--
--	/* MSI memory range */
--	val = reserve_iova(&reserved_iova_ranges,
--			   IOVA_PFN(MSI_RANGE_START), IOVA_PFN(MSI_RANGE_END));
--	if (!val) {
--		pr_err("Reserving MSI range failed\n");
--		return -ENOMEM;
--	}
--
--	/* HT memory range */
--	val = reserve_iova(&reserved_iova_ranges,
--			   IOVA_PFN(HT_RANGE_START), IOVA_PFN(HT_RANGE_END));
--	if (!val) {
--		pr_err("Reserving HT range failed\n");
--		return -ENOMEM;
--	}
--
--	/*
--	 * Memory used for PCI resources
--	 * FIXME: Check whether we can reserve the PCI-hole completly
--	 */
--	for_each_pci_dev(pdev) {
--		int i;
--
--		for (i = 0; i < PCI_NUM_RESOURCES; ++i) {
--			struct resource *r = &pdev->resource[i];
--
--			if (!(r->flags & IORESOURCE_MEM))
--				continue;
--
--			val = reserve_iova(&reserved_iova_ranges,
--					   IOVA_PFN(r->start),
--					   IOVA_PFN(r->end));
--			if (!val) {
--				pci_err(pdev, "Reserve pci-resource range %pR failed\n", r);
--				return -ENOMEM;
--			}
--		}
--	}
--
--	return 0;
--}
--
- int __init amd_iommu_init_api(void)
- {
- 	int ret, err = 0;
-@@ -2784,10 +2247,6 @@ int __init amd_iommu_init_api(void)
- 	if (ret)
- 		return ret;
- 
--	ret = init_reserved_iova_ranges();
--	if (ret)
--		return ret;
--
- 	err = bus_set_iommu(&pci_bus_type, &amd_iommu_ops);
- 	if (err)
- 		return err;
-@@ -2888,7 +2347,6 @@ static struct protection_domain *protection_domain_alloc(void)
- static struct iommu_domain *amd_iommu_domain_alloc(unsigned type)
- {
- 	struct protection_domain *pdomain;
--	struct dma_ops_domain *dma_domain;
- 
- 	switch (type) {
- 	case IOMMU_DOMAIN_UNMANAGED:
-@@ -2909,12 +2367,11 @@ static struct iommu_domain *amd_iommu_domain_alloc(unsigned type)
- 
- 		break;
- 	case IOMMU_DOMAIN_DMA:
--		dma_domain = dma_ops_domain_alloc();
--		if (!dma_domain) {
-+		pdomain = dma_ops_domain_alloc();
-+		if (!pdomain) {
- 			pr_err("Failed to allocate\n");
- 			return NULL;
- 		}
--		pdomain = &dma_domain->domain;
- 		break;
- 	case IOMMU_DOMAIN_IDENTITY:
- 		pdomain = protection_domain_alloc();
-@@ -2933,7 +2390,6 @@ static struct iommu_domain *amd_iommu_domain_alloc(unsigned type)
- static void amd_iommu_domain_free(struct iommu_domain *dom)
- {
- 	struct protection_domain *domain;
--	struct dma_ops_domain *dma_dom;
- 
- 	domain = to_pdomain(dom);
- 
-@@ -2948,8 +2404,7 @@ static void amd_iommu_domain_free(struct iommu_domain *dom)
- 	switch (dom->type) {
- 	case IOMMU_DOMAIN_DMA:
- 		/* Now release the domain */
--		dma_dom = to_dma_ops_domain(domain);
--		dma_ops_domain_free(dma_dom);
-+		dma_ops_domain_free(domain);
- 		break;
- 	default:
- 		if (domain->mode != PAGE_MODE_NONE)
-@@ -3005,6 +2460,7 @@ static int amd_iommu_attach_device(struct iommu_domain *dom,
- 		return -EINVAL;
- 
- 	dev_data = dev->archdata.iommu;
-+	dev_data->defer_attach = false;
- 
- 	iommu = amd_iommu_rlookup_table[dev_data->devid];
- 	if (!iommu)
-@@ -3161,19 +2617,6 @@ static void amd_iommu_put_resv_regions(struct device *dev,
- 		kfree(entry);
- }
- 
--static void amd_iommu_apply_resv_region(struct device *dev,
--				      struct iommu_domain *domain,
--				      struct iommu_resv_region *region)
--{
--	struct dma_ops_domain *dma_dom = to_dma_ops_domain(to_pdomain(domain));
--	unsigned long start, end;
--
--	start = IOVA_PFN(region->start);
--	end   = IOVA_PFN(region->start + region->length - 1);
--
--	WARN_ON_ONCE(reserve_iova(&dma_dom->iovad, start, end) == NULL);
--}
--
- static bool amd_iommu_is_attach_deferred(struct iommu_domain *domain,
- 					 struct device *dev)
- {
-@@ -3206,9 +2649,9 @@ const struct iommu_ops amd_iommu_ops = {
- 	.add_device = amd_iommu_add_device,
- 	.remove_device = amd_iommu_remove_device,
- 	.device_group = amd_iommu_device_group,
-+	.domain_get_attr = amd_iommu_domain_get_attr,
- 	.get_resv_regions = amd_iommu_get_resv_regions,
- 	.put_resv_regions = amd_iommu_put_resv_regions,
--	.apply_resv_region = amd_iommu_apply_resv_region,
- 	.is_attach_deferred = amd_iommu_is_attach_deferred,
- 	.pgsize_bitmap	= AMD_IOMMU_PGSIZES,
- 	.flush_iotlb_all = amd_iommu_flush_iotlb_all,
-@@ -3523,9 +2966,23 @@ EXPORT_SYMBOL(amd_iommu_complete_ppr);
- struct iommu_domain *amd_iommu_get_v2_domain(struct pci_dev *pdev)
- {
- 	struct protection_domain *pdomain;
-+	struct iommu_domain *io_domain;
-+	struct device *dev = &pdev->dev;
-+
-+	if (!check_device(dev))
-+		return NULL;
-+
-+	pdomain = get_dev_data(dev)->domain;
-+	if (pdomain == NULL && get_dev_data(dev)->defer_attach) {
-+		get_dev_data(dev)->defer_attach = false;
-+		io_domain = iommu_get_domain_for_dev(dev);
-+		pdomain = to_pdomain(io_domain);
-+		attach_device(dev, pdomain);
-+	}
-+	if (pdomain == NULL)
-+		return NULL;
- 
--	pdomain = get_domain(&pdev->dev);
--	if (IS_ERR(pdomain))
-+	if (!dma_ops_domain(pdomain))
- 		return NULL;
- 
- 	/* Only return IOMMUv2 domains */
--- 
-2.20.1
+diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
+index 3beb401..87db9b3 100644
+--- a/drivers/vhost/net.c
++++ b/drivers/vhost/net.c
+@@ -309,6 +309,8 @@ static void vhost_net_vq_reset(struct vhost_net *n)
+ 	for (i = 0; i < VHOST_NET_VQ_MAX; i++) {
+ 		n->vqs[i].done_idx = 0;
+ 		n->vqs[i].upend_idx = 0;
++		if (n->vqs[i].ubufs)
++			vhost_net_ubuf_put_wait_and_free(n->vqs[i].ubufs);
+ 		n->vqs[i].ubufs = NULL;
+ 		n->vqs[i].vhost_hlen = 0;
+ 		n->vqs[i].sock_hlen = 0;
+--
 
 _______________________________________________
 Virtualization mailing list
