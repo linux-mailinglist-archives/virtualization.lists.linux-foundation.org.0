@@ -2,73 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95F8D46A2E
-	for <lists.virtualization@lfdr.de>; Fri, 14 Jun 2019 22:37:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89ED146BF6
+	for <lists.virtualization@lfdr.de>; Fri, 14 Jun 2019 23:36:21 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id BD6B1FC2;
-	Fri, 14 Jun 2019 20:37:07 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 375DFED9;
+	Fri, 14 Jun 2019 21:36:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 76878FC2
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B7D4D1231
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 14 Jun 2019 20:37:06 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E5676822
+	Fri, 14 Jun 2019 21:36:12 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2D0BAE5
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 14 Jun 2019 20:37:05 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id m10so5242934edv.6
-	for <virtualization@lists.linux-foundation.org>;
-	Fri, 14 Jun 2019 13:37:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=Y9RKgY0+3FkjSX0Oldmu3gGGi6J9Dx0mTVEOdTGhQwU=;
-	b=BPfkevHAKLwcTEw0iqHFXr8QiwGBGtYDzLrlPA04hLqsksgpZSe8k1jkI+UeyWJCq0
-	bzYSraRuURwxAl6JOFAj1AjqcABPYDgSWlvxFGBSdSQAMcRaz1OOnyQjz3xnOfl1CwyA
-	mnEW049jvD964PgHDYJaWX322cLd5Um9CNf7Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Y9RKgY0+3FkjSX0Oldmu3gGGi6J9Dx0mTVEOdTGhQwU=;
-	b=iX+lxlWYJYrqdIlo+/dVpnIiacSTGNz5/V8BA4gost0TSo4poYwC36zbAp5q8xqS2j
-	dDJ7E2MJDDci/v/cu/ULlZGHrO+HadjgXafCpiAQHJ3FqW82A8Kqw+QNV3+qa3J91TpG
-	vlF7JEpPSPVgRbwnmQXoICYbiFBVYOUMC38HhteI4byYmbhTlJidMY0Z0lidaBmtQZEm
-	B+WrndZDFBn7goz26lLRC3IWhL+t7LB8OLcStzsPniATR7jQzJIR2xEZvvdx8hSzFW7J
-	VMBrV//gJz+s7t5zX+StxYOMEBesrGrnYc2GH4ZfIxx254Nxoc3BkX0pmutJczAKmuMO
-	lXnw==
-X-Gm-Message-State: APjAAAUrYlFFZDIWBfehncUV434VWrB9yjiWHetHiELmFFqv9btPV8km
-	B5f1VGamTD1MJzSvoU5TIHgfEA==
-X-Google-Smtp-Source: APXvYqzkCm47/FYrY7Q0W3jwPMfoOrKGsg0RU324Ysjn2Lsd6f06AYcd7EAKzECV9fCuHygeacDimA==
-X-Received: by 2002:a50:8825:: with SMTP id b34mr25676201edb.22.1560544624634; 
-	Fri, 14 Jun 2019 13:37:04 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id
-	n15sm1166672edd.49.2019.06.14.13.37.03
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 14 Jun 2019 13:37:04 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Subject: [PATCH 37/59] drm/virtio: Drop drm_gem_prime_export/import
-Date: Fri, 14 Jun 2019 22:35:53 +0200
-Message-Id: <20190614203615.12639-38-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190614203615.12639-1-daniel.vetter@ffwll.ch>
+	Fri, 14 Jun 2019 21:36:12 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by asavdk3.altibox.net (Postfix) with ESMTPS id 837A32002E;
+	Fri, 14 Jun 2019 23:36:07 +0200 (CEST)
+Date: Fri, 14 Jun 2019 23:36:06 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Subject: Re: [PATCH 06/59] drm/prime: Actually remove DRIVER_PRIME everywhere
+Message-ID: <20190614213606.GB19476@ravnborg.org>
 References: <20190614203615.12639-1-daniel.vetter@ffwll.ch>
+	<20190614203615.12639-7-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190614203615.12639-7-daniel.vetter@ffwll.ch>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=dqr19Wo4 c=1 sm=1 tr=0
+	a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+	a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10
+	a=GAxTd-NkrUytLa5Px2AA:9 a=CjuIK1q_8ugA:10
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel.vetter@ffwll.ch>,
-	Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+	DRI Development <dri-devel@lists.freedesktop.org>,
 	virtualization@lists.linux-foundation.org,
-	Daniel Vetter <daniel.vetter@intel.com>
+	Daniel Vetter <daniel.vetter@intel.com>,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+	amd-gfx@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+	VMware Graphics <linux-graphics-maintainer@vmware.com>,
+	NXP Linux Team <linux-imx@nxp.com>,
+	spice-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+	Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+	etnaviv@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+	linux-tegra@vger.kernel.org, linux-amlogic@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org, linux-renesas-soc@vger.kernel.org,
+	freedreno@lists.freedesktop.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -85,35 +75,24 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-They're the default.
+Hi Daniel.
 
-Aside: Would be really nice to switch the others over to
-drm_gem_object_funcs.
+Minor nitpick..
 
-Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-Cc: David Airlie <airlied@linux.ie>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: virtualization@lists.linux-foundation.org
----
- drivers/gpu/drm/virtio/virtgpu_drv.c | 2 --
- 1 file changed, 2 deletions(-)
+> diff --git a/drivers/gpu/drm/i915/i915_drv.c b/drivers/gpu/drm/i915/i915_drv.c
+> index 65d599065709..4fd09a9ad67a 100644
+> --- a/drivers/gpu/drm/i915/i915_drv.c
+> +++ b/drivers/gpu/drm/i915/i915_drv.c
+> @@ -3193,7 +3193,7 @@ static struct drm_driver driver = {
+>  	 * deal with them for Intel hardware.
+>  	 */
+>  	.driver_features =
+> -	    DRIVER_GEM | DRIVER_PRIME |
+> +	    DRIVER_GEM | 
+>  	    DRIVER_RENDER | DRIVER_MODESET | DRIVER_ATOMIC | DRIVER_SYNCOBJ,
+Adds a whitespace.
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
-index 0afdf51fdcfd..99bcd290f1fb 100644
---- a/drivers/gpu/drm/virtio/virtgpu_drv.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
-@@ -207,8 +207,6 @@ static struct drm_driver driver = {
- #endif
- 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--	.gem_prime_export = drm_gem_prime_export,
--	.gem_prime_import = drm_gem_prime_import,
- 	.gem_prime_get_sg_table = virtgpu_gem_prime_get_sg_table,
- 	.gem_prime_import_sg_table = virtgpu_gem_prime_import_sg_table,
- 	.gem_prime_vmap = virtgpu_gem_prime_vmap,
--- 
-2.20.1
-
+	Sam
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
