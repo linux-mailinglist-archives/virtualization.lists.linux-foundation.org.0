@@ -2,63 +2,47 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89ED146BF6
-	for <lists.virtualization@lfdr.de>; Fri, 14 Jun 2019 23:36:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27C4646DC1
+	for <lists.virtualization@lfdr.de>; Sat, 15 Jun 2019 04:20:46 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 375DFED9;
-	Fri, 14 Jun 2019 21:36:15 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3795F1720;
+	Sat, 15 Jun 2019 02:20:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id B7D4D1231
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id F3090171C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 14 Jun 2019 21:36:12 +0000 (UTC)
+	Sat, 15 Jun 2019 02:20:39 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2D0BAE5
+Received: from shards.monkeyblade.net (shards.monkeyblade.net [23.128.96.9])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id ABD5EE5
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 14 Jun 2019 21:36:12 +0000 (UTC)
-Received: from ravnborg.org (unknown [158.248.194.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by asavdk3.altibox.net (Postfix) with ESMTPS id 837A32002E;
-	Fri, 14 Jun 2019 23:36:07 +0200 (CEST)
-Date: Fri, 14 Jun 2019 23:36:06 +0200
-From: Sam Ravnborg <sam@ravnborg.org>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: Re: [PATCH 06/59] drm/prime: Actually remove DRIVER_PRIME everywhere
-Message-ID: <20190614213606.GB19476@ravnborg.org>
-References: <20190614203615.12639-1-daniel.vetter@ffwll.ch>
-	<20190614203615.12639-7-daniel.vetter@ffwll.ch>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190614203615.12639-7-daniel.vetter@ffwll.ch>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.3 cv=dqr19Wo4 c=1 sm=1 tr=0
-	a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
-	a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10
-	a=GAxTd-NkrUytLa5Px2AA:9 a=CjuIK1q_8ugA:10
+	Sat, 15 Jun 2019 02:20:39 +0000 (UTC)
+Received: from localhost (unknown [IPv6:2601:601:9f80:35cd::3d5])
+	(using TLSv1 with cipher AES256-SHA (256/256 bits))
+	(Client did not present a certificate)
+	(Authenticated sender: davem-davemloft)
+	by shards.monkeyblade.net (Postfix) with ESMTPSA id DC3BF134116D6;
+	Fri, 14 Jun 2019 19:20:38 -0700 (PDT)
+Date: Fri, 14 Jun 2019 19:20:38 -0700 (PDT)
+Message-Id: <20190614.192038.685198515789181601.davem@davemloft.net>
+To: sunilmut@microsoft.com
+Subject: Re: [PATCH net-next] vsock: correct removal of socket from the list
+From: David Miller <davem@davemloft.net>
+In-Reply-To: <MW2PR2101MB11162BBAEC52B232A7B1EFAFC0EF0@MW2PR2101MB1116.namprd21.prod.outlook.com>
+References: <MW2PR2101MB11162BBAEC52B232A7B1EFAFC0EF0@MW2PR2101MB1116.namprd21.prod.outlook.com>
+X-Mailer: Mew version 6.8 on Emacs 26.1
+Mime-Version: 1.0
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
+	(shards.monkeyblade.net [149.20.54.216]);
+	Fri, 14 Jun 2019 19:20:39 -0700 (PDT)
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
-	DRI Development <dri-devel@lists.freedesktop.org>,
-	virtualization@lists.linux-foundation.org,
-	Daniel Vetter <daniel.vetter@intel.com>,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
-	VMware Graphics <linux-graphics-maintainer@vmware.com>,
-	NXP Linux Team <linux-imx@nxp.com>,
-	spice-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
-	Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
-	etnaviv@lists.freedesktop.org, xen-devel@lists.xenproject.org,
-	linux-tegra@vger.kernel.org, linux-amlogic@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org, linux-renesas-soc@vger.kernel.org,
-	freedreno@lists.freedesktop.org
+Cc: netdev@vger.kernel.org, decui@microsoft.com, kvm@vger.kernel.org,
+	stefanha@redhat.com, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,24 +59,20 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Hi Daniel.
+From: Sunil Muthuswamy <sunilmut@microsoft.com>
+Date: Thu, 13 Jun 2019 03:52:27 +0000
 
-Minor nitpick..
+> The current vsock code for removal of socket from the list is both
+> subject to race and inefficient. It takes the lock, checks whether
+> the socket is in the list, drops the lock and if the socket was on the
+> list, deletes it from the list. This is subject to race because as soon
+> as the lock is dropped once it is checked for presence, that condition
+> cannot be relied upon for any decision. It is also inefficient because
+> if the socket is present in the list, it takes the lock twice.
+> 
+> Signed-off-by: Sunil Muthuswamy <sunilmut@microsoft.com>
 
-> diff --git a/drivers/gpu/drm/i915/i915_drv.c b/drivers/gpu/drm/i915/i915_drv.c
-> index 65d599065709..4fd09a9ad67a 100644
-> --- a/drivers/gpu/drm/i915/i915_drv.c
-> +++ b/drivers/gpu/drm/i915/i915_drv.c
-> @@ -3193,7 +3193,7 @@ static struct drm_driver driver = {
->  	 * deal with them for Intel hardware.
->  	 */
->  	.driver_features =
-> -	    DRIVER_GEM | DRIVER_PRIME |
-> +	    DRIVER_GEM | 
->  	    DRIVER_RENDER | DRIVER_MODESET | DRIVER_ATOMIC | DRIVER_SYNCOBJ,
-Adds a whitespace.
-
-	Sam
+Applied.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
