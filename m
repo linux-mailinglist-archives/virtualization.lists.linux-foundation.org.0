@@ -2,70 +2,71 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E28648520
-	for <lists.virtualization@lfdr.de>; Mon, 17 Jun 2019 16:18:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 578B848522
+	for <lists.virtualization@lfdr.de>; Mon, 17 Jun 2019 16:18:35 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 7B3FEACC;
-	Mon, 17 Jun 2019 14:18:13 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C9763D81;
+	Mon, 17 Jun 2019 14:18:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9ACFDACC
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B7994B4B
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 14:18:11 +0000 (UTC)
+	Mon, 17 Jun 2019 14:18:24 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
 Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
 	[209.85.208.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 05D332C3
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 21FDF2C3
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 14:18:10 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id d4so16380266edr.13
+	Mon, 17 Jun 2019 14:18:24 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id i11so16453782edq.0
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 07:18:10 -0700 (PDT)
+	Mon, 17 Jun 2019 07:18:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
 	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
 	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=U2V9LJPWxdq3Nk0NdolFrZTzs3MZNPXv0KUg5LpciuY=;
-	b=TX9y/JY5+hWC5Xm03AWZ7CFI378GG+jP0eC99ozrl7NkaoFW7f2OyEKmFeRlTvFdZT
-	mdBp9hIJKhB/xFbTv3WTXFNOIL+SPWdM7qHW4Yl7/gp+275Kk4xi7OuN+a9JSaDJfGDY
-	DR3ea0qGW/U8eTxdzsyRLfEoBA3bDdI7LjFHw=
+	bh=255cRppfmUAELVuEBOpb3q7EnIYgii6r3uBAfeCWFHg=;
+	b=QXZd0Hes9umi74jp07G814dRb7D+MKScfq/PvUjRyLM3zoC9fLVKkvWV5netvsA25k
+	NUIsYDd14TDgOSfnvPb2WwyUPm83bP8nmQLJSaq/NYP2ZdXgIcMHoCO2X22RiLjgNXAc
+	VYe43lVvPYBw1dig7MLt4yFnORiY0r9qeYQAM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
 	:mail-followup-to:references:mime-version:content-disposition
 	:in-reply-to:user-agent;
-	bh=U2V9LJPWxdq3Nk0NdolFrZTzs3MZNPXv0KUg5LpciuY=;
-	b=R7nVDxeiF72P4ERPQqkZc5NUxjwr3F5kjgycCNIxn0hQjuXggv9NivWVpreuYx0TJO
-	ChO0w30g7pHwT6LKKpKuB7Eiw5h89feORZZ0i85Y0YTbJo7SSSMHZXdvSt94Z8AQwFsT
-	oypU3a3O4mI2cfxL6GXB7wiWZNslYhzPVHh/e3IsDKqoMGMVHkLKbgtOlZhlDO4M/NSz
-	lXTa+55m34+/k8qhrre8oTSZpTljfCLkywQDdX+JiGzEEpqjtarbQIgfxbNZ//33c8jz
-	6FrDetqjzdNWU8/2W8xrgMoyIfpVFKGJHIG2p1U/J+BLxsa1gcokd8EQwe/G5ofcMta0
-	Bptw==
-X-Gm-Message-State: APjAAAVXwilXLyPTBTcbaehVkS+hKchAW6POQhug3jdrH4ebBrSGMMgf
-	nYI1xhrE1YSCC8wzAdAVUzU7xbje8ro=
-X-Google-Smtp-Source: APXvYqxt2wSFUMgJfQfTbf6PTQBIyVKZ3jLP6op9fPVtWFiQN/oXdv9RZbjIFHvLB1CrQt7BljrzOg==
-X-Received: by 2002:a50:9168:: with SMTP id f37mr11016448eda.242.1560781089631;
-	Mon, 17 Jun 2019 07:18:09 -0700 (PDT)
+	bh=255cRppfmUAELVuEBOpb3q7EnIYgii6r3uBAfeCWFHg=;
+	b=tT/Km0hha5YEaqZhdhUlIK4AoDOJN1Cbfm8ZtqBRV3zDtBqHJmDvb79HhXr92E7tYF
+	3oPJomvFyMrELgG5bNRLZZS8mR7ms83nvIxBVNdqEwkRURECcfzmpgpfYCJomVG6O37U
+	CkGxrImX44XZIxQWohiOJyD3h+d6DuQV8OiGVhap3hLziSD7XRmJcWVcfCOtHRAsMNyz
+	ioQRbCHgu/qEAMn5yEwXPmQi7OzhI7dc9XA/Ze2M2fRa056MFeNnW0+bYFuu6+4bNlw+
+	mlO7tRc/LDAS3RF/2EDBhGCyZJVBlGV33DYROdS0KE3/PG4YIvGsbgNwpq3dzBItcFHO
+	Y53g==
+X-Gm-Message-State: APjAAAU3eWGkcB/i2ZUb+ZrwoAJzPtwNFwHMjSxH0xsvUEi8O6xaSAQf
+	POqfmzn9m5KN3GY5ThJCIa9czQ==
+X-Google-Smtp-Source: APXvYqxDQv3y3Qn61R/NUrw/NJLZtfJcmIB9+oQ+MQzul0tqmu/Xxh75ou9bVBEZdpcSUMhFOByM5g==
+X-Received: by 2002:a17:906:644c:: with SMTP id
+	l12mr45333686ejn.199.1560781102836; 
+	Mon, 17 Jun 2019 07:18:22 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id 14sm1868433ejj.12.2019.06.17.07.18.08
+	by smtp.gmail.com with ESMTPSA id f3sm2186344ejc.15.2019.06.17.07.18.21
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Mon, 17 Jun 2019 07:18:08 -0700 (PDT)
-Date: Mon, 17 Jun 2019 16:18:06 +0200
+	Mon, 17 Jun 2019 07:18:21 -0700 (PDT)
+Date: Mon, 17 Jun 2019 16:18:19 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH 3/4] drm/virtio: simplify cursor updates
-Message-ID: <20190617141806.GG12905@phenom.ffwll.local>
+Subject: Re: [PATCH 4/4] drm/virtio: remove virtio_gpu_object_wait
+Message-ID: <20190617141819.GH12905@phenom.ffwll.local>
 Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
 	dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
 	"open list:VIRTIO GPU DRIVER"
 	<virtualization@lists.linux-foundation.org>, 
 	open list <linux-kernel@vger.kernel.org>
 References: <20190617111406.14765-1-kraxel@redhat.com>
-	<20190617111406.14765-4-kraxel@redhat.com>
+	<20190617111406.14765-5-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190617111406.14765-4-kraxel@redhat.com>
+In-Reply-To: <20190617111406.14765-5-kraxel@redhat.com>
 X-Operating-System: Linux phenom 4.19.0-5-amd64 
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -92,56 +93,51 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Jun 17, 2019 at 01:14:05PM +0200, Gerd Hoffmann wrote:
-> No need to do the reservation dance,
-> we can just wait on the fence directly.
+On Mon, Jun 17, 2019 at 01:14:06PM +0200, Gerd Hoffmann wrote:
+> No users left.
 > 
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  drivers/gpu/drm/virtio/virtgpu_plane.c | 13 +++----------
->  1 file changed, 3 insertions(+), 10 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
-> index 024c2aa0c929..4b805bf466d3 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
-> @@ -184,7 +184,6 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
->  	struct virtio_gpu_framebuffer *vgfb;
->  	struct virtio_gpu_object *bo = NULL;
->  	uint32_t handle;
-> -	int ret = 0;
->  
->  	if (plane->state->crtc)
->  		output = drm_crtc_to_virtio_gpu_output(plane->state->crtc);
-> @@ -208,15 +207,9 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
->  			 cpu_to_le32(plane->state->crtc_w),
->  			 cpu_to_le32(plane->state->crtc_h),
->  			 0, 0, vgfb->fence);
-> -		ret = virtio_gpu_object_reserve(bo, false);
-> -		if (!ret) {
-> -			reservation_object_add_excl_fence(bo->tbo.resv,
-> -							  &vgfb->fence->f);
-> -			dma_fence_put(&vgfb->fence->f);
-> -			vgfb->fence = NULL;
-> -			virtio_gpu_object_unreserve(bo);
-> -			virtio_gpu_object_wait(bo, false);
-> -		}
-> +		dma_fence_wait(&vgfb->fence->f, true);
-> +		dma_fence_put(&vgfb->fence->f);
-> +		vgfb->fence = NULL;
-
-Even nicer would be to add the fence using
-drm_atomic_set_fence_for_plane() in the prepare_fb hook. Assuming this
-isn't necessary for correctness (but then I kinda have questions about
-races and stuff).
-
-But this gets the job done too I think, so:
 
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
->  	}
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_drv.h    |  1 -
+>  drivers/gpu/drm/virtio/virtgpu_object.c | 13 -------------
+>  2 files changed, 14 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> index 9e2d3062b01d..2cd96256ba37 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
+> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> @@ -364,7 +364,6 @@ int virtio_gpu_object_kmap(struct virtio_gpu_object *bo);
+>  int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+>  				   struct virtio_gpu_object *bo);
+>  void virtio_gpu_object_free_sg_table(struct virtio_gpu_object *bo);
+> -int virtio_gpu_object_wait(struct virtio_gpu_object *bo, bool no_wait);
 >  
->  	if (plane->state->fb != old_state->fb) {
+>  /* virtgpu_prime.c */
+>  struct sg_table *virtgpu_gem_prime_get_sg_table(struct drm_gem_object *obj);
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+> index 242766d644a7..82bfbf983fd2 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+> @@ -233,16 +233,3 @@ void virtio_gpu_object_free_sg_table(struct virtio_gpu_object *bo)
+>  	kfree(bo->pages);
+>  	bo->pages = NULL;
+>  }
+> -
+> -int virtio_gpu_object_wait(struct virtio_gpu_object *bo, bool no_wait)
+> -{
+> -	int r;
+> -
+> -	r = ttm_bo_reserve(&bo->tbo, true, no_wait, NULL);
+> -	if (unlikely(r != 0))
+> -		return r;
+> -	r = ttm_bo_wait(&bo->tbo, true, no_wait);
+> -	ttm_bo_unreserve(&bo->tbo);
+> -	return r;
+> -}
+> -
 > -- 
 > 2.18.1
 > 
