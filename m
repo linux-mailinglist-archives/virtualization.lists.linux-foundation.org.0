@@ -2,75 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35284484F9
-	for <lists.virtualization@lfdr.de>; Mon, 17 Jun 2019 16:12:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D148248511
+	for <lists.virtualization@lfdr.de>; Mon, 17 Jun 2019 16:15:29 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3C6F3D48;
-	Mon, 17 Jun 2019 14:11:56 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id DE829D48;
+	Mon, 17 Jun 2019 14:15:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1CD60CD1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id BC2FBD48
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 14:11:55 +0000 (UTC)
+	Mon, 17 Jun 2019 14:15:24 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C13E87DB
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 221AF2C3
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 14:11:53 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id k8so16343500edr.11
+	Mon, 17 Jun 2019 14:15:24 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id m10so16405937edv.6
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 07:11:53 -0700 (PDT)
+	Mon, 17 Jun 2019 07:15:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=zlCo9TC98c5FZkjUzIf1KLkN5UgmU6J99oGWDzFXHpI=;
-	b=E1lV/u7o1nMu/5qcTlwV2LMql4XhweKWVE452oSFGI9R9SjCnpHHJnbxQXIKoXvsmz
-	MjEC7OHqO9/kJOeec+mu0Z8koL5fprasZn58JKAQBBN+0wxWXoJYVbr7u+ap7ulflBy9
-	qPQrTUudwz+GPCINTlkK6HQ+6xSffoDX3Zgzg=
+	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=AYvx+hKlTuvWdDRT83rsHG30d0GVUlP5mRSGQAA1z4U=;
+	b=lOeUzLD7n4PAtFX3vYOFGYkqrgu1sQCyqQDXWzLTWLqikYvglRb+IKFBJMleJ1aRe1
+	UUg9US9oUwADsm26SYW+wJ25BZAAesxu1FDsxn85zKoHf4riEK0CY2fJ21aza++votM/
+	cvZKlJSnYsfAAnUWrTLrv/MCX9rZqWZ2l8HUQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:subject:message-id
+	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
 	:mail-followup-to:references:mime-version:content-disposition
 	:in-reply-to:user-agent;
-	bh=zlCo9TC98c5FZkjUzIf1KLkN5UgmU6J99oGWDzFXHpI=;
-	b=OJAHa4bLZPhBTcXhx/JgV/DXllXqh3cymP5Iji4QeXQy3thL7r+wk7qtNmWxFcU1La
-	rZHshUjjjOJfPgFU24gIMVxUiRyfkx3iIqmQSyP5UtphRIdwik9srYyi4k86g/JhFh/I
-	/FvzHiDomicGBc+VC+4lnC4xETP5euF4wBqUU1s9CITW7oH5HiJQUgCrcL+0IsenCAKD
-	uVkkb53nvshD2tD9jszo1lRBhKwUGdjfNEWhsMp3U/AM4m/oJCdKmsuFAYy77piWilxq
-	w8SRX6uu1eRl04VK0MLQ7/TzfWAD1fwL0tKrOCLSyGRCoDs9Ya6uQN1TJ+WhF9I0Ugmr
-	y77A==
-X-Gm-Message-State: APjAAAUqmzJ7ZHxHG1a+ju6YQEMvO7rxHxcQ6C+O6wmdOzyzl+TSpll7
-	3m8pZw769Q7Q9C2RBB6yZt5uww==
-X-Google-Smtp-Source: APXvYqyFOj7EMYy9qivyoZv6/j9iQIWwU8H2myH8qg8E6iBR3g1ZdPTuAJd2zbKKIw0TxP9ixHftTQ==
-X-Received: by 2002:aa7:c486:: with SMTP id m6mr54266304edq.298.1560780712473; 
-	Mon, 17 Jun 2019 07:11:52 -0700 (PDT)
+	bh=AYvx+hKlTuvWdDRT83rsHG30d0GVUlP5mRSGQAA1z4U=;
+	b=Bd2McptRbOOp64WXLJ95lxyOgXrAibZ9d3voArv9KuPY0v73do8sGmQ2uRzfr0fil1
+	3/f0SASqaUfZPKckHNbuZoOEUBJQpq3Y9c9hWLmPCFXmr7gQvJXgz4sMUochMTyrrB5w
+	Gfag7j5DETLNYuBizt80A14v1RIQT34CIO0zp4GoU5gOQ/NHaKl4uj/qGhYdpymGzoDQ
+	5/4frGwN9EgJaNUadvLpX8zv3r+TbSESRR9+2H96s0QqadWEGDvX8wg3BvSeRD8xUIad
+	0YI28nhcBYlEKiDDfLeV6E3BWLMgMIPOgVilaOxGkOJ7gowMBP02Wfs+CD/Af9aOLIif
+	wMCw==
+X-Gm-Message-State: APjAAAVXTtJ2lmMaDq43itd0Zy5hKJiozkFxQieXwKfdnH3z93xwXCLI
+	IZ9qmTAYPuQYLwI6S/uCtOA//Q==
+X-Google-Smtp-Source: APXvYqwaIDiXPlRgUHNg3kWDu2WCWsswz9JWV+a6jzhjA5v+QP6d6ZCANJoULcIqQzttt4TspRFMiQ==
+X-Received: by 2002:a17:906:4356:: with SMTP id
+	z22mr98657350ejm.56.1560780922674; 
+	Mon, 17 Jun 2019 07:15:22 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
 	by smtp.gmail.com with ESMTPSA id
-	m19sm2186424eje.30.2019.06.17.07.11.50
+	u15sm3735567edi.10.2019.06.17.07.15.18
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Mon, 17 Jun 2019 07:11:50 -0700 (PDT)
-Date: Mon, 17 Jun 2019 16:11:48 +0200
+	Mon, 17 Jun 2019 07:15:19 -0700 (PDT)
+Date: Mon, 17 Jun 2019 16:15:16 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org,
-	David Airlie <airlied@linux.ie>, "open list:VIRTIO GPU DRIVER"
-	<virtualization@lists.linux-foundation.org>, 
-	open list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH 1/4] drm/virtio: pass gem reservation object to ttm init
-Message-ID: <20190617141148.GE12905@phenom.ffwll.local>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Subject: Re: [PATCH 2/4] drm/virtio: switch virtio_gpu_wait_ioctl() to gem
+	helper.
+Message-ID: <20190617141516.GF12905@phenom.ffwll.local>
 Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
 	dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
 	"open list:VIRTIO GPU DRIVER"
 	<virtualization@lists.linux-foundation.org>, 
 	open list <linux-kernel@vger.kernel.org>
 References: <20190617111406.14765-1-kraxel@redhat.com>
-	<20190617111406.14765-2-kraxel@redhat.com>
-	<20190617140825.GD12905@phenom.ffwll.local>
+	<20190617111406.14765-3-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190617140825.GD12905@phenom.ffwll.local>
+In-Reply-To: <20190617111406.14765-3-kraxel@redhat.com>
 X-Operating-System: Linux phenom 4.19.0-5-amd64 
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -78,6 +76,9 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -94,56 +95,59 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Jun 17, 2019 at 04:08:25PM +0200, Daniel Vetter wrote:
-> On Mon, Jun 17, 2019 at 01:14:03PM +0200, Gerd Hoffmann wrote:
-> > With this gem and ttm will use the same reservation object,
-> > so mixing and matching ttm / gem reservation helpers should
-> > work fine.
-> > 
-> > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> 
-> While doing my prime doc+cleanup series I wondered whether we should do
-> this for everyone, and perhaps even remove ttm_bo.ttm_resv. Only driver
-> which doesn't yet have a gem_bo embedded in the same allocation is vmwgfx,
-> and that would be easy to fix by adding a vmwgfx_resv somehwere.
-> 
-> Anyway, looks like a solid start into the convergence story.
-> 
-> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+On Mon, Jun 17, 2019 at 01:14:04PM +0200, Gerd Hoffmann wrote:
+> Use drm_gem_reservation_object_wait() in virtio_gpu_wait_ioctl().
 
-Aside: if virtio ever allows dma-buf sharing with something else (or
-multiple virtio-gpu instances), then together with my patch series this
-will fix dma-buf import. Atm virtio ignores the reservation object of the
-imported dma-buf, which for foreing objects really isn't correct.
--Daniel
+Would be good to mention here that with this the wait becomes lockless, we
+don't call ttm_bo_reserve/unreserve anymore.
 
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_ioctl.c | 18 ++++--------------
+>  1 file changed, 4 insertions(+), 14 deletions(-)
 > 
-> > ---
-> >  drivers/gpu/drm/virtio/virtgpu_object.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
-> > index b2da31310d24..242766d644a7 100644
-> > --- a/drivers/gpu/drm/virtio/virtgpu_object.c
-> > +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
-> > @@ -132,7 +132,8 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
-> >  	virtio_gpu_init_ttm_placement(bo);
-> >  	ret = ttm_bo_init(&vgdev->mman.bdev, &bo->tbo, params->size,
-> >  			  ttm_bo_type_device, &bo->placement, 0,
-> > -			  true, acc_size, NULL, NULL,
-> > +			  true, acc_size, NULL,
-> > +			  bo->gem_base.resv,
-> >  			  &virtio_gpu_ttm_bo_destroy);
-> >  	/* ttm_bo_init failure will call the destroy */
-> >  	if (ret != 0)
-> > -- 
-> > 2.18.1
-> > 
-> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> index c0ba1ead740f..e38a6bb46cc7 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> @@ -464,23 +464,13 @@ static int virtio_gpu_wait_ioctl(struct drm_device *dev, void *data,
+>  			    struct drm_file *file)
+>  {
+>  	struct drm_virtgpu_3d_wait *args = data;
+> -	struct drm_gem_object *gobj = NULL;
+> -	struct virtio_gpu_object *qobj = NULL;
+> -	int ret;
+> -	bool nowait = false;
+> -
+> -	gobj = drm_gem_object_lookup(file, args->handle);
+> -	if (gobj == NULL)
+> -		return -ENOENT;
+> -
+> -	qobj = gem_to_virtio_gpu_obj(gobj);
+> +	long timeout = 15 * HZ;
+>  
+>  	if (args->flags & VIRTGPU_WAIT_NOWAIT)
+> -		nowait = true;
+> -	ret = virtio_gpu_object_wait(qobj, nowait);
+> +		timeout = 0;
+
+timeout of 0 gets upgrade to a 1 jiffy wait, which is probably not what
+you want here. You need to open-code ttm_bo_wait here and call
+reservation_object_test_signaled_rcu() for this case.
+
+With that fixed Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+>  
+> -	drm_gem_object_put_unlocked(gobj);
+> -	return ret;
+> +	return drm_gem_reservation_object_wait(file, args->handle,
+> +					       true, timeout);
+>  }
+>  
+>  static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
 > -- 
-> Daniel Vetter
-> Software Engineer, Intel Corporation
-> http://blog.ffwll.ch
+> 2.18.1
+> 
 
 -- 
 Daniel Vetter
