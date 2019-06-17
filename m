@@ -2,49 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F66D47E2F
-	for <lists.virtualization@lfdr.de>; Mon, 17 Jun 2019 11:21:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 849CD48052
+	for <lists.virtualization@lfdr.de>; Mon, 17 Jun 2019 13:14:19 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E03E7C74;
-	Mon, 17 Jun 2019 09:21:13 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 4EFB2CBC;
+	Mon, 17 Jun 2019 11:14:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id BBD7BC59
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 53401AEF
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 09:21:11 +0000 (UTC)
+	Mon, 17 Jun 2019 11:14:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 64304E6
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0A464828
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 09:21:11 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
-	[10.5.11.14])
+	Mon, 17 Jun 2019 11:14:08 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+	[10.5.11.15])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 85F873086227;
-	Mon, 17 Jun 2019 09:21:03 +0000 (UTC)
-Received: from hp-dl380pg8-01.lab.eng.pek2.redhat.com
-	(hp-dl380pg8-01.lab.eng.pek2.redhat.com [10.73.8.10])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id C97613781;
-	Mon, 17 Jun 2019 09:20:56 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: jasowang@redhat.com, mst@redhat.com, kvm@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH net-next] vhost_net: disable zerocopy by default
-Date: Mon, 17 Jun 2019 05:20:54 -0400
-Message-Id: <20190617092054.12299-1-jasowang@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+	by mx1.redhat.com (Postfix) with ESMTPS id 6538181DF0;
+	Mon, 17 Jun 2019 11:14:08 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-33.ams2.redhat.com
+	[10.36.116.33])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 139E47D66B;
+	Mon, 17 Jun 2019 11:14:07 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+	id F399716E19; Mon, 17 Jun 2019 13:14:06 +0200 (CEST)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH 1/4] drm/virtio: pass gem reservation object to ttm init
+Date: Mon, 17 Jun 2019 13:14:03 +0200
+Message-Id: <20190617111406.14765-2-kraxel@redhat.com>
+In-Reply-To: <20190617111406.14765-1-kraxel@redhat.com>
+References: <20190617111406.14765-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.42]);
-	Mon, 17 Jun 2019 09:21:09 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.25]);
+	Mon, 17 Jun 2019 11:14:08 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: huhai@kylinos.cn
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	Daniel Vetter <daniel@ffwll.ch>, "open list:VIRTIO GPU DRIVER"
+	<virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,36 +66,29 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Vhost_net was known to suffer from HOL[1] issues which is not easy to
-fix. Several downstream disable the feature by default. What's more,
-the datapath was split and datacopy path got the support of batching
-and XDP support recently which makes it faster than zerocopy part for
-small packets transmission.
+With this gem and ttm will use the same reservation object,
+so mixing and matching ttm / gem reservation helpers should
+work fine.
 
-It looks to me that disable zerocopy by default is more
-appropriate. It cold be enabled by default again in the future if we
-fix the above issues.
-
-[1] https://patchwork.kernel.org/patch/3787671/
-
-Signed-off-by: Jason Wang <jasowang@redhat.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/vhost/net.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/virtio/virtgpu_object.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-index 2d9df786a9d3..21e0805e5e60 100644
---- a/drivers/vhost/net.c
-+++ b/drivers/vhost/net.c
-@@ -36,7 +36,7 @@
- 
- #include "vhost.h"
- 
--static int experimental_zcopytx = 1;
-+static int experimental_zcopytx = 0;
- module_param(experimental_zcopytx, int, 0444);
- MODULE_PARM_DESC(experimental_zcopytx, "Enable Zero Copy TX;"
- 		                       " 1 -Enable; 0 - Disable");
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index b2da31310d24..242766d644a7 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -132,7 +132,8 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
+ 	virtio_gpu_init_ttm_placement(bo);
+ 	ret = ttm_bo_init(&vgdev->mman.bdev, &bo->tbo, params->size,
+ 			  ttm_bo_type_device, &bo->placement, 0,
+-			  true, acc_size, NULL, NULL,
++			  true, acc_size, NULL,
++			  bo->gem_base.resv,
+ 			  &virtio_gpu_ttm_bo_destroy);
+ 	/* ttm_bo_init failure will call the destroy */
+ 	if (ret != 0)
 -- 
 2.18.1
 
