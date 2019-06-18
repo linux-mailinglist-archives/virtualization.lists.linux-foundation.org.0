@@ -2,48 +2,57 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDD07491C8
-	for <lists.virtualization@lfdr.de>; Mon, 17 Jun 2019 22:58:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7B2249AD9
+	for <lists.virtualization@lfdr.de>; Tue, 18 Jun 2019 09:42:03 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2DE71CD3;
-	Mon, 17 Jun 2019 20:58:24 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 68B04BA0;
+	Tue, 18 Jun 2019 07:41:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D12C0AE7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 19CC2B43
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 20:58:22 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from shards.monkeyblade.net (shards.monkeyblade.net [23.128.96.9])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 85656E6
+	Tue, 18 Jun 2019 07:41:57 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C0029E6
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 17 Jun 2019 20:58:22 +0000 (UTC)
-Received: from localhost (unknown [IPv6:2601:601:9f80:35cd::3d5])
-	(using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(Client did not present a certificate)
-	(Authenticated sender: davem-davemloft)
-	by shards.monkeyblade.net (Postfix) with ESMTPSA id A9B6B15130B18;
-	Mon, 17 Jun 2019 13:58:21 -0700 (PDT)
-Date: Mon, 17 Jun 2019 13:58:21 -0700 (PDT)
-Message-Id: <20190617.135821.1970853531857836652.davem@davemloft.net>
-To: jasowang@redhat.com
-Subject: Re: [PATCH net-next] vhost_net: disable zerocopy by default
-From: David Miller <davem@davemloft.net>
-In-Reply-To: <20190617092054.12299-1-jasowang@redhat.com>
-References: <20190617092054.12299-1-jasowang@redhat.com>
-X-Mailer: Mew version 6.8 on Emacs 26.1
-Mime-Version: 1.0
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
-	(shards.monkeyblade.net [149.20.54.216]);
-	Mon, 17 Jun 2019 13:58:21 -0700 (PDT)
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	Tue, 18 Jun 2019 07:41:56 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+	[10.5.11.15])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 62B243091797;
+	Tue, 18 Jun 2019 07:41:55 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-33.ams2.redhat.com
+	[10.36.116.33])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 0D7E49839;
+	Tue, 18 Jun 2019 07:41:55 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+	id DE78B16E18; Tue, 18 Jun 2019 09:41:53 +0200 (CEST)
+Date: Tue, 18 Jun 2019 09:41:53 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>, 
+	open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH 3/4] drm/virtio: simplify cursor updates
+Message-ID: <20190618074153.355np63i76ee24c7@sirius.home.kraxel.org>
+References: <20190617111406.14765-1-kraxel@redhat.com>
+	<20190617111406.14765-4-kraxel@redhat.com>
+	<20190617141806.GG12905@phenom.ffwll.local>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20190617141806.GG12905@phenom.ffwll.local>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.41]);
+	Tue, 18 Jun 2019 07:41:56 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, huhai@kylinos.cn
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,24 +69,18 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-From: Jason Wang <jasowang@redhat.com>
-Date: Mon, 17 Jun 2019 05:20:54 -0400
+> Even nicer would be to add the fence using
+> drm_atomic_set_fence_for_plane() in the prepare_fb hook. Assuming this
+> isn't necessary for correctness (but then I kinda have questions about
+> races and stuff).
 
-> Vhost_net was known to suffer from HOL[1] issues which is not easy to
-> fix. Several downstream disable the feature by default. What's more,
-> the datapath was split and datacopy path got the support of batching
-> and XDP support recently which makes it faster than zerocopy part for
-> small packets transmission.
-> 
-> It looks to me that disable zerocopy by default is more
-> appropriate. It cold be enabled by default again in the future if we
-> fix the above issues.
-> 
-> [1] https://patchwork.kernel.org/patch/3787671/
-> 
-> Signed-off-by: Jason Wang <jasowang@redhat.com>
+I'll have a look.  Maybe this way I can drop struct
+virtio_gpu_framebuffer (where the fence is the only
+thing beside struct drm_framebuffer).
 
-Applied, thanks Jason.
+cheers,
+  Gerd
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
