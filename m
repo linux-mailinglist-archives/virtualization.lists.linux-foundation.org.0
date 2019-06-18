@@ -2,73 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4292D4A3D5
-	for <lists.virtualization@lfdr.de>; Tue, 18 Jun 2019 16:23:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D6F44A3D9
+	for <lists.virtualization@lfdr.de>; Tue, 18 Jun 2019 16:24:33 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C7329B4B;
-	Tue, 18 Jun 2019 14:23:48 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 4DC09E3D;
+	Tue, 18 Jun 2019 14:24:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 63A0AAD1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E79F7AD1
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 18 Jun 2019 14:23:47 +0000 (UTC)
+	Tue, 18 Jun 2019 14:24:28 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8550087D
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 84473891
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 18 Jun 2019 14:23:46 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id e3so21956886edr.10
+	Tue, 18 Jun 2019 14:24:27 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id w13so22049979eds.4
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 18 Jun 2019 07:23:46 -0700 (PDT)
+	Tue, 18 Jun 2019 07:24:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
 	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
 	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=fX3MfhN+akKdud7rTKeAfhE9NPiCnKEnOrlfRRG5bLU=;
-	b=K+oUUGqY9nx/DClDvm9BJhPBn9lGzoNKYelLu7dy6gc19R7pMmooKs7+GHNFp1EfbG
-	mMK0u/ITPRK4ugJPWAESn72Rt+tpT9GawQE39QCYHzgs2bj4/IWhfJY8vmDmvhmyPf9p
-	e2gbTk9YlzkDOpNNV7eieonjZLrmk8wW8LWHc=
+	bh=uHnXFlY19ajG5XeU4b9Sa8dKBSgR+uGugZ79Ne3Ctiw=;
+	b=acF128CBhxF2kvltkkX7fAoQeLnvbBcYHTDB+c8gopqzYOIsw9tTUJ9TFqlQIBtdsI
+	zQ7Uznscg2mpVIHwI3qm21u+gRcRbt8R0sFUeDu8Ycy0Bvx2MmgX11qp5AOMBLjPvlfX
+	rGEIWltU5HEOeqcOVjNzNnEtGRD6vsJyhCDrk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
 	:mail-followup-to:references:mime-version:content-disposition
 	:in-reply-to:user-agent;
-	bh=fX3MfhN+akKdud7rTKeAfhE9NPiCnKEnOrlfRRG5bLU=;
-	b=dnQv1t0SIse2+BggVU+ZnC28BwJJH7lu9WBonQJdCOZyY6vtK+/cwIL57myrPrGX2C
-	bI7MCWsQYrY9BiyQIIqPj4GAhAu5DQbj+C8ceqc9ssOI1KPcEyEOU6fb8v8tXSFtzhZ1
-	T28GPXxa+PiRr/lr1Hbq7TDG2DFhUTnosA2VP+WodetzVDoeh74tP6bl6RA95n+gPUSv
-	OBROWowT9auWnjTQuSMw4K2JUUBDC99XIOp7ipgx7O+b/xrB1kVSZ6B87lXJdndMULdo
-	Kd87zIRX6p3WojOvS6j4/us4kNnJO9O7pGk/uBZa+Ef17sIX+knF87Cf+8HXKgVXYKBN
-	BfgA==
-X-Gm-Message-State: APjAAAUYsldl/3bxc9mtH7aAAouLaY+ohQmjb/KGAcfgo5hxH524u+3I
-	HAdopUIaUq494PkDoapKC4bgaA==
-X-Google-Smtp-Source: APXvYqywX4L/MXBiZ6gvbs/ba2m6OFFGgNkS1QZb/dqTtCFDk5frIdc7t9AugsLvIRc6kFMRaTVcyw==
-X-Received: by 2002:a05:6402:64a:: with SMTP id
-	u10mr85306567edx.35.1560867825135; 
-	Tue, 18 Jun 2019 07:23:45 -0700 (PDT)
+	bh=uHnXFlY19ajG5XeU4b9Sa8dKBSgR+uGugZ79Ne3Ctiw=;
+	b=L9uqUDw5eMCIyr16OA8Xv1lvelUrF8H7I2j8kwBRU5ABC0ylBoBRz7jYqPpv5UtGnH
+	LRbgIIeH8TITQD7Dz8wM/dczr9oiGBaqMRvnN1/+pPVjD31toBKiw6uMQtS1nd6PRnmm
+	UzTXh2C+QPTMK1JcHThRLyDpH7SgK3yAtH0CaO2ctK//KT/F0Bq3txqvUMYgSCQNVbvf
+	zwU7qFW3FYbC2IIYGyw9YRyTRp0aB7Nmf5pTySEXUQatfq1/8cSxKk9zXnKDRUbo5gYG
+	85Um9m6dEa6KxFuzS8k1rV+H6Y5ISKR3JYy741QSQNTnGSCteAEOu9+f+3NGHp/lREfn
+	WaTg==
+X-Gm-Message-State: APjAAAVE9xVVqa6Nc2db58plgSEKgRMaDGf/4MciyVdxj5kQJ0v6kDiB
+	AeMfkTO/CthfJ06NhRwad5AkAA==
+X-Google-Smtp-Source: APXvYqxx5Ar/sJIj7A18c3YwjZinSwD1QAHaWKUNoAbyM4MPKWCKRVpPSd25DOefwPVv3Oq0Yp24Jw==
+X-Received: by 2002:a17:906:924c:: with SMTP id
+	c12mr37650490ejx.60.1560867866173; 
+	Tue, 18 Jun 2019 07:24:26 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id u9sm3383709edm.71.2019.06.18.07.23.44
+	by smtp.gmail.com with ESMTPSA id
+	w35sm2253983edd.32.2019.06.18.07.24.25
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 18 Jun 2019 07:23:44 -0700 (PDT)
-Date: Tue, 18 Jun 2019 16:23:42 +0200
+	Tue, 18 Jun 2019 07:24:25 -0700 (PDT)
+Date: Tue, 18 Jun 2019 16:24:23 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v2 07/12] drm/virtio: rework virtio_gpu_execbuffer_ioctl
+Subject: Re: [PATCH v2 08/12] drm/virtio: rework virtio_gpu_object_create
 	fencing
-Message-ID: <20190618142342.GD12905@phenom.ffwll.local>
+Message-ID: <20190618142423.GE12905@phenom.ffwll.local>
 Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
 	dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
 	"open list:VIRTIO GPU DRIVER"
 	<virtualization@lists.linux-foundation.org>, 
 	open list <linux-kernel@vger.kernel.org>
 References: <20190618135821.8644-1-kraxel@redhat.com>
-	<20190618135821.8644-8-kraxel@redhat.com>
-	<20190618141604.GC12905@phenom.ffwll.local>
+	<20190618135821.8644-9-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190618141604.GC12905@phenom.ffwll.local>
+In-Reply-To: <20190618135821.8644-9-kraxel@redhat.com>
 X-Operating-System: Linux phenom 4.19.0-5-amd64 
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -95,158 +95,70 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Jun 18, 2019 at 04:16:04PM +0200, Daniel Vetter wrote:
-> On Tue, Jun 18, 2019 at 03:58:15PM +0200, Gerd Hoffmann wrote:
-> > Use gem reservation helpers and direct reservation_object_* calls
-> > instead of ttm.
-> > 
-> > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> > ---
-> >  drivers/gpu/drm/virtio/virtgpu_ioctl.c | 36 ++++++++++++--------------
-> >  1 file changed, 17 insertions(+), 19 deletions(-)
-> > 
-> > diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-> > index 5cffd2e54c04..6db6a6e92dde 100644
-> > --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-> > +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-> > @@ -107,12 +107,11 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
-> >  	struct virtio_gpu_fpriv *vfpriv = drm_file->driver_priv;
-> >  	struct drm_gem_object *gobj;
-> >  	struct virtio_gpu_fence *out_fence;
-> > -	struct virtio_gpu_object *qobj;
-> >  	int ret;
-> >  	uint32_t *bo_handles = NULL;
-> >  	void __user *user_bo_handles = NULL;
-> >  	struct list_head validate_list;
-> > -	struct ttm_validate_buffer *buflist = NULL;
-> > +	struct drm_gem_object **buflist = NULL;
-> >  	int i;
-> >  	struct ww_acquire_ctx ticket;
-> >  	struct sync_file *sync_file;
-> > @@ -157,12 +156,11 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
-> >  
-> >  	INIT_LIST_HEAD(&validate_list);
-> >  	if (exbuf->num_bo_handles) {
-> > -
-> >  		bo_handles = kvmalloc_array(exbuf->num_bo_handles,
-> > -					   sizeof(uint32_t), GFP_KERNEL);
-> > +					    sizeof(uint32_t), GFP_KERNEL);
-> >  		buflist = kvmalloc_array(exbuf->num_bo_handles,
-> > -					   sizeof(struct ttm_validate_buffer),
-> > -					   GFP_KERNEL | __GFP_ZERO);
-> > +					 sizeof(struct drm_gem_object*),
-> > +					 GFP_KERNEL | __GFP_ZERO);
-> >  		if (!bo_handles || !buflist) {
-> >  			ret = -ENOMEM;
-> >  			goto out_unused_fd;
-> > @@ -181,19 +179,15 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
-> >  				ret = -ENOENT;
-> >  				goto out_unused_fd;
-> >  			}
-> > -
-> > -			qobj = gem_to_virtio_gpu_obj(gobj);
-> > -			buflist[i].bo = &qobj->tbo;
-> > -
-> > -			list_add(&buflist[i].head, &validate_list);
-> > +			buflist[i] = gobj;
+On Tue, Jun 18, 2019 at 03:58:16PM +0200, Gerd Hoffmann wrote:
+> Use gem reservation helpers and direct reservation_object_* calls
+> instead of ttm.
 > 
-> I didn't bother looking, but I guess there's some room for a
-> array-of-gem-id to gem_bo-pointers helper function? Would only make sense
-> if we can share it with panfrost/v3d maybe.
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_object.c | 28 +++++++------------------
+>  1 file changed, 8 insertions(+), 20 deletions(-)
 > 
-> >  		}
-> >  		kvfree(bo_handles);
-> >  		bo_handles = NULL;
-> >  	}
-> >  
-> > -	ret = virtio_gpu_object_list_validate(&ticket, &validate_list);
-> > +	ret = drm_gem_lock_reservations(buflist, exbuf->num_bo_handles, &ticket);
-> >  	if (ret)
-> > -		goto out_free;
-> > +		goto out_unused_fd;
-> >  
-> >  	buf = memdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
-> >  	if (IS_ERR(buf)) {
-> > @@ -222,21 +216,25 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
-> >  	virtio_gpu_cmd_submit(vgdev, buf, exbuf->size,
-> >  			      vfpriv->ctx_id, out_fence);
-> >  
-> > -	ttm_eu_fence_buffer_objects(&ticket, &validate_list, &out_fence->f);
-> > +	for (i = 0; i < exbuf->num_bo_handles; i++)
-> > +		reservation_object_add_excl_fence(buflist[i]->resv, &out_fence->f);
-> 
-> Helper to unref an array of gem bo? Probably also needed by other drivers.
-> 
-> 
-> > +	drm_gem_unlock_reservations(buflist, exbuf->num_bo_handles, &ticket);
-> >  
-> > -	/* fence the command bo */
-> > -	virtio_gpu_unref_list(&validate_list);
-> > +	for (i = 0; i < exbuf->num_bo_handles; i++)
-> > +		if (buflist[i])
-> > +			drm_gem_object_put_unlocked(buflist[i]);
-> 
-> I am left wondering who's holding references onto these buffers now? How
-> do you make sure they don't disappear untimely?
-> 
-> I think atm it's ttm making sure of that, but if you drop that completely
-> there needs to be something else.
-> 
-> >  	kvfree(buflist);
-> >  	return 0;
-> >  
-> >  out_memdup:
-> >  	kfree(buf);
-> >  out_unresv:
-> > -	ttm_eu_backoff_reservation(&ticket, &validate_list);
-> > -out_free:
-> > -	virtio_gpu_unref_list(&validate_list);
-> > +	drm_gem_unlock_reservations(buflist, exbuf->num_bo_handles, &ticket);
-> >  out_unused_fd:
-> >  	kvfree(bo_handles);
-> > +	for (i = 0; i < exbuf->num_bo_handles; i++)
-> > +		if (buflist && buflist[i])
-> > +			drm_gem_object_put_unlocked(buflist[i]);
-> >  	kvfree(buflist);
-> >  
-> >  	if (out_fence_fd >= 0)
-> 
-> Patch itself looks correct, just put down my thoughts while reviewing it.
-> 
-> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+> index 82bfbf983fd2..461f15f26517 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+> @@ -141,34 +141,22 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
+>  
+>  	if (fence) {
+>  		struct virtio_gpu_fence_driver *drv = &vgdev->fence_drv;
+> -		struct list_head validate_list;
+> -		struct ttm_validate_buffer mainbuf;
+> +		struct drm_gem_object *obj = &bo->gem_base;
+>  		struct ww_acquire_ctx ticket;
+>  		unsigned long irq_flags;
+> -		bool signaled;
+>  
+> -		INIT_LIST_HEAD(&validate_list);
+> -		memset(&mainbuf, 0, sizeof(struct ttm_validate_buffer));
+> -
+> -		/* use a gem reference since unref list undoes them */
+> -		drm_gem_object_get(&bo->gem_base);
+> -		mainbuf.bo = &bo->tbo;
+> -		list_add(&mainbuf.head, &validate_list);
+> -
+> -		ret = virtio_gpu_object_list_validate(&ticket, &validate_list);
+> +		drm_gem_object_get(obj);
+> +		ret = drm_gem_lock_reservations(&obj, 1, &ticket);
+>  		if (ret == 0) {
+>  			spin_lock_irqsave(&drv->lock, irq_flags);
+> -			signaled = virtio_fence_signaled(&fence->f);
+> -			if (!signaled)
+> +			if (!virtio_fence_signaled(&fence->f))
+>  				/* virtio create command still in flight */
+> -				ttm_eu_fence_buffer_objects(&ticket, &validate_list,
+> -							    &fence->f);
 
-r-b retracted after reviewing the next patch. You remove ttm_bo_fence
-here, which also moves/adds the bo to the lru, which is the think grabbing
-a reference, which has been preventing the oopses here thus far.
+Same issue with the refcounting gone wrong here as in the previous patch.
+-Daniel
 
-With that gone you blow up.
+> +				reservation_object_add_excl_fence(obj->resv,
+> +								  &fence->f);
+>  			spin_unlock_irqrestore(&drv->lock, irq_flags);
+> -			if (signaled)
+> -				/* virtio create command finished */
+> -				ttm_eu_backoff_reservation(&ticket, &validate_list);
+>  		}
+> -		virtio_gpu_unref_list(&validate_list);
+> +		drm_gem_unlock_reservations(&obj, 1, &ticket);
+> +		drm_gem_object_put_unlocked(obj);
+>  	}
+>  
+>  	*bo_ptr = bo;
+> -- 
+> 2.18.1
+> 
 
-The callchain is:
-
-ttm_eu_fence_buffer_objects -> ttm_bo_add_to_lru -> ttm_bo_add_mem_to_lru
--> kref_get.
-
-I honestly never looked too closely at that part of ttm, but it's a lot
-different from what at least i915 does. Design principles we use there:
-- lru lists only hold a weak reference, i.e. it's a pointer, but it
-  doesn't prevent the final kput from freeing the object. In the actual
-  object free callback we remove those references while grabbing the right
-  locks (which might need to be offloaded to a worker in some cases to
-  avoid recursions).
-
-- we only hold a kref while the object is under active use by the gpu.
-
-I very much prefer this weak reference model for lookup tables, caches,
-lrus and all that since imo it leads to clearer code. And you can always
-upgrade to a full reference using kref_get_unless_zero. ttm seems to be
-using a completely different design here, not sure how old memory gets
-released when a client dies.
-
-I guess this is a gap we'd need to first fix in gem helpers, maybe even
-needs some kind of notion of an lru and some memory region an object sits
-in ...
-
-Cheers, Daniel
 -- 
 Daniel Vetter
 Software Engineer, Intel Corporation
