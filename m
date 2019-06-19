@@ -2,82 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B9B14B5AF
-	for <lists.virtualization@lfdr.de>; Wed, 19 Jun 2019 11:57:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 508B04B61E
+	for <lists.virtualization@lfdr.de>; Wed, 19 Jun 2019 12:24:03 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5C899D83;
-	Wed, 19 Jun 2019 09:57:16 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 04A55EF4;
+	Wed, 19 Jun 2019 10:23:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 08579CA1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 76E1BEEE
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 19 Jun 2019 09:57:15 +0000 (UTC)
+	Wed, 19 Jun 2019 10:23:57 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 548ADE6
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DD06B831
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 19 Jun 2019 09:57:14 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id w13so26328250eds.4
+	Wed, 19 Jun 2019 10:23:56 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id s15so1226039wmj.3
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 19 Jun 2019 02:57:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=OYUOBbihdDezrYIpc84bsimr033/fNxizTudReyy9GE=;
-	b=VooeCWO1OpfkqLQECa5vkxYQhv9QcgV0EEz4MtAZie/DQpFAzkLReYAKFordnWIKq2
-	76y1DCcwaJOZMGb2KIbmbHVmjn2ZeqGGDGzFy8n7iIGwgAGZD/4OQpNyHxlqk/saUlUA
-	Iu0+x1IlzIm74/Ap43c90NeDs0k6H3Sgq2zwI=
+	Wed, 19 Jun 2019 03:23:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-disposition
-	:in-reply-to:user-agent;
-	bh=OYUOBbihdDezrYIpc84bsimr033/fNxizTudReyy9GE=;
-	b=JtDdBWrNq34yvgL420nyq3apX0rrFFcMLf/grSfDfzZEBPHrdF5zrEf/e2V8D5Unzr
-	Dn+mJSocfTbVbwzlRH94/vGFmr2cVGdkDFK1cexqKB0kO5ENZ2wOv9as28wnIZN+IGAS
-	svlj/7gM0q/MxaZN+ePx0/paeI+rYgTleuDxmVj3w0dU2hPQxNkGl/jSSV1SjjE/HpZx
-	OPlgrFcdXg+poLcbvH8rqa8ijT7wZ8NpN2EpXGtcAuV/4L5mZeET5st+5FGbjH55ceBM
-	gKTE5h5jPLzAKXZgzC1/k3fXE/3Jnq1GxcqExxfNyEbtZ5BLK0Z9xtv20Bbkm6vD4UN1
-	jqiw==
-X-Gm-Message-State: APjAAAVmPOjJ2GvR7rbRGStNgkez8g/ZQGB9jXrMDvdlzIfgfIFWPOXA
-	Q1oTEpB4MXOQ4+59XSYyJ1T0Xg==
-X-Google-Smtp-Source: APXvYqxmuZBxDErDZLmU5QeCx1tL6e44prW1irGwG0kDOxQYTRxd1JoAqkmtlD6HogrJKkLq+7r1aQ==
-X-Received: by 2002:a50:b7e2:: with SMTP id i31mr83477702ede.229.1560938232780;
-	Wed, 19 Jun 2019 02:57:12 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=H33BTDhT/l9EEeZmnjCEB6vo6nawwms9/xSEDH82HBs=;
+	b=DuWzSgPpuYB1bAqq2z6L+xcbMuB9j9TW5umh3jBRn3Brn+RvldldinHbpkj96sCgaX
+	sRAgC/893y6+MzBGQBLTU77p3X7cVI09Gm2XuT5cjuSpQFazYahxqzlmKo0n42KjlDF5
+	ErS3MjgbnggWKlPzTK49GRnCYi1IQ+wlfdHFZXLm1A6zWDQaG+wYRXlQ3K7VLHZuCY2r
+	33hoIPjKXD4FDTtXGPYSCzv5srTk8SNyqfLJs5mGo/U0yZUBybm2vxRMpTWDPW17WyHR
+	5Vi6k5QzbP+YHb9jE5hxTkwIa6G8VT1AwhglHuAh0oYP4TCZYw4NyitTdpeSWVqOsCcs
+	LwdA==
+X-Gm-Message-State: APjAAAWs74RHRfwE83r+6uLzjP/DzIqEOjUvpdFQk8K3T/gJbK4CBRZi
+	RobiKC77h9aI6UgYyzSfD2kaog==
+X-Google-Smtp-Source: APXvYqxWQbLBxZmTwWS5bJ4BnfJppMsFM1KQRXe6s5uE8Qwm3YgP31SQhddztiaw5e1msir7HRMGrQ==
+X-Received: by 2002:a1c:a1c5:: with SMTP id k188mr7718728wme.102.1560939835412;
+	Wed, 19 Jun 2019 03:23:55 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:51c0:d03f:68e:1f6d?
+	([2001:b07:6468:f312:51c0:d03f:68e:1f6d])
 	by smtp.gmail.com with ESMTPSA id
-	e26sm3180489eje.29.2019.06.19.02.57.11
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 19 Jun 2019 02:57:12 -0700 (PDT)
-Date: Wed, 19 Jun 2019 11:57:08 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v3 07/12] drm/virtio: remove ttm calls from in
-	virtio_gpu_object_{reserve,unreserve}
-Message-ID: <20190619095708.GL12905@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
-	dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
-	"open list:VIRTIO GPU DRIVER"
-	<virtualization@lists.linux-foundation.org>, 
-	open list <linux-kernel@vger.kernel.org>
-References: <20190619090420.6667-1-kraxel@redhat.com>
-	<20190619090420.6667-8-kraxel@redhat.com>
+	o185sm1198768wmo.45.2019.06.19.03.23.54
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Wed, 19 Jun 2019 03:23:54 -0700 (PDT)
+Subject: Re: [PATCH 1/1] scsi: virtio_scsi: remove unused 'affinity_hint_set'
+To: Dongli Zhang <dongli.zhang@oracle.com>,
+	virtualization@lists.linux-foundation.org, linux-scsi@vger.kernel.org
+References: <1560930739-25692-1-git-send-email-dongli.zhang@oracle.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <c111c5a3-1602-e935-300d-d75e14fe2bd9@redhat.com>
+Date: Wed, 19 Jun 2019 12:24:01 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190619090420.6667-8-kraxel@redhat.com>
-X-Operating-System: Linux phenom 4.19.0-5-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+In-Reply-To: <1560930739-25692-1-git-send-email-dongli.zhang@oracle.com>
+Content-Language: en-US
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
-	Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
-	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
+Cc: martin.petersen@oracle.com, mst@redhat.com, linux-kernel@vger.kernel.org,
+	stefanha@redhat.com, jejb@linux.ibm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -94,56 +80,32 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Jun 19, 2019 at 11:04:15AM +0200, Gerd Hoffmann wrote:
-> Call reservation_object_* directly instead
-> of using ttm_bo_{reserve,unreserve}.
+On 19/06/19 09:52, Dongli Zhang wrote:
+> The 'affinity_hint_set' is not used any longer since
+> commit 0d9f0a52c8b9 ("virtio_scsi: use virtio IRQ affinity").
 > 
-> v3: check for EINTR too.
-> 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
 > ---
->  drivers/gpu/drm/virtio/virtgpu_drv.h | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  drivers/scsi/virtio_scsi.c | 3 ---
+>  1 file changed, 3 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> index 06cc0e961df6..77ac69a8e6cc 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> @@ -402,9 +402,9 @@ static inline int virtio_gpu_object_reserve(struct virtio_gpu_object *bo)
->  {
->  	int r;
+> diff --git a/drivers/scsi/virtio_scsi.c b/drivers/scsi/virtio_scsi.c
+> index 13f1b3b..1705398 100644
+> --- a/drivers/scsi/virtio_scsi.c
+> +++ b/drivers/scsi/virtio_scsi.c
+> @@ -74,9 +74,6 @@ struct virtio_scsi {
 >  
-> -	r = ttm_bo_reserve(&bo->tbo, true, false, NULL);
-> +	r = reservation_object_lock_interruptible(bo->gem_base.resv, NULL);
->  	if (unlikely(r != 0)) {
-> -		if (r != -ERESTARTSYS) {
-> +		if (r != -ERESTARTSYS && r != -EINTR) {
-
-You only need to check for EINTR I think. ttm_bo_reserv does the EINVAL ->
-ERESTARTSYS remapping.
--Daniel
-
->  			struct virtio_gpu_device *qdev =
->  				bo->gem_base.dev->dev_private;
->  			dev_err(qdev->dev, "%p reserve failed\n", bo);
-> @@ -416,7 +416,7 @@ static inline int virtio_gpu_object_reserve(struct virtio_gpu_object *bo)
+>  	u32 num_queues;
 >  
->  static inline void virtio_gpu_object_unreserve(struct virtio_gpu_object *bo)
->  {
-> -	ttm_bo_unreserve(&bo->tbo);
-> +	reservation_object_unlock(bo->gem_base.resv);
->  }
+> -	/* If the affinity hint is set for virtqueues */
+> -	bool affinity_hint_set;
+> -
+>  	struct hlist_node node;
 >  
->  /* virgl debufs */
-> -- 
-> 2.18.1
+>  	/* Protected by event_vq lock */
 > 
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Acked-by: Paolo Bonzini <pbonzini@redhat.com>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
