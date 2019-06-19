@@ -2,83 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D6F44A3D9
-	for <lists.virtualization@lfdr.de>; Tue, 18 Jun 2019 16:24:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4798C4B361
+	for <lists.virtualization@lfdr.de>; Wed, 19 Jun 2019 09:51:36 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4DC09E3D;
-	Tue, 18 Jun 2019 14:24:30 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C0CA4C00;
+	Wed, 19 Jun 2019 07:51:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E79F7AD1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 463ECC00
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 18 Jun 2019 14:24:28 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
-	[209.85.208.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 84473891
+	Wed, 19 Jun 2019 07:51:30 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from userp2120.oracle.com (userp2120.oracle.com [156.151.31.85])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E0205854
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 18 Jun 2019 14:24:27 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id w13so22049979eds.4
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 18 Jun 2019 07:24:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=uHnXFlY19ajG5XeU4b9Sa8dKBSgR+uGugZ79Ne3Ctiw=;
-	b=acF128CBhxF2kvltkkX7fAoQeLnvbBcYHTDB+c8gopqzYOIsw9tTUJ9TFqlQIBtdsI
-	zQ7Uznscg2mpVIHwI3qm21u+gRcRbt8R0sFUeDu8Ycy0Bvx2MmgX11qp5AOMBLjPvlfX
-	rGEIWltU5HEOeqcOVjNzNnEtGRD6vsJyhCDrk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-disposition
-	:in-reply-to:user-agent;
-	bh=uHnXFlY19ajG5XeU4b9Sa8dKBSgR+uGugZ79Ne3Ctiw=;
-	b=L9uqUDw5eMCIyr16OA8Xv1lvelUrF8H7I2j8kwBRU5ABC0ylBoBRz7jYqPpv5UtGnH
-	LRbgIIeH8TITQD7Dz8wM/dczr9oiGBaqMRvnN1/+pPVjD31toBKiw6uMQtS1nd6PRnmm
-	UzTXh2C+QPTMK1JcHThRLyDpH7SgK3yAtH0CaO2ctK//KT/F0Bq3txqvUMYgSCQNVbvf
-	zwU7qFW3FYbC2IIYGyw9YRyTRp0aB7Nmf5pTySEXUQatfq1/8cSxKk9zXnKDRUbo5gYG
-	85Um9m6dEa6KxFuzS8k1rV+H6Y5ISKR3JYy741QSQNTnGSCteAEOu9+f+3NGHp/lREfn
-	WaTg==
-X-Gm-Message-State: APjAAAVE9xVVqa6Nc2db58plgSEKgRMaDGf/4MciyVdxj5kQJ0v6kDiB
-	AeMfkTO/CthfJ06NhRwad5AkAA==
-X-Google-Smtp-Source: APXvYqxx5Ar/sJIj7A18c3YwjZinSwD1QAHaWKUNoAbyM4MPKWCKRVpPSd25DOefwPVv3Oq0Yp24Jw==
-X-Received: by 2002:a17:906:924c:: with SMTP id
-	c12mr37650490ejx.60.1560867866173; 
-	Tue, 18 Jun 2019 07:24:26 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id
-	w35sm2253983edd.32.2019.06.18.07.24.25
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 18 Jun 2019 07:24:25 -0700 (PDT)
-Date: Tue, 18 Jun 2019 16:24:23 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v2 08/12] drm/virtio: rework virtio_gpu_object_create
-	fencing
-Message-ID: <20190618142423.GE12905@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
-	dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
-	"open list:VIRTIO GPU DRIVER"
-	<virtualization@lists.linux-foundation.org>, 
-	open list <linux-kernel@vger.kernel.org>
-References: <20190618135821.8644-1-kraxel@redhat.com>
-	<20190618135821.8644-9-kraxel@redhat.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190618135821.8644-9-kraxel@redhat.com>
-X-Operating-System: Linux phenom 4.19.0-5-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+	Wed, 19 Jun 2019 07:51:29 +0000 (UTC)
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+	by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
+	x5J7mvt3095007; Wed, 19 Jun 2019 07:51:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+	h=from : to : cc :
+	subject : date : message-id; s=corp-2018-07-02;
+	bh=ZqymLuDrO6eYJVDB9tPgYhWtvN/C6n4mryzJzrUy8i8=;
+	b=aSxSmNaQ7iyrOCJ/p6YEzp6sXh/qtKUZ3NziJ/5tCp+6xJ9oIeQblCsustXbVJeEnHl7
+	eSyVCJp3VxOdkd/STEzkb12KYaj6wS4tJXMgLChIvHA/z6pQmF3yFtnLiNhQmdGNxqk7
+	QxB3rrHL8Ai7R2OOob6Gzan/3ypkOX4BmVB55Jy3E90sZt73dBH8uV0J1ciG0seCGpyN
+	kepu4BXOwPXztucbalFvHnFVtR4SuRT0vQzO64bf3O7A1jaRINZsizFBxatPpFmjAKKG
+	9gRizTdm6PLGQS68pBxY4z8eVpgeM2fNDosYQAVaLmVtih0T08glm770/EnFi0IC2tbs
+	Kw== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+	by userp2120.oracle.com with ESMTP id 2t78099qua-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 19 Jun 2019 07:51:27 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+	by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
+	x5J7m39b112615; Wed, 19 Jun 2019 07:49:27 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+	by userp3030.oracle.com with ESMTP id 2t77ymx439-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 19 Jun 2019 07:49:26 +0000
+Received: from abhmp0022.oracle.com (abhmp0022.oracle.com [141.146.116.28])
+	by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x5J7nPpv005684;
+	Wed, 19 Jun 2019 07:49:25 GMT
+Received: from linux.cn.oracle.com (/10.182.69.106)
+	by default (Oracle Beehive Gateway v4.0)
+	with ESMTP ; Wed, 19 Jun 2019 00:49:25 -0700
+From: Dongli Zhang <dongli.zhang@oracle.com>
+To: virtualization@lists.linux-foundation.org, linux-scsi@vger.kernel.org
+Subject: [PATCH 1/1] scsi: virtio_scsi: remove unused 'affinity_hint_set'
+Date: Wed, 19 Jun 2019 15:52:19 +0800
+Message-Id: <1560930739-25692-1-git-send-email-dongli.zhang@oracle.com>
+X-Mailer: git-send-email 2.7.4
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9292
+	signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+	malwarescore=0
+	phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+	adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+	engine=8.0.1-1810050000 definitions=main-1906190065
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9292
+	signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+	priorityscore=1501 malwarescore=0
+	suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+	lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999
+	adultscore=0
+	classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+	definitions=main-1906190065
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
+	UNPARSEABLE_RELAY autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
-	Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
-	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
+Cc: martin.petersen@oracle.com, mst@redhat.com, linux-kernel@vger.kernel.org,
+	stefanha@redhat.com, pbonzini@redhat.com, jejb@linux.ibm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -90,79 +89,37 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Jun 18, 2019 at 03:58:16PM +0200, Gerd Hoffmann wrote:
-> Use gem reservation helpers and direct reservation_object_* calls
-> instead of ttm.
-> 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  drivers/gpu/drm/virtio/virtgpu_object.c | 28 +++++++------------------
->  1 file changed, 8 insertions(+), 20 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
-> index 82bfbf983fd2..461f15f26517 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
-> @@ -141,34 +141,22 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
->  
->  	if (fence) {
->  		struct virtio_gpu_fence_driver *drv = &vgdev->fence_drv;
-> -		struct list_head validate_list;
-> -		struct ttm_validate_buffer mainbuf;
-> +		struct drm_gem_object *obj = &bo->gem_base;
->  		struct ww_acquire_ctx ticket;
->  		unsigned long irq_flags;
-> -		bool signaled;
->  
-> -		INIT_LIST_HEAD(&validate_list);
-> -		memset(&mainbuf, 0, sizeof(struct ttm_validate_buffer));
-> -
-> -		/* use a gem reference since unref list undoes them */
-> -		drm_gem_object_get(&bo->gem_base);
-> -		mainbuf.bo = &bo->tbo;
-> -		list_add(&mainbuf.head, &validate_list);
-> -
-> -		ret = virtio_gpu_object_list_validate(&ticket, &validate_list);
-> +		drm_gem_object_get(obj);
-> +		ret = drm_gem_lock_reservations(&obj, 1, &ticket);
->  		if (ret == 0) {
->  			spin_lock_irqsave(&drv->lock, irq_flags);
-> -			signaled = virtio_fence_signaled(&fence->f);
-> -			if (!signaled)
-> +			if (!virtio_fence_signaled(&fence->f))
->  				/* virtio create command still in flight */
-> -				ttm_eu_fence_buffer_objects(&ticket, &validate_list,
-> -							    &fence->f);
+The 'affinity_hint_set' is not used any longer since
+commit 0d9f0a52c8b9 ("virtio_scsi: use virtio IRQ affinity").
 
-Same issue with the refcounting gone wrong here as in the previous patch.
--Daniel
+Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
+---
+ drivers/scsi/virtio_scsi.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-> +				reservation_object_add_excl_fence(obj->resv,
-> +								  &fence->f);
->  			spin_unlock_irqrestore(&drv->lock, irq_flags);
-> -			if (signaled)
-> -				/* virtio create command finished */
-> -				ttm_eu_backoff_reservation(&ticket, &validate_list);
->  		}
-> -		virtio_gpu_unref_list(&validate_list);
-> +		drm_gem_unlock_reservations(&obj, 1, &ticket);
-> +		drm_gem_object_put_unlocked(obj);
->  	}
->  
->  	*bo_ptr = bo;
-> -- 
-> 2.18.1
-> 
-
+diff --git a/drivers/scsi/virtio_scsi.c b/drivers/scsi/virtio_scsi.c
+index 13f1b3b..1705398 100644
+--- a/drivers/scsi/virtio_scsi.c
++++ b/drivers/scsi/virtio_scsi.c
+@@ -74,9 +74,6 @@ struct virtio_scsi {
+ 
+ 	u32 num_queues;
+ 
+-	/* If the affinity hint is set for virtqueues */
+-	bool affinity_hint_set;
+-
+ 	struct hlist_node node;
+ 
+ 	/* Protected by event_vq lock */
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.7.4
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
