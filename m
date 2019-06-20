@@ -2,55 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 980BA4C89B
-	for <lists.virtualization@lfdr.de>; Thu, 20 Jun 2019 09:44:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BCA24C895
+	for <lists.virtualization@lfdr.de>; Thu, 20 Jun 2019 09:44:46 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9281CC00;
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 234ECC58;
 	Thu, 20 Jun 2019 07:44:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A8CE8BA9
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 20 Jun 2019 07:44:39 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 23A9F7DB
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E2BBBBA9
 	for <virtualization@lists.linux-foundation.org>;
 	Thu, 20 Jun 2019 07:44:38 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
-	[10.5.11.13])
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 261107ED
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 20 Jun 2019 07:44:38 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id E0AC981127;
-	Thu, 20 Jun 2019 07:44:30 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id C81B13060486;
+	Thu, 20 Jun 2019 07:44:31 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-212.ams2.redhat.com
 	[10.36.116.212])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 7FCD660A9B;
-	Thu, 20 Jun 2019 07:44:25 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 3B6E760FAB;
+	Thu, 20 Jun 2019 07:44:28 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id CE3FA17511; Thu, 20 Jun 2019 09:44:24 +0200 (CEST)
+	id 60AFE17536; Thu, 20 Jun 2019 09:44:25 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH 3/6] drm/qxl: use embedded gem object
-Date: Thu, 20 Jun 2019 09:44:21 +0200
-Message-Id: <20190620074424.1677-4-kraxel@redhat.com>
+Subject: [PATCH 5/6] drm/ttm: use gem vma_node
+Date: Thu, 20 Jun 2019 09:44:23 +0200
+Message-Id: <20190620074424.1677-6-kraxel@redhat.com>
 In-Reply-To: <20190620074424.1677-1-kraxel@redhat.com>
 References: <20190620074424.1677-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.28]);
-	Thu, 20 Jun 2019 07:44:35 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.47]);
+	Thu, 20 Jun 2019 07:44:37 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+Cc: "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>,
+	David Airlie <airlied@linux.ie>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	open list <linux-kernel@vger.kernel.org>,
+	"open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
 	"open list:DRM DRIVER FOR QXL VIRTUAL GPU"
 	<virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+	Maxime Ripard <maxime.ripard@bootlin.com>,
+	Huang Rui <ray.huang@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
+	"open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+	<spice-devel@lists.freedesktop.org>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Dave Airlie <airlied@redhat.com>, Sean Paul <sean@poorly.run>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,278 +77,224 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Drop drm_gem_object from qxl_bo, use the
-ttm_buffer_object.base instead.
+Drop vma_node from ttm_buffer_object, use the gem struct
+(base.vma_node) instead.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/gpu/drm/qxl/qxl_drv.h     |  6 +++---
- drivers/gpu/drm/qxl/qxl_object.h  |  4 ++--
- drivers/gpu/drm/qxl/qxl_cmd.c     |  4 ++--
- drivers/gpu/drm/qxl/qxl_debugfs.c |  2 +-
- drivers/gpu/drm/qxl/qxl_display.c |  8 ++++----
- drivers/gpu/drm/qxl/qxl_gem.c     |  2 +-
- drivers/gpu/drm/qxl/qxl_object.c  | 20 ++++++++++----------
- drivers/gpu/drm/qxl/qxl_release.c |  2 +-
- drivers/gpu/drm/qxl/qxl_ttm.c     |  4 ++--
- 9 files changed, 26 insertions(+), 26 deletions(-)
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.h | 2 +-
+ drivers/gpu/drm/qxl/qxl_object.h           | 2 +-
+ drivers/gpu/drm/radeon/radeon_object.h     | 2 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.h       | 2 +-
+ include/drm/ttm/ttm_bo_api.h               | 5 +----
+ drivers/gpu/drm/drm_gem_vram_helper.c      | 5 +----
+ drivers/gpu/drm/ttm/ttm_bo.c               | 8 ++++----
+ drivers/gpu/drm/ttm/ttm_bo_util.c          | 2 +-
+ drivers/gpu/drm/ttm/ttm_bo_vm.c            | 9 +++++----
+ drivers/gpu/drm/virtio/virtgpu_prime.c     | 3 ---
+ 10 files changed, 16 insertions(+), 24 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index 2896bb6fdbf4..b80d4a4361cd 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -72,12 +72,13 @@ extern int qxl_max_ioctls;
- 	QXL_INTERRUPT_CLIENT_MONITORS_CONFIG)
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.h
+index c430e8259038..002fd1450ec7 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.h
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.h
+@@ -192,7 +192,7 @@ static inline unsigned amdgpu_bo_gpu_page_alignment(struct amdgpu_bo *bo)
+  */
+ static inline u64 amdgpu_bo_mmap_offset(struct amdgpu_bo *bo)
+ {
+-	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
++	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
+ }
  
- struct qxl_bo {
-+	struct ttm_buffer_object	tbo;
-+
- 	/* Protected by gem.mutex */
- 	struct list_head		list;
- 	/* Protected by tbo.reserved */
- 	struct ttm_place		placements[3];
- 	struct ttm_placement		placement;
--	struct ttm_buffer_object	tbo;
- 	struct ttm_bo_kmap_obj		kmap;
- 	unsigned int pin_count;
- 	void				*kptr;
-@@ -85,7 +86,6 @@ struct qxl_bo {
- 	int                             type;
- 
- 	/* Constant after initialization */
--	struct drm_gem_object		gem_base;
- 	unsigned int is_primary:1; /* is this now a primary surface */
- 	unsigned int is_dumb:1;
- 	struct qxl_bo *shadow;
-@@ -94,7 +94,7 @@ struct qxl_bo {
- 	uint32_t surface_id;
- 	struct qxl_release *surf_create;
- };
--#define gem_to_qxl_bo(gobj) container_of((gobj), struct qxl_bo, gem_base)
-+#define gem_to_qxl_bo(gobj) container_of((gobj), struct qxl_bo, tbo.base)
- #define to_qxl_bo(tobj) container_of((tobj), struct qxl_bo, tbo)
- 
- struct qxl_gem {
+ /**
 diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_object.h
-index 255b914e2a7b..b812d4ae9d0d 100644
+index b812d4ae9d0d..8ae54ba7857c 100644
 --- a/drivers/gpu/drm/qxl/qxl_object.h
 +++ b/drivers/gpu/drm/qxl/qxl_object.h
-@@ -34,7 +34,7 @@ static inline int qxl_bo_reserve(struct qxl_bo *bo, bool no_wait)
- 	r = ttm_bo_reserve(&bo->tbo, true, no_wait, NULL);
- 	if (unlikely(r != 0)) {
- 		if (r != -ERESTARTSYS) {
--			struct drm_device *ddev = bo->gem_base.dev;
-+			struct drm_device *ddev = bo->tbo.base.dev;
+@@ -60,7 +60,7 @@ static inline unsigned long qxl_bo_size(struct qxl_bo *bo)
  
- 			dev_err(ddev->dev, "%p reserve failed\n", bo);
- 		}
-@@ -71,7 +71,7 @@ static inline int qxl_bo_wait(struct qxl_bo *bo, u32 *mem_type,
- 	r = ttm_bo_reserve(&bo->tbo, true, no_wait, NULL);
- 	if (unlikely(r != 0)) {
- 		if (r != -ERESTARTSYS) {
--			struct drm_device *ddev = bo->gem_base.dev;
-+			struct drm_device *ddev = bo->tbo.base.dev;
- 
- 			dev_err(ddev->dev, "%p reserve failed for wait\n",
- 				bo);
-diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
-index 0a2e51af1230..498000899bfd 100644
---- a/drivers/gpu/drm/qxl/qxl_cmd.c
-+++ b/drivers/gpu/drm/qxl/qxl_cmd.c
-@@ -375,7 +375,7 @@ void qxl_io_destroy_primary(struct qxl_device *qdev)
+ static inline u64 qxl_bo_mmap_offset(struct qxl_bo *bo)
  {
- 	wait_for_io_cmd(qdev, 0, QXL_IO_DESTROY_PRIMARY_ASYNC);
- 	qdev->primary_bo->is_primary = false;
--	drm_gem_object_put_unlocked(&qdev->primary_bo->gem_base);
-+	drm_gem_object_put_unlocked(&qdev->primary_bo->tbo.base);
- 	qdev->primary_bo = NULL;
+-	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
++	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
  }
  
-@@ -402,7 +402,7 @@ void qxl_io_create_primary(struct qxl_device *qdev, struct qxl_bo *bo)
- 	wait_for_io_cmd(qdev, 0, QXL_IO_CREATE_PRIMARY_ASYNC);
- 	qdev->primary_bo = bo;
- 	qdev->primary_bo->is_primary = true;
--	drm_gem_object_get(&qdev->primary_bo->gem_base);
-+	drm_gem_object_get(&qdev->primary_bo->tbo.base);
+ static inline int qxl_bo_wait(struct qxl_bo *bo, u32 *mem_type,
+diff --git a/drivers/gpu/drm/radeon/radeon_object.h b/drivers/gpu/drm/radeon/radeon_object.h
+index 9ffd8215d38a..e5554bf9140e 100644
+--- a/drivers/gpu/drm/radeon/radeon_object.h
++++ b/drivers/gpu/drm/radeon/radeon_object.h
+@@ -116,7 +116,7 @@ static inline unsigned radeon_bo_gpu_page_alignment(struct radeon_bo *bo)
+  */
+ static inline u64 radeon_bo_mmap_offset(struct radeon_bo *bo)
+ {
+-	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
++	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
  }
  
- void qxl_io_memslot_add(struct qxl_device *qdev, uint8_t id)
-diff --git a/drivers/gpu/drm/qxl/qxl_debugfs.c b/drivers/gpu/drm/qxl/qxl_debugfs.c
-index 118422549828..013b938986c7 100644
---- a/drivers/gpu/drm/qxl/qxl_debugfs.c
-+++ b/drivers/gpu/drm/qxl/qxl_debugfs.c
-@@ -66,7 +66,7 @@ qxl_debugfs_buffers_info(struct seq_file *m, void *data)
- 		rcu_read_unlock();
+ extern int radeon_bo_wait(struct radeon_bo *bo, u32 *mem_type,
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+index 9e2d3062b01d..7146ba00fd5b 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.h
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+@@ -396,7 +396,7 @@ static inline void virtio_gpu_object_unref(struct virtio_gpu_object **bo)
  
- 		seq_printf(m, "size %ld, pc %d, num releases %d\n",
--			   (unsigned long)bo->gem_base.size,
-+			   (unsigned long)bo->tbo.base.size,
- 			   bo->pin_count, rel);
+ static inline u64 virtio_gpu_object_mmap_offset(struct virtio_gpu_object *bo)
+ {
+-	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
++	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
+ }
+ 
+ static inline int virtio_gpu_object_reserve(struct virtio_gpu_object *bo,
+diff --git a/include/drm/ttm/ttm_bo_api.h b/include/drm/ttm/ttm_bo_api.h
+index 88aa7bf1b18a..77bd420a147a 100644
+--- a/include/drm/ttm/ttm_bo_api.h
++++ b/include/drm/ttm/ttm_bo_api.h
+@@ -152,7 +152,6 @@ struct ttm_tt;
+  * @ddestroy: List head for the delayed destroy list.
+  * @swap: List head for swap LRU list.
+  * @moving: Fence set when BO is moving
+- * @vma_node: Address space manager node.
+  * @offset: The current GPU offset, which can have different meanings
+  * depending on the memory type. For SYSTEM type memory, it should be 0.
+  * @cur_placement: Hint of current placement.
+@@ -219,9 +218,7 @@ struct ttm_buffer_object {
+ 	 */
+ 
+ 	struct dma_fence *moving;
+-
+-	struct drm_vma_offset_node vma_node;
+-
++	/* base.vma_node */
+ 	unsigned priority;
+ 
+ 	/**
+diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_gem_vram_helper.c
+index 61d9520cc15f..2e474dee30df 100644
+--- a/drivers/gpu/drm/drm_gem_vram_helper.c
++++ b/drivers/gpu/drm/drm_gem_vram_helper.c
+@@ -163,7 +163,7 @@ EXPORT_SYMBOL(drm_gem_vram_put);
+  */
+ u64 drm_gem_vram_mmap_offset(struct drm_gem_vram_object *gbo)
+ {
+-	return drm_vma_node_offset_addr(&gbo->bo.vma_node);
++	return drm_vma_node_offset_addr(&gbo->bo.base.vma_node);
+ }
+ EXPORT_SYMBOL(drm_gem_vram_mmap_offset);
+ 
+@@ -633,9 +633,6 @@ EXPORT_SYMBOL(drm_gem_vram_driver_gem_prime_vunmap);
+ int drm_gem_vram_driver_gem_prime_mmap(struct drm_gem_object *gem,
+ 				       struct vm_area_struct *vma)
+ {
+-	struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(gem);
+-
+-	gbo->bo.base.vma_node.vm_node.start = gbo->bo.vma_node.vm_node.start;
+ 	return drm_gem_prime_mmap(gem, vma);
+ }
+ EXPORT_SYMBOL(drm_gem_vram_driver_gem_prime_mmap);
+diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
+index 516eef3b76d5..1d91da85f399 100644
+--- a/drivers/gpu/drm/ttm/ttm_bo.c
++++ b/drivers/gpu/drm/ttm/ttm_bo.c
+@@ -672,7 +672,7 @@ static void ttm_bo_release(struct kref *kref)
+ 	struct ttm_bo_device *bdev = bo->bdev;
+ 	struct ttm_mem_type_manager *man = &bdev->man[bo->mem.mem_type];
+ 
+-	drm_vma_offset_remove(&bdev->vma_manager, &bo->vma_node);
++	drm_vma_offset_remove(&bdev->vma_manager, &bo->base.vma_node);
+ 	ttm_mem_io_lock(man, false);
+ 	ttm_mem_io_free_vm(bo);
+ 	ttm_mem_io_unlock(man);
+@@ -1342,9 +1342,9 @@ int ttm_bo_init_reserved(struct ttm_bo_device *bdev,
+ 		 * away once all users are switched over.
+ 		 */
+ 		reservation_object_init(&bo->base._resv);
++		drm_vma_node_reset(&bo->base.vma_node);
  	}
- 	return 0;
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 8b319ebbb0fb..93e31d062854 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -794,7 +794,7 @@ static int qxl_plane_prepare_fb(struct drm_plane *plane,
- 		    qdev->dumb_shadow_bo->surf.height != surf.height) {
- 			if (qdev->dumb_shadow_bo) {
- 				drm_gem_object_put_unlocked
--					(&qdev->dumb_shadow_bo->gem_base);
-+					(&qdev->dumb_shadow_bo->tbo.base);
- 				qdev->dumb_shadow_bo = NULL;
+ 	atomic_inc(&bo->bdev->glob->bo_count);
+-	drm_vma_node_reset(&bo->vma_node);
+ 
+ 	/*
+ 	 * For ttm_bo_type_device buffers, allocate
+@@ -1352,7 +1352,7 @@ int ttm_bo_init_reserved(struct ttm_bo_device *bdev,
+ 	 */
+ 	if (bo->type == ttm_bo_type_device ||
+ 	    bo->type == ttm_bo_type_sg)
+-		ret = drm_vma_offset_add(&bdev->vma_manager, &bo->vma_node,
++		ret = drm_vma_offset_add(&bdev->vma_manager, &bo->base.vma_node,
+ 					 bo->mem.num_pages);
+ 
+ 	/* passed reservation objects should already be locked,
+@@ -1780,7 +1780,7 @@ void ttm_bo_unmap_virtual_locked(struct ttm_buffer_object *bo)
+ {
+ 	struct ttm_bo_device *bdev = bo->bdev;
+ 
+-	drm_vma_node_unmap(&bo->vma_node, bdev->dev_mapping);
++	drm_vma_node_unmap(&bo->base.vma_node, bdev->dev_mapping);
+ 	ttm_mem_io_free_vm(bo);
+ }
+ 
+diff --git a/drivers/gpu/drm/ttm/ttm_bo_util.c b/drivers/gpu/drm/ttm/ttm_bo_util.c
+index 3d2617dd63e3..59f1b979b0da 100644
+--- a/drivers/gpu/drm/ttm/ttm_bo_util.c
++++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
+@@ -510,7 +510,7 @@ static int ttm_buffer_object_transfer(struct ttm_buffer_object *bo,
+ 	INIT_LIST_HEAD(&fbo->base.io_reserve_lru);
+ 	mutex_init(&fbo->base.wu_mutex);
+ 	fbo->base.moving = NULL;
+-	drm_vma_node_reset(&fbo->base.vma_node);
++	drm_vma_node_reset(&fbo->base.base.vma_node);
+ 	atomic_set(&fbo->base.cpu_writers, 0);
+ 
+ 	kref_init(&fbo->base.list_kref);
+diff --git a/drivers/gpu/drm/ttm/ttm_bo_vm.c b/drivers/gpu/drm/ttm/ttm_bo_vm.c
+index 6dacff49c1cc..fb6875a789b7 100644
+--- a/drivers/gpu/drm/ttm/ttm_bo_vm.c
++++ b/drivers/gpu/drm/ttm/ttm_bo_vm.c
+@@ -211,9 +211,9 @@ static vm_fault_t ttm_bo_vm_fault(struct vm_fault *vmf)
+ 	}
+ 
+ 	page_offset = ((address - vma->vm_start) >> PAGE_SHIFT) +
+-		vma->vm_pgoff - drm_vma_node_start(&bo->vma_node);
++		vma->vm_pgoff - drm_vma_node_start(&bo->base.vma_node);
+ 	page_last = vma_pages(vma) + vma->vm_pgoff -
+-		drm_vma_node_start(&bo->vma_node);
++		drm_vma_node_start(&bo->base.vma_node);
+ 
+ 	if (unlikely(page_offset >= bo->num_pages)) {
+ 		ret = VM_FAULT_SIGBUS;
+@@ -267,7 +267,7 @@ static vm_fault_t ttm_bo_vm_fault(struct vm_fault *vmf)
+ 			} else if (unlikely(!page)) {
+ 				break;
  			}
- 			qxl_bo_create(qdev, surf.height * surf.stride,
-@@ -804,10 +804,10 @@ static int qxl_plane_prepare_fb(struct drm_plane *plane,
- 		if (user_bo->shadow != qdev->dumb_shadow_bo) {
- 			if (user_bo->shadow) {
- 				drm_gem_object_put_unlocked
--					(&user_bo->shadow->gem_base);
-+					(&user_bo->shadow->tbo.base);
- 				user_bo->shadow = NULL;
- 			}
--			drm_gem_object_get(&qdev->dumb_shadow_bo->gem_base);
-+			drm_gem_object_get(&qdev->dumb_shadow_bo->tbo.base);
- 			user_bo->shadow = qdev->dumb_shadow_bo;
+-			page->index = drm_vma_node_start(&bo->vma_node) +
++			page->index = drm_vma_node_start(&bo->base.vma_node) +
+ 				page_offset;
+ 			pfn = page_to_pfn(page);
  		}
+@@ -413,7 +413,8 @@ static struct ttm_buffer_object *ttm_bo_vm_lookup(struct ttm_bo_device *bdev,
+ 
+ 	node = drm_vma_offset_lookup_locked(&bdev->vma_manager, offset, pages);
+ 	if (likely(node)) {
+-		bo = container_of(node, struct ttm_buffer_object, vma_node);
++		bo = container_of(node, struct ttm_buffer_object,
++				  base.vma_node);
+ 		bo = ttm_bo_get_unless_zero(bo);
  	}
-@@ -838,7 +838,7 @@ static void qxl_plane_cleanup_fb(struct drm_plane *plane,
- 	qxl_bo_unpin(user_bo);
  
- 	if (old_state->fb != plane->state->fb && user_bo->shadow) {
--		drm_gem_object_put_unlocked(&user_bo->shadow->gem_base);
-+		drm_gem_object_put_unlocked(&user_bo->shadow->tbo.base);
- 		user_bo->shadow = NULL;
- 	}
- }
-diff --git a/drivers/gpu/drm/qxl/qxl_gem.c b/drivers/gpu/drm/qxl/qxl_gem.c
-index 89606c819d82..002dc5a7c44b 100644
---- a/drivers/gpu/drm/qxl/qxl_gem.c
-+++ b/drivers/gpu/drm/qxl/qxl_gem.c
-@@ -64,7 +64,7 @@ int qxl_gem_object_create(struct qxl_device *qdev, int size,
- 				  size, initial_domain, alignment, r);
- 		return r;
- 	}
--	*obj = &qbo->gem_base;
-+	*obj = &qbo->tbo.base;
- 
- 	mutex_lock(&qdev->gem.mutex);
- 	list_add_tail(&qbo->list, &qdev->gem.objects);
-diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-index 4928fa602944..548dfe6f3b26 100644
---- a/drivers/gpu/drm/qxl/qxl_object.c
-+++ b/drivers/gpu/drm/qxl/qxl_object.c
-@@ -33,14 +33,14 @@ static void qxl_ttm_bo_destroy(struct ttm_buffer_object *tbo)
- 	struct qxl_device *qdev;
- 
- 	bo = to_qxl_bo(tbo);
--	qdev = (struct qxl_device *)bo->gem_base.dev->dev_private;
-+	qdev = (struct qxl_device *)bo->tbo.base.dev->dev_private;
- 
- 	qxl_surface_evict(qdev, bo, false);
- 	WARN_ON_ONCE(bo->map_count > 0);
- 	mutex_lock(&qdev->gem.mutex);
- 	list_del_init(&bo->list);
- 	mutex_unlock(&qdev->gem.mutex);
--	drm_gem_object_release(&bo->gem_base);
-+	drm_gem_object_release(&bo->tbo.base);
- 	kfree(bo);
- }
- 
-@@ -95,7 +95,7 @@ int qxl_bo_create(struct qxl_device *qdev,
- 	if (bo == NULL)
- 		return -ENOMEM;
- 	size = roundup(size, PAGE_SIZE);
--	r = drm_gem_object_init(&qdev->ddev, &bo->gem_base, size);
-+	r = drm_gem_object_init(&qdev->ddev, &bo->tbo.base, size);
- 	if (unlikely(r)) {
- 		kfree(bo);
- 		return r;
-@@ -214,20 +214,20 @@ void qxl_bo_unref(struct qxl_bo **bo)
- 	if ((*bo) == NULL)
- 		return;
- 
--	drm_gem_object_put_unlocked(&(*bo)->gem_base);
-+	drm_gem_object_put_unlocked(&(*bo)->tbo.base);
- 	*bo = NULL;
- }
- 
- struct qxl_bo *qxl_bo_ref(struct qxl_bo *bo)
+diff --git a/drivers/gpu/drm/virtio/virtgpu_prime.c b/drivers/gpu/drm/virtio/virtgpu_prime.c
+index 8fbf71bd0c5e..fed86f3b099e 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_prime.c
++++ b/drivers/gpu/drm/virtio/virtgpu_prime.c
+@@ -66,8 +66,5 @@ void virtgpu_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
+ int virtgpu_gem_prime_mmap(struct drm_gem_object *obj,
+ 			   struct vm_area_struct *vma)
  {
--	drm_gem_object_get(&bo->gem_base);
-+	drm_gem_object_get(&bo->tbo.base);
- 	return bo;
+-	struct virtio_gpu_object *bo = gem_to_virtio_gpu_obj(obj);
+-
+-	bo->gem_base.vma_node.vm_node.start = bo->tbo.vma_node.vm_node.start;
+ 	return drm_gem_prime_mmap(obj, vma);
  }
- 
- static int __qxl_bo_pin(struct qxl_bo *bo)
- {
- 	struct ttm_operation_ctx ctx = { false, false };
--	struct drm_device *ddev = bo->gem_base.dev;
-+	struct drm_device *ddev = bo->tbo.base.dev;
- 	int r;
- 
- 	if (bo->pin_count) {
-@@ -247,7 +247,7 @@ static int __qxl_bo_pin(struct qxl_bo *bo)
- static int __qxl_bo_unpin(struct qxl_bo *bo)
- {
- 	struct ttm_operation_ctx ctx = { false, false };
--	struct drm_device *ddev = bo->gem_base.dev;
-+	struct drm_device *ddev = bo->tbo.base.dev;
- 	int r, i;
- 
- 	if (!bo->pin_count) {
-@@ -310,13 +310,13 @@ void qxl_bo_force_delete(struct qxl_device *qdev)
- 	dev_err(qdev->ddev.dev, "Userspace still has active objects !\n");
- 	list_for_each_entry_safe(bo, n, &qdev->gem.objects, list) {
- 		dev_err(qdev->ddev.dev, "%p %p %lu %lu force free\n",
--			&bo->gem_base, bo, (unsigned long)bo->gem_base.size,
--			*((unsigned long *)&bo->gem_base.refcount));
-+			&bo->tbo.base, bo, (unsigned long)bo->tbo.base.size,
-+			*((unsigned long *)&bo->tbo.base.refcount));
- 		mutex_lock(&qdev->gem.mutex);
- 		list_del_init(&bo->list);
- 		mutex_unlock(&qdev->gem.mutex);
- 		/* this should unref the ttm bo */
--		drm_gem_object_put_unlocked(&bo->gem_base);
-+		drm_gem_object_put_unlocked(&bo->tbo.base);
- 	}
- }
- 
-diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
-index 49f9a9385393..32126e8836b3 100644
---- a/drivers/gpu/drm/qxl/qxl_release.c
-+++ b/drivers/gpu/drm/qxl/qxl_release.c
-@@ -239,7 +239,7 @@ static int qxl_release_validate_bo(struct qxl_bo *bo)
- 		return ret;
- 
- 	/* allocate a surface for reserved + validated buffers */
--	ret = qxl_bo_check_id(bo->gem_base.dev->dev_private, bo);
-+	ret = qxl_bo_check_id(bo->tbo.base.dev->dev_private, bo);
- 	if (ret)
- 		return ret;
- 	return 0;
-diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c b/drivers/gpu/drm/qxl/qxl_ttm.c
-index 0234f8556ada..2a574cc4d95f 100644
---- a/drivers/gpu/drm/qxl/qxl_ttm.c
-+++ b/drivers/gpu/drm/qxl/qxl_ttm.c
-@@ -153,7 +153,7 @@ static int qxl_verify_access(struct ttm_buffer_object *bo, struct file *filp)
- {
- 	struct qxl_bo *qbo = to_qxl_bo(bo);
- 
--	return drm_vma_node_verify_access(&qbo->gem_base.vma_node,
-+	return drm_vma_node_verify_access(&qbo->tbo.base.vma_node,
- 					  filp->private_data);
- }
- 
-@@ -295,7 +295,7 @@ static void qxl_bo_move_notify(struct ttm_buffer_object *bo,
- 	if (!qxl_ttm_bo_is_qxl_bo(bo))
- 		return;
- 	qbo = to_qxl_bo(bo);
--	qdev = qbo->gem_base.dev->dev_private;
-+	qdev = qbo->tbo.base.dev->dev_private;
- 
- 	if (bo->mem.mem_type == TTM_PL_PRIV && qbo->surface_id)
- 		qxl_surface_evict(qdev, qbo, new_mem ? true : false);
 -- 
 2.18.1
 
