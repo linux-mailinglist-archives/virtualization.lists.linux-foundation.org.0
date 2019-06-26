@@ -2,83 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0B2A56EC5
-	for <lists.virtualization@lfdr.de>; Wed, 26 Jun 2019 18:30:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFC9057518
+	for <lists.virtualization@lfdr.de>; Thu, 27 Jun 2019 01:55:38 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 05F44C8E;
-	Wed, 26 Jun 2019 16:30:05 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 41411CBB;
+	Wed, 26 Jun 2019 23:55:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A8922C59
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DDF6BCAA
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 26 Jun 2019 16:30:02 +0000 (UTC)
+	Wed, 26 Jun 2019 23:55:33 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1248F710
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+	[209.85.166.68])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6F2F53D0
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 26 Jun 2019 16:30:01 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id d4so4104668edr.13
+	Wed, 26 Jun 2019 23:55:33 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id e5so720726iok.4
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 26 Jun 2019 09:30:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=pxtWuk1q9NwdLhCWjigp44Ai1m3FAAy67WUlQm2a8yA=;
-	b=F9CIevuQHRyHX0Cb4LbioMn7puTjlO57X0AZlpXpUCdNutm0m2aJ7IS0d8M21OWHZK
-	+TETAqZTKW1TY9VDnAGJK5hZkd6b7xbLie+HSdTg2DDc63QTHsEvYtwx3R/luOMgj16x
-	ehuLvbWfKr7ecteKGqISws5eJ8uiRlMZCBetw=
+	Wed, 26 Jun 2019 16:55:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=WFOmBfL98emh/MYkHT7m04HAElQFNQEeVW5ROqlJL+Y=;
+	b=WkdsB90003wZlIbZPOM6yLKQ8fZBLPGqZD10BWCj96jgkU45YwHT5zGBlN5RrS2PjH
+	pieBPX2NOzAKAgDARKZwvKO71cNZl1UlkkjYQCJ8lj0+qHwNg2VtG2cJECKc5bjHTmwr
+	Dg2ykRz1tGxTbqn45qfr393V2c2KX0AW7GsXwEdu8Q6I8bmrjyz6wikBj4K0vP3QtNDL
+	jZOKCHdQbEhllLoUcNHcFkD+UjcVIANEc6MnGoYQIwF0nMdBe1+OFnWXoxpXl1QQf8x0
+	Qi/y2bncdtk52+xsoJb4kKI+4BKc8ZN8XP0Ag9T+uKf8XV9Lhwtg4+3bygxI5ufL+jnq
+	+uUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-disposition
-	:in-reply-to:user-agent;
-	bh=pxtWuk1q9NwdLhCWjigp44Ai1m3FAAy67WUlQm2a8yA=;
-	b=ZnkZuy34ADhKQabTi1YYyHoywPY+6C6q9Z4Wi+IvyO1T1sl7RsMBWb7wzqpD4Ua4ZZ
-	81jEP/SF1wkcXJjCrVS360CWQxAc56o7u1hKo9v3yoD0IgtNbgSsUh0CqqxSBXj9WZrB
-	MCNkcyokXQ0v0VfY6OK2VuxmrhlydaubYo49Ba5Mnnw4ei6qb6N0tMaywmCkcdtYGxtf
-	3NdJRFuNs6NRUmPFxsWPkgH7E3ikB91QKbrMeVJoxcIm937zGaoTMJfryNCG4AjYKMuu
-	fzgYb5iwh4md1LGc4p7hWFHe++8NzcQvXM5s3ZC1GHyOAgg27pq+SvcI/XqyxLTylJ30
-	SBzQ==
-X-Gm-Message-State: APjAAAVs9GZIi/M9B45aA4IODqtOGAX15PsSG9+WewKXCv7OMU4GrSef
-	RfQfexx3ThxQdZ/B9mWQ67nvTA==
-X-Google-Smtp-Source: APXvYqw14KV/pLRZOsgSJp+IRx5aZGACL1k4TeWcmneUTB28zjQgI7qKkEuffGFS5EHv4rTsmQzyaA==
-X-Received: by 2002:a50:b4fd:: with SMTP id x58mr6357100edd.97.1561566600740; 
-	Wed, 26 Jun 2019 09:30:00 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id g7sm5884310eda.52.2019.06.26.09.29.59
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 26 Jun 2019 09:29:59 -0700 (PDT)
-Date: Wed, 26 Jun 2019 18:29:57 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH 2/2] drm/bochs: fix framebuffer setup.
-Message-ID: <20190626162957.GW12905@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
-	dri-devel@lists.freedesktop.org, tzimmermann@suse.de,
-	David Airlie <airlied@linux.ie>,
-	"open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>, 
-	open list <linux-kernel@vger.kernel.org>
-References: <20190626065551.12956-1-kraxel@redhat.com>
-	<20190626065551.12956-3-kraxel@redhat.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=WFOmBfL98emh/MYkHT7m04HAElQFNQEeVW5ROqlJL+Y=;
+	b=jGoBYR2jR+Z6kwL/9MumSNF0hkiBiwSWkJQXCz+BJrmgWhYs5865VS0m4FYJhXD7Xc
+	6LyzYuCiUU9ZIQyt3BFWD/mpduze6pS7ux9Ed09jivkgtGmc11F0DKVUHNUT8Op8WL/y
+	NXs2QX82+7lAhME3Fkvzj/9tkQwP4cNqthN6izNuINfL1kM5SFnba0MOuqw1BnxjaZcY
+	AmmlF2qLX+VlU4SXzBPWJzTX9QVLoH1xwvarnVcmXuMDJ06h76C7Lsl7j/lKgDA9clrf
+	iSgdvOJQvOPL2GKFAG5XCdoDS0Q+TZ4e0dDxJkrd1v0ZtMmZP1wWQcPNMt33uK8ucv7t
+	sUFw==
+X-Gm-Message-State: APjAAAUEYkPUfgP4kpQ4+XAA6EBSWdsTx75O/QwmtSRvlwHB1T8/x49t
+	XiKxqXJfSs5P/DAS2IBUhcUQ67jeYKb9cFqH8gU=
+X-Google-Smtp-Source: APXvYqxJskAboHi/EJpGElxVyZ0pbUBPtkqfxFuTpUiQaqkNzIP0fuT6ddNPHhSVOlefT8unJ7Gyt/hPlYS+l8eheig=
+X-Received: by 2002:a02:b10b:: with SMTP id r11mr836507jah.140.1561593331304; 
+	Wed, 26 Jun 2019 16:55:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190626065551.12956-3-kraxel@redhat.com>
-X-Operating-System: Linux phenom 4.19.0-5-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <20190620060726.926-1-kraxel@redhat.com>
+	<20190620060726.926-3-kraxel@redhat.com>
+In-Reply-To: <20190620060726.926-3-kraxel@redhat.com>
+From: Chia-I Wu <olvaffe@gmail.com>
+Date: Wed, 26 Jun 2019 16:55:20 -0700
+Message-ID: <CAPaKu7RWpoRkTkoatdYHz6itHZFvUYgaBcQAXnSC2gDc+dFZxQ@mail.gmail.com>
+Subject: Re: [PATCH v4 02/12] drm/virtio: switch virtio_gpu_wait_ioctl() to
+	gem helper.
+To: Gerd Hoffmann <kraxel@redhat.com>
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
-	open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
-	"open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	ML dri-devel <dri-devel@lists.freedesktop.org>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -95,89 +82,71 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Jun 26, 2019 at 08:55:51AM +0200, Gerd Hoffmann wrote:
-> If bo->width doesn't match fb->width the driver fails to configure
-> the display correctly, resulting in a scrambled display.  Fix it.
-> 
+On Wed, Jun 19, 2019 at 11:07 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> Use drm_gem_reservation_object_wait() in virtio_gpu_wait_ioctl().
+> This also makes the ioctl run lockless.
+The userspace has a BO cache to avoid freeing BOs immediately but to
+reuse them on next allocations.  The BO cache checks if a BO is busy
+before reuse, and I am seeing a big negative perf impact because of
+slow virtio_gpu_wait_ioctl.  I wonder if this helps.
+
+
+>
+> v2: use reservation_object_test_signaled_rcu for VIRTGPU_WAIT_NOWAIT.
+>
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 > ---
->  drivers/gpu/drm/bochs/bochs.h     |  2 +-
->  drivers/gpu/drm/bochs/bochs_hw.c  | 13 +++++++++----
->  drivers/gpu/drm/bochs/bochs_kms.c |  1 +
->  3 files changed, 11 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/bochs/bochs.h b/drivers/gpu/drm/bochs/bochs.h
-> index cc35d492142c..78c0283496cc 100644
-> --- a/drivers/gpu/drm/bochs/bochs.h
-> +++ b/drivers/gpu/drm/bochs/bochs.h
-> @@ -86,7 +86,7 @@ void bochs_hw_setmode(struct bochs_device *bochs,
->  void bochs_hw_setformat(struct bochs_device *bochs,
->  			const struct drm_format_info *format);
->  void bochs_hw_setbase(struct bochs_device *bochs,
-> -		      int x, int y, u64 addr);
-> +		      int x, int y, int fbwidth, u64 addr);
->  int bochs_hw_load_edid(struct bochs_device *bochs);
->  
->  /* bochs_mm.c */
-> diff --git a/drivers/gpu/drm/bochs/bochs_hw.c b/drivers/gpu/drm/bochs/bochs_hw.c
-> index 791ab2f79947..141aa02962d3 100644
-> --- a/drivers/gpu/drm/bochs/bochs_hw.c
-> +++ b/drivers/gpu/drm/bochs/bochs_hw.c
-> @@ -255,16 +255,21 @@ void bochs_hw_setformat(struct bochs_device *bochs,
->  }
->  
->  void bochs_hw_setbase(struct bochs_device *bochs,
-> -		      int x, int y, u64 addr)
-> +		      int x, int y, int fbwidth, u64 addr)
+>  drivers/gpu/drm/virtio/virtgpu_ioctl.c | 24 ++++++++++--------------
+>  1 file changed, 10 insertions(+), 14 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> index ac60be9b5c19..313c770ea2c5 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> @@ -464,23 +464,19 @@ static int virtio_gpu_wait_ioctl(struct drm_device *dev, void *data,
+>                             struct drm_file *file)
 >  {
-> -	unsigned long offset = (unsigned long)addr +
-> +	unsigned long offset;
-> +	unsigned int vx, vy;
-> +
-> +	bochs->stride = fbwidth * (bochs->bpp / 8);
-> +	offset = (unsigned long)addr +
->  		y * bochs->stride +
->  		x * (bochs->bpp / 8);
-> -	int vy = offset / bochs->stride;
-> -	int vx = (offset % bochs->stride) * 8 / bochs->bpp;
-> +	vy = offset / bochs->stride;
-> +	vx = (offset % bochs->stride) * 8 / bochs->bpp;
->  
->  	DRM_DEBUG_DRIVER("x %d, y %d, addr %llx -> offset %lx, vx %d, vy %d\n",
->  			 x, y, addr, offset, vx, vy);
-> +	bochs_dispi_write(bochs, VBE_DISPI_INDEX_VIRT_WIDTH, fbwidth);
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_X_OFFSET, vx);
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_Y_OFFSET, vy);
+>         struct drm_virtgpu_3d_wait *args = data;
+> -       struct drm_gem_object *gobj = NULL;
+> -       struct virtio_gpu_object *qobj = NULL;
+> +       struct drm_gem_object *obj;
+> +       long timeout = 15 * HZ;
+>         int ret;
+> -       bool nowait = false;
+>
+> -       gobj = drm_gem_object_lookup(file, args->handle);
+> -       if (gobj == NULL)
+> -               return -ENOENT;
+> +       if (args->flags & VIRTGPU_WAIT_NOWAIT) {
+> +               obj = drm_gem_object_lookup(file, args->handle);
+Don't we need a NULL check here?
+> +               ret = reservation_object_test_signaled_rcu(obj->resv, true);
+> +               drm_gem_object_put_unlocked(obj);
+> +               return ret ? 0 : -EBUSY;
+> +       }
+>
+> -       qobj = gem_to_virtio_gpu_obj(gobj);
+> -
+> -       if (args->flags & VIRTGPU_WAIT_NOWAIT)
+> -               nowait = true;
+> -       ret = virtio_gpu_object_wait(qobj, nowait);
+> -
+> -       drm_gem_object_put_unlocked(gobj);
+> -       return ret;
+> +       return drm_gem_reservation_object_wait(file, args->handle,
+> +                                              true, timeout);
 >  }
-> diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/bochs_kms.c
-> index 5904eddc83a5..1f6aa11a1dc9 100644
-> --- a/drivers/gpu/drm/bochs/bochs_kms.c
-> +++ b/drivers/gpu/drm/bochs/bochs_kms.c
-> @@ -36,6 +36,7 @@ static void bochs_plane_update(struct bochs_device *bochs,
->  	bochs_hw_setbase(bochs,
->  			 state->crtc_x,
->  			 state->crtc_y,
-> +			 gbo->width,
-
-You want the dimensions of the drm_framebuffer here, not something from
-the underlying gem bo.
-
->  			 gbo->bo.offset);
-
-I think same here, or at least additionally take into account both
-drm_framebuffer offset _and_ vram offset.
--Daniel
-
->  	bochs_hw_setformat(bochs, state->fb->format);
->  }
-> -- 
+>
+>  static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
+> --
 > 2.18.1
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+>
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
