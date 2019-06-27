@@ -2,83 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C91CF57ECB
-	for <lists.virtualization@lfdr.de>; Thu, 27 Jun 2019 10:59:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5400157FE6
+	for <lists.virtualization@lfdr.de>; Thu, 27 Jun 2019 12:06:05 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4856AC4E;
-	Thu, 27 Jun 2019 08:59:08 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1F452E93;
+	Thu, 27 Jun 2019 10:06:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7A0BBBA4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E5B65E7D
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 27 Jun 2019 08:59:06 +0000 (UTC)
+	Thu, 27 Jun 2019 10:06:00 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B723A710
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6ADF384C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 27 Jun 2019 08:59:05 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id z25so6304333edq.9
+	Thu, 27 Jun 2019 10:06:00 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id v19so5034414wmj.5
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 27 Jun 2019 01:59:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=LGczOakCSLer9ILQE8tNaqgNPozV8pb7PqeHtCzn1g0=;
-	b=GsJ767+Bz59YQxnCnFMvFcSYh9soByANcFXUQ+dxUx5Q/FTIOZmR4kAWwuk9/HT1Gi
-	raBZ4yVpCvC1kmTcyiq97Fnn6tEjrLxXJryKVmWHYVVzhGFre9eg61bQxVCoeFBrPx5W
-	nbFSeFVId7v0Y/+FBuoxSRqzo2aQP3RbWafpk=
+	Thu, 27 Jun 2019 03:06:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-disposition
-	:in-reply-to:user-agent;
-	bh=LGczOakCSLer9ILQE8tNaqgNPozV8pb7PqeHtCzn1g0=;
-	b=E14GW9ZDhu1FjdPloIEg4pG9bYKgSIVaIQM16Pvgx8EYfZp1rTVACeNGmZwqdn/t2C
-	2+hzlmwiBF+IwvCJFCDwTbcNvMFJvMhCxULtlPeymVhzlsJMml87PcFXaW+PSU5qE0Rq
-	jKBpAS5soDoopEPqJ1kxwfeRKZLhhBt5epj5nVS8W0nQbsSb3VhMJ8nn1Ll/r2gM1Yqc
-	xZwd4KTTxPEH3+DbEaQllJcnvY6LFk4fdGwcD2nTS5fkAPGRLqxwe4pXeghaqIGvBQT/
-	/mGy4kSo0wSHo83fSZUyECx57SR65GRP4NScFcGeKtDYWZ+CdHeG5VNsbAG6qkK0jUxH
-	w8CQ==
-X-Gm-Message-State: APjAAAU37bWGP6XSRDYOIa1krlxVSddxYkxGbze+XMssUPLpE3Fr4x66
-	oJWY5WIvzdHCbOO1HwcVEVRCQw==
-X-Google-Smtp-Source: APXvYqztF4cKNAF9DjpaD52JmFXj0BdZd5GbwscnxOS6ZW0fc4x9KnKm97t+ztQ3ANKwIhFX1OJPwA==
-X-Received: by 2002:a17:906:2f0b:: with SMTP id
-	v11mr1993434eji.200.1561625944030; 
-	Thu, 27 Jun 2019 01:59:04 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id s26sm309794eja.81.2019.06.27.01.59.02
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=l1NwZTpnYPouG/Q6w8KVsqVGc7B8RfSH5Nd1fRhhCTg=;
+	b=jCDRJJd5fbacJFRut3GGTpG9cqECfF16sRpPWaelypwPNp9b022LVLSD653kepoKuk
+	9InhpGz+PHpG7KXryknc3/yrHHKtb1PCbuILHRAg669vMgyHva4BgEETvStxK/aLDoSS
+	LW9qcj6P+5C2X8vva2R7wO5E7LzFMtl3Tt+WIVj+/M6ll25S2XudyEjkVWB/FovUECsb
+	baTh+Ozf9ojOxa5tyi46jyvTFlnaQMExf2QbvhPIcA6ScCvmU+Qi1prZs4mzE94Uhsm2
+	/V4apkZxqIV09I7YboFpmClFHHiLCGZzfiZZ8iCsdXbZ3ZvPTjNA4IjXbQzfhV7RlVdo
+	Be4A==
+X-Gm-Message-State: APjAAAWBzra9/vGd12mWHuEkufcqHjpuqYJHWRVKxriH+iuupZomNtei
+	AFjjSBxRjFucM6/5Lqo6lR5mrQ==
+X-Google-Smtp-Source: APXvYqzQ0sKIY6ZChWYC2WJ9R3q0SreK0ALQXZZlzrAyFs4jZYqRQY8Nns9g7u2vtKtU2ORhMeHCKQ==
+X-Received: by 2002:a1c:4484:: with SMTP id r126mr2685540wma.27.1561629959060; 
+	Thu, 27 Jun 2019 03:05:59 -0700 (PDT)
+Received: from steredhat.homenet.telecomitalia.it
+	(host21-207-dynamic.52-79-r.retail.telecomitalia.it. [79.52.207.21])
+	by smtp.gmail.com with ESMTPSA id
+	l12sm3249628wrb.81.2019.06.27.03.05.57
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 27 Jun 2019 01:59:03 -0700 (PDT)
-Date: Thu, 27 Jun 2019 10:59:00 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v2] drm/bochs: fix framebuffer setup.
-Message-ID: <20190627085900.GI12905@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
-	dri-devel@lists.freedesktop.org, tzimmermann@suse.de,
-	David Airlie <airlied@linux.ie>,
-	"open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>, 
-	open list <linux-kernel@vger.kernel.org>
-References: <20190627081206.23135-1-kraxel@redhat.com>
+	Thu, 27 Jun 2019 03:05:57 -0700 (PDT)
+Date: Thu, 27 Jun 2019 12:05:55 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [PATCH 0/4] vsock/virtio: several fixes in the .probe() and
+	.remove()
+Message-ID: <20190627100555.pmnecffewzsopxyw@steredhat.homenet.telecomitalia.it>
+References: <20190528105623.27983-1-sgarzare@redhat.com>
+	<20190610130945.GL14257@stefanha-x1.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190627081206.23135-1-kraxel@redhat.com>
-X-Operating-System: Linux phenom 4.19.0-5-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+In-Reply-To: <20190610130945.GL14257@stefanha-x1.localdomain>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
-	open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
-	"open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>
+Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -95,93 +82,39 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Jun 27, 2019 at 10:12:06AM +0200, Gerd Hoffmann wrote:
-> The driver doesn't consider framebuffer pitch and offset, leading to a
-> wrong display in case offset != 0 or pitch != width * bpp.  Fix it.
+On Mon, Jun 10, 2019 at 02:09:45PM +0100, Stefan Hajnoczi wrote:
+> On Tue, May 28, 2019 at 12:56:19PM +0200, Stefano Garzarella wrote:
+> > During the review of "[PATCH] vsock/virtio: Initialize core virtio vsock
+> > before registering the driver", Stefan pointed out some possible issues
+> > in the .probe() and .remove() callbacks of the virtio-vsock driver.
+> > 
+> > This series tries to solve these issues:
+> > - Patch 1 postpones the 'the_virtio_vsock' assignment at the end of the
+> >   .probe() to avoid that some sockets queue works when the initialization
+> >   is not finished.
+> > - Patches 2 and 3 stop workers before to call vdev->config->reset(vdev) to
+> >   be sure that no one is accessing the device, and adds another flush at the
+> >   end of the .remove() to avoid use after free.
+> > - Patch 4 free also used buffers in the virtqueues during the .remove().
+> > 
+> > Stefano Garzarella (4):
+> >   vsock/virtio: fix locking around 'the_virtio_vsock'
+> >   vsock/virtio: stop workers during the .remove()
+> >   vsock/virtio: fix flush of works during the .remove()
+> >   vsock/virtio: free used buffers during the .remove()
+> > 
+> >  net/vmw_vsock/virtio_transport.c | 105 ++++++++++++++++++++++++++-----
+> >  1 file changed, 90 insertions(+), 15 deletions(-)
 > 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> Looking forward to v2.  I took a look at the discussion and I'll review
+> v2 from scratch.  Just keep in mind that the mutex is used more for
+> mutual exclusion of the init/exit code than to protect the_virtio_vsock,
+> so we'll still need protection of init/exit code even with RCU.
 
-Yeah this looks more like it.
+Thanks for the advice! I'll send the v2 ASAP.
 
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-> ---
->  drivers/gpu/drm/bochs/bochs.h     |  2 +-
->  drivers/gpu/drm/bochs/bochs_hw.c  | 14 ++++++++++----
->  drivers/gpu/drm/bochs/bochs_kms.c |  3 ++-
->  3 files changed, 13 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/bochs/bochs.h b/drivers/gpu/drm/bochs/bochs.h
-> index cc35d492142c..2a65434500ee 100644
-> --- a/drivers/gpu/drm/bochs/bochs.h
-> +++ b/drivers/gpu/drm/bochs/bochs.h
-> @@ -86,7 +86,7 @@ void bochs_hw_setmode(struct bochs_device *bochs,
->  void bochs_hw_setformat(struct bochs_device *bochs,
->  			const struct drm_format_info *format);
->  void bochs_hw_setbase(struct bochs_device *bochs,
-> -		      int x, int y, u64 addr);
-> +		      int x, int y, int stride, u64 addr);
->  int bochs_hw_load_edid(struct bochs_device *bochs);
->  
->  /* bochs_mm.c */
-> diff --git a/drivers/gpu/drm/bochs/bochs_hw.c b/drivers/gpu/drm/bochs/bochs_hw.c
-> index 791ab2f79947..ebfea8744fe6 100644
-> --- a/drivers/gpu/drm/bochs/bochs_hw.c
-> +++ b/drivers/gpu/drm/bochs/bochs_hw.c
-> @@ -255,16 +255,22 @@ void bochs_hw_setformat(struct bochs_device *bochs,
->  }
->  
->  void bochs_hw_setbase(struct bochs_device *bochs,
-> -		      int x, int y, u64 addr)
-> +		      int x, int y, int stride, u64 addr)
->  {
-> -	unsigned long offset = (unsigned long)addr +
-> +	unsigned long offset;
-> +	unsigned int vx, vy, vwidth;
-> +
-> +	bochs->stride = stride;
-
-Might be nice to ditch these global/not-so-atomic things like
-bochs->stride/bpp eventually.
--Daniel
-
-> +	offset = (unsigned long)addr +
->  		y * bochs->stride +
->  		x * (bochs->bpp / 8);
-> -	int vy = offset / bochs->stride;
-> -	int vx = (offset % bochs->stride) * 8 / bochs->bpp;
-> +	vy = offset / bochs->stride;
-> +	vx = (offset % bochs->stride) * 8 / bochs->bpp;
-> +	vwidth = stride * 8 / bochs->bpp;
->  
->  	DRM_DEBUG_DRIVER("x %d, y %d, addr %llx -> offset %lx, vx %d, vy %d\n",
->  			 x, y, addr, offset, vx, vy);
-> +	bochs_dispi_write(bochs, VBE_DISPI_INDEX_VIRT_WIDTH, vwidth);
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_X_OFFSET, vx);
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_Y_OFFSET, vy);
->  }
-> diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/bochs_kms.c
-> index 5904eddc83a5..bc19dbd531ef 100644
-> --- a/drivers/gpu/drm/bochs/bochs_kms.c
-> +++ b/drivers/gpu/drm/bochs/bochs_kms.c
-> @@ -36,7 +36,8 @@ static void bochs_plane_update(struct bochs_device *bochs,
->  	bochs_hw_setbase(bochs,
->  			 state->crtc_x,
->  			 state->crtc_y,
-> -			 gbo->bo.offset);
-> +			 state->fb->pitches[0],
-> +			 state->fb->offsets[0] + gbo->bo.offset);
->  	bochs_hw_setformat(bochs, state->fb->format);
->  }
->  
-> -- 
-> 2.18.1
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Thanks,
+Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
