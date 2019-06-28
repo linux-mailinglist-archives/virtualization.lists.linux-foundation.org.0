@@ -2,55 +2,95 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7AFA5827F
-	for <lists.virtualization@lfdr.de>; Thu, 27 Jun 2019 14:24:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B19A859013
+	for <lists.virtualization@lfdr.de>; Fri, 28 Jun 2019 03:59:15 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 44655F38;
-	Thu, 27 Jun 2019 12:24:11 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 408D0AB9;
+	Fri, 28 Jun 2019 01:59:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 789BDF2B
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 27 Jun 2019 12:24:10 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4F8019EE;
+	Fri, 28 Jun 2019 01:59:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 88BB182F
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 27 Jun 2019 12:24:09 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
-	[10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 0B1AD305E23A;
-	Thu, 27 Jun 2019 12:23:59 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-96.ams2.redhat.com
-	[10.36.116.96])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id A6D46600CC;
-	Thu, 27 Jun 2019 12:23:57 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 78CFC9DB6; Thu, 27 Jun 2019 14:23:49 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v3 5/5] drm/bochs: move bochs_hw_setformat() call
-Date: Thu, 27 Jun 2019 14:23:48 +0200
-Message-Id: <20190627122348.5833-6-kraxel@redhat.com>
-In-Reply-To: <20190627122348.5833-1-kraxel@redhat.com>
-References: <20190627122348.5833-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.42]);
-	Thu, 27 Jun 2019 12:23:59 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AF5B413A;
+	Fri, 28 Jun 2019 01:58:59 +0000 (UTC)
+Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x5S1vDtd041017; Thu, 27 Jun 2019 21:58:49 -0400
+Received: from ppma01wdc.us.ibm.com (fd.55.37a9.ip4.static.sl-reverse.com
+	[169.55.85.253])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2td76ad7mt-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Thu, 27 Jun 2019 21:58:49 -0400
+Received: from pps.filterd (ppma01wdc.us.ibm.com [127.0.0.1])
+	by ppma01wdc.us.ibm.com (8.16.0.27/8.16.0.27) with SMTP id
+	x5S1tCOI009374; Fri, 28 Jun 2019 01:58:48 GMT
+Received: from b03cxnp07029.gho.boulder.ibm.com
+	(b03cxnp07029.gho.boulder.ibm.com [9.17.130.16])
+	by ppma01wdc.us.ibm.com with ESMTP id 2t9by7ajaw-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Fri, 28 Jun 2019 01:58:48 +0000
+Received: from b03ledav005.gho.boulder.ibm.com
+	(b03ledav005.gho.boulder.ibm.com [9.17.130.236])
+	by b03cxnp07029.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x5S1wklw29294852
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Fri, 28 Jun 2019 01:58:46 GMT
+Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 989EABE04F;
+	Fri, 28 Jun 2019 01:58:46 +0000 (GMT)
+Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id C8451BE051;
+	Fri, 28 Jun 2019 01:58:42 +0000 (GMT)
+Received: from morokweng.localdomain (unknown [9.85.218.134])
+	by b03ledav005.gho.boulder.ibm.com (Postfix) with ESMTPS;
+	Fri, 28 Jun 2019 01:58:42 +0000 (GMT)
+References: <20190129134750-mutt-send-email-mst@kernel.org>
+	<877eefxvyb.fsf@morokweng.localdomain>
+	<20190204144048-mutt-send-email-mst@kernel.org>
+	<87ef71seve.fsf@morokweng.localdomain>
+	<20190320171027-mutt-send-email-mst@kernel.org>
+	<87tvfvbwpb.fsf@morokweng.localdomain>
+	<20190323165456-mutt-send-email-mst@kernel.org>
+	<87a7go71hz.fsf@morokweng.localdomain>
+	<20190520090939-mutt-send-email-mst@kernel.org>
+	<877ea26tk8.fsf@morokweng.localdomain>
+	<20190603211528-mutt-send-email-mst@kernel.org>
+User-agent: mu4e 1.2.0; emacs 26.2
+From: Thiago Jung Bauermann <bauerman@linux.ibm.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
+In-reply-to: <20190603211528-mutt-send-email-mst@kernel.org>
+Date: Thu, 27 Jun 2019 22:58:40 -0300
+Message-ID: <877e96qxm7.fsf@morokweng.localdomain>
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-06-27_15:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1906280014
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,KHOP_DYNAMIC,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
-	open list <linux-kernel@vger.kernel.org>,
-	"open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>
+Cc: Mike Anderson <andmike@linux.ibm.com>,
+	Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Alexey Kardashevskiy <aik@linux.ibm.com>,
+	Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Paul Mackerras <paulus@ozlabs.org>,
+	iommu@lists.linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
+	Christoph Hellwig <hch@lst.de>, David Gibson <david@gibson.dropbear.id.au>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,71 +102,99 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Call it from bochs_hw_setfb().
-This also allows to make bochs_hw_setformat static.
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/bochs/bochs.h     | 2 --
- drivers/gpu/drm/bochs/bochs_hw.c  | 5 +++--
- drivers/gpu/drm/bochs/bochs_kms.c | 1 -
- 3 files changed, 3 insertions(+), 5 deletions(-)
+Michael S. Tsirkin <mst@redhat.com> writes:
 
-diff --git a/drivers/gpu/drm/bochs/bochs.h b/drivers/gpu/drm/bochs/bochs.h
-index 4081b3aba28d..528b8e8dde40 100644
---- a/drivers/gpu/drm/bochs/bochs.h
-+++ b/drivers/gpu/drm/bochs/bochs.h
-@@ -80,8 +80,6 @@ void bochs_hw_fini(struct drm_device *dev);
- 
- void bochs_hw_setmode(struct bochs_device *bochs,
- 		      struct drm_display_mode *mode);
--void bochs_hw_setformat(struct bochs_device *bochs,
--			const struct drm_format_info *format);
- void bochs_hw_setfb(struct bochs_device *bochs,
- 		    struct drm_framebuffer *fb,
- 		    int x, int y);
-diff --git a/drivers/gpu/drm/bochs/bochs_hw.c b/drivers/gpu/drm/bochs/bochs_hw.c
-index 178715c6755d..daa4fda3d322 100644
---- a/drivers/gpu/drm/bochs/bochs_hw.c
-+++ b/drivers/gpu/drm/bochs/bochs_hw.c
-@@ -224,8 +224,8 @@ void bochs_hw_setmode(struct bochs_device *bochs,
- 			  VBE_DISPI_ENABLED | VBE_DISPI_LFB_ENABLED);
- }
- 
--void bochs_hw_setformat(struct bochs_device *bochs,
--			const struct drm_format_info *format)
-+static void bochs_hw_setformat(struct bochs_device *bochs,
-+			       const struct drm_format_info *format)
- {
- 	DRM_DEBUG_DRIVER("format %c%c%c%c\n",
- 			 (format->format >>  0) & 0xff,
-@@ -263,4 +263,5 @@ void bochs_hw_setfb(struct bochs_device *bochs,
- 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_VIRT_WIDTH, vw);
- 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_X_OFFSET, vx);
- 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_Y_OFFSET, vy);
-+	bochs_hw_setformat(bochs, fb->format);
- }
-diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/bochs_kms.c
-index 28edfb2772ff..368803bd12e5 100644
---- a/drivers/gpu/drm/bochs/bochs_kms.c
-+++ b/drivers/gpu/drm/bochs/bochs_kms.c
-@@ -33,7 +33,6 @@ static void bochs_plane_update(struct bochs_device *bochs,
- 	bochs_hw_setfb(bochs, state->fb,
- 		       state->crtc_x,
- 		       state->crtc_y);
--	bochs_hw_setformat(bochs, state->fb->format);
- }
- 
- static void bochs_pipe_enable(struct drm_simple_display_pipe *pipe,
--- 
-2.18.1
+> On Mon, Jun 03, 2019 at 10:13:59PM -0300, Thiago Jung Bauermann wrote:
+>>
+>>
+>> Michael S. Tsirkin <mst@redhat.com> writes:
+>>
+>> > On Wed, Apr 17, 2019 at 06:42:00PM -0300, Thiago Jung Bauermann wrote:
+>> >> I rephrased it in terms of address translation. What do you think of
+>> >> this version? The flag name is slightly different too:
+>> >>
+>> >>
+>> >> VIRTIO_F_ACCESS_PLATFORM_NO_TRANSLATION This feature has the same
+>> >>     meaning as VIRTIO_F_ACCESS_PLATFORM both when set and when not set,
+>> >>     with the exception that address translation is guaranteed to be
+>> >>     unnecessary when accessing memory addresses supplied to the device
+>> >>     by the driver. Which is to say, the device will always use physical
+>> >>     addresses matching addresses used by the driver (typically meaning
+>> >>     physical addresses used by the CPU) and not translated further. This
+>> >>     flag should be set by the guest if offered, but to allow for
+>> >>     backward-compatibility device implementations allow for it to be
+>> >>     left unset by the guest. It is an error to set both this flag and
+>> >>     VIRTIO_F_ACCESS_PLATFORM.
+>> >
+>> >
+>> > OK so VIRTIO_F_ACCESS_PLATFORM is designed to allow unpriveledged
+>> > drivers. This is why devices fail when it's not negotiated.
+>>
+>> Just to clarify, what do you mean by unprivileged drivers? Is it drivers
+>> implemented in guest userspace such as with VFIO? Or unprivileged in
+>> some other sense such as needing to use bounce buffers for some reason?
+>
+> I had drivers in guest userspace in mind.
 
+Great. Thanks for clarifying.
+
+I don't think this flag would work for guest userspace drivers. Should I
+add a note about that in the flag definition?
+
+>> > This confuses me.
+>> > If driver is unpriveledged then what happens with this flag?
+>> > It can supply any address it wants. Will that corrupt kernel
+>> > memory?
+>>
+>> Not needing address translation doesn't necessarily mean that there's no
+>> IOMMU. On powerpc we don't use VIRTIO_F_ACCESS_PLATFORM but there's
+>> always an IOMMU present. And we also support VFIO drivers. The VFIO API
+>> for pseries (sPAPR section in Documentation/vfio.txt) has extra ioctls
+>> to program the IOMMU.
+>>
+>> For our use case, we don't need address translation because we set up an
+>> identity mapping in the IOMMU so that the device can use guest physical
+>> addresses.
+>
+> And can it access any guest physical address?
+
+Sorry, I was mistaken. We do support VFIO in guests but not for virtio
+devices, only for regular PCI devices. In which case they will use
+address translation.
+
+>> If the guest kernel is concerned that an unprivileged driver could
+>> jeopardize its integrity it should not negotiate this feature flag.
+>
+> Unfortunately flag negotiation is done through config space
+> and so can be overwritten by the driver.
+
+Ok, so the guest kernel has to forbid VFIO access on devices where this
+flag is advertised.
+
+>> Perhaps there should be a note about this in the flag definition? This
+>> concern is platform-dependant though. I don't believe it's an issue in
+>> pseries.
+>
+> Again ACCESS_PLATFORM has a pretty open definition. It does actually
+> say it's all up to the platform.
+>
+> Specifically how will VIRTIO_F_ACCESS_PLATFORM_NO_TRANSLATION be
+> implemented portably? virtio has no portable way to know
+> whether DMA API bypasses translation.
+
+The fact that VIRTIO_F_ACCESS_PLATFORM_NO_TRANSLATION is set
+communicates that knowledge to virtio. There is a shared understanding
+between the guest and the host about what this flag being set means.
+
+--
+Thiago Jung Bauermann
+IBM Linux Technology Center
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
