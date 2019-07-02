@@ -2,69 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B3795C1B7
-	for <lists.virtualization@lfdr.de>; Mon,  1 Jul 2019 19:04:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA4E75C8C1
+	for <lists.virtualization@lfdr.de>; Tue,  2 Jul 2019 07:25:41 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5D4AB2114;
-	Mon,  1 Jul 2019 17:04:04 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 5F1231320;
+	Tue,  2 Jul 2019 05:25:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 499CF1DD8
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 57663F33
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  1 Jul 2019 17:04:03 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1AA0D84F
+	Tue,  2 Jul 2019 05:24:58 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 38B7D70D
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  1 Jul 2019 17:04:02 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id 207so263209wma.1
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 01 Jul 2019 10:04:01 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Ld/S+VVZs8pmZedqdnP/S9bHBpKYWy8WRk/m3Q5+2LI=;
-	b=sZ2p2gp8m8wQ771Pb5WiNH1cjLhx2XAegTjExwU3WfJiVgDTtcDuF3fNdpwfaFzr60
-	iIc3Z/lb588CKRDZGgoLUW8jiQuHHwou4mWhs79XWk3eQa7zhGImO4jojhiOj3+0DB5Z
-	4ll8/ueXUCHrofbFLzgb2i0hiaJYPslQSo3txEWUGEVkS7uOp+pOf+as6urqjtqS+M3O
-	zXLuRwmxlF50agmE0MrHsMcNk9T0U/hwrUANyLtjT8wGBlaJQIdcIUjjnvhv/ZNi0Lc+
-	d8Hd5j9wa1YhR3PC+qiNDbxsTJdHY7BPsJU1V6Ni+phuUImbBcJhfGKJs172tNrhxxKR
-	+/ug==
-X-Gm-Message-State: APjAAAVsCGHy2w3QqJbu3JVULj9x8ajUlWhPy2q9YxUGff9WOv5Ki+zd
-	mtQVGjvSQfGlXVnZqZr2L2DbJA==
-X-Google-Smtp-Source: APXvYqwBOYSxwelsum2oddoo+4pw1dZnLt7m1hYtVtolWxEgwL2beWLJsaejVTIBg02GC95ss28lWA==
-X-Received: by 2002:a1c:7503:: with SMTP id o3mr183987wmc.170.1562000640687;
-	Mon, 01 Jul 2019 10:04:00 -0700 (PDT)
-Received: from steredhat (host21-207-dynamic.52-79-r.retail.telecomitalia.it.
-	[79.52.207.21]) by smtp.gmail.com with ESMTPSA id
-	q18sm9950224wrj.65.2019.07.01.10.03.59
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Mon, 01 Jul 2019 10:04:00 -0700 (PDT)
-Date: Mon, 1 Jul 2019 19:03:57 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Stefan Hajnoczi <stefanha@gmail.com>
-Subject: Re: [PATCH v2 0/3] vsock/virtio: several fixes in the .probe() and
-	.remove()
-Message-ID: <20190701170357.jtuhy3ank7mv6izb@steredhat>
-References: <20190628123659.139576-1-sgarzare@redhat.com>
-	<20190701151113.GE11900@stefanha-x1.localdomain>
+	Tue,  2 Jul 2019 05:24:57 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 98DB433025F;
+	Tue,  2 Jul 2019 05:24:51 +0000 (UTC)
+Received: from [10.72.12.205] (ovpn-12-205.pek2.redhat.com [10.72.12.205])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 847F41001B01;
+	Tue,  2 Jul 2019 05:24:45 +0000 (UTC)
+Subject: Re: Reminder: 2 open syzbot bugs in vhost subsystem
+To: Eric Biggers <ebiggers@kernel.org>, kvm@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, netdev@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>, Hillf Danton <hdanton@sina.com>
+References: <20190702051707.GF23743@sol.localdomain>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <e2da1124-52c3-84ff-77ce-deb017711138@redhat.com>
+Date: Tue, 2 Jul 2019 13:24:43 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190701151113.GE11900@stefanha-x1.localdomain>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+In-Reply-To: <20190702051707.GF23743@sol.localdomain>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.29]);
+	Tue, 02 Jul 2019 05:24:51 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=unavailable version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+Cc: syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,73 +61,68 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Jul 01, 2019 at 04:11:13PM +0100, Stefan Hajnoczi wrote:
-> On Fri, Jun 28, 2019 at 02:36:56PM +0200, Stefano Garzarella wrote:
-> > During the review of "[PATCH] vsock/virtio: Initialize core virtio vsock
-> > before registering the driver", Stefan pointed out some possible issues
-> > in the .probe() and .remove() callbacks of the virtio-vsock driver.
-> > 
-> > This series tries to solve these issues:
-> > - Patch 1 adds RCU critical sections to avoid use-after-free of
-> >   'the_virtio_vsock' pointer.
-> > - Patch 2 stops workers before to call vdev->config->reset(vdev) to
-> >   be sure that no one is accessing the device.
-> > - Patch 3 moves the works flush at the end of the .remove() to avoid
-> >   use-after-free of 'vsock' object.
-> > 
-> > v2:
-> > - Patch 1: use RCU to protect 'the_virtio_vsock' pointer
-> > - Patch 2: no changes
-> > - Patch 3: flush works only at the end of .remove()
-> > - Removed patch 4 because virtqueue_detach_unused_buf() returns all the buffers
-> >   allocated.
-> > 
-> > v1: https://patchwork.kernel.org/cover/10964733/
-> 
-> This looks good to me.
-
-Thanks for the review!
-
-> 
-> Did you run any stress tests?  For example an SMP guest constantly
-> connecting and sending packets together with a script that
-> hotplug/unplugs vhost-vsock-pci from the host side.
-
-Yes, I started an SMP guest (-smp 4 -monitor tcp:127.0.0.1:1234,server,nowait)
-and I run these scripts to stress the .probe()/.remove() path:
-
-- guest
-  while true; do
-      cat /dev/urandom | nc-vsock -l 4321 > /dev/null &
-      cat /dev/urandom | nc-vsock -l 5321 > /dev/null &
-      cat /dev/urandom | nc-vsock -l 6321 > /dev/null &
-      cat /dev/urandom | nc-vsock -l 7321 > /dev/null &
-      wait
-  done
-
-- host
-  while true; do
-      cat /dev/urandom | nc-vsock 3 4321 > /dev/null &
-      cat /dev/urandom | nc-vsock 3 5321 > /dev/null &
-      cat /dev/urandom | nc-vsock 3 6321 > /dev/null &
-      cat /dev/urandom | nc-vsock 3 7321 > /dev/null &
-      sleep 2
-      echo "device_del v1" | nc 127.0.0.1 1234
-      sleep 1
-      echo "device_add vhost-vsock-pci,id=v1,guest-cid=3" | nc 127.0.0.1 1234
-      sleep 1
-  done
-
-Do you think is enough or is better to have a test more accurate?
-
-Thanks,
-Stefano
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvNy8yIOS4i+WNiDE6MTcsIEVyaWMgQmlnZ2VycyB3cm90ZToKPiBbVGhpcyBlbWFp
+bCB3YXMgZ2VuZXJhdGVkIGJ5IGEgc2NyaXB0LiAgTGV0IG1lIGtub3cgaWYgeW91IGhhdmUgYW55
+IHN1Z2dlc3Rpb25zCj4gdG8gbWFrZSBpdCBiZXR0ZXIsIG9yIGlmIHlvdSB3YW50IGl0IHJlLWdl
+bmVyYXRlZCB3aXRoIHRoZSBsYXRlc3Qgc3RhdHVzLl0KPgo+IE9mIHRoZSBjdXJyZW50bHkgb3Bl
+biBzeXpib3QgcmVwb3J0cyBhZ2FpbnN0IHRoZSB1cHN0cmVhbSBrZXJuZWwsIEkndmUgbWFudWFs
+bHkKPiBtYXJrZWQgMiBvZiB0aGVtIGFzIHBvc3NpYmx5IGJlaW5nIGJ1Z3MgaW4gdGhlIHZob3N0
+IHN1YnN5c3RlbS4gIEkndmUgbGlzdGVkCj4gdGhlc2UgcmVwb3J0cyBiZWxvdywgc29ydGVkIGJ5
+IGFuIGFsZ29yaXRobSB0aGF0IHRyaWVzIHRvIGxpc3QgZmlyc3QgdGhlIHJlcG9ydHMKPiBtb3N0
+IGxpa2VseSB0byBiZSBzdGlsbCB2YWxpZCwgaW1wb3J0YW50LCBhbmQgYWN0aW9uYWJsZS4KPgo+
+IE9mIHRoZXNlIDIgYnVncywgMSB3YXMgc2VlbiBpbiBtYWlubGluZSBpbiB0aGUgbGFzdCB3ZWVr
+Lgo+Cj4gSWYgeW91IGJlbGlldmUgYSBidWcgaXMgbm8gbG9uZ2VyIHZhbGlkLCBwbGVhc2UgY2xv
+c2UgdGhlIHN5emJvdCByZXBvcnQgYnkKPiBzZW5kaW5nIGEgJyNzeXogZml4JywgJyNzeXogZHVw
+Jywgb3IgJyNzeXogaW52YWxpZCcgY29tbWFuZCBpbiByZXBseSB0byB0aGUKPiBvcmlnaW5hbCB0
+aHJlYWQsIGFzIGV4cGxhaW5lZCBhdCBodHRwczovL2dvby5nbC90cHNtRUojc3RhdHVzCj4KPiBJ
+ZiB5b3UgYmVsaWV2ZSBJIG1pc2F0dHJpYnV0ZWQgYSBidWcgdG8gdGhlIHZob3N0IHN1YnN5c3Rl
+bSwgcGxlYXNlIGxldCBtZSBrbm93LAo+IGFuZCBpZiBwb3NzaWJsZSBmb3J3YXJkIHRoZSByZXBv
+cnQgdG8gdGhlIGNvcnJlY3QgcGVvcGxlIG9yIG1haWxpbmcgbGlzdC4KPgo+IEhlcmUgYXJlIHRo
+ZSBidWdzOgo+Cj4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiBUaXRsZTogICAgICAgICAgICAg
+IG1lbW9yeSBsZWFrIGluIHZob3N0X25ldF9pb2N0bAo+IExhc3Qgb2NjdXJyZWQ6ICAgICAgMCBk
+YXlzIGFnbwo+IFJlcG9ydGVkOiAgICAgICAgICAgMjYgZGF5cyBhZ28KPiBCcmFuY2hlczogICAg
+ICAgICAgIE1haW5saW5lCj4gRGFzaGJvYXJkIGxpbms6ICAgICBodHRwczovL3N5emthbGxlci5h
+cHBzcG90LmNvbS9idWc/aWQ9MTJiYTM0OWQ3ZTI2Y2NmZTk1MzE3YmMzNzZlODEyZWJiYWUyZWUw
+Zgo+IE9yaWdpbmFsIHRocmVhZDogICAgaHR0cHM6Ly9sa21sLmtlcm5lbC5vcmcvbGttbC8wMDAw
+MDAwMDAwMDAxODhkYTEwNThhOWMyNWUzQGdvb2dsZS5jb20vVC8jdQo+Cj4gVGhpcyBidWcgaGFz
+IGEgQyByZXByb2R1Y2VyLgo+Cj4gVGhlIG9yaWdpbmFsIHRocmVhZCBmb3IgdGhpcyBidWcgaGFz
+IHJlY2VpdmVkIDQgcmVwbGllczsgdGhlIGxhc3Qgd2FzIDE3IGRheXMKPiBhZ28uCj4KPiBJZiB5
+b3UgZml4IHRoaXMgYnVnLCBwbGVhc2UgYWRkIHRoZSBmb2xsb3dpbmcgdGFnIHRvIHRoZSBjb21t
+aXQ6Cj4gICAgICBSZXBvcnRlZC1ieTogc3l6Ym90KzA3ODlmMGM3ZTQ1ZWZkN2JiNjQzQHN5emth
+bGxlci5hcHBzcG90bWFpbC5jb20KPgo+IElmIHlvdSBzZW5kIGFueSBlbWFpbCBvciBwYXRjaCBm
+b3IgdGhpcyBidWcsIHBsZWFzZSBjb25zaWRlciByZXBseWluZyB0byB0aGUKPiBvcmlnaW5hbCB0
+aHJlYWQuICBGb3IgdGhlIGdpdCBzZW5kLWVtYWlsIGNvbW1hbmQgdG8gdXNlLCBvciB0aXBzIG9u
+IGhvdyB0byByZXBseQo+IGlmIHRoZSB0aHJlYWQgaXNuJ3QgaW4geW91ciBtYWlsYm94LCBzZWUg
+dGhlICJSZXBseSBpbnN0cnVjdGlvbnMiIGF0Cj4gaHR0cHM6Ly9sa21sLmtlcm5lbC5vcmcvci8w
+MDAwMDAwMDAwMDAxODhkYTEwNThhOWMyNWUzQGdvb2dsZS5jb20KCgpDYyBIaWxsZiB3aG8gc2hv
+dWxkIGhhZCBhIGZpeCBmb3IgdGhpcy4KCkhpbGxmLCB3b3VsZCB5b3UgcGxlYXNlIHBvc3QgYSBm
+b3JtYWwgcGF0Y2ggZm9yIHRoaXM/IChmb3IgLW5ldCkKCgo+Cj4gLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0KPiBUaXRsZTogICAgICAgICAgICAgIElORk86IHRhc2sgaHVuZyBpbiB2aG9zdF9pbml0
+X2RldmljZV9pb3RsYgo+IExhc3Qgb2NjdXJyZWQ6ICAgICAgMTI1IGRheXMgYWdvCj4gUmVwb3J0
+ZWQ6ICAgICAgICAgICAxNTMgZGF5cyBhZ28KPiBCcmFuY2hlczogICAgICAgICAgIE1haW5saW5l
+IGFuZCBvdGhlcnMKPiBEYXNoYm9hcmQgbGluazogICAgIGh0dHBzOi8vc3l6a2FsbGVyLmFwcHNw
+b3QuY29tL2J1Zz9pZD1jYjFlYThkYWYwM2E1OTQyYzJhYjMxNDY3OTE0OGNmNmUxMjhlZjU4Cj4g
+T3JpZ2luYWwgdGhyZWFkOiAgICBodHRwczovL2xrbWwua2VybmVsLm9yZy9sa21sLzAwMDAwMDAw
+MDAwMDdlODZmZDA1ODA5NTUzM2ZAZ29vZ2xlLmNvbS9ULyN1Cj4KPiBVbmZvcnR1bmF0ZWx5LCB0
+aGlzIGJ1ZyBkb2VzIG5vdCBoYXZlIGEgcmVwcm9kdWNlci4KPgo+IFRoZSBvcmlnaW5hbCB0aHJl
+YWQgZm9yIHRoaXMgYnVnIHJlY2VpdmVkIDIgcmVwbGllczsgdGhlIGxhc3Qgd2FzIDE1MiBkYXlz
+IGFnby4KPgo+IElmIHlvdSBmaXggdGhpcyBidWcsIHBsZWFzZSBhZGQgdGhlIGZvbGxvd2luZyB0
+YWcgdG8gdGhlIGNvbW1pdDoKPiAgICAgIFJlcG9ydGVkLWJ5OiBzeXpib3QrNDBlMjhhOGJkNTlk
+MTBlZDBjNDJAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbQo+Cj4gSWYgeW91IHNlbmQgYW55IGVt
+YWlsIG9yIHBhdGNoIGZvciB0aGlzIGJ1ZywgcGxlYXNlIGNvbnNpZGVyIHJlcGx5aW5nIHRvIHRo
+ZQo+IG9yaWdpbmFsIHRocmVhZC4gIEZvciB0aGUgZ2l0IHNlbmQtZW1haWwgY29tbWFuZCB0byB1
+c2UsIG9yIHRpcHMgb24gaG93IHRvIHJlcGx5Cj4gaWYgdGhlIHRocmVhZCBpc24ndCBpbiB5b3Vy
+IG1haWxib3gsIHNlZSB0aGUgIlJlcGx5IGluc3RydWN0aW9ucyIgYXQKPiBodHRwczovL2xrbWwu
+a2VybmVsLm9yZy9yLzAwMDAwMDAwMDAwMDdlODZmZDA1ODA5NTUzM2ZAZ29vZ2xlLmNvbQo+CgpD
+YW4gc3l6Ym90IHN0aWxsIHJlcHJvZHVjZSB0aGlzIGlzc3VlPwoKVGhhbmtzCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWls
+aW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6
+Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRp
+b24=
