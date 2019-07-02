@@ -2,50 +2,75 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 211187372E
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:02:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC8B173756
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:07:25 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 104FB14B1;
-	Wed, 24 Jul 2019 18:59:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7396714F3;
+	Wed, 24 Jul 2019 18:59:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7EED01A06
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B88791AED
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  2 Jul 2019 12:20:18 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail3-162.sinamail.sina.com.cn (mail3-162.sinamail.sina.com.cn
-	[202.108.3.162])
-	by smtp1.linuxfoundation.org (Postfix) with SMTP id 73C34834
+	Tue,  2 Jul 2019 13:31:33 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 44E0A84F
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  2 Jul 2019 12:20:16 +0000 (UTC)
-Received: from unknown (HELO localhost.localdomain)([221.219.2.241])
-	by sina.com with ESMTP
-	id 5D1B4BFC0000072F; Tue, 2 Jul 2019 20:20:14 +0800 (CST)
-X-Sender: hdanton@sina.com
-X-Auth-ID: hdanton@sina.com
-X-SMAIL-MID: 71389830408936
-From: Hillf Danton <hdanton@sina.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: Reminder: 2 open syzbot bugs in vhost subsystem
-Date: Tue,  2 Jul 2019 20:20:05 +0800
-Message-Id: <20190702122005.2028-1-hdanton@sina.com>
+	Tue,  2 Jul 2019 13:31:33 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id n9so17896103wru.0
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 02 Jul 2019 06:31:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:content-transfer-encoding:in-reply-to:references
+	:subject:from:to:cc:message-id:user-agent:date;
+	bh=4VPnLBfnP+yE8XWhPk6Z0NZmIvwwW0UIFWDe0blP3PA=;
+	b=SSHIWLXSCz2J4XKgqcuB4HuhMgP+BgSjUvlvTI1SfIECDv8eAnmm7cP4x6cRFpdbRd
+	e+z2Qtim/Mny+j7W4rH6z1xj4EWXisZqMg5DdWH/AVWl1rbE26SK5Ern1cohCsDP/qBE
+	/SYTm60q5UUSpE5YlgVQciF57ibUm+YAddrQEFsjiS3BSooSXp/9lfufr4CgL6tRF+vM
+	qShTZpZ847UuD/66QU6Dt84odNmrjud0aJrMXVondjAUKB4QHvPBwlo/x0j1jxreVUge
+	D29IP3CehKILhPMAWtxsPXahwDBbpwfIGD6r+h47ZFwVIVG2aBSTLrTCx+tg/SUaJJo+
+	ssuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:content-transfer-encoding
+	:in-reply-to:references:subject:from:to:cc:message-id:user-agent
+	:date;
+	bh=4VPnLBfnP+yE8XWhPk6Z0NZmIvwwW0UIFWDe0blP3PA=;
+	b=RA9lkIuxeSp7Qqk8VMKN6G+tvl/4L6QcHtPxi0xfBIBkAgAqusyrNrEhAo9V89Aj45
+	EECnlQ9L553M8VSHsm9lXxUiynw62Xojnn/dqlDoj5icjN8vx3yikncc/mK3aDHEsqKp
+	8Cgj8wXxhtMEjaUD2AzCo1JYlrSmR9RtLA1BD3p8bzBXoH/X5dS1gBZWvpNnEQRSgoE0
+	75B2IiZAD12q9xRdhfTQT5vtxO2oY4HpyriebjyirQ7qkvr6g+Dg8zpdqpYnKgAjmp91
+	GZpTGzevACbCsQpOMLZsCmbcdX/Y/CisYwL9T5oR4pC8OGsDxeTLiqe15SUEMpYdX809
+	Rhig==
+X-Gm-Message-State: APjAAAUEY3XDqaKAu3AE9tq8paojwqRUjTKil0dnoOTj/qzwQ0jGU57O
+	DuJQ0mGe/3rNRnvdM0y2tcw=
+X-Google-Smtp-Source: APXvYqwq06G0czPEPLmYLoGzD2jqc2jTMs8sD6Gj1glkXKfoUr2VN70FHXc0dZ5zI3VGNbqDHyFU3Q==
+X-Received: by 2002:adf:e5c2:: with SMTP id a2mr1799223wrn.91.1562074291836;
+	Tue, 02 Jul 2019 06:31:31 -0700 (PDT)
+Received: from localhost ([151.237.18.226])
+	by smtp.gmail.com with ESMTPSA id b8sm2412981wmh.46.2019.07.02.06.31.30
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Tue, 02 Jul 2019 06:31:31 -0700 (PDT)
 MIME-Version: 1.0
-Thread-Topic: Re: Reminder: 2 open syzbot bugs in vhost subsystem
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,FREEMAIL_FROM,
+In-Reply-To: <20190702095918.12852-1-ihor.matushchak@foobox.net>
+References: <20190702095918.12852-1-ihor.matushchak@foobox.net>
+Subject: Re: [PATCH] virtio-mmio: add error check for platform_get_irq
+From: "Ivan T. Ivanov" <iivanov.xz@gmail.com>
+To: Ihor Matushchak <ihor.matushchak@foobox.net>, mst@redhat.com
+Message-ID: <156207429000.5051.5975712347598980745@silver>
+User-Agent: alot/0.8.1
+Date: Tue, 02 Jul 2019 16:31:30 +0300
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-X-Mailman-Approved-At: Wed, 24 Jul 2019 18:59:22 +0000
-Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"syzkaller-bugs@googlegroups.com" <syzkaller-bugs@googlegroups.com>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	Eric Biggers <ebiggers@kernel.org>
+X-Mailman-Approved-At: Wed, 24 Jul 2019 18:59:23 +0000
+Cc: ihor.matushchak@foobox.net, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,60 +88,38 @@ Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
 
-On Tue, 2 Jul 2019 13:30:07 +0800 Jason Wang wrote:
-> On 2019/7/2 Eric Biggers wrote:
-> > [This email was generated by a script.  Let me know if you have any suggestions
-> > to make it better, or if you want it re-generated with the latest status.]
-> >
-> > Of the currently open syzbot reports against the upstream kernel, I've manually
-> > marked 2 of them as possibly being bugs in the vhost subsystem.  I've listed
-> > these reports below, sorted by an algorithm that tries to list first the reports
-> > most likely to be still valid, important, and actionable.
-> >
-> > Of these 2 bugs, 1 was seen in mainline in the last week.
-> >
-> > If you believe a bug is no longer valid, please close the syzbot report by
-> > sending a '#syz fix', '#syz dup', or '#syz invalid' command in reply to the
-> > original thread, as explained at https://goo.gl/tpsmEJ#status
-> >
-> > If you believe I misattributed a bug to the vhost subsystem, please let me know,
-> > and if possible forward the report to the correct people or mailing list.
-> >
-> > Here are the bugs:
-> >
-> > --------------------------------------------------------------------------------
-> > Title:              memory leak in vhost_net_ioctl
-> > Last occurred:      0 days ago
-> > Reported:           26 days ago
-> > Branches:           Mainline
-> > Dashboard link:     https://syzkaller.appspot.com/bug?id=3D12ba349d7e26ccfe95317bc376e812ebbae2ee0f
-> > Original thread:    https://lkml.kernel.org/lkml/000000000000188da1058a9c25e3@google.com/T/#u
-> >
-> > This bug has a C reproducer.
-> >
-> > The original thread for this bug has received 4 replies; the last was 17 days
-> > ago.
-> >
-> > If you fix this bug, please add the following tag to the commit:
-> >      Reported-by: syzbot+0789f0c7e45efd7bb643@syzkaller.appspotmail.com
-> >
-> > If you send any email or patch for this bug, please consider replying to the
-> > original thread.  For the git send-email command to use, or tips on how to reply
-> > if the thread isn't in your mailbox, see the "Reply instructions" at
-> > https://lkml.kernel.org/r/000000000000188da1058a9c25e3@google.com
-> > 
-> Cc Hillf who should had a fix for this.
-> 
-It could not be a fix in any form without the great idea you shared, Jason:)
-while reviewing the first version.
+Hi,
 
-> Hillf, would you please post a formal patch for this? (for -net)
+Quoting Ihor Matushchak (2019-07-02 12:59:18)
+> in vm_find_vqs() irq has a wrong type
+> so, in case of no IRQ resource defined,
+> wrong parameter will be passed to request_irq()
 > 
-And feel free to do this thing appropriate or that thing for fixing the
-reported memory leak before I can earn a Tested-by.
+> Signed-off-by: Ihor Matushchak <ihor.matushchak@foobox.net>
+> ---
+>  drivers/virtio/virtio_mmio.c | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+> index f363fbeb5ab0..60dde8ed163b 100644
+> --- a/drivers/virtio/virtio_mmio.c
+> +++ b/drivers/virtio/virtio_mmio.c
+> @@ -463,9 +463,14 @@ static int vm_find_vqs(struct virtio_device *vdev, unsigned nvqs,
+>                        struct irq_affinity *desc)
+>  {
+>         struct virtio_mmio_device *vm_dev = to_virtio_mmio_device(vdev);
+> -       unsigned int irq = platform_get_irq(vm_dev->pdev, 0);
+> +       int irq = platform_get_irq(vm_dev->pdev, 0);
+>         int i, err, queue_idx = 0;
+>  
+> +       if (irq < 0) {
+> +               dev_err(&vdev->dev, "no IRQ resource defined\n");
+> +               return -ENODEV;
 
---
-Hillf
+Don't overwrite error code value. Just return it as it is.
+
+Regards,
+Ivan
 
 _______________________________________________
 Virtualization mailing list
