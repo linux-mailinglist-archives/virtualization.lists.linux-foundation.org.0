@@ -2,46 +2,45 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56FF55DFE2
-	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 10:34:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC6F55E0BF
+	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 11:16:51 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 697691016;
-	Wed,  3 Jul 2019 08:33:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 07C06116C;
+	Wed,  3 Jul 2019 09:16:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8045B1032
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D31CAED7
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 08:33:15 +0000 (UTC)
+	Wed,  3 Jul 2019 09:16:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0B5AF70D
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 11A6E873
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 08:33:13 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id 10B21AF8D;
-	Wed,  3 Jul 2019 08:33:10 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: airlied@redhat.com, daniel@ffwll.ch, kraxel@redhat.com,
-	maarten.lankhorst@linux.intel.com, maxime.ripard@bootlin.com,
-	sean@poorly.run, noralf@tronnes.org, sam@ravnborg.org,
-	yc_chen@aspeedtech.com
-Subject: [PATCH 5/5] drm/mgag200: Replace struct mga_fbdev with generic
-	framebuffer emulation
-Date: Wed,  3 Jul 2019 10:33:02 +0200
-Message-Id: <20190703083302.2609-6-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190703083302.2609-1-tzimmermann@suse.de>
-References: <20190703083302.2609-1-tzimmermann@suse.de>
-MIME-Version: 1.0
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	Wed,  3 Jul 2019 09:16:33 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	03 Jul 2019 02:16:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,446,1557212400"; d="scan'208";a="154693094"
+Received: from npg-dpdk-virtio-tbie-2.sh.intel.com ([10.67.104.151])
+	by orsmga007.jf.intel.com with ESMTP; 03 Jul 2019 02:16:30 -0700
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: mst@redhat.com, jasowang@redhat.com, alex.williamson@redhat.com,
+	maxime.coquelin@redhat.com
+Subject: [RFC v2] vhost: introduce mdev based hardware vhost backend
+Date: Wed,  3 Jul 2019 17:13:39 +0800
+Message-Id: <20190703091339.1847-1-tiwei.bie@intel.com>
+X-Mailer: git-send-email 2.17.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, zhihong.wang@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,576 +52,1116 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-This patch replaces mgag200's framebuffer console with DRM's generic
-implememtation. All respective code is being removed from the driver.
+Details about this can be found here:
 
-The console is set up with a shadow buffer. The actual buffer object is
-not permanently pinned in video ram, but just another buffer object that
-the driver moves in and out of vram as necessary. The driver's function
-mga_crtc_do_set_base() used to contain special handling for the framebuffer
-console. With the new generic framebuffer, the driver does not need this
-code an longer.
+https://lwn.net/Articles/750770/
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+What's new in this version
+==========================
+
+A new VFIO device type is introduced - vfio-vhost. This addressed
+some comments from here: https://patchwork.ozlabs.org/cover/984763/
+
+Below is the updated device interface:
+
+Currently, there are two regions of this device: 1) CONFIG_REGION
+(VFIO_VHOST_CONFIG_REGION_INDEX), which can be used to setup the
+device; 2) NOTIFY_REGION (VFIO_VHOST_NOTIFY_REGION_INDEX), which
+can be used to notify the device.
+
+1. CONFIG_REGION
+
+The region described by CONFIG_REGION is the main control interface.
+Messages will be written to or read from this region.
+
+The message type is determined by the `request` field in message
+header. The message size is encoded in the message header too.
+The message format looks like this:
+
+struct vhost_vfio_op {
+	__u64 request;
+	__u32 flags;
+	/* Flag values: */
+ #define VHOST_VFIO_NEED_REPLY 0x1 /* Whether need reply */
+	__u32 size;
+	union {
+		__u64 u64;
+		struct vhost_vring_state state;
+		struct vhost_vring_addr addr;
+	} payload;
+};
+
+The existing vhost-kernel ioctl cmds are reused as the message
+requests in above structure.
+
+Each message will be written to or read from this region at offset 0:
+
+int vhost_vfio_write(struct vhost_dev *dev, struct vhost_vfio_op *op)
+{
+	int count = VHOST_VFIO_OP_HDR_SIZE + op->size;
+	struct vhost_vfio *vfio = dev->opaque;
+	int ret;
+
+	ret = pwrite64(vfio->device_fd, op, count, vfio->config_offset);
+	if (ret != count)
+		return -1;
+
+	return 0;
+}
+
+int vhost_vfio_read(struct vhost_dev *dev, struct vhost_vfio_op *op)
+{
+	int count = VHOST_VFIO_OP_HDR_SIZE + op->size;
+	struct vhost_vfio *vfio = dev->opaque;
+	uint64_t request = op->request;
+	int ret;
+
+	ret = pread64(vfio->device_fd, op, count, vfio->config_offset);
+	if (ret != count || request != op->request)
+		return -1;
+
+	return 0;
+}
+
+It's quite straightforward to set things to the device. Just need to
+write the message to device directly:
+
+int vhost_vfio_set_features(struct vhost_dev *dev, uint64_t features)
+{
+	struct vhost_vfio_op op;
+
+	op.request = VHOST_SET_FEATURES;
+	op.flags = 0;
+	op.size = sizeof(features);
+	op.payload.u64 = features;
+
+	return vhost_vfio_write(dev, &op);
+}
+
+To get things from the device, two steps are needed.
+Take VHOST_GET_FEATURE as an example:
+
+int vhost_vfio_get_features(struct vhost_dev *dev, uint64_t *features)
+{
+	struct vhost_vfio_op op;
+	int ret;
+
+	op.request = VHOST_GET_FEATURES;
+	op.flags = VHOST_VFIO_NEED_REPLY;
+	op.size = 0;
+
+	/* Just need to write the header */
+	ret = vhost_vfio_write(dev, &op);
+	if (ret != 0)
+		goto out;
+
+	/* `op` wasn't changed during write */
+	op.flags = 0;
+	op.size = sizeof(*features);
+
+	ret = vhost_vfio_read(dev, &op);
+	if (ret != 0)
+		goto out;
+
+	*features = op.payload.u64;
+out:
+	return ret;
+}
+
+2. NOTIFIY_REGION (mmap-able)
+
+The region described by NOTIFY_REGION will be used to notify
+the device.
+
+Each queue will have a page for notification, and it can be mapped
+to VM (if hardware also supports), and the virtio driver in the VM
+will be able to notify the device directly.
+
+The region described by NOTIFY_REGION is also write-able. If
+the accelerator's notification register(s) cannot be mapped to
+the VM, write() can also be used to notify the device. Something
+like this:
+
+void notify_relay(void *opaque)
+{
+	......
+	offset = host_page_size * queue_idx;
+
+	ret = pwrite64(vfio->device_fd, &queue_idx, sizeof(queue_idx),
+			vfio->notify_offset + offset);
+	......
+}
+
+3. VFIO interrupt ioctl API
+
+VFIO interrupt ioctl API is used to setup device interrupts.
+IRQ-bypass can also be supported.
+
+Currently, the data path interrupt can be configured via the
+VFIO_VHOST_VQ_IRQ_INDEX with virtqueue's callfd.
+
+Signed-off-by: Tiwei Bie <tiwei.bie@intel.com>
 ---
- drivers/gpu/drm/mgag200/Makefile       |   2 +-
- drivers/gpu/drm/mgag200/mgag200_drv.h  |  19 --
- drivers/gpu/drm/mgag200/mgag200_fb.c   | 309 -------------------------
- drivers/gpu/drm/mgag200/mgag200_main.c |  61 ++---
- drivers/gpu/drm/mgag200/mgag200_mode.c |  27 ---
- 5 files changed, 35 insertions(+), 383 deletions(-)
- delete mode 100644 drivers/gpu/drm/mgag200/mgag200_fb.c
+ drivers/vhost/Makefile     |   2 +
+ drivers/vhost/vdpa.c       | 770 +++++++++++++++++++++++++++++++++++++
+ include/linux/vdpa_mdev.h  |  72 ++++
+ include/uapi/linux/vfio.h  |  19 +
+ include/uapi/linux/vhost.h |  25 ++
+ 5 files changed, 888 insertions(+)
+ create mode 100644 drivers/vhost/vdpa.c
+ create mode 100644 include/linux/vdpa_mdev.h
 
-diff --git a/drivers/gpu/drm/mgag200/Makefile b/drivers/gpu/drm/mgag200/Makefile
-index 98d204408bd0..04b281bcf655 100644
---- a/drivers/gpu/drm/mgag200/Makefile
-+++ b/drivers/gpu/drm/mgag200/Makefile
-@@ -1,5 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0-only
- mgag200-y   := mgag200_main.o mgag200_mode.o mgag200_cursor.o \
--	mgag200_drv.o mgag200_fb.o mgag200_i2c.o mgag200_ttm.o
-+	mgag200_drv.o mgag200_i2c.o mgag200_ttm.o
+diff --git a/drivers/vhost/Makefile b/drivers/vhost/Makefile
+index 6c6df24f770c..cabb71095940 100644
+--- a/drivers/vhost/Makefile
++++ b/drivers/vhost/Makefile
+@@ -10,4 +10,6 @@ vhost_vsock-y := vsock.o
  
- obj-$(CONFIG_DRM_MGAG200) += mgag200.o
-diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mgag200/mgag200_drv.h
-index 3ab27f1053c1..1c93f8dc08c7 100644
---- a/drivers/gpu/drm/mgag200/mgag200_drv.h
-+++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
-@@ -99,14 +99,6 @@
- #define to_mga_encoder(x) container_of(x, struct mga_encoder, base)
- #define to_mga_connector(x) container_of(x, struct mga_connector, base)
+ obj-$(CONFIG_VHOST_RING) += vringh.o
  
--struct mga_fbdev {
--	struct drm_fb_helper helper; /* must be first */
--	void *sysram;
--	int size;
--	int x1, y1, x2, y2; /* dirty rect */
--	spinlock_t dirty_lock;
--};
--
- struct mga_crtc {
- 	struct drm_crtc base;
- 	u8 lut_r[256], lut_g[256], lut_b[256];
-@@ -180,7 +172,6 @@ struct mga_device {
- 	struct mga_mc			mc;
- 	struct mga_mode_info		mode_info;
- 
--	struct mga_fbdev *mfbdev;
- 	struct mga_cursor cursor;
- 
- 	bool				suspended;
-@@ -201,19 +192,9 @@ struct mga_device {
- int mgag200_modeset_init(struct mga_device *mdev);
- void mgag200_modeset_fini(struct mga_device *mdev);
- 
--				/* mgag200_fb.c */
--int mgag200_fbdev_init(struct mga_device *mdev);
--void mgag200_fbdev_fini(struct mga_device *mdev);
--
- 				/* mgag200_main.c */
- int mgag200_driver_load(struct drm_device *dev, unsigned long flags);
- void mgag200_driver_unload(struct drm_device *dev);
--int mgag200_gem_create(struct drm_device *dev,
--		   u32 size, bool iskernel,
--		       struct drm_gem_object **obj);
--int mgag200_dumb_create(struct drm_file *file,
--			struct drm_device *dev,
--			struct drm_mode_create_dumb *args);
- 
- 				/* mgag200_i2c.c */
- struct mga_i2c_chan *mgag200_i2c_create(struct drm_device *dev);
-diff --git a/drivers/gpu/drm/mgag200/mgag200_fb.c b/drivers/gpu/drm/mgag200/mgag200_fb.c
-deleted file mode 100644
-index c77cf1b34c98..000000000000
---- a/drivers/gpu/drm/mgag200/mgag200_fb.c
-+++ /dev/null
-@@ -1,309 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Copyright 2010 Matt Turner.
-- * Copyright 2012 Red Hat
-- *
-- * Authors: Matthew Garrett
-- *          Matt Turner
-- *          Dave Airlie
-- */
--
--#include <linux/module.h>
--#include <linux/vmalloc.h>
--
--#include <drm/drm_crtc_helper.h>
--#include <drm/drm_fb_helper.h>
--#include <drm/drm_fourcc.h>
--#include <drm/drm_gem_framebuffer_helper.h>
--#include <drm/drm_util.h>
--
--#include "mgag200_drv.h"
--
--static void mga_dirty_update(struct mga_fbdev *mfbdev,
--			     int x, int y, int width, int height)
--{
--	int i;
--	struct drm_gem_vram_object *gbo;
--	int src_offset, dst_offset;
--	int ret;
--	u8 *dst;
--	bool unmap = false;
--	bool store_for_later = false;
--	int x2, y2;
--	unsigned long flags;
--	struct drm_framebuffer *fb = mfbdev->helper.fb;
--	int bpp = fb->format->cpp[0];
--
--	gbo = drm_gem_vram_of_gem(fb->obj[0]);
--
--	if (drm_can_sleep()) {
--		/* We pin the BO so it won't be moved during the
--		 * update. The actual location, video RAM or system
--		 * memory, is not important.
--		 */
--		ret = drm_gem_vram_pin(gbo, 0);
--		if (ret) {
--			if (ret != -EBUSY)
--				return;
--			store_for_later = true;
--		}
--	} else {
--		store_for_later = true;
--	}
--
--	x2 = x + width - 1;
--	y2 = y + height - 1;
--	spin_lock_irqsave(&mfbdev->dirty_lock, flags);
--
--	if (mfbdev->y1 < y)
--		y = mfbdev->y1;
--	if (mfbdev->y2 > y2)
--		y2 = mfbdev->y2;
--	if (mfbdev->x1 < x)
--		x = mfbdev->x1;
--	if (mfbdev->x2 > x2)
--		x2 = mfbdev->x2;
--
--	if (store_for_later) {
--		mfbdev->x1 = x;
--		mfbdev->x2 = x2;
--		mfbdev->y1 = y;
--		mfbdev->y2 = y2;
--		spin_unlock_irqrestore(&mfbdev->dirty_lock, flags);
--		return;
--	}
--
--	mfbdev->x1 = mfbdev->y1 = INT_MAX;
--	mfbdev->x2 = mfbdev->y2 = 0;
--	spin_unlock_irqrestore(&mfbdev->dirty_lock, flags);
--
--	dst = drm_gem_vram_kmap(gbo, false, NULL);
--	if (IS_ERR(dst)) {
--		DRM_ERROR("failed to kmap fb updates\n");
--		goto out;
--	} else if (!dst) {
--		dst = drm_gem_vram_kmap(gbo, true, NULL);
--		if (IS_ERR(dst)) {
--			DRM_ERROR("failed to kmap fb updates\n");
--			goto out;
--		}
--		unmap = true;
--	}
--
--	for (i = y; i <= y2; i++) {
--		/* assume equal stride for now */
--		src_offset = dst_offset = i * fb->pitches[0] + (x * bpp);
--		memcpy_toio(dst + dst_offset, mfbdev->sysram + src_offset,
--			    (x2 - x + 1) * bpp);
--	}
--
--	if (unmap)
--		drm_gem_vram_kunmap(gbo);
--
--out:
--	drm_gem_vram_unpin(gbo);
--}
--
--static void mga_fillrect(struct fb_info *info,
--			 const struct fb_fillrect *rect)
--{
--	struct mga_fbdev *mfbdev = info->par;
--	drm_fb_helper_sys_fillrect(info, rect);
--	mga_dirty_update(mfbdev, rect->dx, rect->dy, rect->width,
--			 rect->height);
--}
--
--static void mga_copyarea(struct fb_info *info,
--			 const struct fb_copyarea *area)
--{
--	struct mga_fbdev *mfbdev = info->par;
--	drm_fb_helper_sys_copyarea(info, area);
--	mga_dirty_update(mfbdev, area->dx, area->dy, area->width,
--			 area->height);
--}
--
--static void mga_imageblit(struct fb_info *info,
--			  const struct fb_image *image)
--{
--	struct mga_fbdev *mfbdev = info->par;
--	drm_fb_helper_sys_imageblit(info, image);
--	mga_dirty_update(mfbdev, image->dx, image->dy, image->width,
--			 image->height);
--}
--
--
--static struct fb_ops mgag200fb_ops = {
--	.owner = THIS_MODULE,
--	.fb_check_var = drm_fb_helper_check_var,
--	.fb_set_par = drm_fb_helper_set_par,
--	.fb_fillrect = mga_fillrect,
--	.fb_copyarea = mga_copyarea,
--	.fb_imageblit = mga_imageblit,
--	.fb_pan_display = drm_fb_helper_pan_display,
--	.fb_blank = drm_fb_helper_blank,
--	.fb_setcmap = drm_fb_helper_setcmap,
--};
--
--static int mgag200fb_create_object(struct mga_fbdev *afbdev,
--				   const struct drm_mode_fb_cmd2 *mode_cmd,
--				   struct drm_gem_object **gobj_p)
--{
--	struct drm_device *dev = afbdev->helper.dev;
--	u32 size;
--	struct drm_gem_object *gobj;
--	int ret = 0;
--
--	size = mode_cmd->pitches[0] * mode_cmd->height;
--	ret = mgag200_gem_create(dev, size, true, &gobj);
--	if (ret)
--		return ret;
--
--	*gobj_p = gobj;
--	return ret;
--}
--
--static int mgag200fb_create(struct drm_fb_helper *helper,
--			   struct drm_fb_helper_surface_size *sizes)
--{
--	struct mga_fbdev *mfbdev =
--		container_of(helper, struct mga_fbdev, helper);
--	struct drm_device *dev = mfbdev->helper.dev;
--	struct drm_mode_fb_cmd2 mode_cmd;
--	struct mga_device *mdev = dev->dev_private;
--	struct fb_info *info;
--	struct drm_framebuffer *fb;
--	struct drm_gem_object *gobj = NULL;
--	int ret;
--	void *sysram;
--	int size;
--
--	mode_cmd.width = sizes->surface_width;
--	mode_cmd.height = sizes->surface_height;
--	mode_cmd.pitches[0] = mode_cmd.width * ((sizes->surface_bpp + 7) / 8);
--
--	mode_cmd.pixel_format = drm_mode_legacy_fb_format(sizes->surface_bpp,
--							  sizes->surface_depth);
--	size = mode_cmd.pitches[0] * mode_cmd.height;
--
--	ret = mgag200fb_create_object(mfbdev, &mode_cmd, &gobj);
--	if (ret) {
--		DRM_ERROR("failed to create fbcon backing object %d\n", ret);
--		return ret;
--	}
--
--	sysram = vmalloc(size);
--	if (!sysram) {
--		ret = -ENOMEM;
--		goto err_drm_gem_object_put_unlocked;
--	}
--
--	info = drm_fb_helper_alloc_fbi(helper);
--	if (IS_ERR(info)) {
--		ret = PTR_ERR(info);
--		goto err_vfree;
--	}
--
--	fb = drm_gem_fbdev_fb_create(dev, sizes, 0, gobj, NULL);
--	if (IS_ERR(fb)) {
--		ret = PTR_ERR(fb);
--		goto err_vfree;
--	}
--
--	mfbdev->sysram = sysram;
--	mfbdev->size = size;
--
--	/* setup helper */
--	mfbdev->helper.fb = fb;
--
--	info->fbops = &mgag200fb_ops;
--
--	/* setup aperture base/size for vesafb takeover */
--	info->apertures->ranges[0].base = mdev->dev->mode_config.fb_base;
--	info->apertures->ranges[0].size = mdev->mc.vram_size;
--
--	drm_fb_helper_fill_info(info, &mfbdev->helper, sizes);
--
--	info->screen_base = sysram;
--	info->screen_size = size;
--	info->pixmap.flags = FB_PIXMAP_SYSTEM;
--
--	DRM_DEBUG_KMS("allocated %dx%d\n",
--		      fb->width, fb->height);
--
--	return 0;
--
--err_vfree:
--	vfree(sysram);
--err_drm_gem_object_put_unlocked:
--	drm_gem_object_put_unlocked(gobj);
--	return ret;
--}
--
--static int mga_fbdev_destroy(struct drm_device *dev,
--				struct mga_fbdev *mfbdev)
--{
--	drm_fb_helper_unregister_fbi(&mfbdev->helper);
--	drm_fb_helper_fini(&mfbdev->helper);
--	drm_framebuffer_put(mfbdev->helper.fb);
--
--	vfree(mfbdev->sysram);
--
--	return 0;
--}
--
--static const struct drm_fb_helper_funcs mga_fb_helper_funcs = {
--	.fb_probe = mgag200fb_create,
--};
--
--int mgag200_fbdev_init(struct mga_device *mdev)
--{
--	struct mga_fbdev *mfbdev;
--	int ret;
--	int bpp_sel = 32;
--
--	/* prefer 16bpp on low end gpus with limited VRAM */
--	if (IS_G200_SE(mdev) && mdev->mc.vram_size < (2048*1024))
--		bpp_sel = 16;
--
--	mfbdev = devm_kzalloc(mdev->dev->dev, sizeof(struct mga_fbdev), GFP_KERNEL);
--	if (!mfbdev)
--		return -ENOMEM;
--
--	mdev->mfbdev = mfbdev;
--	spin_lock_init(&mfbdev->dirty_lock);
--
--	drm_fb_helper_prepare(mdev->dev, &mfbdev->helper, &mga_fb_helper_funcs);
--
--	ret = drm_fb_helper_init(mdev->dev, &mfbdev->helper,
--				 MGAG200FB_CONN_LIMIT);
--	if (ret)
--		goto err_fb_helper;
--
--	ret = drm_fb_helper_single_add_all_connectors(&mfbdev->helper);
--	if (ret)
--		goto err_fb_setup;
--
--	/* disable all the possible outputs/crtcs before entering KMS mode */
--	drm_helper_disable_unused_functions(mdev->dev);
--
--	ret = drm_fb_helper_initial_config(&mfbdev->helper, bpp_sel);
--	if (ret)
--		goto err_fb_setup;
--
--	return 0;
--
--err_fb_setup:
--	drm_fb_helper_fini(&mfbdev->helper);
--err_fb_helper:
--	mdev->mfbdev = NULL;
--
--	return ret;
--}
--
--void mgag200_fbdev_fini(struct mga_device *mdev)
--{
--	if (!mdev->mfbdev)
--		return;
--
--	mga_fbdev_destroy(mdev->dev, mdev->mfbdev);
--}
-diff --git a/drivers/gpu/drm/mgag200/mgag200_main.c b/drivers/gpu/drm/mgag200/mgag200_main.c
-index b10f7265b5c4..6d943a008752 100644
---- a/drivers/gpu/drm/mgag200/mgag200_main.c
-+++ b/drivers/gpu/drm/mgag200/mgag200_main.c
-@@ -14,8 +14,33 @@
- 
- #include "mgag200_drv.h"
- 
-+static int mga_framebuffer_dirtyfb(struct drm_framebuffer *fb,
-+				   struct drm_file *file_priv,
-+				   unsigned int flags,
-+				   unsigned int color,
-+				   struct drm_clip_rect *clips,
-+				   unsigned int num_clips)
++obj-$(CONFIG_VHOST_VFIO) += vdpa.o
++
+ obj-$(CONFIG_VHOST)	+= vhost.o
+diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
+new file mode 100644
+index 000000000000..5c9426e2a091
+--- /dev/null
++++ b/drivers/vhost/vdpa.c
+@@ -0,0 +1,770 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2018-2019 Intel Corporation.
++ */
++
++#include <linux/module.h>
++#include <linux/kernel.h>
++#include <linux/vfio.h>
++#include <linux/vhost.h>
++#include <linux/mdev.h>
++#include <linux/vdpa_mdev.h>
++#include <asm/uaccess.h>
++
++#define VDPA_CONFIG_SIZE		0x1000000
++
++#define VDPA_VFIO_VHOST_OFFSET_SHIFT	40
++#define VDPA_VFIO_VHOST_OFFSET_MASK \
++		((1ULL << VDPA_VFIO_VHOST_OFFSET_SHIFT) - 1)
++#define VDPA_VFIO_VHOST_OFFSET_TO_INDEX(offset) \
++		((offset) >> VDPA_VFIO_VHOST_OFFSET_SHIFT)
++#define VDPA_VFIO_VHOST_INDEX_TO_OFFSET(index) \
++		((u64)(index) << VDPA_VFIO_VHOST_OFFSET_SHIFT)
++#define VDPA_VFIO_VHOST_REGION_OFFSET(offset) \
++		((offset) & VDPA_VFIO_VHOST_OFFSET_MASK)
++
++struct vdpa_dev *vdpa_alloc(struct mdev_device *mdev, void *private,
++			    int max_vrings)
 +{
-+	/* empty placeholder function to enable fbcon shadow buffer */
++	struct vdpa_dev *vdpa;
++	size_t size;
++
++	size = sizeof(struct vdpa_dev) + max_vrings *
++			sizeof(struct vdpa_vring_info);
++
++	vdpa = kzalloc(size, GFP_KERNEL);
++	if (vdpa == NULL)
++		return NULL;
++
++	mutex_init(&vdpa->ops_lock);
++
++	vdpa->mdev = mdev;
++	vdpa->private = private;
++	vdpa->max_vrings = max_vrings;
++
++	return vdpa;
++}
++EXPORT_SYMBOL(vdpa_alloc);
++
++void vdpa_free(struct vdpa_dev *vdpa)
++{
++	struct mdev_device *mdev;
++
++	mdev = vdpa->mdev;
++
++	vdpa->ops->stop(vdpa);
++	mdev_set_drvdata(mdev, NULL);
++	mutex_destroy(&vdpa->ops_lock);
++	kfree(vdpa);
++}
++EXPORT_SYMBOL(vdpa_free);
++
++static ssize_t vdpa_handle_config_read(struct mdev_device *mdev,
++		char __user *buf, size_t count, loff_t *ppos)
++{
++	struct vdpa_dev *vdpa;
++	struct vhost_vfio_op *op = NULL;
++	loff_t pos = *ppos;
++	loff_t offset;
++	int ret;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa) {
++		ret = -ENODEV;
++		goto out;
++	}
++
++	offset = VDPA_VFIO_VHOST_REGION_OFFSET(pos);
++	if (offset != 0) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	if (!vdpa->pending_reply) {
++		ret = 0;
++		goto out;
++	}
++
++	vdpa->pending_reply = false;
++
++	op = kzalloc(VHOST_VFIO_OP_HDR_SIZE + VHOST_VFIO_OP_PAYLOAD_MAX_SIZE,
++		     GFP_KERNEL);
++	if (op == NULL) {
++		ret = -ENOMEM;
++		goto out;
++	}
++
++	op->request = vdpa->pending.request;
++
++	switch (op->request) {
++	case VHOST_GET_VRING_BASE:
++		op->payload.state = vdpa->pending.payload.state;
++		op->size = sizeof(op->payload.state);
++		break;
++	case VHOST_GET_FEATURES:
++		op->payload.u64 = vdpa->pending.payload.u64;
++		op->size = sizeof(op->payload.u64);
++		break;
++	default:
++		ret = -EINVAL;
++		goto out_free;
++	}
++
++	if (op->size + VHOST_VFIO_OP_HDR_SIZE != count) {
++		ret = -EINVAL;
++		goto out_free;
++	}
++
++	if (copy_to_user(buf, op, count)) {
++		ret = -EFAULT;
++		goto out_free;
++	}
++
++	ret = count;
++
++out_free:
++	kfree(op);
++out:
++	return ret;
++}
++
++ssize_t vdpa_read(struct mdev_device *mdev, char __user *buf,
++		  size_t count, loff_t *ppos)
++{
++	int done = 0;
++	unsigned int index;
++	loff_t pos = *ppos;
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	mutex_lock(&vdpa->ops_lock);
++
++	index = VDPA_VFIO_VHOST_OFFSET_TO_INDEX(pos);
++
++	switch (index) {
++	case VFIO_VHOST_CONFIG_REGION_INDEX:
++		done = vdpa_handle_config_read(mdev, buf, count, ppos);
++		break;
++	}
++
++	if (done > 0)
++		*ppos += done;
++
++	mutex_unlock(&vdpa->ops_lock);
++
++	return done;
++}
++EXPORT_SYMBOL(vdpa_read);
++
++static int vhost_set_vring_addr(struct mdev_device *mdev,
++		struct vhost_vring_addr *addr)
++{
++	struct vdpa_dev *vdpa;
++	int qid = addr->index;
++	struct vdpa_vring_info *vring;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	if (qid >= vdpa->max_vrings)
++		return -EINVAL;
++
++	if (qid >= vdpa->nr_vring)
++		vdpa->nr_vring = qid + 1;
++
++	vring = &vdpa->vring_info[qid];
++
++	vring->desc_user_addr = addr->desc_user_addr;
++	vring->used_user_addr = addr->used_user_addr;
++	vring->avail_user_addr = addr->avail_user_addr;
++	vring->log_guest_addr = addr->log_guest_addr;
++
 +	return 0;
 +}
 +
-+static const struct drm_framebuffer_funcs mga_framebuffer_funcs = {
-+	.destroy	= drm_gem_fb_destroy,
-+	.create_handle	= drm_gem_fb_create_handle,
-+	.dirty		= mga_framebuffer_dirtyfb,
-+};
-+
-+static struct drm_framebuffer *
-+mga_mode_config_funcs_fb_create(struct drm_device *dev, struct drm_file *file,
-+				const struct drm_mode_fb_cmd2 *mode_cmd)
++static int vhost_set_vring_num(struct mdev_device *mdev,
++		struct vhost_vring_state *num)
 +{
-+	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
-+					    &mga_framebuffer_funcs);
++	struct vdpa_dev *vdpa;
++	int qid = num->index;
++	struct vdpa_vring_info *vring;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	if (qid >= vdpa->max_vrings)
++		return -EINVAL;
++
++	vring = &vdpa->vring_info[qid];
++
++	vring->size = num->num;
++
++	return 0;
 +}
 +
- static const struct drm_mode_config_funcs mga_mode_funcs = {
--	.fb_create = drm_gem_fb_create
-+	.fb_create = mga_mode_config_funcs_fb_create
- };
- 
- static int mga_probe_vram(struct mga_device *mdev, void __iomem *mem)
-@@ -162,7 +187,7 @@ int mgag200_driver_load(struct drm_device *dev, unsigned long flags)
- 	if (IS_G200_SE(mdev) && mdev->mc.vram_size < (2048*1024))
- 		dev->mode_config.preferred_depth = 16;
- 	else
--		dev->mode_config.preferred_depth = 24;
-+		dev->mode_config.preferred_depth = 32;
- 	dev->mode_config.prefer_shadow = 1;
- 
- 	r = mgag200_modeset_init(mdev);
-@@ -186,6 +211,13 @@ int mgag200_driver_load(struct drm_device *dev, unsigned long flags)
- 	}
- 	mdev->cursor.pixels_current = NULL;
- 
-+	r = drm_fbdev_generic_setup(mdev->dev, 0);
-+	if (r) {
-+		dev_err(&dev->pdev->dev,
-+			"drm_fbdev_generic_setup failed: %d\n", r);
-+		goto err_modeset;
++static int vhost_set_vring_base(struct mdev_device *mdev,
++		struct vhost_vring_state *base)
++{
++	struct vdpa_dev *vdpa;
++	int qid = base->index;
++	struct vdpa_vring_info *vring;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	if (qid >= vdpa->max_vrings)
++		return -EINVAL;
++
++	vring = &vdpa->vring_info[qid];
++
++	vring->base = base->num;
++
++	return 0;
++}
++
++static int vhost_get_vring_base(struct mdev_device *mdev,
++		struct vhost_vring_state *base)
++{
++	struct vdpa_dev *vdpa;
++	int qid = base->index;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	vdpa->pending_reply = true;
++	vdpa->pending.request = VHOST_GET_VRING_BASE;
++	vdpa->pending.payload.state.index = qid;
++	vdpa->pending.payload.state.num = vdpa->vring_info[qid].base;
++
++	return 0;
++}
++
++static int vhost_set_log_base(struct mdev_device *mdev, u64 *log_base)
++{
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	vdpa->log_base = *log_base;
++	return 0;
++}
++
++static int vhost_set_features(struct mdev_device *mdev, u64 *features)
++{
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	vdpa->features = *features;
++	vdpa->ops->set_features(vdpa);
++
++	return 0;
++}
++
++static int vhost_get_features(struct mdev_device *mdev, u64 *features)
++{
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	vdpa->pending_reply = true;
++	vdpa->pending.request = VHOST_GET_FEATURES;
++	vdpa->pending.payload.u64 =
++		vdpa->ops->supported_features(vdpa);
++
++	return 0;
++}
++
++static int vhost_set_owner(struct mdev_device *mdev)
++{
++	// TODO
++	return 0;
++}
++
++static int vhost_reset_owner(struct mdev_device *mdev)
++{
++	// TODO
++	return 0;
++}
++
++static int vhost_set_state(struct mdev_device *mdev, u64 *state)
++{
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	if (*state >= VHOST_DEVICE_S_MAX)
++		return -EINVAL;
++
++	if (vdpa->state == *state)
++		return 0;
++
++	vdpa->state = *state;
++
++	switch (vdpa->state) {
++	case VHOST_DEVICE_S_RUNNING:
++		vdpa->ops->start(vdpa);
++		break;
++	case VHOST_DEVICE_S_STOPPED:
++		vdpa->ops->stop(vdpa);
++		break;
 +	}
 +
- 	return 0;
++	return 0;
++}
++
++static ssize_t vdpa_handle_config_write(struct mdev_device *mdev,
++		const char __user *buf, size_t count, loff_t *ppos)
++{
++	struct vhost_vfio_op *op = NULL;
++	loff_t pos = *ppos;
++	loff_t offset;
++	int ret;
++
++	offset = VDPA_VFIO_VHOST_REGION_OFFSET(pos);
++	if (offset != 0) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	if (count < VHOST_VFIO_OP_HDR_SIZE) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	op = kzalloc(VHOST_VFIO_OP_HDR_SIZE + VHOST_VFIO_OP_PAYLOAD_MAX_SIZE,
++		     GFP_KERNEL);
++	if (op == NULL) {
++		ret = -ENOMEM;
++		goto out;
++	}
++
++	if (copy_from_user(op, buf, VHOST_VFIO_OP_HDR_SIZE)) {
++		ret = -EINVAL;
++		goto out_free;
++	}
++
++	if (op->size > VHOST_VFIO_OP_PAYLOAD_MAX_SIZE ||
++	    op->size + VHOST_VFIO_OP_HDR_SIZE != count) {
++		ret = -EINVAL;
++		goto out_free;
++	}
++
++	if (copy_from_user(&op->payload, buf + VHOST_VFIO_OP_HDR_SIZE,
++			   op->size)) {
++		ret = -EFAULT;
++		goto out_free;
++	}
++
++	switch (op->request) {
++	case VHOST_SET_LOG_BASE:
++		vhost_set_log_base(mdev, &op->payload.u64);
++		break;
++	case VHOST_SET_VRING_ADDR:
++		vhost_set_vring_addr(mdev, &op->payload.addr);
++		break;
++	case VHOST_SET_VRING_NUM:
++		vhost_set_vring_num(mdev, &op->payload.state);
++		break;
++	case VHOST_SET_VRING_BASE:
++		vhost_set_vring_base(mdev, &op->payload.state);
++		break;
++	case VHOST_GET_VRING_BASE:
++		vhost_get_vring_base(mdev, &op->payload.state);
++		break;
++	case VHOST_SET_FEATURES:
++		vhost_set_features(mdev, &op->payload.u64);
++		break;
++	case VHOST_GET_FEATURES:
++		vhost_get_features(mdev, &op->payload.u64);
++		break;
++	case VHOST_SET_OWNER:
++		vhost_set_owner(mdev);
++		break;
++	case VHOST_RESET_OWNER:
++		vhost_reset_owner(mdev);
++		break;
++	case VHOST_DEVICE_SET_STATE:
++		vhost_set_state(mdev, &op->payload.u64);
++		break;
++	default:
++		break;
++	}
++
++	ret = count;
++
++out_free:
++	kfree(op);
++out:
++	return ret;
++}
++
++static ssize_t vdpa_handle_notify_write(struct mdev_device *mdev,
++		const char __user *buf, size_t count, loff_t *ppos)
++{
++	struct vdpa_dev *vdpa;
++	int qid;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	if (count < sizeof(qid))
++		return -EINVAL;
++
++	if (copy_from_user(&qid, buf, sizeof(qid)))
++		return -EINVAL;
++
++	vdpa->ops->notify(vdpa, qid);
++
++	return count;
++}
++
++ssize_t vdpa_write(struct mdev_device *mdev, const char __user *buf,
++		   size_t count, loff_t *ppos)
++{
++	int done = 0;
++	unsigned int index;
++	loff_t pos = *ppos;
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	mutex_lock(&vdpa->ops_lock);
++
++	index = VDPA_VFIO_VHOST_OFFSET_TO_INDEX(pos);
++
++	switch (index) {
++	case VFIO_VHOST_CONFIG_REGION_INDEX:
++		done = vdpa_handle_config_write(mdev, buf, count, ppos);
++		break;
++	case VFIO_VHOST_NOTIFY_REGION_INDEX:
++		done = vdpa_handle_notify_write(mdev, buf, count, ppos);
++		break;
++	}
++
++	if (done > 0)
++		*ppos += done;
++
++	mutex_unlock(&vdpa->ops_lock);
++
++	return done;
++}
++EXPORT_SYMBOL(vdpa_write);
++
++static int vdpa_get_region_info(struct mdev_device *mdev,
++				struct vfio_region_info *region_info,
++				u16 *cap_type_id, void **cap_type)
++{
++	struct vdpa_dev *vdpa;
++	u32 index, flags;
++	u64 size = 0;
++
++	if (!mdev)
++		return -EINVAL;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -EINVAL;
++
++	index = region_info->index;
++	if (index >= VFIO_VHOST_NUM_REGIONS)
++		return -EINVAL;
++
++	mutex_lock(&vdpa->ops_lock);
++
++	flags = VFIO_REGION_INFO_FLAG_READ | VFIO_REGION_INFO_FLAG_WRITE;
++
++	switch (index) {
++	case VFIO_VHOST_CONFIG_REGION_INDEX:
++		size = VDPA_CONFIG_SIZE;
++		break;
++	case VFIO_VHOST_NOTIFY_REGION_INDEX:
++		size = (u64)vdpa->max_vrings << PAGE_SHIFT;
++		flags |= VFIO_REGION_INFO_FLAG_MMAP;
++		break;
++	default:
++		size = 0;
++		break;
++	}
++
++	region_info->size = size;
++	region_info->offset = VDPA_VFIO_VHOST_INDEX_TO_OFFSET(index);
++	region_info->flags = flags;
++	mutex_unlock(&vdpa->ops_lock);
++	return 0;
++}
++
++static int vdpa_reset(struct mdev_device *mdev)
++{
++	struct vdpa_dev *vdpa;
++
++	if (!mdev)
++		return -EINVAL;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -EINVAL;
++
++	return 0;
++}
++
++static int vdpa_get_device_info(struct mdev_device *mdev,
++				struct vfio_device_info *dev_info)
++{
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	dev_info->flags = VFIO_DEVICE_FLAGS_VHOST | VFIO_DEVICE_RESET;
++	dev_info->num_regions = VFIO_VHOST_NUM_REGIONS;
++	dev_info->num_irqs = VFIO_VHOST_NUM_IRQS;
++
++	return 0;
++}
++
++static int vdpa_get_irq_info(struct mdev_device *mdev,
++			     struct vfio_irq_info *info)
++{
++	struct vdpa_dev *vdpa;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	if (info->index != VFIO_VHOST_VQ_IRQ_INDEX)
++		return -EINVAL;
++
++	info->flags = VFIO_IRQ_INFO_EVENTFD;
++	info->count = vdpa->max_vrings;
++
++	return 0;
++}
++
++static int vdpa_set_irqs(struct mdev_device *mdev, uint32_t flags,
++			 unsigned int index, unsigned int start,
++			 unsigned int count, void *data)
++{
++	struct vdpa_dev *vdpa;
++	int *fd = data, i;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -EINVAL;
++
++	if (index != VFIO_VHOST_VQ_IRQ_INDEX)
++		return -ENOTSUPP;
++
++	for (i = 0; i < count; i++)
++		vdpa->ops->set_eventfd(vdpa, start + i,
++			(flags & VFIO_IRQ_SET_DATA_EVENTFD) ? fd[i] : -1);
++
++	return 0;
++}
++
++long vdpa_ioctl(struct mdev_device *mdev, unsigned int cmd, unsigned long arg)
++{
++	int ret = 0;
++	unsigned long minsz;
++	struct vdpa_dev *vdpa;
++
++	if (!mdev)
++		return -EINVAL;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	switch (cmd) {
++	case VFIO_DEVICE_GET_INFO:
++	{
++		struct vfio_device_info info;
++
++		minsz = offsetofend(struct vfio_device_info, num_irqs);
++
++		if (copy_from_user(&info, (void __user *)arg, minsz))
++			return -EFAULT;
++
++		if (info.argsz < minsz)
++			return -EINVAL;
++
++		ret = vdpa_get_device_info(mdev, &info);
++		if (ret)
++			return ret;
++
++		if (copy_to_user((void __user *)arg, &info, minsz))
++			return -EFAULT;
++
++		return 0;
++	}
++	case VFIO_DEVICE_GET_REGION_INFO:
++	{
++		struct vfio_region_info info;
++		u16 cap_type_id = 0;
++		void *cap_type = NULL;
++
++		minsz = offsetofend(struct vfio_region_info, offset);
++
++		if (copy_from_user(&info, (void __user *)arg, minsz))
++			return -EFAULT;
++
++		if (info.argsz < minsz)
++			return -EINVAL;
++
++		ret = vdpa_get_region_info(mdev, &info, &cap_type_id,
++					   &cap_type);
++		if (ret)
++			return ret;
++
++		if (copy_to_user((void __user *)arg, &info, minsz))
++			return -EFAULT;
++
++		return 0;
++	}
++	case VFIO_DEVICE_GET_IRQ_INFO:
++	{
++		struct vfio_irq_info info;
++
++		minsz = offsetofend(struct vfio_irq_info, count);
++
++		if (copy_from_user(&info, (void __user *)arg, minsz))
++			return -EFAULT;
++
++		if (info.argsz < minsz || info.index >= vdpa->max_vrings)
++			return -EINVAL;
++
++		ret = vdpa_get_irq_info(mdev, &info);
++		if (ret)
++			return ret;
++
++		if (copy_to_user((void __user *)arg, &info, minsz))
++			return -EFAULT;
++
++		return 0;
++	}
++	case VFIO_DEVICE_SET_IRQS:
++	{
++		struct vfio_irq_set hdr;
++		size_t data_size = 0;
++		u8 *data = NULL;
++
++		minsz = offsetofend(struct vfio_irq_set, count);
++
++		if (copy_from_user(&hdr, (void __user *)arg, minsz))
++			return -EFAULT;
++
++		ret = vfio_set_irqs_validate_and_prepare(&hdr, vdpa->max_vrings,
++							 VFIO_VHOST_NUM_IRQS,
++							 &data_size);
++		if (ret)
++			return ret;
++
++		if (data_size) {
++			data = memdup_user((void __user *)(arg + minsz),
++					   data_size);
++			if (IS_ERR(data))
++				return PTR_ERR(data);
++		}
++
++		ret = vdpa_set_irqs(mdev, hdr.flags, hdr.index, hdr.start,
++				hdr.count, data);
++
++		kfree(data);
++		return ret;
++	}
++	case VFIO_DEVICE_RESET:
++		return vdpa_reset(mdev);
++	}
++	return -ENOTTY;
++}
++EXPORT_SYMBOL(vdpa_ioctl);
++
++static const struct vm_operations_struct vdpa_mm_ops = {
++#ifdef CONFIG_HAVE_IOREMAP_PROT
++	.access = generic_access_phys
++#endif
++};
++
++int vdpa_mmap(struct mdev_device *mdev, struct vm_area_struct *vma)
++{
++	struct vdpa_dev *vdpa;
++	unsigned int index;
++	loff_t pos;
++	loff_t offset;
++	int qid, ret;
++
++	vdpa = mdev_get_drvdata(mdev);
++	if (!vdpa)
++		return -ENODEV;
++
++	pos = vma->vm_pgoff << PAGE_SHIFT;
++
++	index = VDPA_VFIO_VHOST_OFFSET_TO_INDEX(pos);
++	offset = VDPA_VFIO_VHOST_REGION_OFFSET(pos);
++
++	qid = offset >> PAGE_SHIFT;
++
++	if (vma->vm_end < vma->vm_start)
++		return -EINVAL;
++	if ((vma->vm_flags & VM_SHARED) == 0)
++		return -EINVAL;
++	if (index != VFIO_VHOST_NOTIFY_REGION_INDEX)
++		return -EINVAL;
++	if (qid < 0 || qid >= vdpa->max_vrings)
++		return -EINVAL;
++
++	if (vma->vm_end - vma->vm_start > PAGE_SIZE)
++		return -EINVAL;
++
++	if (vdpa->ops->get_notify_addr == NULL)
++		return -ENOTSUPP;
++
++	mutex_lock(&vdpa->ops_lock);
++
++	vma->vm_ops = &vdpa_mm_ops;
++	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
++
++	vma->vm_pgoff = vdpa->ops->get_notify_addr(vdpa, qid) >> PAGE_SHIFT;
++
++	ret = remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
++			vma->vm_end - vma->vm_start, vma->vm_page_prot);
++
++	mutex_unlock(&vdpa->ops_lock);
++
++	return ret;
++}
++EXPORT_SYMBOL(vdpa_mmap);
++
++int vdpa_open(struct mdev_device *mdev)
++{
++	return 0;
++}
++EXPORT_SYMBOL(vdpa_open);
++
++void vdpa_close(struct mdev_device *mdev)
++{
++}
++EXPORT_SYMBOL(vdpa_close);
++
++MODULE_VERSION("0.0.0");
++MODULE_LICENSE("GPL v2");
++MODULE_DESCRIPTION("Hardware vhost accelerator abstraction");
+diff --git a/include/linux/vdpa_mdev.h b/include/linux/vdpa_mdev.h
+new file mode 100644
+index 000000000000..4bbdf7e2e712
+--- /dev/null
++++ b/include/linux/vdpa_mdev.h
+@@ -0,0 +1,72 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2018-2019 Intel Corporation.
++ */
++
++#ifndef VDPA_MDEV_H
++#define VDPA_MDEV_H
++
++struct mdev_device;
++struct vdpa_dev;
++
++/*
++ * XXX: Any comments about the vDPA API design for drivers
++ *      would be appreciated!
++ */
++
++typedef int (*vdpa_start_device_t)(struct vdpa_dev *vdpa);
++typedef int (*vdpa_stop_device_t)(struct vdpa_dev *vdpa);
++typedef int (*vdpa_set_features_t)(struct vdpa_dev *vdpa);
++typedef int (*vdpa_set_eventfd_t)(struct vdpa_dev *vdpa, int queue_idx, int fd);
++typedef u64 (*vdpa_supported_features_t)(struct vdpa_dev *vdpa);
++typedef void (*vdpa_notify_device_t)(struct vdpa_dev *vdpa, int queue_idx);
++typedef u64 (*vdpa_get_notify_addr_t)(struct vdpa_dev *vdpa, int queue_idx);
++
++struct vdpa_device_ops {
++	vdpa_start_device_t		start;
++	vdpa_stop_device_t		stop;
++	vdpa_set_eventfd_t		set_eventfd;
++	vdpa_supported_features_t	supported_features;
++	vdpa_notify_device_t		notify;
++	vdpa_get_notify_addr_t		get_notify_addr;
++	vdpa_set_features_t		set_features;
++};
++
++struct vdpa_vring_info {
++	u64 desc_user_addr;
++	u64 used_user_addr;
++	u64 avail_user_addr;
++	u64 log_guest_addr;
++	u16 size;
++	u16 base;
++};
++
++struct vdpa_dev {
++	struct mdev_device *mdev;
++	struct mutex ops_lock;
++	int nr_vring;
++	u64 features;
++	u64 state;
++	bool pending_reply;
++	struct vhost_vfio_op pending;
++	const struct vdpa_device_ops *ops;
++	void *private;
++	int max_vrings;
++	uint64_t log_base;
++	uint64_t log_size;
++	struct vdpa_vring_info vring_info[0];
++};
++
++struct vdpa_dev *vdpa_alloc(struct mdev_device *mdev, void *private,
++			    int max_vrings);
++void vdpa_free(struct vdpa_dev *vdpa);
++ssize_t vdpa_read(struct mdev_device *mdev, char __user *buf,
++		  size_t count, loff_t *ppos);
++ssize_t vdpa_write(struct mdev_device *mdev, const char __user *buf,
++		   size_t count, loff_t *ppos);
++long vdpa_ioctl(struct mdev_device *mdev, unsigned int cmd, unsigned long arg);
++int vdpa_mmap(struct mdev_device *mdev, struct vm_area_struct *vma);
++int vdpa_open(struct mdev_device *mdev);
++void vdpa_close(struct mdev_device *mdev);
++
++#endif /* VDPA_MDEV_H */
+diff --git a/include/uapi/linux/vfio.h b/include/uapi/linux/vfio.h
+index 8f10748dac79..6c5718ab7eeb 100644
+--- a/include/uapi/linux/vfio.h
++++ b/include/uapi/linux/vfio.h
+@@ -201,6 +201,7 @@ struct vfio_device_info {
+ #define VFIO_DEVICE_FLAGS_AMBA  (1 << 3)	/* vfio-amba device */
+ #define VFIO_DEVICE_FLAGS_CCW	(1 << 4)	/* vfio-ccw device */
+ #define VFIO_DEVICE_FLAGS_AP	(1 << 5)	/* vfio-ap device */
++#define VFIO_DEVICE_FLAGS_VHOST	(1 << 6)	/* vfio-vhost device */
+ 	__u32	num_regions;	/* Max region index + 1 */
+ 	__u32	num_irqs;	/* Max IRQ index + 1 */
+ };
+@@ -217,6 +218,7 @@ struct vfio_device_info {
+ #define VFIO_DEVICE_API_AMBA_STRING		"vfio-amba"
+ #define VFIO_DEVICE_API_CCW_STRING		"vfio-ccw"
+ #define VFIO_DEVICE_API_AP_STRING		"vfio-ap"
++#define VFIO_DEVICE_API_VHOST_STRING		"vfio-vhost"
  
- err_modeset:
-@@ -204,32 +236,7 @@ void mgag200_driver_unload(struct drm_device *dev)
- 	if (mdev == NULL)
- 		return;
- 	mgag200_modeset_fini(mdev);
--	mgag200_fbdev_fini(mdev);
- 	drm_mode_config_cleanup(dev);
- 	mgag200_mm_fini(mdev);
- 	dev->dev_private = NULL;
- }
--
--int mgag200_gem_create(struct drm_device *dev,
--		   u32 size, bool iskernel,
--		   struct drm_gem_object **obj)
--{
--	struct drm_gem_vram_object *gbo;
--	int ret;
--
--	*obj = NULL;
--
--	size = roundup(size, PAGE_SIZE);
--	if (size == 0)
--		return -EINVAL;
--
--	gbo = drm_gem_vram_create(dev, &dev->vram_mm->bdev, size, 0, false);
--	if (IS_ERR(gbo)) {
--		ret = PTR_ERR(gbo);
--		if (ret != -ERESTARTSYS)
--			DRM_ERROR("failed to allocate GEM object\n");
--		return ret;
--	}
--	*obj = &gbo->gem;
--	return 0;
--}
-diff --git a/drivers/gpu/drm/mgag200/mgag200_mode.c b/drivers/gpu/drm/mgag200/mgag200_mode.c
-index a7cef78d426f..822f2a13748f 100644
---- a/drivers/gpu/drm/mgag200/mgag200_mode.c
-+++ b/drivers/gpu/drm/mgag200/mgag200_mode.c
-@@ -860,18 +860,12 @@ static int mga_crtc_do_set_base(struct drm_crtc *crtc,
- 				struct drm_framebuffer *fb,
- 				int x, int y, int atomic)
- {
--	struct mga_device *mdev = crtc->dev->dev_private;
- 	struct drm_gem_vram_object *gbo;
- 	int ret;
- 	s64 gpu_addr;
--	void *base;
+ /**
+  * VFIO_DEVICE_GET_REGION_INFO - _IOWR(VFIO_TYPE, VFIO_BASE + 8,
+@@ -573,6 +575,23 @@ enum {
+ 	VFIO_CCW_NUM_IRQS
+ };
  
- 	if (!atomic && fb) {
- 		gbo = drm_gem_vram_of_gem(fb->obj[0]);
--
--		/* unmap if console */
--		if (mdev->mfbdev->helper.fb == fb)
--			drm_gem_vram_kunmap(gbo);
- 		drm_gem_vram_unpin(gbo);
- 	}
++/*
++ * The vfio-vhost bus driver makes use of the following fixed region and
++ * IRQ index mapping. Unimplemented regions return a size of zero.
++ * Unimplemented IRQ types return a count of zero.
++ */
++
++enum {
++	VFIO_VHOST_CONFIG_REGION_INDEX,
++	VFIO_VHOST_NOTIFY_REGION_INDEX,
++	VFIO_VHOST_NUM_REGIONS
++};
++
++enum {
++	VFIO_VHOST_VQ_IRQ_INDEX,
++	VFIO_VHOST_NUM_IRQS
++};
++
+ /**
+  * VFIO_DEVICE_GET_PCI_HOT_RESET_INFO - _IORW(VFIO_TYPE, VFIO_BASE + 12,
+  *					      struct vfio_pci_hot_reset_info)
+diff --git a/include/uapi/linux/vhost.h b/include/uapi/linux/vhost.h
+index 40d028eed645..ad95b90c5c05 100644
+--- a/include/uapi/linux/vhost.h
++++ b/include/uapi/linux/vhost.h
+@@ -116,4 +116,29 @@
+ #define VHOST_VSOCK_SET_GUEST_CID	_IOW(VHOST_VIRTIO, 0x60, __u64)
+ #define VHOST_VSOCK_SET_RUNNING		_IOW(VHOST_VIRTIO, 0x61, int)
  
-@@ -886,15 +880,6 @@ static int mga_crtc_do_set_base(struct drm_crtc *crtc,
- 		goto err_drm_gem_vram_unpin;
- 	}
- 
--	if (mdev->mfbdev->helper.fb == crtc->primary->fb) {
--		/* if pushing console in kmap it */
--		base = drm_gem_vram_kmap(gbo, true, NULL);
--		if (IS_ERR(base)) {
--			ret = PTR_ERR(base);
--			DRM_ERROR("failed to kmap fbcon\n");
--		}
--	}
--
- 	mga_set_start_address(crtc, (u32)gpu_addr);
- 
- 	return 0;
-@@ -1418,14 +1403,9 @@ static void mga_crtc_disable(struct drm_crtc *crtc)
- 	DRM_DEBUG_KMS("\n");
- 	mga_crtc_dpms(crtc, DRM_MODE_DPMS_OFF);
- 	if (crtc->primary->fb) {
--		struct mga_device *mdev = crtc->dev->dev_private;
- 		struct drm_framebuffer *fb = crtc->primary->fb;
- 		struct drm_gem_vram_object *gbo =
- 			drm_gem_vram_of_gem(fb->obj[0]);
--
--		/* unmap if console */
--		if (mdev->mfbdev->helper.fb == fb)
--			drm_gem_vram_kunmap(gbo);
- 		drm_gem_vram_unpin(gbo);
- 	}
- 	crtc->primary->fb = NULL;
-@@ -1718,7 +1698,6 @@ int mgag200_modeset_init(struct mga_device *mdev)
- {
- 	struct drm_encoder *encoder;
- 	struct drm_connector *connector;
--	int ret;
- 
- 	mdev->mode_info.mode_config_initialized = true;
- 
-@@ -1743,12 +1722,6 @@ int mgag200_modeset_init(struct mga_device *mdev)
- 
- 	drm_connector_attach_encoder(connector, encoder);
- 
--	ret = mgag200_fbdev_init(mdev);
--	if (ret) {
--		DRM_ERROR("mga_fbdev_init failed\n");
--		return ret;
--	}
--
- 	return 0;
- }
- 
++/* VHOST_DEVICE specific defines */
++
++#define VHOST_DEVICE_SET_STATE _IOW(VHOST_VIRTIO, 0x70, __u64)
++
++#define VHOST_DEVICE_S_STOPPED 0
++#define VHOST_DEVICE_S_RUNNING 1
++#define VHOST_DEVICE_S_MAX     2
++
++struct vhost_vfio_op {
++	__u64 request;
++	__u32 flags;
++	/* Flag values: */
++#define VHOST_VFIO_NEED_REPLY 0x1 /* Whether need reply */
++	__u32 size;
++	union {
++		__u64 u64;
++		struct vhost_vring_state state;
++		struct vhost_vring_addr addr;
++	} payload;
++};
++
++#define VHOST_VFIO_OP_HDR_SIZE \
++		((unsigned long)&((struct vhost_vfio_op *)NULL)->payload)
++#define VHOST_VFIO_OP_PAYLOAD_MAX_SIZE 1024 /* FIXME TBD */
++
+ #endif
 -- 
-2.21.0
+2.17.1
 
 _______________________________________________
 Virtualization mailing list
