@@ -2,51 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB11D5ECC5
-	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 21:27:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5694C5ECFA
+	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 21:52:39 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 7EC8FEA8;
-	Wed,  3 Jul 2019 19:27:45 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 48BF7EA3;
+	Wed,  3 Jul 2019 19:52:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 21FA0E85
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 663ACE81
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 19:27:44 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from smtp.domeneshop.no (smtp.domeneshop.no [194.63.252.55])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7964A70D
+	Wed,  3 Jul 2019 19:52:32 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id CBC5270D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 19:27:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org;
-	s=ds201810; 
-	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=Fim4j7VbqUMQEUX2smRAc1YukNARo49PRYDt+wRVbD8=; 
-	b=rXq8H6H0u6cgVf65W0gUoq2V/HdYfMzP8KLS8aPEdZuhNdgQvI+R1FVuqwjghzyO1X1xBU8RikkotMgipD39UPsvzRva4wxAUNemBVScpXmNLoeIt4+2/COx8ktUVuFsgBwKXEqZaW+BlYZlEj9GPVqDlsvVO5b+gpZJs3STjEzBmFuZ+sQac0vENwaOCQf3luR1UmGzW4L1CNjenM/LlO1d2s6CMpvcbhGFrYSquDJCaa852pSaKpFbanPGEtbwiQbGamUqg5nYaX93jiYyzEt/7JG0D7iu8ef9vtvbYDYmcWdnpkPEt+QvUkqcX+mzjWQlot5VlgsAZbrsSPFzIw==;
-Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:62952
-	helo=[192.168.10.173]) by smtp.domeneshop.no with esmtpsa
-	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.84_2)
-	(envelope-from <noralf@tronnes.org>)
-	id 1hikur-0000r8-61; Wed, 03 Jul 2019 21:27:41 +0200
-Subject: Re: [PATCH 0/5] Unmappable DRM client buffers for fbdev emulation
-To: Thomas Zimmermann <tzimmermann@suse.de>, airlied@redhat.com,
-	daniel@ffwll.ch, kraxel@redhat.com, maarten.lankhorst@linux.intel.com, 
-	maxime.ripard@bootlin.com, sean@poorly.run, sam@ravnborg.org,
-	yc_chen@aspeedtech.com
-References: <20190703083302.2609-1-tzimmermann@suse.de>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-Message-ID: <a2e3baa8-f8e8-4628-e18f-cb3119194afb@tronnes.org>
-Date: Wed, 3 Jul 2019 21:27:34 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.2
+	Wed,  3 Jul 2019 19:52:31 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id w25so7719521ioc.8
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 03 Jul 2019 12:52:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=L4H4TOfyLAfsMNQ6KlYVmN2d3wCdPkK9USRqsxEO8Ys=;
+	b=PbX/zorGSn1qwb4ZpcKi4XK3kHpCF9c68JDwzqSzG2LSIzadqTkeAKy28E38rLK+Ew
+	EZBJcopVJO9X476DfsouDX8FomhOtrETgkx3KMGKr96SNEtkNJe3EKBsnL4bwri9x2Q2
+	DhEBa3QnWAxo9r4wkqmp9TiAUgLIWSvdGZm/3Mg7cjbDIKzvdQNdyEynHZoNholrX60l
+	25NvVzruc1Z6DE372tfzeb11HVoFfUBqd07c8P1rV+yvNVQ9MmMXR0/wnS+rvvcAWlDS
+	BkkqwqmjMQUkdvBxJS46cQd2CSXD05GD2S/Qa1Ey+PB1qjWgHy5OMT5VO9peoOlkW63R
+	5Wsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=L4H4TOfyLAfsMNQ6KlYVmN2d3wCdPkK9USRqsxEO8Ys=;
+	b=roRiMo4duEvaHU/WN9FwXSyrsl3rdyVtc3wvrIbn6xOUehvaCFdzJPTS3j3z5mmR5y
+	kX78SUZp6MjUIp/KTm+wTarBAQCyFcaWq4bINf0n0AvjkPmLeUc4VCyDcH4H9LwIXQ2P
+	dCO5vI/2eHzkJQhuxb0z2DgJ8vOOyxc5gGFVXmdW491wX1oyb14hP/tM0vfjYo/PsFDC
+	wWP7g2JD+BABqf75YrBsT9VJZWYwa///rFUoWFTSARYqNQRH/xqp4j9cG2ze1T8QgvjI
+	grgDvgrMQoaaBLbuqQ8NrCLV6/m2VeqsWuPdEMenGVgyxfNMSZ1Cn3FyVUdSTJzlWCdX
+	5sjA==
+X-Gm-Message-State: APjAAAW+JWWLrKErDJCy99ejFRw5aE8MAz5/7uTS/OCb133ysQtBRsX+
+	7wL0RJe/P7ZvSCwhZm836EOpq27N/lzE9tmItSs=
+X-Google-Smtp-Source: APXvYqyg6L2E9fD6xiWEGNYlIX9RYdd1Rysp6RIq1uwMBpZNhy+YqsXx/duJBEZ1ZHBSgYyU1RZvHzcsXybl184Z8II=
+X-Received: by 2002:a05:6602:104:: with SMTP id
+	s4mr33493624iot.200.1562183550911; 
+	Wed, 03 Jul 2019 12:52:30 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190703083302.2609-1-tzimmermann@suse.de>
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+References: <20190702141903.1131-1-kraxel@redhat.com>
+	<20190702141903.1131-8-kraxel@redhat.com>
+	<CAPaKu7TJ1RgL_CjGnieE1hOOXnT-ECRk67ntRCPTFiv+EmrX4Q@mail.gmail.com>
+In-Reply-To: <CAPaKu7TJ1RgL_CjGnieE1hOOXnT-ECRk67ntRCPTFiv+EmrX4Q@mail.gmail.com>
+From: Chia-I Wu <olvaffe@gmail.com>
+Date: Wed, 3 Jul 2019 12:52:19 -0700
+Message-ID: <CAPaKu7RFd4EVsV8VbNtNbVv2cPmSbpQ7pkBPpbbeUDz+i=nEfQ@mail.gmail.com>
+Subject: Re: [PATCH v6 07/18] drm/virtio: add virtio_gpu_object_array & helpers
+To: Gerd Hoffmann <kraxel@redhat.com>
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	ML dri-devel <dri-devel@lists.freedesktop.org>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	Gurchetan Singh <gurchetansingh@chromium.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,74 +85,160 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+On Wed, Jul 3, 2019 at 11:31 AM Chia-I Wu <olvaffe@gmail.com> wrote:
+>
+> On Tue, Jul 2, 2019 at 7:19 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+> >
+> > Some helper functions to manage an array of gem objects.
+> >
+> > v6:
+> >  - add ticket to struct virtio_gpu_object_array.
+> >  - add virtio_gpu_array_{lock,unlock}_resv helpers.
+> >  - add virtio_gpu_array_add_fence helper.
+> > v5: some small optimizations (Chia-I Wu).
+> > v4: make them virtio-private instead of generic helpers.
+> >
+> > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> > ---
+> >  drivers/gpu/drm/virtio/virtgpu_drv.h | 17 ++++++
+> >  drivers/gpu/drm/virtio/virtgpu_gem.c | 83 ++++++++++++++++++++++++++++
+> >  2 files changed, 100 insertions(+)
+> >
+> > diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> > index 07f6001ea91e..abb078a5dedf 100644
+> > --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
+> > +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> > @@ -84,6 +84,12 @@ struct virtio_gpu_object {
+> >  #define gem_to_virtio_gpu_obj(gobj) \
+> >         container_of((gobj), struct virtio_gpu_object, gem_base)
+> >
+> > +struct virtio_gpu_object_array {
+> > +       struct ww_acquire_ctx ticket;
+> > +       u32 nents, total;
+> > +       struct drm_gem_object *objs[];
+> > +};
+> > +
+> >  struct virtio_gpu_vbuffer;
+> >  struct virtio_gpu_device;
+> >
+> > @@ -251,6 +257,17 @@ int virtio_gpu_mode_dumb_mmap(struct drm_file *file_priv,
+> >                               struct drm_device *dev,
+> >                               uint32_t handle, uint64_t *offset_p);
+> >
+> > +struct virtio_gpu_object_array *virtio_gpu_array_alloc(u32 nents);
+> > +struct virtio_gpu_object_array*
+> > +virtio_gpu_array_from_handles(struct drm_file *drm_file, u32 *handles, u32 nents);
+> > +void virtio_gpu_array_add_obj(struct virtio_gpu_object_array *objs,
+> > +                             struct drm_gem_object *obj);
+> > +int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs);
+> > +void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs);
+> > +void virtio_gpu_array_add_fence(struct virtio_gpu_object_array *objs,
+> > +                               struct dma_fence *fence);
+> > +void virtio_gpu_array_put_free(struct virtio_gpu_object_array *objs);
+> > +
+> >  /* virtio vg */
+> >  int virtio_gpu_alloc_vbufs(struct virtio_gpu_device *vgdev);
+> >  void virtio_gpu_free_vbufs(struct virtio_gpu_device *vgdev);
+> > diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
+> > index 9c9ad3b14080..e88df5e06d06 100644
+> > --- a/drivers/gpu/drm/virtio/virtgpu_gem.c
+> > +++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
+> > @@ -169,3 +169,86 @@ void virtio_gpu_gem_object_close(struct drm_gem_object *obj,
+> >                                                 qobj->hw_res_handle);
+> >         virtio_gpu_object_unreserve(qobj);
+> >  }
+> > +
+> > +struct virtio_gpu_object_array *virtio_gpu_array_alloc(u32 nents)
+> > +{
+> > +       struct virtio_gpu_object_array *objs;
+> > +       size_t size = sizeof(*objs) + sizeof(objs->objs[0]) * nents;
+> > +
+> > +       objs = kmalloc(size, GFP_KERNEL);
+> > +       if (!objs)
+> > +               return NULL;
+> > +
+> > +       objs->nents = 0;
+> > +       objs->total = nents;
+> > +       return objs;
+> > +}
+> > +
+> > +static void virtio_gpu_array_free(struct virtio_gpu_object_array *objs)
+> > +{
+> > +       kfree(objs);
+> > +}
+> > +
+> > +struct virtio_gpu_object_array*
+> > +virtio_gpu_array_from_handles(struct drm_file *drm_file, u32 *handles, u32 nents)
+> > +{
+> > +       struct virtio_gpu_object_array *objs;
+> > +       u32 i;
+> > +
+> > +       objs = virtio_gpu_array_alloc(nents);
+> > +       if (!objs)
+> > +               return NULL;
+> > +
+> > +       for (i = 0; i < nents; i++) {
+> > +               objs->nents = i;
+> This line can be moved into the if-block just below.
+> > +               objs->objs[i] = drm_gem_object_lookup(drm_file, handles[i]);
+> > +               if (!objs->objs[i]) {
+> > +                       virtio_gpu_array_put_free(objs);
+> > +                       return NULL;
+> > +               }
+> > +       }
+> > +       objs->nents = i;
+> > +       return objs;
+> > +}
+> > +
+> > +void virtio_gpu_array_add_obj(struct virtio_gpu_object_array *objs,
+> > +                             struct drm_gem_object *obj)
+> > +{
+> > +       if (WARN_ON_ONCE(objs->nents == objs->total))
+> > +               return;
+> > +
+> > +       drm_gem_object_get(obj);
+> > +       objs->objs[objs->nents] = obj;
+> > +       objs->nents++;
+> > +}
+> > +
+> > +int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs)
+> > +{
+> > +       return drm_gem_lock_reservations(objs->objs, objs->nents,
+> > +                                        &objs->ticket);
+Unlike in other drivers where an "object array" is only needed in
+execbuffer, we will use this in several places, and often with only 1
+object in the array.  Can we special case that and do a quick
+reservation_object_lock?
 
-
-Den 03.07.2019 10.32, skrev Thomas Zimmermann:
-> DRM client buffers are permanently mapped throughout their lifetime. This
-> prevents us from using generic framebuffer emulation for devices with
-> small dedicated video memory, such as ast or mgag200. With fb buffers
-> permanently mapped, such devices often won't have enougth space left to
-> display other content (e.g., X11).
-> 
-> This patch set introduces unmappable DRM client buffers for framebuffer
-> emulation with shadow buffers. While the shadow buffer remains in system
-> memory permanently, the respective buffer object will only be mapped briefly
-> during updates from the shadow buffer. Hence, the driver can relocate he
-> buffer object among memory regions as needed.
-> 
-> The default behoviour for DRM client buffers is still to be permanently
-> mapped.
-> 
-> The patch set converts ast and mgag200 to generic framebuffer emulation
-> and removes a large amount of framebuffer code from these drivers. For
-> bochs, a problem was reported where the driver could not display the console
-> because it was pinned in system memory. [1] The patch set fixes this bug
-> by converting bochs to use the shadow fb.
-> 
-> The patch set has been tested on ast and mga200 HW.
-> 
-
-I've been thinking, this enables dirty tracking in DRM userspace for
-these drivers since the dirty callback is now set on all framebuffers.
-Is this OK? Should we add a drm_fbdev_generic_shadow_setup() that sets a
-flag enabling the shadow buffer instead?
-
-Really nice diffstat by the way :-)
-
-Noralf.
-
-> [1] https://lists.freedesktop.org/archives/dri-devel/2019-June/224423.html
-> 
-> Thomas Zimmermann (5):
->   drm/client: Support unmapping of DRM client buffers
->   drm/fb-helper: Unmap BO for shadow-buffered framebuffer console
->   drm/ast: Replace struct ast_fbdev with generic framebuffer emulation
->   drm/bochs: Use shadow buffer for bochs framebuffer console
->   drm/mgag200: Replace struct mga_fbdev with generic framebuffer
->     emulation
-> 
->  drivers/gpu/drm/ast/Makefile           |   2 +-
->  drivers/gpu/drm/ast/ast_drv.c          |  22 +-
->  drivers/gpu/drm/ast/ast_drv.h          |  17 --
->  drivers/gpu/drm/ast/ast_fb.c           | 341 -------------------------
->  drivers/gpu/drm/ast/ast_main.c         |  30 ++-
->  drivers/gpu/drm/ast/ast_mode.c         |  21 --
->  drivers/gpu/drm/bochs/bochs_kms.c      |   2 +-
->  drivers/gpu/drm/drm_client.c           |  71 ++++-
->  drivers/gpu/drm/drm_fb_helper.c        |  14 +-
->  drivers/gpu/drm/mgag200/Makefile       |   2 +-
->  drivers/gpu/drm/mgag200/mgag200_drv.h  |  19 --
->  drivers/gpu/drm/mgag200/mgag200_fb.c   | 309 ----------------------
->  drivers/gpu/drm/mgag200/mgag200_main.c |  61 +++--
->  drivers/gpu/drm/mgag200/mgag200_mode.c |  27 --
->  include/drm/drm_client.h               |   3 +
->  15 files changed, 154 insertions(+), 787 deletions(-)
->  delete mode 100644 drivers/gpu/drm/ast/ast_fb.c
->  delete mode 100644 drivers/gpu/drm/mgag200/mgag200_fb.c
-> 
-> --
-> 2.21.0
-> 
+> > +}
+> > +
+> > +void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs)
+> > +{
+> > +       drm_gem_unlock_reservations(objs->objs, objs->nents,
+> > +                                   &objs->ticket);
+> > +}
+> > +
+> > +void virtio_gpu_array_add_fence(struct virtio_gpu_object_array *objs,
+> > +                               struct dma_fence *fence)
+> > +{
+> > +       int i;
+> > +
+> > +       for (i = 0; i < objs->nents; i++)
+> > +               reservation_object_add_excl_fence(objs->objs[i]->resv,
+> > +                                                 fence);
+> > +}
+> > +
+> > +void virtio_gpu_array_put_free(struct virtio_gpu_object_array *objs)
+> > +{
+> > +       u32 i;
+> > +
+> > +       for (i = 0; i < objs->nents; i++)
+> > +               drm_gem_object_put_unlocked(objs->objs[i]);
+> > +       virtio_gpu_array_free(objs);
+> > +}
+> > --
+> > 2.18.1
+> >
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
