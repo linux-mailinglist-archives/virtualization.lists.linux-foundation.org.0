@@ -2,53 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 082485E4E9
-	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 15:11:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 149A65E606
+	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 16:06:28 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AC3F2FF5;
-	Wed,  3 Jul 2019 13:10:58 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 8625E103C;
+	Wed,  3 Jul 2019 14:06:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 22F1AFD7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A001CFF1
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 13:09:44 +0000 (UTC)
+	Wed,  3 Jul 2019 14:04:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4989D873
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B66A9884
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 13:09:43 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	03 Jul 2019 06:09:42 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,446,1557212400"; d="scan'208";a="172127499"
-Received: from npg-dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.151])
-	by FMSMGA003.fm.intel.com with ESMTP; 03 Jul 2019 06:09:40 -0700
-Date: Wed, 3 Jul 2019 21:08:17 +0800
-From: Tiwei Bie <tiwei.bie@intel.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [RFC v2] vhost: introduce mdev based hardware vhost backend
-Message-ID: <20190703130817.GA1978@___>
-References: <20190703091339.1847-1-tiwei.bie@intel.com>
-	<7b8279b2-aa7e-7adc-eeff-20dfaf4400d0@redhat.com>
-	<20190703115245.GA22374@___>
-	<64833f91-02cd-7143-f12e-56ab93b2418d@redhat.com>
+	Wed,  3 Jul 2019 14:04:24 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id B1869AE14;
+	Wed,  3 Jul 2019 14:04:22 +0000 (UTC)
+Subject: Re: [PATCH v2 4/9] x86/mm/tlb: Flush remote and local TLBs
+	concurrently
+To: Nadav Amit <namit@vmware.com>, Andy Lutomirski <luto@kernel.org>,
+	Dave Hansen <dave.hansen@linux.intel.com>
+References: <20190702235151.4377-1-namit@vmware.com>
+	<20190702235151.4377-5-namit@vmware.com>
+From: Juergen Gross <jgross@suse.com>
+Message-ID: <d89e2b57-8682-153e-33d8-98084e9983d6@suse.com>
+Date: Wed, 3 Jul 2019 16:04:21 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <64833f91-02cd-7143-f12e-56ab93b2418d@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+In-Reply-To: <20190702235151.4377-5-namit@vmware.com>
+Content-Language: de-DE
 X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
+	Stephen Hemminger <sthemmin@microsoft.com>, kvm@vger.kernel.org,
+	Peter Zijlstra <peterz@infradead.org>,
+	Haiyang Zhang <haiyangz@microsoft.com>, x86@kernel.org,
 	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	zhihong.wang@intel.com, maxime.coquelin@redhat.com
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Paolo Bonzini <pbonzini@redhat.com>, xen-devel@lists.xenproject.org,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,103 +61,106 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gV2VkLCBKdWwgMDMsIDIwMTkgYXQgMDg6MTY6MjNQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiBPbiAyMDE5LzcvMyDkuIvljYg3OjUyLCBUaXdlaSBCaWUgd3JvdGU6Cj4gPiBPbiBXZWQs
-IEp1bCAwMywgMjAxOSBhdCAwNjowOTo1MVBNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+ID4g
-PiBPbiAyMDE5LzcvMyDkuIvljYg1OjEzLCBUaXdlaSBCaWUgd3JvdGU6Cj4gPiA+ID4gRGV0YWls
-cyBhYm91dCB0aGlzIGNhbiBiZSBmb3VuZCBoZXJlOgo+ID4gPiA+IAo+ID4gPiA+IGh0dHBzOi8v
-bHduLm5ldC9BcnRpY2xlcy83NTA3NzAvCj4gPiA+ID4gCj4gPiA+ID4gV2hhdCdzIG5ldyBpbiB0
-aGlzIHZlcnNpb24KPiA+ID4gPiA9PT09PT09PT09PT09PT09PT09PT09PT09PQo+ID4gPiA+IAo+
-ID4gPiA+IEEgbmV3IFZGSU8gZGV2aWNlIHR5cGUgaXMgaW50cm9kdWNlZCAtIHZmaW8tdmhvc3Qu
-IFRoaXMgYWRkcmVzc2VkCj4gPiA+ID4gc29tZSBjb21tZW50cyBmcm9tIGhlcmU6IGh0dHBzOi8v
-cGF0Y2h3b3JrLm96bGFicy5vcmcvY292ZXIvOTg0NzYzLwo+ID4gPiA+IAo+ID4gPiA+IEJlbG93
-IGlzIHRoZSB1cGRhdGVkIGRldmljZSBpbnRlcmZhY2U6Cj4gPiA+ID4gCj4gPiA+ID4gQ3VycmVu
-dGx5LCB0aGVyZSBhcmUgdHdvIHJlZ2lvbnMgb2YgdGhpcyBkZXZpY2U6IDEpIENPTkZJR19SRUdJ
-T04KPiA+ID4gPiAoVkZJT19WSE9TVF9DT05GSUdfUkVHSU9OX0lOREVYKSwgd2hpY2ggY2FuIGJl
-IHVzZWQgdG8gc2V0dXAgdGhlCj4gPiA+ID4gZGV2aWNlOyAyKSBOT1RJRllfUkVHSU9OIChWRklP
-X1ZIT1NUX05PVElGWV9SRUdJT05fSU5ERVgpLCB3aGljaAo+ID4gPiA+IGNhbiBiZSB1c2VkIHRv
-IG5vdGlmeSB0aGUgZGV2aWNlLgo+ID4gPiA+IAo+ID4gPiA+IDEuIENPTkZJR19SRUdJT04KPiA+
-ID4gPiAKPiA+ID4gPiBUaGUgcmVnaW9uIGRlc2NyaWJlZCBieSBDT05GSUdfUkVHSU9OIGlzIHRo
-ZSBtYWluIGNvbnRyb2wgaW50ZXJmYWNlLgo+ID4gPiA+IE1lc3NhZ2VzIHdpbGwgYmUgd3JpdHRl
-biB0byBvciByZWFkIGZyb20gdGhpcyByZWdpb24uCj4gPiA+ID4gCj4gPiA+ID4gVGhlIG1lc3Nh
-Z2UgdHlwZSBpcyBkZXRlcm1pbmVkIGJ5IHRoZSBgcmVxdWVzdGAgZmllbGQgaW4gbWVzc2FnZQo+
-ID4gPiA+IGhlYWRlci4gVGhlIG1lc3NhZ2Ugc2l6ZSBpcyBlbmNvZGVkIGluIHRoZSBtZXNzYWdl
-IGhlYWRlciB0b28uCj4gPiA+ID4gVGhlIG1lc3NhZ2UgZm9ybWF0IGxvb2tzIGxpa2UgdGhpczoK
-PiA+ID4gPiAKPiA+ID4gPiBzdHJ1Y3Qgdmhvc3RfdmZpb19vcCB7Cj4gPiA+ID4gCV9fdTY0IHJl
-cXVlc3Q7Cj4gPiA+ID4gCV9fdTMyIGZsYWdzOwo+ID4gPiA+IAkvKiBGbGFnIHZhbHVlczogKi8K
-PiA+ID4gPiAgICAjZGVmaW5lIFZIT1NUX1ZGSU9fTkVFRF9SRVBMWSAweDEgLyogV2hldGhlciBu
-ZWVkIHJlcGx5ICovCj4gPiA+ID4gCV9fdTMyIHNpemU7Cj4gPiA+ID4gCXVuaW9uIHsKPiA+ID4g
-PiAJCV9fdTY0IHU2NDsKPiA+ID4gPiAJCXN0cnVjdCB2aG9zdF92cmluZ19zdGF0ZSBzdGF0ZTsK
-PiA+ID4gPiAJCXN0cnVjdCB2aG9zdF92cmluZ19hZGRyIGFkZHI7Cj4gPiA+ID4gCX0gcGF5bG9h
-ZDsKPiA+ID4gPiB9Owo+ID4gPiA+IAo+ID4gPiA+IFRoZSBleGlzdGluZyB2aG9zdC1rZXJuZWwg
-aW9jdGwgY21kcyBhcmUgcmV1c2VkIGFzIHRoZSBtZXNzYWdlCj4gPiA+ID4gcmVxdWVzdHMgaW4g
-YWJvdmUgc3RydWN0dXJlLgo+ID4gPiAKPiA+ID4gU3RpbGwgYSBjb21tZW50cyBsaWtlIFYxLiBX
-aGF0J3MgdGhlIGFkdmFudGFnZSBvZiBpbnZlbnRpbmcgYSBuZXcgcHJvdG9jb2w/Cj4gPiBJJ20g
-dHJ5aW5nIHRvIG1ha2UgaXQgd29yayBpbiBWRklPJ3Mgd2F5Li4KPiA+IAo+ID4gPiBJIGJlbGll
-dmUgZWl0aGVyIG9mIHRoZSBmb2xsb3dpbmcgc2hvdWxkIGJlIGJldHRlcjoKPiA+ID4gCj4gPiA+
-IC0gdXNpbmcgdmhvc3QgaW9jdGwswqAgd2UgY2FuIHN0YXJ0IGZyb20gU0VUX1ZSSU5HX0tJQ0sv
-U0VUX1ZSSU5HX0NBTEwgYW5kCj4gPiA+IGV4dGVuZCBpdCB3aXRoIGUuZyBub3RpZnkgcmVnaW9u
-LiBUaGUgYWR2YW50YWdlcyBpcyB0aGF0IGFsbCBleGlzdCB1c2Vyc3BhY2UKPiA+ID4gcHJvZ3Jh
-bSBjb3VsZCBiZSByZXVzZWQgd2l0aG91dCBtb2RpZmljYXRpb24gKG9yIG1pbmltYWwgbW9kaWZp
-Y2F0aW9uKS4gQW5kCj4gPiA+IHZob3N0IEFQSSBoaWRlcyBsb3RzIG9mIGRldGFpbHMgdGhhdCBp
-cyBub3QgbmVjZXNzYXJ5IHRvIGJlIHVuZGVyc3Rvb2QgYnkKPiA+ID4gYXBwbGljYXRpb24gKGUu
-ZyBpbiB0aGUgY2FzZSBvZiBjb250YWluZXIpLgo+ID4gRG8geW91IG1lYW4gcmV1c2luZyB2aG9z
-dCdzIGlvY3RsIG9uIFZGSU8gZGV2aWNlIGZkIGRpcmVjdGx5LAo+ID4gb3IgaW50cm9kdWNpbmcg
-YW5vdGhlciBtZGV2IGRyaXZlciAoaS5lLiB2aG9zdF9tZGV2IGluc3RlYWQgb2YKPiA+IHVzaW5n
-IHRoZSBleGlzdGluZyB2ZmlvX21kZXYpIGZvciBtZGV2IGRldmljZT8KPiAKPiAKPiBDYW4gd2Ug
-c2ltcGx5IGFkZCB0aGVtIGludG8gaW9jdGwgb2YgbWRldl9wYXJlbnRfb3BzPwoKUmlnaHQsIGVp
-dGhlciB3YXksIHRoZXNlIGlvY3RscyBoYXZlIHRvIGJlIGFuZCBqdXN0IG5lZWQgdG8gYmUKYWRk
-ZWQgaW4gdGhlIGlvY3RsIG9mIHRoZSBtZGV2X3BhcmVudF9vcHMuIEJ1dCBhbm90aGVyIHRoaW5n
-IHdlCmFsc28gbmVlZCB0byBjb25zaWRlciBpcyB0aGF0IHdoaWNoIGZpbGUgZGVzY3JpcHRvciB0
-aGUgdXNlcnNwYWNlCndpbGwgZG8gdGhlIGlvY3RsKCkgb24uIFNvIEknbSB3b25kZXJpbmcgZG8g
-eW91IG1lYW4gbGV0IHRoZQp1c2Vyc3BhY2UgZG8gdGhlIGlvY3RsKCkgb24gdGhlIFZGSU8gZGV2
-aWNlIGZkIG9mIHRoZSBtZGV2CmRldmljZT8KCj4gCj4gCj4gPiAKWy4uLl0KPiA+ID4gPiAzLiBW
-RklPIGludGVycnVwdCBpb2N0bCBBUEkKPiA+ID4gPiAKPiA+ID4gPiBWRklPIGludGVycnVwdCBp
-b2N0bCBBUEkgaXMgdXNlZCB0byBzZXR1cCBkZXZpY2UgaW50ZXJydXB0cy4KPiA+ID4gPiBJUlEt
-YnlwYXNzIGNhbiBhbHNvIGJlIHN1cHBvcnRlZC4KPiA+ID4gPiAKPiA+ID4gPiBDdXJyZW50bHks
-IHRoZSBkYXRhIHBhdGggaW50ZXJydXB0IGNhbiBiZSBjb25maWd1cmVkIHZpYSB0aGUKPiA+ID4g
-PiBWRklPX1ZIT1NUX1ZRX0lSUV9JTkRFWCB3aXRoIHZpcnRxdWV1ZSdzIGNhbGxmZC4KPiA+ID4g
-Cj4gPiA+IEhvdyBhYm91dCBETUEgQVBJPyBEbyB5b3UgZXhwZWN0IHRvIHVzZSBWRklPIElPTU1V
-IEFQSSBvciB1c2luZyB2aG9zdAo+ID4gPiBTRVRfTUVNX1RBQkxFPyBWRklPIElPTU1VIEFQSSBp
-cyBtb3JlIGdlbmVyaWMgZm9yIHN1cmUgYnV0IHdpdGgKPiA+ID4gU0VUX01FTV9UQUJMRSBETUEg
-Y2FuIGJlIGRvbmUgYXQgdGhlIGxldmVsIG9mIHBhcmVudCBkZXZpY2Ugd2hpY2ggbWVhbnMgaXQK
-PiA+ID4gY2FuIHdvcmsgZm9yIGUuZyB0aGUgY2FyZCB3aXRoIG9uLWNoaXAgSU9NTVUuCj4gPiBB
-Z3JlZS4gSW4gdGhpcyBSRkMsIGl0IGFzc3VtZXMgdXNlcnNwYWNlIHdpbGwgdXNlIFZGSU8gSU9N
-TVUgQVBJCj4gPiB0byBkbyB0aGUgRE1BIHByb2dyYW1taW5nLiBCdXQgbGlrZSB3aGF0IHlvdSBz
-YWlkLCB0aGVyZSBjb3VsZCBiZQo+ID4gYSBwcm9ibGVtIHdoZW4gdXNpbmcgY2FyZHMgd2l0aCBv
-bi1jaGlwIElPTU1VLgo+IAo+IAo+IFllcywgYW5vdGhlciBpc3N1ZSBpcyBTRVRfTUVNX1RBQkxF
-IGNhbiBub3QgYmUgdXNlZCB0byB1cGRhdGUganVzdCBhIHBhcnQgb2YKPiB0aGUgdGFibGUuIFRo
-aXMgc2VlbXMgbGVzcyBmbGV4aWJsZSB0aGFuIFZGSU8gQVBJIGJ1dCBpdCBjb3VsZCBiZSBleHRl
-bmRlZC4KCkFncmVlLgoKPiAKPiAKPiA+IAo+ID4gPiBBbmQgd2hhdCdzIHRoZSBwbGFuIGZvciB2
-SU9NTVU/Cj4gPiBBcyB0aGlzIFJGQyBhc3N1bWVzIHVzZXJzcGFjZSB3aWxsIHVzZSBWRklPIElP
-TU1VIEFQSSwgdXNlcnNwYWNlCj4gPiBqdXN0IG5lZWRzIHRvIGZvbGxvdyB0aGUgc2FtZSB3YXkg
-bGlrZSB3aGF0IHZmaW8tcGNpIGRldmljZSBkb2VzCj4gPiBpbiBRRU1VIHRvIHN1cHBvcnQgdklP
-TU1VLgo+IAo+IAo+IFJpZ2h0LCB0aGlzIGlzIG1vcmUgYSBxdWVzdGlvbiBmb3IgdGhlIHFlbXUg
-cGFydC4gSXQgbWVhbnMgaXQgbmVlZHMgdG8gZ28KPiBmb3Igb3JkaW5hcnkgVkZJTyBwYXRoIHRv
-IGdldCBhbGwgbm90aWZpZXJzL2xpc3RlbmVycyBzdXBwb3J0IGZyb20gdklPTU1VLgoKWWVhaC4K
-Cj4gCj4gCj4gPiAKPiA+ID4gCj4gPiA+ID4gU2lnbmVkLW9mZi1ieTogVGl3ZWkgQmllIDx0aXdl
-aS5iaWVAaW50ZWwuY29tPgo+ID4gPiA+IC0tLQo+ID4gPiA+ICAgIGRyaXZlcnMvdmhvc3QvTWFr
-ZWZpbGUgICAgIHwgICAyICsKPiA+ID4gPiAgICBkcml2ZXJzL3Zob3N0L3ZkcGEuYyAgICAgICB8
-IDc3MCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gPiA+ID4gICAgaW5j
-bHVkZS9saW51eC92ZHBhX21kZXYuaCAgfCAgNzIgKysrKwo+ID4gPiA+ICAgIGluY2x1ZGUvdWFw
-aS9saW51eC92ZmlvLmggIHwgIDE5ICsKPiA+ID4gPiAgICBpbmNsdWRlL3VhcGkvbGludXgvdmhv
-c3QuaCB8ICAyNSArKwo+ID4gPiA+ICAgIDUgZmlsZXMgY2hhbmdlZCwgODg4IGluc2VydGlvbnMo
-KykKPiA+ID4gPiAgICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy92aG9zdC92ZHBhLmMKPiA+
-ID4gPiAgICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9saW51eC92ZHBhX21kZXYuaAo+ID4g
-PiAKPiA+ID4gV2UgcHJvYmFibHkgbmVlZCBzb21lIHNhbXBsZSBwYXJlbnQgZGV2aWNlIGltcGxl
-bWVudGF0aW9uLiBJdCBjb3VsZCBiZSBhCj4gPiA+IHNvZnR3YXJlIGRhdGFwYXRoIGxpa2UgZS5n
-IHdlIGNhbiBzdGFydCBmcm9tIHZpcnRpby1uZXQgZGV2aWNlIGluIGd1ZXN0IG9yIGEKPiA+ID4g
-dmhvc3QvdGFwIG9uIGhvc3QuCj4gPiBZZWFoLCBzb21ldGhpbmcgbGlrZSB0aGlzIHdvdWxkIGJl
-IGludGVyZXN0aW5nIQo+IAo+IAo+IFBsYW4gdG8gZG8gc29tZXRoaW5nIGxpa2UgdGhhdCA6KSA/
-CgpJIGRvbid0IGhhdmUgYSBwbGFuIHlldC4uIEJ1dCBpdCdzIHNvbWV0aGluZyB0aGF0IGNhbiBi
-ZSBkb25lIEkgdGhpbmsuCgpUaGFua3MsClRpd2VpCgo+IAo+IFRoYW5rcwo+IAo+IAo+ID4gCj4g
-PiBUaGFua3MsCj4gPiBUaXdlaQo+ID4gCj4gPiA+IFRoYW5rcwo+ID4gPiAKPiA+ID4gCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9u
-IG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpo
-dHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFs
-aXphdGlvbg==
+On 03.07.19 01:51, Nadav Amit wrote:
+> To improve TLB shootdown performance, flush the remote and local TLBs
+> concurrently. Introduce flush_tlb_multi() that does so. Introduce
+> paravirtual versions of flush_tlb_multi() for KVM, Xen and hyper-v (Xen
+> and hyper-v are only compile-tested).
+> 
+> While the updated smp infrastructure is capable of running a function on
+> a single local core, it is not optimized for this case. The multiple
+> function calls and the indirect branch introduce some overhead, and
+> might make local TLB flushes slower than they were before the recent
+> changes.
+> 
+> Before calling the SMP infrastructure, check if only a local TLB flush
+> is needed to restore the lost performance in this common case. This
+> requires to check mm_cpumask() one more time, but unless this mask is
+> updated very frequently, this should impact performance negatively.
+> 
+> Cc: "K. Y. Srinivasan" <kys@microsoft.com>
+> Cc: Haiyang Zhang <haiyangz@microsoft.com>
+> Cc: Stephen Hemminger <sthemmin@microsoft.com>
+> Cc: Sasha Levin <sashal@kernel.org>
+> Cc: Thomas Gleixner <tglx@linutronix.de>
+> Cc: Ingo Molnar <mingo@redhat.com>
+> Cc: Borislav Petkov <bp@alien8.de>
+> Cc: x86@kernel.org
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Paolo Bonzini <pbonzini@redhat.com>
+> Cc: Dave Hansen <dave.hansen@linux.intel.com>
+> Cc: Andy Lutomirski <luto@kernel.org>
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Cc: linux-hyperv@vger.kernel.org
+> Cc: linux-kernel@vger.kernel.org
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: kvm@vger.kernel.org
+> Cc: xen-devel@lists.xenproject.org
+> Signed-off-by: Nadav Amit <namit@vmware.com>
+> ---
+>   arch/x86/hyperv/mmu.c                 | 13 +++---
+>   arch/x86/include/asm/paravirt.h       |  6 +--
+>   arch/x86/include/asm/paravirt_types.h |  4 +-
+>   arch/x86/include/asm/tlbflush.h       |  9 ++--
+>   arch/x86/include/asm/trace/hyperv.h   |  2 +-
+>   arch/x86/kernel/kvm.c                 | 11 +++--
+>   arch/x86/kernel/paravirt.c            |  2 +-
+>   arch/x86/mm/tlb.c                     | 65 ++++++++++++++++++++-------
+>   arch/x86/xen/mmu_pv.c                 | 20 ++++++---
+>   include/trace/events/xen.h            |  2 +-
+>   10 files changed, 91 insertions(+), 43 deletions(-)
+
+...
+
+> diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+> index beb44e22afdf..19e481e6e904 100644
+> --- a/arch/x86/xen/mmu_pv.c
+> +++ b/arch/x86/xen/mmu_pv.c
+> @@ -1355,8 +1355,8 @@ static void xen_flush_tlb_one_user(unsigned long addr)
+>   	preempt_enable();
+>   }
+>   
+> -static void xen_flush_tlb_others(const struct cpumask *cpus,
+> -				 const struct flush_tlb_info *info)
+> +static void xen_flush_tlb_multi(const struct cpumask *cpus,
+> +				const struct flush_tlb_info *info)
+>   {
+>   	struct {
+>   		struct mmuext_op op;
+> @@ -1366,7 +1366,7 @@ static void xen_flush_tlb_others(const struct cpumask *cpus,
+>   	const size_t mc_entry_size = sizeof(args->op) +
+>   		sizeof(args->mask[0]) * BITS_TO_LONGS(num_possible_cpus());
+>   
+> -	trace_xen_mmu_flush_tlb_others(cpus, info->mm, info->start, info->end);
+> +	trace_xen_mmu_flush_tlb_multi(cpus, info->mm, info->start, info->end);
+>   
+>   	if (cpumask_empty(cpus))
+>   		return;		/* nothing to do */
+> @@ -1375,9 +1375,17 @@ static void xen_flush_tlb_others(const struct cpumask *cpus,
+>   	args = mcs.args;
+>   	args->op.arg2.vcpumask = to_cpumask(args->mask);
+>   
+> -	/* Remove us, and any offline CPUS. */
+> +	/* Flush locally if needed and remove us */
+> +	if (cpumask_test_cpu(smp_processor_id(), to_cpumask(args->mask))) {
+> +		local_irq_disable();
+> +		flush_tlb_func_local(info);
+
+I think this isn't the correct function for PV guests.
+
+In fact it should be much easier: just don't clear the own cpu from the
+mask, that's all what's needed. The hypervisor is just fine having the
+current cpu in the mask and it will do the right thing.
+
+
+Juergen
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
