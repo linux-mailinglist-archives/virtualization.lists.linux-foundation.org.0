@@ -2,63 +2,62 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5861A73762
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:08:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B13373763
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 21:08:13 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6E9B213EE;
+	by mail.linuxfoundation.org (Postfix) with ESMTP id B395A14FE;
 	Wed, 24 Jul 2019 18:59:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1A121FE7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5E176DCE
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 13:14:12 +0000 (UTC)
+	Wed,  3 Jul 2019 16:27:18 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id BECE887D
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D3689834
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 13:14:11 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id x15so1287631pfq.0
+	Wed,  3 Jul 2019 16:27:17 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id u14so345189pfn.2
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 03 Jul 2019 06:14:11 -0700 (PDT)
+	Wed, 03 Jul 2019 09:27:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=jBkyRyPJyPqYCM7LVKEeTlHKLt/amBJBKugaRL0hZwE=;
-	b=DGEIzb1kDhOG9CcvmiofF51lt2Oy3LBkNSFVAyi4SdU9RMsBh0V1qV3pYI6gzIFB8X
-	+WZiD2cNpLTG6ASxIPJoB6W9KZ8x9u3XWIq6xQ5/cCqfLU0qAabCO+U8SgkkG5/PqTU5
-	Lovz+MSpHRrvjqqgJA38Bsdj382YQcZMoCvqtrg7iiSLesFNpkm1c4zOtzq0oYTCx6/k
-	qiNsgR+HsMpilCWODBGJkZ6egXasBuP0QuE1ocEyk5w3eQpaoWc/AxbqQP4DitTn0jnH
-	HW/DWB1U2qZl4BE15Ydo3bxKTaJFrrZBJrDox1CXPCEE49MphuvrE9tT8caMvlQb/f01
-	dTzQ==
+	bh=ryQ+KV6I+HBh6xV68vUzaQ/j84wovxLqLnfA8omtyrY=;
+	b=OD7BugQkK23UKrAdvIBgZXB8LBubmLCFmJqY3b/p6UcRfTTiHWgohMCNNbEcDS2eeO
+	FMrXFQu3ZXoniAXFlPJJPEohRbHY4OcQjgb4eWS9CJV8YP7gRCvVsJSh5ZpFmpWXg7s3
+	MxjUhUOqBwYGq/ocXxEwR3EOns2s/1+e3zj2aA0+RSNEsL1kvBWX4062hFoErBOP56oH
+	LZHN8Z0Y8vsOuygdEO56hD8aaN8IJL8KnKa74TTxLrJF9rbYRD9U7pRbN2zNuPsJPZ1j
+	xk6bsxhqS5gboFfZwQfVsfcLBamqwIq/AoXRqYA/AxsfcF1YgXQUTbFLPa6p9jekVaGO
+	CQvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=jBkyRyPJyPqYCM7LVKEeTlHKLt/amBJBKugaRL0hZwE=;
-	b=QlKT7KLyXCTqRkH8tDwbrJ9DdBbMPEGxUGOSr64u47iguqWZTso7xqSHfSih7By5h2
-	+rwULVxTiKSBZWl2AaPycPclyGbF2JtRXgVUBH4sDRFIB/qIzcRKAx5eCvWXDL2aQyaR
-	sgsFpv9+NYsI/tgQTgRxW5hDfgkhw6dqosW12qztJP/uWRslnY1jb8tWuZ5epaynACFN
-	tMAuEHG0PpYD2Ie9PSYYK3EJXD3bdhND330iAXSc25O48GedU63ZsO0a7D6j+7LcT8yn
-	aq+eUZeEITldGemoRjDsgwrBq03QWXx2NvaY3jftRb/ObLNZmp55sHOPQGHVRNdrjA2C
-	y0Jw==
-X-Gm-Message-State: APjAAAXK4nXLJBRPeb1DqyhPQ4+RxdS/IJTK8fJyFVMjKEab9WG4HcgX
-	vvJNXJaWIjG5sZu2orEFdU8=
-X-Google-Smtp-Source: APXvYqyEZ8G/Ytxhng2bseN0byMkFtJdOYaPxiWptFTsBwFatUfS+q+t/spJFJj85TPYnm1YL2gsvA==
-X-Received: by 2002:a17:90a:ad41:: with SMTP id
-	w1mr12692927pjv.52.1562159651356; 
-	Wed, 03 Jul 2019 06:14:11 -0700 (PDT)
+	bh=ryQ+KV6I+HBh6xV68vUzaQ/j84wovxLqLnfA8omtyrY=;
+	b=j1GOdPrC9II7a9ZPRy6pM52m2cHM0q374m6XvsEK07EBY9oyOzdQs6S9xMeE1esb7d
+	T8WIhpAZkn2eNXGz4JM0s4epe40xRIZevLvZwRmJXTgarMMjx67sAzgsfmfFUFqkHOaF
+	u5KX8cZZ0ebgcLeiGZWDO/eJ7ZwwSzE4JE8gT108I8qwxsmeIAVDNZlLun5kbLkn7QeK
+	vpNCISV6xQNtAHsdytYgteU13s1k48CmjyDN6kmLnCEvDQot7wNZ2vw2HJl/PLd9pO+C
+	w6XVB2j9Vz1OdazvKbv8MLMbNTmifHayX4oCtDks0aWZfcVUJQlyfMF6hHCaQzrXjt42
+	YvUA==
+X-Gm-Message-State: APjAAAWyUkAc0/0WuI34FXe6XVW7GezYlTHeKs8ycMEoV4ukKCmSZWCy
+	8TXBHKQdES6uymi7TtvTrDQ=
+X-Google-Smtp-Source: APXvYqzXA1rOPPHweXD5XzmorpU7NYYzo6+KU07FLUuYqjhEoveOo9let3lwgDMUXOQvB3YNvDcZGA==
+X-Received: by 2002:a65:60cc:: with SMTP id r12mr32890562pgv.333.1562171237362;
+	Wed, 03 Jul 2019 09:27:17 -0700 (PDT)
 Received: from hfq-skylake.ipads-lab.se.sjtu.edu.cn ([202.120.40.82])
 	by smtp.googlemail.com with ESMTPSA id
-	q98sm903544pjq.20.2019.07.03.06.14.06
+	s193sm3183112pgc.32.2019.07.03.09.27.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 03 Jul 2019 06:14:11 -0700 (PDT)
+	Wed, 03 Jul 2019 09:27:16 -0700 (PDT)
 From: Fuqian Huang <huangfq.daxian@gmail.com>
 To: 
-Subject: [PATCH 05/30] crypto: Use kmemdup rather than duplicating its
+Subject: [PATCH v2 06/35] crypto: Use kmemdup rather than duplicating its
 	implementation
-Date: Wed,  3 Jul 2019 21:13:58 +0800
-Message-Id: <20190703131358.24901-1-huangfq.daxian@gmail.com>
+Date: Thu,  4 Jul 2019 00:27:08 +0800
+Message-Id: <20190703162708.32137-1-huangfq.daxian@gmail.com>
 X-Mailer: git-send-email 2.11.0
 X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, RCVD_IN_DNSWL_NONE,
@@ -91,13 +90,16 @@ Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
 kmemdup is introduced to duplicate a region of memory in a neat way.
-Rather than kmalloc/kzalloc + memset, which the programmer needs to
+Rather than kmalloc/kzalloc + memcpy, which the programmer needs to
 write the size twice (sometimes lead to mistakes), kmemdup improves
 readability, leads to smaller code and also reduce the chances of mistakes.
-Suggestion to use kmemdup rather than using kmalloc/kzalloc + memset.
+Suggestion to use kmemdup rather than using kmalloc/kzalloc + memcpy.
 
 Signed-off-by: Fuqian Huang <huangfq.daxian@gmail.com>
 ---
+Changes in v2:
+  - Fix a typo in commit message (memset -> memcpy)
+
  drivers/crypto/caam/caampkc.c              | 11 +++--------
  drivers/crypto/virtio/virtio_crypto_algs.c |  4 +---
  2 files changed, 4 insertions(+), 11 deletions(-)
