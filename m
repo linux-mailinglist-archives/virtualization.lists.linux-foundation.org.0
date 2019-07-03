@@ -2,55 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93C315E171
-	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 11:54:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A3E65E19D
+	for <lists.virtualization@lfdr.de>; Wed,  3 Jul 2019 12:07:40 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 95158117C;
-	Wed,  3 Jul 2019 09:54:23 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9B5971185;
+	Wed,  3 Jul 2019 10:07:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0F0181172
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8C04E117E
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 09:54:22 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 480B470D
+	Wed,  3 Jul 2019 10:07:33 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 542D970D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  3 Jul 2019 09:54:21 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
-	[10.5.11.14])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id AC33330BF1B2;
-	Wed,  3 Jul 2019 09:54:14 +0000 (UTC)
-Received: from [10.72.12.173] (ovpn-12-173.pek2.redhat.com [10.72.12.173])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id B68E27F248;
-	Wed,  3 Jul 2019 09:54:00 +0000 (UTC)
-Subject: Re: [PATCH v2 1/3] vsock/virtio: use RCU to avoid use-after-free on
-	the_virtio_vsock
-To: Stefano Garzarella <sgarzare@redhat.com>, netdev@vger.kernel.org
+	Wed,  3 Jul 2019 10:07:32 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id n4so2097064wrs.3
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 03 Jul 2019 03:07:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=VNvFKH5K+pDMmuMUJ4DZzYn2K79WWFEugthw2tWzrCE=;
+	b=VvwjMYO6CHGPB91EoycN4nsYeTPUOs4Hoao9kK/BTgnd1J8+rcVHddzGSpfZ8Y3zm3
+	HWD6wKONo9HQMghUGgwaefBFWqnLltMR5QF1z4uwZQ7CrZ2HfADelfFYt/4E8LD5hJ0E
+	81wUYDs0zo62t6dPg8J3vXaau7hNmHSDWhROACX2iD7hzW9HwsnK9B82Fmq0vIofJSiT
+	agTfn6UsVDmwQHdV0GEAPzKK7lj3bjQ3iU4huy+sAS2G2mIOfPHTIitqJwS3VQ/hY+ml
+	XZkvfEKXIYBsCmX1mYEmgSJy//3xRjSdeI+dPylzuti0vqE/NwcKJhaGQeqgkE5flCKR
+	Xtkg==
+X-Gm-Message-State: APjAAAUfMQo2KfRQfdUUeWKxLf0QkqyizR8h7q7irOl8q+vxiCpAAq1y
+	6MnycrI8wrYE3E2tRTrbFlXOsA==
+X-Google-Smtp-Source: APXvYqzGzHZlSIMty2RhAvvB1Uo0isxGnCtD5XKYMHI9/IRY2pIO6xkm3T2evQoOaleJYQ+jY3ZeIw==
+X-Received: by 2002:adf:dfc4:: with SMTP id q4mr27669596wrn.54.1562148450882; 
+	Wed, 03 Jul 2019 03:07:30 -0700 (PDT)
+Received: from steredhat (host21-207-dynamic.52-79-r.retail.telecomitalia.it.
+	[79.52.207.21])
+	by smtp.gmail.com with ESMTPSA id z5sm1183115wmf.48.2019.07.03.03.07.29
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 03 Jul 2019 03:07:30 -0700 (PDT)
+Date: Wed, 3 Jul 2019 12:07:27 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [PATCH v2 0/3] vsock/virtio: several fixes in the .probe() and
+	.remove()
+Message-ID: <20190703100727.kuwpyc5sksrgmoxb@steredhat>
 References: <20190628123659.139576-1-sgarzare@redhat.com>
-	<20190628123659.139576-2-sgarzare@redhat.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <05311244-ed23-d061-a620-7b83d83c11f5@redhat.com>
-Date: Wed, 3 Jul 2019 17:53:58 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.2
+	<20190701151113.GE11900@stefanha-x1.localdomain>
+	<20190701170357.jtuhy3ank7mv6izb@steredhat>
+	<20190703091453.GA11844@stefanha-x1.localdomain>
 MIME-Version: 1.0
-In-Reply-To: <20190628123659.139576-2-sgarzare@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.42]);
-	Wed, 03 Jul 2019 09:54:20 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+Content-Disposition: inline
+In-Reply-To: <20190703091453.GA11844@stefanha-x1.localdomain>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
 	Stefan Hajnoczi <stefanha@redhat.com>,
 	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -64,112 +78,81 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvNi8yOCDkuIvljYg4OjM2LCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6Cj4gU29t
-ZSBjYWxsYmFja3MgdXNlZCBieSB0aGUgdXBwZXIgbGF5ZXJzIGNhbiBydW4gd2hpbGUgd2UgYXJl
-IGluIHRoZQo+IC5yZW1vdmUoKS4gQSBwb3RlbnRpYWwgdXNlLWFmdGVyLWZyZWUgY2FuIGhhcHBl
-biwgYmVjYXVzZSB3ZSBmcmVlCj4gdGhlX3ZpcnRpb192c29jayB3aXRob3V0IGtub3dpbmcgaWYg
-dGhlIGNhbGxiYWNrcyBhcmUgb3ZlciBvciBub3QuCj4KPiBUbyBzb2x2ZSB0aGlzIGlzc3VlIHdl
-IG1vdmUgdGhlIGFzc2lnbm1lbnQgb2YgdGhlX3ZpcnRpb192c29jayBhdCB0aGUKPiBlbmQgb2Yg
-LnByb2JlKCksIHdoZW4gd2UgZmluaXNoZWQgYWxsIHRoZSBpbml0aWFsaXphdGlvbiwgYW5kIGF0
-IHRoZQo+IGJlZ2lubmluZyBvZiAucmVtb3ZlKCksIGJlZm9yZSB0byByZWxlYXNlIHJlc291cmNl
-cy4KPiBGb3IgdGhlIHNhbWUgcmVhc29uLCB3ZSBkbyB0aGUgc2FtZSBhbHNvIGZvciB0aGUgdmRl
-di0+cHJpdi4KPgo+IFdlIHVzZSBSQ1UgdG8gYmUgc3VyZSB0aGF0IGFsbCBjYWxsYmFja3MgdGhh
-dCB1c2UgdGhlX3ZpcnRpb192c29jawo+IGVuZGVkIGJlZm9yZSBmcmVlaW5nIGl0LiBUaGlzIGlz
-IG5vdCByZXF1aXJlZCBmb3IgY2FsbGJhY2tzIHRoYXQKPiB1c2UgdmRldi0+cHJpdiwgYmVjYXVz
-ZSBhZnRlciB0aGUgdmRldi0+Y29uZmlnLT5kZWxfdnFzKCkgd2UgYXJlIHN1cmUKPiB0aGF0IHRo
-ZXkgYXJlIGVuZGVkIGFuZCB3aWxsIG5vIGxvbmdlciBiZSBpbnZva2VkLgo+Cj4gV2UgYWxzbyB0
-YWtlIHRoZSBtdXRleCBkdXJpbmcgdGhlIC5yZW1vdmUoKSB0byBhdm9pZCB0aGF0IC5wcm9iZSgp
-IGNhbgo+IHJ1biB3aGlsZSB3ZSBhcmUgcmVzZXR0aW5nIHRoZSBkZXZpY2UuCj4KPiBTaWduZWQt
-b2ZmLWJ5OiBTdGVmYW5vIEdhcnphcmVsbGEgPHNnYXJ6YXJlQHJlZGhhdC5jb20+Cj4gLS0tCj4g
-ICBuZXQvdm13X3Zzb2NrL3ZpcnRpb190cmFuc3BvcnQuYyB8IDY3ICsrKysrKysrKysrKysrKysr
-KysrKy0tLS0tLS0tLS0tCj4gICAxIGZpbGUgY2hhbmdlZCwgNDQgaW5zZXJ0aW9ucygrKSwgMjMg
-ZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvbmV0L3Ztd192c29jay92aXJ0aW9fdHJhbnNw
-b3J0LmMgYi9uZXQvdm13X3Zzb2NrL3ZpcnRpb190cmFuc3BvcnQuYwo+IGluZGV4IDljMjg3ZTNl
-MzkzYy4uN2FkNTEwZWMxMmUwIDEwMDY0NAo+IC0tLSBhL25ldC92bXdfdnNvY2svdmlydGlvX3Ry
-YW5zcG9ydC5jCj4gKysrIGIvbmV0L3Ztd192c29jay92aXJ0aW9fdHJhbnNwb3J0LmMKPiBAQCAt
-NjUsMTkgKzY1LDIyIEBAIHN0cnVjdCB2aXJ0aW9fdnNvY2sgewo+ICAgCXUzMiBndWVzdF9jaWQ7
-Cj4gICB9Owo+ICAgCj4gLXN0YXRpYyBzdHJ1Y3QgdmlydGlvX3Zzb2NrICp2aXJ0aW9fdnNvY2tf
-Z2V0KHZvaWQpCj4gLXsKPiAtCXJldHVybiB0aGVfdmlydGlvX3Zzb2NrOwo+IC19Cj4gLQo+ICAg
-c3RhdGljIHUzMiB2aXJ0aW9fdHJhbnNwb3J0X2dldF9sb2NhbF9jaWQodm9pZCkKPiAgIHsKPiAt
-CXN0cnVjdCB2aXJ0aW9fdnNvY2sgKnZzb2NrID0gdmlydGlvX3Zzb2NrX2dldCgpOwo+ICsJc3Ry
-dWN0IHZpcnRpb192c29jayAqdnNvY2s7Cj4gKwl1MzIgcmV0Owo+ICAgCj4gLQlpZiAoIXZzb2Nr
-KQo+IC0JCXJldHVybiBWTUFERFJfQ0lEX0FOWTsKPiArCXJjdV9yZWFkX2xvY2soKTsKPiArCXZz
-b2NrID0gcmN1X2RlcmVmZXJlbmNlKHRoZV92aXJ0aW9fdnNvY2spOwo+ICsJaWYgKCF2c29jaykg
-ewo+ICsJCXJldCA9IFZNQUREUl9DSURfQU5ZOwo+ICsJCWdvdG8gb3V0X3JjdTsKPiArCX0KPiAg
-IAo+IC0JcmV0dXJuIHZzb2NrLT5ndWVzdF9jaWQ7Cj4gKwlyZXQgPSB2c29jay0+Z3Vlc3RfY2lk
-Owo+ICtvdXRfcmN1Ogo+ICsJcmN1X3JlYWRfdW5sb2NrKCk7Cj4gKwlyZXR1cm4gcmV0Owo+ICAg
-fQo+ICAgCj4gICBzdGF0aWMgdm9pZCB2aXJ0aW9fdHJhbnNwb3J0X2xvb3BiYWNrX3dvcmsoc3Ry
-dWN0IHdvcmtfc3RydWN0ICp3b3JrKQo+IEBAIC0xOTcsMTQgKzIwMCwxOCBAQCB2aXJ0aW9fdHJh
-bnNwb3J0X3NlbmRfcGt0KHN0cnVjdCB2aXJ0aW9fdnNvY2tfcGt0ICpwa3QpCj4gICAJc3RydWN0
-IHZpcnRpb192c29jayAqdnNvY2s7Cj4gICAJaW50IGxlbiA9IHBrdC0+bGVuOwo+ICAgCj4gLQl2
-c29jayA9IHZpcnRpb192c29ja19nZXQoKTsKPiArCXJjdV9yZWFkX2xvY2soKTsKPiArCXZzb2Nr
-ID0gcmN1X2RlcmVmZXJlbmNlKHRoZV92aXJ0aW9fdnNvY2spOwo+ICAgCWlmICghdnNvY2spIHsK
-PiAgIAkJdmlydGlvX3RyYW5zcG9ydF9mcmVlX3BrdChwa3QpOwo+IC0JCXJldHVybiAtRU5PREVW
-Owo+ICsJCWxlbiA9IC1FTk9ERVY7Cj4gKwkJZ290byBvdXRfcmN1Owo+ICAgCX0KPiAgIAo+IC0J
-aWYgKGxlNjRfdG9fY3B1KHBrdC0+aGRyLmRzdF9jaWQpID09IHZzb2NrLT5ndWVzdF9jaWQpCj4g
-LQkJcmV0dXJuIHZpcnRpb190cmFuc3BvcnRfc2VuZF9wa3RfbG9vcGJhY2sodnNvY2ssIHBrdCk7
-Cj4gKwlpZiAobGU2NF90b19jcHUocGt0LT5oZHIuZHN0X2NpZCkgPT0gdnNvY2stPmd1ZXN0X2Np
-ZCkgewo+ICsJCWxlbiA9IHZpcnRpb190cmFuc3BvcnRfc2VuZF9wa3RfbG9vcGJhY2sodnNvY2ss
-IHBrdCk7Cj4gKwkJZ290byBvdXRfcmN1Owo+ICsJfQo+ICAgCj4gICAJaWYgKHBrdC0+cmVwbHkp
-Cj4gICAJCWF0b21pY19pbmMoJnZzb2NrLT5xdWV1ZWRfcmVwbGllcyk7Cj4gQEAgLTIxNCw2ICsy
-MjEsOSBAQCB2aXJ0aW9fdHJhbnNwb3J0X3NlbmRfcGt0KHN0cnVjdCB2aXJ0aW9fdnNvY2tfcGt0
-ICpwa3QpCj4gICAJc3Bpbl91bmxvY2tfYmgoJnZzb2NrLT5zZW5kX3BrdF9saXN0X2xvY2spOwo+
-ICAgCj4gICAJcXVldWVfd29yayh2aXJ0aW9fdnNvY2tfd29ya3F1ZXVlLCAmdnNvY2stPnNlbmRf
-cGt0X3dvcmspOwo+ICsKPiArb3V0X3JjdToKPiArCXJjdV9yZWFkX3VubG9jaygpOwo+ICAgCXJl
-dHVybiBsZW47Cj4gICB9Cj4gICAKPiBAQCAtMjIyLDEyICsyMzIsMTQgQEAgdmlydGlvX3RyYW5z
-cG9ydF9jYW5jZWxfcGt0KHN0cnVjdCB2c29ja19zb2NrICp2c2spCj4gICB7Cj4gICAJc3RydWN0
-IHZpcnRpb192c29jayAqdnNvY2s7Cj4gICAJc3RydWN0IHZpcnRpb192c29ja19wa3QgKnBrdCwg
-Km47Cj4gLQlpbnQgY250ID0gMDsKPiArCWludCBjbnQgPSAwLCByZXQ7Cj4gICAJTElTVF9IRUFE
-KGZyZWVtZSk7Cj4gICAKPiAtCXZzb2NrID0gdmlydGlvX3Zzb2NrX2dldCgpOwo+ICsJcmN1X3Jl
-YWRfbG9jaygpOwo+ICsJdnNvY2sgPSByY3VfZGVyZWZlcmVuY2UodGhlX3ZpcnRpb192c29jayk7
-Cj4gICAJaWYgKCF2c29jaykgewo+IC0JCXJldHVybiAtRU5PREVWOwo+ICsJCXJldCA9IC1FTk9E
-RVY7Cj4gKwkJZ290byBvdXRfcmN1Owo+ICAgCX0KPiAgIAo+ICAgCXNwaW5fbG9ja19iaCgmdnNv
-Y2stPnNlbmRfcGt0X2xpc3RfbG9jayk7Cj4gQEAgLTI1NSw3ICsyNjcsMTEgQEAgdmlydGlvX3Ry
-YW5zcG9ydF9jYW5jZWxfcGt0KHN0cnVjdCB2c29ja19zb2NrICp2c2spCj4gICAJCQlxdWV1ZV93
-b3JrKHZpcnRpb192c29ja193b3JrcXVldWUsICZ2c29jay0+cnhfd29yayk7Cj4gICAJfQo+ICAg
-Cj4gLQlyZXR1cm4gMDsKPiArCXJldCA9IDA7Cj4gKwo+ICtvdXRfcmN1Ogo+ICsJcmN1X3JlYWRf
-dW5sb2NrKCk7Cj4gKwlyZXR1cm4gcmV0Owo+ICAgfQo+ICAgCj4gICBzdGF0aWMgdm9pZCB2aXJ0
-aW9fdnNvY2tfcnhfZmlsbChzdHJ1Y3QgdmlydGlvX3Zzb2NrICp2c29jaykKPiBAQCAtNTkwLDgg
-KzYwNiw2IEBAIHN0YXRpYyBpbnQgdmlydGlvX3Zzb2NrX3Byb2JlKHN0cnVjdCB2aXJ0aW9fZGV2
-aWNlICp2ZGV2KQo+ICAgCXZzb2NrLT5yeF9idWZfbWF4X25yID0gMDsKPiAgIAlhdG9taWNfc2V0
-KCZ2c29jay0+cXVldWVkX3JlcGxpZXMsIDApOwo+ICAgCj4gLQl2ZGV2LT5wcml2ID0gdnNvY2s7
-Cj4gLQl0aGVfdmlydGlvX3Zzb2NrID0gdnNvY2s7Cj4gICAJbXV0ZXhfaW5pdCgmdnNvY2stPnR4
-X2xvY2spOwo+ICAgCW11dGV4X2luaXQoJnZzb2NrLT5yeF9sb2NrKTsKPiAgIAltdXRleF9pbml0
-KCZ2c29jay0+ZXZlbnRfbG9jayk7Cj4gQEAgLTYxMyw2ICs2MjcsOSBAQCBzdGF0aWMgaW50IHZp
-cnRpb192c29ja19wcm9iZShzdHJ1Y3QgdmlydGlvX2RldmljZSAqdmRldikKPiAgIAl2aXJ0aW9f
-dnNvY2tfZXZlbnRfZmlsbCh2c29jayk7Cj4gICAJbXV0ZXhfdW5sb2NrKCZ2c29jay0+ZXZlbnRf
-bG9jayk7Cj4gICAKPiArCXZkZXYtPnByaXYgPSB2c29jazsKPiArCXJjdV9hc3NpZ25fcG9pbnRl
-cih0aGVfdmlydGlvX3Zzb2NrLCB2c29jayk7CgoKWW91IHByb2JhYmx5IG5lZWQgdG8gdXNlIHJj
-dV9kZXJlZmVyZW5jZV9wcm90ZWN0ZWQoKSB0byBhY2Nlc3MgCnRoZV92aXJ0aW9fdnNvY2sgaW4g
-dGhlIGZ1bmN0aW9uIGluIG9yZGVyIHRvIHN1cnZpdmUgZnJvbSBzcGFyc2UuCgoKPiArCj4gICAJ
-bXV0ZXhfdW5sb2NrKCZ0aGVfdmlydGlvX3Zzb2NrX211dGV4KTsKPiAgIAlyZXR1cm4gMDsKPiAg
-IAo+IEBAIC02MjcsNiArNjQ0LDEyIEBAIHN0YXRpYyB2b2lkIHZpcnRpb192c29ja19yZW1vdmUo
-c3RydWN0IHZpcnRpb19kZXZpY2UgKnZkZXYpCj4gICAJc3RydWN0IHZpcnRpb192c29jayAqdnNv
-Y2sgPSB2ZGV2LT5wcml2Owo+ICAgCXN0cnVjdCB2aXJ0aW9fdnNvY2tfcGt0ICpwa3Q7Cj4gICAK
-PiArCW11dGV4X2xvY2soJnRoZV92aXJ0aW9fdnNvY2tfbXV0ZXgpOwo+ICsKPiArCXZkZXYtPnBy
-aXYgPSBOVUxMOwo+ICsJcmN1X2Fzc2lnbl9wb2ludGVyKHRoZV92aXJ0aW9fdnNvY2ssIE5VTEwp
-OwoKClRoaXMgaXMgc3RpbGwgc3VzcGljaW91cywgY2FuIHdlIGFjY2VzcyB0aGVfdmlydGlvX3Zz
-b2NrIHRocm91Z2ggCnZkZXYtPnByaXY/IElmIHllcywgd2UgbWF5IHN0aWxsIGdldCB1c2UtYWZ0
-ZXItZnJlZSBzaW5jZSBpdCB3YXMgbm90IApwcm90ZWN0ZWQgYnkgUkNVLgoKQW5vdGhlciBtb3Jl
-IGludGVyZXN0aW5nIHF1ZXN0aW9uLCBJIGJlbGlldmUgd2Ugd2lsbCBkbyBzaW5nbGV0b24gZm9y
-IAp2aXJ0aW9fdnNvY2sgc3RydWN0dXJlLiBUaGVuIHdoYXQncyB0aGUgcG9pbnQgb2YgdXNpbmcg
-dmRldi0+cHJpdiB0byAKYWNjZXNzIHRoZV92aXJ0aW9fdnNvY2s/IEl0IGxvb2tzIHRvIG1lIHdl
-IGNhbiBpdCBicmluZ3MgZXh0cmEgdHJvdWJsZXMgCmZvciBkb2luZyBzeW5jaHJvbml6YXRpb24u
-CgpUaGFua3MKCgo+ICsJc3luY2hyb25pemVfcmN1KCk7Cj4gKwo+ICAgCWZsdXNoX3dvcmsoJnZz
-b2NrLT5sb29wYmFja193b3JrKTsKPiAgIAlmbHVzaF93b3JrKCZ2c29jay0+cnhfd29yayk7Cj4g
-ICAJZmx1c2hfd29yaygmdnNvY2stPnR4X3dvcmspOwo+IEBAIC02NjYsMTIgKzY4OSwxMCBAQCBz
-dGF0aWMgdm9pZCB2aXJ0aW9fdnNvY2tfcmVtb3ZlKHN0cnVjdCB2aXJ0aW9fZGV2aWNlICp2ZGV2
-KQo+ICAgCX0KPiAgIAlzcGluX3VubG9ja19iaCgmdnNvY2stPmxvb3BiYWNrX2xpc3RfbG9jayk7
-Cj4gICAKPiAtCW11dGV4X2xvY2soJnRoZV92aXJ0aW9fdnNvY2tfbXV0ZXgpOwo+IC0JdGhlX3Zp
-cnRpb192c29jayA9IE5VTEw7Cj4gLQltdXRleF91bmxvY2soJnRoZV92aXJ0aW9fdnNvY2tfbXV0
-ZXgpOwo+IC0KPiAgIAl2ZGV2LT5jb25maWctPmRlbF92cXModmRldik7Cj4gICAKPiArCW11dGV4
-X3VubG9jaygmdGhlX3ZpcnRpb192c29ja19tdXRleCk7Cj4gKwo+ICAgCWtmcmVlKHZzb2NrKTsK
-PiAgIH0KPiAgIApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgt
-Zm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4v
-bGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Wed, Jul 03, 2019 at 10:14:53AM +0100, Stefan Hajnoczi wrote:
+> On Mon, Jul 01, 2019 at 07:03:57PM +0200, Stefano Garzarella wrote:
+> > On Mon, Jul 01, 2019 at 04:11:13PM +0100, Stefan Hajnoczi wrote:
+> > > On Fri, Jun 28, 2019 at 02:36:56PM +0200, Stefano Garzarella wrote:
+> > > > During the review of "[PATCH] vsock/virtio: Initialize core virtio vsock
+> > > > before registering the driver", Stefan pointed out some possible issues
+> > > > in the .probe() and .remove() callbacks of the virtio-vsock driver.
+> > > > 
+> > > > This series tries to solve these issues:
+> > > > - Patch 1 adds RCU critical sections to avoid use-after-free of
+> > > >   'the_virtio_vsock' pointer.
+> > > > - Patch 2 stops workers before to call vdev->config->reset(vdev) to
+> > > >   be sure that no one is accessing the device.
+> > > > - Patch 3 moves the works flush at the end of the .remove() to avoid
+> > > >   use-after-free of 'vsock' object.
+> > > > 
+> > > > v2:
+> > > > - Patch 1: use RCU to protect 'the_virtio_vsock' pointer
+> > > > - Patch 2: no changes
+> > > > - Patch 3: flush works only at the end of .remove()
+> > > > - Removed patch 4 because virtqueue_detach_unused_buf() returns all the buffers
+> > > >   allocated.
+> > > > 
+> > > > v1: https://patchwork.kernel.org/cover/10964733/
+> > > 
+> > > This looks good to me.
+> > 
+> > Thanks for the review!
+> > 
+> > > 
+> > > Did you run any stress tests?  For example an SMP guest constantly
+> > > connecting and sending packets together with a script that
+> > > hotplug/unplugs vhost-vsock-pci from the host side.
+> > 
+> > Yes, I started an SMP guest (-smp 4 -monitor tcp:127.0.0.1:1234,server,nowait)
+> > and I run these scripts to stress the .probe()/.remove() path:
+> > 
+> > - guest
+> >   while true; do
+> >       cat /dev/urandom | nc-vsock -l 4321 > /dev/null &
+> >       cat /dev/urandom | nc-vsock -l 5321 > /dev/null &
+> >       cat /dev/urandom | nc-vsock -l 6321 > /dev/null &
+> >       cat /dev/urandom | nc-vsock -l 7321 > /dev/null &
+> >       wait
+> >   done
+> > 
+> > - host
+> >   while true; do
+> >       cat /dev/urandom | nc-vsock 3 4321 > /dev/null &
+> >       cat /dev/urandom | nc-vsock 3 5321 > /dev/null &
+> >       cat /dev/urandom | nc-vsock 3 6321 > /dev/null &
+> >       cat /dev/urandom | nc-vsock 3 7321 > /dev/null &
+> >       sleep 2
+> >       echo "device_del v1" | nc 127.0.0.1 1234
+> >       sleep 1
+> >       echo "device_add vhost-vsock-pci,id=v1,guest-cid=3" | nc 127.0.0.1 1234
+> >       sleep 1
+> >   done
+> > 
+> > Do you think is enough or is better to have a test more accurate?
+> 
+> That's good when left running overnight so that thousands of hotplug
+> events are tested.
+
+Honestly I run the test for ~30 mins (because without the patch the
+crash happens in a few seconds), but of course, I'll run it this night :)
+
+Thanks,
+Stefano
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
