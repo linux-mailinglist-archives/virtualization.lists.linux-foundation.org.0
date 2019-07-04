@@ -2,64 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6571F5FD19
-	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 20:46:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E3B85FD2D
+	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 20:56:17 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 7F99CCF6;
-	Thu,  4 Jul 2019 18:46:26 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id CE886D7E;
+	Thu,  4 Jul 2019 18:56:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CFA33CD9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6992FD7C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 18:46:24 +0000 (UTC)
+	Thu,  4 Jul 2019 18:56:11 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6DB8387C
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 14F0387C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 18:46:24 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id m24so5025908ioo.2
+	Thu,  4 Jul 2019 18:56:11 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id j6so14554691ioa.5
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 04 Jul 2019 11:46:24 -0700 (PDT)
+	Thu, 04 Jul 2019 11:56:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=/EL1KLCRFQKW2ACCFaTqozaezf7EHz4hHVM/un1EcE4=;
-	b=t5F5YNcug6hMseo0CGrmu4jtrScYyR5ptz8hoGQXZ2nAYmqEbnWUkptDsisVRn+DlR
-	CwihM32a+oNgurJg0qF/nDO/Z7Use2bWSvL/B+Rs/djchh2zDLEkloovdGI54dEmg7Z7
-	0ZcLtk9dxbf4JWb2t6EWq1MMcGyaVhvNZG3gucduuo5SYzlm2Ej4EDjeXGg2fUYsONWY
-	wVSxZ+NiAJAy8IT861ZE5CZnGHPrrz8tDjXqwYFHsv145C6cr2YShpRTl8W7KSNlzkUK
-	tR5Qy2gVPZtMNqRb6vSFgLcjAmVZ/dcSvndnrTJdKezTc/nvPEShNL2J6I+hSa2Pwbck
-	a/OA==
+	:cc; bh=dVPI54F8WztxoPvvjrKlk6t2iT7s82kVikoygRX/3n8=;
+	b=DIf/ee9k2Z3dPthl5Ioi3W+zUz0Naw3h98O8/cIJvOQr2OguAQaYQ9/kWMGcp8zUI8
+	MAT9owEMUZvzIHfO94gDHaf7rjxGpW8Z4FlIsOhETeickK9dOPi7j0OwJgMph6sSg9CW
+	HWKDxvhqH4+zwwXhEQzOyKGxFLSohHnGiAo9nxOHWGhA2iZbGTYfSWuR+73+PhMJtyIb
+	/LvwizkK5g44YnpbwLdy+qB+qFZIoY4meT65RCjC1K/RMNS9+qHgrhcuUB7+FCkx5Hld
+	vXQs1+iaUhtVDJH1hFaxqm9343a0RehxmKCxkdm+UssSPkqKaHjitzLG8uyJPFXXNFs/
+	jd0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=/EL1KLCRFQKW2ACCFaTqozaezf7EHz4hHVM/un1EcE4=;
-	b=fIphrk4hcS+/cbQXq8n0/ZC+/5z3Nl2TFtzdbT6ECj74cjGYitisBRXURR8AyKQ8rU
-	0+RouT8NilWYuk14O6tCp/jfkFsIau+/yF5puRZt6p7suemGmxmDpYGXlGY2gTsrXGF2
-	XFRDYpCxEMQGKSI9tPm4pM4jSHKXa6w/kGlavlTH0Gc3NYhaBimuxMsWaEskSMKmJC8F
-	umXZccqLM9bTyV7gA0qN8wBx5j5G1SX/iAd1gHHeOPFbjC/jVm3P1skyVDNo/1iswuBM
-	GTAsgO42+eokQK9ytkbxa/ZYo1allKXMy6uexdmermxHb1W0A4eYRCS2gawNDgeiHP95
-	V7eg==
-X-Gm-Message-State: APjAAAUQDjtLOJddJ3JILQxGJAL9FpWNoW9fghYnqsUt1UF7Okeq/j6/
-	0AOuBf5FhOyFrGWWyEn1p92zvzx/gXlcy6rGbQw=
-X-Google-Smtp-Source: APXvYqw068LIiSNZG8tw6hH1iAgU3f8oV5wzSRuRWNvDNz3EezgtI9aQEHP/lGGiQvDKG3BtZpOWd1VgboUZlM9JGhc=
+	bh=dVPI54F8WztxoPvvjrKlk6t2iT7s82kVikoygRX/3n8=;
+	b=iWUqTO4fMOAGaRG0AM1KlS5/W3YS59HYpI7r7UcoH8mWFfVGX2KEhCDYXMm351Ofwd
+	u5snlWJ9ESm8t8rIPRHKNnWlE7I+Mf2LC3E/TAiDvBc6RxSm9Fa23rkYHf0Wt4g7uj59
+	RXskzTHe+PV8LOYmTdrolDsEKzV8UGXgTzL6O7mjtd4H/IyIVKx0IAwRe8tBen24JSJX
+	+viYzpYp935OEuQHqnrbd5pjZE9UCAF12zcfKK/wAuP/JMwNyQMx4C4FzObFjiUJFWQo
+	erjxODUDzSsxl2x3r9GD9qxlQhOBPDquWQvKpOaC1LTaDESMrax7c5IILkAFpdXzrVu4
+	HWzQ==
+X-Gm-Message-State: APjAAAXeFtJ8cw7L1wA+nvNDFq3h/nDAhb2v+jpvOs1NmE0zBsnFseU2
+	YG/Z1h72f/WI36nWJiuRDt4YrwkqckWGyThtqew=
+X-Google-Smtp-Source: APXvYqyuufs960P1/vdGPNwzz71qxLDK4zx/ys1xqg1z6vid7XwTdQRhtt9ehbnzPiPsMMVOwUiY5nfaXOyov9XPTsE=
 X-Received: by 2002:a05:6602:104:: with SMTP id
-	s4mr39068278iot.200.1562265983623; 
-	Thu, 04 Jul 2019 11:46:23 -0700 (PDT)
+	s4mr39095774iot.200.1562266570329; 
+	Thu, 04 Jul 2019 11:56:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190702141903.1131-1-kraxel@redhat.com>
-	<20190702141903.1131-9-kraxel@redhat.com>
-	<CAPaKu7QP=A2kV_kqcT20Pmc831HviaBJN1RpOFoa=V1g6SmE_g@mail.gmail.com>
-	<20190704112534.v7icsuverf7wrbjq@sirius.home.kraxel.org>
-In-Reply-To: <20190704112534.v7icsuverf7wrbjq@sirius.home.kraxel.org>
+	<20190702141903.1131-15-kraxel@redhat.com>
+	<CAPaKu7T3GvYVMueYgJFhADFSFEVbHEdaupw8=mq_+i150a1mLA@mail.gmail.com>
+	<20190704114756.eavkszsgsyymns3m@sirius.home.kraxel.org>
+In-Reply-To: <20190704114756.eavkszsgsyymns3m@sirius.home.kraxel.org>
 From: Chia-I Wu <olvaffe@gmail.com>
-Date: Thu, 4 Jul 2019 11:46:12 -0700
-Message-ID: <CAPaKu7SQS5USJf0Y+K41tuRA=4qZJf5CnTu9EqAPZvz+GJCP2w@mail.gmail.com>
-Subject: Re: [PATCH v6 08/18] drm/virtio: rework virtio_gpu_execbuffer_ioctl
-	fencing
+Date: Thu, 4 Jul 2019 11:55:59 -0700
+Message-ID: <CAPaKu7SXJwDg1uE0qDOYNS6J44UuQUh6m5rpJ3hBtW2tqYmMKA@mail.gmail.com>
+Subject: Re: [PATCH v6 14/18] drm/virtio: rework
+	virtio_gpu_transfer_from_host_ioctl fencing
 To: Gerd Hoffmann <kraxel@redhat.com>
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
@@ -87,40 +87,35 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Jul 4, 2019 at 4:25 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+On Thu, Jul 4, 2019 at 4:48 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
 >
->   Hi,
+> On Wed, Jul 03, 2019 at 01:05:12PM -0700, Chia-I Wu wrote:
+> > On Tue, Jul 2, 2019 at 7:19 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+> > >
+> > > Switch to the virtio_gpu_array_* helper workflow.
+> > (just repeating my question on patch 6)
+> >
+> > Does this fix the obj refcount issue?  When was the issue introduced?
 >
-> > >         if (fence)
-> > >                 virtio_gpu_fence_emit(vgdev, hdr, fence);
-> > > +       if (vbuf->objs) {
-> > > +               virtio_gpu_array_add_fence(vbuf->objs, &fence->f);
-> > > +               virtio_gpu_array_unlock_resv(vbuf->objs);
-> > > +       }
-> > This is with the spinlock held.  Maybe we should move the
-> > virtio_gpu_array_unlock_resv call out of the critical section.
+> obj refcount should be fine in both old and new code.
 >
-> That would bring back the race ...
-Right...
+> old code:
+>   drm_gem_object_lookup
+>   drm_gem_object_put_unlocked
 >
-> > I am actually more concerned about virtio_gpu_array_add_fence, but it
-> > is also harder to move.  Should we add a kref to the object array?
+> new code:
+>   virtio_gpu_array_from_handles
+>   virtio_gpu_array_put_free (in virtio_gpu_dequeue_ctrl_func).
 >
-> Yep, refcounting would be the other way to fix the race.
->
-> > This bothers me because I recently ran into a CPU-bound game with very
-> > bad lock contention here.
->
-> Hmm.  Any clue where this comes from?  Multiple threads competing for
-> virtio buffers I guess?  Maybe we should have larger virtqueues?
-The game was single-threaded.  I guess it was the game and Xorg
-competing for virtio buffers.  That was also on an older kernel
-without explicit fences.  The userspace had to create dummy resources
-frequently to do VIRTIO_IOCTL_RESOURCE_WAIT.
+> Or did I miss something?
+In the old code, drm_gem_object_put_unlocked is called before the vbuf
+using the object is retired.  Isn't that what object array wants to
+fix?
 
-I think this is fine for now as far as I am concerned.  I can look
-into this more closely after this series lands.
+We get away with that because the host only sees  hw_res_handles, and
+executes the commands in order.
 
+Maybe it was me who missed something..?
 
 >
 > cheers,
