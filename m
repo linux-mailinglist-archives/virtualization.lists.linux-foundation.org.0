@@ -2,50 +2,71 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDA885F679
-	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 12:18:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2F6E5F715
+	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 13:11:01 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5BE74107F;
-	Thu,  4 Jul 2019 10:18:18 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 4D0341099;
+	Thu,  4 Jul 2019 11:10:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2A9A6D9C
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 521461083
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 10:18:17 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from smtp.domeneshop.no (smtp.domeneshop.no [194.63.252.55])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4112487F
+	Thu,  4 Jul 2019 11:10:50 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 301CF892
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 10:18:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org;
-	s=ds201810; 
-	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=0hMLxIqO1Yq7Z0UhniHCYxabposqq8/0CMluI91fCvk=; 
-	b=fk+SH3zoDsoJZOaBGHziDThVH0QCN1j82CiUDS5w0NyBuX1uO5TUX7OSE4XnRDOEcM7sZPtHsO837m027SpZUgibDJ7wTKgX5anbDKgl4H/00wRJ2GArhOP+GM4k4uK3PMV62P/F9P2PM9MjxflssafPhE+HBVjcRrn2gPan0nG8MZuQSDuf/uQT7GUHNE8/9qSs+FSSozo6rFGfKJXcKu/Vckg9n+gOi+rotVC9cxY0CEYSSg702R8zkwHxyODblY/XouMwlm/8Qn1mPFWpwjXJvbNm99wbyM2OeL7vsu8kZmf9Rkc+9yUUdmtJE5Veen9FI3UtvfqsnmXCMCsaxw==;
-Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:61811
-	helo=[192.168.10.173]) by smtp.domeneshop.no with esmtpsa
-	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.84_2)
-	(envelope-from <noralf@tronnes.org>)
-	id 1hiyog-0000bL-6x; Thu, 04 Jul 2019 12:18:14 +0200
+	Thu,  4 Jul 2019 11:10:49 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id 389B6AF9F;
+	Thu,  4 Jul 2019 11:10:47 +0000 (UTC)
 Subject: Re: [PATCH 0/5] Unmappable DRM client buffers for fbdev emulation
-To: Thomas Zimmermann <tzimmermann@suse.de>, airlied@redhat.com,
-	daniel@ffwll.ch, kraxel@redhat.com, maarten.lankhorst@linux.intel.com, 
+To: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>, airlied@redhat.com, 
+	daniel@ffwll.ch, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
 	maxime.ripard@bootlin.com, sean@poorly.run, sam@ravnborg.org,
 	yc_chen@aspeedtech.com
 References: <20190703083302.2609-1-tzimmermann@suse.de>
 	<a2e3baa8-f8e8-4628-e18f-cb3119194afb@tronnes.org>
 	<aa1b7431-21c5-4c99-bfb6-6c5e4946bec3@suse.de>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-Message-ID: <18d573b4-3cb8-dc4a-bee3-a8b9b0a18a28@tronnes.org>
-Date: Thu, 4 Jul 2019 12:18:06 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.2
+	<18d573b4-3cb8-dc4a-bee3-a8b9b0a18a28@tronnes.org>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Openpgp: preference=signencrypt
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+	xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+	AAHNKFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmNvbT7CwJQEEwEIAD4W
+	IQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznTtgIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgID
+	AQIeAQIXgAAKCRBoDcEdUwt6I7D7CACBK42XW+7mCiK8ioXMEy1NzGbXC51RzGea8N83oEJS
+	1KVUtQxrkDxgrW/WLSl/TfqHFsJpdEFOv1XubWbleun3uKPy0e5vZCd5UjZPkeNjnqfCYTDy
+	hVVsdOuFbtWDppJyJrThLqr9AgSFmoCNNUt1SVpYEEOLNE6C32BhlnSq21VLC+YXTgO/ZHTa
+	YXkq54hHj63jwrcjkBSCkXLh37kHeqnl++GHpN+3R+o3w2OpwHAlvVjdKPT27v1tVkiydsFG
+	65Vd0n3m/ft+IOrGgxQM1C20uqKvsZGB4r3OGR50ekAybO7sjEJJ1Obl4ge/6RRqcvKz4LMb
+	tGs85D6tPIeFzsBNBFs50uABCADGJj+DP1fk+UWOWrf4O61HTbC4Vr9QD2K4fUUHnzg2B6zU
+	R1BPXqLGG0+lzK8kfYU/F5RjmEcClsIkAaFkg4kzKP14tvY1J5+AV3yNqcdg018HNtiyrSwI
+	E0Yz/qm1Ot2NMZ0DdvVBg22IMsiudQ1tx9CH9mtyTbIXgACvl3PW2o9CxiHPE/bohFhwZwh/
+	kXYYAE51lhinQ3oFEeQZA3w4OTvxSEspiQR8dg8qJJb+YOAc5IKk6sJmmM7JfFMWSr22satM
+	23oQ3WvJb4RV6HTRTAIEyyZS7g2DhiytgMG60t0qdABG5KXSQW+OKlZRpuWwKWaLh3if/p/u
+	69dvpanbABEBAAHCwHwEGAEIACYWIQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznS4AIbDAUJ
+	A8JnAAAKCRBoDcEdUwt6I6X3CACJ8D+TpXBCqJE5xwog08+Dp8uBpx0T9n1wE0GQisZruACW
+	NofYn8PTX9k4wmegDLwt7YQDdKxQ4+eTfZeLNQqWg6OCftH5Kx7sjWnJ09tOgniVdROzWJ7c
+	VJ/i0okazncsJ+nq48UYvRGE1Swh3A4QRIyphWX4OADOBmTFl9ZYNPnh23eaC9WrNvFr7yP7
+	iGjMlfEW8l6Lda//EC5VpXVNza0xeae0zFNst2R9pn+bLkihwDLWxOIyifGRxTqNxoS4I1aw
+	VhxPSVztPMSpIA/sOr/N/p6JrBLn+gui2K6mP7bGb8hF+szfArYqz3T1rv1VzUWAJf5Wre5U
+	iNx9uqqx
+Message-ID: <5f9c7df7-3805-0e23-4201-be08d41da791@suse.de>
+Date: Thu, 4 Jul 2019 13:10:41 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.1
 MIME-Version: 1.0
-In-Reply-To: <aa1b7431-21c5-4c99-bfb6-6c5e4946bec3@suse.de>
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+In-Reply-To: <18d573b4-3cb8-dc4a-bee3-a8b9b0a18a28@tronnes.org>
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
@@ -60,152 +81,364 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4473498186295515183=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-CgpEZW4gMDQuMDcuMjAxOSAwOS40Mywgc2tyZXYgVGhvbWFzIFppbW1lcm1hbm46Cj4gSGkKPiAK
-PiBBbSAwMy4wNy4xOSB1bSAyMToyNyBzY2hyaWViIE5vcmFsZiBUcsO4bm5lczoKPj4KPj4KPj4g
-RGVuIDAzLjA3LjIwMTkgMTAuMzIsIHNrcmV2IFRob21hcyBaaW1tZXJtYW5uOgo+Pj4gRFJNIGNs
-aWVudCBidWZmZXJzIGFyZSBwZXJtYW5lbnRseSBtYXBwZWQgdGhyb3VnaG91dCB0aGVpciBsaWZl
-dGltZS4gVGhpcwo+Pj4gcHJldmVudHMgdXMgZnJvbSB1c2luZyBnZW5lcmljIGZyYW1lYnVmZmVy
-IGVtdWxhdGlvbiBmb3IgZGV2aWNlcyB3aXRoCj4+PiBzbWFsbCBkZWRpY2F0ZWQgdmlkZW8gbWVt
-b3J5LCBzdWNoIGFzIGFzdCBvciBtZ2FnMjAwLiBXaXRoIGZiIGJ1ZmZlcnMKPj4+IHBlcm1hbmVu
-dGx5IG1hcHBlZCwgc3VjaCBkZXZpY2VzIG9mdGVuIHdvbid0IGhhdmUgZW5vdWd0aCBzcGFjZSBs
-ZWZ0IHRvCj4+PiBkaXNwbGF5IG90aGVyIGNvbnRlbnQgKGUuZy4sIFgxMSkuCj4+Pgo+Pj4gVGhp
-cyBwYXRjaCBzZXQgaW50cm9kdWNlcyB1bm1hcHBhYmxlIERSTSBjbGllbnQgYnVmZmVycyBmb3Ig
-ZnJhbWVidWZmZXIKPj4+IGVtdWxhdGlvbiB3aXRoIHNoYWRvdyBidWZmZXJzLiBXaGlsZSB0aGUg
-c2hhZG93IGJ1ZmZlciByZW1haW5zIGluIHN5c3RlbQo+Pj4gbWVtb3J5IHBlcm1hbmVudGx5LCB0
-aGUgcmVzcGVjdGl2ZSBidWZmZXIgb2JqZWN0IHdpbGwgb25seSBiZSBtYXBwZWQgYnJpZWZseQo+
-Pj4gZHVyaW5nIHVwZGF0ZXMgZnJvbSB0aGUgc2hhZG93IGJ1ZmZlci4gSGVuY2UsIHRoZSBkcml2
-ZXIgY2FuIHJlbG9jYXRlIGhlCj4+PiBidWZmZXIgb2JqZWN0IGFtb25nIG1lbW9yeSByZWdpb25z
-IGFzIG5lZWRlZC4KPj4+Cj4+PiBUaGUgZGVmYXVsdCBiZWhvdmlvdXIgZm9yIERSTSBjbGllbnQg
-YnVmZmVycyBpcyBzdGlsbCB0byBiZSBwZXJtYW5lbnRseQo+Pj4gbWFwcGVkLgo+Pj4KPj4+IFRo
-ZSBwYXRjaCBzZXQgY29udmVydHMgYXN0IGFuZCBtZ2FnMjAwIHRvIGdlbmVyaWMgZnJhbWVidWZm
-ZXIgZW11bGF0aW9uCj4+PiBhbmQgcmVtb3ZlcyBhIGxhcmdlIGFtb3VudCBvZiBmcmFtZWJ1ZmZl
-ciBjb2RlIGZyb20gdGhlc2UgZHJpdmVycy4gRm9yCj4+PiBib2NocywgYSBwcm9ibGVtIHdhcyBy
-ZXBvcnRlZCB3aGVyZSB0aGUgZHJpdmVyIGNvdWxkIG5vdCBkaXNwbGF5IHRoZSBjb25zb2xlCj4+
-PiBiZWNhdXNlIGl0IHdhcyBwaW5uZWQgaW4gc3lzdGVtIG1lbW9yeS4gWzFdIFRoZSBwYXRjaCBz
-ZXQgZml4ZXMgdGhpcyBidWcKPj4+IGJ5IGNvbnZlcnRpbmcgYm9jaHMgdG8gdXNlIHRoZSBzaGFk
-b3cgZmIuCj4+Pgo+Pj4gVGhlIHBhdGNoIHNldCBoYXMgYmVlbiB0ZXN0ZWQgb24gYXN0IGFuZCBt
-Z2EyMDAgSFcuCj4+Pgo+Pgo+PiBJJ3ZlIGJlZW4gdGhpbmtpbmcsIHRoaXMgZW5hYmxlcyBkaXJ0
-eSB0cmFja2luZyBpbiBEUk0gdXNlcnNwYWNlIGZvcgo+PiB0aGVzZSBkcml2ZXJzIHNpbmNlIHRo
-ZSBkaXJ0eSBjYWxsYmFjayBpcyBub3cgc2V0IG9uIGFsbCBmcmFtZWJ1ZmZlcnMuCj4+IElzIHRo
-aXMgT0s/IFNob3VsZCB3ZSBhZGQgYSBkcm1fZmJkZXZfZ2VuZXJpY19zaGFkb3dfc2V0dXAoKSB0
-aGF0IHNldHMgYQo+PiBmbGFnIGVuYWJsaW5nIHRoZSBzaGFkb3cgYnVmZmVyIGluc3RlYWQ/Cj4g
-Cj4gRmJkZXYgZW11bGF0aW9uIGlzIHNwZWNpYWwgd3J0IGZyYW1lYnVmZmVyIHNldHVwIGFuZCB0
-aGVyZSdzIG5vIHdheSB0bwo+IGRpc3Rpbmd1aXNoIGEgcmVndWxhciBGQiBmcm9tIHRoZSBmYmRl
-didzIEZCLiBJJ3ZlIGJlZW4gdHJ5aW5nCj4gZHJtX2ZiZGV2X2dlbmVyaWNfc2hhZG93X3NldHVw
-KCksIGJ1dCBlbmRlZCB1cCBkdXBsaWNhdGluZwo+IGZ1bmN0aW9uYWxpdHkuIFRoZSBwcm9ibGVt
-IHdhcyB0aGF0IHdlIGNhbm5vdCBnZXQgc3RhdGUtZmxhZyBhcmd1bWVudHMKPiBpbnRvIGRybV9m
-Yl9oZWxwZXJfZ2VuZXJpY19wcm9iZSgpLgo+IAo+IFRoZXJlIGFscmVhZHkgaXMgc3RydWN0IG1v
-ZGVfY29uZmlnLnByZWZlcl9zaGFkb3cuIEl0IHNpZ25hbHMgc2hhZG93IEZCCj4gcmVuZGVyaW5n
-IHRvIHVzZXJzcGFjZS4gVGhlIGVhc2llc3Qgc29sdXRpb24gaXMgdG8gYWRkCj4gcHJlZmVyX3No
-YWRvd19mYmRldiBhcyB3ZWxsLiBJZiBlaXRoZXIgZmxhZyBpcyB0cnVlLCBmYmRldiBlbXVsYXRp
-b24KPiB3b3VsZCBlbmFibGUgc2hhZG93IGJ1ZmZlcmluZy4KCkhvdyBhYm91dCBzb21ldGhpbmcg
-bGlrZSB0aGlzOgoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fZmJfaGVscGVyLmMK
-Yi9kcml2ZXJzL2dwdS9kcm0vZHJtX2ZiX2hlbHBlci5jCmluZGV4IDE5ODRlNWM1NGQ1OC4uNzIz
-ZmU1NmFhNWY1IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2ZiX2hlbHBlci5jCisr
-KyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZmJfaGVscGVyLmMKQEAgLTQxNSw3ICs0MTUsOCBAQCBz
-dGF0aWMgdm9pZCBkcm1fZmJfaGVscGVyX2RpcnR5X3dvcmsoc3RydWN0Cndvcmtfc3RydWN0ICp3
-b3JrKQogCQkvKiBHZW5lcmljIGZiZGV2IHVzZXMgYSBzaGFkb3cgYnVmZmVyICovCiAJCWlmICho
-ZWxwZXItPmJ1ZmZlcikKIAkJCWRybV9mYl9oZWxwZXJfZGlydHlfYmxpdF9yZWFsKGhlbHBlciwg
-JmNsaXBfY29weSk7Ci0JCWhlbHBlci0+ZmItPmZ1bmNzLT5kaXJ0eShoZWxwZXItPmZiLCBOVUxM
-LCAwLCAwLCAmY2xpcF9jb3B5LCAxKTsKKwkJaWYgKGhlbHBlci0+ZmItPmZ1bmNzLT5kaXJ0eSkK
-KwkJCWhlbHBlci0+ZmItPmZ1bmNzLT5kaXJ0eShoZWxwZXItPmZiLCBOVUxMLCAwLCAwLCAmY2xp
-cF9jb3B5LCAxKTsKIAl9CiB9CgpAQCAtMjIwOSw3ICsyMjEwLDcgQEAgaW50IGRybV9mYl9oZWxw
-ZXJfZ2VuZXJpY19wcm9iZShzdHJ1Y3QKZHJtX2ZiX2hlbHBlciAqZmJfaGVscGVyLAogI2VuZGlm
-CiAJZHJtX2ZiX2hlbHBlcl9maWxsX2luZm8oZmJpLCBmYl9oZWxwZXIsIHNpemVzKTsKCi0JaWYg
-KGZiLT5mdW5jcy0+ZGlydHkpIHsKKwlpZiAoZmItPmZ1bmNzLT5kaXJ0eSB8fCBmYl9oZWxwZXIt
-PnVzZV9zaGFkb3cpIHsKIAkJc3RydWN0IGZiX29wcyAqZmJvcHM7CiAJCXZvaWQgKnNoYWRvdzsK
-CkBAIC0yMzEwLDYgKzIzMTEsNDQgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fY2xpZW50X2Z1
-bmNzCmRybV9mYmRldl9jbGllbnRfZnVuY3MgPSB7CiAJLmhvdHBsdWcJPSBkcm1fZmJkZXZfY2xp
-ZW50X2hvdHBsdWcsCiB9OwoKK3N0YXRpYyBpbnQgX2RybV9mYmRldl9nZW5lcmljX3NldHVwKHN0
-cnVjdCBkcm1fZGV2aWNlICpkZXYsIHVuc2lnbmVkCmludCBwcmVmZXJyZWRfYnBwLCBib29sIHVz
-ZV9zaGFkb3cpCit7CisJc3RydWN0IGRybV9mYl9oZWxwZXIgKmZiX2hlbHBlcjsKKwlpbnQgcmV0
-OworCisJV0FSTihkZXYtPmZiX2hlbHBlciwgImZiX2hlbHBlciBpcyBhbHJlYWR5IHNldCFcbiIp
-OworCisJaWYgKCFkcm1fZmJkZXZfZW11bGF0aW9uKQorCQlyZXR1cm4gMDsKKworCWZiX2hlbHBl
-ciA9IGt6YWxsb2Moc2l6ZW9mKCpmYl9oZWxwZXIpLCBHRlBfS0VSTkVMKTsKKwlpZiAoIWZiX2hl
-bHBlcikKKwkJcmV0dXJuIC1FTk9NRU07CisKKwlyZXQgPSBkcm1fY2xpZW50X2luaXQoZGV2LCAm
-ZmJfaGVscGVyLT5jbGllbnQsICJmYmRldiIsCiZkcm1fZmJkZXZfY2xpZW50X2Z1bmNzKTsKKwlp
-ZiAocmV0KSB7CisJCWtmcmVlKGZiX2hlbHBlcik7CisJCURSTV9ERVZfRVJST1IoZGV2LT5kZXYs
-ICJGYWlsZWQgdG8gcmVnaXN0ZXIgY2xpZW50OiAlZFxuIiwgcmV0KTsKKwkJcmV0dXJuIHJldDsK
-Kwl9CisKKwlpZiAoIXByZWZlcnJlZF9icHApCisJCXByZWZlcnJlZF9icHAgPSBkZXYtPm1vZGVf
-Y29uZmlnLnByZWZlcnJlZF9kZXB0aDsKKwlpZiAoIXByZWZlcnJlZF9icHApCisJCXByZWZlcnJl
-ZF9icHAgPSAzMjsKKwlmYl9oZWxwZXItPnByZWZlcnJlZF9icHAgPSBwcmVmZXJyZWRfYnBwOwor
-CisJZmJfaGVscGVyLT51c2Vfc2hhZG93ID0gdXNlX3NoYWRvdzsKKworCXJldCA9IGRybV9mYmRl
-dl9jbGllbnRfaG90cGx1ZygmZmJfaGVscGVyLT5jbGllbnQpOworCWlmIChyZXQpCisJCURSTV9E
-RVZfREVCVUcoZGV2LT5kZXYsICJjbGllbnQgaG90cGx1ZyByZXQ9JWRcbiIsIHJldCk7CisKKwlk
-cm1fY2xpZW50X3JlZ2lzdGVyKCZmYl9oZWxwZXItPmNsaWVudCk7CisKKwlyZXR1cm4gMDsKK30K
-KwogLyoqCiAgKiBkcm1fZmJkZXZfZ2VuZXJpY19zZXR1cCgpIC0gU2V0dXAgZ2VuZXJpYyBmYmRl
-diBlbXVsYXRpb24KICAqIEBkZXY6IERSTSBkZXZpY2UKQEAgLTIzMzgsMzggKzIzNzcsMTMgQEAg
-c3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fY2xpZW50X2Z1bmNzCmRybV9mYmRldl9jbGllbnRfZnVu
-Y3MgPSB7CiAgKi8KIGludCBkcm1fZmJkZXZfZ2VuZXJpY19zZXR1cChzdHJ1Y3QgZHJtX2Rldmlj
-ZSAqZGV2LCB1bnNpZ25lZCBpbnQKcHJlZmVycmVkX2JwcCkKIHsKLQlzdHJ1Y3QgZHJtX2ZiX2hl
-bHBlciAqZmJfaGVscGVyOwotCWludCByZXQ7CisJcmV0dXJuIF9kcm1fZmJkZXZfZ2VuZXJpY19z
-ZXR1cChkZXYsIHByZWZlcnJlZF9icHAsIGZhbHNlKTsKK30KK0VYUE9SVF9TWU1CT0woZHJtX2Zi
-ZGV2X2dlbmVyaWNfc2V0dXApOwoKLQlXQVJOKGRldi0+ZmJfaGVscGVyLCAiZmJfaGVscGVyIGlz
-IGFscmVhZHkgc2V0IVxuIik7Ci0KLQlpZiAoIWRybV9mYmRldl9lbXVsYXRpb24pCi0JCXJldHVy
-biAwOwotCi0JZmJfaGVscGVyID0ga3phbGxvYyhzaXplb2YoKmZiX2hlbHBlciksIEdGUF9LRVJO
-RUwpOwotCWlmICghZmJfaGVscGVyKQotCQlyZXR1cm4gLUVOT01FTTsKLQotCXJldCA9IGRybV9j
-bGllbnRfaW5pdChkZXYsICZmYl9oZWxwZXItPmNsaWVudCwgImZiZGV2IiwKJmRybV9mYmRldl9j
-bGllbnRfZnVuY3MpOwotCWlmIChyZXQpIHsKLQkJa2ZyZWUoZmJfaGVscGVyKTsKLQkJRFJNX0RF
-Vl9FUlJPUihkZXYtPmRldiwgIkZhaWxlZCB0byByZWdpc3RlciBjbGllbnQ6ICVkXG4iLCByZXQp
-OwotCQlyZXR1cm4gcmV0OwotCX0KLQotCWlmICghcHJlZmVycmVkX2JwcCkKLQkJcHJlZmVycmVk
-X2JwcCA9IGRldi0+bW9kZV9jb25maWcucHJlZmVycmVkX2RlcHRoOwotCWlmICghcHJlZmVycmVk
-X2JwcCkKLQkJcHJlZmVycmVkX2JwcCA9IDMyOwotCWZiX2hlbHBlci0+cHJlZmVycmVkX2JwcCA9
-IHByZWZlcnJlZF9icHA7Ci0KLQlyZXQgPSBkcm1fZmJkZXZfY2xpZW50X2hvdHBsdWcoJmZiX2hl
-bHBlci0+Y2xpZW50KTsKLQlpZiAocmV0KQotCQlEUk1fREVWX0RFQlVHKGRldi0+ZGV2LCAiY2xp
-ZW50IGhvdHBsdWcgcmV0PSVkXG4iLCByZXQpOwotCi0JZHJtX2NsaWVudF9yZWdpc3RlcigmZmJf
-aGVscGVyLT5jbGllbnQpOwotCi0JcmV0dXJuIDA7CitpbnQgZHJtX2ZiZGV2X2dlbmVyaWNfc2hh
-ZG93X3NldHVwKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHVuc2lnbmVkIGludApwcmVmZXJyZWRf
-YnBwKQoreworCXJldHVybiBfZHJtX2ZiZGV2X2dlbmVyaWNfc2V0dXAoZGV2LCBwcmVmZXJyZWRf
-YnBwLCB0cnVlKTsKIH0KIEVYUE9SVF9TWU1CT0woZHJtX2ZiZGV2X2dlbmVyaWNfc2V0dXApOwoK
-ZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9mYl9oZWxwZXIuaCBiL2luY2x1ZGUvZHJtL2Ry
-bV9mYl9oZWxwZXIuaAppbmRleCBjOGE4YWUyYTY3OGEuLjM5ZjA2M2RlOGNiYyAxMDA2NDQKLS0t
-IGEvaW5jbHVkZS9kcm0vZHJtX2ZiX2hlbHBlci5oCisrKyBiL2luY2x1ZGUvZHJtL2RybV9mYl9o
-ZWxwZXIuaApAQCAtMTg2LDYgKzE4Niw4IEBAIHN0cnVjdCBkcm1fZmJfaGVscGVyIHsKIAkgKiBT
-ZWUgYWxzbzogQGRlZmVycmVkX3NldHVwCiAJICovCiAJaW50IHByZWZlcnJlZF9icHA7CisKKwli
-b29sIHVzZV9zaGFkb3c7CiB9OwoKIHN0YXRpYyBpbmxpbmUgc3RydWN0IGRybV9mYl9oZWxwZXIg
-KgoKCj4gCj4gSSdtIG5vdCBzdXJlIGlmIHdlIHNob3VsZCBjaGVjayBmb3IgdGhlIGRpcnR5KCkg
-Y2FsbGJhY2sgYXQgYWxsLgo+IAoKSG0sIHdoeSBkbyB5b3UgdGhpbmsgdGhhdD8KClRoZSB0aGlu
-ZyB3aXRoIGZiZGV2IGRlZmlvIGlzIHRoYXQgaXQgb25seSBzdXBwb3J0cyBrbWFsbG9jIGFuZCB2
-bWFsbG9jCmFsbG9jYXRlZCBtZW1vcnkgKHBhZ2UtPmxydSBpcyBhdmFpbC4pLiBUaGlzIG1lYW5z
-IHRoYXQgb25seSB0aGUgQ01BCmRyaXZlcnMgY2FuIHVzZSBkZWZpbyB3aXRob3V0IHNoYWRvdyBt
-ZW1vcnkuIFRvIGtlZXAgdGhpbmdzIHNpbXBsZQpldmVyeW9uZSB3aXRoIGEgZGlydHkoKSBjYWxs
-YmFjayBnZXRzIGEgc2hhZG93IGJ1ZmZlci4KCk5vcmFsZi4KCj4gQmVzdCByZWdhcmRzCj4gVGhv
-bWFzCj4gCj4+IFJlYWxseSBuaWNlIGRpZmZzdGF0IGJ5IHRoZSB3YXkgOi0pCj4+Cj4+IE5vcmFs
-Zi4KPj4KPj4+IFsxXSBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9hcmNoaXZlcy9kcmkt
-ZGV2ZWwvMjAxOS1KdW5lLzIyNDQyMy5odG1sCj4+Pgo+Pj4gVGhvbWFzIFppbW1lcm1hbm4gKDUp
-Ogo+Pj4gICBkcm0vY2xpZW50OiBTdXBwb3J0IHVubWFwcGluZyBvZiBEUk0gY2xpZW50IGJ1ZmZl
-cnMKPj4+ICAgZHJtL2ZiLWhlbHBlcjogVW5tYXAgQk8gZm9yIHNoYWRvdy1idWZmZXJlZCBmcmFt
-ZWJ1ZmZlciBjb25zb2xlCj4+PiAgIGRybS9hc3Q6IFJlcGxhY2Ugc3RydWN0IGFzdF9mYmRldiB3
-aXRoIGdlbmVyaWMgZnJhbWVidWZmZXIgZW11bGF0aW9uCj4+PiAgIGRybS9ib2NoczogVXNlIHNo
-YWRvdyBidWZmZXIgZm9yIGJvY2hzIGZyYW1lYnVmZmVyIGNvbnNvbGUKPj4+ICAgZHJtL21nYWcy
-MDA6IFJlcGxhY2Ugc3RydWN0IG1nYV9mYmRldiB3aXRoIGdlbmVyaWMgZnJhbWVidWZmZXIKPj4+
-ICAgICBlbXVsYXRpb24KPj4+Cj4+PiAgZHJpdmVycy9ncHUvZHJtL2FzdC9NYWtlZmlsZSAgICAg
-ICAgICAgfCAgIDIgKy0KPj4+ICBkcml2ZXJzL2dwdS9kcm0vYXN0L2FzdF9kcnYuYyAgICAgICAg
-ICB8ICAyMiArLQo+Pj4gIGRyaXZlcnMvZ3B1L2RybS9hc3QvYXN0X2Rydi5oICAgICAgICAgIHwg
-IDE3IC0tCj4+PiAgZHJpdmVycy9ncHUvZHJtL2FzdC9hc3RfZmIuYyAgICAgICAgICAgfCAzNDEg
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+Pj4gIGRyaXZlcnMvZ3B1L2RybS9hc3QvYXN0X21h
-aW4uYyAgICAgICAgIHwgIDMwICsrLQo+Pj4gIGRyaXZlcnMvZ3B1L2RybS9hc3QvYXN0X21vZGUu
-YyAgICAgICAgIHwgIDIxIC0tCj4+PiAgZHJpdmVycy9ncHUvZHJtL2JvY2hzL2JvY2hzX2ttcy5j
-ICAgICAgfCAgIDIgKy0KPj4+ICBkcml2ZXJzL2dwdS9kcm0vZHJtX2NsaWVudC5jICAgICAgICAg
-ICB8ICA3MSArKysrLQo+Pj4gIGRyaXZlcnMvZ3B1L2RybS9kcm1fZmJfaGVscGVyLmMgICAgICAg
-IHwgIDE0ICstCj4+PiAgZHJpdmVycy9ncHUvZHJtL21nYWcyMDAvTWFrZWZpbGUgICAgICAgfCAg
-IDIgKy0KPj4+ICBkcml2ZXJzL2dwdS9kcm0vbWdhZzIwMC9tZ2FnMjAwX2Rydi5oICB8ICAxOSAt
-LQo+Pj4gIGRyaXZlcnMvZ3B1L2RybS9tZ2FnMjAwL21nYWcyMDBfZmIuYyAgIHwgMzA5IC0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0KPj4+ICBkcml2ZXJzL2dwdS9kcm0vbWdhZzIwMC9tZ2FnMjAwX21h
-aW4uYyB8ICA2MSArKystLQo+Pj4gIGRyaXZlcnMvZ3B1L2RybS9tZ2FnMjAwL21nYWcyMDBfbW9k
-ZS5jIHwgIDI3IC0tCj4+PiAgaW5jbHVkZS9kcm0vZHJtX2NsaWVudC5oICAgICAgICAgICAgICAg
-fCAgIDMgKwo+Pj4gIDE1IGZpbGVzIGNoYW5nZWQsIDE1NCBpbnNlcnRpb25zKCspLCA3ODcgZGVs
-ZXRpb25zKC0pCj4+PiAgZGVsZXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9hc3QvYXN0
-X2ZiLmMKPj4+ICBkZWxldGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL21nYWcyMDAvbWdh
-ZzIwMF9mYi5jCj4+Pgo+Pj4gLS0KPj4+IDIuMjEuMAo+Pj4KPj4gX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPj4gZHJpLWRldmVsIG1haWxpbmcgbGlzdAo+
-PiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4+IGh0dHBzOi8vbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vZHJpLWRldmVsCj4+Cj4gCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcg
-bGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xp
-c3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============4473498186295515183==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="2YlZXm381wi3QxEcCjh15mcEVBeNTERri"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--2YlZXm381wi3QxEcCjh15mcEVBeNTERri
+Content-Type: multipart/mixed; boundary="RwqlKBf3ad6kiFP0rwq0HbCY7flPMBW2n";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>, airlied@redhat.com,
+ daniel@ffwll.ch, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
+ maxime.ripard@bootlin.com, sean@poorly.run, sam@ravnborg.org,
+ yc_chen@aspeedtech.com
+Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Message-ID: <5f9c7df7-3805-0e23-4201-be08d41da791@suse.de>
+Subject: Re: [PATCH 0/5] Unmappable DRM client buffers for fbdev emulation
+References: <20190703083302.2609-1-tzimmermann@suse.de>
+ <a2e3baa8-f8e8-4628-e18f-cb3119194afb@tronnes.org>
+ <aa1b7431-21c5-4c99-bfb6-6c5e4946bec3@suse.de>
+ <18d573b4-3cb8-dc4a-bee3-a8b9b0a18a28@tronnes.org>
+In-Reply-To: <18d573b4-3cb8-dc4a-bee3-a8b9b0a18a28@tronnes.org>
+
+--RwqlKBf3ad6kiFP0rwq0HbCY7flPMBW2n
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+Am 04.07.19 um 12:18 schrieb Noralf Tr=C3=B8nnes:
+>=20
+>=20
+> Den 04.07.2019 09.43, skrev Thomas Zimmermann:
+>> Hi
+>>
+>> Am 03.07.19 um 21:27 schrieb Noralf Tr=C3=B8nnes:
+>>>
+>>>
+>>> Den 03.07.2019 10.32, skrev Thomas Zimmermann:
+>>>> DRM client buffers are permanently mapped throughout their lifetime.=
+ This
+>>>> prevents us from using generic framebuffer emulation for devices wit=
+h
+>>>> small dedicated video memory, such as ast or mgag200. With fb buffer=
+s
+>>>> permanently mapped, such devices often won't have enougth space left=
+ to
+>>>> display other content (e.g., X11).
+>>>>
+>>>> This patch set introduces unmappable DRM client buffers for framebuf=
+fer
+>>>> emulation with shadow buffers. While the shadow buffer remains in sy=
+stem
+>>>> memory permanently, the respective buffer object will only be mapped=
+ briefly
+>>>> during updates from the shadow buffer. Hence, the driver can relocat=
+e he
+>>>> buffer object among memory regions as needed.
+>>>>
+>>>> The default behoviour for DRM client buffers is still to be permanen=
+tly
+>>>> mapped.
+>>>>
+>>>> The patch set converts ast and mgag200 to generic framebuffer emulat=
+ion
+>>>> and removes a large amount of framebuffer code from these drivers. F=
+or
+>>>> bochs, a problem was reported where the driver could not display the=
+ console
+>>>> because it was pinned in system memory. [1] The patch set fixes this=
+ bug
+>>>> by converting bochs to use the shadow fb.
+>>>>
+>>>> The patch set has been tested on ast and mga200 HW.
+>>>>
+>>>
+>>> I've been thinking, this enables dirty tracking in DRM userspace for
+>>> these drivers since the dirty callback is now set on all framebuffers=
+=2E
+>>> Is this OK? Should we add a drm_fbdev_generic_shadow_setup() that set=
+s a
+>>> flag enabling the shadow buffer instead?
+>>
+>> Fbdev emulation is special wrt framebuffer setup and there's no way to=
+
+>> distinguish a regular FB from the fbdev's FB. I've been trying
+>> drm_fbdev_generic_shadow_setup(), but ended up duplicating
+>> functionality. The problem was that we cannot get state-flag arguments=
+
+>> into drm_fb_helper_generic_probe().
+>>
+>> There already is struct mode_config.prefer_shadow. It signals shadow F=
+B
+>> rendering to userspace. The easiest solution is to add
+>> prefer_shadow_fbdev as well. If either flag is true, fbdev emulation
+>> would enable shadow buffering.
+>=20
+> How about something like this:
+
+I had something like that in mind, but maybe without a separate
+function. I'll post my variant as part of the patch set's next iteration.=
+
+
+> diff --git a/drivers/gpu/drm/drm_fb_helper.c
+> b/drivers/gpu/drm/drm_fb_helper.c
+> index 1984e5c54d58..723fe56aa5f5 100644
+> --- a/drivers/gpu/drm/drm_fb_helper.c
+> +++ b/drivers/gpu/drm/drm_fb_helper.c
+> @@ -415,7 +415,8 @@ static void drm_fb_helper_dirty_work(struct
+> work_struct *work)
+>  		/* Generic fbdev uses a shadow buffer */
+>  		if (helper->buffer)
+>  			drm_fb_helper_dirty_blit_real(helper, &clip_copy);
+> -		helper->fb->funcs->dirty(helper->fb, NULL, 0, 0, &clip_copy, 1);
+> +		if (helper->fb->funcs->dirty)
+> +			helper->fb->funcs->dirty(helper->fb, NULL, 0, 0, &clip_copy, 1);
+>  	}
+>  }
+>=20
+> @@ -2209,7 +2210,7 @@ int drm_fb_helper_generic_probe(struct
+> drm_fb_helper *fb_helper,
+>  #endif
+>  	drm_fb_helper_fill_info(fbi, fb_helper, sizes);
+>=20
+> -	if (fb->funcs->dirty) {
+> +	if (fb->funcs->dirty || fb_helper->use_shadow) {
+>  		struct fb_ops *fbops;
+>  		void *shadow;
+>=20
+> @@ -2310,6 +2311,44 @@ static const struct drm_client_funcs
+> drm_fbdev_client_funcs =3D {
+>  	.hotplug	=3D drm_fbdev_client_hotplug,
+>  };
+>=20
+> +static int _drm_fbdev_generic_setup(struct drm_device *dev, unsigned
+> int preferred_bpp, bool use_shadow)
+> +{
+> +	struct drm_fb_helper *fb_helper;
+> +	int ret;
+> +
+> +	WARN(dev->fb_helper, "fb_helper is already set!\n");
+> +
+> +	if (!drm_fbdev_emulation)
+> +		return 0;
+> +
+> +	fb_helper =3D kzalloc(sizeof(*fb_helper), GFP_KERNEL);
+> +	if (!fb_helper)
+> +		return -ENOMEM;
+> +
+> +	ret =3D drm_client_init(dev, &fb_helper->client, "fbdev",
+> &drm_fbdev_client_funcs);
+> +	if (ret) {
+> +		kfree(fb_helper);
+> +		DRM_DEV_ERROR(dev->dev, "Failed to register client: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	if (!preferred_bpp)
+> +		preferred_bpp =3D dev->mode_config.preferred_depth;
+> +	if (!preferred_bpp)
+> +		preferred_bpp =3D 32;
+> +	fb_helper->preferred_bpp =3D preferred_bpp;
+> +
+> +	fb_helper->use_shadow =3D use_shadow;
+> +
+> +	ret =3D drm_fbdev_client_hotplug(&fb_helper->client);
+> +	if (ret)
+> +		DRM_DEV_DEBUG(dev->dev, "client hotplug ret=3D%d\n", ret);
+> +
+> +	drm_client_register(&fb_helper->client);
+> +
+> +	return 0;
+> +}
+> +
+>  /**
+>   * drm_fbdev_generic_setup() - Setup generic fbdev emulation
+>   * @dev: DRM device
+> @@ -2338,38 +2377,13 @@ static const struct drm_client_funcs
+> drm_fbdev_client_funcs =3D {
+>   */
+>  int drm_fbdev_generic_setup(struct drm_device *dev, unsigned int
+> preferred_bpp)
+>  {
+> -	struct drm_fb_helper *fb_helper;
+> -	int ret;
+> +	return _drm_fbdev_generic_setup(dev, preferred_bpp, false);
+> +}
+> +EXPORT_SYMBOL(drm_fbdev_generic_setup);
+>=20
+> -	WARN(dev->fb_helper, "fb_helper is already set!\n");
+> -
+> -	if (!drm_fbdev_emulation)
+> -		return 0;
+> -
+> -	fb_helper =3D kzalloc(sizeof(*fb_helper), GFP_KERNEL);
+> -	if (!fb_helper)
+> -		return -ENOMEM;
+> -
+> -	ret =3D drm_client_init(dev, &fb_helper->client, "fbdev",
+> &drm_fbdev_client_funcs);
+> -	if (ret) {
+> -		kfree(fb_helper);
+> -		DRM_DEV_ERROR(dev->dev, "Failed to register client: %d\n", ret);
+> -		return ret;
+> -	}
+> -
+> -	if (!preferred_bpp)
+> -		preferred_bpp =3D dev->mode_config.preferred_depth;
+> -	if (!preferred_bpp)
+> -		preferred_bpp =3D 32;
+> -	fb_helper->preferred_bpp =3D preferred_bpp;
+> -
+> -	ret =3D drm_fbdev_client_hotplug(&fb_helper->client);
+> -	if (ret)
+> -		DRM_DEV_DEBUG(dev->dev, "client hotplug ret=3D%d\n", ret);
+> -
+> -	drm_client_register(&fb_helper->client);
+> -
+> -	return 0;
+> +int drm_fbdev_generic_shadow_setup(struct drm_device *dev, unsigned in=
+t
+> preferred_bpp)
+> +{
+> +	return _drm_fbdev_generic_setup(dev, preferred_bpp, true);
+>  }
+>  EXPORT_SYMBOL(drm_fbdev_generic_setup);
+>=20
+> diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
+> index c8a8ae2a678a..39f063de8cbc 100644
+> --- a/include/drm/drm_fb_helper.h
+> +++ b/include/drm/drm_fb_helper.h
+> @@ -186,6 +186,8 @@ struct drm_fb_helper {
+>  	 * See also: @deferred_setup
+>  	 */
+>  	int preferred_bpp;
+> +
+> +	bool use_shadow;
+>  };
+>=20
+>  static inline struct drm_fb_helper *
+>=20
+>=20
+>>
+>> I'm not sure if we should check for the dirty() callback at all.
+>>
+>=20
+> Hm, why do you think that?
+
+Drivers may already come with their own shadow buffer. Cirrus is an
+example of that. It uses shmem buffer objects as shadow fbs and
+internally updates the device frame buffer in its dirty callback. Using
+dirty() to select the shadow fbdev adds another buffer (and another
+memcpy) for no reason.
+
+Best regards
+Thomas
+
+> The thing with fbdev defio is that it only supports kmalloc and vmalloc=
+
+> allocated memory (page->lru is avail.). This means that only the CMA
+> drivers can use defio without shadow memory. To keep things simple
+> everyone with a dirty() callback gets a shadow buffer.
+>=20
+> Noralf.
+>=20
+>> Best regards
+>> Thomas
+>>
+>>> Really nice diffstat by the way :-)
+>>>
+>>> Noralf.
+>>>
+>>>> [1] https://lists.freedesktop.org/archives/dri-devel/2019-June/22442=
+3.html
+>>>>
+>>>> Thomas Zimmermann (5):
+>>>>   drm/client: Support unmapping of DRM client buffers
+>>>>   drm/fb-helper: Unmap BO for shadow-buffered framebuffer console
+>>>>   drm/ast: Replace struct ast_fbdev with generic framebuffer emulati=
+on
+>>>>   drm/bochs: Use shadow buffer for bochs framebuffer console
+>>>>   drm/mgag200: Replace struct mga_fbdev with generic framebuffer
+>>>>     emulation
+>>>>
+>>>>  drivers/gpu/drm/ast/Makefile           |   2 +-
+>>>>  drivers/gpu/drm/ast/ast_drv.c          |  22 +-
+>>>>  drivers/gpu/drm/ast/ast_drv.h          |  17 --
+>>>>  drivers/gpu/drm/ast/ast_fb.c           | 341 ----------------------=
+---
+>>>>  drivers/gpu/drm/ast/ast_main.c         |  30 ++-
+>>>>  drivers/gpu/drm/ast/ast_mode.c         |  21 --
+>>>>  drivers/gpu/drm/bochs/bochs_kms.c      |   2 +-
+>>>>  drivers/gpu/drm/drm_client.c           |  71 ++++-
+>>>>  drivers/gpu/drm/drm_fb_helper.c        |  14 +-
+>>>>  drivers/gpu/drm/mgag200/Makefile       |   2 +-
+>>>>  drivers/gpu/drm/mgag200/mgag200_drv.h  |  19 --
+>>>>  drivers/gpu/drm/mgag200/mgag200_fb.c   | 309 ----------------------=
+
+>>>>  drivers/gpu/drm/mgag200/mgag200_main.c |  61 +++--
+>>>>  drivers/gpu/drm/mgag200/mgag200_mode.c |  27 --
+>>>>  include/drm/drm_client.h               |   3 +
+>>>>  15 files changed, 154 insertions(+), 787 deletions(-)
+>>>>  delete mode 100644 drivers/gpu/drm/ast/ast_fb.c
+>>>>  delete mode 100644 drivers/gpu/drm/mgag200/mgag200_fb.c
+>>>>
+>>>> --
+>>>> 2.21.0
+>>>>
+>>> _______________________________________________
+>>> dri-devel mailing list
+>>> dri-devel@lists.freedesktop.org
+>>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+>>>
+>>
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah
+HRB 21284 (AG N=C3=BCrnberg)
+
+
+--RwqlKBf3ad6kiFP0rwq0HbCY7flPMBW2n--
+
+--2YlZXm381wi3QxEcCjh15mcEVBeNTERri
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl0d3rEACgkQaA3BHVML
+eiPm+Af+OvNUALsoY8KQs6rDNvix4ePovOVG3hdYnr62xO4rv5t0JFkq4wztoOky
+Ld2WCeR/bYz8kudKoO2A1KdQRpXVYYKndk1bccLpUPSiMld1nMxD1sT8wHzd5qtv
+Bu14RLjwfIYznpN6exSoi1ZlcqQNd7GViZ/mL9OTUfgKy2/58hbIzVxSuy0DDnyL
+PZJmpUpG8OtrwBFasgNGCjrxg+SIz021sDq+LJbFCg3+0eIW/77ZYAaybGeyfNKz
+DxmZdqaEUBr44rodrrdFcCarl17B0YEsfqVj+VSyi0wnpQ1j72vXdktD533bDlsb
+FqZCiDveYknwqqqDpRgAWB+ykHWKWA==
+=Xs81
+-----END PGP SIGNATURE-----
+
+--2YlZXm381wi3QxEcCjh15mcEVBeNTERri--
+
+--===============4473498186295515183==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============4473498186295515183==--
