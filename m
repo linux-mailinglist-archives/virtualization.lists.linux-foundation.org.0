@@ -2,63 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 622BC5FD4E
-	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 21:08:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BA0C5FD63
+	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 21:18:07 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 37FB0D91;
-	Thu,  4 Jul 2019 19:08:28 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 5C7FBDA8;
+	Thu,  4 Jul 2019 19:18:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3CFF49D
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9EF859D
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 19:08:26 +0000 (UTC)
+	Thu,  4 Jul 2019 19:18:00 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f52.google.com (mail-io1-f52.google.com
-	[209.85.166.52])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D66C287B
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4404687B
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 19:08:25 +0000 (UTC)
-Received: by mail-io1-f52.google.com with SMTP id h6so6379729iom.7
+	Thu,  4 Jul 2019 19:18:00 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id e5so10249543iok.4
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 04 Jul 2019 12:08:25 -0700 (PDT)
+	Thu, 04 Jul 2019 12:18:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9btak+fKeivJpFWumZoTjMC0trVA+9MBYmqaPWrOHn0=;
-	b=kKiKA2Bj2KAI7YLiGcXr0lnUd35Z3UyghngWdqXiuA02WwEsXazhsQZ2v/rgyYCWIH
-	QIHGE6M8JPkfdOpDTW3UzfojE/jdlxwLksTRbmJMTtStjpQz8CGWJu/qF7ygua0YZEgx
-	MZAT43VECo5VkmOouhrKOC82DAu+xzsJ9+fYC364Z+Ux3E64M4LkH+0oB4H2QVUGDLuc
-	RT5MGIzK7yMVUmB8K99/ot6LYVjDmM2Mz+qfqYj+PU7GDG5x0Y3gx9YQJiemTx42YtI4
-	MZpCNrpKfIjAWtnU5SUwmQ7+d79p6bmIychFN/kp1I0+ymcIhPYGJS4UOPL1qIcZDu6a
-	K6Rg==
+	:cc; bh=LCuBLDKrofsuoqhEiEo5+1hJatvhFnFN7oOLzAEnyM4=;
+	b=bhvxBO8QMlxGiuh/BsyudtWPQFUjQ5R9CUOpdTYaaqZyQ8vlvu/++aMUwi7JPKLthb
+	TUMk35QeF5dolWl0Sim+RKa834/lE/WsTIuTlbDF0ehQm3t97BMJEahLPFrS4EXBmrvQ
+	hGtjekw2DVmTrMgyT5cq43Ydrv1tI2BXhhH3cd0rbshvREhTgk+eN0E0HZlra+7rkBII
+	JQEe1bSGSfbPaEhX75Miqqh4xtrQ3u9LzWU9zuiHUi3vu+v8zyPfDbrkdvRsfhQjXdI5
+	jVqTZNVX15sFR7jJRcTntloFNUV9B9Y1sW8SJF4UfOj7XMQDbr6QIZ47Tbbb+X1jaXSp
+	4BDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=9btak+fKeivJpFWumZoTjMC0trVA+9MBYmqaPWrOHn0=;
-	b=K4AupOMpgiq8zKkK6LrbqZbGSdxUV77tNXXzPN8jUcMp3VUROZBfKXDedlmNn7sw7P
-	dq4HNnJmJ3rdwHJN2gk6Qeo31y+V9QNZKfszodPcUTe5gAE+mZoA88F97CwRg8HgwADp
-	VJZZl99jg9dDra7Xk7yAulpu/YSMrTkbH4FF605tn4UDyRCGysAk5VHravpOKHXCOTiS
-	1LVk++Rp8RCQMYIymQi95gYTHEXeG2Y1mnCj+PLxp55S3ZeT7A59Z5AYNatBHAfx+EFp
-	Vz7gqcKcGs8ubu1PJdGKElSMxzaqNyUHLjM8DELSp/nf3zl8uXalZmjWMY3A9JyBqGOW
-	SWdA==
-X-Gm-Message-State: APjAAAU1ozvBwBHkap9jNnJidJK5cgkFmLwHqIzzppyylvnzxXGAiyh0
-	y8Obw8J5g8647Xv5Mjkuzl7xARnTMOXgsySAjtY=
-X-Google-Smtp-Source: APXvYqwVyWfwlxBxJohecI/H5oxgmdJ1n8iHxHi16NUSGnX6AI3z95oR6ILRv45iTfcdHoNfZuLXFs+sMg1SjT1yH1E=
-X-Received: by 2002:a6b:6012:: with SMTP id r18mr5922135iog.241.1562267305070; 
-	Thu, 04 Jul 2019 12:08:25 -0700 (PDT)
+	bh=LCuBLDKrofsuoqhEiEo5+1hJatvhFnFN7oOLzAEnyM4=;
+	b=nWkT4Z6siiJb2deyLkCKGSUrejOyiy+roRaiiySIkdbgqWIxp/h8MXh78Lmq6kg2QK
+	bFe6/s9B679WjnqvSZW+DstEHHggDPhynsL9LUttLUnutoFCw1LVr7JQh38B/HOi0H5K
+	6ZzsUR3ZTSShkma7gCuj75tsmxga0I9gFxM0LEMEmQCk49x7Mr1O60SA+O+NF1E3Gf3V
+	hhqKiz2RgcPG61wbKJro2PJEFFyHlBYp/ytidxcXPqxEN1OJR1Du4c3EQtozgbzl8QEO
+	qoSZ2fn7B8ad6kk0HgA6jqJJcAcKH5niMWIHEWowmODeCUYMbOB/dsIp59lD1pN5TfHB
+	Fdsw==
+X-Gm-Message-State: APjAAAWCJJw62pX1o+BPzgNnOIknvu0iLCbv0sPD23XIgNhy3EQWE8v2
+	PqYmMW9PtUBDNxcd8s0vDVE+mJzvUNjEZZjbKOU=
+X-Google-Smtp-Source: APXvYqwsruAsuCOPhI8PglL1hWlvCc+IVuPwdgdoadncDMpAGwAlFk4w01GWSPGzZlwU1IUEHNzB3abapsoIEw3vMZY=
+X-Received: by 2002:a6b:6012:: with SMTP id r18mr5966278iog.241.1562267879466; 
+	Thu, 04 Jul 2019 12:17:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190702141903.1131-1-kraxel@redhat.com>
-	<20190702141903.1131-16-kraxel@redhat.com>
-	<CAPaKu7S0n=E7g0o2e6fEk1YjP+u=tsoV8upw7J=noSx88PgP+A@mail.gmail.com>
-	<20190704115138.ou77sb3rlrex67tj@sirius.home.kraxel.org>
-In-Reply-To: <20190704115138.ou77sb3rlrex67tj@sirius.home.kraxel.org>
+	<20190702141903.1131-7-kraxel@redhat.com>
+	<CAPaKu7RfLoB=K__wQd92=S20Mt0uqsfyU9oigr8CQ-=gH6OUuA@mail.gmail.com>
+	<20190704111043.5ubc2yjrjphj2iec@sirius.home.kraxel.org>
+In-Reply-To: <20190704111043.5ubc2yjrjphj2iec@sirius.home.kraxel.org>
 From: Chia-I Wu <olvaffe@gmail.com>
-Date: Thu, 4 Jul 2019 12:08:14 -0700
-Message-ID: <CAPaKu7SDwR1TgFQK2XGEbRqSkCO0XZYxGhcjzsAwOH42aOHEEw@mail.gmail.com>
-Subject: Re: [PATCH v6 15/18] drm/virtio: rework
-	virtio_gpu_transfer_to_host_ioctl fencing
+Date: Thu, 4 Jul 2019 12:17:48 -0700
+Message-ID: <CAPaKu7S4Og7kda2ZjFtuRv=_W8gpFbD5y7s==0JB5Z34S4Hsjw@mail.gmail.com>
+Subject: Re: [PATCH v6 06/18] drm/virtio: remove ttm calls from in
+	virtio_gpu_object_{reserve, unreserve}
 To: Gerd Hoffmann <kraxel@redhat.com>
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
@@ -86,37 +86,27 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Jul 4, 2019 at 4:51 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+On Thu, Jul 4, 2019 at 4:10 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
 >
 >   Hi,
 >
-> > >         convert_to_hw_box(&box, &args->box);
-> > >         if (!vgdev->has_virgl_3d) {
-> > >                 virtio_gpu_cmd_transfer_to_host_2d
-> > > -                       (vgdev, qobj, offset,
-> > > +                       (vgdev, gem_to_virtio_gpu_obj(objs->objs[0]), offset,
-> > >                          box.w, box.h, box.x, box.y, NULL);
-> > > +               virtio_gpu_array_put_free(objs);
-> > Don't we need this in non-3D case as well?
+> > > -       r = ttm_bo_reserve(&bo->tbo, true, false, NULL);
+> > > +       r = reservation_object_lock_interruptible(bo->gem_base.resv, NULL);
+> > Can you elaborate a bit about how TTM keeps the BOs alive in, for
+> > example, virtio_gpu_transfer_from_host_ioctl?  In that function, only
+> > three TTM functions are called: ttm_bo_reserve, ttm_bo_validate, and
+> > ttm_bo_unreserve.  I am curious how they keep the BO alive.
 >
-> No, ...
->
-> > >                 virtio_gpu_cmd_transfer_to_host_3d
-> > > -                       (vgdev, qobj,
-> > > +                       (vgdev,
-> > >                          vfpriv ? vfpriv->ctx_id : 0, offset,
-> > > -                        args->level, &box, fence);
-> > > -               reservation_object_add_excl_fence(qobj->base.base.resv,
-> > > -                                                 &fence->f);
-> > > +                        args->level, &box, objs, fence);
->
-> ... 3d case passes the objs list to virtio_gpu_cmd_transfer_to_host_3d,
-> so it gets added to the vbuf and released when the command is finished.
-Why doesn't this apply to virtio_gpu_cmd_transfer_to_host_2d?
+> It can't go away between reserve and unreserve, and I think it also
+> can't be evicted then.  Havn't checked how ttm implements that.
+Hm, but the vbuf using the BO outlives the reserve/unreserve section.
+The NO_EVICT flag applies only when the BO is still alive.  Someone
+needs to hold a reference to the BO to keep it alive, otherwise the BO
+can go away before the vbuf is retired.
 
-When object array was introduced, it was said that the object array
-was to keep the objects alive until the vbuf using the objects is
-retired..  That sounded applicable to any vbuf that uses objects.
+I can be wrong, but on the other hand, it seems fine for a BO to go
+away before the vbuf using it is retired.  When that happens, the
+driver emits a RESOURCE_UNREF vbuf which is *after* the original vbuf.
 
 
 >
