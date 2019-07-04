@@ -2,72 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 714755F400
-	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 09:43:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13F545F568
+	for <lists.virtualization@lfdr.de>; Thu,  4 Jul 2019 11:20:57 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 37790DB2;
-	Thu,  4 Jul 2019 07:43:13 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 344021014;
+	Thu,  4 Jul 2019 09:20:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8CBA1AD0
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7A3041009
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 07:43:11 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B005C87D
+	Thu,  4 Jul 2019 09:20:50 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1FCC087E
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  4 Jul 2019 07:43:10 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id EE39BADDC;
-	Thu,  4 Jul 2019 07:43:08 +0000 (UTC)
-Subject: Re: [PATCH 0/5] Unmappable DRM client buffers for fbdev emulation
-To: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>, airlied@redhat.com, 
-	daniel@ffwll.ch, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
-	maxime.ripard@bootlin.com, sean@poorly.run, sam@ravnborg.org,
-	yc_chen@aspeedtech.com
-References: <20190703083302.2609-1-tzimmermann@suse.de>
-	<a2e3baa8-f8e8-4628-e18f-cb3119194afb@tronnes.org>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Openpgp: preference=signencrypt
-Autocrypt: addr=tzimmermann@suse.de; keydata=
-	xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
-	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
-	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
-	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
-	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
-	AAHNKFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmNvbT7CwJQEEwEIAD4W
-	IQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznTtgIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgID
-	AQIeAQIXgAAKCRBoDcEdUwt6I7D7CACBK42XW+7mCiK8ioXMEy1NzGbXC51RzGea8N83oEJS
-	1KVUtQxrkDxgrW/WLSl/TfqHFsJpdEFOv1XubWbleun3uKPy0e5vZCd5UjZPkeNjnqfCYTDy
-	hVVsdOuFbtWDppJyJrThLqr9AgSFmoCNNUt1SVpYEEOLNE6C32BhlnSq21VLC+YXTgO/ZHTa
-	YXkq54hHj63jwrcjkBSCkXLh37kHeqnl++GHpN+3R+o3w2OpwHAlvVjdKPT27v1tVkiydsFG
-	65Vd0n3m/ft+IOrGgxQM1C20uqKvsZGB4r3OGR50ekAybO7sjEJJ1Obl4ge/6RRqcvKz4LMb
-	tGs85D6tPIeFzsBNBFs50uABCADGJj+DP1fk+UWOWrf4O61HTbC4Vr9QD2K4fUUHnzg2B6zU
-	R1BPXqLGG0+lzK8kfYU/F5RjmEcClsIkAaFkg4kzKP14tvY1J5+AV3yNqcdg018HNtiyrSwI
-	E0Yz/qm1Ot2NMZ0DdvVBg22IMsiudQ1tx9CH9mtyTbIXgACvl3PW2o9CxiHPE/bohFhwZwh/
-	kXYYAE51lhinQ3oFEeQZA3w4OTvxSEspiQR8dg8qJJb+YOAc5IKk6sJmmM7JfFMWSr22satM
-	23oQ3WvJb4RV6HTRTAIEyyZS7g2DhiytgMG60t0qdABG5KXSQW+OKlZRpuWwKWaLh3if/p/u
-	69dvpanbABEBAAHCwHwEGAEIACYWIQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznS4AIbDAUJ
-	A8JnAAAKCRBoDcEdUwt6I6X3CACJ8D+TpXBCqJE5xwog08+Dp8uBpx0T9n1wE0GQisZruACW
-	NofYn8PTX9k4wmegDLwt7YQDdKxQ4+eTfZeLNQqWg6OCftH5Kx7sjWnJ09tOgniVdROzWJ7c
-	VJ/i0okazncsJ+nq48UYvRGE1Swh3A4QRIyphWX4OADOBmTFl9ZYNPnh23eaC9WrNvFr7yP7
-	iGjMlfEW8l6Lda//EC5VpXVNza0xeae0zFNst2R9pn+bLkihwDLWxOIyifGRxTqNxoS4I1aw
-	VhxPSVztPMSpIA/sOr/N/p6JrBLn+gui2K6mP7bGb8hF+szfArYqz3T1rv1VzUWAJf5Wre5U
-	iNx9uqqx
-Message-ID: <aa1b7431-21c5-4c99-bfb6-6c5e4946bec3@suse.de>
-Date: Thu, 4 Jul 2019 09:43:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.1
+	Thu,  4 Jul 2019 09:20:49 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id v14so5814764wrr.4
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 04 Jul 2019 02:20:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=f1r99RR7Q+xI/HzT6VXzcxAxrKbEaF2CKUPs7/mZplQ=;
+	b=KG6le5Bx+qNXAHghAF/uV68AdR8GWRBph9M5lpKv+Arn9RvZ2oEqnp0Y0wZzbpbvCl
+	nAlsdQ8jEourHaY7WrUHhy/vofRnIC3grJCGatgghmYhC4cCvyLMG5HXvgmRevYd57T9
+	bf3+C89MgN5JYm4grJ0zI9Ngea4h/6iBe6KBobrHkJyeaRXSIUn8k6oB3hxKQPW/6duC
+	wJ9WGgY7csUdo6cLD/anHG+lZ6vijYjeZrqU6hWqZ6/Y/t5To/kEMtAHjQUcMpbcRmgz
+	qF60KCNvqUwTTyQfx0SZfaluOYnzxRbh0A8NtJ8KDfIDa8Li9sr6hoq731Ggq6DVbeYq
+	abmw==
+X-Gm-Message-State: APjAAAUUokmg52rSTkOsfgzCQgjeGRx4MTcQ3L7nZV1TB4Hu33rbivyG
+	3Q6Jbcm4bnp+tkEj8+exYPynLw==
+X-Google-Smtp-Source: APXvYqzoACtOvMPdg2pePxgdM0+1il13ShO5vkXimvj9VVxQkaROxCTCtnUfc8x4OnP7UGJOttUN6w==
+X-Received: by 2002:adf:b64b:: with SMTP id i11mr33084792wre.205.1562232047694;
+	Thu, 04 Jul 2019 02:20:47 -0700 (PDT)
+Received: from steredhat.homenet.telecomitalia.it
+	(host21-207-dynamic.52-79-r.retail.telecomitalia.it. [79.52.207.21])
+	by smtp.gmail.com with ESMTPSA id
+	z25sm4919093wmf.38.2019.07.04.02.20.46
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 04 Jul 2019 02:20:47 -0700 (PDT)
+Date: Thu, 4 Jul 2019 11:20:44 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v2 1/3] vsock/virtio: use RCU to avoid use-after-free on
+	the_virtio_vsock
+Message-ID: <20190704092044.23gd5o2rhqarisgg@steredhat.homenet.telecomitalia.it>
+References: <20190628123659.139576-1-sgarzare@redhat.com>
+	<20190628123659.139576-2-sgarzare@redhat.com>
+	<05311244-ed23-d061-a620-7b83d83c11f5@redhat.com>
+	<20190703104135.wg34dobv64k7u4jo@steredhat>
+	<07e5bc00-ebde-4dac-d38c-f008fa230b5f@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <a2e3baa8-f8e8-4628-e18f-cb3119194afb@tronnes.org>
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+Content-Disposition: inline
+In-Reply-To: <07e5bc00-ebde-4dac-d38c-f008fa230b5f@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,182 +81,134 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6960975757685124165=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============6960975757685124165==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="hxi2okYtZStdIFvdjCHLQgyWclcyNW79y"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---hxi2okYtZStdIFvdjCHLQgyWclcyNW79y
-Content-Type: multipart/mixed; boundary="hfdGTlsffKKizT7nPpSMYbx5Ik0yiU9kz";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>, airlied@redhat.com,
- daniel@ffwll.ch, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
- maxime.ripard@bootlin.com, sean@poorly.run, sam@ravnborg.org,
- yc_chen@aspeedtech.com
-Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-Message-ID: <aa1b7431-21c5-4c99-bfb6-6c5e4946bec3@suse.de>
-Subject: Re: [PATCH 0/5] Unmappable DRM client buffers for fbdev emulation
-References: <20190703083302.2609-1-tzimmermann@suse.de>
- <a2e3baa8-f8e8-4628-e18f-cb3119194afb@tronnes.org>
-In-Reply-To: <a2e3baa8-f8e8-4628-e18f-cb3119194afb@tronnes.org>
-
---hfdGTlsffKKizT7nPpSMYbx5Ik0yiU9kz
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-Am 03.07.19 um 21:27 schrieb Noralf Tr=C3=B8nnes:
->=20
->=20
-> Den 03.07.2019 10.32, skrev Thomas Zimmermann:
->> DRM client buffers are permanently mapped throughout their lifetime. T=
-his
->> prevents us from using generic framebuffer emulation for devices with
->> small dedicated video memory, such as ast or mgag200. With fb buffers
->> permanently mapped, such devices often won't have enougth space left t=
-o
->> display other content (e.g., X11).
->>
->> This patch set introduces unmappable DRM client buffers for framebuffe=
-r
->> emulation with shadow buffers. While the shadow buffer remains in syst=
-em
->> memory permanently, the respective buffer object will only be mapped b=
-riefly
->> during updates from the shadow buffer. Hence, the driver can relocate =
-he
->> buffer object among memory regions as needed.
->>
->> The default behoviour for DRM client buffers is still to be permanentl=
-y
->> mapped.
->>
->> The patch set converts ast and mgag200 to generic framebuffer emulatio=
-n
->> and removes a large amount of framebuffer code from these drivers. For=
-
->> bochs, a problem was reported where the driver could not display the c=
-onsole
->> because it was pinned in system memory. [1] The patch set fixes this b=
-ug
->> by converting bochs to use the shadow fb.
->>
->> The patch set has been tested on ast and mga200 HW.
->>
->=20
-> I've been thinking, this enables dirty tracking in DRM userspace for
-> these drivers since the dirty callback is now set on all framebuffers.
-> Is this OK? Should we add a drm_fbdev_generic_shadow_setup() that sets =
-a
-> flag enabling the shadow buffer instead?
-
-Fbdev emulation is special wrt framebuffer setup and there's no way to
-distinguish a regular FB from the fbdev's FB. I've been trying
-drm_fbdev_generic_shadow_setup(), but ended up duplicating
-functionality. The problem was that we cannot get state-flag arguments
-into drm_fb_helper_generic_probe().
-
-There already is struct mode_config.prefer_shadow. It signals shadow FB
-rendering to userspace. The easiest solution is to add
-prefer_shadow_fbdev as well. If either flag is true, fbdev emulation
-would enable shadow buffering.
-
-I'm not sure if we should check for the dirty() callback at all.
-
-Best regards
-Thomas
-
-> Really nice diffstat by the way :-)
->=20
-> Noralf.
->=20
->> [1] https://lists.freedesktop.org/archives/dri-devel/2019-June/224423.=
-html
->>
->> Thomas Zimmermann (5):
->>   drm/client: Support unmapping of DRM client buffers
->>   drm/fb-helper: Unmap BO for shadow-buffered framebuffer console
->>   drm/ast: Replace struct ast_fbdev with generic framebuffer emulation=
-
->>   drm/bochs: Use shadow buffer for bochs framebuffer console
->>   drm/mgag200: Replace struct mga_fbdev with generic framebuffer
->>     emulation
->>
->>  drivers/gpu/drm/ast/Makefile           |   2 +-
->>  drivers/gpu/drm/ast/ast_drv.c          |  22 +-
->>  drivers/gpu/drm/ast/ast_drv.h          |  17 --
->>  drivers/gpu/drm/ast/ast_fb.c           | 341 ------------------------=
--
->>  drivers/gpu/drm/ast/ast_main.c         |  30 ++-
->>  drivers/gpu/drm/ast/ast_mode.c         |  21 --
->>  drivers/gpu/drm/bochs/bochs_kms.c      |   2 +-
->>  drivers/gpu/drm/drm_client.c           |  71 ++++-
->>  drivers/gpu/drm/drm_fb_helper.c        |  14 +-
->>  drivers/gpu/drm/mgag200/Makefile       |   2 +-
->>  drivers/gpu/drm/mgag200/mgag200_drv.h  |  19 --
->>  drivers/gpu/drm/mgag200/mgag200_fb.c   | 309 ----------------------
->>  drivers/gpu/drm/mgag200/mgag200_main.c |  61 +++--
->>  drivers/gpu/drm/mgag200/mgag200_mode.c |  27 --
->>  include/drm/drm_client.h               |   3 +
->>  15 files changed, 154 insertions(+), 787 deletions(-)
->>  delete mode 100644 drivers/gpu/drm/ast/ast_fb.c
->>  delete mode 100644 drivers/gpu/drm/mgag200/mgag200_fb.c
->>
->> --
->> 2.21.0
->>
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah
-HRB 21284 (AG N=C3=BCrnberg)
-
-
---hfdGTlsffKKizT7nPpSMYbx5Ik0yiU9kz--
-
---hxi2okYtZStdIFvdjCHLQgyWclcyNW79y
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl0drggACgkQaA3BHVML
-eiP3wQf/awo09QJefBTfUFH8v1yPLXevN1p91ORAudax8lsLso/3Qpkva5M8GlYM
-tQT2fKjH+2OeZEklujvg3sYVkZKxuGr6YFr/5+r5xjdjGxMMCOrSpCZXslr9hoxW
-tAJ9dNblfcHicIyFY5kCPn2H4aTpw8ceRJjJGke9euW6r5mKRnxHwl/gb959bWzz
-U7k2rcItYJBwYxdth9c5dSLKz/th9gPyp7pfeEG6EwY5Ljak6rdbY9yRC/Q16zEy
-/FJcZ0QM4JDMxUpOgMG/k99hHmwzNOuVCC1WkzyViD/BtlvGTSr9qkuADfIjsFrA
-XWOWZykV3F+A2frIgxqpTGquXQIwSw==
-=51m9
------END PGP SIGNATURE-----
-
---hxi2okYtZStdIFvdjCHLQgyWclcyNW79y--
-
---===============6960975757685124165==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6960975757685124165==--
+T24gVGh1LCBKdWwgMDQsIDIwMTkgYXQgMTE6NTg6MDBBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiAKPiBPbiAyMDE5LzcvMyDkuIvljYg2OjQxLCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6
+Cj4gPiBPbiBXZWQsIEp1bCAwMywgMjAxOSBhdCAwNTo1Mzo1OFBNICswODAwLCBKYXNvbiBXYW5n
+IHdyb3RlOgo+ID4gPiBPbiAyMDE5LzYvMjgg5LiL5Y2IODozNiwgU3RlZmFubyBHYXJ6YXJlbGxh
+IHdyb3RlOgo+ID4gPiA+IFNvbWUgY2FsbGJhY2tzIHVzZWQgYnkgdGhlIHVwcGVyIGxheWVycyBj
+YW4gcnVuIHdoaWxlIHdlIGFyZSBpbiB0aGUKPiA+ID4gPiAucmVtb3ZlKCkuIEEgcG90ZW50aWFs
+IHVzZS1hZnRlci1mcmVlIGNhbiBoYXBwZW4sIGJlY2F1c2Ugd2UgZnJlZQo+ID4gPiA+IHRoZV92
+aXJ0aW9fdnNvY2sgd2l0aG91dCBrbm93aW5nIGlmIHRoZSBjYWxsYmFja3MgYXJlIG92ZXIgb3Ig
+bm90Lgo+ID4gPiA+IAo+ID4gPiA+IFRvIHNvbHZlIHRoaXMgaXNzdWUgd2UgbW92ZSB0aGUgYXNz
+aWdubWVudCBvZiB0aGVfdmlydGlvX3Zzb2NrIGF0IHRoZQo+ID4gPiA+IGVuZCBvZiAucHJvYmUo
+KSwgd2hlbiB3ZSBmaW5pc2hlZCBhbGwgdGhlIGluaXRpYWxpemF0aW9uLCBhbmQgYXQgdGhlCj4g
+PiA+ID4gYmVnaW5uaW5nIG9mIC5yZW1vdmUoKSwgYmVmb3JlIHRvIHJlbGVhc2UgcmVzb3VyY2Vz
+Lgo+ID4gPiA+IEZvciB0aGUgc2FtZSByZWFzb24sIHdlIGRvIHRoZSBzYW1lIGFsc28gZm9yIHRo
+ZSB2ZGV2LT5wcml2Lgo+ID4gPiA+IAo+ID4gPiA+IFdlIHVzZSBSQ1UgdG8gYmUgc3VyZSB0aGF0
+IGFsbCBjYWxsYmFja3MgdGhhdCB1c2UgdGhlX3ZpcnRpb192c29jawo+ID4gPiA+IGVuZGVkIGJl
+Zm9yZSBmcmVlaW5nIGl0LiBUaGlzIGlzIG5vdCByZXF1aXJlZCBmb3IgY2FsbGJhY2tzIHRoYXQK
+PiA+ID4gPiB1c2UgdmRldi0+cHJpdiwgYmVjYXVzZSBhZnRlciB0aGUgdmRldi0+Y29uZmlnLT5k
+ZWxfdnFzKCkgd2UgYXJlIHN1cmUKPiA+ID4gPiB0aGF0IHRoZXkgYXJlIGVuZGVkIGFuZCB3aWxs
+IG5vIGxvbmdlciBiZSBpbnZva2VkLgo+ID4gPiA+IAo+ID4gPiA+IFdlIGFsc28gdGFrZSB0aGUg
+bXV0ZXggZHVyaW5nIHRoZSAucmVtb3ZlKCkgdG8gYXZvaWQgdGhhdCAucHJvYmUoKSBjYW4KPiA+
+ID4gPiBydW4gd2hpbGUgd2UgYXJlIHJlc2V0dGluZyB0aGUgZGV2aWNlLgo+ID4gPiA+IAo+ID4g
+PiA+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gR2FyemFyZWxsYSA8c2dhcnphcmVAcmVkaGF0LmNv
+bT4KPiA+ID4gPiAtLS0KPiA+ID4gPiAgICBuZXQvdm13X3Zzb2NrL3ZpcnRpb190cmFuc3BvcnQu
+YyB8IDY3ICsrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tCj4gPiA+ID4gICAgMSBmaWxl
+IGNoYW5nZWQsIDQ0IGluc2VydGlvbnMoKyksIDIzIGRlbGV0aW9ucygtKQo+ID4gPiA+IAo+ID4g
+PiA+IGRpZmYgLS1naXQgYS9uZXQvdm13X3Zzb2NrL3ZpcnRpb190cmFuc3BvcnQuYyBiL25ldC92
+bXdfdnNvY2svdmlydGlvX3RyYW5zcG9ydC5jCj4gPiA+ID4gaW5kZXggOWMyODdlM2UzOTNjLi43
+YWQ1MTBlYzEyZTAgMTAwNjQ0Cj4gPiA+ID4gLS0tIGEvbmV0L3Ztd192c29jay92aXJ0aW9fdHJh
+bnNwb3J0LmMKPiA+ID4gPiArKysgYi9uZXQvdm13X3Zzb2NrL3ZpcnRpb190cmFuc3BvcnQuYwo+
+ID4gPiA+IEBAIC02NSwxOSArNjUsMjIgQEAgc3RydWN0IHZpcnRpb192c29jayB7Cj4gPiA+ID4g
+ICAgCXUzMiBndWVzdF9jaWQ7Cj4gPiA+ID4gICAgfTsKPiA+ID4gPiAtc3RhdGljIHN0cnVjdCB2
+aXJ0aW9fdnNvY2sgKnZpcnRpb192c29ja19nZXQodm9pZCkKPiA+ID4gPiAtewo+ID4gPiA+IC0J
+cmV0dXJuIHRoZV92aXJ0aW9fdnNvY2s7Cj4gPiA+ID4gLX0KPiA+ID4gPiAtCj4gPiA+ID4gICAg
+c3RhdGljIHUzMiB2aXJ0aW9fdHJhbnNwb3J0X2dldF9sb2NhbF9jaWQodm9pZCkKPiA+ID4gPiAg
+ICB7Cj4gPiA+ID4gLQlzdHJ1Y3QgdmlydGlvX3Zzb2NrICp2c29jayA9IHZpcnRpb192c29ja19n
+ZXQoKTsKPiA+ID4gPiArCXN0cnVjdCB2aXJ0aW9fdnNvY2sgKnZzb2NrOwo+ID4gPiA+ICsJdTMy
+IHJldDsKPiA+ID4gPiAtCWlmICghdnNvY2spCj4gPiA+ID4gLQkJcmV0dXJuIFZNQUREUl9DSURf
+QU5ZOwo+ID4gPiA+ICsJcmN1X3JlYWRfbG9jaygpOwo+ID4gPiA+ICsJdnNvY2sgPSByY3VfZGVy
+ZWZlcmVuY2UodGhlX3ZpcnRpb192c29jayk7Cj4gPiA+ID4gKwlpZiAoIXZzb2NrKSB7Cj4gPiA+
+ID4gKwkJcmV0ID0gVk1BRERSX0NJRF9BTlk7Cj4gPiA+ID4gKwkJZ290byBvdXRfcmN1Owo+ID4g
+PiA+ICsJfQo+ID4gPiA+IC0JcmV0dXJuIHZzb2NrLT5ndWVzdF9jaWQ7Cj4gPiA+ID4gKwlyZXQg
+PSB2c29jay0+Z3Vlc3RfY2lkOwo+ID4gPiA+ICtvdXRfcmN1Ogo+ID4gPiA+ICsJcmN1X3JlYWRf
+dW5sb2NrKCk7Cj4gPiA+ID4gKwlyZXR1cm4gcmV0Owo+ID4gPiA+ICAgIH0KPiA+ID4gPiAgICBz
+dGF0aWMgdm9pZCB2aXJ0aW9fdHJhbnNwb3J0X2xvb3BiYWNrX3dvcmsoc3RydWN0IHdvcmtfc3Ry
+dWN0ICp3b3JrKQo+ID4gPiA+IEBAIC0xOTcsMTQgKzIwMCwxOCBAQCB2aXJ0aW9fdHJhbnNwb3J0
+X3NlbmRfcGt0KHN0cnVjdCB2aXJ0aW9fdnNvY2tfcGt0ICpwa3QpCj4gPiA+ID4gICAgCXN0cnVj
+dCB2aXJ0aW9fdnNvY2sgKnZzb2NrOwo+ID4gPiA+ICAgIAlpbnQgbGVuID0gcGt0LT5sZW47Cj4g
+PiA+ID4gLQl2c29jayA9IHZpcnRpb192c29ja19nZXQoKTsKPiA+ID4gPiArCXJjdV9yZWFkX2xv
+Y2soKTsKPiA+ID4gPiArCXZzb2NrID0gcmN1X2RlcmVmZXJlbmNlKHRoZV92aXJ0aW9fdnNvY2sp
+Owo+ID4gPiA+ICAgIAlpZiAoIXZzb2NrKSB7Cj4gPiA+ID4gICAgCQl2aXJ0aW9fdHJhbnNwb3J0
+X2ZyZWVfcGt0KHBrdCk7Cj4gPiA+ID4gLQkJcmV0dXJuIC1FTk9ERVY7Cj4gPiA+ID4gKwkJbGVu
+ID0gLUVOT0RFVjsKPiA+ID4gPiArCQlnb3RvIG91dF9yY3U7Cj4gPiA+ID4gICAgCX0KPiA+ID4g
+PiAtCWlmIChsZTY0X3RvX2NwdShwa3QtPmhkci5kc3RfY2lkKSA9PSB2c29jay0+Z3Vlc3RfY2lk
+KQo+ID4gPiA+IC0JCXJldHVybiB2aXJ0aW9fdHJhbnNwb3J0X3NlbmRfcGt0X2xvb3BiYWNrKHZz
+b2NrLCBwa3QpOwo+ID4gPiA+ICsJaWYgKGxlNjRfdG9fY3B1KHBrdC0+aGRyLmRzdF9jaWQpID09
+IHZzb2NrLT5ndWVzdF9jaWQpIHsKPiA+ID4gPiArCQlsZW4gPSB2aXJ0aW9fdHJhbnNwb3J0X3Nl
+bmRfcGt0X2xvb3BiYWNrKHZzb2NrLCBwa3QpOwo+ID4gPiA+ICsJCWdvdG8gb3V0X3JjdTsKPiA+
+ID4gPiArCX0KPiA+ID4gPiAgICAJaWYgKHBrdC0+cmVwbHkpCj4gPiA+ID4gICAgCQlhdG9taWNf
+aW5jKCZ2c29jay0+cXVldWVkX3JlcGxpZXMpOwo+ID4gPiA+IEBAIC0yMTQsNiArMjIxLDkgQEAg
+dmlydGlvX3RyYW5zcG9ydF9zZW5kX3BrdChzdHJ1Y3QgdmlydGlvX3Zzb2NrX3BrdCAqcGt0KQo+
+ID4gPiA+ICAgIAlzcGluX3VubG9ja19iaCgmdnNvY2stPnNlbmRfcGt0X2xpc3RfbG9jayk7Cj4g
+PiA+ID4gICAgCXF1ZXVlX3dvcmsodmlydGlvX3Zzb2NrX3dvcmtxdWV1ZSwgJnZzb2NrLT5zZW5k
+X3BrdF93b3JrKTsKPiA+ID4gPiArCj4gPiA+ID4gK291dF9yY3U6Cj4gPiA+ID4gKwlyY3VfcmVh
+ZF91bmxvY2soKTsKPiA+ID4gPiAgICAJcmV0dXJuIGxlbjsKPiA+ID4gPiAgICB9Cj4gPiA+ID4g
+QEAgLTIyMiwxMiArMjMyLDE0IEBAIHZpcnRpb190cmFuc3BvcnRfY2FuY2VsX3BrdChzdHJ1Y3Qg
+dnNvY2tfc29jayAqdnNrKQo+ID4gPiA+ICAgIHsKPiA+ID4gPiAgICAJc3RydWN0IHZpcnRpb192
+c29jayAqdnNvY2s7Cj4gPiA+ID4gICAgCXN0cnVjdCB2aXJ0aW9fdnNvY2tfcGt0ICpwa3QsICpu
+Owo+ID4gPiA+IC0JaW50IGNudCA9IDA7Cj4gPiA+ID4gKwlpbnQgY250ID0gMCwgcmV0Owo+ID4g
+PiA+ICAgIAlMSVNUX0hFQUQoZnJlZW1lKTsKPiA+ID4gPiAtCXZzb2NrID0gdmlydGlvX3Zzb2Nr
+X2dldCgpOwo+ID4gPiA+ICsJcmN1X3JlYWRfbG9jaygpOwo+ID4gPiA+ICsJdnNvY2sgPSByY3Vf
+ZGVyZWZlcmVuY2UodGhlX3ZpcnRpb192c29jayk7Cj4gPiA+ID4gICAgCWlmICghdnNvY2spIHsK
+PiA+ID4gPiAtCQlyZXR1cm4gLUVOT0RFVjsKPiA+ID4gPiArCQlyZXQgPSAtRU5PREVWOwo+ID4g
+PiA+ICsJCWdvdG8gb3V0X3JjdTsKPiA+ID4gPiAgICAJfQo+ID4gPiA+ICAgIAlzcGluX2xvY2tf
+YmgoJnZzb2NrLT5zZW5kX3BrdF9saXN0X2xvY2spOwo+ID4gPiA+IEBAIC0yNTUsNyArMjY3LDEx
+IEBAIHZpcnRpb190cmFuc3BvcnRfY2FuY2VsX3BrdChzdHJ1Y3QgdnNvY2tfc29jayAqdnNrKQo+
+ID4gPiA+ICAgIAkJCXF1ZXVlX3dvcmsodmlydGlvX3Zzb2NrX3dvcmtxdWV1ZSwgJnZzb2NrLT5y
+eF93b3JrKTsKPiA+ID4gPiAgICAJfQo+ID4gPiA+IC0JcmV0dXJuIDA7Cj4gPiA+ID4gKwlyZXQg
+PSAwOwo+ID4gPiA+ICsKPiA+ID4gPiArb3V0X3JjdToKPiA+ID4gPiArCXJjdV9yZWFkX3VubG9j
+aygpOwo+ID4gPiA+ICsJcmV0dXJuIHJldDsKPiA+ID4gPiAgICB9Cj4gPiA+ID4gICAgc3RhdGlj
+IHZvaWQgdmlydGlvX3Zzb2NrX3J4X2ZpbGwoc3RydWN0IHZpcnRpb192c29jayAqdnNvY2spCj4g
+PiA+ID4gQEAgLTU5MCw4ICs2MDYsNiBAQCBzdGF0aWMgaW50IHZpcnRpb192c29ja19wcm9iZShz
+dHJ1Y3QgdmlydGlvX2RldmljZSAqdmRldikKPiA+ID4gPiAgICAJdnNvY2stPnJ4X2J1Zl9tYXhf
+bnIgPSAwOwo+ID4gPiA+ICAgIAlhdG9taWNfc2V0KCZ2c29jay0+cXVldWVkX3JlcGxpZXMsIDAp
+Owo+ID4gPiA+IC0JdmRldi0+cHJpdiA9IHZzb2NrOwo+ID4gPiA+IC0JdGhlX3ZpcnRpb192c29j
+ayA9IHZzb2NrOwo+ID4gPiA+ICAgIAltdXRleF9pbml0KCZ2c29jay0+dHhfbG9jayk7Cj4gPiA+
+ID4gICAgCW11dGV4X2luaXQoJnZzb2NrLT5yeF9sb2NrKTsKPiA+ID4gPiAgICAJbXV0ZXhfaW5p
+dCgmdnNvY2stPmV2ZW50X2xvY2spOwo+ID4gPiA+IEBAIC02MTMsNiArNjI3LDkgQEAgc3RhdGlj
+IGludCB2aXJ0aW9fdnNvY2tfcHJvYmUoc3RydWN0IHZpcnRpb19kZXZpY2UgKnZkZXYpCj4gPiA+
+ID4gICAgCXZpcnRpb192c29ja19ldmVudF9maWxsKHZzb2NrKTsKPiA+ID4gPiAgICAJbXV0ZXhf
+dW5sb2NrKCZ2c29jay0+ZXZlbnRfbG9jayk7Cj4gPiA+ID4gKwl2ZGV2LT5wcml2ID0gdnNvY2s7
+Cj4gPiA+ID4gKwlyY3VfYXNzaWduX3BvaW50ZXIodGhlX3ZpcnRpb192c29jaywgdnNvY2spOwo+
+ID4gPiAKPiA+ID4gWW91IHByb2JhYmx5IG5lZWQgdG8gdXNlIHJjdV9kZXJlZmVyZW5jZV9wcm90
+ZWN0ZWQoKSB0byBhY2Nlc3MKPiA+ID4gdGhlX3ZpcnRpb192c29jayBpbiB0aGUgZnVuY3Rpb24g
+aW4gb3JkZXIgdG8gc3Vydml2ZSBmcm9tIHNwYXJzZS4KPiA+ID4gCj4gPiBPb28sIHRoYW5rcyEK
+PiA+IAo+ID4gRG8geW91IG1lYW4gd2hlbiB3ZSBjaGVjayBpZiB0aGVfdmlydGlvX3Zzb2NrIGlz
+IG5vdCBudWxsIGF0IHRoZSBiZWdpbm5pbmcgb2YKPiA+IHZpcnRpb192c29ja19wcm9iZSgpPwo+
+IAo+IAo+IEkgbWVhbiBpbnN0ZWFkIG9mOgo+IAo+IMKgwqDCoCAvKiBPbmx5IG9uZSB2aXJ0aW8t
+dnNvY2sgZGV2aWNlIHBlciBndWVzdCBpcyBzdXBwb3J0ZWQgKi8KPiDCoMKgwqAgaWYgKHRoZV92
+aXJ0aW9fdnNvY2spIHsKPiDCoMKgwqAgwqDCoMKgIHJldCA9IC1FQlVTWTsKPiDCoMKgwqAgwqDC
+oMKgIGdvdG8gb3V0Owo+IMKgwqDCoCB9Cj4gCj4geW91IHNob3VsZCB1c2U6Cj4gCj4gaWYgKHJj
+dV9kZXJlZmVyZW5jZV9wcm90ZWN0ZWQodGhlX3ZpcnRpb192b3NjaywKPiBsb2NrX2RlcF9pc19o
+ZWxkKCZ0aGVfdmlydGlvX3Zzb2NrX211dGV4KSkKPiAKPiAuLi4KCk9rYXksIHRoYW5rcyBmb3Ig
+Y29uZmlybWluZyEgSSdsbCBzZW5kIGEgdjMgdG8gZml4IHRoaXMhCgo+IAo+IAo+ID4gCj4gPiA+
+ID4gKwo+ID4gPiA+ICAgIAltdXRleF91bmxvY2soJnRoZV92aXJ0aW9fdnNvY2tfbXV0ZXgpOwo+
+ID4gPiA+ICAgIAlyZXR1cm4gMDsKPiA+ID4gPiBAQCAtNjI3LDYgKzY0NCwxMiBAQCBzdGF0aWMg
+dm9pZCB2aXJ0aW9fdnNvY2tfcmVtb3ZlKHN0cnVjdCB2aXJ0aW9fZGV2aWNlICp2ZGV2KQo+ID4g
+PiA+ICAgIAlzdHJ1Y3QgdmlydGlvX3Zzb2NrICp2c29jayA9IHZkZXYtPnByaXY7Cj4gPiA+ID4g
+ICAgCXN0cnVjdCB2aXJ0aW9fdnNvY2tfcGt0ICpwa3Q7Cj4gPiA+ID4gKwltdXRleF9sb2NrKCZ0
+aGVfdmlydGlvX3Zzb2NrX211dGV4KTsKPiA+ID4gPiArCj4gPiA+ID4gKwl2ZGV2LT5wcml2ID0g
+TlVMTDsKPiA+ID4gPiArCXJjdV9hc3NpZ25fcG9pbnRlcih0aGVfdmlydGlvX3Zzb2NrLCBOVUxM
+KTsKPiA+ID4gCj4gPiA+IFRoaXMgaXMgc3RpbGwgc3VzcGljaW91cywgY2FuIHdlIGFjY2VzcyB0
+aGVfdmlydGlvX3Zzb2NrIHRocm91Z2ggdmRldi0+cHJpdj8KPiA+ID4gSWYgeWVzLCB3ZSBtYXkg
+c3RpbGwgZ2V0IHVzZS1hZnRlci1mcmVlIHNpbmNlIGl0IHdhcyBub3QgcHJvdGVjdGVkIGJ5IFJD
+VS4KPiA+IFdlIHdpbGwgZnJlZSB0aGUgb2JqZWN0IG9ubHkgYWZ0ZXIgY2FsbGluZyB0aGUgZGVs
+X3ZxcygpLCBzbyB3ZSBhcmUgc3VyZQo+ID4gdGhhdCB0aGUgdnFfY2FsbGJhY2tzIGVuZGVkIGFu
+ZCB3aWxsIG5vIGxvbmdlciBiZSBpbnZva2VkLgo+ID4gU28sIElJVUMgaXQgc2hvdWxkbid0IGhh
+cHBlbi4KPiAKPiAKPiBZZXMsIGJ1dCBhbnkgZGVyZWZlcmVuY2UgdGhhdCBpcyBub3QgZG9uZSBp
+biB2cV9jYWxsYmFja3Mgd2lsbCBiZSB2ZXJ5Cj4gZGFuZ2Vyb3VzIGluIHRoZSBmdXR1cmUuCgpS
+aWdodC4KCkRvIHlvdSB0aGluayBtYWtlIHNlbnNlIHRvIGNvbnRpbnVlIHdpdGggdGhpcyBzZXJp
+ZXMgaW4gb3JkZXIgdG8gZml4IHRoZQpob3QtdW5wbHVnIGlzc3VlLCB0aGVuIEknbGwgd29yayB0
+byByZWZhY3RvciB0aGUgZHJpdmVyIGNvZGUgdG8gdXNlIHRoZSByZWZjbnQKKGFzIHlvdSBzdWdn
+ZXN0ZWQgaW4gcGF0Y2ggMikgYW5kIHNpbmdsZXRvbiBmb3IgdGhlX3ZpcnRpb192c29jaz8KClRo
+YW5rcywKU3RlZmFubwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGlu
+dXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxt
+YW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
