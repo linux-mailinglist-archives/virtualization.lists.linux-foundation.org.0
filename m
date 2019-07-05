@@ -2,64 +2,58 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E4996075D
-	for <lists.virtualization@lfdr.de>; Fri,  5 Jul 2019 16:07:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 002CF6084D
+	for <lists.virtualization@lfdr.de>; Fri,  5 Jul 2019 16:50:18 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AC75A13F4;
-	Fri,  5 Jul 2019 14:07:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id DBC5D10BD;
+	Fri,  5 Jul 2019 14:50:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 51CE5127D
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2BA3BEBC
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  5 Jul 2019 14:07:50 +0000 (UTC)
+	Fri,  5 Jul 2019 14:50:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EA20688E
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7334287C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  5 Jul 2019 14:07:49 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
-	[10.5.11.11])
+	Fri,  5 Jul 2019 14:50:08 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 2FCC459451;
-	Fri,  5 Jul 2019 14:07:48 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-90.ams2.redhat.com
-	[10.36.116.90])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id D1D277DE33;
-	Fri,  5 Jul 2019 14:07:47 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id C692B16E2D; Fri,  5 Jul 2019 16:07:46 +0200 (CEST)
-Date: Fri, 5 Jul 2019 16:07:46 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Chia-I Wu <olvaffe@gmail.com>
-Subject: Re: [PATCH v6 15/18] drm/virtio: rework
-	virtio_gpu_transfer_to_host_ioctl fencing
-Message-ID: <20190705140746.czs2e5ffryx2slxf@sirius.home.kraxel.org>
-References: <20190702141903.1131-1-kraxel@redhat.com>
-	<20190702141903.1131-16-kraxel@redhat.com>
-	<CAPaKu7S0n=E7g0o2e6fEk1YjP+u=tsoV8upw7J=noSx88PgP+A@mail.gmail.com>
-	<20190704115138.ou77sb3rlrex67tj@sirius.home.kraxel.org>
-	<CAPaKu7SDwR1TgFQK2XGEbRqSkCO0XZYxGhcjzsAwOH42aOHEEw@mail.gmail.com>
-	<20190705090553.jx5zcdoxeimojq2i@sirius.home.kraxel.org>
+	by mx1.redhat.com (Postfix) with ESMTPS id 65412308213B;
+	Fri,  5 Jul 2019 14:49:57 +0000 (UTC)
+Received: from x1.home (ovpn-116-83.phx2.redhat.com [10.3.116.83])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id D63269D90A;
+	Fri,  5 Jul 2019 14:49:47 +0000 (UTC)
+Date: Fri, 5 Jul 2019 08:49:46 -0600
+From: Alex Williamson <alex.williamson@redhat.com>
+To: Tiwei Bie <tiwei.bie@intel.com>
+Subject: Re: [RFC v2] vhost: introduce mdev based hardware vhost backend
+Message-ID: <20190705084946.67b8f9f5@x1.home>
+In-Reply-To: <20190704062134.GA21116@___>
+References: <20190703091339.1847-1-tiwei.bie@intel.com>
+	<7b8279b2-aa7e-7adc-eeff-20dfaf4400d0@redhat.com>
+	<20190703115245.GA22374@___>
+	<64833f91-02cd-7143-f12e-56ab93b2418d@redhat.com>
+	<20190703130817.GA1978@___>
+	<b01b8e28-8d96-31dd-56f4-ca7793498c55@redhat.com>
+	<20190704062134.GA21116@___>
+Organization: Red Hat
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190705090553.jx5zcdoxeimojq2i@sirius.home.kraxel.org>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.39]);
-	Fri, 05 Jul 2019 14:07:49 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.42]);
+	Fri, 05 Jul 2019 14:50:07 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
-	ML dri-devel <dri-devel@lists.freedesktop.org>,
-	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Gurchetan Singh <gurchetansingh@chromium.org>
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	maxime.coquelin@redhat.com, zhihong.wang@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,32 +65,106 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-> > > ... 3d case passes the objs list to virtio_gpu_cmd_transfer_to_host_3d,
-> > > so it gets added to the vbuf and released when the command is finished.
-> > Why doesn't this apply to virtio_gpu_cmd_transfer_to_host_2d?
-> 
-> Hmm, yes, makes sense to handle both the same way.
-> 
-> With virgl=off qemu processes the commands from the guest
-> synchronously, so it'll work fine as-is.  So you can't hit
-> the theoretical race window in practice.  But depending
-> on that host-side implementation detail isn't a good idea
-> indeed.
-
-Branch with incremental fixes:
-https://git.kraxel.org/cgit/linux/log/?h=drm-virtio-kill-ttm
-
-I'll be offline three weeks now, will resume this when I'm back.
-
-cheers,
-  Gerd
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gVGh1LCA0IEp1bCAyMDE5IDE0OjIxOjM0ICswODAwClRpd2VpIEJpZSA8dGl3ZWkuYmllQGlu
+dGVsLmNvbT4gd3JvdGU6Cgo+IE9uIFRodSwgSnVsIDA0LCAyMDE5IGF0IDEyOjMxOjQ4UE0gKzA4
+MDAsIEphc29uIFdhbmcgd3JvdGU6Cj4gPiBPbiAyMDE5LzcvMyDkuIvljYg5OjA4LCBUaXdlaSBC
+aWUgd3JvdGU6ICAKPiA+ID4gT24gV2VkLCBKdWwgMDMsIDIwMTkgYXQgMDg6MTY6MjNQTSArMDgw
+MCwgSmFzb24gV2FuZyB3cm90ZTogIAo+ID4gPiA+IE9uIDIwMTkvNy8zIOS4i+WNiDc6NTIsIFRp
+d2VpIEJpZSB3cm90ZTogIAo+ID4gPiA+ID4gT24gV2VkLCBKdWwgMDMsIDIwMTkgYXQgMDY6MDk6
+NTFQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZTogIAo+ID4gPiA+ID4gPiBPbiAyMDE5LzcvMyDk
+uIvljYg1OjEzLCBUaXdlaSBCaWUgd3JvdGU6ICAKPiA+ID4gPiA+ID4gPiBEZXRhaWxzIGFib3V0
+IHRoaXMgY2FuIGJlIGZvdW5kIGhlcmU6Cj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gaHR0
+cHM6Ly9sd24ubmV0L0FydGljbGVzLzc1MDc3MC8KPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4g
+PiBXaGF0J3MgbmV3IGluIHRoaXMgdmVyc2lvbgo+ID4gPiA+ID4gPiA+ID09PT09PT09PT09PT09
+PT09PT09PT09PT09Cj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gQSBuZXcgVkZJTyBkZXZp
+Y2UgdHlwZSBpcyBpbnRyb2R1Y2VkIC0gdmZpby12aG9zdC4gVGhpcyBhZGRyZXNzZWQKPiA+ID4g
+PiA+ID4gPiBzb21lIGNvbW1lbnRzIGZyb20gaGVyZTpodHRwczovL3BhdGNod29yay5vemxhYnMu
+b3JnL2NvdmVyLzk4NDc2My8KPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiBCZWxvdyBpcyB0
+aGUgdXBkYXRlZCBkZXZpY2UgaW50ZXJmYWNlOgo+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+
+IEN1cnJlbnRseSwgdGhlcmUgYXJlIHR3byByZWdpb25zIG9mIHRoaXMgZGV2aWNlOiAxKSBDT05G
+SUdfUkVHSU9OCj4gPiA+ID4gPiA+ID4gKFZGSU9fVkhPU1RfQ09ORklHX1JFR0lPTl9JTkRFWCks
+IHdoaWNoIGNhbiBiZSB1c2VkIHRvIHNldHVwIHRoZQo+ID4gPiA+ID4gPiA+IGRldmljZTsgMikg
+Tk9USUZZX1JFR0lPTiAoVkZJT19WSE9TVF9OT1RJRllfUkVHSU9OX0lOREVYKSwgd2hpY2gKPiA+
+ID4gPiA+ID4gPiBjYW4gYmUgdXNlZCB0byBub3RpZnkgdGhlIGRldmljZS4KPiA+ID4gPiA+ID4g
+PiAKPiA+ID4gPiA+ID4gPiAxLiBDT05GSUdfUkVHSU9OCj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4g
+PiA+ID4gVGhlIHJlZ2lvbiBkZXNjcmliZWQgYnkgQ09ORklHX1JFR0lPTiBpcyB0aGUgbWFpbiBj
+b250cm9sIGludGVyZmFjZS4KPiA+ID4gPiA+ID4gPiBNZXNzYWdlcyB3aWxsIGJlIHdyaXR0ZW4g
+dG8gb3IgcmVhZCBmcm9tIHRoaXMgcmVnaW9uLgo+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+
+IFRoZSBtZXNzYWdlIHR5cGUgaXMgZGV0ZXJtaW5lZCBieSB0aGUgYHJlcXVlc3RgIGZpZWxkIGlu
+IG1lc3NhZ2UKPiA+ID4gPiA+ID4gPiBoZWFkZXIuIFRoZSBtZXNzYWdlIHNpemUgaXMgZW5jb2Rl
+ZCBpbiB0aGUgbWVzc2FnZSBoZWFkZXIgdG9vLgo+ID4gPiA+ID4gPiA+IFRoZSBtZXNzYWdlIGZv
+cm1hdCBsb29rcyBsaWtlIHRoaXM6Cj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gc3RydWN0
+IHZob3N0X3ZmaW9fb3Agewo+ID4gPiA+ID4gPiA+IAlfX3U2NCByZXF1ZXN0Owo+ID4gPiA+ID4g
+PiA+IAlfX3UzMiBmbGFnczsKPiA+ID4gPiA+ID4gPiAJLyogRmxhZyB2YWx1ZXM6ICovCj4gPiA+
+ID4gPiA+ID4gICAgICNkZWZpbmUgVkhPU1RfVkZJT19ORUVEX1JFUExZIDB4MSAvKiBXaGV0aGVy
+IG5lZWQgcmVwbHkgKi8KPiA+ID4gPiA+ID4gPiAJX191MzIgc2l6ZTsKPiA+ID4gPiA+ID4gPiAJ
+dW5pb24gewo+ID4gPiA+ID4gPiA+IAkJX191NjQgdTY0Owo+ID4gPiA+ID4gPiA+IAkJc3RydWN0
+IHZob3N0X3ZyaW5nX3N0YXRlIHN0YXRlOwo+ID4gPiA+ID4gPiA+IAkJc3RydWN0IHZob3N0X3Zy
+aW5nX2FkZHIgYWRkcjsKPiA+ID4gPiA+ID4gPiAJfSBwYXlsb2FkOwo+ID4gPiA+ID4gPiA+IH07
+Cj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gVGhlIGV4aXN0aW5nIHZob3N0LWtlcm5lbCBp
+b2N0bCBjbWRzIGFyZSByZXVzZWQgYXMgdGhlIG1lc3NhZ2UKPiA+ID4gPiA+ID4gPiByZXF1ZXN0
+cyBpbiBhYm92ZSBzdHJ1Y3R1cmUuICAKPiA+ID4gPiA+ID4gU3RpbGwgYSBjb21tZW50cyBsaWtl
+IFYxLiBXaGF0J3MgdGhlIGFkdmFudGFnZSBvZiBpbnZlbnRpbmcgYSBuZXcgcHJvdG9jb2w/ICAK
+PiA+ID4gPiA+IEknbSB0cnlpbmcgdG8gbWFrZSBpdCB3b3JrIGluIFZGSU8ncyB3YXkuLgo+ID4g
+PiA+ID4gICAKPiA+ID4gPiA+ID4gSSBiZWxpZXZlIGVpdGhlciBvZiB0aGUgZm9sbG93aW5nIHNo
+b3VsZCBiZSBiZXR0ZXI6Cj4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiAtIHVzaW5nIHZob3N0IGlv
+Y3RsLMKgIHdlIGNhbiBzdGFydCBmcm9tIFNFVF9WUklOR19LSUNLL1NFVF9WUklOR19DQUxMIGFu
+ZAo+ID4gPiA+ID4gPiBleHRlbmQgaXQgd2l0aCBlLmcgbm90aWZ5IHJlZ2lvbi4gVGhlIGFkdmFu
+dGFnZXMgaXMgdGhhdCBhbGwgZXhpc3QgdXNlcnNwYWNlCj4gPiA+ID4gPiA+IHByb2dyYW0gY291
+bGQgYmUgcmV1c2VkIHdpdGhvdXQgbW9kaWZpY2F0aW9uIChvciBtaW5pbWFsIG1vZGlmaWNhdGlv
+bikuIEFuZAo+ID4gPiA+ID4gPiB2aG9zdCBBUEkgaGlkZXMgbG90cyBvZiBkZXRhaWxzIHRoYXQg
+aXMgbm90IG5lY2Vzc2FyeSB0byBiZSB1bmRlcnN0b29kIGJ5Cj4gPiA+ID4gPiA+IGFwcGxpY2F0
+aW9uIChlLmcgaW4gdGhlIGNhc2Ugb2YgY29udGFpbmVyKS4gIAo+ID4gPiA+ID4gRG8geW91IG1l
+YW4gcmV1c2luZyB2aG9zdCdzIGlvY3RsIG9uIFZGSU8gZGV2aWNlIGZkIGRpcmVjdGx5LAo+ID4g
+PiA+ID4gb3IgaW50cm9kdWNpbmcgYW5vdGhlciBtZGV2IGRyaXZlciAoaS5lLiB2aG9zdF9tZGV2
+IGluc3RlYWQgb2YKPiA+ID4gPiA+IHVzaW5nIHRoZSBleGlzdGluZyB2ZmlvX21kZXYpIGZvciBt
+ZGV2IGRldmljZT8gIAo+ID4gPiA+IENhbiB3ZSBzaW1wbHkgYWRkIHRoZW0gaW50byBpb2N0bCBv
+ZiBtZGV2X3BhcmVudF9vcHM/ICAKPiA+ID4gUmlnaHQsIGVpdGhlciB3YXksIHRoZXNlIGlvY3Rs
+cyBoYXZlIHRvIGJlIGFuZCBqdXN0IG5lZWQgdG8gYmUKPiA+ID4gYWRkZWQgaW4gdGhlIGlvY3Rs
+IG9mIHRoZSBtZGV2X3BhcmVudF9vcHMuIEJ1dCBhbm90aGVyIHRoaW5nIHdlCj4gPiA+IGFsc28g
+bmVlZCB0byBjb25zaWRlciBpcyB0aGF0IHdoaWNoIGZpbGUgZGVzY3JpcHRvciB0aGUgdXNlcnNw
+YWNlCj4gPiA+IHdpbGwgZG8gdGhlIGlvY3RsKCkgb24uIFNvIEknbSB3b25kZXJpbmcgZG8geW91
+IG1lYW4gbGV0IHRoZQo+ID4gPiB1c2Vyc3BhY2UgZG8gdGhlIGlvY3RsKCkgb24gdGhlIFZGSU8g
+ZGV2aWNlIGZkIG9mIHRoZSBtZGV2Cj4gPiA+IGRldmljZT8KPiA+ID4gICAKPiA+IAo+ID4gWWVz
+LiAgCj4gCj4gR290IGl0ISBJJ20gbm90IHN1cmUgd2hhdCdzIEFsZXggb3BpbmlvbiBvbiB0aGlz
+LiBJZiB3ZSBhbGwKPiBhZ3JlZSB3aXRoIHRoaXMsIEkgY2FuIGRvIGl0IGluIHRoaXMgd2F5Lgo+
+IAo+ID4gSXMgdGhlcmUgYW55IG90aGVyIHdheSBidHc/ICAKPiAKPiBKdXN0IGEgcXVpY2sgdGhv
+dWdodC4uIE1heWJlIHRvdGFsbHkgYSBiYWQgaWRlYS4gSSB3YXMgdGhpbmtpbmcKPiB3aGV0aGVy
+IGl0IHdvdWxkIGJlIG9kZCB0byBkbyBub24tVkZJTydzIGlvY3RscyBvbiBWRklPJ3MgZGV2aWNl
+Cj4gZmQuIFNvIEkgd2FzIHdvbmRlcmluZyB3aGV0aGVyIGl0J3MgcG9zc2libGUgdG8gYWxsb3cg
+YmluZGluZwo+IGFub3RoZXIgbWRldiBkcml2ZXIgKGUuZy4gdmhvc3RfbWRldikgdG8gdGhlIHN1
+cHBvcnRlZCBtZGV2Cj4gZGV2aWNlcy4gVGhlIG5ldyBtZGV2IGRyaXZlciwgdmhvc3RfbWRldiwg
+Y2FuIHByb3ZpZGUgc2ltaWxhcgo+IHdheXMgdG8gbGV0IHVzZXJzcGFjZSBvcGVuIHRoZSBtZGV2
+IGRldmljZSBhbmQgZG8gdGhlIHZob3N0IGlvY3Rscwo+IG9uIGl0LiBUbyBkaXN0aW5ndWlzaCB3
+aXRoIHRoZSB2ZmlvX21kZXYgY29tcGF0aWJsZSBtZGV2IGRldmljZXMsCj4gdGhlIGRldmljZSBB
+UEkgb2YgdGhlIG5ldyB2aG9zdF9tZGV2IGNvbXBhdGlibGUgbWRldiBkZXZpY2VzCj4gbWlnaHQg
+YmUgZS5nLiAidmhvc3QtbmV0IiBmb3IgbmV0Pwo+IAo+IFNvIGluIFZGSU8gY2FzZSwgdGhlIGRl
+dmljZSB3aWxsIGJlIGZvciBwYXNzdGhydSBkaXJlY3RseS4gQW5kCj4gaW4gVkhPU1QgY2FzZSwg
+dGhlIGRldmljZSBjYW4gYmUgdXNlZCB0byBhY2NlbGVyYXRlIHRoZSBleGlzdGluZwo+IHZpcnR1
+YWxpemVkIGRldmljZXMuCj4gCj4gSG93IGRvIHlvdSB0aGluaz8KClZGSU8gcmVhbGx5IGNhbid0
+IHByZXZlbnQgdmVuZG9yIHNwZWNpZmljIGlvY3RscyBvbiB0aGUgZGV2aWNlIGZpbGUKZGVzY3Jp
+cHRvciBmb3IgbWRldnMsIGJ1dCBhKSB3ZSdkIHdhbnQgdG8gYmUgc3VyZSB0aGUgaW9jdGwgYWRk
+cmVzcwpzcGFjZSBjYW4ndCBjb2xsaWRlIHdpdGggaW9jdGxzIHdlJ2QgdXNlIGZvciB2ZmlvIGRl
+ZmluZWQgcHVycG9zZXMgYW5kCmIpIG1heWJlIHRoZSBWRklPIHVzZXIgQVBJIGlzbid0IHdoYXQg
+eW91IHdhbnQgaW4gdGhlIGZpcnN0IHBsYWNlIGlmCnlvdSBpbnRlbmQgdG8gbW9zdGx5L2VudGly
+ZWx5IGlnbm9yZSB0aGUgZGVmaW5lZCBpb2N0bCBzZXQgYW5kIHJlcGxhY2UKdGhlbSB3aXRoIHlv
+dXIgb3duLiAgSW4gdGhlIGNhc2Ugb2YgdGhlIGxhdHRlciwgeW91J3JlIGFsc28gbm90IGdldHRp
+bmcKdGhlIGFkdmFudGFnZXMgb2YgdGhlIGV4aXN0aW5nIFZGSU8gdXNlcnNwYWNlIGNvZGUsIHNv
+IHdoeSBleHBvc2UgYQpWRklPIGRldmljZSBhdCBhbGwuCgpUaGUgbWRldiBpbnRlcmZhY2UgZG9l
+cyBwcm92aWRlIGEgZ2VuZXJhbCBpbnRlcmZhY2UgZm9yIGNyZWF0aW5nIGFuZAptYW5hZ2luZyB2
+aXJ0dWFsIGRldmljZXMsIHZmaW8tbWRldiBpcyBqdXN0IG9uZSBkcml2ZXIgb24gdGhlIG1kZXYK
+YnVzLiAgUGFyYXYgKE1lbGxhbm94KSBoYXMgYmVlbiBkb2luZyB3b3JrIG9uIG1kZXYtY29yZSB0
+byBoZWxwIGNsZWFuCm91dCB2ZmlvLWlzbXMgZnJvbSB0aGUgaW50ZXJmYWNlLCBhaXVpLCB3aXRo
+IHRoZSBpbnRlbnQgb2YgaW1wbGVtZW50aW5nCmFub3RoZXIgbWRldiBidXMgZHJpdmVyIGZvciB1
+c2luZyB0aGUgZGV2aWNlcyB3aXRoaW4gdGhlIGtlcm5lbC4gIEl0CnNlZW1zIGxpa2UgdGhpcyB2
+aG9zdC1tZGV2IGRyaXZlciBtaWdodCBiZSBzaW1pbGFyLCB1c2luZyBtZGV2IGJ1dCBub3QKbmVj
+ZXNzYXJpbHkgdmZpby1tZGV2IHRvIGV4cG9zZSBkZXZpY2VzLiAgVGhhbmtzLAoKQWxleApfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlv
+biBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcK
+aHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVh
+bGl6YXRpb24=
