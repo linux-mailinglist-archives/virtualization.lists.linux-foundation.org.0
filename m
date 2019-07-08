@@ -2,56 +2,87 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C28B561A99
-	for <lists.virtualization@lfdr.de>; Mon,  8 Jul 2019 08:26:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9C3C627BE
+	for <lists.virtualization@lfdr.de>; Mon,  8 Jul 2019 19:54:57 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 104312186;
-	Mon,  8 Jul 2019 06:26:47 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 19DF228AF;
+	Mon,  8 Jul 2019 17:54:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 740E92177
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5F7642863
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  8 Jul 2019 06:18:02 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 66EEB881
+	Mon,  8 Jul 2019 17:49:25 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D5AC0880
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  8 Jul 2019 06:18:01 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	07 Jul 2019 23:18:00 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,465,1557212400"; d="scan'208";a="173175976"
-Received: from npg-dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.66])
-	by FMSMGA003.fm.intel.com with ESMTP; 07 Jul 2019 23:17:58 -0700
-Date: Mon, 8 Jul 2019 14:16:25 +0800
-From: Tiwei Bie <tiwei.bie@intel.com>
-To: Alex Williamson <alex.williamson@redhat.com>
-Subject: Re: [RFC v2] vhost: introduce mdev based hardware vhost backend
-Message-ID: <20190708061625.GA15936@___>
-References: <20190703091339.1847-1-tiwei.bie@intel.com>
-	<7b8279b2-aa7e-7adc-eeff-20dfaf4400d0@redhat.com>
-	<20190703115245.GA22374@___>
-	<64833f91-02cd-7143-f12e-56ab93b2418d@redhat.com>
-	<20190703130817.GA1978@___>
-	<b01b8e28-8d96-31dd-56f4-ca7793498c55@redhat.com>
-	<20190704062134.GA21116@___> <20190705084946.67b8f9f5@x1.home>
+	Mon,  8 Jul 2019 17:49:24 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id w24so8643086plp.2
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 08 Jul 2019 10:49:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=u3wADtOhWERBIwfgOKqVInl3i4gu5vwcVNjYQ611JUc=;
+	b=Cp2JMiqRMbHHc8yVRj5gwNVXKSXDh307ZJxdfhj5m5wZqxjCcjOB1cq6Hoydsv5OFo
+	14RVaNEV9QQ8pm4bi7zWlnTUgO/o0R9Nb9nSi+ekxv0wRSSnm/Ntf2nDLjSDt3fpc+ag
+	If9clYeN+kLlkea7uIf7yLK5X+UGvuATfkHc4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=u3wADtOhWERBIwfgOKqVInl3i4gu5vwcVNjYQ611JUc=;
+	b=DsgilwAnYGYXtN8Gsg1MLctHyBT3hRrqZbuubBCV3K4jx9uHkkNJS2KpubHSsZR5po
+	Y3houHW7gquc84BX42GOIcqj3VJ8pvL2SKgDBNWbBdJn0M1ez9vzUDm+f3YJoE8ecUxe
+	rsUZ4DARPxEVrPRtPTq+e0njPkvw+ugrnHUYCfOr2vCXvIuHrMPk1R8qS3rI9WuPCq9r
+	ndQGSlahyFVAFfzJfSIa2Eu4qVfTRYskzopTBtGqWM4GdteUXFgdMeRZmy889+8L/rdS
+	gdBBhSqUUrL8OeGFb20p2AqNiR4p7G916JM8IvwY8FC9dUmoDOex/MkeE9bH+dUBogqo
+	DFkA==
+X-Gm-Message-State: APjAAAW5KR99NF0dj+wccubF0T/sCxFrb3BaN2xKTwepmh5uVCaH8zgZ
+	a76rvBfXtKSTUJ24nOVBcJ0YIQ==
+X-Google-Smtp-Source: APXvYqx5LipVNdbKqMBoKjNn4lRTatM0sZZZf8RlaGam+sYAQe4c/KcA1glvKLTNDdd17g2N+PzrMw==
+X-Received: by 2002:a17:902:6b02:: with SMTP id
+	o2mr24590139plk.99.1562608164453; 
+	Mon, 08 Jul 2019 10:49:24 -0700 (PDT)
+Received: from skynet.sea.corp.google.com
+	([2620:0:1008:1100:c4b5:ec23:d87b:d6d3])
+	by smtp.gmail.com with ESMTPSA id
+	j1sm20151686pfe.101.2019.07.08.10.49.23
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Mon, 08 Jul 2019 10:49:23 -0700 (PDT)
+From: Thomas Garnier <thgarnie@chromium.org>
+To: kernel-hardening@lists.openwall.com
+Subject: [PATCH v8 00/11] x86: PIE support to extend KASLR randomization
+Date: Mon,  8 Jul 2019 10:48:53 -0700
+Message-Id: <20190708174913.123308-1-thgarnie@chromium.org>
+X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190705084946.67b8f9f5@x1.home>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	maxime.coquelin@redhat.com, zhihong.wang@intel.com
+Cc: Feng Tang <feng.tang@intel.com>, kristen@linux.intel.com,
+	Thomas Garnier <thgarnie@chromium.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	virtualization@lists.linux-foundation.org,
+	Nadav Amit <namit@vmware.com>, Pavel Machek <pavel@ucw.cz>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>, x86@kernel.org,
+	Ingo Molnar <mingo@redhat.com>, Len Brown <len.brown@intel.com>,
+	keescook@chromium.org, Jann Horn <jannh@google.com>,
+	Alexios Zavras <alexios.zavras@intel.com>, Borislav Petkov <bp@alien8.de>,
+	Andy Lutomirski <luto@kernel.org>, Alok Kataria <akataria@vmware.com>,
+	Juergen Gross <jgross@suse.com>, Maran Wilson <maran.wilson@oracle.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-pm@vger.kernel.org,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org,
+	Thomas Gleixner <tglx@linutronix.de>, linux-crypto@vger.kernel.org,
+	Andrew Morton <akpm@linux-foundation.org>, Enrico Weigelt <info@metux.net>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,120 +94,111 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gRnJpLCBKdWwgMDUsIDIwMTkgYXQgMDg6NDk6NDZBTSAtMDYwMCwgQWxleCBXaWxsaWFtc29u
-IHdyb3RlOgo+IE9uIFRodSwgNCBKdWwgMjAxOSAxNDoyMTozNCArMDgwMAo+IFRpd2VpIEJpZSA8
-dGl3ZWkuYmllQGludGVsLmNvbT4gd3JvdGU6Cj4gPiBPbiBUaHUsIEp1bCAwNCwgMjAxOSBhdCAx
-MjozMTo0OFBNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+ID4gPiBPbiAyMDE5LzcvMyDkuIvl
-jYg5OjA4LCBUaXdlaSBCaWUgd3JvdGU6ICAKPiA+ID4gPiBPbiBXZWQsIEp1bCAwMywgMjAxOSBh
-dCAwODoxNjoyM1BNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOiAgCj4gPiA+ID4gPiBPbiAyMDE5
-LzcvMyDkuIvljYg3OjUyLCBUaXdlaSBCaWUgd3JvdGU6ICAKPiA+ID4gPiA+ID4gT24gV2VkLCBK
-dWwgMDMsIDIwMTkgYXQgMDY6MDk6NTFQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZTogIAo+ID4g
-PiA+ID4gPiA+IE9uIDIwMTkvNy8zIOS4i+WNiDU6MTMsIFRpd2VpIEJpZSB3cm90ZTogIAo+ID4g
-PiA+ID4gPiA+ID4gRGV0YWlscyBhYm91dCB0aGlzIGNhbiBiZSBmb3VuZCBoZXJlOgo+ID4gPiA+
-ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiBodHRwczovL2x3bi5uZXQvQXJ0aWNsZXMvNzUwNzcw
-Lwo+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiBXaGF0J3MgbmV3IGluIHRoaXMgdmVy
-c2lvbgo+ID4gPiA+ID4gPiA+ID4gPT09PT09PT09PT09PT09PT09PT09PT09PT0KPiA+ID4gPiA+
-ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gQSBuZXcgVkZJTyBkZXZpY2UgdHlwZSBpcyBpbnRyb2R1
-Y2VkIC0gdmZpby12aG9zdC4gVGhpcyBhZGRyZXNzZWQKPiA+ID4gPiA+ID4gPiA+IHNvbWUgY29t
-bWVudHMgZnJvbSBoZXJlOmh0dHBzOi8vcGF0Y2h3b3JrLm96bGFicy5vcmcvY292ZXIvOTg0NzYz
-Lwo+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiBCZWxvdyBpcyB0aGUgdXBkYXRlZCBk
-ZXZpY2UgaW50ZXJmYWNlOgo+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiBDdXJyZW50
-bHksIHRoZXJlIGFyZSB0d28gcmVnaW9ucyBvZiB0aGlzIGRldmljZTogMSkgQ09ORklHX1JFR0lP
-Tgo+ID4gPiA+ID4gPiA+ID4gKFZGSU9fVkhPU1RfQ09ORklHX1JFR0lPTl9JTkRFWCksIHdoaWNo
-IGNhbiBiZSB1c2VkIHRvIHNldHVwIHRoZQo+ID4gPiA+ID4gPiA+ID4gZGV2aWNlOyAyKSBOT1RJ
-RllfUkVHSU9OIChWRklPX1ZIT1NUX05PVElGWV9SRUdJT05fSU5ERVgpLCB3aGljaAo+ID4gPiA+
-ID4gPiA+ID4gY2FuIGJlIHVzZWQgdG8gbm90aWZ5IHRoZSBkZXZpY2UuCj4gPiA+ID4gPiA+ID4g
-PiAKPiA+ID4gPiA+ID4gPiA+IDEuIENPTkZJR19SRUdJT04KPiA+ID4gPiA+ID4gPiA+IAo+ID4g
-PiA+ID4gPiA+ID4gVGhlIHJlZ2lvbiBkZXNjcmliZWQgYnkgQ09ORklHX1JFR0lPTiBpcyB0aGUg
-bWFpbiBjb250cm9sIGludGVyZmFjZS4KPiA+ID4gPiA+ID4gPiA+IE1lc3NhZ2VzIHdpbGwgYmUg
-d3JpdHRlbiB0byBvciByZWFkIGZyb20gdGhpcyByZWdpb24uCj4gPiA+ID4gPiA+ID4gPiAKPiA+
-ID4gPiA+ID4gPiA+IFRoZSBtZXNzYWdlIHR5cGUgaXMgZGV0ZXJtaW5lZCBieSB0aGUgYHJlcXVl
-c3RgIGZpZWxkIGluIG1lc3NhZ2UKPiA+ID4gPiA+ID4gPiA+IGhlYWRlci4gVGhlIG1lc3NhZ2Ug
-c2l6ZSBpcyBlbmNvZGVkIGluIHRoZSBtZXNzYWdlIGhlYWRlciB0b28uCj4gPiA+ID4gPiA+ID4g
-PiBUaGUgbWVzc2FnZSBmb3JtYXQgbG9va3MgbGlrZSB0aGlzOgo+ID4gPiA+ID4gPiA+ID4gCj4g
-PiA+ID4gPiA+ID4gPiBzdHJ1Y3Qgdmhvc3RfdmZpb19vcCB7Cj4gPiA+ID4gPiA+ID4gPiAJX191
-NjQgcmVxdWVzdDsKPiA+ID4gPiA+ID4gPiA+IAlfX3UzMiBmbGFnczsKPiA+ID4gPiA+ID4gPiA+
-IAkvKiBGbGFnIHZhbHVlczogKi8KPiA+ID4gPiA+ID4gPiA+ICAgICAjZGVmaW5lIFZIT1NUX1ZG
-SU9fTkVFRF9SRVBMWSAweDEgLyogV2hldGhlciBuZWVkIHJlcGx5ICovCj4gPiA+ID4gPiA+ID4g
-PiAJX191MzIgc2l6ZTsKPiA+ID4gPiA+ID4gPiA+IAl1bmlvbiB7Cj4gPiA+ID4gPiA+ID4gPiAJ
-CV9fdTY0IHU2NDsKPiA+ID4gPiA+ID4gPiA+IAkJc3RydWN0IHZob3N0X3ZyaW5nX3N0YXRlIHN0
-YXRlOwo+ID4gPiA+ID4gPiA+ID4gCQlzdHJ1Y3Qgdmhvc3RfdnJpbmdfYWRkciBhZGRyOwo+ID4g
-PiA+ID4gPiA+ID4gCX0gcGF5bG9hZDsKPiA+ID4gPiA+ID4gPiA+IH07Cj4gPiA+ID4gPiA+ID4g
-PiAKPiA+ID4gPiA+ID4gPiA+IFRoZSBleGlzdGluZyB2aG9zdC1rZXJuZWwgaW9jdGwgY21kcyBh
-cmUgcmV1c2VkIGFzIHRoZSBtZXNzYWdlCj4gPiA+ID4gPiA+ID4gPiByZXF1ZXN0cyBpbiBhYm92
-ZSBzdHJ1Y3R1cmUuICAKPiA+ID4gPiA+ID4gPiBTdGlsbCBhIGNvbW1lbnRzIGxpa2UgVjEuIFdo
-YXQncyB0aGUgYWR2YW50YWdlIG9mIGludmVudGluZyBhIG5ldyBwcm90b2NvbD8gIAo+ID4gPiA+
-ID4gPiBJJ20gdHJ5aW5nIHRvIG1ha2UgaXQgd29yayBpbiBWRklPJ3Mgd2F5Li4KPiA+ID4gPiA+
-ID4gICAKPiA+ID4gPiA+ID4gPiBJIGJlbGlldmUgZWl0aGVyIG9mIHRoZSBmb2xsb3dpbmcgc2hv
-dWxkIGJlIGJldHRlcjoKPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiAtIHVzaW5nIHZob3N0
-IGlvY3RsLMKgIHdlIGNhbiBzdGFydCBmcm9tIFNFVF9WUklOR19LSUNLL1NFVF9WUklOR19DQUxM
-IGFuZAo+ID4gPiA+ID4gPiA+IGV4dGVuZCBpdCB3aXRoIGUuZyBub3RpZnkgcmVnaW9uLiBUaGUg
-YWR2YW50YWdlcyBpcyB0aGF0IGFsbCBleGlzdCB1c2Vyc3BhY2UKPiA+ID4gPiA+ID4gPiBwcm9n
-cmFtIGNvdWxkIGJlIHJldXNlZCB3aXRob3V0IG1vZGlmaWNhdGlvbiAob3IgbWluaW1hbCBtb2Rp
-ZmljYXRpb24pLiBBbmQKPiA+ID4gPiA+ID4gPiB2aG9zdCBBUEkgaGlkZXMgbG90cyBvZiBkZXRh
-aWxzIHRoYXQgaXMgbm90IG5lY2Vzc2FyeSB0byBiZSB1bmRlcnN0b29kIGJ5Cj4gPiA+ID4gPiA+
-ID4gYXBwbGljYXRpb24gKGUuZyBpbiB0aGUgY2FzZSBvZiBjb250YWluZXIpLiAgCj4gPiA+ID4g
-PiA+IERvIHlvdSBtZWFuIHJldXNpbmcgdmhvc3QncyBpb2N0bCBvbiBWRklPIGRldmljZSBmZCBk
-aXJlY3RseSwKPiA+ID4gPiA+ID4gb3IgaW50cm9kdWNpbmcgYW5vdGhlciBtZGV2IGRyaXZlciAo
-aS5lLiB2aG9zdF9tZGV2IGluc3RlYWQgb2YKPiA+ID4gPiA+ID4gdXNpbmcgdGhlIGV4aXN0aW5n
-IHZmaW9fbWRldikgZm9yIG1kZXYgZGV2aWNlPyAgCj4gPiA+ID4gPiBDYW4gd2Ugc2ltcGx5IGFk
-ZCB0aGVtIGludG8gaW9jdGwgb2YgbWRldl9wYXJlbnRfb3BzPyAgCj4gPiA+ID4gUmlnaHQsIGVp
-dGhlciB3YXksIHRoZXNlIGlvY3RscyBoYXZlIHRvIGJlIGFuZCBqdXN0IG5lZWQgdG8gYmUKPiA+
-ID4gPiBhZGRlZCBpbiB0aGUgaW9jdGwgb2YgdGhlIG1kZXZfcGFyZW50X29wcy4gQnV0IGFub3Ro
-ZXIgdGhpbmcgd2UKPiA+ID4gPiBhbHNvIG5lZWQgdG8gY29uc2lkZXIgaXMgdGhhdCB3aGljaCBm
-aWxlIGRlc2NyaXB0b3IgdGhlIHVzZXJzcGFjZQo+ID4gPiA+IHdpbGwgZG8gdGhlIGlvY3RsKCkg
-b24uIFNvIEknbSB3b25kZXJpbmcgZG8geW91IG1lYW4gbGV0IHRoZQo+ID4gPiA+IHVzZXJzcGFj
-ZSBkbyB0aGUgaW9jdGwoKSBvbiB0aGUgVkZJTyBkZXZpY2UgZmQgb2YgdGhlIG1kZXYKPiA+ID4g
-PiBkZXZpY2U/Cj4gPiA+ID4gICAKPiA+ID4gCj4gPiA+IFllcy4gIAo+ID4gCj4gPiBHb3QgaXQh
-IEknbSBub3Qgc3VyZSB3aGF0J3MgQWxleCBvcGluaW9uIG9uIHRoaXMuIElmIHdlIGFsbAo+ID4g
-YWdyZWUgd2l0aCB0aGlzLCBJIGNhbiBkbyBpdCBpbiB0aGlzIHdheS4KPiA+IAo+ID4gPiBJcyB0
-aGVyZSBhbnkgb3RoZXIgd2F5IGJ0dz8gIAo+ID4gCj4gPiBKdXN0IGEgcXVpY2sgdGhvdWdodC4u
-IE1heWJlIHRvdGFsbHkgYSBiYWQgaWRlYS4gSSB3YXMgdGhpbmtpbmcKPiA+IHdoZXRoZXIgaXQg
-d291bGQgYmUgb2RkIHRvIGRvIG5vbi1WRklPJ3MgaW9jdGxzIG9uIFZGSU8ncyBkZXZpY2UKPiA+
-IGZkLiBTbyBJIHdhcyB3b25kZXJpbmcgd2hldGhlciBpdCdzIHBvc3NpYmxlIHRvIGFsbG93IGJp
-bmRpbmcKPiA+IGFub3RoZXIgbWRldiBkcml2ZXIgKGUuZy4gdmhvc3RfbWRldikgdG8gdGhlIHN1
-cHBvcnRlZCBtZGV2Cj4gPiBkZXZpY2VzLiBUaGUgbmV3IG1kZXYgZHJpdmVyLCB2aG9zdF9tZGV2
-LCBjYW4gcHJvdmlkZSBzaW1pbGFyCj4gPiB3YXlzIHRvIGxldCB1c2Vyc3BhY2Ugb3BlbiB0aGUg
-bWRldiBkZXZpY2UgYW5kIGRvIHRoZSB2aG9zdCBpb2N0bHMKPiA+IG9uIGl0LiBUbyBkaXN0aW5n
-dWlzaCB3aXRoIHRoZSB2ZmlvX21kZXYgY29tcGF0aWJsZSBtZGV2IGRldmljZXMsCj4gPiB0aGUg
-ZGV2aWNlIEFQSSBvZiB0aGUgbmV3IHZob3N0X21kZXYgY29tcGF0aWJsZSBtZGV2IGRldmljZXMK
-PiA+IG1pZ2h0IGJlIGUuZy4gInZob3N0LW5ldCIgZm9yIG5ldD8KPiA+IAo+ID4gU28gaW4gVkZJ
-TyBjYXNlLCB0aGUgZGV2aWNlIHdpbGwgYmUgZm9yIHBhc3N0aHJ1IGRpcmVjdGx5LiBBbmQKPiA+
-IGluIFZIT1NUIGNhc2UsIHRoZSBkZXZpY2UgY2FuIGJlIHVzZWQgdG8gYWNjZWxlcmF0ZSB0aGUg
-ZXhpc3RpbmcKPiA+IHZpcnR1YWxpemVkIGRldmljZXMuCj4gPiAKPiA+IEhvdyBkbyB5b3UgdGhp
-bms/Cj4gCj4gVkZJTyByZWFsbHkgY2FuJ3QgcHJldmVudCB2ZW5kb3Igc3BlY2lmaWMgaW9jdGxz
-IG9uIHRoZSBkZXZpY2UgZmlsZQo+IGRlc2NyaXB0b3IgZm9yIG1kZXZzLCBidXQgYSkgd2UnZCB3
-YW50IHRvIGJlIHN1cmUgdGhlIGlvY3RsIGFkZHJlc3MKPiBzcGFjZSBjYW4ndCBjb2xsaWRlIHdp
-dGggaW9jdGxzIHdlJ2QgdXNlIGZvciB2ZmlvIGRlZmluZWQgcHVycG9zZXMgYW5kCj4gYikgbWF5
-YmUgdGhlIFZGSU8gdXNlciBBUEkgaXNuJ3Qgd2hhdCB5b3Ugd2FudCBpbiB0aGUgZmlyc3QgcGxh
-Y2UgaWYKPiB5b3UgaW50ZW5kIHRvIG1vc3RseS9lbnRpcmVseSBpZ25vcmUgdGhlIGRlZmluZWQg
-aW9jdGwgc2V0IGFuZCByZXBsYWNlCj4gdGhlbSB3aXRoIHlvdXIgb3duLiAgSW4gdGhlIGNhc2Ug
-b2YgdGhlIGxhdHRlciwgeW91J3JlIGFsc28gbm90IGdldHRpbmcKPiB0aGUgYWR2YW50YWdlcyBv
-ZiB0aGUgZXhpc3RpbmcgVkZJTyB1c2Vyc3BhY2UgY29kZSwgc28gd2h5IGV4cG9zZSBhCj4gVkZJ
-TyBkZXZpY2UgYXQgYWxsLgoKWWVhaCwgSSB0b3RhbGx5IGFncmVlLgoKPiAKPiBUaGUgbWRldiBp
-bnRlcmZhY2UgZG9lcyBwcm92aWRlIGEgZ2VuZXJhbCBpbnRlcmZhY2UgZm9yIGNyZWF0aW5nIGFu
-ZAo+IG1hbmFnaW5nIHZpcnR1YWwgZGV2aWNlcywgdmZpby1tZGV2IGlzIGp1c3Qgb25lIGRyaXZl
-ciBvbiB0aGUgbWRldgo+IGJ1cy4gIFBhcmF2IChNZWxsYW5veCkgaGFzIGJlZW4gZG9pbmcgd29y
-ayBvbiBtZGV2LWNvcmUgdG8gaGVscCBjbGVhbgo+IG91dCB2ZmlvLWlzbXMgZnJvbSB0aGUgaW50
-ZXJmYWNlLCBhaXVpLCB3aXRoIHRoZSBpbnRlbnQgb2YgaW1wbGVtZW50aW5nCj4gYW5vdGhlciBt
-ZGV2IGJ1cyBkcml2ZXIgZm9yIHVzaW5nIHRoZSBkZXZpY2VzIHdpdGhpbiB0aGUga2VybmVsLgoK
-R3JlYXQgdG8ga25vdyB0aGlzISBJIGZvdW5kIGJlbG93IHNlcmllcyBhZnRlciBzb21lIHNlYXJj
-aGluZzoKCmh0dHBzOi8vbGttbC5vcmcvbGttbC8yMDE5LzMvOC84MjEKCkluIGFib3ZlIHNlcmll
-cywgdGhlIG5ldyBtbHg1X2NvcmUgbWRldiBkcml2ZXIgd2lsbCBkbyB0aGUgcHJvYmUKYnkgY2Fs
-bGluZyBtbHg1X2dldF9jb3JlX2RldigpIGZpcnN0IG9uIHRoZSBwYXJlbnQgZGV2aWNlIG9mIHRo
-ZQptZGV2IGRldmljZS4gSW4gdmhvc3RfbWRldiwgbWF5YmUgd2UgY2FuIGFsc28ga2VlcCB0cmFj
-ayBvZiBhbGwKdGhlIGNvbXBhdGlibGUgbWRldiBkZXZpY2VzIGFuZCB1c2UgdGhpcyBpbmZvIHRv
-IGRvIHRoZSBwcm9iZS4KQnV0IHdlIGFsc28gbmVlZCBhIHdheSB0byBhbGxvdyB2ZmlvX21kZXYg
-ZHJpdmVyIHRvIGRpc3Rpbmd1aXNoCmFuZCByZWplY3QgdGhlIGluY29tcGF0aWJsZSBtZGV2IGRl
-dmljZXMuCgo+IEl0Cj4gc2VlbXMgbGlrZSB0aGlzIHZob3N0LW1kZXYgZHJpdmVyIG1pZ2h0IGJl
-IHNpbWlsYXIsIHVzaW5nIG1kZXYgYnV0IG5vdAo+IG5lY2Vzc2FyaWx5IHZmaW8tbWRldiB0byBl
-eHBvc2UgZGV2aWNlcy4gIFRoYW5rcywKClllYWgsIEkgYWxzbyB0aGluayBzbyEKClRoYW5rcyEK
-VGl3ZWkKCj4gCj4gQWxleApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMu
-bGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21h
-aWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+Splitting the previous serie in two. This part contains assembly code
+changes required for PIE but without any direct dependencies with the
+rest of the patchset.
+
+Changes:
+ - patch v8 (assembly):
+   - Fix issues in crypto changes (thanks to Eric Biggers).
+   - Remove unnecessary jump table change.
+   - Change author and signoff to chromium email address.
+ - patch v7 (assembly):
+   - Split patchset and reorder changes.
+ - patch v6:
+   - Rebase on latest changes in jump tables and crypto.
+   - Fix wording on couple commits.
+   - Revisit checkpatch warnings.
+   - Moving to @chromium.org.
+ - patch v5:
+   - Adapt new crypto modules for PIE.
+   - Improve per-cpu commit message.
+   - Fix xen 32-bit build error with .quad.
+   - Remove extra code for ftrace.
+ - patch v4:
+   - Simplify early boot by removing global variables.
+   - Modify the mcount location script for __mcount_loc intead of the address
+     read in the ftrace implementation.
+   - Edit commit description to explain better where the kernel can be located.
+   - Streamlined the testing done on each patch proposal. Always testing
+     hibernation, suspend, ftrace and kprobe to ensure no regressions.
+ - patch v3:
+   - Update on message to describe longer term PIE goal.
+   - Minor change on ftrace if condition.
+   - Changed code using xchgq.
+ - patch v2:
+   - Adapt patch to work post KPTI and compiler changes
+   - Redo all performance testing with latest configs and compilers
+   - Simplify mov macro on PIE (MOVABS now)
+   - Reduce GOT footprint
+ - patch v1:
+   - Simplify ftrace implementation.
+   - Use gcc mstack-protector-guard-reg=%gs with PIE when possible.
+ - rfc v3:
+   - Use --emit-relocs instead of -pie to reduce dynamic relocation space on
+     mapped memory. It also simplifies the relocation process.
+   - Move the start the module section next to the kernel. Remove the need for
+     -mcmodel=large on modules. Extends module space from 1 to 2G maximum.
+   - Support for XEN PVH as 32-bit relocations can be ignored with
+     --emit-relocs.
+   - Support for GOT relocations previously done automatically with -pie.
+   - Remove need for dynamic PLT in modules.
+   - Support dymamic GOT for modules.
+ - rfc v2:
+   - Add support for global stack cookie while compiler default to fs without
+     mcmodel=kernel
+   - Change patch 7 to correctly jump out of the identity mapping on kexec load
+     preserve.
+
+These patches make some of the changes necessary to build the kernel as
+Position Independent Executable (PIE) on x86_64. Another patchset will
+add the PIE option and larger architecture changes.
+
+The patches:
+ - 1, 3-11: Change in assembly code to be PIE compliant.
+ - 2: Add a new _ASM_MOVABS macro to fetch a symbol address generically.
+
+diffstat:
+ crypto/aegis128-aesni-asm.S         |    6 +-
+ crypto/aegis128l-aesni-asm.S        |    8 +--
+ crypto/aegis256-aesni-asm.S         |    6 +-
+ crypto/aes-x86_64-asm_64.S          |   45 ++++++++++------
+ crypto/aesni-intel_asm.S            |    8 +--
+ crypto/aesni-intel_avx-x86_64.S     |    3 -
+ crypto/camellia-aesni-avx-asm_64.S  |   42 +++++++--------
+ crypto/camellia-aesni-avx2-asm_64.S |   44 ++++++++--------
+ crypto/camellia-x86_64-asm_64.S     |    8 +--
+ crypto/cast5-avx-x86_64-asm_64.S    |   50 ++++++++++--------
+ crypto/cast6-avx-x86_64-asm_64.S    |   44 +++++++++-------
+ crypto/des3_ede-asm_64.S            |   96 ++++++++++++++++++++++++------------
+ crypto/ghash-clmulni-intel_asm.S    |    4 -
+ crypto/glue_helper-asm-avx.S        |    4 -
+ crypto/glue_helper-asm-avx2.S       |    6 +-
+ crypto/morus1280-avx2-asm.S         |    4 -
+ crypto/morus1280-sse2-asm.S         |    8 +--
+ crypto/morus640-sse2-asm.S          |    6 +-
+ crypto/sha256-avx2-asm.S            |   18 ++++--
+ entry/entry_64.S                    |   16 ++++--
+ include/asm/alternative.h           |    6 +-
+ include/asm/asm.h                   |    1 
+ include/asm/paravirt_types.h        |   25 +++++++--
+ include/asm/pm-trace.h              |    2 
+ include/asm/processor.h             |    6 +-
+ kernel/acpi/wakeup_64.S             |   31 ++++++-----
+ kernel/head_64.S                    |   16 +++---
+ kernel/relocate_kernel_64.S         |    2 
+ power/hibernate_asm_64.S            |    4 -
+ 29 files changed, 306 insertions(+), 213 deletions(-)
+
+Patchset is based on next-20190708.
+
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
