@@ -2,80 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EABA649E5
-	for <lists.virtualization@lfdr.de>; Wed, 10 Jul 2019 17:43:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79D40649E6
+	for <lists.virtualization@lfdr.de>; Wed, 10 Jul 2019 17:43:19 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0BED545D9;
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 488584591;
 	Wed, 10 Jul 2019 15:43:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 40D3F4591
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id EF5494586
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 10 Jul 2019 15:34:16 +0000 (UTC)
+	Wed, 10 Jul 2019 15:37:11 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6EFC5886
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+	[209.85.221.49])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 73C0D883
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 10 Jul 2019 15:34:15 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id e3so2591601edr.10
+	Wed, 10 Jul 2019 15:37:11 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id n9so2979612wrr.4
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 10 Jul 2019 08:34:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=2KRyzWKVJ1r9jz+Xx4aA9J28JsbLlUf61PW6SdNKD7M=;
-	b=e4qMm/katlxJjK5E4RUDiVYRgMUBOETs4yLIrtm4EVvEP4AiUfADV33Cead1y2/hlT
-	ZPvk6J570VwquFY62hIhX4BKYIWjAfYE1wk3iz++PSk2iwxo1xMdMdaf4M9eBkENxz9R
-	fvSEUQ3QjBRpVkwKPaK9uashIseTpFOqWKsLI=
+	Wed, 10 Jul 2019 08:37:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:references:mime-version:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=2KRyzWKVJ1r9jz+Xx4aA9J28JsbLlUf61PW6SdNKD7M=;
-	b=OodSu+M2QBM9+bys2ovEHs8KWTNI0K3Q0St1WAVweDNDzzhJfz1TN7q87e6UwZHKKO
-	4riJzJCTNhbzvPoUXy4Qu1Qu886ng0n7YbqcHcVnIaItvbuOtcmKefXE4Qz5Lvs99U1D
-	Mdwv5E9aKspyulzjuKzG0sUlCBr3vX/I2l/lDYa6qwE2DYAjGtlNSa/WyMKb5sIxyIQW
-	5nlhDv3/eLBOU02IUzoNfGMj4u9wukJmY3XhM4xDgApUZ6lX35IxH97awGK0Imzi7H4G
-	iCfoDiqm4wSyLmWewdf+ckIePX6oZoWkK0utIU1FtB0HcyiDSV+rKmbssCHGU3ni+buD
-	EAJw==
-X-Gm-Message-State: APjAAAVki8KAx1m9E4r/h3QGVV4fTau3XHiA2Zp1NVjlCHW3qRdkXr0w
-	Z130jiG+ZcupXDv3FGLsquJfJw==
-X-Google-Smtp-Source: APXvYqwEr1dFRN1VdNMAqLJCbd84/UpT3r++MXtJbkiHXcVoESh710iqM2S/yDGf65QoyB1qNR+LOQ==
-X-Received: by 2002:a50:addc:: with SMTP id b28mr32636964edd.174.1562772854009;
-	Wed, 10 Jul 2019 08:34:14 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-	by smtp.gmail.com with ESMTPSA id m25sm592912ejs.85.2019.07.10.08.34.12
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=w6gOM0EF8w6OgRkN0S1HwMV2ZTxvl6sDwbz7UvtM7Ds=;
+	b=EEHXoDPdS9TepWDl41ppjIz0wLAfEd3TlOdarjGut9/+M2XF0uYQ4zXqwyAM/RILBd
+	qXGpIDRWaTiZeTp4VoGppD7NnV3v/fLN3XIjYAiNMUE5IcKDbpCY8sbM5fr/d2u6H7Ae
+	ppBreR8Utt4diTqBByKcaAcMG5DY0styrKpRYS0wdTWCJXwmhx89ADjUMtw3L7nKTarF
+	SSBJfa1+isB6S0UnfX7NtI5MUfbXwSSwDs+1+yc30eua7u7Vaw53S+J97NvzoqyqHFw5
+	z1tnuqxyhiHeld4uVLMxaXp8eM1i+V1JAewRErCN+dJrpeiuh6FF1ba/39Ky8/H/pqWC
+	iBog==
+X-Gm-Message-State: APjAAAVV+I1kLTjG2g+06WcQtIPJveTa8WX7Cdt3yidSzfK1uLb1PzHo
+	8/Yqm+1D+0Q/fUnd32Htbn7b/A==
+X-Google-Smtp-Source: APXvYqw5KGnsPShaRheRWeLkyw7iNHfzH6H8mZGknsxq9TfA80oFKuQNpokcGJJXQu9Hu6et/y/htg==
+X-Received: by 2002:a5d:468a:: with SMTP id u10mr32491868wrq.177.1562773029910;
+	Wed, 10 Jul 2019 08:37:09 -0700 (PDT)
+Received: from steredhat (host122-201-dynamic.13-79-r.retail.telecomitalia.it.
+	[79.13.201.122])
+	by smtp.gmail.com with ESMTPSA id 15sm1847474wmk.34.2019.07.10.08.37.09
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 10 Jul 2019 08:34:13 -0700 (PDT)
-Date: Wed, 10 Jul 2019 17:34:10 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH v2 3/6] drm/fb-helper: Instanciate shadow FB if
-	configured in device's mode_config
-Message-ID: <20190710153410.GU15868@phenom.ffwll.local>
-References: <20190705092613.7621-1-tzimmermann@suse.de>
-	<20190705092613.7621-4-tzimmermann@suse.de>
-	<68f5783f-8022-3238-a6d9-c6a774b39633@tronnes.org>
-	<59111691-5283-fb50-94a9-6960c425e81c@suse.de>
+	Wed, 10 Jul 2019 08:37:09 -0700 (PDT)
+Date: Wed, 10 Jul 2019 17:37:07 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>
+Subject: [RFC] virtio-net: share receive_*() and add_recvbuf_*() with
+	virtio-vsock
+Message-ID: <20190710153707.twmzgmwqqw3pstos@steredhat>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <59111691-5283-fb50-94a9-6960c425e81c@suse.de>
-X-Operating-System: Linux phenom 4.19.0-5-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: yc_chen@aspeedtech.com, maxime.ripard@bootlin.com, sam@ravnborg.org,
-	maarten.lankhorst@linux.intel.com, dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org,
-	Noralf =?iso-8859-1?Q?Tr=F8nnes?= <noralf@tronnes.org>,
-	daniel@ffwll.ch, airlied@redhat.com, sean@poorly.run
+Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -87,230 +70,56 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sun, Jul 07, 2019 at 06:14:50PM +0200, Thomas Zimmermann wrote:
-> Hi
-> =
+Hi,
+as Jason suggested some months ago, I looked better at the virtio-net driver to
+understand if we can reuse some parts also in the virtio-vsock driver, since we
+have similar challenges (mergeable buffers, page allocation, small
+packets, etc.).
 
-> Am 07.07.19 um 16:37 schrieb Noralf Tr=F8nnes:
-> > =
+Initially, I would add the skbuff in the virtio-vsock in order to re-use
+receive_*() functions.
+Then I would move receive_[small, big, mergeable]() and
+add_recvbuf_[small, big, mergeable]() outside of virtio-net driver, in order to
+call them also from virtio-vsock. I need to do some refactoring (e.g. leave the
+XDP part on the virtio-net driver), but I think it is feasible.
 
-> > =
+The idea is to create a virtio-skb.[h,c] where put these functions and a new
+object where stores some attributes needed (e.g. hdr_len ) and status (e.g.
+some fields of struct receive_queue). This is an idea of virtio-skb.h that
+I have in mind:
+    struct virtskb;
 
-> > Den 05.07.2019 11.26, skrev Thomas Zimmermann:
-> >> Generic framebuffer emulation uses a shadow buffer for framebuffers wi=
-th
-> >> dirty() function. If drivers want to use the shadow FB without such a
-> >> function, they can now set prefer_shadow or prefer_shadow_fbdev in the=
-ir
-> >> mode_config structures. The former flag is exported to userspace, the =
-latter
-> >> flag is fbdev-only.
-> >>
-> >> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> >> ---
-> >>  drivers/gpu/drm/drm_fb_helper.c | 19 ++++++++++++++-----
-> >>  include/drm/drm_mode_config.h   |  5 +++++
-> >>  2 files changed, 19 insertions(+), 5 deletions(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_=
-helper.c
-> >> index 7ba6a0255821..56ef169e1814 100644
-> >> --- a/drivers/gpu/drm/drm_fb_helper.c
-> >> +++ b/drivers/gpu/drm/drm_fb_helper.c
-> >> @@ -421,7 +421,9 @@ static void drm_fb_helper_dirty_work(struct work_s=
-truct *work)
-> >>  				return;
-> >>  			drm_fb_helper_dirty_blit_real(helper, &clip_copy);
-> >>  		}
-> >> -		helper->fb->funcs->dirty(helper->fb, NULL, 0, 0, &clip_copy, 1);
-> >> +		if (helper->fb->funcs->dirty)
-> >> +			helper->fb->funcs->dirty(helper->fb, NULL, 0, 0,
-> >> +						 &clip_copy, 1);
-> >>  =
+    struct sk_buff *virtskb_receive_small(struct virtskb *vs, ...);
+    struct sk_buff *virtskb_receive_big(struct virtskb *vs, ...);
+    struct sk_buff *virtskb_receive_mergeable(struct virtskb *vs, ...);
 
-> >>  		if (helper->buffer)
-> >>  			drm_client_buffer_vunmap(helper->buffer);
-> >> @@ -620,9 +622,6 @@ static void drm_fb_helper_dirty(struct fb_info *in=
-fo, u32 x, u32 y,
-> >>  	struct drm_clip_rect *clip =3D &helper->dirty_clip;
-> >>  	unsigned long flags;
-> >>  =
+    int virtskb_add_recvbuf_small(struct virtskb*vs, ...);
+    int virtskb_add_recvbuf_big(struct virtskb *vs, ...);
+    int virtskb_add_recvbuf_mergeable(struct virtskb *vs, ...);
 
-> >> -	if (!helper->fb->funcs->dirty)
-> >> -		return;
-> > =
+For the Guest->Host path it should be easier, so maybe I can add a
+"virtskb_send(struct virtskb *vs, struct sk_buff *skb)" with a part of the code
+of xmit_skb().
 
-> > drm_fb_helper_dirty() is called unconditionally by
-> > drm_fb_helper_sys_imageblit() et al, so we need check with
-> > drm_fbdev_use_shadow_fb() here.
-> > =
+Let me know if you have in mind better names or if I should put these function
+in another place.
 
-> >> -
-> >>  	spin_lock_irqsave(&helper->dirty_lock, flags);
-> >>  	clip->x1 =3D min_t(u32, clip->x1, x);
-> >>  	clip->y1 =3D min_t(u32, clip->y1, y);
-> >> @@ -2166,6 +2165,16 @@ static struct fb_deferred_io drm_fbdev_defio =
-=3D {
-> >>  	.deferred_io	=3D drm_fb_helper_deferred_io,
-> >>  };
-> >>  =
+I would like to leave the control part completely separate, so, for example,
+the two drivers will negotiate the features independently and they will call
+the right virtskb_receive_*() function based on the negotiation.
 
-> >> +static bool drm_fbdev_use_shadow_fb(struct drm_fb_helper *fb_helper)
-> >> +{
-> >> +	struct drm_device *dev =3D fb_helper->dev;
-> >> +	struct drm_framebuffer *fb =3D fb_helper->fb;
-> >> +
-> >> +	return dev->mode_config.prefer_shadow_fbdev |
-> >> +	       dev->mode_config.prefer_shadow |
-> > =
+I already started to work on it, but before to do more steps and send an RFC
+patch, I would like to hear your opinion.
+Do you think that makes sense?
+Do you see any issue or a better solution?
 
-> > Use logical OR here
-> > =
-
-> >> +	       !!fb->funcs->dirty;
-> > =
-
-> > and you can drop the the double NOT here.
-> > =
-
-> >> +}
-> >> +
-> >>  /**
-> >>   * drm_fb_helper_generic_probe - Generic fbdev emulation probe helper
-> >>   * @fb_helper: fbdev helper structure
-> >> @@ -2213,7 +2222,7 @@ int drm_fb_helper_generic_probe(struct drm_fb_he=
-lper *fb_helper,
-> >>  =
-
-> >>  	drm_fb_helper_fill_info(fbi, fb_helper, sizes);
-> >>  =
-
-> >> -	if (fb->funcs->dirty) {
-> >> +	if (drm_fbdev_use_shadow_fb(fb_helper)) {
-> >>  		struct fb_ops *fbops;
-> >>  		void *shadow;
-> >>  =
-
-> >> diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_conf=
-ig.h
-> >> index 759d462d028b..e1c751aca353 100644
-> >> --- a/include/drm/drm_mode_config.h
-> >> +++ b/include/drm/drm_mode_config.h
-> >> @@ -347,6 +347,8 @@ struct drm_mode_config_funcs {
-> >>   * @output_poll_work: delayed work for polling in process context
-> >>   * @preferred_depth: preferred RBG pixel depth, used by fb helpers
-> >>   * @prefer_shadow: hint to userspace to prefer shadow-fb rendering
-> >> + * @prefer_shadow_fbdev: hint to framebuffer emulation to prefer shad=
-ow-fb \
-> >> +	rendering
-> > =
-
-> > It's preferred to have the doc together with the struct member.
-> =
-
-> I just tried to follow the file's existing style, but OK, I don't mind.
-
-If it annoys you too much, convert all the member docs in the header
-comment into the inline style. That's what I usually do when the first
-inline kerneldoc comment is warranted (like here), but not yet rolled out.
-
-Or just mix&match if you feel like not doing that, we have lots of that
-already :-)
--Daniel
-
-> =
-
-> > it's less likely to be forgotten when things change. And we don't use
-> > line cont. when the doc line is too long. Just continue on the next line
-> > after an asterix.
-> > =
-
-> >>   * @cursor_width: hint to userspace for max cursor width
-> >>   * @cursor_height: hint to userspace for max cursor height
-> >>   * @helper_private: mid-layer private data
-> >> @@ -852,6 +854,9 @@ struct drm_mode_config {
-> >>  	/* dumb ioctl parameters */
-> >>  	uint32_t preferred_depth, prefer_shadow;
-> >>  =
-
-> >> +	/* fbdev parameters */
-> > =
-
-> > No need for this comment.
-> > =
-
-> > Doc can look like this, I've done s/framebuffer/fbdev/:
-> > 	/**
-> > 	 * @prefer_shadow_fbdev:
-> > 	 *
-> > 	 * Hint to fbdev emulation to prefer shadow-fb rendering.
-> > 	 */
-> > =
-
-> >> +	uint32_t prefer_shadow_fbdev;
-> > =
-
-> > Use bool here.
-> > =
-
-> > With that:
-> > =
-
-> > Reviewed-by: Noralf Tr=F8nnes <noralf@tronnes.org>
-> > =
-
-> > I have tested this on 2 drivers that use generic fbdev: vc4 (no shadow
-> > buf) and mi0283qt which has a dirty callback.
-> > =
-
-> > Tested-by: Noralf Tr=F8nnes <noralf@tronnes.org>
-> =
-
-> Thanks for reviewing and testing the patches.
-> =
-
-> Best regards
-> Thomas
-> =
-
-> > =
-
-> >> +
-> >>  	/**
-> >>  	 * @quirk_addfb_prefer_xbgr_30bpp:
-> >>  	 *
-> >>
-> > _______________________________________________
-> > dri-devel mailing list
-> > dri-devel@lists.freedesktop.org
-> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
-> > =
-
-> =
-
-> -- =
-
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
-> GF: Felix Imend=F6rffer, Mary Higgins, Sri Rasiah
-> HRB 21284 (AG N=FCrnberg)
-> =
-
-
-
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Thanks in advance,
+Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
