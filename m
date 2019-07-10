@@ -2,63 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79D40649E6
-	for <lists.virtualization@lfdr.de>; Wed, 10 Jul 2019 17:43:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F283464BE3
+	for <lists.virtualization@lfdr.de>; Wed, 10 Jul 2019 20:07:37 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 488584591;
-	Wed, 10 Jul 2019 15:43:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 6ECA647E8;
+	Wed, 10 Jul 2019 18:07:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EF5494586
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6629D47D0
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 10 Jul 2019 15:37:11 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 73C0D883
+	Wed, 10 Jul 2019 17:59:17 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1DA89894
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 10 Jul 2019 15:37:11 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id n9so2979612wrr.4
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 10 Jul 2019 08:37:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=w6gOM0EF8w6OgRkN0S1HwMV2ZTxvl6sDwbz7UvtM7Ds=;
-	b=EEHXoDPdS9TepWDl41ppjIz0wLAfEd3TlOdarjGut9/+M2XF0uYQ4zXqwyAM/RILBd
-	qXGpIDRWaTiZeTp4VoGppD7NnV3v/fLN3XIjYAiNMUE5IcKDbpCY8sbM5fr/d2u6H7Ae
-	ppBreR8Utt4diTqBByKcaAcMG5DY0styrKpRYS0wdTWCJXwmhx89ADjUMtw3L7nKTarF
-	SSBJfa1+isB6S0UnfX7NtI5MUfbXwSSwDs+1+yc30eua7u7Vaw53S+J97NvzoqyqHFw5
-	z1tnuqxyhiHeld4uVLMxaXp8eM1i+V1JAewRErCN+dJrpeiuh6FF1ba/39Ky8/H/pqWC
-	iBog==
-X-Gm-Message-State: APjAAAVV+I1kLTjG2g+06WcQtIPJveTa8WX7Cdt3yidSzfK1uLb1PzHo
-	8/Yqm+1D+0Q/fUnd32Htbn7b/A==
-X-Google-Smtp-Source: APXvYqw5KGnsPShaRheRWeLkyw7iNHfzH6H8mZGknsxq9TfA80oFKuQNpokcGJJXQu9Hu6et/y/htg==
-X-Received: by 2002:a5d:468a:: with SMTP id u10mr32491868wrq.177.1562773029910;
-	Wed, 10 Jul 2019 08:37:09 -0700 (PDT)
-Received: from steredhat (host122-201-dynamic.13-79-r.retail.telecomitalia.it.
-	[79.13.201.122])
-	by smtp.gmail.com with ESMTPSA id 15sm1847474wmk.34.2019.07.10.08.37.09
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 10 Jul 2019 08:37:09 -0700 (PDT)
-Date: Wed, 10 Jul 2019 17:37:07 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>
-Subject: [RFC] virtio-net: share receive_*() and add_recvbuf_*() with
-	virtio-vsock
-Message-ID: <20190710153707.twmzgmwqqw3pstos@steredhat>
-MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	Wed, 10 Jul 2019 17:59:17 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 83E8330C1D17;
+	Wed, 10 Jul 2019 17:59:16 +0000 (UTC)
+Received: from dhcp201-121.englab.pnq.redhat.com (ovpn-116-55.sin2.redhat.com
+	[10.67.116.55])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id CCDAA60148;
+	Wed, 10 Jul 2019 17:59:03 +0000 (UTC)
+From: Pankaj Gupta <pagupta@redhat.com>
+To: virtualization@lists.linux-foundation.org,
+	dan.j.williams@intel.com
+Subject: [PATCH v2] virtio_pmem: fix sparse warning
+Date: Wed, 10 Jul 2019 23:28:32 +0530
+Message-Id: <20190710175832.17252-1-pagupta@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.45]);
+	Wed, 10 Jul 2019 17:59:16 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org
+Cc: pagupta@redhat.com, mst@redhat.com, cohuck@redhat.com,
+	linux-kernel@vger.kernel.org, yuval.shaia@oracle.com,
+	lcapitulino@redhat.com, linux-nvdimm@lists.01.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,56 +57,66 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Hi,
-as Jason suggested some months ago, I looked better at the virtio-net driver to
-understand if we can reuse some parts also in the virtio-vsock driver, since we
-have similar challenges (mergeable buffers, page allocation, small
-packets, etc.).
+This patch fixes below sparse warning related to __virtio
+type in virtio pmem driver. This is reported by Intel test
+bot on linux-next tree.
 
-Initially, I would add the skbuff in the virtio-vsock in order to re-use
-receive_*() functions.
-Then I would move receive_[small, big, mergeable]() and
-add_recvbuf_[small, big, mergeable]() outside of virtio-net driver, in order to
-call them also from virtio-vsock. I need to do some refactoring (e.g. leave the
-XDP part on the virtio-net driver), but I think it is feasible.
+nd_virtio.c:56:28: warning: incorrect type in assignment 
+				(different base types)
+nd_virtio.c:56:28:    expected unsigned int [unsigned] [usertype] type
+nd_virtio.c:56:28:    got restricted __virtio32
+nd_virtio.c:93:59: warning: incorrect type in argument 2 
+				(different base types)
+nd_virtio.c:93:59:    expected restricted __virtio32 [usertype] val
+nd_virtio.c:93:59:    got unsigned int [unsigned] [usertype] ret
 
-The idea is to create a virtio-skb.[h,c] where put these functions and a new
-object where stores some attributes needed (e.g. hdr_len ) and status (e.g.
-some fields of struct receive_queue). This is an idea of virtio-skb.h that
-I have in mind:
-    struct virtskb;
+Reported-by: kbuild test robot <lkp@intel.com>
+Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
+---
 
-    struct sk_buff *virtskb_receive_small(struct virtskb *vs, ...);
-    struct sk_buff *virtskb_receive_big(struct virtskb *vs, ...);
-    struct sk_buff *virtskb_receive_mergeable(struct virtskb *vs, ...);
+This fixes a warning, so submitting it as a separate
+patch on top of virtio pmem series.
 
-    int virtskb_add_recvbuf_small(struct virtskb*vs, ...);
-    int virtskb_add_recvbuf_big(struct virtskb *vs, ...);
-    int virtskb_add_recvbuf_mergeable(struct virtskb *vs, ...);
+ include/uapi/linux/virtio_pmem.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-For the Guest->Host path it should be easier, so maybe I can add a
-"virtskb_send(struct virtskb *vs, struct sk_buff *skb)" with a part of the code
-of xmit_skb().
+diff --git a/include/uapi/linux/virtio_pmem.h b/include/uapi/linux/virtio_pmem.h
+index efcd72f2d20d..7a7435281362 100644
+--- a/include/uapi/linux/virtio_pmem.h
++++ b/include/uapi/linux/virtio_pmem.h
+@@ -10,7 +10,7 @@
+ #ifndef _UAPI_LINUX_VIRTIO_PMEM_H
+ #define _UAPI_LINUX_VIRTIO_PMEM_H
+ 
+-#include <linux/types.h>
++#include <linux/virtio_types.h>
+ #include <linux/virtio_ids.h>
+ #include <linux/virtio_config.h>
+ 
+@@ -23,12 +23,12 @@ struct virtio_pmem_config {
+ 
+ struct virtio_pmem_resp {
+ 	/* Host return status corresponding to flush request */
+-	__u32 ret;
++	__virtio32 ret;
+ };
+ 
+ struct virtio_pmem_req {
+ 	/* command type */
+-	__u32 type;
++	__virtio32 type;
+ };
+ 
+ #endif
+-- 
+2.20.1
 
-Let me know if you have in mind better names or if I should put these function
-in another place.
-
-I would like to leave the control part completely separate, so, for example,
-the two drivers will negotiate the features independently and they will call
-the right virtskb_receive_*() function based on the negotiation.
-
-I already started to work on it, but before to do more steps and send an RFC
-patch, I would like to hear your opinion.
-Do you think that makes sense?
-Do you see any issue or a better solution?
-
-Thanks in advance,
-Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
