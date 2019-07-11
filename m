@@ -2,75 +2,75 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 237346503E
-	for <lists.virtualization@lfdr.de>; Thu, 11 Jul 2019 04:43:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4E536504E
+	for <lists.virtualization@lfdr.de>; Thu, 11 Jul 2019 04:48:44 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id F0F694B28;
-	Thu, 11 Jul 2019 02:43:31 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id CD0414B26;
+	Thu, 11 Jul 2019 02:48:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 133F3494B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7A8DE4B20
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 11 Jul 2019 02:35:54 +0000 (UTC)
+	Thu, 11 Jul 2019 02:40:09 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 82087DF
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 33DDF87C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 11 Jul 2019 02:35:53 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id f4so9227157ioh.6
+	Thu, 11 Jul 2019 02:40:08 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id y15so2004611pfn.5
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 10 Jul 2019 19:35:53 -0700 (PDT)
+	Wed, 10 Jul 2019 19:40:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=C1FC0kkhG8SE4KxZI9/vd1vvZYlqKizf2ehICOMyQFw=;
-	b=gZuX85ZCmj/43wOQW8QDrAr8gsP1kGWGDwQXP7ruMAHyiaKt3g7NjtaA+MEVdHmPOT
-	wKDPWmEBpa83TiEvIwO+ugF++ClLRUvAzQLBP51kB4e6VSC6Snkjk3d4n8a6/wkm9/Ra
-	D7155hJwNevtJn/VruKCuIazOesSrERBBV8vHwGFFkNSHxznLmqbfHO6yEdsHe98bC30
-	T7PKRJ7+sCT5Xa2XQQwi9kRh5LcipaXeyRjPVyu6OVHm/E8NeQJY6UH3Mv4YtROKhPbf
-	uYVC+T7pV39I8wXcfcxdqZB0y5IdoQR5bzuyil6Rc7DsmYrELvsBAixhWonuRgUpjKBt
-	FjYg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=C8E8H/QOJPMLUX+Dl+OKCeAuU0VWHZNPc5/1qNNCS3A=;
+	b=LFssXHlc4NksAYAhzFzgi8xTRTyRMliELywQFv9VUJVWjf2PiU9RiGZ3zV9OaXaJfz
+	91HAomEa81By0LAwwOEB9poOe8UtZyfG9My4IBU8GlmxOBGbsRXNWGH0/bts96LbnjnA
+	NGQkIli+cQ/8qTzQXXfwnhF7U17UASCTKYqTMo/zn/0sP6m9Z0jHm9AixzwV084y/nqx
+	8y2vGNX0GfKDQ+2gYrulCSBkZ9ssbkmBgG1bxloiWpKTGlMfoHhs298oR6oIMlTW4bk4
+	B98fphK+vEl3DSmUmjhZgVDft0yE5G+Vh5F41jeQl5ag1xxzkRi75cZkX6ek98V4UOHK
+	PCMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=C1FC0kkhG8SE4KxZI9/vd1vvZYlqKizf2ehICOMyQFw=;
-	b=SjSjG67wKVIO+T7Y+GQJV+hPRlKkZZKobaBuTKN9e60eikXtOEiHKVQlZ0aoh7uA/s
-	/ElLysNos/WxYSOEcL98cCPngxspe3DnEXx71kOx/X/fwyjSr2dXHnmE5sgKAcvAY8fQ
-	uHxx1NzCVQoH9s4eAceOQUuk4R2sB5dTmDEHyrqNZ+rxMCvPnO6udrHGY/QWJAP+0Ibx
-	CJu9KDuONBMraXPlbxOS2bLwb4isOqU8nT08xHqTB8wUvBX48hm2bonJ8Mm3DMps716w
-	3dmRqbHj5Sl/HH8++cOK1Kjo4tYvc1KwQnbJ5OfSOjiX3XqOZvlOhCKpSyQaCsy3ubnN
-	giKw==
-X-Gm-Message-State: APjAAAVP7m3Q8C6llnjRHDB+jaQvlCOgRgHrcl1/OKtYZVaaekXRfR9z
-	HfFL0AMGAxBmshs5o4arND30+rBV1/7OS4ThhuM=
-X-Google-Smtp-Source: APXvYqySOQ0NQmFWxVA1kPgmyB8lKtJqH6UcCGrrUDZnNcuPCHHrmvDjUvwMLLqlPMPNkYUmdbrvZzQlXxg4BT1y+pw=
-X-Received: by 2002:a5d:8e08:: with SMTP id e8mr1665361iod.139.1562812552660; 
-	Wed, 10 Jul 2019 19:35:52 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190702141903.1131-1-kraxel@redhat.com>
-	<20190702141903.1131-9-kraxel@redhat.com>
-	<CAPaKu7QP=A2kV_kqcT20Pmc831HviaBJN1RpOFoa=V1g6SmE_g@mail.gmail.com>
-	<20190704112534.v7icsuverf7wrbjq@sirius.home.kraxel.org>
-	<CAPaKu7SQS5USJf0Y+K41tuRA=4qZJf5CnTu9EqAPZvz+GJCP2w@mail.gmail.com>
-In-Reply-To: <CAPaKu7SQS5USJf0Y+K41tuRA=4qZJf5CnTu9EqAPZvz+GJCP2w@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=C8E8H/QOJPMLUX+Dl+OKCeAuU0VWHZNPc5/1qNNCS3A=;
+	b=tYTCxR1lrpB+pUN05FLqPWRzRuJ0S0Z3H42jQcG3/oCkXJiMu95GQUhRX4dDPyAtaN
+	9zxMtWYrH1QHCR85kf67XpQPtaA16TeFZzjIX5uwvxoVBJdb6hFcPx1x9tBwlJ61kFxD
+	+xLwvn7ieT646nM4m6hShM4C1zCwiNSCEaqbfPZxgkzcem8EMq1L6G0NILgJiEAYjEOU
+	0W22Za8GQ+2fUUjcka1fOVBdEmMlN0q0q9uEeVff844xS44pj+CnH0qb2nRqixYwQwLS
+	+RgrN9XTqFRX4fkLs4lUpsGuNdqt+nvgjhG1v1WNSo3ZhVDUWEeykx0c6cfFpwAJn8SK
+	l1ag==
+X-Gm-Message-State: APjAAAVolpNwLUrSJD0mbXI0h+7gjQ1JxdZPMun13JOebFFucWyVvFhB
+	x0SUu5HCvSkLZkkXn/1mX3s=
+X-Google-Smtp-Source: APXvYqxPMPQEVTxxbc9UReUqfnmxUCvYxChCFWNedtCSJGKTOwJRfV39HBtupRw4ZTPjT4QYQz/DMQ==
+X-Received: by 2002:a63:7b4d:: with SMTP id k13mr1686080pgn.182.1562812807406; 
+	Wed, 10 Jul 2019 19:40:07 -0700 (PDT)
+Received: from olv0.mtv.corp.google.com
+	([2620:15c:202:201:9649:82d6:f889:b307])
+	by smtp.gmail.com with ESMTPSA id
+	bo20sm2877077pjb.23.2019.07.10.19.40.06
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 10 Jul 2019 19:40:06 -0700 (PDT)
 From: Chia-I Wu <olvaffe@gmail.com>
-Date: Wed, 10 Jul 2019 19:35:41 -0700
-Message-ID: <CAPaKu7RQo8T81iGtPbtgmv7WtV-uDO9+BsT3vMd=iggZ0Q_Yew@mail.gmail.com>
-Subject: Re: [PATCH v6 08/18] drm/virtio: rework virtio_gpu_execbuffer_ioctl
-	fencing
-To: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH] drm/virtio: kick vq outside of the vq lock
+Date: Wed, 10 Jul 2019 19:39:59 -0700
+Message-Id: <20190711023959.170158-1-olvaffe@gmail.com>
+X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
+In-Reply-To: <20190711022937.166015-1-olvaffe@gmail.com>
+References: <20190711022937.166015-1-olvaffe@gmail.com>
+MIME-Version: 1.0
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
-	ML dri-devel <dri-devel@lists.freedesktop.org>,
-	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Gurchetan Singh <gurchetansingh@chromium.org>
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+	Daniel Vetter <daniel@ffwll.ch>, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -87,52 +87,87 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Jul 4, 2019 at 11:46 AM Chia-I Wu <olvaffe@gmail.com> wrote:
->
-> On Thu, Jul 4, 2019 at 4:25 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
-> >
-> >   Hi,
-> >
-> > > >         if (fence)
-> > > >                 virtio_gpu_fence_emit(vgdev, hdr, fence);
-> > > > +       if (vbuf->objs) {
-> > > > +               virtio_gpu_array_add_fence(vbuf->objs, &fence->f);
-> > > > +               virtio_gpu_array_unlock_resv(vbuf->objs);
-> > > > +       }
-> > > This is with the spinlock held.  Maybe we should move the
-> > > virtio_gpu_array_unlock_resv call out of the critical section.
-> >
-> > That would bring back the race ...
-> Right...
-> >
-> > > I am actually more concerned about virtio_gpu_array_add_fence, but it
-> > > is also harder to move.  Should we add a kref to the object array?
-> >
-> > Yep, refcounting would be the other way to fix the race.
-> >
-> > > This bothers me because I recently ran into a CPU-bound game with very
-> > > bad lock contention here.
-> >
-> > Hmm.  Any clue where this comes from?  Multiple threads competing for
-> > virtio buffers I guess?  Maybe we should have larger virtqueues?
-> The game was single-threaded.  I guess it was the game and Xorg
-> competing for virtio buffers.  That was also on an older kernel
-> without explicit fences.  The userspace had to create dummy resources
-> frequently to do VIRTIO_IOCTL_RESOURCE_WAIT.
->
-> I think this is fine for now as far as I am concerned.  I can look
-> into this more closely after this series lands.
-It was virtio_gpu_dequeue_ctrl_func who wanted to grab the lock to
-handle the responses.  I sent a patch for it
+Replace virtqueue_kick by virtqueue_kick_prepare, which requires
+serialization, and virtqueue_notify, which does not.  Repurpose the
+return values to indicate whether the vq should be notified.
 
-  https://patchwork.freedesktop.org/series/63529/
+This fixes a bad spinlock contention when the host is qemu.  When
+the guest calls virtqueue_notify, the qemu vcpu thread exits the
+guest and waits for the qemu iothread to perform the MMIO.  If the
+qemu iothread is still processing the prior buffer, and if the prior
+buffer is cheap to GPU, the iothread will go ahead and generate an
+IRQ.  A worker thread in the guest might start running
+virtio_gpu_dequeue_ctrl_func.  If virtqueue_notify was called with
+the vq lock held, the worker thread would have to busy wait inside
+virtio_gpu_dequeue_ctrl_func.
 
->
->
-> >
-> > cheers,
-> >   Gerd
-> >
+v2: fix scrambled commit message
+
+Signed-off-by: Chia-I Wu <olvaffe@gmail.com>
+---
+ drivers/gpu/drm/virtio/virtgpu_vq.c | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+index 6c1a90717535..e96f88fe5c83 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_vq.c
++++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+@@ -291,11 +291,9 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+ 		trace_virtio_gpu_cmd_queue(vq,
+ 			(struct virtio_gpu_ctrl_hdr *)vbuf->buf);
+ 
+-		virtqueue_kick(vq);
++		ret = virtqueue_kick_prepare(vq);
+ 	}
+ 
+-	if (!ret)
+-		ret = vq->num_free;
+ 	return ret;
+ }
+ 
+@@ -307,6 +305,10 @@ static int virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
+ 	spin_lock(&vgdev->ctrlq.qlock);
+ 	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
+ 	spin_unlock(&vgdev->ctrlq.qlock);
++
++	if (rc > 0)
++		virtqueue_notify(vgdev->ctrlq.vq);
++
+ 	return rc;
+ }
+ 
+@@ -339,6 +341,10 @@ static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+ 		virtio_gpu_fence_emit(vgdev, hdr, fence);
+ 	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
+ 	spin_unlock(&vgdev->ctrlq.qlock);
++
++	if (rc > 0)
++		virtqueue_notify(vgdev->ctrlq.vq);
++
+ 	return rc;
+ }
+ 
+@@ -369,13 +375,14 @@ static int virtio_gpu_queue_cursor(struct virtio_gpu_device *vgdev,
+ 		trace_virtio_gpu_cmd_queue(vq,
+ 			(struct virtio_gpu_ctrl_hdr *)vbuf->buf);
+ 
+-		virtqueue_kick(vq);
++		ret = virtqueue_kick_prepare(vq);
+ 	}
+ 
+ 	spin_unlock(&vgdev->cursorq.qlock);
+ 
+-	if (!ret)
+-		ret = vq->num_free;
++	if (ret > 0)
++		virtqueue_notify(vq);
++
+ 	return ret;
+ }
+ 
+-- 
+2.22.0.410.gd8fdbe21b5-goog
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
