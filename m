@@ -2,92 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87947662D1
-	for <lists.virtualization@lfdr.de>; Fri, 12 Jul 2019 02:26:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5062B6661C
+	for <lists.virtualization@lfdr.de>; Fri, 12 Jul 2019 07:24:52 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E7943542F;
-	Fri, 12 Jul 2019 00:25:58 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id EF1F9563F;
+	Fri, 12 Jul 2019 05:24:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 29DE853EA
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 72CC0563A
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 12 Jul 2019 00:19:13 +0000 (UTC)
+	Fri, 12 Jul 2019 05:16:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D789DDF
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6DE6125A
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 12 Jul 2019 00:19:12 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-	by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
-	x6C0IxBN072399; Fri, 12 Jul 2019 00:18:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
-	h=to : cc : subject :
-	from : references : date : in-reply-to : message-id : mime-version :
-	content-type; s=corp-2018-07-02;
-	bh=ikifAx/xZE2Hygp/gjJZMb9ec8DwwTr57T242pctyqw=;
-	b=EX8GM9R/r2omkzopNRNKk1pBbDLXTN5+SNwFsuzwni7wqAG0+XS2Lv6kgOtaLLi9f+98
-	8pPDExnZOiFcsWseAe/X4/E11ZismKWL7UMeAaUjWYUFwjRPR4tXwUo4qsMS2RFLGeUD
-	mattgH6L4tWbz7IAykZAqj7UcliqgKw4P02IJcxyjVXYvu73MNUVtjX6fxYCfTPhkVhN
-	L0jXbRvZgQ9+N26kRjxGJny+wav0isAYc/avOKBcN3dHXTSKwHzV7F+QLy1/hTDr+Vgi
-	Z4ubZxLcsVYd9eHZxFunCfSfrIEXo/xnMBVzekUT/Vhsa4/2OOw1ytAf/DSi+z6mQvzV
-	hg== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
-	by userp2130.oracle.com with ESMTP id 2tjk2u2w1g-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 12 Jul 2019 00:18:59 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
-	by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
-	x6C0HUVS030890; Fri, 12 Jul 2019 00:18:59 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
-	by userp3020.oracle.com with ESMTP id 2tnc8tu1ab-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 12 Jul 2019 00:18:59 +0000
-Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
-	by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x6C0Iv2t027874;
-	Fri, 12 Jul 2019 00:18:58 GMT
-Received: from ca-mkp.ca.oracle.com (/10.159.214.123)
-	by default (Oracle Beehive Gateway v4.0)
-	with ESMTP ; Thu, 11 Jul 2019 17:18:57 -0700
-To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-Subject: Re: [PATCH] scsi: virtio_scsi: Use struct_size() helper
-From: "Martin K. Petersen" <martin.petersen@oracle.com>
-Organization: Oracle Corporation
-References: <20190619192833.GA825@embeddedor>
-Date: Thu, 11 Jul 2019 20:18:54 -0400
-In-Reply-To: <20190619192833.GA825@embeddedor> (Gustavo A. R. Silva's message
-	of "Wed, 19 Jun 2019 14:28:33 -0500")
-Message-ID: <yq1a7dk9kb5.fsf@oracle.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1.92 (gnu/linux)
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9315
-	signatures=668688
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
-	malwarescore=0
-	phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=602
-	adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
-	engine=8.0.1-1810050000 definitions=main-1907120002
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9315
-	signatures=668688
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
-	priorityscore=1501 malwarescore=0
-	suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
-	lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=658
-	adultscore=0
-	classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
-	definitions=main-1907120002
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
-	UNPARSEABLE_RELAY autolearn=ham version=3.3.1
+	Fri, 12 Jul 2019 05:16:25 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 92CE2308792E;
+	Fri, 12 Jul 2019 05:16:24 +0000 (UTC)
+Received: from dhcp201-121.englab.pnq.redhat.com (ovpn-116-115.sin2.redhat.com
+	[10.67.116.115])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id E3CC85DE6E;
+	Fri, 12 Jul 2019 05:16:14 +0000 (UTC)
+From: Pankaj Gupta <pagupta@redhat.com>
+To: dan.j.williams@intel.com
+Subject: [PATCH v3] virtio_pmem: fix sparse warning
+Date: Fri, 12 Jul 2019 10:46:10 +0530
+Message-Id: <20190712051610.15478-1-pagupta@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.45]);
+	Fri, 12 Jul 2019 05:16:24 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: linux-scsi@vger.kernel.org,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
-	"James E.J. Bottomley" <jejb@linux.ibm.com>
+Cc: pagupta@redhat.com, linux-nvdimm@lists.01.org, cohuck@redhat.com,
+	linux-kernel@vger.kernel.org, yuval.shaia@oracle.com,
+	lcapitulino@redhat.com, mst@redhat.com,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -99,22 +57,82 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+This patch fixes below sparse warning related to __virtio
+type in virtio pmem driver. This is reported by Intel test
+bot on linux-next tree.
 
-Gustavo,
+nd_virtio.c:56:28: warning: incorrect type in assignment
+                                (different base types)
+nd_virtio.c:56:28:    expected unsigned int [unsigned] [usertype] type
+nd_virtio.c:56:28:    got restricted __virtio32
+nd_virtio.c:93:59: warning: incorrect type in argument 2
+                                (different base types)
+nd_virtio.c:93:59:    expected restricted __virtio32 [usertype] val
+nd_virtio.c:93:59:    got unsigned int [unsigned] [usertype] ret
 
-> One of the more common cases of allocation size calculations is finding
-> the size of a structure that has a zero-sized array at the end, along
-> with memory for some number of elements for that array. For example:
+Reported-by: kbuild test robot <lkp@intel.com>
+Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
+---
+This fixes a warning, so submitting it as a separate
+patch on top of virtio pmem series.
 
-Applied to 5.4/scsi-queue, thanks!
+v2-> v3
+ Use __le for req/resp fields - Michael
 
+ drivers/nvdimm/nd_virtio.c       | 4 ++--
+ include/uapi/linux/virtio_pmem.h | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/nvdimm/nd_virtio.c b/drivers/nvdimm/nd_virtio.c
+index 8645275c08c2..10351d5b49fa 100644
+--- a/drivers/nvdimm/nd_virtio.c
++++ b/drivers/nvdimm/nd_virtio.c
+@@ -53,7 +53,7 @@ static int virtio_pmem_flush(struct nd_region *nd_region)
+ 	init_waitqueue_head(&req_data->host_acked);
+ 	init_waitqueue_head(&req_data->wq_buf);
+ 	INIT_LIST_HEAD(&req_data->list);
+-	req_data->req.type = cpu_to_virtio32(vdev, VIRTIO_PMEM_REQ_TYPE_FLUSH);
++	req_data->req.type = cpu_to_le32(VIRTIO_PMEM_REQ_TYPE_FLUSH);
+ 	sg_init_one(&sg, &req_data->req, sizeof(req_data->req));
+ 	sgs[0] = &sg;
+ 	sg_init_one(&ret, &req_data->resp.ret, sizeof(req_data->resp));
+@@ -90,7 +90,7 @@ static int virtio_pmem_flush(struct nd_region *nd_region)
+ 	} else {
+ 		/* A host repsonse results in "host_ack" getting called */
+ 		wait_event(req_data->host_acked, req_data->done);
+-		err = virtio32_to_cpu(vdev, req_data->resp.ret);
++		err = le32_to_cpu(req_data->resp.ret);
+ 	}
+ 
+ 	kfree(req_data);
+diff --git a/include/uapi/linux/virtio_pmem.h b/include/uapi/linux/virtio_pmem.h
+index efcd72f2d20d..9a63ed6d062f 100644
+--- a/include/uapi/linux/virtio_pmem.h
++++ b/include/uapi/linux/virtio_pmem.h
+@@ -23,12 +23,12 @@ struct virtio_pmem_config {
+ 
+ struct virtio_pmem_resp {
+ 	/* Host return status corresponding to flush request */
+-	__u32 ret;
++	__le32 ret;
+ };
+ 
+ struct virtio_pmem_req {
+ 	/* command type */
+-	__u32 type;
++	__le32 type;
+ };
+ 
+ #endif
 -- 
-Martin K. Petersen	Oracle Linux Engineering
+2.14.5
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
