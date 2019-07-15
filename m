@@ -2,54 +2,67 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id D335F69921
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 18:34:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84314699B1
+	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 19:28:27 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CF25FD13;
-	Mon, 15 Jul 2019 16:34:03 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id AB53CF01;
+	Mon, 15 Jul 2019 17:28:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A4B0DB88
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id ECF2CCC6
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 16:34:02 +0000 (UTC)
+	Mon, 15 Jul 2019 17:28:19 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2FED971C
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 90170892
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 16:34:02 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	15 Jul 2019 09:34:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,493,1557212400"; d="scan'208";a="175145375"
-Received: from tassilo.jf.intel.com (HELO tassilo.localdomain) ([10.7.201.137])
-	by FMSMGA003.fm.intel.com with ESMTP; 15 Jul 2019 09:34:00 -0700
-Received: by tassilo.localdomain (Postfix, from userid 1000)
-	id 9AA04301AE9; Mon, 15 Jul 2019 09:34:00 -0700 (PDT)
-From: Andi Kleen <ak@linux.intel.com>
-To: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 0/2] Remove 32-bit Xen PV guest support
-References: <20190715113739.17694-1-jgross@suse.com>
-Date: Mon, 15 Jul 2019 09:34:00 -0700
-In-Reply-To: <20190715113739.17694-1-jgross@suse.com> (Juergen Gross's message
-	of "Mon, 15 Jul 2019 13:37:37 +0200")
-Message-ID: <87y30zfe9z.fsf@linux.intel.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+	Mon, 15 Jul 2019 17:28:19 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+	[209.85.221.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 0DA09217F4
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 15 Jul 2019 17:28:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1563211699;
+	bh=9E0ZytSBTx4ARSQXikFxFqt26WTjZZg9YEuzJOE71XY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=CvQyWlBHJkYMir6qOJgjnjkTNYuDngouMYZ2nM0oVQkb9xzSIvJe/qiRYXQDXjMPB
+	7lVAOCBykBf4qxlzEEPF2ZuEcjSLtiH9TBJOFmQnrCvchgMrQ5KDFopNebDD+yulBB
+	qN0sJe/fvbW15UKisT/n89ScJ8kZ0+b1BwOd14yg=
+Received: by mail-wr1-f46.google.com with SMTP id f9so17944705wre.12
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 15 Jul 2019 10:28:18 -0700 (PDT)
+X-Gm-Message-State: APjAAAUgx/MysKZ1tc0IohrwvnxQJAMmeIMtghjuDTwoL09ogJlFGKbT
+	Ql2QYzKXBN3cpZbz/UUqUGKATW0PFJU8jZTwR4GGZQ==
+X-Google-Smtp-Source: APXvYqz1bcfnUp0J1AeVS+zB00SN2CvvFrutc7PmnWTPZk+ekXhDQO1E9JPmdpKMMm6yj0t8VwFOW7L195SLye6jbF0=
+X-Received: by 2002:adf:cf02:: with SMTP id o2mr11075557wrj.352.1563211697557; 
+	Mon, 15 Jul 2019 10:28:17 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.3.1
+References: <20190715113739.17694-1-jgross@suse.com>
+	<87y30zfe9z.fsf@linux.intel.com>
+In-Reply-To: <87y30zfe9z.fsf@linux.intel.com>
+From: Andy Lutomirski <luto@kernel.org>
+Date: Mon, 15 Jul 2019 10:28:06 -0700
+X-Gmail-Original-Message-ID: <CALCETrUn=gho5Oug-yYvF2d1WYCe7gvtx+bXuhJ8LTjb9guvuA@mail.gmail.com>
+Message-ID: <CALCETrUn=gho5Oug-yYvF2d1WYCe7gvtx+bXuhJ8LTjb9guvuA@mail.gmail.com>
+Subject: Re: [PATCH 0/2] Remove 32-bit Xen PV guest support
+To: Andi Kleen <ak@linux.intel.com>
+X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, x86@kernel.org,
-	Alok Kataria <akataria@vmware.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
+Cc: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	X86 ML <x86@kernel.org>, Alok Kataria <akataria@vmware.com>,
+	LKML <linux-kernel@vger.kernel.org>,
+	Linux Virtualization <virtualization@lists.linux-foundation.org>,
 	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Andy Lutomirski <luto@kernel.org>,
-	"H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
+	Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+	xen-devel <xen-devel@lists.xenproject.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -68,22 +81,34 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Juergen Gross <jgross@suse.com> writes:
+On Mon, Jul 15, 2019 at 9:34 AM Andi Kleen <ak@linux.intel.com> wrote:
+>
+> Juergen Gross <jgross@suse.com> writes:
+>
+> > The long term plan has been to replace Xen PV guests by PVH. The first
+> > victim of that plan are now 32-bit PV guests, as those are used only
+> > rather seldom these days. Xen on x86 requires 64-bit support and with
+> > Grub2 now supporting PVH officially since version 2.04 there is no
+> > need to keep 32-bit PV guest support alive in the Linux kernel.
+> > Additionally Meltdown mitigation is not available in the kernel running
+> > as 32-bit PV guest, so dropping this mode makes sense from security
+> > point of view, too.
+>
+> Normally we have a deprecation period for feature removals like this.
+> You would make the kernel print a warning for some releases, and when
+> no user complains you can then remove. If a user complains you can't.
+>
 
-> The long term plan has been to replace Xen PV guests by PVH. The first
-> victim of that plan are now 32-bit PV guests, as those are used only
-> rather seldom these days. Xen on x86 requires 64-bit support and with
-> Grub2 now supporting PVH officially since version 2.04 there is no
-> need to keep 32-bit PV guest support alive in the Linux kernel.
-> Additionally Meltdown mitigation is not available in the kernel running
-> as 32-bit PV guest, so dropping this mode makes sense from security
-> point of view, too.
+As I understand it, the kernel rules do allow changes like this even
+if there's a complaint: this is a patch that removes what is
+effectively hardware support.  If the maintenance cost exceeds the
+value, then removal is fair game.  (Obviously we weight the value to
+preserving compatibility quite highly, but in this case, Xen dropped
+32-bit hardware support a long time ago.  If the Xen hypervisor says
+that 32-bit PV guest support is deprecated, it's deprecated.)
 
-Normally we have a deprecation period for feature removals like this.
-You would make the kernel print a warning for some releases, and when
-no user complains you can then remove. If a user complains you can't.
-
--Andi
+That being said, a warning might not be a bad idea.  What's the
+current status of this in upstream Xen?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
