@@ -2,69 +2,138 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84314699B1
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 19:28:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78DCD69A0C
+	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 19:39:20 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AB53CF01;
-	Mon, 15 Jul 2019 17:28:21 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id F179CEFF;
+	Mon, 15 Jul 2019 17:39:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id ECF2CCC6
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 12635AD0
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 17:28:19 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 90170892
+	Mon, 15 Jul 2019 17:39:11 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+	[216.71.145.155])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 38BE68DB
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 17:28:19 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
-	[209.85.221.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 0DA09217F4
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 17:28:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1563211699;
-	bh=9E0ZytSBTx4ARSQXikFxFqt26WTjZZg9YEuzJOE71XY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=CvQyWlBHJkYMir6qOJgjnjkTNYuDngouMYZ2nM0oVQkb9xzSIvJe/qiRYXQDXjMPB
-	7lVAOCBykBf4qxlzEEPF2ZuEcjSLtiH9TBJOFmQnrCvchgMrQ5KDFopNebDD+yulBB
-	qN0sJe/fvbW15UKisT/n89ScJ8kZ0+b1BwOd14yg=
-Received: by mail-wr1-f46.google.com with SMTP id f9so17944705wre.12
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 10:28:18 -0700 (PDT)
-X-Gm-Message-State: APjAAAUgx/MysKZ1tc0IohrwvnxQJAMmeIMtghjuDTwoL09ogJlFGKbT
-	Ql2QYzKXBN3cpZbz/UUqUGKATW0PFJU8jZTwR4GGZQ==
-X-Google-Smtp-Source: APXvYqz1bcfnUp0J1AeVS+zB00SN2CvvFrutc7PmnWTPZk+ekXhDQO1E9JPmdpKMMm6yj0t8VwFOW7L195SLye6jbF0=
-X-Received: by 2002:adf:cf02:: with SMTP id o2mr11075557wrj.352.1563211697557; 
-	Mon, 15 Jul 2019 10:28:17 -0700 (PDT)
-MIME-Version: 1.0
+	Mon, 15 Jul 2019 17:39:09 +0000 (UTC)
+Authentication-Results: esa3.hc3370-68.iphmx.com;
+	dkim=none (message not signed) header.i=none;
+	spf=None smtp.pra=andrew.cooper3@citrix.com;
+	spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+	spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+	authenticity information available from domain of
+	andrew.cooper3@citrix.com) identity=pra;
+	client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+	envelope-from="Andrew.Cooper3@citrix.com";
+	x-sender="andrew.cooper3@citrix.com";
+	x-conformance=sidf_compatible
+Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
+	Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+	permitted sender) identity=mailfrom;
+	client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+	envelope-from="Andrew.Cooper3@citrix.com";
+	x-sender="Andrew.Cooper3@citrix.com";
+	x-conformance=sidf_compatible; x-record-type="v=spf1";
+	x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+	ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+	ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+	ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83 ~all"
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+	authenticity information available from domain of
+	postmaster@mail.citrix.com) identity=helo;
+	client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+	envelope-from="Andrew.Cooper3@citrix.com";
+	x-sender="postmaster@mail.citrix.com";
+	x-conformance=sidf_compatible
+IronPort-SDR: u/JBkRit5XP7yvl74tHg1kfCvEnm5OePMdaR6Tzg2LTzdDM/p4lGc1p5B+l956932N7gRRLXiN
+	pGUGxuh8B8SEKu1RcWNoFdYFuM1pkNrP2uSHXq0DoBA/IbQ7bZHqAIo2TR8fGuD7UDAsBJtwpm
+	RcTWq0bnkIfGGeSlUGAFRRQbkPLjJmMh9u/MQCKMuDrOS8hRRcAks5MO+33iUWXkQJh3QRoSEd
+	0VUecKmccu2B4Uq+4NFzFaQcxQ7O5IWEAciw29BSc/JI83RDDPameeoRRAvpXzg+HsOBmJ4zPm
+	OB8=
+X-SBRS: 2.7
+X-MesageID: 2995352
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.63,493,1557201600"; 
+   d="scan'208";a="2995352"
+Subject: Re: [Xen-devel] [PATCH 0/2] Remove 32-bit Xen PV guest support
+To: Andy Lutomirski <luto@kernel.org>, Andi Kleen <ak@linux.intel.com>
 References: <20190715113739.17694-1-jgross@suse.com>
 	<87y30zfe9z.fsf@linux.intel.com>
-In-Reply-To: <87y30zfe9z.fsf@linux.intel.com>
-From: Andy Lutomirski <luto@kernel.org>
-Date: Mon, 15 Jul 2019 10:28:06 -0700
-X-Gmail-Original-Message-ID: <CALCETrUn=gho5Oug-yYvF2d1WYCe7gvtx+bXuhJ8LTjb9guvuA@mail.gmail.com>
-Message-ID: <CALCETrUn=gho5Oug-yYvF2d1WYCe7gvtx+bXuhJ8LTjb9guvuA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Remove 32-bit Xen PV guest support
-To: Andi Kleen <ak@linux.intel.com>
-X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+	<CALCETrUn=gho5Oug-yYvF2d1WYCe7gvtx+bXuhJ8LTjb9guvuA@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=andrew.cooper3@citrix.com; prefer-encrypt=mutual; keydata=
+	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
+	6+ahAA==
+Message-ID: <bbf1ea2d-1206-eb54-3611-4c9b9fad4aa4@citrix.com>
+Date: Mon, 15 Jul 2019 18:39:03 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.2
+MIME-Version: 1.0
+In-Reply-To: <CALCETrUn=gho5Oug-yYvF2d1WYCe7gvtx+bXuhJ8LTjb9guvuA@mail.gmail.com>
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+	AMSPEX02CL02.citrite.net (10.69.22.126)
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	X86 ML <x86@kernel.org>, Alok Kataria <akataria@vmware.com>,
-	LKML <linux-kernel@vger.kernel.org>,
-	Linux Virtualization <virtualization@lists.linux-foundation.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	X86 ML <x86@kernel.org>, LKML <linux-kernel@vger.kernel.org>, Linux
+	Virtualization <virtualization@lists.linux-foundation.org>,
 	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
 	xen-devel <xen-devel@lists.xenproject.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+	Alok Kataria <akataria@vmware.com>, Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,40 +145,53 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Jul 15, 2019 at 9:34 AM Andi Kleen <ak@linux.intel.com> wrote:
->
-> Juergen Gross <jgross@suse.com> writes:
->
-> > The long term plan has been to replace Xen PV guests by PVH. The first
-> > victim of that plan are now 32-bit PV guests, as those are used only
-> > rather seldom these days. Xen on x86 requires 64-bit support and with
-> > Grub2 now supporting PVH officially since version 2.04 there is no
-> > need to keep 32-bit PV guest support alive in the Linux kernel.
-> > Additionally Meltdown mitigation is not available in the kernel running
-> > as 32-bit PV guest, so dropping this mode makes sense from security
-> > point of view, too.
->
-> Normally we have a deprecation period for feature removals like this.
-> You would make the kernel print a warning for some releases, and when
-> no user complains you can then remove. If a user complains you can't.
->
-
-As I understand it, the kernel rules do allow changes like this even
-if there's a complaint: this is a patch that removes what is
-effectively hardware support.  If the maintenance cost exceeds the
-value, then removal is fair game.  (Obviously we weight the value to
-preserving compatibility quite highly, but in this case, Xen dropped
-32-bit hardware support a long time ago.  If the Xen hypervisor says
-that 32-bit PV guest support is deprecated, it's deprecated.)
-
-That being said, a warning might not be a bad idea.  What's the
-current status of this in upstream Xen?
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gMTUvMDcvMjAxOSAxODoyOCwgQW5keSBMdXRvbWlyc2tpIHdyb3RlOgo+IE9uIE1vbiwgSnVs
+IDE1LCAyMDE5IGF0IDk6MzQgQU0gQW5kaSBLbGVlbiA8YWtAbGludXguaW50ZWwuY29tPiB3cm90
+ZToKPj4gSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPiB3cml0ZXM6Cj4+Cj4+PiBUaGUg
+bG9uZyB0ZXJtIHBsYW4gaGFzIGJlZW4gdG8gcmVwbGFjZSBYZW4gUFYgZ3Vlc3RzIGJ5IFBWSC4g
+VGhlIGZpcnN0Cj4+PiB2aWN0aW0gb2YgdGhhdCBwbGFuIGFyZSBub3cgMzItYml0IFBWIGd1ZXN0
+cywgYXMgdGhvc2UgYXJlIHVzZWQgb25seQo+Pj4gcmF0aGVyIHNlbGRvbSB0aGVzZSBkYXlzLiBY
+ZW4gb24geDg2IHJlcXVpcmVzIDY0LWJpdCBzdXBwb3J0IGFuZCB3aXRoCj4+PiBHcnViMiBub3cg
+c3VwcG9ydGluZyBQVkggb2ZmaWNpYWxseSBzaW5jZSB2ZXJzaW9uIDIuMDQgdGhlcmUgaXMgbm8K
+Pj4+IG5lZWQgdG8ga2VlcCAzMi1iaXQgUFYgZ3Vlc3Qgc3VwcG9ydCBhbGl2ZSBpbiB0aGUgTGlu
+dXgga2VybmVsLgo+Pj4gQWRkaXRpb25hbGx5IE1lbHRkb3duIG1pdGlnYXRpb24gaXMgbm90IGF2
+YWlsYWJsZSBpbiB0aGUga2VybmVsIHJ1bm5pbmcKPj4+IGFzIDMyLWJpdCBQViBndWVzdCwgc28g
+ZHJvcHBpbmcgdGhpcyBtb2RlIG1ha2VzIHNlbnNlIGZyb20gc2VjdXJpdHkKPj4+IHBvaW50IG9m
+IHZpZXcsIHRvby4KPj4gTm9ybWFsbHkgd2UgaGF2ZSBhIGRlcHJlY2F0aW9uIHBlcmlvZCBmb3Ig
+ZmVhdHVyZSByZW1vdmFscyBsaWtlIHRoaXMuCj4+IFlvdSB3b3VsZCBtYWtlIHRoZSBrZXJuZWwg
+cHJpbnQgYSB3YXJuaW5nIGZvciBzb21lIHJlbGVhc2VzLCBhbmQgd2hlbgo+PiBubyB1c2VyIGNv
+bXBsYWlucyB5b3UgY2FuIHRoZW4gcmVtb3ZlLiBJZiBhIHVzZXIgY29tcGxhaW5zIHlvdSBjYW4n
+dC4KPj4KPiBBcyBJIHVuZGVyc3RhbmQgaXQsIHRoZSBrZXJuZWwgcnVsZXMgZG8gYWxsb3cgY2hh
+bmdlcyBsaWtlIHRoaXMgZXZlbgo+IGlmIHRoZXJlJ3MgYSBjb21wbGFpbnQ6IHRoaXMgaXMgYSBw
+YXRjaCB0aGF0IHJlbW92ZXMgd2hhdCBpcwo+IGVmZmVjdGl2ZWx5IGhhcmR3YXJlIHN1cHBvcnQu
+ICBJZiB0aGUgbWFpbnRlbmFuY2UgY29zdCBleGNlZWRzIHRoZQo+IHZhbHVlLCB0aGVuIHJlbW92
+YWwgaXMgZmFpciBnYW1lLiAgKE9idmlvdXNseSB3ZSB3ZWlnaHQgdGhlIHZhbHVlIHRvCj4gcHJl
+c2VydmluZyBjb21wYXRpYmlsaXR5IHF1aXRlIGhpZ2hseSwgYnV0IGluIHRoaXMgY2FzZSwgWGVu
+IGRyb3BwZWQKPiAzMi1iaXQgaGFyZHdhcmUgc3VwcG9ydCBhIGxvbmcgdGltZSBhZ28uICBJZiB0
+aGUgWGVuIGh5cGVydmlzb3Igc2F5cwo+IHRoYXQgMzItYml0IFBWIGd1ZXN0IHN1cHBvcnQgaXMg
+ZGVwcmVjYXRlZCwgaXQncyBkZXByZWNhdGVkLikKPgo+IFRoYXQgYmVpbmcgc2FpZCwgYSB3YXJu
+aW5nIG1pZ2h0IG5vdCBiZSBhIGJhZCBpZGVhLiAgV2hhdCdzIHRoZQo+IGN1cnJlbnQgc3RhdHVz
+IG9mIHRoaXMgaW4gdXBzdHJlYW0gWGVuPwoKU28gcGVyc29uYWxseSwgSSdkIHByZWZlciB0byBz
+ZWUgc3VwcG9ydCBzdGF5LCBidXQgYXQgdGhlIGVuZCBvZiB0aGUgZGF5Cml0IGlzIEp1ZXJnZW4n
+cyBjaG9pY2UgYXMgdGhlIG1haW50YWluZXIgb2YgdGhlIGNvZGUuCgpYZW4gaXRzZWxmIGhhcyBi
+ZWVuIGV4Y2x1c2l2ZWx5IDY0LWJpdCBzaW5jZSBYZW4gNC4zIChyZWxlYXNlZCBpbiAyMDEzKS4K
+Ck92ZXIgdGltZSwgdmFyaW91cyBmZWF0dXJlcyBsaWtlIFNNRVAvU01BUCBoYXZlIGJlZW4gbWFr
+aW5nIDMyYml0IFBWCmd1ZXN0cyBwcm9ncmVzc2l2ZWx5IHNsb3dlciwgYmVjYXVzZSByaW5nIDEg
+aXMgc3VwZXJ2aXNvciByYXRoZXIgdGhhbgp1c2VyLsKgIFRoaW5ncyBoYXZlIGdvdCBldmVuIHdv
+cnNlIHdpdGggSUJSUywgdG8gdGhlIHBvaW50IGF0IHdoaWNoIDMyYml0ClBWIGd1ZXN0cyBhcmUg
+c3RhcnRpbmcgdG8gcnVuIGxpa2UgdHJlYWNsZS4KClRoZXJlIGFyZSBubyBjdXJyZW50IHBsYW5z
+IHRvIHJlbW92ZSBzdXBwb3J0IGZvciAzMmJpdCBQViBndWVzdHMgZnJvbQpYZW4sIGJ1dCBpdCBp
+cyB2ZXJ5IG11Y2ggaW4gdGhlIGNhdGVnb3J5IG9mICJ5b3Ugc2hvdWxkbid0IGJlIHVzaW5nIHRo
+aXMKbW9kZSBhbnkgbW9yZSIuCgp+QW5kcmV3CgpQLlMuIEkgZG9uJ3Qgc2VlIDY0Yml0IFBWIGd1
+ZXN0IHN1cHBvcnQgZ29pbmcgYW55d2hlcmUsIGJlY2F1c2UgdGhlcmUKYXJlIHN0aWxsIGEgbnVt
+YmVyIG9mIG9wZW4gcGVyZm9ybWFuY2UgcXVlc3Rpb25zIGR1ZSB0byB0aGUgaW5oZXJlbnQKZGlm
+ZmVyZW5jZXMgYmV0d2VlbiBzeXNjYWxsIGFuZCB2bWV4aXQsIGFuZCB0aGUgZGlmZmVyZW5jZSBF
+UFQvTlBUCnRhYmxlcyBtYWtlIG9uIGNyb3NzLWRvbWFpbiBtYXBwaW5ncy4KX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGlu
+ZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8v
+bGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
