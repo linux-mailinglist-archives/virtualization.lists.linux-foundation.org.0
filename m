@@ -2,52 +2,56 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F43769919
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 18:32:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D335F69921
+	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 18:34:08 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 65034D3E;
-	Mon, 15 Jul 2019 16:32:21 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id CF25FD13;
+	Mon, 15 Jul 2019 16:34:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2A5D3B88
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A4B0DB88
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 16:32:19 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 03B3971C
+	Mon, 15 Jul 2019 16:34:02 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2FED971C
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 16:32:17 +0000 (UTC)
-Received: from ravnborg.org (unknown [158.248.194.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by asavdk4.altibox.net (Postfix) with ESMTPS id 42FD480314;
-	Mon, 15 Jul 2019 18:32:16 +0200 (CEST)
-Date: Mon, 15 Jul 2019 18:32:15 +0200
-From: Sam Ravnborg <sam@ravnborg.org>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v1 31/33] drm/bochs: drop use of drmP.h
-Message-ID: <20190715163215.GK27038@ravnborg.org>
-References: <20190630061922.7254-1-sam@ravnborg.org>
-	<20190630061922.7254-32-sam@ravnborg.org>
-	<20190701063908.5mufonj45bgitzyt@sirius.home.kraxel.org>
+	Mon, 15 Jul 2019 16:34:02 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	15 Jul 2019 09:34:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,493,1557212400"; d="scan'208";a="175145375"
+Received: from tassilo.jf.intel.com (HELO tassilo.localdomain) ([10.7.201.137])
+	by FMSMGA003.fm.intel.com with ESMTP; 15 Jul 2019 09:34:00 -0700
+Received: by tassilo.localdomain (Postfix, from userid 1000)
+	id 9AA04301AE9; Mon, 15 Jul 2019 09:34:00 -0700 (PDT)
+From: Andi Kleen <ak@linux.intel.com>
+To: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 0/2] Remove 32-bit Xen PV guest support
+References: <20190715113739.17694-1-jgross@suse.com>
+Date: Mon, 15 Jul 2019 09:34:00 -0700
+In-Reply-To: <20190715113739.17694-1-jgross@suse.com> (Juergen Gross's message
+	of "Mon, 15 Jul 2019 13:37:37 +0200")
+Message-ID: <87y30zfe9z.fsf@linux.intel.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190701063908.5mufonj45bgitzyt@sirius.home.kraxel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.3 cv=VcLZwmh9 c=1 sm=1 tr=0
-	a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
-	a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8
-	a=20KFwNOVAAAA:8 a=Z4Rwk6OoAAAA:8 a=LZjyS6xDFEDGbRYreboA:9
-	a=CjuIK1q_8ugA:10 a=E9Po1WZjFZOl8hwRPBS3:22 a=HkZW87K1Qel5hWWM3VKY:22
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, x86@kernel.org,
+	Alok Kataria <akataria@vmware.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Andy Lutomirski <luto@kernel.org>,
+	"H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,24 +68,22 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Jul 01, 2019 at 08:39:08AM +0200, Gerd Hoffmann wrote:
-> On Sun, Jun 30, 2019 at 08:19:20AM +0200, Sam Ravnborg wrote:
-> > Drop use of the deprecated drmP.h header file.
-> > Made bochs.h self-contained and then fixed
-> > fallout in remaining files.
-> > Several unused includes was dropped in the process.
-> > 
-> > Signed-off-by: Sam Ravnborg <sam@ravnborg.org>
-> > Cc: Gerd Hoffmann <kraxel@redhat.com>
-> > Cc: David Airlie <airlied@linux.ie>
-> > Cc: Daniel Vetter <daniel@ffwll.ch>
-> > Cc: virtualization@lists.linux-foundation.org
-> 
-> Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+Juergen Gross <jgross@suse.com> writes:
 
-Thanks again, applied.
+> The long term plan has been to replace Xen PV guests by PVH. The first
+> victim of that plan are now 32-bit PV guests, as those are used only
+> rather seldom these days. Xen on x86 requires 64-bit support and with
+> Grub2 now supporting PVH officially since version 2.04 there is no
+> need to keep 32-bit PV guest support alive in the Linux kernel.
+> Additionally Meltdown mitigation is not available in the kernel running
+> as 32-bit PV guest, so dropping this mode makes sense from security
+> point of view, too.
 
-	Sam
+Normally we have a deprecation period for feature removals like this.
+You would make the kernel print a warning for some releases, and when
+no user complains you can then remove. If a user complains you can't.
+
+-Andi
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
