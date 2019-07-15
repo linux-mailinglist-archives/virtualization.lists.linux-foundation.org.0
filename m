@@ -2,106 +2,107 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D72769AAA
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 20:18:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EDF269CC3
+	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 22:29:52 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 1E2B1F0D;
-	Mon, 15 Jul 2019 18:18:04 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id F3949FD7;
+	Mon, 15 Jul 2019 20:29:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E2787C7D
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4CBF6AF7
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 18:18:02 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com
-	(mail-eopbgr750050.outbound.protection.outlook.com [40.107.75.50])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 583FD8CB
+	Mon, 15 Jul 2019 20:29:41 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EF5E8878
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 18:18:01 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=CUxDFhMSSgZo5BkG3rM+p2fJPtHv7/N6bN/RxQIYXssrw71/JO5yafiR2KR0wdN+amOlBH+QyBb+J7khACV7uhwXIQRv+oB5UuaQmsfcYchnPvO7a+QDn/29RMHrlYxev4c7cjb+BaOxXGyzBR8HRgnSVfCF9KqgpASKM8OWNktUExw0Zz76M+eocRHBauudjtrQdvQspA9O86rCW0Dbxn5qq2VWHU1p7sCPEi69hx54GTbWeVhzDqmakD2FE7o6tjWDDx+BixwxThbzJQNMMc/j6nFaaPxjWdoH+OA0NdCMcO6hLoZXFiAUzNndFLKQK4LLlh1vmAlOfFVAorQ4cQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=7qhzh0sCemfs4/HUWjHMPtuD35pXQjPt26/ttyIbfyk=;
-	b=BIGtZEvnwmEnP45eY0IB08uzuctOFeMD0Kb4SYUs4ooQjESuLZkVsVvlf7AwYaum+Ot0k2cAiQDeo//p6AIWS4Iy7RFTNZDtpFAlIeCW2TyyiaOZRTq2V/zf53OGZTv97F++qdc7QknWG7dp5phAhotnpqc3PPNYGGc3o+5Wwn1+iE/wJ3fa0yWYb7j50ibl0Zednrk2MGFgg7khGVMYdTadOO0eE7uiwbwA798ubUI8i6lJwiB8mh8BtaWnJtTRnVHtTvFI/7dzpY6KnkFRIvF3cVMWL4Dh0KHNGJWSjIOY9sJFWtBWJsWKr+45mKGvJ913fvYl+WVfDbJe63orgw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
-	smtp.mailfrom=vmware.com;dmarc=pass action=none
-	header.from=vmware.com;dkim=pass header.d=vmware.com;arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=7qhzh0sCemfs4/HUWjHMPtuD35pXQjPt26/ttyIbfyk=;
-	b=ixIO8DKN7G5QV2CD1ZbQkTU1Ua4p2oowjnzKEEbFhMhPO/KqzfIzWVm7eKDlmRjm77uNq0R2ailpiW+sFhQ77hbbvYEmO0RM2KD34+vQqG/LqLxKAm+IPw7Rmm5S1M8Rc5lQQ4acd9OZBgRLRtXLp08IxZdmEhf6m5JnXNUw0Ys=
-Received: from SN6PR05MB4783.namprd05.prod.outlook.com (52.135.115.17) by
-	SN6PR05MB4413.namprd05.prod.outlook.com (52.135.74.22) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2094.10; Mon, 15 Jul 2019 18:17:59 +0000
-Received: from SN6PR05MB4783.namprd05.prod.outlook.com
-	([fe80::25ae:a9c7:8cc2:24cb]) by
-	SN6PR05MB4783.namprd05.prod.outlook.com
-	([fe80::25ae:a9c7:8cc2:24cb%7]) with mapi id 15.20.2094.007;
-	Mon, 15 Jul 2019 18:17:59 +0000
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2] x86/paravirt: Drop {read,write}_cr8() hooks
-Thread-Topic: [PATCH v2] x86/paravirt: Drop {read,write}_cr8() hooks
-Thread-Index: AQHVOyBUFdACaHiktUycGK4yMfk9sqbL/QEA
-Date: Mon, 15 Jul 2019 18:17:59 +0000
-Message-ID: <602B4D96-E2A9-45BE-8247-4E3481ED5402@vmware.com>
-References: <20190715151641.29210-1-andrew.cooper3@citrix.com>
-In-Reply-To: <20190715151641.29210-1-andrew.cooper3@citrix.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=namit@vmware.com; 
-x-originating-ip: [66.170.99.2]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 2b5dce4e-b85b-4580-9ba0-08d70950c472
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);
-	SRVR:SN6PR05MB4413; 
-x-ms-traffictypediagnostic: SN6PR05MB4413:
-x-microsoft-antispam-prvs: <SN6PR05MB441332FAD4D91B8EF277B82DD0CF0@SN6PR05MB4413.namprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:7219;
-x-forefront-prvs: 00997889E7
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(4636009)(366004)(39860400002)(136003)(396003)(346002)(376002)(199004)(189003)(8676002)(5660300002)(6116002)(53936002)(256004)(476003)(8936002)(91956017)(76116006)(2616005)(66946007)(446003)(81156014)(99286004)(486006)(11346002)(81166006)(33656002)(25786009)(6512007)(3846002)(66066001)(478600001)(4326008)(14444005)(186003)(316002)(7416002)(7736002)(54906003)(229853002)(6246003)(86362001)(6436002)(102836004)(76176011)(6916009)(68736007)(6486002)(53546011)(26005)(6506007)(36756003)(64756008)(71200400001)(66476007)(71190400001)(66446008)(66556008)(2906002)(305945005)(14454004)(142933001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:SN6PR05MB4413;
-	H:SN6PR05MB4783.namprd05.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: vmware.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: e4rgQpucsPHPtHFuYvjh/PvUseVqR4OHS2qtcGw5ldmgsM4aqvli9nLVPGoEWBNuOC/yRbMEfcfMQ4DFBXG/Kg9wdXzhM8RSRFsbaZrKfndudNGx8+EbZJwksWOk5K1Q8bw3uHkwyaCtqb7SIWjvGsjeJKNfzmv5FbcGxdd2yxFp092nG7a1ddTwgnxlnrLg+rac6geXglf5jr0tdwX+7+xJgkGaxddv8UjQXEr6csQ5BrLHhmBWFhZDJlM6/PW+Oev8lTXe7FiwvlL15HQMoDbd27Y/J6szvcmKTYWAUa7tyPcs490/kL0oQqbfYR58Fj1M0RlnSrilDrrjOBmRh4p1T9GXlGAAb+f67jSDF8YHJQp5ZTW/FmRckLimxU0l66nCgifEy7hVEvcEk0KieN5kiZWRT42Xosx57GH1A/M=
-Content-ID: <FD49B339CA227D44BB5DFB367BC85236@namprd05.prod.outlook.com>
+	Mon, 15 Jul 2019 20:29:40 +0000 (UTC)
+Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x6FKR9JF139745 for <virtualization@lists.linux-foundation.org>;
+	Mon, 15 Jul 2019 16:29:38 -0400
+Received: from e35.co.us.ibm.com (e35.co.us.ibm.com [32.97.110.153])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2try7qud4j-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 15 Jul 2019 16:29:38 -0400
+Received: from localhost
+	by e35.co.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+	Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<bauerman@linux.ibm.com>; Mon, 15 Jul 2019 21:29:38 +0100
+Received: from b03cxnp08027.gho.boulder.ibm.com (9.17.130.19)
+	by e35.co.us.ibm.com (192.168.1.135) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Mon, 15 Jul 2019 21:29:32 +0100
+Received: from b03ledav005.gho.boulder.ibm.com
+	(b03ledav005.gho.boulder.ibm.com [9.17.130.236])
+	by b03cxnp08027.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x6FKTVfV61276602
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Mon, 15 Jul 2019 20:29:31 GMT
+Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 30FF3BE053;
+	Mon, 15 Jul 2019 20:29:31 +0000 (GMT)
+Received: from b03ledav005.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7ADF2BE04F;
+	Mon, 15 Jul 2019 20:29:17 +0000 (GMT)
+Received: from morokweng.localdomain (unknown [9.85.238.93])
+	by b03ledav005.gho.boulder.ibm.com (Postfix) with ESMTPS;
+	Mon, 15 Jul 2019 20:29:17 +0000 (GMT)
+References: <20190320171027-mutt-send-email-mst@kernel.org>
+	<87tvfvbwpb.fsf@morokweng.localdomain>
+	<20190323165456-mutt-send-email-mst@kernel.org>
+	<87a7go71hz.fsf@morokweng.localdomain>
+	<20190520090939-mutt-send-email-mst@kernel.org>
+	<877ea26tk8.fsf@morokweng.localdomain>
+	<20190603211528-mutt-send-email-mst@kernel.org>
+	<877e96qxm7.fsf@morokweng.localdomain>
+	<20190701092212-mutt-send-email-mst@kernel.org>
+	<87d0id9nah.fsf@morokweng.localdomain>
+	<20190715103411-mutt-send-email-mst@kernel.org>
+User-agent: mu4e 1.2.0; emacs 26.2
+From: Thiago Jung Bauermann <bauerman@linux.ibm.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
+In-reply-to: <20190715103411-mutt-send-email-mst@kernel.org>
+Date: Mon, 15 Jul 2019 17:29:06 -0300
 MIME-Version: 1.0
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b5dce4e-b85b-4580-9ba0-08d70950c472
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jul 2019 18:17:59.2414 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: namit@vmware.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR05MB4413
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-TM-AS-GCONF: 00
+x-cbid: 19071520-0012-0000-0000-0000174FE71F
+X-IBM-SpamModules-Scores: 
+X-IBM-SpamModules-Versions: BY=3.00011434; HX=3.00000242; KW=3.00000007;
+	PH=3.00000004; SC=3.00000286; SDB=6.01232674; UDB=6.00649454;
+	IPR=6.01013976; 
+	MB=3.00027729; MTD=3.00000008; XFM=3.00000015; UTC=2019-07-15 20:29:36
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19071520-0013-0000-0000-00005813BEDE
+Message-Id: <874l3nnist.fsf@morokweng.localdomain>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-07-15_07:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1907150234
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=unavailable version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Juergen Gross <jgross@suse.com>, Feng Tang <feng.tang@intel.com>,
-	Pavel Machek <pavel@ucw.cz>, Peter Zijlstra <peterz@infradead.org>,
-	the arch/x86 maintainers <x86@kernel.org>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	LKML <linux-kernel@vger.kernel.org>, Stephane Eranian <eranian@google.com>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Mike Anderson <andmike@linux.ibm.com>,
+	Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Alexey Kardashevskiy <aik@linux.ibm.com>,
+	Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Paul Mackerras <paulus@ozlabs.org>,
+	iommu@lists.linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
+	Christoph Hellwig <hch@lst.de>, David Gibson <david@gibson.dropbear.id.au>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -113,33 +114,71 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Nadav Amit via Virtualization <virtualization@lists.linux-foundation.org>
-Reply-To: Nadav Amit <namit@vmware.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-PiBPbiBKdWwgMTUsIDIwMTksIGF0IDg6MTYgQU0sIEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29w
-ZXIzQGNpdHJpeC5jb20+IHdyb3RlOg0KPiANCj4gVGhlcmUgaXMgYSBsb3Qgb2YgaW5mcmFzdHJ1
-Y3R1cmUgZm9yIGZ1bmN0aW9uYWxpdHkgd2hpY2ggaXMgdXNlZA0KPiBleGNsdXNpdmVseSBpbiBf
-X3tzYXZlLHJlc3RvcmV9X3Byb2Nlc3Nvcl9zdGF0ZSgpIG9uIHRoZSBzdXNwZW5kL3Jlc3VtZQ0K
-PiBwYXRoLg0KPiANCj4gY3I4IGlzIGFuIGFsaWFzIG9mIEFQSUNfVEFTS1BSSSwgYW5kIEFQSUNf
-VEFTS1BSSSBpcyBzYXZlZC9yZXN0b3JlZCBieQ0KPiBsYXBpY197c3VzcGVuZCxyZXN1bWV9KCku
-ICBTYXZpbmcgYW5kIHJlc3RvcmluZyBjcjggaW5kZXBlbmRlbnRseSBvZiB0aGUNCj4gcmVzdCBv
-ZiB0aGUgTG9jYWwgQVBJQyBzdGF0ZSBpc24ndCBhIGNsZXZlciB0aGluZyB0byBiZSBkb2luZy4N
-Cj4gDQo+IERlbGV0ZSB0aGUgc3VzcGVuZC9yZXN1bWUgY3I4IGhhbmRsaW5nLCB3aGljaCBzaHJp
-bmtzIHRoZSBzaXplIG9mIHN0cnVjdA0KPiBzYXZlZF9jb250ZXh0LCBhbmQgYWxsb3dzIGZvciB0
-aGUgcmVtb3ZhbCBvZiBib3RoIFBWT1BTLg0KDQpJIHRoaW5rIHJlbW92aW5nIHRoZSBpbnRlcmZh
-Y2UgZm9yIENSOCB3cml0ZXMgaXMgYWxzbyBnb29kIHRvIGF2b2lkDQpwb3RlbnRpYWwgY29ycmVj
-dG5lc3MgaXNzdWVzLCBhcyB0aGUgU0RNIHNheXMgKDEwLjguNi4xICJJbnRlcmFjdGlvbiBvZiBU
-YXNrDQpQcmlvcml0aWVzIGJldHdlZW4gQ1I4IGFuZCBBUElD4oCdKToNCg0KIk9wZXJhdGluZyBz
-b2Z0d2FyZSBzaG91bGQgaW1wbGVtZW50IGVpdGhlciBkaXJlY3QgQVBJQyBUUFIgdXBkYXRlcyBv
-ciBDUjgNCnN0eWxlIFRQUiB1cGRhdGVzIGJ1dCBub3QgbWl4IHRoZW0uIFNvZnR3YXJlIGNhbiB1
-c2UgYSBzZXJpYWxpemluZw0KaW5zdHJ1Y3Rpb24gKGZvciBleGFtcGxlLCBDUFVJRCkgdG8gc2Vy
-aWFsaXplIHVwZGF0ZXMgYmV0d2VlbiBNT1YgQ1I4IGFuZA0Kc3RvcmVzIHRvIHRoZSBBUElDLuKA
-nQ0KDQpBbmQgbmF0aXZlX3dyaXRlX2NyOCgpIGRpZCBub3QgZXZlbiBpc3N1ZSBhIHNlcmlhbGl6
-aW5nIGluc3RydWN0aW9uLg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlz
-dHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3Jn
-L21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+
+Michael S. Tsirkin <mst@redhat.com> writes:
+
+> On Sun, Jul 14, 2019 at 02:51:18AM -0300, Thiago Jung Bauermann wrote:
+>>
+>>
+>> Michael S. Tsirkin <mst@redhat.com> writes:
+>>
+>> > So this is what I would call this option:
+>> >
+>> > VIRTIO_F_ACCESS_PLATFORM_IDENTITY_ADDRESS
+>> >
+>> > and the explanation should state that all device
+>> > addresses are translated by the platform to identical
+>> > addresses.
+>> >
+>> > In fact this option then becomes more, not less restrictive
+>> > than VIRTIO_F_ACCESS_PLATFORM - it's a promise
+>> > by guest to only create identity mappings,
+>> > and only before driver_ok is set.
+>> > This option then would always be negotiated together with
+>> > VIRTIO_F_ACCESS_PLATFORM.
+>> >
+>> > Host then must verify that
+>> > 1. full 1:1 mappings are created before driver_ok
+>> >     or can we make sure this happens before features_ok?
+>> >     that would be ideal as we could require that features_ok fails
+>> > 2. mappings are not modified between driver_ok and reset
+>> >     i guess attempts to change them will fail -
+>> >     possibly by causing a guest crash
+>> >     or some other kind of platform-specific error
+>>
+>> I think VIRTIO_F_ACCESS_PLATFORM_IDENTITY_ADDRESS is good, but requiring
+>> it to be accompanied by ACCESS_PLATFORM can be a problem. One reason is
+>> SLOF as I mentioned above, another is that we would be requiring all
+>> guests running on the machine (secure guests or not, since we would use
+>> the same configuration for all guests) to support it. But
+>> ACCESS_PLATFORM is relatively recent so it's a bit early for that. For
+>> instance, Ubuntu 16.04 LTS (which is still supported) doesn't know about
+>> it and wouldn't be able to use the device.
+>
+> OK and your target is to enable use with kernel drivers within
+> guests, right?
+
+Right.
+
+> My question is, we are defining a new flag here, I guess old guests
+> then do not set it. How does it help old guests? Or maybe it's
+> not designed to ...
+
+Indeed. The idea is that QEMU can offer the flag, old guests can reject
+it (or even new guests can reject it, if they decide not to convert into
+secure VMs) and the feature negotiation will succeed with the flag
+unset.
+
+--
+Thiago Jung Bauermann
+IBM Linux Technology Center
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
