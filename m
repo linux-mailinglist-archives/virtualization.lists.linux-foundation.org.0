@@ -2,44 +2,44 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D8E9692CB
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 16:39:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C23A5693DA
+	for <lists.virtualization@lfdr.de>; Mon, 15 Jul 2019 16:47:40 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C40FCF3A;
-	Mon, 15 Jul 2019 14:39:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 88E3DF48;
+	Mon, 15 Jul 2019 14:47:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5CCDCF08
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 718FAF11
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 14:39:16 +0000 (UTC)
+	Mon, 15 Jul 2019 14:47:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1096771C
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 329F7879
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 15 Jul 2019 14:39:15 +0000 (UTC)
+	Mon, 15 Jul 2019 14:47:33 +0000 (UTC)
 Received: from sasha-vm.mshome.net (unknown [73.61.17.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 7188A2086C;
-	Mon, 15 Jul 2019 14:39:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 6F8D621530;
+	Mon, 15 Jul 2019 14:47:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1563201555;
-	bh=FSZoq9WrIW60R8uTCwm1dsGcg3a3pKKxZCGZIwUgr7E=;
+	s=default; t=1563202053;
+	bh=rU3Ez2wWMrrE/iar+jy6anGCgLmCwgHT+Bint4y05vo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=LL1unzeYM9KVRkaJcDd/Co61vjByfDxzd/4O4kTth3nYe7Pm41b/CoYEqKT4QygAD
-	jySGWVNy46OVejwDCME/pYC6FhXN0FSV1yT0L1hZpfSrPVhS/x96GXWsuR5ph0l5EV
-	d3aKto+D+heEIToiC/Y20yPhnd1HGKXH6slFO65M=
+	b=OVyJ3iXksY9MVgxHgc0hcVaBiwsCjF5g0imSXYrjQubrpe79iNi2OV5WJxf6RBBrn
+	PVch88OIUWEnKOssvz57aiaCWzAMv8Dql3R5EnLPlbDsx22yVyZeYW1Hu44+JtEz3p
+	iQIUdcvXoNg/ubbq3ehj2SLY29A9AkTU8gJzEowo=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 41/73] vhost_net: disable zerocopy by default
-Date: Mon, 15 Jul 2019 10:35:57 -0400
-Message-Id: <20190715143629.10893-41-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.4 33/53] vhost_net: disable zerocopy by default
+Date: Mon, 15 Jul 2019 10:45:15 -0400
+Message-Id: <20190715144535.11636-33-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190715143629.10893-1-sashal@kernel.org>
-References: <20190715143629.10893-1-sashal@kernel.org>
+In-Reply-To: <20190715144535.11636-1-sashal@kernel.org>
+References: <20190715144535.11636-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -92,7 +92,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-index 681d0eade82f..75e1089dfb01 100644
+index 645b2197930e..f46317135224 100644
 --- a/drivers/vhost/net.c
 +++ b/drivers/vhost/net.c
 @@ -30,7 +30,7 @@
