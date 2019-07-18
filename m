@@ -2,61 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id B61C46CA59
-	for <lists.virtualization@lfdr.de>; Thu, 18 Jul 2019 09:52:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1839F6CAAF
+	for <lists.virtualization@lfdr.de>; Thu, 18 Jul 2019 10:13:57 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CD134163E;
-	Thu, 18 Jul 2019 07:52:53 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id B1E7E109F;
+	Thu, 18 Jul 2019 08:13:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id F07721631
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5838B1096
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 07:52:51 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 88DBB12E
+	Thu, 18 Jul 2019 08:13:33 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0E9F625A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 07:52:51 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id 31so27586639wrm.1
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 00:52:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=rq+59r0RojlnTnigSljktyDPpoq1gf7r9wfF77O5XwQ=;
-	b=rmKnFxZoBw8GBvT5euhlyIDv4PQtfzG8/beGAakYPkxZMqxtUePsjjhirkwFVMPSvB
-	05v0AB29UfcbsVlyg8zQH7b+aDqfP6u4tbd7NAEe6pPJgS9O20QNSQTNjXWnxhOdDvpA
-	9iOi7t4Yp2q3fw49yTNWh2A2DBSQNjnM+2KjBgU+iBtKK4tlIhNlPUErkvY6HTduFonr
-	NrlxWufRby8sNZ5w3CZKvdUMz2kbk8iOxgRlT3rNeMsU3TMUzlW1vMn2EYfK/PgBpUed
-	HApqxrTtxZmMWVMF9yGZycJKlO/pxVQQnf3DucK2Jgpm9MHuCTrJZ0SM+AlnxUXj6K99
-	reeg==
-X-Gm-Message-State: APjAAAXRDthBeeauGHXRYkTMLrgqMQlAAc4g0HblIMrnwycbr1QWrz0j
-	y1ffsI4mk4W8gFvFcKcDmWh5Gg==
-X-Google-Smtp-Source: APXvYqyhGa0Qg+pWCOm2tSbKxPMpCW9SMZnBKSICCaQYntmM+FchtqJbWROJ8PfSDyCUWGkgpEQWRw==
-X-Received: by 2002:adf:e6c5:: with SMTP id y5mr50042800wrm.235.1563436370235; 
-	Thu, 18 Jul 2019 00:52:50 -0700 (PDT)
-Received: from steredhat ([5.170.38.133])
-	by smtp.gmail.com with ESMTPSA id 91sm54324185wrp.3.2019.07.18.00.52.48
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 18 Jul 2019 00:52:49 -0700 (PDT)
-Date: Thu, 18 Jul 2019 09:52:41 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH v4 5/5] vsock/virtio: change the maximum packet size
-	allowed
-Message-ID: <CAGxU2F5ybg1_8VhS=COMnxSKC4AcW4ZagYwNMi==d6-rNPgzsg@mail.gmail.com>
+	Thu, 18 Jul 2019 08:13:32 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+	[10.5.11.15])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 4632946288;
+	Thu, 18 Jul 2019 08:13:32 +0000 (UTC)
+Received: from redhat.com (ovpn-120-147.rdu2.redhat.com [10.10.120.147])
+	by smtp.corp.redhat.com (Postfix) with SMTP id 778515D720;
+	Thu, 18 Jul 2019 08:13:27 +0000 (UTC)
+Date: Thu, 18 Jul 2019 04:13:26 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Stefano Garzarella <sgarzare@redhat.com>
+Subject: Re: [PATCH v4 4/5] vhost/vsock: split packets to send using multiple
+	buffers
+Message-ID: <20190718041234-mutt-send-email-mst@kernel.org>
 References: <20190717113030.163499-1-sgarzare@redhat.com>
-	<20190717113030.163499-6-sgarzare@redhat.com>
-	<20190717105703-mutt-send-email-mst@kernel.org>
+	<20190717113030.163499-5-sgarzare@redhat.com>
+	<20190717105336-mutt-send-email-mst@kernel.org>
+	<CAGxU2F45v40qAOHkm1Hk2E69gCS0UwVgS5NS+tDXXuzdF4EixA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190717105703-mutt-send-email-mst@kernel.org>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <CAGxU2F45v40qAOHkm1Hk2E69gCS0UwVgS5NS+tDXXuzdF4EixA@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.29]);
+	Thu, 18 Jul 2019 08:13:32 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
@@ -80,26 +69,36 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Jul 17, 2019 at 5:00 PM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> On Wed, Jul 17, 2019 at 01:30:30PM +0200, Stefano Garzarella wrote:
-> > Since now we are able to split packets, we can avoid limiting
-> > their sizes to VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE.
-> > Instead, we can use VIRTIO_VSOCK_MAX_PKT_BUF_SIZE as the max
-> > packet size.
+On Thu, Jul 18, 2019 at 09:50:14AM +0200, Stefano Garzarella wrote:
+> On Wed, Jul 17, 2019 at 4:55 PM Michael S. Tsirkin <mst@redhat.com> wrote:
 > >
-> > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
->
->
-> OK so this is kind of like GSO where we are passing
-> 64K packets to the vsock and then split at the
-> low level.
+> > On Wed, Jul 17, 2019 at 01:30:29PM +0200, Stefano Garzarella wrote:
+> > > If the packets to sent to the guest are bigger than the buffer
+> > > available, we can split them, using multiple buffers and fixing
+> > > the length in the packet header.
+> > > This is safe since virtio-vsock supports only stream sockets.
+> > >
+> > > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+> >
+> > So how does it work right now? If an app
+> > does sendmsg with a 64K buffer and the other
+> > side publishes 4K buffers - does it just stall?
+> 
+> Before this series, the 64K (or bigger) user messages was split in 4K packets
+> (fixed in the code) and queued in an internal list for the TX worker.
+> 
+> After this series, we will queue up to 64K packets and then it will be split in
+> the TX worker, depending on the size of the buffers available in the
+> vring. (The idea was to allow EWMA or a configuration of the buffers size, but
+> for now we postponed it)
 
-Exactly, something like that in the Host->Guest path, instead in the
-Guest->Host we use the entire 64K packet.
+Got it. Using workers for xmit is IMHO a bad idea btw.
+Why is it done like this?
 
-Thanks,
-Stefano
+> Note: virtio-vsock only supports stream socket for now.
+> 
+> Thanks,
+> Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
