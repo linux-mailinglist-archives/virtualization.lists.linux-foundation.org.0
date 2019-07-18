@@ -2,70 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDB736CC08
-	for <lists.virtualization@lfdr.de>; Thu, 18 Jul 2019 11:38:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FF916CCCC
+	for <lists.virtualization@lfdr.de>; Thu, 18 Jul 2019 12:32:19 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 33D6D143E;
-	Thu, 18 Jul 2019 09:37:55 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 21E2A13DA;
+	Thu, 18 Jul 2019 10:32:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4E3F31370
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DED2A130A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 09:37:41 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C598E12E
+	Thu, 18 Jul 2019 10:31:55 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7A1AE25A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 09:37:40 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id 31so27954773wrm.1
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 02:37:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Vums2zz+KqGmXaH/Vl3B9M8z+ViEwY48CergeYbypPk=;
-	b=XSFA+p34SRT86BY8DUHezc4CjawHRZA5c2PcBF4xOUTZ6NMFhjvseN7vl1YKr7628m
-	NUQi+tUJfdui/0MpfG4YyOg/srlcPVi6Bh/1eG9zYIot+twLMQTYD1b+XeIJrpfAlbcO
-	SSQOrDONlzepB5biWh+v/9KhUJDbkpIW8ctuUWreeaW8zif6bLvQgJNYxED5u2pjhv1A
-	6ik66Pj+WaNxRraYGdEWavqfImTaIsEXhQgoRI4564PuZKf9R9xHdNy17Y61nAvHS5UN
-	U/QJMCLJkY0knD2B7R8Nxca2in4SO+14QuT1w3MvQEoSZrUIZJuwbbcam26DrjGuxFPl
-	BUwA==
-X-Gm-Message-State: APjAAAVYD8ByynrYPokbcTojMB6CJKKlL0oLpzYwM/hTWUX7lhIHf03n
-	nh8BbzQQD2y/3TB89+slHNLNow==
-X-Google-Smtp-Source: APXvYqxYCA1EVl1T2DVO3iZedENcjrNB6Hslgz4pOwp4UFAclSWI8asScK5ZYvkj/r17GyN6S1B6Kg==
-X-Received: by 2002:adf:ec0f:: with SMTP id x15mr13474237wrn.165.1563442659406;
-	Thu, 18 Jul 2019 02:37:39 -0700 (PDT)
-Received: from steredhat ([5.171.190.136]) by smtp.gmail.com with ESMTPSA id
-	q18sm27647509wrw.36.2019.07.18.02.37.37
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 18 Jul 2019 02:37:38 -0700 (PDT)
-Date: Thu, 18 Jul 2019 11:37:30 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH v4 4/5] vhost/vsock: split packets to send using multiple
-	buffers
-Message-ID: <CAGxU2F6oo7Cou7t9o=gG2=wxHMKX9xYQXNxVtDYeHq5fyEhJWg@mail.gmail.com>
-References: <20190717113030.163499-1-sgarzare@redhat.com>
-	<20190717113030.163499-5-sgarzare@redhat.com>
-	<20190717105336-mutt-send-email-mst@kernel.org>
-	<CAGxU2F45v40qAOHkm1Hk2E69gCS0UwVgS5NS+tDXXuzdF4EixA@mail.gmail.com>
-	<20190718041234-mutt-send-email-mst@kernel.org>
+	Thu, 18 Jul 2019 10:31:55 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+	[10.5.11.15])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id AB7823084029;
+	Thu, 18 Jul 2019 10:31:54 +0000 (UTC)
+Received: from [10.72.12.199] (ovpn-12-199.pek2.redhat.com [10.72.12.199])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 814325D6A9;
+	Thu, 18 Jul 2019 10:31:42 +0000 (UTC)
+Subject: Re: [RFC v2] vhost: introduce mdev based hardware vhost backend
+From: Jason Wang <jasowang@redhat.com>
+To: Tiwei Bie <tiwei.bie@intel.com>
+References: <20190703115245.GA22374@___>
+	<64833f91-02cd-7143-f12e-56ab93b2418d@redhat.com>
+	<20190703130817.GA1978@___>
+	<b01b8e28-8d96-31dd-56f4-ca7793498c55@redhat.com>
+	<20190704062134.GA21116@___> <20190705084946.67b8f9f5@x1.home>
+	<20190708061625.GA15936@___>
+	<deae5ede-57e9-41e6-ea42-d84e07ca480a@redhat.com>
+	<20190709063317.GA29300@___>
+	<9aafdc4d-0203-b96e-c205-043db132eb06@redhat.com>
+	<20190710062233.GA16212@___>
+	<1b49aa84-2c1f-eec2-2809-711e1f2dd7de@redhat.com>
+Message-ID: <90e6a722-ce7b-2ab3-0d2d-19b2ca09f2d1@redhat.com>
+Date: Thu, 18 Jul 2019 18:31:36 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190718041234-mutt-send-email-mst@kernel.org>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <1b49aa84-2c1f-eec2-2809-711e1f2dd7de@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.40]);
+	Thu, 18 Jul 2019 10:31:54 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: idos@mellanox.com, kvm@vger.kernel.org, mst@redhat.com,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+	zhihong.wang@intel.com, maxime.coquelin@redhat.com,
+	Rob Miller <rob.miller@broadcom.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,50 +73,20 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Jul 18, 2019 at 10:13 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> On Thu, Jul 18, 2019 at 09:50:14AM +0200, Stefano Garzarella wrote:
-> > On Wed, Jul 17, 2019 at 4:55 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> > > On Wed, Jul 17, 2019 at 01:30:29PM +0200, Stefano Garzarella wrote:
-> > > > If the packets to sent to the guest are bigger than the buffer
-> > > > available, we can split them, using multiple buffers and fixing
-> > > > the length in the packet header.
-> > > > This is safe since virtio-vsock supports only stream sockets.
-> > > >
-> > > > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
-> > >
-> > > So how does it work right now? If an app
-> > > does sendmsg with a 64K buffer and the other
-> > > side publishes 4K buffers - does it just stall?
-> >
-> > Before this series, the 64K (or bigger) user messages was split in 4K packets
-> > (fixed in the code) and queued in an internal list for the TX worker.
-> >
-> > After this series, we will queue up to 64K packets and then it will be split in
-> > the TX worker, depending on the size of the buffers available in the
-> > vring. (The idea was to allow EWMA or a configuration of the buffers size, but
-> > for now we postponed it)
->
-> Got it. Using workers for xmit is IMHO a bad idea btw.
-> Why is it done like this?
-
-Honestly, I don't know the exact reasons for this design, but I suppose
-that the idea was to have only one worker that uses the vring, and
-multiple user threads that enqueue packets in the list.
-This can simplify the code and we can put the user threads to sleep if
-we don't have "credit" available (this means that the receiver doesn't
-have space to receive the packet).
-
-What are the drawbacks in your opinion?
-
-
-Thanks,
-Stefano
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvNy8xMCDkuIvljYgzOjIyLCBKYXNvbiBXYW5nIHdyb3RlOgo+PiBZZWFoLCB0aGF0
+J3MgYSBtYWpvciBjb25jZXJuLiBJZiBpdCdzIHRydWUsIGlzIGl0IHNvbWV0aGluZwo+PiB0aGF0
+J3Mgbm90IGFjY2VwdGFibGU/Cj4KPgo+IEkgdGhpbmsgbm90LCBidXQgSSBkb24ndCBrbm93IGlm
+IGFueSBvdGhlciBvbmUgdGhhdCBjYXJlIHRoaXMuCj4KPgo+Pgo+Pj4gQW5kIEkgZG8gc2VlIHNv
+bWUgbmV3IFJGQyBmb3IgVkZJTyB0byBhZGQgbW9yZSBETUEgQVBJLgo+PiBJcyB0aGVyZSBhbnkg
+cG9pbnRlcnM/Cj4KPgo+IEkgZG9uJ3QgcmVtZW1iZXIgdGhlIGRldGFpbHMsIGJ1dCBpdCBzaG91
+bGQgYmUgc29tZXRoaW5nIHJlbGF0ZWQgdG8gCj4gU1ZBIHN1cHBvcnQgaW4gcmVjZW50IGludGVs
+IElPTU1VLgoKCkUuZyB0aGlzIHNlcmllczoKCmh0dHBzOi8vd3d3LnNwaW5pY3MubmV0L2xpc3Rz
+L2lvbW11L21zZzM3MTQ2Lmh0bWwKClRoYW5rcwoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxp
+emF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3Vu
+ZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
