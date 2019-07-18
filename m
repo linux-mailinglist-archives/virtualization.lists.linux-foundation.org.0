@@ -2,59 +2,59 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 299996CA28
-	for <lists.virtualization@lfdr.de>; Thu, 18 Jul 2019 09:43:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73FA26CA49
+	for <lists.virtualization@lfdr.de>; Thu, 18 Jul 2019 09:50:28 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 24F48EF3;
-	Thu, 18 Jul 2019 07:43:12 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 52A33163B;
+	Thu, 18 Jul 2019 07:50:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5BB70EF3
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 25A55E1E
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 07:43:10 +0000 (UTC)
+	Thu, 18 Jul 2019 07:50:20 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2904812E
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 985D125A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 07:43:09 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id g67so20439902wme.1
+	Thu, 18 Jul 2019 07:50:19 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id z1so27496644wru.13
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 18 Jul 2019 00:43:09 -0700 (PDT)
+	Thu, 18 Jul 2019 00:50:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=+5h5a3O3K59BqV9oPAQLtP560NcGiWgROtgONhhQBcA=;
-	b=p0/54spqm8GgFfljgSdoWnNhiqYzkb2Ib5inqllRWzsSEbRQrre3Nq4ajpL3A7zmru
-	G2zMwjUXYNG/yASFm3fgmre8OiPJzGNYonoE0FaMMZMbSAjHyv0dNtY2022a3czVvLtC
-	IHfpPWVLjQcBi+Ft8Y39R5M6T9rWLk7prxGq70ByF4TjLugqD0I+CsVs/eNtZLSeYRS9
-	u1j89QSIS255mvh+OlbJp3Z7Xc51ahwBNKHnGWq36DYrYxCNF+gtUpI0BvpoIJlUB/a6
-	ijaf/shxFnDYccxiuKT2KCGYneiLf1eFRZUmbnoK+T9aZeR/k2/k4UbuGbN+GgcSdwly
-	BvRw==
-X-Gm-Message-State: APjAAAWPpbrazcY5d1Rh+aZv01tv44z4S+dV/0cfB5xr3Cy+5xwktEUX
-	dwxm9V5CNSmU5obJg0udfly0zA==
-X-Google-Smtp-Source: APXvYqwtVzF6pOrVC5RrHtwRwAyqm+l6A25CyYC8a8Kyj4y50SwTmJGOs3CDoEzgqjZKGhzJbIUIfQ==
-X-Received: by 2002:a1c:3:: with SMTP id 3mr41105085wma.6.1563435787761;
-	Thu, 18 Jul 2019 00:43:07 -0700 (PDT)
+	bh=wKtb4eNPTM8gmdHfl+ucaMw83dCy0zFFLk8YD1DYgwA=;
+	b=dkmDpBUhMI6+NMriBw1fUeUqOeRUpFc2PcBVd53Syo7GXf6asVFpPBXccCb/sysoSb
+	ycitqe9EGEm3Zea0nUNqh/1pc+wlOVKUTLpzZ2eWhmX+pspMwuPoh8iQo1iSTWMr5Z78
+	bwMLVQSX8oVnWAlwxxeHYZuXlPTqhNlpoFjHG3jFq7szlcUltaFAhJZNTJzdTN4IpgHp
+	nHqxQap/+z+RJz6k003j047i4rTqTWwA6ZQGVBsA9a+P2p4A1tEo2n6vcnen9HlJLf6x
+	nKlOxeZF9BHMsrgHDjA8eKFLRr0AqgTFO4nMKmT7OzOOY5zU8njReWNiAlsvZfQDKX3p
+	xY2w==
+X-Gm-Message-State: APjAAAVM6MDT7WzRUouPox8+FLXzHJER633JOoIooVFoDICW/2T6WrFd
+	yviJRr+FbdnE3ZmIJzsIxmmoGQ==
+X-Google-Smtp-Source: APXvYqwhtjfQPOZEcza8kvYxdthj0IlRokH67HGXPivPJMSfA2tEdGbKSTgLCbWYotwEWVmgu0HbJw==
+X-Received: by 2002:adf:cf0d:: with SMTP id o13mr69099wrj.291.1563436218259;
+	Thu, 18 Jul 2019 00:50:18 -0700 (PDT)
 Received: from steredhat ([5.170.38.133]) by smtp.gmail.com with ESMTPSA id
-	g25sm18763167wmk.39.2019.07.18.00.43.06
+	b2sm33517958wrp.72.2019.07.18.00.50.16
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 18 Jul 2019 00:43:07 -0700 (PDT)
-Date: Thu, 18 Jul 2019 09:43:04 +0200
+	Thu, 18 Jul 2019 00:50:17 -0700 (PDT)
+Date: Thu, 18 Jul 2019 09:50:14 +0200
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH v4 3/5] vsock/virtio: fix locking in
-	virtio_transport_inc_tx_pkt()
-Message-ID: <CAGxU2F5PS8Ug3ei79ShVHOwLSXGYKwn3umvfvnhSFDs9pdvH2g@mail.gmail.com>
+Subject: Re: [PATCH v4 4/5] vhost/vsock: split packets to send using multiple
+	buffers
+Message-ID: <CAGxU2F45v40qAOHkm1Hk2E69gCS0UwVgS5NS+tDXXuzdF4EixA@mail.gmail.com>
 References: <20190717113030.163499-1-sgarzare@redhat.com>
-	<20190717113030.163499-4-sgarzare@redhat.com>
-	<20190717105056-mutt-send-email-mst@kernel.org>
+	<20190717113030.163499-5-sgarzare@redhat.com>
+	<20190717105336-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190717105056-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20190717105336-mutt-send-email-mst@kernel.org>
 User-Agent: NeoMutt/20180716
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
@@ -80,80 +80,32 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Jul 17, 2019 at 4:51 PM Michael S. Tsirkin <mst@redhat.com> wrote:
+On Wed, Jul 17, 2019 at 4:55 PM Michael S. Tsirkin <mst@redhat.com> wrote:
 >
-> On Wed, Jul 17, 2019 at 01:30:28PM +0200, Stefano Garzarella wrote:
-> > fwd_cnt and last_fwd_cnt are protected by rx_lock, so we should use
-> > the same spinlock also if we are in the TX path.
-> >
-> > Move also buf_alloc under the same lock.
+> On Wed, Jul 17, 2019 at 01:30:29PM +0200, Stefano Garzarella wrote:
+> > If the packets to sent to the guest are bigger than the buffer
+> > available, we can split them, using multiple buffers and fixing
+> > the length in the packet header.
+> > This is safe since virtio-vsock supports only stream sockets.
 > >
 > > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 >
-> Wait a second is this a bugfix?
-> If it's used under the wrong lock won't values get corrupted?
-> Won't traffic then stall or more data get to sent than
-> credits?
+> So how does it work right now? If an app
+> does sendmsg with a 64K buffer and the other
+> side publishes 4K buffers - does it just stall?
 
-Before this series, we only read vvs->fwd_cnt and vvs->buf_alloc in this
-function, but using a different lock than the one used to write them.
-I'm not sure if a corruption can happen, but if we want to avoid the
-lock, we should use an atomic operation or memory barriers.
+Before this series, the 64K (or bigger) user messages was split in 4K packets
+(fixed in the code) and queued in an internal list for the TX worker.
 
-Since now we also need to update vvs->last_fwd_cnt, in order to limit the
-credit message, I decided to take the same lock used to protect vvs->fwd_cnt
-and vvs->last_fwd_cnt.
+After this series, we will queue up to 64K packets and then it will be split in
+the TX worker, depending on the size of the buffers available in the
+vring. (The idea was to allow EWMA or a configuration of the buffers size, but
+for now we postponed it)
 
+Note: virtio-vsock only supports stream socket for now.
 
 Thanks,
 Stefano
-
->
-> > ---
-> >  include/linux/virtio_vsock.h            | 2 +-
-> >  net/vmw_vsock/virtio_transport_common.c | 4 ++--
-> >  2 files changed, 3 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/include/linux/virtio_vsock.h b/include/linux/virtio_vsock.h
-> > index 49fc9d20bc43..4c7781f4b29b 100644
-> > --- a/include/linux/virtio_vsock.h
-> > +++ b/include/linux/virtio_vsock.h
-> > @@ -35,7 +35,6 @@ struct virtio_vsock_sock {
-> >
-> >       /* Protected by tx_lock */
-> >       u32 tx_cnt;
-> > -     u32 buf_alloc;
-> >       u32 peer_fwd_cnt;
-> >       u32 peer_buf_alloc;
-> >
-> > @@ -43,6 +42,7 @@ struct virtio_vsock_sock {
-> >       u32 fwd_cnt;
-> >       u32 last_fwd_cnt;
-> >       u32 rx_bytes;
-> > +     u32 buf_alloc;
-> >       struct list_head rx_queue;
-> >  };
-> >
-> > diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
-> > index a85559d4d974..34a2b42313b7 100644
-> > --- a/net/vmw_vsock/virtio_transport_common.c
-> > +++ b/net/vmw_vsock/virtio_transport_common.c
-> > @@ -210,11 +210,11 @@ static void virtio_transport_dec_rx_pkt(struct virtio_vsock_sock *vvs,
-> >
-> >  void virtio_transport_inc_tx_pkt(struct virtio_vsock_sock *vvs, struct virtio_vsock_pkt *pkt)
-> >  {
-> > -     spin_lock_bh(&vvs->tx_lock);
-> > +     spin_lock_bh(&vvs->rx_lock);
-> >       vvs->last_fwd_cnt = vvs->fwd_cnt;
-> >       pkt->hdr.fwd_cnt = cpu_to_le32(vvs->fwd_cnt);
-> >       pkt->hdr.buf_alloc = cpu_to_le32(vvs->buf_alloc);
-> > -     spin_unlock_bh(&vvs->tx_lock);
-> > +     spin_unlock_bh(&vvs->rx_lock);
-> >  }
-> >  EXPORT_SYMBOL_GPL(virtio_transport_inc_tx_pkt);
-> >
-> > --
-> > 2.20.1
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
