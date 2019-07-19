@@ -2,46 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E60F6DB4B
-	for <lists.virtualization@lfdr.de>; Fri, 19 Jul 2019 06:08:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46B176DBD2
+	for <lists.virtualization@lfdr.de>; Fri, 19 Jul 2019 06:11:51 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id B3A2E219F;
-	Fri, 19 Jul 2019 04:08:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 400F92163;
+	Fri, 19 Jul 2019 04:11:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6D4DD2132
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DAA022149
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 19 Jul 2019 04:08:30 +0000 (UTC)
+	Fri, 19 Jul 2019 04:11:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 229C47C
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9436F7C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 19 Jul 2019 04:08:29 +0000 (UTC)
+	Fri, 19 Jul 2019 04:11:34 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
 	[73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 0B6AB218A4;
-	Fri, 19 Jul 2019 04:08:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id A03F521873;
+	Fri, 19 Jul 2019 04:11:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1563509309;
-	bh=FCsMAB1Le3dbb95jMq3Ii7C9GcLfcQ3xoI0XX/azHDM=;
+	s=default; t=1563509494;
+	bh=eBLAjYqe2FHNcUeaBNeOumJIpNd6hhEdTCiLow6sYqM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=RLqkxekKC0vfF+OEkKHdwwvrkbCOGEMK6nJWp6DEifl1TY+prHnJ928PRVTQyiLwG
-	eLTill5aWOSDx+TMHCoj3wVo5YZUdVuVDzuGVfAjlxzS3dLLBi/56KXkfwFnzINBSy
-	Ty30lEpYcpiXNAmkKgvaF3fcIbpB7o8Mq+2Zudm8=
+	b=gMUGQUi3grObfmsTfJlX8YkmSk2D3Oou9f8BViQBpLjPzKdu/XfpYrgK+xWO+6o8I
+	AVHtRWp2lBaHUAXh8SuqtHLbgrolDmRfAgCg9bvaj3je6Osq6eSJ/iXgK2teL9IM6c
+	FZNqAWc7T13F0gShk/5SWvOPh6gwrPzHUPxrTxgo=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 027/101] drm/virtio: Add memory barriers for
-	capset cache.
-Date: Fri, 19 Jul 2019 00:06:18 -0400
-Message-Id: <20190719040732.17285-27-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 15/60] drm/virtio: Add memory barriers for capset
+	cache.
+Date: Fri, 19 Jul 2019 00:10:24 -0400
+Message-Id: <20190719041109.18262-15-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190719040732.17285-1-sashal@kernel.org>
-References: <20190719040732.17285-1-sashal@kernel.org>
+In-Reply-To: <20190719041109.18262-1-sashal@kernel.org>
+References: <20190719041109.18262-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -85,12 +85,12 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 5 insertions(+)
 
 diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-index 7bdf6f0e58a5..8d2f5ded86d6 100644
+index ed9c443bb8a1..40cc2f6707cf 100644
 --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
 +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-@@ -528,6 +528,9 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
- 	if (!ret)
- 		return -EBUSY;
+@@ -523,6 +523,9 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
+ 	ret = wait_event_timeout(vgdev->resp_wq,
+ 				 atomic_read(&cache_ent->is_valid), 5 * HZ);
  
 +	/* is_valid check must proceed before copy of the cache entry. */
 +	smp_rmb();
@@ -99,10 +99,10 @@ index 7bdf6f0e58a5..8d2f5ded86d6 100644
  
  copy_exit:
 diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-index 020070d483d3..c8a581b1f4c4 100644
+index 26a2da1f712d..21c2de81f3e3 100644
 --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
 +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-@@ -588,6 +588,8 @@ static void virtio_gpu_cmd_capset_cb(struct virtio_gpu_device *vgdev,
+@@ -585,6 +585,8 @@ static void virtio_gpu_cmd_capset_cb(struct virtio_gpu_device *vgdev,
  		    cache_ent->id == le32_to_cpu(cmd->capset_id)) {
  			memcpy(cache_ent->caps_cache, resp->capset_data,
  			       cache_ent->size);
