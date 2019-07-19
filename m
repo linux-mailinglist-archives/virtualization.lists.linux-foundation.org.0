@@ -2,46 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BDBF6DC1A
-	for <lists.virtualization@lfdr.de>; Fri, 19 Jul 2019 06:13:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A4406DC2B
+	for <lists.virtualization@lfdr.de>; Fri, 19 Jul 2019 06:15:04 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id A7FE62149;
-	Fri, 19 Jul 2019 04:13:43 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 09AAD21A2;
+	Fri, 19 Jul 2019 04:14:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 341C62149
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 048471133
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 19 Jul 2019 04:13:26 +0000 (UTC)
+	Fri, 19 Jul 2019 04:14:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DEC757C
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AFBED71C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 19 Jul 2019 04:13:25 +0000 (UTC)
+	Fri, 19 Jul 2019 04:14:40 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
 	[73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id EF1CE21872;
-	Fri, 19 Jul 2019 04:13:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id BFC6E2189E;
+	Fri, 19 Jul 2019 04:14:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1563509605;
-	bh=vqQwjsyXatyGelWezBxGJt5LrvjbIVovafrzOFTMhrc=;
+	s=default; t=1563509680;
+	bh=5Nril+9LsbgUoVrHLsCvF9VUvW6BFiF0+UitNynqDi4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cIkPunHYtf0B+pt/w9AvYMyKNXsiFYd8RLrvnCjXRhVaESXzYH/240p2uwyN3RD4M
-	1Ndf0pwdlBkwQk9RBDs81lXErxhkCjkjiPZgzmaZ49AffZYZPC2SfGDkpQEEi9ZY/5
-	jHYfRuJd0IbsGxLx5BV+tbbmR2uhaFKwJC7jGOFk=
+	b=DD9BJC9ZV/vNa+j0ww+cdUvh0ZbAE5RpKnjQ3gECJyG5T2EqPr4lndgZ3ODM60nZy
+	QTqGeKCUuQGfgSTBryuraT/iyUI4DD+KXuHzPw3Y2d4yZ1iUkdFgREUKt6Q21SzmHu
+	iH+f98LMAXfwAQNVTQ6zScw+SKhvtMhcnX8dl2TY=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 13/45] drm/virtio: Add memory barriers for capset
+Subject: [PATCH AUTOSEL 4.4 10/35] drm/virtio: Add memory barriers for capset
 	cache.
-Date: Fri, 19 Jul 2019 00:12:32 -0400
-Message-Id: <20190719041304.18849-13-sashal@kernel.org>
+Date: Fri, 19 Jul 2019 00:13:58 -0400
+Message-Id: <20190719041423.19322-10-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190719041304.18849-1-sashal@kernel.org>
-References: <20190719041304.18849-1-sashal@kernel.org>
+In-Reply-To: <20190719041423.19322-1-sashal@kernel.org>
+References: <20190719041423.19322-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -85,10 +85,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 5 insertions(+)
 
 diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-index 54639395aba0..a3559b1a3a0f 100644
+index 6296e9f270ca..0b8f8c10f2ed 100644
 --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
 +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-@@ -521,6 +521,9 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
+@@ -535,6 +535,9 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
  	ret = wait_event_timeout(vgdev->resp_wq,
  				 atomic_read(&cache_ent->is_valid), 5 * HZ);
  
