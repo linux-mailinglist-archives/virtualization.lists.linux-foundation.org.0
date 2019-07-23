@@ -2,68 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE50B71C15
-	for <lists.virtualization@lfdr.de>; Tue, 23 Jul 2019 17:47:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A70A722B2
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 00:58:50 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4E78CB7A;
-	Tue, 23 Jul 2019 15:47:37 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0F6927F6;
+	Tue, 23 Jul 2019 22:58:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 59CD5B50
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CCD6A7F6
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 23 Jul 2019 15:47:35 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ua1-f67.google.com (mail-ua1-f67.google.com
-	[209.85.222.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DE5208BE
+	Tue, 23 Jul 2019 22:58:41 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id ABEF3FE
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 23 Jul 2019 15:47:34 +0000 (UTC)
-Received: by mail-ua1-f67.google.com with SMTP id j2so17085782uaq.5
+	Tue, 23 Jul 2019 22:58:40 +0000 (UTC)
+Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
+	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x6NMuwMr159365 for <virtualization@lists.linux-foundation.org>;
+	Tue, 23 Jul 2019 18:58:39 -0400
+Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
+	by mx0b-001b2d01.pphosted.com with ESMTP id 2tx9g64356-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 23 Jul 2019 08:47:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=EVAD8Vf0X0incVqfNJDqjZVDQjwtcJn0P5gsd+3TH3w=;
-	b=TrWUCjtOPukj0nP7mwQe31kNxUID6rlcFbgJMnNlAGWQWTVYyZpABaX73hc8T9trR4
-	NO22/UuOo5RAlmN/jHolqIvw8rOrNmexlf1DChHdKjOCKYGfiKGVBwrBVcl6iZG7Exap
-	84w4nzVKy2Jbiik9w2DDOtJgXvZO7979p/ujGxwYu388EGcIXY+nxrfaZCC90vB9O2AG
-	Va9C0tOiCgHv+9x3Nl+js59kU1GKICSx7RW199CvGs9WL6v1iG65jELdY5ROTuCjkM0F
-	nc7KpyGcBQl2ISIlAK7VxoC3o4UndukwXPmGs3Y/HtZLUDpoU116vVcUo01XUUdAoo89
-	2OMQ==
-X-Gm-Message-State: APjAAAV/fNx2/JpZQhP4BPpdTPDXYoiuHOmp/BHOmQqWDSt9rBUi6Bx8
-	ad0r2k+dTSzwQA+yo0pXVbvneg==
-X-Google-Smtp-Source: APXvYqzIzHEVdbHcpvt3jUNOAipVxZHK2T6eMul3vNE3BHOosQ4+ZcwjKuMyZs2L9p2YrV6mjmClLw==
-X-Received: by 2002:ab0:734f:: with SMTP id k15mr19186395uap.28.1563896853769; 
-	Tue, 23 Jul 2019 08:47:33 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
-	by smtp.gmail.com with ESMTPSA id
-	j138sm17625220vka.11.2019.07.23.08.47.29
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 23 Jul 2019 08:47:32 -0700 (PDT)
-Date: Tue, 23 Jul 2019 11:47:27 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Christoph Hellwig <hch@lst.de>
-Subject: Re: [PATCH 2/2] virtio/virtio_ring: Fix the dma_max_mapping_size call
-Message-ID: <20190723114504-mutt-send-email-mst@kernel.org>
-References: <20190722145509.1284-1-eric.auger@redhat.com>
-	<20190722145509.1284-3-eric.auger@redhat.com>
-	<20190722112704-mutt-send-email-mst@kernel.org>
-	<20190723153830.GD720@lst.de>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190723153830.GD720@lst.de>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	Tue, 23 Jul 2019 18:58:39 -0400
+Received: from localhost
+	by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<pasic@linux.ibm.com>; Tue, 23 Jul 2019 23:58:37 +0100
+Received: from b06avi18626390.portsmouth.uk.ibm.com (9.149.26.192)
+	by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Tue, 23 Jul 2019 23:58:35 +0100
+Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
+	[9.149.105.61])
+	by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x6NMwI7L37945688
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Tue, 23 Jul 2019 22:58:18 GMT
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 807FF11C054;
+	Tue, 23 Jul 2019 22:58:33 +0000 (GMT)
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 3DA1011C04C;
+	Tue, 23 Jul 2019 22:58:33 +0000 (GMT)
+Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
+	by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+	Tue, 23 Jul 2019 22:58:33 +0000 (GMT)
+From: Halil Pasic <pasic@linux.ibm.com>
+To: Cornelia Huck <cohuck@redhat.com>, kvm@vger.kernel.org,
+	linux-s390@vger.kernel.org
+Subject: [PATCH 1/1] virtio/s390: fix race on airq_areas[]
+Date: Wed, 24 Jul 2019 00:58:17 +0200
+X-Mailer: git-send-email 2.17.1
+X-TM-AS-GCONF: 00
+x-cbid: 19072322-0012-0000-0000-000003358E7A
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19072322-0013-0000-0000-0000216F2048
+Message-Id: <20190723225817.12800-1-pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-07-23_09:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=895 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1906280000 definitions=main-1907230235
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	Eric Auger <eric.auger@redhat.com>,
-	iommu@lists.linux-foundation.org, eric.auger.pro@gmail.com,
-	robin.murphy@arm.com, m.szyprowski@samsung.com
+Cc: Halil Pasic <pasic@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Marc Hartmayer <mhartmay@linux.ibm.com>,
+	Janosch Frank <frankja@linux.ibm.com>,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,38 +93,62 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Jul 23, 2019 at 05:38:30PM +0200, Christoph Hellwig wrote:
-> On Mon, Jul 22, 2019 at 11:33:35AM -0400, Michael S. Tsirkin wrote:
-> > On Mon, Jul 22, 2019 at 04:55:09PM +0200, Eric Auger wrote:
-> > > Do not call dma_max_mapping_size for devices that have no DMA
-> > > mask set, otherwise we can hit a NULL pointer dereference.
-> > > 
-> > > This occurs when a virtio-blk-pci device is protected with
-> > > a virtual IOMMU.
-> > > 
-> > > Fixes: e6d6dd6c875e ("virtio: Introduce virtio_max_dma_size()")
-> > > Signed-off-by: Eric Auger <eric.auger@redhat.com>
-> > > Suggested-by: Christoph Hellwig <hch@lst.de>
-> > 
-> > Christoph, I wonder why did you suggest this?
-> > The connection between dma_mask and dma_max_mapping_size
-> > is far from obvious.  The documentation doesn't exist.
-> > Do we really have to teach all users about this hack?
-> > Why not just make dma_max_mapping_size DTRT?
-> 
-> Because we should not call into dma API functions for devices that
-> are not DMA capable.
+The access to airq_areas was racy ever since the adapter interrupts got
+introduced to virtio-ccw, but since commit 39c7dcb15892 ("virtio/s390:
+make airq summary indicators DMA") this became an issue in practice as
+well. Namely before that commit the airq_info that got overwritten was
+still functional. After that commit however the two infos share a
+summary_indicator, which aggravates the situation. Which means
+auto-online mechanism occasionally hangs the boot with virtio_blk.
 
-I'd rather call is_device_dma_capable then, better than poking
-at DMA internals.
+Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+Reported-by: Marc Hartmayer <mhartmay@linux.ibm.com>
+Fixes: 96b14536d935 ("virtio-ccw: virtio-ccw adapter interrupt support.")
+---
+* We need definitely this fixed for 5.3. For older stable kernels it is
+to be discussed. @Connie what do you think: do we need a cc stable?
 
+* I have a variant that does not need the extra mutex but uses cmpxchg().
+Decided to post this one because that one is more complex. But if there
+is interest we can have a look at it as well.
+---
+ drivers/s390/virtio/virtio_ccw.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
+index 1a55e5942d36..d97742662755 100644
+--- a/drivers/s390/virtio/virtio_ccw.c
++++ b/drivers/s390/virtio/virtio_ccw.c
+@@ -145,6 +145,8 @@ struct airq_info {
+ 	struct airq_iv *aiv;
+ };
+ static struct airq_info *airq_areas[MAX_AIRQ_AREAS];
++DEFINE_MUTEX(airq_areas_lock);
++
+ static u8 *summary_indicators;
+ 
+ static inline u8 *get_summary_indicator(struct airq_info *info)
+@@ -265,9 +267,11 @@ static unsigned long get_airq_indicator(struct virtqueue *vqs[], int nvqs,
+ 	unsigned long bit, flags;
+ 
+ 	for (i = 0; i < MAX_AIRQ_AREAS && !indicator_addr; i++) {
++		mutex_lock(&airq_areas_lock);
+ 		if (!airq_areas[i])
+ 			airq_areas[i] = new_airq_info(i);
+ 		info = airq_areas[i];
++		mutex_unlock(&airq_areas_lock);
+ 		if (!info)
+ 			return 0;
+ 		write_lock_irqsave(&info->lock, flags);
 -- 
-MST
+2.17.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
