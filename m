@@ -2,86 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A70A722B2
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 00:58:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 893B072511
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 05:05:29 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0F6927F6;
-	Tue, 23 Jul 2019 22:58:43 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2CA5BD56;
+	Wed, 24 Jul 2019 03:05:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CCD6A7F6
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3AA7EC9E
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 23 Jul 2019 22:58:41 +0000 (UTC)
+	Wed, 24 Jul 2019 03:05:22 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id ABEF3FE
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A5F94775
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 23 Jul 2019 22:58:40 +0000 (UTC)
-Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x6NMuwMr159365 for <virtualization@lists.linux-foundation.org>;
-	Tue, 23 Jul 2019 18:58:39 -0400
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
-	by mx0b-001b2d01.pphosted.com with ESMTP id 2tx9g64356-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 23 Jul 2019 18:58:39 -0400
-Received: from localhost
-	by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<pasic@linux.ibm.com>; Tue, 23 Jul 2019 23:58:37 +0100
-Received: from b06avi18626390.portsmouth.uk.ibm.com (9.149.26.192)
-	by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Tue, 23 Jul 2019 23:58:35 +0100
-Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
-	[9.149.105.61])
-	by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x6NMwI7L37945688
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Tue, 23 Jul 2019 22:58:18 GMT
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 807FF11C054;
-	Tue, 23 Jul 2019 22:58:33 +0000 (GMT)
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3DA1011C04C;
-	Tue, 23 Jul 2019 22:58:33 +0000 (GMT)
-Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
-	by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Tue, 23 Jul 2019 22:58:33 +0000 (GMT)
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Cornelia Huck <cohuck@redhat.com>, kvm@vger.kernel.org,
-	linux-s390@vger.kernel.org
-Subject: [PATCH 1/1] virtio/s390: fix race on airq_areas[]
-Date: Wed, 24 Jul 2019 00:58:17 +0200
-X-Mailer: git-send-email 2.17.1
-X-TM-AS-GCONF: 00
-x-cbid: 19072322-0012-0000-0000-000003358E7A
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19072322-0013-0000-0000-0000216F2048
-Message-Id: <20190723225817.12800-1-pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-07-23_09:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=895 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1906280000 definitions=main-1907230235
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	Wed, 24 Jul 2019 03:05:21 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 14C00C03BC91;
+	Wed, 24 Jul 2019 03:05:21 +0000 (UTC)
+Received: from [10.72.12.117] (ovpn-12-117.pek2.redhat.com [10.72.12.117])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 3968F19C67;
+	Wed, 24 Jul 2019 03:05:15 +0000 (UTC)
+Subject: Re: Reminder: 3 open syzbot bugs in vhost subsystem
+To: kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	netdev@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+	linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
+References: <20190724023835.GY643@sol.localdomain>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <fabf96ac-e472-c7fd-07ff-486fe03e6433@redhat.com>
+Date: Wed, 24 Jul 2019 11:05:14 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <20190724023835.GY643@sol.localdomain>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.32]);
+	Wed, 24 Jul 2019 03:05:21 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Marc Hartmayer <mhartmay@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -93,63 +60,98 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-The access to airq_areas was racy ever since the adapter interrupts got
-introduced to virtio-ccw, but since commit 39c7dcb15892 ("virtio/s390:
-make airq summary indicators DMA") this became an issue in practice as
-well. Namely before that commit the airq_info that got overwritten was
-still functional. After that commit however the two infos share a
-summary_indicator, which aggravates the situation. Which means
-auto-online mechanism occasionally hangs the boot with virtio_blk.
-
-Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-Reported-by: Marc Hartmayer <mhartmay@linux.ibm.com>
-Fixes: 96b14536d935 ("virtio-ccw: virtio-ccw adapter interrupt support.")
----
-* We need definitely this fixed for 5.3. For older stable kernels it is
-to be discussed. @Connie what do you think: do we need a cc stable?
-
-* I have a variant that does not need the extra mutex but uses cmpxchg().
-Decided to post this one because that one is more complex. But if there
-is interest we can have a look at it as well.
----
- drivers/s390/virtio/virtio_ccw.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
-index 1a55e5942d36..d97742662755 100644
---- a/drivers/s390/virtio/virtio_ccw.c
-+++ b/drivers/s390/virtio/virtio_ccw.c
-@@ -145,6 +145,8 @@ struct airq_info {
- 	struct airq_iv *aiv;
- };
- static struct airq_info *airq_areas[MAX_AIRQ_AREAS];
-+DEFINE_MUTEX(airq_areas_lock);
-+
- static u8 *summary_indicators;
- 
- static inline u8 *get_summary_indicator(struct airq_info *info)
-@@ -265,9 +267,11 @@ static unsigned long get_airq_indicator(struct virtqueue *vqs[], int nvqs,
- 	unsigned long bit, flags;
- 
- 	for (i = 0; i < MAX_AIRQ_AREAS && !indicator_addr; i++) {
-+		mutex_lock(&airq_areas_lock);
- 		if (!airq_areas[i])
- 			airq_areas[i] = new_airq_info(i);
- 		info = airq_areas[i];
-+		mutex_unlock(&airq_areas_lock);
- 		if (!info)
- 			return 0;
- 		write_lock_irqsave(&info->lock, flags);
--- 
-2.17.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvNy8yNCDkuIrljYgxMDozOCwgRXJpYyBCaWdnZXJzIHdyb3RlOgo+IFtUaGlzIGVt
+YWlsIHdhcyBnZW5lcmF0ZWQgYnkgYSBzY3JpcHQuICBMZXQgbWUga25vdyBpZiB5b3UgaGF2ZSBh
+bnkgc3VnZ2VzdGlvbnMKPiB0byBtYWtlIGl0IGJldHRlciwgb3IgaWYgeW91IHdhbnQgaXQgcmUt
+Z2VuZXJhdGVkIHdpdGggdGhlIGxhdGVzdCBzdGF0dXMuXQo+Cj4gT2YgdGhlIGN1cnJlbnRseSBv
+cGVuIHN5emJvdCByZXBvcnRzIGFnYWluc3QgdGhlIHVwc3RyZWFtIGtlcm5lbCwgSSd2ZSBtYW51
+YWxseQo+IG1hcmtlZCAzIG9mIHRoZW0gYXMgcG9zc2libHkgYmVpbmcgYnVncyBpbiB0aGUgdmhv
+c3Qgc3Vic3lzdGVtLiAgSSd2ZSBsaXN0ZWQKPiB0aGVzZSByZXBvcnRzIGJlbG93LCBzb3J0ZWQg
+YnkgYW4gYWxnb3JpdGhtIHRoYXQgdHJpZXMgdG8gbGlzdCBmaXJzdCB0aGUgcmVwb3J0cwo+IG1v
+c3QgbGlrZWx5IHRvIGJlIHN0aWxsIHZhbGlkLCBpbXBvcnRhbnQsIGFuZCBhY3Rpb25hYmxlLgo+
+Cj4gT2YgdGhlc2UgMyBidWdzLCAyIHdlcmUgc2VlbiBpbiBtYWlubGluZSBpbiB0aGUgbGFzdCB3
+ZWVrLgo+Cj4gT2YgdGhlc2UgMyBidWdzLCAyIHdlcmUgYmlzZWN0ZWQgdG8gY29tbWl0cyBmcm9t
+IHRoZSBmb2xsb3dpbmcgcGVyc29uOgo+Cj4gCUphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5j
+b20+Cj4KPiBJZiB5b3UgYmVsaWV2ZSBhIGJ1ZyBpcyBubyBsb25nZXIgdmFsaWQsIHBsZWFzZSBj
+bG9zZSB0aGUgc3l6Ym90IHJlcG9ydCBieQo+IHNlbmRpbmcgYSAnI3N5eiBmaXgnLCAnI3N5eiBk
+dXAnLCBvciAnI3N5eiBpbnZhbGlkJyBjb21tYW5kIGluIHJlcGx5IHRvIHRoZQo+IG9yaWdpbmFs
+IHRocmVhZCwgYXMgZXhwbGFpbmVkIGF0IGh0dHBzOi8vZ29vLmdsL3Rwc21FSiNzdGF0dXMKPgo+
+IElmIHlvdSBiZWxpZXZlIEkgbWlzYXR0cmlidXRlZCBhIGJ1ZyB0byB0aGUgdmhvc3Qgc3Vic3lz
+dGVtLCBwbGVhc2UgbGV0IG1lIGtub3csCj4gYW5kIGlmIHBvc3NpYmxlIGZvcndhcmQgdGhlIHJl
+cG9ydCB0byB0aGUgY29ycmVjdCBwZW9wbGUgb3IgbWFpbGluZyBsaXN0Lgo+Cj4gSGVyZSBhcmUg
+dGhlIGJ1Z3M6Cj4KPiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+IFRpdGxlOiAgICAgICAgICAg
+ICAgS0FTQU46IHVzZS1hZnRlci1mcmVlIFdyaXRlIGluIHRsYl9maW5pc2hfbW11Cj4gTGFzdCBv
+Y2N1cnJlZDogICAgICA1IGRheXMgYWdvCj4gUmVwb3J0ZWQ6ICAgICAgICAgICA0IGRheXMgYWdv
+Cj4gQnJhbmNoZXM6ICAgICAgICAgICBNYWlubGluZQo+IERhc2hib2FyZCBsaW5rOiAgICAgaHR0
+cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20vYnVnP2lkPWQ1N2I5NGY4OWU0OGM4NWVmN2Q5NWFj
+YzIwODIwOWVhNGJkYzEwZGUKPiBPcmlnaW5hbCB0aHJlYWQ6ICAgIGh0dHBzOi8vbGttbC5rZXJu
+ZWwub3JnL2xrbWwvMDAwMDAwMDAwMDAwNDVlN2ExMDU4ZTAyNDU4YUBnb29nbGUuY29tL1QvI3UK
+Pgo+IFRoaXMgYnVnIGhhcyBhIHN5emthbGxlciByZXByb2R1Y2VyIG9ubHkuCj4KPiBUaGlzIGJ1
+ZyB3YXMgYmlzZWN0ZWQgdG86Cj4KPiAJY29tbWl0IDdmNDY2MDMyZGM5ZTVhNjEyMTdmMjJlYTM0
+YjJkZjkzMjc4NmJiZmMKPiAJQXV0aG9yOiBKYXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29t
+Pgo+IAlEYXRlOiAgIEZyaSBNYXkgMjQgMDg6MTI6MTggMjAxOSArMDAwMAo+Cj4gCcKgwqB2aG9z
+dDogYWNjZXNzIHZxIG1ldGFkYXRhIHRocm91Z2gga2VybmVsIHZpcnR1YWwgYWRkcmVzcwo+Cj4g
+Tm8gb25lIGhhcyByZXBsaWVkIHRvIHRoZSBvcmlnaW5hbCB0aHJlYWQgZm9yIHRoaXMgYnVnIHll
+dC4KPgo+IElmIHlvdSBmaXggdGhpcyBidWcsIHBsZWFzZSBhZGQgdGhlIGZvbGxvd2luZyB0YWcg
+dG8gdGhlIGNvbW1pdDoKPiAgICAgIFJlcG9ydGVkLWJ5OiBzeXpib3QrODI2N2U5YWY3OTU0MzRm
+ZmFkYWRAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbQo+Cj4gSWYgeW91IHNlbmQgYW55IGVtYWls
+IG9yIHBhdGNoIGZvciB0aGlzIGJ1ZywgcGxlYXNlIHJlcGx5IHRvIHRoZSBvcmlnaW5hbAo+IHRo
+cmVhZC4gIEZvciB0aGUgZ2l0IHNlbmQtZW1haWwgY29tbWFuZCB0byB1c2UsIG9yIHRpcHMgb24g
+aG93IHRvIHJlcGx5IGlmIHRoZQo+IHRocmVhZCBpc24ndCBpbiB5b3VyIG1haWxib3gsIHNlZSB0
+aGUgIlJlcGx5IGluc3RydWN0aW9ucyIgYXQKPiBodHRwczovL2xrbWwua2VybmVsLm9yZy9yLzAw
+MDAwMDAwMDAwMDQ1ZTdhMTA1OGUwMjQ1OGFAZ29vZ2xlLmNvbQo+Cj4gLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0KPiBUaXRsZTogICAgICAgICAgICAgIEtBU0FOOiB1c2UtYWZ0ZXItZnJlZSBSZWFk
+IGluIGZpbmlzaF90YXNrX3N3aXRjaCAoMikKPiBMYXN0IG9jY3VycmVkOiAgICAgIDUgZGF5cyBh
+Z28KPiBSZXBvcnRlZDogICAgICAgICAgIDQgZGF5cyBhZ28KPiBCcmFuY2hlczogICAgICAgICAg
+IE1haW5saW5lCj4gRGFzaGJvYXJkIGxpbms6ICAgICBodHRwczovL3N5emthbGxlci5hcHBzcG90
+LmNvbS9idWc/aWQ9OWE5OGZjYWQ2YzhiZDMxZjVjM2FmYmRjNmM3NWRlOWYwODJjMGZmYQo+IE9y
+aWdpbmFsIHRocmVhZDogICAgaHR0cHM6Ly9sa21sLmtlcm5lbC5vcmcvbGttbC8wMDAwMDAwMDAw
+MDA0OTA2NzkwNThlMDI0NWVlQGdvb2dsZS5jb20vVC8jdQo+Cj4gVGhpcyBidWcgaGFzIGEgc3l6
+a2FsbGVyIHJlcHJvZHVjZXIgb25seS4KPgo+IFRoaXMgYnVnIHdhcyBiaXNlY3RlZCB0bzoKPgo+
+IAljb21taXQgN2Y0NjYwMzJkYzllNWE2MTIxN2YyMmVhMzRiMmRmOTMyNzg2YmJmYwo+IAlBdXRo
+b3I6IEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+Cj4gCURhdGU6ICAgRnJpIE1heSAy
+NCAwODoxMjoxOCAyMDE5ICswMDAwCj4KPiAJwqDCoHZob3N0OiBhY2Nlc3MgdnEgbWV0YWRhdGEg
+dGhyb3VnaCBrZXJuZWwgdmlydHVhbCBhZGRyZXNzCj4KPiBObyBvbmUgaGFzIHJlcGxpZWQgdG8g
+dGhlIG9yaWdpbmFsIHRocmVhZCBmb3IgdGhpcyBidWcgeWV0LgoKCkhpOgoKV2UgYmVsaWV2ZSBh
+Ym92ZSB0d28gYnVncyBhcmUgZHVwbGljYXRlZCB3aXRoIHRoZSByZXBvcnQgIldBUk5JTkcgaW4g
+Cl9fbW1kcm9wIi4gQ2FuIEkganVzdCBkdXAgdGhlbSB3aXRoCgojc3l6IGR1cCAiV0FSTklORyBp
+biBfX21tZHJvcCIKCihJZiB5ZXMsIGp1c3Qgd29uZGVyIGhvdyBzeXpib3QgZGlmZmVyIGJ1Z3Ms
+IHRlY2huaWNhbGx5LCBzZXZlcmFsIApkaWZmZXJlbnQgYnVnIGNhbiBoaXQgdGhlIHNhbWUgd2Fy
+bmluZykuCgoKPgo+IElmIHlvdSBmaXggdGhpcyBidWcsIHBsZWFzZSBhZGQgdGhlIGZvbGxvd2lu
+ZyB0YWcgdG8gdGhlIGNvbW1pdDoKPiAgICAgIFJlcG9ydGVkLWJ5OiBzeXpib3QrN2YwNjdjNzk2
+ZWVlMmFjYmM1N2FAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbQo+Cj4gSWYgeW91IHNlbmQgYW55
+IGVtYWlsIG9yIHBhdGNoIGZvciB0aGlzIGJ1ZywgcGxlYXNlIHJlcGx5IHRvIHRoZSBvcmlnaW5h
+bAo+IHRocmVhZC4gIEZvciB0aGUgZ2l0IHNlbmQtZW1haWwgY29tbWFuZCB0byB1c2UsIG9yIHRp
+cHMgb24gaG93IHRvIHJlcGx5IGlmIHRoZQo+IHRocmVhZCBpc24ndCBpbiB5b3VyIG1haWxib3gs
+IHNlZSB0aGUgIlJlcGx5IGluc3RydWN0aW9ucyIgYXQKPiBodHRwczovL2xrbWwua2VybmVsLm9y
+Zy9yLzAwMDAwMDAwMDAwMDQ5MDY3OTA1OGUwMjQ1ZWVAZ29vZ2xlLmNvbQo+Cj4gLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0KPiBUaXRsZTogICAgICAgICAgICAgIG1lbW9yeSBsZWFrIGluIHZob3N0
+X25ldF9pb2N0bAo+IExhc3Qgb2NjdXJyZWQ6ICAgICAgMjIgZGF5cyBhZ28KPiBSZXBvcnRlZDog
+ICAgICAgICAgIDQ4IGRheXMgYWdvCj4gQnJhbmNoZXM6ICAgICAgICAgICBNYWlubGluZQo+IERh
+c2hib2FyZCBsaW5rOiAgICAgaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20vYnVnP2lkPTEy
+YmEzNDlkN2UyNmNjZmU5NTMxN2JjMzc2ZTgxMmViYmFlMmVlMGYKPiBPcmlnaW5hbCB0aHJlYWQ6
+ICAgIGh0dHBzOi8vbGttbC5rZXJuZWwub3JnL2xrbWwvMDAwMDAwMDAwMDAwMTg4ZGExMDU4YTlj
+MjVlM0Bnb29nbGUuY29tL1QvI3UKPgo+IFRoaXMgYnVnIGhhcyBhIEMgcmVwcm9kdWNlci4KPgo+
+IFRoZSBvcmlnaW5hbCB0aHJlYWQgZm9yIHRoaXMgYnVnIGhhcyByZWNlaXZlZCA0IHJlcGxpZXM7
+IHRoZSBsYXN0IHdhcyAzOSBkYXlzCj4gYWdvLgo+Cj4gSWYgeW91IGZpeCB0aGlzIGJ1ZywgcGxl
+YXNlIGFkZCB0aGUgZm9sbG93aW5nIHRhZyB0byB0aGUgY29tbWl0Ogo+ICAgICAgUmVwb3J0ZWQt
+Ynk6IHN5emJvdCswNzg5ZjBjN2U0NWVmZDdiYjY0M0BzeXprYWxsZXIuYXBwc3BvdG1haWwuY29t
+CgoKSSBkbyByZW1lbWJlciBpdCBjYW4gbm90IGJlIHJlcHJvZHVjZWQgdXBzdHJlYW0sIGxldCBt
+ZSBkb3VibGUgY2hlY2sgYW5kIApjbG9zZSB0aGlzIG9uZS4KClRoYW5rcwoKCj4KPiBJZiB5b3Ug
+c2VuZCBhbnkgZW1haWwgb3IgcGF0Y2ggZm9yIHRoaXMgYnVnLCBwbGVhc2UgY29uc2lkZXIgcmVw
+bHlpbmcgdG8gdGhlCj4gb3JpZ2luYWwgdGhyZWFkLiAgRm9yIHRoZSBnaXQgc2VuZC1lbWFpbCBj
+b21tYW5kIHRvIHVzZSwgb3IgdGlwcyBvbiBob3cgdG8gcmVwbHkKPiBpZiB0aGUgdGhyZWFkIGlz
+bid0IGluIHlvdXIgbWFpbGJveCwgc2VlIHRoZSAiUmVwbHkgaW5zdHJ1Y3Rpb25zIiBhdAo+IGh0
+dHBzOi8vbGttbC5rZXJuZWwub3JnL3IvMDAwMDAwMDAwMDAwMTg4ZGExMDU4YTljMjVlM0Bnb29n
+bGUuY29tCj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+VmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZv
+dW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3ZpcnR1YWxpemF0aW9u
