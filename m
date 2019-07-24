@@ -2,133 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D4D472958
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 09:58:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BCC772983
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 10:08:16 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6ED8BDAC;
-	Wed, 24 Jul 2019 07:58:13 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0DA19DBC;
+	Wed, 24 Jul 2019 08:08:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 79749AB5
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 42858AF7
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 07:58:11 +0000 (UTC)
-X-Greylist: delayed 01:13:43 by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D7FCDF1
+	Wed, 24 Jul 2019 08:08:09 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1A258894
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 07:58:10 +0000 (UTC)
-Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x6O6edjc056533 for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 02:44:26 -0400
-Received: from e06smtp01.uk.ibm.com (e06smtp01.uk.ibm.com [195.75.94.97])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2txhy297fd-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	Wed, 24 Jul 2019 08:08:08 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id d15so33100384qkl.4
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 02:44:25 -0400
-Received: from localhost
-	by e06smtp01.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<borntraeger@de.ibm.com>; Wed, 24 Jul 2019 07:44:24 +0100
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
-	by e06smtp01.uk.ibm.com (192.168.101.131) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Wed, 24 Jul 2019 07:44:21 +0100
-Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com
-	[9.149.105.60])
-	by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x6O6iKNc53739630
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Wed, 24 Jul 2019 06:44:20 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 35CFF42041;
-	Wed, 24 Jul 2019 06:44:20 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E97AC42042;
-	Wed, 24 Jul 2019 06:44:19 +0000 (GMT)
-Received: from oc7455500831.ibm.com (unknown [9.152.224.116])
-	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-	Wed, 24 Jul 2019 06:44:19 +0000 (GMT)
-Subject: Re: [PATCH 1/1] virtio/s390: fix race on airq_areas[]
-To: Halil Pasic <pasic@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
-	kvm@vger.kernel.org, linux-s390@vger.kernel.org
-References: <20190723225817.12800-1-pasic@linux.ibm.com>
-From: Christian Borntraeger <borntraeger@de.ibm.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
-	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
-	syiRa+UVlsKmx1hsEg==
-Date: Wed, 24 Jul 2019 08:44:19 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.2
+	Wed, 24 Jul 2019 01:08:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to;
+	bh=/MFYQFzENwHk5G46kOvOVKTzaxjp4jXpKM7WypPWBDc=;
+	b=FS6b83HrpcE8QOpRaxw2SCzGjLKd7u0bRmGOQNWSxiGtdvAsCbm3ObG5vC98nl31EK
+	L+OzJQUJ0VsE8De7rXnUqgX8uC2xfm6EGtxt+T3v6Z94lPvUyppiShl82t0lczOw6c7b
+	QmP6B1WgiASO+Hrx/JkKr/JaAAJKGGLMAS+fPMoFnQ9/em3uWKhvwaeuFlfxMFH4BgXL
+	Ye1/KeDBAIxS5sUFq3lyCfaGt3Zlzqbo4PMNqYEoOmk3bcY1UD0XEJpRPijDn+DjSeIa
+	DnaodtbqC0Z1qhh3COzE8LG4ypCgcceE7kVg5W1Py0RmPNRJIpP85OE8z/HDxPhkY53Z
+	N2Xg==
+X-Gm-Message-State: APjAAAVBnPbO5aaXkPPKvVo7SLFpNx1DCcY9Jbpf/3UzWh5v0MMBZGpF
+	jb8IRZPmU1c+F9SgSSL8T5DEIQ==
+X-Google-Smtp-Source: APXvYqyqOJ7xj5WyBSGnSKw6r+fHzKSSQgggyWILPC/N5KbhyvrIGi3wpGDnO2q6i0xNWsrtSCd37A==
+X-Received: by 2002:a05:620a:31b:: with SMTP id
+	s27mr17648521qkm.264.1563955687250; 
+	Wed, 24 Jul 2019 01:08:07 -0700 (PDT)
+Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
+	by smtp.gmail.com with ESMTPSA id
+	t26sm23203051qtc.95.2019.07.24.01.07.58
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 24 Jul 2019 01:08:06 -0700 (PDT)
+Date: Wed, 24 Jul 2019 04:07:55 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: john.hubbard@gmail.com
+Subject: Re: [PATCH 07/12] vhost-scsi: convert put_page() to put_user_page*()
+Message-ID: <20190724040745-mutt-send-email-mst@kernel.org>
+References: <20190724042518.14363-1-jhubbard@nvidia.com>
+	<20190724042518.14363-8-jhubbard@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20190723225817.12800-1-pasic@linux.ibm.com>
-Content-Language: en-US
-X-TM-AS-GCONF: 00
-x-cbid: 19072406-4275-0000-0000-00000350061F
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19072406-4276-0000-0000-000038602D0E
-Message-Id: <74087255-fdae-01a1-7152-f6fac8e13019@de.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-07-24_02:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1906280000 definitions=main-1907240074
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+Content-Disposition: inline
+In-Reply-To: <20190724042518.14363-8-jhubbard@nvidia.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Marc Hartmayer <mhartmay@linux.ibm.com>,
-	Janosch Frank <frankja@linux.ibm.com>,
-	virtualization@lists.linux-foundation.org
+Cc: Boaz Harrosh <boaz@plexistor.com>, Jan Kara <jack@suse.cz>,
+	kvm@vger.kernel.org, Dave Chinner <david@fromorbit.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Christoph Hellwig <hch@lst.de>, linux-cifs@vger.kernel.org,
+	Miklos Szeredi <miklos@szeredi.hu>, linux-rdma@vger.kernel.org,
+	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Johannes Thumshirn <jthumshirn@suse.de>,
+	v9fs-developer@lists.sourceforge.net,
+	Eric Van Hensbergen <ericvh@gmail.com>, John Hubbard <jhubbard@nvidia.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Ming Lei <ming.lei@redhat.com>, linux-block@vger.kernel.org,
+	=?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Stefan Hajnoczi <stefanha@redhat.com>, ceph-devel@vger.kernel.org,
+	Trond Myklebust <trond.myklebust@hammerspace.com>,
+	Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
+	netdev@vger.kernel.org, samba-technical@lists.samba.org,
+	LKML <linux-kernel@vger.kernel.org>,
+	"David S . Miller" <davem@davemloft.net>, linux-fsdevel@vger.kernel.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Anna Schumaker <anna.schumaker@netapp.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -140,70 +93,108 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+On Tue, Jul 23, 2019 at 09:25:13PM -0700, john.hubbard@gmail.com wrote:
+> From: J=E9r=F4me Glisse <jglisse@redhat.com>
+> =
 
+> For pages that were retained via get_user_pages*(), release those pages
+> via the new put_user_page*() routines, instead of via put_page().
+> =
 
-On 24.07.19 00:58, Halil Pasic wrote:
-> The access to airq_areas was racy ever since the adapter interrupts got
-> introduced to virtio-ccw, but since commit 39c7dcb15892 ("virtio/s390:
-> make airq summary indicators DMA") this became an issue in practice as
-> well. Namely before that commit the airq_info that got overwritten was
-> still functional. After that commit however the two infos share a
-> summary_indicator, which aggravates the situation. Which means
-> auto-online mechanism occasionally hangs the boot with virtio_blk.
-> 
-> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-> Reported-by: Marc Hartmayer <mhartmay@linux.ibm.com>
-> Fixes: 96b14536d935 ("virtio-ccw: virtio-ccw adapter interrupt support.")
+> This is part a tree-wide conversion, as described in commit fc1d8e7cca2d
+> ("mm: introduce put_user_page*(), placeholder versions").
+> =
+
+> Changes from J=E9r=F4me's original patch:
+> =
+
+> * Changed a WARN_ON to a BUG_ON.
+> =
+
+> Signed-off-by: J=E9r=F4me Glisse <jglisse@redhat.com>
+> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: linux-fsdevel@vger.kernel.org
+> Cc: linux-block@vger.kernel.org
+> Cc: linux-mm@kvack.org
+> Cc: Jan Kara <jack@suse.cz>
+> Cc: Dan Williams <dan.j.williams@intel.com>
+> Cc: Alexander Viro <viro@zeniv.linux.org.uk>
+> Cc: Johannes Thumshirn <jthumshirn@suse.de>
+> Cc: Christoph Hellwig <hch@lst.de>
+> Cc: Jens Axboe <axboe@kernel.dk>
+> Cc: Ming Lei <ming.lei@redhat.com>
+> Cc: Dave Chinner <david@fromorbit.com>
+> Cc: Jason Gunthorpe <jgg@ziepe.ca>
+> Cc: Matthew Wilcox <willy@infradead.org>
+> Cc: Boaz Harrosh <boaz@plexistor.com>
+> Cc: Miklos Szeredi <miklos@szeredi.hu>
+> Cc: "Michael S. Tsirkin" <mst@redhat.com>
+> Cc: Jason Wang <jasowang@redhat.com>
+> Cc: Paolo Bonzini <pbonzini@redhat.com>
+> Cc: Stefan Hajnoczi <stefanha@redhat.com>
+
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
+
 > ---
-> * We need definitely this fixed for 5.3. For older stable kernels it is
-> to be discussed. @Connie what do you think: do we need a cc stable?
+>  drivers/vhost/scsi.c | 13 ++++++++++---
+>  1 file changed, 10 insertions(+), 3 deletions(-)
+> =
 
-Unless you can prove that the problem could never happen on old version
-we absolutely do need cc stable. 
+> diff --git a/drivers/vhost/scsi.c b/drivers/vhost/scsi.c
+> index a9caf1bc3c3e..282565ab5e3f 100644
+> --- a/drivers/vhost/scsi.c
+> +++ b/drivers/vhost/scsi.c
+> @@ -329,11 +329,11 @@ static void vhost_scsi_release_cmd(struct se_cmd *s=
+e_cmd)
+>  =
 
-> 
-> * I have a variant that does not need the extra mutex but uses cmpxchg().
-> Decided to post this one because that one is more complex. But if there
-> is interest we can have a look at it as well.
+>  	if (tv_cmd->tvc_sgl_count) {
+>  		for (i =3D 0; i < tv_cmd->tvc_sgl_count; i++)
+> -			put_page(sg_page(&tv_cmd->tvc_sgl[i]));
+> +			put_user_page(sg_page(&tv_cmd->tvc_sgl[i]));
+>  	}
+>  	if (tv_cmd->tvc_prot_sgl_count) {
+>  		for (i =3D 0; i < tv_cmd->tvc_prot_sgl_count; i++)
+> -			put_page(sg_page(&tv_cmd->tvc_prot_sgl[i]));
+> +			put_user_page(sg_page(&tv_cmd->tvc_prot_sgl[i]));
+>  	}
+>  =
 
-This is slow path (startup) and never called in hot path. Correct? Mutex should be
-fine.
-> ---
->  drivers/s390/virtio/virtio_ccw.c | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
-> index 1a55e5942d36..d97742662755 100644
-> --- a/drivers/s390/virtio/virtio_ccw.c
-> +++ b/drivers/s390/virtio/virtio_ccw.c
-> @@ -145,6 +145,8 @@ struct airq_info {
->  	struct airq_iv *aiv;
->  };
->  static struct airq_info *airq_areas[MAX_AIRQ_AREAS];
-> +DEFINE_MUTEX(airq_areas_lock);
+>  	vhost_scsi_put_inflight(tv_cmd->inflight);
+> @@ -630,6 +630,13 @@ vhost_scsi_map_to_sgl(struct vhost_scsi_cmd *cmd,
+>  	size_t offset;
+>  	unsigned int npages =3D 0;
+>  =
+
+> +	/*
+> +	 * Here in all cases we should have an IOVEC which use GUP. If that is
+> +	 * not the case then we will wrongly call put_user_page() and the page
+> +	 * refcount will go wrong (this is in vhost_scsi_release_cmd())
+> +	 */
+> +	WARN_ON(!iov_iter_get_pages_use_gup(iter));
 > +
->  static u8 *summary_indicators;
->  
->  static inline u8 *get_summary_indicator(struct airq_info *info)
-> @@ -265,9 +267,11 @@ static unsigned long get_airq_indicator(struct virtqueue *vqs[], int nvqs,
->  	unsigned long bit, flags;
->  
->  	for (i = 0; i < MAX_AIRQ_AREAS && !indicator_addr; i++) {
-> +		mutex_lock(&airq_areas_lock);
->  		if (!airq_areas[i])
->  			airq_areas[i] = new_airq_info(i);
->  		info = airq_areas[i];
-> +		mutex_unlock(&airq_areas_lock);
->  		if (!info)
->  			return 0;
->  		write_lock_irqsave(&info->lock, flags);
-> 
+>  	bytes =3D iov_iter_get_pages(iter, pages, LONG_MAX,
+>  				VHOST_SCSI_PREALLOC_UPAGES, &offset);
+>  	/* No pages were pinned */
+> @@ -681,7 +688,7 @@ vhost_scsi_iov_to_sgl(struct vhost_scsi_cmd *cmd, boo=
+l write,
+>  			while (p < sg) {
+>  				struct page *page =3D sg_page(p++);
+>  				if (page)
+> -					put_page(page);
+> +					put_user_page(page);
+>  			}
+>  			return ret;
+>  		}
+> -- =
 
+> 2.22.0
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
