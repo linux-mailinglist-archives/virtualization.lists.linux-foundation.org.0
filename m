@@ -2,68 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48BFF74145
-	for <lists.virtualization@lfdr.de>; Thu, 25 Jul 2019 00:11:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECDF8741F5
+	for <lists.virtualization@lfdr.de>; Thu, 25 Jul 2019 01:23:34 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3CB9515A8;
-	Wed, 24 Jul 2019 22:11:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id EDB43166A;
+	Wed, 24 Jul 2019 23:23:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 706CA157E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A00F814AC
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 22:11:01 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 437D18A3
+	Wed, 24 Jul 2019 23:23:25 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from hqemgate15.nvidia.com (hqemgate15.nvidia.com [216.228.121.64])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 37250224
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 22:11:00 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id l9so47097231qtu.6
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 15:11:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=ZiT1oQ3le6gupTI0pwbmKNqZ9qeZj4CLKlZRplQnTAY=;
-	b=jveDjIQy3HDtnVk8GM6SmaarxWBpeq1Ok/BGMic6jGD73L9xwaGKCdkgU1rxmLl00n
-	y3yVKCaRbPI7kRtBIFlWrUnpN63S6mZd6g6jc5XZTHQVO4XvChjRyvqh6g4B/f3zY/h+
-	c29evRPUpQ5TTDv3fGBjoOEU9Ditmi2qdsFSBenLDb5HD+FoJqqnNkVmqPWD1r8UGuEH
-	pxJxabTsm0Cfs22/fDtDxXtaFssOwZNFpe9W9s9w3fpBwvNYPIrojCxbTaHwIOUNXsvX
-	g14a/ZrG+YwMqhyCjPh3CiicpU20TPd7asYmfmIlXp+kRaFjH9Y9LGt+SI2y6Oqa3iWa
-	vg+g==
-X-Gm-Message-State: APjAAAWvYTKbdFKBjRroNdLP85JSmNxAs3K6jusHwSwmkImxX3ZEGRrL
-	BZRWGF3mEiIyi/yyM7oTVVTVBw==
-X-Google-Smtp-Source: APXvYqwsl34mAeI1ycJq/WD6DI4M1e7pIzRNfVQKDNOWFybfH6EBHoRGki9/ggsy5dsu/ZaP8T89Pw==
-X-Received: by 2002:ac8:3014:: with SMTP id f20mr59384146qte.69.1564006259498; 
-	Wed, 24 Jul 2019 15:10:59 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
-	by smtp.gmail.com with ESMTPSA id
-	g54sm28199760qtc.61.2019.07.24.15.10.56
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 24 Jul 2019 15:10:58 -0700 (PDT)
-Date: Wed, 24 Jul 2019 18:10:53 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Christoph Hellwig <hch@lst.de>
-Subject: Re: [PATCH 2/2] virtio/virtio_ring: Fix the dma_max_mapping_size call
-Message-ID: <20190723114750-mutt-send-email-mst@kernel.org>
-References: <20190722145509.1284-1-eric.auger@redhat.com>
-	<20190722145509.1284-3-eric.auger@redhat.com>
-	<e4a288f2-a93a-5ce4-32da-f5434302551f@arm.com>
-	<20190723153851.GE720@lst.de>
+	Wed, 24 Jul 2019 23:23:25 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+	hqemgate15.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+	id <B5d38e8730000>; Wed, 24 Jul 2019 16:23:31 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+	by hqpgpgate102.nvidia.com (PGP Universal service);
+	Wed, 24 Jul 2019 16:23:23 -0700
+X-PGP-Universal: processed;
+	by hqpgpgate102.nvidia.com on Wed, 24 Jul 2019 16:23:23 -0700
+Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
+	(172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+	Wed, 24 Jul 2019 23:23:22 +0000
+Subject: Re: [PATCH 00/12] block/bio, fs: convert put_page() to
+	put_user_page*()
+To: Christoph Hellwig <hch@infradead.org>, <john.hubbard@gmail.com>
+References: <20190724042518.14363-1-jhubbard@nvidia.com>
+	<20190724061750.GA19397@infradead.org>
+X-Nvconfidentiality: public
+From: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <17f12f3d-981e-a717-c8e5-bfbbfb7ec1a3@nvidia.com>
+Date: Wed, 24 Jul 2019 16:23:21 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190723153851.GE720@lst.de>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+In-Reply-To: <20190724061750.GA19397@infradead.org>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+	HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+	t=1564010611; bh=U/byz8o3kezigETW8hWUjg+JqkNm/y0Q4UHjAnDVaRI=;
+	h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+	Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+	X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+	Content-Transfer-Encoding;
+	b=POKycPna3sFHaptSpPG8JFNhdv+KWPJt4Fqq7qra/U5uujHxVhga0mA2hyYe3oLWO
+	rvMjdBQgQaYdhe3tYVq3xzWzC7PXLH9gVg6v6GfrdnHKhzPSXOdrUzDa4Sfy+FpWme
+	AYx8XN4QHijtxUQThz9jDsFglp/BwmD6wmVyo2Ou4HoX36ySg8r0DnnWDfRMrkzmXC
+	XvSXsG7L9llJHump4bjV4yoH02Li7EYgdYhEFhGR3d1oO3a9DGx7nb70VEc+guaDrP
+	BAn4DIKE83X0lqImHCnmIIbgjVMdzz9Q4ePUhHR77cnRWD+JGehn4V8I2IYZgTvKbn
+	0ENu9Hbk0xmXw==
+X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	Eric Auger <eric.auger@redhat.com>,
-	iommu@lists.linux-foundation.org, eric.auger.pro@gmail.com,
-	Robin Murphy <robin.murphy@arm.com>, m.szyprowski@samsung.com
+Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Christoph Hellwig <hch@lst.de>, linux-cifs@vger.kernel.org,
+	Miklos Szeredi <miklos@szeredi.hu>, linux-rdma@vger.kernel.org,
+	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	v9fs-developer@lists.sourceforge.net,
+	Eric Van Hensbergen <ericvh@gmail.com>, linux-block@vger.kernel.org,
+	Alexander Viro <viro@zeniv.linux.org.uk>, ceph-devel@vger.kernel.org,
+	Trond Myklebust <trond.myklebust@hammerspace.com>,
+	Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
+	netdev@vger.kernel.org, samba-technical@lists.samba.org,
+	LKML <linux-kernel@vger.kernel.org>, "David
+	S . Miller" <davem@davemloft.net>, linux-fsdevel@vger.kernel.org,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Anna Schumaker <anna.schumaker@netapp.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,37 +89,48 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Jul 23, 2019 at 05:38:51PM +0200, Christoph Hellwig wrote:
-> On Mon, Jul 22, 2019 at 04:36:09PM +0100, Robin Murphy wrote:
-> >> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-> >> index c8be1c4f5b55..37c143971211 100644
-> >> --- a/drivers/virtio/virtio_ring.c
-> >> +++ b/drivers/virtio/virtio_ring.c
-> >> @@ -262,7 +262,7 @@ size_t virtio_max_dma_size(struct virtio_device *vdev)
-> >>   {
-> >>   	size_t max_segment_size = SIZE_MAX;
-> >>   -	if (vring_use_dma_api(vdev))
-> >> +	if (vring_use_dma_api(vdev) && vdev->dev.dma_mask)
-> >
-> > Hmm, might it make sense to roll that check up into vring_use_dma_api() 
-> > itself? After all, if the device has no mask then it's likely that other 
-> > DMA API ops wouldn't really work as expected either.
-> 
-> Makes sense to me.
-
-Christoph - would a documented API wrapping dma_mask make sense?
-With the documentation explaining how users must
-desist from using DMA APIs if that returns false ...
-
-
--- 
-MST
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gNy8yMy8xOSAxMToxNyBQTSwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gT24gVHVlLCBK
+dWwgMjMsIDIwMTkgYXQgMDk6MjU6MDZQTSAtMDcwMCwgam9obi5odWJiYXJkQGdtYWlsLmNvbSB3
+cm90ZToKPj4gKiBTdG9yZSwgaW4gdGhlIGlvdl9pdGVyLCBhICJjYW1lIGZyb20gZ3VwIChnZXRf
+dXNlcl9wYWdlcykiIHBhcmFtZXRlci4KPj4gICBUaGVuLCB1c2UgdGhlIG5ldyBpb3ZfaXRlcl9n
+ZXRfcGFnZXNfdXNlX2d1cCgpIHRvIHJldHJpZXZlIGl0IHdoZW4KPj4gICBpdCBpcyB0aW1lIHRv
+IHJlbGVhc2UgdGhlIHBhZ2VzLiBUaGF0IGFsbG93cyBjaG9vc2luZyBiZXR3ZWVuIHB1dF9wYWdl
+KCkKPj4gICBhbmQgcHV0X3VzZXJfcGFnZSooKS4KPj4KPj4gKiBQYXNzIGluIG9uZSBtb3JlIHBp
+ZWNlIG9mIGluZm9ybWF0aW9uIHRvIGJpb19yZWxlYXNlX3BhZ2VzOiBhICJmcm9tX2d1cCIKPj4g
+ICBwYXJhbWV0ZXIuIFNpbWlsYXIgdXNlIGFzIGFib3ZlLgo+Pgo+PiAqIENoYW5nZSB0aGUgYmxv
+Y2sgbGF5ZXIsIGFuZCBzZXZlcmFsIGZpbGUgc3lzdGVtcywgdG8gdXNlCj4+ICAgcHV0X3VzZXJf
+cGFnZSooKS4KPiAKPiBJIHRoaW5rIHdlIGNhbiBkbyB0aGlzIGluIGEgc2ltcGxlIGFuZCBiZXR0
+ZXIgd2F5LiAgV2UgaGF2ZSA1IElURVJfKgo+IHR5cGVzLiAgT2YgdGhvc2UgSVRFUl9ESVNDQVJE
+IGFzIHRoZSBuYW1lIHN1Z2dlc3RzIG5ldmVyIHVzZXMgcGFnZXMsIHNvCj4gd2UgY2FuIHNraXAg
+aGFuZGxpbmcgaXQuICBJVEVSX1BJUEUgaXMgcmVqZWN0ZWQg0ZZuIHRoZSBkaXJlY3QgSS9PIHBh
+dGgsCj4gd2hpY2ggbGVhdmVzIHVzIHdpdGggdGhyZWUuCj4gCj4gT3V0IG9mIHRob3NlIElURVJf
+QlZFQyBuZWVkcyBhIHVzZXIgcGFnZSByZWZlcmVuY2UsIHNvIHdlIHdhbnQgdG8gY2FsbAoKICAg
+ICAgICAgICAgICAgXiBJVEVSX0lPVkVDLCBJIGhvcGUuIE90aGVyd2lzZSBJJ20gaG9wZWxlc3Mg
+bG9zdC4gOikKCj4gcHV0X3VzZXJfcGFnZSogb24gaXQuICBJVEVSX0JWRUMgYWx3YXlzIGFscmVh
+ZHkgaGFzIHBhZ2UgcmVmZXJlbmNlLAo+IHdoaWNoIG1lYW5zIGluIHRoZSBibG9jayBkaXJlY3Qg
+SS9PIHBhdGggcGF0aCB3ZSBhbHJlYWQgZG9uJ3QgdGFrZQo+IGEgcGFnZSByZWZlcmVuY2UuICBX
+ZSBzaG91bGQgZXh0ZW50IHRoYXQgaGFuZGxpbmcgdG8gYWxsIG90aGVyIGNhbGxzCj4gb2YgaW92
+X2l0ZXJfZ2V0X3BhZ2VzIC8gaW92X2l0ZXJfZ2V0X3BhZ2VzX2FsbG9jLiAgSSB0aGluayB3ZSBz
+aG91bGQKPiBqdXN0IHJlamVjdCBJVEVSX0tWRUMgZm9yIGRpcmVjdCBJL08gYXMgd2VsbCBhcyB3
+ZSBoYXZlIG5vIHVzZXJzIGFuZAo+IGl0IGlzIHJhdGhlciBwb2ludGxlc3MuICBBbHRlcm5hdGl2
+ZWx5IGlmIHdlIHNlZSBhIHVzZSBmb3IgaXQgdGhlCj4gY2FsbGVycyBzaG91bGQgYWx3YXlzIGhh
+dmUgYSBsaWZlIHBhZ2UgcmVmZXJlbmNlIGFueXdheSAob3IgbWlnaHQKPiBiZSBvbiBrbWFsbG9j
+IG1lbW9yeSksIHNvIHdlIHJlYWxseSBzaG91bGQgbm90IHRha2UgYSByZWZlcmVuY2UgZWl0aGVy
+Lgo+IAo+IEluIG90aGVyIHdvcmRzOiAgdGhlIG9ubHkgdGltZSB3ZSBzaG91bGQgZXZlciBoYXZl
+IHRvIHB1dCBhIHBhZ2UgaW4KPiB0aGlzIHBhdGNoIGlzIHdoZW4gdGhleSBhcmUgdXNlciBwYWdl
+cy4gIFdlJ2xsIG5lZWQgdG8gY2xlYW4gdXAKPiB2YXJpb3VzIGJpdHMgb2YgY29kZSBmb3IgdGhh
+dCwgYnV0IHRoYXQgY2FuIGJlIGRvbmUgZ3JhZHVhbGx5IGJlZm9yZQo+IGV2ZW4gZ2V0dGluZyB0
+byB0aGUgYWN0dWFsIHB1dF91c2VyX3BhZ2VzIGNvbnZlcnNpb24uCj4gCgpTb3VuZHMgZ3JlYXQu
+IEknbSBwYXJ0IHdheSBpbnRvIGl0IGFuZCBpdCBkb2Vzbid0IGxvb2sgdG9vIGJhZC4gVGhlIG1h
+aW4KcXVlc3Rpb24gaXMgd2hlcmUgdG8gc2NhdHRlciB2YXJpb3VzIGNoZWNrcyBhbmQgYXNzZXJ0
+aW9ucywgdG8ga2VlcAp0aGUga3ZlY3Mgb3V0IG9mIGRpcmVjdCBJLzAuIE9yIGF0IGxlYXN0IGtl
+ZXAgdGhlIGd1cHMgYXdheSBmcm9tIApkaXJlY3QgSS8wLgoKCnRoYW5rcywKLS0gCkpvaG4gSHVi
+YmFyZApOVklESUEKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4
+LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
