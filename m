@@ -2,53 +2,77 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 893B072511
-	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 05:05:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A92772762
+	for <lists.virtualization@lfdr.de>; Wed, 24 Jul 2019 07:32:07 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2CA5BD56;
-	Wed, 24 Jul 2019 03:05:23 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 8CB92DC9;
+	Wed, 24 Jul 2019 05:32:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3AA7EC9E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2E715DA6
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 03:05:22 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A5F94775
+	Wed, 24 Jul 2019 05:31:59 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+	[198.137.202.133])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 163C0701
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 24 Jul 2019 03:05:21 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
-	[10.5.11.23])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 14C00C03BC91;
-	Wed, 24 Jul 2019 03:05:21 +0000 (UTC)
-Received: from [10.72.12.117] (ovpn-12-117.pek2.redhat.com [10.72.12.117])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 3968F19C67;
-	Wed, 24 Jul 2019 03:05:15 +0000 (UTC)
-Subject: Re: Reminder: 3 open syzbot bugs in vhost subsystem
-To: kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	netdev@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
-	linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
-References: <20190724023835.GY643@sol.localdomain>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <fabf96ac-e472-c7fd-07ff-486fe03e6433@redhat.com>
-Date: Wed, 24 Jul 2019 11:05:14 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Wed, 24 Jul 2019 05:31:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20170209;
+	h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=QMaeodYE6xPawroosfuLAM7Isuyd6msaiuu7WIzXJNg=;
+	b=oW2+1uEt0qJRsZ3rIR+o/XGwJ
+	IpJYdIAzmbpSGeQXXd0w7hFDdorld2bWWW2oiCVa9bfBdmqzQ8VzYAS+3VpPpYND1enTUT3LXM1SV
+	CwbH89SUpW2WcPCY1lNCr1Q9WWq6hrUjLEGXr0uuup16IdlyJWTjkk54FwGggAAJ6/K2n0CpTScov
+	6bsInH3E0/xFvQn6gl70zra+lZBETmvjV0nc1ECTcsc2eePjN7LRDKmPqETKEgRYUFXsRBdhR/R8v
+	o2dvpNjC4kqeW2Xy7IKsHBsPaIMTNnKrfPXCCv6MAnnK2HeXtxBGaSw/R+BXARy62cABx/L38sQl7
+	Pi0QmIdOw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat
+	Linux)) id 1hq9rZ-0006FA-JW; Wed, 24 Jul 2019 05:30:53 +0000
+Date: Tue, 23 Jul 2019 22:30:53 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: john.hubbard@gmail.com
+Subject: Re: [PATCH 03/12] block: bio_release_pages: use flags arg instead of
+	bool
+Message-ID: <20190724053053.GA18330@infradead.org>
+References: <20190724042518.14363-1-jhubbard@nvidia.com>
+	<20190724042518.14363-4-jhubbard@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20190724023835.GY643@sol.localdomain>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.32]);
-	Wed, 24 Jul 2019 03:05:21 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190724042518.14363-4-jhubbard@nvidia.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+	bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_MED autolearn=unavailable version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
+Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Christoph Hellwig <hch@lst.de>, linux-cifs@vger.kernel.org,
+	Miklos Szeredi <miklos@szeredi.hu>, linux-rdma@vger.kernel.org,
+	Matthew Wilcox <willy@infradead.org>,
+	Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Minwoo Im <minwoo.im.dev@gmail.com>, v9fs-developer@lists.sourceforge.net,
+	Eric Van Hensbergen <ericvh@gmail.com>,
+	John Hubbard <jhubbard@nvidia.com>, linux-block@vger.kernel.org,
+	=?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+	Alexander Viro <viro@zeniv.linux.org.uk>, ceph-devel@vger.kernel.org,
+	Trond Myklebust <trond.myklebust@hammerspace.com>,
+	Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
+	netdev@vger.kernel.org, samba-technical@lists.samba.org,
+	LKML <linux-kernel@vger.kernel.org>,
+	"David S . Miller" <davem@davemloft.net>, linux-fsdevel@vger.kernel.org,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Anna Schumaker <anna.schumaker@netapp.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,98 +84,25 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvNy8yNCDkuIrljYgxMDozOCwgRXJpYyBCaWdnZXJzIHdyb3RlOgo+IFtUaGlzIGVt
-YWlsIHdhcyBnZW5lcmF0ZWQgYnkgYSBzY3JpcHQuICBMZXQgbWUga25vdyBpZiB5b3UgaGF2ZSBh
-bnkgc3VnZ2VzdGlvbnMKPiB0byBtYWtlIGl0IGJldHRlciwgb3IgaWYgeW91IHdhbnQgaXQgcmUt
-Z2VuZXJhdGVkIHdpdGggdGhlIGxhdGVzdCBzdGF0dXMuXQo+Cj4gT2YgdGhlIGN1cnJlbnRseSBv
-cGVuIHN5emJvdCByZXBvcnRzIGFnYWluc3QgdGhlIHVwc3RyZWFtIGtlcm5lbCwgSSd2ZSBtYW51
-YWxseQo+IG1hcmtlZCAzIG9mIHRoZW0gYXMgcG9zc2libHkgYmVpbmcgYnVncyBpbiB0aGUgdmhv
-c3Qgc3Vic3lzdGVtLiAgSSd2ZSBsaXN0ZWQKPiB0aGVzZSByZXBvcnRzIGJlbG93LCBzb3J0ZWQg
-YnkgYW4gYWxnb3JpdGhtIHRoYXQgdHJpZXMgdG8gbGlzdCBmaXJzdCB0aGUgcmVwb3J0cwo+IG1v
-c3QgbGlrZWx5IHRvIGJlIHN0aWxsIHZhbGlkLCBpbXBvcnRhbnQsIGFuZCBhY3Rpb25hYmxlLgo+
-Cj4gT2YgdGhlc2UgMyBidWdzLCAyIHdlcmUgc2VlbiBpbiBtYWlubGluZSBpbiB0aGUgbGFzdCB3
-ZWVrLgo+Cj4gT2YgdGhlc2UgMyBidWdzLCAyIHdlcmUgYmlzZWN0ZWQgdG8gY29tbWl0cyBmcm9t
-IHRoZSBmb2xsb3dpbmcgcGVyc29uOgo+Cj4gCUphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5j
-b20+Cj4KPiBJZiB5b3UgYmVsaWV2ZSBhIGJ1ZyBpcyBubyBsb25nZXIgdmFsaWQsIHBsZWFzZSBj
-bG9zZSB0aGUgc3l6Ym90IHJlcG9ydCBieQo+IHNlbmRpbmcgYSAnI3N5eiBmaXgnLCAnI3N5eiBk
-dXAnLCBvciAnI3N5eiBpbnZhbGlkJyBjb21tYW5kIGluIHJlcGx5IHRvIHRoZQo+IG9yaWdpbmFs
-IHRocmVhZCwgYXMgZXhwbGFpbmVkIGF0IGh0dHBzOi8vZ29vLmdsL3Rwc21FSiNzdGF0dXMKPgo+
-IElmIHlvdSBiZWxpZXZlIEkgbWlzYXR0cmlidXRlZCBhIGJ1ZyB0byB0aGUgdmhvc3Qgc3Vic3lz
-dGVtLCBwbGVhc2UgbGV0IG1lIGtub3csCj4gYW5kIGlmIHBvc3NpYmxlIGZvcndhcmQgdGhlIHJl
-cG9ydCB0byB0aGUgY29ycmVjdCBwZW9wbGUgb3IgbWFpbGluZyBsaXN0Lgo+Cj4gSGVyZSBhcmUg
-dGhlIGJ1Z3M6Cj4KPiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+IFRpdGxlOiAgICAgICAgICAg
-ICAgS0FTQU46IHVzZS1hZnRlci1mcmVlIFdyaXRlIGluIHRsYl9maW5pc2hfbW11Cj4gTGFzdCBv
-Y2N1cnJlZDogICAgICA1IGRheXMgYWdvCj4gUmVwb3J0ZWQ6ICAgICAgICAgICA0IGRheXMgYWdv
-Cj4gQnJhbmNoZXM6ICAgICAgICAgICBNYWlubGluZQo+IERhc2hib2FyZCBsaW5rOiAgICAgaHR0
-cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20vYnVnP2lkPWQ1N2I5NGY4OWU0OGM4NWVmN2Q5NWFj
-YzIwODIwOWVhNGJkYzEwZGUKPiBPcmlnaW5hbCB0aHJlYWQ6ICAgIGh0dHBzOi8vbGttbC5rZXJu
-ZWwub3JnL2xrbWwvMDAwMDAwMDAwMDAwNDVlN2ExMDU4ZTAyNDU4YUBnb29nbGUuY29tL1QvI3UK
-Pgo+IFRoaXMgYnVnIGhhcyBhIHN5emthbGxlciByZXByb2R1Y2VyIG9ubHkuCj4KPiBUaGlzIGJ1
-ZyB3YXMgYmlzZWN0ZWQgdG86Cj4KPiAJY29tbWl0IDdmNDY2MDMyZGM5ZTVhNjEyMTdmMjJlYTM0
-YjJkZjkzMjc4NmJiZmMKPiAJQXV0aG9yOiBKYXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29t
-Pgo+IAlEYXRlOiAgIEZyaSBNYXkgMjQgMDg6MTI6MTggMjAxOSArMDAwMAo+Cj4gCcKgwqB2aG9z
-dDogYWNjZXNzIHZxIG1ldGFkYXRhIHRocm91Z2gga2VybmVsIHZpcnR1YWwgYWRkcmVzcwo+Cj4g
-Tm8gb25lIGhhcyByZXBsaWVkIHRvIHRoZSBvcmlnaW5hbCB0aHJlYWQgZm9yIHRoaXMgYnVnIHll
-dC4KPgo+IElmIHlvdSBmaXggdGhpcyBidWcsIHBsZWFzZSBhZGQgdGhlIGZvbGxvd2luZyB0YWcg
-dG8gdGhlIGNvbW1pdDoKPiAgICAgIFJlcG9ydGVkLWJ5OiBzeXpib3QrODI2N2U5YWY3OTU0MzRm
-ZmFkYWRAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbQo+Cj4gSWYgeW91IHNlbmQgYW55IGVtYWls
-IG9yIHBhdGNoIGZvciB0aGlzIGJ1ZywgcGxlYXNlIHJlcGx5IHRvIHRoZSBvcmlnaW5hbAo+IHRo
-cmVhZC4gIEZvciB0aGUgZ2l0IHNlbmQtZW1haWwgY29tbWFuZCB0byB1c2UsIG9yIHRpcHMgb24g
-aG93IHRvIHJlcGx5IGlmIHRoZQo+IHRocmVhZCBpc24ndCBpbiB5b3VyIG1haWxib3gsIHNlZSB0
-aGUgIlJlcGx5IGluc3RydWN0aW9ucyIgYXQKPiBodHRwczovL2xrbWwua2VybmVsLm9yZy9yLzAw
-MDAwMDAwMDAwMDQ1ZTdhMTA1OGUwMjQ1OGFAZ29vZ2xlLmNvbQo+Cj4gLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0KPiBUaXRsZTogICAgICAgICAgICAgIEtBU0FOOiB1c2UtYWZ0ZXItZnJlZSBSZWFk
-IGluIGZpbmlzaF90YXNrX3N3aXRjaCAoMikKPiBMYXN0IG9jY3VycmVkOiAgICAgIDUgZGF5cyBh
-Z28KPiBSZXBvcnRlZDogICAgICAgICAgIDQgZGF5cyBhZ28KPiBCcmFuY2hlczogICAgICAgICAg
-IE1haW5saW5lCj4gRGFzaGJvYXJkIGxpbms6ICAgICBodHRwczovL3N5emthbGxlci5hcHBzcG90
-LmNvbS9idWc/aWQ9OWE5OGZjYWQ2YzhiZDMxZjVjM2FmYmRjNmM3NWRlOWYwODJjMGZmYQo+IE9y
-aWdpbmFsIHRocmVhZDogICAgaHR0cHM6Ly9sa21sLmtlcm5lbC5vcmcvbGttbC8wMDAwMDAwMDAw
-MDA0OTA2NzkwNThlMDI0NWVlQGdvb2dsZS5jb20vVC8jdQo+Cj4gVGhpcyBidWcgaGFzIGEgc3l6
-a2FsbGVyIHJlcHJvZHVjZXIgb25seS4KPgo+IFRoaXMgYnVnIHdhcyBiaXNlY3RlZCB0bzoKPgo+
-IAljb21taXQgN2Y0NjYwMzJkYzllNWE2MTIxN2YyMmVhMzRiMmRmOTMyNzg2YmJmYwo+IAlBdXRo
-b3I6IEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+Cj4gCURhdGU6ICAgRnJpIE1heSAy
-NCAwODoxMjoxOCAyMDE5ICswMDAwCj4KPiAJwqDCoHZob3N0OiBhY2Nlc3MgdnEgbWV0YWRhdGEg
-dGhyb3VnaCBrZXJuZWwgdmlydHVhbCBhZGRyZXNzCj4KPiBObyBvbmUgaGFzIHJlcGxpZWQgdG8g
-dGhlIG9yaWdpbmFsIHRocmVhZCBmb3IgdGhpcyBidWcgeWV0LgoKCkhpOgoKV2UgYmVsaWV2ZSBh
-Ym92ZSB0d28gYnVncyBhcmUgZHVwbGljYXRlZCB3aXRoIHRoZSByZXBvcnQgIldBUk5JTkcgaW4g
-Cl9fbW1kcm9wIi4gQ2FuIEkganVzdCBkdXAgdGhlbSB3aXRoCgojc3l6IGR1cCAiV0FSTklORyBp
-biBfX21tZHJvcCIKCihJZiB5ZXMsIGp1c3Qgd29uZGVyIGhvdyBzeXpib3QgZGlmZmVyIGJ1Z3Ms
-IHRlY2huaWNhbGx5LCBzZXZlcmFsIApkaWZmZXJlbnQgYnVnIGNhbiBoaXQgdGhlIHNhbWUgd2Fy
-bmluZykuCgoKPgo+IElmIHlvdSBmaXggdGhpcyBidWcsIHBsZWFzZSBhZGQgdGhlIGZvbGxvd2lu
-ZyB0YWcgdG8gdGhlIGNvbW1pdDoKPiAgICAgIFJlcG9ydGVkLWJ5OiBzeXpib3QrN2YwNjdjNzk2
-ZWVlMmFjYmM1N2FAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbQo+Cj4gSWYgeW91IHNlbmQgYW55
-IGVtYWlsIG9yIHBhdGNoIGZvciB0aGlzIGJ1ZywgcGxlYXNlIHJlcGx5IHRvIHRoZSBvcmlnaW5h
-bAo+IHRocmVhZC4gIEZvciB0aGUgZ2l0IHNlbmQtZW1haWwgY29tbWFuZCB0byB1c2UsIG9yIHRp
-cHMgb24gaG93IHRvIHJlcGx5IGlmIHRoZQo+IHRocmVhZCBpc24ndCBpbiB5b3VyIG1haWxib3gs
-IHNlZSB0aGUgIlJlcGx5IGluc3RydWN0aW9ucyIgYXQKPiBodHRwczovL2xrbWwua2VybmVsLm9y
-Zy9yLzAwMDAwMDAwMDAwMDQ5MDY3OTA1OGUwMjQ1ZWVAZ29vZ2xlLmNvbQo+Cj4gLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0KPiBUaXRsZTogICAgICAgICAgICAgIG1lbW9yeSBsZWFrIGluIHZob3N0
-X25ldF9pb2N0bAo+IExhc3Qgb2NjdXJyZWQ6ICAgICAgMjIgZGF5cyBhZ28KPiBSZXBvcnRlZDog
-ICAgICAgICAgIDQ4IGRheXMgYWdvCj4gQnJhbmNoZXM6ICAgICAgICAgICBNYWlubGluZQo+IERh
-c2hib2FyZCBsaW5rOiAgICAgaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20vYnVnP2lkPTEy
-YmEzNDlkN2UyNmNjZmU5NTMxN2JjMzc2ZTgxMmViYmFlMmVlMGYKPiBPcmlnaW5hbCB0aHJlYWQ6
-ICAgIGh0dHBzOi8vbGttbC5rZXJuZWwub3JnL2xrbWwvMDAwMDAwMDAwMDAwMTg4ZGExMDU4YTlj
-MjVlM0Bnb29nbGUuY29tL1QvI3UKPgo+IFRoaXMgYnVnIGhhcyBhIEMgcmVwcm9kdWNlci4KPgo+
-IFRoZSBvcmlnaW5hbCB0aHJlYWQgZm9yIHRoaXMgYnVnIGhhcyByZWNlaXZlZCA0IHJlcGxpZXM7
-IHRoZSBsYXN0IHdhcyAzOSBkYXlzCj4gYWdvLgo+Cj4gSWYgeW91IGZpeCB0aGlzIGJ1ZywgcGxl
-YXNlIGFkZCB0aGUgZm9sbG93aW5nIHRhZyB0byB0aGUgY29tbWl0Ogo+ICAgICAgUmVwb3J0ZWQt
-Ynk6IHN5emJvdCswNzg5ZjBjN2U0NWVmZDdiYjY0M0BzeXprYWxsZXIuYXBwc3BvdG1haWwuY29t
-CgoKSSBkbyByZW1lbWJlciBpdCBjYW4gbm90IGJlIHJlcHJvZHVjZWQgdXBzdHJlYW0sIGxldCBt
-ZSBkb3VibGUgY2hlY2sgYW5kIApjbG9zZSB0aGlzIG9uZS4KClRoYW5rcwoKCj4KPiBJZiB5b3Ug
-c2VuZCBhbnkgZW1haWwgb3IgcGF0Y2ggZm9yIHRoaXMgYnVnLCBwbGVhc2UgY29uc2lkZXIgcmVw
-bHlpbmcgdG8gdGhlCj4gb3JpZ2luYWwgdGhyZWFkLiAgRm9yIHRoZSBnaXQgc2VuZC1lbWFpbCBj
-b21tYW5kIHRvIHVzZSwgb3IgdGlwcyBvbiBob3cgdG8gcmVwbHkKPiBpZiB0aGUgdGhyZWFkIGlz
-bid0IGluIHlvdXIgbWFpbGJveCwgc2VlIHRoZSAiUmVwbHkgaW5zdHJ1Y3Rpb25zIiBhdAo+IGh0
-dHBzOi8vbGttbC5rZXJuZWwub3JnL3IvMDAwMDAwMDAwMDAwMTg4ZGExMDU4YTljMjVlM0Bnb29n
-bGUuY29tCj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-VmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZv
-dW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3ZpcnR1YWxpemF0aW9u
+On Tue, Jul 23, 2019 at 09:25:09PM -0700, john.hubbard@gmail.com wrote:
+> From: John Hubbard <jhubbard@nvidia.com>
+> 
+> In commit d241a95f3514 ("block: optionally mark pages dirty in
+> bio_release_pages"), new "bool mark_dirty" argument was added to
+> bio_release_pages.
+> 
+> In upcoming work, another bool argument (to indicate that the pages came
+> from get_user_pages) is going to be added. That's one bool too many,
+> because it's not desirable have calls of the form:
+
+All pages releases by bio_release_pages should come from
+get_get_user_pages, so I don't really see the point here.
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
