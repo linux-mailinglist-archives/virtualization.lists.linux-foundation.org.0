@@ -2,57 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43FCF74D94
-	for <lists.virtualization@lfdr.de>; Thu, 25 Jul 2019 13:54:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9CDE74DAB
+	for <lists.virtualization@lfdr.de>; Thu, 25 Jul 2019 14:04:10 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6FFD3C6E;
-	Thu, 25 Jul 2019 11:54:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A63A0EE7;
+	Thu, 25 Jul 2019 12:04:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id BFCAC910;
-	Thu, 25 Jul 2019 11:54:01 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6A7B1775;
-	Thu, 25 Jul 2019 11:54:01 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 7331D300CA39;
-	Thu, 25 Jul 2019 11:54:00 +0000 (UTC)
-Received: from [10.36.116.102] (ovpn-116-102.ams2.redhat.com [10.36.116.102])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 45E2960C05;
-	Thu, 25 Jul 2019 11:53:51 +0000 (UTC)
-Subject: Re: [PATCH 2/2] virtio/virtio_ring: Fix the dma_max_mapping_size call
-To: Christoph Hellwig <hch@lst.de>, Robin Murphy <robin.murphy@arm.com>
-References: <20190722145509.1284-1-eric.auger@redhat.com>
-	<20190722145509.1284-3-eric.auger@redhat.com>
-	<e4a288f2-a93a-5ce4-32da-f5434302551f@arm.com>
-	<20190723153851.GE720@lst.de>
-From: Auger Eric <eric.auger@redhat.com>
-Message-ID: <fa0fbad5-9b44-d937-e0fd-65fb20c90666@redhat.com>
-Date: Thu, 25 Jul 2019 13:53:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 003F2EBE
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 25 Jul 2019 12:04:04 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 521F9891
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 25 Jul 2019 12:04:03 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id w13so50037256eds.4
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 25 Jul 2019 05:04:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=cy0ew9uPB8kVgEkmAFM7ms4faY7aDGiLUN/eaDicKPg=;
+	b=WPZhZWmRLRFJE8jPPQtDSMQzuxgwp3LQMY9ubs6jUiptnchPg7kFyCCu6lCq07dzQM
+	Bv+b5kp750NTw97eMhhEIN/2+zSUClyeCkEsIT/KpeyftRjloI9FYcvGhe7H6n21aHB7
+	QXdsWpYtCXLTZIJx5CLvoTfenLF2F848/TPPE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+	:mail-followup-to:references:mime-version:content-disposition
+	:in-reply-to:user-agent;
+	bh=cy0ew9uPB8kVgEkmAFM7ms4faY7aDGiLUN/eaDicKPg=;
+	b=VngT3+8uguXQOrlWG6vvP5RLuaMNg1HFTVgKJr2io4UP+8H1gV5+q01zuN0EopEcyv
+	ah1Gm6UkvbCCaz0PHeHyUfCTUvuk5BqbauR+WNLnzfB1QblyZz7IsGxgNrWkNFohPgBF
+	emyNpwJW1bAUHsBHLv+9C2yo7mAbj6l8M7WDobLZByawxmiQEdWjtBOwoHRP2BtN0hNI
+	0yukTFKze/M1ZCU/gz5Sfd2xJNf0ArKp42TnBhbznK7189FSLVWPaV5x165aTcxn/J8+
+	AysJAT0vNO/SW7kA8HsquNCB3TihSObVTIE0RxbgW1flx6aJJaw3h0Cj8CfBA20qpbo3
+	7bDA==
+X-Gm-Message-State: APjAAAVTQtXpmFNWBCFa0PiyKObK8/ePaaBahVmlRacCtLE3ymAzbF1n
+	2+z/otT7ArB7wCPFxvUWPE8=
+X-Google-Smtp-Source: APXvYqyaIPnd0FN+ekWkoKh4vPAtSWP2GBKrYKSJbcPhM7k3XbUpl7CE1EwxPieoU4WbQXNb3+RMyA==
+X-Received: by 2002:a50:9871:: with SMTP id h46mr76005765edb.69.1564056241883; 
+	Thu, 25 Jul 2019 05:04:01 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
+	by smtp.gmail.com with ESMTPSA id
+	k8sm13001747edr.31.2019.07.25.05.04.00
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 25 Jul 2019 05:04:01 -0700 (PDT)
+Date: Thu, 25 Jul 2019 14:03:59 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Jia-Ju Bai <baijiaju1990@gmail.com>
+Subject: Re: [PATCH] gpu: drm: qxl: Fix possible null-pointer dereferences in
+	qxl_crtc_atomic_flush()
+Message-ID: <20190725120359.GB15868@phenom.ffwll.local>
+Mail-Followup-To: Jia-Ju Bai <baijiaju1990@gmail.com>, airlied@redhat.com,
+	kraxel@redhat.com, airlied@linux.ie,
+	virtualization@lists.linux-foundation.org,
+	spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+References: <20190725102127.16086-1-baijiaju1990@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20190723153851.GE720@lst.de>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.42]);
-	Thu, 25 Jul 2019 11:54:00 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190725102127.16086-1-baijiaju1990@gmail.com>
+X-Operating-System: Linux phenom 4.19.0-5-amd64 
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: mst@redhat.com, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	iommu@lists.linux-foundation.org, eric.auger.pro@gmail.com,
-	m.szyprowski@samsung.com
+Cc: airlied@linux.ie, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, daniel@ffwll.ch,
+	spice-devel@lists.freedesktop.org, airlied@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,39 +94,60 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Hi,
-
-On 7/23/19 5:38 PM, Christoph Hellwig wrote:
-> On Mon, Jul 22, 2019 at 04:36:09PM +0100, Robin Murphy wrote:
->>> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
->>> index c8be1c4f5b55..37c143971211 100644
->>> --- a/drivers/virtio/virtio_ring.c
->>> +++ b/drivers/virtio/virtio_ring.c
->>> @@ -262,7 +262,7 @@ size_t virtio_max_dma_size(struct virtio_device *vdev)
->>>   {
->>>   	size_t max_segment_size = SIZE_MAX;
->>>   -	if (vring_use_dma_api(vdev))
->>> +	if (vring_use_dma_api(vdev) && vdev->dev.dma_mask)
->>
->> Hmm, might it make sense to roll that check up into vring_use_dma_api() 
->> itself? After all, if the device has no mask then it's likely that other 
->> DMA API ops wouldn't really work as expected either.
+On Thu, Jul 25, 2019 at 06:21:27PM +0800, Jia-Ju Bai wrote:
+> In qxl_crtc_atomic_flush(), there is an if statement on line 376 to
+> check whether crtc->state is NULL:
+>     if (crtc->state && crtc->state->event)
 > 
-> Makes sense to me.
+> When crtc->state is NULL and qxl_crtc_update_monitors_config() is call, 
+> qxl_crtc_update_monitors_config() uses crtc->state on line 326:
+>     if (crtc->state->active)
+> and on line 358:
+>     DRM_DEBUG_KMS(..., crtc->state->active, ...);
+> 
+> Thus, possible null-pointer dereferences may occur.
+> 
+> To fix these bugs, crtc->state is checked before calling
+> qxl_crtc_update_monitors_config().
+> 
+> These bugs are found by a static analysis tool STCheck written by us.
+> 
+> Signed-off-by: Jia-Ju Bai <baijiaju1990@gmail.com>
+
+crtc->state should never be NULL in this function, ever. Imo correct fix
+is to remove that other NULL check (since obviously it would blow up,
+hence it's dead code).
+
+Atomic kms drivers use drm_mode_config_reset() to make sure the various
+->state pointers are always set and valid.
+-Daniel
+
+> ---
+>  drivers/gpu/drm/qxl/qxl_display.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+> index 8b319ebbb0fb..fae18ef1ba59 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -382,7 +382,8 @@ static void qxl_crtc_atomic_flush(struct drm_crtc *crtc,
+>  		spin_unlock_irqrestore(&dev->event_lock, flags);
+>  	}
+>  
+> -	qxl_crtc_update_monitors_config(crtc, "flush");
+> +	if (crtc->state)
+> +		qxl_crtc_update_monitors_config(crtc, "flush");
+>  }
+>  
+>  static void qxl_crtc_destroy(struct drm_crtc *crtc)
+> -- 
+> 2.17.0
 > 
 
-I am confused: if vring_use_dma_api() returns false if the dma_mask is
-unset (ie. vring_use_dma_api() returns false), the virtio-blk-pci device
-will not be able to get translated addresses and won't work properly.
-
-The patch above allows the dma api to be used and only influences the
-max_segment_size and it works properly.
-
-So is it normal the dma_mask is unset in my case?
-
-Thanks
-
-Eric
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
