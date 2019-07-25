@@ -2,46 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DAC47563D
-	for <lists.virtualization@lfdr.de>; Thu, 25 Jul 2019 19:51:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB1F17563E
+	for <lists.virtualization@lfdr.de>; Thu, 25 Jul 2019 19:51:33 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E2E2EE1C;
-	Thu, 25 Jul 2019 17:50:59 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1AEC7DDF;
+	Thu, 25 Jul 2019 17:51:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 97814DD5
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4193CDD5
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 25 Jul 2019 17:50:58 +0000 (UTC)
+	Thu, 25 Jul 2019 17:51:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4B3BF7C
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E9EF87C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 25 Jul 2019 17:50:58 +0000 (UTC)
+	Thu, 25 Jul 2019 17:50:59 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
 	[10.5.11.11])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id DFAD130C134A;
-	Thu, 25 Jul 2019 17:50:57 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 88A8D307D96F;
+	Thu, 25 Jul 2019 17:50:59 +0000 (UTC)
 Received: from dgilbert-t580.localhost (ovpn-117-187.ams2.redhat.com
 	[10.36.117.187])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 89E1F64459;
-	Thu, 25 Jul 2019 17:50:56 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 34962620CE;
+	Thu, 25 Jul 2019 17:50:58 +0000 (UTC)
 From: "Dr. David Alan Gilbert (git)" <dgilbert@redhat.com>
 To: virtualization@lists.linux-foundation.org, mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH 3/4] virtio_pci: Defined shared memory capability
-Date: Thu, 25 Jul 2019 18:50:43 +0100
-Message-Id: <20190725175044.29303-4-dgilbert@redhat.com>
+Subject: [PATCH 4/4] virito_mmio: Define shared memory region registers
+Date: Thu, 25 Jul 2019 18:50:44 +0100
+Message-Id: <20190725175044.29303-5-dgilbert@redhat.com>
 In-Reply-To: <20190725175044.29303-1-dgilbert@redhat.com>
 References: <20190725175044.29303-1-dgilbert@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.45]);
-	Thu, 25 Jul 2019 17:50:57 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.48]);
+	Thu, 25 Jul 2019 17:50:59 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -65,31 +65,39 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 
 From: "Dr. David Alan Gilbert" <dgilbert@redhat.com>
 
-Define the PCI capability used for enumerating shared memory regions.
-Each capability contains a 'struct virtio_pci_cap64'
-Multiple capabilities of this type may exist for a device and may
-be distinguished using the 'cap.id' field.
+Define an MMIO interface to discover and map shared
+memory regions.
 
-Defined in virtio spec commit 855ad7af2bd64 ("shared memory: Define PCI capability")
+Defined in virtio spec commit 2dd2d468f69b ("shared memory: Define mmio registers")
 
+Signed-off-by: Sebastien Boeuf <sebastien.boeuf@intel.com>
 Signed-off-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
 ---
- include/uapi/linux/virtio_pci.h | 2 ++
- 1 file changed, 2 insertions(+)
+ include/uapi/linux/virtio_mmio.h | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/include/uapi/linux/virtio_pci.h b/include/uapi/linux/virtio_pci.h
-index 11e508719dfd..401a5d6851f1 100644
---- a/include/uapi/linux/virtio_pci.h
-+++ b/include/uapi/linux/virtio_pci.h
-@@ -113,6 +113,8 @@
- #define VIRTIO_PCI_CAP_DEVICE_CFG	4
- /* PCI configuration access */
- #define VIRTIO_PCI_CAP_PCI_CFG		5
-+/* Additional shared memory capability */
-+#define VIRTIO_PCI_CAP_SHARED_MEMORY_CFG 8
+diff --git a/include/uapi/linux/virtio_mmio.h b/include/uapi/linux/virtio_mmio.h
+index c4b09689ab64..0650f91bea6c 100644
+--- a/include/uapi/linux/virtio_mmio.h
++++ b/include/uapi/linux/virtio_mmio.h
+@@ -122,6 +122,17 @@
+ #define VIRTIO_MMIO_QUEUE_USED_LOW	0x0a0
+ #define VIRTIO_MMIO_QUEUE_USED_HIGH	0x0a4
  
- /* This is the PCI capability header: */
- struct virtio_pci_cap {
++/* Shared memory region id */
++#define VIRTIO_MMIO_SHM_SEL             0x0ac
++
++/* Shared memory region length, 64 bits in two halves */
++#define VIRTIO_MMIO_SHM_LEN_LOW         0x0b0
++#define VIRTIO_MMIO_SHM_LEN_HIGH        0x0b4
++
++/* Shared memory region base address, 64 bits in two halves */
++#define VIRTIO_MMIO_SHM_BASE_LOW        0x0b8
++#define VIRTIO_MMIO_SHM_BASE_HIGH       0x0bc
++
+ /* Configuration atomicity value */
+ #define VIRTIO_MMIO_CONFIG_GENERATION	0x0fc
+ 
 -- 
 2.21.0
 
