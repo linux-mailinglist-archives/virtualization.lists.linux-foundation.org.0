@@ -2,46 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3037376808
-	for <lists.virtualization@lfdr.de>; Fri, 26 Jul 2019 15:42:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A03A576840
+	for <lists.virtualization@lfdr.de>; Fri, 26 Jul 2019 15:43:34 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D0482C91;
-	Fri, 26 Jul 2019 13:41:58 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 6D72DCB7;
+	Fri, 26 Jul 2019 13:43:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9142FAD7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 005FC9F0
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 13:41:57 +0000 (UTC)
+	Fri, 26 Jul 2019 13:43:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 41DD589D
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9861A89C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 13:41:57 +0000 (UTC)
+	Fri, 26 Jul 2019 13:43:27 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
 	[73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 2AEDA22CBF;
-	Fri, 26 Jul 2019 13:41:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 8D20922CC3;
+	Fri, 26 Jul 2019 13:43:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1564148517;
-	bh=QbcCrcYP0/ZaPPQaKsY9QH7x/pjhlz95ZsQjyztPYys=;
+	s=default; t=1564148607;
+	bh=7AVM+aF9br7NYktqFIBlqLhlCSGucjodWR167t3Jr+U=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=buoQ0UQtgXPRX5nVwbWTwdgr2nWSWYEFQiZnBloMY//geCM6wlaJ8hpGdGs1YNlG1
-	55bVlgzwTuIAzN9SHj38GiCj9AuZBifNNZgus7DRaefSG9aDixW+HAtOZ7GkiPPprD
-	d8sXjGTOCU1VacvWNGOKA13WWFH/zL88Se3Pb81Q=
+	b=ESY8RtRNDqOVeLItgkS93MJh/dCRy0/dbS43MymD41zTzR2/QbnED44daRtVgbGm6
+	f8SwOTsPwSSfbGl2Xgim3O6Uiej23KquTNxkAshAp7Ddf+eMHcCqncmbsBdPrJJMfa
+	ntViaxHk85hHwLdY9UTv2T7LTVwdNFUG4ffMhjuo=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.2 79/85] x86/paravirt: Fix callee-saved function ELF
-	sizes
-Date: Fri, 26 Jul 2019 09:39:29 -0400
-Message-Id: <20190726133936.11177-79-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 45/47] x86/paravirt: Fix callee-saved function
+	ELF sizes
+Date: Fri, 26 Jul 2019 09:42:08 -0400
+Message-Id: <20190726134210.12156-45-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190726133936.11177-1-sashal@kernel.org>
-References: <20190726133936.11177-1-sashal@kernel.org>
+In-Reply-To: <20190726134210.12156-1-sashal@kernel.org>
+References: <20190726134210.12156-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -95,10 +95,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 2 insertions(+)
 
 diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index c25c38a05c1c..d6f5ae2c79ab 100644
+index e375d4266b53..a04677038872 100644
 --- a/arch/x86/include/asm/paravirt.h
 +++ b/arch/x86/include/asm/paravirt.h
-@@ -746,6 +746,7 @@ bool __raw_callee_save___native_vcpu_is_preempted(long cpu);
+@@ -768,6 +768,7 @@ static __always_inline bool pv_vcpu_is_preempted(long cpu)
  	    PV_RESTORE_ALL_CALLER_REGS					\
  	    FRAME_END							\
  	    "ret;"							\
@@ -107,10 +107,10 @@ index c25c38a05c1c..d6f5ae2c79ab 100644
  
  /* Get a reference to a callee-save function */
 diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
-index 5169b8cc35bb..320b70acb211 100644
+index 7f89d609095a..cee45d46e67d 100644
 --- a/arch/x86/kernel/kvm.c
 +++ b/arch/x86/kernel/kvm.c
-@@ -817,6 +817,7 @@ asm(
+@@ -830,6 +830,7 @@ asm(
  "cmpb	$0, " __stringify(KVM_STEAL_TIME_preempted) "+steal_time(%rax);"
  "setne	%al;"
  "ret;"
