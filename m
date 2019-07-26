@@ -2,57 +2,48 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAF40764E8
-	for <lists.virtualization@lfdr.de>; Fri, 26 Jul 2019 13:51:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CBBD764F3
+	for <lists.virtualization@lfdr.de>; Fri, 26 Jul 2019 13:57:41 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D3351CA8;
-	Fri, 26 Jul 2019 11:51:19 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9E305CAA;
+	Fri, 26 Jul 2019 11:57:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id DEF879EE
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 134B59EE
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 11:51:18 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7C964709
+	Fri, 26 Jul 2019 11:57:34 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B5DF389C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 11:51:18 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id k10so52331370qtq.1
-	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 04:51:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition;
-	bh=9gHO9TyKSj0CYwPdw5b5x4szapbbJYZPZ0dkycmRYIw=;
-	b=OY30H55gRySrBrt5MuSwWJ0V66PNG+bD6Z+WvmTj9j793k1pjYorwD+sFLyClcnEkO
-	agKmuB04lHPb0vktUVifCk9pozVmnFbuFVRYVVxbIkNXG8I1yrdTFSOgl+M4pBJ2bmyT
-	ypdEwRYA6+prM00mbO2IxWkGit+cEj2rKdVt6DeLQWRk/V8T3xZV8uU9exhOvzkRfmnU
-	x6+RTA70K69xopZBSZziDVjyhVwlTaH1xrelM2MJYZswC2wrko9FcF75PRAI/sPgSxSN
-	7PeKK43zYatosp48nRwgQWip8PUyZfefhvTAo5wWl60HUX/Ts6MS/rm5V2diiRt86J1m
-	KWYA==
-X-Gm-Message-State: APjAAAWdxgbXXXHMqH6uTm8Sr7A79BPfTLWOmXvi5Al+y7AUR1RIokXl
-	CqtSjG18wI3TmLtCetz9IHXI6A==
-X-Google-Smtp-Source: APXvYqymcbOMEQ4lUl13pE8Gi7ZsmsaJk9G/++ds4UPazH2mBxi16XyvfrDkgsSarz23FJllDH4Qvg==
-X-Received: by 2002:ac8:520e:: with SMTP id r14mr65932257qtn.50.1564141877674; 
-	Fri, 26 Jul 2019 04:51:17 -0700 (PDT)
-Received: from redhat.com ([212.92.104.165]) by smtp.gmail.com with ESMTPSA id
-	39sm28940576qts.41.2019.07.26.04.51.15
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 26 Jul 2019 04:51:16 -0700 (PDT)
-Date: Fri, 26 Jul 2019 07:51:12 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH] vhost: disable metadata prefetch optimization
-Message-ID: <20190726115021.7319-1-mst@redhat.com>
+	Fri, 26 Jul 2019 11:57:33 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 3785183F4C;
+	Fri, 26 Jul 2019 11:57:33 +0000 (UTC)
+Received: from [10.72.12.238] (ovpn-12-238.pek2.redhat.com [10.72.12.238])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id DC5EA60C18;
+	Fri, 26 Jul 2019 11:57:28 +0000 (UTC)
+Subject: Re: [PATCH] vhost: disable metadata prefetch optimization
+To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
+References: <20190726115021.7319-1-mst@redhat.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <ccba99c1-7708-3e55-6fc9-7775415c77a8@redhat.com>
+Date: Fri, 26 Jul 2019 19:57:25 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mailer: git-send-email 2.22.0.678.g13338e74b8
-X-Mutt-Fcc: =sent
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <20190726115021.7319-1-mst@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.27]);
+	Fri, 26 Jul 2019 11:57:33 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
@@ -69,39 +60,31 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-This seems to cause guest and host memory corruption.
-Disable for now until we get a better handle on that.
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
-
-I put this in linux-next, we'll re-enable if we can fix
-the outstanding issues in a short order.
-
- drivers/vhost/vhost.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index 819296332913..42a8c2a13ab1 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -96,7 +96,7 @@ struct vhost_uaddr {
- };
- 
- #if defined(CONFIG_MMU_NOTIFIER) && ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE == 0
--#define VHOST_ARCH_CAN_ACCEL_UACCESS 1
-+#define VHOST_ARCH_CAN_ACCEL_UACCESS 0
- #else
- #define VHOST_ARCH_CAN_ACCEL_UACCESS 0
- #endif
--- 
-MST
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvNy8yNiDkuIvljYg3OjUxLCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4gVGhp
+cyBzZWVtcyB0byBjYXVzZSBndWVzdCBhbmQgaG9zdCBtZW1vcnkgY29ycnVwdGlvbi4KPiBEaXNh
+YmxlIGZvciBub3cgdW50aWwgd2UgZ2V0IGEgYmV0dGVyIGhhbmRsZSBvbiB0aGF0Lgo+Cj4gU2ln
+bmVkLW9mZi1ieTogTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNvbT4KPiAtLS0KPgo+
+IEkgcHV0IHRoaXMgaW4gbGludXgtbmV4dCwgd2UnbGwgcmUtZW5hYmxlIGlmIHdlIGNhbiBmaXgK
+PiB0aGUgb3V0c3RhbmRpbmcgaXNzdWVzIGluIGEgc2hvcnQgb3JkZXIuCgoKQnR3LCBpcyB0aGlz
+IG1vcmUgc3VpdGFibGUgdG8gZS5nIHJldmVydCB0aGUgCjg0MmFhNjRlZGRhY2QyM2FkYzZlY2Ri
+YzY5Y2IyMDMwYmVjNDcxMjIgYW5kIGxldCBzeXpib3QgZnV6eiBtb3JlIG9uIHRoZSAKY3VycmVu
+dCBjb2RlPwoKSSB0aGluayB3ZSB3b24ndCBhY2NlcHQgdGhhdCBwYXRjaCBldmVudHVhbGx5LCBz
+byBJIHN1c3BlY3Qgd2hhdCBzeXpib3QgCnJlcG9ydHMgdG9kYXkgaXMgYSBmYWxzZSBwb3NpdGl2
+ZXMuCgpUaGFua3MKCgo+Cj4gICBkcml2ZXJzL3Zob3N0L3Zob3N0LmggfCAyICstCj4gICAxIGZp
+bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKPgo+IGRpZmYgLS1naXQg
+YS9kcml2ZXJzL3Zob3N0L3Zob3N0LmggYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiBpbmRleCA4
+MTkyOTYzMzI5MTMuLjQyYThjMmExM2FiMSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3Zob3N0L3Zo
+b3N0LmgKPiArKysgYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiBAQCAtOTYsNyArOTYsNyBAQCBz
+dHJ1Y3Qgdmhvc3RfdWFkZHIgewo+ICAgfTsKPiAgIAo+ICAgI2lmIGRlZmluZWQoQ09ORklHX01N
+VV9OT1RJRklFUikgJiYgQVJDSF9JTVBMRU1FTlRTX0ZMVVNIX0RDQUNIRV9QQUdFID09IDAKPiAt
+I2RlZmluZSBWSE9TVF9BUkNIX0NBTl9BQ0NFTF9VQUNDRVNTIDEKPiArI2RlZmluZSBWSE9TVF9B
+UkNIX0NBTl9BQ0NFTF9VQUNDRVNTIDAKPiAgICNlbHNlCj4gICAjZGVmaW5lIFZIT1NUX0FSQ0hf
+Q0FOX0FDQ0VMX1VBQ0NFU1MgMAo+ICAgI2VuZGlmCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFs
+aXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91
+bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
