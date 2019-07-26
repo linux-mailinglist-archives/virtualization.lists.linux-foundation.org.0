@@ -2,64 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 577247698C
-	for <lists.virtualization@lfdr.de>; Fri, 26 Jul 2019 15:53:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A26977385
+	for <lists.virtualization@lfdr.de>; Fri, 26 Jul 2019 23:35:54 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C8644DA7;
-	Fri, 26 Jul 2019 13:53:07 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 30A71DAC;
+	Fri, 26 Jul 2019 21:35:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4EF59C6F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4C295DA6
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 13:53:06 +0000 (UTC)
+	Fri, 26 Jul 2019 21:35:45 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DE555709
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+	[209.85.208.193])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AF36E894
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 13:53:05 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id n11so52621834qtl.5
+	Fri, 26 Jul 2019 21:35:44 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id r9so52802366ljg.5
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 26 Jul 2019 06:53:05 -0700 (PDT)
+	Fri, 26 Jul 2019 14:35:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux-foundation.org; s=google;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=cVmcZwFhu0VmRu42g2oqdHVRFxqVWleFTBghf3PdU0s=;
+	b=auPaSao4Pu92MrHcL8ri0lwhHW+MxKtMjV1DpxAsA7pVZXiYOWxWxhMCN+yWqE/ApM
+	N1RAQkb6zmoRJMBukop8ckoCwrxu+fdsXpdHaXZqjEngnR6ahHT+uJi/+bo3yEWp6UbC
+	NE3E48fT2I4XCRhysWOc0g0KiUbHZXwqDqq8Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:content-transfer-encoding
-	:in-reply-to;
-	bh=AG8g0/5+Esm5c3gfwUTGC7xBT2DUyGJWbBLEtSQE6Lo=;
-	b=rdJ5YWtqE73DwOjj2g85zqUYo+ptK7yugoWCxKMgkroQ1s4GClVXf/ZZY1p/CPEjQa
-	6S/CwOImMetpM8UIM6f6eyeKCqUpMGPdSBa5j3aHgrLlEmGTT07DEMHaTlWhZ2b7RCN/
-	7WTAx3Eo2rbeNgmQn55TifNtKTNyhviXPJnMy7t4kEZwos+FUaRRxYkD5mRSe6QwMnfs
-	GAeYXOd1K7KjjDZzmldBx1hDxPVDSQ3kjkHynD8h/f3iOd1hkjP4xLNxwJAEW9HR4QKX
-	9T19BZTIcIcEgAhiS5tjh/fN3qiu4w28syxFbBZAKr6RAatIFKaBYWIZD/GChxJKSwjJ
-	u40Q==
-X-Gm-Message-State: APjAAAVitb45rUWLVJRuOTRL3dtVFxrE2WW+K2JtPzRZRuXF00NsPDTD
-	nqcz/YIDcEQo6FM5QLR3+fHrfQ==
-X-Google-Smtp-Source: APXvYqydwEkRiDUhjkzyGjQfoaMf8JbYOCxKxauTFB3YoeZG49kK7ARiVn02SSH3ZF9H39y3z1BKaA==
-X-Received: by 2002:a0c:b521:: with SMTP id d33mr68309462qve.239.1564149185035;
-	Fri, 26 Jul 2019 06:53:05 -0700 (PDT)
-Received: from redhat.com ([212.92.104.165]) by smtp.gmail.com with ESMTPSA id
-	v17sm30156688qtc.23.2019.07.26.06.53.02
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 26 Jul 2019 06:53:04 -0700 (PDT)
-Date: Fri, 26 Jul 2019 09:52:59 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH] vhost: disable metadata prefetch optimization
-Message-ID: <20190726095044-mutt-send-email-mst@kernel.org>
-References: <20190726115021.7319-1-mst@redhat.com>
-	<ccba99c1-7708-3e55-6fc9-7775415c77a8@redhat.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=cVmcZwFhu0VmRu42g2oqdHVRFxqVWleFTBghf3PdU0s=;
+	b=a83FdyB0SaFiiHuAKEcF8aMDIAnERNIgCzpZYF8F3lCYdTqwpCXObGYHSgsRrYOcUe
+	Ts6+MglWmvZ/sng3QCzIELCAPhjU+QWaHG471eKip0NExYJfHf2PhnzFwhaB6eQ7bxwx
+	25y8rz1DDgsFSrLTo3dSexCIrGPG5g9zPmhyemZ16NdHu9Gw8TLxFZlfk33J2IxhUNxO
+	vnB/n1gYHTpIJj6mSJxvPEzE0ZDANMayxRYN9+o8l9NlTYXk2CuC3CzPFPMeXQP8/sgV
+	u+1YntQmvCB9yVZ5ZkuHUdPTyuO58zKoZuEneZfSMvSeM+24OBpywA7sk0ONj77VTuC0
+	oiEg==
+X-Gm-Message-State: APjAAAXRtf5f42AI+k5uJaP8kD6q2r+fnlKMRGft8ajRmT9ZoOGvvao+
+	WXKwc+C/+K2Vsj3oLL7Ics7bJFpjjhljQw==
+X-Google-Smtp-Source: APXvYqw7VWL4AMqrNp3x+W6nJpczskdrjWdWMSjFpnL7VD8qtPXDHAlYyDa0QgU3zZbklRci/kuSww==
+X-Received: by 2002:a2e:9ac4:: with SMTP id p4mr10736900ljj.185.1564176942365; 
+	Fri, 26 Jul 2019 14:35:42 -0700 (PDT)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com.
+	[209.85.208.181])
+	by smtp.gmail.com with ESMTPSA id n1sm8725061lfk.19.2019.07.26.14.35.41
+	for <virtualization@lists.linux-foundation.org>
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Fri, 26 Jul 2019 14:35:41 -0700 (PDT)
+Received: by mail-lj1-f181.google.com with SMTP id x25so52874241ljh.2
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 26 Jul 2019 14:35:41 -0700 (PDT)
+X-Received: by 2002:a2e:b003:: with SMTP id y3mr51555432ljk.72.1564176941127; 
+	Fri, 26 Jul 2019 14:35:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ccba99c1-7708-3e55-6fc9-7775415c77a8@redhat.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+References: <000000000000b4358f058e924c6d@google.com>
+	<000000000000e87d14058e9728d7@google.com>
+In-Reply-To: <000000000000e87d14058e9728d7@google.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Fri, 26 Jul 2019 14:35:25 -0700
+X-Gmail-Original-Message-ID: <CAHk-=whnM5+FBJuVoxXELvFgecuc0+vW7ibWy4Gc5qJbW8HL2Q@mail.gmail.com>
+Message-ID: <CAHk-=whnM5+FBJuVoxXELvFgecuc0+vW7ibWy4Gc5qJbW8HL2Q@mail.gmail.com>
+Subject: Re: INFO: rcu detected stall in vhost_worker
+To: syzbot <syzbot+36e93b425cd6eb54fcc1@syzkaller.appspotmail.com>
+X-Spam-Status: No, score=0.8 required=5.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED, RCVD_IN_DNSWL_NONE,
+	SORTED_RECIPS autolearn=no version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
+Cc: michal.lkml@markovi.net, KVM list <kvm@vger.kernel.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Netdev <netdev@vger.kernel.org>,
+	Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+	syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
+	Linux List Kernel Mailing <linux-kernel@vger.kernel.org>,
+	virtualization@lists.linux-foundation.org,
+	Masahiro Yamada <yamada.masahiro@socionext.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,39 +90,30 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gRnJpLCBKdWwgMjYsIDIwMTkgYXQgMDc6NTc6MjVQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDE5LzcvMjYg5LiL5Y2INzo1MSwgTWljaGFlbCBTLiBUc2lya2luIHdyb3Rl
-Ogo+ID4gVGhpcyBzZWVtcyB0byBjYXVzZSBndWVzdCBhbmQgaG9zdCBtZW1vcnkgY29ycnVwdGlv
-bi4KPiA+IERpc2FibGUgZm9yIG5vdyB1bnRpbCB3ZSBnZXQgYSBiZXR0ZXIgaGFuZGxlIG9uIHRo
-YXQuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IE1pY2hhZWwgUy4gVHNpcmtpbiA8bXN0QHJlZGhh
-dC5jb20+Cj4gPiAtLS0KPiA+IAo+ID4gSSBwdXQgdGhpcyBpbiBsaW51eC1uZXh0LCB3ZSdsbCBy
-ZS1lbmFibGUgaWYgd2UgY2FuIGZpeAo+ID4gdGhlIG91dHN0YW5kaW5nIGlzc3VlcyBpbiBhIHNo
-b3J0IG9yZGVyLgo+IAo+IAo+IEJ0dywgaXMgdGhpcyBtb3JlIHN1aXRhYmxlIHRvIGUuZyByZXZl
-cnQgdGhlCj4gODQyYWE2NGVkZGFjZDIzYWRjNmVjZGJjNjljYjIwMzBiZWM0NzEyMgoKWWVzIEkg
-ZGlkIHRoYXQgdG9vLgoKPiBhbmQgbGV0IHN5emJvdCBmdXp6IG1vcmUgb24gdGhlCj4gY3VycmVu
-dCBjb2RlPwoKQ3VycmVudCBtZXRhZGF0YSBkaXJlY3QgYWNjZXNzIGNvZGUgaXMga25vd24gdG8g
-Y29ycnVwdCBndWVzdCBhbmQgaG9zdAptZW1vcnkgLSBJIGRvbid0IGZlZWwgd2UgbmVlZCBtb3Jl
-IGZ1enppbmcuCgo+IAo+IEkgdGhpbmsgd2Ugd29uJ3QgYWNjZXB0IHRoYXQgcGF0Y2ggZXZlbnR1
-YWxseSwgc28gSSBzdXNwZWN0IHdoYXQgc3l6Ym90Cj4gcmVwb3J0cyB0b2RheSBpcyBhIGZhbHNl
-IHBvc2l0aXZlcy4KClRvZGF5J3MgcmVwb3J0cyBhcmUgcmVhbCwgaXQncyBhIGJ1ZyBpbiBteSBw
-YXRjaC4gQnV0IEkgcmV2ZXJ0ZWQgaXQgLQp0aGUgYmVsb3cgaXMgYW4gZWFzaWVyIHdheSB0byBt
-YWtlIHN1cmUgYXQgbGVhc3QgbGludXgtbmV4dCBpcyBzdGFibGUKZm9yIGV2ZXJ5b25lLgoKPiAK
-PiBUaGFua3MKPiAKPiAKPiA+IAo+ID4gICBkcml2ZXJzL3Zob3N0L3Zob3N0LmggfCAyICstCj4g
-PiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+ID4gCj4g
-PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aG9zdC92aG9zdC5oIGIvZHJpdmVycy92aG9zdC92aG9z
-dC5oCj4gPiBpbmRleCA4MTkyOTYzMzI5MTMuLjQyYThjMmExM2FiMSAxMDA2NDQKPiA+IC0tLSBh
-L2RyaXZlcnMvdmhvc3Qvdmhvc3QuaAo+ID4gKysrIGIvZHJpdmVycy92aG9zdC92aG9zdC5oCj4g
-PiBAQCAtOTYsNyArOTYsNyBAQCBzdHJ1Y3Qgdmhvc3RfdWFkZHIgewo+ID4gICB9Owo+ID4gICAj
-aWYgZGVmaW5lZChDT05GSUdfTU1VX05PVElGSUVSKSAmJiBBUkNIX0lNUExFTUVOVFNfRkxVU0hf
-RENBQ0hFX1BBR0UgPT0gMAo+ID4gLSNkZWZpbmUgVkhPU1RfQVJDSF9DQU5fQUNDRUxfVUFDQ0VT
-UyAxCj4gPiArI2RlZmluZSBWSE9TVF9BUkNIX0NBTl9BQ0NFTF9VQUNDRVNTIDAKPiA+ICAgI2Vs
-c2UKPiA+ICAgI2RlZmluZSBWSE9TVF9BUkNIX0NBTl9BQ0NFTF9VQUNDRVNTIDAKPiA+ICAgI2Vu
-ZGlmCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1
-YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0
-aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5m
-by92aXJ0dWFsaXphdGlvbg==
+On Fri, Jul 26, 2019 at 8:26 AM syzbot
+<syzbot+36e93b425cd6eb54fcc1@syzkaller.appspotmail.com> wrote:
+>
+> syzbot has bisected this bug to:
+>
+> commit 0ecfebd2b52404ae0c54a878c872bb93363ada36
+> Author: Linus Torvalds <torvalds@linux-foundation.org>
+> Date:   Sun Jul 7 22:41:56 2019 +0000
+>
+>      Linux 5.2
+
+That seems very unlikely. That commit literally just changes the
+EXTRAVERSION part of the version string.
+
+So even if something actually depended on the version number, even
+that wouldn't have triggered any semantic change.
+
+              Linus
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
