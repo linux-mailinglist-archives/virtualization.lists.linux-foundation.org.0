@@ -2,64 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20F817909E
-	for <lists.virtualization@lfdr.de>; Mon, 29 Jul 2019 18:18:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECA62790B4
+	for <lists.virtualization@lfdr.de>; Mon, 29 Jul 2019 18:22:29 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EECD71A73;
-	Mon, 29 Jul 2019 16:18:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 760CC1AB6;
+	Mon, 29 Jul 2019 16:22:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5D6401A23
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 16D4019EE
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 29 Jul 2019 16:16:12 +0000 (UTC)
+	Mon, 29 Jul 2019 16:19:09 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ua1-f66.google.com (mail-ua1-f66.google.com
-	[209.85.222.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EF3B05E4
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5D9E35E4
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 29 Jul 2019 16:16:11 +0000 (UTC)
-Received: by mail-ua1-f66.google.com with SMTP id g11so1629433uak.0
+	Mon, 29 Jul 2019 16:19:08 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id n9so62613843wru.0
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 29 Jul 2019 09:16:11 -0700 (PDT)
+	Mon, 29 Jul 2019 09:19:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition;
-	bh=AyvJSduUmZn33FbpJeTkP5NHm1ThVmp/uEoZugiTS6k=;
-	b=Mt+s90thWrYraUy5Y3Kqp5Mz96VowTXT07gZm1i4yh2JhpzyoRBBKEw6Pduz+UZIU/
-	McQoGFFJvGZO7Dn25lFVj2lBRdJgGRHQzvJr+T3rait8qhG4nP4Em1KqzvKStiQniUJ6
-	qkS2vqbkaaXp11ZnFJpNu4atjOqFvFd4JCWAB+j6vxrn7tz6/oJ8g57VdlUiifA36mCK
-	Lw79fdXzI01GtbznwztpQMkmeKLkXIgatkRh2s2ozaUnVmsx8Y8m1bSkDd/ksGnRHpaF
-	mJVQhTanC8bfdXwOFbkd+iWdUWmhqVuFLPMm04zr/FM5k/hyGphgQ9Y6C862hdxhPGOZ
-	ggpg==
-X-Gm-Message-State: APjAAAXGkEBSCMTFOO5nNSC8VV5z6Jgv4aONnqakCoY88N0LCsWJEQa2
-	iUirSzg5eTz9LVNOK6fpeYV05w==
-X-Google-Smtp-Source: APXvYqwG8Q4XQWblCYfrnvjYrxOZIt94OjzyFiLAXTSDaMhX/fRr5dDybVH26+paFqcxZZfddeveUQ==
-X-Received: by 2002:a9f:31a2:: with SMTP id v31mr67985907uad.15.1564416971073; 
-	Mon, 29 Jul 2019 09:16:11 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
-	by smtp.gmail.com with ESMTPSA id
-	u5sm60539788uah.0.2019.07.29.09.16.07
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ZKDqUs0ayhzO8fC3NvwV+tCFuuA/FPgD3ePdCx1GJqM=;
+	b=h/Vu1i4BXqsU6p+sXWAFxx+P26t6E6BZDK1abdopORyO0p31gtjId883dzVsBWIywK
+	4AjO9MOeOx3tDgK9ndyjy9rvm9xnh3GmulsFowkixjnfh71+Y6xRwGkV2vYObpxMWamn
+	HWoffjz0lTawDMojkvy88EzmjJAL2ozB2TIqtnsYl2bS3BKgl5hJksruDgCaXO1fp1A+
+	2yeC9+aVGkb7uRwQPEe8hUdw5CduVs9bjLy9/Gisfm2Xa2V+TZNH88PpTYw4tPsn3/6e
+	ND6UW/SSnWfs3EvmhAIIwFunstWXOsbSBXu69ReGNZ+W9f75ApkEbuZqiZQ/NwacEXV7
+	vNzQ==
+X-Gm-Message-State: APjAAAWh6WwMUH3M12e8kmkkcGJ7GmHkPLKoxBexmWMzn1tBhGEXllFV
+	/c89qicbqUq+4J09jyquTyav6Q==
+X-Google-Smtp-Source: APXvYqx0sc12Pv/jNOPaKvwFRyWt3K0PAbYM2mQ0eNUoR5RWLAC9VV53Iw6ZEaEpC4k4BBzOXgmD7Q==
+X-Received: by 2002:a5d:4b8b:: with SMTP id b11mr40501951wrt.294.1564417146999;
+	Mon, 29 Jul 2019 09:19:06 -0700 (PDT)
+Received: from steredhat (host122-201-dynamic.13-79-r.retail.telecomitalia.it.
+	[79.13.201.122]) by smtp.gmail.com with ESMTPSA id
+	c11sm104255286wrq.45.2019.07.29.09.19.05
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Mon, 29 Jul 2019 09:16:10 -0700 (PDT)
-Date: Mon, 29 Jul 2019 12:16:05 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: [PULL] vhost,virtio: cleanups and fixes
-Message-ID: <20190729121605-mutt-send-email-mst@kernel.org>
+	Mon, 29 Jul 2019 09:19:06 -0700 (PDT)
+Date: Mon, 29 Jul 2019 18:19:03 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH v4 1/5] vsock/virtio: limit the memory used per-socket
+Message-ID: <20190729161903.yhaj5rfcvleexkhc@steredhat>
+References: <20190717113030.163499-1-sgarzare@redhat.com>
+	<20190717113030.163499-2-sgarzare@redhat.com>
+	<20190729095956-mutt-send-email-mst@kernel.org>
+	<20190729153656.zk4q4rob5oi6iq7l@steredhat>
+	<20190729114302-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-X-Mutt-Fcc: =sent
+In-Reply-To: <20190729114302-mutt-send-email-mst@kernel.org>
+User-Agent: NeoMutt/20180716
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: jean-philippe@linaro.org, jroedel@suse.de, kvm@vger.kernel.org,
-	mst@redhat.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, eric.auger@redhat.com,
-	namit@vmware.com
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,44 +82,75 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-The following changes since commit 5f9e832c137075045d15cd6899ab0505cfb2ca4b:
+On Mon, Jul 29, 2019 at 11:49:02AM -0400, Michael S. Tsirkin wrote:
+> On Mon, Jul 29, 2019 at 05:36:56PM +0200, Stefano Garzarella wrote:
+> > On Mon, Jul 29, 2019 at 10:04:29AM -0400, Michael S. Tsirkin wrote:
+> > > On Wed, Jul 17, 2019 at 01:30:26PM +0200, Stefano Garzarella wrote:
+> > > > Since virtio-vsock was introduced, the buffers filled by the host
+> > > > and pushed to the guest using the vring, are directly queued in
+> > > > a per-socket list. These buffers are preallocated by the guest
+> > > > with a fixed size (4 KB).
+> > > > 
+> > > > The maximum amount of memory used by each socket should be
+> > > > controlled by the credit mechanism.
+> > > > The default credit available per-socket is 256 KB, but if we use
+> > > > only 1 byte per packet, the guest can queue up to 262144 of 4 KB
+> > > > buffers, using up to 1 GB of memory per-socket. In addition, the
+> > > > guest will continue to fill the vring with new 4 KB free buffers
+> > > > to avoid starvation of other sockets.
+> > > > 
+> > > > This patch mitigates this issue copying the payload of small
+> > > > packets (< 128 bytes) into the buffer of last packet queued, in
+> > > > order to avoid wasting memory.
+> > > > 
+> > > > Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+> > > > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+> > > 
+> > > This is good enough for net-next, but for net I think we
+> > > should figure out how to address the issue completely.
+> > > Can we make the accounting precise? What happens to
+> > > performance if we do?
+> > > 
+> > 
+> > In order to do more precise accounting maybe we can use the buffer size,
+> > instead of payload size when we update the credit available.
+> > In this way, the credit available for each socket will reflect the memory
+> > actually used.
+> > 
+> > I should check better, because I'm not sure what happen if the peer sees
+> > 1KB of space available, then it sends 1KB of payload (using a 4KB
+> > buffer).
+> > 
+> > The other option is to copy each packet in a new buffer like I did in
+> > the v2 [2], but this forces us to make a copy for each packet that does
+> > not fill the entire buffer, perhaps too expensive.
+> > 
+> > [2] https://patchwork.kernel.org/patch/10938741/
+> > 
+> > 
+> > Thanks,
+> > Stefano
+> 
+> Interesting. You are right, and at some level the protocol forces copies.
+> 
+> We could try to detect that the actual memory is getting close to
+> admin limits and force copies on queued packets after the fact.
+> Is that practical?
 
-  Linus 5.3-rc1 (2019-07-21 14:05:38 -0700)
+Yes, I think it is doable!
+We can decrease the credit available with the buffer size queued, and
+when the buffer size of packet to queue is bigger than the credit
+available, we can copy it.
 
-are available in the Git repository at:
+> 
+> And yes we can extend the credit accounting to include buffer size.
+> That's a protocol change but maybe it makes sense.
 
-  git://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
+Since we send to the other peer the credit available, maybe this
+change can be backwards compatible (I'll check better this).
 
-for you to fetch changes up to 73f628ec9e6bcc45b77c53fe6d0c0ec55eaf82af:
-
-  vhost: disable metadata prefetch optimization (2019-07-26 07:49:29 -0400)
-
-----------------------------------------------------------------
-virtio, vhost: bugfixes
-
-Fixes in the iommu and balloon devices.
-Disable the meta-data optimization for now - I hope we can get it fixed
-shortly, but there's no point in making users suffer crashes while we
-are working on that.
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-
-----------------------------------------------------------------
-Jean-Philippe Brucker (1):
-      iommu/virtio: Update to most recent specification
-
-Michael S. Tsirkin (2):
-      balloon: fix up comments
-      vhost: disable metadata prefetch optimization
-
-Wei Wang (1):
-      mm/balloon_compaction: avoid duplicate page removal
-
- drivers/iommu/virtio-iommu.c      | 40 ++++++++++++++++-------
- drivers/vhost/vhost.h             |  2 +-
- include/uapi/linux/virtio_iommu.h | 32 ++++++++++--------
- mm/balloon_compaction.c           | 69 +++++++++++++++++++++++----------------
- 4 files changed, 89 insertions(+), 54 deletions(-)
+Thanks,
+Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
