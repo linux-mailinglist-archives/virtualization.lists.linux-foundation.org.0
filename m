@@ -2,70 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AFB4794DC
-	for <lists.virtualization@lfdr.de>; Mon, 29 Jul 2019 21:37:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCEF479A8A
+	for <lists.virtualization@lfdr.de>; Mon, 29 Jul 2019 23:02:23 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D7D3D1DD5;
-	Mon, 29 Jul 2019 19:37:16 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7FA482168;
+	Mon, 29 Jul 2019 21:02:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 75126173F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3B8F01EA6
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 29 Jul 2019 19:33:58 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-vs1-f65.google.com (mail-vs1-f65.google.com
-	[209.85.217.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D183B604
+	Mon, 29 Jul 2019 20:57:39 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DC576604
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 29 Jul 2019 19:33:57 +0000 (UTC)
-Received: by mail-vs1-f65.google.com with SMTP id u3so41725117vsh.6
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 29 Jul 2019 12:33:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=APfgCVofNAxTgIpWJJctDNySOFsZWXGHU5vcxTekT1w=;
-	b=NUCxD1mJOYaRo7cxgvJj9aO+AhR7u3VzZkCQnULMyiuPz/dx9a0+uI1Gcbf3XUJ4gt
-	22O5Oct1fxsPVWRIs3ll/eezDDYjDCW4qLt85ms7b+pRcs2W/tVRBrnYrf6esszrdSpS
-	klMB7cqT50S8ppSI6Y7L83RoNoTSiPojhG3h0ocEjEj4t/woy7ViFQdr5zAgSPKLpTy5
-	WfFUxTXDLmrDgT789hUUoyQcvyutDO6bJHSu88EdEsUX5g8GEA5tOk3GFrrw0x647Ryq
-	rHAidEL7Q1ut4fYZ04TMPETJ7ep43TSgxDDbVtR+kRTzR3G6Kb85LTgFQanEU20r+kV+
-	ManQ==
-X-Gm-Message-State: APjAAAWlrfPZqpdDwxV/oBYNOVwIbS1WKVvnyLxeTayUllE1jiCLExDz
-	ZyvKDubtUKonfJhErSMC/kWgAg==
-X-Google-Smtp-Source: APXvYqzRLP/c6oL54wDBJQuKWm3Ku8BrREq1OSA8ge6Iw1WLkwaDnlWWbhuSQBXPE/VnBAgrAnjwqw==
-X-Received: by 2002:a67:f518:: with SMTP id u24mr26227759vsn.87.1564428837005; 
-	Mon, 29 Jul 2019 12:33:57 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
-	by smtp.gmail.com with ESMTPSA id
-	u27sm12353175vkk.53.2019.07.29.12.33.53
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Mon, 29 Jul 2019 12:33:56 -0700 (PDT)
-Date: Mon, 29 Jul 2019 15:33:49 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-Subject: Re: [PATCH v4 1/5] vsock/virtio: limit the memory used per-socket
-Message-ID: <20190729152634-mutt-send-email-mst@kernel.org>
-References: <20190717113030.163499-1-sgarzare@redhat.com>
-	<20190717113030.163499-2-sgarzare@redhat.com>
-	<20190729095956-mutt-send-email-mst@kernel.org>
-	<20190729153656.zk4q4rob5oi6iq7l@steredhat>
-	<20190729115904-mutt-send-email-mst@kernel.org>
-	<CAGxU2F5F1KcaFNJ6n7++ApZiYMGnoEWKVRgo3Vc4h5hpxSJEZg@mail.gmail.com>
+	Mon, 29 Jul 2019 20:57:38 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+	[10.5.11.16])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 40047C060204;
+	Mon, 29 Jul 2019 20:57:37 +0000 (UTC)
+Received: from redhat.com (ovpn-112-31.rdu2.redhat.com [10.10.112.31])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 1D8C65C219;
+	Mon, 29 Jul 2019 20:57:24 +0000 (UTC)
+Date: Mon, 29 Jul 2019 16:57:21 -0400
+From: Jerome Glisse <jglisse@redhat.com>
+To: Christoph Hellwig <hch@infradead.org>
+Subject: Re: [PATCH 03/12] block: bio_release_pages: use flags arg instead of
+	bool
+Message-ID: <20190729205721.GB3760@redhat.com>
+References: <20190724042518.14363-1-jhubbard@nvidia.com>
+	<20190724042518.14363-4-jhubbard@nvidia.com>
+	<20190724053053.GA18330@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAGxU2F5F1KcaFNJ6n7++ApZiYMGnoEWKVRgo3Vc4h5hpxSJEZg@mail.gmail.com>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <20190724053053.GA18330@infradead.org>
+User-Agent: Mutt/1.12.0 (2019-05-25)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.32]);
+	Mon, 29 Jul 2019 20:57:38 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Christoph Hellwig <hch@lst.de>, linux-cifs@vger.kernel.org,
+	Miklos Szeredi <miklos@szeredi.hu>, linux-rdma@vger.kernel.org,
+	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Minwoo Im <minwoo.im.dev@gmail.com>, v9fs-developer@lists.sourceforge.net,
+	Eric Van Hensbergen <ericvh@gmail.com>,
+	John Hubbard <jhubbard@nvidia.com>, john.hubbard@gmail.com,
+	linux-block@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>,
+	ceph-devel@vger.kernel.org,
+	Trond Myklebust <trond.myklebust@hammerspace.com>,
+	Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
+	netdev@vger.kernel.org, samba-technical@lists.samba.org,
+	LKML <linux-kernel@vger.kernel.org>,
+	"David S . Miller" <davem@davemloft.net>, linux-fsdevel@vger.kernel.org,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Anna Schumaker <anna.schumaker@netapp.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,88 +77,37 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Jul 29, 2019 at 06:41:27PM +0200, Stefano Garzarella wrote:
-> On Mon, Jul 29, 2019 at 12:01:37PM -0400, Michael S. Tsirkin wrote:
-> > On Mon, Jul 29, 2019 at 05:36:56PM +0200, Stefano Garzarella wrote:
-> > > On Mon, Jul 29, 2019 at 10:04:29AM -0400, Michael S. Tsirkin wrote:
-> > > > On Wed, Jul 17, 2019 at 01:30:26PM +0200, Stefano Garzarella wrote:
-> > > > > Since virtio-vsock was introduced, the buffers filled by the host
-> > > > > and pushed to the guest using the vring, are directly queued in
-> > > > > a per-socket list. These buffers are preallocated by the guest
-> > > > > with a fixed size (4 KB).
-> > > > >
-> > > > > The maximum amount of memory used by each socket should be
-> > > > > controlled by the credit mechanism.
-> > > > > The default credit available per-socket is 256 KB, but if we use
-> > > > > only 1 byte per packet, the guest can queue up to 262144 of 4 KB
-> > > > > buffers, using up to 1 GB of memory per-socket. In addition, the
-> > > > > guest will continue to fill the vring with new 4 KB free buffers
-> > > > > to avoid starvation of other sockets.
-> > > > >
-> > > > > This patch mitigates this issue copying the payload of small
-> > > > > packets (< 128 bytes) into the buffer of last packet queued, in
-> > > > > order to avoid wasting memory.
-> > > > >
-> > > > > Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
-> > > > > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
-> > > >
-> > > > This is good enough for net-next, but for net I think we
-> > > > should figure out how to address the issue completely.
-> > > > Can we make the accounting precise? What happens to
-> > > > performance if we do?
-> > > >
-> > >
-> > > In order to do more precise accounting maybe we can use the buffer size,
-> > > instead of payload size when we update the credit available.
-> > > In this way, the credit available for each socket will reflect the memory
-> > > actually used.
-> > >
-> > > I should check better, because I'm not sure what happen if the peer sees
-> > > 1KB of space available, then it sends 1KB of payload (using a 4KB
-> > > buffer).
-> > > The other option is to copy each packet in a new buffer like I did in
-> > > the v2 [2], but this forces us to make a copy for each packet that does
-> > > not fill the entire buffer, perhaps too expensive.
-> > >
-> > > [2] https://patchwork.kernel.org/patch/10938741/
-> > >
-> >
-> > So one thing we can easily do is to under-report the
-> > available credit. E.g. if we copy up to 256bytes,
-> > then report just 256bytes for every buffer in the queue.
-> >
-> 
-> Ehm sorry, I got lost :(
-> Can you explain better?
-> 
-> 
-> Thanks,
-> Stefano
+On Tue, Jul 23, 2019 at 10:30:53PM -0700, Christoph Hellwig wrote:
+> On Tue, Jul 23, 2019 at 09:25:09PM -0700, john.hubbard@gmail.com wrote:
+> > From: John Hubbard <jhubbard@nvidia.com>
+> > =
 
-I think I suggested a better idea more recently.
-But to clarify this option: we are adding a 4K buffer.
-Let's say we know we will always copy 128 bytes.
+> > In commit d241a95f3514 ("block: optionally mark pages dirty in
+> > bio_release_pages"), new "bool mark_dirty" argument was added to
+> > bio_release_pages.
+> > =
 
-So we just tell remote we have 128.
-If we add another 4K buffer we add another 128 credits.
+> > In upcoming work, another bool argument (to indicate that the pages came
+> > from get_user_pages) is going to be added. That's one bool too many,
+> > because it's not desirable have calls of the form:
+> =
 
-So we are charging local socket 16x more (4k for a 128 byte packet) but
-we are paying remote 16x less (128 credits for 4k byte buffer). It evens
-out.
+> All pages releases by bio_release_pages should come from
+> get_get_user_pages, so I don't really see the point here.
 
-Way less credits to go around so I'm not sure it's a good idea,
-at least as the only solution. Can be combined with other
-optimizations and probably in a less drastic fashion
-(e.g. 2x rather than 16x).
+No they do not all comes from GUP for see various callers
+of bio_check_pages_dirty() for instance iomap_dio_zero()
 
+I have carefully tracked down all this and i did not do
+anyconvertion just for the fun of it :)
 
--- 
-MST
+Cheers,
+J=E9r=F4me
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
