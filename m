@@ -2,63 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED0D57A4F6
-	for <lists.virtualization@lfdr.de>; Tue, 30 Jul 2019 11:45:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D93D87A5A0
+	for <lists.virtualization@lfdr.de>; Tue, 30 Jul 2019 12:09:36 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 34BD62608;
-	Tue, 30 Jul 2019 09:45:14 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id B648A261C;
+	Tue, 30 Jul 2019 10:09:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5B8FF25F5
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8B9EF2519
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 09:40:18 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 07D98D3
+	Tue, 30 Jul 2019 10:03:34 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 44639D3
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 09:40:17 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id c2so61788342wrm.8
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 02:40:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=fQg1192WhNDyv6FjBGie6urrqGv9zjrLIH2bCUp56uc=;
-	b=OzaTyYLwlDAzU0QQgLVY7Jwuz4FoB7tNA8XQmUMXUEG69ERIqbLMLgBQ2rXLzsXwbX
-	DqaAJ5Lmxu1nfiRhkYKxLsSeBtQm2uUoHF+I9nIeN9oQRaOZGEUZBOxhAlTtzg4AVOpG
-	3T9BnpTQ6HmRJix4SV4izP88+Wp05XEDPwLN/HUW2HT/3iMMxR5zdSImhTeTRpVQVQoV
-	53SMli8ZPyGp+85Dx+lHwGgC3NFNDINw0DX+o/zdUY1wxVu2OI1uRms3oXLIKSkLpD9t
-	xUp2wv66uVnjiFmuoVl6wlnqQXmjkVG7dBtt78zu8/JfOKwU3AkO7aoNF0T6/Stsa021
-	IcLg==
-X-Gm-Message-State: APjAAAVSwcH3P8uiH1WFZZsM/R9Iv+GlgGhWBjUdM3jT/qS4kL3Fc0N3
-	zbbmCtOKV1WwOwo+57mgzFglkRArVKU=
-X-Google-Smtp-Source: APXvYqwQrJXSgJVI83eo1dkA3KRV/8pRzTuIDgoLCeF0kh3lvGAFxSVFdhlDZkRo9pud0n2msXMp9A==
-X-Received: by 2002:a5d:50d1:: with SMTP id f17mr72705216wrt.124.1564479615723;
-	Tue, 30 Jul 2019 02:40:15 -0700 (PDT)
-Received: from steredhat (host122-201-dynamic.13-79-r.retail.telecomitalia.it.
-	[79.13.201.122]) by smtp.gmail.com with ESMTPSA id
-	r12sm77203676wrt.95.2019.07.30.02.40.14
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 30 Jul 2019 02:40:15 -0700 (PDT)
-Date: Tue, 30 Jul 2019 11:40:13 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+	Tue, 30 Jul 2019 10:03:34 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 6F9598112E;
+	Tue, 30 Jul 2019 10:03:33 +0000 (UTC)
+Received: from [10.72.12.185] (ovpn-12-185.pek2.redhat.com [10.72.12.185])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id C603C19C6A;
+	Tue, 30 Jul 2019 10:03:25 +0000 (UTC)
 Subject: Re: [PATCH v4 0/5] vsock/virtio: optimizations to increase the
 	throughput
-Message-ID: <20190730094013.ruqjllqrjmkdnh5y@steredhat>
+To: Stefano Garzarella <sgarzare@redhat.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi
+	<stefanha@redhat.com>, "David S. Miller" <davem@davemloft.net>
 References: <20190717113030.163499-1-sgarzare@redhat.com>
 	<20190729095743-mutt-send-email-mst@kernel.org>
+	<20190730094013.ruqjllqrjmkdnh5y@steredhat>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <fc568e3d-7af5-5895-89e8-32e35b0f9af4@redhat.com>
+Date: Tue, 30 Jul 2019 18:03:24 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190729095743-mutt-send-email-mst@kernel.org>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <20190730094013.ruqjllqrjmkdnh5y@steredhat>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.28]);
+	Tue, 30 Jul 2019 10:03:33 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
@@ -75,34 +65,25 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Jul 29, 2019 at 09:59:23AM -0400, Michael S. Tsirkin wrote:
-> On Wed, Jul 17, 2019 at 01:30:25PM +0200, Stefano Garzarella wrote:
-> > This series tries to increase the throughput of virtio-vsock with slight
-> > changes.
-> > While I was testing the v2 of this series I discovered an huge use of memory,
-> > so I added patch 1 to mitigate this issue. I put it in this series in order
-> > to better track the performance trends.
-> 
-> Series:
-> 
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> 
-> Can this go into net-next?
-> 
-
-I think so.
-Michael, Stefan thanks to ack the series!
-
-Should I resend it with net-next tag?
-
-Thanks,
-Stefano
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvNy8zMCDkuIvljYg1OjQwLCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6Cj4gT24g
+TW9uLCBKdWwgMjksIDIwMTkgYXQgMDk6NTk6MjNBTSAtMDQwMCwgTWljaGFlbCBTLiBUc2lya2lu
+IHdyb3RlOgo+PiBPbiBXZWQsIEp1bCAxNywgMjAxOSBhdCAwMTozMDoyNVBNICswMjAwLCBTdGVm
+YW5vIEdhcnphcmVsbGEgd3JvdGU6Cj4+PiBUaGlzIHNlcmllcyB0cmllcyB0byBpbmNyZWFzZSB0
+aGUgdGhyb3VnaHB1dCBvZiB2aXJ0aW8tdnNvY2sgd2l0aCBzbGlnaHQKPj4+IGNoYW5nZXMuCj4+
+PiBXaGlsZSBJIHdhcyB0ZXN0aW5nIHRoZSB2MiBvZiB0aGlzIHNlcmllcyBJIGRpc2NvdmVyZWQg
+YW4gaHVnZSB1c2Ugb2YgbWVtb3J5LAo+Pj4gc28gSSBhZGRlZCBwYXRjaCAxIHRvIG1pdGlnYXRl
+IHRoaXMgaXNzdWUuIEkgcHV0IGl0IGluIHRoaXMgc2VyaWVzIGluIG9yZGVyCj4+PiB0byBiZXR0
+ZXIgdHJhY2sgdGhlIHBlcmZvcm1hbmNlIHRyZW5kcy4KPj4gU2VyaWVzOgo+Pgo+PiBBY2tlZC1i
+eTogTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNvbT4KPj4KPj4gQ2FuIHRoaXMgZ28g
+aW50byBuZXQtbmV4dD8KPj4KPiBJIHRoaW5rIHNvLgo+IE1pY2hhZWwsIFN0ZWZhbiB0aGFua3Mg
+dG8gYWNrIHRoZSBzZXJpZXMhCj4KPiBTaG91bGQgSSByZXNlbmQgaXQgd2l0aCBuZXQtbmV4dCB0
+YWc/Cj4KPiBUaGFua3MsCj4gU3RlZmFubwoKCkkgdGhpbmsgc28uCgpUaGFua3MKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1h
+aWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRw
+czovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXph
+dGlvbg==
