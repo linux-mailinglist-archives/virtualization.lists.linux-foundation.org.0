@@ -2,69 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id A453A7AD4F
-	for <lists.virtualization@lfdr.de>; Tue, 30 Jul 2019 18:12:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E137D7B157
+	for <lists.virtualization@lfdr.de>; Tue, 30 Jul 2019 20:13:54 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 452BE307D;
-	Tue, 30 Jul 2019 16:12:04 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1BEAD316D;
+	Tue, 30 Jul 2019 18:13:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id AAAB72F4B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 595A32E7D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 16:02:15 +0000 (UTC)
+	Tue, 30 Jul 2019 18:01:53 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B7F1EA8
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C83D6A8
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 16:02:14 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id x1so16470025wrr.9
+	Tue, 30 Jul 2019 18:01:52 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id k189so11413357pgk.13
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 09:02:14 -0700 (PDT)
+	Tue, 30 Jul 2019 11:01:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to;
+	bh=e4oBhvl2JGL/g7znlpJb17wcZ4f4c/GlFLmGamjl13c=;
+	b=fbKhNQxzz82g4sdnAhZ57A0hb0uBcdzsGtvJIewH6J8HFiWd4v1DbjhZme3+FPpHN+
+	CgVrRWW5s0YuozJII/YB+2NZ5r573QGkU38HNUz7maBvW4CAJRPZpo9gRRMOu66NfgT1
+	4s1JAmGCs8uLjMqep+2ShT7MpdeLsB0l8QKaU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=V6Pf8h9wHTibuyyCP6HPV1Sh16lg6oXtd3546eqyiTY=;
-	b=WbfB5hekRh03Fex0ePTj8JG1zR0L7o5OrvexY11WvX0qEAjZx70tRcSS1SU1Dc62Ut
-	g1IVFbo4rmGUci8px491StVtOp+F5lx27gm5XmzKSx0N2O6o0OZnTYcdCI/Ck5xRsSHi
-	mzvFmSwi2W2CmrK20W+8pTVH+xTPWd5pk/e3EqCf3+f37EoNcP9mn6ud7g4ggeBB+lGg
-	XwlR3jUd+OcTSQh9cUWE6+VGfRTm5cz9ZO9r5iSKxCVQquKKpd5I7EW8Ejbvn6lZ8s63
-	8punfRUQi2RVECualDnzyBuDU4Wwhs8YGgPuaA6q99qYx/XWuIiwHzk7wtHcJFyWZ9Mn
-	l5hg==
-X-Gm-Message-State: APjAAAWKv//N23yWqnEKoK1+LhwuqPh0JSHz/F7vLHzKY/ljSfYnbEnU
-	5uVqZnANG8SzD6CkznmmOsJykw==
-X-Google-Smtp-Source: APXvYqx5xyKhNualkS1CVTfw1inkEk+M052ZGUWr39WSwunkma9AVrnPdyiLmtq9+gvnaBNOXudMMQ==
-X-Received: by 2002:adf:e947:: with SMTP id m7mr67344862wrn.123.1564502533191; 
-	Tue, 30 Jul 2019 09:02:13 -0700 (PDT)
-Received: from steredhat (host122-201-dynamic.13-79-r.retail.telecomitalia.it.
-	[79.13.201.122]) by smtp.gmail.com with ESMTPSA id
-	n14sm124735032wra.75.2019.07.30.09.02.11
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 30 Jul 2019 09:02:12 -0700 (PDT)
-Date: Tue, 30 Jul 2019 18:02:09 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH net-next v5 0/5] vsock/virtio: optimizations to increase
-	the throughput
-Message-ID: <20190730160209.hu7kzdzrd22mklow@steredhat>
-References: <20190730154334.237789-1-sgarzare@redhat.com>
-	<20190730115339-mutt-send-email-mst@kernel.org>
-	<20190730115503-mutt-send-email-mst@kernel.org>
+	:mime-version:content-disposition:in-reply-to;
+	bh=e4oBhvl2JGL/g7znlpJb17wcZ4f4c/GlFLmGamjl13c=;
+	b=kWijdAhcOAPtmSl7jb9UQbDzw9i6s74P6O8oGevic4ZerUa/UxApUiwtY0Hw0GIpG5
+	WYT1hGTwcZSdoVNE0k6uLVgIcexcebpg31VIxSt66oJLj4VxPxosXva1Z9sMmiSGR5AU
+	+Bf8cq+NSiZPTEEAfT4N9OnHhzWvEMpjr/9+zSl4Y/xVAxVXZxDSyRPznXd1TCg5rGJM
+	qPp8zcaqbgvr8jN+fESXI4oABy0VciO7w2c6NAy0+earPYti/liqu7GKWKT5kw9IVUZS
+	YqbOBT08PaSn2pLq9EZXl0CPQJJ2lFwFole9rUCnNYrAMgfCrAY7Vehos4RO0jCkuGuG
+	PwXg==
+X-Gm-Message-State: APjAAAW4tBORA45pztym6BVl6AaT7G+0ADZnZnyLVor2ru45f6dwPyZp
+	yetC24ds8Uj0t/ZF4imVaXTzRQ==
+X-Google-Smtp-Source: APXvYqxjt+I4v/sdEnywIDMFxpX9dhohJ2h/xcn+2r0A6Nitb41VcNHFgzjYokT3yWbk7qgmF27dvQ==
+X-Received: by 2002:a17:90a:cb12:: with SMTP id
+	z18mr112668727pjt.82.1564509712356; 
+	Tue, 30 Jul 2019 11:01:52 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+	by smtp.gmail.com with ESMTPSA id c7sm7783391pgq.31.2019.07.30.11.01.51
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 30 Jul 2019 11:01:51 -0700 (PDT)
+Date: Tue, 30 Jul 2019 11:01:50 -0700
+From: Kees Cook <keescook@chromium.org>
+To: Thomas Gleixner <tglx@linutronix.de>
+Subject: Re: [PATCH v8 00/11] x86: PIE support to extend KASLR randomization
+Message-ID: <201907301100.90BB865078@keescook>
+References: <20190708174913.123308-1-thgarnie@chromium.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190730115503-mutt-send-email-mst@kernel.org>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+In-Reply-To: <20190708174913.123308-1-thgarnie@chromium.org>
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: Feng Tang <feng.tang@intel.com>, kristen@linux.intel.com,
+	kernel-hardening@lists.openwall.com, Peter Zijlstra <peterz@infradead.org>,
 	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+	Thomas Garnier <thgarnie@chromium.org>,
+	Pavel Machek <pavel@ucw.cz>, "H. Peter Anvin" <hpa@zytor.com>,
+	Alok Kataria <akataria@vmware.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>, x86@kernel.org,
+	Ingo Molnar <mingo@redhat.com>, Len Brown <len.brown@intel.com>,
+	Jann Horn <jannh@google.com>, Alexios Zavras <alexios.zavras@intel.com>,
+	Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>, Maran Wilson <maran.wilson@oracle.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-pm@vger.kernel.org,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	linux-kernel@vger.kernel.org, linux-crypto@vger.kernel.org,
+	Nadav Amit <namit@vmware.com>, Andrew Morton <akpm@linux-foundation.org>,
+	Enrico Weigelt <info@metux.net>, "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -81,154 +98,117 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Jul 30, 2019 at 11:55:09AM -0400, Michael S. Tsirkin wrote:
-> On Tue, Jul 30, 2019 at 11:54:53AM -0400, Michael S. Tsirkin wrote:
-> > On Tue, Jul 30, 2019 at 05:43:29PM +0200, Stefano Garzarella wrote:
-> > > This series tries to increase the throughput of virtio-vsock with slight
-> > > changes.
-> > > While I was testing the v2 of this series I discovered an huge use of memory,
-> > > so I added patch 1 to mitigate this issue. I put it in this series in order
-> > > to better track the performance trends.
-> > > 
-> > > v5:
-> > > - rebased all patches on net-next
-> > > - added Stefan's R-b and Michael's A-b
-> > 
-> > This doesn't solve all issues around allocation - as I mentioned I think
-> > we will need to improve accounting for that,
-> > and maybe add pre-allocation.
+On Mon, Jul 08, 2019 at 10:48:53AM -0700, Thomas Garnier wrote:
+> Splitting the previous series in two. This part contains assembly code
+> changes required for PIE but without any direct dependencies with the
+> rest of the patchset.
+> 
+> Changes:
+>  - patch v8 (assembly):
+>    - Fix issues in crypto changes (thanks to Eric Biggers).
+>    - Remove unnecessary jump table change.
+>    - Change author and signoff to chromium email address.
 
-Yes, I'll work on it following your suggestions.
+With -rc2 done, is this a good time for this to land in -tip? Are there
+more steps needed for review?
 
-> > But it's a great series of steps in the right direction!
-> > 
+Thanks!
 
-Thank you very much :)
-Stefano
+-Kees
 
+>  - patch v7 (assembly):
+>    - Split patchset and reorder changes.
+>  - patch v6:
+>    - Rebase on latest changes in jump tables and crypto.
+>    - Fix wording on couple commits.
+>    - Revisit checkpatch warnings.
+>    - Moving to @chromium.org.
+>  - patch v5:
+>    - Adapt new crypto modules for PIE.
+>    - Improve per-cpu commit message.
+>    - Fix xen 32-bit build error with .quad.
+>    - Remove extra code for ftrace.
+>  - patch v4:
+>    - Simplify early boot by removing global variables.
+>    - Modify the mcount location script for __mcount_loc intead of the address
+>      read in the ftrace implementation.
+>    - Edit commit description to explain better where the kernel can be located.
+>    - Streamlined the testing done on each patch proposal. Always testing
+>      hibernation, suspend, ftrace and kprobe to ensure no regressions.
+>  - patch v3:
+>    - Update on message to describe longer term PIE goal.
+>    - Minor change on ftrace if condition.
+>    - Changed code using xchgq.
+>  - patch v2:
+>    - Adapt patch to work post KPTI and compiler changes
+>    - Redo all performance testing with latest configs and compilers
+>    - Simplify mov macro on PIE (MOVABS now)
+>    - Reduce GOT footprint
+>  - patch v1:
+>    - Simplify ftrace implementation.
+>    - Use gcc mstack-protector-guard-reg=%gs with PIE when possible.
+>  - rfc v3:
+>    - Use --emit-relocs instead of -pie to reduce dynamic relocation space on
+>      mapped memory. It also simplifies the relocation process.
+>    - Move the start the module section next to the kernel. Remove the need for
+>      -mcmodel=large on modules. Extends module space from 1 to 2G maximum.
+>    - Support for XEN PVH as 32-bit relocations can be ignored with
+>      --emit-relocs.
+>    - Support for GOT relocations previously done automatically with -pie.
+>    - Remove need for dynamic PLT in modules.
+>    - Support dymamic GOT for modules.
+>  - rfc v2:
+>    - Add support for global stack cookie while compiler default to fs without
+>      mcmodel=kernel
+>    - Change patch 7 to correctly jump out of the identity mapping on kexec load
+>      preserve.
+> 
+> These patches make some of the changes necessary to build the kernel as
+> Position Independent Executable (PIE) on x86_64. Another patchset will
+> add the PIE option and larger architecture changes.
+> 
+> The patches:
+>  - 1, 3-11: Change in assembly code to be PIE compliant.
+>  - 2: Add a new _ASM_MOVABS macro to fetch a symbol address generically.
+> 
+> diffstat:
+>  crypto/aegis128-aesni-asm.S         |    6 +-
+>  crypto/aegis128l-aesni-asm.S        |    8 +--
+>  crypto/aegis256-aesni-asm.S         |    6 +-
+>  crypto/aes-x86_64-asm_64.S          |   45 ++++++++++------
+>  crypto/aesni-intel_asm.S            |    8 +--
+>  crypto/aesni-intel_avx-x86_64.S     |    3 -
+>  crypto/camellia-aesni-avx-asm_64.S  |   42 +++++++--------
+>  crypto/camellia-aesni-avx2-asm_64.S |   44 ++++++++--------
+>  crypto/camellia-x86_64-asm_64.S     |    8 +--
+>  crypto/cast5-avx-x86_64-asm_64.S    |   50 ++++++++++--------
+>  crypto/cast6-avx-x86_64-asm_64.S    |   44 +++++++++-------
+>  crypto/des3_ede-asm_64.S            |   96 ++++++++++++++++++++++++------------
+>  crypto/ghash-clmulni-intel_asm.S    |    4 -
+>  crypto/glue_helper-asm-avx.S        |    4 -
+>  crypto/glue_helper-asm-avx2.S       |    6 +-
+>  crypto/morus1280-avx2-asm.S         |    4 -
+>  crypto/morus1280-sse2-asm.S         |    8 +--
+>  crypto/morus640-sse2-asm.S          |    6 +-
+>  crypto/sha256-avx2-asm.S            |   18 ++++--
+>  entry/entry_64.S                    |   16 ++++--
+>  include/asm/alternative.h           |    6 +-
+>  include/asm/asm.h                   |    1 
+>  include/asm/paravirt_types.h        |   25 +++++++--
+>  include/asm/pm-trace.h              |    2 
+>  include/asm/processor.h             |    6 +-
+>  kernel/acpi/wakeup_64.S             |   31 ++++++-----
+>  kernel/head_64.S                    |   16 +++---
+>  kernel/relocate_kernel_64.S         |    2 
+>  power/hibernate_asm_64.S            |    4 -
+>  29 files changed, 306 insertions(+), 213 deletions(-)
+> 
+> Patchset is based on next-20190708.
 > 
 > 
-> So
-> 
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> 
-> > 
-> > > v4: https://patchwork.kernel.org/cover/11047717
-> > > v3: https://patchwork.kernel.org/cover/10970145
-> > > v2: https://patchwork.kernel.org/cover/10938743
-> > > v1: https://patchwork.kernel.org/cover/10885431
-> > > 
-> > > Below are the benchmarks step by step. I used iperf3 [1] modified with VSOCK
-> > > support. As Michael suggested in the v1, I booted host and guest with 'nosmap'.
-> > > 
-> > > A brief description of patches:
-> > > - Patches 1:   limit the memory usage with an extra copy for small packets
-> > > - Patches 2+3: reduce the number of credit update messages sent to the
-> > >                transmitter
-> > > - Patches 4+5: allow the host to split packets on multiple buffers and use
-> > >                VIRTIO_VSOCK_MAX_PKT_BUF_SIZE as the max packet size allowed
-> > > 
-> > >                     host -> guest [Gbps]
-> > > pkt_size before opt   p 1     p 2+3    p 4+5
-> > > 
-> > > 32         0.032     0.030    0.048    0.051
-> > > 64         0.061     0.059    0.108    0.117
-> > > 128        0.122     0.112    0.227    0.234
-> > > 256        0.244     0.241    0.418    0.415
-> > > 512        0.459     0.466    0.847    0.865
-> > > 1K         0.927     0.919    1.657    1.641
-> > > 2K         1.884     1.813    3.262    3.269
-> > > 4K         3.378     3.326    6.044    6.195
-> > > 8K         5.637     5.676   10.141   11.287
-> > > 16K        8.250     8.402   15.976   16.736
-> > > 32K       13.327    13.204   19.013   20.515
-> > > 64K       21.241    21.341   20.973   21.879
-> > > 128K      21.851    22.354   21.816   23.203
-> > > 256K      21.408    21.693   21.846   24.088
-> > > 512K      21.600    21.899   21.921   24.106
-> > > 
-> > >                     guest -> host [Gbps]
-> > > pkt_size before opt   p 1     p 2+3    p 4+5
-> > > 
-> > > 32         0.045     0.046    0.057    0.057
-> > > 64         0.089     0.091    0.103    0.104
-> > > 128        0.170     0.179    0.192    0.200
-> > > 256        0.364     0.351    0.361    0.379
-> > > 512        0.709     0.699    0.731    0.790
-> > > 1K         1.399     1.407    1.395    1.427
-> > > 2K         2.670     2.684    2.745    2.835
-> > > 4K         5.171     5.199    5.305    5.451
-> > > 8K         8.442     8.500   10.083    9.941
-> > > 16K       12.305    12.259   13.519   15.385
-> > > 32K       11.418    11.150   11.988   24.680
-> > > 64K       10.778    10.659   11.589   35.273
-> > > 128K      10.421    10.339   10.939   40.338
-> > > 256K      10.300     9.719   10.508   36.562
-> > > 512K       9.833     9.808   10.612   35.979
-> > > 
-> > > As Stefan suggested in the v1, I measured also the efficiency in this way:
-> > >     efficiency = Mbps / (%CPU_Host + %CPU_Guest)
-> > > 
-> > > The '%CPU_Guest' is taken inside the VM. I know that it is not the best way,
-> > > but it's provided for free from iperf3 and could be an indication.
-> > > 
-> > >         host -> guest efficiency [Mbps / (%CPU_Host + %CPU_Guest)]
-> > > pkt_size before opt   p 1     p 2+3    p 4+5
-> > > 
-> > > 32         0.35      0.45     0.79     1.02
-> > > 64         0.56      0.80     1.41     1.54
-> > > 128        1.11      1.52     3.03     3.12
-> > > 256        2.20      2.16     5.44     5.58
-> > > 512        4.17      4.18    10.96    11.46
-> > > 1K         8.30      8.26    20.99    20.89
-> > > 2K        16.82     16.31    39.76    39.73
-> > > 4K        30.89     30.79    74.07    75.73
-> > > 8K        53.74     54.49   124.24   148.91
-> > > 16K       80.68     83.63   200.21   232.79
-> > > 32K      132.27    132.52   260.81   357.07
-> > > 64K      229.82    230.40   300.19   444.18
-> > > 128K     332.60    329.78   331.51   492.28
-> > > 256K     331.06    337.22   339.59   511.59
-> > > 512K     335.58    328.50   331.56   504.56
-> > > 
-> > >         guest -> host efficiency [Mbps / (%CPU_Host + %CPU_Guest)]
-> > > pkt_size before opt   p 1     p 2+3    p 4+5
-> > > 
-> > > 32         0.43      0.43     0.53     0.56
-> > > 64         0.85      0.86     1.04     1.10
-> > > 128        1.63      1.71     2.07     2.13
-> > > 256        3.48      3.35     4.02     4.22
-> > > 512        6.80      6.67     7.97     8.63
-> > > 1K        13.32     13.31    15.72    15.94
-> > > 2K        25.79     25.92    30.84    30.98
-> > > 4K        50.37     50.48    58.79    59.69
-> > > 8K        95.90     96.15   107.04   110.33
-> > > 16K      145.80    145.43   143.97   174.70
-> > > 32K      147.06    144.74   146.02   282.48
-> > > 64K      145.25    143.99   141.62   406.40
-> > > 128K     149.34    146.96   147.49   489.34
-> > > 256K     156.35    149.81   152.21   536.37
-> > > 512K     151.65    150.74   151.52   519.93
-> > > 
-> > > [1] https://github.com/stefano-garzarella/iperf/
-> > > 
-> > > Stefano Garzarella (5):
-> > >   vsock/virtio: limit the memory used per-socket
-> > >   vsock/virtio: reduce credit update messages
-> > >   vsock/virtio: fix locking in virtio_transport_inc_tx_pkt()
-> > >   vhost/vsock: split packets to send using multiple buffers
-> > >   vsock/virtio: change the maximum packet size allowed
-> > > 
-> > >  drivers/vhost/vsock.c                   | 68 ++++++++++++-----
-> > >  include/linux/virtio_vsock.h            |  4 +-
-> > >  net/vmw_vsock/virtio_transport.c        |  1 +
-> > >  net/vmw_vsock/virtio_transport_common.c | 99 ++++++++++++++++++++-----
-> > >  4 files changed, 134 insertions(+), 38 deletions(-)
-> > > 
-> > > -- 
-> > > 2.20.1
 
 -- 
+Kees Cook
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
