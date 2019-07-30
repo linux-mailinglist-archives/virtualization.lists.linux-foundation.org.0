@@ -2,84 +2,77 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16A267B333
-	for <lists.virtualization@lfdr.de>; Tue, 30 Jul 2019 21:25:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ACAD7B334
+	for <lists.virtualization@lfdr.de>; Tue, 30 Jul 2019 21:25:32 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3A5DF3300;
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 72AFA3303;
 	Tue, 30 Jul 2019 19:24:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 88D053276
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 112833276
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 19:13:09 +0000 (UTC)
+	Tue, 30 Jul 2019 19:13:25 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 125B1A8
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AF8A3A8
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 19:13:09 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id t132so30541671pgb.9
+	Tue, 30 Jul 2019 19:13:24 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id f20so21322526pgj.0
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 12:13:09 -0700 (PDT)
+	Tue, 30 Jul 2019 12:13:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=PQpQB1xhGd1BWNwCOVPVq65dOaaamVfa0p9XxE9K8UE=;
-	b=UeEkx54frGpuY2a5hI6uujVV6CP+NOOrqZjevpUoKoJ93cmYNk/k3rMiq3AadGoCKK
-	4u7ZW5L9P5D/w1F6ZopTCab2PdKgv5sovzVTiDlesGwqHNwk1iQ59Z1CIqJUVPimrjCH
-	2d2E01pLBsNwq9CrfIuERHJQKh4JgFunTybsQ=
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=4p7Yl4EvALrNapOIPblFQ4RqIFxBJYtmcwuhdJ36a4M=;
+	b=gqg94NNJOdf9cHSR+XH6US+L0jKiqTwG0Xmx1oLuP1Hhp+nDgjGFTPn60im+Ecit12
+	y/IVI2h60aZld1+y9XWSydA3vMe0xeJM9dR6rAMy+Kp7VanoIic5nQjtZLeRn6MaGJms
+	8PRL5H4oh61RS+rUbxcD5n83K03BRRSwK4xJY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=PQpQB1xhGd1BWNwCOVPVq65dOaaamVfa0p9XxE9K8UE=;
-	b=GzUWfD9PSd395z5nUTkNCAPJkiMUabaVfOd/bSCDDJE75mbBI4RXudrBhdfM0IfRiX
-	qGS2WVhrn9ou4O/8mKFrKNSMktmB6gSv2/r4KEhq01quP+wqQQ0vWIiNaAa7+FP/YCs8
-	2AyZVeaDj6X3jwNUWO27rvpAYcR40UuRtPgozqTlkB3cZfH7Oxwslb0znTROAcqQsCGc
-	yhWz2Srjzlsks0S9XIamipe4AyKkk8umoEYuHCmjD7bX3udMLruDWtrBexc7X87Vp+Uk
-	V4XhRaU+smrRJy79W+wDvxuW2ATaz29pkkXAH9/wP8E1++fDorpaWXBffo0jDVRmkLb/
-	et1Q==
-X-Gm-Message-State: APjAAAWCnGbOCbMGfINg6VLdb1ONKRw3MxwvMDeEljyl/TA+xo7mHO4B
-	ovN1WyJ+uFmyWV1zSNdRmObGog==
-X-Google-Smtp-Source: APXvYqwcn2k0Dv3q6ck7IZ44pYsx+KVg4rymizIuUGPzamZY74Xu3UwxOdhjJWwI8/DCuTdbmMo2qQ==
-X-Received: by 2002:a63:8a49:: with SMTP id y70mr15370050pgd.271.1564513988658;
-	Tue, 30 Jul 2019 12:13:08 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=4p7Yl4EvALrNapOIPblFQ4RqIFxBJYtmcwuhdJ36a4M=;
+	b=lqThBTUKRnSIUI2sdnJwLQnXZa2aQA4/zhqIKvF3z5Helg1HLWRZGDvSf3XqXBTY+3
+	Q1F8VOf/d7siRyzSj82Gb6xa3EWyP6oVWiLw0/rYmgVYR5JSpnDSeKFm8lE4L/b+d6Rh
+	BneuPD57csObKESQgl/Jkc8kaEKMvM3iBOSaqXuTS5XDqGV43nsfxcrXUp+DDYS6qNWy
+	VF4sRatmOFgpUv+7c9jZBJu1UIG/eFtKdienATdfBlvSgPzqRKk+BnjonvYfREcawJ4k
+	3UHR+SKbc6e9xmlO6BoFsPfa1jHV9USwoDjRiC95ZILl5W3Gwc4mhaOz3GOE8JTF0njD
+	qJvw==
+X-Gm-Message-State: APjAAAUqWm1vhrmSscAlonei4soxInxkI8LAMoVgCMoK/yyxTarUBtLR
+	Jmn5tZs66WCe7a8tLjo67AdVkQ==
+X-Google-Smtp-Source: APXvYqwoE5YtV9czMWqYh5jaOXzzNfppyGGX1LntKX22Zkz6VcJhYSb1VjmmI91pfMMS60cxTSLgPQ==
+X-Received: by 2002:aa7:9407:: with SMTP id x7mr44914613pfo.163.1564514004448; 
+	Tue, 30 Jul 2019 12:13:24 -0700 (PDT)
 Received: from skynet.sea.corp.google.com
 	([2620:0:1008:1100:c4b5:ec23:d87b:d6d3])
 	by smtp.gmail.com with ESMTPSA id
-	n89sm84649540pjc.0.2019.07.30.12.13.07
+	n89sm84649540pjc.0.2019.07.30.12.13.23
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 30 Jul 2019 12:13:08 -0700 (PDT)
+	Tue, 30 Jul 2019 12:13:23 -0700 (PDT)
 From: Thomas Garnier <thgarnie@chromium.org>
 To: kernel-hardening@lists.openwall.com
-Subject: [PATCH v9 00/11] x86: PIE support to extend KASLR randomization
-Date: Tue, 30 Jul 2019 12:12:44 -0700
-Message-Id: <20190730191303.206365-1-thgarnie@chromium.org>
+Subject: [PATCH v9 10/11] x86/paravirt: Adapt assembly for PIE support
+Date: Tue, 30 Jul 2019 12:12:54 -0700
+Message-Id: <20190730191303.206365-11-thgarnie@chromium.org>
 X-Mailer: git-send-email 2.22.0.770.g0f2c4a37fd-goog
+In-Reply-To: <20190730191303.206365-1-thgarnie@chromium.org>
+References: <20190730191303.206365-1-thgarnie@chromium.org>
 MIME-Version: 1.0
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Feng Tang <feng.tang@intel.com>, kristen@linux.intel.com,
-	Thomas Garnier <thgarnie@chromium.org>, "VMware,
-	Inc." <pv-drivers@vmware.com>, virtualization@lists.linux-foundation.org,
-	Nadav Amit <namit@vmware.com>, Pavel Machek <pavel@ucw.cz>,
-	"H. Peter Anvin" <hpa@zytor.com>, Thomas Hellstrom <thellstrom@vmware.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>, x86@kernel.org,
-	Peter Zijlstra <peterz@infradead.org>,
-	Ingo Molnar <mingo@redhat.com>, Len Brown <len.brown@intel.com>,
-	keescook@chromium.org, Jann Horn <jannh@google.com>,
-	Alexios Zavras <alexios.zavras@intel.com>, Borislav Petkov <bp@alien8.de>,
-	Andy Lutomirski <luto@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
-	Allison Randal <allison@lohutok.net>, Juergen Gross <jgross@suse.com>,
-	Maran Wilson <maran.wilson@oracle.com>, linux-pm@vger.kernel.org,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	linux-kernel@vger.kernel.org, linux-crypto@vger.kernel.org,
-	Enrico Weigelt <info@metux.net>, "David S. Miller" <davem@davemloft.net>
+Cc: Juergen Gross <jgross@suse.com>, Thomas Hellstrom <thellstrom@vmware.com>,
+	keescook@chromium.org, Thomas Garnier <thgarnie@chromium.org>,
+	"VMware, Inc." <pv-drivers@vmware.com>, x86@kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	kristen@linux.intel.com, "H. Peter Anvin" <hpa@zytor.com>,
+	Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -96,104 +89,66 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Minor changes based on feedback and rebase from v8.
+if PIE is enabled, switch the paravirt assembly constraints to be
+compatible. The %c/i constrains generate smaller code so is kept by
+default.
 
-Splitting the previous serie in two. This part contains assembly code
-changes required for PIE but without any direct dependencies with the
-rest of the patchset.
+Position Independent Executable (PIE) support will allow to extend the
+KASLR randomization range below 0xffffffff80000000.
 
-Changes:
- - patch v9 (assembly):
-   - Moved to relative reference for sync_core based on feedback.
-   - x86/crypto had multiple algorithms deleted, removed PIE changes to them.
-   - fix typo on comment end line.
- - patch v8 (assembly):
-   - Fix issues in crypto changes (thanks to Eric Biggers).
-   - Remove unnecessary jump table change.
-   - Change author and signoff to chromium email address.
- - patch v7 (assembly):
-   - Split patchset and reorder changes.
- - patch v6:
-   - Rebase on latest changes in jump tables and crypto.
-   - Fix wording on couple commits.
-   - Revisit checkpatch warnings.
-   - Moving to @chromium.org.
- - patch v5:
-   - Adapt new crypto modules for PIE.
-   - Improve per-cpu commit message.
-   - Fix xen 32-bit build error with .quad.
-   - Remove extra code for ftrace.
- - patch v4:
-   - Simplify early boot by removing global variables.
-   - Modify the mcount location script for __mcount_loc intead of the address
-     read in the ftrace implementation.
-   - Edit commit description to explain better where the kernel can be located.
-   - Streamlined the testing done on each patch proposal. Always testing
-     hibernation, suspend, ftrace and kprobe to ensure no regressions.
- - patch v3:
-   - Update on message to describe longer term PIE goal.
-   - Minor change on ftrace if condition.
-   - Changed code using xchgq.
- - patch v2:
-   - Adapt patch to work post KPTI and compiler changes
-   - Redo all performance testing with latest configs and compilers
-   - Simplify mov macro on PIE (MOVABS now)
-   - Reduce GOT footprint
- - patch v1:
-   - Simplify ftrace implementation.
-   - Use gcc mstack-protector-guard-reg=%gs with PIE when possible.
- - rfc v3:
-   - Use --emit-relocs instead of -pie to reduce dynamic relocation space on
-     mapped memory. It also simplifies the relocation process.
-   - Move the start the module section next to the kernel. Remove the need for
-     -mcmodel=large on modules. Extends module space from 1 to 2G maximum.
-   - Support for XEN PVH as 32-bit relocations can be ignored with
-     --emit-relocs.
-   - Support for GOT relocations previously done automatically with -pie.
-   - Remove need for dynamic PLT in modules.
-   - Support dymamic GOT for modules.
- - rfc v2:
-   - Add support for global stack cookie while compiler default to fs without
-     mcmodel=kernel
-   - Change patch 7 to correctly jump out of the identity mapping on kexec load
-     preserve.
+Signed-off-by: Thomas Garnier <thgarnie@chromium.org>
+Acked-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/include/asm/paravirt_types.h | 25 +++++++++++++++++++++----
+ 1 file changed, 21 insertions(+), 4 deletions(-)
 
-These patches make some of the changes necessary to build the kernel as
-Position Independent Executable (PIE) on x86_64. Another patchset will
-add the PIE option and larger architecture changes.
-
-The patches:
- - 1, 3-11: Change in assembly code to be PIE compliant.
- - 2: Add a new _ASM_MOVABS macro to fetch a symbol address generically.
-
-diffstat:
- crypto/aegis128-aesni-asm.S         |    6 +-
- crypto/aesni-intel_asm.S            |    8 +--
- crypto/aesni-intel_avx-x86_64.S     |    3 -
- crypto/camellia-aesni-avx-asm_64.S  |   42 +++++++--------
- crypto/camellia-aesni-avx2-asm_64.S |   44 ++++++++--------
- crypto/camellia-x86_64-asm_64.S     |    8 +--
- crypto/cast5-avx-x86_64-asm_64.S    |   50 ++++++++++--------
- crypto/cast6-avx-x86_64-asm_64.S    |   44 +++++++++-------
- crypto/des3_ede-asm_64.S            |   96 ++++++++++++++++++++++++------------
- crypto/ghash-clmulni-intel_asm.S    |    4 -
- crypto/glue_helper-asm-avx.S        |    4 -
- crypto/glue_helper-asm-avx2.S       |    6 +-
- crypto/sha256-avx2-asm.S            |   18 ++++--
- entry/entry_64.S                    |   16 ++++--
- include/asm/alternative.h           |    6 +-
- include/asm/asm.h                   |    1 
- include/asm/paravirt_types.h        |   25 +++++++--
- include/asm/pm-trace.h              |    2 
- include/asm/processor.h             |    6 +-
- kernel/acpi/wakeup_64.S             |   31 ++++++-----
- kernel/head_64.S                    |   16 +++---
- kernel/relocate_kernel_64.S         |    2 
- power/hibernate_asm_64.S            |    4 -
- 23 files changed, 261 insertions(+), 181 deletions(-)
-
-Patchset is based on next-20190729.
-
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index 70b654f3ffe5..fd7dc37d0010 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -338,9 +338,25 @@ extern struct paravirt_patch_template pv_ops;
+ #define PARAVIRT_PATCH(x)					\
+ 	(offsetof(struct paravirt_patch_template, x) / sizeof(void *))
+ 
++#ifdef CONFIG_X86_PIE
++#define paravirt_opptr_call "a"
++#define paravirt_opptr_type "p"
++
++/*
++ * Alternative patching requires a maximum of 7 bytes but the relative call is
++ * only 6 bytes. If PIE is enabled, add an additional nop to the call
++ * instruction to ensure patching is possible.
++ */
++#define PARAVIRT_CALL_POST  "nop;"
++#else
++#define paravirt_opptr_call "c"
++#define paravirt_opptr_type "i"
++#define PARAVIRT_CALL_POST  ""
++#endif
++
+ #define paravirt_type(op)				\
+ 	[paravirt_typenum] "i" (PARAVIRT_PATCH(op)),	\
+-	[paravirt_opptr] "i" (&(pv_ops.op))
++	[paravirt_opptr] paravirt_opptr_type (&(pv_ops.op))
+ #define paravirt_clobber(clobber)		\
+ 	[paravirt_clobber] "i" (clobber)
+ 
+@@ -379,9 +395,10 @@ int paravirt_disable_iospace(void);
+  * offset into the paravirt_patch_template structure, and can therefore be
+  * freely converted back into a structure offset.
+  */
+-#define PARAVIRT_CALL					\
+-	ANNOTATE_RETPOLINE_SAFE				\
+-	"call *%c[paravirt_opptr];"
++#define PARAVIRT_CALL						\
++	ANNOTATE_RETPOLINE_SAFE					\
++	"call *%" paravirt_opptr_call "[paravirt_opptr];"	\
++	PARAVIRT_CALL_POST
+ 
+ /*
+  * These macros are intended to wrap calls through one of the paravirt
+-- 
+2.22.0.770.g0f2c4a37fd-goog
 
 _______________________________________________
 Virtualization mailing list
