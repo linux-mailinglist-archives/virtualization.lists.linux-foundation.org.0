@@ -2,55 +2,81 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 696E07BE2C
-	for <lists.virtualization@lfdr.de>; Wed, 31 Jul 2019 12:19:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99F5B7C241
+	for <lists.virtualization@lfdr.de>; Wed, 31 Jul 2019 14:52:52 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CAB5C3B5C;
-	Wed, 31 Jul 2019 10:19:50 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 688423BDB;
+	Wed, 31 Jul 2019 12:52:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9E07A2FBD
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0C7A436E5
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 31 Jul 2019 10:06:05 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 39CCDE7
+	Wed, 31 Jul 2019 12:39:41 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 30228A8
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 31 Jul 2019 10:06:05 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id A9BF5285AE;
-	Wed, 31 Jul 2019 10:06:04 +0000 (UTC)
-Received: from [10.72.12.118] (ovpn-12-118.pek2.redhat.com [10.72.12.118])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 906F15C219;
-	Wed, 31 Jul 2019 10:05:59 +0000 (UTC)
-Subject: Re: [PATCH V2 9/9] vhost: do not return -EAGIAN for non blocking
-	invalidation too early
-To: Stefano Garzarella <sgarzare@redhat.com>
+	Wed, 31 Jul 2019 12:39:38 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id s145so49057445qke.7
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 31 Jul 2019 05:39:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=ntHuD78E1C49ZvRvAJ6XgDuP1G4iMkkai3jqPaZStVQ=;
+	b=QYLt5oLxRfkO8iVQlcM8CFDLc+4aB1oq1G5gPzD6FWEByB19Sd3Eq075eKqH5NmW7r
+	yXUDMxL5fze2A5G71ENrhWbScZuetvwRZCvr7X56doCnXI9uRYUnRWTYeIM3gRLiUeyi
+	/eh7SRWLFZtd2zOIxcaSfePSYA3z8PqF8WyX2YtQr70udr1hR6V+9yQyJWWOm0FhCYn3
+	RrLimA3hfR0j6oFPuGpOrXLDhZfmxhVa2mCfh5ZGJrV7tIaubv2+pcRGOH8HyUhlMu/X
+	gRA+wBoXedUidty3leb/SYk1yPOT9L3tkNi4HVKQb4piuEQsqs8j7Li0axrda17mfn/2
+	BcXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ntHuD78E1C49ZvRvAJ6XgDuP1G4iMkkai3jqPaZStVQ=;
+	b=tJqvWJ0BZ250QzvfLnN/NmekyPJkt5b3CAcvCyn+jWN8ZSC7CNarS035t1mHPg14e9
+	84Mh39aG/k0caCAqFmQO6K4kn1K+tWMYuceqrRr/f+c63hQQbtNPlf+00w0GTji6+Z0C
+	Uzc/qiKQbApf6406lkQ7j9P6oBnbOdzzihElGglgZCQTmAPxF6wy4LHCfUKRuq/TQ/m0
+	KTgSHNSKheiRekNf95geiTVV79NIXZfOfZE0GM5B2RGG7MYLAxfQT0wUyOrsI0h5aVij
+	jOTbI1M7ShqKyzjGI2fJlHEhakLVBUzaOz5x1i1UhCj8CtCaaHGNrgQe1xSyIRM4TKNI
+	QP7Q==
+X-Gm-Message-State: APjAAAW1otI984BJMO1JkJlh6l1ovYEVYaIYHDstU3af8mWxYnge/Zid
+	mAsqVBZRbMGhBZKMvASBXIgmEA==
+X-Google-Smtp-Source: APXvYqx/s09x34m2m60hGEG8oq9rNNiSt1/4j5qtIhV1B9Qgz5W3aPna7RR3oLU+V41Ml5DJ6UJ2Ng==
+X-Received: by 2002:a05:620a:1648:: with SMTP id
+	c8mr79693913qko.106.1564576777216; 
+	Wed, 31 Jul 2019 05:39:37 -0700 (PDT)
+Received: from ziepe.ca
+	(hlfxns017vw-156-34-55-100.dhcp-dynamic.fibreop.ns.bellaliant.net.
+	[156.34.55.100]) by smtp.gmail.com with ESMTPSA id
+	m12sm27127419qkk.123.2019.07.31.05.39.36
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 31 Jul 2019 05:39:36 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1hsntH-0006OW-WA; Wed, 31 Jul 2019 09:39:36 -0300
+Date: Wed, 31 Jul 2019 09:39:35 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V2 7/9] vhost: do not use RCU to synchronize MMU notifier
+	with worker
+Message-ID: <20190731123935.GC3946@ziepe.ca>
 References: <20190731084655.7024-1-jasowang@redhat.com>
-	<20190731084655.7024-10-jasowang@redhat.com>
-	<20190731095950.d6zr472megt7rgkt@steredhat>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <e00259ec-af5d-3c58-a936-2e1c6e1bc2b9@redhat.com>
-Date: Wed, 31 Jul 2019 18:05:58 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	<20190731084655.7024-8-jasowang@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190731095950.d6zr472megt7rgkt@steredhat>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.30]);
-	Wed, 31 Jul 2019 10:06:04 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190731084655.7024-8-jasowang@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: jgg@ziepe.ca, kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org, linux-mm@kvack.org
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -64,60 +90,173 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvNy8zMSDkuIvljYg1OjU5LCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6Cj4gQSBs
-aXR0bGUgdHlwbyBpbiB0aGUgdGl0bGU6IHMvRUFHSUFOL0VBR0FJTgo+Cj4gVGhhbmtzLAo+IFN0
-ZWZhbm8KCgpSaWdodCwgd2lsbCBmaXggaWYgbmVlZCByZXNwaW4gb3IgTWljaGFlbCBjYW4gaGVs
-cCB0byBmaXguCgpUaGFua3MKCgo+Cj4gT24gV2VkLCBKdWwgMzEsIDIwMTkgYXQgMDQ6NDY6NTVB
-TSAtMDQwMCwgSmFzb24gV2FuZyB3cm90ZToKPj4gSW5zdGVhZCBvZiByZXR1cm5pbmcgLUVBR0FJ
-TiB1bmNvbmRpdGlvbmFsbHksIHdlJ2QgYmV0dGVyIGRvIHRoYXQgb25seQo+PiB3ZSdyZSBzdXJl
-IHRoZSByYW5nZSBpcyBvdmVybGFwcGVkIHdpdGggdGhlIG1ldGFkYXRhIGFyZWEuCj4+Cj4+IFJl
-cG9ydGVkLWJ5OiBKYXNvbiBHdW50aG9ycGUgPGpnZ0B6aWVwZS5jYT4KPj4gRml4ZXM6IDdmNDY2
-MDMyZGM5ZSAoInZob3N0OiBhY2Nlc3MgdnEgbWV0YWRhdGEgdGhyb3VnaCBrZXJuZWwgdmlydHVh
-bCBhZGRyZXNzIikKPj4gU2lnbmVkLW9mZi1ieTogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0
-LmNvbT4KPj4gLS0tCj4+ICAgZHJpdmVycy92aG9zdC92aG9zdC5jIHwgMzIgKysrKysrKysrKysr
-KysrKysrKy0tLS0tLS0tLS0tLS0KPj4gICAxIGZpbGUgY2hhbmdlZCwgMTkgaW5zZXJ0aW9ucygr
-KSwgMTMgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L3Zob3N0
-LmMgYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmMKPj4gaW5kZXggZmMyZGE4YTBjNjcxLi45NmM2YWVi
-MTg3MWYgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvdmhvc3Qvdmhvc3QuYwo+PiArKysgYi9kcml2
-ZXJzL3Zob3N0L3Zob3N0LmMKPj4gQEAgLTM5OSwxNiArMzk5LDE5IEBAIHN0YXRpYyB2b2lkIGlu
-bGluZSB2aG9zdF92cV9zeW5jX2FjY2VzcyhzdHJ1Y3Qgdmhvc3RfdmlydHF1ZXVlICp2cSkKPj4g
-ICAJc21wX21iKCk7Cj4+ICAgfQo+PiAgIAo+PiAtc3RhdGljIHZvaWQgdmhvc3RfaW52YWxpZGF0
-ZV92cV9zdGFydChzdHJ1Y3Qgdmhvc3RfdmlydHF1ZXVlICp2cSwKPj4gLQkJCQkgICAgICBpbnQg
-aW5kZXgsCj4+IC0JCQkJICAgICAgdW5zaWduZWQgbG9uZyBzdGFydCwKPj4gLQkJCQkgICAgICB1
-bnNpZ25lZCBsb25nIGVuZCkKPj4gK3N0YXRpYyBpbnQgdmhvc3RfaW52YWxpZGF0ZV92cV9zdGFy
-dChzdHJ1Y3Qgdmhvc3RfdmlydHF1ZXVlICp2cSwKPj4gKwkJCQkgICAgIGludCBpbmRleCwKPj4g
-KwkJCQkgICAgIHVuc2lnbmVkIGxvbmcgc3RhcnQsCj4+ICsJCQkJICAgICB1bnNpZ25lZCBsb25n
-IGVuZCwKPj4gKwkJCQkgICAgIGJvb2wgYmxvY2thYmxlKQo+PiAgIHsKPj4gICAJc3RydWN0IHZo
-b3N0X3VhZGRyICp1YWRkciA9ICZ2cS0+dWFkZHJzW2luZGV4XTsKPj4gICAJc3RydWN0IHZob3N0
-X21hcCAqbWFwOwo+PiAgIAo+PiAgIAlpZiAoIXZob3N0X21hcF9yYW5nZV9vdmVybGFwKHVhZGRy
-LCBzdGFydCwgZW5kKSkKPj4gLQkJcmV0dXJuOwo+PiArCQlyZXR1cm4gMDsKPj4gKwllbHNlIGlm
-ICghYmxvY2thYmxlKQo+PiArCQlyZXR1cm4gLUVBR0FJTjsKPj4gICAKPj4gICAJc3Bpbl9sb2Nr
-KCZ2cS0+bW11X2xvY2spOwo+PiAgIAkrK3ZxLT5pbnZhbGlkYXRlX2NvdW50Owo+PiBAQCAtNDIz
-LDYgKzQyNiw4IEBAIHN0YXRpYyB2b2lkIHZob3N0X2ludmFsaWRhdGVfdnFfc3RhcnQoc3RydWN0
-IHZob3N0X3ZpcnRxdWV1ZSAqdnEsCj4+ICAgCQl2aG9zdF9zZXRfbWFwX2RpcnR5KHZxLCBtYXAs
-IGluZGV4KTsKPj4gICAJCXZob3N0X21hcF91bnByZWZldGNoKG1hcCk7Cj4+ICAgCX0KPj4gKwo+
-PiArCXJldHVybiAwOwo+PiAgIH0KPj4gICAKPj4gICBzdGF0aWMgdm9pZCB2aG9zdF9pbnZhbGlk
-YXRlX3ZxX2VuZChzdHJ1Y3Qgdmhvc3RfdmlydHF1ZXVlICp2cSwKPj4gQEAgLTQ0MywxOCArNDQ4
-LDE5IEBAIHN0YXRpYyBpbnQgdmhvc3RfaW52YWxpZGF0ZV9yYW5nZV9zdGFydChzdHJ1Y3QgbW11
-X25vdGlmaWVyICptbiwKPj4gICB7Cj4+ICAgCXN0cnVjdCB2aG9zdF9kZXYgKmRldiA9IGNvbnRh
-aW5lcl9vZihtbiwgc3RydWN0IHZob3N0X2RldiwKPj4gICAJCQkJCSAgICAgbW11X25vdGlmaWVy
-KTsKPj4gLQlpbnQgaSwgajsKPj4gLQo+PiAtCWlmICghbW11X25vdGlmaWVyX3JhbmdlX2Jsb2Nr
-YWJsZShyYW5nZSkpCj4+IC0JCXJldHVybiAtRUFHQUlOOwo+PiArCWJvb2wgYmxvY2thYmxlID0g
-bW11X25vdGlmaWVyX3JhbmdlX2Jsb2NrYWJsZShyYW5nZSk7Cj4+ICsJaW50IGksIGosIHJldDsK
-Pj4gICAKPj4gICAJZm9yIChpID0gMDsgaSA8IGRldi0+bnZxczsgaSsrKSB7Cj4+ICAgCQlzdHJ1
-Y3Qgdmhvc3RfdmlydHF1ZXVlICp2cSA9IGRldi0+dnFzW2ldOwo+PiAgIAo+PiAtCQlmb3IgKGog
-PSAwOyBqIDwgVkhPU1RfTlVNX0FERFJTOyBqKyspCj4+IC0JCQl2aG9zdF9pbnZhbGlkYXRlX3Zx
-X3N0YXJ0KHZxLCBqLAo+PiAtCQkJCQkJICByYW5nZS0+c3RhcnQsCj4+IC0JCQkJCQkgIHJhbmdl
-LT5lbmQpOwo+PiArCQlmb3IgKGogPSAwOyBqIDwgVkhPU1RfTlVNX0FERFJTOyBqKyspIHsKPj4g
-KwkJCXJldCA9IHZob3N0X2ludmFsaWRhdGVfdnFfc3RhcnQodnEsIGosCj4+ICsJCQkJCQkJcmFu
-Z2UtPnN0YXJ0LAo+PiArCQkJCQkJCXJhbmdlLT5lbmQsIGJsb2NrYWJsZSk7Cj4+ICsJCQlpZiAo
-cmV0KQo+PiArCQkJCXJldHVybiByZXQ7Cj4+ICsJCX0KPj4gICAJfQo+PiAgIAo+PiAgIAlyZXR1
-cm4gMDsKPj4gLS0gCj4+IDIuMTguMQo+PgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRp
-b25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRp
-b24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Wed, Jul 31, 2019 at 04:46:53AM -0400, Jason Wang wrote:
+> We used to use RCU to synchronize MMU notifier with worker. This leads
+> calling synchronize_rcu() in invalidate_range_start(). But on a busy
+> system, there would be many factors that may slow down the
+> synchronize_rcu() which makes it unsuitable to be called in MMU
+> notifier.
+> 
+> A solution is SRCU but its overhead is obvious with the expensive full
+> memory barrier. Another choice is to use seqlock, but it doesn't
+> provide a synchronization method between readers and writers. The last
+> choice is to use vq mutex, but it need to deal with the worst case
+> that MMU notifier must be blocked and wait for the finish of swap in.
+> 
+> So this patch switches use a counter to track whether or not the map
+> was used. The counter was increased when vq try to start or finish
+> uses the map. This means, when it was even, we're sure there's no
+> readers and MMU notifier is synchronized. When it was odd, it means
+> there's a reader we need to wait it to be even again then we are
+> synchronized. 
+
+You just described a seqlock.
+
+We've been talking about providing this as some core service from mmu
+notifiers because nearly every use of this API needs it.
+
+IMHO this gets the whole thing backwards, the common pattern is to
+protect the 'shadow pte' data with a seqlock (usually open coded),
+such that the mmu notififer side has the write side of that lock and
+the read side is consumed by the thread accessing or updating the SPTE.
+
+
+> Reported-by: Michael S. Tsirkin <mst@redhat.com>
+> Fixes: 7f466032dc9e ("vhost: access vq metadata through kernel virtual address")
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
+>  drivers/vhost/vhost.c | 145 ++++++++++++++++++++++++++----------------
+>  drivers/vhost/vhost.h |   7 +-
+>  2 files changed, 94 insertions(+), 58 deletions(-)
+> 
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index cfc11f9ed9c9..db2c81cb1e90 100644
+> +++ b/drivers/vhost/vhost.c
+> @@ -324,17 +324,16 @@ static void vhost_uninit_vq_maps(struct vhost_virtqueue *vq)
+>  
+>  	spin_lock(&vq->mmu_lock);
+>  	for (i = 0; i < VHOST_NUM_ADDRS; i++) {
+> -		map[i] = rcu_dereference_protected(vq->maps[i],
+> -				  lockdep_is_held(&vq->mmu_lock));
+> +		map[i] = vq->maps[i];
+>  		if (map[i]) {
+>  			vhost_set_map_dirty(vq, map[i], i);
+> -			rcu_assign_pointer(vq->maps[i], NULL);
+> +			vq->maps[i] = NULL;
+>  		}
+>  	}
+>  	spin_unlock(&vq->mmu_lock);
+>  
+> -	/* No need for synchronize_rcu() or kfree_rcu() since we are
+> -	 * serialized with memory accessors (e.g vq mutex held).
+> +	/* No need for synchronization since we are serialized with
+> +	 * memory accessors (e.g vq mutex held).
+>  	 */
+>  
+>  	for (i = 0; i < VHOST_NUM_ADDRS; i++)
+> @@ -362,6 +361,44 @@ static bool vhost_map_range_overlap(struct vhost_uaddr *uaddr,
+>  	return !(end < uaddr->uaddr || start > uaddr->uaddr - 1 + uaddr->size);
+>  }
+>  
+> +static void inline vhost_vq_access_map_begin(struct vhost_virtqueue *vq)
+> +{
+> +	int ref = READ_ONCE(vq->ref);
+
+Is a lock/single threaded supposed to be held for this?
+
+> +
+> +	smp_store_release(&vq->ref, ref + 1);
+> +	/* Make sure ref counter is visible before accessing the map */
+> +	smp_load_acquire(&vq->ref);
+
+release/acquire semantics are intended to protect blocks of related
+data, so reading something with acquire and throwing away the result
+is nonsense.
+
+> +}
+> +
+> +static void inline vhost_vq_access_map_end(struct vhost_virtqueue *vq)
+> +{
+> +	int ref = READ_ONCE(vq->ref);
+
+If the write to vq->ref is not locked this algorithm won't work, if it
+is locked the READ_ONCE is not needed.
+
+> +	/* Make sure vq access is done before increasing ref counter */
+> +	smp_store_release(&vq->ref, ref + 1);
+> +}
+> +
+> +static void inline vhost_vq_sync_access(struct vhost_virtqueue *vq)
+> +{
+> +	int ref;
+> +
+> +	/* Make sure map change was done before checking ref counter */
+> +	smp_mb();
+
+This is probably smp_rmb after reading ref, and if you are setting ref
+with smp_store_release then this should be smp_load_acquire() without
+an explicit mb.
+
+> +	ref = READ_ONCE(vq->ref);
+> +	if (ref & 0x1) {
+> +		/* When ref change, we are sure no reader can see
+> +		 * previous map */
+> +		while (READ_ONCE(vq->ref) == ref) {
+> +			set_current_state(TASK_RUNNING);
+> +			schedule();
+> +		}
+> +	}
+
+This is basically read_seqcount_begin()' with a schedule instead of
+cpu_relax
+
+
+> +	/* Make sure ref counter was checked before any other
+> +	 * operations that was dene on map. */
+> +	smp_mb();
+
+should be in a smp_load_acquire()
+
+> +}
+> +
+>  static void vhost_invalidate_vq_start(struct vhost_virtqueue *vq,
+>  				      int index,
+>  				      unsigned long start,
+> @@ -376,16 +413,15 @@ static void vhost_invalidate_vq_start(struct vhost_virtqueue *vq,
+>  	spin_lock(&vq->mmu_lock);
+>  	++vq->invalidate_count;
+>  
+> -	map = rcu_dereference_protected(vq->maps[index],
+> -					lockdep_is_held(&vq->mmu_lock));
+> +	map = vq->maps[index];
+>  	if (map) {
+>  		vhost_set_map_dirty(vq, map, index);
+> -		rcu_assign_pointer(vq->maps[index], NULL);
+> +		vq->maps[index] = NULL;
+>  	}
+>  	spin_unlock(&vq->mmu_lock);
+>  
+>  	if (map) {
+> -		synchronize_rcu();
+> +		vhost_vq_sync_access(vq);
+
+What prevents racing with vhost_vq_access_map_end here?
+
+>  		vhost_map_unprefetch(map);
+>  	}
+>  }
+
+Overall I don't like it. 
+
+We are trying to get rid of these botique mmu notifier patterns in
+drivers. 
+
+Jason
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
