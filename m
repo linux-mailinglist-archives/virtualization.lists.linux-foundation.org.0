@@ -2,57 +2,123 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id B46E67B554
-	for <lists.virtualization@lfdr.de>; Tue, 30 Jul 2019 23:56:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D1D27B6CE
+	for <lists.virtualization@lfdr.de>; Wed, 31 Jul 2019 02:21:15 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 238E02F05;
-	Tue, 30 Jul 2019 21:56:10 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 8CD71338E;
+	Wed, 31 Jul 2019 00:21:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8AC802EFE
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6BF573343
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 21:43:33 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from shards.monkeyblade.net (shards.monkeyblade.net [23.128.96.9])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DB971A8
+	Wed, 31 Jul 2019 00:14:00 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from NAM03-DM3-obe.outbound.protection.outlook.com
+	(mail-eopbgr800099.outbound.protection.outlook.com [40.107.80.99])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7E205E7
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 30 Jul 2019 21:43:32 +0000 (UTC)
-Received: from localhost (unknown [IPv6:2601:601:9f80:35cd::d71])
-	(using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(Client did not present a certificate)
-	(Authenticated sender: davem-davemloft)
-	by shards.monkeyblade.net (Postfix) with ESMTPSA id 3BC1314E89C44;
-	Tue, 30 Jul 2019 14:43:30 -0700 (PDT)
-Date: Tue, 30 Jul 2019 14:43:29 -0700 (PDT)
-Message-Id: <20190730.144329.2267958732987589628.davem@davemloft.net>
-To: arnd@arndb.de
-Subject: Re: [PATCH v5 12/29] compat_ioctl: move drivers to compat_ptr_ioctl
-From: David Miller <davem@davemloft.net>
-In-Reply-To: <20190730195227.742215-1-arnd@arndb.de>
-References: <20190730192552.4014288-1-arnd@arndb.de>
-	<20190730195227.742215-1-arnd@arndb.de>
-X-Mailer: Mew version 6.8 on Emacs 26.1
-Mime-Version: 1.0
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
-	(shards.monkeyblade.net [149.20.54.216]);
-	Tue, 30 Jul 2019 14:43:31 -0700 (PDT)
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+	Wed, 31 Jul 2019 00:13:59 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=HaK//ynzrov6VJEPzNcUs4KyjELk1JNEH7PVN+FgTVnc84IwUMQjnVLNjrfr6D4z6FRGtf+onXgeATNsaDYaJHiu77E1BH7vIUUoxOey3wXFnISviN+DeLLdFjNtqtlV+M470Hm5H20LnD8OKCKQzl374Ugsox7cLTx4/NyrGmxXmJ65Hdzi1ufHaJEd+0+hXvnLpW22UI68W9FfRQiHM3Bv8f+V5boXA3kCK8g7p4EW9dOkYLnaEIlQQHbrDP8kjeHThmYrB53cqYOLncYJHW0feOSNQt7EoeMvdCSGtHRTlVPnuR2AR+PAynIZElej8qGBD0tGX58soMS2PEEYtA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=7+qkt2g1PB4yERKLvl3kj4w8iAPpQ6pFCDJAgd1iDx8=;
+	b=h55tKpqQSKPz4zX9L4WWqTWLagEEFHcVeL3loQMWvEY46z+bQ/f0wdFs/QzoTG7khWvzpni3LXLldU1qRA+yNfpxgLAr5IlLfn2IZzMAeCYKG8CvcIcAfiWXeS5mjbbZC9WiCAAGLALpRUQHPxt9OX+OqxDJ24zhpPP57HLBaHH3M5uHSRxoawje18naTLbobEFIUVzb/OMVdCniDsrFIEFEvwC1P6+8XtOrKo2wOfzNrV+ci/nkj41Kj/OTbCiP06HQU6OAIAC1kSbe3FOCfa80X2mxqzDDng+/YwNZUlW5MDkqXlPXiD88Xe05WHXNLeT/ZdBnim9g92JORDlnBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=microsoft.com; dmarc=pass action=none
+	header.from=microsoft.com; dkim=pass header.d=microsoft.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+	s=selector1;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=7+qkt2g1PB4yERKLvl3kj4w8iAPpQ6pFCDJAgd1iDx8=;
+	b=l2L/PE7xCtrKV4xHoOP70MrJo0sAxlPV6A+748sijZcttPRlbN0Vvt3JhUV07uYmIznlzsE7m7r05xz2U87a+DYtt+NS4IiXeO4DR79dJh+O3TrPFey9B9yD+tPWark8gZQoHMt47lsCWYD6osWhltXJWR6pOp0imCdmQz3NPw4=
+Received: from MWHPR21MB0784.namprd21.prod.outlook.com (10.173.51.150) by
+	MWHPR21MB0288.namprd21.prod.outlook.com (10.173.53.18) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2157.2; Wed, 31 Jul 2019 00:13:57 +0000
+Received: from MWHPR21MB0784.namprd21.prod.outlook.com
+	([fe80::7de1:e6c1:296:4e82]) by MWHPR21MB0784.namprd21.prod.outlook.com
+	([fe80::7de1:e6c1:296:4e82%5]) with mapi id 15.20.2157.001;
+	Wed, 31 Jul 2019 00:13:57 +0000
+To: Nadav Amit <namit@vmware.com>, Andy Lutomirski <luto@kernel.org>, Dave
+	Hansen <dave.hansen@linux.intel.com>
+Subject: RE: [PATCH v3 4/9] x86/mm/tlb: Flush remote and local TLBs
+	concurrently
+Thread-Topic: [PATCH v3 4/9] x86/mm/tlb: Flush remote and local TLBs
+	concurrently
+Thread-Index: AQHVPc0tyN8NiFudS0OHFO0tHQVBDqbj7WKw
+Date: Wed, 31 Jul 2019 00:13:57 +0000
+Message-ID: <MWHPR21MB07849B8AE6D1C4943B6F06F7D7DF0@MWHPR21MB0784.namprd21.prod.outlook.com>
+References: <20190719005837.4150-1-namit@vmware.com>
+	<20190719005837.4150-5-namit@vmware.com>
+In-Reply-To: <20190719005837.4150-5-namit@vmware.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Enabled=True;
+	MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SiteId=72f988bf-86f1-41af-91ab-2d7cd011db47;
+	MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Owner=mikelley@ntdev.microsoft.com;
+	MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SetDate=2019-07-31T00:13:55.8711110Z;
+	MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Name=General;
+	MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Application=Microsoft
+	Azure Information Protection;
+	MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ActionId=18386b13-1653-4a41-8c42-2a8ca745b308;
+	MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Extended_MSFT_Method=Automatic
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=mikelley@microsoft.com; 
+x-originating-ip: [24.22.167.197]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 4136bceb-ab23-4308-66e5-08d7154bfb15
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(5600148)(711020)(4605104)(1401327)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
+	SRVR:MWHPR21MB0288; 
+x-ms-traffictypediagnostic: MWHPR21MB0288:|MWHPR21MB0288:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MWHPR21MB028844C36D7FAD0B1375BD8BD7DF0@MWHPR21MB0288.namprd21.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 011579F31F
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(4636009)(396003)(366004)(39860400002)(346002)(136003)(376002)(199004)(189003)(256004)(22452003)(71190400001)(71200400001)(316002)(66066001)(66556008)(9686003)(53936002)(14444005)(6436002)(7696005)(110136005)(476003)(486006)(478600001)(66446008)(68736007)(76116006)(229853002)(11346002)(76176011)(54906003)(66946007)(66476007)(446003)(33656002)(55016002)(64756008)(10290500003)(186003)(52536014)(102836004)(6116002)(7416002)(3846002)(305945005)(99286004)(7736002)(26005)(4326008)(2906002)(5660300002)(10090500001)(6246003)(8990500004)(6506007)(86362001)(14454004)(8676002)(25786009)(81156014)(74316002)(81166006)(8936002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR21MB0288;
+	H:MWHPR21MB0784.namprd21.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: microsoft.com does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: 7pM4N/3Ak2c/DZOAGoI2OlGmJPZe1oSdhoZpBXNisjOTgAcGdF3O8e+eIhajqjhsE0NY9KUfx5W/iVI49EwHSuqABhxWDG1Kr9bZqXkB2+JCITHuZ+fNuMZ25cIEZHbe0jyVQGn9/V9EF/qQitQlBdtzaOO0BoXcHT+BXhLJs3pyqcCGcnTJxpCdfIEg8rtJvBnEUJqqQtlAhs8Li/5HmRaCt35oCSgY9aGfvck212X1Zur05OVSMLKe7dvfPunMW2kfc+cwhwba9kfGydo2u5Ah+l7KwC7pP4JmKRcmwhFoH3RULLT5v5FpOxreJZLMtBC87MuOUl0QcqDRYY7Rb8yhO+eDY7953WqIP/bO2EIJxeXeTkCx5Iipg38yOlTEXHw3h41sEAX9fYaFBnPsYXcxnrRYpnP7mGHvNOBN+k8=
+MIME-Version: 1.0
+X-OriginatorOrg: microsoft.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4136bceb-ab23-4308-66e5-08d7154bfb15
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Jul 2019 00:13:57.4299 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 72f988bf-86f1-41af-91ab-2d7cd011db47
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: uUl+NcMFyy3iOycg7CU2I+3933Yo3iaMJO735J1Vj5VxvRlEmuMyfMxQLd8hgncrZsmrilYj3DL5D2ehRvAWkYnS6LwZwCFdREsqx/h3AlY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR21MB0288
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: devel@driverdev.osuosl.org, linux-input@vger.kernel.org,
-	kvm@vger.kernel.org, mst@redhat.com, gregkh@linuxfoundation.org,
-	linux-usb@vger.kernel.org, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, jarkko.sakkinen@linux.intel.com,
-	virtualization@lists.linux-foundation.org, jgg@mellanox.com,
-	linux-mtd@lists.infradead.org, viro@zeniv.linux.org.uk,
-	stefanha@redhat.com, jkosina@suse.cz,
-	linux-fsdevel@vger.kernel.org, ceph-devel@vger.kernel.org,
-	linux-integrity@vger.kernel.org, linux1394-devel@lists.sourceforge.net,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org
+Cc: Sasha Levin <sashal@kernel.org>, Juergen Gross <jgross@suse.com>,
+	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Haiyang Zhang <haiyangz@microsoft.com>, "x86@kernel.org" <x86@kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,30 +130,69 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Michael Kelley via Virtualization
+	<virtualization@lists.linux-foundation.org>
+Reply-To: Michael Kelley <mikelley@microsoft.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Tue, 30 Jul 2019 21:50:28 +0200
-
-> Each of these drivers has a copy of the same trivial helper function to
-> convert the pointer argument and then call the native ioctl handler.
+From: Nadav Amit <namit@vmware.com> Sent: Thursday, July 18, 2019 5:59 PM
 > 
-> We now have a generic implementation of that, so use it.
+> To improve TLB shootdown performance, flush the remote and local TLBs
+> concurrently. Introduce flush_tlb_multi() that does so. Introduce
+> paravirtual versions of flush_tlb_multi() for KVM, Xen and hyper-v (Xen
+> and hyper-v are only compile-tested).
 > 
-> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> Reviewed-by: Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
-> Reviewed-by: Jason Gunthorpe <jgg@mellanox.com>
-> Reviewed-by: Jiri Kosina <jkosina@suse.cz>
-> Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+> While the updated smp infrastructure is capable of running a function on
+> a single local core, it is not optimized for this case. The multiple
+> function calls and the indirect branch introduce some overhead, and
+> might make local TLB flushes slower than they were before the recent
+> changes.
+> 
+> Before calling the SMP infrastructure, check if only a local TLB flush
+> is needed to restore the lost performance in this common case. This
+> requires to check mm_cpumask() one more time, but unless this mask is
+> updated very frequently, this should impact performance negatively.
+> 
+> Cc: "K. Y. Srinivasan" <kys@microsoft.com>
+> Cc: Haiyang Zhang <haiyangz@microsoft.com>
+> Cc: Stephen Hemminger <sthemmin@microsoft.com>
+> Cc: Sasha Levin <sashal@kernel.org>
+> Cc: Thomas Gleixner <tglx@linutronix.de>
+> Cc: Ingo Molnar <mingo@redhat.com>
+> Cc: Borislav Petkov <bp@alien8.de>
+> Cc: x86@kernel.org
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Paolo Bonzini <pbonzini@redhat.com>
+> Cc: Dave Hansen <dave.hansen@linux.intel.com>
+> Cc: Andy Lutomirski <luto@kernel.org>
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Cc: linux-hyperv@vger.kernel.org
+> Cc: linux-kernel@vger.kernel.org
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: kvm@vger.kernel.org
+> Cc: xen-devel@lists.xenproject.org
+> Signed-off-by: Nadav Amit <namit@vmware.com>
+> ---
+>  arch/x86/hyperv/mmu.c                 | 10 +++---
+>  arch/x86/include/asm/paravirt.h       |  6 ++--
+>  arch/x86/include/asm/paravirt_types.h |  4 +--
+>  arch/x86/include/asm/tlbflush.h       |  8 ++---
+>  arch/x86/include/asm/trace/hyperv.h   |  2 +-
+>  arch/x86/kernel/kvm.c                 | 11 +++++--
+>  arch/x86/kernel/paravirt.c            |  2 +-
+>  arch/x86/mm/tlb.c                     | 47 ++++++++++++++++++---------
+>  arch/x86/xen/mmu_pv.c                 | 11 +++----
+>  include/trace/events/xen.h            |  2 +-
+>  10 files changed, 62 insertions(+), 41 deletions(-)
+> 
 
-I assume this has to go via your series, thus:
+For the Hyper-V parts --
+Reviewed-by: Michael Kelley <mikelley@microsoft.com>
 
-Acked-by: David S. Miller <davem@davemloft.net>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
