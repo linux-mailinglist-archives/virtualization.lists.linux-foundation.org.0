@@ -2,82 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAF247C242
-	for <lists.virtualization@lfdr.de>; Wed, 31 Jul 2019 14:53:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA2817C2C4
+	for <lists.virtualization@lfdr.de>; Wed, 31 Jul 2019 15:06:45 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id ADC083C22;
-	Wed, 31 Jul 2019 12:52:45 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 90AA82290;
+	Wed, 31 Jul 2019 13:06:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7E5463C22
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 922BA3796
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 31 Jul 2019 12:41:26 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id CE3396CE
+	Wed, 31 Jul 2019 12:53:17 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+	[198.137.202.133])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 87B246CE
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 31 Jul 2019 12:41:25 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id h18so66362169qtm.9
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 31 Jul 2019 05:41:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=ssT+JujOxDwS6NEpfq2Ge7MRteKET9yZx/jW5aTaxrI=;
-	b=CV7jH3veMykUxgu+H5gGaJEiM7dHfRA3AWXtjSYfzu48EjQ0oDP+S8cs1UxQbidp/W
-	MqKLYekmIDfV2RBQHTtrwRlnUCc5krtCPt3AASFeznsZkr+ipQT/XuC+Xn6vABBkKIFP
-	enujxa2gQmDcqqBPQMXqNzw5a+lpfG5eB2A37iznAHNxxA9jQHhaTnP+cwJR1UO9lidY
-	SP65bUUa5WqhqoZCyAGPCKh7SUkgLjT8qHxGXbgc7GA59ln/8F06imsHF08LgdqgZvE2
-	/+AQjQMxZnEgE6iMjDFEfdphXGCtwyg1L1ebJpvApgpgereLtbGxAEtwqnD5666T6XAv
-	R7qA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ssT+JujOxDwS6NEpfq2Ge7MRteKET9yZx/jW5aTaxrI=;
-	b=oYZhpQQtKKdGTk0AhUf1PySXHHRN/YZ1DLHDxmhPS7e4AT+GBW2r5M2zy0oNjfYAJW
-	dX96p/eju6R3J9M19XakXIQZeTvSDOiY3r+X6bedVoYD3/jHU1AHJLaYl+nvOwacrEOF
-	GzoIohfCW6UK6goe9NEwFDmdNaQ4jFNUHs0XysZDLp37RupMUyKeGiB7ulSpZ3Pm4gcD
-	7t6hxk6KGrfW4Cl0MnuszKBW3EBB46y9CLXQiXZODt9j9f/qn+FpP7om4uAf0ckoZAZy
-	/SoItG4G37MpP+1Rm4XX3OmsdRbEgTXT58rMj7DmyiA0lq4Ood/kRWEIM7+FDWnm0bVz
-	aABw==
-X-Gm-Message-State: APjAAAU5iACCug80shgbCYF+09urWZOALqYhTpNN3ObxteBM/2jw6AK4
-	WQi7gewcfqA7YXwJ+oULhBbNJCPvErA=
-X-Google-Smtp-Source: APXvYqwbN0Zcgw/rqJW/uUJyj5pJV/gEvjkDyEf6dYni+Q8BnL4R5HKzXod/DVe6ENOwDm8+CZT9Rw==
-X-Received: by 2002:a0c:acab:: with SMTP id m40mr88924921qvc.52.1564576884920; 
-	Wed, 31 Jul 2019 05:41:24 -0700 (PDT)
-Received: from ziepe.ca
-	(hlfxns017vw-156-34-55-100.dhcp-dynamic.fibreop.ns.bellaliant.net.
-	[156.34.55.100]) by smtp.gmail.com with ESMTPSA id
-	u4sm29623865qkb.16.2019.07.31.05.41.24
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 31 Jul 2019 05:41:24 -0700 (PDT)
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1hsnv2-0006PN-6Q; Wed, 31 Jul 2019 09:41:24 -0300
-Date: Wed, 31 Jul 2019 09:41:24 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V2 4/9] vhost: reset invalidate_count in
-	vhost_set_vring_num_addr()
-Message-ID: <20190731124124.GD3946@ziepe.ca>
-References: <20190731084655.7024-1-jasowang@redhat.com>
-	<20190731084655.7024-5-jasowang@redhat.com>
+	Wed, 31 Jul 2019 12:53:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20170209;
+	h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=aeUs+tisL054K/og1W1ep85O/gPdmrMrcRsVDP6dWHA=;
+	b=oaTRIpZMm2SA2ctz/ryJdx5ia
+	/LKWmt439ZZvb35/VbYw9o8t12tJoXD6aI6hksP1Xc+hICCc3+lbHuj2nrT2bZGD1twR9eAYcBLn/
+	E4fayvpXE78Jw5t1qTC2DQir3SQ56cuhq76gfVZUwqhIWVMHnJr4SucdiMqH6GzfyHVgrvLzspEr6
+	JvFKdCyBT4g80kxsamgYcCog1sbUPhjzsmhDI3r3QnLSV/wR0XpPExqeFZbaEJuIgqkq8O0zqND35
+	Ko51GPcra8ktSo4PMvM4DARlpmoUDUTy+UxkL/JmshGg8qarRhlaIOSNQ+vtaaJyNIRbpM938EXsL
+	5GTiOT9LQ==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+	helo=hirez.programming.kicks-ass.net)
+	by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+	id 1hso6O-0004bd-AJ; Wed, 31 Jul 2019 12:53:08 +0000
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+	id 10ABA2029FD58; Wed, 31 Jul 2019 14:53:06 +0200 (CEST)
+Date: Wed, 31 Jul 2019 14:53:06 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Thomas Garnier <thgarnie@chromium.org>
+Subject: Re: [PATCH v9 10/11] x86/paravirt: Adapt assembly for PIE support
+Message-ID: <20190731125306.GU31381@hirez.programming.kicks-ass.net>
+References: <20190730191303.206365-1-thgarnie@chromium.org>
+	<20190730191303.206365-11-thgarnie@chromium.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190731084655.7024-5-jasowang@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+In-Reply-To: <20190730191303.206365-11-thgarnie@chromium.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, linux-mm@kvack.org
+Cc: Juergen Gross <jgross@suse.com>, Thomas Hellstrom <thellstrom@vmware.com>,
+	keescook@chromium.org, kernel-hardening@lists.openwall.com,
+	"VMware, Inc." <pv-drivers@vmware.com>, x86@kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	kristen@linux.intel.com, "H. Peter Anvin" <hpa@zytor.com>,
+	Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -94,37 +78,68 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Jul 31, 2019 at 04:46:50AM -0400, Jason Wang wrote:
-> The vhost_set_vring_num_addr() could be called in the middle of
-> invalidate_range_start() and invalidate_range_end(). If we don't reset
-> invalidate_count after the un-registering of MMU notifier, the
-> invalidate_cont will run out of sync (e.g never reach zero). This will
-> in fact disable the fast accessor path. Fixing by reset the count to
-> zero.
+On Tue, Jul 30, 2019 at 12:12:54PM -0700, Thomas Garnier wrote:
+> if PIE is enabled, switch the paravirt assembly constraints to be
+> compatible. The %c/i constrains generate smaller code so is kept by
+> default.
 > 
-> Reported-by: Michael S. Tsirkin <mst@redhat.com>
-
-Did Michael report this as well?
-
-> Fixes: 7f466032dc9e ("vhost: access vq metadata through kernel virtual address")
-> Signed-off-by: Jason Wang <jasowang@redhat.com>
->  drivers/vhost/vhost.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> Position Independent Executable (PIE) support will allow to extend the
+> KASLR randomization range below 0xffffffff80000000.
 > 
-> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-> index 2a3154976277..2a7217c33668 100644
-> +++ b/drivers/vhost/vhost.c
-> @@ -2073,6 +2073,10 @@ static long vhost_vring_set_num_addr(struct vhost_dev *d,
->  		d->has_notifier = false;
->  	}
+> Signed-off-by: Thomas Garnier <thgarnie@chromium.org>
+> Acked-by: Juergen Gross <jgross@suse.com>
+> ---
+>  arch/x86/include/asm/paravirt_types.h | 25 +++++++++++++++++++++----
+>  1 file changed, 21 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+> index 70b654f3ffe5..fd7dc37d0010 100644
+> --- a/arch/x86/include/asm/paravirt_types.h
+> +++ b/arch/x86/include/asm/paravirt_types.h
+> @@ -338,9 +338,25 @@ extern struct paravirt_patch_template pv_ops;
+>  #define PARAVIRT_PATCH(x)					\
+>  	(offsetof(struct paravirt_patch_template, x) / sizeof(void *))
 >  
-> +	/* reset invalidate_count in case we are in the middle of
-> +	 * invalidate_start() and invalidate_end().
-> +	 */
-> +	vq->invalidate_count = 0;
->  	vhost_uninit_vq_maps(vq);
->  #endif
+> +#ifdef CONFIG_X86_PIE
+> +#define paravirt_opptr_call "a"
+> +#define paravirt_opptr_type "p"
+> +
+> +/*
+> + * Alternative patching requires a maximum of 7 bytes but the relative call is
+> + * only 6 bytes. If PIE is enabled, add an additional nop to the call
+> + * instruction to ensure patching is possible.
+> + */
+> +#define PARAVIRT_CALL_POST  "nop;"
+
+I'm confused; where does the 7 come from? The relative call is 6 bytes,
+a normal call is 5 bytes (which is what we normally replace them with),
+and the longest 'native' sequence we seem to have is also 6 bytes
+(.cpu_usergs_sysret64).
+
+> +#else
+> +#define paravirt_opptr_call "c"
+> +#define paravirt_opptr_type "i"
+> +#define PARAVIRT_CALL_POST  ""
+> +#endif
+> +
+>  #define paravirt_type(op)				\
+>  	[paravirt_typenum] "i" (PARAVIRT_PATCH(op)),	\
+> -	[paravirt_opptr] "i" (&(pv_ops.op))
+> +	[paravirt_opptr] paravirt_opptr_type (&(pv_ops.op))
+>  #define paravirt_clobber(clobber)		\
+>  	[paravirt_clobber] "i" (clobber)
 >  
+> @@ -379,9 +395,10 @@ int paravirt_disable_iospace(void);
+>   * offset into the paravirt_patch_template structure, and can therefore be
+>   * freely converted back into a structure offset.
+>   */
+> -#define PARAVIRT_CALL					\
+> -	ANNOTATE_RETPOLINE_SAFE				\
+> -	"call *%c[paravirt_opptr];"
+> +#define PARAVIRT_CALL						\
+> +	ANNOTATE_RETPOLINE_SAFE					\
+> +	"call *%" paravirt_opptr_call "[paravirt_opptr];"	\
+> +	PARAVIRT_CALL_POST
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
