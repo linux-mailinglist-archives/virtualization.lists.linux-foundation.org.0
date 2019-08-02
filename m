@@ -2,50 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 462677F842
-	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 15:14:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F15EB7F821
+	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 15:13:13 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 029F8137F;
-	Fri,  2 Aug 2019 13:12:53 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2A94013A9;
+	Fri,  2 Aug 2019 13:12:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
-Received: from smtp2.linuxfoundation.org (smtp2.linux-foundation.org
-	[172.17.192.36])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CE35C1306
+Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
+	[172.17.192.35])
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E0A901306
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 13:12:37 +0000 (UTC)
+	Fri,  2 Aug 2019 13:12:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp2.linuxfoundation.org (Postfix) with ESMTPS id E25301DD19
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 998F2832
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 13:12:36 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	Fri,  2 Aug 2019 13:12:30 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+	[10.5.11.15])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 6012F302246D;
-	Fri,  2 Aug 2019 13:12:36 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 169F43090FC7;
+	Fri,  2 Aug 2019 13:12:30 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-81.ams2.redhat.com
 	[10.36.116.81])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id E21B060BF4;
-	Fri,  2 Aug 2019 13:12:26 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 10EF75D71C;
+	Fri,  2 Aug 2019 13:12:27 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 3E74C1750B; Fri,  2 Aug 2019 15:12:26 +0200 (CEST)
+	id 5E0089D77; Fri,  2 Aug 2019 15:12:26 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v7 03/18] drm/virtio: simplify cursor updates
-Date: Fri,  2 Aug 2019 15:12:10 +0200
-Message-Id: <20190802131225.17760-4-kraxel@redhat.com>
+Subject: [PATCH v7 04/18] drm/virtio: remove virtio_gpu_object_wait
+Date: Fri,  2 Aug 2019 15:12:11 +0200
+Message-Id: <20190802131225.17760-5-kraxel@redhat.com>
 In-Reply-To: <20190802131225.17760-1-kraxel@redhat.com>
 References: <20190802131225.17760-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.49]);
-	Fri, 02 Aug 2019 13:12:36 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.43]);
+	Fri, 02 Aug 2019 13:12:30 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	smtp2.linux-foundation.org
+	smtp1.linux-foundation.org
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
 	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
 	Daniel Vetter <daniel@ffwll.ch>, gurchetansingh@chromium.org,
@@ -67,46 +67,48 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-No need to do the reservation dance,
-we can just wait on the fence directly.
+No users left.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/virtio/virtgpu_plane.c | 13 +++----------
- 1 file changed, 3 insertions(+), 10 deletions(-)
+ drivers/gpu/drm/virtio/virtgpu_drv.h    |  1 -
+ drivers/gpu/drm/virtio/virtgpu_object.c | 13 -------------
+ 2 files changed, 14 deletions(-)
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
-index f96c8296307e..11539b66c6f2 100644
---- a/drivers/gpu/drm/virtio/virtgpu_plane.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
-@@ -186,7 +186,6 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
- 	struct virtio_gpu_framebuffer *vgfb;
- 	struct virtio_gpu_object *bo = NULL;
- 	uint32_t handle;
--	int ret = 0;
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+index f4ecea6054ba..1496e3fc1c47 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.h
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+@@ -364,7 +364,6 @@ int virtio_gpu_object_kmap(struct virtio_gpu_object *bo);
+ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+ 				   struct virtio_gpu_object *bo);
+ void virtio_gpu_object_free_sg_table(struct virtio_gpu_object *bo);
+-int virtio_gpu_object_wait(struct virtio_gpu_object *bo, bool no_wait);
  
- 	if (plane->state->crtc)
- 		output = drm_crtc_to_virtio_gpu_output(plane->state->crtc);
-@@ -210,15 +209,9 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
- 			 cpu_to_le32(plane->state->crtc_w),
- 			 cpu_to_le32(plane->state->crtc_h),
- 			 0, 0, vgfb->fence);
--		ret = virtio_gpu_object_reserve(bo, false);
--		if (!ret) {
--			reservation_object_add_excl_fence(bo->tbo.resv,
--							  &vgfb->fence->f);
--			dma_fence_put(&vgfb->fence->f);
--			vgfb->fence = NULL;
--			virtio_gpu_object_unreserve(bo);
--			virtio_gpu_object_wait(bo, false);
--		}
-+		dma_fence_wait(&vgfb->fence->f, true);
-+		dma_fence_put(&vgfb->fence->f);
-+		vgfb->fence = NULL;
- 	}
- 
- 	if (plane->state->fb != old_state->fb) {
+ /* virtgpu_prime.c */
+ struct sg_table *virtgpu_gem_prime_get_sg_table(struct drm_gem_object *obj);
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index 242766d644a7..82bfbf983fd2 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -233,16 +233,3 @@ void virtio_gpu_object_free_sg_table(struct virtio_gpu_object *bo)
+ 	kfree(bo->pages);
+ 	bo->pages = NULL;
+ }
+-
+-int virtio_gpu_object_wait(struct virtio_gpu_object *bo, bool no_wait)
+-{
+-	int r;
+-
+-	r = ttm_bo_reserve(&bo->tbo, true, no_wait, NULL);
+-	if (unlikely(r != 0))
+-		return r;
+-	r = ttm_bo_wait(&bo->tbo, true, no_wait);
+-	ttm_bo_unreserve(&bo->tbo);
+-	return r;
+-}
+-
 -- 
 2.18.1
 
