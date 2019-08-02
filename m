@@ -2,35 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0261B7F194
-	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 11:40:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89FC67F72A
+	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 14:46:45 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 25F7A10B0;
-	Fri,  2 Aug 2019 09:40:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1D78B12C6;
+	Fri,  2 Aug 2019 12:46:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7F48210A6
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8A45A12BD
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 09:40:15 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D5624E7
+	Fri,  2 Aug 2019 12:46:16 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 53220712
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 09:40:14 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 3DA173001A6C;
-	Fri,  2 Aug 2019 09:40:14 +0000 (UTC)
-Received: from [10.72.12.134] (ovpn-12-134.pek2.redhat.com [10.72.12.134])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 15D4F60BE2;
-	Fri,  2 Aug 2019 09:40:08 +0000 (UTC)
+	Fri,  2 Aug 2019 12:46:15 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id r6so54672263qkc.0
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 02 Aug 2019 05:46:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=6ql0O82ncHZU71SnaUyYlbcaPGtvlWm+BrLQDkFEDbY=;
+	b=MRMA2whmjpLNxlhbDl5mBbGm/wxr+mnLnwdUEiOzNBsQbTy974xui1zcbJXuaVeMgi
+	+e6pAPXNKqJ5FLrB5btG3fWEwJOZCNVqx7WhXgNhnlz2EhhnCC/jrtDsn55I0rQrPbEs
+	kTXxKo2YuV2bT1/e1Z1A6Wf8qvRURa8Gr3WBc9QO7dijfCQypZgeANqmpaiWdSJoUCtu
+	VXKmwcx2rj/qqL+7cWXldCjZ59ch1b87c5iVVd4Ql5AT2hWXZoJ7MKekKjw5eD86xgli
+	DTGd7yg7MsSW0a1wLwfpAvBC9sgR49+QmZEGlFoYAgcWlKpxKOv19D6RuAJw4q09e1/M
+	Xu1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=6ql0O82ncHZU71SnaUyYlbcaPGtvlWm+BrLQDkFEDbY=;
+	b=plpnu/Kc2up+vfcaob4vqX0J0NlFHpHtg8aG1vnpJGKlKDnRhlMFC7wu5VTK6Cl6FA
+	lRsrMm5+8zuHxBA6a3YUcjWbXkRQD0ncDeCLbV1BmghEW+mfoRoGJBc1p4KLd/eQRm08
+	Y16kAsfjE2m3NZ4PWxhg6yD/ZLMYfRW2yiijHq3xhDY/Jk4BTf/tE4vHFItpwvcWdaF+
+	uVZ5ZzfuSwaQKZsJsFhh8+dHCkZ1F1ehufeSyY9u75WysjgjVymHAWPFlX2Z2Y39C/qb
+	xEr7kygFLeWIHG930zRNzvRSVsfuxEpH3fKM9QWL6i+ZB13N2S6UwrhsMZEBlG0RYLn+
+	8Pow==
+X-Gm-Message-State: APjAAAV58I7BVIp1zDWaPDKIez5JK4XOe34mM2C0c/+yxpfCsBykWcw4
+	IAstpHwsqpAXWxn/9Pj6ijnkZg==
+X-Google-Smtp-Source: APXvYqxtz2vM6y/fN8WSSWPve6vWs8cD8+KUQAMGJTQIxCltGAZYGzTtsZ3uymeGSjZYIgEaLwJYTg==
+X-Received: by 2002:a37:bc03:: with SMTP id m3mr89369627qkf.199.1564749974287; 
+	Fri, 02 Aug 2019 05:46:14 -0700 (PDT)
+Received: from ziepe.ca
+	(hlfxns017vw-156-34-55-100.dhcp-dynamic.fibreop.ns.bellaliant.net.
+	[156.34.55.100]) by smtp.gmail.com with ESMTPSA id
+	l19sm41561137qtb.6.2019.08.02.05.46.13
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 02 Aug 2019 05:46:13 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1htWwn-0003D2-5A; Fri, 02 Aug 2019 09:46:13 -0300
+Date: Fri, 2 Aug 2019 09:46:13 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Jason Wang <jasowang@redhat.com>
 Subject: Re: [PATCH V2 7/9] vhost: do not use RCU to synchronize MMU notifier
 	with worker
-To: Jason Gunthorpe <jgg@ziepe.ca>
+Message-ID: <20190802124613.GA11245@ziepe.ca>
 References: <20190731084655.7024-1-jasowang@redhat.com>
 	<20190731084655.7024-8-jasowang@redhat.com>
 	<20190731123935.GC3946@ziepe.ca>
@@ -38,20 +71,14 @@ References: <20190731084655.7024-1-jasowang@redhat.com>
 	<20190731193057.GG3946@ziepe.ca>
 	<a3bde826-6329-68e4-2826-8a9de4c5bd1e@redhat.com>
 	<20190801141512.GB23899@ziepe.ca>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <42ead87b-1749-4c73-cbe4-29dbeb945041@redhat.com>
-Date: Fri, 2 Aug 2019 17:40:07 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	<42ead87b-1749-4c73-cbe4-29dbeb945041@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190801141512.GB23899@ziepe.ca>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.45]);
-	Fri, 02 Aug 2019 09:40:14 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <42ead87b-1749-4c73-cbe4-29dbeb945041@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
@@ -68,102 +95,58 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvOC8xIOS4i+WNiDEwOjE1LCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6Cj4gT24gVGh1
-LCBBdWcgMDEsIDIwMTkgYXQgMDE6MDI6MThQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToKPj4g
-T24gMjAxOS84LzEg5LiK5Y2IMzozMCwgSmFzb24gR3VudGhvcnBlIHdyb3RlOgo+Pj4gT24gV2Vk
-LCBKdWwgMzEsIDIwMTkgYXQgMDk6Mjg6MjBQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToKPj4+
-PiBPbiAyMDE5LzcvMzEg5LiL5Y2IODozOSwgSmFzb24gR3VudGhvcnBlIHdyb3RlOgo+Pj4+PiBP
-biBXZWQsIEp1bCAzMSwgMjAxOSBhdCAwNDo0Njo1M0FNIC0wNDAwLCBKYXNvbiBXYW5nIHdyb3Rl
-Ogo+Pj4+Pj4gV2UgdXNlZCB0byB1c2UgUkNVIHRvIHN5bmNocm9uaXplIE1NVSBub3RpZmllciB3
-aXRoIHdvcmtlci4gVGhpcyBsZWFkcwo+Pj4+Pj4gY2FsbGluZyBzeW5jaHJvbml6ZV9yY3UoKSBp
-biBpbnZhbGlkYXRlX3JhbmdlX3N0YXJ0KCkuIEJ1dCBvbiBhIGJ1c3kKPj4+Pj4+IHN5c3RlbSwg
-dGhlcmUgd291bGQgYmUgbWFueSBmYWN0b3JzIHRoYXQgbWF5IHNsb3cgZG93biB0aGUKPj4+Pj4+
-IHN5bmNocm9uaXplX3JjdSgpIHdoaWNoIG1ha2VzIGl0IHVuc3VpdGFibGUgdG8gYmUgY2FsbGVk
-IGluIE1NVQo+Pj4+Pj4gbm90aWZpZXIuCj4+Pj4+Pgo+Pj4+Pj4gQSBzb2x1dGlvbiBpcyBTUkNV
-IGJ1dCBpdHMgb3ZlcmhlYWQgaXMgb2J2aW91cyB3aXRoIHRoZSBleHBlbnNpdmUgZnVsbAo+Pj4+
-Pj4gbWVtb3J5IGJhcnJpZXIuIEFub3RoZXIgY2hvaWNlIGlzIHRvIHVzZSBzZXFsb2NrLCBidXQg
-aXQgZG9lc24ndAo+Pj4+Pj4gcHJvdmlkZSBhIHN5bmNocm9uaXphdGlvbiBtZXRob2QgYmV0d2Vl
-biByZWFkZXJzIGFuZCB3cml0ZXJzLiBUaGUgbGFzdAo+Pj4+Pj4gY2hvaWNlIGlzIHRvIHVzZSB2
-cSBtdXRleCwgYnV0IGl0IG5lZWQgdG8gZGVhbCB3aXRoIHRoZSB3b3JzdCBjYXNlCj4+Pj4+PiB0
-aGF0IE1NVSBub3RpZmllciBtdXN0IGJlIGJsb2NrZWQgYW5kIHdhaXQgZm9yIHRoZSBmaW5pc2gg
-b2Ygc3dhcCBpbi4KPj4+Pj4+Cj4+Pj4+PiBTbyB0aGlzIHBhdGNoIHN3aXRjaGVzIHVzZSBhIGNv
-dW50ZXIgdG8gdHJhY2sgd2hldGhlciBvciBub3QgdGhlIG1hcAo+Pj4+Pj4gd2FzIHVzZWQuIFRo
-ZSBjb3VudGVyIHdhcyBpbmNyZWFzZWQgd2hlbiB2cSB0cnkgdG8gc3RhcnQgb3IgZmluaXNoCj4+
-Pj4+PiB1c2VzIHRoZSBtYXAuIFRoaXMgbWVhbnMsIHdoZW4gaXQgd2FzIGV2ZW4sIHdlJ3JlIHN1
-cmUgdGhlcmUncyBubwo+Pj4+Pj4gcmVhZGVycyBhbmQgTU1VIG5vdGlmaWVyIGlzIHN5bmNocm9u
-aXplZC4gV2hlbiBpdCB3YXMgb2RkLCBpdCBtZWFucwo+Pj4+Pj4gdGhlcmUncyBhIHJlYWRlciB3
-ZSBuZWVkIHRvIHdhaXQgaXQgdG8gYmUgZXZlbiBhZ2FpbiB0aGVuIHdlIGFyZQo+Pj4+Pj4gc3lu
-Y2hyb25pemVkLgo+Pj4+PiBZb3UganVzdCBkZXNjcmliZWQgYSBzZXFsb2NrLgo+Pj4+IEtpbmQg
-b2YsIHNlZSBteSBleHBsYW5hdGlvbiBiZWxvdy4KPj4+Pgo+Pj4+Cj4+Pj4+IFdlJ3ZlIGJlZW4g
-dGFsa2luZyBhYm91dCBwcm92aWRpbmcgdGhpcyBhcyBzb21lIGNvcmUgc2VydmljZSBmcm9tIG1t
-dQo+Pj4+PiBub3RpZmllcnMgYmVjYXVzZSBuZWFybHkgZXZlcnkgdXNlIG9mIHRoaXMgQVBJIG5l
-ZWRzIGl0Lgo+Pj4+IFRoYXQgd291bGQgYmUgdmVyeSBoZWxwZnVsLgo+Pj4+Cj4+Pj4KPj4+Pj4g
-SU1ITyB0aGlzIGdldHMgdGhlIHdob2xlIHRoaW5nIGJhY2t3YXJkcywgdGhlIGNvbW1vbiBwYXR0
-ZXJuIGlzIHRvCj4+Pj4+IHByb3RlY3QgdGhlICdzaGFkb3cgcHRlJyBkYXRhIHdpdGggYSBzZXFs
-b2NrICh1c3VhbGx5IG9wZW4gY29kZWQpLAo+Pj4+PiBzdWNoIHRoYXQgdGhlIG1tdSBub3RpZmlm
-ZXIgc2lkZSBoYXMgdGhlIHdyaXRlIHNpZGUgb2YgdGhhdCBsb2NrIGFuZAo+Pj4+PiB0aGUgcmVh
-ZCBzaWRlIGlzIGNvbnN1bWVkIGJ5IHRoZSB0aHJlYWQgYWNjZXNzaW5nIG9yIHVwZGF0aW5nIHRo
-ZSBTUFRFLgo+Pj4+IFllcywgSSd2ZSBjb25zaWRlcmVkIHNvbWV0aGluZyBsaWtlIHRoYXQuIEJ1
-dCB0aGUgcHJvYmxlbSBpcywgbW11IG5vdGlmaWVyCj4+Pj4gKHdyaXRlcikgbmVlZCB0byB3YWl0
-IGZvciB0aGUgdmhvc3Qgd29ya2VyIHRvIGZpbmlzaCB0aGUgcmVhZCBiZWZvcmUgaXQgY2FuCj4+
-Pj4gZG8gdGhpbmdzIGxpa2Ugc2V0dGluZyBkaXJ0eSBwYWdlcyBhbmQgdW5tYXBwaW5nIHBhZ2Uu
-wqAgSXQgbG9va3MgdG8gbWUKPj4+PiBzZXFsb2NrIGRvZXNuJ3QgcHJvdmlkZSB0aGluZ3MgbGlr
-ZSB0aGlzLgo+Pj4gVGhlIHNlcWxvY2sgaXMgdXN1YWxseSB1c2VkIHRvIHByZXZlbnQgYSAybmQg
-dGhyZWFkIGZyb20gYWNjZXNzaW5nIHRoZQo+Pj4gVkEgd2hpbGUgaXQgaXMgYmVpbmcgY2hhbmdl
-ZCBieSB0aGUgbW0uIGllIHlvdSB1c2Ugc29tZXRoaW5nIHNlcWxvY2t5Cj4+PiBpbnN0ZWFkIG9m
-IHRoZSB1Z2x5IG1tdV9ub3RpZmllcl91bnJlZ2lzdGVyL3JlZ2lzdGVyIGN5Y2xlLgo+Pgo+PiBZ
-ZXMsIHNvIHdlIGhhdmUgdHdvIG1hcHBpbmdzOgo+Pgo+PiBbMV0gdnJpbmcgYWRkcmVzcyB0byBW
-QQo+PiBbMl0gVkEgdG8gUEEKPj4KPj4gQW5kIGhhdmUgc2V2ZXJhbCByZWFkZXJzIGFuZCB3cml0
-ZXJzCj4+Cj4+IDEpIHNldF92cmluZ19udW1fYWRkcigpOiB3cml0ZXIgb2YgYm90aCBbMV0gYW5k
-IFsyXQo+PiAyKSBNTVUgbm90aWZpZXI6IHJlYWRlciBvZiBbMV0gd3JpdGVyIG9mIFsyXQo+PiAz
-KSBHVVA6IHJlYWRlciBvZiBbMV0gd3JpdGVyIG9mIFsyXQo+PiA0KSBtZW1vcnkgYWNjZXNzb3Jz
-OiByZWFkZXIgb2YgWzFdIGFuZCBbMl0KPj4KPj4gRm9ydHVuYXRlbHksIDEpIDMpIGFuZCA0KSBo
-YXZlIGFscmVhZHkgc3luY2hyb25pemVkIHRocm91Z2ggdnEtPm11dGV4LiBXZQo+PiBvbmx5IG5l
-ZWQgdG8gZGVhbCB3aXRoIHN5bmNocm9uaXphdGlvbiBiZXR3ZWVuIDIpIGFuZCBlYWNoIG9mIHRo
-ZSByZXNldDoKPj4gU3luYyBiZXR3ZWVuIDEpIGFuZCAyKTogRm9yIG1hcHBpbmcgWzFdLCBJIGRv
-Cj4+IG1tdV9ub3RpZmllcl91bnJlZ2lzdGVyL3JlZ2lzdGVyLiBUaGlzIGhlbHAgdG8gYXZvaWQg
-aG9sZGluZyBhbnkgbG9jayB0byBkbwo+PiBvdmVybGFwIGNoZWNrLgo+IEkgc3VzcGVjdCB5b3Ug
-Y291bGQgaGF2ZSBkb25lIHRoaXMgd2l0aCBhIFJDVSB0ZWNobmlxdWUgaW5zdGVhZCBvZgo+IHJl
-Z2lzdGVyL3VucmVnaXN0ZXIuCgoKUHJvYmFibHkuIEJ1dCB0aGUgaXNzdWUgdG8gYmUgYWRkcmVz
-c2VkIGJ5IHRoaXMgcGF0Y2ggaXMgdGhlIApzeW5jaHJvbml6YXRpb24gYmV0d2VlbiBNTVUgbm90
-aWZpZXIgYW5kIHZob3N0IHdvcmtlci4KCgo+Cj4+IFN5bmMgYmV0d2VlbiAyKSBhbmQgNCk6IEZv
-ciBtYXBwaW5nIFsxXSwgYm90aCBhcmUgcmVhZGVycywgbm8gbmVlZCBhbnkKPj4gc3luY2hyb25p
-emF0aW9uLiBGb3IgbWFwcGluZyBbMl0sIHN5bmNocm9uaXplIHRocm91Z2ggUkNVIChvciBzb21l
-dGhpbmcKPj4gc2ltbGlhciB0byBzZXFsb2NrKS4KPiBZb3UgY2FuJ3QgcmVhbGx5IHVzZSBhIHNl
-cWxvY2ssIHNlcWxvY2tzIGFyZSBjb2xsaXNpb24tcmV0cnkgbG9ja3MsCj4gYW5kIHRoZSBzZW1h
-bnRpYyBoZXJlIGlzIHRoYXQgaW52YWxpZGF0ZV9yYW5nZV9zdGFydCAqTVVTVCogbm90Cj4gY29u
-dGludWUgdW50aWwgdGhyZWFkIGRvaW5nICM0IGFib3ZlIGlzIGd1YXJlbnRlZWQgbm8gbG9uZ2Vy
-IHRvdWNoaW5nCj4gdGhlIG1lbW9yeS4KCgpZZXMsIHRoYXQncyB0aGUgdHJpY2t5IHBhcnQuIEZv
-ciBoYXJkd2FyZSBsaWtlIENQVSwga2lja2luZyB0aHJvdWdoIElQSSAKaXMgc3VmZmljaWVudCBm
-b3Igc3luY2hyb25pemF0aW9uLiBCdXQgZm9yIHZob3N0IGt0aHJlYWQsIGl0IHJlcXVpcmVzIGEg
-CmxvdyBvdmVyaGVhZCBzeW5jaHJvbml6YXRpb24uCgoKPgo+IFRoaXMgbXVzdCBiZSBhIHByb3Bl
-ciBiYXJyaWVyLCBsaWtlIGEgc3BpbmxvY2ssIG11dGV4LCBvcgo+IHN5bmNocm9uaXplX3JjdS4K
-CgpJIHN0YXJ0IHdpdGggc3luY2hyb25pemVfcmN1KCkgYnV0IGJvdGggeW91IGFuZCBNaWNoYWVs
-IHJhaXNlIHNvbWUgCmNvbmNlcm4uIFRoZW4gSSB0cnkgc3BpbmxvY2sgYW5kIG11dGV4OgoKMSkg
-c3BpbmxvY2s6IGFkZCBsb3RzIG9mIG92ZXJoZWFkIG9uIGRhdGFwYXRoLCB0aGlzIGxlYWRzIDAg
-cGVyZm9ybWFuY2UgCmltcHJvdmVtZW50LgoKMikgU1JDVTogZnVsbCBtZW1vcnkgYmFycmllciBy
-ZXF1aXJlcyBvbiBzcmN1X3JlYWRfbG9jaygpLCB3aGljaCBzdGlsbCAKbGVhZHMgbGl0dGxlIHBl
-cmZvcm1hbmNlIGltcHJvdmVtZW50CgozKSBtdXRleDogYSBwb3NzaWJsZSBpc3N1ZSBpcyBuZWVk
-IHRvIHdhaXQgZm9yIHRoZSBwYWdlIHRvIGJlIHN3YXBwZWQgaW4gCihpcyB0aGlzIHVuYWNjZXB0
-YWJsZSA/KSwgYW5vdGhlciBpc3N1ZSBpcyB0aGF0IHdlIG5lZWQgaG9sZCB2cSBsb2NrIApkdXJp
-bmcgcmFuZ2Ugb3ZlcmxhcCBjaGVjay4KCjQpIHVzaW5nIHZob3N0X2ZsdXNoX3dvcmsoKSBpbnN0
-ZWFkIG9mIHN5bmNocm9uaXplX3JjdSgpOiBzdGlsbCBuZWVkIHRvIAp3YWl0IGZvciBzd2FwLiBC
-dXQgY2FuIGRvIG92ZXJsYXAgY2hlY2tpbmcgd2l0aG91dCB0aGUgbG9jawoKCj4KPiBBbmQsIGFn
-YWluLCB5b3UgY2FuJ3QgcmUtaW52ZW50IGEgc3BpbmxvY2sgd2l0aCBvcGVuIGNvZGluZyBhbmQg
-Z2V0Cj4gc29tZXRoaW5nIGJldHRlci4KCgpTbyB0aGUgcXVlc3Rpb24gaXMgaWYgd2FpdGluZyBm
-b3Igc3dhcCBpcyBjb25zaWRlcmVkIHRvIGJlIHVuc3VpdGFibGUgCmZvciBNTVUgbm90aWZpZXJz
-LiBJZiBub3QsIGl0IHdvdWxkIHNpbXBsaWZ5IGNvZGVzLiBJZiBub3QsIHdlIHN0aWxsIApuZWVk
-IHRvIGZpZ3VyZSBvdXQgYSBwb3NzaWJsZSBzb2x1dGlvbi4KCkJ0dywgSSBjb21lIHVwIGFub3Ro
-ZXIgaWRlYSwgdGhhdCBpcyB0byBkaXNhYmxlIHByZWVtcHRpb24gd2hlbiB2aG9zdCAKdGhyZWFk
-IG5lZWQgdG8gYWNjZXNzIHRoZSBtZW1vcnkuIFRoZW4gcmVnaXN0ZXIgcHJlZW1wdCBub3RpZmll
-ciBhbmQgaWYgCnZob3N0IHRocmVhZCBpcyBwcmVlbXB0ZWQsIHdlJ3JlIHN1cmUgbm8gb25lIHdp
-bGwgYWNjZXNzIHRoZSBtZW1vcnkgYW5kIApjYW4gZG8gdGhlIGNsZWFudXAuCgpUaGFua3MKCgo+
-Cj4gSmFzb24KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-VmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZv
-dW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3ZpcnR1YWxpemF0aW9u
+On Fri, Aug 02, 2019 at 05:40:07PM +0800, Jason Wang wrote:
+> > This must be a proper barrier, like a spinlock, mutex, or
+> > synchronize_rcu.
+> 
+> 
+> I start with synchronize_rcu() but both you and Michael raise some
+> concern.
+
+I've also idly wondered if calling synchronize_rcu() under the various
+mm locks is a deadlock situation.
+
+> Then I try spinlock and mutex:
+> 
+> 1) spinlock: add lots of overhead on datapath, this leads 0 performance
+> improvement.
+
+I think the topic here is correctness not performance improvement
+
+> 2) SRCU: full memory barrier requires on srcu_read_lock(), which still leads
+> little performance improvement
+ 
+> 3) mutex: a possible issue is need to wait for the page to be swapped in (is
+> this unacceptable ?), another issue is that we need hold vq lock during
+> range overlap check.
+
+I have a feeling that mmu notififers cannot safely become dependent on
+progress of swap without causing deadlock. You probably should avoid
+this.
+
+> > And, again, you can't re-invent a spinlock with open coding and get
+> > something better.
+> 
+> So the question is if waiting for swap is considered to be unsuitable for
+> MMU notifiers. If not, it would simplify codes. If not, we still need to
+> figure out a possible solution.
+> 
+> Btw, I come up another idea, that is to disable preemption when vhost thread
+> need to access the memory. Then register preempt notifier and if vhost
+> thread is preempted, we're sure no one will access the memory and can do the
+> cleanup.
+
+I think you should use the spinlock so at least the code is obviously
+functionally correct and worry about designing some properly justified
+performance change after.
+
+Jason
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
