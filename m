@@ -2,57 +2,71 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0B4A7EBFB
-	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 07:23:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A8307EE19
+	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 09:55:21 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9141117DF;
-	Fri,  2 Aug 2019 05:22:57 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 5F284E43;
+	Fri,  2 Aug 2019 07:55:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A90691755
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 52F9DE3C
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 05:22:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5C7C4712
+	Fri,  2 Aug 2019 07:55:13 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 97515712
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 05:22:56 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
-	[10.5.11.14])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id D7D2DC027339;
-	Fri,  2 Aug 2019 05:22:55 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-81.ams2.redhat.com
-	[10.36.116.81])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 8CC175D9DC;
-	Fri,  2 Aug 2019 05:22:55 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id EF7409D20; Fri,  2 Aug 2019 07:22:51 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v4 16/17] drm/virtio: switch driver from bo->resv to
-	bo->base.resv
-Date: Fri,  2 Aug 2019 07:22:46 +0200
-Message-Id: <20190802052247.18427-17-kraxel@redhat.com>
-In-Reply-To: <20190802052247.18427-1-kraxel@redhat.com>
-References: <20190802052247.18427-1-kraxel@redhat.com>
+	Fri,  2 Aug 2019 07:55:12 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id r1so76124937wrl.7
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 02 Aug 2019 00:55:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=iQeecZfwLuP7CODOolIpmoLPGZENj4z5U1obZlPPBsE=;
+	b=kJ5WZYj7+c7ymAw9tzR6zj0XlTKz38f1sZOGTixkTuvPZ3on0rthVsAXnMD03A8Pvy
+	XpcmtfQy5LbW7kFgVbqE2W8fwjxlWd42JTRvifny3kMhYpWiDijqNyHKWadnLbb3D1t2
+	kdjR33VVcKEIAiYrfhcqbsRCLZfXbCi/5U2pgsYm+rwxZrLGIDCanNqx5nQUA+DxDuOo
+	jtAg0G6YVWJidTF4eE9h0okHKhF05XgmBYL2vT33i+gP281ChGVXZVVSVOzsNKDXiwqU
+	A/0ptNJqvF4wXPWvBHY/du0JAS6QrMleINyD5278KoIiwou0eGnQZBukKEYYkF0LF/wl
+	Xp3Q==
+X-Gm-Message-State: APjAAAWT0F7lp9Wr4UM+fFBDIqmT7AG6Xqw9jAUsekoL9UrLTk9urA0U
+	OawDaQNC0Y73XqHGhNJ1GCw4Yw==
+X-Google-Smtp-Source: APXvYqxJYMba81q1+ZjYpm8CUmRIMpGHEf3SB8tgLMove58CtJewiAKhbgEp6Gf/LDnWAQBR7N5n+w==
+X-Received: by 2002:a05:6000:42:: with SMTP id
+	k2mr23783548wrx.80.1564732511147; 
+	Fri, 02 Aug 2019 00:55:11 -0700 (PDT)
+Received: from steredhat (host122-201-dynamic.13-79-r.retail.telecomitalia.it.
+	[79.13.201.122]) by smtp.gmail.com with ESMTPSA id
+	j9sm83739926wrn.81.2019.08.02.00.55.09
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Fri, 02 Aug 2019 00:55:10 -0700 (PDT)
+Date: Fri, 2 Aug 2019 09:55:08 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Dexuan Cui <decui@microsoft.com>
+Subject: Re: [PATCH v2 00/11] VSOCK: add vsock_test test suite
+Message-ID: <20190802075508.tumpam2vfmynuhd5@steredhat>
+References: <20190801152541.245833-1-sgarzare@redhat.com>
+	<PU1P153MB0169B265ECA51CB0AE1212DEBFDE0@PU1P153MB0169.APCP153.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.31]);
-	Fri, 02 Aug 2019 05:22:55 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+Content-Disposition: inline
+In-Reply-To: <PU1P153MB0169B265ECA51CB0AE1212DEBFDE0@PU1P153MB0169.APCP153.PROD.OUTLOOK.COM>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: thomas@shipmail.org, tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
-	ckoenig.leichtzumerken@gmail.com, open list <linux-kernel@vger.kernel.org>,
-	"open list:VIRTIO GPU DRIVER"
-	<virtualization@lists.linux-foundation.org>, daniel@ffwll.ch,
-	bskeggs@redhat.com
+Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,43 +78,35 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-U2lnbmVkLW9mZi1ieTogR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+CkFja2VkLWJ5
-OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Ci0tLQogZHJpdmVy
-cy9ncHUvZHJtL3ZpcnRpby92aXJ0Z3B1X2lvY3RsLmMgfCA0ICsrLS0KIGRyaXZlcnMvZ3B1L2Ry
-bS92aXJ0aW8vdmlydGdwdV9wbGFuZS5jIHwgMiArLQogMiBmaWxlcyBjaGFuZ2VkLCAzIGluc2Vy
-dGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3Zp
-cnRpby92aXJ0Z3B1X2lvY3RsLmMgYi9kcml2ZXJzL2dwdS9kcm0vdmlydGlvL3ZpcnRncHVfaW9j
-dGwuYwppbmRleCBkMzc5ZDJlN2UzZWYuLjNjNDMwZGQ2NWY2NyAxMDA2NDQKLS0tIGEvZHJpdmVy
-cy9ncHUvZHJtL3ZpcnRpby92aXJ0Z3B1X2lvY3RsLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL3Zp
-cnRpby92aXJ0Z3B1X2lvY3RsLmMKQEAgLTM5Niw3ICszOTYsNyBAQCBzdGF0aWMgaW50IHZpcnRp
-b19ncHVfdHJhbnNmZXJfZnJvbV9ob3N0X2lvY3RsKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsCiAJ
-CSh2Z2RldiwgcW9iai0+aHdfcmVzX2hhbmRsZSwKIAkJIHZmcHJpdi0+Y3R4X2lkLCBvZmZzZXQs
-IGFyZ3MtPmxldmVsLAogCQkgJmJveCwgZmVuY2UpOwotCXJlc2VydmF0aW9uX29iamVjdF9hZGRf
-ZXhjbF9mZW5jZShxb2JqLT50Ym8ucmVzdiwKKwlyZXNlcnZhdGlvbl9vYmplY3RfYWRkX2V4Y2xf
-ZmVuY2UocW9iai0+dGJvLmJhc2UucmVzdiwKIAkJCQkJICAmZmVuY2UtPmYpOwogCiAJZG1hX2Zl
-bmNlX3B1dCgmZmVuY2UtPmYpOwpAQCAtNDUwLDcgKzQ1MCw3IEBAIHN0YXRpYyBpbnQgdmlydGlv
-X2dwdV90cmFuc2Zlcl90b19ob3N0X2lvY3RsKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQg
-KmRhdGEsCiAJCQkodmdkZXYsIHFvYmosCiAJCQkgdmZwcml2ID8gdmZwcml2LT5jdHhfaWQgOiAw
-LCBvZmZzZXQsCiAJCQkgYXJncy0+bGV2ZWwsICZib3gsIGZlbmNlKTsKLQkJcmVzZXJ2YXRpb25f
-b2JqZWN0X2FkZF9leGNsX2ZlbmNlKHFvYmotPnRiby5yZXN2LAorCQlyZXNlcnZhdGlvbl9vYmpl
-Y3RfYWRkX2V4Y2xfZmVuY2UocW9iai0+dGJvLmJhc2UucmVzdiwKIAkJCQkJCSAgJmZlbmNlLT5m
-KTsKIAkJZG1hX2ZlbmNlX3B1dCgmZmVuY2UtPmYpOwogCX0KZGlmZiAtLWdpdCBhL2RyaXZlcnMv
-Z3B1L2RybS92aXJ0aW8vdmlydGdwdV9wbGFuZS5jIGIvZHJpdmVycy9ncHUvZHJtL3ZpcnRpby92
-aXJ0Z3B1X3BsYW5lLmMKaW5kZXggZjk2YzgyOTYzMDdlLi4zZGMwOGY5OTFhOGQgMTAwNjQ0Ci0t
-LSBhL2RyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV9wbGFuZS5jCisrKyBiL2RyaXZlcnMv
-Z3B1L2RybS92aXJ0aW8vdmlydGdwdV9wbGFuZS5jCkBAIC0yMTIsNyArMjEyLDcgQEAgc3RhdGlj
-IHZvaWQgdmlydGlvX2dwdV9jdXJzb3JfcGxhbmVfdXBkYXRlKHN0cnVjdCBkcm1fcGxhbmUgKnBs
-YW5lLAogCQkJIDAsIDAsIHZnZmItPmZlbmNlKTsKIAkJcmV0ID0gdmlydGlvX2dwdV9vYmplY3Rf
-cmVzZXJ2ZShibywgZmFsc2UpOwogCQlpZiAoIXJldCkgewotCQkJcmVzZXJ2YXRpb25fb2JqZWN0
-X2FkZF9leGNsX2ZlbmNlKGJvLT50Ym8ucmVzdiwKKwkJCXJlc2VydmF0aW9uX29iamVjdF9hZGRf
-ZXhjbF9mZW5jZShiby0+dGJvLmJhc2UucmVzdiwKIAkJCQkJCQkgICZ2Z2ZiLT5mZW5jZS0+Zik7
-CiAJCQlkbWFfZmVuY2VfcHV0KCZ2Z2ZiLT5mZW5jZS0+Zik7CiAJCQl2Z2ZiLT5mZW5jZSA9IE5V
-TEw7Ci0tIAoyLjE4LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5s
-aW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFp
-bG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Thu, Aug 01, 2019 at 04:16:37PM +0000, Dexuan Cui wrote:
+> > From: Stefano Garzarella <sgarzare@redhat.com>
+> > Sent: Thursday, August 1, 2019 8:26 AM
+> > 
+> > The vsock_diag.ko module already has a test suite but the core AF_VSOCK
+> > functionality has no tests.  This patch series adds several test cases that
+> > exercise AF_VSOCK SOCK_STREAM socket semantics (send/recv,
+> > connect/accept,
+> > half-closed connections, simultaneous connections).
+> > 
+> > Dexuan: Do you think can be useful to test HyperV?
+> 
+> Hi Stefano,
+> Thanks! This should be useful, though I have to write the Windows host side
+> code to use the test program(s). :-)
+> 
+
+Oh, yeah, I thought so :-)
+
+Let me know when you'll try to find out if there's a problem.
+
+Thanks,
+Stefano
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
