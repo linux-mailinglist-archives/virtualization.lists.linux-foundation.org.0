@@ -2,50 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DD3E7F83C
-	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 15:14:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E68A57F847
+	for <lists.virtualization@lfdr.de>; Fri,  2 Aug 2019 15:15:32 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EBE3E1388;
-	Fri,  2 Aug 2019 13:12:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C86E51395;
+	Fri,  2 Aug 2019 13:13:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
-Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
-	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 472971306
+Received: from smtp2.linuxfoundation.org (smtp2.linux-foundation.org
+	[172.17.192.36])
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 028D21306
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 13:12:35 +0000 (UTC)
+	Fri,  2 Aug 2019 13:12:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D6A208A9
+	by smtp2.linuxfoundation.org (Postfix) with ESMTPS id B61A31DD19
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  2 Aug 2019 13:12:34 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
+	Fri,  2 Aug 2019 13:12:38 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 671E0307D90E;
-	Fri,  2 Aug 2019 13:12:34 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 23FF83091799;
+	Fri,  2 Aug 2019 13:12:38 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-81.ams2.redhat.com
 	[10.36.116.81])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 8F5165C22B;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id F0E885D96E;
 	Fri,  2 Aug 2019 13:12:31 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 6A86B9D1F; Fri,  2 Aug 2019 15:12:28 +0200 (CEST)
+	id 821769D20; Fri,  2 Aug 2019 15:12:28 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v7 15/18] drm/virtio: remove virtio_gpu_alloc_object
-Date: Fri,  2 Aug 2019 15:12:22 +0200
-Message-Id: <20190802131225.17760-16-kraxel@redhat.com>
+Subject: [PATCH v7 16/18] drm/virtio: drop virtio_gpu_object_{ref,unref}
+Date: Fri,  2 Aug 2019 15:12:23 +0200
+Message-Id: <20190802131225.17760-17-kraxel@redhat.com>
 In-Reply-To: <20190802131225.17760-1-kraxel@redhat.com>
 References: <20190802131225.17760-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.48]);
-	Fri, 02 Aug 2019 13:12:34 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.41]);
+	Fri, 02 Aug 2019 13:12:38 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	smtp1.linux-foundation.org
+	smtp2.linux-foundation.org
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
 	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
 	Daniel Vetter <daniel@ffwll.ch>, gurchetansingh@chromium.org,
@@ -67,94 +67,39 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Thin wrapper around virtio_gpu_object_create(),
-but calling that directly works equally well.
+No users left.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/virtio/virtgpu_drv.h   |  4 ----
- drivers/gpu/drm/virtio/virtgpu_gem.c   | 23 ++++-------------------
- drivers/gpu/drm/virtio/virtgpu_ioctl.c |  6 +++---
- 3 files changed, 7 insertions(+), 26 deletions(-)
+ drivers/gpu/drm/virtio/virtgpu_drv.h | 15 ---------------
+ 1 file changed, 15 deletions(-)
 
 diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
-index 1d6e4ffee7d1..d4d82679d83a 100644
+index d4d82679d83a..59f71dc94017 100644
 --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
 +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
-@@ -229,10 +229,6 @@ int virtio_gpu_gem_object_open(struct drm_gem_object *obj,
- 			       struct drm_file *file);
- void virtio_gpu_gem_object_close(struct drm_gem_object *obj,
- 				 struct drm_file *file);
--struct virtio_gpu_object*
--virtio_gpu_alloc_object(struct drm_device *dev,
--			struct virtio_gpu_object_params *params,
--			struct virtio_gpu_fence *fence);
- int virtio_gpu_mode_dumb_create(struct drm_file *file_priv,
- 				struct drm_device *dev,
- 				struct drm_mode_create_dumb *args);
-diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
-index 0cba78bcf39c..33cc5ab31356 100644
---- a/drivers/gpu/drm/virtio/virtgpu_gem.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
-@@ -28,35 +28,20 @@
+@@ -363,21 +363,6 @@ struct drm_gem_object *virtgpu_gem_prime_import_sg_table(
+ 	struct drm_device *dev, struct dma_buf_attachment *attach,
+ 	struct sg_table *sgt);
  
- #include "virtgpu_drv.h"
- 
--struct virtio_gpu_object*
--virtio_gpu_alloc_object(struct drm_device *dev,
--			struct virtio_gpu_object_params *params,
--			struct virtio_gpu_fence *fence)
+-static inline struct virtio_gpu_object*
+-virtio_gpu_object_ref(struct virtio_gpu_object *bo)
 -{
--	struct virtio_gpu_device *vgdev = dev->dev_private;
--	struct virtio_gpu_object *obj;
--	int ret;
--
--	ret = virtio_gpu_object_create(vgdev, params, &obj, fence);
--	if (ret)
--		return ERR_PTR(ret);
--
--	return obj;
+-	drm_gem_object_get(&bo->base.base);
+-	return bo;
 -}
 -
- int virtio_gpu_gem_create(struct drm_file *file,
- 			  struct drm_device *dev,
- 			  struct virtio_gpu_object_params *params,
- 			  struct drm_gem_object **obj_p,
- 			  uint32_t *handle_p)
+-static inline void virtio_gpu_object_unref(struct virtio_gpu_object **bo)
+-{
+-	if ((*bo) == NULL)
+-		return;
+-	drm_gem_object_put(&(*bo)->base.base);
+-	*bo = NULL;
+-}
+-
+ static inline u64 virtio_gpu_object_mmap_offset(struct virtio_gpu_object *bo)
  {
-+	struct virtio_gpu_device *vgdev = dev->dev_private;
- 	struct virtio_gpu_object *obj;
- 	int ret;
- 	u32 handle;
- 
--	obj = virtio_gpu_alloc_object(dev, params, NULL);
--	if (IS_ERR(obj))
--		return PTR_ERR(obj);
-+	ret = virtio_gpu_object_create(vgdev, params, &obj, NULL);
-+	if (ret < 0)
-+		return ret;
- 
- 	ret = drm_gem_handle_create(file, &obj->base.base, &handle);
- 	if (ret) {
-diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-index 865b3b8400ed..890bc55183cc 100644
---- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-@@ -256,10 +256,10 @@ static int virtio_gpu_resource_create_ioctl(struct drm_device *dev, void *data,
- 	fence = virtio_gpu_fence_alloc(vgdev);
- 	if (!fence)
- 		return -ENOMEM;
--	qobj = virtio_gpu_alloc_object(dev, &params, fence);
-+	ret = virtio_gpu_object_create(vgdev, &params, &qobj, fence);
- 	dma_fence_put(&fence->f);
--	if (IS_ERR(qobj))
--		return PTR_ERR(qobj);
-+	if (ret < 0)
-+		return ret;
- 	obj = &qobj->base.base;
- 
- 	ret = drm_gem_handle_create(file_priv, obj, &handle);
+ 	return drm_vma_node_offset_addr(&bo->base.base.vma_node);
 -- 
 2.18.1
 
