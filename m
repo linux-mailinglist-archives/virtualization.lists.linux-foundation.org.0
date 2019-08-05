@@ -2,72 +2,62 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59C1C809ED
-	for <lists.virtualization@lfdr.de>; Sun,  4 Aug 2019 10:07:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2E5A810D9
+	for <lists.virtualization@lfdr.de>; Mon,  5 Aug 2019 06:21:01 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 64FD1D6A;
-	Sun,  4 Aug 2019 08:07:24 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id ADD23C75;
+	Mon,  5 Aug 2019 04:20:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4CE52D39
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 466A3AF7
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  4 Aug 2019 08:07:23 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B2339829
+	Mon,  5 Aug 2019 04:20:54 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E2E915E4
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  4 Aug 2019 08:07:22 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id n9so81426160wru.0
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 04 Aug 2019 01:07:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=9iGihd0uQZm0OhWtfPGT4IVKLzhJ/X1+ULeDAnIt+iM=;
-	b=s2UdmoPeOe/j0woc+5K4YHkfcwCyhYsORGI2FaEk7ppQv9DuW02Fikzc3yPEzxrZdD
-	kiSDVY1dMdW6dDNcNBFL/+wvTPQeaRWWJfq8fWvBCjzyaHeL3fXPIhdGEoAaLIv4aZRc
-	GT3McFkTLdlsgnXIifX7jWvIHOaWBr2MblmfxXSQ3GTilBlgfAHAyB0Euso/EYv0jiA0
-	MBkpxJ4An9PC8LEg+IyEWlya93f2PeMSlcC5kUxwSwg2twHgLHYmBIf2gFTnXa8ck3CT
-	QSFe1GxHtQ2Yj5hMgww+iDax2B8+AWqqKsSgFFyNwywgAfh446SvKkv0a49ukb6TvZyg
-	+O5w==
-X-Gm-Message-State: APjAAAWvremLNzX/8eKY0UEjwpCav39EuaaJhQN3SqPkjoZh8wXmAVAj
-	Vp28VqBc0xr/kd1zjIxy1jvw2A==
-X-Google-Smtp-Source: APXvYqwI+gaRAvVddfB9OVUlNyUeUxov9xoEZgkuKZzlqBcvGCZoK4Z/LJM3l40Bq9U3eA5YbA17zQ==
-X-Received: by 2002:adf:e2c1:: with SMTP id d1mr163081358wrj.283.1564906041363;
-	Sun, 04 Aug 2019 01:07:21 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
-	by smtp.gmail.com with ESMTPSA id
-	r11sm124352644wre.14.2019.08.04.01.07.19
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 04 Aug 2019 01:07:20 -0700 (PDT)
-Date: Sun, 4 Aug 2019 04:07:17 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>
+	Mon,  5 Aug 2019 04:20:53 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 4E8B5A3EB3;
+	Mon,  5 Aug 2019 04:20:53 +0000 (UTC)
+Received: from [10.72.12.115] (ovpn-12-115.pek2.redhat.com [10.72.12.115])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 870955D9E2;
+	Mon,  5 Aug 2019 04:20:47 +0000 (UTC)
 Subject: Re: [PATCH V2 7/9] vhost: do not use RCU to synchronize MMU notifier
 	with worker
-Message-ID: <20190804040034-mutt-send-email-mst@kernel.org>
-References: <7555c949-ae6f-f105-6e1d-df21ddae9e4e@redhat.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+References: <20190731084655.7024-1-jasowang@redhat.com>
+	<20190731084655.7024-8-jasowang@redhat.com>
+	<20190731123935.GC3946@ziepe.ca>
+	<7555c949-ae6f-f105-6e1d-df21ddae9e4e@redhat.com>
 	<20190731193057.GG3946@ziepe.ca>
 	<a3bde826-6329-68e4-2826-8a9de4c5bd1e@redhat.com>
 	<20190801141512.GB23899@ziepe.ca>
 	<42ead87b-1749-4c73-cbe4-29dbeb945041@redhat.com>
 	<20190802124613.GA11245@ziepe.ca>
-	<20190802100414-mutt-send-email-mst@kernel.org>
-	<20190802172418.GB11245@ziepe.ca>
-	<20190803172944-mutt-send-email-mst@kernel.org>
-	<20190804001400.GA25543@ziepe.ca>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <11b2a930-eae4-522c-4132-3f8a2da05666@redhat.com>
+Date: Mon, 5 Aug 2019 12:20:45 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190804001400.GA25543@ziepe.ca>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <20190802124613.GA11245@ziepe.ca>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.30]);
+	Mon, 05 Aug 2019 04:20:53 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org, linux-mm@kvack.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
@@ -80,72 +70,50 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sat, Aug 03, 2019 at 09:14:00PM -0300, Jason Gunthorpe wrote:
-> On Sat, Aug 03, 2019 at 05:36:13PM -0400, Michael S. Tsirkin wrote:
-> > On Fri, Aug 02, 2019 at 02:24:18PM -0300, Jason Gunthorpe wrote:
-> > > On Fri, Aug 02, 2019 at 10:27:21AM -0400, Michael S. Tsirkin wrote:
-> > > > On Fri, Aug 02, 2019 at 09:46:13AM -0300, Jason Gunthorpe wrote:
-> > > > > On Fri, Aug 02, 2019 at 05:40:07PM +0800, Jason Wang wrote:
-> > > > > > > This must be a proper barrier, like a spinlock, mutex, or
-> > > > > > > synchronize_rcu.
-> > > > > > 
-> > > > > > 
-> > > > > > I start with synchronize_rcu() but both you and Michael raise some
-> > > > > > concern.
-> > > > > 
-> > > > > I've also idly wondered if calling synchronize_rcu() under the various
-> > > > > mm locks is a deadlock situation.
-> > > > > 
-> > > > > > Then I try spinlock and mutex:
-> > > > > > 
-> > > > > > 1) spinlock: add lots of overhead on datapath, this leads 0 performance
-> > > > > > improvement.
-> > > > > 
-> > > > > I think the topic here is correctness not performance improvement
-> > > > 
-> > > > The topic is whether we should revert
-> > > > commit 7f466032dc9 ("vhost: access vq metadata through kernel virtual address")
-> > > > 
-> > > > or keep it in. The only reason to keep it is performance.
-> > > 
-> > > Yikes, I'm not sure you can ever win against copy_from_user using
-> > > mmu_notifiers?
-> > 
-> > Ever since copy_from_user started playing with flags (for SMAP) and
-> > added speculation barriers there's a chance we can win by accessing
-> > memory through the kernel address.
-> 
-> You think copy_to_user will be more expensive than the minimum two
-> atomics required to synchronize with another thread?
-
-I frankly don't know. With SMAP you flip flags twice, and with spectre
-you flush the pipeline. Is that cheaper or more expensive than an atomic
-operation? Testing is the only way to tell.
-
-> > > Also, why can't this just permanently GUP the pages? In fact, where
-> > > does it put_page them anyhow? Worrying that 7f466 adds a get_user page
-> > > but does not add a put_page??
-> 
-> You didn't answer this.. Why not just use GUP?
-> 
-> Jason
-
-Sorry I misunderstood the question. Permanent GUP breaks lots of
-functionality we need such as THP and numa balancing.
-
-release_pages is used instead of put_page.
-
-
-
-
--- 
-MST
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvOC8yIOS4i+WNiDg6NDYsIEphc29uIEd1bnRob3JwZSB3cm90ZToKPiBPbiBGcmks
+IEF1ZyAwMiwgMjAxOSBhdCAwNTo0MDowN1BNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+Pj4g
+VGhpcyBtdXN0IGJlIGEgcHJvcGVyIGJhcnJpZXIsIGxpa2UgYSBzcGlubG9jaywgbXV0ZXgsIG9y
+Cj4+PiBzeW5jaHJvbml6ZV9yY3UuCj4+Cj4+IEkgc3RhcnQgd2l0aCBzeW5jaHJvbml6ZV9yY3Uo
+KSBidXQgYm90aCB5b3UgYW5kIE1pY2hhZWwgcmFpc2Ugc29tZQo+PiBjb25jZXJuLgo+IEkndmUg
+YWxzbyBpZGx5IHdvbmRlcmVkIGlmIGNhbGxpbmcgc3luY2hyb25pemVfcmN1KCkgdW5kZXIgdGhl
+IHZhcmlvdXMKPiBtbSBsb2NrcyBpcyBhIGRlYWRsb2NrIHNpdHVhdGlvbi4KCgpNYXliZSwgdGhh
+dCdzIHdoeSBJIHN1Z2dlc3QgdG8gdXNlIHZob3N0X3dvcmtfZmx1c2goKSB3aGljaCBpcyBtdWNo
+IApsaWdodHdlaWdodCBjYW4gY2FuIGFjaGlldmUgdGhlIHNhbWUgZnVuY3Rpb24uIEl0IGNhbiBn
+dWFyYW50ZWUgYWxsIApwcmV2aW91cyB3b3JrIGhhcyBiZWVuIHByb2Nlc3NlZCBhZnRlciB2aG9z
+dF93b3JrX2ZsdXNoKCkgcmV0dXJuLgoKCj4KPj4gVGhlbiBJIHRyeSBzcGlubG9jayBhbmQgbXV0
+ZXg6Cj4+Cj4+IDEpIHNwaW5sb2NrOiBhZGQgbG90cyBvZiBvdmVyaGVhZCBvbiBkYXRhcGF0aCwg
+dGhpcyBsZWFkcyAwIHBlcmZvcm1hbmNlCj4+IGltcHJvdmVtZW50Lgo+IEkgdGhpbmsgdGhlIHRv
+cGljIGhlcmUgaXMgY29ycmVjdG5lc3Mgbm90IHBlcmZvcm1hbmNlIGltcHJvdmVtZW50CgoKQnV0
+IHRoZSB3aG9sZSBzZXJpZXMgaXMgdG8gc3BlZWQgdXAgdmhvc3QuCgoKPgo+PiAyKSBTUkNVOiBm
+dWxsIG1lbW9yeSBiYXJyaWVyIHJlcXVpcmVzIG9uIHNyY3VfcmVhZF9sb2NrKCksIHdoaWNoIHN0
+aWxsIGxlYWRzCj4+IGxpdHRsZSBwZXJmb3JtYW5jZSBpbXByb3ZlbWVudAo+ICAgCj4+IDMpIG11
+dGV4OiBhIHBvc3NpYmxlIGlzc3VlIGlzIG5lZWQgdG8gd2FpdCBmb3IgdGhlIHBhZ2UgdG8gYmUg
+c3dhcHBlZCBpbiAoaXMKPj4gdGhpcyB1bmFjY2VwdGFibGUgPyksIGFub3RoZXIgaXNzdWUgaXMg
+dGhhdCB3ZSBuZWVkIGhvbGQgdnEgbG9jayBkdXJpbmcKPj4gcmFuZ2Ugb3ZlcmxhcCBjaGVjay4K
+PiBJIGhhdmUgYSBmZWVsaW5nIHRoYXQgbW11IG5vdGlmaWZlcnMgY2Fubm90IHNhZmVseSBiZWNv
+bWUgZGVwZW5kZW50IG9uCj4gcHJvZ3Jlc3Mgb2Ygc3dhcCB3aXRob3V0IGNhdXNpbmcgZGVhZGxv
+Y2suIFlvdSBwcm9iYWJseSBzaG91bGQgYXZvaWQKPiB0aGlzLgoKClllcywgc28gdGhhdCdzIHdo
+eSBJIHRyeSB0byBzeW5jaHJvbml6ZSB0aGUgY3JpdGljYWwgcmVnaW9uIGJ5IG15c2VsZi4KCgo+
+Pj4gQW5kLCBhZ2FpbiwgeW91IGNhbid0IHJlLWludmVudCBhIHNwaW5sb2NrIHdpdGggb3BlbiBj
+b2RpbmcgYW5kIGdldAo+Pj4gc29tZXRoaW5nIGJldHRlci4KPj4gU28gdGhlIHF1ZXN0aW9uIGlz
+IGlmIHdhaXRpbmcgZm9yIHN3YXAgaXMgY29uc2lkZXJlZCB0byBiZSB1bnN1aXRhYmxlIGZvcgo+
+PiBNTVUgbm90aWZpZXJzLiBJZiBub3QsIGl0IHdvdWxkIHNpbXBsaWZ5IGNvZGVzLiBJZiBub3Qs
+IHdlIHN0aWxsIG5lZWQgdG8KPj4gZmlndXJlIG91dCBhIHBvc3NpYmxlIHNvbHV0aW9uLgo+Pgo+
+PiBCdHcsIEkgY29tZSB1cCBhbm90aGVyIGlkZWEsIHRoYXQgaXMgdG8gZGlzYWJsZSBwcmVlbXB0
+aW9uIHdoZW4gdmhvc3QgdGhyZWFkCj4+IG5lZWQgdG8gYWNjZXNzIHRoZSBtZW1vcnkuIFRoZW4g
+cmVnaXN0ZXIgcHJlZW1wdCBub3RpZmllciBhbmQgaWYgdmhvc3QKPj4gdGhyZWFkIGlzIHByZWVt
+cHRlZCwgd2UncmUgc3VyZSBubyBvbmUgd2lsbCBhY2Nlc3MgdGhlIG1lbW9yeSBhbmQgY2FuIGRv
+IHRoZQo+PiBjbGVhbnVwLgo+IEkgdGhpbmsgeW91IHNob3VsZCB1c2UgdGhlIHNwaW5sb2NrIHNv
+IGF0IGxlYXN0IHRoZSBjb2RlIGlzIG9idmlvdXNseQo+IGZ1bmN0aW9uYWxseSBjb3JyZWN0IGFu
+ZCB3b3JyeSBhYm91dCBkZXNpZ25pbmcgc29tZSBwcm9wZXJseSBqdXN0aWZpZWQKPiBwZXJmb3Jt
+YW5jZSBjaGFuZ2UgYWZ0ZXIuCj4KPiBKYXNvbgoKClNwaW5sb2NrIGlzIGNvcnJlY3QgYnV0IG1h
+a2UgdGhlIHdob2xlIHNlcmllcyBtZWFuaW5nbGVzcyBjb25zaWRlciBpdCAKd29uJ3QgYnJpbmcg
+YW55IHBlcmZvcm1hbmNlIGltcHJvdmVtZW50LgoKVGhhbmtzCgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0
+ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMu
+bGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
