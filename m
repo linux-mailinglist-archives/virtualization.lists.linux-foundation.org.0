@@ -2,56 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 719B9832C4
-	for <lists.virtualization@lfdr.de>; Tue,  6 Aug 2019 15:35:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EED73832CF
+	for <lists.virtualization@lfdr.de>; Tue,  6 Aug 2019 15:37:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0B971E1E;
-	Tue,  6 Aug 2019 13:35:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 83660E27;
+	Tue,  6 Aug 2019 13:37:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EBAA4C11
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id AFE1DC7F
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  6 Aug 2019 13:35:00 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 72260829
+	Tue,  6 Aug 2019 13:37:07 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5832689D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  6 Aug 2019 13:35:00 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
-	[10.5.11.23])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id E586F629C0;
-	Tue,  6 Aug 2019 13:34:59 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-144.ams2.redhat.com
-	[10.36.116.144])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 291F61A269;
-	Tue,  6 Aug 2019 13:34:59 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 3773117473; Tue,  6 Aug 2019 15:34:55 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH 3/3] drm/qxl: switch qxl to use the new ttm helpers.
-Date: Tue,  6 Aug 2019 15:34:54 +0200
-Message-Id: <20190806133454.8254-4-kraxel@redhat.com>
-In-Reply-To: <20190806133454.8254-1-kraxel@redhat.com>
-References: <20190806133454.8254-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.25]);
-	Tue, 06 Aug 2019 13:35:00 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	Tue,  6 Aug 2019 13:37:07 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id w190so62844952qkc.6
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 06 Aug 2019 06:37:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=+EmwYezlru/6l1RGke6OfmjMerhgmwmHntHPbq6+2AE=;
+	b=VJjiZcUSxobFDsPe7V46Bx3WyzLHk4EmFPf4+T1h5gYRv9wS0PCPNPx57t3ksD+o3L
+	8g5SDoeS5B0xiFCjq/Ap2FeCfscfr89LOBnl+dGKn5JYg0O3jaO0Gg+TJp/Rm9f1QCeJ
+	wjHrvMFpFixsmLpk1HCX1aAtc7AtJNJMtWXL+Itk87YwfjFaoXaIUfxHfCXBh9fR90YJ
+	nM+Ix+EuFQi1tLYrawH8A6MIDs5bBxz7aTbbUT/am7O4l3M9c9yfFlObLz/kXm6+XhG/
+	KI/aPkjvJhxlZjrey7uAzJGcwOejghY7+0X2qUUupBDEKD4G91NQT2s7WxdoupoT0Ty0
+	a3Ow==
+X-Gm-Message-State: APjAAAXq6GBFO2MGs2Tdse01JwPL2QW8RiHS2k2IlEZTZSZSCOAUZEKY
+	YHfQfcacuqgY6LeSMM34HHqFvQ==
+X-Google-Smtp-Source: APXvYqwQogResfBtEcBuAcFTuCtTWGzeNFF/0eeIOxkxJPkA8JpnI8WBDTcUIzFbb3AvBDILVnFfYQ==
+X-Received: by 2002:ae9:efc6:: with SMTP id d189mr2946499qkg.323.1565098625407;
+	Tue, 06 Aug 2019 06:37:05 -0700 (PDT)
+Received: from redhat.com ([147.234.38.1]) by smtp.gmail.com with ESMTPSA id
+	q73sm24068906qke.90.2019.08.06.06.37.01
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Tue, 06 Aug 2019 06:37:04 -0700 (PDT)
+Date: Tue, 6 Aug 2019 09:36:58 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+Subject: Re: [PATCH V2 7/9] vhost: do not use RCU to synchronize MMU notifier
+	with worker
+Message-ID: <20190806093633-mutt-send-email-mst@kernel.org>
+References: <a3bde826-6329-68e4-2826-8a9de4c5bd1e@redhat.com>
+	<20190801141512.GB23899@ziepe.ca>
+	<42ead87b-1749-4c73-cbe4-29dbeb945041@redhat.com>
+	<20190802124613.GA11245@ziepe.ca>
+	<20190802100414-mutt-send-email-mst@kernel.org>
+	<20190802172418.GB11245@ziepe.ca>
+	<20190803172944-mutt-send-email-mst@kernel.org>
+	<20190804001400.GA25543@ziepe.ca>
+	<20190804040034-mutt-send-email-mst@kernel.org>
+	<20190806115317.GA11627@ziepe.ca>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20190806115317.GA11627@ziepe.ca>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
-	open list <linux-kernel@vger.kernel.org>,
-	"open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,129 +79,32 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/qxl/qxl_drv.h    |  4 +---
- drivers/gpu/drm/qxl/qxl_object.h |  5 -----
- drivers/gpu/drm/qxl/qxl_drv.c    |  2 +-
- drivers/gpu/drm/qxl/qxl_dumb.c   | 17 -----------------
- drivers/gpu/drm/qxl/qxl_ioctl.c  |  5 +++--
- drivers/gpu/drm/qxl/Kconfig      |  1 +
- 6 files changed, 6 insertions(+), 28 deletions(-)
+On Tue, Aug 06, 2019 at 08:53:17AM -0300, Jason Gunthorpe wrote:
+> On Sun, Aug 04, 2019 at 04:07:17AM -0400, Michael S. Tsirkin wrote:
+> > > > > Also, why can't this just permanently GUP the pages? In fact, where
+> > > > > does it put_page them anyhow? Worrying that 7f466 adds a get_user page
+> > > > > but does not add a put_page??
+> > > 
+> > > You didn't answer this.. Why not just use GUP?
+> > > 
+> > > Jason
+> > 
+> > Sorry I misunderstood the question. Permanent GUP breaks lots of
+> > functionality we need such as THP and numa balancing.
+> 
+> Really? It doesn't look like that many pages are involved..
+> 
+> Jason
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index 9e034c5fa87d..82efbe76062a 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -38,6 +38,7 @@
- #include <drm/drm_crtc.h>
- #include <drm/drm_encoder.h>
- #include <drm/drm_fb_helper.h>
-+#include <drm/drm_gem_ttm_helper.h>
- #include <drm/drm_ioctl.h>
- #include <drm/drm_gem.h>
- #include <drm/qxl_drm.h>
-@@ -347,9 +348,6 @@ int qxl_bo_kmap(struct qxl_bo *bo, void **ptr);
- int qxl_mode_dumb_create(struct drm_file *file_priv,
- 			 struct drm_device *dev,
- 			 struct drm_mode_create_dumb *args);
--int qxl_mode_dumb_mmap(struct drm_file *filp,
--		       struct drm_device *dev,
--		       uint32_t handle, uint64_t *offset_p);
- 
- /* qxl ttm */
- int qxl_ttm_init(struct qxl_device *qdev);
-diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_object.h
-index 8ae54ba7857c..1f0316ebcfd0 100644
---- a/drivers/gpu/drm/qxl/qxl_object.h
-+++ b/drivers/gpu/drm/qxl/qxl_object.h
-@@ -58,11 +58,6 @@ static inline unsigned long qxl_bo_size(struct qxl_bo *bo)
- 	return bo->tbo.num_pages << PAGE_SHIFT;
- }
- 
--static inline u64 qxl_bo_mmap_offset(struct qxl_bo *bo)
--{
--	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
--}
--
- static inline int qxl_bo_wait(struct qxl_bo *bo, u32 *mem_type,
- 			      bool no_wait)
- {
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index c1802e01d9f6..18249110aa56 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -252,7 +252,7 @@ static struct drm_driver qxl_driver = {
- 	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
- 
- 	.dumb_create = qxl_mode_dumb_create,
--	.dumb_map_offset = qxl_mode_dumb_mmap,
-+	.dumb_map_offset = drm_gem_ttm_driver_dumb_mmap_offset,
- #if defined(CONFIG_DEBUG_FS)
- 	.debugfs_init = qxl_debugfs_init,
- #endif
-diff --git a/drivers/gpu/drm/qxl/qxl_dumb.c b/drivers/gpu/drm/qxl/qxl_dumb.c
-index 272d19b677d8..bd3b16a701a6 100644
---- a/drivers/gpu/drm/qxl/qxl_dumb.c
-+++ b/drivers/gpu/drm/qxl/qxl_dumb.c
-@@ -69,20 +69,3 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
- 	args->handle = handle;
- 	return 0;
- }
--
--int qxl_mode_dumb_mmap(struct drm_file *file_priv,
--		       struct drm_device *dev,
--		       uint32_t handle, uint64_t *offset_p)
--{
--	struct drm_gem_object *gobj;
--	struct qxl_bo *qobj;
--
--	BUG_ON(!offset_p);
--	gobj = drm_gem_object_lookup(file_priv, handle);
--	if (gobj == NULL)
--		return -ENOENT;
--	qobj = gem_to_qxl_bo(gobj);
--	*offset_p = qxl_bo_mmap_offset(qobj);
--	drm_gem_object_put_unlocked(gobj);
--	return 0;
--}
-diff --git a/drivers/gpu/drm/qxl/qxl_ioctl.c b/drivers/gpu/drm/qxl/qxl_ioctl.c
-index 8117a45b3610..b1cc38ed0ed4 100644
---- a/drivers/gpu/drm/qxl/qxl_ioctl.c
-+++ b/drivers/gpu/drm/qxl/qxl_ioctl.c
-@@ -67,8 +67,9 @@ static int qxl_map_ioctl(struct drm_device *dev, void *data,
- 	struct qxl_device *qdev = dev->dev_private;
- 	struct drm_qxl_map *qxl_map = data;
- 
--	return qxl_mode_dumb_mmap(file_priv, &qdev->ddev, qxl_map->handle,
--				  &qxl_map->offset);
-+	return drm_gem_ttm_driver_dumb_mmap_offset(file_priv, &qdev->ddev,
-+						   qxl_map->handle,
-+						   &qxl_map->offset);
- }
- 
- struct qxl_reloc_info {
-diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
-index d0d691b31f4a..bfe90c7d17b2 100644
---- a/drivers/gpu/drm/qxl/Kconfig
-+++ b/drivers/gpu/drm/qxl/Kconfig
-@@ -3,6 +3,7 @@ config DRM_QXL
- 	tristate "QXL virtual GPU"
- 	depends on DRM && PCI && MMU
- 	select DRM_KMS_HELPER
-+	select DRM_TTM_HELPER
- 	select DRM_TTM
- 	select CRC32
- 	help
+Yea. But they just might happen to be heavily accessed ones....
+
 -- 
-2.18.1
-
+MST
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
