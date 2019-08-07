@@ -2,85 +2,65 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D9D9844A5
-	for <lists.virtualization@lfdr.de>; Wed,  7 Aug 2019 08:40:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3B89844CF
+	for <lists.virtualization@lfdr.de>; Wed,  7 Aug 2019 08:50:11 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 8B4C8E33;
-	Wed,  7 Aug 2019 06:40:39 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 12C47E63;
+	Wed,  7 Aug 2019 06:50:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 57AD8941
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 464FEE61
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  7 Aug 2019 06:40:38 +0000 (UTC)
+	Wed,  7 Aug 2019 06:50:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from hqemgate15.nvidia.com (hqemgate15.nvidia.com [216.228.121.64])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8F4F282D
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E1F1C82F
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  7 Aug 2019 06:40:35 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
-	hqemgate15.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
-	id <B5d4a726c0000>; Tue, 06 Aug 2019 23:40:44 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
-	by hqpgpgate101.nvidia.com (PGP Universal service);
-	Tue, 06 Aug 2019 23:40:34 -0700
-X-PGP-Universal: processed;
-	by hqpgpgate101.nvidia.com on Tue, 06 Aug 2019 23:40:34 -0700
-Received: from [10.2.165.207] (10.124.1.5) by HQMAIL107.nvidia.com
-	(172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
-	Wed, 7 Aug 2019 06:40:34 +0000
-Subject: Re: [PATCH 00/12] block/bio, fs: convert put_page() to
-	put_user_page*()
-To: Christoph Hellwig <hch@infradead.org>
-References: <20190724042518.14363-1-jhubbard@nvidia.com>
-	<20190724061750.GA19397@infradead.org>
-	<c35aa2bf-c830-9e57-78ca-9ce6fb6cb53b@nvidia.com>
-	<20190807063448.GA6002@infradead.org>
-X-Nvconfidentiality: public
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <3ab1e69f-88c6-3e16-444d-cab78c3bf1d1@nvidia.com>
-Date: Tue, 6 Aug 2019 23:38:59 -0700
+	Wed,  7 Aug 2019 06:50:03 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 2729730DDBD8;
+	Wed,  7 Aug 2019 06:50:03 +0000 (UTC)
+Received: from [10.72.12.139] (ovpn-12-139.pek2.redhat.com [10.72.12.139])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 7BBF825263;
+	Wed,  7 Aug 2019 06:49:58 +0000 (UTC)
+Subject: Re: [PATCH V2 7/9] vhost: do not use RCU to synchronize MMU notifier
+	with worker
+To: Jason Gunthorpe <jgg@ziepe.ca>
+References: <20190731084655.7024-1-jasowang@redhat.com>
+	<20190731084655.7024-8-jasowang@redhat.com>
+	<20190731123935.GC3946@ziepe.ca>
+	<7555c949-ae6f-f105-6e1d-df21ddae9e4e@redhat.com>
+	<20190731193057.GG3946@ziepe.ca>
+	<a3bde826-6329-68e4-2826-8a9de4c5bd1e@redhat.com>
+	<20190801141512.GB23899@ziepe.ca>
+	<42ead87b-1749-4c73-cbe4-29dbeb945041@redhat.com>
+	<20190802124613.GA11245@ziepe.ca>
+	<11b2a930-eae4-522c-4132-3f8a2da05666@redhat.com>
+	<20190806120416.GB11627@ziepe.ca>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <4b448aa5-2c92-a6ca-67d6-d30fad67254c@redhat.com>
+Date: Wed, 7 Aug 2019 14:49:57 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190807063448.GA6002@infradead.org>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL104.nvidia.com (172.18.146.11) To
-	HQMAIL107.nvidia.com (172.20.187.13)
+In-Reply-To: <20190806120416.GB11627@ziepe.ca>
 Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-	t=1565160044; bh=jn0FnBY7ADCh0laBLX/xGqPiB9Jg8oG9YEaLS2KH1Js=;
-	h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
-	Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
-	X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
-	Content-Transfer-Encoding;
-	b=cZhyddtfeWnuDzmY91G/o97CceVB5RM0qm7xIS+BT+DJS1yACOaMbPnxtDPonJo3O
-	Ckk802AdQClg27dtVTwqZlP1rJ45uR/xJxU2tj1bAWtx6wGx8MnDwDr9/hAcMofdtY
-	YSzbF7dvdBOxPO1CMgg0kHDyQnZ9XI/sZkIaiXVixuZIn5BzSqRh7aOyfPS3OIiva2
-	EdoAoTR8kqTmNnuIpmqz0Mts9lp7nFil4TrfQHcFTrur14aYk9UOgpcZdRREzoyCup
-	0KYEKb/ZJNSFduxPI76a4ilG78VxY7/mJHog1LdnWqMnq4OYf6DhFN3qt02E1MzswR
-	TFH77+TyL//6w==
-X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.49]);
+	Wed, 07 Aug 2019 06:50:03 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
-	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
-	Christoph Hellwig <hch@lst.de>, linux-cifs@vger.kernel.org,
-	Miklos Szeredi <miklos@szeredi.hu>, linux-rdma@vger.kernel.org,
-	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
-	v9fs-developer@lists.sourceforge.net,
-	Eric Van Hensbergen <ericvh@gmail.com>, john.hubbard@gmail.com,
-	linux-block@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>,
-	ceph-devel@vger.kernel.org,
-	Trond Myklebust <trond.myklebust@hammerspace.com>,
-	Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
-	netdev@vger.kernel.org, samba-technical@lists.samba.org,
-	LKML <linux-kernel@vger.kernel.org>,
-	"David S . Miller" <davem@davemloft.net>, linux-fsdevel@vger.kernel.org,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Anna Schumaker <anna.schumaker@netapp.com>
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -97,28 +77,39 @@ Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gOC82LzE5IDExOjM0IFBNLCBDaHJpc3RvcGggSGVsbHdpZyB3cm90ZToKPiBPbiBNb24sIEF1
-ZyAwNSwgMjAxOSBhdCAwMzo1NDozNVBNIC0wNzAwLCBKb2huIEh1YmJhcmQgd3JvdGU6Cj4+IE9u
-IDcvMjMvMTkgMTE6MTcgUE0sIENocmlzdG9waCBIZWxsd2lnIHdyb3RlOgouLi4KPj4+IEkgdGhp
-bmsgd2UgY2FuIGRvIHRoaXMgaW4gYSBzaW1wbGUgYW5kIGJldHRlciB3YXkuICBXZSBoYXZlIDUg
-SVRFUl8qCj4+PiB0eXBlcy4gIE9mIHRob3NlIElURVJfRElTQ0FSRCBhcyB0aGUgbmFtZSBzdWdn
-ZXN0cyBuZXZlciB1c2VzIHBhZ2VzLCBzbwo+Pj4gd2UgY2FuIHNraXAgaGFuZGxpbmcgaXQuICBJ
-VEVSX1BJUEUgaXMgcmVqZWN0ZWQg0ZZuIHRoZSBkaXJlY3QgSS9PIHBhdGgsCj4+PiB3aGljaCBs
-ZWF2ZXMgdXMgd2l0aCB0aHJlZS4KPj4+Cj4+Cj4+IEhpIENocmlzdG9waCwKPj4KPj4gQXJlIHlv
-dSB3b3JraW5nIG9uIGFueXRoaW5nIGxpa2UgdGhpcz8KPiAKPiBJIHdhcyBob3BpbmcgSSBjb3Vs
-ZCBzdGVlciB5b3UgdG93YXJkcyBpdC4gIEJ1dCBpZiB5b3UgZG9uJ3Qgd2FudCB0byBkbwo+IGl0
-IHlvdXJzZWxmIEknbGwgYWRkIGl0IHRvIG15IGV2ZXIgZ3Jvd2luZyB0b2RvIGxpc3QuCj4gCgpT
-dXJlLCBJJ20gdXAgZm9yIHRoaXMuIFRoZSBidmVjLXJlbGF0ZWQgaXRlbXMgYXJlIHRoZSBuZXh0
-IGxvZ2ljYWwgcGFydApvZiB0aGUgZ3VwL2RtYSBjb252ZXJzaW9ucyB0byB3b3JrIG9uLCBhbmQg
-SSBqdXN0IHdhbnRlZCB0byBhdm9pZCBzb2x2aW5nIHRoZQpzYW1lIHByb2JsZW0gaWYgeW91IHdl
-cmUgYWxyZWFkeSBpbiB0aGUgY29kZS4KCgo+PiBPciBvbiB0aGUgcHV0X3VzZXJfYnZlYygpIGlk
-ZWE/Cj4gCj4gSSBoYXZlIGEgcHJvdG90eXBlIGZyb20gdHdvIG1vbnRoIGFnbzoKPiAKPiBodHRw
-Oi8vZ2l0LmluZnJhZGVhZC5vcmcvdXNlcnMvaGNoL21pc2MuZ2l0L3Nob3J0bG9nL3JlZnMvaGVh
-ZHMvZ3VwLWJ2ZWMKPiAKPiBidXQgdGhhdCBvbmx5IHN1cnZpdmVkIHRoZSBtb3N0IGJhc2ljIHRl
-c3RpbmcsIHNvIGl0J2xsIG5lZWQgbW9yZSB3b3JrLAo+IHdoaWNoIEknbSBub3Qgc3VyZSB3aGVu
-IEknbGwgZmluZCB0aW1lIGZvci4KPiAKCkknbGwgdGFrZSBhIHBlZWssIGFuZCBwcm9iYWJseSBw
-ZXN0ZXIgeW91IHdpdGggYSBmZXcgcXVlc3Rpb25zIGlmIEkgZ2V0CmNvbmZ1c2VkLiA6KQoKdGhh
-bmtzLAotLSAKSm9obiBIdWJiYXJkCk5WSURJQQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6
-YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5k
-YXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+Ck9uIDIwMTkvOC82IOS4i+WNiDg6MDQsIEphc29uIEd1bnRob3JwZSB3cm90ZToKPiBPbiBNb24s
+IEF1ZyAwNSwgMjAxOSBhdCAxMjoyMDo0NVBNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+PiBP
+biAyMDE5LzgvMiDkuIvljYg4OjQ2LCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6Cj4+PiBPbiBGcmks
+IEF1ZyAwMiwgMjAxOSBhdCAwNTo0MDowN1BNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+Pj4+
+PiBUaGlzIG11c3QgYmUgYSBwcm9wZXIgYmFycmllciwgbGlrZSBhIHNwaW5sb2NrLCBtdXRleCwg
+b3IKPj4+Pj4gc3luY2hyb25pemVfcmN1Lgo+Pj4+IEkgc3RhcnQgd2l0aCBzeW5jaHJvbml6ZV9y
+Y3UoKSBidXQgYm90aCB5b3UgYW5kIE1pY2hhZWwgcmFpc2Ugc29tZQo+Pj4+IGNvbmNlcm4uCj4+
+PiBJJ3ZlIGFsc28gaWRseSB3b25kZXJlZCBpZiBjYWxsaW5nIHN5bmNocm9uaXplX3JjdSgpIHVu
+ZGVyIHRoZSB2YXJpb3VzCj4+PiBtbSBsb2NrcyBpcyBhIGRlYWRsb2NrIHNpdHVhdGlvbi4KPj4K
+Pj4gTWF5YmUsIHRoYXQncyB3aHkgSSBzdWdnZXN0IHRvIHVzZSB2aG9zdF93b3JrX2ZsdXNoKCkg
+d2hpY2ggaXMgbXVjaAo+PiBsaWdodHdlaWdodCBjYW4gY2FuIGFjaGlldmUgdGhlIHNhbWUgZnVu
+Y3Rpb24uIEl0IGNhbiBndWFyYW50ZWUgYWxsIHByZXZpb3VzCj4+IHdvcmsgaGFzIGJlZW4gcHJv
+Y2Vzc2VkIGFmdGVyIHZob3N0X3dvcmtfZmx1c2goKSByZXR1cm4uCj4gSWYgdGhpbmdzIGFyZSBh
+bHJlYWR5IHJ1bm5pbmcgaW4gYSB3b3JrLCB0aGVuIHllcywgeW91IGNhbiBwaWdneWJhY2sKPiBv
+biB0aGUgZXhpc3Rpbmcgc3BpbmxvY2tzIGluc2lkZSB0aGUgd29ya3F1ZXVlIGFuZCBiZSBPawo+
+Cj4gSG93ZXZlciwgaWYgdGhhdCB3b3JrIGlzIGRvaW5nIGFueSBjb3B5X2Zyb21fdXNlciwgdGhl
+biB0aGUgZmx1c2gKPiBiZWNvbWVzIGRlcGVuZGVudCBvbiBzd2FwIGFuZCBpdCB3b24ndCB3b3Jr
+IGFnYWluLi4uCgoKWWVzIGl0IGRvIGNvcHlfZnJvbV91c2VyKCksIHNvIHdlIGNhbid0IGRvIHRo
+aXMuCgoKPgo+Pj4+IDEpIHNwaW5sb2NrOiBhZGQgbG90cyBvZiBvdmVyaGVhZCBvbiBkYXRhcGF0
+aCwgdGhpcyBsZWFkcyAwIHBlcmZvcm1hbmNlCj4+Pj4gaW1wcm92ZW1lbnQuCj4+PiBJIHRoaW5r
+IHRoZSB0b3BpYyBoZXJlIGlzIGNvcnJlY3RuZXNzIG5vdCBwZXJmb3JtYW5jZSBpbXByb3ZlbWVu
+dD4KPiAgIAo+PiBCdXQgdGhlIHdob2xlIHNlcmllcyBpcyB0byBzcGVlZCB1cCB2aG9zdC4KPiBT
+bz8gU3RhcnRpbmcgd2l0aCBhIHdob2xlIGJ1bmNoIG9mIGNyYXp5LCBwb3NzaWJseSBicm9rZW4s
+IGxvY2tpbmcgYW5kCj4gY2xhaW1pbmcgYSBwZXJmb3JtYW5jZSB3aW4gaXMgbm90IHJlYXNvbmFi
+bGUuCgoKWWVzLCBJIGFkbWl0IHRoaXMgcGF0Y2ggaXMgdHJpY2t5LCBJJ20gbm90IGdvaW5nIHRv
+IHB1c2ggdGhpcy4gV2lsbCBwb3N0IAphIFYzLgoKCj4KPj4gU3BpbmxvY2sgaXMgY29ycmVjdCBi
+dXQgbWFrZSB0aGUgd2hvbGUgc2VyaWVzIG1lYW5pbmdsZXNzIGNvbnNpZGVyIGl0IHdvbid0Cj4+
+IGJyaW5nIGFueSBwZXJmb3JtYW5jZSBpbXByb3ZlbWVudC4KPiBZb3UgY2FuJ3QgaW52ZW50IGEg
+ZmFzdGVyIHNwaW5sb2NrIGJ5IG9wZW5jb2Rpbmcgc29tZSB3aWxkCj4gc2NoZW1lLiBUaGVyZSBp
+cyBub3RoaW5nIHNwZWNpYWwgYWJvdXQgdGhlIHVzYWdlIGhlcmUsIGl0IG5lZWRzIGEKPiBibG9j
+a2luZyBsb2NrLCBwbGFpbiBhbmQgc2ltcGxlLgo+Cj4gSmFzb24KCgpXaWxsIHBvc3QgVjMuIExl
+dCdzIHNlZSBpZiB5b3UgYXJlIGhhcHB5IHdpdGggdGhhdCB2ZXJzaW9uLgoKVGhhbmtzCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRp
+b24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3Jn
+Cmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1
+YWxpemF0aW9u
