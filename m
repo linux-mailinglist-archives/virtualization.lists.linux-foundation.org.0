@@ -2,50 +2,57 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5ECB86135
-	for <lists.virtualization@lfdr.de>; Thu,  8 Aug 2019 13:56:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A849386185
+	for <lists.virtualization@lfdr.de>; Thu,  8 Aug 2019 14:19:38 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id F122DF3C;
-	Thu,  8 Aug 2019 11:56:33 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 56C15103B;
+	Thu,  8 Aug 2019 12:19:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C55C7C6F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D8E32F3C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  8 Aug 2019 11:56:32 +0000 (UTC)
+	Thu,  8 Aug 2019 12:19:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8687C82D
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C81F714D
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  8 Aug 2019 11:56:32 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
-	[83.86.89.107])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	Thu,  8 Aug 2019 12:19:25 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id DDF7C2084D;
-	Thu,  8 Aug 2019 11:56:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1565265392;
-	bh=Anl8ipdVnvpFxYj8S10CY1unBn01inBb8NEMwE7VAIk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=clOUDmP4ZVjbOa059z8EY+tisU0Vz5TTmDJ9dFKvu3PFlMukiCUkKomrwAidGzwDA
-	PjCh5tdImv/o4Ppxn4OwCQ/KrIOV4fugdxnANxCtqZ0NZGb3Z96KDWtTiZcp+DTPBX
-	KgA5Sshajrm3XD3ff66d0IzaNM/TdSOhc8SMwf8I=
-Date: Thu, 8 Aug 2019 13:56:30 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Pankaj Gupta <pagupta@redhat.com>
-Subject: Re: [PATCH v2 2/2] virtio_ring: packed ring: fix
-	virtqueue_detach_unused_buf
-Message-ID: <20190808115630.GB2015@kroah.com>
+	by mx1.redhat.com (Postfix) with ESMTPS id 3C4F27E426;
+	Thu,  8 Aug 2019 12:19:25 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+	(colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 2B9321001284;
+	Thu,  8 Aug 2019 12:19:25 +0000 (UTC)
+Received: from zmail21.collab.prod.int.phx2.redhat.com
+	(zmail21.collab.prod.int.phx2.redhat.com [10.5.83.24])
+	by colo-mx.corp.redhat.com (Postfix) with ESMTP id 08FA618089C8;
+	Thu,  8 Aug 2019 12:19:25 +0000 (UTC)
+Date: Thu, 8 Aug 2019 08:19:24 -0400 (EDT)
+From: Pankaj Gupta <pagupta@redhat.com>
+To: Greg KH <gregkh@linuxfoundation.org>
+Message-ID: <1593246032.7424344.1565266764494.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20190808115555.GA2015@kroah.com>
 References: <20190808113606.19504-1-pagupta@redhat.com>
-	<20190808113606.19504-3-pagupta@redhat.com>
+	<20190808113606.19504-2-pagupta@redhat.com>
+	<20190808115555.GA2015@kroah.com>
+Subject: Re: [PATCH v2 1/2] virtio_console: free unused buffers with port
+	delete
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190808113606.19504-3-pagupta@redhat.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Originating-IP: [10.67.116.132, 10.4.195.30]
+Thread-Topic: virtio_console: free unused buffers with port delete
+Thread-Index: 3j1KCI3vfTqn3wC0i4fDgfcUSG+LwQ==
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.27]);
+	Thu, 08 Aug 2019 12:19:25 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: arnd@arndb.de, mst@redhat.com, amit@kernel.org,
@@ -66,15 +73,51 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Aug 08, 2019 at 05:06:06PM +0530, Pankaj Gupta wrote:
-> This patch makes packed ring code compatible with split ring in function
-> 'virtqueue_detach_unused_buf_*'.
 
-What does that mean?  What does this "fix"?
+> 
+> On Thu, Aug 08, 2019 at 05:06:05PM +0530, Pankaj Gupta wrote:
+> >   The commit a7a69ec0d8e4 ("virtio_console: free buffers after reset")
+> >   deferred detaching of unused buffer to virtio device unplug time.
+> > 
+> >   This causes unplug/replug of single port in virtio device with an
+> >   error "Error allocating inbufs\n". As we don't free the unused buffers
+> >   attached with the port. Re-plug the same port tries to allocate new
+> >   buffers in virtqueue and results in this error if queue is full.
+> > 
+> >   This patch removes the unused buffers in vq's when we unplug the port.
+> >   This is the best we can do as we cannot call device_reset because virtio
+> >   device is still active.
+> 
+> Why is this indented?
 
-thanks,
+o.k. will remove the empty lines.
 
-greg k-h
+> 
+> > 
+> > Reported-by: Xiaohui Li <xiaohli@redhat.com>
+> > Fixes: b3258ff1d6 ("virtio_console: free buffers after reset")
+> 
+> Fixes: b3258ff1d608 ("virtio: Decrement avail idx on buffer detach")
+> 
+> is the correct format to use.
+
+Sorry! for this. Commit it fixes is:
+a7a69ec0d8e4 ("virtio_console: free buffers after reset")
+
+> 
+> And given that this is from 2.6.39 (and 2.6.38.5), shouldn't it also be
+> backported for the stable kernels?
+
+Yes.
+
+Thanks,
+Pankaj
+
+> 
+> thanks,
+> 
+> greg k-h
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
