@@ -2,56 +2,51 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 081D686396
-	for <lists.virtualization@lfdr.de>; Thu,  8 Aug 2019 15:45:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 123B9865EA
+	for <lists.virtualization@lfdr.de>; Thu,  8 Aug 2019 17:35:11 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EAACDB7D;
-	Thu,  8 Aug 2019 13:44:28 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 60620111B;
+	Thu,  8 Aug 2019 15:35:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0229CFF7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 73FF8FF0
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  8 Aug 2019 13:44:27 +0000 (UTC)
+	Thu,  8 Aug 2019 15:35:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4779A82D
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 742C589D
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  8 Aug 2019 13:44:25 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
-	[10.5.11.22])
+	Thu,  8 Aug 2019 15:35:02 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id CE39A3007F39;
-	Thu,  8 Aug 2019 13:44:24 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id D92C560171;
+	Thu,  8 Aug 2019 15:35:01 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-144.ams2.redhat.com
 	[10.36.116.144])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 76D0710001B8;
-	Thu,  8 Aug 2019 13:44:24 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 2F4A1600C8;
+	Thu,  8 Aug 2019 15:34:59 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 2275B9CAE; Thu,  8 Aug 2019 15:44:21 +0200 (CEST)
+	id 341EB16E08; Thu,  8 Aug 2019 17:34:58 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v4 17/17] drm/qxl: use DEFINE_DRM_GEM_FOPS()
-Date: Thu,  8 Aug 2019 15:44:17 +0200
-Message-Id: <20190808134417.10610-18-kraxel@redhat.com>
-In-Reply-To: <20190808134417.10610-1-kraxel@redhat.com>
-References: <20190808134417.10610-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Subject: [PATCH] drm/virtio: use virtio_max_dma_size
+Date: Thu,  8 Aug 2019 17:34:45 +0200
+Message-Id: <20190808153445.27177-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.48]);
-	Thu, 08 Aug 2019 13:44:24 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.25]);
+	Thu, 08 Aug 2019 15:35:01 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
-	open list <linux-kernel@vger.kernel.org>,
-	"open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	Daniel Vetter <daniel@ffwll.ch>, "open list:VIRTIO GPU DRIVER"
+	<virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,34 +64,43 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-We have no qxl-specific fops any more.
+We must make sure our scatterlist segments are not too big, otherwise
+we might see swiotlb failures (happens with sev, also reproducable with
+swiotlb=force).
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/gpu/drm/qxl/qxl_drv.c | 10 +---------
- 1 file changed, 1 insertion(+), 9 deletions(-)
+ drivers/gpu/drm/virtio/virtgpu_object.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 2fb1641c817e..4853082ba924 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -132,15 +132,7 @@ qxl_pci_remove(struct pci_dev *pdev)
- 	drm_dev_put(dev);
- }
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index b2da31310d24..6e44568813dd 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -204,6 +204,7 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+ 		.interruptible = false,
+ 		.no_wait_gpu = false
+ 	};
++	unsigned max_segment;
  
--static const struct file_operations qxl_fops = {
--	.owner = THIS_MODULE,
--	.open = drm_open,
--	.release = drm_release,
--	.unlocked_ioctl = drm_ioctl,
--	.poll = drm_poll,
--	.read = drm_read,
--	.mmap = drm_gem_mmap,
--};
-+DEFINE_DRM_GEM_FOPS(qxl_fops);
+ 	/* wtf swapping */
+ 	if (bo->pages)
+@@ -215,8 +216,13 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+ 	if (!bo->pages)
+ 		goto out;
  
- static int qxl_drm_freeze(struct drm_device *dev)
- {
+-	ret = sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
+-					nr_pages << PAGE_SHIFT, GFP_KERNEL);
++	max_segment = virtio_max_dma_size(qdev->vdev);
++	max_segment &= ~(size_t)(PAGE_SIZE - 1);
++	if (max_segment > SCATTERLIST_MAX_SEGMENT)
++		max_segment = SCATTERLIST_MAX_SEGMENT;
++	ret = __sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
++					  nr_pages << PAGE_SHIFT,
++					  max_segment, GFP_KERNEL);
+ 	if (ret)
+ 		goto out;
+ 	return 0;
 -- 
 2.18.1
 
