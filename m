@@ -2,35 +2,36 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89DE188154
-	for <lists.virtualization@lfdr.de>; Fri,  9 Aug 2019 19:35:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41D5A88171
+	for <lists.virtualization@lfdr.de>; Fri,  9 Aug 2019 19:40:46 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E6186DB4;
-	Fri,  9 Aug 2019 17:34:56 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2432CB8F;
+	Fri,  9 Aug 2019 17:39:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 41662CD4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8A09EB8E
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  9 Aug 2019 17:34:55 +0000 (UTC)
+	Fri,  9 Aug 2019 17:39:56 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mx01.bbu.dsd.mx.bitdefender.com
 	(mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B12FA89D
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3D1C08A7
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  9 Aug 2019 17:34:54 +0000 (UTC)
+	Fri,  9 Aug 2019 17:39:55 +0000 (UTC)
 Received: from smtp.bitdefender.com (smtp02.buh.bitdefender.net [10.17.80.76])
 	by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
-	3CAC9305D366; Fri,  9 Aug 2019 19:01:43 +0300 (EEST)
+	932DB3031EB7; Fri,  9 Aug 2019 19:01:13 +0300 (EEST)
 Received: from localhost.localdomain (unknown [89.136.169.210])
-	by smtp.bitdefender.com (Postfix) with ESMTPSA id A9FD4305B7A4;
-	Fri,  9 Aug 2019 19:01:42 +0300 (EEST)
+	by smtp.bitdefender.com (Postfix) with ESMTPSA id 9C12A305B7A9;
+	Fri,  9 Aug 2019 19:01:12 +0300 (EEST)
 From: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>
 To: kvm@vger.kernel.org
-Subject: [RFC PATCH v6 87/92] kvm: x86: emulate xorps xmm/m128, xmm
-Date: Fri,  9 Aug 2019 19:00:42 +0300
-Message-Id: <20190809160047.8319-88-alazar@bitdefender.com>
+Subject: [RFC PATCH v6 42/92] KVM: MMU: Handle host memory remapping and
+	reclaim
+Date: Fri,  9 Aug 2019 18:59:57 +0300
+Message-Id: <20190809160047.8319-43-alazar@bitdefender.com>
 In-Reply-To: <20190809160047.8319-1-alazar@bitdefender.com>
 References: <20190809160047.8319-1-alazar@bitdefender.com>
 MIME-Version: 1.0
@@ -67,38 +68,39 @@ Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-RnJvbTogTWloYWkgRG9uyJt1IDxtZG9udHVAYml0ZGVmZW5kZXIuY29tPgoKVGhpcyBleHRlbmRz
-IHRoZSBwcmV2aW91cyB4b3JwZCBieSBjcmVhdGluZyBhIGRlZGljYXRlZCBncm91cCwgc29tZXRo
-aW5nCkkgc2hvdWxkIGhhdmUgZG9uZSBzaW5jZSB0aGUgdmVyeSBiZWdpbm5pbmcuCgpTaWduZWQt
-b2ZmLWJ5OiBNaWhhaSBEb27Im3UgPG1kb250dUBiaXRkZWZlbmRlci5jb20+ClNpZ25lZC1vZmYt
-Ynk6IEFkYWxiZXJ0IExhesSDciA8YWxhemFyQGJpdGRlZmVuZGVyLmNvbT4KLS0tCiBhcmNoL3g4
-Ni9rdm0vZW11bGF0ZS5jIHwgMjIgKysrKysrKysrKysrKysrKysrKysrLQogMSBmaWxlIGNoYW5n
-ZWQsIDIxIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9hcmNoL3g4
-Ni9rdm0vZW11bGF0ZS5jIGIvYXJjaC94ODYva3ZtL2VtdWxhdGUuYwppbmRleCAyOGFhYzU1MmIz
-NGIuLjE0ODk1YzA0M2VkYyAxMDA2NDQKLS0tIGEvYXJjaC94ODYva3ZtL2VtdWxhdGUuYworKysg
-Yi9hcmNoL3g4Ni9rdm0vZW11bGF0ZS5jCkBAIC0xMTc4LDYgKzExNzgsMjIgQEAgc3RhdGljIGlu
-dCBlbV9mbnN0c3coc3RydWN0IHg4Nl9lbXVsYXRlX2N0eHQgKmN0eHQpCiAJcmV0dXJuIFg4NkVN
-VUxfQ09OVElOVUU7CiB9CiAKK3N0YXRpYyBpbnQgZW1feG9ycHMoc3RydWN0IHg4Nl9lbXVsYXRl
-X2N0eHQgKmN0eHQpCit7CisJY29uc3Qgc3NlMTI4X3QgKnNyYyA9ICZjdHh0LT5zcmMudmVjX3Zh
-bDsKKwlzc2UxMjhfdCAqZHN0ID0gJmN0eHQtPmRzdC52ZWNfdmFsOworCXNzZTEyOF90IHhtbTA7
-CisKKwlhc20gdm9sYXRpbGUoIm1vdmRxdSAlJXhtbTAsICUwXG4iCisJCSAgICAgIm1vdmRxdSAl
-MSwgJSV4bW0wXG4iCisJCSAgICAgInhvcnBzICUyLCAlJXhtbTBcbiIKKwkJICAgICAibW92ZHF1
-ICUleG1tMCwgJTFcbiIKKwkJICAgICAibW92ZHF1ICUwLCAlJXhtbTAiCisJCSAgICAgOiAiK20i
-KHhtbTApLCAiK20iKCpkc3QpIDogIm0iKCpzcmMpKTsKKworCXJldHVybiBYODZFTVVMX0NPTlRJ
-TlVFOworfQorCiBzdGF0aWMgaW50IGVtX3hvcnBkKHN0cnVjdCB4ODZfZW11bGF0ZV9jdHh0ICpj
-dHh0KQogewogCWNvbnN0IHNzZTEyOF90ICpzcmMgPSAmY3R4dC0+c3JjLnZlY192YWw7CkBAIC00
-NjE1LDYgKzQ2MzEsMTAgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBncHJlZml4IHBmeF8wZl9lNyA9
-IHsKIAlOLCBJKFNzZSwgZW1fbW92KSwgTiwgTiwKIH07CiAKK3N0YXRpYyBjb25zdCBzdHJ1Y3Qg
-Z3ByZWZpeCBwZnhfMGZfNTcgPSB7CisJSShVbmFsaWduZWQsIGVtX3hvcnBzKSwgSShVbmFsaWdu
-ZWQsIGVtX3hvcnBkKSwgTiwgTgorfTsKKwogc3RhdGljIGNvbnN0IHN0cnVjdCBlc2NhcGUgZXNj
-YXBlX2Q5ID0geyB7CiAJTiwgTiwgTiwgTiwgTiwgTiwgTiwgSShEc3RNZW0xNiB8IE1vdiwgZW1f
-Zm5zdGN3KSwKIH0sIHsKQEAgLTQ4NDcsNyArNDg2Nyw3IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3Qg
-b3Bjb2RlIHR3b2J5dGVfdGFibGVbMjU2XSA9IHsKIAkvKiAweDQwIC0gMHg0RiAqLwogCVgxNihE
-KERzdFJlZyB8IFNyY01lbSB8IE1vZFJNKSksCiAJLyogMHg1MCAtIDB4NUYgKi8KLQlOLCBOLCBO
-LCBOLCBOLCBOLCBOLCBJKFNyY01lbSB8IERzdFJlZyB8IE1vZFJNIHwgVW5hbGlnbmVkIHwgU3Nl
-LCBlbV94b3JwZCksCisJTiwgTiwgTiwgTiwgTiwgTiwgTiwgR1AoU3JjTWVtIHwgRHN0UmVnIHwg
-TW9kUk0gfCBTc2UsICZwZnhfMGZfNTcpLAogCU4sIE4sIE4sIE4sIE4sIE4sIE4sIE4sCiAJLyog
-MHg2MCAtIDB4NkYgKi8KIAlOLCBOLCBOLCBOLApfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6
-YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5k
-YXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+RnJvbTogWWFuZyBXZWlqaWFuZyA8d2VpamlhbmcueWFuZ0BpbnRlbC5jb20+CgpIb3N0IHBhZ2Ug
+c3dhcHBpbmcvbWlncmF0aW9uIG1heSBjaGFuZ2UgdGhlIHRyYW5zbGF0aW9uIGluCkVQVCBsZWFm
+IGVudHJ5LCBpZiB0aGUgdGFyZ2V0IHBhZ2UgaXMgU1BQIHByb3RlY3RlZCwKcmUtZW5hYmxlIFNQ
+UCBwcm90ZWN0aW9uIGluIE1NVSBub3RpZmllci4gSWYgU1BQVCBzaGFkb3cKcGFnZSBpcyByZWNs
+YWltZWQsIHRoZSBsZXZlbDEgcGFnZXMgZG9uJ3QgaGF2ZSBybWFwIHRvIGNsZWFyLgoKU2lnbmVk
+LW9mZi1ieTogWWFuZyBXZWlqaWFuZyA8d2VpamlhbmcueWFuZ0BpbnRlbC5jb20+Ck1lc3NhZ2Ut
+SWQ6IDwyMDE5MDcxNzEzMzc1MS4xMjkxMC0xMC13ZWlqaWFuZy55YW5nQGludGVsLmNvbT4KU2ln
+bmVkLW9mZi1ieTogQWRhbGJlcnQgTGF6xINyIDxhbGF6YXJAYml0ZGVmZW5kZXIuY29tPgotLS0K
+IGFyY2gveDg2L2t2bS9tbXUuYyB8IDIyICsrKysrKysrKysrKysrKysrKysrKysKIDEgZmlsZSBj
+aGFuZ2VkLCAyMiBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvYXJjaC94ODYva3ZtL21tdS5j
+IGIvYXJjaC94ODYva3ZtL21tdS5jCmluZGV4IDI0MjIyZTNhZGQ5MS4uMGI4NTliMTc5N2Y2IDEw
+MDY0NAotLS0gYS9hcmNoL3g4Ni9rdm0vbW11LmMKKysrIGIvYXJjaC94ODYva3ZtL21tdS5jCkBA
+IC0yMDA0LDYgKzIwMDQsMjQgQEAgc3RhdGljIGludCBrdm1fc2V0X3B0ZV9ybWFwcChzdHJ1Y3Qg
+a3ZtICprdm0sIHN0cnVjdCBrdm1fcm1hcF9oZWFkICpybWFwX2hlYWQsCiAJCQluZXdfc3B0ZSAm
+PSB+UFRfV1JJVEFCTEVfTUFTSzsKIAkJCW5ld19zcHRlICY9IH5TUFRFX0hPU1RfV1JJVEVBQkxF
+OwogCisJCQkvKgorCQkJICogaWYgaXQncyBFUFQgbGVhZiBlbnRyeSBhbmQgdGhlIHBoeXNpY2Fs
+IHBhZ2UgaXMKKwkJCSAqIFNQUCBwcm90ZWN0ZWQsIHRoZW4gcmUtZW5hYmxlIFNQUCBwcm90ZWN0
+aW9uIGZvcgorCQkJICogdGhlIHBhZ2UuCisJCQkgKi8KKwkJCWlmIChrdm0tPmFyY2guc3BwX2Fj
+dGl2ZSAmJgorCQkJICAgIGxldmVsID09IFBUX1BBR0VfVEFCTEVfTEVWRUwpIHsKKwkJCQlzdHJ1
+Y3Qga3ZtX3N1YnBhZ2Ugc3BwX2luZm8gPSB7MH07CisJCQkJaW50IGk7CisKKwkJCQlzcHBfaW5m
+by5iYXNlX2dmbiA9IGdmbjsKKwkJCQlzcHBfaW5mby5ucGFnZXMgPSAxOworCQkJCWkgPSBrdm1f
+bW11X2dldF9zdWJwYWdlcyhrdm0sICZzcHBfaW5mbywgdHJ1ZSk7CisJCQkJaWYgKGkgPT0gMSAm
+JgorCQkJCSAgICBzcHBfaW5mby5hY2Nlc3NfbWFwWzBdICE9IEZVTExfU1BQX0FDQ0VTUykKKwkJ
+CQkJbmV3X3NwdGUgfD0gUFRfU1BQX01BU0s7CisJCQl9CisKIAkJCW5ld19zcHRlID0gbWFya19z
+cHRlX2Zvcl9hY2Nlc3NfdHJhY2sobmV3X3NwdGUpOwogCiAJCQltbXVfc3B0ZV9jbGVhcl90cmFj
+a19iaXRzKHNwdGVwKTsKQEAgLTI5MDUsNiArMjkyMywxMCBAQCBzdGF0aWMgYm9vbCBtbXVfcGFn
+ZV96YXBfcHRlKHN0cnVjdCBrdm0gKmt2bSwgc3RydWN0IGt2bV9tbXVfcGFnZSAqc3AsCiAJcHRl
+ID0gKnNwdGU7CiAJaWYgKGlzX3NoYWRvd19wcmVzZW50X3B0ZShwdGUpKSB7CiAJCWlmIChpc19s
+YXN0X3NwdGUocHRlLCBzcC0+cm9sZS5sZXZlbCkpIHsKKwkJCS8qIFNQUFQgbGVhZiBlbnRyaWVz
+IGRvbid0IGhhdmUgcm1hcHMqLworCQkJaWYgKHNwLT5yb2xlLmxldmVsID09IFBUX1BBR0VfVEFC
+TEVfTEVWRUwgJiYKKwkJCSAgICBpc19zcHBfc3B0ZShzcCkpCisJCQkJcmV0dXJuIHRydWU7CiAJ
+CQlkcm9wX3NwdGUoa3ZtLCBzcHRlKTsKIAkJCWlmIChpc19sYXJnZV9wdGUocHRlKSkKIAkJCQkt
+LWt2bS0+c3RhdC5scGFnZXM7Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0
+cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcv
+bWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
