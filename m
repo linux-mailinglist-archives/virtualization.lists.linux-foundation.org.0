@@ -2,59 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7213888CB8
-	for <lists.virtualization@lfdr.de>; Sat, 10 Aug 2019 20:14:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E74CB88CBD
+	for <lists.virtualization@lfdr.de>; Sat, 10 Aug 2019 20:19:02 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 59C79B8F;
-	Sat, 10 Aug 2019 18:13:00 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id D5563B8E;
+	Sat, 10 Aug 2019 18:18:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 58FBCB59
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 829D0B50
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 10 Aug 2019 18:12:59 +0000 (UTC)
+	Sat, 10 Aug 2019 18:18:55 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
 Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
 	[209.85.222.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E4A897D2
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 005FD7D2
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 10 Aug 2019 18:12:58 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id s14so3761067qkm.4
+	Sat, 10 Aug 2019 18:18:54 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id m2so344256qki.12
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 10 Aug 2019 11:12:58 -0700 (PDT)
+	Sat, 10 Aug 2019 11:18:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to;
-	bh=Rl3GYKdvkUhjJZod4R7cIwaGENcluFkd1m8GRMDLYjA=;
-	b=YX8xfXmaNZwnyVXkRDdL0syq2s+n2xyUrhTXtyvsN6pYJNqDNOrmVjstkmr/ie/wM8
-	Uj24S8qE0goKLUQiHPVuOqLWFN/y+U9yYPgRWih/XVlomvmX9RsUC5D+/sAuLqtV/Vqy
-	02AeLN2LRHHdRlibiXaeMx5/tX5yq8Q62G9okOjfS2fz1bC1nCG9wsTgm70LiQAUtEaZ
-	Ac5kI1QqxZi+Syoa6+dBPmDXUchVeqphsbxq2BEz6CKLVFQzxJfRrXee1wqSoI0m1pZI
-	8LFCkAzRVcQiv8Oe1voPCMMfyrcXHZlB96o7bFrony3Na+ShV3E2ViaLyN/mPxC5dn2C
-	MJ6A==
-X-Gm-Message-State: APjAAAXwDhpizCeCdkbedoc3AokWsfZgy4/qgNYW5wezvhxyM+2fjCJv
-	TKbp8p8/0OB0gKz6lkrzOLfG6w==
-X-Google-Smtp-Source: APXvYqwi1TjEBF8tYTsvAGgXLmd4P+ip28ybiTZaq2rLk2el4TcxbT3QBB9TmfjhklDWaGag+v2B+A==
-X-Received: by 2002:a37:a7d6:: with SMTP id q205mr24016018qke.44.1565460778101;
-	Sat, 10 Aug 2019 11:12:58 -0700 (PDT)
+	bh=zrZ1MFWBUD8XpJlN1HdMmxALzKrZiqQ/CZQqHhvjihk=;
+	b=PN3Qyok7PX/0dYq/0f1AG+LtVbsPXT3Cw3OULvDYwo8r8ctaC7EeqIloalZqTm8zJz
+	L7jEa1oGZod+F0/zf0GeLbVkVrtTRnljmZoDhhPJF9msPUpZ3/GpBzzvix9bjekRk18W
+	ev6iH0bW8Q6H9RJffXda5xV8YZ8DEEDzIIbu6mVVmXAqP3eVKsLq2cfyR4dPAtBPK48F
+	2p9alUTtJNX0JbtJ4TZ7jUb9ghbkx4gBhO94P3wDLvHTpolS9D3XdU5eh/NloqGhEePC
+	YDJJc8UNEPfpK822UnM+BgTwMvJtLgwerzVgYzwc7QRoHE6EYshhHSyyTgsfPe/sN6mK
+	gwDQ==
+X-Gm-Message-State: APjAAAWIDOI6s2M+OiZ5X3pdiwnyAPlefRXgUTDbm4I+yyjhEtsvTmkl
+	VxfGh/5KQYEwJxwP/U8GzeTKTw==
+X-Google-Smtp-Source: APXvYqxQg0u/NQTm7d1bARb/j41E1mdpTfaO2VyPaTxGh/hPAt/cL+vAJQTT2RzTO83w5xAmYimPfA==
+X-Received: by 2002:a37:5f82:: with SMTP id
+	t124mr22052496qkb.180.1565461134184; 
+	Sat, 10 Aug 2019 11:18:54 -0700 (PDT)
 Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
 	by smtp.gmail.com with ESMTPSA id
-	h4sm43862894qkk.39.2019.08.10.11.12.54
+	b18sm40602281qkc.112.2019.08.10.11.18.50
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sat, 10 Aug 2019 11:12:57 -0700 (PDT)
-Date: Sat, 10 Aug 2019 14:12:51 -0400
+	Sat, 10 Aug 2019 11:18:53 -0700 (PDT)
+Date: Sat, 10 Aug 2019 14:18:48 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Pankaj Gupta <pagupta@redhat.com>
-Subject: Re: [PATCH v3 2/2] virtio: decrement avail idx with buffer detach
-	for packed ring
-Message-ID: <20190810141213-mutt-send-email-mst@kernel.org>
+Subject: Re: [PATCH v3 1/2] virtio_console: free unused buffers with port
+	delete
+Message-ID: <20190810141019-mutt-send-email-mst@kernel.org>
 References: <20190809064847.28918-1-pagupta@redhat.com>
-	<20190809064847.28918-3-pagupta@redhat.com>
+	<20190809064847.28918-2-pagupta@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190809064847.28918-3-pagupta@redhat.com>
+In-Reply-To: <20190809064847.28918-2-pagupta@redhat.com>
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -78,42 +79,92 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Aug 09, 2019 at 12:18:47PM +0530, Pankaj Gupta wrote:
-> This patch decrements 'next_avail_idx' count when detaching a buffer
-> from vq for packed ring code. Split ring code already does this in
-> virtqueue_detach_unused_buf_split function. This updates the
-> 'next_avail_idx' to the previous correct index after an unused buffer
-> is detatched from the vq.
+On Fri, Aug 09, 2019 at 12:18:46PM +0530, Pankaj Gupta wrote:
+> The commit a7a69ec0d8e4 ("virtio_console: free buffers after reset")
+> deferred detaching of unused buffer to virtio device unplug time.
+> This causes unplug/replug of single port in virtio device with an
+> error "Error allocating inbufs\n". As we don't free the unused buffers
+> attached with the port. Re-plug the same port tries to allocate new
+> buffers in virtqueue and results in this error if queue is full.
+
+So why not reuse the buffers that are already there in this case?
+Seems quite possible.
+
+> This patch removes the unused buffers in vq's when we unplug the port.
+> This is the best we can do as we cannot call device_reset because virtio
+> device is still active.
 > 
+> Reported-by: Xiaohui Li <xiaohli@redhat.com>
+> Fixes: a7a69ec0d8e4 ("virtio_console: free buffers after reset")
+> Cc: stable@vger.kernel.org
 > Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
 
-I would make this patch 1, not patch 2, otherwise
-patch 1 corrupts the ring.
+This is really a revert of a7a69ec0d8e4, just tagged confusingly.
+
+And the original is also supposed to be a bugfix.
+So how will the original bug be fixed?
+
+"this is the best we can do" is rarely the case.
+
+I am not necessarily against the revert. But if we go that way then what
+we need to do is specify the behaviour in the spec, since strict spec
+compliance is exactly what the original patch was addressing.
+
+In particular, we'd document that console has a special property that
+when port is detached virtqueue is considered stopped, device must not
+use any buffers, and it is legal to take buffers out of the device.
+
 
 
 > ---
->  drivers/virtio/virtio_ring.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  drivers/char/virtio_console.c | 14 +++++++++++---
+>  1 file changed, 11 insertions(+), 3 deletions(-)
 > 
-> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-> index c8be1c4f5b55..7c69181113e2 100644
-> --- a/drivers/virtio/virtio_ring.c
-> +++ b/drivers/virtio/virtio_ring.c
-> @@ -1537,6 +1537,12 @@ static void *virtqueue_detach_unused_buf_packed(struct virtqueue *_vq)
->  		/* detach_buf clears data, so grab it now. */
->  		buf = vq->packed.desc_state[i].data;
->  		detach_buf_packed(vq, i, NULL);
-> +		vq->packed.next_avail_idx--;
-> +		if (vq->packed.next_avail_idx < 0) {
-> +			vq->packed.next_avail_idx = vq->packed.vring.num - 1;
-> +			vq->packed.avail_wrap_counter ^= 1;
-> +		}
+> diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
+> index 7270e7b69262..e8be82f1bae9 100644
+> --- a/drivers/char/virtio_console.c
+> +++ b/drivers/char/virtio_console.c
+> @@ -1494,15 +1494,25 @@ static void remove_port(struct kref *kref)
+>  	kfree(port);
+>  }
+>  
+> +static void remove_unused_bufs(struct virtqueue *vq)
+> +{
+> +	struct port_buffer *buf;
 > +
->  		END_USE(vq);
->  		return buf;
+> +	while ((buf = virtqueue_detach_unused_buf(vq)))
+> +		free_buf(buf, true);
+> +}
+> +
+>  static void remove_port_data(struct port *port)
+>  {
+>  	spin_lock_irq(&port->inbuf_lock);
+>  	/* Remove unused data this port might have received. */
+>  	discard_port_data(port);
+> +	remove_unused_bufs(port->in_vq);
+>  	spin_unlock_irq(&port->inbuf_lock);
+>  
+>  	spin_lock_irq(&port->outvq_lock);
+>  	reclaim_consumed_buffers(port);
+> +	remove_unused_bufs(port->out_vq);
+>  	spin_unlock_irq(&port->outvq_lock);
+>  }
+>  
+> @@ -1938,11 +1948,9 @@ static void remove_vqs(struct ports_device *portdev)
+>  	struct virtqueue *vq;
+>  
+>  	virtio_device_for_each_vq(portdev->vdev, vq) {
+> -		struct port_buffer *buf;
+>  
+>  		flush_bufs(vq, true);
+> -		while ((buf = virtqueue_detach_unused_buf(vq)))
+> -			free_buf(buf, true);
+> +		remove_unused_bufs(vq);
 >  	}
+>  	portdev->vdev->config->del_vqs(portdev->vdev);
+>  	kfree(portdev->in_vqs);
 > -- 
-> 2.20.1
+> 2.21.0
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
