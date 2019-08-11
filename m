@@ -2,91 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 154A789001
-	for <lists.virtualization@lfdr.de>; Sun, 11 Aug 2019 08:46:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 192DC8908B
+	for <lists.virtualization@lfdr.de>; Sun, 11 Aug 2019 10:13:10 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C6A88AEF;
-	Sun, 11 Aug 2019 06:46:37 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 57D30AD8;
+	Sun, 11 Aug 2019 08:13:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id B713AAC8
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 42C9BACC
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 11 Aug 2019 06:46:36 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 76A08786
+	Sun, 11 Aug 2019 08:13:00 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E5EA587D
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 11 Aug 2019 06:46:35 +0000 (UTC)
-Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x7B6gpx8006694 for <virtualization@lists.linux-foundation.org>;
-	Sun, 11 Aug 2019 02:46:34 -0400
-Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
-	by mx0b-001b2d01.pphosted.com with ESMTP id 2uabhtbb13-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	Sun, 11 Aug 2019 08:12:58 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id v38so7612612qtb.0
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 11 Aug 2019 02:46:34 -0400
-Received: from localhost
-	by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<linuxram@us.ibm.com>; Sun, 11 Aug 2019 07:46:32 +0100
-Received: from b06avi18878370.portsmouth.uk.ibm.com (9.149.26.194)
-	by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Sun, 11 Aug 2019 07:46:28 +0100
-Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
-	by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x7B6kRjD40894894
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Sun, 11 Aug 2019 06:46:27 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 06C9742045;
-	Sun, 11 Aug 2019 06:46:27 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 141EE42042;
-	Sun, 11 Aug 2019 06:46:24 +0000 (GMT)
-Received: from ram.ibm.com (unknown [9.85.191.17])
-	by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
-	Sun, 11 Aug 2019 06:46:23 +0000 (GMT)
-Date: Sat, 10 Aug 2019 23:46:21 -0700
-From: Ram Pai <linuxram@us.ibm.com>
-To: Christoph Hellwig <hch@lst.de>
+	Sun, 11 Aug 2019 01:12:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=lK2BvTRRqJlMRPRV20MG66suKP5my4fsNc+MbdelOFY=;
+	b=V/98m03mVaNSpV8MRv4iTHO3VKgBuXUgkdNNgZodIC+v9sTjWyrL+etm5BxIrjHGeU
+	dUmO7RMZ18HHtLRSSbpI9pBo3m3QW4UmSLHdzCXCItwjuF9caI/wkZ6jMqJjRLiUdox4
+	4unNT0O3HIRILxYi9eKhVvFD6MVCFjo85laLce8iV+6z13Z2TslXgHfhhBNwLXqW4NdJ
+	o6kD+lA56lx1QrOdAP3s3ktgHyVyIQ0fG7KqtUwQefmWZKt11niYdqCxgRP3wfAkxHpI
+	PeDHWmNmO0o1itXIEnIXhYd3n+Yb36K8UD2BufJQcr1zDnVPoFq+5AdnEXNC7oAoBtGd
+	hUqw==
+X-Gm-Message-State: APjAAAXRQjpAKvxZJ1F1hYFC5yM+ILuyyge+aTWnUgYEjkUBqDdtRY5b
+	UI1C+kJ0owK3g1yv2sBPUKrOoQ==
+X-Google-Smtp-Source: APXvYqyKfn4s+AIYTpA1AFYCjNuZfg0Z55WNP4r2G9r1W2+SGXIZqpz/IX3y8ci3TiAqrtmHL07K4w==
+X-Received: by 2002:ad4:4112:: with SMTP id i18mr8157789qvp.175.1565511178073; 
+	Sun, 11 Aug 2019 01:12:58 -0700 (PDT)
+Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
+	by smtp.gmail.com with ESMTPSA id
+	l80sm26005979qke.24.2019.08.11.01.12.53
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Sun, 11 Aug 2019 01:12:56 -0700 (PDT)
+Date: Sun, 11 Aug 2019 04:12:50 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Ram Pai <linuxram@us.ibm.com>
+Subject: Re: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
+Message-ID: <20190811041035-mutt-send-email-mst@kernel.org>
 References: <87zhrj8kcp.fsf@morokweng.localdomain>
 	<20190810143038-mutt-send-email-mst@kernel.org>
-	<20190810220702.GA5964@ram.ibm.com> <20190811055607.GA12488@lst.de>
+	<20190810220702.GA5964@ram.ibm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190811055607.GA12488@lst.de>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-TM-AS-GCONF: 00
-x-cbid: 19081106-0020-0000-0000-0000035E6383
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19081106-0021-0000-0000-000021B36F43
-Message-Id: <20190811064621.GB5964@ram.ibm.com>
-Subject: RE: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-08-11_03:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=566 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1906280000 definitions=main-1908110076
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+In-Reply-To: <20190810220702.GA5964@ram.ibm.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>,
 	Alexey Kardashevskiy <aik@linux.ibm.com>, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
 	Paul Mackerras <paulus@ozlabs.org>, iommu@lists.linux-foundation.org,
-	linuxppc-devel@lists.ozlabs.org, David Gibson <david@gibson.dropbear.id.au>
+	linuxppc-devel@lists.ozlabs.org, Christoph Hellwig <hch@lst.de>,
+	David Gibson <david@gibson.dropbear.id.au>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -98,41 +76,121 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Reply-To: Ram Pai <linuxram@us.ibm.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sun, Aug 11, 2019 at 07:56:07AM +0200, Christoph Hellwig wrote:
-> sev_active() is gone now in linux-next, at least as a global API.
+On Sat, Aug 10, 2019 at 03:07:02PM -0700, Ram Pai wrote:
+> On Sat, Aug 10, 2019 at 02:57:17PM -0400, Michael S. Tsirkin wrote:
+> > On Tue, Jan 29, 2019 at 03:08:12PM -0200, Thiago Jung Bauermann wrote:
+> > > 
+> > > Hello,
+> > > 
+> > > With Christoph's rework of the DMA API that recently landed, the patch
+> > > below is the only change needed in virtio to make it work in a POWER
+> > > secure guest under the ultravisor.
+> > > 
+> > > The other change we need (making sure the device's dma_map_ops is NULL
+> > > so that the dma-direct/swiotlb code is used) can be made in
+> > > powerpc-specific code.
+> > > 
+> > > Of course, I also have patches (soon to be posted as RFC) which hook up
+> > > <linux/mem_encrypt.h> to the powerpc secure guest support code.
+> > > 
+> > > What do you think?
+> > > 
+> > > >From d0629a36a75c678b4a72b853f8f7f8c17eedd6b3 Mon Sep 17 00:00:00 2001
+> > > From: Thiago Jung Bauermann <bauerman@linux.ibm.com>
+> > > Date: Thu, 24 Jan 2019 22:08:02 -0200
+> > > Subject: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
+> > > 
+> > > The host can't access the guest memory when it's encrypted, so using
+> > > regular memory pages for the ring isn't an option. Go through the DMA API.
+> > > 
+> > > Signed-off-by: Thiago Jung Bauermann <bauerman@linux.ibm.com>
+> > > ---
+> > >  drivers/virtio/virtio_ring.c | 5 ++++-
+> > >  1 file changed, 4 insertions(+), 1 deletion(-)
+> > > 
+> > > diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+> > > index cd7e755484e3..321a27075380 100644
+> > > --- a/drivers/virtio/virtio_ring.c
+> > > +++ b/drivers/virtio/virtio_ring.c
+> > > @@ -259,8 +259,11 @@ static bool vring_use_dma_api(struct virtio_device *vdev)
+> > >  	 * not work without an even larger kludge.  Instead, enable
+> > >  	 * the DMA API if we're a Xen guest, which at least allows
+> > >  	 * all of the sensible Xen configurations to work correctly.
+> > > +	 *
+> > > +	 * Also, if guest memory is encrypted the host can't access
+> > > +	 * it directly. In this case, we'll need to use the DMA API.
+> > >  	 */
+> > > -	if (xen_domain())
+> > > +	if (xen_domain() || sev_active())
+> > >  		return true;
+> > > 
+> > >  	return false;
+> > 
+> > So I gave this lots of thought, and I'm coming round to
+> > basically accepting something very similar to this patch.
+> > 
+> > But not exactly like this :).
+> > 
+> > Let's see what are the requirements.
+> > 
+> > If
+> > 
+> > 1. We do not trust the device (so we want to use a bounce buffer with it)
+> > 2. DMA address is also a physical address of a buffer
+> > 
+> > then we should use DMA API with virtio.
+> > 
+> > 
+> > sev_active() above is one way to put (1).  I can't say I love it but
+> > it's tolerable.
+> > 
+> > 
+> > But we also want promise from DMA API about 2.
+> > 
+> > 
+> > Without promise 2 we simply can't use DMA API with a legacy device.
+> > 
+> > 
+> > Otherwise, on a SEV system with an IOMMU which isn't 1:1
+> > and with a virtio device without ACCESS_PLATFORM, we are trying
+> > to pass a virtual address, and devices without ACCESS_PLATFORM
+> > can only access CPU physical addresses.
+> > 
+> > So something like:
+> > 
+> > dma_addr_is_phys_addr?
 > 
-> And once again this is entirely going in the wrong direction.  The only
-> way using the DMA API is going to work at all is if the device is ready
-> for it.  So we need a flag on the virtio device, exposed by the
-> hypervisor (or hardware for hw virtio devices) that says:  hey, I'm real,
-> don't take a shortcut.
 > 
-> And that means on power and s390 qemu will always have to set thos if
-> you want to be ready for the ultravisor and co games.  It's not like we
-> haven't been through this a few times before, have we?
+> On our Secure pseries platform,  dma address is physical address and this
+> proposal will help us, use DMA API. 
+> 
+> On our normal pseries platform, dma address is physical address too.
+> But we do not necessarily need to use the DMA API.  We can use the DMA
+> API, but our handlers will do the same thing, the generic virtio handlers
+> would do. If there is an opt-out option; even when dma addr is same as
+> physical addr, than there will be less code duplication.
+> 
+> Would something like this be better.
+> 
+> (dma_addr_is_phys_addr  && arch_want_to_use_dma_api()) ?
+> 
+> 
+> RP
 
+I think sev_active() is an OK replacement for arch_want_to_use_dma_api.
+So just the addition of dma_addr_is_phys_addr would be enough.
 
-We have been through this so many times, but I dont think, we ever
-understood each other.   I have a fundamental question, the answer to
-which was never clear. Here it is...
-
-If the hypervisor (hardware for hw virtio devices) does not mandate a
-DMA API, why is it illegal for the driver to request, special handling
-of its i/o buffers? Why are we associating this special handling to
-always mean, some DMA address translation? Can't there be 
-any other kind of special handling needs, that has nothing to do with
-DMA address translation?
-
-
--- 
-Ram Pai
-
+> 
+> > -- 
+> > MST
+> 
+> -- 
+> Ram Pai
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
