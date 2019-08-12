@@ -2,69 +2,55 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B81F890C6
-	for <lists.virtualization@lfdr.de>; Sun, 11 Aug 2019 10:55:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6421D8956F
+	for <lists.virtualization@lfdr.de>; Mon, 12 Aug 2019 04:45:06 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id B0BA3AF0;
-	Sun, 11 Aug 2019 08:55:35 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A0A90941;
+	Mon, 12 Aug 2019 02:44:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 53988ACD
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 05DD02C
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 11 Aug 2019 08:55:35 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E76886E0
+	Mon, 12 Aug 2019 02:44:58 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A8BFA87B
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 11 Aug 2019 08:55:34 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id x4so2002899qts.5
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 11 Aug 2019 01:55:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=6/2qVAPvLy768Na8XqJHyfaQBOmu1VTQjHr1b0tqDos=;
-	b=Q6vCLM9exW3LL06OpoH+x4e3eUW0dT2x9WtYSREnE/UcrYl3iCEUzePzgbTdaEJXCq
-	6tzkMEL63c1bVOAaVS93b8RHskRJNRDcuwFnjlME4UApluAkPTxJYtYE5HzB6mIK3xOG
-	D1aHiLfSyzcVjoDcOW8TF1zbuwlPBEIxMdkWXGDM1UgAgQm3r/Zu/EDBu/T5HnQCMXYU
-	f1KEoSStG/Wom6baP8fNmQ6F81x2lqAaQJcgTrqL5UoL8+R6huR+j3oib5JENCCm01QB
-	8uZ/Jw0XxGoVxQfydggaRiJ4bTm4Y8QA0hPOl8rQRhteFpgmnyPFwIjn6BI+wwklDWCA
-	r/NA==
-X-Gm-Message-State: APjAAAXLngOJF6c9txxTYMNhiyHLXHfv2mz0Abv16+FNIbl9dFncyRQu
-	9jQXsDXze9Yjxqkbmsx0KgAsKQ==
-X-Google-Smtp-Source: APXvYqwQSHWl5DZCKxcv6b09e+m/U60yeBUP2tSK+Zxbso+cleqVM/RZ1b43sqdRDBiAuYOyKuC1mA==
-X-Received: by 2002:a0c:d91b:: with SMTP id p27mr25451190qvj.236.1565513734175;
-	Sun, 11 Aug 2019 01:55:34 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-91-42.red.bezeqint.net. [79.181.91.42])
-	by smtp.gmail.com with ESMTPSA id
-	x26sm3314318qkn.116.2019.08.11.01.55.29
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 11 Aug 2019 01:55:33 -0700 (PDT)
-Date: Sun, 11 Aug 2019 04:55:27 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Christoph Hellwig <hch@lst.de>
-Subject: Re: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
-Message-ID: <20190811044431-mutt-send-email-mst@kernel.org>
-References: <87zhrj8kcp.fsf@morokweng.localdomain>
-	<20190810143038-mutt-send-email-mst@kernel.org>
-	<20190810220702.GA5964@ram.ibm.com> <20190811055607.GA12488@lst.de>
+	Mon, 12 Aug 2019 02:44:57 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id DBAC63090FCF;
+	Mon, 12 Aug 2019 02:44:56 +0000 (UTC)
+Received: from [10.72.12.78] (ovpn-12-78.pek2.redhat.com [10.72.12.78])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 0273610016E8;
+	Mon, 12 Aug 2019 02:44:51 +0000 (UTC)
+Subject: Re: [PATCH V5 0/9] Fixes for vhost metadata acceleration
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20190809054851.20118-1-jasowang@redhat.com>
+	<20190810134948-mutt-send-email-mst@kernel.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <360a3b91-1ac5-84c0-d34b-a4243fa748c4@redhat.com>
+Date: Mon, 12 Aug 2019 10:44:51 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190811055607.GA12488@lst.de>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+In-Reply-To: <20190810134948-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.43]);
+	Mon, 12 Aug 2019 02:44:57 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Alexey Kardashevskiy <aik@linux.ibm.com>,
-	Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Paul Mackerras <paulus@ozlabs.org>, iommu@lists.linux-foundation.org,
-	David Gibson <david@gibson.dropbear.id.au>
+Cc: kvm@vger.kernel.org, jgg@ziepe.ca, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,25 +62,43 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sun, Aug 11, 2019 at 07:56:07AM +0200, Christoph Hellwig wrote:
-> So we need a flag on the virtio device, exposed by the
-> hypervisor (or hardware for hw virtio devices) that says:  hey, I'm real,
-> don't take a shortcut.
-
-The point here is that it's actually still not real. So we would still
-use a physical address. However Linux decides that it wants extra
-security by moving all data through the bounce buffer.  The distinction
-made is that one can actually give device a physical address of the
-bounce buffer.
-
--- 
-MST
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvOC8xMSDkuIrljYgxOjUyLCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4gT24g
+RnJpLCBBdWcgMDksIDIwMTkgYXQgMDE6NDg6NDJBTSAtMDQwMCwgSmFzb24gV2FuZyB3cm90ZToK
+Pj4gSGkgYWxsOgo+Pgo+PiBUaGlzIHNlcmllcyB0cnkgdG8gZml4IHNldmVyYWwgaXNzdWVzIGlu
+dHJvZHVjZWQgYnkgbWV0YSBkYXRhCj4+IGFjY2VscmVhdGlvbiBzZXJpZXMuIFBsZWFzZSByZXZp
+ZXcuCj4+Cj4+IENoYW5nZXMgZnJvbSBWNDoKPj4gLSBzd2l0Y2ggdG8gdXNlIHNwaW5sb2NrIHN5
+bmNocm9uaXplIE1NVSBub3RpZmllciB3aXRoIGFjY2Vzc29ycwo+Pgo+PiBDaGFuZ2VzIGZyb20g
+VjM6Cj4+IC0gcmVtb3ZlIHRoZSB1bm5lY2Vzc2FyeSBwYXRjaAo+Pgo+PiBDaGFuZ2VzIGZyb20g
+VjI6Cj4+IC0gdXNlIHNlcWxjayBoZWxwZXIgdG8gc3luY2hyb25pemUgTU1VIG5vdGlmaWVyIHdp
+dGggdmhvc3Qgd29ya2VyCj4+Cj4+IENoYW5nZXMgZnJvbSBWMToKPj4gLSB0cnkgbm90IHVzZSBS
+Q1UgdG8gc3luY3Job25pemUgTU1VIG5vdGlmaWVyIHdpdGggdmhvc3Qgd29ya2VyCj4+IC0gc2V0
+IGRpcnR5IHBhZ2VzIGFmdGVyIG5vIHJlYWRlcnMKPj4gLSByZXR1cm4gLUVBR0FJTiBvbmx5IHdo
+ZW4gd2UgZmluZCB0aGUgcmFuZ2UgaXMgb3ZlcmxhcHBlZCB3aXRoCj4+ICAgIG1ldGFkYXRhCj4+
+Cj4+IEphc29uIFdhbmcgKDkpOgo+PiAgICB2aG9zdDogZG9uJ3Qgc2V0IHVhZGRyIGZvciBpbnZh
+bGlkIGFkZHJlc3MKPj4gICAgdmhvc3Q6IHZhbGlkYXRlIE1NVSBub3RpZmllciByZWdpc3RyYXRp
+b24KPj4gICAgdmhvc3Q6IGZpeCB2aG9zdCBtYXAgbGVhawo+PiAgICB2aG9zdDogcmVzZXQgaW52
+YWxpZGF0ZV9jb3VudCBpbiB2aG9zdF9zZXRfdnJpbmdfbnVtX2FkZHIoKQo+PiAgICB2aG9zdDog
+bWFyayBkaXJ0eSBwYWdlcyBkdXJpbmcgbWFwIHVuaW5pdAo+PiAgICB2aG9zdDogZG9uJ3QgZG8g
+c3luY2hyb25pemVfcmN1KCkgaW4gdmhvc3RfdW5pbml0X3ZxX21hcHMoKQo+PiAgICB2aG9zdDog
+ZG8gbm90IHVzZSBSQ1UgdG8gc3luY2hyb25pemUgTU1VIG5vdGlmaWVyIHdpdGggd29ya2VyCj4+
+ICAgIHZob3N0OiBjb3JyZWN0bHkgc2V0IGRpcnR5IHBhZ2VzIGluIE1NVSBub3RpZmllcnMgY2Fs
+bGJhY2sKPj4gICAgdmhvc3Q6IGRvIG5vdCByZXR1cm4gLUVBR0FJTiBmb3Igbm9uIGJsb2NraW5n
+IGludmFsaWRhdGlvbiB0b28gZWFybHkKPj4KPj4gICBkcml2ZXJzL3Zob3N0L3Zob3N0LmMgfCAy
+MDIgKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tCj4+ICAgZHJpdmVy
+cy92aG9zdC92aG9zdC5oIHwgICA2ICstCj4+ICAgMiBmaWxlcyBjaGFuZ2VkLCAxMjIgaW5zZXJ0
+aW9ucygrKSwgODYgZGVsZXRpb25zKC0pCj4gVGhpcyBnZW5lcmFsbHkgbG9va3MgbW9yZSBzb2xp
+ZC4KPgo+IEJ1dCB0aGlzIGFtb3VudHMgdG8gYSBzaWduaWZpY2FudCBvdmVyaGF1bCBvZiB0aGUg
+Y29kZS4KPgo+IEF0IHRoaXMgcG9pbnQgaG93IGFib3V0IHdlIHJldmVydCA3ZjQ2NjAzMmRjOWU1
+YTYxMjE3ZjIyZWEzNGIyZGY5MzI3ODZiYmZjCj4gZm9yIHRoaXMgcmVsZWFzZSwgYW5kIHRoZW4g
+cmUtYXBwbHkgYSBjb3JyZWN0ZWQgdmVyc2lvbgo+IGZvciB0aGUgbmV4dCBvbmU/CgoKSWYgcG9z
+c2libGUsIGNvbnNpZGVyIHdlJ3ZlIGFjdHVhbGx5IGRpc2FibGVkIHRoZSBmZWF0dXJlLiBIb3cg
+YWJvdXQgCmp1c3QgcXVldWVkIHRob3NlIHBhdGNoZXMgZm9yIG5leHQgcmVsZWFzZT8KClRoYW5r
+cwoKCj4KPj4gLS0gCj4+IDIuMTguMQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25A
+bGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24u
+b3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
