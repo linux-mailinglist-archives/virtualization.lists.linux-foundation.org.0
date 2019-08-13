@@ -2,95 +2,56 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F7728BD80
-	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 17:46:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A03C48BDF6
+	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 18:06:26 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 70EAFD09;
-	Tue, 13 Aug 2019 15:45:53 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3562ECC0;
+	Tue, 13 Aug 2019 16:06:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CEFAAC9F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DDC69C79
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 15:45:52 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
-	[148.163.158.5])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 09E818AC
+	Tue, 13 Aug 2019 16:06:18 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx01.bbu.dsd.mx.bitdefender.com
+	(mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6167F89D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 15:45:51 +0000 (UTC)
-Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
-	by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x7DFXKHi032213 for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 11:45:51 -0400
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
-	by mx0b-001b2d01.pphosted.com with ESMTP id 2uby40b4wp-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 11:45:50 -0400
-Received: from localhost
-	by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<linuxram@us.ibm.com>; Tue, 13 Aug 2019 16:45:49 +0100
-Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
-	by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Tue, 13 Aug 2019 16:45:44 +0100
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com
-	(b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
-	by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x7DFjgol60096752
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Tue, 13 Aug 2019 15:45:42 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id D35FFA4054;
-	Tue, 13 Aug 2019 15:45:42 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5D140A4060;
-	Tue, 13 Aug 2019 15:45:40 +0000 (GMT)
-Received: from ram.ibm.com (unknown [9.85.191.17])
-	by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
-	Tue, 13 Aug 2019 15:45:40 +0000 (GMT)
-Date: Tue, 13 Aug 2019 08:45:37 -0700
-From: Ram Pai <linuxram@us.ibm.com>
-To: David Gibson <david@gibson.dropbear.id.au>
-References: <87zhrj8kcp.fsf@morokweng.localdomain>
-	<20190810143038-mutt-send-email-mst@kernel.org>
-	<20190810220702.GA5964@ram.ibm.com> <20190811055607.GA12488@lst.de>
-	<20190812095156.GD3947@umbus.fritz.box>
-	<20190813132617.GA6426@lst.de>
-	<20190813142439.GO3947@umbus.fritz.box>
+	Tue, 13 Aug 2019 16:06:18 +0000 (UTC)
+Received: from smtp.bitdefender.com (smtp02.buh.bitdefender.net [10.17.80.76])
+	by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
+	818B830644BA; Tue, 13 Aug 2019 19:06:16 +0300 (EEST)
+Received: from localhost (unknown [195.210.5.22])
+	by smtp.bitdefender.com (Postfix) with ESMTPSA id 6D9C1303EF04;
+	Tue, 13 Aug 2019 19:06:16 +0300 (EEST)
+From: Adalbert =?iso-8859-2?b?TGF643I=?= <alazar@bitdefender.com>
+Subject: Re: [RFC PATCH v6 70/92] kvm: x86: filter out access rights only when
+	tracked by the introspection tool
+To: Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org
+In-Reply-To: <8cba6816-8d3a-2498-b3b0-2ce76a98ce12@redhat.com>
+References: <20190809160047.8319-1-alazar@bitdefender.com>
+	<20190809160047.8319-71-alazar@bitdefender.com>
+	<8cba6816-8d3a-2498-b3b0-2ce76a98ce12@redhat.com>
+Date: Tue, 13 Aug 2019 19:06:43 +0300
+Message-ID: <1565712403.bf0eBF.11721.@15f23d3a749365d981e968181cce585d2dcb3ffa>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190813142439.GO3947@umbus.fritz.box>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-TM-AS-GCONF: 00
-x-cbid: 19081315-0012-0000-0000-0000033E3613
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19081315-0013-0000-0000-000021784637
-Message-Id: <20190813154537.GE5964@ram.ibm.com>
-Subject: RE: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-08-13_05:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=811 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1906280000 definitions=main-1908130159
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00, FROM_EXCESS_BASE64, 
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Alexey Kardashevskiy <aik@linux.ibm.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Paul Mackerras <paulus@ozlabs.org>, iommu@lists.linux-foundation.org,
-	linuxppc-devel@lists.ozlabs.org, Christoph Hellwig <hch@lst.de>
+Cc: Tamas K Lengyel <tamas@tklengyel.com>,
+	Weijiang Yang <weijiang.yang@intel.com>, Yu C Zhang <yu.c.zhang@intel.com>,
+	Radim =?iso-8859-2?b?S3LobeH4?= <rkrcmar@redhat.com>,
+	Jan Kiszka <jan.kiszka@siemens.com>,
+	Samuel =?iso-8859-1?q?Laur=E9n?= <samuel.lauren@iki.fi>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Patrick Colp <patrick.colp@oracle.com>,
+	Mathieu Tarral <mathieu.tarral@protonmail.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Mihai =?UTF-8?b?RG9uyJt1?= <mdontu@bitdefender.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -102,76 +63,39 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Reply-To: Ram Pai <linuxram@us.ibm.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Aug 14, 2019 at 12:24:39AM +1000, David Gibson wrote:
-> On Tue, Aug 13, 2019 at 03:26:17PM +0200, Christoph Hellwig wrote:
-> > On Mon, Aug 12, 2019 at 07:51:56PM +1000, David Gibson wrote:
-> > > AFAICT we already kind of abuse this for the VIRTIO_F_IOMMU_PLATFORM,
-> > > because to handle for cases where it *is* a device limitation, we
-> > > assume that if the hypervisor presents VIRTIO_F_IOMMU_PLATFORM then
-> > > the guest *must* select it.
-> > > 
-> > > What we actually need here is for the hypervisor to present
-> > > VIRTIO_F_IOMMU_PLATFORM as available, but not required.  Then we need
-> > > a way for the platform core code to communicate to the virtio driver
-> > > that *it* requires the IOMMU to be used, so that the driver can select
-> > > or not the feature bit on that basis.
-> > 
-> > I agree with the above, but that just brings us back to the original
-> > issue - the whole bypass of the DMA OPS should be an option that the
-> > device can offer, not the other way around.  And we really need to
-> > fix that root cause instead of doctoring around it.
-> 
-> I'm not exactly sure what you mean by "device" in this context.  Do
-> you mean the hypervisor (qemu) side implementation?
-> 
-> You're right that this was the wrong way around to begin with, but as
-> well as being hard to change now, I don't see how it really addresses
-> the current problem.  The device could default to IOMMU and allow
-> bypass, but the driver would still need to get information from the
-> platform to know that it *can't* accept that option in the case of a
-> secure VM.  Reversed sense, but the same basic problem.
-> 
-> The hypervisor does not, and can not be aware of the secure VM
-> restrictions - only the guest side platform code knows that.
-
-This statement is almost entirely right. I will rephrase it to make it
-entirely right.   
-
-The hypervisor does not, and can not be aware of the secure VM
-requirement that it needs to do some special processing that has nothing
-to do with DMA address translation - only the guest side platform code
-know that.
-
-BTW: I do not consider 'bounce buffering' as 'DMA address translation'.
-DMA address translation, translates CPU address to DMA address.  Bounce
-buffering moves the data from one buffer at a given CPU address to
-another buffer at a different CPU address.  Unfortunately the current
-DMA ops conflates the two.  The need to do 'DMA address translation' 
-is something the device can enforce.  But the need to do bounce
-buffering, is something that the device should not be aware and should be
-entirely a decision made locally by the kernel/driver in the secure VM.
-
-RP
-
-> 
-> -- 
-> David Gibson			| I'll have my music baroque, and my code
-> david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-> 				| _way_ _around_!
-> http://www.ozlabs.org/~dgibson
-
-
-
--- 
-Ram Pai
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gVHVlLCAxMyBBdWcgMjAxOSAxMTowODozOSArMDIwMCwgUGFvbG8gQm9uemluaSA8cGJvbnpp
+bmlAcmVkaGF0LmNvbT4gd3JvdGU6Cj4gT24gMDkvMDgvMTkgMTg6MDAsIEFkYWxiZXJ0IExhesSD
+ciB3cm90ZToKPiA+IEl0IHNob3VsZCBjb21wbGV0ZSB0aGUgY29tbWl0IGZkMzRhOTUxODE3MyAo
+Imt2bTogeDg2OiBjb25zdWx0IHRoZSBwYWdlIHRyYWNraW5nIGZyb20ga3ZtX21tdV9nZXRfcGFn
+ZSgpIGFuZCBfX2RpcmVjdF9tYXAoKSIpCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IEFkYWxiZXJ0
+IExhesSDciA8YWxhemFyQGJpdGRlZmVuZGVyLmNvbT4KPiA+IC0tLQo+ID4gIGFyY2gveDg2L2t2
+bS9tbXUuYyB8IDMgKysrCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKQo+ID4g
+Cj4gPiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYva3ZtL21tdS5jIGIvYXJjaC94ODYva3ZtL21tdS5j
+Cj4gPiBpbmRleCA2NWI2YWNiYTgyZGEuLmZkNjRjZjExMTVkYSAxMDA2NDQKPiA+IC0tLSBhL2Fy
+Y2gveDg2L2t2bS9tbXUuYwo+ID4gKysrIGIvYXJjaC94ODYva3ZtL21tdS5jCj4gPiBAQCAtMjY2
+MCw2ICsyNjYwLDkgQEAgc3RhdGljIHZvaWQgY2xlYXJfc3Bfd3JpdGVfZmxvb2RpbmdfY291bnQo
+dTY0ICpzcHRlKQo+ID4gIHN0YXRpYyB1bnNpZ25lZCBpbnQga3ZtX21tdV9wYWdlX3RyYWNrX2Fj
+YyhzdHJ1Y3Qga3ZtX3ZjcHUgKnZjcHUsIGdmbl90IGdmbiwKPiA+ICAJCQkJCSAgIHVuc2lnbmVk
+IGludCBhY2MpCj4gPiAgewo+ID4gKwlpZiAoIWt2bWlfdHJhY2tlZF9nZm4odmNwdSwgZ2ZuKSkK
+PiA+ICsJCXJldHVybiBhY2M7Cj4gPiArCj4gPiAgCWlmIChrdm1fcGFnZV90cmFja19pc19hY3Rp
+dmUodmNwdSwgZ2ZuLCBLVk1fUEFHRV9UUkFDS19QUkVSRUFEKSkKPiA+ICAJCWFjYyAmPSB+QUND
+X1VTRVJfTUFTSzsKPiA+ICAJaWYgKGt2bV9wYWdlX3RyYWNrX2lzX2FjdGl2ZSh2Y3B1LCBnZm4s
+IEtWTV9QQUdFX1RSQUNLX1BSRVdSSVRFKSB8fAo+ID4gCj4gCj4gSWYgdGhpcyBwYXRjaCBpcyBh
+bHdheXMgbmVlZGVkLCB0aGVuIHRoZSBmdW5jdGlvbiBzaG91bGQgYmUgbmFtZWQKPiBzb21ldGhp
+bmcgbGlrZSBrdm1fbW11X2FwcGx5X2ludHJvc3BlY3Rpb25fYWNjZXNzIGFuZCBrdm1pX3RyYWNr
+ZWRfZ2ZuCj4gc2hvdWxkIGJlIHRlc3RlZCBmcm9tIHRoZSBtb21lbnQgaXQgaXMgaW50cm9kdWNl
+ZC4KPiAKPiBCdXQgdGhlIGNvbW1pdCBtZXNzYWdlIHNheXMgbm90aGluZyBhYm91dCBfd2h5XyBp
+dCBpcyBuZWVkZWQsIHNvIEkKPiBjYW5ub3QgZ3Vlc3MuICBJIHdvdWxkIHZlcnkgbXVjaCBhdm9p
+ZCBpdCBob3dldmVyLiAgSXMgaXQganVzdCBhbgo+IG9wdGltaXphdGlvbj8KPiAKPiBQYW9sbwoK
+V2UnbGwgcmV0ZXN0IHRvIHNlZSBpZiB3ZSBzdGlsbCBuZWVkIGt2bV9tbXVfcGFnZV90cmFja19h
+Y2MoKS4KVGhlIGt2bWlfdHJhY2tlZF9nZm4oKSBjaGVjayB3YXMgdXNlZCB0byBrZWVwIHRoZSBL
+Vk0gY29kZSBmbG93CiJ1bmNoYW5nZWQiIGFzIG11Y2ggYXMgcG9zc2libGUuIFByb2JhYmx5LCB3
+ZSBjYW4gZ2V0IHJpZGUgb2YgaXQuCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBs
+aXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5v
+cmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
