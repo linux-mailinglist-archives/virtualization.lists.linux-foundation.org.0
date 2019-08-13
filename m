@@ -2,62 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EAFC8B3C3
-	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 11:15:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EB728B3D8
+	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 11:16:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id B2024CBB;
-	Tue, 13 Aug 2019 09:15:45 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 05199CBF;
+	Tue, 13 Aug 2019 09:16:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2A144CA6
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B0E8CCA6
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 09:15:44 +0000 (UTC)
+	Tue, 13 Aug 2019 09:16:06 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 935858AC
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 262848AC
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 09:15:43 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id n9so107169209wru.0
+	Tue, 13 Aug 2019 09:16:06 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id l2so806370wmg.0
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 02:15:43 -0700 (PDT)
+	Tue, 13 Aug 2019 02:16:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
 	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=q7bgqMdQ4an3+fW9pjXHTss4SNTSFngzufR2wW+436s=;
-	b=Y2Bmoidwv8fYJpGD5VtRsavbrGB3YSkT0XJFKhm7cxxYDImtLQUzhCD7go2++ts9rg
-	jL8xQh0zN3PekzKb1xMJT45wgB2/POIvg3m00IwAXypehIS+ZhIZtukChfXnz8yQZ+NV
-	Xo3aPtvmmumpJR804j883d3pknTqR4zoyG3LX+vF5LsS4y2bD9DGh/N84PBUuHHtzGfv
-	CQsAzQ+GOiyXWMbcq4Y+P/rP6eSKbxD6zvGVF6NuocEzJEXiYo+w3r52FvY2GGzcYi/Z
-	jzksWYsPloDHNzu6CROmvlprK+Uj0KuEKQbRNQP/g9J4xpOLHTdMZPNBgD447+6Nkbhn
-	wp4A==
-X-Gm-Message-State: APjAAAVCAnfJwwF8RlXg9PNERmpl12akbW1CZpHn8BIA2ZbrDPtSfl9G
-	fLkTUjdDIK8e+q8iZbZMC+6Xkg==
-X-Google-Smtp-Source: APXvYqxstOWD8uGBtXH2sZT96q5cW3boODxMOIYCbZ+H7TsBnLr+a/3ZIecGYglK7JULc1kUyTstKQ==
-X-Received: by 2002:adf:dc0f:: with SMTP id t15mr25505581wri.50.1565687742155; 
-	Tue, 13 Aug 2019 02:15:42 -0700 (PDT)
+	bh=rJyEXL/9pmUa8F8Nq9N9p+VTELu7g73JrfbMzEYtsqw=;
+	b=HM3+MnQd97+lQFbxkowH/FCH0YdQ+5rxCxid1QmQo4D8V8OkzxAzIdw3TnvImxVtjQ
+	YySBIcR3marus7lJCoEt6/DTnivjgAnLO3uxKocgkIiyDkt8eyRkqhmfvA/jABiWlNTy
+	UE0izNA0vD8auwP/AnaAq1wUVXB13z+Ienk1tMCQTsyJikp7Lqdr1ZG7JSNloNuhr6S5
+	l4yd+3PYolGMgdCFZtXOIn/Xuq032O72OAzKPQJDmzn5ApHBbwbhhif3ndOKNDB5LRec
+	MTcfjivMCC2e2BIZHrk0WuNl2z2+uNsRM45senKeWL4C7XsrTXWQDZJ76kjpXsbu4g3L
+	hlCA==
+X-Gm-Message-State: APjAAAUSLAK7lGHFc2M3nMpEF+o2Sp21OOk69QaJZ16Kiy6SSiVRyD4/
+	cct7lI9/BO4BsECWVi9vkqVjNA==
+X-Google-Smtp-Source: APXvYqwm309us5aZi/frD8eACHl5aijviV3HAVkqCeaBNsVD1mdnoZLmf1PImPsBNT+r6Tg0wB86fA==
+X-Received: by 2002:a7b:cf0b:: with SMTP id l11mr2056631wmg.143.1565687764702; 
+	Tue, 13 Aug 2019 02:16:04 -0700 (PDT)
 Received: from [192.168.10.150] ([93.56.166.5])
-	by smtp.gmail.com with ESMTPSA id w5sm914921wmm.43.2019.08.13.02.15.40
+	by smtp.gmail.com with ESMTPSA id
+	c15sm59116320wrb.80.2019.08.13.02.16.03
 	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Tue, 13 Aug 2019 02:15:41 -0700 (PDT)
-Subject: Re: [RFC PATCH v6 06/92] kvm: introspection: add
-	KVMI_CONTROL_CMD_RESPONSE
+	Tue, 13 Aug 2019 02:16:04 -0700 (PDT)
+Subject: Re: [RFC PATCH v6 07/92] kvm: introspection: honor the reply option
+	when handling the KVMI_GET_VERSION command
 To: =?UTF-8?Q?Adalbert_Laz=c4=83r?= <alazar@bitdefender.com>,
 	kvm@vger.kernel.org
 References: <20190809160047.8319-1-alazar@bitdefender.com>
-	<20190809160047.8319-7-alazar@bitdefender.com>
+	<20190809160047.8319-8-alazar@bitdefender.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
 Openpgp: preference=signencrypt
-Message-ID: <e8f59b08-734a-2ce1-ae28-3cc9d90c0bcb@redhat.com>
-Date: Tue, 13 Aug 2019 11:15:34 +0200
+Message-ID: <a5cdbbd4-6f25-a0a5-054e-5810b5828a48@redhat.com>
+Date: Tue, 13 Aug 2019 11:16:01 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190809160047.8319-7-alazar@bitdefender.com>
+In-Reply-To: <20190809160047.8319-8-alazar@bitdefender.com>
 Content-Language: en-US
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
@@ -90,28 +91,28 @@ Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gMDkvMDgvMTkgMTc6NTksIEFkYWxiZXJ0IExhesSDciB3cm90ZToKPiArSWYgYG5vd2AgaXMg
-MSwgdGhlIGNvbW1hbmQgcmVwbHkgaXMgZW5hYmxlZC9kaXNhYmxlZCAoYWNjb3JkaW5nIHRvCj4g
-K2BlbmFibGVgKSBzdGFydGluZyB3aXRoIHRoZSBjdXJyZW50IGNvbW1hbmQuIEZvciBleGFtcGxl
-LCBgZW5hYmxlPTBgCj4gK2FuZCBgbm93PTFgIG1lYW5zIHRoYXQgdGhlIHJlcGx5IGlzIGRpc2Fi
-bGVkIGZvciB0aGlzIGNvbW1hbmQgdG9vLAo+ICt3aGlsZSBgZW5hYmxlPTBgIGFuZCBgbm93PTBg
-IG1lYW5zIHRoYXQgYSByZXBseSB3aWxsIGJlIHNlbmQgZm9yIHRoaXMKPiArY29tbWFuZCwgYnV0
-IG5vdCBmb3IgdGhlIG5leHQgb25lcyAodW50aWwgZW5hYmxlZCBiYWNrIHdpdGggYW5vdGhlcgo+
-ICsqS1ZNSV9DT05UUk9MX0NNRF9SRVNQT05TRSopLgo+ICsKPiArVGhpcyBjb21tYW5kIGlzIHVz
-ZWQgYnkgdGhlIGludHJvc3BlY3Rpb24gdG9vbCB0byBkaXNhYmxlIHRoZSByZXBsaWVzCj4gK2Zv
-ciBjb21tYW5kcyByZXR1cm5pbmcgYW4gZXJyb3IgY29kZSBvbmx5IChlZy4gKktWTUlfU0VUX1JF
-R0lTVEVSUyopCj4gK3doZW4gYW4gZXJyb3IgaXMgbGVzcyBsaWtlbHkgdG8gaGFwcGVuLiBGb3Ig
-ZXhhbXBsZSwgdGhlIGZvbGxvd2luZwo+ICtjb21tYW5kcyBjYW4gYmUgdXNlZCB0byByZXBseSB0
-byBhbiBldmVudCB3aXRoIGEgc2luZ2xlIGB3cml0ZSgpYCBjYWxsOgo+ICsKPiArCUtWTUlfQ09O
-VFJPTF9DTURfUkVTUE9OU0UgZW5hYmxlPTAgbm93PTEKPiArCUtWTUlfU0VUX1JFR0lTVEVSUyB2
-Y3B1PU4KPiArCUtWTUlfRVZFTlRfUkVQTFkgICB2Y3B1PU4KPiArCUtWTUlfQ09OVFJPTF9DTURf
-UkVTUE9OU0UgZW5hYmxlPTEgbm93PTAKCkkgZG9uJ3QgdW5kZXJzdGFuZCB0aGUgdXNhZ2UuICBJ
-cyB0aGVyZSBhbnkgY2FzZSB3aGVyZSB5b3Ugd2FudCBub3cgPT0gMQphY3R1YWxseT8gIENhbiB5
-b3UganVzdCBzYXkgdGhhdCBLVk1JX0NPTlRST0xfQ01EX1JFU1BPTlNFIG5ldmVyIGhhcyBhCnJl
-cGx5LCBvciB0byBtYWtlIG5vdz09ZW5hYmxlPwoKPiArCWlmIChlcnIpCj4gKwkJa3ZtaV93YXJu
-KGlrdm0sICJFcnJvciBjb2RlICVkIGRpc2NhcmRlZCBmb3IgbWVzc2FnZSBpZCAlZFxuIiwKPiAr
-CQkJICBlcnIsIG1zZy0+aWQpOwo+ICsKCldvdWxkIGl0IG1ha2Ugc2Vuc2UgdG8gZXZlbiBjbG9z
-ZSB0aGUgc29ja2V0IGlmIHRoZXJlIGlzIGFuIGVycm9yPwoKUGFvbG8KX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBs
-aXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlz
-dHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+T24gMDkvMDgvMTkgMTc6NTksIEFkYWxiZXJ0IExhesSDciB3cm90ZToKPiBPYnZpb3VzbHksIHRo
+ZSBLVk1JX0dFVF9WRVJTSU9OIGNvbW1hbmQgbXVzdCBub3QgYmUgdXNlZCB3aGVuIHRoZSBjb21t
+YW5kCj4gcmVwbHkgaXMgZGlzYWJsZWQgYnkgYSBwcmV2aW91cyBLVk1JX0NPTlRST0xfQ01EX1JF
+U1BPTlNFIGNvbW1hbmQuCj4gCj4gVGhpcyBjb21taXQgY2hhbmdlcyB0aGUgY29kZSBwYXRoIGlu
+IG9yZGVyIHRvIGNoZWNrIHRoZSByZXBseSBvcHRpb24KPiAoZW5hYmxlZC9kaXNhYmxlZCkgYmVm
+b3JlIHRyeWluZyB0byByZXBseSB0byB0aGlzIGNvbW1hbmQuIElmIHRoZSBjb21tYW5kCj4gcmVw
+bHkgaXMgZGlzYWJsZWQgaXQgd2lsbCByZXR1cm4gYW4gZXJyb3IgdG8gdGhlIGNhbGxlci4gSW4g
+dGhlIGVuZCwgdGhlCj4gcmVjZWl2aW5nIHdvcmtlciB3aWxsIGZpbmlzaCBhbmQgdGhlIGludHJv
+c3BlY3Rpb24gc29ja2V0IHdpbGwgYmUgY2xvc2VkLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFkYWxi
+ZXJ0IExhesSDciA8YWxhemFyQGJpdGRlZmVuZGVyLmNvbT4KPiAtLS0KPiAgdmlydC9rdm0va3Zt
+aV9tc2cuYyB8IDIgKy0KPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0
+aW9uKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3ZpcnQva3ZtL2t2bWlfbXNnLmMgYi92aXJ0L2t2bS9r
+dm1pX21zZy5jCj4gaW5kZXggZWE1YzdlMjM2NjlhLi4yMjM3YTZlZDI1ZjYgMTAwNjQ0Cj4gLS0t
+IGEvdmlydC9rdm0va3ZtaV9tc2cuYwo+ICsrKyBiL3ZpcnQva3ZtL2t2bWlfbXNnLmMKPiBAQCAt
+MTY5LDcgKzE2OSw3IEBAIHN0YXRpYyBpbnQgaGFuZGxlX2dldF92ZXJzaW9uKHN0cnVjdCBrdm1p
+ICppa3ZtLAo+ICAJbWVtc2V0KCZycGwsIDAsIHNpemVvZihycGwpKTsKPiAgCXJwbC52ZXJzaW9u
+ID0gS1ZNSV9WRVJTSU9OOwo+ICAKPiAtCXJldHVybiBrdm1pX21zZ192bV9yZXBseShpa3ZtLCBt
+c2csIDAsICZycGwsIHNpemVvZihycGwpKTsKPiArCXJldHVybiBrdm1pX21zZ192bV9tYXliZV9y
+ZXBseShpa3ZtLCBtc2csIDAsICZycGwsIHNpemVvZihycGwpKTsKPiAgfQo+ICAKPiAgc3RhdGlj
+IGJvb2wgaXNfY29tbWFuZF9hbGxvd2VkKHN0cnVjdCBrdm1pICppa3ZtLCBpbnQgaWQpCj4gCgpH
+byBhaGVhZCBhbmQgc3F1YXNoIHRoaXMgaW4gdGhlIHByZXZpb3VzIHBhdGNoLgoKUGFvbG8KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRp
+b24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3Jn
+Cmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1
+YWxpemF0aW9u
