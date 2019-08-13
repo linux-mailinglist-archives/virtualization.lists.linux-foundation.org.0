@@ -2,55 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id A35DB8BBEE
-	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 16:48:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDE0D8BBD8
+	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 16:45:23 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 79B57BE7;
-	Tue, 13 Aug 2019 14:47:49 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BCF70C8E;
+	Tue, 13 Aug 2019 14:45:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CD61ABB3;
-	Tue, 13 Aug 2019 14:47:47 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from ozlabs.org (ozlabs.org [203.11.71.1])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 87FCC67F;
-	Tue, 13 Aug 2019 14:47:46 +0000 (UTC)
-Received: by ozlabs.org (Postfix, from userid 1007)
-	id 467Ftl594Dz9sN1; Wed, 14 Aug 2019 00:47:43 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=gibson.dropbear.id.au; s=201602; t=1565707663;
-	bh=YSf4/YKDTs2wsPKYpWpVsROZ9TkPMAXnHxWQNLas4ZQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=RL7wRDBnOANeQePVqkn3FJuiHQUYJQd/cb/dQZ/3SDxdB92pdJf/cJeJiDGnTLJCl
-	rBSj0c8hn7JlnGn2go3uzHbhLJcFsA97E5o9TJgefD0W+kXcz8Fww9xsPBQGXHpdmu
-	iQo4GX9xOdCk3vr3TirWKAtH2Rhs2p3fGutGDX0E=
-Date: Wed, 14 Aug 2019 00:24:39 +1000
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Christoph Hellwig <hch@lst.de>
-Subject: Re: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
-Message-ID: <20190813142439.GO3947@umbus.fritz.box>
-References: <87zhrj8kcp.fsf@morokweng.localdomain>
-	<20190810143038-mutt-send-email-mst@kernel.org>
-	<20190810220702.GA5964@ram.ibm.com> <20190811055607.GA12488@lst.de>
-	<20190812095156.GD3947@umbus.fritz.box>
-	<20190813132617.GA6426@lst.de>
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B55D0BDC
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 13 Aug 2019 14:45:15 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2F7B589D
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 13 Aug 2019 14:45:15 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id t16so17886168wra.6
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 13 Aug 2019 07:45:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=jWtEd3owCPSOaSqnFheJ8jWjvLGAgQi5lkfcBCpyD7o=;
+	b=omLoXWwqqUBQDedo+cMltL9f5jrFO2cXu5aujpqXrOlueguL5z3I+srt0MG1NVgd+/
+	sDExEy0e8GijEzxDXL7lt+7jQtP2zkYko/W4XOH0tRBuec4YunPdKINLbl/6W7srywXB
+	sGUBCWzhEVd2Y5aCLhgFDsqG4/GQR99TlZxRz+81etgdUjUjzMJF5BiUPYVVR19J02Qj
+	9hJRBilSBm46yfMYuRCzX59hNY1xKDGPkQGdHeXlHIiZha827ByY2Bgy72gxfnz+L/WH
+	ztpg7YOjZdR2qL1G7UBbXmrNBcuCB7lAKIw7+DNLE7ZN7Zzu5CYiGvWW+iwI8dFXLU/D
+	ZGNA==
+X-Gm-Message-State: APjAAAUaVQcpiQ8VchuEwVmZ4pDkeP4IwhOzf7WfV7Lj7oR+EQW8rNbo
+	ydkjK7gUvB9JrexNHMtHkQd8Lg==
+X-Google-Smtp-Source: APXvYqwcGE4nFuUbUV12L+CuV8ssqEc28LeuFzgoubUsbyKYX9+fTashqIpI1VrJDY8+MqB+OZnDSA==
+X-Received: by 2002:adf:fc51:: with SMTP id e17mr43958026wrs.348.1565707513708;
+	Tue, 13 Aug 2019 07:45:13 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:5193:b12b:f4df:deb6?
+	([2001:b07:6468:f312:5193:b12b:f4df:deb6])
+	by smtp.gmail.com with ESMTPSA id
+	x20sm237275027wrg.10.2019.08.13.07.45.12
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 Aug 2019 07:45:13 -0700 (PDT)
+Subject: Re: [RFC PATCH v6 14/92] kvm: introspection: handle introspection
+	commands before returning to guest
+To: =?UTF-8?Q?Adalbert_Laz=c4=83r?= <alazar@bitdefender.com>,
+	kvm@vger.kernel.org
+References: <20190809160047.8319-1-alazar@bitdefender.com>
+	<20190809160047.8319-15-alazar@bitdefender.com>
+	<645d86f5-67f6-f5d3-3fbb-5ee9898a7ef8@redhat.com>
+	<5d52c10e.1c69fb81.26904.fd34SMTPIN_ADDED_BROKEN@mx.google.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Openpgp: preference=signencrypt
+Message-ID: <97cdf9cb-286c-2387-6cb5-003b30f74c7e@redhat.com>
+Date: Tue, 13 Aug 2019 16:45:11 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190813132617.GA6426@lst.de>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+In-Reply-To: <5d52c10e.1c69fb81.26904.fd34SMTPIN_ADDED_BROKEN@mx.google.com>
+Content-Language: en-US
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Alexey Kardashevskiy <aik@linux.ibm.com>,
-	Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Paul Mackerras <paulus@ozlabs.org>, iommu@lists.linux-foundation.org,
-	linuxppc-devel@lists.ozlabs.org
+Cc: Tamas K Lengyel <tamas@tklengyel.com>,
+	Weijiang Yang <weijiang.yang@intel.com>, Yu C Zhang <yu.c.zhang@intel.com>,
+	=?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@redhat.com>,
+	Jan Kiszka <jan.kiszka@siemens.com>,
+	=?UTF-8?Q?Samuel_Laur=c3=a9n?= <samuel.lauren@iki.fi>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Patrick Colp <patrick.colp@oracle.com>,
+	Mathieu Tarral <mathieu.tarral@protonmail.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	=?UTF-8?Q?Mircea_C=c3=aerjaliu?= <mcirjaliu@bitdefender.com>,
+	=?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,89 +90,26 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1660255041622460718=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-
---===============1660255041622460718==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="xexMVKTdXPhpRiVT"
-Content-Disposition: inline
-
-
---xexMVKTdXPhpRiVT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Aug 13, 2019 at 03:26:17PM +0200, Christoph Hellwig wrote:
-> On Mon, Aug 12, 2019 at 07:51:56PM +1000, David Gibson wrote:
-> > AFAICT we already kind of abuse this for the VIRTIO_F_IOMMU_PLATFORM,
-> > because to handle for cases where it *is* a device limitation, we
-> > assume that if the hypervisor presents VIRTIO_F_IOMMU_PLATFORM then
-> > the guest *must* select it.
-> >=20
-> > What we actually need here is for the hypervisor to present
-> > VIRTIO_F_IOMMU_PLATFORM as available, but not required.  Then we need
-> > a way for the platform core code to communicate to the virtio driver
-> > that *it* requires the IOMMU to be used, so that the driver can select
-> > or not the feature bit on that basis.
->=20
-> I agree with the above, but that just brings us back to the original
-> issue - the whole bypass of the DMA OPS should be an option that the
-> device can offer, not the other way around.  And we really need to
-> fix that root cause instead of doctoring around it.
-
-I'm not exactly sure what you mean by "device" in this context.  Do
-you mean the hypervisor (qemu) side implementation?
-
-You're right that this was the wrong way around to begin with, but as
-well as being hard to change now, I don't see how it really addresses
-the current problem.  The device could default to IOMMU and allow
-bypass, but the driver would still need to get information from the
-platform to know that it *can't* accept that option in the case of a
-secure VM.  Reversed sense, but the same basic problem.
-
-The hypervisor does not, and can not be aware of the secure VM
-restrictions - only the guest side platform code knows that.
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---xexMVKTdXPhpRiVT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl1SyCcACgkQbDjKyiDZ
-s5I4bQ//S4EUhoZcI/LsW/VYsc9vUb4nR5PFUpsfHBRPpz5LSCyiE0zj6HPD0NEw
-xx7wFiEoEoijTK2eUAql0bciMMkjU4bktaIRNxHL0gHTJ+bYC0JQK42DBFC6t/9L
-2D5DD8K9CYwIwxjYOPlxaxCEJfVKLLCMwBXmO3n1wbp3DO4ejeOq6TcsFfzF079C
-rj1ofD3aAdjKicydMAWXVOly4fcAimPwCI+CU/hEuAiT5OOsvl3RkOcPQ2psC0kr
-AhWUtFFDmdTosz+3HvByFrQoIsWS833CETD/+h7QPRfcgdDnoctb5QY9oyqSCxvH
-phO1O07WExt8rXrRAWJvP81K0n+b4cTuw8aUKp8qchHopQUrSiUfwM0vLFgbHmPj
-qG+x3Z1XfdMRWJjnst0aF/EMnI3GXl+d2hzMJLbXicj0F4HLnn/F2mkQbXRkOcFw
-8gilmJLNmOhUWo8viy7dc90YU2i0HOQd6h0j+5fyfhYKf+4fWvodL6thBGHWWiTk
-g63CjmoEZByRc5iDwuGf3vRBsFU26hDHYXh3mk8+AEmfZ0zMfE+6NvgEdPOvU82A
-bwQU186bnnTF1AjRiGfC69gX4Dfe077FiFjcDwS6ojR+21MojjdITMsVOKw4ZwfQ
-wwnomYbPb7NjK2QJcSM8AqbQftwvqAIzBtjPEOsknnb4VyoVTXs=
-=2Lh2
------END PGP SIGNATURE-----
-
---xexMVKTdXPhpRiVT--
-
---===============1660255041622460718==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============1660255041622460718==--
+T24gMTMvMDgvMTkgMTU6NTQsIEFkYWxiZXJ0IExhesSDciB3cm90ZToKPiAgICAgTGVhdmluZyBr
+dm1fdmNwdV9ibG9jaygpIGluIG9yZGVyIHRvIGhhbmRsZSBhIHJlcXVlc3Qgc3VjaCBhcyAncGF1
+c2UnLAo+ICAgICB3b3VsZCBjYXVzZSB0aGUgdkNQVSB0byBlbnRlciB0aGUgZ3Vlc3Qgd2hlbiBy
+ZXN1bWVkLiBNb3N0IG9mIHRoZQo+ICAgICB0aW1lIHRoaXMgZG9lcyBub3QgYXBwZWFyIHRvIGJl
+IGFuIGlzc3VlLCBidXQgZHVyaW5nIGVhcmx5IGJvb3QgaXQKPiAgICAgY2FuIGhhcHBlbiBmb3Ig
+YSBub24tYm9vdCB2Q1BVIHRvIHN0YXJ0IGV4ZWN1dGluZyBjb2RlIGZyb20gYXJlYXMgdGhhdAo+
+ICAgICBmaXJzdCBuZWVkZWQgdG8gYmUgc2V0IHVwIGJ5IHZDUFUgIzAuCj4gICAgIAo+ICAgICBJ
+biBhIHBhcnRpY3VsYXIgY2FzZSwgdkNQVSAjMSBleGVjdXRlZCBjb2RlIHdoaWNoIHJlc2lkZWQg
+aW4gYW4gYXJlYQo+ICAgICBub3QgY292ZXJlZCBieSBhIG1lbXNsb3QsIHdoaWNoIGNhdXNlZCBh
+biBFUFQgdmlvbGF0aW9uIHRoYXQgZ290Cj4gICAgIHR1cm5lZCBpbiBtbXVfc2V0X3NwdGUoKSBp
+bnRvIGEgTU1JTyByZXF1ZXN0IHRoYXQgcmVxdWlyZWQgZW11bGF0aW9uLgo+ICAgICBVbmZvcnR1
+bmF0ZWxseSwgdGhlIGVtdWxhdG9yIHRyaXBwZWQsIGV4aXRlZCB0byB1c2Vyc3BhY2UgYW5kIHRo
+ZSBWTQo+ICAgICB3YXMgYWJvcnRlZC4KCk9rYXksIHRoaXMgbWFrZXMgc2Vuc2UuICBNYXliZSB5
+b3Ugd2FudCB0byBoYW5kbGUgS1ZNX1JFUV9JTlRST1NQRUNUSU9OCmluIHZjcHVfcnVuIHJhdGhl
+ciB0aGFuIHZjcHVfZW50ZXJfZ3Vlc3Q/CgpQYW9sbwpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVh
+bGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZv
+dW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
