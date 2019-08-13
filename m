@@ -2,43 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3426A8BB1B
-	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 16:05:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D0FB8BB1F
+	for <lists.virtualization@lfdr.de>; Tue, 13 Aug 2019 16:05:53 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id A88E9CD5;
-	Tue, 13 Aug 2019 14:05:39 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E5DF9CDE;
+	Tue, 13 Aug 2019 14:05:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8EA0FB7A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CD176CD3
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 14:05:38 +0000 (UTC)
+	Tue, 13 Aug 2019 14:05:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B7A1887E
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8A0998D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 13 Aug 2019 14:05:36 +0000 (UTC)
+	Tue, 13 Aug 2019 14:05:39 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
 	[10.5.11.13])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id F28EF30A5A64;
-	Tue, 13 Aug 2019 14:05:35 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 1A965308FC22;
+	Tue, 13 Aug 2019 14:05:39 +0000 (UTC)
 Received: from dhcp201-121.englab.pnq.redhat.com (unknown [10.65.16.3])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 4F5537FB8C;
-	Tue, 13 Aug 2019 14:05:30 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 799926092F;
+	Tue, 13 Aug 2019 14:05:36 +0000 (UTC)
 From: Pankaj Gupta <pagupta@redhat.com>
 To: mst@redhat.com,
 	amit@kernel.org
-Subject: [PATCH v4 0/2] virtio_console: fix replug of virtio console port
-Date: Tue, 13 Aug 2019 19:35:27 +0530
-Message-Id: <20190813140529.12939-1-pagupta@redhat.com>
+Subject: [PATCH v4 1/2] virtio: decrement avail idx with buffer detach for
+	packed ring
+Date: Tue, 13 Aug 2019 19:35:28 +0530
+Message-Id: <20190813140529.12939-2-pagupta@redhat.com>
+In-Reply-To: <20190813140529.12939-1-pagupta@redhat.com>
+References: <20190813140529.12939-1-pagupta@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.47]);
-	Tue, 13 Aug 2019 14:05:36 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.43]);
+	Tue, 13 Aug 2019 14:05:39 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -61,39 +64,37 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-This patch series fixes the issue with unplug/replug of a port in virtio
-console driver which fails with an error "Error allocating inbufs\n".
+This patch decrements 'next_avail_idx' count when detaching a buffer
+from vq for packed ring code. Split ring code already does this in
+virtqueue_detach_unused_buf_split function. This updates the
+'next_avail_idx' to the previous correct index after an unused buffer
+is detatched from the vq.
 
-Patch 1 updates the next avail index for packed ring code.
-Patch 2 makes use of 'virtqueue_detach_unused_buf' function to detach
-the unused buffers during port hotunplug time.
+Acked-by: Jason Wang <jasowang@redhat.com>
+Signed-off-by: Pankaj Gupta <pagupta@redhat.com>
+---
+ drivers/virtio/virtio_ring.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Tested the packed ring code with the qemu virtio 1.1 device code posted
-here [1]. Also, sent a patch to document the behavior in virtio spec as
-suggested by Michael.
-
-Changes from v3
-- Swap patch 1 with patch 2  - [Michael]
-- Added acked-by tag by Jason in patch 1
-- Add reference to spec change
-Changes from v2
-- Better change log in patch2 - [Greg]
-Changes from v1[2]
-- Make virtio packed ring code compatible with split ring - [Michael]
-
-[1]  https://marc.info/?l=qemu-devel&m=156471883703948&w=2
-[2]  https://lkml.org/lkml/2019/3/4/517
-[3]  https://lists.oasis-open.org/archives/virtio-dev/201908/msg00055.html
-
-Pankaj Gupta (2):
-  virtio: decrement avail idx with buffer detach for packed ring
-  virtio_console: free unused buffers with port delete
-
- char/virtio_console.c |   14 +++++++++++---
- virtio/virtio_ring.c  |    6 ++++++
- 2 files changed, 17 insertions(+), 3 deletions(-)
+diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+index c8be1c4f5b55..7c69181113e2 100644
+--- a/drivers/virtio/virtio_ring.c
++++ b/drivers/virtio/virtio_ring.c
+@@ -1537,6 +1537,12 @@ static void *virtqueue_detach_unused_buf_packed(struct virtqueue *_vq)
+ 		/* detach_buf clears data, so grab it now. */
+ 		buf = vq->packed.desc_state[i].data;
+ 		detach_buf_packed(vq, i, NULL);
++		vq->packed.next_avail_idx--;
++		if (vq->packed.next_avail_idx < 0) {
++			vq->packed.next_avail_idx = vq->packed.vring.num - 1;
++			vq->packed.avail_wrap_counter ^= 1;
++		}
++
+ 		END_USE(vq);
+ 		return buf;
+ 	}
 -- 
-2.21.0
+2.20.1
 
 _______________________________________________
 Virtualization mailing list
