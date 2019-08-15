@@ -2,32 +2,32 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78E1C8E814
-	for <lists.virtualization@lfdr.de>; Thu, 15 Aug 2019 11:22:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4B6C8E826
+	for <lists.virtualization@lfdr.de>; Thu, 15 Aug 2019 11:26:06 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 426F010FD;
-	Thu, 15 Aug 2019 09:22:31 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E147C1104;
+	Thu, 15 Aug 2019 09:26:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1663010F3
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5579D10F5
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 15 Aug 2019 09:22:30 +0000 (UTC)
+	Thu, 15 Aug 2019 09:25:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4DB92711
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8EFB267F
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 15 Aug 2019 09:22:29 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
-	[10.5.11.14])
+	Thu, 15 Aug 2019 09:25:58 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id AD9573082135;
-	Thu, 15 Aug 2019 09:22:28 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 0459C307D96D;
+	Thu, 15 Aug 2019 09:25:58 +0000 (UTC)
 Received: from [10.72.12.184] (ovpn-12-184.pek2.redhat.com [10.72.12.184])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id BC5C35D9DC;
-	Thu, 15 Aug 2019 09:22:15 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id CEDED95A46;
+	Thu, 15 Aug 2019 09:25:47 +0000 (UTC)
 Subject: Re: [PATCH] virtio-net: lower min ring num_free for efficiency
 To: =?UTF-8?B?5YaJIGppYW5n?= <jiangkidd@hotmail.com>,
 	"mst@redhat.com" <mst@redhat.com>
@@ -37,17 +37,17 @@ References: <BYAPR14MB3205E4E194942B0A1A91A222A6AD0@BYAPR14MB3205.namprd14.prod.
 	<38df7fdd-bd6a-cc82-534d-d7cbf3f1933c@redhat.com>
 	<BYAPR14MB320512CCA27487548DDAA57FA6AC0@BYAPR14MB3205.namprd14.prod.outlook.com>
 From: Jason Wang <jasowang@redhat.com>
-Message-ID: <e1ae87d7-546a-d8fb-8d76-97d44bfa3a13@redhat.com>
-Date: Thu, 15 Aug 2019 17:22:13 +0800
+Message-ID: <92f7955b-1b5a-84cb-895b-8d47044d7f03@redhat.com>
+Date: Thu, 15 Aug 2019 17:25:42 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
 In-Reply-To: <BYAPR14MB320512CCA27487548DDAA57FA6AC0@BYAPR14MB3205.namprd14.prod.outlook.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.42]);
-	Thu, 15 Aug 2019 09:22:28 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.48]);
+	Thu, 15 Aug 2019 09:25:58 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -219,12 +219,11 @@ ZiB3ZQo+Pj4gY2FuIGRvIHRoZSByZWNsYWltIGVhcmxpZXIsIGl0IHdpbGwgY2VydGFpbmx5IGhl
 bHAuCj4+Pgo+Pj4gSmlhbmcKPj4KPj4gUmlnaHQsIGJ1dCBJIHRoaW5rIHRoZXJlJ3Mgbm8gbmVl
 ZCB0byBwdXQgdGhvc2UgdGhpbmcgaW4gdGhlIGNvbW1pdCBsb2cuCj4+Cj4+IFRoYW5rcwo+Pgo+
 Pgo+IFN1cmUsIGhlcmUgaXMgdGhlIGluZm86Cj4KPgo+IFRlc3Qgc2V0dXA6IGlwZXJmMyB0byBn
-ZW5lcmF0ZSBwYWNrZXRzIHRvIGd1ZXN0ICh0b3RhbCAzMG1pbnMsIHBwcyA0MDBrKQo+Cj4gYXZn
-IHBhY2tldHMgZHJvcCBiZWZvcmU6IDI4NDIKPgo+IGF2ZyBwYWNrZXRzIGRyb3AgYWZ0ZXI6IDM2
-MCgtODcuMyUpCj4KPgo+IEp1c3QgbGV0IG1lIGtub3cgaWYgaXQgbG9va3MgZ29vZCBlbm91Z2gu
-IFRoeC4KPgo+IEppYW5nCgoKTG9va3MgZ29vZCwgcGxlYXNlIHBvc3QgYSBWMiBhbmQgaW5jbHVk
-ZSB0aGUgYWJvdmUgcmVzdWx0IGluIHRoZSBjb21taXQgbG9nLgoKVGhhbmtzCgo+Cl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1h
-aWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRw
-czovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXph
-dGlvbg==
+ZW5lcmF0ZSBwYWNrZXRzIHRvIGd1ZXN0ICh0b3RhbCAzMG1pbnMsIHBwcyA0MDBrKQoKClBsZWFz
+ZSBhbHNvIG5vdGUgdGhhdCB0eXBlIG9mIHBhY2tldHMgZS5nIFRDUCBvciBVRFAuCgpUaGFua3MK
+Cgo+Cj4gYXZnIHBhY2tldHMgZHJvcCBiZWZvcmU6IDI4NDIKPgo+IGF2ZyBwYWNrZXRzIGRyb3Ag
+YWZ0ZXI6IDM2MCgtODcuMyUpCj4KPgo+IEp1c3QgbGV0IG1lIGtub3cgaWYgaXQgbG9va3MgZ29v
+ZCBlbm91Z2guIFRoeC4KPgo+IEppYW5nCj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0
+aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0
+aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
