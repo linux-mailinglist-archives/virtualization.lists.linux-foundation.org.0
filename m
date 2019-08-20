@@ -2,70 +2,58 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 830E795B62
-	for <lists.virtualization@lfdr.de>; Tue, 20 Aug 2019 11:44:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8799F96686
+	for <lists.virtualization@lfdr.de>; Tue, 20 Aug 2019 18:37:43 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id BED39E5D;
-	Tue, 20 Aug 2019 09:43:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 347D3DB3;
+	Tue, 20 Aug 2019 16:37:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 433B4E0E;
-	Tue, 20 Aug 2019 09:43:28 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from bombadil.infradead.org (bombadil.infradead.org
-	[198.137.202.133])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 222E912E;
-	Tue, 20 Aug 2019 09:43:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20170209;
-	h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=QuUfcwWC5q1OlMKppxZZFPeRr1Pnwn10MjnRty4Jw/4=;
-	b=DK+6E/3PvKq02RZ+wH3AKe0g2
-	emgWtb26QojlY4VAHpRGmh3KlIund4mgdHMWgmc0ZRx6dcJyo3PpG8MDI8KlKQmIpUNKSN9TeJuGl
-	km+i5/j2F3SaoJeTXNpwyc1DA3G5i1XAAOhEVYYfTsCs6LrVFePHZhgsVEfjdHWWyzVstKhYQi0L8
-	331yfp/XlNTLtQEhPvth1dRekXENsIUVS+WGFJwLetcqcaZ9pRjR0Xm/JRuBmaKm1lM6bJLWAZQf+
-	WIC+77g9XgPJKWwaVMZLpEs7+zOk4VI1rE2qynuwmwBQdiLIKKi6tLX+fcqjXUnNNvFOI9OQI6Dt3
-	D4XxsCCZw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat
-	Linux)) id 1i00fk-00016J-2k; Tue, 20 Aug 2019 09:43:24 +0000
-Date: Tue, 20 Aug 2019 02:43:24 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Tom Murphy <murphyt7@tcd.ie>
-Subject: Re: [PATCH V5 4/5] iommu/dma-iommu: Use the dev->coherent_dma_mask
-Message-ID: <20190820094323.GD24154@infradead.org>
-References: <20190815110944.3579-1-murphyt7@tcd.ie>
-	<20190815110944.3579-5-murphyt7@tcd.ie>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190815110944.3579-5-murphyt7@tcd.ie>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
-	bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D6879A95
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 20 Aug 2019 16:37:33 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6250387
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 20 Aug 2019 16:37:33 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id d16so3232332wme.2
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 20 Aug 2019 09:37:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=E4X7QCNLqGFBsy/7pYjpRVoBo5sZi0bTAtJeoQQ6ohc=;
+	b=D+qY/Zq4iJ+emZ4f/HQvAVDpO0T0x78BEQShzT5ZX0gwCMyzXylf2aBAIhztUrCFzv
+	jADLfONHyHol247RORNf2Uhi4HTXLNNNWahqGpTCyjzv9n6wOqRtOMcLgHg2DWg1Ocec
+	Xt3NJTwga4uRdlvxn61Sf+IyeiYrx45oOyjL2wL4ZT5cfhBnEqaozqB4qf8lC6bWlJPv
+	vHrZVLu9QOgLat4oHMqUiYhzSDR+SCo1vbwV8Z5b3KlI+Pj1mrm6ht0mF6QSfzNnLxiY
+	16dKFW2B22VZ4G3jZcXrN6c06gc6bhys2pe0dXJgZLR+1Z2kJP5HRZ3NLQbs/MKcJGL1
+	B0rg==
+X-Gm-Message-State: APjAAAV6oOCtnW5b4oP4d0rEG/sOTbRxnJZkKmvFjLnNofwyvaa3UyL9
+	GqgUKV9gn4+TkuhONfhLmUA=
+X-Google-Smtp-Source: APXvYqyWdL5QMRDrlWABWdxtx+qi5mJSVMhKc+4wusrmLOkgTE8w+/nuZlj5Jc1f8al4Vo4HPQPOEQ==
+X-Received: by 2002:a1c:2dcf:: with SMTP id t198mr858820wmt.147.1566319051721; 
+	Tue, 20 Aug 2019 09:37:31 -0700 (PDT)
+Received: from sc2-haas01-esx0118.eng.vmware.com ([66.170.99.1])
+	by smtp.gmail.com with ESMTPSA id
+	n14sm58485385wra.75.2019.08.20.09.37.29
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 20 Aug 2019 09:37:31 -0700 (PDT)
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: [PATCH] mm/balloon_compaction: suppress allocation warnings
+Date: Tue, 20 Aug 2019 02:16:46 -0700
+Message-Id: <20190820091646.29642-1-namit@vmware.com>
+X-Mailer: git-send-email 2.17.1
+X-Spam-Status: No, score=-0.4 required=5.0 tests=BAYES_00, DATE_IN_PAST_06_12, 
+	FREEMAIL_FROM,RCVD_IN_DNSWL_NONE autolearn=no version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Heiko Stuebner <heiko@sntech.de>, virtualization@lists.linux-foundation.org,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	Thierry Reding <thierry.reding@gmail.com>, Will Deacon <will@kernel.org>,
-	Jean-Philippe Brucker <jean-philippe@linaro.org>,
-	linux-samsung-soc@vger.kernel.org, Krzysztof Kozlowski <krzk@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>, linux-rockchip@lists.infradead.org,
-	Kukjin Kim <kgene@kernel.org>, Andy Gross <agross@kernel.org>,
-	linux-s390@vger.kernel.org, Gerald Schaefer <gerald.schaefer@de.ibm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-mediatek@lists.infradead.org, linux-tegra@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	David Woodhouse <dwmw2@infradead.org>,
-	linux-kernel@vger.kernel.org, iommu@lists.linux-foundation.org,
-	Robin Murphy <robin.murphy@arm.com>
+Cc: linux-mm@kvack.org, Nadav Amit <namit@vmware.com>,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,14 +65,43 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Nadav Amit via Virtualization <virtualization@lists.linux-foundation.org>
+Reply-To: Nadav Amit <namit@vmware.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Looks good, and should probably be queued up asap as a bug fix:
+There is no reason to print warnings when balloon page allocation fails,
+as they are expected and can be handled gracefully.  Since VMware
+balloon now uses balloon-compaction infrastructure, and suppressed these
+warnings before, it is also beneficial to suppress these warnings to
+keep the same behavior that the balloon had before.
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+Cc: Jason Wang <jasowang@redhat.com>
+Signed-off-by: Nadav Amit <namit@vmware.com>
+---
+ mm/balloon_compaction.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
+index 798275a51887..26de020aae7b 100644
+--- a/mm/balloon_compaction.c
++++ b/mm/balloon_compaction.c
+@@ -124,7 +124,8 @@ EXPORT_SYMBOL_GPL(balloon_page_list_dequeue);
+ struct page *balloon_page_alloc(void)
+ {
+ 	struct page *page = alloc_page(balloon_mapping_gfp_mask() |
+-				       __GFP_NOMEMALLOC | __GFP_NORETRY);
++				       __GFP_NOMEMALLOC | __GFP_NORETRY |
++				       __GFP_NOWARN);
+ 	return page;
+ }
+ EXPORT_SYMBOL_GPL(balloon_page_alloc);
+-- 
+2.19.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
