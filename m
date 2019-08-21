@@ -2,58 +2,52 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8799F96686
-	for <lists.virtualization@lfdr.de>; Tue, 20 Aug 2019 18:37:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 904A5977C7
+	for <lists.virtualization@lfdr.de>; Wed, 21 Aug 2019 13:12:50 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 347D3DB3;
-	Tue, 20 Aug 2019 16:37:35 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 98135F7C;
+	Wed, 21 Aug 2019 11:12:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D6879A95
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9B2C0F68
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 20 Aug 2019 16:37:33 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6250387
+	Wed, 21 Aug 2019 11:12:41 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 575998A2
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 20 Aug 2019 16:37:33 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id d16so3232332wme.2
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 20 Aug 2019 09:37:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=E4X7QCNLqGFBsy/7pYjpRVoBo5sZi0bTAtJeoQQ6ohc=;
-	b=D+qY/Zq4iJ+emZ4f/HQvAVDpO0T0x78BEQShzT5ZX0gwCMyzXylf2aBAIhztUrCFzv
-	jADLfONHyHol247RORNf2Uhi4HTXLNNNWahqGpTCyjzv9n6wOqRtOMcLgHg2DWg1Ocec
-	Xt3NJTwga4uRdlvxn61Sf+IyeiYrx45oOyjL2wL4ZT5cfhBnEqaozqB4qf8lC6bWlJPv
-	vHrZVLu9QOgLat4oHMqUiYhzSDR+SCo1vbwV8Z5b3KlI+Pj1mrm6ht0mF6QSfzNnLxiY
-	16dKFW2B22VZ4G3jZcXrN6c06gc6bhys2pe0dXJgZLR+1Z2kJP5HRZ3NLQbs/MKcJGL1
-	B0rg==
-X-Gm-Message-State: APjAAAV6oOCtnW5b4oP4d0rEG/sOTbRxnJZkKmvFjLnNofwyvaa3UyL9
-	GqgUKV9gn4+TkuhONfhLmUA=
-X-Google-Smtp-Source: APXvYqyWdL5QMRDrlWABWdxtx+qi5mJSVMhKc+4wusrmLOkgTE8w+/nuZlj5Jc1f8al4Vo4HPQPOEQ==
-X-Received: by 2002:a1c:2dcf:: with SMTP id t198mr858820wmt.147.1566319051721; 
-	Tue, 20 Aug 2019 09:37:31 -0700 (PDT)
-Received: from sc2-haas01-esx0118.eng.vmware.com ([66.170.99.1])
-	by smtp.gmail.com with ESMTPSA id
-	n14sm58485385wra.75.2019.08.20.09.37.29
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 20 Aug 2019 09:37:31 -0700 (PDT)
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH] mm/balloon_compaction: suppress allocation warnings
-Date: Tue, 20 Aug 2019 02:16:46 -0700
-Message-Id: <20190820091646.29642-1-namit@vmware.com>
-X-Mailer: git-send-email 2.17.1
-X-Spam-Status: No, score=-0.4 required=5.0 tests=BAYES_00, DATE_IN_PAST_06_12, 
-	FREEMAIL_FROM,RCVD_IN_DNSWL_NONE autolearn=no version=3.3.1
+	Wed, 21 Aug 2019 11:12:41 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id C76E0C08EC04;
+	Wed, 21 Aug 2019 11:12:40 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-60.ams2.redhat.com
+	[10.36.116.60])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id C541679B9;
+	Wed, 21 Aug 2019 11:12:37 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+	id EB9EA16E1A; Wed, 21 Aug 2019 13:12:36 +0200 (CEST)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v5] drm/virtio: use virtio_max_dma_size
+Date: Wed, 21 Aug 2019 13:12:09 +0200
+Message-Id: <20190821111210.27165-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.31]);
+	Wed, 21 Aug 2019 11:12:40 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: linux-mm@kvack.org, Nadav Amit <namit@vmware.com>,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	=?UTF-8?q?L=C3=A1szl=C3=B3=20=C3=89rsek?= <lersek@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,42 +59,52 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Nadav Amit via Virtualization <virtualization@lists.linux-foundation.org>
-Reply-To: Nadav Amit <namit@vmware.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-There is no reason to print warnings when balloon page allocation fails,
-as they are expected and can be handled gracefully.  Since VMware
-balloon now uses balloon-compaction infrastructure, and suppressed these
-warnings before, it is also beneficial to suppress these warnings to
-keep the same behavior that the balloon had before.
+We must make sure our scatterlist segments are not too big, otherwise
+we might see swiotlb failures (happens with sev, also reproducable with
+swiotlb=force).
 
-Cc: Jason Wang <jasowang@redhat.com>
-Signed-off-by: Nadav Amit <namit@vmware.com>
+Suggested-by: Laszlo Ersek <lersek@redhat.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- mm/balloon_compaction.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/virtio/virtgpu_object.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
-index 798275a51887..26de020aae7b 100644
---- a/mm/balloon_compaction.c
-+++ b/mm/balloon_compaction.c
-@@ -124,7 +124,8 @@ EXPORT_SYMBOL_GPL(balloon_page_list_dequeue);
- struct page *balloon_page_alloc(void)
- {
- 	struct page *page = alloc_page(balloon_mapping_gfp_mask() |
--				       __GFP_NOMEMALLOC | __GFP_NORETRY);
-+				       __GFP_NOMEMALLOC | __GFP_NORETRY |
-+				       __GFP_NOWARN);
- 	return page;
- }
- EXPORT_SYMBOL_GPL(balloon_page_alloc);
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index b2da31310d24..09b526518f5a 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -204,6 +204,7 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+ 		.interruptible = false,
+ 		.no_wait_gpu = false
+ 	};
++	size_t max_segment;
+ 
+ 	/* wtf swapping */
+ 	if (bo->pages)
+@@ -215,8 +216,13 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+ 	if (!bo->pages)
+ 		goto out;
+ 
+-	ret = sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
+-					nr_pages << PAGE_SHIFT, GFP_KERNEL);
++	max_segment = virtio_max_dma_size(qdev->vdev);
++	max_segment &= PAGE_MASK;
++	if (max_segment > SCATTERLIST_MAX_SEGMENT)
++		max_segment = SCATTERLIST_MAX_SEGMENT;
++	ret = __sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
++					  nr_pages << PAGE_SHIFT,
++					  max_segment, GFP_KERNEL);
+ 	if (ret)
+ 		goto out;
+ 	return 0;
 -- 
-2.19.1
+2.18.1
 
 _______________________________________________
 Virtualization mailing list
