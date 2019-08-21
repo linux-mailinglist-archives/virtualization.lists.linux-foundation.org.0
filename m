@@ -2,70 +2,98 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B1DA97E6D
-	for <lists.virtualization@lfdr.de>; Wed, 21 Aug 2019 17:18:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0EC097FAD
+	for <lists.virtualization@lfdr.de>; Wed, 21 Aug 2019 18:06:07 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6AD2DECC;
-	Wed, 21 Aug 2019 15:18:52 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7289FEFB;
+	Wed, 21 Aug 2019 16:06:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4E1DFE93
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 03757EEC
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 21 Aug 2019 15:18:51 +0000 (UTC)
+	Wed, 21 Aug 2019 16:06:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E057EE6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8CA3D822
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 21 Aug 2019 15:18:50 +0000 (UTC)
-X-Amp-Result: UNSCANNABLE
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	21 Aug 2019 08:18:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,412,1559545200"; d="scan'208";a="169443350"
-Received: from sjchrist-coffee.jf.intel.com (HELO linux.intel.com)
-	([10.54.74.41])
-	by orsmga007.jf.intel.com with ESMTP; 21 Aug 2019 08:18:46 -0700
-Date: Wed, 21 Aug 2019 08:18:46 -0700
-From: Sean Christopherson <sean.j.christopherson@intel.com>
-To: Mihai =?utf-8?B?RG9uyJt1?= <mdontu@bitdefender.com>
-Subject: Re: [RFC PATCH v6 55/92] kvm: introspection: add KVMI_CONTROL_MSR
-	and KVMI_EVENT_MSR
-Message-ID: <20190821151846.GD29345@linux.intel.com>
-References: <20190809160047.8319-1-alazar@bitdefender.com>
-	<20190809160047.8319-56-alazar@bitdefender.com>
-	<20190812210501.GD1437@linux.intel.com>
-	<f9e94e9649f072911cc20129c2b633747d5c1df5.camel@bitdefender.com>
-	<20190819183643.GB1916@linux.intel.com>
-	<6854bfcc2bff3ffdaadad8708bd186a071ad682c.camel@bitdefender.com>
-	<72df8b3ea66bb5bc7bb9c17e8bf12e12320358e1.camel@bitdefender.com>
+	Wed, 21 Aug 2019 16:05:59 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+	[10.5.11.13])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 102D630832DC;
+	Wed, 21 Aug 2019 16:05:59 +0000 (UTC)
+Received: from [10.36.118.29] (unknown [10.36.118.29])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 7AAF460603;
+	Wed, 21 Aug 2019 16:05:55 +0000 (UTC)
+Subject: Re: [PATCH] mm/balloon_compaction: suppress allocation warnings
+To: Nadav Amit <namit@vmware.com>, "Michael S. Tsirkin" <mst@redhat.com>
+References: <20190820091646.29642-1-namit@vmware.com>
+From: David Hildenbrand <david@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+	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
+	SE+xAvmumFBY
+Organization: Red Hat GmbH
+Message-ID: <ba01ec8c-19c3-847c-a315-2f70f4b1fe31@redhat.com>
+Date: Wed, 21 Aug 2019 18:05:54 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <72df8b3ea66bb5bc7bb9c17e8bf12e12320358e1.camel@bitdefender.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+In-Reply-To: <20190820091646.29642-1-namit@vmware.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.44]);
+	Wed, 21 Aug 2019 16:05:59 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Nicusor CITU <ncitu@bitdefender.com>,
-	Weijiang Yang <weijiang.yang@intel.com>, Yu C <yu.c.zhang@intel.com>,
-	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>,
-	Jan Kiszka <jan.kiszka@siemens.com>,
-	Samuel =?iso-8859-1?Q?Laur=E9n?= <samuel.lauren@iki.fi>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	"Zhang@vger.kernel.org" <Zhang@vger.kernel.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	Adalbert =?utf-8?B?TGF6xINy?= <alazar@bitdefender.com>,
-	"linux-mm@kvack.org" <linux-mm@kvack.org>,
-	Patrick Colp <patrick.colp@oracle.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Mathieu Tarral <mathieu.tarral@protonmail.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,44 +105,54 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gVHVlLCBBdWcgMjAsIDIwMTkgYXQgMDI6NDM6MzJQTSArMDMwMCwgTWloYWkgRG9uyJt1IHdy
-b3RlOgo+IE9uIFR1ZSwgMjAxOS0wOC0yMCBhdCAwODo0NCArMDAwMCwgTmljdXNvciBDSVRVIHdy
-b3RlOgo+ID4gPiA+ID4gPiArc3RhdGljIHZvaWQgdm14X21zcl9pbnRlcmNlcHQoc3RydWN0IGt2
-bV92Y3B1ICp2Y3B1LCB1bnNpZ25lZAo+ID4gPiA+ID4gPiBpbnQKPiA+ID4gPiA+ID4gbXNyLAo+
-ID4gPiA+ID4gPiArCQkJICAgICAgYm9vbCBlbmFibGUpCj4gPiA+ID4gPiA+ICt7Cj4gPiA+ID4g
-PiA+ICsJc3RydWN0IHZjcHVfdm14ICp2bXggPSB0b192bXgodmNwdSk7Cj4gPiA+ID4gPiA+ICsJ
-dW5zaWduZWQgbG9uZyAqbXNyX2JpdG1hcCA9IHZteC0+dm1jczAxLm1zcl9iaXRtYXA7Cj4gPiA+
-IAo+ID4gPiBJcyBLVk1JIGludGVuZGVkIHRvIHBsYXkgbmljZSB3aXRoIG5lc3RlZCB2aXJ0dWFs
-aXphdGlvbj8gVW5jb25kaXRpb25hbGx5Cj4gPiA+IHVwZGF0aW5nIHZtY3MwMS5tc3JfYml0bWFw
-IGlzIGNvcnJlY3QgcmVnYXJkbGVzcyBvZiB3aGV0aGVyIHRoZSB2Q1BVCj4gPiA+IGlzIGluIEwx
-IG9yIEwyLCBidXQgaWYgdGhlIHZDUFUgaXMgY3VycmVudGx5IGluIEwyIHRoZW4gdGhlIGVmZmVj
-dGl2ZQo+ID4gPiBiaXRtYXAsIGkuZS4gdm1jczAyLm1zcl9iaXRtYXAsIHdvbid0IGJlIHVwZGF0
-ZWQgdW50aWwgdGhlIG5leHQgbmVzdGVkIFZNLQo+ID4gPiBFbnRlci4KPiA+IAo+ID4gT3VyIGlu
-aXRpYWwgcHJvb2Ygb2YgY29uY2VwdCB3YXMgcnVubmluZyB3aXRoIHN1Y2Nlc3MgaW4gbmVzdGVk
-Cj4gPiB2aXJ0dWFsaXphdGlvbi4gQnV0IG1vc3Qgb2Ygb3VyIHRlc3RzIHdlcmUgZG9uZSBvbiBi
-YXJlLW1ldGFsLgo+ID4gV2UgZG8gaG93ZXZlciBpbnRlbmQgdG8gbWFrZSBpdCBmdWxseSBmdW5j
-dGlvbmluZyBvbiBuZXN0ZWQgc3lzdGVtcwo+ID4gdG9vLgo+ID4gCj4gPiBFdmVuIHRob3VnaHQs
-IGZyb20gS1ZNSSBwb2ludCBvZiB2aWV3LCB0aGUgTVNSIGludGVyY2VwdGlvbgo+ID4gY29uZmln
-dXJhdGlvbiB3b3VsZCBiZSBqdXN0IGZpbmUgaWYgaXQgZ2V0cyB1cGRhdGVkIGJlZm9yZSB0aGUg
-dmNwdSBpcwo+ID4gYWN0dWFsbHkgZW50ZXJpbmcgdG8gbmVzdGVkIFZNLgo+ID4gCj4gCj4gSSBi
-ZWxpZXZlIFNlYW4gaXMgcmVmZXJyaW5nIGhlcmUgdG8gdGhlIGNhc2Ugd2hlcmUgdGhlIGd1ZXN0
-IGJlaW5nCj4gaW50cm9zcGVjdGVkIGlzIGEgaHlwZXJ2aXNvciAoZWcuIFdpbmRvd3MgMTAgd2l0
-aCBkZXZpY2UgZ3VhcmQpLgoKWWVwLgoKPiBFdmVuIHRob3VnaCB3ZSBhcmUgbG9va2luZyBhdCBo
-b3cgdG8gYXBwcm9hY2ggdGhpcyBzY2VuYXJpbywgdGhlCj4gaW50cm9zcGVjdGlvbiB0b29scyB3
-ZSBoYXZlIGJ1aWx0IHdpbGwgcmVmdXNlIHRvIGF0dGFjaCB0byBhCj4gaHlwZXJ2aXNvci4KCklu
-IHRoYXQgY2FzZSwgaXQncyBwcm9iYWJseSBhIGdvb2QgaWRlYSB0byBtYWtlIEtWTUkgbXV0dWFs
-bHkgZXhjbHVzaXZlCndpdGggbmVzdGVkIHZpcnR1YWxpemF0aW9uLiAgRG9pbmcgc28gc2hvdWxk
-LCBpbiB0aGVvcnksIHNpbXBsaWZ5IHRoZQppbXBsZW1lbnRhdGlvbiBhbmQgZXhwZWRpdGUgdXBz
-dHJlYW1pbmcsIGUuZy4gcmV2aWV3ZXJzIGRvbid0IGhhdmUgdG8Kbml0cGljayBlZGdlIGNhc2Vz
-IHJlbGF0ZWQgdG8gbmVzdGVkIHZpcnQuICBNeSBvbmx5IGhlc2l0YXRpb24gaW4KZGlzYWJsaW5n
-IEtWTUkgd2hlbiBuZXN0ZWQgdmlydCBpcyBlbmFibGVkIGlzIHRoYXQgaXQgY291bGQgbWFrZSBp
-dCBtdWNoCm1vcmUgZGlmZmljdWx0IHRvIChyZSllbmFibGUgdGhlIGNvbWJpbmF0aW9uIGluIHRo
-ZSBmdXR1cmUuCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-ClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1m
-b3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9s
-aXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On 20.08.19 11:16, Nadav Amit wrote:
+> There is no reason to print warnings when balloon page allocation fails,
+> as they are expected and can be handled gracefully.  Since VMware
+> balloon now uses balloon-compaction infrastructure, and suppressed these
+> warnings before, it is also beneficial to suppress these warnings to
+> keep the same behavior that the balloon had before.
+
+I am not sure if that's a good idea. The allocation warnings are usually
+the only trace of "the user/admin did something bad because he/she tried
+to inflate the balloon to an unsafe value". Believe me, I processed a
+couple of such bugreports related to virtio-balloon and the warning were
+very helpful for that.
+
+> 
+> Cc: Jason Wang <jasowang@redhat.com>
+> Signed-off-by: Nadav Amit <namit@vmware.com>
+> ---
+>  mm/balloon_compaction.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
+> index 798275a51887..26de020aae7b 100644
+> --- a/mm/balloon_compaction.c
+> +++ b/mm/balloon_compaction.c
+> @@ -124,7 +124,8 @@ EXPORT_SYMBOL_GPL(balloon_page_list_dequeue);
+>  struct page *balloon_page_alloc(void)
+>  {
+>  	struct page *page = alloc_page(balloon_mapping_gfp_mask() |
+> -				       __GFP_NOMEMALLOC | __GFP_NORETRY);
+> +				       __GFP_NOMEMALLOC | __GFP_NORETRY |
+> +				       __GFP_NOWARN);
+>  	return page;
+>  }
+>  EXPORT_SYMBOL_GPL(balloon_page_alloc);
+> 
+
+
+-- 
+
+Thanks,
+
+David / dhildenb
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
