@@ -2,39 +2,39 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id B41BB98416
-	for <lists.virtualization@lfdr.de>; Wed, 21 Aug 2019 21:12:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E0479841E
+	for <lists.virtualization@lfdr.de>; Wed, 21 Aug 2019 21:13:50 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EC5B0E5E;
-	Wed, 21 Aug 2019 19:12:40 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3D026E4D;
+	Wed, 21 Aug 2019 19:13:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9E55DE30
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 33286E30
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 21 Aug 2019 19:12:39 +0000 (UTC)
+	Wed, 21 Aug 2019 19:13:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2833FF8
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C9EC089B
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 21 Aug 2019 19:12:39 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
-	[10.5.11.23])
+	Wed, 21 Aug 2019 19:13:41 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id AB93B3082128;
-	Wed, 21 Aug 2019 19:12:38 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 612CC30872DD;
+	Wed, 21 Aug 2019 19:13:41 +0000 (UTC)
 Received: from [10.36.118.29] (unknown [10.36.118.29])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 1086A46;
-	Wed, 21 Aug 2019 19:12:34 +0000 (UTC)
-Subject: Re: [PATCH v2] mm/balloon_compaction: Informative allocation warnings
+	by smtp.corp.redhat.com (Postfix) with ESMTP id BD21C60BF3;
+	Wed, 21 Aug 2019 19:13:37 +0000 (UTC)
+Subject: Re: [PATCH] mm/balloon_compaction: suppress allocation warnings
 To: Nadav Amit <namit@vmware.com>
-References: <20190821094159.40795-1-namit@vmware.com>
-	<75ff92c2-7ae2-c4a6-cd1f-44741e29d20e@redhat.com>
-	<4E10A342-9A51-4C1F-8E5A-8005AACEF4CE@vmware.com>
-	<497b1189-8e1d-2926-ee5e-9077fcceb04b@redhat.com>
-	<36AC2460-9E88-4BAF-B793-A14A00E41617@vmware.com>
+References: <20190820091646.29642-1-namit@vmware.com>
+	<ba01ec8c-19c3-847c-a315-2f70f4b1fe31@redhat.com>
+	<5BBC6CB3-2DCD-4A95-90C9-7C23482F9B32@vmware.com>
+	<85c72875-278f-fbab-69c9-92dc1873d407@redhat.com>
+	<FC42B62F-167F-4D7D-ADC5-926B36347E82@vmware.com>
 From: David Hildenbrand <david@redhat.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
@@ -81,22 +81,23 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
 	+8Umfre0Xt4713VxMygW0PnQt5aSQdMD58jHFxTk092mU+yIHj5LeYgvwSgZN4airXk5yRXl
 	SE+xAvmumFBY
 Organization: Red Hat GmbH
-Message-ID: <3873b6ab-de6d-cac2-90e8-541fe86e2005@redhat.com>
-Date: Wed, 21 Aug 2019 21:12:34 +0200
+Message-ID: <2aa52636-4ca7-0d47-c5bf-42408af3ea0f@redhat.com>
+Date: Wed, 21 Aug 2019 21:13:36 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <36AC2460-9E88-4BAF-B793-A14A00E41617@vmware.com>
+In-Reply-To: <FC42B62F-167F-4D7D-ADC5-926B36347E82@vmware.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.42]);
-	Wed, 21 Aug 2019 19:12:38 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.47]);
+	Wed, 21 Aug 2019 19:13:41 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Linux-MM <linux-mm@kvack.org>, "virtualization@lists.linux-foundation.org"
+Cc: "linux-mm@kvack.org" <linux-mm@kvack.org>,
+	"virtualization@lists.linux-foundation.org"
 	<virtualization@lists.linux-foundation.org>,
 	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
 	"Michael S. Tsirkin" <mst@redhat.com>
@@ -111,100 +112,40 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 21.08.19 21:10, Nadav Amit wrote:
->> On Aug 21, 2019, at 12:06 PM, David Hildenbrand <david@redhat.com> wrote:
->>
->> On 21.08.19 20:59, Nadav Amit wrote:
->>>> On Aug 21, 2019, at 11:57 AM, David Hildenbrand <david@redhat.com> wrote:
->>>>
->>>> On 21.08.19 11:41, Nadav Amit wrote:
->>>>> There is no reason to print generic warnings when balloon memory
->>>>> allocation fails, as failures are expected and can be handled
->>>>> gracefully. Since VMware balloon now uses balloon-compaction
->>>>> infrastructure, and suppressed these warnings before, it is also
->>>>> beneficial to suppress these warnings to keep the same behavior that the
->>>>> balloon had before.
->>>>>
->>>>> Since such warnings can still be useful to indicate that the balloon is
->>>>> over-inflated, print more informative and less frightening warning if
->>>>> allocation fails instead.
->>>>>
->>>>> Cc: David Hildenbrand <david@redhat.com>
->>>>> Cc: Jason Wang <jasowang@redhat.com>
->>>>> Signed-off-by: Nadav Amit <namit@vmware.com>
->>>>>
->>>>> ---
->>>>>
->>>>> v1->v2:
->>>>> * Print informative warnings instead suppressing [David]
->>>>> ---
->>>>> mm/balloon_compaction.c | 7 ++++++-
->>>>> 1 file changed, 6 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
->>>>> index 798275a51887..0c1d1f7689f0 100644
->>>>> --- a/mm/balloon_compaction.c
->>>>> +++ b/mm/balloon_compaction.c
->>>>> @@ -124,7 +124,12 @@ EXPORT_SYMBOL_GPL(balloon_page_list_dequeue);
->>>>> struct page *balloon_page_alloc(void)
->>>>> {
->>>>> 	struct page *page = alloc_page(balloon_mapping_gfp_mask() |
->>>>> -				       __GFP_NOMEMALLOC | __GFP_NORETRY);
->>>>> +				       __GFP_NOMEMALLOC | __GFP_NORETRY |
->>>>> +				       __GFP_NOWARN);
->>>>> +
->>>>> +	if (!page)
->>>>> +		pr_warn_ratelimited("memory balloon: memory allocation failed");
->>>>> +
->>>>> 	return page;
->>>>> }
->>>>> EXPORT_SYMBOL_GPL(balloon_page_alloc);
->>>>
->>>> Not sure if "memory balloon" is the right wording. hmmm.
->>>>
->>>> Acked-by: David Hildenbrand <david@redhat.com>
->>>
->>> Do you have a better suggestion?
->>
->> Not really - that's why I ack'ed :)
->>
->> However, thinking about it - what about moving the check + print to the
->> caller and then using dev_warn... or sth. like simple "virtio_balloon:
->> ..." ? You can then drop the warning for vmware balloon if you feel like
->> not needing it.
-> 
-> Actually, there is already a warning that is printed by the virtue_balloon
-> in fill_balloon():
-> 
->                 struct page *page = balloon_page_alloc();
-> 
->                 if (!page) {
->                         dev_info_ratelimited(&vb->vdev->dev,
->                                              "Out of puff! Can't get %u pages\n",
->                                              VIRTIO_BALLOON_PAGES_PER_PAGE);
->                         /* Sleep for at least 1/5 of a second before retry. */
->                         msleep(200);
->                         break;
->                 }
-> 
-> So are you ok with going back to v1?
-> 
-
-Whoops, I missed that - sorry - usually the warnings scream louder at me :D
-
-Yes, v1 is fine with me!
-
--- 
-
-Thanks,
-
-David / dhildenb
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gMjEuMDguMTkgMTg6MzQsIE5hZGF2IEFtaXQgd3JvdGU6Cj4+IE9uIEF1ZyAyMSwgMjAxOSwg
+YXQgOToyOSBBTSwgRGF2aWQgSGlsZGVuYnJhbmQgPGRhdmlkQHJlZGhhdC5jb20+IHdyb3RlOgo+
+Pgo+PiBPbiAyMS4wOC4xOSAxODoyMywgTmFkYXYgQW1pdCB3cm90ZToKPj4+PiBPbiBBdWcgMjEs
+IDIwMTksIGF0IDk6MDUgQU0sIERhdmlkIEhpbGRlbmJyYW5kIDxkYXZpZEByZWRoYXQuY29tPiB3
+cm90ZToKPj4+Pgo+Pj4+IE9uIDIwLjA4LjE5IDExOjE2LCBOYWRhdiBBbWl0IHdyb3RlOgo+Pj4+
+PiBUaGVyZSBpcyBubyByZWFzb24gdG8gcHJpbnQgd2FybmluZ3Mgd2hlbiBiYWxsb29uIHBhZ2Ug
+YWxsb2NhdGlvbiBmYWlscywKPj4+Pj4gYXMgdGhleSBhcmUgZXhwZWN0ZWQgYW5kIGNhbiBiZSBo
+YW5kbGVkIGdyYWNlZnVsbHkuICBTaW5jZSBWTXdhcmUKPj4+Pj4gYmFsbG9vbiBub3cgdXNlcyBi
+YWxsb29uLWNvbXBhY3Rpb24gaW5mcmFzdHJ1Y3R1cmUsIGFuZCBzdXBwcmVzc2VkIHRoZXNlCj4+
+Pj4+IHdhcm5pbmdzIGJlZm9yZSwgaXQgaXMgYWxzbyBiZW5lZmljaWFsIHRvIHN1cHByZXNzIHRo
+ZXNlIHdhcm5pbmdzIHRvCj4+Pj4+IGtlZXAgdGhlIHNhbWUgYmVoYXZpb3IgdGhhdCB0aGUgYmFs
+bG9vbiBoYWQgYmVmb3JlLgo+Pj4+Cj4+Pj4gSSBhbSBub3Qgc3VyZSBpZiB0aGF0J3MgYSBnb29k
+IGlkZWEuIFRoZSBhbGxvY2F0aW9uIHdhcm5pbmdzIGFyZSB1c3VhbGx5Cj4+Pj4gdGhlIG9ubHkg
+dHJhY2Ugb2YgInRoZSB1c2VyL2FkbWluIGRpZCBzb21ldGhpbmcgYmFkIGJlY2F1c2UgaGUvc2hl
+IHRyaWVkCj4+Pj4gdG8gaW5mbGF0ZSB0aGUgYmFsbG9vbiB0byBhbiB1bnNhZmUgdmFsdWUiLiBC
+ZWxpZXZlIG1lLCBJIHByb2Nlc3NlZCBhCj4+Pj4gY291cGxlIG9mIHN1Y2ggYnVncmVwb3J0cyBy
+ZWxhdGVkIHRvIHZpcnRpby1iYWxsb29uIGFuZCB0aGUgd2FybmluZyB3ZXJlCj4+Pj4gdmVyeSBo
+ZWxwZnVsIGZvciB0aGF0Lgo+Pj4KPj4+IE9rLCBzbyBhIG1lc3NhZ2UgaXMgbmVlZGVkLCBidXQg
+ZG9lcyBpdCBoYXZlIHRvIGJlIGEgZ2VuZXJpYyBmcmlnaHRlbmluZwo+Pj4gd2FybmluZz8KPj4+
+Cj4+PiBIb3cgYWJvdXQgdXNpbmcgX19HRlBfTk9XQVJOLCBhbmQgaWYgYWxsb2NhdGlvbiBkbyBz
+b21ldGhpbmcgbGlrZToKPj4+Cj4+PiAgcHJfd2FybijigJxCYWxsb29uIG1lbW9yeSBhbGxvY2F0
+aW9uIGZhaWxlZOKAnSk7Cj4+Pgo+Pj4gT3IgZXZlbiBzb21ldGhpbmcgbW9yZSBpbmZvcm1hdGl2
+ZT8gVGhpcyB3b3VsZCBzdXJlbHkgYmUgbGVzcyBpbnRpbWlkYXRpbmcKPj4+IGZvciBjb21tb24g
+dXNlcnMuCj4+Cj4+IHJhdGVsaW1pdCB3b3VsZCBtYWtlIHNlbnNlIDopCj4+Cj4+IEFuZCB5ZXMs
+IHRoaXMgd291bGQgY2VydGFpbmx5IGJlIG5pY2VyLgo+IAo+IFRoYW5rcy4gSSB3aWxsIHBvc3Qg
+djIgb2YgdGhlIHBhdGNoLgo+IAoKQXMgZGlzY3Vzc2VkIGluIHYyLCB3ZSBhbHJlYWR5IHByaW50
+IGEgd2FybmluZyBpbiB2aXJ0aW8tYmFsbG9vbiwgc28gSQphbSBmaW5lIHdpdGggdGhpcyBwYXRj
+aC4KClJldmlld2VkLWJ5OiBEYXZpZCBIaWxkZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT4KCi0t
+IAoKVGhhbmtzLAoKRGF2aWQgLyBkaGlsZGVuYgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6
+YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5k
+YXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
