@@ -2,78 +2,51 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1400C99062
-	for <lists.virtualization@lfdr.de>; Thu, 22 Aug 2019 12:08:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80DCA990B0
+	for <lists.virtualization@lfdr.de>; Thu, 22 Aug 2019 12:26:27 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 7E631DC2;
-	Thu, 22 Aug 2019 10:08:44 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 915ADFAC;
+	Thu, 22 Aug 2019 10:26:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CEC83B8E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9B2C4EA6
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 22 Aug 2019 10:08:42 +0000 (UTC)
+	Thu, 22 Aug 2019 10:26:19 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 30C7367F
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 42A2F67F
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 22 Aug 2019 10:08:40 +0000 (UTC)
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
-	[209.85.221.72])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	Thu, 22 Aug 2019 10:26:19 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 9241B11A06
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 22 Aug 2019 10:08:39 +0000 (UTC)
-Received: by mail-wr1-f72.google.com with SMTP id m7so2949100wrw.22
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 22 Aug 2019 03:08:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=+QZ6pW149hcLIfsZZS+dKkZglSU+Xi8vHC91tSDHm3c=;
-	b=oxKbPDb0dgsqIXwdyz3TEjOjFMPaMjaiPKmhQQ+xt1w05qo5YVMKHsenI4sK1mDA59
-	3W6KYVANsLQsAAMFOiRn6XoyrnGPU3+6LTb7faQ0uXRTgmY1gfiTviXXianlatxHDaLW
-	k9p50gvj1peL+Xy9GJU93XLYVPWhzzRLHwN6P+SeMIjnMOrGMTrvqTl9W5y8tiEYav3W
-	d9ycqTH6DVYi/pozmKWE9dqgt1btm4ur9OjOYx3ydiNEG9vPCQgEjLfj010lm2ElxP5f
-	VUWsWl+OKr1xAU4Oz+GR41szsDhLc15ooGmZqONJnbe3mNRs0JxGfr4lJYbGa6vJzjtN
-	m6dw==
-X-Gm-Message-State: APjAAAUFzaVWiZT7k3NhpvaKCXlyCqrv3tCzNk8EGB+JT+/trXQdDpmC
-	o/L5P/F+ofc+W4xwOBuaRaIEEINxJnOnHNNryZvpgKxBPq9o/QUr8Df0mdjZ2srL9BXiyHzwTBs
-	cGRvAOS6QTy+Ym43OvlG0fXXvQEwEOrS04lw1kQI8aw==
-X-Received: by 2002:a1c:7513:: with SMTP id o19mr5210671wmc.126.1566468518290; 
-	Thu, 22 Aug 2019 03:08:38 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqx0XnwkglmAIZNRemEqCnbp6/DI7ya5vpk8WBx5UrfbHbyKJgBnEIawFQuaHzBUlbkohxgoxQ==
-X-Received: by 2002:a1c:7513:: with SMTP id o19mr5210642wmc.126.1566468518041; 
-	Thu, 22 Aug 2019 03:08:38 -0700 (PDT)
-Received: from steredhat (host80-221-dynamic.18-79-r.retail.telecomitalia.it.
-	[79.18.221.80]) by smtp.gmail.com with ESMTPSA id
-	o129sm7596453wmb.41.2019.08.22.03.08.36
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 22 Aug 2019 03:08:37 -0700 (PDT)
-Date: Thu, 22 Aug 2019 12:08:35 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>, Jorgen Hansen <jhansen@vmware.com>
-Subject: Re: [PATCH v2 10/11] vsock_test: skip read() in test_stream*close
-	tests on a VMCI host
-Message-ID: <20190822100835.7u27ijlaydk72orv@steredhat>
-References: <20190801152541.245833-1-sgarzare@redhat.com>
-	<20190801152541.245833-11-sgarzare@redhat.com>
-	<20190820083203.GB9855@stefanha-x1.localdomain>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190820083203.GB9855@stefanha-x1.localdomain>
-User-Agent: NeoMutt/20180716
+	by mx1.redhat.com (Postfix) with ESMTPS id 8B9607F75C;
+	Thu, 22 Aug 2019 10:26:18 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-60.ams2.redhat.com
+	[10.36.116.60])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id A15426012C;
+	Thu, 22 Aug 2019 10:26:15 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+	id C817516E32; Thu, 22 Aug 2019 12:26:14 +0200 (CEST)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v2] drm/virtio: make resource id workaround runtime switchable.
+Date: Thu, 22 Aug 2019 12:26:14 +0200
+Message-Id: <20190822102614.18164-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+	(mx1.redhat.com [10.5.110.71]);
+	Thu, 22 Aug 2019 10:26:18 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
-	Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	"David S. Miller" <davem@davemloft.net>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	Daniel Vetter <daniel@ffwll.ch>, "open list:VIRTIO GPU DRIVER"
+	<virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -85,40 +58,85 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Aug 20, 2019 at 09:32:03AM +0100, Stefan Hajnoczi wrote:
-> On Thu, Aug 01, 2019 at 05:25:40PM +0200, Stefano Garzarella wrote:
-> > When VMCI transport is used, if the guest closes a connection,
-> > all data is gone and EOF is returned, so we should skip the read
-> > of data written by the peer before closing the connection.
-> 
-> All transports should aim for identical semantics.  I think virtio-vsock
-> should behave the same as VMCI since userspace applications should be
-> transport-independent.
+Also update the comment with a reference to the virglrenderer fix.
 
-Yes, it is a good point!
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/virtio/virtgpu_object.c | 44 ++++++++++++++-----------
+ 1 file changed, 24 insertions(+), 20 deletions(-)
 
-> 
-> Let's view this as a vsock bug.  Is it feasible to change the VMCI
-> behavior so it's more like TCP sockets?  If not, let's change the
-> virtio-vsock behavior to be compatible with VMCI.
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index b2da31310d24..e98aaa00578d 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -27,34 +27,38 @@
+ 
+ #include "virtgpu_drv.h"
+ 
++static int virtio_gpu_virglrenderer_workaround = 1;
++module_param_named(virglhack, virtio_gpu_virglrenderer_workaround, int, 0400);
++
+ static int virtio_gpu_resource_id_get(struct virtio_gpu_device *vgdev,
+ 				       uint32_t *resid)
+ {
+-#if 0
+-	int handle = ida_alloc(&vgdev->resource_ida, GFP_KERNEL);
+-
+-	if (handle < 0)
+-		return handle;
+-#else
+-	static int handle;
+-
+-	/*
+-	 * FIXME: dirty hack to avoid re-using IDs, virglrenderer
+-	 * can't deal with that.  Needs fixing in virglrenderer, also
+-	 * should figure a better way to handle that in the guest.
+-	 */
+-	handle++;
+-#endif
+-
+-	*resid = handle + 1;
++	if (virtio_gpu_virglrenderer_workaround) {
++		/*
++		 * Hack to avoid re-using resource IDs.
++		 *
++		 * virglrenderer versions up to (and including) 0.7.0
++		 * can't deal with that.  virglrenderer commit
++		 * "f91a9dd35715 Fix unlinking resources from hash
++		 * table." (Feb 2019) fixes the bug.
++		 */
++		static int handle;
++		handle++;
++		*resid = handle + 1;
++	} else {
++		int handle = ida_alloc(&vgdev->resource_ida, GFP_KERNEL);
++		if (handle < 0)
++			return handle;
++		*resid = handle + 1;
++	}
+ 	return 0;
+ }
+ 
+ static void virtio_gpu_resource_id_put(struct virtio_gpu_device *vgdev, uint32_t id)
+ {
+-#if 0
+-	ida_free(&vgdev->resource_ida, id - 1);
+-#endif
++	if (!virtio_gpu_virglrenderer_workaround) {
++		ida_free(&vgdev->resource_ida, id - 1);
++	}
+ }
+ 
+ static void virtio_gpu_ttm_bo_destroy(struct ttm_buffer_object *tbo)
+-- 
+2.18.1
 
-I'm not sure it is feasible to change the VMCI behavior. IIUC reading the
-Jorgen's answer [1], this was a decision made during the implementation.
-
-@Jorgen: please, can you confirm? or not :-)
-
-If it is the case, I'll change virtio-vsock to the same behavior.
-
-
-Thanks,
-Stefano
-
-[1] https://patchwork.ozlabs.org/cover/847998/#1831400
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
