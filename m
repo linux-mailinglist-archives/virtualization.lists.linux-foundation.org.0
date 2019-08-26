@@ -2,97 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C13209D531
-	for <lists.virtualization@lfdr.de>; Mon, 26 Aug 2019 19:49:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 739F09D8D2
+	for <lists.virtualization@lfdr.de>; Tue, 27 Aug 2019 00:06:26 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2ADDB216A;
-	Mon, 26 Aug 2019 17:49:08 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 81F9414B7;
+	Mon, 26 Aug 2019 22:06:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 24554E4C
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0520114AF
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 26 Aug 2019 17:49:07 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
-	[148.163.156.1])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 969FD42D
+	Mon, 26 Aug 2019 22:06:20 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9C6F18A7
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 26 Aug 2019 17:49:06 +0000 (UTC)
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x7QHlP0f139780 for <virtualization@lists.linux-foundation.org>;
-	Mon, 26 Aug 2019 13:49:06 -0400
-Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 2umgu989ah-1
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	Mon, 26 Aug 2019 22:06:19 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id z3so41355578iog.0
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 26 Aug 2019 13:49:05 -0400
-Received: from localhost
-	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
-	Only! Violators will be prosecuted
-	for <virtualization@lists.linux-foundation.org> from
-	<linuxram@us.ibm.com>; Mon, 26 Aug 2019 18:49:03 +0100
-Received: from b06cxnps4074.portsmouth.uk.ibm.com (9.149.109.196)
-	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-	Mon, 26 Aug 2019 18:48:59 +0100
-Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
-	[9.149.105.61])
-	by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
-	ESMTP id x7QHmw6w37683404
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=OK); Mon, 26 Aug 2019 17:48:58 GMT
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 1331C11C04C;
-	Mon, 26 Aug 2019 17:48:58 +0000 (GMT)
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id EE7C111C050;
-	Mon, 26 Aug 2019 17:48:53 +0000 (GMT)
-Received: from ram.ibm.com (unknown [9.85.172.199])
-	by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
-	Mon, 26 Aug 2019 17:48:53 +0000 (GMT)
-Date: Mon, 26 Aug 2019 10:48:49 -0700
-From: Ram Pai <linuxram@us.ibm.com>
-To: David Gibson <david@gibson.dropbear.id.au>, Christoph Hellwig <hch@lst.de>
-References: <87zhrj8kcp.fsf@morokweng.localdomain>
-	<20190810143038-mutt-send-email-mst@kernel.org>
-	<20190810220702.GA5964@ram.ibm.com> <20190811055607.GA12488@lst.de>
-	<20190812095156.GD3947@umbus.fritz.box>
-	<20190813132617.GA6426@lst.de>
-	<20190813142439.GO3947@umbus.fritz.box>
-	<20190813154537.GE5964@ram.ibm.com>
+	Mon, 26 Aug 2019 15:06:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=j2+X7ZLdUUxNkcBQNBfyLlM7Bq5bjsdY0IjjmtqCq8s=;
+	b=lQSN7pQhTCM28br9rSgxowCmfZmsljVskLhGMUN8q9JRAPHK5tkMcdA4AhKA+ezKGf
+	qcEEG70QEoiTsJhZkfOW57KexZaK/Np9tIm3WFU1t0QflRoTMSSWKK6EKoa/oeZECM9v
+	fgpa1tg+tGUUhSa43lab1By1HWWM78GpZ1C8BjBzh9x6I0UTiFwAHzrUCuxuNCjvJSLn
+	vn+AI5TRT8NmBBGBr8ySszqREymrYNaOgZp5QoY5dt7BZKnH361RVhA5ON3uoxJSEwV8
+	Nb/+SsuAVFcRCdMd9bkdDoor3f5LDZapyZbl7ErJI+Gvy8Uqa29OSSHCZ3EjSRZ8QJdd
+	q4nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=j2+X7ZLdUUxNkcBQNBfyLlM7Bq5bjsdY0IjjmtqCq8s=;
+	b=X1eu9y3H/jmMjHWrmvEbZXPjugbGHrffoi3LuSi9QpEy9qYiQTzQ/3Qw5wJ3y6zp4Y
+	I4DQ2eM1bh4Obr5dy5Uwv6N0hIo3XXgvkaLJAuoFfDWc6veT5HOyYXAX0vf4fCvznhSB
+	sF7AmQCfI9a39SCe9zv22MNDJu5q7Kd73ygQEqtMYCRnclINqG94wGrIrh7Tgp3BCNUI
+	W3QZYljIdZbAOprIdaHtsXWQ8ECgacEXPv9YbJSii2swgPFi6g/Vc5Jf0Xi1jIbGU9UJ
+	joRu+tdexq2npo9aquN7tlhvDT976tVJNF8HdYhe6Iy37XfvyKjJXEjtspLJ6F8rBzJV
+	qIGg==
+X-Gm-Message-State: APjAAAVqlS0iXBkJNotgVMcBrxZFj/xJ7kjjYfYM4ndZcuXdu6+6qa3q
+	ATrI4hAO/fnhaJbOAmXJNdVj4Jf0N9dNax+AATY=
+X-Google-Smtp-Source: APXvYqwcYevweKqMNjHTJ83mj+kVwgsdYNMqCFj1IF88/5p1L/AzW1r6mX95/4ulDgCHTIUECfPGxzod9HEYB/twqAs=
+X-Received: by 2002:a5e:df06:: with SMTP id f6mr16773354ioq.93.1566857178737; 
+	Mon, 26 Aug 2019 15:06:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190813154537.GE5964@ram.ibm.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-TM-AS-GCONF: 00
-x-cbid: 19082617-0008-0000-0000-0000030D8F60
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19082617-0009-0000-0000-00004A2BC8CB
-Message-Id: <20190826174849.GA5445@ram.ibm.com>
-Subject: RE: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-08-26_08:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
-	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
-	scancount=1 engine=8.0.1-1906280000 definitions=main-1908260173
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
+References: <20190822102614.18164-1-kraxel@redhat.com>
+In-Reply-To: <20190822102614.18164-1-kraxel@redhat.com>
+From: Chia-I Wu <olvaffe@gmail.com>
+Date: Mon, 26 Aug 2019 15:06:07 -0700
+Message-ID: <CAPaKu7Q+T1qf4jboXSV-jsXHrvqSxG+MrJGJzFf7qNisaZj3Wg@mail.gmail.com>
+Subject: Re: [PATCH v2] drm/virtio: make resource id workaround runtime
+	switchable.
+To: Gerd Hoffmann <kraxel@redhat.com>
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Alexey Kardashevskiy <aik@linux.ibm.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Paul Mackerras <paulus@ozlabs.org>,
-	iommu@lists.linux-foundation.org, ram.n.pai@gmail.com,
-	linuxppc-devel@lists.ozlabs.org
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	ML dri-devel <dri-devel@lists.freedesktop.org>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -104,83 +76,91 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Reply-To: Ram Pai <linuxram@us.ibm.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Aug 13, 2019 at 08:45:37AM -0700, Ram Pai wrote:
-> On Wed, Aug 14, 2019 at 12:24:39AM +1000, David Gibson wrote:
-> > On Tue, Aug 13, 2019 at 03:26:17PM +0200, Christoph Hellwig wrote:
-> > > On Mon, Aug 12, 2019 at 07:51:56PM +1000, David Gibson wrote:
-> > > > AFAICT we already kind of abuse this for the VIRTIO_F_IOMMU_PLATFORM,
-> > > > because to handle for cases where it *is* a device limitation, we
-> > > > assume that if the hypervisor presents VIRTIO_F_IOMMU_PLATFORM then
-> > > > the guest *must* select it.
-> > > > 
-> > > > What we actually need here is for the hypervisor to present
-> > > > VIRTIO_F_IOMMU_PLATFORM as available, but not required.  Then we need
-> > > > a way for the platform core code to communicate to the virtio driver
-> > > > that *it* requires the IOMMU to be used, so that the driver can select
-> > > > or not the feature bit on that basis.
-> > > 
-> > > I agree with the above, but that just brings us back to the original
-> > > issue - the whole bypass of the DMA OPS should be an option that the
-> > > device can offer, not the other way around.  And we really need to
-> > > fix that root cause instead of doctoring around it.
-> > 
-> > I'm not exactly sure what you mean by "device" in this context.  Do
-> > you mean the hypervisor (qemu) side implementation?
-> > 
-> > You're right that this was the wrong way around to begin with, but as
-> > well as being hard to change now, I don't see how it really addresses
-> > the current problem.  The device could default to IOMMU and allow
-> > bypass, but the driver would still need to get information from the
-> > platform to know that it *can't* accept that option in the case of a
-> > secure VM.  Reversed sense, but the same basic problem.
-> > 
-> > The hypervisor does not, and can not be aware of the secure VM
-> > restrictions - only the guest side platform code knows that.
-> 
-> This statement is almost entirely right. I will rephrase it to make it
-> entirely right.   
-> 
-> The hypervisor does not, and can not be aware of the secure VM
-> requirement that it needs to do some special processing that has nothing
-> to do with DMA address translation - only the guest side platform code
-> know that.
-> 
-> BTW: I do not consider 'bounce buffering' as 'DMA address translation'.
-> DMA address translation, translates CPU address to DMA address.  Bounce
-> buffering moves the data from one buffer at a given CPU address to
-> another buffer at a different CPU address.  Unfortunately the current
-> DMA ops conflates the two.  The need to do 'DMA address translation' 
-> is something the device can enforce.  But the need to do bounce
-> buffering, is something that the device should not be aware and should be
-> entirely a decision made locally by the kernel/driver in the secure VM.
-
-
-Christoph,
-
-	Since we have not heard back from you, I am not sure where you
-	stand on this issue now.   One of the three things are
-	possible..
-
-	(a) our above explaination did not make sense and hence
-		you decided to ignore it.
-	(b) our above above made some sense and need more time to think 
-		and respond.
-	(c) you totally forgot about this.
-
-
-I hope it is (b). We want a solution that works for all, and your inputs 
-are important to us.
-
-
-Thanks,
-RP
-
+On Thu, Aug 22, 2019 at 3:26 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> Also update the comment with a reference to the virglrenderer fix.
+>
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Chia-I Wu <olvaffe@gmail.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_object.c | 44 ++++++++++++++-----------
+>  1 file changed, 24 insertions(+), 20 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+> index b2da31310d24..e98aaa00578d 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+> @@ -27,34 +27,38 @@
+>
+>  #include "virtgpu_drv.h"
+>
+> +static int virtio_gpu_virglrenderer_workaround = 1;
+> +module_param_named(virglhack, virtio_gpu_virglrenderer_workaround, int, 0400);
+> +
+>  static int virtio_gpu_resource_id_get(struct virtio_gpu_device *vgdev,
+>                                        uint32_t *resid)
+>  {
+> -#if 0
+> -       int handle = ida_alloc(&vgdev->resource_ida, GFP_KERNEL);
+> -
+> -       if (handle < 0)
+> -               return handle;
+> -#else
+> -       static int handle;
+> -
+> -       /*
+> -        * FIXME: dirty hack to avoid re-using IDs, virglrenderer
+> -        * can't deal with that.  Needs fixing in virglrenderer, also
+> -        * should figure a better way to handle that in the guest.
+> -        */
+> -       handle++;
+> -#endif
+> -
+> -       *resid = handle + 1;
+> +       if (virtio_gpu_virglrenderer_workaround) {
+> +               /*
+> +                * Hack to avoid re-using resource IDs.
+> +                *
+> +                * virglrenderer versions up to (and including) 0.7.0
+> +                * can't deal with that.  virglrenderer commit
+> +                * "f91a9dd35715 Fix unlinking resources from hash
+> +                * table." (Feb 2019) fixes the bug.
+> +                */
+> +               static int handle;
+> +               handle++;
+> +               *resid = handle + 1;
+> +       } else {
+> +               int handle = ida_alloc(&vgdev->resource_ida, GFP_KERNEL);
+> +               if (handle < 0)
+> +                       return handle;
+> +               *resid = handle + 1;
+> +       }
+>         return 0;
+>  }
+>
+>  static void virtio_gpu_resource_id_put(struct virtio_gpu_device *vgdev, uint32_t id)
+>  {
+> -#if 0
+> -       ida_free(&vgdev->resource_ida, id - 1);
+> -#endif
+> +       if (!virtio_gpu_virglrenderer_workaround) {
+> +               ida_free(&vgdev->resource_ida, id - 1);
+> +       }
+>  }
+>
+>  static void virtio_gpu_ttm_bo_destroy(struct ttm_buffer_object *tbo)
+> --
+> 2.18.1
+>
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
