@@ -2,73 +2,97 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 619809C0D6
-	for <lists.virtualization@lfdr.de>; Sun, 25 Aug 2019 00:41:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C13209D531
+	for <lists.virtualization@lfdr.de>; Mon, 26 Aug 2019 19:49:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0C280C8F;
-	Sat, 24 Aug 2019 22:41:41 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2ADDB216A;
+	Mon, 26 Aug 2019 17:49:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E3E1EC6F;
-	Sat, 24 Aug 2019 22:41:38 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from bombadil.infradead.org (bombadil.infradead.org
-	[198.137.202.133])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DE2ED735;
-	Sat, 24 Aug 2019 22:41:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20170209;
-	h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=tPOE4Ko2NQO863SdIwCTZol1z9/vjcbnUu9WQHeGjfE=;
-	b=PkhxhVAUMsw3rpDDQ9Elsjsnh
-	Tx/iXaKWEjKlRJVlNbFtCS9joDf449b5e/w2fS4ZGBtElHzrjgp0jfXF96y03Tsu9Pt5UHeDGE0E8
-	DsMrs2baF0USaDHeb8Px5bDApXhzaulHN0jg70EDDERhXzEKeUu12ArTY7c/al2DtsXvV2r72wIGP
-	AQr+qmf3K2Jx9+6A+N5G+/n+NF89CzPFpakodIGX8OBDPm8xwOV8yqA7bO3MEZjwJwZLJp0fVR2go
-	v5lx4WoO7R5Y5/QjJlI5U7JpNRMgfgYPe4vfnm86L1UXFJ5gsUfvINzi1bOEcmGUV88+qXVR1M94i
-	tgB2WGYWw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat
-	Linux)) id 1i1eiy-0003rr-8F; Sat, 24 Aug 2019 22:41:32 +0000
-Date: Sat, 24 Aug 2019 15:41:32 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Tom Murphy <murphyt7@tcd.ie>
-Subject: Re: [PATCH V5 1/5] iommu/amd: Remove unnecessary locking from AMD
-	iommu driver
-Message-ID: <20190824224132.GA14806@infradead.org>
-References: <20190815110944.3579-1-murphyt7@tcd.ie>
-	<20190815110944.3579-2-murphyt7@tcd.ie>
-	<20190820094143.GA24154@infradead.org>
-	<CALQxJussiGDzWFT1xhko6no5jZNOezWCFuJQUCr4XwH4NHri3Q@mail.gmail.com>
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 24554E4C
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 26 Aug 2019 17:49:07 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 969FD42D
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 26 Aug 2019 17:49:06 +0000 (UTC)
+Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x7QHlP0f139780 for <virtualization@lists.linux-foundation.org>;
+	Mon, 26 Aug 2019 13:49:06 -0400
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2umgu989ah-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 26 Aug 2019 13:49:05 -0400
+Received: from localhost
+	by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use
+	Only! Violators will be prosecuted
+	for <virtualization@lists.linux-foundation.org> from
+	<linuxram@us.ibm.com>; Mon, 26 Aug 2019 18:49:03 +0100
+Received: from b06cxnps4074.portsmouth.uk.ibm.com (9.149.109.196)
+	by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Mon, 26 Aug 2019 18:48:59 +0100
+Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
+	[9.149.105.61])
+	by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id x7QHmw6w37683404
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=OK); Mon, 26 Aug 2019 17:48:58 GMT
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 1331C11C04C;
+	Mon, 26 Aug 2019 17:48:58 +0000 (GMT)
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id EE7C111C050;
+	Mon, 26 Aug 2019 17:48:53 +0000 (GMT)
+Received: from ram.ibm.com (unknown [9.85.172.199])
+	by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
+	Mon, 26 Aug 2019 17:48:53 +0000 (GMT)
+Date: Mon, 26 Aug 2019 10:48:49 -0700
+From: Ram Pai <linuxram@us.ibm.com>
+To: David Gibson <david@gibson.dropbear.id.au>, Christoph Hellwig <hch@lst.de>
+References: <87zhrj8kcp.fsf@morokweng.localdomain>
+	<20190810143038-mutt-send-email-mst@kernel.org>
+	<20190810220702.GA5964@ram.ibm.com> <20190811055607.GA12488@lst.de>
+	<20190812095156.GD3947@umbus.fritz.box>
+	<20190813132617.GA6426@lst.de>
+	<20190813142439.GO3947@umbus.fritz.box>
+	<20190813154537.GE5964@ram.ibm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CALQxJussiGDzWFT1xhko6no5jZNOezWCFuJQUCr4XwH4NHri3Q@mail.gmail.com>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
-	bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+In-Reply-To: <20190813154537.GE5964@ram.ibm.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-TM-AS-GCONF: 00
+x-cbid: 19082617-0008-0000-0000-0000030D8F60
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19082617-0009-0000-0000-00004A2BC8CB
+Message-Id: <20190826174849.GA5445@ram.ibm.com>
+Subject: RE: [RFC PATCH] virtio_ring: Use DMA API if guest memory is encrypted
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-08-26_08:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1906280000 definitions=main-1908260173
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Heiko Stuebner <heiko@sntech.de>, virtualization@lists.linux-foundation.org,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	Thierry Reding <thierry.reding@gmail.com>, Will Deacon <will@kernel.org>,
-	Jean-Philippe Brucker <jean-philippe@linaro.org>,
-	linux-samsung-soc@vger.kernel.org, Krzysztof Kozlowski <krzk@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Christoph Hellwig <hch@infradead.org>, linux-rockchip@lists.infradead.org,
-	Kukjin Kim <kgene@kernel.org>, Andy Gross <agross@kernel.org>,
-	linux-s390@vger.kernel.org, Gerald Schaefer <gerald.schaefer@de.ibm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-mediatek@lists.infradead.org, linux-tegra@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, Robin Murphy <robin.murphy@arm.com>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	iommu@lists.linux-foundation.org, David Woodhouse <dwmw2@infradead.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Alexey Kardashevskiy <aik@linux.ibm.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Paul Mackerras <paulus@ozlabs.org>,
+	iommu@lists.linux-foundation.org, ram.n.pai@gmail.com,
+	linuxppc-devel@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -80,13 +104,83 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Reply-To: Ram Pai <linuxram@us.ibm.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Thank for the explanation Tom. It might make sense to add a condensed
-version of it to commit log for the next iteration.
+On Tue, Aug 13, 2019 at 08:45:37AM -0700, Ram Pai wrote:
+> On Wed, Aug 14, 2019 at 12:24:39AM +1000, David Gibson wrote:
+> > On Tue, Aug 13, 2019 at 03:26:17PM +0200, Christoph Hellwig wrote:
+> > > On Mon, Aug 12, 2019 at 07:51:56PM +1000, David Gibson wrote:
+> > > > AFAICT we already kind of abuse this for the VIRTIO_F_IOMMU_PLATFORM,
+> > > > because to handle for cases where it *is* a device limitation, we
+> > > > assume that if the hypervisor presents VIRTIO_F_IOMMU_PLATFORM then
+> > > > the guest *must* select it.
+> > > > 
+> > > > What we actually need here is for the hypervisor to present
+> > > > VIRTIO_F_IOMMU_PLATFORM as available, but not required.  Then we need
+> > > > a way for the platform core code to communicate to the virtio driver
+> > > > that *it* requires the IOMMU to be used, so that the driver can select
+> > > > or not the feature bit on that basis.
+> > > 
+> > > I agree with the above, but that just brings us back to the original
+> > > issue - the whole bypass of the DMA OPS should be an option that the
+> > > device can offer, not the other way around.  And we really need to
+> > > fix that root cause instead of doctoring around it.
+> > 
+> > I'm not exactly sure what you mean by "device" in this context.  Do
+> > you mean the hypervisor (qemu) side implementation?
+> > 
+> > You're right that this was the wrong way around to begin with, but as
+> > well as being hard to change now, I don't see how it really addresses
+> > the current problem.  The device could default to IOMMU and allow
+> > bypass, but the driver would still need to get information from the
+> > platform to know that it *can't* accept that option in the case of a
+> > secure VM.  Reversed sense, but the same basic problem.
+> > 
+> > The hypervisor does not, and can not be aware of the secure VM
+> > restrictions - only the guest side platform code knows that.
+> 
+> This statement is almost entirely right. I will rephrase it to make it
+> entirely right.   
+> 
+> The hypervisor does not, and can not be aware of the secure VM
+> requirement that it needs to do some special processing that has nothing
+> to do with DMA address translation - only the guest side platform code
+> know that.
+> 
+> BTW: I do not consider 'bounce buffering' as 'DMA address translation'.
+> DMA address translation, translates CPU address to DMA address.  Bounce
+> buffering moves the data from one buffer at a given CPU address to
+> another buffer at a different CPU address.  Unfortunately the current
+> DMA ops conflates the two.  The need to do 'DMA address translation' 
+> is something the device can enforce.  But the need to do bounce
+> buffering, is something that the device should not be aware and should be
+> entirely a decision made locally by the kernel/driver in the secure VM.
+
+
+Christoph,
+
+	Since we have not heard back from you, I am not sure where you
+	stand on this issue now.   One of the three things are
+	possible..
+
+	(a) our above explaination did not make sense and hence
+		you decided to ignore it.
+	(b) our above above made some sense and need more time to think 
+		and respond.
+	(c) you totally forgot about this.
+
+
+I hope it is (b). We want a solution that works for all, and your inputs 
+are important to us.
+
+
+Thanks,
+RP
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
