@@ -2,96 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10573A2793
-	for <lists.virtualization@lfdr.de>; Thu, 29 Aug 2019 22:03:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F968A28E7
+	for <lists.virtualization@lfdr.de>; Thu, 29 Aug 2019 23:26:37 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 38D6C535E;
-	Thu, 29 Aug 2019 20:03:09 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id ABDB1566C;
+	Thu, 29 Aug 2019 21:26:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EB533533B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 032B85108
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 20:01:24 +0000 (UTC)
+	Thu, 29 Aug 2019 21:24:27 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 51E851FB
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 825B68AA
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 20:01:24 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id z9so122879edq.8
+	Thu, 29 Aug 2019 21:24:26 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id m3so2248285pgv.13
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 13:01:24 -0700 (PDT)
+	Thu, 29 Aug 2019 14:24:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=aYf/lCZC1gwMIR9/lhwT5M/JPgKzeUqjFNgwUcFRWFg=;
-	b=U75GJORVMHIr0iUVnntJaP5CkG0L6J04X+1V/ZPN5uW3dQqnBj8pdaROlXs8b4Z1SG
-	DR1yBHet2NvJnJhuzP0i5c/qQ5sBWpaG0KlB9URDDEL2UqurL8fMaEild5hR6irruZ3I
-	WwlNUWnUuDyL8bRkDmAo8qYqSmnG/ayXfekSo=
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E2P9cOC9rhcxBzt6NHNxzx1T9WKYvIwrZWNTN0rkY+s=;
+	b=h0jTQN3TrKHnWNcg4cy77XJ0Co8Zx9n1Djd8fwUQW0bwNR3x0a6yxAkmXQyKGJ0vuP
+	2HpX11DY6L3hw3NBb+hAtyV/Ga22TIDS/NvuS5CEUbOTIw9b4QOdmT1FdD8gNz1QHFby
+	OVTmlgN4RoKEVolCdsq3rEd/zNSOYd16GWfJ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=aYf/lCZC1gwMIR9/lhwT5M/JPgKzeUqjFNgwUcFRWFg=;
-	b=A7+sC6zm1Hf1yb/yNpHVfzJrjm1/SVK/dRhXhP0xt5tlQkLMSFpM3iECB8GphQeKWY
-	XiJ0LnHfHIXWrl4erSY5QQc+Aa3SQftCzWU7Ui6AEQk8tVQU5rgEYefMekoqxjdo0mTf
-	3gXTA/KoyfJ62wste9QF3gOovW2T3tp3N2fb4/xeK6UTHY0e8P2lqxV4/04UTusA8ddl
-	voZt9cIzlA4wxyww1Tm0ZNHFemZgvPrlq83XUKcjDbL+ElC4xMPXcVctgTwVS6zLs2n7
-	j4j2icYzSR4EQdwjQJ9S2BOXeh/Mn7o6pzWI2b/2zjbH6uHvD5VSIdsTlYybekM4vG3A
-	xjcA==
-X-Gm-Message-State: APjAAAXgPwhuQVI1w0KpJwDx3DvhmaddanoiEElIHQLfHhKg8NXD+Xbr
-	Xwo3UokaidkXQGxmBQQDPn+jj7+Hx8Q=
-X-Google-Smtp-Source: APXvYqw5Nr4WNJSEvGHJEnse82bsmBYVGQrkD4vRa7PVTRlB2FJ5GBudQWg/dz0gKUqyaWEXXmH/hw==
-X-Received: by 2002:a17:906:e0d1:: with SMTP id
-	gl17mr6617990ejb.4.1567108882622; 
-	Thu, 29 Aug 2019 13:01:22 -0700 (PDT)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com.
-	[209.85.221.43])
-	by smtp.gmail.com with ESMTPSA id q17sm609938edr.94.2019.08.29.13.01.22
-	for <virtualization@lists.linux-foundation.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E2P9cOC9rhcxBzt6NHNxzx1T9WKYvIwrZWNTN0rkY+s=;
+	b=nl2w++r3swTmJN6qRrGRm4/25RqPL6JGSf+xVp/YREns6LEyBid4pcwndOhHFTuq+S
+	xK1vRpF/e0dshGGVnQF++8rHXkRM45RL2qYcLmtuzS9V/IghkEEl0XN3V3IgebuZIzt3
+	t81sx4VE44FyGJmOUUAsr/Ncap5nmYFf/kz3cmK88e+261LuC2v+WSvHtDQCoECqgyfV
+	TWHsbTiW/l6xw5XGa/VQ9guxy4brF/efWFiBIgaHWCcPWSWGD6bh9FotYuPP7sCXQmPJ
+	Y4yLgqZLWVEPLASNF8C+MZuBIZ/a7QWCy/7d7HMuzVq1syuShfogEhdGtOHnJ5TO9C4S
+	m6bg==
+X-Gm-Message-State: APjAAAUhC+RskovvBtUGhfbUpSvMdCAPGaE5ExdVT2ioP/g3zg7Z1o6z
+	yrnIFFZGLvp2bUHWjTjMTl/g4g==
+X-Google-Smtp-Source: APXvYqwrArfkjixaiROj/5i5BAEgcr0XtH1eJ8V9j+D6f55gAYz46DjrMy53tXXCLTJpgC2htTwUPA==
+X-Received: by 2002:a63:f357:: with SMTP id t23mr10380346pgj.421.1567113866106;
+	Thu, 29 Aug 2019 14:24:26 -0700 (PDT)
+Received: from localhost ([2620:15c:202:1:e9ae:bd45:1bd9:e60d])
+	by smtp.gmail.com with ESMTPSA id o9sm2972126pgv.19.2019.08.29.14.24.25
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 29 Aug 2019 13:01:22 -0700 (PDT)
-Received: by mail-wr1-f43.google.com with SMTP id q12so4629125wrj.12
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 13:01:22 -0700 (PDT)
-X-Received: by 2002:a5d:4a4e:: with SMTP id v14mr13235010wrs.200.1567108513590;
-	Thu, 29 Aug 2019 12:55:13 -0700 (PDT)
+	Thu, 29 Aug 2019 14:24:25 -0700 (PDT)
+From: David Riley <davidriley@chromium.org>
+To: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Subject: [PATCH] drm/virtio: Use vmalloc for command buffer allocations.
+Date: Thu, 29 Aug 2019 14:24:17 -0700
+Message-Id: <20190829212417.257397-1-davidriley@chromium.org>
+X-Mailer: git-send-email 2.23.0.187.g17f5b7556c-goog
 MIME-Version: 1.0
-References: <20190730191303.206365-1-thgarnie@chromium.org>
-	<20190806154347.GD25897@zn.tnic>
-	<20190806155034.GP2349@hirez.programming.kicks-ass.net>
-In-Reply-To: <20190806155034.GP2349@hirez.programming.kicks-ass.net>
-From: Thomas Garnier <thgarnie@chromium.org>
-Date: Thu, 29 Aug 2019 12:55:00 -0700
-X-Gmail-Original-Message-ID: <CAJcbSZETvvQYmh6U_Oauptdsrp-emmSG_QsAZzKLv+0-b2Yxig@mail.gmail.com>
-Message-ID: <CAJcbSZETvvQYmh6U_Oauptdsrp-emmSG_QsAZzKLv+0-b2Yxig@mail.gmail.com>
-Subject: Re: [PATCH v9 00/11] x86: PIE support to extend KASLR randomization
-To: Peter Zijlstra <peterz@infradead.org>
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Feng Tang <feng.tang@intel.com>,
-	Kristen Carlson Accardi <kristen@linux.intel.com>,
-	Kernel Hardening <kernel-hardening@lists.openwall.com>, "VMware,
-	Inc." <pv-drivers@vmware.com>, virtualization@lists.linux-foundation.org,
-	Nadav Amit <namit@vmware.com>, Pavel Machek <pavel@ucw.cz>,
-	"H. Peter Anvin" <hpa@zytor.com>, Thomas Hellstrom <thellstrom@vmware.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	the arch/x86 maintainers <x86@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>, Len Brown <len.brown@intel.com>,
-	Kees Cook <keescook@chromium.org>, Jann Horn <jannh@google.com>,
-	Alexios Zavras <alexios.zavras@intel.com>, Borislav Petkov <bp@alien8.de>,
-	Andy Lutomirski <luto@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
-	Allison Randal <allison@lohutok.net>, Juergen Gross <jgross@suse.com>,
-	Maran Wilson <maran.wilson@oracle.com>,
-	Linux PM list <linux-pm@vger.kernel.org>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	LKML <linux-kernel@vger.kernel.org>,
-	Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
-	Enrico Weigelt <info@metux.net>, "David S. Miller" <davem@davemloft.net>
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	=?UTF-8?q?St=C3=A9phane=20Marchesin?= <marcheu@chromium.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,33 +82,154 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Aug 6, 2019 at 8:51 AM Peter Zijlstra <peterz@infradead.org> wrote:
->
-> On Tue, Aug 06, 2019 at 05:43:47PM +0200, Borislav Petkov wrote:
-> > On Tue, Jul 30, 2019 at 12:12:44PM -0700, Thomas Garnier wrote:
-> > > These patches make some of the changes necessary to build the kernel as
-> > > Position Independent Executable (PIE) on x86_64. Another patchset will
-> > > add the PIE option and larger architecture changes.
-> >
-> > Yeah, about this: do we have a longer writeup about the actual benefits
-> > of all this and why we should take this all? After all, after looking
-> > at the first couple of asm patches, it is posing restrictions to how
-> > we deal with virtual addresses in asm (only RIP-relative addressing in
-> > 64-bit mode, MOVs with 64-bit immediates, etc, for example) and I'm
-> > willing to bet money that some future unrelated change will break PIE
-> > sooner or later.
+Userspace requested command buffer allocations could be too large
+to make as a contiguous allocation.  Use vmalloc if necessary to
+satisfy those allocations.
 
-The goal is being able to extend the range of addresses where the
-kernel can be placed with KASLR. I will look at clarifying that in the
-future.
+Signed-off-by: David Riley <davidriley@chromium.org>
+---
+ drivers/gpu/drm/virtio/virtgpu_ioctl.c |  4 +-
+ drivers/gpu/drm/virtio/virtgpu_vq.c    | 74 ++++++++++++++++++++++++--
+ 2 files changed, 73 insertions(+), 5 deletions(-)
 
->
-> Possibly objtool can help here; it should be possible to teach it about
-> these rules, and then it will yell when violated. That should avoid
-> regressions.
->
+diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+index ac60be9b5c19..a8732a8af766 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
++++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+@@ -195,7 +195,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
+ 	if (ret)
+ 		goto out_free;
+ 
+-	buf = memdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
++	buf = vmemdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
+ 	if (IS_ERR(buf)) {
+ 		ret = PTR_ERR(buf);
+ 		goto out_unresv;
+@@ -230,7 +230,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
+ 	return 0;
+ 
+ out_memdup:
+-	kfree(buf);
++	kvfree(buf);
+ out_unresv:
+ 	ttm_eu_backoff_reservation(&ticket, &validate_list);
+ out_free:
+diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+index 981ee16e3ee9..bcbc48b7284f 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_vq.c
++++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+@@ -154,7 +154,7 @@ static void free_vbuf(struct virtio_gpu_device *vgdev,
+ {
+ 	if (vbuf->resp_size > MAX_INLINE_RESP_SIZE)
+ 		kfree(vbuf->resp_buf);
+-	kfree(vbuf->data_buf);
++	kvfree(vbuf->data_buf);
+ 	kmem_cache_free(vgdev->vbufs, vbuf);
+ }
+ 
+@@ -251,6 +251,59 @@ void virtio_gpu_dequeue_cursor_func(struct work_struct *work)
+ 	wake_up(&vgdev->cursorq.ack_queue);
+ }
+ 
++/* How many bytes left in this page. */
++static unsigned int rest_of_page(void *data)
++{
++	return PAGE_SIZE - offset_in_page(data);
++}
++
++/* Create sg_table from a vmalloc'd buffer. */
++static struct sg_table *vmalloc_to_sgt(char *data, uint32_t size)
++{
++	int nents, ret, s, i;
++	struct sg_table *sgt;
++	struct scatterlist *sg;
++	struct page *pg;
++
++	sgt = kmalloc(sizeof(*sgt), GFP_KERNEL);
++	if (!sgt)
++		return NULL;
++
++	nents = DIV_ROUND_UP(size, PAGE_SIZE) + 1;
++	ret = sg_alloc_table(sgt, nents, GFP_KERNEL);
++	if (ret) {
++		kfree(sgt);
++		return NULL;
++	}
++
++	for_each_sg(sgt->sgl, sg, nents, i) {
++		pg = vmalloc_to_page(data);
++		if (!pg) {
++			sg_free_table(sgt);
++			kfree(sgt);
++			return NULL;
++		}
++
++		s = rest_of_page(data);
++		if (s > size)
++			s = size;
++
++		sg_set_page(sg, pg, s, offset_in_page(data));
++
++		size -= s;
++		data += s;
++
++		if (size) {
++			sg_unmark_end(sg);
++		} else {
++			sg_mark_end(sg);
++			break;
++		}
++	}
++
++	return sgt;
++}
++
+ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+ 					       struct virtio_gpu_vbuffer *vbuf)
+ 		__releases(&vgdev->ctrlq.qlock)
+@@ -260,6 +313,7 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+ 	struct scatterlist *sgs[3], vcmd, vout, vresp;
+ 	int outcnt = 0, incnt = 0;
+ 	int ret;
++	struct sg_table *sgt = NULL;
+ 
+ 	if (!vgdev->vqs_ready)
+ 		return -ENODEV;
+@@ -269,8 +323,17 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+ 	outcnt++;
+ 
+ 	if (vbuf->data_size) {
+-		sg_init_one(&vout, vbuf->data_buf, vbuf->data_size);
+-		sgs[outcnt + incnt] = &vout;
++		if (is_vmalloc_addr(vbuf->data_buf)) {
++			spin_unlock(&vgdev->ctrlq.qlock);
++			sgt = vmalloc_to_sgt(vbuf->data_buf, vbuf->data_size);
++			spin_lock(&vgdev->ctrlq.qlock);
++			if (!sgt)
++				return -ENOMEM;
++			sgs[outcnt + incnt] = sgt->sgl;
++		} else {
++			sg_init_one(&vout, vbuf->data_buf, vbuf->data_size);
++			sgs[outcnt + incnt] = &vout;
++		}
+ 		outcnt++;
+ 	}
+ 
+@@ -294,6 +357,11 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+ 		virtqueue_kick(vq);
+ 	}
+ 
++	if (sgt) {
++		sg_free_table(sgt);
++		kfree(sgt);
++	}
++
+ 	if (!ret)
+ 		ret = vq->num_free;
+ 	return ret;
+-- 
+2.23.0.187.g17f5b7556c-goog
 
-I will look into that as well.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
