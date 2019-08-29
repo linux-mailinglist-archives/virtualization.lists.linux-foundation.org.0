@@ -2,74 +2,96 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3205AA1816
-	for <lists.virtualization@lfdr.de>; Thu, 29 Aug 2019 13:19:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10573A2793
+	for <lists.virtualization@lfdr.de>; Thu, 29 Aug 2019 22:03:15 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0975646F5;
-	Thu, 29 Aug 2019 11:18:48 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 38D6C535E;
+	Thu, 29 Aug 2019 20:03:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6C9CD4692;
-	Thu, 29 Aug 2019 11:18:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id EB533533B
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 29 Aug 2019 20:01:24 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C4D80EC;
-	Thu, 29 Aug 2019 11:18:05 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id h13so3611223edq.10;
-	Thu, 29 Aug 2019 04:18:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=cjixq+s7ZD6fFiV9g8QRBxU/OWNAVY/P4LPyIACEzEM=;
-	b=djC2H5JFeHWERoQFSNo6K1Buv/HAY/zdTZ/Vy9BLHhv70G1BP5aEHIemdlQWFvLK0t
-	3RSHU3+QDvVjBRH6rmndTQFisShBSy2rXVQU/0CyVBy93HiUWngryqj8oTbKIdj6Vnpz
-	sNXUippKE5z0M2ZtM+fW6KuMBLAdoZNiZD6qsjd/JWY1vRPgY0j28/rH0E6Idert9w7d
-	sS2fZojsKu+F+CaN8iGeU4WiMl20abUTFNRMZ2XUCm9qApaELu6NPAdSB6YiqFtgC0ZA
-	1lVSgZoDWeqEdOzemcXFc9s7dX1wZPrqyNfi+GQQTYnagocsIo/CfeeTtfPlcX3yRrKD
-	+5dg==
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 51E851FB
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 29 Aug 2019 20:01:24 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id z9so122879edq.8
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 29 Aug 2019 13:01:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=aYf/lCZC1gwMIR9/lhwT5M/JPgKzeUqjFNgwUcFRWFg=;
+	b=U75GJORVMHIr0iUVnntJaP5CkG0L6J04X+1V/ZPN5uW3dQqnBj8pdaROlXs8b4Z1SG
+	DR1yBHet2NvJnJhuzP0i5c/qQ5sBWpaG0KlB9URDDEL2UqurL8fMaEild5hR6irruZ3I
+	WwlNUWnUuDyL8bRkDmAo8qYqSmnG/ayXfekSo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=cjixq+s7ZD6fFiV9g8QRBxU/OWNAVY/P4LPyIACEzEM=;
-	b=ReRfj+EjmxgpEvKDs8+SH+xET3azyVqWdicjn2UDW/VqQdfDlUR9hrNnYVw8nJCZ4D
-	9wMXOTm0csPJAJYfBVIHTIiPBOURrcoNQhQjwKwtfgpl37h1Wjp13BrE1oLcjjOugjBM
-	5uf0Rtq5fQ9fO6UacHcON+jSyZmWojwtcul0MA/yuMeOnvsfyVf89hyfMZVZgw2h9xPL
-	LSibTmra5Idf7LNQa6zuGX1cgu2mPpkdULxZ5Tzp482wzkhCJbqymFU/3DI0xuWrqTd5
-	0kY/VomASFRQaeAGaCQ+qukqtLsb0mVyuKwDZOdA19fbHTt9QVDPpVsQKqr640TmIaoD
-	2qDg==
-X-Gm-Message-State: APjAAAUpNAY8s6j3cxiNFIaGpJnX5Qt5Hv7YYAJ4CXGKw2fqmz7v2ynF
-	MgVpjzcPZ+PP2W1GEprH3gQ=
-X-Google-Smtp-Source: APXvYqwZIsELufro/apZKANBvYbuav5XunBjAgaDShMq6vd+vYkJ2aickX4Wp+WCq2PXzJ9kM5tq1A==
-X-Received: by 2002:a50:9401:: with SMTP id p1mr8952979eda.189.1567077483603; 
-	Thu, 29 Aug 2019 04:18:03 -0700 (PDT)
-Received: from localhost (pD9E51890.dip0.t-ipconnect.de. [217.229.24.144])
-	by smtp.gmail.com with ESMTPSA id y9sm388439eds.49.2019.08.29.04.18.02
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 29 Aug 2019 04:18:02 -0700 (PDT)
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: [PATCH 5/5] iommu: virt: Use iommu_put_resv_regions_simple()
-Date: Thu, 29 Aug 2019 13:17:52 +0200
-Message-Id: <20190829111752.17513-6-thierry.reding@gmail.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190829111752.17513-1-thierry.reding@gmail.com>
-References: <20190829111752.17513-1-thierry.reding@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=aYf/lCZC1gwMIR9/lhwT5M/JPgKzeUqjFNgwUcFRWFg=;
+	b=A7+sC6zm1Hf1yb/yNpHVfzJrjm1/SVK/dRhXhP0xt5tlQkLMSFpM3iECB8GphQeKWY
+	XiJ0LnHfHIXWrl4erSY5QQc+Aa3SQftCzWU7Ui6AEQk8tVQU5rgEYefMekoqxjdo0mTf
+	3gXTA/KoyfJ62wste9QF3gOovW2T3tp3N2fb4/xeK6UTHY0e8P2lqxV4/04UTusA8ddl
+	voZt9cIzlA4wxyww1Tm0ZNHFemZgvPrlq83XUKcjDbL+ElC4xMPXcVctgTwVS6zLs2n7
+	j4j2icYzSR4EQdwjQJ9S2BOXeh/Mn7o6pzWI2b/2zjbH6uHvD5VSIdsTlYybekM4vG3A
+	xjcA==
+X-Gm-Message-State: APjAAAXgPwhuQVI1w0KpJwDx3DvhmaddanoiEElIHQLfHhKg8NXD+Xbr
+	Xwo3UokaidkXQGxmBQQDPn+jj7+Hx8Q=
+X-Google-Smtp-Source: APXvYqw5Nr4WNJSEvGHJEnse82bsmBYVGQrkD4vRa7PVTRlB2FJ5GBudQWg/dz0gKUqyaWEXXmH/hw==
+X-Received: by 2002:a17:906:e0d1:: with SMTP id
+	gl17mr6617990ejb.4.1567108882622; 
+	Thu, 29 Aug 2019 13:01:22 -0700 (PDT)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com.
+	[209.85.221.43])
+	by smtp.gmail.com with ESMTPSA id q17sm609938edr.94.2019.08.29.13.01.22
+	for <virtualization@lists.linux-foundation.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Thu, 29 Aug 2019 13:01:22 -0700 (PDT)
+Received: by mail-wr1-f43.google.com with SMTP id q12so4629125wrj.12
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 29 Aug 2019 13:01:22 -0700 (PDT)
+X-Received: by 2002:a5d:4a4e:: with SMTP id v14mr13235010wrs.200.1567108513590;
+	Thu, 29 Aug 2019 12:55:13 -0700 (PDT)
 MIME-Version: 1.0
+References: <20190730191303.206365-1-thgarnie@chromium.org>
+	<20190806154347.GD25897@zn.tnic>
+	<20190806155034.GP2349@hirez.programming.kicks-ass.net>
+In-Reply-To: <20190806155034.GP2349@hirez.programming.kicks-ass.net>
+From: Thomas Garnier <thgarnie@chromium.org>
+Date: Thu, 29 Aug 2019 12:55:00 -0700
+X-Gmail-Original-Message-ID: <CAJcbSZETvvQYmh6U_Oauptdsrp-emmSG_QsAZzKLv+0-b2Yxig@mail.gmail.com>
+Message-ID: <CAJcbSZETvvQYmh6U_Oauptdsrp-emmSG_QsAZzKLv+0-b2Yxig@mail.gmail.com>
+Subject: Re: [PATCH v9 00/11] x86: PIE support to extend KASLR randomization
+To: Peter Zijlstra <peterz@infradead.org>
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
-	Will Deacon <will@kernel.org>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	iommu@lists.linux-foundation.org, Robin Murphy <robin.murphy@arm.com>,
-	David Woodhouse <dwmw2@infradead.org>, linux-arm-kernel@lists.infradead.org
+Cc: Feng Tang <feng.tang@intel.com>,
+	Kristen Carlson Accardi <kristen@linux.intel.com>,
+	Kernel Hardening <kernel-hardening@lists.openwall.com>, "VMware,
+	Inc." <pv-drivers@vmware.com>, virtualization@lists.linux-foundation.org,
+	Nadav Amit <namit@vmware.com>, Pavel Machek <pavel@ucw.cz>,
+	"H. Peter Anvin" <hpa@zytor.com>, Thomas Hellstrom <thellstrom@vmware.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	the arch/x86 maintainers <x86@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>, Len Brown <len.brown@intel.com>,
+	Kees Cook <keescook@chromium.org>, Jann Horn <jannh@google.com>,
+	Alexios Zavras <alexios.zavras@intel.com>, Borislav Petkov <bp@alien8.de>,
+	Andy Lutomirski <luto@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
+	Allison Randal <allison@lohutok.net>, Juergen Gross <jgross@suse.com>,
+	Maran Wilson <maran.wilson@oracle.com>,
+	Linux PM list <linux-pm@vger.kernel.org>,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	LKML <linux-kernel@vger.kernel.org>,
+	Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
+	Enrico Weigelt <info@metux.net>, "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,66 +108,33 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-From: Thierry Reding <treding@nvidia.com>
+On Tue, Aug 6, 2019 at 8:51 AM Peter Zijlstra <peterz@infradead.org> wrote:
+>
+> On Tue, Aug 06, 2019 at 05:43:47PM +0200, Borislav Petkov wrote:
+> > On Tue, Jul 30, 2019 at 12:12:44PM -0700, Thomas Garnier wrote:
+> > > These patches make some of the changes necessary to build the kernel as
+> > > Position Independent Executable (PIE) on x86_64. Another patchset will
+> > > add the PIE option and larger architecture changes.
+> >
+> > Yeah, about this: do we have a longer writeup about the actual benefits
+> > of all this and why we should take this all? After all, after looking
+> > at the first couple of asm patches, it is posing restrictions to how
+> > we deal with virtual addresses in asm (only RIP-relative addressing in
+> > 64-bit mode, MOVs with 64-bit immediates, etc, for example) and I'm
+> > willing to bet money that some future unrelated change will break PIE
+> > sooner or later.
 
-Use the new standard function instead of open-coding it.
+The goal is being able to extend the range of addresses where the
+kernel can be placed with KASLR. I will look at clarifying that in the
+future.
 
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>
-Cc: virtualization@lists.linux-foundation.org
-Signed-off-by: Thierry Reding <treding@nvidia.com>
----
- drivers/iommu/virtio-iommu.c | 14 +++-----------
- 1 file changed, 3 insertions(+), 11 deletions(-)
+>
+> Possibly objtool can help here; it should be possible to teach it about
+> these rules, and then it will yell when violated. That should avoid
+> regressions.
+>
 
-diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
-index 3ea9d7682999..bc3c7ab7f996 100644
---- a/drivers/iommu/virtio-iommu.c
-+++ b/drivers/iommu/virtio-iommu.c
-@@ -838,14 +838,6 @@ static void viommu_get_resv_regions(struct device *dev, struct list_head *head)
- 	iommu_dma_get_resv_regions(dev, head);
- }
- 
--static void viommu_put_resv_regions(struct device *dev, struct list_head *head)
--{
--	struct iommu_resv_region *entry, *next;
--
--	list_for_each_entry_safe(entry, next, head, list)
--		kfree(entry);
--}
--
- static struct iommu_ops viommu_ops;
- static struct virtio_driver virtio_iommu_drv;
- 
-@@ -915,7 +907,7 @@ static int viommu_add_device(struct device *dev)
- err_unlink_dev:
- 	iommu_device_unlink(&viommu->iommu, dev);
- err_free_dev:
--	viommu_put_resv_regions(dev, &vdev->resv_regions);
-+	iommu_put_resv_regions_simple(dev, &vdev->resv_regions);
- 	kfree(vdev);
- 
- 	return ret;
-@@ -933,7 +925,7 @@ static void viommu_remove_device(struct device *dev)
- 
- 	iommu_group_remove_device(dev);
- 	iommu_device_unlink(&vdev->viommu->iommu, dev);
--	viommu_put_resv_regions(dev, &vdev->resv_regions);
-+	iommu_put_resv_regions_simple(dev, &vdev->resv_regions);
- 	kfree(vdev);
- }
- 
-@@ -962,7 +954,7 @@ static struct iommu_ops viommu_ops = {
- 	.remove_device		= viommu_remove_device,
- 	.device_group		= viommu_device_group,
- 	.get_resv_regions	= viommu_get_resv_regions,
--	.put_resv_regions	= viommu_put_resv_regions,
-+	.put_resv_regions	= iommu_put_resv_regions_simple,
- 	.of_xlate		= viommu_of_xlate,
- };
- 
--- 
-2.22.0
-
+I will look into that as well.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
