@@ -2,54 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E1F4A1644
-	for <lists.virtualization@lfdr.de>; Thu, 29 Aug 2019 12:35:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8E51A17F9
+	for <lists.virtualization@lfdr.de>; Thu, 29 Aug 2019 13:18:30 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id BFA944700;
-	Thu, 29 Aug 2019 10:33:54 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1460646FC;
+	Thu, 29 Aug 2019 11:18:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
-Received: from smtp2.linuxfoundation.org (smtp2.linux-foundation.org
-	[172.17.192.36])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 93FB046C8
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 10:33:10 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp2.linuxfoundation.org (Postfix) with ESMTPS id 573FB1DDC8
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 10:33:10 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
-	[10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id C221710F23EA;
-	Thu, 29 Aug 2019 10:33:09 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-95.ams2.redhat.com
-	[10.36.116.95])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id B08696061E;
-	Thu, 29 Aug 2019 10:33:08 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id D5D7031F2B; Thu, 29 Aug 2019 12:33:04 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v9 18/18] drm/virtio: add fence sanity check
-Date: Thu, 29 Aug 2019 12:33:01 +0200
-Message-Id: <20190829103301.3539-19-kraxel@redhat.com>
-In-Reply-To: <20190829103301.3539-1-kraxel@redhat.com>
-References: <20190829103301.3539-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
-	(mx1.redhat.com [10.5.110.66]);
-	Thu, 29 Aug 2019 10:33:09 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
+	[172.17.192.35])
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0FF4F4692;
+	Thu, 29 Aug 2019 11:17:56 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6A56FEC;
+	Thu, 29 Aug 2019 11:17:55 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id w5so3622708edl.8;
+	Thu, 29 Aug 2019 04:17:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Qw9TI/oO75bsTCfpr+cHjs+CGmEWrEJqDhW1Nr5mPhI=;
+	b=S8Ri4oDngL/CuKTznOuFJut4kaqtLc9m6OEPBmcrmC9PTg98R4l6Ntojeqare4DfFw
+	Ue+QAiofTOSeEn3E0/BxjOQLgEcmVTFzWxXf/RbFaYze8UQYLYXsmo8idr+2My4VQVHO
+	xiQyF7kbM5iv+RsDvCU/qFLiwosQ4qE2PgBErmbwLqhtHhVnhy9ZxvLpK5PvWZK8+ra5
+	TqQdfoKN+BbrZfXu4iysVRj4aZPP5GWU7rDJ2seuoGic6i98kGKTZABTaRT9p4b2Clsk
+	wvL2evwLuZbxEu0B6knoORNMtSB0oGq3Ul3kTNAEVFmJUdo/iu0piqtwO8RTCzpdtAta
+	+sNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Qw9TI/oO75bsTCfpr+cHjs+CGmEWrEJqDhW1Nr5mPhI=;
+	b=OkvZO2gpr8UVtONJb0DJuVa+u+jEadoYxzB+y55tni+AzNBTYYdQrr24lTBQ9OlAnD
+	4QkOmMqYrahydSSY+Mu4YMiM6FyO+gKWqmdOtyeNh5da3sUWOOUgGXQnfyxUdpq9U6p6
+	h4NdFHBk1vAHuga6FUxcaHSq2/tohCnXuQz9bUC4wlkEQsJV6Phmu173HdHmlRBbcowc
+	DjigrOIT/oTG1FhFfrBmpNFDkbDzGh36ow+r+zOBEnWpe7KGe53R3mcXf99jiKutkhvd
+	3pJOHHluuAtLUhpqlOmjfXF80BjSVFqJcNn3KeW5JOL6Qi2QZmjIpvo6k2/98fPRd3Lw
+	O8Ag==
+X-Gm-Message-State: APjAAAW2P3J+QbGdLlsbXoZyYGCSF4u7lDcHm+llqqG23QxApgGvyp6x
+	m/imouE5+oP+2FI6aCZBaOA=
+X-Google-Smtp-Source: APXvYqzf3VpKDNdxCgnDwyw+83rYA047IH5YU4ry9v57vAHMKEZsuLCcwInPPOQgF729h0A10YkaTw==
+X-Received: by 2002:aa7:c81a:: with SMTP id a26mr9175586edt.26.1567077473918; 
+	Thu, 29 Aug 2019 04:17:53 -0700 (PDT)
+Received: from localhost (pD9E51890.dip0.t-ipconnect.de. [217.229.24.144])
+	by smtp.gmail.com with ESMTPSA id y19sm385592edu.90.2019.08.29.04.17.52
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 29 Aug 2019 04:17:53 -0700 (PDT)
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Joerg Roedel <joro@8bytes.org>
+Subject: [PATCH 0/5] iommu: Implement iommu_put_resv_regions_simple()
+Date: Thu, 29 Aug 2019 13:17:47 +0200
+Message-Id: <20190829111752.17513-1-thierry.reding@gmail.com>
+X-Mailer: git-send-email 2.22.0
+MIME-Version: 1.0
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	smtp2.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
-	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>, gurchetansingh@chromium.org,
-	olvaffe@gmail.com
+	smtp1.linux-foundation.org
+Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
+	Will Deacon <will@kernel.org>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	iommu@lists.linux-foundation.org, Robin Murphy <robin.murphy@arm.com>,
+	David Woodhouse <dwmw2@infradead.org>, linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,36 +79,38 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Make sure we don't leak half-initialized fences outside the driver.
+From: Thierry Reding <treding@nvidia.com>
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/virtio/virtgpu_fence.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Most IOMMU drivers only need to free the memory allocated for each
+reserved region. Instead of open-coding the loop to do this in each
+driver, extract the code into a common function that can be used by
+all these drivers.
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_fence.c b/drivers/gpu/drm/virtio/virtgpu_fence.c
-index a0514f5bd006..a4b9881ca1d3 100644
---- a/drivers/gpu/drm/virtio/virtgpu_fence.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_fence.c
-@@ -41,6 +41,10 @@ bool virtio_fence_signaled(struct dma_fence *f)
- {
- 	struct virtio_gpu_fence *fence = to_virtio_fence(f);
- 
-+	if (WARN_ON_ONCE(fence->f.seqno == 0))
-+		/* leaked fence outside driver before completing
-+		 * initialization with virtio_gpu_fence_emit */
-+		return false;
- 	if (atomic64_read(&fence->drv->last_seq) >= fence->f.seqno)
- 		return true;
- 	return false;
+Thierry
+
+Thierry Reding (5):
+  iommu: Implement iommu_put_resv_regions_simple()
+  iommu: arm: Use iommu_put_resv_regions_simple()
+  iommu: amd: Use iommu_put_resv_regions_simple()
+  iommu: intel: Use iommu_put_resv_regions_simple()
+  iommu: virt: Use iommu_put_resv_regions_simple()
+
+ drivers/iommu/amd_iommu.c    | 11 +----------
+ drivers/iommu/arm-smmu-v3.c  | 11 +----------
+ drivers/iommu/arm-smmu.c     | 11 +----------
+ drivers/iommu/intel-iommu.c  | 11 +----------
+ drivers/iommu/iommu.c        | 19 +++++++++++++++++++
+ drivers/iommu/virtio-iommu.c | 14 +++-----------
+ include/linux/iommu.h        |  2 ++
+ 7 files changed, 28 insertions(+), 51 deletions(-)
+
 -- 
-2.18.1
+2.22.0
 
 _______________________________________________
 Virtualization mailing list
