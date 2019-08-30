@@ -2,61 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF9E0A358A
-	for <lists.virtualization@lfdr.de>; Fri, 30 Aug 2019 13:17:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55D4EA38BF
+	for <lists.virtualization@lfdr.de>; Fri, 30 Aug 2019 16:04:38 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EF53D5DCC;
-	Fri, 30 Aug 2019 11:17:48 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 222E3618E;
+	Fri, 30 Aug 2019 14:04:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 37E275C81
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CFEF35BE7
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 30 Aug 2019 11:16:08 +0000 (UTC)
+	Fri, 30 Aug 2019 14:02:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 39C26E6
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EFC6013A
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 30 Aug 2019 11:16:07 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Fri, 30 Aug 2019 14:02:40 +0000 (UTC)
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+	[209.85.222.199])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 5A3353CA0C;
-	Fri, 30 Aug 2019 11:16:06 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-95.ams2.redhat.com
-	[10.36.116.95])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id DA4755C207;
-	Fri, 30 Aug 2019 11:16:05 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 1CE2217536; Fri, 30 Aug 2019 13:16:05 +0200 (CEST)
-Date: Fri, 30 Aug 2019 13:16:05 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: David Riley <davidriley@chromium.org>
-Subject: Re: [PATCH] drm/virtio: Use vmalloc for command buffer allocations.
-Message-ID: <20190830111605.twzssycagmjhfa45@sirius.home.kraxel.org>
-References: <20190829212417.257397-1-davidriley@chromium.org>
-	<20190830060857.tzrzgoi2hrmchdi5@sirius.home.kraxel.org>
-	<CAASgrz2v0DYb_5A3MnaWFM4Csx1DKkZe546v7DG7R+UyLOA8og@mail.gmail.com>
+	by mx1.redhat.com (Postfix) with ESMTPS id 430C0C057E16
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 30 Aug 2019 14:02:40 +0000 (UTC)
+Received: by mail-qk1-f199.google.com with SMTP id o4so7420901qkg.11
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 30 Aug 2019 07:02:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=dm3SQV6KNXW2r52/sYgn7Fx2GIZBh2qt4DQKQJwM1eI=;
+	b=L9vgCgIOwMDVCUL4hj07HyQHoP8ECiyka+Yursv/SuDo4qa5LarrRA3fQF5lx0jgH7
+	+KQjtGhATpfV0KqwGyyjFkjbmV81culQ75jXUk04vvi4Hc9J0D39Gz/x5iDEZszTefYl
+	iCTqbJY/gSoCuPJpYFDv3RbKcJnQWKnswXVPfa1EWRaq9la1KCtAv1u41/jU+qTsP54X
+	mLcc8FIKwCcxFulbOrMkqNml9L6qI9n06hlQ2iF2TMCsZPf16kczhk/wlM3sH6YrTeaZ
+	DIGOaHiK7gIAT77BbNLVUjWlQX1nbQCCwxnB1fa+cPMxMEawXWMiiqWcPesOVnXIuoMF
+	oLVg==
+X-Gm-Message-State: APjAAAX6UsCxOyNVxv7kqz1TxI046JZxPuF8btLhk3LGS+tGansPS/Qj
+	UiYVBGo1i2BSM/GRulHL5izDKzhcB7+ZW/nbedkCdPeow6Uu/Sj4vBR9sIBdL4OqkiiCJvizxI7
+	TpexfDvobkBm2RRj6IgHk1qGesqJiowBHIU6kY9Aq7Q==
+X-Received: by 2002:ae9:e207:: with SMTP id c7mr14781981qkc.262.1567173759587; 
+	Fri, 30 Aug 2019 07:02:39 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqyzpK/f9AAF+jxF06AYZCj6OSOKjlMicezFhcQw9CYKtXu7XbuSnQ4ytRP0nU0sisqBK38Nqw==
+X-Received: by 2002:ae9:e207:: with SMTP id c7mr14781962qkc.262.1567173759358; 
+	Fri, 30 Aug 2019 07:02:39 -0700 (PDT)
+Received: from redhat.com (bzq-79-180-62-110.red.bezeqint.net. [79.180.62.110])
+	by smtp.gmail.com with ESMTPSA id
+	v13sm2651158qkj.109.2019.08.30.07.02.35
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 30 Aug 2019 07:02:37 -0700 (PDT)
+Date: Fri, 30 Aug 2019 10:02:32 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Matej Genci <matej.genci@nutanix.com>
+Subject: Re: [PATCH] virtio: Change typecasts in vring_init()
+Message-ID: <20190830095928-mutt-send-email-mst@kernel.org>
+References: <20190827152000.53920-1-matej.genci@nutanix.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAASgrz2v0DYb_5A3MnaWFM4Csx1DKkZe546v7DG7R+UyLOA8og@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.39]);
-	Fri, 30 Aug 2019 11:16:06 +0000 (UTC)
+In-Reply-To: <20190827152000.53920-1-matej.genci@nutanix.com>
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	=?utf-8?B?U3TDqXBoYW5l?= Marchesin <marcheu@chromium.org>,
-	virtualization@lists.linux-foundation.org
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,36 +85,49 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-  Hi,
-
-> > > -     kfree(vbuf->data_buf);
-> > > +     kvfree(vbuf->data_buf);
-> >
-> > if (is_vmalloc_addr(vbuf->data_buf)) ...
-> >
-> > needed here I gues?
-> >
+On Tue, Aug 27, 2019 at 03:20:57PM +0000, Matej Genci wrote:
+> Compilers such as g++ 7.3 complain about assigning void* variable to
+> a non-void* variable (like struct pointers) and pointer arithmetics
+> on void*.
 > 
-> kvfree() handles vmalloc/kmalloc/kvmalloc internally by doing that check.
+> Signed-off-by: Matej Genci <matej.genci@nutanix.com>
+> ---
+>  include/uapi/linux/virtio_ring.h | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
+> 
+> diff --git a/include/uapi/linux/virtio_ring.h b/include/uapi/linux/virtio_ring.h
+> index 4c4e24c291a5..2c339b9e2923 100644
+> --- a/include/uapi/linux/virtio_ring.h
+> +++ b/include/uapi/linux/virtio_ring.h
+> @@ -168,10 +168,11 @@ static inline void vring_init(struct vring *vr, unsigned int num, void *p,
+>  			      unsigned long align)
+>  {
+>  	vr->num = num;
+> -	vr->desc = p;
+> -	vr->avail = p + num*sizeof(struct vring_desc);
+> -	vr->used = (void *)(((uintptr_t)&vr->avail->ring[num] + sizeof(__virtio16)
+> -		+ align-1) & ~(align - 1));
+> +	vr->desc = (struct vring_desc *)p;
+> +	vr->avail = (struct vring_avail *)((uintptr_t)p
+> +		+ num*sizeof(struct vring_desc));
+> +	vr->used = (struct vring_used *)(((uintptr_t)&vr->avail->ring[num]
+> +		+ sizeof(__virtio16) + align-1) & ~(align - 1));
+>  }
+>  
+>  static inline unsigned vring_size(unsigned int num, unsigned long align)
 
-Ok.
+I'm not really interested in building with g++, sorry.
+Centainly not if it makes code less robust by forcing
+casts where they weren't previously necessary.
 
-> - videobuf_vmalloc_to_sg in drivers/media/v4l2-core/videobuf-dma-sg.c,
-> assumes contiguous array of scatterlist and that the buffer being converted
-> is page aligned
+However, vring_init and vring_size are legacy APIs anyway,
+so I'd be happy to add ifndefs that will allow userspace
+simply hide these functions if it does not need them.
 
-Well, vmalloc memory _is_ page aligned.
 
-sg_alloc_table_from_pages() does alot of what you need, you just need a
-small loop around vmalloc_to_page() create a struct page array
-beforehand.
-
-Completely different approach: use get_user_pages() and don't copy the
-execbuffer at all.
-
-cheers,
-  Gerd
-
+> -- 
+> 2.22.0
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
