@@ -2,70 +2,55 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F968A28E7
-	for <lists.virtualization@lfdr.de>; Thu, 29 Aug 2019 23:26:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2B2CA2D70
+	for <lists.virtualization@lfdr.de>; Fri, 30 Aug 2019 05:39:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id ABDB1566C;
-	Thu, 29 Aug 2019 21:26:08 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 944975AFC;
+	Fri, 30 Aug 2019 03:39:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 032B85108
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E45C5556C
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 21:24:27 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 825B68AA
+	Fri, 30 Aug 2019 03:37:34 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7B76D13A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 21:24:26 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id m3so2248285pgv.13
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 14:24:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=E2P9cOC9rhcxBzt6NHNxzx1T9WKYvIwrZWNTN0rkY+s=;
-	b=h0jTQN3TrKHnWNcg4cy77XJ0Co8Zx9n1Djd8fwUQW0bwNR3x0a6yxAkmXQyKGJ0vuP
-	2HpX11DY6L3hw3NBb+hAtyV/Ga22TIDS/NvuS5CEUbOTIw9b4QOdmT1FdD8gNz1QHFby
-	OVTmlgN4RoKEVolCdsq3rEd/zNSOYd16GWfJ4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=E2P9cOC9rhcxBzt6NHNxzx1T9WKYvIwrZWNTN0rkY+s=;
-	b=nl2w++r3swTmJN6qRrGRm4/25RqPL6JGSf+xVp/YREns6LEyBid4pcwndOhHFTuq+S
-	xK1vRpF/e0dshGGVnQF++8rHXkRM45RL2qYcLmtuzS9V/IghkEEl0XN3V3IgebuZIzt3
-	t81sx4VE44FyGJmOUUAsr/Ncap5nmYFf/kz3cmK88e+261LuC2v+WSvHtDQCoECqgyfV
-	TWHsbTiW/l6xw5XGa/VQ9guxy4brF/efWFiBIgaHWCcPWSWGD6bh9FotYuPP7sCXQmPJ
-	Y4yLgqZLWVEPLASNF8C+MZuBIZ/a7QWCy/7d7HMuzVq1syuShfogEhdGtOHnJ5TO9C4S
-	m6bg==
-X-Gm-Message-State: APjAAAUhC+RskovvBtUGhfbUpSvMdCAPGaE5ExdVT2ioP/g3zg7Z1o6z
-	yrnIFFZGLvp2bUHWjTjMTl/g4g==
-X-Google-Smtp-Source: APXvYqwrArfkjixaiROj/5i5BAEgcr0XtH1eJ8V9j+D6f55gAYz46DjrMy53tXXCLTJpgC2htTwUPA==
-X-Received: by 2002:a63:f357:: with SMTP id t23mr10380346pgj.421.1567113866106;
-	Thu, 29 Aug 2019 14:24:26 -0700 (PDT)
-Received: from localhost ([2620:15c:202:1:e9ae:bd45:1bd9:e60d])
-	by smtp.gmail.com with ESMTPSA id o9sm2972126pgv.19.2019.08.29.14.24.25
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 29 Aug 2019 14:24:25 -0700 (PDT)
-From: David Riley <davidriley@chromium.org>
-To: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-Subject: [PATCH] drm/virtio: Use vmalloc for command buffer allocations.
-Date: Thu, 29 Aug 2019 14:24:17 -0700
-Message-Id: <20190829212417.257397-1-davidriley@chromium.org>
-X-Mailer: git-send-email 2.23.0.187.g17f5b7556c-goog
+	Fri, 30 Aug 2019 03:37:34 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id B2083C050DEC;
+	Fri, 30 Aug 2019 03:37:33 +0000 (UTC)
+Received: from [10.72.12.92] (ovpn-12-92.pek2.redhat.com [10.72.12.92])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 09030600CD;
+	Fri, 30 Aug 2019 03:37:25 +0000 (UTC)
+Subject: Re: [PATCH 1/2] vhost/test: fix build for vhost test
+To: Tiwei Bie <tiwei.bie@intel.com>, mst@redhat.com
+References: <20190828053700.26022-1-tiwei.bie@intel.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <f44555de-6a9d-256f-5526-9457607e6a47@redhat.com>
+Date: Fri, 30 Aug 2019 11:37:24 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+In-Reply-To: <20190828053700.26022-1-tiwei.bie@intel.com>
+Content-Type: multipart/mixed; boundary="------------8E2AB2F168E0B8F9B8B7B5E9"
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.32]);
+	Fri, 30 Aug 2019 03:37:33 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	=?UTF-8?q?St=C3=A9phane=20Marchesin?= <marcheu@chromium.org>
+Cc: netdev@vger.kernel.org, stable@vger.kernel.org,
+	linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,160 +62,103 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Userspace requested command buffer allocations could be too large
-to make as a contiguous allocation.  Use vmalloc if necessary to
-satisfy those allocations.
+This is a multi-part message in MIME format.
+--------------8E2AB2F168E0B8F9B8B7B5E9
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: David Riley <davidriley@chromium.org>
----
- drivers/gpu/drm/virtio/virtgpu_ioctl.c |  4 +-
- drivers/gpu/drm/virtio/virtgpu_vq.c    | 74 ++++++++++++++++++++++++--
- 2 files changed, 73 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-index ac60be9b5c19..a8732a8af766 100644
---- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-@@ -195,7 +195,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
- 	if (ret)
- 		goto out_free;
- 
--	buf = memdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
-+	buf = vmemdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
- 	if (IS_ERR(buf)) {
- 		ret = PTR_ERR(buf);
- 		goto out_unresv;
-@@ -230,7 +230,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
- 	return 0;
- 
- out_memdup:
--	kfree(buf);
-+	kvfree(buf);
- out_unresv:
- 	ttm_eu_backoff_reservation(&ticket, &validate_list);
- out_free:
-diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-index 981ee16e3ee9..bcbc48b7284f 100644
---- a/drivers/gpu/drm/virtio/virtgpu_vq.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-@@ -154,7 +154,7 @@ static void free_vbuf(struct virtio_gpu_device *vgdev,
- {
- 	if (vbuf->resp_size > MAX_INLINE_RESP_SIZE)
- 		kfree(vbuf->resp_buf);
--	kfree(vbuf->data_buf);
-+	kvfree(vbuf->data_buf);
- 	kmem_cache_free(vgdev->vbufs, vbuf);
- }
- 
-@@ -251,6 +251,59 @@ void virtio_gpu_dequeue_cursor_func(struct work_struct *work)
- 	wake_up(&vgdev->cursorq.ack_queue);
- }
- 
-+/* How many bytes left in this page. */
-+static unsigned int rest_of_page(void *data)
-+{
-+	return PAGE_SIZE - offset_in_page(data);
-+}
-+
-+/* Create sg_table from a vmalloc'd buffer. */
-+static struct sg_table *vmalloc_to_sgt(char *data, uint32_t size)
-+{
-+	int nents, ret, s, i;
-+	struct sg_table *sgt;
-+	struct scatterlist *sg;
-+	struct page *pg;
-+
-+	sgt = kmalloc(sizeof(*sgt), GFP_KERNEL);
-+	if (!sgt)
-+		return NULL;
-+
-+	nents = DIV_ROUND_UP(size, PAGE_SIZE) + 1;
-+	ret = sg_alloc_table(sgt, nents, GFP_KERNEL);
-+	if (ret) {
-+		kfree(sgt);
-+		return NULL;
-+	}
-+
-+	for_each_sg(sgt->sgl, sg, nents, i) {
-+		pg = vmalloc_to_page(data);
-+		if (!pg) {
-+			sg_free_table(sgt);
-+			kfree(sgt);
-+			return NULL;
-+		}
-+
-+		s = rest_of_page(data);
-+		if (s > size)
-+			s = size;
-+
-+		sg_set_page(sg, pg, s, offset_in_page(data));
-+
-+		size -= s;
-+		data += s;
-+
-+		if (size) {
-+			sg_unmark_end(sg);
-+		} else {
-+			sg_mark_end(sg);
-+			break;
-+		}
-+	}
-+
-+	return sgt;
-+}
-+
- static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
- 					       struct virtio_gpu_vbuffer *vbuf)
- 		__releases(&vgdev->ctrlq.qlock)
-@@ -260,6 +313,7 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
- 	struct scatterlist *sgs[3], vcmd, vout, vresp;
- 	int outcnt = 0, incnt = 0;
- 	int ret;
-+	struct sg_table *sgt = NULL;
- 
- 	if (!vgdev->vqs_ready)
- 		return -ENODEV;
-@@ -269,8 +323,17 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
- 	outcnt++;
- 
- 	if (vbuf->data_size) {
--		sg_init_one(&vout, vbuf->data_buf, vbuf->data_size);
--		sgs[outcnt + incnt] = &vout;
-+		if (is_vmalloc_addr(vbuf->data_buf)) {
-+			spin_unlock(&vgdev->ctrlq.qlock);
-+			sgt = vmalloc_to_sgt(vbuf->data_buf, vbuf->data_size);
-+			spin_lock(&vgdev->ctrlq.qlock);
-+			if (!sgt)
-+				return -ENOMEM;
-+			sgs[outcnt + incnt] = sgt->sgl;
-+		} else {
-+			sg_init_one(&vout, vbuf->data_buf, vbuf->data_size);
-+			sgs[outcnt + incnt] = &vout;
-+		}
- 		outcnt++;
- 	}
- 
-@@ -294,6 +357,11 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
- 		virtqueue_kick(vq);
- 	}
- 
-+	if (sgt) {
-+		sg_free_table(sgt);
-+		kfree(sgt);
-+	}
-+
- 	if (!ret)
- 		ret = vq->num_free;
- 	return ret;
--- 
-2.23.0.187.g17f5b7556c-goog
+On 2019/8/28 =E4=B8=8B=E5=8D=881:36, Tiwei Bie wrote:
+> Since below commit, callers need to specify the iov_limit in
+> vhost_dev_init() explicitly.
+>
+> Fixes: b46a0bf78ad7 ("vhost: fix OOB in get_rx_bufs()")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Tiwei Bie <tiwei.bie@intel.com>
+> ---
+>  drivers/vhost/test.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/vhost/test.c b/drivers/vhost/test.c
+> index 9e90e969af55..ac4f762c4f65 100644
+> --- a/drivers/vhost/test.c
+> +++ b/drivers/vhost/test.c
+> @@ -115,7 +115,7 @@ static int vhost_test_open(struct inode *inode, str=
+uct file *f)
+>  	dev =3D &n->dev;
+>  	vqs[VHOST_TEST_VQ] =3D &n->vqs[VHOST_TEST_VQ];
+>  	n->vqs[VHOST_TEST_VQ].handle_kick =3D handle_vq_kick;
+> -	vhost_dev_init(dev, vqs, VHOST_TEST_VQ_MAX);
+> +	vhost_dev_init(dev, vqs, VHOST_TEST_VQ_MAX, UIO_MAXIOV);
+> =20
+>  	f->private_data =3D n;
+> =20
+
+
+Acked-by: Jason Wang <jasowang@redhat.com>
+
+
+
+--------------8E2AB2F168E0B8F9B8B7B5E9
+Content-Type: application/pgp-keys;
+ name="pEpkey.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="pEpkey.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+JJaQ8I7hEjBpmSTF4uR0ETUJmQbCBynU
+=3DCBPY
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------8E2AB2F168E0B8F9B8B7B5E9
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--------------8E2AB2F168E0B8F9B8B7B5E9--
