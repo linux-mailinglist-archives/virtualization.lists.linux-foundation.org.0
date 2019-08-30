@@ -2,69 +2,79 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D42CA301D
-	for <lists.virtualization@lfdr.de>; Fri, 30 Aug 2019 08:38:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96290A344D
+	for <lists.virtualization@lfdr.de>; Fri, 30 Aug 2019 11:43:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5F55D5BEF;
-	Fri, 30 Aug 2019 06:38:22 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1AAB95D41;
+	Fri, 30 Aug 2019 09:42:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9EE975BE4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 198B25CCE
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 30 Aug 2019 06:36:44 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E7FC213A
+	Fri, 30 Aug 2019 09:41:07 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3BABFF1
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 30 Aug 2019 06:36:43 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id k2so4613540wmj.4
+	Fri, 30 Aug 2019 09:41:06 +0000 (UTC)
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+	[209.85.128.71])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 7D051C059B7A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 29 Aug 2019 23:36:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Kk8x3cKyvvXICceum0INWYEPewq78FbjmDWi29s8UWM=;
-	b=QIdRALQscUj1g5pKhrT+kqnbA1s1DJFRuUEErgbicE2+DP/FHUc1xZmMRmRok1pdPJ
-	BgmW/KHS6p8w+iIYlgwIbgMvOpHM14YoaDcSm49QJwXEwTb7Rs0lPNDkqLyzdh/Rs3Si
-	FpZAgsQXNOx3X1q0XJZiN7PlRWBCXvApkWmKw=
+	Fri, 30 Aug 2019 09:41:05 +0000 (UTC)
+Received: by mail-wm1-f71.google.com with SMTP id b11so2297969wmj.0
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 30 Aug 2019 02:41:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Kk8x3cKyvvXICceum0INWYEPewq78FbjmDWi29s8UWM=;
-	b=BjBmKU735uHuaeJNEGMTvrEvcxeiYsKpMF2tBVJ/bLxEGkWllkSSFIM5nAxl6Zo/8Z
-	XVRlXftgIm4wFKwg2qrrBSe0Yx+rjasrti8dBebzdDCjvaW10ZUpw/f5zqUSwAUUhsvA
-	idOmXvnMgi96pVLNX0//3pscYUo7h4Cydd3nDLoYkFjwQXmrTZilraKMEWgjl731WtuP
-	xSVz/BP6U8Sil8XZo1Ks9OWUbvhpF0m+BPSZKboFZEajV7BqR4jNGwCl3vqSG4+C0aq7
-	X52LDRL0DsOHCu08X5QEg7v8syT/yy+XNKnvLaIPWGg9ET9RKXtBGXWb+8ryIcbvYfka
-	eicg==
-X-Gm-Message-State: APjAAAUVd4kmvJBO5Um5OH4DM1USFOT/IowzpUlzf+/YzEe0SQxHH0Jw
-	Ja2LSsnLBDXGZROmucW8OXVsETOlTm4mLpnGt9F+Qg==
-X-Google-Smtp-Source: APXvYqz362DNbXCxqBJOcBjnm+Qh+pOH4b4faggNpPXu9chV19w7iO+en8zEk7AMRyHYLrvQQzN2TO3RTAlICTUm6U8=
-X-Received: by 2002:a1c:7319:: with SMTP id d25mr14416105wmb.123.1567147002204;
-	Thu, 29 Aug 2019 23:36:42 -0700 (PDT)
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=kV8MoK4zo74Y5DGCQJLGcYeGhPzzvX5u0gV32d1E+3k=;
+	b=Rmy+xNZ/swJIYJtnBRrvIUOwSj8YUvcjyR4gTDlgWqTdR0JYV8XXdKn9WbM/QcNxCa
+	MrAC8665dgggfhyndGUpE3Oxm6ZEKtd3r0OAAcWD8ja0IBWaeLZBmhzWKYOI+ovwMksd
+	WBcUXcLyV9l0IBO0aWqAWi2hrsef3u3iWQpLNV/6Rh+XWMvF2zagfJ7OTs7tLbuDIrGU
+	8dYO/drsISb5d03sKY8TzKLWpAADU4EgEe+QOlDyercIkFIpSdUpW5TMgBzFXGJBElgQ
+	SVXXX2Jxct84ZUOWAlXROYPusCaDNC2xuJir7UgCIFK82gLbhUHPkFUB9FtTdasXg+g7
+	aAvw==
+X-Gm-Message-State: APjAAAVPy8+wHrmHUGBQcorHQT+CeCxTNPZsAQtmnVA+LQcGaK83E9Ki
+	7MPHShnpjtIKxxq3umwZ9GUVYfSgzC8cF3BmVqITIRytlqnQO+Ony+ubvsLo4hMWmMHI8oSsauB
+	DQi9/CoKzlgAO52IXlQeZD7cByC7/w/tqSsyU30nI6g==
+X-Received: by 2002:a05:6000:1002:: with SMTP id
+	a2mr5516610wrx.28.1567158064024; 
+	Fri, 30 Aug 2019 02:41:04 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzM/jUL1y2rI43opYvOASgV8Zt/IRRsHiQXSp3BkM+SWkgtSeboge6QBt/hSUqVBlcs47bGGA==
+X-Received: by 2002:a05:6000:1002:: with SMTP id
+	a2mr5516548wrx.28.1567158063481; 
+	Fri, 30 Aug 2019 02:41:03 -0700 (PDT)
+Received: from steredhat (host122-201-dynamic.13-79-r.retail.telecomitalia.it.
+	[79.13.201.122]) by smtp.gmail.com with ESMTPSA id
+	w13sm12490070wre.44.2019.08.30.02.41.01
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 30 Aug 2019 02:41:02 -0700 (PDT)
+Date: Fri, 30 Aug 2019 11:40:59 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>
+Subject: Re: [PATCH v4 1/5] vsock/virtio: limit the memory used per-socket
+Message-ID: <20190830094059.c7qo5cxrp2nkrncd@steredhat>
+References: <20190717113030.163499-1-sgarzare@redhat.com>
+	<20190717113030.163499-2-sgarzare@redhat.com>
+	<20190729095956-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-References: <20190829212417.257397-1-davidriley@chromium.org>
-	<20190830060857.tzrzgoi2hrmchdi5@sirius.home.kraxel.org>
-In-Reply-To: <20190830060857.tzrzgoi2hrmchdi5@sirius.home.kraxel.org>
-From: David Riley <davidriley@chromium.org>
-Date: Thu, 29 Aug 2019 23:36:30 -0700
-Message-ID: <CAASgrz2v0DYb_5A3MnaWFM4Csx1DKkZe546v7DG7R+UyLOA8og@mail.gmail.com>
-Subject: Re: [PATCH] drm/virtio: Use vmalloc for command buffer allocations.
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, HTML_MESSAGE,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190729095956-mutt-send-email-mst@kernel.org>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	=?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
-	virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,135 +86,101 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6992158318738991922=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
---===============6992158318738991922==
-Content-Type: multipart/alternative; boundary="00000000000060f46005914fd875"
+On Mon, Jul 29, 2019 at 10:04:29AM -0400, Michael S. Tsirkin wrote:
+> On Wed, Jul 17, 2019 at 01:30:26PM +0200, Stefano Garzarella wrote:
+> > Since virtio-vsock was introduced, the buffers filled by the host
+> > and pushed to the guest using the vring, are directly queued in
+> > a per-socket list. These buffers are preallocated by the guest
+> > with a fixed size (4 KB).
+> > 
+> > The maximum amount of memory used by each socket should be
+> > controlled by the credit mechanism.
+> > The default credit available per-socket is 256 KB, but if we use
+> > only 1 byte per packet, the guest can queue up to 262144 of 4 KB
+> > buffers, using up to 1 GB of memory per-socket. In addition, the
+> > guest will continue to fill the vring with new 4 KB free buffers
+> > to avoid starvation of other sockets.
+> > 
+> > This patch mitigates this issue copying the payload of small
+> > packets (< 128 bytes) into the buffer of last packet queued, in
+> > order to avoid wasting memory.
+> > 
+> > Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+> > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+> 
+> This is good enough for net-next, but for net I think we
+> should figure out how to address the issue completely.
+> Can we make the accounting precise? What happens to
+> performance if we do?
+> 
 
---00000000000060f46005914fd875
-Content-Type: text/plain; charset="UTF-8"
+Since I'm back from holidays, I'm restarting this thread to figure out
+how to address the issue completely.
 
-On Thu, Aug 29, 2019 at 11:09 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
+I did a better analysis of the credit mechanism that we implemented in
+virtio-vsock to get a clearer view and I'd share it with you:
 
->   Hi,
->
-> >  {
-> >       if (vbuf->resp_size > MAX_INLINE_RESP_SIZE)
-> >               kfree(vbuf->resp_buf);
-> > -     kfree(vbuf->data_buf);
-> > +     kvfree(vbuf->data_buf);
->
-> if (is_vmalloc_addr(vbuf->data_buf)) ...
->
-> needed here I gues?
->
+    This issue affect only the "host->guest" path. In this case, when the
+    host wants to send a packet to the guest, it uses a "free" buffer
+    allocated by the guest (4KB).
+    The "free" buffers available for the host are shared between all
+    sockets, instead, the credit mechanism is per-socket, I think to
+    avoid the starvation of others sockets.
+    The guests re-fill the "free" queue when the available buffers are
+    less than half.
 
-kvfree() handles vmalloc/kmalloc/kvmalloc internally by doing that check.
+    Each peer have these variables in the per-socket state:
+       /* local vars */
+       buf_alloc        /* max bytes usable by this socket
+                           [exposed to the other peer] */
+       fwd_cnt          /* increased when RX packet is consumed by the
+                           user space [exposed to the other peer] */
+       tx_cnt 	        /* increased when TX packet is sent to the other peer */
 
+       /* remote vars  */
+       peer_buf_alloc   /* peer's buf_alloc */
+       peer_fwd_cnt     /* peer's fwd_cnt */
 
->
-> > +/* Create sg_table from a vmalloc'd buffer. */
-> > +static struct sg_table *vmalloc_to_sgt(char *data, uint32_t size)
->
-> Hmm, isn't there an existing function for that?
-> I'd be surprised if virtio-gpu is the first driver needing this ...
->
-> And it case there really isn't one this should probably added to the
-> vmalloc or scatterlist code, not the virtio-gpu driver.
->
+    When a peer sends a packet, it increases the 'tx_cnt'; when the
+    receiver consumes the packet (copy it to the user-space buffer), it
+    increases the 'fwd_cnt'.
+    Note: increments are made considering the payload length and not the
+    buffer length.
 
-There's a few other similar ones around:
-- pack_sg_list in net/9p/trans_virtio.c, assumes contiguous array of
-scatterlist and non-vmalloc
-- videobuf_vmalloc_to_sg in drivers/media/v4l2-core/videobuf-dma-sg.c,
-assumes contiguous array of scatterlist and that the buffer being converted
-is page aligned (the l
-- vmalloc_to_sg() in drivers/media/common/saa7146/saa7146_core.c, duplicate
-of videobuf_vmalloc_to_sg
+    The value of 'buf_alloc' and 'fwd_cnt' are sent to the other peer in
+    all packet headers or with an explicit CREDIT_UPDATE packet.
 
-None of the existing ones seemed to do what was needed and the convention
-seemed to pack an sg table as needed for the usage and just keep it in the
-module so that's what I followed.  I'm not very familiar with these APIs so
-maybe there's something I missed, but I did look through the helpers in
-lib/scatterlist.c and didn't see anything.  If you think it is better
-suited to live in scatterlist I can prepare another change for that.
+    The local 'buf_alloc' value can be modified by the user space using
+    setsockopt() with optname=SO_VM_SOCKETS_BUFFER_SIZE.
 
-Dave
+    Before to send a packet, the peer checks the space available:
+    	credit_available = peer_buf_alloc - (tx_cnt - peer_fwd_cnt)
+    and it will send up to credit_available bytes to the other peer.
 
->
-> cheers,
->   Gerd
->
->
+Possible solutions considering Michael's advice:
+1. Use the buffer length instead of the payload length when we increment
+   the counters:
+  - This approach will account precisely the memory used per socket.
+  - This requires changes in both guest and host.
+  - It is not compatible with old drivers, so a feature should be negotiated.
 
---00000000000060f46005914fd875
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+2. Decrease the advertised 'buf_alloc' taking count of bytes queued in
+   the socket queue but not used. (e.g. 256 byte used on 4K available in
+   the buffer)
+  - pkt->hdr.buf_alloc = buf_alloc - bytes_not_used.
+  - This should be compatible also with old drivers.
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 29, 2019 at 11:09 PM Gerd=
- Hoffmann &lt;<a href=3D"mailto:kraxel@redhat.com">kraxel@redhat.com</a>&gt=
-; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=C2=A0 =
-Hi,<br>
-<br>
-&gt;=C2=A0 {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (vbuf-&gt;resp_size &gt; MAX_INLINE_RESP_=
-SIZE)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0kfree(vbuf-&gt;r=
-esp_buf);<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0kfree(vbuf-&gt;data_buf);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0kvfree(vbuf-&gt;data_buf);<br>
-<br>
-if (is_vmalloc_addr(vbuf-&gt;data_buf)) ...<br>
-<br>
-needed here I gues?<br></blockquote><div><br></div><div>kvfree() handles vm=
-alloc/kmalloc/kvmalloc internally by doing that check.</div><div>=C2=A0</di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
-r-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-&gt; +/* Create sg_table from a vmalloc&#39;d buffer. */<br>
-&gt; +static struct sg_table *vmalloc_to_sgt(char *data, uint32_t size)<br>
-<br>
-Hmm, isn&#39;t there an existing function for that?<br>
-I&#39;d be surprised if virtio-gpu is the first driver needing this ...<br>
-<br>
-And it case there really isn&#39;t one this should probably added to the<br=
->
-vmalloc or scatterlist code, not the virtio-gpu driver.<br></blockquote><di=
-v><br></div><div>There&#39;s a few other similar ones around:</div><div>- p=
-ack_sg_list in net/9p/trans_virtio.c, assumes contiguous=C2=A0array of scat=
-terlist and non-vmalloc</div><div>-=C2=A0videobuf_vmalloc_to_sg in=C2=A0dri=
-vers/media/v4l2-core/videobuf-dma-sg.c, assumes contiguous array of scatter=
-list and that the buffer being converted is page aligned (the l</div><div>-=
- vmalloc_to_sg() in drivers/media/common/saa7146/saa7146_core.c, duplicate =
-of videobuf_vmalloc_to_sg</div><div><br></div><div>None of the existing one=
-s seemed to do what was needed and the convention seemed to pack an sg tabl=
-e as needed for the usage and just keep it in the module so that&#39;s what=
- I followed.=C2=A0 I&#39;m not very familiar with these APIs so maybe there=
-&#39;s something I missed, but I did look through the helpers in lib/scatte=
-rlist.c and didn&#39;t see anything.=C2=A0 If you think it is better suited=
- to live in scatterlist I can prepare another change for that.</div><div><b=
-r></div><div>Dave</div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-cheers,<br>
-=C2=A0 Gerd<br>
-<br>
-</blockquote></div></div>
+Maybe the second is less invasive, but will it be too tricky?
+Any other advice or suggestions?
 
---00000000000060f46005914fd875--
-
---===============6992158318738991922==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Thanks in advance,
+Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6992158318738991922==--
