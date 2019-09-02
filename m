@@ -2,73 +2,84 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54D49A599D
-	for <lists.virtualization@lfdr.de>; Mon,  2 Sep 2019 16:43:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F20BFA5A02
+	for <lists.virtualization@lfdr.de>; Mon,  2 Sep 2019 17:02:04 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 15E92CAA;
-	Mon,  2 Sep 2019 14:43:09 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 72867D39;
+	Mon,  2 Sep 2019 15:01:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4966FCAA
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 34E17D39
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  2 Sep 2019 14:43:08 +0000 (UTC)
+	Mon,  2 Sep 2019 15:01:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 737E87DB
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C2BD8709
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  2 Sep 2019 14:43:07 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id B6FAEAE89;
-	Mon,  2 Sep 2019 14:43:05 +0000 (UTC)
-Subject: Re: [PATCH 5/5] drm/qxl: use drm_gem_ttm_print_info
-To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
-References: <20190902124126.7700-1-kraxel@redhat.com>
-	<20190902124126.7700-6-kraxel@redhat.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Openpgp: preference=signencrypt
-Autocrypt: addr=tzimmermann@suse.de; keydata=
-	xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
-	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
-	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
-	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
-	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
-	AAHNKFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmNvbT7CwJQEEwEIAD4W
-	IQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznTtgIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgID
-	AQIeAQIXgAAKCRBoDcEdUwt6I7D7CACBK42XW+7mCiK8ioXMEy1NzGbXC51RzGea8N83oEJS
-	1KVUtQxrkDxgrW/WLSl/TfqHFsJpdEFOv1XubWbleun3uKPy0e5vZCd5UjZPkeNjnqfCYTDy
-	hVVsdOuFbtWDppJyJrThLqr9AgSFmoCNNUt1SVpYEEOLNE6C32BhlnSq21VLC+YXTgO/ZHTa
-	YXkq54hHj63jwrcjkBSCkXLh37kHeqnl++GHpN+3R+o3w2OpwHAlvVjdKPT27v1tVkiydsFG
-	65Vd0n3m/ft+IOrGgxQM1C20uqKvsZGB4r3OGR50ekAybO7sjEJJ1Obl4ge/6RRqcvKz4LMb
-	tGs85D6tPIeFzsBNBFs50uABCADGJj+DP1fk+UWOWrf4O61HTbC4Vr9QD2K4fUUHnzg2B6zU
-	R1BPXqLGG0+lzK8kfYU/F5RjmEcClsIkAaFkg4kzKP14tvY1J5+AV3yNqcdg018HNtiyrSwI
-	E0Yz/qm1Ot2NMZ0DdvVBg22IMsiudQ1tx9CH9mtyTbIXgACvl3PW2o9CxiHPE/bohFhwZwh/
-	kXYYAE51lhinQ3oFEeQZA3w4OTvxSEspiQR8dg8qJJb+YOAc5IKk6sJmmM7JfFMWSr22satM
-	23oQ3WvJb4RV6HTRTAIEyyZS7g2DhiytgMG60t0qdABG5KXSQW+OKlZRpuWwKWaLh3if/p/u
-	69dvpanbABEBAAHCwHwEGAEIACYWIQRyF/usjOnPY0ShaOVoDcEdUwt6IwUCWznS4AIbDAUJ
-	A8JnAAAKCRBoDcEdUwt6I6X3CACJ8D+TpXBCqJE5xwog08+Dp8uBpx0T9n1wE0GQisZruACW
-	NofYn8PTX9k4wmegDLwt7YQDdKxQ4+eTfZeLNQqWg6OCftH5Kx7sjWnJ09tOgniVdROzWJ7c
-	VJ/i0okazncsJ+nq48UYvRGE1Swh3A4QRIyphWX4OADOBmTFl9ZYNPnh23eaC9WrNvFr7yP7
-	iGjMlfEW8l6Lda//EC5VpXVNza0xeae0zFNst2R9pn+bLkihwDLWxOIyifGRxTqNxoS4I1aw
-	VhxPSVztPMSpIA/sOr/N/p6JrBLn+gui2K6mP7bGb8hF+szfArYqz3T1rv1VzUWAJf5Wre5U
-	iNx9uqqx
-Message-ID: <6648e4f5-8a86-1daa-f6e7-b724980a5be5@suse.de>
-Date: Mon, 2 Sep 2019 16:42:52 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Mon,  2 Sep 2019 15:01:57 +0000 (UTC)
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+	[209.85.160.200])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 1B00681DE3
+	for <virtualization@lists.linux-foundation.org>;
+	Mon,  2 Sep 2019 15:01:57 +0000 (UTC)
+Received: by mail-qt1-f200.google.com with SMTP id u7so5164775qtg.7
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 02 Sep 2019 08:01:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=3eUULgrjIJg0a0dnW4SKY8dVu/LzudzFut/uYLoCkM0=;
+	b=JQuccXJJ67OsOvDJHkcv0mNjbo3YxLqFX646qnLvLEoOejBXtsyIkjordGiznb3+19
+	PEOa9CkRQpjFcM0tBwu2ORawM70xL1GCHaRhZIqYOkGDYrM6SLGdidagoYaQJO4v8XBM
+	CHBWCyQT5qsd4f/PuHqueVFN25cOcxfDbugB8+DUBJdqgZyv30pqmKqW1DK5YAZ6VA1x
+	sAl5M1FwrbUpuBA7txUoQK6S28qGe6mfnEVaOr67zNNp2PGaqnj1iNy3CbugrmW7Ut1f
+	adMA1sMUe6RLzn5CSeo9IU94omY+QYvCvST1Z4KRdNOD5gqC1O0g/isTLd+krYuTehbk
+	bP0g==
+X-Gm-Message-State: APjAAAXBa1OgUrUHvZwF6To+WwJXJHqtQgAtPbmKaXX//+JDVbYTmRck
+	F+FWDgv5zXwrIDWToBBydvb5Edmw2aHItfcg7qV9aKuyFWQmUxw5xLmkbv/bGJqhLUOqPgSiQW+
+	pJ+vLQjn7HJkrpHUeXXNsNO/eYk98vvbLc9+NDbyaKQ==
+X-Received: by 2002:ac8:750e:: with SMTP id u14mr28909656qtq.282.1567436516413;
+	Mon, 02 Sep 2019 08:01:56 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzukZkbHkn1xgGj19iRwoWTZ0EUi0+QeIBA4njsNuROpWrZ/97Kw7ZdMd2ZPPImX2/1Fxx4Fg==
+X-Received: by 2002:ac8:750e:: with SMTP id u14mr28909631qtq.282.1567436516228;
+	Mon, 02 Sep 2019 08:01:56 -0700 (PDT)
+Received: from redhat.com (bzq-79-180-62-110.red.bezeqint.net. [79.180.62.110])
+	by smtp.gmail.com with ESMTPSA id
+	o11sm4589103qkm.105.2019.09.02.08.01.50
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 02 Sep 2019 08:01:55 -0700 (PDT)
+Date: Mon, 2 Sep 2019 11:01:48 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: ? jiang <jiangkidd@hotmail.com>
+Subject: Re: [PATCH v3] virtio-net: lower min ring num_free for efficiency
+Message-ID: <20190902110038-mutt-send-email-mst@kernel.org>
+References: <BYAPR14MB32059DD9439280B66B532351A6AB0@BYAPR14MB3205.namprd14.prod.outlook.com>
 MIME-Version: 1.0
-In-Reply-To: <20190902124126.7700-6-kraxel@redhat.com>
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+Content-Disposition: inline
+In-Reply-To: <BYAPR14MB32059DD9439280B66B532351A6AB0@BYAPR14MB3205.namprd14.prod.outlook.com>
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>,
-	open list <linux-kernel@vger.kernel.org>,
-	"open list:DRM DRIVER FOR QXL VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>
+Cc: "xdp-newbies@vger.kernel.org" <xdp-newbies@vger.kernel.org>,
+	"songliubraving@fb.com" <songliubraving@fb.com>,
+	"jakub.kicinski@netronome.com" <jakub.kicinski@netronome.com>,
+	"hawk@kernel.org" <hawk@kernel.org>,
+	"daniel@iogearbox.net" <daniel@iogearbox.net>,
+	"jiangran.jr@alibaba-inc.com" <jiangran.jr@alibaba-inc.com>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	"john.fastabend@gmail.com" <john.fastabend@gmail.com>,
+	"ast@kernel.org" <ast@kernel.org>, "kafai@fb.com" <kafai@fb.com>,
+	"yhs@fb.com" <yhs@fb.com>, "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	"davem@davemloft.net" <davem@davemloft.net>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -80,114 +91,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3540485744817867524=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============3540485744817867524==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="Clit6RfTTM8Htb9tNSh6wHS8QmmDLqS2V"
+On Tue, Aug 20, 2019 at 02:51:23AM +0000, ? jiang wrote:
+> This change lowers ring buffer reclaim threshold from 1/2*queue to budget
+> for better performance. According to our test with qemu + dpdk, packet
+> dropping happens when the guest is not able to provide free buffer in
+> avail ring timely with default 1/2*queue. The value in the patch has been
+> tested and does show better performance.
+> 
+> Test setup: iperf3 to generate packets to guest (total 30mins, pps 400k, UDP)
+> avg packets drop before: 2842
+> avg packets drop after: 360(-87.3%)
+> 
+> Further, current code suffers from a starvation problem: the amount of
+> work done by try_fill_recv is not bounded by the budget parameter, thus
+> (with large queues) once in a while userspace gets blocked for a long
+> time while queue is being refilled. Trigger refills earlier to make sure
+> the amount of work to do is limited.
+> 
+> Signed-off-by: jiangkidd <jiangkidd@hotmail.com>
+> Acked-by: Jason Wang <jasowang@redhat.com>
+> Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Clit6RfTTM8Htb9tNSh6wHS8QmmDLqS2V
-Content-Type: multipart/mixed; boundary="nnvPW0OXUdx3uGyybx7O16Dcj4tJtS9wE";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
-Cc: David Airlie <airlied@linux.ie>, open list
- <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
-Message-ID: <6648e4f5-8a86-1daa-f6e7-b724980a5be5@suse.de>
-Subject: Re: [PATCH 5/5] drm/qxl: use drm_gem_ttm_print_info
-References: <20190902124126.7700-1-kraxel@redhat.com>
- <20190902124126.7700-6-kraxel@redhat.com>
-In-Reply-To: <20190902124126.7700-6-kraxel@redhat.com>
 
---nnvPW0OXUdx3uGyybx7O16Dcj4tJtS9wE
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Dave, could you merge this please?
 
-Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+Either net or net-next at your discretion.
 
-Am 02.09.19 um 14:41 schrieb Gerd Hoffmann:
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 > ---
->  drivers/gpu/drm/qxl/qxl_drv.h    | 1 +
->  drivers/gpu/drm/qxl/qxl_object.c | 1 +
->  2 files changed, 2 insertions(+)
->=20
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_dr=
-v.h
-> index 9e034c5fa87d..d4051409ce64 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.h
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.h
-> @@ -38,6 +38,7 @@
->  #include <drm/drm_crtc.h>
->  #include <drm/drm_encoder.h>
->  #include <drm/drm_fb_helper.h>
-> +#include <drm/drm_gem_ttm_helper.h>
->  #include <drm/drm_ioctl.h>
->  #include <drm/drm_gem.h>
->  #include <drm/qxl_drm.h>
-> diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl=
-_object.c
-> index 29aab7b14513..c013c516f561 100644
-> --- a/drivers/gpu/drm/qxl/qxl_object.c
-> +++ b/drivers/gpu/drm/qxl/qxl_object.c
-> @@ -86,6 +86,7 @@ static const struct drm_gem_object_funcs qxl_object_f=
-uncs =3D {
->  	.get_sg_table =3D qxl_gem_prime_get_sg_table,
->  	.vmap =3D qxl_gem_prime_vmap,
->  	.vunmap =3D qxl_gem_prime_vunmap,
-> +	.print_info =3D drm_gem_ttm_print_info,
->  };
-> =20
->  int qxl_bo_create(struct qxl_device *qdev,
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Linux GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah
-HRB 21284 (AG N=C3=BCrnberg)
-
-
---nnvPW0OXUdx3uGyybx7O16Dcj4tJtS9wE--
-
---Clit6RfTTM8Htb9tNSh6wHS8QmmDLqS2V
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl1tKmwACgkQaA3BHVML
-eiNabAgAtv1B3wPVXOGKwUAvkeOBYizfbSBQdULp6Jca91gaG1yStTzQuU+yxJqd
-BEZzpuJRtal9jCt7iNOQJKpZuSo66kkyDDn64EYAAoIOxTjC7itN+ZKBl/z9aV+n
-/ztmjcmJadB+O5kvUD4X1D8tJ68EKOgBymdHMQecb9cL9qn54vFwoCzhhrL7/50E
-RNO3HwI7yi7TVNcEvSgsabn+2xH3wpiVYHqOGjN5jRjfizgJuFiULmmckg0adMOJ
-MbjR19Qu8wvvEe3CIa7dVsvCD/zbS0fsoALpsY8lxXsOhjfK9Uh0BmSiV56OP4N2
-Mnq91MRlMwnZB3m8ciAPS8rvxOk8ww==
-=Owph
------END PGP SIGNATURE-----
-
---Clit6RfTTM8Htb9tNSh6wHS8QmmDLqS2V--
-
---===============3540485744817867524==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+>  drivers/net/virtio_net.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> index 0d4115c9e20b..bc08be7925eb 100644
+> --- a/drivers/net/virtio_net.c
+> +++ b/drivers/net/virtio_net.c
+> @@ -1331,7 +1331,7 @@ static int virtnet_receive(struct receive_queue *rq, int budget,
+>  		}
+>  	}
+>  
+> -	if (rq->vq->num_free > virtqueue_get_vring_size(rq->vq) / 2) {
+> +	if (rq->vq->num_free > min((unsigned int)budget, virtqueue_get_vring_size(rq->vq)) / 2) {
+>  		if (!try_fill_recv(vi, rq, GFP_ATOMIC))
+>  			schedule_delayed_work(&vi->refill, 0);
+>  	}
+> -- 
+> 2.11.0
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============3540485744817867524==--
