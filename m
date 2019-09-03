@@ -2,44 +2,44 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4C47A6E28
-	for <lists.virtualization@lfdr.de>; Tue,  3 Sep 2019 18:25:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4C15A6F27
+	for <lists.virtualization@lfdr.de>; Tue,  3 Sep 2019 18:32:19 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 8B22FCBE;
-	Tue,  3 Sep 2019 16:25:09 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BF025D49;
+	Tue,  3 Sep 2019 16:32:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CB7A8B5F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6E6F29D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  3 Sep 2019 16:25:08 +0000 (UTC)
+	Tue,  3 Sep 2019 16:32:12 +0000 (UTC)
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 81E4D8A6
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 244AA712
 	for <virtualization@lists.linux-foundation.org>;
-	Tue,  3 Sep 2019 16:25:08 +0000 (UTC)
+	Tue,  3 Sep 2019 16:32:12 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
 	[73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 563FB23431;
-	Tue,  3 Sep 2019 16:25:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id F155E2343A;
+	Tue,  3 Sep 2019 16:32:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1567527908;
-	bh=Yyh/X5Nvc/YP7vxCIa5rLB+CfoURSPuz+berxUZPKkE=;
+	s=default; t=1567528332;
+	bh=WG6uoZmxjfAMieB1hpPCkzQG0SYx+aPlTDuHzoGfSrQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=CNIu6XuvLUD45W/RvX78c9OI79KXl1MZlNNc5UC1XsvDWoSl0z+2scHqWiYxgi5yw
-	hoDyxgYjvaTjg8OriwMTXjyDvamN7BNFPGkNBGaC5dVjxKX4qg5D9wNTOlGNH3D5ol
-	orvGVMdxnN4ynX+ud9hG0ZdmlwOtIGG13fyIw1z0=
+	b=wFYVmPzOyQlXoAIe6NC0ZRfHzRXIYqZ7OMl666m40GM/YNLqY1AP4fd1LbRjjtiM+
+	eGJpduduePWnyNwKH70EngrkA5d5VjUMdWVbwZgpmb24B1+wtNG/sVdctENmdQFzPn
+	kIgPZHsdYBa0EZEjVt2P2XbNkEVlI2hs6NUrWiwE=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.2 18/23] virtio/s390: fix race on airq_areas[]
-Date: Tue,  3 Sep 2019 12:24:19 -0400
-Message-Id: <20190903162424.6877-18-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 162/167] virtio/s390: fix race on airq_areas[]
+Date: Tue,  3 Sep 2019 12:25:14 -0400
+Message-Id: <20190903162519.7136-162-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190903162424.6877-1-sashal@kernel.org>
-References: <20190903162424.6877-1-sashal@kernel.org>
+In-Reply-To: <20190903162519.7136-1-sashal@kernel.org>
+References: <20190903162519.7136-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -92,7 +92,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+)
 
 diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
-index 6a30768813219..8d47ad61bac3d 100644
+index ec54538f7ae1c..67efdf25657f3 100644
 --- a/drivers/s390/virtio/virtio_ccw.c
 +++ b/drivers/s390/virtio/virtio_ccw.c
 @@ -132,6 +132,7 @@ struct airq_info {
