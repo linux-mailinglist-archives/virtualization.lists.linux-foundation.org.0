@@ -2,57 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08D9CA8639
-	for <lists.virtualization@lfdr.de>; Wed,  4 Sep 2019 17:55:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FD69A8646
+	for <lists.virtualization@lfdr.de>; Wed,  4 Sep 2019 17:59:18 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 019E7191D;
-	Wed,  4 Sep 2019 15:54:59 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 65B6E1967;
+	Wed,  4 Sep 2019 15:59:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3322117C4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2320B1961
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  4 Sep 2019 15:54:35 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 949717DB
+	Wed,  4 Sep 2019 15:58:34 +0000 (UTC)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8D294887
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  4 Sep 2019 15:54:32 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
-	[10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Wed,  4 Sep 2019 15:58:31 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+	[73.47.72.35])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id CD3CE302C066;
-	Wed,  4 Sep 2019 15:54:31 +0000 (UTC)
-Received: from localhost (ovpn-116-88.ams2.redhat.com [10.36.116.88])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 8075B60126;
-	Wed,  4 Sep 2019 15:54:20 +0000 (UTC)
-Date: Wed, 4 Sep 2019 16:54:19 +0100
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Miklos Szeredi <miklos@szeredi.hu>
-Subject: Re: [PATCH v3 00/13] virtio-fs: shared file system for virtual
-	machines
-Message-ID: <20190904155419.GB25679@stefanha-x1.localdomain>
-References: <20190821173742.24574-1-vgoyal@redhat.com>
-	<CAJfpegvPTxkaNhXWhiQSprSJqyW1cLXeZEz6x_f0PxCd-yzHQg@mail.gmail.com>
-	<20190903041507-mutt-send-email-mst@kernel.org>
-	<CAJfpeguB6fFhghuFS420ZQ+JuQvTLc5TgsGjoB_RvFrSVf+v5w@mail.gmail.com>
+	by mail.kernel.org (Postfix) with ESMTPSA id AB24C233FF;
+	Wed,  4 Sep 2019 15:58:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1567612711;
+	bh=pk8YjyyRwMJOPfCa/yxcD7L3OlLFFCTVp2VRhcwJ2fw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=BU/ttMNS9pIUITNNX+AKHx9sdp45Y9CGYaVNBFKfmkklIIaaEocGx6KVx7Lg+Q+mC
+	aIeGWhYjSo+8MygE6j83u4cA1vSdIpwzeKRayDcvJQbi+Zh5jzwLIQxyy/cttd+4yr
+	ekkCU3r4CcJJJEETONTE/SfpCY2f+PFkbeJ4cDDg=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.2 36/94] drm/virtio: use virtio_max_dma_size
+Date: Wed,  4 Sep 2019 11:56:41 -0400
+Message-Id: <20190904155739.2816-36-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190904155739.2816-1-sashal@kernel.org>
+References: <20190904155739.2816-1-sashal@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <CAJfpeguB6fFhghuFS420ZQ+JuQvTLc5TgsGjoB_RvFrSVf+v5w@mail.gmail.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.46]);
-	Wed, 04 Sep 2019 15:54:32 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, virtio-fs@redhat.com,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	linux-fsdevel@vger.kernel.org, Vivek Goyal <vgoyal@redhat.com>
+Cc: Sasha Levin <sashal@kernel.org>, Laszlo Ersek <lersek@redhat.com>,
+	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,85 +60,60 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7791870378345050685=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+From: Gerd Hoffmann <kraxel@redhat.com>
 
---===============7791870378345050685==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="GID0FwUMdk1T2AWN"
-Content-Disposition: inline
+[ Upstream commit 9b2a0a1ef66f96bf34921a3865581eca32ff05ec ]
 
+We must make sure our scatterlist segments are not too big, otherwise
+we might see swiotlb failures (happens with sev, also reproducable with
+swiotlb=force).
 
---GID0FwUMdk1T2AWN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Suggested-by: Laszlo Ersek <lersek@redhat.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Laszlo Ersek <lersek@redhat.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/20190821111210.27165-1-kraxel@redhat.com
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/virtio/virtgpu_object.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-On Tue, Sep 03, 2019 at 11:17:35AM +0200, Miklos Szeredi wrote:
-> On Tue, Sep 3, 2019 at 10:31 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> > > >  fs/fuse/Kconfig                 |   11 +
-> > > >  fs/fuse/Makefile                |    1 +
-> > > >  fs/fuse/control.c               |    4 +-
-> > > >  fs/fuse/cuse.c                  |    4 +-
-> > > >  fs/fuse/dev.c                   |   89 ++-
-> > > >  fs/fuse/dir.c                   |   26 +-
-> > > >  fs/fuse/file.c                  |   15 +-
-> > > >  fs/fuse/fuse_i.h                |  120 +++-
-> > > >  fs/fuse/inode.c                 |  203 +++---
-> > > >  fs/fuse/virtio_fs.c             | 1061 +++++++++++++++++++++++++++=
-++++
-> > > >  fs/splice.c                     |    3 +-
-> > > >  include/linux/fs.h              |    2 +
-> > > >  include/uapi/linux/virtio_fs.h  |   41 ++
-> > > >  include/uapi/linux/virtio_ids.h |    1 +
-> > > >  init/do_mounts.c                |   10 +
-> > > >  15 files changed, 1462 insertions(+), 129 deletions(-)
-> > > >  create mode 100644 fs/fuse/virtio_fs.c
-> > > >  create mode 100644 include/uapi/linux/virtio_fs.h
-> >
-> > Don't the new files need a MAINTAINERS entry?
-> > I think we want virtualization@lists.linux-foundation.org to be
-> > copied.
->=20
-> Yep.
->=20
-> Stefan, do you want to formally maintain this file?
-
-Vivek has been doing most of the kernel work lately and I would suggest
-that he acts as maintainer.
-
-But I'm happy to be added if you want two people or if Vivek is
-unwilling.
-
-Stefan
-
---GID0FwUMdk1T2AWN
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl1v3isACgkQnKSrs4Gr
-c8i3IwgAkPNsvQFn07eQEq84FvAQliEAhVlQPhZtCsVbch+9uZMEFLknwvu44nDV
-4jl49BomGl8bnL2zO9Fw3v8TDw2mcmvzIwGrb3r+TF1fX/Hdgt6I/GLk9sGX6Pnx
-zaCOEFRPRWzo/wC//ljow5suXYiIhGkE9JrxRrTjgxSPbYIKTnoMxIJmXvsa/JWl
-pnWGDMmMMH5ZucxT8iXJozyGqo/KKM04NtKxREt+Qdt1VvVvB92eevZ0uFiA/iah
-ZlVDb+uBVx1t8hbXOOeb85HSUqL/qCQdm0e7FzBxhIg/dIGQgKqQb8Vw5cjEJu/i
-Lb/NaWqBPfAHYb4ZRwHMznYrZBDaKQ==
-=9DaP
------END PGP SIGNATURE-----
-
---GID0FwUMdk1T2AWN--
-
---===============7791870378345050685==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index b2da31310d24c..09b526518f5a6 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -204,6 +204,7 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+ 		.interruptible = false,
+ 		.no_wait_gpu = false
+ 	};
++	size_t max_segment;
+ 
+ 	/* wtf swapping */
+ 	if (bo->pages)
+@@ -215,8 +216,13 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
+ 	if (!bo->pages)
+ 		goto out;
+ 
+-	ret = sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
+-					nr_pages << PAGE_SHIFT, GFP_KERNEL);
++	max_segment = virtio_max_dma_size(qdev->vdev);
++	max_segment &= PAGE_MASK;
++	if (max_segment > SCATTERLIST_MAX_SEGMENT)
++		max_segment = SCATTERLIST_MAX_SEGMENT;
++	ret = __sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
++					  nr_pages << PAGE_SHIFT,
++					  max_segment, GFP_KERNEL);
+ 	if (ret)
+ 		goto out;
+ 	return 0;
+-- 
+2.20.1
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============7791870378345050685==--
