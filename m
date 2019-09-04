@@ -2,76 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DC56A875C
-	for <lists.virtualization@lfdr.de>; Wed,  4 Sep 2019 20:59:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71F07A96D8
+	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 01:11:19 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3A0CA1DD0;
-	Wed,  4 Sep 2019 18:59:16 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9F25222CF;
+	Wed,  4 Sep 2019 23:11:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E383D1795
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D21D022C1
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  4 Sep 2019 18:58:48 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8789D709
+	Wed,  4 Sep 2019 23:10:43 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2B14D831
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  4 Sep 2019 18:58:48 +0000 (UTC)
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
-	[209.85.160.199])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id C199E368CF
+	Wed,  4 Sep 2019 23:10:42 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id s21so394817ioa.1
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  4 Sep 2019 18:58:47 +0000 (UTC)
-Received: by mail-qt1-f199.google.com with SMTP id f19so23940596qtq.1
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 04 Sep 2019 11:58:47 -0700 (PDT)
+	Wed, 04 Sep 2019 16:10:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=DB1rbzm8PF8Bwfs8Jp/tKsNhJPofsXR23GDzMzgP/Zo=;
+	b=TWXBSs+rssh2KOR8Br4xQVWj2yPdts1caiQ8YeGZCkLygQUi3QXTp7bXtG8avLPfoY
+	FU0qWwBUSFqJQ11YlGcYAyCc1LuOHBkMXnenhqK6bcrkpT40+xQVdSKLzHma7+CFHsNH
+	DZE2H4wNyGmxrNjxgvrV/PEFzx79oncEEh/D3bItyY1amR4GCh4qqWlRADRT5zCrS1xz
+	v9RL7oWNP1ZGT3CoxK7EoA/Xh83edIeMEIwa2Q5LX2O+a5xbwE8I0aEm9ioQHvqkHV6F
+	cx90+SxExNmT98lEpdrmmEC1UE3oSt/btorqGtDplYJGoFnrKoF6bjyDNR9WrI8DSxLl
+	l/fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=/t5VuocUMBlzPtybo/yvo5LJ1+xZJB/CRL/KCkZ7mqs=;
-	b=ZtrWs60PCtS67aDIlvs9riEAKkytn+dvrDSFfQpBNNXRSpbmrhgZpotkvm2rl9g7Ov
-	RDzRDFR24ho6kfXh4FQXjrA8IhzMIEbITCI8gu9vhWqlBrYUfQ0zDPni17g50QmxDkxr
-	4c06Kcj/r8r59Ky9lh31Juyjcyq01mtL4bo1vGJf6AGJBrngaFZwIzAz5QhvuGkWoAje
-	XJngOKWcxggjuU+NQLFcSGr9GzIOpd8EQJSTnlGsbLTslKxrc/ZnX+T1lELOrPxbT/gR
-	NuNrt2YAQePq05YNhtkRAIhvLw6bLGf1CQbmiYwSNiHJF4jAK9YGhLo8BhX4CJcUR0m0
-	CP5A==
-X-Gm-Message-State: APjAAAWILT7wRR8lEN6aP3WQPMufeUwZx3Cf5Tq0DwiHFESMcFPPDeXa
-	2w+qjR1gik+EV4Vnz/hE8wFCTRScCMM3mOWc4yTDPwO3E809dehUazdBngU+5i/qO9LINaIWHXG
-	APNm3Ax8DOYZLsLMh3h1dCJuaCSNz8pQF16afRQyS5w==
-X-Received: by 2002:aed:2538:: with SMTP id v53mr15724666qtc.383.1567623527125;
-	Wed, 04 Sep 2019 11:58:47 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqzxNgEnlGe+yk/4flae5AGAQL9JYjycpkVNDhpjV1tHwEkw6zA96VtT4UHpBEbs9AvgdMwM/Q==
-X-Received: by 2002:aed:2538:: with SMTP id v53mr15724648qtc.383.1567623526926;
-	Wed, 04 Sep 2019 11:58:46 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
-	by smtp.gmail.com with ESMTPSA id b1sm9712741qkk.8.2019.09.04.11.58.43
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 04 Sep 2019 11:58:45 -0700 (PDT)
-Date: Wed, 4 Sep 2019 14:58:40 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [PATCH v4 15/16] virtio-fs: add virtiofs filesystem
-Message-ID: <20190904145656-mutt-send-email-mst@kernel.org>
-References: <20190903113640.7984-1-mszeredi@redhat.com>
-	<20190903114203.8278-10-mszeredi@redhat.com>
-	<20190903092222-mutt-send-email-mst@kernel.org>
-	<20190904181630.GB26826@stefanha-x1.localdomain>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=DB1rbzm8PF8Bwfs8Jp/tKsNhJPofsXR23GDzMzgP/Zo=;
+	b=BCroEt01qGZUVNtSresgghf35rV52U+j6rXF+RHWOngRslk8eF/yG685AbGQ4hcrxw
+	1ceK/e0vLToCGzgiF0ao6hDJKDHBkKIVNqyaadD9c0J6VlN/0JPsXR6R8nXMadMKw+Ga
+	+3+99CjYfQMPupoE52kaEUzOMErtJQ242P9h77Haer7VZFwXZ4DiWfTViaaYhapkx2Ln
+	yNn6vnF+zqdgUds4C9PSE9d0YiPGUK/CdjVJGyGk7QYPdKJhjhWMdA2/9AE6dSxXNdtg
+	Vp9v72BDVTfc9LAhh2/jUulsOEuMAw46+3oXmASgYE3u49pAG3uXrlxoRV8AfR4lKPjc
+	uU3g==
+X-Gm-Message-State: APjAAAUtTMg6xxiEKbqZEGy9vmW96CTBzYmOGtN7pLv7zQJ/abtT7DgI
+	O9/WHuiqW1m0NutoiNfXNe40njIALNXQ3lMQrXw=
+X-Google-Smtp-Source: APXvYqy0jYg/Z8XA/MeoEAwnqZjsjs0eFej+KYg1PPMJWO6JB9B1AVaOVDMkjRWEP7D3sv6xexnbd1n0FFsKarY4fh4=
+X-Received: by 2002:a6b:db0e:: with SMTP id t14mr546846ioc.93.1567638641383;
+	Wed, 04 Sep 2019 16:10:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190904181630.GB26826@stefanha-x1.localdomain>
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+References: <20190904074828.32502-1-kraxel@redhat.com>
+In-Reply-To: <20190904074828.32502-1-kraxel@redhat.com>
+From: Chia-I Wu <olvaffe@gmail.com>
+Date: Wed, 4 Sep 2019 16:10:30 -0700
+Message-ID: <CAPaKu7RWiEr5n_DWcg0H2PPnRs9CUn-ZgQV3NYe8VrdZgEAhTQ@mail.gmail.com>
+Subject: Re: [PATCH] drm/virtio: fix command submission with objects but
+	without fence.
+To: Gerd Hoffmann <kraxel@redhat.com>
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Miklos Szeredi <mszeredi@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, Vivek Goyal <vgoyal@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	ML dri-devel <dri-devel@lists.freedesktop.org>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -88,39 +82,44 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Sep 04, 2019 at 07:16:30PM +0100, Stefan Hajnoczi wrote:
-> On Tue, Sep 03, 2019 at 09:55:49AM -0400, Michael S. Tsirkin wrote:
-> > On Tue, Sep 03, 2019 at 01:42:02PM +0200, Miklos Szeredi wrote:
-> > Endian-ness for fuse header also looks wrong.
-> [...]
-> > > +struct virtio_fs_forget {
-> > > +	struct fuse_in_header ih;
-> > > +	struct fuse_forget_in arg;
-> > 
-> > These structures are all native endian.
-> > 
-> > Passing them to host will make cross-endian setups painful to support,
-> > and hardware implementations impossible.
-> > 
-> > How about converting everything to LE?
-> 
-> The driver dictates the endianness of the FUSE protocol session.  The
-> virtio-fs device specification states that the device looks at the first
-> request's fuse_in_header::opcode field to detect the guest endianness.
-> 
-> If it sees FUSE_INIT in its native endianness then no byte-swapping is
-> necessary.  If it sees FUSE_INIT in the opposite endianness then
-> byte-swapping is necessary on the device side.
+On Wed, Sep 4, 2019 at 12:48 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> Only call virtio_gpu_array_add_fence if we actually have a fence.
+>
+> Fixes: da758d51968a ("drm/virtio: rework virtio_gpu_execbuffer_ioctl fencing")
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_vq.c | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> index 595fa6ec2d58..7fd2851f7b97 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> @@ -339,11 +339,12 @@ static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+>                 goto again;
+>         }
+>
+> -       if (fence)
+> +       if (fence) {
+>                 virtio_gpu_fence_emit(vgdev, hdr, fence);
+> -       if (vbuf->objs) {
+> -               virtio_gpu_array_add_fence(vbuf->objs, &fence->f);
+> -               virtio_gpu_array_unlock_resv(vbuf->objs);
+> +               if (vbuf->objs) {
+> +                       virtio_gpu_array_add_fence(vbuf->objs, &fence->f);
+> +                       virtio_gpu_array_unlock_resv(vbuf->objs);
+> +               }
+This leaks when fence == NULL and vbuf->objs != NULL (which can really
+happen IIRC... not at my desk to check).
 
 
-You are right.  Pls ignore the comment.  We need to reserve the
-byte-swapped FUSE_INIT to make sure future versions of fuse don't try to
-send that though.  I sent a patch to that effect, let's see whether it
-gets accepted.
-
-
--- 
-MST
+>         }
+>         notify = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
+>         spin_unlock(&vgdev->ctrlq.qlock);
+> --
+> 2.18.1
+>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
