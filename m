@@ -2,47 +2,47 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00F6FAAC6A
-	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:51:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1188FAAC6D
+	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:51:34 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4A36A1B60;
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7F59D1B62;
 	Thu,  5 Sep 2019 19:49:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5AE471B38
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8D8951642
 	for <virtualization@lists.linux-foundation.org>;
 	Thu,  5 Sep 2019 19:49:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 90029894
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9CC378A3
 	for <virtualization@lists.linux-foundation.org>;
 	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id ED7973082DDD;
+	by mx1.redhat.com (Postfix) with ESMTPS id F071E3175295;
 	Thu,  5 Sep 2019 19:49:25 +0000 (UTC)
 Received: from horse.redhat.com (unknown [10.18.25.137])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 3DAFA5C1D4;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 44F1B100194E;
 	Thu,  5 Sep 2019 19:49:18 +0000 (UTC)
 Received: by horse.redhat.com (Postfix, from userid 10451)
-	id C154F22539A; Thu,  5 Sep 2019 15:49:17 -0400 (EDT)
+	id D06FE22539C; Thu,  5 Sep 2019 15:49:17 -0400 (EDT)
 From: Vivek Goyal <vgoyal@redhat.com>
 To: linux-fsdevel@vger.kernel.org, virtualization@lists.linux-foundation.org,
 	miklos@szeredi.hu
-Subject: [PATCH 02/18] virtiofs: Check whether hiprio queue is connected at
-	submission time
-Date: Thu,  5 Sep 2019 15:48:43 -0400
-Message-Id: <20190905194859.16219-3-vgoyal@redhat.com>
+Subject: [PATCH 04/18] virtiofs: Check connected state for VQ_REQUEST queue as
+	well
+Date: Thu,  5 Sep 2019 15:48:45 -0400
+Message-Id: <20190905194859.16219-5-vgoyal@redhat.com>
 In-Reply-To: <20190905194859.16219-1-vgoyal@redhat.com>
 References: <20190905194859.16219-1-vgoyal@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.46]);
+	(mx1.redhat.com [10.5.110.49]);
 	Thu, 05 Sep 2019 19:49:26 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
@@ -66,40 +66,35 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-For hiprio queue (forget requests), we are keeping a state in queue whether
-queue is connected or not. If queue is not connected, do not try to submit
-request and return error instead.
+Right now we are checking ->connected state only for VQ_HIPRIO. Now we want
+to make use of this method for all queues. So check it for VQ_REQUEST as
+well.
 
-As of now, we are checking for this state only in path where worker tries
-to submit forget after first attempt failed. Check this state even in
-the path when request is being submitted first time.
+This will be helpful if device has been removed and virtqueue is gone. In
+that case ->connected will be false and request can't be submitted anymore
+and user space will see error -ENOTCONN.
 
 Signed-off-by: Vivek Goyal <vgoyal@redhat.com>
 ---
- fs/fuse/virtio_fs.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ fs/fuse/virtio_fs.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
-index a708ccb65662..e9497b565dd8 100644
+index 9d30530e3ca9..c46dd4d284d6 100644
 --- a/fs/fuse/virtio_fs.c
 +++ b/fs/fuse/virtio_fs.c
-@@ -577,9 +577,16 @@ __releases(fiq->waitq.lock)
- 	sg_init_one(&sg, forget, sizeof(*forget));
+@@ -755,6 +755,12 @@ static int virtio_fs_enqueue_req(struct virtio_fs_vq *fsvq,
  
- 	/* Enqueue the request */
-+	spin_lock(&fsvq->lock);
-+
+ 	spin_lock(&fsvq->lock);
+ 
 +	if (!fsvq->connected) {
-+		kfree(forget);
 +		spin_unlock(&fsvq->lock);
++		ret = -ENOTCONN;
 +		goto out;
 +	}
 +
  	vq = fsvq->vq;
- 	dev_dbg(&vq->vdev->dev, "%s\n", __func__);
--	spin_lock(&fsvq->lock);
- 
- 	ret = virtqueue_add_sgs(vq, sgs, 1, 0, forget, GFP_ATOMIC);
+ 	ret = virtqueue_add_sgs(vq, sgs, out_sgs, in_sgs, req, GFP_ATOMIC);
  	if (ret < 0) {
 -- 
 2.20.1
