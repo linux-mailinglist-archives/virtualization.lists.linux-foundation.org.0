@@ -2,52 +2,51 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C066DAAC70
-	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:51:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E6F4AAC5D
+	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:50:48 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 53FE51ADB;
-	Thu,  5 Sep 2019 19:49:36 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 6CF011B56;
+	Thu,  5 Sep 2019 19:49:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
-Received: from smtp2.linuxfoundation.org (smtp2.linux-foundation.org
-	[172.17.192.36])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 54D81FAB
+Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
+	[172.17.192.35])
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B2F13F19
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  5 Sep 2019 19:49:34 +0000 (UTC)
+	Thu,  5 Sep 2019 19:49:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp2.linuxfoundation.org (Postfix) with ESMTPS id F15371DD19
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 56C448A6
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  5 Sep 2019 19:49:33 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
-	[10.5.11.13])
+	Thu,  5 Sep 2019 19:49:27 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 7683930089A1;
-	Thu,  5 Sep 2019 19:49:33 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id E1282308FC20;
+	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
 Received: from horse.redhat.com (unknown [10.18.25.137])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 675FA6060D;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id BBF88600F8;
 	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
 Received: by horse.redhat.com (Postfix, from userid 10451)
-	id 022522253A2; Thu,  5 Sep 2019 15:49:18 -0400 (EDT)
+	id 08BE92253A3; Thu,  5 Sep 2019 15:49:18 -0400 (EDT)
 From: Vivek Goyal <vgoyal@redhat.com>
 To: linux-fsdevel@vger.kernel.org, virtualization@lists.linux-foundation.org,
 	miklos@szeredi.hu
-Subject: [PATCH 10/18] virtiofs: Do not use device managed mem for virtio_fs
-	and virtio_fs_vq
-Date: Thu,  5 Sep 2019 15:48:51 -0400
-Message-Id: <20190905194859.16219-11-vgoyal@redhat.com>
+Subject: [PATCH 11/18] virtiofs: stop and drain queues after sending DESTROY
+Date: Thu,  5 Sep 2019 15:48:52 -0400
+Message-Id: <20190905194859.16219-12-vgoyal@redhat.com>
 In-Reply-To: <20190905194859.16219-1-vgoyal@redhat.com>
 References: <20190905194859.16219-1-vgoyal@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.46]);
-	Thu, 05 Sep 2019 19:49:33 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.43]);
+	Thu, 05 Sep 2019 19:49:26 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	smtp2.linux-foundation.org
+	smtp1.linux-foundation.org
 Cc: mst@redhat.com, linux-kernel@vger.kernel.org, dgilbert@redhat.com,
 	virtio-fs@redhat.com, stefanha@redhat.com, vgoyal@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -66,82 +65,55 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-These data structures should go away when virtio_fs object is going away.
-When deivce is going away, we need to just make sure virtqueues can go
-away and after that none of the code accesses vq and all the requests
-get error.
+During virtio_kill_sb() we first stop forget queue and drain it and then
+call fuse_kill_sb_anon(). This will result in sending DESTROY request to
+fuse server. Once finished, stop all the queues and drain one more time
+just to be sure and then free up the devices.
 
-So allocate memory for virtio_fs and virtio_fs_vq normally and free it
-at right time.
-
-This patch still frees up memory during device remove time. A later patch
-will make virtio_fs object reference counted and this memory will be
-freed when last reference to object is dropped.
+Given drain queues will call flush_work() on various workers, remove this
+logic from virtio_free_devs().
 
 Signed-off-by: Vivek Goyal <vgoyal@redhat.com>
 ---
- fs/fuse/virtio_fs.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+ fs/fuse/virtio_fs.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
-index f2936daca39c..1ea0f889e804 100644
+index 1ea0f889e804..a76bd5a04521 100644
 --- a/fs/fuse/virtio_fs.c
 +++ b/fs/fuse/virtio_fs.c
-@@ -446,7 +446,7 @@ static int virtio_fs_setup_vqs(struct virtio_device *vdev,
- 	vq_callback_t **callbacks;
- 	const char **names;
- 	unsigned int i;
--	int ret;
-+	int ret = 0;
+@@ -180,9 +180,6 @@ static void virtio_fs_free_devs(struct virtio_fs *fs)
+ 		if (!fsvq->fud)
+ 			continue;
  
- 	virtio_cread(vdev, struct virtio_fs_config, num_queues,
- 		     &fs->num_queues);
-@@ -454,9 +454,7 @@ static int virtio_fs_setup_vqs(struct virtio_device *vdev,
- 		return -EINVAL;
- 
- 	fs->nvqs = 1 + fs->num_queues;
+-		flush_work(&fsvq->done_work);
+-		flush_delayed_work(&fsvq->dispatch_work);
 -
--	fs->vqs = devm_kcalloc(&vdev->dev, fs->nvqs,
--				sizeof(fs->vqs[VQ_HIPRIO]), GFP_KERNEL);
-+	fs->vqs = kcalloc(fs->nvqs, sizeof(fs->vqs[VQ_HIPRIO]), GFP_KERNEL);
- 	if (!fs->vqs)
- 		return -ENOMEM;
+ 		/* TODO need to quiesce/end_requests/decrement dev_count */
+ 		fuse_dev_free(fsvq->fud);
+ 		fsvq->fud = NULL;
+@@ -994,6 +991,8 @@ static int virtio_fs_fill_super(struct super_block *sb)
+ 		atomic_inc(&fc->dev_count);
+ 	}
  
-@@ -504,6 +502,8 @@ static int virtio_fs_setup_vqs(struct virtio_device *vdev,
- 	kfree(names);
- 	kfree(callbacks);
- 	kfree(vqs);
-+	if (ret)
-+		kfree(fs->vqs);
- 	return ret;
++	/* Previous unmount will stop all queues. Start these again */
++	virtio_fs_start_all_queues(fs);
+ 	fuse_send_init(fc, init_req);
+ 	return 0;
+ 
+@@ -1026,6 +1025,12 @@ static void virtio_kill_sb(struct super_block *sb)
+ 	virtio_fs_drain_all_queues(vfs);
+ 
+ 	fuse_kill_sb_anon(sb);
++
++	/* fuse_kill_sb_anon() must have sent destroy. Stop all queues
++	 * and drain one more time and free fuse devices.
++	 */
++	virtio_fs_stop_all_queues(vfs);
++	virtio_fs_drain_all_queues(vfs);
+ 	virtio_fs_free_devs(vfs);
  }
  
-@@ -519,7 +519,7 @@ static int virtio_fs_probe(struct virtio_device *vdev)
- 	struct virtio_fs *fs;
- 	int ret;
- 
--	fs = devm_kzalloc(&vdev->dev, sizeof(*fs), GFP_KERNEL);
-+	fs = kzalloc(sizeof(*fs), GFP_KERNEL);
- 	if (!fs)
- 		return -ENOMEM;
- 	vdev->priv = fs;
-@@ -552,6 +552,7 @@ static int virtio_fs_probe(struct virtio_device *vdev)
- 
- out:
- 	vdev->priv = NULL;
-+	kfree(fs);
- 	return ret;
- }
- 
-@@ -582,6 +583,8 @@ static void virtio_fs_remove(struct virtio_device *vdev)
- 	mutex_unlock(&virtio_fs_mutex);
- 
- 	vdev->priv = NULL;
-+	kfree(fs->vqs);
-+	kfree(fs);
- }
- 
- #ifdef CONFIG_PM_SLEEP
 -- 
 2.20.1
 
