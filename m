@@ -2,47 +2,44 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A5B5AAC45
-	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:50:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 278BEAAC61
+	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:51:07 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9A14F1B4C;
-	Thu,  5 Sep 2019 19:49:30 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id D61B716AC;
+	Thu,  5 Sep 2019 19:49:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 50164F19
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D4C7D1707
 	for <virtualization@lists.linux-foundation.org>;
 	Thu,  5 Sep 2019 19:49:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 041FC8B0
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 900AF89C
 	for <virtualization@lists.linux-foundation.org>;
 	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 89A8210C6973;
-	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id EDE0A883823;
+	Thu,  5 Sep 2019 19:49:25 +0000 (UTC)
 Received: from horse.redhat.com (unknown [10.18.25.137])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 666B960C18;
-	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 3D6B46012D;
+	Thu,  5 Sep 2019 19:49:18 +0000 (UTC)
 Received: by horse.redhat.com (Postfix, from userid 10451)
-	id DDF2E22539E; Thu,  5 Sep 2019 15:49:17 -0400 (EDT)
+	id B6929220292; Thu,  5 Sep 2019 15:49:17 -0400 (EDT)
 From: Vivek Goyal <vgoyal@redhat.com>
 To: linux-fsdevel@vger.kernel.org, virtualization@lists.linux-foundation.org,
 	miklos@szeredi.hu
-Subject: [PATCH 06/18] virtiofs: ->remove should not clean virtiofs fuse
-	devices
-Date: Thu,  5 Sep 2019 15:48:47 -0400
-Message-Id: <20190905194859.16219-7-vgoyal@redhat.com>
-In-Reply-To: <20190905194859.16219-1-vgoyal@redhat.com>
-References: <20190905194859.16219-1-vgoyal@redhat.com>
+Subject: [PATCH 00/18] virtiofs: Fix various races and cleanups round 1
+Date: Thu,  5 Sep 2019 15:48:41 -0400
+Message-Id: <20190905194859.16219-1-vgoyal@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
-	(mx1.redhat.com [10.5.110.65]);
+	(mx1.redhat.com [10.5.110.69]);
 	Thu, 05 Sep 2019 19:49:26 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
@@ -66,29 +63,61 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-We maintain a fuse device per virt queue. This fuse devices are allocated
-and installed during mount time and should be cleaned up when super block
-is going away. Device removal should not clean it. Device removal should
-stop queues and virtuques can go away.
+Hi,
 
-Signed-off-by: Vivek Goyal <vgoyal@redhat.com>
----
- fs/fuse/virtio_fs.c | 2 --
- 1 file changed, 2 deletions(-)
+Michael Tsirkin pointed out issues w.r.t various locking related TODO
+items and races w.r.t device removal. 
 
-diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
-index 5df97dfee37d..f68a25ca9e9d 100644
---- a/fs/fuse/virtio_fs.c
-+++ b/fs/fuse/virtio_fs.c
-@@ -497,8 +497,6 @@ static void virtio_fs_remove(struct virtio_device *vdev)
- {
- 	struct virtio_fs *fs = vdev->priv;
- 
--	virtio_fs_free_devs(fs);
--
- 	vdev->config->reset(vdev);
- 	virtio_fs_cleanup_vqs(vdev, fs);
- 
+In this first round of cleanups, I have taken care of most pressing
+issues.
+
+These patches apply on top of following.
+
+git://git.kernel.org/pub/scm/linux/kernel/git/mszeredi/fuse.git#virtiofs-v4
+
+I have tested these patches with mount/umount and device removal using
+qemu monitor. For example.
+
+virsh qemu-monitor-command --hmp vm9-f28 device_del myvirtiofs
+
+Now a mounted device can be removed and file system will return errors
+-ENOTCONN and one can unmount it.
+
+Miklos, if you are fine with the patches, I am fine if you fold these
+all into existing patch. I kept them separate so that review is easier.
+
+Any feedback or comments are welcome.
+
+Thanks
+Vivek
+
+
+Vivek Goyal (18):
+  virtiofs: Remove request from processing list before calling end
+  virtiofs: Check whether hiprio queue is connected at submission time
+  virtiofs: Pass fsvq instead of vq as parameter to
+    virtio_fs_enqueue_req
+  virtiofs: Check connected state for VQ_REQUEST queue as well
+  Maintain count of in flight requests for VQ_REQUEST queue
+  virtiofs: ->remove should not clean virtiofs fuse devices
+  virtiofs: Stop virtiofs queues when device is being removed
+  virtiofs: Drain all pending requests during ->remove time
+  virtiofs: Add an helper to start all the queues
+  virtiofs: Do not use device managed mem for virtio_fs and virtio_fs_vq
+  virtiofs: stop and drain queues after sending DESTROY
+  virtiofs: Use virtio_fs_free_devs() in error path
+  virtiofs: Do not access virtqueue in request submission path
+  virtiofs: Add a fuse_iqueue operation to put() reference
+  virtiofs: Make virtio_fs object refcounted
+  virtiofs: Use virtio_fs_mutex for races w.r.t ->remove and mount path
+  virtiofs: Remove TODO to quiesce/end_requests
+  virtiofs: Remove TODO item from virtio_fs_free_devs()
+
+ fs/fuse/fuse_i.h    |   5 +
+ fs/fuse/inode.c     |   6 +
+ fs/fuse/virtio_fs.c | 259 ++++++++++++++++++++++++++++++++------------
+ 3 files changed, 198 insertions(+), 72 deletions(-)
+
 -- 
 2.20.1
 
