@@ -2,47 +2,48 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BAFEAAC49
-	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:50:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAA26AAC6E
+	for <lists.virtualization@lfdr.de>; Thu,  5 Sep 2019 21:51:41 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3713A1B53;
-	Thu,  5 Sep 2019 19:49:31 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id B7214142E;
+	Thu,  5 Sep 2019 19:49:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A2A961676
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A876F17FB
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  5 Sep 2019 19:49:27 +0000 (UTC)
+	Thu,  5 Sep 2019 19:49:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 58FDE8AA
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 61B8A8B0
 	for <virtualization@lists.linux-foundation.org>;
 	Thu,  5 Sep 2019 19:49:27 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
-	[10.5.11.22])
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+	[10.5.11.15])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id E4CCC7FDCD;
+	by mx1.redhat.com (Postfix) with ESMTPS id E8FA9307D851;
 	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
 Received: from horse.redhat.com (unknown [10.18.25.137])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id BF6E01001B00;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id C33BA5D6A3;
 	Thu,  5 Sep 2019 19:49:26 +0000 (UTC)
 Received: by horse.redhat.com (Postfix, from userid 10451)
-	id 0F63D2253A4; Thu,  5 Sep 2019 15:49:18 -0400 (EDT)
+	id 160592253A5; Thu,  5 Sep 2019 15:49:18 -0400 (EDT)
 From: Vivek Goyal <vgoyal@redhat.com>
 To: linux-fsdevel@vger.kernel.org, virtualization@lists.linux-foundation.org,
 	miklos@szeredi.hu
-Subject: [PATCH 12/18] virtiofs: Use virtio_fs_free_devs() in error path
-Date: Thu,  5 Sep 2019 15:48:53 -0400
-Message-Id: <20190905194859.16219-13-vgoyal@redhat.com>
+Subject: [PATCH 13/18] virtiofs: Do not access virtqueue in request submission
+	path
+Date: Thu,  5 Sep 2019 15:48:54 -0400
+Message-Id: <20190905194859.16219-14-vgoyal@redhat.com>
 In-Reply-To: <20190905194859.16219-1-vgoyal@redhat.com>
 References: <20190905194859.16219-1-vgoyal@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.27]);
-	Thu, 05 Sep 2019 19:49:26 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.48]);
+	Thu, 05 Sep 2019 19:49:27 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -65,28 +66,36 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-We already have an helper to cleanup fuse devices. Use that instead of
-duplicating the code.
+In request submission path it is possible that virtqueue is already gone
+due to driver->remove(). So do not access it in dev_dbg(). Use pr_debug()
+instead.
+
+If virtuqueue is gone, this will result in NULL pointer deference.
 
 Signed-off-by: Vivek Goyal <vgoyal@redhat.com>
 ---
- fs/fuse/virtio_fs.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ fs/fuse/virtio_fs.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
-index a76bd5a04521..40259368a6bd 100644
+index 40259368a6bd..01bbf2c0e144 100644
 --- a/fs/fuse/virtio_fs.c
 +++ b/fs/fuse/virtio_fs.c
-@@ -999,8 +999,7 @@ static int virtio_fs_fill_super(struct super_block *sb)
- err_free_init_req:
- 	fuse_request_free(init_req);
- err_free_fuse_devs:
--	for (i = 0; i < fs->nvqs; i++)
--		fuse_dev_free(fs->vqs[i].fud);
-+	virtio_fs_free_devs(fs);
- err:
- 	return err;
- }
+@@ -888,10 +888,10 @@ __releases(fiq->waitq.lock)
+ 	fs = fiq->priv;
+ 	fc = fs->vqs[queue_id].fud->fc;
+ 
+-	dev_dbg(&fs->vqs[queue_id].vq->vdev->dev,
+-		"%s: opcode %u unique %#llx nodeid %#llx in.len %u out.len %u\n",
+-		__func__, req->in.h.opcode, req->in.h.unique, req->in.h.nodeid,
+-		req->in.h.len, fuse_len_args(req->out.numargs, req->out.args));
++	pr_debug("%s: opcode %u unique %#llx nodeid %#llx in.len %u out.len %u"
++		 "\n", __func__, req->in.h.opcode, req->in.h.unique,
++		 req->in.h.nodeid, req->in.h.len,
++		 fuse_len_args(req->out.numargs, req->out.args));
+ 
+ 	fpq = &fs->vqs[queue_id].fud->pq;
+ 	spin_lock(&fpq->lock);
 -- 
 2.20.1
 
