@@ -2,58 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2061EAB95B
-	for <lists.virtualization@lfdr.de>; Fri,  6 Sep 2019 15:36:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21893AB962
+	for <lists.virtualization@lfdr.de>; Fri,  6 Sep 2019 15:38:21 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 8DB97232A;
-	Fri,  6 Sep 2019 13:36:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0B3E62328;
+	Fri,  6 Sep 2019 13:38:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7C5682323
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 53F2F22B8
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 13:36:04 +0000 (UTC)
+	Fri,  6 Sep 2019 13:38:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 11B26756
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1837A756
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 13:36:04 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
-	[10.5.11.22])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Fri,  6 Sep 2019 13:37:32 +0000 (UTC)
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+	[209.85.221.71])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 821DD301D67F;
-	Fri,  6 Sep 2019 13:36:03 +0000 (UTC)
-Received: from horse.redhat.com (unknown [10.18.25.137])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 8D2CF1001947;
-	Fri,  6 Sep 2019 13:35:55 +0000 (UTC)
-Received: by horse.redhat.com (Postfix, from userid 10451)
-	id 1F167220292; Fri,  6 Sep 2019 09:35:55 -0400 (EDT)
-Date: Fri, 6 Sep 2019 09:35:55 -0400
-From: Vivek Goyal <vgoyal@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [PATCH 14/18] virtiofs: Add a fuse_iqueue operation to put()
-	reference
-Message-ID: <20190906133555.GC22083@redhat.com>
+	by mx1.redhat.com (Postfix) with ESMTPS id 6DDE183F45
+	for <virtualization@lists.linux-foundation.org>;
+	Fri,  6 Sep 2019 13:37:31 +0000 (UTC)
+Received: by mail-wr1-f71.google.com with SMTP id b9so2560767wrt.5
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 06 Sep 2019 06:37:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=aanmrrFSrbrC16B1/2djxgOZCrfOygi38gX6T8Hx2OE=;
+	b=NXSB/RsyXrNVu20vBXjS4g1swrvxt2h36fjfq7cRhk6Q2O4TmxNODeloUQSxkixLqr
+	Jw7sC+42jil/vpTuRvoN5/cQ0QB5GaxwQP+SzeaMDvo8RP3IvFOPlzmERTTEBpykd+9N
+	7PvxrbKBxPN3diV2IlI17nZe8/UKJxS8Dpo4qca1MZAoJQxof+N5nLMnuQ2+O6nhRa7t
+	8/emRhlGwXjZASzHgZX4X1O1FCGk2Oq9lQf5hslyDec1uATxtEJ1sI833lgukVOvduXs
+	I0a8ZEGRkcEqRgBrtH/4d9KBnKgwdV4uWGdHF7jLCKgteGPyTK/VgmsCJ+nA60lU490M
+	rpnw==
+X-Gm-Message-State: APjAAAUICzlMSAASJ8GlnyBdepKwCaJhAzUwzSwn/0/XbNrQ6jz1s8hd
+	s8N00grGrPXm7FcgxaXFhbxziGEYij1ZGodhxv2mzvI1843/Z634gmt80Z8j4U81gwaNSRzMCx8
+	2YqFgc0TiJ/dnuCn9L5VIt7lisg4TExOYCnzuumO+9A==
+X-Received: by 2002:a5d:5387:: with SMTP id d7mr7529778wrv.312.1567777050244; 
+	Fri, 06 Sep 2019 06:37:30 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzrpuonK7IF0vd2h5/N8BnZyiFJnrBEAjQQ2tjZ4s0GtPaJu0RyYzs+POTHYWjLzSnK7iYEuw==
+X-Received: by 2002:a5d:5387:: with SMTP id d7mr7529755wrv.312.1567777049914; 
+	Fri, 06 Sep 2019 06:37:29 -0700 (PDT)
+Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
+	by smtp.gmail.com with ESMTPSA id k6sm10237535wrg.0.2019.09.06.06.37.28
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 06 Sep 2019 06:37:29 -0700 (PDT)
+Date: Fri, 6 Sep 2019 09:37:26 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Vivek Goyal <vgoyal@redhat.com>
+Subject: Re: [PATCH 00/18] virtiofs: Fix various races and cleanups round 1
+Message-ID: <20190906093703-mutt-send-email-mst@kernel.org>
 References: <20190905194859.16219-1-vgoyal@redhat.com>
-	<20190905194859.16219-15-vgoyal@redhat.com>
-	<20190906120009.GV5900@stefanha-x1.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190906120009.GV5900@stefanha-x1.localdomain>
-User-Agent: Mutt/1.12.0 (2019-05-25)
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.47]);
-	Fri, 06 Sep 2019 13:36:03 +0000 (UTC)
+In-Reply-To: <20190905194859.16219-1-vgoyal@redhat.com>
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: miklos@szeredi.hu, mst@redhat.com, linux-kernel@vger.kernel.org,
-	dgilbert@redhat.com, virtio-fs@redhat.com, linux-fsdevel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
+Cc: miklos@szeredi.hu, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, virtio-fs@redhat.com,
+	stefanha@redhat.com, linux-fsdevel@vger.kernel.org, dgilbert@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,100 +84,67 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Sep 06, 2019 at 01:00:09PM +0100, Stefan Hajnoczi wrote:
-> On Thu, Sep 05, 2019 at 03:48:55PM -0400, Vivek Goyal wrote:
-> > diff --git a/fs/fuse/fuse_i.h b/fs/fuse/fuse_i.h
-> > index 85e2dcad68c1..04e2c000d63f 100644
-> > --- a/fs/fuse/fuse_i.h
-> > +++ b/fs/fuse/fuse_i.h
-> > @@ -479,6 +479,11 @@ struct fuse_iqueue_ops {
-> >  	 */
-> >  	void (*wake_pending_and_unlock)(struct fuse_iqueue *fiq)
-> >  		__releases(fiq->waitq.lock);
-> > +
-> > +	/**
-> > +	 * Put a reference on fiq_priv.
+On Thu, Sep 05, 2019 at 03:48:41PM -0400, Vivek Goyal wrote:
+> Hi,
 > 
-> I'm a bit confused about fiq->priv's role in this.  The callback takes
-> struct fuse_iqueue *fiq as the argument, not void *priv, so it could
-> theoretically do more than just release priv.
+> Michael Tsirkin pointed out issues w.r.t various locking related TODO
+> items and races w.r.t device removal. 
 > 
-> I think one of the following would be clearer:
+> In this first round of cleanups, I have taken care of most pressing
+> issues.
 > 
->  /**
->   * Drop a reference to fiq->priv.
->   */
->  void (*put_priv)(void *priv);
+> These patches apply on top of following.
 > 
-> Or:
+> git://git.kernel.org/pub/scm/linux/kernel/git/mszeredi/fuse.git#virtiofs-v4
 > 
->  /**
->   * Clean up when fuse_iqueue is destroyed.
->   */
->  void (*release)(struct fuse_iqueue *fiq);
+> I have tested these patches with mount/umount and device removal using
+> qemu monitor. For example.
 > 
-> In the second case fuse_conn_put() shouldn't check fiq->priv.
-
-Hi Stefan,
-
-I like using ->release() method sounds better. Here is the updated patch.
-This also changes the next patch, so will post that as well.
-
-Thanks
-Vivek
-
-Subject: virtiofs: Add a fuse_iqueue operation to put() reference
-
-Soon I will make virtio_fs object reference counted, where reference will
-be taken by device as well as by fuse_conn (fuse_conn->fuse_iqueue->fiq_priv).
-
-When fuse_connection is going away, it should put its reference on virtio_fs
-object.
-
-So add a fuse_iqueue method which can be used to call into virtio_fs to
-put the reference on the object (fiq_priv).
-
-Signed-off-by: Vivek Goyal <vgoyal@redhat.com>
----
- fs/fuse/fuse_i.h |    5 +++++
- fs/fuse/inode.c  |    4 ++++
- 2 files changed, 9 insertions(+)
-
-Index: rhvgoyal-linux-fuse/fs/fuse/fuse_i.h
-===================================================================
---- rhvgoyal-linux-fuse.orig/fs/fuse/fuse_i.h	2019-09-06 08:46:41.846086544 -0400
-+++ rhvgoyal-linux-fuse/fs/fuse/fuse_i.h	2019-09-06 09:24:32.752245246 -0400
-@@ -479,6 +479,11 @@ struct fuse_iqueue_ops {
- 	 */
- 	void (*wake_pending_and_unlock)(struct fuse_iqueue *fiq)
- 		__releases(fiq->waitq.lock);
-+
-+	/**
-+	 * Cleanup up when fuse_iqueue is destroyed
-+	 */
-+	void (*release)(struct fuse_iqueue *fiq);
- };
- 
- /** /dev/fuse input queue operations */
-Index: rhvgoyal-linux-fuse/fs/fuse/inode.c
-===================================================================
---- rhvgoyal-linux-fuse.orig/fs/fuse/inode.c	2019-09-06 08:46:41.847086544 -0400
-+++ rhvgoyal-linux-fuse/fs/fuse/inode.c	2019-09-06 09:24:32.754245246 -0400
-@@ -631,8 +631,12 @@ EXPORT_SYMBOL_GPL(fuse_conn_init);
- void fuse_conn_put(struct fuse_conn *fc)
- {
- 	if (refcount_dec_and_test(&fc->count)) {
-+		struct fuse_iqueue *fiq = &fc->iq;
-+
- 		if (fc->destroy_req)
- 			fuse_request_free(fc->destroy_req);
-+		if (fiq->ops->release)
-+			fiq->ops->release(fiq);
- 		put_pid_ns(fc->pid_ns);
- 		put_user_ns(fc->user_ns);
- 		fc->release(fc);
+> virsh qemu-monitor-command --hmp vm9-f28 device_del myvirtiofs
+> 
+> Now a mounted device can be removed and file system will return errors
+> -ENOTCONN and one can unmount it.
+> 
+> Miklos, if you are fine with the patches, I am fine if you fold these
+> all into existing patch. I kept them separate so that review is easier.
+> 
+> Any feedback or comments are welcome.
+> 
+> Thanks
+> Vivek
+> 
 
 
+Another version of a patch with fixes all rolled in would also
+be nice.
+> Vivek Goyal (18):
+>   virtiofs: Remove request from processing list before calling end
+>   virtiofs: Check whether hiprio queue is connected at submission time
+>   virtiofs: Pass fsvq instead of vq as parameter to
+>     virtio_fs_enqueue_req
+>   virtiofs: Check connected state for VQ_REQUEST queue as well
+>   Maintain count of in flight requests for VQ_REQUEST queue
+>   virtiofs: ->remove should not clean virtiofs fuse devices
+>   virtiofs: Stop virtiofs queues when device is being removed
+>   virtiofs: Drain all pending requests during ->remove time
+>   virtiofs: Add an helper to start all the queues
+>   virtiofs: Do not use device managed mem for virtio_fs and virtio_fs_vq
+>   virtiofs: stop and drain queues after sending DESTROY
+>   virtiofs: Use virtio_fs_free_devs() in error path
+>   virtiofs: Do not access virtqueue in request submission path
+>   virtiofs: Add a fuse_iqueue operation to put() reference
+>   virtiofs: Make virtio_fs object refcounted
+>   virtiofs: Use virtio_fs_mutex for races w.r.t ->remove and mount path
+>   virtiofs: Remove TODO to quiesce/end_requests
+>   virtiofs: Remove TODO item from virtio_fs_free_devs()
+> 
+>  fs/fuse/fuse_i.h    |   5 +
+>  fs/fuse/inode.c     |   6 +
+>  fs/fuse/virtio_fs.c | 259 ++++++++++++++++++++++++++++++++------------
+>  3 files changed, 198 insertions(+), 72 deletions(-)
+> 
+> -- 
+> 2.20.1
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
