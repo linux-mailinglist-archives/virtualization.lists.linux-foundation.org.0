@@ -2,79 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 674D1ABA98
-	for <lists.virtualization@lfdr.de>; Fri,  6 Sep 2019 16:17:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22C9BABAAD
+	for <lists.virtualization@lfdr.de>; Fri,  6 Sep 2019 16:19:04 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9737B2393;
-	Fri,  6 Sep 2019 14:17:53 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 06AC52394;
+	Fri,  6 Sep 2019 14:18:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E46B92356
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 430B42357
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 14:17:51 +0000 (UTC)
+	Fri,  6 Sep 2019 14:18:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 99DF3756
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id F1E88756
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 14:17:51 +0000 (UTC)
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
-	[209.85.160.199])
+	Fri,  6 Sep 2019 14:18:56 +0000 (UTC)
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+	[209.85.160.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 315A84E924
+	by mx1.redhat.com (Postfix) with ESMTPS id 7B6D781F22
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 14:17:51 +0000 (UTC)
-Received: by mail-qt1-f199.google.com with SMTP id 91so6443561qtf.13
+	Fri,  6 Sep 2019 14:18:56 +0000 (UTC)
+Received: by mail-qt1-f197.google.com with SMTP id f19so6473686qtq.1
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 06 Sep 2019 07:17:51 -0700 (PDT)
+	Fri, 06 Sep 2019 07:18:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to;
-	bh=tzDszuqoBQ88xDVaM9hs1cwB75PSJweaPTjm/VD0ZjM=;
-	b=n8JKrLWDgGTWKIxMCWtKOZqHSn8CY+a3LlvOOgJdwWDyCR/YdaUhAvuyDu7bsUcyAZ
-	q5F5Ox2ALH16vwjdpniMP1DVU+4AS6TJK0zRWvTUf+uV5/o7ziQ4HUqvvRwVpHakoR2i
-	vxXBXzVjkiZOrpGuNJ4D1ZW6r9WBm8j6KGfsEKE6awXFCUkMZq4KOYGJsw9eG6xk+mkX
-	KpzD/aqktm1j/C70boNwlIh51n1G0DxOtw+/l+I0HCyVzg1vRX6/+Sv475VasGrOQxI/
-	aMTyJdvPdurgHQoyK1eIJj7PYTlE74Ha1kGg591b0Z2DzrjZPVRufYKd5KvCdurMPERV
-	G8CQ==
-X-Gm-Message-State: APjAAAXoQ/9DckNnjW+YODR6/WHkT9nk4dzFQioPEf1SuEudPervincU
-	/f5AT2ptgtyH+3VzlpJAGZj+5C80EprlYt6IG9IlPFCqpr9MaTxPK/4Zoy/TCIFOF1lc4RFiKax
-	lI63JXzkbjetoDerY0Ur08M5KH3miuwyteC2BZMcMHA==
-X-Received: by 2002:ac8:4510:: with SMTP id q16mr8952803qtn.247.1567779470606; 
-	Fri, 06 Sep 2019 07:17:50 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxQiC3PC9TmfSYzvcGUcmmMs1BRVachZAgmwDWOQxgs/xawnMqIPU9mszTB1/u4msJYq21W3A==
-X-Received: by 2002:ac8:4510:: with SMTP id q16mr8952787qtn.247.1567779470471; 
-	Fri, 06 Sep 2019 07:17:50 -0700 (PDT)
+	bh=741o/xQPcgkh8sbSjiFyBn3gsnAEkmJOCIfqfDhtUBo=;
+	b=fkYmBOHAR4mzUSq6eNI9V/nHwX9um6RV/aykrYRSWYcKRopOgbwreY8kYgNliOPVI8
+	b12ez0nCln5UgiT8YYvJOBgiy0OtoUIX/sDUe0JtSVy4OE887JDKpeMqVijNmL5NpP2V
+	pmJa6MH7Kw18bbyacamgimUc5uAjtJbkRjoUFx7FNN404R7R/vbBWbDGkIzq8rChnae8
+	36fJAb6XfYbmkS2MD+r5L/UImW4hCB+zBn56B65bOqamCqx2i+wVAEB5r34hH6/sZhCS
+	bkyqsEsz3x/ezDCQ8TznSxRH5KFjyA29ldwLwKF4wHgcUBsDJcvUChAfSQqixXpeWL+V
+	WD7Q==
+X-Gm-Message-State: APjAAAWpZGkwfPqHxRF6CNgpaK15YqFKkBKC1lfo+4Zco9yywpF5LxEk
+	9duZp11rnzkrGZB9e7yVaQ8lSz0thTfIKKaxeS6Wk90la3YveAIOy1AtELUTa1jAdhKcZoncvNh
+	3MMZEGxIXX6IHLJF6NVIhuRuNIS58PzjAl+qgOhQsoA==
+X-Received: by 2002:ac8:3195:: with SMTP id h21mr9753400qte.350.1567779535854; 
+	Fri, 06 Sep 2019 07:18:55 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqxGLpg1Ryu90HpqFQxE1o/aqz1GtskO77HSqagnTOVU8en/4xP+XAgktTlx6GUHLSwh5hScgw==
+X-Received: by 2002:ac8:3195:: with SMTP id h21mr9753390qte.350.1567779535712; 
+	Fri, 06 Sep 2019 07:18:55 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
-	by smtp.gmail.com with ESMTPSA id z5sm3254157qtb.49.2019.09.06.07.17.47
+	by smtp.gmail.com with ESMTPSA id
+	g12sm2422156qkm.25.2019.09.06.07.18.52
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 06 Sep 2019 07:17:49 -0700 (PDT)
-Date: Fri, 6 Sep 2019 10:17:44 -0400
+	Fri, 06 Sep 2019 07:18:54 -0700 (PDT)
+Date: Fri, 6 Sep 2019 10:18:49 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Miklos Szeredi <miklos@szeredi.hu>
-Subject: Re: [PATCH 00/18] virtiofs: Fix various races and cleanups round 1
-Message-ID: <20190906101339-mutt-send-email-mst@kernel.org>
+To: Vivek Goyal <vgoyal@redhat.com>
+Subject: Re: [PATCH 08/18] virtiofs: Drain all pending requests during
+	->remove time
+Message-ID: <20190906101819-mutt-send-email-mst@kernel.org>
 References: <20190905194859.16219-1-vgoyal@redhat.com>
-	<CAJfpegu8POz9gC4MDEcXxDWBD0giUNFgJhMEzntJX_u4+cS9Zw@mail.gmail.com>
-	<20190906103613.GH5900@stefanha-x1.localdomain>
-	<CAJfpegudNVZitQ5L8gPvA45mRPFDk9fhyboceVW6xShpJ4mLww@mail.gmail.com>
-	<20190906120817.GA22083@redhat.com>
-	<20190906095428-mutt-send-email-mst@kernel.org>
-	<CAJfpeguVvwRCi7+23W2qA+KHeoaYaR7uKsX+JykC3HK00uGSNQ@mail.gmail.com>
+	<20190905194859.16219-9-vgoyal@redhat.com>
+	<20190906105210.GP5900@stefanha-x1.localdomain>
+	<20190906141705.GF22083@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAJfpeguVvwRCi7+23W2qA+KHeoaYaR7uKsX+JykC3HK00uGSNQ@mail.gmail.com>
+In-Reply-To: <20190906141705.GF22083@redhat.com>
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	virtio-fs@redhat.com, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+Cc: miklos@szeredi.hu, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, virtio-fs@redhat.com,
 	Stefan Hajnoczi <stefanha@redhat.com>,
-	linux-fsdevel@vger.kernel.org, Vivek Goyal <vgoyal@redhat.com>
+	linux-fsdevel@vger.kernel.org, dgilbert@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -91,13 +90,39 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Sep 06, 2019 at 04:11:45PM +0200, Miklos Szeredi wrote:
-> This is not a drop in replacement for blk and scsi transports.  More
-> for virtio-9p.  Does that have anything similar?
+On Fri, Sep 06, 2019 at 10:17:05AM -0400, Vivek Goyal wrote:
+> On Fri, Sep 06, 2019 at 11:52:10AM +0100, Stefan Hajnoczi wrote:
+> > On Thu, Sep 05, 2019 at 03:48:49PM -0400, Vivek Goyal wrote:
+> > > +static void virtio_fs_drain_queue(struct virtio_fs_vq *fsvq)
+> > > +{
+> > > +	WARN_ON(fsvq->in_flight < 0);
+> > > +
+> > > +	/* Wait for in flight requests to finish.*/
+> > > +	while (1) {
+> > > +		spin_lock(&fsvq->lock);
+> > > +		if (!fsvq->in_flight) {
+> > > +			spin_unlock(&fsvq->lock);
+> > > +			break;
+> > > +		}
+> > > +		spin_unlock(&fsvq->lock);
+> > > +		usleep_range(1000, 2000);
+> > > +	}
+> > 
+> > I think all contexts that call this allow sleeping so we could avoid
+> > usleep here.
+> 
+> usleep_range() is supposed to be used from non-atomic context.
+> 
+> https://github.com/torvalds/linux/blob/master/Documentation/timers/timers-howto.rst
+> 
+> What construct you are thinking of?
+> 
+> Vivek
 
-9p seems to supports unplug, yes. It's not great in that it
-blocks until we close the channel, but it's there and
-it does not crash or leak memory.
+completion + signal on vq callback?
+
+-- 
+MST
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
