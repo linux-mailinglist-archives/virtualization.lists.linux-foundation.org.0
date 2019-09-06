@@ -2,71 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E432ABA26
-	for <lists.virtualization@lfdr.de>; Fri,  6 Sep 2019 16:03:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 212FDABA47
+	for <lists.virtualization@lfdr.de>; Fri,  6 Sep 2019 16:06:51 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 358ED2356;
-	Fri,  6 Sep 2019 14:03:05 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id D7A8E235D;
+	Fri,  6 Sep 2019 14:06:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3C7232351
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DF4E42356
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 14:03:03 +0000 (UTC)
+	Fri,  6 Sep 2019 14:06:43 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B2D597DB
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7C9D5756
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 14:03:02 +0000 (UTC)
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
-	[209.85.160.199])
+	Fri,  6 Sep 2019 14:06:43 +0000 (UTC)
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+	[209.85.222.200])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 29EED69066
+	by mx1.redhat.com (Postfix) with ESMTPS id 0919CC05AA63
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  6 Sep 2019 14:03:02 +0000 (UTC)
-Received: by mail-qt1-f199.google.com with SMTP id h18so6348672qto.18
+	Fri,  6 Sep 2019 14:06:43 +0000 (UTC)
+Received: by mail-qk1-f200.google.com with SMTP id q62so6589952qkd.3
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 06 Sep 2019 07:03:02 -0700 (PDT)
+	Fri, 06 Sep 2019 07:06:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to;
-	bh=69RmnXR6zcsEVhnC3KQRmXknmA6GZn+HdYR3IeVhjJw=;
-	b=sd6XiSDqWsloXACdN4wqKzC0VnjWJDRtFZ7r4KqVgnLQzlZhZfsGgb0eO7UxfwCBxX
-	5NQR3BG8NmXOJWC7oQCgUqUTKq20Bx8RIRJ8zrIF9zSMBerFf7eeyczTLCKbeLLX/ql/
-	YDEJVkf/TkrdfJcgCQV9k9muP01xgts335dlANeRmEHbmUtij7H01gvCYSd+DEOmSHgd
-	sfg8rEf41vPXkOT3HTCmy0qOtWuKA5RNDVtf8QtQujPD42RPjpFrFenwnrp/YyPujS2R
-	tdDR9m/pENV/1dpJREWreacwlikmFP0CwCZmvJRDXdOE+aDZtAxDsCZg7IDeehckQXQT
-	wX7g==
-X-Gm-Message-State: APjAAAU2CbCP/taOpckYxd9YfpY9+49CnTmbOQVRYXv1T7myHgeTFLsi
-	EKm/GLhoe2RKJRVTCyqyQb7LcC1zn/Pe+qQPCPuLGGb0U66zFy0FueRHQ8WrCFfcyWOBA54eIRN
-	iUCCFIWk921NiKx2GtYW+eeFdR8hpZQGrlCYOzwtMNQ==
-X-Received: by 2002:ac8:6a15:: with SMTP id t21mr9290532qtr.145.1567778581517; 
-	Fri, 06 Sep 2019 07:03:01 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxcpH88rdeTHqxjQr9dT1lPBuVD/AjE6lRlaotJPnRZBpDHEe56xygVfVxboYQ47stviHNvVg==
-X-Received: by 2002:ac8:6a15:: with SMTP id t21mr9290512qtr.145.1567778581326; 
-	Fri, 06 Sep 2019 07:03:01 -0700 (PDT)
+	bh=XVlBYwWWxYZBuj80Wo4VR566is8MJKIph81f4lPbuDU=;
+	b=gpbqY8cVSRFXim43qjDp18uJbx3CvaCFHx67PhbaZ9/vF8gXBoJs+lA/JVFXS1CEUl
+	A/Ke88G6BpnPVGjU8emd3Raeu9ynQbcOb/1eEhUzjxM8AcTco3cVDpd4a7nrO3TGORK3
+	xHJ4jI8A50NKt+pB/KQ/EZJRg0aqnfUBTa2UDXCs7m+IhDIX6ev01IM23oqMwB6I2JA0
+	JMZ9pWMSrqcDzjxTLDaD9UmH4P3LRDYi7WxAhAtv5hPEAIO0wIsJssRvDxYIA/Lw0MmL
+	NswYFxeDoRas3pyUQxeuxHV54GNmwMLzhsjy6mq9i0R530cpZ5fTA/MD2cQn4xhFTj4Z
+	buUA==
+X-Gm-Message-State: APjAAAXJvQgj0OQDSPEKvpDDhNB5UB3Tm65nQCC+8eGTlfuXIRYJMPma
+	AEcLptCbW4WZoaqHS8YCAH42Ww21yP7iy8UBQXiRPdKmwUlV0VwnpN6ubw/LdDDDClco9VvhhKS
+	YzKsyA65inTmsaVGB5zof3AFD948vFsaBKd6mwzeeAg==
+X-Received: by 2002:a05:620a:1592:: with SMTP id
+	d18mr8385847qkk.468.1567778802400; 
+	Fri, 06 Sep 2019 07:06:42 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqyFfHmt4BAMm3zXYOXNtxtGGgrko1UO/aCARKEq+SvfmFdpDLoU/MFEaF1sYtHtlkBh4NqgIw==
+X-Received: by 2002:a05:620a:1592:: with SMTP id
+	d18mr8385838qkk.468.1567778802258; 
+	Fri, 06 Sep 2019 07:06:42 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
-	by smtp.gmail.com with ESMTPSA id
-	c26sm3344940qtk.93.2019.09.06.07.02.58
+	by smtp.gmail.com with ESMTPSA id l22sm2186175qtp.8.2019.09.06.07.06.39
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 06 Sep 2019 07:03:00 -0700 (PDT)
-Date: Fri, 6 Sep 2019 10:02:55 -0400
+	Fri, 06 Sep 2019 07:06:41 -0700 (PDT)
+Date: Fri, 6 Sep 2019 10:06:36 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Matthias Lange <matthias.lange@kernkonzept.com>
-Subject: Re: [PATCH] virtio_ring: fix unmap of indirect descriptors
-Message-ID: <20190906095904-mutt-send-email-mst@kernel.org>
-References: <20190906120659.4545-1-matthias.lange@kernkonzept.com>
+To: Matej Genci <matej.genci@nutanix.com>
+Subject: Re: [PATCH] virtio: add VIRTIO_RING_NO_LEGACY
+Message-ID: <20190906100456-mutt-send-email-mst@kernel.org>
+References: <20190906124130.129870-1-matej.genci@nutanix.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190906120659.4545-1-matthias.lange@kernkonzept.com>
+In-Reply-To: <20190906124130.129870-1-matej.genci@nutanix.com>
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: virtualization@lists.linux-foundation.org
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -83,75 +86,45 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Sep 06, 2019 at 02:06:59PM +0200, Matthias Lange wrote:
-> The function virtqueue_add_split() DMA-maps the scatterlist buffers. In
-> case a mapping error occurs the already mapped buffers must be unmapped.
-> This happens by jumping to the 'unmap_release' label.
+On Fri, Sep 06, 2019 at 12:42:14PM +0000, Matej Genci wrote:
+> Add macro to disable legacy functions vring_init and vring_size.
 > 
-> In case of indirect descriptors the release is wrong and may leak kernel
-> memory. Because the implementation assumes that the head descriptor is
-> already mapped it starts iterating over the descriptor list starting
-> from the head descriptor. However for indirect descriptors the head
-> descriptor is never mapped in case of an error.
-> 
-> The fix is to initialize the start index with zero in case of indirect
-> descriptors and use the 'desc' pointer directly for iterating over the
-> descriptor chain.
-> 
-> This fix also changes the return code from EIO to ENOSPC in case of a
-> mapping error. The reason is that drivers such as virtio_blk may retry
-> their request and thus can recover from a mapping error.
-> 
-> Signed-off-by: Matthias Lange <matthias.lange@kernkonzept.com>
-
-Thanks for the patch!
-
-However please, split this to 2 patches.
-I think the 1st patch at least is a stable candidate.
-
-About the return code part - could you please add a bit more explanation
-in the commit log? E.g. document when does it trigger and what is the
-effect of the fix.  Thanks!
-
+> Signed-off-by: Matej Genci <matej.genci@nutanix.com>
 > ---
->  drivers/virtio/virtio_ring.c | 10 +++++++---
->  1 file changed, 7 insertions(+), 3 deletions(-)
+>  include/uapi/linux/virtio_ring.h | 4 ++++
+>  1 file changed, 4 insertions(+)
 > 
-> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-> index c8be1c4f5b55..d2e001f92e6e 100644
-> --- a/drivers/virtio/virtio_ring.c
-> +++ b/drivers/virtio/virtio_ring.c
-> @@ -566,13 +566,17 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
+> diff --git a/include/uapi/linux/virtio_ring.h b/include/uapi/linux/virtio_ring.h
+> index 4c4e24c291a5..496db2f33830 100644
+> --- a/include/uapi/linux/virtio_ring.h
+> +++ b/include/uapi/linux/virtio_ring.h
+> @@ -164,6 +164,8 @@ struct vring {
+>  #define vring_used_event(vr) ((vr)->avail->ring[(vr)->num])
+>  #define vring_avail_event(vr) (*(__virtio16 *)&(vr)->used->ring[(vr)->num])
 >  
->  unmap_release:
->  	err_idx = i;
-> -	i = head;
+> +#ifndef VIRTIO_RING_NO_LEGACY
 > +
-> +	if (indirect)
-> +		i = 0;
-> +	else
-> +		i = head;
->  
->  	for (n = 0; n < total_sg; n++) {
->  		if (i == err_idx)
->  			break;
->  		vring_unmap_one_split(vq, &desc[i]);
-> -		i = virtio16_to_cpu(_vq->vdev, vq->split.vring.desc[i].next);
-> +		i = virtio16_to_cpu(_vq->vdev, desc[i].next);
->  	}
->  
->  	if (indirect)
-> @@ -1081,7 +1085,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
->  	kfree(desc);
->  
->  	END_USE(vq);
-> -	return -EIO;
-> +	return -ENOSPC;
+>  static inline void vring_init(struct vring *vr, unsigned int num, void *p,
+>  			      unsigned long align)
+>  {
+> @@ -181,6 +183,8 @@ static inline unsigned vring_size(unsigned int num, unsigned long align)
+>  		+ sizeof(__virtio16) * 3 + sizeof(struct vring_used_elem) * num;
 >  }
 >  
->  static inline int virtqueue_add_packed(struct virtqueue *_vq,
+> +#endif
+> +
+>  /* The following is used with USED_EVENT_IDX and AVAIL_EVENT_IDX */
+>  /* Assuming a given event_idx value from the other side, if
+>   * we have just incremented index from old to new_idx,
+
+Thanks!
+I am guessing vring_used_event/vring_avail_event should be within
+this ifndef too? How about struct vring?
+
+
 > -- 
-> 2.17.1
+> 2.22.0
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
