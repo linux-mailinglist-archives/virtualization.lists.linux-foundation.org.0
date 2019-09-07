@@ -2,53 +2,117 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0276AC404
-	for <lists.virtualization@lfdr.de>; Sat,  7 Sep 2019 04:00:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01906AC726
+	for <lists.virtualization@lfdr.de>; Sat,  7 Sep 2019 17:03:46 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 1001029B8;
-	Sat,  7 Sep 2019 02:00:28 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id DFA27E04;
+	Sat,  7 Sep 2019 15:03:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9338A28ED
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E7634DCD
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  7 Sep 2019 02:00:26 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail3-166.sinamail.sina.com.cn (mail3-166.sinamail.sina.com.cn
-	[202.108.3.166])
-	by smtp1.linuxfoundation.org (Postfix) with SMTP id 67593756
+	Sat,  7 Sep 2019 15:03:36 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com
+	(mail-eopbgr10046.outbound.protection.outlook.com [40.107.1.46])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1BDE4756
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  7 Sep 2019 02:00:24 +0000 (UTC)
-Received: from unknown (HELO [IPv6:::ffff:192.168.199.155])([114.254.173.51])
-	by sina.com with ESMTP
-	id 5D730F34000055C2; Sat, 7 Sep 2019 10:00:22 +0800 (CST)
-X-Sender: hdanton@sina.com
-X-Auth-ID: hdanton@sina.com
-X-SMAIL-MID: 35191854919708
+	Sat,  7 Sep 2019 15:03:36 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=XilVHR8njVn928K2FoWl6PZxVqBPrhE8HtAOJzj7Rq4kQK75f6KKfmePsEYuD0C9bSFR615+v0Pt176kMub+tZD8KpZGnF64HeBPDTURlrkiI9bYnALe4gzGRASn1RTXYLVvPuct6xnzUPo3ZQdSjzSrqdOHV6Fmc97l0AL5Has7dRsqslXm9ix61YKj8o/hUX8+ja7njIQ0DmQ0DL67C2Bb5wpBR4uZPwP7AvzX4aKO9eMohPYtJTsvaSWr/JS0agGM7UpAKyNOvYEiMJKHm/WRfEfQLsLnRtyzrT7Lh9YQDEMC4ceImat2hkcVkzZf646/ajGjuGloFS11LgSp5A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=nkhU6WRg1mOPBg6c9WFprl+flEhqSQL+E2ThJSfmXIk=;
+	b=g5zbMqiq7Wlqt5CnPXf2vTc9bkydZo3z7oxScT6izureKImksfINdbC9RdFb35dEq0wivhtSj/RMya5K2ic5ZKZYliasSRPGR3SdgHdR3pod1iTVXBXpPA2gM9/uuSQasmalCha8vwtp7FSRO+1w/sf7fclcOeAU1hvQykhb+4HuaESqXkLZYedrFULmQsi1EFiPQd2AH/LbnnWZJqxyfKamdvIkkSKUJ4uF+J8Fybxa1mVLawXtW1/fS51jIDyouVr4gBfI5qKEH2+D74i1SptfLg5kwlnwbJl9WV9PjxgqGYWky04ShvN+mqRcvZb+BsrowEMaVBji6sQe58XsgQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=mellanox.com;
+	dmarc=pass action=none header.from=mellanox.com; 
+	dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+	s=selector2;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=nkhU6WRg1mOPBg6c9WFprl+flEhqSQL+E2ThJSfmXIk=;
+	b=U7S5FLl3rtBHikPfgtfdC3B2v+zo8Q2ZEgNug2r5CQ9qemwE7mxqjqFf1w/uBLKMu3Rcyd4DQw0w7nbQp5on9yD65tttBVwHQF0yqikq4hnV6uYJI8i/fno9fmP8QD6Ps/qaMzDVl6/oIOWAMpMiGUckKhyoG/6auWNms4+VJdk=
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
+	VI1PR05MB3328.eurprd05.prod.outlook.com (10.170.238.141) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2241.15; Sat, 7 Sep 2019 15:03:32 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+	([fe80::79a3:d971:d1f3:ab6f]) by
+	VI1PR05MB4141.eurprd05.prod.outlook.com
+	([fe80::79a3:d971:d1f3:ab6f%7]) with mapi id 15.20.2220.022;
+	Sat, 7 Sep 2019 15:03:32 +0000
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH 0/2] Revert and rework on the metadata accelreation
+Thread-Topic: [PATCH 0/2] Revert and rework on the metadata accelreation
+Thread-Index: AQHVY+VUnpT/Tzy9vUuDxdg4xWUdk6cdHGCAgAFQPoCAAeZoAA==
+Date: Sat, 7 Sep 2019 15:03:32 +0000
+Message-ID: <20190907150330.GC2940@mellanox.com>
+References: <20190905122736.19768-1-jasowang@redhat.com>
+	<20190905135907.GB6011@mellanox.com>
+	<7785d39b-b4e7-8165-516c-ee6a08ac9c4e@redhat.com>
+In-Reply-To: <7785d39b-b4e7-8165-516c-ee6a08ac9c4e@redhat.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: LO2P265CA0437.GBRP265.PROD.OUTLOOK.COM
+	(2603:10a6:600:e::17) To VI1PR05MB4141.eurprd05.prod.outlook.com
+	(2603:10a6:803:4d::16)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=jgg@mellanox.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [81.218.143.71]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 8a921fc1-10d9-47f0-8a50-08d733a48c92
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+	SRVR:VI1PR05MB3328; 
+x-ms-traffictypediagnostic: VI1PR05MB3328:
+x-ms-exchange-purlcount: 1
+x-microsoft-antispam-prvs: <VI1PR05MB33284BEEEC5A848E792B47DCCFB50@VI1PR05MB3328.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:6790;
+x-forefront-prvs: 0153A8321A
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(4636009)(366004)(376002)(136003)(346002)(39850400004)(396003)(189003)(199004)(76176011)(99286004)(66446008)(6506007)(86362001)(71190400001)(71200400001)(66946007)(52116002)(256004)(386003)(5660300002)(478600001)(6116002)(6916009)(7736002)(14444005)(25786009)(3846002)(966005)(81156014)(33656002)(54906003)(14454004)(8676002)(1076003)(486006)(4326008)(305945005)(316002)(66066001)(476003)(64756008)(2906002)(53936002)(446003)(81166006)(6246003)(11346002)(2616005)(66556008)(8936002)(26005)(6486002)(186003)(66476007)(36756003)(229853002)(102836004)(6436002)(6512007)(6306002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB3328;
+	H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: xxuY2pPvq99pYKWpjAcid3zlFUBcjTLJ8Y+Z3fG9th2PQaVrjiwokecx4TBf7/K55bxWRjZXOIxbNCCky7m53B+05MF5yJlHnKOzhXy61nlqG+VFPG/QpTl0GskJYagSGB2w5jZ62JdTV/TVdTTDc34uQD+YGuar/y8M/v+e3uy0SGvIX9xTzin+23ksCsC0JNqeTFgiGsbGdjEoFCPcr/Yso6SIleJR9Y55GADfIKj4cY8vD+imsMq1V0+7ofAie3XlbfyOYpO62lGyo4Y9xrP3iykNXAKmpTcxZIMatq7HphcXQBPJ8XDF3C+dYn2oXEu/j0/UVaf9kvq2tEvmtfIERZteMFSPOzCeVHqRG42PwFr7jv260c7z+sW4ZCV0Kd1fgL9N5oOjw6K5T+5cX2q0tzeipH5lsQLfsmjDgHE=
+x-ms-exchange-transport-forked: True
+Content-ID: <1C5F76DC2A6AD84FA5F277E8F3D586C0@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-To: Frediano Ziglio <fziglio@redhat.com>
-From: Hillf Danton <hdanton@sina.com>
-Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
-Date: Sat, 7 Sep 2019 10:00:20 +0800
-Importance: normal
-X-Priority: 3
-Thread-Topic: Xorg indefinitely hangs in kernelspace
-In-Reply-To: <236676538.10995729.1567801661076.JavaMail.zimbra@redhat.com>
-References: <20190906055322.17900-1-hdanton@sina.com>
-	<236676538.10995729.1567801661076.JavaMail.zimbra@redhat.com>
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,FREEMAIL_FROM,
-	HTML_MESSAGE, MISSING_MID, RCVD_IN_DNSWL_NONE autolearn=no version=3.3.1
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a921fc1-10d9-47f0-8a50-08d733a48c92
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Sep 2019 15:03:32.4230 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: UrS2Fv3py7cTCu60J+995/F+M9vCTlkTcKEpTXwyUHexsIja+Pm03l4VhLxxADzr8eLVJdrA0ZFPomovx9/S/w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB3328
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>,
+Cc: "aarcange@redhat.com" <aarcange@redhat.com>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	"mst@redhat.com" <mst@redhat.com>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
 	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
 	"virtualization@lists.linux-foundation.org"
 	<virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
-	Jaak Ristioja <jaak@ristioja.ee>,
-	"spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+	"linux-mm@kvack.org" <linux-mm@kvack.org>,
+	"jglisse@redhat.com" <jglisse@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,128 +124,32 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8170375718104058186=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
-Message-Id: <20190907020028.1001029B8@mail.linuxfoundation.org>
 
-
---===============8170375718104058186==
-Content-Type: multipart/alternative;
-	boundary="_14B5F2F5-2A3E-4F1A-AB25-A0821578134D_"
-
-
---_14B5F2F5-2A3E-4F1A-AB25-A0821578134D_
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
-
-From Frediano Ziglio <fziglio@redhat.com>
->
-> Where does it came this patch?
-
-My fingers tapping the keyboard.
-
-> Is it already somewhere?
-
-No idea yet.
-
-> Is it supposed to fix this issue?
-
-It may do nothing else as far as I can tell.
-
-> Does it affect some other card beside QXL?
-
-Perhaps.
-
-
-
---_14B5F2F5-2A3E-4F1A-AB25-A0821578134D_
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset="utf-8"
-
-<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" xmlns:w=3D"urn:sc=
-hemas-microsoft-com:office:word" xmlns:m=3D"http://schemas.microsoft.com/of=
-fice/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html40"><head><meta ht=
-tp-equiv=3DContent-Type content=3D"text/html; charset=3Dutf-8"><meta name=
-=3DGenerator content=3D"Microsoft Word 15 (filtered medium)"><style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:DengXian;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:DengXian;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	text-align:justify;
-	text-justify:inter-ideograph;
-	font-size:10.5pt;
-	font-family:DengXian;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-span.DefaultFontHxMailStyle
-	{mso-style-name:"Default Font HxMail Style";
-	font-family:DengXian;
-	color:windowtext;
-	font-weight:normal;
-	font-style:normal;
-	text-decoration:none none;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-/* Page Definitions */
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 90.0pt 72.0pt 90.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style></head><body lang=3DZH-CN link=3Dblue vlink=3D"#954F72"><div cla=
-ss=3DWordSection1><p class=3DMsoNormal><span class=3DDefaultFontHxMailStyle=
-><span lang=3DEN-US>From Frediano Ziglio &lt;fziglio@redhat.com&gt;</span><=
-/span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt;<o:p>&nbsp;</o:p></sp=
-an></p><p class=3DMsoNormal><span lang=3DEN-US>&gt; Where does it came this=
- patch?</span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p>=
-</span></p><p class=3DMsoNormal><span lang=3DEN-US>My fingers tapping the k=
-eyboard.</span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p=
-></span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt; Is it already some=
-where?</span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p><=
-/span></p><p class=3DMsoNormal><span lang=3DEN-US>No idea yet.</span></p><p=
- class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p><p class=
-=3DMsoNormal><span lang=3DEN-US>&gt; Is it supposed to fix this issue?</spa=
-n></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p><=
-p class=3DMsoNormal><span lang=3DEN-US>It may do nothing else as far as I c=
-an tell.</span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p=
-></span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt; Does it affect som=
-e other card beside QXL?</span></p><p class=3DMsoNormal><span lang=3DEN-US>=
-<o:p>&nbsp;</o:p></span></p><p class=3DMsoNormal><span lang=3DEN-US>Perhaps=
-.</span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span=
-></p><p class=3DMsoNormal><span class=3DDefaultFontHxMailStyle><span lang=
-=3DEN-US><o:p>&nbsp;</o:p></span></span></p></div></body></html>=
-
---_14B5F2F5-2A3E-4F1A-AB25-A0821578134D_--
-
-
-
---===============8170375718104058186==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8170375718104058186==--
-
-
+T24gRnJpLCBTZXAgMDYsIDIwMTkgYXQgMDY6MDI6MzVQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToNCj4gDQo+IE9uIDIwMTkvOS81IOS4i+WNiDk6NTksIEphc29uIEd1bnRob3JwZSB3cm90ZToN
+Cj4gPiBPbiBUaHUsIFNlcCAwNSwgMjAxOSBhdCAwODoyNzozNFBNICswODAwLCBKYXNvbiBXYW5n
+IHdyb3RlOg0KPiA+ID4gSGk6DQo+ID4gPiANCj4gPiA+IFBlciByZXF1ZXN0IGZyb20gTWljaGFl
+bCBhbmQgSmFzb24sIHRoZSBtZXRhZGF0YSBhY2NlbHJlYXRpb24gaXMNCj4gPiA+IHJldmVydGVk
+IGluIHRoaXMgdmVyc2lvbiBhbmQgcmV3b3JrIGluIG5leHQgdmVyc2lvbi4NCj4gPiA+IA0KPiA+
+ID4gUGxlYXNlIHJldmlldy4NCj4gPiA+IA0KPiA+ID4gVGhhbmtzDQo+ID4gPiANCj4gPiA+IEph
+c29uIFdhbmcgKDIpOg0KPiA+ID4gICAgUmV2ZXJ0ICJ2aG9zdDogYWNjZXNzIHZxIG1ldGFkYXRh
+IHRocm91Z2gga2VybmVsIHZpcnR1YWwgYWRkcmVzcyINCj4gPiA+ICAgIHZob3N0OiByZS1pbnRy
+b2R1Y2luZyBtZXRhZGF0YSBhY2NlbGVyYXRpb24gdGhyb3VnaCBrZXJuZWwgdmlydHVhbA0KPiA+
+ID4gICAgICBhZGRyZXNzDQo+ID4gVGhlcmUgYXJlIGEgYnVuY2ggb2YgcGF0Y2hlcyBpbiB0aGUg
+cXVldWUgYWxyZWFkeSB0aGF0IHdpbGwgaGVscA0KPiA+IHZob3N0LCBhbmQgSSBhIHdvcmtpbmcg
+b24gb25lIGZvciBuZXh0IGN5Y2xlIHRoYXQgd2lsbCBoZWxwIGFsb3QgbW9yZQ0KPiA+IHRvby4N
+Cj4gDQo+IA0KPiBJIHdpbGwgY2hlY2sgdGhvc2UgcGF0Y2hlcywgYnV0IGlmIHlvdSBjYW4gZ2l2
+ZSBtZSBzb21lIHBvaW50ZXJzIG9yIGtleXdvcmRzDQo+IGl0IHdvdWxkIGJlIG11Y2ggYXBwcmVj
+aWF0ZWQuDQoNCllvdSBjYW4gbG9vayBoZXJlOg0KDQpodHRwczovL2dpdGh1Yi5jb20vamd1bnRo
+b3JwZS9saW51eC9jb21taXRzL21tdV9ub3RpZmllcg0KDQpUaGUgZmlyc3QgcGFydHMsIHRoZSBn
+ZXQvcHV0IGFyZSBpbiB0aGUgaG1tIHRyZWUsIGFuZCB0aGUgbGFzdCBwYXJ0LA0KdGhlIGludGVy
+dmFsIHRyZWUgaW4gdGhlIGxhc3QgY29tbWl0IGlzIHN0aWxsIGEgV0lQLCBidXQgaXQgd291bGQN
+CnJlbW92ZSBhbG90IG9mIHRoYXQgY29kZSBmcm9tIHZob3N0IGFzIHdlbGwuDQoNCkphc29uDQpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
+dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
+cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
+dHVhbGl6YXRpb24=
