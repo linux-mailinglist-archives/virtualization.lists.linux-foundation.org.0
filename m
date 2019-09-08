@@ -2,117 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01906AC726
-	for <lists.virtualization@lfdr.de>; Sat,  7 Sep 2019 17:03:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39BFAACC4F
+	for <lists.virtualization@lfdr.de>; Sun,  8 Sep 2019 13:05:39 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DFA27E04;
-	Sat,  7 Sep 2019 15:03:38 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C4AFFE7C;
+	Sun,  8 Sep 2019 11:05:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E7634DCD
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9C350E41
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  7 Sep 2019 15:03:36 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
-	(mail-eopbgr10046.outbound.protection.outlook.com [40.107.1.46])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1BDE4756
+	Sun,  8 Sep 2019 11:05:30 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 158FBE6
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  7 Sep 2019 15:03:36 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=XilVHR8njVn928K2FoWl6PZxVqBPrhE8HtAOJzj7Rq4kQK75f6KKfmePsEYuD0C9bSFR615+v0Pt176kMub+tZD8KpZGnF64HeBPDTURlrkiI9bYnALe4gzGRASn1RTXYLVvPuct6xnzUPo3ZQdSjzSrqdOHV6Fmc97l0AL5Has7dRsqslXm9ix61YKj8o/hUX8+ja7njIQ0DmQ0DL67C2Bb5wpBR4uZPwP7AvzX4aKO9eMohPYtJTsvaSWr/JS0agGM7UpAKyNOvYEiMJKHm/WRfEfQLsLnRtyzrT7Lh9YQDEMC4ceImat2hkcVkzZf646/ajGjuGloFS11LgSp5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=nkhU6WRg1mOPBg6c9WFprl+flEhqSQL+E2ThJSfmXIk=;
-	b=g5zbMqiq7Wlqt5CnPXf2vTc9bkydZo3z7oxScT6izureKImksfINdbC9RdFb35dEq0wivhtSj/RMya5K2ic5ZKZYliasSRPGR3SdgHdR3pod1iTVXBXpPA2gM9/uuSQasmalCha8vwtp7FSRO+1w/sf7fclcOeAU1hvQykhb+4HuaESqXkLZYedrFULmQsi1EFiPQd2AH/LbnnWZJqxyfKamdvIkkSKUJ4uF+J8Fybxa1mVLawXtW1/fS51jIDyouVr4gBfI5qKEH2+D74i1SptfLg5kwlnwbJl9WV9PjxgqGYWky04ShvN+mqRcvZb+BsrowEMaVBji6sQe58XsgQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
-	smtp.mailfrom=mellanox.com;
-	dmarc=pass action=none header.from=mellanox.com; 
-	dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=nkhU6WRg1mOPBg6c9WFprl+flEhqSQL+E2ThJSfmXIk=;
-	b=U7S5FLl3rtBHikPfgtfdC3B2v+zo8Q2ZEgNug2r5CQ9qemwE7mxqjqFf1w/uBLKMu3Rcyd4DQw0w7nbQp5on9yD65tttBVwHQF0yqikq4hnV6uYJI8i/fno9fmP8QD6Ps/qaMzDVl6/oIOWAMpMiGUckKhyoG/6auWNms4+VJdk=
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
-	VI1PR05MB3328.eurprd05.prod.outlook.com (10.170.238.141) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2241.15; Sat, 7 Sep 2019 15:03:32 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
-	([fe80::79a3:d971:d1f3:ab6f]) by
-	VI1PR05MB4141.eurprd05.prod.outlook.com
-	([fe80::79a3:d971:d1f3:ab6f%7]) with mapi id 15.20.2220.022;
-	Sat, 7 Sep 2019 15:03:32 +0000
-From: Jason Gunthorpe <jgg@mellanox.com>
+	Sun,  8 Sep 2019 11:05:29 +0000 (UTC)
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+	[209.85.222.200])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 57BF351EFB
+	for <virtualization@lists.linux-foundation.org>;
+	Sun,  8 Sep 2019 11:05:28 +0000 (UTC)
+Received: by mail-qk1-f200.google.com with SMTP id c7so7128720qkc.2
+	for <virtualization@lists.linux-foundation.org>;
+	Sun, 08 Sep 2019 04:05:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=9tfRGdmeUE/Z9Y2EhkmlMZJGk466+lOf2D0bDCWPav8=;
+	b=CML6n6eJfK47gurSZBhUzrD3kLiWB9i8Y5mM4P1kU9VLwXOffN96UZ/EUY14UT+MMR
+	7/CgJPMeSnMmc1+cjrMSthJUCvqBW+3itFWGVTeEx+zd+2Y2nbIGu7Cl3CIiQfdZru7U
+	FraUiTB/0DLk9BDj1qMjwO3OV9tR8WMZ7EM709Wscao5AaUXmMzi6xIK3G/FwrIE4Ky7
+	2A81TQFaQmicEl+hIpWLmAP30bV7nAGfy+XWaFszv2vDZaCjxPp5dKweZpE1Dp1sJJzn
+	uixYlE1hAcJepx3545oRNVjV1TABO1LIZ0+oUF2AUp9Ca+EnEYjeoJ6fUDEbkuGnoDyS
+	zC8w==
+X-Gm-Message-State: APjAAAVCsozCnQ/Hdu4kgDEeDpvllrg/POhBaVFWn8FV+WuSRy3Uv3u9
+	z7uqev0AnXduJjcWnczbj5EeYzTP6u/T2sJPGMFM9GE9DP/56vtSeoAaYjdnmwu8WgAOhnHPlog
+	safvZrPtBR5Spoe0rGUY5/ymYMWusV2OZgsfW52m6zg==
+X-Received: by 2002:a37:a790:: with SMTP id q138mr442122qke.383.1567940727542; 
+	Sun, 08 Sep 2019 04:05:27 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzAac3CfwW+m/WznjGjBaoUehVNd2ZscyL59hTHqw9xy3Gtv4jUYWgQmNbqJAyQNOSE9w/+sg==
+X-Received: by 2002:a37:a790:: with SMTP id q138mr442094qke.383.1567940727212; 
+	Sun, 08 Sep 2019 04:05:27 -0700 (PDT)
+Received: from redhat.com ([212.92.124.241])
+	by smtp.gmail.com with ESMTPSA id k46sm567847qtc.96.2019.09.08.04.05.21
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 08 Sep 2019 04:05:26 -0700 (PDT)
+Date: Sun, 8 Sep 2019 07:05:19 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 0/2] Revert and rework on the metadata accelreation
-Thread-Topic: [PATCH 0/2] Revert and rework on the metadata accelreation
-Thread-Index: AQHVY+VUnpT/Tzy9vUuDxdg4xWUdk6cdHGCAgAFQPoCAAeZoAA==
-Date: Sat, 7 Sep 2019 15:03:32 +0000
-Message-ID: <20190907150330.GC2940@mellanox.com>
+Subject: Re: [PATCH 2/2] vhost: re-introducing metadata acceleration through
+	kernel virtual address
+Message-ID: <20190908063618-mutt-send-email-mst@kernel.org>
 References: <20190905122736.19768-1-jasowang@redhat.com>
-	<20190905135907.GB6011@mellanox.com>
-	<7785d39b-b4e7-8165-516c-ee6a08ac9c4e@redhat.com>
-In-Reply-To: <7785d39b-b4e7-8165-516c-ee6a08ac9c4e@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: LO2P265CA0437.GBRP265.PROD.OUTLOOK.COM
-	(2603:10a6:600:e::17) To VI1PR05MB4141.eurprd05.prod.outlook.com
-	(2603:10a6:803:4d::16)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=jgg@mellanox.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [81.218.143.71]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 8a921fc1-10d9-47f0-8a50-08d733a48c92
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
-	SRVR:VI1PR05MB3328; 
-x-ms-traffictypediagnostic: VI1PR05MB3328:
-x-ms-exchange-purlcount: 1
-x-microsoft-antispam-prvs: <VI1PR05MB33284BEEEC5A848E792B47DCCFB50@VI1PR05MB3328.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:6790;
-x-forefront-prvs: 0153A8321A
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(4636009)(366004)(376002)(136003)(346002)(39850400004)(396003)(189003)(199004)(76176011)(99286004)(66446008)(6506007)(86362001)(71190400001)(71200400001)(66946007)(52116002)(256004)(386003)(5660300002)(478600001)(6116002)(6916009)(7736002)(14444005)(25786009)(3846002)(966005)(81156014)(33656002)(54906003)(14454004)(8676002)(1076003)(486006)(4326008)(305945005)(316002)(66066001)(476003)(64756008)(2906002)(53936002)(446003)(81166006)(6246003)(11346002)(2616005)(66556008)(8936002)(26005)(6486002)(186003)(66476007)(36756003)(229853002)(102836004)(6436002)(6512007)(6306002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB3328;
-	H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: xxuY2pPvq99pYKWpjAcid3zlFUBcjTLJ8Y+Z3fG9th2PQaVrjiwokecx4TBf7/K55bxWRjZXOIxbNCCky7m53B+05MF5yJlHnKOzhXy61nlqG+VFPG/QpTl0GskJYagSGB2w5jZ62JdTV/TVdTTDc34uQD+YGuar/y8M/v+e3uy0SGvIX9xTzin+23ksCsC0JNqeTFgiGsbGdjEoFCPcr/Yso6SIleJR9Y55GADfIKj4cY8vD+imsMq1V0+7ofAie3XlbfyOYpO62lGyo4Y9xrP3iykNXAKmpTcxZIMatq7HphcXQBPJ8XDF3C+dYn2oXEu/j0/UVaf9kvq2tEvmtfIERZteMFSPOzCeVHqRG42PwFr7jv260c7z+sW4ZCV0Kd1fgL9N5oOjw6K5T+5cX2q0tzeipH5lsQLfsmjDgHE=
-x-ms-exchange-transport-forked: True
-Content-ID: <1C5F76DC2A6AD84FA5F277E8F3D586C0@eurprd05.prod.outlook.com>
+	<20190905122736.19768-3-jasowang@redhat.com>
 MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a921fc1-10d9-47f0-8a50-08d733a48c92
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Sep 2019 15:03:32.4230 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: UrS2Fv3py7cTCu60J+995/F+M9vCTlkTcKEpTXwyUHexsIja+Pm03l4VhLxxADzr8eLVJdrA0ZFPomovx9/S/w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB3328
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190905122736.19768-3-jasowang@redhat.com>
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "aarcange@redhat.com" <aarcange@redhat.com>,
-	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	"mst@redhat.com" <mst@redhat.com>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	"linux-mm@kvack.org" <linux-mm@kvack.org>,
-	"jglisse@redhat.com" <jglisse@redhat.com>
+Cc: aarcange@redhat.com, Christoph Hellwig <hch@infradead.org>,
+	linux-parisc@vger.kernel.org, kvm@vger.kernel.org,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	James Bottomley <James.Bottomley@hansenpartnership.com>,
+	linux-mm@kvack.org, jglisse@redhat.com, jgg@mellanox.com,
+	David Miller <davem@davemloft.net>, linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -124,32 +85,786 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gRnJpLCBTZXAgMDYsIDIwMTkgYXQgMDY6MDI6MzVQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToNCj4gDQo+IE9uIDIwMTkvOS81IOS4i+WNiDk6NTksIEphc29uIEd1bnRob3JwZSB3cm90ZToN
-Cj4gPiBPbiBUaHUsIFNlcCAwNSwgMjAxOSBhdCAwODoyNzozNFBNICswODAwLCBKYXNvbiBXYW5n
-IHdyb3RlOg0KPiA+ID4gSGk6DQo+ID4gPiANCj4gPiA+IFBlciByZXF1ZXN0IGZyb20gTWljaGFl
-bCBhbmQgSmFzb24sIHRoZSBtZXRhZGF0YSBhY2NlbHJlYXRpb24gaXMNCj4gPiA+IHJldmVydGVk
-IGluIHRoaXMgdmVyc2lvbiBhbmQgcmV3b3JrIGluIG5leHQgdmVyc2lvbi4NCj4gPiA+IA0KPiA+
-ID4gUGxlYXNlIHJldmlldy4NCj4gPiA+IA0KPiA+ID4gVGhhbmtzDQo+ID4gPiANCj4gPiA+IEph
-c29uIFdhbmcgKDIpOg0KPiA+ID4gICAgUmV2ZXJ0ICJ2aG9zdDogYWNjZXNzIHZxIG1ldGFkYXRh
-IHRocm91Z2gga2VybmVsIHZpcnR1YWwgYWRkcmVzcyINCj4gPiA+ICAgIHZob3N0OiByZS1pbnRy
-b2R1Y2luZyBtZXRhZGF0YSBhY2NlbGVyYXRpb24gdGhyb3VnaCBrZXJuZWwgdmlydHVhbA0KPiA+
-ID4gICAgICBhZGRyZXNzDQo+ID4gVGhlcmUgYXJlIGEgYnVuY2ggb2YgcGF0Y2hlcyBpbiB0aGUg
-cXVldWUgYWxyZWFkeSB0aGF0IHdpbGwgaGVscA0KPiA+IHZob3N0LCBhbmQgSSBhIHdvcmtpbmcg
-b24gb25lIGZvciBuZXh0IGN5Y2xlIHRoYXQgd2lsbCBoZWxwIGFsb3QgbW9yZQ0KPiA+IHRvby4N
-Cj4gDQo+IA0KPiBJIHdpbGwgY2hlY2sgdGhvc2UgcGF0Y2hlcywgYnV0IGlmIHlvdSBjYW4gZ2l2
-ZSBtZSBzb21lIHBvaW50ZXJzIG9yIGtleXdvcmRzDQo+IGl0IHdvdWxkIGJlIG11Y2ggYXBwcmVj
-aWF0ZWQuDQoNCllvdSBjYW4gbG9vayBoZXJlOg0KDQpodHRwczovL2dpdGh1Yi5jb20vamd1bnRo
-b3JwZS9saW51eC9jb21taXRzL21tdV9ub3RpZmllcg0KDQpUaGUgZmlyc3QgcGFydHMsIHRoZSBn
-ZXQvcHV0IGFyZSBpbiB0aGUgaG1tIHRyZWUsIGFuZCB0aGUgbGFzdCBwYXJ0LA0KdGhlIGludGVy
-dmFsIHRyZWUgaW4gdGhlIGxhc3QgY29tbWl0IGlzIHN0aWxsIGEgV0lQLCBidXQgaXQgd291bGQN
-CnJlbW92ZSBhbG90IG9mIHRoYXQgY29kZSBmcm9tIHZob3N0IGFzIHdlbGwuDQoNCkphc29uDQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
-dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
-cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
-dHVhbGl6YXRpb24=
+On Thu, Sep 05, 2019 at 08:27:36PM +0800, Jason Wang wrote:
+> This is a rework on the commit 7f466032dc9e ("vhost: access vq
+> metadata through kernel virtual address").
+> 
+> It was noticed that the copy_to/from_user() friends that was used to
+> access virtqueue metdata tends to be very expensive for dataplane
+> implementation like vhost since it involves lots of software checks,
+> speculation barriers,
+
+So if we drop speculation barrier,
+there's a problem here in access will now be speculated.
+This effectively disables the defence in depth effect of
+b3bbfb3fb5d25776b8e3f361d2eedaabb0b496cd
+    x86: Introduce __uaccess_begin_nospec() and uaccess_try_nospec
+
+
+So now we need to sprinkle array_index_nospec or barrier_nospec over the
+code whenever we use an index we got from userspace.
+See below for some examples.
+
+
+> hardware feature toggling (e.g SMAP). The
+> extra cost will be more obvious when transferring small packets since
+> the time spent on metadata accessing become more significant.
+> 
+> This patch tries to eliminate those overheads by accessing them
+> through direct mapping of those pages. Invalidation callbacks is
+> implemented for co-operation with general VM management (swap, KSM,
+> THP or NUMA balancing). We will try to get the direct mapping of vq
+> metadata before each round of packet processing if it doesn't
+> exist. If we fail, we will simplely fallback to copy_to/from_user()
+> friends.
+> 
+> This invalidation, direct mapping access and set are synchronized
+> through spinlock. This takes a step back from the original commit
+> 7f466032dc9e ("vhost: access vq metadata through kernel virtual
+> address") which tries to RCU which is suspicious and hard to be
+> reviewed. This won't perform as well as RCU because of the atomic,
+> this could be addressed by the future optimization.
+> 
+> This method might does not work for high mem page which requires
+> temporary mapping so we just fallback to normal
+> copy_to/from_user() and may not for arch that has virtual tagged cache
+> since extra cache flushing is needed to eliminate the alias. This will
+> result complex logic and bad performance. For those archs, this patch
+> simply go for copy_to/from_user() friends. This is done by ruling out
+> kernel mapping codes through ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE.
+> 
+> Note that this is only done when device IOTLB is not enabled. We
+> could use similar method to optimize IOTLB in the future.
+> 
+> Tests shows at most about 22% improvement on TX PPS when using
+> virtio-user + vhost_net + xdp1 + TAP on 4.0GHz Kaby Lake.
+> 
+>         SMAP on | SMAP off
+> Before: 4.9Mpps | 6.9Mpps
+> After:  6.0Mpps | 7.5Mpps
+> 
+> On a elder CPU Sandy Bridge without SMAP support. TX PPS doesn't see
+> any difference.
+
+Why is not Kaby Lake with SMAP off the same as Sandy Bridge?
+
+
+> Cc: Andrea Arcangeli <aarcange@redhat.com>
+> Cc: James Bottomley <James.Bottomley@hansenpartnership.com>
+> Cc: Christoph Hellwig <hch@infradead.org>
+> Cc: David Miller <davem@davemloft.net>
+> Cc: Jerome Glisse <jglisse@redhat.com>
+> Cc: Jason Gunthorpe <jgg@mellanox.com>
+> Cc: linux-mm@kvack.org
+> Cc: linux-arm-kernel@lists.infradead.org
+> Cc: linux-parisc@vger.kernel.org
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> ---
+>  drivers/vhost/vhost.c | 551 +++++++++++++++++++++++++++++++++++++++++-
+>  drivers/vhost/vhost.h |  41 ++++
+>  2 files changed, 589 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index 791562e03fe0..f98155f28f02 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -298,6 +298,182 @@ static void vhost_vq_meta_reset(struct vhost_dev *d)
+>  		__vhost_vq_meta_reset(d->vqs[i]);
+>  }
+>  
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +static void vhost_map_unprefetch(struct vhost_map *map)
+> +{
+> +	kfree(map->pages);
+> +	kfree(map);
+> +}
+> +
+> +static void vhost_set_map_dirty(struct vhost_virtqueue *vq,
+> +				struct vhost_map *map, int index)
+> +{
+> +	struct vhost_uaddr *uaddr = &vq->uaddrs[index];
+> +	int i;
+> +
+> +	if (uaddr->write) {
+> +		for (i = 0; i < map->npages; i++)
+> +			set_page_dirty(map->pages[i]);
+> +	}
+> +}
+> +
+> +static void vhost_uninit_vq_maps(struct vhost_virtqueue *vq)
+> +{
+> +	struct vhost_map *map[VHOST_NUM_ADDRS];
+> +	int i;
+> +
+> +	spin_lock(&vq->mmu_lock);
+> +	for (i = 0; i < VHOST_NUM_ADDRS; i++) {
+> +		map[i] = vq->maps[i];
+> +		if (map[i]) {
+> +			vhost_set_map_dirty(vq, map[i], i);
+> +			vq->maps[i] = NULL;
+> +		}
+> +	}
+> +	spin_unlock(&vq->mmu_lock);
+> +
+> +	/* No need for synchronization since we are serialized with
+> +	 * memory accessors (e.g vq mutex held).
+> +	 */
+> +
+> +	for (i = 0; i < VHOST_NUM_ADDRS; i++)
+> +		if (map[i])
+> +			vhost_map_unprefetch(map[i]);
+> +
+> +}
+> +
+> +static void vhost_reset_vq_maps(struct vhost_virtqueue *vq)
+> +{
+> +	int i;
+> +
+> +	vhost_uninit_vq_maps(vq);
+> +	for (i = 0; i < VHOST_NUM_ADDRS; i++)
+> +		vq->uaddrs[i].size = 0;
+> +}
+> +
+> +static bool vhost_map_range_overlap(struct vhost_uaddr *uaddr,
+> +				     unsigned long start,
+> +				     unsigned long end)
+> +{
+> +	if (unlikely(!uaddr->size))
+> +		return false;
+> +
+> +	return !(end < uaddr->uaddr || start > uaddr->uaddr - 1 + uaddr->size);
+> +}
+> +
+> +static void inline vhost_vq_access_map_begin(struct vhost_virtqueue *vq)
+> +{
+> +	spin_lock(&vq->mmu_lock);
+> +}
+> +
+> +static void inline vhost_vq_access_map_end(struct vhost_virtqueue *vq)
+> +{
+> +	spin_unlock(&vq->mmu_lock);
+> +}
+> +
+> +static int vhost_invalidate_vq_start(struct vhost_virtqueue *vq,
+> +				     int index,
+> +				     unsigned long start,
+> +				     unsigned long end,
+> +				     bool blockable)
+> +{
+> +	struct vhost_uaddr *uaddr = &vq->uaddrs[index];
+> +	struct vhost_map *map;
+> +
+> +	if (!vhost_map_range_overlap(uaddr, start, end))
+> +		return 0;
+> +	else if (!blockable)
+> +		return -EAGAIN;
+> +
+> +	spin_lock(&vq->mmu_lock);
+> +	++vq->invalidate_count;
+> +
+> +	map = vq->maps[index];
+> +	if (map)
+> +		vq->maps[index] = NULL;
+> +	spin_unlock(&vq->mmu_lock);
+> +
+> +	if (map) {
+> +		vhost_set_map_dirty(vq, map, index);
+> +		vhost_map_unprefetch(map);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static void vhost_invalidate_vq_end(struct vhost_virtqueue *vq,
+> +				    int index,
+> +				    unsigned long start,
+> +				    unsigned long end)
+> +{
+> +	if (!vhost_map_range_overlap(&vq->uaddrs[index], start, end))
+> +		return;
+> +
+> +	spin_lock(&vq->mmu_lock);
+> +	--vq->invalidate_count;
+> +	spin_unlock(&vq->mmu_lock);
+> +}
+> +
+> +static int vhost_invalidate_range_start(struct mmu_notifier *mn,
+> +					const struct mmu_notifier_range *range)
+> +{
+> +	struct vhost_dev *dev = container_of(mn, struct vhost_dev,
+> +					     mmu_notifier);
+> +	bool blockable = mmu_notifier_range_blockable(range);
+> +	int i, j, ret;
+> +
+> +	for (i = 0; i < dev->nvqs; i++) {
+> +		struct vhost_virtqueue *vq = dev->vqs[i];
+> +
+> +		for (j = 0; j < VHOST_NUM_ADDRS; j++) {
+> +			ret = vhost_invalidate_vq_start(vq, j,
+> +							range->start,
+> +							range->end, blockable);
+> +			if (ret)
+> +				return ret;
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static void vhost_invalidate_range_end(struct mmu_notifier *mn,
+> +				       const struct mmu_notifier_range *range)
+> +{
+> +	struct vhost_dev *dev = container_of(mn, struct vhost_dev,
+> +					     mmu_notifier);
+> +	int i, j;
+> +
+> +	for (i = 0; i < dev->nvqs; i++) {
+> +		struct vhost_virtqueue *vq = dev->vqs[i];
+> +
+> +		for (j = 0; j < VHOST_NUM_ADDRS; j++)
+> +			vhost_invalidate_vq_end(vq, j,
+> +						range->start,
+> +						range->end);
+> +	}
+> +}
+> +
+> +static const struct mmu_notifier_ops vhost_mmu_notifier_ops = {
+> +	.invalidate_range_start = vhost_invalidate_range_start,
+> +	.invalidate_range_end = vhost_invalidate_range_end,
+> +};
+> +
+> +static void vhost_init_maps(struct vhost_dev *dev)
+> +{
+> +	struct vhost_virtqueue *vq;
+> +	int i, j;
+> +
+> +	dev->mmu_notifier.ops = &vhost_mmu_notifier_ops;
+> +
+> +	for (i = 0; i < dev->nvqs; ++i) {
+> +		vq = dev->vqs[i];
+> +		for (j = 0; j < VHOST_NUM_ADDRS; j++)
+> +			vq->maps[j] = NULL;
+> +	}
+> +}
+> +#endif
+> +
+>  static void vhost_vq_reset(struct vhost_dev *dev,
+>  			   struct vhost_virtqueue *vq)
+>  {
+> @@ -326,7 +502,11 @@ static void vhost_vq_reset(struct vhost_dev *dev,
+>  	vq->busyloop_timeout = 0;
+>  	vq->umem = NULL;
+>  	vq->iotlb = NULL;
+> +	vq->invalidate_count = 0;
+>  	__vhost_vq_meta_reset(vq);
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	vhost_reset_vq_maps(vq);
+> +#endif
+>  }
+>  
+>  static int vhost_worker(void *data)
+> @@ -471,12 +651,15 @@ void vhost_dev_init(struct vhost_dev *dev,
+>  	dev->iov_limit = iov_limit;
+>  	dev->weight = weight;
+>  	dev->byte_weight = byte_weight;
+> +	dev->has_notifier = false;
+>  	init_llist_head(&dev->work_list);
+>  	init_waitqueue_head(&dev->wait);
+>  	INIT_LIST_HEAD(&dev->read_list);
+>  	INIT_LIST_HEAD(&dev->pending_list);
+>  	spin_lock_init(&dev->iotlb_lock);
+> -
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	vhost_init_maps(dev);
+> +#endif
+>  
+>  	for (i = 0; i < dev->nvqs; ++i) {
+>  		vq = dev->vqs[i];
+> @@ -485,6 +668,7 @@ void vhost_dev_init(struct vhost_dev *dev,
+>  		vq->heads = NULL;
+>  		vq->dev = dev;
+>  		mutex_init(&vq->mutex);
+> +		spin_lock_init(&vq->mmu_lock);
+>  		vhost_vq_reset(dev, vq);
+>  		if (vq->handle_kick)
+>  			vhost_poll_init(&vq->poll, vq->handle_kick,
+> @@ -564,7 +748,19 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
+>  	if (err)
+>  		goto err_cgroup;
+>  
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	err = mmu_notifier_register(&dev->mmu_notifier, dev->mm);
+> +	if (err)
+> +		goto err_mmu_notifier;
+> +#endif
+> +	dev->has_notifier = true;
+> +
+>  	return 0;
+> +
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +err_mmu_notifier:
+> +	vhost_dev_free_iovecs(dev);
+> +#endif
+>  err_cgroup:
+>  	kthread_stop(worker);
+>  	dev->worker = NULL;
+> @@ -655,6 +851,107 @@ static void vhost_clear_msg(struct vhost_dev *dev)
+>  	spin_unlock(&dev->iotlb_lock);
+>  }
+>  
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +static void vhost_setup_uaddr(struct vhost_virtqueue *vq,
+> +			      int index, unsigned long uaddr,
+> +			      size_t size, bool write)
+> +{
+> +	struct vhost_uaddr *addr = &vq->uaddrs[index];
+> +
+> +	addr->uaddr = uaddr;
+> +	addr->size = size;
+> +	addr->write = write;
+> +}
+> +
+> +static void vhost_setup_vq_uaddr(struct vhost_virtqueue *vq)
+> +{
+> +	vhost_setup_uaddr(vq, VHOST_ADDR_DESC,
+> +			  (unsigned long)vq->desc,
+> +			  vhost_get_desc_size(vq, vq->num),
+> +			  false);
+> +	vhost_setup_uaddr(vq, VHOST_ADDR_AVAIL,
+> +			  (unsigned long)vq->avail,
+> +			  vhost_get_avail_size(vq, vq->num),
+> +			  false);
+> +	vhost_setup_uaddr(vq, VHOST_ADDR_USED,
+> +			  (unsigned long)vq->used,
+> +			  vhost_get_used_size(vq, vq->num),
+> +			  true);
+> +}
+> +
+> +static int vhost_map_prefetch(struct vhost_virtqueue *vq,
+> +			       int index)
+> +{
+> +	struct vhost_map *map;
+> +	struct vhost_uaddr *uaddr = &vq->uaddrs[index];
+> +	struct page **pages;
+> +	int npages = DIV_ROUND_UP(uaddr->size, PAGE_SIZE);
+> +	int npinned;
+> +	void *vaddr, *v;
+> +	int err;
+> +	int i;
+> +
+> +	spin_lock(&vq->mmu_lock);
+> +
+> +	err = -EFAULT;
+> +	if (vq->invalidate_count)
+> +		goto err;
+> +
+> +	err = -ENOMEM;
+> +	map = kmalloc(sizeof(*map), GFP_ATOMIC);
+> +	if (!map)
+> +		goto err;
+> +
+> +	pages = kmalloc_array(npages, sizeof(struct page *), GFP_ATOMIC);
+> +	if (!pages)
+> +		goto err_pages;
+> +
+> +	err = EFAULT;
+> +	npinned = __get_user_pages_fast(uaddr->uaddr, npages,
+> +					uaddr->write, pages);
+> +	if (npinned > 0)
+> +		release_pages(pages, npinned);
+> +	if (npinned != npages)
+> +		goto err_gup;
+> +
+> +	for (i = 0; i < npinned; i++)
+> +		if (PageHighMem(pages[i]))
+> +			goto err_gup;
+> +
+> +	vaddr = v = page_address(pages[0]);
+> +
+> +	/* For simplicity, fallback to userspace address if VA is not
+> +	 * contigious.
+> +	 */
+> +	for (i = 1; i < npinned; i++) {
+> +		v += PAGE_SIZE;
+> +		if (v != page_address(pages[i]))
+> +			goto err_gup;
+> +	}
+> +
+> +	map->addr = vaddr + (uaddr->uaddr & (PAGE_SIZE - 1));
+> +	map->npages = npages;
+> +	map->pages = pages;
+> +
+> +	vq->maps[index] = map;
+> +	/* No need for a synchronize_rcu(). This function should be
+> +	 * called by dev->worker so we are serialized with all
+> +	 * readers.
+> +	 */
+> +	spin_unlock(&vq->mmu_lock);
+> +
+> +	return 0;
+> +
+> +err_gup:
+> +	kfree(pages);
+> +err_pages:
+> +	kfree(map);
+> +err:
+> +	spin_unlock(&vq->mmu_lock);
+> +	return err;
+> +}
+> +#endif
+> +
+>  void vhost_dev_cleanup(struct vhost_dev *dev)
+>  {
+>  	int i;
+> @@ -684,8 +981,20 @@ void vhost_dev_cleanup(struct vhost_dev *dev)
+>  		kthread_stop(dev->worker);
+>  		dev->worker = NULL;
+>  	}
+> -	if (dev->mm)
+> +	if (dev->mm) {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +		if (dev->has_notifier) {
+> +			mmu_notifier_unregister(&dev->mmu_notifier,
+> +						dev->mm);
+> +			dev->has_notifier = false;
+> +		}
+> +#endif
+>  		mmput(dev->mm);
+> +	}
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	for (i = 0; i < dev->nvqs; i++)
+> +		vhost_uninit_vq_maps(dev->vqs[i]);
+> +#endif
+>  	dev->mm = NULL;
+>  }
+>  EXPORT_SYMBOL_GPL(vhost_dev_cleanup);
+> @@ -914,6 +1223,26 @@ static inline void __user *__vhost_get_user(struct vhost_virtqueue *vq,
+>  
+>  static inline int vhost_put_avail_event(struct vhost_virtqueue *vq)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_used *used;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_USED];
+> +		if (likely(map)) {
+> +			used = map->addr;
+> +			*((__virtio16 *)&used->ring[vq->num]) =
+> +				cpu_to_vhost16(vq, vq->avail_idx);
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_put_user(vq, cpu_to_vhost16(vq, vq->avail_idx),
+>  			      vhost_avail_event(vq));
+>  }
+> @@ -922,6 +1251,27 @@ static inline int vhost_put_used(struct vhost_virtqueue *vq,
+>  				 struct vring_used_elem *head, int idx,
+>  				 int count)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_used *used;
+> +	size_t size;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_USED];
+> +		if (likely(map)) {
+> +			used = map->addr;
+> +			size = count * sizeof(*head);
+> +			memcpy(used->ring + idx, head, size);
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_copy_to_user(vq, vq->used->ring + idx, head,
+>  				  count * sizeof(*head));
+>  }
+> @@ -929,6 +1279,25 @@ static inline int vhost_put_used(struct vhost_virtqueue *vq,
+>  static inline int vhost_put_used_flags(struct vhost_virtqueue *vq)
+>  
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_used *used;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_USED];
+> +		if (likely(map)) {
+> +			used = map->addr;
+> +			used->flags = cpu_to_vhost16(vq, vq->used_flags);
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_put_user(vq, cpu_to_vhost16(vq, vq->used_flags),
+>  			      &vq->used->flags);
+>  }
+> @@ -936,6 +1305,25 @@ static inline int vhost_put_used_flags(struct vhost_virtqueue *vq)
+>  static inline int vhost_put_used_idx(struct vhost_virtqueue *vq)
+>  
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_used *used;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_USED];
+> +		if (likely(map)) {
+> +			used = map->addr;
+> +			used->idx = cpu_to_vhost16(vq, vq->last_used_idx);
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_put_user(vq, cpu_to_vhost16(vq, vq->last_used_idx),
+>  			      &vq->used->idx);
+>  }
+> @@ -981,12 +1369,50 @@ static void vhost_dev_unlock_vqs(struct vhost_dev *d)
+>  static inline int vhost_get_avail_idx(struct vhost_virtqueue *vq,
+>  				      __virtio16 *idx)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_avail *avail;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_AVAIL];
+> +		if (likely(map)) {
+> +			avail = map->addr;
+> +			*idx = avail->idx;
+
+index can now be speculated.
+
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_get_avail(vq, *idx, &vq->avail->idx);
+>  }
+>  
+>  static inline int vhost_get_avail_head(struct vhost_virtqueue *vq,
+>  				       __virtio16 *head, int idx)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_avail *avail;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_AVAIL];
+> +		if (likely(map)) {
+> +			avail = map->addr;
+> +			*head = avail->ring[idx & (vq->num - 1)];
+
+
+Since idx can be speculated, I guess we need array_index_nospec here?
+
+
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_get_avail(vq, *head,
+>  			       &vq->avail->ring[idx & (vq->num - 1)]);
+>  }
+> @@ -994,24 +1420,98 @@ static inline int vhost_get_avail_head(struct vhost_virtqueue *vq,
+>  static inline int vhost_get_avail_flags(struct vhost_virtqueue *vq,
+>  					__virtio16 *flags)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_avail *avail;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_AVAIL];
+> +		if (likely(map)) {
+> +			avail = map->addr;
+> +			*flags = avail->flags;
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_get_avail(vq, *flags, &vq->avail->flags);
+>  }
+>  
+>  static inline int vhost_get_used_event(struct vhost_virtqueue *vq,
+>  				       __virtio16 *event)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_avail *avail;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +		map = vq->maps[VHOST_ADDR_AVAIL];
+> +		if (likely(map)) {
+> +			avail = map->addr;
+> +			*event = (__virtio16)avail->ring[vq->num];
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_get_avail(vq, *event, vhost_used_event(vq));
+>  }
+>  
+>  static inline int vhost_get_used_idx(struct vhost_virtqueue *vq,
+>  				     __virtio16 *idx)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_used *used;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_USED];
+> +		if (likely(map)) {
+> +			used = map->addr;
+> +			*idx = used->idx;
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_get_used(vq, *idx, &vq->used->idx);
+>  }
+
+
+This seems to be used during init. Why do we bother
+accelerating this?
+
+
+>  
+>  static inline int vhost_get_desc(struct vhost_virtqueue *vq,
+>  				 struct vring_desc *desc, int idx)
+>  {
+> +#if VHOST_ARCH_CAN_ACCEL_UACCESS
+> +	struct vhost_map *map;
+> +	struct vring_desc *d;
+> +
+> +	if (!vq->iotlb) {
+> +		vhost_vq_access_map_begin(vq);
+> +
+> +		map = vq->maps[VHOST_ADDR_DESC];
+> +		if (likely(map)) {
+> +			d = map->addr;
+> +			*desc = *(d + idx);
+
+
+Since idx can be speculated, I guess we need array_index_nospec here?
+
+
+> +			vhost_vq_access_map_end(vq);
+> +			return 0;
+> +		}
+> +
+> +		vhost_vq_access_map_end(vq);
+> +	}
+> +#endif
+> +
+>  	return vhost_copy_from_user(vq, desc, vq->desc + idx, sizeof(*desc));
+>  }
+>  
+
+I also wonder about the userspace address we get eventualy.
+It would seem that we need to prevent that from speculating -
+and that seems like a good idea even if this patch isn't
+applied. As you are playing with micro-benchmarks, maybe
+you could the below patch?
+It's unfortunately untested.
+Thanks a lot in advance!
+
+===>
+vhost: block speculation of translated descriptors
+
+iovec addresses coming from vhost are assumed to be
+pre-validated, but in fact can be speculated to a value
+out of range.
+
+Userspace address are later validated with array_index_nospec so we can
+be sure kernel info does not leak through these addresses, but vhost
+must also not leak userspace info outside the allowed memory table to
+guests.
+
+Following the defence in depth principle, make sure
+the address is not validated out of node range.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+---
+
+
+diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+index 5dc174ac8cac..863e25011ef6 100644
+--- a/drivers/vhost/vhost.c
++++ b/drivers/vhost/vhost.c
+@@ -2072,7 +2076,9 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
+ 		size = node->size - addr + node->start;
+ 		_iov->iov_len = min((u64)len - s, size);
+ 		_iov->iov_base = (void __user *)(unsigned long)
+-			(node->userspace_addr + addr - node->start);
++			(node->userspace_addr +
++			 array_index_nospec(addr - node->start,
++					    node->size));
+ 		s += size;
+ 		addr += size;
+ 		++ret;
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
