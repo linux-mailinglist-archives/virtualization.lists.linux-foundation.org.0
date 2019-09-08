@@ -2,72 +2,88 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id A02CDACC54
-	for <lists.virtualization@lfdr.de>; Sun,  8 Sep 2019 13:05:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BD1AACFE2
+	for <lists.virtualization@lfdr.de>; Sun,  8 Sep 2019 18:57:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 19A1DE7F;
-	Sun,  8 Sep 2019 11:05:47 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id B086AC37;
+	Sun,  8 Sep 2019 16:56:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D51D3E41
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id F20FBBA9
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  8 Sep 2019 11:05:45 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6D88EE6
+	Sun,  8 Sep 2019 16:56:58 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 179037DB
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  8 Sep 2019 11:05:45 +0000 (UTC)
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
-	[209.85.160.197])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id F27AD69086
+	Sun,  8 Sep 2019 16:56:56 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id d15so7632605pfo.10
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  8 Sep 2019 11:05:44 +0000 (UTC)
-Received: by mail-qt1-f197.google.com with SMTP id y13so12208895qtn.6
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 08 Sep 2019 04:05:44 -0700 (PDT)
+	Sun, 08 Sep 2019 09:56:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=tcd-ie.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E2f3KSrZxRio8/FeHv28ONTThNhL2TjtH0LaTd/eJz4=;
+	b=YkxKYH/ERWEtBHeMoD9KlshTjhFsDszVa0tiICeohlWVLEzIcG2mdKPWfiiXIAB9Ep
+	h6QalfbgiFdxT1gwzIyDJP5nWISKWpTHIpT1fN2L7ULPQG419Bbi7XY3FDT2eqv7Pdio
+	H1K5BfueRIQBGq3EqACgol7GvzJZ1eAgnKKZmazjR0LQiP65cCb17u0sJuotvVHS33a6
+	qj4J0lq3fFjn9VBtqa6a2jkRAsYTa2rETqDhPFBFFdRonhlNDlwxzNcmQUhBH77kLi7U
+	AS1qIGirCQTlRgJu1+io8rSZUnDci9vM9xSPVt3khu+byAO8nhRLsYoEOS2YUMuEme9n
+	8jPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition;
-	bh=mJ79VyQiPMiGxBu7/NgWOAdwnTdH8zf8E/dxV83oJIQ=;
-	b=KGtM7cPJsDQycmCAHkgTmEPPx9I64i53n88UHjgxi34/UR94AQf5WiSipbZSQTjbFk
-	zpN7XTr48svwi8R5sxDsUN9n+qTbf3D0uD3bMpv2o3wzOhcnEikn0Q+Jvn/UKzkTTJDF
-	KANdGkrwC7OZXLxPTXxhxWqh2463FnxS3x1j9GgdAjQsnTbdBqMwJd8Nalww6t9bJF6E
-	zu1dM0+AMkevCGTPH3hNpRuEY8eUTCJi/EvUi0g++ldyYiOdndSi9Tdy9L68HghN/49M
-	XPdsGSEaon00+P9/bng0dPCkYP0izepYi6+m6bVZDR++we4J920/7e5b3I4QJ1HVyFMQ
-	TiPQ==
-X-Gm-Message-State: APjAAAWvZpCmevHXfKoVvKxuSWp2ds0Du5i7byd/YwTs+mGATvzZGN+z
-	WauQWpj1ySMck+cJcpAZdKrPw+FXOcnM1b12aP22Q1N35qLhZt2No+imgPo4Vf06SW7jvQpl+0i
-	Av9pNvcCazMSI98wJsUAHVw17Pnn3nV5Mq10HZ3vWFg==
-X-Received: by 2002:ac8:845:: with SMTP id x5mr18054488qth.42.1567940744063;
-	Sun, 08 Sep 2019 04:05:44 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqzWSBaHX6xbj2IMf12T1d2jOLe4XYAW+o7heTvxil6hRKkUH9dOz/sVHUORF99wcOY9BFlSSQ==
-X-Received: by 2002:ac8:845:: with SMTP id x5mr18054478qth.42.1567940743938;
-	Sun, 08 Sep 2019 04:05:43 -0700 (PDT)
-Received: from redhat.com ([212.92.124.241]) by smtp.gmail.com with ESMTPSA id
-	139sm5217532qkf.14.2019.09.08.04.05.41
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E2f3KSrZxRio8/FeHv28ONTThNhL2TjtH0LaTd/eJz4=;
+	b=rFyX1aBjjffNcYWsFo3JbAmjlqEMibuT7nhxA1PuVOfsrl43L96VGzDHWjYWpprUPZ
+	BNF0qrh6oZQ7dwlK5AFOKKmOKrrTGFaPfCHnJHm8yp4gU/BLsJ7wgiWBL7LSzN0dONs5
+	R9Bri/tf0NtDt5iM+akVXBAGIV/VV4N7G4iq8Z+tJFSMU6jxpy731yKvMFOSGk123mJQ
+	4k3F5yoJ0iKDB2wt+hf0CQAPmBbsEyzSWgC/P9Bzy3bOFoXTNaZi6wj9cN13+JhVQcrC
+	1uM9UcmB2pp1IcLBHjr35lt7wzJ345Aw6AGz51kFMyiX3FfW20oP+pVnp/s61pUUx7fW
+	I81Q==
+X-Gm-Message-State: APjAAAW7913OhKrIxgaz741KzQCN9qyKQoIeb496Oqztell4cW7Bz5KL
+	eyJ6g8b7MRNZR12gOJ9mDpLR3g==
+X-Google-Smtp-Source: APXvYqycW5UHspFXzTlIh/iOGVx+SWpR9vq4XdyDpuh90LK48tRDCdIIhjamCNmUiV+Y56F7gJ75Lw==
+X-Received: by 2002:a63:7d05:: with SMTP id y5mr17861065pgc.425.1567961816386; 
+	Sun, 08 Sep 2019 09:56:56 -0700 (PDT)
+Received: from localhost.localdomain ([24.244.23.109])
+	by smtp.googlemail.com with ESMTPSA id
+	f188sm13834631pfa.170.2019.09.08.09.56.55
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 08 Sep 2019 04:05:43 -0700 (PDT)
-Date: Sun, 8 Sep 2019 07:05:39 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [RFC PATCH untested] vhost: block speculation of translated
-	descriptors
-Message-ID: <20190908110521.4031-1-mst@redhat.com>
+	Sun, 08 Sep 2019 09:56:55 -0700 (PDT)
+From: Tom Murphy <murphyt7@tcd.ie>
+To: iommu@lists.linux-foundation.org
+Subject: [PATCH v6 0/5] iommu/amd: Convert the AMD iommu driver to the
+	dma-iommu api
+Date: Sun,  8 Sep 2019 09:56:36 -0700
+Message-Id: <20190908165642.22253-1-murphyt7@tcd.ie>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mailer: git-send-email 2.22.0.678.g13338e74b8
-X-Mutt-Fcc: =sent
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=unavailable version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: netdev@vger.kernel.org, kvm@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
+Cc: Heiko Stuebner <heiko@sntech.de>, virtualization@lists.linux-foundation.org,
+	linux-tegra@vger.kernel.org, Thierry Reding <thierry.reding@gmail.com>,
+	Will Deacon <will@kernel.org>, Marek Szyprowski <m.szyprowski@samsung.com>,
+	Jean-Philippe Brucker <jean-philippe@linaro.org>,
+	linux-samsung-soc@vger.kernel.org, Joerg Roedel <joro@8bytes.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>, linux-rockchip@lists.infradead.org,
+	Andy Gross <agross@kernel.org>,
+	Gerald Schaefer <gerald.schaefer@de.ibm.com>,
+	linux-s390@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-mediatek@lists.infradead.org,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	linux-arm-kernel@lists.infradead.org,
+	David Woodhouse <dwmw2@infradead.org>,
+	linux-kernel@vger.kernel.org, Tom Murphy <murphyt7@tcd.ie>,
+	Rob Clark <robdclark@gmail.com>, Kukjin Kim <kgene@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -84,40 +100,63 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-iovec addresses coming from vhost are assumed to be
-pre-validated, but in fact can be speculated to a value
-out of range.
+Convert the AMD iommu driver to the dma-iommu api. Remove the iova
+handling and reserve region code from the AMD iommu driver.
 
-Userspace address are later validated with array_index_nospec so we can
-be sure kernel info does not leak through these addresses, but vhost
-must also not leak userspace info outside the allowed memory table to
-guests.
+Change-log:
+V6:
+-add more details to the description of patch 001-iommu-amd-Remove-unnecessary-locking-from-AMD-iommu-.patch
+-rename handle_deferred_device to iommu_dma_deferred_attach
+-fix double tabs in 0003-iommu-dma-iommu-Handle-deferred-devices.patch
+V5:
+-Rebase on top of linux-next
+V4:
+-Rebase on top of linux-next
+-Split the removing of the unnecessary locking in the amd iommu driver into a seperate patch
+-refactor the "iommu/dma-iommu: Handle deferred devices" patch and address comments
+v3:
+-rename dma_limit to dma_mask
+-exit handle_deferred_device early if (!is_kdump_kernel())
+-remove pointless calls to handle_deferred_device
+v2:
+-Rebase on top of this series:
+ http://git.infradead.org/users/hch/misc.git/shortlog/refs/heads/dma-iommu-ops.3
+-Add a gfp_t parameter to the iommu_ops::map function.
+-Made use of the reserve region code inside the dma-iommu api
 
-Following the defence in depth principle, make sure
-the address is not validated out of node range.
+Tom Murphy (5):
+  iommu/amd: Remove unnecessary locking from AMD iommu driver
+  iommu: Add gfp parameter to iommu_ops::map
+  iommu/dma-iommu: Handle deferred devices
+  iommu/dma-iommu: Use the dev->coherent_dma_mask
+  iommu/amd: Convert AMD iommu driver to the dma-iommu api
 
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- drivers/vhost/vhost.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/iommu/Kconfig           |   1 +
+ drivers/iommu/amd_iommu.c       | 690 ++++----------------------------
+ drivers/iommu/amd_iommu_types.h |   1 -
+ drivers/iommu/arm-smmu-v3.c     |   2 +-
+ drivers/iommu/arm-smmu.c        |   2 +-
+ drivers/iommu/dma-iommu.c       |  43 +-
+ drivers/iommu/exynos-iommu.c    |   2 +-
+ drivers/iommu/intel-iommu.c     |   2 +-
+ drivers/iommu/iommu.c           |  43 +-
+ drivers/iommu/ipmmu-vmsa.c      |   2 +-
+ drivers/iommu/msm_iommu.c       |   2 +-
+ drivers/iommu/mtk_iommu.c       |   2 +-
+ drivers/iommu/mtk_iommu_v1.c    |   2 +-
+ drivers/iommu/omap-iommu.c      |   2 +-
+ drivers/iommu/qcom_iommu.c      |   2 +-
+ drivers/iommu/rockchip-iommu.c  |   2 +-
+ drivers/iommu/s390-iommu.c      |   2 +-
+ drivers/iommu/tegra-gart.c      |   2 +-
+ drivers/iommu/tegra-smmu.c      |   2 +-
+ drivers/iommu/virtio-iommu.c    |   2 +-
+ include/linux/iommu.h           |  21 +-
+ 21 files changed, 178 insertions(+), 651 deletions(-)
 
-diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index 5dc174ac8cac..0ee375fb7145 100644
---- a/drivers/vhost/vhost.c
-+++ b/drivers/vhost/vhost.c
-@@ -2072,7 +2072,9 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
- 		size = node->size - addr + node->start;
- 		_iov->iov_len = min((u64)len - s, size);
- 		_iov->iov_base = (void __user *)(unsigned long)
--			(node->userspace_addr + addr - node->start);
-+			(node->userspace_addr +
-+			 array_index_nospec(addr - node->start,
-+					    node->size));
- 		s += size;
- 		addr += size;
- 		++ret;
 -- 
-MST
+2.20.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
