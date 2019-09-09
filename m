@@ -2,79 +2,81 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E46DADCEE
-	for <lists.virtualization@lfdr.de>; Mon,  9 Sep 2019 18:18:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D66D2ADDA1
+	for <lists.virtualization@lfdr.de>; Mon,  9 Sep 2019 18:56:46 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CACA1C7C;
-	Mon,  9 Sep 2019 16:18:23 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 832FFE7E;
+	Mon,  9 Sep 2019 16:56:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7865CACD
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 17513E76
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  9 Sep 2019 16:18:22 +0000 (UTC)
+	Mon,  9 Sep 2019 16:56:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 12E8C8B6
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AA8377DB
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  9 Sep 2019 16:18:22 +0000 (UTC)
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
-	[209.85.222.200])
+	Mon,  9 Sep 2019 16:56:38 +0000 (UTC)
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+	[209.85.221.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 8525EC05FF87
+	by mx1.redhat.com (Postfix) with ESMTPS id E1B498E251
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  9 Sep 2019 16:18:21 +0000 (UTC)
-Received: by mail-qk1-f200.google.com with SMTP id k68so16919671qkb.19
+	Mon,  9 Sep 2019 16:56:37 +0000 (UTC)
+Received: by mail-wr1-f72.google.com with SMTP id j10so7647344wrb.16
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 09 Sep 2019 09:18:21 -0700 (PDT)
+	Mon, 09 Sep 2019 09:56:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=xd5J0j1O8RM23sIIIj9h2xCJg8OqHfg7OWxpv2iexsc=;
-	b=I9yDJvMzHFvoUhtF1qRahOEYmjkULxp4oChbqBhSyjjMYpizQGVZN6ZG5NcYvMegxp
-	tWPqpsmwErnrDIcrniXLMmdePVobAMUXa7nOQapWkydpvt1aPIP6/Z/56qWvw++ik2hk
-	429zM+8E6hhL03NJnEKFFPDSrwrd4WHqIsQ2S/17FaffSneNSDz3K8pTo6SAWnOEWP8Y
-	2ccHjdVGfIfUMoZfMgzhVfRKIiQGN+qu9eR6F7SrT9sbBVUlWxtvs7i2zhsVZUfHbQ2+
-	LLYu8/Hxep8pj9H1URQ16aQ9UU1CJkqvPyOtBlqLnFya57SQULm0GBN9m4Ts5NQTjHtS
-	lLRg==
-X-Gm-Message-State: APjAAAWd5G4bmGMgLHnj2z3NtAHnnwzF2yxAGRWMyil2inPm5FqFLTMp
-	RdMIoA/LwB5I6iZJav+cotMt9WAMJS4po/h1GRK/JOTbN4P5WsprVXV5hoyQVj+DYr6n7YzmTqI
-	ls1nsHM17p5PH62PeNIaN+0xNG/QrqKDg8EDADwK1fw==
-X-Received: by 2002:aed:316d:: with SMTP id 100mr442785qtg.20.1568045900871;
-	Mon, 09 Sep 2019 09:18:20 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxvZ3BxEyb3pt+fbqjr5qKBJvhxJopIJiuMLcQ+RPNA0muqjQbM1NQBmU9ZKN8evHR3WQQZoA==
-X-Received: by 2002:aed:316d:: with SMTP id 100mr442761qtg.20.1568045900648;
-	Mon, 09 Sep 2019 09:18:20 -0700 (PDT)
-Received: from redhat.com ([80.74.107.118]) by smtp.gmail.com with ESMTPSA id
-	c14sm8927771qta.80.2019.09.09.09.18.16
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Sep 2019 09:18:19 -0700 (PDT)
-Date: Mon, 9 Sep 2019 12:18:13 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [Virtio-fs] [PATCH 00/18] virtiofs: Fix various races and
-	cleanups round 1
-Message-ID: <20190909121604-mutt-send-email-mst@kernel.org>
-References: <20190905194859.16219-1-vgoyal@redhat.com>
-	<CAJfpegu8POz9gC4MDEcXxDWBD0giUNFgJhMEzntJX_u4+cS9Zw@mail.gmail.com>
-	<20190906103613.GH5900@stefanha-x1.localdomain>
-	<CAJfpegudNVZitQ5L8gPvA45mRPFDk9fhyboceVW6xShpJ4mLww@mail.gmail.com>
-	<866a1469-2c4b-59ce-cf3f-32f65e861b99@huawei.com>
-	<20190909161455.GG20875@stefanha-x1.localdomain>
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to;
+	bh=b+DYBvL0oEEFzvAdvWpG5+5SFlJp7gZgu0SZ3ZeObvI=;
+	b=FYQLbkFsBUQu5eVoRpIwNq/rHx7cXtbgHl5awd6oi5pmcIfcVURmbEc5alGh8xuMU4
+	kMZTk/seGh7orqMrtC1C8F9hPHV0izZSU7B7mwXm3DKGApdKeNkqjnEi/WT5rS7sCfZV
+	T+xg9CkMufzcMOkZzhHqvgC7kSEvXWAfyVp2u4M7V4CCIQQSwXo8HSpcbBtUX5+4RI/X
+	NZmq6G3vF3dRNqO2TtSVguh2XcmQuIWJsgfRD9r5Qpc8RR6XRnjaeCvff2Brh6uJgprD
+	p8OFbH2rcIJnIvEq550GzBSqQIO8delueqkgq+zIP+lvDhs6/SVKKd0F4gIc/XUswqHc
+	TAbA==
+X-Gm-Message-State: APjAAAVybtwh/9N5IjmyO2dfNFImHS1aBW6VtQI1U3zhYSi+lS3sD2cM
+	JcI9mCiT83MBZv9NXEZqXygZyW/9sydRB3pzVeBxvR+Q5k+RDSEM11wGYaZI+BzbWWclrHRTWqA
+	6+sGE7uorIF1mgCg/oOT41eKySG243fWC5tuh6WyPjw==
+X-Received: by 2002:adf:e342:: with SMTP id n2mr2723313wrj.341.1568048196574; 
+	Mon, 09 Sep 2019 09:56:36 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwCDEHfmFTtFBYf4wpg2xKJ2cjZDTuhPEW8XcTtrVh3SrWj7ioRNCGl/I1N77Z+ytfjL6XmFA==
+X-Received: by 2002:adf:e342:: with SMTP id n2mr2723289wrj.341.1568048196307; 
+	Mon, 09 Sep 2019 09:56:36 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:4580:a289:2f55:eec1?
+	([2001:b07:6468:f312:4580:a289:2f55:eec1])
+	by smtp.gmail.com with ESMTPSA id
+	q15sm18613985wrg.65.2019.09.09.09.56.04
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Mon, 09 Sep 2019 09:56:35 -0700 (PDT)
+Subject: Re: [PATCH v2] scsi: virtio_scsi: unplug LUNs when events missed
+To: Stefan Hajnoczi <stefanha@redhat.com>, Matt Lupfer <mlupfer@ddn.com>
+References: <20190905181903.29756-1-mlupfer@ddn.com>
+	<20190906085409.GC5900@stefanha-x1.localdomain>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Openpgp: preference=signencrypt
+Message-ID: <45d4fc47-cfc2-b7ae-e147-fb993a77e9e5@redhat.com>
+Date: Mon, 9 Sep 2019 18:55:48 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190909161455.GG20875@stefanha-x1.localdomain>
-X-Spam-Status: No, score=-5.4 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	RCVD_IN_SORBS_WEB autolearn=ham version=3.3.1
+In-Reply-To: <20190906085409.GC5900@stefanha-x1.localdomain>
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: virtio-fs@redhat.com, Miklos Szeredi <miklos@szeredi.hu>,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	piaojun <piaojun@huawei.com>, linux-fsdevel@vger.kernel.org,
-	Vivek Goyal <vgoyal@redhat.com>
+Cc: "martin.petersen@oracle.com" <martin.petersen@oracle.com>,
+	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+	"mst@redhat.com" <mst@redhat.com>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	"jejb@linux.ibm.com" <jejb@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,64 +88,103 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0137876054551001053=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Sep 09, 2019 at 06:14:55PM +0200, Stefan Hajnoczi wrote:
-> On Sun, Sep 08, 2019 at 07:53:55PM +0800, piaojun wrote:
-> > 
-> > 
-> > On 2019/9/6 19:52, Miklos Szeredi wrote:
-> > > On Fri, Sep 6, 2019 at 12:36 PM Stefan Hajnoczi <stefanha@redhat.com> wrote:
-> > >>
-> > >> On Fri, Sep 06, 2019 at 10:15:14AM +0200, Miklos Szeredi wrote:
-> > >>> On Thu, Sep 5, 2019 at 9:49 PM Vivek Goyal <vgoyal@redhat.com> wrote:
-> > >>>>
-> > >>>> Hi,
-> > >>>>
-> > >>>> Michael Tsirkin pointed out issues w.r.t various locking related TODO
-> > >>>> items and races w.r.t device removal.
-> > >>>>
-> > >>>> In this first round of cleanups, I have taken care of most pressing
-> > >>>> issues.
-> > >>>>
-> > >>>> These patches apply on top of following.
-> > >>>>
-> > >>>> git://git.kernel.org/pub/scm/linux/kernel/git/mszeredi/fuse.git#virtiofs-v4
-> > >>>>
-> > >>>> I have tested these patches with mount/umount and device removal using
-> > >>>> qemu monitor. For example.
-> > >>>
-> > >>> Is device removal mandatory?  Can't this be made a non-removable
-> > >>> device?  Is there a good reason why removing the virtio-fs device
-> > >>> makes sense?
-> > >>
-> > >> Hot plugging and unplugging virtio PCI adapters is common.  I'd very
-> > >> much like removal to work from the beginning.
-> > > 
-> > > Can you give an example use case?
-> > 
-> > I think VirtFS migration need hot plugging, or it may cause QEMU crash
-> > or some problems.
-> 
-> Live migration is currently unsupported.  Hot unplugging the virtio-fs
-> device would allow the guest to live migrate successfully, so it's a
-> useful feature to work around the missing live migration support.
-> 
-> Is this what you mean?
-> 
-> Stefan
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0137876054551001053==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="pxnQuVbtWYEwmX3SJy3OhOXnAXOYEWRNZ"
 
-Exactly. That's what I also said. To add to that, hotplug can not be
-negotiated, so it's not a feature we can easily add down the road if old
-guests crash on unplug. Thus a driver that does not support unplug
-should not claim to support removal.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--pxnQuVbtWYEwmX3SJy3OhOXnAXOYEWRNZ
+Content-Type: multipart/mixed; boundary="KlMsZ2txnG2HaPm51dmD2esB01PSzQkME";
+ protected-headers="v1"
+From: Paolo Bonzini <pbonzini@redhat.com>
+To: Stefan Hajnoczi <stefanha@redhat.com>, Matt Lupfer <mlupfer@ddn.com>
+Cc: "mst@redhat.com" <mst@redhat.com>,
+ "jasowang@redhat.com" <jasowang@redhat.com>,
+ "jejb@linux.ibm.com" <jejb@linux.ibm.com>,
+ "martin.petersen@oracle.com" <martin.petersen@oracle.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Message-ID: <45d4fc47-cfc2-b7ae-e147-fb993a77e9e5@redhat.com>
+Subject: Re: [PATCH v2] scsi: virtio_scsi: unplug LUNs when events missed
+References: <20190905181903.29756-1-mlupfer@ddn.com>
+ <20190906085409.GC5900@stefanha-x1.localdomain>
+In-Reply-To: <20190906085409.GC5900@stefanha-x1.localdomain>
 
--- 
-MST
+--KlMsZ2txnG2HaPm51dmD2esB01PSzQkME
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 06/09/19 10:54, Stefan Hajnoczi wrote:
+> On Thu, Sep 05, 2019 at 06:19:28PM +0000, Matt Lupfer wrote:
+>> The event handler calls scsi_scan_host() when events are missed, which=
+
+>> will hotplug new LUNs.  However, this function won't remove any
+>> unplugged LUNs.  The result is that hotunplug doesn't work properly wh=
+en
+>> the number of unplugged LUNs exceeds the event queue size (currently 8=
+).
+>>
+>> Scan existing LUNs when events are missed to check if they are still
+>> present.  If not, remove them.
+>>
+>> Signed-off-by: Matt Lupfer <mlupfer@ddn.com>
+>> ---
+>>  drivers/scsi/virtio_scsi.c | 33 +++++++++++++++++++++++++++++++++
+>>  1 file changed, 33 insertions(+)
+>=20
+> Please include a changelog in future patch revisions.  For example:
+>=20
+>   Signed-off-by: ...
+>   ---
+>   v2:
+>     * Replaced magic constants with sd.h constants [Michael]
+>=20
+> Just C and virtio code review, no SCSI specifics:
+>=20
+> Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+>=20
+
+Acked-by: Paolo Bonzini <pbonzini@redhat.com>
+
+
+--KlMsZ2txnG2HaPm51dmD2esB01PSzQkME--
+
+--pxnQuVbtWYEwmX3SJy3OhOXnAXOYEWRNZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEE8TM4V0tmI4mGbHaCv/vSX3jHroMFAl12hBQACgkQv/vSX3jH
+roNf/QgAmxUxJG1dOWyJiM9cOE05ZHpVBvjYtllR4MHb7M3HkgznPc7bAe3ojMCh
+MjjpnhamcSKKTKtx9cgDK1bh8uj8viucaOZ43r0/P+npJO8XsdwwAlzfx5WMQ/Al
+qEaNVoX1KUxdWZAEYS1y52JmEvOf+0SlmaeJZMYQOWSJHepaM3d7l2vslFhZMIdt
+y054MXFZiJxyEB/AE8R/Xy7LPe9/CHliHqxDBMVjLYRFuUeqtkgAXjKUVsThUsGt
+EIKONYmN0aQ+Nl8bphUlxHhVVUgCTZ+YP/OCQqAOWtGKpINsFKBcvipeJeAVj3id
+Z7Jdh+v01Bs92VJ3BdQHgIbvvRulCA==
+=O1le
+-----END PGP SIGNATURE-----
+
+--pxnQuVbtWYEwmX3SJy3OhOXnAXOYEWRNZ--
+
+--===============0137876054551001053==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============0137876054551001053==--
