@@ -2,100 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0093AECEB
-	for <lists.virtualization@lfdr.de>; Tue, 10 Sep 2019 16:25:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 648BBAEDDE
+	for <lists.virtualization@lfdr.de>; Tue, 10 Sep 2019 16:54:50 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EBEAADA4;
-	Tue, 10 Sep 2019 14:25:21 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 50C9DDD0;
+	Tue, 10 Sep 2019 14:54:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 26639DA2
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5381DC6D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 10 Sep 2019 14:25:20 +0000 (UTC)
+	Tue, 10 Sep 2019 14:54:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 852A089C
+Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E56B38AA
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 10 Sep 2019 14:25:19 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
-	by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
-	x8AENkGG131485; Tue, 10 Sep 2019 14:25:03 GMT
+	Tue, 10 Sep 2019 14:54:29 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+	by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
+	x8AEsRYj021240; Tue, 10 Sep 2019 14:54:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
 	h=date : from : to : cc
-	: subject : message-id : references : mime-version : content-type :
-	in-reply-to : content-transfer-encoding; s=corp-2019-08-05;
-	bh=NHdeAPKmmXhs2gh53Ao/iY+rl0IHNTcE9ceoYzmW3PA=;
-	b=eTl3Ht16X9k57STX22Nfse1q1i+nAE2TOCTXC5ruD8NFqq1ebwh84ldhbSzISgmnssuF
-	bZIfi3jJldDUhk95HDI8Qd7vioZqIgsTPuYAJmJmPMMhEmrPrpnfOh22bWYYwfdvPQ0W
-	5AsHTQqRr9rI0b5wOBdrcZw9xuTuRG07TVcmSqgR2hpE7BFSph8b9enoTeIcAerW5cCB
-	MUJWN4L+0WArFfdjI4p38FksHxgCerqViUcWoGVEtdoSJk+8+JEyW4ldrL6DbwPH/ZHW
-	sBwq1gi3p5aaqVp2L//aIpV1VGxmbF2cRKlZoK8+zPUvKfHfPO9l4u4RIOqNoXrolw3h
-	Jw== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
-	by aserp2120.oracle.com with ESMTP id 2uw1jy3swg-1
+	: subject : message-id : mime-version : content-type; s=corp-2019-08-05;
+	bh=LyJPiURs4hN/FEJaBGWF5jRt285M/pc7eYLduJ7yKYc=;
+	b=RYYkQbJbuTQTDjMRX6XWrJbtWfttM4eF0WwFsBBz4c6KwVzr48yyBjZjoXRHFi8yCcz/
+	ZnD9ZEI/jEq7frTaf3PRtd07a0XAtXOgDYIwgItmQijpZisWqtk6Azn0Z++Wa4ZN+FQ6
+	9gfWB3VjR6QNy6W0LtkARWwwYwgAmMs19hbfSoWrV+qxII2muYU7No6XDNMBn8NzqxlP
+	yax1wuvHV+yDBrEqdZ1a9Z9e4+4XyynwKM+53L5n6WOAv3fhQElMssd7momXyNYgzPeq
+	s2C/kBfgh9f21VxfSEjreHZbgWyQnOIcvfQHlqlJu0YwqxRnDNPztKm6RHTbhAR2bDYh
+	Hg== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+	by userp2130.oracle.com with ESMTP id 2uw1m8v19g-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 10 Sep 2019 14:25:03 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
-	by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
-	x8AENt39128686; Tue, 10 Sep 2019 14:25:02 GMT
+	Tue, 10 Sep 2019 14:54:28 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+	by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
+	x8AEsMhp104294; Tue, 10 Sep 2019 14:54:28 GMT
 Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
-	by userp3030.oracle.com with ESMTP id 2uxd6ch563-1
+	by userp3020.oracle.com with ESMTP id 2uwq9q4b12-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 10 Sep 2019 14:25:02 +0000
-Received: from abhmp0001.oracle.com (abhmp0001.oracle.com [141.146.116.7])
-	by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x8AEOwoJ025439;
-	Tue, 10 Sep 2019 14:24:58 GMT
-Received: from char.us.oracle.com (/10.152.32.25)
-	by default (Oracle Beehive Gateway v4.0)
-	with ESMTP ; Tue, 10 Sep 2019 07:24:58 -0700
-Received: by char.us.oracle.com (Postfix, from userid 1000)
-	id D9F686A010E; Tue, 10 Sep 2019 10:26:42 -0400 (EDT)
-Date: Tue, 10 Sep 2019 10:26:42 -0400
-From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-To: Adalbert =?utf-8?B?TGF6xINy?= <alazar@bitdefender.com>
-Subject: Re: [RFC PATCH v6 69/92] kvm: x86: keep the page protected if
-	tracked by the introspection tool
-Message-ID: <20190910142642.GC5879@char.us.oracle.com>
-References: <20190809160047.8319-1-alazar@bitdefender.com>
-	<20190809160047.8319-70-alazar@bitdefender.com>
+	Tue, 10 Sep 2019 14:54:24 +0000
+Received: from abhmp0022.oracle.com (abhmp0022.oracle.com [141.146.116.28])
+	by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x8AErQ4f016550;
+	Tue, 10 Sep 2019 14:53:26 GMT
+Received: from mwanda (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
+	with ESMTP ; Tue, 10 Sep 2019 07:53:26 -0700
+Date: Tue, 10 Sep 2019 17:53:20 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: jgross@suse.com
+Subject: [bug report] x86/paravirt: Use a single ops structure
+Message-ID: <20190910145320.GA1479@mwanda>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190809160047.8319-70-alazar@bitdefender.com>
-User-Agent: Mutt/1.9.1 (2017-09-22)
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9376
 	signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=1
 	malwarescore=0
-	phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+	phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=702
 	adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
-	engine=8.0.1-1906280000 definitions=main-1909100140
+	engine=8.0.1-1906280000 definitions=main-1909100144
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9376
 	signatures=668685
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
 	priorityscore=1501 malwarescore=0
-	suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
-	lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999
+	suspectscore=1 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+	lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=768
 	adultscore=0
 	classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1906280000
-	definitions=main-1909100140
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
+	definitions=main-1909100144
+X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,BIGNUM_EMAILS,
+	DKIM_SIGNED, DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
 	UNPARSEABLE_RELAY autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Tamas K Lengyel <tamas@tklengyel.com>,
-	Weijiang Yang <weijiang.yang@intel.com>,
-	Yu C <yu.c.zhang@intel.com>, kvm@vger.kernel.org,
-	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>,
-	Jan Kiszka <jan.kiszka@siemens.com>,
-	Samuel =?iso-8859-1?Q?Laur=E9n?= <samuel.lauren@iki.fi>,
-	Zhang@pps.reinject, virtualization@lists.linux-foundation.org,
-	linux-mm@kvack.org, Patrick Colp <patrick.colp@oracle.com>,
-	Mathieu Tarral <mathieu.tarral@protonmail.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
-	Mihai =?utf-8?B?RG9uyJt1?= <mdontu@bitdefender.com>
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -107,41 +89,54 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gRnJpLCBBdWcgMDksIDIwMTkgYXQgMDc6MDA6MjRQTSArMDMwMCwgQWRhbGJlcnQgTGF6xINy
-IHdyb3RlOgo+IFRoaXMgcGF0Y2ggbWlnaHQgYmUgb2Jzb2xldGUgdGhhbmtzIHRvIHNpbmdsZS1z
-dGVwcGluZy4KCnNvb28gc2hvdWxkIGl0IGJlIHNraXBwZWQgZnJvbSB0aGlzIGxhcmdlIHBhdGNo
-c2V0IHRvIGVhc3kKcmV2aWV3PwoKPiAKPiBTaWduZWQtb2ZmLWJ5OiBBZGFsYmVydCBMYXrEg3Ig
-PGFsYXphckBiaXRkZWZlbmRlci5jb20+Cj4gLS0tCj4gIGFyY2gveDg2L2t2bS94ODYuYyB8IDkg
-KysrKysrKy0tCj4gIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25z
-KC0pCj4gCj4gZGlmZiAtLWdpdCBhL2FyY2gveDg2L2t2bS94ODYuYyBiL2FyY2gveDg2L2t2bS94
-ODYuYwo+IGluZGV4IDJjMDZkZTczYTc4NC4uMDZmNDRjZThlZDA3IDEwMDY0NAo+IC0tLSBhL2Fy
-Y2gveDg2L2t2bS94ODYuYwo+ICsrKyBiL2FyY2gveDg2L2t2bS94ODYuYwo+IEBAIC02MzExLDcg
-KzYzMTEsOCBAQCBzdGF0aWMgYm9vbCByZWV4ZWN1dGVfaW5zdHJ1Y3Rpb24oc3RydWN0IGt2bV92
-Y3B1ICp2Y3B1LCBndmFfdCBjcjIsCj4gIAkJaW5kaXJlY3Rfc2hhZG93X3BhZ2VzID0gdmNwdS0+
-a3ZtLT5hcmNoLmluZGlyZWN0X3NoYWRvd19wYWdlczsKPiAgCQlzcGluX3VubG9jaygmdmNwdS0+
-a3ZtLT5tbXVfbG9jayk7Cj4gIAo+IC0JCWlmIChpbmRpcmVjdF9zaGFkb3dfcGFnZXMpCj4gKwkJ
-aWYgKGluZGlyZWN0X3NoYWRvd19wYWdlcwo+ICsJCSAgICAmJiAha3ZtaV90cmFja2VkX2dmbih2
-Y3B1LCBncGFfdG9fZ2ZuKGdwYSkpKQo+ICAJCQlrdm1fbW11X3VucHJvdGVjdF9wYWdlKHZjcHUt
-Pmt2bSwgZ3BhX3RvX2dmbihncGEpKTsKPiAgCj4gIAkJcmV0dXJuIHRydWU7Cj4gQEAgLTYzMjIs
-NyArNjMyMyw4IEBAIHN0YXRpYyBib29sIHJlZXhlY3V0ZV9pbnN0cnVjdGlvbihzdHJ1Y3Qga3Zt
-X3ZjcHUgKnZjcHUsIGd2YV90IGNyMiwKPiAgCSAqIGFuZCBpdCBmYWlsZWQgdHJ5IHRvIHVuc2hh
-ZG93IHBhZ2UgYW5kIHJlLWVudGVyIHRoZQo+ICAJICogZ3Vlc3QgdG8gbGV0IENQVSBleGVjdXRl
-IHRoZSBpbnN0cnVjdGlvbi4KPiAgCSAqLwo+IC0Ja3ZtX21tdV91bnByb3RlY3RfcGFnZSh2Y3B1
-LT5rdm0sIGdwYV90b19nZm4oZ3BhKSk7Cj4gKwlpZiAoIWt2bWlfdHJhY2tlZF9nZm4odmNwdSwg
-Z3BhX3RvX2dmbihncGEpKSkKPiArCQlrdm1fbW11X3VucHJvdGVjdF9wYWdlKHZjcHUtPmt2bSwg
-Z3BhX3RvX2dmbihncGEpKTsKPiAgCj4gIAkvKgo+ICAJICogSWYgdGhlIGFjY2VzcyBmYXVsdHMg
-b24gaXRzIHBhZ2UgdGFibGUsIGl0IGNhbiBub3QKPiBAQCAtNjM3NCw2ICs2Mzc2LDkgQEAgc3Rh
-dGljIGJvb2wgcmV0cnlfaW5zdHJ1Y3Rpb24oc3RydWN0IHg4Nl9lbXVsYXRlX2N0eHQgKmN0eHQs
-Cj4gIAlpZiAoIXZjcHUtPmFyY2gubW11LT5kaXJlY3RfbWFwKQo+ICAJCWdwYSA9IGt2bV9tbXVf
-Z3ZhX3RvX2dwYV93cml0ZSh2Y3B1LCBjcjIsIE5VTEwpOwo+ICAKPiArCWlmIChrdm1pX3RyYWNr
-ZWRfZ2ZuKHZjcHUsIGdwYV90b19nZm4oZ3BhKSkpCj4gKwkJcmV0dXJuIGZhbHNlOwo+ICsKPiAg
-CWt2bV9tbXVfdW5wcm90ZWN0X3BhZ2UodmNwdS0+a3ZtLCBncGFfdG9fZ2ZuKGdwYSkpOwo+ICAK
-PiAgCXJldHVybiB0cnVlOwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMu
-bGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21h
-aWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+Hello Juergen Gross,
+
+The patch 5c83511bdb98: "x86/paravirt: Use a single ops structure"
+from Aug 28, 2018, leads to the following static checker warning:
+
+	arch/x86/kernel/paravirt.c:123 paravirt_patch_default()
+	warn: uncapped user index '*(&pv_ops + type)'
+
+	arch/x86/kernel/paravirt.c:124 paravirt_patch_default()
+	error: buffer overflow '&pv_ops' 90 <= 255 user_rl='0-255'
+
+arch/x86/kernel/paravirt.c
+   116  unsigned paravirt_patch_default(u8 type, void *insn_buff,
+   117                                  unsigned long addr, unsigned len)
+   118  {
+   119          /*
+   120           * Neat trick to map patch type back to the call within the
+   121           * corresponding structure.
+   122           */
+   123          void *opfunc = *((void **)&pv_ops + type);
+                                          ^^^^^^^^^^^^^^
+This code is actually pretty old...
+
+This isn't a security issue, but the size of &pv_ops is variable but
+type isn't checked so we could be reading beyond the end.  We could do
+something like:
+
+        if (type >= sizeof(pv_ops) / sizeof(void *))
+                return -EINVAL;
+	opfunc = *((void **)&pv_ops + type);
+
+   124          unsigned ret;
+   125  
+   126          if (opfunc == NULL)
+   127                  /* If there's no function, patch it with a ud2a (BUG) */
+   128                  ret = paravirt_patch_insns(insn_buff, len, ud2a, ud2a+sizeof(ud2a));
+   129          else if (opfunc == _paravirt_nop)
+   130                  ret = 0;
+   131  
+
+regards,
+dan carpenter
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
