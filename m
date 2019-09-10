@@ -2,57 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57238AEF8B
-	for <lists.virtualization@lfdr.de>; Tue, 10 Sep 2019 18:28:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 404C8AF22A
+	for <lists.virtualization@lfdr.de>; Tue, 10 Sep 2019 22:07:09 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9B635DDD;
-	Tue, 10 Sep 2019 16:27:57 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 332CEC6C;
+	Tue, 10 Sep 2019 20:07:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 76577C7D
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 000B9BE4
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 10 Sep 2019 16:27:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx01.bbu.dsd.mx.bitdefender.com
-	(mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 7A15B8AA
+	Tue, 10 Sep 2019 20:07:00 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0C7F9832
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 10 Sep 2019 16:27:54 +0000 (UTC)
-Received: from smtp.bitdefender.com (smtp02.buh.bitdefender.net [10.17.80.76])
-	by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
-	5CA3A307483A; Tue, 10 Sep 2019 19:27:52 +0300 (EEST)
-Received: from localhost (unknown [195.210.5.22])
-	by smtp.bitdefender.com (Postfix) with ESMTPSA id 3C3B8303A562;
-	Tue, 10 Sep 2019 19:27:52 +0300 (EEST)
-From: Adalbert =?iso-8859-2?b?TGF643I=?= <alazar@bitdefender.com>
-Subject: Re: [RFC PATCH v6 69/92] kvm: x86: keep the page protected if tracked
-	by the introspection tool
-To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-In-Reply-To: <20190910142642.GC5879@char.us.oracle.com>
-References: <20190809160047.8319-1-alazar@bitdefender.com>
-	<20190809160047.8319-70-alazar@bitdefender.com>
-	<20190910142642.GC5879@char.us.oracle.com>
-Date: Tue, 10 Sep 2019 19:28:19 +0300
-Message-ID: <15681328990.F582D7fCB.15355@host>
-User-agent: void
+	Tue, 10 Sep 2019 20:06:59 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id i1so3337741pfa.6
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 10 Sep 2019 13:06:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=0QByh7nMUE4DnF1EZmnVCO0LesBewegKmGWKg2jdIyE=;
+	b=nTUelCMWT/OF5pwZR9T+jGu510zTnmwud9l5EN0tgRovfWW3EYCEcVjRSwfD8F+hPw
+	yAIdumgV1m7JRyUG7aabeXsBuJzUH71TonbwfImsqF5M8kj+jUqR8e83DIwTd/uGBLma
+	/lCZB6Hq4zwK53E1k9KIQDRF0+VKGvwzIwlyM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=0QByh7nMUE4DnF1EZmnVCO0LesBewegKmGWKg2jdIyE=;
+	b=jyXxg+Sg3ePBJhYwIIHmo3vQ8J6FP5zNAGQeWRq6cSNFmXIsbjnDSrYbY7B499Y8I/
+	Xk/zfxQPxtJNc5DkK6JzTIS0n3oboIYE/678NO96IM6wMbYcBhYh4cCHMN6/8TXdCGM5
+	TlfJNGXdgH+U2jzpFukQemZBCTAUJCMPeV12uxHT2P/8I/1AK+PlkJqqMPsAk1wJ7Joc
+	39IenfuQhSzmSNX+Ed1TjIOv3IQsj+vmr95b1+xq56iz4UBqzusiVmlL2JPmX5e9XJvH
+	yMhyGkDNBUddc37qZrJ0w3Zj8X5Hic9/i1vfD4qUlfM1k80hzRSnJznTxTkSTZlgqyNM
+	QdbQ==
+X-Gm-Message-State: APjAAAXvgXMSB1jajD6iRVLlQZgJxx+mf3ajFqduDeKdj172ctju+e88
+	lg0hzzUhXzpEblrt/0DvfIjj0A==
+X-Google-Smtp-Source: APXvYqwY8ZIVNVGdt/gxFNSdRhnyOwo46cUOwbhh5f13J3xXT4X/se8iTQ5/XLLxoCcy8JMm8lWmtg==
+X-Received: by 2002:a63:1:: with SMTP id 1mr29256800pga.162.1568146018680;
+	Tue, 10 Sep 2019 13:06:58 -0700 (PDT)
+Received: from localhost ([2620:15c:202:1:e9ae:bd45:1bd9:e60d])
+	by smtp.gmail.com with ESMTPSA id
+	q20sm35751990pfg.85.2019.09.10.13.06.57
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Tue, 10 Sep 2019 13:06:58 -0700 (PDT)
+From: David Riley <davidriley@chromium.org>
+To: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Subject: [PATCH v3 1/2] drm/virtio: Rewrite virtio_gpu_queue_ctrl_buffer using
+	fenced version.
+Date: Tue, 10 Sep 2019 13:06:50 -0700
+Message-Id: <20190910200651.118628-1-davidriley@chromium.org>
+X-Mailer: git-send-email 2.23.0.162.g0b9fbb3734-goog
+In-Reply-To: <20190829212417.257397-1-davidriley@chromium.org>
+References: <20190829212417.257397-1-davidriley@chromium.org>
 MIME-Version: 1.0
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00, FROM_EXCESS_BASE64, 
-	RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Tamas K Lengyel <tamas@tklengyel.com>,
-	Weijiang Yang <weijiang.yang@intel.com>,
-	Yu C <yu.c.zhang@intel.com>, kvm@vger.kernel.org,
-	Radim =?iso-8859-2?b?S3LobeH4?= <rkrcmar@redhat.com>,
-	Jan Kiszka <jan.kiszka@siemens.com>,
-	Samuel =?iso-8859-1?q?Laur=E9n?= <samuel.lauren@iki.fi>,
-	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
-	Patrick Colp <patrick.colp@oracle.com>,
-	Mathieu Tarral <mathieu.tarral@protonmail.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
-	Mihai =?UTF-8?b?RG9uyJt1?= <mdontu@bitdefender.com>
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	=?UTF-8?q?St=C3=A9phane=20Marchesin?= <marcheu@chromium.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,48 +81,65 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gVHVlLCAxMCBTZXAgMjAxOSAxMDoyNjo0MiAtMDQwMCwgS29ucmFkIFJ6ZXN6dXRlayBXaWxr
-IDxrb25yYWQud2lsa0BvcmFjbGUuY29tPiB3cm90ZToKPiBPbiBGcmksIEF1ZyAwOSwgMjAxOSBh
-dCAwNzowMDoyNFBNICswMzAwLCBBZGFsYmVydCBMYXrEg3Igd3JvdGU6Cj4gPiBUaGlzIHBhdGNo
-IG1pZ2h0IGJlIG9ic29sZXRlIHRoYW5rcyB0byBzaW5nbGUtc3RlcHBpbmcuCj4gCj4gc29vbyBz
-aG91bGQgaXQgYmUgc2tpcHBlZCBmcm9tIHRoaXMgbGFyZ2UgcGF0Y2hzZXQgdG8gZWFzeQo+IHJl
-dmlldz8KCkknbGwgYWRkIGEgY291cGxlIG9mIHdhcm5pbmcgbWVzc2FnZXMgdG8gY2hlY2sgaWYg
-dGhpcyBwYXRjaCBpcyBzdGlsbApuZWVkZWQsIGluIG9yZGVyIHRvIHNraXAgaXQgZnJvbSB0aGUg
-bmV4dCBzdWJtaXNzaW9uICh3aGljaCB3aWxsIGJlIHNtYWxsZXI6KQoKSG93ZXZlciwgb24gQU1E
-LCBzaW5nbGUtc3RlcHBpbmcgaXMgbm90IGFuIG9wdGlvbi4KClRoYW5rcywKQWRhbGJlcnQKCj4g
-Cj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IEFkYWxiZXJ0IExhesSDciA8YWxhemFyQGJpdGRlZmVu
-ZGVyLmNvbT4KPiA+IC0tLQo+ID4gIGFyY2gveDg2L2t2bS94ODYuYyB8IDkgKysrKysrKy0tCj4g
-PiAgMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKPiA+IAo+
-ID4gZGlmZiAtLWdpdCBhL2FyY2gveDg2L2t2bS94ODYuYyBiL2FyY2gveDg2L2t2bS94ODYuYwo+
-ID4gaW5kZXggMmMwNmRlNzNhNzg0Li4wNmY0NGNlOGVkMDcgMTAwNjQ0Cj4gPiAtLS0gYS9hcmNo
-L3g4Ni9rdm0veDg2LmMKPiA+ICsrKyBiL2FyY2gveDg2L2t2bS94ODYuYwo+ID4gQEAgLTYzMTEs
-NyArNjMxMSw4IEBAIHN0YXRpYyBib29sIHJlZXhlY3V0ZV9pbnN0cnVjdGlvbihzdHJ1Y3Qga3Zt
-X3ZjcHUgKnZjcHUsIGd2YV90IGNyMiwKPiA+ICAJCWluZGlyZWN0X3NoYWRvd19wYWdlcyA9IHZj
-cHUtPmt2bS0+YXJjaC5pbmRpcmVjdF9zaGFkb3dfcGFnZXM7Cj4gPiAgCQlzcGluX3VubG9jaygm
-dmNwdS0+a3ZtLT5tbXVfbG9jayk7Cj4gPiAgCj4gPiAtCQlpZiAoaW5kaXJlY3Rfc2hhZG93X3Bh
-Z2VzKQo+ID4gKwkJaWYgKGluZGlyZWN0X3NoYWRvd19wYWdlcwo+ID4gKwkJICAgICYmICFrdm1p
-X3RyYWNrZWRfZ2ZuKHZjcHUsIGdwYV90b19nZm4oZ3BhKSkpCj4gPiAgCQkJa3ZtX21tdV91bnBy
-b3RlY3RfcGFnZSh2Y3B1LT5rdm0sIGdwYV90b19nZm4oZ3BhKSk7Cj4gPiAgCj4gPiAgCQlyZXR1
-cm4gdHJ1ZTsKPiA+IEBAIC02MzIyLDcgKzYzMjMsOCBAQCBzdGF0aWMgYm9vbCByZWV4ZWN1dGVf
-aW5zdHJ1Y3Rpb24oc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBndmFfdCBjcjIsCj4gPiAgCSAqIGFu
-ZCBpdCBmYWlsZWQgdHJ5IHRvIHVuc2hhZG93IHBhZ2UgYW5kIHJlLWVudGVyIHRoZQo+ID4gIAkg
-KiBndWVzdCB0byBsZXQgQ1BVIGV4ZWN1dGUgdGhlIGluc3RydWN0aW9uLgo+ID4gIAkgKi8KPiA+
-IC0Ja3ZtX21tdV91bnByb3RlY3RfcGFnZSh2Y3B1LT5rdm0sIGdwYV90b19nZm4oZ3BhKSk7Cj4g
-PiArCWlmICgha3ZtaV90cmFja2VkX2dmbih2Y3B1LCBncGFfdG9fZ2ZuKGdwYSkpKQo+ID4gKwkJ
-a3ZtX21tdV91bnByb3RlY3RfcGFnZSh2Y3B1LT5rdm0sIGdwYV90b19nZm4oZ3BhKSk7Cj4gPiAg
-Cj4gPiAgCS8qCj4gPiAgCSAqIElmIHRoZSBhY2Nlc3MgZmF1bHRzIG9uIGl0cyBwYWdlIHRhYmxl
-LCBpdCBjYW4gbm90Cj4gPiBAQCAtNjM3NCw2ICs2Mzc2LDkgQEAgc3RhdGljIGJvb2wgcmV0cnlf
-aW5zdHJ1Y3Rpb24oc3RydWN0IHg4Nl9lbXVsYXRlX2N0eHQgKmN0eHQsCj4gPiAgCWlmICghdmNw
-dS0+YXJjaC5tbXUtPmRpcmVjdF9tYXApCj4gPiAgCQlncGEgPSBrdm1fbW11X2d2YV90b19ncGFf
-d3JpdGUodmNwdSwgY3IyLCBOVUxMKTsKPiA+ICAKPiA+ICsJaWYgKGt2bWlfdHJhY2tlZF9nZm4o
-dmNwdSwgZ3BhX3RvX2dmbihncGEpKSkKPiA+ICsJCXJldHVybiBmYWxzZTsKPiA+ICsKPiA+ICAJ
-a3ZtX21tdV91bnByb3RlY3RfcGFnZSh2Y3B1LT5rdm0sIGdwYV90b19nZm4oZ3BhKSk7Cj4gPiAg
-Cj4gPiAgCXJldHVybiB0cnVlOwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlz
-dHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3Jn
-L21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+Factor function in preparation to generating scatterlist prior to locking.
+
+Signed-off-by: David Riley <davidriley@chromium.org>
+---
+ drivers/gpu/drm/virtio/virtgpu_vq.c | 19 +++++++------------
+ 1 file changed, 7 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+index 981ee16e3ee9..bf5a4a50b002 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_vq.c
++++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+@@ -299,17 +299,6 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+ 	return ret;
+ }
+ 
+-static int virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
+-					struct virtio_gpu_vbuffer *vbuf)
+-{
+-	int rc;
+-
+-	spin_lock(&vgdev->ctrlq.qlock);
+-	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
+-	spin_unlock(&vgdev->ctrlq.qlock);
+-	return rc;
+-}
+-
+ static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+ 					       struct virtio_gpu_vbuffer *vbuf,
+ 					       struct virtio_gpu_ctrl_hdr *hdr,
+@@ -335,13 +324,19 @@ static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+ 		goto again;
+ 	}
+ 
+-	if (fence)
++	if (hdr && fence)
+ 		virtio_gpu_fence_emit(vgdev, hdr, fence);
+ 	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
+ 	spin_unlock(&vgdev->ctrlq.qlock);
+ 	return rc;
+ }
+ 
++static int virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
++					struct virtio_gpu_vbuffer *vbuf)
++{
++	return virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, NULL, NULL);
++}
++
+ static int virtio_gpu_queue_cursor(struct virtio_gpu_device *vgdev,
+ 				   struct virtio_gpu_vbuffer *vbuf)
+ {
+-- 
+2.23.0.162.g0b9fbb3734-goog
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
