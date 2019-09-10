@@ -2,61 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 404C8AF22A
-	for <lists.virtualization@lfdr.de>; Tue, 10 Sep 2019 22:07:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E517BAF236
+	for <lists.virtualization@lfdr.de>; Tue, 10 Sep 2019 22:12:32 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 332CEC6C;
-	Tue, 10 Sep 2019 20:07:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E99ADC5C;
+	Tue, 10 Sep 2019 20:12:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 000B9BE4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6ED8FACC
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 10 Sep 2019 20:07:00 +0000 (UTC)
+	Tue, 10 Sep 2019 20:12:25 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0C7F9832
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DF919832
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 10 Sep 2019 20:06:59 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id i1so3337741pfa.6
+	Tue, 10 Sep 2019 20:12:24 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id x20so3494055plm.9
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 10 Sep 2019 13:06:59 -0700 (PDT)
+	Tue, 10 Sep 2019 13:12:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=0QByh7nMUE4DnF1EZmnVCO0LesBewegKmGWKg2jdIyE=;
-	b=nTUelCMWT/OF5pwZR9T+jGu510zTnmwud9l5EN0tgRovfWW3EYCEcVjRSwfD8F+hPw
-	yAIdumgV1m7JRyUG7aabeXsBuJzUH71TonbwfImsqF5M8kj+jUqR8e83DIwTd/uGBLma
-	/lCZB6Hq4zwK53E1k9KIQDRF0+VKGvwzIwlyM=
+	bh=15hWnr6f2tJrfEoilZ1helN5HSi4DmE9rTuHqUhMmkU=;
+	b=R61eEifgYMh7PnNayuYxhvP5bhbfW2mOmVNcjBrX0u4fCMa2T6Ler3WWj5Apg/ZTMQ
+	f1/ye3xAfOzASybxWrea9GsS6SoROey6PHwxCSthuxwXK0qDfT/cYfz/fb9ycyHnRX2e
+	EbV46qG2jGs23H1GpBftp0RKBI0c8rFuNQb3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=0QByh7nMUE4DnF1EZmnVCO0LesBewegKmGWKg2jdIyE=;
-	b=jyXxg+Sg3ePBJhYwIIHmo3vQ8J6FP5zNAGQeWRq6cSNFmXIsbjnDSrYbY7B499Y8I/
-	Xk/zfxQPxtJNc5DkK6JzTIS0n3oboIYE/678NO96IM6wMbYcBhYh4cCHMN6/8TXdCGM5
-	TlfJNGXdgH+U2jzpFukQemZBCTAUJCMPeV12uxHT2P/8I/1AK+PlkJqqMPsAk1wJ7Joc
-	39IenfuQhSzmSNX+Ed1TjIOv3IQsj+vmr95b1+xq56iz4UBqzusiVmlL2JPmX5e9XJvH
-	yMhyGkDNBUddc37qZrJ0w3Zj8X5Hic9/i1vfD4qUlfM1k80hzRSnJznTxTkSTZlgqyNM
-	QdbQ==
-X-Gm-Message-State: APjAAAXvgXMSB1jajD6iRVLlQZgJxx+mf3ajFqduDeKdj172ctju+e88
-	lg0hzzUhXzpEblrt/0DvfIjj0A==
-X-Google-Smtp-Source: APXvYqwY8ZIVNVGdt/gxFNSdRhnyOwo46cUOwbhh5f13J3xXT4X/se8iTQ5/XLLxoCcy8JMm8lWmtg==
-X-Received: by 2002:a63:1:: with SMTP id 1mr29256800pga.162.1568146018680;
-	Tue, 10 Sep 2019 13:06:58 -0700 (PDT)
+	bh=15hWnr6f2tJrfEoilZ1helN5HSi4DmE9rTuHqUhMmkU=;
+	b=l5Ulk7Q1xlutW4ysEB+qUq2k2fJiPMgRoS81OHVHKmcee/cW1TQ6wAdYnwESUTEa9i
+	Ns9zS8U/wTjOhM+RaiiYwoqTmEClt3ToeqNRlm7JfT0Wo2/koIwHvBEWUSd8VJ7e/f//
+	3Bgha61vRcMzZe1Sij9ycvHd/WD70CYLsn6Wjl3gLLKinNegVnOzk5pVhOpQpZRNljkH
+	jl80b2hvMAaKHpJMckNPCFug3TA/15CQ0eTOJtgyfrgN2xaHwcWip2BTG/lxe5MLEbAq
+	9PBkxkwwmk+2ikr/47YCWBjDZRaZh0214W3eqfItVtwZi60Nd1yIkJ/9f5vPhxoh9ZbY
+	bQuw==
+X-Gm-Message-State: APjAAAW/Th5dQtGWyy7YKrBhg8daXN/hRqDY9iqlC3uWryXolFN8+i0S
+	bw/Y4A1RoBIWtIcpuXb2nbRUWQ==
+X-Google-Smtp-Source: APXvYqxe5wirZcu9g1h+r/nLCfi6tx506Er0HD6EdTcai5ASMPCpU4DNsON/yG0qYLuEnO9zkBPWPw==
+X-Received: by 2002:a17:902:b497:: with SMTP id
+	y23mr33009585plr.201.1568146344505; 
+	Tue, 10 Sep 2019 13:12:24 -0700 (PDT)
 Received: from localhost ([2620:15c:202:1:e9ae:bd45:1bd9:e60d])
-	by smtp.gmail.com with ESMTPSA id
-	q20sm35751990pfg.85.2019.09.10.13.06.57
+	by smtp.gmail.com with ESMTPSA id c8sm1581955pgw.37.2019.09.10.13.12.23
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Tue, 10 Sep 2019 13:06:58 -0700 (PDT)
+	Tue, 10 Sep 2019 13:12:23 -0700 (PDT)
 From: David Riley <davidriley@chromium.org>
 To: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-Subject: [PATCH v3 1/2] drm/virtio: Rewrite virtio_gpu_queue_ctrl_buffer using
-	fenced version.
-Date: Tue, 10 Sep 2019 13:06:50 -0700
-Message-Id: <20190910200651.118628-1-davidriley@chromium.org>
+Subject: [PATCH v3 2/2] drm/virtio: Use vmalloc for command buffer allocations.
+Date: Tue, 10 Sep 2019 13:06:51 -0700
+Message-Id: <20190910200651.118628-2-davidriley@chromium.org>
 X-Mailer: git-send-email 2.23.0.162.g0b9fbb3734-goog
 In-Reply-To: <20190829212417.257397-1-davidriley@chromium.org>
 References: <20190829212417.257397-1-davidriley@chromium.org>
@@ -86,56 +85,170 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Factor function in preparation to generating scatterlist prior to locking.
+Userspace requested command buffer allocations could be too large
+to make as a contiguous allocation.  Use vmalloc if necessary to
+satisfy those allocations.
 
 Signed-off-by: David Riley <davidriley@chromium.org>
 ---
- drivers/gpu/drm/virtio/virtgpu_vq.c | 19 +++++++------------
- 1 file changed, 7 insertions(+), 12 deletions(-)
+ drivers/gpu/drm/virtio/virtgpu_ioctl.c |  4 +-
+ drivers/gpu/drm/virtio/virtgpu_vq.c    | 79 +++++++++++++++++++++++---
+ 2 files changed, 73 insertions(+), 10 deletions(-)
 
+diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+index ac60be9b5c19..a8732a8af766 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
++++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+@@ -195,7 +195,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
+ 	if (ret)
+ 		goto out_free;
+ 
+-	buf = memdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
++	buf = vmemdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
+ 	if (IS_ERR(buf)) {
+ 		ret = PTR_ERR(buf);
+ 		goto out_unresv;
+@@ -230,7 +230,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
+ 	return 0;
+ 
+ out_memdup:
+-	kfree(buf);
++	kvfree(buf);
+ out_unresv:
+ 	ttm_eu_backoff_reservation(&ticket, &validate_list);
+ out_free:
 diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-index 981ee16e3ee9..bf5a4a50b002 100644
+index bf5a4a50b002..76cf2b9d5d1d 100644
 --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
 +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-@@ -299,17 +299,6 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
- 	return ret;
+@@ -154,7 +154,7 @@ static void free_vbuf(struct virtio_gpu_device *vgdev,
+ {
+ 	if (vbuf->resp_size > MAX_INLINE_RESP_SIZE)
+ 		kfree(vbuf->resp_buf);
+-	kfree(vbuf->data_buf);
++	kvfree(vbuf->data_buf);
+ 	kmem_cache_free(vgdev->vbufs, vbuf);
  }
  
--static int virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
--					struct virtio_gpu_vbuffer *vbuf)
--{
--	int rc;
--
--	spin_lock(&vgdev->ctrlq.qlock);
--	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
--	spin_unlock(&vgdev->ctrlq.qlock);
--	return rc;
--}
--
- static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
- 					       struct virtio_gpu_vbuffer *vbuf,
- 					       struct virtio_gpu_ctrl_hdr *hdr,
-@@ -335,13 +324,19 @@ static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
- 		goto again;
+@@ -251,13 +251,54 @@ void virtio_gpu_dequeue_cursor_func(struct work_struct *work)
+ 	wake_up(&vgdev->cursorq.ack_queue);
+ }
+ 
++/* Create sg_table from a vmalloc'd buffer. */
++static struct sg_table *vmalloc_to_sgt(char *data, uint32_t size, int *sg_ents)
++{
++	int ret, s, i;
++	struct sg_table *sgt;
++	struct scatterlist *sg;
++	struct page *pg;
++
++	if (WARN_ON(!PAGE_ALIGNED(data)))
++		return NULL;
++
++	sgt = kmalloc(sizeof(*sgt), GFP_KERNEL);
++	if (!sgt)
++		return NULL;
++
++	*sg_ents = DIV_ROUND_UP(size, PAGE_SIZE);
++	ret = sg_alloc_table(sgt, *sg_ents, GFP_KERNEL);
++	if (ret) {
++		kfree(sgt);
++		return NULL;
++	}
++
++	for_each_sg(sgt->sgl, sg, *sg_ents, i) {
++		pg = vmalloc_to_page(data);
++		if (!pg) {
++			sg_free_table(sgt);
++			kfree(sgt);
++			return NULL;
++		}
++
++		s = min_t(int, PAGE_SIZE, size);
++		sg_set_page(sg, pg, s, 0);
++
++		size -= s;
++		data += s;
++	}
++
++	return sgt;
++}
++
+ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+-					       struct virtio_gpu_vbuffer *vbuf)
++					       struct virtio_gpu_vbuffer *vbuf,
++					       struct scatterlist *vout)
+ 		__releases(&vgdev->ctrlq.qlock)
+ 		__acquires(&vgdev->ctrlq.qlock)
+ {
+ 	struct virtqueue *vq = vgdev->ctrlq.vq;
+-	struct scatterlist *sgs[3], vcmd, vout, vresp;
++	struct scatterlist *sgs[3], vcmd, vresp;
+ 	int outcnt = 0, incnt = 0;
+ 	int ret;
+ 
+@@ -268,9 +309,8 @@ static int virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+ 	sgs[outcnt + incnt] = &vcmd;
+ 	outcnt++;
+ 
+-	if (vbuf->data_size) {
+-		sg_init_one(&vout, vbuf->data_buf, vbuf->data_size);
+-		sgs[outcnt + incnt] = &vout;
++	if (vout) {
++		sgs[outcnt + incnt] = vout;
+ 		outcnt++;
  	}
  
--	if (fence)
-+	if (hdr && fence)
+@@ -305,7 +345,24 @@ static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+ 					       struct virtio_gpu_fence *fence)
+ {
+ 	struct virtqueue *vq = vgdev->ctrlq.vq;
++	struct scatterlist *vout = NULL, sg;
++	struct sg_table *sgt = NULL;
+ 	int rc;
++	int outcnt = 0;
++
++	if (vbuf->data_size) {
++		if (is_vmalloc_addr(vbuf->data_buf)) {
++			sgt = vmalloc_to_sgt(vbuf->data_buf, vbuf->data_size,
++					     &outcnt);
++			if (!sgt)
++				return -ENOMEM;
++			vout = sgt->sgl;
++		} else {
++			sg_init_one(&sg, vbuf->data_buf, vbuf->data_size);
++			vout = &sg;
++			outcnt = 1;
++		}
++	}
+ 
+ again:
+ 	spin_lock(&vgdev->ctrlq.qlock);
+@@ -318,7 +375,7 @@ static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+ 	 * to wait for free space, which can result in fence ids being
+ 	 * submitted out-of-order.
+ 	 */
+-	if (vq->num_free < 3) {
++	if (vq->num_free < 2 + outcnt) {
+ 		spin_unlock(&vgdev->ctrlq.qlock);
+ 		wait_event(vgdev->ctrlq.ack_queue, vq->num_free >= 3);
+ 		goto again;
+@@ -326,8 +383,14 @@ static int virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+ 
+ 	if (hdr && fence)
  		virtio_gpu_fence_emit(vgdev, hdr, fence);
- 	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
+-	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
++	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf, vout);
  	spin_unlock(&vgdev->ctrlq.qlock);
++
++	if (sgt) {
++		sg_free_table(sgt);
++		kfree(sgt);
++	}
++
  	return rc;
  }
  
-+static int virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
-+					struct virtio_gpu_vbuffer *vbuf)
-+{
-+	return virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, NULL, NULL);
-+}
-+
- static int virtio_gpu_queue_cursor(struct virtio_gpu_device *vgdev,
- 				   struct virtio_gpu_vbuffer *vbuf)
- {
 -- 
 2.23.0.162.g0b9fbb3734-goog
 
