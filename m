@@ -2,53 +2,95 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD2B0AF41A
-	for <lists.virtualization@lfdr.de>; Wed, 11 Sep 2019 03:50:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4486CAF42C
+	for <lists.virtualization@lfdr.de>; Wed, 11 Sep 2019 04:14:38 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D34F2ACD;
-	Wed, 11 Sep 2019 01:50:01 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9310AAD7;
+	Wed, 11 Sep 2019 02:14:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id D6207A80
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 80199723
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 01:49:59 +0000 (UTC)
+	Wed, 11 Sep 2019 02:14:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0FDB882B
+Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 51EF082B
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 01:49:58 +0000 (UTC)
-X-Amp-Result: UNSCANNABLE
-X-Amp-File-Uploaded: False
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	10 Sep 2019 18:49:58 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,491,1559545200"; d="scan'208";a="189527651"
-Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.71])
-	by orsmga006.jf.intel.com with ESMTP; 10 Sep 2019 18:49:54 -0700
-Date: Wed, 11 Sep 2019 09:47:26 +0800
-From: Tiwei Bie <tiwei.bie@intel.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [RFC PATCH 3/4] virtio: introudce a mdev based transport
-Message-ID: <20190911014726.GA14798@___>
-References: <20190910081935.30516-1-jasowang@redhat.com>
-	<20190910081935.30516-4-jasowang@redhat.com>
+	Wed, 11 Sep 2019 02:14:28 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+	by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
+	x8B2EMOe182060; Wed, 11 Sep 2019 02:14:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+	h=to : cc : subject :
+	from : references : date : in-reply-to : message-id : mime-version :
+	content-type; s=corp-2019-08-05;
+	bh=tYlswYMGfc9rDFq0KLhl5hLmx6KYuv+guMDS5/fpoEM=;
+	b=Js7LEog6OC6M0+Kt81FP53drVJPYFhEbEt1MjWP2AC4EIj/6hLxavD/qeZDeZaY1uAvE
+	pg+bF0Yi1KEnm/Z1fs4PtIglkdLmTkNmZBVIWA/I8LBcW1KF6OnKDxSP267bDVczZSfY
+	Dde4aVbD0BHlmXBPXnGh5IBHrt1h2rChQZIQfFdYc59hTGAPJLYVUqiMp02kYDa5byTx
+	tLYgEBAWPQUC2EGvFvBC2eSb5b3wdwLPHUdy9Ksuqr4tLeudZxDD5trYiNiniCZ5AAyG
+	8WfBK9v90pVF0xBWuVPhTXz4Eh2i3qmx4SEL8tbHgLJ5FtTNJubs1a69KUpzsf/P9aYe
+	5A== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+	by userp2130.oracle.com with ESMTP id 2uw1m8xyrf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 11 Sep 2019 02:14:22 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+	by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id
+	x8B2DY7L114730; Wed, 11 Sep 2019 02:14:18 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+	by userp3020.oracle.com with ESMTP id 2uxj3hw7yt-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 11 Sep 2019 02:14:18 +0000
+Received: from abhmp0005.oracle.com (abhmp0005.oracle.com [141.146.116.11])
+	by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x8B2EF4i026967;
+	Wed, 11 Sep 2019 02:14:15 GMT
+Received: from ca-mkp.ca.oracle.com (/10.159.214.123)
+	by default (Oracle Beehive Gateway v4.0)
+	with ESMTP ; Tue, 10 Sep 2019 19:14:15 -0700
+To: Matt Lupfer <mlupfer@ddn.com>
+Subject: Re: [PATCH v2] scsi: virtio_scsi: unplug LUNs when events missed
+From: "Martin K. Petersen" <martin.petersen@oracle.com>
+Organization: Oracle Corporation
+References: <20190905181903.29756-1-mlupfer@ddn.com>
+Date: Tue, 10 Sep 2019 22:14:12 -0400
+In-Reply-To: <20190905181903.29756-1-mlupfer@ddn.com> (Matt Lupfer's message
+	of "Thu, 5 Sep 2019 18:19:28 +0000")
+Message-ID: <yq17e6ffukr.fsf@oracle.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1.92 (gnu/linux)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190910081935.30516-4-jasowang@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.3.1
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9376
+	signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+	malwarescore=0
+	phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=997
+	adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+	engine=8.0.1-1906280000 definitions=main-1909110016
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9376
+	signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+	priorityscore=1501 malwarescore=0
+	suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+	lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999
+	adultscore=0
+	classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1906280000
+	definitions=main-1909110016
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED,
+	UNPARSEABLE_RELAY autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: idos@mellanox.com, kvm@vger.kernel.org, mst@redhat.com,
-	netdev@vger.kernel.org, cohuck@redhat.com, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, kwankhede@nvidia.com,
-	xiao.w.wang@intel.com, zhihong.wang@intel.com,
-	maxime.coquelin@redhat.com, haotian.wang@sifive.com,
-	rob.miller@broadcom.com
+Cc: "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+	"martin.petersen@oracle.com" <martin.petersen@oracle.com>,
+	"mst@redhat.com" <mst@redhat.com>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	"stefanha@redhat.com" <stefanha@redhat.com>,
+	"pbonzini@redhat.com" <pbonzini@redhat.com>,
+	"jejb@linux.ibm.com" <jejb@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,204 +107,22 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Sep 10, 2019 at 04:19:34PM +0800, Jason Wang wrote:
-> This path introduces a new mdev transport for virtio. This is used to
-> use kernel virtio driver to drive the mediated device that is capable
-> of populating virtqueue directly.
-> 
-> A new virtio-mdev driver will be registered to the mdev bus, when a
-> new virtio-mdev device is probed, it will register the device with
-> mdev based config ops. This means, unlike the exist hardware
-> transport, this is a software transport between mdev driver and mdev
-> device. The transport was implemented through:
-> 
-> - configuration access was implemented through parent_ops->read()/write()
-> - vq/config callback was implemented through parent_ops->ioctl()
-> 
-> This transport is derived from virtio MMIO protocol and was wrote for
-> kernel driver. But for the transport itself, but the design goal is to
-> be generic enough to support userspace driver (this part will be added
-> in the future).
-> 
-> Note:
-> - current mdev assume all the parameter of parent_ops was from
->   userspace. This prevents us from implementing the kernel mdev
->   driver. For a quick POC, this patch just abuse those parameter and
->   assume the mdev device implementation will treat them as kernel
->   pointer. This should be addressed in the formal series by extending
->   mdev_parent_ops.
-> - for a quick POC, I just drive the transport from MMIO, I'm pretty
->   there's lot of optimization space for this.
-> 
-> Signed-off-by: Jason Wang <jasowang@redhat.com>
-> ---
->  drivers/vfio/mdev/Kconfig        |   7 +
->  drivers/vfio/mdev/Makefile       |   1 +
->  drivers/vfio/mdev/virtio_mdev.c  | 500 +++++++++++++++++++++++++++++++
->  include/uapi/linux/virtio_mdev.h | 131 ++++++++
->  4 files changed, 639 insertions(+)
->  create mode 100644 drivers/vfio/mdev/virtio_mdev.c
->  create mode 100644 include/uapi/linux/virtio_mdev.h
-> 
-[...]
-> diff --git a/include/uapi/linux/virtio_mdev.h b/include/uapi/linux/virtio_mdev.h
-> new file mode 100644
-> index 000000000000..8040de6b960a
-> --- /dev/null
-> +++ b/include/uapi/linux/virtio_mdev.h
-> @@ -0,0 +1,131 @@
-> +/*
-> + * Virtio mediated device driver
-> + *
-> + * Copyright 2019, Red Hat Corp.
-> + *
-> + * Based on Virtio MMIO driver by ARM Ltd, copyright ARM Ltd. 2011
-> + *
-> + * This header is BSD licensed so anyone can use the definitions to implement
-> + * compatible drivers/servers.
-> + *
-> + * Redistribution and use in source and binary forms, with or without
-> + * modification, are permitted provided that the following conditions
-> + * are met:
-> + * 1. Redistributions of source code must retain the above copyright
-> + *    notice, this list of conditions and the following disclaimer.
-> + * 2. Redistributions in binary form must reproduce the above copyright
-> + *    notice, this list of conditions and the following disclaimer in the
-> + *    documentation and/or other materials provided with the distribution.
-> + * 3. Neither the name of IBM nor the names of its contributors
-> + *    may be used to endorse or promote products derived from this software
-> + *    without specific prior written permission.
-> + * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS'' AND
-> + * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-> + * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-> + * ARE DISCLAIMED.  IN NO EVENT SHALL IBM OR CONTRIBUTORS BE LIABLE
-> + * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-> + * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-> + * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-> + * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-> + * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-> + * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-> + * SUCH DAMAGE.
-> + */
-> +#ifndef _LINUX_VIRTIO_MDEV_H
-> +#define _LINUX_VIRTIO_MDEV_H
-> +
-> +#include <linux/interrupt.h>
-> +#include <linux/vringh.h>
-> +#include <uapi/linux/virtio_net.h>
-> +
-> +/*
-> + * Ioctls
-> + */
-> +
-> +struct virtio_mdev_callback {
-> +	irqreturn_t (*callback)(void *);
-> +	void *private;
-> +};
-> +
-> +#define VIRTIO_MDEV 0xAF
-> +#define VIRTIO_MDEV_SET_VQ_CALLBACK _IOW(VIRTIO_MDEV, 0x00, \
-> +					 struct virtio_mdev_callback)
-> +#define VIRTIO_MDEV_SET_CONFIG_CALLBACK _IOW(VIRTIO_MDEV, 0x01, \
-> +					struct virtio_mdev_callback)
-> +
-> +#define VIRTIO_MDEV_DEVICE_API_STRING		"virtio-mdev"
-> +
-> +/*
-> + * Control registers
-> + */
-> +
-> +/* Magic value ("virt" string) - Read Only */
-> +#define VIRTIO_MDEV_MAGIC_VALUE		0x000
-> +
-> +/* Virtio device version - Read Only */
-> +#define VIRTIO_MDEV_VERSION		0x004
-> +
-> +/* Virtio device ID - Read Only */
-> +#define VIRTIO_MDEV_DEVICE_ID		0x008
-> +
-> +/* Virtio vendor ID - Read Only */
-> +#define VIRTIO_MDEV_VENDOR_ID		0x00c
-> +
-> +/* Bitmask of the features supported by the device (host)
-> + * (32 bits per set) - Read Only */
-> +#define VIRTIO_MDEV_DEVICE_FEATURES	0x010
-> +
-> +/* Device (host) features set selector - Write Only */
-> +#define VIRTIO_MDEV_DEVICE_FEATURES_SEL	0x014
-> +
-> +/* Bitmask of features activated by the driver (guest)
-> + * (32 bits per set) - Write Only */
-> +#define VIRTIO_MDEV_DRIVER_FEATURES	0x020
-> +
-> +/* Activated features set selector - Write Only */
-> +#define VIRTIO_MDEV_DRIVER_FEATURES_SEL	0x024
-> +
-> +/* Queue selector - Write Only */
-> +#define VIRTIO_MDEV_QUEUE_SEL		0x030
-> +
-> +/* Maximum size of the currently selected queue - Read Only */
-> +#define VIRTIO_MDEV_QUEUE_NUM_MAX	0x034
-> +
-> +/* Queue size for the currently selected queue - Write Only */
-> +#define VIRTIO_MDEV_QUEUE_NUM		0x038
-> +
-> +/* Ready bit for the currently selected queue - Read Write */
-> +#define VIRTIO_MDEV_QUEUE_READY		0x044
-> +
-> +/* Alignment of virtqueue - Read Only */
-> +#define VIRTIO_MDEV_QUEUE_ALIGN		0x048
-> +
-> +/* Queue notifier - Write Only */
-> +#define VIRTIO_MDEV_QUEUE_NOTIFY	0x050
-> +
-> +/* Device status register - Read Write */
-> +#define VIRTIO_MDEV_STATUS		0x060
-> +
-> +/* Selected queue's Descriptor Table address, 64 bits in two halves */
-> +#define VIRTIO_MDEV_QUEUE_DESC_LOW	0x080
-> +#define VIRTIO_MDEV_QUEUE_DESC_HIGH	0x084
-> +
-> +/* Selected queue's Available Ring address, 64 bits in two halves */
-> +#define VIRTIO_MDEV_QUEUE_AVAIL_LOW	0x090
-> +#define VIRTIO_MDEV_QUEUE_AVAIL_HIGH	0x094
-> +
-> +/* Selected queue's Used Ring address, 64 bits in two halves */
-> +#define VIRTIO_MDEV_QUEUE_USED_LOW	0x0a0
-> +#define VIRTIO_MDEV_QUEUE_USED_HIGH	0x0a4
-> +
-> +/* Configuration atomicity value */
-> +#define VIRTIO_MDEV_CONFIG_GENERATION	0x0fc
-> +
-> +/* The config space is defined by each driver as
-> + * the per-driver configuration space - Read Write */
-> +#define VIRTIO_MDEV_CONFIG		0x100
 
-IIUC, we can use above registers with virtio-mdev parent's
-read()/write() to access the mdev device from kernel driver.
-As you suggested, it's a choice to build vhost-mdev on top
-of this abstraction as well. But virtio is the frontend
-device which lacks some vhost backend features, e.g. get
-vring base, set vring base, negotiate vhost features, etc.
-So I'm wondering, does it make sense to reserve some space
-for vhost-mdev in kernel to do vhost backend specific setups?
-Or do you have any other thoughts?
+Matt,
 
-Besides, I'm also wondering, what's the purpose of making
-above registers part of UAPI? And if we make them part
-of UAPI, do we also need to make them part of virtio spec?
+> The event handler calls scsi_scan_host() when events are missed, which
+> will hotplug new LUNs.  However, this function won't remove any
+> unplugged LUNs.  The result is that hotunplug doesn't work properly
+> when the number of unplugged LUNs exceeds the event queue size
+> (currently 8).
+>
+> Scan existing LUNs when events are missed to check if they are still
+> present.  If not, remove them.
 
-Thanks!
-Tiwei
+Applied to 5.4/scsi-queue, thanks!
 
-> +
-> +#endif
-> +
-> +
-> +/* Ready bit for the currently selected queue - Read Write */
-> -- 
-> 2.19.1
-> 
+-- 
+Martin K. Petersen	Oracle Linux Engineering
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
