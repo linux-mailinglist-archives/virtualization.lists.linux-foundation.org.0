@@ -2,75 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57933AFE1B
-	for <lists.virtualization@lfdr.de>; Wed, 11 Sep 2019 15:51:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E999AFE20
+	for <lists.virtualization@lfdr.de>; Wed, 11 Sep 2019 15:52:39 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5537A1490;
-	Wed, 11 Sep 2019 13:51:30 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 975AC1492;
+	Wed, 11 Sep 2019 13:52:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 15F9A147A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5CF571472
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 13:51:29 +0000 (UTC)
+	Wed, 11 Sep 2019 13:52:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 04BD5894
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 01A8C8A3
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 13:51:27 +0000 (UTC)
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
-	[209.85.222.198])
+	Wed, 11 Sep 2019 13:52:31 +0000 (UTC)
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+	[209.85.160.200])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 4336789C39
+	by mx1.redhat.com (Postfix) with ESMTPS id 82302C059B7C
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 13:51:27 +0000 (UTC)
-Received: by mail-qk1-f198.google.com with SMTP id z128so12624786qke.8
+	Wed, 11 Sep 2019 13:52:31 +0000 (UTC)
+Received: by mail-qt1-f200.google.com with SMTP id o1so23877117qtp.3
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 06:51:27 -0700 (PDT)
+	Wed, 11 Sep 2019 06:52:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to;
-	bh=152d67FF4RV7HTf/TX16nav3+dbWDhuM37ZTXxyyvyE=;
-	b=QHug+hKwOZRLhN/+MnCi5Pi1Kocu2X5zNMaBWbVP9gNQfLGseKQpFXLd8oM7fe2uRe
-	OfC9u1iUH6va6EMxPLtRW03bfL41E3XvybhADuQXmKlsvD3Mif4jNcdaFs6tPPexhyDj
-	1yMqkxBMkF2WUN5spkaTIArIL1GgTMm7rre6Vgxfvbbku2DL2FM0kpIGviYt/0ahl6iJ
-	tyCbKYa0HH9yyMaFTj/l8e8hy9tygZ2KiFe0FrW7VVPOG75tt3EuggnCCwtvR08FAVG5
-	buNZCfTWxJsZXSvJJWeFScGgOwkvYAOVPnPnzpmH8HbI3u1yKr1CdLfhoVtkTze53AHq
-	tQ/g==
-X-Gm-Message-State: APjAAAU3TbiwXLhBk9vARLNt4VA3KJsBNnaTp/Z9vJJsFldWmLL8RYdm
-	9XJTbm0kzpUpTVICMfjOOgGJ9N7scRaMrHHuIVJ98SVXMoy7HSE11pCYW+Ikt68BpKBJNc2FdT/
-	2O3I0VGLVPv21qkuM/UYMNEw7HCD3wJGTtJsT9hQDrA==
-X-Received: by 2002:ac8:6706:: with SMTP id e6mr2563898qtp.143.1568209886592; 
-	Wed, 11 Sep 2019 06:51:26 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwaO6d0va5B79pj+BVvjOJY7I7L3GALGaTfXtlaBYWZSZUc9ffvRmXeRRX5Y4F/HwVRR5aQWQ==
-X-Received: by 2002:ac8:6706:: with SMTP id e6mr2563882qtp.143.1568209886370; 
-	Wed, 11 Sep 2019 06:51:26 -0700 (PDT)
-Received: from redhat.com ([80.74.107.118])
-	by smtp.gmail.com with ESMTPSA id y58sm5426960qta.1.2019.09.11.06.51.22
+	bh=bTpTDYaW4L1Gk4pQTaJgOsQGofG8+keatPi5K+boUSM=;
+	b=kLWHw8h7idm8SP6/6lWUB9JQn3QrMIVtLgWFMxThB8XCSRavl0RqQb7COuAEugTGO0
+	QOWV3EXdwG7HLFQvL2BhMiNx1mAD4oKyBNFQ2kaSMBzx2X5SU1k6ZxArEipisgZgszQb
+	xeGAi1yWcfTiuujs+3mFqLGEYGl5Mq9tYVh1ShD1HjZiPoW8+KG8hPI0mXGir8u7pfmp
+	j6xLC4Bl7v5BsrzoAtwokfl2scsnvBtldpx8o+NodEN4uQkzqLI1EODi9Q75arakVTnO
+	zxNkQOizO4VrScfx+VM5qQAZHs9zOmJbwTdFVILtdDFvRR2ocvAC2zHD65lOP92RVJVn
+	wEUg==
+X-Gm-Message-State: APjAAAW/IQwOrFbQYzgWvhLctfohpdZgqFivz3RygjkKtiRMps7hiP1E
+	c33M2iOF+LFXCD/rmok6DwE0hXjaPktb6pIdQCpSXrcJxcP+80sjSWrlPNogymzyQW64EJZwOc5
+	UPGrv1ycd1Sf+KBsRs3zbR3zhJe1pud4U4HtaUmDyVQ==
+X-Received: by 2002:a37:4651:: with SMTP id t78mr35308380qka.259.1568209950748;
+	Wed, 11 Sep 2019 06:52:30 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzAArEKuceihQtc6r95FHhQta9AhTzn+LrxDRMztlrzqQf2WbTHO7axIccFjavXyHt6DHiEWw==
+X-Received: by 2002:a37:4651:: with SMTP id t78mr35308358qka.259.1568209950581;
+	Wed, 11 Sep 2019 06:52:30 -0700 (PDT)
+Received: from redhat.com ([80.74.107.118]) by smtp.gmail.com with ESMTPSA id
+	n62sm9969475qkd.124.2019.09.11.06.52.28
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Sep 2019 06:51:25 -0700 (PDT)
-Date: Wed, 11 Sep 2019 09:51:20 -0400
+	Wed, 11 Sep 2019 06:52:29 -0700 (PDT)
+Date: Wed, 11 Sep 2019 09:52:25 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Michal Hocko <mhocko@kernel.org>
+To: linux-kernel@vger.kernel.org
 Subject: Re: [PATCH v2] vhost: block speculation of translated descriptors
-Message-ID: <20190911092544-mutt-send-email-mst@kernel.org>
+Message-ID: <20190911095147-mutt-send-email-mst@kernel.org>
 References: <20190911120908.28410-1-mst@redhat.com>
-	<20190911121628.GT4023@dhcp22.suse.cz>
-	<20190911082236-mutt-send-email-mst@kernel.org>
-	<20190911123316.GX4023@dhcp22.suse.cz>
-	<20190911085807-mutt-send-email-mst@kernel.org>
-	<20190911131235.GZ4023@dhcp22.suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190911131235.GZ4023@dhcp22.suse.cz>
+In-Reply-To: <20190911120908.28410-1-mst@redhat.com>
 X-Spam-Status: No, score=-5.4 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
 	RCVD_IN_SORBS_WEB autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+Cc: netdev@vger.kernel.org, security@kernel.org, kvm@vger.kernel.org,
 	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
@@ -88,61 +83,53 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Sep 11, 2019 at 03:12:35PM +0200, Michal Hocko wrote:
-> On Wed 11-09-19 09:03:10, Michael S. Tsirkin wrote:
-> > On Wed, Sep 11, 2019 at 02:33:16PM +0200, Michal Hocko wrote:
-> > > On Wed 11-09-19 08:25:03, Michael S. Tsirkin wrote:
-> > > > On Wed, Sep 11, 2019 at 02:16:28PM +0200, Michal Hocko wrote:
-> > > > > On Wed 11-09-19 08:10:00, Michael S. Tsirkin wrote:
-> > > > > > iovec addresses coming from vhost are assumed to be
-> > > > > > pre-validated, but in fact can be speculated to a value
-> > > > > > out of range.
-> > > > > > 
-> > > > > > Userspace address are later validated with array_index_nospec so we can
-> > > > > > be sure kernel info does not leak through these addresses, but vhost
-> > > > > > must also not leak userspace info outside the allowed memory table to
-> > > > > > guests.
-> > > > > > 
-> > > > > > Following the defence in depth principle, make sure
-> > > > > > the address is not validated out of node range.
-> > > > > > 
-> > > > > > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-> > > > > > Acked-by: Jason Wang <jasowang@redhat.com>
-> > > > > > Tested-by: Jason Wang <jasowang@redhat.com>
-> > > > > 
-> > > > > no need to mark fo stable? Other spectre fixes tend to be backported
-> > > > > even when the security implications are not really clear. The risk
-> > > > > should be low and better to be covered in case.
-> > > > 
-> > > > This is not really a fix - more a defence in depth thing,
-> > > > quite similar to e.g.  commit b3bbfb3fb5d25776b8e3f361d2eedaabb0b496cd
-> > > > x86: Introduce __uaccess_begin_nospec() and uaccess_try_nospec
-> > > > in scope.
-> > > >
-> > > > That one doesn't seem to be tagged for stable. Was it queued
-> > > > there in practice?
-> > > 
-> > > not marked for stable but it went in. At least to 4.4.
-> > 
-> > So I guess the answer is I don't know. If you feel it's
-> > justified, then sure, feel free to forward.
+On Wed, Sep 11, 2019 at 08:10:00AM -0400, Michael S. Tsirkin wrote:
+> iovec addresses coming from vhost are assumed to be
+> pre-validated, but in fact can be speculated to a value
+> out of range.
 > 
-> Well, that obviously depends on you as a maintainer but the point is
-> that spectre gatgets are quite hard to find. There is a smack check
-> AFAIK but that generates quite some false possitives and it is PITA to
-> crawl through those. If you want an interesting (I am not saying
-> vulnerable on purpose) gatget then it would be great to mark it for
-> stable so all stable consumers (disclaimer: I am not one of those) and
-> add that really great feeling of safety ;)
+> Userspace address are later validated with array_index_nospec so we can
+> be sure kernel info does not leak through these addresses, but vhost
+> must also not leak userspace info outside the allowed memory table to
+> guests.
 > 
-> So take this as my 2c
+> Following the defence in depth principle, make sure
+> the address is not validated out of node range.
+> 
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> Acked-by: Jason Wang <jasowang@redhat.com>
+> Tested-by: Jason Wang <jasowang@redhat.com>
+> ---
 
-OK it seems security@kernel.org is the way to handle these things.
-I'll try that.
+Cc: security@kernel.org
 
+Pls advise on whether you'd like me to merge this directly,
+Cc stable, or handle it in some other way.
+
+> changes from v1: fix build on 32 bit
+> 
+>  drivers/vhost/vhost.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index 5dc174ac8cac..34ea219936e3 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -2071,8 +2071,10 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
+>  		_iov = iov + ret;
+>  		size = node->size - addr + node->start;
+>  		_iov->iov_len = min((u64)len - s, size);
+> -		_iov->iov_base = (void __user *)(unsigned long)
+> -			(node->userspace_addr + addr - node->start);
+> +		_iov->iov_base = (void __user *)
+> +			((unsigned long)node->userspace_addr +
+> +			 array_index_nospec((unsigned long)(addr - node->start),
+> +					    node->size));
+>  		s += size;
+>  		addr += size;
+>  		++ret;
 > -- 
-> Michal Hocko
-> SUSE Labs
+> MST
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
