@@ -2,63 +2,61 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDED0AF8EC
-	for <lists.virtualization@lfdr.de>; Wed, 11 Sep 2019 11:30:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04A53AF8F3
+	for <lists.virtualization@lfdr.de>; Wed, 11 Sep 2019 11:31:41 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4E1E91A9C;
-	Wed, 11 Sep 2019 09:29:59 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A7F561AA0;
+	Wed, 11 Sep 2019 09:31:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3E43D1A93
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E92051AA0
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 09:29:58 +0000 (UTC)
+	Wed, 11 Sep 2019 09:31:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2FA3583A
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 77C1F83A
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 09:29:57 +0000 (UTC)
+	Wed, 11 Sep 2019 09:31:32 +0000 (UTC)
 Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
 	[209.85.160.198])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 99D6D796EB
+	by mx1.redhat.com (Postfix) with ESMTPS id 0A5EB69EE6
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 09:29:56 +0000 (UTC)
-Received: by mail-qt1-f198.google.com with SMTP id o13so17495917qtr.15
+	Wed, 11 Sep 2019 09:31:32 +0000 (UTC)
+Received: by mail-qt1-f198.google.com with SMTP id x13so14471078qtq.13
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 11 Sep 2019 02:29:56 -0700 (PDT)
+	Wed, 11 Sep 2019 02:31:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to;
-	bh=Zt5S4a6X6LyLwhE9vIVWQMU/7PuQubto3A7P5mD1PK4=;
-	b=KQuAdJPRkmqplANbNV+fFsacpd9a5R7RYRveTKAP9Q/zGlQjw1WkfMHCHSvCt2wPsV
-	49wPm2YgnqcL1754vMplH3onQbfc2pI3lExD9TKK8/+dJiQy10TsLFeTZilYJT/XQ1P7
-	/UakhbxiCkbdeVVBeqnf3tB2Ozmv6e1NYpYZiYZ5qgEU8gyYkhKt8z/n62nGij+4SqdP
-	+Z3KX572fChvwYNVKWQaZ9j8noItx+60AouOBKbEMwgRJUVKwn6xaN/9BS0rKjAwf+5M
-	uMemJER4Tov/jVramAGQTMC3CKrGO3KLma7NDRgK1/ib/Wad7NNFAFHaXawk0pzaguit
-	YmYQ==
-X-Gm-Message-State: APjAAAXbAIQgVC8fXX1ktUrIwWxXO3BOPvCeQcuPxq8fbwkK7KhWLt5N
-	kIJiy0dNfezpYWJksX9yZSjNKHFERafFa7bxwQa8vhlsnV25I2d9pkzkcpjwpc63sYrRYNJuhlM
-	jsuVf16YX4dtQDDZmLUaxRw561NweiOr0im5DF4G+6w==
-X-Received: by 2002:a37:48cd:: with SMTP id
-	v196mr33105330qka.419.1568194195927; 
-	Wed, 11 Sep 2019 02:29:55 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqyE8k+b7UWHLIlJ8Xibf2YSLj1PYH2HcRg+svLgOynqAQVbEpwFlt5nBwF+4ii6zLUj2pOgDg==
-X-Received: by 2002:a37:48cd:: with SMTP id
-	v196mr33105319qka.419.1568194195786; 
-	Wed, 11 Sep 2019 02:29:55 -0700 (PDT)
-Received: from redhat.com ([80.74.107.118])
-	by smtp.gmail.com with ESMTPSA id h68sm9749151qkf.2.2019.09.11.02.29.53
+	bh=ut3tihE7bTGmYZVRoILxbz8fluSN7bHwSi8fhoDIScQ=;
+	b=cMC+RLBdaelufEQjWXf5ggFkuFW/G+HJK4Exx1fFkF22eloWjC4CQcHTS9ilFCVUo4
+	vI6T180qvVZEFN9Y4sBDNWPsQXJ0h9NffOhgGFehoVUMD7CaJGZ10a47pHQNpTjXikne
+	psPMp4yVPYTtLi2ZDGEA4pz6uC31MJ9hUaiiBmUkIL/CFJYjr1N9Ty7BrkJx3qyc0r6Q
+	wEZ1wnM0l6iF1FAzxK9oxVAd8F5LsZHWY1ZfQ7DOoSWoLwoNcucgL1ns+LthvnAsfK/J
+	zMGuAJU7R5H00R5jVKXnMN0BUK4GGs4SvaRt47m0k1nIbnMn8cLYAup0W4V0yiSdnscj
+	llVw==
+X-Gm-Message-State: APjAAAVX0MpS66/Npt2LTYphqSce6JvaiST5HEiCHVnt2lwbPI0JDlBD
+	/ltrD0IpxpwPbRD4tW+xlCrj5KWoja2Fsq5P7XpgFXU1SUUilUamacSNM9akHXyLvkSyyVj+Vht
+	8mXNtqDO0W6asUGFVK94TiSg/QhE9+U/D/2FtnI1nnQ==
+X-Received: by 2002:ae9:f20f:: with SMTP id m15mr16057178qkg.199.1568194291043;
+	Wed, 11 Sep 2019 02:31:31 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzfzPT6SmbrsRtarE+GakuNnjpB2pyzd8QrqvF/zQOj7HHkg+hOJA0Po72fFkFP2UoCQrr4Cg==
+X-Received: by 2002:ae9:f20f:: with SMTP id m15mr16057160qkg.199.1568194290901;
+	Wed, 11 Sep 2019 02:31:30 -0700 (PDT)
+Received: from redhat.com ([80.74.107.118]) by smtp.gmail.com with ESMTPSA id
+	c29sm13406696qtc.89.2019.09.11.02.31.28
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Sep 2019 02:29:55 -0700 (PDT)
-Date: Wed, 11 Sep 2019 05:29:50 -0400
+	Wed, 11 Sep 2019 02:31:30 -0700 (PDT)
+Date: Wed, 11 Sep 2019 05:31:25 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Matej Genci <matej.genci@nutanix.com>
 Subject: Re: [PATCH v2] virtio: add VIRTIO_RING_NO_LEGACY
-Message-ID: <20190911052825-mutt-send-email-mst@kernel.org>
+Message-ID: <20190911053030-mutt-send-email-mst@kernel.org>
 References: <20190910175335.231660-1-matej.genci@nutanix.com>
 MIME-Version: 1.0
 Content-Disposition: inline
@@ -90,6 +88,13 @@ On Tue, Sep 10, 2019 at 05:53:44PM +0000, Matej Genci wrote:
 > Add macro to disable legacy functions vring_init and vring_size.
 > 
 > Signed-off-by: Matej Genci <matej.genci@nutanix.com>
+
+And I guess we should be able to define this macro in
+drivers/virtio/virtio_pci_modern.c
+?
+
+Will be handy to make sure we don't mask too much.
+
 > ---
 > 
 > V2: Put all legacy APIs inside guards.
@@ -138,12 +143,9 @@ On Tue, Sep 10, 2019 at 05:53:44PM +0000, Matej Genci wrote:
 >  struct vring_packed_desc_event {
 >  	/* Descriptor Ring Change Event Offset/Wrap Counter. */
 >  	__le16 off_wrap;
-
-OK almost but vring_need_event is actually useful for all variants
-so should be outside the guards :) Sorry about it.
-
--- 
-MST
+> -- 
+> 2.22.0
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
