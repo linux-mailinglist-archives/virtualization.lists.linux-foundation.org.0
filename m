@@ -2,69 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5525EB1601
-	for <lists.virtualization@lfdr.de>; Thu, 12 Sep 2019 23:46:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 160F0B1606
+	for <lists.virtualization@lfdr.de>; Thu, 12 Sep 2019 23:48:06 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CA72BE28;
-	Thu, 12 Sep 2019 21:46:40 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 25530E24;
+	Thu, 12 Sep 2019 21:48:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 32D5DE04
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8F68CE04
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 21:46:40 +0000 (UTC)
+	Thu, 12 Sep 2019 21:47:59 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id CC03E6D6
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3A1076D6
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 21:46:39 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id k13so43267909ioj.1
+	Thu, 12 Sep 2019 21:47:59 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id f12so58406529iog.12
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 14:46:39 -0700 (PDT)
+	Thu, 12 Sep 2019 14:47:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=NiZR+n54kDStyi7gn0TCODjC223CXySNQ4QzYgLQl3E=;
-	b=Au3S9WcEiw57y0AQRAbf5wuFCqoJIe+2VdZsVE2e6s0BHIIrx52K8kYnnAq0xDT++b
-	v6LLSRBThw+1+gBkPcOsZ7X/tXgQkVNqloLOuoS/iG8Apn+JURt/X7lsT7ViS6a6kYwa
-	KkUTSZvehBh9c+dFRz0QcX/OZRDVgwkPGwM/MkpXEjGBIyRuQw4iBQVdXXJVnUqkMNto
-	42z1NOEIfhoPm5DyAtr/8kU0T1wE0NfTUZGtMVQrtF0gzxsja0j30OWxvu2BpP89jpDJ
-	Jh+1PcmSRNYP1sWMCnhLRnypbEPhggXBpW0nH8G1CaEbXJ+OkS0abuEs2iUbUfR1j9YS
-	vg7w==
+	:cc; bh=Nsh9wMtR+piWKMVssRxEW2CCDveInH3zQuunz33C6pw=;
+	b=HvE2JMW9DzbOnl+GJq4DI6qFxnw9TBb1eNu3XAJmXzaj7H21B/fTsn/qhRSoMS6r0Y
+	jqt72xjKycAC7WPfc0t8jkHr3Pky0s11I8NjLHyrolMES9x+IWJsc7wYD2hG/9Fes2Ik
+	nGxgHcJfhQISv8I2FcUw/ng61z1YORiGfiVeASwoda5a4J8R39JWJdAfEasQhs2ItKW2
+	6ynBtqYv3FAA1LDnwigBmH9w4Hb+X8d1qIG1FA+MiZAQQ6DAgKekp9P5XVlaB2BCBRM9
+	E80xav8My8RbT71tBoGsurjYpBALHN/v+wfEkBrRyqL82xOzLAxYFiPDUdsY1QX+WZnB
+	JZaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=NiZR+n54kDStyi7gn0TCODjC223CXySNQ4QzYgLQl3E=;
-	b=kKtFV1Y3bGbBQQ/41zopZAHdD3FoOCQoxmf5QGGJ6OfBvK0dxQH+/w1o1zKE+XjAJE
-	7VzMpx9c4G/Mq/4kxqMvP63FgpN+8qPo5PvfZEiGqJKr3zJBR3VodDpHwwslUow4sLl2
-	cUm1HcEBrluyBmbCmcqQY8jUpZcKeSVu5+TYrzNyN1EskdAPZv9O3zIC4GPslxOs3OMe
-	BdiP4apFz6nrE8y8dn77FIjPSLPhDxGgICTZXh3fGPvCnti/lHBz6ptRBpA7Gp4A4rSm
-	l13mXZqK7Qg63XCSHtqCGXbOyxU8si0JuT3SpXko55ZDvaMr/3VEvHnT4u59z4zcdWnV
-	Mprg==
-X-Gm-Message-State: APjAAAXdSiOeCPc5Gmpp/v8KgKzfYAv9JstiRkCHkgrNeO7MRkkWqJU5
-	gP6Wi4CcrDiPYw7RkP2LZSYEdgJhXGOVQcL7Vzk=
-X-Google-Smtp-Source: APXvYqwqasiwTqwYl+8S+TBPDrRVZlt18xiMscbny/PfY5KKeZ1UqdHopMngv1Rw1ZsObWSeAn5PZ/2D1YWLRXpqDr4=
-X-Received: by 2002:a5e:c107:: with SMTP id v7mr7363007iol.200.1568324799015; 
-	Thu, 12 Sep 2019 14:46:39 -0700 (PDT)
+	bh=Nsh9wMtR+piWKMVssRxEW2CCDveInH3zQuunz33C6pw=;
+	b=J6iDp96VY7DzxVZCDKk2Bszee0E0l3kpSvRTZkmMQt5sa8leZ3m7gtb5jojrkj5rOd
+	yq80I0cqXzXN+Se2Fg8za6AxZVroXAbme6Z9EXA+F+trOZSlV+VCqIRCo4ra/mCdhWYj
+	x8nm7Z0UnQYA8dyqA82OzktIRcM+KEPpslts/WyHki1ehULnhfkT9z+Dpltl/NHAw1h/
+	J8x3q4IpEQ+eUaAL0Tcz9PM6oFYW6iIdGrp3oSAzmYTDXPUbr2+FBY8XI4O6mknxhJVc
+	VjNwT803FjBS094qwLGUab9rrnd7SZ/4AcEFUGu0Ts5/N6HbX+lTh5hRb+Gc62mlOrhg
+	+y9w==
+X-Gm-Message-State: APjAAAVji6QLrBhlxkIuV2tLDm9Y2lION8VumLIP79xqhMOCl2n8YwYu
+	/WuDdYhKb7ZjFTtr8OdD8QeLndJlGNjq5kjt3RHf0plm
+X-Google-Smtp-Source: APXvYqzNx4+RAMwUP0AmKza386+UJ1O8aCkriLtdGYKB0a3YLsBG+HWOAjyS4JOKf/XHHXzSp5FmG2p5vw1yFzQk8as=
+X-Received: by 2002:a6b:db0e:: with SMTP id t14mr7016055ioc.93.1568324878498; 
+	Thu, 12 Sep 2019 14:47:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190912160048.212495-1-davidriley@chromium.org>
-In-Reply-To: <20190912160048.212495-1-davidriley@chromium.org>
+References: <20190912114627.20176-1-kraxel@redhat.com>
+In-Reply-To: <20190912114627.20176-1-kraxel@redhat.com>
 From: Chia-I Wu <olvaffe@gmail.com>
-Date: Thu, 12 Sep 2019 14:46:28 -0700
-Message-ID: <CAPaKu7RcJC-rZiYhqGeLeyu45ML6ymiycmWA+RjOq02u=PsK9Q@mail.gmail.com>
-Subject: Re: [PATCH] drm/virtio: Fix warning in
-	virtio_gpu_queue_fenced_ctrl_buffer.
-To: David Riley <davidriley@chromium.org>
+Date: Thu, 12 Sep 2019 14:47:47 -0700
+Message-ID: <CAPaKu7T_TrCUEyjthshTjr_=uDQs+iJuPV68QYmmDJ7vodR35Q@mail.gmail.com>
+Subject: Re: [PATCH] drm/virtio: enable prime mmap support
+To: Gerd Hoffmann <kraxel@redhat.com>
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
-	ML dri-devel <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
-	NET AND BLOCK DRIVERS" <virtualization@lists.linux-foundation.org>
+	ML dri-devel <dri-devel@lists.freedesktop.org>,
+	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -81,33 +80,28 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Sep 12, 2019 at 9:00 AM David Riley <davidriley@chromium.org> wrote:
+On Thu, Sep 12, 2019 at 4:46 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
 >
-> Fix warning introduced with commit e1218b8c0cc1
-> ("drm/virtio: Use vmalloc for command buffer allocations.")
-> from drm-misc-next.
->
-> Signed-off-by: David Riley <davidriley@chromium.org>
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 Reviewed-by: Chia-I Wu <olvaffe@gmail.com>
 > ---
->  drivers/gpu/drm/virtio/virtgpu_vq.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/gpu/drm/virtio/virtgpu_drv.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> index 9f9b782dd332..80176f379ad5 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> @@ -358,7 +358,7 @@ static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
->                         sgt = vmalloc_to_sgt(vbuf->data_buf, vbuf->data_size,
->                                              &outcnt);
->                         if (!sgt)
-> -                               return -ENOMEM;
-> +                               return;
->                         vout = sgt->sgl;
->                 } else {
->                         sg_init_one(&sg, vbuf->data_buf, vbuf->data_size);
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+> index 0c9553ea9f3f..96c240dbf452 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
+> @@ -200,6 +200,7 @@ static struct drm_driver driver = {
+>  #endif
+>         .prime_handle_to_fd = drm_gem_prime_handle_to_fd,
+>         .prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+> +       .gem_prime_mmap = drm_gem_prime_mmap,
+>         .gem_prime_import_sg_table = virtgpu_gem_prime_import_sg_table,
+>
+>         .gem_create_object = virtio_gpu_create_object,
 > --
-> 2.23.0.162.g0b9fbb3734-goog
+> 2.18.1
 >
 > _______________________________________________
 > dri-devel mailing list
