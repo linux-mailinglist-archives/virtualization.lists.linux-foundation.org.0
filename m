@@ -2,73 +2,62 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAF76B0B3D
-	for <lists.virtualization@lfdr.de>; Thu, 12 Sep 2019 11:22:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E98AAB0BA1
+	for <lists.virtualization@lfdr.de>; Thu, 12 Sep 2019 11:40:39 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id F0D88CBC;
-	Thu, 12 Sep 2019 09:22:33 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E7575C9E;
+	Thu, 12 Sep 2019 09:40:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 50DE4BA0
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 037B3AE7
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 09:22:33 +0000 (UTC)
+	Thu, 12 Sep 2019 09:40:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0178583A
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A05CE81A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 09:22:32 +0000 (UTC)
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
-	[209.85.222.197])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	Thu, 12 Sep 2019 09:40:32 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+	[10.5.11.13])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 2347D88304
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 09:22:32 +0000 (UTC)
-Received: by mail-qk1-f197.google.com with SMTP id b67so28229406qkc.1
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 02:22:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition;
-	bh=pLxa89q30vkWfElanRX/0CULLU+24vajFa4KgDHE2hA=;
-	b=ER56WmtLspKKHGK/88pf/iaGCb0qceuGHAuIo64ly+Nva/qdKS+iXqJEc4GlksrPni
-	LXbrDUQcDDuqpMZgW37myUFZwWX5NGBMHjcv5ZPawrHCY/B3Iho0QYZo0gv0FW1qln5Q
-	n1xQDy29PlZC2tyhuBad/42+GnrZAiXc4u7MpS3pO1mrriuLAMZ4eUYjHB5EVpquxRcq
-	nWia0PQ9u1vG4BNXyydWTQHN4l9p5dKrvMqLGYrFEpytNt2Do58lhHR8u10YtnUWFVAk
-	OnhdcKD1TFMQ+/Lac/jI/JheasCFbx0RybnAJxNOdN9n4IreuY8kXpehCT4hn/VZE28w
-	vStw==
-X-Gm-Message-State: APjAAAU0I6bs6QvCNO08YGTku8h3Y21tpz7ec9omnaBTLMADxMfwxPIv
-	AhBLI7/iWLLkXvugAdafweYgum2dzjir1rf6pxWwi7tRScvJsXTARCIvACyMus/o9XZQJQENJiC
-	E5DJhfuY41vGfcWFHUY5/K5mgvhOKresuv+opQ7r6lA==
-X-Received: by 2002:a37:713:: with SMTP id 19mr23814920qkh.490.1568280151434; 
-	Thu, 12 Sep 2019 02:22:31 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqyhC+pK6k4yXPRQ+FZIn0Yq8vOHMCy5tfY3zZL6qdx0w3f0nKj/xe3NiHa8yv2Zlz+qxLR1yA==
-X-Received: by 2002:a37:713:: with SMTP id 19mr23814907qkh.490.1568280151290; 
-	Thu, 12 Sep 2019 02:22:31 -0700 (PDT)
-Received: from redhat.com ([80.74.107.118]) by smtp.gmail.com with ESMTPSA id
-	h29sm14774022qtb.46.2019.09.12.02.22.26
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 02:22:30 -0700 (PDT)
-Date: Thu, 12 Sep 2019 05:22:24 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: [PULL] virtio: last minute bugfixes
-Message-ID: <20190912052224-mutt-send-email-mst@kernel.org>
+	by mx1.redhat.com (Postfix) with ESMTPS id 9D954308FBFC;
+	Thu, 12 Sep 2019 09:40:31 +0000 (UTC)
+Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
+	(ovpn-12-89.pek2.redhat.com [10.72.12.89])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 376B860852;
+	Thu, 12 Sep 2019 09:40:14 +0000 (UTC)
+From: Jason Wang <jasowang@redhat.com>
+To: kvm@vger.kernel.org, linux-s390@vger.kernel.org,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org, intel-gvt-dev@lists.freedesktop.org,
+	kwankhede@nvidia.com, alex.williamson@redhat.com
+Subject: [RFC PATCH 0/2] Mdev: support mutiple kinds of devices
+Date: Thu, 12 Sep 2019 17:40:10 +0800
+Message-Id: <20190912094012.29653-1-jasowang@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mutt-Fcc: =sent
-X-Spam-Status: No, score=-5.4 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	RCVD_IN_SORBS_WEB autolearn=ham version=3.3.1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.43]);
+	Thu, 12 Sep 2019 09:40:32 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, mst@redhat.com, ruippan@tencent.com,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, yongduan@tencent.com,
-	matthias.lange@kernkonzept.com
+Cc: sebott@linux.ibm.com, mst@redhat.com, airlied@linux.ie,
+	joonas.lahtinen@linux.intel.com, heiko.carstens@de.ibm.com,
+	virtualization@lists.linux-foundation.org,
+	rob.miller@broadcom.com, pasic@linux.ibm.com,
+	borntraeger@de.ibm.com, zhi.a.wang@intel.com,
+	farman@linux.ibm.com, idos@mellanox.com, gor@linux.ibm.com,
+	jani.nikula@linux.intel.com, xiao.w.wang@intel.com,
+	freude@linux.ibm.com, zhenyuw@linux.intel.com,
+	rodrigo.vivi@intel.com, lingshan.zhu@intel.com,
+	akrowiak@linux.ibm.com, pmorel@linux.ibm.com, cohuck@redhat.com,
+	oberpar@linux.ibm.com, maxime.coquelin@redhat.com,
+	daniel@ffwll.ch, zhihong.wang@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -85,42 +74,43 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-The following changes since commit 02fa5d7b17a761f53ef1eedfc254e1f33bd226b0:
+Hi all:
 
-  mm/balloon_compaction: suppress allocation warnings (2019-09-04 07:42:01 -0400)
+During the development of virtio-mdev[1]. I find that mdev needs to be
+extended to support devices other than vfio mdev device. So this
+series tries to extend the mdev to be able to differ from different
+devices by:
 
-are available in the Git repository at:
+- device id and matching for mdev bus
+- device speicfic callbacks and move vfio callbacks there
 
-  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
+Sent for early reivew, compile test only!
 
-for you to fetch changes up to 060423bfdee3f8bc6e2c1bac97de24d5415e2bc4:
+Thanks
 
-  vhost: make sure log_num < in_num (2019-09-11 15:15:26 -0400)
+[1] https://lkml.org/lkml/2019/9/10/135
 
-----------------------------------------------------------------
-virtio: last minute bugfixes
+Jason Wang (2):
+  mdev: device id support
+  mdev: introduce device specific ops
 
-A couple of security things.
+ drivers/gpu/drm/i915/gvt/kvmgt.c  | 16 ++++---
+ drivers/s390/cio/vfio_ccw_ops.c   | 16 ++++---
+ drivers/s390/crypto/vfio_ap_ops.c | 13 ++++--
+ drivers/vfio/mdev/mdev_core.c     | 14 +++++-
+ drivers/vfio/mdev/mdev_driver.c   | 14 ++++++
+ drivers/vfio/mdev/mdev_private.h  |  1 +
+ drivers/vfio/mdev/vfio_mdev.c     | 36 ++++++++++-----
+ include/linux/mdev.h              | 76 +++++++++++++++++++------------
+ include/linux/mod_devicetable.h   |  6 +++
+ samples/vfio-mdev/mbochs.c        | 18 +++++---
+ samples/vfio-mdev/mdpy.c          | 18 +++++---
+ samples/vfio-mdev/mtty.c          | 16 ++++---
+ 12 files changed, 163 insertions(+), 81 deletions(-)
 
-And an error handling bugfix that is never encountered by most people,
-but that also makes it kind of safe to push at the last minute, and it
-helps push the fix to stable a bit sooner.
+-- 
+2.19.1
 
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-
-----------------------------------------------------------------
-Matthias Lange (1):
-      virtio_ring: fix unmap of indirect descriptors
-
-Michael S. Tsirkin (1):
-      vhost: block speculation of translated descriptors
-
-yongduan (1):
-      vhost: make sure log_num < in_num
-
- drivers/vhost/vhost.c        | 10 ++++++----
- drivers/virtio/virtio_ring.c |  8 ++++++--
- 2 files changed, 12 insertions(+), 6 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
