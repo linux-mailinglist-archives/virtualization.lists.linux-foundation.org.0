@@ -2,61 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B830B09BA
-	for <lists.virtualization@lfdr.de>; Thu, 12 Sep 2019 09:51:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAF76B0B3D
+	for <lists.virtualization@lfdr.de>; Thu, 12 Sep 2019 11:22:40 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id BF83BC96;
-	Thu, 12 Sep 2019 07:51:09 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id F0D88CBC;
+	Thu, 12 Sep 2019 09:22:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A3AE4B79
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 50DE4BA0
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 07:51:08 +0000 (UTC)
+	Thu, 12 Sep 2019 09:22:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5EEED87D
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0178583A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 12 Sep 2019 07:51:08 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
-	[10.5.11.22])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Thu, 12 Sep 2019 09:22:32 +0000 (UTC)
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+	[209.85.222.197])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id A2D11C04BD48;
-	Thu, 12 Sep 2019 07:51:07 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-47.ams2.redhat.com
-	[10.36.116.47])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 11B30100195F;
-	Thu, 12 Sep 2019 07:51:07 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 488F616E05; Thu, 12 Sep 2019 09:51:06 +0200 (CEST)
-Date: Thu, 12 Sep 2019 09:51:06 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: David Riley <davidriley@chromium.org>
-Subject: Re: [PATCH v4 2/2] drm/virtio: Use vmalloc for command buffer
-	allocations.
-Message-ID: <20190912075105.pcxe4e2celupu3dj@sirius.home.kraxel.org>
-References: <20190829212417.257397-1-davidriley@chromium.org>
-	<20190911181403.40909-3-davidriley@chromium.org>
+	by mx1.redhat.com (Postfix) with ESMTPS id 2347D88304
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 12 Sep 2019 09:22:32 +0000 (UTC)
+Received: by mail-qk1-f197.google.com with SMTP id b67so28229406qkc.1
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 12 Sep 2019 02:22:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+	:content-disposition;
+	bh=pLxa89q30vkWfElanRX/0CULLU+24vajFa4KgDHE2hA=;
+	b=ER56WmtLspKKHGK/88pf/iaGCb0qceuGHAuIo64ly+Nva/qdKS+iXqJEc4GlksrPni
+	LXbrDUQcDDuqpMZgW37myUFZwWX5NGBMHjcv5ZPawrHCY/B3Iho0QYZo0gv0FW1qln5Q
+	n1xQDy29PlZC2tyhuBad/42+GnrZAiXc4u7MpS3pO1mrriuLAMZ4eUYjHB5EVpquxRcq
+	nWia0PQ9u1vG4BNXyydWTQHN4l9p5dKrvMqLGYrFEpytNt2Do58lhHR8u10YtnUWFVAk
+	OnhdcKD1TFMQ+/Lac/jI/JheasCFbx0RybnAJxNOdN9n4IreuY8kXpehCT4hn/VZE28w
+	vStw==
+X-Gm-Message-State: APjAAAU0I6bs6QvCNO08YGTku8h3Y21tpz7ec9omnaBTLMADxMfwxPIv
+	AhBLI7/iWLLkXvugAdafweYgum2dzjir1rf6pxWwi7tRScvJsXTARCIvACyMus/o9XZQJQENJiC
+	E5DJhfuY41vGfcWFHUY5/K5mgvhOKresuv+opQ7r6lA==
+X-Received: by 2002:a37:713:: with SMTP id 19mr23814920qkh.490.1568280151434; 
+	Thu, 12 Sep 2019 02:22:31 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqyhC+pK6k4yXPRQ+FZIn0Yq8vOHMCy5tfY3zZL6qdx0w3f0nKj/xe3NiHa8yv2Zlz+qxLR1yA==
+X-Received: by 2002:a37:713:: with SMTP id 19mr23814907qkh.490.1568280151290; 
+	Thu, 12 Sep 2019 02:22:31 -0700 (PDT)
+Received: from redhat.com ([80.74.107.118]) by smtp.gmail.com with ESMTPSA id
+	h29sm14774022qtb.46.2019.09.12.02.22.26
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 12 Sep 2019 02:22:30 -0700 (PDT)
+Date: Thu, 12 Sep 2019 05:22:24 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: [PULL] virtio: last minute bugfixes
+Message-ID: <20190912052224-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190911181403.40909-3-davidriley@chromium.org>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.31]);
-	Thu, 12 Sep 2019 07:51:07 +0000 (UTC)
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Mutt-Fcc: =sent
+X-Spam-Status: No, score=-5.4 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
+	RCVD_IN_SORBS_WEB autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	=?utf-8?B?U3TDqXBoYW5l?= Marchesin <marcheu@chromium.org>,
-	virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org, mst@redhat.com, ruippan@tencent.com,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, yongduan@tencent.com,
+	matthias.lange@kernkonzept.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,16 +85,42 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Sep 11, 2019 at 11:14:03AM -0700, David Riley wrote:
-> Userspace requested command buffer allocations could be too large
-> to make as a contiguous allocation.  Use vmalloc if necessary to
-> satisfy those allocations.
+The following changes since commit 02fa5d7b17a761f53ef1eedfc254e1f33bd226b0:
 
-Both applied to drm-misc-next.
+  mm/balloon_compaction: suppress allocation warnings (2019-09-04 07:42:01 -0400)
 
-thanks,
-  Gerd
+are available in the Git repository at:
 
+  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
+
+for you to fetch changes up to 060423bfdee3f8bc6e2c1bac97de24d5415e2bc4:
+
+  vhost: make sure log_num < in_num (2019-09-11 15:15:26 -0400)
+
+----------------------------------------------------------------
+virtio: last minute bugfixes
+
+A couple of security things.
+
+And an error handling bugfix that is never encountered by most people,
+but that also makes it kind of safe to push at the last minute, and it
+helps push the fix to stable a bit sooner.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+----------------------------------------------------------------
+Matthias Lange (1):
+      virtio_ring: fix unmap of indirect descriptors
+
+Michael S. Tsirkin (1):
+      vhost: block speculation of translated descriptors
+
+yongduan (1):
+      vhost: make sure log_num < in_num
+
+ drivers/vhost/vhost.c        | 10 ++++++----
+ drivers/virtio/virtio_ring.c |  8 ++++++--
+ 2 files changed, 12 insertions(+), 6 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
