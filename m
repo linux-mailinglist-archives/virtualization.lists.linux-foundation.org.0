@@ -2,51 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C675EB1952
-	for <lists.virtualization@lfdr.de>; Fri, 13 Sep 2019 10:07:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59017B1BF2
+	for <lists.virtualization@lfdr.de>; Fri, 13 Sep 2019 13:05:55 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 22A73B65;
-	Fri, 13 Sep 2019 08:07:12 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BD7BDF97;
+	Fri, 13 Sep 2019 11:05:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0D7B8B2F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5F611F8D
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 13 Sep 2019 08:07:10 +0000 (UTC)
+	Fri, 13 Sep 2019 11:05:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9DED07DB
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D923282B
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 13 Sep 2019 08:07:09 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	Fri, 13 Sep 2019 11:05:46 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+	[10.5.11.13])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id C7EFF30655F9;
-	Fri, 13 Sep 2019 08:07:08 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 1CBED10C0929;
+	Fri, 13 Sep 2019 11:05:46 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-47.ams2.redhat.com
 	[10.36.116.47])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 2E23360C63;
-	Fri, 13 Sep 2019 08:07:08 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 6DB91608C2;
+	Fri, 13 Sep 2019 11:05:45 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 6171A9D75; Fri, 13 Sep 2019 10:07:07 +0200 (CEST)
-Date: Fri, 13 Sep 2019 10:07:07 +0200
+	id 71D0445CD; Fri, 13 Sep 2019 13:05:44 +0200 (CEST)
+Date: Fri, 13 Sep 2019 13:05:44 +0200
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: Tomasz Figa <tfiga@chromium.org>
 Subject: Re: [RFC PATCH] drm/virtio: Export resource handles via DMA-buf API
-Message-ID: <20190913080707.unhyoezesvfhx5np@sirius.home.kraxel.org>
+Message-ID: <20190913110544.htmslqt4yzejugs4@sirius.home.kraxel.org>
 References: <20190912094121.228435-1-tfiga@chromium.org>
 	<20190912123821.rraib5entkcxt5p5@sirius.home.kraxel.org>
 	<CAAFQd5AFXfu7ysFCi1XQS61DK8nbSk5-=UHkvpYWDtFae5YQ6Q@mail.gmail.com>
+	<20190913080707.unhyoezesvfhx5np@sirius.home.kraxel.org>
+	<CAAFQd5BUKdWkp7zvhLHyY+rjcwVLYXk1NKsrrfhoOHT_68T==Q@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAAFQd5AFXfu7ysFCi1XQS61DK8nbSk5-=UHkvpYWDtFae5YQ6Q@mail.gmail.com>
+In-Reply-To: <CAAFQd5BUKdWkp7zvhLHyY+rjcwVLYXk1NKsrrfhoOHT_68T==Q@mail.gmail.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.47]);
-	Fri, 13 Sep 2019 08:07:09 +0000 (UTC)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+	(mx1.redhat.com [10.5.110.66]);
+	Fri, 13 Sep 2019 11:05:46 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -77,54 +79,82 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 
   Hi,
 
-> > > To seamlessly enable buffer sharing with drivers using such frameworks,
-> > > make the virtio-gpu driver expose the resource handle as the DMA address
-> > > of the buffer returned from the DMA-buf mapping operation.  Arguably, the
-> > > resource handle is a kind of DMA address already, as it is the buffer
-> > > identifier that the device needs to access the backing memory, which is
-> > > exactly the same role a DMA address provides for native devices.
+> > No.  DMA master address space in virtual machines is pretty much the
+> > same it is on physical machines.  So, on x86 without iommu, identical
+> > to (guest) physical address space.  You can't re-define it like that.
 > 
-> First of all, thanks for taking a look at this.
+> That's not true. Even on x86 without iommu the DMA address space can
+> be different from the physical address space.
+
+On a standard pc (like the ones emulated by qemu) that is the case.
+It's different on !x86, it also changes with a iommu being present.
+
+But that is not the main point here.  The point is the dma master
+address already has a definition and you can't simply change that.
+
+> That could be still just
+> a simple addition/subtraction by constant, but still, the two are
+> explicitly defined without any guarantees about a simple mapping
+> between one or another existing.
+
+Sure.
+
+> "A CPU cannot reference a dma_addr_t directly because there may be
+> translation between its physical
+> address space and the DMA address space."
+
+Also note that dma address space is device-specific.  In case a iommu
+is present in the system you can have *multiple* dma address spaces,
+separating (groups of) devices from each other.  So passing a dma
+address from one device to another isn't going to work.
+
+> > > However, we could as well introduce a separate DMA address
+> > > space if resource handles are not the right way to refer to the memory
+> > > from other virtio devices.
+> >
+> > s/other virtio devices/other devices/
+> >
+> > dma-bufs are for buffer sharing between devices, not limited to virtio.
+> > You can't re-define that in some virtio-specific way.
+> >
 > 
-> > No.  A scatter list has guest dma addresses, period.  Stuffing something
-> > else into a scatterlist is asking for trouble, things will go seriously
-> > wrong when someone tries to use such a fake scatterlist as real scatterlist.
-> 
-> What is a "guest dma address"? The definition of a DMA address in the
-> Linux DMA API is an address internal to the DMA master address space.
-> For virtio, the resource handle namespace may be such an address
-> space.
+> We don't need to limit this to virtio devices only. In fact I actually
+> foresee this having a use case with the emulated USB host controller,
+> which isn't a virtio device.
 
-No.  DMA master address space in virtual machines is pretty much the
-same it is on physical machines.  So, on x86 without iommu, identical
-to (guest) physical address space.  You can't re-define it like that.
+What exactly?
 
-> However, we could as well introduce a separate DMA address
-> space if resource handles are not the right way to refer to the memory
-> from other virtio devices.
+> That said, I deliberately referred to virtio to keep the scope of the
+> problem in control. If there is a solution that could work without
+> such assumption, I'm more than open to discuss it, of course.
 
-s/other virtio devices/other devices/
+But it might lead to taking virtio-specific (or virtualization-specific)
+shortcuts which will hurt in the long run ...
 
-dma-bufs are for buffer sharing between devices, not limited to virtio.
-You can't re-define that in some virtio-specific way.
+> As per my understanding of the DMA address, anything that lets the DMA
+> master access the target memory would qualify and there would be no
+> need for an IOMMU in between.
 
-> > Also note that "the DMA address of the buffer" is bonkers in virtio-gpu
-> > context.  virtio-gpu resources are not required to be physically
-> > contigous in memory, so typically you actually need a scatter list to
-> > describe them.
-> 
-> There is no such requirement even on a bare metal system, see any
-> system that has an IOMMU, which is typical on ARM/ARM64. The DMA
-> address space must be contiguous only from the DMA master point of
-> view.
+Yes.  But that DMA address is already defined by the platform, you can't
+freely re-define it.  Well, you sort-of can when you design your own
+virtual iommu for qemu.  But even then you can't just pass around magic
+cookies masqueraded as dma address.  You have to make sure they actually
+form an address space, without buffers overlapping, ...
 
-Yes, the iommu (if present) could remap your scatterlist that way.  You
-can't depend on that though.
+> Exactly. The very specific first scenario that we want to start with
+> is allocating host memory through virtio-gpu and using that memory
+> both as output of a video decoder and as input (texture) to Virgil3D.
+> The memory needs to be specifically allocated by the host as only the
+> host can know the requirements for memory allocation of the video
+> decode accelerator hardware.
 
-What is the plan here?  Host-side buffer sharing I guess?  So you are
-looking for some way to pass buffer handles from the guest to the host,
-even in case those buffers are not created by your driver but imported
-from somewhere else?
+So you probably have some virtio-video-decoder.  You allocate a gpu
+buffer, export it as dma-buf, import it into the decoder, then let the
+video decoder render to it.  Right?
+
+Using dmabufs makes sense for sure.  But we need an separate field in
+struct dma_buf for an (optional) host dmabuf identifier, we can't just
+hijack the dma address.
 
 cheers,
   Gerd
