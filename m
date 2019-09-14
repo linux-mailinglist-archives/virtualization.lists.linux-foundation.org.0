@@ -2,76 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1837BB2CB9
-	for <lists.virtualization@lfdr.de>; Sat, 14 Sep 2019 21:38:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFC38B2CBE
+	for <lists.virtualization@lfdr.de>; Sat, 14 Sep 2019 21:39:12 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DD4D5AE7;
-	Sat, 14 Sep 2019 19:38:49 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 22C31AF5;
+	Sat, 14 Sep 2019 19:39:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7DD91907
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0D75A907
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 14 Sep 2019 19:38:48 +0000 (UTC)
+	Sat, 14 Sep 2019 19:39:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 08EE1619
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AD8AD619
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 14 Sep 2019 19:38:47 +0000 (UTC)
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
-	[209.85.222.198])
+	Sat, 14 Sep 2019 19:39:05 +0000 (UTC)
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+	[209.85.160.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 31E2181F10
+	by mx1.redhat.com (Postfix) with ESMTPS id 420C985546
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 14 Sep 2019 19:38:47 +0000 (UTC)
-Received: by mail-qk1-f198.google.com with SMTP id n125so37146145qkc.16
+	Sat, 14 Sep 2019 19:39:05 +0000 (UTC)
+Received: by mail-qt1-f197.google.com with SMTP id f19so35938185qtq.1
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 14 Sep 2019 12:38:47 -0700 (PDT)
+	Sat, 14 Sep 2019 12:39:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=KIGHcmUUN4jMJWs2R7tAQdbVbc2v6AIe7xkdq87Pa2A=;
-	b=nFAUt2OzAbL+kp9Md4Z5BZHdnQGCptJGAtSX0Zp05hir87jJyawVh2/Qjq1BMLD13t
-	G03ElhLSYQaC+ayH3/APgI+ZnJlyCyCqen2Yib9Hvzmdhy06Zy7DXGnzCiONMyGsN0N2
-	5T0oHSLZ43DJ7MC26aEOK6Ai1h9e/6w/z27Uyvk72PjfXJLUI6ke9RTqvCvSt1qLBirS
-	HDfNKcSbGxluI5FiA8M2a5hPJknalHCqeoawnBAnYMzKWYmFBQPwUKERL8xbIgZ3IXMz
-	re42I3/RRJ4YxDSt3V+MJ2hghNM7q94j5j/NwkNCUFNgCAxD0dUi5zOUkftkwnhkBVjY
-	xnxA==
-X-Gm-Message-State: APjAAAU1OByKYQxrmsF2t7/7iJcHB2BjUy6GgaVUOnYgRvk8VEIW4MYO
-	g6Zc4zxV6YVHEgi42URdv4B42l3Oqbll5r87VXdUR1VdJBywXGXOGIfV7BxVqlUwoufry9PIlIK
-	zN8WHnix5l4GUYnuKc3I4ftx+45MhS4vxD/ko33BqQw==
-X-Received: by 2002:a05:620a:c:: with SMTP id
-	j12mr49368895qki.127.1568489926544; 
-	Sat, 14 Sep 2019 12:38:46 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqw7wOJHQxLUm66la0qX4SPSRkPiO4NywNevPf0TnyLpnxGz/aWmk5UQ6mtqxs1zvRBm/WQW7Q==
-X-Received: by 2002:a05:620a:c:: with SMTP id
-	j12mr49368877qki.127.1568489926312; 
-	Sat, 14 Sep 2019 12:38:46 -0700 (PDT)
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+	:content-disposition;
+	bh=vaylEgrlIg+lPjH544xVFYytAlsLACbCpY321J/9g4E=;
+	b=PI2JiSSeHuBEO4aYoQUDtMpbHAEJwMtmeuDsGBjbSb8f5hC8CxkrboP33UxOw/2g9q
+	A1RXjn3fvA7RNPKONNp+jqApvAZOt4lfbCln9z44ILovfLWyeeJ+K7Xlp+OVLhmVIkff
+	anSslzrhxmcWQH/RPFXgD73kcnwjcjVPqmU0PzIkw2jheEBWDtAm7ppHRfedMIzr8n3u
+	f3a9SHGHjS5HQUw5zD41BSiq0OJyg9o6xnl0R0AqtUMvCDgw83nARZUH1BRSfqTBWN23
+	0EbCV2Qjy6bxxfm4BZy8hL1CLWkr/FsyHfAtSsF7/lZfmb88pas7QF+8FWSCbUHr8Cl2
+	sBNg==
+X-Gm-Message-State: APjAAAWIR0fAc4AAV0t+9cv6poHV1Sg7VTdfWJtP0nTs4hZ1zOxZc/cr
+	qPcWSeEByFkZfKPtjTV+MzecHb9LvpzaGZoiYEhQe/lODx+NPfR2oFj/ta8pqYR1c7PnsFJ/YTE
+	nu9XSE2VcVp+0GjwJ6X7xV5Hk4K4mCLvA5TYLuxd4QA==
+X-Received: by 2002:a37:4b97:: with SMTP id
+	y145mr53500325qka.310.1568489944597; 
+	Sat, 14 Sep 2019 12:39:04 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwD6rz0Xz1EID/JFGdbYv8ZxwisBunlJJE5csAnnPdoREA9Pde8LY2vagubbz6rBIS1caMDgg==
+X-Received: by 2002:a37:4b97:: with SMTP id
+	y145mr53500312qka.310.1568489944423; 
+	Sat, 14 Sep 2019 12:39:04 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
 	by smtp.gmail.com with ESMTPSA id
-	60sm15837153qta.77.2019.09.14.12.38.41
+	y17sm17211975qtb.82.2019.09.14.12.39.01
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 14 Sep 2019 12:38:45 -0700 (PDT)
-Date: Sat, 14 Sep 2019 15:38:39 -0400
+	Sat, 14 Sep 2019 12:39:03 -0700 (PDT)
+Date: Sat, 14 Sep 2019 15:38:59 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Guenter Roeck <linux@roeck-us.net>
-Subject: Re: [PATCH] vhost: Fix compile time error
-Message-ID: <20190914153325-mutt-send-email-mst@kernel.org>
-References: <1568450697-16775-1-git-send-email-linux@roeck-us.net>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: [PULL] vhost: a last minute revert
+Message-ID: <20190914153859-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1568450697-16775-1-git-send-email-linux@roeck-us.net>
+X-Mutt-Fcc: =sent
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -88,49 +86,36 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sat, Sep 14, 2019 at 01:44:57AM -0700, Guenter Roeck wrote:
-> Building vhost on 32-bit targets results in the following error.
-> 
-> drivers/vhost/vhost.c: In function 'translate_desc':
-> include/linux/compiler.h:549:38: error:
-> 	call to '__compiletime_assert_1879' declared with attribute error:
-> 	BUILD_BUG_ON failed: sizeof(_s) > sizeof(long)
-> 
-> Fixes: a89db445fbd7 ("vhost: block speculation of translated descriptors")
-> Cc: Michael S. Tsirkin <mst@redhat.com>
-> Cc: Jason Wang <jasowang@redhat.com>
-> Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+So I made a mess of it. Sent a pull before making sure it works on 32
+bit too. Hope it's not too late to revert. Will teach me to be way more
+careful in the near future.
 
+The following changes since commit 060423bfdee3f8bc6e2c1bac97de24d5415e2bc4:
 
+  vhost: make sure log_num < in_num (2019-09-11 15:15:26 -0400)
 
-> ---
->  drivers/vhost/vhost.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-> index acabf20b069e..102a0c877007 100644
-> --- a/drivers/vhost/vhost.c
-> +++ b/drivers/vhost/vhost.c
-> @@ -2074,7 +2074,7 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
->  		_iov->iov_base = (void __user *)
->  			((unsigned long)node->userspace_addr +
->  			 array_index_nospec((unsigned long)(addr - node->start),
-> -					    node->size));
-> +					    (unsigned long)node->size));
+are available in the Git repository at:
 
-Unfortunately this does not fix the case where size is actually 64 bit,
-e.g. a single node with VA 0, size 2^32 is how
-you cover the whole virtual address space.
+  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
 
-this is not how qemu uses it, but it's valid.
+for you to fetch changes up to 0d4a3f2abbef73b9e5bb5f12213c275565473588:
 
-I think it's best to just revert the patch for now.
+  Revert "vhost: block speculation of translated descriptors" (2019-09-14 15:21:51 -0400)
 
->  		s += size;
->  		addr += size;
->  		++ret;
-> -- 
-> 2.7.4
+----------------------------------------------------------------
+virtio: a last minute revert
+
+32 bit build got broken by the latest defence in depth patch.
+Revert and we'll try again in the next cycle.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+----------------------------------------------------------------
+Michael S. Tsirkin (1):
+      Revert "vhost: block speculation of translated descriptors"
+
+ drivers/vhost/vhost.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
