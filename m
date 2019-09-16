@@ -2,43 +2,94 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 823EEB32FE
-	for <lists.virtualization@lfdr.de>; Mon, 16 Sep 2019 03:35:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE919B3589
+	for <lists.virtualization@lfdr.de>; Mon, 16 Sep 2019 09:27:03 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5BFC0CDB;
-	Mon, 16 Sep 2019 01:35:47 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id ED1CA10CD;
+	Mon, 16 Sep 2019 07:26:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 08F50CCB
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 093E610C6
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 16 Sep 2019 01:35:46 +0000 (UTC)
+	Mon, 16 Sep 2019 07:26:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8E88E70D
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 87C2D828
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 16 Sep 2019 01:35:45 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	15 Sep 2019 18:35:33 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,492,1559545200"; d="scan'208";a="190934141"
-Received: from unknown (HELO [10.239.13.7]) ([10.239.13.7])
-	by orsmga006.jf.intel.com with ESMTP; 15 Sep 2019 18:35:32 -0700
-Message-ID: <5D7EE856.2080602@intel.com>
-Date: Mon, 16 Sep 2019 09:41:42 +0800
-From: Wei Wang <wei.w.wang@intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-MIME-Version: 1.0
-To: Tyler Sanderson <tysand@google.com>, 
-	virtualization@lists.linux-foundation.org, mst@redhat.com
+	Mon, 16 Sep 2019 07:26:56 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+	[10.5.11.16])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id D485DC010923;
+	Mon, 16 Sep 2019 07:26:55 +0000 (UTC)
+Received: from [10.36.117.103] (ovpn-117-103.ams2.redhat.com [10.36.117.103])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B8AB65C258;
+	Mon, 16 Sep 2019 07:26:49 +0000 (UTC)
 Subject: Re: VIRTIO_BALLOON_F_FREE_PAGE_HINT
+To: Wei Wang <wei.w.wang@intel.com>, Tyler Sanderson <tysand@google.com>,
+	virtualization@lists.linux-foundation.org, mst@redhat.com
 References: <CAJuQAmpQmNN1EJHm4RinZnBven9Bx4GGqd-8Mt+L=3Z-3pd+zg@mail.gmail.com>
-In-Reply-To: <CAJuQAmpQmNN1EJHm4RinZnBven9Bx4GGqd-8Mt+L=3Z-3pd+zg@mail.gmail.com>
+	<5D7EE856.2080602@intel.com>
+From: David Hildenbrand <david@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+	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
+	SE+xAvmumFBY
+Organization: Red Hat GmbH
+Message-ID: <09257686-90df-5c31-c35f-9d16fc77fee1@redhat.com>
+Date: Mon, 16 Sep 2019 09:26:49 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <5D7EE856.2080602@intel.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.31]);
+	Mon, 16 Sep 2019 07:26:55 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -54,68 +105,81 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 09/14/2019 02:36 AM, Tyler Sanderson wrote:
-> Hello, I'm curious about the intent of VIRTIO_BALLOON_F_FREE_PAGE_HINT 
-> (commit 
-> <https://github.com/torvalds/linux/commit/86a559787e6f5cf662c081363f64a20cad654195#diff-fd202acf694d9eba19c8c64da3e480c9>). 
->
->
-> My understanding is that this mechanism works similarly to the 
-> existing inflate/deflate queues. Pages are allocated by the guest and 
-> then reported on VQ_FREE_PAGE.
->
-> Question: Is there a limit to how many pages will be allocated? What 
-> controls the amount of memory pressure applied?
+On 16.09.19 03:41, Wei Wang wrote:
+> On 09/14/2019 02:36 AM, Tyler Sanderson wrote:
+>> Hello, I'm curious about the intent of VIRTIO_BALLOON_F_FREE_PAGE_HINT 
+>> (commit 
+>> <https://github.com/torvalds/linux/commit/86a559787e6f5cf662c081363f64a20cad654195#diff-fd202acf694d9eba19c8c64da3e480c9>). 
+>>
+>>
+>> My understanding is that this mechanism works similarly to the 
+>> existing inflate/deflate queues. Pages are allocated by the guest and 
+>> then reported on VQ_FREE_PAGE.
+>>
+>> Question: Is there a limit to how many pages will be allocated? What 
+>> controls the amount of memory pressure applied?
+> 
+> No control for the limit currently. The implementation reports all the 
+> guest free pages to host.
+> The main usage for this feature so far is to have guest skip sending 
+> those guest free pages
+> (the more, the better) during live migration.
+> 
+> 
+>>
+>> In my experience with virtio balloon there are problems with the 
+>> mechanisms that are supposed to deflate the balloon in response to 
+>> memory pressure (e.g. OOM notifier).
+> 
+> What problem did you see? We've also changed balloon to use memory shrinker,
+> did you see the problem with shrinker as well?
+> 
+>>
+>> It seems an ideal balloon interface would allow the guest to round 
+>> robin through free guest physical pages, allowing the host to unback 
+>> them, but never having more than a few pages allocated to the balloon 
+>> at any one time. For example:
+>> 1. Guest allocates 1 page and notifies balloon device of this page's 
+>> address.
+>> 2. Host debacks the received page.
+>> 3. Guest frees the page.
+>> 4. Repeat at #1, but ensure that different pages are allocated each time.
+> 
+> Probably you need a mechanism to "ensure" different pages to be allocated.
+> The current implementation (having balloon hold the allocated pages) could
+> be thought of as one mechanism (it is simple).
+> 
+>>
+>> This way the "balloon size" is never more than a few pages and does 
+>> not create memory pressure. However the difficulty is in ensuring each 
+>> set of sent pages is disjoint from previously sent pages. Is there a 
+>> mechanism to round-robin allocations through all of guest physical 
+>> memory? Does VIRTIO_BALLOON_F_FREE_PAGE_HINT enable this?
 
-No control for the limit currently. The implementation reports all the 
-guest free pages to host.
-The main usage for this feature so far is to have guest skip sending 
-those guest free pages
-(the more, the better) during live migration.
+There are use cases where you really want memory pressure (page cache is
+the prime example). Anyhow, I think the use case you want the
+"round-robin allocations" for is better tackled by "free page reporting"
+(used to be called "free page hinting") currently discussed on various
+lists.
 
+"allowing the host to unback them, but never having more than a few
+pages allocated to the balloon at any one time." is similar to what
+"free page reporting" does. We decided to only report bigger pages
+(avoid splitting up THP in the hypervisor, overhead) and only
+temporarily pull out a fixed amount of pages (16) from the page
+allocator to avoid false-OOM. Guaranteeing forward progress (similar to
+what you describe) is one important key concept.
 
->
-> In my experience with virtio balloon there are problems with the 
-> mechanisms that are supposed to deflate the balloon in response to 
-> memory pressure (e.g. OOM notifier).
+-- 
 
-What problem did you see? We've also changed balloon to use memory shrinker,
-did you see the problem with shrinker as well?
+Thanks,
 
->
-> It seems an ideal balloon interface would allow the guest to round 
-> robin through free guest physical pages, allowing the host to unback 
-> them, but never having more than a few pages allocated to the balloon 
-> at any one time. For example:
-> 1. Guest allocates 1 page and notifies balloon device of this page's 
-> address.
-> 2. Host debacks the received page.
-> 3. Guest frees the page.
-> 4. Repeat at #1, but ensure that different pages are allocated each time.
-
-Probably you need a mechanism to "ensure" different pages to be allocated.
-The current implementation (having balloon hold the allocated pages) could
-be thought of as one mechanism (it is simple).
-
->
-> This way the "balloon size" is never more than a few pages and does 
-> not create memory pressure. However the difficulty is in ensuring each 
-> set of sent pages is disjoint from previously sent pages. Is there a 
-> mechanism to round-robin allocations through all of guest physical 
-> memory? Does VIRTIO_BALLOON_F_FREE_PAGE_HINT enable this?
->
-
-AFAIK, no such round-robin allocation so far. This may need the page 
-allocation to have states recording
-the allocation history.
-
-Best,
-Wei
+David / dhildenb
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
