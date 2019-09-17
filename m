@@ -2,64 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C40F7B48F9
-	for <lists.virtualization@lfdr.de>; Tue, 17 Sep 2019 10:14:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 325A2B4914
+	for <lists.virtualization@lfdr.de>; Tue, 17 Sep 2019 10:18:29 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id ED3C01169;
-	Tue, 17 Sep 2019 08:14:53 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E3B4A1146;
+	Tue, 17 Sep 2019 08:18:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E3EBD1112
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 394FB1146
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 17 Sep 2019 08:14:51 +0000 (UTC)
+	Tue, 17 Sep 2019 08:18:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A172576D
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DF4F076D
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 17 Sep 2019 08:14:51 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	Tue, 17 Sep 2019 08:18:20 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id DE6373082B1F;
-	Tue, 17 Sep 2019 08:14:50 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id D2391315C00D;
+	Tue, 17 Sep 2019 08:18:19 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-47.ams2.redhat.com
 	[10.36.116.47])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 1F14F60BF7;
-	Tue, 17 Sep 2019 08:14:50 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 6C14D5D9DC;
+	Tue, 17 Sep 2019 08:18:19 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id D17C317444; Tue, 17 Sep 2019 10:14:48 +0200 (CEST)
-Date: Tue, 17 Sep 2019 10:14:48 +0200
+	id 9D29217444; Tue, 17 Sep 2019 10:18:18 +0200 (CEST)
+Date: Tue, 17 Sep 2019 10:18:18 +0200
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: Steven Price <steven.price@arm.com>
-Subject: Re: [PATCH 2/8] drm/shmem: switch shmem helper to
-	&drm_gem_object_funcs.mmap
-Message-ID: <20190917081448.zonghnqa4aoc4bmp@sirius.home.kraxel.org>
+To: Rob Herring <robh@kernel.org>
+Subject: Re: [PATCH 3/8] drm/shmem: drop DEFINE_DRM_GEM_SHMEM_FOPS
+Message-ID: <20190917081818.4lumcpn4wf6jcuyt@sirius.home.kraxel.org>
 References: <20190913122908.784-1-kraxel@redhat.com>
-	<20190913122908.784-3-kraxel@redhat.com>
-	<197fdced-cf4a-c59a-47fd-aa5dbf8e04a2@arm.com>
+	<20190913122908.784-4-kraxel@redhat.com>
+	<CAL_JsqJajCtM=vRgSDX2DQ6iJzDgMHicXgXgGqF7Bc-KdTUUQA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <197fdced-cf4a-c59a-47fd-aa5dbf8e04a2@arm.com>
+In-Reply-To: <CAL_JsqJajCtM=vRgSDX2DQ6iJzDgMHicXgXgGqF7Bc-KdTUUQA@mail.gmail.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.45]);
-	Tue, 17 Sep 2019 08:14:51 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.41]);
+	Tue, 17 Sep 2019 08:18:20 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Tomeu Vizoso <tomeu.vizoso@collabora.com>,
-	Maxime Ripard <maxime.ripard@bootlin.com>,
+Cc: Maxime Ripard <maxime.ripard@bootlin.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+	Eric Anholt <eric@anholt.net>, David Airlie <airlied@linux.ie>,
 	Daniel Vetter <daniel.vetter@ffwll.ch>,
-	open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
-	"open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
-	David Airlie <airlied@linux.ie>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	open list <linux-kernel@vger.kernel.org>,
+	dri-devel <dri-devel@lists.freedesktop.org>,
+	Steven Price <steven.price@arm.com>, Hans de Goede <hdegoede@redhat.com>,
 	Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>, Sean Paul <sean@poorly.run>
+	Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+	"open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
+	<virtualization@lists.linux-foundation.org>, Sean Paul <sean@poorly.run>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,24 +80,18 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-  Hi,
-
-> > -	/* VM_PFNMAP was set by drm_gem_mmap() */
-> > -	vma->vm_flags &= ~VM_PFNMAP;
-> > -	vma->vm_flags |= VM_MIXEDMAP;
-> > +	vma->vm_flags |= (VM_MIXEDMAP|VM_DONTEXPAND);
+On Mon, Sep 16, 2019 at 05:07:14PM -0500, Rob Herring wrote:
+> On Fri, Sep 13, 2019 at 7:29 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+> >
 > 
-> I'm finding this a bit hard to follow - but I think here we've lost
-> VM_IO and VM_DONTDUMP which used to be set by drm_gem_mmap().
+> Version? Pretty sure this is not v1.
 
-Yep.  Intentional, but I think I better split that off to a separate
-patch with a commit message explaining things.
+Yep, was posted as part of a longer series before.
 
-> Also it looks like nothing is fiddling vma->vm_page_prot anymore.
+Splitted the long series into multiple smaller ones by cherry-picking
+patches into new branches, which re-started the numbering.
 
-Oops, that one was not intentional.  Will fix.
-
-cheers,
+Sorry for the confusion,
   Gerd
 
 _______________________________________________
