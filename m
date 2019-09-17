@@ -2,66 +2,61 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE642B49AD
-	for <lists.virtualization@lfdr.de>; Tue, 17 Sep 2019 10:39:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81C51B4A58
+	for <lists.virtualization@lfdr.de>; Tue, 17 Sep 2019 11:24:20 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6EE3A1174;
-	Tue, 17 Sep 2019 08:39:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2DCF110C0;
+	Tue, 17 Sep 2019 09:24:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 37ADF116A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E6619F7A
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 17 Sep 2019 08:39:05 +0000 (UTC)
+	Tue, 17 Sep 2019 09:24:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DFCFE76D
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 52B1587C
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 17 Sep 2019 08:39:04 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	Tue, 17 Sep 2019 09:24:10 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 28DCDC058CA4;
-	Tue, 17 Sep 2019 08:39:04 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 7ABDA89AC6;
+	Tue, 17 Sep 2019 09:24:09 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-47.ams2.redhat.com
 	[10.36.116.47])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 6259A60BF7;
-	Tue, 17 Sep 2019 08:39:03 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 0CC216013A;
+	Tue, 17 Sep 2019 09:24:05 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 4B5D816E05; Tue, 17 Sep 2019 10:39:02 +0200 (CEST)
-Date: Tue, 17 Sep 2019 10:39:02 +0200
+	id 3F63017538; Tue, 17 Sep 2019 11:24:05 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 8/8] drm/vram: drop DRM_VRAM_MM_FILE_OPERATIONS
-Message-ID: <20190917083902.fn32iznnjm3zhudl@sirius.home.kraxel.org>
-References: <20190913122908.784-1-kraxel@redhat.com>
-	<20190913122908.784-9-kraxel@redhat.com>
-	<e9712055-c6db-5515-0c11-4d7add138856@suse.de>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <e9712055-c6db-5515-0c11-4d7add138856@suse.de>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v2 02/11] drm/shmem: switch shmem helper to
+	&drm_gem_object_funcs.mmap
+Date: Tue, 17 Sep 2019 11:23:55 +0200
+Message-Id: <20190917092404.9982-3-kraxel@redhat.com>
+In-Reply-To: <20190917092404.9982-1-kraxel@redhat.com>
+References: <20190917092404.9982-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.32]);
-	Tue, 17 Sep 2019 08:39:04 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.26]);
+	Tue, 17 Sep 2019 09:24:09 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Hans de Goede <hdegoede@redhat.com>,
+Cc: Rob Herring <robh@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+	Tomeu Vizoso <tomeu.vizoso@collabora.com>, Eric Anholt <eric@anholt.net>,
 	Maxime Ripard <maxime.ripard@bootlin.com>,
 	Daniel Vetter <daniel.vetter@ffwll.ch>,
-	open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
-	"open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	Xinliang Liu <z.liuxinliang@hisilicon.com>,
-	David Airlie <airlied@linux.ie>,
-	Xinwei Kong <kong.kongxinwei@hisilicon.com>,
-	Chen Feng <puck.chen@hisilicon.com>, Rongrong Zou <zourongrong@gmail.com>,
-	Dave Airlie <airlied@redhat.com>, Sean Paul <sean@poorly.run>
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	open list <linux-kernel@vger.kernel.org>,
+	Steven Price <steven.price@arm.com>, David Airlie <airlied@linux.ie>,
+	Thomas Zimmermann <tzimmermann@suse.de>, "open list:VIRTIO GPU DRIVER"
+	<virtualization@lists.linux-foundation.org>, Sean Paul <sean@poorly.run>,
+	Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,24 +68,163 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-> >  include/drm/drm_vram_mm_helper.h              | 82 +++++++++++++++++++
+Switch gem shmem helper to the new mmap() workflow,
+from &gem_driver.fops.mmap to &drm_gem_object_funcs.mmap.
 
-> > diff --git a/include/drm/drm_vram_mm_helper.h b/include/drm/drm_vram_mm_helper.h
-> > new file mode 100644
-> 
-> Please rebase onto the latest drm-tip. This entire file has been removed
-> in a recent patch.
+v2: Fix vm_flags and vm_page_prot handling.
 
-I did rebase already, then re-added the file by mistake.  Didn't pay
-enough attention while solving the conflict.  Fixed now.
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ include/drm/drm_gem_shmem_helper.h      |  6 ++----
+ drivers/gpu/drm/drm_gem_shmem_helper.c  | 28 +++++++++----------------
+ drivers/gpu/drm/panfrost/panfrost_gem.c |  2 +-
+ drivers/gpu/drm/v3d/v3d_bo.c            |  2 +-
+ drivers/gpu/drm/virtio/virtgpu_object.c |  2 +-
+ 5 files changed, 15 insertions(+), 25 deletions(-)
 
-cheers,
-  Gerd
+diff --git a/include/drm/drm_gem_shmem_helper.h b/include/drm/drm_gem_shmem_helper.h
+index 01f514521687..d89f2116c8ab 100644
+--- a/include/drm/drm_gem_shmem_helper.h
++++ b/include/drm/drm_gem_shmem_helper.h
+@@ -111,7 +111,7 @@ struct drm_gem_shmem_object {
+ 		.poll		= drm_poll,\
+ 		.read		= drm_read,\
+ 		.llseek		= noop_llseek,\
+-		.mmap		= drm_gem_shmem_mmap, \
++		.mmap		= drm_gem_mmap, \
+ 	}
+ 
+ struct drm_gem_shmem_object *drm_gem_shmem_create(struct drm_device *dev, size_t size);
+@@ -143,9 +143,7 @@ drm_gem_shmem_create_with_handle(struct drm_file *file_priv,
+ int drm_gem_shmem_dumb_create(struct drm_file *file, struct drm_device *dev,
+ 			      struct drm_mode_create_dumb *args);
+ 
+-int drm_gem_shmem_mmap(struct file *filp, struct vm_area_struct *vma);
+-
+-extern const struct vm_operations_struct drm_gem_shmem_vm_ops;
++int drm_gem_shmem_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma);
+ 
+ void drm_gem_shmem_print_info(struct drm_printer *p, unsigned int indent,
+ 			      const struct drm_gem_object *obj);
+diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+index f5918707672f..a9a586630517 100644
+--- a/drivers/gpu/drm/drm_gem_shmem_helper.c
++++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+@@ -32,7 +32,7 @@ static const struct drm_gem_object_funcs drm_gem_shmem_funcs = {
+ 	.get_sg_table = drm_gem_shmem_get_sg_table,
+ 	.vmap = drm_gem_shmem_vmap,
+ 	.vunmap = drm_gem_shmem_vunmap,
+-	.vm_ops = &drm_gem_shmem_vm_ops,
++	.mmap = drm_gem_shmem_mmap,
+ };
+ 
+ /**
+@@ -505,39 +505,30 @@ static void drm_gem_shmem_vm_close(struct vm_area_struct *vma)
+ 	drm_gem_vm_close(vma);
+ }
+ 
+-const struct vm_operations_struct drm_gem_shmem_vm_ops = {
++static const struct vm_operations_struct drm_gem_shmem_vm_ops = {
+ 	.fault = drm_gem_shmem_fault,
+ 	.open = drm_gem_shmem_vm_open,
+ 	.close = drm_gem_shmem_vm_close,
+ };
+-EXPORT_SYMBOL_GPL(drm_gem_shmem_vm_ops);
+ 
+ /**
+  * drm_gem_shmem_mmap - Memory-map a shmem GEM object
+- * @filp: File object
++ * @obj: gem object
+  * @vma: VMA for the area to be mapped
+  *
+  * This function implements an augmented version of the GEM DRM file mmap
+  * operation for shmem objects. Drivers which employ the shmem helpers should
+- * use this function as their &file_operations.mmap handler in the DRM device file's
+- * file_operations structure.
+- *
+- * Instead of directly referencing this function, drivers should use the
+- * DEFINE_DRM_GEM_SHMEM_FOPS() macro.
++ * use this function as their &drm_gem_object_funcs.mmap handler.
+  *
+  * Returns:
+  * 0 on success or a negative error code on failure.
+  */
+-int drm_gem_shmem_mmap(struct file *filp, struct vm_area_struct *vma)
++int drm_gem_shmem_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
+ {
+ 	struct drm_gem_shmem_object *shmem;
+ 	int ret;
+ 
+-	ret = drm_gem_mmap(filp, vma);
+-	if (ret)
+-		return ret;
+-
+-	shmem = to_drm_gem_shmem_obj(vma->vm_private_data);
++	shmem = to_drm_gem_shmem_obj(obj);
+ 
+ 	ret = drm_gem_shmem_get_pages(shmem);
+ 	if (ret) {
+@@ -545,9 +536,10 @@ int drm_gem_shmem_mmap(struct file *filp, struct vm_area_struct *vma)
+ 		return ret;
+ 	}
+ 
+-	/* VM_PFNMAP was set by drm_gem_mmap() */
+-	vma->vm_flags &= ~VM_PFNMAP;
+-	vma->vm_flags |= VM_MIXEDMAP;
++	vma->vm_flags |= VM_IO | VM_MIXEDMAP | VM_DONTEXPAND | VM_DONTDUMP;
++	vma->vm_page_prot = pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
++	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
++	vma->vm_ops = &drm_gem_shmem_vm_ops;
+ 
+ 	/* Remove the fake offset */
+ 	vma->vm_pgoff -= drm_vma_node_start(&shmem->base.vma_node);
+diff --git a/drivers/gpu/drm/panfrost/panfrost_gem.c b/drivers/gpu/drm/panfrost/panfrost_gem.c
+index acb07fe06580..deca0c30bbd4 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_gem.c
++++ b/drivers/gpu/drm/panfrost/panfrost_gem.c
+@@ -112,7 +112,7 @@ static const struct drm_gem_object_funcs panfrost_gem_funcs = {
+ 	.get_sg_table = drm_gem_shmem_get_sg_table,
+ 	.vmap = drm_gem_shmem_vmap,
+ 	.vunmap = drm_gem_shmem_vunmap,
+-	.vm_ops = &drm_gem_shmem_vm_ops,
++	.mmap = drm_gem_shmem_mmap,
+ };
+ 
+ /**
+diff --git a/drivers/gpu/drm/v3d/v3d_bo.c b/drivers/gpu/drm/v3d/v3d_bo.c
+index a22b75a3a533..edd299ab53d8 100644
+--- a/drivers/gpu/drm/v3d/v3d_bo.c
++++ b/drivers/gpu/drm/v3d/v3d_bo.c
+@@ -58,7 +58,7 @@ static const struct drm_gem_object_funcs v3d_gem_funcs = {
+ 	.get_sg_table = drm_gem_shmem_get_sg_table,
+ 	.vmap = drm_gem_shmem_vmap,
+ 	.vunmap = drm_gem_shmem_vunmap,
+-	.vm_ops = &drm_gem_shmem_vm_ops,
++	.mmap = drm_gem_shmem_mmap,
+ };
+ 
+ /* gem_create_object function for allocating a BO struct and doing
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index 69a3d310ff70..017a9e0fc3bb 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -86,7 +86,7 @@ static const struct drm_gem_object_funcs virtio_gpu_gem_funcs = {
+ 	.get_sg_table = drm_gem_shmem_get_sg_table,
+ 	.vmap = drm_gem_shmem_vmap,
+ 	.vunmap = drm_gem_shmem_vunmap,
+-	.vm_ops = &drm_gem_shmem_vm_ops,
++	.mmap = &drm_gem_shmem_mmap,
+ };
+ 
+ struct drm_gem_object *virtio_gpu_create_object(struct drm_device *dev,
+-- 
+2.18.1
 
 _______________________________________________
 Virtualization mailing list
