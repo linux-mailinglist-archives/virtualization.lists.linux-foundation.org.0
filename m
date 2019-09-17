@@ -2,72 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C34EEB43C3
-	for <lists.virtualization@lfdr.de>; Tue, 17 Sep 2019 00:07:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98B99B4510
+	for <lists.virtualization@lfdr.de>; Tue, 17 Sep 2019 03:05:08 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5D2F31409;
-	Mon, 16 Sep 2019 22:07:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7D8EBC9E;
+	Tue, 17 Sep 2019 01:05:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0910C13F1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8D7D9C4E
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 16 Sep 2019 22:07:28 +0000 (UTC)
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0EABA70D
+	Tue, 17 Sep 2019 01:05:00 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5A62C7DB
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 16 Sep 2019 22:07:27 +0000 (UTC)
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
-	[209.85.222.177])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id AAAAF218AC
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 16 Sep 2019 22:07:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1568671646;
-	bh=dOmx+5b6FQTG2S2CZB6xwqvYvyES1DQ1DZe+OAaMClg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=vqktAQYAqdZQgDA2CtTybSuSETpsBWt7QdjYS1Ul6ZH2Zqd4TNkLn2pHNuNvPk/Vt
-	4tJIsivFm0ZeY014fO1zUv9DeJY9X03hJAY8KY4lKExIcQtByGyCi6qUSYdoEUP7I+
-	kMzmbws2N/zLBMqRsNuZ8b864lBbNVokNah0F+Vk=
-Received: by mail-qk1-f177.google.com with SMTP id 201so1623314qkd.13
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 16 Sep 2019 15:07:26 -0700 (PDT)
-X-Gm-Message-State: APjAAAXxhTtsKxs9HoBzUoZ/9In/2qNVFvTATnj9m8kTY1KUKi33ISI7
-	MthN1wrGLdyTxUZTIw3s+n4JjWEnqcNjY95uzg==
-X-Google-Smtp-Source: APXvYqw0JdhpCWLexwIOT8ESTlHEFkeSnb9jRER69EJErTdTZGBlE/PDwDE/PA78bdeKSSrQ0wdFLVGRQB2aD4rqikg=
-X-Received: by 2002:a05:620a:549:: with SMTP id
-	o9mr575224qko.223.1568671645784; 
-	Mon, 16 Sep 2019 15:07:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190913122908.784-1-kraxel@redhat.com>
-	<20190913122908.784-4-kraxel@redhat.com>
-In-Reply-To: <20190913122908.784-4-kraxel@redhat.com>
-From: Rob Herring <robh@kernel.org>
-Date: Mon, 16 Sep 2019 17:07:14 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqJajCtM=vRgSDX2DQ6iJzDgMHicXgXgGqF7Bc-KdTUUQA@mail.gmail.com>
-Message-ID: <CAL_JsqJajCtM=vRgSDX2DQ6iJzDgMHicXgXgGqF7Bc-KdTUUQA@mail.gmail.com>
-Subject: Re: [PATCH 3/8] drm/shmem: drop DEFINE_DRM_GEM_SHMEM_FOPS
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+	Tue, 17 Sep 2019 01:04:59 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	16 Sep 2019 18:04:58 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,514,1559545200"; d="scan'208";a="180611926"
+Received: from dpdk-virtio-tbie-2.sh.intel.com ([10.67.104.71])
+	by orsmga008.jf.intel.com with ESMTP; 16 Sep 2019 18:04:55 -0700
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: mst@redhat.com, jasowang@redhat.com, alex.williamson@redhat.com,
+	maxime.coquelin@redhat.com
+Subject: [RFC v4 0/3] vhost: introduce mdev based hardware backend
+Date: Tue, 17 Sep 2019 09:02:01 +0800
+Message-Id: <20190917010204.30376-1-tiwei.bie@intel.com>
+X-Mailer: git-send-email 2.17.1
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Maxime Ripard <maxime.ripard@bootlin.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
-	Eric Anholt <eric@anholt.net>, David Airlie <airlied@linux.ie>,
-	Daniel Vetter <daniel.vetter@ffwll.ch>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	open list <linux-kernel@vger.kernel.org>,
-	dri-devel <dri-devel@lists.freedesktop.org>,
-	Steven Price <steven.price@arm.com>, Hans de Goede <hdegoede@redhat.com>,
-	Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
-	Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
-	"open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
-	<virtualization@lists.linux-foundation.org>, Sean Paul <sean@poorly.run>
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	zhihong.wang@intel.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,30 +53,61 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Sep 13, 2019 at 7:29 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
+This RFC is to demonstrate below ideas,
 
-Version? Pretty sure this is not v1.
+a) Build vhost-mdev on top of the same abstraction defined in
+   the virtio-mdev series [1];
 
-> DEFINE_DRM_GEM_SHMEM_FOPS is identical
-> to DEFINE_DRM_GEM_FOPS now, drop it.
->
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  include/drm/drm_gem_shmem_helper.h      | 26 -------------------------
->  drivers/gpu/drm/cirrus/cirrus.c         |  2 +-
->  drivers/gpu/drm/panfrost/panfrost_drv.c |  2 +-
->  drivers/gpu/drm/tiny/gm12u320.c         |  2 +-
->  drivers/gpu/drm/v3d/v3d_drv.c           |  2 +-
->  drivers/gpu/drm/virtio/virtgpu_drv.c    |  2 +-
->  6 files changed, 5 insertions(+), 31 deletions(-)
+b) Introduce /dev/vhost-mdev to do vhost ioctls and support
+   setting mdev device as backend;
 
-Acked-by: Rob Herring <robh@kernel.org>
+Now the userspace API looks like this:
+
+- Userspace generates a compatible mdev device;
+
+- Userspace opens this mdev device with VFIO API (including
+  doing IOMMU programming for this mdev device with VFIO's
+  container/group based interface);
+
+- Userspace opens /dev/vhost-mdev and gets vhost fd;
+
+- Userspace uses vhost ioctls to setup vhost (userspace should
+  do VHOST_MDEV_SET_BACKEND ioctl with VFIO group fd and device
+  fd first before doing other vhost ioctls);
+
+Only compile test has been done for this series for now.
+
+RFCv3: https://patchwork.kernel.org/patch/11117785/
+
+[1] https://lkml.org/lkml/2019/9/10/135
+
+Tiwei Bie (3):
+  vfio: support getting vfio device from device fd
+  vfio: support checking vfio driver by device ops
+  vhost: introduce mdev based hardware backend
+
+ drivers/vfio/mdev/vfio_mdev.c    |   3 +-
+ drivers/vfio/vfio.c              |  32 +++
+ drivers/vhost/Kconfig            |   9 +
+ drivers/vhost/Makefile           |   3 +
+ drivers/vhost/mdev.c             | 462 +++++++++++++++++++++++++++++++
+ drivers/vhost/vhost.c            |  39 ++-
+ drivers/vhost/vhost.h            |   6 +
+ include/linux/vfio.h             |  11 +
+ include/uapi/linux/vhost.h       |  10 +
+ include/uapi/linux/vhost_types.h |   5 +
+ 10 files changed, 573 insertions(+), 7 deletions(-)
+ create mode 100644 drivers/vhost/mdev.c
+
+-- 
+2.17.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
