@@ -2,32 +2,32 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 839EAB88C5
-	for <lists.virtualization@lfdr.de>; Fri, 20 Sep 2019 02:59:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E14A7B88EE
+	for <lists.virtualization@lfdr.de>; Fri, 20 Sep 2019 03:31:28 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 071CBC96;
-	Fri, 20 Sep 2019 00:59:49 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 54401B88;
+	Fri, 20 Sep 2019 01:31:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 888E7C84
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0CF95B49
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 20 Sep 2019 00:59:47 +0000 (UTC)
+	Fri, 20 Sep 2019 01:31:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E9BECF8
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 807CDF8
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 20 Sep 2019 00:59:46 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
-	[10.5.11.14])
+	Fri, 20 Sep 2019 01:31:20 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 2C55B81DE7;
-	Fri, 20 Sep 2019 00:59:46 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id CA48B308FB9D;
+	Fri, 20 Sep 2019 01:31:19 +0000 (UTC)
 Received: from [10.72.12.88] (ovpn-12-88.pek2.redhat.com [10.72.12.88])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 4F6D75D9CD;
-	Fri, 20 Sep 2019 00:59:34 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 5392F100197A;
+	Fri, 20 Sep 2019 01:31:00 +0000 (UTC)
 Subject: Re: [RFC v4 0/3] vhost: introduce mdev based hardware backend
 To: Tiwei Bie <tiwei.bie@intel.com>
 References: <20190917010204.30376-1-tiwei.bie@intel.com>
@@ -38,17 +38,17 @@ References: <20190917010204.30376-1-tiwei.bie@intel.com>
 	<d2efe7e4-cf13-437d-e2dc-e2779fac7d2f@redhat.com>
 	<20190919154552.GA27657@___>
 From: Jason Wang <jasowang@redhat.com>
-Message-ID: <11bc30a9-1cf5-4a5f-109a-f307d70c35fa@redhat.com>
-Date: Fri, 20 Sep 2019 08:59:32 +0800
+Message-ID: <43aaf7dc-f08b-8898-3c55-908ff4d68866@redhat.com>
+Date: Fri, 20 Sep 2019 09:30:58 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
 In-Reply-To: <20190919154552.GA27657@___>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.25]);
-	Fri, 20 Sep 2019 00:59:46 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.43]);
+	Fri, 20 Sep 2019 01:31:19 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -116,20 +116,34 @@ IHZmaW9fdmhvc3RfbWRldl9vcGVuLAo+IAkucmVsZWFzZQk9IHZmaW9fdmhvc3RfbWRldl9yZWxl
 YXNlLAo+IH07Cj4KPiBzdGF0aWMgaW50IHZob3N0X21kZXZfcHJvYmUoc3RydWN0IGRldmljZSAq
 ZGV2KQo+IHsKPiAJc3RydWN0IG1kZXZfZGV2aWNlICptZGV2ID0gdG9fbWRldl9kZXZpY2UoZGV2
 KTsKPgo+IAkuLi4gQ2hlY2sgdGhlIG1kZXYgZGV2aWNlX2lkIHByb3Bvc2VkIGluIC4uLgo+IAku
-Li4gaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMTkvOS8xMi8xNTEgLi4uCj4KPiAJcmV0dXJuIHZm
-aW9fYWRkX2dyb3VwX2RldihkZXYsICZ2ZmlvX3Zob3N0X21kZXZfZGV2X29wcywgbWRldik7Cj4g
-fQo+Cj4gc3RhdGljIHZvaWQgdmhvc3RfbWRldl9yZW1vdmUoc3RydWN0IGRldmljZSAqZGV2KQo+
-IHsKPiAJdmZpb19kZWxfZ3JvdXBfZGV2KGRldik7Cj4gfQo+Cj4gc3RhdGljIHN0cnVjdCBtZGV2
-X2RyaXZlciB2aG9zdF9tZGV2X2RyaXZlciA9IHsKPiAJLm5hbWUJPSAidmhvc3RfbWRldiIsCj4g
-CS5wcm9iZQk9IHZob3N0X21kZXZfcHJvYmUsCj4gCS5yZW1vdmUJPSB2aG9zdF9tZGV2X3JlbW92
-ZSwKPiB9Owo+Cj4gU28gd2UgY2FuIGJpbmQgYWJvdmUgbWRldiBkcml2ZXIgdG8gdGhlIHZpcnRp
-by1tZGV2IGNvbXBhdGlibGUKPiBtZGV2IGRldmljZXMgd2hlbiB3ZSB3YW50IHRvIHVzZSB2aG9z
-dC1tZGV2Lgo+Cj4gQWZ0ZXIgYmluZGluZyBhYm92ZSBkcml2ZXIgdG8gdGhlIG1kZXYgZGV2aWNl
-LCB3ZSBjYW4gc2V0dXAgSU9NTVUKPiB2aWEgVkZJTyBhbmQgZ2V0IFZGSU8gZGV2aWNlIGZkIG9m
-IHRoaXMgbWRldiBkZXZpY2UsIGFuZCBwYXNzIGl0Cj4gdG8gdmhvc3QgZmQgKC9kZXYvdmhvc3Qt
-bWRldikgd2l0aCBhIFNFVF9CQUNLRU5EIGlvY3RsLgo+Cj4gVGhhbmtzLAo+IFRpd2VpCgoKWWVz
-LCBzb21ldGhpbmcgbGlrZSB0aGlzLgoKVGhhbmtzCgoKPj4gVGhhbmtzCj4+Cj4+Cj4+Pj4gWWVz
-LCBpdCBpcy4KPj4+Pgo+Pj4+IFRoYW5rcwo+Pj4+Cj4+Pj4KX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZp
-cnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGlu
-dXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+Li4gaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMTkvOS8xMi8xNTEgLi4uCgoKVG8gY2xhcmlmeSwg
+dGhpcyBzaG91bGQgYmUgZG9uZSB0aHJvdWdoIHRoZSBpZF90YWJsZSBmaWVsZHMgaW4gCnZob3N0
+X21kZXZfZHJpdmVyLCBhbmQgaXQgc2hvdWxkIGNsYWltIGl0IHN1cHBvcnRzIHZpcnRpby1tZGV2
+IGRldmljZSBvbmx5OgoKCnN0YXRpYyBzdHJ1Y3QgbWRldl9jbGFzc19pZCBpZF90YWJsZVtdID0g
+ewogwqDCoMKgIHsgTURFVl9JRF9WSVJUSU8gfSwKIMKgwqDCoCB7IDAgfSwKfTsKCgpzdGF0aWMg
+c3RydWN0IG1kZXZfZHJpdmVyIHZob3N0X21kZXZfZHJpdmVyID0gewogwqDCoMKgIC4uLgogwqDC
+oMKgIC5pZF90YWJsZSA9IGlkX3RhYmxlLAp9CgoKPgo+IAlyZXR1cm4gdmZpb19hZGRfZ3JvdXBf
+ZGV2KGRldiwgJnZmaW9fdmhvc3RfbWRldl9kZXZfb3BzLCBtZGV2KTsKCgpBbmQgaW4gdmZpb192
+aG9zdF9tZGV2X29wcywgYWxsIGl0cyBuZWVkIGlzIHRvIGp1c3QgaW1wbGVtZW50IHZob3N0LW5l
+dCAKaW9jdGwgYW5kIHRyYW5zbGF0ZSB0aGVtIHRvIHZpcnRpby1tZGV2IHRyYW5zcG9ydCAoZS5n
+IGRldmljZV9vcHMgSSAKcHJvcG9zZWQgb3IgaW9jdGxzIG90aGVyIHdoYXRldmVyIG90aGVyIG1l
+dGhvZCkgQVBJLiBBbmQgaXQgY291bGQgaGF2ZSBhIApkdW1teSBvcHMgaW1wbGVtZW50YXRpb24g
+Zm9yIHRoZSBvdGhlciBkZXZpY2Vfb3BzLgoKCj4gfQo+Cj4gc3RhdGljIHZvaWQgdmhvc3RfbWRl
+dl9yZW1vdmUoc3RydWN0IGRldmljZSAqZGV2KQo+IHsKPiAJdmZpb19kZWxfZ3JvdXBfZGV2KGRl
+dik7Cj4gfQo+Cj4gc3RhdGljIHN0cnVjdCBtZGV2X2RyaXZlciB2aG9zdF9tZGV2X2RyaXZlciA9
+IHsKPiAJLm5hbWUJPSAidmhvc3RfbWRldiIsCj4gCS5wcm9iZQk9IHZob3N0X21kZXZfcHJvYmUs
+Cj4gCS5yZW1vdmUJPSB2aG9zdF9tZGV2X3JlbW92ZSwKPiB9Owo+Cj4gU28gd2UgY2FuIGJpbmQg
+YWJvdmUgbWRldiBkcml2ZXIgdG8gdGhlIHZpcnRpby1tZGV2IGNvbXBhdGlibGUKPiBtZGV2IGRl
+dmljZXMgd2hlbiB3ZSB3YW50IHRvIHVzZSB2aG9zdC1tZGV2Lgo+Cj4gQWZ0ZXIgYmluZGluZyBh
+Ym92ZSBkcml2ZXIgdG8gdGhlIG1kZXYgZGV2aWNlLCB3ZSBjYW4gc2V0dXAgSU9NTVUKPiB2aWEg
+VkZJTyBhbmQgZ2V0IFZGSU8gZGV2aWNlIGZkIG9mIHRoaXMgbWRldiBkZXZpY2UsIGFuZCBwYXNz
+IGl0Cj4gdG8gdmhvc3QgZmQgKC9kZXYvdmhvc3QtbWRldikgd2l0aCBhIFNFVF9CQUNLRU5EIGlv
+Y3RsLgoKClRoZW4gd2hhdCB2aG9zdC1tZGV2IGNoYXIgZGV2aWNlIGRpZCBpcyBqdXN0IGZvcndh
+cmRpbmcgaW9jdGwgYmFjayB0byAKdGhpcyB2ZmlvIGRldmljZSBmZCB3aGljaCBzZWVtcyBhIG92
+ZXJraWxsLiBJdCdzIHNpbXBsZXIgdGhhdCBqdXN0IGRvIAppb2N0bCBvbiB0aGUgZGV2aWNlIG9w
+cyBkaXJlY3RseS4KClRoYW5rcwoKCj4KPiBUaGFua3MsCj4gVGl3ZWkKPgo+PiBUaGFua3MKPj4K
+Pj4KPj4+PiBZZXMsIGl0IGlzLgo+Pj4+Cj4+Pj4gVGhhbmtzCj4+Pj4KPj4+PgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWls
+aW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6
+Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRp
+b24=
