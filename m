@@ -2,103 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AF3DBB256
-	for <lists.virtualization@lfdr.de>; Mon, 23 Sep 2019 12:39:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F27EBB398
+	for <lists.virtualization@lfdr.de>; Mon, 23 Sep 2019 14:21:59 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 8C001C6C;
-	Mon, 23 Sep 2019 10:39:25 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 482ACCCE;
+	Mon, 23 Sep 2019 12:21:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2C7ACAF0
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 69D76CC6
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 23 Sep 2019 10:39:24 +0000 (UTC)
+	Mon, 23 Sep 2019 12:21:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id BD6138AC
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E2875102
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 23 Sep 2019 10:39:23 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Mon, 23 Sep 2019 12:21:51 +0000 (UTC)
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+	[209.85.222.197])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 230123C919;
-	Mon, 23 Sep 2019 10:39:23 +0000 (UTC)
-Received: from [10.36.116.207] (ovpn-116-207.ams2.redhat.com [10.36.116.207])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 394635C1B2;
-	Mon, 23 Sep 2019 10:39:21 +0000 (UTC)
-Subject: Re: [PATCH RFC v3 1/9] ACPI: NUMA: export pxm_to_node
-To: Michal Hocko <mhocko@kernel.org>
-References: <20190919142228.5483-1-david@redhat.com>
-	<20190919142228.5483-2-david@redhat.com>
-	<f4d8204e-71a1-855e-3992-35f7ec90440c@redhat.com>
-	<20190923103655.GG6016@dhcp22.suse.cz>
-From: David Hildenbrand <david@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
-	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
-	SE+xAvmumFBY
-Organization: Red Hat GmbH
-Message-ID: <9299e86e-9d11-1cba-59ef-1f30d35239a0@redhat.com>
-Date: Mon, 23 Sep 2019 12:39:20 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	by mx1.redhat.com (Postfix) with ESMTPS id 16FBE63704
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 23 Sep 2019 12:21:51 +0000 (UTC)
+Received: by mail-qk1-f197.google.com with SMTP id s3so17327836qkd.6
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 23 Sep 2019 05:21:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=a9/IjKSOTtP+H0DwvJWJwjvwhzIswSQaCoNDgf8fYiY=;
+	b=kEx1HvXTuERwzy4Q8Ok7MyTaqaFy65aR4zFg2+Vgt33f31ENkaKJQKTLLRXlxclSzH
+	nGulX9SP4z/9BYLCzSuZS6XMe46OprAxL00HkMgc3mHo5x1jd+XsTUS1KWKXXGw/qaC/
+	lMkXqXnfrG50+QENIGSb1QEF+yBoIFclSChgk+DV9X+HRjrFRScmvwv/93/+qbmNhGie
+	0F21W7OudfdezZxV8ZRVHfR2BFBrpALDzds5VxhL1LTwBCr4n/5MNIcyQn7FnSPJZfmN
+	v+cUgPQJn4wu1tKZ30X+AoCsR1CLPqsBOz3ES8MrGUgrL77FyaP60ZbzZAE0d+xjyVel
+	jiCw==
+X-Gm-Message-State: APjAAAXHmUuHKi8gCIU/trYtniAx6tcCaeUK07Ppj8JYAt+hYgG2gG69
+	rAVx04p2GRW3ykiUhAKVSb8I9itTuc1ZZRsPA7YX8wYPypS8E82/v4C3+ArRqNXXUpJIbeLAtnN
+	zEPMwFuf1yOlzu4UDnvSo5afghZYxhJANEOfimrIHcQ==
+X-Received: by 2002:ac8:7117:: with SMTP id z23mr16276202qto.309.1569241310360;
+	Mon, 23 Sep 2019 05:21:50 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqy19kCOwHbgejDjIiixAFXfW0feeppk9Ux+t6GtFmBM+eqf5FZ/rCyZVT2dupdlVrgcrW4SDA==
+X-Received: by 2002:ac8:7117:: with SMTP id z23mr16276147qto.309.1569241310042;
+	Mon, 23 Sep 2019 05:21:50 -0700 (PDT)
+Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
+	by smtp.gmail.com with ESMTPSA id
+	o38sm6573805qtc.39.2019.09.23.05.21.38
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 23 Sep 2019 05:21:48 -0700 (PDT)
+Date: Mon, 23 Sep 2019 08:21:34 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [RFC PATCH V2 0/6] mdev based hardware virtio offloading support
+Message-ID: <20190923074913-mutt-send-email-mst@kernel.org>
+References: <20190920082050.19352-1-jasowang@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190923103655.GG6016@dhcp22.suse.cz>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.39]);
-	Mon, 23 Sep 2019 10:39:23 +0000 (UTC)
+Content-Disposition: inline
+In-Reply-To: <20190920082050.19352-1-jasowang@redhat.com>
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Andrea Arcangeli <aarcange@redhat.com>, linux-acpi@vger.kernel.org,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
-	Len Brown <lenb@kernel.org>
+Cc: kvm@vger.kernel.org, airlied@linux.ie, joonas.lahtinen@linux.intel.com,
+	heiko.carstens@de.ibm.com, dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, kwankhede@nvidia.com,
+	rob.miller@broadcom.com, linux-s390@vger.kernel.org,
+	sebott@linux.ibm.com, lulu@redhat.com, eperezma@redhat.com,
+	pasic@linux.ibm.com, borntraeger@de.ibm.com,
+	haotian.wang@sifive.com, zhi.a.wang@intel.com,
+	farman@linux.ibm.com, idos@mellanox.com, gor@linux.ibm.com,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	xiao.w.wang@intel.com, freude@linux.ibm.com,
+	zhenyuw@linux.intel.com, zhihong.wang@intel.com,
+	rodrigo.vivi@intel.com, intel-gvt-dev@lists.freedesktop.org,
+	akrowiak@linux.ibm.com, oberpar@linux.ibm.com,
+	pmorel@linux.ibm.com, netdev@vger.kernel.org, cohuck@redhat.com,
+	linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
+	daniel@ffwll.ch, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -115,44 +98,92 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 23.09.19 12:36, Michal Hocko wrote:
-> On Mon 23-09-19 12:13:11, David Hildenbrand wrote:
->> On 19.09.19 16:22, David Hildenbrand wrote:
->>> Will be needed by virtio-mem to identify the node from a pxm.
->>>
->>> Cc: "Rafael J. Wysocki" <rjw@rjwysocki.net>
->>> Cc: Len Brown <lenb@kernel.org>
->>> Cc: linux-acpi@vger.kernel.org
->>> Signed-off-by: David Hildenbrand <david@redhat.com>
->>> ---
->>>  drivers/acpi/numa.c | 1 +
->>>  1 file changed, 1 insertion(+)
->>>
->>> diff --git a/drivers/acpi/numa.c b/drivers/acpi/numa.c
->>> index eadbf90e65d1..d5847fa7ac69 100644
->>> --- a/drivers/acpi/numa.c
->>> +++ b/drivers/acpi/numa.c
->>> @@ -35,6 +35,7 @@ int pxm_to_node(int pxm)
->>>  		return NUMA_NO_NODE;
->>>  	return pxm_to_node_map[pxm];
->>>  }
->>> +EXPORT_SYMBOL(pxm_to_node);
->>
->> FWIW, this is a fairly old patch I dragged along and I think I'll
->> convert this to EXPORT_SYMBOL_GPL now that I know better :)
+On Fri, Sep 20, 2019 at 04:20:44PM +0800, Jason Wang wrote:
+> Hi all:
 > 
-> All other exports in this file are EXPORT_SYMBOL. Why is this one
-> considered special to restrict the access?
+> There are hardware that can do virtio datapath offloading while having
+> its own control path. This path tries to implement a mdev based
+> unified API to support using kernel virtio driver to drive those
+> devices. This is done by introducing a new mdev transport for virtio
+> (virtio_mdev) and register itself as a new kind of mdev driver. Then
+> it provides a unified way for kernel virtio driver to talk with mdev
+> device implementation.
+
+This is actually simple enough that I'm inclined to just
+put this into linux-next.
+This mixes virtio and vfio so the code can thinkably
+be merged through either tree.
+Alex, any strong opinions on any of this?
+
+> Though the series only contain kernel driver support, the goal is to
+> make the transport generic enough to support userspace drivers. This
+> means vhost-mdev[1] could be built on top as well by resuing the
+> transport.
 > 
-
-Uh, so I did actually use my brain two years ago back when I was
-crafting this patch :)
-
--- 
-
-Thanks,
-
-David / dhildenb
+> A sample driver is also implemented which simulate a virito-net
+> loopback ethernet device on top of vringh + workqueue. This could be
+> used as a reference implementation for real hardware driver.
+> 
+> Consider mdev framework only support VFIO device and driver right now,
+> this series also extend it to support other types. This is done
+> through introducing class id to the device and pairing it with
+> id_talbe claimed by the driver. On top, this seris also decouple
+> device specific parents ops out of the common ones.
+> 
+> Pktgen test was done with virito-net + mvnet loop back device.
+> 
+> Please review.
+> 
+> Changes from V1:
+> 
+> - rename device id to class id
+> - add docs for class id and device specific ops (device_ops)
+> - split device_ops into seperate headers
+> - drop the mdev_set_dma_ops()
+> - use device_ops to implement the transport API, then it's not a part
+>   of UAPI any more
+> - use GFP_ATOMIC in mvnet sample device and other tweaks
+> - set_vring_base/get_vring_base support for mvnet device
+> 
+> Jason Wang (6):
+>   mdev: class id support
+>   mdev: introduce device specific ops
+>   mdev: introduce virtio device and its device ops
+>   virtio: introudce a mdev based transport
+>   vringh: fix copy direction of vringh_iov_push_kern()
+>   docs: Sample driver to demonstrate how to implement virtio-mdev
+>     framework
+> 
+>  .../driver-api/vfio-mediated-device.rst       |  11 +-
+>  drivers/gpu/drm/i915/gvt/kvmgt.c              |  17 +-
+>  drivers/s390/cio/vfio_ccw_ops.c               |  17 +-
+>  drivers/s390/crypto/vfio_ap_ops.c             |  14 +-
+>  drivers/vfio/mdev/Kconfig                     |   7 +
+>  drivers/vfio/mdev/Makefile                    |   1 +
+>  drivers/vfio/mdev/mdev_core.c                 |  21 +-
+>  drivers/vfio/mdev/mdev_driver.c               |  14 +
+>  drivers/vfio/mdev/mdev_private.h              |   1 +
+>  drivers/vfio/mdev/vfio_mdev.c                 |  37 +-
+>  drivers/vfio/mdev/virtio_mdev.c               | 418 +++++++++++
+>  drivers/vhost/vringh.c                        |   8 +-
+>  include/linux/mdev.h                          |  46 +-
+>  include/linux/mod_devicetable.h               |   8 +
+>  include/linux/vfio_mdev.h                     |  50 ++
+>  include/linux/virtio_mdev.h                   | 141 ++++
+>  samples/Kconfig                               |   7 +
+>  samples/vfio-mdev/Makefile                    |   1 +
+>  samples/vfio-mdev/mbochs.c                    |  19 +-
+>  samples/vfio-mdev/mdpy.c                      |  19 +-
+>  samples/vfio-mdev/mtty.c                      |  17 +-
+>  samples/vfio-mdev/mvnet.c                     | 688 ++++++++++++++++++
+>  22 files changed, 1473 insertions(+), 89 deletions(-)
+>  create mode 100644 drivers/vfio/mdev/virtio_mdev.c
+>  create mode 100644 include/linux/vfio_mdev.h
+>  create mode 100644 include/linux/virtio_mdev.h
+>  create mode 100644 samples/vfio-mdev/mvnet.c
+> 
+> -- 
+> 2.19.1
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
