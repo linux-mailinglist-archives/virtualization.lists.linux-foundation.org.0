@@ -2,74 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id E40EBBAEC9
-	for <lists.virtualization@lfdr.de>; Mon, 23 Sep 2019 09:58:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D220BAEE4
+	for <lists.virtualization@lfdr.de>; Mon, 23 Sep 2019 10:07:29 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EC8AEC64;
-	Mon, 23 Sep 2019 07:58:38 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 8596EC6E;
+	Mon, 23 Sep 2019 08:07:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CB277C00
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 73D45C37
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 23 Sep 2019 07:58:36 +0000 (UTC)
+	Mon, 23 Sep 2019 08:07:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5CBB38B9
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B45C489E
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 23 Sep 2019 07:58:36 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
-	[209.85.221.71])
+	Mon, 23 Sep 2019 08:07:22 +0000 (UTC)
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+	[209.85.222.198])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 82D127BDA5
+	by mx1.redhat.com (Postfix) with ESMTPS id 24C6A61D25
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 23 Sep 2019 07:58:35 +0000 (UTC)
-Received: by mail-wr1-f71.google.com with SMTP id q10so4508588wro.22
+	Mon, 23 Sep 2019 08:07:22 +0000 (UTC)
+Received: by mail-qk1-f198.google.com with SMTP id b67so16803239qkc.1
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 23 Sep 2019 00:58:35 -0700 (PDT)
+	Mon, 23 Sep 2019 01:07:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=9WKA+WhADA6m5tO2INYGO3d/2B7vs6iFqq3kcuFfazA=;
-	b=U6qsdLVTfenSW6E6X1MoEOBD9s2itaz0xaj9nvRt6VcyDKmTzFkgUBK4EOF0m7P3aJ
-	iJ+d3as9CwTepHWqTiujzkiKGnz4Ejs6zC4NpP4aHQwdqCx7QCu5dFxs6gkAxOWaKHpw
-	+cB0G25YYy9Tur6d8p2DMhazc+qYhd7MgISxDFCRq+RS45gN7bU8535NQNDSD5zn0wGO
-	rLQ5XjriM1x9TL9x3Fn680IFFiQRR+fFqDF7UMTKL1EhMCMJwHQYUas+vaxCyIESTkPv
-	85IMLVdT58YGE8bFeGYAY9Ze/rKhmBfRgRvu5D2x1XBY9C32guf33TpgGESpd4EEtj91
-	SxAQ==
-X-Gm-Message-State: APjAAAVnm+8Zer3YhFWJ8/TljmGWm8b3n2W06kJJG30jrdG+J+FVjyHf
-	6GUb54G7Xv5YmNSzN+sdA41X5Rmx05z8N2ASrvr6ox45Zd1DxAN8SE/EiDaH30WHIEhcN6YSXtk
-	RpBfLO9pEUJ6AIJ3g5rjVB40d3jeBkHaGXc/88UXi2g==
-X-Received: by 2002:a1c:6508:: with SMTP id z8mr13334119wmb.93.1569225514193; 
-	Mon, 23 Sep 2019 00:58:34 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqywRzpbSPc3I/T0HiQ3vLyqomtoGHN75D+xXsibaZU6MPSciXTHKp4KwamMtyvbmdFON3ncxg==
-X-Received: by 2002:a1c:6508:: with SMTP id z8mr13334103wmb.93.1569225513884; 
-	Mon, 23 Sep 2019 00:58:33 -0700 (PDT)
-Received: from steredhat (host170-61-dynamic.36-79-r.retail.telecomitalia.it.
-	[79.36.61.170]) by smtp.gmail.com with ESMTPSA id
-	l18sm11651891wrc.18.2019.09.23.00.58.32
+	:mime-version:content-disposition:in-reply-to;
+	bh=GtkVLxajS9qecd1iiLjWKYP8KasxkZAd70jCNiNzvoI=;
+	b=EwBMd4YZ5C1IffK5IELJJHadQz7nCAgiwScYKpq1iSvdUq0fk1TJpWKC+/XlrxS1Qa
+	AA7cokFl0sqz2cMzqnsC6EYP0rkd8ZX/E9V43xQSPLdltekeemad/hZ0WJFfA+x31hTP
+	Dyz3U2Ho4XtKc/gi+teBNC0N0TEz+eNJYeQrf2g39VghElbtyrfgPoKyAXxMUirIwfcE
+	k4GruH/RUzhz1kIJjyMxB6M3mxJ0EBJdd+XatU/JTuTPu+w/0xUMp3mVS3IaZ0kYPGG/
+	NbvJTDvQTxSEK6RbMJYuoxf+cp7VZQruJQBPWziJMDM0CDwUJeNQnvNkyaQYuxIoNPPZ
+	8CBw==
+X-Gm-Message-State: APjAAAWlFMuvNepBcPWIrRluzB5pObA/wzlXFJYF3sgNcc0PHa68zH/b
+	H6yIk891/4L11ZPvSp8ebM4RjtLrb/NoiwPa35oBkk3MtHAmQFK9ialJ+fhRiXXvNz+4DJYMR93
+	FRVshDx6pocT0EY0c86YWgngAqeFIqW68XANluSSE1Q==
+X-Received: by 2002:ac8:1767:: with SMTP id u36mr15795733qtk.152.1569226041435;
+	Mon, 23 Sep 2019 01:07:21 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqxTFCDVmbYMZjvOnYtH+mE9geB7di4826uJa+jSeyr2GrwRD/VkW9bYWy7gYlmWOdfHPTBHMg==
+X-Received: by 2002:ac8:1767:: with SMTP id u36mr15795722qtk.152.1569226041292;
+	Mon, 23 Sep 2019 01:07:21 -0700 (PDT)
+Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
+	by smtp.gmail.com with ESMTPSA id 60sm5445508qta.77.2019.09.23.01.07.18
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 23 Sep 2019 00:58:33 -0700 (PDT)
-Date: Mon, 23 Sep 2019 09:58:30 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Matias Ezequiel Vara Larsen <matiasevara@gmail.com>
-Subject: Re: [RFC] VSOCK: add support for MSG_PEEK
-Message-ID: <20190923075830.a6sjwffnkljmyyqm@steredhat>
-References: <1569174507-15267-1-git-send-email-matiasevara@gmail.com>
+	Mon, 23 Sep 2019 01:07:20 -0700 (PDT)
+Date: Mon, 23 Sep 2019 04:07:15 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: wangxu <wangxu72@huawei.com>
+Subject: Re: [PATCH] vhost: It's better to use size_t for the 3rd parameter
+	of vhost_exceeds_weight()
+Message-ID: <20190923040518-mutt-send-email-mst@kernel.org>
+References: <1569224801-101248-1-git-send-email-wangxu72@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1569174507-15267-1-git-send-email-matiasevara@gmail.com>
-User-Agent: NeoMutt/20180716
+In-Reply-To: <1569224801-101248-1-git-send-email-wangxu72@huawei.com>
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, stefanha@redhat.com,
-	davem@davemloft.net
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,129 +84,74 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Hi Matias,
-thanks for this patch!
-
-Since this patch only concerns virtio_transport,
-I'd use the 'vsock/virtio' prefix in the commit title:
-"vsock/virtio: add support for MSG_PEEK"
-
-Some comments below:
-
-On Sun, Sep 22, 2019 at 05:48:27PM +0000, Matias Ezequiel Vara Larsen wrote:
-> This patch adds support for MSG_PEEK. In such a case, packets are not
-> removed from the rx_queue and credit updates are not sent.
+On Mon, Sep 23, 2019 at 03:46:41PM +0800, wangxu wrote:
+> From: Wang Xu <wangxu72@huawei.com>
 > 
-> Signed-off-by: Matias Ezequiel Vara Larsen <matiasevara@gmail.com>
+> Caller of vhost_exceeds_weight(..., total_len) in drivers/vhost/net.c
+> usually pass size_t total_len, which may be affected by rx/tx package.
+> 
+> Signed-off-by: Wang Xu <wangxu72@huawei.com>
+
+
+Puts a bit more pressure on the register file ...
+why do we care? Is there some way that it can
+exceed INT_MAX?
+
 > ---
->  net/vmw_vsock/virtio_transport_common.c | 59 +++++++++++++++++++++++++++++++--
->  1 file changed, 56 insertions(+), 3 deletions(-)
+>  drivers/vhost/vhost.c | 4 ++--
+>  drivers/vhost/vhost.h | 7 ++++---
+>  2 files changed, 6 insertions(+), 5 deletions(-)
 > 
-> diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
-> index 94cc0fa..830e890 100644
-> --- a/net/vmw_vsock/virtio_transport_common.c
-> +++ b/net/vmw_vsock/virtio_transport_common.c
-> @@ -264,6 +264,59 @@ static int virtio_transport_send_credit_update(struct vsock_sock *vsk,
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index 36ca2cf..159223a 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -412,7 +412,7 @@ static void vhost_dev_free_iovecs(struct vhost_dev *dev)
 >  }
 >  
->  static ssize_t
-> +virtio_transport_stream_do_peek(struct vsock_sock *vsk,
-> +				struct msghdr *msg,
-> +				size_t len)
-> +{
-> +	struct virtio_vsock_sock *vvs = vsk->trans;
-> +	struct virtio_vsock_pkt *pkt;
-> +	size_t bytes, off = 0, total = 0;
-> +	int err = -EFAULT;
-> +
-> +	spin_lock_bh(&vvs->rx_lock);
-> +
-
-What about using list_for_each_entry() to cycle through the queued packets?
-
-> +	if (list_empty(&vvs->rx_queue)) {
-> +		spin_unlock_bh(&vvs->rx_lock);
-> +		return 0;
-> +	}
-> +
-> +	pkt = list_first_entry(&vvs->rx_queue,
-> +			       struct virtio_vsock_pkt, list);
-> +	do {
-
-pkt->off contains the offset inside the packet where the unread data starts.
-So here we should initialize 'off':
-
-		off = pkt->off;
-
-Or just use pkt->off later (without increasing it as in the dequeue).
-
-> +		bytes = len - total;
-> +		if (bytes > pkt->len - off)
-> +			bytes = pkt->len - off;
-> +
-> +		/* sk_lock is held by caller so no one else can dequeue.
-> +		 * Unlock rx_lock since memcpy_to_msg() may sleep.
-> +		 */
-> +		spin_unlock_bh(&vvs->rx_lock);
-> +
-> +		err = memcpy_to_msg(msg, pkt->buf + off, bytes);
-> +		if (err)
-> +			goto out;
-> +
-> +		spin_lock_bh(&vvs->rx_lock);
-> +
-> +		total += bytes;
-
-Using list_for_each_entry(), here we can just do:
-(or better, at the beginning of the cycle)
-
-		if (total == len)
-			break;
-
-removing the next part...
-
-> +		off += bytes;
-> +		if (off == pkt->len) {
-> +			pkt = list_next_entry(pkt, list);
-> +			off = 0;
-> +		}
-> +	} while ((total < len) && !list_is_first(&pkt->list, &vvs->rx_queue));
-
-...until here.
-
-> +
-> +	spin_unlock_bh(&vvs->rx_lock);
-> +
-> +	return total;
-> +
-> +out:
-> +	if (total)
-> +		err = total;
-> +	return err;
-> +}
-> +
-> +static ssize_t
->  virtio_transport_stream_do_dequeue(struct vsock_sock *vsk,
->  				   struct msghdr *msg,
->  				   size_t len)
-> @@ -330,9 +383,9 @@ virtio_transport_stream_dequeue(struct vsock_sock *vsk,
->  				size_t len, int flags)
+>  bool vhost_exceeds_weight(struct vhost_virtqueue *vq,
+> -			  int pkts, int total_len)
+> +			  int pkts, size_t total_len)
 >  {
->  	if (flags & MSG_PEEK)
-> -		return -EOPNOTSUPP;
-> -
-> -	return virtio_transport_stream_do_dequeue(vsk, msg, len);
-> +		return virtio_transport_stream_do_peek(vsk, msg, len);
-> +	else
-> +		return virtio_transport_stream_do_dequeue(vsk, msg, len);
->  }
->  EXPORT_SYMBOL_GPL(virtio_transport_stream_dequeue);
+>  	struct vhost_dev *dev = vq->dev;
+>  
+> @@ -454,7 +454,7 @@ static size_t vhost_get_desc_size(struct vhost_virtqueue *vq,
+>  
+>  void vhost_dev_init(struct vhost_dev *dev,
+>  		    struct vhost_virtqueue **vqs, int nvqs,
+> -		    int iov_limit, int weight, int byte_weight)
+> +		    int iov_limit, int weight, size_t byte_weight)
+>  {
+>  	struct vhost_virtqueue *vq;
+>  	int i;
+> diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
+> index e9ed272..8d80389d 100644
+> --- a/drivers/vhost/vhost.h
+> +++ b/drivers/vhost/vhost.h
+> @@ -172,12 +172,13 @@ struct vhost_dev {
+>  	wait_queue_head_t wait;
+>  	int iov_limit;
+>  	int weight;
+> -	int byte_weight;
+> +	size_t byte_weight;
+>  };
 >  
 
-The rest looks good to me!
 
-Thanks,
-Stefano
+This just costs extra memory, and value is never large,
+so I don't think this matters.
+
+> -bool vhost_exceeds_weight(struct vhost_virtqueue *vq, int pkts, int total_len);
+> +bool vhost_exceeds_weight(struct vhost_virtqueue *vq, int pkts,
+> +			  size_t total_len);
+>  void vhost_dev_init(struct vhost_dev *, struct vhost_virtqueue **vqs,
+> -		    int nvqs, int iov_limit, int weight, int byte_weight);
+> +		    int nvqs, int iov_limit, int weight, size_t byte_weight);
+>  long vhost_dev_set_owner(struct vhost_dev *dev);
+>  bool vhost_dev_has_owner(struct vhost_dev *dev);
+>  long vhost_dev_check_owner(struct vhost_dev *);
+> -- 
+> 1.8.5.6
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
