@@ -2,64 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CEB5BC48C
-	for <lists.virtualization@lfdr.de>; Tue, 24 Sep 2019 11:12:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F58FBC582
+	for <lists.virtualization@lfdr.de>; Tue, 24 Sep 2019 12:12:11 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2A2B2C83;
-	Tue, 24 Sep 2019 09:12:03 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 82CA0C6F;
+	Tue, 24 Sep 2019 10:12:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C07C1C79
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D912CAB9
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 24 Sep 2019 09:12:01 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.heh.ee (heh.ee [213.35.143.160])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4235E8A
+	Tue, 24 Sep 2019 10:12:02 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3B54D8BB
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 24 Sep 2019 09:11:59 +0000 (UTC)
-Received: from [0.0.0.0] (unknown [127.0.0.1])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	Tue, 24 Sep 2019 10:12:02 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.heh.ee (Postfix) with ESMTPSA id 28C8816D1A8;
-	Tue, 24 Sep 2019 12:11:57 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=ristioja.ee; s=mail;
-	t=1569316317; bh=+FTdeih0wbhelrsKafPiC+6qY12Mc34G72pLIoqYmiU=;
-	h=Subject:From:To:Cc:References:Date:In-Reply-To;
-	b=m53PpNduD1hhf1kZVpM5uW3cjTbX/ZkAuZniKln+7rLOnqU+GWzphvKGHDB49Lh19
-	vP4BxN9sfZmTzQbl5qCfm+/lyXwtR12dBPp56dszXqANLAorYn47JQfZAHZOn8QCsL
-	tEZNkP0EVv5sJ66Er7Z5YaF4bEjrw59bzxW6C7VE=
-Subject: Re: Xorg indefinitely hangs in kernelspace
-From: Jaak Ristioja <jaak@ristioja.ee>
-To: Gerd Hoffmann <kraxel@redhat.com>
-References: <92785039-0941-4626-610b-f4e3d9613069@ristioja.ee>
-	<20190905071407.47iywqcqomizs3yr@sirius.home.kraxel.org>
-	<e4b7d889-15f3-0c90-3b9f-d395344499c0@ristioja.ee>
-Openpgp: preference=signencrypt
-Autocrypt: addr=jaak@ristioja.ee; prefer-encrypt=mutual; keydata=
-	mDMEWyjlXBYJKwYBBAHaRw8BAQdABEPNmQfWmwZZXSl5vKnpI1UVtS4l2N9kv7KqyFYtfLe0
-	IEphYWsgUmlzdGlvamEgPGphYWtAcmlzdGlvamEuZWU+iJYEExYIAD4WIQTjaPCMFhRItZ2p
-	iV/uxscoTrbt3AUCWyjlXAIbIwUJA8OZNAULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRDu
-	xscoTrbt3OYPAP9l6ZjLh4qK2r/H1b+7a7qZIAjwf0o4AX6qvtX1WERxywEAhhtOHg+G8idL
-	FR08XPW7nlobl2qEHMnqBTqteSsz1gG4OARbKOVcEgorBgEEAZdVAQUBAQdAU6y3a2gcxTI+
-	bZgPkJjPXxr0tvuLpCqkIb/envF5ajADAQgHiH4EGBYIACYWIQTjaPCMFhRItZ2piV/uxsco
-	Trbt3AUCWyjlXAIbDAUJA8OZNAAKCRDuxscoTrbt3OG5AP0cd6gLbKVSBvSEgRNQ+BNk/1a5
-	lSQtocXAcwUx0X9h0gEAqIZ9u7pCWBlRTL+rij97VWWkB/jb1deZ2gExNhd6RAU=
-Message-ID: <ccafdbaf-7f8e-8616-5543-2a178bd63828@ristioja.ee>
-Date: Tue, 24 Sep 2019 12:12:16 +0300
-User-Agent: undefined
+	by mx1.redhat.com (Postfix) with ESMTPS id 1163330860BD;
+	Tue, 24 Sep 2019 10:12:01 +0000 (UTC)
+Received: from [10.72.12.44] (ovpn-12-44.pek2.redhat.com [10.72.12.44])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B7AF219C58;
+	Tue, 24 Sep 2019 10:11:39 +0000 (UTC)
+Subject: Re: [PATCH 1/6] mdev: class id support
+To: Alex Williamson <alex.williamson@redhat.com>
+References: <20190923130331.29324-1-jasowang@redhat.com>
+	<20190923130331.29324-2-jasowang@redhat.com>
+	<20190923100529.54568ad8@x1.home>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <e565c496-7ce8-5889-57c7-7356458c50d5@redhat.com>
+Date: Tue, 24 Sep 2019 18:11:37 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <e4b7d889-15f3-0c90-3b9f-d395344499c0@ristioja.ee>
-Content-Language: et-EE
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
+In-Reply-To: <20190923100529.54568ad8@x1.home>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.44]);
+	Tue, 24 Sep 2019 10:12:01 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
-	Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
-	Dave Airlie <airlied@redhat.com>
+Cc: kvm@vger.kernel.org, mst@redhat.com, airlied@linux.ie,
+	joonas.lahtinen@linux.intel.com, heiko.carstens@de.ibm.com,
+	dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, kwankhede@nvidia.com,
+	rob.miller@broadcom.com, linux-s390@vger.kernel.org,
+	sebott@linux.ibm.com, lulu@redhat.com, eperezma@redhat.com,
+	pasic@linux.ibm.com, borntraeger@de.ibm.com,
+	haotian.wang@sifive.com, zhi.a.wang@intel.com,
+	farman@linux.ibm.com, idos@mellanox.com, gor@linux.ibm.com,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	rodrigo.vivi@intel.com, xiao.w.wang@intel.com,
+	freude@linux.ibm.com, zhenyuw@linux.intel.com,
+	parav@mellanox.com, zhihong.wang@intel.com,
+	intel-gvt-dev@lists.freedesktop.org, akrowiak@linux.ibm.com,
+	oberpar@linux.ibm.com, netdev@vger.kernel.org, cohuck@redhat.com,
+	linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
+	daniel@ffwll.ch, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,155 +77,129 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 05.09.19 15:34, Jaak Ristioja wrote:
-> On 05.09.19 10:14, Gerd Hoffmann wrote:
->> On Tue, Aug 06, 2019 at 09:00:10PM +0300, Jaak Ristioja wrote:
->>> Hello!
->>>
->>> I'm writing to report a crash in the QXL / DRM code in the Linux kernel.
->>> I originally filed the issue on LaunchPad and more details can be found
->>> there, although I doubt whether these details are useful.
->>
->> Any change with kernel 5.3-rc7 ?
-> 
-> Didn't try. Did you change something? I could try, but I've done so
-> before and every time this bug manifests itself with MAJOR.MINOR-rc# I
-> get asked to try version MAJOR.(MINOR+1)-rc# so I guess I could as well
-> give up?
-> 
-> Alright, I'll install 5.3-rc7, but once more it might take some time for
-> this bug to expose itself.
-
-Just got the issue with 5.3.0-050300rc7-generic:
-
-[124212.547403] INFO: task Xorg:797 blocked for more than 120 seconds.
-[124212.548639]       Not tainted 5.3.0-050300rc7-generic #201909021831
-[124212.549839] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
-disables this message.
-[124212.547403] INFO: task Xorg:797 blocked for more than 120 seconds.
-[124212.548639]       Not tainted 5.3.0-050300rc7-generic #201909021831
-[124212.549839] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
-disables this message.
-[124212.551329] Xorg            D    0   797    773 0x00404004
-[124212.551331] Call Trace:
-[124212.551336]  __schedule+0x2b9/0x6c0
-[124212.551337]  schedule+0x42/0xb0
-[124212.551338]  schedule_preempt_disabled+0xe/0x10
-[124212.551340]  __ww_mutex_lock.isra.0+0x261/0x7f0
-[124212.551345]  ? ttm_bo_init+0x6b/0x100 [ttm]
-[124212.551346]  __ww_mutex_lock_slowpath+0x16/0x20
-[124212.551347]  ww_mutex_lock+0x38/0x90
-[124212.551352]  ttm_eu_reserve_buffers+0x1cc/0x2f0 [ttm]
-[124212.551371]  qxl_release_reserve_list+0x6d/0x150 [qxl]
-[124212.551373]  ? qxl_bo_pin+0xf4/0x190 [qxl]
-[124212.551375]  qxl_cursor_atomic_update+0x1ab/0x2e0 [qxl]
-[124212.551376]  ? qxl_bo_pin+0xf4/0x190 [qxl]
-[124212.551384]  drm_atomic_helper_commit_planes+0xd5/0x220 [drm_kms_helper]
-[124212.551388]  drm_atomic_helper_commit_tail+0x2c/0x70 [drm_kms_helper]
-[124212.551392]  commit_tail+0x68/0x70 [drm_kms_helper]
-[124212.551395]  drm_atomic_helper_commit+0x118/0x120 [drm_kms_helper]
-[124212.551407]  drm_atomic_commit+0x4a/0x50 [drm]
-[124212.551411]  drm_atomic_helper_update_plane+0xea/0x100 [drm_kms_helper]
-[124212.551418]  __setplane_atomic+0xcb/0x110 [drm]
-[124212.551428]  drm_mode_cursor_universal+0x140/0x260 [drm]
-[124212.551435]  drm_mode_cursor_common+0xcc/0x220 [drm]
-[124212.551441]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
-[124212.551447]  drm_mode_cursor2_ioctl+0xe/0x10 [drm]
-[124212.551452]  drm_ioctl_kernel+0xae/0xf0 [drm]
-[124212.551458]  drm_ioctl+0x234/0x3d0 [drm]
-[124212.551464]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
-[124212.551466]  ? timerqueue_add+0x5f/0xa0
-[124212.551469]  ? enqueue_hrtimer+0x3d/0x90
-[124212.551471]  do_vfs_ioctl+0x407/0x670
-[124212.551473]  ? fput+0x13/0x20
-[124212.551475]  ? __sys_recvmsg+0x88/0xa0
-[124212.551476]  ksys_ioctl+0x67/0x90
-[124212.551477]  __x64_sys_ioctl+0x1a/0x20
-[124212.551479]  do_syscall_64+0x5a/0x130
-[124212.551480]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-[124212.551481] RIP: 0033:0x7f07c79ee417
-[124212.551485] Code: Bad RIP value.
-[124212.551485] RSP: 002b:00007ffc6b1de1a8 EFLAGS: 00003246 ORIG_RAX:
-0000000000000010
-[124212.551486] RAX: ffffffffffffffda RBX: 00005612f109a610 RCX:
-00007f07c79ee417
-[124212.551487] RDX: 00007ffc6b1de1e0 RSI: 00000000c02464bb RDI:
-000000000000000e
-[124212.551487] RBP: 00007ffc6b1de1e0 R08: 0000000000000040 R09:
-0000000000000004
-[124212.551488] R10: 000000000000003f R11: 0000000000003246 R12:
-00000000c02464bb
-[124212.551488] R13: 000000000000000e R14: 0000000000000000 R15:
-00005612f10981d0
-[124333.376328] INFO: task Xorg:797 blocked for more than 241 seconds.
-[124333.377474]       Not tainted 5.3.0-050300rc7-generic #201909021831
-[124333.378609] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
-disables this message.
-[124333.376328] INFO: task Xorg:797 blocked for more than 241 seconds.
-[124333.377474]       Not tainted 5.3.0-050300rc7-generic #201909021831
-[124333.378609] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
-disables this message.
-[124333.380060] Xorg            D    0   797    773 0x00404004
-[124333.380062] Call Trace:
-[124333.380067]  __schedule+0x2b9/0x6c0
-[124333.380068]  schedule+0x42/0xb0
-[124333.380069]  schedule_preempt_disabled+0xe/0x10
-[124333.380070]  __ww_mutex_lock.isra.0+0x261/0x7f0
-[124333.380076]  ? ttm_bo_init+0x6b/0x100 [ttm]
-[124333.380077]  __ww_mutex_lock_slowpath+0x16/0x20
-[124333.380077]  ww_mutex_lock+0x38/0x90
-[124333.380080]  ttm_eu_reserve_buffers+0x1cc/0x2f0 [ttm]
-[124333.380083]  qxl_release_reserve_list+0x6d/0x150 [qxl]
-[124333.380085]  ? qxl_bo_pin+0xf4/0x190 [qxl]
-[124333.380087]  qxl_cursor_atomic_update+0x1ab/0x2e0 [qxl]
-[124333.380088]  ? qxl_bo_pin+0xf4/0x190 [qxl]
-[124333.380096]  drm_atomic_helper_commit_planes+0xd5/0x220 [drm_kms_helper]
-[124333.380101]  drm_atomic_helper_commit_tail+0x2c/0x70 [drm_kms_helper]
-[124333.380105]  commit_tail+0x68/0x70 [drm_kms_helper]
-[124333.380109]  drm_atomic_helper_commit+0x118/0x120 [drm_kms_helper]
-[124333.380128]  drm_atomic_commit+0x4a/0x50 [drm]
-[124333.380132]  drm_atomic_helper_update_plane+0xea/0x100 [drm_kms_helper]
-[124333.380140]  __setplane_atomic+0xcb/0x110 [drm]
-[124333.380147]  drm_mode_cursor_universal+0x140/0x260 [drm]
-[124333.380153]  drm_mode_cursor_common+0xcc/0x220 [drm]
-[124333.380160]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
-[124333.380166]  drm_mode_cursor2_ioctl+0xe/0x10 [drm]
-[124333.380171]  drm_ioctl_kernel+0xae/0xf0 [drm]
-[124333.380176]  drm_ioctl+0x234/0x3d0 [drm]
-[124333.380182]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
-[124333.380184]  ? timerqueue_add+0x5f/0xa0
-[124333.380186]  ? enqueue_hrtimer+0x3d/0x90
-[124333.380188]  do_vfs_ioctl+0x407/0x670
-[124333.380190]  ? fput+0x13/0x20
-[124333.380192]  ? __sys_recvmsg+0x88/0xa0
-[124333.380193]  ksys_ioctl+0x67/0x90
-[124333.380194]  __x64_sys_ioctl+0x1a/0x20
-[124333.380195]  do_syscall_64+0x5a/0x130
-[124333.380197]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-[124333.380198] RIP: 0033:0x7f07c79ee417
-[124333.380202] Code: Bad RIP value.
-[124333.380203] RSP: 002b:00007ffc6b1de1a8 EFLAGS: 00003246 ORIG_RAX:
-0000000000000010
-[124333.380204] RAX: ffffffffffffffda RBX: 00005612f109a610 RCX:
-00007f07c79ee417
-[124333.380204] RDX: 00007ffc6b1de1e0 RSI: 00000000c02464bb RDI:
-000000000000000e
-[124333.380205] RBP: 00007ffc6b1de1e0 R08: 0000000000000040 R09:
-0000000000000004
-[124333.380205] R10: 000000000000003f R11: 0000000000003246 R12:
-00000000c02464bb
-[124333.380206] R13: 000000000000000e R14: 0000000000000000 R15:
-00005612f10981d0
-
-
-Best regards,
-J
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvOS8yNCDkuIrljYgxMjowNSwgQWxleCBXaWxsaWFtc29uIHdyb3RlOgo+IE9uIE1v
+biwgMjMgU2VwIDIwMTkgMjE6MDM6MjYgKzA4MDAKPiBKYXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRo
+YXQuY29tPiB3cm90ZToKPgo+PiBNZGV2IGJ1cyBvbmx5IHN1cHBvcnRzIHZmaW8gZHJpdmVyIHJp
+Z2h0IG5vdywgc28gaXQgZG9lc24ndCBpbXBsZW1lbnQKPj4gbWF0Y2ggbWV0aG9kLiBCdXQgaW4g
+dGhlIGZ1dHVyZSwgd2UgbWF5IGFkZCBkcml2ZXJzIG90aGVyIHRoYW4gdmZpbywKPj4gb25lIGV4
+YW1wbGUgaXMgdmlydGlvLW1kZXZbMV0gZHJpdmVyLiBUaGlzIG1lYW5zIHdlIG5lZWQgdG8gYWRk
+IGRldmljZQo+PiBjbGFzcyBpZCBzdXBwb3J0IGluIGJ1cyBtYXRjaCBtZXRob2QgdG8gcGFpciB0
+aGUgbWRldiBkZXZpY2UgYW5kIG1kZXYKPj4gZHJpdmVyIGNvcnJlY3RseS4KPj4KPj4gU28gdGhp
+cyBwYXRjaCBhZGRzIGlkX3RhYmxlIHRvIG1kZXZfZHJpdmVyIGFuZCBjbGFzc19pZCBmb3IgbWRl
+dgo+PiBwYXJlbnQgd2l0aCB0aGUgbWF0Y2ggbWV0aG9kIGZvciBtZGV2IGJ1cy4KPj4KPj4gU2ln
+bmVkLW9mZi1ieTogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4KPj4gLS0tCj4+ICBE
+b2N1bWVudGF0aW9uL2RyaXZlci1hcGkvdmZpby1tZWRpYXRlZC1kZXZpY2UucnN0IHwgIDcgKysr
+KystLQo+PiAgZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0L2t2bWd0LmMgICAgICAgICAgICAgICAg
+ICB8ICAyICstCj4+ICBkcml2ZXJzL3MzOTAvY2lvL3ZmaW9fY2N3X29wcy5jICAgICAgICAgICAg
+ICAgICAgIHwgIDIgKy0KPj4gIGRyaXZlcnMvczM5MC9jcnlwdG8vdmZpb19hcF9vcHMuYyAgICAg
+ICAgICAgICAgICAgfCAgMyArKy0KPj4gIGRyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5jICAg
+ICAgICAgICAgICAgICAgICAgfCAxNCArKysrKysrKysrKystLQo+PiAgZHJpdmVycy92ZmlvL21k
+ZXYvbWRldl9kcml2ZXIuYyAgICAgICAgICAgICAgICAgICB8IDE0ICsrKysrKysrKysrKysrCj4+
+ICBkcml2ZXJzL3ZmaW8vbWRldi9tZGV2X3ByaXZhdGUuaCAgICAgICAgICAgICAgICAgIHwgIDEg
+Kwo+PiAgZHJpdmVycy92ZmlvL21kZXYvdmZpb19tZGV2LmMgICAgICAgICAgICAgICAgICAgICB8
+ICA2ICsrKysrKwo+PiAgaW5jbHVkZS9saW51eC9tZGV2LmggICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICB8ICA3ICsrKysrKy0KPj4gIGluY2x1ZGUvbGludXgvbW9kX2RldmljZXRhYmxlLmgg
+ICAgICAgICAgICAgICAgICAgfCAgOCArKysrKysrKwo+PiAgc2FtcGxlcy92ZmlvLW1kZXYvbWJv
+Y2hzLmMgICAgICAgICAgICAgICAgICAgICAgICB8ICAyICstCj4+ICBzYW1wbGVzL3ZmaW8tbWRl
+di9tZHB5LmMgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDIgKy0KPj4gIHNhbXBsZXMvdmZp
+by1tZGV2L210dHkuYyAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMiArLQo+PiAgMTMgZmls
+ZXMgY2hhbmdlZCwgNTkgaW5zZXJ0aW9ucygrKSwgMTEgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYg
+LS1naXQgYS9Eb2N1bWVudGF0aW9uL2RyaXZlci1hcGkvdmZpby1tZWRpYXRlZC1kZXZpY2UucnN0
+IGIvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL3ZmaW8tbWVkaWF0ZWQtZGV2aWNlLnJzdAo+PiBp
+bmRleCAyNWViN2Q1YjgzNGIuLjBlMDUyMDcyZTFkOCAxMDA2NDQKPj4gLS0tIGEvRG9jdW1lbnRh
+dGlvbi9kcml2ZXItYXBpL3ZmaW8tbWVkaWF0ZWQtZGV2aWNlLnJzdAo+PiArKysgYi9Eb2N1bWVu
+dGF0aW9uL2RyaXZlci1hcGkvdmZpby1tZWRpYXRlZC1kZXZpY2UucnN0Cj4+IEBAIC0xMDIsMTIg
+KzEwMiwxNCBAQCBzdHJ1Y3R1cmUgdG8gcmVwcmVzZW50IGEgbWVkaWF0ZWQgZGV2aWNlJ3MgZHJp
+dmVyOjoKPj4gICAgICAgICogQHByb2JlOiBjYWxsZWQgd2hlbiBuZXcgZGV2aWNlIGNyZWF0ZWQK
+Pj4gICAgICAgICogQHJlbW92ZTogY2FsbGVkIHdoZW4gZGV2aWNlIHJlbW92ZWQKPj4gICAgICAg
+ICogQGRyaXZlcjogZGV2aWNlIGRyaXZlciBzdHJ1Y3R1cmUKPj4gKyAgICAgICogQGlkX3RhYmxl
+OiB0aGUgaWRzIHNlcnZpY2VkIGJ5IHRoaXMgZHJpdmVyLgo+PiAgICAgICAgKi8KPj4gICAgICAg
+c3RydWN0IG1kZXZfZHJpdmVyIHsKPj4gIAkgICAgIGNvbnN0IGNoYXIgKm5hbWU7Cj4+ICAJICAg
+ICBpbnQgICgqcHJvYmUpICAoc3RydWN0IGRldmljZSAqZGV2KTsKPj4gIAkgICAgIHZvaWQgKCpy
+ZW1vdmUpIChzdHJ1Y3QgZGV2aWNlICpkZXYpOwo+PiAgCSAgICAgc3RydWN0IGRldmljZV9kcml2
+ZXIgICAgZHJpdmVyOwo+PiArCSAgICAgY29uc3Qgc3RydWN0IG1kZXZfY2xhc3NfaWQgKmlkX3Rh
+YmxlOwo+PiAgICAgICB9Owo+PiAgCj4+ICBBIG1lZGlhdGVkIGJ1cyBkcml2ZXIgZm9yIG1kZXYg
+c2hvdWxkIHVzZSB0aGlzIHN0cnVjdHVyZSBpbiB0aGUgZnVuY3Rpb24gY2FsbHMKPj4gQEAgLTEx
+Niw3ICsxMTgsNyBAQCB0byByZWdpc3RlciBhbmQgdW5yZWdpc3RlciBpdHNlbGYgd2l0aCB0aGUg
+Y29yZSBkcml2ZXI6Cj4+ICAqIFJlZ2lzdGVyOjoKPj4gIAo+PiAgICAgIGV4dGVybiBpbnQgIG1k
+ZXZfcmVnaXN0ZXJfZHJpdmVyKHN0cnVjdCBtZGV2X2RyaXZlciAqZHJ2LAo+PiAtCQkJCSAgIHN0
+cnVjdCBtb2R1bGUgKm93bmVyKTsKPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBzdHJ1Y3QgbW9kdWxlICpvd25lcik7Cj4+ICAKPj4gICogVW5yZWdpc3Rlcjo6Cj4+ICAK
+Pj4gQEAgLTE2Myw3ICsxNjUsOCBAQCBBIGRyaXZlciBzaG91bGQgdXNlIHRoZSBtZGV2X3BhcmVu
+dF9vcHMgc3RydWN0dXJlIGluIHRoZSBmdW5jdGlvbiBjYWxsIHRvCj4+ICByZWdpc3RlciBpdHNl
+bGYgd2l0aCB0aGUgbWRldiBjb3JlIGRyaXZlcjo6Cj4+ICAKPj4gIAlleHRlcm4gaW50ICBtZGV2
+X3JlZ2lzdGVyX2RldmljZShzdHJ1Y3QgZGV2aWNlICpkZXYsCj4+IC0JICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IG1kZXZfcGFyZW50X29wcyAqb3BzKTsKPj4g
+KwkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgbWRldl9wYXJl
+bnRfb3BzICpvcHMsCj4+ICsJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdTggY2xh
+c3NfaWQpOwo+PiAgCj4+ICBIb3dldmVyLCB0aGUgbWRldl9wYXJlbnRfb3BzIHN0cnVjdHVyZSBp
+cyBub3QgcmVxdWlyZWQgaW4gdGhlIGZ1bmN0aW9uIGNhbGwKPj4gIHRoYXQgYSBkcml2ZXIgc2hv
+dWxkIHVzZSB0byB1bnJlZ2lzdGVyIGl0c2VsZiB3aXRoIHRoZSBtZGV2IGNvcmUgZHJpdmVyOjoK
+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2d2dC9rdm1ndC5jIGIvZHJpdmVy
+cy9ncHUvZHJtL2k5MTUvZ3Z0L2t2bWd0LmMKPj4gaW5kZXggMjNhYTNlNTBjYmY4Li4xOWQ1MWEz
+NWYwMTkgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2d2dC9rdm1ndC5jCj4+
+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2d2dC9rdm1ndC5jCj4+IEBAIC0xNjI1LDcgKzE2
+MjUsNyBAQCBzdGF0aWMgaW50IGt2bWd0X2hvc3RfaW5pdChzdHJ1Y3QgZGV2aWNlICpkZXYsIHZv
+aWQgKmd2dCwgY29uc3Qgdm9pZCAqb3BzKQo+PiAgCQlyZXR1cm4gLUVGQVVMVDsKPj4gIAlpbnRl
+bF92Z3B1X29wcy5zdXBwb3J0ZWRfdHlwZV9ncm91cHMgPSBrdm1fdmdwdV90eXBlX2dyb3VwczsK
+Pj4gIAo+PiAtCXJldHVybiBtZGV2X3JlZ2lzdGVyX2RldmljZShkZXYsICZpbnRlbF92Z3B1X29w
+cyk7Cj4+ICsJcmV0dXJuIG1kZXZfcmVnaXN0ZXJfdmZpb19kZXZpY2UoZGV2LCAmaW50ZWxfdmdw
+dV9vcHMpOwo+PiAgfQo+PiAgCj4+ICBzdGF0aWMgdm9pZCBrdm1ndF9ob3N0X2V4aXQoc3RydWN0
+IGRldmljZSAqZGV2KQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9zMzkwL2Npby92ZmlvX2Njd19v
+cHMuYyBiL2RyaXZlcnMvczM5MC9jaW8vdmZpb19jY3dfb3BzLmMKPj4gaW5kZXggZjBkNzFhYjc3
+YzUwLi4yNDZmZjBmODA5NDQgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvczM5MC9jaW8vdmZpb19j
+Y3dfb3BzLmMKPj4gKysrIGIvZHJpdmVycy9zMzkwL2Npby92ZmlvX2Njd19vcHMuYwo+PiBAQCAt
+NTg4LDcgKzU4OCw3IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgbWRldl9wYXJlbnRfb3BzIHZmaW9f
+Y2N3X21kZXZfb3BzID0gewo+PiAgCj4+ICBpbnQgdmZpb19jY3dfbWRldl9yZWcoc3RydWN0IHN1
+YmNoYW5uZWwgKnNjaCkKPj4gIHsKPj4gLQlyZXR1cm4gbWRldl9yZWdpc3Rlcl9kZXZpY2UoJnNj
+aC0+ZGV2LCAmdmZpb19jY3dfbWRldl9vcHMpOwo+PiArCXJldHVybiBtZGV2X3JlZ2lzdGVyX3Zm
+aW9fZGV2aWNlKCZzY2gtPmRldiwgJnZmaW9fY2N3X21kZXZfb3BzKTsKPj4gIH0KPj4gIAo+PiAg
+dm9pZCB2ZmlvX2Njd19tZGV2X3VucmVnKHN0cnVjdCBzdWJjaGFubmVsICpzY2gpCj4+IGRpZmYg
+LS1naXQgYS9kcml2ZXJzL3MzOTAvY3J5cHRvL3ZmaW9fYXBfb3BzLmMgYi9kcml2ZXJzL3MzOTAv
+Y3J5cHRvL3ZmaW9fYXBfb3BzLmMKPj4gaW5kZXggNWMwZjUzYzZkZGU3Li43NDg3ZmMzOWQyYzUg
+MTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvczM5MC9jcnlwdG8vdmZpb19hcF9vcHMuYwo+PiArKysg
+Yi9kcml2ZXJzL3MzOTAvY3J5cHRvL3ZmaW9fYXBfb3BzLmMKPj4gQEAgLTEyOTUsNyArMTI5NSw4
+IEBAIGludCB2ZmlvX2FwX21kZXZfcmVnaXN0ZXIodm9pZCkKPj4gIHsKPj4gIAlhdG9taWNfc2V0
+KCZtYXRyaXhfZGV2LT5hdmFpbGFibGVfaW5zdGFuY2VzLCBNQVhfWkRFVl9FTlRSSUVTX0VYVCk7
+Cj4+ICAKPj4gLQlyZXR1cm4gbWRldl9yZWdpc3Rlcl9kZXZpY2UoJm1hdHJpeF9kZXYtPmRldmlj
+ZSwgJnZmaW9fYXBfbWF0cml4X29wcyk7Cj4+ICsJcmV0dXJuIG1kZXZfcmVnaXN0ZXJfdmZpb19k
+ZXZpY2UoJm1hdHJpeF9kZXYtPmRldmljZSwKPj4gKwkJCQkJICZ2ZmlvX2FwX21hdHJpeF9vcHMp
+Owo+PiAgfQo+PiAgCj4+ICB2b2lkIHZmaW9fYXBfbWRldl91bnJlZ2lzdGVyKHZvaWQpCj4+IGRp
+ZmYgLS1naXQgYS9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X2NvcmUuYyBiL2RyaXZlcnMvdmZpby9t
+ZGV2L21kZXZfY29yZS5jCj4+IGluZGV4IGI1NThkNGNmZDA4Mi4uYTAyYzI1NmEzNTE0IDEwMDY0
+NAo+PiAtLS0gYS9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X2NvcmUuYwo+PiArKysgYi9kcml2ZXJz
+L3ZmaW8vbWRldi9tZGV2X2NvcmUuYwo+PiBAQCAtMTM1LDExICsxMzUsMTQgQEAgc3RhdGljIGlu
+dCBtZGV2X2RldmljZV9yZW1vdmVfY2Ioc3RydWN0IGRldmljZSAqZGV2LCB2b2lkICpkYXRhKQo+
+PiAgICogbWRldl9yZWdpc3Rlcl9kZXZpY2UgOiBSZWdpc3RlciBhIGRldmljZQo+PiAgICogQGRl
+djogZGV2aWNlIHN0cnVjdHVyZSByZXByZXNlbnRpbmcgcGFyZW50IGRldmljZS4KPj4gICAqIEBv
+cHM6IFBhcmVudCBkZXZpY2Ugb3BlcmF0aW9uIHN0cnVjdHVyZSB0byBiZSByZWdpc3RlcmVkLgo+
+PiArICogQGlkOiBkZXZpY2UgaWQuCj4+ICAgKgo+PiAgICogQWRkIGRldmljZSB0byBsaXN0IG9m
+IHJlZ2lzdGVyZWQgcGFyZW50IGRldmljZXMuCj4+ICAgKiBSZXR1cm5zIGEgbmVnYXRpdmUgdmFs
+dWUgb24gZXJyb3IsIG90aGVyd2lzZSAwLgo+PiAgICovCj4+IC1pbnQgbWRldl9yZWdpc3Rlcl9k
+ZXZpY2Uoc3RydWN0IGRldmljZSAqZGV2LCBjb25zdCBzdHJ1Y3QgbWRldl9wYXJlbnRfb3BzICpv
+cHMpCj4+ICtpbnQgbWRldl9yZWdpc3Rlcl9kZXZpY2Uoc3RydWN0IGRldmljZSAqZGV2LAo+PiAr
+CQkJIGNvbnN0IHN0cnVjdCBtZGV2X3BhcmVudF9vcHMgKm9wcywKPj4gKwkJCSB1OCBjbGFzc19p
+ZCkKPj4gIHsKPj4gIAlpbnQgcmV0Owo+PiAgCXN0cnVjdCBtZGV2X3BhcmVudCAqcGFyZW50Owo+
+PiBAQCAtMTc1LDYgKzE3OCw3IEBAIGludCBtZGV2X3JlZ2lzdGVyX2RldmljZShzdHJ1Y3QgZGV2
+aWNlICpkZXYsIGNvbnN0IHN0cnVjdCBtZGV2X3BhcmVudF9vcHMgKm9wcykKPj4gIAo+PiAgCXBh
+cmVudC0+ZGV2ID0gZGV2Owo+PiAgCXBhcmVudC0+b3BzID0gb3BzOwo+PiArCXBhcmVudC0+Y2xh
+c3NfaWQgPSBjbGFzc19pZDsKPj4gIAo+IEkgZG9uJ3QgdGhpbmsgd2Ugd2FudCB0byB0aWUgdGhl
+IGNsYXNzX2lkIHRvIHRoZSBwYXJlbnQuICBtZGV2IHBhcmVudAo+IGRldmljZXMgY2FuIGNyZWF0
+ZSB2YXJpb3VzIHR5cGVzIG9mIGRldmljZXMsIHNvbWUgbWlnaHQgYmUgdmlydGlvLCBzb21lCj4g
+bWlnaHQgYmUgdmZpby4gIEkgdGhpbmsgdGhlIGNvdmVyIGxldHRlciBldmVuIHN1Z2dlc3RzIHRo
+YXQncyBhCj4gZGlyZWN0aW9uIHRoZXNlIHZpcnRpbyBkZXZpY2VzIG1pZ2h0IGJlIGhlYWRlZC4g
+IEl0IHNlZW1zIHRoZSBjbGFzcwo+IHNob3VsZCBiZSBvbiB0aGUgcmVzdWx0aW5nIGRldmljZSBp
+dHNlbGYuICBUaGF0IGFsc28gc3VnZ2VzdHMgdGhhdCBhdAo+IHRoZSBwYXJlbnQgd2UgY2Fubm90
+IGhhdmUgYSBzaW5nbGUgZGV2aWNlX29wcywgdGhlIG9wcyB1c2VkIHdpbGwgZGVwZW5kCj4gb24g
+dGhlIHR5cGUgb2YgZGV2aWNlIGNyZWF0ZWQuICBQZXJoYXBzIHRoYXQgbWVhbnMgd2UgbmVlZCB2
+ZmlvX29wcwo+IGFsb25nc2lkZSB2aXJ0aW9fb3BzLCByYXRoZXIgdGhhbiBhIGNvbW1vbiBkZXZp
+Y2Vfb3BzLiAgVGhhbmtzLAo+Cj4gQWxleAo+CgpZZXMsIHdpbGwgZG8gaXQgaW4gVjIuCgpUaGFu
+a3MKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1
+YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0
+aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5m
+by92aXJ0dWFsaXphdGlvbg==
