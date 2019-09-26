@@ -2,70 +2,51 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E2E4BF62C
-	for <lists.virtualization@lfdr.de>; Thu, 26 Sep 2019 17:47:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7B30BF6A8
+	for <lists.virtualization@lfdr.de>; Thu, 26 Sep 2019 18:26:24 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0F4B3CA1;
-	Thu, 26 Sep 2019 15:47:12 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 07438D67;
+	Thu, 26 Sep 2019 16:26:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EC7398BF
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id F2C83AD1
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 26 Sep 2019 15:47:10 +0000 (UTC)
+	Thu, 26 Sep 2019 16:26:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5AB4E8B3
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 751E38CF
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 26 Sep 2019 15:47:10 +0000 (UTC)
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
-	[209.85.222.199])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	Thu, 26 Sep 2019 16:26:17 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id A73B02CE955
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 26 Sep 2019 15:47:09 +0000 (UTC)
-Received: by mail-qk1-f199.google.com with SMTP id k67so2841429qkc.3
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 26 Sep 2019 08:47:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=1yylcDQZ8r+5S5Gz7KG/29d/sKE5Q6ALcFR6qx+xQGA=;
-	b=KeNVzKNThLxScF7N1iSIwdmTdnyXsshAhnJX2oBFlxw2RFpPhLc/m5TzbAT65EcmsV
-	+6YDXodZf7/Z8FNzfGqQThaT5dvmOArZXS22t7jGe/7JOkMJE+dzzGb2LhlViRPGWD0V
-	s6TDimPoneMJcloa4U5emUdI+/z4MnaF0oUlDTWfM/K2mkUnuuDx16cA4cc0ymHRXouy
-	j8MKr4KJ5gSlZsw2m48MESY8Qx8OqHJ6R6e1ToGaFdEdPDsK0fJZikXwegFq3cRJ/dHD
-	+1QjnneiffsgsZXKcRc3TgQfLK7Lq8G06o64Tv7OlWrVKw8yxcBF+2gXryRzL5ICVx/m
-	YCYw==
-X-Gm-Message-State: APjAAAWLAYq4MLRxbEMOSb9GWbToR8nx/8xDTfQq1Hh8LsS1hxj4J7FF
-	s2ngJeYpVE401gOY96bWaZgYkmieOjzT688fi09/EW83s1pJMCjUxGU9haQezUHseQOX9W4grLZ
-	dF9Ry3Dj0kW5cGHMpb7I+sX4/5zKtyV5tgjFx6XDPkA==
-X-Received: by 2002:aed:2ce7:: with SMTP id g94mr4560945qtd.255.1569512828849; 
-	Thu, 26 Sep 2019 08:47:08 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxXMLxPwOJSKW86VAhg+FA92BB2rFSPpVANRc+kAYWWIKkKpR3hJkzdDy+E5U7AhQ5WZnHHfA==
-X-Received: by 2002:aed:2ce7:: with SMTP id g94mr4560904qtd.255.1569512828546; 
-	Thu, 26 Sep 2019 08:47:08 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-40-226.red.bezeqint.net. [79.176.40.226])
-	by smtp.gmail.com with ESMTPSA id a4sm1354995qkf.91.2019.09.26.08.46.58
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 26 Sep 2019 08:47:07 -0700 (PDT)
-Date: Thu, 26 Sep 2019 11:46:55 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alex Williamson <alex.williamson@redhat.com>
+	by mx1.redhat.com (Postfix) with ESMTPS id 4A492315C027;
+	Thu, 26 Sep 2019 16:26:16 +0000 (UTC)
+Received: from x1.home (ovpn-118-102.phx2.redhat.com [10.3.118.102])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 42F615D9D5;
+	Thu, 26 Sep 2019 16:26:08 +0000 (UTC)
+Date: Thu, 26 Sep 2019 10:26:08 -0600
+From: Alex Williamson <alex.williamson@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
 Subject: Re: [PATCH V2 5/8] mdev: introduce device specific ops
-Message-ID: <20190926113958-mutt-send-email-mst@kernel.org>
+Message-ID: <20190926102608.5ec81923@x1.home>
+In-Reply-To: <20190926113958-mutt-send-email-mst@kernel.org>
 References: <20190924135332.14160-1-jasowang@redhat.com>
 	<20190924135332.14160-6-jasowang@redhat.com>
 	<20190924170638.064d85f7@x1.home>
 	<AADFC41AFE54684AB9EE6CBC0274A5D19D58F754@SHSMSX104.ccr.corp.intel.com>
 	<CAJPjb1+i7jb0aVfr=7CDuUBpeo_w3wAfTrnmuLVJ-h+qOV+1hw@mail.gmail.com>
 	<20190925103028.1f2edf03@x1.home>
+	<20190926113958-mutt-send-email-mst@kernel.org>
+Organization: Red Hat
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190925103028.1f2edf03@x1.home>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.41]);
+	Thu, 26 Sep 2019 16:26:16 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -96,7 +77,7 @@ Cc: "christophe.de.dinechin@gmail.com" <christophe.de.dinechin@gmail.com>,
 	"Wang, Xiao W" <xiao.w.wang@intel.com>,
 	"freude@linux.ibm.com" <freude@linux.ibm.com>,
 	"zhenyuw@linux.intel.com" <zhenyuw@linux.intel.com>,
-	"parav@mellanox.com" <parav@mellanox.com>, "Vivi,
+	"parav@mellanox.com" <parav@mellanox.com>, "Vivi, 
 	Rodrigo" <rodrigo.vivi@intel.com>, "intel-gvt-dev@lists.freedesktop.org"
 	<intel-gvt-dev@lists.freedesktop.org>, "Zhu,
 	Lingshan" <lingshan.zhu@intel.com>,
@@ -124,90 +105,98 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Sep 25, 2019 at 10:30:28AM -0600, Alex Williamson wrote:
-> On Wed, 25 Sep 2019 10:11:00 -0400
-> Rob Miller <rob.miller@broadcom.com> wrote:
-> > > > On Tue, 24 Sep 2019 21:53:29 +0800
-> > > > Jason Wang <jasowang@redhat.com> wrote:
-> > > > > diff --git a/drivers/vfio/mdev/vfio_mdev.c  
-> > > > b/drivers/vfio/mdev/vfio_mdev.c  
-> > > > > index 891cf83a2d9a..95efa054442f 100644
-> > > > > --- a/drivers/vfio/mdev/vfio_mdev.c
-> > > > > +++ b/drivers/vfio/mdev/vfio_mdev.c
-> > > > > @@ -14,6 +14,7 @@
-> > > > >  #include <linux/slab.h>
-> > > > >  #include <linux/vfio.h>
-> > > > >  #include <linux/mdev.h>
-> > > > > +#include <linux/vfio_mdev.h>
-> > > > >
-> > > > >  #include "mdev_private.h"
-> > > > >
-> > > > > @@ -24,16 +25,16 @@
-> > > > >  static int vfio_mdev_open(void *device_data)
-> > > > >  {
-> > > > >     struct mdev_device *mdev = device_data;
-> > > > > -   struct mdev_parent *parent = mdev->parent;
-> > > > > +   const struct vfio_mdev_device_ops *ops =  
-> > > > mdev_get_dev_ops(mdev);  
-> > > > >     int ret;
-> > > > >
-> > > > > -   if (unlikely(!parent->ops->open))
-> > > > > +   if (unlikely(!ops->open))
-> > > > >             return -EINVAL;
-> > > > >
-> > > > >     if (!try_module_get(THIS_MODULE))
-> > > > >             return -ENODEV;  
-> > >  
+On Thu, 26 Sep 2019 11:46:55 -0400
+"Michael S. Tsirkin" <mst@redhat.com> wrote:
+
+> On Wed, Sep 25, 2019 at 10:30:28AM -0600, Alex Williamson wrote:
+> > On Wed, 25 Sep 2019 10:11:00 -0400
+> > Rob Miller <rob.miller@broadcom.com> wrote:  
+> > > > > On Tue, 24 Sep 2019 21:53:29 +0800
+> > > > > Jason Wang <jasowang@redhat.com> wrote:  
+> > > > > > diff --git a/drivers/vfio/mdev/vfio_mdev.c    
+> > > > > b/drivers/vfio/mdev/vfio_mdev.c    
+> > > > > > index 891cf83a2d9a..95efa054442f 100644
+> > > > > > --- a/drivers/vfio/mdev/vfio_mdev.c
+> > > > > > +++ b/drivers/vfio/mdev/vfio_mdev.c
+> > > > > > @@ -14,6 +14,7 @@
+> > > > > >  #include <linux/slab.h>
+> > > > > >  #include <linux/vfio.h>
+> > > > > >  #include <linux/mdev.h>
+> > > > > > +#include <linux/vfio_mdev.h>
+> > > > > >
+> > > > > >  #include "mdev_private.h"
+> > > > > >
+> > > > > > @@ -24,16 +25,16 @@
+> > > > > >  static int vfio_mdev_open(void *device_data)
+> > > > > >  {
+> > > > > >     struct mdev_device *mdev = device_data;
+> > > > > > -   struct mdev_parent *parent = mdev->parent;
+> > > > > > +   const struct vfio_mdev_device_ops *ops =    
+> > > > > mdev_get_dev_ops(mdev);    
+> > > > > >     int ret;
+> > > > > >
+> > > > > > -   if (unlikely(!parent->ops->open))
+> > > > > > +   if (unlikely(!ops->open))
+> > > > > >             return -EINVAL;
+> > > > > >
+> > > > > >     if (!try_module_get(THIS_MODULE))
+> > > > > >             return -ENODEV;    
+> > > >    
+> > >   
+> > > RJM>] My understanding lately is that this call to    
+> > > try_module_get(THIS_MODULE) is no longer needed as is considered as a
+> > > latent bug.
+> > > Quote from
+> > > https://stackoverflow.com/questions/1741415/linux-kernel-modules-when-to-use-try-module-get-module-put
+> > >  :
+> > > There are a number of uses of try_module_get(THIS_MODULE) in the kernel
+> > > source but most if not all of them are latent bugs that should be cleaned
+> > > up.  
 > > 
-> > RJM>] My understanding lately is that this call to  
-> > try_module_get(THIS_MODULE) is no longer needed as is considered as a
-> > latent bug.
-> > Quote from
-> > https://stackoverflow.com/questions/1741415/linux-kernel-modules-when-to-use-try-module-get-module-put
-> >  :
-> > There are a number of uses of try_module_get(THIS_MODULE) in the kernel
-> > source but most if not all of them are latent bugs that should be cleaned
-> > up.
+> > This use seems to fall exactly into the case where it is necessary, the
+> > open here is not a direct VFS call, it's an internal interface between
+> > modules.  The user is interacting with filesystem objects from the vfio
+> > module and the module reference we're trying to acquire here is to the
+> > vfio-mdev module.  Thanks,
+> > 
+> > Alex  
 > 
-> This use seems to fall exactly into the case where it is necessary, the
-> open here is not a direct VFS call, it's an internal interface between
-> modules.  The user is interacting with filesystem objects from the vfio
-> module and the module reference we're trying to acquire here is to the
-> vfio-mdev module.  Thanks,
 > 
-> Alex
+> I think the latent bug refers not to module get per se,
+> but to the module_put tied to it. E.g.:
+> 
+>  static void vfio_mdev_release(void *device_data)
+>  {
+>         struct mdev_device *mdev = device_data;
+>         struct mdev_parent *parent = mdev->parent;
+> 
+>         if (likely(parent->ops->release))
+>                 parent->ops->release(mdev);
+> 
+>         module_put(THIS_MODULE);
+> 
+> Does anything prevent the module from unloading at this point?
+> if not then ...
+> 
+> 
+>  }
+> 
+> it looks like the implicit return (with instructions for argument pop
+> and functuon return) here can get overwritten on module
+> unload, causing a crash when executed.
+> 
+> IOW there's generally no way for module to keep a reference
+> to itself: it can take a reference but it needs someone else
+> to keep it and put.
 
+I'd always assumed this would exit cleanly, but perhaps there is a
+latent race there.  In any case, taking a module reference within the
+module in this case is better than not doing so, as the latter would
+potentially allow the module to be removed at any point in time, while
+the former only seems to expose acquire and release gaps.  Add it to
+the todo list.  Thanks,
 
-I think the latent bug refers not to module get per se,
-but to the module_put tied to it. E.g.:
-
- static void vfio_mdev_release(void *device_data)
- {
-        struct mdev_device *mdev = device_data;
-        struct mdev_parent *parent = mdev->parent;
-
-        if (likely(parent->ops->release))
-                parent->ops->release(mdev);
-
-        module_put(THIS_MODULE);
-
-Does anything prevent the module from unloading at this point?
-if not then ...
-
-
- }
-
-it looks like the implicit return (with instructions for argument pop
-and functuon return) here can get overwritten on module
-unload, causing a crash when executed.
-
-IOW there's generally no way for module to keep a reference
-to itself: it can take a reference but it needs someone else
-to keep it and put.
-
-
--- 
-MST
+Alex
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
