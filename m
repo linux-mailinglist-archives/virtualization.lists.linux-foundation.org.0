@@ -2,74 +2,71 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11899C066E
-	for <lists.virtualization@lfdr.de>; Fri, 27 Sep 2019 15:37:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1BC7C08BC
+	for <lists.virtualization@lfdr.de>; Fri, 27 Sep 2019 17:39:06 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id A8F741010;
-	Fri, 27 Sep 2019 13:37:05 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 796FFBA0;
+	Fri, 27 Sep 2019 15:39:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6DA5BB43
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7C2BFB4B
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 27 Sep 2019 13:37:03 +0000 (UTC)
+	Fri, 27 Sep 2019 15:38:59 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 31E6A8CB
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0D8888AB
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 27 Sep 2019 13:37:03 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id b128so1630478pfa.1
+	Fri, 27 Sep 2019 15:38:58 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id l3so3510909wru.7
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 27 Sep 2019 06:37:03 -0700 (PDT)
+	Fri, 27 Sep 2019 08:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=1T4A7cJVny4HjoF6OxbZSvzZ4Y1UkSovrypWVv8gRbg=;
-	b=SWHoTDkzvBeJqcKPvZyrZkqOXVuUR6EBz5Su5woWjy5/rlfjYqhJ2wrRV6QL49nhm/
-	bmfVbWGQ80YsKhDtpdgxr2JPTeVvzmLjzo11RPLSYELKno6cG5gS39en6vGS9Ws2tI7y
-	Q3teZwh7rTRO7526AepG31Ox+EfGaE91R319M/5yyI6oLyKjFsqd3567mzORAQMh2czy
-	spYWVD18HN6drbWfdRn4j66y1sn1JYs4bSb8ScSeHaw2j+X7xERn4eSJHxbWA4Rikw/d
-	X00ScOTt2TAIH1I3zTPkCQ039dg8kk5sOkG9lPv74ltkOD0B53ydCSqlQO1JNKKkRMS1
-	Ppyw==
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=WqPr3BMmdkR12PG5X2wdgv7YTpsF0EmWkLgo4C5gGm8=;
+	b=bMQzQjPTyXrKf1113+kG9uJO8Hd1tIflR8zyeoX13anoPf8nfo7xZktTt00/8etwVx
+	f/86eU6y2vPTGWaqDrWTFBfeaUweWBKJVnSS5hkOwuSa1uodSyzGnITqsdwzp/EImrUr
+	Hj1y7tmAXpfSH9RJ2v66esgn2iBI82gvW2A7NCSfd6BFvWq3nUFGTU29pv7n4CPB1umv
+	pZH4xLWfX5teemBDnprRU+viEUq1AyriytkLocg5STufvSIFP3R4Hq5EwGeGFyaQKB1I
+	GkHy2vxG6imthBzN7yzeYk4th90kYWiphjViudxatmJ3SO6oMbT54ZWWAEUKQsCXf6yS
+	TD3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=1T4A7cJVny4HjoF6OxbZSvzZ4Y1UkSovrypWVv8gRbg=;
-	b=Bpm5NKJOYm2LXHb3m7hBPu3KPmE1ZmNvPe5A/7Q0U73pmLww+3qK7tUfqlc5msxfVb
-	h3yrRyZEfYohQ6QIt2E/8niB6R+u0KvUXTCQFitdjv9DsQJe8ClDO3NQ5FOtqCxV7G4e
-	lI/A5Kj+kS9RnNGCGnhUYblCqoU7DKaB5H0x9+95Jrr9DFJ83hI7TEfIcFymU9Y+Z22W
-	PL+Zwg64QCkt2jsHLBgKaunZaP6YIS7tTkuO2qJHFTxa3IxAvGohpfMm4uO1SVc6KrML
-	qXSS6FgTdd6Ho6OD8ikhEI0ZwhFyqFfV/6I2HJaKJj5cGoV1trYsXUZLJdY6fual/RNc
-	PY6g==
-X-Gm-Message-State: APjAAAV0iYDrB5HA4AJLNTFDD7OLMpL7YRyjq0ONinXTj+RTmrTp9+69
-	KC+26lqH6ZHlSYa66WlWn10=
-X-Google-Smtp-Source: APXvYqxUe7IKGHke3pkjd7PB0Ez46t+eLGYbvjqmLd4GYHlniOt1U8vXke2M0+FVndZs0g3h/TAyRw==
-X-Received: by 2002:a65:5043:: with SMTP id k3mr9570894pgo.406.1569591422724; 
-	Fri, 27 Sep 2019 06:37:02 -0700 (PDT)
-Received: from [192.168.86.235] (c-73-241-150-70.hsd1.ca.comcast.net.
-	[73.241.150.70])
-	by smtp.gmail.com with ESMTPSA id v9sm2605962pfe.1.2019.09.27.06.37.01
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 27 Sep 2019 06:37:01 -0700 (PDT)
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=WqPr3BMmdkR12PG5X2wdgv7YTpsF0EmWkLgo4C5gGm8=;
+	b=dytjDxOTo3/kNcb6PiFuoPzBr63Q5PjeMhWRJ7w2ng6HeG0NNKqTJgKUhme1kXEWYQ
+	Rz5c71E431MBF1erpnwQDqNBz2N8ieVqLytGqVyE+K0DtNxtIe3qsyDlkWJOJvi5LaFB
+	rT8zZd63scqsCjGiK2Wc9u2rcwBnlQLXKBwcpKAl281E6dGPIwTDvzCH35f1yfteeMwK
+	lui48+n87LW8DhvAV4ZbCVcHTbD/y0CnHpiKfozqNr0fGIVfUtnbeHzGV+Kh2lbxMadt
+	tmdm4Urdx3lzbzKxx1ijc0Ww5sIHuXubXeB6JGmAiwIpKHtF0ccmzCRGuZM8AtGCNHwi
+	tL5A==
+X-Gm-Message-State: APjAAAWs7WZWGtt1FqJy9Lv5wCS51W9eaPPevZMEzh5urDJJgqgP6DVO
+	/CqyMjEfbxNI1sjlcAVnHFc=
+X-Google-Smtp-Source: APXvYqytcVLtWlyBJYAkuqwx6A2Onw/qBy8K4tRZvRbkGWY98IIBO5iTmei7P0b/bbu1gpKiddducg==
+X-Received: by 2002:a7b:cbd6:: with SMTP id n22mr8198204wmi.39.1569598737528; 
+	Fri, 27 Sep 2019 08:38:57 -0700 (PDT)
+Received: from scw-93ddc8.cloud.online.net ([2001:bc8:4400:2400::302d])
+	by smtp.gmail.com with ESMTPSA id z1sm6009561wre.40.2019.09.27.08.38.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 27 Sep 2019 08:38:56 -0700 (PDT)
+Date: Fri, 27 Sep 2019 15:38:43 +0000
+From: Matias Ezequiel Vara Larsen <matiasevara@gmail.com>
+To: Eric Dumazet <eric.dumazet@gmail.com>,
+	Stefano Garzarella <sgarzare@redhat.com>
 Subject: Re: [PATCH] vsock/virtio: add support for MSG_PEEK
-To: Stefano Garzarella <sgarzare@redhat.com>,
-	Eric Dumazet <eric.dumazet@gmail.com>,
-	Matias Ezequiel Vara Larsen <matiasevara@gmail.com>
+Message-ID: <20190927153843.GA15350@scw-93ddc8.cloud.online.net>
 References: <1569522214-28223-1-git-send-email-matiasevara@gmail.com>
 	<f069a65d-33b9-1fa8-d26e-b76cc51fc7cb@gmail.com>
 	<20190927085513.tdiofiisrpyehfe5@steredhat.homenet.telecomitalia.it>
-From: Eric Dumazet <eric.dumazet@gmail.com>
-Message-ID: <a7a77f0b-a658-6e46-3381-3dfea55b14d1@gmail.com>
-Date: Fri, 27 Sep 2019 06:37:00 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	<a7a77f0b-a658-6e46-3381-3dfea55b14d1@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20190927085513.tdiofiisrpyehfe5@steredhat.homenet.telecomitalia.it>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <a7a77f0b-a658-6e46-3381-3dfea55b14d1@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
@@ -94,34 +91,40 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-
-
-On 9/27/19 1:55 AM, Stefano Garzarella wrote:
-
-> Good catch!
+On Fri, Sep 27, 2019 at 06:37:00AM -0700, Eric Dumazet wrote:
 > 
-> Maybe we can solve in this way:
 > 
-> 	list_for_each_entry(pkt, &vvs->rx_queue, list) {
-> 		size_t off = pkt->off;
+> On 9/27/19 1:55 AM, Stefano Garzarella wrote:
 > 
-> 		if (total == len)
-> 			break;
+> > Good catch!
+> > 
+> > Maybe we can solve in this way:
+> > 
+> > 	list_for_each_entry(pkt, &vvs->rx_queue, list) {
+> > 		size_t off = pkt->off;
+> > 
+> > 		if (total == len)
+> > 			break;
+> > 
+> > 		while (total < len && off < pkt->len) {
+> > 			/* using 'off' instead of 'pkt->off' */
+> > 			...
+> > 
+> > 			total += bytes;
+> > 			off += bytes;
+> > 		}
+> > 	}
+> > 
+> > What do you think?
+> >
 > 
-> 		while (total < len && off < pkt->len) {
-> 			/* using 'off' instead of 'pkt->off' */
-> 			...
-> 
-> 			total += bytes;
-> 			off += bytes;
-> 		}
-> 	}
-> 
-> What do you think?
+> Maybe, but I need to see a complete patch, evil is in the details :)
 >
 
-Maybe, but I need to see a complete patch, evil is in the details :)
+Thanks both for your comments, I will take them into account and submit
+a second version. 
 
+Matias
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
