@@ -2,114 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E413C21E3
-	for <lists.virtualization@lfdr.de>; Mon, 30 Sep 2019 15:24:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D16C0C21F5
+	for <lists.virtualization@lfdr.de>; Mon, 30 Sep 2019 15:29:57 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 169D41828;
-	Mon, 30 Sep 2019 13:23:57 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id EC8501832;
+	Mon, 30 Sep 2019 13:29:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4133E1820
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 96607182B
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 30 Sep 2019 13:23:55 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from NAM01-BY2-obe.outbound.protection.outlook.com
-	(mail-eopbgr810082.outbound.protection.outlook.com [40.107.81.82])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 05B0B735
+	Mon, 30 Sep 2019 13:29:49 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D590D1FB
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 30 Sep 2019 13:23:53 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=MG2vFyRELNjewu3cymAg7JXQOenZrJlb3HAqUOqUVnHTiNxwtRJWH7k/fuJwT8l6nw1E7Plz8sB3apEnzPhLpTmlab4Ir/o0p6t9J5/byh+7PPN0TFWDtrSTB8vls0wkm+6IZ9QlOy6ac8xXId1/awGSVkwePrZ7JI//Ztmwb6g5x1ZfuNqIJ/c9v4124pdQQYpq49vtMRoddBz4Auoi5xX+Zypl6qpPDHeGOusLd2nVNYtd7xXCiYurA24Ykl/FzxfLzV5VhIzVrE743NAVlHDxzTHD4OUmaCYkE7j6Isq6qLL/jWjolb6GbXEGVmTaWfy+dZv0YPaHTwEv5yzenQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=xNevS1Rgr/2uJ4aclBBZJ4MlljfBuAaf7/dk0a6p7iw=;
-	b=MHO7eECcRvDReDBU9mJTRNrrxEFkBu/T25i463plYNN7EO9pCV2fK3F3lCjGGWPghAobuhoONpy7tkzrgco3DTcVboTbRsWQVF1m5BdYkW4CvbWEsJZanRDtucJrgC1LG/IaT5Ft1t7T09ldk4rB32+cC89jVLkElZ6fa3YwjT3qdgJENUcESs+jvFsNJfLdkyHWX5uGG/xMiFt2c38KbhnLDmIz7Zm7X/N5QX9MvS1SKdd5zQKOrziySQuFaVGBYjMRGMxtJnm+1N25A4J0srvzfjfbg0aNOocTwjV12HUg0p15KEq1I5qHn0TYN0qLDoSgwb481i0xsZUh6/PDWw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
-	smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com;
-	dkim=pass header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=xNevS1Rgr/2uJ4aclBBZJ4MlljfBuAaf7/dk0a6p7iw=;
-	b=ii2HerfX2TCozTO7bkFMwDkSz36Di0mOEuESsy9qC8nCFiwrGAXesIXgg1J+/yw0CNM6vcm5vCSlQl75dfhUUr2cnyUV7CsGjFF1JcMlx9Oyz8vBFdghWA1G+jCLNP5DSmDS2S8mgt1QDEHmBuhwFvbdBFazSkb2p4eaaLFzWFk=
-Received: from BN6PR12MB1699.namprd12.prod.outlook.com (10.175.97.148) by
-	BN6PR12MB1217.namprd12.prod.outlook.com (10.168.229.15) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2305.20; Mon, 30 Sep 2019 13:23:51 +0000
-Received: from BN6PR12MB1699.namprd12.prod.outlook.com
-	([fe80::7d62:3e74:d0f0:be92]) by
-	BN6PR12MB1699.namprd12.prod.outlook.com
-	([fe80::7d62:3e74:d0f0:be92%3]) with mapi id 15.20.2305.017;
-	Mon, 30 Sep 2019 13:23:51 +0000
-From: "Koenig, Christian" <Christian.Koenig@amd.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Subject: Re: [Spice-devel] [PATCH 1/2] drm/qxl: stop abusing TTM to call
-	driver internal functions
-Thread-Topic: [Spice-devel] [PATCH 1/2] drm/qxl: stop abusing TTM to call
-	driver internal functions
-Thread-Index: AQHVd3FePLizV3BOzkihcGVBzkmeldDquPb51ll8tIA=
-Date: Mon, 30 Sep 2019 13:23:50 +0000
-Message-ID: <18edbb52-d230-8e93-1808-586253d969de@amd.com>
-References: <20190927132458.4359-1-christian.koenig@amd.com>
-	<2008023935.3565992.1569601905303.JavaMail.zimbra@redhat.com>
-	<3da66dc5-d78a-4aa7-4ecc-d28085d99502@amd.com>
-	<859065241.3666996.1569837067022.JavaMail.zimbra@redhat.com>
-In-Reply-To: <859065241.3666996.1569837067022.JavaMail.zimbra@redhat.com>
-Accept-Language: de-DE, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
-x-originating-ip: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
-x-clientproxiedby: MR2P264CA0014.FRAP264.PROD.OUTLOOK.COM
-	(2603:10a6:500:1::26) To BN6PR12MB1699.namprd12.prod.outlook.com
-	(2603:10b6:404:ff::20)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Christian.Koenig@amd.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: b7857209-12ef-4a88-d569-08d745a96ec9
-x-ms-office365-filtering-ht: Tenant
-x-ms-traffictypediagnostic: BN6PR12MB1217:
-x-microsoft-antispam-prvs: <BN6PR12MB121747990AD9AFBF3900845383820@BN6PR12MB1217.namprd12.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
-x-forefront-prvs: 01762B0D64
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(4636009)(39860400002)(366004)(376002)(396003)(346002)(136003)(199004)(189003)(486006)(446003)(476003)(11346002)(2616005)(76176011)(66574012)(52116002)(386003)(6506007)(81166006)(65806001)(65956001)(99286004)(2906002)(46003)(8936002)(8676002)(316002)(81156014)(31696002)(102836004)(58126008)(86362001)(186003)(54906003)(5660300002)(256004)(14444005)(478600001)(14454004)(4326008)(71190400001)(71200400001)(6116002)(36756003)(66446008)(64756008)(66556008)(66476007)(66946007)(6436002)(6486002)(25786009)(6512007)(7736002)(305945005)(229853002)(31686004)(6246003)(6916009);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR12MB1217;
-	H:BN6PR12MB1699.namprd12.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: amd.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 47iqW5SlrkL/YsW9CJxri3jvdyZBS8DAkcjiINfmn1xFSKfjlCaOtF1HFLF4HHExWuNtNaxxoJiuedVjuzIzK5/K71ZDOIk+yA8yKz8ECMGbUDquHxxmQBeYf3StVxXg1GFhuMrAkZp3LIMcND+2kPslG77sbzdpaGQqaxQJt7h561AzDKiBgM+qFkyemD+D1EwFXYDfudtxmRRqtQXGEcd7wHXcRmGsq7Wx6yaLE7ob/P82VwrvkhsEgDog3spyaIm7M7V7KgXMAz5sh7ehphD3Nuil6awjv1QEY8Qmwl5qJy/vDLvbDpTfFueJljtAMqGC3/knmSr2eOqOjn+iK/IHvbBBMKPCfYCw3YGI3ly883c9zQa+2Lj9RkCAcb65PNPL2E1/JIIGbu3oJWrDm+JuuhMYnAmL1LB6efXNZaA=
-x-ms-exchange-transport-forked: True
-Content-ID: <B480EB127E505C468D2B992176A6215E@namprd12.prod.outlook.com>
+	Mon, 30 Sep 2019 13:29:48 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 54A0D3001BF1;
+	Mon, 30 Sep 2019 13:29:48 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+	(colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 14FAF10013D9;
+	Mon, 30 Sep 2019 13:29:48 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+	(zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+	by colo-mx.corp.redhat.com (Postfix) with ESMTP id 8B0211808878;
+	Mon, 30 Sep 2019 13:29:47 +0000 (UTC)
+Date: Mon, 30 Sep 2019 09:29:47 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Jaak Ristioja <jaak@ristioja.ee>
+Message-ID: <1174991123.3693721.1569850187145.JavaMail.zimbra@redhat.com>
+In-Reply-To: <ccafdbaf-7f8e-8616-5543-2a178bd63828@ristioja.ee>
+References: <92785039-0941-4626-610b-f4e3d9613069@ristioja.ee>
+	<20190905071407.47iywqcqomizs3yr@sirius.home.kraxel.org>
+	<e4b7d889-15f3-0c90-3b9f-d395344499c0@ristioja.ee>
+	<ccafdbaf-7f8e-8616-5543-2a178bd63828@ristioja.ee>
+Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b7857209-12ef-4a88-d569-08d745a96ec9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Sep 2019 13:23:50.8924 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: DDXk8gire2fcGZf4UlZtJhkMPXzcQLzYNZEDY7kmtSoIUxU9RYp5AolRtlPoHLFB
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR12MB1217
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Originating-IP: [10.33.32.17, 10.4.195.3]
+Thread-Topic: Xorg indefinitely hangs in kernelspace
+Thread-Index: P6Hw31NHDA5mMI1vf1Z67xvLkTg4/g==
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.45]);
+	Mon, 30 Sep 2019 13:29:48 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	"daniel@ffwll.ch" <daniel@ffwll.ch>,
-	"airlied@redhat.com" <airlied@redhat.com>,
-	"spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+	Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+	spice-devel@lists.freedesktop.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -121,102 +70,166 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-QW0gMzAuMDkuMTkgdW0gMTE6NTEgc2NocmllYiBGcmVkaWFubyBaaWdsaW86DQo+PiBBbSAyNy4w
-OS4xOSB1bSAxODozMSBzY2hyaWViIEZyZWRpYW5vIFppZ2xpbzoNCj4+Pj4gVGhlIHR0bV9tZW1f
-aW9fKiBmdW5jdGlvbnMgYXJlIGFjdHVhbGx5IGludGVybmFsIHRvIFRUTSBhbmQgc2hvdWxkbid0
-IGJlDQo+Pj4+IHVzZWQgaW4gYSBkcml2ZXIuDQo+Pj4+DQo+Pj4gQXMgZmFyIGFzIEkgY2FuIHNl
-ZSBieSB5b3VyIHNlY29uZCBwYXRjaCBRWEwgaXMganVzdCB1c2luZyBleHBvcnRlZA0KPj4+ICh0
-aGF0IGlzIG5vdCBpbnRlcm5hbCkgZnVuY3Rpb25zLg0KPj4+IE5vdCB0aGF0IHRoZSBpZGVhIG9m
-IG1ha2luZyB0aGVtIGludGVybmFsIGlzIGJhZCBidXQgdGhpcyBjb21tZW50IGlzDQo+Pj4gYSB3
-cm9uZyBzdGF0ZW1lbnQuDQo+PiBTZWUgdGhlIGhpc3Rvcnkgb2YgZXhwb3J0aW5nIHRob3NlLCB0
-aGF0IHdhcyBkb25lIHNwZWNpZmljYWxseSBzbyB0aGF0DQo+PiBRWEwgY2FuIGNhbGwgdGhlbSAo
-Y29tbWl0IGFmZTY4MDRjMDQ1ZmJkNjlhMWI3NWM2ODExMDdiNWQ2ZGY5MTkwZGUpLg0KPj4NCj4+
-IEJ1dCB0aG9zZSBhcmUgdGhlIGludGVybmFsIGZ1bmN0aW9ucyB3aGljaCBUVE0gdXNlcyB0byBj
-YWxsIGludG8gdGhlDQo+PiBkcml2ZXIuIFRoYXQgYSBkcml2ZXIgdXNlcyB0aGVtIHRvIGNhbGwg
-aW50byBpdHNlbGYgZG9lc24ndCBzZWVtIHRvIG1ha2UNCj4+IHNlbnNlLg0KPj4NCj4gVGhlIGNv
-bW1pdCB3YXMgbWVyZ2VkIGFuZCByZWxlYXNlIGluIExpbnV4IDMuMTAgNiB5ZWFycyBhZ28sIHNp
-bmNlDQo+IHRoZW4gdGhlc2UgZnVuY3Rpb25zIGhhdmUgYmVlbiBleHBvcnRlZC4gTm90IHNheWlu
-ZyB0aGF0IHRoZSBRWEwgY2hhbmdlDQo+IHdhcyB3cm9uZyBhbmQgc2hvdWxkIG5vdCBoYXZlIGJl
-ZW4gYWNrZWQgYW5kIG1lcmdlZCBidXQgYWZ0ZXIgNiB5ZWFycw0KPiBzYXlpbmcgdGhhdCB0aGVz
-ZSBmdW5jdGlvbnMgYXJlIGludGVybmFsIGl0J3Mgbm90IGNvcnJlY3QuDQoNCldoeT8gSWYgYSBm
-dW5jdGlvbiBpcyBpbnRlcm5hbCBvciBub3QgaXMgZGVmaW5lZCBieSB0aGUgZGVzaWduIGFuZCBu
-b3QgDQp0aGUgYWN0dWFsIGltcGxlbWVudGF0aW9uLg0KDQo+IFNvbWV0aGluZyBsaWtlDQo+DQo+
-ICJUaGUgdHRtX21lbV9pb18qIGZ1bmN0aW9ucyB3ZXJlIGludGVuZGVkIHRvIGJlIGludGVybmFs
-IHRvIFRUTSBhbmQNCj4gc2hvdWxkbid0IGhhdmUgYmVlbiB1c2VkIGluIGEgZHJpdmVyLiBUaGV5
-IHdlcmUgZXhwb3J0ZWQgaW4gY29tbWl0DQo+IGFmZTY4MDRjMDQ1ZmJkNjlhMWI3NWM2ODExMDdi
-NWQ2ZGY5MTkwZGUganVzdCBmb3IgUVhMLiINCg0KR29vZCBwb2ludCBtZW50aW9uaW5nIHRoZSBj
-b21taXQgYWRkaW5nIHRoYXQsIGdvaW5nIHRvIHVzZSB0aGlzIGZvciB0aGUgDQpjb21taXQgbWVz
-c2FnZS4NCg0KQ2hyaXN0aWFuLg0KDQo+DQo+Pj4+IEluc3RlYWQgY2FsbCB0aGUgcXhsX3R0bV9p
-b19tZW1fcmVzZXJ2ZSgpIGZ1bmN0aW9uIGRpcmVjdGx5Lg0KPj4+Pg0KPj4+IEkgd291bGQgYWRk
-IHRoYXQgcXhsX3R0bV9pb19tZW1fZnJlZSBpcyBlbXB0eSBzbyB0aGUgcmVtb3ZhbCBvZg0KPj4+
-IHR0bV9tZW1faW9fZnJlZSBpcyBmaW5lLg0KPj4gR29vZCBwb2ludCwgZ29pbmcgdG8gYWRkIHRo
-YXQuDQo+Pg0KPj4gVGhhbmtzLA0KPj4gQ2hyaXN0aWFuLg0KPj4NCj4gRnJlZGlhbm8NCj4NCj4+
-Pj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQu
-Y29tPg0KPj4+PiAtLS0NCj4+Pj4gICAgZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfZHJ2LmggICAg
-fCAgMiArKw0KPj4+PiAgICBkcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9vYmplY3QuYyB8IDExICst
-LS0tLS0tLS0tDQo+Pj4+ICAgIGRyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX3R0bS5jICAgIHwgIDQg
-KystLQ0KPj4+PiAgICAzIGZpbGVzIGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKSwgMTIgZGVsZXRp
-b25zKC0pDQo+Pj4+DQo+Pj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9k
-cnYuaCBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX2Rydi5oDQo+Pj4+IGluZGV4IDllMDM0YzVm
-YTg3ZC4uOGEyNGY4ZTEwMWRhIDEwMDY0NA0KPj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcXhs
-L3F4bF9kcnYuaA0KPj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuaA0KPj4+
-PiBAQCAtMzU0LDYgKzM1NCw4IEBAIGludCBxeGxfbW9kZV9kdW1iX21tYXAoc3RydWN0IGRybV9m
-aWxlICpmaWxwLA0KPj4+PiAgICAvKiBxeGwgdHRtICovDQo+Pj4+ICAgIGludCBxeGxfdHRtX2lu
-aXQoc3RydWN0IHF4bF9kZXZpY2UgKnFkZXYpOw0KPj4+PiAgICB2b2lkIHF4bF90dG1fZmluaShz
-dHJ1Y3QgcXhsX2RldmljZSAqcWRldik7DQo+Pj4+ICtpbnQgcXhsX3R0bV9pb19tZW1fcmVzZXJ2
-ZShzdHJ1Y3QgdHRtX2JvX2RldmljZSAqYmRldiwNCj4+Pj4gKwkJCSAgIHN0cnVjdCB0dG1fbWVt
-X3JlZyAqbWVtKTsNCj4+Pj4gICAgaW50IHF4bF9tbWFwKHN0cnVjdCBmaWxlICpmaWxwLCBzdHJ1
-Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSk7DQo+Pj4+ICAgIA0KPj4+PiAgICAvKiBxeGwgaW1hZ2Ug
-Ki8NCj4+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX29iamVjdC5jDQo+
-Pj4+IGIvZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfb2JqZWN0LmMNCj4+Pj4gaW5kZXggNTQ4ZGZl
-NmYzYjI2Li4yOTllNjNhOTUxYzUgMTAwNjQ0DQo+Pj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9x
-eGwvcXhsX29iamVjdC5jDQo+Pj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX29iamVj
-dC5jDQo+Pj4+IEBAIC0xNDgsNyArMTQ4LDYgQEAgaW50IHF4bF9ib19rbWFwKHN0cnVjdCBxeGxf
-Ym8gKmJvLCB2b2lkICoqcHRyKQ0KPj4+PiAgICB2b2lkICpxeGxfYm9fa21hcF9hdG9taWNfcGFn
-ZShzdHJ1Y3QgcXhsX2RldmljZSAqcWRldiwNCj4+Pj4gICAgCQkJICAgICAgc3RydWN0IHF4bF9i
-byAqYm8sIGludCBwYWdlX29mZnNldCkNCj4+Pj4gICAgew0KPj4+PiAtCXN0cnVjdCB0dG1fbWVt
-X3R5cGVfbWFuYWdlciAqbWFuID0NCj4+Pj4gJmJvLT50Ym8uYmRldi0+bWFuW2JvLT50Ym8ubWVt
-Lm1lbV90eXBlXTsNCj4+Pj4gICAgCXZvaWQgKnJwdHI7DQo+Pj4+ICAgIAlpbnQgcmV0Ow0KPj4+
-PiAgICAJc3RydWN0IGlvX21hcHBpbmcgKm1hcDsNCj4+Pj4gQEAgLTE2MCw5ICsxNTksNyBAQCB2
-b2lkICpxeGxfYm9fa21hcF9hdG9taWNfcGFnZShzdHJ1Y3QgcXhsX2RldmljZSAqcWRldiwNCj4+
-Pj4gICAgCWVsc2UNCj4+Pj4gICAgCQlnb3RvIGZhbGxiYWNrOw0KPj4+PiAgICANCj4+Pj4gLQko
-dm9pZCkgdHRtX21lbV9pb19sb2NrKG1hbiwgZmFsc2UpOw0KPj4+PiAtCXJldCA9IHR0bV9tZW1f
-aW9fcmVzZXJ2ZShiby0+dGJvLmJkZXYsICZiby0+dGJvLm1lbSk7DQo+Pj4+IC0JdHRtX21lbV9p
-b191bmxvY2sobWFuKTsNCj4+Pj4gKwlyZXQgPSBxeGxfdHRtX2lvX21lbV9yZXNlcnZlKGJvLT50
-Ym8uYmRldiwgJmJvLT50Ym8ubWVtKTsNCj4+Pj4gICAgDQo+Pj4+ICAgIAlyZXR1cm4gaW9fbWFw
-cGluZ19tYXBfYXRvbWljX3djKG1hcCwgYm8tPnRiby5tZW0uYnVzLm9mZnNldCArDQo+Pj4+ICAg
-IAlwYWdlX29mZnNldCk7DQo+Pj4+ICAgIGZhbGxiYWNrOg0KPj4+PiBAQCAtMTkzLDE3ICsxOTAs
-MTEgQEAgdm9pZCBxeGxfYm9fa3VubWFwKHN0cnVjdCBxeGxfYm8gKmJvKQ0KPj4+PiAgICB2b2lk
-IHF4bF9ib19rdW5tYXBfYXRvbWljX3BhZ2Uoc3RydWN0IHF4bF9kZXZpY2UgKnFkZXYsDQo+Pj4+
-ICAgIAkJCSAgICAgICBzdHJ1Y3QgcXhsX2JvICpibywgdm9pZCAqcG1hcCkNCj4+Pj4gICAgew0K
-Pj4+PiAtCXN0cnVjdCB0dG1fbWVtX3R5cGVfbWFuYWdlciAqbWFuID0NCj4+Pj4gJmJvLT50Ym8u
-YmRldi0+bWFuW2JvLT50Ym8ubWVtLm1lbV90eXBlXTsNCj4+Pj4gLQ0KPj4+PiAgICAJaWYgKChi
-by0+dGJvLm1lbS5tZW1fdHlwZSAhPSBUVE1fUExfVlJBTSkgJiYNCj4+Pj4gICAgCSAgICAoYm8t
-PnRiby5tZW0ubWVtX3R5cGUgIT0gVFRNX1BMX1BSSVYpKQ0KPj4+PiAgICAJCWdvdG8gZmFsbGJh
-Y2s7DQo+Pj4+ICAgIA0KPj4+PiAgICAJaW9fbWFwcGluZ191bm1hcF9hdG9taWMocG1hcCk7DQo+
-Pj4+IC0NCj4+Pj4gLQkodm9pZCkgdHRtX21lbV9pb19sb2NrKG1hbiwgZmFsc2UpOw0KPj4+PiAt
-CXR0bV9tZW1faW9fZnJlZShiby0+dGJvLmJkZXYsICZiby0+dGJvLm1lbSk7DQo+Pj4+IC0JdHRt
-X21lbV9pb191bmxvY2sobWFuKTsNCj4+Pj4gICAgCXJldHVybjsNCj4+Pj4gICAgIGZhbGxiYWNr
-Og0KPj4+PiAgICAJcXhsX2JvX2t1bm1hcChibyk7DQo+Pj4+IGRpZmYgLS1naXQgYS9kcml2ZXJz
-L2dwdS9kcm0vcXhsL3F4bF90dG0uYyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX3R0bS5jDQo+
-Pj4+IGluZGV4IDliMjQ1MTRjNzVhYS4uY2I4MGU1MTJkZDQ2IDEwMDY0NA0KPj4+PiAtLS0gYS9k
-cml2ZXJzL2dwdS9kcm0vcXhsL3F4bF90dG0uYw0KPj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0v
-cXhsL3F4bF90dG0uYw0KPj4+PiBAQCAtMTU5LDggKzE1OSw4IEBAIHN0YXRpYyBpbnQgcXhsX3Zl
-cmlmeV9hY2Nlc3Moc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0DQo+Pj4+ICpibywgc3RydWN0IGZp
-bGUgKmZpbHApDQo+Pj4+ICAgIAkJCQkJICBmaWxwLT5wcml2YXRlX2RhdGEpOw0KPj4+PiAgICB9
-DQo+Pj4+ICAgIA0KPj4+PiAtc3RhdGljIGludCBxeGxfdHRtX2lvX21lbV9yZXNlcnZlKHN0cnVj
-dCB0dG1fYm9fZGV2aWNlICpiZGV2LA0KPj4+PiAtCQkJCSAgc3RydWN0IHR0bV9tZW1fcmVnICpt
-ZW0pDQo+Pj4+ICtpbnQgcXhsX3R0bV9pb19tZW1fcmVzZXJ2ZShzdHJ1Y3QgdHRtX2JvX2Rldmlj
-ZSAqYmRldiwNCj4+Pj4gKwkJCSAgIHN0cnVjdCB0dG1fbWVtX3JlZyAqbWVtKQ0KPj4+PiAgICB7
-DQo+Pj4+ICAgIAlzdHJ1Y3QgdHRtX21lbV90eXBlX21hbmFnZXIgKm1hbiA9ICZiZGV2LT5tYW5b
-bWVtLT5tZW1fdHlwZV07DQo+Pj4+ICAgIAlzdHJ1Y3QgcXhsX2RldmljZSAqcWRldiA9IHF4bF9n
-ZXRfcWRldihiZGV2KTsNCj4+PiBPdGhlcndpc2UgZmluZSBmb3IgbWUuDQo+Pj4NCj4+PiBGcmVk
-aWFubw0KPj4NCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4
-LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+> 
+> On 05.09.19 15:34, Jaak Ristioja wrote:
+> > On 05.09.19 10:14, Gerd Hoffmann wrote:
+> >> On Tue, Aug 06, 2019 at 09:00:10PM +0300, Jaak Ristioja wrote:
+> >>> Hello!
+> >>>
+> >>> I'm writing to report a crash in the QXL / DRM code in the Linux kernel.
+> >>> I originally filed the issue on LaunchPad and more details can be found
+> >>> there, although I doubt whether these details are useful.
+> >>
+> >> Any change with kernel 5.3-rc7 ?
+> > 
+> > Didn't try. Did you change something? I could try, but I've done so
+> > before and every time this bug manifests itself with MAJOR.MINOR-rc# I
+> > get asked to try version MAJOR.(MINOR+1)-rc# so I guess I could as well
+> > give up?
+> > 
+> > Alright, I'll install 5.3-rc7, but once more it might take some time for
+> > this bug to expose itself.
+> 
+> Just got the issue with 5.3.0-050300rc7-generic:
+> 
+> [124212.547403] INFO: task Xorg:797 blocked for more than 120 seconds.
+> [124212.548639]       Not tainted 5.3.0-050300rc7-generic #201909021831
+> [124212.549839] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
+> disables this message.
+> [124212.547403] INFO: task Xorg:797 blocked for more than 120 seconds.
+> [124212.548639]       Not tainted 5.3.0-050300rc7-generic #201909021831
+> [124212.549839] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
+> disables this message.
+> [124212.551329] Xorg            D    0   797    773 0x00404004
+> [124212.551331] Call Trace:
+> [124212.551336]  __schedule+0x2b9/0x6c0
+> [124212.551337]  schedule+0x42/0xb0
+> [124212.551338]  schedule_preempt_disabled+0xe/0x10
+> [124212.551340]  __ww_mutex_lock.isra.0+0x261/0x7f0
+> [124212.551345]  ? ttm_bo_init+0x6b/0x100 [ttm]
+> [124212.551346]  __ww_mutex_lock_slowpath+0x16/0x20
+> [124212.551347]  ww_mutex_lock+0x38/0x90
+> [124212.551352]  ttm_eu_reserve_buffers+0x1cc/0x2f0 [ttm]
+> [124212.551371]  qxl_release_reserve_list+0x6d/0x150 [qxl]
+> [124212.551373]  ? qxl_bo_pin+0xf4/0x190 [qxl]
+> [124212.551375]  qxl_cursor_atomic_update+0x1ab/0x2e0 [qxl]
+> [124212.551376]  ? qxl_bo_pin+0xf4/0x190 [qxl]
+> [124212.551384]  drm_atomic_helper_commit_planes+0xd5/0x220 [drm_kms_helper]
+> [124212.551388]  drm_atomic_helper_commit_tail+0x2c/0x70 [drm_kms_helper]
+> [124212.551392]  commit_tail+0x68/0x70 [drm_kms_helper]
+> [124212.551395]  drm_atomic_helper_commit+0x118/0x120 [drm_kms_helper]
+> [124212.551407]  drm_atomic_commit+0x4a/0x50 [drm]
+> [124212.551411]  drm_atomic_helper_update_plane+0xea/0x100 [drm_kms_helper]
+> [124212.551418]  __setplane_atomic+0xcb/0x110 [drm]
+> [124212.551428]  drm_mode_cursor_universal+0x140/0x260 [drm]
+> [124212.551435]  drm_mode_cursor_common+0xcc/0x220 [drm]
+> [124212.551441]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
+> [124212.551447]  drm_mode_cursor2_ioctl+0xe/0x10 [drm]
+> [124212.551452]  drm_ioctl_kernel+0xae/0xf0 [drm]
+> [124212.551458]  drm_ioctl+0x234/0x3d0 [drm]
+> [124212.551464]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
+> [124212.551466]  ? timerqueue_add+0x5f/0xa0
+> [124212.551469]  ? enqueue_hrtimer+0x3d/0x90
+> [124212.551471]  do_vfs_ioctl+0x407/0x670
+> [124212.551473]  ? fput+0x13/0x20
+> [124212.551475]  ? __sys_recvmsg+0x88/0xa0
+> [124212.551476]  ksys_ioctl+0x67/0x90
+> [124212.551477]  __x64_sys_ioctl+0x1a/0x20
+> [124212.551479]  do_syscall_64+0x5a/0x130
+> [124212.551480]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+> [124212.551481] RIP: 0033:0x7f07c79ee417
+> [124212.551485] Code: Bad RIP value.
+> [124212.551485] RSP: 002b:00007ffc6b1de1a8 EFLAGS: 00003246 ORIG_RAX:
+> 0000000000000010
+> [124212.551486] RAX: ffffffffffffffda RBX: 00005612f109a610 RCX:
+> 00007f07c79ee417
+> [124212.551487] RDX: 00007ffc6b1de1e0 RSI: 00000000c02464bb RDI:
+> 000000000000000e
+> [124212.551487] RBP: 00007ffc6b1de1e0 R08: 0000000000000040 R09:
+> 0000000000000004
+> [124212.551488] R10: 000000000000003f R11: 0000000000003246 R12:
+> 00000000c02464bb
+> [124212.551488] R13: 000000000000000e R14: 0000000000000000 R15:
+> 00005612f10981d0
+> [124333.376328] INFO: task Xorg:797 blocked for more than 241 seconds.
+> [124333.377474]       Not tainted 5.3.0-050300rc7-generic #201909021831
+> [124333.378609] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
+> disables this message.
+> [124333.376328] INFO: task Xorg:797 blocked for more than 241 seconds.
+> [124333.377474]       Not tainted 5.3.0-050300rc7-generic #201909021831
+> [124333.378609] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
+> disables this message.
+> [124333.380060] Xorg            D    0   797    773 0x00404004
+> [124333.380062] Call Trace:
+> [124333.380067]  __schedule+0x2b9/0x6c0
+> [124333.380068]  schedule+0x42/0xb0
+> [124333.380069]  schedule_preempt_disabled+0xe/0x10
+> [124333.380070]  __ww_mutex_lock.isra.0+0x261/0x7f0
+> [124333.380076]  ? ttm_bo_init+0x6b/0x100 [ttm]
+> [124333.380077]  __ww_mutex_lock_slowpath+0x16/0x20
+> [124333.380077]  ww_mutex_lock+0x38/0x90
+> [124333.380080]  ttm_eu_reserve_buffers+0x1cc/0x2f0 [ttm]
+> [124333.380083]  qxl_release_reserve_list+0x6d/0x150 [qxl]
+> [124333.380085]  ? qxl_bo_pin+0xf4/0x190 [qxl]
+> [124333.380087]  qxl_cursor_atomic_update+0x1ab/0x2e0 [qxl]
+> [124333.380088]  ? qxl_bo_pin+0xf4/0x190 [qxl]
+> [124333.380096]  drm_atomic_helper_commit_planes+0xd5/0x220 [drm_kms_helper]
+> [124333.380101]  drm_atomic_helper_commit_tail+0x2c/0x70 [drm_kms_helper]
+> [124333.380105]  commit_tail+0x68/0x70 [drm_kms_helper]
+> [124333.380109]  drm_atomic_helper_commit+0x118/0x120 [drm_kms_helper]
+> [124333.380128]  drm_atomic_commit+0x4a/0x50 [drm]
+> [124333.380132]  drm_atomic_helper_update_plane+0xea/0x100 [drm_kms_helper]
+> [124333.380140]  __setplane_atomic+0xcb/0x110 [drm]
+> [124333.380147]  drm_mode_cursor_universal+0x140/0x260 [drm]
+> [124333.380153]  drm_mode_cursor_common+0xcc/0x220 [drm]
+> [124333.380160]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
+> [124333.380166]  drm_mode_cursor2_ioctl+0xe/0x10 [drm]
+> [124333.380171]  drm_ioctl_kernel+0xae/0xf0 [drm]
+> [124333.380176]  drm_ioctl+0x234/0x3d0 [drm]
+> [124333.380182]  ? drm_mode_cursor_ioctl+0x60/0x60 [drm]
+> [124333.380184]  ? timerqueue_add+0x5f/0xa0
+> [124333.380186]  ? enqueue_hrtimer+0x3d/0x90
+> [124333.380188]  do_vfs_ioctl+0x407/0x670
+> [124333.380190]  ? fput+0x13/0x20
+> [124333.380192]  ? __sys_recvmsg+0x88/0xa0
+> [124333.380193]  ksys_ioctl+0x67/0x90
+> [124333.380194]  __x64_sys_ioctl+0x1a/0x20
+> [124333.380195]  do_syscall_64+0x5a/0x130
+> [124333.380197]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+> [124333.380198] RIP: 0033:0x7f07c79ee417
+> [124333.380202] Code: Bad RIP value.
+> [124333.380203] RSP: 002b:00007ffc6b1de1a8 EFLAGS: 00003246 ORIG_RAX:
+> 0000000000000010
+> [124333.380204] RAX: ffffffffffffffda RBX: 00005612f109a610 RCX:
+> 00007f07c79ee417
+> [124333.380204] RDX: 00007ffc6b1de1e0 RSI: 00000000c02464bb RDI:
+> 000000000000000e
+> [124333.380205] RBP: 00007ffc6b1de1e0 R08: 0000000000000040 R09:
+> 0000000000000004
+> [124333.380205] R10: 000000000000003f R11: 0000000000003246 R12:
+> 00000000c02464bb
+> [124333.380206] R13: 000000000000000e R14: 0000000000000000 R15:
+> 00005612f10981d0
+> 
+> 
+> Best regards,
+> J
+
+Hi Jaak,
+  Why didn't you update bug at https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1813620?
+I know it can seem tedious but would help tracking it.
+It seems you are having this issue since quite some time and with
+multiple kernel versions.
+Are you still using Kubuntu? Maybe it happens more with KDE.
+From the Kernel log looks like a dead lock.
+
+Frediano
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
