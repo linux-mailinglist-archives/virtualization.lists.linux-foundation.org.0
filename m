@@ -2,89 +2,90 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53BC9C28E6
-	for <lists.virtualization@lfdr.de>; Mon, 30 Sep 2019 23:37:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D47FC2DDF
+	for <lists.virtualization@lfdr.de>; Tue,  1 Oct 2019 09:28:59 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E753FF29;
-	Mon, 30 Sep 2019 21:36:12 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0AA057C55;
+	Tue,  1 Oct 2019 07:28:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 28A74F1E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CCF6B7BBE
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 30 Sep 2019 21:36:12 +0000 (UTC)
+	Tue,  1 Oct 2019 07:28:37 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D572B735
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2E9313D0
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 30 Sep 2019 21:36:10 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
-	[10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Tue,  1 Oct 2019 07:28:37 +0000 (UTC)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+	[209.85.221.70])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id AD89A3084244;
-	Mon, 30 Sep 2019 21:36:09 +0000 (UTC)
-Received: from x1.home (ovpn-118-102.phx2.redhat.com [10.3.118.102])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 2DEF460872;
-	Mon, 30 Sep 2019 21:36:02 +0000 (UTC)
-Date: Mon, 30 Sep 2019 15:36:01 -0600
-From: Alex Williamson <alex.williamson@redhat.com>
-To: Parav Pandit <parav@mellanox.com>
-Subject: Re: [PATCH V2 6/8] mdev: introduce virtio device and its device ops
-Message-ID: <20190930153601.31e29f7e@x1.home>
-In-Reply-To: <AM0PR05MB48662BA1D397D74DF4F5B9AFD1810@AM0PR05MB4866.eurprd05.prod.outlook.com>
-References: <20190924135332.14160-1-jasowang@redhat.com>
-	<20190924135332.14160-7-jasowang@redhat.com>
-	<20190924170640.1da03bae@x1.home>
-	<AM0PR05MB48662BA1D397D74DF4F5B9AFD1810@AM0PR05MB4866.eurprd05.prod.outlook.com>
-Organization: Red Hat
+	by mx1.redhat.com (Postfix) with ESMTPS id 447CE4ACA7
+	for <virtualization@lists.linux-foundation.org>;
+	Tue,  1 Oct 2019 07:28:36 +0000 (UTC)
+Received: by mail-wr1-f70.google.com with SMTP id w10so5603324wrl.5
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 01 Oct 2019 00:28:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=rGxRLfEJC1VYNtKSX6kyfg0tMas1+rSvzHhUE5eK6q4=;
+	b=T7oiERhm6lpBO+nddVfZ8ooUWDHu5ruamesS7b12rLXKOCtf81aNjEgqM0Kv2BmKvR
+	eu7fScs8MIqI94znawvY3UEiAfGxv9SY4umhkbI+MC02xM3Y7wXUtEKxD0RtkDi62V9f
+	fhqs5QKUSate6pR0HXv4utlqkkmpQfQkGqapyVXzDlCaQiOBynFwj3W8Az6iX4GvM+On
+	GMjqpqZFmfxtlE4y4a8A6NW0REHJKiOSKJLDfx3OJT7PIS1lau1LFSdCsWigioF3hqv8
+	aR0MlkhEek55EJcyjl4WuuDYkgEaKEaE5sB4maQlnSmsCq6Xhxih/U5xAqfzfwHYJXWq
+	Qi6w==
+X-Gm-Message-State: APjAAAW8moXWkpgSyZNGdoQ/cPLMMkVqbk4st+DWGSWysMwoKKAb9jEU
+	V2EvYN32lYD7mnM9ymCJ/M6rg96GRujSNhEPzapsKJOmji7rpB1lQe+GxAi2mufr7bPv5kIEB8/
+	quDG64Wva8b/FT0IBx3wwSmIyoY6KFYPLR8hY/8adgw==
+X-Received: by 2002:a5d:5231:: with SMTP id i17mr16517830wra.142.1569914914942;
+	Tue, 01 Oct 2019 00:28:34 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwzfP3jzsJGYljEi7cfS5kj/VjiNXOMN2jPKXfvjeLCGNRNerLEOfzcw+u+tiV4YVMMyE9GAQ==
+X-Received: by 2002:a5d:5231:: with SMTP id i17mr16517808wra.142.1569914914666;
+	Tue, 01 Oct 2019 00:28:34 -0700 (PDT)
+Received: from steredhat.homenet.telecomitalia.it
+	(host174-200-dynamic.52-79-r.retail.telecomitalia.it.
+	[79.52.200.174]) by smtp.gmail.com with ESMTPSA id
+	a71sm1892939wme.11.2019.10.01.00.28.33
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 01 Oct 2019 00:28:34 -0700 (PDT)
+Date: Tue, 1 Oct 2019 09:28:31 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Dexuan Cui <decui@microsoft.com>
+Subject: Re: [PATCH net v3] vsock: Fix a lockdep warning in __vsock_release()
+Message-ID: <20191001072831.msry462b7l32fhsw@steredhat.homenet.telecomitalia.it>
+References: <1569868998-56603-1-git-send-email-decui@microsoft.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.40]);
-	Mon, 30 Sep 2019 21:36:10 +0000 (UTC)
+Content-Disposition: inline
+In-Reply-To: <1569868998-56603-1-git-send-email-decui@microsoft.com>
+User-Agent: NeoMutt/20180716
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "christophe.de.dinechin@gmail.com" <christophe.de.dinechin@gmail.com>,
+Cc: "sashal@kernel.org" <sashal@kernel.org>,
+	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
 	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	"mst@redhat.com" <mst@redhat.com>, "airlied@linux.ie" <airlied@linux.ie>,
-	"joonas.lahtinen@linux.intel.com" <joonas.lahtinen@linux.intel.com>,
-	"heiko.carstens@de.ibm.com" <heiko.carstens@de.ibm.com>,
-	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	"arnd@arndb.de" <arnd@arndb.de>,
+	"gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"ytht.net@gmail.com" <ytht.net@gmail.com>,
+	"deepa.kernel@gmail.com" <deepa.kernel@gmail.com>,
+	"stefanha@redhat.com" <stefanha@redhat.com>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	"tglx@linutronix.de" <tglx@linutronix.de>,
 	"virtualization@lists.linux-foundation.org"
 	<virtualization@lists.linux-foundation.org>,
-	"kwankhede@nvidia.com" <kwankhede@nvidia.com>,
-	"rob.miller@broadcom.com" <rob.miller@broadcom.com>,
-	"linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
-	"sebott@linux.ibm.com" <sebott@linux.ibm.com>,
-	"lulu@redhat.com" <lulu@redhat.com>,
-	"eperezma@redhat.com" <eperezma@redhat.com>,
-	"pasic@linux.ibm.com" <pasic@linux.ibm.com>,
-	"borntraeger@de.ibm.com" <borntraeger@de.ibm.com>,
-	"haotian.wang@sifive.com" <haotian.wang@sifive.com>,
-	"intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
-	"zhi.a.wang@intel.com" <zhi.a.wang@intel.com>,
-	"farman@linux.ibm.com" <farman@linux.ibm.com>,
-	Ido Shamay <idos@mellanox.com>, "gor@linux.ibm.com" <gor@linux.ibm.com>,
-	"jani.nikula@linux.intel.com" <jani.nikula@linux.intel.com>,
-	"rodrigo.vivi@intel.com" <rodrigo.vivi@intel.com>,
-	"xiao.w.wang@intel.com" <xiao.w.wang@intel.com>,
-	"freude@linux.ibm.com" <freude@linux.ibm.com>,
-	"zhenyuw@linux.intel.com" <zhenyuw@linux.intel.com>,
-	"zhihong.wang@intel.com" <zhihong.wang@intel.com>,
-	"intel-gvt-dev@lists.freedesktop.org"
-	<intel-gvt-dev@lists.freedesktop.org>,
-	"akrowiak@linux.ibm.com" <akrowiak@linux.ibm.com>,
-	"oberpar@linux.ibm.com" <oberpar@linux.ibm.com>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"cohuck@redhat.com" <cohuck@redhat.com>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>,
-	"daniel@ffwll.ch" <daniel@ffwll.ch>,
-	"lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
+	"davem@davemloft.net" <davem@davemloft.net>,
+	"jhansen@vmware.com" <jhansen@vmware.com>,
+	Michael Kelley <mikelley@microsoft.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -101,91 +102,170 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, 27 Sep 2019 16:25:13 +0000
-Parav Pandit <parav@mellanox.com> wrote:
+On Mon, Sep 30, 2019 at 06:43:50PM +0000, Dexuan Cui wrote:
+> Lockdep is unhappy if two locks from the same class are held.
+> 
+> Fix the below warning for hyperv and virtio sockets (vmci socket code
+> doesn't have the issue) by using lock_sock_nested() when __vsock_release()
+> is called recursively:
+> 
+> ============================================
+> WARNING: possible recursive locking detected
+> 5.3.0+ #1 Not tainted
+> --------------------------------------------
+> server/1795 is trying to acquire lock:
+> ffff8880c5158990 (sk_lock-AF_VSOCK){+.+.}, at: hvs_release+0x10/0x120 [hv_sock]
+> 
+> but task is already holding lock:
+> ffff8880c5158150 (sk_lock-AF_VSOCK){+.+.}, at: __vsock_release+0x2e/0xf0 [vsock]
+> 
+> other info that might help us debug this:
+>  Possible unsafe locking scenario:
+> 
+>        CPU0
+>        ----
+>   lock(sk_lock-AF_VSOCK);
+>   lock(sk_lock-AF_VSOCK);
+> 
+>  *** DEADLOCK ***
+> 
+>  May be due to missing lock nesting notation
+> 
+> 2 locks held by server/1795:
+>  #0: ffff8880c5d05ff8 (&sb->s_type->i_mutex_key#10){+.+.}, at: __sock_release+0x2d/0xa0
+>  #1: ffff8880c5158150 (sk_lock-AF_VSOCK){+.+.}, at: __vsock_release+0x2e/0xf0 [vsock]
+> 
+> stack backtrace:
+> CPU: 5 PID: 1795 Comm: server Not tainted 5.3.0+ #1
+> Call Trace:
+>  dump_stack+0x67/0x90
+>  __lock_acquire.cold.67+0xd2/0x20b
+>  lock_acquire+0xb5/0x1c0
+>  lock_sock_nested+0x6d/0x90
+>  hvs_release+0x10/0x120 [hv_sock]
+>  __vsock_release+0x24/0xf0 [vsock]
+>  __vsock_release+0xa0/0xf0 [vsock]
+>  vsock_release+0x12/0x30 [vsock]
+>  __sock_release+0x37/0xa0
+>  sock_close+0x14/0x20
+>  __fput+0xc1/0x250
+>  task_work_run+0x98/0xc0
+>  do_exit+0x344/0xc60
+>  do_group_exit+0x47/0xb0
+>  get_signal+0x15c/0xc50
+>  do_signal+0x30/0x720
+>  exit_to_usermode_loop+0x50/0xa0
+>  do_syscall_64+0x24e/0x270
+>  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+> RIP: 0033:0x7f4184e85f31
+> 
+> Tested-by: Stefano Garzarella <sgarzare@redhat.com>
+> Signed-off-by: Dexuan Cui <decui@microsoft.com>
+> ---
 
-> Hi Alex,
-> 
-> 
-> > -----Original Message-----
-> > From: Alex Williamson <alex.williamson@redhat.com>
-> > Sent: Tuesday, September 24, 2019 6:07 PM
-> > To: Jason Wang <jasowang@redhat.com>
-> > Cc: kvm@vger.kernel.org; linux-s390@vger.kernel.org; linux-
-> > kernel@vger.kernel.org; dri-devel@lists.freedesktop.org; intel-
-> > gfx@lists.freedesktop.org; intel-gvt-dev@lists.freedesktop.org;
-> > kwankhede@nvidia.com; mst@redhat.com; tiwei.bie@intel.com;
-> > virtualization@lists.linux-foundation.org; netdev@vger.kernel.org;
-> > cohuck@redhat.com; maxime.coquelin@redhat.com;
-> > cunming.liang@intel.com; zhihong.wang@intel.com;
-> > rob.miller@broadcom.com; xiao.w.wang@intel.com;
-> > haotian.wang@sifive.com; zhenyuw@linux.intel.com; zhi.a.wang@intel.com;
-> > jani.nikula@linux.intel.com; joonas.lahtinen@linux.intel.com;
-> > rodrigo.vivi@intel.com; airlied@linux.ie; daniel@ffwll.ch;
-> > farman@linux.ibm.com; pasic@linux.ibm.com; sebott@linux.ibm.com;
-> > oberpar@linux.ibm.com; heiko.carstens@de.ibm.com; gor@linux.ibm.com;
-> > borntraeger@de.ibm.com; akrowiak@linux.ibm.com; freude@linux.ibm.com;
-> > lingshan.zhu@intel.com; Ido Shamay <idos@mellanox.com>;
-> > eperezma@redhat.com; lulu@redhat.com; Parav Pandit
-> > <parav@mellanox.com>; christophe.de.dinechin@gmail.com;
-> > kevin.tian@intel.com
-> > Subject: Re: [PATCH V2 6/8] mdev: introduce virtio device and its device ops
-> > 
-> > On Tue, 24 Sep 2019 21:53:30 +0800
-> > Jason Wang <jasowang@redhat.com> wrote:
-> >   
-> > > This patch implements basic support for mdev driver that supports
-> > > virtio transport for kernel virtio driver.
-> > >
-> > > Signed-off-by: Jason Wang <jasowang@redhat.com>
-> > > ---
-> > >  include/linux/mdev.h        |   2 +
-> > >  include/linux/virtio_mdev.h | 145
-> > > ++++++++++++++++++++++++++++++++++++
-> > >  2 files changed, 147 insertions(+)
-> > >  create mode 100644 include/linux/virtio_mdev.h
-> > >
-> > > diff --git a/include/linux/mdev.h b/include/linux/mdev.h index
-> > > 3414307311f1..73ac27b3b868 100644
-> > > --- a/include/linux/mdev.h
-> > > +++ b/include/linux/mdev.h
-> > > @@ -126,6 +126,8 @@ struct mdev_device *mdev_from_dev(struct device
-> > > *dev);
-> > >
-> > >  enum {
-> > >  	MDEV_ID_VFIO = 1,
-> > > +	MDEV_ID_VIRTIO = 2,
-> > > +	MDEV_ID_VHOST = 3,  
-> > 
-> > MDEV_ID_VHOST isn't used yet here.  Also, given the strong interdependence
-> > between the class_id and the ops structure, we might wand to define them in
-> > the same place.  Thanks,
-> >   
-> 
-> When mlx5_core creates mdevs (parent->ops->create() and it wants to
-> bind to mlx5 mdev driver (which does mdev_register_driver()), mlx5
-> core driver will publish MDEV_ID_MLX5_NET defined in central place as
-> include/linux/mdev.h without any ops structure. Because such ops are
-> not relevant. It uses usual, standard ops probe() remove() on the
-> mdev (similar to a regular PCI device). So for VHOST case ops may be
-> closely related to ID, but not for other type of ID.
-> 
-> Just want to make sure, that scope of ID covers this case.
+The patch LGTM and and functionally it's the same as the v2 that I tested, so:
 
-AIUI, these device-ops are primarily meant to have 1:N multiplexing of
-the mdev bus driver.  One mdev bus driver supports N vendor drivers via
-a common "protocol" defined by this structure.  vfio-mdev supports
-GVT-g, GRID, and several sample drivers.  I think Jason and Tiwei are
-attempting something similar if we have multiple vendors that may
-provide virtio/vhost parent drivers.  If you have a 1:1 model with
-mlx5 where you're not trying to abstract a common channel between the
-mdev bus driver and the mdev vendor driver, then I suppose you might
-not use the device-ops capabilities of the mdev-core.  Did I interpret
-the question correctly?  I think that's probably fine, mdev-core
-shouldn't have any dependencies on the device-ops and we shouldn't
-really be dictating the bus/vendor link through mdev.  Thanks,
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 
-Alex
+Thanks,
+Stefano
+
+> 
+> Changes in v2:
+>   Avoid the duplication of code in v1.
+>   Also fix virtio socket code.
+> 
+> 
+> Changes in v3:
+>   Use "lock_sock_nested(sk, level);" -- suggested by Stefano.
+>   Add Stefano's Tested-by.
+> 
+>  net/vmw_vsock/af_vsock.c                | 16 ++++++++++++----
+>  net/vmw_vsock/hyperv_transport.c        |  2 +-
+>  net/vmw_vsock/virtio_transport_common.c |  2 +-
+>  3 files changed, 14 insertions(+), 6 deletions(-)
+> 
+> diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
+> index ab47bf3ab66e..2ab43b2bba31 100644
+> --- a/net/vmw_vsock/af_vsock.c
+> +++ b/net/vmw_vsock/af_vsock.c
+> @@ -638,7 +638,7 @@ struct sock *__vsock_create(struct net *net,
+>  }
+>  EXPORT_SYMBOL_GPL(__vsock_create);
+>  
+> -static void __vsock_release(struct sock *sk)
+> +static void __vsock_release(struct sock *sk, int level)
+>  {
+>  	if (sk) {
+>  		struct sk_buff *skb;
+> @@ -648,9 +648,17 @@ static void __vsock_release(struct sock *sk)
+>  		vsk = vsock_sk(sk);
+>  		pending = NULL;	/* Compiler warning. */
+>  
+> +		/* The release call is supposed to use lock_sock_nested()
+> +		 * rather than lock_sock(), if a sock lock should be acquired.
+> +		 */
+>  		transport->release(vsk);
+>  
+> -		lock_sock(sk);
+> +		/* When "level" is SINGLE_DEPTH_NESTING, use the nested
+> +		 * version to avoid the warning "possible recursive locking
+> +		 * detected". When "level" is 0, lock_sock_nested(sk, level)
+> +		 * is the same as lock_sock(sk).
+> +		 */
+> +		lock_sock_nested(sk, level);
+>  		sock_orphan(sk);
+>  		sk->sk_shutdown = SHUTDOWN_MASK;
+>  
+> @@ -659,7 +667,7 @@ static void __vsock_release(struct sock *sk)
+>  
+>  		/* Clean up any sockets that never were accepted. */
+>  		while ((pending = vsock_dequeue_accept(sk)) != NULL) {
+> -			__vsock_release(pending);
+> +			__vsock_release(pending, SINGLE_DEPTH_NESTING);
+>  			sock_put(pending);
+>  		}
+>  
+> @@ -708,7 +716,7 @@ EXPORT_SYMBOL_GPL(vsock_stream_has_space);
+>  
+>  static int vsock_release(struct socket *sock)
+>  {
+> -	__vsock_release(sock->sk);
+> +	__vsock_release(sock->sk, 0);
+>  	sock->sk = NULL;
+>  	sock->state = SS_FREE;
+>  
+> diff --git a/net/vmw_vsock/hyperv_transport.c b/net/vmw_vsock/hyperv_transport.c
+> index 261521d286d6..c443db7af8d4 100644
+> --- a/net/vmw_vsock/hyperv_transport.c
+> +++ b/net/vmw_vsock/hyperv_transport.c
+> @@ -559,7 +559,7 @@ static void hvs_release(struct vsock_sock *vsk)
+>  	struct sock *sk = sk_vsock(vsk);
+>  	bool remove_sock;
+>  
+> -	lock_sock(sk);
+> +	lock_sock_nested(sk, SINGLE_DEPTH_NESTING);
+>  	remove_sock = hvs_close_lock_held(vsk);
+>  	release_sock(sk);
+>  	if (remove_sock)
+> diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
+> index 5bb70c692b1e..a666ef8fc54e 100644
+> --- a/net/vmw_vsock/virtio_transport_common.c
+> +++ b/net/vmw_vsock/virtio_transport_common.c
+> @@ -820,7 +820,7 @@ void virtio_transport_release(struct vsock_sock *vsk)
+>  	struct sock *sk = &vsk->sk;
+>  	bool remove_sock = true;
+>  
+> -	lock_sock(sk);
+> +	lock_sock_nested(sk, SINGLE_DEPTH_NESTING);
+>  	if (sk->sk_type == SOCK_STREAM)
+>  		remove_sock = virtio_transport_close(vsk);
+>  
+> -- 
+> 2.19.1
+> 
+
+-- 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
