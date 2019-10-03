@@ -2,74 +2,45 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABC0CCB028
-	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 22:29:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 967D5CB031
+	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 22:33:56 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id EC7121578;
-	Thu,  3 Oct 2019 20:29:30 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 86AF5157F;
+	Thu,  3 Oct 2019 20:33:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EE85B1574
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id BF22A157A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 20:29:28 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 43D5E189
+	Thu,  3 Oct 2019 20:33:49 +0000 (UTC)
+X-Greylist: delayed 00:13:19 by SQLgrey-1.7.6
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D0773D3
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 20:29:28 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id l21so3840324edr.5
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 03 Oct 2019 13:29:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=u7ZYonuNP9SAqKQUA4lb0Fri1p8aW+ORUTZ38/PqnQA=;
-	b=He4q4BaVzz3ysrDjqZmQhSBfWZlpceOetRwr/NpYef80KX0Qruy9e8fdi4wXzf2kDX
-	R3WhG4toYhzzvFCma3V937xC5vMzpVdN/q9rWM5LSF8OUwWWGdtvd/lEOpxqdpG+TEFg
-	PbXOUYo6dA4m1VKnSNbnu/2uWRffLzPSn3PN8qbyybBiGga65wjPuIYtf/oj2a5z1+MV
-	8E7k8owGm3tUFkiqTrKkwNolcmIgl5RT951yANA7krwczT45eYgfDr3TtXvApssqvKME
-	uRN+KgaPIcGdw0qyCqjRAMUUSpCmZ80s2r3VewekJS8DkLNSR6/LpiJ5DKUiunF4lcCW
-	jl9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=u7ZYonuNP9SAqKQUA4lb0Fri1p8aW+ORUTZ38/PqnQA=;
-	b=U3Ok2f6F5zVQ3DqnukOY0nnQTGmyWsifGfUV/rD8SljLX8eGnXR2N34npJmlCrqtnj
-	v+kszjxkZxiBwfH53Vz+4aXNgV/Ct+a06px2x0QFAigWZP/yQk8VnUtTWDomncfIXZM1
-	UH3rMgsGBbqz9xfSYkXqXW3hWEJafd4o2MstKASZRflAAVmxNSZW46eNjoaaIXy2o13H
-	xD6+aEphfYhJy8oNwVOn8H+zMYRudk+QjiXRE1DhIlLz7qwP2djz6WCfbwgKibN3jlmN
-	xjdK4L+kaehoH0cSMo2dd4lQxmqEMT+v12D6MzoRAe6mXuONlzZcJO36/k+PVOxMeo5z
-	ruLA==
-X-Gm-Message-State: APjAAAUuzOgIgUFk6+J6cfzcpXyEbANBdLQizpqNuxd2KbPGF42p1Uwo
-	UNTOEpPri9H3HbshAfBYdQ==
-X-Google-Smtp-Source: APXvYqxm4qn6mXmhwnprpw33vR7yG2Zefk8mywl9KAbSBAJFJ6LB7yDYFggcdc6aA1kL894UxSoqRA==
-X-Received: by 2002:a17:907:20a2:: with SMTP id
-	pw2mr9203607ejb.163.1570134566810; 
-	Thu, 03 Oct 2019 13:29:26 -0700 (PDT)
-Received: from avx2 ([46.53.250.203])
-	by smtp.gmail.com with ESMTPSA id c26sm664660edb.2.2019.10.03.13.29.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Oct 2019 13:29:26 -0700 (PDT)
-Date: Thu, 3 Oct 2019 23:29:24 +0300
-From: Alexey Dobriyan <adobriyan@gmail.com>
-To: davem@davemloft.net
-Subject: [PATCH net-next] net, uapi: fix -Wpointer-arith warnings
-Message-ID: <20191003202924.GA21016@avx2>
-MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+	Thu,  3 Oct 2019 20:33:48 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id BBEC5B04F;
+	Thu,  3 Oct 2019 20:20:27 +0000 (UTC)
+From: Davidlohr Bueso <dave@stgolabs.net>
+To: akpm@linux-foundation.org
+Subject: [PATCH 07/11] vhost: convert vhost_umem_interval_tree to half closed
+	intervals
+Date: Thu,  3 Oct 2019 13:18:54 -0700
+Message-Id: <20191003201858.11666-8-dave@stgolabs.net>
+X-Mailer: git-send-email 2.16.4
+In-Reply-To: <20191003201858.11666-1-dave@stgolabs.net>
+References: <20191003201858.11666-1-dave@stgolabs.net>
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=unavailable version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: jon.maloy@ericsson.com, mst@redhat.com, netdev@vger.kernel.org,
-	fw@strlen.de, kadlec@netfilter.org,
-	netfilter-devel@vger.kernel.org, ying.xue@windriver.com,
-	virtualization@lists.linux-foundation.org, pablo@netfilter.org
+Cc: dave@stgolabs.net, Davidlohr Bueso <dbueso@suse.de>,
+	peterz@infradead.org, Michael@mail.linuxfoundation.org,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	walken@google.com, linux-rdma@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -81,110 +52,136 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Add casts to fix these warnings:
+The vhost_umem interval tree really wants [a, b) intervals,
+not fully closed as currently. As such convert it to use the
+new interval_tree_gen.h, and also rename the 'last' endpoint
+in the node to 'end', which both a more suitable name for
+the half closed interval and also reduces the chances of some
+caller being missed.
 
-./usr/include/linux/netfilter_arp/arp_tables.h:200:19: error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-./usr/include/linux/netfilter_bridge/ebtables.h:197:19: error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-./usr/include/linux/netfilter_ipv4/ip_tables.h:223:19: error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-./usr/include/linux/netfilter_ipv6/ip6_tables.h:263:19: error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-./usr/include/linux/tipc_config.h:310:28: error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-./usr/include/linux/tipc_config.h:410:24: error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-./usr/include/linux/virtio_ring.h:170:16: error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-
-Those are theoretical probably but kernel doesn't control compiler flags
-in userspace.
-
-Signed-off-by: Alexey Dobriyan <adobriyan@gmail.com>
+Cc: Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Signed-off-by: Davidlohr Bueso <dbueso@suse.de>
 ---
+ drivers/vhost/vhost.c | 19 +++++++++----------
+ drivers/vhost/vhost.h |  4 ++--
+ 2 files changed, 11 insertions(+), 12 deletions(-)
 
- include/uapi/linux/netfilter_arp/arp_tables.h  |    2 +-
- include/uapi/linux/netfilter_bridge/ebtables.h |    2 +-
- include/uapi/linux/netfilter_ipv4/ip_tables.h  |    2 +-
- include/uapi/linux/netfilter_ipv6/ip6_tables.h |    2 +-
- include/uapi/linux/tipc_config.h               |    4 ++--
- include/uapi/linux/virtio_ring.h               |    2 +-
- 6 files changed, 7 insertions(+), 7 deletions(-)
+diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+index 36ca2cf419bf..80c3cca24dc7 100644
+--- a/drivers/vhost/vhost.c
++++ b/drivers/vhost/vhost.c
+@@ -28,7 +28,7 @@
+ #include <linux/sort.h>
+ #include <linux/sched/mm.h>
+ #include <linux/sched/signal.h>
+-#include <linux/interval_tree_generic.h>
++#include <linux/interval_tree_gen.h>
+ #include <linux/nospec.h>
+ 
+ #include "vhost.h"
+@@ -51,7 +51,7 @@ enum {
+ 
+ INTERVAL_TREE_DEFINE(struct vhost_umem_node,
+ 		     rb, __u64, __subtree_last,
+-		     START, LAST, static inline, vhost_umem_interval_tree);
++		     START, END, static inline, vhost_umem_interval_tree);
+ 
+ #ifdef CONFIG_VHOST_CROSS_ENDIAN_LEGACY
+ static void vhost_disable_cross_endian(struct vhost_virtqueue *vq)
+@@ -1034,7 +1034,7 @@ static int vhost_new_umem_range(struct vhost_umem *umem,
+ 
+ 	node->start = start;
+ 	node->size = size;
+-	node->last = end;
++	node->end = end;
+ 	node->userspace_addr = userspace_addr;
+ 	node->perm = perm;
+ 	INIT_LIST_HEAD(&node->link);
+@@ -1112,7 +1112,7 @@ static int vhost_process_iotlb_msg(struct vhost_dev *dev,
+ 		}
+ 		vhost_vq_meta_reset(dev);
+ 		if (vhost_new_umem_range(dev->iotlb, msg->iova, msg->size,
+-					 msg->iova + msg->size - 1,
++					 msg->iova + msg->size,
+ 					 msg->uaddr, msg->perm)) {
+ 			ret = -ENOMEM;
+ 			break;
+@@ -1126,7 +1126,7 @@ static int vhost_process_iotlb_msg(struct vhost_dev *dev,
+ 		}
+ 		vhost_vq_meta_reset(dev);
+ 		vhost_del_umem_range(dev->iotlb, msg->iova,
+-				     msg->iova + msg->size - 1);
++				     msg->iova + msg->size);
+ 		break;
+ 	default:
+ 		ret = -EINVAL;
+@@ -1320,15 +1320,14 @@ static bool iotlb_access_ok(struct vhost_virtqueue *vq,
+ {
+ 	const struct vhost_umem_node *node;
+ 	struct vhost_umem *umem = vq->iotlb;
+-	u64 s = 0, size, orig_addr = addr, last = addr + len - 1;
++	u64 s = 0, size, orig_addr = addr, last = addr + len;
+ 
+ 	if (vhost_vq_meta_fetch(vq, addr, len, type))
+ 		return true;
+ 
+ 	while (len > s) {
+ 		node = vhost_umem_interval_tree_iter_first(&umem->umem_tree,
+-							   addr,
+-							   last);
++							   addr, last);
+ 		if (node == NULL || node->start > addr) {
+ 			vhost_iotlb_miss(vq, addr, access);
+ 			return false;
+@@ -1455,7 +1454,7 @@ static long vhost_set_memory(struct vhost_dev *d, struct vhost_memory __user *m)
+ 					 region->guest_phys_addr,
+ 					 region->memory_size,
+ 					 region->guest_phys_addr +
+-					 region->memory_size - 1,
++					 region->memory_size,
+ 					 region->userspace_addr,
+ 					 VHOST_ACCESS_RW))
+ 			goto err;
+@@ -2055,7 +2054,7 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
+ 		}
+ 
+ 		node = vhost_umem_interval_tree_iter_first(&umem->umem_tree,
+-							addr, addr + len - 1);
++							   addr, addr + len);
+ 		if (node == NULL || node->start > addr) {
+ 			if (umem != dev->iotlb) {
+ 				ret = -EFAULT;
+diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
+index e9ed2722b633..bb36cb9ed5ec 100644
+--- a/drivers/vhost/vhost.h
++++ b/drivers/vhost/vhost.h
+@@ -53,13 +53,13 @@ struct vhost_log {
+ };
+ 
+ #define START(node) ((node)->start)
+-#define LAST(node) ((node)->last)
++#define END(node) ((node)->end)
+ 
+ struct vhost_umem_node {
+ 	struct rb_node rb;
+ 	struct list_head link;
+ 	__u64 start;
+-	__u64 last;
++	__u64 end;
+ 	__u64 size;
+ 	__u64 userspace_addr;
+ 	__u32 perm;
+-- 
+2.16.4
 
---- a/include/uapi/linux/netfilter_arp/arp_tables.h
-+++ b/include/uapi/linux/netfilter_arp/arp_tables.h
-@@ -199,7 +199,7 @@ struct arpt_get_entries {
- /* Helper functions */
- static __inline__ struct xt_entry_target *arpt_get_target(struct arpt_entry *e)
- {
--	return (void *)e + e->target_offset;
-+	return (struct xt_entry_target *)((char *)e + e->target_offset);
- }
- 
- /*
---- a/include/uapi/linux/netfilter_bridge/ebtables.h
-+++ b/include/uapi/linux/netfilter_bridge/ebtables.h
-@@ -194,7 +194,7 @@ struct ebt_entry {
- static __inline__ struct ebt_entry_target *
- ebt_get_target(struct ebt_entry *e)
- {
--	return (void *)e + e->target_offset;
-+	return (struct ebt_entry_target *)((char *)e + e->target_offset);
- }
- 
- /* {g,s}etsockopt numbers */
---- a/include/uapi/linux/netfilter_ipv4/ip_tables.h
-+++ b/include/uapi/linux/netfilter_ipv4/ip_tables.h
-@@ -222,7 +222,7 @@ struct ipt_get_entries {
- static __inline__ struct xt_entry_target *
- ipt_get_target(struct ipt_entry *e)
- {
--	return (void *)e + e->target_offset;
-+	return (struct xt_entry_target *)((char *)e + e->target_offset);
- }
- 
- /*
---- a/include/uapi/linux/netfilter_ipv6/ip6_tables.h
-+++ b/include/uapi/linux/netfilter_ipv6/ip6_tables.h
-@@ -262,7 +262,7 @@ struct ip6t_get_entries {
- static __inline__ struct xt_entry_target *
- ip6t_get_target(struct ip6t_entry *e)
- {
--	return (void *)e + e->target_offset;
-+	return (struct xt_entry_target *)((char *)e + e->target_offset);
- }
- 
- /*
---- a/include/uapi/linux/tipc_config.h
-+++ b/include/uapi/linux/tipc_config.h
-@@ -309,7 +309,7 @@ static inline int TLV_SET(void *tlv, __u16 type, void *data, __u16 len)
- 	tlv_ptr->tlv_len  = htons(tlv_len);
- 	if (len && data) {
- 		memcpy(TLV_DATA(tlv_ptr), data, len);
--		memset(TLV_DATA(tlv_ptr) + len, 0, TLV_SPACE(len) - tlv_len);
-+		memset((char *)TLV_DATA(tlv_ptr) + len, 0, TLV_SPACE(len) - tlv_len);
- 	}
- 	return TLV_SPACE(len);
- }
-@@ -409,7 +409,7 @@ static inline int TCM_SET(void *msg, __u16 cmd, __u16 flags,
- 	tcm_hdr->tcm_flags = htons(flags);
- 	if (data_len && data) {
- 		memcpy(TCM_DATA(msg), data, data_len);
--		memset(TCM_DATA(msg) + data_len, 0, TCM_SPACE(data_len) - msg_len);
-+		memset((char *)TCM_DATA(msg) + data_len, 0, TCM_SPACE(data_len) - msg_len);
- 	}
- 	return TCM_SPACE(data_len);
- }
---- a/include/uapi/linux/virtio_ring.h
-+++ b/include/uapi/linux/virtio_ring.h
-@@ -169,7 +169,7 @@ static inline void vring_init(struct vring *vr, unsigned int num, void *p,
- {
- 	vr->num = num;
- 	vr->desc = p;
--	vr->avail = p + num*sizeof(struct vring_desc);
-+	vr->avail = (struct vring_avail *)((char *)p + num * sizeof(struct vring_desc));
- 	vr->used = (void *)(((uintptr_t)&vr->avail->ring[num] + sizeof(__virtio16)
- 		+ align-1) & ~(align - 1));
- }
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
