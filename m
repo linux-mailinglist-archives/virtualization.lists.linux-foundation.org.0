@@ -2,101 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71C47C92C7
-	for <lists.virtualization@lfdr.de>; Wed,  2 Oct 2019 22:10:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20715C9870
+	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 08:46:06 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 112EC15E2;
-	Wed,  2 Oct 2019 20:10:28 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id E876AE95;
+	Thu,  3 Oct 2019 06:45:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id AEEE615DC
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 248F4941
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  2 Oct 2019 20:10:26 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 090F5D3
+	Thu,  3 Oct 2019 06:45:59 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.heh.ee (heh.ee [213.35.143.160])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5B8B2712
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  2 Oct 2019 20:10:24 +0000 (UTC)
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
-	[209.85.221.72])
+	Thu,  3 Oct 2019 06:45:58 +0000 (UTC)
+Received: from [0.0.0.0] (unknown [127.0.0.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 5049C69089
-	for <virtualization@lists.linux-foundation.org>;
-	Wed,  2 Oct 2019 20:10:23 +0000 (UTC)
-Received: by mail-wr1-f72.google.com with SMTP id i15so36038wrx.12
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 02 Oct 2019 13:10:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=ECzmcjCSbbcsFSzX1mjy2hRL/7INCALmJsVRlbIqA+M=;
-	b=SKwY7CVZMrj1wJcO8zAxppwrDxgJIMIb08Ba2fBGwq+kjjNyLqqibq3eyAEJJedDpA
-	Z0ZCyQzp0DElH3cd7oihXRjCWn/b/TVOmNFh4Fs5Umo4oMS6SBis0ramBL5VZ0CVfYYL
-	A6NHKi/sMGncIMDwHBmHtsRd8j8zu88tTMoGjqZllty79BWgPjMiyiURLdzyop6Bk7Aj
-	F3VnLtxHl0di6u6cBXBWVfYIINVWz7uCNCW+++PCJRA48lnj4CWioTEGHuhN5GgsJaHK
-	F/6AjGPCYjjwk0vl+wSPqrAbyrHpNgRLuM/f7pLVaM4FWGbjp7/nEWdkH67AtBC7T/ta
-	UGBA==
-X-Gm-Message-State: APjAAAVyuus/h5Q5Kv2qvz/19DeindjYqCrUMgIxNi217cVEnJC9K7a2
-	ozPTW2y+oh/ZEgLDcvdCZyaeAKhYaJ0rvfetRTYKk+G7l6ypSEhId7A7ITKS7RPA3DLdUpC46m7
-	HQKDWD1ikfcBtikhxEv9w+95o2il9wCrdNgFpzc4W5w==
-X-Received: by 2002:a5d:5185:: with SMTP id k5mr4309037wrv.341.1570047021839; 
-	Wed, 02 Oct 2019 13:10:21 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwCrWt+T8lq0j3jrbvKKSdlpqYZ0reHvLDTlwAHJf9pBgzMN4snDZo/L2kojw/X0EwObK+tMQ==
-X-Received: by 2002:a5d:5185:: with SMTP id k5mr4309009wrv.341.1570047021557; 
-	Wed, 02 Oct 2019 13:10:21 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:e56d:fbdf:8b79:c79c?
-	([2001:b07:6468:f312:e56d:fbdf:8b79:c79c])
-	by smtp.gmail.com with ESMTPSA id 94sm642951wrk.92.2019.10.02.13.10.18
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Wed, 02 Oct 2019 13:10:20 -0700 (PDT)
-Subject: Re: DANGER WILL ROBINSON, DANGER
-To: Jerome Glisse <jglisse@redhat.com>
-References: <20190815191929.GA9253@redhat.com>
-	<20190815201630.GA25517@redhat.com>
-	<VI1PR02MB398411CA9A56081FF4D1248EBBA40@VI1PR02MB3984.eurprd02.prod.outlook.com>
-	<20190905180955.GA3251@redhat.com>
-	<5b0966de-b690-fb7b-5a72-bc7906459168@redhat.com>
-	<DB7PR02MB3979D1143909423F8767ACE2BBB60@DB7PR02MB3979.eurprd02.prod.outlook.com>
-	<20191002192714.GA5020@redhat.com>
-	<ab461f02-e6cd-de0f-b6ce-0f5a95798eaa@redhat.com>
-	<20191002141542.GA5669@redhat.com>
-	<f26710a4-424f-730c-a676-901bae451409@redhat.com>
-	<20191002170429.GA8189@redhat.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
+	by mx1.heh.ee (Postfix) with ESMTPSA id 9479116D285;
+	Thu,  3 Oct 2019 09:45:55 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=ristioja.ee; s=mail;
+	t=1570085155; bh=lo1ytOcDtHw2l+3dcU7fGcAyQaVo6i3tIMNGf9S8fnI=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To;
+	b=qfeWJJPzVyxQRpM7KEnuTiB4TNHfik16gyUY91NXyH3hViTA7orx+Y5FlNXFJumt2
+	zBZmHcQl0BCENiK6lfOMLcVVezU2WLONRdW1DECWkq3csOga2Bk4Dw5n9PftXQv7px
+	a7U8jB4VSsxY5Qy264mMZReKwLsD8HdGwLip91j4=
+Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
+To: Frediano Ziglio <fziglio@redhat.com>
+References: <92785039-0941-4626-610b-f4e3d9613069@ristioja.ee>
+	<20190905071407.47iywqcqomizs3yr@sirius.home.kraxel.org>
+	<e4b7d889-15f3-0c90-3b9f-d395344499c0@ristioja.ee>
+	<ccafdbaf-7f8e-8616-5543-2a178bd63828@ristioja.ee>
+	<1174991123.3693721.1569850187145.JavaMail.zimbra@redhat.com>
+From: Jaak Ristioja <jaak@ristioja.ee>
 Openpgp: preference=signencrypt
-Message-ID: <dd0ca0d3-f502-78a1-933a-7e1b5fb90baa@redhat.com>
-Date: Wed, 2 Oct 2019 22:10:18 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+Autocrypt: addr=jaak@ristioja.ee; prefer-encrypt=mutual; keydata=
+	mDMEWyjlXBYJKwYBBAHaRw8BAQdABEPNmQfWmwZZXSl5vKnpI1UVtS4l2N9kv7KqyFYtfLe0
+	IEphYWsgUmlzdGlvamEgPGphYWtAcmlzdGlvamEuZWU+iJYEExYIAD4WIQTjaPCMFhRItZ2p
+	iV/uxscoTrbt3AUCWyjlXAIbIwUJA8OZNAULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRDu
+	xscoTrbt3OYPAP9l6ZjLh4qK2r/H1b+7a7qZIAjwf0o4AX6qvtX1WERxywEAhhtOHg+G8idL
+	FR08XPW7nlobl2qEHMnqBTqteSsz1gG4OARbKOVcEgorBgEEAZdVAQUBAQdAU6y3a2gcxTI+
+	bZgPkJjPXxr0tvuLpCqkIb/envF5ajADAQgHiH4EGBYIACYWIQTjaPCMFhRItZ2piV/uxsco
+	Trbt3AUCWyjlXAIbDAUJA8OZNAAKCRDuxscoTrbt3OG5AP0cd6gLbKVSBvSEgRNQ+BNk/1a5
+	lSQtocXAcwUx0X9h0gEAqIZ9u7pCWBlRTL+rij97VWWkB/jb1deZ2gExNhd6RAU=
+Message-ID: <b902ffbf-9d25-89bc-2d46-d0a4f67dbee4@ristioja.ee>
+Date: Thu, 3 Oct 2019 09:45:55 +0300
+User-Agent: undefined
 MIME-Version: 1.0
-In-Reply-To: <20191002170429.GA8189@redhat.com>
+In-Reply-To: <1174991123.3693721.1569850187145.JavaMail.zimbra@redhat.com>
 Content-Language: en-US
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Tamas K Lengyel <tamas@tklengyel.com>,
-	Weijiang Yang <weijiang.yang@intel.com>, Yu C <yu.c.zhang@intel.com>,
-	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	=?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@redhat.com>,
-	Jan Kiszka <jan.kiszka@siemens.com>,
-	=?UTF-8?Q?Samuel_Laur=c3=a9n?= <samuel.lauren@iki.fi>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Matthew Wilcox <willy@infradead.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	=?UTF-8?Q?Adalbert_Laz=c4=83r?= <alazar@bitdefender.com>,
-	"linux-mm@kvack.org" <linux-mm@kvack.org>,
-	Patrick Colp <patrick.colp@oracle.com>,
-	Mathieu Tarral <mathieu.tarral@protonmail.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Mircea CIRJALIU - MELIU <mcirjaliu@bitdefender.com>,
-	=?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+	Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+	spice-devel@lists.freedesktop.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -113,42 +78,33 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 02/10/19 19:04, Jerome Glisse wrote:
-> On Wed, Oct 02, 2019 at 06:18:06PM +0200, Paolo Bonzini wrote:
->>>> If the mapping of the source VMA changes, mirroring can update the
->>>> target VMA via insert_pfn.  But what ensures that KVM's MMU notifier
->>>> dismantles its own existing page tables (so that they can be recreated
->>>> with the new mapping from the source VMA)?
->>
->> The KVM inspector process is also (or can be) a QEMU that will have to
->> create its own KVM guest page table.  So if a page in the source VMA is
->> unmapped we want:
->>
->> - the source KVM to invalidate its guest page table (done by the KVM MMU
->> notifier)
->>
->> - the target VMA to be invalidated (easy using mirroring)
->>
->> - the target KVM to invalidate its guest page table, as a result of
->> invalidation of the target VMA
-> 
-> You can do the target KVM invalidation inside the mirroring invalidation
-> code.
+On 30.09.19 16:29, Frediano Ziglio wrote:
+>   Why didn't you update bug at https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1813620?
+> I know it can seem tedious but would help tracking it.
 
-Why should the source and target KVMs behave differently?  If the source
-invalidates its guest page table via MMU notifiers, so should the target.
+I suppose the lack on centralized tracking and handling of Linux kernel
+bugs is a delicate topic, so I don't want to rant much more on that.
+Updating that bug would tedious and time-consuming indeed, which is why
+I haven't done that. To be honest, I don't have enough time and motivation.
 
-The KVM MMU notifier exists so that nothing (including mirroring) needs
-to know that there is KVM on the other side.  Any interaction between
-KVM page tables and VMAs must be mediated by MMU notifiers, anything
-else is unacceptable.
+I would have posted a link to the upstream (kernel) bug tracker for
+this, but being confined I only posted a link to my original e-mail on
+the virtualization list Pipermail archive. Can you please provide a
+better URL to a reasonably browsable index of this whole e-mail thread
+in some web-based mailing list archive? Perhaps posting that to
+Launchpad would suffice.
 
-If it is possible to invoke the MMU notifiers around the calls to
-insert_pfn, that of course would be perfect.
 
-Thanks,
+> It seems you are having this issue since quite some time and with
+> multiple kernel versions.
+> Are you still using Kubuntu? Maybe it happens more with KDE.
+> From the Kernel log looks like a dead lock.
 
-Paolo
+Yes, I'm using Kubuntu 19.04.
+
+
+Best regards,
+Jaak Ristioja
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
