@@ -2,75 +2,102 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDD36CAE32
-	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 20:32:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15E78CAF5D
+	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 21:39:06 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 260A112A5;
-	Thu,  3 Oct 2019 18:31:54 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 363AB14C2;
+	Thu,  3 Oct 2019 19:38:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2E75310BD
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 21FF014BA
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 18:31:53 +0000 (UTC)
+	Thu,  3 Oct 2019 19:38:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8D1C4D3
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C064F1FB
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 18:31:52 +0000 (UTC)
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
-	[209.85.160.198])
+	Thu,  3 Oct 2019 19:38:39 +0000 (UTC)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+	[209.85.221.70])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id BF5607FDCA
+	by mx1.redhat.com (Postfix) with ESMTPS id 18D383D966
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 18:31:51 +0000 (UTC)
-Received: by mail-qt1-f198.google.com with SMTP id z21so3737081qtq.21
+	Thu,  3 Oct 2019 19:38:39 +0000 (UTC)
+Received: by mail-wr1-f70.google.com with SMTP id t11so1562403wrq.19
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 03 Oct 2019 11:31:51 -0700 (PDT)
+	Thu, 03 Oct 2019 12:38:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:content-transfer-encoding
-	:in-reply-to;
-	bh=d0HiH6tiOQHl/25OUuo+EKBoABU3SKKBTLsxWaMW8mI=;
-	b=FoxQQO8hS3eF7EzuyZNmlxMr30HrDQ8NcYmwdSvvgY5AIqsMDHdDDI+m/8Fs3OD2D1
-	K5GIsfUIbfOjY4JJYLYCg+Pt0nrBCHgZ6+Kp2KsDb8WRqSEPavaPXuW3Up4oGZW/P07F
-	4eUe/6/NfazZ2iRhEBFMcXY0AqIUt48yesGDkNUrJE6ihfn/tg7fXopmBa7Mt9tf/Jev
-	vfHuf7R6Jqo1RTSzl+Y2SBeKKJ7CZSA1RJj/jsKQ9qHURsF0p6g1AYS5u8hmK/vFWCiJ
-	4Eph/TmxpTmAgxXAI2qZR0D1CqqX1vjGwe//Nl/oyTf+LxpTM/J+UT1TpluuMOH4Vg9o
-	4MOw==
-X-Gm-Message-State: APjAAAUcwBmxwmWhcq9SwoPNFlKwZ8YcnCk+WBt1pSXR/zVjO0xdiprP
-	L/C1iDe9oqxQzCjPnZv6mVNjktrhOjn3JK5fY8+lK5CF2YkE/+WYFaFHhK8mtb4hJPvRysxv8kN
-	lsO8+ncNAC+HcaUiXAbXtAB3LhFwHNezAoh9H+EcExA==
-X-Received: by 2002:aed:2da3:: with SMTP id i32mr11682178qtd.299.1570127509616;
-	Thu, 03 Oct 2019 11:31:49 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqyUmidbD9b3FbN0lSK/EB3CvSF1AXzoX9igaSDDR/AtYxq7GqVMg7nESj9i15go34t1uwZB5g==
-X-Received: by 2002:aed:2da3:: with SMTP id i32mr11682145qtd.299.1570127509339;
-	Thu, 03 Oct 2019 11:31:49 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-10-77.red.bezeqint.net. [79.176.10.77])
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=7QLgfjpHoSlZ+ECWPNFBD+JW0vOaubyrwbW7qiEpfTs=;
+	b=hSGC4hOisQYAhXzclZUnhd6OVLqbknTz/IWlHsJtKL9hCboLHySAh0V6z05rfnEnK1
+	1NYSf6y1r1k9HsQYx2oH2rqQTEKqedeL0WaIOFycz6JIWPNMRohmrY6Jsfgacy382/W7
+	vy89mTh34BX04FQNJnZ5g47hL/NkAvcLxI9L2dCm+vrYSkEkjnHKvCdEW7tf+b+NSllH
+	TweneBz6jridVjQHBcjo11+Vqn4QuMY9/iXdudoqUXfJQpfy5m/pRh60BDS3f7Hn/f98
+	d76aNSoe63X0pj/u3GNu+OofzBfWbJBUVx0XzGNw+YQwFbY7dD+zCm7UeEtQCzCjVPi/
+	ytLg==
+X-Gm-Message-State: APjAAAUbf1VRlCWB8ionn7uO08wWFsqAFkC0oKRujxJmuB3jH7G4Sdwq
+	fV6oHtXSwqkiAmZLYvnnE/bDK7LSclEt2NOLpbLyx3q922gHNi3b8sdnhvI+6u3avSieSQMYCG4
+	YjjQULsU9rxllablCDgKbB7BkKMUKidsdYmqsyY7izQ==
+X-Received: by 2002:adf:e28e:: with SMTP id v14mr8548949wri.184.1570131517629; 
+	Thu, 03 Oct 2019 12:38:37 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwaEc996x92Bjfkrt/7/Bp3ePgLBVpbOA1h0uSvOWcidOkSjdp4RwK4EnTkpGFal4Tmi9DFQw==
+X-Received: by 2002:adf:e28e:: with SMTP id v14mr8548930wri.184.1570131517306; 
+	Thu, 03 Oct 2019 12:38:37 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:e56d:fbdf:8b79:c79c?
+	([2001:b07:6468:f312:e56d:fbdf:8b79:c79c])
 	by smtp.gmail.com with ESMTPSA id
-	t32sm2459286qtb.64.2019.10.03.11.31.47
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 03 Oct 2019 11:31:48 -0700 (PDT)
-Date: Thu, 3 Oct 2019 14:31:44 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Tyler Sanderson <tysand@google.com>
-Subject: Re: VIRTIO_BALLOON_F_FREE_PAGE_HINT
-Message-ID: <20191003142854-mutt-send-email-mst@kernel.org>
-References: <CAJuQAmpQmNN1EJHm4RinZnBven9Bx4GGqd-8Mt+L=3Z-3pd+zg@mail.gmail.com>
-	<5D7EE856.2080602@intel.com>
-	<09257686-90df-5c31-c35f-9d16fc77fee1@redhat.com>
-	<CAJuQAmpQV26kb9vTyoW-Q7PsD0SOfX+otkiQZAks1L6k7rgdig@mail.gmail.com>
+	q124sm5331957wma.5.2019.10.03.12.38.35
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Thu, 03 Oct 2019 12:38:36 -0700 (PDT)
+Subject: Re: DANGER WILL ROBINSON, DANGER
+To: Jerome Glisse <jglisse@redhat.com>,
+	Mircea CIRJALIU - MELIU <mcirjaliu@bitdefender.com>
+References: <DB7PR02MB3979D1143909423F8767ACE2BBB60@DB7PR02MB3979.eurprd02.prod.outlook.com>
+	<20191002192714.GA5020@redhat.com>
+	<ab461f02-e6cd-de0f-b6ce-0f5a95798eaa@redhat.com>
+	<20191002141542.GA5669@redhat.com>
+	<f26710a4-424f-730c-a676-901bae451409@redhat.com>
+	<20191002170429.GA8189@redhat.com>
+	<dd0ca0d3-f502-78a1-933a-7e1b5fb90baa@redhat.com>
+	<20191003154233.GA4421@redhat.com>
+	<d62a6720-e069-4e03-6a3a-798c020786f7@redhat.com>
+	<DB7PR02MB39796440DC81A5B53E86F029BB9F0@DB7PR02MB3979.eurprd02.prod.outlook.com>
+	<20191003183108.GA3557@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Openpgp: preference=signencrypt
+Message-ID: <afe2cf69-5c2c-95af-88ce-f3814fece2e2@redhat.com>
+Date: Thu, 3 Oct 2019 21:38:35 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAJuQAmpQV26kb9vTyoW-Q7PsD0SOfX+otkiQZAks1L6k7rgdig@mail.gmail.com>
+In-Reply-To: <20191003183108.GA3557@redhat.com>
+Content-Language: en-US
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: virtualization@lists.linux-foundation.org
+Cc: Tamas K Lengyel <tamas@tklengyel.com>,
+	Weijiang Yang <weijiang.yang@intel.com>, Yu C <yu.c.zhang@intel.com>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	=?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@redhat.com>,
+	Jan Kiszka <jan.kiszka@siemens.com>,
+	=?UTF-8?Q?Samuel_Laur=c3=a9n?= <samuel.lauren@iki.fi>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	=?UTF-8?Q?Adalbert_Laz=c4=83r?= <alazar@bitdefender.com>,
+	"linux-mm@kvack.org" <linux-mm@kvack.org>,
+	Patrick Colp <patrick.colp@oracle.com>,
+	Mathieu Tarral <mathieu.tarral@protonmail.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	=?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -82,187 +109,22 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu, Oct 03, 2019 at 11:27:46AM -0700, Tyler Sanderson wrote:
-> Sorry for the slow reply, I did some verification on my end. See responses
-> inline.
-> =
+On 03/10/19 20:31, Jerome Glisse wrote:
+> So in summary, the source qemu process has anonymous vma (regular
+> libc malloc for instance). The introspector qemu process which
+> mirror the the source qemu use mmap on /dev/kvm (assuming you can
+> reuse the kvm device file for this otherwise you can introduce a
+> new kvm device file). 
 
-> On Mon, Sep 16, 2019 at 12:26 AM David Hildenbrand <david@redhat.com> wro=
-te:
-> =
+It should be a new device, something like /dev/kvmmem.  BitDefender's
+RFC patches already have the right userspace API, that was not an issue.
 
->     On 16.09.19 03:41, Wei Wang wrote:
->     > On 09/14/2019 02:36 AM, Tyler Sanderson wrote:
->     >> Hello, I'm curious about the intent of VIRTIO_BALLOON_F_FREE_PAGE_=
-HINT
->     >> (commit
->     >> <https://github.com/torvalds/linux/commit/
->     86a559787e6f5cf662c081363f64a20cad654195#
->     diff-fd202acf694d9eba19c8c64da3e480c9>).
->     >>
->     >>
->     >> My understanding is that this mechanism works similarly to the
->     >> existing inflate/deflate queues. Pages are allocated by the guest =
-and
->     >> then reported on VQ_FREE_PAGE.
->     >>
->     >> Question: Is there a limit to how many pages will be allocated? Wh=
-at
->     >> controls the amount of memory pressure applied?
->     >
->     > No control for the limit currently. The implementation reports all =
-the
->     > guest free pages to host.
->     > The main usage for this feature so far is to have guest skip sending
->     > those guest free pages
->     > (the more, the better) during live migration.
-> =
-
-> How does this differ from the regular inflate/deflate queue?
-> Also, couldn't you simply skip sending pages that do not have host pages
-> backing them (assuming pages added to the balloon are unbacked to reclaim=
- the
-> memory)?
-
-Yes but putting most guest memory into the balloon would
-slow the guest down significantly.
-
-
-> =
-
->     >
->     >
->     >>
->     >> In my experience with virtio balloon there are problems with the
->     >> mechanisms that are supposed to deflate the balloon in response to
->     >> memory pressure (e.g. OOM notifier).
->     >
->     > What problem did you see? We've also changed balloon to use memory
->     shrinker,
->     > did you see the problem with shrinker as well?
-> =
-
-> Yes, I've observed problems both before and after the shrinker change (al=
-though
-> different problems).
-> Before the shrinker change, the overcommit accounting=A0feature gets in t=
-he way
-> and prevents allocations, even when the balloon could be deflated. The OOM
-> notifier is never invoked so the balloon driver's hook into the OOM=A0not=
-ifier is
-> useless.
-> After the shrinker change the overcommit accounting problem is fixed, but=
- I
-> have still found that forcibly deflating the balloon under memory pressur=
-e is
-> slow enough that random allocations can still fail (is there a timeout for
-> allocations?).
-> For example, I've seen:
-> tysand@vm ~ $ fallocate -l 5G d/foo=A0 =A0 // d is tmpfs mount. This comm=
-and causes
-> balloon to require deflation.
-> tysand@vm grep Mem /proc/meminfo
-> MemTotal: =A0 =A0 =A0 =A08172852 kB
-> MemFree: =A0 =A0 =A0 =A0 =A0138932 kB
-> MemAvailable: =A0 =A0 =A083428 kB
-> tysand@vm ~ $ grep Mem /proc/meminfo
-> free(): invalid pointer
-> -bash: wait_for: No record of process 5415
-> free(): invalid pointer
-> =
-
-> Or similarly, I've seen SSH terminate with:
-> tysand@vm:~$ grep Mem /proc/meminfo
-> *** stack smashing detected ***: <unknown> terminated
-> =
-
-> Presumably the stack smashing and "free(): invalid pointer" are caused by
-> malloc returning null in those programs and the programs not handling it
-> correctly.
-> =
-
-> Notably I don't see the fallocate command fail. Usually only other proces=
-ses.
-> =
-
-> =
-
->     >
->     >>
->     >> It seems an ideal balloon interface would allow the guest to round
->     >> robin through free guest physical pages, allowing the host to unba=
-ck
->     >> them, but never having more than a few pages allocated to the ball=
-oon
->     >> at any one time. For example:
->     >> 1. Guest allocates 1 page and notifies balloon device of this page=
-'s
->     >> address.
->     >> 2. Host debacks the received page.
->     >> 3. Guest frees the page.
->     >> 4. Repeat at #1, but ensure that different pages are allocated each
->     time.
->     >
->     > Probably you need a mechanism to "ensure" different pages to be
->     allocated.
->     > The current implementation (having balloon hold the allocated pages)
->     could
->     > be thought of as one mechanism (it is simple).
->     >
->     >>
->     >> This way the "balloon size" is never more than a few pages and does
->     >> not create memory pressure. However the difficulty is in ensuring =
-each
->     >> set of sent pages is disjoint from previously sent pages. Is there=
- a
->     >> mechanism to round-robin allocations through all of guest physical
->     >> memory? Does VIRTIO_BALLOON_F_FREE_PAGE_HINT enable this?
-> =
-
->     There are use cases where you really want memory pressure (page cache=
- is
->     the prime example). Anyhow, I think the use case you want the
->     "round-robin allocations" for is better tackled by "free page reporti=
-ng"
->     (used to be called "free page hinting") currently discussed on various
->     lists.
-> =
-
->     "allowing the host to unback them, but never having more than a few
->     pages allocated to the balloon at any one time." is similar to what
->     "free page reporting" does. We decided to only report bigger pages
->     (avoid splitting up THP in the hypervisor, overhead) and only
->     temporarily pull out a fixed amount of pages (16) from the page
->     allocator to avoid false-OOM. Guaranteeing forward progress (similar =
-to
->     what you describe) is one important key concept.
-> =
-
-> =
-
-> I'm really excited to see this being pursued! It looks like things are ac=
-tively
-> moving forward.
-> =
-
-> =
-
-> =
-
->     --
-> =
-
->     Thanks,
-> =
-
->     David / dhildenb
-> =
-
+Paolo
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
