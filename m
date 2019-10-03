@@ -2,51 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79EDBC99C3
-	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 10:24:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 162DDCA14B
+	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 17:44:08 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 504031356;
-	Thu,  3 Oct 2019 08:24:23 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3BAA7107A;
+	Thu,  3 Oct 2019 15:44:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4A28E11C2
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2D8521071
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 08:24:22 +0000 (UTC)
+	Thu,  3 Oct 2019 15:44:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail3-163.sinamail.sina.com.cn (mail3-163.sinamail.sina.com.cn
-	[202.108.3.163])
-	by smtp1.linuxfoundation.org (Postfix) with SMTP id 6F9911FB
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B00E05D3
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 08:24:21 +0000 (UTC)
-Received: from unknown (HELO localhost.localdomain)([124.64.2.167])
-	by sina.com with ESMTP
-	id 5D95B00D0003713B; Thu, 3 Oct 2019 16:23:43 +0800 (CST)
-X-Sender: hdanton@sina.com
-X-Auth-ID: hdanton@sina.com
-X-SMAIL-MID: 29860649283206
-From: Hillf Danton <hdanton@sina.com>
-To: Frediano Ziglio <fziglio@redhat.com>,
-	Jaak Ristioja <jaak@ristioja.ee>
-Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
-Date: Thu,  3 Oct 2019 16:23:30 +0800
-Message-Id: <20191003082330.15260-1-hdanton@sina.com>
-In-Reply-To: <1174991123.3693721.1569850187145.JavaMail.zimbra@redhat.com>
-References: <92785039-0941-4626-610b-f4e3d9613069@ristioja.ee>
-	<20190905071407.47iywqcqomizs3yr@sirius.home.kraxel.org>
-	<e4b7d889-15f3-0c90-3b9f-d395344499c0@ristioja.ee>
-	<ccafdbaf-7f8e-8616-5543-2a178bd63828@ristioja.ee>
-	<1174991123.3693721.1569850187145.JavaMail.zimbra@redhat.com>
+	Thu,  3 Oct 2019 15:43:59 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id CD2AD3082231;
+	Thu,  3 Oct 2019 15:43:58 +0000 (UTC)
+Received: from redhat.com (ovpn-112-54.rdu2.redhat.com [10.10.112.54])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 3DB7119C69;
+	Thu,  3 Oct 2019 15:43:49 +0000 (UTC)
+Date: Thu, 3 Oct 2019 11:42:33 -0400
+From: Jerome Glisse <jglisse@redhat.com>
+To: Paolo Bonzini <pbonzini@redhat.com>
+Subject: Re: DANGER WILL ROBINSON, DANGER
+Message-ID: <20191003154233.GA4421@redhat.com>
+References: <VI1PR02MB398411CA9A56081FF4D1248EBBA40@VI1PR02MB3984.eurprd02.prod.outlook.com>
+	<20190905180955.GA3251@redhat.com>
+	<5b0966de-b690-fb7b-5a72-bc7906459168@redhat.com>
+	<DB7PR02MB3979D1143909423F8767ACE2BBB60@DB7PR02MB3979.eurprd02.prod.outlook.com>
+	<20191002192714.GA5020@redhat.com>
+	<ab461f02-e6cd-de0f-b6ce-0f5a95798eaa@redhat.com>
+	<20191002141542.GA5669@redhat.com>
+	<f26710a4-424f-730c-a676-901bae451409@redhat.com>
+	<20191002170429.GA8189@redhat.com>
+	<dd0ca0d3-f502-78a1-933a-7e1b5fb90baa@redhat.com>
 MIME-Version: 1.0
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,FREEMAIL_FROM
+Content-Disposition: inline
+In-Reply-To: <dd0ca0d3-f502-78a1-933a-7e1b5fb90baa@redhat.com>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.47]);
+	Thu, 03 Oct 2019 15:43:59 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
-	Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
-	spice-devel@lists.freedesktop.org
+Cc: Tamas K Lengyel <tamas@tklengyel.com>,
+	Weijiang Yang <weijiang.yang@intel.com>, Yu C <yu.c.zhang@intel.com>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>,
+	Jan Kiszka <jan.kiszka@siemens.com>,
+	Samuel =?iso-8859-1?Q?Laur=E9n?= <samuel.lauren@iki.fi>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	Adalbert =?utf-8?B?TGF6xINy?= <alazar@bitdefender.com>,
+	"linux-mm@kvack.org" <linux-mm@kvack.org>,
+	Patrick Colp <patrick.colp@oracle.com>,
+	Mathieu Tarral <mathieu.tarral@protonmail.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Mircea CIRJALIU - MELIU <mcirjaliu@bitdefender.com>,
+	Mihai =?utf-8?B?RG9uyJt1?= <mdontu@bitdefender.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,53 +83,75 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+On Wed, Oct 02, 2019 at 10:10:18PM +0200, Paolo Bonzini wrote:
+> On 02/10/19 19:04, Jerome Glisse wrote:
+> > On Wed, Oct 02, 2019 at 06:18:06PM +0200, Paolo Bonzini wrote:
+> >>>> If the mapping of the source VMA changes, mirroring can update the
+> >>>> target VMA via insert_pfn.  But what ensures that KVM's MMU notifier
+> >>>> dismantles its own existing page tables (so that they can be recreat=
+ed
+> >>>> with the new mapping from the source VMA)?
+> >>
+> >> The KVM inspector process is also (or can be) a QEMU that will have to
+> >> create its own KVM guest page table.  So if a page in the source VMA is
+> >> unmapped we want:
+> >>
+> >> - the source KVM to invalidate its guest page table (done by the KVM M=
+MU
+> >> notifier)
+> >>
+> >> - the target VMA to be invalidated (easy using mirroring)
+> >>
+> >> - the target KVM to invalidate its guest page table, as a result of
+> >> invalidation of the target VMA
+> > =
 
-On Thu, 3 Oct 2019 09:45:55 +0300 Jaak Ristioja wrote:
-> On 30.09.19 16:29, Frediano Ziglio wrote:
-> >   Why didn't you update bug at https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1813620?
-> > I know it can seem tedious but would help tracking it.
-> 
-> I suppose the lack on centralized tracking and handling of Linux kernel
-> bugs is a delicate topic, so I don't want to rant much more on that.
-> Updating that bug would tedious and time-consuming indeed, which is why
-> I haven't done that. To be honest, I don't have enough time and motivation.
+> > You can do the target KVM invalidation inside the mirroring invalidation
+> > code.
+> =
 
-Give the diff below a go only when it is convenient and only if it makes
-a bit of sense to you.
+> Why should the source and target KVMs behave differently?  If the source
+> invalidates its guest page table via MMU notifiers, so should the target.
+> =
 
---- a/drivers/gpu/drm/ttm/ttm_execbuf_util.c
-+++ b/drivers/gpu/drm/ttm/ttm_execbuf_util.c
-@@ -110,6 +110,7 @@ int ttm_eu_reserve_buffers(struct ww_acq
- 		ww_acquire_init(ticket, &reservation_ww_class);
- 
- 	list_for_each_entry(entry, list, head) {
-+		bool lockon = false;
- 		struct ttm_buffer_object *bo = entry->bo;
- 
- 		ret = __ttm_bo_reserve(bo, intr, (ticket == NULL), ticket);
-@@ -150,6 +151,7 @@ int ttm_eu_reserve_buffers(struct ww_acq
- 				dma_resv_lock_slow(bo->base.resv, ticket);
- 				ret = 0;
- 			}
-+			lockon = !ret;
- 		}
- 
- 		if (!ret && entry->num_shared)
-@@ -157,6 +159,8 @@ int ttm_eu_reserve_buffers(struct ww_acq
- 								entry->num_shared);
- 
- 		if (unlikely(ret != 0)) {
-+			if (lockon)
-+				dma_resv_unlock(bo->base.resv);
- 			if (ret == -EINTR)
- 				ret = -ERESTARTSYS;
- 			if (ticket) {
+> The KVM MMU notifier exists so that nothing (including mirroring) needs
+> to know that there is KVM on the other side.  Any interaction between
+> KVM page tables and VMAs must be mediated by MMU notifiers, anything
+> else is unacceptable.
+> =
 
+> If it is possible to invoke the MMU notifiers around the calls to
+> insert_pfn, that of course would be perfect.
+
+Ok and yes you can do that exactly ie inside the mmu notifier callback
+from the target. For instance it is as easy as:
+    target_mirror_notifier_start_callback(start, end) {
+        struct kvm_mirror_struct *kvmms =3D from_mmun(...);
+        unsigned long target_foff, size;
+
+        size =3D end - start;
+        target_foff =3D kvmms_convert_mirror_address(start);
+        take_lock(kvmms->mirror_fault_exclusion_lock);
+        unmap_mapping_range(kvmms->address_space, target_foff, size, 1);
+        drop_lock(kvmms->mirror_fault_exclusion_lock);
+    }
+
+All that is needed is to make sure that vm_normal_page() will see those
+pte (inside the process that is mirroring the other process) as special
+which is the case either because insert_pfn() mark the pte as special or
+the kvm device driver which control the vm_operation struct set a
+find_special_page() callback that always return NULL, or the vma has
+either VM_PFNMAP or VM_MIXEDMAP set (which is the case with insert_pfn).
+
+So you can keep the existing kvm code unmodified.
+
+Cheers,
+J=E9r=F4me
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
