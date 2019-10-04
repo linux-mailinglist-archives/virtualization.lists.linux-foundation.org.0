@@ -2,45 +2,102 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 967D5CB031
-	for <lists.virtualization@lfdr.de>; Thu,  3 Oct 2019 22:33:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B273CB5B2
+	for <lists.virtualization@lfdr.de>; Fri,  4 Oct 2019 10:06:17 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 86AF5157F;
-	Thu,  3 Oct 2019 20:33:50 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A46311010;
+	Fri,  4 Oct 2019 08:06:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id BF22A157A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 812FDFF7
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 20:33:49 +0000 (UTC)
-X-Greylist: delayed 00:13:19 by SQLgrey-1.7.6
-Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id D0773D3
+	Fri,  4 Oct 2019 08:06:08 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1FA118AC
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  3 Oct 2019 20:33:48 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id BBEC5B04F;
-	Thu,  3 Oct 2019 20:20:27 +0000 (UTC)
-From: Davidlohr Bueso <dave@stgolabs.net>
-To: akpm@linux-foundation.org
-Subject: [PATCH 07/11] vhost: convert vhost_umem_interval_tree to half closed
-	intervals
-Date: Thu,  3 Oct 2019 13:18:54 -0700
-Message-Id: <20191003201858.11666-8-dave@stgolabs.net>
-X-Mailer: git-send-email 2.16.4
-In-Reply-To: <20191003201858.11666-1-dave@stgolabs.net>
-References: <20191003201858.11666-1-dave@stgolabs.net>
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=unavailable version=3.3.1
+	Fri,  4 Oct 2019 08:06:08 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 6D00E2D0FC7;
+	Fri,  4 Oct 2019 08:06:07 +0000 (UTC)
+Received: from [10.36.117.182] (ovpn-117-182.ams2.redhat.com [10.36.117.182])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 0A1E75D9DC;
+	Fri,  4 Oct 2019 08:06:03 +0000 (UTC)
+Subject: Re: VIRTIO_BALLOON_F_FREE_PAGE_HINT
+To: Tyler Sanderson <tysand@google.com>, "Michael S. Tsirkin" <mst@redhat.com>
+References: <CAJuQAmpQmNN1EJHm4RinZnBven9Bx4GGqd-8Mt+L=3Z-3pd+zg@mail.gmail.com>
+	<5D7EE856.2080602@intel.com>
+	<09257686-90df-5c31-c35f-9d16fc77fee1@redhat.com>
+	<CAJuQAmpQV26kb9vTyoW-Q7PsD0SOfX+otkiQZAks1L6k7rgdig@mail.gmail.com>
+	<20191003142854-mutt-send-email-mst@kernel.org>
+	<CAJuQAmrCiPsofYpDvm8=i32d9c9yCmKpJRBSRFkeubP_2=XKtw@mail.gmail.com>
+From: David Hildenbrand <david@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+	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
+	SE+xAvmumFBY
+Organization: Red Hat GmbH
+Message-ID: <0df87f00-5102-973b-3a7a-735e44f4ac3f@redhat.com>
+Date: Fri, 4 Oct 2019 10:06:03 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAJuQAmrCiPsofYpDvm8=i32d9c9yCmKpJRBSRFkeubP_2=XKtw@mail.gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.29]);
+	Fri, 04 Oct 2019 08:06:07 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: dave@stgolabs.net, Davidlohr Bueso <dbueso@suse.de>,
-	peterz@infradead.org, Michael@mail.linuxfoundation.org,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
-	walken@google.com, linux-rdma@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,136 +109,30 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-The vhost_umem interval tree really wants [a, b) intervals,
-not fully closed as currently. As such convert it to use the
-new interval_tree_gen.h, and also rename the 'last' endpoint
-in the node to 'end', which both a more suitable name for
-the half closed interval and also reduces the chances of some
-caller being missed.
+On 04.10.19 01:15, Tyler Sanderson wrote:
+> I was mistaken, the problem with overcommit accounting is not fixed by
+> the change to shrinker interface.
+> This means that large allocations are stopped even if they could succeed
+> by deflating the balloon.
 
-Cc: Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: virtualization@lists.linux-foundation.org
-Signed-off-by: Davidlohr Bueso <dbueso@suse.de>
----
- drivers/vhost/vhost.c | 19 +++++++++----------
- drivers/vhost/vhost.h |  4 ++--
- 2 files changed, 11 insertions(+), 12 deletions(-)
+Please note that some people use the balloon for actual memory unplug -
+so initiating to deflate the balloon under any circumstances is
+undesired. It's different with "VIRTIO_BALLOON_F_DEFLATE_ON_OOM" being
+set - however that is barely the case (at least in the setups I know :) ).
 
-diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index 36ca2cf419bf..80c3cca24dc7 100644
---- a/drivers/vhost/vhost.c
-+++ b/drivers/vhost/vhost.c
-@@ -28,7 +28,7 @@
- #include <linux/sort.h>
- #include <linux/sched/mm.h>
- #include <linux/sched/signal.h>
--#include <linux/interval_tree_generic.h>
-+#include <linux/interval_tree_gen.h>
- #include <linux/nospec.h>
- 
- #include "vhost.h"
-@@ -51,7 +51,7 @@ enum {
- 
- INTERVAL_TREE_DEFINE(struct vhost_umem_node,
- 		     rb, __u64, __subtree_last,
--		     START, LAST, static inline, vhost_umem_interval_tree);
-+		     START, END, static inline, vhost_umem_interval_tree);
- 
- #ifdef CONFIG_VHOST_CROSS_ENDIAN_LEGACY
- static void vhost_disable_cross_endian(struct vhost_virtqueue *vq)
-@@ -1034,7 +1034,7 @@ static int vhost_new_umem_range(struct vhost_umem *umem,
- 
- 	node->start = start;
- 	node->size = size;
--	node->last = end;
-+	node->end = end;
- 	node->userspace_addr = userspace_addr;
- 	node->perm = perm;
- 	INIT_LIST_HEAD(&node->link);
-@@ -1112,7 +1112,7 @@ static int vhost_process_iotlb_msg(struct vhost_dev *dev,
- 		}
- 		vhost_vq_meta_reset(dev);
- 		if (vhost_new_umem_range(dev->iotlb, msg->iova, msg->size,
--					 msg->iova + msg->size - 1,
-+					 msg->iova + msg->size,
- 					 msg->uaddr, msg->perm)) {
- 			ret = -ENOMEM;
- 			break;
-@@ -1126,7 +1126,7 @@ static int vhost_process_iotlb_msg(struct vhost_dev *dev,
- 		}
- 		vhost_vq_meta_reset(dev);
- 		vhost_del_umem_range(dev->iotlb, msg->iova,
--				     msg->iova + msg->size - 1);
-+				     msg->iova + msg->size);
- 		break;
- 	default:
- 		ret = -EINVAL;
-@@ -1320,15 +1320,14 @@ static bool iotlb_access_ok(struct vhost_virtqueue *vq,
- {
- 	const struct vhost_umem_node *node;
- 	struct vhost_umem *umem = vq->iotlb;
--	u64 s = 0, size, orig_addr = addr, last = addr + len - 1;
-+	u64 s = 0, size, orig_addr = addr, last = addr + len;
- 
- 	if (vhost_vq_meta_fetch(vq, addr, len, type))
- 		return true;
- 
- 	while (len > s) {
- 		node = vhost_umem_interval_tree_iter_first(&umem->umem_tree,
--							   addr,
--							   last);
-+							   addr, last);
- 		if (node == NULL || node->start > addr) {
- 			vhost_iotlb_miss(vq, addr, access);
- 			return false;
-@@ -1455,7 +1454,7 @@ static long vhost_set_memory(struct vhost_dev *d, struct vhost_memory __user *m)
- 					 region->guest_phys_addr,
- 					 region->memory_size,
- 					 region->guest_phys_addr +
--					 region->memory_size - 1,
-+					 region->memory_size,
- 					 region->userspace_addr,
- 					 VHOST_ACCESS_RW))
- 			goto err;
-@@ -2055,7 +2054,7 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
- 		}
- 
- 		node = vhost_umem_interval_tree_iter_first(&umem->umem_tree,
--							addr, addr + len - 1);
-+							   addr, addr + len);
- 		if (node == NULL || node->start > addr) {
- 			if (umem != dev->iotlb) {
- 				ret = -EFAULT;
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index e9ed2722b633..bb36cb9ed5ec 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -53,13 +53,13 @@ struct vhost_log {
- };
- 
- #define START(node) ((node)->start)
--#define LAST(node) ((node)->last)
-+#define END(node) ((node)->end)
- 
- struct vhost_umem_node {
- 	struct rb_node rb;
- 	struct list_head link;
- 	__u64 start;
--	__u64 last;
-+	__u64 end;
- 	__u64 size;
- 	__u64 userspace_addr;
- 	__u32 perm;
+So yes, free page reporting is a different thing, because it really is
+used to "hint" and not to "agree to unplug" in any scenario.
+
 -- 
-2.16.4
 
+Thanks,
+
+David / dhildenb
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
