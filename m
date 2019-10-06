@@ -2,64 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F426CD8B2
-	for <lists.virtualization@lfdr.de>; Sun,  6 Oct 2019 20:45:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DEDACD8B7
+	for <lists.virtualization@lfdr.de>; Sun,  6 Oct 2019 20:45:46 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 094F0C9A;
-	Sun,  6 Oct 2019 18:45:26 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 4B77EC9F;
+	Sun,  6 Oct 2019 18:45:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A4873C87
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 614E9AC7
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  6 Oct 2019 18:45:24 +0000 (UTC)
+	Sun,  6 Oct 2019 18:45:27 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4576127B
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E3DF6709
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  6 Oct 2019 18:45:24 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id d16so16106242qtq.8
+	Sun,  6 Oct 2019 18:45:26 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id n7so16132327qtb.6
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 06 Oct 2019 11:45:24 -0700 (PDT)
+	Sun, 06 Oct 2019 11:45:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=ZMrZ1RubZY9dyZJ9Hkb1yPFx5en+hRm60DJ8k1k6vSg=;
-	b=sd0OiqMr5oiSOqh/1GM2pf4ESTmHrrgBjeKXfjitHhBf4pj4o1OuSMBVRC5HXz4biP
-	zYoMBWsEwqHoFTgM9OWX2stj+66/9YsuNlN3JWyv2hg+gAeVHAeLJSYOv3Pl6pb3pE/H
-	e0as4YJnQibs1GDl722UdJKquZB5J0MsYYO3BRzjKWmGHjfHhzg4xkAtgB+zT/W7gS6T
-	uKcPSJDB8/LXl9B9dkaEHsnNbesPURuqhm+/D/YluqQMCZyvzVyXXttxI9tUy54OebAo
-	us2jxAGv8UCjJRRdFA2gsFEgqiVclT4nkp5G5e8h3zMyP3ZucuwK2bW2IT7cI1O3t0Gi
-	hJVw==
+	bh=4+0D96UNcW16NmIZzh7KLXswmY9Zu6wl9T6ptTV3qho=;
+	b=LIipmTrSU2Fe7zrquUlZt36LofVfmw3+efcqrExFJHFJhnuGug1fg54yhAKr7GI67j
+	oHtpp0/ZG1zdhEP4F/1qVBRiCqmBHkuM6EALQP0f8gkp8nzvn+uwVoYV7ofke98Bskod
+	qTiaaaKA+fynSBP/Hq+zdbb3hKP3koKjW2nv+bqjCYeBhox4ahHMelYD87/YJnoUoTMP
+	0ySAtNVExLQ8bEP+EKJGNm1TPOE6DmuYCO5z530P4LbtzdY1flCarykY7hvancmGb0I1
+	JHsaMpbHBWVJjLmot+yNSGZp5Qb6INnVlzBvlAvTqxpdMMl8fOWLnz9pCa6UP47EeTlX
+	BC1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=ZMrZ1RubZY9dyZJ9Hkb1yPFx5en+hRm60DJ8k1k6vSg=;
-	b=hl7qWxBSt4hT6juElsNcckXibCCLDKGobfx4PzHcoEj05/43ls0dxnAKhGjcUrF4ZR
-	XyQlRkPx17o/hW4cyY+iskUqDzL5RBs8Au/kJmuJuf2sEu2wiX9YARix5T5kP+raDqpW
-	ThZEL221A3SxJbewygZ+CLi3hzQWPurf/IQJjqPRIazP3ttrjeMzrvzty9lFCx8g+uJA
-	g4mWWzUfijO5GjcgYcnEiP33x70lhuYl1BmnHsZO7uwxGaxCfvkS68z+DDWsFE0WGBBP
-	l81i4pydyA9jEX9v54a1QE8ECQK+61HLUQnDtqGh4r+r3Z9E+s5+VMYeoZUM9jTcBxjd
-	OZdQ==
-X-Gm-Message-State: APjAAAUiALeundQBurqXmgHJR9PAiYK/Mw4ciDNq0t9nS42PxDz4WdtI
-	2sNBrQ+FnD8UftkIHFvsh60=
-X-Google-Smtp-Source: APXvYqwBa99OxIXSIXW8z7fEMc8gNDcJmwc8glhoOkclr8oJJdigdpqpIWyeg2BA5rNH3vMjJLHjNg==
-X-Received: by 2002:ac8:7019:: with SMTP id x25mr27196849qtm.133.1570387523264;
-	Sun, 06 Oct 2019 11:45:23 -0700 (PDT)
+	bh=4+0D96UNcW16NmIZzh7KLXswmY9Zu6wl9T6ptTV3qho=;
+	b=e980+X6+5gyhg4IgT6ijT6isg7dXIupnTi9tzlaxYGGizvpRLLJpjR1045S0Au4FjF
+	w5xc0GRWUmj3cdTRtFfSin4CLT43FM2zHqes7k9gor7/4dbYkX5RHPgMm34R8CyqW0TK
+	jLcUmKAq6vxNn9LkQ4e5NV20zD3bAae5xWXXQxEw6IqR6JkuWK8bD1RyRa1x5drwKEQ2
+	CkIxoxqgIhgU6L6CqKvOO0DxD4sCJRpLp4RyJaIiciOvYbi69Lzs9TlN1xDSVMR6Dy0q
+	0FvrH4n+ODCuW2Wt6Rq6E6TifqjatehHPeKhTHweDVkhT6U8QxzujSbUqnBotbg+k+EM
+	PZ+g==
+X-Gm-Message-State: APjAAAW4XN3iKCp5tjmN7I5ui4gQmQ3XmhH/+UesLS3z3HGCAqjKlB9V
+	wIlh4Q5hYlUEXcI+ys4+IMU=
+X-Google-Smtp-Source: APXvYqwyYoGFKHQ3ZpcvefRTboKWPKKGWbn+30cPAqkuyZJeDXn9fIj71SEwzOe/jCe7kt2p5MMoHQ==
+X-Received: by 2002:a0c:add6:: with SMTP id x22mr24177091qvc.203.1570387525924;
+	Sun, 06 Oct 2019 11:45:25 -0700 (PDT)
 Received: from localhost.localdomain ([2804:431:c7cb:21c2:d505:73c7:4df5:8eac])
 	by smtp.gmail.com with ESMTPSA id
-	l23sm11275578qta.53.2019.10.06.11.45.20
+	l23sm11275578qta.53.2019.10.06.11.45.23
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 06 Oct 2019 11:45:22 -0700 (PDT)
+	Sun, 06 Oct 2019 11:45:25 -0700 (PDT)
 From: jcfaracco@gmail.com
 To: netdev@vger.kernel.org
-Subject: [PATCH RFC net-next 1/2] drivers: net: virtio_net: Add tx_timeout
-	stats field
-Date: Sun,  6 Oct 2019 15:45:14 -0300
-Message-Id: <20191006184515.23048-2-jcfaracco@gmail.com>
+Subject: [PATCH RFC net-next 2/2] drivers: net: virtio_net: Add tx_timeout
+	function
+Date: Sun,  6 Oct 2019 15:45:15 -0300
+Message-Id: <20191006184515.23048-3-jcfaracco@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20191006184515.23048-1-jcfaracco@gmail.com>
 References: <20191006184515.23048-1-jcfaracco@gmail.com>
@@ -89,63 +89,71 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 
 From: Julio Faracco <jcfaracco@gmail.com>
 
-For debug purpose of TX timeout events, a tx_timeout entry was added to
-monitor this special case: when dev_watchdog identifies a tx_timeout and
-throw an exception. We can both consider this event as an error, but
-driver should report as a tx_timeout statistic.
+To enable dev_watchdog, virtio_net should have a tx_timeout defined 
+(.ndo_tx_timeout). This is only a skeleton to throw a warn message. It 
+notifies the event in some specific queue of device. This function 
+still counts tx_timeout statistic and consider this event as an error 
+(one error per queue), reporting it.
 
 Signed-off-by: Julio Faracco <jcfaracco@gmail.com>
 Signed-off-by: Daiane Mendes <dnmendes76@gmail.com>
 Cc: Jason Wang <jasowang@redhat.com>
 ---
- drivers/net/virtio_net.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ drivers/net/virtio_net.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 4f3de0ac8b0b..27f9b212c9f5 100644
+index 27f9b212c9f5..4b703b4b9441 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -75,6 +75,7 @@ struct virtnet_sq_stats {
- 	u64 xdp_tx;
- 	u64 xdp_tx_drops;
- 	u64 kicks;
-+	u64 tx_timeouts;
+@@ -2585,6 +2585,29 @@ static int virtnet_set_features(struct net_device *dev,
+ 	return 0;
+ }
+ 
++static void virtnet_tx_timeout(struct net_device *dev)
++{
++	struct virtnet_info *vi = netdev_priv(dev);
++	u32 i;
++
++	/* find the stopped queue the same way dev_watchdog() does */
++	for (i = 0; i < vi->curr_queue_pairs; i++) {
++		struct send_queue *sq = &vi->sq[i];
++
++		if (!netif_xmit_stopped(netdev_get_tx_queue(dev, i)))
++			continue;
++
++		u64_stats_update_begin(&sq->stats.syncp);
++		sq->stats.tx_timeouts++;
++		u64_stats_update_end(&sq->stats.syncp);
++
++		netdev_warn(dev, "TX timeout on send queue: %d, sq: %s, vq: %d, name: %s\n",
++			    i, sq->name, sq->vq->index, sq->vq->name);
++
++		dev->stats.tx_errors++;
++	}
++}
++
+ static const struct net_device_ops virtnet_netdev = {
+ 	.ndo_open            = virtnet_open,
+ 	.ndo_stop   	     = virtnet_close,
+@@ -2600,6 +2623,7 @@ static const struct net_device_ops virtnet_netdev = {
+ 	.ndo_features_check	= passthru_features_check,
+ 	.ndo_get_phys_port_name	= virtnet_get_phys_port_name,
+ 	.ndo_set_features	= virtnet_set_features,
++	.ndo_tx_timeout		= virtnet_tx_timeout,
  };
  
- struct virtnet_rq_stats {
-@@ -98,6 +99,7 @@ static const struct virtnet_stat_desc virtnet_sq_stats_desc[] = {
- 	{ "xdp_tx",		VIRTNET_SQ_STAT(xdp_tx) },
- 	{ "xdp_tx_drops",	VIRTNET_SQ_STAT(xdp_tx_drops) },
- 	{ "kicks",		VIRTNET_SQ_STAT(kicks) },
-+	{ "tx_timeouts",	VIRTNET_SQ_STAT(tx_timeouts) },
- };
+ static void virtnet_config_changed_work(struct work_struct *work)
+@@ -3018,6 +3042,9 @@ static int virtnet_probe(struct virtio_device *vdev)
+ 	dev->netdev_ops = &virtnet_netdev;
+ 	dev->features = NETIF_F_HIGHDMA;
  
- static const struct virtnet_stat_desc virtnet_rq_stats_desc[] = {
-@@ -1721,7 +1723,7 @@ static void virtnet_stats(struct net_device *dev,
- 	int i;
++	/* Set up dev_watchdog cycle. */
++	dev->watchdog_timeo = 5 * HZ;
++
+ 	dev->ethtool_ops = &virtnet_ethtool_ops;
+ 	SET_NETDEV_DEV(dev, &vdev->dev);
  
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
--		u64 tpackets, tbytes, rpackets, rbytes, rdrops;
-+		u64 tpackets, tbytes, terrors, rpackets, rbytes, rdrops;
- 		struct receive_queue *rq = &vi->rq[i];
- 		struct send_queue *sq = &vi->sq[i];
- 
-@@ -1729,6 +1731,7 @@ static void virtnet_stats(struct net_device *dev,
- 			start = u64_stats_fetch_begin_irq(&sq->stats.syncp);
- 			tpackets = sq->stats.packets;
- 			tbytes   = sq->stats.bytes;
-+			terrors  = sq->stats.tx_timeouts;
- 		} while (u64_stats_fetch_retry_irq(&sq->stats.syncp, start));
- 
- 		do {
-@@ -1743,6 +1746,7 @@ static void virtnet_stats(struct net_device *dev,
- 		tot->rx_bytes   += rbytes;
- 		tot->tx_bytes   += tbytes;
- 		tot->rx_dropped += rdrops;
-+		tot->tx_errors  += terrors;
- 	}
- 
- 	tot->tx_dropped = dev->stats.tx_dropped;
 -- 
 2.21.0
 
