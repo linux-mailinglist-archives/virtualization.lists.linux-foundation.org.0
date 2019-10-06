@@ -2,75 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DEDACD8B7
-	for <lists.virtualization@lfdr.de>; Sun,  6 Oct 2019 20:45:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 158A5CD957
+	for <lists.virtualization@lfdr.de>; Sun,  6 Oct 2019 23:42:38 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4B77EC9F;
-	Sun,  6 Oct 2019 18:45:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9D51A49F;
+	Sun,  6 Oct 2019 21:42:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 614E9AC7
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CE2DC255
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  6 Oct 2019 18:45:27 +0000 (UTC)
+	Sun,  6 Oct 2019 21:42:28 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E3DF6709
+Received: from mail-vs1-f44.google.com (mail-vs1-f44.google.com
+	[209.85.217.44])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DE46127B
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  6 Oct 2019 18:45:26 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id n7so16132327qtb.6
+	Sun,  6 Oct 2019 21:42:26 +0000 (UTC)
+Received: by mail-vs1-f44.google.com with SMTP id b123so7633116vsb.5
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 06 Oct 2019 11:45:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=4+0D96UNcW16NmIZzh7KLXswmY9Zu6wl9T6ptTV3qho=;
-	b=LIipmTrSU2Fe7zrquUlZt36LofVfmw3+efcqrExFJHFJhnuGug1fg54yhAKr7GI67j
-	oHtpp0/ZG1zdhEP4F/1qVBRiCqmBHkuM6EALQP0f8gkp8nzvn+uwVoYV7ofke98Bskod
-	qTiaaaKA+fynSBP/Hq+zdbb3hKP3koKjW2nv+bqjCYeBhox4ahHMelYD87/YJnoUoTMP
-	0ySAtNVExLQ8bEP+EKJGNm1TPOE6DmuYCO5z530P4LbtzdY1flCarykY7hvancmGb0I1
-	JHsaMpbHBWVJjLmot+yNSGZp5Qb6INnVlzBvlAvTqxpdMMl8fOWLnz9pCa6UP47EeTlX
-	BC1A==
+	Sun, 06 Oct 2019 14:42:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=H0Qql8beNpv48V0E+O5GhBKyZ0tQotYI/Tm9AQMWPqc=;
+	b=Xo/82LL2eCQAg3/A0NV9g2MotJYX9J0P4tZRa4zlEYJcx0+hFN62Mah+vVjFemC/8v
+	TR9IoTqTLBYjV3X+lFxm9N0vBSmbHSvvfixaSFd+DRbrWmQ4zY3QgqHr4fvT/IUQXBCr
+	d21H2+uc8VOPNXH6Q9J89PAbPH9pMhVCO7BcVQe1aOekvc+DiPwRY3omp2f8T5agwwsR
+	RCadB/s3xHFWND8849mdT4D8gA0RI3DYQ9FuBb/e47rygX4o7TUmRZMEbGC8Feuy5QD2
+	+zzoblN3T0SzFuGmNoNBt5g/sKaPtKM8I22qkmOjtaj95EtsFfDMi9R/hIDrt+6ErJzV
+	9c/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=4+0D96UNcW16NmIZzh7KLXswmY9Zu6wl9T6ptTV3qho=;
-	b=e980+X6+5gyhg4IgT6ijT6isg7dXIupnTi9tzlaxYGGizvpRLLJpjR1045S0Au4FjF
-	w5xc0GRWUmj3cdTRtFfSin4CLT43FM2zHqes7k9gor7/4dbYkX5RHPgMm34R8CyqW0TK
-	jLcUmKAq6vxNn9LkQ4e5NV20zD3bAae5xWXXQxEw6IqR6JkuWK8bD1RyRa1x5drwKEQ2
-	CkIxoxqgIhgU6L6CqKvOO0DxD4sCJRpLp4RyJaIiciOvYbi69Lzs9TlN1xDSVMR6Dy0q
-	0FvrH4n+ODCuW2Wt6Rq6E6TifqjatehHPeKhTHweDVkhT6U8QxzujSbUqnBotbg+k+EM
-	PZ+g==
-X-Gm-Message-State: APjAAAW4XN3iKCp5tjmN7I5ui4gQmQ3XmhH/+UesLS3z3HGCAqjKlB9V
-	wIlh4Q5hYlUEXcI+ys4+IMU=
-X-Google-Smtp-Source: APXvYqwyYoGFKHQ3ZpcvefRTboKWPKKGWbn+30cPAqkuyZJeDXn9fIj71SEwzOe/jCe7kt2p5MMoHQ==
-X-Received: by 2002:a0c:add6:: with SMTP id x22mr24177091qvc.203.1570387525924;
-	Sun, 06 Oct 2019 11:45:25 -0700 (PDT)
-Received: from localhost.localdomain ([2804:431:c7cb:21c2:d505:73c7:4df5:8eac])
-	by smtp.gmail.com with ESMTPSA id
-	l23sm11275578qta.53.2019.10.06.11.45.23
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 06 Oct 2019 11:45:25 -0700 (PDT)
-From: jcfaracco@gmail.com
-To: netdev@vger.kernel.org
-Subject: [PATCH RFC net-next 2/2] drivers: net: virtio_net: Add tx_timeout
-	function
-Date: Sun,  6 Oct 2019 15:45:15 -0300
-Message-Id: <20191006184515.23048-3-jcfaracco@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191006184515.23048-1-jcfaracco@gmail.com>
-References: <20191006184515.23048-1-jcfaracco@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=H0Qql8beNpv48V0E+O5GhBKyZ0tQotYI/Tm9AQMWPqc=;
+	b=cDmn1y1K2l/+LhfVhhIHm3YxRKHHcpot74BA7lyIw0Fm3i02MikZ0jUKMqO7Be7Uk+
+	05zuIznncuPR1G0sPRHzG+6rqtQMlj7bMI6XBs71INPX2g8egGOhQ94bfsgDy2hPPoEP
+	IG3NnEtdL3lA1Njm93RR7i+iCHZ0B7q2vc4C8pnCGbMtMSlEVV+Hrx6FPAwYwQDgXq+F
+	HwNSdoMCoD4ViVcrE11wPHxoePFPQrJRJINzd5bFH4JH7emSoGcOhRguhO+qvbYP4cH5
+	CFCrqC1HtURYI++4p8qFadW6dQcBxO8D+aUs8pSQa8GcTGKh2N8xfzPd85uw96aQJdiU
+	+hXA==
+X-Gm-Message-State: APjAAAWocIxkckO9X65jSRxBxsRnCpvRykABs3CDEoM0JOIgyPY8YPzR
+	2yluflmaqwSgHDX+0N7VrPOeWbMHPBHacLjYSAglDA==
+X-Google-Smtp-Source: APXvYqxPdlRduzJwi2u5NmApFlM91SBk7vaTnsOTSUbnVX8i8r7ZAKWtJeyBKkI7P3bbqTWx+8hUX9EjlIbhS48bRcg=
+X-Received: by 2002:a67:f2c9:: with SMTP id a9mr4425990vsn.160.1570398145688; 
+	Sun, 06 Oct 2019 14:42:25 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+References: <5D7EE856.2080602@intel.com>
+	<09257686-90df-5c31-c35f-9d16fc77fee1@redhat.com>
+	<CAJuQAmpQV26kb9vTyoW-Q7PsD0SOfX+otkiQZAks1L6k7rgdig@mail.gmail.com>
+	<20191003142854-mutt-send-email-mst@kernel.org>
+	<CAJuQAmrCiPsofYpDvm8=i32d9c9yCmKpJRBSRFkeubP_2=XKtw@mail.gmail.com>
+	<0df87f00-5102-973b-3a7a-735e44f4ac3f@redhat.com>
+	<20191004043446-mutt-send-email-mst@kernel.org>
+	<30c6feba-7037-b52f-3ef4-4a5c50be0aff@redhat.com>
+	<CAJuQAmpwQ4guGtHTTWC60EAYBuJ264d6CgWmWEHSnb8-CRtWBw@mail.gmail.com>
+	<859eada9-d3e2-8f28-ebd6-a8cb562dbff5@redhat.com>
+	<20191006073919-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20191006073919-mutt-send-email-mst@kernel.org>
+Date: Sun, 6 Oct 2019 14:42:14 -0700
+Message-ID: <CAJuQAmpbmTq8mwYCf1G9Qr7ZB0WtG3VCVyfbEYsm6qUOM1N9Zw@mail.gmail.com>
+Subject: Re: VIRTIO_BALLOON_F_FREE_PAGE_HINT
+To: "Michael S. Tsirkin" <mst@redhat.com>
+X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, DOS_RCVD_IP_TWICE_B, HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE, 
+	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: dnmendes76@gmail.com, mst@redhat.com, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, davem@davemloft.net
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -82,82 +83,89 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Tyler Sanderson via Virtualization
+	<virtualization@lists.linux-foundation.org>
+Reply-To: Tyler Sanderson <tysand@google.com>
+Content-Type: multipart/mixed; boundary="===============7426871338427871768=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-From: Julio Faracco <jcfaracco@gmail.com>
+--===============7426871338427871768==
+Content-Type: multipart/alternative; boundary="000000000000a18f2b059444cffa"
 
-To enable dev_watchdog, virtio_net should have a tx_timeout defined 
-(.ndo_tx_timeout). This is only a skeleton to throw a warn message. It 
-notifies the event in some specific queue of device. This function 
-still counts tx_timeout statistic and consider this event as an error 
-(one error per queue), reporting it.
+--000000000000a18f2b059444cffa
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Julio Faracco <jcfaracco@gmail.com>
-Signed-off-by: Daiane Mendes <dnmendes76@gmail.com>
-Cc: Jason Wang <jasowang@redhat.com>
----
- drivers/net/virtio_net.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+On Sun, Oct 6, 2019 at 4:48 AM Michael S. Tsirkin <mst@redhat.com> wrote:
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 27f9b212c9f5..4b703b4b9441 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -2585,6 +2585,29 @@ static int virtnet_set_features(struct net_device *dev,
- 	return 0;
- }
- 
-+static void virtnet_tx_timeout(struct net_device *dev)
-+{
-+	struct virtnet_info *vi = netdev_priv(dev);
-+	u32 i;
-+
-+	/* find the stopped queue the same way dev_watchdog() does */
-+	for (i = 0; i < vi->curr_queue_pairs; i++) {
-+		struct send_queue *sq = &vi->sq[i];
-+
-+		if (!netif_xmit_stopped(netdev_get_tx_queue(dev, i)))
-+			continue;
-+
-+		u64_stats_update_begin(&sq->stats.syncp);
-+		sq->stats.tx_timeouts++;
-+		u64_stats_update_end(&sq->stats.syncp);
-+
-+		netdev_warn(dev, "TX timeout on send queue: %d, sq: %s, vq: %d, name: %s\n",
-+			    i, sq->name, sq->vq->index, sq->vq->name);
-+
-+		dev->stats.tx_errors++;
-+	}
-+}
-+
- static const struct net_device_ops virtnet_netdev = {
- 	.ndo_open            = virtnet_open,
- 	.ndo_stop   	     = virtnet_close,
-@@ -2600,6 +2623,7 @@ static const struct net_device_ops virtnet_netdev = {
- 	.ndo_features_check	= passthru_features_check,
- 	.ndo_get_phys_port_name	= virtnet_get_phys_port_name,
- 	.ndo_set_features	= virtnet_set_features,
-+	.ndo_tx_timeout		= virtnet_tx_timeout,
- };
- 
- static void virtnet_config_changed_work(struct work_struct *work)
-@@ -3018,6 +3042,9 @@ static int virtnet_probe(struct virtio_device *vdev)
- 	dev->netdev_ops = &virtnet_netdev;
- 	dev->features = NETIF_F_HIGHDMA;
- 
-+	/* Set up dev_watchdog cycle. */
-+	dev->watchdog_timeo = 5 * HZ;
-+
- 	dev->ethtool_ops = &virtnet_ethtool_ops;
- 	SET_NETDEV_DEV(dev, &vdev->dev);
- 
--- 
-2.21.0
+> On Sun, Oct 06, 2019 at 10:30:40AM +0200, David Hildenbrand wrote:
+> > Please note the "use outside of a testing or debugging environment is
+> > not recommended". Usually you want a "soft" version of this, e.g., via
+> > the OOM handler (so only drop parts of the cache, not all).
+>
+> Right. We'll need something softer I guess. By how much, I don't know.
+>
+
+It should be left up to the guest system administrator to configure the
+trade off between performance and cache memory reclaimed.
+And the primary performance metric would be cache hit rate.
+So maybe some configuration option that lets you drop cache pages that have
+a hit rate less than X per minute.
+Or more simply: Pages that haven't been hit in the last X seconds.
+
+The other way to do it would be to set a strict cache size limit, but that
+would be workload dependent and toilsome to tune correctly, so it seems
+like a worse choice.
+
+
+>
+> --
+> MST
+>
+
+--000000000000a18f2b059444cffa
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Sun, Oct 6, 2019 at 4:48 AM Michae=
+l S. Tsirkin &lt;<a href=3D"mailto:mst@redhat.com">mst@redhat.com</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
+x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Sun, Oc=
+t 06, 2019 at 10:30:40AM +0200, David Hildenbrand wrote:<br>
+&gt; Please note the &quot;use outside of a testing or debugging environmen=
+t is<br>
+&gt; not recommended&quot;. Usually you want a &quot;soft&quot; version of =
+this, e.g., via<br>
+&gt; the OOM handler (so only drop parts of the cache, not all).<br>
+<br>
+Right. We&#39;ll need something softer I guess. By how much, I don&#39;t kn=
+ow.<br></blockquote><div><br></div><div>It should be left up to the guest s=
+ystem administrator to configure the trade off between performance and cach=
+e memory reclaimed.</div><div>And the primary performance metric would be c=
+ache hit rate.</div><div>So maybe some configuration option that lets you d=
+rop cache pages that have a hit rate less than X per minute.</div><div>Or m=
+ore simply: Pages that haven&#39;t been hit in the last X seconds.</div><di=
+v><br></div><div>The other way to do it would be to set a strict cache size=
+ limit, but that would be workload dependent and toilsome to tune correctly=
+, so it seems like a worse choice.</div><div>=C2=A0</div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">
+<br>
+-- <br>
+MST<br>
+</blockquote></div></div>
+
+--000000000000a18f2b059444cffa--
+
+--===============7426871338427871768==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============7426871338427871768==--
