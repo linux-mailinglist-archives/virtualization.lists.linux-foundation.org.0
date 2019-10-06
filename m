@@ -2,81 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E7ABCD1C9
-	for <lists.virtualization@lfdr.de>; Sun,  6 Oct 2019 13:49:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6239FCD8B1
+	for <lists.virtualization@lfdr.de>; Sun,  6 Oct 2019 20:45:30 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AAB0FB09;
-	Sun,  6 Oct 2019 11:48:55 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id CA384C90;
+	Sun,  6 Oct 2019 18:45:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7180EACC
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 49055C83
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  6 Oct 2019 11:48:53 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1F3DE712
+	Sun,  6 Oct 2019 18:45:22 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B82BB27B
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  6 Oct 2019 11:48:53 +0000 (UTC)
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
-	[209.85.160.199])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 46724859FC
+	Sun,  6 Oct 2019 18:45:21 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id w14so16102061qto.9
 	for <virtualization@lists.linux-foundation.org>;
-	Sun,  6 Oct 2019 11:48:52 +0000 (UTC)
-Received: by mail-qt1-f199.google.com with SMTP id c8so12142062qtd.20
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 06 Oct 2019 04:48:52 -0700 (PDT)
+	Sun, 06 Oct 2019 11:45:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=FDtNMGd4vIkTEBG4VnbaIfDNYKUEZ4dNcxWAbUNY7uo=;
+	b=MONqvAWV2NArFHCXriHQxTaQbsAXGUnRmgCUu0KX2YD7MqciBZlmnJpiG7T3dpIScw
+	Mn6BbVydeTbNOp/4ICc1FILS5izg1W0wvsNf3f9QaRECvWj/fDOjTK6XhWWKutlZp8fv
+	w84reqYic+PpIpn6EC7Y2/DufCRjpztwJYeXsy3baD78Jjs+3DfZu7CbAxeTlbG9SuZf
+	hz/v2WFpSBkLGavhfZofgYx3ogLuymC43+RKur87RkrIs7QsxFlgSTdCEeRm2FVjkNOp
+	Jn9AQDtAA/5QiE8cLZ1cVAlwuu01nU2cmG02pEPNkbxHPAt/sUvbZhDZ0wISfzHNMojq
+	Xt1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=sdl37lqjX+SFzLfIthy2RyG7jlUK9awvDpOf+en7/LQ=;
-	b=TGxJ9WDetS8HQuQPpZzhUKQd83ks7sPMbWQisyZQy6FQfIzjObdphiFnVYArKS34DV
-	hp2hYR4Lc/+H8Dw6fZmm/BIC8FhEUSBZmrgoEeL73O5bTAdBufRpIbGezaJZp10JVeHA
-	+4xEmdQtubUcTBQT+NzboQGyJm1jTgb8y7cmxq0WFzu3O+Ko7tT/sDI4zxKm270q12qV
-	3ywPKPQeEDDfJC2XbYUAwMb4OzfFmeHo0Iv9EJkRTKFcZe1PUovnVUm/Ykf2nqpJCF5P
-	RIFgcIPd3/KGxriAbOjnTx3JVltUfkVlQ8kaki9a74SWcpx4gotLaPGvTeQle6v8GeNJ
-	q/Zw==
-X-Gm-Message-State: APjAAAUDjIXAyG3PG5L0W2RQDyBN7FpzyQ+VijIws1oO2mN/i18RZmqh
-	cFROq+PXwUcDrSEvlnD5ptGi7HB+1vcMm04EX6QhA8tQwCjvZW27ve+E2mtbvNXMWIJwrDRF5bg
-	5QyAtsFl8jrJBTup0Lkbn1Q5evPYBuxSyc+YLRuoE7w==
-X-Received: by 2002:a37:4c14:: with SMTP id z20mr19478458qka.296.1570362531628;
-	Sun, 06 Oct 2019 04:48:51 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwfyp2piM8fXqN43+imXIBnkw3kDMGJe0E4btdMYgzSc+WjX/cHK+JrvxeHCTSf3pCHbvGShQ==
-X-Received: by 2002:a37:4c14:: with SMTP id z20mr19478447qka.296.1570362531373;
-	Sun, 06 Oct 2019 04:48:51 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-10-77.red.bezeqint.net. [79.176.10.77])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=FDtNMGd4vIkTEBG4VnbaIfDNYKUEZ4dNcxWAbUNY7uo=;
+	b=PeJW9If5YovecxLK7TEwBk9t4WCe5+KVADJE8IaLFitoEEIw10L0azUbj+Lizgc4Bg
+	3h1vAJUIn1kbZH1ZKvEPn/rUj/ZOf8e7MsawY9pMCNjmN3k9v5Z56XrpDI804JdT3Lt/
+	BwPC0ivMk0/0YY0EW5jIb0yRquOQkiSKVmL3rx2rSjDLsJ/TSZypxJiaoxvz/2PPaa+r
+	ABIkhQpeyIFkOdMj5ybciVKIMLleuKj/PN4mOTRGNMJZOJ7aNGTee18WEAqEvHxv8bwj
+	yadbIrDXr8k+mAdob5npjiDJEvPZ1sRjAZXNuwFNDhtDZbkAVDJP+YXUtEm4YZbdthSf
+	px5w==
+X-Gm-Message-State: APjAAAWYyemfpPGRUV+3/k29MCBoLsrITEKLAOQ9s9IY6RHzOwGiGDLZ
+	E2TvpAvA4VEhugpDIU8tBwE=
+X-Google-Smtp-Source: APXvYqzTgC0tNHX/1kg7nS97bMQhXuCqAxgVHWRofRl0lCE9xwQis8uTGV52SavGw0YEnwQZvl4PPQ==
+X-Received: by 2002:ac8:5243:: with SMTP id y3mr26218021qtn.51.1570387520605; 
+	Sun, 06 Oct 2019 11:45:20 -0700 (PDT)
+Received: from localhost.localdomain ([2804:431:c7cb:21c2:d505:73c7:4df5:8eac])
 	by smtp.gmail.com with ESMTPSA id
-	s23sm8168394qte.72.2019.10.06.04.48.47
+	l23sm11275578qta.53.2019.10.06.11.45.17
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 06 Oct 2019 04:48:50 -0700 (PDT)
-Date: Sun, 6 Oct 2019 07:48:45 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: David Hildenbrand <david@redhat.com>
-Subject: Re: VIRTIO_BALLOON_F_FREE_PAGE_HINT
-Message-ID: <20191006073919-mutt-send-email-mst@kernel.org>
-References: <5D7EE856.2080602@intel.com>
-	<09257686-90df-5c31-c35f-9d16fc77fee1@redhat.com>
-	<CAJuQAmpQV26kb9vTyoW-Q7PsD0SOfX+otkiQZAks1L6k7rgdig@mail.gmail.com>
-	<20191003142854-mutt-send-email-mst@kernel.org>
-	<CAJuQAmrCiPsofYpDvm8=i32d9c9yCmKpJRBSRFkeubP_2=XKtw@mail.gmail.com>
-	<0df87f00-5102-973b-3a7a-735e44f4ac3f@redhat.com>
-	<20191004043446-mutt-send-email-mst@kernel.org>
-	<30c6feba-7037-b52f-3ef4-4a5c50be0aff@redhat.com>
-	<CAJuQAmpwQ4guGtHTTWC60EAYBuJ264d6CgWmWEHSnb8-CRtWBw@mail.gmail.com>
-	<859eada9-d3e2-8f28-ebd6-a8cb562dbff5@redhat.com>
+	Sun, 06 Oct 2019 11:45:19 -0700 (PDT)
+From: jcfaracco@gmail.com
+To: netdev@vger.kernel.org
+Subject: [PATCH RFC net-next 0/2] drivers: net: virtio_net: Implement 
+Date: Sun,  6 Oct 2019 15:45:13 -0300
+Message-Id: <20191006184515.23048-1-jcfaracco@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <859eada9-d3e2-8f28-ebd6-a8cb562dbff5@redhat.com>
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Tyler Sanderson <tysand@google.com>,
-	virtualization@lists.linux-foundation.org
+Cc: dnmendes76@gmail.com, mst@redhat.com, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -93,15 +84,36 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sun, Oct 06, 2019 at 10:30:40AM +0200, David Hildenbrand wrote:
-> Please note the "use outside of a testing or debugging environment is
-> not recommended". Usually you want a "soft" version of this, e.g., via
-> the OOM handler (so only drop parts of the cache, not all).
+From: Julio Faracco <jcfaracco@gmail.com>
 
-Right. We'll need something softer I guess. By how much, I don't know.
+Driver virtio_net is not handling error events for TX provided by 
+dev_watchdog. This event is reached when transmission queue is having 
+problems to transmit packets. To enable it, driver should have 
+.ndo_tx_timeout implemented. This serie has two commits:
+
+In the past, we implemented a function to recover driver state when this
+kind of event happens, but the structure was to complex for virtio_net
+that moment. Alternativelly, this skeleton should be enough for now.
+
+For further details, see thread:
+https://lkml.org/lkml/2015/6/23/691
+
+Patch 1/2:
+  Add statistic field for TX timeout events.
+
+Patch 2/2:
+  Implement a skeleton function to debug TX timeout events.
+
+Julio Faracco (2):
+  drivers: net: virtio_net: Add tx_timeout stats field
+  drivers: net: virtio_net: Add tx_timeout function
+
+ drivers/net/virtio_net.c | 33 ++++++++++++++++++++++++++++++++-
+ 1 file changed, 32 insertions(+), 1 deletion(-)
 
 -- 
-MST
+2.21.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
