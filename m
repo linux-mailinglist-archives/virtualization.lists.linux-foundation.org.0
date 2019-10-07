@@ -2,105 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 922C7CDD3D
-	for <lists.virtualization@lfdr.de>; Mon,  7 Oct 2019 10:27:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18120CE46F
+	for <lists.virtualization@lfdr.de>; Mon,  7 Oct 2019 15:58:49 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E5959B3E;
-	Mon,  7 Oct 2019 08:27:03 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 47659E48;
+	Mon,  7 Oct 2019 13:58:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8B9ACACC;
-	Mon,  7 Oct 2019 08:27:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 52F5C2F
+	for <virtualization@lists.linux-foundation.org>;
+	Mon,  7 Oct 2019 13:58:41 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 23A965F4;
-	Mon,  7 Oct 2019 08:27:02 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id 89so10198472oth.13;
-	Mon, 07 Oct 2019 01:27:02 -0700 (PDT)
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
+	[209.85.167.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id A384DD0
+	for <virtualization@lists.linux-foundation.org>;
+	Mon,  7 Oct 2019 13:58:40 +0000 (UTC)
+Received: by mail-lf1-f65.google.com with SMTP id y127so9382711lfc.0
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 07 Oct 2019 06:58:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=rS7GIQjyGvU27vvtTIu1FL1u2XlMjMyFmCXQWbGWBVg=;
+	b=NENydgIQlpvB6RuFC5ovZYnM4dtqQuYQYexwXF3dPSTZW3I+95T3AIjzPUDduM3Ba3
+	p7CtJmuY3uyQKp2lyiGFqlHKSBmmQoVz/Oyz6wwre0MyqFbSURtN2+h9jicVT/HkHYs8
+	NwzkvULuYqam67gC8tsDQfm67MvjzLNCLvIO5MNURthoW725RXJ3Sv+wNTzYHHhTmJ0E
+	N/YM3ExlQ7YqSJsDkPSzBti6uQuu3eZyyHji1CJ6iJvsI65gilg3yOAZSOLrMsekhHsa
+	U+BBKQLhFbJxePOIpvaPWk8lPymFFuduc0ul7qk4wLVv0zB4hLjTOtwOOKVy11sQeNY7
+	Lmqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=VKymJxaLp2SF18G9ExdMOsAdXsmgBDVfrU/If3JZGxo=;
-	b=BktjRr1f69lGtbmFYmyvwdSNpen4WheGVasO5sA6JmgwtDW21qo0AI/zoOpBCP/lpF
-	4Xe34X1JR18TYc+aGdiBiPv3qVavu4H3Wmzrx5Yo56cAd0HTCyvj3wXL8y2cI60TQaNP
-	xRbm5Ztb6qjuQJqBSFFoEqvh9WZz6/Gp5YSx18hGdteiHZyX0g0YSLmSoynuK/Y73oHz
-	lFLDWVyyosvAnXAuAaqAdNHykGp9OU+yesAjnvj0TBq3vWmpsl5KxzdTgXnzbgwoivOn
-	vd4ghj8DsQGN4Eal+mP70Hw0OkYt3QQ5vCQV4hEH9pEd19uzT22/Fgtek//huVk1d/XM
-	6mnQ==
-X-Gm-Message-State: APjAAAVRGFkJpYSBVcWBpLOG2xa3KZ3WPXx3Y6MZJJc70olduZp1uRaK
-	VAOaxyPy1pC0A4KhRJQ6+/WenEMekp+V+FHzvvI=
-X-Google-Smtp-Source: APXvYqxEOkV8nJCSllSqxdkQVypo90wcNgBvYDBNSKRgpoLJCvXTnmOdSLlUAojqzzfR9rCgupdlwodIFF5kpYpgt28=
-X-Received: by 2002:a9d:17e6:: with SMTP id j93mr20339687otj.297.1570436821298;
-	Mon, 07 Oct 2019 01:27:01 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=rS7GIQjyGvU27vvtTIu1FL1u2XlMjMyFmCXQWbGWBVg=;
+	b=awDWy3N2QPXf0LfaC7Hkj65H/sz71eCj3R4oKtNUnBsX8wKmN0NSud59SBBkH+2ISS
+	tihkZJ2PlPKZdGqxJg8I4OyGKArpM5ZkliC76X6DOilZcMGCtUYHkeEhnMaQ65mkd9Cw
+	a0xMy1sc2ZYOq17BkFvbP305Q9aCxoOkiDeWWPa10nXpen0S1S4SyjsWuKmzNveqydr8
+	slxFhplfZMByYOTWiKzjV1K/G1FLsGhr0IEv1nMHiwqN2OR4ptvhmsWN+W7kbuTldI/g
+	DjhC+/zcnwWcjFBuQI/1cn/prOEo4vyv6qVjqkuw8ApBTF5N/0gi3SPOE33SLOqtYBlY
+	fdLA==
+X-Gm-Message-State: APjAAAVtG0DSSe5532EG5BM+HX635szEgX9XLVsVlXX+VFgxTYSaHf/K
+	WWu+REpFohmh8DLz51OGE8KNHwAtjYDrgvkR580=
+X-Google-Smtp-Source: APXvYqzFIdc+285g5LfTP5zuKMDbwk+7sH1aRaSjQVKC1b77Y+7RLc9W7rTJb0+ANcjYQFVVHpKxrnvXygWfFaP5DrE=
+X-Received: by 2002:a19:ca07:: with SMTP id a7mr18279722lfg.181.1570456718836; 
+	Mon, 07 Oct 2019 06:58:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191004145544.5066-1-krzk@kernel.org>
-	<20191004145544.5066-3-krzk@kernel.org>
-In-Reply-To: <20191004145544.5066-3-krzk@kernel.org>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Mon, 7 Oct 2019 10:26:49 +0200
-Message-ID: <CAMuHMdW0DSujexoGq4CJAYP40DvMcigk08aEnyQ72haY6jds5Q@mail.gmail.com>
-Subject: Re: [RESEND TRIVIAL 3/3] treewide: arch: Fix Kconfig indentation
-To: Krzysztof Kozlowski <krzk@kernel.org>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00, DOS_RCVD_IP_TWICE_B,
-	FREEMAIL_FROM,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+References: <20191006184515.23048-1-jcfaracco@gmail.com>
+	<20191007034208-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20191007034208-mutt-send-email-mst@kernel.org>
+From: Julio Faracco <jcfaracco@gmail.com>
+Date: Mon, 7 Oct 2019 10:58:27 -0300
+Message-ID: <CAENf94Ky4Hrf+CyCTcKE8KXuVPECHc01OKRpKHGgykfeLe-jEg@mail.gmail.com>
+Subject: Re: [PATCH RFC net-next 0/2] drivers: net: virtio_net: Implement
+To: "Michael S. Tsirkin" <mst@redhat.com>
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, DOS_RCVD_IP_TWICE_B, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Linux Fbdev development list <linux-fbdev@vger.kernel.org>,
-	linux-efi <linux-efi@vger.kernel.org>,
-	Linux-sh list <linux-sh@vger.kernel.org>,
-	linux-iio@vger.kernel.org, linux-pci <linux-pci@vger.kernel.org>,
-	"open list:REMOTE PROCESSOR \(REMOTEPROC\) SUBSYSTEM"
-	<linux-remoteproc@vger.kernel.org>,
-	DRI Development <dri-devel@lists.freedesktop.org>,
-	platform-driver-x86@vger.kernel.org, linux-ide@vger.kernel.org,
-	dm-devel@redhat.com, keyrings@vger.kernel.org,
-	MTD Maling List <linux-mtd@lists.infradead.org>,
-	Linux I2C <linux-i2c@vger.kernel.org>, linux-riscv@lists.infradead.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	ac100@lists.launchpad.net, linux-rtc@vger.kernel.org,
-	linux-samsung-soc@vger.kernel.org, scsi <linux-scsi@vger.kernel.org>,
-	"open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>,
-	linux-rdma <linux-rdma@vger.kernel.org>, esc.storagedev@microsemi.com,
-	linux-security-module@vger.kernel.org,
-	linux-clk <linux-clk@vger.kernel.org>,
-	ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
-	bcm-kernel-feedback-list@broadcom.com,
-	"open list:SERIAL DRIVERS" <linux-serial@vger.kernel.org>,
-	linux-input@vger.kernel.org, xen-devel@lists.xenproject.org,
-	virtualization@lists.linux-foundation.org,
-	Linux Media Mailing List <linux-media@vger.kernel.org>,
-	"moderated list:H8/300 ARCHITECTURE"
-	<uclinux-h8-devel@lists.sourceforge.jp>,
-	driverdevel <devel@driverdev.osuosl.org>,
-	Linux PM list <linux-pm@vger.kernel.org>,
-	linux-arm-msm <linux-arm-msm@vger.kernel.org>,
-	linux-um@lists.infradead.org, linux-block@vger.kernel.org,
-	"open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
-	linux-m68k <linux-m68k@lists.linux-m68k.org>,
-	Openrisc <openrisc@lists.librecores.org>,
-	linux-mediatek@lists.infradead.org,
-	linux-rpi-kernel <linux-rpi-kernel@lists.infradead.org>,
-	linux-tegra <linux-tegra@vger.kernel.org>,
-	openipmi-developer@lists.sourceforge.net,
-	"open list:TI ETHERNET SWITCH DRIVER \(CPSW\)"
-	<linux-omap@vger.kernel.org>,
-	Linux ARM <linux-arm-kernel@lists.infradead.org>,
-	linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
-	linux-raid@vger.kernel.org, Jiri Kosina <trivial@kernel.org>,
-	Linux MM <linux-mm@kvack.org>, netdev <netdev@vger.kernel.org>,
-	Linux MMC List <linux-mmc@vger.kernel.org>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	linux-spi <linux-spi@vger.kernel.org>,
-	Linux IOMMU <iommu@lists.linux-foundation.org>,
-	Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
-	alpha <linux-alpha@vger.kernel.org>, dmaengine@vger.kernel.org,
-	linux-integrity <linux-integrity@vger.kernel.org>,
-	linuxppc-dev <linuxppc-dev@lists.ozlabs.org>
+Cc: Daiane Mendes <dnmendes76@gmail.com>, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -112,36 +77,37 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Oct 4, 2019 at 4:57 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
-> Adjust indentation from spaces to tab (+optional two spaces) as in
-> coding style with command like:
->     $ sed -e 's/^        /\t/' -i */Kconfig
->
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-
->  arch/m68k/Kconfig.bus                  |  2 +-
->  arch/m68k/Kconfig.debug                | 16 ++++++++--------
->  arch/m68k/Kconfig.machine              |  8 ++++----
-
-For m68k:
-Acked-by: Geert Uytterhoeven <geert@linux-m68k.org>
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+RW0gc2VnLCA3IGRlIG91dCBkZSAyMDE5IMOgcyAwNDo0MywgTWljaGFlbCBTLiBUc2lya2luIDxt
+c3RAcmVkaGF0LmNvbT4gZXNjcmV2ZXU6Cj4KPiBPbiBTdW4sIE9jdCAwNiwgMjAxOSBhdCAwMzo0
+NToxM1BNIC0wMzAwLCBqY2ZhcmFjY29AZ21haWwuY29tIHdyb3RlOgo+ID4gRnJvbTogSnVsaW8g
+RmFyYWNjbyA8amNmYXJhY2NvQGdtYWlsLmNvbT4KPiA+Cj4gPiBEcml2ZXIgdmlydGlvX25ldCBp
+cyBub3QgaGFuZGxpbmcgZXJyb3IgZXZlbnRzIGZvciBUWCBwcm92aWRlZCBieQo+ID4gZGV2X3dh
+dGNoZG9nLiBUaGlzIGV2ZW50IGlzIHJlYWNoZWQgd2hlbiB0cmFuc21pc3Npb24gcXVldWUgaXMg
+aGF2aW5nCj4gPiBwcm9ibGVtcyB0byB0cmFuc21pdCBwYWNrZXRzLiBUbyBlbmFibGUgaXQsIGRy
+aXZlciBzaG91bGQgaGF2ZQo+ID4gLm5kb190eF90aW1lb3V0IGltcGxlbWVudGVkLiBUaGlzIHNl
+cmllIGhhcyB0d28gY29tbWl0czoKPiA+Cj4gPiBJbiB0aGUgcGFzdCwgd2UgaW1wbGVtZW50ZWQg
+YSBmdW5jdGlvbiB0byByZWNvdmVyIGRyaXZlciBzdGF0ZSB3aGVuIHRoaXMKPiA+IGtpbmQgb2Yg
+ZXZlbnQgaGFwcGVucywgYnV0IHRoZSBzdHJ1Y3R1cmUgd2FzIHRvIGNvbXBsZXggZm9yIHZpcnRp
+b19uZXQKPiA+IHRoYXQgbW9tZW50Lgo+Cj4gSXQncyBtb3JlIHRoYXQgaXQgd2FzIG1pc3Npbmcg
+YSBidW5jaCBvZiBsb2Nrcy4KCkFjdHVhbGx5LCB3ZSBzdWJtaXR0ZWQgdGhpcyBwYXRjaCBhcyBh
+IFJGQyB0byB1bmRlcnN0YW5kIHRoZSBjb21tdW5pdHkKcGVyc3BlY3RpdmUgYWJvdXQgdGhpcyBt
+aXNzaW5nIGZlYXR1cmU6CkNvbXBsZXhpdHkgdmVyc3VzIHBlcmZvcm1hbmNlIHZlcnN1cyBzb2x1
+dGlvbi4KCj4KPiA+IEFsdGVybmF0aXZlbGx5LCB0aGlzIHNrZWxldG9uIHNob3VsZCBiZSBlbm91
+Z2ggZm9yIG5vdy4KPiA+Cj4gPiBGb3IgZnVydGhlciBkZXRhaWxzLCBzZWUgdGhyZWFkOgo+ID4g
+aHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMTUvNi8yMy82OTEKPiA+Cj4gPiBQYXRjaCAxLzI6Cj4g
+PiAgIEFkZCBzdGF0aXN0aWMgZmllbGQgZm9yIFRYIHRpbWVvdXQgZXZlbnRzLgo+ID4KPiA+IFBh
+dGNoIDIvMjoKPiA+ICAgSW1wbGVtZW50IGEgc2tlbGV0b24gZnVuY3Rpb24gdG8gZGVidWcgVFgg
+dGltZW91dCBldmVudHMuCj4gPgo+ID4gSnVsaW8gRmFyYWNjbyAoMik6Cj4gPiAgIGRyaXZlcnM6
+IG5ldDogdmlydGlvX25ldDogQWRkIHR4X3RpbWVvdXQgc3RhdHMgZmllbGQKPiA+ICAgZHJpdmVy
+czogbmV0OiB2aXJ0aW9fbmV0OiBBZGQgdHhfdGltZW91dCBmdW5jdGlvbgo+ID4KPiA+ICBkcml2
+ZXJzL25ldC92aXJ0aW9fbmV0LmMgfCAzMyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+Ky0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgMzIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+
+ID4KPiA+IC0tCj4gPiAyLjIxLjAKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxp
+c3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
