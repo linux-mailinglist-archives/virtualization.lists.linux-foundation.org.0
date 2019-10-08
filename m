@@ -2,46 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDC81CF0E2
-	for <lists.virtualization@lfdr.de>; Tue,  8 Oct 2019 04:42:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9D45CF5A5
+	for <lists.virtualization@lfdr.de>; Tue,  8 Oct 2019 11:08:23 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C9F22CC3;
-	Tue,  8 Oct 2019 02:42:10 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9A05F123B;
+	Tue,  8 Oct 2019 09:08:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EC373CAC
-	for <virtualization@lists.linux-foundation.org>;
-	Tue,  8 Oct 2019 02:42:09 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from huawei.com (szxga06-in.huawei.com [45.249.212.32])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 767178AB
-	for <virtualization@lists.linux-foundation.org>;
-	Tue,  8 Oct 2019 02:42:09 +0000 (UTC)
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
-	by Forcepoint Email with ESMTP id 991DDDCAB4BC3935C2E2;
-	Tue,  8 Oct 2019 10:42:01 +0800 (CST)
-Received: from localhost (10.133.213.239) by DGGEMS407-HUB.china.huawei.com
-	(10.3.19.207) with Microsoft SMTP Server id 14.3.439.0; Tue, 8 Oct 2019
-	10:41:53 +0800
-From: YueHaibing <yuehaibing@huawei.com>
-To: <airlied@redhat.com>, <kraxel@redhat.com>, <airlied@linux.ie>,
-	<daniel@ffwll.ch>
-Subject: [PATCH -next] drm/qxl: Fix randbuild error
-Date: Tue, 8 Oct 2019 10:40:54 +0800
-Message-ID: <20191008024054.32368-1-yuehaibing@huawei.com>
-X-Mailer: git-send-email 2.10.2.windows.1
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 868261233;
+	Tue,  8 Oct 2019 09:08:15 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0E83E5F4;
+	Tue,  8 Oct 2019 09:08:14 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+	id 51E203D0; Tue,  8 Oct 2019 11:08:13 +0200 (CEST)
+Date: Tue, 8 Oct 2019 11:08:13 +0200
+From: Joerg Roedel <joro@8bytes.org>
+To: Tom Murphy <murphyt7@tcd.ie>
+Subject: Re: [PATCH v6 0/5] iommu/amd: Convert the AMD iommu driver to the
+	dma-iommu api
+Message-ID: <20191008090813.GB2514@8bytes.org>
+References: <20190908165642.22253-1-murphyt7@tcd.ie>
 MIME-Version: 1.0
-X-Originating-IP: [10.133.213.239]
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20190908165642.22253-1-murphyt7@tcd.ie>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00, DOS_RCVD_IP_TWICE_B,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: spice-devel@lists.freedesktop.org, YueHaibing <yuehaibing@huawei.com>,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org
+Cc: Heiko Stuebner <heiko@sntech.de>, virtualization@lists.linux-foundation.org,
+	linux-tegra@vger.kernel.org, Thierry Reding <thierry.reding@gmail.com>,
+	Will Deacon <will@kernel.org>, Marek Szyprowski <m.szyprowski@samsung.com>,
+	linux-s390@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
+	iommu@lists.linux-foundation.org, Krzysztof Kozlowski <krzk@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>, linux-rockchip@lists.infradead.org,
+	Andy Gross <agross@kernel.org>,
+	Gerald Schaefer <gerald.schaefer@de.ibm.com>,
+	Jean-Philippe Brucker <jean-philippe@linaro.org>,
+	linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	linux-arm-kernel@lists.infradead.org,
+	David Woodhouse <dwmw2@infradead.org>,
+	linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
+	Kukjin Kim <kgene@kernel.org>, Robin Murphy <robin.murphy@arm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +66,12 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-If DEM_QXL is y and DRM_TTM_HELPER is m, building fails:
+On Sun, Sep 08, 2019 at 09:56:36AM -0700, Tom Murphy wrote:
+> Convert the AMD iommu driver to the dma-iommu api. Remove the iova
+> handling and reserve region code from the AMD iommu driver.
 
-drivers/gpu/drm/qxl/qxl_object.o: undefined reference to `drm_gem_ttm_print_info'
-
-Select DRM_TTM_HELPER to fix this.
-
-Fixes: 78d54f1f6a33 ("drm/qxl: use drm_gem_ttm_print_info")
-Signed-off-by: YueHaibing <yuehaibing@huawei.com>
----
- drivers/gpu/drm/qxl/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
-index d0d691b..ca3f51c 100644
---- a/drivers/gpu/drm/qxl/Kconfig
-+++ b/drivers/gpu/drm/qxl/Kconfig
-@@ -4,6 +4,7 @@ config DRM_QXL
- 	depends on DRM && PCI && MMU
- 	select DRM_KMS_HELPER
- 	select DRM_TTM
-+	select DRM_TTM_HELPER
- 	select CRC32
- 	help
- 	  QXL virtual GPU for Spice virtualization desktop integration.
--- 
-2.7.4
-
-
+Applied, thanks. Note that it will not show up in linux-next before
+-rc3.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
