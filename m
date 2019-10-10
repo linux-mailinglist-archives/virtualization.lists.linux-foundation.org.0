@@ -2,77 +2,81 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 238DAD2320
-	for <lists.virtualization@lfdr.de>; Thu, 10 Oct 2019 10:47:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF797D243D
+	for <lists.virtualization@lfdr.de>; Thu, 10 Oct 2019 10:50:33 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 0948B101E;
-	Thu, 10 Oct 2019 08:47:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 71A451026;
+	Thu, 10 Oct 2019 08:50:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C4EE61012
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9C2CF101F
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 10 Oct 2019 08:47:49 +0000 (UTC)
+	Thu, 10 Oct 2019 08:50:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 869C15D3
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 36C2A8AB
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 10 Oct 2019 08:47:49 +0000 (UTC)
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
-	[209.85.221.70])
+	Thu, 10 Oct 2019 08:50:25 +0000 (UTC)
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+	[209.85.221.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 088DAC050DEC
+	by mx1.redhat.com (Postfix) with ESMTPS id A7C9590916
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 10 Oct 2019 08:47:49 +0000 (UTC)
-Received: by mail-wr1-f70.google.com with SMTP id w2so2415379wrn.4
+	Thu, 10 Oct 2019 08:50:24 +0000 (UTC)
+Received: by mail-wr1-f72.google.com with SMTP id w10so2407356wrl.5
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 10 Oct 2019 01:47:48 -0700 (PDT)
+	Thu, 10 Oct 2019 01:50:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=yMEA1vwAxxDR9KMsFNEltEDGLvMYr7N57Wh6Y66WRc0=;
-	b=kf4vSGkeev6RhVEiCE+f6p1kIh6W0MhSfYIxhaHGEvNfB9JRS22YtPrKXckOzCoqXY
-	v5yGqcBiYCpBAYN/bIrgcpy01+0FcnFjRLRmHDA7PCVu3zDMYVl+BKJ/V5VsoGB30rIi
-	xV0tO++Iyqy789p7Q+jzY2SLDmw1G8hen/I1FJTFwCg+7sGM5qOqJE8kLk1RICmc0lZc
-	htzaOxUPBVGonkfwgwi8Xfe8c4RTP1Oc0RRWxFvGWYzxhqu7fpFDcOxB2+UIEWspJJEy
-	kXu2M6gDU+RR02TlhWGcCsaQhJfw6QtsQMOwjGFxFnUQHBCdL8CA9LBZgmxgJFyDXjx0
-	zI6g==
-X-Gm-Message-State: APjAAAWis0nGp5aVhZV2fyv/aMlztFwqnE3cjDhygo4MP3KsiI5Cgp+h
-	ymlttTw99KjFesStRwKUPAzU6AsGyJOaikYz1qSOydFi+XZfLPLOCwbtEdlvhcBJG3Gl3eqkSyt
-	4fI32SgRpiar2XnKkRxApdLCKD8aQfhEInGOMMQpOeA==
-X-Received: by 2002:a7b:c7d4:: with SMTP id z20mr6460272wmk.135.1570697267773; 
-	Thu, 10 Oct 2019 01:47:47 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwGlOe+0u6KXBMrN0A6Ztn9RSeVar+fTIwwT5kQa51LZTkc+efRSchIZ3bkrYo/CFxMwyo8bg==
-X-Received: by 2002:a7b:c7d4:: with SMTP id z20mr6460257wmk.135.1570697267541; 
-	Thu, 10 Oct 2019 01:47:47 -0700 (PDT)
+	bh=kbUGk/zH7Jd7BlhB+4/oDRz4mPdioNN/Nf5e+ZFx1KA=;
+	b=RTmt+tUdE6Mak4x6JAK875uN/zoBoNTZ7bttmLtxBgZMmt/fqU/CjGytgZdrPS3vCh
+	s4NiZ603ZenclC7VzM4pGDCL8qWtplyId79i5wlrderiwxyg8ELt+xqHVR3Z6/cWiwZ8
+	IicYNQ7iGcvXyKY44OOPNjF3Op7hCryUELCQEyKu3hyB0sW8gv6LYrpcC1pq7dhOdtOl
+	PeaBl8vOYvCWXRLK+xNH+PXmiZcVW/sMVl4XDCXhzOnBOEwrP+4Am7rubZg5iXj3AeuA
+	EbzrH9XB7TRZ02j76khs/F5+dr+/lBMO8IPvyKF8ZEnJ+mPnyLskamSuEqe4l8KuAL+e
+	kcmA==
+X-Gm-Message-State: APjAAAVXUTYE4VBC7pkuLSSVf3TsZ5kEKX4uqAMEsk1V7aiUvSguUeGL
+	Is6/7pMqC8gvmW07Hf0G+PGZIBEM+plK1uVWWnJcpC7QaNkBEBVZiEVRrd/jPWZZA0yHBZJl+od
+	WX4CeejUq19cLr4pP6Jhm2gHuJhL29PHaEStfca7wmQ==
+X-Received: by 2002:a5d:6a4e:: with SMTP id t14mr7690228wrw.286.1570697423413; 
+	Thu, 10 Oct 2019 01:50:23 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwoCA81jZEGW66oRDsEIESbM+AgkqiF20vI6cPaP0YoBTkJocF4+GdZwig79Aeir6Qomx30bw==
+X-Received: by 2002:a5d:6a4e:: with SMTP id t14mr7690208wrw.286.1570697423217; 
+	Thu, 10 Oct 2019 01:50:23 -0700 (PDT)
 Received: from steredhat (host174-200-dynamic.52-79-r.retail.telecomitalia.it.
 	[79.52.200.174])
-	by smtp.gmail.com with ESMTPSA id z9sm5103737wrp.26.2019.10.10.01.47.46
+	by smtp.gmail.com with ESMTPSA id y8sm6284711wrm.64.2019.10.10.01.50.21
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 10 Oct 2019 01:47:46 -0700 (PDT)
-Date: Thu, 10 Oct 2019 10:47:44 +0200
+	Thu, 10 Oct 2019 01:50:22 -0700 (PDT)
+Date: Thu, 10 Oct 2019 10:50:20 +0200
 From: Stefano Garzarella <sgarzare@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [PATCH v2 07/11] VSOCK: add AF_VSOCK test cases
-Message-ID: <20191010084744.n46t3ryv7rilkpk2@steredhat>
-References: <20190801152541.245833-1-sgarzare@redhat.com>
-	<20190801152541.245833-8-sgarzare@redhat.com>
-	<CAGxU2F4N5ACePf6YLQCBFMHPu8wDLScF+AGQ2==JAuBUj0GB-A@mail.gmail.com>
-	<20191009151503.GA13568@stefanha-x1.localdomain>
+To: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [RFC PATCH 06/13] vsock: add 'struct vsock_sock *' param to
+	vsock_core_get_transport()
+Message-ID: <20191010085020.w5mbse7mnpzalhyr@steredhat>
+References: <20190927112703.17745-1-sgarzare@redhat.com>
+	<20190927112703.17745-7-sgarzare@redhat.com>
+	<20191009115433.GG5747@stefanha-x1.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191009151503.GA13568@stefanha-x1.localdomain>
+In-Reply-To: <20191009115433.GG5747@stefanha-x1.localdomain>
 User-Agent: NeoMutt/20180716
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm <kvm@vger.kernel.org>, netdev@vger.kernel.org,
+Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
+	Stephen Hemminger <sthemmin@microsoft.com>, kvm@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
+	Haiyang Zhang <haiyangz@microsoft.com>,
 	Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
 	"David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
@@ -90,19 +94,25 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Oct 09, 2019 at 04:15:03PM +0100, Stefan Hajnoczi wrote:
-> On Wed, Oct 09, 2019 at 12:03:53PM +0200, Stefano Garzarella wrote:
-> > Hi Stefan,
-> > I'm thinking about dividing this test into single applications, one
-> > for each test, do you think it makes sense?
-> > Or is it just a useless complication?
+On Wed, Oct 09, 2019 at 12:54:33PM +0100, Stefan Hajnoczi wrote:
+> On Fri, Sep 27, 2019 at 01:26:56PM +0200, Stefano Garzarella wrote:
+> > -const struct vsock_transport *vsock_core_get_transport(void)
+> > +const struct vsock_transport *vsock_core_get_transport(struct vsock_sock *vsk)
+> >  {
+> >  	/* vsock_register_mutex not taken since only the transport uses this
+> >  	 * function and only while registered.
+> >  	 */
+> > -	return transport_single;
 > 
-> I don't mind either way but personally I would leave it as a single
-> program.
-> 
+> This comment is about protecting transport_single.  It no longer applies
+> when using vsk->transport.  Please drop it.
 
-Okay, since I had the doubt it was a useless complication and you prefer
-a single application, I continue on this way :-)
+Right, dropped.
+
+> 
+> Otherwise:
+> 
+> Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
 
 Thanks,
 Stefano
