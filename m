@@ -2,58 +2,80 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id D310CD2087
-	for <lists.virtualization@lfdr.de>; Thu, 10 Oct 2019 07:49:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3703AD231F
+	for <lists.virtualization@lfdr.de>; Thu, 10 Oct 2019 10:46:13 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 8F15D107A;
-	Thu, 10 Oct 2019 05:49:28 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9F44B1018;
+	Thu, 10 Oct 2019 08:46:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C290CCC0
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 484CA1010
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 10 Oct 2019 05:49:26 +0000 (UTC)
+	Thu, 10 Oct 2019 08:46:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3F4E98A0
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DA8365D3
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 10 Oct 2019 05:49:26 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
-	[10.5.11.11])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Thu, 10 Oct 2019 08:46:04 +0000 (UTC)
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+	[209.85.221.72])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 371DB2A09A3;
-	Thu, 10 Oct 2019 05:49:25 +0000 (UTC)
-Received: from [10.72.12.46] (ovpn-12-46.pek2.redhat.com [10.72.12.46])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 69C6D600C4;
-	Thu, 10 Oct 2019 05:49:18 +0000 (UTC)
-Subject: Re: [PATCH 07/11] vhost: convert vhost_umem_interval_tree to half
-	closed intervals
-To: Davidlohr Bueso <dave@stgolabs.net>, akpm@linux-foundation.org
-References: <20191003201858.11666-1-dave@stgolabs.net>
-	<20191003201858.11666-8-dave@stgolabs.net>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <294467e3-5545-9a76-a975-4798f096ac4b@redhat.com>
-Date: Thu, 10 Oct 2019 13:49:17 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	by mx1.redhat.com (Postfix) with ESMTPS id 32F1DC08E286
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 10 Oct 2019 08:46:04 +0000 (UTC)
+Received: by mail-wr1-f72.google.com with SMTP id n3so2405976wrt.9
+	for <virtualization@lists.linux-foundation.org>;
+	Thu, 10 Oct 2019 01:46:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=tR/b93II6w98Y1JcW5QoZrFBl2Ih7JvmORnV8m5CDsk=;
+	b=fQ5KRzbc5mVmPhY2nnolqDLhfY3Ax5t7LyhGA5ys9WJX3MdFvl32w4FrrS63ep6ceF
+	XURHhKPcbabqjI8LwaOi+Qey46T2aa/XTfXG3wXBzAEUFwAHqh5aOARcfQqWn1QvW30r
+	IFdXqrA3ZvG9oy1LSz6bSOX7SURxY53QplZf1QFqnbUBGzn4v6eQz6o9C8uszFPniveU
+	e4UYJX1/CvTDuYxUY+MvJqNW4E4kZJvQi78yOJffYwnnOe+BsOworf0cYg8jHT4QyreR
+	5EFoS0JNIk11FVIUhb/NpNh7TMz/Ua6sfXO72PSjyUhy7U1Gdb4bZDbtatWg9gHak+hv
+	SCbA==
+X-Gm-Message-State: APjAAAVGrvYXoC/LQg0daPFGWDD2vsITWKKZitgUtTPrp8D3lxGMJXSC
+	zrGiVVnNvzVDB3l2JCgR2Mq5+pizqDUlIHUtPyscriP+L150IHqQbaV4cKhjjlijRrNWVvfKDfh
+	YwI12WXIUaGGLjl4LPiaOovJieVTKwdiWVrf/bjWL2w==
+X-Received: by 2002:adf:e401:: with SMTP id g1mr5700486wrm.211.1570697162834; 
+	Thu, 10 Oct 2019 01:46:02 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqyrGXBfAqLL3DSANixqvzd6znc5l0D4LZnBiMcWibn1Ag6PBFlGAQzLidI7EwNDBrIbfhWgrA==
+X-Received: by 2002:adf:e401:: with SMTP id g1mr5700471wrm.211.1570697162619; 
+	Thu, 10 Oct 2019 01:46:02 -0700 (PDT)
+Received: from steredhat (host174-200-dynamic.52-79-r.retail.telecomitalia.it.
+	[79.52.200.174]) by smtp.gmail.com with ESMTPSA id
+	q124sm8324726wma.5.2019.10.10.01.46.01
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 10 Oct 2019 01:46:01 -0700 (PDT)
+Date: Thu, 10 Oct 2019 10:45:59 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [RFC PATCH 00/13] vsock: add multi-transports support
+Message-ID: <20191010084559.a4t6v7dopeqffn55@steredhat>
+References: <20190927112703.17745-1-sgarzare@redhat.com>
+	<20191009132952.GO5747@stefanha-x1.localdomain>
 MIME-Version: 1.0
-In-Reply-To: <20191003201858.11666-8-dave@stgolabs.net>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.38]);
-	Thu, 10 Oct 2019 05:49:25 +0000 (UTC)
+Content-Disposition: inline
+In-Reply-To: <20191009132952.GO5747@stefanha-x1.localdomain>
+User-Agent: NeoMutt/20180716
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, peterz@infradead.org,
-	Davidlohr Bueso <dbueso@suse.de>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
-	walken@google.com, linux-rdma@vger.kernel.org
+Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
+	Stephen Hemminger <sthemmin@microsoft.com>, kvm@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,87 +87,27 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvMTAvNCDkuIrljYg0OjE4LCBEYXZpZGxvaHIgQnVlc28gd3JvdGU6Cj4gVGhlIHZo
-b3N0X3VtZW0gaW50ZXJ2YWwgdHJlZSByZWFsbHkgd2FudHMgW2EsIGIpIGludGVydmFscywKPiBu
-b3QgZnVsbHkgY2xvc2VkIGFzIGN1cnJlbnRseS4gQXMgc3VjaCBjb252ZXJ0IGl0IHRvIHVzZSB0
-aGUKPiBuZXcgaW50ZXJ2YWxfdHJlZV9nZW4uaCwgYW5kIGFsc28gcmVuYW1lIHRoZSAnbGFzdCcg
-ZW5kcG9pbnQKPiBpbiB0aGUgbm9kZSB0byAnZW5kJywgd2hpY2ggYm90aCBhIG1vcmUgc3VpdGFi
-bGUgbmFtZSBmb3IKPiB0aGUgaGFsZiBjbG9zZWQgaW50ZXJ2YWwgYW5kIGFsc28gcmVkdWNlcyB0
-aGUgY2hhbmNlcyBvZiBzb21lCj4gY2FsbGVyIGJlaW5nIG1pc3NlZC4KPgo+IENjOiBNaWNoYWVs
-IFMuIFRzaXJraW4iIDxtc3RAcmVkaGF0LmNvbT4KPiBDYzogSmFzb24gV2FuZyA8amFzb3dhbmdA
-cmVkaGF0LmNvbT4KPiBDYzogdmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
-cmcKPiBTaWduZWQtb2ZmLWJ5OiBEYXZpZGxvaHIgQnVlc28gPGRidWVzb0BzdXNlLmRlPgo+IC0t
-LQo+ICAgZHJpdmVycy92aG9zdC92aG9zdC5jIHwgMTkgKysrKysrKysrLS0tLS0tLS0tLQo+ICAg
-ZHJpdmVycy92aG9zdC92aG9zdC5oIHwgIDQgKystLQo+ICAgMiBmaWxlcyBjaGFuZ2VkLCAxMSBp
-bnNlcnRpb25zKCspLCAxMiBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zo
-b3N0L3Zob3N0LmMgYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmMKPiBpbmRleCAzNmNhMmNmNDE5YmYu
-LjgwYzNjY2EyNGRjNyAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmMKPiArKysg
-Yi9kcml2ZXJzL3Zob3N0L3Zob3N0LmMKPiBAQCAtMjgsNyArMjgsNyBAQAo+ICAgI2luY2x1ZGUg
-PGxpbnV4L3NvcnQuaD4KPiAgICNpbmNsdWRlIDxsaW51eC9zY2hlZC9tbS5oPgo+ICAgI2luY2x1
-ZGUgPGxpbnV4L3NjaGVkL3NpZ25hbC5oPgo+IC0jaW5jbHVkZSA8bGludXgvaW50ZXJ2YWxfdHJl
-ZV9nZW5lcmljLmg+Cj4gKyNpbmNsdWRlIDxsaW51eC9pbnRlcnZhbF90cmVlX2dlbi5oPgo+ICAg
-I2luY2x1ZGUgPGxpbnV4L25vc3BlYy5oPgo+ICAgCj4gICAjaW5jbHVkZSAidmhvc3QuaCIKPiBA
-QCAtNTEsNyArNTEsNyBAQCBlbnVtIHsKPiAgIAo+ICAgSU5URVJWQUxfVFJFRV9ERUZJTkUoc3Ry
-dWN0IHZob3N0X3VtZW1fbm9kZSwKPiAgIAkJICAgICByYiwgX191NjQsIF9fc3VidHJlZV9sYXN0
-LAo+IC0JCSAgICAgU1RBUlQsIExBU1QsIHN0YXRpYyBpbmxpbmUsIHZob3N0X3VtZW1faW50ZXJ2
-YWxfdHJlZSk7Cj4gKwkJICAgICBTVEFSVCwgRU5ELCBzdGF0aWMgaW5saW5lLCB2aG9zdF91bWVt
-X2ludGVydmFsX3RyZWUpOwo+ICAgCj4gICAjaWZkZWYgQ09ORklHX1ZIT1NUX0NST1NTX0VORElB
-Tl9MRUdBQ1kKPiAgIHN0YXRpYyB2b2lkIHZob3N0X2Rpc2FibGVfY3Jvc3NfZW5kaWFuKHN0cnVj
-dCB2aG9zdF92aXJ0cXVldWUgKnZxKQo+IEBAIC0xMDM0LDcgKzEwMzQsNyBAQCBzdGF0aWMgaW50
-IHZob3N0X25ld191bWVtX3JhbmdlKHN0cnVjdCB2aG9zdF91bWVtICp1bWVtLAo+ICAgCj4gICAJ
-bm9kZS0+c3RhcnQgPSBzdGFydDsKPiAgIAlub2RlLT5zaXplID0gc2l6ZTsKPiAtCW5vZGUtPmxh
-c3QgPSBlbmQ7Cj4gKwlub2RlLT5lbmQgPSBlbmQ7Cj4gICAJbm9kZS0+dXNlcnNwYWNlX2FkZHIg
-PSB1c2Vyc3BhY2VfYWRkcjsKPiAgIAlub2RlLT5wZXJtID0gcGVybTsKPiAgIAlJTklUX0xJU1Rf
-SEVBRCgmbm9kZS0+bGluayk7Cj4gQEAgLTExMTIsNyArMTExMiw3IEBAIHN0YXRpYyBpbnQgdmhv
-c3RfcHJvY2Vzc19pb3RsYl9tc2coc3RydWN0IHZob3N0X2RldiAqZGV2LAo+ICAgCQl9Cj4gICAJ
-CXZob3N0X3ZxX21ldGFfcmVzZXQoZGV2KTsKPiAgIAkJaWYgKHZob3N0X25ld191bWVtX3Jhbmdl
-KGRldi0+aW90bGIsIG1zZy0+aW92YSwgbXNnLT5zaXplLAo+IC0JCQkJCSBtc2ctPmlvdmEgKyBt
-c2ctPnNpemUgLSAxLAo+ICsJCQkJCSBtc2ctPmlvdmEgKyBtc2ctPnNpemUsCj4gICAJCQkJCSBt
-c2ctPnVhZGRyLCBtc2ctPnBlcm0pKSB7Cj4gICAJCQlyZXQgPSAtRU5PTUVNOwo+ICAgCQkJYnJl
-YWs7Cj4gQEAgLTExMjYsNyArMTEyNiw3IEBAIHN0YXRpYyBpbnQgdmhvc3RfcHJvY2Vzc19pb3Rs
-Yl9tc2coc3RydWN0IHZob3N0X2RldiAqZGV2LAo+ICAgCQl9Cj4gICAJCXZob3N0X3ZxX21ldGFf
-cmVzZXQoZGV2KTsKPiAgIAkJdmhvc3RfZGVsX3VtZW1fcmFuZ2UoZGV2LT5pb3RsYiwgbXNnLT5p
-b3ZhLAo+IC0JCQkJICAgICBtc2ctPmlvdmEgKyBtc2ctPnNpemUgLSAxKTsKPiArCQkJCSAgICAg
-bXNnLT5pb3ZhICsgbXNnLT5zaXplKTsKPiAgIAkJYnJlYWs7Cj4gICAJZGVmYXVsdDoKPiAgIAkJ
-cmV0ID0gLUVJTlZBTDsKPiBAQCAtMTMyMCwxNSArMTMyMCwxNCBAQCBzdGF0aWMgYm9vbCBpb3Rs
-Yl9hY2Nlc3Nfb2soc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAqdnEsCj4gICB7Cj4gICAJY29uc3Qg
-c3RydWN0IHZob3N0X3VtZW1fbm9kZSAqbm9kZTsKPiAgIAlzdHJ1Y3Qgdmhvc3RfdW1lbSAqdW1l
-bSA9IHZxLT5pb3RsYjsKPiAtCXU2NCBzID0gMCwgc2l6ZSwgb3JpZ19hZGRyID0gYWRkciwgbGFz
-dCA9IGFkZHIgKyBsZW4gLSAxOwo+ICsJdTY0IHMgPSAwLCBzaXplLCBvcmlnX2FkZHIgPSBhZGRy
-LCBsYXN0ID0gYWRkciArIGxlbjsKPiAgIAo+ICAgCWlmICh2aG9zdF92cV9tZXRhX2ZldGNoKHZx
-LCBhZGRyLCBsZW4sIHR5cGUpKQo+ICAgCQlyZXR1cm4gdHJ1ZTsKPiAgIAo+ICAgCXdoaWxlIChs
-ZW4gPiBzKSB7Cj4gICAJCW5vZGUgPSB2aG9zdF91bWVtX2ludGVydmFsX3RyZWVfaXRlcl9maXJz
-dCgmdW1lbS0+dW1lbV90cmVlLAo+IC0JCQkJCQkJICAgYWRkciwKPiAtCQkJCQkJCSAgIGxhc3Qp
-Owo+ICsJCQkJCQkJICAgYWRkciwgbGFzdCk7Cj4gICAJCWlmIChub2RlID09IE5VTEwgfHwgbm9k
-ZS0+c3RhcnQgPiBhZGRyKSB7Cj4gICAJCQl2aG9zdF9pb3RsYl9taXNzKHZxLCBhZGRyLCBhY2Nl
-c3MpOwo+ICAgCQkJcmV0dXJuIGZhbHNlOwo+IEBAIC0xNDU1LDcgKzE0NTQsNyBAQCBzdGF0aWMg
-bG9uZyB2aG9zdF9zZXRfbWVtb3J5KHN0cnVjdCB2aG9zdF9kZXYgKmQsIHN0cnVjdCB2aG9zdF9t
-ZW1vcnkgX191c2VyICptKQo+ICAgCQkJCQkgcmVnaW9uLT5ndWVzdF9waHlzX2FkZHIsCj4gICAJ
-CQkJCSByZWdpb24tPm1lbW9yeV9zaXplLAo+ICAgCQkJCQkgcmVnaW9uLT5ndWVzdF9waHlzX2Fk
-ZHIgKwo+IC0JCQkJCSByZWdpb24tPm1lbW9yeV9zaXplIC0gMSwKPiArCQkJCQkgcmVnaW9uLT5t
-ZW1vcnlfc2l6ZSwKPiAgIAkJCQkJIHJlZ2lvbi0+dXNlcnNwYWNlX2FkZHIsCj4gICAJCQkJCSBW
-SE9TVF9BQ0NFU1NfUlcpKQo+ICAgCQkJZ290byBlcnI7Cj4gQEAgLTIwNTUsNyArMjA1NCw3IEBA
-IHN0YXRpYyBpbnQgdHJhbnNsYXRlX2Rlc2Moc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAqdnEsIHU2
-NCBhZGRyLCB1MzIgbGVuLAo+ICAgCQl9Cj4gICAKPiAgIAkJbm9kZSA9IHZob3N0X3VtZW1faW50
-ZXJ2YWxfdHJlZV9pdGVyX2ZpcnN0KCZ1bWVtLT51bWVtX3RyZWUsCj4gLQkJCQkJCQlhZGRyLCBh
-ZGRyICsgbGVuIC0gMSk7Cj4gKwkJCQkJCQkgICBhZGRyLCBhZGRyICsgbGVuKTsKPiAgIAkJaWYg
-KG5vZGUgPT0gTlVMTCB8fCBub2RlLT5zdGFydCA+IGFkZHIpIHsKPiAgIAkJCWlmICh1bWVtICE9
-IGRldi0+aW90bGIpIHsKPiAgIAkJCQlyZXQgPSAtRUZBVUxUOwo+IGRpZmYgLS1naXQgYS9kcml2
-ZXJzL3Zob3N0L3Zob3N0LmggYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiBpbmRleCBlOWVkMjcy
-MmI2MzMuLmJiMzZjYjllZDVlYyAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmgK
-PiArKysgYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiBAQCAtNTMsMTMgKzUzLDEzIEBAIHN0cnVj
-dCB2aG9zdF9sb2cgewo+ICAgfTsKPiAgIAo+ICAgI2RlZmluZSBTVEFSVChub2RlKSAoKG5vZGUp
-LT5zdGFydCkKPiAtI2RlZmluZSBMQVNUKG5vZGUpICgobm9kZSktPmxhc3QpCj4gKyNkZWZpbmUg
-RU5EKG5vZGUpICgobm9kZSktPmVuZCkKPiAgIAo+ICAgc3RydWN0IHZob3N0X3VtZW1fbm9kZSB7
-Cj4gICAJc3RydWN0IHJiX25vZGUgcmI7Cj4gICAJc3RydWN0IGxpc3RfaGVhZCBsaW5rOwo+ICAg
-CV9fdTY0IHN0YXJ0Owo+IC0JX191NjQgbGFzdDsKPiArCV9fdTY0IGVuZDsKPiAgIAlfX3U2NCBz
-aXplOwo+ICAgCV9fdTY0IHVzZXJzcGFjZV9hZGRyOwo+ICAgCV9fdTMyIHBlcm07CgoKUmV2aWV3
-ZWQtYnk6IEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+CgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBs
-aXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlz
-dHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+On Wed, Oct 09, 2019 at 02:29:52PM +0100, Stefan Hajnoczi wrote:
+> On Fri, Sep 27, 2019 at 01:26:50PM +0200, Stefano Garzarella wrote:
+> > Hi all,
+> > this series adds the multi-transports support to vsock, following
+> > this proposal:
+> > https://www.spinics.net/lists/netdev/msg575792.html
+> 
+> Nice series!  I have left a few comments but overall it looks promising.
+
+Thank you very much for the comments!
+
+I'll follow them and respin.
+
+Cheers,
+Stefano
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
