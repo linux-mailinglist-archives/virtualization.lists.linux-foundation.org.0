@@ -2,68 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5AA4D434F
-	for <lists.virtualization@lfdr.de>; Fri, 11 Oct 2019 16:46:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE940D4350
+	for <lists.virtualization@lfdr.de>; Fri, 11 Oct 2019 16:46:52 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C76821A62;
-	Fri, 11 Oct 2019 14:46:41 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 08F871A66;
+	Fri, 11 Oct 2019 14:46:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4F9AA1A60
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CFEC815D5
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 11 Oct 2019 14:35:03 +0000 (UTC)
+	Fri, 11 Oct 2019 14:37:46 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DA28D735
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6BABC735
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 11 Oct 2019 14:35:02 +0000 (UTC)
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
-	[209.85.128.70])
+	Fri, 11 Oct 2019 14:37:46 +0000 (UTC)
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+	[209.85.221.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 386787E421
+	by mx1.redhat.com (Postfix) with ESMTPS id D7C6A80F81
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 11 Oct 2019 14:35:02 +0000 (UTC)
-Received: by mail-wm1-f70.google.com with SMTP id c188so2857064wmd.9
+	Fri, 11 Oct 2019 14:37:45 +0000 (UTC)
+Received: by mail-wr1-f72.google.com with SMTP id w8so4474635wrm.3
 	for <virtualization@lists.linux-foundation.org>;
-	Fri, 11 Oct 2019 07:35:02 -0700 (PDT)
+	Fri, 11 Oct 2019 07:37:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=BMhlHZig+1RhiRk7V7Pz4VOZHaUmDl77u5gqUPus1Vw=;
-	b=sdgrdgIcGkitY51JUI8gE9XkgVcm45D7ywAqwQ4c3kbsiV5xWheQrXT9HWPLAjXjqJ
-	+WmizasAR+Veu9Gq04q2F1rEfz/25tEMTp1o53ozS4trchI99li7hyW5OdpFLHTbZ6xX
-	12jtIJ1wt0OS0z3adqUOS1DJz9nLLEyOd/WdU/KXm02s7qX+j1P1VV0x/iFg0I1V2GU9
-	KlMXB3xreNrGTdd2lp/jrYHGQ+i2CzfN3+tO5D7w0clDTDiwG0NvzDqIMvNk8E+WG7ie
-	oOytpH2Cu/xzsohrenZjTWxcn6XFyWhLgKncRiOHX9mk5iB3c+m84qygkC9UX4/bqIQP
-	LTPg==
-X-Gm-Message-State: APjAAAWF7BrkLG3j44A/xYY7+oQ1Z91aGD6/XSQNSc7EYwMJd6yJYc0x
-	NMdNsnfEb4Ur8wY5glEnqlpcJ6YbUKk4jUdq480/GrYYTvFOq3UyrqcFg/yCAmmuBAkq6nTAuKg
-	EbaXX2HiVDmXPpP5nBYWpBtpTmRbfX/huE/upvaUQNQ==
-X-Received: by 2002:adf:dd88:: with SMTP id x8mr3048518wrl.140.1570804500913; 
-	Fri, 11 Oct 2019 07:35:00 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqx+Irj2vNmRio/nFmNCYUOj5zRQn/cFuQoq8tEJPRY6eLYwjr9hshihDbQlKDa3IF+n7XZANw==
-X-Received: by 2002:adf:dd88:: with SMTP id x8mr3048504wrl.140.1570804500699; 
-	Fri, 11 Oct 2019 07:35:00 -0700 (PDT)
+	bh=cJdL4DlBZ1DsoqoslBnw04GmuGAbbtWTmEe0mcYukas=;
+	b=Ro4+i0jpbw/BECJ8LR+tOslyAA33F9XQkqDYOeUlh7CLWz1I4mJ5SEhzwwKXnP4Al8
+	1vwTzTJPXIsHjEi1SeoYWmUoQbIM+lDKbEF/eFbTgSs3TuwgIm6wbIVL58HD4Co5CYtI
+	beMTbPiWDIheNaDIwMsdsFFmfFDcH3RT8egQfh+uB1mMUlBxkQrzd4lk7Sc0qHKxbuQc
+	Xw3wALpWe/IMIKN7PcjbUIzthEDsWy3APIJTjAMoc7WlvBFrX+MEaZkVtgreCUl6M1ep
+	yUCRt0rHOftdR/iz1fPpMXkN7P31q83gJ2073JNe9OdAE4sEab5wTUjOnwgvbdSXJMD+
+	L+KQ==
+X-Gm-Message-State: APjAAAXO7lWVH/tjVGP1I9l9qzBYyw+c8McUoeNMdIo6foMtzuC6b3fh
+	/0fXmvqtON5RoBrKBEqrnB9wzuzyPkpYmVnKSAnkvtbZwrQt5GQDMgjy9RCsnBWdR/70t2/JBfZ
+	Gi0koGxApsyrSQ0NhYSjuBzJNqrJP2yNSSCE+fUjY1g==
+X-Received: by 2002:adf:a516:: with SMTP id i22mr14579496wrb.273.1570804664504;
+	Fri, 11 Oct 2019 07:37:44 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzNdP5yvb8Rbsm9tLzeyjamBn7Ne70jEAdvVVgHzVT6Bjn+tQzwtYnB8hZDowTkrOmAzV3rXQ==
+X-Received: by 2002:adf:a516:: with SMTP id i22mr14579472wrb.273.1570804664273;
+	Fri, 11 Oct 2019 07:37:44 -0700 (PDT)
 Received: from steredhat (host174-200-dynamic.52-79-r.retail.telecomitalia.it.
 	[79.52.200.174]) by smtp.gmail.com with ESMTPSA id
-	g185sm12205685wme.10.2019.10.11.07.34.59
+	y14sm13296394wrd.84.2019.10.11.07.37.43
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 11 Oct 2019 07:35:00 -0700 (PDT)
-Date: Fri, 11 Oct 2019 16:34:57 +0200
+	Fri, 11 Oct 2019 07:37:43 -0700 (PDT)
+Date: Fri, 11 Oct 2019 16:37:41 +0200
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH net 0/2] vsock: don't allow half-closed socket in the
-	host transports
-Message-ID: <20191011143457.4ujt3gg7oxco6gld@steredhat>
+Subject: Re: [PATCH net 1/2] vsock: add half-closed socket details in the
+	implementation notes
+Message-ID: <20191011143741.frgdjcyee25wpcmf@steredhat>
 References: <20191011130758.22134-1-sgarzare@redhat.com>
-	<20191011101408-mutt-send-email-mst@kernel.org>
+	<20191011130758.22134-2-sgarzare@redhat.com>
+	<20191011101936-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191011101408-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20191011101936-mutt-send-email-mst@kernel.org>
 User-Agent: NeoMutt/20180716
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
@@ -89,49 +90,48 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Oct 11, 2019 at 10:19:13AM -0400, Michael S. Tsirkin wrote:
-> On Fri, Oct 11, 2019 at 03:07:56PM +0200, Stefano Garzarella wrote:
-> > We are implementing a test suite for the VSOCK sockets and we discovered
-> > that vmci_transport never allowed half-closed socket on the host side.
+On Fri, Oct 11, 2019 at 10:22:30AM -0400, Michael S. Tsirkin wrote:
+> On Fri, Oct 11, 2019 at 03:07:57PM +0200, Stefano Garzarella wrote:
+> > vmci_transport never allowed half-closed socket on the host side.
+> > Since we want to have the same behaviour across all transports, we
+> > add a section in the "Implementation notes".
 > > 
-> > As Jorgen explained [1] this is due to the implementation of VMCI.
+> > Cc: Jorgen Hansen <jhansen@vmware.com>
+> > Cc: Adit Ranadive <aditr@vmware.com>
+> > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+> > ---
+> >  net/vmw_vsock/af_vsock.c | 4 ++++
+> >  1 file changed, 4 insertions(+)
 > > 
-> > Since we want to have the same behaviour across all transports, this
-> > series adds a section in the "Implementation notes" to exaplain this
-> > behaviour, and changes the vhost_transport to behave the same way.
-> > 
-> > [1] https://patchwork.ozlabs.org/cover/847998/#1831400
+> > diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
+> > index 2ab43b2bba31..27df57c2024b 100644
+> > --- a/net/vmw_vsock/af_vsock.c
+> > +++ b/net/vmw_vsock/af_vsock.c
+> > @@ -83,6 +83,10 @@
+> >   *   TCP_ESTABLISHED - connected
+> >   *   TCP_CLOSING - disconnecting
+> >   *   TCP_LISTEN - listening
+> > + *
+> > + * - Half-closed socket is supported only on the guest side. recv() on the host
+> > + * side should return EOF when the guest closes a connection, also if some
+> > + * data is still in the receive queue.
+> >   */
+> >  
+> >  #include <linux/types.h>
 > 
-> Half closed sockets are very useful, and lots of
-> applications use tricks to swap a vsock for a tcp socket,
-> which might as a result break.
-
-Got it!
-
+> That's a great way to lose data in a way that's hard to debug.
 > 
-> If VMCI really cares it can implement an ioctl to
-> allow applications to detect that half closed sockets aren't supported.
+> VMCI sockets connect to a hypervisor so there's tight control
+> of what the hypervisor can do.
 > 
-> It does not look like VMCI wants to bother (users do not read
-> kernel implementation notes) so it does not really care.
-> So why do we want to cripple other transports intentionally?
+> But vhost vsocks connect to a fully fledged Linux, so
+> you can't assume this is safe. And application authors do not read
+> kernel source.
 
-The main reason is that we are developing the test suite and we noticed
-the miss match. Since we want to make sure that applications behave in
-the same way on different transports, we thought we would solve it that
-way.
+Thanks for explaining.
+Discard this patch, I'll try to add a getsockopt() to allow the tests
+(and applications) to understand if half-closed socket is supported or not.
 
-But what you are saying (also in the reply of the patches) is actually
-quite right. Not being publicized, applications do not expect this behavior,
-so please discard this series.
-
-My problem during the tests, was trying to figure out if half-closed
-sockets were supported or not, so as you say adding an IOCTL or maybe
-better a getsockopt() could solve the problem.
-
-What do you think?
-
-Thanks,
 Stefano
 _______________________________________________
 Virtualization mailing list
