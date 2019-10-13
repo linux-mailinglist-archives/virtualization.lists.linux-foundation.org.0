@@ -2,62 +2,62 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FEBFD5613
-	for <lists.virtualization@lfdr.de>; Sun, 13 Oct 2019 13:54:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96BC8D5614
+	for <lists.virtualization@lfdr.de>; Sun, 13 Oct 2019 13:55:02 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 2B92AF4C;
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 6D3DA238A;
 	Sun, 13 Oct 2019 11:54:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9F55E2367
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 664CA2367
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 11:42:23 +0000 (UTC)
+	Sun, 13 Oct 2019 11:42:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4165A6CE
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2B1915D3
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 11:42:23 +0000 (UTC)
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
-	[209.85.160.199])
+	Sun, 13 Oct 2019 11:42:28 +0000 (UTC)
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+	[209.85.160.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id BDA11C049E12
+	by mx1.redhat.com (Postfix) with ESMTPS id B862FC049E36
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 11:42:22 +0000 (UTC)
-Received: by mail-qt1-f199.google.com with SMTP id n4so14864391qtp.19
+	Sun, 13 Oct 2019 11:42:27 +0000 (UTC)
+Received: by mail-qt1-f197.google.com with SMTP id z21so14811450qtq.21
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 04:42:22 -0700 (PDT)
+	Sun, 13 Oct 2019 04:42:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to;
-	bh=3CYitd93iDHtPl2boSl3Eyofj0PvtzXYhyw7uXbmPmo=;
-	b=a29BNuLXmeQD/dzuYb9Qkd1ZsKW4lMBcIhuizIMItaFTDFm7XezqoIJL7lHg6bGTm5
-	6Epo61GIYl8ZTqALSq0ZO6kNPL4pgcMjMyJOeNCRZvtLH48uxMCttBK5wVPoyiOJQKHy
-	KwbrHhfJvDTuhbC3sg/pe7+EKf2fP5p+1dT2ioVo0WPRsx/P1IPTxdnpGwJHOBpw3ugI
-	tNwuB8jgM2YJrw2CytbzsObgsTiFcLXBdeQH1Eor9fZ1cdeoyXGU63r2SLwqEshL3Nhc
-	gCg1cPdak8ileubCf31rn9NS3d0xUmOUohx728WZebOd8JtvXKg5Rxf/JTojDMAQuJGw
-	KUmQ==
-X-Gm-Message-State: APjAAAUme6xnpiI+OqziIGAmCJHB4XUkHb4T5WrAbbA3GIkCjBT2YjOd
-	dkfKpt3VxmTvITx/+3eEiY902xhr2MM2x6E4tEzkB5mQFhOiRJluVIAcX7qbqXv5dkFAc+gnzlS
-	UZCMMy2wSF1d6h1cW1I9a7194Sr7i/7wpEgvFLdTa0A==
-X-Received: by 2002:aed:35a7:: with SMTP id c36mr27529127qte.200.1570966942034;
-	Sun, 13 Oct 2019 04:42:22 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqz4LMbkCfrdcYhEI8OeObeDJu5LuXPSdwMN3Yqhx4D0fr8hIGkuB2w8tDSXR79T7N+Kluf9Qg==
-X-Received: by 2002:aed:35a7:: with SMTP id c36mr27529117qte.200.1570966941851;
-	Sun, 13 Oct 2019 04:42:21 -0700 (PDT)
+	bh=LyPdJiu+Pv3Ms2s+9K7y5cFNFk6/oEkuyO+dRyVq8dg=;
+	b=Hif3yEqSOPrp0Jfdf/c3581mNB3sBe5qTYqvjhk6mjMhnbC8AcjGJunDyfM3JSwzuF
+	T+uLphQybhrRbcBAQ8rWBZhZSYAJf/GSLmaVpVylSPsWlcVBxKLJVDcvc6UR11YbInzO
+	4ttrv3XlVkQIBgZ9KmjBoaW1+h6cX5n2dmHJTC6fmj9XglQASBh3ZqkOK0i0BF+LMsld
+	17sdRXvVbQz7R1415oVbdQMMEHyaE/J3pyrWlnYR5pNvyItZQsiZIwOoultVqxlC+7H1
+	sQP7XCTfIckoIzt73WKWCnjj7oy5+nb1seN96NFhfCOKdPADycTySHc6SQr49cdENWA+
+	xfuw==
+X-Gm-Message-State: APjAAAXvjGkmMl3NFh3q8Awss5jKF8YtzDyFYIJO7Bb9q4NHf3TN4g4Y
+	uYSUPZMigwBiZ07PWAo9Mm2gT3NvQ0cad6jTkkGhlQHcRvKTX+x2kvTQxvSqQlMH3/h1XyEH4JU
+	vnojl7nD7jxyadlzkX4VRKCb6dkikN78sJFNgKRtFww==
+X-Received: by 2002:a0c:c792:: with SMTP id k18mr25297614qvj.154.1570966946778;
+	Sun, 13 Oct 2019 04:42:26 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqyhx3XLFozvF0Fexkmjc2uJBOUXPVXIPjvAKX3RiiVhxNpPC56P8T4wN2MQG4g59b9OLo3Gdg==
+X-Received: by 2002:a0c:c792:: with SMTP id k18mr25297597qvj.154.1570966946584;
+	Sun, 13 Oct 2019 04:42:26 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-10-77.red.bezeqint.net. [79.176.10.77])
 	by smtp.gmail.com with ESMTPSA id
-	e42sm10005404qte.26.2019.10.13.04.42.19
+	z5sm7213125qtb.49.2019.10.13.04.42.24
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 13 Oct 2019 04:42:21 -0700 (PDT)
-Date: Sun, 13 Oct 2019 07:42:17 -0400
+	Sun, 13 Oct 2019 04:42:25 -0700 (PDT)
+Date: Sun, 13 Oct 2019 07:42:22 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH RFC v4 4/5] vhost/net: add an option to test new code
-Message-ID: <20191013113940.2863-5-mst@redhat.com>
+Subject: [PATCH RFC v4 5/5] vhost: last descriptor must have NEXT clear
+Message-ID: <20191013113940.2863-6-mst@redhat.com>
 References: <20191013113940.2863-1-mst@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
@@ -86,81 +86,28 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Add a writeable module parameter that tests
-the new code. Note: no effort was made to ensure
-things work correctly if the parameter is changed
-while the device is open. Make sure to
-close the device before changing its value.
+fetch_buf already guarantees we exit on a descriptor without a NEXT
+flag.  Add a BUG_ON statement to make sure we don't overflow the buffer
+in case of a bug.
 
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- drivers/vhost/net.c | 32 +++++++++++++++++++++++++-------
- 1 file changed, 25 insertions(+), 7 deletions(-)
+ drivers/vhost/vhost.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-index 1a2dd53caade..122b666ec1f2 100644
---- a/drivers/vhost/net.c
-+++ b/drivers/vhost/net.c
-@@ -35,6 +35,9 @@
- 
- #include "vhost.h"
- 
-+static int newcode = 0;
-+module_param(newcode, int, 0644);
-+
- static int experimental_zcopytx = 0;
- module_param(experimental_zcopytx, int, 0444);
- MODULE_PARM_DESC(experimental_zcopytx, "Enable Zero Copy TX;"
-@@ -565,8 +568,14 @@ static int vhost_net_tx_get_vq_desc(struct vhost_net *net,
- 	struct vhost_virtqueue *rvq = &rnvq->vq;
- 	struct vhost_virtqueue *tvq = &tnvq->vq;
- 
--	int r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
--				  out_num, in_num, NULL, NULL);
-+	int r;
-+
-+	if (newcode)
-+		r = vhost_get_vq_desc_batch(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+					    out_num, in_num, NULL, NULL);
-+	else
-+		r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+				      out_num, in_num, NULL, NULL);
- 
- 	if (r == tvq->num && tvq->busyloop_timeout) {
- 		/* Flush batched packets first */
-@@ -575,8 +584,12 @@ static int vhost_net_tx_get_vq_desc(struct vhost_net *net,
- 
- 		vhost_net_busy_poll(net, rvq, tvq, busyloop_intr, false);
- 
--		r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
--				      out_num, in_num, NULL, NULL);
-+		if (newcode)
-+			r = vhost_get_vq_desc_batch(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+						    out_num, in_num, NULL, NULL);
-+		else
-+			r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+					      out_num, in_num, NULL, NULL);
+diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+index d46c28149f6f..09f594bb069a 100644
+--- a/drivers/vhost/vhost.c
++++ b/drivers/vhost/vhost.c
+@@ -2656,6 +2656,8 @@ int vhost_get_vq_desc_batch(struct vhost_virtqueue *vq,
+ 			break;
  	}
  
- 	return r;
-@@ -1046,9 +1059,14 @@ static int get_rx_bufs(struct vhost_virtqueue *vq,
- 			r = -ENOBUFS;
- 			goto err;
- 		}
--		r = vhost_get_vq_desc(vq, vq->iov + seg,
--				      ARRAY_SIZE(vq->iov) - seg, &out,
--				      &in, log, log_num);
-+		if (newcode)
-+			r = vhost_get_vq_desc_batch(vq, vq->iov + seg,
-+						    ARRAY_SIZE(vq->iov) - seg, &out,
-+						    &in, log, log_num);
-+		else
-+			r = vhost_get_vq_desc(vq, vq->iov + seg,
-+					      ARRAY_SIZE(vq->iov) - seg, &out,
-+					      &in, log, log_num);
- 		if (unlikely(r < 0))
- 			goto err;
++	BUG_ON(i >= vq->ndescs);
++
+ 	vq->first_desc = i + 1;
  
+ 	return ret;
 -- 
 MST
 
