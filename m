@@ -2,74 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55150D554B
-	for <lists.virtualization@lfdr.de>; Sun, 13 Oct 2019 10:18:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F4D6D556F
+	for <lists.virtualization@lfdr.de>; Sun, 13 Oct 2019 11:12:14 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 586192283;
-	Sun, 13 Oct 2019 08:18:15 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id B5C3122F7;
+	Sun, 13 Oct 2019 09:12:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 327E421F9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 15F8B2293
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 08:08:21 +0000 (UTC)
+	Sun, 13 Oct 2019 09:03:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 5700414D
+Received: from mout.web.de (mout.web.de [212.227.15.3])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E7EB514D
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 08:08:19 +0000 (UTC)
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
-	[209.85.222.200])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id D0C7885539
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 08:08:18 +0000 (UTC)
-Received: by mail-qk1-f200.google.com with SMTP id x77so13725442qka.11
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 01:08:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=3CYitd93iDHtPl2boSl3Eyofj0PvtzXYhyw7uXbmPmo=;
-	b=knOmLtNozOCQ9yV+WVxYV+5nYMKYx4q6MaljptKDuupAhuH8HLMF4wmVCD1NhEZC+P
-	k5zJRBLXWYjBqMXHGKFBLHqHoj4Jqspp73g8x4YcsLrPxscxVe88mvQG8T2r0KiUYtFb
-	oopiJIrk/FfJqP3X8uUw9hViUVZf2EIu+A+CEA1igbjvBF9i8lhaXZ8GrwxCT5HNWBJB
-	HpdhVz286NDF9ek0J5xhmG0WXG7EVjnBm5z167yL5m4x1lMUrGV1dhMcIwYOOAnFP/LT
-	faOs6L9Bq2vm6xhTbc6azUqqIoYS/HNLNxjJiry1sUiQxi2cF5wuE9pqzi6AlYE+caQ/
-	2NUw==
-X-Gm-Message-State: APjAAAVvLgCmr7ay91oyJ1VitjkngYUXXFgMlto8rZ0CRcDofUnhuQ8X
-	kyw3FlbnXpP62cSILhMigTE7H8eqG45Wwkqk6Y6bQuJ05UEpotR+FJOLZ2I4xUriNSPJx9qCi1h
-	ZN3mjGAnyD5SzsR+Ok9yowblMXn8wzSBv4B3+Uz2hwA==
-X-Received: by 2002:a37:9d10:: with SMTP id g16mr24681938qke.29.1570954098129; 
-	Sun, 13 Oct 2019 01:08:18 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqyaJ+QpLI1pMBCIJvuv7x0tuYvQpGl6FL4TAAJwm3gJXchv9/ST+/UasjDNh9TYNk8GtdJuXQ==
-X-Received: by 2002:a37:9d10:: with SMTP id g16mr24681925qke.29.1570954097874; 
-	Sun, 13 Oct 2019 01:08:17 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-10-77.red.bezeqint.net. [79.176.10.77])
-	by smtp.gmail.com with ESMTPSA id
-	f10sm6455018qtj.3.2019.10.13.01.08.15
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 13 Oct 2019 01:08:17 -0700 (PDT)
-Date: Sun, 13 Oct 2019 04:08:13 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH RFC v3 4/4] vhost/net: add an option to test new code
-Message-ID: <20191013080742.16211-5-mst@redhat.com>
-References: <20191013080742.16211-1-mst@redhat.com>
+	Sun, 13 Oct 2019 09:03:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+	s=dbaedf251592; t=1570957412;
+	bh=/JJFbFxFpJrgt1MfB1+HlUCk144HJzeGsZ82FMM6IMw=;
+	h=X-UI-Sender-Class:From:Subject:To:Cc:Date;
+	b=QvbD271PhVgYqWNLqHU0fg6xi+XVo+jTS/b+UHmTQn+3xBLOShASoEVhKgg8CQCMZ
+	JrA0end3XYxHStzGBd+xSCWSf4LeggpnnnWKDX50dFhCFkL9pq4FfexwdisEY6tS5s
+	ylE5yKrta/vQnqwZ3tb0PcdVCA0Ky/CgXsmg5a0c=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [192.168.1.10] ([95.157.55.156]) by smtp.web.de (mrweb004
+	[213.165.67.108]) with ESMTPSA (Nemesis) id 0MWuiC-1iXnFP3geq-00W1Yx;
+	Sun, 13 Oct 2019 11:03:31 +0200
+From: Jan Kiszka <jan.kiszka@web.de>
+Subject: [PATCH] tools/virtio: Fix build
+To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>
+Message-ID: <4b686914-075b-a0a9-c97b-9def82ee0336@web.de>
+Date: Sun, 13 Oct 2019 11:03:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191013080742.16211-1-mst@redhat.com>
-X-Mailer: git-send-email 2.22.0.678.g13338e74b8
-X-Mutt-Fcc: =sent
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+Content-Language: en-US
+X-Provags-ID: V03:K1:ZUTxknunf3G6Pgr3vAD78vi2eR7WdAXKm8qBbLV5J2t/U4o/4EZ
+	TZ6oSJMqVZN1Rm1Xnf4Vwx/O9ojkaI8y5NJmLT1fwtdJtkwS9txiGev7dCd8/2y4ECRTtwQ
+	z04XbSrZje/K+9Z0z31XxJub0b6k32mvx6LiSpteJ4IWLEianalNbu8aN5qmPaLh4PvrzZa
+	ig6WmprlS1YhpLl3QcjHQ==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:7nlS2ZaQecY=:08CSwSG22S349Q6b6tO8u6
+	rdaiZ7Q4U9RWlP1P4AdTDwfQVBpkZISmu3BOb+eUDH/TaKaNewNeXTsbuaBJ33t555KTe2Yd5
+	veocItfCWbO3siPsFa3C6QBbeuGz7sbaR+IsogHABwlrRswYGlYWHiJTvskJOfkY6Q8BPaNnA
+	KfIvgw08/iTnVHXCnBX5wF7+Q6mxb2eJPObAdKLvGyCmizrwYirjJc3SItHJEjehGAOgz8zo2
+	OR4sA4gVcW8gWYDy0M/yM/h+3RmgPws0gGF+dq6QkTKrMx/CLWdGXTv2tRLsvBTzCvar1TLtS
+	ZgY8Fa03EG1hJXWKZarAiYnPdxMsfzmo/aYVBlukvhwneADSi1pNXsWf4LpMedeMcRx9a+fSi
+	f3e/tVcTXwmH5SBvKihON99ZTP9w5E+4wPdz1jqdNkkWFC8bXsLIt14VjcEZS0MiMifqeeDOm
+	0m0lS3gMJd7zXfUjAZ1Tl9bloTvv7YaqJdHyA3Qh+8CxnEeinioCxcv9ZhlYHkKvOWnL9ubq7
+	wrKXpfFP+p+HJfx4jsSu52Sz9S3sxa9w6ZeB3GBIbcdHuxSJncSsJDHED6MwptZKJTsgNQ//N
+	NNBTIXO55iyvd18IYqkiw3Q0skVvqfiFAUCqI9VLnSamjBx+iwIrlopxUNrf8gs4QJmiK5fv4
+	yQjre/RtXOqszthoWG84RdhyQm0zQfRbP+t0UqsJv7Aa6bWya9rEMhaySSrqp2UiEHq6g+2fY
+	ioWkZZkQv7KcAzaRy42E3MZRMt59ucL4z3PGzqGtNSvdw6aaY6PBwaByo3I00ALQDFTISx+9i
+	sFvRksKk5B5XCt3KjcRoSjLlyviJkkiEYZypOXq4OUnOEXwHgu1uvB4b7racTk5PMxVwIb5hq
+	TQbicqdvS+5zw0EYw+UGjZUIZjmJX+4zhcAdapmdrfwS9YFbrXG+RBK1aJjl8F1bGqcjl5QfS
+	30qtKq3InUyZlAyZdEL/WFN7geUmORPuIuUkEOSr73Sv8p4z1ZEoucHWc2fNQFPILPNxgTCJ+
+	3xV3vpYeyqMj3fWuT9S8vgJp/69JbuM1WZ5LW/sN5Yhvvf7GYVRBSgFq++PYxzswIdtCqCWZq
+	jt1PDcHmB1g1eLcHD0/Vv5cyqCVUwbkK7pSJVj4/rki3JRi7Ru7U6LHb5zmntyT9Eg7X9nJ/3
+	lWNk1Saag3CPODdOf7dMKyuW/UhbNvTuVe49WL8hjEPxPAlDFedtGsme2kNVtkX7sFuA24Txx
+	Vzb04B4990YG4zitAZnvFLJFl6NtY7M99aZiC5xYWa8VoDGwLdZsMqNvXA+k=
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: netdev@vger.kernel.org, kvm@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,83 +86,46 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Add a writeable module parameter that tests
-the new code. Note: no effort was made to ensure
-things work correctly if the parameter is changed
-while the device is open. Make sure to
-close the device before changing its value.
+From: Jan Kiszka <jan.kiszka@siemens.com>
 
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Various changes in the recent kernel versions broke the build due to
+missing function and header stubs.
+
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 ---
- drivers/vhost/net.c | 32 +++++++++++++++++++++++++-------
- 1 file changed, 25 insertions(+), 7 deletions(-)
+ tools/virtio/crypto/hash.h       | 0
+ tools/virtio/linux/dma-mapping.h | 2 ++
+ tools/virtio/linux/kernel.h      | 2 ++
+ 3 files changed, 4 insertions(+)
+ create mode 100644 tools/virtio/crypto/hash.h
 
-diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-index 1a2dd53caade..122b666ec1f2 100644
---- a/drivers/vhost/net.c
-+++ b/drivers/vhost/net.c
-@@ -35,6 +35,9 @@
- 
- #include "vhost.h"
- 
-+static int newcode = 0;
-+module_param(newcode, int, 0644);
+diff --git a/tools/virtio/crypto/hash.h b/tools/virtio/crypto/hash.h
+new file mode 100644
+index 000000000000..e69de29bb2d1
+diff --git a/tools/virtio/linux/dma-mapping.h b/tools/virtio/linux/dma-mapping.h
+index f91aeb5fe571..db96cb4bf877 100644
+--- a/tools/virtio/linux/dma-mapping.h
++++ b/tools/virtio/linux/dma-mapping.h
+@@ -29,4 +29,6 @@ enum dma_data_direction {
+ #define dma_unmap_single(...) do { } while (0)
+ #define dma_unmap_page(...) do { } while (0)
+
++#define dma_max_mapping_size(d)	0
 +
- static int experimental_zcopytx = 0;
- module_param(experimental_zcopytx, int, 0444);
- MODULE_PARM_DESC(experimental_zcopytx, "Enable Zero Copy TX;"
-@@ -565,8 +568,14 @@ static int vhost_net_tx_get_vq_desc(struct vhost_net *net,
- 	struct vhost_virtqueue *rvq = &rnvq->vq;
- 	struct vhost_virtqueue *tvq = &tnvq->vq;
- 
--	int r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
--				  out_num, in_num, NULL, NULL);
-+	int r;
+ #endif
+diff --git a/tools/virtio/linux/kernel.h b/tools/virtio/linux/kernel.h
+index 6683b4a70b05..ccf321173210 100644
+--- a/tools/virtio/linux/kernel.h
++++ b/tools/virtio/linux/kernel.h
+@@ -141,4 +141,6 @@ static inline void free_page(unsigned long addr)
+ #define list_for_each_entry(a, b, c) while (0)
+ /* end of stubs */
+
++#define xen_domain() 0
 +
-+	if (newcode)
-+		r = vhost_get_vq_desc_batch(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+					    out_num, in_num, NULL, NULL);
-+	else
-+		r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+				      out_num, in_num, NULL, NULL);
- 
- 	if (r == tvq->num && tvq->busyloop_timeout) {
- 		/* Flush batched packets first */
-@@ -575,8 +584,12 @@ static int vhost_net_tx_get_vq_desc(struct vhost_net *net,
- 
- 		vhost_net_busy_poll(net, rvq, tvq, busyloop_intr, false);
- 
--		r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
--				      out_num, in_num, NULL, NULL);
-+		if (newcode)
-+			r = vhost_get_vq_desc_batch(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+						    out_num, in_num, NULL, NULL);
-+		else
-+			r = vhost_get_vq_desc(tvq, tvq->iov, ARRAY_SIZE(tvq->iov),
-+					      out_num, in_num, NULL, NULL);
- 	}
- 
- 	return r;
-@@ -1046,9 +1059,14 @@ static int get_rx_bufs(struct vhost_virtqueue *vq,
- 			r = -ENOBUFS;
- 			goto err;
- 		}
--		r = vhost_get_vq_desc(vq, vq->iov + seg,
--				      ARRAY_SIZE(vq->iov) - seg, &out,
--				      &in, log, log_num);
-+		if (newcode)
-+			r = vhost_get_vq_desc_batch(vq, vq->iov + seg,
-+						    ARRAY_SIZE(vq->iov) - seg, &out,
-+						    &in, log, log_num);
-+		else
-+			r = vhost_get_vq_desc(vq, vq->iov + seg,
-+					      ARRAY_SIZE(vq->iov) - seg, &out,
-+					      &in, log, log_num);
- 		if (unlikely(r < 0))
- 			goto err;
- 
--- 
-MST
+ #endif /* KERNEL_H */
+--
+2.16.4
 
 _______________________________________________
 Virtualization mailing list
