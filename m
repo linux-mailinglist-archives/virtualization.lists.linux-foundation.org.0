@@ -2,72 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 165B2D5629
-	for <lists.virtualization@lfdr.de>; Sun, 13 Oct 2019 14:14:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E78AD5632
+	for <lists.virtualization@lfdr.de>; Sun, 13 Oct 2019 14:28:17 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id E86962382;
-	Sun, 13 Oct 2019 12:14:26 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 5EBBF2391;
+	Sun, 13 Oct 2019 12:27:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 3D4592373
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 00FC32387
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 12:01:12 +0000 (UTC)
+	Sun, 13 Oct 2019 12:20:53 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mout.web.de (mout.web.de [212.227.15.4])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 3CBC15D3
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 848D65D3
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 13 Oct 2019 12:01:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-	s=dbaedf251592; t=1570968064;
-	bh=zkVikWj3rydfNcm+Xoq/QEW9TfTobJDKETVMlO8u4Qw=;
-	h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
-	b=FgeZ2IwCJd9As1cD1JAnVbr/K6oK0OvlPBl4hMwyAYB8/uEKrtW32heN0YQ82ZzI+
-	0uhNwbk29KlW5UgQCDZAp36+ZJcSGMXzmKJDo2krTqm6BeGQ4SluwNGWnLc7qDQ0w1
-	z0O3v8+KDQJFgyPP/HjPHIsWi2jLxpq00Yr8TwNU=
-X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.10] ([95.157.55.156]) by smtp.web.de (mrweb002
-	[213.165.67.108]) with ESMTPSA (Nemesis) id 0MP047-1iOHWp0hYl-006Pt8;
-	Sun, 13 Oct 2019 14:01:04 +0200
+	Sun, 13 Oct 2019 12:20:53 +0000 (UTC)
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+	[209.85.222.198])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id C688F82DA
+	for <virtualization@lists.linux-foundation.org>;
+	Sun, 13 Oct 2019 12:20:52 +0000 (UTC)
+Received: by mail-qk1-f198.google.com with SMTP id x62so14152846qkb.7
+	for <virtualization@lists.linux-foundation.org>;
+	Sun, 13 Oct 2019 05:20:52 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=sGSWm+VQXM5N7LkmMBoNiFJID9rxkV4UgGbQSywZ0lY=;
+	b=WSLEhabc8qhsnXw1M2RBTOARSN9AF8Cf4MTA2BGn1U/o99MuBrl/DBoQsHS3m+/a6m
+	/l/yZIOX2w01Q8DEeDlg2E7CONGRErMch5rmIl5eRlnreaXGvxYL53FyTwX8DyzcRN82
+	vIAATHIpwUGLkWHPDTqp0/yqw32os42uDJkEwuvSKML5g/w8ZZCqcD95+o0ytT7IHMI1
+	zHKj+zeJLoIzq98JrSHX1zJiVvk6y901D/7jmHGjp+cOxJh/jFIj+eOi7iPiT/DHsQE7
+	8Yx7evzMkKB0nK8YNbAKclbdZn8hxlKz+anixcBoIs8FmzovUIqQllbrPfL162mwbx6J
+	EZMQ==
+X-Gm-Message-State: APjAAAWpRTfAfpdeOOV6UFteo/OBYFv32fdYXjErckst/X907yVRt4vE
+	T1T3Bxi7CjJ+8VLnRCU8lG9Ovw1njS8NryZ+y0rmFfAy3oZp90w5Noay8wMFlC8fm+ScPEXQ71l
+	FtDa+XmQk3X4RYKoMD3/FPXkDB5s5fjpladvz6RxIRA==
+X-Received: by 2002:ac8:610e:: with SMTP id a14mr27955173qtm.189.1570969252116;
+	Sun, 13 Oct 2019 05:20:52 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqyh+vun7Xp3yoPFQiELIdRCqqNlbWf3RdBCpLjK1jdAhUPgwQp14PoZIlUScyHDNFQhMA16jw==
+X-Received: by 2002:ac8:610e:: with SMTP id a14mr27955160qtm.189.1570969251921;
+	Sun, 13 Oct 2019 05:20:51 -0700 (PDT)
+Received: from redhat.com (bzq-79-176-10-77.red.bezeqint.net. [79.176.10.77])
+	by smtp.gmail.com with ESMTPSA id
+	m14sm6458463qki.27.2019.10.13.05.20.49
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 13 Oct 2019 05:20:51 -0700 (PDT)
+Date: Sun, 13 Oct 2019 08:20:46 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jan Kiszka <jan.kiszka@web.de>
 Subject: Re: [PATCH] tools/virtio: Fix build
-To: "Michael S. Tsirkin" <mst@redhat.com>
+Message-ID: <20191013081541-mutt-send-email-mst@kernel.org>
 References: <4b686914-075b-a0a9-c97b-9def82ee0336@web.de>
 	<20191013075107-mutt-send-email-mst@kernel.org>
-From: Jan Kiszka <jan.kiszka@web.de>
-Message-ID: <08c1e081-765b-7c3a-ed31-2059dc521fd0@web.de>
-Date: Sun, 13 Oct 2019 14:01:03 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.1
+	<08c1e081-765b-7c3a-ed31-2059dc521fd0@web.de>
 MIME-Version: 1.0
-In-Reply-To: <20191013075107-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Provags-ID: V03:K1:XIC4E25Ila5IabwhKzDJLfSktbAUNiL1h/Z1laTjqOl/uSmn5ZJ
-	p1+l57O65WSlab5fR9quhOrAQ8ZjI4palVMKDlX+BkFoaA3LRx/vnRI83Xsju+7jV7faovk
-	7VBo8b3wSwAd5CD4eo+G4cLoWejNKDM/+y5nbZGUtPI5Z60PJMGGx+Aob+PdO65vPA9RzkI
-	Z00hv1xkvK13mbcnyI0tA==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:Q/mlyFMjhfQ=:Uba6L31Yxx0a/9byemws44
-	vi/2SA1DtNqZfn1D/hbJIPJrvI7/K8H00fZmvvVi1uALVNc9RoJcJf2UOuvSvfRkRh2/LaEQv
-	ZuzWVftoxI+4VpUEEMYZTLxDUt8vEZm4qVPJ+hEoq6PK8ZH55J25jP6a3zxDAKX1V1mdJdSao
-	RsCA3T3a473iJNShMygTILTekaUCowy0aNJmBUhfgGb/C0MZWhtZ8gH9/o5RERagtJIT34dSX
-	8bP/UEBmO7OIRAxAqf1Y5KOlGX3GEJVWr+VvA78l/IYJEEsBQkU5aYkaB/na1KP966e+otNio
-	4mX3CoVaH+62eqsDdig9S3SGH1NNua7dGphc7htp7RYZ93mq269H7m4O6VuQ3W11qEswipgKD
-	8mbsXgldzNL/7Evo2kGi3kvPPdaF1Y04AiRrI5TYnA5YhVpRIUEnrxtzUv/G3csv6URvH5Gh4
-	GW6kVxVRoAMu0deaDTLwNcA7OCq9+6NKLw2DRYpLJS8GFBuFl9AhaCQNmJSHL+nfaF0UKjdg4
-	hmVqEUgbxxkqL1jdTtUFrVQUpXy2HptfdggLOLv/WMTzzrd7U32p7ye26vPCOA3037UYMQLfj
-	DxHDTZ2jiHlLfqD1WOb4XIy5CPEwpegI6gMc17I7HvaeafGYS/2mrW+y3pwX85N9NsUZLMWns
-	9SdmCeTk7SlAlFrpVq9RlrLNgFKx7yEYUDPlMel7hl9dKuyK9QgJgGWpdn6OkhAuRIdqkaiDE
-	UDoXztDRckdLsGZqbgAP7K28etweSvOQcRI/SKE5B0tI9STEYbxnJhA7K58wUrKj9AS+Oh4Bw
-	2+JE9XA5Re0ASeP0mPbzv9fvhGbDpGP5dSfExCUq3it+yPtNI9INjOefCTNHvNNqhsAkoV71o
-	oIcUUYRrufeicUCn2pZQ73f0aAOty8eMBaULe69SUWXQlCzS8RMml2z4X7UEprhxG34DU5VlO
-	WVjg1rbQhybaw7Gp6PkGpJHs79HiD3lMlta5CZ1/OQ5S2LUmq7R0nbXN2YMyNkrbeRPz/OHsq
-	Hw99cG0cV1QE9mVfjzXi8ckKPCblsnYNYrrlZLb3GU1yrhchH+Z9lL7BfRt6MN20n3oxxxgGI
-	uTnQ42Dqoi0RtdfJ9NleGs7pZ2i8qCkWAtW9JlAHwjSw0t/C2M0jPzWTB20bPnRKlFzrP0SU7
-	AZ4+ce8mILmx8kBbP4sPVgGTaAkf3picIKEDdZQx06mwL5ktwu/6Zdqw5xuAjls30Pu5ZVYDS
-	ZDAWY6mEDRD7cd1zPm2v3clXxlZHOjVxt13HOFfPgmypZ2GiFlqs7ExcjQi8=
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <08c1e081-765b-7c3a-ed31-2059dc521fd0@web.de>
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
@@ -89,60 +87,63 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 13.10.19 13:52, Michael S. Tsirkin wrote:
-> On Sun, Oct 13, 2019 at 11:03:30AM +0200, Jan Kiszka wrote:
->> From: Jan Kiszka <jan.kiszka@siemens.com>
->>
->> Various changes in the recent kernel versions broke the build due to
->> missing function and header stubs.
->>
->> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
->
-> Thanks!
-> I think it's already fixes in the vhost tree.
-> That tree also includes a bugfix for the test.
-> Can you pls give it a spin and report?
+On Sun, Oct 13, 2019 at 02:01:03PM +0200, Jan Kiszka wrote:
+> On 13.10.19 13:52, Michael S. Tsirkin wrote:
+> > On Sun, Oct 13, 2019 at 11:03:30AM +0200, Jan Kiszka wrote:
+> >> From: Jan Kiszka <jan.kiszka@siemens.com>
+> >>
+> >> Various changes in the recent kernel versions broke the build due to
+> >> missing function and header stubs.
+> >>
+> >> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+> >
+> > Thanks!
+> > I think it's already fixes in the vhost tree.
+> > That tree also includes a bugfix for the test.
+> > Can you pls give it a spin and report?
+> 
+> Mostly fixed: the xen_domain stup is missing.
+> 
+> Jan
 
-Mostly fixed: the xen_domain stup is missing.
+That's in xen/xen.h. Do you still see any build errors?
 
-Jan
-
-> Thanks!
->
->> ---
->>  tools/virtio/crypto/hash.h       | 0
->>  tools/virtio/linux/dma-mapping.h | 2 ++
->>  tools/virtio/linux/kernel.h      | 2 ++
->>  3 files changed, 4 insertions(+)
->>  create mode 100644 tools/virtio/crypto/hash.h
->>
->> diff --git a/tools/virtio/crypto/hash.h b/tools/virtio/crypto/hash.h
->> new file mode 100644
->> index 000000000000..e69de29bb2d1
->> diff --git a/tools/virtio/linux/dma-mapping.h b/tools/virtio/linux/dma-mapping.h
->> index f91aeb5fe571..db96cb4bf877 100644
->> --- a/tools/virtio/linux/dma-mapping.h
->> +++ b/tools/virtio/linux/dma-mapping.h
->> @@ -29,4 +29,6 @@ enum dma_data_direction {
->>  #define dma_unmap_single(...) do { } while (0)
->>  #define dma_unmap_page(...) do { } while (0)
->>
->> +#define dma_max_mapping_size(d)	0
->> +
->>  #endif
->> diff --git a/tools/virtio/linux/kernel.h b/tools/virtio/linux/kernel.h
->> index 6683b4a70b05..ccf321173210 100644
->> --- a/tools/virtio/linux/kernel.h
->> +++ b/tools/virtio/linux/kernel.h
->> @@ -141,4 +141,6 @@ static inline void free_page(unsigned long addr)
->>  #define list_for_each_entry(a, b, c) while (0)
->>  /* end of stubs */
->>
->> +#define xen_domain() 0
->> +
->>  #endif /* KERNEL_H */
->> --
->> 2.16.4
+> > Thanks!
+> >
+> >> ---
+> >>  tools/virtio/crypto/hash.h       | 0
+> >>  tools/virtio/linux/dma-mapping.h | 2 ++
+> >>  tools/virtio/linux/kernel.h      | 2 ++
+> >>  3 files changed, 4 insertions(+)
+> >>  create mode 100644 tools/virtio/crypto/hash.h
+> >>
+> >> diff --git a/tools/virtio/crypto/hash.h b/tools/virtio/crypto/hash.h
+> >> new file mode 100644
+> >> index 000000000000..e69de29bb2d1
+> >> diff --git a/tools/virtio/linux/dma-mapping.h b/tools/virtio/linux/dma-mapping.h
+> >> index f91aeb5fe571..db96cb4bf877 100644
+> >> --- a/tools/virtio/linux/dma-mapping.h
+> >> +++ b/tools/virtio/linux/dma-mapping.h
+> >> @@ -29,4 +29,6 @@ enum dma_data_direction {
+> >>  #define dma_unmap_single(...) do { } while (0)
+> >>  #define dma_unmap_page(...) do { } while (0)
+> >>
+> >> +#define dma_max_mapping_size(d)	0
+> >> +
+> >>  #endif
+> >> diff --git a/tools/virtio/linux/kernel.h b/tools/virtio/linux/kernel.h
+> >> index 6683b4a70b05..ccf321173210 100644
+> >> --- a/tools/virtio/linux/kernel.h
+> >> +++ b/tools/virtio/linux/kernel.h
+> >> @@ -141,4 +141,6 @@ static inline void free_page(unsigned long addr)
+> >>  #define list_for_each_entry(a, b, c) while (0)
+> >>  /* end of stubs */
+> >>
+> >> +#define xen_domain() 0
+> >> +
+> >>  #endif /* KERNEL_H */
+> >> --
+> >> 2.16.4
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
