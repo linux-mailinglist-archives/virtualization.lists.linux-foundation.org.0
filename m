@@ -2,86 +2,51 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C522BD5DE9
-	for <lists.virtualization@lfdr.de>; Mon, 14 Oct 2019 10:53:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EAE4D6075
+	for <lists.virtualization@lfdr.de>; Mon, 14 Oct 2019 12:45:26 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id BAA0D2668;
-	Mon, 14 Oct 2019 08:52:57 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id EC9DA28DA;
+	Mon, 14 Oct 2019 10:45:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id AF8C22562
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 14 Oct 2019 08:38:42 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6A21428C1;
+	Mon, 14 Oct 2019 10:29:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 51C276D6
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 14 Oct 2019 08:38:42 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
-	[209.85.221.71])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id A3CDA8553D
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 14 Oct 2019 08:38:41 +0000 (UTC)
-Received: by mail-wr1-f71.google.com with SMTP id k2so8186344wrn.7
-	for <virtualization@lists.linux-foundation.org>;
-	Mon, 14 Oct 2019 01:38:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=zgV9pC+zt0gI/V422zTkhHPL1PoCXjjbpPu+KeAB0w0=;
-	b=MyNCvUjSdbFv7VpUmPA9S5sA/+J0zQUHX1I5grJe6BrYRx9Qe5ScJXlN2lB6EiPojy
-	74d5TxC3NEXFQgGdPfEYOhBN0Lczx5Hvh4/f9Bk3N24O4JLAdfy6eF3Z+Op3vlqx0FKa
-	cZgm1Eey8z0rIe36zmNwXm3WkqznKH39jJcix2CikWkib9k+Mmc9mMFPm96T3SDzz6Sh
-	7J+zrafkC87Wz5fXUTtN2cJOPlMJnLMZ8/lr23IMf8bcqRs5mzccOcktTtk9JmvVqlId
-	fbxwZl/kt4ihnX+a6qohaebUVdTdjD70loCe8Dwk7aZ8BuvqXMUpQbUK5HL3XhVf8l7E
-	bWzQ==
-X-Gm-Message-State: APjAAAUEoRkE88PsBrIRZyNINT07eOOnf2Rs9rmL2NW/Dl4tSZmpGHQu
-	4lptDkO0F1AqH6IFQ/Xpb5PY+dlG/U86lUNAGzXKo5fqZB0HWy5c8OnBffob2M83YEaCuzbH2CO
-	udmV8CJWrxjXdjh2DpZM7Ddba8BeK++sAjUfvp4TheA==
-X-Received: by 2002:a1c:3284:: with SMTP id
-	y126mr14533756wmy.164.1571042320317; 
-	Mon, 14 Oct 2019 01:38:40 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqx7BekhhYUaPdPVvYSoK18HhJqtlF38AkAYk8aK0SjlT68meT4y2oI/uOqPx7iwjAspulu58A==
-X-Received: by 2002:a1c:3284:: with SMTP id
-	y126mr14533736wmy.164.1571042320048; 
-	Mon, 14 Oct 2019 01:38:40 -0700 (PDT)
-Received: from steredhat (host174-200-dynamic.52-79-r.retail.telecomitalia.it.
-	[79.52.200.174]) by smtp.gmail.com with ESMTPSA id
-	x5sm22881456wrt.75.2019.10.14.01.38.38
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 14 Oct 2019 01:38:39 -0700 (PDT)
-Date: Mon, 14 Oct 2019 10:38:36 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jason Wang <jasowang@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [PATCH v4 1/5] vsock/virtio: limit the memory used per-socket
-Message-ID: <20191014083836.fumqbp4sfn5usys6@steredhat>
-References: <20190717113030.163499-1-sgarzare@redhat.com>
-	<20190717113030.163499-2-sgarzare@redhat.com>
-	<20190729095956-mutt-send-email-mst@kernel.org>
-	<20190830094059.c7qo5cxrp2nkrncd@steredhat>
-	<20190901024525-mutt-send-email-mst@kernel.org>
-	<CAGxU2F7fA5UtkuMQbOHHy0noOGZUtpepBNKFg5afD81bynMVUQ@mail.gmail.com>
-	<20191014081724.GD22963@stefanha-x1.localdomain>
-	<2398c960-b6d7-8af3-fa25-d75344335db7@redhat.com>
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 8627E14D;
+	Mon, 14 Oct 2019 10:29:28 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BDE68337;
+	Mon, 14 Oct 2019 03:29:27 -0700 (PDT)
+Received: from [10.1.197.57] (e110467-lin.cambridge.arm.com [10.1.197.57])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9C3363F718;
+	Mon, 14 Oct 2019 03:29:25 -0700 (PDT)
+Subject: Re: [PATCH 1/2] dma-mapping: Add dma_addr_is_phys_addr()
+To: David Gibson <david@gibson.dropbear.id.au>, Ram Pai <linuxram@us.ibm.com>
+References: <1570843519-8696-1-git-send-email-linuxram@us.ibm.com>
+	<1570843519-8696-2-git-send-email-linuxram@us.ibm.com>
+	<20191014045139.GN4080@umbus.fritz.box>
+From: Robin Murphy <robin.murphy@arm.com>
+Message-ID: <37609731-5539-b906-aa94-2ef0242795ac@arm.com>
+Date: Mon, 14 Oct 2019 11:29:24 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <2398c960-b6d7-8af3-fa25-d75344335db7@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+In-Reply-To: <20191014045139.GN4080@umbus.fritz.box>
+Content-Language: en-GB
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm <kvm@vger.kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>
+Cc: andmike@us.ibm.com, b.zolnierkie@samsung.com, mpe@ellerman.id.au,
+	aik@linux.ibm.com, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, paulus@ozlabs.org,
+	iommu@lists.linux-foundation.org, paul.burton@mips.com,
+	benh@kernel.crashing.org, sukadev@linux.vnet.ibm.com,
+	linuxppc-dev@lists.ozlabs.org, hch@lst.de, m.szyprowski@samsung.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -93,28 +58,157 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gTW9uLCBPY3QgMTQsIDIwMTkgYXQgMDQ6MjE6MzVQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiBPbiAyMDE5LzEwLzE0IOS4i+WNiDQ6MTcsIFN0ZWZhbiBIYWpub2N6aSB3cm90ZToKPiA+
-IFNPX1ZNX1NPQ0tFVFNfQlVGRkVSX1NJWkUgbWlnaHQgaGF2ZSBiZWVuIHVzZWZ1bCBmb3IgVk1D
-SS1zcGVjaWZpYwo+ID4gYXBwbGljYXRpb25zLCBidXQgd2Ugc2hvdWxkIHVzZSBTT19SQ1ZCVUYg
-YW5kIFNPX1NOREJVRiBmb3IgcG9ydGFibGUKPiA+IGFwcGxpY2F0aW9ucyBpbiB0aGUgZnV0dXJl
-LiAgVGhvc2Ugc29ja2V0IG9wdGlvbnMgYWxzbyB3b3JrIHdpdGggb3RoZXIKPiA+IGFkZHJlc3Mg
-ZmFtaWxpZXMuCj4gPiAKCkkgdGhpbmsgaHlwZXJ2X3RyYW5zcG9ydCBzdGFydGVkIHRvIHVzZSBp
-dCBpbiB0aGlzIHBhdGNoOgphYzM4M2Y1OGYzYzkgIGh2X3NvY2s6IHBlcmY6IEFsbG93IHRoZSBz
-b2NrZXQgYnVmZmVyIHNpemUgb3B0aW9ucyB0byBpbmZsdWVuY2UKICAgICAgICAgICAgICB0aGUg
-YWN0dWFsIHNvY2tldCBidWZmZXJzCgoKPiA+IEkgZ3Vlc3MgdGhlc2Ugc29ja29wdHMgYXJlIGJ5
-cGFzc2VkIGJ5IEFGX1ZTT0NLIGJlY2F1c2UgaXQgZG9lc24ndCB1c2UKPiA+IHRoZSBjb21tb24g
-c2tiIHF1ZXVpbmcgY29kZSBpbiBuZXQvY29yZS9zb2NrLmM6KC4gIEJ1dCBvbmUgZGF5IHdlIG1p
-Z2h0Cj4gPiBtaWdyYXRlIHRvIGl0Li4uCj4gPiAKPiA+IFN0ZWZhbgo+IAo+IAo+ICsxLCB3ZSBz
-aG91bGQgcmVhbGx5IGNvbnNpZGVyIHRvIHJldXNlIHRoZSBleGlzdCBzb2NrZXQgbWVjaGFuaXNt
-IGluc3RlYWQgb2YKPiByZS1pbnZlbnRpbmcgd2hlZWxzLgoKKzEsIEkgdG90YWxseSBhZ3JlZS4g
-SSdsbCBnbyB0aGlzIHdheS4KCkd1eXMsIHRoYW5rIHlvdSBhbGwgZm9yIHlvdXIgc3VnZ2VzdGlv
-bnMhCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1
-YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0
-aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5m
-by92aXJ0dWFsaXphdGlvbg==
+On 14/10/2019 05:51, David Gibson wrote:
+> On Fri, Oct 11, 2019 at 06:25:18PM -0700, Ram Pai wrote:
+>> From: Thiago Jung Bauermann <bauerman@linux.ibm.com>
+>>
+>> In order to safely use the DMA API, virtio needs to know whether DMA
+>> addresses are in fact physical addresses and for that purpose,
+>> dma_addr_is_phys_addr() is introduced.
+>>
+>> cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+>> cc: David Gibson <david@gibson.dropbear.id.au>
+>> cc: Michael Ellerman <mpe@ellerman.id.au>
+>> cc: Paul Mackerras <paulus@ozlabs.org>
+>> cc: Michael Roth <mdroth@linux.vnet.ibm.com>
+>> cc: Alexey Kardashevskiy <aik@linux.ibm.com>
+>> cc: Paul Burton <paul.burton@mips.com>
+>> cc: Robin Murphy <robin.murphy@arm.com>
+>> cc: Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
+>> cc: Marek Szyprowski <m.szyprowski@samsung.com>
+>> cc: Christoph Hellwig <hch@lst.de>
+>> Suggested-by: Michael S. Tsirkin <mst@redhat.com>
+>> Signed-off-by: Ram Pai <linuxram@us.ibm.com>
+>> Signed-off-by: Thiago Jung Bauermann <bauerman@linux.ibm.com>
+> 
+> The change itself looks ok, so
+> 
+> Reviewed-by: David Gibson <david@gibson.dropbear.id.au>
+> 
+> However, I would like to see the commit message (and maybe the inline
+> comments) expanded a bit on what the distinction here is about.  Some
+> of the text from the next patch would be suitable, about DMA addresses
+> usually being in a different address space but not in the case of
+> bounce buffering.
+
+Right, this needs a much tighter definition. "DMA address happens to be 
+a valid physical address" is true of various IOMMU setups too, but I 
+can't believe it's meaningful in such cases.
+
+If what you actually want is "DMA is direct or SWIOTLB" - i.e. "DMA 
+address is physical address of DMA data (not necessarily the original 
+buffer)" - wouldn't dma_is_direct() suffice?
+
+Robin.
+
+>> ---
+>>   arch/powerpc/include/asm/dma-mapping.h | 21 +++++++++++++++++++++
+>>   arch/powerpc/platforms/pseries/Kconfig |  1 +
+>>   include/linux/dma-mapping.h            | 20 ++++++++++++++++++++
+>>   kernel/dma/Kconfig                     |  3 +++
+>>   4 files changed, 45 insertions(+)
+>>
+>> diff --git a/arch/powerpc/include/asm/dma-mapping.h b/arch/powerpc/include/asm/dma-mapping.h
+>> index 565d6f7..f92c0a4b 100644
+>> --- a/arch/powerpc/include/asm/dma-mapping.h
+>> +++ b/arch/powerpc/include/asm/dma-mapping.h
+>> @@ -5,6 +5,8 @@
+>>   #ifndef _ASM_DMA_MAPPING_H
+>>   #define _ASM_DMA_MAPPING_H
+>>   
+>> +#include <asm/svm.h>
+>> +
+>>   static inline const struct dma_map_ops *get_arch_dma_ops(struct bus_type *bus)
+>>   {
+>>   	/* We don't handle the NULL dev case for ISA for now. We could
+>> @@ -15,4 +17,23 @@ static inline const struct dma_map_ops *get_arch_dma_ops(struct bus_type *bus)
+>>   	return NULL;
+>>   }
+>>   
+>> +#ifdef CONFIG_ARCH_HAS_DMA_ADDR_IS_PHYS_ADDR
+>> +/**
+>> + * dma_addr_is_phys_addr - check whether a device DMA address is a physical
+>> + *		address
+>> + * @dev:	device to check
+>> + *
+>> + * Returns %true if any DMA address for this device happens to also be a valid
+>> + * physical address (not necessarily of the same page).
+>> + */
+>> +static inline bool dma_addr_is_phys_addr(struct device *dev)
+>> +{
+>> +	/*
+>> +	 * Secure guests always use the SWIOTLB, therefore DMA addresses are
+>> +	 * actually the physical address of the bounce buffer.
+>> +	 */
+>> +	return is_secure_guest();
+>> +}
+>> +#endif
+>> +
+>>   #endif	/* _ASM_DMA_MAPPING_H */
+>> diff --git a/arch/powerpc/platforms/pseries/Kconfig b/arch/powerpc/platforms/pseries/Kconfig
+>> index 9e35cdd..0108150 100644
+>> --- a/arch/powerpc/platforms/pseries/Kconfig
+>> +++ b/arch/powerpc/platforms/pseries/Kconfig
+>> @@ -152,6 +152,7 @@ config PPC_SVM
+>>   	select SWIOTLB
+>>   	select ARCH_HAS_MEM_ENCRYPT
+>>   	select ARCH_HAS_FORCE_DMA_UNENCRYPTED
+>> +	select ARCH_HAS_DMA_ADDR_IS_PHYS_ADDR
+>>   	help
+>>   	 There are certain POWER platforms which support secure guests using
+>>   	 the Protected Execution Facility, with the help of an Ultravisor
+>> diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+>> index f7d1eea..6df5664 100644
+>> --- a/include/linux/dma-mapping.h
+>> +++ b/include/linux/dma-mapping.h
+>> @@ -693,6 +693,26 @@ static inline bool dma_addressing_limited(struct device *dev)
+>>   			    dma_get_required_mask(dev);
+>>   }
+>>   
+>> +#ifndef CONFIG_ARCH_HAS_DMA_ADDR_IS_PHYS_ADDR
+>> +/**
+>> + * dma_addr_is_phys_addr - check whether a device DMA address is a physical
+>> + *		address
+>> + * @dev:	device to check
+>> + *
+>> + * Returns %true if any DMA address for this device happens to also be a valid
+>> + * physical address (not necessarily of the same page).
+>> + */
+>> +static inline bool dma_addr_is_phys_addr(struct device *dev)
+>> +{
+>> +	/*
+>> +	 * Except in very specific setups, DMA addresses exist in a different
+>> +	 * address space from CPU physical addresses and cannot be directly used
+>> +	 * to reference system memory.
+>> +	 */
+>> +	return false;
+>> +}
+>> +#endif
+>> +
+>>   #ifdef CONFIG_ARCH_HAS_SETUP_DMA_OPS
+>>   void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
+>>   		const struct iommu_ops *iommu, bool coherent);
+>> diff --git a/kernel/dma/Kconfig b/kernel/dma/Kconfig
+>> index 9decbba..6209b46 100644
+>> --- a/kernel/dma/Kconfig
+>> +++ b/kernel/dma/Kconfig
+>> @@ -51,6 +51,9 @@ config ARCH_HAS_DMA_MMAP_PGPROT
+>>   config ARCH_HAS_FORCE_DMA_UNENCRYPTED
+>>   	bool
+>>   
+>> +config ARCH_HAS_DMA_ADDR_IS_PHYS_ADDR
+>> +	bool
+>> +
+>>   config DMA_NONCOHERENT_CACHE_SYNC
+>>   	bool
+>>   
+> 
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
