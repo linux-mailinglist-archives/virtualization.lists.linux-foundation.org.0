@@ -2,72 +2,52 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F85FD81EC
-	for <lists.virtualization@lfdr.de>; Tue, 15 Oct 2019 23:19:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3728AD839C
+	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 00:25:44 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id A9BBCC96;
-	Tue, 15 Oct 2019 21:19:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 7C8BEEE3;
+	Tue, 15 Oct 2019 22:25:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6D2DBC96
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 34372EC2
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 15 Oct 2019 21:19:16 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2403C5D3
+	Tue, 15 Oct 2019 22:25:08 +0000 (UTC)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 0A244821
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 15 Oct 2019 21:19:16 +0000 (UTC)
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
-	[209.85.222.199])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id A1DD92A09DC
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 15 Oct 2019 21:19:14 +0000 (UTC)
-Received: by mail-qk1-f199.google.com with SMTP id x77so21482382qka.11
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 15 Oct 2019 14:19:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition;
-	bh=dL6rRUzanF/mngAS+r+PSLw0RQ+CPB/xDAExf30z58I=;
-	b=B920w8qZBMxlC2UcHlcl1vEUTyXqg7sAo5AKngnacjgour6GEWpMe8k8m6YCB1B58H
-	1RH+oqshFOEokCpG3kl+bCcLHMuq+rEx7GDqZyhzYdz3y8OFlFipEdIBIiGbDpwFICZQ
-	V+RQM2MHQWruRV47P0Ju6iO4ml1xrU9q+QrB79yBx4SBwGNenwwjlDPC/lGmm/PU4miu
-	58uqBGHDvDxyCzem2pw5ybiSVx4pJ7M/FJWbrONeiuMcUP2vbVjPtKF+4zq93lRKzzHU
-	/7+EryqjgORl7uH7aUH2u6N9akaeXjbZkOsl42aMkcIWiR0h3TvvrWdQqDouYoRG7E21
-	IeZA==
-X-Gm-Message-State: APjAAAUsu5TfF6LVw50CkFZVsdcAgz/QDlda5PCTUf4xO7ZUzkotOeXd
-	s59Ke5NcEMNgt77wLh6kBTItQQv0AeN9TgtddRkWIQ5Ow5LHlnFuZzNVev3vj/b5mraYDGm5k5C
-	KF+WFZtqDcarhuV2JVKWPolRkbpjP2eA7Jta1C13P6w==
-X-Received: by 2002:a0c:f612:: with SMTP id r18mr38402296qvm.56.1571174353649; 
-	Tue, 15 Oct 2019 14:19:13 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqzMCqTGbwZd7p8eXtvsCO6t1D+F0697yJqDJ1oBBJZwAb7HGPZvXklyA5piJoGL8p8xGUaolQ==
-X-Received: by 2002:a0c:f612:: with SMTP id r18mr38402264qvm.56.1571174353431; 
-	Tue, 15 Oct 2019 14:19:13 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-10-77.red.bezeqint.net. [79.176.10.77])
-	by smtp.gmail.com with ESMTPSA id
-	q44sm14292649qtk.16.2019.10.15.14.19.10
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 15 Oct 2019 14:19:12 -0700 (PDT)
-Date: Tue, 15 Oct 2019 17:19:08 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: [PULL] vhost: cleanups and fixes
-Message-ID: <20191015171908-mutt-send-email-mst@kernel.org>
-MIME-Version: 1.0
-Content-Disposition: inline
-X-Mutt-Fcc: =sent
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+	Tue, 15 Oct 2019 22:25:08 +0000 (UTC)
+Subject: Re: [PULL] vhost: cleanups and fixes
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1571178307;
+	bh=kvmC4E7L+oeDDz2E8MyZ7vy8vlZuBNRvi0r5zkZQzEw=;
+	h=From:In-Reply-To:References:Date:To:Cc:From;
+	b=bnEMMCiIkY+cceDhVmWI3SwGLOVkTzLzCA/iEbt/KJrqDlApuq1MhEKMRMmJl0rAl
+	osldAywju56GIGmKTtqF+C+aeNULWZ94iC2j7vYgpDe4VJhvo7DujiguCdSUN2Kl1R
+	7OYLubeq6rVlb+Xn702ULY86zKyVld5Q9SzjvvvU=
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20191015171908-mutt-send-email-mst@kernel.org>
+References: <20191015171908-mutt-send-email-mst@kernel.org>
+X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <20191015171908-mutt-send-email-mst@kernel.org>
+X-PR-Tracked-Remote: https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git
+	tags/for_linus
+X-PR-Tracked-Commit-Id: 245cdd9fbd396483d501db83047116e2530f245f
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 3b1f00aceb7a67bf079a5a64aa5c6baf78a8f442
+Message-Id: <157117830785.470.239830549616573165.pr-tracker-bot@kernel.org>
+Date: Tue, 15 Oct 2019 22:25:07 +0000
+To: "Michael S. Tsirkin" <mst@redhat.com>
+X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
 Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, jan.kiszka@web.de
+	virtualization@lists.linux-foundation.org, jan.kiszka@web.de,
+	Linus Torvalds <torvalds@linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,43 +59,24 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-The following changes since commit da0c9ea146cbe92b832f1b0f694840ea8eb33cce:
+The pull request you sent on Tue, 15 Oct 2019 17:19:08 -0400:
 
-  Linux 5.4-rc2 (2019-10-06 14:27:30 -0700)
+> https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
 
-are available in the Git repository at:
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/3b1f00aceb7a67bf079a5a64aa5c6baf78a8f442
 
-  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
+Thank you!
 
-for you to fetch changes up to 245cdd9fbd396483d501db83047116e2530f245f:
-
-  vhost/test: stop device before reset (2019-10-13 09:38:27 -0400)
-
-----------------------------------------------------------------
-virtio: fixes
-
-Some minor bugfixes
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-
-----------------------------------------------------------------
-Michael S. Tsirkin (3):
-      tools/virtio: more stubs
-      tools/virtio: xen stub
-      vhost/test: stop device before reset
-
- drivers/vhost/test.c             | 2 ++
- tools/virtio/crypto/hash.h       | 0
- tools/virtio/linux/dma-mapping.h | 2 ++
- tools/virtio/xen/xen.h           | 6 ++++++
- 4 files changed, 10 insertions(+)
- create mode 100644 tools/virtio/crypto/hash.h
- create mode 100644 tools/virtio/xen/xen.h
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.wiki.kernel.org/userdoc/prtracker
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
