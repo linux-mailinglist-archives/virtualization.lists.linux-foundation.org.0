@@ -2,61 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 664A2D91B6
-	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 14:57:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72737D92C8
+	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 15:45:24 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id B9EA5E78;
-	Wed, 16 Oct 2019 12:57:08 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id EE10DE91;
+	Wed, 16 Oct 2019 13:45:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id AAC9EE1E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2C630DC2
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 12:57:07 +0000 (UTC)
+	Wed, 16 Oct 2019 13:45:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4751E821
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id B3EF3821
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 12:57:07 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	Wed, 16 Oct 2019 13:45:15 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 9965C300C72A;
-	Wed, 16 Oct 2019 12:57:06 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 6ABA210CC212;
+	Wed, 16 Oct 2019 13:45:14 +0000 (UTC)
 Received: from [10.36.116.19] (ovpn-116-19.ams2.redhat.com [10.36.116.19])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 7887560C4E;
-	Wed, 16 Oct 2019 12:57:04 +0000 (UTC)
-Subject: Re: [PATCH RFC v3 8/9] mm/memory_hotplug: Introduce
-	offline_and_remove_memory()
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 602B61001B20;
+	Wed, 16 Oct 2019 13:45:07 +0000 (UTC)
+Subject: Re: [PATCH RFC v3 6/9] mm: Allow to offline PageOffline() pages with
+	a reference count of 0
 To: Michal Hocko <mhocko@kernel.org>
 References: <20190919142228.5483-1-david@redhat.com>
-	<20190919142228.5483-9-david@redhat.com>
-	<20191016114708.GY317@dhcp22.suse.cz>
+	<20190919142228.5483-7-david@redhat.com>
+	<20191016114321.GX317@dhcp22.suse.cz>
 From: David Hildenbrand <david@redhat.com>
 Organization: Red Hat GmbH
-Message-ID: <0568676b-4a22-cd95-1de8-a43022aa6a9f@redhat.com>
-Date: Wed, 16 Oct 2019 14:57:03 +0200
+Message-ID: <36fef317-78e3-0500-43ba-f537f9a6fea4@redhat.com>
+Date: Wed, 16 Oct 2019 15:45:06 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.1.1
 MIME-Version: 1.0
-In-Reply-To: <20191016114708.GY317@dhcp22.suse.cz>
+In-Reply-To: <20191016114321.GX317@dhcp22.suse.cz>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.45]);
-	Wed, 16 Oct 2019 12:57:06 +0000 (UTC)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+	(mx1.redhat.com [10.5.110.65]);
+	Wed, 16 Oct 2019 13:45:15 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Andrea Arcangeli <aarcange@redhat.com>, Oscar Salvador <osalvador@suse.com>,
-	Pavel Tatashin <pasha.tatashin@soleen.com>, linux-kernel@vger.kernel.org,
+Cc: Pingfan Liu <kernelfans@gmail.com>,
 	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
-	Qian Cai <cai@lca.pw>, Andrew Morton <akpm@linux-foundation.org>,
-	Wei Yang <richard.weiyang@gmail.com>,
-	Dan Williams <dan.j.williams@intel.com>
+	Alexander Potapenko <glider@google.com>,
+	Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+	Ira Weiny <ira.weiny@intel.com>, Andrea Arcangeli <aarcange@redhat.com>,
+	Stephen Rothwell <sfr@canb.auug.org.au>, Yu Zhao <yuzhao@google.com>,
+	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Pavel Tatashin <pavel.tatashin@microsoft.com>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Mike Rapoport <rppt@linux.vnet.ibm.com>, Qian Cai <cai@lca.pw>,
+	Andrey Ryabinin <aryabinin@virtuozzo.com>,
+	Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+	Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>,
+	Yang Shi <yang.shi@linux.alibaba.com>,
+	linux-kernel@vger.kernel.org, Minchan Kim <minchan@kernel.org>,
+	Wei Yang <richardw.yang@linux.intel.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,51 +88,57 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 16.10.19 13:47, Michal Hocko wrote:
-> On Thu 19-09-19 16:22:27, David Hildenbrand wrote:
->> virtio-mem wants to offline and remove a memory block once it unplugged
->> all subblocks (e.g., using alloc_contig_range()). Let's provide
->> an interface to do that from a driver. virtio-mem already supports to
->> offline partially unplugged memory blocks. Offlining a fully unplugged
->> memory block will not require to migrate any pages. All unplugged
->> subblocks are PageOffline() and have a reference count of 0 - so
->> offlining code will simply skip them.
+On 16.10.19 13:43, Michal Hocko wrote:
+> On Thu 19-09-19 16:22:25, David Hildenbrand wrote:
+>> virtio-mem wants to allow to offline memory blocks of which some parts
+>> were unplugged, especially, to later offline and remove completely
+>> unplugged memory blocks. The important part is that PageOffline() has
+>> to remain set until the section is offline, so these pages will never
+>> get accessed (e.g., when dumping). The pages should not be handed
+>> back to the buddy (which would require clearing PageOffline() and
+>> result in issues if offlining fails and the pages are suddenly in the
+>> buddy).
 >>
->> All we need an interface to trigger the "offlining" and the removing in a
->> single operation - to make sure the memory block cannot get onlined by
->> user space again before it gets removed.
+>> Let's use "PageOffline() + reference count = 0" as a sign to
+>> memory offlining code that these pages can simply be skipped when
+>> offlining, similar to free or HWPoison pages.
 >>
->> To keep things simple, allow to only work on a single memory block.
+>> Pass flags to test_pages_isolated(), similar as already done for
+>> has_unmovable_pages(). Use a new flag to indicate the
+>> requirement of memory offlining to skip over these special pages.
+>>
+>> In has_unmovable_pages(), make sure the pages won't be detected as
+>> movable. This is not strictly necessary, however makes e.g.,
+>> alloc_contig_range() stop early, trying to isolate such page blocks -
+>> compared to failing later when testing if all pages were isolated.
+>>
+>> Also, make sure that when a reference to a PageOffline() page is
+>> dropped, that the page will not be returned to the buddy.
+>>
+>> memory devices (like virtio-mem) that want to make use of this
+>> functionality have to make sure to synchronize against memory offlining,
+>> using the memory hotplug notifier.
+>>
+>> Alternative: Allow to offline with a reference count of 1
+>> and use some other sign in the struct page that offlining is permitted.
 > 
-> Without a user it is not really clear why do we need this interface.
-> I am also not really sure why do you want/need to control beyond the
-> offlining stage. Care to explain some more?
-> 
+> Few questions. I do not see onlining code to take care of this special
+> case. What should happen when offline && online?
+> Should we allow to try_remove_memory to succeed with these pages?
+> Do we really have hook into __put_page? Why do we even care about the
+> reference count of those pages?
 
-The user is the next (small) patch in this series:
+Oh, I forgot to answer this questions. The __put_page() change is 
+necessary for the following race I identified:
 
-https://lkml.org/lkml/2019/9/19/475
+Page has a refcount of 1 (e.g., allocated by virtio-mem using 
+alloc_contig_range()).
 
-Let's assume virtio-mem added a memory block and that block was onlined 
-(e.g. by user space). E.g. 128MB.
+a) kernel: get_page_unless_zero(page): refcount = 2
+b) virtio-mem: set page PG_offline, reduce refcount): refocunt = 1
+c) kernel: put_page(page): refcount = 0
 
-On request, virtio-mem used alloc_contig_range() to logically unplug all 
-chunks (e.g., 4MB) of that memory block. virtio-mem marked all pages 
-PG_offline and dropped the reference count to 0 (to allow the memory 
-block to get offlined). Basically no memory of the memory block is still 
-in use by the system. So it is very desirable to remove that memory 
-block along with the vmemmap and the page tables. This frees up memory.
-
-In order to remove the memory block, it first has to be officially 
-offlined (e.g., make the memory block as offline). Then, the memory 
-block can get cleanly removed. Otherwise, try_remove_memory() will fail.
-
-To do this, virtio-mem needs an interface to perform both steps (offline 
-+ remove).
-
-There is no interface for a driver to offline a memory block. What I 
-propose here performs both steps (offline+remove) in a single step, as 
-that is really what the driver wants.
+The page would suddenly be given to the buddy. which is bad.
 
 -- 
 
