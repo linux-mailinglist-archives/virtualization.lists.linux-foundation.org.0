@@ -2,40 +2,42 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 278CED934A
-	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 16:04:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EA81D9362
+	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 16:10:09 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D5A1AE92;
-	Wed, 16 Oct 2019 14:03:56 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 5174CE9F;
+	Wed, 16 Oct 2019 14:10:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 50BD7E91
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8B099E8F
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 14:03:55 +0000 (UTC)
+	Wed, 16 Oct 2019 14:10:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 56C058A8
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 13275831
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 14:03:54 +0000 (UTC)
+	Wed, 16 Oct 2019 14:10:02 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id 4972DAF41;
-	Wed, 16 Oct 2019 14:03:52 +0000 (UTC)
-Date: Wed, 16 Oct 2019 16:03:50 +0200
+	by mx1.suse.de (Postfix) with ESMTP id F3777B979;
+	Wed, 16 Oct 2019 14:09:59 +0000 (UTC)
+Date: Wed, 16 Oct 2019 16:09:58 +0200
 From: Michal Hocko <mhocko@kernel.org>
 To: David Hildenbrand <david@redhat.com>
 Subject: Re: [PATCH RFC v3 6/9] mm: Allow to offline PageOffline() pages with
 	a reference count of 0
-Message-ID: <20191016140350.GD317@dhcp22.suse.cz>
+Message-ID: <20191016140958.GE317@dhcp22.suse.cz>
 References: <20190919142228.5483-1-david@redhat.com>
 	<20190919142228.5483-7-david@redhat.com>
 	<20191016114321.GX317@dhcp22.suse.cz>
-	<36fef317-78e3-0500-43ba-f537f9a6fea4@redhat.com>
+	<bd38d88d-19a7-275a-386d-f37cb76a3390@redhat.com>
+	<20191016134519.GC317@dhcp22.suse.cz>
+	<2aef8477-7d12-63a8-e273-9eae8712d5c2@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <36fef317-78e3-0500-43ba-f537f9a6fea4@redhat.com>
+In-Reply-To: <2aef8477-7d12-63a8-e273-9eae8712d5c2@redhat.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.3.1
@@ -78,73 +80,32 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed 16-10-19 15:45:06, David Hildenbrand wrote:
-> On 16.10.19 13:43, Michal Hocko wrote:
-> > On Thu 19-09-19 16:22:25, David Hildenbrand wrote:
-> > > virtio-mem wants to allow to offline memory blocks of which some parts
-> > > were unplugged, especially, to later offline and remove completely
-> > > unplugged memory blocks. The important part is that PageOffline() has
-> > > to remain set until the section is offline, so these pages will never
-> > > get accessed (e.g., when dumping). The pages should not be handed
-> > > back to the buddy (which would require clearing PageOffline() and
-> > > result in issues if offlining fails and the pages are suddenly in the
-> > > buddy).
-> > > 
-> > > Let's use "PageOffline() + reference count = 0" as a sign to
-> > > memory offlining code that these pages can simply be skipped when
-> > > offlining, similar to free or HWPoison pages.
-> > > 
-> > > Pass flags to test_pages_isolated(), similar as already done for
-> > > has_unmovable_pages(). Use a new flag to indicate the
-> > > requirement of memory offlining to skip over these special pages.
-> > > 
-> > > In has_unmovable_pages(), make sure the pages won't be detected as
-> > > movable. This is not strictly necessary, however makes e.g.,
-> > > alloc_contig_range() stop early, trying to isolate such page blocks -
-> > > compared to failing later when testing if all pages were isolated.
-> > > 
-> > > Also, make sure that when a reference to a PageOffline() page is
-> > > dropped, that the page will not be returned to the buddy.
-> > > 
-> > > memory devices (like virtio-mem) that want to make use of this
-> > > functionality have to make sure to synchronize against memory offlining,
-> > > using the memory hotplug notifier.
-> > > 
-> > > Alternative: Allow to offline with a reference count of 1
-> > > and use some other sign in the struct page that offlining is permitted.
-> > 
-> > Few questions. I do not see onlining code to take care of this special
-> > case. What should happen when offline && online?
-> > Should we allow to try_remove_memory to succeed with these pages?
-> > Do we really have hook into __put_page? Why do we even care about the
-> > reference count of those pages?
+On Wed 16-10-19 15:55:00, David Hildenbrand wrote:
+> On 16.10.19 15:45, Michal Hocko wrote:
+[...]
+> > There is state stored in the struct page. In other words this shouldn't
+> > be really different from HWPoison pages. I cannot find the code that is
+> > doing that and maybe we don't handle that. But we cannot simply online
+> > hwpoisoned page. Offlining the range will not make a broken memory OK
+> > all of the sudden. And your usecase sounds similar to me.
 > 
-> Oh, I forgot to answer this questions. The __put_page() change is necessary
-> for the following race I identified:
+> Sorry to say, but whenever we online memory the memmap is overwritten,
+> because there is no way you could tell it contains garbage or not. You have
+> to assume it is garbage. (my recent patch even poisons the memmap when
+> offlining, which helped to find a lot of these "garbage memmap" BUGs)
 > 
-> Page has a refcount of 1 (e.g., allocated by virtio-mem using
-> alloc_contig_range()).
+> online_pages()
+> 	...
+> 	move_pfn_range_to_zone(zone, pfn, nr_pages, NULL);
+> 	...
+> 		memmap_init_zone()
+> 			-> memmap initialized
 > 
-> a) kernel: get_page_unless_zero(page): refcount = 2
-> b) virtio-mem: set page PG_offline, reduce refcount): refocunt = 1
-> c) kernel: put_page(page): refcount = 0
-> 
-> The page would suddenly be given to the buddy. which is bad.
+> So yes, offlining memory with HWPoison and re-onlining it effectively drops
+> HWPoison markers. On the next access, you will trigger a new HWPoison.
 
-But why cannot you keep the reference count at 1 (do get_page when
-offlining the page)? In other words as long as the driver knows the page
-has been returned to the host then it has ref count at 1. Once the page
-is returned to the guest for whatever reason it can free it to the
-system by clearing the offline state and put_page.
-
-An elevated ref count could help to detect that the memory hotremove is
-not safe until the driver removes all potential metadata it might still
-hold. You also know that memory online should skip such a page.
-
-All in all your page is still in use by the driver and the life cycle is
-controlled by that driver.
-
-Or am I am missing something?
+Right you are! I need to sit on this much more and think about it with a
+clean head.
 -- 
 Michal Hocko
 SUSE Labs
