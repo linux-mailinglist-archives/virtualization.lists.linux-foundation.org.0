@@ -2,32 +2,32 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC392D9318
-	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 15:55:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CBF5D932B
+	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 15:59:15 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 7AE83E8A;
-	Wed, 16 Oct 2019 13:55:10 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 34879E96;
+	Wed, 16 Oct 2019 13:59:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C7292E5A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 078D6E91
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 13:55:09 +0000 (UTC)
+	Wed, 16 Oct 2019 13:59:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E8460821
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8194C821
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 13:55:08 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
-	[10.5.11.22])
+	Wed, 16 Oct 2019 13:59:08 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 9256D6908A;
-	Wed, 16 Oct 2019 13:55:07 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 9111B800DF2;
+	Wed, 16 Oct 2019 13:59:07 +0000 (UTC)
 Received: from [10.36.116.19] (ovpn-116-19.ams2.redhat.com [10.36.116.19])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 69A4C100EBD4;
-	Wed, 16 Oct 2019 13:55:01 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B166D60C5D;
+	Wed, 16 Oct 2019 13:59:01 +0000 (UTC)
 Subject: Re: [PATCH RFC v3 6/9] mm: Allow to offline PageOffline() pages with
 	a reference count of 0
 To: Michal Hocko <mhocko@kernel.org>
@@ -38,17 +38,17 @@ References: <20190919142228.5483-1-david@redhat.com>
 	<20191016134519.GC317@dhcp22.suse.cz>
 From: David Hildenbrand <david@redhat.com>
 Organization: Red Hat GmbH
-Message-ID: <2aef8477-7d12-63a8-e273-9eae8712d5c2@redhat.com>
-Date: Wed, 16 Oct 2019 15:55:00 +0200
+Message-ID: <50ee63c0-9d0b-0479-a5b9-494e4bc00446@redhat.com>
+Date: Wed, 16 Oct 2019 15:59:00 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.1.1
 MIME-Version: 1.0
 In-Reply-To: <20191016134519.GC317@dhcp22.suse.cz>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.28]);
-	Wed, 16 Oct 2019 13:55:08 +0000 (UTC)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+	(mx1.redhat.com [10.5.110.67]);
+	Wed, 16 Oct 2019 13:59:08 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -139,108 +139,13 @@ On 16.10.19 15:45, Michal Hocko wrote:
 > But we can skip those pages when onlining and keep them in the offline
 > state right? We do not poison offlined pages.
 
-Right now, I do that via the online_page_callback_t call (similar to 
-HyperV), as the memmap is basically garbage and not trustworthy.
+https://lkml.org/lkml/2019/10/6/60
 
-> 
-> There is state stored in the struct page. In other words this shouldn't
-> be really different from HWPoison pages. I cannot find the code that is
-> doing that and maybe we don't handle that. But we cannot simply online
-> hwpoisoned page. Offlining the range will not make a broken memory OK
-> all of the sudden. And your usecase sounds similar to me.
+But  again, onlining will overwrite the whole memmap right now and there 
+is no way to identify if a memmap contains garbage or not.
 
-Sorry to say, but whenever we online memory the memmap is overwritten, 
-because there is no way you could tell it contains garbage or not. You 
-have to assume it is garbage. (my recent patch even poisons the memmap 
-when offlining, which helped to find a lot of these "garbage memmap" BUGs)
-
-online_pages()
-	...
-	move_pfn_range_to_zone(zone, pfn, nr_pages, NULL);
-	...
-		memmap_init_zone()
-			-> memmap initialized
-
-So yes, offlining memory with HWPoison and re-onlining it effectively 
-drops HWPoison markers. On the next access, you will trigger a new HWPoison.
-
-> 
->> The driver that marked these pages to be skipped when offlining is
->> responsible for registering the online_page_callback_t callback where these
->> pages will get excluded.
->>
->> This is exactly the same as when onling a memory block that is partially
->> populated (e.g., HpyerV balloon right now).
->>
->> So it's effectively "re-initializing the memmap using the driver knowledge"
->> when onlining.
-> 
-> I am not sure I follow. So you exclude those pages when onlining?
-
-Exactly, using the online_page callback. The pages will - again - be 
-marked PG_offline with a refcount of 0. They will not be put to the buddy.
-
-> 
->>> Should we allow to try_remove_memory to succeed with these pages?
->>
->> I think we should first properly offline them (mark sections offline and
->> memory blocks, fixup numbers, shrink zones ...). The we can cleanly remove
->> the memory. (see [PATCH RFC v3 8/9] mm/memory_hotplug: Introduce
->> offline_and_remove_memory())
-> 
-> I will have a look, but just to quick question. try_remove_memory would
-> fail if the range is offline (via user interface) but there are still some
-> pages in the driver Offline state?
-
-try_remove_memory() does not check any memmap (because it is garbage), 
-it only makes sure that the memory blocks are properly marked as 
-offline. (IOW, device_offline() was called on the memory block).
-
-> 
->> Once offline, the memmap is irrelevant and try_remove_memory() can do its
->> job.
->>
->>> Do we really have hook into __put_page? Why do we even care about the
->>> reference count of those pages? Wouldn't it be just more consistent to
->>> elevate the reference count (I guess this is what you suggest in the
->>> last paragraph) and the virtio driver would return that page to the
->>> buddy by regular put_page. This is also related to the above question
->>> about the physical memory remove.
->>
->> Returning them to the buddy is problematic for various reasons. Let's have a
->> look at __offline_pages():
->>
->> 1) start_isolate_page_range()
->> -> offline pages with a reference count of one will be detected as unmovable
->> -> BAD, we abort right away. We could hack around that.
->>
->> 2) memory_notify(MEM_GOING_OFFLINE, &arg);
->> -> Here, we could release all pages to the buddy, clearing PG_offline
->> -> BAD, PF_offline must not be cleared so dumping tools will not touch
->>     these pages. I don't see a way to hack around that.
->>
->> 3) scan_movable_pages() ...
->>
->> 4a) memory_notify(MEM_OFFLINE, &arg);
->>
->> Perfect, it worked. Sections are offline.
->>
->> 4b) undo_isolate_page_range(start_pfn, end_pfn, MIGRATE_MOVABLE);
->>      memory_notify(MEM_CANCEL_OFFLINE, &arg);
->>
->> -> Offlining failed for whatever reason.
->> -> Pages are in the buddy, but we already un-isolated them. BAD.
->>
->> By not going via the buddy we avoid these issues and can leave PG_offline
->> set until the section is fully offline. Something that is very desirable for
->> virtio-mem (and as far as I can tell also HyperV in the future).
-> 
-> I am not sure I follow. Maybe my original question was confusing. Let me
-> ask again. Why do we need to hook into __put_page?
-
-Just replied again answering this question, before I read this mail :)
-
-Thanks!
+We would have to identify/remember if re-onlining, but I am not yet sure 
+if re-using memmaps when onlining is such a good idea ...
 
 -- 
 
