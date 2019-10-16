@@ -2,78 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66DBDD9157
-	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 14:46:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2306FD9198
+	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 14:53:17 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D92C2DC1;
-	Wed, 16 Oct 2019 12:46:46 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 436FDE18;
+	Wed, 16 Oct 2019 12:50:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id B069AD67;
-	Wed, 16 Oct 2019 12:46:45 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 220C013A;
-	Wed, 16 Oct 2019 12:46:45 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id b24so2602489wmj.5;
-	Wed, 16 Oct 2019 05:46:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=zKeyF68jMzkZ8PZE+zyf0AJaz2r+snV2TpAgt4NOVLs=;
-	b=KTEToaQ6qrUyieyWQDtnZTqU0uLP/8iwXQlf8besLewIcU49APKdYdkSgI38Agh1MC
-	fybhBfRdkx5N+TTVr1tYMxdymZL3T0riuRTK/LOyyxhgaZQubAeRVPpVt+A3RnXX8QXs
-	URwFg3CqEOZzLc5RyI2hhW6B0aejSropBsziuKyyH/FIwM2Q/afI6g5YmezT97h0gfC5
-	m7l0yztoR6wQheMj/D2XjlMwJcTuiMahzWX2A2g4HbTmV1V3s2gVyEtGwQa4xFvdKB7X
-	+hlE/qsb3XwJejEKcLz/Da0ZJ8PWWa/2vOpEx0Rr6ALCbfpwZCOQM8tBCVrg0yVT28Nz
-	rENQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=zKeyF68jMzkZ8PZE+zyf0AJaz2r+snV2TpAgt4NOVLs=;
-	b=GgtHLY/v0VIwGrDIF2jrB13dqz0eZv8fXK57S+B8nVQR4++ndUX1hGhYBoo1t1TErf
-	sMA5i8g0e/RPQ+qWlA++15B41hQnj9IdHIrqC/PFr4E0aRFFf/5br1UDr0BnctGV5Xmf
-	ebMe1jnixjCQ+tu4leZNCfie+4rBSEFFSfECt22l21SQEyrpFldZZKQ4a6S9xMZ7BHHV
-	4UsQii6ztq3qG+ZqwSexj5/SL+wvvKFqRG/VJiO2q8u5NGO0hNAdO6L3Y0mPK4qdn4kW
-	1tOqUJ0Wsx7eVLs/p6/g914fWzs0j4GJZx3NIxVVGmaOcWZjW4bMma1Wkdq4D4QdUSYc
-	1spQ==
-X-Gm-Message-State: APjAAAUF6DECd4mACrN1PTV0U8hMwF9xQfMgRkHJolmLqYJMAqo0rEp5
-	N0Nb36+HW/U7i7TLnpwdx5Q=
-X-Google-Smtp-Source: APXvYqy4uLAxXK8dZ9uj0Q5OXVcdh/jm7RvNEApTwfDvS63JBb+q8OpwLefZS54uymyMLUA4t9VzRQ==
-X-Received: by 2002:a7b:c4c6:: with SMTP id g6mr3276352wmk.126.1571230003562; 
-	Wed, 16 Oct 2019 05:46:43 -0700 (PDT)
-Received: from localhost (p2E5BE2CE.dip0.t-ipconnect.de. [46.91.226.206])
-	by smtp.gmail.com with ESMTPSA id
-	c18sm22646572wrv.10.2019.10.16.05.46.41
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 16 Oct 2019 05:46:41 -0700 (PDT)
-Date: Wed, 16 Oct 2019 14:46:40 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Will Deacon <will@kernel.org>
-Subject: Re: [PATCH 1/5] iommu: Implement iommu_put_resv_regions_simple()
-Message-ID: <20191016124640.GA1772382@ulmo>
-References: <20190829111752.17513-1-thierry.reding@gmail.com>
-	<20190829111752.17513-2-thierry.reding@gmail.com>
-	<20190918153737.dea2z5dddhuus25g@willie-the-truck>
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8F1CEDE1
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 16 Oct 2019 12:50:40 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DC2A189D
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 16 Oct 2019 12:50:39 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 2247D3086E27;
+	Wed, 16 Oct 2019 12:50:38 +0000 (UTC)
+Received: from [10.36.116.19] (ovpn-116-19.ams2.redhat.com [10.36.116.19])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4D3481001B36;
+	Wed, 16 Oct 2019 12:50:31 +0000 (UTC)
+Subject: Re: [PATCH RFC v3 6/9] mm: Allow to offline PageOffline() pages with
+	a reference count of 0
+To: Michal Hocko <mhocko@kernel.org>
+References: <20190919142228.5483-1-david@redhat.com>
+	<20190919142228.5483-7-david@redhat.com>
+	<20191016114321.GX317@dhcp22.suse.cz>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat GmbH
+Message-ID: <bd38d88d-19a7-275a-386d-f37cb76a3390@redhat.com>
+Date: Wed, 16 Oct 2019 14:50:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.1
 MIME-Version: 1.0
-In-Reply-To: <20190918153737.dea2z5dddhuus25g@willie-the-truck>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+In-Reply-To: <20191016114321.GX317@dhcp22.suse.cz>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.44]);
+	Wed, 16 Oct 2019 12:50:39 +0000 (UTC)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Joerg Roedel <joro@8bytes.org>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	iommu@lists.linux-foundation.org, David Woodhouse <dwmw2@infradead.org>,
-	linux-arm-kernel@lists.infradead.org
+Cc: Pingfan Liu <kernelfans@gmail.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Alexander Potapenko <glider@google.com>,
+	Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+	Ira Weiny <ira.weiny@intel.com>, Andrea Arcangeli <aarcange@redhat.com>,
+	Stephen Rothwell <sfr@canb.auug.org.au>, Yu Zhao <yuzhao@google.com>,
+	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Pavel Tatashin <pavel.tatashin@microsoft.com>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Mike Rapoport <rppt@linux.vnet.ibm.com>, Qian Cai <cai@lca.pw>,
+	Andrey Ryabinin <aryabinin@virtuozzo.com>,
+	Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+	Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>,
+	Yang Shi <yang.shi@linux.alibaba.com>,
+	linux-kernel@vger.kernel.org, Minchan Kim <minchan@kernel.org>,
+	Wei Yang <richardw.yang@linux.intel.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -85,112 +83,149 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2040086399292798659=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
+On 16.10.19 13:43, Michal Hocko wrote:
+> On Thu 19-09-19 16:22:25, David Hildenbrand wrote:
+>> virtio-mem wants to allow to offline memory blocks of which some parts
+>> were unplugged, especially, to later offline and remove completely
+>> unplugged memory blocks. The important part is that PageOffline() has
+>> to remain set until the section is offline, so these pages will never
+>> get accessed (e.g., when dumping). The pages should not be handed
+>> back to the buddy (which would require clearing PageOffline() and
+>> result in issues if offlining fails and the pages are suddenly in the
+>> buddy).
+>>
+>> Let's use "PageOffline() + reference count = 0" as a sign to
+>> memory offlining code that these pages can simply be skipped when
+>> offlining, similar to free or HWPoison pages.
+>>
+>> Pass flags to test_pages_isolated(), similar as already done for
+>> has_unmovable_pages(). Use a new flag to indicate the
+>> requirement of memory offlining to skip over these special pages.
+>>
+>> In has_unmovable_pages(), make sure the pages won't be detected as
+>> movable. This is not strictly necessary, however makes e.g.,
+>> alloc_contig_range() stop early, trying to isolate such page blocks -
+>> compared to failing later when testing if all pages were isolated.
+>>
+>> Also, make sure that when a reference to a PageOffline() page is
+>> dropped, that the page will not be returned to the buddy.
+>>
+>> memory devices (like virtio-mem) that want to make use of this
+>> functionality have to make sure to synchronize against memory offlining,
+>> using the memory hotplug notifier.
+>>
+>> Alternative: Allow to offline with a reference count of 1
+>> and use some other sign in the struct page that offlining is permitted.
+> 
+> Few questions. I do not see onlining code to take care of this special
+> case. What should happen when offline && online?
 
---===============2040086399292798659==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="gKMricLos+KVdGMg"
-Content-Disposition: inline
+Once offline, the memmap is garbage. When onlining again:
+
+a) memmap will be re-initialized
+b) online_page_callback_t will be called for every page in the section. 
+The driver can mark them offline again and not give them to the buddy.
+c) section will be marked online.
+
+The driver that marked these pages to be skipped when offlining is 
+responsible for registering the online_page_callback_t callback where 
+these pages will get excluded.
+
+This is exactly the same as when onling a memory block that is partially 
+populated (e.g., HpyerV balloon right now).
+
+So it's effectively "re-initializing the memmap using the driver 
+knowledge" when onlining.
+
+> Should we allow to try_remove_memory to succeed with these pages?
+
+I think we should first properly offline them (mark sections offline and 
+memory blocks, fixup numbers, shrink zones ...). The we can cleanly 
+remove the memory. (see [PATCH RFC v3 8/9] mm/memory_hotplug: Introduce 
+offline_and_remove_memory())
+
+Once offline, the memmap is irrelevant and try_remove_memory() can do 
+its job.
+
+> Do we really have hook into __put_page? Why do we even care about the
+> reference count of those pages? Wouldn't it be just more consistent to
+> elevate the reference count (I guess this is what you suggest in the
+> last paragraph) and the virtio driver would return that page to the
+> buddy by regular put_page. This is also related to the above question
+> about the physical memory remove.
+
+Returning them to the buddy is problematic for various reasons. Let's 
+have a look at __offline_pages():
+
+1) start_isolate_page_range()
+-> offline pages with a reference count of one will be detected as 
+unmovable -> BAD, we abort right away. We could hack around that.
+
+2) memory_notify(MEM_GOING_OFFLINE, &arg);
+-> Here, we could release all pages to the buddy, clearing PG_offline
+-> BAD, PF_offline must not be cleared so dumping tools will not touch
+    these pages. I don't see a way to hack around that.
+
+3) scan_movable_pages() ...
+
+4a) memory_notify(MEM_OFFLINE, &arg);
+
+Perfect, it worked. Sections are offline.
+
+4b) undo_isolate_page_range(start_pfn, end_pfn, MIGRATE_MOVABLE);
+     memory_notify(MEM_CANCEL_OFFLINE, &arg);
+
+-> Offlining failed for whatever reason.
+-> Pages are in the buddy, but we already un-isolated them. BAD.
+
+By not going via the buddy we avoid these issues and can leave 
+PG_offline set until the section is fully offline. Something that is 
+very desirable for virtio-mem (and as far as I can tell also HyperV in 
+the future).
+
+> 
+> [...]
+>> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+>> index d5d7944954b3..fef74720d8b4 100644
+>> --- a/mm/page_alloc.c
+>> +++ b/mm/page_alloc.c
+>> @@ -8221,6 +8221,15 @@ bool has_unmovable_pages(struct zone *zone, struct page *page, int count,
+>>   		if (!page_ref_count(page)) {
+>>   			if (PageBuddy(page))
+>>   				iter += (1 << page_order(page)) - 1;
+>> +			/*
+>> +			* Memory devices allow to offline a page if it is
+>> +			* marked PG_offline and has a reference count of 0.
+>> +			* However, the pages are not movable as it would be
+>> +			* required e.g., for alloc_contig_range().
+>> +			*/
+>> +			if (PageOffline(page) && !(flags & SKIP_OFFLINE))
+>> +				if (++found > count)
+>> +					goto unmovable;
+>>   			continue;
+>>   		}
+> 
+> Do we really need to distinguish offline and hwpoison pages? They are
+> both unmovable for allocator purposes and offlineable for the hotplug,
+> right? Should we just hide them behind a helper and use it rather than
+> an explicit SKIP_$FOO?
+
+Makes sense. It really boils down to "offline" vs. "allocate" use cases.
+
+So maybe instead of "SKIP_FOO" something like "MEMORY_OFFLINE". ?
 
 
---gKMricLos+KVdGMg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-- 
 
-On Wed, Sep 18, 2019 at 04:37:38PM +0100, Will Deacon wrote:
-> On Thu, Aug 29, 2019 at 01:17:48PM +0200, Thierry Reding wrote:
-> > From: Thierry Reding <treding@nvidia.com>
-> >=20
-> > Implement a generic function for removing reserved regions. This can be
-> > used by drivers that don't do anything fancy with these regions other
-> > than allocating memory for them.
-> >=20
-> > Signed-off-by: Thierry Reding <treding@nvidia.com>
-> > ---
-> >  drivers/iommu/iommu.c | 19 +++++++++++++++++++
-> >  include/linux/iommu.h |  2 ++
-> >  2 files changed, 21 insertions(+)
-> >=20
-> > diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-> > index 0f585b614657..73a2a6b13507 100644
-> > --- a/drivers/iommu/iommu.c
-> > +++ b/drivers/iommu/iommu.c
-> > @@ -2170,6 +2170,25 @@ void iommu_put_resv_regions(struct device *dev, =
-struct list_head *list)
-> >  		ops->put_resv_regions(dev, list);
-> >  }
-> > =20
-> > +/**
-> > + * iommu_put_resv_regions_simple - Reserved region driver helper
-> > + * @dev: device for which to free reserved regions
-> > + * @list: reserved region list for device
-> > + *
-> > + * IOMMU drivers can use this to implement their .put_resv_regions() c=
-allback
-> > + * for simple reservations. Memory allocated for each reserved region =
-will be
-> > + * freed. If an IOMMU driver allocates additional resources per region=
-, it is
-> > + * going to have to implement a custom callback.
-> > + */
-> > +void iommu_put_resv_regions_simple(struct device *dev, struct list_hea=
-d *list)
-> > +{
-> > +	struct iommu_resv_region *entry, *next;
-> > +
-> > +	list_for_each_entry_safe(entry, next, list, list)
-> > +		kfree(entry);
-> > +}
-> > +EXPORT_SYMBOL(iommu_put_resv_regions_simple);
->=20
-> Can you call this directly from iommu_put_resv_regions() if the function
-> pointer in ops is NULL? That would save having to plumb the default callb=
-ack
-> into a bunch of drivers.
+Thanks,
 
-I probably could, but I don't think that necessarily improves things.
-The reason is that that would cause the helper to get called even if the
-driver doesn't support reserved regions. That's likely harmless because
-in that case the list of regions passed to it would be empty. However, I
-think the current way to do this, where we have to implement both hooks
-for ->get_resv_regions() and ->put_resv_regions() is nicely symmetric.
-
-Thierry
-
---gKMricLos+KVdGMg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl2nES4ACgkQ3SOs138+
-s6EONg//ZrYWm5ShwdyQ9XivGxuuU1NxmrAJMtWHz2z0xMVhLv8vVlvNeGNNepm/
-AYozw/NMlEZokXfJVW9zNHDpOdr+MB6EchafhOZo9kK592CE18NhVrpVDptMvf29
-K1QsQvgCq5Lu9EHBeDMxpx6Kn9VNBFJuAeYCIVzD5GOm80sHdAp1eKMwu/od+oTQ
-IwZLB0K82tKdvnwYDYjN/JUW0dbrthH+fW843oOxAqQgrJYApL64k6WuPn6evN11
-V7xbw3/Yk3LMqxmBzve7b7ATYXdGRuN7TdMX7aZmLX8xyu11L6LbK+Lss10BbBKi
-Vja3MbZgoD54Eam3zOvj+b7tfdiRry4jhqqVksJ/Q2U7KOygrzLORgYR6wTgtz9g
-opzD+i9cGdaSj1k8kvVeFPqX9TL/er2hy05MIEWYYTuVh3Y6xiPekH988bHvxf9X
-bcl8I5YARin8U2n5R9kaS+drtuo3HvgeQMfszEf9UDNLQc+Pl5niTQPJzljWiZ36
-zI8Tq7Sq8Fph33gOGbpcZMTDux4cjlYtGWle7U5tkS38Xte7+IgRxmpwWDC6Y0jX
-muP1UNGkXJMLvJtssGseFZZw9qkJcq0NPRdjaN4k+LTdbrw0B10f1CDST8g/9Z4H
-xvmbe6SyeWzgcBc43Fs4V3YjZXAYWxf66eD2B9h9AdAEHSmCgD4=
-=LljU
------END PGP SIGNATURE-----
-
---gKMricLos+KVdGMg--
-
---===============2040086399292798659==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+David / dhildenb
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============2040086399292798659==--
