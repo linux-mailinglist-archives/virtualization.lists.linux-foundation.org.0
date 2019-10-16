@@ -2,63 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECF91D9011
-	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 13:52:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 694E2D90F4
+	for <lists.virtualization@lfdr.de>; Wed, 16 Oct 2019 14:31:27 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 16106D3E;
-	Wed, 16 Oct 2019 11:52:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 3A620DA3;
+	Wed, 16 Oct 2019 12:31:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C4FE0D3B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D5CA2D9B
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 11:52:13 +0000 (UTC)
+	Wed, 16 Oct 2019 12:31:19 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4593570D
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 390F070D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 16 Oct 2019 11:52:13 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
-	[10.5.11.22])
+	Wed, 16 Oct 2019 12:31:19 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id AEA0D8980F1;
-	Wed, 16 Oct 2019 11:52:12 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-43.ams2.redhat.com
-	[10.36.116.43])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 5587B1001B20;
-	Wed, 16 Oct 2019 11:52:09 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id 8D43731EA4; Wed, 16 Oct 2019 13:52:05 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v4 11/11] drm/vram: drop DRM_VRAM_MM_FILE_OPERATIONS
-Date: Wed, 16 Oct 2019 13:52:03 +0200
-Message-Id: <20191016115203.20095-12-kraxel@redhat.com>
-In-Reply-To: <20191016115203.20095-1-kraxel@redhat.com>
-References: <20191016115203.20095-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
-	(mx1.redhat.com [10.5.110.67]);
-	Wed, 16 Oct 2019 11:52:12 +0000 (UTC)
+	by mx1.redhat.com (Postfix) with ESMTPS id 5450687638;
+	Wed, 16 Oct 2019 12:31:18 +0000 (UTC)
+Received: from [10.36.116.19] (ovpn-116-19.ams2.redhat.com [10.36.116.19])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B6FA85D9CD;
+	Wed, 16 Oct 2019 12:31:15 +0000 (UTC)
+Subject: Re: [PATCH RFC v3 4/9] mm: Export alloc_contig_range() /
+	free_contig_range()
+To: Michal Hocko <mhocko@kernel.org>
+References: <20190919142228.5483-1-david@redhat.com>
+	<20190919142228.5483-5-david@redhat.com>
+	<20191016112051.GW317@dhcp22.suse.cz>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat GmbH
+Message-ID: <ef8b47c6-45ad-1b32-c54d-829b44a12131@redhat.com>
+Date: Wed, 16 Oct 2019 14:31:14 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.1
+MIME-Version: 1.0
+In-Reply-To: <20191016112051.GW317@dhcp22.suse.cz>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.26]);
+	Wed, 16 Oct 2019 12:31:18 +0000 (UTC)
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>,
-	Daniel Vetter <daniel.vetter@ffwll.ch>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	open list <linux-kernel@vger.kernel.org>,
-	Maxime Ripard <mripard@kernel.org>,
-	"open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
-	<virtualization@lists.linux-foundation.org>,
-	Xinliang Liu <z.liuxinliang@hisilicon.com>,
-	Hans de Goede <hdegoede@redhat.com>,
-	Xinwei Kong <kong.kongxinwei@hisilicon.com>,
-	Daniel Vetter <daniel@ffwll.ch>, Chen Feng <puck.chen@hisilicon.com>,
-	Rongrong Zou <zourongrong@gmail.com>,
-	Dave Airlie <airlied@redhat.com>, Sean Paul <sean@poorly.run>
+Cc: Andrea Arcangeli <aarcange@redhat.com>,
+	Pavel Tatashin <pavel.tatashin@microsoft.com>,
+	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Alexander Potapenko <glider@google.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Mike Rapoport <rppt@linux.ibm.com>,
+	Mel Gorman <mgorman@techsingularity.net>,
+	Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+	Oscar Salvador <osalvador@suse.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,136 +73,78 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Not needed any more because we don't have vram specific fops
-any more.  DEFINE_DRM_GEM_FOPS() can be used instead.
+On 16.10.19 13:20, Michal Hocko wrote:
+> On Thu 19-09-19 16:22:23, David Hildenbrand wrote:
+>> A virtio-mem device wants to allocate memory from the memory region it
+>> manages in order to unplug it in the hypervisor - similar to
+>> a balloon driver. Also, it might want to plug previously unplugged
+>> (allocated) memory and give it back to Linux. alloc_contig_range() /
+>> free_contig_range() seem to be the perfect interface for this task.
+>>
+>> In contrast to existing balloon devices, a virtio-mem device operates
+>> on bigger chunks (e.g., 4MB) and only on physical memory it manages. It
+>> tracks which chunks (subblocks) are still plugged, so it can go ahead
+>> and try to alloc_contig_range()+unplug them on unplug request, or
+>> plug+free_contig_range() unplugged chunks on plug requests.
+>>
+>> A virtio-mem device will use alloc_contig_range() / free_contig_range()
+>> only on ranges that belong to the same node/zone in at least
+>> MAX(MAX_ORDER - 1, pageblock_order) order granularity - e.g., 4MB on
+>> x86-64. The virtio-mem device added that memory, so the memory
+>> exists and does not contain any holes. virtio-mem will only try to allocate
+>> on ZONE_NORMAL, never on ZONE_MOVABLE, just like when allocating
+>> gigantic pages (we don't put unmovable data into the movable zone).
+> 
+> Is there any real reason to export as GPL rather than generic
+> EXPORT_SYMBOL? In other words do we need to restrict the usage this
+> interface only to GPL modules and why if so. All other allocator APIs
+> are EXPORT_SYMBOL so there should better be a good reason for this one
+> to differ. I can understand that this one is slightly different by
+> requesting a specific range of the memory but it is still under a full
+> control of the core MM to say no.
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- include/drm/drm_gem_vram_helper.h              | 18 ------------------
- drivers/gpu/drm/ast/ast_drv.c                  |  5 +----
- drivers/gpu/drm/bochs/bochs_drv.c              |  5 +----
- .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c    |  5 +----
- drivers/gpu/drm/mgag200/mgag200_drv.c          |  5 +----
- drivers/gpu/drm/vboxvideo/vbox_drv.c           |  5 +----
- 6 files changed, 5 insertions(+), 38 deletions(-)
+I thought that we might - at least initially - might want to know all 
+users. If you prefer, I can drop the GPL.
 
-diff --git a/include/drm/drm_gem_vram_helper.h b/include/drm/drm_gem_vram_helper.h
-index 5e48fdac4a1d..b8ad4531ebb4 100644
---- a/include/drm/drm_gem_vram_helper.h
-+++ b/include/drm/drm_gem_vram_helper.h
-@@ -184,22 +184,4 @@ struct drm_vram_mm *drm_vram_helper_alloc_mm(
- 	struct drm_device *dev, uint64_t vram_base, size_t vram_size);
- void drm_vram_helper_release_mm(struct drm_device *dev);
- 
--/**
-- * define DRM_VRAM_MM_FILE_OPERATIONS - default callback functions for \
--	&struct file_operations
-- *
-- * Drivers that use VRAM MM can use this macro to initialize
-- * &struct file_operations with default functions.
-- */
--#define DRM_VRAM_MM_FILE_OPERATIONS \
--	.llseek		= no_llseek, \
--	.read		= drm_read, \
--	.poll		= drm_poll, \
--	.unlocked_ioctl = drm_ioctl, \
--	.compat_ioctl	= drm_compat_ioctl, \
--	.mmap		= drm_gem_mmap, \
--	.open		= drm_open, \
--	.release	= drm_release \
--
--
- #endif
-diff --git a/drivers/gpu/drm/ast/ast_drv.c b/drivers/gpu/drm/ast/ast_drv.c
-index e0e8770462bc..1f17794b0890 100644
---- a/drivers/gpu/drm/ast/ast_drv.c
-+++ b/drivers/gpu/drm/ast/ast_drv.c
-@@ -200,10 +200,7 @@ static struct pci_driver ast_pci_driver = {
- 	.driver.pm = &ast_pm_ops,
- };
- 
--static const struct file_operations ast_fops = {
--	.owner = THIS_MODULE,
--	DRM_VRAM_MM_FILE_OPERATIONS
--};
-+DEFINE_DRM_GEM_FOPS(ast_fops);
- 
- static struct drm_driver driver = {
- 	.driver_features = DRIVER_MODESET | DRIVER_GEM,
-diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
-index 3b9b0d9bbc14..10460878414e 100644
---- a/drivers/gpu/drm/bochs/bochs_drv.c
-+++ b/drivers/gpu/drm/bochs/bochs_drv.c
-@@ -58,10 +58,7 @@ static int bochs_load(struct drm_device *dev)
- 	return ret;
- }
- 
--static const struct file_operations bochs_fops = {
--	.owner		= THIS_MODULE,
--	DRM_VRAM_MM_FILE_OPERATIONS
--};
-+DEFINE_DRM_GEM_FOPS(bochs_fops);
- 
- static struct drm_driver bochs_driver = {
- 	.driver_features	= DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
-diff --git a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
-index 4f52c83b9b4c..2fd4ca91a62d 100644
---- a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
-+++ b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
-@@ -26,10 +26,7 @@
- #include "hibmc_drm_drv.h"
- #include "hibmc_drm_regs.h"
- 
--static const struct file_operations hibmc_fops = {
--	.owner		= THIS_MODULE,
--	DRM_VRAM_MM_FILE_OPERATIONS
--};
-+DEFINE_DRM_GEM_FOPS(hibmc_fops);
- 
- static irqreturn_t hibmc_drm_interrupt(int irq, void *arg)
- {
-diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.c b/drivers/gpu/drm/mgag200/mgag200_drv.c
-index 4f9df3b93598..397f8b0a9af8 100644
---- a/drivers/gpu/drm/mgag200/mgag200_drv.c
-+++ b/drivers/gpu/drm/mgag200/mgag200_drv.c
-@@ -58,10 +58,7 @@ static void mga_pci_remove(struct pci_dev *pdev)
- 	drm_put_dev(dev);
- }
- 
--static const struct file_operations mgag200_driver_fops = {
--	.owner = THIS_MODULE,
--	DRM_VRAM_MM_FILE_OPERATIONS
--};
-+DEFINE_DRM_GEM_FOPS(mgag200_driver_fops);
- 
- static struct drm_driver driver = {
- 	.driver_features = DRIVER_GEM | DRIVER_MODESET,
-diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
-index 6ee308b453da..8512d970a09f 100644
---- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
-+++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
-@@ -181,10 +181,7 @@ static struct pci_driver vbox_pci_driver = {
- #endif
- };
- 
--static const struct file_operations vbox_fops = {
--	.owner = THIS_MODULE,
--	DRM_VRAM_MM_FILE_OPERATIONS
--};
-+DEFINE_DRM_GEM_FOPS(vbox_fops);
- 
- static struct drm_driver driver = {
- 	.driver_features =
+> 
+>> Cc: Andrew Morton <akpm@linux-foundation.org>
+>> Cc: Michal Hocko <mhocko@suse.com>
+>> Cc: Vlastimil Babka <vbabka@suse.cz>
+>> Cc: Oscar Salvador <osalvador@suse.de>
+>> Cc: Mel Gorman <mgorman@techsingularity.net>
+>> Cc: Mike Rapoport <rppt@linux.ibm.com>
+>> Cc: Dan Williams <dan.j.williams@intel.com>
+>> Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+>> Cc: Pavel Tatashin <pavel.tatashin@microsoft.com>
+>> Cc: Alexander Potapenko <glider@google.com>
+>> Signed-off-by: David Hildenbrand <david@redhat.com>
+> 
+> Other than that, I do not think exporting this function is harmful. It
+> would be worse to reinvent it and do it wrong.
+> 
+> I usually prefer to add a caller in the same patch, though, because it
+> makes the usage explicit and clear.
+> 
+
+It's the next patch in this series (I prefer to split this from the 
+actual driver):
+
+https://lkml.org/lkml/2019/9/19/486
+
+> Acked-by: Michal Hocko <mhocko@suse.com> # to export contig range allocator API
+
+Thanks!
+
 -- 
-2.18.1
 
+Thanks,
+
+David / dhildenb
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
