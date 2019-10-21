@@ -2,55 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89900DE6AD
-	for <lists.virtualization@lfdr.de>; Mon, 21 Oct 2019 10:37:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 041DDDE833
+	for <lists.virtualization@lfdr.de>; Mon, 21 Oct 2019 11:36:46 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 8B861C2A;
-	Mon, 21 Oct 2019 08:37:07 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C042F14C1;
+	Mon, 21 Oct 2019 09:36:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4D7DCB88;
-	Mon, 21 Oct 2019 08:37:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2FD7C14BA
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 21 Oct 2019 09:36:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from ozlabs.org (bilbo.ozlabs.org [203.11.71.1])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 42DA914D;
-	Mon, 21 Oct 2019 08:37:04 +0000 (UTC)
-Received: by ozlabs.org (Postfix, from userid 1007)
-	id 46xVPB4GFcz9sPL; Mon, 21 Oct 2019 19:37:02 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=gibson.dropbear.id.au; s=201602; t=1571647022;
-	bh=P4+BLRFMUZOzcZoVFqPd/m5gwNGJV4F8kQoNpmmm7xA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=avrjOdXbIP98E9IET/dkB7o//V/WUQGuUZauaU4YAvbsL0iyAbQT2hdQRmWjeEtZo
-	9O9YxymQ60Bi6NXIO5IUyMVUzVZQwJA4XWrkWh3oqnn11r/hQ7lDikvL9i2P05SRlS
-	qBAWHB7eC/SE7bNC8DQDz1J6xg+SKHjJu2mzfdIs=
-Date: Mon, 21 Oct 2019 19:36:50 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Christoph Hellwig <hch@lst.de>
-Subject: Re: [PATCH 2/2] virtio_ring: Use DMA API if memory is encrypted
-Message-ID: <20191021083650.GG6439@umbus.fritz.box>
-References: <1570843519-8696-1-git-send-email-linuxram@us.ibm.com>
-	<1570843519-8696-2-git-send-email-linuxram@us.ibm.com>
-	<1570843519-8696-3-git-send-email-linuxram@us.ibm.com>
-	<20191015073501.GA32345@lst.de>
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+	[205.139.110.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 9605C831
+	for <virtualization@lists.linux-foundation.org>;
+	Mon, 21 Oct 2019 09:36:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1571650596;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	content-transfer-encoding:content-transfer-encoding:
+	in-reply-to:in-reply-to:references:references;
+	bh=FpZdScR+KHI00mbq34flCWHyvKtJnKCqm7Yan1K0IeI=;
+	b=CfmF4STpp9cTMmDyreZvb4bwNhCtuC97bnNllvBwIXN7QAijTFl9W49fvfqIjIQy7nj7Ge
+	hUw5vJWg2T4Hzp5KQ/HMGX7qXer6ZTud8yIK1UvZMAzIeHbWLw9lJabJ16yXSvwvsp6+C0
+	sXEfM8LYMMZlnn2UhzCNkhuOQMRv3IA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+	us-mta-26-gGQdN0OCO4edN38FnITm1A-1; Mon, 21 Oct 2019 05:36:33 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E66A780183E;
+	Mon, 21 Oct 2019 09:36:25 +0000 (UTC)
+Received: from gondolin (dhcp-192-218.str.redhat.com [10.33.192.218])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 499036012C;
+	Mon, 21 Oct 2019 09:36:09 +0000 (UTC)
+Date: Mon, 21 Oct 2019 11:36:07 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V4 5/6] virtio: introduce a mdev based transport
+Message-ID: <20191021113607.16b26d9d.cohuck@redhat.com>
+In-Reply-To: <2bb5645b-5c46-9cae-0571-65c302f51cf2@redhat.com>
+References: <20191017104836.32464-1-jasowang@redhat.com>
+	<20191017104836.32464-6-jasowang@redhat.com>
+	<20191018162007.31631039.cohuck@redhat.com>
+	<2bb5645b-5c46-9cae-0571-65c302f51cf2@redhat.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-In-Reply-To: <20191015073501.GA32345@lst.de>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-MC-Unique: gGQdN0OCO4edN38FnITm1A-1
+X-Mimecast-Spam-Score: 0
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: andmike@us.ibm.com, sukadev@linux.vnet.ibm.com, b.zolnierkie@samsung.com,
-	benh@kernel.crashing.org, aik@linux.ibm.com,
-	Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, paulus@ozlabs.org,
-	iommu@lists.linux-foundation.org, paul.burton@mips.com,
-	mpe@ellerman.id.au, m.szyprowski@samsung.com,
-	linuxppc-dev@lists.ozlabs.org, robin.murphy@arm.com
+Cc: stefanha@redhat.com, christophe.de.dinechin@gmail.com, kvm@vger.kernel.org,
+	mst@redhat.com, airlied@linux.ie,
+	joonas.lahtinen@linux.intel.com, heiko.carstens@de.ibm.com,
+	dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, kwankhede@nvidia.com,
+	rob.miller@broadcom.com, linux-s390@vger.kernel.org,
+	sebott@linux.ibm.com, lulu@redhat.com, eperezma@redhat.com,
+	pasic@linux.ibm.com, borntraeger@de.ibm.com,
+	haotian.wang@sifive.com, zhi.a.wang@intel.com,
+	farman@linux.ibm.com, idos@mellanox.com, gor@linux.ibm.com,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	xiao.w.wang@intel.com, freude@linux.ibm.com,
+	zhenyuw@linux.intel.com, parav@mellanox.com,
+	zhihong.wang@intel.com, rodrigo.vivi@intel.com,
+	intel-gvt-dev@lists.freedesktop.org, akrowiak@linux.ibm.com,
+	oberpar@linux.ibm.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
+	daniel@ffwll.ch, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,96 +90,69 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5505045536764271647=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-
---===============5505045536764271647==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Sw7tCqrGA+HQ0/zt"
-Content-Disposition: inline
-
-
---Sw7tCqrGA+HQ0/zt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 15, 2019 at 09:35:01AM +0200, Christoph Hellwig wrote:
-> On Fri, Oct 11, 2019 at 06:25:19PM -0700, Ram Pai wrote:
-> > From: Thiago Jung Bauermann <bauerman@linux.ibm.com>
-> >=20
-> > Normally, virtio enables DMA API with VIRTIO_F_IOMMU_PLATFORM, which mu=
-st
-> > be set by both device and guest driver. However, as a hack, when DMA API
-> > returns physical addresses, guest driver can use the DMA API; even thou=
-gh
-> > device does not set VIRTIO_F_IOMMU_PLATFORM and just uses physical
-> > addresses.
->=20
-> Sorry, but this is a complete bullshit hack.  Driver must always use
-> the DMA API if they do DMA, and if virtio devices use physical addresses
-> that needs to be returned through the platform firmware interfaces for
-> the dma setup.  If you don't do that yet (which based on previous
-> informations you don't), you need to fix it, and we can then quirk
-> old implementations that already are out in the field.
->=20
-> In other words: we finally need to fix that virtio mess and not pile
-> hacks on top of hacks.
-
-Christoph, if I understand correctly, your objection isn't so much to
-the proposed change here of itself, except insofar as it entrenches
-virtio's existing code allowing it to either use the DMA api or bypass
-it and use physical addresses directly.  Is that right, or have I
-missed something?
-
-Where do you envisage the decision to bypass the IOMMU being made?
-The virtio spec more or less states that virtio devices use hypervisor
-magic to access physical addresses directly, rather than using normal
-DMA channels.  The F_IOMMU_PLATFORM flag then overrides that, since it
-obviously won't work for hardware devices.
-
-The platform code isn't really in a position to know that virtio
-devices are (usually) magic.  So were you envisaging the virtio driver
-explicitly telling the platform to use bypassing DMA operations?
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---Sw7tCqrGA+HQ0/zt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl2tbhcACgkQbDjKyiDZ
-s5JyXg//T3Ppsd9Nw4UJ0S7vuihqdegF9xf5Id+ggjipfZl02lYq6KHjlrkDkMXH
-HVHUoVYy0626P9inLv/Yt9cqA70zVNKVt5gItWX+FUETTio5hv1vcz5pB28nGln/
-uauetB6MmSZnnRcMkzguJjRO53cJJIR2ft+qKz6BhVksdhE+JufUYuWgCM92znTp
-e+ku518x0fc5t4mqCBjIf/EZ0S0F3GqXH61q38USXZhfaJDJiaR/krUYvB+Opm6y
-k505kcbvfLybLlZyb6EOQyjQGskvQsBbSXbzJRImbUPA8hrFQY0JMozfxcUKz56G
-PGvl9KKWz/Wr+NwwCcPi6/oM1t+iisn6UGsW9j4888nFzMDVlQgWMBP2oPD5vNiS
-JvmxsmveiRl+0YZ6mPPG6GLg0msmW8TPM5lYVBpG+yJs24C/AY0yUkgjzSX9wjdd
-6zuO5ZJumgblftxiYZ5SoMX/RZ1tlTn9o35B5wOA8rbvBEGbdVEPlrhxzpxKUA41
-M+63HFoZOZ4zRtV/qBP4Z3lhqzsatDsDPq3FIH5GOtJAVs9yiaJPjF4449plpzMS
-mSoJgCD9g0M0aQJXYb1gv/1BrAuO2kQSoounFzDWP0hmTPdGd3QQifF8n3x4j4h6
-xuGMCq/7AXeE6xZsBnw7+bqX0NLIRgIb7a6d3nyJeVzfgJWvq/M=
-=ybRR
------END PGP SIGNATURE-----
-
---Sw7tCqrGA+HQ0/zt--
-
---===============5505045536764271647==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============5505045536764271647==--
+T24gTW9uLCAyMSBPY3QgMjAxOSAxMzo1OToyMyArMDgwMApKYXNvbiBXYW5nIDxqYXNvd2FuZ0By
+ZWRoYXQuY29tPiB3cm90ZToKCj4gT24gMjAxOS8xMC8xOCDkuIvljYgxMDoyMCwgQ29ybmVsaWEg
+SHVjayB3cm90ZToKPiA+IE9uIFRodSwgMTcgT2N0IDIwMTkgMTg6NDg6MzUgKzA4MDAKPiA+IEph
+c29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+IHdyb3RlOgo+ID4gIAo+ID4+IFRoaXMgcGF0
+Y2ggaW50cm9kdWNlcyBhIG5ldyBtZGV2IHRyYW5zcG9ydCBmb3IgdmlydGlvLiBUaGlzIGlzIHVz
+ZWQgdG8KPiA+PiB1c2Uga2VybmVsIHZpcnRpbyBkcml2ZXIgdG8gZHJpdmUgdGhlIG1lZGlhdGVk
+IGRldmljZSB0aGF0IGlzIGNhcGFibGUKPiA+PiBvZiBwb3B1bGF0aW5nIHZpcnRxdWV1ZSBkaXJl
+Y3RseS4KPiA+Pgo+ID4+IEEgbmV3IHZpcnRpby1tZGV2IGRyaXZlciB3aWxsIGJlIHJlZ2lzdGVy
+ZWQgdG8gdGhlIG1kZXYgYnVzLCB3aGVuIGEKPiA+PiBuZXcgdmlydGlvLW1kZXYgZGV2aWNlIGlz
+IHByb2JlZCwgaXQgd2lsbCByZWdpc3RlciB0aGUgZGV2aWNlIHdpdGgKPiA+PiBtZGV2IGJhc2Vk
+IGNvbmZpZyBvcHMuIFRoaXMgbWVhbnMgaXQgaXMgYSBzb2Z0d2FyZSB0cmFuc3BvcnQgYmV0d2Vl
+bgo+ID4+IG1kZXYgZHJpdmVyIGFuZCBtZGV2IGRldmljZS4gVGhlIHRyYW5zcG9ydCB3YXMgaW1w
+bGVtZW50ZWQgdGhyb3VnaAo+ID4+IGRldmljZSBzcGVjaWZpYyBvcHMgd2hpY2ggaXMgYSBwYXJ0
+IG9mIG1kZXZfcGFyZW50X29wcyBub3cuCj4gPj4KPiA+PiBTaWduZWQtb2ZmLWJ5OiBKYXNvbiBX
+YW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29tPgo+ID4+IC0tLQo+ID4+ICAgZHJpdmVycy92aXJ0aW8v
+S2NvbmZpZyAgICAgICB8ICAgNyArCj4gPj4gICBkcml2ZXJzL3ZpcnRpby9NYWtlZmlsZSAgICAg
+IHwgICAxICsKPiA+PiAgIGRyaXZlcnMvdmlydGlvL3ZpcnRpb19tZGV2LmMgfCA0MDkgKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPiA+PiAgIDMgZmlsZXMgY2hhbmdlZCwgNDE3
+IGluc2VydGlvbnMoKykgIAo+ID4gKC4uLikKPiA+ICAKPiA+PiArc3RhdGljIGludCB2aXJ0aW9f
+bWRldl9wcm9iZShzdHJ1Y3QgZGV2aWNlICpkZXYpCj4gPj4gK3sKPiA+PiArCXN0cnVjdCBtZGV2
+X2RldmljZSAqbWRldiA9IG1kZXZfZnJvbV9kZXYoZGV2KTsKPiA+PiArCWNvbnN0IHN0cnVjdCB2
+aXJ0aW9fbWRldl9kZXZpY2Vfb3BzICpvcHMgPSBtZGV2X2dldF9kZXZfb3BzKG1kZXYpOwo+ID4+
+ICsJc3RydWN0IHZpcnRpb19tZGV2X2RldmljZSAqdm1fZGV2Owo+ID4+ICsJaW50IHJjOwo+ID4+
+ICsKPiA+PiArCXZtX2RldiA9IGRldm1fa3phbGxvYyhkZXYsIHNpemVvZigqdm1fZGV2KSwgR0ZQ
+X0tFUk5FTCk7Cj4gPj4gKwlpZiAoIXZtX2RldikKPiA+PiArCQlyZXR1cm4gLUVOT01FTTsKPiA+
+PiArCj4gPj4gKwl2bV9kZXYtPnZkZXYuZGV2LnBhcmVudCA9IGRldjsKPiA+PiArCXZtX2Rldi0+
+dmRldi5kZXYucmVsZWFzZSA9IHZpcnRpb19tZGV2X3JlbGVhc2VfZGV2Owo+ID4+ICsJdm1fZGV2
+LT52ZGV2LmNvbmZpZyA9ICZ2aXJ0aW9fbWRldl9jb25maWdfb3BzOwo+ID4+ICsJdm1fZGV2LT5t
+ZGV2ID0gbWRldjsKPiA+PiArCUlOSVRfTElTVF9IRUFEKCZ2bV9kZXYtPnZpcnRxdWV1ZXMpOwo+
+ID4+ICsJc3Bpbl9sb2NrX2luaXQoJnZtX2Rldi0+bG9jayk7Cj4gPj4gKwo+ID4+ICsJdm1fZGV2
+LT52ZXJzaW9uID0gb3BzLT5nZXRfbWRldl9mZWF0dXJlcyhtZGV2KTsKPiA+PiArCWlmICh2bV9k
+ZXYtPnZlcnNpb24gIT0gVklSVElPX01ERVZfRl9WRVJTSU9OXzEpIHsKPiA+PiArCQlkZXZfZXJy
+KGRldiwgIlZJUlRJT19NREVWX0ZfVkVSU0lPTl8xIGlzIG1hbmRhdG9yeVxuIik7Cj4gPj4gKwkJ
+cmV0dXJuIC1FTlhJTzsKPiA+PiArCX0gIAo+ID4gSG0sIHNvIGhvdyBpcyB0aGF0IG1kZXYgZmVh
+dHVyZXMgaW50ZXJmYWNlIHN1cHBvc2VkIHRvIHdvcms/IElmCj4gPiBWSVJUSU9fTURFVl9GX1ZF
+UlNJT05fMSBpcyBhIGJpdCwgSSB3b3VsZCBleHBlY3QgdGhpcyBjb2RlIHRvIHRlc3QgZm9yCj4g
+PiBpdHMgcHJlc2VuY2UsIGFuZCBub3QgZm9yIGlkZW50aXR5LiAgCj4gCj4gCj4gVGhpcyBzaG91
+bGQgYmUgdXNlZCBieSBkcml2ZXIgdG8gZGV0ZWN0IHRoZSB3aGljaCBzZXRzIG9mIGZ1bmN0aW9u
+cyBhbmQgCj4gdGhlaXIgc2VtYW50aWNzIHRoYXQgY291bGQgYmUgcHJvdmlkZWQgYnkgdGhlIGRl
+dmljZS4gRS5nIHdoZW4gZHJpdmVyIAo+IHN1cHBvcnQgYm90aCB2ZXJzaW9uIDIgYW5kIHZlcnNp
+b24gMSBidXQgZGV2aWNlIG9ubHkgc3VwcG9ydCB2ZXJzaW9uIDEsIAo+IGRyaXZlciBjYW4gc3dp
+dGNoIHRvIHVzZSB2ZXJzaW9uIDEuIEJ0dywgSXMgdGhlcmUgYSBlYXN5IHdheSBmb3IgdG8gdGVz
+dCAKPiBpdHMgcHJlc2VuY2Ugb3IgZG8geW91IG1lYW4gZG9pbmcgc2FuaXR5IHRlc3Rpbmcgb24g
+ZXhpc3RlbmNlIG9mIHRoZSAKPiBtYW5kYXRvcnkgb3BzIHRoYXQgcHJvdmlkZWQgYnkgdGhlIGRl
+dmljZT8KCldoYXQgSSBtZWFudCB3YXMgc29tZXRoaW5nIGxpa2U6CgpmZWF0dXJlcyA9IG9wcy0+
+Z2V0X21kZXZfZmVhdHVyZXMobWRldik7CmlmIChmZWF0dXJlcyAmIFZJUlRJT19NREVWX0ZfVkVS
+U0lPTl8xKQoJdm1fZGV2LT52ZXJzaW9uID0gMTsKZWxzZQoJLy9tb2FuIGFib3V0IG1pc3Npbmcg
+c3VwcG9ydCBmb3IgdmVyc2lvbiAxCgpDYW4gdGhlcmUgYmUgY2xhc3MgaWQgc3BlY2lmaWMgZXh0
+cmEgZmVhdHVyZXMsIG9yIGlzIHRoaXMgb25seSBmb3IgY29yZQpmZWF0dXJlcz8gSWYgdGhlIGxh
+dHRlciwgbWF5YmUgYWxzbyBkbyBzb21ldGhpbmcgbGlrZQoKc3VwcG9ydGVkX2ZlYXR1cmVzID0g
+T1JFRF9MSVNUX09GX0ZFQVRVUkVTOwppZiAoZmVhdHVyZXMgJiB+c3VwcG9ydGVkX2ZlYXR1cmVz
+KQoJLy9tb2FuIGFib3V0IGV4dHJhIGZlYXR1cmUgYml0cwoKPiAKPiAKPiA+Cj4gPiBXaGF0IHdp
+bGwgaGFwcGVuIGlmIHdlIGNvbWUgdXAgd2l0aCBhIHZlcnNpb24gMj8gSWYgdGhpcyBpcyBiYWNr
+d2FyZHMKPiA+IGNvbXBhdGlibGUsIHdpbGwgYm90aCB2ZXJzaW9uIDIgYW5kIHZlcnNpb24gMSBi
+ZSBzZXQ/ICAKPiAKPiAKPiBZZXMsIEkgdGhpbmsgc28sIGFuZCB2ZXJzaW9uIDIgc2hvdWxkIGJl
+IGNvbnNpZGVyZWQgYXMgc29tZSBleHRlbnNpb25zIAo+IG9mIHZlcnNpb24gMS4gSWYgaXQncyBj
+b21wbGV0ZWx5LCBpdCBzaG91bGQgdXNlIGEgbmV3IGNsYXNzIGlkLgoKT2ssIHRoYXQgbWFrZXMg
+c2Vuc2UuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpW
+aXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91
+bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlz
+dGluZm8vdmlydHVhbGl6YXRpb24=
