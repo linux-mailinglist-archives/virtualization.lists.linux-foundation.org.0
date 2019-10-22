@@ -2,22 +2,22 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 251BDDFF00
-	for <lists.virtualization@lfdr.de>; Tue, 22 Oct 2019 10:06:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE96EDFF03
+	for <lists.virtualization@lfdr.de>; Tue, 22 Oct 2019 10:06:30 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id ADF161370;
-	Tue, 22 Oct 2019 08:05:57 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 2829E1362;
+	Tue, 22 Oct 2019 08:06:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 861A1135E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 24901135E
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 22 Oct 2019 08:05:56 +0000 (UTC)
+	Tue, 22 Oct 2019 08:05:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
-	[205.139.110.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 176FC87E
+Received: from us-smtp-delivery-1.mimecast.com
+	(us-smtp-delivery-1.mimecast.com [205.139.110.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 948F087E
 	for <virtualization@lists.linux-foundation.org>;
 	Tue, 22 Oct 2019 08:05:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
@@ -26,35 +26,35 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	to:to:cc:cc:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
 	in-reply-to:in-reply-to:references:references;
-	bh=GtZmqzFgxn1pwN65/xIkar281NrAbaBtoHehY0Fvb0U=;
-	b=hlM8DH4ed8/ZSpdtugPPcRsq+kjXUS37ilg17f9eNDilkfM5kyYzP1vJ07gET1tvRABVqg
-	qrA/zZ3+QNhAMPDTSqYypN4nmBxnUawUq5OnMy4hUiC2nncMgD4aIs7E292yHEl/Lqlo2J
-	r+43S8rptKA1T3FckuENd7GTlfz3x0Q=
+	bh=oVc09gtJkfw81t/CSZzvN6PZuWLwf46NNAtbbfhMjiE=;
+	b=KirD8HORz3nT3Gx4z84Y5oKWUyo5iusgwRfANpm61B9HH9yGl7O73Hm9a/GlNXaz9RRQg3
+	Pc8Vt4pE//f9aAv65k5GuYQJnz3s5+29Lm4sEXgRzCZs/hiTVKjCKTflmjUOIfFX2Ho8R9
+	e02Qy9tM9W/xZNMDnNn1v/dQMty9cgg=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-78-quF3-_HKNCqdkw3peQ_QqA-1; Tue, 22 Oct 2019 04:05:51 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
+	us-mta-192-r4AlLiXzOFqTnJCqM6tt0Q-1; Tue, 22 Oct 2019 04:05:51 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2D687800D56;
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8135B1800D6A;
 	Tue, 22 Oct 2019 08:05:50 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-43.ams2.redhat.com
 	[10.36.116.43])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 711B65C22C;
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 8F67819481;
 	Tue, 22 Oct 2019 08:05:47 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
-	id BFBCF9D76; Tue, 22 Oct 2019 10:05:46 +0200 (CEST)
+	id D7FC49D31; Tue, 22 Oct 2019 10:05:46 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH 3/5] drm/virtio: fix byteorder handling in
-	virtio_gpu_cmd_transfer_{from, to}_host_3d functions
-Date: Tue, 22 Oct 2019 10:05:44 +0200
-Message-Id: <20191022080546.19769-4-kraxel@redhat.com>
+Subject: [PATCH 4/5] drm/virtio: Simplify virtio_gpu_primary_plane_update
+	workflow.
+Date: Tue, 22 Oct 2019 10:05:45 +0200
+Message-Id: <20191022080546.19769-5-kraxel@redhat.com>
 In-Reply-To: <20191022080546.19769-1-kraxel@redhat.com>
 References: <20191022080546.19769-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-MC-Unique: quF3-_HKNCqdkw3peQ_QqA-1
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-MC-Unique: r4AlLiXzOFqTnJCqM6tt0Q-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
@@ -81,51 +81,108 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Be consistent with the rest of the code base.
+Return early for the no framebuffer (or disabled output) case.
+Results in a simpler code flow for the remaining cases.
 No functional change.
-
-In theory this change is incompatible on bigendian machines,
-but in practice 3d acceleration is supported only on little
-endian machines, so the affected code paths never run on
-bigendian machines.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/gpu/drm/virtio/virtgpu_vq.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/virtio/virtgpu_plane.c | 62 ++++++++++++++------------
+ 1 file changed, 33 insertions(+), 29 deletions(-)
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-index 74ad3bc3ebe8..0bf60914ece2 100644
---- a/drivers/gpu/drm/virtio/virtgpu_vq.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-@@ -987,7 +987,12 @@ void virtio_gpu_cmd_transfer_to_host_3d(struct virtio_gpu_device *vgdev,
- 	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_TRANSFER_TO_HOST_3D);
- 	cmd_p->hdr.ctx_id = cpu_to_le32(ctx_id);
- 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
--	cmd_p->box = *box;
-+	cmd_p->box.x = cpu_to_le32(box->x);
-+	cmd_p->box.y = cpu_to_le32(box->y);
-+	cmd_p->box.z = cpu_to_le32(box->z);
-+	cmd_p->box.w = cpu_to_le32(box->w);
-+	cmd_p->box.h = cpu_to_le32(box->h);
-+	cmd_p->box.d = cpu_to_le32(box->d);
- 	cmd_p->offset = cpu_to_le64(offset);
- 	cmd_p->level = cpu_to_le32(level);
+diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+index 390524143139..0b5a760bc293 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_plane.c
++++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+@@ -110,7 +110,6 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
+ 	struct virtio_gpu_output *output = NULL;
+ 	struct virtio_gpu_framebuffer *vgfb;
+ 	struct virtio_gpu_object *bo;
+-	uint32_t handle;
  
-@@ -1013,7 +1018,12 @@ void virtio_gpu_cmd_transfer_from_host_3d(struct virtio_gpu_device *vgdev,
- 	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_TRANSFER_FROM_HOST_3D);
- 	cmd_p->hdr.ctx_id = cpu_to_le32(ctx_id);
- 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
--	cmd_p->box = *box;
-+	cmd_p->box.x = cpu_to_le32(box->x);
-+	cmd_p->box.y = cpu_to_le32(box->y);
-+	cmd_p->box.z = cpu_to_le32(box->z);
-+	cmd_p->box.w = cpu_to_le32(box->w);
-+	cmd_p->box.h = cpu_to_le32(box->h);
-+	cmd_p->box.d = cpu_to_le32(box->d);
- 	cmd_p->offset = cpu_to_le64(offset);
- 	cmd_p->level = cpu_to_le32(level);
+ 	if (plane->state->crtc)
+ 		output = drm_crtc_to_virtio_gpu_output(plane->state->crtc);
+@@ -119,47 +118,52 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
+ 	if (WARN_ON(!output))
+ 		return;
  
+-	if (plane->state->fb && output->enabled) {
+-		vgfb = to_virtio_gpu_framebuffer(plane->state->fb);
+-		bo = gem_to_virtio_gpu_obj(vgfb->base.obj[0]);
+-		handle = bo->hw_res_handle;
+-		if (bo->dumb) {
+-			struct virtio_gpu_object_array *objs;
++	if (!plane->state->fb || !output->enabled) {
++		DRM_DEBUG("nofb\n");
++		virtio_gpu_cmd_set_scanout(vgdev, output->index, 0,
++					   plane->state->src_w >> 16,
++					   plane->state->src_h >> 16,
++					   0, 0);
++		return;
++	}
++
++	vgfb = to_virtio_gpu_framebuffer(plane->state->fb);
++	bo = gem_to_virtio_gpu_obj(vgfb->base.obj[0]);
++	if (bo->dumb) {
++		struct virtio_gpu_object_array *objs;
+ 
+-			objs = virtio_gpu_array_alloc(1);
+-			if (!objs)
+-				return;
+-			virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+-			virtio_gpu_cmd_transfer_to_host_2d
+-				(vgdev, 0,
+-				 plane->state->src_w >> 16,
+-				 plane->state->src_h >> 16,
+-				 plane->state->src_x >> 16,
+-				 plane->state->src_y >> 16,
+-				 objs, NULL);
+-		}
+-	} else {
+-		handle = 0;
++		objs = virtio_gpu_array_alloc(1);
++		if (!objs)
++			return;
++		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
++		virtio_gpu_cmd_transfer_to_host_2d
++			(vgdev, 0,
++			 plane->state->src_w >> 16,
++			 plane->state->src_h >> 16,
++			 plane->state->src_x >> 16,
++			 plane->state->src_y >> 16,
++			 objs, NULL);
+ 	}
+ 
+-	DRM_DEBUG("handle 0x%x, crtc %dx%d+%d+%d, src %dx%d+%d+%d\n", handle,
++	DRM_DEBUG("handle 0x%x, crtc %dx%d+%d+%d, src %dx%d+%d+%d\n",
++		  bo->hw_res_handle,
+ 		  plane->state->crtc_w, plane->state->crtc_h,
+ 		  plane->state->crtc_x, plane->state->crtc_y,
+ 		  plane->state->src_w >> 16,
+ 		  plane->state->src_h >> 16,
+ 		  plane->state->src_x >> 16,
+ 		  plane->state->src_y >> 16);
+-	virtio_gpu_cmd_set_scanout(vgdev, output->index, handle,
++	virtio_gpu_cmd_set_scanout(vgdev, output->index,
++				   bo->hw_res_handle,
+ 				   plane->state->src_w >> 16,
+ 				   plane->state->src_h >> 16,
+ 				   plane->state->src_x >> 16,
+ 				   plane->state->src_y >> 16);
+-	if (handle)
+-		virtio_gpu_cmd_resource_flush(vgdev, handle,
+-					      plane->state->src_x >> 16,
+-					      plane->state->src_y >> 16,
+-					      plane->state->src_w >> 16,
+-					      plane->state->src_h >> 16);
++	virtio_gpu_cmd_resource_flush(vgdev, bo->hw_res_handle,
++				      plane->state->src_x >> 16,
++				      plane->state->src_y >> 16,
++				      plane->state->src_w >> 16,
++				      plane->state->src_h >> 16);
+ }
+ 
+ static int virtio_gpu_cursor_prepare_fb(struct drm_plane *plane,
 -- 
 2.18.1
 
