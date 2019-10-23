@@ -2,80 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67C04E14C6
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 10:53:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88BF1E1679
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 11:44:04 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id B6E48C87;
-	Wed, 23 Oct 2019 08:53:26 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BB32EEA2;
+	Wed, 23 Oct 2019 09:43:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 23A55C77
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 68F57C96
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 08:53:25 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1C59E87E
+	Wed, 23 Oct 2019 09:43:56 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8074814D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 08:53:24 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id c2so15882641wrr.10
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 01:53:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=c15b8lNHKKPEisLr5Qnb32a9fHBq7eoEYGPC9AHM6uM=;
-	b=aADuctuVh+iBZgH6KmBw1uYsoBaMygfjSaq4gUfEbVAoFI5tX8ASjl0+GFW9mmhX4R
-	ZjW5nE9aypoRimDAoES9vBU8SzEm6vG3VYtmWiPKado050bhrE1iY+Kz/EnISTSOwgVk
-	sgc8fLv1AzXyewUbTZbE4izySIpyD0ZpLNHsM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:references:mime-version:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=c15b8lNHKKPEisLr5Qnb32a9fHBq7eoEYGPC9AHM6uM=;
-	b=lBMwMkmE1aMzkV2UBPhA7Np5IhXpk/2/aXR+WJJrWYO+srwrp6aYqidhOdYkIep1Id
-	RiURUTMG6yydI/sq7ojCH4vvh+ajUQNz3XpHM7XM77pck+01MIQ/9Thr480MfLqLJo2p
-	k6Er8g2tdZKtNyA+4eXkmUOUvnZIDGaFfewgJS1CSy/YRZEuGnJCOm2xZvkOz/kY1FjK
-	pnKvC9iyotDQNTjGzqcgRz89ku/Jo+RhgnOuO/pYqiD28QO1Ko5GBgElfqelSHuSpuGh
-	IOETzA0NktwSqqexUWEzhZi/SKQCKQGX3dMwSZuuuXisiiohj2aEiC/aSUlDr+i5oqIv
-	w7iA==
-X-Gm-Message-State: APjAAAXfsNw5itYS93OzOMhDnMQ3yHy1w3XFX52L9/EmVNOJrtjkfn/M
-	M8PqtzNntUoUJUwLT6Dsia10PQ==
-X-Google-Smtp-Source: APXvYqzhSCBtM2XktGWC56wZzj/ptZmdDpZVVDT2xUI+aDXlHXbZfa/6Bw7c+Q+uGuv3Zca7oaVxhQ==
-X-Received: by 2002:adf:e2cc:: with SMTP id d12mr7456738wrj.345.1571820802541; 
-	Wed, 23 Oct 2019 01:53:22 -0700 (PDT)
-Received: from phenom.ffwll.local (212-51-149-96.fiber7.init7.net.
-	[212.51.149.96]) by smtp.gmail.com with ESMTPSA id
-	p7sm19162808wma.34.2019.10.23.01.53.21
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 23 Oct 2019 01:53:21 -0700 (PDT)
-Date: Wed, 23 Oct 2019 10:53:19 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH] drm/simple-kms: Standardize arguments for callbacks
-Message-ID: <20191023085319.GS11828@phenom.ffwll.local>
-References: <20191022155536.27939-1-daniel.vetter@ffwll.ch>
-	<56867554-5169-e249-8e55-043d07be3e99@suse.de>
-	<CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
-	<64a4e824-f730-2ac4-0b02-4ead2bce4b69@suse.de>
+	Wed, 23 Oct 2019 09:43:55 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id CD048B17E;
+	Wed, 23 Oct 2019 09:43:51 +0000 (UTC)
+Date: Wed, 23 Oct 2019 11:43:45 +0200
+From: Michal Hocko <mhocko@kernel.org>
+To: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH RFC v3 6/9] mm: Allow to offline PageOffline() pages with
+	a reference count of 0
+Message-ID: <20191023094345.GL754@dhcp22.suse.cz>
+References: <20191016114321.GX317@dhcp22.suse.cz>
+	<36fef317-78e3-0500-43ba-f537f9a6fea4@redhat.com>
+	<20191016140350.GD317@dhcp22.suse.cz>
+	<7c7bef01-f904-904a-b0a7-f7b514b8bda8@redhat.com>
+	<20191018081524.GD5017@dhcp22.suse.cz>
+	<83d0a961-952d-21e4-74df-267912b7b6fa@redhat.com>
+	<20191018111843.GH5017@dhcp22.suse.cz>
+	<709d39aa-a7ba-97aa-e66b-e2fec2fdf3c4@redhat.com>
+	<20191022122326.GL9379@dhcp22.suse.cz>
+	<b4be42a4-cbfc-8706-cc94-26211ddcbe4a@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <64a4e824-f730-2ac4-0b02-4ead2bce4b69@suse.de>
-X-Operating-System: Linux phenom 5.2.0-2-amd64 
+In-Reply-To: <b4be42a4-cbfc-8706-cc94-26211ddcbe4a@redhat.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Daniel Vetter <daniel.vetter@ffwll.ch>,
-	DRI Development <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
-	NET..." <virtualization@lists.linux-foundation.org>,
-	Daniel Vetter <daniel.vetter@intel.com>,
-	Emil Velikov <emil.velikov@collabora.com>
+Cc: Pingfan Liu <kernelfans@gmail.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Alexander Potapenko <glider@google.com>,
+	Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+	Ira Weiny <ira.weiny@intel.com>, Andrea Arcangeli <aarcange@redhat.com>,
+	Stephen Rothwell <sfr@canb.auug.org.au>, Yu Zhao <yuzhao@google.com>,
+	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Pavel Tatashin <pavel.tatashin@microsoft.com>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Mike Rapoport <rppt@linux.vnet.ibm.com>, Qian Cai <cai@lca.pw>,
+	Andrey Ryabinin <aryabinin@virtuozzo.com>,
+	Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+	Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>,
+	Yang Shi <yang.shi@linux.alibaba.com>,
+	linux-kernel@vger.kernel.org, Minchan Kim <minchan@kernel.org>,
+	Wei Yang <richardw.yang@linux.intel.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -87,246 +79,131 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Oct 23, 2019 at 08:47:57AM +0200, Thomas Zimmermann wrote:
-> Hi
-> =
-
-> Am 22.10.19 um 21:03 schrieb Daniel Vetter:
-> > On Tue, Oct 22, 2019 at 7:16 PM Thomas Zimmermann <tzimmermann@suse.de>=
- wrote:
+On Tue 22-10-19 16:02:09, David Hildenbrand wrote:
+[...]
+> >>> MEM_CANCEL_OFFLINE could gain the reference back to balance the
+> >>> MEM_GOING_OFFLINE step.
 > >>
-> >> Hi,
+> >> The pages are already unisolated and could be used by the buddy. But again,
+> >> I think you have an idea that tries to avoid putting pages to the buddy.
+> > 
+> > Yeah, set_page_count(page, 0) if you do not want to release that page
+> > from the notifier context to reflect that the page is ok to be offlined
+> > with the rest.
+> >   
+> 
+> I neither see how you deal with __test_page_isolated_in_pageblock() nor with
+> __offline_isolated_pages(). Sorry, but what I read is incomplete and you
+> probably have a full proposal in your head. Please read below how I think
+> you want to solve it.
+
+Yeah, sorry that I am throwing incomplete ideas at you. I am just trying
+to really nail down how to deal with reference counting here because it
+is an important aspect.
+ 
+> >>> explicit control via the reference count which is the standard way to
+> >>> control the struct page life cycle.
+> >>>
+> >>> Anyway hooking into __put_page (which tends to be a hot path with
+> >>> something that is barely used on most systems) doesn't sound nice to me.
+> >>> This is the whole point which made me think about the whole reference
+> >>> count approach in the first place.
 > >>
-> >> there are two types of callbacks in struct
-> >> drm_simple_display_pipe_funcs: functions that are genuine to simple KM=
-S,
-> >> and functions that are merely forwarded from another structure (crtc,
-> >> plane, etc).
+> >> Again, the race I think that is possible
 > >>
-> >> In the former category are enable(), disable(), check(), and update().
-> >> Those should probably receive a simple display pipe as their first arg=
-ument.
-> > =
+> >> somebody: get_page_unless_zero(page)
+> >> virtio_mem: page_ref_dec(pfn_to_page(pfn)
+> >> somebody: put_page() -> straight to the buddy
+> > 
+> > Who is that somebody? I thought that it is only the owner/driver to have
+> > a control over the page. Also the above is not possible as long as the
+> > owner/driver keeps a reference to the PageOffline page throughout the
+> > time it is marked that way.
+> >   
+> 
+> I was reading
+> 
+> include/linux/mm_types.h:
+> 
+> "If you want to use the refcount field, it must be used in such a way
+>  that other CPUs temporarily incrementing and then decrementing the
+>  refcount does not cause problems"
+> 
+> And that made me think "anybody can go ahead and try get_page_unless_zero()".
+> 
+> If I am missing something here and this can indeed not happen (e.g.,
+> because PageOffline() pages are never mapped to user space), then I'll
+> happily remove this code.
 
-> > mode_valid _very_ much belongs to this category too, since there's
-> > mode_valid hooks also on other objects. But simple pipe helper
-> > condenses that down to one mode_valid hook (we could also put the
-> > mode_valid onto encoder, wouldn't change anything).
-> > =
+The point is that if the owner of the page is holding the only reference
+to the page then it is clear that nothing like that's happened.
+ 
+[...]
 
-> >> In the latter category are mode_valid(), prepare_fb(), cleanup_fb(),
-> >> enable_vblank(), and disable_vblank(). IMHO those functions should
-> >> receive a pointer to the original structure as their first argument.
-> >> This type provides the context in which the operations make sense. (Ev=
-en
-> >> their documentation already refers to the original structure.)
-> > =
+> Let's recap what I suggest:
+> 
+> "PageOffline() pages that have a reference count of 0 will be treated
+>  like free pages when offlining pages, allowing the containing memory
+>  block to get offlined. In case a driver wants to revive such a page, it
+>  has to synchronize against memory onlining/offlining (e.g., using memory
+>  notifiers) while incrementing the reference count. Also, a driver that
+>  relies in this feature is aware that re-onlining the memory will require
+>  to re-set the pages PageOffline() - e.g., via the online_page_callback_t."
 
-> > Now on those you can maybe make a case that they only exist in one
-> > object. But the entire point of simple helpers was to condense the zoo
-> > of drm types down to one. Only reason you don't also get a
-> > drm_simple_display_pipe_state is that this one would be a bit more
-> > work to make work correctly. If we full on leak all the underlying
-> > objects, then you might as well set them up yourself and set up all
-> > the hooks, it's just a few more lines of code.
-> > =
+OK
 
-> > Imo for simple pipe we should go more into that direction, not less.
-> > =
+[...]
+> d) __put_page() is modified to not return pages to the buddy in any
+>    case as a safety net. We might be able to get rid of that.
 
-> >> I admit that not all are as shareable as prepare_fb() and enable_fb().
-> >> But what else than boiler-plate wrappers do we get from simple display
-> >> pipe here?
-> > =
+I do not like exactly this part
+ 
+> What I think you suggest:
+> 
+> a) has_unmovable_pages() skips over all PageOffline() pages.
+>    This results in a lot of false negatives when trying to offline. Might be ok.
+> 
+> b) The driver decrements the reference count of the PageOffline pages
+>    in MEM_GOING_OFFLINE.
 
-> > Boiler plate wrappers is pretty much the entire point of simple pipe
-> > helpers. Anytime you're interested in the things it abstracts away
-> > (crtc, plane, encoder) you probably want your own atomic
-> > implementation.
-> =
+Well, driver should make the page unreferenced or fail. What is done
+really depends on the specific driver
 
-> I was speaking of boiler-plate code in drivers and other helpers (e.g.,
-> drm_gem_fb_simple_display_pipe_prepare_fb() )
-> =
+> c) The driver increments the reference count of the PageOffline pages
+>    in MEM_CANCEL_OFFLINE. One issue might be that the pages are no longer
+>    isolated once we get that call. Might be ok.
 
-> TBH I don't think it is possible to build and use simple pipe without
-> exposing the underlying primitives (crtc, plane, connector). This would
-> require a completely separate set of atomic helpers. IMHO the current
-> simple pipe is a mid-layer and comes with typical mid-layer problems.
+Only previous PageBuddy pages are returned to the allocator IIRC. Mostly
+because of MovablePage()
 
-Helpers can be midlayers, as long as their optional. And for simple I
-agree it's not a perfect illusion, it's a tradeoff between having a huge
-helper library that remaps everything and still enabling useful code and
-complexity savings in the tiny drivers.
+> d) How to make __test_page_isolated_in_pageblock() succeed?
+>    Like I propose in this patch (PageOffline() + refcount == 0)?
 
-Maybe another rule of thumb: If your driver has more than one source file,
-simple pipe is maybe not what you're looking for. Exceptions apply ofc.
-simple pipe was designed for drm/tiny, and it utterly excels at that. But
-that doesn't make it a general purpose tool.
+Yep
 
-> Anyway, given your rational for the current design, I'll update my
-> recent patches for prepare_fb() to support simple pipe.
-> =
+> e) How to make __offline_isolated_pages() succeed?
+>    Like I propose in this patch (PageOffline() + refcount == 0)?
 
-> For this patch
-> =
+Simply skip over PageOffline pages. Reference count should never be != 0
+at this stage.
+ 
+> In summary, is what you suggest simply delaying setting the reference count to 0
+> in MEM_GOING_OFFLINE instead of right away when the driver unpluggs the pages?
 
->   Acked-By: Thomas Zimmermann <tzimmermann@suse.de>
+Yes
 
-Thanks, will apply.
--Daniel
+> What's the big benefit you see and I fail to see?
 
-> =
-
-> Best regards
-> Thomas
-> =
-
-> > conversion is a good fit, it's not meant to be useful for all small
-> > drivers. Only for the _really_ simple ones.
-> > =
-
-> > Otherwise if we readd all the bells and whistles to simple pipe
-> > helpers, then we just end back where we started. That's also why I
-> > personally think explicit simple wrappers would fit better, instead of
-> > wrestling the prepare/cleanup_fb functions to match full atomic
-> > helpers.
-> > -Daniel
-> > =
-
-> >>
-> >> Best regards
-> >> Thomas
-> >>
-> >> Am 22.10.19 um 17:55 schrieb Daniel Vetter:
-> >>> Passing the wrong type feels icky, everywhere else we use the pipe as
-> >>> the first parameter. Spotted while discussing patches with Thomas
-> >>> Zimmermann.
-> >>>
-> >>> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> >>> Cc: Noralf Tr=F8nnes <noralf@tronnes.org>
-> >>> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> >>> Cc: Eric Anholt <eric@anholt.net>
-> >>> Cc: Emil Velikov <emil.velikov@collabora.com>
-> >>> Cc: virtualization@lists.linux-foundation.org
-> >>> Cc: Linus Walleij <linus.walleij@linaro.org>
-> >>> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> >>> ---
-> >>>  drivers/gpu/drm/cirrus/cirrus.c         | 2 +-
-> >>>  drivers/gpu/drm/drm_simple_kms_helper.c | 2 +-
-> >>>  drivers/gpu/drm/pl111/pl111_display.c   | 4 ++--
-> >>>  include/drm/drm_simple_kms_helper.h     | 2 +-
-> >>>  4 files changed, 5 insertions(+), 5 deletions(-)
-> >>>
-> >>> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus=
-/cirrus.c
-> >>> index 7d08d067e1a4..248c9f765c45 100644
-> >>> --- a/drivers/gpu/drm/cirrus/cirrus.c
-> >>> +++ b/drivers/gpu/drm/cirrus/cirrus.c
-> >>> @@ -390,7 +390,7 @@ static int cirrus_conn_init(struct cirrus_device =
-*cirrus)
-> >>>  /* -----------------------------------------------------------------=
-- */
-> >>>  /* cirrus (simple) display pipe                                     =
-       */
-> >>>
-> >>> -static enum drm_mode_status cirrus_pipe_mode_valid(struct drm_crtc *=
-crtc,
-> >>> +static enum drm_mode_status cirrus_pipe_mode_valid(struct drm_simple=
-_display_pipe *pipe,
-> >>>                                                  const struct drm_dis=
-play_mode *mode)
-> >>>  {
-> >>>       if (cirrus_check_size(mode->hdisplay, mode->vdisplay, NULL) < 0)
-> >>> diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/dr=
-m/drm_simple_kms_helper.c
-> >>> index 046055719245..15fb516ae2d8 100644
-> >>> --- a/drivers/gpu/drm/drm_simple_kms_helper.c
-> >>> +++ b/drivers/gpu/drm/drm_simple_kms_helper.c
-> >>> @@ -43,7 +43,7 @@ drm_simple_kms_crtc_mode_valid(struct drm_crtc *crt=
-c,
-> >>>               /* Anything goes */
-> >>>               return MODE_OK;
-> >>>
-> >>> -     return pipe->funcs->mode_valid(crtc, mode);
-> >>> +     return pipe->funcs->mode_valid(pipe, mode);
-> >>>  }
-> >>>
-> >>>  static int drm_simple_kms_crtc_check(struct drm_crtc *crtc,
-> >>> diff --git a/drivers/gpu/drm/pl111/pl111_display.c b/drivers/gpu/drm/=
-pl111/pl111_display.c
-> >>> index 024771a4083e..703ddc803c55 100644
-> >>> --- a/drivers/gpu/drm/pl111/pl111_display.c
-> >>> +++ b/drivers/gpu/drm/pl111/pl111_display.c
-> >>> @@ -48,10 +48,10 @@ irqreturn_t pl111_irq(int irq, void *data)
-> >>>  }
-> >>>
-> >>>  static enum drm_mode_status
-> >>> -pl111_mode_valid(struct drm_crtc *crtc,
-> >>> +pl111_mode_valid(struct drm_simple_display_pipe *pipe,
-> >>>                const struct drm_display_mode *mode)
-> >>>  {
-> >>> -     struct drm_device *drm =3D crtc->dev;
-> >>> +     struct drm_device *drm =3D pipe->crtc.dev;
-> >>>       struct pl111_drm_dev_private *priv =3D drm->dev_private;
-> >>>       u32 cpp =3D priv->variant->fb_bpp / 8;
-> >>>       u64 bw;
-> >>> diff --git a/include/drm/drm_simple_kms_helper.h b/include/drm/drm_si=
-mple_kms_helper.h
-> >>> index 4d89cd0a60db..15afee9cf049 100644
-> >>> --- a/include/drm/drm_simple_kms_helper.h
-> >>> +++ b/include/drm/drm_simple_kms_helper.h
-> >>> @@ -49,7 +49,7 @@ struct drm_simple_display_pipe_funcs {
-> >>>        *
-> >>>        * drm_mode_status Enum
-> >>>        */
-> >>> -     enum drm_mode_status (*mode_valid)(struct drm_crtc *crtc,
-> >>> +     enum drm_mode_status (*mode_valid)(struct drm_simple_display_pi=
-pe *pipe,
-> >>>                                          const struct drm_display_mod=
-e *mode);
-> >>>
-> >>>       /**
-> >>>
-> >>
-> >> --
-> >> Thomas Zimmermann
-> >> Graphics Driver Developer
-> >> SUSE Software Solutions Germany GmbH
-> >> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
-> >> (HRB 36809, AG N=FCrnberg)
-> >> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
-> >>
-> > =
-
-> > =
-
-> =
-
-> -- =
-
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
-> (HRB 36809, AG N=FCrnberg)
-> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
-> =
-
-
-
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Aparat from no hooks into __put_page it is also an explicit control over
+the page via reference counting. Do you see any downsides?
+-- 
+Michal Hocko
+SUSE Labs
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
