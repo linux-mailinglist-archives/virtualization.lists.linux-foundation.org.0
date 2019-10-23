@@ -2,72 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id A487DE126C
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 08:48:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E40EE12D9
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 09:11:07 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9CCD1BB3;
-	Wed, 23 Oct 2019 06:48:06 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 478EAB8F;
+	Wed, 23 Oct 2019 07:11:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2D5B5B88
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id F3845B6D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 06:48:05 +0000 (UTC)
+	Wed, 23 Oct 2019 07:10:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 001878A2
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 422208A2
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 06:48:03 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id 02D2EB2BF;
-	Wed, 23 Oct 2019 06:48:01 +0000 (UTC)
-Subject: Re: [PATCH] drm/simple-kms: Standardize arguments for callbacks
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-References: <20191022155536.27939-1-daniel.vetter@ffwll.ch>
-	<56867554-5169-e249-8e55-043d07be3e99@suse.de>
-	<CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
-	mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
-	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
-	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
-	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
-	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
-	AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
-	BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
-	Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
-	irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
-	clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
-	mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
-	KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
-	Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
-	UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
-	RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
-	dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
-	ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
-	12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
-	wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
-	h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
-	n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
-	aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
-	HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
-	3H26qrE=
-Message-ID: <64a4e824-f730-2ac4-0b02-4ead2bce4b69@suse.de>
-Date: Wed, 23 Oct 2019 08:47:57 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.1
+	Wed, 23 Oct 2019 07:10:57 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	23 Oct 2019 00:10:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.68,219,1569308400"; d="scan'208";a="372790337"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+	by orsmga005.jf.intel.com with ESMTP; 23 Oct 2019 00:10:54 -0700
+Date: Wed, 23 Oct 2019 15:07:47 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v2] vhost: introduce mdev based hardware backend
+Message-ID: <20191023070747.GA30533@___>
+References: <20191022095230.2514-1-tiwei.bie@intel.com>
+	<47a572fd-5597-1972-e177-8ee25ca51247@redhat.com>
+	<20191023030253.GA15401@___>
+	<ac36f1e3-b972-71ac-fe0c-3db03e016dcf@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
+Content-Disposition: inline
+In-Reply-To: <ac36f1e3-b972-71ac-fe0c-3db03e016dcf@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Daniel Vetter <daniel.vetter@intel.com>,
-	Emil Velikov <emil.velikov@collabora.com>,
-	DRI Development <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
-	NET..." <virtualization@lists.linux-foundation.org>
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	zhihong.wang@intel.com, maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,264 +60,112 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4008987601348081600=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============4008987601348081600==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="3738eZazcuctdTVEnimlhMqC7srKkdmvs"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---3738eZazcuctdTVEnimlhMqC7srKkdmvs
-Content-Type: multipart/mixed; boundary="IDpWwrnJOX80L69oW7hJJsPBaVOSySCT3";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Cc: DRI Development <dri-devel@lists.freedesktop.org>,
- "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>,
- Emil Velikov <emil.velikov@collabora.com>
-Message-ID: <64a4e824-f730-2ac4-0b02-4ead2bce4b69@suse.de>
-Subject: Re: [PATCH] drm/simple-kms: Standardize arguments for callbacks
-References: <20191022155536.27939-1-daniel.vetter@ffwll.ch>
- <56867554-5169-e249-8e55-043d07be3e99@suse.de>
- <CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
-In-Reply-To: <CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
-
---IDpWwrnJOX80L69oW7hJJsPBaVOSySCT3
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-Am 22.10.19 um 21:03 schrieb Daniel Vetter:
-> On Tue, Oct 22, 2019 at 7:16 PM Thomas Zimmermann <tzimmermann@suse.de>=
- wrote:
->>
->> Hi,
->>
->> there are two types of callbacks in struct
->> drm_simple_display_pipe_funcs: functions that are genuine to simple KM=
-S,
->> and functions that are merely forwarded from another structure (crtc,
->> plane, etc).
->>
->> In the former category are enable(), disable(), check(), and update().=
-
->> Those should probably receive a simple display pipe as their first arg=
-ument.
->=20
-> mode_valid _very_ much belongs to this category too, since there's
-> mode_valid hooks also on other objects. But simple pipe helper
-> condenses that down to one mode_valid hook (we could also put the
-> mode_valid onto encoder, wouldn't change anything).
->=20
->> In the latter category are mode_valid(), prepare_fb(), cleanup_fb(),
->> enable_vblank(), and disable_vblank(). IMHO those functions should
->> receive a pointer to the original structure as their first argument.
->> This type provides the context in which the operations make sense. (Ev=
-en
->> their documentation already refers to the original structure.)
->=20
-> Now on those you can maybe make a case that they only exist in one
-> object. But the entire point of simple helpers was to condense the zoo
-> of drm types down to one. Only reason you don't also get a
-> drm_simple_display_pipe_state is that this one would be a bit more
-> work to make work correctly. If we full on leak all the underlying
-> objects, then you might as well set them up yourself and set up all
-> the hooks, it's just a few more lines of code.
->=20
-> Imo for simple pipe we should go more into that direction, not less.
->=20
->> I admit that not all are as shareable as prepare_fb() and enable_fb().=
-
->> But what else than boiler-plate wrappers do we get from simple display=
-
->> pipe here?
->=20
-> Boiler plate wrappers is pretty much the entire point of simple pipe
-> helpers. Anytime you're interested in the things it abstracts away
-> (crtc, plane, encoder) you probably want your own atomic
-> implementation.
-
-I was speaking of boiler-plate code in drivers and other helpers (e.g.,
-drm_gem_fb_simple_display_pipe_prepare_fb() )
-
-TBH I don't think it is possible to build and use simple pipe without
-exposing the underlying primitives (crtc, plane, connector). This would
-require a completely separate set of atomic helpers. IMHO the current
-simple pipe is a mid-layer and comes with typical mid-layer problems.
-
-Anyway, given your rational for the current design, I'll update my
-recent patches for prepare_fb() to support simple pipe.
-
-For this patch
-
-  Acked-By: Thomas Zimmermann <tzimmermann@suse.de>
-
-Best regards
-Thomas
-
-> conversion is a good fit, it's not meant to be useful for all small
-> drivers. Only for the _really_ simple ones.
->=20
-> Otherwise if we readd all the bells and whistles to simple pipe
-> helpers, then we just end back where we started. That's also why I
-> personally think explicit simple wrappers would fit better, instead of
-> wrestling the prepare/cleanup_fb functions to match full atomic
-> helpers.
-> -Daniel
->=20
->>
->> Best regards
->> Thomas
->>
->> Am 22.10.19 um 17:55 schrieb Daniel Vetter:
->>> Passing the wrong type feels icky, everywhere else we use the pipe as=
-
->>> the first parameter. Spotted while discussing patches with Thomas
->>> Zimmermann.
->>>
->>> Cc: Thomas Zimmermann <tzimmermann@suse.de>
->>> Cc: Noralf Tr=C3=B8nnes <noralf@tronnes.org>
->>> Cc: Gerd Hoffmann <kraxel@redhat.com>
->>> Cc: Eric Anholt <eric@anholt.net>
->>> Cc: Emil Velikov <emil.velikov@collabora.com>
->>> Cc: virtualization@lists.linux-foundation.org
->>> Cc: Linus Walleij <linus.walleij@linaro.org>
->>> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
->>> ---
->>>  drivers/gpu/drm/cirrus/cirrus.c         | 2 +-
->>>  drivers/gpu/drm/drm_simple_kms_helper.c | 2 +-
->>>  drivers/gpu/drm/pl111/pl111_display.c   | 4 ++--
->>>  include/drm/drm_simple_kms_helper.h     | 2 +-
->>>  4 files changed, 5 insertions(+), 5 deletions(-)
->>>
->>> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus=
-/cirrus.c
->>> index 7d08d067e1a4..248c9f765c45 100644
->>> --- a/drivers/gpu/drm/cirrus/cirrus.c
->>> +++ b/drivers/gpu/drm/cirrus/cirrus.c
->>> @@ -390,7 +390,7 @@ static int cirrus_conn_init(struct cirrus_device =
-*cirrus)
->>>  /* -----------------------------------------------------------------=
-- */
->>>  /* cirrus (simple) display pipe                                     =
-       */
->>>
->>> -static enum drm_mode_status cirrus_pipe_mode_valid(struct drm_crtc *=
-crtc,
->>> +static enum drm_mode_status cirrus_pipe_mode_valid(struct drm_simple=
-_display_pipe *pipe,
->>>                                                  const struct drm_dis=
-play_mode *mode)
->>>  {
->>>       if (cirrus_check_size(mode->hdisplay, mode->vdisplay, NULL) < 0=
-)
->>> diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/dr=
-m/drm_simple_kms_helper.c
->>> index 046055719245..15fb516ae2d8 100644
->>> --- a/drivers/gpu/drm/drm_simple_kms_helper.c
->>> +++ b/drivers/gpu/drm/drm_simple_kms_helper.c
->>> @@ -43,7 +43,7 @@ drm_simple_kms_crtc_mode_valid(struct drm_crtc *crt=
-c,
->>>               /* Anything goes */
->>>               return MODE_OK;
->>>
->>> -     return pipe->funcs->mode_valid(crtc, mode);
->>> +     return pipe->funcs->mode_valid(pipe, mode);
->>>  }
->>>
->>>  static int drm_simple_kms_crtc_check(struct drm_crtc *crtc,
->>> diff --git a/drivers/gpu/drm/pl111/pl111_display.c b/drivers/gpu/drm/=
-pl111/pl111_display.c
->>> index 024771a4083e..703ddc803c55 100644
->>> --- a/drivers/gpu/drm/pl111/pl111_display.c
->>> +++ b/drivers/gpu/drm/pl111/pl111_display.c
->>> @@ -48,10 +48,10 @@ irqreturn_t pl111_irq(int irq, void *data)
->>>  }
->>>
->>>  static enum drm_mode_status
->>> -pl111_mode_valid(struct drm_crtc *crtc,
->>> +pl111_mode_valid(struct drm_simple_display_pipe *pipe,
->>>                const struct drm_display_mode *mode)
->>>  {
->>> -     struct drm_device *drm =3D crtc->dev;
->>> +     struct drm_device *drm =3D pipe->crtc.dev;
->>>       struct pl111_drm_dev_private *priv =3D drm->dev_private;
->>>       u32 cpp =3D priv->variant->fb_bpp / 8;
->>>       u64 bw;
->>> diff --git a/include/drm/drm_simple_kms_helper.h b/include/drm/drm_si=
-mple_kms_helper.h
->>> index 4d89cd0a60db..15afee9cf049 100644
->>> --- a/include/drm/drm_simple_kms_helper.h
->>> +++ b/include/drm/drm_simple_kms_helper.h
->>> @@ -49,7 +49,7 @@ struct drm_simple_display_pipe_funcs {
->>>        *
->>>        * drm_mode_status Enum
->>>        */
->>> -     enum drm_mode_status (*mode_valid)(struct drm_crtc *crtc,
->>> +     enum drm_mode_status (*mode_valid)(struct drm_simple_display_pi=
-pe *pipe,
->>>                                          const struct drm_display_mod=
-e *mode);
->>>
->>>       /**
->>>
->>
->> --
->> Thomas Zimmermann
->> Graphics Driver Developer
->> SUSE Software Solutions Germany GmbH
->> Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
->> (HRB 36809, AG N=C3=BCrnberg)
->> Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
->>
->=20
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---IDpWwrnJOX80L69oW7hJJsPBaVOSySCT3--
-
---3738eZazcuctdTVEnimlhMqC7srKkdmvs
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl2v96AACgkQaA3BHVML
-eiNyQAf/bHb3V1RDufKDc3sepf4QTxO+0RDoM9lloJKdcVq9t26IfQAMinzjluEk
-zxwOy0pdI1VjWMdqnKNeTuUpmndh6kSsDhLkSB/zJtZme5ORRrfovA7/I5pkGwiQ
-Oc9wLEv5OlVv8Q0b08eNeaN6WE3UrurKXL4y8nt7uuuBVyQEu84xkVlw4+4PuHFo
-Oz19wOwkIhPhUQLlI/9+KyNWo4wEZfElWB9c8+FXk2IzoD1UlAFxbELQR+KWpqfS
-1W7LPRboFODusOuCa9jt9p+yR3qGWjkasJu4Wna7gxLBi+bmyZ/v6lLB3fEFRnA2
-oSuy2HOjtF/3pVjRMv3ceTn40o88QA==
-=ZgIZ
------END PGP SIGNATURE-----
-
---3738eZazcuctdTVEnimlhMqC7srKkdmvs--
-
---===============4008987601348081600==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============4008987601348081600==--
+T24gV2VkLCBPY3QgMjMsIDIwMTkgYXQgMDE6NDY6MjNQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiBPbiAyMDE5LzEwLzIzIOS4iuWNiDExOjAyLCBUaXdlaSBCaWUgd3JvdGU6Cj4gPiBPbiBU
+dWUsIE9jdCAyMiwgMjAxOSBhdCAwOTozMDoxNlBNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+
+ID4gPiBPbiAyMDE5LzEwLzIyIOS4i+WNiDU6NTIsIFRpd2VpIEJpZSB3cm90ZToKPiA+ID4gPiBU
+aGlzIHBhdGNoIGludHJvZHVjZXMgYSBtZGV2IGJhc2VkIGhhcmR3YXJlIHZob3N0IGJhY2tlbmQu
+Cj4gPiA+ID4gVGhpcyBiYWNrZW5kIGlzIGJ1aWx0IG9uIHRvcCBvZiB0aGUgc2FtZSBhYnN0cmFj
+dGlvbiB1c2VkCj4gPiA+ID4gaW4gdmlydGlvLW1kZXYgYW5kIHByb3ZpZGVzIGEgZ2VuZXJpYyB2
+aG9zdCBpbnRlcmZhY2UgZm9yCj4gPiA+ID4gdXNlcnNwYWNlIHRvIGFjY2VsZXJhdGUgdGhlIHZp
+cnRpbyBkZXZpY2VzIGluIGd1ZXN0Lgo+ID4gPiA+IAo+ID4gPiA+IFRoaXMgYmFja2VuZCBpcyBp
+bXBsZW1lbnRlZCBhcyBhIG1kZXYgZGV2aWNlIGRyaXZlciBvbiB0b3AKPiA+ID4gPiBvZiB0aGUg
+c2FtZSBtZGV2IGRldmljZSBvcHMgdXNlZCBpbiB2aXJ0aW8tbWRldiBidXQgdXNpbmcKPiA+ID4g
+PiBhIGRpZmZlcmVudCBtZGV2IGNsYXNzIGlkLCBhbmQgaXQgd2lsbCByZWdpc3RlciB0aGUgZGV2
+aWNlCj4gPiA+ID4gYXMgYSBWRklPIGRldmljZSBmb3IgdXNlcnNwYWNlIHRvIHVzZS4gVXNlcnNw
+YWNlIGNhbiBzZXR1cAo+ID4gPiA+IHRoZSBJT01NVSB3aXRoIHRoZSBleGlzdGluZyBWRklPIGNv
+bnRhaW5lci9ncm91cCBBUElzIGFuZAo+ID4gPiA+IHRoZW4gZ2V0IHRoZSBkZXZpY2UgZmQgd2l0
+aCB0aGUgZGV2aWNlIG5hbWUuIEFmdGVyIGdldHRpbmcKPiA+ID4gPiB0aGUgZGV2aWNlIGZkIG9m
+IHRoaXMgZGV2aWNlLCB1c2Vyc3BhY2UgY2FuIHVzZSB2aG9zdCBpb2N0bHMKPiA+ID4gPiB0byBz
+ZXR1cCB0aGUgYmFja2VuZC4KPiA+ID4gPiAKPiA+ID4gPiBTaWduZWQtb2ZmLWJ5OiBUaXdlaSBC
+aWUgPHRpd2VpLmJpZUBpbnRlbC5jb20+Cj4gPiA+ID4gLS0tCj4gPiA+ID4gVGhpcyBwYXRjaCBk
+ZXBlbmRzIG9uIGJlbG93IHNlcmllczoKPiA+ID4gPiBodHRwczovL2xrbWwub3JnL2xrbWwvMjAx
+OS8xMC8xNy8yODYKPiA+ID4gPiAKPiA+ID4gPiB2MSAtPiB2MjoKPiA+ID4gPiAtIFJlcGxhY2Ug
+X1NFVF9TVEFURSB3aXRoIF9TRVRfU1RBVFVTIChNU1QpOwo+ID4gPiA+IC0gQ2hlY2sgc3RhdHVz
+IGJpdHMgYXQgZWFjaCBzdGVwIChNU1QpOwo+ID4gPiA+IC0gUmVwb3J0IHRoZSBtYXggcmluZyBz
+aXplIGFuZCBtYXggbnVtYmVyIG9mIHF1ZXVlcyAoTVNUKTsKPiA+ID4gPiAtIEFkZCBtaXNzaW5n
+IE1PRFVMRV9ERVZJQ0VfVEFCTEUgKEphc29uKTsKPiA+ID4gPiAtIE9ubHkgc3VwcG9ydCB0aGUg
+bmV0d29yayBiYWNrZW5kIHcvbyBtdWx0aXF1ZXVlIGZvciBub3c7Cj4gPiA+IAo+ID4gPiBBbnkg
+aWRlYSBvbiBob3cgdG8gZXh0ZW5kIGl0IHRvIHN1cHBvcnQgZGV2aWNlcyBvdGhlciB0aGFuIG5l
+dD8gSSB0aGluayB3ZQo+ID4gPiB3YW50IGEgZ2VuZXJpYyBBUEkgb3IgYW4gQVBJIHRoYXQgY291
+bGQgYmUgbWFkZSBnZW5lcmljIGluIHRoZSBmdXR1cmUuCj4gPiA+IAo+ID4gPiBEbyB3ZSB3YW50
+IHRvIGUuZyBoYXZpbmcgYSBnZW5lcmljIHZob3N0IG1kZXYgZm9yIGFsbCBraW5kcyBvZiBkZXZp
+Y2VzIG9yCj4gPiA+IGludHJvZHVjaW5nIGUuZyB2aG9zdC1uZXQtbWRldiBhbmQgdmhvc3Qtc2Nz
+aS1tZGV2Pwo+ID4gT25lIHBvc3NpYmxlIHdheSBpcyB0byBkbyB3aGF0IHZob3N0LXVzZXIgZG9l
+cy4gSS5lLiBBcGFydCBmcm9tCj4gPiB0aGUgZ2VuZXJpYyByaW5nLCBmZWF0dXJlcywgLi4uIHJl
+bGF0ZWQgaW9jdGxzLCB3ZSBhbHNvIGludHJvZHVjZQo+ID4gZGV2aWNlIHNwZWNpZmljIGlvY3Rs
+cyB3aGVuIHdlIG5lZWQgdGhlbS4gQXMgdmhvc3QtbWRldiBqdXN0IG5lZWRzCj4gPiB0byBmb3J3
+YXJkIGNvbmZpZ3MgYmV0d2VlbiBwYXJlbnQgYW5kIHVzZXJzcGFjZSBhbmQgZXZlbiB3b24ndAo+
+ID4gY2FjaGUgYW55IGluZm8gd2hlbiBwb3NzaWJsZSwKPiAKPiAKPiBTbyBpdCBsb29rcyB0byBt
+ZSB0aGlzIGlzIG9ubHkgcG9zc2libGUgaWYgd2UgZXhwb3NlIGUuZyBzZXRfY29uZmlnIGFuZAo+
+IGdldF9jb25maWcgdG8gdXNlcnNwYWNlLgoKVGhlIHNldF9jb25maWcgYW5kIGdldF9jb25maWcg
+aW50ZXJmYWNlIGlzbid0IHJlYWxseSBldmVyeXRoaW5nCm9mIGRldmljZSBzcGVjaWZpYyBzZXR0
+aW5ncy4gV2UgYWxzbyBoYXZlIGN0cmxxIGluIHZpcnRpby1uZXQuCgo+IAo+IAo+ID4gSSB0aGlu
+ayBpdCBtaWdodCBiZSBiZXR0ZXIgdG8gZG8KPiA+IHRoaXMgaW4gb25lIGdlbmVyaWMgdmhvc3Qt
+bWRldiBtb2R1bGUuCj4gCj4gCj4gTG9va2luZyBhdCBkZWZpbml0aW9ucyBvZiBWaG9zdFVzZXJS
+ZXF1ZXN0IGluIHFlbXUsIGl0IG1peGVkIGdlbmVyaWMgQVBJCj4gd2l0aCBkZXZpY2Ugc3BlY2lm
+aWMgQVBJLiBJZiB3ZSB3YW50IGdvIHRoaXMgd2F5cyAoYSBnZW5lcmljIHZob3N0LW1kZXYpLAo+
+IG1vcmUgcXVlc3Rpb25zIG5lZWRzIHRvIGJlIGFuc3dlcmVkOgo+IAo+IDEpIEhvdyBjb3VsZCB1
+c2Vyc3BhY2Uga25vdyB3aGljaCB0eXBlIG9mIHZob3N0IGl0IHdvdWxkIHVzZT8gRG8gd2UgbmVl
+ZCB0bwo+IGV4cG9zZSB2aXJ0aW8gc3Vic3lzdGVtIGRldmljZSBpbiBmb3IgdXNlcnNwYWNlIHRo
+aXMgY2FzZT8KPiAKPiAyKSBUaGF0IGdlbmVyaWMgdmhvc3QtbWRldiBtb2R1bGUgc3RpbGwgbmVl
+ZCB0byBmaWx0ZXIgb3V0IHVuc3VwcG9ydGVkCj4gaW9jdGxzIGZvciBhIHNwZWNpZmljIHR5cGUu
+IEUuZyBpZiBpdCBwcm9iZXMgYSBuZXQgZGV2aWNlLCBpdCBzaG91bGQgcmVmdXNlCj4gQVBJIGZv
+ciBvdGhlciB0eXBlLiBUaGlzIGluIGZhY3QgYSB2aG9zdC1tZGV2LW5ldCBidXQganVzdCBub3Qg
+bW9kdWxhcml6ZSBpdAo+IG9uIHRvcCBvZiB2aG9zdC1tZGV2Lgo+IAo+IAo+ID4gCj4gPiA+IAo+
+ID4gPiA+IC0gU29tZSBtaW5vciBmaXhlcyBhbmQgaW1wcm92ZW1lbnRzOwo+ID4gPiA+IC0gUmVi
+YXNlIG9uIHRvcCBvZiB2aXJ0aW8tbWRldiBzZXJpZXMgdjQ7ClsuLi5dCj4gPiA+ID4gKwo+ID4g
+PiA+ICtzdGF0aWMgbG9uZyB2aG9zdF9tZGV2X2dldF9mZWF0dXJlcyhzdHJ1Y3Qgdmhvc3RfbWRl
+diAqbSwgdTY0IF9fdXNlciAqZmVhdHVyZXApCj4gPiA+ID4gK3sKPiA+ID4gPiArCWlmIChjb3B5
+X3RvX3VzZXIoZmVhdHVyZXAsICZtLT5mZWF0dXJlcywgc2l6ZW9mKG0tPmZlYXR1cmVzKSkpCj4g
+PiA+ID4gKwkJcmV0dXJuIC1FRkFVTFQ7Cj4gPiA+IAo+ID4gPiBBcyBkaXNjdXNzZWQgaW4gcHJl
+dmlvdXMgdmVyc2lvbiBkbyB3ZSBuZWVkIHRvIGZpbHRlciBvdXQgTVEgZmVhdHVyZSBoZXJlPwo+
+ID4gSSB0aGluayBpdCdzIG1vcmUgc3RyYWlnaHRmb3J3YXJkIHRvIGxldCB0aGUgcGFyZW50IGRy
+aXZlcnMgdG8KPiA+IGZpbHRlciBvdXQgdGhlIHVuc3VwcG9ydGVkIGZlYXR1cmVzLiBPdGhlcndp
+c2UgaXQgd291bGQgYmUgdHJpY2t5Cj4gPiB3aGVuIHdlIHdhbnQgdG8gYWRkIG1vcmUgZmVhdHVy
+ZXMgaW4gdmhvc3QtbWRldiBtb2R1bGUsCj4gCj4gCj4gSXQncyBhcyBzaW1wbGUgYXMgcmVtb3Zl
+IHRoZSBmZWF0dXJlIGZyb20gYmxhY2tsaXN0PwoKSXQncyBub3QgcmVhbGx5IHRoYXQgZWFzeS4g
+SXQgbWF5IGJyZWFrIHRoZSBvbGQgZHJpdmVycy4KCj4gCj4gCj4gPiBpLmUuIGlmCj4gPiB0aGUg
+cGFyZW50IGRyaXZlcnMgbWF5IGV4cG9zZSB1bnN1cHBvcnRlZCBmZWF0dXJlcyBhbmQgcmVsYXkg
+b24KPiA+IHZob3N0LW1kZXYgdG8gZmlsdGVyIHRoZW0gb3V0LCB0aGVzZSBmZWF0dXJlcyB3aWxs
+IGJlIGV4cG9zZWQKPiA+IHRvIHVzZXJzcGFjZSBhdXRvbWF0aWNhbGx5IHdoZW4gdGhleSBhcmUg
+ZW5hYmxlZCBpbiB2aG9zdC1tZGV2Cj4gPiBpbiB0aGUgZnV0dXJlLgo+IAo+IAo+IFRoZSBpc3N1
+ZSBpcywgaXQncyBvbmx5IHRoYXQgdmhvc3QtbWRldiBrbm93cyBpdHMgb3duIGxpbWl0YXRpb24u
+IEUuZyBpbgo+IHRoaXMgcGF0Y2gsIHZob3N0LW1kZXYgb25seSBpbXBsZW1lbnRzIGEgc3Vic2V0
+IG9mIHRyYW5zcG9ydCBBUEksIGJ1dCBwYXJlbnQKPiBkb2Vzbid0IGtub3cgYWJvdXQgdGhhdC4K
+PiAKPiBTdGlsbCBNUSBhcyBhbiBleGFtcGxlLCB0aGVyZSdzIG5vIHdheSAob3Igbm8gbmVlZCkg
+Zm9yIHBhcmVudCB0byBrbm93IHRoYXQKPiB2aG9zdC1tZGV2IGRvZXMgbm90IHN1cHBvcnQgTVEu
+CgpUaGUgbWRldiBpcyBhIE1ERVZfQ0xBU1NfSURfVkhPU1QgbWRldiBkZXZpY2UuIFdoZW4gdGhl
+IHBhcmVudAppcyBiZWluZyBkZXZlbG9wZWQsIGl0IHNob3VsZCBrbm93IHRoZSBjdXJyZW50bHkg
+c3VwcG9ydGVkIGZlYXR1cmVzCm9mIHZob3N0LW1kZXYuCgo+IEFuZCB0aGlzIGFsbG93cyBvbGQg
+a2VucmVsIHRvIHdvcmsgd2l0aCBuZXcKPiBwYXJlbnQgZHJpdmVycy4KClRoZSBuZXcgZHJpdmVy
+cyBzaG91bGQgcHJvdmlkZSB0aGluZ3MgbGlrZSBWSVJUSU9fTURFVl9GX1ZFUlNJT05fMQp0byBi
+ZSBjb21wYXRpYmxlIHdpdGggdGhlIG9sZCBrZXJuZWxzLiBXaGVuIFZJUlRJT19NREVWX0ZfVkVS
+U0lPTl8xCmlzIHByb3ZpZGVkL25lZ290aWF0ZWQsIHRoZSBiZWhhdmlvdXJzIHNob3VsZCBiZSBj
+b25zaXN0ZW50LgoKPiAKPiBTbyBiYXNpY2FsbHkgd2UgaGF2ZSB0aHJlZSBjaG9pY2VzIGhlcmU6
+Cj4gCj4gMSkgSW1wbGVtZW50IHdoYXQgdmhvc3QtdXNlciBkaWQgYW5kIGltcGxlbWVudCBhIGdl
+bmVyaWMgdmhvc3QtbWRldiAoYnV0IG1heQo+IHN0aWxsIGhhdmUgbG90cyBvZiBkZXZpY2Ugc3Bl
+Y2lmaWMgY29kZSkuIFRvIHN1cHBvcnQgYWR2YW5jZWQgZmVhdHVyZSB3aGljaAo+IHJlcXVpcmVz
+IHRoZSBhY2Nlc3MgdG8gY29uZmlnLCBzdGlsbCBsb3RzIG9mIEFQSSB0aGF0IG5lZWRzIHRvIGJl
+IGFkZGVkLgo+IAo+IDIpIEltcGxlbWVudCB3aGF0IHZob3N0LWtlcm5lbCBkaWQsIGhhdmUgYSBn
+ZW5lcmljIHZob3N0LW1kZXYgZHJpdmVyIGFuZCBhCj4gdmhvc3QgYnVzIG9uIHRvcCBmb3IgbWF0
+Y2ggYSBkZXZpY2Ugc3BlY2lmaWMgQVBJIGUuZyB2aG9zdC1tZGV2LW5ldC4gV2UKPiBzdGlsbCBo
+YXZlIGRldmljZSBzcGVjaWZpYyBBUEkgYnV0IGxpbWl0IHRoZW0gb25seSB0byBkZXZpY2Ugc3Bl
+Y2lmaWMKPiBtb2R1bGUuIFN0aWxsIHJlcXVpcmUgbmV3IGlvY3RscyBmb3IgYWR2YW5jZWQgZmVh
+dHVyZSBsaWtlIE1RLgo+IAo+IDMpIFNpbXBseSBleHBvc2UgYWxsIHZpcnRpby1tZGV2IHRyYW5z
+cG9ydCB0byB1c2Vyc3BhY2UuCgpDdXJyZW50bHksIHZpcnRpby1tZGV2IHRyYW5zcG9ydCBpcyBh
+IHNldCBvZiBmdW5jdGlvbiBjYWxsYmFja3MKZGVmaW5lZCBpbiBrZXJuZWwuIEhvdyB0byBzaW1w
+bHkgZXhwb3NlIHZpcnRpby1tZGV2IHRyYW5zcG9ydCB0bwp1c2Vyc3BhY2U/CgoKPiBBIGdlbmVy
+aWMgbW9kdWxlCj4gd2l0aG91dCBhbnkgdHlwZSBzcGVjaWZpYyBjb2RlIChsaWtlIHZpcnRpby1t
+ZGV2KS4gTm8gbmVlZCBkZWRpY2F0ZWQgQVBJIGZvcgo+IGUuZyBNUS4gQnV0IHRoZW4gdGhlIEFQ
+SSB3aWxsIGxvb2sgbXVjaCBkaWZmZXJlbnQgdGhhbiBjdXJyZW50IHZob3N0IGRpZC4KPiAKPiBD
+b25zaWRlciB0aGUgbGltaXRhdGlvbiBvZiAxKSBJIHRlbmQgdG8gY2hvb3NlIDIgb3IgMy4gV2hh
+dCdzIHlvdSBvcGluaW9uPwo+IAo+IApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25A
+bGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24u
+b3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
