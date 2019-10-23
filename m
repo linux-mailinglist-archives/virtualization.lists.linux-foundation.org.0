@@ -2,97 +2,55 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EC8BE1746
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 12:04:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E3F9E1794
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 12:14:53 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C0E08EB6;
-	Wed, 23 Oct 2019 10:04:08 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 60A06EC3;
+	Wed, 23 Oct 2019 10:14:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 06666EB6
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id AE31BEA5
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 10:04:07 +0000 (UTC)
+	Wed, 23 Oct 2019 10:14:46 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com
-	(us-smtp-delivery-1.mimecast.com [207.211.31.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 4F3C787B
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E067314D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 10:04:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1571825045;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=W6lSdzoaa0n+6w843OleSIn3qypoeQbbwBSChxn+qqI=;
-	b=HNZrwzbnStY2k1xoVaT4pEx8pKot84a9PaHu+jqi4z+OdtZl4z1ZmxxBRx/xlYFrwZk3vR
-	csYNXZM7AzuniBo6KJaxk9nme4PtdeCNash5nml3CN7Sci0Nks7Pq4Zw8qYIgi56xN8CsL
-	S1jv127mdlGdk3llXP9B60Zf1bOrXho=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
-	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-103-3kLTzBU8Pru_Lon8ETvXGg-1; Wed, 23 Oct 2019 06:04:01 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 31F2A1800D6B;
-	Wed, 23 Oct 2019 10:03:58 +0000 (UTC)
-Received: from [10.36.117.79] (ovpn-117-79.ams2.redhat.com [10.36.117.79])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 4AB205C1B2;
-	Wed, 23 Oct 2019 10:03:51 +0000 (UTC)
-Subject: Re: [PATCH RFC v3 6/9] mm: Allow to offline PageOffline() pages with
-	a reference count of 0
-To: Michal Hocko <mhocko@kernel.org>
-References: <20191016114321.GX317@dhcp22.suse.cz>
-	<36fef317-78e3-0500-43ba-f537f9a6fea4@redhat.com>
-	<20191016140350.GD317@dhcp22.suse.cz>
-	<7c7bef01-f904-904a-b0a7-f7b514b8bda8@redhat.com>
-	<20191018081524.GD5017@dhcp22.suse.cz>
-	<83d0a961-952d-21e4-74df-267912b7b6fa@redhat.com>
-	<20191018111843.GH5017@dhcp22.suse.cz>
-	<709d39aa-a7ba-97aa-e66b-e2fec2fdf3c4@redhat.com>
-	<20191022122326.GL9379@dhcp22.suse.cz>
-	<b4be42a4-cbfc-8706-cc94-26211ddcbe4a@redhat.com>
-	<20191023094345.GL754@dhcp22.suse.cz>
-From: David Hildenbrand <david@redhat.com>
-Organization: Red Hat GmbH
-Message-ID: <ad2aef12-61ac-f019-90d1-59637255f9e3@redhat.com>
-Date: Wed, 23 Oct 2019 12:03:51 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.1
+	Wed, 23 Oct 2019 10:14:45 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	23 Oct 2019 03:14:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.68,220,1569308400"; d="scan'208";a="197388690"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+	by fmsmga007.fm.intel.com with ESMTP; 23 Oct 2019 03:14:42 -0700
+Date: Wed, 23 Oct 2019 18:11:36 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v2] vhost: introduce mdev based hardware backend
+Message-ID: <20191023101135.GA6367@___>
+References: <20191022095230.2514-1-tiwei.bie@intel.com>
+	<47a572fd-5597-1972-e177-8ee25ca51247@redhat.com>
+	<20191023030253.GA15401@___>
+	<ac36f1e3-b972-71ac-fe0c-3db03e016dcf@redhat.com>
+	<20191023070747.GA30533@___>
+	<106834b5-dae5-82b2-0f97-16951709d075@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191023094345.GL754@dhcp22.suse.cz>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-MC-Unique: 3kLTzBU8Pru_Lon8ETvXGg-1
-X-Mimecast-Spam-Score: 0
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <106834b5-dae5-82b2-0f97-16951709d075@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Pingfan Liu <kernelfans@gmail.com>,
-	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
-	Alexander Potapenko <glider@google.com>,
-	Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
-	Ira Weiny <ira.weiny@intel.com>, Andrea Arcangeli <aarcange@redhat.com>,
-	Stephen Rothwell <sfr@canb.auug.org.au>, Yu Zhao <yuzhao@google.com>,
-	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
-	Anthony Yznaga <anthony.yznaga@oracle.com>,
-	Pavel Tatashin <pavel.tatashin@microsoft.com>,
-	Anshuman Khandual <anshuman.khandual@arm.com>,
-	Mike Rapoport <rppt@linux.vnet.ibm.com>, Qian Cai <cai@lca.pw>,
-	Andrey Ryabinin <aryabinin@virtuozzo.com>,
-	Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
-	Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>,
-	Yang Shi <yang.shi@linux.alibaba.com>,
-	linux-kernel@vger.kernel.org, Minchan Kim <minchan@kernel.org>,
-	Wei Yang <richardw.yang@linux.intel.com>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Mel Gorman <mgorman@techsingularity.net>
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	zhihong.wang@intel.com, maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -104,144 +62,147 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 23.10.19 11:43, Michal Hocko wrote:
-> On Tue 22-10-19 16:02:09, David Hildenbrand wrote:
-> [...]
->>>>> MEM_CANCEL_OFFLINE could gain the reference back to balance the
->>>>> MEM_GOING_OFFLINE step.
->>>>
->>>> The pages are already unisolated and could be used by the buddy. But again,
->>>> I think you have an idea that tries to avoid putting pages to the buddy.
->>>
->>> Yeah, set_page_count(page, 0) if you do not want to release that page
->>> from the notifier context to reflect that the page is ok to be offlined
->>> with the rest.
->>>    
->>
->> I neither see how you deal with __test_page_isolated_in_pageblock() nor with
->> __offline_isolated_pages(). Sorry, but what I read is incomplete and you
->> probably have a full proposal in your head. Please read below how I think
->> you want to solve it.
-> 
-> Yeah, sorry that I am throwing incomplete ideas at you. I am just trying
-> to really nail down how to deal with reference counting here because it
-> is an important aspect.
-
-I think we collected all the missing pieces now :) Thanks!
-
-[...]
-
->>
->> I was reading
->>
->> include/linux/mm_types.h:
->>
->> "If you want to use the refcount field, it must be used in such a way
->>   that other CPUs temporarily incrementing and then decrementing the
->>   refcount does not cause problems"
->>
->> And that made me think "anybody can go ahead and try get_page_unless_zero()".
->>
->> If I am missing something here and this can indeed not happen (e.g.,
->> because PageOffline() pages are never mapped to user space), then I'll
->> happily remove this code.
-> 
-> The point is that if the owner of the page is holding the only reference
-> to the page then it is clear that nothing like that's happened.
-
-Right, and I think the race I described won't happen in practice. Nobody 
-should be trying to do a get_page_unless_zero() on random pages that are 
-not even mapped to user space. I was (as so often) very careful :)
-
->> Let's recap what I suggest:
->>
->> "PageOffline() pages that have a reference count of 0 will be treated
->>   like free pages when offlining pages, allowing the containing memory
->>   block to get offlined. In case a driver wants to revive such a page, it
->>   has to synchronize against memory onlining/offlining (e.g., using memory
->>   notifiers) while incrementing the reference count. Also, a driver that
->>   relies in this feature is aware that re-onlining the memory will require
->>   to re-set the pages PageOffline() - e.g., via the online_page_callback_t."
-> 
-> OK
-> 
-> [...]
->> d) __put_page() is modified to not return pages to the buddy in any
->>     case as a safety net. We might be able to get rid of that.
-> 
-> I do not like exactly this part
-
-Yeah, and I think I can drop it from this patch.
-
->   
->> What I think you suggest:
->>
->> a) has_unmovable_pages() skips over all PageOffline() pages.
->>     This results in a lot of false negatives when trying to offline. Might be ok.
->>
->> b) The driver decrements the reference count of the PageOffline pages
->>     in MEM_GOING_OFFLINE.
-> 
-> Well, driver should make the page unreferenced or fail. What is done
-> really depends on the specific driver
-> 
->> c) The driver increments the reference count of the PageOffline pages
->>     in MEM_CANCEL_OFFLINE. One issue might be that the pages are no longer
->>     isolated once we get that call. Might be ok.
-> 
-> Only previous PageBuddy pages are returned to the allocator IIRC. Mostly
-> because of MovablePage()
-> 
->> d) How to make __test_page_isolated_in_pageblock() succeed?
->>     Like I propose in this patch (PageOffline() + refcount == 0)?
-> 
-> Yep
-> 
->> e) How to make __offline_isolated_pages() succeed?
->>     Like I propose in this patch (PageOffline() + refcount == 0)?
-> 
-> Simply skip over PageOffline pages. Reference count should never be != 0
-> at this stage.
-
-Right, that should be guaranteed by d). (as long as people play by the 
-rules) Same applies to my current patch.
-
->   
->> In summary, is what you suggest simply delaying setting the reference count to 0
->> in MEM_GOING_OFFLINE instead of right away when the driver unpluggs the pages?
-> 
-> Yes
-> 
->> What's the big benefit you see and I fail to see?
-> 
-> Aparat from no hooks into __put_page it is also an explicit control over
-> the page via reference counting. Do you see any downsides?
-
-The only downside I see is that we get more false negatives on 
-has_unmovable_pages(), eventually resulting in the offlining stage after 
-isolation to loop forever (as some PageOffline() pages are not movable 
-(especially, XEN balloon, HyperV balloon), there won't be progress).
-
-I somewhat don't like forcing everybody that uses PageOffline() 
-(especially all users of balloon compaction) to implement memory 
-notifiers just to avoid that. Maybe, we even want to use PageOffline() 
-in the future in the core (e.g., for memory holes instead of PG_reserved 
-or similar).
-
-Thanks!
-
--- 
-
-Thanks,
-
-David / dhildenb
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gV2VkLCBPY3QgMjMsIDIwMTkgYXQgMDM6MjU6MDBQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiBPbiAyMDE5LzEwLzIzIOS4i+WNiDM6MDcsIFRpd2VpIEJpZSB3cm90ZToKPiA+IE9uIFdl
+ZCwgT2N0IDIzLCAyMDE5IGF0IDAxOjQ2OjIzUE0gKzA4MDAsIEphc29uIFdhbmcgd3JvdGU6Cj4g
+PiA+IE9uIDIwMTkvMTAvMjMg5LiK5Y2IMTE6MDIsIFRpd2VpIEJpZSB3cm90ZToKPiA+ID4gPiBP
+biBUdWUsIE9jdCAyMiwgMjAxOSBhdCAwOTozMDoxNlBNICswODAwLCBKYXNvbiBXYW5nIHdyb3Rl
+Ogo+ID4gPiA+ID4gT24gMjAxOS8xMC8yMiDkuIvljYg1OjUyLCBUaXdlaSBCaWUgd3JvdGU6Cj4g
+PiA+ID4gPiA+IFRoaXMgcGF0Y2ggaW50cm9kdWNlcyBhIG1kZXYgYmFzZWQgaGFyZHdhcmUgdmhv
+c3QgYmFja2VuZC4KPiA+ID4gPiA+ID4gVGhpcyBiYWNrZW5kIGlzIGJ1aWx0IG9uIHRvcCBvZiB0
+aGUgc2FtZSBhYnN0cmFjdGlvbiB1c2VkCj4gPiA+ID4gPiA+IGluIHZpcnRpby1tZGV2IGFuZCBw
+cm92aWRlcyBhIGdlbmVyaWMgdmhvc3QgaW50ZXJmYWNlIGZvcgo+ID4gPiA+ID4gPiB1c2Vyc3Bh
+Y2UgdG8gYWNjZWxlcmF0ZSB0aGUgdmlydGlvIGRldmljZXMgaW4gZ3Vlc3QuCj4gPiA+ID4gPiA+
+IAo+ID4gPiA+ID4gPiBUaGlzIGJhY2tlbmQgaXMgaW1wbGVtZW50ZWQgYXMgYSBtZGV2IGRldmlj
+ZSBkcml2ZXIgb24gdG9wCj4gPiA+ID4gPiA+IG9mIHRoZSBzYW1lIG1kZXYgZGV2aWNlIG9wcyB1
+c2VkIGluIHZpcnRpby1tZGV2IGJ1dCB1c2luZwo+ID4gPiA+ID4gPiBhIGRpZmZlcmVudCBtZGV2
+IGNsYXNzIGlkLCBhbmQgaXQgd2lsbCByZWdpc3RlciB0aGUgZGV2aWNlCj4gPiA+ID4gPiA+IGFz
+IGEgVkZJTyBkZXZpY2UgZm9yIHVzZXJzcGFjZSB0byB1c2UuIFVzZXJzcGFjZSBjYW4gc2V0dXAK
+PiA+ID4gPiA+ID4gdGhlIElPTU1VIHdpdGggdGhlIGV4aXN0aW5nIFZGSU8gY29udGFpbmVyL2dy
+b3VwIEFQSXMgYW5kCj4gPiA+ID4gPiA+IHRoZW4gZ2V0IHRoZSBkZXZpY2UgZmQgd2l0aCB0aGUg
+ZGV2aWNlIG5hbWUuIEFmdGVyIGdldHRpbmcKPiA+ID4gPiA+ID4gdGhlIGRldmljZSBmZCBvZiB0
+aGlzIGRldmljZSwgdXNlcnNwYWNlIGNhbiB1c2Ugdmhvc3QgaW9jdGxzCj4gPiA+ID4gPiA+IHRv
+IHNldHVwIHRoZSBiYWNrZW5kLgo+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gU2lnbmVkLW9mZi1i
+eTogVGl3ZWkgQmllIDx0aXdlaS5iaWVAaW50ZWwuY29tPgo+ID4gPiA+ID4gPiAtLS0KPiA+ID4g
+PiA+ID4gVGhpcyBwYXRjaCBkZXBlbmRzIG9uIGJlbG93IHNlcmllczoKPiA+ID4gPiA+ID4gaHR0
+cHM6Ly9sa21sLm9yZy9sa21sLzIwMTkvMTAvMTcvMjg2Cj4gPiA+ID4gPiA+IAo+ID4gPiA+ID4g
+PiB2MSAtPiB2MjoKPiA+ID4gPiA+ID4gLSBSZXBsYWNlIF9TRVRfU1RBVEUgd2l0aCBfU0VUX1NU
+QVRVUyAoTVNUKTsKPiA+ID4gPiA+ID4gLSBDaGVjayBzdGF0dXMgYml0cyBhdCBlYWNoIHN0ZXAg
+KE1TVCk7Cj4gPiA+ID4gPiA+IC0gUmVwb3J0IHRoZSBtYXggcmluZyBzaXplIGFuZCBtYXggbnVt
+YmVyIG9mIHF1ZXVlcyAoTVNUKTsKPiA+ID4gPiA+ID4gLSBBZGQgbWlzc2luZyBNT0RVTEVfREVW
+SUNFX1RBQkxFIChKYXNvbik7Cj4gPiA+ID4gPiA+IC0gT25seSBzdXBwb3J0IHRoZSBuZXR3b3Jr
+IGJhY2tlbmQgdy9vIG11bHRpcXVldWUgZm9yIG5vdzsKPiA+ID4gPiA+IEFueSBpZGVhIG9uIGhv
+dyB0byBleHRlbmQgaXQgdG8gc3VwcG9ydCBkZXZpY2VzIG90aGVyIHRoYW4gbmV0PyBJIHRoaW5r
+IHdlCj4gPiA+ID4gPiB3YW50IGEgZ2VuZXJpYyBBUEkgb3IgYW4gQVBJIHRoYXQgY291bGQgYmUg
+bWFkZSBnZW5lcmljIGluIHRoZSBmdXR1cmUuCj4gPiA+ID4gPiAKPiA+ID4gPiA+IERvIHdlIHdh
+bnQgdG8gZS5nIGhhdmluZyBhIGdlbmVyaWMgdmhvc3QgbWRldiBmb3IgYWxsIGtpbmRzIG9mIGRl
+dmljZXMgb3IKPiA+ID4gPiA+IGludHJvZHVjaW5nIGUuZyB2aG9zdC1uZXQtbWRldiBhbmQgdmhv
+c3Qtc2NzaS1tZGV2Pwo+ID4gPiA+IE9uZSBwb3NzaWJsZSB3YXkgaXMgdG8gZG8gd2hhdCB2aG9z
+dC11c2VyIGRvZXMuIEkuZS4gQXBhcnQgZnJvbQo+ID4gPiA+IHRoZSBnZW5lcmljIHJpbmcsIGZl
+YXR1cmVzLCAuLi4gcmVsYXRlZCBpb2N0bHMsIHdlIGFsc28gaW50cm9kdWNlCj4gPiA+ID4gZGV2
+aWNlIHNwZWNpZmljIGlvY3RscyB3aGVuIHdlIG5lZWQgdGhlbS4gQXMgdmhvc3QtbWRldiBqdXN0
+IG5lZWRzCj4gPiA+ID4gdG8gZm9yd2FyZCBjb25maWdzIGJldHdlZW4gcGFyZW50IGFuZCB1c2Vy
+c3BhY2UgYW5kIGV2ZW4gd29uJ3QKPiA+ID4gPiBjYWNoZSBhbnkgaW5mbyB3aGVuIHBvc3NpYmxl
+LAo+ID4gPiAKPiA+ID4gU28gaXQgbG9va3MgdG8gbWUgdGhpcyBpcyBvbmx5IHBvc3NpYmxlIGlm
+IHdlIGV4cG9zZSBlLmcgc2V0X2NvbmZpZyBhbmQKPiA+ID4gZ2V0X2NvbmZpZyB0byB1c2Vyc3Bh
+Y2UuCj4gPiBUaGUgc2V0X2NvbmZpZyBhbmQgZ2V0X2NvbmZpZyBpbnRlcmZhY2UgaXNuJ3QgcmVh
+bGx5IGV2ZXJ5dGhpbmcKPiA+IG9mIGRldmljZSBzcGVjaWZpYyBzZXR0aW5ncy4gV2UgYWxzbyBo
+YXZlIGN0cmxxIGluIHZpcnRpby1uZXQuCj4gCj4gCj4gWWVzLCBidXQgaXQgY291bGQgYmUgcHJv
+Y2Vzc2VkIGJ5IHRoZSBleGlzdCBBUEkuIElzbid0IGl0PyBKdXN0IHNldCBjdHJsIHZxCj4gYWRk
+cmVzcyBhbmQgbGV0IHBhcmVudCB0byBkZWFsIHdpdGggdGhhdC4KCkkgbWVhbiBob3cgdG8gZXhw
+b3NlIGN0cmxxIHJlbGF0ZWQgc2V0dGluZ3MgdG8gdXNlcnNwYWNlPwoKPiAKPiAKPiA+IAo+ID4g
+PiAKPiA+ID4gPiBJIHRoaW5rIGl0IG1pZ2h0IGJlIGJldHRlciB0byBkbwo+ID4gPiA+IHRoaXMg
+aW4gb25lIGdlbmVyaWMgdmhvc3QtbWRldiBtb2R1bGUuCj4gPiA+IAo+ID4gPiBMb29raW5nIGF0
+IGRlZmluaXRpb25zIG9mIFZob3N0VXNlclJlcXVlc3QgaW4gcWVtdSwgaXQgbWl4ZWQgZ2VuZXJp
+YyBBUEkKPiA+ID4gd2l0aCBkZXZpY2Ugc3BlY2lmaWMgQVBJLiBJZiB3ZSB3YW50IGdvIHRoaXMg
+d2F5cyAoYSBnZW5lcmljIHZob3N0LW1kZXYpLAo+ID4gPiBtb3JlIHF1ZXN0aW9ucyBuZWVkcyB0
+byBiZSBhbnN3ZXJlZDoKPiA+ID4gCj4gPiA+IDEpIEhvdyBjb3VsZCB1c2Vyc3BhY2Uga25vdyB3
+aGljaCB0eXBlIG9mIHZob3N0IGl0IHdvdWxkIHVzZT8gRG8gd2UgbmVlZCB0bwo+ID4gPiBleHBv
+c2UgdmlydGlvIHN1YnN5c3RlbSBkZXZpY2UgaW4gZm9yIHVzZXJzcGFjZSB0aGlzIGNhc2U/Cj4g
+PiA+IAo+ID4gPiAyKSBUaGF0IGdlbmVyaWMgdmhvc3QtbWRldiBtb2R1bGUgc3RpbGwgbmVlZCB0
+byBmaWx0ZXIgb3V0IHVuc3VwcG9ydGVkCj4gPiA+IGlvY3RscyBmb3IgYSBzcGVjaWZpYyB0eXBl
+LiBFLmcgaWYgaXQgcHJvYmVzIGEgbmV0IGRldmljZSwgaXQgc2hvdWxkIHJlZnVzZQo+ID4gPiBB
+UEkgZm9yIG90aGVyIHR5cGUuIFRoaXMgaW4gZmFjdCBhIHZob3N0LW1kZXYtbmV0IGJ1dCBqdXN0
+IG5vdCBtb2R1bGFyaXplIGl0Cj4gPiA+IG9uIHRvcCBvZiB2aG9zdC1tZGV2Lgo+ID4gPiAKPiA+
+ID4gCj4gPiA+ID4gPiA+IC0gU29tZSBtaW5vciBmaXhlcyBhbmQgaW1wcm92ZW1lbnRzOwo+ID4g
+PiA+ID4gPiAtIFJlYmFzZSBvbiB0b3Agb2YgdmlydGlvLW1kZXYgc2VyaWVzIHY0Owo+ID4gWy4u
+Ll0KPiA+ID4gPiA+ID4gKwo+ID4gPiA+ID4gPiArc3RhdGljIGxvbmcgdmhvc3RfbWRldl9nZXRf
+ZmVhdHVyZXMoc3RydWN0IHZob3N0X21kZXYgKm0sIHU2NCBfX3VzZXIgKmZlYXR1cmVwKQo+ID4g
+PiA+ID4gPiArewo+ID4gPiA+ID4gPiArCWlmIChjb3B5X3RvX3VzZXIoZmVhdHVyZXAsICZtLT5m
+ZWF0dXJlcywgc2l6ZW9mKG0tPmZlYXR1cmVzKSkpCj4gPiA+ID4gPiA+ICsJCXJldHVybiAtRUZB
+VUxUOwo+ID4gPiA+ID4gQXMgZGlzY3Vzc2VkIGluIHByZXZpb3VzIHZlcnNpb24gZG8gd2UgbmVl
+ZCB0byBmaWx0ZXIgb3V0IE1RIGZlYXR1cmUgaGVyZT8KPiA+ID4gPiBJIHRoaW5rIGl0J3MgbW9y
+ZSBzdHJhaWdodGZvcndhcmQgdG8gbGV0IHRoZSBwYXJlbnQgZHJpdmVycyB0bwo+ID4gPiA+IGZp
+bHRlciBvdXQgdGhlIHVuc3VwcG9ydGVkIGZlYXR1cmVzLiBPdGhlcndpc2UgaXQgd291bGQgYmUg
+dHJpY2t5Cj4gPiA+ID4gd2hlbiB3ZSB3YW50IHRvIGFkZCBtb3JlIGZlYXR1cmVzIGluIHZob3N0
+LW1kZXYgbW9kdWxlLAo+ID4gPiAKPiA+ID4gSXQncyBhcyBzaW1wbGUgYXMgcmVtb3ZlIHRoZSBm
+ZWF0dXJlIGZyb20gYmxhY2tsaXN0Pwo+ID4gSXQncyBub3QgcmVhbGx5IHRoYXQgZWFzeS4gSXQg
+bWF5IGJyZWFrIHRoZSBvbGQgZHJpdmVycy4KPiAKPiAKPiBJJ20gbm90IHN1cmUgSSB1bmRlcnN0
+YW5kIGhlcmUsIHdlIGRvIGZlYXR1cmUgbmVnb3RpYXRpb24gYW55aG93LiBGb3Igb2xkCj4gZHJp
+dmVycyBkbyB5b3UgbWVhbiB0aGUgZ3Vlc3QgZHJpdmVycyB3aXRob3V0IE1RPwoKRm9yIG9sZCBk
+cml2ZXJzIEkgbWVhbiBvbGQgcGFyZW50IGRyaXZlcnMuIEl0J3MgcG9zc2libGUKdG8gY29tcGls
+ZSBvbGQgZHJpdmVycyBvbiBuZXcga2VybmVscy4KCkknbSBub3QgcXVpdGUgc3VyZSBob3cgd2ls
+bCB3ZSBpbXBsZW1lbnQgTVEgc3VwcG9ydCBpbgp2aG9zdC1tZGV2LiBJZiB3ZSBuZWVkIHRvIGlu
+dHJvZHVjZSBuZXcgdmlydGlvX21kZXZfZGV2aWNlX29wcwpjYWxsYmFja3MgYW5kIGFuIG9sZCBk
+cml2ZXIgZXhwb3NlZCB0aGUgTVEgZmVhdHVyZSwKdGhlbiB0aGUgbmV3IHZob3N0LW1kZXYgd2ls
+bCBzZWUgdGhpcyBvbGQgZHJpdmVyIGV4cG9zZQpNUSBmZWF0dXJlIGJ1dCBub3QgcHJvdmlkZSBj
+b3JyZXNwb25kaW5nIGNhbGxiYWNrcy4KCj4gCj4gCj4gPiAKPiA+ID4gCj4gPiA+ID4gaS5lLiBp
+Zgo+ID4gPiA+IHRoZSBwYXJlbnQgZHJpdmVycyBtYXkgZXhwb3NlIHVuc3VwcG9ydGVkIGZlYXR1
+cmVzIGFuZCByZWxheSBvbgo+ID4gPiA+IHZob3N0LW1kZXYgdG8gZmlsdGVyIHRoZW0gb3V0LCB0
+aGVzZSBmZWF0dXJlcyB3aWxsIGJlIGV4cG9zZWQKPiA+ID4gPiB0byB1c2Vyc3BhY2UgYXV0b21h
+dGljYWxseSB3aGVuIHRoZXkgYXJlIGVuYWJsZWQgaW4gdmhvc3QtbWRldgo+ID4gPiA+IGluIHRo
+ZSBmdXR1cmUuCj4gPiA+IAo+ID4gPiBUaGUgaXNzdWUgaXMsIGl0J3Mgb25seSB0aGF0IHZob3N0
+LW1kZXYga25vd3MgaXRzIG93biBsaW1pdGF0aW9uLiBFLmcgaW4KPiA+ID4gdGhpcyBwYXRjaCwg
+dmhvc3QtbWRldiBvbmx5IGltcGxlbWVudHMgYSBzdWJzZXQgb2YgdHJhbnNwb3J0IEFQSSwgYnV0
+IHBhcmVudAo+ID4gPiBkb2Vzbid0IGtub3cgYWJvdXQgdGhhdC4KPiA+ID4gCj4gPiA+IFN0aWxs
+IE1RIGFzIGFuIGV4YW1wbGUsIHRoZXJlJ3Mgbm8gd2F5IChvciBubyBuZWVkKSBmb3IgcGFyZW50
+IHRvIGtub3cgdGhhdAo+ID4gPiB2aG9zdC1tZGV2IGRvZXMgbm90IHN1cHBvcnQgTVEuCj4gPiBU
+aGUgbWRldiBpcyBhIE1ERVZfQ0xBU1NfSURfVkhPU1QgbWRldiBkZXZpY2UuIFdoZW4gdGhlIHBh
+cmVudAo+ID4gaXMgYmVpbmcgZGV2ZWxvcGVkLCBpdCBzaG91bGQga25vdyB0aGUgY3VycmVudGx5
+IHN1cHBvcnRlZCBmZWF0dXJlcwo+ID4gb2Ygdmhvc3QtbWRldi4KPiAKPiAKPiBIb3cgY2FuIHBh
+cmVudCBrbm93IE1RIGlzIG5vdCBzdXBwb3J0ZWQgYnkgdmhvc3QtbWRldj8KCkdvb2QgcG9pbnQu
+IEkgYWdyZWUgdmhvc3QtbWRldiBzaG91bGQgZmlsdGVyIG91dCB0aGUgdW5zdXBwb3J0ZWQKZmVh
+dHVyZXMuIEJ1dCBpbiB0aGUgbWVhbnRpbWUsIEkgdGhpbmsgZHJpdmVycyBhbHNvIHNob3VsZG4n
+dApleHBvc2UgdW5zdXBwb3J0ZWQgZmVhdHVyZXMuCgo+IAo+IAo+ID4gCj4gPiA+IEFuZCB0aGlz
+IGFsbG93cyBvbGQga2VucmVsIHRvIHdvcmsgd2l0aCBuZXcKPiA+ID4gcGFyZW50IGRyaXZlcnMu
+Cj4gPiBUaGUgbmV3IGRyaXZlcnMgc2hvdWxkIHByb3ZpZGUgdGhpbmdzIGxpa2UgVklSVElPX01E
+RVZfRl9WRVJTSU9OXzEKPiA+IHRvIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgb2xkIGtlcm5lbHMu
+IFdoZW4gVklSVElPX01ERVZfRl9WRVJTSU9OXzEKPiA+IGlzIHByb3ZpZGVkL25lZ290aWF0ZWQs
+IHRoZSBiZWhhdmlvdXJzIHNob3VsZCBiZSBjb25zaXN0ZW50Lgo+IAo+IAo+IFRvIGJlIGNsZWFy
+LCBJIGRpZG4ndCBtZWFuIGEgY2hhbmdlIGluIHZpcnRpby1tZGV2IEFQSSwgSSBtZWFudDoKPiAK
+PiAxKSBvbGQgdmhvc3QtbWRldiBrZXJuZWwgZHJpdmVyIHRoYXQgZmlsdGVycyBvdXQgTVEKPiAK
+PiAyKSBuZXcgcGFyZW50IGRyaXZlciB0aGF0IHN1cHBvcnQgTVEKPiAKPiAKPiA+IAo+ID4gPiBT
+byBiYXNpY2FsbHkgd2UgaGF2ZSB0aHJlZSBjaG9pY2VzIGhlcmU6Cj4gPiA+IAo+ID4gPiAxKSBJ
+bXBsZW1lbnQgd2hhdCB2aG9zdC11c2VyIGRpZCBhbmQgaW1wbGVtZW50IGEgZ2VuZXJpYyB2aG9z
+dC1tZGV2IChidXQgbWF5Cj4gPiA+IHN0aWxsIGhhdmUgbG90cyBvZiBkZXZpY2Ugc3BlY2lmaWMg
+Y29kZSkuIFRvIHN1cHBvcnQgYWR2YW5jZWQgZmVhdHVyZSB3aGljaAo+ID4gPiByZXF1aXJlcyB0
+aGUgYWNjZXNzIHRvIGNvbmZpZywgc3RpbGwgbG90cyBvZiBBUEkgdGhhdCBuZWVkcyB0byBiZSBh
+ZGRlZC4KPiA+ID4gCj4gPiA+IDIpIEltcGxlbWVudCB3aGF0IHZob3N0LWtlcm5lbCBkaWQsIGhh
+dmUgYSBnZW5lcmljIHZob3N0LW1kZXYgZHJpdmVyIGFuZCBhCj4gPiA+IHZob3N0IGJ1cyBvbiB0
+b3AgZm9yIG1hdGNoIGEgZGV2aWNlIHNwZWNpZmljIEFQSSBlLmcgdmhvc3QtbWRldi1uZXQuIFdl
+Cj4gPiA+IHN0aWxsIGhhdmUgZGV2aWNlIHNwZWNpZmljIEFQSSBidXQgbGltaXQgdGhlbSBvbmx5
+IHRvIGRldmljZSBzcGVjaWZpYwo+ID4gPiBtb2R1bGUuIFN0aWxsIHJlcXVpcmUgbmV3IGlvY3Rs
+cyBmb3IgYWR2YW5jZWQgZmVhdHVyZSBsaWtlIE1RLgo+ID4gPiAKPiA+ID4gMykgU2ltcGx5IGV4
+cG9zZSBhbGwgdmlydGlvLW1kZXYgdHJhbnNwb3J0IHRvIHVzZXJzcGFjZS4KPiA+IEN1cnJlbnRs
+eSwgdmlydGlvLW1kZXYgdHJhbnNwb3J0IGlzIGEgc2V0IG9mIGZ1bmN0aW9uIGNhbGxiYWNrcwo+
+ID4gZGVmaW5lZCBpbiBrZXJuZWwuIEhvdyB0byBzaW1wbHkgZXhwb3NlIHZpcnRpby1tZGV2IHRy
+YW5zcG9ydCB0bwo+ID4gdXNlcnNwYWNlPwo+IAo+IAo+IFRoZSBtb3N0IHN0cmFpZ2h0Zm9yd2Fy
+ZCB3YXkgaXMgdG8gaGF2ZSBhbiAxOjEgbWFwcGluZyBiZXR3ZWVuIGlvY3RsIGFuZAo+IHZpcml0
+b19tZGV2X2RldmljZV9vcHMuCgpTZWVtcyB3ZSBhcmUgYWxyZWFkeSB0cnlpbmcgdG8gZG8gMTox
+IG1hcHBpbmcgYmV0d2VlbiBpb2N0bAphbmQgdmlydGlvX21kZXZfZGV2aWNlX29wcyBpbiB2aG9z
+dC1tZGV2IG5vdyAodGhlIG1ham9yIHBpZWNlCm1pc3NpbmcgaXMgZ2V0X2RldmljZV9pZC9nZXRf
+Y29uZmlnL3NldF9jb25maWcpLgoKCj4gCj4gVGhhbmtzCj4gCj4gCj4gPiAKPiA+IAo+ID4gPiBB
+IGdlbmVyaWMgbW9kdWxlCj4gPiA+IHdpdGhvdXQgYW55IHR5cGUgc3BlY2lmaWMgY29kZSAobGlr
+ZSB2aXJ0aW8tbWRldikuIE5vIG5lZWQgZGVkaWNhdGVkIEFQSSBmb3IKPiA+ID4gZS5nIE1RLiBC
+dXQgdGhlbiB0aGUgQVBJIHdpbGwgbG9vayBtdWNoIGRpZmZlcmVudCB0aGFuIGN1cnJlbnQgdmhv
+c3QgZGlkLgo+ID4gPiAKPiA+ID4gQ29uc2lkZXIgdGhlIGxpbWl0YXRpb24gb2YgMSkgSSB0ZW5k
+IHRvIGNob29zZSAyIG9yIDMuIFdoYXQncyB5b3Ugb3Bpbmlvbj8KPiA+ID4gCj4gPiA+IAo+IApf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
+dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
+cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
+dHVhbGl6YXRpb24=
