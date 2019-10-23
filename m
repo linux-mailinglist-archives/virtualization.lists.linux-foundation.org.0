@@ -2,74 +2,97 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0082CE1702
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 11:58:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EC8BE1746
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 12:04:15 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DB4F4EC8;
-	Wed, 23 Oct 2019 09:58:12 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C0E08EB6;
+	Wed, 23 Oct 2019 10:04:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CFBDBEB2
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 06666EB6
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 09:58:10 +0000 (UTC)
+	Wed, 23 Oct 2019 10:04:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com
-	(us-smtp-delivery-1.mimecast.com [205.139.110.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 6D58214D
+	(us-smtp-delivery-1.mimecast.com [207.211.31.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 4F3C787B
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 09:58:10 +0000 (UTC)
+	Wed, 23 Oct 2019 10:04:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1571824689;
+	s=mimecast20190719; t=1571825045;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
 	in-reply-to:in-reply-to:references:references;
-	bh=JJgYQZfotgXlLYk+1TQwpLuAuYDxrmw6K+/7q0UstaI=;
-	b=DdgpCyiMqCzfHsgXaBK2FOCpFbhPHdnRnDgvuzoryKPtPNEVJTJhWrhXuXdrslUWLuVB4o
-	wYmdYfHxPHafS8uxtyMTQNvddgqCHlFuFGPdJDYEqv5FDLCuMAmjoi9BHF+JBZ8vJkPk04
-	quqFfTKIp0q5FKN0sg/IvhxNGfzZblk=
+	bh=W6lSdzoaa0n+6w843OleSIn3qypoeQbbwBSChxn+qqI=;
+	b=HNZrwzbnStY2k1xoVaT4pEx8pKot84a9PaHu+jqi4z+OdtZl4z1ZmxxBRx/xlYFrwZk3vR
+	csYNXZM7AzuniBo6KJaxk9nme4PtdeCNash5nml3CN7Sci0Nks7Pq4Zw8qYIgi56xN8CsL
+	S1jv127mdlGdk3llXP9B60Zf1bOrXho=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-284-QeJcTTHPPBCURHnAdXrw0Q-1; Wed, 23 Oct 2019 05:58:08 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
-	[10.5.11.15])
+	us-mta-103-3kLTzBU8Pru_Lon8ETvXGg-1; Wed, 23 Oct 2019 06:04:01 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+	[10.5.11.16])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9756780183D;
-	Wed, 23 Oct 2019 09:58:06 +0000 (UTC)
-Received: from [10.72.12.79] (ovpn-12-79.pek2.redhat.com [10.72.12.79])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id E145B5D6C8;
-	Wed, 23 Oct 2019 09:58:01 +0000 (UTC)
-Subject: Re: [RFC 2/2] vhost: IFC VF vdpa layer
-To: "Zhu, Lingshan" <lingshan.zhu@intel.com>, mst@redhat.com,
-	alex.williamson@redhat.com
-References: <20191016013050.3918-1-lingshan.zhu@intel.com>
-	<20191016013050.3918-3-lingshan.zhu@intel.com>
-	<9495331d-3c65-6f49-dcd9-bfdb17054cf0@redhat.com>
-	<f65358e9-6728-8260-74f7-176d7511e989@intel.com>
-	<1cae60b6-938d-e2df-2dca-fbf545f06853@redhat.com>
-	<ddf412c6-69e2-b3ca-d0c8-75de1db78ed9@linux.intel.com>
-	<a16461af-8e78-6089-aad2-8af6d1b487af@intel.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <3c6c0319-7961-67ae-61d3-13771162dba7@redhat.com>
-Date: Wed, 23 Oct 2019 17:58:00 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 31F2A1800D6B;
+	Wed, 23 Oct 2019 10:03:58 +0000 (UTC)
+Received: from [10.36.117.79] (ovpn-117-79.ams2.redhat.com [10.36.117.79])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4AB205C1B2;
+	Wed, 23 Oct 2019 10:03:51 +0000 (UTC)
+Subject: Re: [PATCH RFC v3 6/9] mm: Allow to offline PageOffline() pages with
+	a reference count of 0
+To: Michal Hocko <mhocko@kernel.org>
+References: <20191016114321.GX317@dhcp22.suse.cz>
+	<36fef317-78e3-0500-43ba-f537f9a6fea4@redhat.com>
+	<20191016140350.GD317@dhcp22.suse.cz>
+	<7c7bef01-f904-904a-b0a7-f7b514b8bda8@redhat.com>
+	<20191018081524.GD5017@dhcp22.suse.cz>
+	<83d0a961-952d-21e4-74df-267912b7b6fa@redhat.com>
+	<20191018111843.GH5017@dhcp22.suse.cz>
+	<709d39aa-a7ba-97aa-e66b-e2fec2fdf3c4@redhat.com>
+	<20191022122326.GL9379@dhcp22.suse.cz>
+	<b4be42a4-cbfc-8706-cc94-26211ddcbe4a@redhat.com>
+	<20191023094345.GL754@dhcp22.suse.cz>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat GmbH
+Message-ID: <ad2aef12-61ac-f019-90d1-59637255f9e3@redhat.com>
+Date: Wed, 23 Oct 2019 12:03:51 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.1
 MIME-Version: 1.0
-In-Reply-To: <a16461af-8e78-6089-aad2-8af6d1b487af@intel.com>
+In-Reply-To: <20191023094345.GL754@dhcp22.suse.cz>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: QeJcTTHPPBCURHnAdXrw0Q-1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-MC-Unique: 3kLTzBU8Pru_Lon8ETvXGg-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, zhiyuan.lv@intel.com,
-	jason.zeng@intel.com
+Cc: Pingfan Liu <kernelfans@gmail.com>,
+	virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+	Alexander Potapenko <glider@google.com>,
+	Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+	Ira Weiny <ira.weiny@intel.com>, Andrea Arcangeli <aarcange@redhat.com>,
+	Stephen Rothwell <sfr@canb.auug.org.au>, Yu Zhao <yuzhao@google.com>,
+	Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Pavel Tatashin <pavel.tatashin@microsoft.com>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Mike Rapoport <rppt@linux.vnet.ibm.com>, Qian Cai <cai@lca.pw>,
+	Andrey Ryabinin <aryabinin@virtuozzo.com>,
+	Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+	Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>,
+	Yang Shi <yang.shi@linux.alibaba.com>,
+	linux-kernel@vger.kernel.org, Minchan Kim <minchan@kernel.org>,
+	Wei Yang <richardw.yang@linux.intel.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -81,31 +104,144 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvMTAvMjMg5LiL5Y2INToyNCwgWmh1LCBMaW5nc2hhbiB3cm90ZToKPj4+Pj4KPj4+
-Pj4KPj4+Pj4gc2V0X2NvbmZpZy9nZXRfY29uZmlnIGlzIG1pc3NpbmcuIEl0IGxvb2tzIHRvIG1l
-IHRoZXkgYXJlIG5vdCAKPj4+Pj4gaGFyZCwganVzdCBpbXBsZW1lbnRpbmcgdGhlIGFjY2VzcyB0
-byBkZXZfY2ZnLiBJdCdzIGtleSB0byBtYWtlIAo+Pj4+PiBrZXJuZWwgdmlydGlvIGRyaXZlciB0
-byB3b3JrLgo+Pj4+Pgo+Pj4+PiBBbmQgaW4gdGhlIG5ldyB2ZXJzaW9uIG9mIHZpcml0by1tZGV2
-LCBmZWF0dXJlcyBsaWtlIF9GX0xPR19BTEwgCj4+Pj4+IHNob3VsZCBiZSBhZHZlcnRpc2VkIHRo
-cm91Z2ggZ2V0X21kZXZfZmVhdHVyZXMuCj4+Pj4gSU1ITywgY3VycmVudGx5IHRoZSBkcml2ZXIg
-Y2FuIHdvcmsgd2l0aG91dCBzZXQvZ2V0X2NvbmZpZywgCj4+Pj4gdmhvc3RfbWRldiBkb2Vzbid0
-IGNhbGwgdGhlbSBmb3Igbm93Lgo+Pj4KPj4+Cj4+PiBZZXMsIGJ1dCBpdCB3YXMgcmVxdWlyZWQg
-YnkgdmlydGlvX21kZXYgZm9yIGhvc3QgZHJpdmVyIHRvIHdvcmssIGFuZCAKPj4+IGl0IGxvb2tz
-IHRvIG1lIGl0J3Mgbm90IGhhcmQgdG8gYWRkIHRoZW0uIElmIHBvc3NpYmxlIHBsZWFzZSBhZGQg
-Cj4+PiB0aGVtIGFuZCAidmlydGlvIiB0eXBlIHRoZW4gd2UgY2FuIHVzZSB0aGUgb3BzIGZvciBi
-b3RoIHRoZSBjYXNlIG9mIAo+Pj4gVk0gYW5kIGNvbnRhaW5lcnMuCj4+IHN1cmUKPgo+IEhlbGxv
-IEphc29uLAo+Cj4gSnVzdCB3YW50IHRvIGRvdWJsZSBjb25maXJtIHRoZSBpbXBsZW1lbnRhdGlv
-biBvZiBzZXQvZ2V0X2NvbmZpZywgZm9yIAo+IG5vdywgZGV2X2NmZyBvbmx5IGNvbnRhaW5zIG1h
-Y1s2XSwgc3RhdHVzIGFuZCBtYXhfdmlydHF1ZXVlX3BhaXJzLCBpcyAKPiB0aGF0IGVub3VnaCB0
-byBzdXBwb3J0IHZpcnRpb19tZGV2Pwo+Cj4gVEhhbmtzIQoKClllcywgYW5kIGl0IGRlcGVuZHMg
-b24gdGhlIGZlYXR1cmVzIHRoYXQgeW91IHdhbnQgdG8gYWR2ZXJ0aXNlLiBJZiB5b3UgCmRvbid0
-IHdhbnQgdG8gYWR2ZXJ0aXNlIE1RLCB0aGVyZSdzIG5vIG5lZWQgdG8gZXhwb3NlIG1heF92aXJ0
-cXVldWVfcGFpcnMuCgpUaGFua3MKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBs
-aXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5v
-cmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On 23.10.19 11:43, Michal Hocko wrote:
+> On Tue 22-10-19 16:02:09, David Hildenbrand wrote:
+> [...]
+>>>>> MEM_CANCEL_OFFLINE could gain the reference back to balance the
+>>>>> MEM_GOING_OFFLINE step.
+>>>>
+>>>> The pages are already unisolated and could be used by the buddy. But again,
+>>>> I think you have an idea that tries to avoid putting pages to the buddy.
+>>>
+>>> Yeah, set_page_count(page, 0) if you do not want to release that page
+>>> from the notifier context to reflect that the page is ok to be offlined
+>>> with the rest.
+>>>    
+>>
+>> I neither see how you deal with __test_page_isolated_in_pageblock() nor with
+>> __offline_isolated_pages(). Sorry, but what I read is incomplete and you
+>> probably have a full proposal in your head. Please read below how I think
+>> you want to solve it.
+> 
+> Yeah, sorry that I am throwing incomplete ideas at you. I am just trying
+> to really nail down how to deal with reference counting here because it
+> is an important aspect.
+
+I think we collected all the missing pieces now :) Thanks!
+
+[...]
+
+>>
+>> I was reading
+>>
+>> include/linux/mm_types.h:
+>>
+>> "If you want to use the refcount field, it must be used in such a way
+>>   that other CPUs temporarily incrementing and then decrementing the
+>>   refcount does not cause problems"
+>>
+>> And that made me think "anybody can go ahead and try get_page_unless_zero()".
+>>
+>> If I am missing something here and this can indeed not happen (e.g.,
+>> because PageOffline() pages are never mapped to user space), then I'll
+>> happily remove this code.
+> 
+> The point is that if the owner of the page is holding the only reference
+> to the page then it is clear that nothing like that's happened.
+
+Right, and I think the race I described won't happen in practice. Nobody 
+should be trying to do a get_page_unless_zero() on random pages that are 
+not even mapped to user space. I was (as so often) very careful :)
+
+>> Let's recap what I suggest:
+>>
+>> "PageOffline() pages that have a reference count of 0 will be treated
+>>   like free pages when offlining pages, allowing the containing memory
+>>   block to get offlined. In case a driver wants to revive such a page, it
+>>   has to synchronize against memory onlining/offlining (e.g., using memory
+>>   notifiers) while incrementing the reference count. Also, a driver that
+>>   relies in this feature is aware that re-onlining the memory will require
+>>   to re-set the pages PageOffline() - e.g., via the online_page_callback_t."
+> 
+> OK
+> 
+> [...]
+>> d) __put_page() is modified to not return pages to the buddy in any
+>>     case as a safety net. We might be able to get rid of that.
+> 
+> I do not like exactly this part
+
+Yeah, and I think I can drop it from this patch.
+
+>   
+>> What I think you suggest:
+>>
+>> a) has_unmovable_pages() skips over all PageOffline() pages.
+>>     This results in a lot of false negatives when trying to offline. Might be ok.
+>>
+>> b) The driver decrements the reference count of the PageOffline pages
+>>     in MEM_GOING_OFFLINE.
+> 
+> Well, driver should make the page unreferenced or fail. What is done
+> really depends on the specific driver
+> 
+>> c) The driver increments the reference count of the PageOffline pages
+>>     in MEM_CANCEL_OFFLINE. One issue might be that the pages are no longer
+>>     isolated once we get that call. Might be ok.
+> 
+> Only previous PageBuddy pages are returned to the allocator IIRC. Mostly
+> because of MovablePage()
+> 
+>> d) How to make __test_page_isolated_in_pageblock() succeed?
+>>     Like I propose in this patch (PageOffline() + refcount == 0)?
+> 
+> Yep
+> 
+>> e) How to make __offline_isolated_pages() succeed?
+>>     Like I propose in this patch (PageOffline() + refcount == 0)?
+> 
+> Simply skip over PageOffline pages. Reference count should never be != 0
+> at this stage.
+
+Right, that should be guaranteed by d). (as long as people play by the 
+rules) Same applies to my current patch.
+
+>   
+>> In summary, is what you suggest simply delaying setting the reference count to 0
+>> in MEM_GOING_OFFLINE instead of right away when the driver unpluggs the pages?
+> 
+> Yes
+> 
+>> What's the big benefit you see and I fail to see?
+> 
+> Aparat from no hooks into __put_page it is also an explicit control over
+> the page via reference counting. Do you see any downsides?
+
+The only downside I see is that we get more false negatives on 
+has_unmovable_pages(), eventually resulting in the offlining stage after 
+isolation to loop forever (as some PageOffline() pages are not movable 
+(especially, XEN balloon, HyperV balloon), there won't be progress).
+
+I somewhat don't like forcing everybody that uses PageOffline() 
+(especially all users of balloon compaction) to implement memory 
+notifiers just to avoid that. Maybe, we even want to use PageOffline() 
+in the future in the core (e.g., for memory holes instead of PG_reserved 
+or similar).
+
+Thanks!
+
+-- 
+
+Thanks,
+
+David / dhildenb
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
