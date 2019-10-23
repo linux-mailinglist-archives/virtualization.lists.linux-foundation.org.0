@@ -2,77 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 461C7E1D4D
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 15:50:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CFB60E1E34
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 16:31:27 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 3F5D6C00;
-	Wed, 23 Oct 2019 13:50:28 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id C6433AD7;
+	Wed, 23 Oct 2019 14:31:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CD7D340B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 1A4C741C
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 13:50:26 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8849A831
+	Wed, 23 Oct 2019 14:31:19 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [207.211.31.81])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id C396214D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 13:50:25 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id g50so18207073qtb.4
-	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 06:50:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=YRkY+aBxE9hZdBe1FL06hzEtAF+venmJUi6XuiuleYs=;
-	b=Z7umXCP9MjNBDxPLTg06CWYluvjLNqLabwT5jgh+mIUUCO3NtEoNw8SSOy1h2gvBQs
-	ti0A6f88arX4+LZVmjzwpPSUcFoX09Ef6GbbDpjhCUl+hVboNOf7Z+I0yex3UmoHTNI4
-	pFy9UyRqQLlxWUt4FMv/sQgIKTlzdWxa8ZyljGm0umJ/IDY092SX0ezWjhlv0nZKTBGL
-	Fw207fL5ChkW4et6Mv/Kcuu5n6Egiyr/4ILm3tWn6maGZlUeh3qjIY3d8WzHiIjhH0K8
-	7nfgM4adsYjAD2BidWLEm0dimQhZWtGeAZCXHU+75V6n3O9urs7kBVw2Jd+3gved2aLR
-	tpRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=YRkY+aBxE9hZdBe1FL06hzEtAF+venmJUi6XuiuleYs=;
-	b=S9aPA+h815+Na1FsiyF8a2MUNaB7rAKtdAvH6Zi9pqc+6Y8U45drq2BxJmXFnhaeSE
-	qVlcUgqWvW05QkdiLNi80awiWdITlDAAgd+sPR+bQ6cxwY5CEBtiGPDyWVlpSdgmFwdl
-	otaZDXylfRfh/4ZsfGQRPr5OiNPO9VgSa+wDSQsF0mevRl5LlwHwIvaCLSNeHwUmoXmf
-	0pjoqbCvsdVgMA7iLi3VAwlke/UqaCJ0KjFv56w2KmMUOpQbHGoTis0srccu50FrlahA
-	D/rxnDNlf/UKcSeVNsUxQ/Qi/yZdoaC8YAArt/pnwv0RW/gt+EV6BA1MR7WfCxcYKHJM
-	qefA==
-X-Gm-Message-State: APjAAAU4fbG8ojuWI0gP4qqzb6kcnUYXWtxE2R+RUs8u2CXlxtqRYtNE
-	O0TTK1jgcfhXXlYxqIXESRu1xA19eqUo2Ngyiyf0bw==
-X-Google-Smtp-Source: APXvYqzw4YjCo83icRV+mrEHZmgPfBbFlldrPD5LYUxGJwtTpywYc9LXV0/W6t7MKVG/gnLc8w/UCFAy4gNRXqYJWlg=
-X-Received: by 2002:aed:24af:: with SMTP id t44mr8934014qtc.57.1571838623993; 
-	Wed, 23 Oct 2019 06:50:23 -0700 (PDT)
+	Wed, 23 Oct 2019 14:31:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1571841076;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	in-reply-to:in-reply-to:references:references;
+	bh=NEpRmfIMlgMtQvCpBiyWHq35i58wkyDE9q0HwuYCkJw=;
+	b=CX/jp55mqpirCnAlRHeknPBaUoJlkJ08YBNHwsTWiUT9WnYGltC9bQaY+4+riRU5TLIpCf
+	94bHPCIgfjz372J82STllw/MHwm2SEKN7xYITwffCYuDf5bo7ASnFoyBcgvAWukUkcvpcy
+	m/Hkwtoive+WvNmzbdlsqenJhgkdL2k=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+	us-mta-289-9MNdKUhlPuOEt5UBzneH8A-1; Wed, 23 Oct 2019 10:31:15 -0400
+X-MC-Unique: 9MNdKUhlPuOEt5UBzneH8A-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DE8EC800D49;
+	Wed, 23 Oct 2019 14:31:13 +0000 (UTC)
+Received: from localhost (unknown [10.36.118.70])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 73E735DD61;
+	Wed, 23 Oct 2019 14:31:13 +0000 (UTC)
+Date: Wed, 23 Oct 2019 15:31:12 +0100
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: YueHaibing <yuehaibing@huawei.com>
+Subject: Re: [PATCH -next] virtiofs: remove unused variable 'fc'
+Message-ID: <20191023143112.GF9574@stefanha-x1.localdomain>
+References: <20191023062130.23068-1-yuehaibing@huawei.com>
 MIME-Version: 1.0
-References: <cover.1571762488.git.andreyknvl@google.com>
-	<26e088ae3ebcaa30afe957aeabaa9f0c653df7d0.1571762488.git.andreyknvl@google.com>
-	<CACT4Y+YntxT+cpESOBvbg+h=g-84ECJwQrFg7LM5tbq_zaMd3A@mail.gmail.com>
-	<CAAeHK+yUTZc+BrGDvvTQD4O0hsDzhp0V6GGFdtnmE6U4yWabKw@mail.gmail.com>
-In-Reply-To: <CAAeHK+yUTZc+BrGDvvTQD4O0hsDzhp0V6GGFdtnmE6U4yWabKw@mail.gmail.com>
-Date: Wed, 23 Oct 2019 15:50:12 +0200
-Message-ID: <CACT4Y+b+RTYjUyB1h0SYjEq8vmOZas3ByjeJqVU1LrjxpRKy2Q@mail.gmail.com>
-Subject: Re: [PATCH 3/3] vhost, kcov: collect coverage from vhost_worker
-To: Andrey Konovalov <andreyknvl@google.com>
-X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
-	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
+In-Reply-To: <20191023062130.23068-1-yuehaibing@huawei.com>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Mimecast-Spam-Score: 0
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Anders Roxell <anders.roxell@linaro.org>, Arnd Bergmann <arnd@arndb.de>,
-	KVM list <kvm@vger.kernel.org>, "Michael S . Tsirkin" <mst@redhat.com>,
-	netdev <netdev@vger.kernel.org>, USB list <linux-usb@vger.kernel.org>,
-	LKML <linux-kernel@vger.kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+Cc: mszeredi@redhat.com, miklos@szeredi.hu, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
-	Alan Stern <stern@rowland.harvard.edu>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Elena Reshetova <elena.reshetova@intel.com>,
-	David Windsor <dwindsor@gmail.com>
+	linux-fsdevel@vger.kernel.org, vgoyal@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -84,125 +70,61 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Dmitry Vyukov via Virtualization
-	<virtualization@lists.linux-foundation.org>
-Reply-To: Dmitry Vyukov <dvyukov@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============7469274430740727956=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, Oct 23, 2019 at 3:35 PM Andrey Konovalov <andreyknvl@google.com> wrote:
->
-> On Wed, Oct 23, 2019 at 10:36 AM Dmitry Vyukov <dvyukov@google.com> wrote:
-> >
-> > On Tue, Oct 22, 2019 at 6:46 PM Andrey Konovalov <andreyknvl@google.com> wrote:
-> > >
-> > > This patch adds kcov_remote_start()/kcov_remote_stop() annotations to the
-> > > vhost_worker() function, which is responsible for processing vhost works.
-> > > Since vhost_worker() threads are spawned per vhost device instance
-> > > the common kcov handle is used for kcov_remote_start()/stop() annotations
-> > > (see Documentation/dev-tools/kcov.rst for details). As the result kcov can
-> > > now be used to collect coverage from vhost worker threads.
-> > >
-> > > Signed-off-by: Andrey Konovalov <andreyknvl@google.com>
-> > > ---
-> > >  drivers/vhost/vhost.c | 6 ++++++
-> > >  drivers/vhost/vhost.h | 1 +
-> > >  2 files changed, 7 insertions(+)
-> > >
-> > > diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-> > > index 36ca2cf419bf..a5a557c4b67f 100644
-> > > --- a/drivers/vhost/vhost.c
-> > > +++ b/drivers/vhost/vhost.c
-> > > @@ -30,6 +30,7 @@
-> > >  #include <linux/sched/signal.h>
-> > >  #include <linux/interval_tree_generic.h>
-> > >  #include <linux/nospec.h>
-> > > +#include <linux/kcov.h>
-> > >
-> > >  #include "vhost.h"
-> > >
-> > > @@ -357,7 +358,9 @@ static int vhost_worker(void *data)
-> > >                 llist_for_each_entry_safe(work, work_next, node, node) {
-> > >                         clear_bit(VHOST_WORK_QUEUED, &work->flags);
-> > >                         __set_current_state(TASK_RUNNING);
-> > > +                       kcov_remote_start(dev->kcov_handle);
-> > >                         work->fn(work);
-> > > +                       kcov_remote_stop();
-> > >                         if (need_resched())
-> > >                                 schedule();
-> > >                 }
-> > > @@ -546,6 +549,7 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
-> > >
-> > >         /* No owner, become one */
-> > >         dev->mm = get_task_mm(current);
-> > > +       dev->kcov_handle = current->kcov_handle;
-> >
-> > kcov_handle is not present in task_struct if !CONFIG_KCOV
-> >
-> > Also this does not use KCOV_SUBSYSTEM_COMMON.
-> > We discussed something along the following lines:
-> >
-> > u64 kcov_remote_handle(u64 subsys, u64 id)
-> > {
-> >   WARN_ON(subsys or id has wrong bits set).
->
-> Hm, we can't have warnings in kcov_remote_handle() that is exposed in
-> uapi headers. What we can do is return 0 (invalid handle) if subsys/id
-> have incorrect bits set. And then we can either have another
-> kcov_remote_handle() internally (with a different name though) that
-> has a warning, or have warning in kcov_remote_start(). WDYT?
+--===============7469274430740727956==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="3oCie2+XPXTnK5a5"
+Content-Disposition: inline
 
-I would probably add the warning to kcov_remote_start(). This avoids
-the need for another function and will catch a wrong ID if caller
-generated it by some other means.
-And then ioctls should also detect bad handles passed in and return
-EINVAL. Then we will cover errors for both kernel and user programs.
+--3oCie2+XPXTnK5a5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
-> >   return ...;
-> > }
-> >
-> > kcov_remote_handle(KCOV_SUBSYSTEM_USB, bus);
-> > kcov_remote_handle(KCOV_SUBSYSTEM_COMMON, current->kcov_handle);
-> >
-> >
-> > >         worker = kthread_create(vhost_worker, dev, "vhost-%d", current->pid);
-> > >         if (IS_ERR(worker)) {
-> > >                 err = PTR_ERR(worker);
-> > > @@ -571,6 +575,7 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
-> > >         if (dev->mm)
-> > >                 mmput(dev->mm);
-> > >         dev->mm = NULL;
-> > > +       dev->kcov_handle = 0;
-> > >  err_mm:
-> > >         return err;
-> > >  }
-> > > @@ -682,6 +687,7 @@ void vhost_dev_cleanup(struct vhost_dev *dev)
-> > >         if (dev->worker) {
-> > >                 kthread_stop(dev->worker);
-> > >                 dev->worker = NULL;
-> > > +               dev->kcov_handle = 0;
-> > >         }
-> > >         if (dev->mm)
-> > >                 mmput(dev->mm);
-> > > diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-> > > index e9ed2722b633..a123fd70847e 100644
-> > > --- a/drivers/vhost/vhost.h
-> > > +++ b/drivers/vhost/vhost.h
-> > > @@ -173,6 +173,7 @@ struct vhost_dev {
-> > >         int iov_limit;
-> > >         int weight;
-> > >         int byte_weight;
-> > > +       u64 kcov_handle;
-> > >  };
-> > >
-> > >  bool vhost_exceeds_weight(struct vhost_virtqueue *vq, int pkts, int total_len);
-> > > --
-> > > 2.23.0.866.gb869b98d4c-goog
-> > >
+On Wed, Oct 23, 2019 at 02:21:30PM +0800, YueHaibing wrote:
+> fs/fuse/virtio_fs.c:983:20: warning:
+>  variable fc set but not used [-Wunused-but-set-variable]
+>=20
+> It is not used since commit 7ee1e2e631db ("virtiofs:
+> No need to check fpq->connected state")
+>=20
+> Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+> ---
+>  fs/fuse/virtio_fs.c | 2 --
+>  1 file changed, 2 deletions(-)
+
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+
+--3oCie2+XPXTnK5a5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl2wZDAACgkQnKSrs4Gr
+c8ia7Af+MQeFLTLG0CFTE1qP7CUS9Bb7d/kyzFLEOhRKzGeQ/X5WF82X/8onbeeS
+vWxhG9VDk5YfFMxJs/kCUsOdHyqzSqfU1neF08K+wgu2RsL9LwSvppC+RM68SbUV
++2fh6BaNdKNNtfxRi8Dbw+2xqKLnqlLyhBVCqc7jIAshVMwTeV8GiDAv5WMNWEhQ
+8tXKiepCviHSBWHHE0hFQaczmLQQobtgxvJOE6Ooy0Cvd8daN5f3PiCIqpUfRPTx
+4ojBtmkZN3Cdc9qHM9cQmqZ/AwdtTuCeTuqd5E096I4Zqm0oq+ZiCBmlt/BSKK+t
+sPTRv0L6bdGD6UztBumMJcHOyGplaA==
+=Ygrg
+-----END PGP SIGNATURE-----
+
+--3oCie2+XPXTnK5a5--
+
+
+--===============7469274430740727956==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============7469274430740727956==--
+
