@@ -2,56 +2,56 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id C55F1E16D2
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 11:56:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BB07E16D6
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 11:56:45 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id B0041EB9;
-	Wed, 23 Oct 2019 09:56:31 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id DFC3CEBC;
+	Wed, 23 Oct 2019 09:56:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id F0DB2EA8
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0850FEA8
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 09:56:30 +0000 (UTC)
+	Wed, 23 Oct 2019 09:56:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
-	[205.139.110.61])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 7DB6E14D
+Received: from us-smtp-delivery-1.mimecast.com
+	(us-smtp-delivery-1.mimecast.com [207.211.31.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 85B7814D
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 09:56:30 +0000 (UTC)
+	Wed, 23 Oct 2019 09:56:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1571824589;
+	s=mimecast20190719; t=1571824593;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
 	in-reply-to:in-reply-to:references:references;
-	bh=PbBHwvRLvLZ0eluEmXVUU71SfEOX89Tc9IF8g918SpU=;
-	b=YVLiWCzDxkc7VDiYivyyv9/f9jf+JQ+wKubGNFJCpQMIaX28waVQsnN6txE3itBe6qxqJC
-	ZECE5a+GlXfDPfI+Vzqr2ELm/Q7xWT/eJSS3R2dLu7g5QacGSGbozAiU2QHvzIJ1vDG5YO
-	ZCfhd9J+eEg6eaMoUCpI6Fh5rpX2Mas=
+	bh=9sJ0WDXdJxC1HXNkIu3Ovqw3Nyx7JWkRa0RkZ1qnbSY=;
+	b=YMEalTO4oVqUr0a6rxHwM5cDMfeGnxgtFYCqcHDyDRb4mOp6qUU8sI8K1a4T2Awlw6QmUK
+	jpE0iiZkkhBFFPEZ7MrEu7UdmRF2OkPIVyq8ccPoOT1SowPEmkhUcjNPujzZz+IfReVwfZ
+	5pushh1eBUf7rUUbpB0NmAYZAwMZ7Zs=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-28-33Ff576cMC2trEkMna2QHQ-1; Wed, 23 Oct 2019 05:56:26 -0400
+	us-mta-209-mXUVW6uKNnaV1mPGzPBqOg-1; Wed, 23 Oct 2019 05:56:31 -0400
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
 	[10.5.11.16])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2C3A7476;
-	Wed, 23 Oct 2019 09:56:24 +0000 (UTC)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9DDA21005500;
+	Wed, 23 Oct 2019 09:56:29 +0000 (UTC)
 Received: from steredhat.redhat.com (unknown [10.36.118.164])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id DA17A5C1B2;
-	Wed, 23 Oct 2019 09:56:14 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 810495C1B2;
+	Wed, 23 Oct 2019 09:56:24 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next 02/14] vsock: remove vm_sockets_get_local_cid()
-Date: Wed, 23 Oct 2019 11:55:42 +0200
-Message-Id: <20191023095554.11340-3-sgarzare@redhat.com>
+Subject: [PATCH net-next 03/14] vsock: remove include/linux/vm_sockets.h file
+Date: Wed, 23 Oct 2019 11:55:43 +0200
+Message-Id: <20191023095554.11340-4-sgarzare@redhat.com>
 In-Reply-To: <20191023095554.11340-1-sgarzare@redhat.com>
 References: <20191023095554.11340-1-sgarzare@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-MC-Unique: 33Ff576cMC2trEkMna2QHQ-1
+X-MC-Unique: mXUVW6uKNnaV1mPGzPBqOg-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
@@ -83,63 +83,76 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-vm_sockets_get_local_cid() is only used in virtio_transport_common.c.
-We can replace it calling the virtio_transport_get_ops() and
-using the get_local_cid() callback registered by the transport.
+This header file now only includes the "uapi/linux/vm_sockets.h".
+We can include directly it when needed.
 
 Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
- include/linux/vm_sockets.h              |  2 --
- net/vmw_vsock/af_vsock.c                | 10 ----------
- net/vmw_vsock/virtio_transport_common.c |  2 +-
- 3 files changed, 1 insertion(+), 13 deletions(-)
+ include/linux/vm_sockets.h            | 13 -------------
+ include/net/af_vsock.h                |  2 +-
+ include/net/vsock_addr.h              |  2 +-
+ net/vmw_vsock/vmci_transport_notify.h |  1 -
+ 4 files changed, 2 insertions(+), 16 deletions(-)
+ delete mode 100644 include/linux/vm_sockets.h
 
 diff --git a/include/linux/vm_sockets.h b/include/linux/vm_sockets.h
-index 33f1a2ecd905..7dd899ccb920 100644
+deleted file mode 100644
+index 7dd899ccb920..000000000000
 --- a/include/linux/vm_sockets.h
-+++ b/include/linux/vm_sockets.h
-@@ -10,6 +10,4 @@
- 
- #include <uapi/linux/vm_sockets.h>
- 
--int vm_sockets_get_local_cid(void);
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * VMware vSockets Driver
+- *
+- * Copyright (C) 2007-2013 VMware, Inc. All rights reserved.
+- */
 -
- #endif /* _VM_SOCKETS_H */
-diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
-index 2ab43b2bba31..2f2582fb7fdd 100644
---- a/net/vmw_vsock/af_vsock.c
-+++ b/net/vmw_vsock/af_vsock.c
-@@ -129,16 +129,6 @@ static struct proto vsock_proto = {
- static const struct vsock_transport *transport;
- static DEFINE_MUTEX(vsock_register_mutex);
- 
--/**** EXPORTS ****/
+-#ifndef _VM_SOCKETS_H
+-#define _VM_SOCKETS_H
 -
--/* Get the ID of the local context.  This is transport dependent. */
+-#include <uapi/linux/vm_sockets.h>
 -
--int vm_sockets_get_local_cid(void)
--{
--	return transport->get_local_cid();
--}
--EXPORT_SYMBOL_GPL(vm_sockets_get_local_cid);
--
- /**** UTILS ****/
+-#endif /* _VM_SOCKETS_H */
+diff --git a/include/net/af_vsock.h b/include/net/af_vsock.h
+index 80ea0f93d3f7..c660402b10f2 100644
+--- a/include/net/af_vsock.h
++++ b/include/net/af_vsock.h
+@@ -10,7 +10,7 @@
  
- /* Each bound VSocket is stored in the bind hash table and each connected
-diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
-index d02c9b41a768..b1cd16ed66ea 100644
---- a/net/vmw_vsock/virtio_transport_common.c
-+++ b/net/vmw_vsock/virtio_transport_common.c
-@@ -168,7 +168,7 @@ static int virtio_transport_send_pkt_info(struct vsock_sock *vsk,
- 	struct virtio_vsock_pkt *pkt;
- 	u32 pkt_len = info->pkt_len;
+ #include <linux/kernel.h>
+ #include <linux/workqueue.h>
+-#include <linux/vm_sockets.h>
++#include <uapi/linux/vm_sockets.h>
  
--	src_cid = vm_sockets_get_local_cid();
-+	src_cid = virtio_transport_get_ops()->transport.get_local_cid();
- 	src_port = vsk->local_addr.svm_port;
- 	if (!info->remote_cid) {
- 		dst_cid	= vsk->remote_addr.svm_cid;
+ #include "vsock_addr.h"
+ 
+diff --git a/include/net/vsock_addr.h b/include/net/vsock_addr.h
+index 57d2db5c4bdf..cf8cc140d68d 100644
+--- a/include/net/vsock_addr.h
++++ b/include/net/vsock_addr.h
+@@ -8,7 +8,7 @@
+ #ifndef _VSOCK_ADDR_H_
+ #define _VSOCK_ADDR_H_
+ 
+-#include <linux/vm_sockets.h>
++#include <uapi/linux/vm_sockets.h>
+ 
+ void vsock_addr_init(struct sockaddr_vm *addr, u32 cid, u32 port);
+ int vsock_addr_validate(const struct sockaddr_vm *addr);
+diff --git a/net/vmw_vsock/vmci_transport_notify.h b/net/vmw_vsock/vmci_transport_notify.h
+index 7843f08d4290..a1aa5a998c0e 100644
+--- a/net/vmw_vsock/vmci_transport_notify.h
++++ b/net/vmw_vsock/vmci_transport_notify.h
+@@ -11,7 +11,6 @@
+ #include <linux/types.h>
+ #include <linux/vmw_vmci_defs.h>
+ #include <linux/vmw_vmci_api.h>
+-#include <linux/vm_sockets.h>
+ 
+ #include "vmci_transport.h"
+ 
 -- 
 2.21.0
 
