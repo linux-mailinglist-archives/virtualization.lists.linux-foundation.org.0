@@ -2,76 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51C25E1245
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 08:39:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A487DE126C
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 08:48:12 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id A554AB9E;
-	Wed, 23 Oct 2019 06:39:38 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 9CCD1BB3;
+	Wed, 23 Oct 2019 06:48:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id DE15DAF3
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2D5B5B88
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 06:39:37 +0000 (UTC)
+	Wed, 23 Oct 2019 06:48:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
-	[205.139.110.61])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 68ED98A2
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 001878A2
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 06:39:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1571812776;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=JPoAZ12wvzk0gM/LMQmdcsjRqyc3hj/9X0DxYyB3fTs=;
-	b=hVvgTKdc/bNeH9Wd6Ff8dmsch9XkS8ftV+OW2xaNYTq+d09Og0l3N50DSCJVWDrmDOfwrG
-	ZDu+gOyOaaUT/QkX4Ek0TL3OcwcevVsaegTwgK8nvzuwiJi8LbilbMrkxUO/Cg5ATJjpnw
-	YmfytHTxO9F5TQ30W1xO33jHs4CQA2g=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
-	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-98-pxA18oaXO4G0FL33orpGpw-1; Wed, 23 Oct 2019 02:39:33 -0400
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
-	[10.5.11.23])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5A9AE801E52;
-	Wed, 23 Oct 2019 06:39:31 +0000 (UTC)
-Received: from [10.72.12.161] (ovpn-12-161.pek2.redhat.com [10.72.12.161])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 6BB4A19C70;
-	Wed, 23 Oct 2019 06:39:16 +0000 (UTC)
-Subject: Re: [RFC 2/2] vhost: IFC VF vdpa layer
-To: "Zhu, Lingshan" <lingshan.zhu@intel.com>,
-	Zhu Lingshan <lingshan.zhu@linux.intel.com>, mst@redhat.com,
-	alex.williamson@redhat.com
-References: <20191016013050.3918-1-lingshan.zhu@intel.com>
-	<20191016013050.3918-3-lingshan.zhu@intel.com>
-	<9495331d-3c65-6f49-dcd9-bfdb17054cf0@redhat.com>
-	<f65358e9-6728-8260-74f7-176d7511e989@intel.com>
-	<1cae60b6-938d-e2df-2dca-fbf545f06853@redhat.com>
-	<ddf412c6-69e2-b3ca-d0c8-75de1db78ed9@linux.intel.com>
-	<b2adaab0-bbc3-b7f0-77da-e1e3cab93b76@redhat.com>
-	<6588d9f4-f357-ec78-16a4-ccaf0e3768e7@intel.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <02d44f0a-687f-ed87-518b-7a4d3e83c5d3@redhat.com>
-Date: Wed, 23 Oct 2019 14:39:15 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Wed, 23 Oct 2019 06:48:03 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+	by mx1.suse.de (Postfix) with ESMTP id 02D2EB2BF;
+	Wed, 23 Oct 2019 06:48:01 +0000 (UTC)
+Subject: Re: [PATCH] drm/simple-kms: Standardize arguments for callbacks
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+References: <20191022155536.27939-1-daniel.vetter@ffwll.ch>
+	<56867554-5169-e249-8e55-043d07be3e99@suse.de>
+	<CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+	mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+	XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+	BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+	hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+	9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+	AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+	BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+	Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+	irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+	clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+	mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+	KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+	Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+	UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+	RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+	dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+	ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+	12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+	wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+	h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+	n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+	aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+	HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+	3H26qrE=
+Message-ID: <64a4e824-f730-2ac4-0b02-4ead2bce4b69@suse.de>
+Date: Wed, 23 Oct 2019 08:47:57 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.1
 MIME-Version: 1.0
-In-Reply-To: <6588d9f4-f357-ec78-16a4-ccaf0e3768e7@intel.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-MC-Unique: pxA18oaXO4G0FL33orpGpw-1
-X-Mimecast-Spam-Score: 0
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+In-Reply-To: <CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, zhiyuan.lv@intel.com,
-	jason.zeng@intel.com
+Cc: Daniel Vetter <daniel.vetter@intel.com>,
+	Emil Velikov <emil.velikov@collabora.com>,
+	DRI Development <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
+	NET..." <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -83,48 +79,264 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============4008987601348081600=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvMTAvMjMg5LiL5Y2IMjoxOSwgWmh1LCBMaW5nc2hhbiB3cm90ZToKPgo+IE9uIDEw
-LzIyLzIwMTkgOTowNSBQTSwgSmFzb24gV2FuZyB3cm90ZToKPj4KPj4gT24gMjAxOS8xMC8yMiDk
-uIvljYgyOjUzLCBaaHUgTGluZ3NoYW4gd3JvdGU6Cj4+Pgo+Pj4gT24gMTAvMjEvMjAxOSA2OjE5
-IFBNLCBKYXNvbiBXYW5nIHdyb3RlOgo+Pj4+Cj4+Pj4gT24gMjAxOS8xMC8yMSDkuIvljYg1OjUz
-LCBaaHUsIExpbmdzaGFuIHdyb3RlOgo+Pj4+Pgo+Pj4+PiBPbiAxMC8xNi8yMDE5IDY6MTkgUE0s
-IEphc29uIFdhbmcgd3JvdGU6Cj4+Pj4+Pgo+Pj4+Pj4gT24gMjAxOS8xMC8xNiDkuIrljYg5OjMw
-LCBaaHUgTGluZ3NoYW4gd3JvdGU6Cj4+Pj4+Pj4gVGhpcyBjb21taXQgaW50cm9kdWNlZCBJRkMg
-VkYgb3BlcmF0aW9ucyBmb3IgdmRwYSwgd2hpY2ggY29tcGx5cyB0bwo+Pj4+Pj4+IHZob3N0X21k
-ZXYgaW50ZXJmYWNlcywgaGFuZGxlcyBJRkMgVkYgaW5pdGlhbGl6YXRpb24sCj4+Pj4+Pj4gY29u
-ZmlndXJhdGlvbiBhbmQgcmVtb3ZhbC4KPj4+Pj4+Pgo+Pj4+Pj4+IFNpZ25lZC1vZmYtYnk6IFpo
-dSBMaW5nc2hhbiA8bGluZ3NoYW4uemh1QGludGVsLmNvbT4KPj4+Pj4+PiAtLS0KPj4KPj4KPj4g
-Wy4uLl0KPj4KPj4KPj4+Pgo+Pj4+Cj4+Pj4+Cj4+Pj4+Pgo+Pj4+Pj4KPj4+Pj4+PiArfQo+Pj4+
-Pj4+ICsKPj4+Pj4+PiArc3RhdGljIGludCBpZmN2Zl9tZGV2X3NldF9mZWF0dXJlcyhzdHJ1Y3Qg
-bWRldl9kZXZpY2UgKm1kZXYsIAo+Pj4+Pj4+IHU2NCBmZWF0dXJlcykKPj4+Pj4+PiArewo+Pj4+
-Pj4+ICvCoMKgwqAgc3RydWN0IGlmY3ZmX2FkYXB0ZXIgKmFkYXB0ZXIgPSBtZGV2X2dldF9kcnZk
-YXRhKG1kZXYpOwo+Pj4+Pj4+ICvCoMKgwqAgc3RydWN0IGlmY3ZmX2h3ICp2ZiA9IElGQ19QUklW
-QVRFX1RPX1ZGKGFkYXB0ZXIpOwo+Pj4+Pj4+ICsKPj4+Pj4+PiArwqDCoMKgIHZmLT5yZXFfZmVh
-dHVyZXMgPSBmZWF0dXJlczsKPj4+Pj4+PiArCj4+Pj4+Pj4gK8KgwqDCoCByZXR1cm4gMDsKPj4+
-Pj4+PiArfQo+Pj4+Pj4+ICsKPj4+Pj4+PiArc3RhdGljIHU2NCBpZmN2Zl9tZGV2X2dldF92cV9z
-dGF0ZShzdHJ1Y3QgbWRldl9kZXZpY2UgKm1kZXYsIAo+Pj4+Pj4+IHUxNiBxaWQpCj4+Pj4+Pj4g
-K3sKPj4+Pj4+PiArwqDCoMKgIHN0cnVjdCBpZmN2Zl9hZGFwdGVyICphZGFwdGVyID0gbWRldl9n
-ZXRfZHJ2ZGF0YShtZGV2KTsKPj4+Pj4+PiArwqDCoMKgIHN0cnVjdCBpZmN2Zl9odyAqdmYgPSBJ
-RkNfUFJJVkFURV9UT19WRihhZGFwdGVyKTsKPj4+Pj4+PiArCj4+Pj4+Pj4gK8KgwqDCoCByZXR1
-cm4gdmYtPnZyaW5nW3FpZF0ubGFzdF9hdmFpbF9pZHg7Cj4+Pj4+Pgo+Pj4+Pj4KPj4+Pj4+IERv
-ZXMgdGhpcyByZWFsbHkgd29yaz8gSSdkIGV4cGVjdCBpdCBzaG91bGQgYmUgZmV0Y2hlZCBmcm9t
-IGh3IAo+Pj4+Pj4gc2luY2UgaXQncyBhbiBpbnRlcm5hbCBzdGF0ZS4KPj4+Pj4gZm9yIG5vdywg
-aXQncyB3b3JraW5nLCB3ZSBpbnRlbmQgdG8gc3VwcG9ydCBMTSBpbiBuZXh0IHZlcnNpb24gCj4+
-Pj4+IGRyaXZlcnMuCj4+Pj4KPj4+Pgo+Pj4+IEknbSBub3Qgc3VyZSBJIHVuZGVyc3RhbmQgaGVy
-ZSwgSSBkb24ndCBzZWUgYW55IHN5bmNocm9uaXphdGlvbiAKPj4+PiBiZXR3ZWVuIHRoZSBoYXJk
-d2FyZSBhbmQgbGFzdF9hdmFpbF9pZHgsIHNvIGxhc3RfYXZhaWxfaWR4IHNob3VsZCAKPj4+PiBu
-b3QgY2hhbmdlLgo+Pj4+Cj4+Pj4gQnR3LCB3aGF0IGRpZCAiTE0iIG1lYW4gOikgPwo+Pj4KPj4+
-IEkgY2FuIGFkZCBiYXIgSU8gb3BlcmF0aW9ucyBoZXJlLCBMTSA9IGxpdmUgbWlncmF0aW9uLCBz
-b3JyeSBmb3IgdGhlIAo+Pj4gYWJicmV2aWF0aW9uLgo+Pgo+Pgo+PiBKdXN0IG1ha2Ugc3VyZSBJ
-IHVuZGVyc3RhbmQgaGVyZSwgSSBiZWxpZXZlIHlvdSBtZWFuIHJlYWRpbmcgCj4+IGxhc3RfYXZh
-aWxfaWR4IHRocm91Z2ggSU8gYmFyIGhlcmU/Cj4+Cj4+IFRoYW5rcwo+Cj4gSGkgSmFzb24sCj4K
-PiBZZXMsIEkgbWVhbiBsYXN0X2F2YWlsX2lkeC4gaXMgdGhhdCBjb3JyZWN0Pwo+Cj4gVEhhbmtz
-CgoKWWVzLgoKVGhhbmtzCgoKPgo+Pgo+PgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0
-aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0
-aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============4008987601348081600==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="3738eZazcuctdTVEnimlhMqC7srKkdmvs"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--3738eZazcuctdTVEnimlhMqC7srKkdmvs
+Content-Type: multipart/mixed; boundary="IDpWwrnJOX80L69oW7hJJsPBaVOSySCT3";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: DRI Development <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>,
+ Emil Velikov <emil.velikov@collabora.com>
+Message-ID: <64a4e824-f730-2ac4-0b02-4ead2bce4b69@suse.de>
+Subject: Re: [PATCH] drm/simple-kms: Standardize arguments for callbacks
+References: <20191022155536.27939-1-daniel.vetter@ffwll.ch>
+ <56867554-5169-e249-8e55-043d07be3e99@suse.de>
+ <CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
+In-Reply-To: <CAKMK7uHo2L8m+VT1vSMjOdScJmuSQP032HyAFj_aYiCJu+gaRQ@mail.gmail.com>
+
+--IDpWwrnJOX80L69oW7hJJsPBaVOSySCT3
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+Am 22.10.19 um 21:03 schrieb Daniel Vetter:
+> On Tue, Oct 22, 2019 at 7:16 PM Thomas Zimmermann <tzimmermann@suse.de>=
+ wrote:
+>>
+>> Hi,
+>>
+>> there are two types of callbacks in struct
+>> drm_simple_display_pipe_funcs: functions that are genuine to simple KM=
+S,
+>> and functions that are merely forwarded from another structure (crtc,
+>> plane, etc).
+>>
+>> In the former category are enable(), disable(), check(), and update().=
+
+>> Those should probably receive a simple display pipe as their first arg=
+ument.
+>=20
+> mode_valid _very_ much belongs to this category too, since there's
+> mode_valid hooks also on other objects. But simple pipe helper
+> condenses that down to one mode_valid hook (we could also put the
+> mode_valid onto encoder, wouldn't change anything).
+>=20
+>> In the latter category are mode_valid(), prepare_fb(), cleanup_fb(),
+>> enable_vblank(), and disable_vblank(). IMHO those functions should
+>> receive a pointer to the original structure as their first argument.
+>> This type provides the context in which the operations make sense. (Ev=
+en
+>> their documentation already refers to the original structure.)
+>=20
+> Now on those you can maybe make a case that they only exist in one
+> object. But the entire point of simple helpers was to condense the zoo
+> of drm types down to one. Only reason you don't also get a
+> drm_simple_display_pipe_state is that this one would be a bit more
+> work to make work correctly. If we full on leak all the underlying
+> objects, then you might as well set them up yourself and set up all
+> the hooks, it's just a few more lines of code.
+>=20
+> Imo for simple pipe we should go more into that direction, not less.
+>=20
+>> I admit that not all are as shareable as prepare_fb() and enable_fb().=
+
+>> But what else than boiler-plate wrappers do we get from simple display=
+
+>> pipe here?
+>=20
+> Boiler plate wrappers is pretty much the entire point of simple pipe
+> helpers. Anytime you're interested in the things it abstracts away
+> (crtc, plane, encoder) you probably want your own atomic
+> implementation.
+
+I was speaking of boiler-plate code in drivers and other helpers (e.g.,
+drm_gem_fb_simple_display_pipe_prepare_fb() )
+
+TBH I don't think it is possible to build and use simple pipe without
+exposing the underlying primitives (crtc, plane, connector). This would
+require a completely separate set of atomic helpers. IMHO the current
+simple pipe is a mid-layer and comes with typical mid-layer problems.
+
+Anyway, given your rational for the current design, I'll update my
+recent patches for prepare_fb() to support simple pipe.
+
+For this patch
+
+  Acked-By: Thomas Zimmermann <tzimmermann@suse.de>
+
+Best regards
+Thomas
+
+> conversion is a good fit, it's not meant to be useful for all small
+> drivers. Only for the _really_ simple ones.
+>=20
+> Otherwise if we readd all the bells and whistles to simple pipe
+> helpers, then we just end back where we started. That's also why I
+> personally think explicit simple wrappers would fit better, instead of
+> wrestling the prepare/cleanup_fb functions to match full atomic
+> helpers.
+> -Daniel
+>=20
+>>
+>> Best regards
+>> Thomas
+>>
+>> Am 22.10.19 um 17:55 schrieb Daniel Vetter:
+>>> Passing the wrong type feels icky, everywhere else we use the pipe as=
+
+>>> the first parameter. Spotted while discussing patches with Thomas
+>>> Zimmermann.
+>>>
+>>> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+>>> Cc: Noralf Tr=C3=B8nnes <noralf@tronnes.org>
+>>> Cc: Gerd Hoffmann <kraxel@redhat.com>
+>>> Cc: Eric Anholt <eric@anholt.net>
+>>> Cc: Emil Velikov <emil.velikov@collabora.com>
+>>> Cc: virtualization@lists.linux-foundation.org
+>>> Cc: Linus Walleij <linus.walleij@linaro.org>
+>>> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+>>> ---
+>>>  drivers/gpu/drm/cirrus/cirrus.c         | 2 +-
+>>>  drivers/gpu/drm/drm_simple_kms_helper.c | 2 +-
+>>>  drivers/gpu/drm/pl111/pl111_display.c   | 4 ++--
+>>>  include/drm/drm_simple_kms_helper.h     | 2 +-
+>>>  4 files changed, 5 insertions(+), 5 deletions(-)
+>>>
+>>> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus=
+/cirrus.c
+>>> index 7d08d067e1a4..248c9f765c45 100644
+>>> --- a/drivers/gpu/drm/cirrus/cirrus.c
+>>> +++ b/drivers/gpu/drm/cirrus/cirrus.c
+>>> @@ -390,7 +390,7 @@ static int cirrus_conn_init(struct cirrus_device =
+*cirrus)
+>>>  /* -----------------------------------------------------------------=
+- */
+>>>  /* cirrus (simple) display pipe                                     =
+       */
+>>>
+>>> -static enum drm_mode_status cirrus_pipe_mode_valid(struct drm_crtc *=
+crtc,
+>>> +static enum drm_mode_status cirrus_pipe_mode_valid(struct drm_simple=
+_display_pipe *pipe,
+>>>                                                  const struct drm_dis=
+play_mode *mode)
+>>>  {
+>>>       if (cirrus_check_size(mode->hdisplay, mode->vdisplay, NULL) < 0=
+)
+>>> diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/dr=
+m/drm_simple_kms_helper.c
+>>> index 046055719245..15fb516ae2d8 100644
+>>> --- a/drivers/gpu/drm/drm_simple_kms_helper.c
+>>> +++ b/drivers/gpu/drm/drm_simple_kms_helper.c
+>>> @@ -43,7 +43,7 @@ drm_simple_kms_crtc_mode_valid(struct drm_crtc *crt=
+c,
+>>>               /* Anything goes */
+>>>               return MODE_OK;
+>>>
+>>> -     return pipe->funcs->mode_valid(crtc, mode);
+>>> +     return pipe->funcs->mode_valid(pipe, mode);
+>>>  }
+>>>
+>>>  static int drm_simple_kms_crtc_check(struct drm_crtc *crtc,
+>>> diff --git a/drivers/gpu/drm/pl111/pl111_display.c b/drivers/gpu/drm/=
+pl111/pl111_display.c
+>>> index 024771a4083e..703ddc803c55 100644
+>>> --- a/drivers/gpu/drm/pl111/pl111_display.c
+>>> +++ b/drivers/gpu/drm/pl111/pl111_display.c
+>>> @@ -48,10 +48,10 @@ irqreturn_t pl111_irq(int irq, void *data)
+>>>  }
+>>>
+>>>  static enum drm_mode_status
+>>> -pl111_mode_valid(struct drm_crtc *crtc,
+>>> +pl111_mode_valid(struct drm_simple_display_pipe *pipe,
+>>>                const struct drm_display_mode *mode)
+>>>  {
+>>> -     struct drm_device *drm =3D crtc->dev;
+>>> +     struct drm_device *drm =3D pipe->crtc.dev;
+>>>       struct pl111_drm_dev_private *priv =3D drm->dev_private;
+>>>       u32 cpp =3D priv->variant->fb_bpp / 8;
+>>>       u64 bw;
+>>> diff --git a/include/drm/drm_simple_kms_helper.h b/include/drm/drm_si=
+mple_kms_helper.h
+>>> index 4d89cd0a60db..15afee9cf049 100644
+>>> --- a/include/drm/drm_simple_kms_helper.h
+>>> +++ b/include/drm/drm_simple_kms_helper.h
+>>> @@ -49,7 +49,7 @@ struct drm_simple_display_pipe_funcs {
+>>>        *
+>>>        * drm_mode_status Enum
+>>>        */
+>>> -     enum drm_mode_status (*mode_valid)(struct drm_crtc *crtc,
+>>> +     enum drm_mode_status (*mode_valid)(struct drm_simple_display_pi=
+pe *pipe,
+>>>                                          const struct drm_display_mod=
+e *mode);
+>>>
+>>>       /**
+>>>
+>>
+>> --
+>> Thomas Zimmermann
+>> Graphics Driver Developer
+>> SUSE Software Solutions Germany GmbH
+>> Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+>> (HRB 36809, AG N=C3=BCrnberg)
+>> Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+>>
+>=20
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--IDpWwrnJOX80L69oW7hJJsPBaVOSySCT3--
+
+--3738eZazcuctdTVEnimlhMqC7srKkdmvs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl2v96AACgkQaA3BHVML
+eiNyQAf/bHb3V1RDufKDc3sepf4QTxO+0RDoM9lloJKdcVq9t26IfQAMinzjluEk
+zxwOy0pdI1VjWMdqnKNeTuUpmndh6kSsDhLkSB/zJtZme5ORRrfovA7/I5pkGwiQ
+Oc9wLEv5OlVv8Q0b08eNeaN6WE3UrurKXL4y8nt7uuuBVyQEu84xkVlw4+4PuHFo
+Oz19wOwkIhPhUQLlI/9+KyNWo4wEZfElWB9c8+FXk2IzoD1UlAFxbELQR+KWpqfS
+1W7LPRboFODusOuCa9jt9p+yR3qGWjkasJu4Wna7gxLBi+bmyZ/v6lLB3fEFRnA2
+oSuy2HOjtF/3pVjRMv3ceTn40o88QA==
+=ZgIZ
+-----END PGP SIGNATURE-----
+
+--3738eZazcuctdTVEnimlhMqC7srKkdmvs--
+
+--===============4008987601348081600==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============4008987601348081600==--
