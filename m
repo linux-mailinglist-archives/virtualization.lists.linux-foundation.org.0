@@ -2,71 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ABE8E130A
-	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 09:25:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1620E145A
+	for <lists.virtualization@lfdr.de>; Wed, 23 Oct 2019 10:36:43 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 49D56C6A;
-	Wed, 23 Oct 2019 07:25:24 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 0D853C4E;
+	Wed, 23 Oct 2019 08:36:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 46D0AC2C
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2EE55C4E
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 07:25:22 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
-	[207.211.31.81])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 7C435896
+	Wed, 23 Oct 2019 08:36:34 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AA18187E
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 23 Oct 2019 07:25:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1571815520;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=t5zjHQpTeAkClNQhQEPJ3+MpaSkNKcTWow8Ri9dKxRU=;
-	b=gimglyuuhmLc5QxbcNDyyxMshLtV95QxW2cUHNa7/qMj8hKGIKxhTX0onyB15qIp664hBo
-	b1B1wH0i8y7UpfQuSibqFkcxgiz49J/l36aoqqBrc5IL1AQD73V7ivgaIIW1nbmzh+vbbe
-	kGl2khCiFF0glgxnpHNCQl1x/uYcFf0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
-	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-59-E_1lPYQvMbq6Oa_69H82bw-1; Wed, 23 Oct 2019 03:25:16 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 94EB01800DD0;
-	Wed, 23 Oct 2019 07:25:14 +0000 (UTC)
-Received: from [10.72.12.161] (ovpn-12-161.pek2.redhat.com [10.72.12.161])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id BCF725C1D4;
-	Wed, 23 Oct 2019 07:25:01 +0000 (UTC)
-Subject: Re: [PATCH v2] vhost: introduce mdev based hardware backend
-To: Tiwei Bie <tiwei.bie@intel.com>
-References: <20191022095230.2514-1-tiwei.bie@intel.com>
-	<47a572fd-5597-1972-e177-8ee25ca51247@redhat.com>
-	<20191023030253.GA15401@___>
-	<ac36f1e3-b972-71ac-fe0c-3db03e016dcf@redhat.com>
-	<20191023070747.GA30533@___>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <106834b5-dae5-82b2-0f97-16951709d075@redhat.com>
-Date: Wed, 23 Oct 2019 15:25:00 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Wed, 23 Oct 2019 08:36:33 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id m4so2084324qke.9
+	for <virtualization@lists.linux-foundation.org>;
+	Wed, 23 Oct 2019 01:36:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=9v9iQV19DgUi7HpW2WaXbL0gSupsIrn2jbWl4B5cbgA=;
+	b=GVNr3B/Pu7MhpLCF/dDljxT+FdoGWUX3wKn2/1eUXY7mn6PbLjPdBp3YQsOZ3yPYLQ
+	WSWxUBvh9cHNDXTl/XYd6WcF58ndf5Enb6Zf8GLJrDjg5QY6kDKBcRU+VbEj3gahLRg7
+	vJ9UFiG27wNkTs/40C073ctPhILdFtxNxS+6tI4RSo7/BtCENKdU3NUEzHRPNk2pkyGp
+	cKRNlEWDrcCZQOXVaRFjIaVuR+ng9CxjSsJOAjcXp+VlZYyTIbSM7X1Oxmk8LwouDTkq
+	JOfQ4gCi61/2ZVRZbGRn4D2gGe28nDUzHjiqJm8y4UqCUqMgTGv1E98tZF4saJknGme8
+	2zeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=9v9iQV19DgUi7HpW2WaXbL0gSupsIrn2jbWl4B5cbgA=;
+	b=kO8mWR9Fz1iapezKZEGtTGwDg2COPyLfmcWUaltkSGECPMQgFCtZqauSnKKflCsCbR
+	AID6Y3KyKnyc9+RN8cQioabukaVou+kSzs6aMngZ6K1h0lDBK3ogmua6kaoECPrUsZK3
+	fcjscjs3GnYVagZ+3QSGHP0IG59CtFafLIDvupo29A9CaTdZ6B+/WdyTI/4I3D7Iaez2
+	JlTWSNrAk/aOg95IFH87VIyGsj2RSXxtywe3M6tj5FYrH8FMALKqCl49wyZFMEqt2eW9
+	RX5nQFQz/wILJB7wsz0foZdoSCOy8XfHy+q5ZYS0FkbXg0hSwu2FuARBFHRAlMgPyVXL
+	6KHA==
+X-Gm-Message-State: APjAAAWJODljxh2PIJRkHxYnCvh1iTIEGKkYrcMU947CeFHoaahY4tcZ
+	acNiuRY/m8O9oByJF/osYJMTHfqB12UxToRtPSHOHg==
+X-Google-Smtp-Source: APXvYqz5/xtUvZp/vVxcL3Gonlq1fmzZz6efHYtE62iXY8lYaTgZeEKiWaOv+Rs97z8NDXNy+5/kH6MjE+IQOOktJZw=
+X-Received: by 2002:a05:620a:16a6:: with SMTP id
+	s6mr6613669qkj.407.1571819792095; 
+	Wed, 23 Oct 2019 01:36:32 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20191023070747.GA30533@___>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-MC-Unique: E_1lPYQvMbq6Oa_69H82bw-1
-X-Mimecast-Spam-Score: 0
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+References: <cover.1571762488.git.andreyknvl@google.com>
+	<26e088ae3ebcaa30afe957aeabaa9f0c653df7d0.1571762488.git.andreyknvl@google.com>
+In-Reply-To: <26e088ae3ebcaa30afe957aeabaa9f0c653df7d0.1571762488.git.andreyknvl@google.com>
+Date: Wed, 23 Oct 2019 10:36:20 +0200
+Message-ID: <CACT4Y+YntxT+cpESOBvbg+h=g-84ECJwQrFg7LM5tbq_zaMd3A@mail.gmail.com>
+Subject: Re: [PATCH 3/3] vhost, kcov: collect coverage from vhost_worker
+To: Andrey Konovalov <andreyknvl@google.com>
+X-Spam-Status: No, score=-9.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_NONE,
+	USER_IN_DEF_DKIM_WL autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
-	zhihong.wang@intel.com, maxime.coquelin@redhat.com, lingshan.zhu@intel.com
+Cc: Anders Roxell <anders.roxell@linaro.org>, Arnd Bergmann <arnd@arndb.de>,
+	KVM list <kvm@vger.kernel.org>, "Michael S . Tsirkin" <mst@redhat.com>,
+	netdev <netdev@vger.kernel.org>, USB list <linux-usb@vger.kernel.org>,
+	LKML <linux-kernel@vger.kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+	virtualization@lists.linux-foundation.org,
+	Alan Stern <stern@rowland.harvard.edu>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Elena Reshetova <elena.reshetova@intel.com>,
+	David Windsor <dwindsor@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -78,122 +83,107 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+From: Dmitry Vyukov via Virtualization
+	<virtualization@lists.linux-foundation.org>
+Reply-To: Dmitry Vyukov <dvyukov@google.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvMTAvMjMg5LiL5Y2IMzowNywgVGl3ZWkgQmllIHdyb3RlOgo+IE9uIFdlZCwgT2N0
-IDIzLCAyMDE5IGF0IDAxOjQ2OjIzUE0gKzA4MDAsIEphc29uIFdhbmcgd3JvdGU6Cj4+IE9uIDIw
-MTkvMTAvMjMg5LiK5Y2IMTE6MDIsIFRpd2VpIEJpZSB3cm90ZToKPj4+IE9uIFR1ZSwgT2N0IDIy
-LCAyMDE5IGF0IDA5OjMwOjE2UE0gKzA4MDAsIEphc29uIFdhbmcgd3JvdGU6Cj4+Pj4gT24gMjAx
-OS8xMC8yMiDkuIvljYg1OjUyLCBUaXdlaSBCaWUgd3JvdGU6Cj4+Pj4+IFRoaXMgcGF0Y2ggaW50
-cm9kdWNlcyBhIG1kZXYgYmFzZWQgaGFyZHdhcmUgdmhvc3QgYmFja2VuZC4KPj4+Pj4gVGhpcyBi
-YWNrZW5kIGlzIGJ1aWx0IG9uIHRvcCBvZiB0aGUgc2FtZSBhYnN0cmFjdGlvbiB1c2VkCj4+Pj4+
-IGluIHZpcnRpby1tZGV2IGFuZCBwcm92aWRlcyBhIGdlbmVyaWMgdmhvc3QgaW50ZXJmYWNlIGZv
-cgo+Pj4+PiB1c2Vyc3BhY2UgdG8gYWNjZWxlcmF0ZSB0aGUgdmlydGlvIGRldmljZXMgaW4gZ3Vl
-c3QuCj4+Pj4+Cj4+Pj4+IFRoaXMgYmFja2VuZCBpcyBpbXBsZW1lbnRlZCBhcyBhIG1kZXYgZGV2
-aWNlIGRyaXZlciBvbiB0b3AKPj4+Pj4gb2YgdGhlIHNhbWUgbWRldiBkZXZpY2Ugb3BzIHVzZWQg
-aW4gdmlydGlvLW1kZXYgYnV0IHVzaW5nCj4+Pj4+IGEgZGlmZmVyZW50IG1kZXYgY2xhc3MgaWQs
-IGFuZCBpdCB3aWxsIHJlZ2lzdGVyIHRoZSBkZXZpY2UKPj4+Pj4gYXMgYSBWRklPIGRldmljZSBm
-b3IgdXNlcnNwYWNlIHRvIHVzZS4gVXNlcnNwYWNlIGNhbiBzZXR1cAo+Pj4+PiB0aGUgSU9NTVUg
-d2l0aCB0aGUgZXhpc3RpbmcgVkZJTyBjb250YWluZXIvZ3JvdXAgQVBJcyBhbmQKPj4+Pj4gdGhl
-biBnZXQgdGhlIGRldmljZSBmZCB3aXRoIHRoZSBkZXZpY2UgbmFtZS4gQWZ0ZXIgZ2V0dGluZwo+
-Pj4+PiB0aGUgZGV2aWNlIGZkIG9mIHRoaXMgZGV2aWNlLCB1c2Vyc3BhY2UgY2FuIHVzZSB2aG9z
-dCBpb2N0bHMKPj4+Pj4gdG8gc2V0dXAgdGhlIGJhY2tlbmQuCj4+Pj4+Cj4+Pj4+IFNpZ25lZC1v
-ZmYtYnk6IFRpd2VpIEJpZSA8dGl3ZWkuYmllQGludGVsLmNvbT4KPj4+Pj4gLS0tCj4+Pj4+IFRo
-aXMgcGF0Y2ggZGVwZW5kcyBvbiBiZWxvdyBzZXJpZXM6Cj4+Pj4+IGh0dHBzOi8vbGttbC5vcmcv
-bGttbC8yMDE5LzEwLzE3LzI4Ngo+Pj4+Pgo+Pj4+PiB2MSAtPiB2MjoKPj4+Pj4gLSBSZXBsYWNl
-IF9TRVRfU1RBVEUgd2l0aCBfU0VUX1NUQVRVUyAoTVNUKTsKPj4+Pj4gLSBDaGVjayBzdGF0dXMg
-Yml0cyBhdCBlYWNoIHN0ZXAgKE1TVCk7Cj4+Pj4+IC0gUmVwb3J0IHRoZSBtYXggcmluZyBzaXpl
-IGFuZCBtYXggbnVtYmVyIG9mIHF1ZXVlcyAoTVNUKTsKPj4+Pj4gLSBBZGQgbWlzc2luZyBNT0RV
-TEVfREVWSUNFX1RBQkxFIChKYXNvbik7Cj4+Pj4+IC0gT25seSBzdXBwb3J0IHRoZSBuZXR3b3Jr
-IGJhY2tlbmQgdy9vIG11bHRpcXVldWUgZm9yIG5vdzsKPj4+PiBBbnkgaWRlYSBvbiBob3cgdG8g
-ZXh0ZW5kIGl0IHRvIHN1cHBvcnQgZGV2aWNlcyBvdGhlciB0aGFuIG5ldD8gSSB0aGluayB3ZQo+
-Pj4+IHdhbnQgYSBnZW5lcmljIEFQSSBvciBhbiBBUEkgdGhhdCBjb3VsZCBiZSBtYWRlIGdlbmVy
-aWMgaW4gdGhlIGZ1dHVyZS4KPj4+Pgo+Pj4+IERvIHdlIHdhbnQgdG8gZS5nIGhhdmluZyBhIGdl
-bmVyaWMgdmhvc3QgbWRldiBmb3IgYWxsIGtpbmRzIG9mIGRldmljZXMgb3IKPj4+PiBpbnRyb2R1
-Y2luZyBlLmcgdmhvc3QtbmV0LW1kZXYgYW5kIHZob3N0LXNjc2ktbWRldj8KPj4+IE9uZSBwb3Nz
-aWJsZSB3YXkgaXMgdG8gZG8gd2hhdCB2aG9zdC11c2VyIGRvZXMuIEkuZS4gQXBhcnQgZnJvbQo+
-Pj4gdGhlIGdlbmVyaWMgcmluZywgZmVhdHVyZXMsIC4uLiByZWxhdGVkIGlvY3Rscywgd2UgYWxz
-byBpbnRyb2R1Y2UKPj4+IGRldmljZSBzcGVjaWZpYyBpb2N0bHMgd2hlbiB3ZSBuZWVkIHRoZW0u
-IEFzIHZob3N0LW1kZXYganVzdCBuZWVkcwo+Pj4gdG8gZm9yd2FyZCBjb25maWdzIGJldHdlZW4g
-cGFyZW50IGFuZCB1c2Vyc3BhY2UgYW5kIGV2ZW4gd29uJ3QKPj4+IGNhY2hlIGFueSBpbmZvIHdo
-ZW4gcG9zc2libGUsCj4+Cj4+IFNvIGl0IGxvb2tzIHRvIG1lIHRoaXMgaXMgb25seSBwb3NzaWJs
-ZSBpZiB3ZSBleHBvc2UgZS5nIHNldF9jb25maWcgYW5kCj4+IGdldF9jb25maWcgdG8gdXNlcnNw
-YWNlLgo+IFRoZSBzZXRfY29uZmlnIGFuZCBnZXRfY29uZmlnIGludGVyZmFjZSBpc24ndCByZWFs
-bHkgZXZlcnl0aGluZwo+IG9mIGRldmljZSBzcGVjaWZpYyBzZXR0aW5ncy4gV2UgYWxzbyBoYXZl
-IGN0cmxxIGluIHZpcnRpby1uZXQuCgoKWWVzLCBidXQgaXQgY291bGQgYmUgcHJvY2Vzc2VkIGJ5
-IHRoZSBleGlzdCBBUEkuIElzbid0IGl0PyBKdXN0IHNldCBjdHJsIAp2cSBhZGRyZXNzIGFuZCBs
-ZXQgcGFyZW50IHRvIGRlYWwgd2l0aCB0aGF0LgoKCj4KPj4KPj4+IEkgdGhpbmsgaXQgbWlnaHQg
-YmUgYmV0dGVyIHRvIGRvCj4+PiB0aGlzIGluIG9uZSBnZW5lcmljIHZob3N0LW1kZXYgbW9kdWxl
-Lgo+Pgo+PiBMb29raW5nIGF0IGRlZmluaXRpb25zIG9mIFZob3N0VXNlclJlcXVlc3QgaW4gcWVt
-dSwgaXQgbWl4ZWQgZ2VuZXJpYyBBUEkKPj4gd2l0aCBkZXZpY2Ugc3BlY2lmaWMgQVBJLiBJZiB3
-ZSB3YW50IGdvIHRoaXMgd2F5cyAoYSBnZW5lcmljIHZob3N0LW1kZXYpLAo+PiBtb3JlIHF1ZXN0
-aW9ucyBuZWVkcyB0byBiZSBhbnN3ZXJlZDoKPj4KPj4gMSkgSG93IGNvdWxkIHVzZXJzcGFjZSBr
-bm93IHdoaWNoIHR5cGUgb2Ygdmhvc3QgaXQgd291bGQgdXNlPyBEbyB3ZSBuZWVkIHRvCj4+IGV4
-cG9zZSB2aXJ0aW8gc3Vic3lzdGVtIGRldmljZSBpbiBmb3IgdXNlcnNwYWNlIHRoaXMgY2FzZT8K
-Pj4KPj4gMikgVGhhdCBnZW5lcmljIHZob3N0LW1kZXYgbW9kdWxlIHN0aWxsIG5lZWQgdG8gZmls
-dGVyIG91dCB1bnN1cHBvcnRlZAo+PiBpb2N0bHMgZm9yIGEgc3BlY2lmaWMgdHlwZS4gRS5nIGlm
-IGl0IHByb2JlcyBhIG5ldCBkZXZpY2UsIGl0IHNob3VsZCByZWZ1c2UKPj4gQVBJIGZvciBvdGhl
-ciB0eXBlLiBUaGlzIGluIGZhY3QgYSB2aG9zdC1tZGV2LW5ldCBidXQganVzdCBub3QgbW9kdWxh
-cml6ZSBpdAo+PiBvbiB0b3Agb2Ygdmhvc3QtbWRldi4KPj4KPj4KPj4+Pj4gLSBTb21lIG1pbm9y
-IGZpeGVzIGFuZCBpbXByb3ZlbWVudHM7Cj4+Pj4+IC0gUmViYXNlIG9uIHRvcCBvZiB2aXJ0aW8t
-bWRldiBzZXJpZXMgdjQ7Cj4gWy4uLl0KPj4+Pj4gKwo+Pj4+PiArc3RhdGljIGxvbmcgdmhvc3Rf
-bWRldl9nZXRfZmVhdHVyZXMoc3RydWN0IHZob3N0X21kZXYgKm0sIHU2NCBfX3VzZXIgKmZlYXR1
-cmVwKQo+Pj4+PiArewo+Pj4+PiArCWlmIChjb3B5X3RvX3VzZXIoZmVhdHVyZXAsICZtLT5mZWF0
-dXJlcywgc2l6ZW9mKG0tPmZlYXR1cmVzKSkpCj4+Pj4+ICsJCXJldHVybiAtRUZBVUxUOwo+Pj4+
-IEFzIGRpc2N1c3NlZCBpbiBwcmV2aW91cyB2ZXJzaW9uIGRvIHdlIG5lZWQgdG8gZmlsdGVyIG91
-dCBNUSBmZWF0dXJlIGhlcmU/Cj4+PiBJIHRoaW5rIGl0J3MgbW9yZSBzdHJhaWdodGZvcndhcmQg
-dG8gbGV0IHRoZSBwYXJlbnQgZHJpdmVycyB0bwo+Pj4gZmlsdGVyIG91dCB0aGUgdW5zdXBwb3J0
-ZWQgZmVhdHVyZXMuIE90aGVyd2lzZSBpdCB3b3VsZCBiZSB0cmlja3kKPj4+IHdoZW4gd2Ugd2Fu
-dCB0byBhZGQgbW9yZSBmZWF0dXJlcyBpbiB2aG9zdC1tZGV2IG1vZHVsZSwKPj4KPj4gSXQncyBh
-cyBzaW1wbGUgYXMgcmVtb3ZlIHRoZSBmZWF0dXJlIGZyb20gYmxhY2tsaXN0Pwo+IEl0J3Mgbm90
-IHJlYWxseSB0aGF0IGVhc3kuIEl0IG1heSBicmVhayB0aGUgb2xkIGRyaXZlcnMuCgoKSSdtIG5v
-dCBzdXJlIEkgdW5kZXJzdGFuZCBoZXJlLCB3ZSBkbyBmZWF0dXJlIG5lZ290aWF0aW9uIGFueWhv
-dy4gRm9yIApvbGQgZHJpdmVycyBkbyB5b3UgbWVhbiB0aGUgZ3Vlc3QgZHJpdmVycyB3aXRob3V0
-IE1RPwoKCj4KPj4KPj4+IGkuZS4gaWYKPj4+IHRoZSBwYXJlbnQgZHJpdmVycyBtYXkgZXhwb3Nl
-IHVuc3VwcG9ydGVkIGZlYXR1cmVzIGFuZCByZWxheSBvbgo+Pj4gdmhvc3QtbWRldiB0byBmaWx0
-ZXIgdGhlbSBvdXQsIHRoZXNlIGZlYXR1cmVzIHdpbGwgYmUgZXhwb3NlZAo+Pj4gdG8gdXNlcnNw
-YWNlIGF1dG9tYXRpY2FsbHkgd2hlbiB0aGV5IGFyZSBlbmFibGVkIGluIHZob3N0LW1kZXYKPj4+
-IGluIHRoZSBmdXR1cmUuCj4+Cj4+IFRoZSBpc3N1ZSBpcywgaXQncyBvbmx5IHRoYXQgdmhvc3Qt
-bWRldiBrbm93cyBpdHMgb3duIGxpbWl0YXRpb24uIEUuZyBpbgo+PiB0aGlzIHBhdGNoLCB2aG9z
-dC1tZGV2IG9ubHkgaW1wbGVtZW50cyBhIHN1YnNldCBvZiB0cmFuc3BvcnQgQVBJLCBidXQgcGFy
-ZW50Cj4+IGRvZXNuJ3Qga25vdyBhYm91dCB0aGF0Lgo+Pgo+PiBTdGlsbCBNUSBhcyBhbiBleGFt
-cGxlLCB0aGVyZSdzIG5vIHdheSAob3Igbm8gbmVlZCkgZm9yIHBhcmVudCB0byBrbm93IHRoYXQK
-Pj4gdmhvc3QtbWRldiBkb2VzIG5vdCBzdXBwb3J0IE1RLgo+IFRoZSBtZGV2IGlzIGEgTURFVl9D
-TEFTU19JRF9WSE9TVCBtZGV2IGRldmljZS4gV2hlbiB0aGUgcGFyZW50Cj4gaXMgYmVpbmcgZGV2
-ZWxvcGVkLCBpdCBzaG91bGQga25vdyB0aGUgY3VycmVudGx5IHN1cHBvcnRlZCBmZWF0dXJlcwo+
-IG9mIHZob3N0LW1kZXYuCgoKSG93IGNhbiBwYXJlbnQga25vdyBNUSBpcyBub3Qgc3VwcG9ydGVk
-IGJ5IHZob3N0LW1kZXY/CgoKPgo+PiBBbmQgdGhpcyBhbGxvd3Mgb2xkIGtlbnJlbCB0byB3b3Jr
-IHdpdGggbmV3Cj4+IHBhcmVudCBkcml2ZXJzLgo+IFRoZSBuZXcgZHJpdmVycyBzaG91bGQgcHJv
-dmlkZSB0aGluZ3MgbGlrZSBWSVJUSU9fTURFVl9GX1ZFUlNJT05fMQo+IHRvIGJlIGNvbXBhdGli
-bGUgd2l0aCB0aGUgb2xkIGtlcm5lbHMuIFdoZW4gVklSVElPX01ERVZfRl9WRVJTSU9OXzEKPiBp
-cyBwcm92aWRlZC9uZWdvdGlhdGVkLCB0aGUgYmVoYXZpb3VycyBzaG91bGQgYmUgY29uc2lzdGVu
-dC4KCgpUbyBiZSBjbGVhciwgSSBkaWRuJ3QgbWVhbiBhIGNoYW5nZSBpbiB2aXJ0aW8tbWRldiBB
-UEksIEkgbWVhbnQ6CgoxKSBvbGQgdmhvc3QtbWRldiBrZXJuZWwgZHJpdmVyIHRoYXQgZmlsdGVy
-cyBvdXQgTVEKCjIpIG5ldyBwYXJlbnQgZHJpdmVyIHRoYXQgc3VwcG9ydCBNUQoKCj4KPj4gU28g
-YmFzaWNhbGx5IHdlIGhhdmUgdGhyZWUgY2hvaWNlcyBoZXJlOgo+Pgo+PiAxKSBJbXBsZW1lbnQg
-d2hhdCB2aG9zdC11c2VyIGRpZCBhbmQgaW1wbGVtZW50IGEgZ2VuZXJpYyB2aG9zdC1tZGV2IChi
-dXQgbWF5Cj4+IHN0aWxsIGhhdmUgbG90cyBvZiBkZXZpY2Ugc3BlY2lmaWMgY29kZSkuIFRvIHN1
-cHBvcnQgYWR2YW5jZWQgZmVhdHVyZSB3aGljaAo+PiByZXF1aXJlcyB0aGUgYWNjZXNzIHRvIGNv
-bmZpZywgc3RpbGwgbG90cyBvZiBBUEkgdGhhdCBuZWVkcyB0byBiZSBhZGRlZC4KPj4KPj4gMikg
-SW1wbGVtZW50IHdoYXQgdmhvc3Qta2VybmVsIGRpZCwgaGF2ZSBhIGdlbmVyaWMgdmhvc3QtbWRl
-diBkcml2ZXIgYW5kIGEKPj4gdmhvc3QgYnVzIG9uIHRvcCBmb3IgbWF0Y2ggYSBkZXZpY2Ugc3Bl
-Y2lmaWMgQVBJIGUuZyB2aG9zdC1tZGV2LW5ldC4gV2UKPj4gc3RpbGwgaGF2ZSBkZXZpY2Ugc3Bl
-Y2lmaWMgQVBJIGJ1dCBsaW1pdCB0aGVtIG9ubHkgdG8gZGV2aWNlIHNwZWNpZmljCj4+IG1vZHVs
-ZS4gU3RpbGwgcmVxdWlyZSBuZXcgaW9jdGxzIGZvciBhZHZhbmNlZCBmZWF0dXJlIGxpa2UgTVEu
-Cj4+Cj4+IDMpIFNpbXBseSBleHBvc2UgYWxsIHZpcnRpby1tZGV2IHRyYW5zcG9ydCB0byB1c2Vy
-c3BhY2UuCj4gQ3VycmVudGx5LCB2aXJ0aW8tbWRldiB0cmFuc3BvcnQgaXMgYSBzZXQgb2YgZnVu
-Y3Rpb24gY2FsbGJhY2tzCj4gZGVmaW5lZCBpbiBrZXJuZWwuIEhvdyB0byBzaW1wbHkgZXhwb3Nl
-IHZpcnRpby1tZGV2IHRyYW5zcG9ydCB0bwo+IHVzZXJzcGFjZT8KCgpUaGUgbW9zdCBzdHJhaWdo
-dGZvcndhcmQgd2F5IGlzIHRvIGhhdmUgYW4gMToxIG1hcHBpbmcgYmV0d2VlbiBpb2N0bCBhbmQg
-CnZpcml0b19tZGV2X2RldmljZV9vcHMuCgpUaGFua3MKCgo+Cj4KPj4gQSBnZW5lcmljIG1vZHVs
-ZQo+PiB3aXRob3V0IGFueSB0eXBlIHNwZWNpZmljIGNvZGUgKGxpa2UgdmlydGlvLW1kZXYpLiBO
-byBuZWVkIGRlZGljYXRlZCBBUEkgZm9yCj4+IGUuZyBNUS4gQnV0IHRoZW4gdGhlIEFQSSB3aWxs
-IGxvb2sgbXVjaCBkaWZmZXJlbnQgdGhhbiBjdXJyZW50IHZob3N0IGRpZC4KPj4KPj4gQ29uc2lk
-ZXIgdGhlIGxpbWl0YXRpb24gb2YgMSkgSSB0ZW5kIHRvIGNob29zZSAyIG9yIDMuIFdoYXQncyB5
-b3Ugb3Bpbmlvbj8KPj4KPj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0
-cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcv
-bWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Tue, Oct 22, 2019 at 6:46 PM Andrey Konovalov <andreyknvl@google.com> wrote:
+>
+> This patch adds kcov_remote_start()/kcov_remote_stop() annotations to the
+> vhost_worker() function, which is responsible for processing vhost works.
+> Since vhost_worker() threads are spawned per vhost device instance
+> the common kcov handle is used for kcov_remote_start()/stop() annotations
+> (see Documentation/dev-tools/kcov.rst for details). As the result kcov can
+> now be used to collect coverage from vhost worker threads.
+>
+> Signed-off-by: Andrey Konovalov <andreyknvl@google.com>
+> ---
+>  drivers/vhost/vhost.c | 6 ++++++
+>  drivers/vhost/vhost.h | 1 +
+>  2 files changed, 7 insertions(+)
+>
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index 36ca2cf419bf..a5a557c4b67f 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -30,6 +30,7 @@
+>  #include <linux/sched/signal.h>
+>  #include <linux/interval_tree_generic.h>
+>  #include <linux/nospec.h>
+> +#include <linux/kcov.h>
+>
+>  #include "vhost.h"
+>
+> @@ -357,7 +358,9 @@ static int vhost_worker(void *data)
+>                 llist_for_each_entry_safe(work, work_next, node, node) {
+>                         clear_bit(VHOST_WORK_QUEUED, &work->flags);
+>                         __set_current_state(TASK_RUNNING);
+> +                       kcov_remote_start(dev->kcov_handle);
+>                         work->fn(work);
+> +                       kcov_remote_stop();
+>                         if (need_resched())
+>                                 schedule();
+>                 }
+> @@ -546,6 +549,7 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
+>
+>         /* No owner, become one */
+>         dev->mm = get_task_mm(current);
+> +       dev->kcov_handle = current->kcov_handle;
+
+kcov_handle is not present in task_struct if !CONFIG_KCOV
+
+Also this does not use KCOV_SUBSYSTEM_COMMON.
+We discussed something along the following lines:
+
+u64 kcov_remote_handle(u64 subsys, u64 id)
+{
+  WARN_ON(subsys or id has wrong bits set).
+  return ...;
+}
+
+kcov_remote_handle(KCOV_SUBSYSTEM_USB, bus);
+kcov_remote_handle(KCOV_SUBSYSTEM_COMMON, current->kcov_handle);
+
+
+>         worker = kthread_create(vhost_worker, dev, "vhost-%d", current->pid);
+>         if (IS_ERR(worker)) {
+>                 err = PTR_ERR(worker);
+> @@ -571,6 +575,7 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
+>         if (dev->mm)
+>                 mmput(dev->mm);
+>         dev->mm = NULL;
+> +       dev->kcov_handle = 0;
+>  err_mm:
+>         return err;
+>  }
+> @@ -682,6 +687,7 @@ void vhost_dev_cleanup(struct vhost_dev *dev)
+>         if (dev->worker) {
+>                 kthread_stop(dev->worker);
+>                 dev->worker = NULL;
+> +               dev->kcov_handle = 0;
+>         }
+>         if (dev->mm)
+>                 mmput(dev->mm);
+> diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
+> index e9ed2722b633..a123fd70847e 100644
+> --- a/drivers/vhost/vhost.h
+> +++ b/drivers/vhost/vhost.h
+> @@ -173,6 +173,7 @@ struct vhost_dev {
+>         int iov_limit;
+>         int weight;
+>         int byte_weight;
+> +       u64 kcov_handle;
+>  };
+>
+>  bool vhost_exceeds_weight(struct vhost_virtqueue *vq, int pkts, int total_len);
+> --
+> 2.23.0.866.gb869b98d4c-goog
+>
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
