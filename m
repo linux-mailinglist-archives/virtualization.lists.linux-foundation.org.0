@@ -2,78 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1144DE33FC
-	for <lists.virtualization@lfdr.de>; Thu, 24 Oct 2019 15:24:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BE8EE3C51
+	for <lists.virtualization@lfdr.de>; Thu, 24 Oct 2019 21:47:08 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 9E9B9163F;
-	Thu, 24 Oct 2019 13:24:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 6BE9511D5;
+	Thu, 24 Oct 2019 19:47:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 6B7AE162E
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id CD0DE1164
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 24 Oct 2019 13:24:01 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E2E34831
+	Thu, 24 Oct 2019 19:47:00 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+	[207.211.31.81])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 0365E87B
 	for <virtualization@lists.linux-foundation.org>;
-	Thu, 24 Oct 2019 13:23:59 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id t16so20941910wrr.1
-	for <virtualization@lists.linux-foundation.org>;
-	Thu, 24 Oct 2019 06:23:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=KkX6qzZaTwohXSXWCxEEDtNSmaYeUCGtH+INKRMHgMc=;
-	b=BfCV50RyvTSrlpah+w08Tn9qfsskT4aPNelhiHQQxSM9Hy/VYhuAta278+KWUvigxE
-	qal/xQl5/wQPUOaDowlxLkRDHR77t320IkDh+UKBVv+jO88TDtjyN9UZTN/wFejMqWTu
-	RADsEOFxEqagyY6PmQCBePSbFxTx4PJ7vP3Z+QmymtppSYBSL5k4/mS5Rril14RfSgUg
-	cxz1+8gRvbpKdB0WmIS0RqJJ9L7OxemSoaGs2msdzaLC4NaAdzKHhJ46dQfFFRysFaVl
-	93PS/csDL/e9BSxBXWtzS80raRfH/yE5a6HbY6veQBCoStlalVCXzp884f6p5jsOeHza
-	xjmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=KkX6qzZaTwohXSXWCxEEDtNSmaYeUCGtH+INKRMHgMc=;
-	b=gkOJhvH/bFRQ8tr+IVim3JSITk/wpeWTsLKqX3StKgDxce0s2PQSwxqz59RY+UYRSx
-	2fHFVNMYV6QOSMT5KimJT6NFHkQF5UT+AOShlC4MZWJ7rjRAjL2/tg+pBgeS70WlFZjQ
-	RWf+7rzDX8j8yvx5BJUhobuOrM9m+lKjh1ZlTAg6Pw4YylSJAF1V3u9tDILDRFgUCngZ
-	VarjdXdB1J+SHqVGdH3WHjj1rSeVRM11cB38QHsUOBSyDxzFKq7xb9074Ky/RPRgM/qS
-	1bnFgMA10KECAraEHm1gXfKPidrBM8Q4PKeFamPEkMrnx54TwKZX73Vp5a9d808tmrko
-	hDTw==
-X-Gm-Message-State: APjAAAVlhKNwbSthYfJkZ6yFoYq0b5pI07igPCn4+WYhiJAyJeIXCoFh
-	TSruUAEua9i4I+Nyj7uDBLHJcA==
-X-Google-Smtp-Source: APXvYqzM9YZJL6W1UKq6EICyKY/uz/ckEMYVmjlr9ouq6YzZjn5eqAYpTLyP5ZokyjZ5JwAi7jip6g==
-X-Received: by 2002:adf:f40c:: with SMTP id g12mr3799325wro.244.1571923438046; 
-	Thu, 24 Oct 2019 06:23:58 -0700 (PDT)
-Received: from localhost.localdomain
-	(laubervilliers-657-1-83-120.w92-154.abo.wanadoo.fr. [92.154.90.120])
-	by smtp.gmail.com with ESMTPSA id e3sm2346310wme.36.2019.10.24.06.23.56
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 24 Oct 2019 06:23:57 -0700 (PDT)
-From: Ard Biesheuvel <ard.biesheuvel@linaro.org>
-To: linux-crypto@vger.kernel.org
-Subject: [PATCH v2 03/27] crypto: virtio - switch to skcipher API
-Date: Thu, 24 Oct 2019 15:23:21 +0200
-Message-Id: <20191024132345.5236-4-ard.biesheuvel@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191024132345.5236-1-ard.biesheuvel@linaro.org>
-References: <20191024132345.5236-1-ard.biesheuvel@linaro.org>
+	Thu, 24 Oct 2019 19:46:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1571946418;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	content-transfer-encoding:content-transfer-encoding:
+	in-reply-to:in-reply-to:references:references;
+	bh=H9X0BtuoZ8Jvkk6PkqP3IQvdtLRJY5D+ojk6YTP+TA8=;
+	b=FpqgupQ/bzrF9eAzPRmY49TJu08LuDdukolw0bUpkwN37ko2Ic0yX+Kdvy0TLu6/0Mr6nh
+	Zgn4Sdwgi2pXAXL/ntjSiBjuQ1Va3XbiwtgYR+LduGrleF5DQlrto4KG1Zwoaro4zU33LU
+	x0Cy49PUWaYaOUHmqBaQrKU6+IJyyLA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+	us-mta-251-_h2FRMZQMb62lVvm9O8R9A-1; Thu, 24 Oct 2019 15:46:54 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+	[10.5.11.16])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A3F8B107AD33;
+	Thu, 24 Oct 2019 19:46:50 +0000 (UTC)
+Received: from x1.home (ovpn-118-102.phx2.redhat.com [10.3.118.102])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id CDC055C21A;
+	Thu, 24 Oct 2019 19:46:36 +0000 (UTC)
+Date: Thu, 24 Oct 2019 13:46:36 -0600
+From: Alex Williamson <alex.williamson@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V5 1/6] mdev: class id support
+Message-ID: <20191024134636.253131c5@x1.home>
+In-Reply-To: <38bdf762-524a-e0f1-6e9a-1102adfe8fb1@redhat.com>
+References: <20191023130752.18980-1-jasowang@redhat.com>
+	<20191023130752.18980-2-jasowang@redhat.com>
+	<20191023154204.31d74866@x1.home>
+	<38bdf762-524a-e0f1-6e9a-1102adfe8fb1@redhat.com>
+Organization: Red Hat
 MIME-Version: 1.0
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-MC-Unique: _h2FRMZQMb62lVvm9O8R9A-1
+X-Mimecast-Spam-Score: 0
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Ard Biesheuvel <ard.biesheuvel@linaro.org>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"Michael S. Tsirkin" <mst@redhat.com>, Eric Biggers <ebiggers@google.com>,
-	virtualization@lists.linux-foundation.org,
-	"David S. Miller" <davem@davemloft.net>,
-	linux-arm-kernel@lists.infradead.org
+Cc: stefanha@redhat.com, christophe.de.dinechin@gmail.com, kvm@vger.kernel.org,
+	mst@redhat.com, airlied@linux.ie,
+	joonas.lahtinen@linux.intel.com, heiko.carstens@de.ibm.com,
+	dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, kwankhede@nvidia.com,
+	rob.miller@broadcom.com, linux-s390@vger.kernel.org,
+	sebott@linux.ibm.com, lulu@redhat.com, eperezma@redhat.com,
+	pasic@linux.ibm.com, borntraeger@de.ibm.com,
+	haotian.wang@sifive.com, zhi.a.wang@intel.com,
+	farman@linux.ibm.com, idos@mellanox.com, gor@linux.ibm.com,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	rodrigo.vivi@intel.com, xiao.w.wang@intel.com,
+	freude@linux.ibm.com, zhenyuw@linux.intel.com,
+	parav@mellanox.com, zhihong.wang@intel.com,
+	intel-gvt-dev@lists.freedesktop.org, akrowiak@linux.ibm.com,
+	oberpar@linux.ibm.com, netdev@vger.kernel.org, cohuck@redhat.com,
+	linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
+	daniel@ffwll.ch, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -85,489 +90,148 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Commit 7a7ffe65c8c5 ("crypto: skcipher - Add top-level skcipher interface")
-dated 20 august 2015 introduced the new skcipher API which is supposed to
-replace both blkcipher and ablkcipher. While all consumers of the API have
-been converted long ago, some producers of the ablkcipher remain, forcing
-us to keep the ablkcipher support routines alive, along with the matching
-code to expose [a]blkciphers via the skcipher API.
-
-So switch this driver to the skcipher API, allowing us to finally drop the
-blkcipher code in the near future.
-
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Gonglei <arei.gonglei@huawei.com>
-Cc: virtualization@lists.linux-foundation.org
-Signed-off-by: Ard Biesheuvel <ard.biesheuvel@linaro.org>
----
- drivers/crypto/virtio/virtio_crypto_algs.c   | 187 ++++++++++----------
- drivers/crypto/virtio/virtio_crypto_common.h |   2 +-
- 2 files changed, 92 insertions(+), 97 deletions(-)
-
-diff --git a/drivers/crypto/virtio/virtio_crypto_algs.c b/drivers/crypto/virtio/virtio_crypto_algs.c
-index 82b316b2f537..4b71e80951b7 100644
---- a/drivers/crypto/virtio/virtio_crypto_algs.c
-+++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -8,6 +8,7 @@
- 
- #include <linux/scatterlist.h>
- #include <crypto/algapi.h>
-+#include <crypto/internal/skcipher.h>
- #include <linux/err.h>
- #include <crypto/scatterwalk.h>
- #include <linux/atomic.h>
-@@ -16,10 +17,10 @@
- #include "virtio_crypto_common.h"
- 
- 
--struct virtio_crypto_ablkcipher_ctx {
-+struct virtio_crypto_skcipher_ctx {
- 	struct crypto_engine_ctx enginectx;
- 	struct virtio_crypto *vcrypto;
--	struct crypto_tfm *tfm;
-+	struct crypto_skcipher *tfm;
- 
- 	struct virtio_crypto_sym_session_info enc_sess_info;
- 	struct virtio_crypto_sym_session_info dec_sess_info;
-@@ -30,8 +31,8 @@ struct virtio_crypto_sym_request {
- 
- 	/* Cipher or aead */
- 	uint32_t type;
--	struct virtio_crypto_ablkcipher_ctx *ablkcipher_ctx;
--	struct ablkcipher_request *ablkcipher_req;
-+	struct virtio_crypto_skcipher_ctx *skcipher_ctx;
-+	struct skcipher_request *skcipher_req;
- 	uint8_t *iv;
- 	/* Encryption? */
- 	bool encrypt;
-@@ -41,7 +42,7 @@ struct virtio_crypto_algo {
- 	uint32_t algonum;
- 	uint32_t service;
- 	unsigned int active_devs;
--	struct crypto_alg algo;
-+	struct skcipher_alg algo;
- };
- 
- /*
-@@ -49,9 +50,9 @@ struct virtio_crypto_algo {
-  * and crypto algorithms registion.
-  */
- static DEFINE_MUTEX(algs_lock);
--static void virtio_crypto_ablkcipher_finalize_req(
-+static void virtio_crypto_skcipher_finalize_req(
- 	struct virtio_crypto_sym_request *vc_sym_req,
--	struct ablkcipher_request *req,
-+	struct skcipher_request *req,
- 	int err);
- 
- static void virtio_crypto_dataq_sym_callback
-@@ -59,7 +60,7 @@ static void virtio_crypto_dataq_sym_callback
- {
- 	struct virtio_crypto_sym_request *vc_sym_req =
- 		container_of(vc_req, struct virtio_crypto_sym_request, base);
--	struct ablkcipher_request *ablk_req;
-+	struct skcipher_request *ablk_req;
- 	int error;
- 
- 	/* Finish the encrypt or decrypt process */
-@@ -79,8 +80,8 @@ static void virtio_crypto_dataq_sym_callback
- 			error = -EIO;
- 			break;
- 		}
--		ablk_req = vc_sym_req->ablkcipher_req;
--		virtio_crypto_ablkcipher_finalize_req(vc_sym_req,
-+		ablk_req = vc_sym_req->skcipher_req;
-+		virtio_crypto_skcipher_finalize_req(vc_sym_req,
- 							ablk_req, error);
- 	}
- }
-@@ -110,8 +111,8 @@ virtio_crypto_alg_validate_key(int key_len, uint32_t *alg)
- 	return 0;
- }
- 
--static int virtio_crypto_alg_ablkcipher_init_session(
--		struct virtio_crypto_ablkcipher_ctx *ctx,
-+static int virtio_crypto_alg_skcipher_init_session(
-+		struct virtio_crypto_skcipher_ctx *ctx,
- 		uint32_t alg, const uint8_t *key,
- 		unsigned int keylen,
- 		int encrypt)
-@@ -200,8 +201,8 @@ static int virtio_crypto_alg_ablkcipher_init_session(
- 	return 0;
- }
- 
--static int virtio_crypto_alg_ablkcipher_close_session(
--		struct virtio_crypto_ablkcipher_ctx *ctx,
-+static int virtio_crypto_alg_skcipher_close_session(
-+		struct virtio_crypto_skcipher_ctx *ctx,
- 		int encrypt)
- {
- 	struct scatterlist outhdr, status_sg, *sgs[2];
-@@ -261,8 +262,8 @@ static int virtio_crypto_alg_ablkcipher_close_session(
- 	return 0;
- }
- 
--static int virtio_crypto_alg_ablkcipher_init_sessions(
--		struct virtio_crypto_ablkcipher_ctx *ctx,
-+static int virtio_crypto_alg_skcipher_init_sessions(
-+		struct virtio_crypto_skcipher_ctx *ctx,
- 		const uint8_t *key, unsigned int keylen)
- {
- 	uint32_t alg;
-@@ -278,30 +279,30 @@ static int virtio_crypto_alg_ablkcipher_init_sessions(
- 		goto bad_key;
- 
- 	/* Create encryption session */
--	ret = virtio_crypto_alg_ablkcipher_init_session(ctx,
-+	ret = virtio_crypto_alg_skcipher_init_session(ctx,
- 			alg, key, keylen, 1);
- 	if (ret)
- 		return ret;
- 	/* Create decryption session */
--	ret = virtio_crypto_alg_ablkcipher_init_session(ctx,
-+	ret = virtio_crypto_alg_skcipher_init_session(ctx,
- 			alg, key, keylen, 0);
- 	if (ret) {
--		virtio_crypto_alg_ablkcipher_close_session(ctx, 1);
-+		virtio_crypto_alg_skcipher_close_session(ctx, 1);
- 		return ret;
- 	}
- 	return 0;
- 
- bad_key:
--	crypto_tfm_set_flags(ctx->tfm, CRYPTO_TFM_RES_BAD_KEY_LEN);
-+	crypto_skcipher_set_flags(ctx->tfm, CRYPTO_TFM_RES_BAD_KEY_LEN);
- 	return -EINVAL;
- }
- 
- /* Note: kernel crypto API realization */
--static int virtio_crypto_ablkcipher_setkey(struct crypto_ablkcipher *tfm,
-+static int virtio_crypto_skcipher_setkey(struct crypto_skcipher *tfm,
- 					 const uint8_t *key,
- 					 unsigned int keylen)
- {
--	struct virtio_crypto_ablkcipher_ctx *ctx = crypto_ablkcipher_ctx(tfm);
-+	struct virtio_crypto_skcipher_ctx *ctx = crypto_skcipher_ctx(tfm);
- 	uint32_t alg;
- 	int ret;
- 
-@@ -323,11 +324,11 @@ static int virtio_crypto_ablkcipher_setkey(struct crypto_ablkcipher *tfm,
- 		ctx->vcrypto = vcrypto;
- 	} else {
- 		/* Rekeying, we should close the created sessions previously */
--		virtio_crypto_alg_ablkcipher_close_session(ctx, 1);
--		virtio_crypto_alg_ablkcipher_close_session(ctx, 0);
-+		virtio_crypto_alg_skcipher_close_session(ctx, 1);
-+		virtio_crypto_alg_skcipher_close_session(ctx, 0);
- 	}
- 
--	ret = virtio_crypto_alg_ablkcipher_init_sessions(ctx, key, keylen);
-+	ret = virtio_crypto_alg_skcipher_init_sessions(ctx, key, keylen);
- 	if (ret) {
- 		virtcrypto_dev_put(ctx->vcrypto);
- 		ctx->vcrypto = NULL;
-@@ -339,14 +340,14 @@ static int virtio_crypto_ablkcipher_setkey(struct crypto_ablkcipher *tfm,
- }
- 
- static int
--__virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
--		struct ablkcipher_request *req,
-+__virtio_crypto_skcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
-+		struct skcipher_request *req,
- 		struct data_queue *data_vq)
- {
--	struct crypto_ablkcipher *tfm = crypto_ablkcipher_reqtfm(req);
--	struct virtio_crypto_ablkcipher_ctx *ctx = vc_sym_req->ablkcipher_ctx;
-+	struct crypto_skcipher *tfm = crypto_skcipher_reqtfm(req);
-+	struct virtio_crypto_skcipher_ctx *ctx = vc_sym_req->skcipher_ctx;
- 	struct virtio_crypto_request *vc_req = &vc_sym_req->base;
--	unsigned int ivsize = crypto_ablkcipher_ivsize(tfm);
-+	unsigned int ivsize = crypto_skcipher_ivsize(tfm);
- 	struct virtio_crypto *vcrypto = ctx->vcrypto;
- 	struct virtio_crypto_op_data_req *req_data;
- 	int src_nents, dst_nents;
-@@ -359,7 +360,7 @@ __virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
- 	int sg_total;
- 	uint8_t *iv;
- 
--	src_nents = sg_nents_for_len(req->src, req->nbytes);
-+	src_nents = sg_nents_for_len(req->src, req->cryptlen);
- 	dst_nents = sg_nents(req->dst);
- 
- 	pr_debug("virtio_crypto: Number of sgs (src_nents: %d, dst_nents: %d)\n",
-@@ -396,7 +397,7 @@ __virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
- 	req_data->u.sym_req.op_type = cpu_to_le32(VIRTIO_CRYPTO_SYM_OP_CIPHER);
- 	req_data->u.sym_req.u.cipher.para.iv_len = cpu_to_le32(ivsize);
- 	req_data->u.sym_req.u.cipher.para.src_data_len =
--			cpu_to_le32(req->nbytes);
-+			cpu_to_le32(req->cryptlen);
- 
- 	dst_len = virtio_crypto_alg_sg_nents_length(req->dst);
- 	if (unlikely(dst_len > U32_MAX)) {
-@@ -406,9 +407,9 @@ __virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
- 	}
- 
- 	pr_debug("virtio_crypto: src_len: %u, dst_len: %llu\n",
--			req->nbytes, dst_len);
-+			req->cryptlen, dst_len);
- 
--	if (unlikely(req->nbytes + dst_len + ivsize +
-+	if (unlikely(req->cryptlen + dst_len + ivsize +
- 		sizeof(vc_req->status) > vcrypto->max_size)) {
- 		pr_err("virtio_crypto: The length is too big\n");
- 		err = -EINVAL;
-@@ -434,10 +435,10 @@ __virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
- 		err = -ENOMEM;
- 		goto free;
- 	}
--	memcpy(iv, req->info, ivsize);
-+	memcpy(iv, req->iv, ivsize);
- 	if (!vc_sym_req->encrypt)
--		scatterwalk_map_and_copy(req->info, req->src,
--					 req->nbytes - AES_BLOCK_SIZE,
-+		scatterwalk_map_and_copy(req->iv, req->src,
-+					 req->cryptlen - AES_BLOCK_SIZE,
- 					 AES_BLOCK_SIZE, 0);
- 
- 	sg_init_one(&iv_sg, iv, ivsize);
-@@ -476,93 +477,93 @@ __virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
- 	return err;
- }
- 
--static int virtio_crypto_ablkcipher_encrypt(struct ablkcipher_request *req)
-+static int virtio_crypto_skcipher_encrypt(struct skcipher_request *req)
- {
--	struct crypto_ablkcipher *atfm = crypto_ablkcipher_reqtfm(req);
--	struct virtio_crypto_ablkcipher_ctx *ctx = crypto_ablkcipher_ctx(atfm);
-+	struct crypto_skcipher *atfm = crypto_skcipher_reqtfm(req);
-+	struct virtio_crypto_skcipher_ctx *ctx = crypto_skcipher_ctx(atfm);
- 	struct virtio_crypto_sym_request *vc_sym_req =
--				ablkcipher_request_ctx(req);
-+				skcipher_request_ctx(req);
- 	struct virtio_crypto_request *vc_req = &vc_sym_req->base;
- 	struct virtio_crypto *vcrypto = ctx->vcrypto;
- 	/* Use the first data virtqueue as default */
- 	struct data_queue *data_vq = &vcrypto->data_vq[0];
- 
--	if (!req->nbytes)
-+	if (!req->cryptlen)
- 		return 0;
--	if (req->nbytes % AES_BLOCK_SIZE)
-+	if (req->cryptlen % AES_BLOCK_SIZE)
- 		return -EINVAL;
- 
- 	vc_req->dataq = data_vq;
- 	vc_req->alg_cb = virtio_crypto_dataq_sym_callback;
--	vc_sym_req->ablkcipher_ctx = ctx;
--	vc_sym_req->ablkcipher_req = req;
-+	vc_sym_req->skcipher_ctx = ctx;
-+	vc_sym_req->skcipher_req = req;
- 	vc_sym_req->encrypt = true;
- 
--	return crypto_transfer_ablkcipher_request_to_engine(data_vq->engine, req);
-+	return crypto_transfer_skcipher_request_to_engine(data_vq->engine, req);
- }
- 
--static int virtio_crypto_ablkcipher_decrypt(struct ablkcipher_request *req)
-+static int virtio_crypto_skcipher_decrypt(struct skcipher_request *req)
- {
--	struct crypto_ablkcipher *atfm = crypto_ablkcipher_reqtfm(req);
--	struct virtio_crypto_ablkcipher_ctx *ctx = crypto_ablkcipher_ctx(atfm);
-+	struct crypto_skcipher *atfm = crypto_skcipher_reqtfm(req);
-+	struct virtio_crypto_skcipher_ctx *ctx = crypto_skcipher_ctx(atfm);
- 	struct virtio_crypto_sym_request *vc_sym_req =
--				ablkcipher_request_ctx(req);
-+				skcipher_request_ctx(req);
- 	struct virtio_crypto_request *vc_req = &vc_sym_req->base;
- 	struct virtio_crypto *vcrypto = ctx->vcrypto;
- 	/* Use the first data virtqueue as default */
- 	struct data_queue *data_vq = &vcrypto->data_vq[0];
- 
--	if (!req->nbytes)
-+	if (!req->cryptlen)
- 		return 0;
--	if (req->nbytes % AES_BLOCK_SIZE)
-+	if (req->cryptlen % AES_BLOCK_SIZE)
- 		return -EINVAL;
- 
- 	vc_req->dataq = data_vq;
- 	vc_req->alg_cb = virtio_crypto_dataq_sym_callback;
--	vc_sym_req->ablkcipher_ctx = ctx;
--	vc_sym_req->ablkcipher_req = req;
-+	vc_sym_req->skcipher_ctx = ctx;
-+	vc_sym_req->skcipher_req = req;
- 	vc_sym_req->encrypt = false;
- 
--	return crypto_transfer_ablkcipher_request_to_engine(data_vq->engine, req);
-+	return crypto_transfer_skcipher_request_to_engine(data_vq->engine, req);
- }
- 
--static int virtio_crypto_ablkcipher_init(struct crypto_tfm *tfm)
-+static int virtio_crypto_skcipher_init(struct crypto_skcipher *tfm)
- {
--	struct virtio_crypto_ablkcipher_ctx *ctx = crypto_tfm_ctx(tfm);
-+	struct virtio_crypto_skcipher_ctx *ctx = crypto_skcipher_ctx(tfm);
- 
--	tfm->crt_ablkcipher.reqsize = sizeof(struct virtio_crypto_sym_request);
-+	crypto_skcipher_set_reqsize(tfm, sizeof(struct virtio_crypto_sym_request));
- 	ctx->tfm = tfm;
- 
--	ctx->enginectx.op.do_one_request = virtio_crypto_ablkcipher_crypt_req;
-+	ctx->enginectx.op.do_one_request = virtio_crypto_skcipher_crypt_req;
- 	ctx->enginectx.op.prepare_request = NULL;
- 	ctx->enginectx.op.unprepare_request = NULL;
- 	return 0;
- }
- 
--static void virtio_crypto_ablkcipher_exit(struct crypto_tfm *tfm)
-+static void virtio_crypto_skcipher_exit(struct crypto_skcipher *tfm)
- {
--	struct virtio_crypto_ablkcipher_ctx *ctx = crypto_tfm_ctx(tfm);
-+	struct virtio_crypto_skcipher_ctx *ctx = crypto_skcipher_ctx(tfm);
- 
- 	if (!ctx->vcrypto)
- 		return;
- 
--	virtio_crypto_alg_ablkcipher_close_session(ctx, 1);
--	virtio_crypto_alg_ablkcipher_close_session(ctx, 0);
-+	virtio_crypto_alg_skcipher_close_session(ctx, 1);
-+	virtio_crypto_alg_skcipher_close_session(ctx, 0);
- 	virtcrypto_dev_put(ctx->vcrypto);
- 	ctx->vcrypto = NULL;
- }
- 
--int virtio_crypto_ablkcipher_crypt_req(
-+int virtio_crypto_skcipher_crypt_req(
- 	struct crypto_engine *engine, void *vreq)
- {
--	struct ablkcipher_request *req = container_of(vreq, struct ablkcipher_request, base);
-+	struct skcipher_request *req = container_of(vreq, struct skcipher_request, base);
- 	struct virtio_crypto_sym_request *vc_sym_req =
--				ablkcipher_request_ctx(req);
-+				skcipher_request_ctx(req);
- 	struct virtio_crypto_request *vc_req = &vc_sym_req->base;
- 	struct data_queue *data_vq = vc_req->dataq;
- 	int ret;
- 
--	ret = __virtio_crypto_ablkcipher_do_req(vc_sym_req, req, data_vq);
-+	ret = __virtio_crypto_skcipher_do_req(vc_sym_req, req, data_vq);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -571,16 +572,16 @@ int virtio_crypto_ablkcipher_crypt_req(
- 	return 0;
- }
- 
--static void virtio_crypto_ablkcipher_finalize_req(
-+static void virtio_crypto_skcipher_finalize_req(
- 	struct virtio_crypto_sym_request *vc_sym_req,
--	struct ablkcipher_request *req,
-+	struct skcipher_request *req,
- 	int err)
- {
- 	if (vc_sym_req->encrypt)
--		scatterwalk_map_and_copy(req->info, req->dst,
--					 req->nbytes - AES_BLOCK_SIZE,
-+		scatterwalk_map_and_copy(req->iv, req->dst,
-+					 req->cryptlen - AES_BLOCK_SIZE,
- 					 AES_BLOCK_SIZE, 0);
--	crypto_finalize_ablkcipher_request(vc_sym_req->base.dataq->engine,
-+	crypto_finalize_skcipher_request(vc_sym_req->base.dataq->engine,
- 					   req, err);
- 	kzfree(vc_sym_req->iv);
- 	virtcrypto_clear_request(&vc_sym_req->base);
-@@ -590,27 +591,21 @@ static struct virtio_crypto_algo virtio_crypto_algs[] = { {
- 	.algonum = VIRTIO_CRYPTO_CIPHER_AES_CBC,
- 	.service = VIRTIO_CRYPTO_SERVICE_CIPHER,
- 	.algo = {
--		.cra_name = "cbc(aes)",
--		.cra_driver_name = "virtio_crypto_aes_cbc",
--		.cra_priority = 150,
--		.cra_flags = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_ASYNC,
--		.cra_blocksize = AES_BLOCK_SIZE,
--		.cra_ctxsize  = sizeof(struct virtio_crypto_ablkcipher_ctx),
--		.cra_alignmask = 0,
--		.cra_module = THIS_MODULE,
--		.cra_type = &crypto_ablkcipher_type,
--		.cra_init = virtio_crypto_ablkcipher_init,
--		.cra_exit = virtio_crypto_ablkcipher_exit,
--		.cra_u = {
--			.ablkcipher = {
--				.setkey = virtio_crypto_ablkcipher_setkey,
--				.decrypt = virtio_crypto_ablkcipher_decrypt,
--				.encrypt = virtio_crypto_ablkcipher_encrypt,
--				.min_keysize = AES_MIN_KEY_SIZE,
--				.max_keysize = AES_MAX_KEY_SIZE,
--				.ivsize = AES_BLOCK_SIZE,
--			},
--		},
-+		.base.cra_name		= "cbc(aes)",
-+		.base.cra_driver_name	= "virtio_crypto_aes_cbc",
-+		.base.cra_priority	= 150,
-+		.base.cra_flags		= CRYPTO_ALG_ASYNC,
-+		.base.cra_blocksize	= AES_BLOCK_SIZE,
-+		.base.cra_ctxsize	= sizeof(struct virtio_crypto_skcipher_ctx),
-+		.base.cra_module	= THIS_MODULE,
-+		.init			= virtio_crypto_skcipher_init,
-+		.exit			= virtio_crypto_skcipher_exit,
-+		.setkey			= virtio_crypto_skcipher_setkey,
-+		.decrypt		= virtio_crypto_skcipher_decrypt,
-+		.encrypt		= virtio_crypto_skcipher_encrypt,
-+		.min_keysize		= AES_MIN_KEY_SIZE,
-+		.max_keysize		= AES_MAX_KEY_SIZE,
-+		.ivsize			= AES_BLOCK_SIZE,
- 	},
- } };
- 
-@@ -630,14 +625,14 @@ int virtio_crypto_algs_register(struct virtio_crypto *vcrypto)
- 			continue;
- 
- 		if (virtio_crypto_algs[i].active_devs == 0) {
--			ret = crypto_register_alg(&virtio_crypto_algs[i].algo);
-+			ret = crypto_register_skcipher(&virtio_crypto_algs[i].algo);
- 			if (ret)
- 				goto unlock;
- 		}
- 
- 		virtio_crypto_algs[i].active_devs++;
- 		dev_info(&vcrypto->vdev->dev, "Registered algo %s\n",
--			 virtio_crypto_algs[i].algo.cra_name);
-+			 virtio_crypto_algs[i].algo.base.cra_name);
- 	}
- 
- unlock:
-@@ -661,7 +656,7 @@ void virtio_crypto_algs_unregister(struct virtio_crypto *vcrypto)
- 			continue;
- 
- 		if (virtio_crypto_algs[i].active_devs == 1)
--			crypto_unregister_alg(&virtio_crypto_algs[i].algo);
-+			crypto_unregister_skcipher(&virtio_crypto_algs[i].algo);
- 
- 		virtio_crypto_algs[i].active_devs--;
- 	}
-diff --git a/drivers/crypto/virtio/virtio_crypto_common.h b/drivers/crypto/virtio/virtio_crypto_common.h
-index 1c6e00da5a29..a24f85c589e7 100644
---- a/drivers/crypto/virtio/virtio_crypto_common.h
-+++ b/drivers/crypto/virtio/virtio_crypto_common.h
-@@ -112,7 +112,7 @@ struct virtio_crypto *virtcrypto_get_dev_node(int node,
- 					      uint32_t algo);
- int virtcrypto_dev_start(struct virtio_crypto *vcrypto);
- void virtcrypto_dev_stop(struct virtio_crypto *vcrypto);
--int virtio_crypto_ablkcipher_crypt_req(
-+int virtio_crypto_skcipher_crypt_req(
- 	struct crypto_engine *engine, void *vreq);
- 
- void
--- 
-2.20.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gVGh1LCAyNCBPY3QgMjAxOSAxMToyNzozNiArMDgwMApKYXNvbiBXYW5nIDxqYXNvd2FuZ0By
+ZWRoYXQuY29tPiB3cm90ZToKCj4gT24gMjAxOS8xMC8yNCDkuIrljYg1OjQyLCBBbGV4IFdpbGxp
+YW1zb24gd3JvdGU6Cj4gPiBPbiBXZWQsIDIzIE9jdCAyMDE5IDIxOjA3OjQ3ICswODAwCj4gPiBK
+YXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29tPiB3cm90ZToKPiA+ICAKPiA+PiBNZGV2IGJ1
+cyBvbmx5IHN1cHBvcnRzIHZmaW8gZHJpdmVyIHJpZ2h0IG5vdywgc28gaXQgZG9lc24ndCBpbXBs
+ZW1lbnQKPiA+PiBtYXRjaCBtZXRob2QuIEJ1dCBpbiB0aGUgZnV0dXJlLCB3ZSBtYXkgYWRkIGRy
+aXZlcnMgb3RoZXIgdGhhbiB2ZmlvLAo+ID4+IHRoZSBmaXJzdCBkcml2ZXIgY291bGQgYmUgdmly
+dGlvLW1kZXYuIFRoaXMgbWVhbnMgd2UgbmVlZCB0byBhZGQKPiA+PiBkZXZpY2UgY2xhc3MgaWQg
+c3VwcG9ydCBpbiBidXMgbWF0Y2ggbWV0aG9kIHRvIHBhaXIgdGhlIG1kZXYgZGV2aWNlCj4gPj4g
+YW5kIG1kZXYgZHJpdmVyIGNvcnJlY3RseS4KPiA+Pgo+ID4+IFNvIHRoaXMgcGF0Y2ggYWRkcyBp
+ZF90YWJsZSB0byBtZGV2X2RyaXZlciBhbmQgY2xhc3NfaWQgZm9yIG1kZXYKPiA+PiBkZXZpY2Ug
+d2l0aCB0aGUgbWF0Y2ggbWV0aG9kIGZvciBtZGV2IGJ1cy4KPiA+Pgo+ID4+IFNpZ25lZC1vZmYt
+Ynk6IEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+Cj4gPj4gLS0tCj4gPj4gICAuLi4v
+ZHJpdmVyLWFwaS92ZmlvLW1lZGlhdGVkLWRldmljZS5yc3QgICAgICAgfCAgNSArKysrKwo+ID4+
+ICAgZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0L2t2bWd0LmMgICAgICAgICAgICAgIHwgIDEgKwo+
+ID4+ICAgZHJpdmVycy9zMzkwL2Npby92ZmlvX2Njd19vcHMuYyAgICAgICAgICAgICAgIHwgIDEg
+Kwo+ID4+ICAgZHJpdmVycy9zMzkwL2NyeXB0by92ZmlvX2FwX29wcy5jICAgICAgICAgICAgIHwg
+IDEgKwo+ID4+ICAgZHJpdmVycy92ZmlvL21kZXYvbWRldl9jb3JlLmMgICAgICAgICAgICAgICAg
+IHwgMTggKysrKysrKysrKysrKysrCj4gPj4gICBkcml2ZXJzL3ZmaW8vbWRldi9tZGV2X2RyaXZl
+ci5jICAgICAgICAgICAgICAgfCAyMiArKysrKysrKysrKysrKysrKysrCj4gPj4gICBkcml2ZXJz
+L3ZmaW8vbWRldi9tZGV2X3ByaXZhdGUuaCAgICAgICAgICAgICAgfCAgMSArCj4gPj4gICBkcml2
+ZXJzL3ZmaW8vbWRldi92ZmlvX21kZXYuYyAgICAgICAgICAgICAgICAgfCAgNiArKysrKwo+ID4+
+ICAgaW5jbHVkZS9saW51eC9tZGV2LmggICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDggKysr
+KysrKwo+ID4+ICAgaW5jbHVkZS9saW51eC9tb2RfZGV2aWNldGFibGUuaCAgICAgICAgICAgICAg
+IHwgIDggKysrKysrKwo+ID4+ICAgc2FtcGxlcy92ZmlvLW1kZXYvbWJvY2hzLmMgICAgICAgICAg
+ICAgICAgICAgIHwgIDEgKwo+ID4+ICAgc2FtcGxlcy92ZmlvLW1kZXYvbWRweS5jICAgICAgICAg
+ICAgICAgICAgICAgIHwgIDEgKwo+ID4+ICAgc2FtcGxlcy92ZmlvLW1kZXYvbXR0eS5jICAgICAg
+ICAgICAgICAgICAgICAgIHwgIDEgKwo+ID4+ICAgMTMgZmlsZXMgY2hhbmdlZCwgNzQgaW5zZXJ0
+aW9ucygrKQo+ID4+Cj4gPj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vZHJpdmVyLWFwaS92
+ZmlvLW1lZGlhdGVkLWRldmljZS5yc3QgYi9Eb2N1bWVudGF0aW9uL2RyaXZlci1hcGkvdmZpby1t
+ZWRpYXRlZC1kZXZpY2UucnN0Cj4gPj4gaW5kZXggMjVlYjdkNWI4MzRiLi42NzA5NDEzYmVlMjkg
+MTAwNjQ0Cj4gPj4gLS0tIGEvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL3ZmaW8tbWVkaWF0ZWQt
+ZGV2aWNlLnJzdAo+ID4+ICsrKyBiL0RvY3VtZW50YXRpb24vZHJpdmVyLWFwaS92ZmlvLW1lZGlh
+dGVkLWRldmljZS5yc3QKPiA+PiBAQCAtMTAyLDEyICsxMDIsMTQgQEAgc3RydWN0dXJlIHRvIHJl
+cHJlc2VudCBhIG1lZGlhdGVkIGRldmljZSdzIGRyaXZlcjo6Cj4gPj4gICAgICAgICAqIEBwcm9i
+ZTogY2FsbGVkIHdoZW4gbmV3IGRldmljZSBjcmVhdGVkCj4gPj4gICAgICAgICAqIEByZW1vdmU6
+IGNhbGxlZCB3aGVuIGRldmljZSByZW1vdmVkCj4gPj4gICAgICAgICAqIEBkcml2ZXI6IGRldmlj
+ZSBkcml2ZXIgc3RydWN0dXJlCj4gPj4gKyAgICAgICogQGlkX3RhYmxlOiB0aGUgaWRzIHNlcnZp
+Y2VkIGJ5IHRoaXMgZHJpdmVyCj4gPj4gICAgICAgICAqLwo+ID4+ICAgICAgICBzdHJ1Y3QgbWRl
+dl9kcml2ZXIgewo+ID4+ICAgCSAgICAgY29uc3QgY2hhciAqbmFtZTsKPiA+PiAgIAkgICAgIGlu
+dCAgKCpwcm9iZSkgIChzdHJ1Y3QgZGV2aWNlICpkZXYpOwo+ID4+ICAgCSAgICAgdm9pZCAoKnJl
+bW92ZSkgKHN0cnVjdCBkZXZpY2UgKmRldik7Cj4gPj4gICAJICAgICBzdHJ1Y3QgZGV2aWNlX2Ry
+aXZlciAgICBkcml2ZXI7Cj4gPj4gKwkgICAgIGNvbnN0IHN0cnVjdCBtZGV2X2NsYXNzX2lkICpp
+ZF90YWJsZTsKPiA+PiAgICAgICAgfTsKPiA+PiAgIAo+ID4+ICAgQSBtZWRpYXRlZCBidXMgZHJp
+dmVyIGZvciBtZGV2IHNob3VsZCB1c2UgdGhpcyBzdHJ1Y3R1cmUgaW4gdGhlIGZ1bmN0aW9uIGNh
+bGxzCj4gPj4gQEAgLTE3MCw2ICsxNzIsOSBAQCB0aGF0IGEgZHJpdmVyIHNob3VsZCB1c2UgdG8g
+dW5yZWdpc3RlciBpdHNlbGYgd2l0aCB0aGUgbWRldiBjb3JlIGRyaXZlcjo6Cj4gPj4gICAKPiA+
+PiAgIAlleHRlcm4gdm9pZCBtZGV2X3VucmVnaXN0ZXJfZGV2aWNlKHN0cnVjdCBkZXZpY2UgKmRl
+dik7Cj4gPj4gICAKPiA+PiArSXQgaXMgYWxzbyByZXF1aXJlZCB0byBzcGVjaWZ5IHRoZSBjbGFz
+c19pZCBpbiBjcmVhdGUoKSBjYWxsYmFjayB0aHJvdWdoOjoKPiA+PiArCj4gPj4gKwlpbnQgbWRl
+dl9zZXRfY2xhc3Moc3RydWN0IG1kZXZfZGV2aWNlICptZGV2LCB1MTYgaWQpOwo+ID4+ICAgCj4g
+Pj4gICBNZWRpYXRlZCBEZXZpY2UgTWFuYWdlbWVudCBJbnRlcmZhY2UgVGhyb3VnaCBzeXNmcwo+
+ID4+ICAgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0K
+PiA+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0L2t2bWd0LmMgYi9kcml2
+ZXJzL2dwdS9kcm0vaTkxNS9ndnQva3ZtZ3QuYwo+ID4+IGluZGV4IDM0M2Q3OWMxY2I3ZS4uNjQy
+MGYwZGJkMzFiIDEwMDY0NAo+ID4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2d2dC9rdm1n
+dC5jCj4gPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0L2t2bWd0LmMKPiA+PiBAQCAt
+Njc4LDYgKzY3OCw3IEBAIHN0YXRpYyBpbnQgaW50ZWxfdmdwdV9jcmVhdGUoc3RydWN0IGtvYmpl
+Y3QgKmtvYmosIHN0cnVjdCBtZGV2X2RldmljZSAqbWRldikKPiA+PiAgIAkJICAgICBkZXZfbmFt
+ZShtZGV2X2RldihtZGV2KSkpOwo+ID4+ICAgCXJldCA9IDA7Cj4gPj4gICAKPiA+PiArCW1kZXZf
+c2V0X2NsYXNzKG1kZXYsIE1ERVZfQ0xBU1NfSURfVkZJTyk7Cj4gPj4gICBvdXQ6Cj4gPj4gICAJ
+cmV0dXJuIHJldDsKPiA+PiAgIH0KPiA+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9zMzkwL2Npby92
+ZmlvX2Njd19vcHMuYyBiL2RyaXZlcnMvczM5MC9jaW8vdmZpb19jY3dfb3BzLmMKPiA+PiBpbmRl
+eCBmMGQ3MWFiNzdjNTAuLmNmMmMwMTNhZTMyZiAxMDA2NDQKPiA+PiAtLS0gYS9kcml2ZXJzL3Mz
+OTAvY2lvL3ZmaW9fY2N3X29wcy5jCj4gPj4gKysrIGIvZHJpdmVycy9zMzkwL2Npby92ZmlvX2Nj
+d19vcHMuYwo+ID4+IEBAIC0xMjksNiArMTI5LDcgQEAgc3RhdGljIGludCB2ZmlvX2Njd19tZGV2
+X2NyZWF0ZShzdHJ1Y3Qga29iamVjdCAqa29iaiwgc3RydWN0IG1kZXZfZGV2aWNlICptZGV2KQo+
+ID4+ICAgCQkJICAgcHJpdmF0ZS0+c2NoLT5zY2hpZC5zc2lkLAo+ID4+ICAgCQkJICAgcHJpdmF0
+ZS0+c2NoLT5zY2hpZC5zY2hfbm8pOwo+ID4+ICAgCj4gPj4gKwltZGV2X3NldF9jbGFzcyhtZGV2
+LCBNREVWX0NMQVNTX0lEX1ZGSU8pOwo+ID4+ICAgCXJldHVybiAwOwo+ID4+ICAgfQo+ID4+ICAg
+Cj4gPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvczM5MC9jcnlwdG8vdmZpb19hcF9vcHMuYyBiL2Ry
+aXZlcnMvczM5MC9jcnlwdG8vdmZpb19hcF9vcHMuYwo+ID4+IGluZGV4IDVjMGY1M2M2ZGRlNy4u
+MDdjMzEwNzBhZmViIDEwMDY0NAo+ID4+IC0tLSBhL2RyaXZlcnMvczM5MC9jcnlwdG8vdmZpb19h
+cF9vcHMuYwo+ID4+ICsrKyBiL2RyaXZlcnMvczM5MC9jcnlwdG8vdmZpb19hcF9vcHMuYwo+ID4+
+IEBAIC0zNDMsNiArMzQzLDcgQEAgc3RhdGljIGludCB2ZmlvX2FwX21kZXZfY3JlYXRlKHN0cnVj
+dCBrb2JqZWN0ICprb2JqLCBzdHJ1Y3QgbWRldl9kZXZpY2UgKm1kZXYpCj4gPj4gICAJbGlzdF9h
+ZGQoJm1hdHJpeF9tZGV2LT5ub2RlLCAmbWF0cml4X2Rldi0+bWRldl9saXN0KTsKPiA+PiAgIAlt
+dXRleF91bmxvY2soJm1hdHJpeF9kZXYtPmxvY2spOwo+ID4+ICAgCj4gPj4gKwltZGV2X3NldF9j
+bGFzcyhtZGV2LCBNREVWX0NMQVNTX0lEX1ZGSU8pOwo+ID4+ICAgCXJldHVybiAwOwo+ID4+ICAg
+fQo+ID4+ICAgCj4gPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5j
+IGIvZHJpdmVycy92ZmlvL21kZXYvbWRldl9jb3JlLmMKPiA+PiBpbmRleCBiNTU4ZDRjZmQwODIu
+LjNhOWM1MmQ3MWI0ZSAxMDA2NDQKPiA+PiAtLS0gYS9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X2Nv
+cmUuYwo+ID4+ICsrKyBiL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5jCj4gPj4gQEAgLTQ1
+LDYgKzQ1LDE2IEBAIHZvaWQgbWRldl9zZXRfZHJ2ZGF0YShzdHJ1Y3QgbWRldl9kZXZpY2UgKm1k
+ZXYsIHZvaWQgKmRhdGEpCj4gPj4gICB9Cj4gPj4gICBFWFBPUlRfU1lNQk9MKG1kZXZfc2V0X2Ry
+dmRhdGEpOwo+ID4+ICAgCj4gPj4gKy8qIFNwZWNpZnkgdGhlIGNsYXNzIGZvciB0aGUgbWRldiBk
+ZXZpY2UsIHRoaXMgbXVzdCBiZSBjYWxsZWQgZHVyaW5nCj4gPj4gKyAqIGNyZWF0ZSgpIGNhbGxi
+YWNrLgo+ID4+ICsgKi8KPiA+PiArdm9pZCBtZGV2X3NldF9jbGFzcyhzdHJ1Y3QgbWRldl9kZXZp
+Y2UgKm1kZXYsIHUxNiBpZCkKPiA+PiArewo+ID4+ICsJV0FSTl9PTihtZGV2LT5jbGFzc19pZCk7
+Cj4gPj4gKwltZGV2LT5jbGFzc19pZCA9IGlkOwo+ID4+ICt9Cj4gPj4gK0VYUE9SVF9TWU1CT0wo
+bWRldl9zZXRfY2xhc3MpOwo+ID4+ICsKPiA+PiAgIHN0cnVjdCBkZXZpY2UgKm1kZXZfZGV2KHN0
+cnVjdCBtZGV2X2RldmljZSAqbWRldikKPiA+PiAgIHsKPiA+PiAgIAlyZXR1cm4gJm1kZXYtPmRl
+djsKPiA+PiBAQCAtMTM1LDYgKzE0NSw3IEBAIHN0YXRpYyBpbnQgbWRldl9kZXZpY2VfcmVtb3Zl
+X2NiKHN0cnVjdCBkZXZpY2UgKmRldiwgdm9pZCAqZGF0YSkKPiA+PiAgICAqIG1kZXZfcmVnaXN0
+ZXJfZGV2aWNlIDogUmVnaXN0ZXIgYSBkZXZpY2UKPiA+PiAgICAqIEBkZXY6IGRldmljZSBzdHJ1
+Y3R1cmUgcmVwcmVzZW50aW5nIHBhcmVudCBkZXZpY2UuCj4gPj4gICAgKiBAb3BzOiBQYXJlbnQg
+ZGV2aWNlIG9wZXJhdGlvbiBzdHJ1Y3R1cmUgdG8gYmUgcmVnaXN0ZXJlZC4KPiA+PiArICogQGlk
+OiBjbGFzcyBpZC4KPiA+PiAgICAqCj4gPj4gICAgKiBBZGQgZGV2aWNlIHRvIGxpc3Qgb2YgcmVn
+aXN0ZXJlZCBwYXJlbnQgZGV2aWNlcy4KPiA+PiAgICAqIFJldHVybnMgYSBuZWdhdGl2ZSB2YWx1
+ZSBvbiBlcnJvciwgb3RoZXJ3aXNlIDAuCj4gPj4gQEAgLTMyNCw2ICszMzUsMTMgQEAgaW50IG1k
+ZXZfZGV2aWNlX2NyZWF0ZShzdHJ1Y3Qga29iamVjdCAqa29iaiwKPiA+PiAgIAlpZiAocmV0KQo+
+ID4+ICAgCQlnb3RvIG9wc19jcmVhdGVfZmFpbDsKPiA+PiAgIAo+ID4+ICsJaWYgKCFtZGV2LT5j
+bGFzc19pZCkgewo+ID4+ICsJCXJldCA9IC1FSU5WQUw7Cj4gPj4gKwkJV0FSTigxLCAiY2xhc3Mg
+aWQgbXVzdCBiZSBzcGVjaWZpZWQgZm9yIGRldmljZSAlc1xuIiwKPiA+PiArCQkgICAgIGRldl9u
+YW1lKGRldikpOyAgCj4gPiBOaXQsIGRldl93YXJuKGRldiwgIm1kZXYgdmVuZG9yIGRyaXZlciBm
+YWlsZWQgdG8gc3BlY2lmeSBkZXZpY2UgY2xhc3NcbiIpOyAgCj4gCj4gCj4gV2lsbCBmaXguCj4g
+Cj4gCj4gPiAgCj4gPj4gKwkJZ290byBhZGRfZmFpbDsKPiA+PiArCX0KPiA+PiArCj4gPj4gICAJ
+cmV0ID0gZGV2aWNlX2FkZCgmbWRldi0+ZGV2KTsKPiA+PiAgIAlpZiAocmV0KQo+ID4+ICAgCQln
+b3RvIGFkZF9mYWlsOwo+ID4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X2Ry
+aXZlci5jIGIvZHJpdmVycy92ZmlvL21kZXYvbWRldl9kcml2ZXIuYwo+ID4+IGluZGV4IDBkMzIy
+M2FlZTIwYi4uMzE5ZDg4NmZmYWY3IDEwMDY0NAo+ID4+IC0tLSBhL2RyaXZlcnMvdmZpby9tZGV2
+L21kZXZfZHJpdmVyLmMKPiA+PiArKysgYi9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X2RyaXZlci5j
+Cj4gPj4gQEAgLTY5LDggKzY5LDMwIEBAIHN0YXRpYyBpbnQgbWRldl9yZW1vdmUoc3RydWN0IGRl
+dmljZSAqZGV2KQo+ID4+ICAgCXJldHVybiAwOwo+ID4+ICAgfQo+ID4+ICAgCj4gPj4gK3N0YXRp
+YyBpbnQgbWRldl9tYXRjaChzdHJ1Y3QgZGV2aWNlICpkZXYsIHN0cnVjdCBkZXZpY2VfZHJpdmVy
+ICpkcnYpCj4gPj4gK3sKPiA+PiArCXVuc2lnbmVkIGludCBpOwo+ID4+ICsJc3RydWN0IG1kZXZf
+ZGV2aWNlICptZGV2ID0gdG9fbWRldl9kZXZpY2UoZGV2KTsKPiA+PiArCXN0cnVjdCBtZGV2X2Ry
+aXZlciAqbWRydiA9IHRvX21kZXZfZHJpdmVyKGRydik7Cj4gPj4gKwljb25zdCBzdHJ1Y3QgbWRl
+dl9jbGFzc19pZCAqaWRzID0gbWRydi0+aWRfdGFibGU7Cj4gPj4gKyAgCj4gPiBOaXQsIGFzIHdl
+IHN0YXJ0IHRvIGFsbG93IG5ldyBtZGV2IGJ1cyBkcml2ZXJzLCBtZGV2LWNvcmUgbWlnaHQgd2Fu
+dCB0bwo+ID4gcHJvdGVjdCBpdHNlbGYgZnJvbSBhIE5VTEwgaWRfdGFibGUsIGJ5IGVpdGhlciBm
+YWlsaW5nIHRoZQo+ID4gbWRldl9yZWdpc3Rlcl9kcml2ZXIoKSBvciBmYWlsaW5nIHRoZSBtYXRj
+aCBoZXJlLiAgSSB0aGluayBzdWNoIGEKPiA+IGNvbmRpdGlvbiB3b3VsZCBzZWdmYXVsdCBhcyB3
+cml0dGVuIGhlcmUsIGJ1dCBjbGVhcmx5IHdlIGRvbid0IGhhdmUKPiA+IHN1Y2ggZXh0ZXJuYWwg
+ZHJpdmVycyB5ZXQuICBUaGFua3MsICAKPiAKPiAKPiBJJ20gbm90IHN1cmUgSSBnZXQgdGhlIHBv
+aW50IGhlcmUuIE15IHVuZGVyc3RhbmRpbmcgaXMgdGhhdCBtZGV2LWNvcmUgCj4gd29uJ3QgdHJ5
+IHRvIGJlIG1hdGNoZWQgaGVyZSBzaW5jZSBpdCB3YXMgbm90IGEgY29tcGxldGUgbWRldiBkZXZp
+Y2UuCgpUaGUgcGFyZW50IGRyaXZlciBmYWlsaW5nIHRvIHNldCBhIHR5cGUgdnMgdGhlIHBhcmVu
+dCBkcml2ZXIgZmFpbGluZyB0bwpyZWdpc3RlciB3aXRoIGEgc3RydWN0IG1kZXZfZHJpdmVyIHdo
+ZXJlIGlkX3RhYmxlIGlzIG5vdCBudWxsIGFyZQpkaWZmZXJlbnQgaXNzdWVzLiAgSSBhZ3JlZSB0
+aGF0IGlmIGEgdmVuZG9yIGRyaXZlciB3YXMgbm90IHVwZGF0ZWQgZm9yCnRoaXMgc2VyaWVzIHRo
+YXQgdGhleSdkIG5ldmVyIHN1Y2Nlc3NmdWxseSBjcmVhdGUgYSBkZXZpY2UgYmVjYXVzZSB0aGUK
+bWRldi1jb3JlIHdvdWxkIHJlamVjdCBpdCBmb3Igbm90IHNldHRpbmcgYSBjbGFzcywgYnV0IG1k
+ZXZfbWF0Y2goKSBpcwpjYWxsZWQgZm9yIGRldmljZXMgdGhhdCBtaWdodCBiZSBjcmVhdGVkIGJ5
+IG90aGVyIHZlbmRvciBkcml2ZXJzLCBzbwpsb2FkaW5nIGEgcGFyZW50IGRyaXZlciB3aXRoIGEg
+bnVsbCBpZF90YWJsZSBwb3RlbnRpYWxseSBicmVha3MKbWF0Y2hpbmcgZm9yIGV2ZXJ5b25lLiAg
+VGhhbmtzLAoKQWxleAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
+bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
