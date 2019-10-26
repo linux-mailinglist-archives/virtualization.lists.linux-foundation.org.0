@@ -2,44 +2,44 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F903E5AC6
-	for <lists.virtualization@lfdr.de>; Sat, 26 Oct 2019 15:17:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81F64E5B1D
+	for <lists.virtualization@lfdr.de>; Sat, 26 Oct 2019 15:20:35 +0200 (CEST)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id AF669B7A;
-	Sat, 26 Oct 2019 13:17:48 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 72E70B8A;
+	Sat, 26 Oct 2019 13:20:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C1945B1F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4CA6AB59
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 26 Oct 2019 13:17:47 +0000 (UTC)
+	Sat, 26 Oct 2019 13:20:29 +0000 (UTC)
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 841F691E
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 06B3E935
 	for <virtualization@lists.linux-foundation.org>;
-	Sat, 26 Oct 2019 13:17:47 +0000 (UTC)
+	Sat, 26 Oct 2019 13:20:29 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
 	[73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 9C42B21E6F;
-	Sat, 26 Oct 2019 13:17:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 21E9021D7F;
+	Sat, 26 Oct 2019 13:20:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1572095867;
-	bh=e8P5zc33e5phKu6LdejVEInb2mZmqaRPq2wqjeZobb4=;
+	s=default; t=1572096028;
+	bh=jqZFpikfJbMsGU/bG7ztRjCnMW9m9ycSR09ThwTCulM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Pnri5QBo6pVruvY3Exmr4YCVsBwqvQCZUYM6XlHlVKJxwCQu4/fQZSnqTpVZ4T8fV
-	2i4bwQICZ9GXK+nwg0xtIigG8xr3ZiLhCyykmXzGojiABhZr2HONNNzNuzqLUM1yoV
-	NPwQUawce1CGjv1k0VouRr6HcY7RWb6jPQfcoV6A=
+	b=rNpFQpAkcUDRBq6aoXPhpB1WM2jGK8fGpmlN0ixvGbtOO25ADig/1/hXm14Ctsusp
+	EHewpDE9CioLO6ZXMr/aXZvXqCSbgSD/TLZjfa7ULLP0tm5qOa6gXQ1k287mfrcLjl
+	FoI3UJ0HxHdBM8e37p2XPG7WDfzWsvA4xBMhCDCY=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.3 57/99] vhost/test: stop device before reset
-Date: Sat, 26 Oct 2019 09:15:18 -0400
-Message-Id: <20191026131600.2507-57-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 39/59] vhost/test: stop device before reset
+Date: Sat, 26 Oct 2019 09:18:50 -0400
+Message-Id: <20191026131910.3435-39-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191026131600.2507-1-sashal@kernel.org>
-References: <20191026131600.2507-1-sashal@kernel.org>
+In-Reply-To: <20191026131910.3435-1-sashal@kernel.org>
+References: <20191026131910.3435-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -82,10 +82,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+)
 
 diff --git a/drivers/vhost/test.c b/drivers/vhost/test.c
-index 7804869c6a313..056308008288c 100644
+index a9be2d8e98df7..55090d9f9de0d 100644
 --- a/drivers/vhost/test.c
 +++ b/drivers/vhost/test.c
-@@ -161,6 +161,7 @@ static int vhost_test_release(struct inode *inode, struct file *f)
+@@ -162,6 +162,7 @@ static int vhost_test_release(struct inode *inode, struct file *f)
  
  	vhost_test_stop(n, &private);
  	vhost_test_flush(n);
@@ -93,7 +93,7 @@ index 7804869c6a313..056308008288c 100644
  	vhost_dev_cleanup(&n->dev);
  	/* We do an extra flush before freeing memory,
  	 * since jobs can re-queue themselves. */
-@@ -237,6 +238,7 @@ static long vhost_test_reset_owner(struct vhost_test *n)
+@@ -238,6 +239,7 @@ static long vhost_test_reset_owner(struct vhost_test *n)
  	}
  	vhost_test_stop(n, &priv);
  	vhost_test_flush(n);
