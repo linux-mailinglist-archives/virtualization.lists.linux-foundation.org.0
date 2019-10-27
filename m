@@ -2,69 +2,67 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B143E632D
-	for <lists.virtualization@lfdr.de>; Sun, 27 Oct 2019 15:43:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E647E6331
+	for <lists.virtualization@lfdr.de>; Sun, 27 Oct 2019 15:43:57 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DD2DDB50;
-	Sun, 27 Oct 2019 14:43:36 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 22EFCB4B;
+	Sun, 27 Oct 2019 14:43:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id C07E6AEF
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B8694AE7
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 14:43:33 +0000 (UTC)
+	Sun, 27 Oct 2019 14:43:35 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4E7E114D
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 1AE4414D
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 14:43:33 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id 11so6841659wmk.0
+	Sun, 27 Oct 2019 14:43:35 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id n7so6819624wmc.3
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 07:43:33 -0700 (PDT)
+	Sun, 27 Oct 2019 07:43:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=K1drSj56NAMifp0a52nujMXEWxvKYc9KCSSsaeobpyU=;
-	b=TyzHBKD+Hyl4HO0A4bnaZYaumW+Bj/xP+SRf/Gyzp9LM2IPa0nApKEzMny34zY2nni
-	/jZhVQQMkOA6w1fkLsXyCvZ4wSYOTFxaO3AjVsJGJvJkcsO/lzGVgGeQngK/RNc7Egri
-	vcK+0EhYd7ZlM1z6inTn6NOxMFHs+Pb3pOBZ6vhw7YSe4PqKmG/frwtLNLcEq6k2+aE9
-	jxtFwZ4mg+SL5Ee4EKdIpMQC0OuOLgcrxmGnPBP4d4E92oNWKVi+Puh4M0wCaNJr6lHn
-	0Rh0AMSpRQsCmYGBDT4pEtOzApgtfEeCQGkf3x3kQqyZwQ73BtMFIzymjJc/+v70cVZO
-	NIcQ==
+	bh=qE0X3ogtNhn0ebFIC/w7JpP2rq2/beNy9tfdgFGDWNI=;
+	b=c0fZnZa8IRC4VhCN+ke+befKGunIOO7DkdhdFaW+KDbpyWHkOsSjIKR9Dc0Rq7Kuj3
+	Ncr3xzia093wSTG7NjjuBjEOWtDraFGsGPGhWkXSmkyaYAXRGMlB9f4dUS6EkQJ3h87m
+	gfgMYdQ+LpSTpCSfgf/PfkwJXXm4DgWlfZExXMdaoyzWYDpTa17vp2m5Z048vWoi3i00
+	rcrdtNHrHcrhEyE+Bb6tefzIrXXhFszP1SO1ADgz7YvTfDTI6Qm+FdmI/a3V8SNTbaez
+	LA946Gk8I6ZGviJVfCUYd+IiTIJbKwK2jQvvWcsZQkd97KZuUI6T6IrzGOM5UW8dBgnJ
+	N8bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=K1drSj56NAMifp0a52nujMXEWxvKYc9KCSSsaeobpyU=;
-	b=TOXXKwBwT+JXyC7lWB4Admowmffongcx3NdUwoY7zzvJZTZxUmHNn748iXMVC9kkQf
-	Z4YgBrlN36D8FS5cqswdPEFhUPpAnIv3Br/hk17xVE6AhpCCzDpz3COFVo1jepeaYrYI
-	zO8a6qlOFguaO3Tbw6KqD56rWLjCbMpT1/1m4MkqC8qtgORjOdlB3QanjoP5Z5Bbp6/V
-	KyKSiNN2k0lFU3arrz4gKz8Z2QkXTZ6Ok/c9nz1Gc9dPIJjSe8J4z79uQJ+YnFA/Xmz7
-	s0AuZ6QDNNo2wKPI/xDZQNCPLQd7fedaQZ8twtTyErWt5w61P1OkPeamftzuxHrDZlMe
-	bjfw==
-X-Gm-Message-State: APjAAAV5lJv3C9mRkHRRgwc89PHBAeDWnyRT9P5yBFNAMLs3m3jtaiUF
-	txGfVWJqhj4CmHBQ4MP5Avs=
-X-Google-Smtp-Source: APXvYqxLw4bBUvZYDSjjOukhCIcplahm2+ltAyfvlmEEdDvw7ye8qdWpBrNXeBrD9mv/HgOQmciqAg==
-X-Received: by 2002:a1c:5f82:: with SMTP id
-	t124mr12409011wmb.114.1572187411930; 
-	Sun, 27 Oct 2019 07:43:31 -0700 (PDT)
+	bh=qE0X3ogtNhn0ebFIC/w7JpP2rq2/beNy9tfdgFGDWNI=;
+	b=UrUJCb24xKhj7B19TB1aTsvaoPi28UTgrNwUKM7d+LVF7VwZHd9vmEbsLfAwGs2/jR
+	ZSM2yvaPBvtWdDrywPLSTVMt4nm8g+iiSvHPEb4aMAtZPQ75Gc5mwkH0sjyiMVuyt5CZ
+	TZhw9A7wNW8lyphru5bLm5USjgCLnfKRlJu0/zfH0x5oeyHrUedy/zY3+TWy5TWpE1qQ
+	OT2j8lNzZQfvWD0Hd/12ba8jtGW0vExxShSB+HY/IHe6tNXOvLsAI4JOnlB84qVFJcOH
+	zoF0l7ag3XJWJss2mQMj3FD4qtnYLR0o2G3vl3v7m/p154b3rt6kQd9a0IyPSwypHnTU
+	4eoA==
+X-Gm-Message-State: APjAAAUnteWdlS6pnY8Ctmkfw9iRWcIUNzHWahhxIWXnfzlXTtj3iTTN
+	PXz04MJp8bhz1Nt5CG6gRW4=
+X-Google-Smtp-Source: APXvYqyBiUGAZ2CjiSe1OPmeBxzC1CyoaPv3kh/kHYYIFyajS1xQnlY1UJFFT+LYInWLXZcO8WGb+Q==
+X-Received: by 2002:a7b:cd86:: with SMTP id y6mr12203560wmj.101.1572187413656; 
+	Sun, 27 Oct 2019 07:43:33 -0700 (PDT)
 Received: from localhost (94.222.26.109.rev.sfr.net. [109.26.222.94])
-	by smtp.gmail.com with ESMTPSA id
-	h124sm1133697wmf.30.2019.10.27.07.43.31
+	by smtp.gmail.com with ESMTPSA id l15sm1194788wme.5.2019.10.27.07.43.32
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 27 Oct 2019 07:43:31 -0700 (PDT)
-Date: Sun, 27 Oct 2019 09:08:23 +0100
+	Sun, 27 Oct 2019 07:43:32 -0700 (PDT)
+Date: Sun, 27 Oct 2019 09:12:13 +0100
 From: Stefan Hajnoczi <stefanha@gmail.com>
 To: Stefano Garzarella <sgarzare@redhat.com>
-Subject: Re: [PATCH net-next 07/14] vsock: handle buffer_size sockopts in the
-	core
-Message-ID: <20191027080823.GB4472@stefanha-x1.localdomain>
+Subject: Re: [PATCH net-next 08/14] vsock: add vsock_create_connected()
+	called by transports
+Message-ID: <20191027081213.GC4472@stefanha-x1.localdomain>
 References: <20191023095554.11340-1-sgarzare@redhat.com>
-	<20191023095554.11340-8-sgarzare@redhat.com>
+	<20191023095554.11340-9-sgarzare@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191023095554.11340-8-sgarzare@redhat.com>
+In-Reply-To: <20191023095554.11340-9-sgarzare@redhat.com>
 User-Agent: Mutt/1.12.1 (2019-06-15)
 X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00, DATE_IN_PAST_06_12, 
 	DKIM_SIGNED, DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
@@ -92,73 +90,60 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2813262763275677183=="
+Content-Type: multipart/mixed; boundary="===============4026023754936226677=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
 
---===============2813262763275677183==
+--===============4026023754936226677==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="rS8CxjVDS/+yyDmU"
+	protocol="application/pgp-signature"; boundary="DSayHWYpDlRfCAAQ"
 Content-Disposition: inline
 
 
---rS8CxjVDS/+yyDmU
+--DSayHWYpDlRfCAAQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 23, 2019 at 11:55:47AM +0200, Stefano Garzarella wrote:
-> virtio_transport and vmci_transport handle the buffer_size
-> sockopts in a very similar way.
+On Wed, Oct 23, 2019 at 11:55:48AM +0200, Stefano Garzarella wrote:
+> All transports call __vsock_create() with the same parameters,
+> most of them depending on the parent socket. In order to simplify
+> the VSOCK core APIs exposed to the transports, this patch adds
+> the vsock_create_connected() callable from transports to create
+> a new socket when a connection request is received.
+> We also unexported the __vsock_create().
 >=20
-> In order to support multiple transports, this patch moves this
-> handling in the core to allow the user to change the options
-> also if the socket is not yet assigned to any transport.
->=20
-> This patch also adds the '.notify_buffer_size' callback in the
-> 'struct virtio_transport' in order to inform the transport,
-> when the buffer_size is changed by the user. It is also useful
-> to limit the 'buffer_size' requested (e.g. virtio transports).
->=20
-> Acked-by: Dexuan Cui <decui@microsoft.com>
+> Suggested-by: Stefan Hajnoczi <stefanha@redhat.com>
 > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 > ---
-> RFC -> v1:
-> - changed .notify_buffer_size return to void (Stefan)
-> - documented that .notify_buffer_size is called with sk_lock held (Stefan)
-> ---
->  drivers/vhost/vsock.c                   |  7 +-
->  include/linux/virtio_vsock.h            | 15 +----
->  include/net/af_vsock.h                  | 15 ++---
->  net/vmw_vsock/af_vsock.c                | 43 ++++++++++---
->  net/vmw_vsock/hyperv_transport.c        | 36 -----------
->  net/vmw_vsock/virtio_transport.c        |  8 +--
->  net/vmw_vsock/virtio_transport_common.c | 79 ++++-------------------
->  net/vmw_vsock/vmci_transport.c          | 86 +++----------------------
->  net/vmw_vsock/vmci_transport.h          |  3 -
->  9 files changed, 65 insertions(+), 227 deletions(-)
+>  include/net/af_vsock.h                  |  5 +----
+>  net/vmw_vsock/af_vsock.c                | 20 +++++++++++++-------
+>  net/vmw_vsock/hyperv_transport.c        |  3 +--
+>  net/vmw_vsock/virtio_transport_common.c |  3 +--
+>  net/vmw_vsock/vmci_transport.c          |  3 +--
+>  5 files changed, 17 insertions(+), 17 deletions(-)
 
 Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
 
---rS8CxjVDS/+yyDmU
+--DSayHWYpDlRfCAAQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl21UHcACgkQnKSrs4Gr
-c8jf5wf6ArMyUiMMsXentQxUSlbUpCtIRf1HllqzAAYdsb4/GngX/TcZHaVU4JYg
-vnMxPnYs9IatdJgEmJ2oV7Xemt2KdT67eqeqpeUuvOXzwCFTqx7gmCq0GYXPobTW
-5Km+oVwrDxfzrUNVK5ZmeFhOSQuB09zbY1JhuwXTiX+nXOVOBP91Mt3i5wijc6a1
-M6W2KtgysSkW1K4tf+8/c12QdNlB5bwL6HX2Tgop6bE+yTFpxmykopRkXonrLSQ7
-2Ba02wkFAOakw0f9AlF0xBCJfY8OvHUNPYRvnh5g9OJc9DjvZPl2p2PLTpMv7DLm
-XF8KeD/VWkSjA8RIYlUYmzUdVvshGA==
-=oEzi
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl21UV0ACgkQnKSrs4Gr
+c8j8/ggAyDA6UkgCfi0daj2HF5HCXYLlJ9/XXtklusGF1Wc9tWjzw/GXPdNlYum9
+SqWtDu4YlWC3HH5TXKiMuTFjsumU6qJOSXKbPTFOmHdsQAnYeBMB1LZZRAd1O85T
+LeBzRaNJjd+3qcjEeGf4gy7TuHGk49qnJaaP9n+SvheaN6DRf4cVJYhVYHf15xnI
+qyhbT8cq5YcgszT/mp/D4guFPl9gYFPT7IqFvN8FOhELWmj7q6noJqAlEiUMsOSW
+fg8L76b1v8h04Q7iF2lmvUMFu3q9POIgkxqCQcYZzxJUMFLJez2y8nWnRIbNLJnJ
+l70AGpwkVMKXrJfa8DwyCI39cmT1Hg==
+=06uZ
 -----END PGP SIGNATURE-----
 
---rS8CxjVDS/+yyDmU--
+--DSayHWYpDlRfCAAQ--
 
---===============2813262763275677183==
+--===============4026023754936226677==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -168,4 +153,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============2813262763275677183==--
+--===============4026023754936226677==--
