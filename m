@@ -2,72 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id AACF6E61F6
-	for <lists.virtualization@lfdr.de>; Sun, 27 Oct 2019 11:08:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57FA1E6326
+	for <lists.virtualization@lfdr.de>; Sun, 27 Oct 2019 15:43:40 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DFF50949;
-	Sun, 27 Oct 2019 10:08:14 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id A6ED3B09;
+	Sun, 27 Oct 2019 14:43:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9E6C0890
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8ADCB499
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 10:08:13 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 24C1D63D
+	Sun, 27 Oct 2019 14:43:32 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id DF7A914D
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 10:08:13 +0000 (UTC)
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
-	[209.85.160.198])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 9B99F5AFE9
+	Sun, 27 Oct 2019 14:43:31 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id a11so7222026wra.6
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 10:08:12 +0000 (UTC)
-Received: by mail-qt1-f198.google.com with SMTP id u23so7707304qtb.22
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 03:08:12 -0700 (PDT)
+	Sun, 27 Oct 2019 07:43:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=YTHjpx5tynN5ysNBWnDF8q0AZsL3oz0jYtEIvTs3UB8=;
+	b=nywAXHaYFmYMIY+hAOelcPD7dFa0WvtZ4hopNPXAcgcSOOWBR3qexe4p3jR+opMRem
+	lCugMtCFnPAa3bYeCi5XUQ9nsJjqAlyMBdtErBu6QfX4HiRClOJ9XlX/YzaCltObVthY
+	kmmcXvFX9SHiQPo0V8Unp3F6q7o//WoKIRf54n4rgXnKWx+n76nNudLg2fyVX0LLKjl/
+	PT3bvONLPl3UJdPbe/wn9J2+LWtGQS93qOk5kt8AjOXmyRaf7eStSgqKHH+1RGIB+vJI
+	cYBywcXCz6MGJOcKDf2v81F7FSxmlhMvDjS20n5zV5P+PuVCUmoFOu+G1edytmO2HiIq
+	fAEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-	:content-disposition;
-	bh=2LKFbpd/57zdcxL2B5zndGKqrGlJbgH02f3Dnv6OaXo=;
-	b=UTqh3gpjF6hoV+5URAL6kcfTBzRSOTc6L2QGUvMiExgm1izEhBjIh/4Gp6qpyVDT6C
-	ZXDALv0IloMyRjxLlHnobdOw+1PTL/XRHcZtt6uAhuzugJHzCX3RGaT7si5O5C3aobZL
-	e0tlCsI5wJfK0ME0EbJVF+VyHAPHCIL72fL56sUW8+WUcNDskzpWvtfBFTZdbiI0t0z3
-	pcNDhsmjp2GGsZVermmkOc22jHG7/1mFvGCTUrms4U5bWt7eoEjzXQ1HxHZBOQJu8G7I
-	GQpOQEvf4f6uUmpSAvFCsoUj0blVxBPC7TzIgTSmV2p2VCoZ7GNWpsN9R/ZVumF6QRU7
-	H9Pg==
-X-Gm-Message-State: APjAAAXB/DOJSUDFP4ArHhZhhKBdRKM3BLcQrgTTGgAwRTgJbZw10pio
-	ftEbDZfascUNY2bBZaa0p0Q0fyxDC6iVZm930yCc7q+QxHGq1lOLOsaaxP/sVQ0l/1R6MaB5cep
-	IzbHdAHqkkdbRuPQYEXRC8ddNLoBdtKGMWbtRcN4JTA==
-X-Received: by 2002:ac8:3711:: with SMTP id o17mr12438945qtb.159.1572170891945;
-	Sun, 27 Oct 2019 03:08:11 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqy4yH+6ZR2wBZq+Jvuc7lC5oL5AYqVi9r9IYLRVIAL0mc77PKJB7RThLM03NDFUqz9i1FUPjw==
-X-Received: by 2002:ac8:3711:: with SMTP id o17mr12438933qtb.159.1572170891717;
-	Sun, 27 Oct 2019 03:08:11 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-10-77.red.bezeqint.net. [79.176.10.77])
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=YTHjpx5tynN5ysNBWnDF8q0AZsL3oz0jYtEIvTs3UB8=;
+	b=csCBw2w7urs9Bks440bE1ksB0UOEmqDX8Vk+WdCoViAr5woJb4JjU7Ew79bANvJEjv
+	yYkCrvbGA2nNcNXJKMBtj2puYfIqvP26c0tPEpuMpSDY0qUZVGQi4W+oWygMyQvWwl2R
+	5y8uilNUfjP1nkuG2mizQDk4AEB4KhuKhS4yXXG2M36VSRnC2j9MvnwZNxb1r8xgUrs+
+	5kkOIkBk0IRgYEGaIqeYyufHHA9nYMZjAvo0M4XKxSiA2PVZGIMAowoTgDfsVnBV8QT8
+	RQRK/8wbnZiGqVErTvYU11FfaUOAOk3KKy3IpdxLrCkoItFk1Q3P8ckeauhv/KFNxX8b
+	v9+Q==
+X-Gm-Message-State: APjAAAW6C6pAeyHCXv9JEz4xRQUXOvWcv6kdsTeByXbuCoCMd6pMuhV7
+	cIM1PR5ilO9xmSY9mLDMH/M=
+X-Google-Smtp-Source: APXvYqwJ+H4xcrTifNRyujk7kct3/jugAiLCESyoG4j0g4CEAKEOyPB8CuSko//m+TkPGmo0KYgcvQ==
+X-Received: by 2002:a5d:4705:: with SMTP id y5mr11261749wrq.364.1572187410396; 
+	Sun, 27 Oct 2019 07:43:30 -0700 (PDT)
+Received: from localhost (94.222.26.109.rev.sfr.net. [109.26.222.94])
 	by smtp.gmail.com with ESMTPSA id
-	y33sm7072062qta.18.2019.10.27.03.08.09
+	n17sm7655453wmc.41.2019.10.27.07.43.28
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 27 Oct 2019 03:08:11 -0700 (PDT)
-Date: Sun, 27 Oct 2019 06:08:07 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH] virtio_ring: fix stalls for packed rings
-Message-ID: <20191027100705.11644-1-mst@redhat.com>
+	Sun, 27 Oct 2019 07:43:29 -0700 (PDT)
+Date: Sun, 27 Oct 2019 09:01:46 +0100
+From: Stefan Hajnoczi <stefanha@gmail.com>
+To: Stefano Garzarella <sgarzare@redhat.com>
+Subject: Re: [PATCH net-next 00/14] vsock: add multi-transports support
+Message-ID: <20191027080146.GA4472@stefanha-x1.localdomain>
+References: <20191023095554.11340-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mailer: git-send-email 2.22.0.678.g13338e74b8
-X-Mutt-Fcc: =sent
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+In-Reply-To: <20191023095554.11340-1-sgarzare@redhat.com>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00, DATE_IN_PAST_06_12, 
+	DKIM_SIGNED, DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE autolearn=no version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Marvin Liu <yong.liu@intel.com>, stable@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
+Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Arnd Bergmann <arnd@arndb.de>, kvm@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,90 +89,78 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============7542246376614576319=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-From: Marvin Liu <yong.liu@intel.com>
 
-When VIRTIO_F_RING_EVENT_IDX is negotiated, virtio devices can
-use virtqueue_enable_cb_delayed_packed to reduce the number of device
-interrupts.  At the moment, this is the case for virtio-net when the
-napi_tx module parameter is set to false.
-
-In this case, the virtio driver selects an event offset and expects that
-the device will send a notification when rolling over the event offset
-in the ring.  However, if this roll-over happens before the event
-suppression structure update, the notification won't be sent. To address
-this race condition the driver needs to check wether the device rolled
-over the offset after updating the event suppression structure.
-
-With VIRTIO_F_RING_PACKED, the virtio driver did this by reading the
-flags field of the descriptor at the specified offset.
-
-Unfortunately, checking at the event offset isn't reliable: if
-descriptors are chained (e.g. when INDIRECT is off) not all descriptors
-are overwritten by the device, so it's possible that the device skipped
-the specific descriptor driver is checking when writing out used
-descriptors. If this happens, the driver won't detect the race condition
-and will incorrectly expect the device to send a notification.
-
-For virtio-net, the result will be a TX queue stall, with the
-transmission getting blocked forever.
-
-With the packed ring, it isn't easy to find a location which is
-guaranteed to change upon the roll-over, except the next device
-descriptor, as described in the spec:
-
-        Writes of device and driver descriptors can generally be
-        reordered, but each side (driver and device) are only required to
-        poll (or test) a single location in memory: the next device descriptor after
-        the one they processed previously, in circular order.
-
-while this might be sub-optimal, let's do exactly this for now.
-
-Cc: stable@vger.kernel.org
-Cc: Jason Wang <jasowang@redhat.com>
-Signed-off-by: Marvin Liu <yong.liu@intel.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
-
-So this is what I have in my tree now - this is just Marvin's patch
-with a tweaked description.
+--===============7542246376614576319==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="1yeeQ81UyVL57Vl7"
+Content-Disposition: inline
 
 
- drivers/virtio/virtio_ring.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+--1yeeQ81UyVL57Vl7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index bdc08244a648..a8041e451e9e 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -1499,9 +1499,6 @@ static bool virtqueue_enable_cb_delayed_packed(struct virtqueue *_vq)
- 		 * counter first before updating event flags.
- 		 */
- 		virtio_wmb(vq->weak_barriers);
--	} else {
--		used_idx = vq->last_used_idx;
--		wrap_counter = vq->packed.used_wrap_counter;
- 	}
- 
- 	if (vq->packed.event_flags_shadow == VRING_PACKED_EVENT_FLAG_DISABLE) {
-@@ -1518,7 +1515,9 @@ static bool virtqueue_enable_cb_delayed_packed(struct virtqueue *_vq)
- 	 */
- 	virtio_mb(vq->weak_barriers);
- 
--	if (is_used_desc_packed(vq, used_idx, wrap_counter)) {
-+	if (is_used_desc_packed(vq,
-+				vq->last_used_idx,
-+				vq->packed.used_wrap_counter)) {
- 		END_USE(vq);
- 		return false;
- 	}
--- 
-MST
+On Wed, Oct 23, 2019 at 11:55:40AM +0200, Stefano Garzarella wrote:
+> This series adds the multi-transports support to vsock, following
+> this proposal: https://www.spinics.net/lists/netdev/msg575792.html
+>=20
+> With the multi-transports support, we can use VSOCK with nested VMs
+> (using also different hypervisors) loading both guest->host and
+> host->guest transports at the same time.
+> Before this series, vmci-transport supported this behavior but only
+> using VMware hypervisor on L0, L1, etc.
+>=20
+> RFC: https://patchwork.ozlabs.org/cover/1168442/
+> RFC -> v1:
+> - Added R-b/A-b from Dexuan and Stefan
+> - Fixed comments and typos in several patches (Stefan)
+> - Patch 7: changed .notify_buffer_size return to void (Stefan)
+> - Added patch 8 to simplify the API exposed to the transports (Stefan)
+> - Patch 11:
+>   + documented VSOCK_TRANSPORT_F_* flags (Stefan)
+>   + fixed vsock_assign_transport() when the socket is already assigned
+>   + moved features outside of struct vsock_transport, and used as
+>     parameter of vsock_core_register() as a preparation of Patch 12
+> - Removed "vsock: add 'transport_hg' to handle g2h\h2g transports" patch
+> - Added patch 12 to register vmci_transport only when VMCI guest/host
+>   are active
+
+Has there been feedback from Jorgen or someone else from VMware?  A
+Reviewed-by or Acked-by would be nice since this patch series affects
+VMCI AF_VSOCK.
+
+Stefan
+
+--1yeeQ81UyVL57Vl7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl21TucACgkQnKSrs4Gr
+c8jY1wf9G0k0TNCkBEFILNq2f7qw5oF5+pTf1Of9V+p/S4tsTcWiHPLrYThBzZui
+QJ/Zws7KFQcXB/7+e8RQ4SXI/iMLoPtaEFK3euKQg0N48xlULtw2XuiMVuaAsTsl
+iaEmsyI21PQlM7zeMFTfqt0wxt2H6MebdP4DyrfhbKvFKmzAAy7v0Xq3vtv6/ZX6
+AIVIDuKDo19J9oe9ZKF51lvMe4Ndd7ynKNDD+2s2ZrrF31/uuQkE6K2ZUMjTDQVR
+zcK2K/aHtAnz+98XtneyrQAlc4JV0lTIZOMB2aTS4ZQ1sHssYiwGbF/j4fR2Dj0n
+iFHeCiwo4mQ5+1RKCoFZbtObs2ilQw==
+=wYuh
+-----END PGP SIGNATURE-----
+
+--1yeeQ81UyVL57Vl7--
+
+--===============7542246376614576319==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============7542246376614576319==--
