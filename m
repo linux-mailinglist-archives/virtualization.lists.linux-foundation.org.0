@@ -2,85 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B413E6338
-	for <lists.virtualization@lfdr.de>; Sun, 27 Oct 2019 15:44:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE8F1E6A99
+	for <lists.virtualization@lfdr.de>; Mon, 28 Oct 2019 02:58:03 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 4E73DAE7;
-	Sun, 27 Oct 2019 14:43:39 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 98A13A80;
+	Mon, 28 Oct 2019 01:57:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id CFE47B4B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 9DBCE2C
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 14:43:36 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6D06A14D
+	Mon, 28 Oct 2019 01:57:54 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 2720842D
 	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 14:43:36 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id o28so7226489wro.7
-	for <virtualization@lists.linux-foundation.org>;
-	Sun, 27 Oct 2019 07:43:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=8m+44Vom44C3KhaUynaGnY+KEBMnlLX9FyMyBId8qoU=;
-	b=NQH/OeWG8WdxJzcEjzA4jcs0prQEWO9Pvc/hRibnmA2kGfBX9GXKEPzG8QBt0r5gt5
-	WjLH9+UgxdiMjt+Upsns+/VTt4xZduF/oj+56GLFkWyGTeKIpVPddDxRQ18hMU6VTzeS
-	Q3APORHOhFrh88B0ZczEmBrll1sBbpDk005nfDYQ/7lqddPN6exe7WgjGRpcLNfCPILS
-	+14lN+4eH5gYalHUk+tGCUcgJEewmLLRDKhU7lLUE4pyu4YYaZl3gnGoFEdH1F25bdIf
-	XVk9yXZgNi8mgQrhxWHxwRSseL6MeWEYAlASPhmRobVUJyTznxd8fFxLT1eXbZbR6cvB
-	bVdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=8m+44Vom44C3KhaUynaGnY+KEBMnlLX9FyMyBId8qoU=;
-	b=HcFa8oAEMvokG8F2lQK9qu+rc7Mk8eEc1F80qVuwNU6DPvNP93OpVnNxXvsWuL1Zj6
-	dxpHLQwpzh0TEblqnN4LZ+Ox/83lrtW3Ibfe9SXuZpMWM7lMiDEyKCv4if7uBN9UP6d/
-	r+YR5mIpQqqN9WBi4SnC+WCV+iFe94bY+Mhy2ARkwzKTagbKAUT266ClAHQWZymO7GUK
-	m6270uiLnjJpBf9WP5gNgGVT0mYgag/948p9DTkHnBNTHAUZerMu/aqiSgMNZygvDTJo
-	/ClgtJK5czvcfwrhUNofD0J0MYSFwVLW9FAQYGLB4UXNvJjFsUeh7s3cVBV/PwTxqlvW
-	8Y1g==
-X-Gm-Message-State: APjAAAVqic2VRAhRMtTDwKJMBAeJf0TPUS0TO61mOzsUNZyrSY9+QQTl
-	hVST1ASmzkoHYIDD1yQYOjY=
-X-Google-Smtp-Source: APXvYqyiG2KCZCSee9Vwv5D88dH0uhGwkGZqT0L2pQDFD9DyKBWheclB6McEARrC/xn+QILCohGoMQ==
-X-Received: by 2002:a05:6000:92:: with SMTP id
-	m18mr11842859wrx.105.1572187415060; 
-	Sun, 27 Oct 2019 07:43:35 -0700 (PDT)
-Received: from localhost (94.222.26.109.rev.sfr.net. [109.26.222.94])
-	by smtp.gmail.com with ESMTPSA id
-	f17sm8378029wrs.66.2019.10.27.07.43.34
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 27 Oct 2019 07:43:34 -0700 (PDT)
-Date: Sun, 27 Oct 2019 09:17:52 +0100
-From: Stefan Hajnoczi <stefanha@gmail.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-Subject: Re: [PATCH net-next 12/14] vsock/vmci: register vmci_transport only
-	when VMCI guest/host are active
-Message-ID: <20191027081752.GD4472@stefanha-x1.localdomain>
-References: <20191023095554.11340-1-sgarzare@redhat.com>
-	<20191023095554.11340-13-sgarzare@redhat.com>
+	Mon, 28 Oct 2019 01:57:54 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	27 Oct 2019 18:57:53 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.68,238,1569308400"; d="scan'208";a="229541691"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+	by fmsmga002.fm.intel.com with ESMTP; 27 Oct 2019 18:57:51 -0700
+Date: Mon, 28 Oct 2019 09:58:42 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Wang <jasowang@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH v2] vhost: introduce mdev based hardware backend
+Message-ID: <20191028015842.GA9005@___>
+References: <106834b5-dae5-82b2-0f97-16951709d075@redhat.com>
+	<20191023101135.GA6367@___>
+	<5a7bc5da-d501-2750-90bf-545dd55f85fa@redhat.com>
+	<20191024042155.GA21090@___>
+	<d37529e1-5147-bbe5-cb9d-299bd6d4aa1a@redhat.com>
+	<d4cc4f4e-2635-4041-2f68-cd043a97f25a@redhat.com>
+	<20191024091839.GA17463@___>
+	<fefc82a3-a137-bc03-e1c3-8de79b238080@redhat.com>
+	<e7e239ba-2461-4f8d-7dd7-0f557ac7f4bf@redhat.com>
+	<20191025080143-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20191023095554.11340-13-sgarzare@redhat.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00, DATE_IN_PAST_06_12, 
-	DKIM_SIGNED, DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=no version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20191025080143-mutt-send-email-mst@kernel.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
-	Stephen Hemminger <sthemmin@microsoft.com>,
-	Arnd Bergmann <arnd@arndb.de>, kvm@vger.kernel.org,
-	"Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, maxime.coquelin@redhat.com,
 	virtualization@lists.linux-foundation.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
+	zhihong.wang@intel.com, lingshan.zhu@intel.com,
+	linux-kernel@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -92,53 +67,52 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0117337910579865229=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-
---===============0117337910579865229==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="C1iGAkRnbeBonpVg"
-Content-Disposition: inline
-
-
---C1iGAkRnbeBonpVg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Wed, Oct 23, 2019 at 11:55:52AM +0200, Stefano Garzarella wrote:
-> +static int __init vmci_transport_init(void)
-> +{
-> +	int features = VSOCK_TRANSPORT_F_DGRAM;
-
-Where is this variable used?
-
---C1iGAkRnbeBonpVg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl21UrAACgkQnKSrs4Gr
-c8iGGgf/YjP9kPT916spdjeVdu2Wg8PPuw60Kt/da2i6Qp1hdl0CTXaK1RJxoH8F
-FYtdWNROfs6CPSHEP5xVD4xBeHvZEST4BgeVr/hFZYbw4F5vVb9OIDpSln7JkN/r
-zldMb0Q+UjbvTUZm9buMeb08nbzn9CdeaCJDGPIRHOZjDNw+wL0cilfVm5NMDR4L
-pNbLtyJJliiIZeh2CxCu0k8Kd25OUlwDfqHHuFvDn/kmcNyQlVOUwb0VRnDts8mW
-ian+XNpRXDY24xdyZ9F2UxA6wvwOleFhEN/La2euNs8Iv38liHKNgiCDHe/+br/t
-vuMWadKe9tonhgk7iUlCA5hNDKgKiQ==
-=CXM0
------END PGP SIGNATURE-----
-
---C1iGAkRnbeBonpVg--
-
---===============0117337910579865229==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============0117337910579865229==--
+T24gRnJpLCBPY3QgMjUsIDIwMTkgYXQgMDg6MTY6MjZBTSAtMDQwMCwgTWljaGFlbCBTLiBUc2ly
+a2luIHdyb3RlOgo+IE9uIEZyaSwgT2N0IDI1LCAyMDE5IGF0IDA1OjU0OjU1UE0gKzA4MDAsIEph
+c29uIFdhbmcgd3JvdGU6Cj4gPiBPbiAyMDE5LzEwLzI0IOS4i+WNiDY6NDIsIEphc29uIFdhbmcg
+d3JvdGU6Cj4gPiA+IAo+ID4gPiBZZXMuCj4gPiA+IAo+ID4gPiAKPiA+ID4gPiDCoCBBbmQgd2Ug
+c2hvdWxkIHRyeSB0byBhdm9pZAo+ID4gPiA+IHB1dHRpbmcgY3RybCB2cSBhbmQgUngvVHggdnFz
+IGluIHRoZSBzYW1lIERNQSBzcGFjZSB0byBwcmV2ZW50Cj4gPiA+ID4gZ3Vlc3RzIGhhdmluZyB0
+aGUgY2hhbmNlIHRvIGJ5cGFzcyB0aGUgaG9zdCAoZS5nLiBRRU1VKSB0bwo+ID4gPiA+IHNldHVw
+IHRoZSBiYWNrZW5kIGFjY2VsZXJhdG9yIGRpcmVjdGx5Lgo+ID4gPiAKPiA+ID4gCj4gPiA+IFRo
+YXQncyByZWFsbHkgZ29vZCBwb2ludC7CoCBTbyB3aGVuICJ2aG9zdCIgdHlwZSBpcyBjcmVhdGVk
+LCBwYXJlbnQKPiA+ID4gc2hvdWxkIGFzc3VtZSBhZGRyIG9mIGN0cmxfdnEgaXMgaHZhLgo+ID4g
+PiAKPiA+ID4gVGhhbmtzCj4gPiAKPiA+IAo+ID4gVGhpcyB3b3JrcyBmb3Igdmhvc3QgYnV0IG5v
+dCB2aXJ0aW8gc2luY2UgdGhlcmUncyBubyB3YXkgZm9yIHZpcnRpbyBrZXJuZWwKPiA+IGRyaXZl
+ciB0byBkaWZmZXIgY3RybF92cSB3aXRoIHRoZSByZXN0IHdoZW4gZG9pbmcgRE1BIG1hcC4gT25l
+IHBvc3NpYmxlCj4gPiBzb2x1dGlvbiBpcyB0byBwcm92aWRlIERNQSBkb21haW4gaXNvbGF0aW9u
+IGJldHdlZW4gdmlydHF1ZXVlcy4gVGhlbiBjdHJsIHZxCj4gPiBjYW4gdXNlIGl0cyBkZWRpY2F0
+ZWQgRE1BIGRvbWFpbiBmb3IgdGhlIHdvcmsuCgpJdCBtaWdodCBub3QgYmUgYSBiYWQgaWRlYSB0
+byBsZXQgdGhlIHBhcmVudCBkcml2ZXJzIGRpc3Rpbmd1aXNoCmJldHdlZW4gdmlydGlvLW1kZXYg
+bWRldnMgYW5kIHZob3N0LW1kZXYgbWRldnMgaW4gY3RybC12cSBoYW5kbGluZwpieSBtZGV2J3Mg
+Y2xhc3MgaWQuCgo+ID4gCj4gPiBBbnl3YXksIHRoaXMgY291bGQgYmUgZG9uZSBpbiB0aGUgZnV0
+dXJlLiBXZSBjYW4gaGF2ZSBhIHZlcnNpb24gZmlyc3QgdGhhdAo+ID4gZG9lc24ndCBzdXBwb3J0
+IGN0cmxfdnEuCgorMSwgdGhhbmtzCgo+ID4gCj4gPiBUaGFua3MKPiAKPiBXZWxsIG5vIGN0cmxf
+dnEgaW1wbGllcyBlaXRoZXIgbm8gb2ZmbG9hZHMsIG9yIG5vIFhEUCAoc2luY2UgWERQIG5lZWRz
+Cj4gdG8gZGlzYWJsZSBvZmZsb2FkcyBkeW5hbWljYWxseSkuCj4gCj4gICAgICAgICBpZiAoIXZp
+cnRpb19oYXNfZmVhdHVyZSh2aS0+dmRldiwgVklSVElPX05FVF9GX0NUUkxfR1VFU1RfT0ZGTE9B
+RFMpCj4gICAgICAgICAgICAgJiYgKHZpcnRpb19oYXNfZmVhdHVyZSh2aS0+dmRldiwgVklSVElP
+X05FVF9GX0dVRVNUX1RTTzQpIHx8Cj4gICAgICAgICAgICAgICAgIHZpcnRpb19oYXNfZmVhdHVy
+ZSh2aS0+dmRldiwgVklSVElPX05FVF9GX0dVRVNUX1RTTzYpIHx8Cj4gICAgICAgICAgICAgICAg
+IHZpcnRpb19oYXNfZmVhdHVyZSh2aS0+dmRldiwgVklSVElPX05FVF9GX0dVRVNUX0VDTikgfHwK
+PiAgICAgICAgICAgICAgICAgdmlydGlvX2hhc19mZWF0dXJlKHZpLT52ZGV2LCBWSVJUSU9fTkVU
+X0ZfR1VFU1RfVUZPKSB8fAo+ICAgICAgICAgICAgICAgICB2aXJ0aW9faGFzX2ZlYXR1cmUodmkt
+PnZkZXYsIFZJUlRJT19ORVRfRl9HVUVTVF9DU1VNKSkpIHsKPiAgICAgICAgICAgICAgICAgTkxf
+U0VUX0VSUl9NU0dfTU9EKGV4dGFjaywgIkNhbid0IHNldCBYRFAgd2hpbGUgaG9zdCBpcyBpbXBs
+ZW1lbnRpbmcgTFJPL0NTVU0sIGRpc2FibGUgTFJPL0NTVU0gZmlyc3QiKTsKPiAgICAgICAgICAg
+ICAgICAgcmV0dXJuIC1FT1BOT1RTVVBQOwo+ICAgICAgICAgfQo+IAo+IG5laXRoZXIgaXMgdmVy
+eSBhdHRyYWN0aXZlLgo+IAo+IFNvIHllcyBvayBqdXN0IGZvciBkZXZlbG9wbWVudCBidXQgd2Ug
+ZG8gbmVlZCB0byBmaWd1cmUgb3V0IGhvdyBpdCB3aWxsCj4gd29yayBkb3duIHRoZSByb2FkIGlu
+IHByb2R1Y3Rpb24uCgpUb3RhbGx5IGFncmVlLgoKPiAKPiBTbyByZWFsbHkgdGhpcyBzcGVjaWZp
+YyB2aXJ0aW8gbmV0IGRldmljZSBkb2VzIG5vdCBzdXBwb3J0IGNvbnRyb2wgdnEsCj4gaW5zdGVh
+ZCBpdCBzdXBwb3J0cyBhIGRpZmZlcmVudCB0cmFuc3BvcnQgc3BlY2lmaWMgd2F5IHRvIHNlbmQg
+Y29tbWFuZHMKPiB0byBkZXZpY2UuCj4gCj4gU29tZSBraW5kIG9mIGV4dGVuc2lvbiB0byB0aGUg
+dHJhbnNwb3J0PyBJZGVhcz8KPiAKPiAKPiAtLSAKPiBNU1QKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZp
+cnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGlu
+dXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
