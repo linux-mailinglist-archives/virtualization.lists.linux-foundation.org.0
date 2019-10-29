@@ -2,64 +2,85 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20E58E8636
-	for <lists.virtualization@lfdr.de>; Tue, 29 Oct 2019 11:59:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AAD3E8CA7
+	for <lists.virtualization@lfdr.de>; Tue, 29 Oct 2019 17:27:33 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 409F71368;
-	Tue, 29 Oct 2019 10:59:51 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1E3B4D12;
+	Tue, 29 Oct 2019 16:27:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 740B61339
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A58D4CC2
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 29 Oct 2019 10:59:50 +0000 (UTC)
+	Tue, 29 Oct 2019 16:27:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-1.mimecast.com [207.211.31.81])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 45FE1FD
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8FD7B8A
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 29 Oct 2019 10:59:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1572346788;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=RoC9DQBfngAYpMprddyEKsQ4rDBmYaE/2uMIoiuS8Sc=;
-	b=Bo3RizRIDhaqo4B/IoQVDhh26Wo6uYCrngdeqRJiRYqIR5MSpyIn+6qrYZf3PBBrFwSIPm
-	OMD+No/QzGuxyKc19nuUnRu06HAhzrm+5JiLEpgSMPBDWvtzc0U8FUK1ylrS2GrHGBY10t
-	vBcuPRqpiXvqujfErdhtKFbWaM90hO0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
-	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-277-kDmpJ3UPMQ-9Gx_yNcan0g-1; Tue, 29 Oct 2019 06:59:44 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	Tue, 29 Oct 2019 16:27:24 +0000 (UTC)
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+	[209.85.221.72])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DEE4C8017DD;
-	Tue, 29 Oct 2019 10:59:43 +0000 (UTC)
-Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
-	(ovpn-12-223.pek2.redhat.com [10.72.12.223])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 6731A5C1B2;
-	Tue, 29 Oct 2019 10:59:26 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: mst@redhat.com, jasowang@redhat.com,
-	virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [RFC PATCH 2/2] virtio: allow query vq parent device
-Date: Tue, 29 Oct 2019 18:58:43 +0800
-Message-Id: <20191029105843.12061-3-jasowang@redhat.com>
-In-Reply-To: <20191029105843.12061-1-jasowang@redhat.com>
-References: <20191029105843.12061-1-jasowang@redhat.com>
+	by mx1.redhat.com (Postfix) with ESMTPS id 9E44B81F07
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 29 Oct 2019 16:27:23 +0000 (UTC)
+Received: by mail-wr1-f72.google.com with SMTP id p6so1622896wrs.5
+	for <virtualization@lists.linux-foundation.org>;
+	Tue, 29 Oct 2019 09:27:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=C6bDuPajdG9JVS65/nNfvWestag5Xwy94+uZABzDGas=;
+	b=mpPUxXjt57r8KkbkrsHp8o8H/VjnkoVTzVTaq+NEavro+7N7S6ZkYNoftH0rDoLotV
+	gltnBByBQm+KOT89Cr+jgSB/9YYQNyYpc23cYoHZOQqHKWaxHO4XWokGGvg3OgY3gyv3
+	ybRc+fzy5B4afvY51qJaXiuhT1iHU8fGyfCdtomGXtw4wywylZh4Lc5fLF1N3YSRzzb8
+	2X6bvsdcI6nd4w9u3w4RjAKjG+ovoBgyKuVgMqUUse7hLMIhvRdhC75U8GK1A+k7MXoQ
+	Ra5E+MhV0KWgQj6QsQte7ea8mm9Q0XGzLRIOTzo/Y5hlRp+YHLcu6mRSRkUJNHnfz8/t
+	CEBw==
+X-Gm-Message-State: APjAAAXPYZHucbOml1TZyE6wDOD7Gz+dTTvV2JqXtWhh8k2axLWBjH95
+	ZyfAtn+DZoKqgzmATWXreNqQfCl6hKCOLPiV7nO2subLhr4ukZZcUGb1FPR/r6Y+duBqQ+8NY40
+	RKCXO0MaerUScUGoeXahlCRPMNxcwgIqBMdkX5xlW0g==
+X-Received: by 2002:a7b:c924:: with SMTP id h4mr5203719wml.143.1572366442237; 
+	Tue, 29 Oct 2019 09:27:22 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwqcoHXB/eGlbAvP8/zQv1DhxCc9oHsJCpQ0Me1i12d1jrxIWteVIy4TZqjG4WQmNpAjkkq4g==
+X-Received: by 2002:a7b:c924:: with SMTP id h4mr5203696wml.143.1572366441980; 
+	Tue, 29 Oct 2019 09:27:21 -0700 (PDT)
+Received: from steredhat (94.222.26.109.rev.sfr.net. [109.26.222.94])
+	by smtp.gmail.com with ESMTPSA id
+	v10sm4015055wmg.48.2019.10.29.09.27.20
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 29 Oct 2019 09:27:21 -0700 (PDT)
+Date: Tue, 29 Oct 2019 17:27:12 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Stefan Hajnoczi <stefanha@gmail.com>, Adit Ranadive <aditr@vmware.com>,
+	Vishnu Dasa <vdasa@vmware.com>, Andy king <acking@vmware.com>,
+	Aditya Sarwade <asarwade@vmware.com>,
+	George Zhang <georgezhang@vmware.com>, Jorgen Hansen <jhansen@vmware.com>
+Subject: Re: [PATCH net-next 00/14] vsock: add multi-transports support
+Message-ID: <20191029162712.fn5rgxrwdrbxuehw@steredhat>
+References: <20191023095554.11340-1-sgarzare@redhat.com>
+	<20191027080146.GA4472@stefanha-x1.localdomain>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-MC-Unique: kDmpJ3UPMQ-9Gx_yNcan0g-1
-X-Mimecast-Spam-Score: 0
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU,
-	RCVD_IN_DNSWL_MED autolearn=unavailable version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <20191027080146.GA4472@stefanha-x1.localdomain>
+User-Agent: NeoMutt/20180716
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: lingshan.zhu@intel.com, lulu@redhat.com, zhihong.wang@intel.com
+Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Arnd Bergmann <arnd@arndb.de>, kvm@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,90 +97,44 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Signed-off-by: Jason Wang <jasowang@redhat.com>
----
- drivers/virtio/virtio_ring.c  | 16 ++++++++++++++--
- include/linux/virtio_config.h |  2 ++
- 2 files changed, 16 insertions(+), 2 deletions(-)
+On Sun, Oct 27, 2019 at 09:01:46AM +0100, Stefan Hajnoczi wrote:
+> On Wed, Oct 23, 2019 at 11:55:40AM +0200, Stefano Garzarella wrote:
+> > This series adds the multi-transports support to vsock, following
+> > this proposal: https://www.spinics.net/lists/netdev/msg575792.html
+> > 
+> > With the multi-transports support, we can use VSOCK with nested VMs
+> > (using also different hypervisors) loading both guest->host and
+> > host->guest transports at the same time.
+> > Before this series, vmci-transport supported this behavior but only
+> > using VMware hypervisor on L0, L1, etc.
+> > 
+> > RFC: https://patchwork.ozlabs.org/cover/1168442/
+> > RFC -> v1:
+> > - Added R-b/A-b from Dexuan and Stefan
+> > - Fixed comments and typos in several patches (Stefan)
+> > - Patch 7: changed .notify_buffer_size return to void (Stefan)
+> > - Added patch 8 to simplify the API exposed to the transports (Stefan)
+> > - Patch 11:
+> >   + documented VSOCK_TRANSPORT_F_* flags (Stefan)
+> >   + fixed vsock_assign_transport() when the socket is already assigned
+> >   + moved features outside of struct vsock_transport, and used as
+> >     parameter of vsock_core_register() as a preparation of Patch 12
+> > - Removed "vsock: add 'transport_hg' to handle g2h\h2g transports" patch
+> > - Added patch 12 to register vmci_transport only when VMCI guest/host
+> >   are active
+> 
+> Has there been feedback from Jorgen or someone else from VMware?  A
+> Reviewed-by or Acked-by would be nice since this patch series affects
+> VMCI AF_VSOCK.
+> 
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 51d83f4d7c32..ddeef7421d4d 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -183,6 +183,9 @@ struct vring_virtqueue {
- 	/* DMA, allocation, and size information */
- 	bool we_own_ring;
- 
-+	/* Parent device for doing DMA */
-+	struct device *parent;
-+
- #ifdef DEBUG
- 	/* They're supposed to lock for us. */
- 	unsigned int in_use;
-@@ -318,7 +321,7 @@ static void vring_free_queue(struct virtio_device *vdev, size_t size,
-  */
- static inline struct device *vring_dma_dev(const struct vring_virtqueue *vq)
- {
--	return vq->vq.vdev->dev.parent;
-+	return vq->parent;
- }
- 
- /* Map one sg entry. */
-@@ -1554,6 +1557,14 @@ static void *virtqueue_detach_unused_buf_packed(struct virtqueue *_vq)
- 	return NULL;
- }
- 
-+static struct device *vring_get_parent(struct virtio_device *vdev, int index)
-+{
-+	if (vdev->config->get_vq_parent)
-+		return vdev->config->get_vq_parent(vdev, index);
-+	else
-+		return vdev->dev.parent;
-+}
-+
- static struct virtqueue *vring_create_virtqueue_packed(
- 	unsigned int index,
- 	unsigned int num,
-@@ -1572,7 +1583,7 @@ static struct virtqueue *vring_create_virtqueue_packed(
- 	dma_addr_t ring_dma_addr, driver_event_dma_addr, device_event_dma_addr;
- 	size_t ring_size_in_bytes, event_size_in_bytes;
- 	unsigned int i;
--	struct device *parent = vdev->dev.parent;
-+	struct device *parent = vring_get_parent(vdev, index);
- 
- 	ring_size_in_bytes = num * sizeof(struct vring_packed_desc);
- 
-@@ -1613,6 +1624,7 @@ static struct virtqueue *vring_create_virtqueue_packed(
- 	vq->num_added = 0;
- 	vq->packed_ring = true;
- 	vq->use_dma_api = vring_use_dma_api(vdev);
-+	vq->parent = parent;
- 	list_add_tail(&vq->vq.list, &vdev->vqs);
- #ifdef DEBUG
- 	vq->in_use = false;
-diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
-index bb4cc4910750..a95af83aad9f 100644
---- a/include/linux/virtio_config.h
-+++ b/include/linux/virtio_config.h
-@@ -65,6 +65,7 @@ struct irq_affinity;
-  *      the caller can then copy.
-  * @set_vq_affinity: set the affinity for a virtqueue (optional).
-  * @get_vq_affinity: get the affinity for a virtqueue (optional).
-+ * @get_vq_parent: get the parent device for a virtqueue (optional).
-  */
- typedef void vq_callback_t(struct virtqueue *);
- struct virtio_config_ops {
-@@ -88,6 +89,7 @@ struct virtio_config_ops {
- 			       const struct cpumask *cpu_mask);
- 	const struct cpumask *(*get_vq_affinity)(struct virtio_device *vdev,
- 			int index);
-+	struct device *(*get_vq_parent)(struct virtio_device *vdev, int index);
- };
- 
- /* If driver didn't advertise the feature, it will never appear. */
--- 
-2.19.1
+Unfortunately not for now, I'm adding to this thread some VMware guys that
+reviewed latest vmci patches.
 
+Would be nice to have your feedback for these changes.
+
+Thanks in advance,
+Stefano
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
