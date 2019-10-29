@@ -2,70 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AAD3E8CA7
-	for <lists.virtualization@lfdr.de>; Tue, 29 Oct 2019 17:27:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 554EDE8CD5
+	for <lists.virtualization@lfdr.de>; Tue, 29 Oct 2019 17:35:31 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 1E3B4D12;
-	Tue, 29 Oct 2019 16:27:27 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 50DEED07;
+	Tue, 29 Oct 2019 16:35:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A58D4CC2
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id B1D3CD07
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 29 Oct 2019 16:27:25 +0000 (UTC)
+	Tue, 29 Oct 2019 16:35:22 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 8FD7B8A
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6D5808A
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 29 Oct 2019 16:27:24 +0000 (UTC)
+	Tue, 29 Oct 2019 16:35:22 +0000 (UTC)
 Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
 	[209.85.221.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 9E44B81F07
+	by mx1.redhat.com (Postfix) with ESMTPS id DC6FE757CF
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 29 Oct 2019 16:27:23 +0000 (UTC)
-Received: by mail-wr1-f72.google.com with SMTP id p6so1622896wrs.5
+	Tue, 29 Oct 2019 16:35:21 +0000 (UTC)
+Received: by mail-wr1-f72.google.com with SMTP id b4so1390855wrn.8
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 29 Oct 2019 09:27:23 -0700 (PDT)
+	Tue, 29 Oct 2019 09:35:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=C6bDuPajdG9JVS65/nNfvWestag5Xwy94+uZABzDGas=;
-	b=mpPUxXjt57r8KkbkrsHp8o8H/VjnkoVTzVTaq+NEavro+7N7S6ZkYNoftH0rDoLotV
-	gltnBByBQm+KOT89Cr+jgSB/9YYQNyYpc23cYoHZOQqHKWaxHO4XWokGGvg3OgY3gyv3
-	ybRc+fzy5B4afvY51qJaXiuhT1iHU8fGyfCdtomGXtw4wywylZh4Lc5fLF1N3YSRzzb8
-	2X6bvsdcI6nd4w9u3w4RjAKjG+ovoBgyKuVgMqUUse7hLMIhvRdhC75U8GK1A+k7MXoQ
-	Ra5E+MhV0KWgQj6QsQte7ea8mm9Q0XGzLRIOTzo/Y5hlRp+YHLcu6mRSRkUJNHnfz8/t
-	CEBw==
-X-Gm-Message-State: APjAAAXPYZHucbOml1TZyE6wDOD7Gz+dTTvV2JqXtWhh8k2axLWBjH95
-	ZyfAtn+DZoKqgzmATWXreNqQfCl6hKCOLPiV7nO2subLhr4ukZZcUGb1FPR/r6Y+duBqQ+8NY40
-	RKCXO0MaerUScUGoeXahlCRPMNxcwgIqBMdkX5xlW0g==
-X-Received: by 2002:a7b:c924:: with SMTP id h4mr5203719wml.143.1572366442237; 
-	Tue, 29 Oct 2019 09:27:22 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwqcoHXB/eGlbAvP8/zQv1DhxCc9oHsJCpQ0Me1i12d1jrxIWteVIy4TZqjG4WQmNpAjkkq4g==
-X-Received: by 2002:a7b:c924:: with SMTP id h4mr5203696wml.143.1572366441980; 
-	Tue, 29 Oct 2019 09:27:21 -0700 (PDT)
+	bh=FQnLYx2QWY4cuAKWiCGGUv4yf2h+qdP8BhSsdB+2sT0=;
+	b=qiWMLgidVEJT1b8XdNEC84tPVQ3yzJfjBMQLhyPKhJoicIKS1JRTHH3T6az/I+eVDs
+	7jQl2mwNqV9kjap/91JkfFdv+SqlkW0fgj9d0Ffr6/ECvVnOKIwfBEOzqG5J/oeyHzxU
+	HghLNZwAfPhADnhIRDhQVYUYBv/vt98RbPqqE580lgztVPALIQBQxc56Np1N+OTL8x1K
+	MoYaOqgBSimg7kaaZ3KW1ynOBMabT+Vw9GQPLwagbSZ1AY/dql1HWLy5Hmg1kF3VjXxo
+	xZUso98Gs7e10+JLwKJt+nXJ0vsx1J95zQP6GNRli6tNhXMgEcbs4my8GSnzH7Gb3aeG
+	3C0Q==
+X-Gm-Message-State: APjAAAXCyrxKV/muDjKCpiLoYvlddIiTdxmBcb+lLgwB/ouZgaZsPvOd
+	dlUC/wJD9Yn1wTP/OiCYxvR08P5t6aZrYS5GB93dZCUscfgMMI5ym2vj1a1BRgZzLT9IwPrxLKP
+	jpFN/v/bdk9fWg8S3hZ2mTxwMmvirvPXnAwNRocs9aQ==
+X-Received: by 2002:a1c:a9cb:: with SMTP id s194mr5321607wme.92.1572366920614; 
+	Tue, 29 Oct 2019 09:35:20 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqx29BHLiojOUxFUuXNicrwQ7MqELEUWM6W1qCELpsBAD/xgXR4ttLraQVt+y1hgrjzLl0jEJQ==
+X-Received: by 2002:a1c:a9cb:: with SMTP id s194mr5321583wme.92.1572366920428; 
+	Tue, 29 Oct 2019 09:35:20 -0700 (PDT)
 Received: from steredhat (94.222.26.109.rev.sfr.net. [109.26.222.94])
 	by smtp.gmail.com with ESMTPSA id
-	v10sm4015055wmg.48.2019.10.29.09.27.20
+	r19sm18295914wrr.47.2019.10.29.09.35.18
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 29 Oct 2019 09:27:21 -0700 (PDT)
-Date: Tue, 29 Oct 2019 17:27:12 +0100
+	Tue, 29 Oct 2019 09:35:19 -0700 (PDT)
+Date: Tue, 29 Oct 2019 17:35:16 +0100
 From: Stefano Garzarella <sgarzare@redhat.com>
-To: Stefan Hajnoczi <stefanha@gmail.com>, Adit Ranadive <aditr@vmware.com>,
-	Vishnu Dasa <vdasa@vmware.com>, Andy king <acking@vmware.com>,
-	Aditya Sarwade <asarwade@vmware.com>,
-	George Zhang <georgezhang@vmware.com>, Jorgen Hansen <jhansen@vmware.com>
-Subject: Re: [PATCH net-next 00/14] vsock: add multi-transports support
-Message-ID: <20191029162712.fn5rgxrwdrbxuehw@steredhat>
+To: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [PATCH net-next 12/14] vsock/vmci: register vmci_transport only
+	when VMCI guest/host are active
+Message-ID: <20191029163516.td6wk7lf5pmytwtk@steredhat>
 References: <20191023095554.11340-1-sgarzare@redhat.com>
-	<20191027080146.GA4472@stefanha-x1.localdomain>
+	<20191023095554.11340-13-sgarzare@redhat.com>
+	<20191027081752.GD4472@stefanha-x1.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191027080146.GA4472@stefanha-x1.localdomain>
+In-Reply-To: <20191027081752.GD4472@stefanha-x1.localdomain>
 User-Agent: NeoMutt/20180716
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
@@ -80,7 +79,7 @@ Cc: Sasha Levin <sashal@kernel.org>, linux-hyperv@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
 	Stefan Hajnoczi <stefanha@redhat.com>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"David S. Miller" <davem@davemloft.net>
+	"David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -97,43 +96,23 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sun, Oct 27, 2019 at 09:01:46AM +0100, Stefan Hajnoczi wrote:
-> On Wed, Oct 23, 2019 at 11:55:40AM +0200, Stefano Garzarella wrote:
-> > This series adds the multi-transports support to vsock, following
-> > this proposal: https://www.spinics.net/lists/netdev/msg575792.html
-> > 
-> > With the multi-transports support, we can use VSOCK with nested VMs
-> > (using also different hypervisors) loading both guest->host and
-> > host->guest transports at the same time.
-> > Before this series, vmci-transport supported this behavior but only
-> > using VMware hypervisor on L0, L1, etc.
-> > 
-> > RFC: https://patchwork.ozlabs.org/cover/1168442/
-> > RFC -> v1:
-> > - Added R-b/A-b from Dexuan and Stefan
-> > - Fixed comments and typos in several patches (Stefan)
-> > - Patch 7: changed .notify_buffer_size return to void (Stefan)
-> > - Added patch 8 to simplify the API exposed to the transports (Stefan)
-> > - Patch 11:
-> >   + documented VSOCK_TRANSPORT_F_* flags (Stefan)
-> >   + fixed vsock_assign_transport() when the socket is already assigned
-> >   + moved features outside of struct vsock_transport, and used as
-> >     parameter of vsock_core_register() as a preparation of Patch 12
-> > - Removed "vsock: add 'transport_hg' to handle g2h\h2g transports" patch
-> > - Added patch 12 to register vmci_transport only when VMCI guest/host
-> >   are active
+On Sun, Oct 27, 2019 at 09:17:52AM +0100, Stefan Hajnoczi wrote:
+> On Wed, Oct 23, 2019 at 11:55:52AM +0200, Stefano Garzarella wrote:
+> > +static int __init vmci_transport_init(void)
+> > +{
+> > +	int features = VSOCK_TRANSPORT_F_DGRAM;
 > 
-> Has there been feedback from Jorgen or someone else from VMware?  A
-> Reviewed-by or Acked-by would be nice since this patch series affects
-> VMCI AF_VSOCK.
-> 
+> Where is this variable used?
 
-Unfortunately not for now, I'm adding to this thread some VMware guys that
-reviewed latest vmci patches.
+It is introduced in the previous patch "vsock: add multi-transports support",
+and it is used in the vsock_core_register(), but since now the
+vmci_transport_init() registers the vmci_transport only with DGRAM
+feature, I can remove this variable and I can use directly the
+VSOCK_TRANSPORT_F_DGRAM.
 
-Would be nice to have your feedback for these changes.
+I'll fix in the v3.
 
-Thanks in advance,
+Thanks,
 Stefano
 _______________________________________________
 Virtualization mailing list
