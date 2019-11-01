@@ -2,68 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8894BEBE64
-	for <lists.virtualization@lfdr.de>; Fri,  1 Nov 2019 08:18:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F187AEC009
+	for <lists.virtualization@lfdr.de>; Fri,  1 Nov 2019 09:51:28 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C88D769CF;
-	Fri,  1 Nov 2019 07:18:05 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BD0DE3EC5;
+	Fri,  1 Nov 2019 08:51:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id EC23E688F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7CAAAFD9
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  1 Nov 2019 07:18:04 +0000 (UTC)
+	Fri,  1 Nov 2019 08:51:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
-	[207.211.31.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 487AB14D
+Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 1916363D
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  1 Nov 2019 07:18:04 +0000 (UTC)
+	Fri,  1 Nov 2019 08:51:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1572592683;
+	s=mimecast20190719; t=1572598278;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	to:to:cc:mime-version:mime-version:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
 	in-reply-to:in-reply-to:references:references;
-	bh=E4yFBfK6P5qO2iGdElvY9cHWNWW3eh/j179BCPUqcV0=;
-	b=BLlO4UQFCBauQ318gKq17DQENqSIyjDLgM2niDkOGTecPMP1bwFBrFe1mtUSDk9sW+W0Ki
-	jMFitK1ynTJoltXace/0o5ntPINpbXuOhlWV2zn1Q/+ZqbrCQT3J9misun+iM63xkNLi8t
-	9zduuBBIm9F/5Z02ZnHxpmvnVokamaI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
-	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-7-vmEXXq4tO1KNPerKdQYPQA-1; Fri, 01 Nov 2019 03:17:55 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
-	[10.5.11.15])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B13F5107ACC0;
-	Fri,  1 Nov 2019 07:17:53 +0000 (UTC)
-Received: from [10.72.12.30] (ovpn-12-30.pek2.redhat.com [10.72.12.30])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 30C515D6A7;
-	Fri,  1 Nov 2019 07:17:40 +0000 (UTC)
-Subject: Re: [PATCH v4] vhost: introduce mdev based hardware backend
-To: Tiwei Bie <tiwei.bie@intel.com>, mst@redhat.com,
-	alex.williamson@redhat.com, maxime.coquelin@redhat.com
-References: <20191031140114.25615-1-tiwei.bie@intel.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <f9036643-7aaf-7107-8bf0-85975ab95d4b@redhat.com>
-Date: Fri, 1 Nov 2019 15:17:39 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	bh=5ktp9lhDtVKvIHfR99rgDCIdSp2yeuZotk6sUT/R7FA=;
+	b=f4cqk5UXELfh9xSuJWUBI13iaX21Un79BAWCSYzRPmwSsHdIHZ2CexsTWQRfEnCW1I7c8N
+	ToCR52CnM0OcEjOP1A3/8k/vGc8ve+LLM+lT95h1bIP5RtXia8KjlA+WWNnjZXgvv7c+Uy
+	buN3VBMaYn8Vi3bVoHbvXU8t+Ow0h8o=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+	[209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
+	us-mta-42--PBEZtvAODyLO06MYsCidA-1; Fri, 01 Nov 2019 04:51:15 -0400
+Received: by mail-qt1-f198.google.com with SMTP id q54so9210165qtk.15
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 01 Nov 2019 01:51:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to;
+	bh=P5XOZGyw2oG7H0SnvrpnKTJA5LnJvwTZ0jVxtaaPC4g=;
+	b=pcfUkBWkEDyD2gDKdTiezE0+TD0LbkBdA39Kp78mkqKjr+7UirjLdc8JOEFtQq/bSx
+	Phea0ozN+Qk9QhLljGYqfxT6VvWAYVunNPZyYDsXz7cIpBwy1712lwt8bjoeIEjy3k3+
+	d6vqzXbSJE0zGXcwhxGfI9HEciiOzI0VWbX/4avbtAYfX/AqGUNDrcR/8uhj5J96O6LC
+	YfIuONFFtUsclrAo8DuIIZJJFm6F37171MtfEb7ipg7XxQzxUm+OiVYW4TUi69QJ8UU6
+	1KG29pfTzv6yv+lEbx2lnA0aFnX9R5PBD/o9mKgMVea7TPIhFZllkmMgppE80AN29OJ4
+	SgNA==
+X-Gm-Message-State: APjAAAXSYtOkspqxI/f9Os20i5yaEaxyZUYttOlNSXR7VPj4lqd8BDDX
+	HVvQ0RcGHIfL2lhptAQlLxpE9s1VJGYJ+rHWdP87aS6Ytftuu2foMBXzby4bpMTQ19OcD+xFYZJ
+	d9uWh70CqIhjaLTEWa2CcUHpOOTKrMDrOZhNfi4uhPA==
+X-Received: by 2002:a37:4ccb:: with SMTP id z194mr1660269qka.128.1572598275218;
+	Fri, 01 Nov 2019 01:51:15 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqznVLmhcvqDP9+wbCuzkX2TVWL1sCyMMrKm8HTrClFL3Is3yNefPoiinVdvNFThvIqtAV7wqA==
+X-Received: by 2002:a37:4ccb:: with SMTP id z194mr1660256qka.128.1572598274910;
+	Fri, 01 Nov 2019 01:51:14 -0700 (PDT)
+Received: from redhat.com ([91.217.168.176]) by smtp.gmail.com with ESMTPSA id
+	h23sm3910913qkk.56.2019.11.01.01.51.12
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 01 Nov 2019 01:51:13 -0700 (PDT)
+Date: Fri, 1 Nov 2019 04:51:10 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: virtio-dev@lists.oasis-open.org, qemu-devel@nongnu.org,
+	virtualization@lists.linux-foundation.org
+Subject: Re: presentation at kvm forum and pagefaults
+Message-ID: <20191101044700-mutt-send-email-mst@kernel.org>
+References: <20191031234601-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20191031140114.25615-1-tiwei.bie@intel.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: vmEXXq4tO1KNPerKdQYPQA-1
+In-Reply-To: <20191031234601-mutt-send-email-mst@kernel.org>
+X-MC-Unique: -PBEZtvAODyLO06MYsCidA-1
 X-Mimecast-Spam-Score: 0
+Content-Disposition: inline
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	zhihong.wang@intel.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,91 +85,69 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvMTAvMzEg5LiL5Y2IMTA6MDEsIFRpd2VpIEJpZSB3cm90ZToKPiBUaGlzIHBhdGNo
-IGludHJvZHVjZXMgYSBtZGV2IGJhc2VkIGhhcmR3YXJlIHZob3N0IGJhY2tlbmQuCj4gVGhpcyBi
-YWNrZW5kIGlzIGJ1aWx0IG9uIHRvcCBvZiB0aGUgc2FtZSBhYnN0cmFjdGlvbiB1c2VkCj4gaW4g
-dmlydGlvLW1kZXYgYW5kIHByb3ZpZGVzIGEgZ2VuZXJpYyB2aG9zdCBpbnRlcmZhY2UgZm9yCj4g
-dXNlcnNwYWNlIHRvIGFjY2VsZXJhdGUgdGhlIHZpcnRpbyBkZXZpY2VzIGluIGd1ZXN0Lgo+Cj4g
-VGhpcyBiYWNrZW5kIGlzIGltcGxlbWVudGVkIGFzIGEgbWRldiBkZXZpY2UgZHJpdmVyIG9uIHRv
-cAo+IG9mIHRoZSBzYW1lIG1kZXYgZGV2aWNlIG9wcyB1c2VkIGluIHZpcnRpby1tZGV2IGJ1dCB1
-c2luZwo+IGEgZGlmZmVyZW50IG1kZXYgY2xhc3MgaWQsIGFuZCBpdCB3aWxsIHJlZ2lzdGVyIHRo
-ZSBkZXZpY2UKPiBhcyBhIFZGSU8gZGV2aWNlIGZvciB1c2Vyc3BhY2UgdG8gdXNlLiBVc2Vyc3Bh
-Y2UgY2FuIHNldHVwCj4gdGhlIElPTU1VIHdpdGggdGhlIGV4aXN0aW5nIFZGSU8gY29udGFpbmVy
-L2dyb3VwIEFQSXMgYW5kCj4gdGhlbiBnZXQgdGhlIGRldmljZSBmZCB3aXRoIHRoZSBkZXZpY2Ug
-bmFtZS4gQWZ0ZXIgZ2V0dGluZwo+IHRoZSBkZXZpY2UgZmQgb2YgdGhpcyBkZXZpY2UsIHVzZXJz
-cGFjZSBjYW4gdXNlIHZob3N0IGlvY3Rscwo+IHRvIHNldHVwIHRoZSBiYWNrZW5kLgo+Cj4gU2ln
-bmVkLW9mZi1ieTogVGl3ZWkgQmllIDx0aXdlaS5iaWVAaW50ZWwuY29tPgo+IC0tLQo+IFRoaXMg
-cGF0Y2ggZGVwZW5kcyBvbiBiZWxvdyBzZXJpZXM6Cj4gaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIw
-MTkvMTAvMzAvNjIKPgo+IHYzIC0+IHY0Ogo+IC0gUmViYXNlIG9uIHRvcCBvZiB2aXJ0aW8tbWRl
-diBzZXJpZXMgdjY7Cj4gLSBTb21lIG1pbm9yIHR3ZWFrcyBhbmQgaW1wcm92ZW1lbnRzOwo+Cj4g
-djIgLT4gdjM6Cj4gLSBGaXggdGhlIHJldHVybiB2YWx1ZSAoSmFzb24pOwo+IC0gRG9uJ3QgY2Fj
-aGUgdW5uZWNlc3NhcnkgaW5mb3JtYXRpb24gaW4gdmhvc3QtbWRldiAoSmFzb24pOwo+IC0gR2V0
-IHJpZCBvZiB0aGUgbWVtc2V0IGluIG9wZW4gKEphc29uKTsKPiAtIEFkZCBjb21tZW50cyBmb3Ig
-VkhPU1RfU0VUX01FTV9UQUJMRSwgLi4uIChKYXNvbik7Cj4gLSBGaWx0ZXIgb3V0IHVuc3VwcG9y
-dGVkIGZlYXR1cmVzIGluIHZob3N0LW1kZXYgKEphc29uKTsKPiAtIEFkZCBfR0VUX0RFVklDRV9J
-RCBpb2N0bCAoSmFzb24pOwo+IC0gQWRkIF9HRVRfQ09ORklHL19TRVRfQ09ORklHIGlvY3RscyAo
-SmFzb24pOwo+IC0gRHJvcCBfR0VUX1FVRVVFX05VTSBpb2N0bCAoSmFzb24pOwo+IC0gRml4IHRo
-ZSBjb3B5LXBhc3RlIGVycm9ycyBpbiBfSU9XL19JT1IgdXNhZ2U7Cj4gLSBTb21lIG1pbm9yIGZp
-eGVzIGFuZCBpbXByb3ZlbWVudHM7Cj4KPiB2MSAtPiB2MjoKPiAtIFJlcGxhY2UgX1NFVF9TVEFU
-RSB3aXRoIF9TRVRfU1RBVFVTIChNU1QpOwo+IC0gQ2hlY2sgc3RhdHVzIGJpdHMgYXQgZWFjaCBz
-dGVwIChNU1QpOwo+IC0gUmVwb3J0IHRoZSBtYXggcmluZyBzaXplIGFuZCBtYXggbnVtYmVyIG9m
-IHF1ZXVlcyAoTVNUKTsKPiAtIEFkZCBtaXNzaW5nIE1PRFVMRV9ERVZJQ0VfVEFCTEUgKEphc29u
-KTsKPiAtIE9ubHkgc3VwcG9ydCB0aGUgbmV0d29yayBiYWNrZW5kIHcvbyBtdWx0aXF1ZXVlIGZv
-ciBub3c7Cj4gLSBTb21lIG1pbm9yIGZpeGVzIGFuZCBpbXByb3ZlbWVudHM7Cj4gLSBSZWJhc2Ug
-b24gdG9wIG9mIHZpcnRpby1tZGV2IHNlcmllcyB2NDsKPgo+IFJGQyB2NCAtPiB2MToKPiAtIElt
-cGxlbWVudCB2aG9zdC1tZGV2IGFzIGEgbWRldiBkZXZpY2UgZHJpdmVyIGRpcmVjdGx5IGFuZAo+
-ICAgIGNvbm5lY3QgaXQgdG8gVkZJTyBjb250YWluZXIvZ3JvdXAuIChKYXNvbik7Cj4gLSBQYXNz
-IHJpbmcgYWRkcmVzc2VzIGFzIEdQQXMvSU9WQXMgaW4gdmhvc3QtbWRldiB0byBhdm9pZAo+ICAg
-IG1lYW5pbmdsZXNzIEhWQS0+R1BBIHRyYW5zbGF0aW9ucyAoSmFzb24pOwo+Cj4gUkZDIHYzIC0+
-IFJGQyB2NDoKPiAtIEJ1aWxkIHZob3N0LW1kZXYgb24gdG9wIG9mIHRoZSBzYW1lIGFic3RyYWN0
-aW9uIHVzZWQgYnkKPiAgICB2aXJ0aW8tbWRldiAoSmFzb24pOwo+IC0gSW50cm9kdWNlIHZob3N0
-IGZkIGFuZCBwYXNzIFZGSU8gZmQgdmlhIFNFVF9CQUNLRU5EIGlvY3RsIChNU1QpOwo+Cj4gUkZD
-IHYyIC0+IFJGQyB2MzoKPiAtIFJldXNlIHZob3N0J3MgaW9jdGxzIGluc3RlYWQgb2YgaW52ZW50
-aW5nIGEgVkZJTyByZWdpb25zL2lycXMKPiAgICBiYXNlZCB2aG9zdCBwcm90b2NvbCBvbiB0b3Ag
-b2YgdmZpby1tZGV2IChKYXNvbik7Cj4KPiBSRkMgdjEgLT4gUkZDIHYyOgo+IC0gSW50cm9kdWNl
-IGEgbmV3IFZGSU8gZGV2aWNlIHR5cGUgdG8gYnVpbGQgYSB2aG9zdCBwcm90b2NvbAo+ICAgIG9u
-IHRvcCBvZiB2ZmlvLW1kZXY7Cj4KPiAgIGRyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5jICAg
-IHwgIDIwICsrCj4gICBkcml2ZXJzL3ZmaW8vbWRldi9tZGV2X3ByaXZhdGUuaCB8ICAgMSArCj4g
-ICBkcml2ZXJzL3Zob3N0L0tjb25maWcgICAgICAgICAgICB8ICAxMiArCj4gICBkcml2ZXJzL3Zo
-b3N0L01ha2VmaWxlICAgICAgICAgICB8ICAgMyArCj4gICBkcml2ZXJzL3Zob3N0L21kZXYuYyAg
-ICAgICAgICAgICB8IDU1NiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gICBpbmNs
-dWRlL2xpbnV4L21kZXYuaCAgICAgICAgICAgICB8ICAgNSArCj4gICBpbmNsdWRlL3VhcGkvbGlu
-dXgvdmhvc3QuaCAgICAgICB8ICAxOCArCj4gICBpbmNsdWRlL3VhcGkvbGludXgvdmhvc3RfdHlw
-ZXMuaCB8ICAgOCArCj4gICA4IGZpbGVzIGNoYW5nZWQsIDYyMyBpbnNlcnRpb25zKCspCj4gICBj
-cmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy92aG9zdC9tZGV2LmMKPgo+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL3ZmaW8vbWRldi9tZGV2X2NvcmUuYyBiL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfY29y
-ZS5jCj4gaW5kZXggMjJjYTU4OTc1MGQ4Li4xMDlkYmFjMDFhOGYgMTAwNjQ0Cj4gLS0tIGEvZHJp
-dmVycy92ZmlvL21kZXYvbWRldl9jb3JlLmMKPiArKysgYi9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2
-X2NvcmUuYwo+IEBAIC05Niw2ICs5NiwyNiBAQCBtZGV2X2dldF92aXJ0aW9fb3BzKHN0cnVjdCBt
-ZGV2X2RldmljZSAqbWRldikKPiAgIH0KPiAgIEVYUE9SVF9TWU1CT0wobWRldl9nZXRfdmlydGlv
-X29wcyk7Cj4gICAKPiArLyogU3BlY2lmeSB0aGUgdmhvc3QgZGV2aWNlIG9wcyBmb3IgdGhlIG1k
-ZXYgZGV2aWNlLCB0aGlzCj4gKyAqIG11c3QgYmUgY2FsbGVkIGR1cmluZyBjcmVhdGUoKSBjYWxs
-YmFjayBmb3Igdmhvc3QgbWRldiBkZXZpY2UuCj4gKyAqLwo+ICt2b2lkIG1kZXZfc2V0X3Zob3N0
-X29wcyhzdHJ1Y3QgbWRldl9kZXZpY2UgKm1kZXYsCj4gKwkJCWNvbnN0IHN0cnVjdCB2aXJ0aW9f
-bWRldl9kZXZpY2Vfb3BzICp2aG9zdF9vcHMpCj4gK3sKPiArCW1kZXZfc2V0X2NsYXNzKG1kZXYs
-IE1ERVZfQ0xBU1NfSURfVkhPU1QpOwo+ICsJbWRldi0+dmhvc3Rfb3BzID0gdmhvc3Rfb3BzOwo+
-ICt9Cj4gK0VYUE9SVF9TWU1CT0wobWRldl9zZXRfdmhvc3Rfb3BzKTsKPiArCj4gKy8qIEdldCB0
-aGUgdmhvc3QgZGV2aWNlIG9wcyBmb3IgdGhlIG1kZXYgZGV2aWNlLiAqLwo+ICtjb25zdCBzdHJ1
-Y3QgdmlydGlvX21kZXZfZGV2aWNlX29wcyAqCj4gK21kZXZfZ2V0X3Zob3N0X29wcyhzdHJ1Y3Qg
-bWRldl9kZXZpY2UgKm1kZXYpCj4gK3sKPiArCVdBUk5fT04obWRldi0+Y2xhc3NfaWQgIT0gTURF
-Vl9DTEFTU19JRF9WSE9TVCk7Cj4gKwlyZXR1cm4gbWRldi0+dmhvc3Rfb3BzOwo+ICt9Cj4gK0VY
-UE9SVF9TWU1CT0wobWRldl9nZXRfdmhvc3Rfb3BzKTsKPiArCj4gICBzdHJ1Y3QgZGV2aWNlICpt
-ZGV2X2RldihzdHJ1Y3QgbWRldl9kZXZpY2UgKm1kZXYpCj4gICB7Cj4gICAJcmV0dXJuICZtZGV2
-LT5kZXY7Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfcHJpdmF0ZS5oIGIv
-ZHJpdmVycy92ZmlvL21kZXYvbWRldl9wcml2YXRlLmgKPiBpbmRleCA3YjQ3ODkwYzM0ZTcuLjU1
-OTdjODQ2ZTUyZiAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X3ByaXZhdGUu
-aAo+ICsrKyBiL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfcHJpdmF0ZS5oCj4gQEAgLTQwLDYgKzQw
-LDcgQEAgc3RydWN0IG1kZXZfZGV2aWNlIHsKPiAgIAl1bmlvbiB7Cj4gICAJCWNvbnN0IHN0cnVj
-dCB2ZmlvX21kZXZfZGV2aWNlX29wcyAqdmZpb19vcHM7Cj4gICAJCWNvbnN0IHN0cnVjdCB2aXJ0
-aW9fbWRldl9kZXZpY2Vfb3BzICp2aXJ0aW9fb3BzOwo+ICsJCWNvbnN0IHN0cnVjdCB2aXJ0aW9f
-bWRldl9kZXZpY2Vfb3BzICp2aG9zdF9vcHM7CgoKQW55IHJlYXNvbiB3aHkgdmlydGlvX29wcyBp
-cyBub3QgdXNlZCBmb3Igdmhvc3QgaGVyZT8KCk90aGVyIGxvb2tzIGdvb2QuCgpUaGFua3MKCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
-dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
-cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
-dHVhbGl6YXRpb24=
+On Fri, Nov 01, 2019 at 12:07:01AM -0400, Michael S. Tsirkin wrote:
+> Regarding the presentation I gave at the kvm forum
+> on pagefaults.
+> 
+> Two points:
+> 
+> 
+> 1. pagefaults are important not just for migration.
+> They are important for performance features such as
+> autonuma and huge pages, since this relies on moving
+> pages around.
+> Migration can maybe be solved by switch to software but
+> this is not a good solution for numa and thp  since
+> at a given time some page is likely being moved.
+> 
+
+Also, pagefaults might allow iommu page table shadowing to scale better
+to huge guests. As in, the host IOMMU page tables can be populated
+lazily on fault. I'm not sure what the performance of such an approach
+would be though, but this space might be worth exploring.
+
+
+> 
+> 
+> 
+> 2.  For devices such as networking RX order in which buffers are
+> used *does not matter*.
+> Thus if a device gets a fault in response to attempt to store a buffer
+> into memory, it can just re-try, using the next buffer in queue instead.
+> 
+> This works because normally buffers can be used out of order by device.
+> 
+> The faulted buffer will be reused by another buffer when driver notifies
+> device page has been faulted in.
+> 
+> Note buffers are processed by buffer in the order in which they have
+> been used, *not* the order in which they have been put in the queue.  So
+> this will *not* cause any packet reordering for the driver.
+> 
+> Packets will only get dropped if all buffers are swapped
+> out, which should be rare with a large RX queue.
+> 
+> 
+> As I said at the forum, a side buffer for X packets
+> to be stored temporarily is also additionally possible. But with the above
+> it is no longer strictly required.
+> 
+> 
+> This conflicts with the IN_ORDER feature flag, I guess we will have to
+> re-think this flag then. If we do feel we need to salvage IN_ORDER as is,
+> maybe device can use the buffer with length 0 and driver will re-post it
+> later, but I am not I am not sure about this since involving the VF
+> driver seems inelegant.
+> 
+> -- 
+> MST
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
