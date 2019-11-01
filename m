@@ -2,78 +2,51 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id F187AEC009
-	for <lists.virtualization@lfdr.de>; Fri,  1 Nov 2019 09:51:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40619EC418
+	for <lists.virtualization@lfdr.de>; Fri,  1 Nov 2019 14:55:48 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id BD0DE3EC5;
-	Fri,  1 Nov 2019 08:51:22 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BC3AA189E;
+	Fri,  1 Nov 2019 13:55:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 7CAAAFD9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A55221895
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  1 Nov 2019 08:51:21 +0000 (UTC)
+	Fri,  1 Nov 2019 13:55:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 1916363D
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id E7225876
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  1 Nov 2019 08:51:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1572598278;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=5ktp9lhDtVKvIHfR99rgDCIdSp2yeuZotk6sUT/R7FA=;
-	b=f4cqk5UXELfh9xSuJWUBI13iaX21Un79BAWCSYzRPmwSsHdIHZ2CexsTWQRfEnCW1I7c8N
-	ToCR52CnM0OcEjOP1A3/8k/vGc8ve+LLM+lT95h1bIP5RtXia8KjlA+WWNnjZXgvv7c+Uy
-	buN3VBMaYn8Vi3bVoHbvXU8t+Ow0h8o=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
-	[209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-42--PBEZtvAODyLO06MYsCidA-1; Fri, 01 Nov 2019 04:51:15 -0400
-Received: by mail-qt1-f198.google.com with SMTP id q54so9210165qtk.15
-	for <virtualization@lists.linux-foundation.org>;
-	Fri, 01 Nov 2019 01:51:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=P5XOZGyw2oG7H0SnvrpnKTJA5LnJvwTZ0jVxtaaPC4g=;
-	b=pcfUkBWkEDyD2gDKdTiezE0+TD0LbkBdA39Kp78mkqKjr+7UirjLdc8JOEFtQq/bSx
-	Phea0ozN+Qk9QhLljGYqfxT6VvWAYVunNPZyYDsXz7cIpBwy1712lwt8bjoeIEjy3k3+
-	d6vqzXbSJE0zGXcwhxGfI9HEciiOzI0VWbX/4avbtAYfX/AqGUNDrcR/8uhj5J96O6LC
-	YfIuONFFtUsclrAo8DuIIZJJFm6F37171MtfEb7ipg7XxQzxUm+OiVYW4TUi69QJ8UU6
-	1KG29pfTzv6yv+lEbx2lnA0aFnX9R5PBD/o9mKgMVea7TPIhFZllkmMgppE80AN29OJ4
-	SgNA==
-X-Gm-Message-State: APjAAAXSYtOkspqxI/f9Os20i5yaEaxyZUYttOlNSXR7VPj4lqd8BDDX
-	HVvQ0RcGHIfL2lhptAQlLxpE9s1VJGYJ+rHWdP87aS6Ytftuu2foMBXzby4bpMTQ19OcD+xFYZJ
-	d9uWh70CqIhjaLTEWa2CcUHpOOTKrMDrOZhNfi4uhPA==
-X-Received: by 2002:a37:4ccb:: with SMTP id z194mr1660269qka.128.1572598275218;
-	Fri, 01 Nov 2019 01:51:15 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqznVLmhcvqDP9+wbCuzkX2TVWL1sCyMMrKm8HTrClFL3Is3yNefPoiinVdvNFThvIqtAV7wqA==
-X-Received: by 2002:a37:4ccb:: with SMTP id z194mr1660256qka.128.1572598274910;
-	Fri, 01 Nov 2019 01:51:14 -0700 (PDT)
-Received: from redhat.com ([91.217.168.176]) by smtp.gmail.com with ESMTPSA id
-	h23sm3910913qkk.56.2019.11.01.01.51.12
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 01 Nov 2019 01:51:13 -0700 (PDT)
-Date: Fri, 1 Nov 2019 04:51:10 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: virtio-dev@lists.oasis-open.org, qemu-devel@nongnu.org,
-	virtualization@lists.linux-foundation.org
-Subject: Re: presentation at kvm forum and pagefaults
-Message-ID: <20191101044700-mutt-send-email-mst@kernel.org>
-References: <20191031234601-mutt-send-email-mst@kernel.org>
+	Fri,  1 Nov 2019 13:55:43 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	01 Nov 2019 06:55:43 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.68,255,1569308400"; d="scan'208";a="190964201"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+	by orsmga007.jf.intel.com with ESMTP; 01 Nov 2019 06:55:40 -0700
+Date: Fri, 1 Nov 2019 21:56:28 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v4] vhost: introduce mdev based hardware backend
+Message-ID: <20191101135628.GA18045@___>
+References: <20191031140114.25615-1-tiwei.bie@intel.com>
+	<f9036643-7aaf-7107-8bf0-85975ab95d4b@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191031234601-mutt-send-email-mst@kernel.org>
-X-MC-Unique: -PBEZtvAODyLO06MYsCidA-1
-X-Mimecast-Spam-Score: 0
 Content-Disposition: inline
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+In-Reply-To: <f9036643-7aaf-7107-8bf0-85975ab95d4b@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
+Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	zhihong.wang@intel.com, maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -85,69 +58,98 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, Nov 01, 2019 at 12:07:01AM -0400, Michael S. Tsirkin wrote:
-> Regarding the presentation I gave at the kvm forum
-> on pagefaults.
-> 
-> Two points:
-> 
-> 
-> 1. pagefaults are important not just for migration.
-> They are important for performance features such as
-> autonuma and huge pages, since this relies on moving
-> pages around.
-> Migration can maybe be solved by switch to software but
-> this is not a good solution for numa and thp  since
-> at a given time some page is likely being moved.
-> 
-
-Also, pagefaults might allow iommu page table shadowing to scale better
-to huge guests. As in, the host IOMMU page tables can be populated
-lazily on fault. I'm not sure what the performance of such an approach
-would be though, but this space might be worth exploring.
-
-
-> 
-> 
-> 
-> 2.  For devices such as networking RX order in which buffers are
-> used *does not matter*.
-> Thus if a device gets a fault in response to attempt to store a buffer
-> into memory, it can just re-try, using the next buffer in queue instead.
-> 
-> This works because normally buffers can be used out of order by device.
-> 
-> The faulted buffer will be reused by another buffer when driver notifies
-> device page has been faulted in.
-> 
-> Note buffers are processed by buffer in the order in which they have
-> been used, *not* the order in which they have been put in the queue.  So
-> this will *not* cause any packet reordering for the driver.
-> 
-> Packets will only get dropped if all buffers are swapped
-> out, which should be rare with a large RX queue.
-> 
-> 
-> As I said at the forum, a side buffer for X packets
-> to be stored temporarily is also additionally possible. But with the above
-> it is no longer strictly required.
-> 
-> 
-> This conflicts with the IN_ORDER feature flag, I guess we will have to
-> re-think this flag then. If we do feel we need to salvage IN_ORDER as is,
-> maybe device can use the buffer with length 0 and driver will re-post it
-> later, but I am not I am not sure about this since involving the VF
-> driver seems inelegant.
-> 
-> -- 
-> MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gRnJpLCBOb3YgMDEsIDIwMTkgYXQgMDM6MTc6MzlQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiBPbiAyMDE5LzEwLzMxIOS4i+WNiDEwOjAxLCBUaXdlaSBCaWUgd3JvdGU6Cj4gPiBUaGlz
+IHBhdGNoIGludHJvZHVjZXMgYSBtZGV2IGJhc2VkIGhhcmR3YXJlIHZob3N0IGJhY2tlbmQuCj4g
+PiBUaGlzIGJhY2tlbmQgaXMgYnVpbHQgb24gdG9wIG9mIHRoZSBzYW1lIGFic3RyYWN0aW9uIHVz
+ZWQKPiA+IGluIHZpcnRpby1tZGV2IGFuZCBwcm92aWRlcyBhIGdlbmVyaWMgdmhvc3QgaW50ZXJm
+YWNlIGZvcgo+ID4gdXNlcnNwYWNlIHRvIGFjY2VsZXJhdGUgdGhlIHZpcnRpbyBkZXZpY2VzIGlu
+IGd1ZXN0Lgo+ID4gCj4gPiBUaGlzIGJhY2tlbmQgaXMgaW1wbGVtZW50ZWQgYXMgYSBtZGV2IGRl
+dmljZSBkcml2ZXIgb24gdG9wCj4gPiBvZiB0aGUgc2FtZSBtZGV2IGRldmljZSBvcHMgdXNlZCBp
+biB2aXJ0aW8tbWRldiBidXQgdXNpbmcKPiA+IGEgZGlmZmVyZW50IG1kZXYgY2xhc3MgaWQsIGFu
+ZCBpdCB3aWxsIHJlZ2lzdGVyIHRoZSBkZXZpY2UKPiA+IGFzIGEgVkZJTyBkZXZpY2UgZm9yIHVz
+ZXJzcGFjZSB0byB1c2UuIFVzZXJzcGFjZSBjYW4gc2V0dXAKPiA+IHRoZSBJT01NVSB3aXRoIHRo
+ZSBleGlzdGluZyBWRklPIGNvbnRhaW5lci9ncm91cCBBUElzIGFuZAo+ID4gdGhlbiBnZXQgdGhl
+IGRldmljZSBmZCB3aXRoIHRoZSBkZXZpY2UgbmFtZS4gQWZ0ZXIgZ2V0dGluZwo+ID4gdGhlIGRl
+dmljZSBmZCBvZiB0aGlzIGRldmljZSwgdXNlcnNwYWNlIGNhbiB1c2Ugdmhvc3QgaW9jdGxzCj4g
+PiB0byBzZXR1cCB0aGUgYmFja2VuZC4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogVGl3ZWkgQmll
+IDx0aXdlaS5iaWVAaW50ZWwuY29tPgo+ID4gLS0tCj4gPiBUaGlzIHBhdGNoIGRlcGVuZHMgb24g
+YmVsb3cgc2VyaWVzOgo+ID4gaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMTkvMTAvMzAvNjIKPiA+
+IAo+ID4gdjMgLT4gdjQ6Cj4gPiAtIFJlYmFzZSBvbiB0b3Agb2YgdmlydGlvLW1kZXYgc2VyaWVz
+IHY2Owo+ID4gLSBTb21lIG1pbm9yIHR3ZWFrcyBhbmQgaW1wcm92ZW1lbnRzOwo+ID4gCj4gPiB2
+MiAtPiB2MzoKPiA+IC0gRml4IHRoZSByZXR1cm4gdmFsdWUgKEphc29uKTsKPiA+IC0gRG9uJ3Qg
+Y2FjaGUgdW5uZWNlc3NhcnkgaW5mb3JtYXRpb24gaW4gdmhvc3QtbWRldiAoSmFzb24pOwo+ID4g
+LSBHZXQgcmlkIG9mIHRoZSBtZW1zZXQgaW4gb3BlbiAoSmFzb24pOwo+ID4gLSBBZGQgY29tbWVu
+dHMgZm9yIFZIT1NUX1NFVF9NRU1fVEFCTEUsIC4uLiAoSmFzb24pOwo+ID4gLSBGaWx0ZXIgb3V0
+IHVuc3VwcG9ydGVkIGZlYXR1cmVzIGluIHZob3N0LW1kZXYgKEphc29uKTsKPiA+IC0gQWRkIF9H
+RVRfREVWSUNFX0lEIGlvY3RsIChKYXNvbik7Cj4gPiAtIEFkZCBfR0VUX0NPTkZJRy9fU0VUX0NP
+TkZJRyBpb2N0bHMgKEphc29uKTsKPiA+IC0gRHJvcCBfR0VUX1FVRVVFX05VTSBpb2N0bCAoSmFz
+b24pOwo+ID4gLSBGaXggdGhlIGNvcHktcGFzdGUgZXJyb3JzIGluIF9JT1cvX0lPUiB1c2FnZTsK
+PiA+IC0gU29tZSBtaW5vciBmaXhlcyBhbmQgaW1wcm92ZW1lbnRzOwo+ID4gCj4gPiB2MSAtPiB2
+MjoKPiA+IC0gUmVwbGFjZSBfU0VUX1NUQVRFIHdpdGggX1NFVF9TVEFUVVMgKE1TVCk7Cj4gPiAt
+IENoZWNrIHN0YXR1cyBiaXRzIGF0IGVhY2ggc3RlcCAoTVNUKTsKPiA+IC0gUmVwb3J0IHRoZSBt
+YXggcmluZyBzaXplIGFuZCBtYXggbnVtYmVyIG9mIHF1ZXVlcyAoTVNUKTsKPiA+IC0gQWRkIG1p
+c3NpbmcgTU9EVUxFX0RFVklDRV9UQUJMRSAoSmFzb24pOwo+ID4gLSBPbmx5IHN1cHBvcnQgdGhl
+IG5ldHdvcmsgYmFja2VuZCB3L28gbXVsdGlxdWV1ZSBmb3Igbm93Owo+ID4gLSBTb21lIG1pbm9y
+IGZpeGVzIGFuZCBpbXByb3ZlbWVudHM7Cj4gPiAtIFJlYmFzZSBvbiB0b3Agb2YgdmlydGlvLW1k
+ZXYgc2VyaWVzIHY0Owo+ID4gCj4gPiBSRkMgdjQgLT4gdjE6Cj4gPiAtIEltcGxlbWVudCB2aG9z
+dC1tZGV2IGFzIGEgbWRldiBkZXZpY2UgZHJpdmVyIGRpcmVjdGx5IGFuZAo+ID4gICAgY29ubmVj
+dCBpdCB0byBWRklPIGNvbnRhaW5lci9ncm91cC4gKEphc29uKTsKPiA+IC0gUGFzcyByaW5nIGFk
+ZHJlc3NlcyBhcyBHUEFzL0lPVkFzIGluIHZob3N0LW1kZXYgdG8gYXZvaWQKPiA+ICAgIG1lYW5p
+bmdsZXNzIEhWQS0+R1BBIHRyYW5zbGF0aW9ucyAoSmFzb24pOwo+ID4gCj4gPiBSRkMgdjMgLT4g
+UkZDIHY0Ogo+ID4gLSBCdWlsZCB2aG9zdC1tZGV2IG9uIHRvcCBvZiB0aGUgc2FtZSBhYnN0cmFj
+dGlvbiB1c2VkIGJ5Cj4gPiAgICB2aXJ0aW8tbWRldiAoSmFzb24pOwo+ID4gLSBJbnRyb2R1Y2Ug
+dmhvc3QgZmQgYW5kIHBhc3MgVkZJTyBmZCB2aWEgU0VUX0JBQ0tFTkQgaW9jdGwgKE1TVCk7Cj4g
+PiAKPiA+IFJGQyB2MiAtPiBSRkMgdjM6Cj4gPiAtIFJldXNlIHZob3N0J3MgaW9jdGxzIGluc3Rl
+YWQgb2YgaW52ZW50aW5nIGEgVkZJTyByZWdpb25zL2lycXMKPiA+ICAgIGJhc2VkIHZob3N0IHBy
+b3RvY29sIG9uIHRvcCBvZiB2ZmlvLW1kZXYgKEphc29uKTsKPiA+IAo+ID4gUkZDIHYxIC0+IFJG
+QyB2MjoKPiA+IC0gSW50cm9kdWNlIGEgbmV3IFZGSU8gZGV2aWNlIHR5cGUgdG8gYnVpbGQgYSB2
+aG9zdCBwcm90b2NvbAo+ID4gICAgb24gdG9wIG9mIHZmaW8tbWRldjsKPiA+IAo+ID4gICBkcml2
+ZXJzL3ZmaW8vbWRldi9tZGV2X2NvcmUuYyAgICB8ICAyMCArKwo+ID4gICBkcml2ZXJzL3ZmaW8v
+bWRldi9tZGV2X3ByaXZhdGUuaCB8ICAgMSArCj4gPiAgIGRyaXZlcnMvdmhvc3QvS2NvbmZpZyAg
+ICAgICAgICAgIHwgIDEyICsKPiA+ICAgZHJpdmVycy92aG9zdC9NYWtlZmlsZSAgICAgICAgICAg
+fCAgIDMgKwo+ID4gICBkcml2ZXJzL3Zob3N0L21kZXYuYyAgICAgICAgICAgICB8IDU1NiArKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gPiAgIGluY2x1ZGUvbGludXgvbWRldi5oICAg
+ICAgICAgICAgIHwgICA1ICsKPiA+ICAgaW5jbHVkZS91YXBpL2xpbnV4L3Zob3N0LmggICAgICAg
+fCAgMTggKwo+ID4gICBpbmNsdWRlL3VhcGkvbGludXgvdmhvc3RfdHlwZXMuaCB8ICAgOCArCj4g
+PiAgIDggZmlsZXMgY2hhbmdlZCwgNjIzIGluc2VydGlvbnMoKykKPiA+ICAgY3JlYXRlIG1vZGUg
+MTAwNjQ0IGRyaXZlcnMvdmhvc3QvbWRldi5jCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L3ZmaW8vbWRldi9tZGV2X2NvcmUuYyBiL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5jCj4g
+PiBpbmRleCAyMmNhNTg5NzUwZDguLjEwOWRiYWMwMWE4ZiAxMDA2NDQKPiA+IC0tLSBhL2RyaXZl
+cnMvdmZpby9tZGV2L21kZXZfY29yZS5jCj4gPiArKysgYi9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2
+X2NvcmUuYwo+ID4gQEAgLTk2LDYgKzk2LDI2IEBAIG1kZXZfZ2V0X3ZpcnRpb19vcHMoc3RydWN0
+IG1kZXZfZGV2aWNlICptZGV2KQo+ID4gICB9Cj4gPiAgIEVYUE9SVF9TWU1CT0wobWRldl9nZXRf
+dmlydGlvX29wcyk7Cj4gPiArLyogU3BlY2lmeSB0aGUgdmhvc3QgZGV2aWNlIG9wcyBmb3IgdGhl
+IG1kZXYgZGV2aWNlLCB0aGlzCj4gPiArICogbXVzdCBiZSBjYWxsZWQgZHVyaW5nIGNyZWF0ZSgp
+IGNhbGxiYWNrIGZvciB2aG9zdCBtZGV2IGRldmljZS4KPiA+ICsgKi8KPiA+ICt2b2lkIG1kZXZf
+c2V0X3Zob3N0X29wcyhzdHJ1Y3QgbWRldl9kZXZpY2UgKm1kZXYsCj4gPiArCQkJY29uc3Qgc3Ry
+dWN0IHZpcnRpb19tZGV2X2RldmljZV9vcHMgKnZob3N0X29wcykKPiA+ICt7Cj4gPiArCW1kZXZf
+c2V0X2NsYXNzKG1kZXYsIE1ERVZfQ0xBU1NfSURfVkhPU1QpOwo+ID4gKwltZGV2LT52aG9zdF9v
+cHMgPSB2aG9zdF9vcHM7Cj4gPiArfQo+ID4gK0VYUE9SVF9TWU1CT0wobWRldl9zZXRfdmhvc3Rf
+b3BzKTsKPiA+ICsKPiA+ICsvKiBHZXQgdGhlIHZob3N0IGRldmljZSBvcHMgZm9yIHRoZSBtZGV2
+IGRldmljZS4gKi8KPiA+ICtjb25zdCBzdHJ1Y3QgdmlydGlvX21kZXZfZGV2aWNlX29wcyAqCj4g
+PiArbWRldl9nZXRfdmhvc3Rfb3BzKHN0cnVjdCBtZGV2X2RldmljZSAqbWRldikKPiA+ICt7Cj4g
+PiArCVdBUk5fT04obWRldi0+Y2xhc3NfaWQgIT0gTURFVl9DTEFTU19JRF9WSE9TVCk7Cj4gPiAr
+CXJldHVybiBtZGV2LT52aG9zdF9vcHM7Cj4gPiArfQo+ID4gK0VYUE9SVF9TWU1CT0wobWRldl9n
+ZXRfdmhvc3Rfb3BzKTsKPiA+ICsKPiA+ICAgc3RydWN0IGRldmljZSAqbWRldl9kZXYoc3RydWN0
+IG1kZXZfZGV2aWNlICptZGV2KQo+ID4gICB7Cj4gPiAgIAlyZXR1cm4gJm1kZXYtPmRldjsKPiA+
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X3ByaXZhdGUuaCBiL2RyaXZlcnMv
+dmZpby9tZGV2L21kZXZfcHJpdmF0ZS5oCj4gPiBpbmRleCA3YjQ3ODkwYzM0ZTcuLjU1OTdjODQ2
+ZTUyZiAxMDA2NDQKPiA+IC0tLSBhL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfcHJpdmF0ZS5oCj4g
+PiArKysgYi9kcml2ZXJzL3ZmaW8vbWRldi9tZGV2X3ByaXZhdGUuaAo+ID4gQEAgLTQwLDYgKzQw
+LDcgQEAgc3RydWN0IG1kZXZfZGV2aWNlIHsKPiA+ICAgCXVuaW9uIHsKPiA+ICAgCQljb25zdCBz
+dHJ1Y3QgdmZpb19tZGV2X2RldmljZV9vcHMgKnZmaW9fb3BzOwo+ID4gICAJCWNvbnN0IHN0cnVj
+dCB2aXJ0aW9fbWRldl9kZXZpY2Vfb3BzICp2aXJ0aW9fb3BzOwo+ID4gKwkJY29uc3Qgc3RydWN0
+IHZpcnRpb19tZGV2X2RldmljZV9vcHMgKnZob3N0X29wczsKPiAKPiAKPiBBbnkgcmVhc29uIHdo
+eSB2aXJ0aW9fb3BzIGlzIG5vdCB1c2VkIGZvciB2aG9zdCBoZXJlPwoKSSBkb24ndCBoYXZlIGEg
+c3Ryb25nIG9waW5pb24gb24gdGhpcy4KV2lsbCB1c2UgdmlydGlvX29wcyBkaXJlY3RseS4KCj4g
+Cj4gT3RoZXIgbG9va3MgZ29vZC4KClRoYW5rcyEKCj4gCj4gVGhhbmtzCj4gCj4gCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1h
+aWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRw
+czovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXph
+dGlvbg==
