@@ -2,58 +2,61 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61A54EEBD0
-	for <lists.virtualization@lfdr.de>; Mon,  4 Nov 2019 22:51:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA1EFEF3EE
+	for <lists.virtualization@lfdr.de>; Tue,  5 Nov 2019 04:18:22 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 5054FD56;
-	Mon,  4 Nov 2019 21:51:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 227DAF15;
+	Tue,  5 Nov 2019 03:18:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E1E6FCC6
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 88F0AE7E
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  4 Nov 2019 21:51:15 +0000 (UTC)
+	Tue,  5 Nov 2019 03:18:14 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
-	[205.139.110.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 88693A9
+Received: from us-smtp-delivery-1.mimecast.com
+	(us-smtp-delivery-1.mimecast.com [205.139.110.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 282A9189
 	for <virtualization@lists.linux-foundation.org>;
-	Mon,  4 Nov 2019 21:51:14 +0000 (UTC)
+	Tue,  5 Nov 2019 03:18:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1572904273;
+	s=mimecast20190719; t=1572923891;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
 	in-reply-to:in-reply-to:references:references;
-	bh=jBUTCcDJZAhH6k/jk77wHwKGvMKu+HofA0vxdxN5Q1I=;
-	b=Bysw/Y8FJvceg7vsMQOkA2OFv2xrQPIIWizDC9jptemIbj88JAoHV2jSb3xkzYi+mAYjO2
-	VXD/cOezpzpDEMyS0sBe1hUqJlEGrEb15TZ6BzA4MemsZ0B0HOHtPokFe/YyIBHfonfsPj
-	obdj+jXKU32bs/2ffmrDU/+QoamrERw=
+	bh=kWoXCWgC74qwKyM0/t+PNexMRUtw6/VHE8jdEP5dslk=;
+	b=SRtadgRKoiNvut7ZKGNkdWAxcJNOYfg3GE04lBANdG538ZeRkBE9BbIH4FzOMVjld3Lo3z
+	9wcPwkfUYyOZl8CwqJdqnRH+4D/KxCChI9GdOnbr0IHJ7A1jLI7VSdIdhqAQ8QHyUM58gm
+	40whwcELS3/7OC511/M18plWVy6wrfM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-302-TdmU9EZBPuaZaf4t29g5ew-1; Mon, 04 Nov 2019 16:51:09 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
-	[10.5.11.15])
+	us-mta-398-lTxSoeIcNKuLlLIrabzbhg-1; Mon, 04 Nov 2019 22:18:08 -0500
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F2DDC800C73;
-	Mon,  4 Nov 2019 21:51:05 +0000 (UTC)
-Received: from x1.home (ovpn-116-110.phx2.redhat.com [10.3.116.110])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 3F8085D70D;
-	Mon,  4 Nov 2019 21:51:03 +0000 (UTC)
-Date: Mon, 4 Nov 2019 14:50:24 -0700
-From: Alex Williamson <alex.williamson@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V7 4/6] mdev: introduce virtio device and its device ops
-Message-ID: <20191104145024.5e437765@x1.home>
-In-Reply-To: <20191104123952.17276-5-jasowang@redhat.com>
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1B7DD1800D56;
+	Tue,  5 Nov 2019 03:18:04 +0000 (UTC)
+Received: from [10.72.12.252] (ovpn-12-252.pek2.redhat.com [10.72.12.252])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 7792C60E1C;
+	Tue,  5 Nov 2019 03:16:24 +0000 (UTC)
+Subject: Re: [PATCH V7 1/6] mdev: class id support
+To: Alex Williamson <alex.williamson@redhat.com>
 References: <20191104123952.17276-1-jasowang@redhat.com>
-	<20191104123952.17276-5-jasowang@redhat.com>
-Organization: Red Hat
+	<20191104123952.17276-2-jasowang@redhat.com>
+	<20191104145002.4dfed0c4@x1.home>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <faaa43d8-662e-9b1e-a25a-5f242341a974@redhat.com>
+Date: Tue, 5 Nov 2019 11:16:21 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: TdmU9EZBPuaZaf4t29g5ew-1
+In-Reply-To: <20191104145002.4dfed0c4@x1.home>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-MC-Unique: lTxSoeIcNKuLlLIrabzbhg-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
@@ -88,318 +91,97 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon,  4 Nov 2019 20:39:50 +0800
-Jason Wang <jasowang@redhat.com> wrote:
-
-> This patch implements basic support for mdev driver that supports
-> virtio transport for kernel virtio driver.
-> 
-> Signed-off-by: Jason Wang <jasowang@redhat.com>
-> ---
->  drivers/vfio/mdev/mdev_core.c    |  20 ++++
->  drivers/vfio/mdev/mdev_private.h |   2 +
->  include/linux/mdev.h             |   6 ++
->  include/linux/mdev_virtio_ops.h  | 166 +++++++++++++++++++++++++++++++
->  4 files changed, 194 insertions(+)
->  create mode 100644 include/linux/mdev_virtio_ops.h
-> 
-> diff --git a/drivers/vfio/mdev/mdev_core.c b/drivers/vfio/mdev/mdev_core.c
-> index 8d579d7ed82f..95ee4126ff9c 100644
-> --- a/drivers/vfio/mdev/mdev_core.c
-> +++ b/drivers/vfio/mdev/mdev_core.c
-> @@ -76,6 +76,26 @@ const struct mdev_vfio_device_ops *mdev_get_vfio_ops(struct mdev_device *mdev)
->  }
->  EXPORT_SYMBOL(mdev_get_vfio_ops);
->  
-> +/* Specify the virtio device ops for the mdev device, this
-> + * must be called during create() callback for virtio mdev device.
-> + */
-
-Comment style.
-
-> +void mdev_set_virtio_ops(struct mdev_device *mdev,
-> +			 const struct mdev_virtio_device_ops *virtio_ops)
-> +{
-> +	mdev_set_class(mdev, MDEV_CLASS_ID_VIRTIO);
-> +	mdev->virtio_ops = virtio_ops;
-> +}
-> +EXPORT_SYMBOL(mdev_set_virtio_ops);
-> +
-> +/* Get the virtio device ops for the mdev device. */
-> +const struct mdev_virtio_device_ops *
-> +mdev_get_virtio_ops(struct mdev_device *mdev)
-> +{
-> +	WARN_ON(mdev->class_id != MDEV_CLASS_ID_VIRTIO);
-> +	return mdev->virtio_ops;
-> +}
-> +EXPORT_SYMBOL(mdev_get_virtio_ops);
-> +
->  struct device *mdev_dev(struct mdev_device *mdev)
->  {
->  	return &mdev->dev;
-> diff --git a/drivers/vfio/mdev/mdev_private.h b/drivers/vfio/mdev/mdev_private.h
-> index 411227373625..2c74dd032409 100644
-> --- a/drivers/vfio/mdev/mdev_private.h
-> +++ b/drivers/vfio/mdev/mdev_private.h
-> @@ -11,6 +11,7 @@
->  #define MDEV_PRIVATE_H
->  
->  #include <linux/mdev_vfio_ops.h>
-> +#include <linux/mdev_virtio_ops.h>
->  
->  int  mdev_bus_register(void);
->  void mdev_bus_unregister(void);
-> @@ -38,6 +39,7 @@ struct mdev_device {
->  	u16 class_id;
->  	union {
->  		const struct mdev_vfio_device_ops *vfio_ops;
-> +		const struct mdev_virtio_device_ops *virtio_ops;
->  	};
->  };
->  
-> diff --git a/include/linux/mdev.h b/include/linux/mdev.h
-> index 9e37506d1987..f3d75a60c2b5 100644
-> --- a/include/linux/mdev.h
-> +++ b/include/linux/mdev.h
-> @@ -17,6 +17,7 @@
->  
->  struct mdev_device;
->  struct mdev_vfio_device_ops;
-> +struct mdev_virtio_device_ops;
->  
->  /*
->   * Called by the parent device driver to set the device which represents
-> @@ -112,6 +113,10 @@ void mdev_set_class(struct mdev_device *mdev, u16 id);
->  void mdev_set_vfio_ops(struct mdev_device *mdev,
->  		       const struct mdev_vfio_device_ops *vfio_ops);
->  const struct mdev_vfio_device_ops *mdev_get_vfio_ops(struct mdev_device *mdev);
-> +void mdev_set_virtio_ops(struct mdev_device *mdev,
-> +			 const struct mdev_virtio_device_ops *virtio_ops);
-> +const struct mdev_virtio_device_ops *
-> +mdev_get_virtio_ops(struct mdev_device *mdev);
->  
->  extern struct bus_type mdev_bus_type;
->  
-> @@ -127,6 +132,7 @@ struct mdev_device *mdev_from_dev(struct device *dev);
->  
->  enum {
->  	MDEV_CLASS_ID_VFIO = 1,
-> +	MDEV_CLASS_ID_VIRTIO = 2,
->  	/* New entries must be added here */
->  };
->  
-> diff --git a/include/linux/mdev_virtio_ops.h b/include/linux/mdev_virtio_ops.h
-> new file mode 100644
-> index 000000000000..0dcae7fa31e5
-> --- /dev/null
-> +++ b/include/linux/mdev_virtio_ops.h
-> @@ -0,0 +1,166 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Virtio mediated device driver
-> + *
-> + * Copyright 2019, Red Hat Corp.
-> + *     Author: Jason Wang <jasowang@redhat.com>
-> + */
-> +#ifndef MDEV_VIRTIO_OPS_H
-> +#define MDEV_VIRTIO_OPS_H
-> +
-> +#include <linux/interrupt.h>
-> +#include <linux/mdev.h>
-> +#include <uapi/linux/vhost.h>
-> +
-> +#define VIRTIO_MDEV_DEVICE_API_STRING		"virtio-mdev"
-> +#define VIRTIO_MDEV_F_VERSION_1 0x1
-> +
-> +struct virtio_mdev_callback {
-> +	irqreturn_t (*callback)(void *data);
-> +	void *private;
-> +};
-> +
-> +/**
-> + * struct mdev_virtio_device_ops - Structure to be registered for each
-> + * mdev device to register the device for virtio/vhost drivers.
-> + *
-> + * The device ops that is supported by VIRTIO_MDEV_F_VERSION_1, the
-> + * callbacks are mandatory unless explicity mentioned.
-> + *
-> + * @get_mdev_features:		Get a set of bits that demonstrate
-> + *				the capability of the mdev device. New
-> + *				feature bits must be added when
-> + *				introducing new device ops. This
-> + *				allows the device ops to be extended
-> + *				(one feature could have N new ops).
-> + *				@mdev: mediated device
-> + *				Returns the mdev features (API) support by
-> + *				the device.
-
-I still don't see the point of VIRTIO_MDEV_F_VERSION_1.  In what case
-would it not be set?  What would it indicate to the caller if it were
-not set?  The existence of this interface seems to indicate version 1.
-
-I'm also still unclear how device ops gets extended, can you give some
-examples?  Particularly, if feature A and feature B both add device ops
-callbacks, is the vendor allowed to support B but not A, and does that
-imply their device ops structure includes callbacks for A but they're
-unused?  Why doesn't the previous patch take any of this into account
-for struct mdev_vfio_device_ops?  I think this is an internal API,
-therefore is it worthwhile to include feature and extension support?
-
-> + * @get_mdev_features:		Set a set of features that will be
-
-s/get/set/
-
-> + *				used by the driver.
-> + *				@features: features used by the driver
-> + *				Returns bollean: whether the features
-
-s/bollean/boolean/
-
-How does one provide a set of features to set given this prototype?
-
-bool (*set_mdev_feature)(struct mdev_device *mdev);
-
-This is starting to look like a grab bag of callbacks, what sort of
-mdev features would the driver have the ability to set on a device?
-
-Note that this is not listed as optional, but the sample driver doesn't
-implement it :-\
-
-Thanks,
-
-Alex
-
-> + *				is accepted by the device.
-> + * @set_vq_address:		Set the address of virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + *				@desc_area: address of desc area
-> + *				@driver_area: address of driver area
-> + *				@device_area: address of device area
-> + *				Returns integer: success (0) or error (< 0)
-> + * @set_vq_num:			Set the size of virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + *				@num: the size of virtqueue
-> + * @kick_vq:			Kick the virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + * @set_vq_cb:			Set the interrupt callback function for
-> + *				a virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + *				@cb: virtio-mdev interrupt callback structure
-> + * @set_vq_ready:		Set ready status for a virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + *				@ready: ready (true) not ready(false)
-> + * @get_vq_ready:		Get ready status for a virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + *				Returns boolean: ready (true) or not (false)
-> + * @set_vq_state:		Set the state for a virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + *				@state: virtqueue state (last_avail_idx)
-> + *				Returns integer: success (0) or error (< 0)
-> + * @get_vq_state:		Get the state for a virtqueue
-> + *				@mdev: mediated device
-> + *				@idx: virtqueue index
-> + *				Returns virtqueue state (last_avail_idx)
-> + * @get_vq_align:		Get the virtqueue align requirement
-> + *				for the device
-> + *				@mdev: mediated device
-> + *				Returns virtqueue algin requirement
-> + * @get_features:		Get virtio features supported by the device
-> + *				@mdev: mediated device
-> + *				Returns the virtio features support by the
-> + *				device
-> + * @set_features:		Set virtio features supported by the driver
-> + *				@mdev: mediated device
-> + *				@features: feature support by the driver
-> + *				Returns integer: success (0) or error (< 0)
-> + * @set_config_cb:		Set the config interrupt callback
-> + *				@mdev: mediated device
-> + *				@cb: virtio-mdev interrupt callback structure
-> + * @get_vq_num_max:		Get the max size of virtqueue
-> + *				@mdev: mediated device
-> + *				Returns u16: max size of virtqueue
-> + * @get_device_id:		Get virtio device id
-> + *				@mdev: mediated device
-> + *				Returns u32: virtio device id
-> + * @get_vendor_id:		Get id for the vendor that provides this device
-> + *				@mdev: mediated device
-> + *				Returns u32: virtio vendor id
-> + * @get_status:			Get the device status
-> + *				@mdev: mediated device
-> + *				Returns u8: virtio device status
-> + * @set_status:			Set the device status
-> + *				@mdev: mediated device
-> + *				@status: virtio device status
-> + * @get_config:			Read from device specific configuration space
-> + *				@mdev: mediated device
-> + *				@offset: offset from the beginning of
-> + *				configuration space
-> + *				@buf: buffer used to read to
-> + *				@len: the length to read from
-> + *				configration space
-> + * @set_config:			Write to device specific configuration space
-> + *				@mdev: mediated device
-> + *				@offset: offset from the beginning of
-> + *				configuration space
-> + *				@buf: buffer used to write from
-> + *				@len: the length to write to
-> + *				configration space
-> + * @get_generation:		Get device config generaton (optional)
-> + *				@mdev: mediated device
-> + *				Returns u32: device generation
-> + */
-> +struct mdev_virtio_device_ops {
-> +	/* Mdev device ops */
-> +	u64 (*get_mdev_features)(struct mdev_device *mdev);
-> +	bool (*set_mdev_feature)(struct mdev_device *mdev);
-> +	/* Virtqueue ops */
-> +	int (*set_vq_address)(struct mdev_device *mdev,
-> +			      u16 idx, u64 desc_area, u64 driver_area,
-> +			      u64 device_area);
-> +	void (*set_vq_num)(struct mdev_device *mdev, u16 idx, u32 num);
-> +	void (*kick_vq)(struct mdev_device *mdev, u16 idx);
-> +	void (*set_vq_cb)(struct mdev_device *mdev, u16 idx,
-> +			  struct virtio_mdev_callback *cb);
-> +	void (*set_vq_ready)(struct mdev_device *mdev, u16 idx, bool ready);
-> +	bool (*get_vq_ready)(struct mdev_device *mdev, u16 idx);
-> +	int (*set_vq_state)(struct mdev_device *mdev, u16 idx, u64 state);
-> +	u64 (*get_vq_state)(struct mdev_device *mdev, u16 idx);
-> +
-> +	/* Virtio device ops */
-> +	u16 (*get_vq_align)(struct mdev_device *mdev);
-> +	u64 (*get_features)(struct mdev_device *mdev);
-> +	int (*set_features)(struct mdev_device *mdev, u64 features);
-> +	void (*set_config_cb)(struct mdev_device *mdev,
-> +			      struct virtio_mdev_callback *cb);
-> +	u16 (*get_vq_num_max)(struct mdev_device *mdev);
-> +	u32 (*get_device_id)(struct mdev_device *mdev);
-> +	u32 (*get_vendor_id)(struct mdev_device *mdev);
-> +	u8 (*get_status)(struct mdev_device *mdev);
-> +	void (*set_status)(struct mdev_device *mdev, u8 status);
-> +	void (*get_config)(struct mdev_device *mdev, unsigned int offset,
-> +			   void *buf, unsigned int len);
-> +	void (*set_config)(struct mdev_device *mdev, unsigned int offset,
-> +			   const void *buf, unsigned int len);
-> +	u32 (*get_generation)(struct mdev_device *mdev);
-> +};
-> +
-> +void mdev_set_virtio_ops(struct mdev_device *mdev,
-> +			 const struct mdev_virtio_device_ops *virtio_ops);
-> +
-> +#endif
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvMTEvNSDkuIrljYg1OjUwLCBBbGV4IFdpbGxpYW1zb24gd3JvdGU6Cj4gT24gTW9u
+LCAgNCBOb3YgMjAxOSAyMDozOTo0NyArMDgwMAo+IEphc29uIFdhbmc8amFzb3dhbmdAcmVkaGF0
+LmNvbT4gIHdyb3RlOgo+Cj4+IE1kZXYgYnVzIG9ubHkgc3VwcG9ydHMgdmZpbyBkcml2ZXIgcmln
+aHQgbm93LCBzbyBpdCBkb2Vzbid0IGltcGxlbWVudAo+PiBtYXRjaCBtZXRob2QuIEJ1dCBpbiB0
+aGUgZnV0dXJlLCB3ZSBtYXkgYWRkIGRyaXZlcnMgb3RoZXIgdGhhbiB2ZmlvLAo+PiB0aGUgZmly
+c3QgZHJpdmVyIGNvdWxkIGJlIHZpcnRpby1tZGV2LiBUaGlzIG1lYW5zIHdlIG5lZWQgdG8gYWRk
+Cj4+IGRldmljZSBjbGFzcyBpZCBzdXBwb3J0IGluIGJ1cyBtYXRjaCBtZXRob2QgdG8gcGFpciB0
+aGUgbWRldiBkZXZpY2UKPj4gYW5kIG1kZXYgZHJpdmVyIGNvcnJlY3RseS4KPj4KPj4gU28gdGhp
+cyBwYXRjaCBhZGRzIGlkX3RhYmxlIHRvIG1kZXZfZHJpdmVyIGFuZCBjbGFzc19pZCBmb3IgbWRl
+dgo+PiBkZXZpY2Ugd2l0aCB0aGUgbWF0Y2ggbWV0aG9kIGZvciBtZGV2IGJ1cy4KPj4KPj4gUmV2
+aWV3ZWQtYnk6IFBhcmF2IFBhbmRpdDxwYXJhdkBtZWxsYW5veC5jb20+Cj4+IFNpZ25lZC1vZmYt
+Ynk6IEphc29uIFdhbmc8amFzb3dhbmdAcmVkaGF0LmNvbT4KPj4gLS0tCj4+ICAgLi4uL2RyaXZl
+ci1hcGkvdmZpby1tZWRpYXRlZC1kZXZpY2UucnN0ICAgICAgIHwgIDUgKysrKwo+PiAgIGRyaXZl
+cnMvZ3B1L2RybS9pOTE1L2d2dC9rdm1ndC5jICAgICAgICAgICAgICB8ICAxICsKPj4gICBkcml2
+ZXJzL3MzOTAvY2lvL3ZmaW9fY2N3X29wcy5jICAgICAgICAgICAgICAgfCAgMSArCj4+ICAgZHJp
+dmVycy9zMzkwL2NyeXB0by92ZmlvX2FwX29wcy5jICAgICAgICAgICAgIHwgIDEgKwo+PiAgIGRy
+aXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5jICAgICAgICAgICAgICAgICB8IDE2ICsrKysrKysr
+KysrKwo+PiAgIGRyaXZlcnMvdmZpby9tZGV2L21kZXZfZHJpdmVyLmMgICAgICAgICAgICAgICB8
+IDI1ICsrKysrKysrKysrKysrKysrKysKPj4gICBkcml2ZXJzL3ZmaW8vbWRldi9tZGV2X3ByaXZh
+dGUuaCAgICAgICAgICAgICAgfCAgMSArCj4+ICAgZHJpdmVycy92ZmlvL21kZXYvdmZpb19tZGV2
+LmMgICAgICAgICAgICAgICAgIHwgIDYgKysrKysKPj4gICBpbmNsdWRlL2xpbnV4L21kZXYuaCAg
+ICAgICAgICAgICAgICAgICAgICAgICAgfCAgOCArKysrKysKPj4gICBpbmNsdWRlL2xpbnV4L21v
+ZF9kZXZpY2V0YWJsZS5oICAgICAgICAgICAgICAgfCAgOCArKysrKysKPj4gICBzYW1wbGVzL3Zm
+aW8tbWRldi9tYm9jaHMuYyAgICAgICAgICAgICAgICAgICAgfCAgMSArCj4+ICAgc2FtcGxlcy92
+ZmlvLW1kZXYvbWRweS5jICAgICAgICAgICAgICAgICAgICAgIHwgIDEgKwo+PiAgIHNhbXBsZXMv
+dmZpby1tZGV2L210dHkuYyAgICAgICAgICAgICAgICAgICAgICB8ICAxICsKPj4gICAxMyBmaWxl
+cyBjaGFuZ2VkLCA3NSBpbnNlcnRpb25zKCspCj4+Cj4+IGRpZmYgLS1naXQgYS9Eb2N1bWVudGF0
+aW9uL2RyaXZlci1hcGkvdmZpby1tZWRpYXRlZC1kZXZpY2UucnN0IGIvRG9jdW1lbnRhdGlvbi9k
+cml2ZXItYXBpL3ZmaW8tbWVkaWF0ZWQtZGV2aWNlLnJzdAo+PiBpbmRleCAyNWViN2Q1YjgzNGIu
+LjY3MDk0MTNiZWUyOSAxMDA2NDQKPj4gLS0tIGEvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL3Zm
+aW8tbWVkaWF0ZWQtZGV2aWNlLnJzdAo+PiArKysgYi9Eb2N1bWVudGF0aW9uL2RyaXZlci1hcGkv
+dmZpby1tZWRpYXRlZC1kZXZpY2UucnN0Cj4+IEBAIC0xMDIsMTIgKzEwMiwxNCBAQCBzdHJ1Y3R1
+cmUgdG8gcmVwcmVzZW50IGEgbWVkaWF0ZWQgZGV2aWNlJ3MgZHJpdmVyOjoKPj4gICAgICAgICAq
+IEBwcm9iZTogY2FsbGVkIHdoZW4gbmV3IGRldmljZSBjcmVhdGVkCj4+ICAgICAgICAgKiBAcmVt
+b3ZlOiBjYWxsZWQgd2hlbiBkZXZpY2UgcmVtb3ZlZAo+PiAgICAgICAgICogQGRyaXZlcjogZGV2
+aWNlIGRyaXZlciBzdHJ1Y3R1cmUKPj4gKyAgICAgICogQGlkX3RhYmxlOiB0aGUgaWRzIHNlcnZp
+Y2VkIGJ5IHRoaXMgZHJpdmVyCj4+ICAgICAgICAgKi8KPj4gICAgICAgIHN0cnVjdCBtZGV2X2Ry
+aXZlciB7Cj4+ICAgCSAgICAgY29uc3QgY2hhciAqbmFtZTsKPj4gICAJICAgICBpbnQgICgqcHJv
+YmUpICAoc3RydWN0IGRldmljZSAqZGV2KTsKPj4gICAJICAgICB2b2lkICgqcmVtb3ZlKSAoc3Ry
+dWN0IGRldmljZSAqZGV2KTsKPj4gICAJICAgICBzdHJ1Y3QgZGV2aWNlX2RyaXZlciAgICBkcml2
+ZXI7Cj4+ICsJICAgICBjb25zdCBzdHJ1Y3QgbWRldl9jbGFzc19pZCAqaWRfdGFibGU7Cj4+ICAg
+ICAgICB9Owo+PiAgIAo+PiAgIEEgbWVkaWF0ZWQgYnVzIGRyaXZlciBmb3IgbWRldiBzaG91bGQg
+dXNlIHRoaXMgc3RydWN0dXJlIGluIHRoZSBmdW5jdGlvbiBjYWxscwo+PiBAQCAtMTcwLDYgKzE3
+Miw5IEBAIHRoYXQgYSBkcml2ZXIgc2hvdWxkIHVzZSB0byB1bnJlZ2lzdGVyIGl0c2VsZiB3aXRo
+IHRoZSBtZGV2IGNvcmUgZHJpdmVyOjoKPj4gICAKPj4gICAJZXh0ZXJuIHZvaWQgbWRldl91bnJl
+Z2lzdGVyX2RldmljZShzdHJ1Y3QgZGV2aWNlICpkZXYpOwo+PiAgIAo+PiArSXQgaXMgYWxzbyBy
+ZXF1aXJlZCB0byBzcGVjaWZ5IHRoZSBjbGFzc19pZCBpbiBjcmVhdGUoKSBjYWxsYmFjayB0aHJv
+dWdoOjoKPj4gKwo+PiArCWludCBtZGV2X3NldF9jbGFzcyhzdHJ1Y3QgbWRldl9kZXZpY2UgKm1k
+ZXYsIHUxNiBpZCk7Cj4+ICAgCj4+ICAgTWVkaWF0ZWQgRGV2aWNlIE1hbmFnZW1lbnQgSW50ZXJm
+YWNlIFRocm91Z2ggc3lzZnMKPj4gICA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0
+L2t2bWd0LmMgYi9kcml2ZXJzL2dwdS9kcm0vaTkxNS9ndnQva3ZtZ3QuYwo+PiBpbmRleCAzNDNk
+NzljMWNiN2UuLjY0MjBmMGRiZDMxYiAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2k5
+MTUvZ3Z0L2t2bWd0LmMKPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0L2t2bWd0LmMK
+Pj4gQEAgLTY3OCw2ICs2NzgsNyBAQCBzdGF0aWMgaW50IGludGVsX3ZncHVfY3JlYXRlKHN0cnVj
+dCBrb2JqZWN0ICprb2JqLCBzdHJ1Y3QgbWRldl9kZXZpY2UgKm1kZXYpCj4+ICAgCQkgICAgIGRl
+dl9uYW1lKG1kZXZfZGV2KG1kZXYpKSk7Cj4+ICAgCXJldCA9IDA7Cj4+ICAgCj4+ICsJbWRldl9z
+ZXRfY2xhc3MobWRldiwgTURFVl9DTEFTU19JRF9WRklPKTsKPj4gICBvdXQ6Cj4+ICAgCXJldHVy
+biByZXQ7Cj4+ICAgfQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9zMzkwL2Npby92ZmlvX2Njd19v
+cHMuYyBiL2RyaXZlcnMvczM5MC9jaW8vdmZpb19jY3dfb3BzLmMKPj4gaW5kZXggZjBkNzFhYjc3
+YzUwLi5jZjJjMDEzYWUzMmYgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvczM5MC9jaW8vdmZpb19j
+Y3dfb3BzLmMKPj4gKysrIGIvZHJpdmVycy9zMzkwL2Npby92ZmlvX2Njd19vcHMuYwo+PiBAQCAt
+MTI5LDYgKzEyOSw3IEBAIHN0YXRpYyBpbnQgdmZpb19jY3dfbWRldl9jcmVhdGUoc3RydWN0IGtv
+YmplY3QgKmtvYmosIHN0cnVjdCBtZGV2X2RldmljZSAqbWRldikKPj4gICAJCQkgICBwcml2YXRl
+LT5zY2gtPnNjaGlkLnNzaWQsCj4+ICAgCQkJICAgcHJpdmF0ZS0+c2NoLT5zY2hpZC5zY2hfbm8p
+Owo+PiAgIAo+PiArCW1kZXZfc2V0X2NsYXNzKG1kZXYsIE1ERVZfQ0xBU1NfSURfVkZJTyk7Cj4+
+ICAgCXJldHVybiAwOwo+PiAgIH0KPj4gICAKPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvczM5MC9j
+cnlwdG8vdmZpb19hcF9vcHMuYyBiL2RyaXZlcnMvczM5MC9jcnlwdG8vdmZpb19hcF9vcHMuYwo+
+PiBpbmRleCA1YzBmNTNjNmRkZTcuLjA3YzMxMDcwYWZlYiAxMDA2NDQKPj4gLS0tIGEvZHJpdmVy
+cy9zMzkwL2NyeXB0by92ZmlvX2FwX29wcy5jCj4+ICsrKyBiL2RyaXZlcnMvczM5MC9jcnlwdG8v
+dmZpb19hcF9vcHMuYwo+PiBAQCAtMzQzLDYgKzM0Myw3IEBAIHN0YXRpYyBpbnQgdmZpb19hcF9t
+ZGV2X2NyZWF0ZShzdHJ1Y3Qga29iamVjdCAqa29iaiwgc3RydWN0IG1kZXZfZGV2aWNlICptZGV2
+KQo+PiAgIAlsaXN0X2FkZCgmbWF0cml4X21kZXYtPm5vZGUsICZtYXRyaXhfZGV2LT5tZGV2X2xp
+c3QpOwo+PiAgIAltdXRleF91bmxvY2soJm1hdHJpeF9kZXYtPmxvY2spOwo+PiAgIAo+PiArCW1k
+ZXZfc2V0X2NsYXNzKG1kZXYsIE1ERVZfQ0xBU1NfSURfVkZJTyk7Cj4+ICAgCXJldHVybiAwOwo+
+PiAgIH0KPj4gICAKPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5j
+IGIvZHJpdmVycy92ZmlvL21kZXYvbWRldl9jb3JlLmMKPj4gaW5kZXggYjU1OGQ0Y2ZkMDgyLi5k
+MjNjYTM5ZTNiZTYgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5j
+Cj4+ICsrKyBiL2RyaXZlcnMvdmZpby9tZGV2L21kZXZfY29yZS5jCj4+IEBAIC00NSw2ICs0NSwx
+NiBAQCB2b2lkIG1kZXZfc2V0X2RydmRhdGEoc3RydWN0IG1kZXZfZGV2aWNlICptZGV2LCB2b2lk
+ICpkYXRhKQo+PiAgIH0KPj4gICBFWFBPUlRfU1lNQk9MKG1kZXZfc2V0X2RydmRhdGEpOwo+PiAg
+IAo+PiArLyogU3BlY2lmeSB0aGUgY2xhc3MgZm9yIHRoZSBtZGV2IGRldmljZSwgdGhpcyBtdXN0
+IGJlIGNhbGxlZCBkdXJpbmcKPj4gKyAqIGNyZWF0ZSgpIGNhbGxiYWNrLgo+PiArICovCj4gU3Rh
+bmRhcmQgbm9uLW5ldHdvcmtpbmcgbXVsdGktbGluZSBjb21tZW50IHN0eWxlIHBsZWFzZSwgaWUu
+Cj4KPiAvKgo+ICAgKiBNdWx0aS0KPiAgICogbGluZQo+ICAgKiBjb21tZW50Cj4gICAqLwo+Cj4g
+VGhhbmtzLAo+IEFsZXgKPgoKV2lsbCBmaXguCgpUaGFua3MKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApW
+aXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxp
+bnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
