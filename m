@@ -2,126 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9872FF1A38
-	for <lists.virtualization@lfdr.de>; Wed,  6 Nov 2019 16:41:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A22E6F1E2E
+	for <lists.virtualization@lfdr.de>; Wed,  6 Nov 2019 20:03:53 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 66ABECB5;
-	Wed,  6 Nov 2019 15:41:48 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 03D1FE17;
+	Wed,  6 Nov 2019 19:03:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 06CB4CAE
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id E9931D9B
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  6 Nov 2019 15:41:47 +0000 (UTC)
+	Wed,  6 Nov 2019 19:03:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
-	[207.211.31.81])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 640CD189
+Received: from us-smtp-delivery-1.mimecast.com
+	(us-smtp-delivery-1.mimecast.com [205.139.110.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 622F5844
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  6 Nov 2019 15:41:46 +0000 (UTC)
+	Wed,  6 Nov 2019 19:03:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1573054905;
+	s=mimecast20190719; t=1573067023;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=KrRoZ6oQk33QhiJPIRsRQ3bYWaP2zLOfHkEESHXAF28=;
-	b=i3k29yFRQf1mcOhoxWLTTpPWnNELlsEkMR9oJs34/qnWJNPD3/ACM6RgUUT1PRAu+YV/vk
-	B6040ygZAJwe4e+CVBP4Hk4zpv/pcKWOZW9sKknvLARzI/TVUZQE4G791TNYRfG7xiJ+8R
-	mgwNMrxPtTMQKUKApGFRh21mzs9WZ80=
+	in-reply-to:in-reply-to:references:references;
+	bh=mg3JgW1BuhTCB4NFaQyIC8Smk9WRddoCBLHgtm+TXAs=;
+	b=Rgc+6IyECAu50rQUaEBdcUdZt5+bt083Lt5PdKgAv6m23ApL2SQhcCbWtctmJ1/RVV+NG1
+	hQcq0JbUuSczWVBQp5r0flzIIQ8ff3w9LY2CdQAXS3bgyOxu3E/cgnAYus7NmA5GjlTbTD
+	5DbEfzyfKHSv+5MruMC8wymtJ+0GtQk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-329-CLBIw6l2Na-xaDOgEuUaIg-1; Wed, 06 Nov 2019 10:41:39 -0500
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
-	[10.5.11.11])
+	us-mta-364-MkavMd-mPku2TkqD8XFDEg-1; Wed, 06 Nov 2019 14:03:34 -0500
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+	[10.5.11.16])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CD730800C72;
-	Wed,  6 Nov 2019 15:41:38 +0000 (UTC)
-Received: from [10.36.117.83] (ovpn-117-83.ams2.redhat.com [10.36.117.83])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 1B8CF600C4;
-	Wed,  6 Nov 2019 15:41:33 +0000 (UTC)
-Subject: Re: [PATCH] virtio_console: allocate inbufs in add_port() only if it
-	is needed
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20191018164718.15999-1-lvivier@redhat.com>
-	<20191106085548-mutt-send-email-mst@kernel.org>
-	<83d88904-1626-8dd6-9e5c-7abcee27bcd0@redhat.com>
-	<20191106095707-mutt-send-email-mst@kernel.org>
-From: Laurent Vivier <lvivier@redhat.com>
-Autocrypt: addr=lvivier@redhat.com; prefer-encrypt=mutual; keydata=
-	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
-	D+Ofp0T3KOr1RUHvCZoLURfFhSQ=
-Message-ID: <1109631e-69b1-d506-3e32-e1b80b8b93d9@redhat.com>
-Date: Wed, 6 Nov 2019 16:41:33 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.1
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E3930477;
+	Wed,  6 Nov 2019 19:03:30 +0000 (UTC)
+Received: from x1.home (ovpn-116-138.phx2.redhat.com [10.3.116.138])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id EA38F5C6DC;
+	Wed,  6 Nov 2019 19:03:12 +0000 (UTC)
+Date: Wed, 6 Nov 2019 12:03:12 -0700
+From: Alex Williamson <alex.williamson@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V8 0/6] mdev based hardware virtio offloading support
+Message-ID: <20191106120312.77a6a318@x1.home>
+In-Reply-To: <393f2dc9-8c67-d3c9-6553-640b80c15aaf@redhat.com>
+References: <20191105093240.5135-1-jasowang@redhat.com>
+	<20191105105834.469675f0@x1.home>
+	<393f2dc9-8c67-d3c9-6553-640b80c15aaf@redhat.com>
+Organization: Red Hat
 MIME-Version: 1.0
-In-Reply-To: <20191106095707-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-MC-Unique: CLBIw6l2Na-xaDOgEuUaIg-1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-MC-Unique: MkavMd-mPku2TkqD8XFDEg-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	virtualization@lists.linux-foundation.org,
-	linux-kernel@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
-	Amit Shah <amit@kernel.org>
+Cc: stefanha@redhat.com, christophe.de.dinechin@gmail.com, kvm@vger.kernel.org,
+	mst@redhat.com, airlied@linux.ie,
+	joonas.lahtinen@linux.intel.com, heiko.carstens@de.ibm.com,
+	dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, kwankhede@nvidia.com,
+	rob.miller@broadcom.com, linux-s390@vger.kernel.org,
+	sebott@linux.ibm.com, lulu@redhat.com, eperezma@redhat.com,
+	pasic@linux.ibm.com, borntraeger@de.ibm.com,
+	haotian.wang@sifive.com, zhi.a.wang@intel.com,
+	farman@linux.ibm.com, idos@mellanox.com, gor@linux.ibm.com,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	rodrigo.vivi@intel.com, xiao.w.wang@intel.com,
+	freude@linux.ibm.com, zhenyuw@linux.intel.com,
+	parav@mellanox.com, zhihong.wang@intel.com,
+	intel-gvt-dev@lists.freedesktop.org, akrowiak@linux.ibm.com,
+	oberpar@linux.ibm.com, netdev@vger.kernel.org, cohuck@redhat.com,
+	linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
+	daniel@ffwll.ch, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -133,100 +89,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On 06/11/2019 16:03, Michael S. Tsirkin wrote:
-> On Wed, Nov 06, 2019 at 03:02:25PM +0100, Laurent Vivier wrote:
->> On 06/11/2019 14:56, Michael S. Tsirkin wrote:
->>> On Fri, Oct 18, 2019 at 06:47:18PM +0200, Laurent Vivier wrote:
->>>> When we hot unplug a virtserialport and then try to hot plug again,
->>>> it fails:
->>>>
->>>> (qemu) chardev-add socket,id=serial0,path=/tmp/serial0,server,nowait
->>>> (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
->>>>                   chardev=serial0,id=serial0,name=serial0
->>>> (qemu) device_del serial0
->>>> (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
->>>>                   chardev=serial0,id=serial0,name=serial0
->>>> kernel error:
->>>>   virtio-ports vport2p2: Error allocating inbufs
->>>> qemu error:
->>>>   virtio-serial-bus: Guest failure in adding port 2 for device \
->>>>                      virtio-serial0.0
->>>>
->>>> This happens because buffers for the in_vq are allocated when the port is
->>>> added but are not released when the port is unplugged.
->>>>
->>>> They are only released when virtconsole is removed (see a7a69ec0d8e4)
->>>>
->>>> To avoid the problem and to be symmetric, we could allocate all the buffers
->>>> in init_vqs() as they are released in remove_vqs(), but it sounds like
->>>> a waste of memory.
->>>>
->>>> Rather than that, this patch changes add_port() logic to only allocate the
->>>> buffers if the in_vq has available free slots.
->>>>
->>>> Fixes: a7a69ec0d8e4 ("virtio_console: free buffers after reset")
->>>> Cc: mst@redhat.com
->>>> Signed-off-by: Laurent Vivier <lvivier@redhat.com>
->>>> ---
->>>>  drivers/char/virtio_console.c | 17 +++++++++++------
->>>>  1 file changed, 11 insertions(+), 6 deletions(-)
->>>>
->>>> diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
->>>> index 7270e7b69262..77105166fe01 100644
->>>> --- a/drivers/char/virtio_console.c
->>>> +++ b/drivers/char/virtio_console.c
->>>> @@ -1421,12 +1421,17 @@ static int add_port(struct ports_device *portdev, u32 id)
->>>>  	spin_lock_init(&port->outvq_lock);
->>>>  	init_waitqueue_head(&port->waitqueue);
->>>>  
->>>> -	/* Fill the in_vq with buffers so the host can send us data. */
->>>> -	nr_added_bufs = fill_queue(port->in_vq, &port->inbuf_lock);
->>>> -	if (!nr_added_bufs) {
->>>> -		dev_err(port->dev, "Error allocating inbufs\n");
->>>> -		err = -ENOMEM;
->>>> -		goto free_device;
->>>> +	/* if the in_vq has not already been filled (the port has already been
->>>> +	 * used and unplugged), fill the in_vq with buffers so the host can
->>>> +	 * send us data.
->>>> +	 */
->>>> +	if (port->in_vq->num_free != 0) {
->>>> +		nr_added_bufs = fill_queue(port->in_vq, &port->inbuf_lock);
->>>> +		if (!nr_added_bufs) {
->>>> +			dev_err(port->dev, "Error allocating inbufs\n");
->>>> +			err = -ENOMEM;
->>>> +			goto free_device;
->>>> +		}
->>>>  	}
->>>>  
->>>>  	if (is_rproc_serial(port->portdev->vdev))
->>>
->>> Well fill_queue will just add slots as long as it can.
->>> So on a full queue it does nothing. How does this patch help?
->>
->> Yes, but in this case it returns 0 and so add_port() fails and exits
->> with -ENOMEM and the device is freed. It's what this patch tries to avoid.
->>
->> Thanks,
->> Laurent
-> 
-> Oh I see. However it's a bit asymmetrical to special case ring full.
-> How about making fill_queue return int and testing return code for
-> -ENOSPC instead? Will also help propagate errors correctly.
-
-Good idea. I'm going to propose a new patch.
-
-> And I guess CC stable?
-Sure.
-
-Thanks,
-Laurent
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gV2VkLCA2IE5vdiAyMDE5IDExOjU2OjQ2ICswODAwCkphc29uIFdhbmcgPGphc293YW5nQHJl
+ZGhhdC5jb20+IHdyb3RlOgoKPiBPbiAyMDE5LzExLzYg5LiK5Y2IMTo1OCwgQWxleCBXaWxsaWFt
+c29uIHdyb3RlOgo+ID4gT24gVHVlLCAgNSBOb3YgMjAxOSAxNzozMjozNCArMDgwMAo+ID4gSmFz
+b24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4gd3JvdGU6Cj4gPiAgCj4gPj4gSGkgYWxsOgo+
+ID4+Cj4gPj4gVGhlcmUgYXJlIGhhcmR3YXJlcyB0aGF0IGNhbiBkbyB2aXJ0aW8gZGF0YXBhdGgg
+b2ZmbG9hZGluZyB3aGlsZQo+ID4+IGhhdmluZyBpdHMgb3duIGNvbnRyb2wgcGF0aC4gVGhpcyBw
+YXRoIHRyaWVzIHRvIGltcGxlbWVudCBhIG1kZXYgYmFzZWQKPiA+PiB1bmlmaWVkIEFQSSB0byBz
+dXBwb3J0IHVzaW5nIGtlcm5lbCB2aXJ0aW8gZHJpdmVyIHRvIGRyaXZlIHRob3NlCj4gPj4gZGV2
+aWNlcy4gVGhpcyBpcyBkb25lIGJ5IGludHJvZHVjaW5nIGEgbmV3IG1kZXYgdHJhbnNwb3J0IGZv
+ciB2aXJ0aW8KPiA+PiAodmlydGlvX21kZXYpIGFuZCByZWdpc3RlciBpdHNlbGYgYXMgYSBuZXcg
+a2luZCBvZiBtZGV2IGRyaXZlci4gVGhlbgo+ID4+IGl0IHByb3ZpZGVzIGEgdW5pZmllZCB3YXkg
+Zm9yIGtlcm5lbCB2aXJ0aW8gZHJpdmVyIHRvIHRhbGsgd2l0aCBtZGV2Cj4gPj4gZGV2aWNlIGlt
+cGxlbWVudGF0aW9uLgo+ID4+Cj4gPj4gVGhvdWdoIHRoZSBzZXJpZXMgb25seSBjb250YWlucyBr
+ZXJuZWwgZHJpdmVyIHN1cHBvcnQsIHRoZSBnb2FsIGlzIHRvCj4gPj4gbWFrZSB0aGUgdHJhbnNw
+b3J0IGdlbmVyaWMgZW5vdWdoIHRvIHN1cHBvcnQgdXNlcnNwYWNlIGRyaXZlcnMuIFRoaXMKPiA+
+PiBtZWFucyB2aG9zdC1tZGV2WzFdIGNvdWxkIGJlIGJ1aWx0IG9uIHRvcCBhcyB3ZWxsIGJ5IHJl
+c3VpbmcgdGhlCj4gPj4gdHJhbnNwb3J0Lgo+ID4+Cj4gPj4gQSBzYW1wbGUgZHJpdmVyIGlzIGFs
+c28gaW1wbGVtZW50ZWQgd2hpY2ggc2ltdWxhdGUgYSB2aXJpdG8tbmV0Cj4gPj4gbG9vcGJhY2sg
+ZXRoZXJuZXQgZGV2aWNlIG9uIHRvcCBvZiB2cmluZ2ggKyB3b3JrcXVldWUuIFRoaXMgY291bGQg
+YmUKPiA+PiB1c2VkIGFzIGEgcmVmZXJlbmNlIGltcGxlbWVudGF0aW9uIGZvciByZWFsIGhhcmR3
+YXJlIGRyaXZlci4KPiA+Pgo+ID4+IEFsc28gYSByZWFsIElDRiBWRiBkcml2ZXIgd2FzIGFsc28g
+cG9zdGVkIGhlcmVbMl0gd2hpY2ggaXMgYSBnb29kCj4gPj4gcmVmZXJlbmNlIGZvciB2ZW5kb3Jz
+IHdobyBpcyBpbnRlcmVzdGVkIGluIHRoZWlyIG93biB2aXJ0aW8gZGF0YXBhdGgKPiA+PiBvZmZs
+b2FkaW5nIHByb2R1Y3QuCj4gPj4KPiA+PiBDb25zaWRlciBtZGV2IGZyYW1ld29yayBvbmx5IHN1
+cHBvcnQgVkZJTyBkZXZpY2UgYW5kIGRyaXZlciByaWdodCBub3csCj4gPj4gdGhpcyBzZXJpZXMg
+YWxzbyBleHRlbmQgaXQgdG8gc3VwcG9ydCBvdGhlciB0eXBlcy4gVGhpcyBpcyBkb25lCj4gPj4g
+dGhyb3VnaCBpbnRyb2R1Y2luZyBjbGFzcyBpZCB0byB0aGUgZGV2aWNlIGFuZCBwYWlyaW5nIGl0
+IHdpdGgKPiA+PiBpZF90YWxiZSBjbGFpbWVkIGJ5IHRoZSBkcml2ZXIuIE9uIHRvcCwgdGhpcyBz
+ZXJpcyBhbHNvIGRlY291cGxlCj4gPj4gZGV2aWNlIHNwZWNpZmljIHBhcmVudHMgb3BzIG91dCBv
+ZiB0aGUgY29tbW9uIG9uZXMuCj4gPj4KPiA+PiBQa3RnZW4gdGVzdCB3YXMgZG9uZSB3aXRoIHZp
+cml0by1uZXQgKyBtdm5ldCBsb29wIGJhY2sgZGV2aWNlLgo+ID4+Cj4gPj4gUGxlYXNlIHJldmll
+dy4KPiA+Pgo+ID4+IFsxXSBodHRwczovL2xrbWwub3JnL2xrbWwvMjAxOS8xMC8zMS80NDAKPiA+
+PiBbMl0gaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMTkvMTAvMTUvMTIyNgo+ID4+Cj4gPj4gQ2hh
+bmdlcyBmcm9tIFY3Ogo+ID4+IC0gZHJvcCB7c2V0fGdldH1fbWRldl9mZWF0dXJlcyBmb3Igdmly
+dGlvCj4gPj4gLSB0eXBvIGFuZCBjb21tZW50IHN0eWxlIGZpeGVzICAKPiA+Cj4gPiBTZWVtcyB3
+ZSdyZSBuZWFybHkgdGhlcmUsIGFsbCB0aGUgcmVtYWluaW5nIGNvbW1lbnRzIGFyZSByZWxhdGl2
+ZWx5Cj4gPiBzdXBlcmZpY2lhbCwgdGhvdWdoIEkgd291bGQgYXBwcmVjaWF0ZSBhIHY5IGFkZHJl
+c3NpbmcgdGhlbSBhcyB3ZWxsIGFzCj4gPiB0aGUgY2hlY2twYXRjaCB3YXJuaW5nczoKPiA+Cj4g
+PiBodHRwczovL3BhdGNod29yay5mcmVlZGVza3RvcC5vcmcvc2VyaWVzLzY4OTc3LyAgCj4gCj4g
+Cj4gV2lsbCBkby4KPiAKPiBCdHcsIGRvIHlvdSBwbGFuIHRvIG1lcmdlIHZob3N0LW1kZXYgcGF0
+Y2ggb24gdG9wPyBPciB5b3UgcHJlZmVyIGl0IHRvIAo+IGdvIHRocm91Z2ggTWljaGFlbCdzIHZo
+b3N0IHRyZWU/CgpJIGNhbiBpbmNsdWRlIGl0IGlmIHlvdSB3aXNoLiAgVGhlIG1kZXYgY2hhbmdl
+cyBhcmUgaXNvbGF0ZWQgZW5vdWdoIGluCnRoYXQgcGF0Y2ggdGhhdCBJIHdvdWxkbid0IHByZXN1
+bWUgaXQsIGJ1dCBjbGVhcmx5IGl0IHdvdWxkIHJlcXVpcmUKbGVzcyBtZXJnZSBjb29yZGluYXRp
+b24gdG8gZHJvcCBpdCBpbiBteSB0cmVlLiAgTGV0IG1lIGtub3cuICBUaGFua3MsCgpBbGV4Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
+dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
+cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
+dHVhbGl6YXRpb24=
