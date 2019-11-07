@@ -2,70 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52958F2674
-	for <lists.virtualization@lfdr.de>; Thu,  7 Nov 2019 05:16:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8AC5F2718
+	for <lists.virtualization@lfdr.de>; Thu,  7 Nov 2019 06:25:18 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6AECEB7A;
-	Thu,  7 Nov 2019 04:16:29 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 1AC15C59;
+	Thu,  7 Nov 2019 05:25:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 4E694B7A
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id AF6F8B1F
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  7 Nov 2019 04:16:27 +0000 (UTC)
+	Thu,  7 Nov 2019 05:25:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
-	[207.211.31.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 25919756
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 4D0FD67F
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  7 Nov 2019 04:16:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1573100185;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=k3IbSyGD4qLkNAVSZEuvxBFa8ZkDMuEWAdZpi7gSPzg=;
-	b=Do3Igs2tvwS8OTK8hbB7u4ZsqRcVAkIVIUg14UFpmEe4B+9+JqeyLJxNAC1Nw1+YzDeDlC
-	fyCofOhZlkeDIGBo0xlhAC9tu+ECYZ235RWfm3U651u2soB6+FL+y6wYAcUU9EL9+bBR/4
-	LC7dukr1sDz0p+VtiwMPTnGGZVF84UM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
-	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-341-MQBzENQcOFypmSyLPrCApQ-1; Wed, 06 Nov 2019 23:16:17 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
-	[10.5.11.15])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C3470800C61;
-	Thu,  7 Nov 2019 04:16:15 +0000 (UTC)
-Received: from [10.72.12.214] (ovpn-12-214.pek2.redhat.com [10.72.12.214])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 54F865D6B7;
-	Thu,  7 Nov 2019 04:16:03 +0000 (UTC)
+	Thu,  7 Nov 2019 05:25:11 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	06 Nov 2019 21:25:10 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.68,276,1569308400"; d="scan'208";a="233139016"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+	by fmsmga002.fm.intel.com with ESMTP; 06 Nov 2019 21:25:08 -0800
+Date: Thu, 7 Nov 2019 13:25:54 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Wang <jasowang@redhat.com>
 Subject: Re: [PATCH v5] vhost: introduce mdev based hardware backend
-To: Tiwei Bie <tiwei.bie@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>
+Message-ID: <20191107052554.GA27721@___>
 References: <20191105115332.11026-1-tiwei.bie@intel.com>
 	<20191106075733-mutt-send-email-mst@kernel.org>
 	<20191106143907.GA10776@___>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <def13888-c99f-5f59-647b-05a4bb2f8657@redhat.com>
-Date: Thu, 7 Nov 2019 12:16:01 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	<def13888-c99f-5f59-647b-05a4bb2f8657@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191106143907.GA10776@___>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: MQBzENQcOFypmSyLPrCApQ-1
-X-Mimecast-Spam-Score: 0
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <def13888-c99f-5f59-647b-05a4bb2f8657@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, maxime.coquelin@redhat.com,
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
-	zhihong.wang@intel.com, lingshan.zhu@intel.com,
-	linux-kernel@vger.kernel.org
+	zhihong.wang@intel.com, maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,34 +61,38 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-Ck9uIDIwMTkvMTEvNiDkuIvljYgxMDozOSwgVGl3ZWkgQmllIHdyb3RlOgo+IE9uIFdlZCwgTm92
-IDA2LCAyMDE5IGF0IDA3OjU5OjAyQU0gLTA1MDAsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToK
-Pj4gT24gVHVlLCBOb3YgMDUsIDIwMTkgYXQgMDc6NTM6MzJQTSArMDgwMCwgVGl3ZWkgQmllIHdy
-b3RlOgo+Pj4gVGhpcyBwYXRjaCBpbnRyb2R1Y2VzIGEgbWRldiBiYXNlZCBoYXJkd2FyZSB2aG9z
-dCBiYWNrZW5kLgo+Pj4gVGhpcyBiYWNrZW5kIGlzIGJ1aWx0IG9uIHRvcCBvZiB0aGUgc2FtZSBh
-YnN0cmFjdGlvbiB1c2VkCj4+PiBpbiB2aXJ0aW8tbWRldiBhbmQgcHJvdmlkZXMgYSBnZW5lcmlj
-IHZob3N0IGludGVyZmFjZSBmb3IKPj4+IHVzZXJzcGFjZSB0byBhY2NlbGVyYXRlIHRoZSB2aXJ0
-aW8gZGV2aWNlcyBpbiBndWVzdC4KPj4+Cj4+PiBUaGlzIGJhY2tlbmQgaXMgaW1wbGVtZW50ZWQg
-YXMgYSBtZGV2IGRldmljZSBkcml2ZXIgb24gdG9wCj4+PiBvZiB0aGUgc2FtZSBtZGV2IGRldmlj
-ZSBvcHMgdXNlZCBpbiB2aXJ0aW8tbWRldiBidXQgdXNpbmcKPj4+IGEgZGlmZmVyZW50IG1kZXYg
-Y2xhc3MgaWQsIGFuZCBpdCB3aWxsIHJlZ2lzdGVyIHRoZSBkZXZpY2UKPj4+IGFzIGEgVkZJTyBk
-ZXZpY2UgZm9yIHVzZXJzcGFjZSB0byB1c2UuIFVzZXJzcGFjZSBjYW4gc2V0dXAKPj4+IHRoZSBJ
-T01NVSB3aXRoIHRoZSBleGlzdGluZyBWRklPIGNvbnRhaW5lci9ncm91cCBBUElzIGFuZAo+Pj4g
-dGhlbiBnZXQgdGhlIGRldmljZSBmZCB3aXRoIHRoZSBkZXZpY2UgbmFtZS4gQWZ0ZXIgZ2V0dGlu
-Zwo+Pj4gdGhlIGRldmljZSBmZCwgdXNlcnNwYWNlIGNhbiB1c2Ugdmhvc3QgaW9jdGxzIG9uIHRv
-cCBvZiBpdAo+Pj4gdG8gc2V0dXAgdGhlIGJhY2tlbmQuCj4+Pgo+Pj4gU2lnbmVkLW9mZi1ieTog
-VGl3ZWkgQmllIDx0aXdlaS5iaWVAaW50ZWwuY29tPgo+PiBTbyBhdCB0aGlzIHBvaW50LCBsb29r
-cyBsaWtlIHRoZSBvbmx5IHRoaW5nIG1pc3NpbmcgaXMgSUZDLCBhbmQgdGhlbiBhbGwKPj4gdGhl
-c2UgcGF0Y2hlcyBjYW4gZ28gaW4uCj4+IEJ1dCBhcyBJRkMgaXMgc3RpbGwgYmVpbmcgd29ya2Vk
-IG9uIGFueXdheSwgaXQgbWFrZXMgc2Vuc2UgdG8KPj4gYWRkcmVzcyB0aGUgbWlub3IgY29tbWVu
-dHMgbWFud2hpbGUgc28gd2UgZG9uJ3QgbmVlZAo+PiBwYXRjaGVzIG9uIHRvcC4KPj4gUmlnaHQ/
-Cj4gWWVhaCwgb2YgY291cnNlLgo+Cj4gVGhhbmtzLAo+IFRpd2VpCgoKUGxlYXNlIHNlbmQgVjYg
-YW5kIEkgd2lsbCBhY2sgdGhlcmUuCgpUaGFua3MKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFs
-aXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91
-bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+T24gVGh1LCBOb3YgMDcsIDIwMTkgYXQgMTI6MTY6MDFQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiBPbiAyMDE5LzExLzYg5LiL5Y2IMTA6MzksIFRpd2VpIEJpZSB3cm90ZToKPiA+IE9uIFdl
+ZCwgTm92IDA2LCAyMDE5IGF0IDA3OjU5OjAyQU0gLTA1MDAsIE1pY2hhZWwgUy4gVHNpcmtpbiB3
+cm90ZToKPiA+ID4gT24gVHVlLCBOb3YgMDUsIDIwMTkgYXQgMDc6NTM6MzJQTSArMDgwMCwgVGl3
+ZWkgQmllIHdyb3RlOgo+ID4gPiA+IFRoaXMgcGF0Y2ggaW50cm9kdWNlcyBhIG1kZXYgYmFzZWQg
+aGFyZHdhcmUgdmhvc3QgYmFja2VuZC4KPiA+ID4gPiBUaGlzIGJhY2tlbmQgaXMgYnVpbHQgb24g
+dG9wIG9mIHRoZSBzYW1lIGFic3RyYWN0aW9uIHVzZWQKPiA+ID4gPiBpbiB2aXJ0aW8tbWRldiBh
+bmQgcHJvdmlkZXMgYSBnZW5lcmljIHZob3N0IGludGVyZmFjZSBmb3IKPiA+ID4gPiB1c2Vyc3Bh
+Y2UgdG8gYWNjZWxlcmF0ZSB0aGUgdmlydGlvIGRldmljZXMgaW4gZ3Vlc3QuCj4gPiA+ID4gCj4g
+PiA+ID4gVGhpcyBiYWNrZW5kIGlzIGltcGxlbWVudGVkIGFzIGEgbWRldiBkZXZpY2UgZHJpdmVy
+IG9uIHRvcAo+ID4gPiA+IG9mIHRoZSBzYW1lIG1kZXYgZGV2aWNlIG9wcyB1c2VkIGluIHZpcnRp
+by1tZGV2IGJ1dCB1c2luZwo+ID4gPiA+IGEgZGlmZmVyZW50IG1kZXYgY2xhc3MgaWQsIGFuZCBp
+dCB3aWxsIHJlZ2lzdGVyIHRoZSBkZXZpY2UKPiA+ID4gPiBhcyBhIFZGSU8gZGV2aWNlIGZvciB1
+c2Vyc3BhY2UgdG8gdXNlLiBVc2Vyc3BhY2UgY2FuIHNldHVwCj4gPiA+ID4gdGhlIElPTU1VIHdp
+dGggdGhlIGV4aXN0aW5nIFZGSU8gY29udGFpbmVyL2dyb3VwIEFQSXMgYW5kCj4gPiA+ID4gdGhl
+biBnZXQgdGhlIGRldmljZSBmZCB3aXRoIHRoZSBkZXZpY2UgbmFtZS4gQWZ0ZXIgZ2V0dGluZwo+
+ID4gPiA+IHRoZSBkZXZpY2UgZmQsIHVzZXJzcGFjZSBjYW4gdXNlIHZob3N0IGlvY3RscyBvbiB0
+b3Agb2YgaXQKPiA+ID4gPiB0byBzZXR1cCB0aGUgYmFja2VuZC4KPiA+ID4gPiAKPiA+ID4gPiBT
+aWduZWQtb2ZmLWJ5OiBUaXdlaSBCaWUgPHRpd2VpLmJpZUBpbnRlbC5jb20+Cj4gPiA+IFNvIGF0
+IHRoaXMgcG9pbnQsIGxvb2tzIGxpa2UgdGhlIG9ubHkgdGhpbmcgbWlzc2luZyBpcyBJRkMsIGFu
+ZCB0aGVuIGFsbAo+ID4gPiB0aGVzZSBwYXRjaGVzIGNhbiBnbyBpbi4KPiA+ID4gQnV0IGFzIElG
+QyBpcyBzdGlsbCBiZWluZyB3b3JrZWQgb24gYW55d2F5LCBpdCBtYWtlcyBzZW5zZSB0bwo+ID4g
+PiBhZGRyZXNzIHRoZSBtaW5vciBjb21tZW50cyBtYW53aGlsZSBzbyB3ZSBkb24ndCBuZWVkCj4g
+PiA+IHBhdGNoZXMgb24gdG9wLgo+ID4gPiBSaWdodD8KPiA+IFllYWgsIG9mIGNvdXJzZS4KPiA+
+IAo+ID4gVGhhbmtzLAo+ID4gVGl3ZWkKPiAKPiAKPiBQbGVhc2Ugc2VuZCBWNiBhbmQgSSB3aWxs
+IGFjayB0aGVyZS4KCkdvdCBpdCwgSSB3aWxsIHNlbmQgaXQgc29vbi4KClRoYW5rcyEKVGl3ZWkK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6
+YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24u
+b3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3Zp
+cnR1YWxpemF0aW9u
