@@ -2,82 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EA3BF223D
-	for <lists.virtualization@lfdr.de>; Wed,  6 Nov 2019 23:58:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 03CD0F263D
+	for <lists.virtualization@lfdr.de>; Thu,  7 Nov 2019 05:09:08 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id C65D5C84;
-	Wed,  6 Nov 2019 22:58:21 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 226CCC3E;
+	Thu,  7 Nov 2019 04:09:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id E23642F
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 8C8FAB5F
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  6 Nov 2019 22:58:19 +0000 (UTC)
+	Thu,  7 Nov 2019 04:08:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-1.mimecast.com [207.211.31.81])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 671FA5D0
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 13AF0756
 	for <virtualization@lists.linux-foundation.org>;
-	Wed,  6 Nov 2019 22:58:19 +0000 (UTC)
+	Thu,  7 Nov 2019 04:08:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1573081098;
+	s=mimecast20190719; t=1573099737;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
 	in-reply-to:in-reply-to:references:references;
-	bh=9Clhu2rt+kpo43UbuiVcjjHoWtjEgIjo2tHeRtPjlyQ=;
-	b=bZQe086k/IHnAuMY7ONkhRZddgHCeTz99r92g31HRvHEpYqODSOG66hMNdJeyg5OwNZjIh
-	AMzG76nktxoFwj2Wb4bJOEsht7+aMBYXCoWM70wrBfiOa+3BFdCgfulYMCtZzg1AEUvdaU
-	IMB6uxhYJFoFZ1Hx/p3oDZ/uKrI6tyk=
+	bh=YSIEdqcLrogv35u/q3ac44m/gQYEQosg5vjXwg1Frog=;
+	b=Kv5Shbw2uYdpjl7xPUJp0kikDCTV436Av2zR0n2DdCcWiHGK1mx9guuVQYRsSaiuc0yLwY
+	bWa3ixK3Cg8XwDj6dRa/hMwkQAeiLkdAsLgP6NNPVVw5Vm78dxJEUheCTNiOQu6/1UbsHx
+	kPgHiYQeyJ3EIdD04wf9j0IrUrZt+bw=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-331-YbiNC0ioPxK3IgeNVq5zwQ-1; Wed, 06 Nov 2019 17:58:14 -0500
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
-	[10.5.11.16])
+	us-mta-355-b64OKsVqNKabWfY1H8bGSQ-1; Wed, 06 Nov 2019 23:08:54 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+	[10.5.11.13])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F2C16107ACC3;
-	Wed,  6 Nov 2019 22:58:10 +0000 (UTC)
-Received: from x1.home (ovpn-116-138.phx2.redhat.com [10.3.116.138])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id BF7AB5C1BB;
-	Wed,  6 Nov 2019 22:58:00 +0000 (UTC)
-Date: Wed, 6 Nov 2019 15:58:00 -0700
-From: Alex Williamson <alex.williamson@redhat.com>
-To: Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH V9 6/6] docs: sample driver to demonstrate how to
-	implement virtio-mdev framework
-Message-ID: <20191106155800.0b8418ec@x1.home>
-In-Reply-To: <88efad07-70aa-3879-31e7-ace4d2ad63a1@infradead.org>
-References: <20191106070548.18980-1-jasowang@redhat.com>
-	<20191106070548.18980-7-jasowang@redhat.com>
-	<88efad07-70aa-3879-31e7-ace4d2ad63a1@infradead.org>
-Organization: Red Hat
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E3D7B107ACC3;
+	Thu,  7 Nov 2019 04:08:52 +0000 (UTC)
+Received: from [10.72.12.214] (ovpn-12-214.pek2.redhat.com [10.72.12.214])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4851960870;
+	Thu,  7 Nov 2019 04:08:16 +0000 (UTC)
+Subject: Re: [PATCH v5] vhost: introduce mdev based hardware backend
+To: Tiwei Bie <tiwei.bie@intel.com>
+References: <20191105115332.11026-1-tiwei.bie@intel.com>
+	<16f31c27-3a0e-09d7-3925-dc9777f5e229@redhat.com>
+	<20191106122249.GA3235@___>
+	<20191106075607-mutt-send-email-mst@kernel.org>
+	<580dfa2c-f1ff-2f6f-bbc8-1c4b0a829a3d@redhat.com>
+	<20191106144952.GA10926@___>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <914081d6-40ee-f184-ff43-c3d4cd885fba@redhat.com>
+Date: Thu, 7 Nov 2019 12:08:08 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-MC-Unique: YbiNC0ioPxK3IgeNVq5zwQ-1
+In-Reply-To: <20191106144952.GA10926@___>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-MC-Unique: b64OKsVqNKabWfY1H8bGSQ-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: stefanha@redhat.com, christophe.de.dinechin@gmail.com, kvm@vger.kernel.org,
-	mst@redhat.com, airlied@linux.ie,
-	joonas.lahtinen@linux.intel.com, heiko.carstens@de.ibm.com,
-	dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org, kwankhede@nvidia.com,
-	rob.miller@broadcom.com, linux-s390@vger.kernel.org,
-	sebott@linux.ibm.com, lulu@redhat.com, eperezma@redhat.com,
-	pasic@linux.ibm.com, borntraeger@de.ibm.com,
-	haotian.wang@sifive.com, intel-gfx@lists.freedesktop.org,
-	zhi.a.wang@intel.com, farman@linux.ibm.com, idos@mellanox.com,
-	gor@linux.ibm.com, jani.nikula@linux.intel.com,
-	rodrigo.vivi@intel.com, xiao.w.wang@intel.com,
-	freude@linux.ibm.com, zhenyuw@linux.intel.com,
-	parav@mellanox.com, zhihong.wang@intel.com,
-	intel-gvt-dev@lists.freedesktop.org, akrowiak@linux.ibm.com,
-	oberpar@linux.ibm.com, netdev@vger.kernel.org, cohuck@redhat.com,
-	linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
-	daniel@ffwll.ch, lingshan.zhu@intel.com
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	zhihong.wang@intel.com, maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -89,55 +79,41 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, 6 Nov 2019 14:50:30 -0800
-Randy Dunlap <rdunlap@infradead.org> wrote:
-
-> On 11/5/19 11:05 PM, Jason Wang wrote:
-> > diff --git a/samples/Kconfig b/samples/Kconfig
-> > index c8dacb4dda80..13a2443e18e0 100644
-> > --- a/samples/Kconfig
-> > +++ b/samples/Kconfig
-> > @@ -131,6 +131,16 @@ config SAMPLE_VFIO_MDEV_MDPY
-> >  	  mediated device.  It is a simple framebuffer and supports
-> >  	  the region display interface (VFIO_GFX_PLANE_TYPE_REGION).
-> >  
-> > +config SAMPLE_VIRTIO_MDEV_NET
-> > +	tristate "Build VIRTIO net example mediated device sample code -- loadable modules only"
-> > +	depends on VIRTIO_MDEV && VHOST_RING && m
-> > +	help
-> > +	  Build a networking sample device for use as a virtio
-> > +	  mediated device. The device coopreates with virtio-mdev bus  
-> 
-> typo here:
-> 	                              cooperates
-> 
-
-I can fix this on commit relative to V10 if there are no other issues
-raised:
-
-diff --git a/samples/Kconfig b/samples/Kconfig
-index 13a2443e18e0..b7116d97cbbe 100644
---- a/samples/Kconfig
-+++ b/samples/Kconfig
-@@ -136,7 +136,7 @@ config SAMPLE_VIRTIO_MDEV_NET
-        depends on VIRTIO_MDEV && VHOST_RING && m
-        help
-          Build a networking sample device for use as a virtio
--         mediated device. The device coopreates with virtio-mdev bus
-+         mediated device. The device cooperates with virtio-mdev bus
-          driver to present an virtio ethernet driver for
-          kernel. It simply loopbacks all packets from its TX
-          virtqueue to its RX virtqueue.
-
-Thanks,
-Alex
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMTkvMTEvNiDkuIvljYgxMDo0OSwgVGl3ZWkgQmllIHdyb3RlOgo+Pj4+Pj4gKwlkZWZh
+dWx0Ogo+Pj4+Pj4gKwkJLyoKPj4+Pj4+ICsJCSAqIFZIT1NUX1NFVF9NRU1fVEFCTEUsIFZIT1NU
+X1NFVF9MT0dfQkFTRSwgYW5kCj4+Pj4+PiArCQkgKiBWSE9TVF9TRVRfTE9HX0ZEIGFyZSBub3Qg
+dXNlZCB5ZXQuCj4+Pj4+PiArCQkgKi8KPj4+Pj4gSWYgd2UgZG9uJ3QgZXZlbiB1c2UgdGhlbSwg
+dGhlcmUncyBwcm9iYWJseSBubyBuZWVkIHRvIGNhbGwKPj4+Pj4gdmhvc3RfZGV2X2lvY3RsKCku
+IFRoaXMgbWF5IGhlbHAgdG8gYXZvaWQgY29uZnVzaW9uIHdoZW4gd2Ugd2FudCB0byBkZXZlbG9w
+Cj4+Pj4+IG5ldyBBUEkgZm9yIGUuZyBkaXJ0eSBwYWdlIHRyYWNraW5nLgo+Pj4+IEdvb2QgcG9p
+bnQuIEl0J3MgYmV0dGVyIHRvIHJlamVjdCB0aGVzZSBpb2N0bHMgZm9yIG5vdy4KPj4+Pgo+Pj4+
+IFBTLiBPbmUgdGhpbmcgSSBtYXkgbmVlZCB0byBjbGFyaWZ5IGlzIHRoYXQsIHdlIG5lZWQgdGhl
+Cj4+Pj4gVkhPU1RfU0VUX09XTkVSIGlvY3RsIHRvIGdldCB0aGUgdnEtPmhhbmRsZV9raWNrIHRv
+IHdvcmsuCj4+Pj4gU28gaWYgd2UgZG9uJ3QgY2FsbCB2aG9zdF9kZXZfaW9jdGwoKSwgd2Ugd2ls
+bCBuZWVkIHRvCj4+Pj4gY2FsbCB2aG9zdF9kZXZfc2V0X293bmVyKCkgZGlyZWN0bHkuCj4+IEkg
+bWF5IG1pc3Mgc29tZXRoaW5nLCBpdCBsb29rcyB0byBtZSB0aGUgdGhlcmUncyBubyBvd25lciBj
+aGVjayBpbgo+PiB2aG9zdF92cmluZ19pb2N0bCgpIGFuZCB0aGUgdmhvc3RfcG9sbF9zdGFydCgp
+IGNhbiBtYWtlIHN1cmUgaGFuZGxlX2tpY2sKPj4gd29ya3M/Cj4gWWVhaCwgdGhlcmUgaXMgbm8g
+b3duZXIgY2hlY2sgaW4gdmhvc3RfdnJpbmdfaW9jdGwoKS4KPiBJSVVDLCB2aG9zdF9wb2xsX3N0
+YXJ0KCkgd2lsbCBzdGFydCBwb2xsaW5nIHRoZSBmaWxlLiBBbmQgd2hlbgo+IGV2ZW50IGFycml2
+ZXMsIHZob3N0X3BvbGxfd2FrZXVwKCkgd2lsbCBiZSBjYWxsZWQsIGFuZCBpdCB3aWxsCj4gcXVl
+dWUgd29yayB0byB3b3JrX2xpc3QgYW5kIHdha2V1cCB3b3JrZXIgdG8gZmluaXNoIHRoZSB3b3Jr
+Lgo+IEFuZCB0aGUgd29ya2VyIGlzIGNyZWF0ZWQgYnkgdmhvc3RfZGV2X3NldF9vd25lcigpLgo+
+CgpSaWdodCwgcmV0aGluayBhYm91dCB0aGlzLiBJdCBsb29rcyB0byBtZSB3ZSBuZWVkOgoKLSBL
+ZWVwIFZIT1NUX1NFVF9PV05FUiwgdGhpcyBjb3VsZCBiZSB1c2VkIGZvciBmdXR1cmUgY29udHJv
+bCB2cSB3aGVyZSAKaXQgbmVlZHMgYSBrdGhyZWFkIHRvIGFjY2VzcyB0aGUgdXNlcnNwYWNlIG1l
+bW9yeQoKLSBUZW1wb3JhcmlseSBmaWx0ZXLCoCBTRVRfTE9HX0JBU0UgYW5kIFNFVF9MT0dfRkQg
+dW50aWwgd2UgZmluYWxpemUgdGhlIApBUEkgZm9yIGRpcnR5IHBhZ2UgdHJhY2tpbmcuCgotIEZv
+ciBraWNrIHRocm91Z2gga3RocmVhZCwgaXQgbG9va3Mgc3ViLW9wdGltYWwgYnV0IHdlIGNhbiBh
+ZGRyZXNzIHRoaXMgCmluIHRoZSBmdXR1cmUsIGUuZyBjYWxsIGhhbmRsZV92cV9raWNrIGRpcmVj
+dGx5IGluIHZob3N0X3BvbGxfcXVldWUgCihwcm9iYWJseSBhIGZsYWcgZm9yIHZob3N0X3BvbGwp
+IGFuZCBkZWFsIHdpdGggdGhlIHN5bmNocm9uaXphdGlvbiBpbiAKdmhvc3RfcG9sbF9mbHVzaCBj
+YXJlZnVsbHkuCgpUaGFua3MKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlz
+dHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3Jn
+L21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
