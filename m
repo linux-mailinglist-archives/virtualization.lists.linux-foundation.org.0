@@ -2,59 +2,58 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E9CEF3364
-	for <lists.virtualization@lfdr.de>; Thu,  7 Nov 2019 16:35:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3DCFF337B
+	for <lists.virtualization@lfdr.de>; Thu,  7 Nov 2019 16:36:57 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id DE7AC1080;
-	Thu,  7 Nov 2019 15:35:13 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 4CA77E2B;
+	Thu,  7 Nov 2019 15:36:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A04CEE7B
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 77776C3A
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  7 Nov 2019 15:35:12 +0000 (UTC)
+	Thu,  7 Nov 2019 15:36:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
-	[207.211.31.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id D742D87D
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+	[205.139.110.61])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 3C52F189
 	for <virtualization@lists.linux-foundation.org>;
-	Thu,  7 Nov 2019 15:35:10 +0000 (UTC)
+	Thu,  7 Nov 2019 15:36:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1573140909;
+	s=mimecast20190719; t=1573141009;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	content-transfer-encoding:content-transfer-encoding:
 	in-reply-to:in-reply-to:references:references;
-	bh=BzEyez2H23edMWUzeroDzzDUe6EbJTfa2zTwff9g92s=;
-	b=iytoKoHykz8YhCd5O48nU5ObA9o3jLo8P15TM0U2VcVQPg/x6e7Hr5Qa3j4gO0uSqttAOY
-	OgwLfTp0x5ODyLzDUyK9cBN58lQJI3x2Gl4CSaSsetY0I49gmlFVL4x9U2Ft2tcqirL7Kp
-	vnva7uDFSHOsVxHnhV4DEiFhMMeqIfo=
+	bh=FAhytQLph68txo2Lut8xXgNzL31NY3OX1jJJVRGMRL8=;
+	b=J4yR4iXt7yA0fVEj/iZ6RewQCh0xuYC7Z6rf6em5WY+b4ssJ4kG1VxM4AovXVtdkLW+E4Y
+	WtaC31WeBHjX2o4oAhjyiGQ8XwZ/tAREAWHIp0EiuIS0tnxb+jscXmMBPbWX2gdCJC2JcW
+	wMEPwWUIqXZbYv7Ela4Ewou2pbT4+jA=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-423-TZdOIwyWM0aw-ZFtUujj9Q-1; Thu, 07 Nov 2019 10:35:05 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	us-mta-296-lwzusoTTONmDNFvxeSwQlg-1; Thu, 07 Nov 2019 10:36:45 -0500
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 000FF477;
-	Thu,  7 Nov 2019 15:35:00 +0000 (UTC)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A1925107ACC3;
+	Thu,  7 Nov 2019 15:36:41 +0000 (UTC)
 Received: from gondolin (ovpn-117-222.ams2.redhat.com [10.36.117.222])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id CCE1260BEC;
-	Thu,  7 Nov 2019 15:34:51 +0000 (UTC)
-Date: Thu, 7 Nov 2019 16:34:48 +0100
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 927595DA76;
+	Thu,  7 Nov 2019 15:36:09 +0000 (UTC)
+Date: Thu, 7 Nov 2019 16:36:06 +0100
 From: Cornelia Huck <cohuck@redhat.com>
 To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V11 6/6] docs: sample driver to demonstrate how to
-	implement virtio-mdev framework
-Message-ID: <20191107163448.4d20b75b.cohuck@redhat.com>
-In-Reply-To: <20191107151109.23261-7-jasowang@redhat.com>
+Subject: Re: [PATCH V11 3/6] mdev: introduce device specific ops
+Message-ID: <20191107163606.293a4f62.cohuck@redhat.com>
+In-Reply-To: <20191107151109.23261-4-jasowang@redhat.com>
 References: <20191107151109.23261-1-jasowang@redhat.com>
-	<20191107151109.23261-7-jasowang@redhat.com>
+	<20191107151109.23261-4-jasowang@redhat.com>
 Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-MC-Unique: TZdOIwyWM0aw-ZFtUujj9Q-1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-MC-Unique: lwzusoTTONmDNFvxeSwQlg-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
@@ -93,29 +92,38 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Thu,  7 Nov 2019 23:11:09 +0800
+On Thu,  7 Nov 2019 23:11:06 +0800
 Jason Wang <jasowang@redhat.com> wrote:
 
-> This sample driver creates mdev device that simulate virtio net device
-> over virtio mdev transport. The device is implemented through vringh
-> and workqueue. A device specific dma ops is to make sure HVA is used
-> directly as the IOVA. This should be sufficient for kernel virtio
-> driver to work.
+> Currently, except for the create and remove, the rest of
+> mdev_parent_ops is designed for vfio-mdev driver only and may not help
+> for kernel mdev driver. With the help of class id, this patch
+> introduces device specific callbacks inside mdev_device
+> structure. This allows different set of callback to be used by
+> vfio-mdev and virtio-mdev.
 > 
-> Only 'virtio' type is supported right now. I plan to add 'vhost' type
-> on top which requires some virtual IOMMU implemented in this sample
-> driver.
-> 
+> Reviewed-by: Parav Pandit <parav@mellanox.com>
 > Signed-off-by: Jason Wang <jasowang@redhat.com>
 > ---
->  MAINTAINERS                        |   1 +
->  samples/Kconfig                    |  10 +
->  samples/vfio-mdev/Makefile         |   1 +
->  samples/vfio-mdev/mvnet_loopback.c | 687 +++++++++++++++++++++++++++++
->  4 files changed, 699 insertions(+)
->  create mode 100644 samples/vfio-mdev/mvnet_loopback.c
+>  .../driver-api/vfio-mediated-device.rst       | 35 +++++++++----
+>  MAINTAINERS                                   |  1 +
+>  drivers/gpu/drm/i915/gvt/kvmgt.c              | 18 ++++---
+>  drivers/s390/cio/vfio_ccw_ops.c               | 18 ++++---
+>  drivers/s390/crypto/vfio_ap_ops.c             | 14 +++--
+>  drivers/vfio/mdev/mdev_core.c                 | 24 ++++++++-
+>  drivers/vfio/mdev/mdev_private.h              |  5 ++
+>  drivers/vfio/mdev/vfio_mdev.c                 | 37 ++++++-------
+>  include/linux/mdev.h                          | 43 ++++-----------
+>  include/linux/mdev_vfio_ops.h                 | 52 +++++++++++++++++++
+>  samples/vfio-mdev/mbochs.c                    | 20 ++++---
+>  samples/vfio-mdev/mdpy.c                      | 20 ++++---
+>  samples/vfio-mdev/mtty.c                      | 18 ++++---
+>  13 files changed, 206 insertions(+), 99 deletions(-)
+>  create mode 100644 include/linux/mdev_vfio_ops.h
 
-Acked-by: Cornelia Huck <cohuck@redhat.com>
+You dropped my R-b :(, here it is again:
+
+Reviewed-by: Cornelia Huck <cohuck@redhat.com>
 
 _______________________________________________
 Virtualization mailing list
