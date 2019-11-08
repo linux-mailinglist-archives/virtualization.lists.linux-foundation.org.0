@@ -2,47 +2,80 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDBA9F52D8
-	for <lists.virtualization@lfdr.de>; Fri,  8 Nov 2019 18:48:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57171F55C2
+	for <lists.virtualization@lfdr.de>; Fri,  8 Nov 2019 21:02:47 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 699BADAC;
-	Fri,  8 Nov 2019 17:48:50 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 389E4DDC;
+	Fri,  8 Nov 2019 20:02:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id B6E13CD4
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DF9D7DDC
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  8 Nov 2019 17:48:48 +0000 (UTC)
-X-Greylist: delayed 00:06:41 by SQLgrey-1.7.6
-Received: from iolanthe.rowland.org (iolanthe.rowland.org [192.131.102.54])
-	by smtp1.linuxfoundation.org (Postfix) with SMTP id 20F0E8AA
+	Fri,  8 Nov 2019 20:02:38 +0000 (UTC)
+X-Greylist: delayed 00:05:04 by SQLgrey-1.7.6
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EED5F844
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  8 Nov 2019 17:48:47 +0000 (UTC)
-Received: (qmail 4415 invoked by uid 2102); 8 Nov 2019 12:42:05 -0500
-Received: from localhost (sendmail-bs@127.0.0.1)
-	by localhost with SMTP; 8 Nov 2019 12:42:05 -0500
-Date: Fri, 8 Nov 2019 12:42:05 -0500 (EST)
-From: Alan Stern <stern@rowland.harvard.edu>
-X-X-Sender: stern@iolanthe.rowland.org
-To: Will Deacon <will@kernel.org>
-Subject: Re: [PATCH 10/13] tools/memory-model: Remove
-	smp_read_barrier_depends() from informal doc
-In-Reply-To: <20191108170120.22331-11-will@kernel.org>
-Message-ID: <Pine.LNX.4.44L0.1911081241460.1498-100000@iolanthe.rowland.org>
+	Fri,  8 Nov 2019 20:02:37 +0000 (UTC)
+Received: from mail-qk1-f170.google.com ([209.85.222.170]) by
+	mrelayeu.kundenserver.de (mreue011 [212.227.15.129]) with ESMTPSA
+	(Nemesis) id 1MUGuZ-1iKbwe1syB-00RFVh for
+	<virtualization@lists.linux-foundation.org>; 
+	Fri, 08 Nov 2019 20:57:31 +0100
+Received: by mail-qk1-f170.google.com with SMTP id i19so6392752qki.2
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 08 Nov 2019 11:57:31 -0800 (PST)
+X-Gm-Message-State: APjAAAUuW77DQ6gFbrsCFOGPdVURbRt3R1fhWU8NqIEOiYZAU7EfwIve
+	dr6Ad/ZMUg9ZbtDt/nydqfa5eNrqnpAMqQU9xqo=
+X-Google-Smtp-Source: APXvYqwbEOv9N5n3ZVSMCaT2AayZZFizNM7xZNN/vq5TItdY6JMB/hXbfpzfEILBcvqaJNvSbipOgEpXoOH0B2jqyjk=
+X-Received: by 2002:a37:4f13:: with SMTP id d19mr10475357qkb.138.1573243050314;
+	Fri, 08 Nov 2019 11:57:30 -0800 (PST)
 MIME-Version: 1.0
+References: <20191108170120.22331-1-will@kernel.org>
+	<20191108170120.22331-2-will@kernel.org>
+In-Reply-To: <20191108170120.22331-2-will@kernel.org>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Fri, 8 Nov 2019 20:57:14 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a0f=WvSQSBQ4t0FmEkcFE_mC3oARxaeTviTSkSa-D2qhg@mail.gmail.com>
+Message-ID: <CAK8P3a0f=WvSQSBQ4t0FmEkcFE_mC3oARxaeTviTSkSa-D2qhg@mail.gmail.com>
+Subject: Re: [PATCH 01/13] compiler.h: Split {READ, WRITE}_ONCE definitions out
+	into rwonce.h
+To: Will Deacon <will@kernel.org>
+X-Provags-ID: V03:K1:q1Yam/o29NjAH4ey6WRM7xNq+9u2kqVfOlks9fN0rl/QSmwODV2
+	FjfP+4JvBKthqedJmT/DB7Lw8zKh6HUmsgjN8G81zQKa++c6UWI71MyFU/yCDoUZ7zSva1O
+	kYtLr1GdGnv0qpPXgKjRfIUxSkz7Y0o4dMgJ2to2rXQA+8L9LhML3WodL/X+Q+75dMfkZEK
+	qJJ1Fz4lZHqUAfiU3+yTA==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:KC3IFQmVi1M=:vVbaySIOh9/26+oLbyDfRS
+	TJ//IGOwL12oKCSDVKZtkS63WrRmCcgZZ43peowzB8GiqbN0Bgch+qTUOZ2LEy5WwcV/bW/qc
+	Ps3CdGCgAjQQ7tx0BRUm8C+zr/Ops9MFx7AIDocsui/q5/AiFvznNEpQG9KIuELe0G/X2tRPq
+	PG2O2lpJuh0eYmaTFusVgSiLEFjOEbzVH6RwBIuzf3kJTZAiFG0r47gR5ZvnPT4T4kP9l2o+3
+	vu3wd1x3nLM7etbDCJ3In5Q4pbl4vSBEhZ/hrjMbfaQD7T5Ft0UlHMTp+mBxkHv69chv5QYcA
+	3HVeO825Ynb9fmswDOqOz2QPTLe1uy4vX67fNV3zp0q9T/DVqT+6NKxiTNaqazf7IFHm6dtUF
+	0uRaCNyAEFSPPgbuKCaK/ZFRufP4E9J9qp0GvBLSGnJXNidYSApxquYPeUu4jVB2+rFEkSeqr
+	kFUnD1GpvYu8lTQAoenfrE4wI9I6V04Ft3KqsDxCAtZuec9E1qG88o8TAvc9/U4HJKYHd92Fw
+	+DoZUJWGdNwWYDJtdea9LdZ2OYGZ2HFlEa5VinW8letyLqGIyeEK50jsatWsQBAWiO/vVzOBi
+	ce77OWw5cqbFgYdBHTkr1gNvse7oU4CfduVFKNxn6jWwsdtL4Etztm1R6bM4d5XUX4ua+YlZj
+	ukJ+g/muJLISH/sJEQ0x8DDNovYKrRL7NDThuat97Gx/bC0tjwhAMPDR7qSk8UDYtsUVl3+eC
+	b1SdcJKFCoV5fJPmcAJs2EDwMzeR4deltHUZa1fblsi1+isT1IbF8bVOXsC+4mY0w7Y5vNrZN
+	BO0yWBmofNQUveyTggS20UATvzZZGjlWEgTSAzOIn26B3YgcEbcxFAtAScbJpNjcQwfYybiEt
+	ZnYn5vRp3GWj3jGjYvaA==
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=unavailable version=3.3.1
+	autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Arnd Bergmann <arnd@arndb.de>, "Paul E. McKenney" <paulmck@kernel.org>,
+Cc: "Paul E. McKenney" <paulmck@kernel.org>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	Peter Zijlstra <peterz@infradead.org>,
 	Michael Ellerman <mpe@ellerman.id.au>,
-	Josh Triplett <josh@joshtriplett.org>, linux-kernel@vger.kernel.org,
+	Josh Triplett <josh@joshtriplett.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
 	SeongJae Park <sj38.park@gmail.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
 	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
-	linux-alpha@vger.kernel.org, Joe Perches <joe@perches.com>,
+	alpha <linux-alpha@vger.kernel.org>, Joe Perches <joe@perches.com>,
+	Alan Stern <stern@rowland.harvard.edu>,
 	Matt Turner <mattst88@gmail.com>, Yunjae Lee <lyj7694@gmail.com>,
 	virtualization@lists.linux-foundation.org,
 	Boqun Feng <boqun.feng@gmail.com>, Richard Henderson <rth@twiddle.net>
@@ -57,70 +90,25 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Fri, 8 Nov 2019, Will Deacon wrote:
-
-> 'smp_read_barrier_depends()' has gone the way of mmiowb() and so many
-> esoteric memory barriers before it. Drop the two mentions of this
-> deceased barrier from the LKMM informal explanation document.
-> 
-> Signed-off-by: Will Deacon <will@kernel.org>
-> ---
->  .../Documentation/explanation.txt             | 26 +++++++++----------
->  1 file changed, 12 insertions(+), 14 deletions(-)
-> 
-> diff --git a/tools/memory-model/Documentation/explanation.txt b/tools/memory-model/Documentation/explanation.txt
-> index 488f11f6c588..3050bf67b8d0 100644
-> --- a/tools/memory-model/Documentation/explanation.txt
-> +++ b/tools/memory-model/Documentation/explanation.txt
-> @@ -1118,12 +1118,10 @@ maintain at least the appearance of FIFO order.
->  In practice, this difficulty is solved by inserting a special fence
->  between P1's two loads when the kernel is compiled for the Alpha
->  architecture.  In fact, as of version 4.15, the kernel automatically
-> -adds this fence (called smp_read_barrier_depends() and defined as
-> -nothing at all on non-Alpha builds) after every READ_ONCE() and atomic
-> -load.  The effect of the fence is to cause the CPU not to execute any
-> -po-later instructions until after the local cache has finished
-> -processing all the stores it has already received.  Thus, if the code
-> -was changed to:
-> +adds this fence after every READ_ONCE() and atomic load on Alpha.  The
-> +effect of the fence is to cause the CPU not to execute any po-later
-> +instructions until after the local cache has finished processing all
-> +the stores it has already received.  Thus, if the code was changed to:
->  
->  	P1()
->  	{
-> @@ -1142,14 +1140,14 @@ READ_ONCE() or another synchronization primitive rather than accessed
->  directly.
->  
->  The LKMM requires that smp_rmb(), acquire fences, and strong fences
-> -share this property with smp_read_barrier_depends(): They do not allow
-> -the CPU to execute any po-later instructions (or po-later loads in the
-> -case of smp_rmb()) until all outstanding stores have been processed by
-> -the local cache.  In the case of a strong fence, the CPU first has to
-> -wait for all of its po-earlier stores to propagate to every other CPU
-> -in the system; then it has to wait for the local cache to process all
-> -the stores received as of that time -- not just the stores received
-> -when the strong fence began.
-> +share this property: They do not allow the CPU to execute any po-later
-> +instructions (or po-later loads in the case of smp_rmb()) until all
-> +outstanding stores have been processed by the local cache.  In the
-> +case of a strong fence, the CPU first has to wait for all of its
-> +po-earlier stores to propagate to every other CPU in the system; then
-> +it has to wait for the local cache to process all the stores received
-> +as of that time -- not just the stores received when the strong fence
-> +began.
->  
->  And of course, none of this matters for any architecture other than
->  Alpha.
-
-Acked-by: Alan Stern <stern@rowland.harvard.edu>
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gRnJpLCBOb3YgOCwgMjAxOSBhdCA2OjAxIFBNIFdpbGwgRGVhY29uIDx3aWxsQGtlcm5lbC5v
+cmc+IHdyb3RlOgo+Cj4gSW4gcHJlcGFyYXRpb24gZm9yIGFsbG93aW5nIGFyY2hpdGVjdHVyZXMg
+dG8gZGVmaW5lIHRoZWlyIG93bgo+IGltcGxlbWVudGF0aW9uIG9mIHRoZSAnUkVBRF9PTkNFKCkn
+IG1hY3JvLCBtb3ZlIHRoZSBnZW5lcmljCj4gJ3tSRUFELFdSSVRFfV9PTkNFKCknIGRlZmluaXRp
+b25zIG91dCBvZiB0aGUgdW53aWVsZHkgJ2xpbnV4L2NvbXBpbGVyLmgnCj4gYW5kIGludG8gYSBu
+ZXcgJ3J3b25jZS5oJyBoZWFkZXIgdW5kZXIgJ2FzbS1nZW5lcmljJy4KCkFkZGluZyBDaHJpc3Rp
+YW4gQm9ybnRyw6RnZXIgdG8gQ2MsIGhlIG9yaWdpbmFsbHkgYWRkZWQgdGhlClJFQURfT05DRSgp
+L1dSSVRFX09OQ0UoKQpjb2RlLgoKSSB3b25kZXIgaWYgaXQgd291bGQgYmUgYXBwcm9wcmlhdGUg
+bm93IHRvIHJldmVydCBiYWNrIHRvIGEgbXVjaCBzaW1wbGVyIHZlcnNpb24Kb2YgdGhlc2UgaGVs
+cGVycyBmb3IgYW55IG1vZGVybiBjb21waWxlci4gQXMgSSB1bmRlcnN0YW5kLCBvbmx5IGdjYy00
+LjYgYW5kCmdjYzQuNyBhY3R1YWxseSBuZWVkIHRoZSBzb25nLWFuZC1kYW5jZSB2ZXJzaW9uIHdp
+dGggdGhlIHVuaW9uIGFuZCBzd2l0Y2gvY2FzZSwKd2hpbGUgZm9yIG90aGVycywgd2UgY2FuIG1p
+Z2h0IGJlIGFibGUgYmFjayB0byBhIG1hY3JvIGRvaW5nIGEgdm9sYXRpbGUgYWNjZXNzLgoKICAg
+ICBBcm5kCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZp
+cnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3Vu
+ZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0
+aW5mby92aXJ0dWFsaXphdGlvbg==
