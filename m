@@ -2,61 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABDE8F5D9E
-	for <lists.virtualization@lfdr.de>; Sat,  9 Nov 2019 06:49:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED7F0F5DE7
+	for <lists.virtualization@lfdr.de>; Sat,  9 Nov 2019 08:54:37 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 23FFCCAB;
-	Sat,  9 Nov 2019 05:49:20 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 052DDCD2;
+	Sat,  9 Nov 2019 07:54:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id A1F8CB49
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id D232DCA4
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  9 Nov 2019 05:49:18 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from bombadil.infradead.org (bombadil.infradead.org
-	[198.137.202.133])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 21E99102
+	Sat,  9 Nov 2019 07:54:28 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 9DB20102
 	for <virtualization@lists.linux-foundation.org>;
-	Sat,  9 Nov 2019 05:49:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-	Mime-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=2daBl1XqJHk3doN2SvcFAh4NuQLq3rWMCItDmKsEpzQ=;
-	b=GSiXKZ4u85elUSwsSft5FIB1p
-	q9yCf7onnjBGMgM7WYIrqGrdrwzWSxmg3IIl8nptckvkl0R7Qt522bYRbtJEm+SHghqLgs+1CP67/
-	LmowD8XwIY6ZpDsa7j7UUZmPF8EdXJGeK60ZgJ2bLybbkXE38lFhea9GBvfJacV8yahAQCesjWcGK
-	vOy50BYEvutu86hMJfPnrhSseYanJlMaOg1Tv7P4LqOFjM5TUfyoARmhRRh5dOqyO/jDGoxY3Tl//
-	XqCryecRHT8N1PBPrzj9+o4iOufriu5iYnbbwM69ZtVqlw8MLZL5ue+86f4moULSYE7eTgZ88khC2
-	urB5dwqYA==;
-Received: from [95.90.212.9] (helo=u601e653ff81a58.ant.amazon.com)
-	by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1iTJcZ-0000Xq-Gl; Sat, 09 Nov 2019 05:49:15 +0000
-Message-ID: <46cc3d4a8d4b2279ce8b3cba5e061ac14b2a0c84.camel@infradead.org>
-Subject: Re: [PATCH] virtio_console: allocate inbufs in add_port() only if
-	it is needed
-From: Amit Shah <amit@infradead.org>
-To: "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <lvivier@redhat.com>
-Date: Sat, 09 Nov 2019 06:49:12 +0100
-In-Reply-To: <20191106095707-mutt-send-email-mst@kernel.org>
-References: <20191018164718.15999-1-lvivier@redhat.com>
-	<20191106085548-mutt-send-email-mst@kernel.org>
-	<83d88904-1626-8dd6-9e5c-7abcee27bcd0@redhat.com>
-	<20191106095707-mutt-send-email-mst@kernel.org>
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+	Sat,  9 Nov 2019 07:54:28 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id ay6so5357700plb.0
+	for <virtualization@lists.linux-foundation.org>;
+	Fri, 08 Nov 2019 23:54:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=veiAcMlIgcLHjJxd0QNhUHza9s431ffRaEJpWcEHXlA=;
+	b=ZrcVhD0E25ufPrmCCfZ8MdFHm7QQe97Zw1uyYMICsTUBdeTTZku7sXrCkCp00Y8WTj
+	ssQNLd0wY4j5kVeBQOlyt+J8HxJQUV2+ZycfVCAFWt7NyqBsvWB60WV5wR8rfkQ2VY2N
+	0K8O05POwFRF8UJTOljz9j40NxSX5E+k/TK+lMU7/7BG+Vfszm9WfoA7Kd13lSB/6FiK
+	lOOu0ERBepCRgVwSyr/vXyegHkDjSp5ve0mC23B5Ju5n21ilfXQILL7E5RNlxV5IHaoC
+	y95+fHo5YQQJQAT9NgMuHZ3tNSjwcx/qcRUnusSjy3QvTQpKL3rs+v2rC60U/EZI5Ozg
+	4njw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=veiAcMlIgcLHjJxd0QNhUHza9s431ffRaEJpWcEHXlA=;
+	b=AJ9OhO3JDysiILcNkx10xJw7T2F9b1BRkoUGdUOEpqJU7sUSMq9nDuxjrkHE+HUspr
+	5TUfpVvkhY5rW0pqVyY9OvtBrJpQbYdfSwB3x6se0IGhF0nmIjxDLPkACTwEr/3Nxing
+	1gMuGOM2pQHyd7nv35IbMq8TjicwSSlcinBwej4qSGKt81pHtGYZeXndj6NU4GZZIlEl
+	kEX0haQhy0c3jEnTwzJRRQzdy6BXta4YdNcC+Yfheyfxpuor04RG6pLG7e8L9WPohklJ
+	65knq3T32ftBkokr/wuw1NZJM7joe0Eu3XZa4/I8e8Rq/+Ns4bRpq1CuN3KVR/wgIe9p
+	gGHQ==
+X-Gm-Message-State: APjAAAWiE13idVWuWP/nl5DiaumZNGYZvzddIihP9RW6oaExCDnPYKyW
+	JVlOAPignC9Tfggx5RSwHSM=
+X-Google-Smtp-Source: APXvYqxvItN9OnqheTvov4hpS8eX99Ly+f08T42CJNk7Az9Z5y+C87MbZqWmuka9RwkjJGMYYz+pvw==
+X-Received: by 2002:a17:902:6802:: with SMTP id
+	h2mr14901704plk.135.1573286068169; 
+	Fri, 08 Nov 2019 23:54:28 -0800 (PST)
+Received: from suzukaze.ipads-lab.se.sjtu.edu.cn ([202.120.40.82])
+	by smtp.gmail.com with ESMTPSA id
+	y1sm9578671pfq.138.2019.11.08.23.54.23
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 08 Nov 2019 23:54:27 -0800 (PST)
+From: Chuhong Yuan <hslester96@gmail.com>
+To: 
+Subject: [PATCH] drm/virtgpu: fix double unregistration
+Date: Sat,  9 Nov 2019 15:54:17 +0800
+Message-Id: <20191109075417.29808-1-hslester96@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+X-Spam-Status: No, score=-0.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_SORBS_WEB autolearn=no version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	virtualization@lists.linux-foundation.org,
-	linux-kernel@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
-	Amit Shah <amit@kernel.org>
+Cc: David Airlie <airlied@linux.ie>, Chuhong Yuan <hslester96@gmail.com>,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org, Daniel Vetter <daniel@ffwll.ch>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,113 +86,30 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Wed, 2019-11-06 at 10:03 -0500, Michael S. Tsirkin wrote:
-> On Wed, Nov 06, 2019 at 03:02:25PM +0100, Laurent Vivier wrote:
-> > On 06/11/2019 14:56, Michael S. Tsirkin wrote:
-> > > On Fri, Oct 18, 2019 at 06:47:18PM +0200, Laurent Vivier wrote:
-> > > > When we hot unplug a virtserialport and then try to hot plug
-> > > > again,
-> > > > it fails:
-> > > > 
-> > > > (qemu) chardev-add
-> > > > socket,id=serial0,path=/tmp/serial0,server,nowait
-> > > > (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
-> > > >                   chardev=serial0,id=serial0,name=serial0
-> > > > (qemu) device_del serial0
-> > > > (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
-> > > >                   chardev=serial0,id=serial0,name=serial0
-> > > > kernel error:
-> > > >   virtio-ports vport2p2: Error allocating inbufs
-> > > > qemu error:
-> > > >   virtio-serial-bus: Guest failure in adding port 2 for device
-> > > > \
-> > > >                      virtio-serial0.0
-> > > > 
-> > > > This happens because buffers for the in_vq are allocated when
-> > > > the port is
-> > > > added but are not released when the port is unplugged.
-> > > > 
-> > > > They are only released when virtconsole is removed (see
-> > > > a7a69ec0d8e4)
-> > > > 
-> > > > To avoid the problem and to be symmetric, we could allocate all
-> > > > the buffers
-> > > > in init_vqs() as they are released in remove_vqs(), but it
-> > > > sounds like
-> > > > a waste of memory.
-> > > > 
-> > > > Rather than that, this patch changes add_port() logic to only
-> > > > allocate the
-> > > > buffers if the in_vq has available free slots.
-> > > > 
-> > > > Fixes: a7a69ec0d8e4 ("virtio_console: free buffers after
-> > > > reset")
-> > > > Cc: mst@redhat.com
-> > > > Signed-off-by: Laurent Vivier <lvivier@redhat.com>
-> > > > ---
-> > > >  drivers/char/virtio_console.c | 17 +++++++++++------
-> > > >  1 file changed, 11 insertions(+), 6 deletions(-)
-> > > > 
-> > > > diff --git a/drivers/char/virtio_console.c
-> > > > b/drivers/char/virtio_console.c
-> > > > index 7270e7b69262..77105166fe01 100644
-> > > > --- a/drivers/char/virtio_console.c
-> > > > +++ b/drivers/char/virtio_console.c
-> > > > @@ -1421,12 +1421,17 @@ static int add_port(struct ports_device
-> > > > *portdev, u32 id)
-> > > >  	spin_lock_init(&port->outvq_lock);
-> > > >  	init_waitqueue_head(&port->waitqueue);
-> > > >  
-> > > > -	/* Fill the in_vq with buffers so the host can send us
-> > > > data. */
-> > > > -	nr_added_bufs = fill_queue(port->in_vq, &port-
-> > > > >inbuf_lock);
-> > > > -	if (!nr_added_bufs) {
-> > > > -		dev_err(port->dev, "Error allocating
-> > > > inbufs\n");
-> > > > -		err = -ENOMEM;
-> > > > -		goto free_device;
-> > > > +	/* if the in_vq has not already been filled (the port
-> > > > has already been
-> > > > +	 * used and unplugged), fill the in_vq with buffers so
-> > > > the host can
-> > > > +	 * send us data.
-> > > > +	 */
-> > > > +	if (port->in_vq->num_free != 0) {
-> > > > +		nr_added_bufs = fill_queue(port->in_vq, &port-
-> > > > >inbuf_lock);
-> > > > +		if (!nr_added_bufs) {
-> > > > +			dev_err(port->dev, "Error allocating
-> > > > inbufs\n");
-> > > > +			err = -ENOMEM;
-> > > > +			goto free_device;
-> > > > +		}
-> > > >  	}
-> > > >  
-> > > >  	if (is_rproc_serial(port->portdev->vdev))
-> > > 
-> > > Well fill_queue will just add slots as long as it can.
-> > > So on a full queue it does nothing. How does this patch help?
-> > 
-> > Yes, but in this case it returns 0 and so add_port() fails and
-> > exits
-> > with -ENOMEM and the device is freed. It's what this patch tries to
-> > avoid.
-> > 
-> > Thanks,
-> > Laurent
-> 
-> Oh I see. However it's a bit asymmetrical to special case ring full.
-> How about making fill_queue return int and testing return code for
-> -ENOSPC instead? Will also help propagate errors correctly.
+drm_put_dev also calls drm_dev_unregister, so dev will be unregistered
+twice.
+Replace it with drm_dev_put to fix it.
 
-Yes, I like this better too.
+Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
+---
+ drivers/gpu/drm/virtio/virtgpu_drv.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Can you call out which commit introduced this behaviour / regression?
-
-> 
-> And I guess CC stable?
-> 
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+index 0fc32fa0b3c0..fccc24e21af8 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.c
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
+@@ -138,7 +138,7 @@ static void virtio_gpu_remove(struct virtio_device *vdev)
+ 
+ 	drm_dev_unregister(dev);
+ 	virtio_gpu_deinit(dev);
+-	drm_put_dev(dev);
++	drm_dev_put(dev);
+ }
+ 
+ static void virtio_gpu_config_changed(struct virtio_device *vdev)
+-- 
+2.23.0
 
 _______________________________________________
 Virtualization mailing list
