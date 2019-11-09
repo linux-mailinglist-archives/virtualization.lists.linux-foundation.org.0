@@ -2,83 +2,61 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57171F55C2
-	for <lists.virtualization@lfdr.de>; Fri,  8 Nov 2019 21:02:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABDE8F5D9E
+	for <lists.virtualization@lfdr.de>; Sat,  9 Nov 2019 06:49:27 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 389E4DDC;
-	Fri,  8 Nov 2019 20:02:40 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 23FFCCAB;
+	Sat,  9 Nov 2019 05:49:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id DF9D7DDC
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id A1F8CB49
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  8 Nov 2019 20:02:38 +0000 (UTC)
-X-Greylist: delayed 00:05:04 by SQLgrey-1.7.6
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id EED5F844
+	Sat,  9 Nov 2019 05:49:18 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+	[198.137.202.133])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 21E99102
 	for <virtualization@lists.linux-foundation.org>;
-	Fri,  8 Nov 2019 20:02:37 +0000 (UTC)
-Received: from mail-qk1-f170.google.com ([209.85.222.170]) by
-	mrelayeu.kundenserver.de (mreue011 [212.227.15.129]) with ESMTPSA
-	(Nemesis) id 1MUGuZ-1iKbwe1syB-00RFVh for
-	<virtualization@lists.linux-foundation.org>; 
-	Fri, 08 Nov 2019 20:57:31 +0100
-Received: by mail-qk1-f170.google.com with SMTP id i19so6392752qki.2
-	for <virtualization@lists.linux-foundation.org>;
-	Fri, 08 Nov 2019 11:57:31 -0800 (PST)
-X-Gm-Message-State: APjAAAUuW77DQ6gFbrsCFOGPdVURbRt3R1fhWU8NqIEOiYZAU7EfwIve
-	dr6Ad/ZMUg9ZbtDt/nydqfa5eNrqnpAMqQU9xqo=
-X-Google-Smtp-Source: APXvYqwbEOv9N5n3ZVSMCaT2AayZZFizNM7xZNN/vq5TItdY6JMB/hXbfpzfEILBcvqaJNvSbipOgEpXoOH0B2jqyjk=
-X-Received: by 2002:a37:4f13:: with SMTP id d19mr10475357qkb.138.1573243050314;
-	Fri, 08 Nov 2019 11:57:30 -0800 (PST)
-MIME-Version: 1.0
-References: <20191108170120.22331-1-will@kernel.org>
-	<20191108170120.22331-2-will@kernel.org>
-In-Reply-To: <20191108170120.22331-2-will@kernel.org>
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Fri, 8 Nov 2019 20:57:14 +0100
-X-Gmail-Original-Message-ID: <CAK8P3a0f=WvSQSBQ4t0FmEkcFE_mC3oARxaeTviTSkSa-D2qhg@mail.gmail.com>
-Message-ID: <CAK8P3a0f=WvSQSBQ4t0FmEkcFE_mC3oARxaeTviTSkSa-D2qhg@mail.gmail.com>
-Subject: Re: [PATCH 01/13] compiler.h: Split {READ, WRITE}_ONCE definitions out
-	into rwonce.h
-To: Will Deacon <will@kernel.org>
-X-Provags-ID: V03:K1:q1Yam/o29NjAH4ey6WRM7xNq+9u2kqVfOlks9fN0rl/QSmwODV2
-	FjfP+4JvBKthqedJmT/DB7Lw8zKh6HUmsgjN8G81zQKa++c6UWI71MyFU/yCDoUZ7zSva1O
-	kYtLr1GdGnv0qpPXgKjRfIUxSkz7Y0o4dMgJ2to2rXQA+8L9LhML3WodL/X+Q+75dMfkZEK
-	qJJ1Fz4lZHqUAfiU3+yTA==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:KC3IFQmVi1M=:vVbaySIOh9/26+oLbyDfRS
-	TJ//IGOwL12oKCSDVKZtkS63WrRmCcgZZ43peowzB8GiqbN0Bgch+qTUOZ2LEy5WwcV/bW/qc
-	Ps3CdGCgAjQQ7tx0BRUm8C+zr/Ops9MFx7AIDocsui/q5/AiFvznNEpQG9KIuELe0G/X2tRPq
-	PG2O2lpJuh0eYmaTFusVgSiLEFjOEbzVH6RwBIuzf3kJTZAiFG0r47gR5ZvnPT4T4kP9l2o+3
-	vu3wd1x3nLM7etbDCJ3In5Q4pbl4vSBEhZ/hrjMbfaQD7T5Ft0UlHMTp+mBxkHv69chv5QYcA
-	3HVeO825Ynb9fmswDOqOz2QPTLe1uy4vX67fNV3zp0q9T/DVqT+6NKxiTNaqazf7IFHm6dtUF
-	0uRaCNyAEFSPPgbuKCaK/ZFRufP4E9J9qp0GvBLSGnJXNidYSApxquYPeUu4jVB2+rFEkSeqr
-	kFUnD1GpvYu8lTQAoenfrE4wI9I6V04Ft3KqsDxCAtZuec9E1qG88o8TAvc9/U4HJKYHd92Fw
-	+DoZUJWGdNwWYDJtdea9LdZ2OYGZ2HFlEa5VinW8letyLqGIyeEK50jsatWsQBAWiO/vVzOBi
-	ce77OWw5cqbFgYdBHTkr1gNvse7oU4CfduVFKNxn6jWwsdtL4Etztm1R6bM4d5XUX4ua+YlZj
-	ukJ+g/muJLISH/sJEQ0x8DDNovYKrRL7NDThuat97Gx/bC0tjwhAMPDR7qSk8UDYtsUVl3+eC
-	b1SdcJKFCoV5fJPmcAJs2EDwMzeR4deltHUZa1fblsi1+isT1IbF8bVOXsC+4mY0w7Y5vNrZN
-	BO0yWBmofNQUveyTggS20UATvzZZGjlWEgTSAzOIn26B3YgcEbcxFAtAScbJpNjcQwfYybiEt
-	ZnYn5vRp3GWj3jGjYvaA==
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+	Sat,  9 Nov 2019 05:49:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+	Mime-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=2daBl1XqJHk3doN2SvcFAh4NuQLq3rWMCItDmKsEpzQ=;
+	b=GSiXKZ4u85elUSwsSft5FIB1p
+	q9yCf7onnjBGMgM7WYIrqGrdrwzWSxmg3IIl8nptckvkl0R7Qt522bYRbtJEm+SHghqLgs+1CP67/
+	LmowD8XwIY6ZpDsa7j7UUZmPF8EdXJGeK60ZgJ2bLybbkXE38lFhea9GBvfJacV8yahAQCesjWcGK
+	vOy50BYEvutu86hMJfPnrhSseYanJlMaOg1Tv7P4LqOFjM5TUfyoARmhRRh5dOqyO/jDGoxY3Tl//
+	XqCryecRHT8N1PBPrzj9+o4iOufriu5iYnbbwM69ZtVqlw8MLZL5ue+86f4moULSYE7eTgZ88khC2
+	urB5dwqYA==;
+Received: from [95.90.212.9] (helo=u601e653ff81a58.ant.amazon.com)
+	by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1iTJcZ-0000Xq-Gl; Sat, 09 Nov 2019 05:49:15 +0000
+Message-ID: <46cc3d4a8d4b2279ce8b3cba5e061ac14b2a0c84.camel@infradead.org>
+Subject: Re: [PATCH] virtio_console: allocate inbufs in add_port() only if
+	it is needed
+From: Amit Shah <amit@infradead.org>
+To: "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <lvivier@redhat.com>
+Date: Sat, 09 Nov 2019 06:49:12 +0100
+In-Reply-To: <20191106095707-mutt-send-email-mst@kernel.org>
+References: <20191018164718.15999-1-lvivier@redhat.com>
+	<20191106085548-mutt-send-email-mst@kernel.org>
+	<83d88904-1626-8dd6-9e5c-7abcee27bcd0@redhat.com>
+	<20191106095707-mutt-send-email-mst@kernel.org>
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: "Paul E. McKenney" <paulmck@kernel.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Josh Triplett <josh@joshtriplett.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	SeongJae Park <sj38.park@gmail.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
-	alpha <linux-alpha@vger.kernel.org>, Joe Perches <joe@perches.com>,
-	Alan Stern <stern@rowland.harvard.edu>,
-	Matt Turner <mattst88@gmail.com>, Yunjae Lee <lyj7694@gmail.com>,
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	virtualization@lists.linux-foundation.org,
-	Boqun Feng <boqun.feng@gmail.com>, Richard Henderson <rth@twiddle.net>
+	linux-kernel@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
+	Amit Shah <amit@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -90,25 +68,120 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-T24gRnJpLCBOb3YgOCwgMjAxOSBhdCA2OjAxIFBNIFdpbGwgRGVhY29uIDx3aWxsQGtlcm5lbC5v
-cmc+IHdyb3RlOgo+Cj4gSW4gcHJlcGFyYXRpb24gZm9yIGFsbG93aW5nIGFyY2hpdGVjdHVyZXMg
-dG8gZGVmaW5lIHRoZWlyIG93bgo+IGltcGxlbWVudGF0aW9uIG9mIHRoZSAnUkVBRF9PTkNFKCkn
-IG1hY3JvLCBtb3ZlIHRoZSBnZW5lcmljCj4gJ3tSRUFELFdSSVRFfV9PTkNFKCknIGRlZmluaXRp
-b25zIG91dCBvZiB0aGUgdW53aWVsZHkgJ2xpbnV4L2NvbXBpbGVyLmgnCj4gYW5kIGludG8gYSBu
-ZXcgJ3J3b25jZS5oJyBoZWFkZXIgdW5kZXIgJ2FzbS1nZW5lcmljJy4KCkFkZGluZyBDaHJpc3Rp
-YW4gQm9ybnRyw6RnZXIgdG8gQ2MsIGhlIG9yaWdpbmFsbHkgYWRkZWQgdGhlClJFQURfT05DRSgp
-L1dSSVRFX09OQ0UoKQpjb2RlLgoKSSB3b25kZXIgaWYgaXQgd291bGQgYmUgYXBwcm9wcmlhdGUg
-bm93IHRvIHJldmVydCBiYWNrIHRvIGEgbXVjaCBzaW1wbGVyIHZlcnNpb24Kb2YgdGhlc2UgaGVs
-cGVycyBmb3IgYW55IG1vZGVybiBjb21waWxlci4gQXMgSSB1bmRlcnN0YW5kLCBvbmx5IGdjYy00
-LjYgYW5kCmdjYzQuNyBhY3R1YWxseSBuZWVkIHRoZSBzb25nLWFuZC1kYW5jZSB2ZXJzaW9uIHdp
-dGggdGhlIHVuaW9uIGFuZCBzd2l0Y2gvY2FzZSwKd2hpbGUgZm9yIG90aGVycywgd2UgY2FuIG1p
-Z2h0IGJlIGFibGUgYmFjayB0byBhIG1hY3JvIGRvaW5nIGEgdm9sYXRpbGUgYWNjZXNzLgoKICAg
-ICBBcm5kCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZp
-cnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3Vu
-ZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0
-aW5mby92aXJ0dWFsaXphdGlvbg==
+On Wed, 2019-11-06 at 10:03 -0500, Michael S. Tsirkin wrote:
+> On Wed, Nov 06, 2019 at 03:02:25PM +0100, Laurent Vivier wrote:
+> > On 06/11/2019 14:56, Michael S. Tsirkin wrote:
+> > > On Fri, Oct 18, 2019 at 06:47:18PM +0200, Laurent Vivier wrote:
+> > > > When we hot unplug a virtserialport and then try to hot plug
+> > > > again,
+> > > > it fails:
+> > > > 
+> > > > (qemu) chardev-add
+> > > > socket,id=serial0,path=/tmp/serial0,server,nowait
+> > > > (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+> > > >                   chardev=serial0,id=serial0,name=serial0
+> > > > (qemu) device_del serial0
+> > > > (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+> > > >                   chardev=serial0,id=serial0,name=serial0
+> > > > kernel error:
+> > > >   virtio-ports vport2p2: Error allocating inbufs
+> > > > qemu error:
+> > > >   virtio-serial-bus: Guest failure in adding port 2 for device
+> > > > \
+> > > >                      virtio-serial0.0
+> > > > 
+> > > > This happens because buffers for the in_vq are allocated when
+> > > > the port is
+> > > > added but are not released when the port is unplugged.
+> > > > 
+> > > > They are only released when virtconsole is removed (see
+> > > > a7a69ec0d8e4)
+> > > > 
+> > > > To avoid the problem and to be symmetric, we could allocate all
+> > > > the buffers
+> > > > in init_vqs() as they are released in remove_vqs(), but it
+> > > > sounds like
+> > > > a waste of memory.
+> > > > 
+> > > > Rather than that, this patch changes add_port() logic to only
+> > > > allocate the
+> > > > buffers if the in_vq has available free slots.
+> > > > 
+> > > > Fixes: a7a69ec0d8e4 ("virtio_console: free buffers after
+> > > > reset")
+> > > > Cc: mst@redhat.com
+> > > > Signed-off-by: Laurent Vivier <lvivier@redhat.com>
+> > > > ---
+> > > >  drivers/char/virtio_console.c | 17 +++++++++++------
+> > > >  1 file changed, 11 insertions(+), 6 deletions(-)
+> > > > 
+> > > > diff --git a/drivers/char/virtio_console.c
+> > > > b/drivers/char/virtio_console.c
+> > > > index 7270e7b69262..77105166fe01 100644
+> > > > --- a/drivers/char/virtio_console.c
+> > > > +++ b/drivers/char/virtio_console.c
+> > > > @@ -1421,12 +1421,17 @@ static int add_port(struct ports_device
+> > > > *portdev, u32 id)
+> > > >  	spin_lock_init(&port->outvq_lock);
+> > > >  	init_waitqueue_head(&port->waitqueue);
+> > > >  
+> > > > -	/* Fill the in_vq with buffers so the host can send us
+> > > > data. */
+> > > > -	nr_added_bufs = fill_queue(port->in_vq, &port-
+> > > > >inbuf_lock);
+> > > > -	if (!nr_added_bufs) {
+> > > > -		dev_err(port->dev, "Error allocating
+> > > > inbufs\n");
+> > > > -		err = -ENOMEM;
+> > > > -		goto free_device;
+> > > > +	/* if the in_vq has not already been filled (the port
+> > > > has already been
+> > > > +	 * used and unplugged), fill the in_vq with buffers so
+> > > > the host can
+> > > > +	 * send us data.
+> > > > +	 */
+> > > > +	if (port->in_vq->num_free != 0) {
+> > > > +		nr_added_bufs = fill_queue(port->in_vq, &port-
+> > > > >inbuf_lock);
+> > > > +		if (!nr_added_bufs) {
+> > > > +			dev_err(port->dev, "Error allocating
+> > > > inbufs\n");
+> > > > +			err = -ENOMEM;
+> > > > +			goto free_device;
+> > > > +		}
+> > > >  	}
+> > > >  
+> > > >  	if (is_rproc_serial(port->portdev->vdev))
+> > > 
+> > > Well fill_queue will just add slots as long as it can.
+> > > So on a full queue it does nothing. How does this patch help?
+> > 
+> > Yes, but in this case it returns 0 and so add_port() fails and
+> > exits
+> > with -ENOMEM and the device is freed. It's what this patch tries to
+> > avoid.
+> > 
+> > Thanks,
+> > Laurent
+> 
+> Oh I see. However it's a bit asymmetrical to special case ring full.
+> How about making fill_queue return int and testing return code for
+> -ENOSPC instead? Will also help propagate errors correctly.
+
+Yes, I like this better too.
+
+Can you call out which commit introduced this behaviour / regression?
+
+> 
+> And I guess CC stable?
+> 
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
