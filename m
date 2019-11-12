@@ -2,95 +2,80 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E01AF7A00
-	for <lists.virtualization@lfdr.de>; Mon, 11 Nov 2019 18:31:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C1C3F8C0C
+	for <lists.virtualization@lfdr.de>; Tue, 12 Nov 2019 10:40:44 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id 6B281E0E;
-	Mon, 11 Nov 2019 17:31:02 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id F1F7FCC7;
+	Tue, 12 Nov 2019 09:40:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 16D57DC9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 18EB2941
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 11 Nov 2019 17:31:01 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
-	[207.211.31.81])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 8A15389E
+	Tue, 12 Nov 2019 09:40:36 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.7.6
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 14FE6623
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 11 Nov 2019 17:31:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1573493459;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=/Pu/XRjHN00bp26uJKyF+eeNc+4bMeKaeoX1nXunFjQ=;
-	b=B3+zBx3A2z2CLJYpuFDga6a7BkjYtwct6WzeFGE4DPuIk6ZDgh7rcQkFqMtr9SOl7empPi
-	GW74xE2ZQsZM+CH7qb2SsvThkQ7S8IF4PmM+XAlRDH/gBdeM3d5Gt39oDeDoy5RrDNf3ao
-	bA9YoAkCi3r7XEeWwf5sN6kyXAc0Tr0=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
-	[209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-49-qhhB-lolO8aAOwh2GIs2KQ-1; Mon, 11 Nov 2019 12:30:57 -0500
-Received: by mail-wr1-f70.google.com with SMTP id p6so10331925wrs.5
+	Tue, 12 Nov 2019 09:40:34 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id z19so2165291wmk.3
 	for <virtualization@lists.linux-foundation.org>;
-	Mon, 11 Nov 2019 09:30:57 -0800 (PST)
+	Tue, 12 Nov 2019 01:40:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ejx/kqQy3kcUiiFlaD/FPSSHJrxrW00iUrEoU2xAx90=;
+	b=lWbjKPSh3T/bDqJI/OHcdLlHvZS5ZQztXcO2OXBpY5i56aD1VdfCigUlZJ3ECo8PkX
+	c5BD6/OUUkowHGZ0krgx5x2QCrVgAaZYg8lbDU4ZKdFofGst8i6HqOXyIbBwSmdeZoYl
+	d1iLL7m24zo7aI/7PXf4CBZRYc/omP54nwyD8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to;
-	bh=OGemqcYu9gXrdCs7NgbTRCHoieRkJLCT5RXpmkbgD3I=;
-	b=PpP4ZuI2z/YReX2IbmNO61IUQ7lsCtNx+jF0VOjeofMLwQ/oYIwUPwBBU+NbdairAF
-	Zg/uVKPoAlNZpooK61trP/Ne4QlZ8KLWKe3SklZ7KYpwvM1ahbiklnnHc1crQ91U525N
-	Bp9VkAgqBp4uKeMz1ZYxkvl94luOsWPdJb4Q72aks4jNgqteEqZBdnSP9vdoimixlY8j
-	EUKDwxGy/0JCgJUXqULAIjz5bxvzkGWeK2vZmTxqyKmlW+b/Z0RlQGbTTOFanNNs/p1P
-	Z7RC0DkkcyUF+RBBgRU714dNxsMcwFzRNcw8qsep0LvQBuHVXNSdfwJ73a1Z6p90NmGG
-	aUKQ==
-X-Gm-Message-State: APjAAAXaxcId2uAyi+NQEP0TCRNH/Uu/gGColZJkoXB060LEQ664W6WH
-	UvQmGaaIiGjWSehUtvt7osGnv56sw+7TiufkPtxqAlYDBALn1mF2RnvqSVn2jpvmD7m79OnIVpd
-	5ydY+GpTCyLUupQe2+/2lnystp+jZTs0CjTAX3YCmjw==
-X-Received: by 2002:adf:ed4b:: with SMTP id u11mr2059900wro.215.1573493456386; 
-	Mon, 11 Nov 2019 09:30:56 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxtK1/4KWgD9KPJoU+tAGhHUeUEQrzwzlucpPtfP0PmUdGJAdIPC9pkDZltrDfXpW0g+AEtzQ==
-X-Received: by 2002:adf:ed4b:: with SMTP id u11mr2059871wro.215.1573493456151; 
-	Mon, 11 Nov 2019 09:30:56 -0800 (PST)
-Received: from steredhat (a-nu5-32.tin.it. [212.216.181.31])
-	by smtp.gmail.com with ESMTPSA id m1sm1701700wrv.37.2019.11.11.09.30.54
+	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+	:mail-followup-to:references:mime-version:content-disposition
+	:in-reply-to:user-agent;
+	bh=ejx/kqQy3kcUiiFlaD/FPSSHJrxrW00iUrEoU2xAx90=;
+	b=heHwTrZrCCy+oIw7FMBXc0060l4V0Y4Yxb1zdqFxctQX4wdC7ARYJP7jM0Kc373JuV
+	ocfHc+B/A7BJ85P9EnoLdg7FC1IZPF0Uiinz8/x3GdUaPeilGrtR4xAD/1WM5UdER90r
+	03ZjaIT8MAwtKVoMhnQC4gjpIloO5dEfTOmrsfJQoHGeCxX/lcW6Kgb+Giqb/SXS0k5K
+	1WIfA4zzeq9MT/FYAf1RgFtcWyJzMhzoWV412f9SY/BvjZKl2qSpXCQei+uS28N5grMm
+	0YEmGcRqIvBYTS8wsU2f4n6GEv1fN1GUB73+L08WZx4dNpJOWlkBbDaJbwVa1aW5as6R
+	4l3w==
+X-Gm-Message-State: APjAAAWxA3+3Z2jCH2Wyb/NT/c/9V+OK1hTOjCY3qVTg+2NWs7/C9yyg
+	7A3wfCVgvaARJPjxtOBu67OnsQ==
+X-Google-Smtp-Source: APXvYqwrO8bU+BJYM7oebMXYjkT49Im67i7AQuC63Zqgak8bgNrt+yEN/H6dPBWSj91L92X3BD5VAw==
+X-Received: by 2002:a1c:c28a:: with SMTP id s132mr2985572wmf.162.1573551633503;
+	Tue, 12 Nov 2019 01:40:33 -0800 (PST)
+Received: from phenom.ffwll.local (212-51-149-96.fiber7.init7.net.
+	[212.51.149.96]) by smtp.gmail.com with ESMTPSA id
+	62sm26900378wre.38.2019.11.12.01.40.32
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 11 Nov 2019 09:30:55 -0800 (PST)
-Date: Mon, 11 Nov 2019 18:30:53 +0100
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jorgen Hansen <jhansen@vmware.com>
-Subject: Re: [PATCH net-next 12/14] vsock/vmci: register vmci_transport only
-	when VMCI guest/host are active
-Message-ID: <20191111173053.erwfzawioxje635o@steredhat>
-References: <20191023095554.11340-1-sgarzare@redhat.com>
-	<20191023095554.11340-13-sgarzare@redhat.com>
-	<MWHPR05MB3376266BC6AE9E6E0B75F1A1DA740@MWHPR05MB3376.namprd05.prod.outlook.com>
+	Tue, 12 Nov 2019 01:40:32 -0800 (PST)
+Date: Tue, 12 Nov 2019 10:40:31 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Chuhong Yuan <hslester96@gmail.com>
+Subject: Re: [PATCH] drm/virtgpu: fix double unregistration
+Message-ID: <20191112094031.GF23790@phenom.ffwll.local>
+Mail-Followup-To: Chuhong Yuan <hslester96@gmail.com>,
+	David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+	dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org,
+	linux-kernel@vger.kernel.org
+References: <20191109075417.29808-1-hslester96@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <MWHPR05MB3376266BC6AE9E6E0B75F1A1DA740@MWHPR05MB3376.namprd05.prod.outlook.com>
-X-MC-Unique: qhhB-lolO8aAOwh2GIs2KQ-1
-X-Mimecast-Spam-Score: 0
 Content-Disposition: inline
-X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+In-Reply-To: <20191109075417.29808-1-hslester96@gmail.com>
+X-Operating-System: Linux phenom 5.2.0-3-amd64 
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU,
+	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Sasha Levin <sashal@kernel.org>,
-	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
-	Stephen Hemminger <sthemmin@microsoft.com>, Arnd Bergmann <arnd@arndb.de>,
-	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	Dexuan Cui <decui@microsoft.com>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"David S. Miller" <davem@davemloft.net>
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+	Daniel Vetter <daniel@ffwll.ch>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -107,69 +92,47 @@ Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Mon, Nov 11, 2019 at 04:27:28PM +0000, Jorgen Hansen wrote:
-> > From: Stefano Garzarella [mailto:sgarzare@redhat.com]
-> > Sent: Wednesday, October 23, 2019 11:56 AM
-> > 
-> > To allow other transports to be loaded with vmci_transport,
-> > we register the vmci_transport as G2H or H2G only when a VMCI guest
-> > or host is active.
-> > 
-> > To do that, this patch adds a callback registered in the vmci driver
-> > that will be called when a new host or guest become active.
-> > This callback will register the vmci_transport in the VSOCK core.
-> > If the transport is already registered, we ignore the error coming
-> > from vsock_core_register().
+On Sat, Nov 09, 2019 at 03:54:17PM +0800, Chuhong Yuan wrote:
+> drm_put_dev also calls drm_dev_unregister, so dev will be unregistered
+> twice.
+> Replace it with drm_dev_put to fix it.
 > 
-> So today this is mainly an issue for the VMCI vsock transport, because
-> VMCI autoloads with vsock (and with this solution it can continue to
-> do that, so none of our old products break due to changed behavior,
-> which is great).
+> Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
 
-I tried to not break anything :-)
+Nice catch, I'll apply.
 
->                  Shouldn't vhost behave similar, so that any module
-> that registers a h2g transport only does so if it is in active use?
+Since this is so confusing, we actually have a todo to remove drm_put_dev
+completely from the codebase (and open-code it with explicit
+unregister+put). Want to do that little patch series to update the
+remaining few drivers and then remove drm_put_dev from core code?
+
+Thanks, Daniel
+
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_drv.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+> index 0fc32fa0b3c0..fccc24e21af8 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
+> @@ -138,7 +138,7 @@ static void virtio_gpu_remove(struct virtio_device *vdev)
+>  
+>  	drm_dev_unregister(dev);
+>  	virtio_gpu_deinit(dev);
+> -	drm_put_dev(dev);
+> +	drm_dev_put(dev);
+>  }
+>  
+>  static void virtio_gpu_config_changed(struct virtio_device *vdev)
+> -- 
+> 2.23.0
 > 
 
-The vhost-vsock module will load when the first hypervisor open
-/dev/vhost-vsock, so in theory, when there's at least one active user.
-
-> 
-> > --- a/drivers/misc/vmw_vmci/vmci_host.c
-> > +++ b/drivers/misc/vmw_vmci/vmci_host.c
-> > @@ -108,6 +108,11 @@ bool vmci_host_code_active(void)
-> >  	     atomic_read(&vmci_host_active_users) > 0);
-> >  }
-> > 
-> > +int vmci_host_users(void)
-> > +{
-> > +	return atomic_read(&vmci_host_active_users);
-> > +}
-> > +
-> >  /*
-> >   * Called on open of /dev/vmci.
-> >   */
-> > @@ -338,6 +343,8 @@ static int vmci_host_do_init_context(struct
-> > vmci_host_dev *vmci_host_dev,
-> >  	vmci_host_dev->ct_type = VMCIOBJ_CONTEXT;
-> >  	atomic_inc(&vmci_host_active_users);
-> > 
-> > +	vmci_call_vsock_callback(true);
-> > +
-> 
-> Since we don't unregister the transport if user count drops back to 0, we could
-> just call this the first time, a VM is powered on after the module is loaded.
-
-Yes, make sense. can I use the 'vmci_host_active_users' or is better to
-add a new 'vmci_host_vsock_loaded'?
-
-My doubt is that vmci_host_active_users can return to 0, so when it returns
-to 1, we call vmci_call_vsock_callback() again.
-
-Thanks,
-Stefano
-
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
