@@ -2,80 +2,113 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C1C3F8C0C
-	for <lists.virtualization@lfdr.de>; Tue, 12 Nov 2019 10:40:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7263F8C56
+	for <lists.virtualization@lfdr.de>; Tue, 12 Nov 2019 10:59:23 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id F1F7FCC7;
-	Tue, 12 Nov 2019 09:40:36 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 5CCF71573;
+	Tue, 12 Nov 2019 09:59:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 18EB2941
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 618871567
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 12 Nov 2019 09:40:36 +0000 (UTC)
+	Tue, 12 Nov 2019 09:59:16 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 14FE6623
+Received: from NAM04-CO1-obe.outbound.protection.outlook.com
+	(mail-eopbgr690067.outbound.protection.outlook.com [40.107.69.67])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id 6E10A4C3
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 12 Nov 2019 09:40:34 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id z19so2165291wmk.3
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 12 Nov 2019 01:40:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
-	h=sender:date:from:to:cc:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ejx/kqQy3kcUiiFlaD/FPSSHJrxrW00iUrEoU2xAx90=;
-	b=lWbjKPSh3T/bDqJI/OHcdLlHvZS5ZQztXcO2OXBpY5i56aD1VdfCigUlZJ3ECo8PkX
-	c5BD6/OUUkowHGZ0krgx5x2QCrVgAaZYg8lbDU4ZKdFofGst8i6HqOXyIbBwSmdeZoYl
-	d1iLL7m24zo7aI/7PXf4CBZRYc/omP54nwyD8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-disposition
-	:in-reply-to:user-agent;
-	bh=ejx/kqQy3kcUiiFlaD/FPSSHJrxrW00iUrEoU2xAx90=;
-	b=heHwTrZrCCy+oIw7FMBXc0060l4V0Y4Yxb1zdqFxctQX4wdC7ARYJP7jM0Kc373JuV
-	ocfHc+B/A7BJ85P9EnoLdg7FC1IZPF0Uiinz8/x3GdUaPeilGrtR4xAD/1WM5UdER90r
-	03ZjaIT8MAwtKVoMhnQC4gjpIloO5dEfTOmrsfJQoHGeCxX/lcW6Kgb+Giqb/SXS0k5K
-	1WIfA4zzeq9MT/FYAf1RgFtcWyJzMhzoWV412f9SY/BvjZKl2qSpXCQei+uS28N5grMm
-	0YEmGcRqIvBYTS8wsU2f4n6GEv1fN1GUB73+L08WZx4dNpJOWlkBbDaJbwVa1aW5as6R
-	4l3w==
-X-Gm-Message-State: APjAAAWxA3+3Z2jCH2Wyb/NT/c/9V+OK1hTOjCY3qVTg+2NWs7/C9yyg
-	7A3wfCVgvaARJPjxtOBu67OnsQ==
-X-Google-Smtp-Source: APXvYqwrO8bU+BJYM7oebMXYjkT49Im67i7AQuC63Zqgak8bgNrt+yEN/H6dPBWSj91L92X3BD5VAw==
-X-Received: by 2002:a1c:c28a:: with SMTP id s132mr2985572wmf.162.1573551633503;
-	Tue, 12 Nov 2019 01:40:33 -0800 (PST)
-Received: from phenom.ffwll.local (212-51-149-96.fiber7.init7.net.
-	[212.51.149.96]) by smtp.gmail.com with ESMTPSA id
-	62sm26900378wre.38.2019.11.12.01.40.32
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 12 Nov 2019 01:40:32 -0800 (PST)
-Date: Tue, 12 Nov 2019 10:40:31 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Chuhong Yuan <hslester96@gmail.com>
-Subject: Re: [PATCH] drm/virtgpu: fix double unregistration
-Message-ID: <20191112094031.GF23790@phenom.ffwll.local>
-Mail-Followup-To: Chuhong Yuan <hslester96@gmail.com>,
-	David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
-	dri-devel@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org,
-	linux-kernel@vger.kernel.org
-References: <20191109075417.29808-1-hslester96@gmail.com>
+	Tue, 12 Nov 2019 09:59:15 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=M+1Kik3HbB/I4dD6iX1MjiG4XPRZEvI1sDauDsfE1tDTPVvaPcrnNs1Aw4Hk10+obWNW3YF1PvJorS1B3Mzvv/PkeJF0i5bmH2VvXv1QLbi4Yk5CCOF4qOwHcegGVTLUcDU3supzIpu/aIQyg56mBQsC7IkH3+UEmYmJC6hbF1f4pZiDqHiGJkPFzaDJHo7DyejKhDkpYms8x9kg/a31S55U7JhiMOA5VoRZicR4hSB0RbD7LE3Sqkviuvzrgvqx8zegmpeA/dY/A0RpxbKo0oFfi9dfTeFH39y0+7seXyAq5yh2YhVnIfcMbtcqDNnuEPwsE5HYSVf+nrsfmylXyA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=hnB+URNR5KQXvtEQBC8NZJVUf5ATZ6vNJRSpQFvOto0=;
+	b=Kp5EiH5F5lRdgYM6vTmp+VbX60GRA7AnFCFq9HNy+vSOKtQMXz4bdZPrhmGFom0KytozO2N+wXiA4iLzVvL1+d3/zB4Pk6ife9xGfQ9YIJqFpusNrTowHf3RXYJx/Z+1Kx8ChqmTgFOQm4EchU5xfXO6U5miVgIb8KngkhhXQ11ljdUzcQVMJ07YgELgVq7wX1U2Txkjd8NfGz2U5nMH4WMiEjHIksnRABr5AAMgt4RFNAqvOoqdcs0OR4PMKjARy2fBiGjaAag6nF5RoOmo81czVmkf9rA2dOH5K/KgXZs3kaXTlbJCZz1+jaU8le7aWxcsFNiTKFSeHYZotz7L/g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
+	dkim=pass header.d=vmware.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
+	s=selector2;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=hnB+URNR5KQXvtEQBC8NZJVUf5ATZ6vNJRSpQFvOto0=;
+	b=nym9izq4rYVReJtb6M+Oqhxt6/g6QgrfbVMC10OecoP//baIUXyXYqd0zAg996fDwMBiT3gDvJcSu4cpxOCXqa4bELv00OJt04yHyMpWt1BW195fYxZiqLJT3D6Sf1sedXKMWPIzHZg9usFRoqvR7qFnTbvDTqSoGPAqvUtk5uA=
+Received: from MWHPR05MB3376.namprd05.prod.outlook.com (10.174.175.149) by
+	MWHPR05MB2815.namprd05.prod.outlook.com (10.168.245.146) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2451.21; Tue, 12 Nov 2019 09:59:13 +0000
+Received: from MWHPR05MB3376.namprd05.prod.outlook.com
+	([fe80::4098:2c39:d8d3:a209]) by
+	MWHPR05MB3376.namprd05.prod.outlook.com
+	([fe80::4098:2c39:d8d3:a209%7]) with mapi id 15.20.2451.018;
+	Tue, 12 Nov 2019 09:59:12 +0000
+To: 'Stefano Garzarella' <sgarzare@redhat.com>
+Subject: RE: [PATCH net-next 11/14] vsock: add multi-transports support
+Thread-Topic: [PATCH net-next 11/14] vsock: add multi-transports support
+Thread-Index: AQHViYhm3+s3qIN1EEmJgzgCfyvFAqeGCo7QgABKOACAAQ6AQA==
+Date: Tue, 12 Nov 2019 09:59:12 +0000
+Message-ID: <MWHPR05MB33764F82AFA882B921A11E56DA770@MWHPR05MB3376.namprd05.prod.outlook.com>
+References: <20191023095554.11340-1-sgarzare@redhat.com>
+	<20191023095554.11340-12-sgarzare@redhat.com>
+	<MWHPR05MB33761FE4DA27130C72FC5048DA740@MWHPR05MB3376.namprd05.prod.outlook.com>
+	<20191111171740.xwo7isdmtt7ywibo@steredhat>
+In-Reply-To: <20191111171740.xwo7isdmtt7ywibo@steredhat>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=jhansen@vmware.com; 
+x-originating-ip: [208.91.2.2]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: a2ec1a5d-5f63-441d-dfaf-08d76756f878
+x-ms-traffictypediagnostic: MWHPR05MB2815:
+x-microsoft-antispam-prvs: <MWHPR05MB2815A531CCA8D39A5ABC467EDA770@MWHPR05MB2815.namprd05.prod.outlook.com>
+x-vmwhitelist: True
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-forefront-prvs: 021975AE46
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(4636009)(39860400002)(376002)(346002)(366004)(136003)(396003)(43544003)(189003)(199004)(476003)(8676002)(76116006)(76176011)(7696005)(6436002)(66946007)(74316002)(7736002)(316002)(102836004)(53546011)(6506007)(6916009)(305945005)(5660300002)(26005)(4326008)(11346002)(446003)(8936002)(81156014)(81166006)(486006)(6246003)(25786009)(7416002)(66066001)(52536014)(66556008)(14454004)(478600001)(66446008)(64756008)(99286004)(229853002)(2906002)(9686003)(86362001)(186003)(54906003)(33656002)(71190400001)(71200400001)(66476007)(55016002)(6116002)(3846002)(256004)(14444005);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:MWHPR05MB2815;
+	H:MWHPR05MB3376.namprd05.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: vmware.com does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: w0KwgTGwgWNJie4Y02bZQl8VgyyuPNMNRv3c3Quuneb8gsDJMPR0rEp/Iu55udVZxliGIK9Gq0z6vaRris7PmxHu6lB6L8+0e1w1nsFnRBLBRMl0eyGV/rAlE36GUbg6KlMTY++/U6AsmSOHSvhaybHESrQL45nul+WndUNORqDhX6Sq0iwdAC3Yo4j6PCUjVRi5gm/FwJl8g05S96gpGNCL6/W2HOUnWeZ9UJelsRR6enzSjsg1YokkGRJZjuGbqUWpc8OkFMOXEbivClc2huk/iRu55eGUBjhrNwuUCstmXOd61mr/VKJDiipvgZrwD3R/wQMExiB0MOSvYo2FuUzxc2ZiXj5MUAl8MglekzNUfMPsVZamvd4TQW9fmvezt0mUE0WVo+sifexrU6Zk7TZDdTjjoMI0C8W4he1ACbETdxjPCCXdPN4LfncRBW+r
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191109075417.29808-1-hslester96@gmail.com>
-X-Operating-System: Linux phenom 5.2.0-3-amd64 
-User-Agent: Mutt/1.12.2 (2019-09-21)
+X-OriginatorOrg: vmware.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2ec1a5d-5f63-441d-dfaf-08d76756f878
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Nov 2019 09:59:12.8424 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: L3FgC4NNAX8vMDP9RyqM0A+rfAc+t0dUMm+0rsS0ubm+H0GGhGGJrgWWGj3UluOeRhvl1gfIBXKkxCh1l8hLRw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR05MB2815
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU,
 	RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
-	Daniel Vetter <daniel@ffwll.ch>
+Cc: Sasha Levin <sashal@kernel.org>,
+	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+	Stephen Hemminger <sthemmin@microsoft.com>, Arnd Bergmann <arnd@arndb.de>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"virtualization@lists.linux-foundation.org"
+	<virtualization@lists.linux-foundation.org>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -87,52 +120,275 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Jorgen Hansen via Virtualization
+	<virtualization@lists.linux-foundation.org>
+Reply-To: Jorgen Hansen <jhansen@vmware.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Sat, Nov 09, 2019 at 03:54:17PM +0800, Chuhong Yuan wrote:
-> drm_put_dev also calls drm_dev_unregister, so dev will be unregistered
-> twice.
-> Replace it with drm_dev_put to fix it.
+> From: Stefano Garzarella [mailto:sgarzare@redhat.com]
+> Sent: Monday, November 11, 2019 6:18 PM
+> To: Jorgen Hansen <jhansen@vmware.com>
+> Subject: Re: [PATCH net-next 11/14] vsock: add multi-transports support
 > 
-> Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
-
-Nice catch, I'll apply.
-
-Since this is so confusing, we actually have a todo to remove drm_put_dev
-completely from the codebase (and open-code it with explicit
-unregister+put). Want to do that little patch series to update the
-remaining few drivers and then remove drm_put_dev from core code?
-
-Thanks, Daniel
-
-> ---
->  drivers/gpu/drm/virtio/virtgpu_drv.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> On Mon, Nov 11, 2019 at 01:53:39PM +0000, Jorgen Hansen wrote:
+> > > From: Stefano Garzarella [mailto:sgarzare@redhat.com]
+> > > Sent: Wednesday, October 23, 2019 11:56 AM
+> >
+> > Thanks a lot for working on this!
+> >
 > 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> index 0fc32fa0b3c0..fccc24e21af8 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> @@ -138,7 +138,7 @@ static void virtio_gpu_remove(struct virtio_device *vdev)
->  
->  	drm_dev_unregister(dev);
->  	virtio_gpu_deinit(dev);
-> -	drm_put_dev(dev);
-> +	drm_dev_put(dev);
->  }
->  
->  static void virtio_gpu_config_changed(struct virtio_device *vdev)
-> -- 
-> 2.23.0
+> Thanks to you for the reviews!
 > 
+> > > With the multi-transports support, we can use vsock with nested VMs
+> (using
+> > > also different hypervisors) loading both guest->host and
+> > > host->guest transports at the same time.
+> > >
+> > > Major changes:
+> > > - vsock core module can be loaded regardless of the transports
+> > > - vsock_core_init() and vsock_core_exit() are renamed to
+> > >   vsock_core_register() and vsock_core_unregister()
+> > > - vsock_core_register() has a feature parameter (H2G, G2H, DGRAM)
+> > >   to identify which directions the transport can handle and if it's
+> > >   support DGRAM (only vmci)
+> > > - each stream socket is assigned to a transport when the remote CID
+> > >   is set (during the connect() or when we receive a connection request
+> > >   on a listener socket).
+> >
+> > How about allowing the transport to be set during bind as well? That
+> > would allow an application to ensure that it is using a specific transport,
+> > i.e., if it binds to the host CID, it will use H2G, and if it binds to something
+> > else it will use G2H? You can still use VMADDR_CID_ANY if you want to
+> > initially listen to both transports.
+> 
+> Do you mean for socket that will call the connect()?
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+I was just thinking that in general we know the transport at that point, so we
+could ensure that the socket would only see traffic from the relevant transport,
+but as you mention below -  the updated bind lookup, and the added checks
+when selecting transport should also take care of this, so that is fine.
+ 
+> For listener socket the "[PATCH net-next 14/14] vsock: fix bind() behaviour
+> taking care of CID" provides this behaviour.
+> Since the listener sockets don't use any transport specific callback
+> (they don't send any data to the remote peer), but they are used as
+> placeholder,
+> we don't need to assign them to a transport.
+> 
+> >
+> >
+> > >   The remote CID is used to decide which transport to use:
+> > >   - remote CID > VMADDR_CID_HOST will use host->guest transport
+> > >   - remote CID <= VMADDR_CID_HOST will use guest->host transport
+> > > - listener sockets are not bound to any transports since no transport
+> > >   operations are done on it. In this way we can create a listener
+> > >   socket, also if the transports are not loaded or with VMADDR_CID_ANY
+> > >   to listen on all transports.
+> > > - DGRAM sockets are handled as before, since only the vmci_transport
+> > >   provides this feature.
+> > >
+> > > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+> > > ---
+> > > RFC -> v1:
+> > > - documented VSOCK_TRANSPORT_F_* flags
+> > > - fixed vsock_assign_transport() when the socket is already assigned
+> > >   (e.g connection failed)
+> > > - moved features outside of struct vsock_transport, and used as
+> > >   parameter of vsock_core_register()
+> > > ---
+> > >  drivers/vhost/vsock.c                   |   5 +-
+> > >  include/net/af_vsock.h                  |  17 +-
+> > >  net/vmw_vsock/af_vsock.c                | 237 ++++++++++++++++++------
+> > >  net/vmw_vsock/hyperv_transport.c        |  26 ++-
+> > >  net/vmw_vsock/virtio_transport.c        |   7 +-
+> > >  net/vmw_vsock/virtio_transport_common.c |  28 ++-
+> > >  net/vmw_vsock/vmci_transport.c          |  31 +++-
+> > >  7 files changed, 270 insertions(+), 81 deletions(-)
+> > >
+> >
+> >
+> > > diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
+> index
+> > > d89381166028..dddd85d9a147 100644
+> > > --- a/net/vmw_vsock/af_vsock.c
+> > > +++ b/net/vmw_vsock/af_vsock.c
+> > > @@ -130,7 +130,12 @@ static struct proto vsock_proto = {  #define
+> > > VSOCK_DEFAULT_BUFFER_MAX_SIZE (1024 * 256)  #define
+> > > VSOCK_DEFAULT_BUFFER_MIN_SIZE 128
+> > >
+> > > -static const struct vsock_transport *transport_single;
+> > > +/* Transport used for host->guest communication */ static const struct
+> > > +vsock_transport *transport_h2g;
+> > > +/* Transport used for guest->host communication */ static const struct
+> > > +vsock_transport *transport_g2h;
+> > > +/* Transport used for DGRAM communication */ static const struct
+> > > +vsock_transport *transport_dgram;
+> > >  static DEFINE_MUTEX(vsock_register_mutex);
+> > >
+> > >  /**** UTILS ****/
+> > > @@ -182,7 +187,7 @@ static int vsock_auto_bind(struct vsock_sock *vsk)
+> > >  	return __vsock_bind(sk, &local_addr);
+> > >  }
+> > >
+> > > -static int __init vsock_init_tables(void)
+> > > +static void vsock_init_tables(void)
+> > >  {
+> > >  	int i;
+> > >
+> > > @@ -191,7 +196,6 @@ static int __init vsock_init_tables(void)
+> > >
+> > >  	for (i = 0; i < ARRAY_SIZE(vsock_connected_table); i++)
+> > >  		INIT_LIST_HEAD(&vsock_connected_table[i]);
+> > > -	return 0;
+> > >  }
+> > >
+> > >  static void __vsock_insert_bound(struct list_head *list, @@ -376,6
+> +380,62
+> > > @@ void vsock_enqueue_accept(struct sock *listener, struct sock
+> > > *connected)  }  EXPORT_SYMBOL_GPL(vsock_enqueue_accept);
+> > >
+> > > +/* Assign a transport to a socket and call the .init transport callback.
+> > > + *
+> > > + * Note: for stream socket this must be called when vsk->remote_addr
+> is
+> > > +set
+> > > + * (e.g. during the connect() or when a connection request on a
+> > > +listener
+> > > + * socket is received).
+> > > + * The vsk->remote_addr is used to decide which transport to use:
+> > > + *  - remote CID > VMADDR_CID_HOST will use host->guest transport
+> > > + *  - remote CID <= VMADDR_CID_HOST will use guest->host transport
+> */
+> > > +int vsock_assign_transport(struct vsock_sock *vsk, struct vsock_sock
+> > > +*psk) {
+> > > +	const struct vsock_transport *new_transport;
+> > > +	struct sock *sk = sk_vsock(vsk);
+> > > +
+> > > +	switch (sk->sk_type) {
+> > > +	case SOCK_DGRAM:
+> > > +		new_transport = transport_dgram;
+> > > +		break;
+> > > +	case SOCK_STREAM:
+> > > +		if (vsk->remote_addr.svm_cid > VMADDR_CID_HOST)
+> > > +			new_transport = transport_h2g;
+> > > +		else
+> > > +			new_transport = transport_g2h;
+> > > +		break;
+> >
+> > You already mentioned that you are working on a fix for loopback
+> > here for the guest, but presumably a host could also do loopback.
+> 
+> IIUC we don't support loopback in the host, because in this case the
+> application will use the CID_HOST as address, but if we are in a nested
+> VM environment we are in trouble.
+
+If both src and dst CID are CID_HOST, we should be fairly sure that this
+Is host loopback, no? If src is anything else, we would do G2H.
+
+> 
+> Since several people asked about this feature at the KVM Forum, I would like
+> to add a new VMADDR_CID_LOCAL (i.e. using the reserved 1) and implement
+> loopback in the core.
+> 
+> What do you think?
+
+What kind of use cases are mentioned in the KVM forum for loopback? One concern
+is that we have to maintain yet another interprocess communication mechanism,
+even though other choices exist already  (and those are likely to be more efficient
+given the development time and specific focus that went into those). To me, the
+local connections are mainly useful as a way to sanity test the protocol and transports.
+However, if loopback is compelling, it would make sense have it in the core, since it
+shouldn't need a specific transport. 
+
+> 
+> > If we select transport during bind to a specific CID, this comment
+> 
+> Also in this case, are you talking about the peer that will call
+> connect()?
+
+The same thought as mentioned in the beginning - but as mentioned
+above, I agree that your updated bind and transport selection should
+handle this as well.
+ 
+> > Isn't relevant, but otherwise, we should look at the local addr as
+> > well, since a socket with local addr of host CID shouldn't use
+> > the guest to host transport, and a socket with local addr > host CID
+> > shouldn't use host to guest.
+> 
+> Yes, I agree, in my fix I'm looking at the local addr, and in L1 I'll
+> not allow to assign a CID to a nested L2 equal to the CID of L1 (in
+> vhost-vsock)
+> 
+> Maybe we can allow the host loopback (using CID_HOST), only if there isn't
+> G2H loaded, but also in this case I'd like to move the loopback in the vsock
+> core, since we can do that, also if there are no transports loaded.
+> >
+> >
+> > > +	default:
+> > > +		return -ESOCKTNOSUPPORT;
+> > > +	}
+> > > +
+> > > +	if (vsk->transport) {
+> > > +		if (vsk->transport == new_transport)
+> > > +			return 0;
+> > > +
+> > > +		vsk->transport->release(vsk);
+> > > +		vsk->transport->destruct(vsk);
+> > > +	}
+> > > +
+> > > +	if (!new_transport)
+> > > +		return -ENODEV;
+> > > +
+> > > +	vsk->transport = new_transport;
+> > > +
+> > > +	return vsk->transport->init(vsk, psk); }
+> > > +EXPORT_SYMBOL_GPL(vsock_assign_transport);
+> > > +
+> > > +static bool vsock_find_cid(unsigned int cid) {
+> > > +	if (transport_g2h && cid == transport_g2h->get_local_cid())
+> > > +		return true;
+> > > +
+> > > +	if (transport_h2g && cid == VMADDR_CID_HOST)
+> > > +		return true;
+> > > +
+> > > +	return false;
+> > > +}
+> > > +
+> > >  static struct sock *vsock_dequeue_accept(struct sock *listener)  {
+> > >  	struct vsock_sock *vlistener;
+> >
+> >
+> > > diff --git a/net/vmw_vsock/vmci_transport.c
+> > > b/net/vmw_vsock/vmci_transport.c index 5955238ffc13..2eb3f16d53e7
+> > > 100644
+> > > --- a/net/vmw_vsock/vmci_transport.c
+> > > +++ b/net/vmw_vsock/vmci_transport.c
+> >
+> > > @@ -1017,6 +1018,15 @@ static int vmci_transport_recv_listen(struct
+> sock
+> > > *sk,
+> > >  	vsock_addr_init(&vpending->remote_addr, pkt->dg.src.context,
+> > >  			pkt->src_port);
+> > >
+> > > +	err = vsock_assign_transport(vpending, vsock_sk(sk));
+> > > +	/* Transport assigned (looking at remote_addr) must be the same
+> > > +	 * where we received the request.
+> > > +	 */
+> > > +	if (err || !vmci_check_transport(vpending)) {
+> >
+> > We need to send a reset on error, i.e.,
+> >   vmci_transport_send_reset(sk, pkt);
+> 
+> Good catch, I'll fix in the v2.
+> 
+> Thanks,
+> Stefano
+
+Thanks,
+Jorgen
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
