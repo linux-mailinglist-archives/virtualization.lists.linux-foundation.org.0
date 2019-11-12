@@ -2,71 +2,67 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FD13F8D71
-	for <lists.virtualization@lfdr.de>; Tue, 12 Nov 2019 12:03:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B48AFF8EB0
+	for <lists.virtualization@lfdr.de>; Tue, 12 Nov 2019 12:37:01 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id CC60D14F4;
-	Tue, 12 Nov 2019 11:03:19 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id 908C7CC7;
+	Tue, 12 Nov 2019 11:36:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 5F71D14E6
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 0A03DB9E
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 12 Nov 2019 11:03:18 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id C92CDDF
+	Tue, 12 Nov 2019 11:36:54 +0000 (UTC)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTPS id AD5F112F
 	for <virtualization@lists.linux-foundation.org>;
-	Tue, 12 Nov 2019 11:03:17 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id m13so14543471edv.9
-	for <virtualization@lists.linux-foundation.org>;
-	Tue, 12 Nov 2019 03:03:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7v/v4nr+zqzk2y/jAd0gNZ9DfjLyLFd4Z21yLnvf0Dw=;
-	b=WGcrxOsczq3GVLUIOlQBv9NqR40pTHNB89f52HlTcJP/airVxcI1SbQma3s/xI/y9b
-	3FzS+nvwEDIrjUz2i2JkCwft5P+/PNYXiNcxG6SeQicGHSv4apY9rtF/iOfeKgKERvGi
-	49Mh+wxoUpPZaJmxb9Nw6btNQVViXnOh65IYkoGrkBwPGsVMEnTa7lGIUtfNvTF+Gn3V
-	Qe6PMS86mVL8zxP5qiu8kymKk6Zx8AH19LR1tOXygo4H+xoYMcZsRW7KYCViZ0cRc+oW
-	/MXLGW+zWRzqppdLzFyZg5PVEzdYx8ePWwKKIta0fJ9bjReuWFvvR2ms3JaP8Joey/fo
-	0Rkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7v/v4nr+zqzk2y/jAd0gNZ9DfjLyLFd4Z21yLnvf0Dw=;
-	b=bnBudHK8bEw8N6piyTuhtymJkEiDCvsUirxJFdK4/K0SJHtVf9xkr/iz1T5X9HX2l9
-	2JLYqtt4Eoz9HIYNCkV/MUcdcpYzXeX/z6MLGg83ZYgjBii89ER7RJi0KTfvYxwRjHYN
-	r9a0DMX6W7qa1BHuFfKcK2rDyuy9WWITz9fcjBtgNt7sfC6i3g854aoc/mGMf2dagJ5C
-	xTM7T8L2AgIAJdE38hRF9uGUZzxL8DizxpE8jYQUSiBdiZUNltpbqsD4UzDfi+xxABfP
-	q7rt8nosWuWheBD98U+IvMnA4uc7K2GeYivMzJJfFaax5/4knvinMD5e0glo55m0hcWt
-	NLzA==
-X-Gm-Message-State: APjAAAWc4pHJd1IDyi3ITiuTX7NXixuRnjuHZS2ExJstKWnwknnzmFJv
-	dZoUgtiRjGvSjCC2VVEoGDBxe4h61nlQAdgH338=
-X-Google-Smtp-Source: APXvYqyF5pycYcqNWugO2851/NH1Ih0TM/Tf5B7Bn9iBKqBF7TP/lwxHh3YlfKn//hB0aWX0AcvVEX/a2g+CgBbh4C8=
-X-Received: by 2002:a17:906:f109:: with SMTP id
-	gv9mr28018882ejb.196.1573556596349; 
-	Tue, 12 Nov 2019 03:03:16 -0800 (PST)
+	Tue, 12 Nov 2019 11:36:53 +0000 (UTC)
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+	bits)) (No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 61D6421925;
+	Tue, 12 Nov 2019 11:36:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1573558613;
+	bh=IBRZ0V+FizBPRXBE7AIelmGcF/rqx4zxpH+FTVnkzDQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=vgR6vb6pygOrhYdh1tLbICYpzNyLiNW/NGEr6J8+nCx71yHQDyEQ3zjASKeUfsJrC
+	tr9H+e8krqDcjj664LKgstygnZJcLRjtIzdyrNXpDLEotbjAeOGuGg3W0fRW/q0rLK
+	wrAAh0Cey56Uy6sOjPmN8QeMewVkm+GLfLdNBr24=
+Date: Tue, 12 Nov 2019 11:36:47 +0000
+From: Will Deacon <will@kernel.org>
+To: Arnd Bergmann <arnd@arndb.de>
+Subject: Re: [PATCH 01/13] compiler.h: Split {READ,WRITE}_ONCE definitions
+	out into rwonce.h
+Message-ID: <20191112113646.GC17835@willie-the-truck>
+References: <20191108170120.22331-1-will@kernel.org>
+	<20191108170120.22331-2-will@kernel.org>
+	<CAK8P3a0f=WvSQSBQ4t0FmEkcFE_mC3oARxaeTviTSkSa-D2qhg@mail.gmail.com>
+	<93f80017-d65e-7c3a-29b0-d9a568d08f58@de.ibm.com>
+	<CAK8P3a21KdGKMDDPs3jc9XEg3=LbzFnGwVm+xDTB+EqGXiZorA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20191109075417.29808-1-hslester96@gmail.com>
-	<20191112094031.GF23790@phenom.ffwll.local>
-In-Reply-To: <20191112094031.GF23790@phenom.ffwll.local>
-From: Chuhong Yuan <hslester96@gmail.com>
-Date: Tue, 12 Nov 2019 19:03:05 +0800
-Message-ID: <CANhBUQ1HRe4FNWo0o18zxV2ZoANRdNd3PaTeeBZ6dG__0quDUA@mail.gmail.com>
-Subject: Re: [PATCH] drm/virtgpu: fix double unregistration
-To: Chuhong Yuan <hslester96@gmail.com>, David Airlie <airlied@linux.ie>, 
-	Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org, 
-	virtualization@lists.linux-foundation.org, 
-	LKML <linux-kernel@vger.kernel.org>
-X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_ENVFROM_END_DIGIT,FREEMAIL_FROM,
-	RCVD_IN_DNSWL_NONE autolearn=no version=3.3.1
+Content-Disposition: inline
+In-Reply-To: <CAK8P3a21KdGKMDDPs3jc9XEg3=LbzFnGwVm+xDTB+EqGXiZorA@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Status: No, score=-7.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: "Paul E. McKenney" <paulmck@kernel.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Josh Triplett <josh@joshtriplett.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	SeongJae Park <sj38.park@gmail.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+	alpha <linux-alpha@vger.kernel.org>, Joe Perches <joe@perches.com>,
+	Alan Stern <stern@rowland.harvard.edu>,
+	Matt Turner <mattst88@gmail.com>, Yunjae Lee <lyj7694@gmail.com>,
+	virtualization@lists.linux-foundation.org,
+	Boqun Feng <boqun.feng@gmail.com>, Richard Henderson <rth@twiddle.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -78,73 +74,62 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
-On Tue, Nov 12, 2019 at 5:40 PM Daniel Vetter <daniel@ffwll.ch> wrote:
->
-> On Sat, Nov 09, 2019 at 03:54:17PM +0800, Chuhong Yuan wrote:
-> > drm_put_dev also calls drm_dev_unregister, so dev will be unregistered
-> > twice.
-> > Replace it with drm_dev_put to fix it.
+On Mon, Nov 11, 2019 at 10:32:46AM +0100, Arnd Bergmann wrote:
+> On Mon, Nov 11, 2019 at 9:10 AM Christian Borntraeger
+> <borntraeger@de.ibm.com> wrote:
+> > On 08.11.19 20:57, Arnd Bergmann wrote:
+> > > On Fri, Nov 8, 2019 at 6:01 PM Will Deacon <will@kernel.org> wrote:
+> > >>
+> > >> In preparation for allowing architectures to define their own
+> > >> implementation of the 'READ_ONCE()' macro, move the generic
+> > >> '{READ,WRITE}_ONCE()' definitions out of the unwieldy 'linux/compile=
+r.h'
+> > >> and into a new 'rwonce.h' header under 'asm-generic'.
+> > >
+> > > Adding Christian Borntr=E4ger to Cc, he originally added the
+> > > READ_ONCE()/WRITE_ONCE()
+> > > code.
+> > >
+> > > I wonder if it would be appropriate now to revert back to a much simp=
+ler version
+> > > of these helpers for any modern compiler. As I understand, only gcc-4=
+.6 and
+> > > gcc4.7 actually need the song-and-dance version with the union and sw=
+itch/case,
+> > > while for others, we can might be able back to a macro doing a volati=
+le access.
 > >
-> > Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
->
-> Nice catch, I'll apply.
->
-> Since this is so confusing, we actually have a todo to remove drm_put_dev
-> completely from the codebase (and open-code it with explicit
-> unregister+put). Want to do that little patch series to update the
-> remaining few drivers and then remove drm_put_dev from core code?
->
-> Thanks, Daniel
->
+> > As far as I know this particular issue with  volatile access on aggrega=
+te types
+> > was fixed in gcc 4.8. On the other hand we know that the current constr=
+uct will
+> > work on all compilers. Not so sure about the orignal ACCESS_ONCE implem=
+entation.
+> =
 
-I am sorry that I have to focus on my current project in recent days.
-But since this is a problem, I have written a Coccinelle script just now
-to find drm_put_dev and open-code it.
-I hope this helps.
-The script is:
+> I've seen problems with clang on the current version, leading to unnecess=
+ary
+> temporaries being spilled to the stack in some cases, so I think it would=
+ still
+> help to simplify it.
+> =
 
-virtual patch
+> We probably don't want the exact ACCESS_ONCE() implementation back
+> that existed before, but rather something that implements the stricter
+> READ_ONCE() and WRITE_ONCE(). I'd probably also want to avoid the
+> __builtin_memcpy() exception for odd-sized accesses and instead have
+> a separate way to do those.
 
-@ drm_put_dev depends on patch exists @
-expression dev;
-@@
+If you have a patch, I'm happy to carry it at the end of the series to
+avoid conflicts. It's not completely clear to me what you're after, so if
+you need me to adjust anything here then please shout!
 
-- drm_put_dev(dev);
-+ drm_dev_unregister(dev);
-+ drm_dev_put(dev);
-
-Regards,
-Chuhong
-> > ---
-> >  drivers/gpu/drm/virtio/virtgpu_drv.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> > index 0fc32fa0b3c0..fccc24e21af8 100644
-> > --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
-> > +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> > @@ -138,7 +138,7 @@ static void virtio_gpu_remove(struct virtio_device *vdev)
-> >
-> >       drm_dev_unregister(dev);
-> >       virtio_gpu_deinit(dev);
-> > -     drm_put_dev(dev);
-> > +     drm_dev_put(dev);
-> >  }
-> >
-> >  static void virtio_gpu_config_changed(struct virtio_device *vdev)
-> > --
-> > 2.23.0
-> >
->
-> --
-> Daniel Vetter
-> Software Engineer, Intel Corporation
-> http://blog.ffwll.ch
+Will
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
