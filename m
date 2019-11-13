@@ -2,55 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3ACEFB2B3
-	for <lists.virtualization@lfdr.de>; Wed, 13 Nov 2019 15:40:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14785FB2B6
+	for <lists.virtualization@lfdr.de>; Wed, 13 Nov 2019 15:40:35 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id A0C7DDC0;
-	Wed, 13 Nov 2019 14:40:17 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id D7FFDDDF;
+	Wed, 13 Nov 2019 14:40:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 2B1B3BA9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id 23B5CBA9
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 13 Nov 2019 14:40:17 +0000 (UTC)
+	Wed, 13 Nov 2019 14:40:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [207.211.31.81])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 3A11E8A
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+	[205.139.110.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 662598A
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 13 Nov 2019 14:40:12 +0000 (UTC)
+	Wed, 13 Nov 2019 14:40:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1573656010;
+	s=mimecast20190719; t=1573656025;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	in-reply-to:in-reply-to:references:references;
-	bh=bSHrFQsbaC1yAitK7Law8cbj6Z2ZKZzmHqlB5M3qljE=;
-	b=brfr55ZKu3Txa/qEfIXgJc9C/9PXXcbVyGb8rLXHHuiv/86Jnxxc8fqB43rojLLWpMVXJP
-	uICnQHvE2ZJk2pzGIwyyoGKCpCY+LcBy+vhYKx+EDeGSqNKskASiQyQSiCjWGVhmrrnS/c
-	rQq3bl/V5RUUjIMzY133om/2FDTLGhA=
+	bh=zjCOT9P28nv8a4MBtngrDC5z35NTofmz5vBBPAPm6Zg=;
+	b=KCaNTeJJ7EnV8WBhfdoOoVziF3CooBjNsHLP02y8u0Jwgzi2xf9yYpm0ZYVMcthgvw9tzu
+	icD8NK6VSaM+VuUV2dYWLvoIMi2n/8NLMn5Plih5mUkDbc8C20VI9zRuRRqnOSYdl3ZWO8
+	PLbp6zG+rdJKSfadTxyYAQ3NdDGpWzk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-177-yOlrfIIcMb-iBtVC6B25Hg-1; Wed, 13 Nov 2019 09:40:08 -0500
-X-MC-Unique: yOlrfIIcMb-iBtVC6B25Hg-1
+	us-mta-66-wZGniYHCNaWWRKsaHL3NSw-1; Wed, 13 Nov 2019 09:40:21 -0500
+X-MC-Unique: wZGniYHCNaWWRKsaHL3NSw-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
 	[10.5.11.12])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6C76C8EDBC1;
-	Wed, 13 Nov 2019 14:40:07 +0000 (UTC)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B61BD1804973;
+	Wed, 13 Nov 2019 14:40:20 +0000 (UTC)
 Received: from localhost (ovpn-117-166.ams2.redhat.com [10.36.117.166])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id EBE4860C88;
-	Wed, 13 Nov 2019 14:40:03 +0000 (UTC)
-Date: Wed, 13 Nov 2019 14:40:02 +0000
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4A6CD6106C;
+	Wed, 13 Nov 2019 14:40:20 +0000 (UTC)
+Date: Wed, 13 Nov 2019 14:40:18 +0000
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: Vivek Goyal <vgoyal@redhat.com>
-Subject: Re: [PATCH 3/3] virtiofs: Use completions while waiting for queue to
-	be drained
-Message-ID: <20191113144002.GB554680@stefanha-x1.localdomain>
+Subject: Re: [PATCH 0/3] virtiofs: Small Cleanups for 5.5
+Message-ID: <20191113144018.GC554680@stefanha-x1.localdomain>
 References: <20191030150719.29048-1-vgoyal@redhat.com>
-	<20191030150719.29048-4-vgoyal@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191030150719.29048-4-vgoyal@redhat.com>
+In-Reply-To: <20191030150719.29048-1-vgoyal@redhat.com>
 User-Agent: Mutt/1.12.1 (2019-06-15)
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Mimecast-Spam-Score: 0
@@ -72,44 +71,65 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1496840029369470473=="
+Content-Type: multipart/mixed; boundary="===============8759589861265519034=="
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
---===============1496840029369470473==
+--===============8759589861265519034==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="8P1HSweYDcXXzwPJ"
+	protocol="application/pgp-signature"; boundary="UPT3ojh+0CqEDtpF"
 Content-Disposition: inline
 
---8P1HSweYDcXXzwPJ
+--UPT3ojh+0CqEDtpF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 30, 2019 at 11:07:19AM -0400, Vivek Goyal wrote:
-> While we wait for queue to finish draining, use completions instead of
-> uslee_range(). This is better way of waiting for event.
+On Wed, Oct 30, 2019 at 11:07:16AM -0400, Vivek Goyal wrote:
+> Hi Miklos,
+>=20
+> Here are few small cleanups for virtiofs for 5.5. I had received some
+> comments from Michael Tsirkin on original virtiofs patches and these
+> cleanups are result of these comments.
+>=20
+> Thanks
+> Vivek
+>=20
+> Vivek Goyal (3):
+>   virtiofs: Use a common function to send forget
+>   virtiofs: Do not send forget request "struct list_head" element
+>   virtiofs: Use completions while waiting for queue to be drained
+>=20
+>  fs/fuse/virtio_fs.c | 204 ++++++++++++++++++++++----------------------
+>  1 file changed, 103 insertions(+), 101 deletions(-)
+>=20
+> --=20
+> 2.20.1
+>=20
 
-s/uslee_range()/usleep_range()/
+There are typos in the commit descriptions but the code looks fine:
 
---8P1HSweYDcXXzwPJ
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+
+--UPT3ojh+0CqEDtpF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl3MFcIACgkQnKSrs4Gr
-c8iVMQgAlnZ9d6GvnmORD+LRCvqgvHMMUlFoZS9nF/QBnEG7N4Pqr8BPRJw7Gi0D
-uBdcZjReMZY2fG9ZNXoMA0ivvPUPa3eDEBeuXlQrp8Qw4yx32ciL9VYvKly8vvV2
-2SMpOnsiuxDhldW2norjAP2piC7VCt+ni8x0yMTECQbaIfvrMhAxR/be/NWOj3pa
-RIFzuyeB4yqi73m0yRXtuN4AwL8Fzq/R0NFAfZDlGSiDmhWJ+xIJpPiL4ZfwVBaK
-hwzVPIkrA6TmDNNLtI7aCmVrQiA8lpnMH5FbKLmobmXjhedf4PwtiUEMSa3ESC6Y
-lBzMsJ4gnruQmDefdEdC1G7ohBHzSg==
-=47Ie
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl3MFdIACgkQnKSrs4Gr
+c8gz9gf8C1ie4Xi0WRMLEPRPpIjZue0W+WRJNTMJheJ+0d2dyTylZl1EOFrRI9Mz
+tlQtH/MUeJ999e1bX14gngArSdq5yrBMmk2OVngHa9CoPJlJ7CAT8R0uJFa0ca1X
+6QWdtDLTlcyKJGGl75bFqwT32R/iReCoQuzXRdO0h/tKPykm6NDDFhJJPtDeO4GM
+F+4C+1faPh0nMUp7lSGwIAJ4pgKYGc3URDSJpHj8X0mouYDBnoHtVErX6dMnxyw2
+jKGthgQDd2Ynx7NYecWmD+qfSMiBa7JUWgFpAreyVxnzONAKKUqAxmVShzdRdNm8
+zBAVkR0zFJEJljlOj9jfknJxGlecIg==
+=traL
 -----END PGP SIGNATURE-----
 
---8P1HSweYDcXXzwPJ--
+--UPT3ojh+0CqEDtpF--
 
 
---===============1496840029369470473==
+--===============8759589861265519034==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -119,5 +139,5 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============1496840029369470473==--
+--===============8759589861265519034==--
 
