@@ -2,63 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from mail.linuxfoundation.org (mail.linuxfoundation.org [140.211.169.12])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14785FB2B6
-	for <lists.virtualization@lfdr.de>; Wed, 13 Nov 2019 15:40:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1516DFB318
+	for <lists.virtualization@lfdr.de>; Wed, 13 Nov 2019 16:01:21 +0100 (CET)
 Received: from mail.linux-foundation.org (localhost [127.0.0.1])
-	by mail.linuxfoundation.org (Postfix) with ESMTP id D7FFDDDF;
-	Wed, 13 Nov 2019 14:40:27 +0000 (UTC)
+	by mail.linuxfoundation.org (Postfix) with ESMTP id BE8F2E7A;
+	Wed, 13 Nov 2019 15:01:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@mail.linuxfoundation.org
 Received: from smtp1.linuxfoundation.org (smtp1.linux-foundation.org
 	[172.17.192.35])
-	by mail.linuxfoundation.org (Postfix) with ESMTPS id 23B5CBA9
+	by mail.linuxfoundation.org (Postfix) with ESMTPS id DEF6AC6F
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 13 Nov 2019 14:40:27 +0000 (UTC)
+	Wed, 13 Nov 2019 15:01:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
-	[205.139.110.120])
-	by smtp1.linuxfoundation.org (Postfix) with ESMTP id 662598A
+	[207.211.31.120])
+	by smtp1.linuxfoundation.org (Postfix) with ESMTP id EC6E0DF
 	for <virtualization@lists.linux-foundation.org>;
-	Wed, 13 Nov 2019 14:40:26 +0000 (UTC)
+	Wed, 13 Nov 2019 15:01:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1573656025;
+	s=mimecast20190719; t=1573657267;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	in-reply-to:in-reply-to:references:references;
-	bh=zjCOT9P28nv8a4MBtngrDC5z35NTofmz5vBBPAPm6Zg=;
-	b=KCaNTeJJ7EnV8WBhfdoOoVziF3CooBjNsHLP02y8u0Jwgzi2xf9yYpm0ZYVMcthgvw9tzu
-	icD8NK6VSaM+VuUV2dYWLvoIMi2n/8NLMn5Plih5mUkDbc8C20VI9zRuRRqnOSYdl3ZWO8
-	PLbp6zG+rdJKSfadTxyYAQ3NdDGpWzk=
+	content-transfer-encoding:content-transfer-encoding;
+	bh=pZrVnWf11qMep6zPjTPieof4+h3HJFQO0raZCoFr0t8=;
+	b=Yr8uSatWsck0J4UxCx5bC/Jy7kOHp8jFvikfLjrbwSwQ/7qdzb8GoTnc1gN09RLIwPql2p
+	+2ukxrPl+bRCOHwLqId2IZurcRLVpCfJRFmagORtr8TgxGKvC2A2toUJdvqqSfMe4Z6SK5
+	nIEPJ0Rw9Cz2H/gaRK10CwldU1T5NLI=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
 	[209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
-	us-mta-66-wZGniYHCNaWWRKsaHL3NSw-1; Wed, 13 Nov 2019 09:40:21 -0500
-X-MC-Unique: wZGniYHCNaWWRKsaHL3NSw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	us-mta-349-oR_IZnsWO86m8XAGuP0U2w-1; Wed, 13 Nov 2019 10:01:04 -0500
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+	[10.5.11.11])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B61BD1804973;
-	Wed, 13 Nov 2019 14:40:20 +0000 (UTC)
-Received: from localhost (ovpn-117-166.ams2.redhat.com [10.36.117.166])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 4A6CD6106C;
-	Wed, 13 Nov 2019 14:40:20 +0000 (UTC)
-Date: Wed, 13 Nov 2019 14:40:18 +0000
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Vivek Goyal <vgoyal@redhat.com>
-Subject: Re: [PATCH 0/3] virtiofs: Small Cleanups for 5.5
-Message-ID: <20191113144018.GC554680@stefanha-x1.localdomain>
-References: <20191030150719.29048-1-vgoyal@redhat.com>
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 093F118B5F76;
+	Wed, 13 Nov 2019 15:01:02 +0000 (UTC)
+Received: from thinkpad.redhat.com (ovpn-117-236.ams2.redhat.com
+	[10.36.117.236])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id EDF3360308;
+	Wed, 13 Nov 2019 15:00:56 +0000 (UTC)
+From: Laurent Vivier <lvivier@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v2] virtio_console: allocate inbufs in add_port() only if it
+	is needed
+Date: Wed, 13 Nov 2019 16:00:56 +0100
+Message-Id: <20191113150056.9990-1-lvivier@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191030150719.29048-1-vgoyal@redhat.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-MC-Unique: oR_IZnsWO86m8XAGuP0U2w-1
 X-Mimecast-Spam-Score: 0
 X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID, DKIM_VALID_AU, RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	smtp1.linux-foundation.org
-Cc: miklos@szeredi.hu, linux-kernel@vger.kernel.org, dgilbert@redhat.com,
-	virtio-fs@redhat.com, linux-fsdevel@vger.kernel.org,
+Cc: Laurent Vivier <lvivier@redhat.com>, Arnd Bergmann <arnd@arndb.de>,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Amit Shah <amit@kernel.org>, stable@vger.kernel.org,
 	virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.12
@@ -71,73 +72,135 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
 	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8759589861265519034=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Sender: virtualization-bounces@lists.linux-foundation.org
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 
---===============8759589861265519034==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="UPT3ojh+0CqEDtpF"
-Content-Disposition: inline
+When we hot unplug a virtserialport and then try to hot plug again,
+it fails:
 
---UPT3ojh+0CqEDtpF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+(qemu) chardev-add socket,id=serial0,path=/tmp/serial0,server,nowait
+(qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+                  chardev=serial0,id=serial0,name=serial0
+(qemu) device_del serial0
+(qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+                  chardev=serial0,id=serial0,name=serial0
+kernel error:
+  virtio-ports vport2p2: Error allocating inbufs
+qemu error:
+  virtio-serial-bus: Guest failure in adding port 2 for device \
+                     virtio-serial0.0
 
-On Wed, Oct 30, 2019 at 11:07:16AM -0400, Vivek Goyal wrote:
-> Hi Miklos,
->=20
-> Here are few small cleanups for virtiofs for 5.5. I had received some
-> comments from Michael Tsirkin on original virtiofs patches and these
-> cleanups are result of these comments.
->=20
-> Thanks
-> Vivek
->=20
-> Vivek Goyal (3):
->   virtiofs: Use a common function to send forget
->   virtiofs: Do not send forget request "struct list_head" element
->   virtiofs: Use completions while waiting for queue to be drained
->=20
->  fs/fuse/virtio_fs.c | 204 ++++++++++++++++++++++----------------------
->  1 file changed, 103 insertions(+), 101 deletions(-)
->=20
-> --=20
-> 2.20.1
->=20
+This happens because buffers for the in_vq are allocated when the port is
+added but are not released when the port is unplugged.
 
-There are typos in the commit descriptions but the code looks fine:
+They are only released when virtconsole is removed (see a7a69ec0d8e4)
 
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+To avoid the problem and to be symmetric, we could allocate all the buffers
+in init_vqs() as they are released in remove_vqs(), but it sounds like
+a waste of memory.
 
---UPT3ojh+0CqEDtpF
-Content-Type: application/pgp-signature; name="signature.asc"
+Rather than that, this patch changes add_port() logic to ignore ENOSPC
+error in fill_queue(), which means queue has already been filled.
 
------BEGIN PGP SIGNATURE-----
+Fixes: a7a69ec0d8e4 ("virtio_console: free buffers after reset")
+Cc: mst@redhat.com
+Cc: stable@vger.kernel.org
+Signed-off-by: Laurent Vivier <lvivier@redhat.com>
+---
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl3MFdIACgkQnKSrs4Gr
-c8gz9gf8C1ie4Xi0WRMLEPRPpIjZue0W+WRJNTMJheJ+0d2dyTylZl1EOFrRI9Mz
-tlQtH/MUeJ999e1bX14gngArSdq5yrBMmk2OVngHa9CoPJlJ7CAT8R0uJFa0ca1X
-6QWdtDLTlcyKJGGl75bFqwT32R/iReCoQuzXRdO0h/tKPykm6NDDFhJJPtDeO4GM
-F+4C+1faPh0nMUp7lSGwIAJ4pgKYGc3URDSJpHj8X0mouYDBnoHtVErX6dMnxyw2
-jKGthgQDd2Ynx7NYecWmD+qfSMiBa7JUWgFpAreyVxnzONAKKUqAxmVShzdRdNm8
-zBAVkR0zFJEJljlOj9jfknJxGlecIg==
-=traL
------END PGP SIGNATURE-----
+Notes:
+    v2: making fill_queue return int and testing return code for -ENOSPC
 
---UPT3ojh+0CqEDtpF--
+ drivers/char/virtio_console.c | 24 +++++++++---------------
+ 1 file changed, 9 insertions(+), 15 deletions(-)
 
-
---===============8759589861265519034==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
+index 7270e7b69262..9e6534fd1aa4 100644
+--- a/drivers/char/virtio_console.c
++++ b/drivers/char/virtio_console.c
+@@ -1325,24 +1325,24 @@ static void set_console_size(struct port *port, u16 rows, u16 cols)
+ 	port->cons.ws.ws_col = cols;
+ }
+ 
+-static unsigned int fill_queue(struct virtqueue *vq, spinlock_t *lock)
++static int fill_queue(struct virtqueue *vq, spinlock_t *lock)
+ {
+ 	struct port_buffer *buf;
+-	unsigned int nr_added_bufs;
++	int nr_added_bufs;
+ 	int ret;
+ 
+ 	nr_added_bufs = 0;
+ 	do {
+ 		buf = alloc_buf(vq->vdev, PAGE_SIZE, 0);
+ 		if (!buf)
+-			break;
++			return -ENOMEM;
+ 
+ 		spin_lock_irq(lock);
+ 		ret = add_inbuf(vq, buf);
+ 		if (ret < 0) {
+ 			spin_unlock_irq(lock);
+ 			free_buf(buf, true);
+-			break;
++			return ret;
+ 		}
+ 		nr_added_bufs++;
+ 		spin_unlock_irq(lock);
+@@ -1362,7 +1362,6 @@ static int add_port(struct ports_device *portdev, u32 id)
+ 	char debugfs_name[16];
+ 	struct port *port;
+ 	dev_t devt;
+-	unsigned int nr_added_bufs;
+ 	int err;
+ 
+ 	port = kmalloc(sizeof(*port), GFP_KERNEL);
+@@ -1421,11 +1420,9 @@ static int add_port(struct ports_device *portdev, u32 id)
+ 	spin_lock_init(&port->outvq_lock);
+ 	init_waitqueue_head(&port->waitqueue);
+ 
+-	/* Fill the in_vq with buffers so the host can send us data. */
+-	nr_added_bufs = fill_queue(port->in_vq, &port->inbuf_lock);
+-	if (!nr_added_bufs) {
++	err = fill_queue(port->in_vq, &port->inbuf_lock);
++	if (err < 0 && err != -ENOSPC) {
+ 		dev_err(port->dev, "Error allocating inbufs\n");
+-		err = -ENOMEM;
+ 		goto free_device;
+ 	}
+ 
+@@ -2059,14 +2056,11 @@ static int virtcons_probe(struct virtio_device *vdev)
+ 	INIT_WORK(&portdev->control_work, &control_work_handler);
+ 
+ 	if (multiport) {
+-		unsigned int nr_added_bufs;
+-
+ 		spin_lock_init(&portdev->c_ivq_lock);
+ 		spin_lock_init(&portdev->c_ovq_lock);
+ 
+-		nr_added_bufs = fill_queue(portdev->c_ivq,
+-					   &portdev->c_ivq_lock);
+-		if (!nr_added_bufs) {
++		err = fill_queue(portdev->c_ivq, &portdev->c_ivq_lock);
++		if (err < 0) {
+ 			dev_err(&vdev->dev,
+ 				"Error allocating buffers for control queue\n");
+ 			/*
+@@ -2077,7 +2071,7 @@ static int virtcons_probe(struct virtio_device *vdev)
+ 					   VIRTIO_CONSOLE_DEVICE_READY, 0);
+ 			/* Device was functional: we need full cleanup. */
+ 			virtcons_remove(vdev);
+-			return -ENOMEM;
++			return err;
+ 		}
+ 	} else {
+ 		/*
+-- 
+2.23.0
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8759589861265519034==--
-
