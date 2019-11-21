@@ -1,86 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B279104F58
-	for <lists.virtualization@lfdr.de>; Thu, 21 Nov 2019 10:35:08 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD9FB104F85
+	for <lists.virtualization@lfdr.de>; Thu, 21 Nov 2019 10:46:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 11E1E22886;
-	Thu, 21 Nov 2019 09:35:06 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 152BE887C0;
+	Thu, 21 Nov 2019 09:46:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7mwnEkL0oM0e; Thu, 21 Nov 2019 09:35:04 +0000 (UTC)
+	with ESMTP id Iy5F33hbj63Q; Thu, 21 Nov 2019 09:46:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 4C6362094E;
-	Thu, 21 Nov 2019 09:35:04 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7F3E0887B9;
+	Thu, 21 Nov 2019 09:46:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2B218C18DA;
-	Thu, 21 Nov 2019 09:35:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 651BCC18DA;
+	Thu, 21 Nov 2019 09:46:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9004DC18DA
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6DBECC18DA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:35:03 +0000 (UTC)
+ Thu, 21 Nov 2019 09:46:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 74F6F887B9
+ by hemlock.osuosl.org (Postfix) with ESMTP id 5CEC5887CA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:35:03 +0000 (UTC)
+ Thu, 21 Nov 2019 09:46:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id I0hNaxUtyxIP
+ with ESMTP id 5ErjrZCX2yRK
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:35:02 +0000 (UTC)
+ Thu, 21 Nov 2019 09:46:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 74EFC887B5
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+ [209.85.128.65])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 52F40887B9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:35:02 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id t1so3507400wrv.4
+ Thu, 21 Nov 2019 09:46:18 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id y5so2884268wmi.5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 01:35:02 -0800 (PST)
+ Thu, 21 Nov 2019 01:46:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=ZGBH8au92eRUZnEPs71VbpK8gTvHx2as+XDVL4G8p5c=;
- b=RQMfQYNTUiKORtkurvhl+zlmqW6i2LOgyoavWGAxBYFRjs1x/V7VYG77WSTY3VRfgg
- qV5qw6eq6E+Bp0N5zKmm7ya3ShQEVONdaNr4y2brrmkP1OwSPcetNdxRNbQEBKjdUtED
- oHlJcAVv7PrDXSJ0R3Ed4qRqqdcPJu5qIyrcnhFIIJsnhShjUiFYx47yIUIiBzZVlzPe
- n6Ra60+vxZvv53FXe63RHcADjI/4SF1d2nX9Vpq+W4Mx75O56Yr2PFjz4C0OK03bEw75
- 68qo/x3u7yVjPyLORf7F8Ozq6KlPTthOj1zc1qRx4idnr+I2V5DbgHLNwcE+CdaVfzhK
- W7mw==
+ bh=Zq604zfFYaP1lg3EZmX/ZaHb/wgc+8oQ8qyObi+Xugk=;
+ b=EqWQIKk+Pc+6l/iTZqHgRlRZKxdn4V5MLvDyH0ww5S+V+fMSCiyEKuvRNjME92kpzR
+ xcVvIZLkVoemqT088j6zTquIIRlUtFPaJuPbj1gRvRqz9mkwPyu9vQ6n8z+t2yM32vCz
+ pDquaI0iz8FNlE2lh/MIGSO4oj+ofk8tt9/yAQbbgYHMgE+uXnFhDEaOF55hmhCeo6gZ
+ LqyQHu1s+IZNMbJwy0SkDh4yiE8HuRicUZlJt7NAsuUyMRaekXE7UDU7Rx6NE/3Efqhc
+ grH+DPrIOumY2l92QPIrd6f2xxrX25HXk1PnobD//XAPU3rxd+ttp1nIZ8rmAVLfSebm
+ 3s0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=ZGBH8au92eRUZnEPs71VbpK8gTvHx2as+XDVL4G8p5c=;
- b=tHXhZhG+KMjjhT/mwmluD4Y/wXtUoo6ZPIRfrEC4Lkmqi4zXBuPoCRa6C+fKjGVWOR
- omxG4idzuaDsJgLi1sTE1AimYnpQOnkMo6sJNCIyYXeCSSSOpWuqvTv16bxUrg4iQgkO
- JJ4wJH1KMFqLSWRrEX0pQVU4SM89SywqjhmbUzoctWnZRhEP8cJPIAy1K+eIyntiJf3O
- 1MSTkhYFWXoOJkOD9yOGxNtFM2L2qUoMPRJk9uUJbVQorZvEQV2k63OGwGJ9++5FkPpF
- Dy8KGhXFD0DRZiz2VPz5ZRp6AbEiyu+7uQbDcYbhYJS2IZyBPBc0AP27tim8qijfjT59
- /2sw==
-X-Gm-Message-State: APjAAAX6oeGaFq8MQS0RWtxHF1xrP481+87zA5pl2vDTsB8D39mo5QBU
- qHjjwWrEJpYSvO/Cd4fsUus=
-X-Google-Smtp-Source: APXvYqyJMxet4XYjUxprEHdfDptf7OeeSXc3aHltx2r2yhe48bUYKHoKuape6jSz58WOzX8nscMlBg==
-X-Received: by 2002:adf:f084:: with SMTP id n4mr9197280wro.369.1574328900838; 
- Thu, 21 Nov 2019 01:35:00 -0800 (PST)
+ bh=Zq604zfFYaP1lg3EZmX/ZaHb/wgc+8oQ8qyObi+Xugk=;
+ b=SYu0hLTS187lusnCQMrRg2rwq5puSvRq8yuxxvJKO4jY0RsaVjNEOXfERF4c4rxWhV
+ bgDFg4CeKVFYEV51kfrIIHp7jbMW0greN/tpeeILM9BquxJ95x4fVGVfmWV7YqFM01tx
+ odUdH3sDnSLvzjlS73Bfx+RW1o1uK72NhBdYkySez93CpXfAFJtOMh+ZMuKGOSrRo/Bu
+ OhwyLc32XxCWDVnihQy5Omd0KqXv5CrZ7P5VeKtzkLh4bgbqTh4ecujgdOkCVuSrkfPv
+ k7iEZGGmjyAPddx/S2ye3cJBOq2Z/y6ck+fpBF8oeaOlzDUpFYeCNB6Vh284JYKrdbLo
+ Uf2A==
+X-Gm-Message-State: APjAAAVZNXB0QJXxLR/h7k8WmLcK2mCFg2bZmgGBCtaiNOmmPlr17XJ9
+ xm3iM6ehaCNYzwfn00+dBG4=
+X-Google-Smtp-Source: APXvYqyZ8t14KdyBL7WZHEesuhWgOkStCUSzngEXJC35eulov2avg9DZSJMo7BWYsnIIGFoYvTWJJg==
+X-Received: by 2002:a1c:a406:: with SMTP id n6mr9076240wme.90.1574329576856;
+ Thu, 21 Nov 2019 01:46:16 -0800 (PST)
 Received: from localhost ([51.15.41.238])
- by smtp.gmail.com with ESMTPSA id y19sm2371455wmd.29.2019.11.21.01.34.59
+ by smtp.gmail.com with ESMTPSA id i203sm1972471wma.35.2019.11.21.01.46.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2019 01:34:59 -0800 (PST)
-Date: Thu, 21 Nov 2019 09:34:58 +0000
+ Thu, 21 Nov 2019 01:46:15 -0800 (PST)
+Date: Thu, 21 Nov 2019 09:46:14 +0000
 From: Stefan Hajnoczi <stefanha@gmail.com>
 To: Stefano Garzarella <sgarzare@redhat.com>
-Subject: Re: [PATCH net-next 4/6] vsock: add vsock_loopback transport
-Message-ID: <20191121093458.GB439743@stefanha-x1.localdomain>
+Subject: Re: [PATCH net-next 5/6] vsock: use local transport when it is loaded
+Message-ID: <20191121094614.GC439743@stefanha-x1.localdomain>
 References: <20191119110121.14480-1-sgarzare@redhat.com>
- <20191119110121.14480-5-sgarzare@redhat.com>
+ <20191119110121.14480-6-sgarzare@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191119110121.14480-5-sgarzare@redhat.com>
+In-Reply-To: <20191119110121.14480-6-sgarzare@redhat.com>
 User-Agent: Mutt/1.12.1 (2019-06-15)
 Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
  Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
@@ -98,109 +98,62 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1147125361251077541=="
+Content-Type: multipart/mixed; boundary="===============4133274744528085402=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 
---===============1147125361251077541==
+--===============4133274744528085402==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="GID0FwUMdk1T2AWN"
+	protocol="application/pgp-signature"; boundary="+nBD6E3TurpgldQp"
 Content-Disposition: inline
 
 
---GID0FwUMdk1T2AWN
+--+nBD6E3TurpgldQp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Nov 19, 2019 at 12:01:19PM +0100, Stefano Garzarella wrote:
+On Tue, Nov 19, 2019 at 12:01:20PM +0100, Stefano Garzarella wrote:
+> @@ -420,9 +436,10 @@ int vsock_assign_transport(struct vsock_sock *vsk, struct vsock_sock *psk)
+>  		new_transport = transport_dgram;
+>  		break;
+>  	case SOCK_STREAM:
+> -		if (remote_cid <= VMADDR_CID_HOST ||
+> -		    (transport_g2h &&
+> -		     remote_cid == transport_g2h->get_local_cid()))
+> +		if (vsock_use_local_transport(remote_cid))
+> +			new_transport = transport_local;
+> +		else if (remote_cid == VMADDR_CID_HOST ||
+> +			 remote_cid == VMADDR_CID_HYPERVISOR)
+>  			new_transport = transport_g2h;
+>  		else
+>  			new_transport = transport_h2g;
 
-Ideas for long-term changes below.
+We used to send VMADDR_CID_RESERVED to the host.  Now we send
+VMADDR_CID_RESERVED (LOCAL) to the guest when there is no
+transport_local loaded?
 
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+If this is correct, is there a justification for this change?  It seems
+safest to retain existing behavior.
 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 760049454a23..c2a3dc3113ba 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -17239,6 +17239,7 @@ F:	net/vmw_vsock/diag.c
->  F:	net/vmw_vsock/af_vsock_tap.c
->  F:	net/vmw_vsock/virtio_transport_common.c
->  F:	net/vmw_vsock/virtio_transport.c
-> +F:	net/vmw_vsock/vsock_loopback.c
->  F:	drivers/net/vsockmon.c
->  F:	drivers/vhost/vsock.c
->  F:	tools/testing/vsock/
-
-At this point you are most active in virtio-vsock and I am reviewing
-patches on a best-effort basis.  Feel free to add yourself as
-maintainer.
-
-> diff --git a/net/vmw_vsock/vsock_loopback.c b/net/vmw_vsock/vsock_loopback.c
-> new file mode 100644
-> index 000000000000..3d1c1a88305f
-> --- /dev/null
-> +++ b/net/vmw_vsock/vsock_loopback.c
-> @@ -0,0 +1,217 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * loopback transport for vsock using virtio_transport_common APIs
-> + *
-> + * Copyright (C) 2013-2019 Red Hat, Inc.
-> + * Author: Asias He <asias@redhat.com>
-> + *         Stefan Hajnoczi <stefanha@redhat.com>
-> + *         Stefano Garzarella <sgarzare@redhat.com>
-> + *
-> + */
-> +#include <linux/spinlock.h>
-> +#include <linux/module.h>
-> +#include <linux/list.h>
-> +#include <linux/virtio_vsock.h>
-
-Is it time to rename the generic functionality in
-virtio_transport_common.c?  This doesn't have anything to do with virtio
-:).
-
-> +
-> +static struct workqueue_struct *vsock_loopback_workqueue;
-> +static struct vsock_loopback *the_vsock_loopback;
-
-the_vsock_loopback could be a static global variable (not a pointer) and
-vsock_loopback_workqueue could also be included in the struct.
-
-The RCU pointer is really a way to synchronize vsock_loopback_send_pkt()
-and vsock_loopback_cancel_pkt() with module exit.  There is no other
-reason for using a pointer.
-
-It's cleaner to implement the synchronization once in af_vsock.c (or
-virtio_transport_common.c) instead of making each transport do it.
-Maybe try_module_get() and related APIs provide the necessary semantics
-so that core vsock code can hold the transport module while it's being
-used to send/cancel a packet.
-
-> +MODULE_ALIAS_NETPROTO(PF_VSOCK);
-
-Why does this module define the alias for PF_VSOCK?  Doesn't another
-module already define this alias?
-
---GID0FwUMdk1T2AWN
+--+nBD6E3TurpgldQp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl3WWkIACgkQnKSrs4Gr
-c8jBuAgAg4roCliY5QrKSBc2swUmpdqgthCa2WBtvGuV40W4kMS8BoWa4ACU8uGA
-uxOG2+bM919Qiu+LpwTdm4RrQ5Vxk78KUZsHGdTrHxF7tZvg6J9ojjZGc3DkO/zr
-ndGHNu05QTeEetAhPg13rpZmYe0WDgR6NTP4cWlpFRxWjBk46laAbA04xLXDN/NF
-fgt/nh2LL5k9CWbNFuPKwzm5qudh7OAojBGmk1dfeBnZCLZB4U7AF1zdDB8CJssG
-YJ2zcbuKUptctXc8reETVJOxwDXzpvwiQgpIp1blJC+Z3Thdn5vJDxlzefjBLYyL
-/DyzsL2ZvpFLxvf62uE+xEAQeXa0Jg==
-=lA3N
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl3WXOYACgkQnKSrs4Gr
+c8iT+Qf9ESuEFX++6Sq/wJtYnpiX6cvGw7bvw+fxkdiksMzIPBWT6ZbC/ZrRv87z
+zBMNmGrLElTPu3lN4ISYgd1gjrLn1iTTnkj/A42X5VvjEqfQYXNz84gBMP7jRcxo
+XufjkgajBvxcssZgAPOAMjx/4BbGlW3cwUNoTa7oy9PCQlhBPVDvqPWSM4sQ61cP
+GJ2hFaCeYTmCbYKnyrvqmoXIewMF1XAjAuuXSHz7zVlCpbHL21piJByTKAUnqL7N
+6W6nMibNjso9qI0AYAOsCkFRnhIshBqRhRhO96/1ZEBmLe7kH6gXYpgScRs4IRYD
+V7w4kz76mzwiZZZLiW4/K5FOBe8v9Q==
+=HSd8
 -----END PGP SIGNATURE-----
 
---GID0FwUMdk1T2AWN--
+--+nBD6E3TurpgldQp--
 
---===============1147125361251077541==
+--===============4133274744528085402==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -210,4 +163,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============1147125361251077541==--
+--===============4133274744528085402==--
