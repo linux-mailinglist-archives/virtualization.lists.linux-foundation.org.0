@@ -1,86 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68947104F8D
-	for <lists.virtualization@lfdr.de>; Thu, 21 Nov 2019 10:46:51 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 31648104FDF
+	for <lists.virtualization@lfdr.de>; Thu, 21 Nov 2019 11:00:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E372786F66;
-	Thu, 21 Nov 2019 09:46:49 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 703D9887EB;
+	Thu, 21 Nov 2019 10:00:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YtLjBMByWDjQ; Thu, 21 Nov 2019 09:46:48 +0000 (UTC)
+	with ESMTP id U-wskjpsSV7o; Thu, 21 Nov 2019 09:59:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id BE1A086F58;
-	Thu, 21 Nov 2019 09:46:48 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7BE23887CA;
+	Thu, 21 Nov 2019 09:59:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A392FC18DA;
-	Thu, 21 Nov 2019 09:46:48 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B87EC18DA;
+	Thu, 21 Nov 2019 09:59:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 11091C18DA
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 98A2FC18DA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:46:48 +0000 (UTC)
+ Thu, 21 Nov 2019 09:59:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id EFC5587E95
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 8292786F4E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:46:47 +0000 (UTC)
+ Thu, 21 Nov 2019 09:59:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id yMQebt7iXvu2
+ with ESMTP id z2qZcLDGrbQX
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:46:47 +0000 (UTC)
+ Thu, 21 Nov 2019 09:59:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
- [209.85.128.66])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 13BA787E93
+Received: from us-smtp-1.mimecast.com (us-smtp-1.mimecast.com [207.211.31.81])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 4E27486EB9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 09:46:47 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id l1so2954596wme.2
+ Thu, 21 Nov 2019 09:59:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1574330395;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=yt8HpiGqxds2OMjKtJNRUWY5kPKw9cLn1g1BZYhvSYU=;
+ b=MNhdTsgT8A31ph+otYZp+yS5DkB+9Fi/T8JlpunarugpcocibB3EWMJxmyH/Gd5fTu5NM3
+ RB3f4SrqUQILjQ082z28VNG1Stj2DAyCp6S8Y3b/zvHAAAOsGQwcuXiIrcNrBVCXjCS41W
+ VT78RM1Vb934y4G4ScfR1iWND9Yog1E=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-9-4aLdga3QPbqtQMx26Gpprg-1; Thu, 21 Nov 2019 04:59:53 -0500
+Received: by mail-wm1-f69.google.com with SMTP id f21so1317521wmh.5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 01:46:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=WL6pXCeu6XuKW3klwRRmKr6eTtRF5VFWIYJFBOiOTz4=;
- b=hd4lX3Yqf3IW8r/Uil+0yEeCNDDDcm/cDu6uaAjj+xzgIzSiUQqZBJ3PfblpEbkcRG
- BnVDdlyplcWyxQUJQmQdj2iuOLHxzF/fNb65QKDtQM73kJ0bKygsWhKYM5QElvvAO2zy
- opfSHogwVx9l8ovu6mcmr5Yd8pQxw/7nmYZ/z5zEO3Z06gFmIbQsQ4rimEucQs4De/g6
- XTm0TiT3zQpXjKooOwWKGWFpnZMFQU/KForF3wAM0pjWKnAL2lHNnNJda4hL9BW0empV
- lpUeysFyY1uEYahInd5rX9atG3ANPeChM3iTgXDPuPAc3hnVxm4oX2igoZHdWInaIb6M
- Y4AA==
+ Thu, 21 Nov 2019 01:59:53 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=WL6pXCeu6XuKW3klwRRmKr6eTtRF5VFWIYJFBOiOTz4=;
- b=l9BzkaDgTVXsgDbuI8IWkFRQ9Kz7eNek5ecFZbeiA4VTKozXy1XcU3rfPhKmZhJ4EJ
- Lnm7RZ6EuGY7n+3Fqr8ScrrOgr9LnfI9BP97E7nQzn0SJG94ppExYeyb942DX/NTc5+B
- Ax89rtt2ktpIlG7LGwt9kVIifwjqNsWga/r57T9uZH3jVpW0tYZvqUOQiTiAn+MLBjcB
- BBQFF/mdKFAu/HsRrX8cNGf4fyI1yUmZirafxPIguRrh23saYVq2WoVwwYb0QdCm9VsI
- Wmom1ueWZeku/ezchsKnoKAnnBaGc+XPXv2enh/n94sw82qYp3VxuwnuZpCJEGtUdavM
- s8pw==
-X-Gm-Message-State: APjAAAUTo1feu+2FWmhhSXGMnqWGxNVaRw3aQzIMqR/ob1DZ2VXHX4wf
- xF4bIvtyK/g+OHuqcaqfEFA=
-X-Google-Smtp-Source: APXvYqzF0FGM/Vj/Mprdo+NEZjgKKrkrZxn6+akIEVJMqkE6Jg2J9aBNFPsEXVx/LUZoE3f2tDsIDg==
-X-Received: by 2002:a7b:c642:: with SMTP id q2mr8684297wmk.169.1574329605481; 
- Thu, 21 Nov 2019 01:46:45 -0800 (PST)
-Received: from localhost ([51.15.41.238])
- by smtp.gmail.com with ESMTPSA id b15sm2536520wrx.77.2019.11.21.01.46.44
+ :mime-version:content-disposition:in-reply-to;
+ bh=uJVUKucSDZy17F3anNizQDOnRpUUDTqYqO9jAnfMJpQ=;
+ b=pFxsGtFg71DqN1ZpZGmujZtRsX3JywpwXztRfClUlv+weCcd7U1VXwSYMpAdHbRar6
+ rW1lMSB42bfp4ySiVH6nDAhl36+T0VS5I2QZOhTqldoGIbnmjENrYJKhsQpHRjHlYv3j
+ 1TAFRquPL5rxjovM1CEw0nM+3NbEn+3NI14ERCOX3cdrNqwHYxsRQArDMGbyaPSNF/bp
+ Ao7PCBxNRqazG6nJp2ldFjIxmtidRqDyrmKEYrLI4DS9zEY6Ka/8XoQ161Mp6OKnYQK5
+ 6gvLtWPzyOZP2lzjo00VfK1Wdu9XqTNGOFv7ALZJlCUPTAKstWF0xi8DienkCSp9DYRn
+ BPfA==
+X-Gm-Message-State: APjAAAVwOp3MV9DproY2FXZfqv/Q/AgwKbc7h+6zbdg7Uxs8aCI8u1Ib
+ 3VsYnludG/kTN307JhGdOhVxLlL2nHx5hWn99DDh374o/i73RbVFeTyfCAyxBOC3Ytnr9SdY44u
+ DuRa7bCmrymF079nEJNK/HOaqfmdAPTzdY2VYUWEDOw==
+X-Received: by 2002:a1c:6309:: with SMTP id x9mr8375553wmb.108.1574330392045; 
+ Thu, 21 Nov 2019 01:59:52 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwPhJ9p31NlkxFdXc1WkCFoBS07DC7jz3SIB+5yTxT/Kdnf/tqFWQvPhtgZ6YH4XQmcMUxa7A==
+X-Received: by 2002:a1c:6309:: with SMTP id x9mr8375533wmb.108.1574330391716; 
+ Thu, 21 Nov 2019 01:59:51 -0800 (PST)
+Received: from steredhat (a-nu5-32.tin.it. [212.216.181.31])
+ by smtp.gmail.com with ESMTPSA id a8sm2249793wme.11.2019.11.21.01.59.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2019 01:46:44 -0800 (PST)
-Date: Thu, 21 Nov 2019 09:46:43 +0000
-From: Stefan Hajnoczi <stefanha@gmail.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-Subject: Re: [PATCH net-next 0/6] vsock: add local transport support
-Message-ID: <20191121094643.GD439743@stefanha-x1.localdomain>
+ Thu, 21 Nov 2019 01:59:51 -0800 (PST)
+Date: Thu, 21 Nov 2019 10:59:48 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [PATCH net-next 4/6] vsock: add vsock_loopback transport
+Message-ID: <20191121095948.bc7lc3ptsh6jxizw@steredhat>
 References: <20191119110121.14480-1-sgarzare@redhat.com>
+ <20191119110121.14480-5-sgarzare@redhat.com>
+ <20191121093458.GB439743@stefanha-x1.localdomain>
 MIME-Version: 1.0
-In-Reply-To: <20191119110121.14480-1-sgarzare@redhat.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
+In-Reply-To: <20191121093458.GB439743@stefanha-x1.localdomain>
+X-MC-Unique: 4aLdga3QPbqtQMx26Gpprg-1
+X-Mimecast-Spam-Score: 0
+Content-Disposition: inline
 Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
  Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org,
@@ -97,106 +106,118 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8339820992161836083=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On Thu, Nov 21, 2019 at 09:34:58AM +0000, Stefan Hajnoczi wrote:
+> On Tue, Nov 19, 2019 at 12:01:19PM +0100, Stefano Garzarella wrote:
+> 
+> Ideas for long-term changes below.
+> 
+> Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+> 
 
---===============8339820992161836083==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="eqp4TxRxnD4KrmFZ"
-Content-Disposition: inline
+Thanks for reviewing!
 
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 760049454a23..c2a3dc3113ba 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -17239,6 +17239,7 @@ F:	net/vmw_vsock/diag.c
+> >  F:	net/vmw_vsock/af_vsock_tap.c
+> >  F:	net/vmw_vsock/virtio_transport_common.c
+> >  F:	net/vmw_vsock/virtio_transport.c
+> > +F:	net/vmw_vsock/vsock_loopback.c
+> >  F:	drivers/net/vsockmon.c
+> >  F:	drivers/vhost/vsock.c
+> >  F:	tools/testing/vsock/
+> 
+> At this point you are most active in virtio-vsock and I am reviewing
+> patches on a best-effort basis.  Feel free to add yourself as
+> maintainer.
+> 
 
---eqp4TxRxnD4KrmFZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Sure, I'd be happy to maintain it.
 
-On Tue, Nov 19, 2019 at 12:01:15PM +0100, Stefano Garzarella wrote:
-> This series introduces a new transport (vsock_loopback) to handle
-> local communication.
-> This could be useful to test vsock core itself and to allow developers
-> to test their applications without launching a VM.
->=20
-> Before this series, vmci and virtio transports allowed this behavior,
-> but only in the guest.
-> We are moving the loopback handling in a new transport, because it
-> might be useful to provide this feature also in the host or when
-> no H2G/G2H transports (hyperv, virtio, vmci) are loaded.
->=20
-> The user can use the loopback with the new VMADDR_CID_LOCAL (that
-> replaces VMADDR_CID_RESERVED) in any condition.
-> Otherwise, if the G2H transport is loaded, it can also use the guest
-> local CID as previously supported by vmci and virtio transports.
-> If G2H transport is not loaded, the user can also use VMADDR_CID_HOST
-> for local communication.
->=20
-> Patch 1 is a cleanup to build virtio_transport_common without virtio
-> Patch 2 adds the new VMADDR_CID_LOCAL, replacing VMADDR_CID_RESERVED
-> Patch 3 adds a new feature flag to register a loopback transport
-> Patch 4 adds the new vsock_loopback transport based on the loopback
->         implementation of virtio_transport
-> Patch 5 implements the logic to use the local transport for loopback
->         communication
-> Patch 6 removes the loopback from virtio_transport
->=20
-> @Jorgen: Do you think it might be a problem to replace
-> VMADDR_CID_RESERVED with VMADDR_CID_LOCAL?
->=20
-> Thanks,
-> Stefano
->=20
-> Stefano Garzarella (6):
->   vsock/virtio_transport_common: remove unused virtio header includes
->   vsock: add VMADDR_CID_LOCAL definition
->   vsock: add local transport support in the vsock core
->   vsock: add vsock_loopback transport
->   vsock: use local transport when it is loaded
->   vsock/virtio: remove loopback handling
->=20
->  MAINTAINERS                             |   1 +
->  include/net/af_vsock.h                  |   2 +
->  include/uapi/linux/vm_sockets.h         |   8 +-
->  net/vmw_vsock/Kconfig                   |  12 ++
->  net/vmw_vsock/Makefile                  |   1 +
->  net/vmw_vsock/af_vsock.c                |  49 +++++-
->  net/vmw_vsock/virtio_transport.c        |  61 +------
->  net/vmw_vsock/virtio_transport_common.c |   3 -
->  net/vmw_vsock/vmci_transport.c          |   2 +-
->  net/vmw_vsock/vsock_loopback.c          | 217 ++++++++++++++++++++++++
->  10 files changed, 283 insertions(+), 73 deletions(-)
->  create mode 100644 net/vmw_vsock/vsock_loopback.c
+> > diff --git a/net/vmw_vsock/vsock_loopback.c b/net/vmw_vsock/vsock_loopback.c
+> > new file mode 100644
+> > index 000000000000..3d1c1a88305f
+> > --- /dev/null
+> > +++ b/net/vmw_vsock/vsock_loopback.c
+> > @@ -0,0 +1,217 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +/*
+> > + * loopback transport for vsock using virtio_transport_common APIs
+> > + *
+> > + * Copyright (C) 2013-2019 Red Hat, Inc.
+> > + * Author: Asias He <asias@redhat.com>
+> > + *         Stefan Hajnoczi <stefanha@redhat.com>
+> > + *         Stefano Garzarella <sgarzare@redhat.com>
+> > + *
+> > + */
+> > +#include <linux/spinlock.h>
+> > +#include <linux/module.h>
+> > +#include <linux/list.h>
+> > +#include <linux/virtio_vsock.h>
+> 
+> Is it time to rename the generic functionality in
+> virtio_transport_common.c?  This doesn't have anything to do with virtio
+> :).
+> 
 
-Please see my comments.  Otherwise:
+Completely agree, new transports could use it to handle the protocol without
+reimplementing things already done.
 
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+> > +
+> > +static struct workqueue_struct *vsock_loopback_workqueue;
+> > +static struct vsock_loopback *the_vsock_loopback;
+> 
+> the_vsock_loopback could be a static global variable (not a pointer) and
+> vsock_loopback_workqueue could also be included in the struct.
+> 
+> The RCU pointer is really a way to synchronize vsock_loopback_send_pkt()
+> and vsock_loopback_cancel_pkt() with module exit.  There is no other
+> reason for using a pointer.
+> 
+> It's cleaner to implement the synchronization once in af_vsock.c (or
+> virtio_transport_common.c) instead of making each transport do it.
+> Maybe try_module_get() and related APIs provide the necessary semantics
+> so that core vsock code can hold the transport module while it's being
+> used to send/cancel a packet.
 
---eqp4TxRxnD4KrmFZ
-Content-Type: application/pgp-signature; name="signature.asc"
+Right, the module cannot be unloaded until open sockets, so here the
+synchronization is not needed.
 
------BEGIN PGP SIGNATURE-----
+The synchronization come from virtio-vsock device that can be
+hot-unplugged while sockets are still open, but that can't happen here.
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl3WXQMACgkQnKSrs4Gr
-c8h4aQf5ATKD+2md5rF2gaJHwaBfEiLqsK5/ciPJv0qtYXlnZi9wionMXyFbAmo+
-tWchVmMP8gpdCf9qsWBQo6beDMWJdZSCZCZ0kiAgoHXGWK50lFhtFBqXjngopcXJ
-Hr9IgWPWoobZR0Z0p98tHj0ToumHaFtopLL+rrtCAwkGHxNnVTgv0HRWcAsEORQc
-o3AI3/+6a6ESmP8dtcRZ7fY628un7VcdFVrD6mnyxPTX3CVqulPLPLC7Y+DpYtFa
-ZqU04KBPp/8t8HtsZZYjGv60H58qzwPDAwwEIpFZ9gYl3cKRGRvUXs3t7vKdzZGA
-gu9P/McerEE+0vQCtysTkHsIzrgUvg==
-=c63q
------END PGP SIGNATURE-----
+I will remove the pointers and RCU in the v2.
 
---eqp4TxRxnD4KrmFZ--
+Can I keep your R-b or do you prefer to watch v2 first?
 
---===============8339820992161836083==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> 
+> > +MODULE_ALIAS_NETPROTO(PF_VSOCK);
+> 
+> Why does this module define the alias for PF_VSOCK?  Doesn't another
+> module already define this alias?
+
+It is a way to load this module when PF_VSOCK is starting to be used.
+MODULE_ALIAS_NETPROTO(PF_VSOCK) is already defined in vmci_transport
+and hyperv_transport. IIUC it is used for the same reason.
+
+In virtio_transport we don't need it because it will be loaded when
+the PCI device is discovered.
+
+Do you think there's a better way?
+Should I include the vsock_loopback transport directly in af_vsock
+without creating a new module?
+
+Thanks,
+Stefano
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8339820992161836083==--
