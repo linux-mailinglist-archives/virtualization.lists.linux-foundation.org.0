@@ -2,85 +2,85 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE362106D24
-	for <lists.virtualization@lfdr.de>; Fri, 22 Nov 2019 11:57:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA1C0106D49
+	for <lists.virtualization@lfdr.de>; Fri, 22 Nov 2019 11:59:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 70CD4868C0;
-	Fri, 22 Nov 2019 10:57:57 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A0AA1868CE;
+	Fri, 22 Nov 2019 10:59:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kPo0kPKWrraV; Fri, 22 Nov 2019 10:57:56 +0000 (UTC)
+	with ESMTP id kl8NC6vDuLpS; Fri, 22 Nov 2019 10:59:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D416186205;
-	Fri, 22 Nov 2019 10:57:56 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 35209868D9;
+	Fri, 22 Nov 2019 10:59:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AEE43C18DA;
-	Fri, 22 Nov 2019 10:57:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 181C8C18DA;
+	Fri, 22 Nov 2019 10:59:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AD073C18DA
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4EDFBC18DA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:57:55 +0000 (UTC)
+ Fri, 22 Nov 2019 10:59:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 94ED288B3D
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 3D479868CE
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:57:55 +0000 (UTC)
+ Fri, 22 Nov 2019 10:59:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mxFXTEeKTgaM
+ with ESMTP id VqT-2rdW1cMJ
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:57:55 +0000 (UTC)
+ Fri, 22 Nov 2019 10:58:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 2BBA488B39
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+ [209.85.221.65])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 8326785F83
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:57:55 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id t1so8087946wrv.4
+ Fri, 22 Nov 2019 10:58:59 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id z7so4653968wrl.13
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 02:57:55 -0800 (PST)
+ Fri, 22 Nov 2019 02:58:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=O8FVNRvH5irJ2zDaBsxloUo7UX0pFrVUzjUZiLfKvwU=;
- b=KE4FZyVJ7oTMaqEmjpbPlG5DZcuerskPQmr4Oz+oBjjiJHvGL6H8exZ0GXrlPmDu4L
- fjock0LX/ANKXLc2tQLf8axKFLTKAmNc1cOarXAmF0mUTryD4ji2KpaeIUDw6KdwzCw2
- MxmVyNC6Z760rlRWN+O0jtt5nJoCB5GWkiGoJq9XOXrGI1Q2/py21NNS6EZZJTYshlH1
- dixx5JojDpj/FfGb3I7ZZgOUrdLQ8kn2WEIgbTcnNR0ah1Bdppb6CTCz4NURwPA8aLfS
- EJmBtSrx3Y1mMzNCGoqbw/42Xt3due4SSZ7dusRabMT5A8dSeghZrBgyRs8JtWKzrXen
- CdDw==
+ bh=lDs5y1/lUK+eWeeJx//ERXKdVvxWdj4EMLwCwstQME4=;
+ b=tZrmxDqsZ1RxyI07RNeundpwyg3krx2pcdHCNpZvL3eVD3KsQ239cK0WPxnijQt1Sx
+ Fs/hoURodhjYShc3UsRO8wvWP3TJghstOvwU0hqvTLFGlHfjPbK+N8DC9RWKjJr0OSfG
+ U8/SeO0cY0wZsBiqU23iCYDvR8R/mftguKFjWVo1gq4EDGNowS6VNXbBbPpDaZ6ANKju
+ QvHqIx0HkGQc9XfDWtkRsWeWzQvhDGRGubK/9H01T5zo/uIfdNyzFvyaivP26qcnRGV1
+ 2W+UM6kD51rYLCCVA698kX5jZc+fgUZ9zv8aIXlsnfVKBPQMWGC6BGoWZw80BqSyjx13
+ 75PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=O8FVNRvH5irJ2zDaBsxloUo7UX0pFrVUzjUZiLfKvwU=;
- b=YGvV4I4n3oM3hvL/hzclWSeLWmbvgyYL6bFPm/baqUBDU72WfM+KjvkkmkOfYaJMaF
- rv0TZw+hAt9G3JrkDYbL0YwnB6JZ+IbAcwRbludNxHseAIpF3ew3CNgHEJO5+vlZk4mV
- GZ60QhCqaN1AQgDZNk13W4QqVWTaDwMi/HTgHCht+rCBY0tHetbICXXINlLqxnPi0iNU
- aiqFDaq54FnVCB7UXTXHx8iusYjHo5vd7YTb4d21L7uIj9cu/yL2zer8kW8sTAPmGAvX
- NOhxshnUWJtOPDt35dpjrJrQWEhWJGJTEOG8fFIfCqXo8jujJFlYMxTZEXtqWcWfoUo5
- 4H3w==
-X-Gm-Message-State: APjAAAV+7tii+N4RNdtzmGuDjfvg3vAhdtO6f1dbaZBewz7wnYg4Pnvp
- r7lAS2Z2Ndpt5wGwCfmoWSH6Gw==
-X-Google-Smtp-Source: APXvYqxupzAk9/+hAGuqo2zCmryiXsqWB8zdfYtdzuCH8fYncJHID5ipVvqg0xilqWNq9KeWUZb/LQ==
-X-Received: by 2002:adf:de0a:: with SMTP id b10mr17179236wrm.268.1574419862914; 
- Fri, 22 Nov 2019 02:51:02 -0800 (PST)
+ bh=lDs5y1/lUK+eWeeJx//ERXKdVvxWdj4EMLwCwstQME4=;
+ b=lUJZRtvHAj15e07FLgxQUPP4ntGfi3CXG7JXw/6OfI6NWPrrpTC6ucTkQiYhAX2aMP
+ i/56JqH0uOHM42i9Q6htxw/KRY/DlHDCOmHWAsgFYYNUZac4YC2QYZPAThmagfv/t0/Q
+ U+fnBvResg2MeCzd4wpVzuzHRWYD7GSvJa7S2l+xbtLMrgvDDNHhU1lClUxUOBxHYPYh
+ YUkgZcLaZ23IHCXurXPgNIZV/sI0mJukQ1xph2NzzRqDSnSoLauy59kQaVqMcxNwSe/k
+ UD6st1P+scIYkAJgnfrkquxwKhuZRgfPNpkM8TGN6ox+2Qul3cUF393uFr7UatzmnPzM
+ 3aUQ==
+X-Gm-Message-State: APjAAAX6UeFcNgOkNGyE2u+GYmsmoH5Hr3LMyVBC/UXG14klQSVoa7TS
+ YkG0+IXuKcQNGEZQEELbB+D6Y3bmsTg=
+X-Google-Smtp-Source: APXvYqz63MumbBUd6GIRd7d2nXdQzJtqYQvwS0Q1xjmH0yv+JY/99rcdr1f7XN3ibul7iFA5Jzo61w==
+X-Received: by 2002:adf:9f43:: with SMTP id f3mr17102828wrg.76.1574419864067; 
+ Fri, 22 Nov 2019 02:51:04 -0800 (PST)
 Received: from localhost.localdomain (xdsl-188-155-204-106.adslplus.ch.
  [188.155.204.106])
- by smtp.gmail.com with ESMTPSA id o133sm2088197wmb.4.2019.11.22.02.51.01
+ by smtp.gmail.com with ESMTPSA id o133sm2088197wmb.4.2019.11.22.02.51.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2019 02:51:02 -0800 (PST)
+ Fri, 22 Nov 2019 02:51:03 -0800 (PST)
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: linux-acpi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
  iommu@lists.linux-foundation.org,
  virtualization@lists.linux-foundation.org, linux-pci@vger.kernel.org,
  virtio-dev@lists.oasis-open.org
-Subject: [RFC 09/13] iommu/virtio: Create fwnode if necessary
-Date: Fri, 22 Nov 2019 11:49:56 +0100
-Message-Id: <20191122105000.800410-10-jean-philippe@linaro.org>
+Subject: [RFC 10/13] iommu/virtio: Update IORT fwnode
+Date: Fri, 22 Nov 2019 11:49:57 +0100
+Message-Id: <20191122105000.800410-11-jean-philippe@linaro.org>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <20191122105000.800410-1-jean-philippe@linaro.org>
 References: <20191122105000.800410-1-jean-philippe@linaro.org>
@@ -105,115 +105,44 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The presence of a fwnode on a PCI device depends on the platform. QEMU
-q35, for example, creates an ACPI description for each PCI slot, but
-QEMU virt (aarch64) doesn't. Since the IOMMU subsystem relies heavily on
-fwnode to discover the DMA topology, create a fwnode for the
-virtio-iommu if necessary, using the software_node framework.
+When the virtio-iommu uses the PCI transport and the topology is
+described with IORT, register the PCI fwnode with IORT.
 
 Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
 ---
- drivers/iommu/virtio-iommu.c | 56 ++++++++++++++++++++++++++++++++----
- 1 file changed, 51 insertions(+), 5 deletions(-)
+ drivers/iommu/virtio-iommu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
-index 3ea9d7682999..8efa368134c0 100644
+index 8efa368134c0..9847552faecc 100644
 --- a/drivers/iommu/virtio-iommu.c
 +++ b/drivers/iommu/virtio-iommu.c
-@@ -966,6 +966,48 @@ static struct iommu_ops viommu_ops = {
- 	.of_xlate		= viommu_of_xlate,
- };
+@@ -7,6 +7,7 @@
  
-+static int viommu_set_fwnode(struct viommu_dev *viommu)
-+{
-+	/*
-+	 * viommu->dev is the virtio device, its parent is the associated
-+	 * transport device.
-+	 */
-+	struct device *dev = viommu->dev->parent;
-+
-+	/*
-+	 * With device tree a fwnode is always present. With ACPI, on some
-+	 * platforms a PCI device has a DSDT node describing the slot. On other
-+	 * platforms, no fwnode is created and we have to do it ourselves.
-+	 */
-+	if (!dev->fwnode) {
-+		struct fwnode_handle *fwnode;
-+
-+		fwnode = fwnode_create_software_node(NULL, NULL);
-+		if (IS_ERR(fwnode))
-+			return PTR_ERR(fwnode);
-+
-+		set_primary_fwnode(dev, fwnode);
-+	}
-+
-+	iommu_device_set_fwnode(&viommu->iommu, dev->fwnode);
-+	return 0;
-+}
-+
-+static void viommu_clear_fwnode(struct viommu_dev *viommu)
-+{
-+	struct device *dev = viommu->dev->parent;
-+
-+	if (!dev->fwnode)
-+		return;
-+
-+	if (is_software_node(dev->fwnode)) {
-+		struct fwnode_handle *fwnode = dev->fwnode;
-+
-+		set_primary_fwnode(dev, NULL);
-+		fwnode_remove_software_node(fwnode);
-+	}
-+}
-+
- static int viommu_init_vqs(struct viommu_dev *viommu)
- {
- 	struct virtio_device *vdev = dev_to_virtio(viommu->dev);
-@@ -1004,7 +1046,6 @@ static int viommu_fill_evtq(struct viommu_dev *viommu)
+ #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
  
- static int viommu_probe(struct virtio_device *vdev)
- {
--	struct device *parent_dev = vdev->dev.parent;
- 	struct viommu_dev *viommu = NULL;
- 	struct device *dev = &vdev->dev;
- 	u64 input_start = 0;
-@@ -1084,9 +1125,11 @@ static int viommu_probe(struct virtio_device *vdev)
- 	if (ret)
- 		goto err_free_vqs;
++#include <linux/acpi_iort.h>
+ #include <linux/amba/bus.h>
+ #include <linux/delay.h>
+ #include <linux/dma-iommu.h>
+@@ -989,6 +990,8 @@ static int viommu_set_fwnode(struct viommu_dev *viommu)
+ 		set_primary_fwnode(dev, fwnode);
+ 	}
  
--	iommu_device_set_ops(&viommu->iommu, &viommu_ops);
--	iommu_device_set_fwnode(&viommu->iommu, parent_dev->fwnode);
-+	ret = viommu_set_fwnode(viommu);
-+	if (ret)
-+		goto err_sysfs_remove;
- 
-+	iommu_device_set_ops(&viommu->iommu, &viommu_ops);
- 	iommu_device_register(&viommu->iommu);
- 
- #ifdef CONFIG_PCI
-@@ -1119,8 +1162,10 @@ static int viommu_probe(struct virtio_device *vdev)
++	/* Tell IORT about a PCI device's fwnode */
++	iort_iommu_update_fwnode(dev, dev->fwnode);
+ 	iommu_device_set_fwnode(&viommu->iommu, dev->fwnode);
  	return 0;
+ }
+@@ -1000,6 +1003,8 @@ static void viommu_clear_fwnode(struct viommu_dev *viommu)
+ 	if (!dev->fwnode)
+ 		return;
  
- err_unregister:
--	iommu_device_sysfs_remove(&viommu->iommu);
- 	iommu_device_unregister(&viommu->iommu);
-+	viommu_clear_fwnode(viommu);
-+err_sysfs_remove:
-+	iommu_device_sysfs_remove(&viommu->iommu);
- err_free_vqs:
- 	vdev->config->del_vqs(vdev);
++	iort_iommu_update_fwnode(dev, NULL);
++
+ 	if (is_software_node(dev->fwnode)) {
+ 		struct fwnode_handle *fwnode = dev->fwnode;
  
-@@ -1131,8 +1176,9 @@ static void viommu_remove(struct virtio_device *vdev)
- {
- 	struct viommu_dev *viommu = vdev->priv;
- 
--	iommu_device_sysfs_remove(&viommu->iommu);
- 	iommu_device_unregister(&viommu->iommu);
-+	viommu_clear_fwnode(viommu);
-+	iommu_device_sysfs_remove(&viommu->iommu);
- 
- 	/* Stop all virtqueues */
- 	vdev->config->reset(vdev);
 -- 
 2.24.0
 
