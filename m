@@ -1,98 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACD49106A0F
-	for <lists.virtualization@lfdr.de>; Fri, 22 Nov 2019 11:31:33 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 471A3106CED
+	for <lists.virtualization@lfdr.de>; Fri, 22 Nov 2019 11:56:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 28777880CB;
-	Fri, 22 Nov 2019 10:31:32 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E6D3387388;
+	Fri, 22 Nov 2019 10:56:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FlIUY+2yWZIW; Fri, 22 Nov 2019 10:31:30 +0000 (UTC)
+	with ESMTP id AfDNufYGRiRM; Fri, 22 Nov 2019 10:56:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C07B388164;
-	Fri, 22 Nov 2019 10:31:30 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 377F28737F;
+	Fri, 22 Nov 2019 10:56:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AD572C18DA;
-	Fri, 22 Nov 2019 10:31:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2B5A0C18DA;
+	Fri, 22 Nov 2019 10:56:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2D14EC18DA
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B4B0BC18DA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:31:29 +0000 (UTC)
+ Fri, 22 Nov 2019 10:56:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 17B0825D78
+ by whitealder.osuosl.org (Postfix) with ESMTP id 9F46F881BF
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:31:29 +0000 (UTC)
+ Fri, 22 Nov 2019 10:56:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QI72dXlARLdf
+ with ESMTP id bHwwX3873jY5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:31:28 +0000 (UTC)
+ Fri, 22 Nov 2019 10:56:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id CC3EC21526
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+ [209.85.208.68])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 30EA2881BA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 10:31:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1574418686;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FlOZ5zqkxPswmHPOY4akzRfmqrkgFo/O2Djc8eOm0Q8=;
- b=Au7OZzg95qfKtqheCwo/zJZNNZ5xyi9mnwRdqFkO1USGwpzsFxWWMa52DopGZPt3bKO89m
- DKsJ5JaODzEr4HOqgwvy4Q4niJjr7A9BhbRdBJxH8kWnNTbC3kgJ6WBaNnMuJkBgAwExXm
- Y+WrIVIOzaGallbikuVAxbvSvNUOdcY=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-110-GtSTQfFzOIycSFh_DFLhhg-1; Fri, 22 Nov 2019 05:31:25 -0500
-Received: by mail-qt1-f199.google.com with SMTP id f14so4363871qto.2
+ Fri, 22 Nov 2019 10:56:26 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id i7so1227412edt.1
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 02:31:25 -0800 (PST)
+ Fri, 22 Nov 2019 02:56:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=TVZC8O5GuUsgdVDCzcN2CqTy4L8wnnx0IKWd5NiFgCs=;
+ b=Q3aBSYS6L0keHFMg9s3YF/O/MS0ZbpfYzXYluOwOpxXbstgAIVmQmrUo3jmGNcrDMZ
+ RRPRqees28PfvdT26W0bPHIpTF934vMZ1mdXqlDToqWtyVfmuX00leXURFV5dfkQ02NJ
+ g8MLLi84nyK+BFemsn5DmX+bFGOhLRD0eyOqDxu7lLUZ9cyS3bFHai1Fg75a75rR5dmc
+ HAtSQb2nq4jX33aT5hVPbjbJphW0npRYuRLSvtGKiec4rx5bJjM/h3+QM3a2GsLsz6Wf
+ aE1lZ/Wt3JEJzcp0sPuMjwjNU7ZJsgm+knGVpf9Ib7BC1bjVvZmANR5bEwTu8vWj9Clx
+ OrdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=jUNfNcFYrnFo3vyliVS23hPPWffkd+zA0rWCMO8GM2A=;
- b=RL5BK3jjJfBRZ+m2YPQSuyxPovJePQmtjNLwvdw5xVVMS7ldDxRegRkwtoiLPDHziK
- xFr+KWxlbAAhdZb25ZVxk/D6o6/VxV0mYONgM0qIugGMzhJ38yXNlsaKolNPgJecPMgG
- L0Fei7wuH+Y/Fs12fW40aAn1rw0MNQuDMlNr9zgzY4LUV8NfN6CVQP4RHERooFyirqa/
- Khd1yaEiokn1rBJZlH9AstR0hoPXBRWVqJFl+j4aOGU+/046uqiF+cMVdTzVUuQsgLgh
- +o93y0q0Q54JPMC4aCQHnfcOLYTpx9XC7jxJrrJ60MggB9k9RaC3i3YCcAVlTWcuGpLp
- sVAw==
-X-Gm-Message-State: APjAAAWkJmfslB/+XsUkZ2HzTL1nzYLX+kgsY3Ztx0D7dbEsbcwBTzUh
- f7kCAjgo8zJPBDFzQ1sFpE9VAcv6I7Od61mY5kJ7QKc0DUhHR1/gZImbLRhMCSqNkZaEurJt+Wk
- iyVQkBEuxqVvA/bFt6mnee0CrLmBBIGW98djywPXcJA==
-X-Received: by 2002:ac8:ccf:: with SMTP id o15mr13578819qti.380.1574418684932; 
- Fri, 22 Nov 2019 02:31:24 -0800 (PST)
-X-Google-Smtp-Source: APXvYqzqWjQYE0JViMErwUJLyP31KaReAxhSG7SzcnEEeUUZg6KiYptY1y7iF0uI6KQLrQqeTSBM5A==
-X-Received: by 2002:ac8:ccf:: with SMTP id o15mr13578801qti.380.1574418684642; 
- Fri, 22 Nov 2019 02:31:24 -0800 (PST)
-Received: from redhat.com (bzq-79-176-6-42.red.bezeqint.net. [79.176.6.42])
- by smtp.gmail.com with ESMTPSA id g7sm2775765qkl.20.2019.11.22.02.31.21
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=TVZC8O5GuUsgdVDCzcN2CqTy4L8wnnx0IKWd5NiFgCs=;
+ b=qakJkAY7YPayScj4X03D59aPpP0TDQmPS9QSaYZbGWl1aMEISrwFxJLJ5zTJi3C4ii
+ Pl7Zwz7WzQ3OOF994mWwRjy5cpWduMGEZlzvdqbB+nLFZdIUkttpCvYXMLdpA8RUF/FU
+ daIHjdgCLWsbMA6IwzrAQ6nr592WJJdntQMhtx2bQYBarZGpN9Ds4iWIeZfRTSgDc7/i
+ TAN46dwT2877R8nBKlfCHwc+h0vlrO6dm3V6dEZvJVkDsX8FSQZMsrXAnjoQobL/dpUn
+ lSgC6TnJpEKaoVnyQu3GnhhvVWDwiSM91Uj/scbYDanQVXMJ5Fbugqg1U1sZRVg7D20o
+ 7K3w==
+X-Gm-Message-State: APjAAAUdb7glhMImzAIYJpEC+pvMFwgeMia5l/oBGjMQ3M30dZ0phgJW
+ 6u+Chpx/gvr2EkC0HvkWDczccQ1Mv5c=
+X-Google-Smtp-Source: APXvYqwBWCyLPkUhZBo6K0fMA3vA5VrmhXM4U/1z4Br0F1oFeGiiIWprIEctPIwsTs5r8FDOo3DDYA==
+X-Received: by 2002:adf:f688:: with SMTP id v8mr174600wrp.147.1574419850990;
+ Fri, 22 Nov 2019 02:50:50 -0800 (PST)
+Received: from localhost.localdomain (xdsl-188-155-204-106.adslplus.ch.
+ [188.155.204.106])
+ by smtp.gmail.com with ESMTPSA id o133sm2088197wmb.4.2019.11.22.02.50.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2019 02:31:23 -0800 (PST)
-Date: Fri, 22 Nov 2019 05:31:19 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Julio Faracco <jcfaracco@gmail.com>
-Subject: Re: [PATCH net-next v2] drivers: net: virtio_net: Implement a
- dev_watchdog handler
-Message-ID: <20191122052506-mutt-send-email-mst@kernel.org>
-References: <20191122013636.1041-1-jcfaracco@gmail.com>
+ Fri, 22 Nov 2019 02:50:50 -0800 (PST)
+From: Jean-Philippe Brucker <jean-philippe@linaro.org>
+To: linux-acpi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ iommu@lists.linux-foundation.org,
+ virtualization@lists.linux-foundation.org, linux-pci@vger.kernel.org,
+ virtio-dev@lists.oasis-open.org
+Subject: [RFC 00/13] virtio-iommu on non-devicetree platforms
+Date: Fri, 22 Nov 2019 11:49:47 +0100
+Message-Id: <20191122105000.800410-1-jean-philippe@linaro.org>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-In-Reply-To: <20191122013636.1041-1-jcfaracco@gmail.com>
-X-MC-Unique: GtSTQfFzOIycSFh_DFLhhg-1
-X-Mimecast-Spam-Score: 0
-Content-Disposition: inline
-Cc: dnmendes76@gmail.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- "David S. Miller" <davem@davemloft.net>
+Cc: lorenzo.pieralisi@arm.com, mst@redhat.com, gregkh@linuxfoundation.org,
+ joro@8bytes.org, sudeep.holla@arm.com, rjw@rjwysocki.net,
+ eric.auger@redhat.com, sebastien.boeuf@intel.com, jacob.jun.pan@intel.com,
+ guohanjun@huawei.com, bhelgaas@google.com, lenb@kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,224 +103,141 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Nov 21, 2019 at 10:36:36PM -0300, Julio Faracco wrote:
-> Driver virtio_net is not handling error events for TX provided by
-> dev_watchdog. This event is reached when transmission queue is having
-> problems to transmit packets. This could happen for any reason. To
-> enable it, driver should have .ndo_tx_timeout implemented.
-> 
-> This commit brings back virtnet_reset method to recover TX queues from a
-> error state. That function is called by schedule_work method and it puts
-> the reset function into work queue.
-> 
-> As the error cause is unknown at this moment, it would be better to
-> reset all queues.
-> 
-> Signed-off-by: Julio Faracco <jcfaracco@gmail.com>
-> Signed-off-by: Daiane Mendes <dnmendes76@gmail.com>
-> Cc: Jason Wang <jasowang@redhat.com>
-> ---
-> v1-v2: Tag `net-next` was included to indentify where patch would be
-> applied.
-> ---
->  drivers/net/virtio_net.c | 95 +++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 94 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-> index 4d7d5434cc5d..31890d77eaf2 100644
-> --- a/drivers/net/virtio_net.c
-> +++ b/drivers/net/virtio_net.c
-> @@ -75,6 +75,7 @@ struct virtnet_sq_stats {
->  	u64 xdp_tx;
->  	u64 xdp_tx_drops;
->  	u64 kicks;
-> +	u64 tx_timeouts;
->  };
->  
->  struct virtnet_rq_stats {
-> @@ -98,6 +99,7 @@ static const struct virtnet_stat_desc virtnet_sq_stats_desc[] = {
->  	{ "xdp_tx",		VIRTNET_SQ_STAT(xdp_tx) },
->  	{ "xdp_tx_drops",	VIRTNET_SQ_STAT(xdp_tx_drops) },
->  	{ "kicks",		VIRTNET_SQ_STAT(kicks) },
-> +	{ "tx_timeouts",	VIRTNET_SQ_STAT(tx_timeouts) },
->  };
->  
->  static const struct virtnet_stat_desc virtnet_rq_stats_desc[] = {
-> @@ -211,6 +213,9 @@ struct virtnet_info {
->  	/* Work struct for config space updates */
->  	struct work_struct config_work;
->  
-> +	/* Work struct for resetting the virtio-net driver. */
-> +	struct work_struct reset_work;
-> +
->  	/* Does the affinity hint is set for virtqueues? */
->  	bool affinity_hint_set;
->  
-> @@ -1721,7 +1726,7 @@ static void virtnet_stats(struct net_device *dev,
->  	int i;
->  
->  	for (i = 0; i < vi->max_queue_pairs; i++) {
-> -		u64 tpackets, tbytes, rpackets, rbytes, rdrops;
-> +		u64 tpackets, tbytes, terrors, rpackets, rbytes, rdrops;
->  		struct receive_queue *rq = &vi->rq[i];
->  		struct send_queue *sq = &vi->sq[i];
->  
-> @@ -1729,6 +1734,7 @@ static void virtnet_stats(struct net_device *dev,
->  			start = u64_stats_fetch_begin_irq(&sq->stats.syncp);
->  			tpackets = sq->stats.packets;
->  			tbytes   = sq->stats.bytes;
-> +			terrors  = sq->stats.tx_timeouts;
->  		} while (u64_stats_fetch_retry_irq(&sq->stats.syncp, start));
->  
->  		do {
-> @@ -1743,6 +1749,7 @@ static void virtnet_stats(struct net_device *dev,
->  		tot->rx_bytes   += rbytes;
->  		tot->tx_bytes   += tbytes;
->  		tot->rx_dropped += rdrops;
-> +		tot->tx_errors  += terrors;
->  	}
->  
->  	tot->tx_dropped = dev->stats.tx_dropped;
-> @@ -2578,6 +2585,33 @@ static int virtnet_set_features(struct net_device *dev,
->  	return 0;
->  }
->  
-> +static void virtnet_tx_timeout(struct net_device *dev)
-> +{
-> +	struct virtnet_info *vi = netdev_priv(dev);
-> +	u32 i;
-> +
-> +	netdev_warn(dev, "TX timeout stats:\n");
-> +	/* find the stopped queue the same way dev_watchdog() does */
-> +	for (i = 0; i < vi->curr_queue_pairs; i++) {
-> +		struct send_queue *sq = &vi->sq[i];
-> +
-> +		if (!netif_xmit_stopped(netdev_get_tx_queue(dev, i))) {
-> +			netdev_warn(dev, " Available send queue: %d, sq: %s, vq: %d, name: %s\n",
-> +				    i, sq->name, sq->vq->index, sq->vq->name);
+I'm seeking feedback on multi-platform support for virtio-iommu. At the
+moment only devicetree (DT) is supported and we don't have a pleasant
+solution for other platforms. Once we figure out the topology
+description, x86 support is trivial.
 
-What does this mean?
+Since the IOMMU manages memory accesses from other devices, the guest
+kernel needs to initialize the IOMMU before endpoints start issuing DMA.
+It's a solved problem: firmware or hypervisor describes through DT or
+ACPI tables the device dependencies, and probe of endpoints is deferred
+until the IOMMU is probed. But:
 
-> +			continue;
-> +		}
-> +
-> +		u64_stats_update_begin(&sq->stats.syncp);
-> +		sq->stats.tx_timeouts++;
-> +		u64_stats_update_end(&sq->stats.syncp);
-> +
-> +		netdev_warn(dev, " Unavailable send queue: %d, sq: %s, vq: %d, name: %s\n",
-> +			    i, sq->name, sq->vq->index, sq->vq->name);
-> +	}
+(1) ACPI has one table per vendor (DMAR for Intel, IVRS for AMD and IORT
+    for Arm). From my point of view IORT is easier to extend, since we
+    just need to introduce a new node type. There are no dependencies to
+    Arm in the Linux IORT driver, so it works well with CONFIG_X86.
 
-Can we make the warning less cryptic?
-I wonder why don't we get the sq from timeout directly?
-Would seem cleaner.
+    However, there are concerns about other OS vendors feeling obligated
+    to implement this new node, so Arm proposed introducing another ACPI
+    table, that can wrap any of DMAR, IVRS and IORT to extend it with
+    new virtual nodes. A draft of this VIOT table specification is
+    available at http://jpbrucker.net/virtio-iommu/viot/viot-v5.pdf
 
-> +
-> +	schedule_work(&vi->reset_work);
-> +}
-> +
->  static const struct net_device_ops virtnet_netdev = {
->  	.ndo_open            = virtnet_open,
->  	.ndo_stop   	     = virtnet_close,
-> @@ -2593,6 +2627,7 @@ static const struct net_device_ops virtnet_netdev = {
->  	.ndo_features_check	= passthru_features_check,
->  	.ndo_get_phys_port_name	= virtnet_get_phys_port_name,
->  	.ndo_set_features	= virtnet_set_features,
-> +	.ndo_tx_timeout		= virtnet_tx_timeout,
->  };
->  
->  static void virtnet_config_changed_work(struct work_struct *work)
-> @@ -2982,6 +3017,62 @@ static int virtnet_validate(struct virtio_device *vdev)
->  	return 0;
->  }
->  
-> +static void _remove_vq_common(struct virtnet_info *vi)
-> +{
-> +	vi->vdev->config->reset(vi->vdev);
-> +
-> +	/* Free unused buffers in both send and recv, if any. */
-> +	free_unused_bufs(vi);
-> +
-> +	_free_receive_bufs(vi);
-> +
-> +	free_receive_page_frags(vi);
-> +
-> +	virtnet_del_vqs(vi);
-> +}
-> +
-> +static int _virtnet_reset(struct virtnet_info *vi)
-> +{
-> +	struct virtio_device *vdev = vi->vdev;
-> +	int ret;
-> +
-> +	virtio_config_disable(vdev);
-> +	vdev->failed = vdev->config->get_status(vdev) & VIRTIO_CONFIG_S_FAILED;
-> +
-> +	virtnet_freeze_down(vdev);
-> +	_remove_vq_common(vi);
-> +
-> +	virtio_add_status(vdev, VIRTIO_CONFIG_S_ACKNOWLEDGE);
-> +	virtio_add_status(vdev, VIRTIO_CONFIG_S_DRIVER);
-> +
-> +	ret = virtio_finalize_features(vdev);
-> +	if (ret)
-> +		goto err;
-> +
-> +	ret = virtnet_restore_up(vdev);
-> +	if (ret)
-> +		goto err;
-> +
-> +	ret = _virtnet_set_queues(vi, vi->curr_queue_pairs);
-> +	if (ret)
-> +		goto err;
-> +
-> +	virtio_add_status(vdev, VIRTIO_CONFIG_S_DRIVER_OK);
-> +	virtio_config_enable(vdev);
+    I'm afraid this could increase fragmentation as guests would need to
+    implement or modify their support for all of DMAR, IVRS and IORT. If
+    we end up doing VIOT, I suggest limiting it to IORT.
+
+(2) In addition, there are some concerns about having virtio depend on
+    ACPI or DT. Some hypervisors (Firecracker, QEMU microvm, kvmtool x86
+    [1]) don't currently implement those methods.
+
+    It was suggested to embed the topology description into the device.
+    It can work, as demonstrated at the end of this RFC, with the
+    following limitations:
+
+    - The topology description must be read before any endpoint managed
+      by the IOMMU is probed, and even before the virtio module is
+      loaded. This RFC uses a PCI quirk to manually parse the virtio
+      configuration. It assumes that all endpoints managed by the IOMMU
+      are under this same PCI host.
+
+    - I don't have a solution for the virtio-mmio transport at the
+      moment, because I haven't had time to modify a host to test it. I
+      think it could either use a notifier on the platform bus, or
+      better, a new 'iommu' command-line argument to the virtio-mmio
+      driver. So the current prototype doesn't work for firecracker and
+      microvm, which rely on virtio-mmio.
+
+    - For Arm, if the platform has an ITS, the hypervisor needs IORT or
+      DT to describe it anyway. More generally, not using either ACPI or
+      DT might prevent from supporting other features as well. I suspect
+      the above users will have to implement a standard method sooner or
+      later.
+
+    - Even when reusing as much existing code as possible, guest support
+      is still going to be around a few hundred lines since we can't
+      rely on the normal virtio infrastructure to be loaded at that
+      point. As you can see below, the diffstat for the incomplete
+      topology implementation is already bigger than the exhaustive IORT
+      support, even when jumping through the VIOT hoop.
+
+    So it's a lightweight solution for very specific use-cases, and we
+    should still support ACPI for the general case. Multi-platform
+    guests such as Linux will then need to support three topology
+    descriptions instead of two.
+
+In this RFC I present both solutions, but I'd rather not keep all of it.
+Please see the individual patches for details:
+
+(1) Patches 1, 3-10 add support for virtio-iommu to the Linux IORT
+    driver and patches 2, 11 add the VIOT glue.
+
+(2) Patch 12 adds the built-in topology description to the virtio-iommu
+    specification. Patch 13 is a partial implementation for the Linux
+    virtio-iommu driver. It only supports PCI, not platform devices.
+
+You can find Linux and QEMU code on my virtio-iommu/devel branches at
+http://jpbrucker.net/git/linux and http://jpbrucker.net/git/qemu
 
 
-Is this enough? E.g. all RX mode programming has been lost.
+I split the diffstat since there are two independent features. The first
+one is for patches 1-11, and the second one for patch 13.
+
+Jean-Philippe Brucker (11):
+  ACPI/IORT: Move IORT to the ACPI folder
+  ACPI: Add VIOT definitions
+  ACPI/IORT: Allow registration of external tables
+  ACPI/IORT: Add node categories
+  ACPI/IORT: Support VIOT virtio-mmio node
+  ACPI/IORT: Support VIOT virtio-pci node
+  ACPI/IORT: Defer probe until virtio-iommu-pci has registered a fwnode
+  ACPI/IORT: Add callback to update a device's fwnode
+  iommu/virtio: Create fwnode if necessary
+  iommu/virtio: Update IORT fwnode
+  ACPI: Add VIOT table
+
+ MAINTAINERS                     |   9 +
+ drivers/acpi/Kconfig            |   7 +
+ drivers/acpi/Makefile           |   2 +
+ drivers/acpi/arm64/Kconfig      |   3 -
+ drivers/acpi/arm64/Makefile     |   1 -
+ drivers/acpi/bus.c              |   2 +
+ drivers/acpi/{arm64 => }/iort.c | 317 ++++++++++++++++++++++++++------
+ drivers/acpi/tables.c           |   2 +-
+ drivers/acpi/viot.c             |  44 +++++
+ drivers/iommu/Kconfig           |   1 +
+ drivers/iommu/virtio-iommu.c    |  61 +++++-
+ include/acpi/actbl2.h           |  31 ++++
+ include/linux/acpi_iort.h       |  14 ++
+ include/linux/acpi_viot.h       |  20 ++
+ 14 files changed, 448 insertions(+), 66 deletions(-)
+ rename drivers/acpi/{arm64 => }/iort.c (86%)
+ create mode 100644 drivers/acpi/viot.c
+ create mode 100644 include/linux/acpi_viot.h
+
+Jean-Philippe Brucker (1):
+  iommu/virtio: Add topology description to virtio-iommu config space
+
+ drivers/base/platform.c               |   3 +
+ drivers/iommu/Kconfig                 |   9 +
+ drivers/iommu/Makefile                |   1 +
+ drivers/iommu/virtio-iommu-topology.c | 410 ++++++++++++++++++++++++++
+ drivers/iommu/virtio-iommu.c          |   3 +
+ drivers/pci/pci-driver.c              |   3 +
+ include/linux/virtio_iommu.h          |  18 ++
+ include/uapi/linux/virtio_iommu.h     |  26 ++
+ 8 files changed, 473 insertions(+)
+ create mode 100644 drivers/iommu/virtio-iommu-topology.c
+ create mode 100644 include/linux/virtio_iommu.h
 
 
-
-> +	return 0;
-> +err:
-> +	virtio_add_status(vdev, VIRTIO_CONFIG_S_FAILED);
-> +	return ret;
-> +}
-> +
-> +static void virtnet_reset(struct work_struct *work)
-> +{
-> +	struct virtnet_info *vi =
-> +		container_of(work, struct virtnet_info, reset_work);
-> +
-> +	_virtnet_reset(vi);
-> +}
-> +
->  static int virtnet_probe(struct virtio_device *vdev)
->  {
->  	int i, err = -ENOMEM;
-> @@ -3011,6 +3102,7 @@ static int virtnet_probe(struct virtio_device *vdev)
->  	dev->netdev_ops = &virtnet_netdev;
->  	dev->features = NETIF_F_HIGHDMA;
->  
-> +	dev->watchdog_timeo = 5 * HZ;
->  	dev->ethtool_ops = &virtnet_ethtool_ops;
->  	SET_NETDEV_DEV(dev, &vdev->dev);
->
-
-Is there a way to make this tuneable from ethtool?
-  
-> @@ -3068,6 +3160,7 @@ static int virtnet_probe(struct virtio_device *vdev)
->  	vdev->priv = vi;
->  
->  	INIT_WORK(&vi->config_work, virtnet_config_changed_work);
-> +	INIT_WORK(&vi->reset_work, virtnet_reset);
->  
->  	/* If we can receive ANY GSO packets, we must allocate large ones. */
->  	if (virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO4) ||
-> -- 
-> 2.17.1
+[1] firecracker: https://github.com/firecracker-microvm/firecracker
+    microvm: https://github.com/qemu/qemu/blob/master/docs/microvm.rst
+    kvmtool: https://git.kernel.org/pub/scm/linux/kernel/git/will/kvmtool.git/
+-- 
+2.24.0
 
 _______________________________________________
 Virtualization mailing list
