@@ -1,81 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA859105E48
-	for <lists.virtualization@lfdr.de>; Fri, 22 Nov 2019 02:34:30 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AB30105E4B
+	for <lists.virtualization@lfdr.de>; Fri, 22 Nov 2019 02:36:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 664D387EDA;
-	Fri, 22 Nov 2019 01:34:29 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2B94287239;
+	Fri, 22 Nov 2019 01:36:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id F6gNJsoRqe4D; Fri, 22 Nov 2019 01:34:28 +0000 (UTC)
+	with ESMTP id b7JNKcnEcvEa; Fri, 22 Nov 2019 01:36:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3930887F04;
-	Fri, 22 Nov 2019 01:34:28 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 82D4487031;
+	Fri, 22 Nov 2019 01:36:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0403DC18DA;
-	Fri, 22 Nov 2019 01:34:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6BD06C18DA;
+	Fri, 22 Nov 2019 01:36:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 084C3C18DA
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 32679C18DA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 01:34:27 +0000 (UTC)
+ Fri, 22 Nov 2019 01:36:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id EAD03889EC
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 2E4A287031
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 01:34:26 +0000 (UTC)
+ Fri, 22 Nov 2019 01:36:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id S-aCMpV5+E5Q
+ with ESMTP id j1dp3QQSTWz4
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 01:34:26 +0000 (UTC)
+ Fri, 22 Nov 2019 01:36:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
- [209.85.222.196])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 04E5E8859D
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+ [209.85.160.193])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 49B7E86FB7
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Nov 2019 01:34:26 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id m125so4902333qkd.8
+ Fri, 22 Nov 2019 01:36:42 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id o49so6015421qta.7
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Nov 2019 17:34:25 -0800 (PST)
+ Thu, 21 Nov 2019 17:36:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id;
- bh=M2t/bQT6SDEWyA5LFYGQq1a0ZPecdTO0+C4+tNOQp/Q=;
- b=cKZwN9aI0AhhNU/q3P8pUGyJtmoG7bBlp+Ye24J5Hh4/g/4KC78Kve6FoexiRpN7X9
- VXuZhSeUsR/i7jfUIbLyDIF726aBAueN3S+UWfn46U6GFQjnW0nOZ3M54ktteKWzMK/X
- OKy8BkXCVNnC2Z4SjT/U1o4J64aeAKEcdQMVcSpsc9d2oWN71toERVtA488UYLebphSu
- chsJBHEDszc7X73mGmXvDcnPSocD/IcYMP9upvMEyKu0O58ZwssOxUntsDqonZ1rnR0k
- dM26+udPe2wM0zNXntKhP81wd2G6qPsdnGi85g77jBRrLjI48ADHDjZ3vz5YJ4KYSWse
- w/jA==
+ bh=j/rdj823c44COpV5cCERJMmYJupdnu4Z7k72/Pj6nfc=;
+ b=qSCWEAf/Oq25XXc6GCeTD36O8i45C0HfRm0uyrEsaXcsOiov5e0aVxeBkVOixUvM8L
+ HUUQKoqTZMF8wXSwjdueBDo4NjMgycaHrY4DSmsQwwQo/OvJ3bACYTuQaXUBbW79OjXW
+ SNjNMxPDz6BCIgRhFsD/71hKWZg6w6fW8aP2Ee/in667aFydGJG9j/UdJrUOfnNXlABZ
+ iqWBUjPNRdlcN+vkmerEMbBPyLhf+ZUCsNaK7IMJktmcNW/1SxiIEIZWgFEVZf4OTSUL
+ DJYxY/Hes8TV9SmInbbK0rZZN0eeN7T8ISRb/zIiNc22XCdM3Y7Kz9/aNuGEZ1KBtflo
+ FYog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=M2t/bQT6SDEWyA5LFYGQq1a0ZPecdTO0+C4+tNOQp/Q=;
- b=sexMFZrrUbMc4y8GJp01CP8QCDcsfkDRbNvt5nsTA/3fC/I3CoKufrbJiu7bouGMJ5
- RiUKTFN/TcOXjBTBLGahPSu2Vz/sjbAfIpT1yRgaDZrZVj8YyVGwph/HuxK6e5pHLPpf
- XfXhDZyGeHgHBQbE6+Z3Uuxqo9o/ZimrX1sFoxdOeHWa///viE01ijJ/QwODg3TWDnLq
- IB1cin3lSUbMOzivPDQfm/VBb5M1goDa2jqKSU11tYWmwgDExlUdtXAo2xZV5RNWSXiA
- HTKzSHTqfsZTzt1TXKXGOi4jJvNwQXCPlDpgObZUR49zsLd3kQTNBmP9XmL65YONywp1
- Jqlw==
-X-Gm-Message-State: APjAAAW7gbrewrOlmrfJmAEsfLJjq7wr+1BBWuEohh91F07lLUONYarh
- iWQomswg9X16CUwbZ6h9Kx8=
-X-Google-Smtp-Source: APXvYqzZ/EJJ3EmUqlzJuVC3CRtXNCTr/UmNFVErkc75WzxXPUGQeuwG6FjYAg7wQbxVrUB7jnAXeQ==
-X-Received: by 2002:a05:620a:984:: with SMTP id
- x4mr11421581qkx.373.1574386464621; 
- Thu, 21 Nov 2019 17:34:24 -0800 (PST)
+ bh=j/rdj823c44COpV5cCERJMmYJupdnu4Z7k72/Pj6nfc=;
+ b=l4vBiLSHrsKDh/ydtc3ZZKWWUS7O9AAeYk3bXnqnu+FS/s9qa7U6XNKs08JbrXiTF8
+ sgtBjo3oWY/tqZvX/b490aa7JM5C1P5/6/fHazmqYjGhGnx1v8Hlqcp2YaJ7QxaMtXPZ
+ mOvlHkW9fDyB+kikuVVoxmY5110LMhxY4cVuA7tUdsyA19CTMs4n+l5ISXF/G4DEjIXM
+ AxOKUv5bQIBydllJJvc/isWL7k0Tgcc7/gTB1XfsrG52Pzy/PK67GuSMbWbSqwAVifvy
+ 4HphRI2gBwdYRyrBR0nTem9Yar3pqGxGnxZpyFJtsh73uoObgRBaKaKG4QghmZh0C5mk
+ k6GQ==
+X-Gm-Message-State: APjAAAUc/mECtdRc0eLC6UcR0wLz2Cnjxss/d/fFom6WAqpSKP/DgN2G
+ 3+pbcOUiqll6hT4cksMzKzQ=
+X-Google-Smtp-Source: APXvYqyPKeZrhMbgH8kJUD7OD1ngbGnzaM8S4gillMotJpVwQTjf7ylLCo8pDCds0mDFBg+mBkuY1A==
+X-Received: by 2002:ac8:2441:: with SMTP id d1mr1579575qtd.386.1574386601064; 
+ Thu, 21 Nov 2019 17:36:41 -0800 (PST)
 Received: from ubuntu.default ([191.254.197.220])
- by smtp.gmail.com with ESMTPSA id a70sm2304857qkb.86.2019.11.21.17.34.22
+ by smtp.gmail.com with ESMTPSA id y28sm2485073qtk.65.2019.11.21.17.36.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2019 17:34:23 -0800 (PST)
+ Thu, 21 Nov 2019 17:36:40 -0800 (PST)
 From: Julio Faracco <jcfaracco@gmail.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH] drivers: net: virtio_net: Implement a dev_watchdog handler
-Date: Thu, 21 Nov 2019 22:34:19 -0300
-Message-Id: <20191122013419.980-1-jcfaracco@gmail.com>
+Subject: [PATCH net-next v2] drivers: net: virtio_net: Implement a
+ dev_watchdog handler
+Date: Thu, 21 Nov 2019 22:36:36 -0300
+Message-Id: <20191122013636.1041-1-jcfaracco@gmail.com>
 X-Mailer: git-send-email 2.17.1
 Cc: dnmendes76@gmail.com, "Michael S. Tsirkin" <mst@redhat.com>,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
@@ -112,6 +112,9 @@ reset all queues.
 Signed-off-by: Julio Faracco <jcfaracco@gmail.com>
 Signed-off-by: Daiane Mendes <dnmendes76@gmail.com>
 Cc: Jason Wang <jasowang@redhat.com>
+---
+v1-v2: Tag `net-next` was included to indentify where patch would be
+applied.
 ---
  drivers/net/virtio_net.c | 95 +++++++++++++++++++++++++++++++++++++++-
  1 file changed, 94 insertions(+), 1 deletion(-)
