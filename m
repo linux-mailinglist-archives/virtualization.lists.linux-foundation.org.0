@@ -1,95 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32043109338
-	for <lists.virtualization@lfdr.de>; Mon, 25 Nov 2019 19:02:57 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 35637843BB;
-	Mon, 25 Nov 2019 18:02:55 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2ZRpHQGGXhoJ; Mon, 25 Nov 2019 18:02:53 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CCB6B83AE3;
-	Mon, 25 Nov 2019 18:02:53 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BBC0AC0878;
-	Mon, 25 Nov 2019 18:02:53 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0E4E4C0878
- for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Nov 2019 18:02:53 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 525B310A429
+	for <lists.virtualization@lfdr.de>; Tue, 26 Nov 2019 19:45:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 0AA03844C7
- for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Nov 2019 18:02:53 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C8A568598E;
+	Tue, 26 Nov 2019 18:45:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Sjbyocuv7O6b; Tue, 26 Nov 2019 18:45:34 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2E4CD85A96;
+	Tue, 26 Nov 2019 18:45:34 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 14DD1C0878;
+	Tue, 26 Nov 2019 18:45:34 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EA9F7C0878
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 26 Nov 2019 18:45:32 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id DBCC787FB5
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 26 Nov 2019 18:45:32 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3cHYLSykt17E
+ with ESMTP id arVubMxLzCeM
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Nov 2019 18:02:51 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
- [209.85.128.65])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8FF6184496
+ Tue, 26 Nov 2019 18:45:31 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7CB7787F84
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Nov 2019 18:02:51 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id u18so277324wmc.3
- for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Nov 2019 10:02:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=DsVFgOaoUnvqgpXrrfO/kuxApZChsstp982wmsPwKow=;
- b=BVZoTiVVWzkDa6J2Q2Qlyztkv9vYFsD8IQFSzj6F/veUx4CwkaYyPnMFRUYWaN8vy4
- FN/26iKAp68el7tDKgZOR8bbr3gZQ+IIjxSCIbCU3xYwtaRnVItBvJtOT5eD0zVON6uG
- /vdQ+r1fFJyFa5adDPjnZxlevY/yeOnNxUybX639YiR7WofyJKBI4nK48UtjD0iVidNm
- 6GJ9ITcStA6id5xJFVLJHZv6Lax/OfEErhFa/2G/Ceczqd2xJ8z/NNb+5Zv+8SmMkZFv
- HaZyLOMDnD+07/EQFr1qxCxir+RJwAnSaMeHJgSUMK3rZ0osaPrGXBCwdtx82UlEbUCw
- EIRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=DsVFgOaoUnvqgpXrrfO/kuxApZChsstp982wmsPwKow=;
- b=lglIVzFdEWxGW9NWI0TMahBt+hzpyRbxJWeaeRFqoqn5rTJ56DNstJOQpAAUmyhmh4
- x+ld0L9laqXBrvtwh5bgFYKAfYgJBHXH+AOi7b8DRNWMJiI+HJkjPJxmw7DxhCPkXF8H
- /1jb7um5OKcOs9IVHlCbUMCIezf5Lm2q+D7v0T8FgngxrfaLhkkmK7vYq5GRR0jGRN2Z
- YSzlrCDK+AOa/ue0P2vbVuoDq8kTg8Laskap5QS2VFZutgcEtLkYXltDG6M4178GO/J0
- qfa2NByiptsy/RfKiYCh2Yl4uG/YZKd/kH9AvIgUoPMFuxK/lJNmodTa2jj3ZTX3lKqf
- bCSw==
-X-Gm-Message-State: APjAAAU8/kO8fCBq3IgWuR9g3eOLUIlfmPJ4E0Grhr1g0qqMJzgGuNK7
- 15Q5aa/JoLuaP2i6/fjEI2ArKQ==
-X-Google-Smtp-Source: APXvYqw9M5aeYuFnK4VC6ZcTBEX4VkbAMP2hH5YfKViShTZm/FHN5Dr4VO7dByhvs7N0wxzK+UaojA==
-X-Received: by 2002:a7b:c1d3:: with SMTP id a19mr93685wmj.127.1574704970043;
- Mon, 25 Nov 2019 10:02:50 -0800 (PST)
-Received: from lophozonia (xdsl-188-155-204-106.adslplus.ch. [188.155.204.106])
- by smtp.gmail.com with ESMTPSA id 72sm11785825wrl.73.2019.11.25.10.02.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2019 10:02:49 -0800 (PST)
-Date: Mon, 25 Nov 2019 19:02:47 +0100
-From: Jean-Philippe Brucker <jean-philippe@linaro.org>
-To: "Jacob Pan (Jun)" <jacob.jun.pan@intel.com>
-Subject: Re: [RFC 00/13] virtio-iommu on non-devicetree platforms
-Message-ID: <20191125180247.GD945122@lophozonia>
-References: <20191122105000.800410-1-jean-philippe@linaro.org>
- <20191122160102.00004489@intel.com>
+ Tue, 26 Nov 2019 18:45:31 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 3ADCA68C4E; Tue, 26 Nov 2019 19:45:27 +0100 (CET)
+Date: Tue, 26 Nov 2019 19:45:27 +0100
+From: Christoph Hellwig <hch@lst.de>
+To: Tom Lendacky <thomas.lendacky@amd.com>
+Subject: Re: [PATCH 1/1] virtio_ring: fix return code on DMA mapping fails
+Message-ID: <20191126184527.GA10481@lst.de>
+References: <20191114124646.74790-1-pasic@linux.ibm.com>
+ <20191119121022.03aed69a.pasic@linux.ibm.com>
+ <20191119080420-mutt-send-email-mst@kernel.org>
+ <20191122140827.0ead345c.pasic@linux.ibm.com>
+ <1ec7c229-6c4f-9351-efda-ed2df20f95f6@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191122160102.00004489@intel.com>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-Cc: virtio-dev@lists.oasis-open.org, lorenzo.pieralisi@arm.com,
- gregkh@linuxfoundation.org, linux-pci@vger.kernel.org, joro@8bytes.org,
- sudeep.holla@arm.com, rjw@rjwysocki.net,
- virtualization@lists.linux-foundation.org, linux-acpi@vger.kernel.org,
- iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com, mst@redhat.com,
- eric.auger@redhat.com, guohanjun@huawei.com, bhelgaas@google.com,
- linux-arm-kernel@lists.infradead.org, lenb@kernel.org
+In-Reply-To: <1ec7c229-6c4f-9351-efda-ed2df20f95f6@amd.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Cc: linux-s390@vger.kernel.org, "Kalra, Ashish" <Ashish.Kalra@amd.com>,
+ Brijesh Singh <brijesh.singh@amd.com>, Janosch Frank <frankja@linux.ibm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Andy Lutomirski <luto@kernel.org>, Michael Mueller <mimu@linux.ibm.com>,
+ Christoph Hellwig <hch@lst.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,50 +73,38 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Nov 22, 2019 at 04:01:02PM -0800, Jacob Pan (Jun) wrote:
-> > (1) ACPI has one table per vendor (DMAR for Intel, IVRS for AMD and
-> > IORT for Arm). From my point of view IORT is easier to extend, since
-> > we just need to introduce a new node type. There are no dependencies
-> > to Arm in the Linux IORT driver, so it works well with CONFIG_X86.
-> > 
-> From my limited understanding, IORT and VIOT is to solve device topology
-> enumeration only? I am not sure how it can be expanded to cover
-> information beyond device topology. e.g. DMAR has NUMA information and
-> root port ATS, I guess they are not used today in the guest but might
-> be additions in the future.
-
-The PCI root-complex node of IORT has an ATS attribute, which we can
-already use. However its scope is the root complex, not individual root
-ports like with DMAR.
-
-I'm not very familiar with NUMA, but it looks like we just need to specify
-a proximity domain in relation to the SRAT table, for each viommu? The
-SMMUv3 node in IORT has a 4-bytes "proximity domain" field for this. We
-can add the same to the VIOT virtio-iommu nodes later, since the
-structures are extensible.
-
-But it might be better to keep the bare minimum information in the FW
-descriptor, and put the rest in the virtio-iommu. So yes topology
-enumeration is something the device cannot do itself (not fully that is,
-see (2)) but for the rest, virtio-iommu's PROBE request can provide
-details about each endpoint in relation to their physical IOMMU.
-
-We could for example add a bit in a PROBE property saying that the whole
-path between the IOMMU and the endpoint supports ATS. For NUMA it might
-also be more interesting to have a finer granularity, since one viommu
-could be managing endpoints that are behind different physical IOMMUs. If
-in the future we want to allocate page tables close to the physical IOMMU
-for example, we might need to describe multiple NUMA nodes per viommu,
-using the PROBE request.
-
-Thanks,
-Jean
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gU2F0LCBOb3YgMjMsIDIwMTkgYXQgMDk6Mzk6MDhBTSAtMDYwMCwgVG9tIExlbmRhY2t5IHdy
+b3RlOgo+IElkZWFsbHksIGhhdmluZyBhIHBvb2wgb2Ygc2hhcmVkIHBhZ2VzIGZvciBETUEsIG91
+dHNpZGUgb2Ygc3RhbmRhcmQKPiBTV0lPVExCLCBtaWdodCBiZSBhIGdvb2QgdGhpbmcuICBPbiB4
+ODYsIFNXSU9UTEIgcmVhbGx5IHNlZW1zIGdlYXJlZAo+IHRvd2FyZHMgZGV2aWNlcyB0aGF0IGRv
+bid0IHN1cHBvcnQgNjQtYml0IERNQS4gSWYgYSBkZXZpY2Ugc3VwcG9ydHMgNjQtYml0Cj4gRE1B
+IHRoZW4gaXQgY2FuIHVzZSBzaGFyZWQgcGFnZXMgdGhhdCByZXNpZGUgYW55d2hlcmUgdG8gcGVy
+Zm9ybSB0aGUgRE1BCj4gYW5kIGJvdW5jZSBidWZmZXJpbmcuIEkgd29uZGVyIGlmIHRoZSBTV0lP
+VExCIHN1cHBvcnQgY2FuIGJlIGVuaGFuY2VkIHRvCj4gc3VwcG9ydCBzb21ldGhpbmcgbGlrZSB0
+aGlzLCB1c2luZyB0b2RheSdzIGxvdyBTV0lPVExCIGJ1ZmZlcnMgaWYgdGhlIERNQQo+IG1hc2sg
+bmVjZXNzaXRhdGVzIGl0LCBvdGhlcndpc2UgdXNpbmcgYSBkeW5hbWljYWxseSBzaXplZCBwb29s
+IG9mIHNoYXJlZAo+IHBhZ2VzIHRoYXQgY2FuIGxpdmUgYW55d2hlcmUuCgpJIHRoaW5rIHRoYXQg
+Y2FuIGJlIGRvbmUgcmVsYXRpdmVseSBlYXNpbHkuICBJJ3ZlIGFjdHVhbGx5IGJlZW4gdGhpbmtp
+bmcKb2YgbXVsdGlwbGUgcG9vbCBzdXBwb3J0IGZvciBhIHdo0ZZsZSB0byByZXBsYWNlIHRoZSBi
+b3VuY2UgYnVmZmVyaW5nCmluIHRoZSBibG9jayBsYXllciBmb3IgSVNBIGRldmljZXMgKDI0LWJp
+dCBhZGRyZXNzaW5nKS4KCkkndmUgYWxzbyBiZWVuIGxvb2tpbmcgaW50byBhIGRtYV9hbGxvY19w
+YWdlcyBpbnRlcmZhY2UgdG8gaGVscCBwZW9wbGUKanVzdCBhbGxvY2F0ZSBwYWdlcyB0aGF0IGFy
+ZSBhbHdheXMgZG1hIGFkZHJlc3NhYmxlLCBidXQgZG9uJ3QgbmVlZAphIGNvaGVyZW50IGFsbG9j
+YXRpb24uICBNeSBsYXN0IHZlcnNpb24gSSBzaGFyZWQgaXMgaGVyZToKCmh0dHA6Ly9naXQuaW5m
+cmFkZWFkLm9yZy91c2Vycy9oY2gvbWlzYy5naXQvc2hvcnRsb2cvcmVmcy9oZWFkcy9kbWFfYWxs
+b2NfcGFnZXMKCkJ1dCBpdCB0dXJucyBvdXQgdGhpcyBzdGlsbCBkb2Vzbid0IHdvcmsgd2l0aCBT
+RVYgYXMgd2UnbGwgYWx3YXlzCmJvdW5jZS4gIEFuZCBJJ3ZlIGJlZW4ga2luZGEgbG9zdCBvbiBm
+aWd1cmluZyBvdXQgYSB3YXkgaG93IHRvCmFsbG9jYXRlIHVuZW5jcnlwdGVkIHBhZ2VzIHRoYXQg
+d2Ugd2UgY2FuIGZlZWQgaW50byB0aGUgbm9ybWFsCmRtYV9tYXBfcGFnZSAmIGNvIGludGVyZmFj
+ZXMgZHVlIHRvIHRoZSBtYWdpYyBlbmNyeXB0aW9uIGJpdCBpbgp0aGUgYWRkcmVzcy4gIEkgZ3Vl
+c3Mgd2UgY291bGQgaGF2ZSBhIGZhbGxiYWNrIHBhdGggaW4gdGhlIG1hcHBpbmcKcGF0aCBhbmQg
+anVzdCB1bmNvbmRpdGlvbmFsbHkgY2xlYXIgdGhhdCBiaXQgaW4gdGhlIGRtYV90b19waHlzCnBh
+dGguCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1
+YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0
+aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5m
+by92aXJ0dWFsaXphdGlvbg==
