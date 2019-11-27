@@ -1,93 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8522010AECC
-	for <lists.virtualization@lfdr.de>; Wed, 27 Nov 2019 12:38:48 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EAA510AED1
+	for <lists.virtualization@lfdr.de>; Wed, 27 Nov 2019 12:41:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 3D31288216;
-	Wed, 27 Nov 2019 11:38:47 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DB1FD87659;
+	Wed, 27 Nov 2019 11:41:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zGH3OoKZ8Tag; Wed, 27 Nov 2019 11:38:46 +0000 (UTC)
+	with ESMTP id v9rUqDlvWafe; Wed, 27 Nov 2019 11:41:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C1B1A87ED9;
-	Wed, 27 Nov 2019 11:38:46 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 367FE87618;
+	Wed, 27 Nov 2019 11:41:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AD697C1DE1;
-	Wed, 27 Nov 2019 11:38:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 18EADC1DD5;
+	Wed, 27 Nov 2019 11:41:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C9A45C0881
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 390ECC0881
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Nov 2019 11:38:44 +0000 (UTC)
+ Wed, 27 Nov 2019 11:41:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C5D3C8820C
+ by whitealder.osuosl.org (Postfix) with ESMTP id 2DC5A86ACB
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Nov 2019 11:38:44 +0000 (UTC)
+ Wed, 27 Nov 2019 11:41:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wzsR1mkTAR7W
+ with ESMTP id LaTM0+End4Po
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Nov 2019 11:38:44 +0000 (UTC)
+ Wed, 27 Nov 2019 11:41:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 0DF6A87ED9
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 44957869C4
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Nov 2019 11:38:43 +0000 (UTC)
+ Wed, 27 Nov 2019 11:41:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1574854722;
+ s=mimecast20190719; t=1574854860;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=h5tpEqO+wGu590B9l8gWu8dMstk0LXzAJSva1FoVaD0=;
- b=aJJbxyhNxYTb8faSR85v2MlvwHREeShFZ5jg7xGgbDvUjCNRipMMTM+UOVZAGHRI3yTC6X
- +W0GE5JmfEKIWHhcnenwb8K5idDfSNozL2KSuijAGwKxnsgjP1QxDr7kB7iJFCUkCTtEfm
- MkVRGFfVnU+BVdiluBu3fAEHI18HtDA=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-360-Bl7-mu0EPIe5Q-GNFuHNkA-1; Wed, 27 Nov 2019 06:38:40 -0500
-Received: by mail-wr1-f72.google.com with SMTP id m17so11991202wrb.20
+ bh=u2MTh3sn/YgUzo7BT+awl8HsuGfDfwhUCejX1QPvEAw=;
+ b=VkDxup/CWAzfk94Ajn5DPX13+Ot2LL77MUvNFfqH0dYX2fMEvj552vgpceEqiEm5IK5o8p
+ Ls0tjuu8xnphpNMr5DP6PjAG/xCEhzkla1jqJg16YjARL7rEhuTdlffSRo33iEz/oFa3sM
+ llDgy8tLboEom6r+G7OydeaK3othG90=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-23-4XR-JlX1MGCTtVF6suVl6g-1; Wed, 27 Nov 2019 06:40:57 -0500
+Received: by mail-wr1-f69.google.com with SMTP id d8so8102478wrq.12
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Nov 2019 03:38:40 -0800 (PST)
+ Wed, 27 Nov 2019 03:40:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=gB/Wj4XkNOl04gutjt7FkVMp5zt/tHRhcrcqk436DGA=;
- b=QLv3kw5AaqGt1vjlFFHXuEsuaiCSqN+f4Ax09trHYbBpx7reZpAEMx3oBSNBXoeQru
- n9DdbZj7DImTN/yD9dfLzZYA5XaY1v8yHAbRJ5L30qM7o5wEU4w3jhOn9ByM4kfYTZ3p
- W4TxR8QYN1HxDgepgWMvwYMWq0AImvKI5uMaro7+uK4H9JNsig607GjcKhHTQbUniRPM
- LrI7E/wbJVY89ai0JEObQN5+QnjsK5sN+DNmKYFaRKUsr0Qn9JfG5ZD/NEf+GGXhjaUY
- 9VVA1z4m8erAa34pj0hdF/bzW6+GxfL7uFWPqSO7ToTEG8l2+/pcaU0RN5hxYCNl4ixO
- D+JA==
-X-Gm-Message-State: APjAAAUJAi4lKtWCl9/t/qc27HWu6xLAKwHp5W4Brylfw+XJ7dXJVXdD
- aNq2Nh7p9IdpiRrBxPOHtEoE9ygupyspmpAt52gQ6Vsipvw0Uzf/mZBxKc3ghyXbeeSx28c3E6q
- iSU/S1Q+c3aHb/keaKIZjCaru7x2zIc6zcQHdVFmyWA==
-X-Received: by 2002:a05:600c:249:: with SMTP id 9mr3850245wmj.2.1574854719517; 
- Wed, 27 Nov 2019 03:38:39 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwxKFhYNt/5OmFRFNm0SplAax2A8tbao8cCbRdGJOTR3SFH21/IDFCvk/lfdGlETDTJsaX8dg==
-X-Received: by 2002:a05:600c:249:: with SMTP id 9mr3850228wmj.2.1574854719334; 
- Wed, 27 Nov 2019 03:38:39 -0800 (PST)
+ bh=nZ69cqNkgRpKOiZ3h2rwuEogSUZ9kEE8/cm9II5vyBg=;
+ b=pG2xJXL8vljCx7PlmzEZdoAi8ZFvjvSOIo2KZJELhHrt2sCCdF2LxbFq630GwKGCSJ
+ IidaLYhn8tKnK1kJrzNhKpEsV076HjUKCIbrOXHNROLEHCDufnJYmSHiV/G/q5IiDaqY
+ h1miudg+Xux9QFOsGh44lvxkmht21XFTYXbTZ52ZxTjg7q47leqQ+jc6DgCBLjbJH0GU
+ lAlcdo4sbpB8V3hrmoZf1UycY0GmFOxEo0W5ehI1CeDqkWt1NHVcGtbxFbj8A7s36SOg
+ yzNcpqd5NFZaYggtgxlPvAHaBTJvzuDlXTzrPdEq5h1J7wbMVmSRyvH5UZmBYXbyaU0l
+ 1J2g==
+X-Gm-Message-State: APjAAAUEkf864YSSagMTdyD/5+CCb1wMEoIG2DDKKUJKpmbWcKZEDUjC
+ FcMd9dU21Pn50lUjeGCcXyO43Dfxx/yuIuQuGOsfKTU3Dl03a9VjS1qVCVtk7a5IJyOY9RerHWM
+ xjiU/8ejc7Tgaugmr9mENwBNe0Z+g4oT35PX64Csnyw==
+X-Received: by 2002:a05:600c:2944:: with SMTP id
+ n4mr3955911wmd.57.1574854856476; 
+ Wed, 27 Nov 2019 03:40:56 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwZ/QBEsQ+X1s4efkDz9dRO4IGVX6KoJpp1ZLnXg0uOuyaTXWEfcsMy9j8KVa0jIkfLV3LMdg==
+X-Received: by 2002:a05:600c:2944:: with SMTP id
+ n4mr3955894wmd.57.1574854856346; 
+ Wed, 27 Nov 2019 03:40:56 -0800 (PST)
 Received: from redhat.com (bzq-79-181-48-215.red.bezeqint.net. [79.181.48.215])
- by smtp.gmail.com with ESMTPSA id w11sm20128184wra.83.2019.11.27.03.38.37
+ by smtp.gmail.com with ESMTPSA id u14sm19057119wrm.51.2019.11.27.03.40.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2019 03:38:38 -0800 (PST)
-Date: Wed, 27 Nov 2019 06:38:35 -0500
+ Wed, 27 Nov 2019 03:40:55 -0800 (PST)
+Date: Wed, 27 Nov 2019 06:40:53 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: David Miller <davem@davemloft.net>
 Subject: Re: [net-next V3 0/2] drivers: net: virtio_net: implement
-Message-ID: <20191127063624-mutt-send-email-mst@kernel.org>
+Message-ID: <20191127064037-mutt-send-email-mst@kernel.org>
 References: <20191126200628.22251-1-jcfaracco@gmail.com>
  <20191126.140630.1195989367614358026.davem@davemloft.net>
+ <20191127063624-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20191126.140630.1195989367614358026.davem@davemloft.net>
-X-MC-Unique: Bl7-mu0EPIe5Q-GNFuHNkA-1
+In-Reply-To: <20191127063624-mutt-send-email-mst@kernel.org>
+X-MC-Unique: 4XR-JlX1MGCTtVF6suVl6g-1
 X-Mimecast-Spam-Score: 0
 Content-Disposition: inline
 Cc: dnmendes76@gmail.com, netdev@vger.kernel.org, jcfaracco@gmail.com,
@@ -108,17 +111,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Nov 26, 2019 at 02:06:30PM -0800, David Miller wrote:
+On Wed, Nov 27, 2019 at 06:38:39AM -0500, Michael S. Tsirkin wrote:
+> On Tue, Nov 26, 2019 at 02:06:30PM -0800, David Miller wrote:
+> > 
+> > net-next is closed
 > 
-> net-next is closed
+> Could you merge this early when net-next reopens though?
+> This way I don't need to keep adding drivers to update.
 
-Could you merge this early when net-next reopens though?
-This way I don't need to keep adding drivers to update.
 
-Thanks,
+I just mean 1/2 btw. I think 2/2 might still need some work.
 
--- 
-MST
+> Thanks,
+> 
+> -- 
+> MST
 
 _______________________________________________
 Virtualization mailing list
