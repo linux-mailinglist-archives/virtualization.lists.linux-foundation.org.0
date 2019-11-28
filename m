@@ -1,76 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2EEF10CD94
-	for <lists.virtualization@lfdr.de>; Thu, 28 Nov 2019 18:15:41 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 93737883D2;
-	Thu, 28 Nov 2019 17:15:40 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IUTs3yDjNhar; Thu, 28 Nov 2019 17:15:39 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B3CD4883D7;
-	Thu, 28 Nov 2019 17:15:39 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9600AC1DD5;
-	Thu, 28 Nov 2019 17:15:39 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4EA67C0881
- for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Nov 2019 17:15:37 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20C7310CD95
+	for <lists.virtualization@lfdr.de>; Thu, 28 Nov 2019 18:15:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3F7F3878EA
- for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Nov 2019 17:15:37 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B5BA587B4B;
+	Thu, 28 Nov 2019 17:15:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0eDqZiwet-2S; Thu, 28 Nov 2019 17:15:42 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3B08787B49;
+	Thu, 28 Nov 2019 17:15:42 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 19D8EC0881;
+	Thu, 28 Nov 2019 17:15:42 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C800AC0881
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 28 Nov 2019 17:15:40 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id B2301883D4
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 28 Nov 2019 17:15:40 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pk+G+F-ZxrlA
+ with ESMTP id utPfKfM3XCZ0
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Nov 2019 17:15:36 +0000 (UTC)
+ Thu, 28 Nov 2019 17:15:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id DD4D78795E
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 8B818883CB
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Nov 2019 17:15:35 +0000 (UTC)
+ Thu, 28 Nov 2019 17:15:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1574961334;
+ s=mimecast20190719; t=1574961338;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EJ8wmKVAVGzwQy9RJeA/HRES3+N97aoUgTm4JmySAyU=;
- b=WoZ35YLmpIA4mLtYJWzHwdpbUazCzX7k9wt8k+F7+0OucWXABbt+wb6PJJuvqHvzQTbvUl
- kHwe3ugfUK7zk/I5Z2Rgs7reiXmOSVHHDp9LLWg08tYEtlkID1LywYMsnhmgHxUu4taSLc
- bmiScLYcPl+Q9QDSrF4uGORWBjSMnhw=
+ bh=5auX1CvYbu3yZRsbt+Lmj7tuXc5Und38I/LjU8EXijg=;
+ b=Gme6DFpsmRq90pucWX4aOMaMgl31v9cybP0/xu8Gh1mpREG/GQ0hM7j87fTYqwygqAtXmh
+ gZnDQKTMvOzx9RyJIVxochWg3OuDpHcwoerPByyzi329lbx41MnNDg6069PWfFPBCH153P
+ MBqVv3YRgI5e5jqfXhwg/zs59QnSo/8=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-2--QKnLjt9PjOK2AeJ3ke5Mw-1; Thu, 28 Nov 2019 12:15:32 -0500
+ us-mta-191-j_2Yy6OxNziUa1CniJMwSw-1; Thu, 28 Nov 2019 12:15:35 -0500
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2B7C3107ACC4;
- Thu, 28 Nov 2019 17:15:31 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DDD8D107ACC4;
+ Thu, 28 Nov 2019 17:15:33 +0000 (UTC)
 Received: from steredhat.redhat.com (ovpn-117-168.ams2.redhat.com
  [10.36.117.168])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9CB89600C8;
- Thu, 28 Nov 2019 17:15:28 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7723B600C8;
+ Thu, 28 Nov 2019 17:15:31 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: netdev@vger.kernel.org
-Subject: [RFC PATCH 1/3] vsock: add network namespace support
-Date: Thu, 28 Nov 2019 18:15:17 +0100
-Message-Id: <20191128171519.203979-2-sgarzare@redhat.com>
+Subject: [RFC PATCH 2/3] vsock/virtio_transport_common: handle netns of
+ received packets
+Date: Thu, 28 Nov 2019 18:15:18 +0100
+Message-Id: <20191128171519.203979-3-sgarzare@redhat.com>
 In-Reply-To: <20191128171519.203979-1-sgarzare@redhat.com>
 References: <20191128171519.203979-1-sgarzare@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-MC-Unique: -QKnLjt9PjOK2AeJ3ke5Mw-1
+X-MC-Unique: j_2Yy6OxNziUa1CniJMwSw-1
 X-Mimecast-Spam-Score: 0
 Cc: linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
  "Michael S. Tsirkin" <mst@redhat.com>, Dexuan Cui <decui@microsoft.com>,
@@ -93,232 +95,156 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch adds a check of the "net" assigned to a socket during
-the vsock_find_bound_socket() and vsock_find_connected_socket()
-to support network namespace, allowing to share the same address
-(cid, port) across different network namespaces.
+This patch allows transports that use virtio_transport_common
+to specify the network namespace where a received packet is to
+be delivered.
 
-G2H transports will use the default network namepsace (init_net).
-H2G transports can use different network namespace for different
-VMs.
+virtio_transport and vhost_transport, for now, use the default
+network namespace.
 
-This patch uses default network namepsace (init_net) in all
-transports.
+vsock_loopback uses the same network namespace of the trasmitter.
 
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
- include/net/af_vsock.h                  |  6 +++--
- net/vmw_vsock/af_vsock.c                | 31 ++++++++++++++++++-------
- net/vmw_vsock/hyperv_transport.c        |  5 ++--
- net/vmw_vsock/virtio_transport_common.c |  5 ++--
- net/vmw_vsock/vmci_transport.c          |  5 ++--
- 5 files changed, 35 insertions(+), 17 deletions(-)
+ drivers/vhost/vsock.c                   |  1 +
+ include/linux/virtio_vsock.h            |  2 ++
+ net/vmw_vsock/virtio_transport.c        |  2 ++
+ net/vmw_vsock/virtio_transport_common.c | 13 ++++++++++---
+ 4 files changed, 15 insertions(+), 3 deletions(-)
 
-diff --git a/include/net/af_vsock.h b/include/net/af_vsock.h
-index b1c717286993..fb7dcf73af5b 100644
---- a/include/net/af_vsock.h
-+++ b/include/net/af_vsock.h
-@@ -193,13 +193,15 @@ void vsock_enqueue_accept(struct sock *listener, struct sock *connected);
- void vsock_insert_connected(struct vsock_sock *vsk);
- void vsock_remove_bound(struct vsock_sock *vsk);
- void vsock_remove_connected(struct vsock_sock *vsk);
--struct sock *vsock_find_bound_socket(struct sockaddr_vm *addr);
-+struct sock *vsock_find_bound_socket(struct sockaddr_vm *addr, struct net *net);
- struct sock *vsock_find_connected_socket(struct sockaddr_vm *src,
--					 struct sockaddr_vm *dst);
-+					 struct sockaddr_vm *dst,
-+					 struct net *net);
- void vsock_remove_sock(struct vsock_sock *vsk);
- void vsock_for_each_connected_socket(void (*fn)(struct sock *sk));
- int vsock_assign_transport(struct vsock_sock *vsk, struct vsock_sock *psk);
- bool vsock_find_cid(unsigned int cid);
-+struct net *vsock_default_net(void);
- 
- /**** TAP ****/
- 
-diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
-index 9c5b2a91baad..b485b4a4e3e9 100644
---- a/net/vmw_vsock/af_vsock.c
-+++ b/net/vmw_vsock/af_vsock.c
-@@ -226,15 +226,18 @@ static void __vsock_remove_connected(struct vsock_sock *vsk)
- 	sock_put(&vsk->sk);
- }
- 
--static struct sock *__vsock_find_bound_socket(struct sockaddr_vm *addr)
-+static struct sock *__vsock_find_bound_socket(struct sockaddr_vm *addr,
-+					      struct net *net)
- {
- 	struct vsock_sock *vsk;
- 
- 	list_for_each_entry(vsk, vsock_bound_sockets(addr), bound_table) {
--		if (vsock_addr_equals_addr(addr, &vsk->local_addr))
-+		if (vsock_addr_equals_addr(addr, &vsk->local_addr) &&
-+		    net_eq(net, sock_net(sk_vsock(vsk))))
- 			return sk_vsock(vsk);
- 
- 		if (addr->svm_port == vsk->local_addr.svm_port &&
-+		    net_eq(net, sock_net(sk_vsock(vsk))) &&
- 		    (vsk->local_addr.svm_cid == VMADDR_CID_ANY ||
- 		     addr->svm_cid == VMADDR_CID_ANY))
- 			return sk_vsock(vsk);
-@@ -244,13 +247,15 @@ static struct sock *__vsock_find_bound_socket(struct sockaddr_vm *addr)
- }
- 
- static struct sock *__vsock_find_connected_socket(struct sockaddr_vm *src,
--						  struct sockaddr_vm *dst)
-+						  struct sockaddr_vm *dst,
-+						  struct net *net)
- {
- 	struct vsock_sock *vsk;
- 
- 	list_for_each_entry(vsk, vsock_connected_sockets(src, dst),
- 			    connected_table) {
- 		if (vsock_addr_equals_addr(src, &vsk->remote_addr) &&
-+		    net_eq(net, sock_net(sk_vsock(vsk))) &&
- 		    dst->svm_port == vsk->local_addr.svm_port) {
- 			return sk_vsock(vsk);
+diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
+index dde392b91bb3..31b0f3608752 100644
+--- a/drivers/vhost/vsock.c
++++ b/drivers/vhost/vsock.c
+@@ -474,6 +474,7 @@ static void vhost_vsock_handle_tx_kick(struct vhost_work *work)
+ 			continue;
  		}
-@@ -295,12 +300,12 @@ void vsock_remove_connected(struct vsock_sock *vsk)
- }
- EXPORT_SYMBOL_GPL(vsock_remove_connected);
  
--struct sock *vsock_find_bound_socket(struct sockaddr_vm *addr)
-+struct sock *vsock_find_bound_socket(struct sockaddr_vm *addr, struct net *net)
- {
- 	struct sock *sk;
++		pkt->net = vsock_default_net();
+ 		len = pkt->len;
  
- 	spin_lock_bh(&vsock_table_lock);
--	sk = __vsock_find_bound_socket(addr);
-+	sk = __vsock_find_bound_socket(addr, net);
- 	if (sk)
- 		sock_hold(sk);
- 
-@@ -311,12 +316,13 @@ struct sock *vsock_find_bound_socket(struct sockaddr_vm *addr)
- EXPORT_SYMBOL_GPL(vsock_find_bound_socket);
- 
- struct sock *vsock_find_connected_socket(struct sockaddr_vm *src,
--					 struct sockaddr_vm *dst)
-+					 struct sockaddr_vm *dst,
-+					 struct net *net)
- {
- 	struct sock *sk;
- 
- 	spin_lock_bh(&vsock_table_lock);
--	sk = __vsock_find_connected_socket(src, dst);
-+	sk = __vsock_find_connected_socket(src, dst, net);
- 	if (sk)
- 		sock_hold(sk);
- 
-@@ -488,6 +494,12 @@ bool vsock_find_cid(unsigned int cid)
- }
- EXPORT_SYMBOL_GPL(vsock_find_cid);
- 
-+struct net *vsock_default_net(void)
-+{
-+	return &init_net;
-+}
-+EXPORT_SYMBOL_GPL(vsock_default_net);
-+
- static struct sock *vsock_dequeue_accept(struct sock *listener)
- {
- 	struct vsock_sock *vlistener;
-@@ -586,6 +598,7 @@ static int __vsock_bind_stream(struct vsock_sock *vsk,
- {
- 	static u32 port;
- 	struct sockaddr_vm new_addr;
-+	struct net *net = sock_net(sk_vsock(vsk));
- 
- 	if (!port)
- 		port = LAST_RESERVED_PORT + 1 +
-@@ -603,7 +616,7 @@ static int __vsock_bind_stream(struct vsock_sock *vsk,
- 
- 			new_addr.svm_port = port++;
- 
--			if (!__vsock_find_bound_socket(&new_addr)) {
-+			if (!__vsock_find_bound_socket(&new_addr, net)) {
- 				found = true;
- 				break;
+ 		/* Deliver to monitoring devices all received packets */
+diff --git a/include/linux/virtio_vsock.h b/include/linux/virtio_vsock.h
+index 71c81e0dc8f2..a025d105a456 100644
+--- a/include/linux/virtio_vsock.h
++++ b/include/linux/virtio_vsock.h
+@@ -43,6 +43,7 @@ struct virtio_vsock_pkt {
+ 	struct list_head list;
+ 	/* socket refcnt not held, only use for cancellation */
+ 	struct vsock_sock *vsk;
++	struct net *net;
+ 	void *buf;
+ 	u32 buf_len;
+ 	u32 len;
+@@ -53,6 +54,7 @@ struct virtio_vsock_pkt {
+ struct virtio_vsock_pkt_info {
+ 	u32 remote_cid, remote_port;
+ 	struct vsock_sock *vsk;
++	struct net *net;
+ 	struct msghdr *msg;
+ 	u32 pkt_len;
+ 	u16 type;
+diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
+index dfbaf6bd8b1c..fb03a1535c21 100644
+--- a/net/vmw_vsock/virtio_transport.c
++++ b/net/vmw_vsock/virtio_transport.c
+@@ -527,6 +527,8 @@ static void virtio_transport_rx_work(struct work_struct *work)
  			}
-@@ -620,7 +633,7 @@ static int __vsock_bind_stream(struct vsock_sock *vsk,
- 			return -EACCES;
+ 
+ 			pkt->len = len - sizeof(pkt->hdr);
++			pkt->net = vsock_default_net();
++
+ 			virtio_transport_deliver_tap_pkt(pkt);
+ 			virtio_transport_recv_pkt(&virtio_transport, pkt);
  		}
- 
--		if (__vsock_find_bound_socket(&new_addr))
-+		if (__vsock_find_bound_socket(&new_addr, net))
- 			return -EADDRINUSE;
- 	}
- 
-diff --git a/net/vmw_vsock/hyperv_transport.c b/net/vmw_vsock/hyperv_transport.c
-index 3c7d07a99fc5..fc48a861a0bc 100644
---- a/net/vmw_vsock/hyperv_transport.c
-+++ b/net/vmw_vsock/hyperv_transport.c
-@@ -201,7 +201,8 @@ static void hvs_remote_addr_init(struct sockaddr_vm *remote,
- 
- 		remote->svm_port = host_ephemeral_port++;
- 
--		sk = vsock_find_connected_socket(remote, local);
-+		sk = vsock_find_connected_socket(remote, local,
-+						 vsock_default_net());
- 		if (!sk) {
- 			/* Found an available ephemeral port */
- 			return;
-@@ -350,7 +351,7 @@ static void hvs_open_connection(struct vmbus_channel *chan)
- 		return;
- 
- 	hvs_addr_init(&addr, conn_from_host ? if_type : if_instance);
--	sk = vsock_find_bound_socket(&addr);
-+	sk = vsock_find_bound_socket(&addr, vsock_default_net());
- 	if (!sk)
- 		return;
- 
 diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
-index 0e20b0f6eb65..10a8cbe39f61 100644
+index 10a8cbe39f61..f249dc099c38 100644
 --- a/net/vmw_vsock/virtio_transport_common.c
 +++ b/net/vmw_vsock/virtio_transport_common.c
-@@ -1075,6 +1075,7 @@ virtio_transport_recv_listen(struct sock *sk, struct virtio_vsock_pkt *pkt,
+@@ -60,6 +60,7 @@ virtio_transport_alloc_pkt(struct virtio_vsock_pkt_info *info,
+ 	pkt->hdr.len		= cpu_to_le32(len);
+ 	pkt->reply		= info->reply;
+ 	pkt->vsk		= info->vsk;
++	pkt->net		= info->net;
+ 
+ 	if (info->msg && len > 0) {
+ 		pkt->buf = kmalloc(len, GFP_KERNEL);
+@@ -260,6 +261,7 @@ static int virtio_transport_send_credit_update(struct vsock_sock *vsk,
+ 		.op = VIRTIO_VSOCK_OP_CREDIT_UPDATE,
+ 		.type = type,
+ 		.vsk = vsk,
++		.net = sock_net(sk_vsock(vsk)),
+ 	};
+ 
+ 	return virtio_transport_send_pkt_info(vsk, &info);
+@@ -609,6 +611,7 @@ int virtio_transport_connect(struct vsock_sock *vsk)
+ 		.op = VIRTIO_VSOCK_OP_REQUEST,
+ 		.type = VIRTIO_VSOCK_TYPE_STREAM,
+ 		.vsk = vsk,
++		.net = sock_net(sk_vsock(vsk)),
+ 	};
+ 
+ 	return virtio_transport_send_pkt_info(vsk, &info);
+@@ -625,6 +628,7 @@ int virtio_transport_shutdown(struct vsock_sock *vsk, int mode)
+ 			 (mode & SEND_SHUTDOWN ?
+ 			  VIRTIO_VSOCK_SHUTDOWN_SEND : 0),
+ 		.vsk = vsk,
++		.net = sock_net(sk_vsock(vsk)),
+ 	};
+ 
+ 	return virtio_transport_send_pkt_info(vsk, &info);
+@@ -652,6 +656,7 @@ virtio_transport_stream_enqueue(struct vsock_sock *vsk,
+ 		.msg = msg,
+ 		.pkt_len = len,
+ 		.vsk = vsk,
++		.net = sock_net(sk_vsock(vsk)),
+ 	};
+ 
+ 	return virtio_transport_send_pkt_info(vsk, &info);
+@@ -674,6 +679,7 @@ static int virtio_transport_reset(struct vsock_sock *vsk,
+ 		.type = VIRTIO_VSOCK_TYPE_STREAM,
+ 		.reply = !!pkt,
+ 		.vsk = vsk,
++		.net = sock_net(sk_vsock(vsk)),
+ 	};
+ 
+ 	/* Send RST only if the original pkt is not a RST pkt */
+@@ -694,6 +700,7 @@ static int virtio_transport_reset_no_sock(const struct virtio_transport *t,
+ 		.op = VIRTIO_VSOCK_OP_RST,
+ 		.type = le16_to_cpu(pkt->hdr.type),
+ 		.reply = true,
++		.net = pkt->net,
+ 	};
+ 
+ 	/* Send RST only if the original pkt is not a RST pkt */
+@@ -978,6 +985,7 @@ virtio_transport_send_response(struct vsock_sock *vsk,
+ 		.remote_port = le32_to_cpu(pkt->hdr.src_port),
+ 		.reply = true,
+ 		.vsk = vsk,
++		.net = sock_net(sk_vsock(vsk)),
+ 	};
+ 
+ 	return virtio_transport_send_pkt_info(vsk, &info);
+@@ -1075,7 +1083,6 @@ virtio_transport_recv_listen(struct sock *sk, struct virtio_vsock_pkt *pkt,
  void virtio_transport_recv_pkt(struct virtio_transport *t,
  			       struct virtio_vsock_pkt *pkt)
  {
-+	struct net *net = vsock_default_net();
+-	struct net *net = vsock_default_net();
  	struct sockaddr_vm src, dst;
  	struct vsock_sock *vsk;
  	struct sock *sk;
-@@ -1102,9 +1103,9 @@ void virtio_transport_recv_pkt(struct virtio_transport *t,
+@@ -1103,9 +1110,9 @@ void virtio_transport_recv_pkt(struct virtio_transport *t,
  	/* The socket must be in connected or bound table
  	 * otherwise send reset back
  	 */
--	sk = vsock_find_connected_socket(&src, &dst);
-+	sk = vsock_find_connected_socket(&src, &dst, net);
+-	sk = vsock_find_connected_socket(&src, &dst, net);
++	sk = vsock_find_connected_socket(&src, &dst, pkt->net);
  	if (!sk) {
--		sk = vsock_find_bound_socket(&dst);
-+		sk = vsock_find_bound_socket(&dst, net);
+-		sk = vsock_find_bound_socket(&dst, net);
++		sk = vsock_find_bound_socket(&dst, pkt->net);
  		if (!sk) {
  			(void)virtio_transport_reset_no_sock(t, pkt);
  			goto free_pkt;
-diff --git a/net/vmw_vsock/vmci_transport.c b/net/vmw_vsock/vmci_transport.c
-index 4b8b1150a738..3ad15d51b30b 100644
---- a/net/vmw_vsock/vmci_transport.c
-+++ b/net/vmw_vsock/vmci_transport.c
-@@ -669,6 +669,7 @@ static bool vmci_transport_stream_allow(u32 cid, u32 port)
- 
- static int vmci_transport_recv_stream_cb(void *data, struct vmci_datagram *dg)
- {
-+	struct net *net = vsock_default_net();
- 	struct sock *sk;
- 	struct sockaddr_vm dst;
- 	struct sockaddr_vm src;
-@@ -702,9 +703,9 @@ static int vmci_transport_recv_stream_cb(void *data, struct vmci_datagram *dg)
- 	vsock_addr_init(&src, pkt->dg.src.context, pkt->src_port);
- 	vsock_addr_init(&dst, pkt->dg.dst.context, pkt->dst_port);
- 
--	sk = vsock_find_connected_socket(&src, &dst);
-+	sk = vsock_find_connected_socket(&src, &dst, net);
- 	if (!sk) {
--		sk = vsock_find_bound_socket(&dst);
-+		sk = vsock_find_bound_socket(&dst, net);
- 		if (!sk) {
- 			/* We could not find a socket for this specified
- 			 * address.  If this packet is a RST, we just drop it.
 -- 
 2.23.0
 
