@@ -1,86 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3428110FAB9
-	for <lists.virtualization@lfdr.de>; Tue,  3 Dec 2019 10:26:59 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BC1610FC5A
+	for <lists.virtualization@lfdr.de>; Tue,  3 Dec 2019 12:17:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B7CDF87E13;
-	Tue,  3 Dec 2019 09:26:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id B972122621;
+	Tue,  3 Dec 2019 11:17:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rOibg4ncVoou; Tue,  3 Dec 2019 09:26:57 +0000 (UTC)
+	with ESMTP id 4dIP5BgN5jTN; Tue,  3 Dec 2019 11:17:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 3167687E07;
-	Tue,  3 Dec 2019 09:26:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A3144221F0;
+	Tue,  3 Dec 2019 11:17:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 01D3CC1799;
-	Tue,  3 Dec 2019 09:26:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A54AC087F;
+	Tue,  3 Dec 2019 11:17:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6C104C087F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 39D0DC087F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 09:26:55 +0000 (UTC)
+ Tue,  3 Dec 2019 11:17:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 519C787601
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 28F2284947
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 09:26:55 +0000 (UTC)
+ Tue,  3 Dec 2019 11:17:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id l5VlBXuhi8dN
+ with ESMTP id 9tK9XpRXLj6t
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 09:26:54 +0000 (UTC)
+ Tue,  3 Dec 2019 11:17:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
- [209.85.221.66])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A8B6F86F8A
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 5C6808488E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 09:26:53 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id b6so2796360wrq.0
+ Tue,  3 Dec 2019 11:17:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1575371867;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=P0GMfVL6QAezA2eT0aIWQXB/37RirCO0eO2hEzXqpFM=;
+ b=gFVruzjSiGxkv8iSoeg1Io5S3NxZaxTBgESUeQZQ3xXUqEpUivEDkZHUidoApQXUkEPDuB
+ u0nRBNfzsikXj8UCFk/P/BOceSAaL6qbghGv8khWkbUhJ4lswPW6ljTFQSpr57RBFSj/2A
+ P87H56lHEMkxcCdPdgrhb4HHmnbDEvI=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-389--2FjruFfNOa5BOsYP-ifjA-1; Tue, 03 Dec 2019 06:17:43 -0500
+Received: by mail-wm1-f70.google.com with SMTP id q21so785027wmc.7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 03 Dec 2019 01:26:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=SZdfC+gFtVklBpHF7XF3yKS4xbagQBubfYPugqhRugk=;
- b=aDs2YAsOEnOy5MORl6ZJIiOEESJ7SrV+tBNsG7s0DhwI8IAa+WmSS2HHd4QyjWGSJ/
- ldRTToqQ7fQK307trD2DA1pagxWm6spcShdYjO1bCT5zkFNurwT8D0qFsmSSEUBqQVn9
- Z2Zj1HZOONpz9ZI8OlPB6cYCLrisPtiHZPkN+kZ/Qkwrv6OYQdkg4ifUYV0RgQrtxBHy
- Ngqwe37IcYAgs+JB/PBz+qMv8mc+6lkEbD2x5TcMRk7CuL/LFUSdqB1iMLYZ4bG1D9G2
- wj0QR3TKc67oNoo5knJzrwdTSto5TOtorlUqVKc7rBt0YKFHYhH+mW0TIY8+1NlWPXWq
- fHAQ==
+ Tue, 03 Dec 2019 03:17:43 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=SZdfC+gFtVklBpHF7XF3yKS4xbagQBubfYPugqhRugk=;
- b=Sj2Io0KINPrlP/1mSc7Z++1H3TlzuWMZY8rjarU6fGNZEVXDjWMPokYCjdsCj7NcCP
- AZjzjAJODfFJB/7eYJQou5626eiAO5GV3znVgJIv4wBOKyjdIh+ZKICs4Q8aSnrRkWUU
- mArc6zOCMLIBmdLxuWvaH9/u9SJjVSm3P5zu6FzvwsObUzh70RcPJ/Ti6Di44AQJDvs7
- yChEu0RnLMX+zKBuuSLB5HEDGQD4DzVI1+/ralC6r/CODF4buuWKhvmhTQzD7LCxDl52
- 3UGgl8szmyYlTk5RO/3Bv5TPO0iSH1O3LRbygCxLbPwjsg+iKvRGkq492WhSAdZCxHA/
- uswA==
-X-Gm-Message-State: APjAAAXxOPHaFnQs1bBJt1itpFJogpTFWzrbVGE3tsDKgV545nrBehQz
- /wFpu2r5E/MU9K1I500+j+c=
-X-Google-Smtp-Source: APXvYqyWUu9z3na0YvFr46Iqp7ei5QNeidd0TaMx3re4eCOYeNXe9t/Q0pvxheWa/uyUnaKqbmgSNw==
-X-Received: by 2002:a5d:43c7:: with SMTP id v7mr3806207wrr.32.1575365212035;
- Tue, 03 Dec 2019 01:26:52 -0800 (PST)
-Received: from localhost ([51.15.41.238])
- by smtp.gmail.com with ESMTPSA id v17sm2696979wrt.91.2019.12.03.01.26.50
+ :mime-version:content-disposition:in-reply-to;
+ bh=8m7nF4w29pgZQB4V/SdwIROmAwTn+h+KHeQv4HnXE8M=;
+ b=PBix3aaX6tSQy8jVQxFRzSfrOtrxs+4RHTq+B/pnUiWCfeqJPohVHNbWX7Auko/1EU
+ gEdctMv3YPfh5WLfa24CtPWbf6jYtynPCMwRHAwmrf4vX4JAgYz58RK8LtldJT9EmQB/
+ DDPP9skIld/coPBVyKjivD6/maI0+b3uGg5t/8zZdXCu4w2yBVDjyoinkDadcvO08nst
+ 9F4rpJQik0plDt5cIM4BkLuBoztCERaHS9bXTILPGbJqyFDFqNw4n4BqL99n4XJka5mx
+ KqI9taTbicFTgoAqtP7d0ZeBnYStOesTJp2Rslcr9i7WptDcQ/FNWm8ojtwMm/axMzer
+ 1ZnA==
+X-Gm-Message-State: APjAAAXPXgHcE+yF8k/bmgtrDtxpA/BZDtINfaQtceDWY+0FawTN+qEM
+ +Dc5bZmzdAuEtSW/o4L5/EVGljAASmiOoW7yFausFajyY8HEOAj8JZP1CWKeD6IyIBlYF+GnO2S
+ 93MNZbx8zEytGfU/sdT9nB2SNCofc9YwS/nh7hyXsjg==
+X-Received: by 2002:a5d:49c7:: with SMTP id t7mr4444059wrs.369.1575371862793; 
+ Tue, 03 Dec 2019 03:17:42 -0800 (PST)
+X-Google-Smtp-Source: APXvYqxHsfuHbTjkQH8eviKJ48+Nlp7C/1JLX3I4FiWaDe4+xpQuoyOM0/YkQJewOzX/cskP8i9LEw==
+X-Received: by 2002:a5d:49c7:: with SMTP id t7mr4444037wrs.369.1575371862537; 
+ Tue, 03 Dec 2019 03:17:42 -0800 (PST)
+Received: from steredhat (host28-88-dynamic.16-87-r.retail.telecomitalia.it.
+ [87.16.88.28])
+ by smtp.gmail.com with ESMTPSA id p17sm3209682wrx.20.2019.12.03.03.17.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2019 01:26:50 -0800 (PST)
-Date: Tue, 3 Dec 2019 09:26:49 +0000
-From: Stefan Hajnoczi <stefanha@gmail.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
+ Tue, 03 Dec 2019 03:17:41 -0800 (PST)
+Date: Tue, 3 Dec 2019 12:17:39 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Stefan Hajnoczi <stefanha@gmail.com>
 Subject: Re: [RFC PATCH 0/3] vsock: support network namespace
-Message-ID: <20191203092649.GB153510@stefanha-x1.localdomain>
+Message-ID: <20191203111739.jbxptcpmvtwg7j2g@steredhat>
 References: <20191128171519.203979-1-sgarzare@redhat.com>
+ <20191203092649.GB153510@stefanha-x1.localdomain>
 MIME-Version: 1.0
-In-Reply-To: <20191128171519.203979-1-sgarzare@redhat.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
+In-Reply-To: <20191203092649.GB153510@stefanha-x1.localdomain>
+X-MC-Unique: -2FjruFfNOa5BOsYP-ifjA-1
+X-Mimecast-Spam-Score: 0
+Content-Disposition: inline
 Cc: linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
  "Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
  Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
@@ -98,92 +108,81 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1416234420332745454=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On Tue, Dec 03, 2019 at 09:26:49AM +0000, Stefan Hajnoczi wrote:
+> On Thu, Nov 28, 2019 at 06:15:16PM +0100, Stefano Garzarella wrote:
+> > Hi,
+> > now that we have multi-transport upstream, I started to take a look to
+> > support network namespace (netns) in vsock.
+> > 
+> > As we partially discussed in the multi-transport proposal [1], it could
+> > be nice to support network namespace in vsock to reach the following
+> > goals:
+> > - isolate host applications from guest applications using the same ports
+> >   with CID_ANY
+> > - assign the same CID of VMs running in different network namespaces
+> > - partition VMs between VMMs or at finer granularity
+> > 
+> > This preliminary implementation provides the following behavior:
+> > - packets received from the host (received by G2H transports) are
+> >   assigned to the default netns (init_net)
+> > - packets received from the guest (received by H2G - vhost-vsock) are
+> >   assigned to the netns of the process that opens /dev/vhost-vsock
+> >   (usually the VMM, qemu in my tests, opens the /dev/vhost-vsock)
+> >     - for vmci I need some suggestions, because I don't know how to do
+> >       and test the same in the vmci driver, for now vmci uses the
+> >       init_net
+> > - loopback packets are exchanged only in the same netns
+> > 
+> > Questions:
+> > 1. Should we make configurable the netns (now it is init_net) where
+> >    packets from the host should be delivered?
+> 
+> Yes, it should be possible to have multiple G2H (e.g. virtio-vsock)
+> devices and to assign them to different net namespaces.  Something like
+> net/core/dev.c:dev_change_net_namespace() will eventually be needed.
+> 
 
---===============1416234420332745454==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="XOIedfhf+7KOe/yw"
-Content-Disposition: inline
+Make sense, but for now we support only one G2H.
+How we can provide this feature to the userspace?
+Should we interface vsock with ip-link(8)?
 
+I don't know if initially we can provide through sysfs a way to set the
+netns of the only G2H loaded.
 
---XOIedfhf+7KOe/yw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> > 2. Should we provide an ioctl in vhost-vsock to configure the netns
+> >    to use? (instead of using the netns of the process that opens
+> >    /dev/vhost-vsock)
+> 
+> Creating the vhost-vsock instance in the process' net namespace makes
+> sense.  Maybe wait for a use case before adding an ioctl.
+> 
 
-On Thu, Nov 28, 2019 at 06:15:16PM +0100, Stefano Garzarella wrote:
-> Hi,
-> now that we have multi-transport upstream, I started to take a look to
-> support network namespace (netns) in vsock.
->=20
-> As we partially discussed in the multi-transport proposal [1], it could
-> be nice to support network namespace in vsock to reach the following
-> goals:
-> - isolate host applications from guest applications using the same ports
->   with CID_ANY
-> - assign the same CID of VMs running in different network namespaces
-> - partition VMs between VMMs or at finer granularity
->=20
-> This preliminary implementation provides the following behavior:
-> - packets received from the host (received by G2H transports) are
->   assigned to the default netns (init_net)
-> - packets received from the guest (received by H2G - vhost-vsock) are
->   assigned to the netns of the process that opens /dev/vhost-vsock
->   (usually the VMM, qemu in my tests, opens the /dev/vhost-vsock)
->     - for vmci I need some suggestions, because I don't know how to do
->       and test the same in the vmci driver, for now vmci uses the
->       init_net
-> - loopback packets are exchanged only in the same netns
->=20
-> Questions:
-> 1. Should we make configurable the netns (now it is init_net) where
->    packets from the host should be delivered?
+Agree.
 
-Yes, it should be possible to have multiple G2H (e.g. virtio-vsock)
-devices and to assign them to different net namespaces.  Something like
-net/core/dev.c:dev_change_net_namespace() will eventually be needed.
+> > 3. Should we provide a way to disable the netns support in vsock?
+> 
+> The code should follow CONFIG_NET_NS semantics.  I'm not sure what they
+> are exactly since struct net is always defined, regardless of whether
+> network namespaces are enabled.
 
-> 2. Should we provide an ioctl in vhost-vsock to configure the netns
->    to use? (instead of using the netns of the process that opens
->    /dev/vhost-vsock)
+I think that if CONFIG_NET_NS is not defined, all sockets and processes
+are assigned to init_net and this RFC should work in this case, but I'll
+try this case before v1.
 
-Creating the vhost-vsock instance in the process' net namespace makes
-sense.  Maybe wait for a use case before adding an ioctl.
+I was thinking about the Kata's use case, I don't know if they launch the
+VM in a netns and even the runtime in the host runs inside the same netns.
 
-> 3. Should we provide a way to disable the netns support in vsock?
+I'll send an e-mail to kata mailing list.
 
-The code should follow CONFIG_NET_NS semantics.  I'm not sure what they
-are exactly since struct net is always defined, regardless of whether
-network namespaces are enabled.
-
---XOIedfhf+7KOe/yw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl3mKlkACgkQnKSrs4Gr
-c8h54wf/eNE48AsDKZkZl+68dw3paeS7KLIQEPgUklUhfhqp/IHdX9uG2R88hvCl
-rMCQbGHSMQ+yb7gPxN1+0tVXFX7Rf2Cqed4Lwqfq0VvufS80FUk4GiQZKKgk4LRv
-/8x4or61TnKGbApxbJnQ+zdj1OirmGwrO8jEt4beMPgsfY80yzl6GcKwYwsOYzeg
-w+28vrKtnprab8l8D0DnVIggTtyep72rsGdeOi4KtSmrUoM8GVExUDmwBQtUJ4xo
-5+OJJjQ+EzPuKWxGIahFrZAHDGerrVHWyltH/LTq+BU0VNR+Ta726WWzDKVx7v6d
-YQm7/TdSAT3l9Id0uVC9+DEM455UIw==
-=v5qS
------END PGP SIGNATURE-----
-
---XOIedfhf+7KOe/yw--
-
---===============1416234420332745454==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Thanks,
+Stefano
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============1416234420332745454==--
