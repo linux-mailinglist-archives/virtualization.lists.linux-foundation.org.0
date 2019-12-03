@@ -1,99 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id F29ED1105D8
-	for <lists.virtualization@lfdr.de>; Tue,  3 Dec 2019 21:18:56 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id CAEF21105E1
+	for <lists.virtualization@lfdr.de>; Tue,  3 Dec 2019 21:19:56 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 831E287C20;
-	Tue,  3 Dec 2019 20:18:55 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 703172043A;
+	Tue,  3 Dec 2019 20:19:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eoIJ8DKlT5PP; Tue,  3 Dec 2019 20:18:54 +0000 (UTC)
+	with ESMTP id kO8Az0hwA6DX; Tue,  3 Dec 2019 20:19:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 819DC87B1D;
-	Tue,  3 Dec 2019 20:18:54 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4F70C227F7;
+	Tue,  3 Dec 2019 20:19:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 60146C1798;
-	Tue,  3 Dec 2019 20:18:54 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 329C0C087F;
+	Tue,  3 Dec 2019 20:19:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BA610C087F
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3F99BC087F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:18:53 +0000 (UTC)
+ Tue,  3 Dec 2019 20:19:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id B6AC287813
+ by silver.osuosl.org (Postfix) with ESMTP id 3B418227A3
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:18:53 +0000 (UTC)
+ Tue,  3 Dec 2019 20:19:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id H4r18HkaNITo
+ with ESMTP id 09gE0e1VAxdL
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:18:52 +0000 (UTC)
+ Tue,  3 Dec 2019 20:19:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 735918781C
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id 579412043A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:18:52 +0000 (UTC)
+ Tue,  3 Dec 2019 20:19:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575404331;
+ s=mimecast20190719; t=1575404390;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QzfchXBORmVAXVWCchalHt0Yn1js9G37mDNvONQ3Wls=;
- b=BCuAMHPfyZpG8I9aKGXGyLHrazi+WMWRziA54L8OLUR63lFFMJX4KNo4qMZ//xec18ggK6
- qss696NrS7Z15+TTPp6KgBi/bj60ECBf97p0GQLGR1XgRUSAtQ59h8ZUuNDxqjxoN7DmNA
- +J67jEtogTZ1kj7dTcvXqLgr8Acopxk=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-187-97I2ryY6PzW_r2bVAM1QCQ-1; Tue, 03 Dec 2019 15:18:49 -0500
-Received: by mail-qv1-f72.google.com with SMTP id e11so2970934qvv.18
+ bh=vvoBxuvp3G0/XLbvffQRipup1lCyNBJiGiUdnNoPbls=;
+ b=h7QOH9fKDTe8uO3xFTJ2KhQsA2cB/McXPPrqBTcP1ehOQd75gWcC0D0JDfzTEWefqzByjS
+ F5AKsNzJx4ate24mJFyEsBhJetX8KOeRfdlWxfecIqHFNE0VoZYKHvCu3cLTfH4k7q0R1K
+ 6BcdOBQOC0zT8DTl0yZi35pV41pS4j4=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-16-ExAyjBMEM4O9M_5l5dzQnA-1; Tue, 03 Dec 2019 15:19:48 -0500
+Received: by mail-qt1-f197.google.com with SMTP id j14so3314628qtr.10
  for <virtualization@lists.linux-foundation.org>;
- Tue, 03 Dec 2019 12:18:49 -0800 (PST)
+ Tue, 03 Dec 2019 12:19:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=1eT8WcO+phWqOZ5pmGdX1qqI1UY1VLfXJPwN7V6jCjo=;
- b=rg7jTB4lF29QvwVozdyQKSiBX0+MEXNEg0f7DKXLvQi9WCHb6UX5ekKiMlLItK5lRt
- dYL4aZ2e4eXaUP+8TGE1Ey8gNAoxZ8QV2dJcpbGMaPzfXk6rdrsZ7bhx9f0M7ciWyDDQ
- Opaw7+y0Pi5ilt5XXrm5U6uPCMNIb7CnfVLjIhv+rT5h7+ki1p+XrrWJCd+W3+sMaPF5
- LLC4efT0IRHx3wA78Jgq0tRqFCGhHh9TRBrAdWrTYxjmDIqjdGY+thQoXFiQOu6i64db
- qYUBEnsep++AaLHn16dQxikulO1DxO2mM2pBVTqjMZfghwEnn3rqcyx3G6MTnMhSDWza
- UipQ==
-X-Gm-Message-State: APjAAAXqiSMzIpS2Wu8U9wYdY8py14zgvBjRs7hY9GnB8vf+15ow/OQ+
- DLeRBpYrJFdo1UT2e71r6/y7bpiEHW8e/ZJLbq4eoH7Q/Z/Na6yWkDqg9VU4IPeSxSrc7g54DCn
- YuyzEIMRiRpmOFBcOYvZNnuPo09XKRR1Q3kui0N1RdA==
-X-Received: by 2002:ae9:e30e:: with SMTP id v14mr6993495qkf.344.1575404329220; 
- Tue, 03 Dec 2019 12:18:49 -0800 (PST)
-X-Google-Smtp-Source: APXvYqysczwdd3R/V/nqPtkylMkEJge0arlFCdi6l3hYYdJyHzUT6UlaH9W1E/8BHEBhaPjqmCAnFg==
-X-Received: by 2002:ae9:e30e:: with SMTP id v14mr6993469qkf.344.1575404329019; 
- Tue, 03 Dec 2019 12:18:49 -0800 (PST)
+ bh=QmtzDLYDSTNcDSWhu8MKh0ZRRQ2IxQ2t+dts0IfGnuc=;
+ b=QMAZNO/PfxrdxPQPaM8WSU02Ma3f37qKN5oixOeWjvFCkIJl9Il+KUM6tFMuzDYstK
+ nBMPwDM5jlr5vLMkTgRwM+6yuu6wa/TbJY2kndO/qDuwiuxExBJRw+JjdYBqdA5evRJf
+ YXVFEMeFrJsKcK+yzGCDyTs3xcalMYyrkkyRI+27EyXjbIG0/awTTvbCJ34e2X835Jyo
+ LHdozzvwGg1aU6IWhGbA/Za6IKGh24TCPDPGV1T0Hm6Ox0J0p3pLZmovFPWcUK6/Qh7j
+ XO3SJokf/2nYWHh38TlTxEFJpOCXT24wDkKxMEtajYLaAKSItcNIXr41gtmOSRcJWT9d
+ tyng==
+X-Gm-Message-State: APjAAAUg0cAG7adCxN8zGAFTI7m6u3X3xMR4VhAbewVZd4SLTeEj0tcH
+ usLDPLW1zpuc9boO5n8XlSgUXeP1+Cb9gV6yBYqZHLEGWwkRN9Lng+i3GAe1yn8LMmTftDaUMqK
+ bipUx5L9xueuVXdMqjeXEyUiazeNaOXksCHtbKVNmpw==
+X-Received: by 2002:a05:620a:210e:: with SMTP id
+ l14mr7328299qkl.18.1575404388181; 
+ Tue, 03 Dec 2019 12:19:48 -0800 (PST)
+X-Google-Smtp-Source: APXvYqzNAGftONrxG7OOOmA1p2XeS+kBT15c+ObkoyL77kRsuzntoDuyINOMAAxBlSMFnthhkga2lw==
+X-Received: by 2002:a05:620a:210e:: with SMTP id
+ l14mr7328279qkl.18.1575404387958; 
+ Tue, 03 Dec 2019 12:19:47 -0800 (PST)
 Received: from redhat.com (bzq-79-181-48-215.red.bezeqint.net. [79.181.48.215])
- by smtp.gmail.com with ESMTPSA id s127sm2357687qkc.44.2019.12.03.12.18.45
+ by smtp.gmail.com with ESMTPSA id s44sm2425816qts.22.2019.12.03.12.19.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2019 12:18:48 -0800 (PST)
-Date: Tue, 3 Dec 2019 15:18:43 -0500
+ Tue, 03 Dec 2019 12:19:47 -0800 (PST)
+Date: Tue, 3 Dec 2019 15:19:42 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org, Julio Faracco <jcfaracco@gmail.com>
-Subject: [PATCH RFC net-next v8 3/3] netronome: use the new txqueue timeout
- argument
-Message-ID: <20191203201804.662066-4-mst@redhat.com>
+Subject: [PATCH RFC net-next v8 2/3] mlx4: use new txqueue timeout argument
+Message-ID: <20191203201804.662066-3-mst@redhat.com>
 References: <20191203201804.662066-1-mst@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20191203201804.662066-1-mst@redhat.com>
 X-Mailer: git-send-email 2.22.0.678.g13338e74b8
 X-Mutt-Fcc: =sent
-X-MC-Unique: 97I2ryY6PzW_r2bVAM1QCQ-1
+X-MC-Unique: ExAyjBMEM4O9M_5l5dzQnA-1
 X-Mimecast-Spam-Score: 0
 Content-Disposition: inline
-Cc: dnmendes76@gmail.com, Jakub Kicinski <jakub.kicinski@netronome.com>,
- mst@redhat.com, netdev@vger.kernel.org,
+Cc: dnmendes76@gmail.com, mst@redhat.com, netdev@vger.kernel.org,
  virtualization@lists.linux-foundation.org, davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -112,35 +112,43 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Acked-by: Jakub Kicinski <jakub.kicinski@netronome.com>
 ---
 
-Changes from v7:
-	combine two warnings into one
+changes from v7:
+	build fix
 
- drivers/net/ethernet/netronome/nfp/nfp_net_common.c | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+ drivers/net/ethernet/mellanox/mlx4/en_netdev.c | 14 ++++----------
+ 1 file changed, 4 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/net/ethernet/netronome/nfp/nfp_net_common.c b/drivers/net/ethernet/netronome/nfp/nfp_net_common.c
-index 41a808b14d76..eb1f9bed4833 100644
---- a/drivers/net/ethernet/netronome/nfp/nfp_net_common.c
-+++ b/drivers/net/ethernet/netronome/nfp/nfp_net_common.c
-@@ -1323,14 +1323,8 @@ nfp_net_tx_ring_reset(struct nfp_net_dp *dp, struct nfp_net_tx_ring *tx_ring)
- static void nfp_net_tx_timeout(struct net_device *netdev, unsigned int txqueue)
+diff --git a/drivers/net/ethernet/mellanox/mlx4/en_netdev.c b/drivers/net/ethernet/mellanox/mlx4/en_netdev.c
+index aa348230bd39..2c2ff1f0ea6d 100644
+--- a/drivers/net/ethernet/mellanox/mlx4/en_netdev.c
++++ b/drivers/net/ethernet/mellanox/mlx4/en_netdev.c
+@@ -1367,20 +1367,14 @@ static void mlx4_en_tx_timeout(struct net_device *dev, unsigned int txqueue)
  {
- 	struct nfp_net *nn = netdev_priv(netdev);
+ 	struct mlx4_en_priv *priv = netdev_priv(dev);
+ 	struct mlx4_en_dev *mdev = priv->mdev;
 -	int i;
++	struct mlx4_en_tx_ring *tx_ring = priv->tx_ring[TX][txqueue];
  
--	for (i = 0; i < nn->dp.netdev->real_num_tx_queues; i++) {
--		if (!netif_tx_queue_stopped(netdev_get_tx_queue(netdev, i)))
+ 	if (netif_msg_timer(priv))
+ 		en_warn(priv, "Tx timeout called on port:%d\n", priv->port);
+ 
+-	for (i = 0; i < priv->tx_ring_num[TX]; i++) {
+-		struct mlx4_en_tx_ring *tx_ring = priv->tx_ring[TX][i];
+-
+-		if (!netif_tx_queue_stopped(netdev_get_tx_queue(dev, i)))
 -			continue;
--		nn_warn(nn, "TX timeout on ring: %d\n", i);
+-		en_warn(priv, "TX timeout on queue: %d, QP: 0x%x, CQ: 0x%x, Cons: 0x%x, Prod: 0x%x\n",
+-			i, tx_ring->qpn, tx_ring->sp_cqn,
+-			tx_ring->cons, tx_ring->prod);
 -	}
--	nn_warn(nn, "TX watchdog timeout\n");
-+	nn_warn(nn, "TX watchdog timeout on ring: %u\n", txqueue);
- }
++	en_warn(priv, "TX timeout on queue: %d, QP: 0x%x, CQ: 0x%x, Cons: 0x%x, Prod: 0x%x\n",
++		txqueue, tx_ring->qpn, tx_ring->sp_cqn,
++		tx_ring->cons, tx_ring->prod);
  
- /* Receive processing
+ 	priv->port_stats.tx_timeout++;
+ 	en_dbg(DRV, priv, "Scheduling watchdog\n");
 -- 
 MST
 
