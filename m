@@ -1,102 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BC1610FC5A
-	for <lists.virtualization@lfdr.de>; Tue,  3 Dec 2019 12:17:54 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id B972122621;
-	Tue,  3 Dec 2019 11:17:52 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4dIP5BgN5jTN; Tue,  3 Dec 2019 11:17:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id A3144221F0;
-	Tue,  3 Dec 2019 11:17:51 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A54AC087F;
-	Tue,  3 Dec 2019 11:17:51 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 39D0DC087F
- for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 11:17:49 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7170A110156
+	for <lists.virtualization@lfdr.de>; Tue,  3 Dec 2019 16:33:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 28F2284947
- for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 11:17:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 67B3B85116;
+	Tue,  3 Dec 2019 15:33:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id FHcyxQX6ga_e; Tue,  3 Dec 2019 15:33:10 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CAC3E85087;
+	Tue,  3 Dec 2019 15:33:10 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A607CC087F;
+	Tue,  3 Dec 2019 15:33:10 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 80561C087F
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  3 Dec 2019 15:33:08 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 7BDD122785
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  3 Dec 2019 15:33:08 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9tK9XpRXLj6t
+ with ESMTP id bVnNpayP+QEB
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 11:17:48 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5C6808488E
+ Tue,  3 Dec 2019 15:33:07 +0000 (UTC)
+X-Greylist: delayed 00:46:08 by SQLgrey-1.7.6
+Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
+ by silver.osuosl.org (Postfix) with ESMTPS id E811822730
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 11:17:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575371867;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=P0GMfVL6QAezA2eT0aIWQXB/37RirCO0eO2hEzXqpFM=;
- b=gFVruzjSiGxkv8iSoeg1Io5S3NxZaxTBgESUeQZQ3xXUqEpUivEDkZHUidoApQXUkEPDuB
- u0nRBNfzsikXj8UCFk/P/BOceSAaL6qbghGv8khWkbUhJ4lswPW6ljTFQSpr57RBFSj/2A
- P87H56lHEMkxcCdPdgrhb4HHmnbDEvI=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-389--2FjruFfNOa5BOsYP-ifjA-1; Tue, 03 Dec 2019 06:17:43 -0500
-Received: by mail-wm1-f70.google.com with SMTP id q21so785027wmc.7
- for <virtualization@lists.linux-foundation.org>;
- Tue, 03 Dec 2019 03:17:43 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=8m7nF4w29pgZQB4V/SdwIROmAwTn+h+KHeQv4HnXE8M=;
- b=PBix3aaX6tSQy8jVQxFRzSfrOtrxs+4RHTq+B/pnUiWCfeqJPohVHNbWX7Auko/1EU
- gEdctMv3YPfh5WLfa24CtPWbf6jYtynPCMwRHAwmrf4vX4JAgYz58RK8LtldJT9EmQB/
- DDPP9skIld/coPBVyKjivD6/maI0+b3uGg5t/8zZdXCu4w2yBVDjyoinkDadcvO08nst
- 9F4rpJQik0plDt5cIM4BkLuBoztCERaHS9bXTILPGbJqyFDFqNw4n4BqL99n4XJka5mx
- KqI9taTbicFTgoAqtP7d0ZeBnYStOesTJp2Rslcr9i7WptDcQ/FNWm8ojtwMm/axMzer
- 1ZnA==
-X-Gm-Message-State: APjAAAXPXgHcE+yF8k/bmgtrDtxpA/BZDtINfaQtceDWY+0FawTN+qEM
- +Dc5bZmzdAuEtSW/o4L5/EVGljAASmiOoW7yFausFajyY8HEOAj8JZP1CWKeD6IyIBlYF+GnO2S
- 93MNZbx8zEytGfU/sdT9nB2SNCofc9YwS/nh7hyXsjg==
-X-Received: by 2002:a5d:49c7:: with SMTP id t7mr4444059wrs.369.1575371862793; 
- Tue, 03 Dec 2019 03:17:42 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxHsfuHbTjkQH8eviKJ48+Nlp7C/1JLX3I4FiWaDe4+xpQuoyOM0/YkQJewOzX/cskP8i9LEw==
-X-Received: by 2002:a5d:49c7:: with SMTP id t7mr4444037wrs.369.1575371862537; 
- Tue, 03 Dec 2019 03:17:42 -0800 (PST)
-Received: from steredhat (host28-88-dynamic.16-87-r.retail.telecomitalia.it.
- [87.16.88.28])
- by smtp.gmail.com with ESMTPSA id p17sm3209682wrx.20.2019.12.03.03.17.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2019 03:17:41 -0800 (PST)
-Date: Tue, 3 Dec 2019 12:17:39 +0100
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Stefan Hajnoczi <stefanha@gmail.com>
-Subject: Re: [RFC PATCH 0/3] vsock: support network namespace
-Message-ID: <20191203111739.jbxptcpmvtwg7j2g@steredhat>
-References: <20191128171519.203979-1-sgarzare@redhat.com>
- <20191203092649.GB153510@stefanha-x1.localdomain>
-MIME-Version: 1.0
-In-Reply-To: <20191203092649.GB153510@stefanha-x1.localdomain>
-X-MC-Unique: -2FjruFfNOa5BOsYP-ifjA-1
-X-Mimecast-Spam-Score: 0
-Content-Disposition: inline
-Cc: linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
- "Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
- Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Stefan Hajnoczi <stefanha@redhat.com>, "David S. Miller" <davem@davemloft.net>,
- Jorgen Hansen <jhansen@vmware.com>
+ Tue,  3 Dec 2019 15:33:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Mime-Version:
+ Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Df/63bTiz0MbvffoTq5LGNY0f3lhFWeKO2rB4GEICME=; b=PWrO0iJZ5Jov8iCg1pPsVunCpH
+ VKIXG5NVaIwAyuk9qs+FtWWaqb8GHI5HIot4d4zS3l6ToeM4RJ9C9bKwkp4Bq7bScIXW/DnbH4CAM
+ yX7WpR5Rv2X15OcVcVeilludvtzlx7C2WNs1b9A/WXTpW2K1+4qASeNrpmeCIvfBnuzi3prBumKoL
+ 1d43Blr5eVn4L+04HYdlwEE6sDS2n1DiK04Ik3SKuX7a2ZpX7F3YDx9RfxvPzwchv65B5056Jwzg9
+ 0mGFcU35sYGU5ydUEAQ4yMoYJV8mpZDrykj1RVEwaTNPitrVywJ5mMupy42gvs6mZnOLLA784MBjp
+ lfjSKxTw==;
+Received: from [54.239.6.185] (helo=u0c626add9cce5a.ant.amazon.com)
+ by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1ic9S1-0000q1-9o; Tue, 03 Dec 2019 14:46:53 +0000
+Message-ID: <ae3451423c18f2e408245d745d1f28e311a2845c.camel@infradead.org>
+Subject: Re: [PATCH v3] virtio_console: allocate inbufs in add_port() only
+ if it is needed
+From: Amit Shah <amit@infradead.org>
+To: Laurent Vivier <lvivier@redhat.com>, linux-kernel@vger.kernel.org
+Date: Tue, 03 Dec 2019 15:46:50 +0100
+In-Reply-To: <20191114122548.24364-1-lvivier@redhat.com>
+References: <20191114122548.24364-1-lvivier@redhat.com>
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Cc: Arnd Bergmann <arnd@arndb.de>, Amit Shah <amit@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>, stable@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,74 +83,152 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Dec 03, 2019 at 09:26:49AM +0000, Stefan Hajnoczi wrote:
-> On Thu, Nov 28, 2019 at 06:15:16PM +0100, Stefano Garzarella wrote:
-> > Hi,
-> > now that we have multi-transport upstream, I started to take a look to
-> > support network namespace (netns) in vsock.
-> > 
-> > As we partially discussed in the multi-transport proposal [1], it could
-> > be nice to support network namespace in vsock to reach the following
-> > goals:
-> > - isolate host applications from guest applications using the same ports
-> >   with CID_ANY
-> > - assign the same CID of VMs running in different network namespaces
-> > - partition VMs between VMMs or at finer granularity
-> > 
-> > This preliminary implementation provides the following behavior:
-> > - packets received from the host (received by G2H transports) are
-> >   assigned to the default netns (init_net)
-> > - packets received from the guest (received by H2G - vhost-vsock) are
-> >   assigned to the netns of the process that opens /dev/vhost-vsock
-> >   (usually the VMM, qemu in my tests, opens the /dev/vhost-vsock)
-> >     - for vmci I need some suggestions, because I don't know how to do
-> >       and test the same in the vmci driver, for now vmci uses the
-> >       init_net
-> > - loopback packets are exchanged only in the same netns
-> > 
-> > Questions:
-> > 1. Should we make configurable the netns (now it is init_net) where
-> >    packets from the host should be delivered?
+On Thu, 2019-11-14 at 13:25 +0100, Laurent Vivier wrote:
+> When we hot unplug a virtserialport and then try to hot plug again,
+> it fails:
 > 
-> Yes, it should be possible to have multiple G2H (e.g. virtio-vsock)
-> devices and to assign them to different net namespaces.  Something like
-> net/core/dev.c:dev_change_net_namespace() will eventually be needed.
+> (qemu) chardev-add socket,id=serial0,path=/tmp/serial0,server,nowait
+> (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+>                   chardev=serial0,id=serial0,name=serial0
+> (qemu) device_del serial0
+> (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+>                   chardev=serial0,id=serial0,name=serial0
+> kernel error:
+>   virtio-ports vport2p2: Error allocating inbufs
+> qemu error:
+>   virtio-serial-bus: Guest failure in adding port 2 for device \
+>                      virtio-serial0.0
 > 
-
-Make sense, but for now we support only one G2H.
-How we can provide this feature to the userspace?
-Should we interface vsock with ip-link(8)?
-
-I don't know if initially we can provide through sysfs a way to set the
-netns of the only G2H loaded.
-
-> > 2. Should we provide an ioctl in vhost-vsock to configure the netns
-> >    to use? (instead of using the netns of the process that opens
-> >    /dev/vhost-vsock)
+> This happens because buffers for the in_vq are allocated when the
+> port is
+> added but are not released when the port is unplugged.
 > 
-> Creating the vhost-vsock instance in the process' net namespace makes
-> sense.  Maybe wait for a use case before adding an ioctl.
+> They are only released when virtconsole is removed (see a7a69ec0d8e4)
 > 
-
-Agree.
-
-> > 3. Should we provide a way to disable the netns support in vsock?
+> To avoid the problem and to be symmetric, we could allocate all the
+> buffers
+> in init_vqs() as they are released in remove_vqs(), but it sounds
+> like
+> a waste of memory.
 > 
-> The code should follow CONFIG_NET_NS semantics.  I'm not sure what they
-> are exactly since struct net is always defined, regardless of whether
-> network namespaces are enabled.
+> Rather than that, this patch changes add_port() logic to ignore
+> ENOSPC
+> error in fill_queue(), which means queue has already been filled.
+> 
+> Fixes: a7a69ec0d8e4 ("virtio_console: free buffers after reset")
+> Cc: mst@redhat.com
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Laurent Vivier <lvivier@redhat.com>
 
-I think that if CONFIG_NET_NS is not defined, all sockets and processes
-are assigned to init_net and this RFC should work in this case, but I'll
-try this case before v1.
+Reviewed-by: Amit Shah <amit@kernel.org>
 
-I was thinking about the Kata's use case, I don't know if they launch the
-VM in a netns and even the runtime in the host runs inside the same netns.
+Thanks!
 
-I'll send an e-mail to kata mailing list.
-
-Thanks,
-Stefano
+> ---
+> 
+> Notes:
+>     v3: add a comment about ENOSPC error
+>     v2: making fill_queue return int and testing return code for
+> -ENOSPC
+> 
+>  drivers/char/virtio_console.c | 28 +++++++++++++---------------
+>  1 file changed, 13 insertions(+), 15 deletions(-)
+> 
+> diff --git a/drivers/char/virtio_console.c
+> b/drivers/char/virtio_console.c
+> index 7270e7b69262..3259426f01dc 100644
+> --- a/drivers/char/virtio_console.c
+> +++ b/drivers/char/virtio_console.c
+> @@ -1325,24 +1325,24 @@ static void set_console_size(struct port
+> *port, u16 rows, u16 cols)
+>  	port->cons.ws.ws_col = cols;
+>  }
+>  
+> -static unsigned int fill_queue(struct virtqueue *vq, spinlock_t
+> *lock)
+> +static int fill_queue(struct virtqueue *vq, spinlock_t *lock)
+>  {
+>  	struct port_buffer *buf;
+> -	unsigned int nr_added_bufs;
+> +	int nr_added_bufs;
+>  	int ret;
+>  
+>  	nr_added_bufs = 0;
+>  	do {
+>  		buf = alloc_buf(vq->vdev, PAGE_SIZE, 0);
+>  		if (!buf)
+> -			break;
+> +			return -ENOMEM;
+>  
+>  		spin_lock_irq(lock);
+>  		ret = add_inbuf(vq, buf);
+>  		if (ret < 0) {
+>  			spin_unlock_irq(lock);
+>  			free_buf(buf, true);
+> -			break;
+> +			return ret;
+>  		}
+>  		nr_added_bufs++;
+>  		spin_unlock_irq(lock);
+> @@ -1362,7 +1362,6 @@ static int add_port(struct ports_device
+> *portdev, u32 id)
+>  	char debugfs_name[16];
+>  	struct port *port;
+>  	dev_t devt;
+> -	unsigned int nr_added_bufs;
+>  	int err;
+>  
+>  	port = kmalloc(sizeof(*port), GFP_KERNEL);
+> @@ -1421,11 +1420,13 @@ static int add_port(struct ports_device
+> *portdev, u32 id)
+>  	spin_lock_init(&port->outvq_lock);
+>  	init_waitqueue_head(&port->waitqueue);
+>  
+> -	/* Fill the in_vq with buffers so the host can send us data. */
+> -	nr_added_bufs = fill_queue(port->in_vq, &port->inbuf_lock);
+> -	if (!nr_added_bufs) {
+> +	/* We can safely ignore ENOSPC because it means
+> +	 * the queue already has buffers. Buffers are removed
+> +	 * only by virtcons_remove(), not by unplug_port()
+> +	 */
+> +	err = fill_queue(port->in_vq, &port->inbuf_lock);
+> +	if (err < 0 && err != -ENOSPC) {
+>  		dev_err(port->dev, "Error allocating inbufs\n");
+> -		err = -ENOMEM;
+>  		goto free_device;
+>  	}
+>  
+> @@ -2059,14 +2060,11 @@ static int virtcons_probe(struct
+> virtio_device *vdev)
+>  	INIT_WORK(&portdev->control_work, &control_work_handler);
+>  
+>  	if (multiport) {
+> -		unsigned int nr_added_bufs;
+> -
+>  		spin_lock_init(&portdev->c_ivq_lock);
+>  		spin_lock_init(&portdev->c_ovq_lock);
+>  
+> -		nr_added_bufs = fill_queue(portdev->c_ivq,
+> -					   &portdev->c_ivq_lock);
+> -		if (!nr_added_bufs) {
+> +		err = fill_queue(portdev->c_ivq, &portdev->c_ivq_lock);
+> +		if (err < 0) {
+>  			dev_err(&vdev->dev,
+>  				"Error allocating buffers for control
+> queue\n");
+>  			/*
+> @@ -2077,7 +2075,7 @@ static int virtcons_probe(struct virtio_device
+> *vdev)
+>  					   VIRTIO_CONSOLE_DEVICE_READY,
+> 0);
+>  			/* Device was functional: we need full cleanup.
+> */
+>  			virtcons_remove(vdev);
+> -			return -ENOMEM;
+> +			return err;
+>  		}
+>  	} else {
+>  		/*
 
 _______________________________________________
 Virtualization mailing list
