@@ -1,100 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAEF21105E1
-	for <lists.virtualization@lfdr.de>; Tue,  3 Dec 2019 21:19:56 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8FDE112D17
+	for <lists.virtualization@lfdr.de>; Wed,  4 Dec 2019 14:59:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 703172043A;
-	Tue,  3 Dec 2019 20:19:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 55E0386B0E;
+	Wed,  4 Dec 2019 13:59:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kO8Az0hwA6DX; Tue,  3 Dec 2019 20:19:54 +0000 (UTC)
+	with ESMTP id 5lZHD-GxW1cB; Wed,  4 Dec 2019 13:59:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 4F70C227F7;
-	Tue,  3 Dec 2019 20:19:54 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id AE20D86AE9;
+	Wed,  4 Dec 2019 13:59:00 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 329C0C087F;
-	Tue,  3 Dec 2019 20:19:54 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8C43EC18DD;
+	Wed,  4 Dec 2019 13:59:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3F99BC087F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6AEA9C077D
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:19:52 +0000 (UTC)
+ Wed,  4 Dec 2019 13:58:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 3B418227A3
+ by silver.osuosl.org (Postfix) with ESMTP id 53EB022DDB
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:19:52 +0000 (UTC)
+ Wed,  4 Dec 2019 13:58:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 09gE0e1VAxdL
+ with ESMTP id gM5Vyqdr2oym
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:19:51 +0000 (UTC)
+ Wed,  4 Dec 2019 13:58:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 579412043A
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by silver.osuosl.org (Postfix) with ESMTPS id 7D65622D0D
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Dec 2019 20:19:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575404390;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vvoBxuvp3G0/XLbvffQRipup1lCyNBJiGiUdnNoPbls=;
- b=h7QOH9fKDTe8uO3xFTJ2KhQsA2cB/McXPPrqBTcP1ehOQd75gWcC0D0JDfzTEWefqzByjS
- F5AKsNzJx4ate24mJFyEsBhJetX8KOeRfdlWxfecIqHFNE0VoZYKHvCu3cLTfH4k7q0R1K
- 6BcdOBQOC0zT8DTl0yZi35pV41pS4j4=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-16-ExAyjBMEM4O9M_5l5dzQnA-1; Tue, 03 Dec 2019 15:19:48 -0500
-Received: by mail-qt1-f197.google.com with SMTP id j14so3314628qtr.10
- for <virtualization@lists.linux-foundation.org>;
- Tue, 03 Dec 2019 12:19:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=QmtzDLYDSTNcDSWhu8MKh0ZRRQ2IxQ2t+dts0IfGnuc=;
- b=QMAZNO/PfxrdxPQPaM8WSU02Ma3f37qKN5oixOeWjvFCkIJl9Il+KUM6tFMuzDYstK
- nBMPwDM5jlr5vLMkTgRwM+6yuu6wa/TbJY2kndO/qDuwiuxExBJRw+JjdYBqdA5evRJf
- YXVFEMeFrJsKcK+yzGCDyTs3xcalMYyrkkyRI+27EyXjbIG0/awTTvbCJ34e2X835Jyo
- LHdozzvwGg1aU6IWhGbA/Za6IKGh24TCPDPGV1T0Hm6Ox0J0p3pLZmovFPWcUK6/Qh7j
- XO3SJokf/2nYWHh38TlTxEFJpOCXT24wDkKxMEtajYLaAKSItcNIXr41gtmOSRcJWT9d
- tyng==
-X-Gm-Message-State: APjAAAUg0cAG7adCxN8zGAFTI7m6u3X3xMR4VhAbewVZd4SLTeEj0tcH
- usLDPLW1zpuc9boO5n8XlSgUXeP1+Cb9gV6yBYqZHLEGWwkRN9Lng+i3GAe1yn8LMmTftDaUMqK
- bipUx5L9xueuVXdMqjeXEyUiazeNaOXksCHtbKVNmpw==
-X-Received: by 2002:a05:620a:210e:: with SMTP id
- l14mr7328299qkl.18.1575404388181; 
- Tue, 03 Dec 2019 12:19:48 -0800 (PST)
-X-Google-Smtp-Source: APXvYqzNAGftONrxG7OOOmA1p2XeS+kBT15c+ObkoyL77kRsuzntoDuyINOMAAxBlSMFnthhkga2lw==
-X-Received: by 2002:a05:620a:210e:: with SMTP id
- l14mr7328279qkl.18.1575404387958; 
- Tue, 03 Dec 2019 12:19:47 -0800 (PST)
-Received: from redhat.com (bzq-79-181-48-215.red.bezeqint.net. [79.181.48.215])
- by smtp.gmail.com with ESMTPSA id s44sm2425816qts.22.2019.12.03.12.19.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2019 12:19:47 -0800 (PST)
-Date: Tue, 3 Dec 2019 15:19:42 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org, Julio Faracco <jcfaracco@gmail.com>
-Subject: [PATCH RFC net-next v8 2/3] mlx4: use new txqueue timeout argument
-Message-ID: <20191203201804.662066-3-mst@redhat.com>
-References: <20191203201804.662066-1-mst@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <20191203201804.662066-1-mst@redhat.com>
-X-Mailer: git-send-email 2.22.0.678.g13338e74b8
-X-Mutt-Fcc: =sent
-X-MC-Unique: ExAyjBMEM4O9M_5l5dzQnA-1
-X-Mimecast-Spam-Score: 0
-Content-Disposition: inline
-Cc: dnmendes76@gmail.com, mst@redhat.com, netdev@vger.kernel.org,
- virtualization@lists.linux-foundation.org, davem@davemloft.net
+ Wed,  4 Dec 2019 13:58:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+ Mime-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:
+ Message-ID:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=1O3RASwSBQtukZSsiULD4Oz8VPMmlubHuY7PxIAb5yg=; b=DQlqMhee5t6rs7/yLDNfMIzRx
+ 2PC5TdPG/McP0TnA7ja0ZmSD6npxQ7/Vxl60N407jJm82Ly/lFfjczxz27RjppptRB12qVMYbnyve
+ cywGhi/oMKg6zgHUAgzo1886oi0C3ZlEjc1+4B42dFffXprOj++Ht0NIaM87lzg63sxti+ekXbhlj
+ MQ1efmvUdK2e8xxFbXIWeNd2ebuUcvF1kXF49ZrubBVX9V2M3y5C5FbOATt/OPJ1MJnAIjqQgyOWb
+ cR25AeTiCXfoOE6gWsgV+6gM1ko7oplDCjzaX/nhfDq6UVFWTsPgfhcjmhhR7q2oqWQImqnrMHTCI
+ e4c+pIbOw==;
+Received: from [54.239.6.185] (helo=u0c626add9cce5a.drs10.amazon.com)
+ by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1icVB8-0001fV-4J; Wed, 04 Dec 2019 13:58:54 +0000
+Message-ID: <108357faa8d7add057a8dc0870b42c482eec34ee.camel@infradead.org>
+Subject: Re: [PATCH v3] virtio_console: allocate inbufs in add_port() only
+ if it is needed
+From: Amit Shah <amit@infradead.org>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Date: Wed, 04 Dec 2019 14:58:51 +0100
+In-Reply-To: <20191203103840-mutt-send-email-mst@kernel.org>
+References: <20191114122548.24364-1-lvivier@redhat.com>
+ <ae3451423c18f2e408245d745d1f28e311a2845c.camel@infradead.org>
+ <20191203103840-mutt-send-email-mst@kernel.org>
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Cc: Laurent Vivier <lvivier@redhat.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,46 +85,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
+On Tue, 2019-12-03 at 10:42 -0500, Michael S. Tsirkin wrote:
+> On Tue, Dec 03, 2019 at 03:46:50PM +0100, Amit Shah wrote:
+> > On Thu, 2019-11-14 at 13:25 +0100, Laurent Vivier wrote:
+> > > When we hot unplug a virtserialport and then try to hot plug
+> > > again,
+> > > it fails:
+> > > 
+> > > (qemu) chardev-add
+> > > socket,id=serial0,path=/tmp/serial0,server,nowait
+> > > (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+> > >                   chardev=serial0,id=serial0,name=serial0
+> > > (qemu) device_del serial0
+> > > (qemu) device_add virtserialport,bus=virtio-serial0.0,nr=2,\
+> > >                   chardev=serial0,id=serial0,name=serial0
+> > > kernel error:
+> > >   virtio-ports vport2p2: Error allocating inbufs
+> > > qemu error:
+> > >   virtio-serial-bus: Guest failure in adding port 2 for device \
+> > >                      virtio-serial0.0
+> > > 
+> > > This happens because buffers for the in_vq are allocated when the
+> > > port is
+> > > added but are not released when the port is unplugged.
+> > > 
+> > > They are only released when virtconsole is removed (see
+> > > a7a69ec0d8e4)
+> > > 
+> > > To avoid the problem and to be symmetric, we could allocate all
+> > > the
+> > > buffers
+> > > in init_vqs() as they are released in remove_vqs(), but it sounds
+> > > like
+> > > a waste of memory.
+> > > 
+> > > Rather than that, this patch changes add_port() logic to ignore
+> > > ENOSPC
+> > > error in fill_queue(), which means queue has already been filled.
+> > > 
+> > > Fixes: a7a69ec0d8e4 ("virtio_console: free buffers after reset")
+> > > Cc: mst@redhat.com
+> > > Cc: stable@vger.kernel.org
+> > > Signed-off-by: Laurent Vivier <lvivier@redhat.com>
+> > 
+> > Reviewed-by: Amit Shah <amit@kernel.org>
+> > 
+> > Thanks!
+> 
+> 
+> Thanks, however this has already been merged by Linus.
+> I can't add the tag retroactively, sorry about that.
 
-changes from v7:
-	build fix
+Right, no problem - but I wanted to ensure it's on-list :)
 
- drivers/net/ethernet/mellanox/mlx4/en_netdev.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
+> 
+> For bugfix patches like that, I think we can reasonably
+> target a turn around of a couple of days, these
+> shouldn't really need to wait weeks for review.
 
-diff --git a/drivers/net/ethernet/mellanox/mlx4/en_netdev.c b/drivers/net/ethernet/mellanox/mlx4/en_netdev.c
-index aa348230bd39..2c2ff1f0ea6d 100644
---- a/drivers/net/ethernet/mellanox/mlx4/en_netdev.c
-+++ b/drivers/net/ethernet/mellanox/mlx4/en_netdev.c
-@@ -1367,20 +1367,14 @@ static void mlx4_en_tx_timeout(struct net_device *dev, unsigned int txqueue)
- {
- 	struct mlx4_en_priv *priv = netdev_priv(dev);
- 	struct mlx4_en_dev *mdev = priv->mdev;
--	int i;
-+	struct mlx4_en_tx_ring *tx_ring = priv->tx_ring[TX][txqueue];
- 
- 	if (netif_msg_timer(priv))
- 		en_warn(priv, "Tx timeout called on port:%d\n", priv->port);
- 
--	for (i = 0; i < priv->tx_ring_num[TX]; i++) {
--		struct mlx4_en_tx_ring *tx_ring = priv->tx_ring[TX][i];
--
--		if (!netif_tx_queue_stopped(netdev_get_tx_queue(dev, i)))
--			continue;
--		en_warn(priv, "TX timeout on queue: %d, QP: 0x%x, CQ: 0x%x, Cons: 0x%x, Prod: 0x%x\n",
--			i, tx_ring->qpn, tx_ring->sp_cqn,
--			tx_ring->cons, tx_ring->prod);
--	}
-+	en_warn(priv, "TX timeout on queue: %d, QP: 0x%x, CQ: 0x%x, Cons: 0x%x, Prod: 0x%x\n",
-+		txqueue, tx_ring->qpn, tx_ring->sp_cqn,
-+		tx_ring->cons, tx_ring->prod);
- 
- 	priv->port_stats.tx_timeout++;
- 	en_dbg(DRV, priv, "Scheduling watchdog\n");
--- 
-MST
+Sure, thanks for picking it up fast enough.  Life happens, etc., and
+it's not always possible to reply in a couple of days.  Since we had
+already covered the main comments in v1 and v2, v3 wasn't going to need
+much attention anyway.
+
 
 _______________________________________________
 Virtualization mailing list
