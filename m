@@ -1,91 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 404AF114133
-	for <lists.virtualization@lfdr.de>; Thu,  5 Dec 2019 14:06:46 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D3C1E88251;
-	Thu,  5 Dec 2019 13:06:44 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id u-0IRs5eSohJ; Thu,  5 Dec 2019 13:06:44 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 61390881AD;
-	Thu,  5 Dec 2019 13:06:44 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 301D4C077D;
-	Thu,  5 Dec 2019 13:06:44 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7D1F2C077D
- for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Dec 2019 13:06:43 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9068114ED3
+	for <lists.virtualization@lfdr.de>; Fri,  6 Dec 2019 11:13:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 7073123420
- for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Dec 2019 13:06:43 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3DCC425E5D;
+	Fri,  6 Dec 2019 10:13:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3A0wiwOPMFs4
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ih8DE0v-omru; Fri,  6 Dec 2019 10:13:16 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id ACA2225E23;
+	Fri,  6 Dec 2019 10:13:16 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 93D34C077D;
+	Fri,  6 Dec 2019 10:13:16 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F3ED8C077D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Dec 2019 13:06:42 +0000 (UTC)
+ Fri,  6 Dec 2019 10:13:14 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id D3C4F88B26
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  6 Dec 2019 10:13:14 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 85nthesoPafP
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  6 Dec 2019 10:13:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by silver.osuosl.org (Postfix) with ESMTPS id A6D20203A8
+ by hemlock.osuosl.org (Postfix) with ESMTPS id BAA7088B41
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Dec 2019 13:06:42 +0000 (UTC)
+ Fri,  6 Dec 2019 10:13:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575551201;
+ s=mimecast20190719; t=1575627191;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pIbfnsWyjUzYuMMUtvP8cBzLFVnihHBsEg4LNJqdKgI=;
- b=ijhmthc0DRHlsgCY66E1VDmg1zh4LQ3oOBeZCY3WjIB2S/t5dDWeDoSCjDi+PD6sbW1LT1
- S9A8asNf0Ij3WGmCRouk/9HtgVsOZFgxj1ZH3A0lND3WeVqNYcIzGq+lQDu5hU6fytesYH
- dIrtXMWTaOuAC1dy/urGhC86LYuzeUo=
+ bh=VjFRH+KKy9lVo/LpjoVhiAMNpklSmLSTjCgJyK72eTk=;
+ b=e1vNJNKvuZV/tVHTwCxSJiNMOGnRQYw1fzIrpdFIT05+HtDxoLuQJDXPzW1ydBlCEaO8OO
+ xyOCoBQTmyffAf8mEC0/AF4cxfZNhQ8lwYLIOdf9HqZCWxi57iqkEMUgszvwX82Om/hY+j
+ +C301YlQ+DHQRvT8uH+31J4cRzpeNCU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-68-7hcZwkCJNWex1a5zYOwlZw-1; Thu, 05 Dec 2019 08:06:37 -0500
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-382-_P5lLl6yMu6earcgehqAzw-1; Fri, 06 Dec 2019 05:13:09 -0500
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8EC6CDB35;
- Thu,  5 Dec 2019 13:06:34 +0000 (UTC)
-Received: from warthog.procyon.org.uk (ovpn-120-250.rdu2.redhat.com
- [10.10.120.250])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6179260135;
- Thu,  5 Dec 2019 13:06:31 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-From: David Howells <dhowells@redhat.com>
-In-Reply-To: <20191205072838.GA3237@sol.localdomain>
-References: <20191205072838.GA3237@sol.localdomain>
- <000000000000a376820598b2eb97@google.com>
- <20191205054023.GA772@sol.localdomain>
-To: Eric Biggers <ebiggers@kernel.org>
-Subject: Re: kernel BUG at fs/pipe.c:LINE!
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B89451005512;
+ Fri,  6 Dec 2019 10:13:07 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-67.ams2.redhat.com
+ [10.36.116.67])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DF2885D6A3;
+ Fri,  6 Dec 2019 10:13:06 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 10F2416E18; Fri,  6 Dec 2019 11:13:06 +0100 (CET)
+Date: Fri, 6 Dec 2019 11:13:06 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Aditya Pakki <pakki001@umn.edu>
+Subject: Re: [PATCH] drm/qxl: remove unnecessary BUG_ON check for handle
+Message-ID: <20191206101306.rp2uxsmzgsshxey6@sirius.home.kraxel.org>
+References: <20191205234231.10849-1-pakki001@umn.edu>
 MIME-Version: 1.0
-Content-ID: <27080.1575551190.1@warthog.procyon.org.uk>
-Date: Thu, 05 Dec 2019 13:06:30 +0000
-Message-ID: <27081.1575551190@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-MC-Unique: 7hcZwkCJNWex1a5zYOwlZw-1
+In-Reply-To: <20191205234231.10849-1-pakki001@umn.edu>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-MC-Unique: _P5lLl6yMu6earcgehqAzw-1
 X-Mimecast-Spam-Score: 0
-Cc: willy@infradead.org, arnd@arndb.de, jannh@google.com,
- syzbot <syzbot+d37abaade33a934f16f2@syzkaller.appspotmail.com>,
- amit@kernel.org, syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
- rostedt@goodmis.org, virtualization@lists.linux-foundation.org,
- dhowells@redhat.com, miklos@szeredi.hu, viro@zeniv.linux.org.uk,
- gregkh@linuxfoundation.org, linux-fsdevel@vger.kernel.org
+Content-Disposition: inline
+Cc: David Airlie <airlied@linux.ie>, kjlu@umn.edu, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,40 +96,16 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Eric Biggers <ebiggers@kernel.org> wrote:
+On Thu, Dec 05, 2019 at 05:42:31PM -0600, Aditya Pakki wrote:
+> In qxl_gem_object_create_with_handle(), handle's memory is not
+> allocated on the heap. Checking for failure of handle via BUG_ON
+> is unnecessary. This patch eliminates the check.
 
-> static __poll_t
-> pipe_poll(struct file *filp, poll_table *wait)
-> {
->         __poll_t mask;
->         struct pipe_inode_info *pipe = filp->private_data;
->         unsigned int head = READ_ONCE(pipe->head);
->         unsigned int tail = READ_ONCE(pipe->tail);
-> 
->         poll_wait(filp, &pipe->wait, wait);
-> 
->         BUG_ON(pipe_occupancy(head, tail) > pipe->ring_size);
-> 
-> It's not holding the pipe mutex, right?  So 'head', 'tail' and 'ring_size' can
-> all be changed concurrently, and they aren't read atomically with respect to
-> each other.
-> 
-> How do you propose to implement poll() correctly with the new head + tail
-> approach?  Just take the mutex?
+The check makes sure the caller doesn't pass in handle == NULL
+and it is needed.
 
-Firstly, the BUG_ON() check probably isn't necessary here - the same issue
-with occupancy being seen to be greater than the queue depth existed
-previously (there was no locking around the read of pipe->nrbufs and
-pipe->buffers).  I added a sanity check.
-
-Secondly, it should be possible to make it such that just the spinlock
-suffices.  The following few patches make the main pipe read/write routines
-use the spinlock so as not to be interfered with by notification insertion.
-
-I didn't roll the spinlock out to splice and suchlike since I prohibit
-splicing to a notifications pipe because of the iov_iter_revert() fun.
-
-David
+cheers,
+  Gerd
 
 _______________________________________________
 Virtualization mailing list
