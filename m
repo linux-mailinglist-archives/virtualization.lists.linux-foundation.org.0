@@ -1,58 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5883116C67
-	for <lists.virtualization@lfdr.de>; Mon,  9 Dec 2019 12:39:51 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BDBC116F95
+	for <lists.virtualization@lfdr.de>; Mon,  9 Dec 2019 15:51:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 58A508768C;
-	Mon,  9 Dec 2019 11:39:50 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6736385C19;
+	Mon,  9 Dec 2019 14:51:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VX1Rv2DeCxd8; Mon,  9 Dec 2019 11:39:49 +0000 (UTC)
+	with ESMTP id jdjQLy8-sI78; Mon,  9 Dec 2019 14:51:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C71638763C;
-	Mon,  9 Dec 2019 11:39:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id DC652869B9;
+	Mon,  9 Dec 2019 14:50:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B75F6C0881;
-	Mon,  9 Dec 2019 11:39:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BF994C0881;
+	Mon,  9 Dec 2019 14:50:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CEC68C0881
- for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Dec 2019 11:39:46 +0000 (UTC)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2C34DC0881;
+ Mon,  9 Dec 2019 14:50:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id C4AB78768C
- for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Dec 2019 11:39:46 +0000 (UTC)
+ by hemlock.osuosl.org (Postfix) with ESMTP id 2762087DDE;
+ Mon,  9 Dec 2019 14:50:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vyNT5-lNodh1
- for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Dec 2019 11:39:45 +0000 (UTC)
-X-Greylist: delayed 00:44:52 by SQLgrey-1.7.6
-Received: from sipsolutions.net (s3.sipsolutions.net [144.76.43.62])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 6FDDE87635
- for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Dec 2019 11:39:45 +0000 (UTC)
-Received: by sipsolutions.net with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
- (Exim 4.92.3) (envelope-from <johannes@sipsolutions.net>)
- id 1ieGgi-00FN4j-L6; Mon, 09 Dec 2019 11:54:48 +0100
-Message-ID: <db33800253f071a1cfbb91f413af59e73faa6775.camel@sipsolutions.net>
-Subject: Re: [PATCH] virtio: Work around frames incorrectly marked as gso
-From: Johannes Berg <johannes@sipsolutions.net>
-To: anton.ivanov@cambridgegreys.com, netdev@vger.kernel.org
-Date: Mon, 09 Dec 2019 11:54:46 +0100
-In-Reply-To: <20191209104824.17059-1-anton.ivanov@cambridgegreys.com>
-References: <20191209104824.17059-1-anton.ivanov@cambridgegreys.com>
-User-Agent: Evolution 3.34.2 (3.34.2-1.fc31) 
+ with ESMTP id KPxlYZKqXo9R; Mon,  9 Dec 2019 14:50:16 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id DA1F887F52;
+ Mon,  9 Dec 2019 14:50:11 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id d16so16478837wre.10;
+ Mon, 09 Dec 2019 06:50:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=7g3wSCUkuYWHZsY797oGKzqOQQtMHGZXYj3iutCpVxs=;
+ b=u91aLh+YeBCHC44kayet3YM2AUntkYXMMX1pB/CSCzoAIFP+uLAcMwnJdsc7rbnQ+U
+ En/u38xmp/ZaSrMelXHGaVP52bkx1ZHf6fa0G31V+GUhQS0AaFSn7ys+h8RO1NV7WwV8
+ ymTsoKVUUeJQKGShJcXhRTy2EGqLJh6aGXWYBXpnjQEUtLbQuGVBa6A2YqkH5uprWm/d
+ vExxTU69ZDydrFyUChrYMXLctHuRAFns98Wcf6gFerjB0lv8isbF6NZZB1yfy5BvtY8n
+ PFFHY7dkbo8v2ddCOwEwVVHdCIfhIVbhWl9DBEzdztx/PK8tsG39arQVINGlMjwc9u28
+ QbHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=7g3wSCUkuYWHZsY797oGKzqOQQtMHGZXYj3iutCpVxs=;
+ b=gtBfHQ1hhhpKsVtMg9skkWz5bOfRMVkxJxSbxTjrwqpWeZAbvRGUsnPhGGAGmN8jea
+ +KCbKMW/ZBd6tThzRqDXuvqwuR8fIZslfr3FVFujFM4ZS4RFSfImnyu72o0VurHpBtD/
+ vzZj7HlKEc2UgK2YN5R/wPM1MZq9M9oQl0iC0SyyUvZUbWOnUB3TOeSI3BybbFQZDLLo
+ TuhNluYGG8rA728gUTnJXjvqpDARgSF4S1X3w9gJBtDEPEufamF3H534l6A66ojG3lFk
+ EfMyZvAmMByrT9ZeFnDa899MbYdUpLVX/mCySzQbRtgoemb7b4cQVeuJ5I+zcwH/3qjY
+ ILVg==
+X-Gm-Message-State: APjAAAVzMRBhJY3EhgoMyjpt8tTDqu/TQaJFkfofc3bI6EBxCOF526eD
+ AoUi+5C2qXa4qQ7Tb85ff+c=
+X-Google-Smtp-Source: APXvYqwgHRCIfDFUwn/zmwWNRl9/DgRU5Wwz5H2iHGf8TX85hbSYzSKuX7Aal6o+CbkISCPQgbBhvQ==
+X-Received: by 2002:adf:e984:: with SMTP id h4mr2512872wrm.275.1575903009994; 
+ Mon, 09 Dec 2019 06:50:09 -0800 (PST)
+Received: from localhost (pD9E518ED.dip0.t-ipconnect.de. [217.229.24.237])
+ by smtp.gmail.com with ESMTPSA id s82sm13863411wms.28.2019.12.09.06.50.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Dec 2019 06:50:08 -0800 (PST)
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Joerg Roedel <joro@8bytes.org>
+Subject: [PATCH v2 0/5] iommu: Implement iommu_put_resv_regions_simple()
+Date: Mon,  9 Dec 2019 15:50:02 +0100
+Message-Id: <20191209145007.2433144-1-thierry.reding@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Cc: mst@redhat.com, linux-um@lists.infradead.org,
- virtualization@lists.linux-foundation.org
+Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
+ Will Deacon <will@kernel.org>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Christoph Hellwig <hch@infradead.org>, iommu@lists.linux-foundation.org,
+ Robin Murphy <robin.murphy@arm.com>, David Woodhouse <dwmw2@infradead.org>,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,21 +96,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+From: Thierry Reding <treding@nvidia.com>
 
->  		else if (sinfo->gso_type & SKB_GSO_TCPV6)
->  			hdr->gso_type = VIRTIO_NET_HDR_GSO_TCPV6;
-> -		else
-> -			return -EINVAL;
-> +		else {
-> +			if (skb->data_len == 0)
-> +				hdr->gso_type = VIRTIO_NET_HDR_GSO_NONE;
+Most IOMMU drivers only need to free the memory allocated for each
+reserved region. Instead of open-coding the loop to do this in each
+driver, extract the code into a common function that can be used by
+all these drivers.
 
+Changes in v2:
+- change subject prefix to "iommu: virtio: " for virtio-iommu.c driver
 
-maybe use "else if" like in the before? yes, it's a different type of
-condition, but braces look a bit unnatural here to me at least
+Thierry
 
-johannes
+Thierry Reding (5):
+  iommu: Implement iommu_put_resv_regions_simple()
+  iommu: arm: Use iommu_put_resv_regions_simple()
+  iommu: amd: Use iommu_put_resv_regions_simple()
+  iommu: intel: Use iommu_put_resv_regions_simple()
+  iommu: virtio: Use iommu_put_resv_regions_simple()
 
+ drivers/iommu/amd_iommu.c    | 11 +----------
+ drivers/iommu/arm-smmu-v3.c  | 11 +----------
+ drivers/iommu/arm-smmu.c     | 11 +----------
+ drivers/iommu/intel-iommu.c  | 11 +----------
+ drivers/iommu/iommu.c        | 19 +++++++++++++++++++
+ drivers/iommu/virtio-iommu.c | 14 +++-----------
+ include/linux/iommu.h        |  2 ++
+ 7 files changed, 28 insertions(+), 51 deletions(-)
+
+-- 
+2.23.0
 
 _______________________________________________
 Virtualization mailing list
