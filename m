@@ -1,64 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD5E5115E5F
-	for <lists.virtualization@lfdr.de>; Sat,  7 Dec 2019 21:00:15 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 153DC116798
+	for <lists.virtualization@lfdr.de>; Mon,  9 Dec 2019 08:40:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5A1E588415;
-	Sat,  7 Dec 2019 20:00:14 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9373E87645;
+	Mon,  9 Dec 2019 07:40:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9AbBUEJFdHSC; Sat,  7 Dec 2019 20:00:13 +0000 (UTC)
+	with ESMTP id xKXstAPzCxiv; Mon,  9 Dec 2019 07:40:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E5247883CD;
-	Sat,  7 Dec 2019 20:00:13 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4DC2E875C7;
+	Mon,  9 Dec 2019 07:40:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D019AC077D;
-	Sat,  7 Dec 2019 20:00:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 23930C0881;
+	Mon,  9 Dec 2019 07:40:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 93009C077D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 24A99C0881
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 Dec 2019 20:00:11 +0000 (UTC)
+ Mon,  9 Dec 2019 07:40:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 818F588400
+ by hemlock.osuosl.org (Postfix) with ESMTP id 0DD428820B
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 Dec 2019 20:00:11 +0000 (UTC)
+ Mon,  9 Dec 2019 07:40:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id j2e60Ab43LLN
+ with ESMTP id vxl+yf7asvkW
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 Dec 2019 20:00:09 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from shards.monkeyblade.net (shards.monkeyblade.net [23.128.96.9])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 18809883CD
+ Mon,  9 Dec 2019 07:40:18 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
+ [209.85.210.68])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 0492887C7D
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 Dec 2019 20:00:09 +0000 (UTC)
-Received: from localhost (unknown [IPv6:2601:601:9f00:1c3::3d5])
- (using TLSv1 with cipher AES256-SHA (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: davem-davemloft)
- by shards.monkeyblade.net (Postfix) with ESMTPSA id 1E629153B510D;
- Sat,  7 Dec 2019 12:00:08 -0800 (PST)
-Date: Sat, 07 Dec 2019 12:00:07 -0800 (PST)
-Message-Id: <20191207.120007.1885129473331538826.davem@davemloft.net>
-To: sgarzare@redhat.com
-Subject: Re: [PATCH] vhost/vsock: accept only packets with the right dst_cid
-From: David Miller <davem@davemloft.net>
-In-Reply-To: <20191206143912.153583-1-sgarzare@redhat.com>
-References: <20191206143912.153583-1-sgarzare@redhat.com>
-X-Mailer: Mew version 6.8 on Emacs 26.1
-Mime-Version: 1.0
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
- (shards.monkeyblade.net [149.20.54.216]);
- Sat, 07 Dec 2019 12:00:08 -0800 (PST)
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- stefanha@redhat.com
+ Mon,  9 Dec 2019 07:40:17 +0000 (UTC)
+Received: by mail-ot1-f68.google.com with SMTP id 66so11362581otd.9
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 08 Dec 2019 23:40:17 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FPK1maUM55Gi6p6kYw8RySJ9yGFpidLuP0EhKQwUZt0=;
+ b=aSrCT5/WOsg/91MpCNACDjZ40v/n6Nk2ZGRE96ZdcoZzdaYj8Li9OiVk5uodaQKt1S
+ I/A+AxoED7Fbi27g/EAS37sCQy8oAXGgR4GChdmExz+yhIvzHeK8D3nAcMcqfw3F2fLp
+ NutTqJHLl6BxYwAQnOrI5seX/CITWPGUvhVW7oSDLg1wfbaxotaNIHK0+y96ZK/a8DrT
+ I8AuOvilP15NrRkLCyIkhqqRb/U2jspIHv5enkvbttPg+HCBYvr9LM1NNG/IfKAFTvJP
+ 7obaVaCMtekyS1EdrAUhm7qC5Wdmj6h8qfFrZBFuDGaO+3hT/GAsW1/38xnevoHoHAGR
+ T89A==
+X-Gm-Message-State: APjAAAVxqQR4nLkJ2e8sAJeRpfw+qOmcA6Z5cOPzbyPGG0UfTh4UkByC
+ u1AypYKN0HvFD34uRJx4bvvmaW6IjNon+rvh8j8=
+X-Google-Smtp-Source: APXvYqxnnTSYYLFHYr/PZKJtreFRDO2OI11O4NLAJMeK4zbXArJ/fD3O2OflqrT+cACovE3JpEFWmclImrX5h6naz84=
+X-Received: by 2002:a05:6830:91:: with SMTP id
+ a17mr19172583oto.107.1575877217104; 
+ Sun, 08 Dec 2019 23:40:17 -0800 (PST)
+MIME-Version: 1.0
+References: <20191203201804.662066-1-mst@redhat.com>
+ <20191203201804.662066-2-mst@redhat.com>
+In-Reply-To: <20191203201804.662066-2-mst@redhat.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Mon, 9 Dec 2019 08:40:06 +0100
+Message-ID: <CAMuHMdXDm0NiCk1pD_-wS9c-ErmRKkrqnPc_pGKzG=QB35mj9A@mail.gmail.com>
+Subject: Re: [PATCH RFC net-next v8 1/3] netdev: pass the stuck queue to the
+ timeout handler
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: dnmendes76@gmail.com, Jakub Kicinski <jakub.kicinski@netronome.com>,
+ netdev <netdev@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ virtualization@lists.linux-foundation.org,
+ Martin Habets <mhabets@solarflare.com>, Julio Faracco <jcfaracco@gmail.com>,
+ Shannon Nelson <snelson@pensando.io>, "David S. Miller" <davem@davemloft.net>,
+ Heiner Kallweit <hkallweit1@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,18 +92,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Stefano Garzarella <sgarzare@redhat.com>
-Date: Fri,  6 Dec 2019 15:39:12 +0100
+Hi Michael,
 
-> When we receive a new packet from the guest, we check if the
-> src_cid is correct, but we forgot to check the dst_cid.
-> 
-> The host should accept only packets where dst_cid is
-> equal to the host CID.
-> 
-> Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+On Tue, Dec 3, 2019 at 9:21 PM Michael S. Tsirkin <mst@redhat.com> wrote:
+> This allows incrementing the correct timeout statistic without any mess.
+> Down the road, devices can learn to reset just the specific queue.
+>
+> The patch was generated with the following script:
 
-Applied.
+[...]
+
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+> --- a/drivers/net/ethernet/8390/8390p.c
+> +++ b/drivers/net/ethernet/8390/8390p.c
+> @@ -41,9 +41,9 @@ void eip_set_multicast_list(struct net_device *dev)
+>  }
+>  EXPORT_SYMBOL(eip_set_multicast_list);
+>
+> -void eip_tx_timeout(struct net_device *dev)
+> +void eip_tx_timeout(struct net_device *dev, unsigned int txqueue)
+>  {
+> -       __ei_tx_timeout(dev);
+> +       __ei_tx_timeout(dev, txqueue);
+>  }
+>  EXPORT_SYMBOL(eip_tx_timeout);
+
+On Mon, Dec 9, 2019 at 6:37 AM <noreply@ellerman.id.au> wrote:
+> FAILED linux-next/m68k-defconfig/m68k Mon Dec 09, 16:34
+>
+> http://kisskb.ellerman.id.au/kisskb/buildresult/14060060/
+>
+> Commit:   Add linux-next specific files for 20191209
+>           6cf8298daad041cd15dc514d8a4f93ca3636c84e
+> Compiler: m68k-linux-gcc (GCC) 4.6.3 / GNU ld (GNU Binutils) 2.22
+>
+> Possible errors
+> ---------------
+>
+> drivers/net/ethernet/8390/8390p.c:44:6: error: conflicting types for 'eip_tx_timeout'
+> drivers/net/ethernet/8390/8390p.c:48:1: error: conflicting types for 'eip_tx_timeout'
+> make[5]: *** [scripts/Makefile.build:266: drivers/net/ethernet/8390/8390p.o] Error 1
+> make[4]: *** [scripts/Makefile.build:503: drivers/net/ethernet/8390] Error 2
+> make[3]: *** [scripts/Makefile.build:503: drivers/net/ethernet] Error 2
+> make[2]: *** [scripts/Makefile.build:503: drivers/net] Error 2
+> make[1]: *** [Makefile:1693: drivers] Error 2
+> make: *** [Makefile:179: sub-make] Error 2
+
+Looks like you forgot to update the forward declaration in
+drivers/net/ethernet/8390/8390.h
+
+There may be others...
+http://kisskb.ellerman.id.au/kisskb/head/6cf8298daad041cd15dc514d8a4f93ca3636c84e/
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+-- 
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
