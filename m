@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C72C1197C4
-	for <lists.virtualization@lfdr.de>; Tue, 10 Dec 2019 22:35:35 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E53CC119A9D
+	for <lists.virtualization@lfdr.de>; Tue, 10 Dec 2019 23:05:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C4ABC87CB9;
-	Tue, 10 Dec 2019 21:35:33 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9D07A86C18;
+	Tue, 10 Dec 2019 22:05:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7E3Zf+9xcnlF; Tue, 10 Dec 2019 21:35:32 +0000 (UTC)
+	with ESMTP id jEmhiQ0fNRVc; Tue, 10 Dec 2019 22:05:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D51CF868C6;
-	Tue, 10 Dec 2019 21:35:32 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id EE50586C04;
+	Tue, 10 Dec 2019 22:05:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B8226C0881;
-	Tue, 10 Dec 2019 21:35:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D35CDC0881;
+	Tue, 10 Dec 2019 22:05:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 65346C0881
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7D09CC0881
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 21:35:30 +0000 (UTC)
+ Tue, 10 Dec 2019 22:05:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 5A9AD22855
+ by silver.osuosl.org (Postfix) with ESMTP id 6BE4322739
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 21:35:30 +0000 (UTC)
+ Tue, 10 Dec 2019 22:05:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id O8jT7w2ah+Tz
+ with ESMTP id gy3Be7lDIKA7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 21:35:29 +0000 (UTC)
+ Tue, 10 Dec 2019 22:05:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by silver.osuosl.org (Postfix) with ESMTPS id AC29C22851
+ by silver.osuosl.org (Postfix) with ESMTPS id B601622735
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 21:35:29 +0000 (UTC)
+ Tue, 10 Dec 2019 22:05:16 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8834E24653;
- Tue, 10 Dec 2019 21:35:28 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 915422073B;
+ Tue, 10 Dec 2019 22:05:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576013729;
- bh=RLShHQeXVG4YlSKwBDqxLbQ7OdzK7yYlJ1FwnCfry8M=;
+ s=default; t=1576015516;
+ bh=8zyNla2jXgqDmHpILGytgenyNG3o9448eWYRUveLcKE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=XQtF4IKdDXs+f04n09KmUo0XVA3I1ygWBnKy1EEZcGBsb//kAqd8S/iPis2TREGp8
- YAP0Ir5QWogN30U83dnoxWMKSUB0/3JLBLWeKuGRWEXsowY0/hKlr+P3mNvG1juft5
- 2iAsrXBGlRasGKtAkP4GyHYYecTc8YOc2R+NLR2U=
+ b=lce5y2VJXAerrMsuoSQEksOD0zSPI54x4sAtME5LU9bCp9NWQqJxeNMi+dzzchiYW
+ WiB7zsvE85cIgc1RGr8nok5gyVlb04p2WfRzlGbgU7nK9aN8N1xQE8c3l48zCOtRMW
+ Xob8Hw2JjXJAfvH5BKbOGTnydoO9Fp5fdsomn1wc=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 154/177] crypto: virtio - deal with unsupported
+Subject: [PATCH AUTOSEL 4.14 113/130] crypto: virtio - deal with unsupported
  input sizes
-Date: Tue, 10 Dec 2019 16:31:58 -0500
-Message-Id: <20191210213221.11921-154-sashal@kernel.org>
+Date: Tue, 10 Dec 2019 17:02:44 -0500
+Message-Id: <20191210220301.13262-113-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191210213221.11921-1-sashal@kernel.org>
-References: <20191210213221.11921-1-sashal@kernel.org>
+In-Reply-To: <20191210220301.13262-1-sashal@kernel.org>
+References: <20191210220301.13262-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -107,10 +107,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/crypto/virtio/virtio_crypto_algs.c b/drivers/crypto/virtio/virtio_crypto_algs.c
-index 2c573d1aaa64f..523b712770ac5 100644
+index 5035b0dc1e40c..e2231a1a05a12 100644
 --- a/drivers/crypto/virtio/virtio_crypto_algs.c
 +++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -117,8 +117,6 @@ virtio_crypto_alg_validate_key(int key_len, uint32_t *alg)
+@@ -110,8 +110,6 @@ virtio_crypto_alg_validate_key(int key_len, uint32_t *alg)
  		*alg = VIRTIO_CRYPTO_CIPHER_AES_CBC;
  		break;
  	default:
@@ -119,7 +119,7 @@ index 2c573d1aaa64f..523b712770ac5 100644
  		return -EINVAL;
  	}
  	return 0;
-@@ -498,6 +496,11 @@ static int virtio_crypto_ablkcipher_encrypt(struct ablkcipher_request *req)
+@@ -485,6 +483,11 @@ static int virtio_crypto_ablkcipher_encrypt(struct ablkcipher_request *req)
  	/* Use the first data virtqueue as default */
  	struct data_queue *data_vq = &vcrypto->data_vq[0];
  
@@ -131,7 +131,7 @@ index 2c573d1aaa64f..523b712770ac5 100644
  	vc_req->dataq = data_vq;
  	vc_req->alg_cb = virtio_crypto_dataq_sym_callback;
  	vc_sym_req->ablkcipher_ctx = ctx;
-@@ -518,6 +521,11 @@ static int virtio_crypto_ablkcipher_decrypt(struct ablkcipher_request *req)
+@@ -505,6 +508,11 @@ static int virtio_crypto_ablkcipher_decrypt(struct ablkcipher_request *req)
  	/* Use the first data virtqueue as default */
  	struct data_queue *data_vq = &vcrypto->data_vq[0];
  
