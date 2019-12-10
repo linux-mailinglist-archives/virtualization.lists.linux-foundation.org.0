@@ -1,78 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0893B11855C
-	for <lists.virtualization@lfdr.de>; Tue, 10 Dec 2019 11:43:27 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D13DB11855E
+	for <lists.virtualization@lfdr.de>; Tue, 10 Dec 2019 11:43:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 82727857B0;
-	Tue, 10 Dec 2019 10:43:25 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7C27622179;
+	Tue, 10 Dec 2019 10:43:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id py_YyFBXp8oc; Tue, 10 Dec 2019 10:43:24 +0000 (UTC)
+	with ESMTP id 8SCCl5961t8U; Tue, 10 Dec 2019 10:43:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7F2EB85F7E;
-	Tue, 10 Dec 2019 10:43:24 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id AC96D221A9;
+	Tue, 10 Dec 2019 10:43:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 660CEC0881;
-	Tue, 10 Dec 2019 10:43:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 97F33C0881;
+	Tue, 10 Dec 2019 10:43:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BE3CBC0881
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D4415C0881
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 10:43:22 +0000 (UTC)
+ Tue, 10 Dec 2019 10:43:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id B94E28558A
+ by hemlock.osuosl.org (Postfix) with ESMTP id BF67A87A4D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 10:43:22 +0000 (UTC)
+ Tue, 10 Dec 2019 10:43:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id O1cw0GE5Q_6j
+ with ESMTP id Wsd37d4ME5jI
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 10:43:22 +0000 (UTC)
+ Tue, 10 Dec 2019 10:43:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id EB94485585
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 48A3287A39
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Dec 2019 10:43:21 +0000 (UTC)
+ Tue, 10 Dec 2019 10:43:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575974600;
+ s=mimecast20190719; t=1575974605;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tnXvqpFpNzP8oPTla7hKks1vt4Ju8zKblazbqfdN9vI=;
- b=c1ncx/iQdjW5xNL2XOuE+Rdn1F3whxUFvLefXUx2hKz9ZdSFYcRutmui0dE+qSQA/zYwwp
- iXsBErDRPa2mk7bl02Frp/9aJnjHZOoJ32JF2wgeDlhj4L0ZckRkFK5+C6dvy9vlLEtpjJ
- 81XJ6/13dzbUCFPZVJxM8bWNeLRu8VU=
+ bh=bWw5CHeiqYpd2mPCO8jLMgnH+0xB69v4o/ZzGi9D20g=;
+ b=fSIOCswdrpz7BR4+RkDpC4isVlBvp7if3vuM2f7WKT3HWkMQGGrzpQzyIpCMJFRXRI2SNY
+ 9O/1VcnE2+f+1OLIIRp/hs9Djx143YqIQoIn2WPqLNiLvlkm6thH5iRzZRI/67fUtH4sTk
+ nax4nPmPnOVgsLfvTo/3pXpqOgvbxa4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-66-cxDu77_YMKiBjb-D9Pf9LQ-1; Tue, 10 Dec 2019 05:43:19 -0500
+ us-mta-93-LdCDeDbyMre2pv2b90AovA-1; Tue, 10 Dec 2019 05:43:21 -0500
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B6E17800D5E;
- Tue, 10 Dec 2019 10:43:17 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6130F1183E2E;
+ Tue, 10 Dec 2019 10:43:20 +0000 (UTC)
 Received: from steredhat.redhat.com (ovpn-117-168.ams2.redhat.com
  [10.36.117.168])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B7B5660568;
- Tue, 10 Dec 2019 10:43:15 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1546060570;
+ Tue, 10 Dec 2019 10:43:17 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: netdev@vger.kernel.org,
 	davem@davemloft.net
-Subject: [PATCH net-next v2 2/6] vsock: add VMADDR_CID_LOCAL definition
-Date: Tue, 10 Dec 2019 11:43:03 +0100
-Message-Id: <20191210104307.89346-3-sgarzare@redhat.com>
+Subject: [PATCH net-next v2 3/6] vsock: add local transport support in the
+ vsock core
+Date: Tue, 10 Dec 2019 11:43:04 +0100
+Message-Id: <20191210104307.89346-4-sgarzare@redhat.com>
 In-Reply-To: <20191210104307.89346-1-sgarzare@redhat.com>
 References: <20191210104307.89346-1-sgarzare@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-MC-Unique: cxDu77_YMKiBjb-D9Pf9LQ-1
+X-MC-Unique: LdCDeDbyMre2pv2b90AovA-1
 X-Mimecast-Spam-Score: 0
 Cc: kvm@vger.kernel.org, Dexuan Cui <decui@microsoft.com>,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
@@ -93,53 +94,88 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The VMADDR_CID_RESERVED (1) was used by VMCI, but now it is not
-used anymore, so we can reuse it for local communication
-(loopback) adding the new well-know CID: VMADDR_CID_LOCAL.
+This patch allows to register a transport able to handle
+local communication (loopback).
 
-Cc: Jorgen Hansen <jhansen@vmware.com>
 Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
-Reviewed-by: Jorgen Hansen <jhansen@vmware.com>
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
- include/uapi/linux/vm_sockets.h | 8 +++++---
- net/vmw_vsock/vmci_transport.c  | 2 +-
- 2 files changed, 6 insertions(+), 4 deletions(-)
+ include/net/af_vsock.h   |  2 ++
+ net/vmw_vsock/af_vsock.c | 17 ++++++++++++++++-
+ 2 files changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/include/uapi/linux/vm_sockets.h b/include/uapi/linux/vm_sockets.h
-index 68d57c5e99bc..fd0ed7221645 100644
---- a/include/uapi/linux/vm_sockets.h
-+++ b/include/uapi/linux/vm_sockets.h
-@@ -99,11 +99,13 @@
+diff --git a/include/net/af_vsock.h b/include/net/af_vsock.h
+index 4206dc6d813f..b1c717286993 100644
+--- a/include/net/af_vsock.h
++++ b/include/net/af_vsock.h
+@@ -98,6 +98,8 @@ struct vsock_transport_send_notify_data {
+ #define VSOCK_TRANSPORT_F_G2H		0x00000002
+ /* Transport provides DGRAM communication */
+ #define VSOCK_TRANSPORT_F_DGRAM		0x00000004
++/* Transport provides local (loopback) communication */
++#define VSOCK_TRANSPORT_F_LOCAL		0x00000008
  
- #define VMADDR_CID_HYPERVISOR 0
+ struct vsock_transport {
+ 	struct module *module;
+diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
+index 74db4cd637a7..3da0749a0c97 100644
+--- a/net/vmw_vsock/af_vsock.c
++++ b/net/vmw_vsock/af_vsock.c
+@@ -136,6 +136,8 @@ static const struct vsock_transport *transport_h2g;
+ static const struct vsock_transport *transport_g2h;
+ /* Transport used for DGRAM communication */
+ static const struct vsock_transport *transport_dgram;
++/* Transport used for local communication */
++static const struct vsock_transport *transport_local;
+ static DEFINE_MUTEX(vsock_register_mutex);
  
--/* This CID is specific to VMCI and can be considered reserved (even VMCI
-- * doesn't use it anymore, it's a legacy value from an older release).
-+/* Use this as the destination CID in an address when referring to the
-+ * local communication (loopback).
-+ * (This was VMADDR_CID_RESERVED, but even VMCI doesn't use it anymore,
-+ * it was a legacy value from an older release).
-  */
+ /**** UTILS ****/
+@@ -2137,7 +2139,7 @@ EXPORT_SYMBOL_GPL(vsock_core_get_transport);
  
--#define VMADDR_CID_RESERVED 1
-+#define VMADDR_CID_LOCAL 1
- 
- /* Use this as the destination CID in an address when referring to the host
-  * (any process other than the hypervisor).  VMCI relies on it being 2, but
-diff --git a/net/vmw_vsock/vmci_transport.c b/net/vmw_vsock/vmci_transport.c
-index 644d32e43d23..4b8b1150a738 100644
---- a/net/vmw_vsock/vmci_transport.c
-+++ b/net/vmw_vsock/vmci_transport.c
-@@ -648,7 +648,7 @@ static int vmci_transport_recv_dgram_cb(void *data, struct vmci_datagram *dg)
- static bool vmci_transport_stream_allow(u32 cid, u32 port)
+ int vsock_core_register(const struct vsock_transport *t, int features)
  {
- 	static const u32 non_socket_contexts[] = {
--		VMADDR_CID_RESERVED,
-+		VMADDR_CID_LOCAL,
- 	};
- 	int i;
+-	const struct vsock_transport *t_h2g, *t_g2h, *t_dgram;
++	const struct vsock_transport *t_h2g, *t_g2h, *t_dgram, *t_local;
+ 	int err = mutex_lock_interruptible(&vsock_register_mutex);
  
+ 	if (err)
+@@ -2146,6 +2148,7 @@ int vsock_core_register(const struct vsock_transport *t, int features)
+ 	t_h2g = transport_h2g;
+ 	t_g2h = transport_g2h;
+ 	t_dgram = transport_dgram;
++	t_local = transport_local;
+ 
+ 	if (features & VSOCK_TRANSPORT_F_H2G) {
+ 		if (t_h2g) {
+@@ -2171,9 +2174,18 @@ int vsock_core_register(const struct vsock_transport *t, int features)
+ 		t_dgram = t;
+ 	}
+ 
++	if (features & VSOCK_TRANSPORT_F_LOCAL) {
++		if (t_local) {
++			err = -EBUSY;
++			goto err_busy;
++		}
++		t_local = t;
++	}
++
+ 	transport_h2g = t_h2g;
+ 	transport_g2h = t_g2h;
+ 	transport_dgram = t_dgram;
++	transport_local = t_local;
+ 
+ err_busy:
+ 	mutex_unlock(&vsock_register_mutex);
+@@ -2194,6 +2206,9 @@ void vsock_core_unregister(const struct vsock_transport *t)
+ 	if (transport_dgram == t)
+ 		transport_dgram = NULL;
+ 
++	if (transport_local == t)
++		transport_local = NULL;
++
+ 	mutex_unlock(&vsock_register_mutex);
+ }
+ EXPORT_SYMBOL_GPL(vsock_core_unregister);
 -- 
 2.23.0
 
