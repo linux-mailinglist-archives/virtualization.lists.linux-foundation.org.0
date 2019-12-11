@@ -1,101 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6549D11A9EF
-	for <lists.virtualization@lfdr.de>; Wed, 11 Dec 2019 12:29:26 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0041D11AA9F
+	for <lists.virtualization@lfdr.de>; Wed, 11 Dec 2019 13:20:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 09E4122E20;
-	Wed, 11 Dec 2019 11:29:25 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6FA8088538;
+	Wed, 11 Dec 2019 12:20:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VlmJ5lGWSKm4; Wed, 11 Dec 2019 11:29:23 +0000 (UTC)
+	with ESMTP id 6O9emjIrfRG1; Wed, 11 Dec 2019 12:20:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 4C72E22DB0;
-	Wed, 11 Dec 2019 11:29:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id DD0F688171;
+	Wed, 11 Dec 2019 12:20:10 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3EFF9C0881;
-	Wed, 11 Dec 2019 11:29:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AEE32C0881;
+	Wed, 11 Dec 2019 12:20:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6C70CC0881
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DC3B5C0881
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Dec 2019 11:29:22 +0000 (UTC)
+ Wed, 11 Dec 2019 12:20:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 5AC6785DEC
+ by hemlock.osuosl.org (Postfix) with ESMTP id C7FFF878A0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Dec 2019 11:29:22 +0000 (UTC)
+ Wed, 11 Dec 2019 12:20:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id I1HaI-54y9eU
+ with ESMTP id 7gQCKENBHrii
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Dec 2019 11:29:21 +0000 (UTC)
+ Wed, 11 Dec 2019 12:20:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 41D1385259
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 72A60878A8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Dec 2019 11:29:21 +0000 (UTC)
+ Wed, 11 Dec 2019 12:20:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576063760;
+ s=mimecast20190719; t=1576066806;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=eqlqvPWeQGEzUKutyZf04CNS3FHXTx+H0QmritbRKH0=;
- b=hGd0Vji7Qy3TNS5JJYecj+xmo6BdCPea6jY55LOkrTteELo0hIs9CHL6g78E/BRztrYmEe
- 9rxHbmTAhvQYXHZHUALkoYr42+VrgeYWsceysybdkRX0Q60LLZ4HT3J1dnldlnRZj7bYSL
- wO80QZJrln+fnvD8J+bUWH/5ljKIhOM=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-340-7a1ZkVAGNPKm5PnHgldEQQ-1; Wed, 11 Dec 2019 06:29:18 -0500
-Received: by mail-qt1-f197.google.com with SMTP id x8so4147818qtq.14
- for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Dec 2019 03:29:18 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=mxq0wFAhoaCJow02lugZDiEwxSfkjXFe0nZyQ8UiIeA=;
- b=rdNyzRlrsAje8NFufUbW0kZCavGfVGNTqF21ybGPjC7cU+4Fx8UTP5/28yigPxliBg
- +/1L/fLHrrAHgZGKhfIwRJcJSLET7r3zq2HeuLyr7LjheBJv+daYDuSH1y7mPFu5wbI7
- uQFYrukkmLS06PUIY6B7RiyY6Lbm8oIDR1aSqvVRIl0V0E8joN6bm4QZLv44iiUGr9eS
- N9ngsy1Zi8eyYFH8C/L40UDtSMb9QUblueo/Xxk+qfdcNbejVGEUZemftpOLXr2wsKgP
- zHab96AnRiVeipL1P3ZjqdKyCDyhGdE7nVlAZZzav1LitAx8W3AGZmwHrf7eW9kjbTX+
- 5hGA==
-X-Gm-Message-State: APjAAAWtdDBjoZ/OwRpZl40YhXYztb25ILnZT+g4m8t9Ny2rC1ervctz
- Cq9kJ1oxWivsMPIYj5huW2X/B56eVAKPzvI1c7PxEvXujQbGsS3oadBT4ErfSHDrT/MZ8xgb/MP
- U96qEPjtHqYX72KWUpqrm545ARIQvoeJdZ5RQzEI1Fw==
-X-Received: by 2002:a05:620a:8cc:: with SMTP id
- z12mr2236746qkz.48.1576063757560; 
- Wed, 11 Dec 2019 03:29:17 -0800 (PST)
-X-Google-Smtp-Source: APXvYqzFvbEiSMoTM1t0AONNn3kKiN96hQmXVbPo9b/C4ndVUe1T993b6ftRpmCtSoa0zoAQLkp/xw==
-X-Received: by 2002:a05:620a:8cc:: with SMTP id
- z12mr2236710qkz.48.1576063757102; 
- Wed, 11 Dec 2019 03:29:17 -0800 (PST)
-Received: from redhat.com (bzq-79-181-48-215.red.bezeqint.net. [79.181.48.215])
- by smtp.gmail.com with ESMTPSA id k4sm581435qki.35.2019.12.11.03.29.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2019 03:29:16 -0800 (PST)
-Date: Wed, 11 Dec 2019 06:29:10 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: David Hildenbrand <david@redhat.com>
-Subject: Re: [PATCH v3] virtio-balloon: fix managed page counts when
- migrating pages between zones
-Message-ID: <20191211062855-mutt-send-email-mst@kernel.org>
-References: <20191211111152.6553-1-david@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <20191211111152.6553-1-david@redhat.com>
-X-MC-Unique: 7a1ZkVAGNPKm5PnHgldEQQ-1
+ bh=UIewAyx++ktQ/Uek8hL3crFT01ZthoO/ZwsAoVP4Ej8=;
+ b=K/p3RvmEV2+B9h+FgaKu8/5HR78X/NHceqzzq2SeQ5c76d516ok0X4DyrHttFekhP9tdlz
+ IXw/HqFyD7UT0afVb/B3/iOp8w85ly0ltBSBSQw26ZK03/jbJazQ7BO5sVTw2FBIIdP5bc
+ jA9Wul27rZNEogkUuKNkW95mSq4VAvQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-279-VXS_jZefO9GEJcB7iAO75Q-1; Wed, 11 Dec 2019 07:20:02 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 052361005524;
+ Wed, 11 Dec 2019 12:20:01 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-67.ams2.redhat.com
+ [10.36.116.67])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2D956691A0;
+ Wed, 11 Dec 2019 12:19:58 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 746BA17536; Wed, 11 Dec 2019 13:19:57 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v3 3/4] drm/virtio: fix mmap page attributes
+Date: Wed, 11 Dec 2019 13:19:55 +0100
+Message-Id: <20191211121957.18637-4-kraxel@redhat.com>
+In-Reply-To: <20191211121957.18637-1-kraxel@redhat.com>
+References: <20191211121957.18637-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-MC-Unique: VXS_jZefO9GEJcB7iAO75Q-1
 X-Mimecast-Spam-Score: 0
-Content-Disposition: inline
-Cc: Yumei Huang <yuhuang@redhat.com>, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, Igor Mammedov <imammedo@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>, Jiang Liu <liuj97@gmail.com>
+Cc: tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ Daniel Vetter <daniel@ffwll.ch>, gurchetansingh@chromium.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,178 +89,35 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Dec 11, 2019 at 12:11:52PM +0100, David Hildenbrand wrote:
-> In case we have to migrate a ballon page to a newpage of another zone, the
-> managed page count of both zones is wrong. Paired with memory offlining
-> (which will adjust the managed page count), we can trigger kernel crashes
-> and all kinds of different symptoms.
-> 
-> One way to reproduce:
-> 1. Start a QEMU guest with 4GB, no NUMA
-> 2. Hotplug a 1GB DIMM and online the memory to ZONE_NORMAL
-> 3. Inflate the balloon to 1GB
-> 4. Unplug the DIMM (be quick, otherwise unmovable data ends up on it)
-> 5. Observe /proc/zoneinfo
->   Node 0, zone   Normal
->     pages free     16810
->           min      24848885473806
->           low      18471592959183339
->           high     36918337032892872
->           spanned  262144
->           present  262144
->           managed  18446744073709533486
-> 6. Do anything that requires some memory (e.g., inflate the balloon some
-> more). The OOM goes crazy and the system crashes
->   [  238.324946] Out of memory: Killed process 537 (login) total-vm:27584kB, anon-rss:860kB, file-rss:0kB, shmem-rss:00
->   [  238.338585] systemd invoked oom-killer: gfp_mask=0x100cca(GFP_HIGHUSER_MOVABLE), order=0, oom_score_adj=0
->   [  238.339420] CPU: 0 PID: 1 Comm: systemd Tainted: G      D W         5.4.0-next-20191204+ #75
->   [  238.340139] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.12.0-59-gc9ba5276e321-prebuilt.qemu4
->   [  238.341121] Call Trace:
->   [  238.341337]  dump_stack+0x8f/0xd0
->   [  238.341630]  dump_header+0x61/0x5ea
->   [  238.341942]  oom_kill_process.cold+0xb/0x10
->   [  238.342299]  out_of_memory+0x24d/0x5a0
->   [  238.342625]  __alloc_pages_slowpath+0xd12/0x1020
->   [  238.343024]  __alloc_pages_nodemask+0x391/0x410
->   [  238.343407]  pagecache_get_page+0xc3/0x3a0
->   [  238.343757]  filemap_fault+0x804/0xc30
->   [  238.344083]  ? ext4_filemap_fault+0x28/0x42
->   [  238.344444]  ext4_filemap_fault+0x30/0x42
->   [  238.344789]  __do_fault+0x37/0x1a0
->   [  238.345087]  __handle_mm_fault+0x104d/0x1ab0
->   [  238.345450]  handle_mm_fault+0x169/0x360
->   [  238.345790]  do_user_addr_fault+0x20d/0x490
->   [  238.346154]  do_page_fault+0x31/0x210
->   [  238.346468]  async_page_fault+0x43/0x50
->   [  238.346797] RIP: 0033:0x7f47eba4197e
->   [  238.347110] Code: Bad RIP value.
->   [  238.347387] RSP: 002b:00007ffd7c0c1890 EFLAGS: 00010293
->   [  238.347834] RAX: 0000000000000002 RBX: 000055d196a20a20 RCX: 00007f47eba4197e
->   [  238.348437] RDX: 0000000000000033 RSI: 00007ffd7c0c18c0 RDI: 0000000000000004
->   [  238.349047] RBP: 00007ffd7c0c1c20 R08: 0000000000000000 R09: 0000000000000033
->   [  238.349660] R10: 00000000ffffffff R11: 0000000000000293 R12: 0000000000000001
->   [  238.350261] R13: ffffffffffffffff R14: 0000000000000000 R15: 00007ffd7c0c18c0
->   [  238.350878] Mem-Info:
->   [  238.351085] active_anon:3121 inactive_anon:51 isolated_anon:0
->   [  238.351085]  active_file:12 inactive_file:7 isolated_file:0
->   [  238.351085]  unevictable:0 dirty:0 writeback:0 unstable:0
->   [  238.351085]  slab_reclaimable:5565 slab_unreclaimable:10170
->   [  238.351085]  mapped:3 shmem:111 pagetables:155 bounce:0
->   [  238.351085]  free:720717 free_pcp:2 free_cma:0
->   [  238.353757] Node 0 active_anon:12484kB inactive_anon:204kB active_file:48kB inactive_file:28kB unevictable:0kB iss
->   [  238.355979] Node 0 DMA free:11556kB min:36kB low:48kB high:60kB reserved_highatomic:0KB active_anon:152kB inactivB
->   [  238.358345] lowmem_reserve[]: 0 2955 2884 2884 2884
->   [  238.358761] Node 0 DMA32 free:2677864kB min:7004kB low:10028kB high:13052kB reserved_highatomic:0KB active_anon:0B
->   [  238.361202] lowmem_reserve[]: 0 0 72057594037927865 72057594037927865 72057594037927865
->   [  238.361888] Node 0 Normal free:193448kB min:99395541895224kB low:73886371836733356kB high:147673348131571488kB reB
->   [  238.364765] lowmem_reserve[]: 0 0 0 0 0
->   [  238.365101] Node 0 DMA: 7*4kB (U) 5*8kB (UE) 6*16kB (UME) 2*32kB (UM) 1*64kB (U) 2*128kB (UE) 3*256kB (UME) 2*512B
->   [  238.366379] Node 0 DMA32: 0*4kB 1*8kB (U) 2*16kB (UM) 2*32kB (UM) 2*64kB (UM) 1*128kB (U) 1*256kB (U) 1*512kB (U)B
->   [  238.367654] Node 0 Normal: 1985*4kB (UME) 1321*8kB (UME) 844*16kB (UME) 524*32kB (UME) 300*64kB (UME) 138*128kB (B
->   [  238.369184] Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB
->   [  238.369915] 130 total pagecache pages
->   [  238.370241] 0 pages in swap cache
->   [  238.370533] Swap cache stats: add 0, delete 0, find 0/0
->   [  238.370981] Free swap  = 0kB
->   [  238.371239] Total swap = 0kB
->   [  238.371488] 1048445 pages RAM
->   [  238.371756] 0 pages HighMem/MovableOnly
->   [  238.372090] 306992 pages reserved
->   [  238.372376] 0 pages cma reserved
->   [  238.372661] 0 pages hwpoisoned
-> 
-> In another instance (older kernel), I was able to observe this
-> (negative page count :/):
->   [  180.896971] Offlined Pages 32768
->   [  182.667462] Offlined Pages 32768
->   [  184.408117] Offlined Pages 32768
->   [  186.026321] Offlined Pages 32768
->   [  187.684861] Offlined Pages 32768
->   [  189.227013] Offlined Pages 32768
->   [  190.830303] Offlined Pages 32768
->   [  190.833071] Built 1 zonelists, mobility grouping on.  Total pages: -36920272750453009
-> 
-> In another instance (older kernel), I was no longer able to start any
-> process:
->   [root@vm ~]# [  214.348068] Offlined Pages 32768
->   [  215.973009] Offlined Pages 32768
->   cat /proc/meminfo
->   -bash: fork: Cannot allocate memory
->   [root@vm ~]# cat /proc/meminfo
->   -bash: fork: Cannot allocate memory
-> 
-> Fix it by properly adjusting the managed page count when migrating if
-> the zone changed. The managed page count of the zones now looks after
-> unplug of the DIMM (and after deflating the balloon) just like before
-> inflating the balloon (and plugging+onlining the DIMM).
-> 
-> We'll temporarily modify the totalram page count. If this ever becomes a
-> problem, we can fine tune by providing helpers that don't touch
-> the totalram pages (e.g., adjust_zone_managed_page_count()).
-> 
-> Please note that fixing up the managed page count is only necessary when
-> we adjusted the managed page count when inflating - only if we
-> don't have VIRTIO_BALLOON_F_DEFLATE_ON_OOM. With that feature, the
-> managed page count is not touched when inflating/deflating.
-> 
-> Reported-by: Yumei Huang <yuhuang@redhat.com>
-> Fixes: 3dcc0571cd64 ("mm: correctly update zone->managed_pages")
-> Cc: <stable@vger.kernel.org> # v3.11+
-> Cc: "Michael S. Tsirkin" <mst@redhat.com>
-> Cc: Jason Wang <jasowang@redhat.com>
-> Cc: Jiang Liu <liuj97@gmail.com>
-> Cc: Andrew Morton <akpm@linux-foundation.org>
-> Cc: Igor Mammedov <imammedo@redhat.com>
-> Cc: virtualization@lists.linux-foundation.org
-> Signed-off-by: David Hildenbrand <david@redhat.com>
+virtio-gpu uses cached mappings, set virtio_gpu_gem_funcs.pgprot
+accordingly.
 
-Looks good, will queue this up, thanks!
+Reported-by: Gurchetan Singh <gurchetansingh@chromium.org>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/virtio/virtgpu_object.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> ---
-> 
-> v2 -> v3:
-> - Refine comment
-> - s/only/online/ in description
-> - Clarify why VIRTIO_BALLOON_F_DEFLATE_ON_OOM has to be checked
-> 
-> v1 -> v2:
-> - Adjust count before enquing newpage (and it possibly gets free form the
->   balloon)
-> - Check if the zone changed
-> 
-> ---
->  drivers/virtio/virtio_balloon.c | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
-> index 15b7f1d8c334..93f995f6cf36 100644
-> --- a/drivers/virtio/virtio_balloon.c
-> +++ b/drivers/virtio/virtio_balloon.c
-> @@ -722,6 +722,17 @@ static int virtballoon_migratepage(struct balloon_dev_info *vb_dev_info,
->  
->  	get_page(newpage); /* balloon reference */
->  
-> +	/*
-> +	  * When we migrate a page to a different zone and adjusted the
-> +	  * managed page count when inflating, we have to fixup the count of
-> +	  * both involved zones.
-> +	  */
-> +	if (!virtio_has_feature(vb->vdev, VIRTIO_BALLOON_F_DEFLATE_ON_OOM) &&
-> +	    page_zone(page) != page_zone(newpage)) {
-> +		adjust_managed_page_count(page, 1);
-> +		adjust_managed_page_count(newpage, -1);
-> +	}
-> +
->  	/* balloon's page migration 1st step  -- inflate "newpage" */
->  	spin_lock_irqsave(&vb_dev_info->pages_lock, flags);
->  	balloon_page_insert(vb_dev_info, newpage);
-> -- 
-> 2.23.0
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index 017a9e0fc3bb..0b754c5bbcce 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -87,6 +87,7 @@ static const struct drm_gem_object_funcs virtio_gpu_gem_funcs = {
+ 	.vmap = drm_gem_shmem_vmap,
+ 	.vunmap = drm_gem_shmem_vunmap,
+ 	.mmap = &drm_gem_shmem_mmap,
++	.pgprot = &drm_gem_pgprot_cached,
+ };
+ 
+ struct drm_gem_object *virtio_gpu_create_object(struct drm_device *dev,
+-- 
+2.18.1
 
 _______________________________________________
 Virtualization mailing list
