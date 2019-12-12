@@ -1,70 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D98F611D26F
-	for <lists.virtualization@lfdr.de>; Thu, 12 Dec 2019 17:37:33 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id E76A611D341
+	for <lists.virtualization@lfdr.de>; Thu, 12 Dec 2019 18:12:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 8E4A486FAD;
-	Thu, 12 Dec 2019 16:37:32 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 9F32D24F56;
+	Thu, 12 Dec 2019 17:12:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HVFuq5SWvScH; Thu, 12 Dec 2019 16:37:31 +0000 (UTC)
+	with ESMTP id 3lTKdqpiWS01; Thu, 12 Dec 2019 17:12:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 96B45874AB;
-	Thu, 12 Dec 2019 16:37:31 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 1889724F3A;
+	Thu, 12 Dec 2019 17:12:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 87ECBC0881;
-	Thu, 12 Dec 2019 16:37:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DEAD0C0881;
+	Thu, 12 Dec 2019 17:12:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 038D7C0881
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D6CDBC0881
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:37:30 +0000 (UTC)
+ Thu, 12 Dec 2019 17:12:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id E663D883A6
+ by silver.osuosl.org (Postfix) with ESMTP id C469C24CBC
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:37:29 +0000 (UTC)
+ Thu, 12 Dec 2019 17:12:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fMO4ifCq-SfN
+ with ESMTP id NkFWOyL2m7uo
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:37:28 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [198.137.202.133])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A60668839F
+ Thu, 12 Dec 2019 17:12:14 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id 51A3724A5A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:37:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2Jz6taz35JZegkKFQERoTLypJxH/c8Nr8d7W3QSRKDE=; b=N/Dt6YXPRT7NcUkjKnjgqq0OS
- vwGJBFdgvYrnpOIF/wuehpr834OyUN6bzI9QriM26xkIa+cuiHw/jlRSDG5i2Tme5c+i75m3y3aeE
- Tk+04yBRI1G5Bwv46ymqEXqAL7/nuYKUu2YJrpB5RdrPSStM7PE0tb08DXTV5cXnV5YYGLL5IzAmi
- eCK7vT1Kky5W+BDsbkWHSUNIJyzEsyq5vt4CxYW1E459rRl8Qax0sbbDtz3/4hNipXA0IQsuEm1v/
- LnRHVWUGyVqNFcu3vAZsq83ay0hSi0/Agw+ge0bJ5HjmyzG1fcB077bzWiygSKneAqWR/WGVc9+de
- 2MbRS71bw==;
-Received: from [2001:4bb8:188:2b00:20e6:8b5a:ed96:f9da] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1ifRSt-0008Bp-RL; Thu, 12 Dec 2019 16:37:24 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: axboe@kernel.dk, mst@redhat.com, jasowang@redhat.com, pbonzini@redhat.com,
- stefanha@redhat.com
-Subject: [PATCH] virtio-blk: remove VIRTIO_BLK_F_SCSI support
-Date: Thu, 12 Dec 2019 17:37:19 +0100
-Message-Id: <20191212163719.28432-1-hch@lst.de>
-X-Mailer: git-send-email 2.20.1
+ Thu, 12 Dec 2019 17:12:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1576170733;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=sLqlvPDHnKvsJe6HBuLHP8LjRn0E/JlW2y8ewQYTPYo=;
+ b=SY511Zt9Gayb3wC21QZyBomrkXRDpVXbgN5aDp4oi3f2uCOjnxO3qqLHxqTArOwOl2MeJ1
+ crEjPROay+C4yKYPDimkr8Dc2AGqxH0NSCbcNWzoL/+TZumX6rgJoJ5r49bW3MqhfgaGxD
+ ji6rPChlorWblrHSZZn2HFjHV18orMs=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-89-myxY3gn5MeaLS54kABs3UA-1; Thu, 12 Dec 2019 12:12:05 -0500
+X-MC-Unique: myxY3gn5MeaLS54kABs3UA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6322F1005514;
+ Thu, 12 Dec 2019 17:11:59 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-117-65.ams2.redhat.com [10.36.117.65])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5A7BB5C1C3;
+ Thu, 12 Dec 2019 17:11:38 +0000 (UTC)
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH RFC v4 00/13] virtio-mem: paravirtualized memory
+Date: Thu, 12 Dec 2019 18:11:24 +0100
+Message-Id: <20191212171137.13872-1-david@redhat.com>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Cc: linux-block@vger.kernel.org, virtualization@lists.linux-foundation.org
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
+ Robert Bradford <robert.bradford@intel.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pingfan Liu <kernelfans@gmail.com>,
+ Luiz Capitulino <lcapitulino@redhat.com>, linux-mm@kvack.org,
+ Alexander Potapenko <glider@google.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
+ Mike Rapoport <rppt@linux.ibm.com>, Wei Yang <richard.weiyang@gmail.com>,
+ Anthony Yznaga <anthony.yznaga@oracle.com>, Dave Young <dyoung@redhat.com>,
+ Len Brown <lenb@kernel.org>, Pavel Tatashin <pavel.tatashin@microsoft.com>,
+ Pavel Tatashin <pasha.tatashin@soleen.com>,
+ Anshuman Khandual <anshuman.khandual@arm.com>, Qian Cai <cai@lca.pw>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Samuel Ortiz <samuel.ortiz@intel.com>,
+ Dan Williams <dan.j.williams@intel.com>, Michal Hocko <mhocko@kernel.org>,
+ Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>,
+ Juergen Gross <jgross@suse.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ virtualization@lists.linux-foundation.org,
+ Sebastien Boeuf <sebastien.boeuf@intel.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Igor Mammedov <imammedo@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,247 +108,359 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Since the need for a special flag to support SCSI passthrough on a
-block device was added in May 2017 the SCSI passthrough support in
-virtio-blk has been disabled.  It has always been a bad idea
-(just ask the original author..) and we have virtio-scsi for proper
-passthrough.  The feature also never made it into the virtio 1.0
-or later specifications.
+This series is based on latest linux-next. The patches are located at:
+    https://github.com/davidhildenbrand/linux.git virtio-mem-rfc-v4
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- arch/powerpc/configs/guest.config |   1 -
- drivers/block/Kconfig             |  10 ---
- drivers/block/virtio_blk.c        | 115 +-----------------------------
- 3 files changed, 1 insertion(+), 125 deletions(-)
+The basic idea of virtio-mem is to provide a flexible,
+cross-architecture memory hot(un)plug solution that avoids many limitations
+imposed by existing technologies, architectures, and interfaces. More
+details can be found below and in linked material.
 
-diff --git a/arch/powerpc/configs/guest.config b/arch/powerpc/configs/guest.config
-index 8b8cd18ecd7c..209f58515d88 100644
---- a/arch/powerpc/configs/guest.config
-+++ b/arch/powerpc/configs/guest.config
-@@ -1,5 +1,4 @@
- CONFIG_VIRTIO_BLK=y
--CONFIG_VIRTIO_BLK_SCSI=y
- CONFIG_SCSI_VIRTIO=y
- CONFIG_VIRTIO_NET=y
- CONFIG_NET_FAILOVER=y
-diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
-index 1bb8ec575352..025b1b77b11a 100644
---- a/drivers/block/Kconfig
-+++ b/drivers/block/Kconfig
-@@ -432,16 +432,6 @@ config VIRTIO_BLK
- 	  This is the virtual block driver for virtio.  It can be used with
-           QEMU based VMMs (like KVM or Xen).  Say Y or M.
- 
--config VIRTIO_BLK_SCSI
--	bool "SCSI passthrough request for the Virtio block driver"
--	depends on VIRTIO_BLK
--	select BLK_SCSI_REQUEST
--	---help---
--	  Enable support for SCSI passthrough (e.g. the SG_IO ioctl) on
--	  virtio-blk devices.  This is only supported for the legacy
--	  virtio protocol and not enabled by default by any hypervisor.
--	  You probably want to use virtio-scsi instead.
--
- config BLK_DEV_RBD
- 	tristate "Rados block device (RBD)"
- 	depends on INET && BLOCK
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 7ffd719d89de..54158766334b 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -11,7 +11,6 @@
- #include <linux/virtio_blk.h>
- #include <linux/scatterlist.h>
- #include <linux/string_helpers.h>
--#include <scsi/scsi_cmnd.h>
- #include <linux/idr.h>
- #include <linux/blk-mq.h>
- #include <linux/blk-mq-virtio.h>
-@@ -56,11 +55,6 @@ struct virtio_blk {
- };
- 
- struct virtblk_req {
--#ifdef CONFIG_VIRTIO_BLK_SCSI
--	struct scsi_request sreq;	/* for SCSI passthrough, must be first */
--	u8 sense[SCSI_SENSE_BUFFERSIZE];
--	struct virtio_scsi_inhdr in_hdr;
--#endif
- 	struct virtio_blk_outhdr out_hdr;
- 	u8 status;
- 	struct scatterlist sg[];
-@@ -78,80 +72,6 @@ static inline blk_status_t virtblk_result(struct virtblk_req *vbr)
- 	}
- }
- 
--/*
-- * If this is a packet command we need a couple of additional headers.  Behind
-- * the normal outhdr we put a segment with the scsi command block, and before
-- * the normal inhdr we put the sense data and the inhdr with additional status
-- * information.
-- */
--#ifdef CONFIG_VIRTIO_BLK_SCSI
--static int virtblk_add_req_scsi(struct virtqueue *vq, struct virtblk_req *vbr,
--		struct scatterlist *data_sg, bool have_data)
--{
--	struct scatterlist hdr, status, cmd, sense, inhdr, *sgs[6];
--	unsigned int num_out = 0, num_in = 0;
--
--	sg_init_one(&hdr, &vbr->out_hdr, sizeof(vbr->out_hdr));
--	sgs[num_out++] = &hdr;
--	sg_init_one(&cmd, vbr->sreq.cmd, vbr->sreq.cmd_len);
--	sgs[num_out++] = &cmd;
--
--	if (have_data) {
--		if (vbr->out_hdr.type & cpu_to_virtio32(vq->vdev, VIRTIO_BLK_T_OUT))
--			sgs[num_out++] = data_sg;
--		else
--			sgs[num_out + num_in++] = data_sg;
--	}
--
--	sg_init_one(&sense, vbr->sense, SCSI_SENSE_BUFFERSIZE);
--	sgs[num_out + num_in++] = &sense;
--	sg_init_one(&inhdr, &vbr->in_hdr, sizeof(vbr->in_hdr));
--	sgs[num_out + num_in++] = &inhdr;
--	sg_init_one(&status, &vbr->status, sizeof(vbr->status));
--	sgs[num_out + num_in++] = &status;
--
--	return virtqueue_add_sgs(vq, sgs, num_out, num_in, vbr, GFP_ATOMIC);
--}
--
--static inline void virtblk_scsi_request_done(struct request *req)
--{
--	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
--	struct virtio_blk *vblk = req->q->queuedata;
--	struct scsi_request *sreq = &vbr->sreq;
--
--	sreq->resid_len = virtio32_to_cpu(vblk->vdev, vbr->in_hdr.residual);
--	sreq->sense_len = virtio32_to_cpu(vblk->vdev, vbr->in_hdr.sense_len);
--	sreq->result = virtio32_to_cpu(vblk->vdev, vbr->in_hdr.errors);
--}
--
--static int virtblk_ioctl(struct block_device *bdev, fmode_t mode,
--			     unsigned int cmd, unsigned long data)
--{
--	struct gendisk *disk = bdev->bd_disk;
--	struct virtio_blk *vblk = disk->private_data;
--
--	/*
--	 * Only allow the generic SCSI ioctls if the host can support it.
--	 */
--	if (!virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_SCSI))
--		return -ENOTTY;
--
--	return scsi_cmd_blk_ioctl(bdev, mode, cmd,
--				  (void __user *)data);
--}
--#else
--static inline int virtblk_add_req_scsi(struct virtqueue *vq,
--		struct virtblk_req *vbr, struct scatterlist *data_sg,
--		bool have_data)
--{
--	return -EIO;
--}
--static inline void virtblk_scsi_request_done(struct request *req)
--{
--}
--#define virtblk_ioctl	NULL
--#endif /* CONFIG_VIRTIO_BLK_SCSI */
--
- static int virtblk_add_req(struct virtqueue *vq, struct virtblk_req *vbr,
- 		struct scatterlist *data_sg, bool have_data)
- {
-@@ -216,13 +136,6 @@ static inline void virtblk_request_done(struct request *req)
- 		      req->special_vec.bv_offset);
- 	}
- 
--	switch (req_op(req)) {
--	case REQ_OP_SCSI_IN:
--	case REQ_OP_SCSI_OUT:
--		virtblk_scsi_request_done(req);
--		break;
--	}
--
- 	blk_mq_end_request(req, virtblk_result(vbr));
- }
- 
-@@ -299,10 +212,6 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
- 		type = VIRTIO_BLK_T_WRITE_ZEROES;
- 		unmap = !(req->cmd_flags & REQ_NOUNMAP);
- 		break;
--	case REQ_OP_SCSI_IN:
--	case REQ_OP_SCSI_OUT:
--		type = VIRTIO_BLK_T_SCSI_CMD;
--		break;
- 	case REQ_OP_DRV_IN:
- 		type = VIRTIO_BLK_T_GET_ID;
- 		break;
-@@ -333,10 +242,7 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
- 	}
- 
- 	spin_lock_irqsave(&vblk->vqs[qid].lock, flags);
--	if (blk_rq_is_scsi(req))
--		err = virtblk_add_req_scsi(vblk->vqs[qid].vq, vbr, vbr->sg, num);
--	else
--		err = virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
-+	err = virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
- 	if (err) {
- 		virtqueue_kick(vblk->vqs[qid].vq);
- 		blk_mq_stop_hw_queue(hctx);
-@@ -404,7 +310,6 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
- }
- 
- static const struct block_device_operations virtblk_fops = {
--	.ioctl  = virtblk_ioctl,
- 	.owner  = THIS_MODULE,
- 	.getgeo = virtblk_getgeo,
- };
-@@ -683,9 +588,6 @@ static int virtblk_init_request(struct blk_mq_tag_set *set, struct request *rq,
- 	struct virtio_blk *vblk = set->driver_data;
- 	struct virtblk_req *vbr = blk_mq_rq_to_pdu(rq);
- 
--#ifdef CONFIG_VIRTIO_BLK_SCSI
--	vbr->sreq.sense = vbr->sense;
--#endif
- 	sg_init_table(vbr->sg, vblk->sg_elems);
- 	return 0;
- }
-@@ -698,23 +600,11 @@ static int virtblk_map_queues(struct blk_mq_tag_set *set)
- 					vblk->vdev, 0);
- }
- 
--#ifdef CONFIG_VIRTIO_BLK_SCSI
--static void virtblk_initialize_rq(struct request *req)
--{
--	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
--
--	scsi_req_init(&vbr->sreq);
--}
--#endif
--
- static const struct blk_mq_ops virtio_mq_ops = {
- 	.queue_rq	= virtio_queue_rq,
- 	.commit_rqs	= virtio_commit_rqs,
- 	.complete	= virtblk_request_done,
- 	.init_request	= virtblk_init_request,
--#ifdef CONFIG_VIRTIO_BLK_SCSI
--	.initialize_rq_fn = virtblk_initialize_rq,
--#endif
- 	.map_queues	= virtblk_map_queues,
- };
- 
-@@ -991,9 +881,6 @@ static const struct virtio_device_id id_table[] = {
- static unsigned int features_legacy[] = {
- 	VIRTIO_BLK_F_SEG_MAX, VIRTIO_BLK_F_SIZE_MAX, VIRTIO_BLK_F_GEOMETRY,
- 	VIRTIO_BLK_F_RO, VIRTIO_BLK_F_BLK_SIZE,
--#ifdef CONFIG_VIRTIO_BLK_SCSI
--	VIRTIO_BLK_F_SCSI,
--#endif
- 	VIRTIO_BLK_F_FLUSH, VIRTIO_BLK_F_TOPOLOGY, VIRTIO_BLK_F_CONFIG_WCE,
- 	VIRTIO_BLK_F_MQ, VIRTIO_BLK_F_DISCARD, VIRTIO_BLK_F_WRITE_ZEROES,
- }
+This RFC is limited to x86-64, however, should theoretically work on any
+architecture that supports virtio and implements memory hot(un)plug under
+Linux - like s390x, powerpc64 and arm64. On x86-64, it is currently
+possible to add/remove memory to the system in >= 4MB granularity.
+Memory hotplug works very reliably. For memory unplug, there are no
+guarantees how much memory can actually get unplugged, it depends on the
+setup (especially: fragmentation of (unmovable) memory). I have plans to
+improve that in the future.
+
+--------------------------------------------------------------------------
+1. virtio-mem
+--------------------------------------------------------------------------
+
+The basic idea behind virtio-mem was presented at KVM Forum 2018. The
+slides can be found at [1]. The previous RFC can be found at [2]. The
+first RFC can be found at [3]. However, the concept evolved over time. The
+KVM Forum slides roughly match the current design.
+
+Patch #2 ("virtio-mem: Paravirtualized memory hotplug") contains quite some
+information, especially in "include/uapi/linux/virtio_mem.h":
+
+  Each virtio-mem device manages a dedicated region in physical address
+  space. Each device can belong to a single NUMA node, multiple devices
+  for a single NUMA node are possible. A virtio-mem device is like a
+  "resizable DIMM" consisting of small memory blocks that can be plugged
+  or unplugged. The device driver is responsible for (un)plugging memory
+  blocks on demand.
+
+  Virtio-mem devices can only operate on their assigned memory region in
+  order to (un)plug memory. A device cannot (un)plug memory belonging to
+  other devices.
+
+  The "region_size" corresponds to the maximum amount of memory that can
+  be provided by a device. The "size" corresponds to the amount of memory
+  that is currently plugged. "requested_size" corresponds to a request
+  from the device to the device driver to (un)plug blocks. The
+  device driver should try to (un)plug blocks in order to reach the
+  "requested_size". It is impossible to plug more memory than requested.
+
+  The "usable_region_size" represents the memory region that can actually
+  be used to (un)plug memory. It is always at least as big as the
+  "requested_size" and will grow dynamically. It will only shrink when
+  explicitly triggered (VIRTIO_MEM_REQ_UNPLUG).
+
+  Memory in the usable region can usually be read, however, there are no
+  guarantees. It can happen that the device cannot process a request,
+  because it is busy. The device driver has to retry later.
+
+  Usually, during system resets all memory will get unplugged, so the
+  device driver can start with a clean state. However, in specific
+  scenarios (if the device is busy) it can happen that the device still
+  has memory plugged. The device driver can request to unplug all memory
+  (VIRTIO_MEM_REQ_UNPLUG) - which might take a while to succeed if the
+  device is busy.
+
+--------------------------------------------------------------------------
+2. Linux Implementation
+--------------------------------------------------------------------------
+
+This RFC reuses quite some existing MM infrastructure, however, has to
+expose some additional functionality.
+
+Memory blocks (e.g., 128MB) are added/removed on demand. Within these
+memory blocks, subblocks (e.g., 4MB) are plugged/unplugged. The sizes
+depend on the target architecture, MAX_ORDER + pageblock_order, and
+the block size of a virtio-mem device.
+
+add_memory()/try_remove_memory() is used to add/remove memory blocks.
+virtio-mem will not online memory blocks itself. This has to be done by
+user space, or configured into the kernel
+(CONFIG_MEMORY_HOTPLUG_DEFAULT_ONLINE). virtio-mem will only unplug memory
+that was online to the ZONE_NORMAL. Memory is suggested to be onlined to
+the ZONE_NORMAL for now.
+
+The memory hotplug notifier is used to properly synchronize against
+onlining/offlining of memory blocks and to track the states of memory
+blocks (including the zone memory blocks are onlined to).
+
+The set_online_page() callback is used to keep unplugged subblocks
+of a memory block fake-offline when onlining the memory block.
+generic_online_page() is used to fake-online plugged subblocks. This
+handling is similar to the Hyper-V balloon driver.
+
+PG_offline is used to mark unplugged subblocks as offline, so e.g.,
+dumping tools (makedumpfile) will skip these pages. This is similar to
+other balloon drivers like virtio-balloon and Hyper-V.
+
+Memory offlining code is extended to allow drivers to drop their reference
+to PG_offline pages when MEM_GOING_OFFLINE, so these pages can be skipped
+when offlining memory blocks. This allows to offline memory blocks that
+have partially unplugged (allocated e.g., via alloc_contig_range())
+subblocks - or are completely unplugged.
+
+alloc_contig_range()/free_contig_range() [now exposed] is used to
+unplug/plug subblocks of memory blocks the are already exposed to Linux.
+
+offline_and_remove_memory() [new] is used to offline a fully unplugged
+memory block and remove it from Linux.
+
+
+A lot of additional information can be found in the separate patches and
+as comments in the code itself.
+
+--------------------------------------------------------------------------
+3. Changes RFC v2 -> v3
+--------------------------------------------------------------------------
+
+A lot of things changed, especially also on the QEMU + virtio side. The
+biggest changes on the Linux driver side are:
+- Onlining/offlining of subblocks is now emulated on top of memory blocks.
+  set_online_page()+alloc_contig_range()+free_contig_range() is now used
+  for that. Core MM does not have to be modified and will continue to
+  online/offline full memory blocks.
+- Onlining/offlining of memory blocks is no longer performed by virtio-mem.
+- Pg_offline is upstream and can be used. It is also used to allow
+  offlining of partially unplugged memory blocks.
+- Memory block states + subblocks are now tracked more space-efficient.
+- Proper kexec(), kdump(), driver unload, driver reload, ZONE_MOVABLE, ...
+  handling.
+
+--------------------------------------------------------------------------
+4. Changes RFC v3 -> RFC v4
+--------------------------------------------------------------------------
+
+Only minor things changed, especially nothing on the QEMU + virtio side.
+Interresting changes on the Linux driver side are:
+- "mm: Allow to offline unmovable PageOffline() pages via
+   MEM_GOING_OFFLINE"
+-- Rework to Michals suggestion (allow to isolate all PageOffline() pages
+   by skipping all PageOffline() pages in has_unmovable_pages(). Fail
+   offlining later if the pages cannot be offlined/migrated).
+- "virtio-mem: Allow to offline partially unplugged memory blocks"
+-- Adapt to Michals suggestion on core-mm part.
+- "virtio-mem: Better retry handling"
+-- Optimize retry intervals
+- "virtio-mem: Drop slab objects when unplug continues to fail"
+-- Call drop_slab()/drop_slab_node() when unplug keeps failing for a longer
+   time.
+- Multiple cleanups and fixes.
+
+--------------------------------------------------------------------------
+5. Future work
+--------------------------------------------------------------------------
+
+The separate patches contain a lot of future work items. One of the next
+steps is to make memory unplug more likely to succeed - currently, there
+are no guarantees on how much memory can get unplugged again. I have
+various ideas on how to limit fragmentation of all memory blocks that
+virtio-mem added.
+
+Memory hotplug:
+- Reduce the amount of memory resources if that turnes out to be an
+  issue. Or try to speed up relevant code paths to deal with many
+  resources.
+- Allocate the vmemmap from the added memory. Makes hotplug more likely
+  to succeed, the vmemmap is stored on the same NUMA node and that
+  unmovable memory will later not hinder unplug.
+
+Memory hotunplug:
+- Performance improvements:
+-- Sense (lockless) if it make sense to try alloc_contig_range() at all
+   before directly trying to isolate and taking locks.
+-- Try to unplug bigger chunks if possible first.
+-- Identify free areas first, that don't have to be evacuated.
+- Make unplug more likely to succeed:
+-- There are various idea to limit fragmentation on memory block
+   granularity. (e.g., ZONE_PREFER_MOVABLE and smart balancing)
+-- Allocate memmap from added memory. This way, less unmovable data can
+   end up on the memory blocks.
+- OOM handling, e.g., via an OOM handler.
+- Defragmentation
+-- Will require a new virtio-mem CMD to exchange plugged<->unplugged blocks
+
+--------------------------------------------------------------------------
+6. Example Usage
+--------------------------------------------------------------------------
+
+A very basic QEMU prototype (kept updated) is available at:
+    https://github.com/davidhildenbrand/qemu.git virtio-mem
+
+It lacks various features, however, works to test the guest driver side:
+- No support for resizable memory regions / memory backends yet
+- No protection of unplugged memory (esp., userfaultfd-wp) yet
+- No dump/migration/XXX optimizations to skip unplugged memory (and avoid
+  touching it)
+
+Start QEMU with two virtio-mem devices (one per NUMA node):
+ $ qemu-system-x86_64 -m 4G,maxmem=20G \
+  -smp sockets=2,cores=2 \
+  -numa node,nodeid=0,cpus=0-1 -numa node,nodeid=1,cpus=2-3 \
+  [...]
+  -object memory-backend-ram,id=mem0,size=8G \
+  -device virtio-mem-pci,id=vm0,memdev=mem0,node=0,requested-size=128M \
+  -object memory-backend-ram,id=mem1,size=8G \
+  -device virtio-mem-pci,id=vm1,memdev=mem1,node=1,requested-size=80M
+
+Query the configuration:
+ QEMU 4.1.95 monitor - type 'help' for more information
+ (qemu) info memory-devices
+ Memory device [virtio-mem]: "vm0"
+   memaddr: 0x140000000
+   node: 0
+   requested-size: 134217728
+   size: 134217728
+   max-size: 8589934592
+   block-size: 2097152
+   memdev: /objects/mem0
+ Memory device [virtio-mem]: "vm1"
+   memaddr: 0x340000000
+   node: 1
+   requested-size: 83886080
+   size: 83886080
+   max-size: 8589934592
+   block-size: 2097152
+   memdev: /objects/mem1
+
+Add some memory to node 1:
+ QEMU 4.1.95 monitor - type 'help' for more information
+ (qemu) qom-set vm1 requested-size 1G
+
+Remove some memory from node 0:
+ QEMU 4.1.95 monitor - type 'help' for more information
+ (qemu) qom-set vm0 requested-size 64M
+
+Query the configuration again:
+ (qemu) info memory-devices
+ Memory device [virtio-mem]: "vm0"
+   memaddr: 0x140000000
+   node: 0
+   requested-size: 67108864
+   size: 67108864
+   max-size: 8589934592
+   block-size: 2097152
+   memdev: /objects/mem0
+ Memory device [virtio-mem]: "vm1"
+   memaddr: 0x340000000
+   node: 1
+   requested-size: 1073741824
+   size: 1073741824
+   max-size: 8589934592
+   block-size: 2097152
+   memdev: /objects/mem1
+
+--------------------------------------------------------------------------
+7. Q/A
+--------------------------------------------------------------------------
+
+Q: Why add/remove parts ("subblocks") of memory blocks/sections?
+A: Flexibility (section size depends on the architecture) - e.g., some
+   architectures have a section size of 2GB. Also, the memory block size
+   is variable (e.g., on x86-64). I want to avoid any such restrictions.
+   Some use cases want to add/remove memory in smaller granularities to a
+   VM (e.g., the Hyper-V balloon also implements this) - especially smaller
+   VMs like used for kata containers. Also, on memory unplug, it is more
+   reliable to free-up and unplug multiple small chunks instead
+   of one big chunk. E.g., if one page of a DIMM is either unmovable or
+   pinned, the DIMM can't get unplugged. This approach is basically a
+   compromise between DIMM-based memory hot(un)plug and balloon
+   inflation/deflation, which works mostly on page granularity.
+
+Q: Why care about memory blocks?
+A: They are the way to tell user space about new memory. This way,
+   memory can get onlined/offlined by user space. Also, e.g., kdump
+   relies on udev events to reload kexec when memory blocks are
+   onlined/offlined. Memory blocks are the "real" memory hot(un)plug
+   granularity. Everything that's smaller has to be emulated "on top".
+
+Q: Won't memory unplug of subblocks fragment memory?
+A: Yes and no. Unplugging e.g., >=4MB subblocks on x86-64 will not really
+   fragment memory like unplugging random pages like a balloon driver does.
+   Buddy merging will not be limited. However, any allocation that requires
+   bigger consecutive memory chunks (e.g., gigantic pages) might observe
+   the fragmentation. Possible solutions: Allocate gigantic huge pages
+   before unplugging memory, don't unplug memory, combine virtio-mem with
+   DIMM based memory or bigger initial memory. Remember, a virtio-mem
+   device will only unplug on the memory range it manages, not on other
+   DIMMs. Unplug of single memory blocks will result in similar
+   fragmentation in respect to gigantic huge pages. I ahve plans for a
+   virtio-mem defragmentation feature in the future.
+
+Q: How reliable is memory unplug?
+A: There are no guarantees on how much memory can get unplugged
+   again. However, it is more likely to find 4MB chunks to unplug than
+   e.g., 128MB chunks. If memory is terribly fragmented, there is nothing
+   we can do - for now. I consider memory hotplug the first primary use
+   of virtio-mem. Memory unplug might usually work, but we want to improve
+   the performance and the amount of memory we can actually unplug later.
+
+Q: Why not unplug from the ZONE_MOVABLE?
+A: Unplugged memory chunks are unmovable. Unmovable data must not end up
+   on the ZONE_MOVABLE - similar to gigantic pages - they will never be
+   allocated from ZONE_MOVABLE. virtio-mem added memory can be onlined
+   to the ZONE_MOVABLE, but subblocks will not get unplugged from it.
+
+Q: How big should the initial (!virtio-mem) memory of a VM be?
+A: virtio-mem memory will not go to the DMA zones. So to avoid running out
+   of DMA memory, I suggest something like 2-3GB on x86-64. But many
+   VMs can most probably deal with less DMA memory - depends on the use
+   case.
+
+[1] https://events.linuxfoundation.org/wp-content/uploads/2017/12/virtio-mem-Paravirtualized-Memory-David-Hildenbrand-Red-Hat-1.pdf
+[2] https://lkml.kernel.org/r/20190919142228.5483-1-david@redhat.com
+[3] https://lkml.kernel.org/r/547865a9-d6c2-7140-47e2-5af01e7d761d@redhat.com
+
+Cc: Sebastien Boeuf  <sebastien.boeuf@intel.com>
+Cc: Samuel Ortiz <samuel.ortiz@intel.com>
+Cc: Robert Bradford <robert.bradford@intel.com>
+Cc: Luiz Capitulino <lcapitulino@redhat.com>
+
+David Hildenbrand (13):
+  ACPI: NUMA: export pxm_to_node
+  virtio-mem: Paravirtualized memory hotplug
+  virtio-mem: Paravirtualized memory hotunplug part 1
+  mm: Export alloc_contig_range() / free_contig_range()
+  virtio-mem: Paravirtualized memory hotunplug part 2
+  mm: Allow to offline unmovable PageOffline() pages via
+    MEM_GOING_OFFLINE
+  virtio-mem: Allow to offline partially unplugged memory blocks
+  mm/memory_hotplug: Introduce offline_and_remove_memory()
+  virtio-mem: Offline and remove completely unplugged memory blocks
+  virtio-mem: Better retry handling
+  mm/vmscan: Move count_vm_event(DROP_SLAB) into drop_slab()
+  mm/vmscan: Export drop_slab() and drop_slab_node()
+  virtio-mem: Drop slab objects when unplug continues to fail
+
+ drivers/acpi/numa/srat.c        |    1 +
+ drivers/virtio/Kconfig          |   18 +
+ drivers/virtio/Makefile         |    1 +
+ drivers/virtio/virtio_mem.c     | 1939 +++++++++++++++++++++++++++++++
+ fs/drop_caches.c                |    4 +-
+ include/linux/memory_hotplug.h  |    1 +
+ include/linux/mm.h              |    4 +-
+ include/linux/page-flags.h      |   10 +
+ include/uapi/linux/virtio_ids.h |    1 +
+ include/uapi/linux/virtio_mem.h |  204 ++++
+ mm/memory_hotplug.c             |   76 +-
+ mm/page_alloc.c                 |   26 +
+ mm/page_isolation.c             |    9 +
+ mm/vmscan.c                     |    3 +
+ 14 files changed, 2282 insertions(+), 15 deletions(-)
+ create mode 100644 drivers/virtio/virtio_mem.c
+ create mode 100644 include/uapi/linux/virtio_mem.h
+
 -- 
-2.20.1
+2.23.0
 
 _______________________________________________
 Virtualization mailing list
