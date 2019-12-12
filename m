@@ -2,80 +2,85 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8557611D364
-	for <lists.virtualization@lfdr.de>; Thu, 12 Dec 2019 18:13:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0B9611D365
+	for <lists.virtualization@lfdr.de>; Thu, 12 Dec 2019 18:13:40 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 39A35883E7;
-	Thu, 12 Dec 2019 17:13:37 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8D17386473;
+	Thu, 12 Dec 2019 17:13:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sX6jh-zXpWdL; Thu, 12 Dec 2019 17:13:36 +0000 (UTC)
+	with ESMTP id MpY3DVabGeFZ; Thu, 12 Dec 2019 17:13:39 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B8792865C4;
-	Thu, 12 Dec 2019 17:13:36 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id F256186404;
+	Thu, 12 Dec 2019 17:13:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F7C1C0881;
-	Thu, 12 Dec 2019 17:13:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E29EBC0881;
+	Thu, 12 Dec 2019 17:13:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 82CD4C0881
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 21472C0881
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 17:13:35 +0000 (UTC)
+ Thu, 12 Dec 2019 17:13:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 7B32924F76
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 1093286FAE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 17:13:35 +0000 (UTC)
+ Thu, 12 Dec 2019 17:13:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id tnm5RB3XZMKy
+ with ESMTP id BU-zrLvMIMGO
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 17:13:34 +0000 (UTC)
+ Thu, 12 Dec 2019 17:13:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id AC4C424A5A
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 55FFC86CA5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 17:13:31 +0000 (UTC)
+ Thu, 12 Dec 2019 17:13:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576170810;
+ s=mimecast20190719; t=1576170815;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=2upD/YUhaw2ZDUGySKrouuwI8eCyNFFa47e7Zu9VlYw=;
- b=LUaY5Gnuq2gnLK91kJ21eKMjxMK7jhFgHVgvspxLuDMWZRYTMC986MUbH49o9LpSkdfT2A
- yHiaHMUi195L0eAJ+ZZwQdf/uJirdBMtlnnndq6OpUZHwsVJbanB9XncWmy6dv+bOHf7KD
- Y8gH1Ph1Clur/Am0ETCiit9ZQmz9aXo=
+ bh=w/9RPsLV3hmHV/aDZLnceRyys47s4obu7zT1ywSY+3U=;
+ b=YTAZqjSCLBiEE8kML0HOJn5E9JOKVc33ekj4DXHQypAKD/iRzyytggRDD8Q9P340+IZhbb
+ 1cO/fkgBUnhgu1N4vj3T3VILZS86pNh/NSvgpU7yYOCWhbEA+bBpOzsbD8rJfuiDphBQsg
+ R17b1xCkZDcGayWbhRQedmmm+AuUXXk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-189-nNkgjHYrMa--T3YPAku24w-1; Thu, 12 Dec 2019 12:13:27 -0500
-X-MC-Unique: nNkgjHYrMa--T3YPAku24w-1
+ us-mta-230-ugnwkmHgMqya7HmLmDbz_g-1; Thu, 12 Dec 2019 12:13:31 -0500
+X-MC-Unique: ugnwkmHgMqya7HmLmDbz_g-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
  [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 73FEB107ACC5;
- Thu, 12 Dec 2019 17:13:25 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 546F1800053;
+ Thu, 12 Dec 2019 17:13:29 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-117-65.ams2.redhat.com [10.36.117.65])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D360E5C1C3;
- Thu, 12 Dec 2019 17:13:18 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C082A5C1C3;
+ Thu, 12 Dec 2019 17:13:25 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH RFC v4 12/13] mm/vmscan: Export drop_slab() and
- drop_slab_node()
-Date: Thu, 12 Dec 2019 18:11:36 +0100
-Message-Id: <20191212171137.13872-13-david@redhat.com>
+Subject: [PATCH RFC v4 13/13] virtio-mem: Drop slab objects when unplug
+ continues to fail
+Date: Thu, 12 Dec 2019 18:11:37 +0100
+Message-Id: <20191212171137.13872-14-david@redhat.com>
 In-Reply-To: <20191212171137.13872-1-david@redhat.com>
 References: <20191212171137.13872-1-david@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, Andrew Morton <akpm@linux-foundation.org>,
- virtualization@lists.linux-foundation.org
+Cc: virtio-dev@lists.oasis-open.org, Pavel Tatashin <pasha.tatashin@soleen.com>,
+ kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
+ Michal Hocko <mhocko@kernel.org>, linux-mm@kvack.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Stefan Hajnoczi <stefanha@redhat.com>, linux-fsdevel@vger.kernel.org,
+ Igor Mammedov <imammedo@redhat.com>, Andrew Morton <akpm@linux-foundation.org>,
+ virtualization@lists.linux-foundation.org, Dave Young <dyoung@redhat.com>,
+ Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Oscar Salvador <osalvador@suse.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,65 +97,95 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We already have a way to trigger reclaiming of all reclaimable slab objects
-from user space (echo 2 > /proc/sys/vm/drop_caches). Let's allow drivers
-to also trigger this when they really want to make progress and know what
-they are doing.
+Start dropping slab objects after 30 minutes and repeat every 30 minutes
+in case we can't unplug more memory using alloc_contig_range().
+Log messages and make it configurable. Enable dropping slab objects as
+default (especially, reclaimable slab objects that are not movable).
 
-virtio-mem wants to use these functions when it failed to unplug memory
-for quite some time (e.g., after 30 minutes). It will then try to
-free up reclaimable objects by dropping the slab caches every now and
-then (e.g., every 30 minutes) as long as necessary. There will be a way to
-disable this feature and info messages will be logged.
+In the future, we might want to implement+use drop_slab_range(), which
+will also come in handy for other users (e.g., offlining, gigantic huge
+pages).
 
-In the future, we want to have a drop_slab_range() functionality
-instead. Memory offlining code has similar demands and also other
-alloc_contig_range() users (e.g., gigantic pages) could make good use of
-this feature. Adding it, however, requires more work/thought.
-
+Cc: Alexander Viro <viro@zeniv.linux.org.uk>
 Cc: Andrew Morton <akpm@linux-foundation.org>
 Cc: Michal Hocko <mhocko@kernel.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Oscar Salvador <osalvador@suse.de>
+Cc: Igor Mammedov <imammedo@redhat.com>
+Cc: Dave Young <dyoung@redhat.com>
+Cc: Dan Williams <dan.j.williams@intel.com>
+Cc: Pavel Tatashin <pasha.tatashin@soleen.com>
+Cc: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: Vlastimil Babka <vbabka@suse.cz>
+Cc: linux-fsdevel@vger.kernel.org
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- include/linux/mm.h | 4 ++--
- mm/vmscan.c        | 2 ++
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ drivers/virtio/virtio_mem.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 64799c5cb39f..483300f58be8 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -2706,8 +2706,8 @@ int drop_caches_sysctl_handler(struct ctl_table *, int,
- 					void __user *, size_t *, loff_t *);
- #endif
+diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
+index 3a57434f92ed..8f25f7453a08 100644
+--- a/drivers/virtio/virtio_mem.c
++++ b/drivers/virtio/virtio_mem.c
+@@ -25,6 +25,11 @@ static bool unplug_online = true;
+ module_param(unplug_online, bool, 0644);
+ MODULE_PARM_DESC(unplug_online, "Try to unplug online memory");
  
--void drop_slab(void);
--void drop_slab_node(int nid);
-+extern void drop_slab(void);
-+extern void drop_slab_node(int nid);
- 
- #ifndef CONFIG_MMU
- #define randomize_va_space 0
-diff --git a/mm/vmscan.c b/mm/vmscan.c
-index c3e53502a84a..4e1cdaaec5e6 100644
---- a/mm/vmscan.c
-+++ b/mm/vmscan.c
-@@ -719,6 +719,7 @@ void drop_slab_node(int nid)
- 		} while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)) != NULL);
- 	} while (freed > 10);
- }
-+EXPORT_SYMBOL(drop_slab_node);
- 
- void drop_slab(void)
++static bool drop_slab_objects = true;
++module_param(drop_slab_objects, bool, 0644);
++MODULE_PARM_DESC(drop_slab_objects,
++		 "Drop slab objects when unplug continues to fail");
++
+ enum virtio_mem_mb_state {
+ 	/* Unplugged, not added to Linux. Can be reused later. */
+ 	VIRTIO_MEM_MB_STATE_UNUSED = 0,
+@@ -1384,6 +1389,7 @@ static int virtio_mem_mb_unplug_any_sb_online(struct virtio_mem *vm,
+ static int virtio_mem_unplug_request(struct virtio_mem *vm, uint64_t diff)
  {
-@@ -728,6 +729,7 @@ void drop_slab(void)
- 		drop_slab_node(nid);
- 	count_vm_event(DROP_SLAB);
- }
-+EXPORT_SYMBOL(drop_slab);
+ 	uint64_t nb_sb = diff / vm->subblock_size;
++	bool retried = false;
+ 	unsigned long mb_id;
+ 	int rc;
  
- static inline int is_page_cache_freeable(struct page *page)
- {
+@@ -1421,6 +1427,7 @@ static int virtio_mem_unplug_request(struct virtio_mem *vm, uint64_t diff)
+ 		return 0;
+ 	}
+ 
++retry_locked:
+ 	/* Try to unplug subblocks of partially plugged online blocks. */
+ 	virtio_mem_for_each_mb_state(vm, mb_id,
+ 				     VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL) {
+@@ -1445,6 +1452,29 @@ static int virtio_mem_unplug_request(struct virtio_mem *vm, uint64_t diff)
+ 	}
+ 
+ 	mutex_unlock(&vm->hotplug_mutex);
++
++	/*
++	 * If we can't unplug the requested amount of memory for a long time,
++	 * start freeing up memory in caches. This might harm performance,
++	 * is configurable, and we log a message. Retry imemdiately a second
++	 * time - then wait another VIRTIO_MEM_RETRY_TIMER_MAX_MS.
++	 */
++	if (nb_sb && !retried && drop_slab_objects &&
++	    vm->retry_timer_ms == VIRTIO_MEM_RETRY_TIMER_MAX_MS) {
++		if (vm->nid == NUMA_NO_NODE) {
++			dev_info(&vm->vdev->dev, "dropping all slab objects\n");
++			drop_slab();
++		} else {
++			dev_info(&vm->vdev->dev,
++				 "dropping all slab objects on node=%d\n",
++				 vm->nid);
++			drop_slab_node(vm->nid);
++		}
++		retried = true;
++		mutex_lock(&vm->hotplug_mutex);
++		goto retry_locked;
++	}
++
+ 	return nb_sb ? -EBUSY : 0;
+ out_unlock:
+ 	mutex_unlock(&vm->hotplug_mutex);
 -- 
 2.23.0
 
