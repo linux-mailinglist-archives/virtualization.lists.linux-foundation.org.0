@@ -2,104 +2,69 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A88911D272
-	for <lists.virtualization@lfdr.de>; Thu, 12 Dec 2019 17:40:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D98F611D26F
+	for <lists.virtualization@lfdr.de>; Thu, 12 Dec 2019 17:37:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4744388871;
-	Thu, 12 Dec 2019 16:40:40 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8E4A486FAD;
+	Thu, 12 Dec 2019 16:37:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Np+mKFBdcewa; Thu, 12 Dec 2019 16:40:39 +0000 (UTC)
+	with ESMTP id HVFuq5SWvScH; Thu, 12 Dec 2019 16:37:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 356D38886F;
-	Thu, 12 Dec 2019 16:40:39 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 96B45874AB;
+	Thu, 12 Dec 2019 16:37:31 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 21B2FC0881;
-	Thu, 12 Dec 2019 16:40:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 87ECBC0881;
+	Thu, 12 Dec 2019 16:37:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CE4F4C0881
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 038D7C0881
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:40:37 +0000 (UTC)
+ Thu, 12 Dec 2019 16:37:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id C752120485
+ by whitealder.osuosl.org (Postfix) with ESMTP id E663D883A6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:40:37 +0000 (UTC)
+ Thu, 12 Dec 2019 16:37:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NvdTeq5hoej0
+ with ESMTP id fMO4ifCq-SfN
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:40:36 +0000 (UTC)
-X-Greylist: delayed 00:05:10 by SQLgrey-1.7.6
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
- [209.85.166.194])
- by silver.osuosl.org (Postfix) with ESMTPS id B99F71FCB5
+ Thu, 12 Dec 2019 16:37:28 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id A60668839F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 16:40:36 +0000 (UTC)
-Received: by mail-il1-f194.google.com with SMTP id p8so2545775iln.12
- for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Dec 2019 08:40:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20150623.gappssmtp.com; s=20150623;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=3FtLIVj+wnM2ARUnkHjLCIs+M1M/IA6PpWp8jtXGxBs=;
- b=xbcplkXMsLKBVhI2XoEAIhOCDrqD47HX6n1yvO5V22GmwrrQQBKbWggYHs4jvP1r5e
- d06kkPEOnjJE94l1i8s0OQBGyq2uCnz06HSXakJyefIeamZrYC04IsPHZG0q8AamKYX7
- hQiBFF2unkfh+vzBU4sfnsk8eFSJqiqGb27+ELN3raRO+1VzqxuUmJvQteWCoq4j74gw
- zDZjlxcYlLJc7nj02zY/1J5oio91PD6bX3m6ftojddzXMI4lyWGMcOBLF2IgQDl1+DS4
- M8/9vHNTZSCqOo/1DexoCnH9ZtJ4bViECOh2oT+MHZ1qxnhhm7JEOSFNx7VJQCROP4qJ
- 4jQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=3FtLIVj+wnM2ARUnkHjLCIs+M1M/IA6PpWp8jtXGxBs=;
- b=a/4lajTV/zbGyjmVZzL3RLzTh1byxvaPXlnEEPTnuNTAcHXcjhXRtSvSjUYhWmjTkx
- oyNebJ6Jd5rYWqjO3sW5+MN+DrExFksiSWHo2plwF4aJt06y1jBJYZtn7Wor7kQEAU8N
- WX7esY+2FvMC8pEgYFKTl+DUM7+2raJ0VVVITylY0ktVC6Qp1P5nOeMWrdJAlJpzcIWU
- M018bOOskDxVN523OgGLixre2nQfixsBh9m1ifKOTiB6p59XjLAwqr/BPNleZWHR7vpk
- Nf6EsGJxrBGE80kv6ErbukdXak/RuUZ8PeOPjedIfGoPFp3dYac6G+8RBoGt1BiJBL5X
- 2FIQ==
-X-Gm-Message-State: APjAAAWHmaZ/FfUmWsCu8/9n0iqEyrLVTp5MU+ACpHHHnlwdIWeW2CNL
- K6z6ejTJmBQgxANAfRCAD94cqg==
-X-Google-Smtp-Source: APXvYqxAPt9ybQh/T8WYBX6qxbHJzz4zpYaVA1B8qE0Zhi2chspe24qfeJl3SeUOs00SEoxpnZbeng==
-X-Received: by 2002:a92:5d03:: with SMTP id r3mr8554165ilb.278.1576168525332; 
- Thu, 12 Dec 2019 08:35:25 -0800 (PST)
-Received: from [192.168.1.159] ([65.144.74.34])
- by smtp.gmail.com with ESMTPSA id x62sm1843784ill.86.2019.12.12.08.35.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Dec 2019 08:35:24 -0800 (PST)
-Subject: Re: [PATCH 15/24] compat_ioctl: scsi: move ioctl handling into drivers
-To: Christoph Hellwig <hch@infradead.org>, Paolo Bonzini <pbonzini@redhat.com>
-References: <20191211204306.1207817-1-arnd@arndb.de>
- <20191211204306.1207817-16-arnd@arndb.de>
- <20191211180155-mutt-send-email-mst@kernel.org>
- <858768fb-5f79-8259-eb6a-a26f18fb0e04@redhat.com>
- <20191212162729.GB27991@infradead.org>
-From: Jens Axboe <axboe@kernel.dk>
-Message-ID: <6e265890-23e5-6368-4e36-d59ff47879b2@kernel.dk>
-Date: Thu, 12 Dec 2019 09:35:22 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ Thu, 12 Dec 2019 16:37:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=2Jz6taz35JZegkKFQERoTLypJxH/c8Nr8d7W3QSRKDE=; b=N/Dt6YXPRT7NcUkjKnjgqq0OS
+ vwGJBFdgvYrnpOIF/wuehpr834OyUN6bzI9QriM26xkIa+cuiHw/jlRSDG5i2Tme5c+i75m3y3aeE
+ Tk+04yBRI1G5Bwv46ymqEXqAL7/nuYKUu2YJrpB5RdrPSStM7PE0tb08DXTV5cXnV5YYGLL5IzAmi
+ eCK7vT1Kky5W+BDsbkWHSUNIJyzEsyq5vt4CxYW1E459rRl8Qax0sbbDtz3/4hNipXA0IQsuEm1v/
+ LnRHVWUGyVqNFcu3vAZsq83ay0hSi0/Agw+ge0bJ5HjmyzG1fcB077bzWiygSKneAqWR/WGVc9+de
+ 2MbRS71bw==;
+Received: from [2001:4bb8:188:2b00:20e6:8b5a:ed96:f9da] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1ifRSt-0008Bp-RL; Thu, 12 Dec 2019 16:37:24 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: axboe@kernel.dk, mst@redhat.com, jasowang@redhat.com, pbonzini@redhat.com,
+ stefanha@redhat.com
+Subject: [PATCH] virtio-blk: remove VIRTIO_BLK_F_SCSI support
+Date: Thu, 12 Dec 2019 17:37:19 +0100
+Message-Id: <20191212163719.28432-1-hch@lst.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20191212162729.GB27991@infradead.org>
-Content-Language: en-US
-Cc: Hannes Reinecke <hare@suse.com>, Arnd Bergmann <arnd@arndb.de>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, y2038@lists.linaro.org,
- Damien Le Moal <damien.lemoal@wdc.com>, John Garry <john.garry@huawei.com>,
- linux-kernel@vger.kernel.org,
- =?UTF-8?Q?Kai_M=c3=a4kisara?= <Kai.Makisara@kolumbus.fi>,
- linux-block@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>,
- Stefan Hajnoczi <stefanha@redhat.com>, Doug Gilbert <dgilbert@interlog.com>,
- linux-fsdevel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-scsi@vger.kernel.org, "James E.J. Bottomley" <jejb@linux.ibm.com>,
- Bart Van Assche <bvanassche@acm.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: linux-block@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -116,23 +81,247 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 12/12/19 9:27 AM, Christoph Hellwig wrote:
-> On Thu, Dec 12, 2019 at 01:28:08AM +0100, Paolo Bonzini wrote:
->> I think it's because the only ioctl for virtio-blk is SG_IO.  It makes
->> sense to lump it in with scsi, but I wouldn't mind getting rid of
->> CONFIG_VIRTIO_BLK_SCSI altogether.
-> 
-> CONFIG_VIRTIO_BLK_SCSI has been broken for about two years, as it
-> never set the QUEUE_FLAG_SCSI_PASSTHROUGH flag after that was
-> introduced.  I actually have a patch that I plan to send to remove
-> this support as it was a really idea to start with (speaking as
-> the person who had that idea back in the day).
+Since the need for a special flag to support SCSI passthrough on a
+block device was added in May 2017 the SCSI passthrough support in
+virtio-blk has been disabled.  It has always been a bad idea
+(just ask the original author..) and we have virtio-scsi for proper
+passthrough.  The feature also never made it into the virtio 1.0
+or later specifications.
 
-We had this very discussion two years ago, and we never got it removed.
-Let's please get it done.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ arch/powerpc/configs/guest.config |   1 -
+ drivers/block/Kconfig             |  10 ---
+ drivers/block/virtio_blk.c        | 115 +-----------------------------
+ 3 files changed, 1 insertion(+), 125 deletions(-)
 
+diff --git a/arch/powerpc/configs/guest.config b/arch/powerpc/configs/guest.config
+index 8b8cd18ecd7c..209f58515d88 100644
+--- a/arch/powerpc/configs/guest.config
++++ b/arch/powerpc/configs/guest.config
+@@ -1,5 +1,4 @@
+ CONFIG_VIRTIO_BLK=y
+-CONFIG_VIRTIO_BLK_SCSI=y
+ CONFIG_SCSI_VIRTIO=y
+ CONFIG_VIRTIO_NET=y
+ CONFIG_NET_FAILOVER=y
+diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
+index 1bb8ec575352..025b1b77b11a 100644
+--- a/drivers/block/Kconfig
++++ b/drivers/block/Kconfig
+@@ -432,16 +432,6 @@ config VIRTIO_BLK
+ 	  This is the virtual block driver for virtio.  It can be used with
+           QEMU based VMMs (like KVM or Xen).  Say Y or M.
+ 
+-config VIRTIO_BLK_SCSI
+-	bool "SCSI passthrough request for the Virtio block driver"
+-	depends on VIRTIO_BLK
+-	select BLK_SCSI_REQUEST
+-	---help---
+-	  Enable support for SCSI passthrough (e.g. the SG_IO ioctl) on
+-	  virtio-blk devices.  This is only supported for the legacy
+-	  virtio protocol and not enabled by default by any hypervisor.
+-	  You probably want to use virtio-scsi instead.
+-
+ config BLK_DEV_RBD
+ 	tristate "Rados block device (RBD)"
+ 	depends on INET && BLOCK
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index 7ffd719d89de..54158766334b 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -11,7 +11,6 @@
+ #include <linux/virtio_blk.h>
+ #include <linux/scatterlist.h>
+ #include <linux/string_helpers.h>
+-#include <scsi/scsi_cmnd.h>
+ #include <linux/idr.h>
+ #include <linux/blk-mq.h>
+ #include <linux/blk-mq-virtio.h>
+@@ -56,11 +55,6 @@ struct virtio_blk {
+ };
+ 
+ struct virtblk_req {
+-#ifdef CONFIG_VIRTIO_BLK_SCSI
+-	struct scsi_request sreq;	/* for SCSI passthrough, must be first */
+-	u8 sense[SCSI_SENSE_BUFFERSIZE];
+-	struct virtio_scsi_inhdr in_hdr;
+-#endif
+ 	struct virtio_blk_outhdr out_hdr;
+ 	u8 status;
+ 	struct scatterlist sg[];
+@@ -78,80 +72,6 @@ static inline blk_status_t virtblk_result(struct virtblk_req *vbr)
+ 	}
+ }
+ 
+-/*
+- * If this is a packet command we need a couple of additional headers.  Behind
+- * the normal outhdr we put a segment with the scsi command block, and before
+- * the normal inhdr we put the sense data and the inhdr with additional status
+- * information.
+- */
+-#ifdef CONFIG_VIRTIO_BLK_SCSI
+-static int virtblk_add_req_scsi(struct virtqueue *vq, struct virtblk_req *vbr,
+-		struct scatterlist *data_sg, bool have_data)
+-{
+-	struct scatterlist hdr, status, cmd, sense, inhdr, *sgs[6];
+-	unsigned int num_out = 0, num_in = 0;
+-
+-	sg_init_one(&hdr, &vbr->out_hdr, sizeof(vbr->out_hdr));
+-	sgs[num_out++] = &hdr;
+-	sg_init_one(&cmd, vbr->sreq.cmd, vbr->sreq.cmd_len);
+-	sgs[num_out++] = &cmd;
+-
+-	if (have_data) {
+-		if (vbr->out_hdr.type & cpu_to_virtio32(vq->vdev, VIRTIO_BLK_T_OUT))
+-			sgs[num_out++] = data_sg;
+-		else
+-			sgs[num_out + num_in++] = data_sg;
+-	}
+-
+-	sg_init_one(&sense, vbr->sense, SCSI_SENSE_BUFFERSIZE);
+-	sgs[num_out + num_in++] = &sense;
+-	sg_init_one(&inhdr, &vbr->in_hdr, sizeof(vbr->in_hdr));
+-	sgs[num_out + num_in++] = &inhdr;
+-	sg_init_one(&status, &vbr->status, sizeof(vbr->status));
+-	sgs[num_out + num_in++] = &status;
+-
+-	return virtqueue_add_sgs(vq, sgs, num_out, num_in, vbr, GFP_ATOMIC);
+-}
+-
+-static inline void virtblk_scsi_request_done(struct request *req)
+-{
+-	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
+-	struct virtio_blk *vblk = req->q->queuedata;
+-	struct scsi_request *sreq = &vbr->sreq;
+-
+-	sreq->resid_len = virtio32_to_cpu(vblk->vdev, vbr->in_hdr.residual);
+-	sreq->sense_len = virtio32_to_cpu(vblk->vdev, vbr->in_hdr.sense_len);
+-	sreq->result = virtio32_to_cpu(vblk->vdev, vbr->in_hdr.errors);
+-}
+-
+-static int virtblk_ioctl(struct block_device *bdev, fmode_t mode,
+-			     unsigned int cmd, unsigned long data)
+-{
+-	struct gendisk *disk = bdev->bd_disk;
+-	struct virtio_blk *vblk = disk->private_data;
+-
+-	/*
+-	 * Only allow the generic SCSI ioctls if the host can support it.
+-	 */
+-	if (!virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_SCSI))
+-		return -ENOTTY;
+-
+-	return scsi_cmd_blk_ioctl(bdev, mode, cmd,
+-				  (void __user *)data);
+-}
+-#else
+-static inline int virtblk_add_req_scsi(struct virtqueue *vq,
+-		struct virtblk_req *vbr, struct scatterlist *data_sg,
+-		bool have_data)
+-{
+-	return -EIO;
+-}
+-static inline void virtblk_scsi_request_done(struct request *req)
+-{
+-}
+-#define virtblk_ioctl	NULL
+-#endif /* CONFIG_VIRTIO_BLK_SCSI */
+-
+ static int virtblk_add_req(struct virtqueue *vq, struct virtblk_req *vbr,
+ 		struct scatterlist *data_sg, bool have_data)
+ {
+@@ -216,13 +136,6 @@ static inline void virtblk_request_done(struct request *req)
+ 		      req->special_vec.bv_offset);
+ 	}
+ 
+-	switch (req_op(req)) {
+-	case REQ_OP_SCSI_IN:
+-	case REQ_OP_SCSI_OUT:
+-		virtblk_scsi_request_done(req);
+-		break;
+-	}
+-
+ 	blk_mq_end_request(req, virtblk_result(vbr));
+ }
+ 
+@@ -299,10 +212,6 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 		type = VIRTIO_BLK_T_WRITE_ZEROES;
+ 		unmap = !(req->cmd_flags & REQ_NOUNMAP);
+ 		break;
+-	case REQ_OP_SCSI_IN:
+-	case REQ_OP_SCSI_OUT:
+-		type = VIRTIO_BLK_T_SCSI_CMD;
+-		break;
+ 	case REQ_OP_DRV_IN:
+ 		type = VIRTIO_BLK_T_GET_ID;
+ 		break;
+@@ -333,10 +242,7 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 	}
+ 
+ 	spin_lock_irqsave(&vblk->vqs[qid].lock, flags);
+-	if (blk_rq_is_scsi(req))
+-		err = virtblk_add_req_scsi(vblk->vqs[qid].vq, vbr, vbr->sg, num);
+-	else
+-		err = virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
++	err = virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
+ 	if (err) {
+ 		virtqueue_kick(vblk->vqs[qid].vq);
+ 		blk_mq_stop_hw_queue(hctx);
+@@ -404,7 +310,6 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
+ }
+ 
+ static const struct block_device_operations virtblk_fops = {
+-	.ioctl  = virtblk_ioctl,
+ 	.owner  = THIS_MODULE,
+ 	.getgeo = virtblk_getgeo,
+ };
+@@ -683,9 +588,6 @@ static int virtblk_init_request(struct blk_mq_tag_set *set, struct request *rq,
+ 	struct virtio_blk *vblk = set->driver_data;
+ 	struct virtblk_req *vbr = blk_mq_rq_to_pdu(rq);
+ 
+-#ifdef CONFIG_VIRTIO_BLK_SCSI
+-	vbr->sreq.sense = vbr->sense;
+-#endif
+ 	sg_init_table(vbr->sg, vblk->sg_elems);
+ 	return 0;
+ }
+@@ -698,23 +600,11 @@ static int virtblk_map_queues(struct blk_mq_tag_set *set)
+ 					vblk->vdev, 0);
+ }
+ 
+-#ifdef CONFIG_VIRTIO_BLK_SCSI
+-static void virtblk_initialize_rq(struct request *req)
+-{
+-	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
+-
+-	scsi_req_init(&vbr->sreq);
+-}
+-#endif
+-
+ static const struct blk_mq_ops virtio_mq_ops = {
+ 	.queue_rq	= virtio_queue_rq,
+ 	.commit_rqs	= virtio_commit_rqs,
+ 	.complete	= virtblk_request_done,
+ 	.init_request	= virtblk_init_request,
+-#ifdef CONFIG_VIRTIO_BLK_SCSI
+-	.initialize_rq_fn = virtblk_initialize_rq,
+-#endif
+ 	.map_queues	= virtblk_map_queues,
+ };
+ 
+@@ -991,9 +881,6 @@ static const struct virtio_device_id id_table[] = {
+ static unsigned int features_legacy[] = {
+ 	VIRTIO_BLK_F_SEG_MAX, VIRTIO_BLK_F_SIZE_MAX, VIRTIO_BLK_F_GEOMETRY,
+ 	VIRTIO_BLK_F_RO, VIRTIO_BLK_F_BLK_SIZE,
+-#ifdef CONFIG_VIRTIO_BLK_SCSI
+-	VIRTIO_BLK_F_SCSI,
+-#endif
+ 	VIRTIO_BLK_F_FLUSH, VIRTIO_BLK_F_TOPOLOGY, VIRTIO_BLK_F_CONFIG_WCE,
+ 	VIRTIO_BLK_F_MQ, VIRTIO_BLK_F_DISCARD, VIRTIO_BLK_F_WRITE_ZEROES,
+ }
 -- 
-Jens Axboe
+2.20.1
 
 _______________________________________________
 Virtualization mailing list
