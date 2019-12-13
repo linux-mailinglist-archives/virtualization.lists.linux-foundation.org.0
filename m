@@ -2,80 +2,119 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 910A611EAA2
-	for <lists.virtualization@lfdr.de>; Fri, 13 Dec 2019 19:48:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECF8311EBBA
+	for <lists.virtualization@lfdr.de>; Fri, 13 Dec 2019 21:15:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 2C4C820403;
-	Fri, 13 Dec 2019 18:48:19 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 1F12325E87;
+	Fri, 13 Dec 2019 20:15:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aSpCZ7JZ4d-0; Fri, 13 Dec 2019 18:48:18 +0000 (UTC)
+	with ESMTP id 9uvR3rWOXagp; Fri, 13 Dec 2019 20:15:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id A022520435;
-	Fri, 13 Dec 2019 18:48:18 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 5EEFD25E42;
+	Fri, 13 Dec 2019 20:15:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 92138C0881;
-	Fri, 13 Dec 2019 18:48:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 448A7C1D84;
+	Fri, 13 Dec 2019 20:15:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9EBBDC0881
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C1B2BC0881
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 18:48:17 +0000 (UTC)
+ Fri, 13 Dec 2019 20:15:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 8C1F225DC5
+ by silver.osuosl.org (Postfix) with ESMTP id A419425E31
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 18:48:17 +0000 (UTC)
+ Fri, 13 Dec 2019 20:15:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MbTIRLnsKciv
+ with ESMTP id VHDEKF4W96xz
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 18:48:16 +0000 (UTC)
+ Fri, 13 Dec 2019 20:15:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 4B51A20435
+Received: from userp2120.oracle.com (userp2120.oracle.com [156.151.31.85])
+ by silver.osuosl.org (Postfix) with ESMTPS id EC3F420449
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 18:48:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576262894;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=VSDDjKTdNjIjYY9lNEGudZN4ZxbNPvX2QUzIT/T3/bU=;
- b=H+RNfMxdNvTysBCOEmbPOGorcnkdQWR0n9YwUpYf65m+E0ejY7abgtQ04kHLSiM0UHU2Az
- BWCe4hrJHp904ycXffWHXpDCVGBoLFmMWifQXPHMZYB9ZUI3ZUjE5r6bEQvZko5mrr7fTa
- QDe+Owf7cMPRb/BLYrOL/nrCTXYhrwI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-252-arex5kL_PveUSWwTT-l1-A-1; Fri, 13 Dec 2019 13:48:12 -0500
-X-MC-Unique: arex5kL_PveUSWwTT-l1-A-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 657F1107ACC4;
- Fri, 13 Dec 2019 18:48:11 +0000 (UTC)
-Received: from steredhat.redhat.com (ovpn-117-123.ams2.redhat.com
- [10.36.117.123])
- by smtp.corp.redhat.com (Postfix) with ESMTP id CDC1460474;
- Fri, 13 Dec 2019 18:48:09 +0000 (UTC)
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: davem@davemloft.net
-Subject: [PATCH net 2/2] vsock/virtio: add WARN_ON check on
- virtio_transport_get_ops()
-Date: Fri, 13 Dec 2019 19:48:01 +0100
-Message-Id: <20191213184801.486675-3-sgarzare@redhat.com>
-In-Reply-To: <20191213184801.486675-1-sgarzare@redhat.com>
-References: <20191213184801.486675-1-sgarzare@redhat.com>
+ Fri, 13 Dec 2019 20:15:04 +0000 (UTC)
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xBDK4M8Q052848;
+ Fri, 13 Dec 2019 20:12:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=mime-version :
+ message-id : date : from : to : cc : subject : references : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2019-08-05;
+ bh=TNwH//sjjP0dpv5Zb5O45GTAWkGy6Jy5zU0tVrwrNCk=;
+ b=F18byeuDDoK0Av2CaxjNbhA3ASHKdzGPKTrw1Vj38TDKmGbt+zU0oUBsHTNbpSFehz1y
+ ixBJKQxe4cCqNO4nBstjiYhn2mwrSCmx3N3F0YSBT6QLbNiDtmk11Zn3YQCQwm/4jz8R
+ 3dVm+2zCKKo1Knzoo4FobVtE+pg8hbHZHTooEn+agcJWprLwCgKGZJKflJOrNFAySygJ
+ 0gc+gl7iPZR0Gt+F17IpCWzh8ZQ4CiJYNuBi4T6AkAxYg0HuN4uZ0oyTUT3338j6a8A3
+ OG8xLXoOjiv90V3ATGB+5vn0rc8aSra6d++fisKNUG+03h3bNn6ycMRTxrd+Mt3dXw4M Wg== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2120.oracle.com with ESMTP id 2wr4qs32ff-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 13 Dec 2019 20:12:44 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xBDK9OAE010187;
+ Fri, 13 Dec 2019 20:12:43 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3020.oracle.com with ESMTP id 2wvdwqnq06-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 13 Dec 2019 20:12:43 +0000
+Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id xBDKCUlG030058;
+ Fri, 13 Dec 2019 20:12:30 GMT
+Received: from char.us.oracle.com (/10.152.32.25) by default (Oracle Beehive
+ Gateway v4.0) with ESMTP ; Fri, 13 Dec 2019 12:12:29 -0800
+Received: by char.us.oracle.com (Postfix, from userid 1000) id 7E0D56A00F0;
+ Fri, 13 Dec 2019 15:15:56 -0500 (EST)
+USER-AGENT: Mutt/1.9.1 (2017-09-22)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Stefan Hajnoczi <stefanha@redhat.com>
+Message-ID: <20191213201556.GC26990@char.us.oracle.com>
+Date: Fri, 13 Dec 2019 12:15:56 -0800 (PST)
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+To: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH RFC v4 00/13] virtio-mem: paravirtualized memory
+References: <20191212171137.13872-1-david@redhat.com>
+In-Reply-To: <20191212171137.13872-1-david@redhat.com>
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9470
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-1912130147
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9470
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
+ definitions=main-1912130147
+Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
+ Robert Bradford <robert.bradford@intel.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>, "Rafael J.
+ Wysocki" <rjw@rjwysocki.net>, Pingfan Liu <kernelfans@gmail.com>,
+ Luiz Capitulino <lcapitulino@redhat.com>, linux-mm@kvack.org,
+ Alexander Potapenko <glider@google.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
+ Mike Rapoport <rppt@linux.ibm.com>, Wei Yang <richard.weiyang@gmail.com>,
+ Anthony Yznaga <anthony.yznaga@oracle.com>, Dave Young <dyoung@redhat.com>,
+ Len Brown <lenb@kernel.org>, Pavel Tatashin <pavel.tatashin@microsoft.com>,
+ Pavel Tatashin <pasha.tatashin@soleen.com>,
+ Anshuman Khandual <anshuman.khandual@arm.com>, Qian Cai <cai@lca.pw>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Samuel Ortiz <samuel.ortiz@intel.com>,
+ Dan Williams <dan.j.williams@intel.com>, Michal Hocko <mhocko@kernel.org>,
+ Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>,
+ Juergen Gross <jgross@suse.com>, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, Sebastien Boeuf <sebastien.boeuf@intel.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Igor Mammedov <imammedo@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,71 +131,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtio_transport_get_ops() and virtio_transport_send_pkt_info()
-can only be used on connecting/connected sockets, since a socket
-assigned to a transport is required.
+On Thu, Dec 12, 2019 at 06:11:24PM +0100, David Hildenbrand wrote:
+> This series is based on latest linux-next. The patches are located at:
+>     https://github.com/davidhildenbrand/linux.git virtio-mem-rfc-v4
+Heya!
 
-This patch adds a WARN_ON() on virtio_transport_get_ops() to check
-this requirement, a comment and a returned error on
-virtio_transport_send_pkt_info(),
+Would there be by any chance a virtio-spec git tree somewhere?
 
-Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
----
- net/vmw_vsock/virtio_transport_common.c | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
+..snip..
+> --------------------------------------------------------------------------
+> 5. Future work
+> --------------------------------------------------------------------------
+> 
+> The separate patches contain a lot of future work items. One of the next
+> steps is to make memory unplug more likely to succeed - currently, there
+> are no guarantees on how much memory can get unplugged again. I have
 
-diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
-index f5991006190e..6abec3fc81d1 100644
---- a/net/vmw_vsock/virtio_transport_common.c
-+++ b/net/vmw_vsock/virtio_transport_common.c
-@@ -34,6 +34,9 @@ virtio_transport_get_ops(struct vsock_sock *vsk)
- {
- 	const struct vsock_transport *t = vsock_core_get_transport(vsk);
- 
-+	if (WARN_ON(!t))
-+		return NULL;
-+
- 	return container_of(t, struct virtio_transport, transport);
- }
- 
-@@ -161,15 +164,25 @@ void virtio_transport_deliver_tap_pkt(struct virtio_vsock_pkt *pkt)
- }
- EXPORT_SYMBOL_GPL(virtio_transport_deliver_tap_pkt);
- 
-+/* This function can only be used on connecting/connected sockets,
-+ * since a socket assigned to a transport is required.
-+ *
-+ * Do not use on listener sockets!
-+ */
- static int virtio_transport_send_pkt_info(struct vsock_sock *vsk,
- 					  struct virtio_vsock_pkt_info *info)
- {
- 	u32 src_cid, src_port, dst_cid, dst_port;
-+	const struct virtio_transport *t_ops;
- 	struct virtio_vsock_sock *vvs;
- 	struct virtio_vsock_pkt *pkt;
- 	u32 pkt_len = info->pkt_len;
- 
--	src_cid = virtio_transport_get_ops(vsk)->transport.get_local_cid();
-+	t_ops = virtio_transport_get_ops(vsk);
-+	if (unlikely(!t_ops))
-+		return -EFAULT;
-+
-+	src_cid = t_ops->transport.get_local_cid();
- 	src_port = vsk->local_addr.svm_port;
- 	if (!info->remote_cid) {
- 		dst_cid	= vsk->remote_addr.svm_cid;
-@@ -202,7 +215,7 @@ static int virtio_transport_send_pkt_info(struct vsock_sock *vsk,
- 
- 	virtio_transport_inc_tx_pkt(vvs, pkt);
- 
--	return virtio_transport_get_ops(vsk)->send_pkt(pkt);
-+	return t_ops->send_pkt(pkt);
- }
- 
- static bool virtio_transport_inc_rx_pkt(struct virtio_vsock_sock *vvs,
--- 
-2.23.0
+
+Or perhaps tell the caller why we can't and let them sort it out?
+For example: "Application XYZ is mlocked. Can't offload'.
+
 
 _______________________________________________
 Virtualization mailing list
