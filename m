@@ -2,95 +2,85 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B2CB11E5AA
-	for <lists.virtualization@lfdr.de>; Fri, 13 Dec 2019 15:35:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EC9B11E926
+	for <lists.virtualization@lfdr.de>; Fri, 13 Dec 2019 18:26:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 046608817F;
-	Fri, 13 Dec 2019 14:35:36 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1FF25878A6;
+	Fri, 13 Dec 2019 17:26:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KSDbQPG1w9D2; Fri, 13 Dec 2019 14:35:34 +0000 (UTC)
+	with ESMTP id iMG4lwG2ByJ5; Fri, 13 Dec 2019 17:26:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D8AA588247;
-	Fri, 13 Dec 2019 14:35:34 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4595F878A4;
+	Fri, 13 Dec 2019 17:26:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BEBB1C0881;
-	Fri, 13 Dec 2019 14:35:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1E43CC0881;
+	Fri, 13 Dec 2019 17:26:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C3184C0881
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 46D92C0881
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 14:35:32 +0000 (UTC)
+ Fri, 13 Dec 2019 17:26:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id A85E1203D3
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 35A4287330
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 14:35:32 +0000 (UTC)
+ Fri, 13 Dec 2019 17:26:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VZldkuB+w7SD
+ with ESMTP id vUvkhx3hNy1b
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 14:35:31 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id B566D20013
+ Fri, 13 Dec 2019 17:26:28 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id F100D87317
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 14:35:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576247730;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=1UCRXBD5Pi3Dg28VGjijNWgSndqA5ZG4/4ICsiAgUB8=;
- b=TpS1h5d7WXg4r9T2miPjYq36zjAa1dnT6QfPkm+Nh60DxUi9vmtgJMl2j+5ukauQZ+IrQX
- q9hMs63AtWovXYmCQcV2x3vujDT98U0ar1Syl6NcsFOk1PlIzvQgcojtxUUHljQm3Tr1Mk
- GI1pwlh8u2RUxwmQav/joMm5Z+WJLyk=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-103-MHB55A6-OgKYdxPbgruYBA-1; Fri, 13 Dec 2019 09:35:26 -0500
-Received: by mail-qt1-f197.google.com with SMTP id e8so1915065qtg.9
+ Fri, 13 Dec 2019 17:26:27 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id q10so232717wrm.11
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Dec 2019 06:35:25 -0800 (PST)
+ Fri, 13 Dec 2019 09:26:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=v2QQo2XB7NXwvW9lnZFYF7ZZ3DNShcC4KCT5UdTmJbg=;
+ b=IkTuiXLCwMl5X6aSrAX2aAlYlfwvvlp6WhvuBzrSHu5i5Pkjt2f+lE62nHWnM7GTxA
+ 4RwLuaP8Edc/XfXBIDUQ2J6v6ROM0WE2Aqfb7rqiyKjzlVq/hHBSaqTfgoYbmmE7jnbR
+ M6bz0mx19JEEERFXSknFWQzeV5ly+mh9dbg6g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=K16O3uoMoq1X7RVCymy3uF4s1barxs0V/Dkj4PdUFYc=;
- b=nx2lppcALpwmn5jqgqLxhE2tKkXkiT8QluiNavHOzKsBJW2cNJr/ObejuYlyWUzpRv
- TIe6uaWLgbT24X1ITvr+ii4gSaamB1rNg/XaGXu8LKMwZHYyTpm9ezdFJuYVg7EhQren
- H6M3unEaUzQWJ4NUIsqmAUgj8eRGyEZh5UWt64t1arlBnOtKhuPxnXPjwkWajz6VGrjN
- 0a3LxXdDne9bdsNCqcMK/vUhSLpu5G36ZGHfOOtz75BoTf4c7+zf0Jbor9G3dM1n8wsC
- eS+14VQKNhR+nKzguvfBbGYZQOuv29Cv9ER1lM+Rz+zvCXu76njGmr2LLSx0Bnd0s79d
- GmsQ==
-X-Gm-Message-State: APjAAAViAAH35Rs4EV6s0tPndzZGBu/23yBZQtAdZvGY4VaYZP/E96od
- cmzZLrECEkrjECooeWuxdEq5mMgVdDxymSRpJHwneoFAYbvbyaFW0DCueL7953m756e98XQHUBw
- NgoL1PZVPpYMu/NYLno11BcHbLG9GrhAgGS5n5NIupg==
-X-Received: by 2002:a37:5d1:: with SMTP id 200mr13575573qkf.492.1576247725619; 
- Fri, 13 Dec 2019 06:35:25 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxgq1bbRToA9P95foPk8oGS2OI8ibHY6a72vmEjljgya2qgJqTa4/Xh04URKGN+H8Bz4Y3K4g==
-X-Received: by 2002:a37:5d1:: with SMTP id 200mr13575555qkf.492.1576247725393; 
- Fri, 13 Dec 2019 06:35:25 -0800 (PST)
-Received: from redhat.com (bzq-79-181-48-215.red.bezeqint.net. [79.181.48.215])
- by smtp.gmail.com with ESMTPSA id l62sm2885132qke.12.2019.12.13.06.35.21
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=v2QQo2XB7NXwvW9lnZFYF7ZZ3DNShcC4KCT5UdTmJbg=;
+ b=KJmZwqwHOUlYksJdZvpUXbTMJiJoRzeJyBhyf4AfZBXJZgtt0435oMBCfuu4kzd5/a
+ CI1YtddYK0sxQA2bk0Zx0MaYwEhjfAKeca6KmvxTjqK6iXCqHBrvd+0Mr+CyXv7hwyb3
+ V3rYADpllIZAohbQnMgW+r2SxFxsmLK8fr7FmrfMafYx5CxiOQLEVkZzainMdYKeITKg
+ mF79Pam6qEVOmumKZXMKxipsN2XfIe32ycvef7/d0Lah/K5SRo2bgM/6Wlsc99i7RABT
+ LZTHclMptrhwta1MkRNB7xws/DosTqp9stiDeJHKcA187Uf4Aa2u/7whf65CM2VF+e2W
+ 8xiQ==
+X-Gm-Message-State: APjAAAXhMEHfa+KoiBCAMl/Xj3Isn6EqG+BDNcR1tjNxHb5jBQ0M1VUj
+ c1/WQXziiMvYrHsLVxC+95wjLg==
+X-Google-Smtp-Source: APXvYqxbjJsIIrae6ucYxC8SHS+iLhc+EAdv+i5QRVToz5+KDdFk5pSV7I1tisG7+zyWPdF8ERx+SQ==
+X-Received: by 2002:a5d:4d4a:: with SMTP id a10mr14211332wru.220.1576257986276; 
+ Fri, 13 Dec 2019 09:26:26 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:564b:0:7567:bb67:3d7f:f863])
+ by smtp.gmail.com with ESMTPSA id q15sm10689669wrr.11.2019.12.13.09.26.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2019 06:35:24 -0800 (PST)
-Date: Fri, 13 Dec 2019 09:35:19 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: [PULL] virtio: cleanups and fixes
-Message-ID: <20191213093519-mutt-send-email-mst@kernel.org>
+ Fri, 13 Dec 2019 09:26:25 -0800 (PST)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Subject: [PATCH 08/10] drm/virtio: plane_state->fb iff plane_state->crtc
+Date: Fri, 13 Dec 2019 18:26:10 +0100
+Message-Id: <20191213172612.1514842-8-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.24.0
+In-Reply-To: <20191213172612.1514842-1-daniel.vetter@ffwll.ch>
+References: <20191213172612.1514842-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-X-Mutt-Fcc: =sent
-X-MC-Unique: MHB55A6-OgKYdxPbgruYBA-1
-X-Mimecast-Spam-Score: 0
-Content-Disposition: inline
-Cc: yuhuang@redhat.com, kvm@vger.kernel.org, netdev@vger.kernel.org,
- mst@redhat.com, linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- virtualization@lists.linux-foundation.org, imammedo@redhat.com,
- akpm@linux-foundation.org, liuj97@gmail.com
+Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel.vetter@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,35 +97,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The following changes since commit e42617b825f8073569da76dc4510bfa019b1c35a:
+Checking both is one too much, so wrap a WARN_ON around it to stope
+the copypasta.
 
-  Linux 5.5-rc1 (2019-12-08 14:57:55 -0800)
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+---
+ drivers/gpu/drm/virtio/virtgpu_plane.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-are available in the Git repository at:
-
-  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
-
-for you to fetch changes up to 63b9b80e9f5b2c463d98d6e550e0d0e3ace66033:
-
-  virtio_balloon: divide/multiply instead of shifts (2019-12-11 08:14:07 -0500)
-
-----------------------------------------------------------------
-virtio: fixes, cleanups
-
-Some fixes and cleanup patches.
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-
-----------------------------------------------------------------
-David Hildenbrand (1):
-      virtio-balloon: fix managed page counts when migrating pages between zones
-
-Michael S. Tsirkin (2):
-      virtio_balloon: name cleanups
-      virtio_balloon: divide/multiply instead of shifts
-
- drivers/virtio/virtio_balloon.c | 36 ++++++++++++++++++++++++------------
- 1 file changed, 24 insertions(+), 12 deletions(-)
+diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+index bc4bc4475a8c..947e65b51555 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_plane.c
++++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+@@ -88,7 +88,7 @@ static int virtio_gpu_plane_atomic_check(struct drm_plane *plane,
+ 	struct drm_crtc_state *crtc_state;
+ 	int ret;
+ 
+-	if (!state->fb || !state->crtc)
++	if (!state->fb || WARN_ON(!state->crtc))
+ 		return 0;
+ 
+ 	crtc_state = drm_atomic_get_crtc_state(state->state, state->crtc);
+-- 
+2.24.0
 
 _______________________________________________
 Virtualization mailing list
