@@ -2,63 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8344211F7A0
-	for <lists.virtualization@lfdr.de>; Sun, 15 Dec 2019 13:15:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E239011F7A3
+	for <lists.virtualization@lfdr.de>; Sun, 15 Dec 2019 13:17:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1449686E59;
-	Sun, 15 Dec 2019 12:15:37 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9632B86E5A;
+	Sun, 15 Dec 2019 12:17:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id t4+BeGNpqTf5; Sun, 15 Dec 2019 12:15:36 +0000 (UTC)
+	with ESMTP id AeJBUGOnkLsu; Sun, 15 Dec 2019 12:17:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3CBDA86C11;
-	Sun, 15 Dec 2019 12:15:36 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B8B9C86C11;
+	Sun, 15 Dec 2019 12:17:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 19A32C077D;
-	Sun, 15 Dec 2019 12:15:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A4972C077D;
+	Sun, 15 Dec 2019 12:17:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 50A90C077D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 47368C077D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 12:15:34 +0000 (UTC)
+ Sun, 15 Dec 2019 12:17:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3C9D286E59
+ by whitealder.osuosl.org (Postfix) with ESMTP id 33F5686E59
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 12:15:34 +0000 (UTC)
+ Sun, 15 Dec 2019 12:17:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dRze5IXQoTle
+ with ESMTP id Xmfvdr1AUVid
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 12:15:33 +0000 (UTC)
+ Sun, 15 Dec 2019 12:17:02 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5D51486C11
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 5499586C11
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 12:15:33 +0000 (UTC)
+ Sun, 15 Dec 2019 12:17:02 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B38F120866;
- Sun, 15 Dec 2019 12:15:32 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B018E20726;
+ Sun, 15 Dec 2019 12:17:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576412133;
- bh=YZe/bmgMtGF3RxFzl2zj4QYjw7NjIa+swL7Gz+olT8s=;
+ s=default; t=1576412222;
+ bh=lS4oeH/LxENdTBnagfsV5TCg65CozKVEeSfU2nGbNSo=;
  h=Subject:To:Cc:From:Date:From;
- b=YVpkc9ZoVSnOEJcOMaKEhoejt0bxOnY+GyZcyYSwlW58mp/5jACScGV0NJu8qfwR4
- L4lQBeb3w/1Zp5L7SN80VZxyjm6bRdX8Eru7maCgxY+jMrIndRTAcEtcn0b4FGC2yj
- lwEBS4hje8mqX3RIaGBAXlni9HjYwPBU9XVPP3TY=
+ b=tMJxGgc+BOaLusAzPgm6Sib8X2t3P4J/J3SlnsBwTjx+Mh0F/Olvruk7bSPt5DJkR
+ r8TEuhJbNAHUcPhHw/5IncWrIC6XMN9HzLlI4YTqVF/NiEpmV3kVpSJ/ShiUrzGCQS
+ 2nlnPP+DXV155Ew/g+3UX8m8OsY+1QgGaC9gsa04=
 Subject: Patch "virtio-balloon: fix managed page counts when migrating pages
- between zones" has been added to the 4.19-stable tree
+ between zones" has been added to the 5.3-stable tree
 To: akpm@linux-foundation.org, david@redhat.com, gregkh@linuxfoundation.org,
  imammedo@redhat.com, jasowang@redhat.com, liuj97@gmail.com, mst@redhat.com,
  virtualization@lists.linux-foundation.org, yuhuang@redhat.com
 From: <gregkh@linuxfoundation.org>
-Date: Sun, 15 Dec 2019 13:13:17 +0100
-Message-ID: <1576411997227151@kroah.com>
+Date: Sun, 15 Dec 2019 13:13:47 +0100
+Message-ID: <15764120273623@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
@@ -84,12 +84,12 @@ This is a note to let you know that I've just added the patch titled
 
     virtio-balloon: fix managed page counts when migrating pages between zones
 
-to the 4.19-stable tree which can be found at:
+to the 5.3-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      virtio-balloon-fix-managed-page-counts-when-migrating-pages-between-zones.patch
-and it can be found in the queue-4.19 subdirectory.
+and it can be found in the queue-5.3 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -236,7 +236,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/virtio/virtio_balloon.c
 +++ b/drivers/virtio/virtio_balloon.c
-@@ -468,6 +468,17 @@ static int virtballoon_migratepage(struc
+@@ -721,6 +721,17 @@ static int virtballoon_migratepage(struc
  
  	get_page(newpage); /* balloon reference */
  
@@ -258,7 +258,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from david@redhat.com are
 
-queue-4.19/virtio-balloon-fix-managed-page-counts-when-migrating-pages-between-zones.patch
+queue-5.3/virtio-balloon-fix-managed-page-counts-when-migrating-pages-between-zones.patch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
