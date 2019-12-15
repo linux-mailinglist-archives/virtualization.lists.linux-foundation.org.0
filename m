@@ -1,64 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68AD611F767
-	for <lists.virtualization@lfdr.de>; Sun, 15 Dec 2019 12:22:29 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id BBC1B11F79B
+	for <lists.virtualization@lfdr.de>; Sun, 15 Dec 2019 13:13:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D5BFF86216;
-	Sun, 15 Dec 2019 11:22:27 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6DA1787E4A;
+	Sun, 15 Dec 2019 12:13:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OI_BfK2lchNU; Sun, 15 Dec 2019 11:22:27 +0000 (UTC)
+	with ESMTP id k7hFgc63ezu1; Sun, 15 Dec 2019 12:13:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0C499861F9;
-	Sun, 15 Dec 2019 11:22:27 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 72AA487E55;
+	Sun, 15 Dec 2019 12:13:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F295DC077D;
-	Sun, 15 Dec 2019 11:22:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 51B44C077D;
+	Sun, 15 Dec 2019 12:13:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 38953C077D
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5D73AC077D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 11:22:25 +0000 (UTC)
+ Sun, 15 Dec 2019 12:13:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 22721861FE
+ by whitealder.osuosl.org (Postfix) with ESMTP id 45ED0855F1
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 11:22:25 +0000 (UTC)
+ Sun, 15 Dec 2019 12:13:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AgXOSHC_6X5e
+ with ESMTP id UBs3iYtdOKyM
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 11:22:23 +0000 (UTC)
+ Sun, 15 Dec 2019 12:13:03 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3BE2A861F9
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 0ED6C855D9
  for <virtualization@lists.linux-foundation.org>;
- Sun, 15 Dec 2019 11:22:23 +0000 (UTC)
+ Sun, 15 Dec 2019 12:13:03 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5FFDA206CB;
- Sun, 15 Dec 2019 11:22:22 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 51F9524654;
+ Sun, 15 Dec 2019 12:13:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576408943;
- bh=vmJ/uEWZKhgPKx/fMc28Oe5eOBv3jPGxp6jz89KQDhU=;
+ s=default; t=1576411982;
+ bh=XIPAMyby0Huf8iXcu/nveRW3kFuBTP3bygwFbp1B/YA=;
  h=Subject:To:Cc:From:Date:From;
- b=GeLbveTL6Kkdo2CSXcZRYAy8pEKVybyIR34DPpVvRpzr24CKnyCvOona/+EqTtHKt
- CfnjcWEEVdp9u4YJQKp8oBWLjXOiTdLZzU9/8oFVH8Nlbrh8Kx0vKCttnETeA6xqUY
- Bl2PElw9af8HWDfmCLWIbf+xAdmLiK1P13LVZqwg=
+ b=Rrx3dUJMuYB2Wqv8oLCwuDqVddy2eEB0x3Upy3uGA2qs5hK8vPMu3r9eK6Hv3Zveg
+ dWNWcNIGdO6m3fQlx+1/+qDWmKfXQgDiZ3uHoKxne+SSPfnFZUztobDHNPkZlWDq6b
+ Is18fJ2I8hShGsJaO5u5421u+4mvfVBTxJGX42OQ=
 Subject: Patch "virtio-balloon: fix managed page counts when migrating pages
- between zones" has been added to the 4.4-stable tree
+ between zones" has been added to the 4.9-stable tree
 To: akpm@linux-foundation.org, david@redhat.com, gregkh@linuxfoundation.org,
  imammedo@redhat.com, jasowang@redhat.com, liuj97@gmail.com, mst@redhat.com,
  virtualization@lists.linux-foundation.org, yuhuang@redhat.com
 From: <gregkh@linuxfoundation.org>
-Date: Sun, 15 Dec 2019 12:21:52 +0100
-Message-ID: <157640891212896@kroah.com>
+Date: Sun, 15 Dec 2019 13:12:28 +0100
+Message-ID: <157641194814771@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
@@ -84,12 +84,12 @@ This is a note to let you know that I've just added the patch titled
 
     virtio-balloon: fix managed page counts when migrating pages between zones
 
-to the 4.4-stable tree which can be found at:
+to the 4.9-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      virtio-balloon-fix-managed-page-counts-when-migrating-pages-between-zones.patch
-and it can be found in the queue-4.4 subdirectory.
+and it can be found in the queue-4.9 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -236,7 +236,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/virtio/virtio_balloon.c
 +++ b/drivers/virtio/virtio_balloon.c
-@@ -468,6 +468,17 @@ static int virtballoon_migratepage(struc
+@@ -482,6 +482,17 @@ static int virtballoon_migratepage(struc
  
  	get_page(newpage); /* balloon reference */
  
@@ -258,7 +258,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from david@redhat.com are
 
-queue-4.4/virtio-balloon-fix-managed-page-counts-when-migrating-pages-between-zones.patch
+queue-4.9/virtio-balloon-fix-managed-page-counts-when-migrating-pages-between-zones.patch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
