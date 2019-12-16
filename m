@@ -1,71 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54FEB1214F2
-	for <lists.virtualization@lfdr.de>; Mon, 16 Dec 2019 19:16:44 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05FD3121F0C
+	for <lists.virtualization@lfdr.de>; Tue, 17 Dec 2019 00:39:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id DDD7886064;
-	Mon, 16 Dec 2019 18:16:42 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 870D586A0F;
+	Mon, 16 Dec 2019 23:39:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gXc+xFJuaiFV; Mon, 16 Dec 2019 18:16:42 +0000 (UTC)
+	with ESMTP id Kg-MebymKhJr; Mon, 16 Dec 2019 23:39:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id AF55586443;
-	Mon, 16 Dec 2019 18:16:42 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E908586538;
+	Mon, 16 Dec 2019 23:39:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 941A8C077D;
-	Mon, 16 Dec 2019 18:16:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D6150C077D;
+	Mon, 16 Dec 2019 23:39:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3AC6DC077D
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C42E4C077D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Dec 2019 18:16:41 +0000 (UTC)
+ Mon, 16 Dec 2019 23:39:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 2980C86443
+ by silver.osuosl.org (Postfix) with ESMTP id AD32622708
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Dec 2019 18:16:41 +0000 (UTC)
+ Mon, 16 Dec 2019 23:39:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mpRhTzUvvmIh
+ with ESMTP id 3fbjzYz2Bsza
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Dec 2019 18:16:41 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 0C4D486064
+ Mon, 16 Dec 2019 23:39:03 +0000 (UTC)
+X-Greylist: delayed 00:24:30 by SQLgrey-1.7.6
+Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
+ [209.85.216.65])
+ by silver.osuosl.org (Postfix) with ESMTPS id E046B22703
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Dec 2019 18:16:41 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5BA93206E0;
- Mon, 16 Dec 2019 18:16:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576520200;
- bh=DP4fkJYu/ZUk3CHqJSESzZrnvSYI605vdEchAwGOeKE=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=b4/6sUoRYehT2ZRDqx2GM0BWJ5nGLl/mpbkoc3elQ5jb8HFdwDuvvVbGyXKmkWw6V
- 8T8uUgUjaEl4USkB94WdVoeWKjhwlLY+PNkaGp/UY8hEAxGKTVIcQ+/zhR62mjLKHB
- 9rZ1d9H+9qF32jtsBnDLKOxioXJhFhPrOC3rgGHs=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.4 058/177] virtio-balloon: fix managed page counts when
- migrating pages between zones
-Date: Mon, 16 Dec 2019 18:48:34 +0100
-Message-Id: <20191216174831.218991709@linuxfoundation.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20191216174811.158424118@linuxfoundation.org>
-References: <20191216174811.158424118@linuxfoundation.org>
-User-Agent: quilt/0.66
+ Mon, 16 Dec 2019 23:39:03 +0000 (UTC)
+Received: by mail-pj1-f65.google.com with SMTP id j11so3713724pjs.1
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 16 Dec 2019 15:39:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hh4xJUGnwtI6vTmvxaUgzW0nF+oGlVMU5O+ceMGA88M=;
+ b=SgzCCyoQgX+qcPm/DKUK17Os5yRMoipT1rwpuulJYqCs/xRfkx/EfDC1moVtI6wpBi
+ 8IP/o2G0A+v/q8yQD1fMABfUVWNiIjm8rs91U5+EXiXK1ElxTV6rwifM99Girb803Mbr
+ Y+1KLgN0EVhfhaUgyFCUN+yT1net7VFKxsWgI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hh4xJUGnwtI6vTmvxaUgzW0nF+oGlVMU5O+ceMGA88M=;
+ b=Y1dAO2p+TIvdy2exeJRO0rNQYV44OEo87b2guJMNfS9s5cavasYm9opUooHsm1tKSO
+ OGgl76GFL2XiePkh9C0CxZD3sopbHdecttnm2IbUmPefq5Ivqwskcr4uwO7NEX7ncP24
+ UOuCkX0upO3nNrbI72Xx0ANo2pclIXUQrWzXv5fQCV8FP7qcgyqku8xLXq1NucYJGUA+
+ H8XsAjwGSDeWgRB2bjcH1F8n32mkjisyW96mwPJ2rDzqePkfQzlEtmduG5wzDqi+s9eN
+ 5Wg522cQgbIHBor4urj7zgTxrNjt31sUQKMtldhDyCzMEGyiXwtKPNudIGkg2DJ78JAz
+ u+nQ==
+X-Gm-Message-State: APjAAAWjTmnl4yGwQCEjHGR6p/iVsHu1P7l0QIVyX4xMlqPBhaD2PeoF
+ CK/y6n0YNUDKi5jDKCRsdU6lPbchfeQ=
+X-Google-Smtp-Source: APXvYqxOZHjGu9ft+ASNRTxZGhrHVLXROKs4n9qFX/OnSQbkgrxElNjjTHcV0mVi8HZCDGvGAS+LCA==
+X-Received: by 2002:a17:902:8bc5:: with SMTP id
+ r5mr19585315plo.189.1576538072271; 
+ Mon, 16 Dec 2019 15:14:32 -0800 (PST)
+Received: from localhost ([2620:15c:202:201:bfdf:e7dd:b034:6ac7])
+ by smtp.gmail.com with ESMTPSA id w8sm23168802pfn.186.2019.12.16.15.14.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Dec 2019 15:14:31 -0800 (PST)
+From: Daniel Verkamp <dverkamp@chromium.org>
+To: virtualization@lists.linux-foundation.org
+Subject: [PATCH] virtio-balloon: request nvqs based on features
+Date: Mon, 16 Dec 2019 15:14:29 -0800
+Message-Id: <20191216231429.38202-1-dverkamp@chromium.org>
+X-Mailer: git-send-email 2.24.1.735.g03f4e72817-goog
 MIME-Version: 1.0
-Cc: Yumei Huang <yuhuang@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Igor Mammedov <imammedo@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>, Jiang Liu <liuj97@gmail.com>
+Cc: Liang Li <liang.z.li@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,161 +94,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: David Hildenbrand <david@redhat.com>
+After 86a559787e6f ("virtio-balloon: VIRTIO_BALLOON_F_FREE_PAGE_HINT"),
+the virtio-balloon device unconditionally specifies 4 virtqueues as the
+argument to find_vqs(), which means that 5 MSI-X vectors are required in
+order to assign one vector per VQ plus one for configuration changes.
 
-commit 63341ab03706e11a31e3dd8ccc0fbc9beaf723f0 upstream.
+However, in cases where the virtio device only provides exactly as many
+MSI-X vectors as required for the features it implements (e.g. 3 for the
+basic configuration of inflate + deflate + config), this results in the
+selection of the fallback configuration where one interrupt vector is
+used for all VQs instead of having one VQ per vector.
 
-In case we have to migrate a ballon page to a newpage of another zone, the
-managed page count of both zones is wrong. Paired with memory offlining
-(which will adjust the managed page count), we can trigger kernel crashes
-and all kinds of different symptoms.
+Restore the logic that chose nvqs conditionally based on enabled
+features, which was removed as part of the aforementioned commit.
+This is slightly more complex than just incrementing a counter of the
+number of VQs, since the queue for a given feature is assigned a fixed
+index.
 
-One way to reproduce:
-1. Start a QEMU guest with 4GB, no NUMA
-2. Hotplug a 1GB DIMM and online the memory to ZONE_NORMAL
-3. Inflate the balloon to 1GB
-4. Unplug the DIMM (be quick, otherwise unmovable data ends up on it)
-5. Observe /proc/zoneinfo
-  Node 0, zone   Normal
-    pages free     16810
-          min      24848885473806
-          low      18471592959183339
-          high     36918337032892872
-          spanned  262144
-          present  262144
-          managed  18446744073709533486
-6. Do anything that requires some memory (e.g., inflate the balloon some
-more). The OOM goes crazy and the system crashes
-  [  238.324946] Out of memory: Killed process 537 (login) total-vm:27584kB, anon-rss:860kB, file-rss:0kB, shmem-rss:00
-  [  238.338585] systemd invoked oom-killer: gfp_mask=0x100cca(GFP_HIGHUSER_MOVABLE), order=0, oom_score_adj=0
-  [  238.339420] CPU: 0 PID: 1 Comm: systemd Tainted: G      D W         5.4.0-next-20191204+ #75
-  [  238.340139] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.12.0-59-gc9ba5276e321-prebuilt.qemu4
-  [  238.341121] Call Trace:
-  [  238.341337]  dump_stack+0x8f/0xd0
-  [  238.341630]  dump_header+0x61/0x5ea
-  [  238.341942]  oom_kill_process.cold+0xb/0x10
-  [  238.342299]  out_of_memory+0x24d/0x5a0
-  [  238.342625]  __alloc_pages_slowpath+0xd12/0x1020
-  [  238.343024]  __alloc_pages_nodemask+0x391/0x410
-  [  238.343407]  pagecache_get_page+0xc3/0x3a0
-  [  238.343757]  filemap_fault+0x804/0xc30
-  [  238.344083]  ? ext4_filemap_fault+0x28/0x42
-  [  238.344444]  ext4_filemap_fault+0x30/0x42
-  [  238.344789]  __do_fault+0x37/0x1a0
-  [  238.345087]  __handle_mm_fault+0x104d/0x1ab0
-  [  238.345450]  handle_mm_fault+0x169/0x360
-  [  238.345790]  do_user_addr_fault+0x20d/0x490
-  [  238.346154]  do_page_fault+0x31/0x210
-  [  238.346468]  async_page_fault+0x43/0x50
-  [  238.346797] RIP: 0033:0x7f47eba4197e
-  [  238.347110] Code: Bad RIP value.
-  [  238.347387] RSP: 002b:00007ffd7c0c1890 EFLAGS: 00010293
-  [  238.347834] RAX: 0000000000000002 RBX: 000055d196a20a20 RCX: 00007f47eba4197e
-  [  238.348437] RDX: 0000000000000033 RSI: 00007ffd7c0c18c0 RDI: 0000000000000004
-  [  238.349047] RBP: 00007ffd7c0c1c20 R08: 0000000000000000 R09: 0000000000000033
-  [  238.349660] R10: 00000000ffffffff R11: 0000000000000293 R12: 0000000000000001
-  [  238.350261] R13: ffffffffffffffff R14: 0000000000000000 R15: 00007ffd7c0c18c0
-  [  238.350878] Mem-Info:
-  [  238.351085] active_anon:3121 inactive_anon:51 isolated_anon:0
-  [  238.351085]  active_file:12 inactive_file:7 isolated_file:0
-  [  238.351085]  unevictable:0 dirty:0 writeback:0 unstable:0
-  [  238.351085]  slab_reclaimable:5565 slab_unreclaimable:10170
-  [  238.351085]  mapped:3 shmem:111 pagetables:155 bounce:0
-  [  238.351085]  free:720717 free_pcp:2 free_cma:0
-  [  238.353757] Node 0 active_anon:12484kB inactive_anon:204kB active_file:48kB inactive_file:28kB unevictable:0kB iss
-  [  238.355979] Node 0 DMA free:11556kB min:36kB low:48kB high:60kB reserved_highatomic:0KB active_anon:152kB inactivB
-  [  238.358345] lowmem_reserve[]: 0 2955 2884 2884 2884
-  [  238.358761] Node 0 DMA32 free:2677864kB min:7004kB low:10028kB high:13052kB reserved_highatomic:0KB active_anon:0B
-  [  238.361202] lowmem_reserve[]: 0 0 72057594037927865 72057594037927865 72057594037927865
-  [  238.361888] Node 0 Normal free:193448kB min:99395541895224kB low:73886371836733356kB high:147673348131571488kB reB
-  [  238.364765] lowmem_reserve[]: 0 0 0 0 0
-  [  238.365101] Node 0 DMA: 7*4kB (U) 5*8kB (UE) 6*16kB (UME) 2*32kB (UM) 1*64kB (U) 2*128kB (UE) 3*256kB (UME) 2*512B
-  [  238.366379] Node 0 DMA32: 0*4kB 1*8kB (U) 2*16kB (UM) 2*32kB (UM) 2*64kB (UM) 1*128kB (U) 1*256kB (U) 1*512kB (U)B
-  [  238.367654] Node 0 Normal: 1985*4kB (UME) 1321*8kB (UME) 844*16kB (UME) 524*32kB (UME) 300*64kB (UME) 138*128kB (B
-  [  238.369184] Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB
-  [  238.369915] 130 total pagecache pages
-  [  238.370241] 0 pages in swap cache
-  [  238.370533] Swap cache stats: add 0, delete 0, find 0/0
-  [  238.370981] Free swap  = 0kB
-  [  238.371239] Total swap = 0kB
-  [  238.371488] 1048445 pages RAM
-  [  238.371756] 0 pages HighMem/MovableOnly
-  [  238.372090] 306992 pages reserved
-  [  238.372376] 0 pages cma reserved
-  [  238.372661] 0 pages hwpoisoned
-
-In another instance (older kernel), I was able to observe this
-(negative page count :/):
-  [  180.896971] Offlined Pages 32768
-  [  182.667462] Offlined Pages 32768
-  [  184.408117] Offlined Pages 32768
-  [  186.026321] Offlined Pages 32768
-  [  187.684861] Offlined Pages 32768
-  [  189.227013] Offlined Pages 32768
-  [  190.830303] Offlined Pages 32768
-  [  190.833071] Built 1 zonelists, mobility grouping on.  Total pages: -36920272750453009
-
-In another instance (older kernel), I was no longer able to start any
-process:
-  [root@vm ~]# [  214.348068] Offlined Pages 32768
-  [  215.973009] Offlined Pages 32768
-  cat /proc/meminfo
-  -bash: fork: Cannot allocate memory
-  [root@vm ~]# cat /proc/meminfo
-  -bash: fork: Cannot allocate memory
-
-Fix it by properly adjusting the managed page count when migrating if
-the zone changed. The managed page count of the zones now looks after
-unplug of the DIMM (and after deflating the balloon) just like before
-inflating the balloon (and plugging+onlining the DIMM).
-
-We'll temporarily modify the totalram page count. If this ever becomes a
-problem, we can fine tune by providing helpers that don't touch
-the totalram pages (e.g., adjust_zone_managed_page_count()).
-
-Please note that fixing up the managed page count is only necessary when
-we adjusted the managed page count when inflating - only if we
-don't have VIRTIO_BALLOON_F_DEFLATE_ON_OOM. With that feature, the
-managed page count is not touched when inflating/deflating.
-
-Reported-by: Yumei Huang <yuhuang@redhat.com>
-Fixes: 3dcc0571cd64 ("mm: correctly update zone->managed_pages")
-Cc: <stable@vger.kernel.org> # v3.11+
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Jiang Liu <liuj97@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Igor Mammedov <imammedo@redhat.com>
-Cc: virtualization@lists.linux-foundation.org
-Signed-off-by: David Hildenbrand <david@redhat.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-
+Signed-off-by: Daniel Verkamp <dverkamp@chromium.org>
 ---
- drivers/virtio/virtio_balloon.c |   11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/virtio/virtio_balloon.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
+diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+index 93f995f6cf36..67c6318d77c7 100644
 --- a/drivers/virtio/virtio_balloon.c
 +++ b/drivers/virtio/virtio_balloon.c
-@@ -721,6 +721,17 @@ static int virtballoon_migratepage(struc
+@@ -465,6 +465,7 @@ static int init_vqs(struct virtio_balloon *vb)
+ 	vq_callback_t *callbacks[VIRTIO_BALLOON_VQ_MAX];
+ 	const char *names[VIRTIO_BALLOON_VQ_MAX];
+ 	int err;
++	unsigned nvqs;
  
- 	get_page(newpage); /* balloon reference */
- 
-+	/*
-+	  * When we migrate a page to a different zone and adjusted the
-+	  * managed page count when inflating, we have to fixup the count of
-+	  * both involved zones.
-+	  */
-+	if (!virtio_has_feature(vb->vdev, VIRTIO_BALLOON_F_DEFLATE_ON_OOM) &&
-+	    page_zone(page) != page_zone(newpage)) {
-+		adjust_managed_page_count(page, 1);
-+		adjust_managed_page_count(newpage, -1);
-+	}
+ 	/*
+ 	 * Inflateq and deflateq are used unconditionally. The names[]
+@@ -475,20 +476,24 @@ static int init_vqs(struct virtio_balloon *vb)
+ 	names[VIRTIO_BALLOON_VQ_INFLATE] = "inflate";
+ 	callbacks[VIRTIO_BALLOON_VQ_DEFLATE] = balloon_ack;
+ 	names[VIRTIO_BALLOON_VQ_DEFLATE] = "deflate";
++	nvqs = VIRTIO_BALLOON_VQ_DEFLATE + 1;
 +
- 	/* balloon's page migration 1st step  -- inflate "newpage" */
- 	spin_lock_irqsave(&vb_dev_info->pages_lock, flags);
- 	balloon_page_insert(vb_dev_info, newpage);
-
+ 	names[VIRTIO_BALLOON_VQ_STATS] = NULL;
+ 	names[VIRTIO_BALLOON_VQ_FREE_PAGE] = NULL;
+ 
+ 	if (virtio_has_feature(vb->vdev, VIRTIO_BALLOON_F_STATS_VQ)) {
+ 		names[VIRTIO_BALLOON_VQ_STATS] = "stats";
+ 		callbacks[VIRTIO_BALLOON_VQ_STATS] = stats_request;
++		nvqs = VIRTIO_BALLOON_VQ_STATS + 1;
+ 	}
+ 
+ 	if (virtio_has_feature(vb->vdev, VIRTIO_BALLOON_F_FREE_PAGE_HINT)) {
+ 		names[VIRTIO_BALLOON_VQ_FREE_PAGE] = "free_page_vq";
+ 		callbacks[VIRTIO_BALLOON_VQ_FREE_PAGE] = NULL;
++		nvqs = VIRTIO_BALLOON_VQ_FREE_PAGE + 1;
+ 	}
+ 
+-	err = vb->vdev->config->find_vqs(vb->vdev, VIRTIO_BALLOON_VQ_MAX,
++	err = vb->vdev->config->find_vqs(vb->vdev, nvqs,
+ 					 vqs, callbacks, names, NULL, NULL);
+ 	if (err)
+ 		return err;
+-- 
+2.24.1.735.g03f4e72817-goog
 
 _______________________________________________
 Virtualization mailing list
