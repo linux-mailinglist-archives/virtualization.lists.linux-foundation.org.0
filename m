@@ -1,74 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56BF212502D
-	for <lists.virtualization@lfdr.de>; Wed, 18 Dec 2019 19:07:50 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4770512502E
+	for <lists.virtualization@lfdr.de>; Wed, 18 Dec 2019 19:07:56 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0F5B22014B;
-	Wed, 18 Dec 2019 18:07:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id F231D84EDB;
+	Wed, 18 Dec 2019 18:07:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yY7GIrxeMOQh; Wed, 18 Dec 2019 18:07:47 +0000 (UTC)
+	with ESMTP id KuHQazxfoUTl; Wed, 18 Dec 2019 18:07:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id E2D5622920;
-	Wed, 18 Dec 2019 18:07:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2E99A84B75;
+	Wed, 18 Dec 2019 18:07:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BD8B7C077D;
-	Wed, 18 Dec 2019 18:07:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 14FE0C077D;
+	Wed, 18 Dec 2019 18:07:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3EBD7C077D
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B92CEC077D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Dec 2019 18:07:46 +0000 (UTC)
+ Wed, 18 Dec 2019 18:07:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3B48E8584F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id A7E2884A6C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Dec 2019 18:07:46 +0000 (UTC)
+ Wed, 18 Dec 2019 18:07:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ti3JbZr04tl1
+ with ESMTP id dSNJo8XzCnzN
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Dec 2019 18:07:44 +0000 (UTC)
+ Wed, 18 Dec 2019 18:07:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 9B47F84F69
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 7A4FA849FA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Dec 2019 18:07:44 +0000 (UTC)
+ Wed, 18 Dec 2019 18:07:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576692463;
+ s=mimecast20190719; t=1576692470;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mub2wd3Ra/02EpcL0dbiRF0hcLXprsOY9Pb/jiP+caQ=;
- b=XgPWDXGyuxiG6+ynoVFwTG5w9eO01IEA2BE7AKNGXCqbkyHr3EPRgs4L4dxCUMbs0rIZGX
- HCjsHKoVikJc+Jhtk8/41gt1PPSzpJVE44neTz6n8pyf/NfZS+DpJbev6stxniquwRuQfc
- 3AE/SPbrUWyOykTpjehj7fxk60hC/eY=
+ bh=Ba+jdilHJOq5z4M9yN1rn/HCKx5aiHP0bqMQXqZ4gWs=;
+ b=GraQRKj9TDDWyxSB/3Ax3/noKW9KtdCWNjZvuCtEaGDWPiDNfgl/3tc+NjZpVqx9sNwrF5
+ GQdXVrQwXheqzjyEMkfLRx4D6fIZlDJqhZc6Knph9fzQf1sGNcoqG6Hj2WD4SbG3EOzEXb
+ dL87ICLd2jNPydnxTTK+FFZTqfRF0sU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-85-OGXhYp4LOFqXDxkkZZZRtQ-1; Wed, 18 Dec 2019 13:07:39 -0500
-X-MC-Unique: OGXhYp4LOFqXDxkkZZZRtQ-1
+ us-mta-386-674jwpI1NKi7qts0unCKJg-1; Wed, 18 Dec 2019 13:07:45 -0500
+X-MC-Unique: 674jwpI1NKi7qts0unCKJg-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C650F1088392;
- Wed, 18 Dec 2019 18:07:37 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D383810883A1;
+ Wed, 18 Dec 2019 18:07:43 +0000 (UTC)
 Received: from steredhat.redhat.com (ovpn-117-218.ams2.redhat.com
  [10.36.117.218])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A5DFF5D9E2;
- Wed, 18 Dec 2019 18:07:35 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2622A5D9E5;
+ Wed, 18 Dec 2019 18:07:37 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: davem@davemloft.net
-Subject: [PATCH net-next v3 06/11] VSOCK: add send_byte()/recv_byte() test
- utilities
-Date: Wed, 18 Dec 2019 19:07:03 +0100
-Message-Id: <20191218180708.120337-7-sgarzare@redhat.com>
+Subject: [PATCH net-next v3 07/11] VSOCK: add AF_VSOCK test cases
+Date: Wed, 18 Dec 2019 19:07:04 +0100
+Message-Id: <20191218180708.120337-8-sgarzare@redhat.com>
 In-Reply-To: <20191218180708.120337-1-sgarzare@redhat.com>
 References: <20191218180708.120337-1-sgarzare@redhat.com>
 MIME-Version: 1.0
@@ -95,155 +94,380 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Stefan Hajnoczi <stefanha@redhat.com>
 
-Test cases will want to transfer data.  This patch adds utility
-functions to do this.
+The vsock_test.c program runs a test suite of AF_VSOCK test cases.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
-v3:
- * check the byte received in the recv_byte()
- * use send(2)/recv(2) instead of write(2)/read(2) to test also flags
-   (e.g. MSG_PEEK)
+v2:
+ * Drop unnecessary includes [Stefan]
+ * Aligned with the current SPDX [Stefano]
+ * Set MULTICONN_NFDS to 100 [Stefano]
+ * Change (i % 1) in (i % 2) in the 'multiconn' test [Stefano]
 ---
- tools/testing/vsock/util.c | 103 +++++++++++++++++++++++++++++++++++++
- tools/testing/vsock/util.h |   2 +
- 2 files changed, 105 insertions(+)
+ tools/testing/vsock/.gitignore   |   1 +
+ tools/testing/vsock/Makefile     |   5 +-
+ tools/testing/vsock/README       |   1 +
+ tools/testing/vsock/vsock_test.c | 312 +++++++++++++++++++++++++++++++
+ 4 files changed, 317 insertions(+), 2 deletions(-)
+ create mode 100644 tools/testing/vsock/vsock_test.c
 
-diff --git a/tools/testing/vsock/util.c b/tools/testing/vsock/util.c
-index 4280a56ba677..6026ef3ce512 100644
---- a/tools/testing/vsock/util.c
-+++ b/tools/testing/vsock/util.c
-@@ -9,6 +9,7 @@
+diff --git a/tools/testing/vsock/.gitignore b/tools/testing/vsock/.gitignore
+index dc5f11faf530..7f7a2ccc30c4 100644
+--- a/tools/testing/vsock/.gitignore
++++ b/tools/testing/vsock/.gitignore
+@@ -1,2 +1,3 @@
+ *.d
++vsock_test
+ vsock_diag_test
+diff --git a/tools/testing/vsock/Makefile b/tools/testing/vsock/Makefile
+index a916878a2d8c..f8293c6910c9 100644
+--- a/tools/testing/vsock/Makefile
++++ b/tools/testing/vsock/Makefile
+@@ -1,10 +1,11 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ all: test
+-test: vsock_diag_test
++test: vsock_test vsock_diag_test
++vsock_test: vsock_test.o timeout.o control.o util.o
+ vsock_diag_test: vsock_diag_test.o timeout.o control.o util.o
  
- #include <errno.h>
- #include <stdio.h>
-+#include <stdint.h>
- #include <stdlib.h>
- #include <signal.h>
- #include <unistd.h>
-@@ -149,6 +150,108 @@ int vsock_stream_accept(unsigned int cid, unsigned int port,
- 	return client_fd;
- }
+ CFLAGS += -g -O2 -Werror -Wall -I. -I../../include -I../../../usr/include -Wno-pointer-sign -fno-strict-overflow -fno-strict-aliasing -fno-common -MMD -U_FORTIFY_SOURCE -D_GNU_SOURCE
+ .PHONY: all test clean
+ clean:
+-	${RM} *.o *.d vsock_diag_test
++	${RM} *.o *.d vsock_test vsock_diag_test
+ -include *.d
+diff --git a/tools/testing/vsock/README b/tools/testing/vsock/README
+index cf7dc64273bf..4d5045e7d2c3 100644
+--- a/tools/testing/vsock/README
++++ b/tools/testing/vsock/README
+@@ -5,6 +5,7 @@ Hyper-V.
  
-+/* Transmit one byte and check the return value.
+ The following tests are available:
+ 
++  * vsock_test - core AF_VSOCK socket functionality
+   * vsock_diag_test - vsock_diag.ko module for listing open sockets
+ 
+ The following prerequisite steps are not automated and must be performed prior
+diff --git a/tools/testing/vsock/vsock_test.c b/tools/testing/vsock/vsock_test.c
+new file mode 100644
+index 000000000000..fae8ddc3ef72
+--- /dev/null
++++ b/tools/testing/vsock/vsock_test.c
+@@ -0,0 +1,312 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * vsock_test - vsock.ko test suite
 + *
-+ * expected_ret:
-+ *  <0 Negative errno (for testing errors)
-+ *   0 End-of-file
-+ *   1 Success
++ * Copyright (C) 2017 Red Hat, Inc.
++ *
++ * Author: Stefan Hajnoczi <stefanha@redhat.com>
 + */
-+void send_byte(int fd, int expected_ret, int flags)
++
++#include <getopt.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <errno.h>
++#include <unistd.h>
++
++#include "timeout.h"
++#include "control.h"
++#include "util.h"
++
++static void test_stream_connection_reset(const struct test_opts *opts)
 +{
-+	const uint8_t byte = 'A';
-+	ssize_t nwritten;
++	union {
++		struct sockaddr sa;
++		struct sockaddr_vm svm;
++	} addr = {
++		.svm = {
++			.svm_family = AF_VSOCK,
++			.svm_port = 1234,
++			.svm_cid = opts->peer_cid,
++		},
++	};
++	int ret;
++	int fd;
++
++	fd = socket(AF_VSOCK, SOCK_STREAM, 0);
 +
 +	timeout_begin(TIMEOUT);
 +	do {
-+		nwritten = send(fd, &byte, sizeof(byte), flags);
-+		timeout_check("write");
-+	} while (nwritten < 0 && errno == EINTR);
++		ret = connect(fd, &addr.sa, sizeof(addr.svm));
++		timeout_check("connect");
++	} while (ret < 0 && errno == EINTR);
 +	timeout_end();
 +
-+	if (expected_ret < 0) {
-+		if (nwritten != -1) {
-+			fprintf(stderr, "bogus send(2) return value %zd\n",
-+				nwritten);
-+			exit(EXIT_FAILURE);
-+		}
-+		if (errno != -expected_ret) {
-+			perror("write");
-+			exit(EXIT_FAILURE);
-+		}
-+		return;
++	if (ret != -1) {
++		fprintf(stderr, "expected connect(2) failure, got %d\n", ret);
++		exit(EXIT_FAILURE);
++	}
++	if (errno != ECONNRESET) {
++		fprintf(stderr, "unexpected connect(2) errno %d\n", errno);
++		exit(EXIT_FAILURE);
 +	}
 +
-+	if (nwritten < 0) {
-+		perror("write");
-+		exit(EXIT_FAILURE);
-+	}
-+	if (nwritten == 0) {
-+		if (expected_ret == 0)
-+			return;
-+
-+		fprintf(stderr, "unexpected EOF while sending byte\n");
-+		exit(EXIT_FAILURE);
-+	}
-+	if (nwritten != sizeof(byte)) {
-+		fprintf(stderr, "bogus send(2) return value %zd\n", nwritten);
-+		exit(EXIT_FAILURE);
-+	}
++	close(fd);
 +}
 +
-+/* Receive one byte and check the return value.
-+ *
-+ * expected_ret:
-+ *  <0 Negative errno (for testing errors)
-+ *   0 End-of-file
-+ *   1 Success
-+ */
-+void recv_byte(int fd, int expected_ret, int flags)
++static void test_stream_client_close_client(const struct test_opts *opts)
 +{
-+	uint8_t byte;
-+	ssize_t nread;
++	int fd;
 +
-+	timeout_begin(TIMEOUT);
-+	do {
-+		nread = recv(fd, &byte, sizeof(byte), flags);
-+		timeout_check("read");
-+	} while (nread < 0 && errno == EINTR);
-+	timeout_end();
-+
-+	if (expected_ret < 0) {
-+		if (nread != -1) {
-+			fprintf(stderr, "bogus recv(2) return value %zd\n",
-+				nread);
-+			exit(EXIT_FAILURE);
-+		}
-+		if (errno != -expected_ret) {
-+			perror("read");
-+			exit(EXIT_FAILURE);
-+		}
-+		return;
-+	}
-+
-+	if (nread < 0) {
-+		perror("read");
++	fd = vsock_stream_connect(opts->peer_cid, 1234);
++	if (fd < 0) {
++		perror("connect");
 +		exit(EXIT_FAILURE);
 +	}
-+	if (nread == 0) {
-+		if (expected_ret == 0)
-+			return;
 +
-+		fprintf(stderr, "unexpected EOF while receiving byte\n");
-+		exit(EXIT_FAILURE);
-+	}
-+	if (nread != sizeof(byte)) {
-+		fprintf(stderr, "bogus recv(2) return value %zd\n", nread);
-+		exit(EXIT_FAILURE);
-+	}
-+	if (byte != 'A') {
-+		fprintf(stderr, "unexpected byte read %c\n", byte);
-+		exit(EXIT_FAILURE);
-+	}
++	send_byte(fd, 1, 0);
++	close(fd);
++	control_writeln("CLOSED");
 +}
 +
- /* Run test cases.  The program terminates if a failure occurs. */
- void run_tests(const struct test_case *test_cases,
- 	       const struct test_opts *opts)
-diff --git a/tools/testing/vsock/util.h b/tools/testing/vsock/util.h
-index 1786305cfddd..4df12e4b5ebe 100644
---- a/tools/testing/vsock/util.h
-+++ b/tools/testing/vsock/util.h
-@@ -36,6 +36,8 @@ unsigned int parse_cid(const char *str);
- int vsock_stream_connect(unsigned int cid, unsigned int port);
- int vsock_stream_accept(unsigned int cid, unsigned int port,
- 			struct sockaddr_vm *clientaddrp);
-+void send_byte(int fd, int expected_ret, int flags);
-+void recv_byte(int fd, int expected_ret, int flags);
- void run_tests(const struct test_case *test_cases,
- 	       const struct test_opts *opts);
- 
++static void test_stream_client_close_server(const struct test_opts *opts)
++{
++	int fd;
++
++	fd = vsock_stream_accept(VMADDR_CID_ANY, 1234, NULL);
++	if (fd < 0) {
++		perror("accept");
++		exit(EXIT_FAILURE);
++	}
++
++	control_expectln("CLOSED");
++
++	send_byte(fd, -EPIPE, 0);
++	recv_byte(fd, 1, 0);
++	recv_byte(fd, 0, 0);
++	close(fd);
++}
++
++static void test_stream_server_close_client(const struct test_opts *opts)
++{
++	int fd;
++
++	fd = vsock_stream_connect(opts->peer_cid, 1234);
++	if (fd < 0) {
++		perror("connect");
++		exit(EXIT_FAILURE);
++	}
++
++	control_expectln("CLOSED");
++
++	send_byte(fd, -EPIPE, 0);
++	recv_byte(fd, 1, 0);
++	recv_byte(fd, 0, 0);
++	close(fd);
++}
++
++static void test_stream_server_close_server(const struct test_opts *opts)
++{
++	int fd;
++
++	fd = vsock_stream_accept(VMADDR_CID_ANY, 1234, NULL);
++	if (fd < 0) {
++		perror("accept");
++		exit(EXIT_FAILURE);
++	}
++
++	send_byte(fd, 1, 0);
++	close(fd);
++	control_writeln("CLOSED");
++}
++
++/* With the standard socket sizes, VMCI is able to support about 100
++ * concurrent stream connections.
++ */
++#define MULTICONN_NFDS 100
++
++static void test_stream_multiconn_client(const struct test_opts *opts)
++{
++	int fds[MULTICONN_NFDS];
++	int i;
++
++	for (i = 0; i < MULTICONN_NFDS; i++) {
++		fds[i] = vsock_stream_connect(opts->peer_cid, 1234);
++		if (fds[i] < 0) {
++			perror("connect");
++			exit(EXIT_FAILURE);
++		}
++	}
++
++	for (i = 0; i < MULTICONN_NFDS; i++) {
++		if (i % 2)
++			recv_byte(fds[i], 1, 0);
++		else
++			send_byte(fds[i], 1, 0);
++	}
++
++	for (i = 0; i < MULTICONN_NFDS; i++)
++		close(fds[i]);
++}
++
++static void test_stream_multiconn_server(const struct test_opts *opts)
++{
++	int fds[MULTICONN_NFDS];
++	int i;
++
++	for (i = 0; i < MULTICONN_NFDS; i++) {
++		fds[i] = vsock_stream_accept(VMADDR_CID_ANY, 1234, NULL);
++		if (fds[i] < 0) {
++			perror("accept");
++			exit(EXIT_FAILURE);
++		}
++	}
++
++	for (i = 0; i < MULTICONN_NFDS; i++) {
++		if (i % 2)
++			send_byte(fds[i], 1, 0);
++		else
++			recv_byte(fds[i], 1, 0);
++	}
++
++	for (i = 0; i < MULTICONN_NFDS; i++)
++		close(fds[i]);
++}
++
++static struct test_case test_cases[] = {
++	{
++		.name = "SOCK_STREAM connection reset",
++		.run_client = test_stream_connection_reset,
++	},
++	{
++		.name = "SOCK_STREAM client close",
++		.run_client = test_stream_client_close_client,
++		.run_server = test_stream_client_close_server,
++	},
++	{
++		.name = "SOCK_STREAM server close",
++		.run_client = test_stream_server_close_client,
++		.run_server = test_stream_server_close_server,
++	},
++	{
++		.name = "SOCK_STREAM multiple connections",
++		.run_client = test_stream_multiconn_client,
++		.run_server = test_stream_multiconn_server,
++	},
++	{},
++};
++
++static const char optstring[] = "";
++static const struct option longopts[] = {
++	{
++		.name = "control-host",
++		.has_arg = required_argument,
++		.val = 'H',
++	},
++	{
++		.name = "control-port",
++		.has_arg = required_argument,
++		.val = 'P',
++	},
++	{
++		.name = "mode",
++		.has_arg = required_argument,
++		.val = 'm',
++	},
++	{
++		.name = "peer-cid",
++		.has_arg = required_argument,
++		.val = 'p',
++	},
++	{
++		.name = "help",
++		.has_arg = no_argument,
++		.val = '?',
++	},
++	{},
++};
++
++static void usage(void)
++{
++	fprintf(stderr, "Usage: vsock_test [--help] [--control-host=<host>] --control-port=<port> --mode=client|server --peer-cid=<cid>\n"
++		"\n"
++		"  Server: vsock_test --control-port=1234 --mode=server --peer-cid=3\n"
++		"  Client: vsock_test --control-host=192.168.0.1 --control-port=1234 --mode=client --peer-cid=2\n"
++		"\n"
++		"Run vsock.ko tests.  Must be launched in both guest\n"
++		"and host.  One side must use --mode=client and\n"
++		"the other side must use --mode=server.\n"
++		"\n"
++		"A TCP control socket connection is used to coordinate tests\n"
++		"between the client and the server.  The server requires a\n"
++		"listen address and the client requires an address to\n"
++		"connect to.\n"
++		"\n"
++		"The CID of the other side must be given with --peer-cid=<cid>.\n");
++	exit(EXIT_FAILURE);
++}
++
++int main(int argc, char **argv)
++{
++	const char *control_host = NULL;
++	const char *control_port = NULL;
++	struct test_opts opts = {
++		.mode = TEST_MODE_UNSET,
++		.peer_cid = VMADDR_CID_ANY,
++	};
++
++	init_signals();
++
++	for (;;) {
++		int opt = getopt_long(argc, argv, optstring, longopts, NULL);
++
++		if (opt == -1)
++			break;
++
++		switch (opt) {
++		case 'H':
++			control_host = optarg;
++			break;
++		case 'm':
++			if (strcmp(optarg, "client") == 0)
++				opts.mode = TEST_MODE_CLIENT;
++			else if (strcmp(optarg, "server") == 0)
++				opts.mode = TEST_MODE_SERVER;
++			else {
++				fprintf(stderr, "--mode must be \"client\" or \"server\"\n");
++				return EXIT_FAILURE;
++			}
++			break;
++		case 'p':
++			opts.peer_cid = parse_cid(optarg);
++			break;
++		case 'P':
++			control_port = optarg;
++			break;
++		case '?':
++		default:
++			usage();
++		}
++	}
++
++	if (!control_port)
++		usage();
++	if (opts.mode == TEST_MODE_UNSET)
++		usage();
++	if (opts.peer_cid == VMADDR_CID_ANY)
++		usage();
++
++	if (!control_host) {
++		if (opts.mode != TEST_MODE_SERVER)
++			usage();
++		control_host = "0.0.0.0";
++	}
++
++	control_init(control_host, control_port,
++		     opts.mode == TEST_MODE_SERVER);
++
++	run_tests(test_cases, &opts);
++
++	control_cleanup();
++	return EXIT_SUCCESS;
++}
 -- 
 2.24.1
 
