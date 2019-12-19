@@ -2,64 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDCEE126A54
-	for <lists.virtualization@lfdr.de>; Thu, 19 Dec 2019 19:46:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79230126990
+	for <lists.virtualization@lfdr.de>; Thu, 19 Dec 2019 19:39:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7CF5586F4D;
-	Thu, 19 Dec 2019 18:46:27 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id ECD2086F4E;
+	Thu, 19 Dec 2019 18:39:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OK60VP9HL3JW; Thu, 19 Dec 2019 18:46:26 +0000 (UTC)
+	with ESMTP id S00jW2T3e4YD; Thu, 19 Dec 2019 18:39:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id BF59086C1B;
-	Thu, 19 Dec 2019 18:46:26 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E943486F3B;
+	Thu, 19 Dec 2019 18:39:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A7B7DC077D;
-	Thu, 19 Dec 2019 18:46:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D8602C1D84;
+	Thu, 19 Dec 2019 18:39:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A13BAC077D
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 08588C077D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 18:46:25 +0000 (UTC)
+ Thu, 19 Dec 2019 18:39:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 9D7E186BAE
+ by whitealder.osuosl.org (Postfix) with ESMTP id E4D8E86C18
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 18:46:25 +0000 (UTC)
+ Thu, 19 Dec 2019 18:39:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HUSaOpuqUeIb
+ with ESMTP id XUQBJDTWbrid
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 18:46:22 +0000 (UTC)
+ Thu, 19 Dec 2019 18:39:01 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id C685B86BBB
+ by whitealder.osuosl.org (Postfix) with ESMTPS id EBA168801A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 18:46:22 +0000 (UTC)
+ Thu, 19 Dec 2019 18:39:01 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 18BA9206D7;
- Thu, 19 Dec 2019 18:46:21 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3E74224679;
+ Thu, 19 Dec 2019 18:39:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576781182;
- bh=7t1tCh+jFq5EyAmMMBL5E8JOA3DXiqAMBqa671ZIwmU=;
+ s=default; t=1576780741;
+ bh=pHMfLRRW7hQ+3bEIOX1BvLDlecxBjRJZdnD5T823sY8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=TrmipirHsDKQmgBfo4E9kbEv30jqCdXc5vZc7cuRWt16Yah5yom/fTkHjmLk9wK5E
- IRDInSVa9Mut97B9vaVhpb0QdmFz00qe7GGgtq2laGJAyQ72eE7Jhf4tjyUcoDy09f
- ytw0nuG5Oby4T8WyECGjVHCFQN2OIk1cFpowv3TI=
+ b=fGofG5Uk2hlUQ1Im6V61oU6OpsIWxDCbsltWcXk9DlDF7t9WgVoCZVMSOzaWpEmz1
+ pX0wmY98MjcDvzlz5bbxVbvbjLUc3PSatu2HGEbPqGu7dkO+JBgt+uhagD9ek7PWAS
+ bGz00ruw8i81sAYZxFzad/BISuntqGHTTJYm36/E=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 4.9 115/199] virtio-balloon: fix managed page counts when
+Subject: [PATCH 4.4 098/162] virtio-balloon: fix managed page counts when
  migrating pages between zones
-Date: Thu, 19 Dec 2019 19:33:17 +0100
-Message-Id: <20191219183221.248667384@linuxfoundation.org>
+Date: Thu, 19 Dec 2019 19:33:26 +0100
+Message-Id: <20191219183213.748408115@linuxfoundation.org>
 X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20191219183214.629503389@linuxfoundation.org>
-References: <20191219183214.629503389@linuxfoundation.org>
+In-Reply-To: <20191219183150.477687052@linuxfoundation.org>
+References: <20191219183150.477687052@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Cc: Yumei Huang <yuhuang@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
@@ -218,7 +218,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/virtio/virtio_balloon.c
 +++ b/drivers/virtio/virtio_balloon.c
-@@ -482,6 +482,17 @@ static int virtballoon_migratepage(struc
+@@ -468,6 +468,17 @@ static int virtballoon_migratepage(struc
  
  	get_page(newpage); /* balloon reference */
  
