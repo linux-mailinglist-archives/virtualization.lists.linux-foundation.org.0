@@ -1,84 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1724C126164
-	for <lists.virtualization@lfdr.de>; Thu, 19 Dec 2019 12:59:17 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7DD412628D
+	for <lists.virtualization@lfdr.de>; Thu, 19 Dec 2019 13:47:57 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C2C6E203D0;
-	Thu, 19 Dec 2019 11:59:15 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A160F85D02;
+	Thu, 19 Dec 2019 12:47:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IiWLgutMiizr; Thu, 19 Dec 2019 11:59:14 +0000 (UTC)
+	with ESMTP id XeoCC4wOAHMo; Thu, 19 Dec 2019 12:47:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 9D753203BE;
-	Thu, 19 Dec 2019 11:59:14 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 502D085BC9;
+	Thu, 19 Dec 2019 12:47:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 75087C077D;
-	Thu, 19 Dec 2019 11:59:14 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 21876C077D;
+	Thu, 19 Dec 2019 12:47:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 72DA3C077D
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 11:59:13 +0000 (UTC)
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 37B71C077D;
+ Thu, 19 Dec 2019 12:47:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 61F1B86DA9
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 11:59:13 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 2E7CE85B81;
+ Thu, 19 Dec 2019 12:47:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Tzq9XwXNmwtN
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 11:59:12 +0000 (UTC)
+ with ESMTP id eVu8IVwHWdsI; Thu, 19 Dec 2019 12:47:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from huawei.com (szxga03-in.huawei.com [45.249.212.189])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 1789286D7B
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Dec 2019 11:59:11 +0000 (UTC)
-Received: from DGGEMM404-HUB.china.huawei.com (unknown [172.30.72.56])
- by Forcepoint Email with ESMTP id 271993F2B861E22293DF;
- Thu, 19 Dec 2019 19:59:08 +0800 (CST)
-Received: from dggeme755-chm.china.huawei.com (10.3.19.101) by
- DGGEMM404-HUB.china.huawei.com (10.3.20.212) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Thu, 19 Dec 2019 19:59:07 +0800
-Received: from [127.0.0.1] (10.173.221.248) by dggeme755-chm.china.huawei.com
- (10.3.19.101) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5; Thu, 19
- Dec 2019 19:59:06 +0800
-Subject: Re: [PATCH 2/5] KVM: arm64: Implement PV_LOCK_FEATURES call
-To: Steven Price <steven.price@arm.com>
-References: <20191217135549.3240-1-yezengruan@huawei.com>
- <20191217135549.3240-3-yezengruan@huawei.com>
- <20191217142848.GB38811@arm.com>
-From: yezengruan <yezengruan@huawei.com>
-Message-ID: <21910175-c89a-7a14-66a9-7b53d72a4543@huawei.com>
-Date: Thu, 19 Dec 2019 19:59:04 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.0
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+ [209.85.128.65])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id AA272851CC;
+ Thu, 19 Dec 2019 12:47:51 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id q9so5301635wmj.5;
+ Thu, 19 Dec 2019 04:47:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=e2DBwRLOc0+NXX0lm+V606orQs3w/QtiskRtJFmTJpE=;
+ b=PTKns+SdLLr4ZaCEfAh3ObI+jGZMo4+JOlU5CQQRWkDFIVSsPWz2iDbfKhjEq6MKIC
+ aRbyCQCnk0cTs2UwulNsRgCaiGU5xFbr8ETxhumyOWd8x1/PXMy2lyyiNaGerK3cQHCZ
+ QeXBFYNls7O+PoJIrEVsftRBKevjpiYvieUmujy9N2Ktd21t46Qo2yfAICnLpbqmV8sZ
+ x7W+JNTruIQEteqTUii7U1vwxk7FLU6CCKbJhIp95hDFhijA9uokDokESBeuNby6NCnH
+ QGAbDMuJK9ssD148eRuhFOTXZ4+6o1OxSY+LTgToJGv6UM3vYL+/4R7PHs2e8issXRYK
+ N/fQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=e2DBwRLOc0+NXX0lm+V606orQs3w/QtiskRtJFmTJpE=;
+ b=qQtmdU5jcNn7XTLGsALPxpjX3MjFPenaZaI+g1r8ewMYS/Dw+HldXKI3bcA4ZfhKmX
+ 8cRVAskgPsidXq263uIGcE71GRwE8JS9Xds6CTJjTkvxHoE0v4LqeIAZ2cVhVaMgxu1S
+ FgXd3DAmF0U8SQC1uqCSJ2yVE0d5zLFqqxLSvve5tIL6xgGnB9QDHG48hI1YyRYavJpS
+ +//GyWBPmRBVL769NTGXGfn0WPMBsnGZ6qrBGp5x3geQKggXwTUp5mbiPhKrWG17Obhr
+ 44ldITGPf5u/6dGwU7f32PlF+EZ8H3D6XtVj9gCJg/f4eik19roeWwQrs/ekSTD2lAsE
+ j/Lg==
+X-Gm-Message-State: APjAAAVfUtwgRZMGWJVQEy8RV771mWGz3kvogV1ee8UW0zntaFSS5KO3
+ bJYFnD4izyNUOHivPGF/lik=
+X-Google-Smtp-Source: APXvYqwa9Hu0h5qRLAIYGmBsvZFeHDEip3Ga9oDqR6+Q+7HjHlER5nfEI1KMGyTaWk8sZgzSPZaIvw==
+X-Received: by 2002:a05:600c:2298:: with SMTP id
+ 24mr10205863wmf.65.1576759669976; 
+ Thu, 19 Dec 2019 04:47:49 -0800 (PST)
+Received: from localhost (pD9E518ED.dip0.t-ipconnect.de. [217.229.24.237])
+ by smtp.gmail.com with ESMTPSA id c195sm6591110wmd.45.2019.12.19.04.47.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2019 04:47:48 -0800 (PST)
+Date: Thu, 19 Dec 2019 13:47:47 +0100
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Lu Baolu <baolu.lu@linux.intel.com>, Joerg Roedel <joro@8bytes.org>
+Subject: Re: [PATCH v3 4/5] iommu: intel: Use generic_iommu_put_resv_regions()
+Message-ID: <20191219124747.GA1440537@ulmo>
+References: <20191218134205.1271740-1-thierry.reding@gmail.com>
+ <20191218134205.1271740-5-thierry.reding@gmail.com>
+ <2b3020a1-221c-f86b-6440-e9ef65f0c12e@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <20191217142848.GB38811@arm.com>
-Content-Language: en-US
-X-Originating-IP: [10.173.221.248]
-X-ClientProxiedBy: dggeme712-chm.china.huawei.com (10.1.199.108) To
- dggeme755-chm.china.huawei.com (10.3.19.101)
-X-CFilter-Loop: Reflected
-Cc: Mark Rutland <Mark.Rutland@arm.com>,
- "daniel.lezcano@linaro.org" <daniel.lezcano@linaro.org>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- "maz@kernel.org" <maz@kernel.org>, Suzuki Poulose <Suzuki.Poulose@arm.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, James Morse <James.Morse@arm.com>,
- "julien.thierry.kdev@gmail.com" <julien.thierry.kdev@gmail.com>, Catalin
- Marinas <Catalin.Marinas@arm.com>,
- "linux@armlinux.org.uk" <linux@armlinux.org.uk>,
- "will@kernel.org" <will@kernel.org>,
- "kvmarm@lists.cs.columbia.edu" <kvmarm@lists.cs.columbia.edu>,
- "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
+In-Reply-To: <2b3020a1-221c-f86b-6440-e9ef65f0c12e@linux.intel.com>
+User-Agent: Mutt/1.13.1 (2019-12-14)
+Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
+ Will Deacon <will@kernel.org>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
+ Robin Murphy <robin.murphy@arm.com>, David Woodhouse <dwmw2@infradead.org>,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,120 +95,112 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============2227956216585943089=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Steve,
 
-On 2019/12/17 22:28, Steven Price wrote:
-> On Tue, Dec 17, 2019 at 01:55:46PM +0000, yezengruan@huawei.com wrote:
->> From: Zengruan Ye <yezengruan@huawei.com>
->>
->> This provides a mechanism for querying which paravirtualized lock
->> features are available in this hypervisor.
->>
->> Also add the header file which defines the ABI for the paravirtualized
->> lock features we're about to add.
->>
->> Signed-off-by: Zengruan Ye <yezengruan@huawei.com>
->> ---
->>  arch/arm64/include/asm/pvlock-abi.h | 16 ++++++++++++++++
->>  include/linux/arm-smccc.h           | 13 +++++++++++++
->>  virt/kvm/arm/hypercalls.c           |  3 +++
->>  3 files changed, 32 insertions(+)
->>  create mode 100644 arch/arm64/include/asm/pvlock-abi.h
->>
->> diff --git a/arch/arm64/include/asm/pvlock-abi.h b/arch/arm64/include/asm/pvlock-abi.h
->> new file mode 100644
->> index 000000000000..06e0c3d7710a
->> --- /dev/null
->> +++ b/arch/arm64/include/asm/pvlock-abi.h
->> @@ -0,0 +1,16 @@
->> +/* SPDX-License-Identifier: GPL-2.0 */
->> +/*
->> + * Copyright(c) 2019 Huawei Technologies Co., Ltd
->> + * Author: Zengruan Ye <yezengruan@huawei.com>
->> + */
->> +
->> +#ifndef __ASM_PVLOCK_ABI_H
->> +#define __ASM_PVLOCK_ABI_H
->> +
->> +struct pvlock_vcpu_state {
->> +	__le64 preempted;
-> 
-> Somewhere we need to document when 'preempted' is. It looks like it's a
-> 1-bit field from the later patches.
+--===============2227956216585943089==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="Q68bSM7Ycu6FN28Q"
+Content-Disposition: inline
 
-Good point, I'll document this in the pvlock doc.
 
-> 
->> +	/* Structure must be 64 byte aligned, pad to that size */
->> +	u8 padding[56];
->> +} __packed;
->> +
->> +#endif
->> diff --git a/include/linux/arm-smccc.h b/include/linux/arm-smccc.h
->> index 59494df0f55b..59e65a951959 100644
->> --- a/include/linux/arm-smccc.h
->> +++ b/include/linux/arm-smccc.h
->> @@ -377,5 +377,18 @@ asmlinkage void __arm_smccc_hvc(unsigned long a0, unsigned long a1,
->>  			   ARM_SMCCC_OWNER_STANDARD_HYP,	\
->>  			   0x21)
->>  
->> +/* Paravirtualised lock calls */
->> +#define ARM_SMCCC_HV_PV_LOCK_FEATURES				\
->> +	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL,			\
->> +			   ARM_SMCCC_SMC_64,			\
->> +			   ARM_SMCCC_OWNER_STANDARD_HYP,	\
->> +			   0x40)
->> +
->> +#define ARM_SMCCC_HV_PV_LOCK_PREEMPTED				\
->> +	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL,			\
->> +			   ARM_SMCCC_SMC_64,			\
->> +			   ARM_SMCCC_OWNER_STANDARD_HYP,	\
->> +			   0x41)
->> +
->>  #endif /*__ASSEMBLY__*/
->>  #endif /*__LINUX_ARM_SMCCC_H*/
->> diff --git a/virt/kvm/arm/hypercalls.c b/virt/kvm/arm/hypercalls.c
->> index 550dfa3e53cd..ff13871fd85a 100644
->> --- a/virt/kvm/arm/hypercalls.c
->> +++ b/virt/kvm/arm/hypercalls.c
->> @@ -52,6 +52,9 @@ int kvm_hvc_call_handler(struct kvm_vcpu *vcpu)
->>  		case ARM_SMCCC_HV_PV_TIME_FEATURES:
->>  			val = SMCCC_RET_SUCCESS;
->>  			break;
->> +		case ARM_SMCCC_HV_PV_LOCK_FEATURES:
->> +			val = SMCCC_RET_SUCCESS;
->> +			break;
-> 
-> Ideally you wouldn't report that PV_LOCK_FEATURES exists until the
-> actual hypercalls are wired up to avoid breaking a bisect.
+--Q68bSM7Ycu6FN28Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for pointing it out to me! I'll update the code.
+On Thu, Dec 19, 2019 at 09:53:22AM +0800, Lu Baolu wrote:
+> Please tweak the title to
+>=20
+> "iommu/vt-d: Use generic_iommu_put_resv_regions()"
+>=20
+> then,
+>=20
+> Acked-by: Lu Baolu <baolu.lu@linux.intel.com>
+>=20
+> Best regards,
+> baolu
 
-> 
-> Steve
-> 
->>  		}
->>  		break;
->>  	case ARM_SMCCC_HV_PV_TIME_FEATURES:
->> -- 
->> 2.19.1
->>
->>
-> 
-> .
-> 
+Joerg, do you want me to resend with this change or is it more efficient
+if you fix up the subject while applying?
 
-Thanks,
+Thierry
 
-Zengruan
+> On 12/18/19 9:42 PM, Thierry Reding wrote:
+> > From: Thierry Reding <treding@nvidia.com>
+> >=20
+> > Use the new standard function instead of open-coding it.
+> >=20
+> > Cc: David Woodhouse <dwmw2@infradead.org>
+> > Signed-off-by: Thierry Reding <treding@nvidia.com>
+> > ---
+> >   drivers/iommu/intel-iommu.c | 11 +----------
+> >   1 file changed, 1 insertion(+), 10 deletions(-)
+> >=20
+> > diff --git a/drivers/iommu/intel-iommu.c b/drivers/iommu/intel-iommu.c
+> > index 42966611a192..a6d5b7cf9183 100644
+> > --- a/drivers/iommu/intel-iommu.c
+> > +++ b/drivers/iommu/intel-iommu.c
+> > @@ -5744,15 +5744,6 @@ static void intel_iommu_get_resv_regions(struct =
+device *device,
+> >   	list_add_tail(&reg->list, head);
+> >   }
+> > -static void intel_iommu_put_resv_regions(struct device *dev,
+> > -					 struct list_head *head)
+> > -{
+> > -	struct iommu_resv_region *entry, *next;
+> > -
+> > -	list_for_each_entry_safe(entry, next, head, list)
+> > -		kfree(entry);
+> > -}
+> > -
+> >   int intel_iommu_enable_pasid(struct intel_iommu *iommu, struct device=
+ *dev)
+> >   {
+> >   	struct device_domain_info *info;
+> > @@ -5987,7 +5978,7 @@ const struct iommu_ops intel_iommu_ops =3D {
+> >   	.add_device		=3D intel_iommu_add_device,
+> >   	.remove_device		=3D intel_iommu_remove_device,
+> >   	.get_resv_regions	=3D intel_iommu_get_resv_regions,
+> > -	.put_resv_regions	=3D intel_iommu_put_resv_regions,
+> > +	.put_resv_regions	=3D generic_iommu_put_resv_regions,
+> >   	.apply_resv_region	=3D intel_iommu_apply_resv_region,
+> >   	.device_group		=3D pci_device_group,
+> >   	.dev_has_feat		=3D intel_iommu_dev_has_feat,
+> >=20
 
+--Q68bSM7Ycu6FN28Q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl37cW8ACgkQ3SOs138+
+s6HwMg//QTaq9qdL6boTSg1EAx8bgcGx/ElOv3yPZusDHrNbEG7C19YElgpyGquj
+7x+Amfj9QD/8vIKJg+w2Z7VpKwUgrVyteYw+dOyFzSx5gjqLE7/r5klBFwR32/Uz
+pGffIE2X3N6xtCfdzYrFt1ay9wM+cHJA0lvMy7oFX+XEOxc/eAorwm68g+UgkYAm
+QigqZ/5cjjlkIkQL2FThNHnwpwd9zAhOMchjlyz+4UZv/4AvQqX0YSilx72T4JP0
+3LOCto7pCGTmvv/4/E0bCOzIa+FOMZf56LLqOstqBhIoPeBWGuGNXUerZ5iV22E0
+ah5RgWxHM0YwGufRGyHiJ8niUQlIuuIzFsJmjvXbDHdaIM7/tZMGRVRGNcZuINBb
+5Addl123iKthkOTBBqNMoZwg9Y30E3mG07wZbH8tkZj91CRJPJ1Ui5uQsEtxlwvS
+jwGcb9kVFk3PJO0AuKvDC9VTi40K1MDYW8NLAtTYV4UhLKA5XGuOWawKZWC20Q+X
+88ie9W4l5+HhW9hgpSfawGdKAlOeeCzXTVmqzm8o5vaAIZ6qGnaf4peVVZ59YF70
+HSty77b43BATtE0oL3ps6hzLgNMNQYSAd8hOnA1cqEwK4+wyCsRgfzx64jxyMOSB
+vCaXjNxdpNsgZWqwqw5NVrsV2z3Jn/f11Wvsob4EMM5C3/ZDuVE=
+=lKCJ
+-----END PGP SIGNATURE-----
+
+--Q68bSM7Ycu6FN28Q--
+
+--===============2227956216585943089==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============2227956216585943089==--
