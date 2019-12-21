@@ -1,84 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCC54128A21
-	for <lists.virtualization@lfdr.de>; Sat, 21 Dec 2019 16:12:24 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 7BF0A87C91;
-	Sat, 21 Dec 2019 15:12:23 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Crykmea22-5e; Sat, 21 Dec 2019 15:12:22 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C748F878E3;
-	Sat, 21 Dec 2019 15:12:22 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AF40BC077D;
-	Sat, 21 Dec 2019 15:12:22 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D6293C077D
- for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Dec 2019 15:12:20 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE387128A15
+	for <lists.virtualization@lfdr.de>; Sat, 21 Dec 2019 16:11:00 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id CE4AE20483
- for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Dec 2019 15:12:20 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id D49E320334;
+	Sat, 21 Dec 2019 15:10:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id C4U4uPCTrf5P; Sat, 21 Dec 2019 15:10:57 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 420BE20487;
+	Sat, 21 Dec 2019 15:10:57 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 34767C077D;
+	Sat, 21 Dec 2019 15:10:57 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3BA65C077D
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 21 Dec 2019 15:10:55 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 2B5BB88305
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 21 Dec 2019 15:10:55 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kyk5tqlswVVj
+ with ESMTP id W5LtcaWuTEP7
  for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Dec 2019 15:12:20 +0000 (UTC)
+ Sat, 21 Dec 2019 15:10:54 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
- [209.85.208.67])
- by silver.osuosl.org (Postfix) with ESMTPS id 63FD12010E
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+ [209.85.208.68])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 967B1882E7
  for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Dec 2019 15:12:20 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id i16so11394864edr.5
+ Sat, 21 Dec 2019 15:10:53 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id dc19so11387541edb.10
  for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Dec 2019 07:12:20 -0800 (PST)
+ Sat, 21 Dec 2019 07:10:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=tcd-ie.20150623.gappssmtp.com; s=20150623;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=yYBMxHbMND3KXJAAlRHvXU1gMqhOszki9jNdzLeiJU4=;
- b=OfH7P/O33XqVmrRHuQ/69BFU28v+MGMIwEx7w/umhnY1qNKXSsCGq1Cwaq7vbEzLMp
- 1ksjMyjtAT7hWlwrLscfQ77QvEuhl13Swd9KWJGnv0QAQ12Z4EMmc0UBnDdMMC+fXDOJ
- AwGTYVg3PMuc/dPZ45WbnbZxhIn8YgFF6EoHwr+nGZQHnCr6DhBjsrSxM9L9AHr6Caov
- mXYjg4dRT2WuQhsh/0gAG0D+t+HUDuGU7Nr7pKzkderovTZvMGtj+Zix8GpyJLSUDu3F
- 9RO4rb75QMNfDN91pVMg46S9XuW7CZvVU6kXu8d0DBfHs3P12+Wv2dYSOCKjy0bOS/Il
- 93QQ==
+ bh=g9kFTz+OIjtd02sboEb/xPH2umLLduJGHZnkezx3k0U=;
+ b=CTktPvnNq1jyejKuw4FPmsDHJqlMqnIK+LqTDjsTZ1ZsJVdD5K3EVXU9H9QfhP1vZi
+ Dr+qg3qIXY699xoJ8F0TOCouYc1BBGbU43hDF2kmAYXm04HO5vI0AZGZAi2jkV0r6EFN
+ Uqqu8MF/N0nkVC19U2nfYFQHC/XM6Mw8TaFgZUgu9czVrLEwvawDZRjnsTBB+/yigVh0
+ MNGrdrt/6eys15k3D6741eDIFVQEakAIF0yLafdCTI/WakOrjNrokbN5gIZLsHdv6rvT
+ JHYoqwNQsVMDBB0wYNztnmjEhP8hzVgepORwDvLZVBZd6aM2+hZeuyiCzwGgtYXJJ1Dy
+ 5Qag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=yYBMxHbMND3KXJAAlRHvXU1gMqhOszki9jNdzLeiJU4=;
- b=I8HXkfqbUY6vF0U2PwA88V7haLtoFtF5+08dQroYbC8SG0Qa+aau6ShY0dkzUuCW8J
- KdceJ+ZQzNHkx0g91crWCIC7EewO8XopOzWZcjtYU3MZ1msTS7bH4jDgtcwcnZBdXW9J
- ibmtf3T6Y4evZDLmzz+fFhX9Y3JP2QzoWCk0hdGTOVBKY0IiqVO5OsmJ+T5R/Vp08HC0
- jcldoHQ0LnCzjNhAylRhsFK3GdYgr1WUWz5yMIc8um6RxuAKLC0swyZ1Zy5tmPyOK0ql
- WAaTTkeZqMMVjM5SrUxX7yKBr0O8b8YYrSFLo6KDhjHvAaUT6h5Yta7EMipLKY5N+vtm
- NUzA==
-X-Gm-Message-State: APjAAAW32bibFXycH4OdmuHYnHOS4NbqVJvKMoJWV837FGNoQJiQ9Fle
- rE6VASfbImIZ1dh5rvmrvYbqgg==
-X-Google-Smtp-Source: APXvYqxT2LSHoXL54d4LTh1o2yBuykvAD28LUC42eFWoj6JLm/GJqllZFuXkdK3UEroGowvwPF7Zpw==
-X-Received: by 2002:a17:906:5448:: with SMTP id
- d8mr22606596ejp.254.1576940659410; 
- Sat, 21 Dec 2019 07:04:19 -0800 (PST)
+ bh=g9kFTz+OIjtd02sboEb/xPH2umLLduJGHZnkezx3k0U=;
+ b=tCxfYtsqOjbGOHTrVKakxNjdQTspZ4otiElHNcmcs9zycIEXds+tmKqMygV0XvpJMg
+ pHzXmrEvVeEqC++OOZ+PU23Djneiszljx1EG+25xAd8m1oIqodJS2jHVkTRFQecMmmJD
+ uKipSkgSXr6wp/Ly5ghOJDDTpOeEAc+FAlrWJORjno7eKWD6juppqVCjyRr3ikqnmtFO
+ XlYkiKElUERFv/lCNX8ol8vykKItC5iVBxsJah8AENzJ8rFdeYQt/8642djGCik3qh2K
+ RfvnhYIP1476b8dw5ni66oqLyNFjL7wPBwvqDYlSrNjuRK9K3nDya0Kj8SWkl26Dt59v
+ X4vQ==
+X-Gm-Message-State: APjAAAU6naRhESRBp69AyFkOMSzFVQdYm4EsyZN0hlo+JtOEJrqZUbB8
+ cRnAnUnm2zOZ6kyjVRL4dU576g==
+X-Google-Smtp-Source: APXvYqz53m9hdZ0HCFwnxdnPVWgrcBCgGDP73tz51CWh/bfe9HlHp6dFxdkAOOP0s/SRLuvh29w7og==
+X-Received: by 2002:a50:d0d0:: with SMTP id g16mr22057226edf.75.1576940666211; 
+ Sat, 21 Dec 2019 07:04:26 -0800 (PST)
 Received: from localhost.localdomain ([80.233.37.20])
- by smtp.googlemail.com with ESMTPSA id u13sm1517639ejz.69.2019.12.21.07.04.15
+ by smtp.googlemail.com with ESMTPSA id u13sm1517639ejz.69.2019.12.21.07.04.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Dec 2019 07:04:18 -0800 (PST)
+ Sat, 21 Dec 2019 07:04:25 -0800 (PST)
 From: Tom Murphy <murphyt7@tcd.ie>
 To: iommu@lists.linux-foundation.org
-Subject: [PATCH 1/8] iommu/vt-d: clean up 32bit si_domain assignment
-Date: Sat, 21 Dec 2019 15:03:53 +0000
-Message-Id: <20191221150402.13868-2-murphyt7@tcd.ie>
+Subject: [PATCH 2/8] iommu/vt-d: Use default dma_direct_* mapping functions
+ for direct mapped devices
+Date: Sat, 21 Dec 2019 15:03:54 +0000
+Message-Id: <20191221150402.13868-3-murphyt7@tcd.ie>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20191221150402.13868-1-murphyt7@tcd.ie>
 References: <20191221150402.13868-1-murphyt7@tcd.ie>
@@ -124,196 +124,176 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-In the intel iommu driver devices which only support 32bit DMA can't be
-direct mapped. The implementation of this is weird. Currently we assign
-it a direct mapped domain and then remove the domain later and replace
-it with a domain of type IOMMU_DOMAIN_IDENTITY. We should just assign it
-a domain of type IOMMU_DOMAIN_IDENTITY from the begging rather than
-needlessly swapping domains.
+We should only assign intel_dma_ops to devices which will actually use
+the iommu and let the default fall back dma_direct_* functions handle
+all other devices. This won't change any behaviour but will just use the
+generic implementations for direct mapped devices rather than intel
+specific ones.
 
 Signed-off-by: Tom Murphy <murphyt7@tcd.ie>
 ---
- drivers/iommu/intel-iommu.c | 88 +++++++++++++------------------------
- 1 file changed, 31 insertions(+), 57 deletions(-)
+ drivers/iommu/intel-iommu.c | 52 +++++--------------------------------
+ 1 file changed, 6 insertions(+), 46 deletions(-)
 
 diff --git a/drivers/iommu/intel-iommu.c b/drivers/iommu/intel-iommu.c
-index 0c8d81f56a30..c1ea66467918 100644
+index c1ea66467918..64b1a9793daa 100644
 --- a/drivers/iommu/intel-iommu.c
 +++ b/drivers/iommu/intel-iommu.c
-@@ -3462,46 +3462,9 @@ static struct dmar_domain *get_private_domain_for_dev(struct device *dev)
+@@ -2794,17 +2794,6 @@ static int __init si_domain_init(int hw)
+ 	return 0;
  }
  
- /* Check if the dev needs to go through non-identity map and unmap process.*/
--static bool iommu_need_mapping(struct device *dev)
-+static bool iommu_no_mapping(struct device *dev)
+-static int identity_mapping(struct device *dev)
+-{
+-	struct device_domain_info *info;
+-
+-	info = dev->archdata.iommu;
+-	if (info && info != DUMMY_DEVICE_DOMAIN_INFO && info != DEFER_DEVICE_DOMAIN_INFO)
+-		return (info->domain == si_domain);
+-
+-	return 0;
+-}
+-
+ static int domain_add_dev_info(struct dmar_domain *domain, struct device *dev)
  {
--	int ret;
--
--	if (iommu_dummy(dev))
--		return false;
--
--	ret = identity_mapping(dev);
--	if (ret) {
--		u64 dma_mask = *dev->dma_mask;
--
--		if (dev->coherent_dma_mask && dev->coherent_dma_mask < dma_mask)
--			dma_mask = dev->coherent_dma_mask;
--
--		if (dma_mask >= dma_direct_get_required_mask(dev))
--			return false;
--
--		/*
--		 * 32 bit DMA is removed from si_domain and fall back to
--		 * non-identity mapping.
--		 */
--		dmar_remove_one_dev_info(dev);
--		ret = iommu_request_dma_domain_for_dev(dev);
--		if (ret) {
--			struct iommu_domain *domain;
--			struct dmar_domain *dmar_domain;
--
--			domain = iommu_get_domain_for_dev(dev);
--			if (domain) {
--				dmar_domain = to_dmar_domain(domain);
--				dmar_domain->flags |= DOMAIN_FLAG_LOSE_CHILDREN;
--			}
--			dmar_remove_one_dev_info(dev);
--			get_private_domain_for_dev(dev);
--		}
--
--		dev_info(dev, "32bit DMA uses non-identity mapping\n");
--	}
--
--	return true;
-+	return iommu_dummy(dev) || identity_mapping(dev);
+ 	struct dmar_domain *ndomain;
+@@ -3461,12 +3450,6 @@ static struct dmar_domain *get_private_domain_for_dev(struct device *dev)
+ 	return domain;
  }
  
+-/* Check if the dev needs to go through non-identity map and unmap process.*/
+-static bool iommu_no_mapping(struct device *dev)
+-{
+-	return iommu_dummy(dev) || identity_mapping(dev);
+-}
+-
  static dma_addr_t __intel_map_single(struct device *dev, phys_addr_t paddr,
-@@ -3568,20 +3531,22 @@ static dma_addr_t intel_map_page(struct device *dev, struct page *page,
+ 				     size_t size, int dir, u64 dma_mask)
+ {
+@@ -3531,9 +3514,6 @@ static dma_addr_t intel_map_page(struct device *dev, struct page *page,
  				 enum dma_data_direction dir,
  				 unsigned long attrs)
  {
--	if (iommu_need_mapping(dev))
--		return __intel_map_single(dev, page_to_phys(page) + offset,
--				size, dir, *dev->dma_mask);
--	return dma_direct_map_page(dev, page, offset, size, dir, attrs);
-+	if (iommu_no_mapping(dev))
-+		return dma_direct_map_page(dev, page, offset, size, dir, attrs);
-+
-+	return __intel_map_single(dev, page_to_phys(page) + offset, size, dir,
-+			*dev->dma_mask);
+-	if (iommu_no_mapping(dev))
+-		return dma_direct_map_page(dev, page, offset, size, dir, attrs);
+-
+ 	return __intel_map_single(dev, page_to_phys(page) + offset, size, dir,
+ 			*dev->dma_mask);
  }
- 
- static dma_addr_t intel_map_resource(struct device *dev, phys_addr_t phys_addr,
+@@ -3542,10 +3522,6 @@ static dma_addr_t intel_map_resource(struct device *dev, phys_addr_t phys_addr,
  				     size_t size, enum dma_data_direction dir,
  				     unsigned long attrs)
  {
--	if (iommu_need_mapping(dev))
--		return __intel_map_single(dev, phys_addr, size, dir,
--				*dev->dma_mask);
--	return dma_direct_map_resource(dev, phys_addr, size, dir, attrs);
-+	if (iommu_no_mapping(dev))
-+		return dma_direct_map_resource(dev, phys_addr, size, dir,
-+				attrs);
-+
-+	return __intel_map_single(dev, phys_addr, size, dir, *dev->dma_mask);
+-	if (iommu_no_mapping(dev))
+-		return dma_direct_map_resource(dev, phys_addr, size, dir,
+-				attrs);
+-
+ 	return __intel_map_single(dev, phys_addr, size, dir, *dev->dma_mask);
  }
  
- static void intel_unmap(struct device *dev, dma_addr_t dev_addr, size_t size)
-@@ -3632,16 +3597,16 @@ static void intel_unmap_page(struct device *dev, dma_addr_t dev_addr,
+@@ -3597,17 +3573,13 @@ static void intel_unmap_page(struct device *dev, dma_addr_t dev_addr,
  			     size_t size, enum dma_data_direction dir,
  			     unsigned long attrs)
  {
--	if (iommu_need_mapping(dev))
--		intel_unmap(dev, dev_addr, size);
+-	if (iommu_no_mapping(dev))
+-		dma_direct_unmap_page(dev, dev_addr, size, dir, attrs);
 -	else
-+	if (iommu_no_mapping(dev))
- 		dma_direct_unmap_page(dev, dev_addr, size, dir, attrs);
-+	else
-+		intel_unmap(dev, dev_addr, size);
+-		intel_unmap(dev, dev_addr, size);
++	intel_unmap(dev, dev_addr, size);
  }
  
  static void intel_unmap_resource(struct device *dev, dma_addr_t dev_addr,
  		size_t size, enum dma_data_direction dir, unsigned long attrs)
  {
--	if (iommu_need_mapping(dev))
-+	if (!iommu_no_mapping(dev))
- 		intel_unmap(dev, dev_addr, size);
+-	if (!iommu_no_mapping(dev))
+-		intel_unmap(dev, dev_addr, size);
++	intel_unmap(dev, dev_addr, size);
  }
  
-@@ -3652,7 +3617,7 @@ static void *intel_alloc_coherent(struct device *dev, size_t size,
+ static void *intel_alloc_coherent(struct device *dev, size_t size,
+@@ -3617,9 +3589,6 @@ static void *intel_alloc_coherent(struct device *dev, size_t size,
  	struct page *page = NULL;
  	int order;
  
--	if (!iommu_need_mapping(dev))
-+	if (iommu_no_mapping(dev))
- 		return dma_direct_alloc(dev, size, dma_handle, flags, attrs);
- 
+-	if (iommu_no_mapping(dev))
+-		return dma_direct_alloc(dev, size, dma_handle, flags, attrs);
+-
  	size = PAGE_ALIGN(size);
-@@ -3688,7 +3653,7 @@ static void intel_free_coherent(struct device *dev, size_t size, void *vaddr,
+ 	order = get_order(size);
+ 
+@@ -3653,9 +3622,6 @@ static void intel_free_coherent(struct device *dev, size_t size, void *vaddr,
  	int order;
  	struct page *page = virt_to_page(vaddr);
  
--	if (!iommu_need_mapping(dev))
-+	if (iommu_no_mapping(dev))
- 		return dma_direct_free(dev, size, vaddr, dma_handle, attrs);
- 
+-	if (iommu_no_mapping(dev))
+-		return dma_direct_free(dev, size, vaddr, dma_handle, attrs);
+-
  	size = PAGE_ALIGN(size);
-@@ -3708,7 +3673,7 @@ static void intel_unmap_sg(struct device *dev, struct scatterlist *sglist,
+ 	order = get_order(size);
+ 
+@@ -3673,9 +3639,6 @@ static void intel_unmap_sg(struct device *dev, struct scatterlist *sglist,
  	struct scatterlist *sg;
  	int i;
  
--	if (!iommu_need_mapping(dev))
-+	if (iommu_no_mapping(dev))
- 		return dma_direct_unmap_sg(dev, sglist, nelems, dir, attrs);
- 
+-	if (iommu_no_mapping(dev))
+-		return dma_direct_unmap_sg(dev, sglist, nelems, dir, attrs);
+-
  	for_each_sg(sglist, sg, nelems, i) {
-@@ -3734,7 +3699,7 @@ static int intel_map_sg(struct device *dev, struct scatterlist *sglist, int nele
+ 		nrpages += aligned_nrpages(sg_dma_address(sg), sg_dma_len(sg));
+ 	}
+@@ -3699,8 +3662,6 @@ static int intel_map_sg(struct device *dev, struct scatterlist *sglist, int nele
  	struct intel_iommu *iommu;
  
  	BUG_ON(dir == DMA_NONE);
--	if (!iommu_need_mapping(dev))
-+	if (iommu_no_mapping(dev))
- 		return dma_direct_map_sg(dev, sglist, nelems, dir, attrs);
+-	if (iommu_no_mapping(dev))
+-		return dma_direct_map_sg(dev, sglist, nelems, dir, attrs);
  
  	domain = deferred_attach_domain(dev);
-@@ -3782,7 +3747,7 @@ static int intel_map_sg(struct device *dev, struct scatterlist *sglist, int nele
+ 	if (!domain)
+@@ -3747,8 +3708,6 @@ static int intel_map_sg(struct device *dev, struct scatterlist *sglist, int nele
  
  static u64 intel_get_required_mask(struct device *dev)
  {
--	if (!iommu_need_mapping(dev))
-+	if (iommu_no_mapping(dev))
- 		return dma_direct_get_required_mask(dev);
+-	if (iommu_no_mapping(dev))
+-		return dma_direct_get_required_mask(dev);
  	return DMA_BIT_MASK(32);
  }
-@@ -5618,9 +5583,13 @@ static int intel_iommu_add_device(struct device *dev)
- 	struct iommu_domain *domain;
- 	struct intel_iommu *iommu;
- 	struct iommu_group *group;
-+	u64 dma_mask = *dev->dma_mask;
- 	u8 bus, devfn;
- 	int ret;
  
-+	if (dev->coherent_dma_mask && dev->coherent_dma_mask < dma_mask)
-+		dma_mask = dev->coherent_dma_mask;
-+
- 	iommu = device_to_iommu(dev, &bus, &devfn);
- 	if (!iommu)
- 		return -ENODEV;
-@@ -5640,7 +5609,12 @@ static int intel_iommu_add_device(struct device *dev)
- 	domain = iommu_get_domain_for_dev(dev);
- 	dmar_domain = to_dmar_domain(domain);
- 	if (domain->type == IOMMU_DOMAIN_DMA) {
--		if (device_def_domain_type(dev) == IOMMU_DOMAIN_IDENTITY) {
-+		/*
-+		 * We check dma_mask >= dma_get_required_mask(dev) because
-+		 * 32 bit DMA falls back to non-identity mapping.
-+		 */
-+		if (device_def_domain_type(dev) == IOMMU_DOMAIN_IDENTITY &&
-+				dma_mask >= dma_get_required_mask(dev)) {
- 			ret = iommu_request_dm_for_dev(dev);
- 			if (ret) {
- 				dmar_remove_one_dev_info(dev);
+@@ -5014,7 +4973,6 @@ int __init intel_iommu_init(void)
+ 	if (!has_untrusted_dev() || intel_no_bounce)
+ 		swiotlb = 0;
+ #endif
+-	dma_ops = &intel_dma_ops;
+ 
+ 	init_iommu_pm_ops();
+ 
+@@ -5623,6 +5581,8 @@ static int intel_iommu_add_device(struct device *dev)
+ 				dev_info(dev,
+ 					 "Device uses a private identity domain.\n");
+ 			}
++		} else {
++			dev->dma_ops = &intel_dma_ops;
+ 		}
+ 	} else {
+ 		if (device_def_domain_type(dev) == IOMMU_DOMAIN_DMA) {
+@@ -5639,6 +5599,7 @@ static int intel_iommu_add_device(struct device *dev)
+ 				dev_info(dev,
+ 					 "Device uses a private dma domain.\n");
+ 			}
++			dev->dma_ops = &intel_dma_ops;
+ 		}
+ 	}
+ 
+@@ -5665,8 +5626,7 @@ static void intel_iommu_remove_device(struct device *dev)
+ 
+ 	iommu_device_unlink(&iommu->iommu, dev);
+ 
+-	if (device_needs_bounce(dev))
+-		set_dma_ops(dev, NULL);
++	set_dma_ops(dev, NULL);
+ }
+ 
+ static void intel_iommu_get_resv_regions(struct device *device,
 -- 
 2.20.1
 
