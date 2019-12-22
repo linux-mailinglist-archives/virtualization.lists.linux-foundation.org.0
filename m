@@ -1,102 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5312C128EC6
-	for <lists.virtualization@lfdr.de>; Sun, 22 Dec 2019 16:55:10 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id B81A785BFB;
-	Sun, 22 Dec 2019 15:55:08 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Rxrbe0R8py33; Sun, 22 Dec 2019 15:55:08 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 000D485773;
-	Sun, 22 Dec 2019 15:55:07 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C28E7C0881;
-	Sun, 22 Dec 2019 15:55:07 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3F6A7C0881
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Dec 2019 15:55:06 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5991C128FA8
+	for <lists.virtualization@lfdr.de>; Sun, 22 Dec 2019 20:08:49 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 32C5620422
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Dec 2019 15:55:06 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 0D6F720115;
+	Sun, 22 Dec 2019 19:08:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Oq2-LbnX7WpT; Sun, 22 Dec 2019 19:08:46 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 182DC20017;
+	Sun, 22 Dec 2019 19:08:45 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 000E9C0881;
+	Sun, 22 Dec 2019 19:08:44 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8DF76C0881
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 22 Dec 2019 19:08:43 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 73295858C9
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 22 Dec 2019 19:08:43 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HXl2mEn6eyyL
+ with ESMTP id bBsLUe1VOQhS
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Dec 2019 15:55:04 +0000 (UTC)
+ Sun, 22 Dec 2019 19:08:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-yb1-f195.google.com (mail-yb1-f195.google.com
- [209.85.219.195])
- by silver.osuosl.org (Postfix) with ESMTPS id 86507203F8
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+ [209.85.214.196])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 5EAAD85361
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Dec 2019 15:55:04 +0000 (UTC)
-Received: by mail-yb1-f195.google.com with SMTP id v24so6162114ybd.10
+ Sun, 22 Dec 2019 19:08:42 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id p9so6332195plk.9
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Dec 2019 07:55:04 -0800 (PST)
+ Sun, 22 Dec 2019 11:08:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=lAVicwNWaDkMag3xmq3Dz6+zXkkUHKTRx2/quvHKtCQ=;
- b=eUiuLpb48u5geqeZKhmXtXQw/MZxjPsB+J02ZrNeBn2iERhvThqjw4H7A7GXNonEMw
- eiyEYElCkysnzhyVmRKGeOZjZLVkclq3htf99rskR4Y3Jj+JzDYDBEfnlrNskKWKrX7S
- RI+LKtgp7NjeB5gwUEBny35lX6+QqwVJlPf8+8StkKpTv1arkZoBorZNorF9NB9xuJny
- wARQIIlLwzunkm/a6Ge5EAaCNnYQtyDQOjqyxQUxeRB63pisvZEAfRvM8yx0LhQtWT1K
- /XYGB7nc+knQw4dtgBRFsDJx4gCBUW0v/HrILqjGDpZcVzIoxjf4jAmG6rCuVuDpCEBB
- UV5A==
+ h=from:to:cc:subject:date:message-id;
+ bh=t2pcE/zB/zRFa+D+0DGOcMCSuy9rY9vAk3qxszJwLvo=;
+ b=eK3u6NGTjCt3W6n8+0kujic7kEYU+S23lpnUv4W0WBuW1drRdllW/DFgThMGZVF8/Z
+ w6PtNPkCPEpyp7kEn/OIqwWI7FlvrHh7pbKWdlUpDP4qMfOB8p8NvSyVkaC9CmlENc5m
+ 9HbwVrK+GgovJWWsH7G4QJID9V00e9WIpcGVgNblJx+/tGXFWKpQVfV+xZEzUV8ZN1bk
+ tfUV2NjuIcskaaBE7v8wywg9z2+BUYgsrCq8xfnfsYfZTO9uu1/7KDQsPsQgs21EObjo
+ knHrkV3QDFsg7oToxZ/iVXjdN1R/TNuA4FmrJzpZhkuEWx0De3Lnp8Q1XFcuuWvV9ets
+ dCYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=lAVicwNWaDkMag3xmq3Dz6+zXkkUHKTRx2/quvHKtCQ=;
- b=uJvRFsfxLFg0ex5mGwS3I9yM5V2EK69ypDAyVkjwhcUtU7zWG+HuPEcHEF5VHi/mh5
- BCXjk8KQX4xfuwjHsaBzxmLvS5brp9S11jB6TG4bDBZZ1p3A8QsnYW50sduVhdhuPhLX
- e3EZTzJmoUk97OWnp0qcwW4NBgmoR0373Q18KHYBhB9okYujMtgUohc2wAs5NZiWs1kQ
- LQKWswLr0RAgfQ9sPN84ZWv977vvxCTXF6Mvjrx2MQsiYmOdkQLdmF/r23aHVeRRy1aE
- +CGpotv56hIH6cmJ/fdz8lIls8x+9XGWv9hoGQaY9kirOb2wWiqmY0UHPCsh1jD4BGEG
- KVbA==
-X-Gm-Message-State: APjAAAVPDfWttvKIDj0uv7up7InwQpRkPGuVWE2gLLa6nQgD05Ci4sOn
- +v0QzPsN/Jujx7890aUeHvotwxoL
-X-Google-Smtp-Source: APXvYqz+BXXciUA67gzZoA8+qu4IuSbgBMv50vWC90kRrJFPZySn9oax0ecGyybpVc+AtrCSE8ADFg==
-X-Received: by 2002:a25:9309:: with SMTP id f9mr19244891ybo.43.1577030102647; 
- Sun, 22 Dec 2019 07:55:02 -0800 (PST)
-Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com.
- [209.85.219.169])
- by smtp.gmail.com with ESMTPSA id l5sm6576792ywd.48.2019.12.22.07.55.01
- for <virtualization@lists.linux-foundation.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 22 Dec 2019 07:55:01 -0800 (PST)
-Received: by mail-yb1-f169.google.com with SMTP id v24so6162078ybd.10
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Dec 2019 07:55:01 -0800 (PST)
-X-Received: by 2002:a25:c444:: with SMTP id u65mr18090159ybf.443.1577030100686; 
- Sun, 22 Dec 2019 07:55:00 -0800 (PST)
-MIME-Version: 1.0
-References: <20191220212207.76726-1-adelva@google.com>
- <CA+FuTSewMaRTe51jOJtD-VHcp4Ct+c=11-9SxenULHwQuokamw@mail.gmail.com>
- <20191222080754-mutt-send-email-mst@kernel.org>
- <CA+FuTSd4vd9wS0sHmAk=Ys2-OwZarAHT3TNFzg7c7+2Dsott=g@mail.gmail.com>
- <20191222095141-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20191222095141-mutt-send-email-mst@kernel.org>
-From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-Date: Sun, 22 Dec 2019 10:54:23 -0500
-X-Gmail-Original-Message-ID: <CA+FuTScTcMqU4dKXNKCbjYJ8A-eVGp5eDNihAkq106YKTvTqDw@mail.gmail.com>
-Message-ID: <CA+FuTScTcMqU4dKXNKCbjYJ8A-eVGp5eDNihAkq106YKTvTqDw@mail.gmail.com>
-Subject: Re: [PATCH net] virtio-net: Skip set_features on non-cvq devices
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Alistair Delva <adelva@google.com>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Network Development <netdev@vger.kernel.org>,
- linux-kernel <linux-kernel@vger.kernel.org>, stable <stable@vger.kernel.org>,
- virtualization@lists.linux-foundation.org, kernel-team@android.com,
- "David S . Miller" <davem@davemloft.net>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=t2pcE/zB/zRFa+D+0DGOcMCSuy9rY9vAk3qxszJwLvo=;
+ b=lh00MHCFBej2GCxBr8aqYMcNfp1Y1YfiO39Pxf4BVvqCIYeClFZWEyXvrk+mq6O/7h
+ Vd9DwAM1mhDRbwEkGE160Gt0bjYa6grgc63k5BxVCyfz7LznZ+FRglmLBBIrZcwY5hv0
+ YEgHwLIwpdkJqmPn1WopbB8/XuHMYeiOD+2fhhVdjVkEVF15uKdvqhjNxPmgQKFh/ejm
+ GUv81db9mT+QPWXiCclKEUiqf+hVsm8Ucni1bjT05X2Xyo3wxRbSgP8vNd/96o6CD0rx
+ 9YcBQ+KRS5f/YcCPF98Ep6IMySEzRYTApJvnXzLDkjYERs8z+x4Ta+DnKI2zixILkgqW
+ zZTA==
+X-Gm-Message-State: APjAAAWefG9i40V6D+zwpCV+Hfrl4s2CFG1Gh1cQ30n09ubJTx78VoEb
+ gvLkF9ekqEIeEyv4kA3nPkI=
+X-Google-Smtp-Source: APXvYqz39Vp0a6zPzR6fPNDFQyU57GdaiKA8kXCxB1r5wua09/6D53xwbX3AciCIHG6yNWbyBak+nw==
+X-Received: by 2002:a17:90a:bb0c:: with SMTP id
+ u12mr13130220pjr.100.1577041722010; 
+ Sun, 22 Dec 2019 11:08:42 -0800 (PST)
+Received: from localhost ([2001:19f0:6001:12c8:5400:2ff:fe72:6403])
+ by smtp.gmail.com with ESMTPSA id p28sm19181262pgb.93.2019.12.22.11.08.41
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Sun, 22 Dec 2019 11:08:41 -0800 (PST)
+From: Yangtao Li <tiny.windzz@gmail.com>
+To: mst@redhat.com,
+	jasowang@redhat.com
+Subject: [PATCH] virtio-mmio: convert to devm_platform_ioremap_resource
+Date: Sun, 22 Dec 2019 19:08:39 +0000
+Message-Id: <20191222190839.4863-1-tiny.windzz@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Yangtao Li <tiny.windzz@gmail.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,140 +91,60 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sun, Dec 22, 2019 at 9:57 AM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> On Sun, Dec 22, 2019 at 09:21:43AM -0500, Willem de Bruijn wrote:
-> > On Sun, Dec 22, 2019 at 8:11 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> > >
-> > > On Fri, Dec 20, 2019 at 10:08:41PM -0500, Willem de Bruijn wrote:
-> > > > On Fri, Dec 20, 2019 at 4:22 PM Alistair Delva <adelva@google.com> wrote:
-> > > > >
-> > > > > On devices without control virtqueue support, such as the virtio_net
-> > > > > implementation in crosvm[1], attempting to configure LRO will panic the
-> > > > > kernel:
-> > > > >
-> > > > > kernel BUG at drivers/net/virtio_net.c:1591!
-> > > > > invalid opcode: 0000 [#1] PREEMPT SMP PTI
-> > > > > CPU: 1 PID: 483 Comm: Binder:330_1 Not tainted 5.4.5-01326-g19463e9acaac #1
-> > > > > Hardware name: ChromiumOS crosvm, BIOS 0
-> > > > > RIP: 0010:virtnet_send_command+0x15d/0x170 [virtio_net]
-> > > > > Code: d8 00 00 00 80 78 02 00 0f 94 c0 65 48 8b 0c 25 28 00 00 00 48 3b 4c 24 70 75 11 48 8d 65 d8 5b 41 5c 41 5d 41 5e 41 5f 5d c3 <0f> 0b e8 ec a4 12 c8 66 90 66 2e 0f 1f 84 00 00 00 00 00 55 48 89
-> > > > > RSP: 0018:ffffb97940e7bb50 EFLAGS: 00010246
-> > > > > RAX: ffffffffc0596020 RBX: ffffa0e1fc8ea840 RCX: 0000000000000017
-> > > > > RDX: ffffffffc0596110 RSI: 0000000000000011 RDI: 000000000000000d
-> > > > > RBP: ffffb97940e7bbf8 R08: ffffa0e1fc8ea0b0 R09: ffffa0e1fc8ea0b0
-> > > > > R10: ffffffffffffffff R11: ffffffffc0590940 R12: 0000000000000005
-> > > > > R13: ffffa0e1ffad2c00 R14: ffffb97940e7bc08 R15: 0000000000000000
-> > > > > FS:  0000000000000000(0000) GS:ffffa0e1fd100000(006b) knlGS:00000000e5ef7494
-> > > > > CS:  0010 DS: 002b ES: 002b CR0: 0000000080050033
-> > > > > CR2: 00000000e5eeb82c CR3: 0000000079b06001 CR4: 0000000000360ee0
-> > > > > DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-> > > > > DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-> > > > > Call Trace:
-> > > > >  ? preempt_count_add+0x58/0xb0
-> > > > >  ? _raw_spin_lock_irqsave+0x36/0x70
-> > > > >  ? _raw_spin_unlock_irqrestore+0x1a/0x40
-> > > > >  ? __wake_up+0x70/0x190
-> > > > >  virtnet_set_features+0x90/0xf0 [virtio_net]
-> > > > >  __netdev_update_features+0x271/0x980
-> > > > >  ? nlmsg_notify+0x5b/0xa0
-> > > > >  dev_disable_lro+0x2b/0x190
-> > > > >  ? inet_netconf_notify_devconf+0xe2/0x120
-> > > > >  devinet_sysctl_forward+0x176/0x1e0
-> > > > >  proc_sys_call_handler+0x1f0/0x250
-> > > > >  proc_sys_write+0xf/0x20
-> > > > >  __vfs_write+0x3e/0x190
-> > > > >  ? __sb_start_write+0x6d/0xd0
-> > > > >  vfs_write+0xd3/0x190
-> > > > >  ksys_write+0x68/0xd0
-> > > > >  __ia32_sys_write+0x14/0x20
-> > > > >  do_fast_syscall_32+0x86/0xe0
-> > > > >  entry_SYSENTER_compat+0x7c/0x8e
-> > > > >
-> > > > > This happens because virtio_set_features() does not check the presence
-> > > > > of the control virtqueue feature, which is sanity checked by a BUG_ON
-> > > > > in virtnet_send_command().
-> > > > >
-> > > > > Fix this by skipping any feature processing if the control virtqueue is
-> > > > > missing. This should be OK for any future feature that is added, as
-> > > > > presumably all of them would require control virtqueue support to notify
-> > > > > the endpoint that offload etc. should begin.
-> > > > >
-> > > > > [1] https://chromium.googlesource.com/chromiumos/platform/crosvm/
-> > > > >
-> > > > > Fixes: a02e8964eaf9 ("virtio-net: ethtool configurable LRO")
-> > > > > Cc: stable@vger.kernel.org [4.20+]
-> > > > > Cc: Michael S. Tsirkin <mst@redhat.com>
-> > > > > Cc: Jason Wang <jasowang@redhat.com>
-> > > > > Cc: David S. Miller <davem@davemloft.net>
-> > > > > Cc: kernel-team@android.com
-> > > > > Cc: virtualization@lists.linux-foundation.org
-> > > > > Cc: linux-kernel@vger.kernel.org
-> > > > > Signed-off-by: Alistair Delva <adelva@google.com>
-> > > >
-> > > > Thanks for debugging this, Alistair.
-> > > >
-> > > > > ---
-> > > > >  drivers/net/virtio_net.c | 3 +++
-> > > > >  1 file changed, 3 insertions(+)
-> > > > >
-> > > > > diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-> > > > > index 4d7d5434cc5d..709bcd34e485 100644
-> > > > > --- a/drivers/net/virtio_net.c
-> > > > > +++ b/drivers/net/virtio_net.c
-> > > > > @@ -2560,6 +2560,9 @@ static int virtnet_set_features(struct net_device *dev,
-> > > > >         u64 offloads;
-> > > > >         int err;
-> > > > >
-> > > > > +       if (!vi->has_cvq)
-> > > > > +               return 0;
-> > > > > +
-> > > >
-> > > > Instead of checking for this in virtnet_set_features, how about we
-> > > > make configurability contingent on cvq in virtnet_probe:
-> > > >
-> > > > -       if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS))
-> > > > +       if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS) &&
-> > > > +           virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_VQ))
-> > > >                 dev->hw_features |= NETIF_F_LRO;
-> > > >
-> > > > Based on this logic a little below in the same function
-> > > >
-> > > >         if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_VQ))
-> > > >                 vi->has_cvq = true;
-> > >
-> > >
-> > > This would be a regression on old hypervisors which didn't have
-> > > CTL VQ - suddenly they will lose offloads.
-> >
-> > dev->features still correctly displays whether offloads are enabled.
-> > Removing it from dev->hw_features just renders it non-configurable.
->
-> Oh you are right. I confused it with dev->features.
->
-> > Note that before the patch that is being fixed the offloads were
-> > enabled, but ethtool would show them as off.
->
-> So the bug is in spec, it should have said
-> VIRTIO_NET_F_CTRL_GUEST_OFFLOADS depends on VIRTIO_NET_F_CTRL_VQ, but we
-> missed that part. We can and I guess should add this as a recommendation
-> but it's too late to make it a MUST.
->
-> Meanwhile I would say it's cleanest to work around
-> this in virtnet_validate by clearing VIRTIO_NET_F_CTRL_GUEST_OFFLOADS
-> if VIRTIO_NET_F_CTRL_VQ is off, with a big comment explaining
-> it's a spec bug.
+Use devm_platform_ioremap_resource() to simplify code, which
+contains platform_get_resource, devm_request_mem_region and
+devm_ioremap.
 
-Wouldn't that cause precisely the regression you were concerned about?
+Signed-off-by: Yangtao Li <tiny.windzz@gmail.com>
+---
+ drivers/virtio/virtio_mmio.c | 15 +++------------
+ 1 file changed, 3 insertions(+), 12 deletions(-)
 
-Workloads may now depend on LRO for cycle efficiency. Reverting to
-behavior before this patch (though now displaying the offload state
-correctly) is more conservative in that regard.
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index e09edb5c5e06..97d5725fd9a2 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -531,18 +531,9 @@ static void virtio_mmio_release_dev(struct device *_d)
+ static int virtio_mmio_probe(struct platform_device *pdev)
+ {
+ 	struct virtio_mmio_device *vm_dev;
+-	struct resource *mem;
+ 	unsigned long magic;
+ 	int rc;
+ 
+-	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+-	if (!mem)
+-		return -EINVAL;
+-
+-	if (!devm_request_mem_region(&pdev->dev, mem->start,
+-			resource_size(mem), pdev->name))
+-		return -EBUSY;
+-
+ 	vm_dev = devm_kzalloc(&pdev->dev, sizeof(*vm_dev), GFP_KERNEL);
+ 	if (!vm_dev)
+ 		return -ENOMEM;
+@@ -554,9 +545,9 @@ static int virtio_mmio_probe(struct platform_device *pdev)
+ 	INIT_LIST_HEAD(&vm_dev->virtqueues);
+ 	spin_lock_init(&vm_dev->lock);
+ 
+-	vm_dev->base = devm_ioremap(&pdev->dev, mem->start, resource_size(mem));
+-	if (vm_dev->base == NULL)
+-		return -EFAULT;
++	vm_dev->base = devm_platform_ioremap_resource(pdev, 0);
++	if (IS_ERR(vm_dev->base))
++		return PTR_ERR(vm_dev->base);
+ 
+ 	/* Check magic value */
+ 	magic = readl(vm_dev->base + VIRTIO_MMIO_MAGIC_VALUE);
+-- 
+2.17.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
