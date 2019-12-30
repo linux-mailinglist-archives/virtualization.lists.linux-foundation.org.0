@@ -2,57 +2,100 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C10B12CAF2
-	for <lists.virtualization@lfdr.de>; Sun, 29 Dec 2019 22:06:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CF6812D395
+	for <lists.virtualization@lfdr.de>; Mon, 30 Dec 2019 19:52:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0DFD3826AC;
-	Sun, 29 Dec 2019 21:06:54 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D88228616F;
+	Mon, 30 Dec 2019 18:52:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uEx4jDxjkuzV; Sun, 29 Dec 2019 21:06:49 +0000 (UTC)
+	with ESMTP id yDDPeUA3rIc0; Mon, 30 Dec 2019 18:52:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4C257821E2;
-	Sun, 29 Dec 2019 21:06:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6664A86064;
+	Mon, 30 Dec 2019 18:52:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1D2A2C077D;
-	Sun, 29 Dec 2019 21:06:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 48983C077D;
+	Mon, 30 Dec 2019 18:52:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5F361C077D
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 570C0C077D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Dec 2019 21:06:48 +0000 (UTC)
+ Mon, 30 Dec 2019 18:52:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 48E8A2038D
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4D74685AF1
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Dec 2019 21:06:48 +0000 (UTC)
+ Mon, 30 Dec 2019 18:52:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QdbyzGVSUuzz
+ with ESMTP id 96i6Ye2kJGA0
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Dec 2019 21:06:44 +0000 (UTC)
+ Mon, 30 Dec 2019 18:52:31 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
- [5.45.125.222])
- by silver.osuosl.org (Postfix) with ESMTPS id 1326520022
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
+ [209.85.210.68])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 5519185A4B
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Dec 2019 21:06:43 +0000 (UTC)
-Received: from bl20-63-176.dsl.telepac.pt ([2.81.63.176] helo=DESKTOP-DVRB5CC)
- by s052d7dde.fastvps-server.com with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <marle@saisti.eu>) id 1ilf6y-0001vX-5u
- for virtualization@lists.linux-foundation.org; Sun, 29 Dec 2019 23:24:28 +0300
-From: "Maria Lemos" <marialemos72@gmail.com>
-Subject: CISTI'2020 - Doctoral Symposium | Seville, Spain; Deadline: February
- 14
-To: virtualization@lists.linux-foundation.org
+ Mon, 30 Dec 2019 18:52:31 +0000 (UTC)
+Received: by mail-ot1-f68.google.com with SMTP id k14so47300431otn.4
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 30 Dec 2019 10:52:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=2PU80e06dVsLEFBPoBP15a3a0bqTWpgCtffJm4G5PGU=;
+ b=bHZS9r+DC7xoeD6cxpH4i3xpSJ/gq50CwlupX1697alL9zoV2RniiOpeS0fzfamIQa
+ WxQ7cCBNSANfXeX4NY4r/hZFK4P1w1JlyzXv9TnOkQRK0d1M4ZscNJljNFAQFM5GFlOM
+ 35xcjwPPMRp352B/JuDt4EKyWZZ4Uo+a1Db+c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=2PU80e06dVsLEFBPoBP15a3a0bqTWpgCtffJm4G5PGU=;
+ b=HUJl1/2ZO7avet2vhB0G9J9ghOW9zenFIKEFNAkAlKSG4a6EwY0PLu3dhp5DxNZugl
+ NJYmfPG2M4rOi29w4N5H5/HyXmGKbLnluv2jrCzEJygfsY/yDX3r0kKXF+Q+e0VYJ8FP
+ dv1WnTlBkf4E9wL3hkaf9HbszpEW5msisG0IomgzzdmtPGwV2BRAlYRRe0Uqz7T7lSee
+ xQWb+K6iMi/Vi3DxoAeGZTwObDBvCjGnvWe5S15oIwvNbVfeQ4crrFs0+YRySF/fnUsx
+ IeHK32ciFr4io0Zi57l3UuuZh6Q1bbdTarza3jcpzrwfnTWrf1ybZ8dVVZvwfGxUsGMH
+ ROqA==
+X-Gm-Message-State: APjAAAXzfE+vuREZaf7pEV754Bo5YV/Qy0D5N2MFCh6meARLIPld+P53
+ +++L0ZGYMQXirFa/3euAD/zhcA==
+X-Google-Smtp-Source: APXvYqyRXCmINU65Y6yuKMiO/XiDPdUu64Vn+VoIxbx6ttD2OgkwUiThd7nh2RnWqHJyh6C1czL/mQ==
+X-Received: by 2002:a9d:748d:: with SMTP id t13mr73212089otk.181.1577731950592; 
+ Mon, 30 Dec 2019 10:52:30 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id r13sm13994800oic.52.2019.12.30.10.52.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Dec 2019 10:52:29 -0800 (PST)
+Date: Mon, 30 Dec 2019 10:52:28 -0800
+From: Kees Cook <keescook@chromium.org>
+To: Borislav Petkov <bp@alien8.de>
+Subject: Re: [PATCH v10 00/11] x86: PIE support to extend KASLR randomization
+Message-ID: <201912301052.16438D6@keescook>
+References: <20191205000957.112719-1-thgarnie@chromium.org>
+ <20191224130310.GE21017@zn.tnic>
 MIME-Version: 1.0
-Date: Sun, 29 Dec 2019 20:24:28 +0000
-Message-ID: <143321590002578@gmail-com>
-X-Antivirus: AVG (VPS 191228-0, 12/28/2019), Outbound message
-X-Antivirus-Status: Clean
+Content-Disposition: inline
+In-Reply-To: <20191224130310.GE21017@zn.tnic>
+Cc: kristen@linux.intel.com, kernel-hardening@lists.openwall.com, "VMware,
+ Inc." <pv-drivers@vmware.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ virtualization@lists.linux-foundation.org,
+ Thomas Garnier <thgarnie@chromium.org>, Pavel Machek <pavel@ucw.cz>,
+ "H. Peter Anvin" <hpa@zytor.com>, Will Deacon <will@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, Thomas Hellstrom <thellstrom@vmware.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>, Jiri Slaby <jslaby@suse.cz>,
+ x86@kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Ingo Molnar <mingo@redhat.com>, linux-crypto@vger.kernel.org,
+ Len Brown <len.brown@intel.com>, linux-pm@vger.kernel.org,
+ Alexios Zavras <alexios.zavras@intel.com>, Andy Lutomirski <luto@kernel.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Allison Randal <allison@lohutok.net>, Juergen Gross <jgross@suse.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -64,375 +107,30 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Reply-To: cistimail@gmail.com
-Content-Type: multipart/mixed; boundary="===============7401445201433776208=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is a multi-part message in MIME format
-
---===============7401445201433776208==
-Content-Type: multipart/alternative; charset=utf-8; boundary="NrHnH9jx7MCck2KMX45uNiuCenJDP=_3Ss"
-
-This is a multi-part message in MIME format
-
---NrHnH9jx7MCck2KMX45uNiuCenJDP=_3Ss
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-* Published in IEEE Xplore and indexed by ISI, Scopus, EI-Compendex, G=
-oogle Scholar, etc.
-
-** Conference with H5-Index =3D 16 (Google Scholar Ranking)
-
-
-----------------------------------------------------------------------=
------------------------------------------------------
-Doctoral Symposium of CISTI'2020 - 15th Iberian Conference on Informat=
-ion Systems and Technologies
-                                                   Seville, Spain, 24 =
-- 27 June 2020
-                                                               http://=
-www.cisti.eu/ <http://www.cisti.eu/>
-----------------------------------------------------------------------=
---------------------------------------------------------------
-
-=20
-
-The purpose of CISTI'2020=E2=80=99s Doctoral Symposium is to provide g=
-raduate students a setting where they can, informally, expose and disc=
-uss their work, collecting valuable expert opinions and sharing new id=
-eas, methods and applications. The Doctoral Symposium is an excellent =
-opportunity for PhD students to present and discuss their work in a Wo=
-rkshop format. Each presentation will be evaluated by a panel composed=
- by at least three Information Systems and Technologies experts.
-
-=20
-
-Contributions Submission
-
-The Doctoral Symposium is opened to PhD students whose research area i=
-ncludes the themes proposed for this Conference. Submissions must incl=
-ude an extended abstract (maximum 4 pages), following the Conference s=
-tyle guide <http://cisti.eu/2017/images/templates.zip>. All selected c=
-ontributions will be published with the Conference Proceedings in elec=
-tronic format with ISBN. These contributions will be available in the =
-IEEE Xplore <https://ieeexplore.ieee.org/xpl/conhome/8755443/proceedin=
-g> Digital Library and will be sent for indexing in ISI, Scopus, EI-Co=
-mpendex, INSPEC and Google Scholar.
-
-Submissions must include the field, the PhD institution and the number=
- of months devoted to the development of the work. Additionally, they =
-should include in a clear and succinct manner:
-
-    =E2=80=A2    The problem approached and its significance or releva=
-nce
-    =E2=80=A2    The research objectives and related investigation top=
-ics
-    =E2=80=A2    A brief display of what is already known
-    =E2=80=A2    A proposed solution methodology for the problem
-    =E2=80=A2    Expected results
-
-=20
-
-Important Dates
-
-Paper submission: February 14, 2020
-
-Notification of acceptance: March 22, 2020
-
-Submission of accepted papers: April 5, 2020
-
-Payment of registration, to ensure the inclusion of an accepted paper =
-in the conference proceedings: April 5, 2020
-
-=20
-
-Organizing Committee
-
-
-=C3=81lvaro Rocha, Universidade de Coimbra
-
-Francisco Garc=C3=ADa-Pe=C3=B1alvo, Universidad de Salamanca
-
-=20
-
-Scientific Committee
-
-Francisco Garc=C3=ADa-Pe=C3=B1alvo, Universidad de Salamanca (Chair)
-
-Ad=C3=A9rito Marcos, Universidade Aberta
-
-Adolfo Lozano Tello, Universidad de Extremadura
-
-=C3=81lvaro Rocha, Universidade de Coimbra
-
-Ana Am=C3=A9lia Carvalho, Universidade de Coimbra
-
-Ana Maria Ramalho Correia, NOVA IMS
-
-Antonio Fern=C3=A1ndez-Caballero, Universidad de Castilla-La Mancha
-
-Antonio Garcia-Loureiro, Universidad de Santiago de Compostela
-
-Arnaldo Martins, Universidade de Aveiro
-
-Br=C3=A1ulio Alturas, ISCTE - Insituto Universit=C3=A1rio de Lisboa
-
-Carlos Costa, ISEG, Universidade de Lisboa
-
-Carlos Ferr=C3=A1s Sexto, Universidad de Santiago de Compostela
-
-Carlos Juiz, Universitat de les Illes Balears
-
-David Fonseca, La Salle, Universitat Ramon Llull
-
-Ernest Redondo, Universidad Polit=C3=A9cnica de Catalunya
-
-Feliz Gouveia, Universidade Fernando Pessoa
-
-Fernando Moreira, Universidade Portucalense
-
-Fernando Ramos, Universidade de Aveiro
-
-Francisco Restivo, Universidade Cat=C3=B3lica Portuguesa
-
-Gon=C3=A7alo Paiva Dias, Universidade de Aveiro
-
-Gonzalo Cuevas Agustin, Universidad Polit=C3=A9cnica de Madrid
-
-Jes=C3=BAs Fraile Ardanuy, Universidad Polit=C3=A9cnica de Madrid
-
-Jo=C3=A3o Costa, Universidade de Coimbra
-
-Jos=C3=A9 Antonio Calvo-Manzano Villal=C3=B3n, Universidad Polit=C3=A9=
-cnica de Madrid
-
-Jose M. Molina, Universidad Carlos III de Madrid
-
-Jose Machado, Universidade do Minho
-
-Jo=C3=A3o Manuel R.S. Tavares, FEUP, Universidade do Porto
-
-Jos=C3=A9 Martins, Universidade de Tr=C3=A1s-os-Montes e Alto Douro
-
-Luis Camarinha-Matos, Universidade Nova de Lisboa
-
-Lu=C3=ADs Paulo Reis, FEUP, Universidade do Porto
-
-Manuel P=C3=A9rez Cota, Universidad de Vigo
-
-Marco Painho, NOVA IMS
-
-M=C3=A1rio Piattini, Universidad de Castilla-La Mancha
-
-Martin Llamas Nistal, Universidad de Vigo
-
-Miguel Ram=C3=B3n Gonz=C3=A1lez Castro, Ence, Energ=C3=ADa y Celulosa
-
-Nelson Rocha, Universidade de Aveiro
-
-=C3=93scar Mealha, Universidade de Aveiro
-
-Paulo Pinto, FC, Universidade Nova de Lisboa
-
-Pedro S=C3=A1nchez-Palma, Universidad Polit=C3=A9cnica de Cartagena
-
-Pilar Mareca, Universidad Polit=C3=A9cnica de Madrid
-
-Ramiro Gon=C3=A7alves, Universidade de Tr=C3=A1s-os-Montes e Alto Dour=
-o
-
-Vitor Santos, NOVA IMS
-
-
-=20
-
-CISTI'2020 webpage:  http://www.cisti.eu/ <http://www.cisti.eu/>
-
-
-Kind regards,
-
-CISTI'2020 Team
-http://www.cisti.eu/ <http://www.cisti.eu/>
-
-
-
-=20
-
---NrHnH9jx7MCck2KMX45uNiuCenJDP=_3Ss
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-<html>
-  <head>
-    <title></title>
-    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content=
--Type" />
-  </head>
-  <body>
-    <p>* Published in IEEE Xplore and indexed by ISI, Scopus, EI-Compe=
-ndex, Google Scholar, etc.</p>
-    <p>** Conference with H5-Index =3D 16 (Google Scholar Ranking)</p>=
-
-    <p><br />---------------------------------------------------------=
-------------------------------------------------------------------<br =
-/>Doctoral Symposium of CISTI'2020&nbsp;- 15th Iberian Conference on I=
-nformation Systems and Technologies<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Seville,=
- Spain,&nbsp;24 -&nbsp;27&nbsp;June 2020<br />&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;<a href=3D"http://www.cisti.eu/">http://www.cisti.eu/</a><br />---=
-----------------------------------------------------------------------=
------------------------------------------------------------</p>
-    <p>&nbsp;</p>
-    <p>The purpose of CISTI'2020&rsquo;s Doctoral Symposium is to prov=
-ide graduate students a setting where they can, informally, expose and=
- discuss their work, collecting valuable expert opinions and sharing n=
-ew ideas, methods and applications. The Doctoral Symposium is an excel=
-lent opportunity for PhD students to present and discuss their work in=
- a Workshop format. Each presentation will be evaluated by a panel com=
-posed by at least three Information Systems and Technologies experts.<=
-/p>
-    <p>&nbsp;</p>
-    <p><strong>Contributions Submission</strong></p>
-    <p>The Doctoral Symposium is opened to PhD students whose research=
- area includes the themes proposed for this Conference. Submissions mu=
-st include an extended abstract (maximum 4 pages), following the Confe=
-rence&nbsp;<strong><a href=3D"http://cisti.eu/2017/images/templates.zi=
-p" rel=3D"noopener noreferrer" target=3D"_blank">style guide</a></stro=
-ng>. All selected contributions will be published with the Conference =
-Proceedings in electronic format with ISBN. These contributions&nbsp;<=
-span class=3D"hps">will be available</span>&nbsp;<span class=3D"hps">i=
-n</span>&nbsp;<span class=3D"hps">the&nbsp;<strong><a href=3D"https://=
-ieeexplore.ieee.org/xpl/conhome/8755443/proceeding" rel=3D"noopener no=
-referrer" target=3D"_blank">IEEE Xplore</a></strong></span>&nbsp;D<spa=
-n class=3D"hps">igital Library and&nbsp;</span><span class=3D"hps">wil=
-l be sent</span>&nbsp;<span class=3D"hps">for indexing in</span>&nbsp;=
-ISI, Scopus, EI-Compendex,&nbsp;<span class=3D"hps">INSPEC</span>&nbsp=
-;and Google Scholar.</p>
-    <p>Submissions must include the field, the PhD institution and the=
- number of months devoted to the development of the work. Additionally=
-, they should include in a clear and succinct manner:</p>
-    <p>&nbsp;&nbsp;&nbsp; &bull;&nbsp;&nbsp;&nbsp; The problem approac=
-hed and its significance or relevance<br />&nbsp;&nbsp;&nbsp; &bull;&n=
-bsp;&nbsp;&nbsp; The research objectives and related investigation top=
-ics<br />&nbsp;&nbsp;&nbsp; &bull;&nbsp;&nbsp;&nbsp; A brief display o=
-f what is already known<br />&nbsp;&nbsp;&nbsp; &bull;&nbsp;&nbsp;&nbs=
-p; A proposed solution methodology for the problem<br />&nbsp;&nbsp;&n=
-bsp; &bull;&nbsp;&nbsp;&nbsp; Expected results</p>
-    <p>&nbsp;</p>
-    <p><strong>Important Dates</strong></p>
-    <div itemprop=3D"articleBody">
-      <p><span class=3D"hps">Paper</span>&nbsp;<span class=3D"hps">sub=
-mission:</span>&nbsp;<span class=3D"hps">February 14</span>, <span cla=
-ss=3D"hps">2020</span><br /><br /><span class=3D"hps">Notification of<=
-/span>&nbsp;<span class=3D"hps">acceptance</span>:&nbsp;March 22, <spa=
-n class=3D"hps">2020</span><br /><br /><span class=3D"hps">Submission =
-of</span>&nbsp;<span class=3D"hps">accepted</span>&nbsp;<span class=3D=
-"hps">papers</span>: April <span class=3D"hps">5</span>,&nbsp;<span cl=
-ass=3D"hps">2020</span><br /><br /><span class=3D"hps">Payment of</spa=
-n>&nbsp;<span class=3D"hps">registration</span>,&nbsp;<span class=3D"h=
-ps">to</span>&nbsp;<span class=3D"hps">ensure</span>&nbsp;<span class=3D=
-"hps">the</span>&nbsp;<span class=3D"hps">inclusion</span>&nbsp;<span =
-class=3D"hps">of an</span>&nbsp;<span class=3D"hps">accepted paper</sp=
-an>&nbsp;<span class=3D"hps">in the&nbsp;</span><span class=3D"hps">co=
-nference</span>&nbsp;<span class=3D"hps">proceedings</span>: April <sp=
-an class=3D"hps">5</span>,&nbsp;<span class=3D"hps">2020</span></p>
-    </div>
-    <p>&nbsp;</p>
-    <p><strong>Organizing Committee<br /></strong></p>
-    <p>&Aacute;lvaro Rocha, Universidade de Coimbra</p>
-    <p>Francisco Garc&iacute;a-Pe&ntilde;alvo, Universidad de Salamanc=
-a</p>
-    <p>&nbsp;</p>
-    <p><strong>Scientific Committee</strong></p>
-    <p>Francisco Garc&iacute;a-Pe&ntilde;alvo, Universidad de Salamanc=
-a (Chair)</p>
-    <p>Ad&eacute;rito Marcos, Universidade Aberta</p>
-    <p>Adolfo Lozano Tello, Universidad de Extremadura</p>
-    <p>&Aacute;lvaro Rocha, Universidade de Coimbra</p>
-    <p>Ana Am&eacute;lia Carvalho, Universidade de Coimbra</p>
-    <p>Ana Maria Ramalho Correia, NOVA IMS</p>
-    <p>Antonio Fern&aacute;ndez-Caballero, Universidad de Castilla-La =
-Mancha</p>
-    <p>Antonio Garcia-Loureiro, Universidad de Santiago de Compostela<=
-/p>
-    <p>Arnaldo Martins, Universidade de Aveiro</p>
-    <p>Br&aacute;ulio Alturas, ISCTE - Insituto Universit&aacute;rio d=
-e Lisboa</p>
-    <p>Carlos Costa, ISEG, Universidade de Lisboa</p>
-    <p>Carlos Ferr&aacute;s Sexto, Universidad de Santiago de Composte=
-la</p>
-    <p>Carlos Juiz, Universitat de les Illes Balears</p>
-    <p>David Fonseca, La Salle, Universitat Ramon Llull</p>
-    <p>Ernest Redondo, Universidad Polit&eacute;cnica de Catalunya</p>=
-
-    <p>Feliz Gouveia, Universidade Fernando Pessoa</p>
-    <p>Fernando Moreira, Universidade Portucalense</p>
-    <p>Fernando Ramos, Universidade de Aveiro</p>
-    <p>Francisco Restivo, Universidade Cat&oacute;lica Portuguesa</p>
-    <p>Gon&ccedil;alo Paiva Dias, Universidade de Aveiro</p>
-    <p>Gonzalo Cuevas Agustin, Universidad Polit&eacute;cnica de Madri=
-d</p>
-    <p>Jes&uacute;s Fraile Ardanuy, Universidad Polit&eacute;cnica de =
-Madrid</p>
-    <p>Jo&atilde;o Costa, Universidade de Coimbra</p>
-    <p>Jos&eacute; Antonio Calvo-Manzano Villal&oacute;n, Universidad =
-Polit&eacute;cnica de Madrid</p>
-    <p>Jose M. Molina, Universidad Carlos III de Madrid</p>
-    <p>Jose Machado, Universidade do Minho</p>
-    <p>Jo&atilde;o Manuel R.S. Tavares, FEUP, Universidade do Porto</p=
->
-    <p>Jos&eacute; Martins, Universidade de Tr&aacute;s-os-Montes e Al=
-to Douro</p>
-    <p>Luis Camarinha-Matos, Universidade Nova de Lisboa</p>
-    <p>Lu&iacute;s Paulo Reis, FEUP, Universidade do Porto</p>
-    <p>Manuel P&eacute;rez Cota, Universidad de Vigo</p>
-    <p>Marco Painho, NOVA IMS</p>
-    <p>M&aacute;rio Piattini, Universidad de Castilla-La Mancha</p>
-    <p>Martin Llamas Nistal, Universidad de Vigo</p>
-    <p>Miguel Ram&oacute;n Gonz&aacute;lez Castro, Ence, Energ&iacute;=
-a y Celulosa</p>
-    <p>Nelson Rocha, Universidade de Aveiro</p>
-    <p>&Oacute;scar Mealha, Universidade de Aveiro</p>
-    <p>Paulo Pinto, FC, Universidade Nova de Lisboa</p>
-    <p>Pedro S&aacute;nchez-Palma, Universidad Polit&eacute;cnica de C=
-artagena</p>
-    <p>Pilar Mareca, Universidad Polit&eacute;cnica de Madrid</p>
-    <p>Ramiro Gon&ccedil;alves, Universidade de Tr&aacute;s-os-Montes =
-e Alto Douro</p>
-    <p>Vitor Santos, NOVA IMS<br /></p>
-    <p><span style=3D"font-weight: bold">&nbsp;</span></p>
-    <p><span style=3D"font-weight: bold">CISTI'2020&nbsp;webpage</span=
->:&nbsp; <a href=3D"http://www.cisti.eu/">http://www.cisti.eu/</a><br =
-/><br /><br />Kind regards,<br /><br />CISTI'2020 Team<br /><a href=3D=
-"http://www.cisti.eu/">http://www.cisti.eu/</a><br /><br /></p>
-    <p>&nbsp;</p>
-  </body>
-</html>
-
---NrHnH9jx7MCck2KMX45uNiuCenJDP=_3Ss--
-
-
---===============7401445201433776208==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+On Tue, Dec 24, 2019 at 02:03:10PM +0100, Borislav Petkov wrote:
+> On Wed, Dec 04, 2019 at 04:09:37PM -0800, Thomas Garnier wrote:
+> > Minor changes based on feedback and rebase from v9.
+> > 
+> > Splitting the previous serie in two. This part contains assembly code
+> > changes required for PIE but without any direct dependencies with the
+> > rest of the patchset.
+> 
+> Ok, modulo the minor commit message and comments fixup, this looks ok
+> and passes testing here.
+> 
+> I'm going to queue patches 2-11 of the next version unless someone
+> complains.
+
+Great! Thanks very much for the reviews. :)
+
+-- 
+Kees Cook
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============7401445201433776208==--
-
