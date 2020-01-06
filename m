@@ -1,83 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24E4D130C37
-	for <lists.virtualization@lfdr.de>; Mon,  6 Jan 2020 03:47:55 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 255061310D9
+	for <lists.virtualization@lfdr.de>; Mon,  6 Jan 2020 11:51:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 58F548739D;
-	Mon,  6 Jan 2020 02:47:53 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6DE7184BBE;
+	Mon,  6 Jan 2020 10:51:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Bcx2gZRplKA5; Mon,  6 Jan 2020 02:47:52 +0000 (UTC)
+	with ESMTP id clltE4YGT6PZ; Mon,  6 Jan 2020 10:51:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id CC7B88738A;
-	Mon,  6 Jan 2020 02:47:52 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D377785198;
+	Mon,  6 Jan 2020 10:51:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A1244C0881;
-	Mon,  6 Jan 2020 02:47:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AE236C0881;
+	Mon,  6 Jan 2020 10:51:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BC136C0881
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D4923C0881
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jan 2020 02:47:50 +0000 (UTC)
+ Mon,  6 Jan 2020 10:51:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id B1D2681E6F
+ by hemlock.osuosl.org (Postfix) with ESMTP id B3969876A0
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jan 2020 02:47:50 +0000 (UTC)
+ Mon,  6 Jan 2020 10:51:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id t6ere7escTfR
+ with ESMTP id sBTEfMOjJm7s
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jan 2020 02:47:49 +0000 (UTC)
+ Mon,  6 Jan 2020 10:51:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5102281DFD
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id CDBF687702
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jan 2020 02:47:49 +0000 (UTC)
+ Mon,  6 Jan 2020 10:50:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1578278867;
+ s=mimecast20190719; t=1578307843;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5jHs+ncyMkPMxI5AsiGIl7F6vLxr1/FM/W1+8uxJ60Q=;
- b=iYAwGKrRkHiLRkU5AvjTBCGENVmW3G6S7GeFofT9QmsDopbEUgtkbKm3420M9+f2PHNcJ/
- HLqM29jgDmB8hqAkjLKJfeFbbtuvS4LV5qJTtNPNLl6TNsKdHfc+PgfvTYPp6I0xDLNami
- MU9kecTdaXTDsAl5tqYMhGOZczkjHY0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-61-bEdDg_oCPxqNF6G2z-hkxg-1; Sun, 05 Jan 2020 21:47:44 -0500
-X-MC-Unique: bEdDg_oCPxqNF6G2z-hkxg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CA9DB10054E3;
- Mon,  6 Jan 2020 02:47:42 +0000 (UTC)
-Received: from [10.72.12.147] (ovpn-12-147.pek2.redhat.com [10.72.12.147])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 73D9328981;
- Mon,  6 Jan 2020 02:47:37 +0000 (UTC)
-Subject: Re: [PATCH v2] virtio_net: CTRL_GUEST_OFFLOADS depends on CTRL_VQ
-To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
-References: <20200105132120.92370-1-mst@redhat.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <2d7053b5-295c-4051-a722-7656350bdb74@redhat.com>
-Date: Mon, 6 Jan 2020 10:47:35 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ bh=qU0SboNEBDWBERvxqixCdqMTzHYQoyobKNvA/+6rjvk=;
+ b=VXKO1yeA8hbAJUwgWeRvslKBPgWi1pvIHLW6eUh86SIMo3a5WM1SOd9VKQNoQGXHJehyiu
+ fA7DWFtuWfx2yCkJGGv+l/8iMNBITNt4ATze+XQyttF7EqU7gM+YAG+yPQpY1m2/jTo2Sa
+ sYa87e4wt+0bsb2HNmaOtdzpnSbTWyQ=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-262-o4VUwQPwN5mLOjYj_rrhVg-1; Mon, 06 Jan 2020 05:50:42 -0500
+Received: by mail-qk1-f199.google.com with SMTP id l7so14619290qke.8
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 06 Jan 2020 02:50:42 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=qU0SboNEBDWBERvxqixCdqMTzHYQoyobKNvA/+6rjvk=;
+ b=WKH8a8URUdxSEh3lkNmwaeKzLkBhIJOimnW1QPtV3pk3o4cYz2MiNwf1BPuggqs9Mm
+ fajiofjxeu2brGr4hAk73JQw8TikDURVpI9wLT4Cvle8wUUpSB59n/saxErfa+5YdkL2
+ D9pviqY/PWI0HS25gjj3NyWonjuSLo1Fbvez0j/rD4FJJCBzs+6VEX6y7BSWWYWr0qV7
+ GzqWh4H250NHFiXFIqYlC0UzHG4zXabIWAZ8Xch0yXxdlq2FyQeYb0YJzeH9q7FtUU16
+ vLVWEDl0pHuD5E0vqbfjT+KbgnqQfYx5DtJBoOdo8VuZ9mq64+g3yUqhwjcfIRtNlN5n
+ HG6A==
+X-Gm-Message-State: APjAAAWYKlD+1nqMprE6J8GzIwvEr5GFmaXfYLZlXCKkBU1V/6xYwURz
+ dtOzw1Pj7cxpEyHV4D4m99YuR9pybQVNIGnq9SkLNxoVtQVMO02DJ1poIbCseGUpyF2CpzDMV3W
+ LxrQHFe4tgk1b/fJ/UZoj1XAfY7aR25FujX3OGrhZdQ==
+X-Received: by 2002:a37:65c7:: with SMTP id
+ z190mr77575624qkb.261.1578307841385; 
+ Mon, 06 Jan 2020 02:50:41 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwBMNWp3jpUCJz4gy7m1LfPpAYW3QX/zbzMI48HgZMdTtTpUk7nhqdKrFjR8fz3UtWCh133Iw==
+X-Received: by 2002:a37:65c7:: with SMTP id
+ z190mr77575606qkb.261.1578307841125; 
+ Mon, 06 Jan 2020 02:50:41 -0800 (PST)
+Received: from redhat.com (bzq-79-183-34-164.red.bezeqint.net. [79.183.34.164])
+ by smtp.gmail.com with ESMTPSA id e2sm20313422qkb.112.2020.01.06.02.50.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Jan 2020 02:50:40 -0800 (PST)
+Date: Mon, 6 Jan 2020 05:50:34 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Christian Borntraeger <borntraeger@de.ibm.com>
+Subject: Re: vhost changes (batched) in linux-next after 12/13 trigger random
+ crashes in KVM guests after reboot
+Message-ID: <20200106054041-mutt-send-email-mst@kernel.org>
+References: <c022e1d6-0d57-ae07-5e6b-8e40d3b01f4b@de.ibm.com>
+ <20191218100926-mutt-send-email-mst@kernel.org>
+ <2ffdbd95-e375-a627-55a1-6990b0a0e37a@de.ibm.com>
 MIME-Version: 1.0
-In-Reply-To: <20200105132120.92370-1-mst@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: Alistair Delva <adelva@google.com>, netdev@vger.kernel.org,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- "David S. Miller" <davem@davemloft.net>,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <2ffdbd95-e375-a627-55a1-6990b0a0e37a@de.ibm.com>
+X-MC-Unique: o4VUwQPwN5mLOjYj_rrhVg-1
+X-Mimecast-Spam-Score: 0
+Content-Disposition: inline
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,49 +109,82 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMS81IOS4i+WNiDk6MjIsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToKPiBUaGUg
-b25seSB3YXkgZm9yIGd1ZXN0IHRvIGNvbnRyb2wgb2ZmbG9hZHMgKGFzIGVuYWJsZWQgYnkKPiBW
-SVJUSU9fTkVUX0ZfQ1RSTF9HVUVTVF9PRkZMT0FEUykgaXMgYnkgc2VuZGluZyBjb21tYW5kcwo+
-IHRocm91Z2ggQ1RSTF9WUS4gU28gaXQgZG9lcyBub3QgbWFrZSBzZW5zZSB0bwo+IGFja25vd2xl
-ZGdlIFZJUlRJT19ORVRfRl9DVFJMX0dVRVNUX09GRkxPQURTIHdpdGhvdXQKPiBWSVJUSU9fTkVU
-X0ZfQ1RSTF9WUS4KPgo+IFRoZSBzcGVjIGRvZXMgbm90IG91dGxhdyBkZXZpY2VzIHdpdGggc3Vj
-aCBhIGNvbmZpZ3VyYXRpb24sIHNvIHdlIGhhdmUKPiB0byBzdXBwb3J0IGl0LiBTaW1wbHkgY2xl
-YXIgVklSVElPX05FVF9GX0NUUkxfR1VFU1RfT0ZGTE9BRFMuCj4gTm90ZSB0aGF0IExpbnV4IGlz
-IHN0aWxsIGNyYXNoaW5nIGlmIGl0IHRyaWVzIHRvCj4gY2hhbmdlIHRoZSBvZmZsb2FkcyB3aGVu
-IHRoZXJlJ3Mgbm8gY29udHJvbCB2cS4KPiBUaGF0IG5lZWRzIHRvIGJlIGZpeGVkIGJ5IGFub3Ro
-ZXIgcGF0Y2guCj4KPiBSZXBvcnRlZC1ieTogQWxpc3RhaXIgRGVsdmEgPGFkZWx2YUBnb29nbGUu
-Y29tPgo+IFJlcG9ydGVkLWJ5OiBXaWxsZW0gZGUgQnJ1aWpuIDx3aWxsZW1kZWJydWlqbi5rZXJu
-ZWxAZ21haWwuY29tPgo+IEZpeGVzOiAzZjkzNTIyZmZhYjIgKCJ2aXJ0aW8tbmV0OiBzd2l0Y2gg
-b2ZmIG9mZmxvYWRzIG9uIGRlbWFuZCBpZiBwb3NzaWJsZSBvbiBYRFAgc2V0IikKPiBTaWduZWQt
-b2ZmLWJ5OiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29tPgo+IC0tLQo+Cj4gU2Ft
-ZSBwYXRjaCBhcyB2MSBidXQgdXBkYXRlIGRvY3VtZW50YXRpb24gc28gaXQncyBjbGVhciBpdCdz
-IG5vdAo+IGVub3VnaCB0byBmaXggdGhlIGNyYXNoLgo+Cj4gICBkcml2ZXJzL25ldC92aXJ0aW9f
-bmV0LmMgfCA5ICsrKysrKysrKwo+ICAgMSBmaWxlIGNoYW5nZWQsIDkgaW5zZXJ0aW9ucygrKQo+
-Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYyBiL2RyaXZlcnMvbmV0L3Zp
-cnRpb19uZXQuYwo+IGluZGV4IDRkN2Q1NDM0Y2M1ZC4uN2I4ODA1YjQ3ZjBkIDEwMDY0NAo+IC0t
-LSBhL2RyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYwo+ICsrKyBiL2RyaXZlcnMvbmV0L3ZpcnRpb19u
-ZXQuYwo+IEBAIC0yOTcxLDYgKzI5NzEsMTUgQEAgc3RhdGljIGludCB2aXJ0bmV0X3ZhbGlkYXRl
-KHN0cnVjdCB2aXJ0aW9fZGV2aWNlICp2ZGV2KQo+ICAgCWlmICghdmlydG5ldF92YWxpZGF0ZV9m
-ZWF0dXJlcyh2ZGV2KSkKPiAgIAkJcmV0dXJuIC1FSU5WQUw7Cj4gICAKPiArCS8qIFZJUlRJT19O
-RVRfRl9DVFJMX0dVRVNUX09GRkxPQURTIGRvZXMgbm90IHdvcmsgd2l0aG91dAo+ICsJICogVklS
-VElPX05FVF9GX0NUUkxfVlEuIFVuZm9ydHVuYXRlbHkgc3BlYyBmb3Jnb3QgdG8KPiArCSAqIHNw
-ZWNpZnkgdGhhdCBWSVJUSU9fTkVUX0ZfQ1RSTF9HVUVTVF9PRkZMT0FEUyBkZXBlbmRzCj4gKwkg
-KiBvbiBWSVJUSU9fTkVUX0ZfQ1RSTF9WUSBzbyBkZXZpY2VzIGNhbiBzZXQgdGhlIGxhdGVyIGJ1
-dAo+ICsJICogbm90IHRoZSBmb3JtZXIuCj4gKwkgKi8KPiArCWlmICghdmlydGlvX2hhc19mZWF0
-dXJlKHZkZXYsIFZJUlRJT19ORVRfRl9DVFJMX1ZRKSkKPiArCQkJX192aXJ0aW9fY2xlYXJfYml0
-KHZkZXYsIFZJUlRJT19ORVRfRl9DVFJMX0dVRVNUX09GRkxPQURTKTsKCgpJZiBpdCdzIGp1c3Qg
-YmVjYXVzZSBhIGJ1ZyBvZiBzcGVjLCBzaG91bGQgd2Ugc2ltcGx5IGZpeCB0aGUgYnVnIGFuZCAK
-ZmFpbCB0aGUgbmVnb3RpYXRpb24gaW4gdmlydG5ldF92YWxpZGF0ZV9mZWF0dXJlKCk/CgpPdGhl
-cndpc2UgdGhlcmUgd291bGQgYmUgaW5jb25zaXN0ZW5jeSBpbiBoYW5kbGluZyBmZWF0dXJlIGRl
-cGVuZGVuY2llcyAKZm9yIGN0cmwgdnEuCgpUaGFua3MKCgo+ICsKPiAgIAlpZiAodmlydGlvX2hh
-c19mZWF0dXJlKHZkZXYsIFZJUlRJT19ORVRfRl9NVFUpKSB7Cj4gICAJCWludCBtdHUgPSB2aXJ0
-aW9fY3JlYWQxNih2ZGV2LAo+ICAgCQkJCQkgb2Zmc2V0b2Yoc3RydWN0IHZpcnRpb19uZXRfY29u
-ZmlnLAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmly
-dHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5k
-YXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3ZpcnR1YWxpemF0aW9u
+On Wed, Dec 18, 2019 at 04:59:02PM +0100, Christian Borntraeger wrote:
+> On 18.12.19 16:10, Michael S. Tsirkin wrote:
+> > On Wed, Dec 18, 2019 at 03:43:43PM +0100, Christian Borntraeger wrote:
+> >> Michael,
+> >>
+> >> with 
+> >> commit db7286b100b503ef80612884453bed53d74c9a16 (refs/bisect/skip-db7286b100b503ef80612884453bed53d74c9a16)
+> >>     vhost: use batched version by default
+> >> plus
+> >> commit 6bd262d5eafcdf8cdfae491e2e748e4e434dcda6 (HEAD, refs/bisect/bad)
+> >>     Revert "vhost/net: add an option to test new code"
+> >> to make things compile (your next tree is not easily bisectable, can you fix that as well?).
+> > 
+> > I'll try.
+> > 
+> >>
+> >> I get random crashes in my s390 KVM guests after reboot.
+> >> Reverting both patches together with commit decd9b8 "vhost: use vhost_desc instead of vhost_log" to
+> >> make it compile again) on top of linux-next-1218 makes the problem go away.
+> >>
+> >> Looks like the batched version is not yet ready for prime time. Can you drop these patches until
+> >> we have fixed the issues?
+> >>
+> >> Christian
+> >>
+> > 
+> > Will do, thanks for letting me know.
+> 
+> I have confirmed with the initial reporter (internal test team) that <driver name='qemu'/> 
+> with a known to be broken linux next kernel also fixes the problem, so it is really the
+> vhost changes.
+
+OK I'm back and trying to make it more bisectable.
+
+I pushed a new tag "batch-v2".
+It's same code but with this bisect should get more information.
+
+
+I suspect one of the following:
+
+commit 1414d7ee3d10d2ec2bc4ee652d1d90ec91da1c79
+Author: Michael S. Tsirkin <mst@redhat.com>
+Date:   Mon Oct 7 06:11:18 2019 -0400
+
+    vhost: batching fetches
+    
+    With this patch applied, new and old code perform identically.
+    
+    Lots of extra optimizations are now possible, e.g.
+    we can fetch multiple heads with copy_from/to_user now.
+    We can get rid of maintaining the log array.  Etc etc.
+    
+    Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+commit 50297a8480b439efc5f3f23088cb2d90b799acef
+Author: Michael S. Tsirkin <mst@redhat.com>
+Date:   Wed Dec 11 12:19:26 2019 -0500
+
+    vhost: use batched version by default
+    
+    As testing shows no performance change, switch to that now.
+    
+    Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+
+and would like to know which.
+
+Thanks!
+
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
