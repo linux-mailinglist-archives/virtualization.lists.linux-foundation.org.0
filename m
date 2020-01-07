@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A73C5132BCC
-	for <lists.virtualization@lfdr.de>; Tue,  7 Jan 2020 17:54:35 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 595D2835C4;
-	Tue,  7 Jan 2020 16:54:34 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FM_P5bCu1vjW; Tue,  7 Jan 2020 16:54:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id DB90284EA3;
-	Tue,  7 Jan 2020 16:54:33 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D4A51C0881;
-	Tue,  7 Jan 2020 16:54:33 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 95579C0881
- for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jan 2020 16:54:32 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C85C132BE3
+	for <lists.virtualization@lfdr.de>; Tue,  7 Jan 2020 17:54:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 842B285FAC
- for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jan 2020 16:54:32 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DDD1E86030;
+	Tue,  7 Jan 2020 16:54:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id p0MhXwoIx6gH
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rojyqCyJjngf; Tue,  7 Jan 2020 16:54:43 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 257E085F6D;
+	Tue,  7 Jan 2020 16:54:43 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 14E07C0881;
+	Tue,  7 Jan 2020 16:54:43 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 24BE1C0881
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jan 2020 16:54:32 +0000 (UTC)
+ Tue,  7 Jan 2020 16:54:42 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 1AC88203B4
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  7 Jan 2020 16:54:42 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id opS2q6mcPpKS
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  7 Jan 2020 16:54:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 1B04A85F6D
+ by silver.osuosl.org (Postfix) with ESMTPS id 6A3CA2000B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jan 2020 16:54:32 +0000 (UTC)
+ Tue,  7 Jan 2020 16:54:41 +0000 (UTC)
 Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6B861214D8;
- Tue,  7 Jan 2020 16:54:24 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4E4BC24676;
+ Tue,  7 Jan 2020 16:54:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578416071;
- bh=kcx/rxr2RLwdfnh8NHNbRoC/CMRusZFBrn/JE86e3Ww=;
+ s=default; t=1578416081;
+ bh=pyS3wZ02TYoQQFrhCaT28XntjPpq/hHYDQKnecGVi1c=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=nPI0cC7rOnafhOVC5bp7UTE2mQoTZDbOxMxBpCNT2a6rIVaeFzV7mtVVZ9F+98p+x
- Hk2gcfTOOvUk0qIzZk1BSRAhziD0R33MmnQ7l6nqXeVJ0q41DUIG7bmLWej2I0aWHz
- EJm+d+oMYMPHrJxueaaDZOqmBnz1RIpoH7U6LrGs=
+ b=MyjPtgApzAeWBBxzp9EQBWQXZ+iwA999spRine79c7OM4lsnSPBUGIGrBr9MZxl+K
+ qVZbWWFCLhelBQoFuIPPOarD6WgO7KDyfRquNgQ3rTLR4Z1FvS7QTS1zTSCX5JmiYr
+ znxaQdgOb6csvJ/r8Qjz1jvr9IFWhhb4LsApylCQ=
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: Richard Henderson <rth@twiddle.net>,
  Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
@@ -78,10 +78,10 @@ To: Richard Henderson <rth@twiddle.net>,
  linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
  linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
  linux-arch@vger.kernel.org
-Subject: [RFT 05/13] powerpc: Constify ioreadX() iomem argument (as in generic
+Subject: [RFT 06/13] arc: Constify ioreadX() iomem argument (as in generic
  implementation)
-Date: Tue,  7 Jan 2020 17:53:04 +0100
-Message-Id: <1578415992-24054-8-git-send-email-krzk@kernel.org>
+Date: Tue,  7 Jan 2020 17:53:05 +0100
+Message-Id: <1578415992-24054-9-git-send-email-krzk@kernel.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1578415992-24054-1-git-send-email-krzk@kernel.org>
 References: <1578415992-24054-1-git-send-email-krzk@kernel.org>
@@ -106,82 +106,37 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 The ioreadX() helpers have inconsistent interface.  On some architectures
 void *__iomem address argument is a pointer to const, on some not.
 
-Implementations of ioreadX() do not modify the memory under the address
-so they can be converted to a "const" version for const-safety and
-consistency among architectures.
+Implementations of ioreadX() do not modify the memory under the
+address so they can be converted to a "const" version for const-safety
+and consistency among architectures.
 
 Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 ---
- arch/powerpc/kernel/iomap.c | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
+ arch/arc/plat-axs10x/axs10x.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/powerpc/kernel/iomap.c b/arch/powerpc/kernel/iomap.c
-index 5ac84efc6ede..de8da1c3496f 100644
---- a/arch/powerpc/kernel/iomap.c
-+++ b/arch/powerpc/kernel/iomap.c
-@@ -15,23 +15,23 @@
-  * Here comes the ppc64 implementation of the IOMAP 
-  * interfaces.
-  */
--unsigned int ioread8(void __iomem *addr)
-+unsigned int ioread8(const void __iomem *addr)
- {
- 	return readb(addr);
+diff --git a/arch/arc/plat-axs10x/axs10x.c b/arch/arc/plat-axs10x/axs10x.c
+index 63ea5a606ecd..180c260a8221 100644
+--- a/arch/arc/plat-axs10x/axs10x.c
++++ b/arch/arc/plat-axs10x/axs10x.c
+@@ -84,7 +84,7 @@ static void __init axs10x_print_board_ver(unsigned int creg, const char *str)
+ 		unsigned int val;
+ 	} board;
+ 
+-	board.val = ioread32((void __iomem *)creg);
++	board.val = ioread32((const void __iomem *)creg);
+ 	pr_info("AXS: %s FPGA Date: %u-%u-%u\n", str, board.d, board.m,
+ 		board.y);
  }
--unsigned int ioread16(void __iomem *addr)
-+unsigned int ioread16(const void __iomem *addr)
- {
- 	return readw(addr);
- }
--unsigned int ioread16be(void __iomem *addr)
-+unsigned int ioread16be(const void __iomem *addr)
- {
- 	return readw_be(addr);
- }
--unsigned int ioread32(void __iomem *addr)
-+unsigned int ioread32(const void __iomem *addr)
- {
- 	return readl(addr);
- }
--unsigned int ioread32be(void __iomem *addr)
-+unsigned int ioread32be(const void __iomem *addr)
- {
- 	return readl_be(addr);
- }
-@@ -41,27 +41,27 @@ EXPORT_SYMBOL(ioread16be);
- EXPORT_SYMBOL(ioread32);
- EXPORT_SYMBOL(ioread32be);
- #ifdef __powerpc64__
--u64 ioread64(void __iomem *addr)
-+u64 ioread64(const void __iomem *addr)
- {
- 	return readq(addr);
- }
--u64 ioread64_lo_hi(void __iomem *addr)
-+u64 ioread64_lo_hi(const void __iomem *addr)
- {
- 	return readq(addr);
- }
--u64 ioread64_hi_lo(void __iomem *addr)
-+u64 ioread64_hi_lo(const void __iomem *addr)
- {
- 	return readq(addr);
- }
--u64 ioread64be(void __iomem *addr)
-+u64 ioread64be(const void __iomem *addr)
- {
- 	return readq_be(addr);
- }
--u64 ioread64be_lo_hi(void __iomem *addr)
-+u64 ioread64be_lo_hi(const void __iomem *addr)
- {
- 	return readq_be(addr);
- }
--u64 ioread64be_hi_lo(void __iomem *addr)
-+u64 ioread64be_hi_lo(const void __iomem *addr)
- {
- 	return readq_be(addr);
- }
+@@ -95,7 +95,7 @@ static void __init axs10x_early_init(void)
+ 	char mb[32];
+ 
+ 	/* Determine motherboard version */
+-	if (ioread32((void __iomem *) CREG_MB_CONFIG) & (1 << 28))
++	if (ioread32((const void __iomem *) CREG_MB_CONFIG) & (1 << 28))
+ 		mb_rev = 3;	/* HT-3 (rev3.0) */
+ 	else
+ 		mb_rev = 2;	/* HT-2 (rev2.0) */
 -- 
 2.7.4
 
