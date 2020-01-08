@@ -1,82 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F6C4133E19
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jan 2020 10:16:01 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 355EB134146
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jan 2020 12:56:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C497A87B3D;
-	Wed,  8 Jan 2020 09:15:59 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id CF3898663C;
+	Wed,  8 Jan 2020 11:56:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eMfSLnD+JzHe; Wed,  8 Jan 2020 09:15:58 +0000 (UTC)
+	with ESMTP id LKvlnQCV3efK; Wed,  8 Jan 2020 11:56:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 631FB87B47;
-	Wed,  8 Jan 2020 09:15:58 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3FE0386657;
+	Wed,  8 Jan 2020 11:56:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 47FAEC1D81;
-	Wed,  8 Jan 2020 09:15:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2EAF1C0881;
+	Wed,  8 Jan 2020 11:56:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B0EC3C0881
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B9175C0881
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 09:15:56 +0000 (UTC)
+ Wed,  8 Jan 2020 11:56:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 9370C879FC
+ by fraxinus.osuosl.org (Postfix) with ESMTP id A2E22857F8
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 09:15:56 +0000 (UTC)
+ Wed,  8 Jan 2020 11:56:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8HEj2tyMPyBl
+ with ESMTP id kEzqW4PbYiY6
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 09:15:55 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
- [209.85.208.67])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 86C2187B3C
+ Wed,  8 Jan 2020 11:56:01 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.73])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 74EAD848FA
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 09:15:55 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id b8so1962249edx.7
+ Wed,  8 Jan 2020 11:56:00 +0000 (UTC)
+Received: from mail-lj1-f170.google.com ([209.85.208.170]) by
+ mrelayeu.kundenserver.de (mreue107 [212.227.15.145]) with ESMTPSA (Nemesis)
+ id 1MGA0o-1iuivJ3GGq-00GXfa for <virtualization@lists.linux-foundation.org>;
+ Wed, 08 Jan 2020 12:55:57 +0100
+Received: by mail-lj1-f170.google.com with SMTP id w1so3029275ljh.5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 08 Jan 2020 01:15:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=vfyps/IUL6/PJnjolCWEAdH26MAmNPDn2opwbDbnepg=;
- b=ELhdi1Cb18eJfAfWB1ySVv9queR72rA2QzJLRMfEtXh2jDyaX4wQxLbzlc3L4msio8
- 7dmTqyK27k5vaZ528RpP+cNpZKEtvJ7qpnoftZcsNTYlQkia0YP2qSeO7iX6Ui7twjKy
- fk2x6v8mzXCrnyA05XDsKWbCWYaGyQNqN0A515fp//VWnzpC5VIoWbZzGSWBMWSIWXrh
- FyV1d6yJ8lOMHvsKQZI760yRM4fPBWO0DSUDQzgEtyIT4E/F409qTp/tlBo8zGMQ0ZDj
- YnnVECX9giVjUtKQxcjxl0unkoll+Hmam/YzvyOWDngcClx5l9eVaTcdaW8PiOaK3kzG
- vLEA==
-X-Gm-Message-State: APjAAAX6CqYfHlUnRGvKFRRnMsrpGmbkPnHqCeod1qUI/8AAbsbGexHo
- E1gJBJ7kcJ9m2f00YIPrhVE=
-X-Google-Smtp-Source: APXvYqwWgb4dfQDzLCQ3ihOQo6HGElfX4FRxgQVj5VsuPKdEU0cfakNWGRh627mzzt3wCzM621IKeg==
-X-Received: by 2002:aa7:c4c8:: with SMTP id p8mr4353856edr.72.1578474953961;
- Wed, 08 Jan 2020 01:15:53 -0800 (PST)
-Received: from pi3 ([194.230.155.149])
- by smtp.googlemail.com with ESMTPSA id y4sm54018edl.11.2020.01.08.01.15.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2020 01:15:53 -0800 (PST)
-Date: Wed, 8 Jan 2020 10:15:49 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Arnd Bergmann <arnd@arndb.de>
-Subject: Re: [RFT 00/13] iomap: Constify ioreadX() iomem argument
-Message-ID: <20200108091549.GB10145@pi3>
+ Wed, 08 Jan 2020 03:55:57 -0800 (PST)
+X-Gm-Message-State: APjAAAXJZzpBNBdCBtqyA3jn3tFpY1ao6P2nysSoH55wXFvmaBrQFILa
+ DvQyLx3EQAmzrhycncpmEmMgPemMuU2xv9+xgME=
+X-Google-Smtp-Source: APXvYqx76A/E4Ch8oNBJvonZ2jianfqelDGhZdcoyIiElnwI+5tX58xf2+wQq15Hqyr3lM5AXUWKqh7e7QV64xZG5mc=
+X-Received: by 2002:a2e:9095:: with SMTP id l21mr2608508ljg.175.1578484556968; 
+ Wed, 08 Jan 2020 03:55:56 -0800 (PST)
+MIME-Version: 1.0
 References: <1578415992-24054-1-git-send-email-krzk@kernel.org>
  <CAMuHMdW4ek0OYQDrrbcpZjNUTTP04nSbwkmiZvBmKcU=PQM9qA@mail.gmail.com>
  <CAMuHMdUBmYtJKtSYzS_5u67hVZOqcKSgFY1rDGme6gLNRBJ_gA@mail.gmail.com>
  <CAJKOXPfq9vS4kSyx1jOPHBvi9_HjviRv0LU2A8ZwdmqgUuebHQ@mail.gmail.com>
  <2355489c-a207-1927-54cf-85c04b62f18f@c-s.fr>
  <CAK8P3a21yPrmp4ik3Ei1BZfeqZNf0wL5NZNF3uXqb4FLRDyUPw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAK8P3a21yPrmp4ik3Ei1BZfeqZNf0wL5NZNF3uXqb4FLRDyUPw@mail.gmail.com>
+ <20200108091549.GB10145@pi3>
+In-Reply-To: <20200108091549.GB10145@pi3>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Wed, 8 Jan 2020 12:55:39 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a19ZgLhKJ016Mt_FyZrqnKaWwJyiaauMiUDAHV=DB9_2w@mail.gmail.com>
+Message-ID: <CAK8P3a19ZgLhKJ016Mt_FyZrqnKaWwJyiaauMiUDAHV=DB9_2w@mail.gmail.com>
+Subject: Re: [RFT 00/13] iomap: Constify ioreadX() iomem argument
+To: Krzysztof Kozlowski <krzk@kernel.org>
+X-Provags-ID: V03:K1:2PunY2zyZgR3dtDeMxCXMwAAAo0MTMenJMzx+mQdc5aha8knZnw
+ pTDfQvGqmZ0uZpIP7gWKkkwbmZklpOIcDyL1xZV3lIXE5YqYZ8Hxa9/08vTJED7m5sa8rh6
+ 6aUDwYRdz1RUf8bKNqWWzbr311yBbsPsxgpKsWHoJQdYJlGGleP5mkR0Fhb5jAouuUR/xJh
+ xfHEdrp64Vowzwo995opw==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:kgtq+g1wZWA=:PJhG06G38WqbbnLjlnZj0f
+ k5hPooCL/IdMbSxPXvJF1TjpmJ2dkWUsKjz9RWXI98bi3q+JnO2jv6RVy/o9zZK1bz5jo79na
+ QX4GRSqhLRyQ6+iBE5aNCfex8DtZr6OH3FSEVpeG7zOsLmQlEHrBvhMGkJNzqzcBdKRVZEb5n
+ aB4OUKCLMAE/fLX4lv/NJzniWwt8mMQ2d770D1CZZj+mj0/2GbXfJ2j3hm1j4dr7cTWOS61o+
+ iEgqLxzeno08NDn195je6GVPWLGw7g1QEMmZjMG6j6Rek5uujFvtsfi1ZRxLRHTJvEey4d7gD
+ O35nc8BcYT8O5G1/S1KwwZviJWjdqJJHR4wcGS3HhKkEEJdqGxP86ZZo9Z0v201UfwPeL8sdW
+ 9tAe+RQEXVrBKulSHInPJ1jlEeq4wYa/UZ6KFan0QIQiD4Q4yHfKjpnMy/IZZffN9cHAFxPjI
+ 5ZIMO9EOtlvwCujRVHNchI8RdxlS1hCjwa34Pag+gQhR49+Ni04cVvsWv+vHxeE2ghqssP2ab
+ rjV2LkAzdqGrbL6Spt9QG0mYC/UyNv5IIqZmCV34Mrv1DExa9nETqgDseY3L3igZlXmC4ngI3
+ sMZwekWOB6xyOFtq394YDTqfvMfI/lfZjEQJieJW/F5Pm6Df0z2o8JLoMlCT3rekWpH3RZk6U
+ OwgEHdljg9za8FOig+jbHcojc+bxiswg4g9cZY48BHM4zVbgniFt/qCnsAjQ6n4BbnHR3xi8L
+ QWfrdjuoLPk1er69zuU14xspaGtyzzkQTtdiO+t0IqEUnz5OzzMzwm5C1gHi6PvWiwps4rdEc
+ ReykrIMgcrRGh5BWpwOTyRbgrcHihdQZxfMVO3a6i4QPNTQDb9AheT6LnuRvo+J/Q3tbrILXT
+ 1cbTCZbttQ1FiHn4oUIA==
 Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
  ML nouveau <nouveau@lists.freedesktop.org>,
@@ -116,55 +122,34 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gV2VkLCBKYW4gMDgsIDIwMjAgYXQgMDk6NDQ6MzZBTSArMDEwMCwgQXJuZCBCZXJnbWFubiB3
-cm90ZToKPiBPbiBXZWQsIEphbiA4LCAyMDIwIGF0IDk6MzYgQU0gQ2hyaXN0b3BoZSBMZXJveSA8
-Y2hyaXN0b3BoZS5sZXJveUBjLXMuZnI+IHdyb3RlOgo+ID4gTGUgMDgvMDEvMjAyMCDDoCAwOTox
-OCwgS3J6eXN6dG9mIEtvemxvd3NraSBhIMOpY3JpdCA6Cj4gPiA+IE9uIFdlZCwgOCBKYW4gMjAy
-MCBhdCAwOToxMywgR2VlcnQgVXl0dGVyaG9ldmVuIDxnZWVydEBsaW51eC1tNjhrLm9yZz4gd3Jv
-dGU6Cj4gPiA+IEknbGwgYWRkIHRvIHRoaXMgb25lIGFsc28gY2hhbmdlcyB0byBpb3JlYWRYX3Jl
-cCgpIGFuZCBhZGQgYW5vdGhlcgo+ID4gPiBwYXRjaCBmb3Igdm9sYXRpbGUgZm9yIHJlYWRzIGFu
-ZCB3cml0ZXMuIEkgZ3Vlc3MgeW91ciByZXZpZXcgd2lsbCBiZQo+ID4gPiBhcHByZWNpYXRlZCBv
-bmNlIG1vcmUgYmVjYXVzZSBvZiBpb3JlYWRYX3JlcCgpCj4gPiA+Cj4gPgo+ID4gdm9sYXRpbGUg
-c2hvdWxkIHJlYWxseSBvbmx5IGJlIHVzZWQgd2hlcmUgZGVlbWVkIG5lY2Vzc2FyeToKPiA+Cj4g
-PiBodHRwczovL3d3dy5rZXJuZWwub3JnL2RvYy9odG1sL2xhdGVzdC9wcm9jZXNzL3ZvbGF0aWxl
-LWNvbnNpZGVyZWQtaGFybWZ1bC5odG1sCj4gPgo+ID4gSXQgaXMgc2FpZDogIiAuLi4gIGFjY2Vz
-c29yIGZ1bmN0aW9ucyBtaWdodCB1c2Ugdm9sYXRpbGUgb24KPiA+IGFyY2hpdGVjdHVyZXMgd2hl
-cmUgZGlyZWN0IEkvTyBtZW1vcnkgYWNjZXNzIGRvZXMgd29yay4gRXNzZW50aWFsbHksCj4gPiBl
-YWNoIGFjY2Vzc29yIGNhbGwgYmVjb21lcyBhIGxpdHRsZSBjcml0aWNhbCBzZWN0aW9uIG9uIGl0
-cyBvd24gYW5kCj4gPiBlbnN1cmVzIHRoYXQgdGhlIGFjY2VzcyBoYXBwZW5zIGFzIGV4cGVjdGVk
-IGJ5IHRoZSBwcm9ncmFtbWVyLiIKPiAKPiBUaGUgSS9PIGFjY2Vzc29ycyBhcmUgb25lIG9mIHRo
-ZSBmZXcgcGxhY2VzIGluIHdoaWNoICd2b2xhdGlsZScgZ2VuZXJhbGx5Cj4gbWFrZXMgc2Vuc2Us
-IGF0IGxlYXN0IGZvciB0aGUgaW1wbGVtZW50YXRpb25zIHRoYXQgZG8gYSBwbGFpbiBwb2ludGVy
-Cj4gZGVyZWZlcmVuY2UgKHByb2JhYmx5IG5vbmUgb2YgdGhlIG9uZXMgaW4gcXVlc3Rpb24gaGVy
-ZSkuCj4gCj4gSW4gY2FzZSBvZiByZWFkbC93cml0ZWwsIHRoaXMgaXMgd2hhdCB3ZSBkbyBpbiBh
-c20tZ2VuZXJpYzoKPiAKPiBzdGF0aWMgaW5saW5lIHUzMiBfX3Jhd19yZWFkbChjb25zdCB2b2xh
-dGlsZSB2b2lkIF9faW9tZW0gKmFkZHIpCj4gewo+ICAgICAgICAgcmV0dXJuICooY29uc3Qgdm9s
-YXRpbGUgdTMyIF9fZm9yY2UgKilhZGRyOwo+IH0KClN1cGVySCBpcyBhbm90aGVyIGV4YW1wbGU6
-CjEuIGlvcmVhZDhfcmVwKHZvaWQgX19pb21lbSAqYWRkciwgdm9pZCAqZHN0LCB1bnNpZ25lZCBs
-b25nIGNvdW50KQogICBjYWxscyBtbWlvX2luc2IoKQoKMi4gc3RhdGljIGlubGluZSB2b2lkIG1t
-aW9faW5zYih2b2lkIF9faW9tZW0gKmFkZHIsIHU4ICpkc3QsIGludCBjb3VudCkKICAgY2FsbHMg
-X19yYXdfcmVhZGIoKQoKMy4gI2RlZmluZSBfX3Jhd19yZWFkYihhKSAgICAgICAgICAoX19jaGtf
-aW9fcHRyKGEpLCAqKHZvbGF0aWxlIHU4ICBfX2ZvcmNlICopKGEpKQoKRXZlbiBpZiBpbnRlcmZh
-Y2Ugd2FzIG5vdCBtYXJrZWQgYXMgdm9sYXRpbGUsIGluIGZhY3QgaXRzIGltcGxlbWVudGF0aW9u
-CndhcyBjYXN0aW5nIHRvIHZvbGF0aWxlLgoKPiBUaGUgX19mb3JjZS1jYXN0IHRoYXQgcmVtb3Zl
-cyB0aGUgX19pb21lbSBoZXJlIGFsc28gbWVhbnMgdGhhdAo+IHRoZSAndm9sYXRpbGUnIGtleXdv
-cmQgY291bGQgYmUgZHJvcHBlZCBmcm9tIHRoZSBhcmd1bWVudCBsaXN0LAo+IGFzIGl0IGhhcyBu
-byByZWFsIGVmZmVjdCBhbnkgbW9yZSwgYnV0IHRoZW4gdGhlcmUgYXJlIGEgZmV3IGRyaXZlcnMK
-PiB0aGF0IG1hcmsgdGhlaXIgaW9tZW0gcG9pbnRlcnMgYXMgZWl0aGVyICd2b2xhdGlsZSB2b2lk
-IF9faW9tZW0qJyBvcgo+ICh3b3JzZSkgJ3ZvbGF0aWxlIHZvaWQgKicsIHNvIHdlIGtlZXAgaXQg
-aW4gdGhlIGFyZ3VtZW50IGxpc3QgdG8gbm90Cj4gYWRkIHdhcm5pbmdzIGZvciB0aG9zZSBkcml2
-ZXJzLgo+IAo+IEl0IG1heSBiZSB0aW1lIHRvIGNoYW5nZSB0aGVzZSBkcml2ZXJzIHRvIG5vdCB1
-c2Ugdm9sYXRpbGUgZm9yIF9faW9tZW0KPiBwb2ludGVycywgYnV0IHRoYXQgc2VlbXMgb3V0IG9m
-IHNjb3BlIGZvciB3aGF0IEtyenlzenRvZiBpcyB0cnlpbmcKPiB0byBkby4gSWRlYWxseSB3ZSB3
-b3VsZCBiZSBjb25zaXN0ZW50IGhlcmUgdGhvdWdoLCBlaXRoZXIgdXNpbmcgdm9sYXRpbGUKPiBh
-bGwgdGhlIHRpbWUgb3IgbmV2ZXIuCgpJbmRlZWQuIEkgZ3Vlc3MgdGhlcmUgYXJlIG5vIG9iamVj
-dGlvbnMgYXJvdW5kIGNvbnN0IHNvIGxldCBtZSBzZW5kIHYyCmZvciBjb25zdCBvbmx5LgoKQmVz
-dCByZWdhcmRzLApLcnp5c3p0b2YKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBs
-aXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5v
-cmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Wed, Jan 8, 2020 at 10:15 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+
+> > The __force-cast that removes the __iomem here also means that
+> > the 'volatile' keyword could be dropped from the argument list,
+> > as it has no real effect any more, but then there are a few drivers
+> > that mark their iomem pointers as either 'volatile void __iomem*' or
+> > (worse) 'volatile void *', so we keep it in the argument list to not
+> > add warnings for those drivers.
+> >
+> > It may be time to change these drivers to not use volatile for __iomem
+> > pointers, but that seems out of scope for what Krzysztof is trying
+> > to do. Ideally we would be consistent here though, either using volatile
+> > all the time or never.
+>
+> Indeed. I guess there are no objections around const so let me send v2
+> for const only.
+
+Ok, sounds good. Maybe mention in the changelog then that the
+'volatile' in the interface is intentionally left out, and that only users
+of readl/writel still have it to deal with existing drivers.
+
+    Arnd
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
