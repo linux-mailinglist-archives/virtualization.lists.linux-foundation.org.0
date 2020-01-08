@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D752134CB7
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jan 2020 21:07:09 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 24576134CB5
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jan 2020 21:07:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2452285F4B;
-	Wed,  8 Jan 2020 20:07:08 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id BE57520656;
+	Wed,  8 Jan 2020 20:07:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vbck-NjpuYPB; Wed,  8 Jan 2020 20:07:07 +0000 (UTC)
+	with ESMTP id v+2uQuv8Igpt; Wed,  8 Jan 2020 20:07:02 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 724B085F54;
-	Wed,  8 Jan 2020 20:07:07 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 12B332076B;
+	Wed,  8 Jan 2020 20:07:02 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 644D3C0881;
-	Wed,  8 Jan 2020 20:07:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EE5C0C1D92;
+	Wed,  8 Jan 2020 20:07:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8FB1FC0881
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 84A61C1D92
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 20:07:06 +0000 (UTC)
+ Wed,  8 Jan 2020 20:07:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id D807F81E87
+ by whitealder.osuosl.org (Postfix) with ESMTP id 7286A86503
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 20:07:04 +0000 (UTC)
+ Wed,  8 Jan 2020 20:07:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XV9AEp+OCVxg
+ with ESMTP id dnZ6wdKpt1cN
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 20:07:02 +0000 (UTC)
+ Wed,  8 Jan 2020 20:06:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id CD11187E14
+ by whitealder.osuosl.org (Postfix) with ESMTPS id ECB3586501
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 20:06:50 +0000 (UTC)
+ Wed,  8 Jan 2020 20:06:59 +0000 (UTC)
 Received: from localhost.localdomain (unknown [83.218.167.187])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 186642084D;
- Wed,  8 Jan 2020 20:06:41 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 20BA520643;
+ Wed,  8 Jan 2020 20:06:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1578514010;
- bh=4G9U4hbwpjc43HA1VaCSm2knWdxpECK/Qm3J7uuyiGY=;
+ s=default; t=1578514019;
+ bh=HDn1c+OCg4Fxwj0uJTYLgnTqOgR4bEcc2OImuEKXcQg=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=L0JByfH82fI10MazHw+qyYQZ7ZEaLpg6nJdjXcllD8SsyRut9af5aObLYz9vOIvHH
- D+1E4n3QQA3rcx3fqbrfPWnXhadJS6dDc8TIg4sQEYfba1RBaB2QbsYG+DNHUeblja
- AQPDxweWn1lMMwEPz4YtSI/zKx8892RAcVGsp3t8=
+ b=Z7kr39OMPyJ7syJjfpiv7bYYzQQTmxY9i9gDEMUNchIHddpcw2Lt4bYaf/iod/izt
+ l7HWaMdttfnaO+wtU8l705qwszkyEX8ot1OUlgStQffxrEPRngbVy628F/iddqGwJl
+ qXHxpQpnurQB1zdPn/z3aZU9m+VOfqbtddzmv7+s=
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: Richard Henderson <rth@twiddle.net>,
  Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
@@ -78,10 +78,10 @@ To: Richard Henderson <rth@twiddle.net>,
  linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
  linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
  linux-arch@vger.kernel.org
-Subject: [PATCH v2 7/9] drm/nouveau: Constify ioreadX() iomem argument (as in
- generic implementation)
-Date: Wed,  8 Jan 2020 21:05:26 +0100
-Message-Id: <20200108200528.4614-8-krzk@kernel.org>
+Subject: [PATCH v2 8/9] media: fsl-viu: Constify ioreadX() iomem argument (as
+ in generic implementation)
+Date: Wed,  8 Jan 2020 21:05:27 +0100
+Message-Id: <20200108200528.4614-9-krzk@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200108200528.4614-1-krzk@kernel.org>
 References: <20200108200528.4614-1-krzk@kernel.org>
@@ -111,22 +111,22 @@ consistency among architectures.
 
 Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nouveau_bo.c | 2 +-
+ drivers/media/platform/fsl-viu.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index f8015e0318d7..5120d062c2df 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -613,7 +613,7 @@ nouveau_bo_rd32(struct nouveau_bo *nvbo, unsigned index)
- 	mem += index;
+diff --git a/drivers/media/platform/fsl-viu.c b/drivers/media/platform/fsl-viu.c
+index 81a8faedbba6..991d9dc82749 100644
+--- a/drivers/media/platform/fsl-viu.c
++++ b/drivers/media/platform/fsl-viu.c
+@@ -34,7 +34,7 @@
+ /* Allow building this driver with COMPILE_TEST */
+ #if !defined(CONFIG_PPC) && !defined(CONFIG_MICROBLAZE)
+ #define out_be32(v, a)	iowrite32be(a, (void __iomem *)v)
+-#define in_be32(a)	ioread32be((void __iomem *)a)
++#define in_be32(a)	ioread32be((const void __iomem *)a)
+ #endif
  
- 	if (is_iomem)
--		return ioread32_native((void __force __iomem *)mem);
-+		return ioread32_native((const void __force __iomem *)mem);
- 	else
- 		return *mem;
- }
+ #define BUFFER_TIMEOUT		msecs_to_jiffies(500)  /* 0.5 seconds */
 -- 
 2.17.1
 
