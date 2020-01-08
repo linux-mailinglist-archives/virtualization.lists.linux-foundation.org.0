@@ -1,70 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DC43133CA6
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jan 2020 09:08:15 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF062133CAC
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jan 2020 09:10:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0391520337;
-	Wed,  8 Jan 2020 08:08:14 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6CBE08452D;
+	Wed,  8 Jan 2020 08:10:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id J6KdJ8RfUu6R; Wed,  8 Jan 2020 08:08:11 +0000 (UTC)
+	with ESMTP id d7FYIOLC9cSG; Wed,  8 Jan 2020 08:10:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id D09A2203E3;
-	Wed,  8 Jan 2020 08:08:11 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 85B9984376;
+	Wed,  8 Jan 2020 08:10:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B046DC0881;
-	Wed,  8 Jan 2020 08:08:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 69914C0881;
+	Wed,  8 Jan 2020 08:10:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A7DACC0881
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 00E66C0881
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 08:08:09 +0000 (UTC)
+ Wed,  8 Jan 2020 08:10:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 8F39320337
+ by hemlock.osuosl.org (Postfix) with ESMTP id EE804879A3
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 08:08:09 +0000 (UTC)
+ Wed,  8 Jan 2020 08:10:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4iHPMHo4z31i
+ with ESMTP id sFEO9ju12H2U
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 08:08:06 +0000 (UTC)
+ Wed,  8 Jan 2020 08:10:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
- [209.85.167.194])
- by silver.osuosl.org (Postfix) with ESMTPS id B690C1FE32
+Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
+ [209.85.167.195])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 4026C87999
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jan 2020 08:08:06 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id a67so1891698oib.6
+ Wed,  8 Jan 2020 08:10:18 +0000 (UTC)
+Received: by mail-oi1-f195.google.com with SMTP id v140so1929740oie.0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 08 Jan 2020 00:08:06 -0800 (PST)
+ Wed, 08 Jan 2020 00:10:18 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=X9lAK3bszh6tWp/dVwz4gJZ7NIZBKvl8mgEWhJz1N9U=;
- b=YRY/Q5a43XVSnHtWgybDpuZVki0PA6JVx9x+4lqSxIL5NglhDjqyWWkBkvwCVjMg4z
- vHgA5h8BEfT2p2gQbzmYW1RbECBusIlikKwTRGzLbObGzSkQOrZInhMMBj6ITFG1sFbT
- FfCyK1mzQd0GNPSa3VVYAjdHrPtulStSRe+SZxp/Qid3JMrYx8p1vk4QVCDf73t6EE29
- TVTuqfK4hXNKOcvRd0/9GhZRHcCOu4uiihYUBzK2a2dgkY52+cjEokmgTt6xXDQZMbY5
- dJjKMcKF5ld1f44DlY84h+EHfnK4EPa1Iz1iA9MMCbMrhTtUmQYAabdPsrCWDiclGQuv
- 5Wsw==
-X-Gm-Message-State: APjAAAVIzBCNJrEoYytcFJhlF8mwZ6/U8Q5D/civQADs9DkVVIIp91FW
- OhI1XQzgN6oNiv/UH5yCE+xnD4dn1Wd9PwoIM0o=
-X-Google-Smtp-Source: APXvYqyHxa8fgIJDObTLOZ73RoRUdvNM74muiuZsOkTaJvwYlT+0s8R5nYIen4AoxoDKsD4fs/oquvfeWacJQ1YKaqA=
-X-Received: by 2002:aca:1a06:: with SMTP id a6mr1987025oia.148.1578470885935; 
- Wed, 08 Jan 2020 00:08:05 -0800 (PST)
+ bh=zSvatSaXmaDcygklTO+AiD7URC1DncR275ZO9qcviaY=;
+ b=tLQaGmar0VtLmkKjp7XZVOx+bKzjkQMI6lCg167J0i6WnqXf7o2GSw1r306QPKoK1h
+ WU8jYSgAyLrNC/MkBtoYrg+XKktJukJgPGUFdjtmXmVlMm0BbACIupCU4MB0lq/UHJfn
+ HWnExtbh4ZuFp8Oj+mDP5zUQBvX/hqYhfHQeq8BT9RdQWuUxAznBvJLra+z4tPUd3NGi
+ Y6ZNW1WJL2Zidp8VvIcegHAnFCp5zZ/pOKaiQd3nFBlIn2MHiUntd+GCrSMF0kSqWuKM
+ KQyjko3wM9E2GXJzO5hOy3e7pOYdXSGBv3ubcpWMdDJTFYB82kFBwtSFBfAMkk1O6RiX
+ gvqg==
+X-Gm-Message-State: APjAAAXjMENY7MqHQ1dOr3U9OkIaYQlsTjukTfM5HBBtsyVKO1bYQIox
+ VzrYA7g9EwoUVKPOxTb0fYMbdTPjI4nxSu7GVzI=
+X-Google-Smtp-Source: APXvYqx7mMV6iu/aCjHaPWwxCajM/7EbWdhdn3wdjlil8XEXHsid4BFGqUofVL4JHvNq7QwetgrnnLwPgZu0svS796A=
+X-Received: by 2002:a05:6808:292:: with SMTP id
+ z18mr2042282oic.131.1578471017446; 
+ Wed, 08 Jan 2020 00:10:17 -0800 (PST)
 MIME-Version: 1.0
 References: <1578415992-24054-1-git-send-email-krzk@kernel.org>
-In-Reply-To: <1578415992-24054-1-git-send-email-krzk@kernel.org>
+ <1578415992-24054-3-git-send-email-krzk@kernel.org>
+In-Reply-To: <1578415992-24054-3-git-send-email-krzk@kernel.org>
 From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Wed, 8 Jan 2020 09:07:54 +0100
-Message-ID: <CAMuHMdW4ek0OYQDrrbcpZjNUTTP04nSbwkmiZvBmKcU=PQM9qA@mail.gmail.com>
-Subject: Re: [RFT 00/13] iomap: Constify ioreadX() iomem argument
+Date: Wed, 8 Jan 2020 09:10:06 +0100
+Message-ID: <CAMuHMdXHhF6GhS1W8qS4j7Jv5YnxXjcRopT5QSA=+trc8qwFng@mail.gmail.com>
+Subject: Re: [RFT 02/13] alpha: Constify ioreadX() iomem argument (as in
+ generic implementation)
 To: Krzysztof Kozlowski <krzk@kernel.org>
 Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
@@ -114,35 +117,36 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 Hi Krzysztof,
 
 On Tue, Jan 7, 2020 at 5:53 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
-> The ioread8/16/32() and others have inconsistent interface among the
-> architectures: some taking address as const, some not.
+> The ioreadX() helpers have inconsistent interface.  On some architectures
+> void *__iomem address argument is a pointer to const, on some not.
 >
-> It seems there is nothing really stopping all of them to take
-> pointer to const.
+> Implementations of ioreadX() do not modify the memory under the address
+> so they can be converted to a "const" version for const-safety and
+> consistency among architectures.
+>
+> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 
-Shouldn't all of them take const volatile __iomem pointers?
-It seems the "volatile" is missing from all but the implementations in
-include/asm-generic/io.h.
+> --- a/arch/alpha/include/asm/io.h
+> +++ b/arch/alpha/include/asm/io.h
+> @@ -151,9 +151,9 @@ static inline void generic_##NAME(TYPE b, QUAL void __iomem *addr)  \
+>         alpha_mv.mv_##NAME(b, addr);                                    \
+>  }
+>
+> -REMAP1(unsigned int, ioread8, /**/)
+> -REMAP1(unsigned int, ioread16, /**/)
+> -REMAP1(unsigned int, ioread32, /**/)
+> +REMAP1(unsigned int, ioread8, const)
+> +REMAP1(unsigned int, ioread16, const)
+> +REMAP1(unsigned int, ioread32, const)
 
-> Patchset was really tested on all affected architectures.
-> Build testing is in progress - I hope auto-builders will point any issues.
->
->
-> Todo
-> ====
-> Convert also string versions (ioread16_rep() etc) if this aproach looks OK.
->
->
-> Merging
-> =======
-> The first 5 patches - iomap, alpha, sh, parisc and powerpc - should probably go
-> via one tree, or even squashed into one.
+If these would become "const volatile", there would no longer be a need
+for the last parameter of the REMAP1() macro.
 
-Yes, they should be squashed, cfr. Arnd's comment.
-I also wouldn't bother doing the updates in patches 6-10.
+>  REMAP1(u8, readb, const volatile)
+>  REMAP1(u16, readw, const volatile)
+>  REMAP1(u32, readl, const volatile)
 
-The rest looks good to me.
-Thanks a lot!
+Same for REMAP2() macro below, for iowrite*().
 
 Gr{oetje,eeting}s,
 
