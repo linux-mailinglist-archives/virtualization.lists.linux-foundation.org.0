@@ -1,78 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E3FB136A22
-	for <lists.virtualization@lfdr.de>; Fri, 10 Jan 2020 10:45:52 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 97B32136C8A
+	for <lists.virtualization@lfdr.de>; Fri, 10 Jan 2020 12:57:19 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E761F20014;
-	Fri, 10 Jan 2020 09:45:50 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 10F9886B67;
+	Fri, 10 Jan 2020 11:57:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eo8DtKM1P-UV; Fri, 10 Jan 2020 09:45:50 +0000 (UTC)
+	with ESMTP id g+c53E-761eY; Fri, 10 Jan 2020 11:57:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 603EE20369;
-	Fri, 10 Jan 2020 09:45:50 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 582FB86460;
+	Fri, 10 Jan 2020 11:57:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2C302C0881;
-	Fri, 10 Jan 2020 09:45:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3DD00C0881;
+	Fri, 10 Jan 2020 11:57:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5BBC8C0881
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2F5B3C0881
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 09:45:48 +0000 (UTC)
+ Fri, 10 Jan 2020 11:57:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 54CD720369
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 18BFB86205
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 09:45:48 +0000 (UTC)
+ Fri, 10 Jan 2020 11:57:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GSO7lDwjhT90
+ with ESMTP id jmKeZfYVwVkm
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 09:45:47 +0000 (UTC)
+ Fri, 10 Jan 2020 11:57:14 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 6F40920014
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id D6545861FE
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 09:45:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1578649545;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc; bh=3Bjxye7nXEN8DZWgb9uCaUhoYDYYa6n7XP6x/kFHIr4=;
- b=ZJGLF1Q1Wzpa0s97PSKK48wVARPbs2hCwDM1RT823RqQQPDJHdGDl9rm2lUm57VXCISJut
- UhtuUS1tLh8fCNXIuOk9sLwGxE4toIQTODhauAK/UA9D/LSmmghsUwbPszBe+7NAyFLqao
- d+wnstN8jhBPVPo6DHQ0OxyRD609ANs=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-412-meg9DrUpPZmOGRGq3eT1tA-1; Fri, 10 Jan 2020 04:45:41 -0500
-X-MC-Unique: meg9DrUpPZmOGRGq3eT1tA-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4FA36800D41;
- Fri, 10 Jan 2020 09:45:39 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-98.ams2.redhat.com
- [10.36.116.98])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6A9715C1B5;
- Fri, 10 Jan 2020 09:45:36 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 773F048E0; Fri, 10 Jan 2020 10:45:35 +0100 (CET)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH] drm/virtio: add missing virtio_gpu_array_lock_resv call
-Date: Fri, 10 Jan 2020 10:45:35 +0100
-Message-Id: <20200110094535.23472-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: jannh@google.com, David Airlie <airlied@linux.ie>,
- open list <linux-kernel@vger.kernel.org>, gurchetansingh@chromium.org,
- Daniel Vetter <daniel@ffwll.ch>,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- olvaffe@gmail.com
+ Fri, 10 Jan 2020 11:57:13 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 77918ADEE;
+ Fri, 10 Jan 2020 11:57:11 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@redhat.com,
+	kraxel@redhat.com,
+	daniel@ffwll.ch
+Subject: [PATCH] drm/cirrus: Let DRM core send VBLANK events
+Date: Fri, 10 Jan 2020 12:57:07 +0100
+Message-Id: <20200110115707.14080-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,36 +64,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When submitting a fenced command we must lock the object reservations
-because virtio_gpu_queue_fenced_ctrl_buffer() unlocks after adding the
-fence.
+In drm_atomic_helper_fake_vblank() the DRM core sends out VBLANK
+events if struct drm_crtc_state.no_vblank is enabled. Replace cirrus'
+VBLANK events with the DRM core's functionality.
 
-Reported-by: Jann Horn <jannh@google.com>
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/virtio/virtgpu_plane.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/cirrus/cirrus.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
-index 390524143139..1635a9ff4794 100644
---- a/drivers/gpu/drm/virtio/virtgpu_plane.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
-@@ -232,6 +232,7 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
- 		if (!objs)
- 			return;
- 		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
-+		virtio_gpu_array_lock_resv(objs);
- 		virtio_gpu_cmd_transfer_to_host_2d
- 			(vgdev, 0,
- 			 plane->state->crtc_w,
+diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus/cirrus.c
+index 248c9f765c45..4a1729aa7e53 100644
+--- a/drivers/gpu/drm/cirrus/cirrus.c
++++ b/drivers/gpu/drm/cirrus/cirrus.c
+@@ -38,7 +38,6 @@
+ #include <drm/drm_modeset_helper_vtables.h>
+ #include <drm/drm_probe_helper.h>
+ #include <drm/drm_simple_kms_helper.h>
+-#include <drm/drm_vblank.h>
+ 
+ #define DRIVER_NAME "cirrus"
+ #define DRIVER_DESC "qemu cirrus vga"
+@@ -415,6 +414,8 @@ static void cirrus_pipe_enable(struct drm_simple_display_pipe *pipe,
+ {
+ 	struct cirrus_device *cirrus = pipe->crtc.dev->dev_private;
+ 
++	crtc_state->no_vblank = true;
++
+ 	cirrus_mode_set(cirrus, &crtc_state->mode, plane_state->fb);
+ 	cirrus_fb_blit_fullscreen(plane_state->fb);
+ }
+@@ -434,13 +435,6 @@ static void cirrus_pipe_update(struct drm_simple_display_pipe *pipe,
+ 
+ 	if (drm_atomic_helper_damage_merged(old_state, state, &rect))
+ 		cirrus_fb_blit_rect(pipe->plane.state->fb, &rect);
+-
+-	if (crtc->state->event) {
+-		spin_lock_irq(&crtc->dev->event_lock);
+-		drm_crtc_send_vblank_event(crtc, crtc->state->event);
+-		crtc->state->event = NULL;
+-		spin_unlock_irq(&crtc->dev->event_lock);
+-	}
+ }
+ 
+ static const struct drm_simple_display_pipe_funcs cirrus_pipe_funcs = {
 -- 
-2.18.1
+2.24.1
 
 _______________________________________________
 Virtualization mailing list
