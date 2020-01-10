@@ -1,83 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7BEA1366C4
-	for <lists.virtualization@lfdr.de>; Fri, 10 Jan 2020 06:36:46 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E6FE13672F
+	for <lists.virtualization@lfdr.de>; Fri, 10 Jan 2020 07:13:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 971C1203FC;
-	Fri, 10 Jan 2020 05:36:45 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id CDEAF883F8;
+	Fri, 10 Jan 2020 06:13:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iUXBjK4528PG; Fri, 10 Jan 2020 05:36:44 +0000 (UTC)
+	with ESMTP id xF2JDHW+u0c0; Fri, 10 Jan 2020 06:13:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 9FC3720400;
-	Fri, 10 Jan 2020 05:36:44 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 66920883F5;
+	Fri, 10 Jan 2020 06:13:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8E67FC1D7D;
-	Fri, 10 Jan 2020 05:36:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 49625C0881;
+	Fri, 10 Jan 2020 06:13:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9B0AAC0881
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 93F23C0881
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 05:36:42 +0000 (UTC)
+ Fri, 10 Jan 2020 06:13:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 837F4869A5
+ by whitealder.osuosl.org (Postfix) with ESMTP id 902F186B04
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 05:36:42 +0000 (UTC)
+ Fri, 10 Jan 2020 06:13:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rxwtj-G9EU99
+ with ESMTP id gQqS1VjXlCBM
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 05:36:40 +0000 (UTC)
+ Fri, 10 Jan 2020 06:13:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id C2F5086360
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id AB800869B6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jan 2020 05:36:40 +0000 (UTC)
+ Fri, 10 Jan 2020 06:13:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1578634599;
+ s=mimecast20190719; t=1578636785;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HM5UsrVrUU/xsuvpVm4/UMVX73v4Pg7qa9yYLhBJ6yc=;
- b=TKUy/09gCU70Qzg9Rv9hYE81Asg5ajM7diX9sshg5Q1c6wR2awLZrzyW0sVKphGx//Wv4O
- JHRDJjV8j1T4e0V5Y02HJl1S6HSQmX5uI4QBWpDD5qpbRmwb/Td+0IHL9JP3CvnM5VXHA7
- 6gQZCa316Zx4Yxocpolpb3hk6BjPqvI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-368-HAiFoP4dN6mOpOKAAZbPiw-1; Fri, 10 Jan 2020 00:35:55 -0500
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CDA0A800A02;
- Fri, 10 Jan 2020 05:35:54 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-98.ams2.redhat.com
- [10.36.116.98])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8C9F5272C4;
- Fri, 10 Jan 2020 05:35:54 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id BE07B9DA5; Fri, 10 Jan 2020 06:35:53 +0100 (CET)
-Date: Fri, 10 Jan 2020 06:35:53 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: bochs_drm: failed bochs_hw_init() results in panic
-Message-ID: <20200110053553.4gqlagjdpfi6pg3b@sirius.home.kraxel.org>
-References: <20200110013328.GA12596@mail-itl>
+ bh=JUb7J5k9pHQGDMgWElpRTaa3UN/XQp4RFy7vMyL+c3E=;
+ b=iX04FDuafdD8b8vZGBE1+PhCQ8w/njG36vT4nuLrdtzLjRawnPFhxJjRPFHoyh1Nu331qW
+ qcqrRGfA2msshO+0TiYvAkd4PYiA12bsBeYY7sg3AxiPckQdpLoaZFr6ZHhsWNTg3xBIyE
+ K682Fnhu1LyG6MNLUiapegPStNcILwM=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-348-x9BNYs4-N_a7C-MJOqE8AQ-1; Fri, 10 Jan 2020 01:13:03 -0500
+Received: by mail-qv1-f72.google.com with SMTP id l1so515975qvu.13
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 09 Jan 2020 22:13:03 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=JUb7J5k9pHQGDMgWElpRTaa3UN/XQp4RFy7vMyL+c3E=;
+ b=XO4rtjVYSW6ZtmTRtM1wQmStNI0ZLIKninp3YSBctBljbIhyqK1lsUTdQ8hP4boMNd
+ j5jSmy6KKHJZjO/hQT1m/YExvBjzbCDk5ZVqhyr1PbbWKOzyldJqyGawdX8ypQqmkHIU
+ uN5P+HBxRPtJ6dWGb8LLnjMz2d5JGLBVcalMorJ0PzKKyMuQkXzOJL1S4h65HSK0PQlV
+ eXTVjBf0RyaC9VxgvmsZv1FfgWb07lhXHcI9yJIqB/+QyFA5VWSGDlliEr/IOUtz/Ekn
+ riNYk4ARh0Xxn5XiJlCKx9HjeAZSAvxMqshFrWVn41GVG15XZXrONzkTXFKasa/jpS00
+ EM4Q==
+X-Gm-Message-State: APjAAAUXjWXeRO4N9z1G1eJyyNis7bFn5mEAGLuRrZaqXH1lL7m55Z3P
+ KKbY9cTk5xJLxCX50K/ru86UxN73hOofbcnhysXC2HOYLyBl4NFacHP+R7qG0Wb4+K4s4CMaBMO
+ xprd4mpDtFtQ3tixKQGQluWD2f23fuHMgQQm4JOYnIA==
+X-Received: by 2002:ac8:6697:: with SMTP id d23mr1080350qtp.350.1578636783318; 
+ Thu, 09 Jan 2020 22:13:03 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyEBnt7IxTIASPQRiXS/2qwYjQd4GY3gTOeHUpypwIPSrQCqrkSOQtY6sfsyfysgAniCEZu/A==
+X-Received: by 2002:ac8:6697:: with SMTP id d23mr1080336qtp.350.1578636783113; 
+ Thu, 09 Jan 2020 22:13:03 -0800 (PST)
+Received: from redhat.com (bzq-79-183-34-164.red.bezeqint.net. [79.183.34.164])
+ by smtp.gmail.com with ESMTPSA id z3sm546702qtm.5.2020.01.09.22.12.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2020 22:13:01 -0800 (PST)
+Date: Fri, 10 Jan 2020 01:12:56 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: David Miller <davem@davemloft.net>
+Subject: Re: [PATCH v2] virtio_net: CTRL_GUEST_OFFLOADS depends on CTRL_VQ
+Message-ID: <20200110011236-mutt-send-email-mst@kernel.org>
+References: <20200105132120.92370-1-mst@redhat.com>
+ <20200109.183339.173768060466817001.davem@davemloft.net>
 MIME-Version: 1.0
-In-Reply-To: <20200110013328.GA12596@mail-itl>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-MC-Unique: HAiFoP4dN6mOpOKAAZbPiw-1
+In-Reply-To: <20200109.183339.173768060466817001.davem@davemloft.net>
+X-MC-Unique: x9BNYs4-N_a7C-MJOqE8AQ-1
 X-Mimecast-Spam-Score: 0
 Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org
+Cc: adelva@google.com, willemdebruijn.kernel@gmail.com, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,39 +102,42 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jan 10, 2020 at 02:33:28AM +0100, Marek Marczykowski-G=F3recki wrot=
-e:
-> Hi,
-> =
+On Thu, Jan 09, 2020 at 06:33:39PM -0800, David Miller wrote:
+> From: "Michael S. Tsirkin" <mst@redhat.com>
+> Date: Sun, 5 Jan 2020 08:22:07 -0500
+> 
+> > The only way for guest to control offloads (as enabled by
+> > VIRTIO_NET_F_CTRL_GUEST_OFFLOADS) is by sending commands
+> > through CTRL_VQ. So it does not make sense to
+> > acknowledge VIRTIO_NET_F_CTRL_GUEST_OFFLOADS without
+> > VIRTIO_NET_F_CTRL_VQ.
+> > 
+> > The spec does not outlaw devices with such a configuration, so we have
+> > to support it. Simply clear VIRTIO_NET_F_CTRL_GUEST_OFFLOADS.
+> > Note that Linux is still crashing if it tries to
+> > change the offloads when there's no control vq.
+> > That needs to be fixed by another patch.
+> > 
+> > Reported-by: Alistair Delva <adelva@google.com>
+> > Reported-by: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+> > Fixes: 3f93522ffab2 ("virtio-net: switch off offloads on demand if possible on XDP set")
+> > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> > ---
+> > 
+> > Same patch as v1 but update documentation so it's clear it's not
+> > enough to fix the crash.
+> 
+> Where are we with this patch?  There seems to still be some unresolved
+> discussion about how we should actually handle this case.
+> 
+> Thanks.
 
-> It looks like bochs_kms_fini() don't like being called if
-> bochs_kms_init() wasn't. Regardless of the reason for the
-> bochs_hw_init() failure (that's another story), it shouldn't cause a
-> panic. Any idea how to fix it?
-
-maybe this?
-
-diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/boch=
-s_kms.c
-index 3f0006c2470d..322be68a238a 100644
---- a/drivers/gpu/drm/bochs/bochs_kms.c
-+++ b/drivers/gpu/drm/bochs/bochs_kms.c
-@@ -192,6 +192,9 @@ int bochs_kms_init(struct bochs_device *bochs)
- =
-
- void bochs_kms_fini(struct bochs_device *bochs)
- {
-+	if (!dev->mode_config.num_connector)
-+		return;
-+
- 	drm_atomic_helper_shutdown(bochs->dev);
- 	drm_mode_config_cleanup(bochs->dev);
- }
+Once discussion is resolved I'll post v3 with updated commit log.
 
 _______________________________________________
 Virtualization mailing list
