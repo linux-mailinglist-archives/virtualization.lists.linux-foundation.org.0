@@ -1,81 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9732B138FC7
-	for <lists.virtualization@lfdr.de>; Mon, 13 Jan 2020 12:08:18 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 06D591390DF
+	for <lists.virtualization@lfdr.de>; Mon, 13 Jan 2020 13:12:53 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0CDA485754;
-	Mon, 13 Jan 2020 11:08:17 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7EC8F846BF;
+	Mon, 13 Jan 2020 12:12:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 40RYIC7IWceC; Mon, 13 Jan 2020 11:08:14 +0000 (UTC)
+	with ESMTP id ZML+QMJ1BkW4; Mon, 13 Jan 2020 12:12:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 844618574F;
-	Mon, 13 Jan 2020 11:08:14 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 44559846C0;
+	Mon, 13 Jan 2020 12:12:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5BC89C077D;
-	Mon, 13 Jan 2020 11:08:14 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1A178C077D;
+	Mon, 13 Jan 2020 12:12:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 759A4C077D
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9E0C3C077D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jan 2020 11:08:12 +0000 (UTC)
+ Mon, 13 Jan 2020 12:12:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4B18886D73
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 86AB28526D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jan 2020 11:08:12 +0000 (UTC)
+ Mon, 13 Jan 2020 12:12:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RA2rGtQk7xKW
+ with ESMTP id SBsgSE9qldu8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jan 2020 11:08:11 +0000 (UTC)
+ Mon, 13 Jan 2020 12:12:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 2F3E386CD7
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 685ED8523B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jan 2020 11:08:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1578913689;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FHUwvC4V45pQBl3YOQgs1FSsgQ9Xms/WHSg7K9Kokh4=;
- b=PFlySBzNlddNl4bvhL7gCsjzSsG3OUUrHeoi+4h6elrBfTb7+0GQyDhfaYqyxG/wa0QkQP
- uCeblRKfhvVBzp3aslpM6TR6/U8HqYk+0JkVPh+pj8oUdgJkZu0ys+XmO28ars5LV/9HKy
- lFBUmwfBchBtXxho4kGskzKaN0vdwdg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-114-HyVeANQYPxm5Op4tY6G7AQ-1; Mon, 13 Jan 2020 06:08:06 -0500
-X-MC-Unique: HyVeANQYPxm5Op4tY6G7AQ-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6B7BB1005514;
- Mon, 13 Jan 2020 11:08:05 +0000 (UTC)
-Received: from [10.72.12.51] (ovpn-12-51.pek2.redhat.com [10.72.12.51])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 209CE5C1BB;
- Mon, 13 Jan 2020 11:07:57 +0000 (UTC)
-Subject: Re: [PATCH v2] virtio-net: Introduce extended RSC feature
-To: Yuri Benditovich <yuri.benditovich@daynix.com>, mst@redhat.com,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-References: <20200113081736.2340-1-yuri.benditovich@daynix.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <bdc6cb05-30d1-b4fd-512e-740b2550c14e@redhat.com>
-Date: Mon, 13 Jan 2020 19:07:52 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ Mon, 13 Jan 2020 12:12:47 +0000 (UTC)
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6A2602075B;
+ Mon, 13 Jan 2020 12:12:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1578917567;
+ bh=jrKOx7fdYO/hgwOXZereFYrzknBNVlPV0cWc5JJ1418=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=kE2bX48Ij3Lcc8WQScofYgYFGjjwfqDqH83qLTdcOcI2aZ5mXA2CThEiocaWgQ+V5
+ WRtPBjxDkvffPZMCQIsNDIJVhxwT+WOOVIi9qDCDwlN6nxuJt2W12nScVYpTS+8AE7
+ pVt9HDLXBQPMkGUKJ5MBkeSkRs86GPSr4a7Fkk1Q=
+Date: Mon, 13 Jan 2020 12:12:41 +0000
+From: Will Deacon <will@kernel.org>
+To: Zengruan Ye <yezengruan@huawei.com>
+Subject: Re: [PATCH v2 0/6] KVM: arm64: VCPU preempted check support
+Message-ID: <20200113121240.GC3260@willie-the-truck>
+References: <20191226135833.1052-1-yezengruan@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <20200113081736.2340-1-yuri.benditovich@daynix.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: yan@daynix.com
+Content-Disposition: inline
+In-Reply-To: <20191226135833.1052-1-yezengruan@huawei.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: mark.rutland@arm.com, daniel.lezcano@linaro.org, kvm@vger.kernel.org,
+ linux-doc@vger.kernel.org, peterz@infradead.org, maz@kernel.org,
+ suzuki.poulose@arm.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, james.morse@arm.com,
+ julien.thierry.kdev@gmail.com, catalin.marinas@arm.com, linux@armlinux.org.uk,
+ steven.price@arm.com, kvmarm@lists.cs.columbia.edu,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,53 +78,73 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMS8xMyDkuIvljYg0OjE3LCBZdXJpIEJlbmRpdG92aWNoIHdyb3RlOgo+IFZJUlRJ
-T19ORVRfRl9SU0NfRVhUIGZlYXR1cmUgYml0IGluZGljYXRlcyB0aGF0IHRoZSBkZXZpY2UKPiBp
-cyBhYmxlIHRvIHByb3ZpZGUgZXh0ZW5kZWQgUlNDIGluZm9ybWF0aW9uLiBXaGVuIHRoZSBmZWF0
-dXJlCj4gaXMgbmVnb3RpYXRlZGUgYW5kICdnc29fdHlwZScgZmllbGQgaW4gcmVjZWl2ZWQgcGFj
-a2V0IGlzIG5vdAo+IEdTT19OT05FLCB0aGUgZGV2aWNlIHJlcG9ydHMgbnVtYmVyIG9mIGNvYWxl
-c2NlZCBwYWNrZXRzIGluCj4gJ2NzdW1fc3RhcnQnIGZpZWxkIGFuZCBudW1iZXIgb2YgZHVwbGlj
-YXRlZCBhY2tzIGluICdjc3VtX29mZnNldCcKPiBmaWVsZCBhbmQgc2V0cyBWSVJUSU9fTkVUX0hE
-Ul9GX1JTQ19JTkZPIGluICdmbGFncycgZmllbGQuCj4KPiBTaWduZWQtb2ZmLWJ5OiBZdXJpIEJl
-bmRpdG92aWNoIDx5dXJpLmJlbmRpdG92aWNoQGRheW5peC5jb20+CgoKSGkgWXVyaToKCklzIHRo
-ZSBmZWF0dXJlIHVzZWQgYnkgTGludXg/IElmIHllcywgaXQncyBiZXR0ZXIgdG8gaW5jbHVkZSB0
-aGUgcmVhbCB1c2VyLgoKCj4gLS0tCj4gICBpbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX25ldC5o
-IHwgMTAgKysrKysrKysrLQo+ICAgMSBmaWxlIGNoYW5nZWQsIDkgaW5zZXJ0aW9ucygrKSwgMSBk
-ZWxldGlvbigtKQo+Cj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fbmV0
-LmggYi9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX25ldC5oCj4gaW5kZXggYTM3MTVhMzIyNGMx
-Li4yYmRkMjZmOGE0ZWQgMTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb19u
-ZXQuaAo+ICsrKyBiL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fbmV0LmgKPiBAQCAtNTYsNyAr
-NTYsNyBAQAo+ICAgI2RlZmluZSBWSVJUSU9fTkVUX0ZfTVEJMjIJLyogRGV2aWNlIHN1cHBvcnRz
-IFJlY2VpdmUgRmxvdwo+ICAgCQkJCQkgKiBTdGVlcmluZyAqLwo+ICAgI2RlZmluZSBWSVJUSU9f
-TkVUX0ZfQ1RSTF9NQUNfQUREUiAyMwkvKiBTZXQgTUFDIGFkZHJlc3MgKi8KPiAtCj4gKyNkZWZp
-bmUgVklSVElPX05FVF9GX1JTQ19FWFQJICA2MQkvKiBQcm92aWRlcyBleHRlbmRlZCBSU0MgaW5m
-byAqLwoKCklzIHRoaXMgYmV0dGVyIHRvIGtlZXAgdGhlIG5ld2xpbmUgYXJvdW5kPwoKCj4gICAj
-ZGVmaW5lIFZJUlRJT19ORVRfRl9TVEFOREJZCSAgNjIJLyogQWN0IGFzIHN0YW5kYnkgZm9yIGFu
-b3RoZXIgZGV2aWNlCj4gICAJCQkJCSAqIHdpdGggdGhlIHNhbWUgTUFDLgo+ICAgCQkJCQkgKi8K
-PiBAQCAtMTA0LDYgKzEwNCw3IEBAIHN0cnVjdCB2aXJ0aW9fbmV0X2NvbmZpZyB7Cj4gICBzdHJ1
-Y3QgdmlydGlvX25ldF9oZHJfdjEgewo+ICAgI2RlZmluZSBWSVJUSU9fTkVUX0hEUl9GX05FRURT
-X0NTVU0JMQkvKiBVc2UgY3N1bV9zdGFydCwgY3N1bV9vZmZzZXQgKi8KPiAgICNkZWZpbmUgVklS
-VElPX05FVF9IRFJfRl9EQVRBX1ZBTElECTIJLyogQ3N1bSBpcyB2YWxpZCAqLwo+ICsjZGVmaW5l
-IFZJUlRJT19ORVRfSERSX0ZfUlNDX0lORk8JNAkvKiByc2NfZXh0IGRhdGEgaW4gY3N1bV8gZmll
-bGRzICovCj4gICAJX191OCBmbGFnczsKPiAgICNkZWZpbmUgVklSVElPX05FVF9IRFJfR1NPX05P
-TkUJCTAJLyogTm90IGEgR1NPIGZyYW1lICovCj4gICAjZGVmaW5lIFZJUlRJT19ORVRfSERSX0dT
-T19UQ1BWNAkxCS8qIEdTTyBmcmFtZSwgSVB2NCBUQ1AgKFRTTykgKi8KPiBAQCAtMTE4LDYgKzEx
-OSwxMyBAQCBzdHJ1Y3QgdmlydGlvX25ldF9oZHJfdjEgewo+ICAgCV9fdmlydGlvMTYgbnVtX2J1
-ZmZlcnM7CS8qIE51bWJlciBvZiBtZXJnZWQgcnggYnVmZmVycyAqLwo+ICAgfTsKPiAgIAo+ICsv
-Kgo+ICsgKiBpZiBWSVJUSU9fTkVUX0ZfUlNDX0VYVCBmZWF0dXJlIGhhcyBiZWVuIG5lZ290aWF0
-ZWQgYW5kCj4gKyAqIFZJUlRJT19ORVRfSERSX0ZfUlNDX0lORk8gaXMgc2V0IGluIFJYIHBhY2tl
-dAo+ICsgKi8KPiArI2RlZmluZSB2aXJ0aW9fbmV0X3JzY19leHRfbnVtX3BhY2tldHMJY3N1bV9z
-dGFydAo+ICsjZGVmaW5lIHZpcnRpb19uZXRfcnNjX2V4dF9udW1fZHVwYWNrcwljc3VtX29mZnNl
-dAoKClRoaXMgbG9va3Mgc3ViLW9wdGltYWwsIGl0IGxvb2tzIHRvIG1lIHVuaW9uIGlzIGJldHRl
-cj8KClRoYW5rcwoKCj4gKwo+ICAgI2lmbmRlZiBWSVJUSU9fTkVUX05PX0xFR0FDWQo+ICAgLyog
-VGhpcyBoZWFkZXIgY29tZXMgZmlyc3QgaW4gdGhlIHNjYXR0ZXItZ2F0aGVyIGxpc3QuCj4gICAg
-KiBGb3IgbGVnYWN5IHZpcnRpbywgaWYgVklSVElPX0ZfQU5ZX0xBWU9VVCBpcyBub3QgbmVnb3Rp
-YXRlZCwgaXQgbXVzdAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
-bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+[+PeterZ]
+
+On Thu, Dec 26, 2019 at 09:58:27PM +0800, Zengruan Ye wrote:
+> This patch set aims to support the vcpu_is_preempted() functionality
+> under KVM/arm64, which allowing the guest to obtain the VCPU is
+> currently running or not. This will enhance lock performance on
+> overcommitted hosts (more runnable VCPUs than physical CPUs in the
+> system) as doing busy waits for preempted VCPUs will hurt system
+> performance far worse than early yielding.
+> 
+> We have observed some performace improvements in uninx benchmark tests.
+> 
+> unix benchmark result:
+>   host:  kernel 5.5.0-rc1, HiSilicon Kunpeng920, 8 CPUs
+>   guest: kernel 5.5.0-rc1, 16 VCPUs
+> 
+>                test-case                |    after-patch    |   before-patch
+> ----------------------------------------+-------------------+------------------
+>  Dhrystone 2 using register variables   | 334600751.0 lps   | 335319028.3 lps
+>  Double-Precision Whetstone             |     32856.1 MWIPS |     32849.6 MWIPS
+>  Execl Throughput                       |      3662.1 lps   |      2718.0 lps
+>  File Copy 1024 bufsize 2000 maxblocks  |    432906.4 KBps  |    158011.8 KBps
+>  File Copy 256 bufsize 500 maxblocks    |    116023.0 KBps  |     37664.0 KBps
+>  File Copy 4096 bufsize 8000 maxblocks  |   1432769.8 KBps  |    441108.8 KBps
+>  Pipe Throughput                        |   6405029.6 lps   |   6021457.6 lps
+>  Pipe-based Context Switching           |    185872.7 lps   |    184255.3 lps
+>  Process Creation                       |      4025.7 lps   |      3706.6 lps
+>  Shell Scripts (1 concurrent)           |      6745.6 lpm   |      6436.1 lpm
+>  Shell Scripts (8 concurrent)           |       998.7 lpm   |       931.1 lpm
+>  System Call Overhead                   |   3913363.1 lps   |   3883287.8 lps
+> ----------------------------------------+-------------------+------------------
+>  System Benchmarks Index Score          |      1835.1       |      1327.6
+
+Interesting, thanks for the numbers.
+
+So it looks like there is a decent improvement to be had from targetted vCPU
+wakeup, but I really dislike the explicit PV interface and it's already been
+shown to interact badly with the WFE-based polling in smp_cond_load_*().
+
+Rather than expose a divergent interface, I would instead like to explore an
+improvement to smp_cond_load_*() and see how that performs before we commit
+to something more intrusive. Marc and I looked at this very briefly in the
+past, and the basic idea is to register all of the WFE sites with the
+hypervisor, indicating which register contains the address being spun on
+and which register contains the "bad" value. That way, you don't bother
+rescheduling a vCPU if the value at the address is still bad, because you
+know it will exit immediately.
+
+Of course, the devil is in the details because when I say "address", that's
+a guest virtual address, so you need to play some tricks in the hypervisor
+so that you have a separate mapping for the lockword (it's enough to keep
+track of the physical address).
+
+Our hacks are here but we basically ran out of time to work on them beyond
+an unoptimised and hacky prototype:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/maz/arm-platforms.git/log/?h=kvm-arm64/pvcy
+
+Marc -- how would you prefer to handle this?
+
+Will
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
