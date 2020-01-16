@@ -1,68 +1,143 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 526CE13DB10
-	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 14:04:55 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3FA713DEE7
+	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 16:36:55 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E86432150A;
-	Thu, 16 Jan 2020 13:04:53 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5C1F186914;
+	Thu, 16 Jan 2020 15:36:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0el7m+VS9yhr; Thu, 16 Jan 2020 13:04:49 +0000 (UTC)
+	with ESMTP id CE6UUeBM0dvg; Thu, 16 Jan 2020 15:36:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id DC13620491;
-	Thu, 16 Jan 2020 13:04:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 393CA81926;
+	Thu, 16 Jan 2020 15:36:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C0C4FC077D;
-	Thu, 16 Jan 2020 13:04:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1EE3BC077D;
+	Thu, 16 Jan 2020 15:36:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 01808C077D
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9CFE8C077D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:48 +0000 (UTC)
+ Thu, 16 Jan 2020 15:36:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id F120387D0B
+ by whitealder.osuosl.org (Postfix) with ESMTP id 89D9881926
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:47 +0000 (UTC)
+ Thu, 16 Jan 2020 15:36:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9FnUpuCJ+qF6
+ with ESMTP id C1gpWsw9fQBm
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:43 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7D14987D7F
+ Thu, 16 Jan 2020 15:36:43 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr130073.outbound.protection.outlook.com [40.107.13.73])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 5B62786849
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:43 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BF24B20748;
- Thu, 16 Jan 2020 13:04:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579179883;
- bh=cqwlyhWBKAqKJrhsN4Hb/s3j5SSMsdchtDX67lvtUpA=;
- h=Subject:To:Cc:From:Date:From;
- b=TfqBl70RNLqvTGX9+QC2QLnStgDOFpMFg92STheXYZalDdulewnOq0KluV/l6gEfd
- 5WczJToWoAWM+tgkPAyGLoW8Rqp44W94DEZKSxs3rm+Z1yU2NTf+Xwv8Dc0CWNug9C
- VKrCTUR+d/9hOctS3UYdi/idfqXjyw9IwwVhSe1c=
-Subject: Patch "crypto: virtio - implement missing support for output IVs" has
- been added to the 5.4-stable tree
-To: ardb@kernel.org, arei.gonglei@huawei.com, gregkh@linuxfoundation.org,
- herbert@gondor.apana.org.au, jasowang@redhat.com, mst@redhat.com,
- virtualization@lists.linux-foundation.org
-From: <gregkh@linuxfoundation.org>
-Date: Thu, 16 Jan 2020 14:04:17 +0100
-Message-ID: <157917985760138@kroah.com>
+ Thu, 16 Jan 2020 15:36:43 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=d6mCaLfU0wivgp8sKJANYROLtNpfswyW4i4fhxR+11BJAckQhMZzcz1g6ysf5nkUDaN5yy2MVJVw1TujiuWtKFYxK+JDakOBbG9Etbr9ZN5DUta9m4a+a9VfYRvLqEOTf4SSX1xOgTv2IzFaTzglvKVPYTjxI7UKblOU9Yg7WBXkWBY94ayVZ/PywqvFQMMSwT7ldjJLQ6F7x9ikCIjC9J1x2bI2tywncHWC21Iq+p5hYcMzq3r6ccj4LFGBXbERc/CuU+zbTE53YiDUYGkWkMos6d5WtunzcBPEjsz0C4LDUtgx+4UpDqigwY69jwV3ChjQtrWIEwd3OTfvHY7Fvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HUrxsts3paAh+K7ZNfpj6JIHdNvRmGe7stdH5seGYr0=;
+ b=Yk/iwmMV/cuDmFVIZQ4aUXsj1OWvOrSkh9LFAxDYOAgrutHnBLOYRYQn699enuTNiVzw3fAXSuFm1lNXNPwZIppo8aD+PVW/OC8NENkeyEG5IcNZr6rdZpKzefFCslG/Naurvx4x5MqUqSeeCaFSxBZTJuWBYMq+Bkeiru/pJKfK+zwO0bSOi2vjkupjQe1cj/XHRsCZujr26A8PvZk3HnA25iuP52KTFz272f+WLkAT+GQBTkXL1nJocOyzibXduclC/Iyk4Rqrv6ae0CkR3riGVEuIBeve1jFZkV1g+agRhFE1pCzOB709ckSVmrxhgaFF+xTZKvAyZldUdzAuJg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HUrxsts3paAh+K7ZNfpj6JIHdNvRmGe7stdH5seGYr0=;
+ b=cS9r9RiNBcwrwITnqko156U1SljxmV8eWkIMg5WKyNM5fQE7yD0H27YaJIIj9uKB8HTo5/M4hULDtqdPSAd8ODihJdY3rXz/35jxZqlpGDuONH/BM4XNmT5Dkghi+cUU0mIkhcd6B1lCVno02DfK8nICFYZB2r+t1ZF+bx0IgOw=
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
+ VI1PR05MB4672.eurprd05.prod.outlook.com (20.176.7.10) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2644.18; Thu, 16 Jan 2020 15:22:13 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2644.015; Thu, 16 Jan 2020
+ 15:22:13 +0000
+Received: from mlx.ziepe.ca (142.68.57.212) by
+ MN2PR14CA0018.namprd14.prod.outlook.com (2603:10b6:208:23e::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2644.20 via Frontend
+ Transport; Thu, 16 Jan 2020 15:22:12 +0000
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
+ <jgg@mellanox.com>)	id 1is6yH-0005cJ-Kf; Thu, 16 Jan 2020 11:22:09 -0400
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH 3/5] vDPA: introduce vDPA bus
+Thread-Topic: [PATCH 3/5] vDPA: introduce vDPA bus
+Thread-Index: AQHVzGqUgTlkW8H4N0+zRVK4Lh0XAKftaJqA
+Date: Thu, 16 Jan 2020 15:22:12 +0000
+Message-ID: <20200116152209.GH20978@mellanox.com>
+References: <20200116124231.20253-1-jasowang@redhat.com>
+ <20200116124231.20253-4-jasowang@redhat.com>
+In-Reply-To: <20200116124231.20253-4-jasowang@redhat.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: MN2PR14CA0018.namprd14.prod.outlook.com
+ (2603:10b6:208:23e::23) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [142.68.57.212]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 2bb7f725-6a53-4627-299e-08d79a97dc78
+x-ms-traffictypediagnostic: VI1PR05MB4672:|VI1PR05MB4672:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <VI1PR05MB467220B344972E3D56BF53E7CF360@VI1PR05MB4672.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-forefront-prvs: 02843AA9E0
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(396003)(376002)(39860400002)(346002)(136003)(366004)(199004)(189003)(86362001)(66446008)(54906003)(66946007)(5660300002)(9746002)(4326008)(316002)(66556008)(33656002)(64756008)(36756003)(71200400001)(2616005)(8936002)(26005)(81166006)(6666004)(81156014)(186003)(6916009)(1076003)(2906002)(52116002)(7416002)(9786002)(478600001)(8676002)(66476007)(24400500001);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4672;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: LEZjD8mBedcmyZdfu5ZK7O9nmIyyuBfEipKziYJM/lEt5t4g7qhdHvoRR2sl8NykjWPuCAXtTEHuid9B+JewKFsvwEt6/UARk/UWq0XFaqo8O0Up5F2q065mJcW/2fxUMoK2ugxGCdMkGGY7AlHWrKA7zsuStl6S5lDAoAFzlZpgpEg7HnNUOTZD2w0hTiXS9Qfuhtid35ORyBfgiQuTEnEJsM8MYYGCLCVdS5bvIjL+TE4VuR7wunqwLWO+vCnkVI0RFQZYNeu8Su/trlMSIcr+ll/UYtOXL5pssT8wyEiTW611VpeFF+ExwNtjKTqaTL5If2vhDRUcxtXDQwU+O/ekwDJwvtRGAa7Zi32UL/2gzkSL98LRcz9g2+5aZ7s6SUA4WqcMyN9u5iuYx4gSf2oyirVmimvMTiVvF6hiO/MJoKK38pXWiMMMkxh8onhrCpcP1+63d9G+bYDH//UfgT/vDq8FbyBXdqcvk9dtJzbkEtfn8jGbDqIhqXW+PUf4
+Content-ID: <20CB0C9B575F27429AFD01BABED3A9C5@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-X-stable: commit
-X-Patchwork-Hint: ignore 
-Cc: stable-commits@vger.kernel.org
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2bb7f725-6a53-4627-299e-08d79a97dc78
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jan 2020 15:22:12.8434 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 6xt20MfOs+vFPWMh78+DoIVCiHSlKInLIUkS7D+osczidBCZDm/xCiLEzBKaxDm+CqhF3EWDZ1pUiXQlbYQmJw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4672
+Cc: "jakub.kicinski@netronome.com" <jakub.kicinski@netronome.com>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "mst@redhat.com" <mst@redhat.com>,
+ "mhabets@solarflare.com" <mhabets@solarflare.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "rob.miller@broadcom.com" <rob.miller@broadcom.com>,
+ "lulu@redhat.com" <lulu@redhat.com>, "hanand@xilinx.com" <hanand@xilinx.com>,
+ "hch@infradead.org" <hch@infradead.org>,
+ "eperezma@redhat.com" <eperezma@redhat.com>,
+ "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
+ Shahaf Shuler <shahafs@mellanox.com>, Parav Pandit <parav@mellanox.com>,
+ Jiri Pirko <jiri@mellanox.com>,
+ "xiao.w.wang@intel.com" <xiao.w.wang@intel.com>,
+ "stefanha@redhat.com" <stefanha@redhat.com>,
+ "zhihong.wang@intel.com" <zhihong.wang@intel.com>,
+ "rdunlap@infradead.org" <rdunlap@infradead.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,79 +154,122 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On Thu, Jan 16, 2020 at 08:42:29PM +0800, Jason Wang wrote:
+> vDPA device is a device that uses a datapath which complies with the
+> virtio specifications with vendor specific control path. vDPA devices
+> can be both physically located on the hardware or emulated by
+> software. vDPA hardware devices are usually implemented through PCIE
+> with the following types:
+> 
+> - PF (Physical Function) - A single Physical Function
+> - VF (Virtual Function) - Device that supports single root I/O
+>   virtualization (SR-IOV). Its Virtual Function (VF) represents a
+>   virtualized instance of the device that can be assigned to different
+>   partitions
 
-This is a note to let you know that I've just added the patch titled
+> - VDEV (Virtual Device) - With technologies such as Intel Scalable
+>   IOV, a virtual device composed by host OS utilizing one or more
+>   ADIs.
+> - SF (Sub function) - Vendor specific interface to slice the Physical
+>   Function to multiple sub functions that can be assigned to different
+>   partitions as virtual devices.
 
-    crypto: virtio - implement missing support for output IVs
+I really hope we don't end up with two different ways to spell this
+same thing.
 
-to the 5.4-stable tree which can be found at:
-    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
+> @@ -0,0 +1,2 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +obj-$(CONFIG_VDPA) += vdpa.o
+> diff --git a/drivers/virtio/vdpa/vdpa.c b/drivers/virtio/vdpa/vdpa.c
+> new file mode 100644
+> index 000000000000..2b0e4a9f105d
+> +++ b/drivers/virtio/vdpa/vdpa.c
+> @@ -0,0 +1,141 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * vDPA bus.
+> + *
+> + * Copyright (c) 2019, Red Hat. All rights reserved.
+> + *     Author: Jason Wang <jasowang@redhat.com>
 
-The filename of the patch is:
-     crypto-virtio-implement-missing-support-for-output-ivs.patch
-and it can be found in the queue-5.4 subdirectory.
+2020 tests days
 
-If you, or anyone else, feels it should not be added to the stable tree,
-please let <stable@vger.kernel.org> know about it.
+> + *
+> + */
+> +
+> +#include <linux/module.h>
+> +#include <linux/idr.h>
+> +#include <linux/vdpa.h>
+> +
+> +#define MOD_VERSION  "0.1"
 
+I think module versions are discouraged these days
 
-From 500e6807ce93b1fdc7d5b827c5cc167cc35630db Mon Sep 17 00:00:00 2001
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Sat, 9 Nov 2019 18:09:26 +0100
-Subject: crypto: virtio - implement missing support for output IVs
+> +#define MOD_DESC     "vDPA bus"
+> +#define MOD_AUTHOR   "Jason Wang <jasowang@redhat.com>"
+> +#define MOD_LICENSE  "GPL v2"
+> +
+> +static DEFINE_IDA(vdpa_index_ida);
+> +
+> +struct device *vdpa_get_parent(struct vdpa_device *vdpa)
+> +{
+> +	return vdpa->dev.parent;
+> +}
+> +EXPORT_SYMBOL(vdpa_get_parent);
+> +
+> +void vdpa_set_parent(struct vdpa_device *vdpa, struct device *parent)
+> +{
+> +	vdpa->dev.parent = parent;
+> +}
+> +EXPORT_SYMBOL(vdpa_set_parent);
+> +
+> +struct vdpa_device *dev_to_vdpa(struct device *_dev)
+> +{
+> +	return container_of(_dev, struct vdpa_device, dev);
+> +}
+> +EXPORT_SYMBOL_GPL(dev_to_vdpa);
+> +
+> +struct device *vdpa_to_dev(struct vdpa_device *vdpa)
+> +{
+> +	return &vdpa->dev;
+> +}
+> +EXPORT_SYMBOL_GPL(vdpa_to_dev);
 
-From: Ard Biesheuvel <ardb@kernel.org>
+Why these trivial assessors? Seems unnecessary, or should at least be
+static inlines in a header
 
-commit 500e6807ce93b1fdc7d5b827c5cc167cc35630db upstream.
+> +int register_vdpa_device(struct vdpa_device *vdpa)
+> +{
 
-In order to allow for CBC to be chained, which is something that the
-CTS template relies upon, implementations of CBC need to pass the
-IV to be used for subsequent invocations via the IV buffer. This was
-not implemented yet for virtio-crypto so implement it now.
+Usually we want to see symbols consistently prefixed with vdpa_*, is
+there a reason why register/unregister are swapped?
 
-Fixes: dbaf0624ffa5 ("crypto: add virtio-crypto driver")
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Gonglei <arei.gonglei@huawei.com>
-Cc: virtualization@lists.linux-foundation.org
-Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
-Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> +	int err;
+> +
+> +	if (!vdpa_get_parent(vdpa))
+> +		return -EINVAL;
+> +
+> +	if (!vdpa->config)
+> +		return -EINVAL;
+> +
+> +	err = ida_simple_get(&vdpa_index_ida, 0, 0, GFP_KERNEL);
+> +	if (err < 0)
+> +		return -EFAULT;
+> +
+> +	vdpa->dev.bus = &vdpa_bus;
+> +	device_initialize(&vdpa->dev);
 
----
- drivers/crypto/virtio/virtio_crypto_algs.c |    9 +++++++++
- 1 file changed, 9 insertions(+)
+IMHO device_initialize should not be called inside something called
+register, toooften we find out that the caller drivers need the device
+to be initialized earlier, ie to use the kref, or something.
 
---- a/drivers/crypto/virtio/virtio_crypto_algs.c
-+++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -435,6 +435,11 @@ __virtio_crypto_ablkcipher_do_req(struct
- 		goto free;
- 	}
- 	memcpy(iv, req->info, ivsize);
-+	if (!vc_sym_req->encrypt)
-+		scatterwalk_map_and_copy(req->info, req->src,
-+					 req->nbytes - AES_BLOCK_SIZE,
-+					 AES_BLOCK_SIZE, 0);
-+
- 	sg_init_one(&iv_sg, iv, ivsize);
- 	sgs[num_out++] = &iv_sg;
- 	vc_sym_req->iv = iv;
-@@ -571,6 +576,10 @@ static void virtio_crypto_ablkcipher_fin
- 	struct ablkcipher_request *req,
- 	int err)
- {
-+	if (vc_sym_req->encrypt)
-+		scatterwalk_map_and_copy(req->info, req->dst,
-+					 req->nbytes - AES_BLOCK_SIZE,
-+					 AES_BLOCK_SIZE, 0);
- 	crypto_finalize_ablkcipher_request(vc_sym_req->base.dataq->engine,
- 					   req, err);
- 	kzfree(vc_sym_req->iv);
+I find the best flow is to have some init function that does the
+device_initialize and sets the device_name that the driver can call
+early.
 
+Shouldn't there be a device/driver matching process of some kind?
 
-Patches currently in stable-queue which might be from ardb@kernel.org are
-
-queue-5.4/crypto-virtio-implement-missing-support-for-output-ivs.patch
+Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
