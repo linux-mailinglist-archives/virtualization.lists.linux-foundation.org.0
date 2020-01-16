@@ -2,92 +2,90 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0CAD13D46F
-	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 07:41:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33A8813D51D
+	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 08:38:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6607A87B36;
-	Thu, 16 Jan 2020 06:41:28 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D1CD787B5B;
+	Thu, 16 Jan 2020 07:38:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id w5uclUhQQN78; Thu, 16 Jan 2020 06:41:24 +0000 (UTC)
+	with ESMTP id 4ShDy20m9fgt; Thu, 16 Jan 2020 07:37:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5274287B0E;
-	Thu, 16 Jan 2020 06:41:24 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 5AA1A87B96;
+	Thu, 16 Jan 2020 07:37:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 22FA6C077D;
-	Thu, 16 Jan 2020 06:41:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3F062C077D;
+	Thu, 16 Jan 2020 07:37:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 034DAC077D
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2D1D4C077D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 06:41:22 +0000 (UTC)
+ Thu, 16 Jan 2020 07:37:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id ED90C86447
+ by silver.osuosl.org (Postfix) with ESMTP id 147F7203CA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 06:41:21 +0000 (UTC)
+ Thu, 16 Jan 2020 07:37:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pZmbORo623YW
+ with ESMTP id NpVwKFmEfStA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 06:41:17 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
- [209.85.215.193])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5187186322
+ Thu, 16 Jan 2020 07:37:51 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id 76D52203BD
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 06:41:17 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id b9so9371941pgk.12
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jan 2020 22:41:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=f+3QqTgKD7g/KMqBuMVdD0S0/jS8wXuOx0d2mRo05wM=;
- b=HWyZ3sMXGypZPNNMnZ852l+iVVKgncaqVj3flIFUoNqtIfd60EyelDa3m2LZrvRnBr
- h0l7o9f8UC4fo6HCkftcKVspCowdS+e6L/ybziqj3RV6Rrr6GakIosK/u3nobSMoK8hX
- lSxCdkVTZryN2yp+LCBmbzoysuD5mrcoDIeEo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=f+3QqTgKD7g/KMqBuMVdD0S0/jS8wXuOx0d2mRo05wM=;
- b=YB+COdM5QxTyv+n3BjHnnxw0PFCNdep4w/L8yxE7h3hSqjaPC7iOL8ZXQ9QdRznNAu
- 9BMwDNj/7h0BY/HieaFIvfXhaSshl+c10aiEg0tRYvlYH7Qkao6IPo6Ra+bCWjST6Lyy
- KAju0sjgvPuoOo7qe6QXpXy0BlrrBLnX8LSpAWJENK/4I7GyxNxi2CUcExui9JX8aP9X
- HiAnE0paUi65R0cElC+EHpmCFZ6a4lb18G/GpzqzOJiRaxIhGN2Gq3OVII5f5kbiK+W+
- hLmsSTgLJI3FrFvz78Rif4T5ClRxDUCW8wyOAP8iG/wKOxEnmyY4nDdqDQiTFYoFIMdS
- 1rig==
-X-Gm-Message-State: APjAAAWWFzjI/9WzbbvfWYddCeJt+rNkrDo3wF0o0GM3zYiGUqTMM6JD
- l0Qjb0s5SA+uxjj2ufBjuQpScA==
-X-Google-Smtp-Source: APXvYqwZqouniRGqLdIbpa7A320WvTTDLYRevXEYwIJDywXZPmI0KIu4Kbc7bxX/PQE5dglAyvziBw==
-X-Received: by 2002:a63:e0c:: with SMTP id d12mr36249068pgl.3.1579156876764;
- Wed, 15 Jan 2020 22:41:16 -0800 (PST)
-Received: from dvetter-linux.ger.corp.intel.com ([138.44.248.126])
- by smtp.gmail.com with ESMTPSA id a1sm23642333pfo.68.2020.01.15.22.41.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2020 22:41:16 -0800 (PST)
-Date: Thu, 16 Jan 2020 07:41:07 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH v2 4/4] drm/simple-kms: Let DRM core send VBLANK events
- by default
-Message-ID: <20200116064107.GB8400@dvetter-linux.ger.corp.intel.com>
+ Thu, 16 Jan 2020 07:37:51 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 593D4AC2C;
+ Thu, 16 Jan 2020 07:37:32 +0000 (UTC)
+Subject: Re: [PATCH v2 4/4] drm/simple-kms: Let DRM core send VBLANK events by
+ default
+To: Daniel Vetter <daniel@ffwll.ch>
 References: <20200115125226.13843-1-tzimmermann@suse.de>
  <20200115125226.13843-5-tzimmermann@suse.de>
+ <20200116064107.GB8400@dvetter-linux.ger.corp.intel.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <33fdd33f-ce8d-70d3-544e-fac727d2686b@suse.de>
+Date: Thu, 16 Jan 2020 08:37:26 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200115125226.13843-5-tzimmermann@suse.de>
-X-Operating-System: Linux dvetter-linux.ger.corp.intel.com
- 5.2.11-200.fc30.x86_64 
+In-Reply-To: <20200116064107.GB8400@dvetter-linux.ger.corp.intel.com>
 Cc: david@lechnology.com, oleksandr_andrushchenko@epam.com, airlied@linux.ie,
  sam@ravnborg.org, dri-devel@lists.freedesktop.org,
  maarten.lankhorst@linux.intel.com, mripard@kernel.org,
  virtualization@lists.linux-foundation.org, hdegoede@redhat.com,
- noralf@tronnes.org, daniel@ffwll.ch, xen-devel@lists.xenproject.org,
- emil.velikov@collabora.com, sean@poorly.run, laurent.pinchart@ideasonboard.com
+ noralf@tronnes.org, xen-devel@lists.xenproject.org, emil.velikov@collabora.com,
+ sean@poorly.run, laurent.pinchart@ideasonboard.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,108 +97,210 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============5489304536102959506=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jan 15, 2020 at 01:52:26PM +0100, Thomas Zimmermann wrote:
-> In drm_atomic_helper_fake_vblank() the DRM core sends out VBLANK events
-> if struct drm_crtc_state.no_vblank is enabled in the check() callbacks.
-> 
-> For drivers that have neither an enable_vblank() callback nor a check()
-> callback, the simple-KMS helpers enable VBLANK generation by default. This
-> simplifies bochs, udl, several tiny drivers, and drivers based upon MIPI
-> DPI helpers. The driver for Xen explicitly disables no_vblank, as it has
-> its own logic for sending these events.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============5489304536102959506==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="2TF20vE0nUR867IpaGkbOHeyuGZJOixI9"
 
-> diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/drm/drm_simple_kms_helper.c
-> index 15fb516ae2d8..4414c7a5b2ce 100644
-> --- a/drivers/gpu/drm/drm_simple_kms_helper.c
-> +++ b/drivers/gpu/drm/drm_simple_kms_helper.c
-> @@ -146,10 +146,21 @@ static int drm_simple_kms_plane_atomic_check(struct drm_plane *plane,
->  	if (!plane_state->visible)
->  		return 0;
->  
-> -	if (!pipe->funcs || !pipe->funcs->check)
-> -		return 0;
-> -
-> -	return pipe->funcs->check(pipe, plane_state, crtc_state);
-> +	if (pipe->funcs) {
-> +		if (pipe->funcs->check)
-> +			return pipe->funcs->check(pipe, plane_state,
-> +						  crtc_state);
-> +		if (pipe->funcs->enable_vblank)
-> +			return 0;
-> +	}
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--2TF20vE0nUR867IpaGkbOHeyuGZJOixI9
+Content-Type: multipart/mixed; boundary="IhVePYMFhVozNgiM73xbi0VCK6gdDGe7Y";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Daniel Vetter <daniel@ffwll.ch>
+Cc: airlied@linux.ie, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, hdegoede@redhat.com, david@lechnology.com,
+ noralf@tronnes.org, sean@poorly.run, oleksandr_andrushchenko@epam.com,
+ sam@ravnborg.org, laurent.pinchart@ideasonboard.com,
+ emil.velikov@collabora.com, xen-devel@lists.xenproject.org,
+ virtualization@lists.linux-foundation.org, dri-devel@lists.freedesktop.org
+Message-ID: <33fdd33f-ce8d-70d3-544e-fac727d2686b@suse.de>
+Subject: Re: [PATCH v2 4/4] drm/simple-kms: Let DRM core send VBLANK events by
+ default
+References: <20200115125226.13843-1-tzimmermann@suse.de>
+ <20200115125226.13843-5-tzimmermann@suse.de>
+ <20200116064107.GB8400@dvetter-linux.ger.corp.intel.com>
+In-Reply-To: <20200116064107.GB8400@dvetter-linux.ger.corp.intel.com>
+
+--IhVePYMFhVozNgiM73xbi0VCK6gdDGe7Y
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+Am 16.01.20 um 07:41 schrieb Daniel Vetter:
+> On Wed, Jan 15, 2020 at 01:52:26PM +0100, Thomas Zimmermann wrote:
+>> In drm_atomic_helper_fake_vblank() the DRM core sends out VBLANK event=
+s
+>> if struct drm_crtc_state.no_vblank is enabled in the check() callbacks=
+=2E
+>>
+>> For drivers that have neither an enable_vblank() callback nor a check(=
+)
+>> callback, the simple-KMS helpers enable VBLANK generation by default. =
+This
+>> simplifies bochs, udl, several tiny drivers, and drivers based upon MI=
+PI
+>> DPI helpers. The driver for Xen explicitly disables no_vblank, as it h=
+as
+>> its own logic for sending these events.
+>>
+>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>=20
+>> diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/drm=
+/drm_simple_kms_helper.c
+>> index 15fb516ae2d8..4414c7a5b2ce 100644
+>> --- a/drivers/gpu/drm/drm_simple_kms_helper.c
+>> +++ b/drivers/gpu/drm/drm_simple_kms_helper.c
+>> @@ -146,10 +146,21 @@ static int drm_simple_kms_plane_atomic_check(str=
+uct drm_plane *plane,
+>>  	if (!plane_state->visible)
+>>  		return 0;
+>> =20
+>> -	if (!pipe->funcs || !pipe->funcs->check)
+>> -		return 0;
+>> -
+>> -	return pipe->funcs->check(pipe, plane_state, crtc_state);
+>> +	if (pipe->funcs) {
+>> +		if (pipe->funcs->check)
+>> +			return pipe->funcs->check(pipe, plane_state,
+>> +						  crtc_state);
+>> +		if (pipe->funcs->enable_vblank)
+>> +			return 0;
+>> +	}
+>> +
+>> +	/* Drivers without VBLANK support have to fake VBLANK events. As
+>> +	 * there's no check() callback to enable this, set the no_vblank
+>> +	 * field by default.
+>> +	 */
+>=20
+> The ->check callback is right above this comment ... I'm confused.
+
+I guess that comment isn't overly precise. What it means is that
+no_vblank would have to be set in check(), but the driver did not
+specify a check() function. So it has neither vblank support nor any way
+of setting no_vblank. Hence, the simple-kms helper sets no_vblank
+automatically.
+
+Maybe something to update for the patchset's v2.
+
+>=20
+>> +	crtc_state->no_vblank =3D true;
+>=20
+> That's kinda not what I meant with handling this automatically. Instead=
+
+> something like this:
+>=20
+>=20
+> diff --git a/drivers/gpu/drm/drm_atomic_state_helper.c b/drivers/gpu/dr=
+m/drm_atomic_state_helper.c
+> index 7cf3cf936547..23d2f51fc1d4 100644
+> --- a/drivers/gpu/drm/drm_atomic_state_helper.c
+> +++ b/drivers/gpu/drm/drm_atomic_state_helper.c
+> @@ -149,6 +149,11 @@ void __drm_atomic_helper_crtc_duplicate_state(stru=
+ct drm_crtc *crtc,
+>  	/* Self refresh should be canceled when a new update is available */
+>  	state->active =3D drm_atomic_crtc_effectively_active(state);
+>  	state->self_refresh_active =3D false;
 > +
-> +	/* Drivers without VBLANK support have to fake VBLANK events. As
-> +	 * there's no check() callback to enable this, set the no_vblank
-> +	 * field by default.
-> +	 */
+> +	if (drm_dev_has_vblank(crtc->dev))
+> +		state->no_vblank =3D true;
+> +	else
+> +		state->no_vblank =3D false;
+>  }
+>  EXPORT_SYMBOL(__drm_atomic_helper_crtc_duplicate_state);
 
-The ->check callback is right above this comment ... I'm confused.
+I think the if/else branches are in the wrong order.
 
-> +	crtc_state->no_vblank = true;
+But generally speaking, is it really that easy? The xen driver already
+has to work around simple-kms's auto-enabling of no_vblank (see patch
+4). Maybe this settings interferes with other drivers as well. At least
+the calls for sending fake vblanks should be removed from all affected
+drivers.
 
-That's kinda not what I meant with handling this automatically. Instead
-something like this:
+Best regards
+Thomas
+
+> =20
+> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.=
+c
+> index 1659b13b178c..32cab3d3c872 100644
+> --- a/drivers/gpu/drm/drm_vblank.c
+> +++ b/drivers/gpu/drm/drm_vblank.c
+> @@ -81,6 +81,12 @@
+>   */
+>  #define DRM_REDUNDANT_VBLIRQ_THRESH_NS 1000000
+> =20
+> +/* FIXME roll this out here in this file */
+> +bool drm_dev_has_vblank(dev)
+> +{
+> +	return dev->num_crtcs;
+> +}
+> +
+>  static bool
+>  drm_get_last_vbltimestamp(struct drm_device *dev, unsigned int pipe,
+>  			  ktime_t *tvblank, bool in_vblank_irq);
+>=20
+>=20
+> But maybe move the default value to some other/better place in the atom=
+ic
+> helpers, not sure what the best one is.
+>=20
+> Plus then in the documentation patch also highlight the link between
+> crtc_state->no_vblank and drm_dev_has_vblank respectively
+> drm_device.num_crtcs.
+>=20
+> That should plug this issue once for all across the board.
+>=20
+> There's still the fun between having the vblank callbacks and the
+> drm_vblank setup, but that's a much older can of worms ...
+> -Daniel
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
-diff --git a/drivers/gpu/drm/drm_atomic_state_helper.c b/drivers/gpu/drm/drm_atomic_state_helper.c
-index 7cf3cf936547..23d2f51fc1d4 100644
---- a/drivers/gpu/drm/drm_atomic_state_helper.c
-+++ b/drivers/gpu/drm/drm_atomic_state_helper.c
-@@ -149,6 +149,11 @@ void __drm_atomic_helper_crtc_duplicate_state(struct drm_crtc *crtc,
- 	/* Self refresh should be canceled when a new update is available */
- 	state->active = drm_atomic_crtc_effectively_active(state);
- 	state->self_refresh_active = false;
-+
-+	if (drm_dev_has_vblank(crtc->dev))
-+		state->no_vblank = true;
-+	else
-+		state->no_vblank = false;
- }
- EXPORT_SYMBOL(__drm_atomic_helper_crtc_duplicate_state);
- 
-diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
-index 1659b13b178c..32cab3d3c872 100644
---- a/drivers/gpu/drm/drm_vblank.c
-+++ b/drivers/gpu/drm/drm_vblank.c
-@@ -81,6 +81,12 @@
-  */
- #define DRM_REDUNDANT_VBLIRQ_THRESH_NS 1000000
- 
-+/* FIXME roll this out here in this file */
-+bool drm_dev_has_vblank(dev)
-+{
-+	return dev->num_crtcs;
-+}
-+
- static bool
- drm_get_last_vbltimestamp(struct drm_device *dev, unsigned int pipe,
- 			  ktime_t *tvblank, bool in_vblank_irq);
+--IhVePYMFhVozNgiM73xbi0VCK6gdDGe7Y--
 
+--2TF20vE0nUR867IpaGkbOHeyuGZJOixI9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-But maybe move the default value to some other/better place in the atomic
-helpers, not sure what the best one is.
+-----BEGIN PGP SIGNATURE-----
 
-Plus then in the documentation patch also highlight the link between
-crtc_state->no_vblank and drm_dev_has_vblank respectively
-drm_device.num_crtcs.
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl4gErkACgkQaA3BHVML
+eiN+vwf/XGyl88sc5pspPvxnC5r6X3M2RF8oBoWhQ3pFbMkf4/UqJarP8N+G5M/+
+yMVhwkYswAe9KdUZeqSwGLEdesukkyAQHPICSPXo17YrQl3HVAAqqv6P7zhGrNcU
+l1P5ESbAVbxQf6P2nlLbJK6+lYPvp3ojLRloeLVXEO+MGR5hWtogc9p/vulWcDnu
+8dEb0apW53GmMovVFhOr0haenOhzUc1wUb9zQm5mX/TDbpsJg8MBf7kKDcAMnPr1
+/gM2EDjuW4BlRdrAQRTnpwcOFZe/bwXwZ8m9s6/jLAF4aP6LTsbgMzZxIGc0v/Ku
+QZ5C5SSX3z4d1WSPYDhqIt600yNvVA==
+=Xk4o
+-----END PGP SIGNATURE-----
 
-That should plug this issue once for all across the board.
+--2TF20vE0nUR867IpaGkbOHeyuGZJOixI9--
 
-There's still the fun between having the vblank callbacks and the
-drm_vblank setup, but that's a much older can of worms ...
--Daniel
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+--===============5489304536102959506==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============5489304536102959506==--
