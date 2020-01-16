@@ -1,64 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E08713DB0D
-	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 14:04:17 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 526CE13DB10
+	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 14:04:55 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E16E2817F8;
-	Thu, 16 Jan 2020 13:04:15 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id E86432150A;
+	Thu, 16 Jan 2020 13:04:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0ljPAMrZO0Nb; Thu, 16 Jan 2020 13:04:11 +0000 (UTC)
+	with ESMTP id 0el7m+VS9yhr; Thu, 16 Jan 2020 13:04:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A039282018;
-	Thu, 16 Jan 2020 13:04:11 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id DC13620491;
+	Thu, 16 Jan 2020 13:04:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7EF30C077D;
-	Thu, 16 Jan 2020 13:04:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C0C4FC077D;
+	Thu, 16 Jan 2020 13:04:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 713D6C077D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 01808C077D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:10 +0000 (UTC)
+ Thu, 16 Jan 2020 13:04:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 5A8E887D7F
+ by hemlock.osuosl.org (Postfix) with ESMTP id F120387D0B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:10 +0000 (UTC)
+ Thu, 16 Jan 2020 13:04:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id q+jl+bPP0NlR
+ with ESMTP id 9FnUpuCJ+qF6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:06 +0000 (UTC)
+ Thu, 16 Jan 2020 13:04:43 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 9633887D0B
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7D14987D7F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 13:04:06 +0000 (UTC)
+ Thu, 16 Jan 2020 13:04:43 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E599620748;
- Thu, 16 Jan 2020 13:04:05 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id BF24B20748;
+ Thu, 16 Jan 2020 13:04:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1579179846;
- bh=SIWOxmz7y4jifKeNHMMpOFTqbC86hbHeIt8af6rsvuc=;
+ s=default; t=1579179883;
+ bh=cqwlyhWBKAqKJrhsN4Hb/s3j5SSMsdchtDX67lvtUpA=;
  h=Subject:To:Cc:From:Date:From;
- b=VvwRyBWK2EmpYNJUJqFQO1TwHJRQKrYYbJfRzfia6DSdHi70RYn8Xz19r9qS0XJBh
- 5NCYfb6UKXrmo56/wFqfIpSvUtx+NkJtPs8OZan5XnTWRxuSn9mXNJwuHs/rdb+/Qg
- Nk7TFFSAP2w/XHEbmE9MnTfdTkk6FNaob9rkvuTo=
+ b=TfqBl70RNLqvTGX9+QC2QLnStgDOFpMFg92STheXYZalDdulewnOq0KluV/l6gEfd
+ 5WczJToWoAWM+tgkPAyGLoW8Rqp44W94DEZKSxs3rm+Z1yU2NTf+Xwv8Dc0CWNug9C
+ VKrCTUR+d/9hOctS3UYdi/idfqXjyw9IwwVhSe1c=
 Subject: Patch "crypto: virtio - implement missing support for output IVs" has
- been added to the 4.19-stable tree
+ been added to the 5.4-stable tree
 To: ardb@kernel.org, arei.gonglei@huawei.com, gregkh@linuxfoundation.org,
  herbert@gondor.apana.org.au, jasowang@redhat.com, mst@redhat.com,
  virtualization@lists.linux-foundation.org
 From: <gregkh@linuxfoundation.org>
-Date: Thu, 16 Jan 2020 14:03:55 +0100
-Message-ID: <1579179835228172@kroah.com>
+Date: Thu, 16 Jan 2020 14:04:17 +0100
+Message-ID: <157917985760138@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
@@ -84,12 +84,12 @@ This is a note to let you know that I've just added the patch titled
 
     crypto: virtio - implement missing support for output IVs
 
-to the 4.19-stable tree which can be found at:
+to the 5.4-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      crypto-virtio-implement-missing-support-for-output-ivs.patch
-and it can be found in the queue-4.19 subdirectory.
+and it can be found in the queue-5.4 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -124,7 +124,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/crypto/virtio/virtio_crypto_algs.c
 +++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -449,6 +449,11 @@ __virtio_crypto_ablkcipher_do_req(struct
+@@ -435,6 +435,11 @@ __virtio_crypto_ablkcipher_do_req(struct
  		goto free;
  	}
  	memcpy(iv, req->info, ivsize);
@@ -136,7 +136,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  	sg_init_one(&iv_sg, iv, ivsize);
  	sgs[num_out++] = &iv_sg;
  	vc_sym_req->iv = iv;
-@@ -585,6 +590,10 @@ static void virtio_crypto_ablkcipher_fin
+@@ -571,6 +576,10 @@ static void virtio_crypto_ablkcipher_fin
  	struct ablkcipher_request *req,
  	int err)
  {
@@ -151,7 +151,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from ardb@kernel.org are
 
-queue-4.19/crypto-virtio-implement-missing-support-for-output-ivs.patch
+queue-5.4/crypto-virtio-implement-missing-support-for-output-ivs.patch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
