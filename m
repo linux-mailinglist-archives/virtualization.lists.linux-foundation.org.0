@@ -2,90 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9A9E13E6C1
-	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 18:22:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 678E613E74A
+	for <lists.virtualization@lfdr.de>; Thu, 16 Jan 2020 18:24:59 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7B6CA8641E;
-	Thu, 16 Jan 2020 17:22:20 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 18C2586594;
+	Thu, 16 Jan 2020 17:24:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ITxopq-9z46I; Thu, 16 Jan 2020 17:22:16 +0000 (UTC)
+	with ESMTP id 1UgOctU0i-mU; Thu, 16 Jan 2020 17:24:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 36B3A864BD;
-	Thu, 16 Jan 2020 17:22:16 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0AC3B86529;
+	Thu, 16 Jan 2020 17:24:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 16A07C077D;
-	Thu, 16 Jan 2020 17:22:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F341DC077D;
+	Thu, 16 Jan 2020 17:24:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 10CCDC077D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 146BEC077D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 17:22:14 +0000 (UTC)
+ Thu, 16 Jan 2020 17:24:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 0C2D220341
+ by silver.osuosl.org (Postfix) with ESMTP id 0C94D20387
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 17:22:14 +0000 (UTC)
+ Thu, 16 Jan 2020 17:24:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Q-kEWZZh4qDG
+ with ESMTP id 1UB-r6kPN6NP
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 17:22:08 +0000 (UTC)
+ Thu, 16 Jan 2020 17:24:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com
- [209.85.222.65])
- by silver.osuosl.org (Postfix) with ESMTPS id 970C320030
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id 196CB21552
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 17:22:08 +0000 (UTC)
-Received: by mail-ua1-f65.google.com with SMTP id c7so7904417uaf.5
- for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Jan 2020 09:22:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hjlPO7BPZ/JlQoLqlUXvQTlJfTAbQfDZ8K8Uze8BU/s=;
- b=YKMxolQBt/5TtzXuM46+gh9+XoXFQUxQh/cVpqTPRL0MhbKQNmtAXQKA013/fyOecO
- w136SaOLrnBnJBQtcqo0CSjSuaDQjPv55UatHkkhtYeF88FMZL8rGhX9mMFc9grHdBXe
- 9SuUZBrHr+8b/qwPkCSb4ftodkLJBP1DGWj0o28IQuMPz7nOqJ//eyp+S2oLV/hf1FkZ
- U6ayL/rVh/7ZtcFiYIHF6p1z9xQAcb+9jsVzlmo4YgRCaVHQ4ESCv1TfZvGT8NrH9sLu
- TrKfjOztyqm3R0nOU3nG9D/tKkM9/NO+NWzfV/+d2Pk0xorsvpuk5/1tENmSDHf+cGTy
- IG/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=hjlPO7BPZ/JlQoLqlUXvQTlJfTAbQfDZ8K8Uze8BU/s=;
- b=cO51OPohPY/SsKG9yqvZNRhXz8nWWqVWFJUMYKc4zb2gTLLEuOZuY97pSAqnNdtYQJ
- Npz+jrPAken3IZ6+wOLfhucFBuvezyD1sjnhgRXDg1vluNK0MkqusXhH5GckZGzH3PPZ
- FrnxSHfNfnB8OEiutZJyi+s6tIzdba9YH6XhsfAK5u2LYDlNdLU6c1IAzj/b56/a3Hdg
- v8swyftrZvwZ8aWerNJ4xegRNG/bgXxbXUpipwHlvkJQpoDHJgmEhwSIxoZ4cRyouv3Y
- ygyJA7FegIuqy9IApXEYTTjmMjeOQMvdlZRO0TBW76eeyzEgA6iBu3B5Ga1IL5ruwm1w
- y5cw==
-X-Gm-Message-State: APjAAAX2fkiqQ9dSyL5xxDODd0n1W/Jc40NIFH9p9oT6uyWLK6PyP5cZ
- u8yFNdS/CrG77nRIPdF/kqelLfTv3X4UWQFfqHs=
-X-Google-Smtp-Source: APXvYqyZHt1bqJYkRt6MbFegAzbw6GywWUBqaQuyP76aQnU4RRq0QOEI8YeE5E4qQi+Z4gewiSopIQgd5bPceS0uhj4=
-X-Received: by 2002:ab0:14a2:: with SMTP id d31mr18349536uae.106.1579195327403; 
- Thu, 16 Jan 2020 09:22:07 -0800 (PST)
+ Thu, 16 Jan 2020 17:24:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1579195485;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=L1usH87y9Hi/ZiYHMXoHuhdmW1E/8d47ArLsZBDzX7o=;
+ b=XJinJ0kCHyHfEdMKr9DwZZk5Js+UaAI/mIyiqZFM7u+NaTHK0Gp9c8GYI/bKEw3ftfisH4
+ Tomc0I9edkmGHe3lL1XoUx7YOn42wgRqabaQzsWz/zHet9DZabRo/JzqNrEqwHAkkMYLqw
+ MmMwUVWa3qCol1gNEMzhsOG0tFeEthQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-206-dO0yLECUNPe09s1O855Low-1; Thu, 16 Jan 2020 12:24:44 -0500
+X-MC-Unique: dO0yLECUNPe09s1O855Low-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 397941137843;
+ Thu, 16 Jan 2020 17:24:42 +0000 (UTC)
+Received: from steredhat.redhat.com (ovpn-117-242.ams2.redhat.com
+ [10.36.117.242])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id ACF8C5C28F;
+ Thu, 16 Jan 2020 17:24:30 +0000 (UTC)
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: davem@davemloft.net,
+	netdev@vger.kernel.org
+Subject: [PATCH net-next 0/3] vsock: support network namespace
+Date: Thu, 16 Jan 2020 18:24:25 +0100
+Message-Id: <20200116172428.311437-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-References: <20200115125226.13843-1-tzimmermann@suse.de>
- <20200115125226.13843-5-tzimmermann@suse.de>
- <20200116064107.GB8400@dvetter-linux.ger.corp.intel.com>
- <33fdd33f-ce8d-70d3-544e-fac727d2686b@suse.de>
-In-Reply-To: <33fdd33f-ce8d-70d3-544e-fac727d2686b@suse.de>
-From: Emil Velikov <emil.l.velikov@gmail.com>
-Date: Thu, 16 Jan 2020 17:22:34 +0000
-Message-ID: <CACvgo52gwC6U5HjnsQSUUDgE7Gp_EDb-QqCY8VDFjAX7cE0Lxg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] drm/simple-kms: Let DRM core send VBLANK events by
- default
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, david@lechnology.com,
- oleksandr_andrushchenko@epam.com, Dave Airlie <airlied@linux.ie>,
- Sean Paul <sean@poorly.run>, ML dri-devel <dri-devel@lists.freedesktop.org>,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- Hans de Goede <hdegoede@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- xen-devel@lists.xenproject.org, Sam Ravnborg <sam@ravnborg.org>,
- Emil Velikov <emil.velikov@collabora.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Cc: linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, Dexuan Cui <decui@microsoft.com>,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Stefan Hajnoczi <stefanha@redhat.com>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,51 +90,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi all,
+RFC -> v1:
+ * added 'netns' module param to vsock.ko to enable the
+   network namespace support (disabled by default)
+ * added 'vsock_net_eq()' to check the "net" assigned to a socket
+   only when 'netns' support is enabled
 
-On Thu, 16 Jan 2020 at 07:37, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+RFC: https://patchwork.ozlabs.org/cover/1202235/
 
-> > diff --git a/drivers/gpu/drm/drm_atomic_state_helper.c b/drivers/gpu/drm/drm_atomic_state_helper.c
-> > index 7cf3cf936547..23d2f51fc1d4 100644
-> > --- a/drivers/gpu/drm/drm_atomic_state_helper.c
-> > +++ b/drivers/gpu/drm/drm_atomic_state_helper.c
-> > @@ -149,6 +149,11 @@ void __drm_atomic_helper_crtc_duplicate_state(struct drm_crtc *crtc,
-> >       /* Self refresh should be canceled when a new update is available */
-> >       state->active = drm_atomic_crtc_effectively_active(state);
-> >       state->self_refresh_active = false;
-> > +
-> > +     if (drm_dev_has_vblank(crtc->dev))
-> > +             state->no_vblank = true;
-> > +     else
-> > +             state->no_vblank = false;
-> >  }
-> >  EXPORT_SYMBOL(__drm_atomic_helper_crtc_duplicate_state);
->
-> I think the if/else branches are in the wrong order.
->
-> But generally speaking, is it really that easy? The xen driver already
-> has to work around simple-kms's auto-enabling of no_vblank (see patch
-> 4). Maybe this settings interferes with other drivers as well. At least
-> the calls for sending fake vblanks should be removed from all affected
-> drivers.
->
+Now that we have multi-transport upstream, I started to take a look to
+support network namespace in vsock.
 
-I'm not sure if setting no_vblank based on dev->num_crtcs is the correct thing.
-From the original commit and associated description for no_vblank:
+As we partially discussed in the multi-transport proposal [1], it could
+be nice to support network namespace in vsock to reach the following
+goals:
+- isolate host applications from guest applications using the same ports
+  with CID_ANY
+- assign the same CID of VMs running in different network namespaces
+- partition VMs between VMMs or at finer granularity
 
-In some cases CRTCs are active but are not able to generating events, at
-least not at every frame at it's expected to.
-This is typically the case when the CRTC is feeding a writeback connector...
+This new feature is disabled by default, because it changes vsock's
+behavior with network namespaces and could break existing applications.
+It can be enabled with the new 'netns' module parameter of vsock.ko.
 
-Reflects the ability of a CRTC to send VBLANK events....
+This implementation provides the following behavior:
+- packets received from the host (received by G2H transports) are
+  assigned to the default netns (init_net)
+- packets received from the guest (received by H2G - vhost-vsock) are
+  assigned to the netns of the process that opens /dev/vhost-vsock
+  (usually the VMM, qemu in my tests, opens the /dev/vhost-vsock)
+    - for vmci I need some suggestions, because I don't know how to do
+      and test the same in the vmci driver, for now vmci uses the
+      init_net
+- loopback packets are exchanged only in the same netns
 
+I tested the series in this way:
+l0_host$ qemu-system-x86_64 -m 4G -M accel=kvm -smp 4 \
+            -drive file=/tmp/vsockvm0.img,if=virtio --nographic \
+            -device vhost-vsock-pci,guest-cid=3
 
-The proposed handling of no_vblank feels a little dirty, although
-nothing better comes to mind.
-Nevertheless code seems perfectly reasonable, so if it were me I'd merge it.
+l1_vm$ echo 1 > /sys/module/vsock/parameters/netns
 
-HTH
-Emil
+l1_vm$ ip netns add ns1
+l1_vm$ ip netns add ns2
+ # same CID on different netns
+l1_vm$ ip netns exec ns1 qemu-system-x86_64 -m 1G -M accel=kvm -smp 2 \
+            -drive file=/tmp/vsockvm1.img,if=virtio --nographic \
+            -device vhost-vsock-pci,guest-cid=4
+l1_vm$ ip netns exec ns2 qemu-system-x86_64 -m 1G -M accel=kvm -smp 2 \
+            -drive file=/tmp/vsockvm2.img,if=virtio --nographic \
+            -device vhost-vsock-pci,guest-cid=4
+
+ # all iperf3 listen on CID_ANY and port 5201, but in different netns
+l1_vm$ ./iperf3 --vsock -s # connection from l0 or guests started
+                           # on default netns (init_net)
+l1_vm$ ip netns exec ns1 ./iperf3 --vsock -s
+l1_vm$ ip netns exec ns1 ./iperf3 --vsock -s
+
+l0_host$ ./iperf3 --vsock -c 3
+l2_vm1$ ./iperf3 --vsock -c 2
+l2_vm2$ ./iperf3 --vsock -c 2
+
+[1] https://www.spinics.net/lists/netdev/msg575792.html
+
+Stefano Garzarella (3):
+  vsock: add network namespace support
+  vsock/virtio_transport_common: handle netns of received packets
+  vhost/vsock: use netns of process that opens the vhost-vsock device
+
+ drivers/vhost/vsock.c                   | 29 ++++++++++++-----
+ include/linux/virtio_vsock.h            |  2 ++
+ include/net/af_vsock.h                  |  7 +++--
+ net/vmw_vsock/af_vsock.c                | 41 +++++++++++++++++++------
+ net/vmw_vsock/hyperv_transport.c        |  5 +--
+ net/vmw_vsock/virtio_transport.c        |  2 ++
+ net/vmw_vsock/virtio_transport_common.c | 12 ++++++--
+ net/vmw_vsock/vmci_transport.c          |  5 +--
+ 8 files changed, 78 insertions(+), 25 deletions(-)
+
+-- 
+2.24.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
