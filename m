@@ -1,101 +1,121 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83A3C1429FE
-	for <lists.virtualization@lfdr.de>; Mon, 20 Jan 2020 13:03:42 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9BEE142A21
+	for <lists.virtualization@lfdr.de>; Mon, 20 Jan 2020 13:10:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 365111FFC1;
-	Mon, 20 Jan 2020 12:03:41 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9DA5E832FE;
+	Mon, 20 Jan 2020 12:10:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pVZAxXLaccMj; Mon, 20 Jan 2020 12:03:36 +0000 (UTC)
+	with ESMTP id r1FqZCBdfUpQ; Mon, 20 Jan 2020 12:10:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 89AFE20012;
-	Mon, 20 Jan 2020 12:03:35 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A34D9832F8;
+	Mon, 20 Jan 2020 12:09:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5DC5BC0174;
-	Mon, 20 Jan 2020 12:03:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8EFC8C1D88;
+	Mon, 20 Jan 2020 12:09:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BCAAFC0174
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E1C67C0174
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:03:33 +0000 (UTC)
+ Mon, 20 Jan 2020 12:09:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id AA12A1FFC1
+ by hemlock.osuosl.org (Postfix) with ESMTP id CF325874E0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:03:33 +0000 (UTC)
+ Mon, 20 Jan 2020 12:09:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SaWUBwJaI7rp
+ with ESMTP id nWdonezOYuj6
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:03:32 +0000 (UTC)
+ Mon, 20 Jan 2020 12:09:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 9F11220012
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6B51A87447
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:03:32 +0000 (UTC)
+ Mon, 20 Jan 2020 12:09:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1579521811;
+ s=mimecast20190719; t=1579522158;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=i0FYwpPvJVwXX6WibGdKe3t8GmO0Q/BB/ry3XOYj5v4=;
- b=IUsagC+QT7o8Lg7F1pqLCJbSApDaimaTwWR2DDCb+EFmTbNbyTERf0ROeQzX6iE2e3fthU
- 8F+yuUTDv9de3lrQaArYnjglILK+XcLEWnwlYCnFXQssRlJpkb5HigEHVl5nJCAVc7o+4f
- e3mDKsdzEwwtdJ/I6u5d9fFXZCzJ1GM=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-181-2ehTjIyJPESUAThyT3J7dg-1; Mon, 20 Jan 2020 07:03:28 -0500
-Received: by mail-qk1-f199.google.com with SMTP id 143so20224198qkg.12
+ bh=ils+V+DNAQCUc++KUaM/zwaIHOd66hKtcZoyoJKDxck=;
+ b=XJazi4uvc8FGdXK0hA/jHe7Y8jCenZUr+XMAMOm7NMAJZeomzdavszjWLOjkuS4rsquFSr
+ 68RtAPmdDl1lOAzTOOu4HdaUlVh63Aps3Eyg3bVcGgoLyz6TIZIuAC3AKF9tYZCHqw4gUY
+ Yi/uP6+dDeRNtZ7WY1T4ZP4RG0t2dOs=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-301-x3vpDmi6PvyKZ4IvmCFR6A-1; Mon, 20 Jan 2020 07:09:17 -0500
+Received: by mail-qt1-f198.google.com with SMTP id z11so11208422qts.1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 04:03:28 -0800 (PST)
+ Mon, 20 Jan 2020 04:09:17 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=i0FYwpPvJVwXX6WibGdKe3t8GmO0Q/BB/ry3XOYj5v4=;
- b=mCFTDhuvgpSsU4ZUENSPSHaJ/e6iyuB5dgsLTNk7hYbgYqY4XRiZCS3rdJhz0a3SsW
- upfwhraYnyT9rhO5aqxDm1mrmShwHgwNSXwt3ADlFFM3YMpJ/TLTao6TFjp1vd+EE6UK
- xGckczFOiBsxmSYBCrm2tKdfE/aq/wdEcqng6aRJmih6OYHZJgp0qtARI9hdUfBjwEsG
- SQ4nh8YaBSc8x1QT4/01Lpmrhi4cahf+uXWy9wSSlBlBu+aC7KBU2zKS9rYCgjW6ZKlL
- T7vF1rEyXHrk2G1A0Mna8k63eMURN3pCbM2SMUTx2MK5ddz5kdIrzsTOYLEJ4AJq5tQT
- a1pQ==
-X-Gm-Message-State: APjAAAWhh+n/et1DwrqV/S1R3I/Z19dk6kf6CZ/DebpYyBtTgvt6Z9wI
- z17dUlB6UM5XWDBle1DjQH3hxaIbPrDIiOtGxqMt+v44JqmIQGqsycYdtUNlwD+YSbz37mYh9nH
- zNd467kz+bqvgcBIzjBPclGF8JNHXzU5uuvZAe1kHiQ==
-X-Received: by 2002:ac8:2c7d:: with SMTP id e58mr20372312qta.196.1579521807751; 
- Mon, 20 Jan 2020 04:03:27 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwBOvpzVbluzRk2PBevjR+yTn5PHKpCN1mkjbfx/S5QQmnZyFB/1WiP+Ct1GD9bo9yvXG9y7A==
-X-Received: by 2002:ac8:2c7d:: with SMTP id e58mr20372288qta.196.1579521807486; 
- Mon, 20 Jan 2020 04:03:27 -0800 (PST)
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=ils+V+DNAQCUc++KUaM/zwaIHOd66hKtcZoyoJKDxck=;
+ b=X3UxFf7JCVl5FtfLJNEJPF1HpT1C4459ZuPqXU3++3wDB1l5Wng0B+Pel6MWin9y2H
+ 0sku+OFB1zihKToHnL6etzsvJdx5o7y+KChXzh2slNFbZPYWalqlrJsat8kbOau6UDnG
+ YZqZ2HTCrm1ckm43wycR6HzoFHF3Kb4WqDB9XQpi6iTtQQtb6PhxT+tfF3W+BVKmbf5R
+ o5lVtN0KhU9r0lcGlsJCoCponNVu31fFTCtbDE13BFAm54nZkUuyazBFz0PeXGvZoTa5
+ gmakBDiUDgmO+tuVrF005YRjN7Pm7yKUeZwgKQDuAEjVVUsHQ+Puw3i3XoY9r7Ra5wY1
+ QOxg==
+X-Gm-Message-State: APjAAAUClA2RKvrlOsOqXccK42xOk8kqynr1iTkXCR5uG1ud7ntfqdIZ
+ p7EIH/QLcw9JgH+s9TJsMy/49D/aWPz9Mh8gB75ZRgcMYjnRxqmo7gGEy9p8NheTmkhvtsMOf6w
+ 33LPy1Jgz4aAs9fL6P6pzOI2gGbQVIgEwAxRIF3JQMg==
+X-Received: by 2002:ac8:747:: with SMTP id k7mr20536092qth.120.1579522157153; 
+ Mon, 20 Jan 2020 04:09:17 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyPRlGSUNQNiKSICSXdcPuLibX0Cl/JMb+oCpOV4CRtRfGtUmRXGfQQVE1MHMBhude5c31BGg==
+X-Received: by 2002:ac8:747:: with SMTP id k7mr20536064qth.120.1579522156954; 
+ Mon, 20 Jan 2020 04:09:16 -0800 (PST)
 Received: from redhat.com (bzq-79-179-85-180.red.bezeqint.net. [79.179.85.180])
- by smtp.gmail.com with ESMTPSA id h8sm17044762qtm.51.2020.01.20.04.03.22
+ by smtp.gmail.com with ESMTPSA id t2sm15467285qkc.31.2020.01.20.04.09.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2020 04:03:26 -0800 (PST)
-Date: Mon, 20 Jan 2020 07:03:20 -0500
+ Mon, 20 Jan 2020 04:09:15 -0800 (PST)
+Date: Mon, 20 Jan 2020 07:09:07 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-Subject: Re: [PATCH net-next 1/3] vsock: add network namespace support
-Message-ID: <20200120060601-mutt-send-email-mst@kernel.org>
-References: <20200116172428.311437-1-sgarzare@redhat.com>
- <20200116172428.311437-2-sgarzare@redhat.com>
- <20200120.100610.546818167633238909.davem@davemloft.net>
- <20200120101735.uyh4o64gb4njakw5@steredhat>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH 3/5] vDPA: introduce vDPA bus
+Message-ID: <20200120070710-mutt-send-email-mst@kernel.org>
+References: <20200116124231.20253-1-jasowang@redhat.com>
+ <20200116124231.20253-4-jasowang@redhat.com>
+ <20200117070324-mutt-send-email-mst@kernel.org>
+ <239b042c-2d9e-0eec-a1ef-b03b7e2c5419@redhat.com>
+ <CAJPjb1+fG9L3=iKbV4Vn13VwaeDZZdcfBPvarogF_Nzhk+FnKg@mail.gmail.com>
+ <AM0PR0502MB379553984D0D55FDE25426F6C3330@AM0PR0502MB3795.eurprd05.prod.outlook.com>
+ <20200119045849-mutt-send-email-mst@kernel.org>
+ <d4e7fc56-c9d8-f01f-1504-dd49d5658037@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200120101735.uyh4o64gb4njakw5@steredhat>
-X-MC-Unique: 2ehTjIyJPESUAThyT3J7dg-1
+In-Reply-To: <d4e7fc56-c9d8-f01f-1504-dd49d5658037@redhat.com>
+X-MC-Unique: x3vpDmi6PvyKZ4IvmCFR6A-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: linux-hyperv@vger.kernel.org, kvm@vger.kernel.org, netdev@vger.kernel.org,
- decui@microsoft.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, stefanha@redhat.com,
- David Miller <davem@davemloft.net>, jhansen@vmware.com
+Cc: "jakub.kicinski@netronome.com" <jakub.kicinski@netronome.com>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "mhabets@solarflare.com" <mhabets@solarflare.com>,
+ "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ Rob Miller <rob.miller@broadcom.com>, "lulu@redhat.com" <lulu@redhat.com>,
+ "hanand@xilinx.com" <hanand@xilinx.com>,
+ "hch@infradead.org" <hch@infradead.org>,
+ "eperezma@redhat.com" <eperezma@redhat.com>,
+ Jason Gunthorpe <jgg@mellanox.com>, Shahaf Shuler <shahafs@mellanox.com>,
+ Parav Pandit <parav@mellanox.com>, Jiri Pirko <jiri@mellanox.com>, "Wang,
+ Xiao W" <xiao.w.wang@intel.com>, "stefanha@redhat.com" <stefanha@redhat.com>,
+ "Wang, Zhihong" <zhihong.wang@intel.com>, Netdev <netdev@vger.kernel.org>,
+ "rdunlap@infradead.org" <rdunlap@infradead.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>, "Zhu,
+ Lingshan" <lingshan.zhu@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,59 +127,25 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jan 20, 2020 at 11:17:35AM +0100, Stefano Garzarella wrote:
-> On Mon, Jan 20, 2020 at 10:06:10AM +0100, David Miller wrote:
-> > From: Stefano Garzarella <sgarzare@redhat.com>
-> > Date: Thu, 16 Jan 2020 18:24:26 +0100
-> > 
-> > > This patch adds 'netns' module param to enable this new feature
-> > > (disabled by default), because it changes vsock's behavior with
-> > > network namespaces and could break existing applications.
-> > 
-> > Sorry, no.
-> > 
-> > I wonder if you can even design a legitimate, reasonable, use case
-> > where these netns changes could break things.
-> 
-> I forgot to mention the use case.
-> I tried the RFC with Kata containers and we found that Kata shim-v1
-> doesn't work (Kata shim-v2 works as is) because there are the following
-> processes involved:
-> - kata-runtime (runs in the init_netns) opens /dev/vhost-vsock and
->   passes it to qemu
-> - kata-shim (runs in a container) wants to talk with the guest but the
->   vsock device is assigned to the init_netns and kata-shim runs in a
->   different netns, so the communication is not allowed
-> But, as you said, this could be a wrong design, indeed they already
-> found a fix, but I was not sure if others could have the same issue.
-> 
-> In this case, do you think it is acceptable to make this change in
-> the vsock's behavior with netns and ask the user to change the design?
-
-David's question is what would be a usecase that's broken
-(as opposed to fixed) by enabling this by default.
-
-If it does exist, you need a way for userspace to opt-in,
-module parameter isn't that.
-
-> 
-> > 
-> > I am totally against adding a module parameter for this, it's
-> > incredibly confusing for users and will create a test scenerio
-> > that is strongly less likely to be covered.
-> > 
-> 
-> Got it, I'll remove the module parameter!
-> 
-> Thanks,
-> Stefano
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gTW9uLCBKYW4gMjAsIDIwMjAgYXQgMDQ6NDQ6MzRQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiAKPiBPbiAyMDIwLzEvMTkg5LiL5Y2INTo1OSwgTWljaGFlbCBTLiBUc2lya2luIHdyb3Rl
+Ogo+ID4gT24gU3VuLCBKYW4gMTksIDIwMjAgYXQgMDk6MDc6MDlBTSArMDAwMCwgU2hhaGFmIFNo
+dWxlciB3cm90ZToKPiA+ID4gPiBUZWNobmljYWxseSwgd2UgY2FuIGtlZXAgdGhlIGluY3JlbWVu
+dGFsIEFQSQo+ID4gPiA+IGhlcmUgYW5kIGxldCB0aGUgdmVuZG9yIHZEUEEgZHJpdmVycyB0byBy
+ZWNvcmQgdGhlIGZ1bGwgbWFwcGluZwo+ID4gPiA+IGludGVybmFsbHkgd2hpY2ggbWF5IHNsaWdo
+dGx5IGluY3JlYXNlIHRoZSBjb21wbGV4aXR5IG9mIHZlbmRvciBkcml2ZXIuCj4gPiA+IFdoYXQg
+d2lsbCBiZSB0aGUgdHJpZ2dlciBmb3IgdGhlIGRyaXZlciB0byBrbm93IGl0IHJlY2VpdmVkIHRo
+ZSBsYXN0IG1hcHBpbmcgb24gdGhpcyBzZXJpZXMgYW5kIGl0IGNhbiBub3cgcHVzaCBpdCB0byB0
+aGUgb24tY2hpcCBJT01NVT8KPiA+IFNvbWUga2luZCBvZiBpbnZhbGlkYXRlIEFQST8KPiA+IAo+
+IAo+IFRoZSBwcm9ibGVtIGlzIGhvdyB0byBkZWFsIHdpdGggdGhlIGNhc2Ugb2YgdklPTU1VLiBX
+aGVuIHZJT01NVSBpcyBlbmFibGluZwo+IHRoZXJlJ3Mgbm8gY29uY2VwdCBvZiBsYXN0IG1hcHBp
+bmcuCj4gCj4gVGhhbmtzCgpNb3N0IElPTU1VcyBoYXZlIGEgdHJhbnNsYXRpb24gY2FjaGUgc28g
+aGF2ZSBhbiBpbnZhbGlkYXRlIEFQSSB0b28uCgotLSAKTVNUCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QK
+VmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5s
+aW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
