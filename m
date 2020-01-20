@@ -2,117 +2,59 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F511142A62
-	for <lists.virtualization@lfdr.de>; Mon, 20 Jan 2020 13:17:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D123F142A76
+	for <lists.virtualization@lfdr.de>; Mon, 20 Jan 2020 13:21:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5B3AC84EC0;
-	Mon, 20 Jan 2020 12:17:51 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 77DF487535;
+	Mon, 20 Jan 2020 12:21:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cpxrMgkkuL3P; Mon, 20 Jan 2020 12:17:46 +0000 (UTC)
+	with ESMTP id DrhFU8TI0W8q; Mon, 20 Jan 2020 12:21:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D3BD086038;
-	Mon, 20 Jan 2020 12:17:46 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 9FA0787554;
+	Mon, 20 Jan 2020 12:21:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B6143C0174;
-	Mon, 20 Jan 2020 12:17:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7579BC0178;
+	Mon, 20 Jan 2020 12:21:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3646DC0174
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 94210C0174
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:17:45 +0000 (UTC)
+ Mon, 20 Jan 2020 12:21:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 1D45486038
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8FBB984EC0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:17:45 +0000 (UTC)
+ Mon, 20 Jan 2020 12:21:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HkPm3Cpfrxtd
+ with ESMTP id hXKuBwqbIvdH
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:17:39 +0000 (UTC)
+ Mon, 20 Jan 2020 12:20:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 0237584EC0
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 08C2A862B2
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 12:17:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1579522657;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=8L+ILVTS7iEVpEf9FQ7Niyp0BU3VQIiebmcN8SzOcl8=;
- b=Q8jJfz8kyQyUMTq+IqvBSU4xbhlSH9LCcDAIZk5+hsFJTxy9yMXVXtc0X/wvSkx+ykf66Q
- ttNo9gVr8SXSpg3wS/nySmKhQEqoIUSAVzraxC/kXD8JBTvYO2H/vDUGf32YfZJhNU2vRM
- uXaJUloQwg1Pf7GxPEsxVZJDV9WTUDs=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-419-BjiRG6CAMRKDbnVmOMa5gg-1; Mon, 20 Jan 2020 07:17:36 -0500
-Received: by mail-qt1-f199.google.com with SMTP id e37so21007549qtk.7
- for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Jan 2020 04:17:36 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=8L+ILVTS7iEVpEf9FQ7Niyp0BU3VQIiebmcN8SzOcl8=;
- b=VVoRX80k/tfPhNW55Ye7VW2zq7ddWyhxkQgZsMs+NdbT5YWv+wxrV9ibMuYnH/szrE
- pRYunpFYm3q/WFlKo1jDAbqupz5SktibCfzS22a/5vCFyfYQVYtDOAxaxIjoU/eh4R7f
- A63nSmUulhF9vXSuB5hmfgt6VdLpaN3iN3bMHpRkifpPCj7+wsygfl2csZuiQ6hsEBCD
- SSJZvkmGHvcDwcZQvRzygjCAiybes2QukWINu1wNXBXEdboadLMzkOo65aXTjcSHlNZj
- StSKt4+WnOdWG8WUmQmTZQQfZrdiw1W5yjBiVrSWbumUyKNw1LO6mlpyZBQq74vt+ZjG
- HUwg==
-X-Gm-Message-State: APjAAAVIp6IyiD6dhTzm73mTHrQl73alD84wb9sSWaqwG2G7ANjw1YXM
- x4NM6WbCuA485cB/rURYnTvHiNsB7nHu78VpWSnCUHxl+IdL6gBtUj8hnIYQRCvpb+7p9bri4z/
- BP3iDM2Uvv1noHw67yWHYVaiSPCsCi2h0WNOH6q9MNg==
-X-Received: by 2002:ac8:784:: with SMTP id l4mr19850127qth.286.1579522656242; 
- Mon, 20 Jan 2020 04:17:36 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwNA60FKJeMn0/BVl0tQjIyzqQrUvdMi0GrHZyiN0uIGAcUXWQkWAFroQqD7gDCIK6n3lBLSQ==
-X-Received: by 2002:ac8:784:: with SMTP id l4mr19850095qth.286.1579522655996; 
- Mon, 20 Jan 2020 04:17:35 -0800 (PST)
-Received: from redhat.com (bzq-79-179-85-180.red.bezeqint.net. [79.179.85.180])
- by smtp.gmail.com with ESMTPSA id y26sm17884235qtc.94.2020.01.20.04.17.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2020 04:17:34 -0800 (PST)
-Date: Mon, 20 Jan 2020 07:17:26 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Gunthorpe <jgg@mellanox.com>
-Subject: Re: [PATCH 3/5] vDPA: introduce vDPA bus
-Message-ID: <20200120071406-mutt-send-email-mst@kernel.org>
-References: <20200116124231.20253-1-jasowang@redhat.com>
- <20200116124231.20253-4-jasowang@redhat.com>
- <20200116152209.GH20978@mellanox.com>
- <03cfbcc2-fef0-c9d8-0b08-798b2a293b8c@redhat.com>
- <20200117135435.GU20978@mellanox.com>
+ Mon, 20 Jan 2020 12:20:58 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id BE130AC7C;
+ Mon, 20 Jan 2020 12:20:54 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, hdegoede@redhat.com,
+ david@lechnology.com, noralf@tronnes.org, sean@poorly.run,
+ oleksandr_andrushchenko@epam.com, sam@ravnborg.org,
+ laurent.pinchart@ideasonboard.com, emil.velikov@collabora.com
+Subject: [PATCH v3 0/4] Use no_vblank property for drivers without VBLANK
+Date: Mon, 20 Jan 2020 13:20:47 +0100
+Message-Id: <20200120122051.25178-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-In-Reply-To: <20200117135435.GU20978@mellanox.com>
-X-MC-Unique: BjiRG6CAMRKDbnVmOMa5gg-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: "jakub.kicinski@netronome.com" <jakub.kicinski@netronome.com>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "rob.miller@broadcom.com" <rob.miller@broadcom.com>,
- "lulu@redhat.com" <lulu@redhat.com>, "hanand@xilinx.com" <hanand@xilinx.com>,
- "hch@infradead.org" <hch@infradead.org>,
- "eperezma@redhat.com" <eperezma@redhat.com>,
- "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
- "mhabets@solarflare.com" <mhabets@solarflare.com>,
- Shahaf Shuler <shahafs@mellanox.com>, Parav Pandit <parav@mellanox.com>,
- Jiri Pirko <jiri@mellanox.com>,
- "xiao.w.wang@intel.com" <xiao.w.wang@intel.com>,
- "stefanha@redhat.com" <stefanha@redhat.com>,
- "zhihong.wang@intel.com" <zhihong.wang@intel.com>,
- "rdunlap@infradead.org" <rdunlap@infradead.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
+Cc: xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -129,25 +71,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jan 17, 2020 at 01:54:42PM +0000, Jason Gunthorpe wrote:
-> > 1) "virtio" vs "vhost", I implemented matching method for this in mdev
-> > series, but it looks unnecessary for vDPA device driver to know about this.
-> > Anyway we can use sysfs driver bind/unbind to switch drivers
-> > 2) virtio device id and vendor id. I'm not sure we need this consider the
-> > two drivers so far (virtio/vhost) are all bus drivers.
-> 
-> As we seem to be contemplating some dynamic creation of vdpa devices I
-> think upon creation time it should be specified what mode they should
-> run it and then all driver binding and autoloading should happen
-> automatically. Telling the user to bind/unbind is a very poor
-> experience.
+Instead of faking VBLANK events by themselves, drivers without VBLANK
+support can enable drm_crtc_vblank.no_vblank and let DRM do the rest.
+The patchset makes this official and converts over drivers.
 
-Maybe but OTOH it's an existing interface. I think we can reasonably
-start with bind/unbind and then add ability to specify
-the mode later. bind/unbind come from core so they will be
-maintained anyway.
--- 
-MST
+The current implementation looks at the number of initialized CRTCs
+wrt vblanking. If vblanking has been initialized for a CRTC, the driver
+is responsible for sending out VBLANK events. Otherwise, DRM will send
+out the event. The behaviour selected by initializing no_vblank as part
+of drm_atomic_helper_check_modeset().
+
+I went through all drivers, looking for those that call send out VBLANK
+events but do not call drm_vblank_init(). These are converted to the new
+semantics. This affects tiny drivers; drivers for virtual hardware; and
+a few others, which do not support interrupts. Xen comes with its
+own VBLANK logic and disables no_vblank explictly.
+
+For now, I left out Hans' R-b on v2 of the series, as the patches changed
+quite a bit.
+
+v3:
+	* reorder and squash patches
+	* set no_vblank in drm_atomic_helper_check_modeset() for *all*
+	  drivers (Daniel)
+	* convert all drivers to new semnatics as necessary
+v2:
+	* document functionality (Daniel)
+	* cleanup ast (Daniel)
+	* let simple-kms handle no_vblank where possible
+
+Thomas Zimmermann (4):
+  drm: Add drm_crtc_has_vblank()
+  drm: Initialize struct drm_crtc_state.no_vblank from device settings
+  drm/ast: Don't set struct drm_crtc_state.no_vblank explictly
+  drm/udl: Don't set struct drm_crtc_state.no_vblank explictly
+
+ drivers/gpu/drm/arc/arcpgu_crtc.c        | 16 -------------
+ drivers/gpu/drm/ast/ast_mode.c           |  2 --
+ drivers/gpu/drm/bochs/bochs_kms.c        |  9 -------
+ drivers/gpu/drm/cirrus/cirrus.c          |  8 -------
+ drivers/gpu/drm/drm_atomic_helper.c      | 10 +++++++-
+ drivers/gpu/drm/drm_mipi_dbi.c           |  9 -------
+ drivers/gpu/drm/drm_vblank.c             | 30 ++++++++++++++++++++++++
+ drivers/gpu/drm/qxl/qxl_display.c        | 14 -----------
+ drivers/gpu/drm/tiny/gm12u320.c          |  9 -------
+ drivers/gpu/drm/tiny/ili9225.c           |  9 -------
+ drivers/gpu/drm/tiny/repaper.c           |  9 -------
+ drivers/gpu/drm/tiny/st7586.c            |  9 -------
+ drivers/gpu/drm/udl/udl_modeset.c        | 11 ---------
+ drivers/gpu/drm/vboxvideo/vbox_mode.c    | 12 ----------
+ drivers/gpu/drm/virtio/virtgpu_display.c |  8 -------
+ drivers/gpu/drm/xen/xen_drm_front_kms.c  | 13 ++++++++++
+ include/drm/drm_crtc.h                   | 27 +++++++++++++++------
+ include/drm/drm_simple_kms_helper.h      |  7 ++++--
+ include/drm/drm_vblank.h                 |  1 +
+ 19 files changed, 78 insertions(+), 135 deletions(-)
+
+--
+2.24.1
 
 _______________________________________________
 Virtualization mailing list
