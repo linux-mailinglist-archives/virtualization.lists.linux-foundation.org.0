@@ -1,91 +1,160 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72070144FEF
-	for <lists.virtualization@lfdr.de>; Wed, 22 Jan 2020 10:42:40 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0285145C7F
+	for <lists.virtualization@lfdr.de>; Wed, 22 Jan 2020 20:32:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 22F9B20348;
-	Wed, 22 Jan 2020 09:42:39 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8765D861C5;
+	Wed, 22 Jan 2020 19:32:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Hoc6JzbmuMTm; Wed, 22 Jan 2020 09:42:37 +0000 (UTC)
+	with ESMTP id oHp2I-O1IiUY; Wed, 22 Jan 2020 19:32:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 2BEC21FE41;
-	Wed, 22 Jan 2020 09:42:37 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A5357861C9;
+	Wed, 22 Jan 2020 19:32:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 085CAC0174;
-	Wed, 22 Jan 2020 09:42:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 72342C0174;
+	Wed, 22 Jan 2020 19:32:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 45A2CC0174
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8B13CC0174
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jan 2020 09:42:35 +0000 (UTC)
+ Wed, 22 Jan 2020 19:32:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 2CEF420348
+ by silver.osuosl.org (Postfix) with ESMTP id 7797821513
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jan 2020 09:42:35 +0000 (UTC)
+ Wed, 22 Jan 2020 19:32:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mROGS0Wn4AUz
+ with ESMTP id OW+IbIKdlO+L
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jan 2020 09:42:33 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by silver.osuosl.org (Postfix) with ESMTPS id 8B4FB1FE41
+ Wed, 22 Jan 2020 19:32:30 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ by silver.osuosl.org (Postfix) with ESMTPS id 2425D20109
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jan 2020 09:42:33 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id AF4BDB9C6;
- Wed, 22 Jan 2020 09:42:30 +0000 (UTC)
-Subject: Re: [PATCH v3 1/4] drm: Add drm_crtc_has_vblank()
-To: Daniel Vetter <daniel@ffwll.ch>
-References: <20200120122051.25178-1-tzimmermann@suse.de>
- <20200120122051.25178-2-tzimmermann@suse.de>
- <20200122083139.GP43062@phenom.ffwll.local>
- <3ad03b06-f9be-37c7-9cc7-044468cdf300@suse.de>
- <20200122090405.GR43062@phenom.ffwll.local>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <c33b4684-9d43-d3ab-bc88-a89a635f63d3@suse.de>
-Date: Wed, 22 Jan 2020 10:42:26 +0100
+ Wed, 22 Jan 2020 19:32:30 +0000 (UTC)
+Received: from pps.filterd (m0187473.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 00MJSLtM100162 for <virtualization@lists.linux-foundation.org>;
+ Wed, 22 Jan 2020 14:32:29 -0500
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2xkxj0hgnh-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 22 Jan 2020 14:32:28 -0500
+Received: from localhost
+ by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <virtualization@lists.linux-foundation.org> from <borntraeger@de.ibm.com>; 
+ Wed, 22 Jan 2020 19:32:26 -0000
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
+ by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Wed, 22 Jan 2020 19:32:23 -0000
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
+ [9.149.105.58])
+ by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 00MJWMp951970252
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 22 Jan 2020 19:32:22 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 3C43F4C04E;
+ Wed, 22 Jan 2020 19:32:22 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id C616E4C050;
+ Wed, 22 Jan 2020 19:32:21 +0000 (GMT)
+Received: from oc7455500831.ibm.com (unknown [9.145.160.236])
+ by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Wed, 22 Jan 2020 19:32:21 +0000 (GMT)
+Subject: Re: vhost changes (batched) in linux-next after 12/13 trigger random
+ crashes in KVM guests after reboot
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <c022e1d6-0d57-ae07-5e6b-8e40d3b01f4b@de.ibm.com>
+ <20191218100926-mutt-send-email-mst@kernel.org>
+ <2ffdbd95-e375-a627-55a1-6990b0a0e37a@de.ibm.com>
+ <20200106054041-mutt-send-email-mst@kernel.org>
+ <08ae8d28-3d8c-04e8-bdeb-0117d06c6dc7@de.ibm.com>
+ <20200107042401-mutt-send-email-mst@kernel.org>
+ <c6795e53-d12c-0709-c2e9-e35d9af1f693@de.ibm.com>
+ <20200107065434-mutt-send-email-mst@kernel.org>
+ <fe6e7e90-3004-eb7a-9ed8-b53a7667959f@de.ibm.com>
+ <20200120012724-mutt-send-email-mst@kernel.org>
+From: Christian Borntraeger <borntraeger@de.ibm.com>
+Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
+ xsFNBE6cPPgBEAC2VpALY0UJjGmgAmavkL/iAdqul2/F9ONz42K6NrwmT+SI9CylKHIX+fdf
+ J34pLNJDmDVEdeb+brtpwC9JEZOLVE0nb+SR83CsAINJYKG3V1b3Kfs0hydseYKsBYqJTN2j
+ CmUXDYq9J7uOyQQ7TNVoQejmpp5ifR4EzwIFfmYDekxRVZDJygD0wL/EzUr8Je3/j548NLyL
+ 4Uhv6CIPf3TY3/aLVKXdxz/ntbLgMcfZsDoHgDk3lY3r1iwbWwEM2+eYRdSZaR4VD+JRD7p8
+ 0FBadNwWnBce1fmQp3EklodGi5y7TNZ/CKdJ+jRPAAnw7SINhSd7PhJMruDAJaUlbYaIm23A
+ +82g+IGe4z9tRGQ9TAflezVMhT5J3ccu6cpIjjvwDlbxucSmtVi5VtPAMTLmfjYp7VY2Tgr+
+ T92v7+V96jAfE3Zy2nq52e8RDdUo/F6faxcumdl+aLhhKLXgrozpoe2nL0Nyc2uqFjkjwXXI
+ OBQiaqGeWtxeKJP+O8MIpjyGuHUGzvjNx5S/592TQO3phpT5IFWfMgbu4OreZ9yekDhf7Cvn
+ /fkYsiLDz9W6Clihd/xlpm79+jlhm4E3xBPiQOPCZowmHjx57mXVAypOP2Eu+i2nyQrkapaY
+ IdisDQfWPdNeHNOiPnPS3+GhVlPcqSJAIWnuO7Ofw1ZVOyg/jwARAQABzUNDaHJpc3RpYW4g
+ Qm9ybnRyYWVnZXIgKDJuZCBJQk0gYWRkcmVzcykgPGJvcm50cmFlZ2VyQGxpbnV4LmlibS5j
+ b20+wsF5BBMBAgAjBQJdP/hMAhsDBwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQEXu8
+ gLWmHHy/pA/+JHjpEnd01A0CCyfVnb5fmcOlQ0LdmoKWLWPvU840q65HycCBFTt6V62cDljB
+ kXFFxMNA4y/2wqU0H5/CiL963y3gWIiJsZa4ent+KrHl5GK1nIgbbesfJyA7JqlB0w/E/SuY
+ NRQwIWOo/uEvOgXnk/7+rtvBzNaPGoGiiV1LZzeaxBVWrqLtmdi1iulW/0X/AlQPuF9dD1Px
+ hx+0mPjZ8ClLpdSp5d0yfpwgHtM1B7KMuQPQZGFKMXXTUd3ceBUGGczsgIMipZWJukqMJiJj
+ QIMH0IN7XYErEnhf0GCxJ3xAn/J7iFpPFv8sFZTvukntJXSUssONnwiKuld6ttUaFhSuSoQg
+ OFYR5v7pOfinM0FcScPKTkrRsB5iUvpdthLq5qgwdQjmyINt3cb+5aSvBX2nNN135oGOtlb5
+ tf4dh00kUR8XFHRrFxXx4Dbaw4PKgV3QLIHKEENlqnthH5t0tahDygQPnSucuXbVQEcDZaL9
+ WgJqlRAAj0pG8M6JNU5+2ftTFXoTcoIUbb0KTOibaO9zHVeGegwAvPLLNlKHiHXcgLX1tkjC
+ DrvE2Z0e2/4q7wgZgn1kbvz7ZHQZB76OM2mjkFu7QNHlRJ2VXJA8tMXyTgBX6kq1cYMmd/Hl
+ OhFrAU3QO1SjCsXA2CDk9MM1471mYB3CTXQuKzXckJnxHkHOwU0ETpw8+AEQAJjyNXvMQdJN
+ t07BIPDtbAQk15FfB0hKuyZVs+0lsjPKBZCamAAexNRk11eVGXK/YrqwjChkk60rt3q5i42u
+ PpNMO9aS8cLPOfVft89Y654Qd3Rs1WRFIQq9xLjdLfHh0i0jMq5Ty+aiddSXpZ7oU6E+ud+X
+ Czs3k5RAnOdW6eV3+v10sUjEGiFNZwzN9Udd6PfKET0J70qjnpY3NuWn5Sp1ZEn6lkq2Zm+G
+ 9G3FlBRVClT30OWeiRHCYB6e6j1x1u/rSU4JiNYjPwSJA8EPKnt1s/Eeq37qXXvk+9DYiHdT
+ PcOa3aNCSbIygD3jyjkg6EV9ZLHibE2R/PMMid9FrqhKh/cwcYn9FrT0FE48/2IBW5mfDpAd
+ YvpawQlRz3XJr2rYZJwMUm1y+49+1ZmDclaF3s9dcz2JvuywNq78z/VsUfGz4Sbxy4ShpNpG
+ REojRcz/xOK+FqNuBk+HoWKw6OxgRzfNleDvScVmbY6cQQZfGx/T7xlgZjl5Mu/2z+ofeoxb
+ vWWM1YCJAT91GFvj29Wvm8OAPN/+SJj8LQazd9uGzVMTz6lFjVtH7YkeW/NZrP6znAwv5P1a
+ DdQfiB5F63AX++NlTiyA+GD/ggfRl68LheSskOcxDwgI5TqmaKtX1/8RkrLpnzO3evzkfJb1
+ D5qh3wM1t7PZ+JWTluSX8W25ABEBAAHCwV8EGAECAAkFAk6cPPgCGwwACgkQEXu8gLWmHHz8
+ 2w//VjRlX+tKF3szc0lQi4X0t+pf88uIsvR/a1GRZpppQbn1jgE44hgF559K6/yYemcvTR7r
+ 6Xt7cjWGS4wfaR0+pkWV+2dbw8Xi4DI07/fN00NoVEpYUUnOnupBgychtVpxkGqsplJZQpng
+ v6fauZtyEcUK3dLJH3TdVQDLbUcL4qZpzHbsuUnTWsmNmG4Vi0NsEt1xyd/Wuw+0kM/oFEH1
+ 4BN6X9xZcG8GYUbVUd8+bmio8ao8m0tzo4pseDZFo4ncDmlFWU6hHnAVfkAs4tqA6/fl7RLN
+ JuWBiOL/mP5B6HDQT9JsnaRdzqF73FnU2+WrZPjinHPLeE74istVgjbowvsgUqtzjPIG5pOj
+ cAsKoR0M1womzJVRfYauWhYiW/KeECklci4TPBDNx7YhahSUlexfoftltJA8swRshNA/M90/
+ i9zDo9ySSZHwsGxG06ZOH5/MzG6HpLja7g8NTgA0TD5YaFm/oOnsQVsf2DeAGPS2xNirmknD
+ jaqYefx7yQ7FJXXETd2uVURiDeNEFhVZWb5CiBJM5c6qQMhmkS4VyT7/+raaEGgkEKEgHOWf
+ ZDP8BHfXtszHqI3Fo1F4IKFo/AP8GOFFxMRgbvlAs8z/+rEEaQYjxYJqj08raw6P4LFBqozr
+ nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
+Date: Wed, 22 Jan 2020 20:32:21 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ Thunderbird/68.3.0
 MIME-Version: 1.0
-In-Reply-To: <20200122090405.GR43062@phenom.ffwll.local>
-Cc: laurent.pinchart@ideasonboard.com, david@lechnology.com,
- oleksandr_andrushchenko@epam.com, airlied@linux.ie, sean@poorly.run,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- hdegoede@redhat.com, xen-devel@lists.xenproject.org, sam@ravnborg.org,
- emil.velikov@collabora.com
+In-Reply-To: <20200120012724-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-TM-AS-GCONF: 00
+x-cbid: 20012219-0008-0000-0000-0000034BCDE0
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20012219-0009-0000-0000-00004A6C37EA
+Message-Id: <2a63b15f-8cf5-5868-550c-42e2cfd92c60@de.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-01-22_08:2020-01-22,
+ 2020-01-22 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015
+ phishscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0
+ priorityscore=1501 bulkscore=0 adultscore=0 mlxscore=0 mlxlogscore=999
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-1910280000 definitions=main-2001220165
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,270 +166,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5803262040779799163=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5803262040779799163==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="Kr4FBQgHbqqwjCZYPZWobCco0q64F0NlR"
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Kr4FBQgHbqqwjCZYPZWobCco0q64F0NlR
-Content-Type: multipart/mixed; boundary="CbcRnXutG6CAwBMbtZz7TPwfM6GQSRaNU";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel@ffwll.ch>
-Cc: david@lechnology.com, oleksandr_andrushchenko@epam.com, airlied@linux.ie,
- sam@ravnborg.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, hdegoede@redhat.com,
- kraxel@redhat.com, xen-devel@lists.xenproject.org,
- emil.velikov@collabora.com, sean@poorly.run,
- laurent.pinchart@ideasonboard.com
-Message-ID: <c33b4684-9d43-d3ab-bc88-a89a635f63d3@suse.de>
-Subject: Re: [PATCH v3 1/4] drm: Add drm_crtc_has_vblank()
-References: <20200120122051.25178-1-tzimmermann@suse.de>
- <20200120122051.25178-2-tzimmermann@suse.de>
- <20200122083139.GP43062@phenom.ffwll.local>
- <3ad03b06-f9be-37c7-9cc7-044468cdf300@suse.de>
- <20200122090405.GR43062@phenom.ffwll.local>
-In-Reply-To: <20200122090405.GR43062@phenom.ffwll.local>
 
---CbcRnXutG6CAwBMbtZz7TPwfM6GQSRaNU
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-Am 22.01.20 um 10:04 schrieb Daniel Vetter:
-> On Wed, Jan 22, 2020 at 09:53:42AM +0100, Thomas Zimmermann wrote:
->> Hi
->>
->> Am 22.01.20 um 09:31 schrieb Daniel Vetter:
->>> On Mon, Jan 20, 2020 at 01:20:48PM +0100, Thomas Zimmermann wrote:
->>>> The new interface drm_crtc_has_vblank() return true if vblanking has=
-
->>>> been initialized for a certain CRTC, or false otherwise. This functi=
-on
->>>> will be useful for initializing CRTC state.
->>>>
->>>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>>> ---
->>>>  drivers/gpu/drm/drm_vblank.c | 21 +++++++++++++++++++++
->>>>  include/drm/drm_vblank.h     |  1 +
->>>>  2 files changed, 22 insertions(+)
->>>>
->>>> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vbla=
-nk.c
->>>> index 1659b13b178c..c20102899411 100644
->>>> --- a/drivers/gpu/drm/drm_vblank.c
->>>> +++ b/drivers/gpu/drm/drm_vblank.c
->>>> @@ -501,6 +501,27 @@ int drm_vblank_init(struct drm_device *dev, uns=
-igned int num_crtcs)
->>>>  }
->>>>  EXPORT_SYMBOL(drm_vblank_init);
->>>> =20
->>>> +/**
->>>> + * drm_crtc_has_vblank - test if vblanking has been initialized for=
-
->>>> + *                       a CRTC
->>>> + * @crtc: the CRTC
->>>> + *
->>>> + * Drivers may call this function to test if vblank support is
->>>> + * initialized for a CRTC. For most hardware this means that vblank=
-ing
->>>> + * can also be enabled on the CRTC.
->>>> + *
->>>> + * Returns:
->>>> + * True if vblanking has been initialized for the given CRTC, false=
-
->>>> + * otherwise.
->>>> + */
->>>> +bool drm_crtc_has_vblank(const struct drm_crtc *crtc)
->>>
->>> So making this specific to a CRTC sounds like a good idea. But it's n=
-ot
->>> the reality, drm_vblank.c assumes that either everything or nothing
->>> supports vblanks.
->>>
->>> The reason for dev->num_crtcs is historical baggage, it predates kms =
-by a
->>> few years. For kms drivers the only two valid values are either 0 or
->>> dev->mode_config.num_crtcs. Yes that's an entire different can of wor=
-ms
->>> that's been irking me since forever (ideally drm_vblank_init would so=
-mehow
->>> loose the num_crtcs argument for kms drivers, but some drivers call t=
-his
->>> before they've done all the drm_crtc_init calls so it's complicated).=
-
->>
->> Maybe as a first step, drm_vblank_init() could use
->> dev->mode_config.num_crtcs if the supplied number of CRTCs is zero.
+On 20.01.20 07:27, Michael S. Tsirkin wrote:
+> On Tue, Jan 07, 2020 at 01:16:50PM +0100, Christian Borntraeger wrote:
+>> On 07.01.20 12:55, Michael S. Tsirkin wrote:
 >>
 >>>
->>> Hence drm_dev_has_vblank as I suggested. That would also allow you to=
-
->>> replace a bunch of if (dev->num_crtcs) checks in drm_vblank.c, which
->>> should help quite a bit in code readability.
->>
->> OK, but I still don't understand why this interface is better overall.=
-
->> We don't loose anything by passing in the crtc instead of the device
->> structure. And if there's ever a per-crtc vblank initialization, we'd
->> have the interface in place already. The tests with "if
->> (dev->num_crtcs)" could probably be removed in most places in any case=
-=2E
->=20
-> You can't use it in drm_vblank.c code, because we only have the
-> drm_device, not the drm_crtc (in most places at least). Your other patc=
-h
-> series to deprecate the drm_device callbacks for vblanks is a huge step=
-
-> into the direction to fix that, but still more work needed: We'd
-> essentially need to copypaste drm_vblank.c into drm_crtc_vblank.c for k=
-ms
-> drivers, and in that copy switch from (dev, pipe) to crtc everywhere. P=
-lus
-> then move the drm_vblank structure into struct drm_crtc.
->=20
-> Wrt removing the check: In a pile of cases it changes the return value,=
-
-> which matters both for vblank usage in helper code and the ioctl itself=
-=2E
-> From a quick look most of the checks that don't matter are already wrap=
-ped
-> in a WARN.
->=20
->> We should also consider forking the vblank code for non-KMS drivers.
->> While working in this, I found the support for legacy drivers is getti=
-ng
->> in the way at times. With such a fork, legacy drivers could continue
->> using struct drm_vblank_crtc, while modern drivers could maybe store
->> vblank state directly in struct drm_crtc.
->=20
-> Hm if you want to do all that then the drm_crtc_has_vblank makes sense.=
-
-> But only after we've done the full split. So maybe make the public
-> function drm_crtc_has_vblank, which calls the internal-only
-> drm_has_vblank, and use that internally in drm_vblank.c?
->=20
-> btw I still think a sub-struct for vblank stuff in drm_crtc makes sense=
-,
-> and drm_vblank_crtc seems to mostly fit the bill.
->=20
-> That way we're at least not adding the the conversion pain of switching=
-
-> the vblank code over to drm_crtc fully.
->=20
-> Thoughts?
-
-That all sounds good. Using struct drm_vblank_crtc with legacy and
-modern vblank functions, might allow us to continue to share some of the
-implementation.
-
-Wrt the current interface, drm_dev_has_vblank() is only called in a
-single place, so switching to drm_crtc_has_vblank() later would not be ha=
-rd.
-
-Best regards
-Thomas
-
-> -Daniel
->=20
->> Anyway, all this is for another patch. Unless you change your mind, I'=
-ll
->> replace drm_crtc_has_vblank() with drm_dev_has_vblank() for the
->> patchset's next iteration.
->>
->> Best regards
->> Thomas
->>
->>>
->>> Cheers, Daniel
->>>
->>>> +{
->>>> +	struct drm_device *dev =3D crtc->dev;
->>>> +
->>>> +	return crtc->index < dev->num_crtcs;
->>>> +}
->>>> +EXPORT_SYMBOL(drm_crtc_has_vblank);
->>>> +
->>>>  /**
->>>>   * drm_crtc_vblank_waitqueue - get vblank waitqueue for the CRTC
->>>>   * @crtc: which CRTC's vblank waitqueue to retrieve
->>>> diff --git a/include/drm/drm_vblank.h b/include/drm/drm_vblank.h
->>>> index c16c44052b3d..531a6bc12b7e 100644
->>>> --- a/include/drm/drm_vblank.h
->>>> +++ b/include/drm/drm_vblank.h
->>>> @@ -206,6 +206,7 @@ struct drm_vblank_crtc {
->>>>  };
->>>> =20
->>>>  int drm_vblank_init(struct drm_device *dev, unsigned int num_crtcs)=
-;
->>>> +bool drm_crtc_has_vblank(const struct drm_crtc *crtc);
->>>>  u64 drm_crtc_vblank_count(struct drm_crtc *crtc);
->>>>  u64 drm_crtc_vblank_count_and_time(struct drm_crtc *crtc,
->>>>  				   ktime_t *vblanktime);
->>>> --=20
->>>> 2.24.1
->>>>
+>>> I pushed batched-v3 - same head but bisect should work now.
 >>>
 >>
->> --=20
->> Thomas Zimmermann
->> Graphics Driver Developer
->> SUSE Software Solutions Germany GmbH
->> Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
->> (HRB 36809, AG N=C3=BCrnberg)
->> Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+>> With 
+>> commit 38ced0208491103b50f1056f0d1c8f28e2e13d08 (HEAD)
+>> Author:     Michael S. Tsirkin <mst@redhat.com>
+>> AuthorDate: Wed Dec 11 12:19:26 2019 -0500
+>> Commit:     Michael S. Tsirkin <mst@redhat.com>
+>> CommitDate: Tue Jan 7 06:52:42 2020 -0500
 >>
->=20
->=20
->=20
->=20
+>>     vhost: use batched version by default
+>>
+>>
+>> I have exactly one successful ping and then the network inside the guest is broken (no packet
+>> anymore).
+> 
+> Does anything appear in host's dmesg when this happens?
 
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+I think there was nothing, but I am not sure. I would need to redo the test if this is important to know.
 
-
---CbcRnXutG6CAwBMbtZz7TPwfM6GQSRaNU--
-
---Kr4FBQgHbqqwjCZYPZWobCco0q64F0NlR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl4oGQIACgkQaA3BHVML
-eiN5EQgArXdg09il/Ymt9AEbsv3GHpCMJ1VsFbmlHJy1OYjEMWi9+iVFWLjLIS9t
-ldUO+o9XTSKEhz/AjQMPAbF4yXHfNiQe0nnHbsU1NxdG/Ip6geQ4CfuP9xm37+kj
-0Vqd7olY6D/rXTSxcsCBd+ix07tuHOsHTHWMOJRS9/fvFYCZIBMkXVU/0c6Uo3MX
-3IbJSmJFwAohcE2I6/ZcmD4V35KROf/C/lgEzQcE7sU1zQfNLPqmFpMFjEten5xy
-zj6ZoUL2S9vD8Z11I4p7r1elgW/7VUveP0jTa6GjQEXg7I97UDlwdnwAAEX4GmKx
-adH1p7K3alJdRTafNZeokdY2j+fWFQ==
-=lYah
------END PGP SIGNATURE-----
-
---Kr4FBQgHbqqwjCZYPZWobCco0q64F0NlR--
-
---===============5803262040779799163==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> 
+> 
+>> So you could consider this commit broken (but in a different way and also without any
+>> guest reboot necessary).
+>>
+>>
+>> bisect log:
+>> git bisect start
+>> # bad: [d2f6175f52062ee51ee69754a6925608213475d2] vhost: use vhost_desc instead of vhost_log
+>> git bisect bad d2f6175f52062ee51ee69754a6925608213475d2
+>> # good: [d1281e3a562ec6a08f944a876481dd043ba739b9] virtio-blk: remove VIRTIO_BLK_F_SCSI support
+>> git bisect good d1281e3a562ec6a08f944a876481dd043ba739b9
+>> # good: [fac7c0f46996e32d996f5c46121df24a6b95ec3b] vhost: option to fetch descriptors through an independent struct
+>> git bisect good fac7c0f46996e32d996f5c46121df24a6b95ec3b
+>> # bad: [539eb9d738f048cd7be61f404e8f9c7d9d2ff3cc] vhost: batching fetches
+>> git bisect bad 539eb9d738f048cd7be61f404e8f9c7d9d2ff3cc
+> 
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============5803262040779799163==--
