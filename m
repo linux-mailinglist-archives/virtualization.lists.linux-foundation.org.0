@@ -2,45 +2,45 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7416314CA12
-	for <lists.virtualization@lfdr.de>; Wed, 29 Jan 2020 13:05:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC10114CA1A
+	for <lists.virtualization@lfdr.de>; Wed, 29 Jan 2020 13:05:49 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 8E4502037B;
-	Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 6A51521511;
+	Wed, 29 Jan 2020 12:05:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PdWbotodQoeI; Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
+	with ESMTP id uPAwnyupM+sF; Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 524EE203DD;
-	Wed, 29 Jan 2020 12:05:41 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 170362094C;
+	Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 26E7FC0171;
-	Wed, 29 Jan 2020 12:05:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 093A2C1D84;
+	Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 70E02C0881
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 17E36C0171
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jan 2020 12:05:38 +0000 (UTC)
+ Wed, 29 Jan 2020 12:05:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 5EFDA869C4
+ by silver.osuosl.org (Postfix) with ESMTP id 11B5F2000A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jan 2020 12:05:38 +0000 (UTC)
+ Wed, 29 Jan 2020 12:05:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RvlCpQgYrNv4
+ with ESMTP id HYe7f8HOvqES
  for <virtualization@lists.linux-foundation.org>;
  Wed, 29 Jan 2020 12:05:37 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A5E208347D
+ by silver.osuosl.org (Postfix) with ESMTPS id A40D71FF98
  for <virtualization@lists.linux-foundation.org>;
  Wed, 29 Jan 2020 12:05:37 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 1FCC5AFCF;
+ by mx2.suse.de (Postfix) with ESMTP id 9EB15ACA4;
  Wed, 29 Jan 2020 12:05:35 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
@@ -48,10 +48,9 @@ To: airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
  david@lechnology.com, noralf@tronnes.org, sean@poorly.run,
  oleksandr_andrushchenko@epam.com, sam@ravnborg.org,
  laurent.pinchart@ideasonboard.com, emil.velikov@collabora.com
-Subject: [PATCH v5 03/15] drm/ast: Don't set struct drm_crtc_state.no_vblank
- explictly
-Date: Wed, 29 Jan 2020 13:05:19 +0100
-Message-Id: <20200129120531.6891-4-tzimmermann@suse.de>
+Subject: [PATCH v5 04/15] drm/bochs: Remove sending of vblank event
+Date: Wed, 29 Jan 2020 13:05:20 +0100
+Message-Id: <20200129120531.6891-5-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200129120531.6891-1-tzimmermann@suse.de>
 References: <20200129120531.6891-1-tzimmermann@suse.de>
@@ -75,30 +74,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-As ast does not initialize vblanking, atomic helpers initialize the
-value of struct drm_crtc_state.no_vblank to be true. No need to set
-it from within the driver.
+The atomic helpers automatically send out fake VBLANK events if no
+vblanking has been initialized. Remove the sending code from the
+driver.
+
+v4:
+	* separate commit from core vblank changes
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 Acked-by: Gerd Hoffmann <kraxel@redhat.com>
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/ast/ast_mode.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/gpu/drm/bochs/bochs_kms.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/drivers/gpu/drm/ast/ast_mode.c b/drivers/gpu/drm/ast/ast_mode.c
-index 34608f0499eb..7810a84e7e9e 100644
---- a/drivers/gpu/drm/ast/ast_mode.c
-+++ b/drivers/gpu/drm/ast/ast_mode.c
-@@ -833,8 +833,6 @@ static void ast_crtc_helper_atomic_flush(struct drm_crtc *crtc,
- 	struct ast_vbios_mode_info *vbios_mode_info;
- 	struct drm_display_mode *adjusted_mode;
+diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/bochs_kms.c
+index 3f0006c2470d..ff275faee88d 100644
+--- a/drivers/gpu/drm/bochs/bochs_kms.c
++++ b/drivers/gpu/drm/bochs/bochs_kms.c
+@@ -7,7 +7,6 @@
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_probe_helper.h>
+-#include <drm/drm_vblank.h>
  
--	crtc->state->no_vblank = true;
+ #include "bochs.h"
+ 
+@@ -57,16 +56,8 @@ static void bochs_pipe_update(struct drm_simple_display_pipe *pipe,
+ 			      struct drm_plane_state *old_state)
+ {
+ 	struct bochs_device *bochs = pipe->crtc.dev->dev_private;
+-	struct drm_crtc *crtc = &pipe->crtc;
+ 
+ 	bochs_plane_update(bochs, pipe->plane.state);
 -
- 	ast_state = to_ast_crtc_state(crtc->state);
+-	if (crtc->state->event) {
+-		spin_lock_irq(&crtc->dev->event_lock);
+-		drm_crtc_send_vblank_event(crtc, crtc->state->event);
+-		crtc->state->event = NULL;
+-		spin_unlock_irq(&crtc->dev->event_lock);
+-	}
+ }
  
- 	format = ast_state->format;
+ static const struct drm_simple_display_pipe_funcs bochs_pipe_funcs = {
 -- 
 2.25.0
 
