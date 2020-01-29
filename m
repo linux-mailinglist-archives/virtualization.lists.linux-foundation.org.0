@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC10114CA1A
-	for <lists.virtualization@lfdr.de>; Wed, 29 Jan 2020 13:05:49 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EF4014CA16
+	for <lists.virtualization@lfdr.de>; Wed, 29 Jan 2020 13:05:48 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 6A51521511;
-	Wed, 29 Jan 2020 12:05:48 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A29A188167;
+	Wed, 29 Jan 2020 12:05:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uPAwnyupM+sF; Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
+	with ESMTP id gpsJWkP49B88; Wed, 29 Jan 2020 12:05:45 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 170362094C;
-	Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1561187E76;
+	Wed, 29 Jan 2020 12:05:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 093A2C1D84;
-	Wed, 29 Jan 2020 12:05:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EABB8C0171;
+	Wed, 29 Jan 2020 12:05:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 17E36C0171
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 86DC4C0171
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jan 2020 12:05:39 +0000 (UTC)
+ Wed, 29 Jan 2020 12:05:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 11B5F2000A
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 754C884475
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 29 Jan 2020 12:05:40 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id nVgMB1lkVPeq
  for <virtualization@lists.linux-foundation.org>;
  Wed, 29 Jan 2020 12:05:39 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HYe7f8HOvqES
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jan 2020 12:05:37 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by silver.osuosl.org (Postfix) with ESMTPS id A40D71FF98
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 2C85A83608
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jan 2020 12:05:37 +0000 (UTC)
+ Wed, 29 Jan 2020 12:05:39 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 9EB15ACA4;
- Wed, 29 Jan 2020 12:05:35 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 21171ACE1;
+ Wed, 29 Jan 2020 12:05:36 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
  maarten.lankhorst@linux.intel.com, mripard@kernel.org, hdegoede@redhat.com,
  david@lechnology.com, noralf@tronnes.org, sean@poorly.run,
  oleksandr_andrushchenko@epam.com, sam@ravnborg.org,
  laurent.pinchart@ideasonboard.com, emil.velikov@collabora.com
-Subject: [PATCH v5 04/15] drm/bochs: Remove sending of vblank event
-Date: Wed, 29 Jan 2020 13:05:20 +0100
-Message-Id: <20200129120531.6891-5-tzimmermann@suse.de>
+Subject: [PATCH v5 05/15] drm/cirrus: Remove sending of vblank event
+Date: Wed, 29 Jan 2020 13:05:21 +0100
+Message-Id: <20200129120531.6891-6-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200129120531.6891-1-tzimmermann@suse.de>
 References: <20200129120531.6891-1-tzimmermann@suse.de>
@@ -85,28 +85,25 @@ Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 Acked-by: Gerd Hoffmann <kraxel@redhat.com>
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/bochs/bochs_kms.c | 9 ---------
- 1 file changed, 9 deletions(-)
+ drivers/gpu/drm/cirrus/cirrus.c | 8 --------
+ 1 file changed, 8 deletions(-)
 
-diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/bochs_kms.c
-index 3f0006c2470d..ff275faee88d 100644
---- a/drivers/gpu/drm/bochs/bochs_kms.c
-+++ b/drivers/gpu/drm/bochs/bochs_kms.c
-@@ -7,7 +7,6 @@
- #include <drm/drm_atomic_helper.h>
- #include <drm/drm_gem_framebuffer_helper.h>
+diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus/cirrus.c
+index 248c9f765c45..a91fb0d7282c 100644
+--- a/drivers/gpu/drm/cirrus/cirrus.c
++++ b/drivers/gpu/drm/cirrus/cirrus.c
+@@ -38,7 +38,6 @@
+ #include <drm/drm_modeset_helper_vtables.h>
  #include <drm/drm_probe_helper.h>
+ #include <drm/drm_simple_kms_helper.h>
 -#include <drm/drm_vblank.h>
  
- #include "bochs.h"
+ #define DRIVER_NAME "cirrus"
+ #define DRIVER_DESC "qemu cirrus vga"
+@@ -434,13 +433,6 @@ static void cirrus_pipe_update(struct drm_simple_display_pipe *pipe,
  
-@@ -57,16 +56,8 @@ static void bochs_pipe_update(struct drm_simple_display_pipe *pipe,
- 			      struct drm_plane_state *old_state)
- {
- 	struct bochs_device *bochs = pipe->crtc.dev->dev_private;
--	struct drm_crtc *crtc = &pipe->crtc;
- 
- 	bochs_plane_update(bochs, pipe->plane.state);
+ 	if (drm_atomic_helper_damage_merged(old_state, state, &rect))
+ 		cirrus_fb_blit_rect(pipe->plane.state->fb, &rect);
 -
 -	if (crtc->state->event) {
 -		spin_lock_irq(&crtc->dev->event_lock);
@@ -116,7 +113,7 @@ index 3f0006c2470d..ff275faee88d 100644
 -	}
  }
  
- static const struct drm_simple_display_pipe_funcs bochs_pipe_funcs = {
+ static const struct drm_simple_display_pipe_funcs cirrus_pipe_funcs = {
 -- 
 2.25.0
 
