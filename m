@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE21C14CA1D
-	for <lists.virtualization@lfdr.de>; Wed, 29 Jan 2020 13:05:50 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3204014CA1F
+	for <lists.virtualization@lfdr.de>; Wed, 29 Jan 2020 13:05:51 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A14DE85EC4;
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1AAB288171;
 	Wed, 29 Jan 2020 12:05:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qiQpdcyH5oRB; Wed, 29 Jan 2020 12:05:47 +0000 (UTC)
+	with ESMTP id EoL71pDR9xlW; Wed, 29 Jan 2020 12:05:45 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CEF6085F2D;
-	Wed, 29 Jan 2020 12:05:46 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6869A88162;
+	Wed, 29 Jan 2020 12:05:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BF7E7C1D84;
-	Wed, 29 Jan 2020 12:05:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 53CBFC0171;
+	Wed, 29 Jan 2020 12:05:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ED848C0171
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F302CC1D8B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jan 2020 12:05:43 +0000 (UTC)
+ Wed, 29 Jan 2020 12:05:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id D975985E99
+ by hemlock.osuosl.org (Postfix) with ESMTP id D6E6B88072
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jan 2020 12:05:43 +0000 (UTC)
+ Wed, 29 Jan 2020 12:05:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id BQ3q1zeNs9IH
+ with ESMTP id nTQlwXM-YZVO
  for <virtualization@lists.linux-foundation.org>;
  Wed, 29 Jan 2020 12:05:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2550F83597
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 900A788056
  for <virtualization@lists.linux-foundation.org>;
  Wed, 29 Jan 2020 12:05:39 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id A047CB17A;
- Wed, 29 Jan 2020 12:05:37 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 2B839B191;
+ Wed, 29 Jan 2020 12:05:38 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
  maarten.lankhorst@linux.intel.com, mripard@kernel.org, hdegoede@redhat.com,
  david@lechnology.com, noralf@tronnes.org, sean@poorly.run,
  oleksandr_andrushchenko@epam.com, sam@ravnborg.org,
  laurent.pinchart@ideasonboard.com, emil.velikov@collabora.com
-Subject: [PATCH v5 08/15] drm/mipi-dbi: Remove sending of vblank event
-Date: Wed, 29 Jan 2020 13:05:24 +0100
-Message-Id: <20200129120531.6891-9-tzimmermann@suse.de>
+Subject: [PATCH v5 09/15] drm/qxl: Remove sending of vblank event
+Date: Wed, 29 Jan 2020 13:05:25 +0100
+Message-Id: <20200129120531.6891-10-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200129120531.6891-1-tzimmermann@suse.de>
 References: <20200129120531.6891-1-tzimmermann@suse.de>
@@ -85,39 +85,40 @@ Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 Acked-by: Gerd Hoffmann <kraxel@redhat.com>
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/drm_mipi_dbi.c | 9 ---------
- 1 file changed, 9 deletions(-)
+ drivers/gpu/drm/qxl/qxl_display.c | 14 --------------
+ 1 file changed, 14 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_mipi_dbi.c b/drivers/gpu/drm/drm_mipi_dbi.c
-index 27fe81a53c88..558baf989f5a 100644
---- a/drivers/gpu/drm/drm_mipi_dbi.c
-+++ b/drivers/gpu/drm/drm_mipi_dbi.c
-@@ -24,7 +24,6 @@
- #include <drm/drm_modes.h>
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index 16d73b22f3f5..ab4f8dd00400 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -31,7 +31,6 @@
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_plane_helper.h>
  #include <drm/drm_probe_helper.h>
- #include <drm/drm_rect.h>
 -#include <drm/drm_vblank.h>
- #include <video/mipi_display.h>
  
- #define MIPI_DBI_MAX_SPI_READ_SPEED 2000000 /* 2MHz */
-@@ -312,18 +311,10 @@ void mipi_dbi_pipe_update(struct drm_simple_display_pipe *pipe,
- 			  struct drm_plane_state *old_state)
+ #include "qxl_drv.h"
+ #include "qxl_object.h"
+@@ -372,19 +371,6 @@ static void qxl_crtc_update_monitors_config(struct drm_crtc *crtc,
+ static void qxl_crtc_atomic_flush(struct drm_crtc *crtc,
+ 				  struct drm_crtc_state *old_crtc_state)
  {
- 	struct drm_plane_state *state = pipe->plane.state;
--	struct drm_crtc *crtc = &pipe->crtc;
- 	struct drm_rect rect;
- 
- 	if (drm_atomic_helper_damage_merged(old_state, state, &rect))
- 		mipi_dbi_fb_dirty(state->fb, &rect);
+-	struct drm_device *dev = crtc->dev;
+-	struct drm_pending_vblank_event *event;
+-	unsigned long flags;
 -
--	if (crtc->state->event) {
--		spin_lock_irq(&crtc->dev->event_lock);
--		drm_crtc_send_vblank_event(crtc, crtc->state->event);
--		spin_unlock_irq(&crtc->dev->event_lock);
+-	if (crtc->state && crtc->state->event) {
+-		event = crtc->state->event;
 -		crtc->state->event = NULL;
+-
+-		spin_lock_irqsave(&dev->event_lock, flags);
+-		drm_crtc_send_vblank_event(crtc, event);
+-		spin_unlock_irqrestore(&dev->event_lock, flags);
 -	}
+-
+ 	qxl_crtc_update_monitors_config(crtc, "flush");
  }
- EXPORT_SYMBOL(mipi_dbi_pipe_update);
  
 -- 
 2.25.0
