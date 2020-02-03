@@ -2,90 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4AF9150E4D
-	for <lists.virtualization@lfdr.de>; Mon,  3 Feb 2020 18:04:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C682D151109
+	for <lists.virtualization@lfdr.de>; Mon,  3 Feb 2020 21:32:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 5F35881E39;
-	Mon,  3 Feb 2020 17:04:26 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7AB8F84949;
+	Mon,  3 Feb 2020 20:32:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sQyJ2pXdu8Xy; Mon,  3 Feb 2020 17:04:25 +0000 (UTC)
+	with ESMTP id pUM6DS0pfler; Mon,  3 Feb 2020 20:32:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 5E46081B8A;
-	Mon,  3 Feb 2020 17:04:25 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7D36584B89;
+	Mon,  3 Feb 2020 20:32:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 381B2C1D81;
-	Mon,  3 Feb 2020 17:04:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 568B9C0174;
+	Mon,  3 Feb 2020 20:32:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9F6F0C0174
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A6B78C0174
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Feb 2020 17:04:23 +0000 (UTC)
+ Mon,  3 Feb 2020 20:32:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8CB0E87463
+ by hemlock.osuosl.org (Postfix) with ESMTP id A12A784F0F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Feb 2020 17:04:23 +0000 (UTC)
+ Mon,  3 Feb 2020 20:32:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wJ3RokIkqqpo
+ with ESMTP id IlnczlN9oKKT
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Feb 2020 17:04:21 +0000 (UTC)
+ Mon,  3 Feb 2020 20:32:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 3C89E8753D
+Received: from mail-vk1-f176.google.com (mail-vk1-f176.google.com
+ [209.85.221.176])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 452C684ED0
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Feb 2020 17:04:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580749459;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Y44gayMdvWxI/WSWNYy85+9/6qvmbHxSyq8pt+fDbBA=;
- b=EQ/EguyvIai/u8KmujbRyOV9k82iKrQhkH0nHs/4kZsT/8j1RCrPJ+bcvF15NMBNULGyS6
- V1Tg7LhsmX5TXPrxSUfZNTp4A/ffkj/Id3nEGElX0egbKjocBhrWL3nizjCYBLlq5qIWvz
- 2PSiFPh3yzQiWUVzan7BVh+z/Mg2Uz0=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-73-fD54ttGBPxmvc81HnZ-mnA-1; Mon, 03 Feb 2020 12:04:02 -0500
-Received: by mail-qt1-f200.google.com with SMTP id d16so1853501qtr.2
+ Mon,  3 Feb 2020 20:32:18 +0000 (UTC)
+Received: by mail-vk1-f176.google.com with SMTP id t129so4513878vkg.6
  for <virtualization@lists.linux-foundation.org>;
- Mon, 03 Feb 2020 09:04:02 -0800 (PST)
+ Mon, 03 Feb 2020 12:32:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=vKNtC8O5oWdev4z2OZqYfGRqu370JrtOcoEaQ3EinoA=;
+ b=AsMYb7Nbdih11U2SnpwzLWyvAwlOqEaJscrSQYVxa8cQisQxQs45lNJBrGiB0u6C1a
+ eNWd5/TYFD4XbWOgTWw1znOHMWDvMddJc5kXGtsZujdB/VqVXalXB+nbHAfmUBCHxNG9
+ V+vslxEltJgcGee+J8P3l/UWD8/pdQ7As1GjraL5c8/5AkE07QtYJ0Hn4gL1fa5N+IHW
+ dh6N4dvtn7liNdaKrv8UG+9CO6Vfi4qdqs389X9YhmlDnehjZoaEVVHqxxYM+HuCIzHm
+ ZHiKLgRNS4oiE5FJHEVoZlEjax03ZG7DPRGCGGTGGdaY0iDzAQk3HyzIwdls0nHJAaKl
+ wTfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=Y44gayMdvWxI/WSWNYy85+9/6qvmbHxSyq8pt+fDbBA=;
- b=maEXKDHlgW6TrbtsXCirDV4kaE7HkJuHAVCYjIFS9MP7ux5wWDtwQFNG/S2tluRIZy
- IFGDWms7DZuMh7tUTJ3ab5dKlDKSiugA9ioT33C5ZHDLdl9//n4yt7kcPbGxXd9/gWzo
- g3SD8ygwlsOtL6avsd7SlvWUgEUrpofSyVw6gjF2jQM73QReRX7tEwVwpNRRcRQ/n9AY
- LlJPw5igQJL4iE/SyJqs2IYtSGgXEmYdFlAinFY0u83bWJ+80Q6hFkR0ZWuVyAJGT8o3
- q1vDADSB98yTeI7fhCEJhkkB6+hmdRSVlm6yQgfDnkYyqZewqsPC+CTbQiTpL5IClyKI
- Vt8w==
-X-Gm-Message-State: APjAAAWWBxPCwjfWqQDy130rzHnigbEiMhO40FYqkrUflTZIDgQQChbP
- bMVOD4jBL4D1GKnfv5AVSzfhqhu98vAQXOynRl+TFYKd8cRaH/YSsq+4G9jINNgq0D6PD5YGcMn
- BFPd4Cvm3AeeKbecyoBvfEMYZUupV8zmNGKAfNNRFcg==
-X-Received: by 2002:a37:9dc8:: with SMTP id
- g191mr24371862qke.171.1580749442457; 
- Mon, 03 Feb 2020 09:04:02 -0800 (PST)
-X-Google-Smtp-Source: APXvYqziT6dDdzBZ5/VpRxQBOrjZwjAcJQbt0FjvLNXCg1NJioS7wYmUvlg7/2Y1knb3p3SASCDaxg==
-X-Received: by 2002:a37:9dc8:: with SMTP id
- g191mr24371833qke.171.1580749442075; 
- Mon, 03 Feb 2020 09:04:02 -0800 (PST)
-Received: from redhat.com (bzq-109-64-11-187.red.bezeqint.net. [109.64.11.187])
- by smtp.gmail.com with ESMTPSA id c186sm3870988qke.124.2020.02.03.09.03.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2020 09:04:01 -0800 (PST)
-Date: Mon, 3 Feb 2020 12:03:56 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: David Hildenbrand <david@redhat.com>
-Subject: Re: Balloon pressuring page cache
-Message-ID: <20200203120225-mutt-send-email-mst@kernel.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=vKNtC8O5oWdev4z2OZqYfGRqu370JrtOcoEaQ3EinoA=;
+ b=j5DbicKXFu6s4roc2scOxi85OtXrRnnyhgDBD1ImztvjzFqGEwYm4kc4qraSWpbtP2
+ RSh4R+J0dmcbnjXl+LKsl90NdqnMhEB8C+UHgW1iEJX7+TYKCwTTl0tq84ly+P3KmqLV
+ yY5sgXBqhtvRd4iasRstYG0kW75SU6KqVzJ7u9mzqiRI8bUGbVQxKoURERvLJSJuF5Xi
+ DxAr3Ds9/BwZ/aMryJGMHpcycdRJ9j891mnXNPeN30JNdWYaTq0nYXSNsT0TWE2+jE3/
+ /7RwlkpuvEa86S4CPEFAxpKJkdn/fCLNc6HhF3B3r091WZ/82OegUjl03Ula6msNMuC4
+ DAOw==
+X-Gm-Message-State: APjAAAUUD2YX1l4TVdFEgKxCtb1UIBeAIuJRI3ltnzuOnCeu1hlWeWp3
+ /zWkVeXjIOzz29rQfqRj74nxsbFgv8/lBN3mvp3ziA==
+X-Google-Smtp-Source: APXvYqyq6qZqQYbsi9Qolh9OJutRlVBaZWAAAVdQb1aFxsdrtp+O3JPhx/e52rJOCEjl7RfVzI5ToK76/ooJKzCbaCE=
+X-Received: by 2002:a1f:7c0c:: with SMTP id x12mr14924704vkc.41.1580761936950; 
+ Mon, 03 Feb 2020 12:32:16 -0800 (PST)
+MIME-Version: 1.0
 References: <CAJuQAmpDUyve2S+oxp9tLUhuRcnddXnNztC5PmYOOCpY6c68xg@mail.gmail.com>
  <91270a68-ff48-88b0-219c-69801f0c252f@redhat.com>
  <CAJuQAmoaK0Swytu2Os_SQRfG5_LqiCPaDa9yatatm9MtfncNTQ@mail.gmail.com>
@@ -95,15 +77,15 @@ References: <CAJuQAmpDUyve2S+oxp9tLUhuRcnddXnNztC5PmYOOCpY6c68xg@mail.gmail.com>
  <20200203080520-mutt-send-email-mst@kernel.org>
  <5ac131de8e3b7fc1fafd05a61feb5f6889aeb917.camel@linux.intel.com>
  <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
-X-MC-Unique: fD54ttGBPxmvc81HnZ-mnA-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
+ <20200203120225-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20200203120225-mutt-send-email-mst@kernel.org>
+Date: Mon, 3 Feb 2020 12:32:05 -0800
+Message-ID: <CAJuQAmqGA9mhzR5AQeMDtovJAh7y8khC3qUtLKx_e9RdL0wFJQ@mail.gmail.com>
+Subject: Re: Balloon pressuring page cache
+To: "Michael S. Tsirkin" <mst@redhat.com>
 Cc: "virtualization@lists.linux-foundation.org"
  <virtualization@lists.linux-foundation.org>,
- Tyler Sanderson <tysand@google.com>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
  David Rientjes <rientjes@google.com>,
  Alexander Duyck <alexander.h.duyck@linux.intel.com>,
  Michal Hocko <mhocko@kernel.org>
@@ -118,78 +100,348 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Tyler Sanderson via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Tyler Sanderson <tysand@google.com>
+Content-Type: multipart/mixed; boundary="===============3095139446014947072=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gTW9uLCBGZWIgMDMsIDIwMjAgYXQgMDU6MzQ6MjBQTSArMDEwMCwgRGF2aWQgSGlsZGVuYnJh
-bmQgd3JvdGU6Cj4gT24gMDMuMDIuMjAgMTc6MTgsIEFsZXhhbmRlciBEdXljayB3cm90ZToKPiA+
-IE9uIE1vbiwgMjAyMC0wMi0wMyBhdCAwODoxMSAtMDUwMCwgTWljaGFlbCBTLiBUc2lya2luIHdy
-b3RlOgo+ID4+IE9uIFRodSwgSmFuIDMwLCAyMDIwIGF0IDExOjU5OjQ2QU0gLTA4MDAsIFR5bGVy
-IFNhbmRlcnNvbiB3cm90ZToKPiA+Pj4KPiA+Pj4gT24gVGh1LCBKYW4gMzAsIDIwMjAgYXQgNzoz
-MSBBTSBXYW5nLCBXZWkgVyA8d2VpLncud2FuZ0BpbnRlbC5jb20+IHdyb3RlOgo+ID4+Pgo+ID4+
-PiAgICAgT24gVGh1cnNkYXksIEphbnVhcnkgMzAsIDIwMjAgMTE6MDMgUE0sIERhdmlkIEhpbGRl
-bmJyYW5kIHdyb3RlOgo+ID4+PiAgICAgPiBPbiAyOS4wMS4yMCAyMDoxMSwgVHlsZXIgU2FuZGVy
-c29uIHdyb3RlOgo+ID4+PiAgICAgPiA+Cj4gPj4+ICAgICA+ID4KPiA+Pj4gICAgID4gPiBPbiBX
-ZWQsIEphbiAyOSwgMjAyMCBhdCAyOjMxIEFNIERhdmlkIEhpbGRlbmJyYW5kIDxkYXZpZEByZWRo
-YXQuY29tCj4gPj4+ICAgICA+ID4gPG1haWx0bzpkYXZpZEByZWRoYXQuY29tPj4gd3JvdGU6Cj4g
-Pj4+ICAgICA+ID4KPiA+Pj4gICAgID4gPiAgICAgT24gMjkuMDEuMjAgMDE6MjIsIFR5bGVyIFNh
-bmRlcnNvbiB2aWEgVmlydHVhbGl6YXRpb24gd3JvdGU6Cj4gPj4+ICAgICA+ID4gICAgID4gQSBw
-cmltYXJ5IGFkdmFudGFnZSBvZiB2aXJ0aW8gYmFsbG9vbiBvdmVyIG90aGVyIG1lbW9yeSByZWNs
-YWltCj4gPj4+ICAgICA+ID4gICAgID4gbWVjaGFuaXNtcyBpcyB0aGF0IGl0IGNhbiBwcmVzc3Vy
-ZSB0aGUgZ3Vlc3QncyBwYWdlIGNhY2hlIGludG8KPiA+Pj4gICAgID4gPiAgICAgc2hyaW5raW5n
-Lgo+ID4+PiAgICAgPiA+ICAgICA+Cj4gPj4+ICAgICA+ID4gICAgID4gSG93ZXZlciwgc2luY2Ug
-dGhlIGJhbGxvb24gZHJpdmVyIGNoYW5nZWQgdG8gdXNpbmcgdGhlIHNocmlua2VyCj4gPj4+ICAg
-ICBBUEkKPiA+Pj4gICAgID4gPiAgICAgPgo+ID4+PiAgICAgPiA+Cj4gPj4+ICAgICA+IDxodHRw
-czovL2dpdGh1Yi5jb20vdG9ydmFsZHMvbGludXgvY29tbWl0LzcxOTk0NjIwYmIyNWE4YjEwOTM4
-OGZlZmE5Cj4gPj4+ICAgICA+IGU5OWEyOGUzNTUyNTVhI2RpZmYtZmQyMDJhY2Y2OTRkOWViYTE5
-YzhjNjRkYTNlNDgwYzk+IHRoaXMKPiA+Pj4gICAgID4gPiAgICAgPiB1c2UgY2FzZSBoYXMgYmVj
-b21lIGEgYml0IG1vcmUgdHJpY2t5LiBJJ20gd29uZGVyaW5nIHdoYXQgdGhlCj4gPj4+ICAgICA+
-IGludGVuZGVkCj4gPj4+ICAgICA+ID4gICAgID4gZGV2aWNlIGltcGxlbWVudGF0aW9uIGlzLgo+
-ID4+PiAgICAgPiA+ICAgICA+Cj4gPj4+ICAgICA+ID4gICAgID4gV2hlbiBpbmZsYXRpbmcgdGhl
-IGJhbGxvb24gYWdhaW5zdCBwYWdlIGNhY2hlIChpLmUuIG5vIGZyZWUKPiA+Pj4gICAgIG1lbW9y
-eQo+ID4+PiAgICAgPiA+ICAgICA+IHJlbWFpbnMpIHZtc2Nhbi5jIHdpbGwgYm90aCBzaHJpbmsg
-cGFnZSBjYWNoZSwgYnV0IGFsc28gaW52b2tlCj4gPj4+ICAgICB0aGUKPiA+Pj4gICAgID4gPiAg
-ICAgPiBzaHJpbmtlcnMgLS0gaW5jbHVkaW5nIHRoZSBiYWxsb29uJ3Mgc2hyaW5rZXIuIFNvIHRo
-ZSBiYWxsb29uCj4gPj4+ICAgICBkcml2ZXIKPiA+Pj4gICAgID4gPiAgICAgPiBhbGxvY2F0ZXMg
-bWVtb3J5IHdoaWNoIHJlcXVpcmVzIHJlY2xhaW0sIHZtc2NhbiBnZXRzIHRoaXMgbWVtb3J5Cj4g
-Pj4+ICAgICA+IGJ5Cj4gPj4+ICAgICA+ID4gICAgID4gc2hyaW5raW5nIHRoZSBiYWxsb29uLCBh
-bmQgdGhlbiB0aGUgZHJpdmVyIGFkZHMgdGhlIG1lbW9yeSBiYWNrCj4gPj4+ICAgICB0bwo+ID4+
-PiAgICAgPiB0aGUKPiA+Pj4gICAgID4gPiAgICAgPiBiYWxsb29uLiBCYXNpY2FsbHkgYSBidXN5
-IG5vLW9wLgo+ID4+Pgo+ID4+PiAgICAgUGVyIG15IHVuZGVyc3RhbmRpbmcsIHRoZSBiYWxsb29u
-IGFsbG9jYXRpb24gd29u4oCZdCBpbnZva2Ugc2hyaW5rZXIgYXMKPiA+Pj4gICAgIF9fR0ZQX0RJ
-UkVDVF9SRUNMQUlNIGlzbid0IHNldCwgbm8/Cj4gPj4+Cj4gPj4+IEkgY291bGQgYmUgd3Jvbmcg
-YWJvdXQgdGhlIG1lY2hhbmlzbSwgYnV0IHRoZSBkZXZpY2Ugc2VlcyBsb3RzIG9mIGFjdGl2aXR5
-IG9uCj4gPj4+IHRoZSBkZWZsYXRlIHF1ZXVlLiBUaGUgYmFsbG9vbiBpcyBiZWluZyBzaHJ1bmsu
-IEFuZCB0aGlzIG9ubHkgc3RhcnRzIG9uY2UgYWxsCj4gPj4+IGZyZWUgbWVtb3J5IGlzIGRlcGxl
-dGVkIGFuZCB3ZSdyZSBpbmZsYXRpbmcgaW50byBwYWdlIGNhY2hlLgo+ID4+Cj4gPj4gU28gZ2l2
-ZW4gdGhpcyBsb29rcyBsaWtlIGEgcmVncmVzc2lvbiwgbWF5YmUgd2Ugc2hvdWxkIHJldmVydCB0
-aGUKPiA+PiBwYXRjaCBpbiBxdWVzdGlvbiA3MTk5NDYyMGJiMjUgKCJ2aXJ0aW9fYmFsbG9vbjog
-cmVwbGFjZSBvb20gbm90aWZpZXIgd2l0aCBzaHJpbmtlciIpCj4gPj4gQmVzaWRlcywgd2l0aCBW
-SVJUSU9fQkFMTE9PTl9GX0ZSRUVfUEFHRV9ISU5UCj4gPj4gc2hyaW5rZXIgYWxzbyBpZ25vcmVz
-IFZJUlRJT19CQUxMT09OX0ZfTVVTVF9URUxMX0hPU1Qgd2hpY2ggaXNuJ3QgbmljZQo+ID4+IGF0
-IGFsbC4KPiA+Pgo+ID4+IFNvIGl0IGxvb2tzIGxpa2UgYWxsIHRoaXMgcmV3b3JrIGludHJvZHVj
-ZWQgbW9yZSBpc3N1ZXMgdGhhbiBpdAo+ID4+IGFkZHJlc3NlZCAuLi4KPiA+Pgo+ID4+IEkgYWxz
-byBDQyBBbGV4IER1eWNrIGZvciBhbiBvcGluaW9uIG9uIHRoaXMuCj4gPj4gQWxleCwgd2hhdCBk
-byB5b3UgdXNlIHRvIHB1dCBwcmVzc3VyZSBvbiBwYWdlIGNhY2hlPwo+ID4gCj4gPiBJIHdvdWxk
-IHNheSByZXZlcnRpbmcgcHJvYmFibHkgbWFrZXMgc2Vuc2UuIEknbSBub3Qgc3VyZSB0aGVyZSBp
-cyBtdWNoCj4gPiB2YWx1ZSB0byBoYXZpbmcgYSBzaHJpbmtlciBydW5uaW5nIGRlZmxhdGlvbiB3
-aGVuIHlvdSBhcmUgYWN0aXZlbHkgdHJ5aW5nCj4gPiB0byBpbmNyZWFzZSB0aGUgYmFsbG9vbi4g
-SXQgd291bGQgbWFrZSBtb3JlIHNlbnNlIHRvIHdhaXQgdW50aWwgeW91IGFyZQo+ID4gYWN0dWFs
-bHkgYWJvdXQgdG8gc3RhcnQgaGl0dGluZyBvb20uCj4gCj4gSSB0aGluayB0aGUgc2hyaW5rZXIg
-bWFrZXMgc2Vuc2UgZm9yIGZyZWUgcGFnZSBoaW50aW5nIGZlYXR1cmUKPiAoZXZlcnl0aGluZyBv
-biBmcmVlX3BhZ2VfbGlzdCkuCj4gCj4gU28gaW5zdGVhZCBvZiBvbmx5IHJldmVydGluZywgSSB0
-aGluayB3ZSBzaG91bGQgc3BsaXQgaXQgdXAgYW5kIGFsd2F5cwo+IHJlZ2lzdGVyIHRoZSBzaHJp
-bmtlciBmb3IgVklSVElPX0JBTExPT05fRl9GUkVFX1BBR0VfSElOVCBhbmQgdGhlIE9PTQo+IG5v
-dGlmaWVyIChhcyBiZWZvcmUpIGZvciBWSVJUSU9fQkFMTE9PTl9GX01VU1RfVEVMTF9IT1NULgoK
-T0sgLi4uIEkgZ3Vlc3MgdGhhdCBtZWFucyB3ZSBuZWVkIHRvIGZpeCBzaHJpbmtlciB0byB0YWtl
-ClZJUlRJT19CQUxMT09OX0ZfTVVTVF9URUxMX0hPU1QgaW50byBhY2NvdW50IGNvcnJlY3RseS4K
-SG9zdHMgaWdub3JlIGl0IGF0IHRoZSBtb21lbnQgYnV0IGl0J3MgYSBmcmFnaWxlIHRoaW5nCnRv
-IGRvIHdoYXQgaXQgZG9lcyBhbmQgaWdub3JlIHVzZWQgYnVmZmVycy4KCj4gKE9mIGNvdXJzZSwg
-YWRhcHRpbmcgd2hhdCBpcyBiZWluZyBkb25lIGluIHRoZSBzaHJpbmtlciBhbmQgaW4gdGhlIE9P
-TQo+IG5vdGlmaWVyKQo+IAo+IC0tIAo+IFRoYW5rcywKPiAKPiBEYXZpZCAvIGRoaWxkZW5iCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
-dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
-cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
-dHVhbGl6YXRpb24=
+--===============3095139446014947072==
+Content-Type: multipart/alternative; boundary="000000000000ba8db1059db1d188"
+
+--000000000000ba8db1059db1d188
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+There were apparently good reasons for moving away from OOM notifier
+callback:
+https://lkml.org/lkml/2018/7/12/314
+https://lkml.org/lkml/2018/8/2/322
+
+In particular the OOM notifier is worse than the shrinker because:
+
+   1. It is last-resort, which means the system has already gone through
+   heroics to prevent OOM. Those heroic reclaim efforts are expensive and
+   impact application performance.
+   2. It lacks understanding of NUMA or other OOM constraints.
+   3. It has a higher potential for bugs due to the subtlety of the
+   callback context.
+
+Given the above, I think the shrinker API certainly makes the most sense
+_if_ the balloon size is static. In that case memory should be reclaimed
+from the balloon early and proportionally to balloon size, which the
+shrinker API achieves.
+
+However, if the balloon is inflating and intentionally causing memory
+pressure then this results in the inefficiency pointed out earlier.
+
+If the balloon is inflating but not causing memory pressure then there is
+no problem with either API.
+
+This suggests another route: rather than cause memory pressure to shrink
+the page cache, the balloon could issue the equivalent of "echo 3 >
+/proc/sys/vm/drop_caches".
+Of course ideally, we want to be more fine grained than "drop everything".
+We really want an API that says "drop everything that hasn't been accessed
+in the last 5 minutes".
+
+This would eliminate the need for the balloon to cause memory pressure at
+all which avoids the inefficiency in question. Furthermore, this pairs
+nicely with the FREE_PAGE_HINT feature.
+
+
+On Mon, Feb 3, 2020 at 9:04 AM Michael S. Tsirkin <mst@redhat.com> wrote:
+
+> On Mon, Feb 03, 2020 at 05:34:20PM +0100, David Hildenbrand wrote:
+> > On 03.02.20 17:18, Alexander Duyck wrote:
+> > > On Mon, 2020-02-03 at 08:11 -0500, Michael S. Tsirkin wrote:
+> > >> On Thu, Jan 30, 2020 at 11:59:46AM -0800, Tyler Sanderson wrote:
+> > >>>
+> > >>> On Thu, Jan 30, 2020 at 7:31 AM Wang, Wei W <wei.w.wang@intel.com>
+> wrote:
+> > >>>
+> > >>>     On Thursday, January 30, 2020 11:03 PM, David Hildenbrand wrote=
+:
+> > >>>     > On 29.01.20 20:11, Tyler Sanderson wrote:
+> > >>>     > >
+> > >>>     > >
+> > >>>     > > On Wed, Jan 29, 2020 at 2:31 AM David Hildenbrand <
+> david@redhat.com
+> > >>>     > > <mailto:david@redhat.com>> wrote:
+> > >>>     > >
+> > >>>     > >     On 29.01.20 01:22, Tyler Sanderson via Virtualization
+> wrote:
+> > >>>     > >     > A primary advantage of virtio balloon over other
+> memory reclaim
+> > >>>     > >     > mechanisms is that it can pressure the guest's page
+> cache into
+> > >>>     > >     shrinking.
+> > >>>     > >     >
+> > >>>     > >     > However, since the balloon driver changed to using th=
+e
+> shrinker
+> > >>>     API
+> > >>>     > >     >
+> > >>>     > >
+> > >>>     > <
+> https://github.com/torvalds/linux/commit/71994620bb25a8b109388fefa9
+> > >>>     > e99a28e355255a#diff-fd202acf694d9eba19c8c64da3e480c9> this
+> > >>>     > >     > use case has become a bit more tricky. I'm wondering
+> what the
+> > >>>     > intended
+> > >>>     > >     > device implementation is.
+> > >>>     > >     >
+> > >>>     > >     > When inflating the balloon against page cache (i.e. n=
+o
+> free
+> > >>>     memory
+> > >>>     > >     > remains) vmscan.c will both shrink page cache, but
+> also invoke
+> > >>>     the
+> > >>>     > >     > shrinkers -- including the balloon's shrinker. So the
+> balloon
+> > >>>     driver
+> > >>>     > >     > allocates memory which requires reclaim, vmscan gets
+> this memory
+> > >>>     > by
+> > >>>     > >     > shrinking the balloon, and then the driver adds the
+> memory back
+> > >>>     to
+> > >>>     > the
+> > >>>     > >     > balloon. Basically a busy no-op.
+> > >>>
+> > >>>     Per my understanding, the balloon allocation won=E2=80=99t invo=
+ke
+> shrinker as
+> > >>>     __GFP_DIRECT_RECLAIM isn't set, no?
+> > >>>
+> > >>> I could be wrong about the mechanism, but the device sees lots of
+> activity on
+> > >>> the deflate queue. The balloon is being shrunk. And this only start=
+s
+> once all
+> > >>> free memory is depleted and we're inflating into page cache.
+> > >>
+> > >> So given this looks like a regression, maybe we should revert the
+> > >> patch in question 71994620bb25 ("virtio_balloon: replace oom notifie=
+r
+> with shrinker")
+> > >> Besides, with VIRTIO_BALLOON_F_FREE_PAGE_HINT
+> > >> shrinker also ignores VIRTIO_BALLOON_F_MUST_TELL_HOST which isn't ni=
+ce
+> > >> at all.
+> > >>
+> > >> So it looks like all this rework introduced more issues than it
+> > >> addressed ...
+> > >>
+> > >> I also CC Alex Duyck for an opinion on this.
+> > >> Alex, what do you use to put pressure on page cache?
+> > >
+> > > I would say reverting probably makes sense. I'm not sure there is muc=
+h
+> > > value to having a shrinker running deflation when you are actively
+> trying
+> > > to increase the balloon. It would make more sense to wait until you a=
+re
+> > > actually about to start hitting oom.
+> >
+> > I think the shrinker makes sense for free page hinting feature
+> > (everything on free_page_list).
+> >
+> > So instead of only reverting, I think we should split it up and always
+> > register the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT and the OOM
+> > notifier (as before) for VIRTIO_BALLOON_F_MUST_TELL_HOST.
+>
+> OK ... I guess that means we need to fix shrinker to take
+> VIRTIO_BALLOON_F_MUST_TELL_HOST into account correctly.
+> Hosts ignore it at the moment but it's a fragile thing
+> to do what it does and ignore used buffers.
+>
+> > (Of course, adapting what is being done in the shrinker and in the OOM
+> > notifier)
+> >
+> > --
+> > Thanks,
+> >
+> > David / dhildenb
+>
+>
+
+--000000000000ba8db1059db1d188
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">There were apparently good reasons for moving away from OO=
+M notifier callback:<div><a href=3D"https://lkml.org/lkml/2018/7/12/314">ht=
+tps://lkml.org/lkml/2018/7/12/314</a><br></div><div><a href=3D"https://lkml=
+.org/lkml/2018/8/2/322">https://lkml.org/lkml/2018/8/2/322</a></div><div><b=
+r></div><div>In particular the OOM notifier is worse than the shrinker beca=
+use:</div><div><ol><li>It is last-resort, which means the system has alread=
+y gone through heroics to prevent OOM. Those heroic reclaim efforts are exp=
+ensive and impact application performance.</li><li>It lacks understanding o=
+f NUMA or other OOM constraints.</li><li>It has a higher potential for bugs=
+ due to the subtlety=C2=A0of the callback context.</li></ol></div><div>Give=
+n the above, I think the shrinker=C2=A0API certainly makes the most sense _=
+if_ the balloon size is static. In that case memory should be reclaimed fro=
+m the balloon early and proportionally to balloon size, which the shrinker =
+API achieves.</div><div><br></div><div>However, if the balloon is inflating=
+ and intentionally causing memory pressure then this results in the ineffic=
+iency pointed out earlier.</div><div><br></div><div>If the balloon is infla=
+ting but not causing memory pressure then there is no problem with either A=
+PI.</div><div><br></div><div>This suggests another route: rather than cause=
+ memory pressure to shrink the page cache, the balloon could issue the equi=
+valent=C2=A0of &quot;echo 3 &gt; /proc/sys/vm/drop_caches&quot;.</div><div>=
+Of course ideally, we want to be more fine grained than &quot;drop everythi=
+ng&quot;. We really want an API that says &quot;drop everything that hasn&#=
+39;t been accessed in the last 5 minutes&quot;.</div><div><br></div><div><d=
+iv>This would eliminate the need for the balloon to cause memory pressure a=
+t all which=C2=A0avoids the inefficiency in question. Furthermore, this pai=
+rs nicely with the FREE_PAGE_HINT feature.</div></div><div><br></div></div>=
+<br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon=
+, Feb 3, 2020 at 9:04 AM Michael S. Tsirkin &lt;<a href=3D"mailto:mst@redha=
+t.com">mst@redhat.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex">On Mon, Feb 03, 2020 at 05:34:20PM +0100, David Hilden=
+brand wrote:<br>
+&gt; On 03.02.20 17:18, Alexander Duyck wrote:<br>
+&gt; &gt; On Mon, 2020-02-03 at 08:11 -0500, Michael S. Tsirkin wrote:<br>
+&gt; &gt;&gt; On Thu, Jan 30, 2020 at 11:59:46AM -0800, Tyler Sanderson wro=
+te:<br>
+&gt; &gt;&gt;&gt;<br>
+&gt; &gt;&gt;&gt; On Thu, Jan 30, 2020 at 7:31 AM Wang, Wei W &lt;<a href=
+=3D"mailto:wei.w.wang@intel.com" target=3D"_blank">wei.w.wang@intel.com</a>=
+&gt; wrote:<br>
+&gt; &gt;&gt;&gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0On Thursday, January 30, 2020 11:03 PM=
+, David Hildenbrand wrote:<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; On 29.01.20 20:11, Tyler Sanderso=
+n wrote:<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; On Wed, Jan 29, 2020 at 2:31=
+ AM David Hildenbrand &lt;<a href=3D"mailto:david@redhat.com" target=3D"_bl=
+ank">david@redhat.com</a><br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; &lt;mailto:<a href=3D"mailto=
+:david@redhat.com" target=3D"_blank">david@redhat.com</a>&gt;&gt; wrote:<br=
+>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0On 29.01.=
+20 01:22, Tyler Sanderson via Virtualization wrote:<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; A pr=
+imary advantage of virtio balloon over other memory reclaim<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; mech=
+anisms is that it can pressure the guest&#39;s page cache into<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0shrinking=
+.<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; Howe=
+ver, since the balloon driver changed to using the shrinker<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0API<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &lt;<a href=3D"https://github.com=
+/torvalds/linux/commit/71994620bb25a8b109388fefa9" rel=3D"noreferrer" targe=
+t=3D"_blank">https://github.com/torvalds/linux/commit/71994620bb25a8b109388=
+fefa9</a><br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; e99a28e355255a#diff-fd202acf694d9=
+eba19c8c64da3e480c9&gt; this<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; use =
+case has become a bit more tricky. I&#39;m wondering what the<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; intended<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; devi=
+ce implementation is.<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; When=
+ inflating the balloon against page cache (i.e. no free<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0memory<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; rema=
+ins) vmscan.c will both shrink page cache, but also invoke<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0the<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; shri=
+nkers -- including the balloon&#39;s shrinker. So the balloon<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0driver<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; allo=
+cates memory which requires reclaim, vmscan gets this memory<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; by<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; shri=
+nking the balloon, and then the driver adds the memory back<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0to<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; the<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 =C2=A0 =C2=A0&gt; ball=
+oon. Basically a busy no-op.<br>
+&gt; &gt;&gt;&gt;<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0Per my understanding, the balloon allo=
+cation won=E2=80=99t invoke shrinker as<br>
+&gt; &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0__GFP_DIRECT_RECLAIM isn&#39;t set, no=
+?<br>
+&gt; &gt;&gt;&gt;<br>
+&gt; &gt;&gt;&gt; I could be wrong about the mechanism, but the device sees=
+ lots of activity on<br>
+&gt; &gt;&gt;&gt; the deflate queue. The balloon is being shrunk. And this =
+only starts once all<br>
+&gt; &gt;&gt;&gt; free memory is depleted and we&#39;re inflating into page=
+ cache.<br>
+&gt; &gt;&gt;<br>
+&gt; &gt;&gt; So given this looks like a regression, maybe we should revert=
+ the<br>
+&gt; &gt;&gt; patch in question 71994620bb25 (&quot;virtio_balloon: replace=
+ oom notifier with shrinker&quot;)<br>
+&gt; &gt;&gt; Besides, with VIRTIO_BALLOON_F_FREE_PAGE_HINT<br>
+&gt; &gt;&gt; shrinker also ignores VIRTIO_BALLOON_F_MUST_TELL_HOST which i=
+sn&#39;t nice<br>
+&gt; &gt;&gt; at all.<br>
+&gt; &gt;&gt;<br>
+&gt; &gt;&gt; So it looks like all this rework introduced more issues than =
+it<br>
+&gt; &gt;&gt; addressed ...<br>
+&gt; &gt;&gt;<br>
+&gt; &gt;&gt; I also CC Alex Duyck for an opinion on this.<br>
+&gt; &gt;&gt; Alex, what do you use to put pressure on page cache?<br>
+&gt; &gt; <br>
+&gt; &gt; I would say reverting probably makes sense. I&#39;m not sure ther=
+e is much<br>
+&gt; &gt; value to having a shrinker running deflation when you are activel=
+y trying<br>
+&gt; &gt; to increase the balloon. It would make more sense to wait until y=
+ou are<br>
+&gt; &gt; actually about to start hitting oom.<br>
+&gt; <br>
+&gt; I think the shrinker makes sense for free page hinting feature<br>
+&gt; (everything on free_page_list).<br>
+&gt; <br>
+&gt; So instead of only reverting, I think we should split it up and always=
+<br>
+&gt; register the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT and the OOM<=
+br>
+&gt; notifier (as before) for VIRTIO_BALLOON_F_MUST_TELL_HOST.<br>
+<br>
+OK ... I guess that means we need to fix shrinker to take<br>
+VIRTIO_BALLOON_F_MUST_TELL_HOST into account correctly.<br>
+Hosts ignore it at the moment but it&#39;s a fragile thing<br>
+to do what it does and ignore used buffers.<br>
+<br>
+&gt; (Of course, adapting what is being done in the shrinker and in the OOM=
+<br>
+&gt; notifier)<br>
+&gt; <br>
+&gt; -- <br>
+&gt; Thanks,<br>
+&gt; <br>
+&gt; David / dhildenb<br>
+<br>
+</blockquote></div>
+
+--000000000000ba8db1059db1d188--
+
+--===============3095139446014947072==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============3095139446014947072==--
