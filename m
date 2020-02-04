@@ -1,141 +1,98 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 056A415172B
-	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 09:49:09 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C760151791
+	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 10:15:40 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B3FAB810F1;
-	Tue,  4 Feb 2020 08:49:06 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id BAB5086F21;
+	Tue,  4 Feb 2020 09:15:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eH1i7zNWf6A4; Tue,  4 Feb 2020 08:49:04 +0000 (UTC)
+	with ESMTP id K3DaD0SGlqLY; Tue,  4 Feb 2020 09:15:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C629584BCF;
-	Tue,  4 Feb 2020 08:49:04 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 97D8286EA5;
+	Tue,  4 Feb 2020 09:15:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 97EB4C0174;
-	Tue,  4 Feb 2020 08:49:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6801CC0174;
+	Tue,  4 Feb 2020 09:15:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DC8BDC0174
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DF0BAC0174
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:49:02 +0000 (UTC)
+ Tue,  4 Feb 2020 09:15:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id D201D84AE3
+ by silver.osuosl.org (Postfix) with ESMTP id C89882036B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:49:02 +0000 (UTC)
+ Tue,  4 Feb 2020 09:15:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZEuG1eBO0Mj5
+ with ESMTP id yuKFrA4h5L-i
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:49:02 +0000 (UTC)
+ Tue,  4 Feb 2020 09:15:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 138C48362E
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by silver.osuosl.org (Postfix) with ESMTPS id A48E61FD90
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:49:01 +0000 (UTC)
+ Tue,  4 Feb 2020 09:15:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580806140;
+ s=mimecast20190719; t=1580807733;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=lwnbK5APJzfOCWPwhOp8VoZxursVdtbJyIRa46rX6YY=;
- b=KLlf/ZPkD/RVJxYJzH5uZMnsa9HaBJJ0xlKmPoTXUNeTeUtCN20mgRbO1ygn6k8N1QlL9O
- r0t0qvrXc5FYaCPrGKcZ+88B72P/2e2jXO8TEYIRBFGKPk20xqMdQBtZ+9QBu+5EwdBb4G
- 2JxJldqNtWr2f9FS3KilSPWMiBcT7qw=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-247-sfI0bAAuMkyWdD7P6tcJjw-1; Tue, 04 Feb 2020 03:48:55 -0500
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 00B29DB22;
- Tue,  4 Feb 2020 08:48:54 +0000 (UTC)
-Received: from [10.36.117.121] (ovpn-117-121.ams2.redhat.com [10.36.117.121])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 830FE196AE;
- Tue,  4 Feb 2020 08:48:49 +0000 (UTC)
-Subject: Re: Balloon pressuring page cache
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <91270a68-ff48-88b0-219c-69801f0c252f@redhat.com>
- <CAJuQAmoaK0Swytu2Os_SQRfG5_LqiCPaDa9yatatm9MtfncNTQ@mail.gmail.com>
- <75d4594f-0864-5172-a0f8-f97affedb366@redhat.com>
- <286AC319A985734F985F78AFA26841F73E3F8A02@shsmsx102.ccr.corp.intel.com>
- <CAJuQAmqcayaNuG19fKCuux=YVO3+VcN-qrXvobgKMykogeMkzA@mail.gmail.com>
- <20200203080520-mutt-send-email-mst@kernel.org>
- <5ac131de8e3b7fc1fafd05a61feb5f6889aeb917.camel@linux.intel.com>
- <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
- <539B606A-A0CA-4AA4-B99A-759C874A1EF8@vmware.com>
- <d69eafb4-ad0d-1617-9248-ea4fc776da58@redhat.com>
- <20200204033657-mutt-send-email-mst@kernel.org>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <cdf72b78-37ea-28d6-e3aa-c19ecda8465a@redhat.com>
-Date: Tue, 4 Feb 2020 09:48:48 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ in-reply-to:in-reply-to:references:references;
+ bh=XcERBKLD0pNCQ+9nUGC0SljdPFd4QEpox0vzFppf7MM=;
+ b=ihy/7ccSCyxa4ZzArKP2e1qN1cxeaVjEevMs95rRrpNfb9O0Fy7TPRsDtHYbVDLnFjxQ65
+ IkpaayR2Tp97A9RY+aPYrY406MUA3HTdWElBRzAzAz9iiwR01UDVKSfono3TZ+RuxETVXe
+ mXQ4S8UsxCKwahdiCJKmlNb9+9c2/Cs=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-364-e1b_PKtsOVi4mqmfla2mJw-1; Tue, 04 Feb 2020 04:15:30 -0500
+Received: by mail-qt1-f200.google.com with SMTP id m8so11919548qta.20
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 04 Feb 2020 01:15:30 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=XcERBKLD0pNCQ+9nUGC0SljdPFd4QEpox0vzFppf7MM=;
+ b=Fb1YhhhqOjSmUigMGaHeIK2kSJkAdStj/MQsGwcWzysK3gm3U36lT6Q8126nLrylyL
+ WkPcaOM7mQbJyF+FwVC011I/nprYGLutWP1je51V1zWs3cuMXg0MmwhTIhTVJl9lv/kJ
+ p86pFKg7b4cwsYjIF8WczcY9Zf/1CNzlX44KeQwjxRy6JI4eEraA9y3TOwfbo6ILDCc9
+ qD5OICimFyXZrEThdBWv8G+JrD9IeMdm2Q+oe/Fi55+JbKg71QcSWFppAn5PG4ppuHF+
+ 02b51UrzHQw3w3c7iNuKW9A1kFokqonOZecaS1LwkzYCRPa3rwJSF7PF9rfeF0Rd+8G8
+ SfXw==
+X-Gm-Message-State: APjAAAVaicDufE3BDIQ0SoqFFEgwPww3Q1PttZdpzoE6opX0HMXl5Jxo
+ HirolvESnNdYZNUztdEAyZCMPE/O3CPSpgL0Fggmj+TbWkVqZzzzc5FnvDsbGGuVwlTsipGKmYh
+ i8D8EtbF9U0WJxF4lPDSqMbvgDI/GhMz5GLp+z5tjaQ==
+X-Received: by 2002:a37:9ce:: with SMTP id 197mr27871951qkj.194.1580807728517; 
+ Tue, 04 Feb 2020 01:15:28 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwKvgkclu5BLnLevhgiDeKWmCIEv4uhSFnYEH08g1U+qD+zdZhxrHLCADZ7VXCufD1Ywynifw==
+X-Received: by 2002:a37:9ce:: with SMTP id 197mr27871932qkj.194.1580807728267; 
+ Tue, 04 Feb 2020 01:15:28 -0800 (PST)
+Received: from redhat.com (bzq-109-64-11-187.red.bezeqint.net. [109.64.11.187])
+ by smtp.gmail.com with ESMTPSA id t7sm10703873qkm.136.2020.02.04.01.15.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Feb 2020 01:15:27 -0800 (PST)
+Date: Tue, 4 Feb 2020 04:15:22 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: LABBE Corentin <clabbe@baylibre.com>
+Subject: Re: [CRASH] crypto: virtio: crash when modprobing tcrypt on 5.5-rc7
+ / next-20200122
+Message-ID: <20200204041419-mutt-send-email-mst@kernel.org>
+References: <20200123101000.GB24255@Red>
 MIME-Version: 1.0
-In-Reply-To: <20200204033657-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-MC-Unique: sfI0bAAuMkyWdD7P6tcJjw-1
+In-Reply-To: <20200123101000.GB24255@Red>
+X-MC-Unique: e1b_PKtsOVi4mqmfla2mJw-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Cc: "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- Tyler Sanderson <tysand@google.com>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
- Nadav Amit <namit@vmware.com>, David Rientjes <rientjes@google.com>,
- Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- Michal Hocko <mhocko@kernel.org>
+Content-Disposition: inline
+Cc: herbert@gondor.apana.org.au, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-crypto@vger.kernel.org,
+ davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -152,57 +109,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 04.02.20 09:40, Michael S. Tsirkin wrote:
-> On Tue, Feb 04, 2020 at 09:35:21AM +0100, David Hildenbrand wrote:
->>>>> I would say reverting probably makes sense. I'm not sure there is much
->>>>> value to having a shrinker running deflation when you are actively trying
->>>>> to increase the balloon. It would make more sense to wait until you are
->>>>> actually about to start hitting oom.
->>>>
->>>> I think the shrinker makes sense for free page hinting feature
->>>> (everything on free_page_list).
->>>>
->>>> So instead of only reverting, I think we should split it up and always
->>>> register the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT and the OOM
->>>> notifier (as before) for VIRTIO_BALLOON_F_MUST_TELL_HOST.
->>
->> s/VIRTIO_BALLOON_F_MUST_TELL_HOST/VIRTIO_BALLOON_F_DEFLATE_ON_OOM/
->>
->> :)
+On Thu, Jan 23, 2020 at 11:10:00AM +0100, LABBE Corentin wrote:
+> Hello
 > 
-> Well VIRTIO_BALLOON_F_MUST_TELL_HOST is also broken by shrinker
-> with VIRTIO_BALLOON_F_FREE_PAGE_HINT as that code adds buffers
-> but does not wait for them to be used even with VIRTIO_BALLOON_F_MUST_TELL_HOST.
-> We never noticed because QEMU does not advertize
-> VIRTIO_BALLOON_F_MUST_TELL_HOST.
+> When modprobing tcrypt on qemu 4.1.0 I get a kernel panic on 5.5-rc7 and next-20200122
+> qemu is started by:
+> /usr/bin/qemu-system-x86_64 -cpu host -enable-kvm -nographic -net nic,model=e1000,macaddr=52:54:00:12:34:58 -net tap -m 512 -monitor none -object cryptodev-backend-builtin,id=cryptodev0 -device virtio-crypto-pci,id=crypto0,cryptodev=cryptodev0 -append 'console=ttyS0 root=/dev/ram0 ip=dhcp' -kernel /var/lib/lava/dispatcher/tmp/41332/deployimages-td18675m/kernel/bzImage -initrd /var/lib/lava/dispatcher/tmp/41332/deployimages-td18675m/ramdisk/rootfs.cpio.gz -drive format=qcow2,file=/var/lib/lava/dispatcher/tmp/41332/apply-overlay-guest-icy4k1ol/lava-guest.qcow2,media=disk,if=ide,id=lavatest
+> 
+> [  112.771925] general protection fault: 0000 [#1] SMP PTI
+> [  112.772686] CPU: 0 PID: 126 Comm: virtio0-engine Not tainted 5.5.0-rc7+ #1
+> [  112.773576] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ?-20190711_202441-buildvm-armv7-10.arm.fedoraproject.org-2.fc31 04/01/2014
+> [  112.775319] RIP: 0010:sg_next+0x0/0x20
+> [  112.775821] Code: cc cc cc cc cc cc cc cc cc cc c7 47 10 00 00 00 00 89 57 0c 48 89 37 89 4f 08 c3 0f 1f 44 00 00 66 2e 0f 1f 84 00 00 00 00 00 <f6> 07 02 75 17 48 8b 57 20 48 8d 47 20 48 89 d1 48 83 e1 fc 83 e2
+> [  112.778330] RSP: 0018:ffffa92440237d90 EFLAGS: 00010006
+> [  112.779071] RAX: fefefefe00000000 RBX: 000000000000000a RCX: fefefefe00000000
+> [  112.780081] RDX: 0000000000000001 RSI: ffff9b19da1a2180 RDI: fefefefe00000000
+> [  112.781081] RBP: ffff9b19da1a2198 R08: ffff9b19dfb24ee8 R09: 0000000000000a20
+> [  112.782079] R10: ffff9b19da125010 R11: 0000000000000000 R12: ffff9b19da1a21b8
+> [  112.783079] R13: 0000000000000003 R14: ffff9b19da1a2180 R15: 0000000000000004
+> [  112.784077] FS:  0000000000000000(0000) GS:ffff9b19de400000(0000) knlGS:0000000000000000
+> [  112.785202] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [  112.786030] CR2: 00007f18a157b050 CR3: 000000001040a004 CR4: 0000000000060ef0
+> [  112.787034] Call Trace:
+> [  112.787393]  virtqueue_add_sgs+0x4c/0x90
+> [  112.787998]  virtio_crypto_skcipher_crypt_req+0x310/0x3e0
+> [  112.788817]  crypto_pump_work+0x10c/0x240
+> [  112.789420]  ? __kthread_init_worker+0x50/0x50
+> [  112.790082]  kthread_worker_fn+0x89/0x180
+> [  112.790690]  kthread+0x10e/0x130
+> [  112.791182]  ? kthread_park+0x80/0x80
+> [  112.791736]  ret_from_fork+0x35/0x40
+> [  112.792282] Modules linked in: cts lzo salsa20_generic camellia_x86_64 camellia_generic fcrypt pcbc tgr192 anubis wp512 khazad tea michael_mic arc4 cast6_generic cast5_generic cast_common deflate sha512_ssse3 sha512_generic cfb ofb serpent_sse2_x86_64 serpent_generic lrw twofish_x86_64_3way twofish_x86_64 crypto_simd cryptd glue_helper twofish_generic twofish_common blowfish_x86_64 blowfish_generic blowfish_common md4 tcrypt(+)
+> [  112.797652] ---[ end trace 4a8142d4a08c2518 ]---
+> [  112.798320] RIP: 0010:sg_next+0x0/0x20
+> [  112.798865] Code: cc cc cc cc cc cc cc cc cc cc c7 47 10 00 00 00 00 89 57 0c 48 89 37 89 4f 08 c3 0f 1f 44 00 00 66 2e 0f 1f 84 00 00 00 00 00 <f6> 07 02 75 17 48 8b 57 20 48 8d 47 20 48 89 d1 48 83 e1 fc 83 e2
+> [  112.801452] RSP: 0018:ffffa92440237d90 EFLAGS: 00010006
+> [  112.802189] RAX: fefefefe00000000 RBX: 000000000000000a RCX: fefefefe00000000
+> [  112.803190] RDX: 0000000000000001 RSI: ffff9b19da1a2180 RDI: fefefefe00000000
+> [  112.804192] RBP: ffff9b19da1a2198 R08: ffff9b19dfb24ee8 R09: 0000000000000a20
+> [  112.805201] R10: ffff9b19da125010 R11: 0000000000000000 R12: ffff9b19da1a21b8
+> [  112.806195] R13: 0000000000000003 R14: ffff9b19da1a2180 R15: 0000000000000004
+> [  112.807222] FS:  0000000000000000(0000) GS:ffff9b19de400000(0000) knlGS:0000000000000000
+> [  112.808352] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [  112.809169] CR2: 00007f18a157b050 CR3: 000000001040a004 CR4: 0000000000060ef0
+> 
+> I have tested also 5.4.14 
+> and I got random freeze with:
+> qemu-system-x86_64: virtio: zero sized buffers are not allowed
+> 
+> Regards
 
-Will try to figure out how to best undo this mess :)
-
-> 
-> 
->>>>
->>>> (Of course, adapting what is being done in the shrinker and in the OOM
->>>> notifier)
->>>
->>> David,
->>>
->>> Please keep me posted. I decided to adapt the same solution as the virtio
->>> balloon for the VMware balloon. If the verdict is that this is damaging and
->>> the OOM notifier should be used instead, I will submit patches to move to
->>> OOM notifier as well.
->>
->> Will do. It all sounds sub-optimal to me at this point ... but I prefer
->> the old variant where a simple "drop_slab()" won't deflate the balloon.
->> That looks broken to me.
-> 
-> Okay. Could you post a patch?
-
-I can give it a shot.
+Cc: Gonglei <arei.gonglei@huawei.com>
 
 -- 
-Thanks,
-
-David / dhildenb
+MST
 
 _______________________________________________
 Virtualization mailing list
