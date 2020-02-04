@@ -1,139 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AD6C151EC5
-	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 17:56:40 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC01E1520A8
+	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 19:53:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A00FB8704A;
-	Tue,  4 Feb 2020 16:56:38 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 23AC784BB2;
+	Tue,  4 Feb 2020 18:53:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AfAOuAW0QrcS; Tue,  4 Feb 2020 16:56:37 +0000 (UTC)
+	with ESMTP id obSqh-dYr9kx; Tue,  4 Feb 2020 18:53:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E7C48862B7;
-	Tue,  4 Feb 2020 16:56:37 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 1217084D7A;
+	Tue,  4 Feb 2020 18:53:00 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CD1FDC0174;
-	Tue,  4 Feb 2020 16:56:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D9D61C1D87;
+	Tue,  4 Feb 2020 18:52:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7CB36C0174
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3700FC0174
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 16:56:35 +0000 (UTC)
+ Tue,  4 Feb 2020 18:52:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 62B2D86229
+ by silver.osuosl.org (Postfix) with ESMTP id 1E8CB2013C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 16:56:35 +0000 (UTC)
+ Tue,  4 Feb 2020 18:52:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MM9TCVppmYS3
+ with ESMTP id OgqCdZO30mkY
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 16:56:35 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id C912A861F8
+ Tue,  4 Feb 2020 18:52:55 +0000 (UTC)
+X-Greylist: delayed 19:36:38 by SQLgrey-1.7.6
+Received: from mail-vs1-f52.google.com (mail-vs1-f52.google.com
+ [209.85.217.52])
+ by silver.osuosl.org (Postfix) with ESMTPS id 231DA2000B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 16:56:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580835393;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=YNydENmRwA+pndqgP995+ZDrs7aMQKkRqBlBvhLQorY=;
- b=SWeJFEmbYz+6W60TwY304qeV3w9RX8d10kuKtQrQyPK7UsErJy6CBfjLYlMDk7lD84juVX
- rWpr+2CsBAc7nsWdocySwF+7/H+Tm1ofyjuyiRuHNFLOHH6bk3MxPuCfEWyZhQYmnk6X09
- 2Tqucotanr8y0sNODIkD2bVhvemKkE0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-322-YmVy2-7ANsi43VDujar6EA-1; Tue, 04 Feb 2020 11:56:29 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EEA35190D342;
- Tue,  4 Feb 2020 16:56:27 +0000 (UTC)
-Received: from [10.36.116.24] (ovpn-116-24.ams2.redhat.com [10.36.116.24])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 526C1867FB;
- Tue,  4 Feb 2020 16:56:23 +0000 (UTC)
-Subject: Re: Balloon pressuring page cache
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <75d4594f-0864-5172-a0f8-f97affedb366@redhat.com>
+ Tue,  4 Feb 2020 18:52:55 +0000 (UTC)
+Received: by mail-vs1-f52.google.com with SMTP id b79so12045464vsd.9
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 04 Feb 2020 10:52:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=JFjuhlOU48p12QMv00/QPBxxPW3d/P9IoYypv065CfE=;
+ b=i0vDtfwJSIMb0pbgmz469WvBT6h3lntoMPaoC19R21ozGQl0RIcwGd9Ce+H7blpc/6
+ RHOZr6xpSMSW83IW/n08oOe2mZHC+qnj0tWf3xMnsrVHXBcL7dNERaei2cqUDHbcbiCd
+ 19tzLkVR2qriGBu0i3AD3R7MxIXFqhtPeZfD0GfQ1OJ0TVEc9UBKUy7RSKmh0Bpml0ae
+ 38xyA9qNFsfhHqj8CxDV7aNgMas4OG/bZMOYB1zaxHIjedf5jBjBIK6HhKU35YDRId8x
+ b4997f0M9Os3+EHBzuz5gJYvH4rP5DsBXEp9lgXoCansHnUEW6dSitpE3xKWElZXo2iq
+ 48zQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=JFjuhlOU48p12QMv00/QPBxxPW3d/P9IoYypv065CfE=;
+ b=H6tZl1LDPpuXThIOOZ+OJRGoHmfP3/B4MDZkk8LuqSbqX0a9K/yiIwLbv/td6upFJP
+ Xpv0dtBVDA2Qm39HKMwG936jhMqZrRO74GFm6GIQP25mvTzSYhzwqlDbYKEtK0DVwyEV
+ 7WQdy897UkdxM495B25hmKuBHi7rzcs7VDpqDBYJNOup43YjYs6tI9+rCKdHzFBx3CQU
+ fS8wprxQu7MFGg5fzxT6rw94/8326DQ5ZMUY9hhtBv1jQibwvnhyciAucpHLRfrpr+6/
+ YBqZc/ecz9RwfeY+ulmd84BCC7oLVcggMYugHJwilUFn6THYpXxLZKNSWuZEtjSMSCDq
+ JnPg==
+X-Gm-Message-State: APjAAAWryhvvj0al8tOxYiI7Agi46TvhOQzJdE+SEspkjJiziCFAJZh7
+ /lYe74FD9z6yvgGO7USrnDXewwGGC35NkinZ3znQjg==
+X-Google-Smtp-Source: APXvYqxPOffbTHs6dP9CmwCbqDZvA029uMmiJaVYrG/dhOyMzIxue5TSSUCy/LAEA7ZbPpQiwn6P80yKmAjXW6XzIJM=
+X-Received: by 2002:a05:6102:72b:: with SMTP id
+ u11mr19360198vsg.69.1580842373898; 
+ Tue, 04 Feb 2020 10:52:53 -0800 (PST)
+MIME-Version: 1.0
+References: <CAJuQAmpDUyve2S+oxp9tLUhuRcnddXnNztC5PmYOOCpY6c68xg@mail.gmail.com>
+ <91270a68-ff48-88b0-219c-69801f0c252f@redhat.com>
+ <CAJuQAmoaK0Swytu2Os_SQRfG5_LqiCPaDa9yatatm9MtfncNTQ@mail.gmail.com>
+ <75d4594f-0864-5172-a0f8-f97affedb366@redhat.com>
  <286AC319A985734F985F78AFA26841F73E3F8A02@shsmsx102.ccr.corp.intel.com>
  <CAJuQAmqcayaNuG19fKCuux=YVO3+VcN-qrXvobgKMykogeMkzA@mail.gmail.com>
  <20200203080520-mutt-send-email-mst@kernel.org>
  <5ac131de8e3b7fc1fafd05a61feb5f6889aeb917.camel@linux.intel.com>
  <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
- <539B606A-A0CA-4AA4-B99A-759C874A1EF8@vmware.com>
- <d69eafb4-ad0d-1617-9248-ea4fc776da58@redhat.com>
- <20200204033657-mutt-send-email-mst@kernel.org>
- <ce93331c-0099-dda7-e00f-126bf7826a40@redhat.com>
- <20200204114336-mutt-send-email-mst@kernel.org>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <a94fe61e-e015-49f7-b6c1-3c5aff727996@redhat.com>
-Date: Tue, 4 Feb 2020 17:56:22 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
-MIME-Version: 1.0
-In-Reply-To: <20200204114336-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: YmVy2-7ANsi43VDujar6EA-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: "virtualization@lists.linux-foundation.org"
+ <20200203120225-mutt-send-email-mst@kernel.org>
+ <CAJuQAmqGA9mhzR5AQeMDtovJAh7y8khC3qUtLKx_e9RdL0wFJQ@mail.gmail.com>
+ <74cc25a6-cefb-c580-8e59-5b76fb680bf4@redhat.com>
+In-Reply-To: <74cc25a6-cefb-c580-8e59-5b76fb680bf4@redhat.com>
+Date: Tue, 4 Feb 2020 10:52:42 -0800
+Message-ID: <CAJuQAmpiVqnNt-vSkQh5Gg63QZ49_nuz4+VW2Jfwn51gWVdtfA@mail.gmail.com>
+Subject: Re: Balloon pressuring page cache
+To: David Hildenbrand <david@redhat.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+ "virtualization@lists.linux-foundation.org"
  <virtualization@lists.linux-foundation.org>,
- Tyler Sanderson <tysand@google.com>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
- Nadav Amit <namit@vmware.com>, David Rientjes <rientjes@google.com>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, namit@vmware.com,
+ David Rientjes <rientjes@google.com>,
  Alexander Duyck <alexander.h.duyck@linux.intel.com>,
  Michal Hocko <mhocko@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -147,54 +104,169 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Tyler Sanderson via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Tyler Sanderson <tysand@google.com>
+Content-Type: multipart/mixed; boundary="===============3259729004362866944=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-[...]
+--===============3259729004362866944==
+Content-Type: multipart/alternative; boundary="00000000000024c073059dc48c52"
 
->>
->> Issue 2: When called via the shrinker, (but also to fix Issue 1), it could be
->> that we do have VIRTIO_BALLOON_F_MUST_TELL_HOST. I assume this means
->> (-ENOCLUE) that we have to wait until the hypervisor notifies us via the STOP? Or
->> for which event do we have to wait? Because there is no way to *tell host* here
->> that we want to reuse a page. The hypervisor will *tell us* when we can reuse pages.
->> For the shrinker it is simple: Don't use the shrinker with
->> VIRTIO_BALLOON_F_MUST_TELL_HOST :) . But to fix Issue 1, we *would* have to wait
->> until we get a STOP signal. That is not really possible because it might
->> take an infinite amount of time.
->>
->> Michael, any clue on which event we have to wait with
->> VIRTIO_BALLOON_F_MUST_TELL_HOST? IMHO, I don't think
->> VIRTIO_BALLOON_F_MUST_TELL_HOST applies to VIRTIO_BALLOON_F_FREE_PAGE_HINT and
->> we'd better document that. It introduces complexity with no clear benefit.
-> 
-> I meant that we must wait for host to see the hint. Signalled via using
-> the buffer.  But maybe that's too far in the meaning from
-> VIRTIO_BALLOON_F_MUST_TELL_HOST and we need a separate new flag for
+--00000000000024c073059dc48c52
+Content-Type: text/plain; charset="UTF-8"
 
-Yes, that's what I think.
+On Tue, Feb 4, 2020 at 12:29 AM David Hildenbrand <david@redhat.com> wrote:
 
-> that. Then current code won't be broken (yay!) but we need to
-> document another flag that's pretty similar.
+> On 03.02.20 21:32, Tyler Sanderson wrote:
+> > There were apparently good reasons for moving away from OOM notifier
+> > callback:
+> > https://lkml.org/lkml/2018/7/12/314
+> > https://lkml.org/lkml/2018/8/2/322
+> >
+> > In particular the OOM notifier is worse than the shrinker because:
+>
+> The issue is that DEFLATE_ON_OOM is under-specified.
+>
+> >
+> >  1. It is last-resort, which means the system has already gone through
+> >     heroics to prevent OOM. Those heroic reclaim efforts are expensive
+> >     and impact application performance.
+>
+> That's *exactly* what "deflate on OOM" suggests.
+>
 
-I mean, do we need a flag at all as long as there is no user?
-Introducing a flag and documenting it if nobody uses it does not sound
-like a work I will enjoy :)
+It seems there are some use cases where "deflate on OOM" is desired and
+others where "deflate on pressure" is desired.
+This suggests adding a new feature bit "DEFLATE_ON_PRESSURE" that registers
+the shrinker, and reverting DEFLATE_ON_OOM to use the OOM notifier callback.
 
-We can simply document "VIRTIO_BALLOON_F_MUST_TELL_HOST does not apply
-to FREE_PAGE_HINTING" and "with FREE_PAGE_HINTING, the guest can reuse
-pages any time, without waiting for a response/ack from the hypervisor".
+This lets users configure the balloon for their use case.
 
-Thoughts?
 
--- 
-Thanks,
+>
+> Assume you are using virtio-balloon for some weird way of memory
+> hotunplug (which is what some people do) and you want to minimize the
+> footprint of your guest. Then you really only want to give the guest
+> more memory (or rather, let it take back memory automatically in this
+> case) in case it really needs more memory. It should try to reclaim first.
+>
+> Under-specified.
+>
+>
+> >  2. It lacks understanding of NUMA or other OOM constraints.
+>
+> Ballooning in general lacks the understanding of NUMA.
+>
+> >  3. It has a higher potential for bugs due to the subtlety of the
+> >     callback context.
+>
+> While that is a valid point, it doesn't explain why existing
+> functionality is changed.
+>
+> Personally, I think DEFLATE_ON_OOM should never have been introduced (at
+> least not in this form).
+>
+I'm actually not sure how you would safely do memory overcommit without
+DEFLATE_ON_OOM. So I think it unlocks a huge use case.
 
-David / dhildenb
+
+>
+>
+> --
+> Thanks,
+>
+> David / dhildenb
+>
+>
+
+--00000000000024c073059dc48c52
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Feb 4, 2020 at 12:29 AM David=
+ Hildenbrand &lt;<a href=3D"mailto:david@redhat.com">david@redhat.com</a>&g=
+t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
+x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 03.=
+02.20 21:32, Tyler Sanderson wrote:<br>
+&gt; There were apparently good reasons for moving away from OOM notifier<b=
+r>
+&gt; callback:<br>
+&gt; <a href=3D"https://lkml.org/lkml/2018/7/12/314" rel=3D"noreferrer" tar=
+get=3D"_blank">https://lkml.org/lkml/2018/7/12/314</a><br>
+&gt; <a href=3D"https://lkml.org/lkml/2018/8/2/322" rel=3D"noreferrer" targ=
+et=3D"_blank">https://lkml.org/lkml/2018/8/2/322</a><br>
+&gt; <br>
+&gt; In particular the OOM notifier is worse than the shrinker because:<br>
+<br>
+The issue is that DEFLATE_ON_OOM is under-specified.<br>
+<br>
+&gt; <br>
+&gt;=C2=A0 1. It is last-resort, which means the system has already gone th=
+rough<br>
+&gt;=C2=A0 =C2=A0 =C2=A0heroics to prevent OOM. Those heroic reclaim effort=
+s are expensive<br>
+&gt;=C2=A0 =C2=A0 =C2=A0and impact application performance.<br>
+<br>
+That&#39;s *exactly* what &quot;deflate on OOM&quot; suggests.<br></blockqu=
+ote><div><br></div><div>It seems there are some use cases where &quot;defla=
+te on OOM&quot; is desired and others where &quot;deflate on pressure&quot;=
+ is desired.</div><div>This suggests adding a new feature bit &quot;DEFLATE=
+_ON_PRESSURE&quot; that registers the shrinker, and reverting DEFLATE_ON_OO=
+M to use the OOM notifier callback.</div><div><br></div><div>This lets user=
+s configure the balloon for their use case.</div><div>=C2=A0</div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">
+<br>
+Assume you are using virtio-balloon for some weird way of memory<br>
+hotunplug (which is what some people do) and you want to minimize the<br>
+footprint of your guest. Then you really only want to give the guest<br>
+more memory (or rather, let it take back memory automatically in this<br>
+case) in case it really needs more memory. It should try to reclaim first.<=
+br>
+<br>
+Under-specified.<br>
+<br>
+<br>
+&gt;=C2=A0 2. It lacks understanding of NUMA or other OOM constraints.<br>
+<br>
+Ballooning in general lacks the understanding of NUMA.<br>
+<br>
+&gt;=C2=A0 3. It has a higher potential for bugs due to the subtlety=C2=A0o=
+f the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0callback context.<br>
+<br>
+While that is a valid point, it doesn&#39;t explain why existing<br>
+functionality is changed.<br>
+<br>
+Personally, I think DEFLATE_ON_OOM should never have been introduced (at<br=
+>
+least not in this form).<br></blockquote><div>I&#39;m actually not sure how=
+ you would safely do memory overcommit without DEFLATE_ON_OOM. So I think i=
+t unlocks a huge use case.</div><div>=C2=A0</div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">
+<br>
+<br>
+-- <br>
+Thanks,<br>
+<br>
+David / dhildenb<br>
+<br>
+</blockquote></div></div>
+
+--00000000000024c073059dc48c52--
+
+--===============3259729004362866944==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============3259729004362866944==--
