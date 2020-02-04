@@ -1,89 +1,140 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA00715170D
-	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 09:28:56 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CD10151710
+	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 09:29:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 7F7B62050E;
-	Tue,  4 Feb 2020 08:28:55 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 715BB86A14;
+	Tue,  4 Feb 2020 08:29:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NbHzRbo8CH1v; Tue,  4 Feb 2020 08:28:54 +0000 (UTC)
+	with ESMTP id w+z-eU3MmGCd; Tue,  4 Feb 2020 08:29:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 6A8B720022;
-	Tue,  4 Feb 2020 08:28:54 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E26ED86DAC;
+	Tue,  4 Feb 2020 08:29:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5D552C0174;
-	Tue,  4 Feb 2020 08:28:54 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CC43DC0174;
+	Tue,  4 Feb 2020 08:29:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 944FFC0174
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9EA8CC0174
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:28:52 +0000 (UTC)
+ Tue,  4 Feb 2020 08:29:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 86C6620104
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 8D2D584032
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:28:52 +0000 (UTC)
+ Tue,  4 Feb 2020 08:29:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id cZev4PsR7wlX
+ with ESMTP id MZQTs_3fTWRv
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:28:51 +0000 (UTC)
+ Tue,  4 Feb 2020 08:29:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id B7F1920022
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id EF479839DD
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:28:51 +0000 (UTC)
+ Tue,  4 Feb 2020 08:29:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580804930;
+ s=mimecast20190719; t=1580804978;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JipmoOe2nr0hGxD7C+f101bb7FTOHzYyEwpTEYgv7tg=;
- b=fcqkr51i4XIx1miBuekqjS7AzBreBOE17Z77lH4I447ZVrALMhWuJCSZQ5m2dH+dZ8m/zd
- kqWBHzIjzPUUhw94RinUWbgv0cp8DwLCS9/4widvBxm+g2+DA+IHo4qTdz0KHvhpA4W3Zi
- pFgG0KTIXgg4dZ6ehlPHl+S9uHcfZQ4=
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=ohrGTwmAT76eQeRzpJLCczh4G62uQiHZfZm4f0n/tDo=;
+ b=cgIr7ESuMkDOam4cSaJLFSAHMLI+L6oH0WQmcvNCaMG3ZmLa75EWJf6/9iLujAfw7xBiqM
+ mZsp2kvyGu7vmWpgd8eckKeKnqmZuubLLo5fo0vQMF9djYE8YVPhdM8IUrjPQHux+I7C+o
+ KcEV0MdOzZZfT5bEnJpwsTpnpxEm6EM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-121-Dqa5HkEuOly10_ZneL--TQ-1; Tue, 04 Feb 2020 03:28:48 -0500
-X-MC-Unique: Dqa5HkEuOly10_ZneL--TQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-377-pe0dRV0-NPiOlyTrm-R10Q-1; Tue, 04 Feb 2020 03:29:31 -0500
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BBA80800D54;
- Tue,  4 Feb 2020 08:28:45 +0000 (UTC)
-Received: from [10.72.12.170] (ovpn-12-170.pek2.redhat.com [10.72.12.170])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0B4F290F49;
- Tue,  4 Feb 2020 08:28:28 +0000 (UTC)
-Subject: Re: [PATCH 5/5] vdpasim: vDPA device simulator
-To: Zhu Lingshan <lingshan.zhu@linux.intel.com>, mst@redhat.com,
- linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org, netdev@vger.kernel.org
-References: <20200116124231.20253-1-jasowang@redhat.com>
- <20200116124231.20253-6-jasowang@redhat.com>
- <1b86d188-0666-f6ab-e3b3-bec1cfbd0c76@linux.intel.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <cca7901b-51dd-4f4b-5c30-c42577ad5194@redhat.com>
-Date: Tue, 4 Feb 2020 16:28:27 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 55EBB19251DF;
+ Tue,  4 Feb 2020 08:29:30 +0000 (UTC)
+Received: from [10.36.117.121] (ovpn-117-121.ams2.redhat.com [10.36.117.121])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3C6F060BFB;
+ Tue,  4 Feb 2020 08:29:25 +0000 (UTC)
+Subject: Re: Balloon pressuring page cache
+To: Tyler Sanderson <tysand@google.com>, "Michael S. Tsirkin" <mst@redhat.com>
+References: <CAJuQAmpDUyve2S+oxp9tLUhuRcnddXnNztC5PmYOOCpY6c68xg@mail.gmail.com>
+ <91270a68-ff48-88b0-219c-69801f0c252f@redhat.com>
+ <CAJuQAmoaK0Swytu2Os_SQRfG5_LqiCPaDa9yatatm9MtfncNTQ@mail.gmail.com>
+ <75d4594f-0864-5172-a0f8-f97affedb366@redhat.com>
+ <286AC319A985734F985F78AFA26841F73E3F8A02@shsmsx102.ccr.corp.intel.com>
+ <CAJuQAmqcayaNuG19fKCuux=YVO3+VcN-qrXvobgKMykogeMkzA@mail.gmail.com>
+ <20200203080520-mutt-send-email-mst@kernel.org>
+ <5ac131de8e3b7fc1fafd05a61feb5f6889aeb917.camel@linux.intel.com>
+ <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
+ <20200203120225-mutt-send-email-mst@kernel.org>
+ <CAJuQAmqGA9mhzR5AQeMDtovJAh7y8khC3qUtLKx_e9RdL0wFJQ@mail.gmail.com>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <74cc25a6-cefb-c580-8e59-5b76fb680bf4@redhat.com>
+Date: Tue, 4 Feb 2020 09:29:24 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.1
 MIME-Version: 1.0
-In-Reply-To: <1b86d188-0666-f6ab-e3b3-bec1cfbd0c76@linux.intel.com>
+In-Reply-To: <CAJuQAmqGA9mhzR5AQeMDtovJAh7y8khC3qUtLKx_e9RdL0wFJQ@mail.gmail.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: jakub.kicinski@netronome.com, mhabets@solarflare.com, jgg@mellanox.com,
- rob.miller@broadcom.com, lulu@redhat.com, hanand@xilinx.com, hch@infradead.org,
- eperezma@redhat.com, haotian.wang@sifive.com, shahafs@mellanox.com,
- parav@mellanox.com, jiri@mellanox.com, xiao.w.wang@intel.com,
- stefanha@redhat.com, zhihong.wang@intel.com, rdunlap@infradead.org,
- maxime.coquelin@redhat.com, lingshan.zhu@intel.com
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-MC-Unique: pe0dRV0-NPiOlyTrm-R10Q-1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: Michal Hocko <mhocko@kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ David Rientjes <rientjes@google.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,29 +146,36 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMi80IOS4i+WNiDQ6MjEsIFpodSBMaW5nc2hhbiB3cm90ZToKPj4gK3N0YXRpYyBj
-b25zdCBzdHJ1Y3QgZG1hX21hcF9vcHMgdmRwYXNpbV9kbWFfb3BzID0gewo+PiArwqDCoMKgIC5t
-YXBfcGFnZSA9IHZkcGFzaW1fbWFwX3BhZ2UsCj4+ICvCoMKgwqAgLnVubWFwX3BhZ2UgPSB2ZHBh
-c2ltX3VubWFwX3BhZ2UsCj4+ICvCoMKgwqAgLmFsbG9jID0gdmRwYXNpbV9hbGxvY19jb2hlcmVu
-dCwKPj4gK8KgwqDCoCAuZnJlZSA9IHZkcGFzaW1fZnJlZV9jb2hlcmVudCwKPj4gK307Cj4+ICsK
-Pgo+IEhleSBKYXNvbiwKPgo+IElNSE8sIGl0IHdvdWxkIGJlIG5pY2UgaWYgZG1hX29wcyBvZiB0
-aGUgcGFyZW50IGRldmljZSBjb3VsZCBiZSAKPiByZS11c2VkLiB2ZHBhX2RldmljZSBpcyBleHBl
-Y3RpbmcgdG8gcmVwcmVzZW50IGEgcGh5c2ljYWwgZGV2aWNlIAo+IGV4Y2VwdCB0aGlzIHNpbXVs
-YXRvciwgaG93ZXZlciwgdGhlcmUgYXJlIG5vdCBlbm91Z2ggaW5mb3JtYXRpb24gaW4gCj4gdmRw
-YV9kZXZpY2UuZGV2IHRvIGluZGljYXRpbmcgd2hpY2gga2luZCBwaHlzaWNhbCBkZXZpY2UgaXQg
-YXR0YWNoZWQgCj4gdG8uIE5hbWVseSBnZXRfYXJjaF9kbWFfb3BzKHN0cnVjdCBidXMgdHlwZSkg
-Y2FuIG5vdCB3b3JrIG9uIAo+IHZkcGFfZGV2aWNlLmRldi4gVGhlbiBpdCBzZWVtcyBkZXZpY2Ug
-ZHJpdmVycyBuZWVkIHRvIGltcGxlbWVudCBhIHdyYXAgCj4gb2YgZG1hX29wcyBvZiBwYXJlbnQg
-ZGV2aWNlcy4gQ2FuIHRoaXMgd29yayBiZSBkb25lIGluIHRoZSB2ZHBhIAo+IGZyYW1ld29yayBz
-aW5jZSBpdCBsb29rcyBsaWtlIGEgY29tbW9uIHRhc2s/IENhbiAKPiAidmRfZGV2LT52ZGV2LmRl
-di5wYXJlbnQgPSB2ZHBhLT5kZXYtPnBhcmVudDsiIGluIHZpcnRpb192ZHBhX3Byb2JlKCkgCj4g
-ZG8gdGhlIHdvcms/Cj4KPiBUaGFua3MsCj4gQlIKPiBaaHUgTGluZ3NoYW4gCgoKR29vZCBjYXRj
-aC4KCkkgdGhpbmsgd2UgY2FuLgoKVGhhbmtzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6
-YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5k
-YXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+T24gMDMuMDIuMjAgMjE6MzIsIFR5bGVyIFNhbmRlcnNvbiB3cm90ZToKPiBUaGVyZSB3ZXJlIGFw
+cGFyZW50bHkgZ29vZCByZWFzb25zIGZvciBtb3ZpbmcgYXdheSBmcm9tIE9PTSBub3RpZmllcgo+
+IGNhbGxiYWNrOgo+IGh0dHBzOi8vbGttbC5vcmcvbGttbC8yMDE4LzcvMTIvMzE0Cj4gaHR0cHM6
+Ly9sa21sLm9yZy9sa21sLzIwMTgvOC8yLzMyMgo+IAo+IEluIHBhcnRpY3VsYXIgdGhlIE9PTSBu
+b3RpZmllciBpcyB3b3JzZSB0aGFuIHRoZSBzaHJpbmtlciBiZWNhdXNlOgoKVGhlIGlzc3VlIGlz
+IHRoYXQgREVGTEFURV9PTl9PT00gaXMgdW5kZXItc3BlY2lmaWVkLgoKPiAKPiAgMS4gSXQgaXMg
+bGFzdC1yZXNvcnQsIHdoaWNoIG1lYW5zIHRoZSBzeXN0ZW0gaGFzIGFscmVhZHkgZ29uZSB0aHJv
+dWdoCj4gICAgIGhlcm9pY3MgdG8gcHJldmVudCBPT00uIFRob3NlIGhlcm9pYyByZWNsYWltIGVm
+Zm9ydHMgYXJlIGV4cGVuc2l2ZQo+ICAgICBhbmQgaW1wYWN0IGFwcGxpY2F0aW9uIHBlcmZvcm1h
+bmNlLgoKVGhhdCdzICpleGFjdGx5KiB3aGF0ICJkZWZsYXRlIG9uIE9PTSIgc3VnZ2VzdHMuCgpB
+c3N1bWUgeW91IGFyZSB1c2luZyB2aXJ0aW8tYmFsbG9vbiBmb3Igc29tZSB3ZWlyZCB3YXkgb2Yg
+bWVtb3J5CmhvdHVucGx1ZyAod2hpY2ggaXMgd2hhdCBzb21lIHBlb3BsZSBkbykgYW5kIHlvdSB3
+YW50IHRvIG1pbmltaXplIHRoZQpmb290cHJpbnQgb2YgeW91ciBndWVzdC4gVGhlbiB5b3UgcmVh
+bGx5IG9ubHkgd2FudCB0byBnaXZlIHRoZSBndWVzdAptb3JlIG1lbW9yeSAob3IgcmF0aGVyLCBs
+ZXQgaXQgdGFrZSBiYWNrIG1lbW9yeSBhdXRvbWF0aWNhbGx5IGluIHRoaXMKY2FzZSkgaW4gY2Fz
+ZSBpdCByZWFsbHkgbmVlZHMgbW9yZSBtZW1vcnkuIEl0IHNob3VsZCB0cnkgdG8gcmVjbGFpbSBm
+aXJzdC4KClVuZGVyLXNwZWNpZmllZC4KCgo+ICAyLiBJdCBsYWNrcyB1bmRlcnN0YW5kaW5nIG9m
+IE5VTUEgb3Igb3RoZXIgT09NIGNvbnN0cmFpbnRzLgoKQmFsbG9vbmluZyBpbiBnZW5lcmFsIGxh
+Y2tzIHRoZSB1bmRlcnN0YW5kaW5nIG9mIE5VTUEuCgo+ICAzLiBJdCBoYXMgYSBoaWdoZXIgcG90
+ZW50aWFsIGZvciBidWdzIGR1ZSB0byB0aGUgc3VidGxldHnCoG9mIHRoZQo+ICAgICBjYWxsYmFj
+ayBjb250ZXh0LgoKV2hpbGUgdGhhdCBpcyBhIHZhbGlkIHBvaW50LCBpdCBkb2Vzbid0IGV4cGxh
+aW4gd2h5IGV4aXN0aW5nCmZ1bmN0aW9uYWxpdHkgaXMgY2hhbmdlZC4KClBlcnNvbmFsbHksIEkg
+dGhpbmsgREVGTEFURV9PTl9PT00gc2hvdWxkIG5ldmVyIGhhdmUgYmVlbiBpbnRyb2R1Y2VkIChh
+dApsZWFzdCBub3QgaW4gdGhpcyBmb3JtKS4KCgotLSAKVGhhbmtzLAoKRGF2aWQgLyBkaGlsZGVu
+YgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVh
+bGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRp
+b24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3ZpcnR1YWxpemF0aW9u
