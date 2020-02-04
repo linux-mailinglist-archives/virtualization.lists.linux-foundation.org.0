@@ -1,68 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CD10151710
-	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 09:29:45 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B033415171E
+	for <lists.virtualization@lfdr.de>; Tue,  4 Feb 2020 09:35:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 715BB86A14;
-	Tue,  4 Feb 2020 08:29:43 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5862884626;
+	Tue,  4 Feb 2020 08:35:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id w+z-eU3MmGCd; Tue,  4 Feb 2020 08:29:42 +0000 (UTC)
+	with ESMTP id H5b2YQfduz+M; Tue,  4 Feb 2020 08:35:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E26ED86DAC;
-	Tue,  4 Feb 2020 08:29:42 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id CC9C0815E3;
+	Tue,  4 Feb 2020 08:35:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CC43DC0174;
-	Tue,  4 Feb 2020 08:29:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A942DC0174;
+	Tue,  4 Feb 2020 08:35:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9EA8CC0174
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 72811C0174
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:29:40 +0000 (UTC)
+ Tue,  4 Feb 2020 08:35:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 8D2D584032
+ by silver.osuosl.org (Postfix) with ESMTP id 63A3920104
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:29:40 +0000 (UTC)
+ Tue,  4 Feb 2020 08:35:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MZQTs_3fTWRv
+ with ESMTP id 5dvkF9IjBiJV
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:29:40 +0000 (UTC)
+ Tue,  4 Feb 2020 08:35:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id EF479839DD
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id 6829B20025
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Feb 2020 08:29:39 +0000 (UTC)
+ Tue,  4 Feb 2020 08:35:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580804978;
+ s=mimecast20190719; t=1580805332;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ohrGTwmAT76eQeRzpJLCczh4G62uQiHZfZm4f0n/tDo=;
- b=cgIr7ESuMkDOam4cSaJLFSAHMLI+L6oH0WQmcvNCaMG3ZmLa75EWJf6/9iLujAfw7xBiqM
- mZsp2kvyGu7vmWpgd8eckKeKnqmZuubLLo5fo0vQMF9djYE8YVPhdM8IUrjPQHux+I7C+o
- KcEV0MdOzZZfT5bEnJpwsTpnpxEm6EM=
+ bh=/ZVKAsCFMkio7MeldRi4lotHjSods1WydzAF9+ZMbpw=;
+ b=SzlxlEZBYtN+xBBkn3H+rhqQ0qKtGLNjzs3l/vRqpERek11kyq36dCtPKHLHmthXXAjowf
+ aWU8W0r95lZuy5RObwxWC5CYIk9kFfkzp5KtV5pt+6wBZ9VwE1fytYEurPimiZsqUmqfE+
+ n7rYpra/LOzMMfRcKnqtBGaVDgfNvBQ=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-377-pe0dRV0-NPiOlyTrm-R10Q-1; Tue, 04 Feb 2020 03:29:31 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ us-mta-121-F_1NUrerMyabCyqgAakEPA-1; Tue, 04 Feb 2020 03:35:28 -0500
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 55EBB19251DF;
- Tue,  4 Feb 2020 08:29:30 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B57201083E84;
+ Tue,  4 Feb 2020 08:35:26 +0000 (UTC)
 Received: from [10.36.117.121] (ovpn-117-121.ams2.redhat.com [10.36.117.121])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3C6F060BFB;
- Tue,  4 Feb 2020 08:29:25 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4738919C7F;
+ Tue,  4 Feb 2020 08:35:22 +0000 (UTC)
 Subject: Re: Balloon pressuring page cache
-To: Tyler Sanderson <tysand@google.com>, "Michael S. Tsirkin" <mst@redhat.com>
+To: Nadav Amit <namit@vmware.com>
 References: <CAJuQAmpDUyve2S+oxp9tLUhuRcnddXnNztC5PmYOOCpY6c68xg@mail.gmail.com>
  <91270a68-ff48-88b0-219c-69801f0c252f@redhat.com>
  <CAJuQAmoaK0Swytu2Os_SQRfG5_LqiCPaDa9yatatm9MtfncNTQ@mail.gmail.com>
@@ -72,8 +72,7 @@ References: <CAJuQAmpDUyve2S+oxp9tLUhuRcnddXnNztC5PmYOOCpY6c68xg@mail.gmail.com>
  <20200203080520-mutt-send-email-mst@kernel.org>
  <5ac131de8e3b7fc1fafd05a61feb5f6889aeb917.camel@linux.intel.com>
  <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
- <20200203120225-mutt-send-email-mst@kernel.org>
- <CAJuQAmqGA9mhzR5AQeMDtovJAh7y8khC3qUtLKx_e9RdL0wFJQ@mail.gmail.com>
+ <539B606A-A0CA-4AA4-B99A-759C874A1EF8@vmware.com>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -119,22 +118,24 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <74cc25a6-cefb-c580-8e59-5b76fb680bf4@redhat.com>
-Date: Tue, 4 Feb 2020 09:29:24 +0100
+Message-ID: <d69eafb4-ad0d-1617-9248-ea4fc776da58@redhat.com>
+Date: Tue, 4 Feb 2020 09:35:21 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.3.1
 MIME-Version: 1.0
-In-Reply-To: <CAJuQAmqGA9mhzR5AQeMDtovJAh7y8khC3qUtLKx_e9RdL0wFJQ@mail.gmail.com>
+In-Reply-To: <539B606A-A0CA-4AA4-B99A-759C874A1EF8@vmware.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-MC-Unique: pe0dRV0-NPiOlyTrm-R10Q-1
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-MC-Unique: F_1NUrerMyabCyqgAakEPA-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Cc: Michal Hocko <mhocko@kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ Tyler Sanderson <tysand@google.com>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
  David Rientjes <rientjes@google.com>,
  Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
+ Michal Hocko <mhocko@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -146,36 +147,48 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gMDMuMDIuMjAgMjE6MzIsIFR5bGVyIFNhbmRlcnNvbiB3cm90ZToKPiBUaGVyZSB3ZXJlIGFw
-cGFyZW50bHkgZ29vZCByZWFzb25zIGZvciBtb3ZpbmcgYXdheSBmcm9tIE9PTSBub3RpZmllcgo+
-IGNhbGxiYWNrOgo+IGh0dHBzOi8vbGttbC5vcmcvbGttbC8yMDE4LzcvMTIvMzE0Cj4gaHR0cHM6
-Ly9sa21sLm9yZy9sa21sLzIwMTgvOC8yLzMyMgo+IAo+IEluIHBhcnRpY3VsYXIgdGhlIE9PTSBu
-b3RpZmllciBpcyB3b3JzZSB0aGFuIHRoZSBzaHJpbmtlciBiZWNhdXNlOgoKVGhlIGlzc3VlIGlz
-IHRoYXQgREVGTEFURV9PTl9PT00gaXMgdW5kZXItc3BlY2lmaWVkLgoKPiAKPiAgMS4gSXQgaXMg
-bGFzdC1yZXNvcnQsIHdoaWNoIG1lYW5zIHRoZSBzeXN0ZW0gaGFzIGFscmVhZHkgZ29uZSB0aHJv
-dWdoCj4gICAgIGhlcm9pY3MgdG8gcHJldmVudCBPT00uIFRob3NlIGhlcm9pYyByZWNsYWltIGVm
-Zm9ydHMgYXJlIGV4cGVuc2l2ZQo+ICAgICBhbmQgaW1wYWN0IGFwcGxpY2F0aW9uIHBlcmZvcm1h
-bmNlLgoKVGhhdCdzICpleGFjdGx5KiB3aGF0ICJkZWZsYXRlIG9uIE9PTSIgc3VnZ2VzdHMuCgpB
-c3N1bWUgeW91IGFyZSB1c2luZyB2aXJ0aW8tYmFsbG9vbiBmb3Igc29tZSB3ZWlyZCB3YXkgb2Yg
-bWVtb3J5CmhvdHVucGx1ZyAod2hpY2ggaXMgd2hhdCBzb21lIHBlb3BsZSBkbykgYW5kIHlvdSB3
-YW50IHRvIG1pbmltaXplIHRoZQpmb290cHJpbnQgb2YgeW91ciBndWVzdC4gVGhlbiB5b3UgcmVh
-bGx5IG9ubHkgd2FudCB0byBnaXZlIHRoZSBndWVzdAptb3JlIG1lbW9yeSAob3IgcmF0aGVyLCBs
-ZXQgaXQgdGFrZSBiYWNrIG1lbW9yeSBhdXRvbWF0aWNhbGx5IGluIHRoaXMKY2FzZSkgaW4gY2Fz
-ZSBpdCByZWFsbHkgbmVlZHMgbW9yZSBtZW1vcnkuIEl0IHNob3VsZCB0cnkgdG8gcmVjbGFpbSBm
-aXJzdC4KClVuZGVyLXNwZWNpZmllZC4KCgo+ICAyLiBJdCBsYWNrcyB1bmRlcnN0YW5kaW5nIG9m
-IE5VTUEgb3Igb3RoZXIgT09NIGNvbnN0cmFpbnRzLgoKQmFsbG9vbmluZyBpbiBnZW5lcmFsIGxh
-Y2tzIHRoZSB1bmRlcnN0YW5kaW5nIG9mIE5VTUEuCgo+ICAzLiBJdCBoYXMgYSBoaWdoZXIgcG90
-ZW50aWFsIGZvciBidWdzIGR1ZSB0byB0aGUgc3VidGxldHnCoG9mIHRoZQo+ICAgICBjYWxsYmFj
-ayBjb250ZXh0LgoKV2hpbGUgdGhhdCBpcyBhIHZhbGlkIHBvaW50LCBpdCBkb2Vzbid0IGV4cGxh
-aW4gd2h5IGV4aXN0aW5nCmZ1bmN0aW9uYWxpdHkgaXMgY2hhbmdlZC4KClBlcnNvbmFsbHksIEkg
-dGhpbmsgREVGTEFURV9PTl9PT00gc2hvdWxkIG5ldmVyIGhhdmUgYmVlbiBpbnRyb2R1Y2VkIChh
-dApsZWFzdCBub3QgaW4gdGhpcyBmb3JtKS4KCgotLSAKVGhhbmtzLAoKRGF2aWQgLyBkaGlsZGVu
-YgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVh
-bGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRp
-b24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3ZpcnR1YWxpemF0aW9u
+>>> I would say reverting probably makes sense. I'm not sure there is much
+>>> value to having a shrinker running deflation when you are actively trying
+>>> to increase the balloon. It would make more sense to wait until you are
+>>> actually about to start hitting oom.
+>>
+>> I think the shrinker makes sense for free page hinting feature
+>> (everything on free_page_list).
+>>
+>> So instead of only reverting, I think we should split it up and always
+>> register the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT and the OOM
+>> notifier (as before) for VIRTIO_BALLOON_F_MUST_TELL_HOST.
+
+s/VIRTIO_BALLOON_F_MUST_TELL_HOST/VIRTIO_BALLOON_F_DEFLATE_ON_OOM/
+
+:)
+
+>>
+>> (Of course, adapting what is being done in the shrinker and in the OOM
+>> notifier)
+> 
+> David,
+> 
+> Please keep me posted. I decided to adapt the same solution as the virtio
+> balloon for the VMware balloon. If the verdict is that this is damaging and
+> the OOM notifier should be used instead, I will submit patches to move to
+> OOM notifier as well.
+
+Will do. It all sounds sub-optimal to me at this point ... but I prefer
+the old variant where a simple "drop_slab()" won't deflate the balloon.
+That looks broken to me.
+
+-- 
+Thanks,
+
+David / dhildenb
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
