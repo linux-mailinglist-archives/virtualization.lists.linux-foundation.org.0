@@ -1,101 +1,70 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29E9D152400
-	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 01:16:12 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07B9B1524A2
+	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 03:03:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D276D8609F;
-	Wed,  5 Feb 2020 00:16:10 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7039187371;
+	Wed,  5 Feb 2020 02:03:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aig6brfSwVSP; Wed,  5 Feb 2020 00:16:09 +0000 (UTC)
+	with ESMTP id y0lDcuCD60xN; Wed,  5 Feb 2020 02:03:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 064B585F6D;
-	Wed,  5 Feb 2020 00:16:09 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id CA71D8738A;
+	Wed,  5 Feb 2020 02:03:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DD621C0174;
-	Wed,  5 Feb 2020 00:16:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9DC45C0177;
+	Wed,  5 Feb 2020 02:03:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6E52EC0174
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F09CBC0174
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 00:16:07 +0000 (UTC)
+ Wed,  5 Feb 2020 02:03:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 69E4985742
+ by hemlock.osuosl.org (Postfix) with ESMTP id DD9988715D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 00:16:07 +0000 (UTC)
+ Wed,  5 Feb 2020 02:03:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MYDbYVRgRWo7
+ with ESMTP id JGlovii6SJ7u
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 00:16:06 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-vs1-f45.google.com (mail-vs1-f45.google.com
- [209.85.217.45])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 354BC84E15
+ Wed,  5 Feb 2020 02:03:01 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 47F56862B7
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 00:16:06 +0000 (UTC)
-Received: by mail-vs1-f45.google.com with SMTP id n27so242768vsa.0
- for <virtualization@lists.linux-foundation.org>;
- Tue, 04 Feb 2020 16:16:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cGdCfLjRtDPXydcBWCp03hXWh5cpE7/XZ7Wz5DbtW14=;
- b=RFmrWc0U/dIAJtt5R/8dM7UgmOH85IdeAtBXWbC/zNcqG8LUeI4Npil5deg0kFOjbq
- RVtHNlAgzrp2RS0BIywygFp6FM3oM4kXfn0apGLkxQDeVr4n/Ep2ZA5FFKJuGr7Mg2ep
- VA3EPK/SDYhhc1thLIQeEvxRSHkFCdskCtI1j3GbSvJ7VPxRwERKA5xFZ9+eDrBqffwK
- byEwRZNtdWK/AD/clK4eUqw+hUN4vZZNnakb3nHrWd9ZMT3VrnySNX7Cm54PreEBmXAE
- VF/iPdA5CyfejvYwDG5SiF36r6KiZRcOx39cXhwL5+I/HmPb/lmwRjQf/cazHbnrHFRV
- Gtdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cGdCfLjRtDPXydcBWCp03hXWh5cpE7/XZ7Wz5DbtW14=;
- b=fM81m4QGyuFTIEccMPwHJsFyaGo77eXGe96rDqQQhU7Smqb03KLtuD0RlS4H/FFUHR
- 5UrKVQLVqUBNOZLKh5QEzU3abMaN/tw+pMbQ44dohOKZoDpQfr4HGFvtPZQc2mvkfAeg
- 5wt2RRo80DUGt9dFpymWbU0HhLvqqlSe/EKDMIAl+pTmpHbvePZ2/mWe9tbKOoO8YxWs
- LTzT3NUCPcK3Y5EJ518wrHSXWRhuvilyctF5VrRqO/7KRXfmH9ASD86XTHDpDULaPJp1
- ig6IWEE3s6KfKyToYq/oF+ugM3hrL99O0C8BLN5dkWl29MsyEq5ZsmOIBC0hSvM2oLnI
- QNgA==
-X-Gm-Message-State: APjAAAV6OiX24KaNQJzF/RFUVGXhzGbs0BmgeqQjsvn9cC0wtDN25VpW
- 7dTNx2xDXgEhExdqM9UwiuguV5ryPBfWNocIn+4OOA==
-X-Google-Smtp-Source: APXvYqzqd/nogo6x9tGOdPka5NWogfh1P/DbNOd+nF3DsA8pEZ/NaHAeyHMuOTz0Sa7OAdTcDaYQXpq5t8VuRkR4hQQ=
-X-Received: by 2002:a05:6102:72b:: with SMTP id
- u11mr20251693vsg.69.1580861765002; 
- Tue, 04 Feb 2020 16:16:05 -0800 (PST)
+ Wed,  5 Feb 2020 02:03:01 +0000 (UTC)
+X-Amp-Result: UNSCANNABLE
+X-Amp-File-Uploaded: False
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+ by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 04 Feb 2020 18:03:00 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,404,1574150400"; d="scan'208";a="231570076"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+ by orsmga003.jf.intel.com with ESMTP; 04 Feb 2020 18:02:55 -0800
+Date: Wed, 5 Feb 2020 10:02:47 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH] vhost: introduce vDPA based backend
+Message-ID: <20200205020247.GA368700@___>
+References: <20200131033651.103534-1-tiwei.bie@intel.com>
+ <7aab2892-bb19-a06a-a6d3-9c28bc4c3400@redhat.com>
 MIME-Version: 1.0
-References: <CAJuQAmpDUyve2S+oxp9tLUhuRcnddXnNztC5PmYOOCpY6c68xg@mail.gmail.com>
- <91270a68-ff48-88b0-219c-69801f0c252f@redhat.com>
- <CAJuQAmoaK0Swytu2Os_SQRfG5_LqiCPaDa9yatatm9MtfncNTQ@mail.gmail.com>
- <75d4594f-0864-5172-a0f8-f97affedb366@redhat.com>
- <286AC319A985734F985F78AFA26841F73E3F8A02@shsmsx102.ccr.corp.intel.com>
- <CAJuQAmqcayaNuG19fKCuux=YVO3+VcN-qrXvobgKMykogeMkzA@mail.gmail.com>
- <20200203080520-mutt-send-email-mst@kernel.org>
- <5ac131de8e3b7fc1fafd05a61feb5f6889aeb917.camel@linux.intel.com>
- <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
- <20200203120225-mutt-send-email-mst@kernel.org>
- <CAJuQAmqGA9mhzR5AQeMDtovJAh7y8khC3qUtLKx_e9RdL0wFJQ@mail.gmail.com>
- <74cc25a6-cefb-c580-8e59-5b76fb680bf4@redhat.com>
- <CAJuQAmpiVqnNt-vSkQh5Gg63QZ49_nuz4+VW2Jfwn51gWVdtfA@mail.gmail.com>
- <b809340d-7e86-caf6-bf12-db7bb8265045@redhat.com>
- <CAJuQAmqeKvc_k7pmDuC1b+w6yezzHoSxZJ8WW5sHVo1yMsRPfg@mail.gmail.com>
-In-Reply-To: <CAJuQAmqeKvc_k7pmDuC1b+w6yezzHoSxZJ8WW5sHVo1yMsRPfg@mail.gmail.com>
-Date: Tue, 4 Feb 2020 16:15:53 -0800
-Message-ID: <CAJuQAmpzP3V8p002UYCGyTGkMQ=B1B_=o-4y=jxv2LPkbADdAw@mail.gmail.com>
-Subject: Re: Balloon pressuring page cache
-To: David Hildenbrand <david@redhat.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, namit@vmware.com,
- David Rientjes <rientjes@google.com>,
- Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- Michal Hocko <mhocko@kernel.org>
+Content-Disposition: inline
+In-Reply-To: <7aab2892-bb19-a06a-a6d3-9c28bc4c3400@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: kvm@vger.kernel.org, mst@redhat.com, mhabets@solarflare.com,
+ virtualization@lists.linux-foundation.org, jgg@mellanox.com,
+ rob.miller@broadcom.com, lulu@redhat.com, maxime.coquelin@redhat.com,
+ hch@infradead.org, eperezma@redhat.com, haotian.wang@sifive.com,
+ shahafs@mellanox.com, parav@mellanox.com, jiri@mellanox.com,
+ zhihong.wang@intel.com, netdev@vger.kernel.org, rdunlap@infradead.org,
+ linux-kernel@vger.kernel.org, hanand@xilinx.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,271 +76,325 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Tyler Sanderson via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Tyler Sanderson <tysand@google.com>
-Content-Type: multipart/mixed; boundary="===============5999778019002158300=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============5999778019002158300==
-Content-Type: multipart/alternative; boundary="000000000000f193dd059dc90f7b"
-
---000000000000f193dd059dc90f7b
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Feb 4, 2020 at 3:58 PM Tyler Sanderson <tysand@google.com> wrote:
-
->
->
-> On Tue, Feb 4, 2020 at 11:17 AM David Hildenbrand <david@redhat.com>
-> wrote:
->
->> On 04.02.20 19:52, Tyler Sanderson wrote:
->> >
->> >
->> > On Tue, Feb 4, 2020 at 12:29 AM David Hildenbrand <david@redhat.com
->> > <mailto:david@redhat.com>> wrote:
->> >
->> >     On 03.02.20 21:32, Tyler Sanderson wrote:
->> >     > There were apparently good reasons for moving away from OOM
->> notifier
->> >     > callback:
->> >     > https://lkml.org/lkml/2018/7/12/314
->> >     > https://lkml.org/lkml/2018/8/2/322
->> >     >
->> >     > In particular the OOM notifier is worse than the shrinker because:
->> >
->> >     The issue is that DEFLATE_ON_OOM is under-specified.
->> >
->> >     >
->> >     >  1. It is last-resort, which means the system has already gone
->> through
->> >     >     heroics to prevent OOM. Those heroic reclaim efforts are
->> expensive
->> >     >     and impact application performance.
->> >
->> >     That's *exactly* what "deflate on OOM" suggests.
->> >
->> >
->> > It seems there are some use cases where "deflate on OOM" is desired and
->> > others where "deflate on pressure" is desired.
->> > This suggests adding a new feature bit "DEFLATE_ON_PRESSURE" that
->> > registers the shrinker, and reverting DEFLATE_ON_OOM to use the OOM
->> > notifier callback.
->> >
->> > This lets users configure the balloon for their use case.
->>
->> You want the old behavior back, so why should we introduce a new one? Or
->> am I missing something? (you did want us to revert to old handling, no?)
->>
-> Reverting actually doesn't help me because this has been the behavior
-> since Linux 4.19 which is already widely in use. So my device
-> implementation needs to handle the shrinker behavior anyways. I started
-> this conversation to ask what the intended device implementation was.
->
-I should clarify: reverting _would_ improve guest performance under my
-implementation. So I guess I'm in favor. But I think we should consider
-reasonable alternative implementations. I think this suggests adding a new
-feature bit to allow device implementations to choose.
-
-
-> I think there are reasonable device implementations that would prefer the
-> shrinker behavior (it turns out that mine doesn't).
-> For example, an implementation that slowly inflates the balloon for the
-> purpose of memory overcommit. It might leave the balloon inflated and
-> expect any memory pressure (including page cache usage) to deflate the
-> balloon as a way to dynamically right-size the balloon.
->
-> Two reasons I didn't go with the above implementation:
-> 1. I need to support guests before Linux 4.19 which don't have the
-> shrinker behavior.
-> 2. Memory in the balloon does not appear as "available" in /proc/meminfo
-> even though it is freeable. This is confusing to users, but isn't a deal
-> breaker.
->
-> If we added a DEFLATE_ON_PRESSURE feature bit that indicated shrinker API
-> support then that would resolve reason #1 (ideally we would backport the
-> bit to 4.19).
->
-> In any case, the shrinker behavior when pressuring page cache is more of
-> an inefficiency than a bug. It's not clear to me that it necessitates
-> reverting. If there were/are reasons to be on the shrinker interface then I
-> think those carry similar weight as the problem itself.
->
->
->>
->> I consider virtio-balloon to this very day a big hack. And I don't see
->> it getting better with new config knobs. Having that said, the
->> technologies that are candidates to replace it (free page reporting,
->> taming the guest page cache, etc.) are still not ready - so we'll have
->> to stick with it for now :( .
->>
->> >
->> > I'm actually not sure how you would safely do memory overcommit without
->> > DEFLATE_ON_OOM. So I think it unlocks a huge use case.
->>
->> Using better suited technologies that are not ready yet (well, some form
->> of free page reporting is available under IBM z already but in a
->> proprietary form) ;) Anyhow, I remember that DEFLATE_ON_OOM only makes
->> it less likely to crash your guest, but not that you are safe to squeeze
->> the last bit out of your guest VM.
->>
-> Can you elaborate on the danger of DEFLATE_ON_OOM? I haven't seen any
-> problems in testing but I'd really like to know about the dangers.
-> Is there a difference in safety between the OOM notifier callback and the
-> shrinker API?
->
->
->>
->> --
->> Thanks,
->>
->> David / dhildenb
->>
->>
-
---000000000000f193dd059dc90f7b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Feb 4, 2020 at 3:58 PM Tyler =
-Sanderson &lt;<a href=3D"mailto:tysand@google.com">tysand@google.com</a>&gt=
-; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div di=
-r=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote"><div di=
-r=3D"ltr" class=3D"gmail_attr">On Tue, Feb 4, 2020 at 11:17 AM David Hilden=
-brand &lt;<a href=3D"mailto:david@redhat.com" target=3D"_blank">david@redha=
-t.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
-rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
-1ex">On 04.02.20 19:52, Tyler Sanderson wrote:<br>
-&gt; <br>
-&gt; <br>
-&gt; On Tue, Feb 4, 2020 at 12:29 AM David Hildenbrand &lt;<a href=3D"mailt=
-o:david@redhat.com" target=3D"_blank">david@redhat.com</a><br>
-&gt; &lt;mailto:<a href=3D"mailto:david@redhat.com" target=3D"_blank">david=
-@redhat.com</a>&gt;&gt; wrote:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0On 03.02.20 21:32, Tyler Sanderson wrote:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt; There were apparently good reasons for moving =
-away from OOM notifier<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt; callback:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt; <a href=3D"https://lkml.org/lkml/2018/7/12/314=
-" rel=3D"noreferrer" target=3D"_blank">https://lkml.org/lkml/2018/7/12/314<=
-/a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt; <a href=3D"https://lkml.org/lkml/2018/8/2/322"=
- rel=3D"noreferrer" target=3D"_blank">https://lkml.org/lkml/2018/8/2/322</a=
-><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt; In particular the OOM notifier is worse than t=
-he shrinker because:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0The issue is that DEFLATE_ON_OOM is under-specified=
-.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt;=C2=A0 1. It is last-resort, which means the sy=
-stem has already gone through<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt;=C2=A0 =C2=A0 =C2=A0heroics to prevent OOM. Tho=
-se heroic reclaim efforts are expensive<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&gt;=C2=A0 =C2=A0 =C2=A0and impact application perf=
-ormance.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0That&#39;s *exactly* what &quot;deflate on OOM&quot=
-; suggests.<br>
-&gt; <br>
-&gt; <br>
-&gt; It seems there are some use cases where &quot;deflate on OOM&quot; is =
-desired and<br>
-&gt; others where &quot;deflate on pressure&quot; is desired.<br>
-&gt; This suggests adding a new feature bit &quot;DEFLATE_ON_PRESSURE&quot;=
- that<br>
-&gt; registers the shrinker, and reverting DEFLATE_ON_OOM to use the OOM<br=
->
-&gt; notifier callback.<br>
-&gt; <br>
-&gt; This lets users configure the balloon for their use case.<br>
-<br>
-You want the old behavior back, so why should we introduce a new one? Or<br=
->
-am I missing something? (you did want us to revert to old handling, no?)<br=
-></blockquote><div>Reverting actually doesn&#39;t help me because this has =
-been the behavior since Linux 4.19 which is already widely in use. So my de=
-vice implementation needs to handle the shrinker behavior anyways. I starte=
-d this conversation to ask what the intended device implementation was.</di=
-v></div></div></blockquote><div>I should clarify: reverting _would_ improve=
- guest=C2=A0performance under my implementation. So I guess I&#39;m in favo=
-r. But I think we should consider reasonable alternative implementations. I=
- think this suggests adding a new feature bit to allow device implementatio=
-ns to choose.</div><div><br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex"><div dir=3D"ltr"><div class=3D"gmail_quote"><div><br></div><div>=
-I think there are reasonable device implementations that would prefer the s=
-hrinker=C2=A0behavior (it turns out that mine doesn&#39;t).<br></div><div>F=
-or example, an implementation that slowly inflates the balloon for the purp=
-ose of memory overcommit. It might leave the balloon inflated and expect an=
-y memory pressure (including page cache usage) to deflate the balloon as a =
-way to dynamically right-size the balloon.</div><div><br></div><div>Two rea=
-sons I didn&#39;t go with the above implementation:</div><div>1. I need to =
-support guests before Linux 4.19 which don&#39;t have the shrinker behavior=
-.</div><div>2. Memory in the balloon does not appear as &quot;available&quo=
-t; in /proc/meminfo even though it is freeable. This is confusing to users,=
- but isn&#39;t a deal breaker.</div><div><div><br></div><div>If we added a =
-DEFLATE_ON_PRESSURE feature bit that indicated shrinker API support then th=
-at would resolve reason=C2=A0#1 (ideally we would backport the bit to 4.19)=
-.</div><div><br></div><div>In any case, the shrinker=C2=A0behavior when pre=
-ssuring page cache is more of an inefficiency than a bug. It&#39;s not clea=
-r to me that it necessitates reverting. If there were/are reasons to be on =
-the shrinker=C2=A0interface then I think those carry similar weight as the =
-problem itself.</div></div><div>=C2=A0<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">
-<br>
-I consider virtio-balloon to this very day a big hack. And I don&#39;t see<=
-br>
-it getting better with new config knobs. Having that said, the<br>
-technologies that are candidates to replace it (free page reporting,<br>
-taming the guest page cache, etc.) are still not ready - so we&#39;ll have<=
-br>
-to stick with it for now :( .<br>
-<br>
-&gt; <br>
-&gt; I&#39;m actually not sure how you would safely do memory overcommit wi=
-thout<br>
-&gt; DEFLATE_ON_OOM. So I think it unlocks a huge use case.<br>
-<br>
-Using better suited technologies that are not ready yet (well, some form<br=
->
-of free page reporting is available under IBM z already but in a<br>
-proprietary form) ;) Anyhow, I remember that DEFLATE_ON_OOM only makes<br>
-it less likely to crash your guest, but not that you are safe to squeeze<br=
->
-the last bit out of your guest VM.<br></blockquote><div>Can you elaborate o=
-n the danger of DEFLATE_ON_OOM? I haven&#39;t seen any problems in testing =
-but I&#39;d really like to know about the dangers.</div><div>Is there a dif=
-ference in safety between the OOM notifier callback and the shrinker API?</=
-div><div>=C2=A0<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
--- <br>
-Thanks,<br>
-<br>
-David / dhildenb<br>
-<br>
-</blockquote></div></div>
-</blockquote></div></div>
-
---000000000000f193dd059dc90f7b--
-
---===============5999778019002158300==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============5999778019002158300==--
+T24gVHVlLCBGZWIgMDQsIDIwMjAgYXQgMTE6MzA6MTFBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiBPbiAyMDIwLzEvMzEg5LiK5Y2IMTE6MzYsIFRpd2VpIEJpZSB3cm90ZToKPiA+IFRoaXMg
+cGF0Y2ggaW50cm9kdWNlcyBhIHZEUEEgYmFzZWQgdmhvc3QgYmFja2VuZC4gVGhpcwo+ID4gYmFj
+a2VuZCBpcyBidWlsdCBvbiB0b3Agb2YgdGhlIHNhbWUgaW50ZXJmYWNlIGRlZmluZWQKPiA+IGlu
+IHZpcnRpby12RFBBIGFuZCBwcm92aWRlcyBhIGdlbmVyaWMgdmhvc3QgaW50ZXJmYWNlCj4gPiBm
+b3IgdXNlcnNwYWNlIHRvIGFjY2VsZXJhdGUgdGhlIHZpcnRpbyBkZXZpY2VzIGluIGd1ZXN0Lgo+
+ID4gCj4gPiBUaGlzIGJhY2tlbmQgaXMgaW1wbGVtZW50ZWQgYXMgYSB2RFBBIGRldmljZSBkcml2
+ZXIgb24KPiA+IHRvcCBvZiB0aGUgc2FtZSBvcHMgdXNlZCBpbiB2aXJ0aW8tdkRQQS4gSXQgd2ls
+bCBjcmVhdGUKPiA+IGNoYXIgZGV2aWNlIGVudHJ5IG5hbWVkIHZob3N0LXZkcGEvJHZkcGFfZGV2
+aWNlX2luZGV4Cj4gPiBmb3IgdXNlcnNwYWNlIHRvIHVzZS4gVXNlcnNwYWNlIGNhbiB1c2Ugdmhv
+c3QgaW9jdGxzIG9uCj4gPiB0b3Agb2YgdGhpcyBjaGFyIGRldmljZSB0byBzZXR1cCB0aGUgYmFj
+a2VuZC4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogVGl3ZWkgQmllIDx0aXdlaS5iaWVAaW50ZWwu
+Y29tPgo+ID4gLS0tCj4gPiBUaGlzIHBhdGNoIGRlcGVuZHMgb24gYmVsb3cgc2VyaWVzOgo+ID4g
+aHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMjAvMS8xNi8zNTMKPiA+IAo+ID4gUGxlYXNlIG5vdGUg
+dGhhdCBfU0VUX01FTV9UQUJMRSBpc24ndCBmdWxseSBzdXBwb3J0ZWQgeWV0Lgo+ID4gQ29tbWVu
+dHMgd291bGQgYmUgYXBwcmVjaWF0ZWQhCj4gPiAKPiA+IENoYW5nZXMgc2luY2UgbGFzdCBwYXRj
+aCAoaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMTkvMTEvMTgvMTA2OCkKPiA+IC0gU3dpdGNoIHRv
+IHRoZSB2RFBBIGJ1czsKPiA+IC0gU3dpdGNoIHRvIHZob3N0J3Mgb3duIGNoYXJkZXY7Cj4gPiAK
+PiA+ICAgZHJpdmVycy92aG9zdC9LY29uZmlnICAgICAgICAgICAgfCAgMTIgKwo+ID4gICBkcml2
+ZXJzL3Zob3N0L01ha2VmaWxlICAgICAgICAgICB8ICAgMyArCj4gPiAgIGRyaXZlcnMvdmhvc3Qv
+dmRwYS5jICAgICAgICAgICAgIHwgNzA1ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysK
+PiA+ICAgaW5jbHVkZS91YXBpL2xpbnV4L3Zob3N0LmggICAgICAgfCAgMjEgKwo+ID4gICBpbmNs
+dWRlL3VhcGkvbGludXgvdmhvc3RfdHlwZXMuaCB8ICAgOCArCj4gPiAgIDUgZmlsZXMgY2hhbmdl
+ZCwgNzQ5IGluc2VydGlvbnMoKykKPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvdmhv
+c3QvdmRwYS5jCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L0tjb25maWcgYi9k
+cml2ZXJzL3Zob3N0L0tjb25maWcKPiA+IGluZGV4IGYyMWM0NWFhNWUwNy4uMTNlNmE5NGQwMjQz
+IDEwMDY0NAo+ID4gLS0tIGEvZHJpdmVycy92aG9zdC9LY29uZmlnCj4gPiArKysgYi9kcml2ZXJz
+L3Zob3N0L0tjb25maWcKPiA+IEBAIC0zNCw2ICszNCwxOCBAQCBjb25maWcgVkhPU1RfVlNPQ0sK
+PiA+ICAgCVRvIGNvbXBpbGUgdGhpcyBkcml2ZXIgYXMgYSBtb2R1bGUsIGNob29zZSBNIGhlcmU6
+IHRoZSBtb2R1bGUgd2lsbCBiZSBjYWxsZWQKPiA+ICAgCXZob3N0X3Zzb2NrLgo+ID4gK2NvbmZp
+ZyBWSE9TVF9WRFBBCj4gPiArCXRyaXN0YXRlICJWaG9zdCBkcml2ZXIgZm9yIHZEUEEgYmFzZWQg
+YmFja2VuZCIKPiA+ICsJZGVwZW5kcyBvbiBFVkVOVEZEICYmIFZEUEEKPiA+ICsJc2VsZWN0IFZI
+T1NUCj4gPiArCWRlZmF1bHQgbgo+ID4gKwktLS1oZWxwLS0tCj4gPiArCVRoaXMga2VybmVsIG1v
+ZHVsZSBjYW4gYmUgbG9hZGVkIGluIGhvc3Qga2VybmVsIHRvIGFjY2VsZXJhdGUKPiA+ICsJZ3Vl
+c3QgdmlydGlvIGRldmljZXMgd2l0aCB0aGUgdkRQQSBiYXNlZCBiYWNrZW5kcy4KPiA+ICsKPiA+
+ICsJVG8gY29tcGlsZSB0aGlzIGRyaXZlciBhcyBhIG1vZHVsZSwgY2hvb3NlIE0gaGVyZTogdGhl
+IG1vZHVsZQo+ID4gKwl3aWxsIGJlIGNhbGxlZCB2aG9zdF92ZHBhLgo+ID4gKwo+ID4gICBjb25m
+aWcgVkhPU1QKPiA+ICAgCXRyaXN0YXRlCj4gPiAgICAgICAgICAgZGVwZW5kcyBvbiBWSE9TVF9J
+T1RMQgo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmhvc3QvTWFrZWZpbGUgYi9kcml2ZXJzL3Zo
+b3N0L01ha2VmaWxlCj4gPiBpbmRleCBkZjk5NzU2ZmJiMjYuLmE2NWU5ZjRhMmMwYSAxMDA2NDQK
+PiA+IC0tLSBhL2RyaXZlcnMvdmhvc3QvTWFrZWZpbGUKPiA+ICsrKyBiL2RyaXZlcnMvdmhvc3Qv
+TWFrZWZpbGUKPiA+IEBAIC0xMCw2ICsxMCw5IEBAIHZob3N0X3Zzb2NrLXkgOj0gdnNvY2subwo+
+ID4gICBvYmotJChDT05GSUdfVkhPU1RfUklORykgKz0gdnJpbmdoLm8KPiA+ICtvYmotJChDT05G
+SUdfVkhPU1RfVkRQQSkgKz0gdmhvc3RfdmRwYS5vCj4gPiArdmhvc3RfdmRwYS15IDo9IHZkcGEu
+bwo+ID4gKwo+ID4gICBvYmotJChDT05GSUdfVkhPU1QpCSs9IHZob3N0Lm8KPiA+ICAgb2JqLSQo
+Q09ORklHX1ZIT1NUX0lPVExCKSArPSB2aG9zdF9pb3RsYi5vCj4gPiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy92aG9zdC92ZHBhLmMgYi9kcml2ZXJzL3Zob3N0L3ZkcGEuYwo+ID4gbmV3IGZpbGUgbW9k
+ZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAwMDAwMC4uNjMxZDk5NGQzN2FjCj4gPiAtLS0gL2Rl
+di9udWxsCj4gPiArKysgYi9kcml2ZXJzL3Zob3N0L3ZkcGEuYwo+ID4gQEAgLTAsMCArMSw3MDUg
+QEAKPiA+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMAo+ID4gKy8qCj4gPiAr
+ICogQ29weXJpZ2h0IChDKSAyMDE4LTIwMjAgSW50ZWwgQ29ycG9yYXRpb24uCj4gPiArICoKPiA+
+ICsgKiBBdXRob3I6IFRpd2VpIEJpZSA8dGl3ZWkuYmllQGludGVsLmNvbT4KPiA+ICsgKgo+ID4g
+KyAqIFRoYW5rcyB0byBKYXNvbiBXYW5nIGFuZCBNaWNoYWVsIFMuIFRzaXJraW4gZm9yIHRoZSB2
+YWx1YWJsZQo+ID4gKyAqIGNvbW1lbnRzIGFuZCBzdWdnZXN0aW9ucy4gIEFuZCB0aGFua3MgdG8g
+Q3VubWluZyBMaWFuZyBhbmQKPiA+ICsgKiBaaGlob25nIFdhbmcgZm9yIGFsbCB0aGVpciBzdXBw
+b3J0cy4KPiA+ICsgKi8KPiA+ICsKPiA+ICsjaW5jbHVkZSA8bGludXgva2VybmVsLmg+Cj4gPiAr
+I2luY2x1ZGUgPGxpbnV4L21vZHVsZS5oPgo+ID4gKyNpbmNsdWRlIDxsaW51eC9jZGV2Lmg+Cj4g
+PiArI2luY2x1ZGUgPGxpbnV4L2RldmljZS5oPgo+ID4gKyNpbmNsdWRlIDxsaW51eC91dWlkLmg+
+Cj4gPiArI2luY2x1ZGUgPGxpbnV4L3ZkcGEuaD4KPiA+ICsjaW5jbHVkZSA8bGludXgvbm9zcGVj
+Lmg+Cj4gPiArI2luY2x1ZGUgPGxpbnV4L3Zob3N0Lmg+Cj4gPiArI2luY2x1ZGUgPGxpbnV4L3Zp
+cnRpb19uZXQuaD4KPiA+ICsKPiA+ICsjaW5jbHVkZSAidmhvc3QuaCIKPiA+ICsKPiA+ICtlbnVt
+IHsKPiA+ICsJVkhPU1RfVkRQQV9GRUFUVVJFUyA9Cj4gPiArCQkoMVVMTCA8PCBWSVJUSU9fRl9O
+T1RJRllfT05fRU1QVFkpIHwKPiA+ICsJCSgxVUxMIDw8IFZJUlRJT19GX0FOWV9MQVlPVVQpIHwK
+PiA+ICsJCSgxVUxMIDw8IFZJUlRJT19GX1ZFUlNJT05fMSkgfAo+ID4gKwkJKDFVTEwgPDwgVklS
+VElPX0ZfSU9NTVVfUExBVEZPUk0pIHwKPiA+ICsJCSgxVUxMIDw8IFZJUlRJT19GX1JJTkdfUEFD
+S0VEKSB8Cj4gPiArCQkoMVVMTCA8PCBWSVJUSU9fRl9PUkRFUl9QTEFURk9STSkgfAo+ID4gKwkJ
+KDFVTEwgPDwgVklSVElPX1JJTkdfRl9JTkRJUkVDVF9ERVNDKSB8Cj4gPiArCQkoMVVMTCA8PCBW
+SVJUSU9fUklOR19GX0VWRU5UX0lEWCksCj4gPiArCj4gPiArCVZIT1NUX1ZEUEFfTkVUX0ZFQVRV
+UkVTID0gVkhPU1RfVkRQQV9GRUFUVVJFUyB8Cj4gPiArCQkoMVVMTCA8PCBWSVJUSU9fTkVUX0Zf
+Q1NVTSkgfAo+ID4gKwkJKDFVTEwgPDwgVklSVElPX05FVF9GX0dVRVNUX0NTVU0pIHwKPiA+ICsJ
+CSgxVUxMIDw8IFZJUlRJT19ORVRfRl9NVFUpIHwKPiA+ICsJCSgxVUxMIDw8IFZJUlRJT19ORVRf
+Rl9NQUMpIHwKPiA+ICsJCSgxVUxMIDw8IFZJUlRJT19ORVRfRl9HVUVTVF9UU080KSB8Cj4gPiAr
+CQkoMVVMTCA8PCBWSVJUSU9fTkVUX0ZfR1VFU1RfVFNPNikgfAo+ID4gKwkJKDFVTEwgPDwgVklS
+VElPX05FVF9GX0dVRVNUX0VDTikgfAo+ID4gKwkJKDFVTEwgPDwgVklSVElPX05FVF9GX0dVRVNU
+X1VGTykgfAo+ID4gKwkJKDFVTEwgPDwgVklSVElPX05FVF9GX0hPU1RfVFNPNCkgfAo+ID4gKwkJ
+KDFVTEwgPDwgVklSVElPX05FVF9GX0hPU1RfVFNPNikgfAo+ID4gKwkJKDFVTEwgPDwgVklSVElP
+X05FVF9GX0hPU1RfRUNOKSB8Cj4gPiArCQkoMVVMTCA8PCBWSVJUSU9fTkVUX0ZfSE9TVF9VRk8p
+IHwKPiA+ICsJCSgxVUxMIDw8IFZJUlRJT19ORVRfRl9NUkdfUlhCVUYpIHwKPiA+ICsJCSgxVUxM
+IDw8IFZJUlRJT19ORVRfRl9TVEFUVVMpIHwKPiA+ICsJCSgxVUxMIDw8IFZJUlRJT19ORVRfRl9T
+UEVFRF9EVVBMRVgpLAo+ID4gK307Cj4gPiArCj4gPiArLyogQ3VycmVudGx5LCBvbmx5IG5ldHdv
+cmsgYmFja2VuZCB3L28gbXVsdGlxdWV1ZSBpcyBzdXBwb3J0ZWQuICovCj4gPiArI2RlZmluZSBW
+SE9TVF9WRFBBX1ZRX01BWAkyCj4gPiArCj4gPiArc3RydWN0IHZob3N0X3ZkcGEgewo+ID4gKwkv
+KiBUaGUgbG9jayBpcyB0byBwcm90ZWN0IHRoaXMgc3RydWN0dXJlLiAqLwo+ID4gKwlzdHJ1Y3Qg
+bXV0ZXggbXV0ZXg7Cj4gPiArCXN0cnVjdCB2aG9zdF9kZXYgdmRldjsKPiA+ICsJc3RydWN0IHZo
+b3N0X3ZpcnRxdWV1ZSAqdnFzOwo+ID4gKwlzdHJ1Y3QgdmRwYV9kZXZpY2UgKnZkcGE7Cj4gPiAr
+CXN0cnVjdCBkZXZpY2UgKmRldjsKPiA+ICsJYXRvbWljX3Qgb3BlbmVkOwo+ID4gKwlpbnQgbnZx
+czsKPiA+ICsJaW50IHZpcnRpb19pZDsKPiA+ICsJaW50IG1pbm9yOwo+ID4gK307Cj4gPiArCj4g
+PiArc3RhdGljIHN0cnVjdCB7Cj4gPiArCS8qIFRoZSBsb2NrIGlzIHRvIHByb3RlY3QgdGhpcyBz
+dHJ1Y3R1cmUuICovCj4gPiArCXN0cnVjdCBtdXRleCBtdXRleDsKPiA+ICsJc3RydWN0IGNsYXNz
+ICpjbGFzczsKPiA+ICsJc3RydWN0IGlkciBpZHI7Cj4gPiArCXN0cnVjdCBjZGV2IGNkZXY7Cj4g
+PiArCWRldl90IGRldnQ7Cj4gPiArCXdhaXRfcXVldWVfaGVhZF90IHJlbGVhc2VfcTsKPiA+ICt9
+IHZob3N0X3ZkcGE7Cj4gPiArCj4gPiArc3RhdGljIGNvbnN0IHU2NCB2aG9zdF92ZHBhX2ZlYXR1
+cmVzW10gPSB7Cj4gPiArCVtWSVJUSU9fSURfTkVUXSA9IFZIT1NUX1ZEUEFfTkVUX0ZFQVRVUkVT
+LAo+ID4gK307Cj4gPiArCj4gPiArc3RhdGljIGludCB2aG9zdF92ZHBhX2FsbG9jX21pbm9yKHN0
+cnVjdCB2aG9zdF92ZHBhICp2KQo+ID4gK3sKPiA+ICsJcmV0dXJuIGlkcl9hbGxvYygmdmhvc3Rf
+dmRwYS5pZHIsIHYsIDAsIE1JTk9STUFTSyArIDEsCj4gPiArCQkJIEdGUF9LRVJORUwpOwo+ID4g
+K30KPiA+ICsKPiA+ICtzdGF0aWMgdm9pZCB2aG9zdF92ZHBhX2ZyZWVfbWlub3IoaW50IG1pbm9y
+KQo+ID4gK3sKPiA+ICsJaWRyX3JlbW92ZSgmdmhvc3RfdmRwYS5pZHIsIG1pbm9yKTsKPiA+ICt9
+Cj4gPiArCj4gPiArc3RhdGljIHN0cnVjdCB2aG9zdF92ZHBhICp2aG9zdF92ZHBhX2dldF9mcm9t
+X21pbm9yKGludCBtaW5vcikKPiA+ICt7Cj4gPiArCXN0cnVjdCB2aG9zdF92ZHBhICp2Owo+ID4g
+Kwo+ID4gKwltdXRleF9sb2NrKCZ2aG9zdF92ZHBhLm11dGV4KTsKPiA+ICsJdiA9IGlkcl9maW5k
+KCZ2aG9zdF92ZHBhLmlkciwgbWlub3IpOwo+ID4gKwltdXRleF91bmxvY2soJnZob3N0X3ZkcGEu
+bXV0ZXgpOwo+ID4gKwo+ID4gKwlyZXR1cm4gdjsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZv
+aWQgaGFuZGxlX3ZxX2tpY2soc3RydWN0IHZob3N0X3dvcmsgKndvcmspCj4gPiArewo+ID4gKwlz
+dHJ1Y3Qgdmhvc3RfdmlydHF1ZXVlICp2cSA9IGNvbnRhaW5lcl9vZih3b3JrLCBzdHJ1Y3Qgdmhv
+c3RfdmlydHF1ZXVlLAo+ID4gKwkJCQkJCSAgcG9sbC53b3JrKTsKPiA+ICsJc3RydWN0IHZob3N0
+X3ZkcGEgKnYgPSBjb250YWluZXJfb2YodnEtPmRldiwgc3RydWN0IHZob3N0X3ZkcGEsIHZkZXYp
+Owo+ID4gKwljb25zdCBzdHJ1Y3QgdmRwYV9jb25maWdfb3BzICpvcHMgPSB2LT52ZHBhLT5jb25m
+aWc7Cj4gPiArCj4gPiArCW9wcy0+a2lja192cSh2LT52ZHBhLCB2cSAtIHYtPnZxcyk7Cj4gPiAr
+fQo+ID4gKwo+ID4gK3N0YXRpYyBpcnFyZXR1cm5fdCB2aG9zdF92ZHBhX3ZpcnRxdWV1ZV9jYih2
+b2lkICpwcml2YXRlKQo+ID4gK3sKPiA+ICsJc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAqdnEgPSBw
+cml2YXRlOwo+ID4gKwlzdHJ1Y3QgZXZlbnRmZF9jdHggKmNhbGxfY3R4ID0gdnEtPmNhbGxfY3R4
+Owo+ID4gKwo+ID4gKwlpZiAoY2FsbF9jdHgpCj4gPiArCQlldmVudGZkX3NpZ25hbChjYWxsX2N0
+eCwgMSk7Cj4gPiArCj4gPiArCXJldHVybiBJUlFfSEFORExFRDsKPiA+ICt9Cj4gPiArCj4gPiAr
+c3RhdGljIHZvaWQgdmhvc3RfdmRwYV9yZXNldChzdHJ1Y3Qgdmhvc3RfdmRwYSAqdikKPiA+ICt7
+Cj4gPiArCXN0cnVjdCB2ZHBhX2RldmljZSAqdmRwYSA9IHYtPnZkcGE7Cj4gPiArCWNvbnN0IHN0
+cnVjdCB2ZHBhX2NvbmZpZ19vcHMgKm9wcyA9IHZkcGEtPmNvbmZpZzsKPiA+ICsKPiA+ICsJb3Bz
+LT5zZXRfc3RhdHVzKHZkcGEsIDApOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgbG9uZyB2aG9z
+dF92ZHBhX2dldF9kZXZpY2VfaWQoc3RydWN0IHZob3N0X3ZkcGEgKnYsIHU4IF9fdXNlciAqYXJn
+cCkKPiA+ICt7Cj4gPiArCXN0cnVjdCB2ZHBhX2RldmljZSAqdmRwYSA9IHYtPnZkcGE7Cj4gPiAr
+CWNvbnN0IHN0cnVjdCB2ZHBhX2NvbmZpZ19vcHMgKm9wcyA9IHZkcGEtPmNvbmZpZzsKPiA+ICsJ
+dTMyIGRldmljZV9pZDsKPiA+ICsKPiA+ICsJZGV2aWNlX2lkID0gb3BzLT5nZXRfZGV2aWNlX2lk
+KHZkcGEpOwo+ID4gKwo+ID4gKwlpZiAoY29weV90b191c2VyKGFyZ3AsICZkZXZpY2VfaWQsIHNp
+emVvZihkZXZpY2VfaWQpKSkKPiA+ICsJCXJldHVybiAtRUZBVUxUOwo+ID4gKwo+ID4gKwlyZXR1
+cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGxvbmcgdmhvc3RfdmRwYV9nZXRfc3RhdHVz
+KHN0cnVjdCB2aG9zdF92ZHBhICp2LCB1OCBfX3VzZXIgKnN0YXR1c3ApCj4gPiArewo+ID4gKwlz
+dHJ1Y3QgdmRwYV9kZXZpY2UgKnZkcGEgPSB2LT52ZHBhOwo+ID4gKwljb25zdCBzdHJ1Y3QgdmRw
+YV9jb25maWdfb3BzICpvcHMgPSB2ZHBhLT5jb25maWc7Cj4gPiArCXU4IHN0YXR1czsKPiA+ICsK
+PiA+ICsJc3RhdHVzID0gb3BzLT5nZXRfc3RhdHVzKHZkcGEpOwo+ID4gKwo+ID4gKwlpZiAoY29w
+eV90b191c2VyKHN0YXR1c3AsICZzdGF0dXMsIHNpemVvZihzdGF0dXMpKSkKPiA+ICsJCXJldHVy
+biAtRUZBVUxUOwo+ID4gKwo+ID4gKwlyZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGlj
+IGxvbmcgdmhvc3RfdmRwYV9zZXRfc3RhdHVzKHN0cnVjdCB2aG9zdF92ZHBhICp2LCB1OCBfX3Vz
+ZXIgKnN0YXR1c3ApCj4gPiArewo+ID4gKwlzdHJ1Y3QgdmRwYV9kZXZpY2UgKnZkcGEgPSB2LT52
+ZHBhOwo+ID4gKwljb25zdCBzdHJ1Y3QgdmRwYV9jb25maWdfb3BzICpvcHMgPSB2ZHBhLT5jb25m
+aWc7Cj4gPiArCXU4IHN0YXR1czsKPiA+ICsKPiA+ICsJaWYgKGNvcHlfZnJvbV91c2VyKCZzdGF0
+dXMsIHN0YXR1c3AsIHNpemVvZihzdGF0dXMpKSkKPiA+ICsJCXJldHVybiAtRUZBVUxUOwo+ID4g
+Kwo+ID4gKwkvKgo+ID4gKwkgKiBVc2Vyc3BhY2Ugc2hvdWxkbid0IHJlbW92ZSBzdGF0dXMgYml0
+cyB1bmxlc3MgcmVzZXQgdGhlCj4gPiArCSAqIHN0YXR1cyB0byAwLgo+ID4gKwkgKi8KPiA+ICsJ
+aWYgKHN0YXR1cyAhPSAwICYmIChvcHMtPmdldF9zdGF0dXModmRwYSkgJiB+c3RhdHVzKSAhPSAw
+KQo+ID4gKwkJcmV0dXJuIC1FSU5WQUw7Cj4gPiArCj4gPiArCW9wcy0+c2V0X3N0YXR1cyh2ZHBh
+LCBzdGF0dXMpOwo+ID4gKwo+ID4gKwlyZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGlj
+IGludCB2aG9zdF92ZHBhX2NvbmZpZ192YWxpZGF0ZShzdHJ1Y3Qgdmhvc3RfdmRwYSAqdiwKPiA+
+ICsJCQkJICAgICAgc3RydWN0IHZob3N0X3ZkcGFfY29uZmlnICpjKQo+ID4gK3sKPiA+ICsJbG9u
+ZyBzaXplID0gMDsKPiA+ICsKPiA+ICsJc3dpdGNoICh2LT52aXJ0aW9faWQpIHsKPiA+ICsJY2Fz
+ZSBWSVJUSU9fSURfTkVUOgo+ID4gKwkJc2l6ZSA9IHNpemVvZihzdHJ1Y3QgdmlydGlvX25ldF9j
+b25maWcpOwo+ID4gKwkJYnJlYWs7Cj4gPiArCX0KPiA+ICsKPiA+ICsJaWYgKGMtPmxlbiA9PSAw
+KQo+ID4gKwkJcmV0dXJuIC1FSU5WQUw7Cj4gPiArCj4gPiArCWlmIChjLT5sZW4gPiBzaXplIC0g
+Yy0+b2ZmKQo+ID4gKwkJcmV0dXJuIC1FMkJJRzsKPiA+ICsKPiA+ICsJcmV0dXJuIDA7Cj4gPiAr
+fQo+ID4gKwo+ID4gK3N0YXRpYyBsb25nIHZob3N0X3ZkcGFfZ2V0X2NvbmZpZyhzdHJ1Y3Qgdmhv
+c3RfdmRwYSAqdiwKPiA+ICsJCQkJICBzdHJ1Y3Qgdmhvc3RfdmRwYV9jb25maWcgX191c2VyICpj
+KQo+ID4gK3sKPiA+ICsJc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhID0gdi0+dmRwYTsKPiA+ICsJ
+Y29uc3Qgc3RydWN0IHZkcGFfY29uZmlnX29wcyAqb3BzID0gdmRwYS0+Y29uZmlnOwo+ID4gKwlz
+dHJ1Y3Qgdmhvc3RfdmRwYV9jb25maWcgY29uZmlnOwo+ID4gKwl1bnNpZ25lZCBsb25nIHNpemUg
+PSBvZmZzZXRvZihzdHJ1Y3Qgdmhvc3RfdmRwYV9jb25maWcsIGJ1Zik7Cj4gPiArCXU4ICpidWY7
+Cj4gPiArCj4gPiArCWlmIChjb3B5X2Zyb21fdXNlcigmY29uZmlnLCBjLCBzaXplKSkKPiA+ICsJ
+CXJldHVybiAtRUZBVUxUOwo+ID4gKwlpZiAodmhvc3RfdmRwYV9jb25maWdfdmFsaWRhdGUodiwg
+JmNvbmZpZykpCj4gPiArCQlyZXR1cm4gLUVJTlZBTDsKPiA+ICsJYnVmID0ga3Z6YWxsb2MoY29u
+ZmlnLmxlbiwgR0ZQX0tFUk5FTCk7Cj4gPiArCWlmICghYnVmKQo+ID4gKwkJcmV0dXJuIC1FTk9N
+RU07Cj4gPiArCj4gPiArCW9wcy0+Z2V0X2NvbmZpZyh2ZHBhLCBjb25maWcub2ZmLCBidWYsIGNv
+bmZpZy5sZW4pOwo+ID4gKwo+ID4gKwlpZiAoY29weV90b191c2VyKGMtPmJ1ZiwgYnVmLCBjb25m
+aWcubGVuKSkgewo+ID4gKwkJa3ZmcmVlKGJ1Zik7Cj4gPiArCQlyZXR1cm4gLUVGQVVMVDsKPiA+
+ICsJfQo+ID4gKwo+ID4gKwlrdmZyZWUoYnVmKTsKPiA+ICsJcmV0dXJuIDA7Cj4gPiArfQo+ID4g
+Kwo+ID4gK3N0YXRpYyBsb25nIHZob3N0X3ZkcGFfc2V0X2NvbmZpZyhzdHJ1Y3Qgdmhvc3RfdmRw
+YSAqdiwKPiA+ICsJCQkJICBzdHJ1Y3Qgdmhvc3RfdmRwYV9jb25maWcgX191c2VyICpjKQo+ID4g
+K3sKPiA+ICsJc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhID0gdi0+dmRwYTsKPiA+ICsJY29uc3Qg
+c3RydWN0IHZkcGFfY29uZmlnX29wcyAqb3BzID0gdmRwYS0+Y29uZmlnOwo+ID4gKwlzdHJ1Y3Qg
+dmhvc3RfdmRwYV9jb25maWcgY29uZmlnOwo+ID4gKwl1bnNpZ25lZCBsb25nIHNpemUgPSBvZmZz
+ZXRvZihzdHJ1Y3Qgdmhvc3RfdmRwYV9jb25maWcsIGJ1Zik7Cj4gPiArCXU4ICpidWY7Cj4gPiAr
+Cj4gPiArCWlmIChjb3B5X2Zyb21fdXNlcigmY29uZmlnLCBjLCBzaXplKSkKPiA+ICsJCXJldHVy
+biAtRUZBVUxUOwo+ID4gKwlpZiAodmhvc3RfdmRwYV9jb25maWdfdmFsaWRhdGUodiwgJmNvbmZp
+ZykpCj4gPiArCQlyZXR1cm4gLUVJTlZBTDsKPiA+ICsJYnVmID0ga3Z6YWxsb2MoY29uZmlnLmxl
+biwgR0ZQX0tFUk5FTCk7Cj4gPiArCWlmICghYnVmKQo+ID4gKwkJcmV0dXJuIC1FTk9NRU07Cj4g
+PiArCj4gPiArCWlmIChjb3B5X2Zyb21fdXNlcihidWYsIGMtPmJ1ZiwgY29uZmlnLmxlbikpIHsK
+PiA+ICsJCWt2ZnJlZShidWYpOwo+ID4gKwkJcmV0dXJuIC1FRkFVTFQ7Cj4gPiArCX0KPiA+ICsK
+PiA+ICsJb3BzLT5zZXRfY29uZmlnKHZkcGEsIGNvbmZpZy5vZmYsIGJ1ZiwgY29uZmlnLmxlbik7
+Cj4gPiArCj4gPiArCWt2ZnJlZShidWYpOwo+ID4gKwlyZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4g
+PiArc3RhdGljIGxvbmcgdmhvc3RfdmRwYV9nZXRfZmVhdHVyZXMoc3RydWN0IHZob3N0X3ZkcGEg
+KnYsIHU2NCBfX3VzZXIgKmZlYXR1cmVwKQo+ID4gK3sKPiA+ICsJc3RydWN0IHZkcGFfZGV2aWNl
+ICp2ZHBhID0gdi0+dmRwYTsKPiA+ICsJY29uc3Qgc3RydWN0IHZkcGFfY29uZmlnX29wcyAqb3Bz
+ID0gdmRwYS0+Y29uZmlnOwo+ID4gKwl1NjQgZmVhdHVyZXM7Cj4gPiArCj4gPiArCWZlYXR1cmVz
+ID0gb3BzLT5nZXRfZmVhdHVyZXModmRwYSk7Cj4gPiArCWZlYXR1cmVzICY9IHZob3N0X3ZkcGFf
+ZmVhdHVyZXNbdi0+dmlydGlvX2lkXTsKPiA+ICsKPiA+ICsJaWYgKGNvcHlfdG9fdXNlcihmZWF0
+dXJlcCwgJmZlYXR1cmVzLCBzaXplb2YoZmVhdHVyZXMpKSkKPiA+ICsJCXJldHVybiAtRUZBVUxU
+Owo+ID4gKwo+ID4gKwlyZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGxvbmcgdmhv
+c3RfdmRwYV9zZXRfZmVhdHVyZXMoc3RydWN0IHZob3N0X3ZkcGEgKnYsIHU2NCBfX3VzZXIgKmZl
+YXR1cmVwKQo+ID4gK3sKPiA+ICsJc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhID0gdi0+dmRwYTsK
+PiA+ICsJY29uc3Qgc3RydWN0IHZkcGFfY29uZmlnX29wcyAqb3BzID0gdmRwYS0+Y29uZmlnOwo+
+ID4gKwl1NjQgZmVhdHVyZXM7Cj4gPiArCj4gPiArCS8qCj4gPiArCSAqIEl0J3Mgbm90IGFsbG93
+ZWQgdG8gY2hhbmdlIHRoZSBmZWF0dXJlcyBhZnRlciB0aGV5IGhhdmUKPiA+ICsJICogYmVlbiBu
+ZWdvdGlhdGVkLgo+ID4gKwkgKi8KPiA+ICsJaWYgKG9wcy0+Z2V0X3N0YXR1cyh2ZHBhKSAmIFZJ
+UlRJT19DT05GSUdfU19GRUFUVVJFU19PSykKPiA+ICsJCXJldHVybiAtRUJVU1k7Cj4gPiArCj4g
+PiArCWlmIChjb3B5X2Zyb21fdXNlcigmZmVhdHVyZXMsIGZlYXR1cmVwLCBzaXplb2YoZmVhdHVy
+ZXMpKSkKPiA+ICsJCXJldHVybiAtRUZBVUxUOwo+ID4gKwo+ID4gKwlpZiAoZmVhdHVyZXMgJiB+
+dmhvc3RfdmRwYV9mZWF0dXJlc1t2LT52aXJ0aW9faWRdKQo+ID4gKwkJcmV0dXJuIC1FSU5WQUw7
+Cj4gPiArCj4gPiArCWlmIChvcHMtPnNldF9mZWF0dXJlcyh2ZHBhLCBmZWF0dXJlcykpCj4gPiAr
+CQlyZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsJcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4g
+K3N0YXRpYyBsb25nIHZob3N0X3ZkcGFfZ2V0X3ZyaW5nX251bShzdHJ1Y3Qgdmhvc3RfdmRwYSAq
+diwgdTE2IF9fdXNlciAqYXJncCkKPiA+ICt7Cj4gPiArCXN0cnVjdCB2ZHBhX2RldmljZSAqdmRw
+YSA9IHYtPnZkcGE7Cj4gPiArCWNvbnN0IHN0cnVjdCB2ZHBhX2NvbmZpZ19vcHMgKm9wcyA9IHZk
+cGEtPmNvbmZpZzsKPiA+ICsJdTE2IG51bTsKPiA+ICsKPiA+ICsJbnVtID0gb3BzLT5nZXRfdnFf
+bnVtX21heCh2ZHBhKTsKPiA+ICsKPiA+ICsJaWYgKGNvcHlfdG9fdXNlcihhcmdwLCAmbnVtLCBz
+aXplb2YobnVtKSkpCj4gPiArCQlyZXR1cm4gLUVGQVVMVDsKPiA+ICsKPiA+ICsJcmV0dXJuIDA7
+Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBsb25nIHZob3N0X3ZkcGFfdnJpbmdfaW9jdGwoc3Ry
+dWN0IHZob3N0X3ZkcGEgKnYsIHVuc2lnbmVkIGludCBjbWQsCj4gPiArCQkJCSAgIHZvaWQgX191
+c2VyICphcmdwKQo+ID4gK3sKPiA+ICsJc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhID0gdi0+dmRw
+YTsKPiA+ICsJY29uc3Qgc3RydWN0IHZkcGFfY29uZmlnX29wcyAqb3BzID0gdmRwYS0+Y29uZmln
+Owo+ID4gKwlzdHJ1Y3QgdmRwYV9jYWxsYmFjayBjYjsKPiA+ICsJc3RydWN0IHZob3N0X3ZpcnRx
+dWV1ZSAqdnE7Cj4gPiArCXN0cnVjdCB2aG9zdF92cmluZ19zdGF0ZSBzOwo+ID4gKwl1OCBzdGF0
+dXM7Cj4gPiArCXUzMiBpZHg7Cj4gPiArCWxvbmcgcjsKPiA+ICsKPiA+ICsJciA9IGdldF91c2Vy
+KGlkeCwgKHUzMiBfX3VzZXIgKilhcmdwKTsKPiA+ICsJaWYgKHIgPCAwKQo+ID4gKwkJcmV0dXJu
+IHI7Cj4gPiArCWlmIChpZHggPj0gdi0+bnZxcykKPiA+ICsJCXJldHVybiAtRU5PQlVGUzsKPiA+
+ICsKPiA+ICsJaWR4ID0gYXJyYXlfaW5kZXhfbm9zcGVjKGlkeCwgdi0+bnZxcyk7Cj4gPiArCXZx
+ID0gJnYtPnZxc1tpZHhdOwo+ID4gKwo+ID4gKwlzdGF0dXMgPSBvcHMtPmdldF9zdGF0dXModmRw
+YSk7Cj4gPiArCj4gPiArCS8qCj4gPiArCSAqIEl0J3Mgbm90IGFsbG93ZWQgdG8gZGV0ZWN0IGFu
+ZCBwcm9ncmFtIHZxcyBiZWZvcmUKPiA+ICsJICogZmVhdHVyZXMgbmVnb3RpYXRpb24gb3IgYWZ0
+ZXIgZW5hYmxpbmcgZHJpdmVyLgo+ID4gKwkgKi8KPiA+ICsJaWYgKCEoc3RhdHVzICYgVklSVElP
+X0NPTkZJR19TX0ZFQVRVUkVTX09LKSB8fAo+ID4gKwkgICAgKHN0YXR1cyAmIFZJUlRJT19DT05G
+SUdfU19EUklWRVJfT0spKQo+ID4gKwkJcmV0dXJuIC1FQlVTWTsKPiA+ICsKPiA+ICsJaWYgKGNt
+ZCA9PSBWSE9TVF9WRFBBX1NFVF9WUklOR19FTkFCTEUpIHsKPiA+ICsJCWlmIChjb3B5X2Zyb21f
+dXNlcigmcywgYXJncCwgc2l6ZW9mKHMpKSkKPiA+ICsJCQlyZXR1cm4gLUVGQVVMVDsKPiA+ICsJ
+CW9wcy0+c2V0X3ZxX3JlYWR5KHZkcGEsIGlkeCwgcy5udW0pOwo+ID4gKwkJcmV0dXJuIDA7Cj4g
+PiArCX0KPiA+ICsKPiA+ICsJLyoKPiA+ICsJICogSXQncyBub3QgYWxsb3dlZCB0byBkZXRlY3Qg
+YW5kIHByb2dyYW0gdnFzIHdpdGgKPiA+ICsJICogdnFzIGVuYWJsZWQuCj4gPiArCSAqLwo+ID4g
+KwlpZiAob3BzLT5nZXRfdnFfcmVhZHkodmRwYSwgaWR4KSkKPiA+ICsJCXJldHVybiAtRUJVU1k7
+Cj4gPiArCj4gPiArCWlmIChjbWQgPT0gVkhPU1RfR0VUX1ZSSU5HX0JBU0UpCj4gPiArCQl2cS0+
+bGFzdF9hdmFpbF9pZHggPSBvcHMtPmdldF92cV9zdGF0ZSh2LT52ZHBhLCBpZHgpOwo+ID4gKwo+
+ID4gKwlyID0gdmhvc3RfdnJpbmdfaW9jdGwoJnYtPnZkZXYsIGNtZCwgYXJncCk7Cj4gPiArCWlm
+IChyKQo+ID4gKwkJcmV0dXJuIHI7Cj4gPiArCj4gPiArCXN3aXRjaCAoY21kKSB7Cj4gPiArCWNh
+c2UgVkhPU1RfU0VUX1ZSSU5HX0FERFI6Cj4gPiArCQlpZiAob3BzLT5zZXRfdnFfYWRkcmVzcyh2
+ZHBhLCBpZHgsICh1NjQpdnEtPmRlc2MsCj4gPiArCQkJCQkodTY0KXZxLT5hdmFpbCwgKHU2NCl2
+cS0+dXNlZCkpCj4gPiArCQkJciA9IC1FSU5WQUw7Cj4gPiArCQlicmVhazsKPiA+ICsKPiA+ICsJ
+Y2FzZSBWSE9TVF9TRVRfVlJJTkdfQkFTRToKPiA+ICsJCWlmIChvcHMtPnNldF92cV9zdGF0ZSh2
+ZHBhLCBpZHgsIHZxLT5sYXN0X2F2YWlsX2lkeCkpCj4gPiArCQkJciA9IC1FSU5WQUw7Cj4gPiAr
+CQlicmVhazsKPiA+ICsKPiA+ICsJY2FzZSBWSE9TVF9TRVRfVlJJTkdfQ0FMTDoKPiA+ICsJCWlm
+ICh2cS0+Y2FsbF9jdHgpIHsKPiA+ICsJCQljYi5jYWxsYmFjayA9IHZob3N0X3ZkcGFfdmlydHF1
+ZXVlX2NiOwo+ID4gKwkJCWNiLnByaXZhdGUgPSB2cTsKPiA+ICsJCX0gZWxzZSB7Cj4gPiArCQkJ
+Y2IuY2FsbGJhY2sgPSBOVUxMOwo+ID4gKwkJCWNiLnByaXZhdGUgPSBOVUxMOwo+ID4gKwkJfQo+
+ID4gKwkJb3BzLT5zZXRfdnFfY2IodmRwYSwgaWR4LCAmY2IpOwo+ID4gKwkJYnJlYWs7Cj4gPiAr
+Cj4gPiArCWNhc2UgVkhPU1RfU0VUX1ZSSU5HX05VTToKPiA+ICsJCW9wcy0+c2V0X3ZxX251bSh2
+ZHBhLCBpZHgsIHZxLT5udW0pOwo+ID4gKwkJYnJlYWs7Cj4gPiArCX0KPiA+ICsKPiA+ICsJcmV0
+dXJuIHI7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBsb25nIHZob3N0X3ZkcGFfZG9fZG1hX21h
+cHBpbmcoc3RydWN0IHZob3N0X3ZkcGEgKnYpCj4gPiArewo+ID4gKwkvKiBUT0RPOiBmaXggdGhp
+cyAqLwo+IAo+IAo+IEJlZm9yZSB0cnlpbmcgdG8gZG8gdGhpcyBpdCBsb29rcyB0byBtZSB3ZSBu
+ZWVkIHRoZSBmb2xsb3dpbmcgZHVyaW5nIHRoZQo+IHByb2JlCj4gCj4gMSkgaWYgc2V0X21hcCgp
+IGlzIG5vdCBzdXBwb3J0ZWQgYnkgdGhlIHZEUEEgZGV2aWNlIHByb2JlIHRoZSBJT01NVSB0aGF0
+IGlzCj4gc3VwcG9ydGVkIGJ5IHRoZSB2RFBBIGRldmljZQo+IDIpIGFsbG9jYXRlIElPTU1VIGRv
+bWFpbgo+IAo+IEFuZCB0aGVuOgo+IAo+IDMpIHBpbiBwYWdlcyB0aHJvdWdoIEdVUCBhbmQgZG8g
+cHJvcGVyIGFjY291bnRpbmcKPiA0KSBzdG9yZSBHUEEtPkhQQSBtYXBwaW5nIGluIHRoZSB1bWVt
+Cj4gNSkgZ2VuZXJhdGUgZGlmZnMgb2YgbWVtb3J5IHRhYmxlIGFuZCB1c2luZyBJT01NVSBBUEkg
+dG8gc2V0dXAgdGhlIGRtYQo+IG1hcHBpbmcgaW4gdGhpcyBtZXRob2QKPiAKPiBGb3IgMSksIEkn
+bSBub3Qgc3VyZSBwYXJlbnQgaXMgc3VmZmljaWVudCBmb3IgdG8gZG9pbmcgdGhpcyBvciBuZWVk
+IHRvCj4gaW50cm9kdWNlIG5ldyBBUEkgbGlrZSBpb21tdV9kZXZpY2UgaW4gbWRldi4KCkFncmVl
+LiBXZSBtYXkgYWxzbyBuZWVkIHRvIGludHJvZHVjZSBzb21ldGhpbmcgbGlrZQp0aGUgaW9tbXVf
+ZGV2aWNlLgoKPiAKPiAKPiA+ICsJcmV0dXJuIC1FTk9UU1VQUDsKPiA+ICt9Cj4gPiArCj4gPiAr
+c3RhdGljIGludCB2aG9zdF92ZHBhX29wZW4oc3RydWN0IGlub2RlICppbm9kZSwgc3RydWN0IGZp
+bGUgKmZpbGVwKQo+ID4gK3sKPiA+ICsJc3RydWN0IHZob3N0X3ZkcGEgKnY7Cj4gPiArCXN0cnVj
+dCB2aG9zdF9kZXYgKmRldjsKPiA+ICsJc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAqKnZxczsKPiA+
+ICsJaW50IG52cXMsIGksIHIsIG9wZW5lZDsKPiA+ICsKPiA+ICsJdiA9IHZob3N0X3ZkcGFfZ2V0
+X2Zyb21fbWlub3IoaW1pbm9yKGlub2RlKSk7Cj4gPiArCWlmICghdikKPiA+ICsJCXJldHVybiAt
+RU5PREVWOwo+ID4gKwo+ID4gKwlvcGVuZWQgPSBhdG9taWNfY21weGNoZygmdi0+b3BlbmVkLCAw
+LCAxKTsKPiA+ICsJaWYgKG9wZW5lZCkgewo+ID4gKwkJciA9IC1FQlVTWTsKPiA+ICsJCWdvdG8g
+ZXJyOwo+ID4gKwl9Cj4gPiArCj4gPiArCW52cXMgPSB2LT5udnFzOwo+ID4gKwl2aG9zdF92ZHBh
+X3Jlc2V0KHYpOwo+ID4gKwo+ID4gKwl2cXMgPSBrbWFsbG9jX2FycmF5KG52cXMsIHNpemVvZigq
+dnFzKSwgR0ZQX0tFUk5FTCk7Cj4gPiArCWlmICghdnFzKSB7Cj4gPiArCQlyID0gLUVOT01FTTsK
+PiA+ICsJCWdvdG8gZXJyOwo+ID4gKwl9Cj4gPiArCj4gPiArCWRldiA9ICZ2LT52ZGV2Owo+ID4g
+Kwlmb3IgKGkgPSAwOyBpIDwgbnZxczsgaSsrKSB7Cj4gPiArCQl2cXNbaV0gPSAmdi0+dnFzW2ld
+Owo+ID4gKwkJdnFzW2ldLT5oYW5kbGVfa2ljayA9IGhhbmRsZV92cV9raWNrOwo+ID4gKwl9Cj4g
+PiArCXZob3N0X2Rldl9pbml0KGRldiwgdnFzLCBudnFzLCAwLCAwLCAwKTsKPiA+ICsKPiA+ICsJ
+ZmlsZXAtPnByaXZhdGVfZGF0YSA9IHY7Cj4gPiArCj4gPiArCXJldHVybiAwOwo+ID4gKwo+ID4g
+K2VycjoKPiA+ICsJYXRvbWljX2RlYygmdi0+b3BlbmVkKTsKPiA+ICsJcmV0dXJuIHI7Cj4gPiAr
+fQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmhvc3RfdmRwYV9yZWxlYXNlKHN0cnVjdCBpbm9kZSAq
+aW5vZGUsIHN0cnVjdCBmaWxlICpmaWxlcCkKPiA+ICt7Cj4gPiArCXN0cnVjdCB2aG9zdF92ZHBh
+ICp2ID0gZmlsZXAtPnByaXZhdGVfZGF0YTsKPiA+ICsKPiA+ICsJbXV0ZXhfbG9jaygmdi0+bXV0
+ZXgpOwo+ID4gKwlmaWxlcC0+cHJpdmF0ZV9kYXRhID0gTlVMTDsKPiA+ICsJdmhvc3RfdmRwYV9y
+ZXNldCh2KTsKPiA+ICsJdmhvc3RfZGV2X3N0b3AoJnYtPnZkZXYpOwo+ID4gKwl2aG9zdF9kZXZf
+Y2xlYW51cCgmdi0+dmRldik7Cj4gPiArCWtmcmVlKHYtPnZkZXYudnFzKTsKPiA+ICsJbXV0ZXhf
+dW5sb2NrKCZ2LT5tdXRleCk7Cj4gPiArCj4gPiArCWF0b21pY19kZWMoJnYtPm9wZW5lZCk7Cj4g
+PiArCXdha2VfdXAoJnZob3N0X3ZkcGEucmVsZWFzZV9xKTsKPiA+ICsKPiA+ICsJcmV0dXJuIDA7
+Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBsb25nIHZob3N0X3ZkcGFfdW5sb2NrZWRfaW9jdGwo
+c3RydWN0IGZpbGUgKmZpbGVwLAo+ID4gKwkJCQkgICAgICB1bnNpZ25lZCBpbnQgY21kLCB1bnNp
+Z25lZCBsb25nIGFyZykKPiA+ICt7Cj4gPiArCXN0cnVjdCB2aG9zdF92ZHBhICp2ID0gZmlsZXAt
+PnByaXZhdGVfZGF0YTsKPiA+ICsJc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhID0gdi0+dmRwYTsK
+PiA+ICsJY29uc3Qgc3RydWN0IHZkcGFfY29uZmlnX29wcyAqb3BzID0gdmRwYS0+Y29uZmlnOwo+
+ID4gKwl2b2lkIF9fdXNlciAqYXJncCA9ICh2b2lkIF9fdXNlciAqKWFyZzsKPiA+ICsJbG9uZyBy
+Owo+ID4gKwo+ID4gKwltdXRleF9sb2NrKCZ2LT5tdXRleCk7Cj4gPiArCj4gPiArCXN3aXRjaCAo
+Y21kKSB7Cj4gPiArCWNhc2UgVkhPU1RfVkRQQV9HRVRfREVWSUNFX0lEOgo+ID4gKwkJciA9IHZo
+b3N0X3ZkcGFfZ2V0X2RldmljZV9pZCh2LCBhcmdwKTsKPiA+ICsJCWJyZWFrOwo+ID4gKwljYXNl
+IFZIT1NUX1ZEUEFfR0VUX1NUQVRVUzoKPiA+ICsJCXIgPSB2aG9zdF92ZHBhX2dldF9zdGF0dXMo
+diwgYXJncCk7Cj4gPiArCQlicmVhazsKPiA+ICsJY2FzZSBWSE9TVF9WRFBBX1NFVF9TVEFUVVM6
+Cj4gPiArCQlyID0gdmhvc3RfdmRwYV9zZXRfc3RhdHVzKHYsIGFyZ3ApOwo+ID4gKwkJYnJlYWs7
+Cj4gPiArCWNhc2UgVkhPU1RfVkRQQV9HRVRfQ09ORklHOgo+ID4gKwkJciA9IHZob3N0X3ZkcGFf
+Z2V0X2NvbmZpZyh2LCBhcmdwKTsKPiA+ICsJCWJyZWFrOwo+ID4gKwljYXNlIFZIT1NUX1ZEUEFf
+U0VUX0NPTkZJRzoKPiA+ICsJCXIgPSB2aG9zdF92ZHBhX3NldF9jb25maWcodiwgYXJncCk7Cj4g
+PiArCQlicmVhazsKPiA+ICsJY2FzZSBWSE9TVF9HRVRfRkVBVFVSRVM6Cj4gPiArCQlyID0gdmhv
+c3RfdmRwYV9nZXRfZmVhdHVyZXModiwgYXJncCk7Cj4gPiArCQlicmVhazsKPiA+ICsJY2FzZSBW
+SE9TVF9TRVRfRkVBVFVSRVM6Cj4gPiArCQlyID0gdmhvc3RfdmRwYV9zZXRfZmVhdHVyZXModiwg
+YXJncCk7Cj4gPiArCQlicmVhazsKPiA+ICsJY2FzZSBWSE9TVF9WRFBBX0dFVF9WUklOR19OVU06
+Cj4gPiArCQlyID0gdmhvc3RfdmRwYV9nZXRfdnJpbmdfbnVtKHYsIGFyZ3ApOwo+ID4gKwkJYnJl
+YWs7Cj4gPiArCWNhc2UgVkhPU1RfU0VUX0xPR19CQVNFOgo+ID4gKwljYXNlIFZIT1NUX1NFVF9M
+T0dfRkQ6Cj4gPiArCQlyID0gLUVOT0lPQ1RMQ01EOwo+ID4gKwkJYnJlYWs7Cj4gPiArCWRlZmF1
+bHQ6Cj4gPiArCQltdXRleF9sb2NrKCZ2LT52ZGV2Lm11dGV4KTsKPiA+ICsJCXIgPSB2aG9zdF9k
+ZXZfaW9jdGwoJnYtPnZkZXYsIGNtZCwgYXJncCk7Cj4gPiArCQlpZiAociA9PSAtRU5PSU9DVExD
+TUQpCj4gPiArCQkJciA9IHZob3N0X3ZkcGFfdnJpbmdfaW9jdGwodiwgY21kLCBhcmdwKTsKPiA+
+ICsJCW11dGV4X3VubG9jaygmdi0+dmRldi5tdXRleCk7Cj4gPiArCQlicmVhazsKPiA+ICsJfQo+
+ID4gKwo+ID4gKwlpZiAocikKPiA+ICsJCWdvdG8gb3V0Owo+ID4gKwo+ID4gKwlzd2l0Y2ggKGNt
+ZCkgewo+ID4gKwljYXNlIFZIT1NUX1NFVF9NRU1fVEFCTEU6Cj4gPiArCQlpZiAob3BzLT5zZXRf
+bWFwKQo+ID4gKwkJCXIgPSBvcHMtPnNldF9tYXAodmRwYSwgdi0+dmRldi51bWVtKTsKPiAKPiAK
+PiBJIHRoaW5rIHdlIG5lZWQgZG8gdGhlIGZvbGxvd2luZyB0byBtYWtlIHN1cmUgc2V0X21hcCgp
+IHdvcmtzOgo+IAo+IDEpIHBpbiBwYWdlcyB0aHJvdWdoIEdVUCBhbmQgZG8gcHJvcGVyIGFjY291
+bnRpbmcgZm9yIGUuZyB1bGltaXQKPiAyKSB1c2luZyBHUEEtPkhQQSBtYXBwaW5nIGZvciBkZXYt
+PnVtZW0KPiAzKSB0aGVuIHRoZXJlJ3Mgbm8gbmVlZCB0byBkZWFsIFZIT1NUX1NFVF9NRU1fVEFC
+TEUgaW4gdmhvc3RfZGV2X2lvY3RsKCksIG9yCj4gYWRkIHNvbWUgc3BlY2lmaWMgY2FsbGJhY2tz
+IGluIHZob3N0X3NldF9tZW1vcnkoKS4KCk9LLgoKVGhhbmtzIQpUaXdlaQoKPiAKPiBUaGFua3MK
+PiAKPiAKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmly
+dHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5k
+YXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3ZpcnR1YWxpemF0aW9u
