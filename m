@@ -2,78 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id F40AD15295B
-	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 11:42:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE0EE15295C
+	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 11:44:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 9526E85B3B;
-	Wed,  5 Feb 2020 10:42:22 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7C6DF85C05;
+	Wed,  5 Feb 2020 10:44:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2k3COo_npdZF; Wed,  5 Feb 2020 10:42:22 +0000 (UTC)
+	with ESMTP id 3g1QEXvgaMLg; Wed,  5 Feb 2020 10:44:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id EFE9D85C19;
-	Wed,  5 Feb 2020 10:42:21 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BB61385B81;
+	Wed,  5 Feb 2020 10:44:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DA3D2C0174;
-	Wed,  5 Feb 2020 10:42:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9FB44C0174;
+	Wed,  5 Feb 2020 10:44:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7AB8CC0174
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D34FAC0174
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 10:42:20 +0000 (UTC)
+ Wed,  5 Feb 2020 10:44:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 702CA85754
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C1F3985B73
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 10:42:20 +0000 (UTC)
+ Wed,  5 Feb 2020 10:44:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 197VN4S7PkTV
+ with ESMTP id 6eDXkW5DOlbS
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 10:42:18 +0000 (UTC)
+ Wed,  5 Feb 2020 10:44:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
  [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id EB67F85077
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 0033385B3B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 10:42:17 +0000 (UTC)
+ Wed,  5 Feb 2020 10:44:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580899336;
+ s=mimecast20190719; t=1580899439;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ceiKPffZAvyLxnMW33MSrGQ+Bel6T9pmv8DoZOxu9/U=;
- b=O8kTLEhKnbPElH11O0YZkry1+481vaPEtOvtlHF3dR52znvSio55smspaaimuu2qTvOOc2
- dZwon1fp6ydzan5Nctdh5kTodr9AE8SnLmgWpsk098w9n9VztZWftFjI+UilAFJvbm6pwz
- +m4mwFhyr/3hxXOoXX6D5r80kCpp0X4=
+ bh=rX8mnmQQnJ+iwegPjh5bwAw0fYKr26DwCE5y9Z7CRNE=;
+ b=P54dEwqHkdHWqmTAboC7zUOsF5TDFpWYOtQ0GsqckIuec54fojhJj++LtIX31QxsyWZQrx
+ fZV7XfxOxzuhc++qDlUCsa0FuLzvOSGuPMbWBs6TjjrC7KDUUTMF/J8wohA6fgNvHt1iIG
+ YS9hSewtD7NBRHc7WKblOzVtOUURgDQ=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-173-vm2pR6eaOJO8ZvlKTO5ATw-1; Wed, 05 Feb 2020 05:42:11 -0500
+ us-mta-245-DTQQek8TOJm5LGjUJBSIFA-1; Wed, 05 Feb 2020 05:43:56 -0500
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CFAD5800D55;
- Wed,  5 Feb 2020 10:42:09 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 43EFC800D54;
+ Wed,  5 Feb 2020 10:43:54 +0000 (UTC)
 Received: from [10.36.116.217] (ovpn-116-217.ams2.redhat.com [10.36.116.217])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6D5B25DA2C;
- Wed,  5 Feb 2020 10:42:05 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id EFC265DA7B;
+ Wed,  5 Feb 2020 10:43:49 +0000 (UTC)
 Subject: Re: Balloon pressuring page cache
 To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <286AC319A985734F985F78AFA26841F73E41F306@shsmsx102.ccr.corp.intel.com>
- <2b388a78-79cd-f99a-6f87-6446dcb4b819@redhat.com>
- <286AC319A985734F985F78AFA26841F73E41F367@shsmsx102.ccr.corp.intel.com>
- <605bef3e-373f-f39a-4849-930326564b5b@redhat.com>
- <286AC319A985734F985F78AFA26841F73E41F3DE@shsmsx102.ccr.corp.intel.com>
- <bcb69e37-fd84-6397-0ff5-befd99a361dd@redhat.com>
- <286AC319A985734F985F78AFA26841F73E41F490@shsmsx102.ccr.corp.intel.com>
- <5b184893-014c-35a1-928b-37b8f4647116@redhat.com>
- <286AC319A985734F985F78AFA26841F73E41F562@shsmsx102.ccr.corp.intel.com>
- <ef1dfd46-49c8-8aa9-2a5e-d2ebb2e093f5@redhat.com>
- <20200205051404-mutt-send-email-mst@kernel.org>
+References: <CAJuQAmoaK0Swytu2Os_SQRfG5_LqiCPaDa9yatatm9MtfncNTQ@mail.gmail.com>
+ <75d4594f-0864-5172-a0f8-f97affedb366@redhat.com>
+ <286AC319A985734F985F78AFA26841F73E3F8A02@shsmsx102.ccr.corp.intel.com>
+ <CAJuQAmqcayaNuG19fKCuux=YVO3+VcN-qrXvobgKMykogeMkzA@mail.gmail.com>
+ <20200203080520-mutt-send-email-mst@kernel.org>
+ <5ac131de8e3b7fc1fafd05a61feb5f6889aeb917.camel@linux.intel.com>
+ <c836a8d1-c5cc-eb8b-84ed-027070b77bf8@redhat.com>
+ <539B606A-A0CA-4AA4-B99A-759C874A1EF8@vmware.com>
+ <08D323B9-0B4A-47B2-9955-511B8FBA056B@vmware.com>
+ <dd5aa189-daed-7008-d02b-4e5bd61fe6e1@redhat.com>
+ <20200205052548-mutt-send-email-mst@kernel.org>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -119,15 +119,15 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <193b0215-fda3-6867-e7dc-39c2d43f1007@redhat.com>
-Date: Wed, 5 Feb 2020 11:42:04 +0100
+Message-ID: <c967349f-c422-1505-ee13-8b0746b593c3@redhat.com>
+Date: Wed, 5 Feb 2020 11:43:49 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.3.1
 MIME-Version: 1.0
-In-Reply-To: <20200205051404-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20200205052548-mutt-send-email-mst@kernel.org>
 Content-Language: en-US
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-MC-Unique: vm2pR6eaOJO8ZvlKTO5ATw-1
+X-MC-Unique: DTQQek8TOJm5LGjUJBSIFA-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Cc: "virtualization@lists.linux-foundation.org"
@@ -147,71 +147,99 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 05.02.20 11:25, Michael S. Tsirkin wrote:
-> On Wed, Feb 05, 2020 at 10:58:14AM +0100, David Hildenbrand wrote:
->> On 05.02.20 10:49, Wang, Wei W wrote:
->>> On Wednesday, February 5, 2020 5:37 PM, David Hildenbrand wrote:
->>>>>
->>>>> Not sure how TCG tracks the dirty bits. But In whatever
->>>>> implementation, the hypervisor should have
->>>>
->>>> There is only a single bitmap for that purpose. (well, the one where KVM
->>>> syncs to)
->>>>
->>>>> already dealt with the race between he current round and the previous
->>>> round dirty recording.
->>>>> (the race isn't brought by this feature essentially)
->>>>
->>>> It is guaranteed to work reliably without this feature as you only clear what
->>>> *has been migrated*, 
->>>
->>> Not "clear what has been migrated" (that skips nothing..)
->>> Anyway, it's a hint used for optimization.
->>
->> Yes, an optimization that might easily lead to data corruption when the
->> two bitmaps are either not in place or don't play along in that specific
->> way (and I suspect this is the case under TCG).
-> 
-> So I checked and TCG has two copies too.
-> Each block has bmap used for migration and also dirty_memory
-> where pages are marked dirty. See cpu_physical_memory_sync_dirty_bitmap.
-qemu_guest_free_page_hint() works on block->bmap.
-cpu_physical_memory_set_dirty_range() works on ram_list.dirty_memory[i].
-
-So you are right - sorry for the false alarm and thanks for verifying :)
-
-[...]
-
-> 
-> Again a flag that tells guest it should wait until used
-> could be a reasonable expension. If we stick to the shrinker
-> it's actually implementable easily. With an OOM notifier - I'm not so
-> sure ...
-
-See my other mail. I think we should keep handling just as is and not
-overcomplicate things (especially in our implementation as you noted)
-Instead, maybe abstract the reporting feature.
-
-> 
-> And a big part of the problem is that after all this time the page
-> hinting interfaces are still undocumented. Quite sad really :(
-
-Yes, that was the source of my confusion ... the double-bitmap thingy is
-non-obvious. And anybody who wants to implement that interface in a
-hypervisor has to be aware that the race I explained has to be avoided
-using e.g., two bitmaps and the sync.
-
--- 
-Thanks,
-
-David / dhildenb
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gMDUuMDIuMjAgMTE6MjcsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToKPiBPbiBXZWQsIEZl
+YiAwNSwgMjAyMCBhdCAwOToxOTo1OEFNICswMTAwLCBEYXZpZCBIaWxkZW5icmFuZCB3cm90ZToK
+Pj4gT24gMDUuMDIuMjAgMDg6MzUsIE5hZGF2IEFtaXQgd3JvdGU6Cj4+Pj4gT24gRmViIDMsIDIw
+MjAsIGF0IDI6NTAgUE0sIE5hZGF2IEFtaXQgPG5hbWl0QHZtd2FyZS5jb20+IHdyb3RlOgo+Pj4+
+Cj4+Pj4+IE9uIEZlYiAzLCAyMDIwLCBhdCA4OjM0IEFNLCBEYXZpZCBIaWxkZW5icmFuZCA8ZGF2
+aWRAcmVkaGF0LmNvbT4gd3JvdGU6Cj4+Pj4+Cj4+Pj4+IE9uIDAzLjAyLjIwIDE3OjE4LCBBbGV4
+YW5kZXIgRHV5Y2sgd3JvdGU6Cj4+Pj4+PiBPbiBNb24sIDIwMjAtMDItMDMgYXQgMDg6MTEgLTA1
+MDAsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToKPj4+Pj4+PiBPbiBUaHUsIEphbiAzMCwgMjAy
+MCBhdCAxMTo1OTo0NkFNIC0wODAwLCBUeWxlciBTYW5kZXJzb24gd3JvdGU6Cj4+Pj4+Pj4+IE9u
+IFRodSwgSmFuIDMwLCAyMDIwIGF0IDc6MzEgQU0gV2FuZywgV2VpIFcgPHdlaS53LndhbmdAaW50
+ZWwuY29tPiB3cm90ZToKPj4+Pj4+Pj4KPj4+Pj4+Pj4gICBPbiBUaHVyc2RheSwgSmFudWFyeSAz
+MCwgMjAyMCAxMTowMyBQTSwgRGF2aWQgSGlsZGVuYnJhbmQgd3JvdGU6Cj4+Pj4+Pj4+PiBPbiAy
+OS4wMS4yMCAyMDoxMSwgVHlsZXIgU2FuZGVyc29uIHdyb3RlOgo+Pj4+Pj4+Pj4+IE9uIFdlZCwg
+SmFuIDI5LCAyMDIwIGF0IDI6MzEgQU0gRGF2aWQgSGlsZGVuYnJhbmQgPGRhdmlkQHJlZGhhdC5j
+b20KPj4+Pj4+Pj4+PiA8bWFpbHRvOmRhdmlkQHJlZGhhdC5jb20+PiB3cm90ZToKPj4+Pj4+Pj4+
+Pgo+Pj4+Pj4+Pj4+ICAgT24gMjkuMDEuMjAgMDE6MjIsIFR5bGVyIFNhbmRlcnNvbiB2aWEgVmly
+dHVhbGl6YXRpb24gd3JvdGU6Cj4+Pj4+Pj4+Pj4+IEEgcHJpbWFyeSBhZHZhbnRhZ2Ugb2Ygdmly
+dGlvIGJhbGxvb24gb3ZlciBvdGhlciBtZW1vcnkgcmVjbGFpbQo+Pj4+Pj4+Pj4+PiBtZWNoYW5p
+c21zIGlzIHRoYXQgaXQgY2FuIHByZXNzdXJlIHRoZSBndWVzdCdzIHBhZ2UgY2FjaGUgaW50bwo+
+Pj4+Pj4+Pj4+ICAgc2hyaW5raW5nLgo+Pj4+Pj4+Pj4+PiBIb3dldmVyLCBzaW5jZSB0aGUgYmFs
+bG9vbiBkcml2ZXIgY2hhbmdlZCB0byB1c2luZyB0aGUgc2hyaW5rZXIKPj4+Pj4+Pj4gICBBUEkK
+Pj4+Pj4+Pj4+IDxodHRwczovL2dpdGh1Yi5jb20vdG9ydmFsZHMvbGludXgvY29tbWl0LzcxOTk0
+NjIwYmIyNWE4YjEwOTM4OGZlZmE5Cj4+Pj4+Pj4+PiBlOTlhMjhlMzU1MjU1YSNkaWZmLWZkMjAy
+YWNmNjk0ZDllYmExOWM4YzY0ZGEzZTQ4MGM5PiB0aGlzCj4+Pj4+Pj4+Pj4+IHVzZSBjYXNlIGhh
+cyBiZWNvbWUgYSBiaXQgbW9yZSB0cmlja3kuIEknbSB3b25kZXJpbmcgd2hhdCB0aGUKPj4+Pj4+
+Pj4+IGludGVuZGVkCj4+Pj4+Pj4+Pj4+IGRldmljZSBpbXBsZW1lbnRhdGlvbiBpcy4KPj4+Pj4+
+Pj4+Pj4KPj4+Pj4+Pj4+Pj4gV2hlbiBpbmZsYXRpbmcgdGhlIGJhbGxvb24gYWdhaW5zdCBwYWdl
+IGNhY2hlIChpLmUuIG5vIGZyZWUKPj4+Pj4+Pj4gICBtZW1vcnkKPj4+Pj4+Pj4+Pj4gcmVtYWlu
+cykgdm1zY2FuLmMgd2lsbCBib3RoIHNocmluayBwYWdlIGNhY2hlLCBidXQgYWxzbyBpbnZva2UK
+Pj4+Pj4+Pj4gICB0aGUKPj4+Pj4+Pj4+Pj4gc2hyaW5rZXJzIC0tIGluY2x1ZGluZyB0aGUgYmFs
+bG9vbidzIHNocmlua2VyLiBTbyB0aGUgYmFsbG9vbgo+Pj4+Pj4+PiAgIGRyaXZlcgo+Pj4+Pj4+
+Pj4+PiBhbGxvY2F0ZXMgbWVtb3J5IHdoaWNoIHJlcXVpcmVzIHJlY2xhaW0sIHZtc2NhbiBnZXRz
+IHRoaXMgbWVtb3J5Cj4+Pj4+Pj4+PiBieQo+Pj4+Pj4+Pj4+PiBzaHJpbmtpbmcgdGhlIGJhbGxv
+b24sIGFuZCB0aGVuIHRoZSBkcml2ZXIgYWRkcyB0aGUgbWVtb3J5IGJhY2sKPj4+Pj4+Pj4gICB0
+bwo+Pj4+Pj4+Pj4gdGhlCj4+Pj4+Pj4+Pj4+IGJhbGxvb24uIEJhc2ljYWxseSBhIGJ1c3kgbm8t
+b3AuCj4+Pj4+Pj4+Cj4+Pj4+Pj4+ICAgUGVyIG15IHVuZGVyc3RhbmRpbmcsIHRoZSBiYWxsb29u
+IGFsbG9jYXRpb24gd29u4oCZdCBpbnZva2Ugc2hyaW5rZXIgYXMKPj4+Pj4+Pj4gICBfX0dGUF9E
+SVJFQ1RfUkVDTEFJTSBpc24ndCBzZXQsIG5vPwo+Pj4+Pj4+Pgo+Pj4+Pj4+PiBJIGNvdWxkIGJl
+IHdyb25nIGFib3V0IHRoZSBtZWNoYW5pc20sIGJ1dCB0aGUgZGV2aWNlIHNlZXMgbG90cyBvZiBh
+Y3Rpdml0eSBvbgo+Pj4+Pj4+PiB0aGUgZGVmbGF0ZSBxdWV1ZS4gVGhlIGJhbGxvb24gaXMgYmVp
+bmcgc2hydW5rLiBBbmQgdGhpcyBvbmx5IHN0YXJ0cyBvbmNlIGFsbAo+Pj4+Pj4+PiBmcmVlIG1l
+bW9yeSBpcyBkZXBsZXRlZCBhbmQgd2UncmUgaW5mbGF0aW5nIGludG8gcGFnZSBjYWNoZS4KPj4+
+Pj4+Pgo+Pj4+Pj4+IFNvIGdpdmVuIHRoaXMgbG9va3MgbGlrZSBhIHJlZ3Jlc3Npb24sIG1heWJl
+IHdlIHNob3VsZCByZXZlcnQgdGhlCj4+Pj4+Pj4gcGF0Y2ggaW4gcXVlc3Rpb24gNzE5OTQ2MjBi
+YjI1ICgidmlydGlvX2JhbGxvb246IHJlcGxhY2Ugb29tIG5vdGlmaWVyIHdpdGggc2hyaW5rZXIi
+KQo+Pj4+Pj4+IEJlc2lkZXMsIHdpdGggVklSVElPX0JBTExPT05fRl9GUkVFX1BBR0VfSElOVAo+
+Pj4+Pj4+IHNocmlua2VyIGFsc28gaWdub3JlcyBWSVJUSU9fQkFMTE9PTl9GX01VU1RfVEVMTF9I
+T1NUIHdoaWNoIGlzbid0IG5pY2UKPj4+Pj4+PiBhdCBhbGwuCj4+Pj4+Pj4KPj4+Pj4+PiBTbyBp
+dCBsb29rcyBsaWtlIGFsbCB0aGlzIHJld29yayBpbnRyb2R1Y2VkIG1vcmUgaXNzdWVzIHRoYW4g
+aXQKPj4+Pj4+PiBhZGRyZXNzZWQgLi4uCj4+Pj4+Pj4KPj4+Pj4+PiBJIGFsc28gQ0MgQWxleCBE
+dXljayBmb3IgYW4gb3BpbmlvbiBvbiB0aGlzLgo+Pj4+Pj4+IEFsZXgsIHdoYXQgZG8geW91IHVz
+ZSB0byBwdXQgcHJlc3N1cmUgb24gcGFnZSBjYWNoZT8KPj4+Pj4+Cj4+Pj4+PiBJIHdvdWxkIHNh
+eSByZXZlcnRpbmcgcHJvYmFibHkgbWFrZXMgc2Vuc2UuIEknbSBub3Qgc3VyZSB0aGVyZSBpcyBt
+dWNoCj4+Pj4+PiB2YWx1ZSB0byBoYXZpbmcgYSBzaHJpbmtlciBydW5uaW5nIGRlZmxhdGlvbiB3
+aGVuIHlvdSBhcmUgYWN0aXZlbHkgdHJ5aW5nCj4+Pj4+PiB0byBpbmNyZWFzZSB0aGUgYmFsbG9v
+bi4gSXQgd291bGQgbWFrZSBtb3JlIHNlbnNlIHRvIHdhaXQgdW50aWwgeW91IGFyZQo+Pj4+Pj4g
+YWN0dWFsbHkgYWJvdXQgdG8gc3RhcnQgaGl0dGluZyBvb20uCj4+Pj4+Cj4+Pj4+IEkgdGhpbmsg
+dGhlIHNocmlua2VyIG1ha2VzIHNlbnNlIGZvciBmcmVlIHBhZ2UgaGludGluZyBmZWF0dXJlCj4+
+Pj4+IChldmVyeXRoaW5nIG9uIGZyZWVfcGFnZV9saXN0KS4KPj4+Pj4KPj4+Pj4gU28gaW5zdGVh
+ZCBvZiBvbmx5IHJldmVydGluZywgSSB0aGluayB3ZSBzaG91bGQgc3BsaXQgaXQgdXAgYW5kIGFs
+d2F5cwo+Pj4+PiByZWdpc3RlciB0aGUgc2hyaW5rZXIgZm9yIFZJUlRJT19CQUxMT09OX0ZfRlJF
+RV9QQUdFX0hJTlQgYW5kIHRoZSBPT00KPj4+Pj4gbm90aWZpZXIgKGFzIGJlZm9yZSkgZm9yIFZJ
+UlRJT19CQUxMT09OX0ZfTVVTVF9URUxMX0hPU1QuCj4+Pj4+Cj4+Pj4+IChPZiBjb3Vyc2UsIGFk
+YXB0aW5nIHdoYXQgaXMgYmVpbmcgZG9uZSBpbiB0aGUgc2hyaW5rZXIgYW5kIGluIHRoZSBPT00K
+Pj4+Pj4gbm90aWZpZXIpCj4+Pj4KPj4+PiBEYXZpZCwKPj4+Pgo+Pj4+IFBsZWFzZSBrZWVwIG1l
+IHBvc3RlZC4gSSBkZWNpZGVkIHRvIGFkYXB0IHRoZSBzYW1lIHNvbHV0aW9uIGFzIHRoZSB2aXJ0
+aW8KPj4+PiBiYWxsb29uIGZvciB0aGUgVk13YXJlIGJhbGxvb24uIElmIHRoZSB2ZXJkaWN0IGlz
+IHRoYXQgdGhpcyBpcyBkYW1hZ2luZyBhbmQKPj4+PiB0aGUgT09NIG5vdGlmaWVyIHNob3VsZCBi
+ZSB1c2VkIGluc3RlYWQsIEkgd2lsbCBzdWJtaXQgcGF0Y2hlcyB0byBtb3ZlIHRvCj4+Pj4gT09N
+IG5vdGlmaWVyIGFzIHdlbGwuCj4+Pgo+Pj4gQWRkaW5nIHNvbWUgaW5mb3JtYXRpb24gZm9yIHRo
+ZSByZWNvcmQgKGlmIHNvbWVvbmUgZ29vZ2xlcyB0aGlzIHRocmVhZCk6Cj4+Pgo+Pj4gSW4gdGhl
+IFZNd2FyZSBiYWxsb29uIGRyaXZlciwgdGhlIHNocmlua2VyIGlzIGRpc2FibGVkIGJ5IGRlZmF1
+bHQgc2luY2Ugd2UKPj4+IGVuY291bnRlcmVkIGEgcGVyZm9ybWFuY2UgZGVncmFkYXRpb24gaW4g
+dGVzdGluZy4gSSB0cmllZCB0byBhdm9pZCByYXBpZAo+Pj4gaW5mbGF0aW9uL3Nocmlua2VyLWRl
+ZmxhdGlvbiBjeWNsZXMgYnkgYWRkaW5nIGEgdGltZW91dCwgYnV0IGFwcGFyZW50bHkgaXQKPj4+
+IGRpZCBub3QgaGVscCBpbiBhdm9pZGluZyB0aGUgcGVyZm9ybWFuY2UgcmVncmVzc2lvbi4KPj4K
+Pj4gVGhhbmtzIGZvciB0aGF0IGluZm8uIFRvIG1lIHRoYXQgc291bmRzIGxpa2UgdGhlIHNocmlu
+a2VyIGlzIHRoZSB3cm9uZwo+PiBhcHByb2FjaCB0byAiYXV0by1kZWZsYXRpb24iLiBJdCdzIG5v
+dCBqdXN0ICJzb21lIHNsYWIgY2FjaGUiLgo+IAo+IFNvIGFzIHlvdSBwb2ludGVkIG91dCB5b3Vy
+c2VsZiBkZWZsYXRlIG9uIG9vbSBpcyByZWFsbHkgdW5kZXItc3BlY2lmaWVkLgo+IAo+IEkgd291
+bGQgYmUgdmVyeSBoYXBweSBpZiB5b3UgY291bGQgdGFrZSBhIHN0dWIgYXQgZG9jdW1lbnRpbmcg
+d2hhdCdzCj4gZXhwZWN0ZWQgZnJvbSBndWVzdCBhbmQgaG93IGl0IGNvdWxkIGJlIHVzZWQuCj4g
+UGxlYXNlIGNvcHkgdGhlIHZpcnRpbyBUQyB3aGVuIHlvdSBkbyB0aGlzIGFzIHRoaXMgaXMgc3Bl
+YyBzdHVmZi4KClNvLCBJJ2xsIGZpcnN0IGdldCB0aGUgY29kZSBiYWNrIGludG8gdGhlIGRlc2ly
+ZWQgc3RhdGUsIHNvIGF0IGxlYXN0IHdlCmhhdmUgYW4gYWdyZWVtZW50IG9mIGhvdyBpdCBzaG91
+bGQgYmUsIGFuZCB0aGVuIGZvbGxvdyB1cCB3aXRoIGEgc3BlYwp1cGRhdGUuCgpNaWdodCB0YWtl
+IHNvbWUgdGltZSwgdGhvdWdoIChwbGVudHkgb2Ygc3R1ZmYgdG8gZG8pLgoKLS0gClRoYW5rcywK
+CkRhdmlkIC8gZGhpbGRlbmIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0
+cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcv
+bWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
