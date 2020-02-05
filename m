@@ -1,97 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1C1C153B74
-	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 23:52:23 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 75DE4153B9E
+	for <lists.virtualization@lfdr.de>; Thu,  6 Feb 2020 00:06:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 6C8D120016;
-	Wed,  5 Feb 2020 22:52:22 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7EC7885A41;
+	Wed,  5 Feb 2020 23:06:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MCI8aIi7VEiG; Wed,  5 Feb 2020 22:52:18 +0000 (UTC)
+	with ESMTP id O5QpyCic-tFc; Wed,  5 Feb 2020 23:06:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 366E220456;
-	Wed,  5 Feb 2020 22:52:18 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id ADE9D859E3;
+	Wed,  5 Feb 2020 23:06:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 20D7FC0174;
-	Wed,  5 Feb 2020 22:52:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A391BC0174;
+	Wed,  5 Feb 2020 23:06:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0D7FAC0174
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 55DE0C0174
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 22:52:16 +0000 (UTC)
+ Wed,  5 Feb 2020 23:06:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 05E8483079
+ by hemlock.osuosl.org (Postfix) with ESMTP id 423AC859AE
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 22:52:16 +0000 (UTC)
+ Wed,  5 Feb 2020 23:06:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SI8LV1KlJ9Js
+ with ESMTP id EC-k3yAGC4H2
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 22:52:14 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 22C928060A
+ Wed,  5 Feb 2020 23:06:39 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com
+ [209.85.217.68])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7AA20821E2
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 22:52:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580943133;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=hUs/DiidQTwioeVZwlx/n0fTyMj2i+Fl87Q2QU19NXE=;
- b=ODkdBrJYLIe42SS0z9rzoPzQ25ni3UvCBCajVF71XFLAjDoDLXZBIuljcJsMZRMVUhFGFd
- YS0WgYJ23RXSnL4Nltuf38hOvGkjy0GI/YPxlKQIMwqWEm2fbLGZP+44p/dxcECjUs+qgN
- 2QEg+u4MFMVYC/ZA6l7gYB7JAtwBBHs=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-108-JjKv1fEqPlq-uSp3HmlO8w-1; Wed, 05 Feb 2020 17:52:08 -0500
-Received: by mail-wm1-f70.google.com with SMTP id y125so2553002wmg.1
+ Wed,  5 Feb 2020 23:06:39 +0000 (UTC)
+Received: by mail-vs1-f68.google.com with SMTP id p6so2516637vsj.11
  for <virtualization@lists.linux-foundation.org>;
- Wed, 05 Feb 2020 14:52:07 -0800 (PST)
+ Wed, 05 Feb 2020 15:06:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=lKvwUj8bxY633KPDqg6as2nezK97VzS+5LQkaAtfYrk=;
+ b=PCbZYCBiYAAJZKZ62S2ZjCEs6TfKyeh0WOknqk1CYF/sGsKWeGJDJOHU+henYp1QAD
+ h8c/kbVLO3fExeu4ZzjWgNScVy1hfkFpWGiPIuFGkwMZa8qvYSpsvr1IKC5YZYBdFGcN
+ 1sTZzCiIR9LJlcJOUmJg3vtqJopfDGRLfLedGF+lwGoKVvOMYerR6mLYkInoEPKkZgjm
+ bPaYy9nyOqZgGBYT22a+vecQ7cL0l+f+tTUg8/gIVnu2eskiwox2bi4UpoLG/GfEIWbh
+ DDnrxoyNmZ8pKS8vhzreVIs+uMHFedWtJmrLiLK3i4suzkq3fOo84d/WRQlpnHkgDWWF
+ 0gsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:content-transfer-encoding:from:mime-version
- :subject:date:message-id:references:cc:in-reply-to:to;
- bh=wkjVhVa2NyTDmZ8/LFbZ5n3Su9BgrxDkJjKz3sXdxiw=;
- b=CrFQQml8+4/acSgQ3Ylzx1hYDAqTESJ3nSTu0UrI7+XQSFvdK8y37Z5OipWXtMqoKB
- aBPafRCNVYASZ+YmeBrX5RMLD1nHwK/PLPyqYN5FebGaxlzZak//Ij6SbJTyaQWYzDLq
- KY8zh7D6ZrKUMsFKDSfM6I5POAnsvdwIYzYysbCtsT941KaSEViylFLrMECMP4rTDFER
- hxVosX28bwxF/9d7kO6F2pzjSmMpVii/MLRRhHoN2fOHbmoiDbgd7ElHrdhgOpJ5csi8
- ysdT766/cEo3ZerKLRZrJpLfQJNM6Vyadg2dX3oPS006qr0NPfHD1u8V3x7pW4TrbgV1
- /A2Q==
-X-Gm-Message-State: APjAAAXU3nUmhhYzf4tGQzex0XgkTi4wY1OQ2V7lDbHRiMXIzWdrUPs1
- kfj+FXkABWv24ND4LA2VNXGIeZVib/RtNw6JhXbGfP7Wms5QIUg/Oj/f7Zklv1Xu/y8K9wY8HSY
- L8XUGcMy1hJiBKjz8g9nwPqRFoz6dETmZFXZLydmlZw==
-X-Received: by 2002:a05:600c:217:: with SMTP id
- 23mr8022434wmi.124.1580943126911; 
- Wed, 05 Feb 2020 14:52:06 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwiDHT0qXGq2gA8EXYwjjj/RqXgsYsUlzIIAtdGXpOlDxU+MsMWas/ug+dwaury9C1t3uoRBA==
-X-Received: by 2002:a05:600c:217:: with SMTP id
- 23mr8022405wmi.124.1580943126587; 
- Wed, 05 Feb 2020 14:52:06 -0800 (PST)
-Received: from [192.168.3.122] (p5B0C6AA4.dip0.t-ipconnect.de. [91.12.106.164])
- by smtp.gmail.com with ESMTPSA id z19sm1144722wmi.35.2020.02.05.14.52.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Feb 2020 14:52:06 -0800 (PST)
-From: David Hildenbrand <david@redhat.com>
-Mime-Version: 1.0 (1.0)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=lKvwUj8bxY633KPDqg6as2nezK97VzS+5LQkaAtfYrk=;
+ b=h7U2ZFwh3NVa6nhKKoS8Exxpw+Ov94xEej60I+vjsPOuEYxDTt70J4SyT6Ea3HR2hD
+ orhX2CLRgAmfV3vFZ6lBkp/z9Kfl6LKLx+J3/WwypUIrjYzxYiBgMY1J2CEl9lzm3/+I
+ FMiSoKenpUkhbCoSQlv1hcIcUpHiEVpvz1uRxPAPmRsaLfY0tILeM5Kq3u+4fbYhkWvg
+ +I5qNuPi4jBVtRomF/9LYgVjFrig1tDjYlDY8Nh0XuKNdHGC7qFQt/JTJQ+FfzlPgrUL
+ n63/qitM170wJT/2Hwa5KjIj+l5Rsg6dy3IRn3mmWCtvUfVR35ZRtcTKuG6X+G/SKVkg
+ 1wZA==
+X-Gm-Message-State: APjAAAUA9vkbbmfZM7ZHfvqwH9KgR0IIPL95Aco0djORnfMlOSp05p8D
+ Wf4Z8d926rmysTcfnL+3Q++/RU7fafZ22FF8pYRr4Q==
+X-Google-Smtp-Source: APXvYqxeGO2XrAFna+EZAIQn9xoBp/ffQ1s8bAKFE8nQXmnxzGH8XUcIeVnK+JqqHIy6GLmuTpd0Wnw20eSJ+aeAOTc=
+X-Received: by 2002:a67:f6c9:: with SMTP id v9mr62103vso.48.1580943998199;
+ Wed, 05 Feb 2020 15:06:38 -0800 (PST)
+MIME-Version: 1.0
+References: <CAJuQAmrzQmSJ64ufkA0vOug=HiCikAxJB7O-j8aJCKuNTUnAKQ@mail.gmail.com>
+ <7C577D41-AC5C-4094-A280-CBA6ED05C9FB@redhat.com>
+In-Reply-To: <7C577D41-AC5C-4094-A280-CBA6ED05C9FB@redhat.com>
+Date: Wed, 5 Feb 2020 15:06:27 -0800
+Message-ID: <CAJuQAmp8i31stBTLiKK0KhhrChutwKadR9=7s_4K+rnKmsfBoA@mail.gmail.com>
 Subject: Re: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
  VIRTIO_BALLOON_F_DEFLATE_ON_OOM
-Date: Wed, 5 Feb 2020 23:52:05 +0100
-Message-Id: <7C577D41-AC5C-4094-A280-CBA6ED05C9FB@redhat.com>
-References: <CAJuQAmrzQmSJ64ufkA0vOug=HiCikAxJB7O-j8aJCKuNTUnAKQ@mail.gmail.com>
-In-Reply-To: <CAJuQAmrzQmSJ64ufkA0vOug=HiCikAxJB7O-j8aJCKuNTUnAKQ@mail.gmail.com>
-To: Tyler Sanderson <tysand@google.com>
-X-Mailer: iPhone Mail (17C54)
-X-MC-Unique: JjKv1fEqPlq-uSp3HmlO8w-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+To: David Hildenbrand <david@redhat.com>
 Cc: "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
  Nadav Amit <namit@vmware.com>, David Rientjes <rientjes@google.com>,
@@ -108,54 +92,59 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============9120355971494198680=="
+From: Tyler Sanderson via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Tyler Sanderson <tysand@google.com>
+Content-Type: multipart/mixed; boundary="===============2708172818746933992=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============9120355971494198680==
-Content-Type: multipart/alternative; boundary=Apple-Mail-F9A6D605-018C-4510-9EDF-244179F93224
+--===============2708172818746933992==
+Content-Type: multipart/alternative; boundary="0000000000006c8e4b059ddc3552"
 
---Apple-Mail-F9A6D605-018C-4510-9EDF-244179F93224
-Content-Type: text/plain;
-	charset=utf-8
+--0000000000006c8e4b059ddc3552
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+On Wed, Feb 5, 2020 at 2:52 PM David Hildenbrand <david@redhat.com> wrote:
 
-
+>
+>
 > Am 05.02.2020 um 23:37 schrieb Tyler Sanderson <tysand@google.com>:
->=20
+>
 > =EF=BB=BF
->=20
->=20
->> On Wed, Feb 5, 2020 at 8:34 AM David Hildenbrand <david@redhat.com> wrot=
-e:
+>
+>
+> On Wed, Feb 5, 2020 at 8:34 AM David Hildenbrand <david@redhat.com> wrote=
+:
+>
 >> Commit 71994620bb25 ("virtio_balloon: replace oom notifier with shrinker=
 ")
 >> changed the behavior when deflation happens automatically. Instead of
 >> deflating when called by the OOM handler, the shrinker is used.
->>=20
+>>
 >> However, the balloon is not simply some slab cache that should be
 >> shrunk when under memory pressure. The shrinker does not have a concept =
 of
 >> priorities, so this behavior cannot be configured.
->>=20
+>>
 >> There was a report that this results in undesired side effects when
 >> inflating the balloon to shrink the page cache. [1]
->>         "When inflating the balloon against page cache (i.e. no free mem=
-ory
->>          remains) vmscan.c will both shrink page cache, but also invoke =
-the
+>>         "When inflating the balloon against page cache (i.e. no free
+>> memory
+>>          remains) vmscan.c will both shrink page cache, but also invoke
+>> the
 >>          shrinkers -- including the balloon's shrinker. So the balloon
 >>          driver allocates memory which requires reclaim, vmscan gets thi=
 s
 >>          memory by shrinking the balloon, and then the driver adds the
 >>          memory back to the balloon. Basically a busy no-op."
->>=20
+>>
 >> The name "deflate on OOM" makes it pretty clear when deflation should
 >> happen - after other approaches to reclaim memory failed, not while
 >> reclaiming. This allows to minimize the footprint of a guest - memory
 >> will only be taken out of the balloon when really needed.
->>=20
+>>
 >> Especially, a drop_slab() will result in the whole balloon getting
 >> deflated - undesired. While handling it via the OOM handler might not be
 >> perfect, it keeps existing behavior. If we want a different behavior, th=
@@ -163,32 +152,32 @@ en
 >> we need a new feature bit and document it properly (although, there shou=
 ld
 >> be a clear use case and the intended effects should be well described).
->>=20
+>>
 >> Keep using the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT, because
 >> this has no such side effects. Always register the shrinker with
 >> VIRTIO_BALLOON_F_FREE_PAGE_HINT now. We are always allowed to reuse free
 >> pages that are still to be processed by the guest. The hypervisor takes
 >> care of identifying and resolving possible races between processing a
 >> hinting request and the guest reusing a page.
->>=20
+>>
 >> In contrast to pre commit 71994620bb25 ("virtio_balloon: replace oom
 >> notifier with shrinker"), don't add a moodule parameter to configure the
 >> number of pages to deflate on OOM. Can be re-added if really needed.
 >> Also, pay attention that leak_balloon() returns the number of 4k pages -
 >> convert it properly in virtio_balloon_oom_notify().
->>=20
+>>
 >> Note1: using the OOM handler is frowned upon, but it really is what we
 >>        need for this feature.
->>=20
+>>
 >> Note2: without VIRTIO_BALLOON_F_MUST_TELL_HOST (iow, always with QEMU) w=
 e
 >>        could actually skip sending deflation requests to our hypervisor,
 >>        making the OOM path *very* simple. Besically freeing pages and
 >>        updating the balloon. If the communication with the host ever
 >>        becomes a problem on this call path.
->>=20
+>>
 >> [1] https://www.spinics.net/lists/linux-virtualization/msg40863.html
->>=20
+>>
 >> Reported-by: Tyler Sanderson <tysand@google.com>
 >> Cc: Michael S. Tsirkin <mst@redhat.com>
 >> Cc: Wei Wang <wei.w.wang@intel.com>
@@ -200,9 +189,9 @@ e
 >> ---
 >>  drivers/virtio/virtio_balloon.c | 107 +++++++++++++-------------------
 >>  1 file changed, 44 insertions(+), 63 deletions(-)
->>=20
->> diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_bal=
-loon.c
+>>
+>> diff --git a/drivers/virtio/virtio_balloon.c
+>> b/drivers/virtio/virtio_balloon.c
 >> index 7e5d84caeb94..e7b18f556c5e 100644
 >> --- a/drivers/virtio/virtio_balloon.c
 >> +++ b/drivers/virtio/virtio_balloon.c
@@ -216,43 +205,43 @@ loon.c
 >>  #include <linux/mount.h>
 >> @@ -27,7 +28,9 @@
 >>   */
->>  #define VIRTIO_BALLOON_PAGES_PER_PAGE (unsigned)(PAGE_SIZE >> VIRTIO_BA=
-LLOON_PFN_SHIFT)
+>>  #define VIRTIO_BALLOON_PAGES_PER_PAGE (unsigned)(PAGE_SIZE >>
+>> VIRTIO_BALLOON_PFN_SHIFT)
 >>  #define VIRTIO_BALLOON_ARRAY_PFNS_MAX 256
 >> -#define VIRTBALLOON_OOM_NOTIFY_PRIORITY 80
 >> +/* Maximum number of (4k) pages to deflate on OOM notifications. */
 >> +#define VIRTIO_BALLOON_OOM_NR_PAGES 256
 >> +#define VIRTIO_BALLOON_OOM_NOTIFY_PRIORITY 80
->>=20
->>  #define VIRTIO_BALLOON_FREE_PAGE_ALLOC_FLAG (__GFP_NORETRY | __GFP_NOWA=
-RN | \
+>>
+>>  #define VIRTIO_BALLOON_FREE_PAGE_ALLOC_FLAG (__GFP_NORETRY |
+>> __GFP_NOWARN | \
 >>                                              __GFP_NOMEMALLOC)
 >> @@ -112,8 +115,11 @@ struct virtio_balloon {
 >>         /* Memory statistics */
 >>         struct virtio_balloon_stat stats[VIRTIO_BALLOON_S_NR];
->>=20
+>>
 >> -       /* To register a shrinker to shrink memory upon memory pressure =
 */
->> +       /* Shrinker to return free pages - VIRTIO_BALLOON_F_FREE_PAGE_HI=
-NT */
+>> +       /* Shrinker to return free pages -
+>> VIRTIO_BALLOON_F_FREE_PAGE_HINT */
 >>         struct shrinker shrinker;
 >> +
->> +       /* OOM notifier to deflate on OOM - VIRTIO_BALLOON_F_DEFLATE_ON_=
-OOM */
+>> +       /* OOM notifier to deflate on OOM -
+>> VIRTIO_BALLOON_F_DEFLATE_ON_OOM */
 >> +       struct notifier_block oom_nb;
 >>  };
->>=20
+>>
 >>  static struct virtio_device_id id_table[] =3D {
->> @@ -786,50 +792,13 @@ static unsigned long shrink_free_pages(struct virt=
-io_balloon *vb,
+>> @@ -786,50 +792,13 @@ static unsigned long shrink_free_pages(struct
+>> virtio_balloon *vb,
 >>         return blocks_freed * VIRTIO_BALLOON_HINT_BLOCK_PAGES;
 >>  }
->>=20
+>>
 >> -static unsigned long leak_balloon_pages(struct virtio_balloon *vb,
 >> -                                          unsigned long pages_to_free)
 >> -{
->> -       return leak_balloon(vb, pages_to_free * VIRTIO_BALLOON_PAGES_PER=
-_PAGE) /
+>> -       return leak_balloon(vb, pages_to_free *
+>> VIRTIO_BALLOON_PAGES_PER_PAGE) /
 >> -               VIRTIO_BALLOON_PAGES_PER_PAGE;
 >> -}
 >> -
@@ -268,24 +257,24 @@ _PAGE) /
 >> -        */
 >> -       while (vb->num_pages && pages_freed < pages_to_free)
 >> -               pages_freed +=3D leak_balloon_pages(vb,
->> -                                                 pages_to_free - pages_=
-freed);
+>> -                                                 pages_to_free -
+>> pages_freed);
 >> -
 >> -       update_balloon_size(vb);
 >> -
 >> -       return pages_freed;
 >> -}
 >> -
->>  static unsigned long virtio_balloon_shrinker_scan(struct shrinker *shri=
-nker,
->>                                                   struct shrink_control =
-*sc)
+>>  static unsigned long virtio_balloon_shrinker_scan(struct shrinker
+>> *shrinker,
+>>                                                   struct shrink_control
+>> *sc)
 >>  {
 >> -       unsigned long pages_to_free, pages_freed =3D 0;
 >>         struct virtio_balloon *vb =3D container_of(shrinker,
 >>                                         struct virtio_balloon, shrinker)=
 ;
->>=20
+>>
 >> -       pages_to_free =3D sc->nr_to_scan;
 >> -
 >> -       if (virtio_has_feature(vb->vdev, VIRTIO_BALLOON_F_FREE_PAGE_HINT=
@@ -295,17 +284,17 @@ nker,
 >> -       if (pages_freed >=3D pages_to_free)
 >> -               return pages_freed;
 >> -
->> -       pages_freed +=3D shrink_balloon_pages(vb, pages_to_free - pages_=
-freed);
+>> -       pages_freed +=3D shrink_balloon_pages(vb, pages_to_free -
+>> pages_freed);
 >> -
 >> -       return pages_freed;
 >> +       return shrink_free_pages(vb, sc->nr_to_scan);
 >>  }
->>=20
->>  static unsigned long virtio_balloon_shrinker_count(struct shrinker *shr=
-inker,
->> @@ -837,26 +806,22 @@ static unsigned long virtio_balloon_shrinker_count=
-(struct shrinker *shrinker,
+>>
+>>  static unsigned long virtio_balloon_shrinker_count(struct shrinker
+>> *shrinker,
+>> @@ -837,26 +806,22 @@ static unsigned long
+>> virtio_balloon_shrinker_count(struct shrinker *shrinker,
 >>  {
 >>         struct virtio_balloon *vb =3D container_of(shrinker,
 >>                                         struct virtio_balloon, shrinker)=
@@ -313,14 +302,14 @@ inker,
 >> -       unsigned long count;
 >> -
 >> -       count =3D vb->num_pages / VIRTIO_BALLOON_PAGES_PER_PAGE;
->> -       count +=3D vb->num_free_page_blocks * VIRTIO_BALLOON_HINT_BLOCK_=
-PAGES;
->>=20
+>> -       count +=3D vb->num_free_page_blocks *
+>> VIRTIO_BALLOON_HINT_BLOCK_PAGES;
+>>
 >> -       return count;
 >> +       return vb->num_free_page_blocks * VIRTIO_BALLOON_HINT_BLOCK_PAGE=
 S;
 >>  }
->>=20
+>>
 >> -static void virtio_balloon_unregister_shrinker(struct virtio_balloon *v=
 b)
 >> +static int virtio_balloon_oom_notify(struct notifier_block *nb,
@@ -329,10 +318,10 @@ b)
 >> -       unregister_shrinker(&vb->shrinker);
 >> -}
 >> +       struct virtio_balloon *vb =3D container_of(nb,
->> +                                                struct virtio_balloon, =
-oom_nb);
+>> +                                                struct virtio_balloon,
+>> oom_nb);
 >> +       unsigned long *freed =3D parm;
->>=20
+>>
 >> -static int virtio_balloon_register_shrinker(struct virtio_balloon *vb)
 >> -{
 >> -       vb->shrinker.scan_objects =3D virtio_balloon_shrinker_scan;
@@ -341,63 +330,76 @@ oom_nb);
 >> +       *freed +=3D leak_balloon(vb, VIRTIO_BALLOON_OOM_NR_PAGES) /
 >> +                 VIRTIO_BALLOON_PAGES_PER_PAGE;
 >> +       update_balloon_size(vb);
->>=20
+>>
 >> -       return register_shrinker(&vb->shrinker);
 >> +       return NOTIFY_OK;
 >>  }
->>=20
+>>
 >>  static int virtballoon_probe(struct virtio_device *vdev)
->> @@ -933,22 +898,35 @@ static int virtballoon_probe(struct virtio_device =
-*vdev)
->>                         virtio_cwrite(vb->vdev, struct virtio_balloon_co=
-nfig,
+>> @@ -933,22 +898,35 @@ static int virtballoon_probe(struct virtio_device
+>> *vdev)
+>>                         virtio_cwrite(vb->vdev, struct
+>> virtio_balloon_config,
 >>                                       poison_val, &poison_val);
 >>                 }
 >> -       }
 >> -       /*
->> -        * We continue to use VIRTIO_BALLOON_F_DEFLATE_ON_OOM to decide =
-if a
+>> -        * We continue to use VIRTIO_BALLOON_F_DEFLATE_ON_OOM to decide
+>> if a
 >> -        * shrinker needs to be registered to relieve memory pressure.
 >> -        */
->> -       if (virtio_has_feature(vb->vdev, VIRTIO_BALLOON_F_DEFLATE_ON_OOM=
-)) {
+>> -       if (virtio_has_feature(vb->vdev,
+>> VIRTIO_BALLOON_F_DEFLATE_ON_OOM)) {
 >> -               err =3D virtio_balloon_register_shrinker(vb);
 >> +
 >> +               /*
 >> +                * We're allowed to reuse any free pages, even if they a=
 re
 >> +                * still to be processed by the host.
-> It is important to clarify that pages that are on the inflate queue but n=
-ot ACKed by the host (the queue entry has not been returned) are _not_ okay=
- to reuse.
-> If the host is going to do something destructive to the page (like deback=
- it) then that needs to happen before the entry is returned.
+>>
+> It is important to clarify that pages that are on the inflate queue but
+> not ACKed by the host (the queue entry has not been returned) are _not_
+> okay to reuse.
+> If the host is going to do something destructive to the page (like deback
+> it) then that needs to happen before the entry is returned.
+>
+>
+> While you are correct, this comment is in the =E2=80=9Efree page hinting=
+=E2=80=9C
+> section/if (not obvious by looking at the diff only), so it does not appl=
+y
+> to inflate/deflate queues - but only free pages that are getting hinted. =
+Or
+> am I misreading your suggestion/missing something?
+>
+Ah you are right. Thanks!
 
-While you are correct, this comment is in the =E2=80=9Efree page hinting=E2=
-=80=9C section/if (not obvious by looking at the diff only), so it does not=
- apply to inflate/deflate queues - but only free pages that are getting hin=
-ted. Or am I misreading your suggestion/missing something?
+>
+> Thanks!
+>
+>
+>
 
-Thanks!
-
-
-
---Apple-Mail-F9A6D605-018C-4510-9EDF-244179F93224
-Content-Type: text/html;
-	charset=utf-8
+--0000000000006c8e4b059ddc3552
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=
-=3Dutf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><br></div><div dir=3D"=
-ltr"><br><blockquote type=3D"cite">Am 05.02.2020 um 23:37 schrieb Tyler San=
-derson &lt;tysand@google.com&gt;:<br><br></blockquote></div><blockquote typ=
-e=3D"cite"><div dir=3D"ltr">=EF=BB=BF<div dir=3D"ltr"><div dir=3D"ltr"><br>=
-</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=
-On Wed, Feb 5, 2020 at 8:34 AM David Hildenbrand &lt;<a href=3D"mailto:davi=
-d@redhat.com">david@redhat.com</a>&gt; wrote:<br></div><blockquote class=3D=
-"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
-04,204,204);padding-left:1ex">Commit 71994620bb25 ("virtio_balloon: replace=
- oom notifier with shrinker")<br>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Feb 5, 2020 at 2:52 PM David =
+Hildenbrand &lt;<a href=3D"mailto:david@redhat.com">david@redhat.com</a>&gt=
+; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div di=
+r=3D"auto"><div dir=3D"ltr"><br></div><div dir=3D"ltr"><br><blockquote type=
+=3D"cite">Am 05.02.2020 um 23:37 schrieb Tyler Sanderson &lt;<a href=3D"mai=
+lto:tysand@google.com" target=3D"_blank">tysand@google.com</a>&gt;:<br><br>=
+</blockquote></div><blockquote type=3D"cite"><div dir=3D"ltr">=EF=BB=BF<div=
+ dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote"><div=
+ dir=3D"ltr" class=3D"gmail_attr">On Wed, Feb 5, 2020 at 8:34 AM David Hild=
+enbrand &lt;<a href=3D"mailto:david@redhat.com" target=3D"_blank">david@red=
+hat.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
+t:1ex">Commit 71994620bb25 (&quot;virtio_balloon: replace oom notifier with=
+ shrinker&quot;)<br>
 changed the behavior when deflation happens automatically. Instead of<br>
 deflating when called by the OOM handler, the shrinker is used.<br>
 <br>
@@ -408,20 +410,21 @@ priorities, so this behavior cannot be configured.<br>
 <br>
 There was a report that this results in undesired side effects when<br>
 inflating the balloon to shrink the page cache. [1]<br>
-&nbsp; &nbsp; &nbsp; &nbsp; "When inflating the balloon against page cache =
-(i.e. no free memory<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;remains) vmscan.c will both shrink page c=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;When inflating the balloon against page c=
+ache (i.e. no free memory<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0remains) vmscan.c will both shrink page c=
 ache, but also invoke the<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;shrinkers -- including the balloon's shri=
-nker. So the balloon<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;driver allocates memory which requires re=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0shrinkers -- including the balloon&#39;s =
+shrinker. So the balloon<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0driver allocates memory which requires re=
 claim, vmscan gets this<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;memory by shrinking the balloon, and then=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memory by shrinking the balloon, and then=
  the driver adds the<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;memory back to the balloon. Basically a b=
-usy no-op."<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memory back to the balloon. Basically a b=
+usy no-op.&quot;<br>
 <br>
-The name "deflate on OOM" makes it pretty clear when deflation should<br>
+The name &quot;deflate on OOM&quot; makes it pretty clear when deflation sh=
+ould<br>
 happen - after other approaches to reclaim memory failed, not while<br>
 reclaiming. This allows to minimize the footprint of a guest - memory<br>
 will only be taken out of the balloon when really needed.<br>
@@ -443,26 +446,27 @@ pages that are still to be processed by the guest. The hypervisor takes<br>
 care of identifying and resolving possible races between processing a<br>
 hinting request and the guest reusing a page.<br>
 <br>
-In contrast to pre commit 71994620bb25 ("virtio_balloon: replace oom<br>
-notifier with shrinker"), don't add a moodule parameter to configure the<br=
->
+In contrast to pre commit 71994620bb25 (&quot;virtio_balloon: replace oom<b=
+r>
+notifier with shrinker&quot;), don&#39;t add a moodule parameter to configu=
+re the<br>
 number of pages to deflate on OOM. Can be re-added if really needed.<br>
 Also, pay attention that leak_balloon() returns the number of 4k pages -<br=
 >
 convert it properly in virtio_balloon_oom_notify().<br>
 <br>
 Note1: using the OOM handler is frowned upon, but it really is what we<br>
-&nbsp; &nbsp; &nbsp; &nbsp;need for this feature.<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0need for this feature.<br>
 <br>
 Note2: without VIRTIO_BALLOON_F_MUST_TELL_HOST (iow, always with QEMU) we<b=
 r>
-&nbsp; &nbsp; &nbsp; &nbsp;could actually skip sending deflation requests t=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0could actually skip sending deflation requests t=
 o our hypervisor,<br>
-&nbsp; &nbsp; &nbsp; &nbsp;making the OOM path *very* simple. Besically fre=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0making the OOM path *very* simple. Besically fre=
 eing pages and<br>
-&nbsp; &nbsp; &nbsp; &nbsp;updating the balloon. If the communication with =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0updating the balloon. If the communication with =
 the host ever<br>
-&nbsp; &nbsp; &nbsp; &nbsp;becomes a problem on this call path.<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0becomes a problem on this call path.<br>
 <br>
 [1] <a href=3D"https://www.spinics.net/lists/linux-virtualization/msg40863.=
 html" rel=3D"noreferrer" target=3D"_blank">https://www.spinics.net/lists/li=
@@ -485,9 +489,9 @@ Cc: Michal Hocko &lt;<a href=3D"mailto:mhocko@kernel.org" target=3D"_blank"=
 Signed-off-by: David Hildenbrand &lt;<a href=3D"mailto:david@redhat.com" ta=
 rget=3D"_blank">david@redhat.com</a>&gt;<br>
 ---<br>
-&nbsp;drivers/virtio/virtio_balloon.c | 107 +++++++++++++------------------=
+=C2=A0drivers/virtio/virtio_balloon.c | 107 +++++++++++++------------------=
 -<br>
-&nbsp;1 file changed, 44 insertions(+), 63 deletions(-)<br>
+=C2=A01 file changed, 44 insertions(+), 63 deletions(-)<br>
 <br>
 diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloo=
 n.c<br>
@@ -495,204 +499,204 @@ index 7e5d84caeb94..e7b18f556c5e 100644<br>
 --- a/drivers/virtio/virtio_balloon.c<br>
 +++ b/drivers/virtio/virtio_balloon.c<br>
 @@ -14,6 +14,7 @@<br>
-&nbsp;#include &lt;linux/slab.h&gt;<br>
-&nbsp;#include &lt;linux/module.h&gt;<br>
-&nbsp;#include &lt;linux/balloon_compaction.h&gt;<br>
+=C2=A0#include &lt;linux/slab.h&gt;<br>
+=C2=A0#include &lt;linux/module.h&gt;<br>
+=C2=A0#include &lt;linux/balloon_compaction.h&gt;<br>
 +#include &lt;linux/oom.h&gt;<br>
-&nbsp;#include &lt;linux/wait.h&gt;<br>
-&nbsp;#include &lt;linux/mm.h&gt;<br>
-&nbsp;#include &lt;linux/mount.h&gt;<br>
+=C2=A0#include &lt;linux/wait.h&gt;<br>
+=C2=A0#include &lt;linux/mm.h&gt;<br>
+=C2=A0#include &lt;linux/mount.h&gt;<br>
 @@ -27,7 +28,9 @@<br>
-&nbsp; */<br>
-&nbsp;#define VIRTIO_BALLOON_PAGES_PER_PAGE (unsigned)(PAGE_SIZE &gt;&gt; V=
+=C2=A0 */<br>
+=C2=A0#define VIRTIO_BALLOON_PAGES_PER_PAGE (unsigned)(PAGE_SIZE &gt;&gt; V=
 IRTIO_BALLOON_PFN_SHIFT)<br>
-&nbsp;#define VIRTIO_BALLOON_ARRAY_PFNS_MAX 256<br>
+=C2=A0#define VIRTIO_BALLOON_ARRAY_PFNS_MAX 256<br>
 -#define VIRTBALLOON_OOM_NOTIFY_PRIORITY 80<br>
 +/* Maximum number of (4k) pages to deflate on OOM notifications. */<br>
 +#define VIRTIO_BALLOON_OOM_NR_PAGES 256<br>
 +#define VIRTIO_BALLOON_OOM_NOTIFY_PRIORITY 80<br>
 <br>
-&nbsp;#define VIRTIO_BALLOON_FREE_PAGE_ALLOC_FLAG (__GFP_NORETRY | __GFP_NO=
+=C2=A0#define VIRTIO_BALLOON_FREE_PAGE_ALLOC_FLAG (__GFP_NORETRY | __GFP_NO=
 WARN | \<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp;__GFP_NOMEMALLOC)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0__GFP_NOMEMALLOC)<br>
 @@ -112,8 +115,11 @@ struct virtio_balloon {<br>
-&nbsp; &nbsp; &nbsp; &nbsp; /* Memory statistics */<br>
-&nbsp; &nbsp; &nbsp; &nbsp; struct virtio_balloon_stat stats[VIRTIO_BALLOON=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Memory statistics */<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct virtio_balloon_stat stats[VIRTIO_BALLOON=
 _S_NR];<br>
 <br>
--&nbsp; &nbsp; &nbsp; &nbsp;/* To register a shrinker to shrink memory upon=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0/* To register a shrinker to shrink memory upon=
  memory pressure */<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;/* Shrinker to return free pages - VIRTIO_BALLO=
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Shrinker to return free pages - VIRTIO_BALLO=
 ON_F_FREE_PAGE_HINT */<br>
-&nbsp; &nbsp; &nbsp; &nbsp; struct shrinker shrinker;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct shrinker shrinker;<br>
 +<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;/* OOM notifier to deflate on OOM - VIRTIO_BALL=
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/* OOM notifier to deflate on OOM - VIRTIO_BALL=
 OON_F_DEFLATE_ON_OOM */<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;struct notifier_block oom_nb;<br>
-&nbsp;};<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0struct notifier_block oom_nb;<br>
+=C2=A0};<br>
 <br>
-&nbsp;static struct virtio_device_id id_table[] =3D {<br>
+=C2=A0static struct virtio_device_id id_table[] =3D {<br>
 @@ -786,50 +792,13 @@ static unsigned long shrink_free_pages(struct virtio_=
 balloon *vb,<br>
-&nbsp; &nbsp; &nbsp; &nbsp; return blocks_freed * VIRTIO_BALLOON_HINT_BLOCK=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return blocks_freed * VIRTIO_BALLOON_HINT_BLOCK=
 _PAGES;<br>
-&nbsp;}<br>
+=C2=A0}<br>
 <br>
 -static unsigned long leak_balloon_pages(struct virtio_balloon *vb,<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; un=
-signed long pages_to_free)<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 u=
+nsigned long pages_to_free)<br>
 -{<br>
--&nbsp; &nbsp; &nbsp; &nbsp;return leak_balloon(vb, pages_to_free * VIRTIO_=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0return leak_balloon(vb, pages_to_free * VIRTIO_=
 BALLOON_PAGES_PER_PAGE) /<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;VIRTIO_BALLOON_PAGE=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VIRTIO_BALLOON_PAGE=
 S_PER_PAGE;<br>
 -}<br>
 -<br>
 -static unsigned long shrink_balloon_pages(struct virtio_balloon *vb,<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;uns=
-igned long pages_to_free)<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0un=
+signed long pages_to_free)<br>
 -{<br>
--&nbsp; &nbsp; &nbsp; &nbsp;unsigned long pages_freed =3D 0;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned long pages_freed =3D 0;<br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;/*<br>
--&nbsp; &nbsp; &nbsp; &nbsp; * One invocation of leak_balloon can deflate a=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 * One invocation of leak_balloon can deflate a=
 t most<br>
--&nbsp; &nbsp; &nbsp; &nbsp; * VIRTIO_BALLOON_ARRAY_PFNS_MAX balloon pages,=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 * VIRTIO_BALLOON_ARRAY_PFNS_MAX balloon pages,=
  so we call it<br>
--&nbsp; &nbsp; &nbsp; &nbsp; * multiple times to deflate pages till reachin=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 * multiple times to deflate pages till reachin=
 g pages_to_free.<br>
--&nbsp; &nbsp; &nbsp; &nbsp; */<br>
--&nbsp; &nbsp; &nbsp; &nbsp;while (vb-&gt;num_pages &amp;&amp; pages_freed =
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0while (vb-&gt;num_pages &amp;&amp; pages_freed =
 &lt; pages_to_free)<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;pages_freed +=3D le=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pages_freed +=3D le=
 ak_balloon_pages(vb,<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp;pages_to_free - pages_freed);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0pages_to_free - pages_freed);<br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;update_balloon_size(vb);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0update_balloon_size(vb);<br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;return pages_freed;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0return pages_freed;<br>
 -}<br>
 -<br>
-&nbsp;static unsigned long virtio_balloon_shrinker_scan(struct shrinker *sh=
+=C2=A0static unsigned long virtio_balloon_shrinker_scan(struct shrinker *sh=
 rinker,<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; struct shrink_control *sc)<br>
-&nbsp;{<br>
--&nbsp; &nbsp; &nbsp; &nbsp;unsigned long pages_to_free, pages_freed =3D 0;=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct shrink_control *sc)<br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned long pages_to_free, pages_freed =3D 0;=
 <br>
-&nbsp; &nbsp; &nbsp; &nbsp; struct virtio_balloon *vb =3D container_of(shri=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct virtio_balloon *vb =3D container_of(shri=
 nker,<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; struct vir=
-tio_balloon, shrinker);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 struct v=
+irtio_balloon, shrinker);<br>
 <br>
--&nbsp; &nbsp; &nbsp; &nbsp;pages_to_free =3D sc-&gt;nr_to_scan;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0pages_to_free =3D sc-&gt;nr_to_scan;<br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;if (virtio_has_feature(vb-&gt;vdev, VIRTIO_BALL=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0if (virtio_has_feature(vb-&gt;vdev, VIRTIO_BALL=
 OON_F_FREE_PAGE_HINT))<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;pages_freed =3D shr=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pages_freed =3D shr=
 ink_free_pages(vb, pages_to_free);<br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;if (pages_freed &gt;=3D pages_to_free)<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return pages_freed;=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0if (pages_freed &gt;=3D pages_to_free)<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return pages_freed;=
 <br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;pages_freed +=3D shrink_balloon_pages(vb, pages=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0pages_freed +=3D shrink_balloon_pages(vb, pages=
 _to_free - pages_freed);<br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;return pages_freed;<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;return shrink_free_pages(vb, sc-&gt;nr_to_scan)=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0return pages_freed;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0return shrink_free_pages(vb, sc-&gt;nr_to_scan)=
 ;<br>
-&nbsp;}<br>
+=C2=A0}<br>
 <br>
-&nbsp;static unsigned long virtio_balloon_shrinker_count(struct shrinker *s=
+=C2=A0static unsigned long virtio_balloon_shrinker_count(struct shrinker *s=
 hrinker,<br>
 @@ -837,26 +806,22 @@ static unsigned long virtio_balloon_shrinker_count(st=
 ruct shrinker *shrinker,<br>
-&nbsp;{<br>
-&nbsp; &nbsp; &nbsp; &nbsp; struct virtio_balloon *vb =3D container_of(shri=
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct virtio_balloon *vb =3D container_of(shri=
 nker,<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; struct vir=
-tio_balloon, shrinker);<br>
--&nbsp; &nbsp; &nbsp; &nbsp;unsigned long count;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 struct v=
+irtio_balloon, shrinker);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned long count;<br>
 -<br>
--&nbsp; &nbsp; &nbsp; &nbsp;count =3D vb-&gt;num_pages / VIRTIO_BALLOON_PAG=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0count =3D vb-&gt;num_pages / VIRTIO_BALLOON_PAG=
 ES_PER_PAGE;<br>
--&nbsp; &nbsp; &nbsp; &nbsp;count +=3D vb-&gt;num_free_page_blocks * VIRTIO=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0count +=3D vb-&gt;num_free_page_blocks * VIRTIO=
 _BALLOON_HINT_BLOCK_PAGES;<br>
 <br>
--&nbsp; &nbsp; &nbsp; &nbsp;return count;<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;return vb-&gt;num_free_page_blocks * VIRTIO_BAL=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0return count;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0return vb-&gt;num_free_page_blocks * VIRTIO_BAL=
 LOON_HINT_BLOCK_PAGES;<br>
-&nbsp;}<br>
+=C2=A0}<br>
 <br>
 -static void virtio_balloon_unregister_shrinker(struct virtio_balloon *vb)<=
 br>
 +static int virtio_balloon_oom_notify(struct notifier_block *nb,<br>
-+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unsigned long dummy, vo=
-id *parm)<br>
-&nbsp;{<br>
--&nbsp; &nbsp; &nbsp; &nbsp;unregister_shrinker(&amp;vb-&gt;shrinker);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned long dummy, v=
+oid *parm)<br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0unregister_shrinker(&amp;vb-&gt;shrinker);<br>
 -}<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;struct virtio_balloon *vb =3D container_of(nb,<=
++=C2=A0 =C2=A0 =C2=A0 =C2=A0struct virtio_balloon *vb =3D container_of(nb,<=
 br>
-+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; struct virtio_balloon, oom_nb);<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;unsigned long *freed =3D parm;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 struct virtio_balloon, oom_nb);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned long *freed =3D parm;<br>
 <br>
 -static int virtio_balloon_register_shrinker(struct virtio_balloon *vb)<br>
 -{<br>
--&nbsp; &nbsp; &nbsp; &nbsp;vb-&gt;shrinker.scan_objects =3D virtio_balloon=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0vb-&gt;shrinker.scan_objects =3D virtio_balloon=
 _shrinker_scan;<br>
--&nbsp; &nbsp; &nbsp; &nbsp;vb-&gt;shrinker.count_objects =3D virtio_balloo=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0vb-&gt;shrinker.count_objects =3D virtio_balloo=
 n_shrinker_count;<br>
--&nbsp; &nbsp; &nbsp; &nbsp;vb-&gt;shrinker.seeks =3D DEFAULT_SEEKS;<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;*freed +=3D leak_balloon(vb, VIRTIO_BALLOON_OOM=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0vb-&gt;shrinker.seeks =3D DEFAULT_SEEKS;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0*freed +=3D leak_balloon(vb, VIRTIO_BALLOON_OOM=
 _NR_PAGES) /<br>
-+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;VIRTIO_BALLO=
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VIRTIO_BALLO=
 ON_PAGES_PER_PAGE;<br>
-+&nbsp; &nbsp; &nbsp; &nbsp;update_balloon_size(vb);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0update_balloon_size(vb);<br>
 <br>
--&nbsp; &nbsp; &nbsp; &nbsp;return register_shrinker(&amp;vb-&gt;shrinker);=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0return register_shrinker(&amp;vb-&gt;shrinker);=
 <br>
-+&nbsp; &nbsp; &nbsp; &nbsp;return NOTIFY_OK;<br>
-&nbsp;}<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0return NOTIFY_OK;<br>
+=C2=A0}<br>
 <br>
-&nbsp;static int virtballoon_probe(struct virtio_device *vdev)<br>
+=C2=A0static int virtballoon_probe(struct virtio_device *vdev)<br>
 @@ -933,22 +898,35 @@ static int virtballoon_probe(struct virtio_device *vd=
 ev)<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; virtio_cwrite(vb-&gt;vdev, struct virtio_balloon_config,<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; poison_val, &amp;=
-poison_val);<br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>
--&nbsp; &nbsp; &nbsp; &nbsp;}<br>
--&nbsp; &nbsp; &nbsp; &nbsp;/*<br>
--&nbsp; &nbsp; &nbsp; &nbsp; * We continue to use VIRTIO_BALLOON_F_DEFLATE_=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 virtio_cwrite(vb-&gt;vdev, struct virtio_balloon_config,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 poison_val, &am=
+p;poison_val);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 * We continue to use VIRTIO_BALLOON_F_DEFLATE_=
 ON_OOM to decide if a<br>
--&nbsp; &nbsp; &nbsp; &nbsp; * shrinker needs to be registered to relieve m=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 * shrinker needs to be registered to relieve m=
 emory pressure.<br>
--&nbsp; &nbsp; &nbsp; &nbsp; */<br>
--&nbsp; &nbsp; &nbsp; &nbsp;if (virtio_has_feature(vb-&gt;vdev, VIRTIO_BALL=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0if (virtio_has_feature(vb-&gt;vdev, VIRTIO_BALL=
 OON_F_DEFLATE_ON_OOM)) {<br>
--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;err =3D virtio_ball=
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0err =3D virtio_ball=
 oon_register_shrinker(vb);<br>
 +<br>
-+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/*<br>
-+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * We're allowed to=
- reuse any free pages, even if they are<br>
-+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; * still to be proc=
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * We&#39;re allowe=
+d to reuse any free pages, even if they are<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * still to be proc=
 essed by the host.<br></blockquote><div>It is important to clarify that pag=
 es that are on the inflate queue but not ACKed by the host (the queue entry=
  has not been returned) are _not_ okay to reuse.</div><div>If the host is g=
@@ -702,12 +706,15 @@ ds to happen before the entry is returned.</div></div></div>
 =E2=80=9Efree page hinting=E2=80=9C section/if (not obvious by looking at t=
 he diff only), so it does not apply to inflate/deflate queues - but only fr=
 ee pages that are getting hinted. Or am I misreading your suggestion/missin=
-g something?</div><div><br></div><div>Thanks!</div><div><br></div><div><br>=
-</div></body></html>
---Apple-Mail-F9A6D605-018C-4510-9EDF-244179F93224--
+g something?</div></div></blockquote><div>Ah you are right. Thanks!=C2=A0</=
+div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"auto"><di=
+v><br></div><div>Thanks!</div><div><br></div><div><br></div></div></blockqu=
+ote></div></div>
 
+--0000000000006c8e4b059ddc3552--
 
---===============9120355971494198680==
+--===============2708172818746933992==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -717,5 +724,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============9120355971494198680==--
-
+--===============2708172818746933992==--
