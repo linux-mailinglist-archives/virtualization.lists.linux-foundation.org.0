@@ -2,80 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 390EB15395C
-	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 20:57:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C61415397A
+	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 21:20:29 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D48BB85EA5;
-	Wed,  5 Feb 2020 19:57:19 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 26FBE85E47;
+	Wed,  5 Feb 2020 20:20:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hdPGRLikUKZK; Wed,  5 Feb 2020 19:57:17 +0000 (UTC)
+	with ESMTP id z6IqVvlSe1eF; Wed,  5 Feb 2020 20:20:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E8D0685EA4;
-	Wed,  5 Feb 2020 19:57:17 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id AB35C85DDB;
+	Wed,  5 Feb 2020 20:20:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C95D1C0174;
-	Wed,  5 Feb 2020 19:57:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 87BEFC0174;
+	Wed,  5 Feb 2020 20:20:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1D37AC0174
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7B7C7C0174
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 19:57:16 +0000 (UTC)
+ Wed,  5 Feb 2020 20:20:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 0B19886190
+ by silver.osuosl.org (Postfix) with ESMTP id 60CFB204E9
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 19:57:16 +0000 (UTC)
+ Wed,  5 Feb 2020 20:20:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id eTkwRU-t3DeF
+ with ESMTP id fx7PLQzKhBFt
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 19:57:15 +0000 (UTC)
+ Wed,  5 Feb 2020 20:20:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
- [209.85.166.66])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 429D485F8E
+Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
+ [209.85.166.193])
+ by silver.osuosl.org (Postfix) with ESMTPS id 9F8432043F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 19:57:15 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id m25so3559989ioo.8
+ Wed,  5 Feb 2020 20:20:24 +0000 (UTC)
+Received: by mail-il1-f193.google.com with SMTP id f10so3010875ils.8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 05 Feb 2020 11:57:15 -0800 (PST)
+ Wed, 05 Feb 2020 12:20:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=E8DT/JDkCyTz3eJT+UFCcTHz+yBESFEOpQDShsbicZo=;
- b=WUu4aa27JwL7uv2P/L4c3Ok+FyuKnqJGHLzGZYjJt9q/DSazi89aSuNF5QF2wicVsv
- ebLtKMEBEsZTeJWcdtGUvwZRlzQ6lkH9tS6lvboxehjdvt+GgWZOI0X3pYDwY5fbUwlk
- 66EQ3KGTsAybDLyF43WaeikkWK6NTpmVU9U5LF4og2RqArCzJtLfT9K6EN7ncauORJV3
- viR4bsYex8C8aof2HDO8Bn+/YKScoZj0PNhkb249dkiQ/jhxzlJQ0woYy1wUNij+nC3p
- ddfQqM4Yu9A2zOMqInce5lbterdjRi4WoVxM6b1kcH5v/XULCALRXlK6AJmKiK5hABpP
- 2K6g==
+ :cc; bh=JlLlxcQrpMkFUoU3hq5dL+E4UdUH5CDEd0YwvUejnVU=;
+ b=oxenJqq82hLbOY7iPrO4DykFZo5N5e0MnyDP4aMCZ4rNnPVzW7PVckpP2qD7MWebBl
+ Al2LFHbYZUmY6P3jBNPQTFTJATaNYQgghy5BquPjuhetKLPYg9SYNadMl/MB5nl7p4qg
+ fP4YnhAj3q8n1AbMRpiGqJzn+4OeEEOrK6Re9bVBJ1d/IuaQkN3rb6jYEWcjVskRYLp5
+ vWHG9YVnk4VtWVbENO1Fy3klZ4pRRQAwj+tfauQTnQrm5eYUVWtjg7IuVHH6cFLXArQ9
+ PWBduhU9ZJSz1uDA/+UGLI7zagtMps7gLmNwuAHjyETzuhbO2L6Wzt2/DjinPhcQ6ge4
+ Q1gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=E8DT/JDkCyTz3eJT+UFCcTHz+yBESFEOpQDShsbicZo=;
- b=pqgkTTTgxx4BXN596TLF1hhjFO/T650B8xQUZ3P889viM2B4DctexRBmrexyx4YgNt
- eV4N2w7MtmYWZwbeS0P/kvpa0LsmxMWYrp0jUBZBQQNwYD8nGsEt1Ee85o9V5XeBxpid
- o6zKp2kzxZ1oDbz/XjHnY1SNGo0Rb/zCGf2YR2Vj/TyZAUpYNXa5kw+MUN25fXbUFsTv
- 92swf4H1IcqJwwLo5Wn0YO6ieptmLCnjVDSuzsFlnSkuUFw4oyMdz7CzCCQgM16OC8Bs
- DU72Cb79wXUF1aIeCNZR7Tl6n6xvRTLN4PrNrnwVWEcDV5imVQmCFbRy3mz1bW3e2PJ/
- 6rVw==
-X-Gm-Message-State: APjAAAU2uQWNa4B0H+DFlDNQtbxcmyZ2vtahe84StmuynuNqT9IXyz9c
- smUFO9hJEjcm1M43nNbEzF/xUDpAm3IJ7fifE+8=
-X-Google-Smtp-Source: APXvYqzzljsWEvyAgqshuVvQI0+bwWGkLOy/+bGZ3qsxtX0LFjmImFZkCekHNQSV/qnqvg1jI5PMWdsyBC7Y9123Vas=
-X-Received: by 2002:a6b:e705:: with SMTP id b5mr31341286ioh.139.1580932634363; 
- Wed, 05 Feb 2020 11:57:14 -0800 (PST)
+ bh=JlLlxcQrpMkFUoU3hq5dL+E4UdUH5CDEd0YwvUejnVU=;
+ b=VutpRy5FYsvR67bUOVq0AmIDG2vkG+wTZkIGbVEcWMWrNiHMGW07l6/10DbrGW8Pui
+ guSEAWSJ8MAQta/uWHtrkJc8VWvvMykU5SQfwyFbOevX+ht6TXnMqPnk7IBohtXw7rgE
+ 1GP53f+rZaPyP6q9puuNFKPeglfwa+qr9Jqto/LwvBvc1Jh9+LGHlQ5BP/R3tJBHflJA
+ nsya481xYED1cLXbfUA1d1/ETkf00BA70NJ5swtLZz09SXeXQxbe/PWy4uBpUuMtvWXR
+ LOdqA/DQN86ZV0OiMvuYs5vkkMKwqzwCs+/8XmNtpNgZ+h8RdEYxOBoJxg6WR5lPvtI/
+ 6EHQ==
+X-Gm-Message-State: APjAAAU0ePOAHzdr3IaBDuTB+KD4sb2+TX/G10S//B8PEietcY7gbgdj
+ lm7D+idgtavFt+LuNBtzsMlW6tI6607HlZPgEaE=
+X-Google-Smtp-Source: APXvYqxFqY4hqvCjpu5bLrtVB9HF9X+Oiknt2AoIL2F6QzIYDbfIIZTO59osj5M/WRh4O2BVdm/STxVTgQlIrA90kSA=
+X-Received: by 2002:a92:9e97:: with SMTP id s23mr29405150ilk.139.1580934023820; 
+ Wed, 05 Feb 2020 12:20:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20200205105955.28143-1-kraxel@redhat.com>
- <20200205105955.28143-5-kraxel@redhat.com>
-In-Reply-To: <20200205105955.28143-5-kraxel@redhat.com>
+References: <20200205102552.21409-1-kraxel@redhat.com>
+In-Reply-To: <20200205102552.21409-1-kraxel@redhat.com>
 From: Chia-I Wu <olvaffe@gmail.com>
-Date: Wed, 5 Feb 2020 11:57:03 -0800
-Message-ID: <CAPaKu7RxijC_oS4GPukS9wEe9gn8DPQgaGZKwG6g8M8xwTnsig@mail.gmail.com>
-Subject: Re: [PATCH 4/4] drm/virtio: move virtio_gpu_mem_entry initialization
- to new function
+Date: Wed, 5 Feb 2020 12:20:12 -0800
+Message-ID: <CAPaKu7SyqZU=ov4Atbedie6AGC52he0QQJZnGqr545mG-U7vvg@mail.gmail.com>
+Subject: Re: [PATCH] drm/virtio: ratelimit error logging
 To: Gerd Hoffmann <kraxel@redhat.com>
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
  ML dri-devel <dri-devel@lists.freedesktop.org>,
@@ -97,174 +95,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Feb 5, 2020 at 3:00 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+On Wed, Feb 5, 2020 at 2:26 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
 >
-> Introduce new virtio_gpu_object_shmem_init() helper function which will
-> create the virtio_gpu_mem_entry array, containing the backing storage
-> information for the host.  For the most path this just moves code from
-> virtio_gpu_object_attach().
+> Avoid flooding the log in case we screw up badly.
 >
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Chia-I Wu <olvaffe@gmail.com>
 > ---
->  drivers/gpu/drm/virtio/virtgpu_drv.h    |  4 ++
->  drivers/gpu/drm/virtio/virtgpu_object.c | 49 +++++++++++++++++++++++++
->  drivers/gpu/drm/virtio/virtgpu_vq.c     | 49 ++-----------------------
->  3 files changed, 56 insertions(+), 46 deletions(-)
+>  drivers/gpu/drm/virtio/virtgpu_vq.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> index 15fb3c12f22f..be62a7469b04 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> @@ -71,6 +71,10 @@ struct virtio_gpu_object {
->
->         struct sg_table *pages;
->         uint32_t mapped;
-> +
-> +       struct virtio_gpu_mem_entry *ents;
-> +       unsigned int nents;
-> +
->         bool dumb;
->         bool created;
->  };
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
-> index bce2b3d843fe..4e82e269a1f4 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
-> @@ -121,6 +121,49 @@ struct drm_gem_object *virtio_gpu_create_object(struct drm_device *dev,
->         return &bo->base.base;
->  }
->
-> +static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
-> +                                       struct virtio_gpu_object *bo)
-> +{
-> +       bool use_dma_api = !virtio_has_iommu_quirk(vgdev->vdev);
-> +       struct scatterlist *sg;
-> +       int si, ret;
-> +
-> +       ret = drm_gem_shmem_pin(&bo->base.base);
-> +       if (ret < 0)
-> +               return -EINVAL;
-> +
-> +       bo->pages = drm_gem_shmem_get_sg_table(&bo->base.base);
-> +       if (bo->pages == NULL) {
-> +               drm_gem_shmem_unpin(&bo->base.base);
-> +               return -EINVAL;
-> +       }
-> +
-> +       if (use_dma_api) {
-> +               bo->mapped = dma_map_sg(vgdev->vdev->dev.parent,
-> +                                        bo->pages->sgl, bo->pages->nents,
-> +                                        DMA_TO_DEVICE);
-> +               bo->nents = bo->mapped;
-> +       } else {
-> +               bo->nents = bo->pages->nents;
-> +       }
-> +
-> +       bo->ents = kmalloc_array(bo->nents, sizeof(struct virtio_gpu_mem_entry),
-> +                                GFP_KERNEL);
-> +       if (!bo->ents) {
-> +               DRM_ERROR("failed to allocate ent list\n");
-> +               return -ENOMEM;
-> +       }
-> +
-> +       for_each_sg(bo->pages->sgl, sg, bo->nents, si) {
-> +               bo->ents[si].addr = cpu_to_le64(use_dma_api
-> +                                               ? sg_dma_address(sg)
-> +                                               : sg_phys(sg));
-> +               bo->ents[si].length = cpu_to_le32(sg->length);
-> +               bo->ents[si].padding = 0;
-> +       }
-> +       return 0;
-> +}
-> +
->  int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
->                              struct virtio_gpu_object_params *params,
->                              struct virtio_gpu_object **bo_ptr,
-> @@ -165,6 +208,12 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
->                                                objs, fence);
->         }
->
-> +       ret = virtio_gpu_object_shmem_init(vgdev, bo);
-> +       if (ret != 0) {
-> +               virtio_gpu_free_object(&shmem_obj->base);
-> +               return ret;
-> +       }
-> +
->         ret = virtio_gpu_object_attach(vgdev, bo, NULL);
->         if (ret != 0) {
->                 virtio_gpu_free_object(&shmem_obj->base);
 > diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> index e258186bedb2..7db91376f2f2 100644
+> index 5914e79d3429..83f22933c3bb 100644
 > --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
 > +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> @@ -1081,54 +1081,11 @@ int virtio_gpu_object_attach(struct virtio_gpu_device *vgdev,
->                              struct virtio_gpu_object *obj,
->                              struct virtio_gpu_fence *fence)
->  {
-> -       bool use_dma_api = !virtio_has_iommu_quirk(vgdev->vdev);
-> -       struct virtio_gpu_mem_entry *ents;
-> -       struct scatterlist *sg;
-> -       int si, nents, ret;
-> -
-> -       if (WARN_ON_ONCE(!obj->created))
-> -               return -EINVAL;
-> -       if (WARN_ON_ONCE(obj->pages))
-> -               return -EINVAL;
-> -
-> -       ret = drm_gem_shmem_pin(&obj->base.base);
-> -       if (ret < 0)
-> -               return -EINVAL;
-> -
-> -       obj->pages = drm_gem_shmem_get_sg_table(&obj->base.base);
-> -       if (obj->pages == NULL) {
-> -               drm_gem_shmem_unpin(&obj->base.base);
-> -               return -EINVAL;
-> -       }
-> -
-> -       if (use_dma_api) {
-> -               obj->mapped = dma_map_sg(vgdev->vdev->dev.parent,
-> -                                        obj->pages->sgl, obj->pages->nents,
-> -                                        DMA_TO_DEVICE);
-> -               nents = obj->mapped;
-> -       } else {
-> -               nents = obj->pages->nents;
-> -       }
-> -
-> -       /* gets freed when the ring has consumed it */
-> -       ents = kmalloc_array(nents, sizeof(struct virtio_gpu_mem_entry),
-> -                            GFP_KERNEL);
-> -       if (!ents) {
-> -               DRM_ERROR("failed to allocate ent list\n");
-> -               return -ENOMEM;
-> -       }
-> -
-> -       for_each_sg(obj->pages->sgl, sg, nents, si) {
-> -               ents[si].addr = cpu_to_le64(use_dma_api
-> -                                           ? sg_dma_address(sg)
-> -                                           : sg_phys(sg));
-> -               ents[si].length = cpu_to_le32(sg->length);
-> -               ents[si].padding = 0;
-> -       }
-> -
->         virtio_gpu_cmd_resource_attach_backing(vgdev, obj->hw_res_handle,
-> -                                              ents, nents,
-> +                                              obj->ents, obj->nents,
->                                                fence);
-> +       obj->ents = NULL;
-> +       obj->nents = 0;
-Hm, if the entries are temporary, can we allocate and initialize them
-in this function?
-
-virtio_gpu_object_shmem_init will just pin and map pages.  Maybe
-rename it to virtio_gpu_object_pin_pages (and add a helper
-virtio_gpu_object_unpin_pages for use by virtio_gpu_cleanup_object).
-
-Because we pin pages on object creation, virtio_gpu_gem_funcs does not
-need to provide the optional pin/unpin hooks.
-
->         return 0;
->  }
->
+> @@ -212,9 +212,9 @@ void virtio_gpu_dequeue_ctrl_func(struct work_struct *work)
+>                         if (resp->type >= cpu_to_le32(VIRTIO_GPU_RESP_ERR_UNSPEC)) {
+>                                 struct virtio_gpu_ctrl_hdr *cmd;
+>                                 cmd = (struct virtio_gpu_ctrl_hdr *)entry->buf;
+> -                               DRM_ERROR("response 0x%x (command 0x%x)\n",
+> -                                         le32_to_cpu(resp->type),
+> -                                         le32_to_cpu(cmd->type));
+> +                               DRM_ERROR_RATELIMITED("response 0x%x (command 0x%x)\n",
+> +                                                     le32_to_cpu(resp->type),
+> +                                                     le32_to_cpu(cmd->type));
+>                         } else
+>                                 DRM_DEBUG("response 0x%x\n", le32_to_cpu(resp->type));
+>                 }
 > --
 > 2.18.1
 >
