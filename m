@@ -1,124 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4D6F15317A
-	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 14:11:26 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 37E2285C11;
-	Wed,  5 Feb 2020 13:11:25 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jv1L5ZNCWh8I; Wed,  5 Feb 2020 13:11:23 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5A3E185ADC;
-	Wed,  5 Feb 2020 13:11:23 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3FC9CC0174;
-	Wed,  5 Feb 2020 13:11:23 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 699C3C0174
- for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 13:11:21 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99B36153183
+	for <lists.virtualization@lfdr.de>; Wed,  5 Feb 2020 14:15:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 65C288410C
- for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 13:11:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 2ACDA862BC;
+	Wed,  5 Feb 2020 13:15:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VWvP4WgqNHoO; Wed,  5 Feb 2020 13:15:00 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4E6A186165;
+	Wed,  5 Feb 2020 13:15:00 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 240A7C0174;
+	Wed,  5 Feb 2020 13:15:00 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 04581C0174
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  5 Feb 2020 13:14:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id E6A6685C11
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  5 Feb 2020 13:14:57 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JHb0ASAgF2Oi
+ with ESMTP id QQbASsAEimht
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 13:11:20 +0000 (UTC)
+ Wed,  5 Feb 2020 13:14:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr10078.outbound.protection.outlook.com [40.107.1.78])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 2A2BF838F6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 2F18C844A1
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 Feb 2020 13:11:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NQKCu4+70/kJSBcmulkd6fE5JAWXqSUsoahihvze38tsEhLjuhOkLTtDOJCM0LrWI+DXWJwx//lnbUsRzVvt5WbgRBaf42ssZ84E0/EjgSDtjVQys3gIIZK7ZeMSJumy+YW3S4QydoHa5BeoBQnCBYFsDo/83qRCjQfu2OKqd14uP6caAsHCjTPv7Vvh7K+AMmjLiP4NtXaTMb+F/V4ZzaQGJ8L4AhGT3ib4rYOIFZppHXX5epzfUR8qJvgKB5jNxP5k3+NX8c0gyz7F2VT/LjmNXualnNpZuR2pszHP1zYtxe92Cc15q2V40gGz5rN+QNXM3tgH7ivN5qgFoFfGGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gbiPdN/Tw9XZTbyfw4LGMrONC3v0+6S/WuRJhvHO4Tw=;
- b=JrAdRBJaCDYfHSnnGXGaLa1TNaH/UI1SUKmizArhczqd1cfVYEynecLkR9/5k5CAXlAqO1TWLv9lHSlzqTCyjvnXX5uywgB/I6eQ+6Pal2+9B3Q8YpR10FrLAnOO7jmqfkfcwlW4EmPK5iBNkpyLoQxDr4wZRXcQv1wFI8Lun/l1P6Po05iX3cgIA45m987EKsDOHxYssUV5gw37iH4Di9Z1aUCXfg/s6ZCfS2kUOfJu6iLitodvYetyhuebInN5D1BHd8InpYghBV1I/5/KfC+p8ImSL7tZYcBEZNqUiMxFMs2rOzLXZ/e738oQbQ1SP4fRZii6X/Kas7k73P6YrA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gbiPdN/Tw9XZTbyfw4LGMrONC3v0+6S/WuRJhvHO4Tw=;
- b=HUqeCSJWz5pEvpa6i2a32ezw1unnN9LnmoIScZvtGJYTFugpRKxnstscHF3JzfdCzlQMBiJVjgdfzOU9nEVvDG9qp1MqyyNTrJXzhz27OLbaSVJzGwWhDYYPe5LGacHGJdZKRVNEMdD9HIuE44W0xAX0oJXISKaxOAGO24yU83s=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB4509.eurprd05.prod.outlook.com (10.171.182.149) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2707.21; Wed, 5 Feb 2020 12:56:53 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2707.020; Wed, 5 Feb 2020
- 12:56:53 +0000
-Date: Wed, 5 Feb 2020 08:56:48 -0400
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Jason Wang <jasowang@redhat.com>
+ Wed,  5 Feb 2020 13:14:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1580908495;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QuNXmwS8sysRc0ThXGMCmTTQlX8tFR45lSd0PUTiOGs=;
+ b=CzvJwhwXrycMJnKvpCWji+0amMkonKqF/bG//ByPBF59iq3kYYjy0F5ebHXAZlYr9RG7eV
+ U690ZpS/GYaOohPjq5mweRKtcUieVkAObnf7tfLLtFPX8+WuzzxwiJXnDcJI+VfOKD/8W1
+ 1zaCRT901L2/EwMsv8hm36qP5XUPMcA=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-175-R715Qg6ZM3mNPwtMNozxEg-1; Wed, 05 Feb 2020 08:14:54 -0500
+Received: by mail-qt1-f197.google.com with SMTP id o18so1274069qtt.19
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 05 Feb 2020 05:14:54 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=QuNXmwS8sysRc0ThXGMCmTTQlX8tFR45lSd0PUTiOGs=;
+ b=m3i9wsl2nTlaA6y4H4wlFQrm3b8ndwTwJcJNPEco3AFK8oYRkP9XzM3vCdjtbWP0Lj
+ 2RPcVOgrHXDGsmHvLlydDyQ11Vt+2LfxStDDSz6mNncFsomknORxVkAI4nmMqbawbBiY
+ NjFLi4l4riPo3MhnqjAafA3R0GHsXezGghbDTyadaxApikTUOm9F/xtElOP2phu2Ces6
+ ulOWNq/4CJqP3maADSQS1rPUtoOGjzCMsdzkNnvImHKcZnHJga0W4egkOQdGpDhhJZQc
+ 6rdYmPu/EUml9MQ10tUj9b3KycK4tRrtNxkRbXBFAyGXdqyUria37wQHfHntHgCBj/kc
+ mrZw==
+X-Gm-Message-State: APjAAAUxH2A5npt331qZpUKMoOmX/f6AssvQbDfnDaI32k95tj1U6q8j
+ OeSLiWJX2lR4V3NRYBkeuvnXY6gWGnc0MDU6qKjM0my1bWi8q4mnTvpKu/PolpIT7DZzkWzqjGc
+ VL1Ot+BOk339ftrBbhhdHzDurAH+rDCUT0ZL1YJn5DQ==
+X-Received: by 2002:a37:6551:: with SMTP id z78mr34386873qkb.144.1580908493726; 
+ Wed, 05 Feb 2020 05:14:53 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyPJbBNbk5endfccq+ku5moWMnpzgaXCLDqjaEgV35BhSBP12RgV6EFcH2z1a9H9HuZasXKOQ==
+X-Received: by 2002:a37:6551:: with SMTP id z78mr34386840qkb.144.1580908493533; 
+ Wed, 05 Feb 2020 05:14:53 -0800 (PST)
+Received: from redhat.com (bzq-79-176-41-183.red.bezeqint.net. [79.176.41.183])
+ by smtp.gmail.com with ESMTPSA id c45sm14187780qtd.43.2020.02.05.05.14.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Feb 2020 05:14:52 -0800 (PST)
+Date: Wed, 5 Feb 2020 08:14:46 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Gunthorpe <jgg@mellanox.com>
 Subject: Re: [PATCH] vhost: introduce vDPA based backend
-Message-ID: <20200205125648.GV23346@mellanox.com>
+Message-ID: <20200205081210-mutt-send-email-mst@kernel.org>
 References: <20200131033651.103534-1-tiwei.bie@intel.com>
  <7aab2892-bb19-a06a-a6d3-9c28bc4c3400@redhat.com>
  <20200205020247.GA368700@___>
  <AM0PR0502MB37952015716C1D5E07E390B6C3020@AM0PR0502MB3795.eurprd05.prod.outlook.com>
  <112858a4-1a01-f4d7-e41a-1afaaa1cad45@redhat.com>
-Content-Disposition: inline
-In-Reply-To: <112858a4-1a01-f4d7-e41a-1afaaa1cad45@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-ClientProxiedBy: MN2PR05CA0062.namprd05.prod.outlook.com
- (2603:10b6:208:236::31) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+ <20200205125648.GV23346@mellanox.com>
 MIME-Version: 1.0
-Received: from mlx.ziepe.ca (142.68.57.212) by
- MN2PR05CA0062.namprd05.prod.outlook.com (2603:10b6:208:236::31) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2707.12 via Frontend
- Transport; Wed, 5 Feb 2020 12:56:53 +0000
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
- <jgg@mellanox.com>)	id 1izKEa-0002I9-2r; Wed, 05 Feb 2020 08:56:48 -0400
-X-Originating-IP: [142.68.57.212]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 8f8fb22b-1f4c-4d1b-e392-08d7aa3adf80
-X-MS-TrafficTypeDiagnostic: VI1PR05MB4509:|VI1PR05MB4509:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <VI1PR05MB4509FA44E2ECF6674D62AB4DCF020@VI1PR05MB4509.eurprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
-X-Forefront-PRVS: 0304E36CA3
-X-Forefront-Antispam-Report: SFV:NSPM;
- SFS:(10009020)(4636009)(366004)(346002)(136003)(396003)(376002)(39860400002)(189003)(199004)(2616005)(6916009)(26005)(186003)(7416002)(36756003)(33656002)(81156014)(81166006)(8936002)(9746002)(9786002)(8676002)(2906002)(1076003)(4326008)(66476007)(66946007)(66556008)(4744005)(478600001)(5660300002)(316002)(52116002)(86362001)(54906003)(24400500001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4509;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-Received-SPF: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: LgU9/3vE7rJYUS2L6IWqg10NyNGNV3Fo/zCFzdtAkzHzdiYixeujAbMyPr3Up9SgmPunaXZQ1jEpn7UN42D5oDQ+WqaFoss+ZMs62E7ORCriGuviExal0wRfiIEo7zSMvbRStwZsBP+Q+1MUjJMMmYVHsjlyXQozL9JZwIaaf2Z+UqycIEdKFUy2y4qRgEqLIRnJO6gShwg00nwO9VZELiu8kuBNYj6sSchOSZcSXBxI3kXoeho5bKrxBDx1jb7TQ70iSKejvRmgqQgLsG7DWC1h+swqeaAoKgHd7Kv+NxgZTtLulqZ9oYhGYBDA3r37qFiG6wL/buJf//G8iVZHzuAVQC96dnIf9UjMAgSzALP03EIjhlPiLpyS/l0S6RUrhB8Uh0Hghemxnma9kgWowI6SXKD5yDyYuO6HxvvOpjWAfoWyR6g0A3c8vP20OtosdSLX112OG13R/+4i1OlceLT+GtVCZfEqLM7SS4ZYMSNVwKXbIgCG3TFYOvGiu2lL
-X-MS-Exchange-AntiSpam-MessageData: n1YkP5iFigNTfa5KFTJKaT4IhUwo19bRL4ngRj9iADAEXWD9JLYAO5y92o05X17qTFiV6JXJAt7MY+SCTscuiZ9/H2CvotdbMpx8YerIj9hngHhvbOf21RsGHMF3ozY3rr3eo2F8BncEuARfM1vWpw==
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8f8fb22b-1f4c-4d1b-e392-08d7aa3adf80
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2020 12:56:53.3574 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dQ01rPmVWX2GbT50QEsE8g6wEQjpuNubHc0YWbcwnBAr7qgaxFt2UCbDidwlc0PIn3y+UjGfyWisqL0OL7AGXQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4509
+In-Reply-To: <20200205125648.GV23346@mellanox.com>
+X-MC-Unique: R715Qg6ZM3mNPwtMNozxEg-1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "mst@redhat.com" <mst@redhat.com>,
- "mhabets@solarflare.com" <mhabets@solarflare.com>,
  "virtualization@lists.linux-foundation.org"
  <virtualization@lists.linux-foundation.org>,
  "rob.miller@broadcom.com" <rob.miller@broadcom.com>,
@@ -127,6 +103,7 @@ Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
  "hch@infradead.org" <hch@infradead.org>,
  "eperezma@redhat.com" <eperezma@redhat.com>,
  "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
+ "mhabets@solarflare.com" <mhabets@solarflare.com>,
  Shahaf Shuler <shahafs@mellanox.com>, Parav Pandit <parav@mellanox.com>,
  Jiri Pirko <jiri@mellanox.com>,
  "zhihong.wang@intel.com" <zhihong.wang@intel.com>,
@@ -151,18 +128,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Feb 05, 2020 at 03:50:14PM +0800, Jason Wang wrote:
-> > Would it be better for the map/umnap logic to happen inside each device ?
-> > Devices that needs the IOMMU will call iommu APIs from inside the driver callback.
+On Wed, Feb 05, 2020 at 08:56:48AM -0400, Jason Gunthorpe wrote:
+> On Wed, Feb 05, 2020 at 03:50:14PM +0800, Jason Wang wrote:
+> > > Would it be better for the map/umnap logic to happen inside each device ?
+> > > Devices that needs the IOMMU will call iommu APIs from inside the driver callback.
+> > 
+> > Technically, this can work. But if it can be done by vhost-vpda it will make
+> > the vDPA driver more compact and easier to be implemented.
 > 
-> Technically, this can work. But if it can be done by vhost-vpda it will make
-> the vDPA driver more compact and easier to be implemented.
+> Generally speaking, in the kernel, it is normal to not hoist code of
+> out drivers into subsystems until 2-3 drivers are duplicating that
+> code. It helps ensure the right design is used
+> 
+> Jason
 
-Generally speaking, in the kernel, it is normal to not hoist code of
-out drivers into subsystems until 2-3 drivers are duplicating that
-code. It helps ensure the right design is used
+That's up to the sybsystem maintainer really, as there's also some
+intuition involved in guessing a specific API is widely useful.
+In-kernel APIs are flexible, if we find something isn't needed we just
+drop it.
 
-Jason
+-- 
+MST
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
