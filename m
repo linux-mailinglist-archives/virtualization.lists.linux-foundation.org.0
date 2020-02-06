@@ -2,105 +2,162 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 871111542FD
-	for <lists.virtualization@lfdr.de>; Thu,  6 Feb 2020 12:26:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5EB615474B
+	for <lists.virtualization@lfdr.de>; Thu,  6 Feb 2020 16:12:34 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 176DC85F4E;
-	Thu,  6 Feb 2020 11:26:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3D95F860C6;
+	Thu,  6 Feb 2020 15:12:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bzYl9d8V6bCH; Thu,  6 Feb 2020 11:26:48 +0000 (UTC)
+	with ESMTP id uKZIC2QJGuds; Thu,  6 Feb 2020 15:12:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id B117685F34;
-	Thu,  6 Feb 2020 11:26:48 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B6837860C4;
+	Thu,  6 Feb 2020 15:12:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 82DC9C013E;
-	Thu,  6 Feb 2020 11:26:48 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A9B5CC1D87;
+	Thu,  6 Feb 2020 15:12:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 716B3C013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 93902C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 11:26:46 +0000 (UTC)
+ Thu,  6 Feb 2020 15:12:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 675EF85772
+ by silver.osuosl.org (Postfix) with ESMTP id 80F2F2155B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 11:26:46 +0000 (UTC)
+ Thu,  6 Feb 2020 15:12:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2eE5LgmbovM7
+ with ESMTP id bRx4XCS2GzoZ
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 11:26:45 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 1D89B8510C
+ Thu,  6 Feb 2020 15:12:29 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by silver.osuosl.org (Postfix) with ESMTPS id 2C0A32154B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 11:26:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580988403;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=5piNXc1fMT29Zpv4Z7TyeSYOjlJ928bleKih104+/Vg=;
- b=UBRy7ulQ06UGkmM+jakhjLKna+KOi4UO3Olz0AT5rWGUfTUipfucm83GK5uZaruHqrVTJ0
- N53LinAgRSN6kL1MeHduSctPQ1oW1h+uCQ8mNcSXLcI2vhXQFr2hCZjb+h942k1wC9CWpc
- IAMXJjJO6qCvBD3tDBkrGa25r+U4wCU=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-423-qufN_jxINRaIi3F6XGB8ew-1; Thu, 06 Feb 2020 06:26:42 -0500
-Received: by mail-qt1-f200.google.com with SMTP id d9so3600765qtq.13
+ Thu,  6 Feb 2020 15:12:29 +0000 (UTC)
+Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 016F8x4v086903
+ for <virtualization@lists.linux-foundation.org>; Thu, 6 Feb 2020 10:12:28 -0500
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 2y0ktrbtch-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
  for <virtualization@lists.linux-foundation.org>;
- Thu, 06 Feb 2020 03:26:42 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=5piNXc1fMT29Zpv4Z7TyeSYOjlJ928bleKih104+/Vg=;
- b=OBLrBPbOJGFt7S0u6pMOisPRyypcY9rRMinzy1F7UzRhoZyIzFGn6AoZpwePeCEqWf
- IaviU9VTlTnKvyrJ1pQwez2nUI0tnVVLzUf/jEJ3Q0WS+ogqVnTBjVGbjF0snGwhKZWY
- SQtwmhQWIHeslo9Ut67OvOOxVsiw4+mzUmgtVY8LJdzYYf/yEsd/pDjLXzkCCVhPoBIm
- ZSYsRkEgHuoqzow9kjiEAY8MYjcKYoR1mfqLi5VPcR3uw1GUPSoWctAqoU+OiGaQ/1vX
- u/BwIqn9XQP29OuG3kF6gbdXU1iTEaY5utNGZZ09I9YIX+st3/83+myRGU3f+/+I2FGF
- tuag==
-X-Gm-Message-State: APjAAAWnplPFpjBMBkUp+sgI7s64L3+Bo925zg7PZrSJszQuL7P95wQK
- MkKUe/aeIWLE0jUEmLqQw+86e0s7ZeWhfJyLHie/tpvATRWFscH/BeNlLaErxk1tq0ixo3BQgNM
- d/kpUs+nVr0GXnqtLwi9i5Xyv7Xll4WSC89hb1sF9wg==
-X-Received: by 2002:ad4:4434:: with SMTP id e20mr1838480qvt.157.1580988401903; 
- Thu, 06 Feb 2020 03:26:41 -0800 (PST)
-X-Google-Smtp-Source: APXvYqzs2H4Ue1BislOS6JG/nHk8GpbKHgxSbqwXwcwg9tcef/fex6WCKz5lI8ZaFpUYEjzL720t+A==
-X-Received: by 2002:ad4:4434:: with SMTP id e20mr1838467qvt.157.1580988401685; 
- Thu, 06 Feb 2020 03:26:41 -0800 (PST)
-Received: from redhat.com (bzq-79-176-41-183.red.bezeqint.net. [79.176.41.183])
- by smtp.gmail.com with ESMTPSA id b24sm1422245qto.71.2020.02.06.03.26.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2020 03:26:40 -0800 (PST)
-Date: Thu, 6 Feb 2020 06:26:35 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: "Wang, Wei W" <wei.w.wang@intel.com>
-Subject: Re: [PATCH RFC] virtio_balloon: conservative balloon page shrinking
-Message-ID: <20200206062558-mutt-send-email-mst@kernel.org>
-References: <1580976107-16013-1-git-send-email-wei.w.wang@intel.com>
- <20200206035749-mutt-send-email-mst@kernel.org>
- <286AC319A985734F985F78AFA26841F73E4238A5@shsmsx102.ccr.corp.intel.com>
- <20200206042824-mutt-send-email-mst@kernel.org>
- <286AC319A985734F985F78AFA26841F73E42395B@shsmsx102.ccr.corp.intel.com>
+ Thu, 06 Feb 2020 10:12:27 -0500
+Received: from localhost
+ by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <virtualization@lists.linux-foundation.org> from <borntraeger@de.ibm.com>; 
+ Thu, 6 Feb 2020 15:12:26 -0000
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
+ by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Thu, 6 Feb 2020 15:12:23 -0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+ [9.149.105.62])
+ by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 016FCMTf47513742
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 6 Feb 2020 15:12:22 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 0AFBEAE05D;
+ Thu,  6 Feb 2020 15:12:22 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id C5B48AE04D;
+ Thu,  6 Feb 2020 15:12:21 +0000 (GMT)
+Received: from oc7455500831.ibm.com (unknown [9.152.224.61])
+ by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Thu,  6 Feb 2020 15:12:21 +0000 (GMT)
+Subject: Re: vhost changes (batched) in linux-next after 12/13 trigger random
+ crashes in KVM guests after reboot
+To: eperezma@redhat.com
+References: <c022e1d6-0d57-ae07-5e6b-8e40d3b01f4b@de.ibm.com>
+ <20191218100926-mutt-send-email-mst@kernel.org>
+ <2ffdbd95-e375-a627-55a1-6990b0a0e37a@de.ibm.com>
+ <20200106054041-mutt-send-email-mst@kernel.org>
+ <08ae8d28-3d8c-04e8-bdeb-0117d06c6dc7@de.ibm.com>
+ <20200107042401-mutt-send-email-mst@kernel.org>
+ <c6795e53-d12c-0709-c2e9-e35d9af1f693@de.ibm.com>
+ <20200107065434-mutt-send-email-mst@kernel.org>
+ <fe6e7e90-3004-eb7a-9ed8-b53a7667959f@de.ibm.com>
+ <20200120012724-mutt-send-email-mst@kernel.org>
+ <2a63b15f-8cf5-5868-550c-42e2cfd92c60@de.ibm.com>
+ <b6e32f58e5d85ac5cc3141e9155fb140ae5cd580.camel@redhat.com>
+From: Christian Borntraeger <borntraeger@de.ibm.com>
+Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
+ 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
+ nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
+Date: Thu, 6 Feb 2020 16:12:21 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.0
 MIME-Version: 1.0
-In-Reply-To: <286AC319A985734F985F78AFA26841F73E42395B@shsmsx102.ccr.corp.intel.com>
-X-MC-Unique: qufN_jxINRaIi3F6XGB8ew-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: "penguin-kernel@i-love.sakura.ne.jp" <penguin-kernel@i-love.sakura.ne.jp>,
+In-Reply-To: <b6e32f58e5d85ac5cc3141e9155fb140ae5cd580.camel@redhat.com>
+Content-Language: en-US
+X-TM-AS-GCONF: 00
+x-cbid: 20020615-0008-0000-0000-0000035057B5
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20020615-0009-0000-0000-00004A70EC21
+Message-Id: <1ade56b5-083f-bb6f-d3e0-3ddcf78f4d26@de.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-02-06_01:2020-02-06,
+ 2020-02-06 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxscore=0 mlxlogscore=770
+ impostorscore=0 malwarescore=0 suspectscore=1 phishscore=0 adultscore=0
+ lowpriorityscore=0 priorityscore=1501 spamscore=0 clxscore=1015
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2001150001 definitions=main-2002060116
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "tysand@google.com" <tysand@google.com>, "namit@vmware.com" <namit@vmware.com>,
- "rientjes@google.com" <rientjes@google.com>,
- "alexander.h.duyck@linux.intel.com" <alexander.h.duyck@linux.intel.com>,
- "mhocko@kernel.org" <mhocko@kernel.org>
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,23 +174,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Feb 06, 2020 at 09:43:10AM +0000, Wang, Wei W wrote:
-> On Thursday, February 6, 2020 5:31 PM, Michael S. Tsirkin wrote:
-> > 
-> > How about just making this a last resort thing to be compatible with existing
-> > hypervisors? if someone wants to change behaviour that really should use a
-> > feature bit ...
-> 
-> Yeah, sounds good to me to control via feature bits.
-> 
-> Best,
-> Wei
 
-To clarify, shrinker use could be a feature bit. OOM behaviour was
-there for years and has been used to dynamically size guests.
 
--- 
-MST
+On 06.02.20 15:22, eperezma@redhat.com wrote:
+> Hi Christian.
+> 
+> Could you try this patch on top of ("38ced0208491 vhost: use batched version by default")?
+> 
+> It will not solve your first random crash but it should help with the lost of network connectivity.
+> 
+> Please let me know how does it goes.
+
+
+38ced0208491 + this seem to be ok.
+
+Not sure if you can make out anything of this (and the previous git bisect log)
 
 _______________________________________________
 Virtualization mailing list
