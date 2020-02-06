@@ -2,94 +2,92 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC7B51540E9
-	for <lists.virtualization@lfdr.de>; Thu,  6 Feb 2020 10:11:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C2931540ED
+	for <lists.virtualization@lfdr.de>; Thu,  6 Feb 2020 10:12:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5FEE3870C7;
-	Thu,  6 Feb 2020 09:11:25 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C02638742F;
+	Thu,  6 Feb 2020 09:12:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5UpLdj2-+rEt; Thu,  6 Feb 2020 09:11:24 +0000 (UTC)
+	with ESMTP id LIpI0SGufyPz; Thu,  6 Feb 2020 09:12:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 0D12887134;
-	Thu,  6 Feb 2020 09:11:24 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 4FCB88731E;
+	Thu,  6 Feb 2020 09:12:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0225CC013E;
-	Thu,  6 Feb 2020 09:11:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 34BE9C013E;
+	Thu,  6 Feb 2020 09:12:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 16407C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7E3A6C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 09:11:23 +0000 (UTC)
+ Thu,  6 Feb 2020 09:12:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 0458485E60
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 7B13D85E60
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 09:11:23 +0000 (UTC)
+ Thu,  6 Feb 2020 09:12:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id E_-HTVRNOccy
+ with ESMTP id PNHiEYgpXFy2
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 09:11:21 +0000 (UTC)
+ Thu,  6 Feb 2020 09:12:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 97E9B85E0B
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 3A45385E27
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 09:11:21 +0000 (UTC)
+ Thu,  6 Feb 2020 09:12:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580980280;
+ s=mimecast20190719; t=1580980339;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=/t9maecIs5tki36A7uRhOFb40wkNs+40rTQgn09/WK8=;
- b=fhc/3sn1gl5MA088Ro23WNbbx4w8hytkokQfs0pWwNPAiC4rbxzFVTSVPy/cwU9XWIBL3t
- H2BRTBhyw4EzUcEKAWpLRJcDplsPOUo6KmzcwS2Ax5ldVFo7Ua2UaAAJl0YS4kiApM+Ns9
- tRMOFK7nSSXOaprwNQ0kuPczpzU8BNo=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-231-s1TAoTiWPNS3Y99fqeTCfQ-1; Thu, 06 Feb 2020 04:11:16 -0500
-Received: by mail-qv1-f69.google.com with SMTP id cn2so3313198qvb.1
+ bh=E+oh5Pmn7fq2TiHt+yzyj7uEE9/6W9iJHrYGL0+d2SQ=;
+ b=Chkvjo7dWcEiRdu+6JGN6SkccgavNlEFnXmNJmlzkz32IyRPM61eHJ7WdmXsGM/NwaMdV9
+ 1ITf36x4KE08EEoNvNKv1LRZMakdQw3mmiX6IEWAdy1Q/p7deGbMWN9HxnnuXtRforI8Xs
+ kA3uyWDWkSSXM2wd6ItZiyoTDVpx8Ls=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-139-dBIFCu6DM3SE7Ms1_yA7wg-1; Thu, 06 Feb 2020 04:12:17 -0500
+Received: by mail-qv1-f72.google.com with SMTP id v3so3306763qvm.2
  for <virtualization@lists.linux-foundation.org>;
- Thu, 06 Feb 2020 01:11:16 -0800 (PST)
+ Thu, 06 Feb 2020 01:12:17 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=/t9maecIs5tki36A7uRhOFb40wkNs+40rTQgn09/WK8=;
- b=d8Ecpm+Y5h7cREFbi2mGBsCTqk6gTV9vJbrABf6QyPmvUskV2JQ+aa9JTY0Stz1ckm
- Av4/+hi9f4d5aallx5s8yLg77LEse18/NmxlzzhZl+P4KpH2Xy9zMBaWsYIDktvb40p/
- SOyVgZec4r/Q8tEMysHyAANdnaEYTtBIErfz6fLYRmDzIG0+OThW50LP/Uzt+hsWFJ0m
- ffVyPe+PlduSe8nWktoqWxXquGoCXMNwxNrmOftQFDh/ebTLhXr/T+ny6LIUj+c6oC1h
- P42HyikBiQMU9wwD33Vq2jMeBuV1vxk3/6uS9wEgYs0NpyjSZFwSODlSnV3e3MtuFVGh
- G4kg==
-X-Gm-Message-State: APjAAAU68Nt1vN8KZsqdln6dPpyWyXL9ZUk9VNN6NGRjXBN+bz8VVUD4
- mjolIwQ0DKCyiqJVhzeAX90ie3f00rX8VAdMqm+LieJRuLoxwlyTgdxCCv5/cmz5w7h6nKZkJil
- itybgNP5rlNd4QigRlLXk3zjFPQSyejEAj6qn3YqG9Q==
-X-Received: by 2002:a05:620a:9cc:: with SMTP id
- y12mr1588240qky.446.1580980275518; 
- Thu, 06 Feb 2020 01:11:15 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxH9AALMiv9HPt4nTzXlyGpnRQpNx3LPKyvEl2gt+gFQ8/4ngbLEjEieYdPDlm7tmznn9TLTg==
-X-Received: by 2002:a05:620a:9cc:: with SMTP id
- y12mr1588220qky.446.1580980275214; 
- Thu, 06 Feb 2020 01:11:15 -0800 (PST)
+ bh=E+oh5Pmn7fq2TiHt+yzyj7uEE9/6W9iJHrYGL0+d2SQ=;
+ b=olE+FI93gmLjJ2AeSgCceGWQGu9f4XAnuA3nKKNrAtvuW8csYp9uoB1ho6gQo7ff4n
+ IB4t4o2mKV/ceqgKqAmQGwUO3j5+It+BmTC382hfv38gR5f+yP8juTs0155YQk7P5ahO
+ c1dbhgq2pmBUuUH7Nm1y1lbD2sHwkEUv9mrJksSVUUoRquyuJ0Hwm7/BeSnZrTGcKgFR
+ MRS4QPBccE4q4h1TrF8N878uos6JpvFCd0hhbbcyJ57TtbMlpgvph4GfiwAEhK2RHRUi
+ bdYZaD4UxPSIVFUdhWfczitBTrckvymMbdpzwITcR+wxCuwW+Cz2aZvqgQgqNidkeh7W
+ 5lCg==
+X-Gm-Message-State: APjAAAWSZm1gzOjecjt0ucKIq7c5g5Ad3OJfRRDIJ0NejYrOcgObXBuG
+ l1Spih8/NvsFL4rgdh9/0sBXvrqFUcdPSi/XXIVqzq+8+V2MrvYCo29gj55+FPWvxuYTROHW7jG
+ vb2F0gwm9nncYbzFFSKJnZoFsCEinmHnVMonG4YNhsQ==
+X-Received: by 2002:ae9:ee11:: with SMTP id i17mr1597818qkg.333.1580980336772; 
+ Thu, 06 Feb 2020 01:12:16 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyPiuidl9Qwdt7QNWhWnc/fuiWxC40B0nSebTITJk+DZOpvXjL4dAG3wJ07AI2Q3eVLI6fr0w==
+X-Received: by 2002:ae9:ee11:: with SMTP id i17mr1597801qkg.333.1580980336498; 
+ Thu, 06 Feb 2020 01:12:16 -0800 (PST)
 Received: from redhat.com (bzq-79-176-41-183.red.bezeqint.net. [79.176.41.183])
- by smtp.gmail.com with ESMTPSA id y194sm1123257qkb.113.2020.02.06.01.11.12
+ by smtp.gmail.com with ESMTPSA id d71sm1114923qkg.4.2020.02.06.01.12.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2020 01:11:14 -0800 (PST)
-Date: Thu, 6 Feb 2020 04:11:10 -0500
+ Thu, 06 Feb 2020 01:12:15 -0800 (PST)
+Date: Thu, 6 Feb 2020 04:12:11 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: David Hildenbrand <david@redhat.com>
 Subject: Re: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
  VIRTIO_BALLOON_F_DEFLATE_ON_OOM
-Message-ID: <20200206040958-mutt-send-email-mst@kernel.org>
+Message-ID: <20200206041126-mutt-send-email-mst@kernel.org>
 References: <20200205163402.42627-1-david@redhat.com>
  <20200205163402.42627-4-david@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20200205163402.42627-4-david@redhat.com>
-X-MC-Unique: s1TAoTiWPNS3Y99fqeTCfQ-1
+X-MC-Unique: dBIFCu6DM3SE7Ms1_yA7wg-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -176,13 +174,10 @@ On Wed, Feb 05, 2020 at 05:34:02PM +0100, David Hildenbrand wrote:
 > Cc: Michal Hocko <mhocko@kernel.org>
 > Signed-off-by: David Hildenbrand <david@redhat.com>
 
-So the revert looks ok, from that POV and with commit log changes
 
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-
-however, let's see what do others think, and whether Wei can come
-up with a fixup for the shrinker.
-
+I guess we should add a Fixes tag to the patch it's reverting,
+this way it's backported and hypervisors will be able to rely on OOM
+behaviour.
 
 > ---
 >  drivers/virtio/virtio_balloon.c | 107 +++++++++++++-------------------
