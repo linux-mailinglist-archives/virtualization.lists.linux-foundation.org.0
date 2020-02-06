@@ -1,94 +1,124 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A83BB153FB4
-	for <lists.virtualization@lfdr.de>; Thu,  6 Feb 2020 09:01:40 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7738A154030
+	for <lists.virtualization@lfdr.de>; Thu,  6 Feb 2020 09:29:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5E5E284506;
-	Thu,  6 Feb 2020 08:01:39 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 13087847D9;
+	Thu,  6 Feb 2020 08:29:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ijOsXgL5DLQl; Thu,  6 Feb 2020 08:01:38 +0000 (UTC)
+	with ESMTP id CZ6giYpS+eyW; Thu,  6 Feb 2020 08:29:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id AD7B385B25;
-	Thu,  6 Feb 2020 08:01:38 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3A683840FF;
+	Thu,  6 Feb 2020 08:29:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7ABA2C1D87;
-	Thu,  6 Feb 2020 08:01:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 08A84C013E;
+	Thu,  6 Feb 2020 08:29:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C13B5C013E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 542B2C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 08:01:37 +0000 (UTC)
+ Thu,  6 Feb 2020 08:29:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id ACC828485E
+ by hemlock.osuosl.org (Postfix) with ESMTP id 3CA1B86450
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 08:01:37 +0000 (UTC)
+ Thu,  6 Feb 2020 08:29:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MhsRP5PJ5Tz4
+ with ESMTP id 3ELn5o8EBDdW
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 08:01:37 +0000 (UTC)
+ Thu,  6 Feb 2020 08:29:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2A82D84506
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 1544586408
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Feb 2020 08:01:37 +0000 (UTC)
+ Thu,  6 Feb 2020 08:29:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580976095;
+ s=mimecast20190719; t=1580977776;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=3tlkCnjb8Q/VM9TgB9qGpS6MVMK6ymwvGChTp9CUmG0=;
- b=ipAhYCmDSN0UBlMX5cPDdJrir+4BZywU9dOZGedArSGiYk4Soh0sdy1SUtG2YR1P8cuy1c
- 6qtQ/tswqqmmAfEhpOu4zuMwHTPjHOdFvyk0zjr/oYqYvpc6tBT1JvK8kprm0SenksyMWf
- dAF3CUzZpNqkWx5Aw8RF6BDX8acLYOY=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-37-X4S56hDOMw-kidONMKDJ4A-1; Thu, 06 Feb 2020 03:01:34 -0500
-Received: by mail-qt1-f197.google.com with SMTP id p12so3284829qtu.6
- for <virtualization@lists.linux-foundation.org>;
- Thu, 06 Feb 2020 00:01:34 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=3tlkCnjb8Q/VM9TgB9qGpS6MVMK6ymwvGChTp9CUmG0=;
- b=s2dlPAIxSfjORol5dgNwZ4f6JlojI7wS4RUlwYDHx2Eq3c9ZA1Rp0WZhCbgFmBl+V1
- tgK+wDeePUTkYydOntBNKOahrqJqopCSyXuxlxqK3v4mkLNgn7XsP6NZE2uE9tWpdtK+
- UwJN5gmHweOhHs8JQs6HxutTBAfGCt6+oxnAHtCP+4eyNo+r/2lnHYluljHSnE02ChfJ
- DiieS5vrd8Z9od87kSqf+Q5Uc6tx+Rcq2kxQgRNp9oc/xdv8KJPrqA3W5xyWLs2qkHl/
- tI+7oW2Q8/VyitO2ouAIQEBPJden8TbNpgMWMq5VhqGu2aT6bGzUyKZrfaHFLvzy2VbO
- qVPA==
-X-Gm-Message-State: APjAAAWMdZI0HDVHNjZC8CL1kB2ONaqCNqhAgYIUHdKi00S6ZoDhuciU
- +zxW5DZF7ck9onFGD39niatO922jpjalqZdG7AhLlKBYAqd8512PJ0a307X4Wj76kkue6EEJtuu
- /wfNdZ6tFuS9G0Pbqic3vl9Cww5B5Eril7WEuad7nYw==
-X-Received: by 2002:a0c:fe8d:: with SMTP id d13mr1308098qvs.217.1580976093801; 
- Thu, 06 Feb 2020 00:01:33 -0800 (PST)
-X-Google-Smtp-Source: APXvYqzDBfxSmanieDzWEXWVdX/CjC3Q/5KbnOAyJYXWTLuPb+oEDUAw9pAoLQDK+qxgWVtcbdYfBw==
-X-Received: by 2002:a0c:fe8d:: with SMTP id d13mr1308083qvs.217.1580976093498; 
- Thu, 06 Feb 2020 00:01:33 -0800 (PST)
-Received: from redhat.com (bzq-79-176-41-183.red.bezeqint.net. [79.176.41.183])
- by smtp.gmail.com with ESMTPSA id m16sm1025713qka.8.2020.02.06.00.01.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2020 00:01:32 -0800 (PST)
-Date: Thu, 6 Feb 2020 03:01:30 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH] tools/virtio: option to build an out of tree module
-Message-ID: <20200206080125.1178242-1-mst@redhat.com>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=tmBfyZu8JUKP6eH1jfCqX5u48/UqerhW2hGS86sF3A8=;
+ b=dHPu0tSojVoGm4hNpXWN29dN9i1qCpi9mfUH6QVJ/6u63eFNUODYTtzVqavosttO5mWc1v
+ hST7q3EmcWvI6NMX42sHBcbc02mhQZDRJJ3sVrsh2SdgAco1pxVMlBTPdtZ8M3891dOGbx
+ IliZs4/LfjR6V2Ws+H5iiUTbEpsieCQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-68-wsOMaCNYO3qzlCTcYWjvuA-1; Thu, 06 Feb 2020 03:29:34 -0500
+X-MC-Unique: wsOMaCNYO3qzlCTcYWjvuA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D9FA6800D55;
+ Thu,  6 Feb 2020 08:29:33 +0000 (UTC)
+Received: from [10.36.117.188] (ovpn-117-188.ams2.redhat.com [10.36.117.188])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B820A5C1B0;
+ Thu,  6 Feb 2020 08:29:28 +0000 (UTC)
+Subject: Re: [PATCH] virtio_balloon: prevent pfn array overflow
+To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
+References: <20200206074644.1177551-1-mst@redhat.com>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <7ccd0cff-b132-aa90-7117-5058df29810f@redhat.com>
+Date: Thu, 6 Feb 2020 09:29:27 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.1
 MIME-Version: 1.0
-X-Mailer: git-send-email 2.24.1.751.gd10ce2899c
-X-Mutt-Fcc: =sent
-X-MC-Unique: X4S56hDOMw-kidONMKDJ4A-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org
+In-Reply-To: <20200206074644.1177551-1-mst@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Cc: linux-mm@kvack.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,41 +135,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Handy for testing with distro kernels.
-Warn that the resulting module is completely unsupported,
-and isn't intended for production use.
+On 06.02.20 08:47, Michael S. Tsirkin wrote:
+> Make sure, at build time, that pfn array is big enough to hold a single
+> page.  It happens to be true since the PAGE_SHIFT value at the moment is
+> 20, which is 1M - exactly 256 4K balloon pages.
+> 
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> ---
+>  drivers/virtio/virtio_balloon.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+> index 8e400ece9273..2457c54b6185 100644
+> --- a/drivers/virtio/virtio_balloon.c
+> +++ b/drivers/virtio/virtio_balloon.c
+> @@ -158,6 +158,8 @@ static void set_page_pfns(struct virtio_balloon *vb,
+>  {
+>  	unsigned int i;
+>  
+> +	BUILD_BUG_ON(VIRTIO_BALLOON_PAGES_PER_PAGE > VIRTIO_BALLOON_ARRAY_PFNS_MAX);
+> +
+>  	/*
+>  	 * Set balloon pfns pointing at this page.
+>  	 * Note that the first pfn points at start of the page.
+> 
 
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- tools/virtio/Makefile | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+Reviewed-by: David Hildenbrand <david@redhat.com>
 
-diff --git a/tools/virtio/Makefile b/tools/virtio/Makefile
-index 8e2a908115c2..94106cde49e3 100644
---- a/tools/virtio/Makefile
-+++ b/tools/virtio/Makefile
-@@ -8,7 +8,18 @@ CFLAGS += -g -O2 -Werror -Wall -I. -I../include/ -I ../../usr/include/ -Wno-poin
- vpath %.c ../../drivers/virtio ../../drivers/vhost
- mod:
- 	${MAKE} -C `pwd`/../.. M=`pwd`/vhost_test V=${V}
--.PHONY: all test mod clean
-+
-+#oot: build vhost as an out of tree module for a distro kernel
-+#no effort is taken to make it actually build or work, but tends to mostly work
-+#if the distro kernel is very close to upstream
-+#unsupported! this is a development tool only, don't use the
-+#resulting modules in production!
-+oot:
-+	echo "UNSUPPORTED! Don't use the resulting modules in production!"
-+	KCFLAGS="-I "`pwd`/../../drivers/vhost ${MAKE} -C /usr/src/kernels/$$(uname -r) M=`pwd`/vhost_test V=${V}
-+	KCFLAGS="-I "`pwd`/../../drivers/vhost ${MAKE} -C /usr/src/kernels/$$(uname -r) M=`pwd`/../../drivers/vhost V=${V} CONFIG_VHOST_VSOCK=n
-+
-+.PHONY: all test mod clean vhost oot
- clean:
- 	${RM} *.o vringh_test virtio_test vhost_test/*.o vhost_test/.*.cmd \
-               vhost_test/Module.symvers vhost_test/modules.order *.d
 -- 
-MST
+Thanks,
+
+David / dhildenb
 
 _______________________________________________
 Virtualization mailing list
