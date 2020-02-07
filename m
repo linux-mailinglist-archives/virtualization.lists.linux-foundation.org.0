@@ -1,162 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5418615538D
-	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 09:13:28 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 817591553E2
+	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 09:42:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 03EE8203CA;
-	Fri,  7 Feb 2020 08:13:27 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 22A2786C7E;
+	Fri,  7 Feb 2020 08:42:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TN6hs3OnzCS7; Fri,  7 Feb 2020 08:13:25 +0000 (UTC)
+	with ESMTP id HJ9rgeKNERKs; Fri,  7 Feb 2020 08:41:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 71EDA203BF;
-	Fri,  7 Feb 2020 08:13:25 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D965986CB4;
+	Fri,  7 Feb 2020 08:41:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4B631C013E;
-	Fri,  7 Feb 2020 08:13:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C04C6C1D81;
+	Fri,  7 Feb 2020 08:41:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 67817C013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 76776C013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 08:13:24 +0000 (UTC)
+ Fri,  7 Feb 2020 08:41:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 59E7D8715D
+ by silver.osuosl.org (Postfix) with ESMTP id 62CE220462
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 08:13:24 +0000 (UTC)
+ Fri,  7 Feb 2020 08:41:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id U-wvbN1Q7+wZ
+ with ESMTP id vQOZqkfl6Fyo
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 08:13:23 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 9878487082
+ Fri,  7 Feb 2020 08:41:41 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id 45030203BF
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 08:13:23 +0000 (UTC)
-Received: from pps.filterd (m0187473.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0178CXIA047458
- for <virtualization@lists.linux-foundation.org>; Fri, 7 Feb 2020 03:13:22 -0500
-Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2y0m79ju7r-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <virtualization@lists.linux-foundation.org>;
- Fri, 07 Feb 2020 03:13:22 -0500
-Received: from localhost
- by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <virtualization@lists.linux-foundation.org> from <borntraeger@de.ibm.com>; 
- Fri, 7 Feb 2020 08:13:19 -0000
-Received: from b06cxnps4074.portsmouth.uk.ibm.com (9.149.109.196)
- by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Fri, 7 Feb 2020 08:13:16 -0000
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com
- (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
- by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 0178DF7552691044
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 7 Feb 2020 08:13:15 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 608CEA405B;
- Fri,  7 Feb 2020 08:13:15 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 18503A4054;
- Fri,  7 Feb 2020 08:13:15 +0000 (GMT)
-Received: from oc7455500831.ibm.com (unknown [9.152.224.61])
- by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Fri,  7 Feb 2020 08:13:15 +0000 (GMT)
-Subject: Re: vhost changes (batched) in linux-next after 12/13 trigger random
- crashes in KVM guests after reboot
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20200107042401-mutt-send-email-mst@kernel.org>
- <c6795e53-d12c-0709-c2e9-e35d9af1f693@de.ibm.com>
- <20200107065434-mutt-send-email-mst@kernel.org>
- <fe6e7e90-3004-eb7a-9ed8-b53a7667959f@de.ibm.com>
- <20200120012724-mutt-send-email-mst@kernel.org>
- <2a63b15f-8cf5-5868-550c-42e2cfd92c60@de.ibm.com>
- <b6e32f58e5d85ac5cc3141e9155fb140ae5cd580.camel@redhat.com>
- <1ade56b5-083f-bb6f-d3e0-3ddcf78f4d26@de.ibm.com>
- <20200206171349-mutt-send-email-mst@kernel.org>
- <5c860fa1-cef5-b389-4ebf-99a62afa0fe8@de.ibm.com>
- <20200207025806-mutt-send-email-mst@kernel.org>
-From: Christian Borntraeger <borntraeger@de.ibm.com>
-Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
- xsFNBE6cPPgBEAC2VpALY0UJjGmgAmavkL/iAdqul2/F9ONz42K6NrwmT+SI9CylKHIX+fdf
- J34pLNJDmDVEdeb+brtpwC9JEZOLVE0nb+SR83CsAINJYKG3V1b3Kfs0hydseYKsBYqJTN2j
- CmUXDYq9J7uOyQQ7TNVoQejmpp5ifR4EzwIFfmYDekxRVZDJygD0wL/EzUr8Je3/j548NLyL
- 4Uhv6CIPf3TY3/aLVKXdxz/ntbLgMcfZsDoHgDk3lY3r1iwbWwEM2+eYRdSZaR4VD+JRD7p8
- 0FBadNwWnBce1fmQp3EklodGi5y7TNZ/CKdJ+jRPAAnw7SINhSd7PhJMruDAJaUlbYaIm23A
- +82g+IGe4z9tRGQ9TAflezVMhT5J3ccu6cpIjjvwDlbxucSmtVi5VtPAMTLmfjYp7VY2Tgr+
- T92v7+V96jAfE3Zy2nq52e8RDdUo/F6faxcumdl+aLhhKLXgrozpoe2nL0Nyc2uqFjkjwXXI
- OBQiaqGeWtxeKJP+O8MIpjyGuHUGzvjNx5S/592TQO3phpT5IFWfMgbu4OreZ9yekDhf7Cvn
- /fkYsiLDz9W6Clihd/xlpm79+jlhm4E3xBPiQOPCZowmHjx57mXVAypOP2Eu+i2nyQrkapaY
- IdisDQfWPdNeHNOiPnPS3+GhVlPcqSJAIWnuO7Ofw1ZVOyg/jwARAQABzUNDaHJpc3RpYW4g
- Qm9ybnRyYWVnZXIgKDJuZCBJQk0gYWRkcmVzcykgPGJvcm50cmFlZ2VyQGxpbnV4LmlibS5j
- b20+wsF5BBMBAgAjBQJdP/hMAhsDBwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQEXu8
- gLWmHHy/pA/+JHjpEnd01A0CCyfVnb5fmcOlQ0LdmoKWLWPvU840q65HycCBFTt6V62cDljB
- kXFFxMNA4y/2wqU0H5/CiL963y3gWIiJsZa4ent+KrHl5GK1nIgbbesfJyA7JqlB0w/E/SuY
- NRQwIWOo/uEvOgXnk/7+rtvBzNaPGoGiiV1LZzeaxBVWrqLtmdi1iulW/0X/AlQPuF9dD1Px
- hx+0mPjZ8ClLpdSp5d0yfpwgHtM1B7KMuQPQZGFKMXXTUd3ceBUGGczsgIMipZWJukqMJiJj
- QIMH0IN7XYErEnhf0GCxJ3xAn/J7iFpPFv8sFZTvukntJXSUssONnwiKuld6ttUaFhSuSoQg
- OFYR5v7pOfinM0FcScPKTkrRsB5iUvpdthLq5qgwdQjmyINt3cb+5aSvBX2nNN135oGOtlb5
- tf4dh00kUR8XFHRrFxXx4Dbaw4PKgV3QLIHKEENlqnthH5t0tahDygQPnSucuXbVQEcDZaL9
- WgJqlRAAj0pG8M6JNU5+2ftTFXoTcoIUbb0KTOibaO9zHVeGegwAvPLLNlKHiHXcgLX1tkjC
- DrvE2Z0e2/4q7wgZgn1kbvz7ZHQZB76OM2mjkFu7QNHlRJ2VXJA8tMXyTgBX6kq1cYMmd/Hl
- OhFrAU3QO1SjCsXA2CDk9MM1471mYB3CTXQuKzXckJnxHkHOwU0ETpw8+AEQAJjyNXvMQdJN
- t07BIPDtbAQk15FfB0hKuyZVs+0lsjPKBZCamAAexNRk11eVGXK/YrqwjChkk60rt3q5i42u
- PpNMO9aS8cLPOfVft89Y654Qd3Rs1WRFIQq9xLjdLfHh0i0jMq5Ty+aiddSXpZ7oU6E+ud+X
- Czs3k5RAnOdW6eV3+v10sUjEGiFNZwzN9Udd6PfKET0J70qjnpY3NuWn5Sp1ZEn6lkq2Zm+G
- 9G3FlBRVClT30OWeiRHCYB6e6j1x1u/rSU4JiNYjPwSJA8EPKnt1s/Eeq37qXXvk+9DYiHdT
- PcOa3aNCSbIygD3jyjkg6EV9ZLHibE2R/PMMid9FrqhKh/cwcYn9FrT0FE48/2IBW5mfDpAd
- YvpawQlRz3XJr2rYZJwMUm1y+49+1ZmDclaF3s9dcz2JvuywNq78z/VsUfGz4Sbxy4ShpNpG
- REojRcz/xOK+FqNuBk+HoWKw6OxgRzfNleDvScVmbY6cQQZfGx/T7xlgZjl5Mu/2z+ofeoxb
- vWWM1YCJAT91GFvj29Wvm8OAPN/+SJj8LQazd9uGzVMTz6lFjVtH7YkeW/NZrP6znAwv5P1a
- DdQfiB5F63AX++NlTiyA+GD/ggfRl68LheSskOcxDwgI5TqmaKtX1/8RkrLpnzO3evzkfJb1
- D5qh3wM1t7PZ+JWTluSX8W25ABEBAAHCwV8EGAECAAkFAk6cPPgCGwwACgkQEXu8gLWmHHz8
- 2w//VjRlX+tKF3szc0lQi4X0t+pf88uIsvR/a1GRZpppQbn1jgE44hgF559K6/yYemcvTR7r
- 6Xt7cjWGS4wfaR0+pkWV+2dbw8Xi4DI07/fN00NoVEpYUUnOnupBgychtVpxkGqsplJZQpng
- v6fauZtyEcUK3dLJH3TdVQDLbUcL4qZpzHbsuUnTWsmNmG4Vi0NsEt1xyd/Wuw+0kM/oFEH1
- 4BN6X9xZcG8GYUbVUd8+bmio8ao8m0tzo4pseDZFo4ncDmlFWU6hHnAVfkAs4tqA6/fl7RLN
- JuWBiOL/mP5B6HDQT9JsnaRdzqF73FnU2+WrZPjinHPLeE74istVgjbowvsgUqtzjPIG5pOj
- cAsKoR0M1womzJVRfYauWhYiW/KeECklci4TPBDNx7YhahSUlexfoftltJA8swRshNA/M90/
- i9zDo9ySSZHwsGxG06ZOH5/MzG6HpLja7g8NTgA0TD5YaFm/oOnsQVsf2DeAGPS2xNirmknD
- jaqYefx7yQ7FJXXETd2uVURiDeNEFhVZWb5CiBJM5c6qQMhmkS4VyT7/+raaEGgkEKEgHOWf
- ZDP8BHfXtszHqI3Fo1F4IKFo/AP8GOFFxMRgbvlAs8z/+rEEaQYjxYJqj08raw6P4LFBqozr
- nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
-Date: Fri, 7 Feb 2020 09:13:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.0
+ Fri,  7 Feb 2020 08:41:41 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 80BF9B0B7;
+ Fri,  7 Feb 2020 08:41:38 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
+ sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
+Subject: [PATCH 0/6] drm: Provide a simple encoder
+Date: Fri,  7 Feb 2020 09:41:29 +0100
+Message-Id: <20200207084135.4524-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <20200207025806-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-TM-AS-GCONF: 00
-x-cbid: 20020708-0012-0000-0000-000003849033
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 20020708-0013-0000-0000-000021C1008C
-Message-Id: <97c93d38-ef07-e321-d133-18483d54c0c0@de.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-02-06_04:2020-02-06,
- 2020-02-06 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0
- priorityscore=1501 bulkscore=0 lowpriorityscore=0 phishscore=0 mlxscore=0
- clxscore=1015 suspectscore=0 mlxlogscore=999 malwarescore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2001150001 definitions=main-2002070062
-Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
- Cornelia Huck <cohuck@redhat.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
- eperezma@redhat.com, Linux Next Mailing List <linux-next@vger.kernel.org>
+Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -173,69 +69,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Many DRM drivers implement an encoder with an empty implementation. This
+patchset adds drm_simple_encoder_init() and drm_simple_encoder_create(),
+which can be used by drivers instead. Except for the destroy callback, the
+simple encoder's implementation is empty.
 
+The patchset also converts 4 encoder instances to use the simple-encoder
+helpers. But there are at least 11 other drivers which can use the helper
+and I think I did not examine all drivers yet.
 
-On 07.02.20 08:58, Michael S. Tsirkin wrote:
-> On Fri, Feb 07, 2020 at 08:47:14AM +0100, Christian Borntraeger wrote:
->> Also adding Cornelia.
->>
->>
->> On 06.02.20 23:17, Michael S. Tsirkin wrote:
->>> On Thu, Feb 06, 2020 at 04:12:21PM +0100, Christian Borntraeger wrote:
->>>>
->>>>
->>>> On 06.02.20 15:22, eperezma@redhat.com wrote:
->>>>> Hi Christian.
->>>>>
->>>>> Could you try this patch on top of ("38ced0208491 vhost: use batched version by default")?
->>>>>
->>>>> It will not solve your first random crash but it should help with the lost of network connectivity.
->>>>>
->>>>> Please let me know how does it goes.
->>>>
->>>>
->>>> 38ced0208491 + this seem to be ok.
->>>>
->>>> Not sure if you can make out anything of this (and the previous git bisect log)
->>>
->>> Yes it does - that this is just bad split-up of patches, and there's
->>> still a real bug that caused worse crashes :)
->>>
->>> So I just pushed batch-v4.
->>> I expect that will fail, and bisect to give us
->>>     vhost: batching fetches
->>> Can you try that please?
->>>
->>
->> yes.
->>
->> eccb852f1fe6bede630e2e4f1a121a81e34354ab is the first bad commit
->> commit eccb852f1fe6bede630e2e4f1a121a81e34354ab
->> Author: Michael S. Tsirkin <mst@redhat.com>
->> Date:   Mon Oct 7 06:11:18 2019 -0400
->>
->>     vhost: batching fetches
->>     
->>     With this patch applied, new and old code perform identically.
->>     
->>     Lots of extra optimizations are now possible, e.g.
->>     we can fetch multiple heads with copy_from/to_user now.
->>     We can get rid of maintaining the log array.  Etc etc.
->>     
->>     Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
->>
->>  drivers/vhost/test.c  |  2 +-
->>  drivers/vhost/vhost.c | 39 ++++++++++++++++++++++++++++++++++-----
->>  drivers/vhost/vhost.h |  4 +++-
->>  3 files changed, 38 insertions(+), 7 deletions(-)
->>
-> 
-> 
-> And the symptom is still the same - random crashes
-> after a bit of traffic, right?
+The patchset was smoke-tested on mgag200 by running the fbdev console
+and Gnome on X11.
 
-random guest crashes after a reboot of the guests. As if vhost would still
-write into now stale buffers.
+Thomas Zimmermann (6):
+  drm: Move initialization of encoder into an internal function
+  drm: Add drm_simple_encoder_{init,create}()
+  drm/ast: Use simple encoder
+  drm/mgag200: Use simple encoder
+  drm/qxl: Use simple encoder
+  drm/simple-pipe: Use simple encoder
+
+ drivers/gpu/drm/ast/ast_drv.h           |   6 +-
+ drivers/gpu/drm/ast/ast_mode.c          |  25 +---
+ drivers/gpu/drm/drm_encoder.c           | 190 +++++++++++++++++++++---
+ drivers/gpu/drm/drm_simple_kms_helper.c |   8 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.h   |   7 -
+ drivers/gpu/drm/mgag200/mgag200_mode.c  |  60 +-------
+ drivers/gpu/drm/qxl/qxl_display.c       |  17 +--
+ include/drm/drm_encoder.h               |  10 ++
+ 8 files changed, 191 insertions(+), 132 deletions(-)
+
+--
+2.25.0
 
 _______________________________________________
 Virtualization mailing list
