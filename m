@@ -1,89 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD2E3155628
-	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 11:57:03 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E039315573C
+	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 12:57:59 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1992287E38;
-	Fri,  7 Feb 2020 10:51:10 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7114B863A8;
+	Fri,  7 Feb 2020 11:57:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oJSRamJutPZX; Fri,  7 Feb 2020 10:51:09 +0000 (UTC)
+	with ESMTP id m6IIdH2pXrzh; Fri,  7 Feb 2020 11:57:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4734587E23;
-	Fri,  7 Feb 2020 10:51:09 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0B2EE8687B;
+	Fri,  7 Feb 2020 11:57:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 241E4C013E;
-	Fri,  7 Feb 2020 10:51:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CDB75C013E;
+	Fri,  7 Feb 2020 11:57:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 973E0C013E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 58EBCC013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 10:51:07 +0000 (UTC)
+ Fri,  7 Feb 2020 11:57:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 8DBD386508
+ by whitealder.osuosl.org (Postfix) with ESMTP id 4020A8687B
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 10:51:07 +0000 (UTC)
+ Fri,  7 Feb 2020 11:57:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GdsMiqWNj_BF
+ with ESMTP id At+ULzBOfMHp
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 10:51:03 +0000 (UTC)
+ Fri,  7 Feb 2020 11:57:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 96C0B86519
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4584C863A8
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 10:50:33 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 79345AB7F;
- Fri,  7 Feb 2020 10:50:30 +0000 (UTC)
-Subject: Re: [PATCH 2/6] drm: Add drm_simple_encoder_{init,create}()
-To: Gerd Hoffmann <kraxel@redhat.com>
-References: <20200207084135.4524-1-tzimmermann@suse.de>
- <20200207084135.4524-3-tzimmermann@suse.de>
- <20200207103333.rxebukm4hukavlq5@sirius.home.kraxel.org>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <cd78b79f-ff4e-9c8e-4d87-ce717a717559@suse.de>
-Date: Fri, 7 Feb 2020 11:50:24 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ Fri,  7 Feb 2020 11:57:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1581076674;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=l9Om1VdDqKQp4D0lip8cfLl2U7Dg5Wq0M3QVMJgD+1I=;
+ b=dhWg7OQHsxIDfCIREv3AWnjgDtBzv8WdDauoqdfLzjojON41zTGoaWdBV9xdqTthdYsxzZ
+ 0azoFY0/+9ng7Fio9QQCPkZdhMOCcSDZkrPZMoWq7XWRuoVfzG7dO32MeJbeA+8rhMIOj0
+ TXYX1GfKmdpMP8hKR6EuboBzIGaFqqI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-397-Wx585QMENKWhZ0HmxUjXYA-1; Fri, 07 Feb 2020 06:57:49 -0500
+X-MC-Unique: Wx585QMENKWhZ0HmxUjXYA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 30061DBA3;
+ Fri,  7 Feb 2020 11:57:48 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-112.ams2.redhat.com
+ [10.36.116.112])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 606D4790F2;
+ Fri,  7 Feb 2020 11:57:45 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id A26201747D; Fri,  7 Feb 2020 12:57:44 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v2] drm/bochs: downgrade pci_request_region failure from error
+ to warning
+Date: Fri,  7 Feb 2020 12:57:44 +0100
+Message-Id: <20200207115744.4559-1-kraxel@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200207103333.rxebukm4hukavlq5@sirius.home.kraxel.org>
-Cc: airlied@linux.ie, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- virtualization@lists.linux-foundation.org, noralf@tronnes.org,
- dri-devel@lists.freedesktop.org, daniel@ffwll.ch, alexander.deucher@amd.com,
- spice-devel@lists.freedesktop.org, sam@ravnborg.org,
- emil.velikov@collabora.com
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: marmarek@invisiblethingslab.com, David Airlie <airlied@linux.ie>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,129 +87,30 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3433946686573690535=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============3433946686573690535==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="T0w1ckiulGikfr0Xhr6obHC3UuCzv4Cvb"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---T0w1ckiulGikfr0Xhr6obHC3UuCzv4Cvb
-Content-Type: multipart/mixed; boundary="X5V3QFNtNcX9iXkOwABge6p9MixeZf7V0";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Cc: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, noralf@tronnes.org, sam@ravnborg.org,
- alexander.deucher@amd.com, emil.velikov@collabora.com,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- spice-devel@lists.freedesktop.org
-Message-ID: <cd78b79f-ff4e-9c8e-4d87-ce717a717559@suse.de>
-Subject: Re: [PATCH 2/6] drm: Add drm_simple_encoder_{init,create}()
-References: <20200207084135.4524-1-tzimmermann@suse.de>
- <20200207084135.4524-3-tzimmermann@suse.de>
- <20200207103333.rxebukm4hukavlq5@sirius.home.kraxel.org>
-In-Reply-To: <20200207103333.rxebukm4hukavlq5@sirius.home.kraxel.org>
-
---X5V3QFNtNcX9iXkOwABge6p9MixeZf7V0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi Gerd
-
-Am 07.02.20 um 11:33 schrieb Gerd Hoffmann:
->> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_cleanu=
-p =3D {
->> +	.destroy =3D drm_encoder_cleanup,
->> +};
->> +
->> +/**
->> + * drm_simple_encoder_init - Init a preallocated encoder
->> + * @dev: drm device
->> + * @funcs: callbacks for this encoder
->> + * @encoder_type: user visible type of the encoder
->> + * @name: printf style format string for the encoder name, or NULL
->> + *        for default name
->> + *
->> + * Initialises a preallocated encoder that has no further functionali=
-ty. The
->> + * encoder will be released automatically.
->> + *
->> + * Returns:
->> + * Zero on success, error code on failure.
->> + */
->> +int drm_simple_encoder_init(struct drm_device *dev,
->> +			    struct drm_encoder *encoder,
->> +			    int encoder_type, const char *name, ...)
->=20
-> How about using
->=20
-> #define drm_simple_encoder_init(dev, type, name, ...) \
->         drm_encoder_init(dev, drm_simple_encoder_funcs_cleanup, type, n=
-ame, __VA_ARGS__)
->=20
-> instead ?
-
-I'd prefer a function call for aesthetic reasons and for not having to
-export the drm_simple_encoder_funcs_cleanup. drm_simple_encoder_create()
-is also a function and probably cannot be turned into a macro. So having
-a function for drm_simple_encoder_init seems consequent.
-
-I guess you want to save a few lines in the implementation of
-drm_simple_encoder_init() (?) If so, I'd rather try to share more
-internal code among the various init and create functions.
-
-Best regards
-Thomas
-
->=20
-> cheers,
->   Gerd
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---X5V3QFNtNcX9iXkOwABge6p9MixeZf7V0--
-
---T0w1ckiulGikfr0Xhr6obHC3UuCzv4Cvb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl49QPMACgkQaA3BHVML
-eiPcOgf7Bi+fIF8jY2zA0Xv7Qud52dM7kca2Q2x3OHLeUyBs0vUUpB9AFONibBwx
-jqhQIo6mQvyqw2rDUTXCpznw2qV5IrCJW+Rc31hQb+p9g1+BPZsf8oJjQlXam7Th
-QV2nyw5SisqXgLP3XfUNWuKLE8zC6htCDHj0h/bnp0Ov7EWFt1PZ3Ymi/8NzdhxS
-KupkfqeUuXD1lxNPH6x4fJh8KzC26BnvSItJGAyM2kK+Q8porJCbyJNfd2x3gDNX
-csEODfagrVw2/m8f+eqyh6t33Z9dlvReB1jehSdSND2Af49j6aJd5D+ZT8alrrG2
-bXN+qXJ6RRTYcVbr8yldee3jSlFNnQ==
-=cFhv
------END PGP SIGNATURE-----
-
---T0w1ckiulGikfr0Xhr6obHC3UuCzv4Cvb--
-
---===============3433946686573690535==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============3433946686573690535==--
+U2h1dGRvd24gb2YgZmlybXdhcmUgZnJhbWVidWZmZXIgaGFzIGEgYnVuY2ggb2YgcHJvYmxlbXMu
+ICBCZWNhdXNlCm9mIHRoaXMgdGhlIGZyYW1lYnVmZmVyIHJlZ2lvbiBtaWdodCBzdGlsbCBiZSBy
+ZXNlcnZlZCBldmVuIGFmdGVyCmRybV9mYl9oZWxwZXJfcmVtb3ZlX2NvbmZsaWN0aW5nX3BjaV9m
+cmFtZWJ1ZmZlcnMoKSByZXR1cm5lZC4KCkRvbid0IGNvbnNpZGVyIHBjaV9yZXF1ZXN0X3JlZ2lv
+bigpIGZhaWx1cmUgZm9yIHRoZSBmcmFtZWJ1ZmZlcgpyZWdpb24gYXMgZmF0YWwgZXJyb3IgdG8g
+d29ya2Fyb3VuZCB0aGlzIGlzc3VlLgoKUmVwb3J0ZWQtYnk6IE1hcmVrIE1hcmN6eWtvd3NraS1H
+w7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4KU2lnbmVkLW9mZi1ieTog
+R2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL2Jv
+Y2hzL2JvY2hzX2h3LmMgfCAzICstLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAy
+IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ib2Nocy9ib2Noc19o
+dy5jIGIvZHJpdmVycy9ncHUvZHJtL2JvY2hzL2JvY2hzX2h3LmMKaW5kZXggYjYxNWI3ZGZkZDlk
+Li5hMzg3ZWZhOWU1NTkgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ib2Nocy9ib2Noc19o
+dy5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ib2Nocy9ib2Noc19ody5jCkBAIC0xNTcsOCArMTU3
+LDcgQEAgaW50IGJvY2hzX2h3X2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldikKIAl9CiAKIAlp
+ZiAocGNpX3JlcXVlc3RfcmVnaW9uKHBkZXYsIDAsICJib2Nocy1kcm0iKSAhPSAwKSB7Ci0JCURS
+TV9FUlJPUigiQ2Fubm90IHJlcXVlc3QgZnJhbWVidWZmZXJcbiIpOwotCQlyZXR1cm4gLUVCVVNZ
+OworCQlEUk1fV0FSTigiQ2Fubm90IHJlcXVlc3QgZnJhbWVidWZmZXIsIGJvb3QgZnJhbWVidWZm
+ZXIgc3RpbGwgYWN0aXZlP1xuIik7CiAJfQogCiAJYm9jaHMtPmZiX21hcCA9IGlvcmVtYXAoYWRk
+ciwgc2l6ZSk7Ci0tIAoyLjE4LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBs
+aXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5v
+cmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
