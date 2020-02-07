@@ -2,94 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D50571558BF
-	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 14:49:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D41AA1558D9
+	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 14:56:56 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 77E9A81EFA;
-	Fri,  7 Feb 2020 13:49:11 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5266C86C80;
+	Fri,  7 Feb 2020 13:56:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GN3HoDfzrKGy; Fri,  7 Feb 2020 13:49:10 +0000 (UTC)
+	with ESMTP id WR8JzVg2-bJM; Fri,  7 Feb 2020 13:56:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A83D186C34;
-	Fri,  7 Feb 2020 13:49:10 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id BA70586C7E;
+	Fri,  7 Feb 2020 13:56:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8B23AC013E;
-	Fri,  7 Feb 2020 13:49:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 91618C013E;
+	Fri,  7 Feb 2020 13:56:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BFCEAC013E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 710C9C013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:49:08 +0000 (UTC)
+ Fri,  7 Feb 2020 13:56:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id ADF5E86407
+ by whitealder.osuosl.org (Postfix) with ESMTP id 5EBC086C80
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:49:08 +0000 (UTC)
+ Fri,  7 Feb 2020 13:56:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3DoNflPcFNkG
+ with ESMTP id wpTFRmoI76iN
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:49:08 +0000 (UTC)
+ Fri,  7 Feb 2020 13:56:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
- [209.85.221.65])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id D4E54863F2
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4BFB686C7E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:49:07 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id u6so2801918wrt.0
- for <virtualization@lists.linux-foundation.org>;
- Fri, 07 Feb 2020 05:49:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=MwvFxS4AH5H+msf0RBllxFFr08FoXJrYwxPsNlpLaEQ=;
- b=Pxid3V/7oELCUAVYCAbBRfGbPfOEsMJg8xXN1JTmemsVv3TBTsWlXcSfrdQoBNhuTH
- 1m8yIGCff9hZmpc9wEG1dS08c6ZquRHQJiToOViW2rUGp43mSk7n65o7JvuvZVSW4auZ
- cbn0VAjrrFJZ60AFoGtwm9WzugYsnujFLchNY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=MwvFxS4AH5H+msf0RBllxFFr08FoXJrYwxPsNlpLaEQ=;
- b=iWewZ3IZqqYSU2YqhpvP4AlTh7gtPsnmpPyieQcrO2GEtMJ2GlZfLCzeH5jw8r+NuM
- Ipa2gvhiMmEdz4BdrDh13AryZ0j61LpAK288ZiAKhScMTM+jfJg3GFj1HwE6tQD9ledx
- yFMdlxXEO/6sVaWTZ/cxdrP7pvD0XPinYS1jEZYi7ktgyq8Gfpn5B21GS2zaSf7VM6m3
- hgZLd8LCmDAnxw4Kx5M2ODIcmyzy4lBYDbT0DqiBjxo9YKBRv8vmMCRj7qCJQxjEjWex
- Kd8dqbYZF71TpVke5mevg3oH9Mz31q83bLR8yK97AjivYAivai0R/2B3IHeOvHrMp9AM
- 4SmA==
-X-Gm-Message-State: APjAAAUYzB57B7C4r+42w/zRPTaggU/qPvo+/IyLcOgx81FiOk5rt0sa
- ieOlFv4SfKUW/0sYNw3Vd9kRDg==
-X-Google-Smtp-Source: APXvYqwb7z6otNJpnpWZ2LemuyPi/rvqLye9AzCkf4YZs9lQDPxX/bMBWeZASc7vHTbBKNFsZlr8hQ==
-X-Received: by 2002:adf:90ee:: with SMTP id i101mr4772714wri.417.1581083346294; 
- Fri, 07 Feb 2020 05:49:06 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id r14sm3360107wrj.26.2020.02.07.05.49.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2020 05:49:05 -0800 (PST)
-Date: Fri, 7 Feb 2020 14:49:03 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH] drm/virtio: add drm_driver.release callback.
-Message-ID: <20200207134903.GD43062@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, gurchetansingh@chromium.org,
- olvaffe@gmail.com, David Airlie <airlied@linux.ie>,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20200207121420.26222-1-kraxel@redhat.com>
+ Fri,  7 Feb 2020 13:56:51 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id C2854AFAE;
+ Fri,  7 Feb 2020 13:56:49 +0000 (UTC)
+Subject: Re: [PATCH] drm/qxl: add drm_driver.release callback.
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+References: <20200207121405.25895-1-kraxel@redhat.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <4a6aae3a-5148-8593-0efe-1786cb0bf41e@suse.de>
+Date: Fri, 7 Feb 2020 14:56:46 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200207121420.26222-1-kraxel@redhat.com>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- Daniel Vetter <daniel@ffwll.ch>, gurchetansingh@chromium.org,
- olvaffe@gmail.com
+In-Reply-To: <20200207121405.25895-1-kraxel@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,123 +93,178 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3218327447976545251=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 07, 2020 at 01:14:20PM +0100, Gerd Hoffmann wrote:
-> Split virtio_gpu_deinit(), move the drm shutdown and release to
-> virtio_gpu_release().  Also free vbufs in case we can't queue them.
-> 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============3218327447976545251==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="j5pSowMF1RznSZGlCiEpo0AL1G951df4M"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--j5pSowMF1RznSZGlCiEpo0AL1G951df4M
+Content-Type: multipart/mixed; boundary="bNca9cXX2dHZkq7Z8zobbXzJw9YbrdHUn";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, open list
+ <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+Message-ID: <4a6aae3a-5148-8593-0efe-1786cb0bf41e@suse.de>
+Subject: Re: [PATCH] drm/qxl: add drm_driver.release callback.
+References: <20200207121405.25895-1-kraxel@redhat.com>
+In-Reply-To: <20200207121405.25895-1-kraxel@redhat.com>
+
+--bNca9cXX2dHZkq7Z8zobbXzJw9YbrdHUn
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+Am 07.02.20 um 13:14 schrieb Gerd Hoffmann:
+> Move final cleanups to qxl_drm_release() callback.
+> Add drm_atomic_helper_shutdown() call to qxl_pci_remove().
+>=20
+> Reorder calls in qxl_device_fini().  Cleaning up gem & ttm
+> might trigger qxl commands, so we should do that before
+> releaseing command rings.
+
+Should the second part be a separate patch?
+
+Best regards
+Thomas
+
+>=20
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 > ---
->  drivers/gpu/drm/virtio/virtgpu_drv.h | 1 +
->  drivers/gpu/drm/virtio/virtgpu_drv.c | 4 ++++
->  drivers/gpu/drm/virtio/virtgpu_kms.c | 5 +++++
->  drivers/gpu/drm/virtio/virtgpu_vq.c  | 9 ++++++++-
->  4 files changed, 18 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> index d278c8c50f39..09a485b001e7 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> @@ -217,6 +217,7 @@ extern struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS];
->  /* virtio_kms.c */
->  int virtio_gpu_init(struct drm_device *dev);
->  void virtio_gpu_deinit(struct drm_device *dev);
-> +void virtio_gpu_release(struct drm_device *dev);
->  int virtio_gpu_driver_open(struct drm_device *dev, struct drm_file *file);
->  void virtio_gpu_driver_postclose(struct drm_device *dev, struct drm_file *file);
->  
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> index 8cf27af3ad53..664a741a3b0b 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> @@ -31,6 +31,7 @@
+>  drivers/gpu/drm/qxl/qxl_drv.c | 21 ++++++++++++++-------
+>  drivers/gpu/drm/qxl/qxl_kms.c |  8 ++++----
+>  2 files changed, 18 insertions(+), 11 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_dr=
+v.c
+> index 1d601f57a6ba..8044363ba0f2 100644
+> --- a/drivers/gpu/drm/qxl/qxl_drv.c
+> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+> @@ -34,6 +34,7 @@
 >  #include <linux/pci.h>
->  
+> =20
 >  #include <drm/drm.h>
 > +#include <drm/drm_atomic_helper.h>
 >  #include <drm/drm_drv.h>
 >  #include <drm/drm_file.h>
->  
-> @@ -136,6 +137,7 @@ static void virtio_gpu_remove(struct virtio_device *vdev)
->  	struct drm_device *dev = vdev->priv;
->  
->  	drm_dev_unregister(dev);
-> +	drm_atomic_helper_shutdown(dev);
->  	virtio_gpu_deinit(dev);
->  	drm_dev_put(dev);
+>  #include <drm/drm_modeset_helper.h>
+> @@ -132,21 +133,25 @@ qxl_pci_probe(struct pci_dev *pdev, const struct =
+pci_device_id *ent)
+>  	return ret;
 >  }
-> @@ -214,4 +216,6 @@ static struct drm_driver driver = {
->  	.major = DRIVER_MAJOR,
->  	.minor = DRIVER_MINOR,
->  	.patchlevel = DRIVER_PATCHLEVEL,
+> =20
+> +static void qxl_drm_release(struct drm_device *dev)
+> +{
+> +	struct qxl_device *qdev =3D dev->dev_private;
 > +
-> +	.release = virtio_gpu_release,
->  };
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_kms.c b/drivers/gpu/drm/virtio/virtgpu_kms.c
-> index c1086df49816..b45d12e3db2a 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_kms.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_kms.c
-> @@ -240,6 +240,11 @@ void virtio_gpu_deinit(struct drm_device *dev)
->  	flush_work(&vgdev->config_changed_work);
->  	vgdev->vdev->config->reset(vgdev->vdev);
->  	vgdev->vdev->config->del_vqs(vgdev->vdev);
+> +	qxl_modeset_fini(qdev);
+> +	qxl_device_fini(qdev);
+> +	dev->dev_private =3D NULL;
+> +	kfree(qdev);
 > +}
 > +
-> +void virtio_gpu_release(struct drm_device *dev)
-> +{
-> +	struct virtio_gpu_device *vgdev = dev->dev_private;
->  
->  	virtio_gpu_modeset_fini(vgdev);
-
-This calls drm_atomic_helper_shutdown, probably want that in the remove
-hook?  Everything else looks like it's in the right spot. So with that
-call moved into the top of the deinit function above this is:
-
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-
->  	virtio_gpu_free_vbufs(vgdev);
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> index cc02fc4bab2a..cc674b45f904 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> @@ -330,6 +330,11 @@ static void virtio_gpu_queue_ctrl_sgs(struct virtio_gpu_device *vgdev,
->  	bool notify = false;
->  	int ret;
->  
-> +	if (!vgdev->vqs_ready) {
-> +		free_vbuf(vgdev, vbuf);
-> +		return;
-> +	}
+>  static void
+>  qxl_pci_remove(struct pci_dev *pdev)
+>  {
+>  	struct drm_device *dev =3D pci_get_drvdata(pdev);
+> -	struct qxl_device *qdev =3D dev->dev_private;
+> =20
+>  	drm_dev_unregister(dev);
+> -
+> -	qxl_modeset_fini(qdev);
+> -	qxl_device_fini(qdev);
+> +	drm_atomic_helper_shutdown(dev);
+>  	if (is_vga(pdev))
+>  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+> -
+> -	dev->dev_private =3D NULL;
+> -	kfree(qdev);
+>  	drm_dev_put(dev);
+>  }
+> =20
+> @@ -279,6 +284,8 @@ static struct drm_driver qxl_driver =3D {
+>  	.major =3D 0,
+>  	.minor =3D 1,
+>  	.patchlevel =3D 0,
 > +
->  	if (vgdev->has_indirect)
->  		elemcnt = 1;
->  
-> @@ -462,8 +467,10 @@ static void virtio_gpu_queue_cursor(struct virtio_gpu_device *vgdev,
->  	int ret;
->  	int outcnt;
->  
-> -	if (!vgdev->vqs_ready)
-> +	if (!vgdev->vqs_ready) {
-> +		free_vbuf(vgdev, vbuf);
->  		return;
-> +	}
->  
->  	sg_init_one(&ccmd, vbuf->buf, vbuf->size);
->  	sgs[0] = &ccmd;
-> -- 
-> 2.18.1
-> 
+> +	.release =3D qxl_drm_release,
+>  };
+> =20
+>  static int __init qxl_init(void)
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_km=
+s.c
+> index bfc1631093e9..70b20ee4741a 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -299,12 +299,12 @@ void qxl_device_fini(struct qxl_device *qdev)
+>  {
+>  	qxl_bo_unref(&qdev->current_release_bo[0]);
+>  	qxl_bo_unref(&qdev->current_release_bo[1]);
+> -	flush_work(&qdev->gc_work);
+> -	qxl_ring_free(qdev->command_ring);
+> -	qxl_ring_free(qdev->cursor_ring);
+> -	qxl_ring_free(qdev->release_ring);
+>  	qxl_gem_fini(qdev);
+>  	qxl_bo_fini(qdev);
+> +	flush_work(&qdev->gc_work);
+> +	qxl_ring_free(qdev->command_ring);
+> +	qxl_ring_free(qdev->cursor_ring);
+> +	qxl_ring_free(qdev->release_ring);
+>  	io_mapping_free(qdev->surface_mapping);
+>  	io_mapping_free(qdev->vram_mapping);
+>  	iounmap(qdev->ram_header);
+>=20
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--bNca9cXX2dHZkq7Z8zobbXzJw9YbrdHUn--
+
+--j5pSowMF1RznSZGlCiEpo0AL1G951df4M
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl49bJ4ACgkQaA3BHVML
+eiOOmQf6AoWbKa22Ovy6vMK3tNMpamOd23WriCqWH1ef4o8NQhAhb+p8gPG86IO2
+IHSmslvxRb3EIfMMm9A36Ju2OqPO0l7taQos50EyrBMHiWhcfGRmJXPTC//I2Xht
+A7kPTBe3QFALi0bgTx2b4NweWijkR+8+YXBSI0FoXngsZ370PdLx74kYw8YMmrzS
+cr7cWAcqOWtaxB5Nz5z7kHDx91qXlbwmqOB2xmmVNMDoMDL2Y07QIFHX36Dzw+Ux
+MxdzyfGwZwPVvQojh25IBSlDCknWnaYwxw0HcHmB7STtmIJ3HnFhB/eSu7mdA2oh
+BuCiP4FUTOk76pdSddmEQ3dqtlvJBg==
+=wLW5
+-----END PGP SIGNATURE-----
+
+--j5pSowMF1RznSZGlCiEpo0AL1G951df4M--
+
+--===============3218327447976545251==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============3218327447976545251==--
