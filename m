@@ -1,97 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E9A61558A9
-	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 14:42:36 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3787E1558B5
+	for <lists.virtualization@lfdr.de>; Fri,  7 Feb 2020 14:44:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C9A8B863F2;
-	Fri,  7 Feb 2020 13:42:34 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id DEAF687E58;
+	Fri,  7 Feb 2020 13:44:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NTwMNcu2N3fk; Fri,  7 Feb 2020 13:42:34 +0000 (UTC)
+	with ESMTP id UOFJDpaLyVmw; Fri,  7 Feb 2020 13:44:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 31D74863CD;
-	Fri,  7 Feb 2020 13:42:34 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6825187B97;
+	Fri,  7 Feb 2020 13:44:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 04A9DC013E;
-	Fri,  7 Feb 2020 13:42:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 48C42C013E;
+	Fri,  7 Feb 2020 13:44:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DC9D9C013E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CEFD6C013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:42:31 +0000 (UTC)
+ Fri,  7 Feb 2020 13:44:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id CB72586C11
+ by hemlock.osuosl.org (Postfix) with ESMTP id BD71B87E58
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:42:31 +0000 (UTC)
+ Fri,  7 Feb 2020 13:44:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zgAbCxBO893C
+ with ESMTP id 44RV9Dxj1G81
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:42:30 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
- [209.85.128.67])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 3460486C02
+ Fri,  7 Feb 2020 13:44:16 +0000 (UTC)
+X-Greylist: delayed 00:06:51 by SQLgrey-1.7.6
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+ [209.85.221.65])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id BDE4A87E3C
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Feb 2020 13:42:30 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id a5so2664544wmb.0
+ Fri,  7 Feb 2020 13:44:15 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id u6so2783134wrt.0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 07 Feb 2020 05:42:29 -0800 (PST)
+ Fri, 07 Feb 2020 05:44:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:mail-followup-to:references
  :mime-version:content-disposition:in-reply-to;
- bh=TyPPRLKeipDPd+u8tqRuMDYkhQE0y3JFQkWBFGYN/N8=;
- b=Q6ayxrGsTc4a7zvF4JrnE8pm2eVELARdVSK6Pfhkt5GjlpNQouAG/N05fastzNDYtV
- 0s/3GOaVVtss8j7chaZqG7vGZQRceoD5tg/UC5OVWooSkOcqvpqBBdeYlbu8DDxfb+oM
- BOI3HVjzmrTIXfiK6zcpxNhHPSzQPSjhdF8vA=
+ bh=m9Hn1RaUXFooKHwmRZTfAKZ274VjztClE8pDRYYGw2c=;
+ b=M0PjjdgYCPa6DgxGqO3xxPQ3OX262TSN0UqM6Kqiq8/lumJMhLG+2HPA3bnZvyhpwc
+ CVSO/cXMEAMr+UUk3ef8vaeTxw3+qSrjyvfJWj/sLyvEzrHr1LqWAjHi8Ap3jRrWzagR
+ fWYlOeYeXN31g0NzMnTA5QYYX6ZfrRyNtdkGc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id
  :mail-followup-to:references:mime-version:content-disposition
  :in-reply-to;
- bh=TyPPRLKeipDPd+u8tqRuMDYkhQE0y3JFQkWBFGYN/N8=;
- b=uiwfNa08exuzUKrYaTEQi58zB5TmCTdoOWSbPXaEDv5CQVJnjKPWmBWoEGVUP3Y+lN
- ixS/ZZtxCI2UQWs60+EyA6zJuz8QPxe7NZo5dOlm1XBhl+Tt8977bC7A2Z6TlrEZcEY0
- 4vdfYCUJ8tc2Msn8zSHBrv5VgTryYIjl8UB5STLJgWJ4AQ81Qrzt3xp9F6+PskEL/z5W
- FUT7fIqoYeKaCLngokEX4Ed4Y6OmsXpy/QR3NemnBNwlMIKWscBH+VYjN9M5NN933Asw
- ZviwBsDTGLTqlVmhRtHuHuasxV8HtIRvyS4aWXP/9sM4dNjegzoBv5hc8EYUfFBXkCSd
- rJ2A==
-X-Gm-Message-State: APjAAAXXDtJNM9Y3wfUkCQJ/w0V3YKJZqmXQkTQWdShaicFNrzhcYF6i
- u5dECGmKLxKnX6ceQDJDiWxD9Q==
-X-Google-Smtp-Source: APXvYqxhatD4Js1NKtiy3XyO7Te5rVWuR1uUeZlh84mCoY9NL3oeMACk2iagMiLuPOki+LjjhnCnBA==
-X-Received: by 2002:a1c:9a84:: with SMTP id c126mr4594084wme.111.1581082948462; 
- Fri, 07 Feb 2020 05:42:28 -0800 (PST)
+ bh=m9Hn1RaUXFooKHwmRZTfAKZ274VjztClE8pDRYYGw2c=;
+ b=Ukh0MBs1NVbFJ6rwP+G7ajF0uSJaVZ1FFQRSmKf88D8HFipWzVfvVS0BbrCQgvGojL
+ toqSIK3t8skGBfYXE+FS05JyMLWT3uya8eUIkzHsslFRWDmxScVxNA7OX53Xqf+TfiFf
+ 06kpJlTnRS7J2wqNsweDmvglvBfSICY5cYzuYGG/xD0h8QEHpZQy0VHud4NszjZ/+jnj
+ ja+q/qj4oxixQIxjHk9uXtDDxWUvc1OUenITPOdv0x5S1pEmaPImp6kHzkU7oY1m/Wyd
+ t6fUrswjuuQjxBrlV6jXf4uhn9bfaspxgNHAEXKda2EJcAv+H491J7yEKnwuSCJSyHyL
+ WU+A==
+X-Gm-Message-State: APjAAAXJDq13UFegFXkjgw4MJxRB4J/AfaCMArzEQpqnFYiRqAWETy/N
+ P2lv59cSxpKlKkM27H1JGKphgA==
+X-Google-Smtp-Source: APXvYqwJ37XAlNKHJ3NdiUGsMdK5N0tuoJlJ5hgMTD925OdVra68xNS96qXdlwiN2Ssrdy6rDTdM8Q==
+X-Received: by 2002:adf:d4ca:: with SMTP id w10mr5065348wrk.53.1581083054017; 
+ Fri, 07 Feb 2020 05:44:14 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id i16sm3175338wrr.71.2020.02.07.05.42.27
+ by smtp.gmail.com with ESMTPSA id g25sm16762868wmh.3.2020.02.07.05.44.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2020 05:42:27 -0800 (PST)
-Date: Fri, 7 Feb 2020 14:42:25 +0100
+ Fri, 07 Feb 2020 05:44:13 -0800 (PST)
+Date: Fri, 7 Feb 2020 14:44:11 +0100
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH] drm/bochs: add drm_driver.release callback.
-Message-ID: <20200207134225.GA43062@phenom.ffwll.local>
+Subject: Re: [PATCH] drm/qxl: add drm_driver.release callback.
+Message-ID: <20200207134411.GB43062@phenom.ffwll.local>
 Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org,
- Gurchetan Singh <gurchetansingh@chromium.org>,
+ dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
  David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>, 
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
  open list <linux-kernel@vger.kernel.org>
-References: <20200207121312.25296-1-kraxel@redhat.com>
+References: <20200207121405.25895-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200207121312.25296-1-kraxel@redhat.com>
+In-Reply-To: <20200207121405.25895-1-kraxel@redhat.com>
 X-Operating-System: Linux phenom 5.3.0-3-amd64 
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org,
- "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- Gurchetan Singh <gurchetansingh@chromium.org>
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,68 +108,100 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 07, 2020 at 01:13:12PM +0100, Gerd Hoffmann wrote:
-> From: Gurchetan Singh <gurchetansingh@chromium.org>
+On Fri, Feb 07, 2020 at 01:14:05PM +0100, Gerd Hoffmann wrote:
+> Move final cleanups to qxl_drm_release() callback.
+> Add drm_atomic_helper_shutdown() call to qxl_pci_remove().
 > 
-> Move bochs_unload call from bochs_remove() to the new bochs_release()
-> callback.  Also call drm_dev_unregister() first in bochs_remove().
+> Reorder calls in qxl_device_fini().  Cleaning up gem & ttm
+> might trigger qxl commands, so we should do that before
+> releaseing command rings.
 > 
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 > ---
->  drivers/gpu/drm/bochs/bochs_drv.c | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/qxl/qxl_drv.c | 21 ++++++++++++++-------
+>  drivers/gpu/drm/qxl/qxl_kms.c |  8 ++++----
+>  2 files changed, 18 insertions(+), 11 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
-> index 10460878414e..87ee1eb21a4d 100644
-> --- a/drivers/gpu/drm/bochs/bochs_drv.c
-> +++ b/drivers/gpu/drm/bochs/bochs_drv.c
-> @@ -60,6 +60,11 @@ static int bochs_load(struct drm_device *dev)
+> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+> index 1d601f57a6ba..8044363ba0f2 100644
+> --- a/drivers/gpu/drm/qxl/qxl_drv.c
+> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+> @@ -34,6 +34,7 @@
+>  #include <linux/pci.h>
 >  
->  DEFINE_DRM_GEM_FOPS(bochs_fops);
+>  #include <drm/drm.h>
+> +#include <drm/drm_atomic_helper.h>
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_file.h>
+>  #include <drm/drm_modeset_helper.h>
+> @@ -132,21 +133,25 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+>  	return ret;
+>  }
 >  
-> +static void bochs_release(struct drm_device *dev)
+> +static void qxl_drm_release(struct drm_device *dev)
 > +{
-> +	bochs_unload(dev);
+> +	struct qxl_device *qdev = dev->dev_private;
+> +
+> +	qxl_modeset_fini(qdev);
+> +	qxl_device_fini(qdev);
 
-Hm I think this needs to be split, and bochs_hw_fini needs to stay in
-bochs_pci_remove. Otherwise we again release the iommu mappings too late
-(there was just a discussion about that on the fbdev side of things
-getting this wrong). Good to fix the lifetime fun here, but let's not move
-too far :-)
+Same here, there's a few iounmap and io_mapping_free which I think should
+be in the pci_remove hook.
+-Daniel
 
-Ideally we'd move the iomapping to devm_, that would remove it at the
-right time I think.
-
-Slight annoyance might be that we then need to shoot down the varios
-mmaps, which I frankly don't know how to do. But keeping them pointing at
-wrong stuff also isn't that great :-/
-
-Cheers, Daniel
-
+> +	dev->dev_private = NULL;
+> +	kfree(qdev);
 > +}
 > +
->  static struct drm_driver bochs_driver = {
->  	.driver_features	= DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
->  	.fops			= &bochs_fops,
-> @@ -69,6 +74,7 @@ static struct drm_driver bochs_driver = {
->  	.major			= 1,
->  	.minor			= 0,
->  	DRM_GEM_VRAM_DRIVER,
-> +	.release                = bochs_release,
->  };
->  
->  /* ---------------------------------------------------------------------- */
-> @@ -148,9 +154,8 @@ static void bochs_pci_remove(struct pci_dev *pdev)
+>  static void
+>  qxl_pci_remove(struct pci_dev *pdev)
 >  {
 >  	struct drm_device *dev = pci_get_drvdata(pdev);
+> -	struct qxl_device *qdev = dev->dev_private;
 >  
-> -	drm_atomic_helper_shutdown(dev);
 >  	drm_dev_unregister(dev);
-> -	bochs_unload(dev);
+> -
+> -	qxl_modeset_fini(qdev);
+> -	qxl_device_fini(qdev);
 > +	drm_atomic_helper_shutdown(dev);
+>  	if (is_vga(pdev))
+>  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+> -
+> -	dev->dev_private = NULL;
+> -	kfree(qdev);
 >  	drm_dev_put(dev);
 >  }
 >  
+> @@ -279,6 +284,8 @@ static struct drm_driver qxl_driver = {
+>  	.major = 0,
+>  	.minor = 1,
+>  	.patchlevel = 0,
+> +
+> +	.release = qxl_drm_release,
+>  };
+>  
+>  static int __init qxl_init(void)
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+> index bfc1631093e9..70b20ee4741a 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -299,12 +299,12 @@ void qxl_device_fini(struct qxl_device *qdev)
+>  {
+>  	qxl_bo_unref(&qdev->current_release_bo[0]);
+>  	qxl_bo_unref(&qdev->current_release_bo[1]);
+> -	flush_work(&qdev->gc_work);
+> -	qxl_ring_free(qdev->command_ring);
+> -	qxl_ring_free(qdev->cursor_ring);
+> -	qxl_ring_free(qdev->release_ring);
+>  	qxl_gem_fini(qdev);
+>  	qxl_bo_fini(qdev);
+> +	flush_work(&qdev->gc_work);
+> +	qxl_ring_free(qdev->command_ring);
+> +	qxl_ring_free(qdev->cursor_ring);
+> +	qxl_ring_free(qdev->release_ring);
+>  	io_mapping_free(qdev->surface_mapping);
+>  	io_mapping_free(qdev->vram_mapping);
+>  	iounmap(qdev->ram_header);
 > -- 
 > 2.18.1
 > 
