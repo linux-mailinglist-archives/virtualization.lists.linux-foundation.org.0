@@ -2,97 +2,65 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A0C6157E33
-	for <lists.virtualization@lfdr.de>; Mon, 10 Feb 2020 16:06:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F6F158040
+	for <lists.virtualization@lfdr.de>; Mon, 10 Feb 2020 17:55:55 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CAA0185010;
-	Mon, 10 Feb 2020 15:06:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D6AA084F48;
+	Mon, 10 Feb 2020 16:55:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ex--QHYBgkSb; Mon, 10 Feb 2020 15:06:40 +0000 (UTC)
+	with ESMTP id p01RAWDWrzdY; Mon, 10 Feb 2020 16:55:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4908B85036;
-	Mon, 10 Feb 2020 15:06:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0258384828;
+	Mon, 10 Feb 2020 16:55:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2AF6DC0171;
-	Mon, 10 Feb 2020 15:06:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E5528C0171;
+	Mon, 10 Feb 2020 16:55:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 79FE3C0171
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 42FCDC0171
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 15:06:38 +0000 (UTC)
+ Mon, 10 Feb 2020 16:55:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 6778A847D1
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3FA55841E3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 15:06:38 +0000 (UTC)
+ Mon, 10 Feb 2020 16:55:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bV1o16CXAvmk
+ with ESMTP id kR4F90+pndsB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 15:06:37 +0000 (UTC)
+ Mon, 10 Feb 2020 16:55:50 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
- [209.85.128.65])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 6DDF784707
+Received: from www.kot-begemot.co.uk (ivanoab7.miniserver.com [37.128.132.42])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 1773283C12
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 15:06:37 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id b17so754829wmb.0
- for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 07:06:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=SZWw5BNnqsxO+B1PSnFYos2X0WTIUEc5MmcB9KkYh80=;
- b=W0V0l0jrXQHgBSOItUTUJwRpOtkv/Q/smtmpPUJS47OOLZBD9qbyJ8CY7KClmjxKxE
- OFc5xuUJTNI4H//VPHEy4UoWZp7QD8sRKpumXKABiIZpcpZIkyHN4QhqxByZ2lH+sKZu
- XV3LNb2Q4Jr9z+7WNawVmGuKpSgkkjfr0VcRE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=SZWw5BNnqsxO+B1PSnFYos2X0WTIUEc5MmcB9KkYh80=;
- b=iluaOlv7KazOwlnv3RjjbzgqS0Af9dTtSgNAZJgX/mCarhbHvNpSfiTVpvze/ek2al
- 2vtrd35YU29caj/DKqv3KjnI5NSg6yNFJLx85/xD0UsEhOyQ3cT/USEd1JKdxWp+l43c
- 0sLEpvH9QWKpytkUzYUWMMUixCk6msEanBpibuPZB4XK6dj4pM8t7ro/o9aNGgBojIYk
- cxXJ2KnAKr0hWme3tbXjgpvi63GFGtLLim/6rs7n/sd2uUInORWHG59zut82Wqx6FK80
- rEomEc1lfvKpfUfQzRSjAUVDu3It+XiR9nVvBqy6I3pn2TUkhR5Sr2DHg/vHRUyqQ0L7
- Z5FA==
-X-Gm-Message-State: APjAAAXigj32bajzcwaXOi2n5r1ZSejwf/G+ZUglosCFz6eyScFFKqKx
- MlMc3I7rSzLiUk1vsezPZeCaPQ==
-X-Google-Smtp-Source: APXvYqzYMP69IToA5/mmhtOboZyOY6hCkleSPGfnRYobetT8q7zeS4pAYMffcDEcpwKzvUZc8Wsx2Q==
-X-Received: by 2002:a1c:44d:: with SMTP id 74mr16475365wme.53.1581347195749;
- Mon, 10 Feb 2020 07:06:35 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id t13sm935403wrw.19.2020.02.10.07.06.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2020 07:06:35 -0800 (PST)
-Date: Mon, 10 Feb 2020 16:06:33 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v2 2/2] drm/qxl: add drm_driver.release callback.
-Message-ID: <20200210150633.GS43062@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, 
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20200210113753.5614-1-kraxel@redhat.com>
- <20200210113753.5614-3-kraxel@redhat.com>
+ Mon, 10 Feb 2020 16:55:49 +0000 (UTC)
+Received: from tun252.jain.kot-begemot.co.uk ([192.168.18.6]
+ helo=jain.kot-begemot.co.uk)
+ by www.kot-begemot.co.uk with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <anton.ivanov@cambridgegreys.com>)
+ id 1j1CLa-0004sq-Iu; Mon, 10 Feb 2020 16:55:46 +0000
+Received: from jain.kot-begemot.co.uk ([192.168.3.3])
+ by jain.kot-begemot.co.uk with esmtp (Exim 4.92)
+ (envelope-from <anton.ivanov@cambridgegreys.com>)
+ id 1j1CLY-0004P0-4b; Mon, 10 Feb 2020 16:55:46 +0000
+Subject: Re: [PATCH] virtio: Work around frames incorrectly marked as gso
+To: netdev@vger.kernel.org
+References: <20191209104824.17059-1-anton.ivanov@cambridgegreys.com>
+From: Anton Ivanov <anton.ivanov@cambridgegreys.com>
+Message-ID: <57230228-7030-c65f-a24f-910ca52bbe9e@cambridgegreys.com>
+Date: Mon, 10 Feb 2020 16:55:44 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200210113753.5614-3-kraxel@redhat.com>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
+In-Reply-To: <20191209104824.17059-1-anton.ivanov@cambridgegreys.com>
+Content-Language: en-US
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: virtualization@lists.linux-foundation.org, linux-um@lists.infradead.org,
+ mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,108 +72,62 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Feb 10, 2020 at 12:37:52PM +0100, Gerd Hoffmann wrote:
-> Move final cleanups to qxl_drm_release() callback.
-> Add drm_atomic_helper_shutdown() call to qxl_pci_remove().
+
+
+On 09/12/2019 10:48, anton.ivanov@cambridgegreys.com wrote:
+> From: Anton Ivanov <anton.ivanov@cambridgegreys.com>
 > 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> Some of the frames marked as GSO which arrive at
+> virtio_net_hdr_from_skb() have no GSO_TYPE, no
+> fragments (data_len = 0) and length significantly shorter
+> than the MTU (752 in my experiments).
+> 
+> This is observed on raw sockets reading off vEth interfaces
+> in all 4.x and 5.x kernels I tested.
+> 
+> These frames are reported as invalid while they are in fact
+> gso-less frames.
+> 
+> This patch marks the vnet header as no-GSO for them instead
+> of reporting it as invalid.
+> 
+> Signed-off-by: Anton Ivanov <anton.ivanov@cambridgegreys.com>
 > ---
->  drivers/gpu/drm/qxl/qxl_drv.c | 26 +++++++++++++++++++-------
->  1 file changed, 19 insertions(+), 7 deletions(-)
+>   include/linux/virtio_net.h | 8 ++++++--
+>   1 file changed, 6 insertions(+), 2 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-> index 1d601f57a6ba..4fda3f9b29f4 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> @@ -34,6 +34,7 @@
->  #include <linux/pci.h>
->  
->  #include <drm/drm.h>
-> +#include <drm/drm_atomic_helper.h>
->  #include <drm/drm_drv.h>
->  #include <drm/drm_file.h>
->  #include <drm/drm_modeset_helper.h>
-> @@ -132,21 +133,30 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
->  	return ret;
->  }
->  
-> +static void qxl_drm_release(struct drm_device *dev)
-> +{
-> +	struct qxl_device *qdev = dev->dev_private;
-> +
-> +	/*
-> +	 * TODO: qxl_device_fini() call should be in qxl_pci_remove(),
-> +	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
-> +	 * non-trivial though.
-> +	 */
-> +	qxl_modeset_fini(qdev);
-
-So the drm_mode_config_cleanup call in here belongs in ->release, but the
-qxl_destroy_monitors_object feels like should be perfectly fine in the
-remove hook. You might need to sprinkle a few drm_dev_enter/exit around to
-protect code paths thought.
-
-Aside from this lgtm, for the series
-
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-And up to you whether you want to fix this or not really.
-
-Btw for testing all these patches that add a ->release hook I think it'd
-be good if the drm core checks that drm_device->dev is set to NULL, and
-that we do this in the remove hook. Since that's guaranteed to be gone at
-that point, so anything in ->release that still needs the device is
-broken. Ofc maybe do that check only for drivers which have a ->release
-hook, and we might need a few fixups.
-
-Cheers, Daniel
-
-> +	qxl_device_fini(qdev);
-> +	dev->dev_private = NULL;
-> +	kfree(qdev);
-> +}
-> +
->  static void
->  qxl_pci_remove(struct pci_dev *pdev)
->  {
->  	struct drm_device *dev = pci_get_drvdata(pdev);
-> -	struct qxl_device *qdev = dev->dev_private;
->  
->  	drm_dev_unregister(dev);
-> -
-> -	qxl_modeset_fini(qdev);
-> -	qxl_device_fini(qdev);
-> +	drm_atomic_helper_shutdown(dev);
->  	if (is_vga(pdev))
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
-> -
-> -	dev->dev_private = NULL;
-> -	kfree(qdev);
->  	drm_dev_put(dev);
->  }
->  
-> @@ -279,6 +289,8 @@ static struct drm_driver qxl_driver = {
->  	.major = 0,
->  	.minor = 1,
->  	.patchlevel = 0,
-> +
-> +	.release = qxl_drm_release,
->  };
->  
->  static int __init qxl_init(void)
-> -- 
-> 2.18.1
+> diff --git a/include/linux/virtio_net.h b/include/linux/virtio_net.h
+> index 0d1fe9297ac6..d90d5cff1b9a 100644
+> --- a/include/linux/virtio_net.h
+> +++ b/include/linux/virtio_net.h
+> @@ -112,8 +112,12 @@ static inline int virtio_net_hdr_from_skb(const struct sk_buff *skb,
+>   			hdr->gso_type = VIRTIO_NET_HDR_GSO_TCPV4;
+>   		else if (sinfo->gso_type & SKB_GSO_TCPV6)
+>   			hdr->gso_type = VIRTIO_NET_HDR_GSO_TCPV6;
+> -		else
+> -			return -EINVAL;
+> +		else {
+> +			if (skb->data_len == 0)
+> +				hdr->gso_type = VIRTIO_NET_HDR_GSO_NONE;
+> +			else
+> +				return -EINVAL;
+> +		}
+>   		if (sinfo->gso_type & SKB_GSO_TCP_ECN)
+>   			hdr->gso_type |= VIRTIO_NET_HDR_GSO_ECN;
+>   	} else
 > 
+
+ping.
 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Anton R. Ivanov
+Cambridgegreys Limited. Registered in England. Company Number 10273661
+https://www.cambridgegreys.com/
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
