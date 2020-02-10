@@ -2,86 +2,79 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70154156DC9
-	for <lists.virtualization@lfdr.de>; Mon, 10 Feb 2020 04:14:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4E1E156E24
+	for <lists.virtualization@lfdr.de>; Mon, 10 Feb 2020 04:57:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CA080852FE;
-	Mon, 10 Feb 2020 03:14:02 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B51AA84545;
+	Mon, 10 Feb 2020 03:57:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1pIR7f11dTFK; Mon, 10 Feb 2020 03:14:01 +0000 (UTC)
+	with ESMTP id LiBrDgYsbunN; Mon, 10 Feb 2020 03:57:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D95C0852E9;
-	Mon, 10 Feb 2020 03:14:01 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 075BD85232;
+	Mon, 10 Feb 2020 03:57:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B2038C0171;
-	Mon, 10 Feb 2020 03:14:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EE650C0171;
+	Mon, 10 Feb 2020 03:57:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 24790C0171
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D0F4DC0171
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 03:14:01 +0000 (UTC)
+ Mon, 10 Feb 2020 03:57:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 0D9418734E
+ by fraxinus.osuosl.org (Postfix) with ESMTP id BB09184545
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 03:14:01 +0000 (UTC)
+ Mon, 10 Feb 2020 03:57:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ktV-n8k4HPWj
+ with ESMTP id n9vSDDdrZqlW
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 03:14:00 +0000 (UTC)
+ Mon, 10 Feb 2020 03:57:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 69FBA87327
+Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [207.211.31.81])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id DD350850EA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 03:14:00 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 09 Feb 2020 19:13:59 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,423,1574150400"; d="scan'208";a="227061106"
-Received: from fmsmsx106.amr.corp.intel.com ([10.18.124.204])
- by fmsmga008.fm.intel.com with ESMTP; 09 Feb 2020 19:13:58 -0800
-Received: from fmsmsx156.amr.corp.intel.com (10.18.116.74) by
- FMSMSX106.amr.corp.intel.com (10.18.124.204) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Sun, 9 Feb 2020 19:13:23 -0800
-Received: from shsmsx105.ccr.corp.intel.com (10.239.4.158) by
- fmsmsx156.amr.corp.intel.com (10.18.116.74) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Sun, 9 Feb 2020 19:13:23 -0800
-Received: from shsmsx102.ccr.corp.intel.com ([169.254.2.126]) by
- SHSMSX105.ccr.corp.intel.com ([169.254.11.138]) with mapi id 14.03.0439.000;
- Mon, 10 Feb 2020 11:13:21 +0800
-From: "Wang, Wei W" <wei.w.wang@intel.com>
-To: Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
-Subject: RE: [PATCH RFC] virtio_balloon: conservative balloon page shrinking
-Thread-Topic: [PATCH RFC] virtio_balloon: conservative balloon page shrinking
-Thread-Index: AQHV3Mq/N+pHUOUW3kyXc/hsfZBMQqgQuBMAgAL6SVA=
-Date: Mon, 10 Feb 2020 03:13:21 +0000
-Message-ID: <286AC319A985734F985F78AFA26841F73E429F32@shsmsx102.ccr.corp.intel.com>
-References: <1580976107-16013-1-git-send-email-wei.w.wang@intel.com>
- <345addae-0945-2f49-52cf-8e53446e63b2@i-love.sakura.ne.jp>
-In-Reply-To: <345addae-0945-2f49-52cf-8e53446e63b2@i-love.sakura.ne.jp>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.2.0.6
-dlp-reaction: no-action
-x-originating-ip: [10.239.127.40]
+ Mon, 10 Feb 2020 03:57:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1581307051;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FpaNsEwT/ks+uSjIzZvFcpf96lfi9mqPgeVQPWwqQKs=;
+ b=V8vhku9frgr1FMr1SCcN5PnSCbkyo052XS0frT1yA2uscBpbNsx1q+vuuvMs9xnL48Mj1l
+ 5XFlw2HreRI5CHvSLW+l1VJOK5if2GB7Hn/veknmZjzeGD9aMiMsoj6/tm04HSMwWbOhB7
+ TrpmrPt0b1bLT/2DR3PDfMRtkUNfUuo=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-3-zqTqYp5IPvKusquXu357Vg-1; Sun, 09 Feb 2020 22:57:27 -0500
+X-MC-Unique: zqTqYp5IPvKusquXu357Vg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 03CD8800D5E;
+ Mon, 10 Feb 2020 03:57:25 +0000 (UTC)
+Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
+ (ovpn-13-219.pek2.redhat.com [10.72.13.219])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DB5E9101D481;
+ Mon, 10 Feb 2020 03:56:13 +0000 (UTC)
+From: Jason Wang <jasowang@redhat.com>
+To: mst@redhat.com, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, netdev@vger.kernel.org
+Subject: [PATCH V2 0/5] vDPA support
+Date: Mon, 10 Feb 2020 11:56:03 +0800
+Message-Id: <20200210035608.10002-1-jasowang@redhat.com>
 MIME-Version: 1.0
-Cc: "mst@redhat.com" <mst@redhat.com>, "mhocko@kernel.org" <mhocko@kernel.org>,
- "tysand@google.com" <tysand@google.com>, "namit@vmware.com" <namit@vmware.com>,
- "rientjes@google.com" <rientjes@google.com>,
- "alexander.h.duyck@linux.intel.com" <alexander.h.duyck@linux.intel.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Cc: jgg@mellanox.com, rob.miller@broadcom.com, lulu@redhat.com,
+ hanand@xilinx.com, hch@infradead.org, eperezma@redhat.com,
+ haotian.wang@sifive.com, mhabets@solarflare.com, shahafs@mellanox.com,
+ parav@mellanox.com, jiri@mellanox.com, xiao.w.wang@intel.com,
+ stefanha@redhat.com, zhihong.wang@intel.com, rdunlap@infradead.org,
+ maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,33 +91,83 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Saturday, February 8, 2020 8:33 PM, Tetsuo Handa wrote:
-> 
-> Is this NUMA aware? Can "node-A's NR_FILE_PAGES is already 0 and
-> node-B's NR_FILE_PAGES is not 0, but allocation request which triggered this
-> shrinker wants to allocate from only node-B" happen? 
+Hi all:
 
-No, it's a global counter.
+This is an updated version of kernel support for vDPA device. Various
+changes were made based on the feedback since last verion. One major
+change is to drop the sysfs API and leave the management interface for
+future development, and introudce the incremental DMA bus
+operations. Please see changelog for more information.
 
->Can some thread keep
-> this shrinker defunctional by keep increasing NR_FILE_PAGES?
+The work on vhost, IFCVF (intel VF driver for vDPA) and qemu is
+ongoing.
 
-Yes. Actually it's our intention - as long as there are pagecache pages,
-balloon pages are avoided to be reclaimed.
+Please provide feedback.
 
+Thanks
 
-> 
-> Is this patch from "Re: Balloon pressuring page cache" thread? I hope that
-> the guest could start reclaiming memory based on host's request (like OOM
-> notifier chain) which is issued when host thinks that host is getting close to
-> OOM and thus guests should start returning their unused memory to host.
-> Maybe "periodically (e.g. 5 minutes)" in addition to "upon close to OOM
-> condition" is also possible.
+Change from V1:
 
-That's about the host usages. The host side management software decides when to issue a request to balloon (either periodically or event driven), I think there isn't anything we need to do in the balloon driver here.
+- drop sysfs API, leave the management interface to future development
+  (Michael)
+- introduce incremental DMA ops (dma_map/dma_unmap) (Michael)
+- introduce dma_device and use it instead of parent device for doing
+  IOMMU or DMA from bus driver (Michael, Jason, Ling Shan, Tiwei)
+- accept parent device and dma device when register vdpa device
+- coding style and compile fixes (Randy)
+- using vdpa_xxx instead of xxx_vdpa (Jason)
+- ove vDPA accessors to header and make it static inline (Jason)
+- split vdp_register_device() into two helpers vdpa_init_device() and
+  vdpa_register_device() which allows intermediate step to be done (Jason)
+- warn on invalidate queue state when fail to creating virtqueue (Jason)
+- make to_virtio_vdpa_device() static (Jason)
+- use kmalloc/kfree instead of devres for virtio vdpa device (Jason)
+- avoid using cast in vdpa bus function (Jason)
+- introduce module_vdpa_driver and fix module refcnt (Jason)
+- fix returning freed address in vdapsim coherent DMA addr allocation (Dan)
+- various other fixes and tweaks
 
-Best,
-Wei
+V1: https://lkml.org/lkml/2020/1/16/353
+
+Jason Wang (5):
+  vhost: factor out IOTLB
+  vringh: IOTLB support
+  vDPA: introduce vDPA bus
+  virtio: introduce a vDPA based transport
+  vdpasim: vDPA device simulator
+
+ MAINTAINERS                    |   2 +
+ drivers/vhost/Kconfig          |   7 +
+ drivers/vhost/Kconfig.vringh   |   1 +
+ drivers/vhost/Makefile         |   2 +
+ drivers/vhost/net.c            |   2 +-
+ drivers/vhost/vhost.c          | 221 ++++-------
+ drivers/vhost/vhost.h          |  36 +-
+ drivers/vhost/vhost_iotlb.c    | 171 +++++++++
+ drivers/vhost/vringh.c         | 421 ++++++++++++++++++--
+ drivers/virtio/Kconfig         |  15 +
+ drivers/virtio/Makefile        |   2 +
+ drivers/virtio/vdpa/Kconfig    |  26 ++
+ drivers/virtio/vdpa/Makefile   |   3 +
+ drivers/virtio/vdpa/vdpa.c     | 160 ++++++++
+ drivers/virtio/vdpa/vdpa_sim.c | 678 +++++++++++++++++++++++++++++++++
+ drivers/virtio/virtio_vdpa.c   | 392 +++++++++++++++++++
+ include/linux/vdpa.h           | 233 +++++++++++
+ include/linux/vhost_iotlb.h    |  45 +++
+ include/linux/vringh.h         |  36 ++
+ 19 files changed, 2249 insertions(+), 204 deletions(-)
+ create mode 100644 drivers/vhost/vhost_iotlb.c
+ create mode 100644 drivers/virtio/vdpa/Kconfig
+ create mode 100644 drivers/virtio/vdpa/Makefile
+ create mode 100644 drivers/virtio/vdpa/vdpa.c
+ create mode 100644 drivers/virtio/vdpa/vdpa_sim.c
+ create mode 100644 drivers/virtio/virtio_vdpa.c
+ create mode 100644 include/linux/vdpa.h
+ create mode 100644 include/linux/vhost_iotlb.h
+
+-- 
+2.19.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
