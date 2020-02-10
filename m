@@ -2,124 +2,93 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CAE9157C15
-	for <lists.virtualization@lfdr.de>; Mon, 10 Feb 2020 14:34:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEAE2157DEE
+	for <lists.virtualization@lfdr.de>; Mon, 10 Feb 2020 15:55:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CA49181EE6;
-	Mon, 10 Feb 2020 13:34:56 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7B9FE824B0;
+	Mon, 10 Feb 2020 14:55:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fDssvXsuTfeC; Mon, 10 Feb 2020 13:34:54 +0000 (UTC)
+	with ESMTP id BgRs4Q15-HAz; Mon, 10 Feb 2020 14:55:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0EA07848F5;
-	Mon, 10 Feb 2020 13:34:54 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id ADBBD84103;
+	Mon, 10 Feb 2020 14:55:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E75C6C0171;
-	Mon, 10 Feb 2020 13:34:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A041C0171;
+	Mon, 10 Feb 2020 14:55:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9065CC0171
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 98178C0171
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 13:34:52 +0000 (UTC)
+ Mon, 10 Feb 2020 14:55:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 7B11685022
+ by silver.osuosl.org (Postfix) with ESMTP id 7E2F7203E1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 13:34:52 +0000 (UTC)
+ Mon, 10 Feb 2020 14:55:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 65amxFiO7-jv
+ with ESMTP id BojSmHk+KO7e
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 13:34:51 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-eopbgr60070.outbound.protection.outlook.com [40.107.6.70])
- by hemlock.osuosl.org (Postfix) with ESMTPS id E5F9082713
+ Mon, 10 Feb 2020 14:55:41 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+ [209.85.128.67])
+ by silver.osuosl.org (Postfix) with ESMTPS id 08D26203BE
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Feb 2020 13:34:50 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NVzveOVfN8Xz03ksgNbMr4idgkvXDa4UJuOEVyHJs7yjUdF/NhLEL8xy46vF1DXiGMqx3hJfaffI3/utfy3gBQPC/1P+zsIKZoi5RCCCVUUO30mn2N3Smn1G9YOXe1/6dIoCnm6TO6qKQYP4hOOQDZ02oJAorYRejw7Ee653FcUVwdMR/cvUiCATBCuGtKcUHDZ454xwn2Jg9mFB0Siw7Xm2eKxB2KLEU68huumecTvaPTreCsZD/sYQ5gsKizNZX2VLxHJZqT0eE7vGPu8JUJ8P0xKomxzhhgr0CSBI2yro2ptxf1W62ScLvE++cJzG52NEWFvDmwWNfXK3oAvnwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GaZwTrZDk3+PW79yrrqW4udBycnyk2AgyvXtnszqCh0=;
- b=CcnW1wcBwhJw+og1Ut8119zGiTAePKe7B7XKjLWDL0DrgiaXw+8kGFY63Smmw2LZsSau7pQM/8hvPR0rpjsteuPx6XRDqp7Ff40elaaGeOUatm8Ix8mPkPJRxgQHdc6U5RrMsjejD+M0gZ6h8AK6umIomFNFph+aFa0VdY1woexieiBWoOzoXhYaGMLdPubEmL4kHZIhQnahUxzuYIVqExsiwsim5cDgOqbQ3Odwei24m1y8HAs0zq4fCoYWnJKwMXxwD/oTcQ3/sBllAFPACyNl+FFKXQ1zBsVFlndNP8eMrW1J8S35xa1VV0DlVhldLkC8085ARzCaXOsCwLg17g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GaZwTrZDk3+PW79yrrqW4udBycnyk2AgyvXtnszqCh0=;
- b=kC2Bb9TIdknNEFb3gDBe1E9ApYXXtpQEV/3soJEKHJxcExIbVm0KP6CY/Rk4zZla1lcK5yROaudbo1DZ79Lp9EP4kYT0YE+yXmq8kA6fvK8pvkJNuFd5qJpkORwQB03MjoMEF2fx/ovo4jD/rxJLZlA7z0T5yEfR6boL3nqwnvQ=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB5693.eurprd05.prod.outlook.com (20.178.124.87) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2707.25; Mon, 10 Feb 2020 13:34:46 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2707.030; Mon, 10 Feb 2020
- 13:34:46 +0000
-Date: Mon, 10 Feb 2020 09:34:42 -0400
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V2 4/5] virtio: introduce a vDPA based transport
-Message-ID: <20200210133442.GS23346@mellanox.com>
-References: <20200210035608.10002-1-jasowang@redhat.com>
- <20200210035608.10002-5-jasowang@redhat.com>
-Content-Disposition: inline
-In-Reply-To: <20200210035608.10002-5-jasowang@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-ClientProxiedBy: MN2PR10CA0003.namprd10.prod.outlook.com
- (2603:10b6:208:120::16) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+ Mon, 10 Feb 2020 14:55:40 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id q9so626173wmj.5
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 10 Feb 2020 06:55:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=e6DHkRv/RjVLMoJccwFow7vvIDkBmRxpatiW9uqHzAA=;
+ b=T3AIPwpHb40S1bpKetV7hO985S/I88xVqo8fkgncaFoZN33BL4HETEu++2ciOa8uFG
+ 4+msmny/lboaWn7mnopixrx1reZqDzIkhoAEflSmF/Rk01KUe7jk8RKOIWrN8RM8u+7m
+ XKvVhnzIo54T6UE9cYaSQnZGDIP/Ql6gl7VIc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=e6DHkRv/RjVLMoJccwFow7vvIDkBmRxpatiW9uqHzAA=;
+ b=s0D+lSMV2Vzn3qpohk2ifNkSVDyuMJpHihm8n6Qhjx5K56Em7SZfd5iKKiCRgCSdix
+ OOvQNuk8VDKjOtS7nQhIFKo6f5a1UjZo4pz3w1dNC415PyhtS4fA6I1ZEI3DZx+SAaMv
+ EcdD/DK5unUvC7Nd3RjQduMdl/vk6GKFFf+CDh7ycz+I0WCtXbmPHH30BytSK2WB8Ufu
+ hvIBpMY17e9UmqLAcWPzZydgVgMjpfrqUgRXqI3vlk8JoX0ipUcpJEzcjpuSeokndyrm
+ isLPUJHcCjBfDeyg18r75I+rKN7+tHwnziH8kt+/E/pU9IqPb+pCE8e9g3AhyNPJ7+6u
+ +WIw==
+X-Gm-Message-State: APjAAAWC+oQH6e2K/K/eU7usoxWb81zdp3LfDBbWzF6UL8h9EqGT5E7b
+ jt/pG9iBrREmBHS0fMq943DZlQ==
+X-Google-Smtp-Source: APXvYqwyb3cBhEKTprq13qfJXLglASZPW0m/htnQi0Lz1UZwEiKsNxIUIoHqj1hTCGDthl5O4Ffi8A==
+X-Received: by 2002:a1c:1b4d:: with SMTP id b74mr16308048wmb.33.1581346539278; 
+ Mon, 10 Feb 2020 06:55:39 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id n13sm887530wmd.21.2020.02.10.06.55.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Feb 2020 06:55:38 -0800 (PST)
+Date: Mon, 10 Feb 2020 15:55:36 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Subject: Re: [PATCH v2] drm/bochs: add drm_driver.release callback.
+Message-ID: <20200210145536.GR43062@phenom.ffwll.local>
+Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
+ dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, 
+ open list <linux-kernel@vger.kernel.org>
+References: <20200210093801.4773-1-kraxel@redhat.com>
 MIME-Version: 1.0
-Received: from mlx.ziepe.ca (142.68.57.212) by
- MN2PR10CA0003.namprd10.prod.outlook.com (2603:10b6:208:120::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2707.21 via Frontend
- Transport; Mon, 10 Feb 2020 13:34:46 +0000
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
- <jgg@mellanox.com>)	id 1j19D0-0007da-Dx; Mon, 10 Feb 2020 09:34:42 -0400
-X-Originating-IP: [142.68.57.212]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 25ec9ef4-7192-407d-6259-08d7ae2dfe74
-X-MS-TrafficTypeDiagnostic: VI1PR05MB5693:|VI1PR05MB5693:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <VI1PR05MB56939BD3265A5DA05A710F4FCF190@VI1PR05MB5693.eurprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
-X-Forefront-PRVS: 03094A4065
-X-Forefront-Antispam-Report: SFV:NSPM;
- SFS:(10009020)(4636009)(396003)(136003)(346002)(376002)(366004)(39860400002)(199004)(189003)(33656002)(4744005)(36756003)(86362001)(5660300002)(1076003)(7416002)(316002)(66946007)(66476007)(66556008)(9746002)(9786002)(8936002)(2906002)(81156014)(52116002)(81166006)(4326008)(8676002)(6916009)(478600001)(2616005)(26005)(186003)(24400500001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB5693;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-Received-SPF: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: YtvaUXxzyYCj0pgU9Eg9keN35LKCSqyajPZxI905JRj11wLMxtYAEPa+nLINWL3o0WGqS9oBKxsKm5zmaiBzl2LDzTMDWaudCZBBq145H8ZpPY33e2CoAeHQ2PrO79/9uXAmhuULv8GCn/Ah1OqYIrVimheg2es5qKwOHHbQxIdQUi1iuiRdzgrCn9FNAazngDZuwo+o39s/CYy/4iel+FKT5fLW1weTjKhWZBXTKIyOlIOD95c0jYTn4q1pdciS1vZo14+AIXaG0mC/ZG88Ka3S5cTvmTAGCPxIpnVZ/NQvoR+EWwSDPzP/My3C0qBV5dwi3M9pUXn1XffqFlUW1cTzfzhtRlPeHw9zncG833vHgFqqF4HJaLu5WBKjxVP/G90PH5nDcRPKQ4g9cq6k6s/mlvEwe9OP1+EhPBTCfE1ElzhKnA1+t8ys8MjlxkfzZNFwqh86kN8p9P0Og4wc2KwGzHRqAwi1+eCpwDaupUciDcm8HNQ8hFc4Khi+ZHdq
-X-MS-Exchange-AntiSpam-MessageData: CIfrORGkJvDfy+1AFpTaIVIepe25xJRzSvJHNesSmByTLAqMjmHrCN+QEKzTXE6KqbDIQWiuPiA0NMdEwHgGGOsekA2xCRDrU5emtcnb8XC29S1a8/VbIiaBUn3cAMLbFBpEW05Iak+cXoINndaL4g==
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25ec9ef4-7192-407d-6259-08d7ae2dfe74
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2020 13:34:46.5204 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dSYCotorbWwV1JeU4KqH7/avPuFIxu20RpiHphMzFN55hK9WttMyFe2tQNyj3ibEswqN73mEb3fSJqlrvuO0ng==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB5693
-Cc: kvm@vger.kernel.org, mst@redhat.com, mhabets@solarflare.com,
- virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
- lulu@redhat.com, hanand@xilinx.com, hch@infradead.org, eperezma@redhat.com,
- haotian.wang@sifive.com, shahafs@mellanox.com, parav@mellanox.com,
- jiri@mellanox.com, xiao.w.wang@intel.com, stefanha@redhat.com,
- zhihong.wang@intel.com, rdunlap@infradead.org, linux-kernel@vger.kernel.org,
- maxime.coquelin@redhat.com, netdev@vger.kernel.org, lingshan.zhu@intel.com
+Content-Disposition: inline
+In-Reply-To: <20200210093801.4773-1-kraxel@redhat.com>
+X-Operating-System: Linux phenom 5.3.0-3-amd64 
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
+ "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -136,14 +105,143 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Feb 10, 2020 at 11:56:07AM +0800, Jason Wang wrote:
-> This patch introduces a vDPA transport for virtio. This is used to
-> use kernel virtio driver to drive the mediated device that is capable
-> of populating virtqueue directly.
+On Mon, Feb 10, 2020 at 10:38:01AM +0100, Gerd Hoffmann wrote:
+> Call drm_dev_unregister() first in bochs_pci_remove().  Hook
+> bochs_unload() into the new .release callback, to make sure cleanup
+> is done when all users are gone.
+> 
+> Add ready bool to state struct and move bochs_hw_fini() call from
+> bochs_unload() to bochs_pci_remove() to make sure hardware is not
+> touched after bochs_pci_remove returns.
+> 
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/bochs/bochs.h     |  1 +
+>  drivers/gpu/drm/bochs/bochs_drv.c |  6 +++---
+>  drivers/gpu/drm/bochs/bochs_hw.c  | 14 ++++++++++++++
+>  3 files changed, 18 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/bochs/bochs.h b/drivers/gpu/drm/bochs/bochs.h
+> index 917767173ee6..f6bce8669274 100644
+> --- a/drivers/gpu/drm/bochs/bochs.h
+> +++ b/drivers/gpu/drm/bochs/bochs.h
+> @@ -57,6 +57,7 @@ struct bochs_device {
+>  	unsigned long  fb_base;
+>  	unsigned long  fb_size;
+>  	unsigned long  qext_size;
+> +	bool           ready;
+>  
+>  	/* mode */
+>  	u16 xres;
+> diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
+> index 10460878414e..60b5492739ef 100644
+> --- a/drivers/gpu/drm/bochs/bochs_drv.c
+> +++ b/drivers/gpu/drm/bochs/bochs_drv.c
+> @@ -23,7 +23,6 @@ static void bochs_unload(struct drm_device *dev)
+>  
+>  	bochs_kms_fini(bochs);
+>  	bochs_mm_fini(bochs);
+> -	bochs_hw_fini(dev);
+>  	kfree(bochs);
+>  	dev->dev_private = NULL;
+>  }
+> @@ -69,6 +68,7 @@ static struct drm_driver bochs_driver = {
+>  	.major			= 1,
+>  	.minor			= 0,
+>  	DRM_GEM_VRAM_DRIVER,
+> +	.release                = bochs_unload,
+>  };
+>  
+>  /* ---------------------------------------------------------------------- */
+> @@ -148,9 +148,9 @@ static void bochs_pci_remove(struct pci_dev *pdev)
+>  {
+>  	struct drm_device *dev = pci_get_drvdata(pdev);
+>  
+> -	drm_atomic_helper_shutdown(dev);
+>  	drm_dev_unregister(dev);
+> -	bochs_unload(dev);
+> +	drm_atomic_helper_shutdown(dev);
+> +	bochs_hw_fini(dev);
+>  	drm_dev_put(dev);
+>  }
+>  
+> diff --git a/drivers/gpu/drm/bochs/bochs_hw.c b/drivers/gpu/drm/bochs/bochs_hw.c
+> index b615b7dfdd9d..48c1a6a8b026 100644
+> --- a/drivers/gpu/drm/bochs/bochs_hw.c
+> +++ b/drivers/gpu/drm/bochs/bochs_hw.c
+> @@ -168,6 +168,7 @@ int bochs_hw_init(struct drm_device *dev)
+>  	}
+>  	bochs->fb_base = addr;
+>  	bochs->fb_size = size;
+> +	bochs->ready = true;
+>  
+>  	DRM_INFO("Found bochs VGA, ID 0x%x.\n", id);
+>  	DRM_INFO("Framebuffer size %ld kB @ 0x%lx, %s @ 0x%lx.\n",
+> @@ -194,6 +195,10 @@ void bochs_hw_fini(struct drm_device *dev)
+>  {
+>  	struct bochs_device *bochs = dev->dev_private;
+>  
+> +	bochs->ready = false;
+> +
+> +	/* TODO: shot down existing vram mappings */
 
-Is this comment still right? Is there a mediated device still?
+Aside: I'm mildly hopefull that we could do this with a generic helper,
+both punching out all current ptes and replacing them with something
+dummy. Since replacing them with nothing and refusing to fault stuff is
+probably not going to work out well - userspace will crash&burn too much.
 
-Jason
+> +
+>  	if (bochs->mmio)
+>  		iounmap(bochs->mmio);
+>  	if (bochs->ioports)
+> @@ -207,6 +212,9 @@ void bochs_hw_fini(struct drm_device *dev)
+>  void bochs_hw_setmode(struct bochs_device *bochs,
+>  		      struct drm_display_mode *mode)
+>  {
+> +	if (!bochs->ready)
+> +		return;
+
+drm_dev_enter/exit is the primitive you're looking for I think. Don't hand
+roll your own racy version of this. btw changelog in the patch missing.
+Personally I'd split out the drm_dev_enter/exit in a 2nd patch, but up to
+you.
+
+The remove/release split looks correct to me now.
+-Daniel
+
+
+> +
+>  	bochs->xres = mode->hdisplay;
+>  	bochs->yres = mode->vdisplay;
+>  	bochs->bpp = 32;
+> @@ -237,6 +245,9 @@ void bochs_hw_setmode(struct bochs_device *bochs,
+>  void bochs_hw_setformat(struct bochs_device *bochs,
+>  			const struct drm_format_info *format)
+>  {
+> +	if (!bochs->ready)
+> +		return;
+> +
+>  	DRM_DEBUG_DRIVER("format %c%c%c%c\n",
+>  			 (format->format >>  0) & 0xff,
+>  			 (format->format >>  8) & 0xff,
+> @@ -264,6 +275,9 @@ void bochs_hw_setbase(struct bochs_device *bochs,
+>  	unsigned long offset;
+>  	unsigned int vx, vy, vwidth;
+>  
+> +	if (!bochs->ready)
+> +		return;
+> +
+>  	bochs->stride = stride;
+>  	offset = (unsigned long)addr +
+>  		y * bochs->stride +
+> -- 
+> 2.18.1
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
