@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88D7A1590A5
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:54:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A4331590A2
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:54:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 29C3686759;
-	Tue, 11 Feb 2020 13:54:11 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B0317866F6;
+	Tue, 11 Feb 2020 13:54:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PFHpjb8Tqe2D; Tue, 11 Feb 2020 13:54:06 +0000 (UTC)
+	with ESMTP id hWZahgSlkYxQ; Tue, 11 Feb 2020 13:53:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B2707868C6;
-	Tue, 11 Feb 2020 13:53:34 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 2454A8680D;
+	Tue, 11 Feb 2020 13:53:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8E254C1D80;
-	Tue, 11 Feb 2020 13:53:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D4E8BC07FE;
+	Tue, 11 Feb 2020 13:53:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 81327C07FE
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C427EC1D8E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:29 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 634CC857F8
+ by fraxinus.osuosl.org (Postfix) with ESMTP id AC2F785653
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:29 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Y-JPB9EoTkHw
+ with ESMTP id H2_-XTHS_mib
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 1F80D85725
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id A1FCF857A4
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id D9E7DE64; Tue, 11 Feb 2020 14:53:12 +0100 (CET)
+ id 19891E69; Tue, 11 Feb 2020 14:53:13 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 32/62] x86/sev-es: Compile early handler code into kernel image
-Date: Tue, 11 Feb 2020 14:52:26 +0100
-Message-Id: <20200211135256.24617-33-joro@8bytes.org>
+Subject: [PATCH 33/62] x86/sev-es: Setup early #VC handler
+Date: Tue, 11 Feb 2020 14:52:27 +0100
+Message-Id: <20200211135256.24617-34-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200211135256.24617-1-joro@8bytes.org>
 References: <20200211135256.24617-1-joro@8bytes.org>
@@ -75,219 +75,166 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Setup sev-es.c and include the code from the
-pre-decompression stage to also build it into the image of the running
-kernel. Temporarily add __maybe_unused annotations to avoid build
-warnings until the functions get used.
+Setup an early handler for #VC exceptions. There is no GHCB mapped
+yet, so just re-use the no_ghcb_vc_handler. It can only handle CPUID
+exit-codes, but that should be enough to get the kernel through
+verify_cpu() and __startup_64() until it runs on virtual addresses.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/Makefile        |  1 +
- arch/x86/kernel/sev-es-shared.c | 24 ++++----
- arch/x86/kernel/sev-es.c        | 98 +++++++++++++++++++++++++++++++++
- 3 files changed, 113 insertions(+), 10 deletions(-)
- create mode 100644 arch/x86/kernel/sev-es.c
+ arch/x86/include/asm/desc.h      |  1 +
+ arch/x86/include/asm/processor.h |  1 +
+ arch/x86/include/asm/sev-es.h    |  2 ++
+ arch/x86/kernel/head64.c         | 17 ++++++++++++++++
+ arch/x86/kernel/head_64.S        | 35 ++++++++++++++++++++++++++++++++
+ arch/x86/kernel/idt.c            | 10 +++++++++
+ 6 files changed, 66 insertions(+)
 
-diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
-index 9b294c13809a..b11bb52e2603 100644
---- a/arch/x86/kernel/Makefile
-+++ b/arch/x86/kernel/Makefile
-@@ -143,6 +143,7 @@ obj-$(CONFIG_UNWINDER_ORC)		+= unwind_orc.o
- obj-$(CONFIG_UNWINDER_FRAME_POINTER)	+= unwind_frame.o
- obj-$(CONFIG_UNWINDER_GUESS)		+= unwind_guess.o
+diff --git a/arch/x86/include/asm/desc.h b/arch/x86/include/asm/desc.h
+index 8a4c642ee2b3..cc2db0325f9f 100644
+--- a/arch/x86/include/asm/desc.h
++++ b/arch/x86/include/asm/desc.h
+@@ -388,6 +388,7 @@ static inline void set_desc_limit(struct desc_struct *desc, unsigned long limit)
  
-+obj-$(CONFIG_AMD_MEM_ENCRYPT)		+= sev-es.o
- ###
- # 64 bit specific files
- ifeq ($(CONFIG_X86_64),y)
-diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
-index 14693eff9614..ad2a6c964217 100644
---- a/arch/x86/kernel/sev-es-shared.c
-+++ b/arch/x86/kernel/sev-es-shared.c
-@@ -9,7 +9,7 @@
-  * and is included directly into both code-bases.
-  */
+ void update_intr_gate(unsigned int n, const void *addr);
+ void alloc_intr_gate(unsigned int n, const void *addr);
++void set_early_idt_handler(gate_desc *idt, int n, void *handler);
  
--static void terminate(unsigned int reason)
-+static void __maybe_unused terminate(unsigned int reason)
- {
- 	/* Request Guest Termination from Hypvervisor */
- 	write_ghcb_msr(GHCB_SEV_TERMINATE);
-@@ -19,7 +19,7 @@ static void terminate(unsigned int reason)
- 		asm volatile("hlt\n" : : : "memory");
+ extern unsigned long system_vectors[];
+ 
+diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/processor.h
+index 09705ccc393c..4622427d01d4 100644
+--- a/arch/x86/include/asm/processor.h
++++ b/arch/x86/include/asm/processor.h
+@@ -768,6 +768,7 @@ extern int sysenter_setup(void);
+ 
+ /* Defined in head.S */
+ extern struct desc_ptr		early_gdt_descr;
++extern struct desc_ptr		early_idt_descr;
+ 
+ extern void switch_to_new_gdt(int);
+ extern void load_direct_gdt(int);
+diff --git a/arch/x86/include/asm/sev-es.h b/arch/x86/include/asm/sev-es.h
+index 512d3ccb9832..caa29f75ce41 100644
+--- a/arch/x86/include/asm/sev-es.h
++++ b/arch/x86/include/asm/sev-es.h
+@@ -75,4 +75,6 @@ static inline u64 copy_lower_bits(u64 out, u64 in, unsigned int bits)
+ 	return out;
  }
  
--static bool sev_es_negotiate_protocol(void)
-+static bool __maybe_unused sev_es_negotiate_protocol(void)
- {
- 	u64 val;
- 
-@@ -38,7 +38,7 @@ static bool sev_es_negotiate_protocol(void)
- 	return true;
- }
- 
--static void ghcb_invalidate(struct ghcb *ghcb)
-+static void __maybe_unused ghcb_invalidate(struct ghcb *ghcb)
- {
- 	memset(ghcb->save.valid_bitmap, 0, sizeof(ghcb->save.valid_bitmap));
- }
-@@ -80,9 +80,10 @@ static bool decoding_needed(unsigned long exit_code)
- 		 exit_code <= SVM_EXIT_LAST_EXCP);
- }
- 
--static enum es_result init_em_ctxt(struct es_em_ctxt *ctxt,
--				   struct pt_regs *regs,
--				   unsigned long exit_code)
-+static enum es_result __maybe_unused
-+init_em_ctxt(struct es_em_ctxt *ctxt,
-+	     struct pt_regs *regs,
-+	     unsigned long exit_code)
- {
- 	enum es_result ret = ES_OK;
- 
-@@ -95,7 +96,7 @@ static enum es_result init_em_ctxt(struct es_em_ctxt *ctxt,
- 	return ret;
- }
- 
--static void finish_insn(struct es_em_ctxt *ctxt)
-+static void __maybe_unused finish_insn(struct es_em_ctxt *ctxt)
- {
- 	ctxt->regs->ip += ctxt->insn.length;
- }
-@@ -358,7 +359,8 @@ static enum es_result ioio_exitinfo(struct es_em_ctxt *ctxt, u64 *exitinfo)
- 	return ES_OK;
- }
- 
--static enum es_result handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
-+static enum es_result __maybe_unused
-+handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
- 	u64 exit_info_1, exit_info_2;
-@@ -450,7 +452,8 @@ static enum es_result handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- 	return ret;
- }
- 
--static enum es_result handle_cpuid(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
-+static enum es_result __maybe_unused
-+handle_cpuid(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
- 	u32 cr4 = native_read_cr4();
-@@ -656,7 +659,8 @@ static enum es_result handle_mmio_twobyte_ops(struct ghcb *ghcb,
- 	return ret;
- }
- 
--static enum es_result handle_mmio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
-+static enum es_result __maybe_unused
-+handle_mmio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct insn *insn = &ctxt->insn;
- 	unsigned int bytes = 0;
-diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-new file mode 100644
-index 000000000000..33ab7fe8b6a0
---- /dev/null
-+++ b/arch/x86/kernel/sev-es.c
-@@ -0,0 +1,98 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * AMD Memory Encryption Support
-+ *
-+ * Copyright (C) 2019 SUSE
-+ *
-+ * Author: Joerg Roedel <jroedel@suse.de>
-+ */
++extern void early_vc_handler(void);
 +
-+#include <linux/kernel.h>
-+#include <linux/mm.h>
-+
-+#include <asm/trap_defs.h>
+ #endif
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index d83c62ebaa85..eab04ac260d4 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -38,6 +38,7 @@
+ #include <asm/fixmap.h>
+ #include <asm/extable.h>
+ #include <asm/trap_defs.h>
 +#include <asm/sev-es.h>
-+#include <asm/fpu/internal.h>
-+#include <asm/processor.h>
-+#include <asm/svm.h>
+ 
+ /*
+  * Manage page tables very early on.
+@@ -516,3 +517,19 @@ void __head early_idt_setup_early_handler(unsigned long physaddr)
+ 
+ 	setup_early_handlers(idt);
+ }
 +
-+static inline u64 read_ghcb_msr(void)
++void __head early_idt_setup(unsigned long physbase)
 +{
-+	return native_read_msr(MSR_AMD64_SEV_ES_GHCB);
-+}
++	gate_desc *idt = fixup_pointer(idt_table, physbase);
++	void __maybe_unused *handler;
 +
-+static inline void write_ghcb_msr(u64 val)
++#ifdef CONFIG_AMD_MEM_ENCRYPT
++	/* VMM Communication Exception */
++	handler = fixup_pointer(early_vc_handler, physbase);
++	set_early_idt_handler(idt, X86_TRAP_VC, handler);
++#endif
++
++	/* Initialize IDT descriptor and load IDT */
++	early_idt_descr.address = (unsigned long)idt;
++	native_load_idt(&early_idt_descr);
++}
+diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+index 81cf6c5763ef..13ebf7d3af2c 100644
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -86,6 +86,12 @@ SYM_CODE_START_NOALIGN(startup_64)
+ .Lon_kernel_cs:
+ 	UNWIND_HINT_EMPTY
+ 
++	/* Setup IDT - Needed for SEV-ES */
++	leaq	_text(%rip), %rdi
++	pushq	%rsi
++	call	early_idt_setup
++	popq	%rsi
++
+ 	/* Sanitize CPU configuration */
+ 	call verify_cpu
+ 
+@@ -364,6 +370,32 @@ SYM_CODE_START_LOCAL(early_idt_handler_common)
+ 	jmp restore_regs_and_return_to_kernel
+ SYM_CODE_END(early_idt_handler_common)
+ 
++#ifdef CONFIG_AMD_MEM_ENCRYPT
++/*
++ * VC Exception handler used during very early boot. The
++ * early_idt_handler_array can't be used because it returns via the
++ * paravirtualized INTERRUPT_RETURN and pv-ops don't work that early.
++ */
++SYM_CODE_START_NOALIGN(early_vc_handler)
++	UNWIND_HINT_IRET_REGS offset=8
++
++	/* Build pt_regs */
++	PUSH_AND_CLEAR_REGS
++
++	/* Call C handler */
++	movq    %rsp, %rdi
++	call    no_ghcb_vc_handler
++
++	/* Unwind pt_regs */
++	POP_REGS
++
++	/* Remove Error Code */
++	addq    $8, %rsp
++
++	/* Pure iret required here - don't use INTERRUPT_RETURN */
++	iretq
++SYM_CODE_END(early_vc_handler)
++#endif
+ 
+ #define SYM_DATA_START_PAGE_ALIGNED(name)			\
+ 	SYM_START(name, SYM_L_GLOBAL, .balign PAGE_SIZE)
+@@ -505,6 +537,9 @@ SYM_DATA_END(level1_fixmap_pgt)
+ SYM_DATA(early_gdt_descr,		.word GDT_ENTRIES*8-1)
+ SYM_DATA_LOCAL(early_gdt_descr_base,	.quad INIT_PER_CPU_VAR(gdt_page))
+ 
++SYM_DATA(early_idt_descr,		.word NUM_EXCEPTION_VECTORS * 16)
++SYM_DATA_LOCAL(early_idt_descr_base,	.quad 0)
++
+ 	.align 16
+ /* This must match the first entry in level2_kernel_pgt */
+ SYM_DATA(phys_base, .quad 0x0)
+diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
+index 84250c090596..1bfee6981e9b 100644
+--- a/arch/x86/kernel/idt.c
++++ b/arch/x86/kernel/idt.c
+@@ -393,3 +393,13 @@ void alloc_intr_gate(unsigned int n, const void *addr)
+ 	if (!test_and_set_bit(n, system_vectors))
+ 		set_intr_gate(n, addr);
+ }
++
++void set_early_idt_handler(gate_desc *idt, int n, void *handler)
 +{
-+	u32 low, high;
++	struct idt_data data;
++	gate_desc desc;
 +
-+	low  = (u32)(val);
-+	high = (u32)(val >> 32);
-+
-+	native_write_msr(MSR_AMD64_SEV_ES_GHCB, low, high);
++	init_idt_data(&data, n, handler);
++	idt_init_desc(&desc, &data);
++	native_write_idt_entry(idt, n, &desc);
 +}
-+
-+static bool check_kernel(struct pt_regs *regs)
-+{
-+	return regs->cs == __KERNEL_CS;
-+}
-+
-+static enum es_result es_fetch_insn_byte(struct es_em_ctxt *ctxt,
-+					 unsigned int offset,
-+					 char *buffer)
-+{
-+	char *rip = (char *)ctxt->regs->ip;
-+
-+	/* More checks are needed when we boot to user-space */
-+	if (!check_kernel(ctxt->regs))
-+		return ES_UNSUPPORTED;
-+
-+	buffer[offset] = rip[offset];
-+
-+	return ES_OK;
-+}
-+
-+static enum es_result es_write_mem(struct es_em_ctxt *ctxt,
-+				   void *dst, char *buf, size_t size)
-+{
-+	/* More checks are needed when we boot to user-space */
-+	if (!check_kernel(ctxt->regs))
-+		return ES_UNSUPPORTED;
-+
-+	memcpy(dst, buf, size);
-+
-+	return ES_OK;
-+}
-+
-+static enum es_result es_read_mem(struct es_em_ctxt *ctxt,
-+				  void *src, char *buf, size_t size)
-+{
-+	/* More checks are needed when we boot to user-space */
-+	if (!check_kernel(ctxt->regs))
-+		return ES_UNSUPPORTED;
-+
-+	memcpy(buf, src, size);
-+
-+	return ES_OK;
-+}
-+
-+static phys_addr_t es_slow_virt_to_phys(struct ghcb *ghcb, long vaddr)
-+{
-+	unsigned long va = (unsigned long)vaddr;
-+	unsigned int level;
-+	phys_addr_t pa;
-+	pgd_t *pgd;
-+	pte_t *pte;
-+
-+	pgd = pgd_offset(current->active_mm, va);
-+	pte = lookup_address_in_pgd(pgd, va, &level);
-+	if (!pte)
-+		return 0;
-+
-+	pa = (phys_addr_t)pte_pfn(*pte) << PAGE_SHIFT;
-+	pa |= va & ~page_level_mask(level);
-+
-+	return pa;
-+}
-+
-+/* Include code shared with pre-decompression boot stage */
-+#include "sev-es-shared.c"
 -- 
 2.17.1
 
