@@ -1,50 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33903159163
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 15:04:05 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA37215915D
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 15:04:01 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id D5BF8204E4;
-	Tue, 11 Feb 2020 14:04:03 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4161C856E8;
+	Tue, 11 Feb 2020 14:04:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nUJkcwJGt7oH; Tue, 11 Feb 2020 14:04:00 +0000 (UTC)
+	with ESMTP id Alh7GqHxuSCh; Tue, 11 Feb 2020 14:03:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8DBA1204F1;
-	Tue, 11 Feb 2020 14:04:00 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 69DFD85712;
+	Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 73A0BC1D80;
-	Tue, 11 Feb 2020 14:04:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B92EC07FE;
+	Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 03A8AC07FE
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 57EDEC07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:58 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id D19A5857DC
+ by hemlock.osuosl.org (Postfix) with ESMTP id 44B28870F6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ExBFvxaVXFXg
+ with ESMTP id v6f+inC9GNof
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:55 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 5D8E88731A
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 82019857DC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:55 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 657A4EA7; Tue, 11 Feb 2020 14:53:17 +0100 (CET)
+ id 919D6EA8; Tue, 11 Feb 2020 14:53:17 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 57/62] x86/realmode: Setup AP jump table
-Date: Tue, 11 Feb 2020 14:52:51 +0100
-Message-Id: <20200211135256.24617-58-joro@8bytes.org>
+Subject: [PATCH 58/62] x86/head/64: Don't call verify_cpu() on starting APs
+Date: Tue, 11 Feb 2020 14:52:52 +0100
+Message-Id: <20200211135256.24617-59-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200211135256.24617-1-joro@8bytes.org>
 References: <20200211135256.24617-1-joro@8bytes.org>
@@ -73,170 +73,59 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Joerg Roedel <jroedel@suse.de>
 
-Setup the AP jump table to point to the SEV-ES trampoline code so that
-the APs can boot.
+The APs are not ready to handle exceptions when verify_cpu() is called
+in secondary_startup_64.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: - Adapted to different code base
-                   - Moved AP table setup from SIPI sending path to
-		     real-mode setup code ]
-Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/sev-es.h   | 11 ++++++
- arch/x86/include/uapi/asm/svm.h |  3 ++
- arch/x86/kernel/sev-es.c        | 63 +++++++++++++++++++++++++++++++++
- arch/x86/realmode/init.c        |  6 ++++
- 4 files changed, 83 insertions(+)
+ arch/x86/include/asm/realmode.h | 1 +
+ arch/x86/kernel/head_64.S       | 1 +
+ arch/x86/realmode/init.c        | 6 ++++++
+ 3 files changed, 8 insertions(+)
 
-diff --git a/arch/x86/include/asm/sev-es.h b/arch/x86/include/asm/sev-es.h
-index a2d0c77dabc3..a4d7574c5c6a 100644
---- a/arch/x86/include/asm/sev-es.h
-+++ b/arch/x86/include/asm/sev-es.h
-@@ -78,4 +78,15 @@ static inline u64 copy_lower_bits(u64 out, u64 in, unsigned int bits)
- extern void early_vc_handler(void);
- extern int boot_vc_exception(struct pt_regs *regs);
- 
-+struct real_mode_header;
-+
-+#ifdef CONFIG_AMD_MEM_ENCRYPT
-+int sev_es_setup_ap_jump_table(struct real_mode_header *rmh);
-+#else /* CONFIG_AMD_MEM_ENCRYPT */
-+static inline int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
-+{
-+	return 0;
-+}
-+#endif /* CONFIG_AMD_MEM_ENCRYPT*/
-+
+diff --git a/arch/x86/include/asm/realmode.h b/arch/x86/include/asm/realmode.h
+index 6590394af309..5c97807c38a4 100644
+--- a/arch/x86/include/asm/realmode.h
++++ b/arch/x86/include/asm/realmode.h
+@@ -69,6 +69,7 @@ extern unsigned char startup_32_smp[];
+ extern unsigned char boot_gdt[];
+ #else
+ extern unsigned char secondary_startup_64[];
++extern unsigned char secondary_startup_64_no_verify[];
  #endif
-diff --git a/arch/x86/include/uapi/asm/svm.h b/arch/x86/include/uapi/asm/svm.h
-index 8f36ae021a7f..a19ce9681ec2 100644
---- a/arch/x86/include/uapi/asm/svm.h
-+++ b/arch/x86/include/uapi/asm/svm.h
-@@ -84,6 +84,9 @@
- /* SEV-ES software-defined VMGEXIT events */
- #define SVM_VMGEXIT_MMIO_READ			0x80000001
- #define SVM_VMGEXIT_MMIO_WRITE			0x80000002
-+#define SVM_VMGEXIT_AP_JUMP_TABLE		0x80000005
-+#define		SVM_VMGEXIT_SET_AP_JUMP_TABLE			0
-+#define		SVM_VMGEXIT_GET_AP_JUMP_TABLE			1
- #define SVM_VMGEXIT_UNSUPPORTED_EVENT		0x8000ffff
  
- #define SVM_EXIT_ERR           -1
-diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 6924bb1ad8b2..d8193d37ed2b 100644
---- a/arch/x86/kernel/sev-es.c
-+++ b/arch/x86/kernel/sev-es.c
-@@ -16,6 +16,7 @@
- #include <linux/mm.h>
+ static inline size_t real_mode_size_needed(void)
+diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+index 13ebf7d3af2c..9dd602bd6244 100644
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -144,6 +144,7 @@ SYM_CODE_START(secondary_startup_64)
+ 	/* Sanitize CPU configuration */
+ 	call verify_cpu
  
- #include <asm/trap_defs.h>
-+#include <asm/realmode.h>
- #include <asm/sev-es.h>
- #include <asm/fpu/internal.h>
- #include <asm/processor.h>
-@@ -42,6 +43,8 @@ static DEFINE_PER_CPU_DECRYPTED(struct ghcb, ghcb_page) __aligned(PAGE_SIZE);
- /* Needed in early_forward_exception */
- extern void early_exception(struct pt_regs *regs, int trapnr);
- 
-+static inline u64 read_ghcb_msr(void);
-+
- static inline u64 read_ghcb_msr(void)
- {
- 	return native_read_msr(MSR_AMD64_SEV_ES_GHCB);
-@@ -139,6 +142,66 @@ static phys_addr_t es_slow_virt_to_phys(struct ghcb *ghcb, long vaddr)
- /* Include code shared with pre-decompression boot stage */
- #include "sev-es-shared.c"
- 
-+static u64 sev_es_get_jump_table_addr(void)
-+{
-+	unsigned long flags;
-+	struct ghcb *ghcb;
-+	u64 ret;
-+
-+	local_irq_save(flags);
-+
-+	ghcb = this_cpu_ptr(&ghcb_page);
-+	ghcb_invalidate(ghcb);
-+
-+	ghcb_set_sw_exit_code(ghcb, SVM_VMGEXIT_AP_JUMP_TABLE);
-+	ghcb_set_sw_exit_info_1(ghcb, SVM_VMGEXIT_GET_AP_JUMP_TABLE);
-+	ghcb_set_sw_exit_info_2(ghcb, 0);
-+
-+	write_ghcb_msr(__pa(ghcb));
-+	VMGEXIT();
-+
-+	if (!ghcb_is_valid_sw_exit_info_1(ghcb) ||
-+	    !ghcb_is_valid_sw_exit_info_2(ghcb))
-+		ret = 0;
-+
-+	ret = ghcb->save.sw_exit_info_2;
-+
-+	local_irq_restore(flags);
-+
-+	return ret;
-+}
-+
-+int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
-+{
-+	u16 startup_cs, startup_ip;
-+	phys_addr_t jump_table_pa;
-+	u64 jump_table_addr;
-+	u16 *jump_table;
-+
-+	jump_table_addr = sev_es_get_jump_table_addr();
-+
-+	/* Check if AP Jump Table is non-zero and page-aligned */
-+	if (!jump_table_addr || jump_table_addr & ~PAGE_MASK)
-+		return 0;
-+
-+	jump_table_pa = jump_table_addr & PAGE_MASK;
-+
-+	startup_cs = (u16)(rmh->trampoline_start >> 4);
-+	startup_ip = (u16)(rmh->sev_es_trampoline_start -
-+			   rmh->trampoline_start);
-+
-+	jump_table = ioremap_encrypted(jump_table_pa, PAGE_SIZE);
-+	if (!jump_table)
-+		return -EIO;
-+
-+	jump_table[0] = startup_ip;
-+	jump_table[1] = startup_cs;
-+
-+	iounmap(jump_table);
-+
-+	return 0;
-+}
-+
- static enum es_result handle_msr(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
++SYM_INNER_LABEL(secondary_startup_64_no_verify, SYM_L_GLOBAL)
+ 	/*
+ 	 * Retrieve the modifier (SME encryption mask if SME is active) to be
+ 	 * added to the initial pgdir entry that will be programmed into CR3.
 diff --git a/arch/x86/realmode/init.c b/arch/x86/realmode/init.c
-index 262f83cad355..1c5cbfd102d5 100644
+index 1c5cbfd102d5..030c38268069 100644
 --- a/arch/x86/realmode/init.c
 +++ b/arch/x86/realmode/init.c
-@@ -9,6 +9,7 @@
- #include <asm/realmode.h>
- #include <asm/tlbflush.h>
- #include <asm/crash.h>
-+#include <asm/sev-es.h>
- 
- struct real_mode_header *real_mode_header;
- u32 *trampoline_cr4_features;
-@@ -107,6 +108,11 @@ static void __init setup_real_mode(void)
- 	if (sme_active())
+@@ -109,6 +109,12 @@ static void __init setup_real_mode(void)
  		trampoline_header->flags |= TH_FLAGS_SME_ACTIVE;
  
-+	if (sev_es_active()) {
-+		if (sev_es_setup_ap_jump_table(real_mode_header))
-+			panic("Failed to update SEV-ES AP Jump Table");
-+	}
+ 	if (sev_es_active()) {
++		/*
++		 * Skip the call to verify_cpu() in secondary_startup_64 as it
++		 * will cause #VC exceptions when the AP can't handle them yet.
++		 */
++		trampoline_header->start = (u64) secondary_startup_64_no_verify;
 +
- 	trampoline_pgd = (u64 *) __va(real_mode_header->trampoline_pgd);
- 	trampoline_pgd[0] = trampoline_pgd_entry.pgd;
- 	trampoline_pgd[511] = init_top_pgt[511].pgd;
+ 		if (sev_es_setup_ap_jump_table(real_mode_header))
+ 			panic("Failed to update SEV-ES AP Jump Table");
+ 	}
 -- 
 2.17.1
 
