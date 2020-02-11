@@ -1,77 +1,113 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3C501590C4
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:55:35 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A07AE15911B
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:58:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 55373860FF;
-	Tue, 11 Feb 2020 13:55:34 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 56D86204DD;
+	Tue, 11 Feb 2020 13:58:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7bSEWwSr1Dlp; Tue, 11 Feb 2020 13:55:33 +0000 (UTC)
+	with ESMTP id rLuZpZJa0ZLk; Tue, 11 Feb 2020 13:58:16 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 576B486388;
-	Tue, 11 Feb 2020 13:55:33 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 2251C204E4;
+	Tue, 11 Feb 2020 13:58:16 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 306CEC07FE;
-	Tue, 11 Feb 2020 13:55:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F3BE2C07FE;
+	Tue, 11 Feb 2020 13:58:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 940C1C07FE
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4757EC07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:55:31 +0000 (UTC)
+ Tue, 11 Feb 2020 13:58:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 83B4B83307
+ by hemlock.osuosl.org (Postfix) with ESMTP id 32F2487111
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:55:31 +0000 (UTC)
+ Tue, 11 Feb 2020 13:58:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9TA7lycsxvJd
+ with ESMTP id QgJveAwfDFLK
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:55:30 +0000 (UTC)
+ Tue, 11 Feb 2020 13:58:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8D03E80EB3
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7DEE2870A1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:55:30 +0000 (UTC)
+ Tue, 11 Feb 2020 13:58:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581429329;
+ s=mimecast20190719; t=1581429492;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc; bh=LiI8OXeqApXKVycGwDYh1aLBwvgIFPPVhBrhusiyeE4=;
- b=H2WJVxmPqDGbqr/ts4Av1Bf5MhBoIqPL4ROSUQ7vyc4FAfBAEvnQaHTjGmmNtO6O+7uZK+
- /XR1ISbpBhCT+ADvXYSmTWTYWLQ3LtmgStrJ0pC1RXGneVzr0ouGOtKrvnebef9YbVJp/e
- aFFzMNXyLmP2hkTy0ExZMUMh52zK6dU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-24-XXjEI8eUMeeF-aIDrc7KMg-1; Tue, 11 Feb 2020 08:55:27 -0500
-X-MC-Unique: XXjEI8eUMeeF-aIDrc7KMg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 70085801E6C;
- Tue, 11 Feb 2020 13:55:26 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-112.ams2.redhat.com
- [10.36.116.112])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3252F60BF1;
- Tue, 11 Feb 2020 13:55:23 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 219DB17447; Tue, 11 Feb 2020 14:55:22 +0100 (CET)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v4] drm/cirrus: add drm_driver.release callback.
-Date: Tue, 11 Feb 2020 14:55:22 +0100
-Message-Id: <20200211135522.23654-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pOgNYfeson6DGVMt52GdG1eIMdZkb6CQICeU1aVFfGE=;
+ b=EFPdn6xSmctbUcFMAvpBOOLZwufb+FFtwK1A6z2D8MPp1j6uIxiEIjhDbaSe64QnBZlDpj
+ Y/JgZyZFcBQfmkBLvOQM9MsLvy04dDCy0bnrUF94UYVvPz+RKhOpPtbK5ySknClowJFyQl
+ gF+2F7PApDoXqfmoyYcnh8HYEfpOohg=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-57-WXtVD00fNteRXPdtS14ylQ-1; Tue, 11 Feb 2020 08:58:04 -0500
+Received: by mail-qk1-f200.google.com with SMTP id t195so7056069qke.23
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 11 Feb 2020 05:58:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=WG0Npq/OjpsV9gQYxRWfzFxfkdPt4v/t5ykKU8PVL2k=;
+ b=V57JYIUmcE9Mn2vf+wOZWcNnAag8MJD9ps4nGxZ7oj/cWuZeSgOWImbKeCbVQlniIs
+ 3Jwvl5vgaCccVx55t+5hN28FjtQS89M30EfeCvCs4z3gnSM1x6AMEtO5WizBW6krsMSV
+ CxV94VMr1Icl/OHbkmA8Qu+HgpG+qxO04tt44Hn0gUcDOM7LCKAtVn1vijZ+7JDzmYAF
+ pSM8i6wABVFVagDKhNelwga3ReKIqbxM3sKnyJ2ToAnR4HLBhlenzOk6jCrf7BxmYIGF
+ enBGc6eg+0S6HD+0axStdA2PH9CfVcydLIVu/ZLGWRd5j1dviOGoSMjoKr/7oht9Lews
+ DwnA==
+X-Gm-Message-State: APjAAAVZYYXz6PcEh9UJqa4ec9FcHPViciBxP3d9wMCJuCKxDgXZvK1B
+ PorEWkOeMuksDcTV5NN8UL1l84UypndA2KCgmcX/fmKkf+TfnY7pOHQJF6tqSInDrdZjPjJl0+0
+ aCQBn9FpJSRI5v07s9UyQ27IUcZGDO2NQuz4Mc1ub/Q==
+X-Received: by 2002:ad4:49ca:: with SMTP id j10mr2823703qvy.155.1581429483900; 
+ Tue, 11 Feb 2020 05:58:03 -0800 (PST)
+X-Google-Smtp-Source: APXvYqz11UYC/BUBAy6kXD/YknIJWxgOMbrK5yvh/VgO+Bst7ojYaRjy5EybVs2SGNTw/K86LmEO+w==
+X-Received: by 2002:ad4:49ca:: with SMTP id j10mr2823688qvy.155.1581429483704; 
+ Tue, 11 Feb 2020 05:58:03 -0800 (PST)
+Received: from redhat.com (bzq-79-176-41-183.red.bezeqint.net. [79.176.41.183])
+ by smtp.gmail.com with ESMTPSA id a72sm2102422qkc.121.2020.02.11.05.58.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2020 05:58:02 -0800 (PST)
+Date: Tue, 11 Feb 2020 08:57:58 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>
+Subject: Re: vhost changes (batched) in linux-next after 12/13 trigger random
+ crashes in KVM guests after reboot
+Message-ID: <20200211085736-mutt-send-email-mst@kernel.org>
+References: <2a63b15f-8cf5-5868-550c-42e2cfd92c60@de.ibm.com>
+ <b6e32f58e5d85ac5cc3141e9155fb140ae5cd580.camel@redhat.com>
+ <1ade56b5-083f-bb6f-d3e0-3ddcf78f4d26@de.ibm.com>
+ <20200206171349-mutt-send-email-mst@kernel.org>
+ <5c860fa1-cef5-b389-4ebf-99a62afa0fe8@de.ibm.com>
+ <20200207025806-mutt-send-email-mst@kernel.org>
+ <97c93d38-ef07-e321-d133-18483d54c0c0@de.ibm.com>
+ <CAJaqyWfngzP4d01B6+Sqt8FXN6jX7kGegjx8ie4no_1Er3igQA@mail.gmail.com>
+ <43a5dbaa-9129-e220-8483-45c60a82c945@de.ibm.com>
+ <e299afca8e22044916abbf9fbbd0bff6b0ee9e13.camel@redhat.com>
+MIME-Version: 1.0
+In-Reply-To: <e299afca8e22044916abbf9fbbd0bff6b0ee9e13.camel@redhat.com>
+X-MC-Unique: WXtVD00fNteRXPdtS14ylQ-1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ Cornelia Huck <cohuck@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,157 +119,86 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Move final cleanups from cirrus_pci_remove() to the new callback.
-Add drm_atomic_helper_shutdown() call to cirrus_pci_remove().
+On Tue, Feb 11, 2020 at 02:04:54PM +0100, Eugenio P=C3=A9rez wrote:
+> On Mon, 2020-02-10 at 12:01 +0100, Christian Borntraeger wrote:
+> > =
 
-Use drm_dev_{enter,exit,unplug} to avoid touching hardware after
-device removal.
+> > On 10.02.20 10:47, Eugenio Perez Martin wrote:
+> > > Hi Christian.
+> > > =
 
-v4: add changelog.
-v3: use drm_dev*.
-v2: stop touching hardware after pci_remove().
+> > > I'm not able to reproduce the failure with eccb852f1fe6bede630e2e4f1a=
+121a81e34354ab commit. Could you add more data?
+> > > Your configuration (libvirt or qemu line), and host's dmesg output if=
+ any?
+> > > =
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/cirrus/cirrus.c | 43 ++++++++++++++++++++++++++++-----
- 1 file changed, 37 insertions(+), 6 deletions(-)
+> > > Thanks!
+> > =
 
-diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus/cirrus.c
-index a91fb0d7282c..d2ff63ce8eaf 100644
---- a/drivers/gpu/drm/cirrus/cirrus.c
-+++ b/drivers/gpu/drm/cirrus/cirrus.c
-@@ -151,9 +151,13 @@ static int cirrus_pitch(struct drm_framebuffer *fb)
- 
- static void cirrus_set_start_address(struct cirrus_device *cirrus, u32 offset)
- {
-+	int idx;
- 	u32 addr;
- 	u8 tmp;
- 
-+	if (!drm_dev_enter(&cirrus->dev, &idx))
-+		return;
-+
- 	addr = offset >> 2;
- 	wreg_crt(cirrus, 0x0c, (u8)((addr >> 8) & 0xff));
- 	wreg_crt(cirrus, 0x0d, (u8)(addr & 0xff));
-@@ -168,6 +172,8 @@ static void cirrus_set_start_address(struct cirrus_device *cirrus, u32 offset)
- 	tmp &= 0x7f;
- 	tmp |= (addr >> 12) & 0x80;
- 	wreg_crt(cirrus, 0x1d, tmp);
-+
-+	drm_dev_exit(idx);
- }
- 
- static int cirrus_mode_set(struct cirrus_device *cirrus,
-@@ -176,9 +182,12 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
- {
- 	int hsyncstart, hsyncend, htotal, hdispend;
- 	int vtotal, vdispend;
--	int tmp;
-+	int tmp, idx;
- 	int sr07 = 0, hdr = 0;
- 
-+	if (!drm_dev_enter(&cirrus->dev, &idx))
-+		return -1;
-+
- 	htotal = mode->htotal / 8;
- 	hsyncend = mode->hsync_end / 8;
- 	hsyncstart = mode->hsync_start / 8;
-@@ -264,6 +273,7 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
- 		hdr = 0xc5;
- 		break;
- 	default:
-+		drm_dev_exit(idx);
- 		return -1;
- 	}
- 
-@@ -292,6 +302,8 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
- 
- 	/* Unblank (needed on S3 resume, vgabios doesn't do it then) */
- 	outb(0x20, 0x3c0);
-+
-+	drm_dev_exit(idx);
- 	return 0;
- }
- 
-@@ -300,10 +312,16 @@ static int cirrus_fb_blit_rect(struct drm_framebuffer *fb,
- {
- 	struct cirrus_device *cirrus = fb->dev->dev_private;
- 	void *vmap;
-+	int idx, ret;
- 
-+	ret = -ENODEV;
-+	if (!drm_dev_enter(&cirrus->dev, &idx))
-+		goto out;
-+
-+	ret = -ENOMEM;
- 	vmap = drm_gem_shmem_vmap(fb->obj[0]);
- 	if (!vmap)
--		return -ENOMEM;
-+		goto out_dev_exit;
- 
- 	if (cirrus->cpp == fb->format->cpp[0])
- 		drm_fb_memcpy_dstclip(cirrus->vram,
-@@ -323,7 +341,12 @@ static int cirrus_fb_blit_rect(struct drm_framebuffer *fb,
- 		WARN_ON_ONCE("cpp mismatch");
- 
- 	drm_gem_shmem_vunmap(fb->obj[0], vmap);
--	return 0;
-+	ret = 0;
-+
-+out_dev_exit:
-+	drm_dev_exit(idx);
-+out:
-+	return ret;
- }
- 
- static int cirrus_fb_blit_fullscreen(struct drm_framebuffer *fb)
-@@ -502,6 +525,14 @@ static void cirrus_mode_config_init(struct cirrus_device *cirrus)
- 
- /* ------------------------------------------------------------------ */
- 
-+static void cirrus_release(struct drm_device *dev)
-+{
-+	struct cirrus_device *cirrus = dev->dev_private;
-+
-+	drm_mode_config_cleanup(dev);
-+	kfree(cirrus);
-+}
-+
- DEFINE_DRM_GEM_FOPS(cirrus_fops);
- 
- static struct drm_driver cirrus_driver = {
-@@ -515,6 +546,7 @@ static struct drm_driver cirrus_driver = {
- 
- 	.fops		 = &cirrus_fops,
- 	DRM_GEM_SHMEM_DRIVER_OPS,
-+	.release         = cirrus_release,
- };
- 
- static int cirrus_pci_probe(struct pci_dev *pdev,
-@@ -598,12 +630,11 @@ static void cirrus_pci_remove(struct pci_dev *pdev)
- 	struct drm_device *dev = pci_get_drvdata(pdev);
- 	struct cirrus_device *cirrus = dev->dev_private;
- 
--	drm_dev_unregister(dev);
--	drm_mode_config_cleanup(dev);
-+	drm_dev_unplug(dev);
-+	drm_atomic_helper_shutdown(dev);
- 	iounmap(cirrus->mmio);
- 	iounmap(cirrus->vram);
- 	drm_dev_put(dev);
--	kfree(cirrus);
- 	pci_release_regions(pdev);
- }
- 
--- 
-2.18.2
+> > If it was not obvious, this is on s390x, a big endian system.
+> > =
+
+> =
+
+> Hi Christian. Thank you very much for your fast responses.
+> =
+
+> Could you try this patch on top of eccb852f1fe6bede630e2e4f1a121a81e34354=
+ab?
+> =
+
+> Thanks!
+> =
+
+> >From 71d0f9108a18aa894cc0c0c1c7efbad39f465a27 Mon Sep 17 00:00:00 2001
+> From: =3D?UTF-8?q?Eugenio=3D20P=3DC3=3DA9rez?=3D <
+> eperezma@redhat.com>
+> Date: Tue, 11 Feb 2020 13:19:10 +0100
+> Subject: [PATCH] vhost: fix return value of vhost_get_vq_desc
+> =
+
+> Before of the batch change, it was the chain's head. Need to keep that
+> way or we will not be able to free a chain of descriptors.
+
+I think it's cleaner to have all descriptors in the chain
+have the same id.
+
+> Fixes: eccb852f1fe6 ("vhost: batching fetches")
+> ---
+>  drivers/vhost/vhost.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+> =
+
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index b5a51b1f2e79..fc422c3e5c08 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -2409,12 +2409,11 @@ int vhost_get_vq_desc(struct vhost_virtqueue *vq,
+>  			*out_num +=3D ret;
+>  		}
+>  =
+
+> -		ret =3D desc->id;
+> -
+>  		if (!(desc->flags & VRING_DESC_F_NEXT))
+>  			break;
+>  	}
+>  =
+
+> +	ret =3D vq->descs[vq->first_desc].id;
+>  	vq->first_desc =3D i + 1;
+>  =
+
+>  	return ret;
+> -- =
+
+> 2.18.1
 
 _______________________________________________
 Virtualization mailing list
