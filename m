@@ -1,50 +1,51 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1E0615907D
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:53:34 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D3261590A1
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:54:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id ACAED204F3;
-	Tue, 11 Feb 2020 13:53:33 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D55D38672C;
+	Tue, 11 Feb 2020 13:54:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HAx1hvYrsNbX; Tue, 11 Feb 2020 13:53:32 +0000 (UTC)
+	with ESMTP id kOuDPjRy7I0N; Tue, 11 Feb 2020 13:53:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 4B20B204E8;
+	by whitealder.osuosl.org (Postfix) with ESMTP id AA66F86797;
 	Tue, 11 Feb 2020 13:53:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4456DC07FE;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 83E5EC1D80;
 	Tue, 11 Feb 2020 13:53:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5E57CC1D80
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9B7DAC1D89
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4DDC08733F
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8AA5B8733F
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id m++kLeiRtbua
+ with ESMTP id BTQcBEZZE-ph
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:26 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:27 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 8EC93878A0
+ by hemlock.osuosl.org (Postfix) with ESMTPS id CC6CA8788D
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:26 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id CE3BEE7D; Tue, 11 Feb 2020 14:53:13 +0100 (CET)
+ id 35481E84; Tue, 11 Feb 2020 14:53:14 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 37/62] x86/sev-es: Wire up existing #VC exit-code handlers
-Date: Tue, 11 Feb 2020 14:52:31 +0100
-Message-Id: <20200211135256.24617-38-joro@8bytes.org>
+Subject: [PATCH 39/62] x86/sev-es: Harden runtime #VC handler for exceptions
+ from user-space
+Date: Tue, 11 Feb 2020 14:52:33 +0100
+Message-Id: <20200211135256.24617-40-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200211135256.24617-1-joro@8bytes.org>
 References: <20200211135256.24617-1-joro@8bytes.org>
@@ -75,69 +76,70 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Re-use the handlers for CPUID and IOIO caused #VC exceptions in the
-early boot handler.
+Send SIGBUS to the user-space process that caused the #VC exception
+instead of killing the machine. Also ratelimit the error messages so
+that user-space can't flood the kernel log.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es-shared.c | 9 +++------
- arch/x86/kernel/sev-es.c        | 9 +++++++++
- 2 files changed, 12 insertions(+), 6 deletions(-)
+ arch/x86/kernel/sev-es.c | 32 +++++++++++++++++++++++---------
+ 1 file changed, 23 insertions(+), 9 deletions(-)
 
-diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
-index 57c29c91fe87..14693eff9614 100644
---- a/arch/x86/kernel/sev-es-shared.c
-+++ b/arch/x86/kernel/sev-es-shared.c
-@@ -358,8 +358,7 @@ static enum es_result ioio_exitinfo(struct es_em_ctxt *ctxt, u64 *exitinfo)
- 	return ES_OK;
- }
- 
--static enum es_result __maybe_unused
--handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
-+static enum es_result handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
- 	u64 exit_info_1, exit_info_2;
-@@ -451,8 +450,7 @@ handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- 	return ret;
- }
- 
--static enum es_result __maybe_unused
--handle_cpuid(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
-+static enum es_result handle_cpuid(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
- 	u32 cr4 = native_read_cr4();
-@@ -658,8 +656,7 @@ static enum es_result handle_mmio_twobyte_ops(struct ghcb *ghcb,
- 	return ret;
- }
- 
--static enum es_result __maybe_unused
--handle_mmio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
-+static enum es_result handle_mmio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct insn *insn = &ctxt->insn;
- 	unsigned int bytes = 0;
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 1fb7128ff386..2a801919e7c0 100644
+index f5bff4219f6f..d128a9397639 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -174,6 +174,15 @@ static enum es_result handle_vc_exception(struct es_em_ctxt *ctxt,
- 	enum es_result result;
+@@ -254,16 +254,16 @@ dotraplinkage void do_vmm_communication(struct pt_regs *regs, unsigned long exit
+ 		finish_insn(&ctxt);
+ 		break;
+ 	case ES_UNSUPPORTED:
+-		pr_emerg("Unsupported exit-code 0x%02lx in early #VC exception (IP: 0x%lx)\n",
+-			 exit_code, regs->ip);
++		pr_err_ratelimited("Unsupported exit-code 0x%02lx in early #VC exception (IP: 0x%lx)\n",
++				   exit_code, regs->ip);
+ 		goto fail;
+ 	case ES_VMM_ERROR:
+-		pr_emerg("PANIC: Failure in communication with VMM (exit-code 0x%02lx IP: 0x%lx)\n",
+-			 exit_code, regs->ip);
++		pr_err_ratelimited("Failure in communication with VMM (exit-code 0x%02lx IP: 0x%lx)\n",
++				   exit_code, regs->ip);
+ 		goto fail;
+ 	case ES_DECODE_FAILED:
+-		pr_emerg("PANIC: Failed to decode instruction (exit-code 0x%02lx IP: 0x%lx)\n",
+-			 exit_code, regs->ip);
++		pr_err_ratelimited("PANIC: Failed to decode instruction (exit-code 0x%02lx IP: 0x%lx)\n",
++				   exit_code, regs->ip);
+ 		goto fail;
+ 	case ES_EXCEPTION:
+ 		forward_exception(&ctxt);
+@@ -278,10 +278,24 @@ dotraplinkage void do_vmm_communication(struct pt_regs *regs, unsigned long exit
+ 	return;
  
- 	switch (exit_code) {
-+	case SVM_EXIT_CPUID:
-+		result = handle_cpuid(ghcb, ctxt);
-+		break;
-+	case SVM_EXIT_IOIO:
-+		result = handle_ioio(ghcb, ctxt);
-+		break;
-+	case SVM_EXIT_NPF:
-+		result = handle_mmio(ghcb, ctxt);
-+		break;
- 	default:
- 		/*
- 		 * Unexpected #VC exception
+ fail:
+-	show_regs(regs);
++	if (user_mode(regs)) {
++		/*
++		 * Do not kill the machine if user-space triggered the
++		 * exception. Send SIGBUS instead and let user-space deal with
++		 * it.
++		 */
++		force_sig_fault(SIGBUS, BUS_OBJERR, (void __user *)0);
++	} else {
++		/* Show some debug info */
++		show_regs(regs);
+ 
+-	while (true)
+-		halt();
++		/* Ask hypervisor to terminate */
++		terminate(GHCB_SEV_ES_REASON_GENERAL_REQUEST);
++
++		/* If that fails and we get here - just halt the machine */
++		while (true)
++			halt();
++	}
+ }
+ 
+ int __init boot_vc_exception(struct pt_regs *regs)
 -- 
 2.17.1
 
