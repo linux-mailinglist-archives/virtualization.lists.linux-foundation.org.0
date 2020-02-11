@@ -1,95 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FCE51591B7
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 15:20:08 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 046021591C3
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 15:22:51 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0918284BCF;
-	Tue, 11 Feb 2020 14:20:07 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 602EA84D8A;
+	Tue, 11 Feb 2020 14:22:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qenJQl78hOE3; Tue, 11 Feb 2020 14:20:05 +0000 (UTC)
+	with ESMTP id 8LV2_ffEhgrb; Tue, 11 Feb 2020 14:22:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B41B38643F;
-	Tue, 11 Feb 2020 14:20:05 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CB49B84A92;
+	Tue, 11 Feb 2020 14:22:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A7B7BC07FE;
-	Tue, 11 Feb 2020 14:20:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9B730C07FE;
+	Tue, 11 Feb 2020 14:22:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0B172C07FE
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 64293C07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:20:04 +0000 (UTC)
+ Tue, 11 Feb 2020 14:22:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 0325484EA0
+ by hemlock.osuosl.org (Postfix) with ESMTP id 52B8986DC6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:20:04 +0000 (UTC)
+ Tue, 11 Feb 2020 14:22:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id yAkynusgNJEO
+ with ESMTP id NVMFflSwASyn
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:20:01 +0000 (UTC)
+ Tue, 11 Feb 2020 14:22:46 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
  [209.85.128.68])
- by whitealder.osuosl.org (Postfix) with ESMTPS id D7A8484BCF
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 495DA86CD3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:20:00 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id p17so3794028wma.1
+ Tue, 11 Feb 2020 14:22:46 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id m10so2392030wmc.0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 06:20:00 -0800 (PST)
+ Tue, 11 Feb 2020 06:22:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:mail-followup-to:references
  :mime-version:content-disposition:in-reply-to;
- bh=Wnr+//oGH4uXMO6GDB7TwubX/nxe1+x76Hvs2NVGFuc=;
- b=GIQ8GjOqJrhLYKdgtLRlfIIfitARQxNz4LODBM0XdoUf+DS+VdY2Y9sLMV4cFvXUqg
- eDscMY7wgT8H5Jsa2+kdwu0cfcTeX/rUVrc8rw4U8dyqHg7XynQ7Bo4W4Qi0yNelAk05
- JPspZp/zNtqJX4ZkZieNqJdpzqmVjUwIPtOfQ=
+ bh=zbCpoEzMkXhuds3sawE1UyW9vC3Fj6dPXq0u004qUn4=;
+ b=KzUjILm1iSPNky6CD9uanf3G3iyYl/J28iOaqMo/AmK22/0X3/LFIPTbBn0ydkCkiQ
+ N3TUyrOKjzvrCTmwbRapoiQDmjvHM/cdxSkI7kAxwhN3rhvuh51eMXEvhkDwIyxgMbLr
+ MmDPzcI626frvOBJR1qfCVefDQp0ipbGYci1Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id
  :mail-followup-to:references:mime-version:content-disposition
  :in-reply-to;
- bh=Wnr+//oGH4uXMO6GDB7TwubX/nxe1+x76Hvs2NVGFuc=;
- b=MNl0W/PiYQZT0zBlpfizrhP2zcfEEd9JOOk2Hl0p7/uXnK4LKYHJ2O9bnSrgxSo3q+
- aNBBUpfGdFvGoo4mfT6wDcrrVoYAaKu2SBmT3UgTRY+SNAYHo/ehEqnwciCOs8HtNzSO
- X2S8ZFV1QNct9f0njFVLAGzO3JNY2zTCHFzxQjK5I1Hnnx/i3TwGpcjoXc2YJm9ij6b/
- aUPHtkmsfadCF0kY8Hu9ALR3uA2B8CZyhAh/BQL8lzNpUSupYBhW5yxwWns79B1zLq8i
- epQm/svjeb8kIPxq6Q99Ix12jsLeuInXn7mGatMrtrZMgPFbf0jxVbJyY/Inf8myfUy5
- zgyA==
-X-Gm-Message-State: APjAAAVO1J0FLTddvF7E7qvi5YVH/vufNJ/zsYZUl6U5tuAj/DIFI1rr
- yEeIZK2+TYqE7kB5fiaeTgBMeA==
-X-Google-Smtp-Source: APXvYqy6L5KPAi1i0sPrc30Ft7+bqgWt2Wm5wPwnLY5tKsWvuzgkp0nY4PgfSjs3STKYXkE0grFKJA==
-X-Received: by 2002:a05:600c:34b:: with SMTP id
- u11mr5830687wmd.69.1581430799258; 
- Tue, 11 Feb 2020 06:19:59 -0800 (PST)
+ bh=zbCpoEzMkXhuds3sawE1UyW9vC3Fj6dPXq0u004qUn4=;
+ b=Tl4+iME9150NfakWXYV/kkAo1UOlLkocVCxyArHrRhg8q+iqZkdlofIYzLNQuLSv2t
+ zip5E83uWirNuPi8/b7TmFgmV+j/AOTVBteya3avHCqaTVk1xOjJBol40gRn8atnoF31
+ CrxgVBKBOu2MP0saN/UsqSm7nVgtL6llSWfCeBzGN19Bdbl7fZDLP2dWBgwgxLBM0htV
+ s+06vI6TtRKYZzOwvIMu+qHj5xGp+onrG3M8ZwvwCEK+UNNBsR4qK9HFlRel2yz+1bXN
+ JWjOle5JITieVMPMaQHfrmgcd2fAbrLvAuNtwpbvFWZC4/H2K4rflOWJVjoRXXubBGoF
+ 1G+A==
+X-Gm-Message-State: APjAAAX/fQnIDdeE8nNK2K7z4kmcFAB7K09eTiycybqXEGgpnPy19mhX
+ LOl5GPmJacU6dChJcb1Jdyb9rA==
+X-Google-Smtp-Source: APXvYqzYF5XCaXVSaa4gHRNv6N8Qaghaww1USAbGGjBeOKDuCJVmSMfWpAroKmZNMq/swNcVY7dXLQ==
+X-Received: by 2002:a7b:cb97:: with SMTP id m23mr5621995wmi.37.1581430964656; 
+ Tue, 11 Feb 2020 06:22:44 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id q14sm5394758wrj.81.2020.02.11.06.19.58
+ by smtp.gmail.com with ESMTPSA id c4sm3869494wml.7.2020.02.11.06.22.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2020 06:19:58 -0800 (PST)
-Date: Tue, 11 Feb 2020 15:19:56 +0100
+ Tue, 11 Feb 2020 06:22:44 -0800 (PST)
+Date: Tue, 11 Feb 2020 15:22:42 +0100
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v4] drm/bochs: add drm_driver.release callback.
-Message-ID: <20200211141956.GC2363188@phenom.ffwll.local>
+Subject: Re: [PATCH v4] drm/cirrus: add drm_driver.release callback.
+Message-ID: <20200211142242.GD2363188@phenom.ffwll.local>
 Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
  <virtualization@lists.linux-foundation.org>, 
  open list <linux-kernel@vger.kernel.org>
-References: <20200211135218.22871-1-kraxel@redhat.com>
+References: <20200211135522.23654-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200211135218.22871-1-kraxel@redhat.com>
+In-Reply-To: <20200211135522.23654-1-kraxel@redhat.com>
 X-Operating-System: Linux phenom 5.3.0-3-amd64 
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
- "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>
+ dri-devel@lists.freedesktop.org,
+ "open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,142 +107,160 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Feb 11, 2020 at 02:52:18PM +0100, Gerd Hoffmann wrote:
-> Call bochs_unload via drm_driver.release to make sure we release stuff
-> when it is safe to do so.  Use drm_dev_{enter,exit,unplug} to avoid
-> touching hardware after device removal.  Tidy up here and there.
+On Tue, Feb 11, 2020 at 02:55:22PM +0100, Gerd Hoffmann wrote:
+> Move final cleanups from cirrus_pci_remove() to the new callback.
+> Add drm_atomic_helper_shutdown() call to cirrus_pci_remove().
+> 
+> Use drm_dev_{enter,exit,unplug} to avoid touching hardware after
+> device removal.
 > 
 > v4: add changelog.
-> v3: use drm_dev_*().
-> v2: move hardware deinit to pci_remove().
+> v3: use drm_dev*.
+> v2: stop touching hardware after pci_remove().
 > 
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 
+I think you got them all with drm_dev_enter/exit.
+
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
-Btw I checked around whether there's anything else that obviously needs a
-drm_dev_enter/exit, and I spotted the !bochs->mmio check in
-bochs_hw_load_edid. That one looks like cargo-cult, there's a single
-caller in the init path, so either mmio works at that point or this is
-dead code ... slightly confusing.
+Aside: everyone ignores the return value of cirrus_fb_blit_rect and
+cirrus_mode_set (with atomic those shouldn't be able to fail anymore),
+could ditch those.
 -Daniel
 
 > ---
->  drivers/gpu/drm/bochs/bochs_drv.c |  6 +++---
->  drivers/gpu/drm/bochs/bochs_hw.c  | 24 +++++++++++++++++++++++-
->  2 files changed, 26 insertions(+), 4 deletions(-)
+>  drivers/gpu/drm/cirrus/cirrus.c | 43 ++++++++++++++++++++++++++++-----
+>  1 file changed, 37 insertions(+), 6 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
-> index 10460878414e..addb0568c1af 100644
-> --- a/drivers/gpu/drm/bochs/bochs_drv.c
-> +++ b/drivers/gpu/drm/bochs/bochs_drv.c
-> @@ -23,7 +23,6 @@ static void bochs_unload(struct drm_device *dev)
+> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus/cirrus.c
+> index a91fb0d7282c..d2ff63ce8eaf 100644
+> --- a/drivers/gpu/drm/cirrus/cirrus.c
+> +++ b/drivers/gpu/drm/cirrus/cirrus.c
+> @@ -151,9 +151,13 @@ static int cirrus_pitch(struct drm_framebuffer *fb)
 >  
->  	bochs_kms_fini(bochs);
->  	bochs_mm_fini(bochs);
-> -	bochs_hw_fini(dev);
->  	kfree(bochs);
->  	dev->dev_private = NULL;
+>  static void cirrus_set_start_address(struct cirrus_device *cirrus, u32 offset)
+>  {
+> +	int idx;
+>  	u32 addr;
+>  	u8 tmp;
+>  
+> +	if (!drm_dev_enter(&cirrus->dev, &idx))
+> +		return;
+> +
+>  	addr = offset >> 2;
+>  	wreg_crt(cirrus, 0x0c, (u8)((addr >> 8) & 0xff));
+>  	wreg_crt(cirrus, 0x0d, (u8)(addr & 0xff));
+> @@ -168,6 +172,8 @@ static void cirrus_set_start_address(struct cirrus_device *cirrus, u32 offset)
+>  	tmp &= 0x7f;
+>  	tmp |= (addr >> 12) & 0x80;
+>  	wreg_crt(cirrus, 0x1d, tmp);
+> +
+> +	drm_dev_exit(idx);
 >  }
-> @@ -69,6 +68,7 @@ static struct drm_driver bochs_driver = {
->  	.major			= 1,
->  	.minor			= 0,
->  	DRM_GEM_VRAM_DRIVER,
-> +	.release                = bochs_unload,
+>  
+>  static int cirrus_mode_set(struct cirrus_device *cirrus,
+> @@ -176,9 +182,12 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
+>  {
+>  	int hsyncstart, hsyncend, htotal, hdispend;
+>  	int vtotal, vdispend;
+> -	int tmp;
+> +	int tmp, idx;
+>  	int sr07 = 0, hdr = 0;
+>  
+> +	if (!drm_dev_enter(&cirrus->dev, &idx))
+> +		return -1;
+> +
+>  	htotal = mode->htotal / 8;
+>  	hsyncend = mode->hsync_end / 8;
+>  	hsyncstart = mode->hsync_start / 8;
+> @@ -264,6 +273,7 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
+>  		hdr = 0xc5;
+>  		break;
+>  	default:
+> +		drm_dev_exit(idx);
+>  		return -1;
+>  	}
+>  
+> @@ -292,6 +302,8 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
+>  
+>  	/* Unblank (needed on S3 resume, vgabios doesn't do it then) */
+>  	outb(0x20, 0x3c0);
+> +
+> +	drm_dev_exit(idx);
+>  	return 0;
+>  }
+>  
+> @@ -300,10 +312,16 @@ static int cirrus_fb_blit_rect(struct drm_framebuffer *fb,
+>  {
+>  	struct cirrus_device *cirrus = fb->dev->dev_private;
+>  	void *vmap;
+> +	int idx, ret;
+>  
+> +	ret = -ENODEV;
+> +	if (!drm_dev_enter(&cirrus->dev, &idx))
+> +		goto out;
+> +
+> +	ret = -ENOMEM;
+>  	vmap = drm_gem_shmem_vmap(fb->obj[0]);
+>  	if (!vmap)
+> -		return -ENOMEM;
+> +		goto out_dev_exit;
+>  
+>  	if (cirrus->cpp == fb->format->cpp[0])
+>  		drm_fb_memcpy_dstclip(cirrus->vram,
+> @@ -323,7 +341,12 @@ static int cirrus_fb_blit_rect(struct drm_framebuffer *fb,
+>  		WARN_ON_ONCE("cpp mismatch");
+>  
+>  	drm_gem_shmem_vunmap(fb->obj[0], vmap);
+> -	return 0;
+> +	ret = 0;
+> +
+> +out_dev_exit:
+> +	drm_dev_exit(idx);
+> +out:
+> +	return ret;
+>  }
+>  
+>  static int cirrus_fb_blit_fullscreen(struct drm_framebuffer *fb)
+> @@ -502,6 +525,14 @@ static void cirrus_mode_config_init(struct cirrus_device *cirrus)
+>  
+>  /* ------------------------------------------------------------------ */
+>  
+> +static void cirrus_release(struct drm_device *dev)
+> +{
+> +	struct cirrus_device *cirrus = dev->dev_private;
+> +
+> +	drm_mode_config_cleanup(dev);
+> +	kfree(cirrus);
+> +}
+> +
+>  DEFINE_DRM_GEM_FOPS(cirrus_fops);
+>  
+>  static struct drm_driver cirrus_driver = {
+> @@ -515,6 +546,7 @@ static struct drm_driver cirrus_driver = {
+>  
+>  	.fops		 = &cirrus_fops,
+>  	DRM_GEM_SHMEM_DRIVER_OPS,
+> +	.release         = cirrus_release,
 >  };
 >  
->  /* ---------------------------------------------------------------------- */
-> @@ -148,9 +148,9 @@ static void bochs_pci_remove(struct pci_dev *pdev)
->  {
+>  static int cirrus_pci_probe(struct pci_dev *pdev,
+> @@ -598,12 +630,11 @@ static void cirrus_pci_remove(struct pci_dev *pdev)
 >  	struct drm_device *dev = pci_get_drvdata(pdev);
+>  	struct cirrus_device *cirrus = dev->dev_private;
 >  
-> +	drm_dev_unplug(dev);
->  	drm_atomic_helper_shutdown(dev);
 > -	drm_dev_unregister(dev);
-> -	bochs_unload(dev);
-> +	bochs_hw_fini(dev);
+> -	drm_mode_config_cleanup(dev);
+> +	drm_dev_unplug(dev);
+> +	drm_atomic_helper_shutdown(dev);
+>  	iounmap(cirrus->mmio);
+>  	iounmap(cirrus->vram);
 >  	drm_dev_put(dev);
+> -	kfree(cirrus);
+>  	pci_release_regions(pdev);
 >  }
 >  
-> diff --git a/drivers/gpu/drm/bochs/bochs_hw.c b/drivers/gpu/drm/bochs/bochs_hw.c
-> index b615b7dfdd9d..952199cc0462 100644
-> --- a/drivers/gpu/drm/bochs/bochs_hw.c
-> +++ b/drivers/gpu/drm/bochs/bochs_hw.c
-> @@ -4,6 +4,7 @@
->  
->  #include <linux/pci.h>
->  
-> +#include <drm/drm_drv.h>
->  #include <drm/drm_fourcc.h>
->  
->  #include "bochs.h"
-> @@ -194,6 +195,8 @@ void bochs_hw_fini(struct drm_device *dev)
->  {
->  	struct bochs_device *bochs = dev->dev_private;
->  
-> +	/* TODO: shot down existing vram mappings */
-> +
->  	if (bochs->mmio)
->  		iounmap(bochs->mmio);
->  	if (bochs->ioports)
-> @@ -207,6 +210,11 @@ void bochs_hw_fini(struct drm_device *dev)
->  void bochs_hw_setmode(struct bochs_device *bochs,
->  		      struct drm_display_mode *mode)
->  {
-> +	int idx;
-> +
-> +	if (!drm_dev_enter(bochs->dev, &idx))
-> +		return;
-> +
->  	bochs->xres = mode->hdisplay;
->  	bochs->yres = mode->vdisplay;
->  	bochs->bpp = 32;
-> @@ -232,11 +240,18 @@ void bochs_hw_setmode(struct bochs_device *bochs,
->  
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_ENABLE,
->  			  VBE_DISPI_ENABLED | VBE_DISPI_LFB_ENABLED);
-> +
-> +	drm_dev_exit(idx);
->  }
->  
->  void bochs_hw_setformat(struct bochs_device *bochs,
->  			const struct drm_format_info *format)
->  {
-> +	int idx;
-> +
-> +	if (!drm_dev_enter(bochs->dev, &idx))
-> +		return;
-> +
->  	DRM_DEBUG_DRIVER("format %c%c%c%c\n",
->  			 (format->format >>  0) & 0xff,
->  			 (format->format >>  8) & 0xff,
-> @@ -256,13 +271,18 @@ void bochs_hw_setformat(struct bochs_device *bochs,
->  			  __func__, format->format);
->  		break;
->  	}
-> +
-> +	drm_dev_exit(idx);
->  }
->  
->  void bochs_hw_setbase(struct bochs_device *bochs,
->  		      int x, int y, int stride, u64 addr)
->  {
->  	unsigned long offset;
-> -	unsigned int vx, vy, vwidth;
-> +	unsigned int vx, vy, vwidth, idx;
-> +
-> +	if (!drm_dev_enter(bochs->dev, &idx))
-> +		return;
->  
->  	bochs->stride = stride;
->  	offset = (unsigned long)addr +
-> @@ -277,4 +297,6 @@ void bochs_hw_setbase(struct bochs_device *bochs,
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_VIRT_WIDTH, vwidth);
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_X_OFFSET, vx);
->  	bochs_dispi_write(bochs, VBE_DISPI_INDEX_Y_OFFSET, vy);
-> +
-> +	drm_dev_exit(idx);
->  }
 > -- 
 > 2.18.2
 > 
