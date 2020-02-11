@@ -1,50 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 880071590A8
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:54:25 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1532015907C
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:53:34 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3691586373;
-	Tue, 11 Feb 2020 13:54:24 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B0F68857D6;
+	Tue, 11 Feb 2020 13:53:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Oe7wm8Bxktlj; Tue, 11 Feb 2020 13:54:15 +0000 (UTC)
+	with ESMTP id gG7hfRTOQUyY; Tue, 11 Feb 2020 13:53:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1098986BC5;
-	Tue, 11 Feb 2020 13:53:39 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D9111857A4;
+	Tue, 11 Feb 2020 13:53:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 07026C07FE;
-	Tue, 11 Feb 2020 13:53:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BFBD8C07FE;
+	Tue, 11 Feb 2020 13:53:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6750BC07FE
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9701EC1D8E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:36 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 5056D8687B
+ by hemlock.osuosl.org (Postfix) with ESMTP id 79ED187852
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:36 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DysOmyRCvqdW
+ with ESMTP id c-rfvg6ALboM
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:33 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 44658864B8
+ by hemlock.osuosl.org (Postfix) with ESMTPS id BDDBC8739E
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:24 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 5B59EE48; Tue, 11 Feb 2020 14:53:12 +0100 (CET)
+ id 7C652E49; Tue, 11 Feb 2020 14:53:12 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 29/62] x86/head/64: Load IDT earlier
-Date: Tue, 11 Feb 2020 14:52:23 +0100
-Message-Id: <20200211135256.24617-30-joro@8bytes.org>
+Subject: [PATCH 30/62] x86/head/64: Move early exception dispatch to C code
+Date: Tue, 11 Feb 2020 14:52:24 +0100
+Message-Id: <20200211135256.24617-31-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200211135256.24617-1-joro@8bytes.org>
 References: <20200211135256.24617-1-joro@8bytes.org>
@@ -75,112 +75,77 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Load the IDT right after switching to virtual addresses in head_64.S
-so that the kernel can handle #VC exceptions.
+Move the assembly coded dispatch between page-faults and all other
+exceptions to C code to make it easier to maintain and extend.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/desc.h |  1 +
- arch/x86/kernel/head64.c    |  7 +++++++
- arch/x86/kernel/head_64.S   | 17 +++++++++++++++++
- arch/x86/kernel/idt.c       | 22 ++++++++++++++++++++++
- 4 files changed, 47 insertions(+)
+ arch/x86/kernel/head64.c  | 20 ++++++++++++++++++++
+ arch/x86/kernel/head_64.S | 11 +----------
+ 2 files changed, 21 insertions(+), 10 deletions(-)
 
-diff --git a/arch/x86/include/asm/desc.h b/arch/x86/include/asm/desc.h
-index 68a99d2a5f33..8a4c642ee2b3 100644
---- a/arch/x86/include/asm/desc.h
-+++ b/arch/x86/include/asm/desc.h
-@@ -440,6 +440,7 @@ extern void idt_setup_apic_and_irq_gates(void);
- extern void idt_setup_early_pf(void);
- extern void idt_setup_ist_traps(void);
- extern void idt_setup_debugidt_traps(void);
-+extern void setup_early_handlers(gate_desc *idt);
- #else
- static inline void idt_setup_early_pf(void) { }
- static inline void idt_setup_ist_traps(void) { }
 diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
-index 206a4b6144c2..7cdfb7113811 100644
+index 7cdfb7113811..d83c62ebaa85 100644
 --- a/arch/x86/kernel/head64.c
 +++ b/arch/x86/kernel/head64.c
-@@ -489,3 +489,10 @@ void __init x86_64_start_reservations(char *real_mode_data)
+@@ -36,6 +36,8 @@
+ #include <asm/microcode.h>
+ #include <asm/kasan.h>
+ #include <asm/fixmap.h>
++#include <asm/extable.h>
++#include <asm/trap_defs.h>
  
- 	start_kernel();
+ /*
+  * Manage page tables very early on.
+@@ -377,6 +379,24 @@ int __init early_make_pgtable(unsigned long address)
+ 	return __early_make_pgtable(address, pmd);
  }
-+
-+void __head early_idt_setup_early_handler(unsigned long physaddr)
+ 
++void __init early_exception(struct pt_regs *regs, int trapnr)
 +{
-+	gate_desc *idt = fixup_pointer(idt_table, physaddr);
++	unsigned long cr2;
++	int r;
 +
-+	setup_early_handlers(idt);
++	switch (trapnr) {
++	case X86_TRAP_PF:
++		cr2 = native_read_cr2();
++		r = early_make_pgtable(cr2);
++		break;
++	default:
++		r = 1;
++	}
++
++	if (r)
++		early_fixup_exception(regs, trapnr);
 +}
++
+ /* Don't add a printk in there. printk relies on the PDA which is not initialized 
+    yet. */
+ static void __init clear_bss(void)
 diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index eefd6838b895..0af79f783659 100644
+index 0af79f783659..81cf6c5763ef 100644
 --- a/arch/x86/kernel/head_64.S
 +++ b/arch/x86/kernel/head_64.S
-@@ -98,6 +98,20 @@ SYM_CODE_START_NOALIGN(startup_64)
- 	leaq	_text(%rip), %rdi
- 	pushq	%rsi
- 	call	__startup_64
-+	/* Save return value */
-+	pushq	%rax
-+
-+	/*
-+	 * Load IDT with early handlers - needed for SEV-ES
-+	 * Do this here because this must only happen on the boot CPU
-+	 * and the code below is shared with secondary CPU bringup.
-+	 */
-+	leaq	_text(%rip), %rdi
-+	call	early_idt_setup_early_handler
-+
-+	/* Restore __startup_64 return value*/
-+	popq	%rax
-+	/* Restore pointer to real_mode_data */
- 	popq	%rsi
+@@ -357,18 +357,9 @@ SYM_CODE_START_LOCAL(early_idt_handler_common)
+ 	pushq %r15				/* pt_regs->r15 */
+ 	UNWIND_HINT_REGS
  
- 	/* Form the CR3 value being sure to include the CR3 modifier */
-@@ -194,6 +208,9 @@ SYM_CODE_START(secondary_startup_64)
- 	 */
- 	movq initial_stack(%rip), %rsp
+-	cmpq $14,%rsi		/* Page fault? */
+-	jnz 10f
+-	GET_CR2_INTO(%rdi)	/* can clobber %rax if pv */
+-	call early_make_pgtable
+-	andl %eax,%eax
+-	jz 20f			/* All good */
+-
+-10:
+ 	movq %rsp,%rdi		/* RDI = pt_regs; RSI is already trapnr */
+-	call early_fixup_exception
++	call early_exception
  
-+	/* Load IDT */
-+	lidt	idt_descr(%rip)
-+
- 	/* Check if nx is implemented */
- 	movl	$0x80000001, %eax
- 	cpuid
-diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
-index 7d8fa631dca9..84250c090596 100644
---- a/arch/x86/kernel/idt.c
-+++ b/arch/x86/kernel/idt.c
-@@ -347,6 +347,28 @@ void __init idt_setup_early_handler(void)
- 	load_idt(&idt_descr);
- }
- 
-+#ifdef CONFIG_X86_64
-+/*
-+ * This function does the same as idt_setup_early_handler(), but is
-+ * called directly from head_64.S before the kernel switches to virtual
-+ * addresses.  PV-ops don't work at that point, so set_intr_gate() can't
-+ * be used here.
-+ */
-+void __init setup_early_handlers(gate_desc *idt)
-+{
-+	int i;
-+
-+	for (i = 0; i < NUM_EXCEPTION_VECTORS; i++) {
-+		struct idt_data data;
-+		gate_desc desc;
-+
-+		init_idt_data(&data, i, early_idt_handler_array[i]);
-+		idt_init_desc(&desc, &data);
-+		native_write_idt_entry(idt, i, &desc);
-+	}
-+}
-+#endif
-+
- /**
-  * idt_invalidate - Invalidate interrupt descriptor table
-  * @addr:	The virtual address of the 'invalid' IDT
+-20:
+ 	decl early_recursion_flag(%rip)
+ 	jmp restore_regs_and_return_to_kernel
+ SYM_CODE_END(early_idt_handler_common)
 -- 
 2.17.1
 
