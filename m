@@ -1,84 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA17A159C8E
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 23:50:48 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C1ED159DAC
+	for <lists.virtualization@lfdr.de>; Wed, 12 Feb 2020 00:49:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 7E2CE2038D;
-	Tue, 11 Feb 2020 22:50:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0706085725;
+	Tue, 11 Feb 2020 23:49:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hIqS2z9-dM5l; Tue, 11 Feb 2020 22:50:46 +0000 (UTC)
+	with ESMTP id vKtc3j4U_HGK; Tue, 11 Feb 2020 23:49:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8630B204B8;
-	Tue, 11 Feb 2020 22:50:46 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id EE6CB85742;
+	Tue, 11 Feb 2020 23:48:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 66064C07FE;
-	Tue, 11 Feb 2020 22:50:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DC682C07FE;
+	Tue, 11 Feb 2020 23:48:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 96CAAC07FE
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 05E98C07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:50:44 +0000 (UTC)
+ Tue, 11 Feb 2020 23:48:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 910C78464A
+ by whitealder.osuosl.org (Postfix) with ESMTP id E2E0B8647A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:50:44 +0000 (UTC)
+ Tue, 11 Feb 2020 23:48:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id eLoyctbwcxir
+ with ESMTP id YyKgcZTKpRoU
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:50:43 +0000 (UTC)
+ Tue, 11 Feb 2020 23:48:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 4B4FB81FB3
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
+ [209.85.208.194])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 63C7381DD2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:50:43 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
- [209.85.221.50])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A68D620848
+ Tue, 11 Feb 2020 23:48:56 +0000 (UTC)
+Received: by mail-lj1-f194.google.com with SMTP id q8so183814ljb.2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:50:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581461442;
- bh=XV1MMCtQP/VUtU4M6HqgIW/VlmatPHwn+NBw1GlBfxE=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=II3HgMfbxENGctvOMjFOHZA/hx7inxXCtRZH3Te8aprNZIdAdJsUNs+3sM2QpGRvJ
- CbVr+cNo2HNTPixkDuyq8S/Lq/nYAuAdr2NXdJJ8wDJ2S5PlEzMIoKrpOvqls66FUK
- zzAtfoGqfwhafGxEuPDZBqnTgkd0DFqnEZHX/VYU=
-Received: by mail-wr1-f50.google.com with SMTP id y17so14600683wrh.5
+ Tue, 11 Feb 2020 15:48:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fmcRvU+GIRtcxEpoNR1/Jwt7N+LvErM8Hs/QOjADSN8=;
+ b=N0KdKUa3ZUHtTuE3TmuW5cG2ZdqCT6NUrDDioygf1Jm1yPXF69UuS0aCIXat1K2MHY
+ SAqGbCd7Ynv+rIt3hYxu5acX+wX9kiWZsZ4T1FvwdUL36xmNpoVPEKyWTdko3e18D4l9
+ QlP9uq1JKal6EB8pl34ZHJyUMa/GIuZ6th82I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fmcRvU+GIRtcxEpoNR1/Jwt7N+LvErM8Hs/QOjADSN8=;
+ b=KsZ7UroiMRe4DJ5V3OXfos9sZU3drccflPZe5qXCFa9Tqe0oKv5ewQr0kJDujC+rc/
+ d1aoHcX3PcbmkFfIrDxBkNHWXTWVNgra+xuT18QXbD8kystb3kv6L4vXyxlxYGfMKj/G
+ 1Nanay03dzvcaJ/GrN/N2aGGXwXPhnKFskXXVCObGH2y7hfRys4mrX5/CHh9/FzHXVnl
+ nZGzlaTq53Q9iuTyAwtUt18LrSsf7jc3pCE0IAHLdbI8g9sFRuEHHpgXNPrx/9amey8P
+ iGZPtWYyzBHFzeUQIVBGP4n6ijFOR2WFI4uPMMNSbn9mKby+k8ag6jd9JaqjmrRim1If
+ XM8A==
+X-Gm-Message-State: APjAAAVhIk8h8ExoPCo2ldt+JzRB4gdTiEBDAviefGMD82jebGXIkWfG
+ maNDbHzzWQFXQK8PHO0uQeFDQe1XZdM=
+X-Google-Smtp-Source: APXvYqw/NNTtPxfzbpdR/UG/w7lV4XLl7xc2MGZqNJXs4V/9agLW9Yp3LmMJ9TlmIbVAshvSNlij9A==
+X-Received: by 2002:a2e:7e11:: with SMTP id z17mr5926711ljc.279.1581464933833; 
+ Tue, 11 Feb 2020 15:48:53 -0800 (PST)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com.
+ [209.85.167.49])
+ by smtp.gmail.com with ESMTPSA id r9sm3152150lfc.72.2020.02.11.15.48.53
+ for <virtualization@lists.linux-foundation.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Feb 2020 15:48:53 -0800 (PST)
+Received: by mail-lf1-f49.google.com with SMTP id t23so202236lfk.6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:50:42 -0800 (PST)
-X-Gm-Message-State: APjAAAWtTuXzV9Hy1l9UCzdf7RFJjpZ1Uw/nyw2yggq1zY2cNTDIDt5A
- VmRXZ9wCSMaWbiwT8yrdDhzYydxsT0YLEQmq4U9uiA==
-X-Google-Smtp-Source: APXvYqzqJ1AlSDY2ZRDO05AMScFqgtaEyb1UuVzqt0WKNedpg8GD4u5J3WkIoYB+03YMjv6Q0h3O47HFfxgY+9Q1m0c=
-X-Received: by 2002:adf:a354:: with SMTP id d20mr10861134wrb.257.1581461441006; 
- Tue, 11 Feb 2020 14:50:41 -0800 (PST)
+ Tue, 11 Feb 2020 15:48:53 -0800 (PST)
+X-Received: by 2002:a19:7b0a:: with SMTP id w10mr5049991lfc.90.1581464932591; 
+ Tue, 11 Feb 2020 15:48:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20200211135256.24617-1-joro@8bytes.org>
- <20200211135256.24617-63-joro@8bytes.org>
-In-Reply-To: <20200211135256.24617-63-joro@8bytes.org>
-From: Andy Lutomirski <luto@kernel.org>
-Date: Tue, 11 Feb 2020 14:50:29 -0800
-X-Gmail-Original-Message-ID: <CALCETrWV15+YTGsEwUHBSjT2MYappLANw4fQHjgZgei2UyV1JQ@mail.gmail.com>
-Message-ID: <CALCETrWV15+YTGsEwUHBSjT2MYappLANw4fQHjgZgei2UyV1JQ@mail.gmail.com>
-Subject: Re: [PATCH 62/62] x86/sev-es: Add NMI state tracking
-To: Joerg Roedel <joro@8bytes.org>
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Kees Cook <keescook@chromium.org>,
- kvm list <kvm@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>,
- X86 ML <x86@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
- Linux Virtualization <virtualization@lists.linux-foundation.org>,
- Joerg Roedel <jroedel@suse.de>, Andy Lutomirski <luto@kernel.org>,
- "H. Peter Anvin" <hpa@zytor.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+References: <20200211125751.7697-1-kraxel@redhat.com>
+In-Reply-To: <20200211125751.7697-1-kraxel@redhat.com>
+From: Gurchetan Singh <gurchetansingh@chromium.org>
+Date: Tue, 11 Feb 2020 15:48:41 -0800
+X-Gmail-Original-Message-ID: <CAAfnVBkuKY2OQwSPQWw-XOmSv37eYb14JFy1h9i-E1sEiBQmLA@mail.gmail.com>
+Message-ID: <CAAfnVBkuKY2OQwSPQWw-XOmSv37eYb14JFy1h9i-E1sEiBQmLA@mail.gmail.com>
+Subject: Re: [PATCH] drm/virtio: rework batching
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Chia-I Wu <olvaffe@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,31 +104,255 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Feb 11, 2020 at 5:53 AM Joerg Roedel <joro@8bytes.org> wrote:
+On Tue, Feb 11, 2020 at 4:58 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
 >
-> From: Joerg Roedel <jroedel@suse.de>
+> Drop the virtio_gpu_{disable,enable}_notify().  Add a new
+> virtio_gpu_notify() call instead, which must be called whenever
+> the driver wants make sure the host is notified needed.
 >
-> Keep NMI state in SEV-ES code so the kernel can re-enable NMIs for the
-> vCPU when it reaches IRET.
+> Drop notification from command submission.  Add virtio_gpu_notify()
+> calls everywhere instead.  This results in more batching because we now
+> notify only once for a series of commands.  We already had that for page
+> flips, now we also batch resource creation (create + attach-backing),
+> display updates (edid + display-info) and device initialization.  With
+> this in place it is also possible to make notification optional for
+> userspace ioctls.
+>
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_drv.h     |  6 ++---
+>  drivers/gpu/drm/virtio/virtgpu_display.c |  2 ++
+>  drivers/gpu/drm/virtio/virtgpu_ioctl.c   |  4 +++
+>  drivers/gpu/drm/virtio/virtgpu_kms.c     |  3 +++
+>  drivers/gpu/drm/virtio/virtgpu_object.c  |  1 +
+>  drivers/gpu/drm/virtio/virtgpu_plane.c   |  5 ++--
+>  drivers/gpu/drm/virtio/virtgpu_vq.c      | 31 +++++++++---------------
+>  7 files changed, 26 insertions(+), 26 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> index 7fd8361e1c9e..28aeac8717e1 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
+> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> @@ -179,8 +179,7 @@ struct virtio_gpu_device {
+>         struct kmem_cache *vbufs;
+>         bool vqs_ready;
+>
+> -       bool disable_notify;
+> -       bool pending_notify;
+> +       atomic_t pending_commands;
+>
+>         struct ida      resource_ida;
+>
+> @@ -334,8 +333,7 @@ void virtio_gpu_dequeue_ctrl_func(struct work_struct *work);
+>  void virtio_gpu_dequeue_cursor_func(struct work_struct *work);
+>  void virtio_gpu_dequeue_fence_func(struct work_struct *work);
+>
+> -void virtio_gpu_disable_notify(struct virtio_gpu_device *vgdev);
+> -void virtio_gpu_enable_notify(struct virtio_gpu_device *vgdev);
+> +void virtio_gpu_notify(struct virtio_gpu_device *vgdev);
+>
+>  /* virtio_gpu_display.c */
+>  void virtio_gpu_modeset_init(struct virtio_gpu_device *vgdev);
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
+> index 7b0f0643bb2d..e95fcfd8d20c 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_display.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_display.c
+> @@ -90,6 +90,7 @@ static void virtio_gpu_crtc_mode_set_nofb(struct drm_crtc *crtc)
+>         virtio_gpu_cmd_set_scanout(vgdev, output->index, 0,
+>                                    crtc->mode.hdisplay,
+>                                    crtc->mode.vdisplay, 0, 0);
+> +       virtio_gpu_notify(vgdev);
+>  }
+>
+>  static void virtio_gpu_crtc_atomic_enable(struct drm_crtc *crtc,
+> @@ -108,6 +109,7 @@ static void virtio_gpu_crtc_atomic_disable(struct drm_crtc *crtc,
+>         struct virtio_gpu_output *output = drm_crtc_to_virtio_gpu_output(crtc);
+>
+>         virtio_gpu_cmd_set_scanout(vgdev, output->index, 0, 0, 0, 0, 0);
+> +       virtio_gpu_notify(vgdev);
+>         output->enabled = false;
+>  }
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> index 205ec4abae2b..75d818d707e6 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+> @@ -158,6 +158,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
+>
+>         virtio_gpu_cmd_submit(vgdev, buf, exbuf->size,
+>                               vfpriv->ctx_id, buflist, out_fence);
+> +       virtio_gpu_notify(vgdev);
+>         return 0;
+>
+>  out_memdup:
+> @@ -314,6 +315,7 @@ static int virtio_gpu_transfer_from_host_ioctl(struct drm_device *dev,
+>                 (vgdev, vfpriv->ctx_id, offset, args->level,
+>                  &args->box, objs, fence);
+>         dma_fence_put(&fence->f);
+> +       virtio_gpu_notify(vgdev);
+>         return 0;
+>
+>  err_unlock:
+> @@ -359,6 +361,7 @@ static int virtio_gpu_transfer_to_host_ioctl(struct drm_device *dev, void *data,
+>                          args->level, &args->box, objs, fence);
+>                 dma_fence_put(&fence->f);
+>         }
+> +       virtio_gpu_notify(vgdev);
+>         return 0;
+>
+>  err_unlock:
+> @@ -445,6 +448,7 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
+>         /* not in cache - need to talk to hw */
+>         virtio_gpu_cmd_get_capset(vgdev, found_valid, args->cap_set_ver,
+>                                   &cache_ent);
+> +       virtio_gpu_notify(vgdev);
+>
+>  copy_exit:
+>         ret = wait_event_timeout(vgdev->resp_wq,
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_kms.c b/drivers/gpu/drm/virtio/virtgpu_kms.c
+> index c1086df49816..44e4c07d0162 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_kms.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_kms.c
+> @@ -44,6 +44,7 @@ static void virtio_gpu_config_changed_work_func(struct work_struct *work)
+>                 if (vgdev->has_edid)
+>                         virtio_gpu_cmd_get_edids(vgdev);
+>                 virtio_gpu_cmd_get_display_info(vgdev);
+> +               virtio_gpu_notify(vgdev);
+>                 drm_helper_hpd_irq_event(vgdev->ddev);
+>                 events_clear |= VIRTIO_GPU_EVENT_DISPLAY;
+>         }
+> @@ -92,6 +93,7 @@ static void virtio_gpu_get_capsets(struct virtio_gpu_device *vgdev,
+>         }
+>         for (i = 0; i < num_capsets; i++) {
+>                 virtio_gpu_cmd_get_capset_info(vgdev, i);
+> +               virtio_gpu_notify(vgdev);
+>                 ret = wait_event_timeout(vgdev->resp_wq,
+>                                          vgdev->capsets[i].id > 0, 5 * HZ);
+>                 if (ret == 0) {
+> @@ -206,6 +208,7 @@ int virtio_gpu_init(struct drm_device *dev)
+>         if (vgdev->has_edid)
+>                 virtio_gpu_cmd_get_edids(vgdev);
+>         virtio_gpu_cmd_get_display_info(vgdev);
+> +       virtio_gpu_notify(vgdev);
+>         wait_event_timeout(vgdev->resp_wq, !vgdev->display_info_pending,
+>                            5 * HZ);
+>         return 0;
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+> index 8870ee23ff2b..65d6834d3c74 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+> @@ -224,6 +224,7 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
+>                 return ret;
+>         }
+>
+> +       virtio_gpu_notify(vgdev);
+>         *bo_ptr = bo;
+>         return 0;
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+> index ac42c84d2d7f..fd6487fb0855 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+> @@ -154,8 +154,6 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
+>         if (!drm_atomic_helper_damage_merged(old_state, plane->state, &rect))
+>                 return;
+>
+> -       virtio_gpu_disable_notify(vgdev);
+> -
+>         bo = gem_to_virtio_gpu_obj(plane->state->fb->obj[0]);
+>         if (bo->dumb)
+>                 virtio_gpu_update_dumb_bo(vgdev, plane->state, &rect);
+> @@ -187,7 +185,7 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
+>                                       rect.x2 - rect.x1,
+>                                       rect.y2 - rect.y1);
+>
+> -       virtio_gpu_enable_notify(vgdev);
+> +       virtio_gpu_notify(vgdev);
+>  }
+>
+>  static int virtio_gpu_cursor_prepare_fb(struct drm_plane *plane,
+> @@ -265,6 +263,7 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
+>                          plane->state->crtc_w,
+>                          plane->state->crtc_h,
+>                          0, 0, objs, vgfb->fence);
+> +               virtio_gpu_notify(vgdev);
+>                 dma_fence_wait(&vgfb->fence->f, true);
+>                 dma_fence_put(&vgfb->fence->f);
+>                 vgfb->fence = NULL;
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> index a682c2fcbe9a..ccc89b7578a0 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> @@ -329,7 +329,6 @@ static void virtio_gpu_queue_ctrl_sgs(struct virtio_gpu_device *vgdev,
+>                                       int incnt)
+>  {
+>         struct virtqueue *vq = vgdev->ctrlq.vq;
+> -       bool notify = false;
+>         int ret;
+>
+>         if (vgdev->has_indirect)
+> @@ -369,16 +368,9 @@ static void virtio_gpu_queue_ctrl_sgs(struct virtio_gpu_device *vgdev,
+>
+>         trace_virtio_gpu_cmd_queue(vq, virtio_gpu_vbuf_ctrl_hdr(vbuf));
+>
+> -       notify = virtqueue_kick_prepare(vq);
+> +       atomic_inc(&vgdev->pending_commands);
+>
+>         spin_unlock(&vgdev->ctrlq.qlock);
+> -
+> -       if (notify) {
+> -               if (vgdev->disable_notify)
+> -                       vgdev->pending_notify = true;
+> -               else
+> -                       virtqueue_notify(vq);
+> -       }
+>  }
+>
+>  static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+> @@ -434,19 +426,20 @@ static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
+>         }
+>  }
+>
+> -void virtio_gpu_disable_notify(struct virtio_gpu_device *vgdev)
+> +void virtio_gpu_notify(struct virtio_gpu_device *vgdev)
+>  {
+> -       vgdev->disable_notify = true;
+> -}
+> +       bool notify;
+>
+> -void virtio_gpu_enable_notify(struct virtio_gpu_device *vgdev)
+> -{
+> -       vgdev->disable_notify = false;
+> -
+> -       if (!vgdev->pending_notify)
+> +       if (atomic_read(&vgdev->pending_commands) == 0)
+>                 return;
 
-This patch is overcomplicated IMO.  Just do the magic incantation in C
-from do_nmi or from here:
+nit: maybe !atomic_read(&vgdev->pending_commands)?
 
-        /*
-         * For ease of testing, unmask NMIs right away.  Disabled by
-         * default because IRET is very expensive.
+With or without, this patch is:
 
-If you do the latter, you'll need to handle the case where the NMI
-came from user mode.
+Reviewed-by: Gurchetan Singh <gurchetansingh@chromium.org>
+Tested-by: Gurchetan Singh <gurchetansingh@chromium.org>
 
-The ideal solution is do_nmi, I think.
 
-if (static_cpu_has(X86_BUG_AMD_FORGOT_ABOUT_NMI))
-  sev_es_unmask_nmi();
 
-Feel free to use X86_FEATURE_SEV_ES instead :)
-
---Andu
+> -       vgdev->pending_notify = false;
+> -       virtqueue_notify(vgdev->ctrlq.vq);
+> +
+> +       spin_lock(&vgdev->ctrlq.qlock);
+> +       atomic_set(&vgdev->pending_commands, 0);
+> +       notify = virtqueue_kick_prepare(vgdev->ctrlq.vq);
+> +       spin_unlock(&vgdev->ctrlq.qlock);
+> +
+> +       if (notify)
+> +               virtqueue_notify(vgdev->ctrlq.vq);
+>  }
+>
+>  static void virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
+> --
+> 2.18.2
+>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
