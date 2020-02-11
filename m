@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 599A415909C
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:53:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88D7A1590A5
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:54:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 020FB865C4;
-	Tue, 11 Feb 2020 13:53:57 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 29C3686759;
+	Tue, 11 Feb 2020 13:54:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3GtG8-qorUjC; Tue, 11 Feb 2020 13:53:51 +0000 (UTC)
+	with ESMTP id PFHpjb8Tqe2D; Tue, 11 Feb 2020 13:54:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 815F6863B7;
-	Tue, 11 Feb 2020 13:53:28 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B2707868C6;
+	Tue, 11 Feb 2020 13:53:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 65C2BC07FE;
-	Tue, 11 Feb 2020 13:53:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8E254C1D80;
+	Tue, 11 Feb 2020 13:53:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E3CB8C1D8F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 81327C07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C8A4C8742F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 634CC857F8
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lhDhxRZpvW1c
+ with ESMTP id Y-JPB9EoTkHw
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 1F11B8733F
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1F80D85725
  for <virtualization@lists.linux-foundation.org>;
  Tue, 11 Feb 2020 13:53:25 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id AB53BE51; Tue, 11 Feb 2020 14:53:12 +0100 (CET)
+ id D9E7DE64; Tue, 11 Feb 2020 14:53:12 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 31/62] x86/sev-es: Add SEV-ES Feature Detection
-Date: Tue, 11 Feb 2020 14:52:25 +0100
-Message-Id: <20200211135256.24617-32-joro@8bytes.org>
+Subject: [PATCH 32/62] x86/sev-es: Compile early handler code into kernel image
+Date: Tue, 11 Feb 2020 14:52:26 +0100
+Message-Id: <20200211135256.24617-33-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200211135256.24617-1-joro@8bytes.org>
 References: <20200211135256.24617-1-joro@8bytes.org>
@@ -75,106 +75,219 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Add the sev_es_active function for checking whether SEV-ES is enabled.
-Also cache the value of MSR_AMD64_SEV at boot to speed up the feature
-checking in the running code.
+Setup sev-es.c and include the code from the
+pre-decompression stage to also build it into the image of the running
+kernel. Temporarily add __maybe_unused annotations to avoid build
+warnings until the functions get used.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/mem_encrypt.h |  3 +++
- arch/x86/include/asm/msr-index.h   |  2 ++
- arch/x86/mm/mem_encrypt.c          | 11 ++++++++++-
- arch/x86/mm/mem_encrypt_identity.c |  3 +++
- 4 files changed, 18 insertions(+), 1 deletion(-)
+ arch/x86/kernel/Makefile        |  1 +
+ arch/x86/kernel/sev-es-shared.c | 24 ++++----
+ arch/x86/kernel/sev-es.c        | 98 +++++++++++++++++++++++++++++++++
+ 3 files changed, 113 insertions(+), 10 deletions(-)
+ create mode 100644 arch/x86/kernel/sev-es.c
 
-diff --git a/arch/x86/include/asm/mem_encrypt.h b/arch/x86/include/asm/mem_encrypt.h
-index 848ce43b9040..6f61bb93366a 100644
---- a/arch/x86/include/asm/mem_encrypt.h
-+++ b/arch/x86/include/asm/mem_encrypt.h
-@@ -19,6 +19,7 @@
- #ifdef CONFIG_AMD_MEM_ENCRYPT
+diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
+index 9b294c13809a..b11bb52e2603 100644
+--- a/arch/x86/kernel/Makefile
++++ b/arch/x86/kernel/Makefile
+@@ -143,6 +143,7 @@ obj-$(CONFIG_UNWINDER_ORC)		+= unwind_orc.o
+ obj-$(CONFIG_UNWINDER_FRAME_POINTER)	+= unwind_frame.o
+ obj-$(CONFIG_UNWINDER_GUESS)		+= unwind_guess.o
  
- extern u64 sme_me_mask;
-+extern u64 sev_status;
- extern bool sev_enabled;
- 
- void sme_encrypt_execute(unsigned long encrypted_kernel_vaddr,
-@@ -49,6 +50,7 @@ void __init mem_encrypt_free_decrypted_mem(void);
- 
- bool sme_active(void);
- bool sev_active(void);
-+bool sev_es_active(void);
- 
- #define __bss_decrypted __attribute__((__section__(".bss..decrypted")))
- 
-@@ -71,6 +73,7 @@ static inline void __init sme_enable(struct boot_params *bp) { }
- 
- static inline bool sme_active(void) { return false; }
- static inline bool sev_active(void) { return false; }
-+static inline bool sev_es_active(void) { return false; }
- 
- static inline int __init
- early_set_memory_decrypted(unsigned long vaddr, unsigned long size) { return 0; }
-diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-index.h
-index b6139b70db54..1411c37b6cd9 100644
---- a/arch/x86/include/asm/msr-index.h
-+++ b/arch/x86/include/asm/msr-index.h
-@@ -435,7 +435,9 @@
- #define MSR_AMD64_SEV_ES_GHCB		0xc0010130
- #define MSR_AMD64_SEV			0xc0010131
- #define MSR_AMD64_SEV_ENABLED_BIT	0
-+#define MSR_AMD64_SEV_ES_ENABLED_BIT	1
- #define MSR_AMD64_SEV_ENABLED		BIT_ULL(MSR_AMD64_SEV_ENABLED_BIT)
-+#define MSR_AMD64_SEV_ES_ENABLED	BIT_ULL(MSR_AMD64_SEV_ES_ENABLED_BIT)
- 
- #define MSR_AMD64_VIRT_SPEC_CTRL	0xc001011f
- 
-diff --git a/arch/x86/mm/mem_encrypt.c b/arch/x86/mm/mem_encrypt.c
-index a03614bd3e1a..a35fcba24866 100644
---- a/arch/x86/mm/mem_encrypt.c
-+++ b/arch/x86/mm/mem_encrypt.c
-@@ -38,7 +38,9 @@
-  * section is later cleared.
++obj-$(CONFIG_AMD_MEM_ENCRYPT)		+= sev-es.o
+ ###
+ # 64 bit specific files
+ ifeq ($(CONFIG_X86_64),y)
+diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
+index 14693eff9614..ad2a6c964217 100644
+--- a/arch/x86/kernel/sev-es-shared.c
++++ b/arch/x86/kernel/sev-es-shared.c
+@@ -9,7 +9,7 @@
+  * and is included directly into both code-bases.
   */
- u64 sme_me_mask __section(.data) = 0;
-+u64 sev_status __section(.data) = 0;
- EXPORT_SYMBOL(sme_me_mask);
-+EXPORT_SYMBOL(sev_status);
- DEFINE_STATIC_KEY_FALSE(sev_enable_key);
- EXPORT_SYMBOL_GPL(sev_enable_key);
  
-@@ -347,9 +349,16 @@ bool sme_active(void)
- 
- bool sev_active(void)
+-static void terminate(unsigned int reason)
++static void __maybe_unused terminate(unsigned int reason)
  {
--	return sme_me_mask && sev_enabled;
-+	return !!(sev_status & MSR_AMD64_SEV_ENABLED);
+ 	/* Request Guest Termination from Hypvervisor */
+ 	write_ghcb_msr(GHCB_SEV_TERMINATE);
+@@ -19,7 +19,7 @@ static void terminate(unsigned int reason)
+ 		asm volatile("hlt\n" : : : "memory");
  }
  
-+bool sev_es_active(void)
-+{
-+	return !!(sev_status & MSR_AMD64_SEV_ES_ENABLED);
-+}
-+EXPORT_SYMBOL_GPL(sev_es_active);
-+
-+
- /* Override for DMA direct allocation check - ARCH_HAS_FORCE_DMA_UNENCRYPTED */
- bool force_dma_unencrypted(struct device *dev)
+-static bool sev_es_negotiate_protocol(void)
++static bool __maybe_unused sev_es_negotiate_protocol(void)
  {
-diff --git a/arch/x86/mm/mem_encrypt_identity.c b/arch/x86/mm/mem_encrypt_identity.c
-index e2b0e2ac07bb..68d75379e06a 100644
---- a/arch/x86/mm/mem_encrypt_identity.c
-+++ b/arch/x86/mm/mem_encrypt_identity.c
-@@ -540,6 +540,9 @@ void __init sme_enable(struct boot_params *bp)
- 		if (!(msr & MSR_AMD64_SEV_ENABLED))
- 			return;
+ 	u64 val;
  
-+		/* Save SEV_STATUS to avoid reading MSR again */
-+		sev_status = msr;
+@@ -38,7 +38,7 @@ static bool sev_es_negotiate_protocol(void)
+ 	return true;
+ }
+ 
+-static void ghcb_invalidate(struct ghcb *ghcb)
++static void __maybe_unused ghcb_invalidate(struct ghcb *ghcb)
+ {
+ 	memset(ghcb->save.valid_bitmap, 0, sizeof(ghcb->save.valid_bitmap));
+ }
+@@ -80,9 +80,10 @@ static bool decoding_needed(unsigned long exit_code)
+ 		 exit_code <= SVM_EXIT_LAST_EXCP);
+ }
+ 
+-static enum es_result init_em_ctxt(struct es_em_ctxt *ctxt,
+-				   struct pt_regs *regs,
+-				   unsigned long exit_code)
++static enum es_result __maybe_unused
++init_em_ctxt(struct es_em_ctxt *ctxt,
++	     struct pt_regs *regs,
++	     unsigned long exit_code)
+ {
+ 	enum es_result ret = ES_OK;
+ 
+@@ -95,7 +96,7 @@ static enum es_result init_em_ctxt(struct es_em_ctxt *ctxt,
+ 	return ret;
+ }
+ 
+-static void finish_insn(struct es_em_ctxt *ctxt)
++static void __maybe_unused finish_insn(struct es_em_ctxt *ctxt)
+ {
+ 	ctxt->regs->ip += ctxt->insn.length;
+ }
+@@ -358,7 +359,8 @@ static enum es_result ioio_exitinfo(struct es_em_ctxt *ctxt, u64 *exitinfo)
+ 	return ES_OK;
+ }
+ 
+-static enum es_result handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
++static enum es_result __maybe_unused
++handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
+ {
+ 	struct pt_regs *regs = ctxt->regs;
+ 	u64 exit_info_1, exit_info_2;
+@@ -450,7 +452,8 @@ static enum es_result handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
+ 	return ret;
+ }
+ 
+-static enum es_result handle_cpuid(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
++static enum es_result __maybe_unused
++handle_cpuid(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
+ {
+ 	struct pt_regs *regs = ctxt->regs;
+ 	u32 cr4 = native_read_cr4();
+@@ -656,7 +659,8 @@ static enum es_result handle_mmio_twobyte_ops(struct ghcb *ghcb,
+ 	return ret;
+ }
+ 
+-static enum es_result handle_mmio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
++static enum es_result __maybe_unused
++handle_mmio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
+ {
+ 	struct insn *insn = &ctxt->insn;
+ 	unsigned int bytes = 0;
+diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
+new file mode 100644
+index 000000000000..33ab7fe8b6a0
+--- /dev/null
++++ b/arch/x86/kernel/sev-es.c
+@@ -0,0 +1,98 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * AMD Memory Encryption Support
++ *
++ * Copyright (C) 2019 SUSE
++ *
++ * Author: Joerg Roedel <jroedel@suse.de>
++ */
 +
- 		/* SEV state cannot be controlled by a command line option */
- 		sme_me_mask = me_mask;
- 		sev_enabled = true;
++#include <linux/kernel.h>
++#include <linux/mm.h>
++
++#include <asm/trap_defs.h>
++#include <asm/sev-es.h>
++#include <asm/fpu/internal.h>
++#include <asm/processor.h>
++#include <asm/svm.h>
++
++static inline u64 read_ghcb_msr(void)
++{
++	return native_read_msr(MSR_AMD64_SEV_ES_GHCB);
++}
++
++static inline void write_ghcb_msr(u64 val)
++{
++	u32 low, high;
++
++	low  = (u32)(val);
++	high = (u32)(val >> 32);
++
++	native_write_msr(MSR_AMD64_SEV_ES_GHCB, low, high);
++}
++
++static bool check_kernel(struct pt_regs *regs)
++{
++	return regs->cs == __KERNEL_CS;
++}
++
++static enum es_result es_fetch_insn_byte(struct es_em_ctxt *ctxt,
++					 unsigned int offset,
++					 char *buffer)
++{
++	char *rip = (char *)ctxt->regs->ip;
++
++	/* More checks are needed when we boot to user-space */
++	if (!check_kernel(ctxt->regs))
++		return ES_UNSUPPORTED;
++
++	buffer[offset] = rip[offset];
++
++	return ES_OK;
++}
++
++static enum es_result es_write_mem(struct es_em_ctxt *ctxt,
++				   void *dst, char *buf, size_t size)
++{
++	/* More checks are needed when we boot to user-space */
++	if (!check_kernel(ctxt->regs))
++		return ES_UNSUPPORTED;
++
++	memcpy(dst, buf, size);
++
++	return ES_OK;
++}
++
++static enum es_result es_read_mem(struct es_em_ctxt *ctxt,
++				  void *src, char *buf, size_t size)
++{
++	/* More checks are needed when we boot to user-space */
++	if (!check_kernel(ctxt->regs))
++		return ES_UNSUPPORTED;
++
++	memcpy(buf, src, size);
++
++	return ES_OK;
++}
++
++static phys_addr_t es_slow_virt_to_phys(struct ghcb *ghcb, long vaddr)
++{
++	unsigned long va = (unsigned long)vaddr;
++	unsigned int level;
++	phys_addr_t pa;
++	pgd_t *pgd;
++	pte_t *pte;
++
++	pgd = pgd_offset(current->active_mm, va);
++	pte = lookup_address_in_pgd(pgd, va, &level);
++	if (!pte)
++		return 0;
++
++	pa = (phys_addr_t)pte_pfn(*pte) << PAGE_SHIFT;
++	pa |= va & ~page_level_mask(level);
++
++	return pa;
++}
++
++/* Include code shared with pre-decompression boot stage */
++#include "sev-es-shared.c"
 -- 
 2.17.1
 
