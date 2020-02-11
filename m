@@ -2,49 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94FF8159161
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 15:04:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7D3015915C
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 15:03:59 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 29E67859D6;
-	Tue, 11 Feb 2020 14:04:03 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2F6D385640;
+	Tue, 11 Feb 2020 14:03:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3mNiXXC41iuA; Tue, 11 Feb 2020 14:04:01 +0000 (UTC)
+	with ESMTP id TXHXjyJ49TmX; Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 6580B857D6;
-	Tue, 11 Feb 2020 14:04:01 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3C18385633;
+	Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4BB2BC07FE;
-	Tue, 11 Feb 2020 14:04:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C58EC1D80;
+	Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 18FECC1D80
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D048AC07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:59 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 1416686497
+ by silver.osuosl.org (Postfix) with ESMTP id B6B70204E4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:59 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 75iH-r-LcmYH
+ with ESMTP id ZvZ8H0tTHVdI
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:55 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 4BE9486473
+ by silver.osuosl.org (Postfix) with ESMTPS id 73882204E0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:03:57 +0000 (UTC)
+ Tue, 11 Feb 2020 14:03:55 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 871A0E9C; Tue, 11 Feb 2020 14:53:16 +0100 (CET)
+ id ACA7DEA0; Tue, 11 Feb 2020 14:53:16 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 52/62] x86/sev-es: Handle #DB Events
-Date: Tue, 11 Feb 2020 14:52:46 +0100
-Message-Id: <20200211135256.24617-53-joro@8bytes.org>
+Subject: [PATCH 53/62] x86/paravirt: Allow hypervisor specific VMMCALL
+ handling under SEV-ES
+Date: Tue, 11 Feb 2020 14:52:47 +0100
+Message-Id: <20200211135256.24617-54-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200211135256.24617-1-joro@8bytes.org>
 References: <20200211135256.24617-1-joro@8bytes.org>
@@ -75,44 +76,85 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Handle #VC exceptions caused by #DB exceptions in the guest. Do not
-forward them to the hypervisor and handle them with do_debug() instead.
+Add two new paravirt callbacks to provide hypervisor specific processor
+state in the GHCB and to copy state from the hypervisor back to the
+processor.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ arch/x86/include/asm/x86_init.h | 16 +++++++++++++++-
+ arch/x86/kernel/sev-es.c        | 12 ++++++++++++
+ 2 files changed, 27 insertions(+), 1 deletion(-)
 
+diff --git a/arch/x86/include/asm/x86_init.h b/arch/x86/include/asm/x86_init.h
+index 96d9cd208610..c4790ec279cc 100644
+--- a/arch/x86/include/asm/x86_init.h
++++ b/arch/x86/include/asm/x86_init.h
+@@ -4,8 +4,10 @@
+ 
+ #include <asm/bootparam.h>
+ 
++struct ghcb;
+ struct mpc_bus;
+ struct mpc_cpu;
++struct pt_regs;
+ struct mpc_table;
+ struct cpuinfo_x86;
+ 
+@@ -238,10 +240,22 @@ struct x86_legacy_features {
+ /**
+  * struct x86_hyper_runtime - x86 hypervisor specific runtime callbacks
+  *
+- * @pin_vcpu:		pin current vcpu to specified physical cpu (run rarely)
++ * @pin_vcpu:			pin current vcpu to specified physical
++ *				cpu (run rarely)
++ * @sev_es_hcall_prepare:	Load additional hypervisor-specific
++ *				state into the GHCB when doing a VMMCALL under
++ *				SEV-ES. Called from the #VC exception handler.
++ * @sev_es_hcall_finish:	Copies state from the GHCB back into the
++ *				processor (or pt_regs). Also runs checks on the
++ *				state returned from the hypervisor after a
++ *				VMMCALL under SEV-ES.  Needs to return 'false'
++ *				if the checks fail.  Called from the #VC
++ *				exception handler.
+  */
+ struct x86_hyper_runtime {
+ 	void (*pin_vcpu)(int cpu);
++	void (*sev_es_hcall_prepare)(struct ghcb *ghcb, struct pt_regs *regs);
++	bool (*sev_es_hcall_finish)(struct ghcb *ghcb, struct pt_regs *regs);
+ };
+ 
+ /**
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 1b873d00e38f..700f75fc13e7 100644
+index 700f75fc13e7..6924bb1ad8b2 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -361,6 +361,15 @@ static enum es_result handle_vmmcall(struct ghcb *ghcb,
+@@ -349,6 +349,9 @@ static enum es_result handle_vmmcall(struct ghcb *ghcb,
+ 	ghcb_set_rax(ghcb, ctxt->regs->ax);
+ 	ghcb_set_cpl(ghcb, user_mode(ctxt->regs) ? 3 : 0);
+ 
++	if (x86_platform.hyper.sev_es_hcall_prepare)
++		x86_platform.hyper.sev_es_hcall_prepare(ghcb, ctxt->regs);
++
+ 	ret = ghcb_hv_call(ghcb, ctxt, SVM_EXIT_VMMCALL, 0, 0);
+ 	if (ret != ES_OK)
+ 		return ret;
+@@ -358,6 +361,15 @@ static enum es_result handle_vmmcall(struct ghcb *ghcb,
+ 
+ 	ctxt->regs->ax = ghcb->save.rax;
+ 
++	/*
++	 * Call sev_es_hcall_finish() after regs->ax is already set.
++	 * This allows the hypervisor handler to overwrite it again if
++	 * necessary.
++	 */
++	if (x86_platform.hyper.sev_es_hcall_finish &&
++	    !x86_platform.hyper.sev_es_hcall_finish(ghcb, ctxt->regs))
++		return ES_VMM_ERROR;
++
  	return ES_OK;
  }
  
-+static enum es_result handle_db_exception(struct ghcb *ghcb,
-+					  struct es_em_ctxt *ctxt)
-+{
-+	do_debug(ctxt->regs, 0);
-+
-+	/* Exception event, do not advance RIP */
-+	return ES_RETRY;
-+}
-+
- static enum es_result handle_vc_exception(struct es_em_ctxt *ctxt,
- 					  struct ghcb *ghcb,
- 					  unsigned long exit_code,
-@@ -375,6 +384,9 @@ static enum es_result handle_vc_exception(struct es_em_ctxt *ctxt,
- 	case SVM_EXIT_WRITE_DR7:
- 		result = handle_dr7_write(ghcb, ctxt, early);
- 		break;
-+	case SVM_EXIT_EXCP_BASE + X86_TRAP_DB:
-+		result = handle_db_exception(ghcb, ctxt);
-+		break;
- 	case SVM_EXIT_EXCP_BASE + X86_TRAP_AC:
- 		do_alignment_check(ctxt->regs, 0);
- 		result = ES_RETRY;
 -- 
 2.17.1
 
