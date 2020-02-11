@@ -2,94 +2,75 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CDFD158B54
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 09:36:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6F6D158C2F
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 10:55:43 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 9E90585247;
-	Tue, 11 Feb 2020 08:36:00 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3B6E684FDE;
+	Tue, 11 Feb 2020 09:55:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zBtRZCHLuh63; Tue, 11 Feb 2020 08:36:00 +0000 (UTC)
+	with ESMTP id Q7rqTfJaAtqT; Tue, 11 Feb 2020 09:55:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0F64E8539A;
-	Tue, 11 Feb 2020 08:36:00 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3B65B844EC;
+	Tue, 11 Feb 2020 09:55:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E1746C07FE;
-	Tue, 11 Feb 2020 08:35:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 23BF7C07FE;
+	Tue, 11 Feb 2020 09:55:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9BFAAC07FE
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1A3D9C07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 08:35:58 +0000 (UTC)
+ Tue, 11 Feb 2020 09:55:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 9811A85247
+ by hemlock.osuosl.org (Postfix) with ESMTP id 1692986D78
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 08:35:58 +0000 (UTC)
+ Tue, 11 Feb 2020 09:55:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ah_vPNgI17lW
+ with ESMTP id oNHuqnRQ0P-x
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 08:35:57 +0000 (UTC)
+ Tue, 11 Feb 2020 09:55:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3270684430
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 2A92A86CDC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 08:35:57 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id u6so11166389wrt.0
- for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 00:35:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=Hsu+gXyOgop18isowZZKKs2ga2iqsZd2LEer6p5GpPQ=;
- b=IkJTmHnBqkSeqUtyUWgNsTGgarFx+e3w/pLKfpfvylxwfnqItWne0uhDNuJjsmEQPz
- eBoEqm24oNpn2kKUaXmY2H/1Y0dafzRIrS2z5zJBlBsOw7nR8uxS1iuitDxWII11t6qQ
- I+F4zEX6w7lXT5sYkbD6O7gN4/WdTkZ7s9Arw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=Hsu+gXyOgop18isowZZKKs2ga2iqsZd2LEer6p5GpPQ=;
- b=IadpHtwLHl8Z+kMgl5yd1EsEaVsnrp0XQJ9eaSAx3vckJfYae19oTjWbVftGyR1xhD
- a3QnXPPvAnhFOR4qJvsgpvYaDpLWdRRtd5YuQHQ+XTnRPNn5ALG7utjgN6m24Qw8mnEd
- Iw0t9mkd3zYtTWpYNQ1xCfsIzLLZLpJj7jUpnhmorlWI50etyZpamiPnA7O+OK4wQdry
- XTEpfxdq6HaO8vP5tvurYS/T6LnmiLYUEXWja40hPRKBk/qVwkFpeZPgV9bbQvlLRmz6
- dBvJnNi1bKXJErJMd4YF/6tajK8T4fwxcCY2qNNjHTxqrfe/ZP98wSY6bwYyCIXlNnkh
- QdrA==
-X-Gm-Message-State: APjAAAUf5dh5+3HyUXc6AqVAY4KvZ/XUms080EeHSPfAq9sjhtQUbdjY
- 2b02KWb9I4ZwZOrhbjP6bnspUQ==
-X-Google-Smtp-Source: APXvYqx82fqKEARb5BEhakpp4jXR/7ODpujJp+tB36Tqmlvdm6DCSV3wY7lQglJNGOtDibcnh/t9Rg==
-X-Received: by 2002:a5d:56ca:: with SMTP id m10mr7476980wrw.313.1581410155601; 
- Tue, 11 Feb 2020 00:35:55 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id b17sm4407581wrp.49.2020.02.11.00.35.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2020 00:35:55 -0800 (PST)
-Date: Tue, 11 Feb 2020 09:35:53 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v2] drm/virtio: add drm_driver.release callback.
-Message-ID: <20200211083553.GU43062@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, gurchetansingh@chromium.org,
- olvaffe@gmail.com, David Airlie <airlied@linux.ie>,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20200210100819.29761-1-kraxel@redhat.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200210100819.29761-1-kraxel@redhat.com>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
+ Tue, 11 Feb 2020 09:55:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1581414937;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc; bh=DCZ/HZY+BrMbXg5FbkPEvwFRllXttN9dTdmpwAbOBrg=;
+ b=ZKFoJbZ+TqojeaR77ZGW9cJKp8bgBBC+1W3nQu82c8VYG8JTlIq5pE5QredH6xd76531dZ
+ qoevzYINWwNJrDm+exiJXrKXkY25KbnJhj5NufKP6hPutfgLJws/hXdjcJfqiAdFgKo3rS
+ O6+BSk+M4oze0irE7vA0DV9wyTfLcVs=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-311-R89z60rxNr6iUvaiwZOc3w-1; Tue, 11 Feb 2020 04:55:35 -0500
+X-MC-Unique: R89z60rxNr6iUvaiwZOc3w-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 604CD8017DF;
+ Tue, 11 Feb 2020 09:55:33 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-112.ams2.redhat.com
+ [10.36.116.112])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3FC5760BF1;
+ Tue, 11 Feb 2020 09:55:30 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 537C616E15; Tue, 11 Feb 2020 10:55:29 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v3] drm/bochs: add drm_driver.release callback.
+Date: Tue, 11 Feb 2020 10:55:29 +0100
+Message-Id: <20200211095529.30449-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- Daniel Vetter <daniel@ffwll.ch>, gurchetansingh@chromium.org,
- olvaffe@gmail.com
+ daniel@ffwll.ch, "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,131 +82,136 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Feb 10, 2020 at 11:08:19AM +0100, Gerd Hoffmann wrote:
-> Split virtio_gpu_deinit(), move the drm shutdown and release to
-> virtio_gpu_release().  Also free vbufs in case we can't queue them.
-> 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  drivers/gpu/drm/virtio/virtgpu_drv.h     | 1 +
->  drivers/gpu/drm/virtio/virtgpu_display.c | 1 -
->  drivers/gpu/drm/virtio/virtgpu_drv.c     | 4 ++++
->  drivers/gpu/drm/virtio/virtgpu_kms.c     | 5 +++++
->  drivers/gpu/drm/virtio/virtgpu_vq.c      | 9 ++++++++-
->  5 files changed, 18 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> index d278c8c50f39..09a485b001e7 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> @@ -217,6 +217,7 @@ extern struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS];
->  /* virtio_kms.c */
->  int virtio_gpu_init(struct drm_device *dev);
->  void virtio_gpu_deinit(struct drm_device *dev);
-> +void virtio_gpu_release(struct drm_device *dev);
->  int virtio_gpu_driver_open(struct drm_device *dev, struct drm_file *file);
->  void virtio_gpu_driver_postclose(struct drm_device *dev, struct drm_file *file);
->  
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
-> index 7b0f0643bb2d..af953db4a0c9 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_display.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_display.c
-> @@ -368,6 +368,5 @@ void virtio_gpu_modeset_fini(struct virtio_gpu_device *vgdev)
->  
->  	for (i = 0 ; i < vgdev->num_scanouts; ++i)
->  		kfree(vgdev->outputs[i].edid);
-> -	drm_atomic_helper_shutdown(vgdev->ddev);
->  	drm_mode_config_cleanup(vgdev->ddev);
->  }
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> index 8cf27af3ad53..664a741a3b0b 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
-> @@ -31,6 +31,7 @@
->  #include <linux/pci.h>
->  
->  #include <drm/drm.h>
-> +#include <drm/drm_atomic_helper.h>
->  #include <drm/drm_drv.h>
->  #include <drm/drm_file.h>
->  
-> @@ -136,6 +137,7 @@ static void virtio_gpu_remove(struct virtio_device *vdev)
->  	struct drm_device *dev = vdev->priv;
->  
->  	drm_dev_unregister(dev);
-> +	drm_atomic_helper_shutdown(dev);
->  	virtio_gpu_deinit(dev);
->  	drm_dev_put(dev);
->  }
-> @@ -214,4 +216,6 @@ static struct drm_driver driver = {
->  	.major = DRIVER_MAJOR,
->  	.minor = DRIVER_MINOR,
->  	.patchlevel = DRIVER_PATCHLEVEL,
-> +
-> +	.release = virtio_gpu_release,
->  };
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_kms.c b/drivers/gpu/drm/virtio/virtgpu_kms.c
-> index c1086df49816..b45d12e3db2a 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_kms.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_kms.c
-> @@ -240,6 +240,11 @@ void virtio_gpu_deinit(struct drm_device *dev)
->  	flush_work(&vgdev->config_changed_work);
->  	vgdev->vdev->config->reset(vgdev->vdev);
->  	vgdev->vdev->config->del_vqs(vgdev->vdev);
-> +}
-> +
-> +void virtio_gpu_release(struct drm_device *dev)
+Call bochs_unload via drm_driver.release to make sure we release stuff
+when it is safe to do so.  Use drm_dev_{enter,exit,unplug} to avoid
+touching hardware after device removal.  Tidy up here and there.
 
-Split lgtm, but again I think you want drm_dev_enter/exit. And maybe a
-changelog.
--Daniel
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/bochs/bochs_drv.c |  6 +++---
+ drivers/gpu/drm/bochs/bochs_hw.c  | 24 +++++++++++++++++++++++-
+ 2 files changed, 26 insertions(+), 4 deletions(-)
 
-> +{
-> +	struct virtio_gpu_device *vgdev = dev->dev_private;
->  
->  	virtio_gpu_modeset_fini(vgdev);
->  	virtio_gpu_free_vbufs(vgdev);
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> index cc02fc4bab2a..cc674b45f904 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-> @@ -330,6 +330,11 @@ static void virtio_gpu_queue_ctrl_sgs(struct virtio_gpu_device *vgdev,
->  	bool notify = false;
->  	int ret;
->  
-> +	if (!vgdev->vqs_ready) {
-> +		free_vbuf(vgdev, vbuf);
-> +		return;
-> +	}
-> +
->  	if (vgdev->has_indirect)
->  		elemcnt = 1;
->  
-> @@ -462,8 +467,10 @@ static void virtio_gpu_queue_cursor(struct virtio_gpu_device *vgdev,
->  	int ret;
->  	int outcnt;
->  
-> -	if (!vgdev->vqs_ready)
-> +	if (!vgdev->vqs_ready) {
-> +		free_vbuf(vgdev, vbuf);
->  		return;
-> +	}
->  
->  	sg_init_one(&ccmd, vbuf->buf, vbuf->size);
->  	sgs[0] = &ccmd;
-> -- 
-> 2.18.1
-> 
-
+diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
+index 10460878414e..addb0568c1af 100644
+--- a/drivers/gpu/drm/bochs/bochs_drv.c
++++ b/drivers/gpu/drm/bochs/bochs_drv.c
+@@ -23,7 +23,6 @@ static void bochs_unload(struct drm_device *dev)
+ 
+ 	bochs_kms_fini(bochs);
+ 	bochs_mm_fini(bochs);
+-	bochs_hw_fini(dev);
+ 	kfree(bochs);
+ 	dev->dev_private = NULL;
+ }
+@@ -69,6 +68,7 @@ static struct drm_driver bochs_driver = {
+ 	.major			= 1,
+ 	.minor			= 0,
+ 	DRM_GEM_VRAM_DRIVER,
++	.release                = bochs_unload,
+ };
+ 
+ /* ---------------------------------------------------------------------- */
+@@ -148,9 +148,9 @@ static void bochs_pci_remove(struct pci_dev *pdev)
+ {
+ 	struct drm_device *dev = pci_get_drvdata(pdev);
+ 
++	drm_dev_unplug(dev);
+ 	drm_atomic_helper_shutdown(dev);
+-	drm_dev_unregister(dev);
+-	bochs_unload(dev);
++	bochs_hw_fini(dev);
+ 	drm_dev_put(dev);
+ }
+ 
+diff --git a/drivers/gpu/drm/bochs/bochs_hw.c b/drivers/gpu/drm/bochs/bochs_hw.c
+index b615b7dfdd9d..952199cc0462 100644
+--- a/drivers/gpu/drm/bochs/bochs_hw.c
++++ b/drivers/gpu/drm/bochs/bochs_hw.c
+@@ -4,6 +4,7 @@
+ 
+ #include <linux/pci.h>
+ 
++#include <drm/drm_drv.h>
+ #include <drm/drm_fourcc.h>
+ 
+ #include "bochs.h"
+@@ -194,6 +195,8 @@ void bochs_hw_fini(struct drm_device *dev)
+ {
+ 	struct bochs_device *bochs = dev->dev_private;
+ 
++	/* TODO: shot down existing vram mappings */
++
+ 	if (bochs->mmio)
+ 		iounmap(bochs->mmio);
+ 	if (bochs->ioports)
+@@ -207,6 +210,11 @@ void bochs_hw_fini(struct drm_device *dev)
+ void bochs_hw_setmode(struct bochs_device *bochs,
+ 		      struct drm_display_mode *mode)
+ {
++	int idx;
++
++	if (!drm_dev_enter(bochs->dev, &idx))
++		return;
++
+ 	bochs->xres = mode->hdisplay;
+ 	bochs->yres = mode->vdisplay;
+ 	bochs->bpp = 32;
+@@ -232,11 +240,18 @@ void bochs_hw_setmode(struct bochs_device *bochs,
+ 
+ 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_ENABLE,
+ 			  VBE_DISPI_ENABLED | VBE_DISPI_LFB_ENABLED);
++
++	drm_dev_exit(idx);
+ }
+ 
+ void bochs_hw_setformat(struct bochs_device *bochs,
+ 			const struct drm_format_info *format)
+ {
++	int idx;
++
++	if (!drm_dev_enter(bochs->dev, &idx))
++		return;
++
+ 	DRM_DEBUG_DRIVER("format %c%c%c%c\n",
+ 			 (format->format >>  0) & 0xff,
+ 			 (format->format >>  8) & 0xff,
+@@ -256,13 +271,18 @@ void bochs_hw_setformat(struct bochs_device *bochs,
+ 			  __func__, format->format);
+ 		break;
+ 	}
++
++	drm_dev_exit(idx);
+ }
+ 
+ void bochs_hw_setbase(struct bochs_device *bochs,
+ 		      int x, int y, int stride, u64 addr)
+ {
+ 	unsigned long offset;
+-	unsigned int vx, vy, vwidth;
++	unsigned int vx, vy, vwidth, idx;
++
++	if (!drm_dev_enter(bochs->dev, &idx))
++		return;
+ 
+ 	bochs->stride = stride;
+ 	offset = (unsigned long)addr +
+@@ -277,4 +297,6 @@ void bochs_hw_setbase(struct bochs_device *bochs,
+ 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_VIRT_WIDTH, vwidth);
+ 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_X_OFFSET, vx);
+ 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_Y_OFFSET, vy);
++
++	drm_dev_exit(idx);
+ }
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.18.2
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
