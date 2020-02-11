@@ -1,74 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EAD5159C2E
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 23:28:25 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id A66A2159C32
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 23:29:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 4126620526;
-	Tue, 11 Feb 2020 22:28:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 38AF887356;
+	Tue, 11 Feb 2020 22:29:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LwEcfNWgIvRQ; Tue, 11 Feb 2020 22:28:22 +0000 (UTC)
+	with ESMTP id 4PCsXY9KvC04; Tue, 11 Feb 2020 22:29:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 3D9B220524;
-	Tue, 11 Feb 2020 22:28:22 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B1AD4879A3;
+	Tue, 11 Feb 2020 22:29:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 212E6C07FE;
-	Tue, 11 Feb 2020 22:28:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8F4FBC07FE;
+	Tue, 11 Feb 2020 22:29:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 01EFDC07FE
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DE17FC07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:28:19 +0000 (UTC)
+ Tue, 11 Feb 2020 22:29:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id DF75785533
+ by fraxinus.osuosl.org (Postfix) with ESMTP id CC69C82DC4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:28:19 +0000 (UTC)
+ Tue, 11 Feb 2020 22:29:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TfJkUj98FVLX
+ with ESMTP id vTFut70un2wk
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:28:19 +0000 (UTC)
+ Tue, 11 Feb 2020 22:29:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 7C57184D11
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id BB22B823E6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:28:19 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
- [209.85.221.52])
+ Tue, 11 Feb 2020 22:29:38 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+ [209.85.128.51])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 10A4D217F4
+ by mail.kernel.org (Postfix) with ESMTPSA id 5465121569
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:28:19 +0000 (UTC)
+ Tue, 11 Feb 2020 22:29:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581460099;
- bh=qr3w/Jk4E7ZCigNfuSnbve2ZaYJ6PJplvO36QBtgk3A=;
+ s=default; t=1581460178;
+ bh=KbBBWvLVK/nodTeKKBzWdDxesPO9rH86mdssi2OYvmE=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=NbhIRNqjUWMveUgY7a+SRNavuBLMaEJ0S2oXpbC09sQj8F1OxfAaPXKrzuWU3TF2O
- Mw+vNvdw9fNIzYXnERaAnsTNo8ZHS1QCAPy5Nvu8ouh1ktsRBH8DIULlWinJRU+cW+
- hVMAIhu2xjN3VS9wPKN+Ai4P976oR8rTNBaTMTcQ=
-Received: by mail-wr1-f52.google.com with SMTP id z3so14576821wru.3
+ b=DEpqbkvuTZXMkr63GM08gp5bKr12sFU+qQi9r5Zj4HWdj7aslzu8jgZSigrAe2eQU
+ RP6IiPQqnLnmgJBtQ8Sp0A5ySeD+z0EsIWHL/OXdxBcq/7M90Bi/UlGbpzm/2hPm0y
+ UnqVtWL9dY39uCU4ZBjxv6N+E6hI3lWhITd4TEe8=
+Received: by mail-wm1-f51.google.com with SMTP id p17so5740030wma.1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:28:18 -0800 (PST)
-X-Gm-Message-State: APjAAAVmW/hFCOBpTH/mXPL81ciy7uR0WZoV68ukLECXf8ZvvX61y7l3
- MuqUnyIpS87NzxqQFtS2w+/TszGkQQ846kMWtC9uzg==
-X-Google-Smtp-Source: APXvYqxuwxNAwq4kzXKENcWaHlU1Oo2EBlzHy1k0fYPvxMGCQYfMlvTgvb3+mfAmlPcL+PPn6IOa2/0gfWBtQFH5zR0=
-X-Received: by 2002:adf:a354:: with SMTP id d20mr10781683wrb.257.1581460097315; 
- Tue, 11 Feb 2020 14:28:17 -0800 (PST)
+ Tue, 11 Feb 2020 14:29:38 -0800 (PST)
+X-Gm-Message-State: APjAAAVNA3cIqmbz/Oqr4uZFGl3lxUnI6IibRu5vcMvnJs36IYVU32Ek
+ 0iiYfG8M3WupRClxE8SkZfQI44hYQHHq+6NC06/wsQ==
+X-Google-Smtp-Source: APXvYqxAXjknmXNrLHvDElSilQoVMSXHJMtigVdOl5IHhqhN4u1qCSPsaq5HYAeGjLH+qh9AEhijdGGotRqPNvYIFyc=
+X-Received: by 2002:a05:600c:2207:: with SMTP id
+ z7mr8217365wml.138.1581460176281; 
+ Tue, 11 Feb 2020 14:29:36 -0800 (PST)
 MIME-Version: 1.0
 References: <20200211135256.24617-1-joro@8bytes.org>
- <20200211135256.24617-20-joro@8bytes.org>
-In-Reply-To: <20200211135256.24617-20-joro@8bytes.org>
+ <20200211135256.24617-26-joro@8bytes.org>
+In-Reply-To: <20200211135256.24617-26-joro@8bytes.org>
 From: Andy Lutomirski <luto@kernel.org>
-Date: Tue, 11 Feb 2020 14:28:06 -0800
-X-Gmail-Original-Message-ID: <CALCETrWecBK7cqgLTB72mMYRs10R1e+rkZh9mnzRNJc0N=XU2Q@mail.gmail.com>
-Message-ID: <CALCETrWecBK7cqgLTB72mMYRs10R1e+rkZh9mnzRNJc0N=XU2Q@mail.gmail.com>
-Subject: Re: [PATCH 19/62] x86/sev-es: Add support for handling IOIO exceptions
+Date: Tue, 11 Feb 2020 14:29:24 -0800
+X-Gmail-Original-Message-ID: <CALCETrWryvrGoPD5zOVxVs3pk+WFfb287NV46Zw7Gz7FtNAHag@mail.gmail.com>
+Message-ID: <CALCETrWryvrGoPD5zOVxVs3pk+WFfb287NV46Zw7Gz7FtNAHag@mail.gmail.com>
+Subject: Re: [PATCH 25/62] x86/head/64: Install boot GDT
 To: Joerg Roedel <joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -97,19 +98,39 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On Tue, Feb 11, 2020 at 5:53 AM Joerg Roedel <joro@8bytes.org> wrote:
 >
-> From: Tom Lendacky <thomas.lendacky@amd.com>
+> From: Joerg Roedel <jroedel@suse.de>
 >
-> Add support for decoding and handling #VC exceptions for IOIO events.
+> Handling exceptions during boot requires a working GDT. The kernel GDT
+> is not yet ready for use, so install a temporary boot GDT.
 >
-> Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-> [ jroedel@suse.de: Adapted code to #VC handling framework ]
-> Co-developed-by: Joerg Roedel <jroedel@suse.de>
 > Signed-off-by: Joerg Roedel <jroedel@suse.de>
+> ---
+>  arch/x86/kernel/head_64.S | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+>
+> diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+> index 4bbc770af632..5a3cde971cb7 100644
+> --- a/arch/x86/kernel/head_64.S
+> +++ b/arch/x86/kernel/head_64.S
+> @@ -72,6 +72,20 @@ SYM_CODE_START_NOALIGN(startup_64)
+>         /* Set up the stack for verify_cpu(), similar to initial_stack below */
+>         leaq    (__end_init_task - SIZEOF_PTREGS)(%rip), %rsp
+>
+> +       /* Setup boot GDT descriptor and load boot GDT */
+> +       leaq    boot_gdt(%rip), %rax
+> +       movq    %rax, boot_gdt_base(%rip)
+> +       lgdt    boot_gdt_descr(%rip)
+> +
+> +       /* GDT loaded - switch to __KERNEL_CS so IRET works reliably */
+> +       pushq   $__KERNEL_CS
+> +       leaq    .Lon_kernel_cs(%rip), %rax
+> +       pushq   %rax
+> +       lretq
+> +
+> +.Lon_kernel_cs:
+> +       UNWIND_HINT_EMPTY
 
-It would be nice if this could reuse the existing in-kernel
-instruction decoder.  Is there some reason it can't?
-
---Andy
+I would suggest fixing at least SS as well.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
