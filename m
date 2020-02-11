@@ -1,76 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF682159062
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:52:33 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93644159081
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 14:53:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 73210860FF;
-	Tue, 11 Feb 2020 13:52:32 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 42C30204D3;
+	Tue, 11 Feb 2020 13:53:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PeDtam6ytGq8; Tue, 11 Feb 2020 13:52:31 +0000 (UTC)
+	with ESMTP id BsgjQl-8Bp97; Tue, 11 Feb 2020 13:53:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D572885C10;
-	Tue, 11 Feb 2020 13:52:31 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4EB23204F4;
+	Tue, 11 Feb 2020 13:53:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C85FAC07FE;
-	Tue, 11 Feb 2020 13:52:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3425BC07FE;
+	Tue, 11 Feb 2020 13:53:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 47B8CC07FE
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6D3C9C1D89
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:52:30 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 43B3686E5B
+ by whitealder.osuosl.org (Postfix) with ESMTP id 432EA86759
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:52:30 +0000 (UTC)
+ Tue, 11 Feb 2020 13:53:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EsBaKLKdxPkO
+ with ESMTP id iZK3wbFh-DZs
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:52:29 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 6D25386C82
+ Tue, 11 Feb 2020 13:53:30 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id B0BDE86456
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 13:52:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581429148;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc; bh=o2XF+6S9QP9MMONzva7MUWo1VqNBPmt53WQKr9NpEek=;
- b=YxQ7ZaN7L8ohZIj+uyV8HP0bfWLi3q/G3snJXSjHzXBso+IGzUu77LuPFJXaFVQ90Y3SR0
- xzxNFIZBAJ73fb61CYN4vUUzTMuqTRSLwLj6WprmfWoEQjwo2NTYLuCWuZpCGcAgFnx8Vo
- NBMG+SNO8OUK9CfU8c9mt4CGED9WqAM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-329-o7wJ414CP6SyQ53u_9hlhA-1; Tue, 11 Feb 2020 08:52:24 -0500
-X-MC-Unique: o7wJ414CP6SyQ53u_9hlhA-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E5A2F100726A;
- Tue, 11 Feb 2020 13:52:22 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-112.ams2.redhat.com
- [10.36.116.112])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8E95B26FB6;
- Tue, 11 Feb 2020 13:52:19 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 90E0717447; Tue, 11 Feb 2020 14:52:18 +0100 (CET)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v4] drm/bochs: add drm_driver.release callback.
-Date: Tue, 11 Feb 2020 14:52:18 +0100
-Message-Id: <20200211135218.22871-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- daniel@ffwll.ch, "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>
+ Tue, 11 Feb 2020 13:53:23 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id 967DDE29; Tue, 11 Feb 2020 14:53:11 +0100 (CET)
+From: Joerg Roedel <joro@8bytes.org>
+To: x86@kernel.org
+Subject: [PATCH 25/62] x86/head/64: Install boot GDT
+Date: Tue, 11 Feb 2020 14:52:19 +0100
+Message-Id: <20200211135256.24617-26-joro@8bytes.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200211135256.24617-1-joro@8bytes.org>
+References: <20200211135256.24617-1-joro@8bytes.org>
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>, Joerg Roedel <jroedel@suse.de>,
+ Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>, Joerg Roedel <joro@8bytes.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,133 +73,62 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Call bochs_unload via drm_driver.release to make sure we release stuff
-when it is safe to do so.  Use drm_dev_{enter,exit,unplug} to avoid
-touching hardware after device removal.  Tidy up here and there.
+From: Joerg Roedel <jroedel@suse.de>
 
-v4: add changelog.
-v3: use drm_dev_*().
-v2: move hardware deinit to pci_remove().
+Handling exceptions during boot requires a working GDT. The kernel GDT
+is not yet ready for use, so install a temporary boot GDT.
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- drivers/gpu/drm/bochs/bochs_drv.c |  6 +++---
- drivers/gpu/drm/bochs/bochs_hw.c  | 24 +++++++++++++++++++++++-
- 2 files changed, 26 insertions(+), 4 deletions(-)
+ arch/x86/kernel/head_64.S | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
-index 10460878414e..addb0568c1af 100644
---- a/drivers/gpu/drm/bochs/bochs_drv.c
-+++ b/drivers/gpu/drm/bochs/bochs_drv.c
-@@ -23,7 +23,6 @@ static void bochs_unload(struct drm_device *dev)
+diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+index 4bbc770af632..5a3cde971cb7 100644
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -72,6 +72,20 @@ SYM_CODE_START_NOALIGN(startup_64)
+ 	/* Set up the stack for verify_cpu(), similar to initial_stack below */
+ 	leaq	(__end_init_task - SIZEOF_PTREGS)(%rip), %rsp
  
- 	bochs_kms_fini(bochs);
- 	bochs_mm_fini(bochs);
--	bochs_hw_fini(dev);
- 	kfree(bochs);
- 	dev->dev_private = NULL;
- }
-@@ -69,6 +68,7 @@ static struct drm_driver bochs_driver = {
- 	.major			= 1,
- 	.minor			= 0,
- 	DRM_GEM_VRAM_DRIVER,
-+	.release                = bochs_unload,
- };
- 
- /* ---------------------------------------------------------------------- */
-@@ -148,9 +148,9 @@ static void bochs_pci_remove(struct pci_dev *pdev)
- {
- 	struct drm_device *dev = pci_get_drvdata(pdev);
- 
-+	drm_dev_unplug(dev);
- 	drm_atomic_helper_shutdown(dev);
--	drm_dev_unregister(dev);
--	bochs_unload(dev);
-+	bochs_hw_fini(dev);
- 	drm_dev_put(dev);
- }
- 
-diff --git a/drivers/gpu/drm/bochs/bochs_hw.c b/drivers/gpu/drm/bochs/bochs_hw.c
-index b615b7dfdd9d..952199cc0462 100644
---- a/drivers/gpu/drm/bochs/bochs_hw.c
-+++ b/drivers/gpu/drm/bochs/bochs_hw.c
-@@ -4,6 +4,7 @@
- 
- #include <linux/pci.h>
- 
-+#include <drm/drm_drv.h>
- #include <drm/drm_fourcc.h>
- 
- #include "bochs.h"
-@@ -194,6 +195,8 @@ void bochs_hw_fini(struct drm_device *dev)
- {
- 	struct bochs_device *bochs = dev->dev_private;
- 
-+	/* TODO: shot down existing vram mappings */
++	/* Setup boot GDT descriptor and load boot GDT */
++	leaq	boot_gdt(%rip), %rax
++	movq	%rax, boot_gdt_base(%rip)
++	lgdt	boot_gdt_descr(%rip)
 +
- 	if (bochs->mmio)
- 		iounmap(bochs->mmio);
- 	if (bochs->ioports)
-@@ -207,6 +210,11 @@ void bochs_hw_fini(struct drm_device *dev)
- void bochs_hw_setmode(struct bochs_device *bochs,
- 		      struct drm_display_mode *mode)
- {
-+	int idx;
++	/* GDT loaded - switch to __KERNEL_CS so IRET works reliably */
++	pushq	$__KERNEL_CS
++	leaq	.Lon_kernel_cs(%rip), %rax
++	pushq	%rax
++	lretq
 +
-+	if (!drm_dev_enter(bochs->dev, &idx))
-+		return;
++.Lon_kernel_cs:
++	UNWIND_HINT_EMPTY
 +
- 	bochs->xres = mode->hdisplay;
- 	bochs->yres = mode->vdisplay;
- 	bochs->bpp = 32;
-@@ -232,11 +240,18 @@ void bochs_hw_setmode(struct bochs_device *bochs,
+ 	/* Sanitize CPU configuration */
+ 	call verify_cpu
  
- 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_ENABLE,
- 			  VBE_DISPI_ENABLED | VBE_DISPI_LFB_ENABLED);
-+
-+	drm_dev_exit(idx);
- }
+@@ -480,6 +494,18 @@ SYM_DATA_LOCAL(early_gdt_descr_base,	.quad INIT_PER_CPU_VAR(gdt_page))
+ SYM_DATA(phys_base, .quad 0x0)
+ EXPORT_SYMBOL(phys_base)
  
- void bochs_hw_setformat(struct bochs_device *bochs,
- 			const struct drm_format_info *format)
- {
-+	int idx;
++/* Boot GDT used when kernel addresses are not mapped yet */
++SYM_DATA_LOCAL(boot_gdt_descr,		.word boot_gdt_end - boot_gdt)
++SYM_DATA_LOCAL(boot_gdt_base,		.quad 0)
++SYM_DATA_START(boot_gdt)
++	.quad	0
++	.quad   0x00cf9a000000ffff      /* __KERNEL32_CS */
++	.quad   0x00af9a000000ffff      /* __KERNEL_CS */
++	.quad   0x00cf92000000ffff      /* __KERNEL_DS */
++	.quad   0x0080890000000000      /* TS descriptor */
++	.quad   0x0000000000000000      /* TS continued */
++SYM_DATA_END_LABEL(boot_gdt, SYM_L_LOCAL, boot_gdt_end)
 +
-+	if (!drm_dev_enter(bochs->dev, &idx))
-+		return;
-+
- 	DRM_DEBUG_DRIVER("format %c%c%c%c\n",
- 			 (format->format >>  0) & 0xff,
- 			 (format->format >>  8) & 0xff,
-@@ -256,13 +271,18 @@ void bochs_hw_setformat(struct bochs_device *bochs,
- 			  __func__, format->format);
- 		break;
- 	}
-+
-+	drm_dev_exit(idx);
- }
+ #include "../../x86/xen/xen-head.S"
  
- void bochs_hw_setbase(struct bochs_device *bochs,
- 		      int x, int y, int stride, u64 addr)
- {
- 	unsigned long offset;
--	unsigned int vx, vy, vwidth;
-+	unsigned int vx, vy, vwidth, idx;
-+
-+	if (!drm_dev_enter(bochs->dev, &idx))
-+		return;
- 
- 	bochs->stride = stride;
- 	offset = (unsigned long)addr +
-@@ -277,4 +297,6 @@ void bochs_hw_setbase(struct bochs_device *bochs,
- 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_VIRT_WIDTH, vwidth);
- 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_X_OFFSET, vx);
- 	bochs_dispi_write(bochs, VBE_DISPI_INDEX_Y_OFFSET, vy);
-+
-+	drm_dev_exit(idx);
- }
+ 	__PAGE_ALIGNED_BSS
 -- 
-2.18.2
+2.17.1
 
 _______________________________________________
 Virtualization mailing list
