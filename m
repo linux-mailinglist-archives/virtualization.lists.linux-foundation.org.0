@@ -2,74 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13018159C75
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 23:46:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45F1A159C81
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 23:47:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id B334F84647;
-	Tue, 11 Feb 2020 22:46:27 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E96E58458C;
+	Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id esPUQmyCQd6E; Tue, 11 Feb 2020 22:46:27 +0000 (UTC)
+	with ESMTP id F9LjPAA1cNrV; Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2DC2E8455D;
-	Tue, 11 Feb 2020 22:46:27 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7B7CC8455D;
+	Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 12754C07FE;
-	Tue, 11 Feb 2020 22:46:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6167DC07FE;
+	Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D785CC07FE
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B30ADC07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:46:25 +0000 (UTC)
+ Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C0C4187ADF
+ by whitealder.osuosl.org (Postfix) with ESMTP id 9F146838D9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:46:25 +0000 (UTC)
+ Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7QqNr3pNxUwi
+ with ESMTP id DPg+32zVrBGA
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:46:24 +0000 (UTC)
+ Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 9691987A60
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 378F28362E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:46:24 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
+ Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+ [209.85.128.52])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2C15E2465D
+ by mail.kernel.org (Postfix) with ESMTPSA id C9ABF2082F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:46:24 +0000 (UTC)
+ Tue, 11 Feb 2020 22:47:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581461184;
- bh=9zLCa0HTXZYtXrs14B/zXbcAM+4CsAnHeAwUWEaDQbU=;
+ s=default; t=1581461238;
+ bh=8846fUtTtG1u5dbmx7PL9BsCMN38k37aj9KG0jpXB20=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=tEpjSeql3DYLAsrYSUbprtMEMw4C1h4U9B78zjw3Qwnq3PhruIVJrZW8I5dlgSnI6
- RCIp+Vz9WgnqGblWwxpp3lhHSfdMKx+4t6P4j+em9epOg+/6e+14nf9fPQcXYTnq6P
- +BDN9l79+1oay7W+lPw8cHQ29YuY1J1E6/p9/UXQ=
-Received: by mail-wr1-f48.google.com with SMTP id c9so14624526wrw.8
+ b=GdwV6pGjP1QMeQ9Q+I0Qe8Mkkt024wfIE1N1G7WKC38gYA+19B9en7ircBqB3Qp2z
+ aTsU9i5zrWlfJ8kqZFxfKVJUIAmx7Pg3EQOCVPBYGv/sJ6X9dDOWNp6t9yy1e3HEV3
+ WirIIuFUK4W1YI+iIr6C5Y+vFyNAdx4AoCF1r1HA=
+Received: by mail-wm1-f52.google.com with SMTP id p17so5778662wma.1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:46:24 -0800 (PST)
-X-Gm-Message-State: APjAAAURK7pzCLX4mwn+jgay1hrWC/LRpFMVg/pKevmryROWdmyXSHHo
- 9OXF8vz+vx9tfftnt99q2qzO0lmusecxub6deB4GFQ==
-X-Google-Smtp-Source: APXvYqzDG+yy1Y1bMAL59wrUEfua8nCDrkCgCp14PmWU1Fe0rMfRwXKkAP8PvX1rVCDgCCV2/NPugHE40sdjEg/9qFs=
-X-Received: by 2002:adf:a354:: with SMTP id d20mr10846226wrb.257.1581461182628; 
- Tue, 11 Feb 2020 14:46:22 -0800 (PST)
+ Tue, 11 Feb 2020 14:47:17 -0800 (PST)
+X-Gm-Message-State: APjAAAUV+HpSlx0DZudLgRL6AnX4/jFP5AJZ8KJm8w+rKQ8IQvjhAX8K
+ 6gPrITpFJscOZ3pKF+4SrHZCF7BI0jCd25Z6xc6gYg==
+X-Google-Smtp-Source: APXvYqwLMFfykA+lJO+JrGtvf5tixGtL0MJifVbP6ZDH2lGW5WHYfqpx8LjEVH0nOFYUqKIXHF9G/pYzuXtkAs32brE=
+X-Received: by 2002:a7b:cbcf:: with SMTP id n15mr8161092wmi.21.1581461236365; 
+ Tue, 11 Feb 2020 14:47:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20200211135256.24617-1-joro@8bytes.org>
- <20200211135256.24617-36-joro@8bytes.org>
-In-Reply-To: <20200211135256.24617-36-joro@8bytes.org>
+ <20200211135256.24617-40-joro@8bytes.org>
+In-Reply-To: <20200211135256.24617-40-joro@8bytes.org>
 From: Andy Lutomirski <luto@kernel.org>
-Date: Tue, 11 Feb 2020 14:46:11 -0800
-X-Gmail-Original-Message-ID: <CALCETrWVYM_EQJYznNzPT0q2yYjUojCHYpHmdYoSCdqApitTrA@mail.gmail.com>
-Message-ID: <CALCETrWVYM_EQJYznNzPT0q2yYjUojCHYpHmdYoSCdqApitTrA@mail.gmail.com>
-Subject: Re: [PATCH 35/62] x86/sev-es: Setup per-cpu GHCBs for the runtime
- handler
+Date: Tue, 11 Feb 2020 14:47:05 -0800
+X-Gmail-Original-Message-ID: <CALCETrXnFr47OEDk8OYrHHW=1XNAQMUB=wPevhLM6ROnO6_Rog@mail.gmail.com>
+Message-ID: <CALCETrXnFr47OEDk8OYrHHW=1XNAQMUB=wPevhLM6ROnO6_Rog@mail.gmail.com>
+Subject: Re: [PATCH 39/62] x86/sev-es: Harden runtime #VC handler for
+ exceptions from user-space
 To: Joerg Roedel <joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -98,67 +98,13 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On Tue, Feb 11, 2020 at 5:53 AM Joerg Roedel <joro@8bytes.org> wrote:
 >
-> From: Tom Lendacky <thomas.lendacky@amd.com>
+> From: Joerg Roedel <jroedel@suse.de>
 >
-> The runtime handler needs a GHCB per CPU. Set them up and map them
-> unencrypted.
->
-> Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-> Signed-off-by: Joerg Roedel <jroedel@suse.de>
-> ---
->  arch/x86/include/asm/mem_encrypt.h |  2 ++
->  arch/x86/kernel/sev-es.c           | 25 ++++++++++++++++++++++++-
->  arch/x86/kernel/traps.c            |  3 +++
->  3 files changed, 29 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/x86/include/asm/mem_encrypt.h b/arch/x86/include/asm/mem_encrypt.h
-> index 6f61bb93366a..d48e7be9bb49 100644
-> --- a/arch/x86/include/asm/mem_encrypt.h
-> +++ b/arch/x86/include/asm/mem_encrypt.h
-> @@ -48,6 +48,7 @@ int __init early_set_memory_encrypted(unsigned long vaddr, unsigned long size);
->  void __init mem_encrypt_init(void);
->  void __init mem_encrypt_free_decrypted_mem(void);
->
-> +void __init encrypted_state_init_ghcbs(void);
->  bool sme_active(void);
->  bool sev_active(void);
->  bool sev_es_active(void);
-> @@ -71,6 +72,7 @@ static inline void __init sme_early_init(void) { }
->  static inline void __init sme_encrypt_kernel(struct boot_params *bp) { }
->  static inline void __init sme_enable(struct boot_params *bp) { }
->
-> +static inline void encrypted_state_init_ghcbs(void) { }
->  static inline bool sme_active(void) { return false; }
->  static inline bool sev_active(void) { return false; }
->  static inline bool sev_es_active(void) { return false; }
-> diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-> index 0e0b28477627..9a5530857db7 100644
-> --- a/arch/x86/kernel/sev-es.c
-> +++ b/arch/x86/kernel/sev-es.c
-> @@ -8,8 +8,11 @@
->   */
->
->  #include <linux/sched/debug.h> /* For show_regs() */
-> -#include <linux/kernel.h>
-> +#include <linux/percpu-defs.h>
-> +#include <linux/mem_encrypt.h>
->  #include <linux/printk.h>
-> +#include <linux/set_memory.h>
-> +#include <linux/kernel.h>
->  #include <linux/mm.h>
->
->  #include <asm/trap_defs.h>
-> @@ -28,6 +31,9 @@ struct ghcb boot_ghcb_page __bss_decrypted __aligned(PAGE_SIZE);
->   */
->  struct ghcb __initdata *boot_ghcb;
->
-> +/* Runtime GHCBs */
-> +static DEFINE_PER_CPU_DECRYPTED(struct ghcb, ghcb_page) __aligned(PAGE_SIZE);
+> Send SIGBUS to the user-space process that caused the #VC exception
+> instead of killing the machine. Also ratelimit the error messages so
+> that user-space can't flood the kernel log.
 
-Hmm.  This is a largeish amount of memory on large non-SEV-ES systems.
-Maybe store a pointer instead?  It would be even better if it could be
-DEFINE_PER_CPU like this but be discarded if we don't need it, but I
-don't think we have the infrastructure for that.
+What would cause this?  CPUID?  Something else?
 
 --Andy
 _______________________________________________
