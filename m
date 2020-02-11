@@ -1,75 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45F1A159C81
-	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 23:47:22 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA17A159C8E
+	for <lists.virtualization@lfdr.de>; Tue, 11 Feb 2020 23:50:48 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E96E58458C;
-	Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7E2CE2038D;
+	Tue, 11 Feb 2020 22:50:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id F9LjPAA1cNrV; Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
+	with ESMTP id hIqS2z9-dM5l; Tue, 11 Feb 2020 22:50:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7B7CC8455D;
-	Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 8630B204B8;
+	Tue, 11 Feb 2020 22:50:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6167DC07FE;
-	Tue, 11 Feb 2020 22:47:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 66064C07FE;
+	Tue, 11 Feb 2020 22:50:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B30ADC07FE
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 96CAAC07FE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
+ Tue, 11 Feb 2020 22:50:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 9F146838D9
+ by whitealder.osuosl.org (Postfix) with ESMTP id 910C78464A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
+ Tue, 11 Feb 2020 22:50:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DPg+32zVrBGA
+ with ESMTP id eLoyctbwcxir
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
+ Tue, 11 Feb 2020 22:50:43 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 378F28362E
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4B4FB81FB3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:47:18 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
+ Tue, 11 Feb 2020 22:50:43 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id C9ABF2082F
+ by mail.kernel.org (Postfix) with ESMTPSA id A68D620848
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 22:47:17 +0000 (UTC)
+ Tue, 11 Feb 2020 22:50:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581461238;
- bh=8846fUtTtG1u5dbmx7PL9BsCMN38k37aj9KG0jpXB20=;
+ s=default; t=1581461442;
+ bh=XV1MMCtQP/VUtU4M6HqgIW/VlmatPHwn+NBw1GlBfxE=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=GdwV6pGjP1QMeQ9Q+I0Qe8Mkkt024wfIE1N1G7WKC38gYA+19B9en7ircBqB3Qp2z
- aTsU9i5zrWlfJ8kqZFxfKVJUIAmx7Pg3EQOCVPBYGv/sJ6X9dDOWNp6t9yy1e3HEV3
- WirIIuFUK4W1YI+iIr6C5Y+vFyNAdx4AoCF1r1HA=
-Received: by mail-wm1-f52.google.com with SMTP id p17so5778662wma.1
+ b=II3HgMfbxENGctvOMjFOHZA/hx7inxXCtRZH3Te8aprNZIdAdJsUNs+3sM2QpGRvJ
+ CbVr+cNo2HNTPixkDuyq8S/Lq/nYAuAdr2NXdJJ8wDJ2S5PlEzMIoKrpOvqls66FUK
+ zzAtfoGqfwhafGxEuPDZBqnTgkd0DFqnEZHX/VYU=
+Received: by mail-wr1-f50.google.com with SMTP id y17so14600683wrh.5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Feb 2020 14:47:17 -0800 (PST)
-X-Gm-Message-State: APjAAAUV+HpSlx0DZudLgRL6AnX4/jFP5AJZ8KJm8w+rKQ8IQvjhAX8K
- 6gPrITpFJscOZ3pKF+4SrHZCF7BI0jCd25Z6xc6gYg==
-X-Google-Smtp-Source: APXvYqwLMFfykA+lJO+JrGtvf5tixGtL0MJifVbP6ZDH2lGW5WHYfqpx8LjEVH0nOFYUqKIXHF9G/pYzuXtkAs32brE=
-X-Received: by 2002:a7b:cbcf:: with SMTP id n15mr8161092wmi.21.1581461236365; 
- Tue, 11 Feb 2020 14:47:16 -0800 (PST)
+ Tue, 11 Feb 2020 14:50:42 -0800 (PST)
+X-Gm-Message-State: APjAAAWtTuXzV9Hy1l9UCzdf7RFJjpZ1Uw/nyw2yggq1zY2cNTDIDt5A
+ VmRXZ9wCSMaWbiwT8yrdDhzYydxsT0YLEQmq4U9uiA==
+X-Google-Smtp-Source: APXvYqzqJ1AlSDY2ZRDO05AMScFqgtaEyb1UuVzqt0WKNedpg8GD4u5J3WkIoYB+03YMjv6Q0h3O47HFfxgY+9Q1m0c=
+X-Received: by 2002:adf:a354:: with SMTP id d20mr10861134wrb.257.1581461441006; 
+ Tue, 11 Feb 2020 14:50:41 -0800 (PST)
 MIME-Version: 1.0
 References: <20200211135256.24617-1-joro@8bytes.org>
- <20200211135256.24617-40-joro@8bytes.org>
-In-Reply-To: <20200211135256.24617-40-joro@8bytes.org>
+ <20200211135256.24617-63-joro@8bytes.org>
+In-Reply-To: <20200211135256.24617-63-joro@8bytes.org>
 From: Andy Lutomirski <luto@kernel.org>
-Date: Tue, 11 Feb 2020 14:47:05 -0800
-X-Gmail-Original-Message-ID: <CALCETrXnFr47OEDk8OYrHHW=1XNAQMUB=wPevhLM6ROnO6_Rog@mail.gmail.com>
-Message-ID: <CALCETrXnFr47OEDk8OYrHHW=1XNAQMUB=wPevhLM6ROnO6_Rog@mail.gmail.com>
-Subject: Re: [PATCH 39/62] x86/sev-es: Harden runtime #VC handler for
- exceptions from user-space
+Date: Tue, 11 Feb 2020 14:50:29 -0800
+X-Gmail-Original-Message-ID: <CALCETrWV15+YTGsEwUHBSjT2MYappLANw4fQHjgZgei2UyV1JQ@mail.gmail.com>
+Message-ID: <CALCETrWV15+YTGsEwUHBSjT2MYappLANw4fQHjgZgei2UyV1JQ@mail.gmail.com>
+Subject: Re: [PATCH 62/62] x86/sev-es: Add NMI state tracking
 To: Joerg Roedel <joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -100,13 +99,27 @@ On Tue, Feb 11, 2020 at 5:53 AM Joerg Roedel <joro@8bytes.org> wrote:
 >
 > From: Joerg Roedel <jroedel@suse.de>
 >
-> Send SIGBUS to the user-space process that caused the #VC exception
-> instead of killing the machine. Also ratelimit the error messages so
-> that user-space can't flood the kernel log.
+> Keep NMI state in SEV-ES code so the kernel can re-enable NMIs for the
+> vCPU when it reaches IRET.
 
-What would cause this?  CPUID?  Something else?
+This patch is overcomplicated IMO.  Just do the magic incantation in C
+from do_nmi or from here:
 
---Andy
+        /*
+         * For ease of testing, unmask NMIs right away.  Disabled by
+         * default because IRET is very expensive.
+
+If you do the latter, you'll need to handle the case where the NMI
+came from user mode.
+
+The ideal solution is do_nmi, I think.
+
+if (static_cpu_has(X86_BUG_AMD_FORGOT_ABOUT_NMI))
+  sev_es_unmask_nmi();
+
+Feel free to use X86_FEATURE_SEV_ES instead :)
+
+--Andu
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
