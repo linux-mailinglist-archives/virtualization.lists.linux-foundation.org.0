@@ -1,111 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94BC815C85E
-	for <lists.virtualization@lfdr.de>; Thu, 13 Feb 2020 17:37:34 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05FB815CAC0
+	for <lists.virtualization@lfdr.de>; Thu, 13 Feb 2020 19:54:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E613B86E6E;
-	Thu, 13 Feb 2020 16:37:32 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 82E5187FF7;
+	Thu, 13 Feb 2020 18:54:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NtzzB-JOIevJ; Thu, 13 Feb 2020 16:37:32 +0000 (UTC)
+	with ESMTP id 6ZczRHXBLzL1; Thu, 13 Feb 2020 18:54:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1C05F86E89;
-	Thu, 13 Feb 2020 16:37:32 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D09BB87F71;
+	Thu, 13 Feb 2020 18:54:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EF7B4C0177;
-	Thu, 13 Feb 2020 16:37:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B67B5C0177;
+	Thu, 13 Feb 2020 18:54:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 10E7DC0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6994EC0177
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 16:37:30 +0000 (UTC)
+ Thu, 13 Feb 2020 18:54:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id EAB462151E
+ by whitealder.osuosl.org (Postfix) with ESMTP id 55736868B4
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 16:37:29 +0000 (UTC)
+ Thu, 13 Feb 2020 18:54:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OPiQ90ANZ0Kc
+ with ESMTP id XjRw2rgvgcJ1
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 16:37:28 +0000 (UTC)
+ Thu, 13 Feb 2020 18:54:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 5698A203F4
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
+ [209.85.166.194])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 2F66786879
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 16:37:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581611847;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eCOS1WTh+5YoNP9A08K63Y7Q0hZciqVvtfKTwj5+FFA=;
- b=QiiSNZV8CgV3DXWO0hH+xnL5Xmd8dddroY2mayeKCV3cOdxC2l9rRYKLca36OWjsvqvm22
- Yqea1Uu+oKuySDzJAJFhlm5u4ybIc4KCDrmnWgiV5Nn38hfxUlpcUSRTe+UY5gZzjgI0qp
- RmHUWQTKY5obHU5whpw6uj1qgk85Pqc=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-355-UZcL3rEYO8uRXOo_gSEIBg-1; Thu, 13 Feb 2020 11:37:21 -0500
-Received: by mail-qt1-f197.google.com with SMTP id o18so4001748qtt.19
+ Thu, 13 Feb 2020 18:54:33 +0000 (UTC)
+Received: by mail-il1-f194.google.com with SMTP id f70so5875881ill.6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 08:37:21 -0800 (PST)
+ Thu, 13 Feb 2020 10:54:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=bRoElX6JuGSJIj1nzDEkGjFX2yatSmfvyb68/4mK0og=;
+ b=KuFXWeFq0mYsucnXtEil4E8uJ/Xi9I8NFtS2D8Nq96ybHLSqVX3cFY/M54teo+zphX
+ 8Q+vqenQIgFsq8dmQMXw3ZmpsdTUAwPivpn+7DoDNxs33VG0bt4EL4MZs0CaLxuCCLQC
+ BvDCnlVtrNTMZosO8DIxQVYaG1bHk04W/CfOjWw0T26357uN55rpZ+etDHcZAOfWgF3y
+ PkKoBqpCWGE4usla6USJnXEklQP99luo5rprwn5EvvXoKO6HURlR+gMQJlQ/HNas5q7g
+ iuefhdaHNMK9XZkv7BVrGXJNMutQvtTgtkimqb5M0PlEZbHRmiy9DPXnQohL6Qkm4NYw
+ B8aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=eCOS1WTh+5YoNP9A08K63Y7Q0hZciqVvtfKTwj5+FFA=;
- b=gAH97rfL1XAVb2RYjgeGDRy+S6oalL0MS+7QtuVvI6AeiMxSyNlemF96AHgGNLulcH
- HF53cAVQNNp3qhqNKT7j82iSRve+wpA4Uad1VwY2TGM2B18as4mFz19t580Hd2xbONAY
- NkQBDklj6cJTB+RKBsDbi3/2H7X4bsBaJkZyZrnjXlQiiczV+TDR6Mvmvdp8B0qEZEOu
- jZuX54W4We3MbLBka3zZ6+FmI9vZ6446G30TRuI6qmCFqAwO8p6XKED8KzgN/VFq/ni1
- wjGjYyZCxnCyeeeKK1PQzF3IPhOAicl38P1hZlq4eAQOSswsh/wA194xf6KLzlfJGBoN
- 3exQ==
-X-Gm-Message-State: APjAAAXUthDnilyfIeD4HOL4uTipPdFeqjx//iXECfE6YNrd5lgWPqFX
- HgEECR9CoYKJ3x3p7G/6rNaahQ+DvEllH8xRVcOSxitPv1Tpz3AdUYhNAwO7v/850ogouVAXt6V
- Tkv4y8jLkWCQVTIuW0fZvUrJYPvd3AMawNaVjo80aBA==
-X-Received: by 2002:a05:620a:89e:: with SMTP id
- b30mr16113965qka.398.1581611841143; 
- Thu, 13 Feb 2020 08:37:21 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxvgU/Go4ObHDgoqZyrNkss5Y1hUf6NDyAxdpnATEPwDonOvDUWqewU3vmkE/IllyLsw5QSgg==
-X-Received: by 2002:a05:620a:89e:: with SMTP id
- b30mr16113944qka.398.1581611840852; 
- Thu, 13 Feb 2020 08:37:20 -0800 (PST)
-Received: from redhat.com (bzq-79-176-28-95.red.bezeqint.net. [79.176.28.95])
- by smtp.gmail.com with ESMTPSA id
- o187sm1541284qkf.26.2020.02.13.08.37.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Feb 2020 08:37:20 -0800 (PST)
-Date: Thu, 13 Feb 2020 11:37:16 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Anton Ivanov <anton.ivanov@cambridgegreys.com>
-Subject: Re: [PATCH] virtio: Work around frames incorrectly marked as gso
-Message-ID: <20200213113654-mutt-send-email-mst@kernel.org>
-References: <20191209104824.17059-1-anton.ivanov@cambridgegreys.com>
- <57230228-7030-c65f-a24f-910ca52bbe9e@cambridgegreys.com>
- <f78bfe6e-2ffc-3734-9618-470f1afea0c6@redhat.com>
- <918222d9-816a-be70-f8af-b8dfcb586240@cambridgegreys.com>
- <20200211053502-mutt-send-email-mst@kernel.org>
- <9547228b-aa93-f2b6-6fdc-8d33cde3716a@cambridgegreys.com>
- <20200213045937-mutt-send-email-mst@kernel.org>
- <94fb9656-99ee-a001-e428-9d76c3620e61@gmail.com>
- <20200213105010-mutt-send-email-mst@kernel.org>
- <35510da7-08f1-4aa5-c6d6-6bffbccaee0c@cambridgegreys.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=bRoElX6JuGSJIj1nzDEkGjFX2yatSmfvyb68/4mK0og=;
+ b=Q8gdzaGd3nK81BMQjU0p7Jb/ovhM7/YuDRxS7lRe9R42Lf4n7Zv1Q9hsEyoO9BqNQY
+ +/loF3NQyR1TrCmeROVGlObBBiiduCT/XrlIE2KxibI6FXNXAMrTgxOUNdf0Hpvx75qX
+ UfyD69fQMy4A9PSZ/3g30cwl8MT57MPO5fW280Osr0l/l2QolONxbxBkW7d5NSrqsiO9
+ +dyTjYgw9sOmPK6vtk4FOxPelLB2wtoSSdhRibE01YxSvfHo/g4AcOwZOkDfE6wJZO9W
+ 7A4cUGZehBOOqCadoiv8rUYVBm/TYYBT6x7oSC2GT1JP5GlYxpQUeFwVLseH2SlXy8fA
+ XTgg==
+X-Gm-Message-State: APjAAAXJMs3+bVMXFARgEjq9xp+VByxIv5MCDFuAJiJ5OBT3iIaeU7CV
+ eR5lSq9GvB76WH2jofW7LXoHarb3qLXYLai8G/g=
+X-Google-Smtp-Source: APXvYqx18+9TYWouF+4cCT1KAMj8Zzdhy8YqKGILwwfJrRQPAlQk3MAbpmKQbgGXEpXBEPCMFAe+q5YqXY1DKL8W66k=
+X-Received: by 2002:a92:9ac5:: with SMTP id c66mr18208254ill.232.1581620072485; 
+ Thu, 13 Feb 2020 10:54:32 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <35510da7-08f1-4aa5-c6d6-6bffbccaee0c@cambridgegreys.com>
-X-MC-Unique: UZcL3rEYO8uRXOo_gSEIBg-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: netdev@vger.kernel.org, linux-um@lists.infradead.org,
- Eric Dumazet <eric.dumazet@gmail.com>,
- virtualization@lists.linux-foundation.org
+References: <20200213132203.23441-1-kraxel@redhat.com>
+ <20200213132203.23441-4-kraxel@redhat.com>
+In-Reply-To: <20200213132203.23441-4-kraxel@redhat.com>
+From: Chia-I Wu <olvaffe@gmail.com>
+Date: Thu, 13 Feb 2020 10:54:21 -0800
+Message-ID: <CAPaKu7TgvBtgPuJaeesCUP4zxDOO=xxtun48P=bT0VBF4-dNFg@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] drm/virtio: batch resource creation
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Gurchetan Singh <gurchetansingh@chromium.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,114 +91,75 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVGh1LCBGZWIgMTMsIDIwMjAgYXQgMDQ6MjM6MjRQTSArMDAwMCwgQW50b24gSXZhbm92IHdy
-b3RlOgo+IAo+IE9uIDEzLzAyLzIwMjAgMTU6NTMsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToK
-PiA+IE9uIFRodSwgRmViIDEzLCAyMDIwIGF0IDA3OjQ0OjA2QU0gLTA4MDAsIEVyaWMgRHVtYXpl
-dCB3cm90ZToKPiA+ID4gCj4gPiA+IE9uIDIvMTMvMjAgMjowMCBBTSwgTWljaGFlbCBTLiBUc2ly
-a2luIHdyb3RlOgo+ID4gPiA+IE9uIFdlZCwgRmViIDEyLCAyMDIwIGF0IDA1OjM4OjA5UE0gKzAw
-MDAsIEFudG9uIEl2YW5vdiB3cm90ZToKPiA+ID4gPiA+IAo+ID4gPiA+ID4gT24gMTEvMDIvMjAy
-MCAxMDozNywgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+ID4gPiA+ID4gPiBPbiBUdWUsIEZl
-YiAxMSwgMjAyMCBhdCAwNzo0MjozN0FNICswMDAwLCBBbnRvbiBJdmFub3Ygd3JvdGU6Cj4gPiA+
-ID4gPiA+ID4gT24gMTEvMDIvMjAyMCAwMjo1MSwgSmFzb24gV2FuZyB3cm90ZToKPiA+ID4gPiA+
-ID4gPiA+IE9uIDIwMjAvMi8xMSDkuIrljYgxMjo1NSwgQW50b24gSXZhbm92IHdyb3RlOgo+ID4g
-PiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gT24gMDkvMTIvMjAxOSAxMDo0OCwgYW50
-b24uaXZhbm92QGNhbWJyaWRnZWdyZXlzLmNvbSB3cm90ZToKPiA+ID4gPiA+ID4gPiA+ID4gPiBG
-cm9tOiBBbnRvbiBJdmFub3YgPGFudG9uLml2YW5vdkBjYW1icmlkZ2VncmV5cy5jb20+Cj4gPiA+
-ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA+ID4gU29tZSBvZiB0aGUgZnJhbWVzIG1h
-cmtlZCBhcyBHU08gd2hpY2ggYXJyaXZlIGF0Cj4gPiA+ID4gPiA+ID4gPiA+ID4gdmlydGlvX25l
-dF9oZHJfZnJvbV9za2IoKSBoYXZlIG5vIEdTT19UWVBFLCBubwo+ID4gPiA+ID4gPiA+ID4gPiA+
-IGZyYWdtZW50cyAoZGF0YV9sZW4gPSAwKSBhbmQgbGVuZ3RoIHNpZ25pZmljYW50bHkgc2hvcnRl
-cgo+ID4gPiA+ID4gPiA+ID4gPiA+IHRoYW4gdGhlIE1UVSAoNzUyIGluIG15IGV4cGVyaW1lbnRz
-KS4KPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gPiBUaGlzIGlzIG9ic2Vy
-dmVkIG9uIHJhdyBzb2NrZXRzIHJlYWRpbmcgb2ZmIHZFdGggaW50ZXJmYWNlcwo+ID4gPiA+ID4g
-PiA+ID4gPiA+IGluIGFsbCA0LnggYW5kIDUueCBrZXJuZWxzIEkgdGVzdGVkLgo+ID4gPiA+ID4g
-PiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+IFRoZXNlIGZyYW1lcyBhcmUgcmVwb3J0ZWQg
-YXMgaW52YWxpZCB3aGlsZSB0aGV5IGFyZSBpbiBmYWN0Cj4gPiA+ID4gPiA+ID4gPiA+ID4gZ3Nv
-LWxlc3MgZnJhbWVzLgo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+IFRo
-aXMgcGF0Y2ggbWFya3MgdGhlIHZuZXQgaGVhZGVyIGFzIG5vLUdTTyBmb3IgdGhlbSBpbnN0ZWFk
-Cj4gPiA+ID4gPiA+ID4gPiA+ID4gb2YgcmVwb3J0aW5nIGl0IGFzIGludmFsaWQuCj4gPiA+ID4g
-PiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA+ID4gU2lnbmVkLW9mZi1ieTogQW50b24gSXZh
-bm92IDxhbnRvbi5pdmFub3ZAY2FtYnJpZGdlZ3JleXMuY29tPgo+ID4gPiA+ID4gPiA+ID4gPiA+
-IC0tLQo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgwqAgaW5jbHVkZS9saW51eC92aXJ0aW9fbmV0Lmgg
-fCA4ICsrKysrKy0tCj4gPiA+ID4gPiA+ID4gPiA+ID4gICDCoCAxIGZpbGUgY2hhbmdlZCwgNiBp
-bnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+
-ID4gPiA+ID4gPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3ZpcnRpb19uZXQuaCBiL2lu
-Y2x1ZGUvbGludXgvdmlydGlvX25ldC5oCj4gPiA+ID4gPiA+ID4gPiA+ID4gaW5kZXggMGQxZmU5
-Mjk3YWM2Li5kOTBkNWNmZjFiOWEgMTAwNjQ0Cj4gPiA+ID4gPiA+ID4gPiA+ID4gLS0tIGEvaW5j
-bHVkZS9saW51eC92aXJ0aW9fbmV0LmgKPiA+ID4gPiA+ID4gPiA+ID4gPiArKysgYi9pbmNsdWRl
-L2xpbnV4L3ZpcnRpb19uZXQuaAo+ID4gPiA+ID4gPiA+ID4gPiA+IEBAIC0xMTIsOCArMTEyLDEy
-IEBAIHN0YXRpYyBpbmxpbmUgaW50Cj4gPiA+ID4gPiA+ID4gPiA+ID4gdmlydGlvX25ldF9oZHJf
-ZnJvbV9za2IoY29uc3Qgc3RydWN0IHNrX2J1ZmYgKnNrYiwKPiA+ID4gPiA+ID4gPiA+ID4gPiAg
-IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGhkci0+Z3NvX3R5cGUgPSBWSVJUSU9fTkVUX0hE
-Ul9HU09fVENQVjQ7Cj4gPiA+ID4gPiA+ID4gPiA+ID4gICDCoMKgwqDCoMKgwqDCoMKgwqAgZWxz
-ZSBpZiAoc2luZm8tPmdzb190eXBlICYgU0tCX0dTT19UQ1BWNikKPiA+ID4gPiA+ID4gPiA+ID4g
-PiAgIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGhkci0+Z3NvX3R5cGUgPSBWSVJUSU9fTkVU
-X0hEUl9HU09fVENQVjY7Cj4gPiA+ID4gPiA+ID4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgIGVsc2UK
-PiA+ID4gPiA+ID4gPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZB
-TDsKPiA+ID4gPiA+ID4gPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgZWxzZSB7Cj4gPiA+ID4gPiA+
-ID4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHNrYi0+ZGF0YV9sZW4gPT0gMCkK
-PiA+ID4gPiA+ID4gPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGhkci0+
-Z3NvX3R5cGUgPSBWSVJUSU9fTkVUX0hEUl9HU09fTk9ORTsKPiA+ID4gPiA+ID4gPiA+ID4gPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbHNlCj4gPiA+ID4gPiA+ID4gPiA+ID4gK8KgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZBTDsKPiA+ID4gPiA+ID4gPiA+ID4g
-PiArwqDCoMKgwqDCoMKgwqAgfQo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgwqDCoMKgwqDCoMKgwqDC
-oMKgIGlmIChzaW5mby0+Z3NvX3R5cGUgJiBTS0JfR1NPX1RDUF9FQ04pCj4gPiA+ID4gPiA+ID4g
-PiA+ID4gICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBoZHItPmdzb190eXBlIHw9IFZJUlRJ
-T19ORVRfSERSX0dTT19FQ047Cj4gPiA+ID4gPiA+ID4gPiA+ID4gICDCoMKgwqDCoMKgIH0gZWxz
-ZQo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiBwaW5nLgo+ID4gPiA+ID4g
-PiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+IERvIHlvdSBtZWFuIGdzb19zaXplIGlzIHNldCBidXQg
-Z3NvX3R5cGUgaXMgbm90PyBMb29rcyBsaWtlIGEgYnVnCj4gPiA+ID4gPiA+ID4gPiBlbHNld2hl
-cmUuCj4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+IFRoYW5rcwo+ID4gPiA+ID4gPiA+
-ID4gCj4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiBZZXMuCj4gPiA+ID4gPiA+ID4gCj4g
-PiA+ID4gPiA+ID4gSSBjb3VsZCBub3QgdHJhY2UgaXQgd2hlcmUgaXQgaXMgY29taW5nIGZyb20u
-Cj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gSSBzZWUgaXQgd2hlbiBkb2luZyByZWN2bW1z
-ZyBvbiByYXcgc29ja2V0cyBpbiB0aGUgVU1MIHZlY3RvciBuZXR3b3JrCj4gPiA+ID4gPiA+ID4g
-ZHJpdmVycy4KPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gSSB0aGluayB3ZSBuZWVkIHRvIGZp
-bmQgdGhlIGN1bHByaXQgYW5kIGZpeCBpdCB0aGVyZSwgbG90cyBvZiBvdGhlciB0aGluZ3MKPiA+
-ID4gPiA+ID4gY2FuIGJyZWFrIG90aGVyd2lzZS4KPiA+ID4gPiA+ID4gSnVzdCBwcmludGluZyBv
-dXQgc2tiLT5kZXYtPm5hbWUgc2hvdWxkIGRvIHRoZSB0cmljaywgbm8/Cj4gPiA+ID4gPiBUaGUg
-cHJpbnRrIGluIHZpcnRpb19uZXRfaGRyX2Zyb21fc2tiIHNheXMgTlVMTC4KPiA+ID4gPiA+IAo+
-ID4gPiA+ID4gVGhhdCBpcyBwcm9iYWJseSBub3JtYWwgZm9yIGEgbG9jYWxseSBvcmlnaW5hdGVk
-IGZyYW1lLgo+ID4gPiA+ID4gCj4gPiA+ID4gPiBJIGNhbm5vdCByZXByb2R1Y2UgdGhpcyB3aXRo
-IG5ldHdvcmsgdHJhZmZpYyBieSB0aGUgd2F5IC0gaXQgaGFwcGVucyBvbmx5IGlmIHRoZSB0cmFm
-ZmljIGlzIGxvY2FsbHkgb3JpZ2luYXRlZCBvbiB0aGUgaG9zdC4KPiA+ID4gPiA+IAo+ID4gPiA+
-ID4gQSwKPiA+ID4gPiBPSyBzbyBpcyBpdCBjb2RlIGluIF9fdGNwX3RyYW5zbWl0X3NrYiB0aGF0
-IHNldHMgZ3NvX3NpemUgdG8gbm9uLW51bGwKPiA+ID4gPiB3aGVuIGdzb190eXBlIGlzIDA/Cj4g
-PiA+ID4gCj4gPiA+IENvcnJlY3Qgd2F5IHRvIGRldGVybWluZSBpZiBhIHBhY2tldCBpcyBhIGdz
-byBvbmUgaXMgYnkgbG9va2luZyBhdCBnc29fc2l6ZS4KPiA+ID4gVGhlbiBvbmx5IGl0IGlzIGxl
-Z2FsIGxvb2tpbmcgYXQgZ3NvX3R5cGUKPiA+ID4gCj4gPiA+IAo+ID4gPiBzdGF0aWMgaW5saW5l
-IGJvb2wgc2tiX2lzX2dzbyhjb25zdCBzdHJ1Y3Qgc2tfYnVmZiAqc2tiKQo+ID4gPiB7Cj4gPiA+
-ICAgICAgcmV0dXJuIHNrYl9zaGluZm8oc2tiKS0+Z3NvX3NpemU7Cj4gPiA+IH0KPiA+ID4gCj4g
-PiA+IC8qIE5vdGU6IFNob3VsZCBiZSBjYWxsZWQgb25seSBpZiBza2JfaXNfZ3NvKHNrYikgaXMg
-dHJ1ZSAqLwo+ID4gPiBzdGF0aWMgaW5saW5lIGJvb2wgc2tiX2lzX2dzb192Nihjb25zdCBzdHJ1
-Y3Qgc2tfYnVmZiAqc2tiKQo+ID4gPiAuLi4KPiA+ID4gCj4gPiA+IAo+ID4gPiBUaGVyZSBpcyBh
-YnNvbHV0ZWx5IG5vIHJlbGF0aW9uIGJldHdlZW4gR1NPIGFuZCBza2ItPmRhdGFfbGVuLCBza2Ig
-Y2FuIGJlIGxpbmVhcml6ZWQKPiA+ID4gZm9yIHZhcmlvdXMgb3J0aG9nb25hbCByZWFzb25zLgo+
-ID4gVGhlIHJlcG9ydGVkIHByb2JsZW0gaXMgdGhhdCB2aXJ0aW8gZ2V0cyBhIHBhY2tldCB3aGVy
-ZSBnc29fc2l6ZQo+ID4gaXMgITAgYnV0IGdzb190eXBlIGlzIDAuCj4gPiAKPiA+IEl0IGN1cnJl
-bnRseSBkcm9wcyB0aGVzZSBvbiB0aGUgYXNzdW1wdGlvbiB0aGF0IGl0J3Mgc29tZSB0eXBlCj4g
-PiBvZiBhIGdzbyBwYWNrZXQgaXQgZG9lcyBub3Qga25vdyBob3cgdG8gaGFuZGxlLgo+ID4gCj4g
-PiAKPiA+IFNvIHlvdSBhcmUgc2F5aW5nIGlmIHNrYl9pc19nc28gd2UgY2FuIHN0aWxsIGhhdmUg
-Z3NvX3R5cGUgc2V0IHRvIDAsCj4gPiBhbmQgdGhhdCdzIGFuIGV4cGVjdGVkIGNvbmZpZ3VyYXRp
-b24/Cj4gPiAKPiA+IFNvIHRoZSBwYXRjaCBzaG91bGQganVzdCBiZToKPiA+IAo+ID4gCj4gPiAt
-ICAgICAgICBpZiAoc2tiX2lzX2dzbyhza2IpKSB7Cj4gPiArICAgICAgICBpZiAoc2tiX2lzX2dz
-byhza2IpICYmIHNpbmZvLT5nc29fdHlwZSkgewo+ID4gCj4gWWVzLCBwcm92aWRlZCB0aGF0IHNr
-Yl9pc19nc28oc2tiKSBhbmQgc2luZm8tPmdzb190eXBlID09IDAgaXMgYSB2YWxpZCBzdGF0ZS4K
-PiAKPiBJIGFncmVlIHdpdGggSmFzb24sIHRoZXJlIG1heSBiZSBzb21ldGhpbmcgd3JvbmcgZ29p
-bmcgb24gaGVyZSBhbmQgd2UgbmVlZCB0byBmaW5kIHRoZSBzb3VyY2Ugd2hpY2ggY3JlYXRlcyB0
-aGVzZSBwYWNrZXRzLgo+IAo+IEEuCgpXZWxsIEVyaWMgd2lsbCBrbm93IGZvciBzdXJlLiBFcmlj
-IGlzIHNrYl9pc19nc28oc2tiKSBhbmQKc2luZm8tPmdzb190eXBlID09IDAgYSB2YWxpZCBzdGF0
-ZT8KCj4gPiAKPiA+ID8KPiA+IAo+ID4gCj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwo+ID4gbGludXgtdW0gbWFpbGluZyBsaXN0Cj4gPiBsaW51eC11
-bUBsaXN0cy5pbmZyYWRlYWQub3JnCj4gPiBodHRwOi8vbGlzdHMuaW5mcmFkZWFkLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL2xpbnV4LXVtCj4gCj4gLS0gCj4gQW50b24gUi4gSXZhbm92Cj4gQ2FtYnJp
-ZGdlZ3JleXMgTGltaXRlZC4gUmVnaXN0ZXJlZCBpbiBFbmdsYW5kLiBDb21wYW55IE51bWJlciAx
-MDI3MzY2MQo+IGh0dHBzOi8vd3d3LmNhbWJyaWRnZWdyZXlzLmNvbS8KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcg
-bGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xp
-c3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Thu, Feb 13, 2020 at 5:22 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> Move virtio_gpu_notify() to higher-level functions for
+> virtio_gpu_cmd_create_resource(), virtio_gpu_cmd_resource_create_3d()
+> and virtio_gpu_cmd_resource_attach_backing().
+>
+> virtio_gpu_object_create() will batch commands and notify only once when
+> creating a resource.
+>
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_object.c | 1 +
+>  drivers/gpu/drm/virtio/virtgpu_vq.c     | 3 ---
+>  2 files changed, 1 insertion(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+> index 8870ee23ff2b..65d6834d3c74 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+> @@ -224,6 +224,7 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
+>                 return ret;
+The virtqueue might become full without ever being notified on errors.
+We should notify on errors, or better yet, virtio_gpu_queue_ctrl_sgs
+should notify before waiting.
+
+
+>         }
+>
+> +       virtio_gpu_notify(vgdev);
+>         *bo_ptr = bo;
+>         return 0;
+>
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> index 9d4ca0fafa5f..778b7acf2f7f 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> @@ -514,7 +514,6 @@ void virtio_gpu_cmd_create_resource(struct virtio_gpu_device *vgdev,
+>         cmd_p->height = cpu_to_le32(params->height);
+>
+>         virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, fence);
+> -       virtio_gpu_notify(vgdev);
+>         bo->created = true;
+>  }
+>
+> @@ -643,7 +642,6 @@ virtio_gpu_cmd_resource_attach_backing(struct virtio_gpu_device *vgdev,
+>         vbuf->data_size = sizeof(*ents) * nents;
+>
+>         virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, fence);
+> -       virtio_gpu_notify(vgdev);
+>  }
+>
+>  static void virtio_gpu_cmd_get_display_info_cb(struct virtio_gpu_device *vgdev,
+> @@ -1010,7 +1008,6 @@ virtio_gpu_cmd_resource_create_3d(struct virtio_gpu_device *vgdev,
+>         cmd_p->flags = cpu_to_le32(params->flags);
+>
+>         virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, fence);
+> -       virtio_gpu_notify(vgdev);
+>
+>         bo->created = true;
+>  }
+> --
+> 2.18.2
+>
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
