@@ -1,90 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 170EF15C564
-	for <lists.virtualization@lfdr.de>; Thu, 13 Feb 2020 16:56:16 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A80C15C56F
+	for <lists.virtualization@lfdr.de>; Thu, 13 Feb 2020 16:59:51 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C0E26860E6;
-	Thu, 13 Feb 2020 15:56:14 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id AA9B683204;
+	Thu, 13 Feb 2020 15:59:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id u3X3xa_ttoCx; Thu, 13 Feb 2020 15:56:12 +0000 (UTC)
+	with ESMTP id rk3+2kiEiscx; Thu, 13 Feb 2020 15:59:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id EABCD860C9;
-	Thu, 13 Feb 2020 15:56:12 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id AA71081EE6;
+	Thu, 13 Feb 2020 15:59:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9B60C0177;
-	Thu, 13 Feb 2020 15:56:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78F68C0177;
+	Thu, 13 Feb 2020 15:59:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D4D8DC0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B2F58C0177
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 15:56:11 +0000 (UTC)
+ Thu, 13 Feb 2020 15:59:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id A3AC92034B
+ by hemlock.osuosl.org (Postfix) with ESMTP id AA29E86DAC
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 15:56:11 +0000 (UTC)
+ Thu, 13 Feb 2020 15:59:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6mhU+XOYy9kQ
+ with ESMTP id ycnydPG28QZ9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 15:56:11 +0000 (UTC)
+ Thu, 13 Feb 2020 15:59:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id F22552010C
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 08D4E8776C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 15:56:10 +0000 (UTC)
+ Thu, 13 Feb 2020 15:59:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581609369;
+ s=mimecast20190719; t=1581609584;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=4QU7uZENcxRUfqiM7K3X0/JKBCsiyDClS/c2wdkQrjg=;
- b=iGfuaLkI/y8+BEpVRyRZlE87BL6SRJSeHb2Tr8q1ysdaIGCy4kW668O2515iqRT36iaQQ9
- BlsfPyuvRqIwKvBl0U89I6Wo/ghJe+2NqwFUPiDu9d+fBqSxEV/Y6notrHJp2ybsTeoWwt
- g65IunAPEWL6p6qAE5TuD49n9aQ/Nmg=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-189-JrqZ-4D7MY2bFM0A5FTQWA-1; Thu, 13 Feb 2020 10:56:08 -0500
-Received: by mail-qt1-f199.google.com with SMTP id b5so3921062qtt.10
+ bh=YjESY5U+42gtKNpvEnDRTyHV+mXqJmvUAfYgrE7ny0Y=;
+ b=iEuMHtMDQJGT4zIAt7kB0SgAoxppHf57ldT9HPdxkD0viABA+r+tkEXUR26GeUm2ouQMxX
+ vUkUtdcFyX4wI0ATfy/TXFUoxc11eKOZpJAsUid0VKbVNl1tF78z1mQaMh5JdrbWqT7eGe
+ ssShISjdGZKx/w8/nlOOL0vz229uI1U=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-311-d_p3hWycNrWk5T4hF1WJBg-1; Thu, 13 Feb 2020 10:59:42 -0500
+Received: by mail-qk1-f199.google.com with SMTP id c77so4011663qke.7
  for <virtualization@lists.linux-foundation.org>;
- Thu, 13 Feb 2020 07:56:08 -0800 (PST)
+ Thu, 13 Feb 2020 07:59:42 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=4QU7uZENcxRUfqiM7K3X0/JKBCsiyDClS/c2wdkQrjg=;
- b=GwweHwUiMg0YMUP6x3ldDZVREXFRvfjt4aZtaWqnTOKJ6ll4Mj7HJvtXuU7WseLG8R
- RYX8cTCv09c6FbDOKypaWoWWZera3gqnuE6MFei5rp0dKns271Y+ou4BIJiBHwatzY1B
- MyPR8sKEIRygqC7q9gEpNgv+/9pj/G8j44aE8Ab9zqaRLUHS97EOwS91nONApscuiZJX
- ToADSPsNTSw84W5TW6/0f5x93bkfeJXImdAGRHeAqbCxOMphEHC3Yz+EHWWBOYG4gLO2
- rhrd41z24QlGIm4a2/SGIjlQb4IO0vY/pdmLF5WR6LVBpx3TGhvEImx1oXco5zLGCEB0
- rCmQ==
-X-Gm-Message-State: APjAAAXUwMmgIwNdxfIYJEIGAn++Phfl19t35T9Jcw51AzI9G5IH3euO
- yPu5QQFqM6cBHnThdpSes4GQi3s6Tl3uOFZ6qh6tqfw8RV4A0g6iR0jozByoPoZX3eITsOMGqrZ
- ryuWG7TyK/gHP/SOpLpz1pi4C504/68APm6px1OjjQw==
-X-Received: by 2002:a05:620a:2194:: with SMTP id
- g20mr12784473qka.227.1581609367941; 
- Thu, 13 Feb 2020 07:56:07 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwwTNCl9VOR9NXth70L4mcZCSxDTc7p2/DaWb9KB+fHDHe7f/L4NfXn5L3kN2ExjUDHM2UKSQ==
-X-Received: by 2002:a05:620a:2194:: with SMTP id
- g20mr12784445qka.227.1581609367767; 
- Thu, 13 Feb 2020 07:56:07 -0800 (PST)
+ bh=YjESY5U+42gtKNpvEnDRTyHV+mXqJmvUAfYgrE7ny0Y=;
+ b=L4ve4fFfQy9w8IURqp8ROhe9GhRIkiDLSpsIby4CDo6Ihn4/vO6BSJ3JViRAQpLajl
+ wRPVEBj/bxm/klDEGRtpETG7d2KLbk/Y1Ke6iwEbPR7kGCywKY6VAalFRgzkqA9wFpFy
+ C21H8dcsmlkXFmnyStSEW3nP+2j49HSI0K3rZWeSuU2xwnkRSc7A29UHYUoPbvnUIqe8
+ 1kMsTlhuzq+JSXtqdLrZv8nEdqzHU7NbShGuvTzDIkB8ft9MWQtQ4YpfsyngFxT5jtIs
+ BzK48lFpM8BO6f5ZefPaRk08WKS41DMXLzgBbVovTsz/mj3NIyGESXxlNiLJAqOnd2gv
+ QGIQ==
+X-Gm-Message-State: APjAAAXwwlC1amMkvQ0ae1//IyRZKkee9BHa2vWXdfqW/Nob3ktPpxhk
+ KK0BgPXCPljAhzBHa+XFCkKJXXqLn/ewRH5EOMPMSW9cy/cXkhPxArTmf/ZMLJ6Aq6j2iAZO4F0
+ kwalZbaiV+j25ginF7AZguvVVY4zn9LfgmqPGoJsyaA==
+X-Received: by 2002:a37:648c:: with SMTP id
+ y134mr12655822qkb.112.1581609582443; 
+ Thu, 13 Feb 2020 07:59:42 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwblUv4o0toVmVYl/HEAfrRzni+p8oGrxwrOCdC64VBDuyyCDEhJs814GPsgJHzOlkKNS9BGQ==
+X-Received: by 2002:a37:648c:: with SMTP id
+ y134mr12655792qkb.112.1581609582252; 
+ Thu, 13 Feb 2020 07:59:42 -0800 (PST)
 Received: from redhat.com (bzq-79-176-28-95.red.bezeqint.net. [79.176.28.95])
  by smtp.gmail.com with ESMTPSA id
- z21sm1523631qka.122.2020.02.13.07.56.02
+ b7sm1490925qka.67.2020.02.13.07.59.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Feb 2020 07:56:07 -0800 (PST)
-Date: Thu, 13 Feb 2020 10:56:00 -0500
+ Thu, 13 Feb 2020 07:59:41 -0800 (PST)
+Date: Thu, 13 Feb 2020 10:59:34 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Jason Gunthorpe <jgg@mellanox.com>
 Subject: Re: [PATCH V2 3/5] vDPA: introduce vDPA bus
-Message-ID: <20200213105425-mutt-send-email-mst@kernel.org>
+Message-ID: <20200213105743-mutt-send-email-mst@kernel.org>
 References: <20200210035608.10002-4-jasowang@redhat.com>
  <20200211134746.GI4271@mellanox.com>
  <cf7abcc9-f8ef-1fe2-248e-9b9028788ade@redhat.com>
@@ -97,7 +97,7 @@ References: <20200210035608.10002-4-jasowang@redhat.com>
  <20200213155154.GX4271@mellanox.com>
 MIME-Version: 1.0
 In-Reply-To: <20200213155154.GX4271@mellanox.com>
-X-MC-Unique: JrqZ-4D7MY2bFM0A5FTQWA-1
+X-MC-Unique: d_p3hWycNrWk5T4hF1WJBg-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -125,12 +125,13 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On Thu, Feb 13, 2020 at 11:51:54AM -0400, Jason Gunthorpe wrote:
-> > That bus is exactly what Greg KH proposed. There are other ways
-> > to solve this I guess but this bikeshedding is getting tiring.
-> 
-> This discussion was for a different goal, IMHO.
+> The 'class' is supposed to provide all the library functions to remove
+> this duplication. Instead of plugging the HW driver in via some bus
+> scheme every subsystem has its own 'ops' that the HW driver provides
+> to the subsystem's class via subsystem_register()
 
-Hmm couldn't find it anymore. What was the goal there in your opinion?
+Hmm I'm not familiar with subsystem_register. A grep didn't find it
+in the kernel either ...
 
 -- 
 MST
