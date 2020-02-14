@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA47C15E118
-	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 17:17:09 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CDBE15E1DB
+	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 17:21:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 64A3522128;
-	Fri, 14 Feb 2020 16:17:08 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 0530E87FCF;
+	Fri, 14 Feb 2020 16:21:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CeEvMgHkAobF; Fri, 14 Feb 2020 16:17:07 +0000 (UTC)
+	with ESMTP id WKnEmcbr1FSG; Fri, 14 Feb 2020 16:21:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 0E494221BB;
-	Fri, 14 Feb 2020 16:17:07 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 39F1187FCC;
+	Fri, 14 Feb 2020 16:21:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E58E7C0177;
-	Fri, 14 Feb 2020 16:17:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1284BC08A4;
+	Fri, 14 Feb 2020 16:21:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1D583C0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D9B76C0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 16:17:05 +0000 (UTC)
+ Fri, 14 Feb 2020 16:21:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 15F7185A22
+ by whitealder.osuosl.org (Postfix) with ESMTP id D5F4187654
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 16:17:05 +0000 (UTC)
+ Fri, 14 Feb 2020 16:21:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Amloni-xdrt3
+ with ESMTP id W1vFflUK1lfh
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 16:17:03 +0000 (UTC)
+ Fri, 14 Feb 2020 16:21:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5BDBC86521
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6BE778764A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 16:17:03 +0000 (UTC)
+ Fri, 14 Feb 2020 16:21:12 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 80DCA24687;
- Fri, 14 Feb 2020 16:17:02 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 912EC246A6;
+ Fri, 14 Feb 2020 16:21:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581697023;
- bh=HT5L93YR/HJ4vRRxxviyJu2IQ9sUF4CagOliP9ync7E=;
+ s=default; t=1581697272;
+ bh=YfbMbyD05HzVkW76A5HvNdRv/srdjyjD6bLEWEbPA+k=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gFXUr1g455LZhJpTcqKVWOSgafcWdkslbwZhu6EpwUd3Kg2FnuZ286KpxKepAxyHl
- 870cweNFSuYLPy2ZLmtLzTsB4+Vy4BXP461iukLGmNkzPyYY2hX9YaJpJu1T4HfEPS
- QBxvCxsuL8gESZPyft/I6W8/U/MQuNxi0OWbcqSs=
+ b=1n8lqmPqUIZZ+Z1mA1HfvcuS30Nk80zL25mleJnmdyD4EoAhmW9okYehhDbtOCumv
+ 6Kchp4RszsBj2xem8GSc+qvERinSATlG8cU0mFCh5y73+wHUYevSejG5J6iVq2Pae6
+ SH61ZlUYRa34AW5JRxcR8hduhbvPRlv6es46PQ+I=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 251/252] virtio_balloon: prevent pfn array
+Subject: [PATCH AUTOSEL 4.14 185/186] virtio_balloon: prevent pfn array
  overflow
-Date: Fri, 14 Feb 2020 11:11:46 -0500
-Message-Id: <20200214161147.15842-251-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 11:17:14 -0500
+Message-Id: <20200214161715.18113-185-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214161147.15842-1-sashal@kernel.org>
-References: <20200214161147.15842-1-sashal@kernel.org>
+In-Reply-To: <20200214161715.18113-1-sashal@kernel.org>
+References: <20200214161715.18113-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -98,10 +98,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+)
 
 diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
-index 14ac36ca8fbd3..1afcbef397ab7 100644
+index 499531608fa26..71970773aad13 100644
 --- a/drivers/virtio/virtio_balloon.c
 +++ b/drivers/virtio/virtio_balloon.c
-@@ -126,6 +126,8 @@ static void set_page_pfns(struct virtio_balloon *vb,
+@@ -132,6 +132,8 @@ static void set_page_pfns(struct virtio_balloon *vb,
  {
  	unsigned int i;
  
