@@ -2,130 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BEC215D944
-	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 15:19:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B63015DB79
+	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 16:49:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 05E4F88098;
-	Fri, 14 Feb 2020 14:19:13 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B64CF8810B;
+	Fri, 14 Feb 2020 15:49:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0E3B8aIJezpG; Fri, 14 Feb 2020 14:19:11 +0000 (UTC)
+	with ESMTP id CPWVYYQCV8ev; Fri, 14 Feb 2020 15:49:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D50738807B;
-	Fri, 14 Feb 2020 14:19:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 01A9A880B3;
+	Fri, 14 Feb 2020 15:49:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B11BDC0177;
-	Fri, 14 Feb 2020 14:19:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C2684C0177;
+	Fri, 14 Feb 2020 15:49:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F1DCEC0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C41CAC0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:19:10 +0000 (UTC)
+ Fri, 14 Feb 2020 15:49:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id D629E221C6
+ by whitealder.osuosl.org (Postfix) with ESMTP id B10ED8475F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:19:10 +0000 (UTC)
+ Fri, 14 Feb 2020 15:49:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id f04lZFUF0pme
+ with ESMTP id REwzibsSHvMk
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:19:09 +0000 (UTC)
+ Fri, 14 Feb 2020 15:49:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id 2C481221B7
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id D51FD84627
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:19:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581689947;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=oNH03EvOgl6h+WFlarzDLv0nKTUvAcwmTbYXpPA6LUo=;
- b=GRjvdc3GjPMDmcKeg8yOSeMbUKyNW/naMz1m1HTtV8pFIKW+I7SYG7U2gp6GwjvG2aRunK
- vRQdHOWOnszz0tO7TwU6tGT3wLYN2DhS+0l65uCgDtJWcptpij/+NnITaD1u5CCsmBVF6J
- j2wPiAkdzyG6ZSkKSR4o+0eY0xVbU0s=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-419-rw4yFl6tNCmwruHl-kdIqQ-1; Fri, 14 Feb 2020 09:19:03 -0500
-X-MC-Unique: rw4yFl6tNCmwruHl-kdIqQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ Fri, 14 Feb 2020 15:49:02 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5FA198018B0;
- Fri, 14 Feb 2020 14:19:01 +0000 (UTC)
-Received: from [10.36.118.137] (unknown [10.36.118.137])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 716F789A6F;
- Fri, 14 Feb 2020 14:18:56 +0000 (UTC)
-Subject: Re: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
- VIRTIO_BALLOON_F_DEFLATE_ON_OOM
-To: Michal Hocko <mhocko@kernel.org>
-References: <20200205163402.42627-1-david@redhat.com>
- <20200205163402.42627-4-david@redhat.com>
- <20200214140641.GB31689@dhcp22.suse.cz>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
- dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
- QZLQMzNE74ap+GDK0wnacPQFpcG1AE9RMq3aeErY5tujekBS32jfC/7AnH7I0v1v1TbbK3Gp
- XNeiN4QroO+5qaSr0ID2sz5jtBLRb15RMre27E1ImpaIv2Jw8NJgW0k/D1RyKCwaTsgRdwuK
- Kx/Y91XuSBdz0uOyU/S8kM1+ag0wvsGlpBVxRR/xw/E8M7TEwuCZQArqqTCmkG6HGcXFT0V9
- PXFNNgV5jXMQRwU0O/ztJIQqsE5LsUomE//bLwzj9IVsaQpKDqW6TAPjcdBDPLHvriq7kGjt
- WhVhdl0qEYB8lkBEU7V2Yb+SYhmhpDrti9Fq1EsmhiHSkxJcGREoMK/63r9WLZYI3+4W2rAc
- UucZa4OT27U5ZISjNg3Ev0rxU5UH2/pT4wJCfxwocmqaRr6UYmrtZmND89X0KigoFD/XSeVv
- jwBRNjPAubK9/k5NoRrYqztM9W6sJqrH8+UWZ1Idd/DdmogJh0gNC0+N42Za9yBRURfIdKSb
- B3JfpUqcWwE7vUaYrHG1nw54pLUoPG6sAA7Mehl3nd4pZUALHwARAQABtCREYXZpZCBIaWxk
- ZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT6JAlgEEwEIAEICGwMFCQlmAYAGCwkIBwMCBhUI
- AgkKCwQWAgMBAh4BAheAFiEEG9nKrXNcTDpGDfzKTd4Q9wD/g1oFAl3pImkCGQEACgkQTd4Q
- 9wD/g1o+VA//SFvIHUAvul05u6wKv/pIR6aICPdpF9EIgEU448g+7FfDgQwcEny1pbEzAmiw
- zAXIQ9H0NZh96lcq+yDLtONnXk/bEYWHHUA014A1wqcYNRY8RvY1+eVHb0uu0KYQoXkzvu+s
- Dncuguk470XPnscL27hs8PgOP6QjG4jt75K2LfZ0eAqTOUCZTJxA8A7E9+XTYuU0hs7QVrWJ
- jQdFxQbRMrYz7uP8KmTK9/Cnvqehgl4EzyRaZppshruKMeyheBgvgJd5On1wWq4ZUV5PFM4x
- II3QbD3EJfWbaJMR55jI9dMFa+vK7MFz3rhWOkEx/QR959lfdRSTXdxs8V3zDvChcmRVGN8U
- Vo93d1YNtWnA9w6oCW1dnDZ4kgQZZSBIjp6iHcA08apzh7DPi08jL7M9UQByeYGr8KuR4i6e
- RZI6xhlZerUScVzn35ONwOC91VdYiQgjemiVLq1WDDZ3B7DIzUZ4RQTOaIWdtXBWb8zWakt/
- ztGhsx0e39Gvt3391O1PgcA7ilhvqrBPemJrlb9xSPPRbaNAW39P8ws/UJnzSJqnHMVxbRZC
- Am4add/SM+OCP0w3xYss1jy9T+XdZa0lhUvJfLy7tNcjVG/sxkBXOaSC24MFPuwnoC9WvCVQ
- ZBxouph3kqc4Dt5X1EeXVLeba+466P1fe1rC8MbcwDkoUo65Ag0EVcufkQEQAOfX3n0g0fZz
- Bgm/S2zF/kxQKCEKP8ID+Vz8sy2GpDvveBq4H2Y34XWsT1zLJdvqPI4af4ZSMxuerWjXbVWb
- T6d4odQIG0fKx4F8NccDqbgHeZRNajXeeJ3R7gAzvWvQNLz4piHrO/B4tf8svmRBL0ZB5P5A
- 2uhdwLU3NZuK22zpNn4is87BPWF8HhY0L5fafgDMOqnf4guJVJPYNPhUFzXUbPqOKOkL8ojk
- CXxkOFHAbjstSK5Ca3fKquY3rdX3DNo+EL7FvAiw1mUtS+5GeYE+RMnDCsVFm/C7kY8c2d0G
- NWkB9pJM5+mnIoFNxy7YBcldYATVeOHoY4LyaUWNnAvFYWp08dHWfZo9WCiJMuTfgtH9tc75
- 7QanMVdPt6fDK8UUXIBLQ2TWr/sQKE9xtFuEmoQGlE1l6bGaDnnMLcYu+Asp3kDT0w4zYGsx
- 5r6XQVRH4+5N6eHZiaeYtFOujp5n+pjBaQK7wUUjDilPQ5QMzIuCL4YjVoylWiBNknvQWBXS
- lQCWmavOT9sttGQXdPCC5ynI+1ymZC1ORZKANLnRAb0NH/UCzcsstw2TAkFnMEbo9Zu9w7Kv
- AxBQXWeXhJI9XQssfrf4Gusdqx8nPEpfOqCtbbwJMATbHyqLt7/oz/5deGuwxgb65pWIzufa
- N7eop7uh+6bezi+rugUI+w6DABEBAAGJAiUEGAECAA8FAlXLn5ECGwwFCQlmAYAACgkQTd4Q
- 9wD/g1qA6w/+M+ggFv+JdVsz5+ZIc6MSyGUozASX+bmIuPeIecc9UsFRatc91LuJCKMkD9Uv
- GOcWSeFpLrSGRQ1Z7EMzFVU//qVs6uzhsNk0RYMyS0B6oloW3FpyQ+zOVylFWQCzoyyf227y
- GW8HnXunJSC+4PtlL2AY4yZjAVAPLK2l6mhgClVXTQ/S7cBoTQKP+jvVJOoYkpnFxWE9pn4t
- H5QIFk7Ip8TKr5k3fXVWk4lnUi9MTF/5L/mWqdyIO1s7cjharQCstfWCzWrVeVctpVoDfJWp
- 4LwTuQ5yEM2KcPeElLg5fR7WB2zH97oI6/Ko2DlovmfQqXh9xWozQt0iGy5tWzh6I0JrlcxJ
- ileZWLccC4XKD1037Hy2FLAjzfoWgwBLA6ULu0exOOdIa58H4PsXtkFPrUF980EEibUp0zFz
- GotRVekFAceUaRvAj7dh76cToeZkfsjAvBVb4COXuhgX6N4pofgNkW2AtgYu1nUsPAo+NftU
- CxrhjHtLn4QEBpkbErnXQyMjHpIatlYGutVMS91XTQXYydCh5crMPs7hYVsvnmGHIaB9ZMfB
- njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
- FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
-Organization: Red Hat GmbH
-Message-ID: <802f93b1-1588-bd2c-8238-c12ec7f7ae9e@redhat.com>
-Date: Fri, 14 Feb 2020 15:18:55 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ by mail.kernel.org (Postfix) with ESMTPSA id D75D22467D;
+ Fri, 14 Feb 2020 15:49:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1581695342;
+ bh=LoGvoCiSwR3JH5U7wIqySCdnVjdTGHmGcOe0AU87k4c=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=VDsu4/9ghICoHWW/RC1M0RQlTc+DZKSW0Skseg9WkI2xgh53ecYG53YYvrql3GRWf
+ rnFl0g5YmEvHHIP82hHG+ukmYmVFPhLGhmAcWQs8zYmqL/CY5pn9SuU5lLoQis2Yco
+ srUvEGrupaPUK4edvIov7P5Hs97A5gZ8uHmKII5g=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.5 006/542] drm/virtio: fix byteorder handling in
+ virtio_gpu_cmd_transfer_{from, to}_host_3d functions
+Date: Fri, 14 Feb 2020 10:39:58 -0500
+Message-Id: <20200214154854.6746-6-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
+References: <20200214154854.6746-1-sashal@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20200214140641.GB31689@dhcp22.suse.cz>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Tyler Sanderson <tysand@google.com>,
- linux-mm@kvack.org, Nadav Amit <namit@vmware.com>,
- David Rientjes <rientjes@google.com>,
- Alexander Duyck <alexander.h.duyck@linux.intel.com>
+X-stable: review
+X-Patchwork-Hint: Ignore
+Cc: Sasha Levin <sashal@kernel.org>, virtualization@lists.linux-foundation.org,
+ dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -142,42 +82,193 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
->> There was a report that this results in undesired side effects when
->> inflating the balloon to shrink the page cache. [1]
->> 	"When inflating the balloon against page cache (i.e. no free memory
->> 	 remains) vmscan.c will both shrink page cache, but also invoke the
->> 	 shrinkers -- including the balloon's shrinker. So the balloon
->> 	 driver allocates memory which requires reclaim, vmscan gets this
->> 	 memory by shrinking the balloon, and then the driver adds the
->> 	 memory back to the balloon. Basically a busy no-op."
->>
->> The name "deflate on OOM" makes it pretty clear when deflation should
->> happen - after other approaches to reclaim memory failed, not while
->> reclaiming. This allows to minimize the footprint of a guest - memory
->> will only be taken out of the balloon when really needed.
->>
->> Especially, a drop_slab() will result in the whole balloon getting
->> deflated - undesired.
-> 
-> Could you explain why some more? drop_caches shouldn't be really used in
-> any production workloads and if somebody really wants all the cache to
-> be dropped then why is balloon any different?
-> 
+From: Gerd Hoffmann <kraxel@redhat.com>
 
-Deflation should happen when the guest is out of memory, not when
-somebody thinks it's time to reclaim some memory. That's what the
-feature promised from the beginning: Only give the guest more memory in
-case it *really* needs more memory.
+[ Upstream commit 1dc3485247170d3b88a21cadee7f7da1f0433495 ]
 
-Deflate on oom, not deflate on reclaim/memory pressure. (that's what the
-report was all about)
+Be consistent with the rest of the code base.
+No functional change.
 
-A priority for shrinkers might be a step into the right direction.
+v2:
+ - fix sparse warnings for virtio_gpu_cmd_transfer_to_host_2d call.
+ - move convert_to_hw_box helper function.
 
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Gurchetan Singh <gurchetansingh@chromium.org>
+Link: http://patchwork.freedesktop.org/patch/msgid/20191023062539.11728-2-kraxel@redhat.com
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/virtio/virtgpu_drv.h   |  5 +++--
+ drivers/gpu/drm/virtio/virtgpu_ioctl.c | 22 +++-------------------
+ drivers/gpu/drm/virtio/virtgpu_vq.c    | 19 +++++++++++++++----
+ 3 files changed, 21 insertions(+), 25 deletions(-)
+
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+index 0b56ba005e253..eedae2a7b532d 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.h
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+@@ -38,6 +38,7 @@
+ #include <drm/drm_gem_shmem_helper.h>
+ #include <drm/drm_ioctl.h>
+ #include <drm/drm_probe_helper.h>
++#include <drm/virtgpu_drm.h>
+ 
+ #define DRIVER_NAME "virtio_gpu"
+ #define DRIVER_DESC "virtio GPU"
+@@ -312,13 +313,13 @@ void virtio_gpu_cmd_submit(struct virtio_gpu_device *vgdev,
+ void virtio_gpu_cmd_transfer_from_host_3d(struct virtio_gpu_device *vgdev,
+ 					  uint32_t ctx_id,
+ 					  uint64_t offset, uint32_t level,
+-					  struct virtio_gpu_box *box,
++					  struct drm_virtgpu_3d_box *box,
+ 					  struct virtio_gpu_object_array *objs,
+ 					  struct virtio_gpu_fence *fence);
+ void virtio_gpu_cmd_transfer_to_host_3d(struct virtio_gpu_device *vgdev,
+ 					uint32_t ctx_id,
+ 					uint64_t offset, uint32_t level,
+-					struct virtio_gpu_box *box,
++					struct drm_virtgpu_3d_box *box,
+ 					struct virtio_gpu_object_array *objs,
+ 					struct virtio_gpu_fence *fence);
+ void
+diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+index 9af1ec62434f2..205ec4abae2b9 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
++++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+@@ -33,17 +33,6 @@
+ 
+ #include "virtgpu_drv.h"
+ 
+-static void convert_to_hw_box(struct virtio_gpu_box *dst,
+-			      const struct drm_virtgpu_3d_box *src)
+-{
+-	dst->x = cpu_to_le32(src->x);
+-	dst->y = cpu_to_le32(src->y);
+-	dst->z = cpu_to_le32(src->z);
+-	dst->w = cpu_to_le32(src->w);
+-	dst->h = cpu_to_le32(src->h);
+-	dst->d = cpu_to_le32(src->d);
+-}
+-
+ static int virtio_gpu_map_ioctl(struct drm_device *dev, void *data,
+ 				struct drm_file *file_priv)
+ {
+@@ -304,7 +293,6 @@ static int virtio_gpu_transfer_from_host_ioctl(struct drm_device *dev,
+ 	struct virtio_gpu_fence *fence;
+ 	int ret;
+ 	u32 offset = args->offset;
+-	struct virtio_gpu_box box;
+ 
+ 	if (vgdev->has_virgl_3d == false)
+ 		return -ENOSYS;
+@@ -317,8 +305,6 @@ static int virtio_gpu_transfer_from_host_ioctl(struct drm_device *dev,
+ 	if (ret != 0)
+ 		goto err_put_free;
+ 
+-	convert_to_hw_box(&box, &args->box);
+-
+ 	fence = virtio_gpu_fence_alloc(vgdev);
+ 	if (!fence) {
+ 		ret = -ENOMEM;
+@@ -326,7 +312,7 @@ static int virtio_gpu_transfer_from_host_ioctl(struct drm_device *dev,
+ 	}
+ 	virtio_gpu_cmd_transfer_from_host_3d
+ 		(vgdev, vfpriv->ctx_id, offset, args->level,
+-		 &box, objs, fence);
++		 &args->box, objs, fence);
+ 	dma_fence_put(&fence->f);
+ 	return 0;
+ 
+@@ -345,7 +331,6 @@ static int virtio_gpu_transfer_to_host_ioctl(struct drm_device *dev, void *data,
+ 	struct drm_virtgpu_3d_transfer_to_host *args = data;
+ 	struct virtio_gpu_object_array *objs;
+ 	struct virtio_gpu_fence *fence;
+-	struct virtio_gpu_box box;
+ 	int ret;
+ 	u32 offset = args->offset;
+ 
+@@ -353,11 +338,10 @@ static int virtio_gpu_transfer_to_host_ioctl(struct drm_device *dev, void *data,
+ 	if (objs == NULL)
+ 		return -ENOENT;
+ 
+-	convert_to_hw_box(&box, &args->box);
+ 	if (!vgdev->has_virgl_3d) {
+ 		virtio_gpu_cmd_transfer_to_host_2d
+ 			(vgdev, offset,
+-			 box.w, box.h, box.x, box.y,
++			 args->box.w, args->box.h, args->box.x, args->box.y,
+ 			 objs, NULL);
+ 	} else {
+ 		ret = virtio_gpu_array_lock_resv(objs);
+@@ -372,7 +356,7 @@ static int virtio_gpu_transfer_to_host_ioctl(struct drm_device *dev, void *data,
+ 		virtio_gpu_cmd_transfer_to_host_3d
+ 			(vgdev,
+ 			 vfpriv ? vfpriv->ctx_id : 0, offset,
+-			 args->level, &box, objs, fence);
++			 args->level, &args->box, objs, fence);
+ 		dma_fence_put(&fence->f);
+ 	}
+ 	return 0;
+diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+index 74ad3bc3ebe83..9274c4063c701 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_vq.c
++++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+@@ -40,6 +40,17 @@
+ 			       + MAX_INLINE_CMD_SIZE		 \
+ 			       + MAX_INLINE_RESP_SIZE)
+ 
++static void convert_to_hw_box(struct virtio_gpu_box *dst,
++			      const struct drm_virtgpu_3d_box *src)
++{
++	dst->x = cpu_to_le32(src->x);
++	dst->y = cpu_to_le32(src->y);
++	dst->z = cpu_to_le32(src->z);
++	dst->w = cpu_to_le32(src->w);
++	dst->h = cpu_to_le32(src->h);
++	dst->d = cpu_to_le32(src->d);
++}
++
+ void virtio_gpu_ctrl_ack(struct virtqueue *vq)
+ {
+ 	struct drm_device *dev = vq->vdev->priv;
+@@ -965,7 +976,7 @@ virtio_gpu_cmd_resource_create_3d(struct virtio_gpu_device *vgdev,
+ void virtio_gpu_cmd_transfer_to_host_3d(struct virtio_gpu_device *vgdev,
+ 					uint32_t ctx_id,
+ 					uint64_t offset, uint32_t level,
+-					struct virtio_gpu_box *box,
++					struct drm_virtgpu_3d_box *box,
+ 					struct virtio_gpu_object_array *objs,
+ 					struct virtio_gpu_fence *fence)
+ {
+@@ -987,7 +998,7 @@ void virtio_gpu_cmd_transfer_to_host_3d(struct virtio_gpu_device *vgdev,
+ 	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_TRANSFER_TO_HOST_3D);
+ 	cmd_p->hdr.ctx_id = cpu_to_le32(ctx_id);
+ 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
+-	cmd_p->box = *box;
++	convert_to_hw_box(&cmd_p->box, box);
+ 	cmd_p->offset = cpu_to_le64(offset);
+ 	cmd_p->level = cpu_to_le32(level);
+ 
+@@ -997,7 +1008,7 @@ void virtio_gpu_cmd_transfer_to_host_3d(struct virtio_gpu_device *vgdev,
+ void virtio_gpu_cmd_transfer_from_host_3d(struct virtio_gpu_device *vgdev,
+ 					  uint32_t ctx_id,
+ 					  uint64_t offset, uint32_t level,
+-					  struct virtio_gpu_box *box,
++					  struct drm_virtgpu_3d_box *box,
+ 					  struct virtio_gpu_object_array *objs,
+ 					  struct virtio_gpu_fence *fence)
+ {
+@@ -1013,7 +1024,7 @@ void virtio_gpu_cmd_transfer_from_host_3d(struct virtio_gpu_device *vgdev,
+ 	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_TRANSFER_FROM_HOST_3D);
+ 	cmd_p->hdr.ctx_id = cpu_to_le32(ctx_id);
+ 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
+-	cmd_p->box = *box;
++	convert_to_hw_box(&cmd_p->box, box);
+ 	cmd_p->offset = cpu_to_le64(offset);
+ 	cmd_p->level = cpu_to_le32(level);
+ 
 -- 
-Thanks,
-
-David / dhildenb
+2.20.1
 
 _______________________________________________
 Virtualization mailing list
