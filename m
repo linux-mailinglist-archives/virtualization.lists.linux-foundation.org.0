@@ -1,134 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EE8C15D94F
-	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 15:20:45 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 200E48761B;
-	Fri, 14 Feb 2020 14:20:44 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id E1MlPfYwYCOm; Fri, 14 Feb 2020 14:20:42 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 69A8A86497;
-	Fri, 14 Feb 2020 14:20:42 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 481AAC0177;
-	Fri, 14 Feb 2020 14:20:42 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A3633C0177
- for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:20:40 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id A14E415D8FF
+	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 15:06:48 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 9109A86208
- for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:20:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 43C9E86448;
+	Fri, 14 Feb 2020 14:06:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EyCUCeYZQdC2; Fri, 14 Feb 2020 14:06:46 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id AC54886135;
+	Fri, 14 Feb 2020 14:06:46 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 80649C08A4;
+	Fri, 14 Feb 2020 14:06:46 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EF6CFC0177
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 14 Feb 2020 14:06:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id D943386ED5
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 14 Feb 2020 14:06:45 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6rV5JA25DKFa
+ with ESMTP id ftj7e1GymcPH
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:20:40 +0000 (UTC)
-X-Greylist: delayed 00:15:44 by SQLgrey-1.7.6
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com
- (mail-eopbgr00051.outbound.protection.outlook.com [40.107.0.51])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id A6103861F1
+ Fri, 14 Feb 2020 14:06:45 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+ [209.85.221.68])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id DD83886E9E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 14:20:39 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=i0pMDtLBPrI9DC47M7THOEaKRqQiUnwStk0X/FeJ8yZ1/dqcKT4tR/Hn403VMTKql/aHeMAbKDFZYtdIGs9BerNWityTorXjL+5OVxnjWLnhMjFFP3zeKlTrC5xQmZ8LrUGF99+I9aM4KxpAMk9X6ihEcm3MrxVcNUcCmnRRbZCOIgvOfS8q7tWn723qOorGONrEYDNl1l7qF3GOwEuxMAGf/tWr8V8nFJBSr3vLuNQPYOvVX0nbB3N7Skq1954awoxHXTa4emzS/Er96EA/+tmYBD5/1mvSubOlg4A9BZEYb/9KYklaioowfXfftPJhKXYoC9vRIrzzAMK1yUrtmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QCXeQN9UBfJaHleubs4Gqrirjj0nzTtb/7eL1LxX6mE=;
- b=TlE+wlwrfue5IPqguFNxLGz0gJdMOc+4T2PLB1GEbdIvAAS5v8n0wWeUqD4yfdxgpPkkm6zRr3jJFJbhkf0da/G4nFpelSPS+Awq+iOQSKkAk+ZIE+COd1eWPBfSm5Vh5UeNng37x0MiFheqx3AvLKgpoFtvO0bKO+fagNMMSymiYR5p22NoMBJzcoSuLB2+TXZeVgDVtKlti1x8La38L46KMioPmXuVn4fApQcj048jHyFMdV8b/WR7s9MkoBP4y2cqRQigop4qpReqGczkvd3Dh/yCcSBZb9QX0F8bJYTYp4Qx1nMNXTYO64NgA6sCGZyIIW5LL4pACE8yBE0tMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QCXeQN9UBfJaHleubs4Gqrirjj0nzTtb/7eL1LxX6mE=;
- b=VhdjAgPCgtuvOkuK/Yo+QxQ02AEBkVp5LRGXi5Zg5Ld4YQtAby7ZNFYk4slDiJI++gN8HbWWVoK00zlbsGAsB77c+GOv50MFVFoHe/iTymlVStyytBmdrpG1iob8iP245qM2RcQiIOpmYVZsjF+eN+6jWBsoWe+7mJrhVgtU73Q=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB6383.eurprd05.prod.outlook.com (20.179.25.147) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2729.22; Fri, 14 Feb 2020 14:04:49 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2729.025; Fri, 14 Feb 2020
- 14:04:49 +0000
-Date: Fri, 14 Feb 2020 10:04:46 -0400
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V2 3/5] vDPA: introduce vDPA bus
-Message-ID: <20200214140446.GD4271@mellanox.com>
-References: <20200212125108.GS4271@mellanox.com>
- <12775659-1589-39e4-e344-b7a2c792b0f3@redhat.com>
- <20200213134128.GV4271@mellanox.com>
- <ebaea825-5432-65e2-2ab3-720a8c4030e7@redhat.com>
- <20200213150542.GW4271@mellanox.com>
- <20200213103714-mutt-send-email-mst@kernel.org>
- <20200213155154.GX4271@mellanox.com>
- <20200213105425-mutt-send-email-mst@kernel.org>
- <20200213162407.GZ4271@mellanox.com>
- <5625f971-0455-6463-2c0a-cbca6a1f8271@redhat.com>
-Content-Disposition: inline
-In-Reply-To: <5625f971-0455-6463-2c0a-cbca6a1f8271@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-ClientProxiedBy: MN2PR05CA0054.namprd05.prod.outlook.com
- (2603:10b6:208:236::23) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+ Fri, 14 Feb 2020 14:06:44 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id w15so11042676wru.4
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 14 Feb 2020 06:06:44 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=4/DviMTLAqxW+NTVLow2DllCrC7LZyuIIAbFynwyDuk=;
+ b=kqjzPFfTWHUwtTl001+doLTojaPz7S1EdD8xYWxV65vw1JUN9OJ3bxrX7WuYKAYXeW
+ RiuqJLP8wmCPAdLFW2tufzNKGTh28foOuPKmWifW+iAUFH6eK1cDmgkGYW59KbhuRKvh
+ SdthQHW+e4stnMzrikdlVJfj3jWe8lxY/1dYIrz/WrmOhE49a2KDvfwS74b+S99jhAH6
+ jDFaltDw38ITDu1uRUA4VG5/jzOUxG5GcrKWaaTjN9vuPIIPMSa/Mj2/eq+6KrDEP9P6
+ K8WiUcLqr9Qm12jRnUWvkF0vbJjdM3lfMG0QTyg87NjKuEajSgBpwIPZdMLFpvpsyrMQ
+ jSXA==
+X-Gm-Message-State: APjAAAXlg/9O87NtB1TsvvHQqsNYLORUQYauGi9fK3UGAJ6RwCzYctPT
+ ciQ92wDF/qKP7n+fzn2AGAKbgjnq
+X-Google-Smtp-Source: APXvYqwqAYkIzT1DaMbqwJUULUwsZd6efBR4EsJ+5TXnBVtDKLC5Wnyppu4eiSOPMu38VVysNStKhA==
+X-Received: by 2002:adf:fa43:: with SMTP id y3mr4204102wrr.65.1581689203326;
+ Fri, 14 Feb 2020 06:06:43 -0800 (PST)
+Received: from localhost (ip-37-188-133-87.eurotel.cz. [37.188.133.87])
+ by smtp.gmail.com with ESMTPSA id q14sm7263208wrj.81.2020.02.14.06.06.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Feb 2020 06:06:42 -0800 (PST)
+Date: Fri, 14 Feb 2020 15:06:41 +0100
+From: Michal Hocko <mhocko@kernel.org>
+To: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
+ VIRTIO_BALLOON_F_DEFLATE_ON_OOM
+Message-ID: <20200214140641.GB31689@dhcp22.suse.cz>
+References: <20200205163402.42627-1-david@redhat.com>
+ <20200205163402.42627-4-david@redhat.com>
 MIME-Version: 1.0
-Received: from mlx.ziepe.ca (142.68.57.212) by
- MN2PR05CA0054.namprd05.prod.outlook.com (2603:10b6:208:236::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2729.16 via Frontend
- Transport; Fri, 14 Feb 2020 14:04:49 +0000
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
- <jgg@mellanox.com>)	id 1j2baI-0003O8-Co; Fri, 14 Feb 2020 10:04:46 -0400
-X-Originating-IP: [142.68.57.212]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: ee6bf460-08e1-4a4d-c9d4-08d7b156dab0
-X-MS-TrafficTypeDiagnostic: VI1PR05MB6383:|VI1PR05MB6383:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <VI1PR05MB6383F42679A87E141C9233E2CF150@VI1PR05MB6383.eurprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-Forefront-PRVS: 03137AC81E
-X-Forefront-Antispam-Report: SFV:NSPM;
- SFS:(10009020)(4636009)(39850400004)(376002)(346002)(396003)(366004)(136003)(199004)(189003)(81156014)(8676002)(36756003)(81166006)(7416002)(9786002)(9746002)(52116002)(1076003)(8936002)(2616005)(4326008)(66556008)(66476007)(66946007)(86362001)(478600001)(186003)(33656002)(5660300002)(316002)(2906002)(6916009)(26005)(21314003)(24400500001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB6383;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-Received-SPF: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: cJ9+JySpWJlUar2SxEoDedM+39ExJs/ZZtEY7Pn5GSZbmynuYFgJ99aOOO5ZAQmFafgxgXV4S40wTduGg+/+27SBF9h7c12zUzE8UOUNWG7PXhjPMXcR6SJPDg6xmDYJhNJ9DvhIXTUEAjb5InkVaPphx1bOJUf8HAtK8wqGhGnsQqJzz6XXssyo0BVzbAXxGOFvPEAJEWb8wU0Ftp7BCNdRRo2Zs/+jysKzUDZ3mxyrzPIdk6Mf/rLkt+cLCrjDPurbBu/Od5z+HgRQeul4zb6WlTxls9B2uANAfmy7YaNIvfh1MQ0Yqo4N3PviyRrdN9rAhElogVghgQO/a3FWOtegNUWBFK1fmghrlPTgRnaiggc3o4tA4vuBaHa0bInBcP/7acPDQSxJMzWw8+PPw+JVNJ6doErVi33TpQT/HHnCfld5zs2t6pm0E9LraHZQbmKa3jaCIwa1vv6aeespAwuLjWzstdzdi3xDANhyh9GcFuTqqWWMzIiIXOBirh0ptT140gI09nHHLUQstxrcIQ==
-X-MS-Exchange-AntiSpam-MessageData: GPnSDgFwapwTtSZdA8VOoAcYFFi/9y0eqxe5rQsIOvPsK8H/onipS3lUd4rhrN7XtwiyGFLS+j/6btmiZTxFMI+qYvkp4opoQTm8aOzF+Kfb+thRUGnBhsqA7XyFB/19/5g/FM+P9AZjfqAG/bzQfg==
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee6bf460-08e1-4a4d-c9d4-08d7b156dab0
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2020 14:04:49.2066 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /0vY7Z+de9Cn/ZbV2YQRpJIxWtTGqVP5PVcK7qdXD/UtzSFjfc7V/vhF/jZ+KIWagIbkXxVksR2zCe5AYG/QAQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6383
-Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
- mhabets@solarflare.com, virtualization@lists.linux-foundation.org,
- rob.miller@broadcom.com, lulu@redhat.com, hanand@xilinx.com, hch@infradead.org,
- eperezma@redhat.com, haotian.wang@sifive.com, shahafs@mellanox.com,
- parav@mellanox.com, jiri@mellanox.com, xiao.w.wang@intel.com,
- stefanha@redhat.com, zhihong.wang@intel.com, rdunlap@infradead.org,
- linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
- netdev@vger.kernel.org, lingshan.zhu@intel.com
+Content-Disposition: inline
+In-Reply-To: <20200205163402.42627-4-david@redhat.com>
+Cc: "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Tyler Sanderson <tysand@google.com>,
+ linux-mm@kvack.org, Nadav Amit <namit@vmware.com>,
+ David Rientjes <rientjes@google.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -145,91 +94,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 14, 2020 at 12:05:32PM +0800, Jason Wang wrote:
-
-> > The standard driver model is a 'bus' driver provides the HW access
-> > (think PCI level things), and a 'hw driver' attaches to the bus
-> > device,
+On Wed 05-02-20 17:34:02, David Hildenbrand wrote:
+> Commit 71994620bb25 ("virtio_balloon: replace oom notifier with shrinker")
+> changed the behavior when deflation happens automatically. Instead of
+> deflating when called by the OOM handler, the shrinker is used.
 > 
-> This is not true, kernel had already had plenty virtual bus where virtual
-> devices and drivers could be attached, besides mdev and virtio, you can see
-> vop, rpmsg, visorbus etc.
+> However, the balloon is not simply some slab cache that should be
+> shrunk when under memory pressure. The shrinker does not have a concept of
+> priorities, so this behavior cannot be configured.
 
-Sure, but those are not connecting HW into the kernel..
- 
-> > and instantiates a 'subsystem device' (think netdev, rdma,
-> > etc) using some per-subsystem XXX_register().
+Adding a priority to the shrinker doesn't sound like a big problem to
+me. Shrinkers already get shrink_control data structure already and
+priority could be added there.
+
+> There was a report that this results in undesired side effects when
+> inflating the balloon to shrink the page cache. [1]
+> 	"When inflating the balloon against page cache (i.e. no free memory
+> 	 remains) vmscan.c will both shrink page cache, but also invoke the
+> 	 shrinkers -- including the balloon's shrinker. So the balloon
+> 	 driver allocates memory which requires reclaim, vmscan gets this
+> 	 memory by shrinking the balloon, and then the driver adds the
+> 	 memory back to the balloon. Basically a busy no-op."
 > 
+> The name "deflate on OOM" makes it pretty clear when deflation should
+> happen - after other approaches to reclaim memory failed, not while
+> reclaiming. This allows to minimize the footprint of a guest - memory
+> will only be taken out of the balloon when really needed.
 > 
-> Well, if you go through virtio spec, we support ~20 types of different
-> devices. Classes like netdev and rdma are correct since they have a clear
-> set of semantics their own. But grouping network and scsi into a single
-> class looks wrong, that's the work of a virtual bus.
+> Especially, a drop_slab() will result in the whole balloon getting
+> deflated - undesired.
 
-rdma also has about 20 different types of things it supports on top of
-the generic ib_device.
+Could you explain why some more? drop_caches shouldn't be really used in
+any production workloads and if somebody really wants all the cache to
+be dropped then why is balloon any different?
 
-The central point in RDMA is the 'struct ib_device' which is a device
-class. You can discover all RDMA devices by looking in /sys/class/infiniband/
-
-It has an internal bus like thing (which probably should have been an
-actual bus, but this was done 15 years ago) which allows other
-subsystems to have drivers to match and bind their own drivers to the
-struct ib_device.
-
-So you'd have a chain like:
-
-struct pci_device -> struct ib_device -> [ib client bus thing] -> struct net_device
-
-And the various char devs are created by clients connecting to the
-ib_device and creating char devs on their own classes.
-
-Since ib_devices are multi-queue we can have all 20 devices running
-concurrently and there are various schemes to manage when the various
-things are created.
-
-> > The 'hw driver' pulls in
-> > functions from the 'subsystem' using a combination of callbacks and
-> > library-style calls so there is no code duplication.
-> 
-> The point is we want vDPA devices to be used by different subsystems, not
-> only vhost, but also netdev, blk, crypto (every subsystem that can use
-> virtio devices). That's why we introduce vDPA bus and introduce different
-> drivers on top.
-
-See the other mail, it seems struct virtio_device serves this purpose
-already, confused why a struct vdpa_device and another bus is being
-introduced
-
-> There're several examples that a bus is needed on top.
-> 
-> A good example is Mellanox TmFIFO driver which is a platform device driver
-> but register itself as a virtio device in order to be used by virito-console
-> driver on the virtio bus.
-
-How is that another bus? The platform bus is the HW bus, the TmFIFO is
-the HW driver, and virtio_device is the subsystem.
-
-This seems reasonable/normal so far..
-
-> But it's a pity that the device can not be used by userspace driver due to
-> the limitation of virito bus which is designed for kernel driver. That's why
-> vDPA bus is introduced which abstract the common requirements of both kernel
-> and userspace drivers which allow the a single HW driver to be used by
-> kernel drivers (and the subsystems on top) and userspace drivers.
-
-Ah! Maybe this is the source of all this strangeness - the userspace
-driver is something parallel to the struct virtio_device instead of
-being a consumer of it?? That certianly would mess up the driver model
-quite a lot.
-
-Then you want to add another bus to switch between vhost and struct
-virtio_device? But only for vdpa?
-
-But as you point out something like TmFIFO is left hanging. Seems like
-the wrong abstraction point..
-
-Jason
+-- 
+Michal Hocko
+SUSE Labs
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
