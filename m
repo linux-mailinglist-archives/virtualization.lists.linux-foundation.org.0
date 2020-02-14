@@ -1,131 +1,168 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66B7415D501
-	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 10:52:02 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C4A832010C;
-	Fri, 14 Feb 2020 09:52:00 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id d5KY9fR4nRTg; Fri, 14 Feb 2020 09:51:59 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 960D920341;
-	Fri, 14 Feb 2020 09:51:59 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 857DDC0177;
-	Fri, 14 Feb 2020 09:51:59 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6B894C0177
- for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 09:51:57 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0059B15D74E
+	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 13:23:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 55595863AE
- for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 09:51:57 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 98E8686422;
+	Fri, 14 Feb 2020 12:23:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rjvUSumew0NT; Fri, 14 Feb 2020 12:22:58 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9C32186375;
+	Fri, 14 Feb 2020 12:22:58 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 65F07C0177;
+	Fri, 14 Feb 2020 12:22:58 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6F813C0177
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 14 Feb 2020 12:22:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 5E2C887C41
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 14 Feb 2020 12:22:56 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pIxklPVyo-EU
+ with ESMTP id yZXPjBrHeDvu
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 09:51:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 7E7D38639F
+ Fri, 14 Feb 2020 12:22:54 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 4C31E85EE7
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 09:51:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581673915;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=UCpmE3zSutct5c301Bj6EydaHLm8A67eCLTCHfY8xdM=;
- b=KXIKN8B9qc7rTS+MnXUeSYmvO8g8LdgNvIqrAIpaRsPB2ue3DQVHZdx5xWuF3b4Il4w2FO
- bvwkCczw7U8SBeahjBGAxxLwjOEcl/vF+o44ogTnBUnutgnveSK//1egFxWZb+1AdzeKIX
- d5/KstroEFB/tRYhJl6h1Ppcy0cVHnc=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-386-Fa3mK3BoOs6irBcb9q9B3g-1; Fri, 14 Feb 2020 04:51:51 -0500
-X-MC-Unique: Fa3mK3BoOs6irBcb9q9B3g-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5450E8017CC;
- Fri, 14 Feb 2020 09:51:49 +0000 (UTC)
-Received: from [10.36.118.137] (unknown [10.36.118.137])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 955B35C13E;
- Fri, 14 Feb 2020 09:51:44 +0000 (UTC)
-Subject: Re: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
- VIRTIO_BALLOON_F_DEFLATE_ON_OOM
-To: linux-kernel@vger.kernel.org
-References: <20200205163402.42627-1-david@redhat.com>
- <20200205163402.42627-4-david@redhat.com>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <f31eff75-b328-de41-c2cc-e55471aa27d8@redhat.com>
-Date: Fri, 14 Feb 2020 10:51:43 +0100
+ Fri, 14 Feb 2020 12:22:54 +0000 (UTC)
+Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 01ECJO3X002334 for <virtualization@lists.linux-foundation.org>;
+ Fri, 14 Feb 2020 07:22:53 -0500
+Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2y4j8cvk77-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 14 Feb 2020 07:22:53 -0500
+Received: from localhost
+ by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <virtualization@lists.linux-foundation.org> from <borntraeger@de.ibm.com>; 
+ Fri, 14 Feb 2020 12:22:51 -0000
+Received: from b06avi18878370.portsmouth.uk.ibm.com (9.149.26.194)
+ by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Fri, 14 Feb 2020 12:22:48 -0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+ [9.149.105.62])
+ by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
+ id 01ECMlxl42729754
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 14 Feb 2020 12:22:47 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 98774AE057;
+ Fri, 14 Feb 2020 12:22:47 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 501FDAE056;
+ Fri, 14 Feb 2020 12:22:47 +0000 (GMT)
+Received: from oc7455500831.ibm.com (unknown [9.152.224.211])
+ by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Fri, 14 Feb 2020 12:22:47 +0000 (GMT)
+Subject: Re: vhost changes (batched) in linux-next after 12/13 trigger random
+ crashes in KVM guests after reboot
+To: =?UTF-8?Q?Eugenio_P=c3=a9rez?= <eperezma@redhat.com>
+References: <20200107042401-mutt-send-email-mst@kernel.org>
+ <CAJaqyWfngzP4d01B6+Sqt8FXN6jX7kGegjx8ie4no_1Er3igQA@mail.gmail.com>
+ <43a5dbaa-9129-e220-8483-45c60a82c945@de.ibm.com>
+ <e299afca8e22044916abbf9fbbd0bff6b0ee9e13.camel@redhat.com>
+ <4c3f70b7-723a-8b0f-ac49-babef1bcc180@de.ibm.com>
+ <50a79c3491ac483583c97df2fac29e2c3248fdea.camel@redhat.com>
+ <8fbbfb49-99d1-7fee-e713-d6d5790fe866@de.ibm.com>
+ <2364d0728c3bb4bcc0c13b591f774109a9274a30.camel@redhat.com>
+ <bb9fb726-306c-5330-05aa-a86bd1b18097@de.ibm.com>
+ <468983fad50a5e74a739f71487f0ea11e8d4dfd1.camel@redhat.com>
+ <2dc1df65-1431-3917-40e5-c2b12096e2a7@de.ibm.com>
+ <bd9c9b4d99abd20d5420583af5a4954ea1cf4618.camel@redhat.com>
+ <e11ba53c-a5fa-0518-2e06-9296897ed529@de.ibm.com>
+ <CAJaqyWfJFArAdpOwehTn5ci-frqai+pazGgcn2VvQSebqGRVtg@mail.gmail.com>
+ <80520391-d90d-e10d-a107-7a18f2810900@de.ibm.com>
+ <dabe59fe-e068-5935-f49e-bc1da3d8471a@de.ibm.com>
+ <35dca16b9a85eb203f35d3e55dcaa9d0dae5a922.camel@redhat.com>
+From: Christian Borntraeger <borntraeger@de.ibm.com>
+Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
+ 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
+ nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
+Date: Fri, 14 Feb 2020 13:22:47 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200205163402.42627-4-david@redhat.com>
+In-Reply-To: <35dca16b9a85eb203f35d3e55dcaa9d0dae5a922.camel@redhat.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: "Michael S . Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org, Tyler Sanderson <tysand@google.com>,
- linux-mm@kvack.org, Nadav Amit <namit@vmware.com>,
- David Rientjes <rientjes@google.com>,
- Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- Michal Hocko <mhocko@kernel.org>
+X-TM-AS-GCONF: 00
+x-cbid: 20021412-0016-0000-0000-000002E6C505
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20021412-0017-0000-0000-00003349CC77
+Message-Id: <3144806d-436e-86a1-2e29-74f7027f7f0b@de.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-02-14_03:2020-02-12,
+ 2020-02-14 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0
+ mlxlogscore=999 clxscore=1015 impostorscore=0 mlxscore=0 adultscore=0
+ lowpriorityscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2001150001 definitions=main-2002140102
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -137,72 +174,42 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 05.02.20 17:34, David Hildenbrand wrote:
-> Commit 71994620bb25 ("virtio_balloon: replace oom notifier with shrinker")
-> changed the behavior when deflation happens automatically. Instead of
-> deflating when called by the OOM handler, the shrinker is used.
-> 
-> However, the balloon is not simply some slab cache that should be
-> shrunk when under memory pressure. The shrinker does not have a concept of
-> priorities, so this behavior cannot be configured.
-> 
-> There was a report that this results in undesired side effects when
-> inflating the balloon to shrink the page cache. [1]
-> 	"When inflating the balloon against page cache (i.e. no free memory
-> 	 remains) vmscan.c will both shrink page cache, but also invoke the
-> 	 shrinkers -- including the balloon's shrinker. So the balloon
-> 	 driver allocates memory which requires reclaim, vmscan gets this
-> 	 memory by shrinking the balloon, and then the driver adds the
-> 	 memory back to the balloon. Basically a busy no-op."
-> 
-> The name "deflate on OOM" makes it pretty clear when deflation should
-> happen - after other approaches to reclaim memory failed, not while
-> reclaiming. This allows to minimize the footprint of a guest - memory
-> will only be taken out of the balloon when really needed.
-> 
-> Especially, a drop_slab() will result in the whole balloon getting
-> deflated - undesired. While handling it via the OOM handler might not be
-> perfect, it keeps existing behavior. If we want a different behavior, then
-> we need a new feature bit and document it properly (although, there should
-> be a clear use case and the intended effects should be well described).
-> 
-> Keep using the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT, because
-> this has no such side effects. Always register the shrinker with
-> VIRTIO_BALLOON_F_FREE_PAGE_HINT now. We are always allowed to reuse free
-> pages that are still to be processed by the guest. The hypervisor takes
-> care of identifying and resolving possible races between processing a
-> hinting request and the guest reusing a page.
-> 
-> In contrast to pre commit 71994620bb25 ("virtio_balloon: replace oom
-> notifier with shrinker"), don't add a moodule parameter to configure the
-> number of pages to deflate on OOM. Can be re-added if really needed.
-> Also, pay attention that leak_balloon() returns the number of 4k pages -
-> convert it properly in virtio_balloon_oom_notify().
-> 
-> Note1: using the OOM handler is frowned upon, but it really is what we
->        need for this feature.
-> 
-> Note2: without VIRTIO_BALLOON_F_MUST_TELL_HOST (iow, always with QEMU) we
->        could actually skip sending deflation requests to our hypervisor,
->        making the OOM path *very* simple. Besically freeing pages and
->        updating the balloon. If the communication with the host ever
->        becomes a problem on this call path.
-> 
-
-@Michael, how to proceed with this?
-
-
--- 
-Thanks,
-
-David / dhildenb
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+CgpPbiAxNC4wMi4yMCAxMzoxNywgRXVnZW5pbyBQw6lyZXogd3JvdGU6Cj4gQ2FuIHlvdSB0cnkg
+dGhlIGlubGluZWQgcGF0Y2ggb3ZlciA1MmMzNmNlN2YzMzQgKCJ2aG9zdDogdXNlIGJhdGNoZWQg
+dmVyc2lvbiBieSBkZWZhdWx0Iik/IE15IGludGVudGlvbiBpcyB0byBjaGVjayBpZgo+ICJzdHJh
+bmdlIFZIT1NUX1NFVF9WUklOR19CQVNFIiBsaW5lIGFwcGVhcnMuIEluIHByZXZpb3VzIHRlc3Rz
+LCBpdCBhcHBlYXJzIHZlcnkgZmFzdCwgYnV0IG1heWJlIGl0IHRha2VzIHNvbWUgdGltZSBmb3IK
+PiBpdCB0byBhcHBlYXIsIG9yIGl0IGRvZXMgbm90IGFwcGVhciBhbnltb3JlLgoKICBMRCBbTV0g
+IGRyaXZlcnMvdmhvc3Qvdmhvc3RfdnNvY2subwogIENDIFtNXSAgZHJpdmVycy92aG9zdC92aG9z
+dC5vCkluIGZpbGUgaW5jbHVkZWQgZnJvbSAuL2luY2x1ZGUvbGludXgvcHJpbnRrLmg6MzMxLAog
+ICAgICAgICAgICAgICAgIGZyb20gLi9pbmNsdWRlL2xpbnV4L2tlcm5lbC5oOjE1LAogICAgICAg
+ICAgICAgICAgIGZyb20gLi9pbmNsdWRlL2xpbnV4L2xpc3QuaDo5LAogICAgICAgICAgICAgICAg
+IGZyb20gLi9pbmNsdWRlL2xpbnV4L3dhaXQuaDo3LAogICAgICAgICAgICAgICAgIGZyb20gLi9p
+bmNsdWRlL2xpbnV4L2V2ZW50ZmQuaDoxMywKICAgICAgICAgICAgICAgICBmcm9tIGRyaXZlcnMv
+dmhvc3Qvdmhvc3QuYzoxMzoKZHJpdmVycy92aG9zdC92aG9zdC5jOiBJbiBmdW5jdGlvbiDigJhm
+ZXRjaF9kZXNjc+KAmToKZHJpdmVycy92aG9zdC92aG9zdC5jOjIzMzA6NTY6IGVycm9yOiDigJhz
+dHJ1Y3Qgdmhvc3RfdmlydHF1ZXVl4oCZIGhhcyBubyBtZW1iZXIgbmFtZWQg4oCYZmlyc3RfZGVz
+Y+KAmQogMjMzMCB8ICAgdnEsIHZxLT5sYXN0X2F2YWlsX2lkeCwgdnEtPmF2YWlsX2lkeCwgdnEt
+Pm5kZXNjcywgdnEtPmZpcnN0X2Rlc2MpOwogICAgICB8ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefgouL2luY2x1ZGUvbGludXgvZHluYW1p
+Y19kZWJ1Zy5oOjEyNToxNTogbm90ZTogaW4gZGVmaW5pdGlvbiBvZiBtYWNybyDigJhfX2R5bmFt
+aWNfZnVuY19jYWxs4oCZCiAgMTI1IHwgICBmdW5jKCZpZCwgIyNfX1ZBX0FSR1NfXyk7ICBcCiAg
+ICAgIHwgICAgICAgICAgICAgICBefn5+fn5+fn5+fgouL2luY2x1ZGUvbGludXgvZHluYW1pY19k
+ZWJ1Zy5oOjE1MzoyOiBub3RlOiBpbiBleHBhbnNpb24gb2YgbWFjcm8g4oCYX2R5bmFtaWNfZnVu
+Y19jYWxs4oCZCiAgMTUzIHwgIF9keW5hbWljX2Z1bmNfY2FsbChmbXQsIF9fZHluYW1pY19wcl9k
+ZWJ1ZywgIFwKICAgICAgfCAgXn5+fn5+fn5+fn5+fn5+fn5+Ci4vaW5jbHVkZS9saW51eC9wcmlu
+dGsuaDozMzU6Mjogbm90ZTogaW4gZXhwYW5zaW9uIG9mIG1hY3JvIOKAmGR5bmFtaWNfcHJfZGVi
+dWfigJkKICAzMzUgfCAgZHluYW1pY19wcl9kZWJ1ZyhmbXQsICMjX19WQV9BUkdTX18pCiAgICAg
+IHwgIF5+fn5+fn5+fn5+fn5+fn4KZHJpdmVycy92aG9zdC92aG9zdC5jOjIzMjg6Mjogbm90ZTog
+aW4gZXhwYW5zaW9uIG9mIG1hY3JvIOKAmHByX2RlYnVn4oCZCiAyMzI4IHwgIHByX2RlYnVnKAog
+ICAgICB8ICBefn5+fn5+fgptYWtlWzJdOiAqKiogW3NjcmlwdHMvTWFrZWZpbGUuYnVpbGQ6MjY2
+OiBkcml2ZXJzL3Zob3N0L3Zob3N0Lm9dIEVycm9yIDEKbWFrZVsxXTogKioqIFtzY3JpcHRzL01h
+a2VmaWxlLmJ1aWxkOjUwMzogZHJpdmVycy92aG9zdF0gRXJyb3IgMgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBs
+aXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlz
+dHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
