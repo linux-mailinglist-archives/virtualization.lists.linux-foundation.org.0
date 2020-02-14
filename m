@@ -1,80 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9D8115D7C4
-	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 13:55:54 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C65B215D884
+	for <lists.virtualization@lfdr.de>; Fri, 14 Feb 2020 14:32:01 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 900E88654E;
-	Fri, 14 Feb 2020 12:55:53 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id EAFEF87B6D;
+	Fri, 14 Feb 2020 13:31:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YBeUoRLPTuaT; Fri, 14 Feb 2020 12:55:52 +0000 (UTC)
+	with ESMTP id khuKdglaJ8az; Fri, 14 Feb 2020 13:31:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E1C8286599;
-	Fri, 14 Feb 2020 12:55:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A5ACC87FB5;
+	Fri, 14 Feb 2020 13:31:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CE739C0177;
-	Fri, 14 Feb 2020 12:55:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 72F36C0177;
+	Fri, 14 Feb 2020 13:31:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 50201C0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6B2F2C0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 12:55:49 +0000 (UTC)
+ Fri, 14 Feb 2020 13:31:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 3F6AD21F5A
+ by whitealder.osuosl.org (Postfix) with ESMTP id 5A3D587609
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 12:55:49 +0000 (UTC)
+ Fri, 14 Feb 2020 13:31:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Kqd7qeGY1Cku
+ with ESMTP id lcmnl2t5suAc
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 12:55:47 +0000 (UTC)
+ Fri, 14 Feb 2020 13:31:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 83C792000A
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 8211D875F0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Feb 2020 12:55:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581684946;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:in-reply-to:in-reply-to:references:references;
- bh=vfouwP8TcamNpMbxHNP6dn1gS+edKVT/FDKZ0j5xkf4=;
- b=MXWso3GvlkUwlb2eIqBRf6uiFPGcKrVT6VJqr8BhLtKNg7vOlriJyyhKCmCgFanZmBMhNf
- joYMzgksZqWiE0TukxVr9D2PZbKOqf/6QEsZrvcKcXIRGH1xFRLoH71R9Zvzvf+MDoZ6Gx
- /48uRTFl1Jwtw9usT090yicpx+ufZTM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-330-L4uG9_CPOjipUjdS1oGkdg-1; Fri, 14 Feb 2020 07:55:42 -0500
-X-MC-Unique: L4uG9_CPOjipUjdS1oGkdg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 051E6107ACCD;
- Fri, 14 Feb 2020 12:55:41 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-117-39.ams2.redhat.com
- [10.36.117.39])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6E12E8AC44;
- Fri, 14 Feb 2020 12:55:40 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 4400131FEE; Fri, 14 Feb 2020 13:55:36 +0100 (CET)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v4 6/6] drm/virtio: move remaining virtio_gpu_notify calls
-Date: Fri, 14 Feb 2020 13:55:35 +0100
-Message-Id: <20200214125535.26349-7-kraxel@redhat.com>
-In-Reply-To: <20200214125535.26349-1-kraxel@redhat.com>
-References: <20200214125535.26349-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- Daniel Vetter <daniel@ffwll.ch>, gurchetansingh@chromium.org,
- olvaffe@gmail.com
+ Fri, 14 Feb 2020 13:31:55 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 14 Feb 2020 05:31:55 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,440,1574150400"; d="scan'208";a="381442955"
+Received: from fmsmsx105.amr.corp.intel.com ([10.18.124.203])
+ by orsmga004.jf.intel.com with ESMTP; 14 Feb 2020 05:31:54 -0800
+Received: from FMSMSX110.amr.corp.intel.com (10.18.116.10) by
+ FMSMSX105.amr.corp.intel.com (10.18.124.203) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Fri, 14 Feb 2020 05:31:54 -0800
+Received: from shsmsx105.ccr.corp.intel.com (10.239.4.158) by
+ fmsmsx110.amr.corp.intel.com (10.18.116.10) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Fri, 14 Feb 2020 05:31:53 -0800
+Received: from shsmsx102.ccr.corp.intel.com ([169.254.2.126]) by
+ SHSMSX105.ccr.corp.intel.com ([169.254.11.138]) with mapi id 14.03.0439.000;
+ Fri, 14 Feb 2020 21:31:51 +0800
+From: "Wang, Wei W" <wei.w.wang@intel.com>
+To: David Hildenbrand <david@redhat.com>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>
+Subject: RE: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
+ VIRTIO_BALLOON_F_DEFLATE_ON_OOM
+Thread-Topic: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
+ VIRTIO_BALLOON_F_DEFLATE_ON_OOM
+Thread-Index: AQHV3EIpfQc0Q8o+LUGdBo475Vlup6gZ+hiAgADBtnA=
+Date: Fri, 14 Feb 2020 13:31:51 +0000
+Message-ID: <286AC319A985734F985F78AFA26841F73E4392AF@shsmsx102.ccr.corp.intel.com>
+References: <20200205163402.42627-1-david@redhat.com>
+ <20200205163402.42627-4-david@redhat.com>
+ <f31eff75-b328-de41-c2cc-e55471aa27d8@redhat.com>
+In-Reply-To: <f31eff75-b328-de41-c2cc-e55471aa27d8@redhat.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.2.0.6
+dlp-reaction: no-action
+x-originating-ip: [10.239.127.40]
+MIME-Version: 1.0
+Cc: "Michael S . Tsirkin" <mst@redhat.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ Tyler Sanderson <tysand@google.com>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ Nadav Amit <namit@vmware.com>, David Rientjes <rientjes@google.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ Michal Hocko <mhocko@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,191 +97,74 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Move all remaining virtio_gpu_notify() calls from virtio_gpu_cmd_*
-to the callers, for consistency reasons.
+On Friday, February 14, 2020 5:52 PM, David Hildenbrand wrote:
+> > Commit 71994620bb25 ("virtio_balloon: replace oom notifier with
+> > shrinker") changed the behavior when deflation happens automatically.
+> > Instead of deflating when called by the OOM handler, the shrinker is used.
+> >
+> > However, the balloon is not simply some slab cache that should be
+> > shrunk when under memory pressure. The shrinker does not have a
+> > concept of priorities, so this behavior cannot be configured.
+> >
+> > There was a report that this results in undesired side effects when
+> > inflating the balloon to shrink the page cache. [1]
+> > 	"When inflating the balloon against page cache (i.e. no free memory
+> > 	 remains) vmscan.c will both shrink page cache, but also invoke the
+> > 	 shrinkers -- including the balloon's shrinker. So the balloon
+> > 	 driver allocates memory which requires reclaim, vmscan gets this
+> > 	 memory by shrinking the balloon, and then the driver adds the
+> > 	 memory back to the balloon. Basically a busy no-op."
+> >
+> > The name "deflate on OOM" makes it pretty clear when deflation should
+> > happen - after other approaches to reclaim memory failed, not while
+> > reclaiming. This allows to minimize the footprint of a guest - memory
+> > will only be taken out of the balloon when really needed.
+> >
+> > Especially, a drop_slab() will result in the whole balloon getting
+> > deflated - undesired. While handling it via the OOM handler might not
+> > be perfect, it keeps existing behavior. If we want a different
+> > behavior, then we need a new feature bit and document it properly
+> > (although, there should be a clear use case and the intended effects should
+> be well described).
+> >
+> > Keep using the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT,
+> because
+> > this has no such side effects. Always register the shrinker with
+> > VIRTIO_BALLOON_F_FREE_PAGE_HINT now. We are always allowed to
+> reuse
+> > free pages that are still to be processed by the guest. The hypervisor
+> > takes care of identifying and resolving possible races between
+> > processing a hinting request and the guest reusing a page.
+> >
+> > In contrast to pre commit 71994620bb25 ("virtio_balloon: replace oom
+> > notifier with shrinker"), don't add a moodule parameter to configure
+> > the number of pages to deflate on OOM. Can be re-added if really needed.
+> > Also, pay attention that leak_balloon() returns the number of 4k pages
+> > - convert it properly in virtio_balloon_oom_notify().
+> >
+> > Note1: using the OOM handler is frowned upon, but it really is what we
+> >        need for this feature.
+> >
+> > Note2: without VIRTIO_BALLOON_F_MUST_TELL_HOST (iow, always with
+> QEMU) we
+> >        could actually skip sending deflation requests to our hypervisor,
+> >        making the OOM path *very* simple. Besically freeing pages and
+> >        updating the balloon. If the communication with the host ever
+> >        becomes a problem on this call path.
+> >
+> 
+> @Michael, how to proceed with this?
+> 
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/virtio/virtgpu_gem.c    | 2 ++
- drivers/gpu/drm/virtio/virtgpu_ioctl.c  | 3 +++
- drivers/gpu/drm/virtio/virtgpu_kms.c    | 3 +++
- drivers/gpu/drm/virtio/virtgpu_object.c | 1 +
- drivers/gpu/drm/virtio/virtgpu_vq.c     | 9 ---------
- 5 files changed, 9 insertions(+), 9 deletions(-)
+I vote for not going back. When there are solid request and strong reasons in the future, we could reopen this discussion.
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
-index 0a2b62279647..0d6152c99a27 100644
---- a/drivers/gpu/drm/virtio/virtgpu_gem.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
-@@ -123,6 +123,7 @@ int virtio_gpu_gem_object_open(struct drm_gem_object *obj,
- 
- 	virtio_gpu_cmd_context_attach_resource(vgdev, vfpriv->ctx_id,
- 					       objs);
-+	virtio_gpu_notify(vgdev);
- 	return 0;
- }
- 
-@@ -143,6 +144,7 @@ void virtio_gpu_gem_object_close(struct drm_gem_object *obj,
- 
- 	virtio_gpu_cmd_context_detach_resource(vgdev, vfpriv->ctx_id,
- 					       objs);
-+	virtio_gpu_notify(vgdev);
- }
- 
- struct virtio_gpu_object_array *virtio_gpu_array_alloc(u32 nents)
-diff --git a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-index 467649733d24..bbc31aef51f1 100644
---- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
-@@ -158,6 +158,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
- 
- 	virtio_gpu_cmd_submit(vgdev, buf, exbuf->size,
- 			      vfpriv->ctx_id, buflist, out_fence);
-+	virtio_gpu_notify(vgdev);
- 	return 0;
- 
- out_unresv:
-@@ -314,6 +315,7 @@ static int virtio_gpu_transfer_from_host_ioctl(struct drm_device *dev,
- 		(vgdev, vfpriv->ctx_id, offset, args->level,
- 		 &args->box, objs, fence);
- 	dma_fence_put(&fence->f);
-+	virtio_gpu_notify(vgdev);
- 	return 0;
- 
- err_unlock:
-@@ -446,6 +448,7 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
- 	/* not in cache - need to talk to hw */
- 	virtio_gpu_cmd_get_capset(vgdev, found_valid, args->cap_set_ver,
- 				  &cache_ent);
-+	virtio_gpu_notify(vgdev);
- 
- copy_exit:
- 	ret = wait_event_timeout(vgdev->resp_wq,
-diff --git a/drivers/gpu/drm/virtio/virtgpu_kms.c b/drivers/gpu/drm/virtio/virtgpu_kms.c
-index 8fd7acef960f..ad3b673f5796 100644
---- a/drivers/gpu/drm/virtio/virtgpu_kms.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_kms.c
-@@ -61,6 +61,7 @@ static int virtio_gpu_context_create(struct virtio_gpu_device *vgdev,
- 		return handle;
- 	handle += 1;
- 	virtio_gpu_cmd_context_create(vgdev, handle, nlen, name);
-+	virtio_gpu_notify(vgdev);
- 	return handle;
- }
- 
-@@ -68,6 +69,7 @@ static void virtio_gpu_context_destroy(struct virtio_gpu_device *vgdev,
- 				      uint32_t ctx_id)
- {
- 	virtio_gpu_cmd_context_destroy(vgdev, ctx_id);
-+	virtio_gpu_notify(vgdev);
- 	ida_free(&vgdev->ctx_id_ida, ctx_id - 1);
- }
- 
-@@ -93,6 +95,7 @@ static void virtio_gpu_get_capsets(struct virtio_gpu_device *vgdev,
- 	}
- 	for (i = 0; i < num_capsets; i++) {
- 		virtio_gpu_cmd_get_capset_info(vgdev, i);
-+		virtio_gpu_notify(vgdev);
- 		ret = wait_event_timeout(vgdev->resp_wq,
- 					 vgdev->capsets[i].id > 0, 5 * HZ);
- 		if (ret == 0) {
-diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
-index 65d6834d3c74..3d2a6d489bfc 100644
---- a/drivers/gpu/drm/virtio/virtgpu_object.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_object.c
-@@ -88,6 +88,7 @@ static void virtio_gpu_free_object(struct drm_gem_object *obj)
- 
- 	if (bo->created) {
- 		virtio_gpu_cmd_unref_resource(vgdev, bo);
-+		virtio_gpu_notify(vgdev);
- 		/* completion handler calls virtio_gpu_cleanup_object() */
- 		return;
- 	}
-diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
-index 2e108b426244..5e2375e0f7bb 100644
---- a/drivers/gpu/drm/virtio/virtgpu_vq.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
-@@ -544,7 +544,6 @@ void virtio_gpu_cmd_unref_resource(struct virtio_gpu_device *vgdev,
- 
- 	vbuf->resp_cb_data = bo;
- 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
--	virtio_gpu_notify(vgdev);
- }
- 
- void virtio_gpu_cmd_set_scanout(struct virtio_gpu_device *vgdev,
-@@ -798,7 +797,6 @@ int virtio_gpu_cmd_get_capset_info(struct virtio_gpu_device *vgdev, int idx)
- 	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_GET_CAPSET_INFO);
- 	cmd_p->capset_index = cpu_to_le32(idx);
- 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
--	virtio_gpu_notify(vgdev);
- 	return 0;
- }
- 
-@@ -874,7 +872,6 @@ int virtio_gpu_cmd_get_capset(struct virtio_gpu_device *vgdev,
- 	cmd_p->capset_version = cpu_to_le32(version);
- 	*cache_p = cache_ent;
- 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
--	virtio_gpu_notify(vgdev);
- 
- 	return 0;
- }
-@@ -922,7 +919,6 @@ void virtio_gpu_cmd_context_create(struct virtio_gpu_device *vgdev, uint32_t id,
- 	strncpy(cmd_p->debug_name, name, sizeof(cmd_p->debug_name) - 1);
- 	cmd_p->debug_name[sizeof(cmd_p->debug_name) - 1] = 0;
- 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
--	virtio_gpu_notify(vgdev);
- }
- 
- void virtio_gpu_cmd_context_destroy(struct virtio_gpu_device *vgdev,
-@@ -937,7 +933,6 @@ void virtio_gpu_cmd_context_destroy(struct virtio_gpu_device *vgdev,
- 	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_CTX_DESTROY);
- 	cmd_p->hdr.ctx_id = cpu_to_le32(id);
- 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
--	virtio_gpu_notify(vgdev);
- }
- 
- void virtio_gpu_cmd_context_attach_resource(struct virtio_gpu_device *vgdev,
-@@ -956,7 +951,6 @@ void virtio_gpu_cmd_context_attach_resource(struct virtio_gpu_device *vgdev,
- 	cmd_p->hdr.ctx_id = cpu_to_le32(ctx_id);
- 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
- 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
--	virtio_gpu_notify(vgdev);
- }
- 
- void virtio_gpu_cmd_context_detach_resource(struct virtio_gpu_device *vgdev,
-@@ -975,7 +969,6 @@ void virtio_gpu_cmd_context_detach_resource(struct virtio_gpu_device *vgdev,
- 	cmd_p->hdr.ctx_id = cpu_to_le32(ctx_id);
- 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
- 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
--	virtio_gpu_notify(vgdev);
- }
- 
- void
-@@ -1067,7 +1060,6 @@ void virtio_gpu_cmd_transfer_from_host_3d(struct virtio_gpu_device *vgdev,
- 	cmd_p->level = cpu_to_le32(level);
- 
- 	virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, fence);
--	virtio_gpu_notify(vgdev);
- }
- 
- void virtio_gpu_cmd_submit(struct virtio_gpu_device *vgdev,
-@@ -1091,7 +1083,6 @@ void virtio_gpu_cmd_submit(struct virtio_gpu_device *vgdev,
- 	cmd_p->size = cpu_to_le32(data_size);
- 
- 	virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, fence);
--	virtio_gpu_notify(vgdev);
- }
- 
- int virtio_gpu_object_attach(struct virtio_gpu_device *vgdev,
--- 
-2.18.2
-
+Best,
+Wei
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
