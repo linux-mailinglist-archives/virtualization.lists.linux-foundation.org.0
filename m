@@ -2,108 +2,102 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BEEB160331
-	for <lists.virtualization@lfdr.de>; Sun, 16 Feb 2020 10:46:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06024160334
+	for <lists.virtualization@lfdr.de>; Sun, 16 Feb 2020 10:47:27 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4B92987766;
-	Sun, 16 Feb 2020 09:46:24 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A78EB877AE;
+	Sun, 16 Feb 2020 09:47:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZCT+miYRXEeT; Sun, 16 Feb 2020 09:46:23 +0000 (UTC)
+	with ESMTP id jbv5t20X4cqW; Sun, 16 Feb 2020 09:47:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BAFAB8777C;
-	Sun, 16 Feb 2020 09:46:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id EA66C877A0;
+	Sun, 16 Feb 2020 09:47:24 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 86188C013E;
-	Sun, 16 Feb 2020 09:46:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D17A8C013E;
+	Sun, 16 Feb 2020 09:47:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A6BE6C013E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 01D72C013E
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Feb 2020 09:46:22 +0000 (UTC)
+ Sun, 16 Feb 2020 09:47:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id A2D318777C
+ by whitealder.osuosl.org (Postfix) with ESMTP id F24B886762
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Feb 2020 09:46:22 +0000 (UTC)
+ Sun, 16 Feb 2020 09:47:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id sDEbE-w15nkX
+ with ESMTP id JtzTI9LR+qhp
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Feb 2020 09:46:21 +0000 (UTC)
+ Sun, 16 Feb 2020 09:47:22 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 984D687766
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 097FF8583C
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Feb 2020 09:46:21 +0000 (UTC)
+ Sun, 16 Feb 2020 09:47:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581846380;
+ s=mimecast20190719; t=1581846440;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=noScbgaCkZMx7Fw4Ys3lLKQbwx2ehnbJ375bYYlmYnU=;
- b=iygYX9SjAhlc0gf6JVgoOOF55oJkuQfL0Kr3y8nWQbxu+KmozQCelncTrDCtd8/0yOhiym
- skSeC9MfPd+wZSazj7HLR1dyaSD8zM2hJvH46K5U4bCVQxEs4EQtI+3IRI5d6xKkXGqlaa
- Whou2HQ7MrEIOY31MaEycboilEAMhLE=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-315-myCrnlAZPXqNKSQkFOgwlQ-1; Sun, 16 Feb 2020 04:46:18 -0500
-Received: by mail-wr1-f69.google.com with SMTP id 90so7049492wrq.6
+ bh=3c/WN0m/fSra0TkxvPfDqbPdSXCm+vdA6iOX3UjbCRY=;
+ b=Yn1MoOVEGr6lVgT10N4xC6zcG6vNX4qoE0zBN0BFOXdLdqlea5y/Gt94sHPaKYHGbICTlX
+ +60ENbVL1ZOT96+YamgIC4q0mCxKf/sZ9tatB5uVwC28llZFsT5OqvXA4NQ0Ql41l0BrYd
+ zMFlClwjzrA5LeoaOHR9jiWABhvJBZE=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-240-2Jow0kZQPaK5TlCvjzGk0g-1; Sun, 16 Feb 2020 04:47:17 -0500
+Received: by mail-wr1-f70.google.com with SMTP id v17so7006997wrm.17
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Feb 2020 01:46:17 -0800 (PST)
+ Sun, 16 Feb 2020 01:47:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=ZtasoyQFCb5RWLLV8eTtZLdqEWZ7911rlj1gtV4FhTo=;
- b=RHqfdvE1VVfGmmvHirp6hSmRPLwHHmuWpBjnAkHlfXva6nQXbC/8UEwNY9PJb8cbQ2
- NgfSUq5xoqi0fMrNXlVqA57163wFl+aj2wBhOllrNTl85SDB/FuxcNHuZIhb7TAkDp8u
- Cqr3XOKtvwHOk9jug+iLUai+UlcvJqRVGTjz+sYSonZ4ZV8BxxOIH/ghP3Ibw2BD92bQ
- 7EmZKAyopLmngj+9FQzpPOav/jSw0F8/Dm0Tw1Ap+wYYCOsker3hB5I8rhJd3XLhVqjY
- MJA/0l9EJJvap4+WdrfpCxI0r/9vZQq2fQw2C6MkoLzFJ7YMlSglmTDVTK7xU4z17iOX
- MbTA==
-X-Gm-Message-State: APjAAAWC6yFRuII1JAJRTIzyIYxve7o+3+S3l2QEhwP9HZQ/0SlRtvrT
- i3mPmS42V9yTM6XuFqvwmYwejwsRw9KI0NVsDHHztfQTDQQcnyvj5DqNVRzKnuPS4kdRN3+XHZB
- txebOvGcRKgTIKMJaf9jN1kbiRptjrJsFUha07JQBsA==
-X-Received: by 2002:a05:600c:2406:: with SMTP id
- 6mr15804475wmp.30.1581846376893; 
- Sun, 16 Feb 2020 01:46:16 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxiJrJeE35F57XE7BYaxi/pj3GggCLXzH7A0bPaUDDuXSCX0jIpgP45E++A8xFP+UtWDibEKA==
-X-Received: by 2002:a05:600c:2406:: with SMTP id
- 6mr15804448wmp.30.1581846376650; 
- Sun, 16 Feb 2020 01:46:16 -0800 (PST)
+ :mime-version:content-disposition:in-reply-to;
+ bh=3c/WN0m/fSra0TkxvPfDqbPdSXCm+vdA6iOX3UjbCRY=;
+ b=dq9BS5BWE2uKlzTXxsI4gyLhRWGgc8552SKyfbNVh3u2owTFyMPMPrPTuTP+rpYozz
+ UW34caTMUIdKDgaMaSI3Yu2FbBYRMkHfCfAU9nZt3h+zcdff+I9dpEi/lzX1TD6owHhw
+ jTVySO704Bpcb7SSt8yc7eezzNWQi/DDXZ6yKV6zUZMXCUlvu2ZMtIJF4ZMJlHfmhhZH
+ LqDtFNCP0liCW/b5TqBmGPfLLfsjqSuxrgYJTQLHUfMDmIHOTFcjiH0VzXV7Tjro9A2L
+ gQ6ofRpwcN0pbEIvFF761dOBeH8J2bl5913L3lWguUnMYxklgfq5TC9TL+1lcCYjZ4/9
+ chGw==
+X-Gm-Message-State: APjAAAWi2Ns5LV1CVQIMHxktip4I8UPoNJHRDu6AkuWN0b4K0gdlpfSD
+ jFIm2aWfWoHzWQVcQA5SYCB90pJskkMfkDfkW1zAzWxXyGrqjLo14j7l7aKX41HW4fei+fTn6le
+ mUti541yQqkVP/OqCJcJ7fs9Zh21VI4SIOBsMNgfHoQ==
+X-Received: by 2002:adf:81c2:: with SMTP id 60mr14899129wra.8.1581846435946;
+ Sun, 16 Feb 2020 01:47:15 -0800 (PST)
+X-Google-Smtp-Source: APXvYqzG6RrsUSe8N2Fvm+d5duF0MuB1svG4/FyfcHkv6fRCRbqtrjKVH9j/IKcsdYDYK8VCFBolkQ==
+X-Received: by 2002:adf:81c2:: with SMTP id 60mr14899111wra.8.1581846435739;
+ Sun, 16 Feb 2020 01:47:15 -0800 (PST)
 Received: from redhat.com (bzq-79-176-28-95.red.bezeqint.net. [79.176.28.95])
  by smtp.gmail.com with ESMTPSA id
- o15sm15619180wra.83.2020.02.16.01.46.14
+ a16sm14989900wrx.87.2020.02.16.01.47.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2020 01:46:15 -0800 (PST)
-Date: Sun, 16 Feb 2020 04:46:12 -0500
+ Sun, 16 Feb 2020 01:47:15 -0800 (PST)
+Date: Sun, 16 Feb 2020 04:47:12 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Tyler Sanderson <tysand@google.com>
+To: David Hildenbrand <david@redhat.com>
 Subject: Re: [PATCH v1 3/3] virtio-balloon: Switch back to OOM handler for
  VIRTIO_BALLOON_F_DEFLATE_ON_OOM
-Message-ID: <20200216044551-mutt-send-email-mst@kernel.org>
+Message-ID: <20200216044641-mutt-send-email-mst@kernel.org>
 References: <20200205163402.42627-1-david@redhat.com>
  <20200205163402.42627-4-david@redhat.com>
- <20200214140641.GB31689@dhcp22.suse.cz>
- <802f93b1-1588-bd2c-8238-c12ec7f7ae9e@redhat.com>
- <CAJuQAmpGKcyWo8Ojnia_pXZAaOt98u0c_Sk-8ieCO218hutW1g@mail.gmail.com>
+ <f31eff75-b328-de41-c2cc-e55471aa27d8@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAJuQAmpGKcyWo8Ojnia_pXZAaOt98u0c_Sk-8ieCO218hutW1g@mail.gmail.com>
-X-MC-Unique: myCrnlAZPXqNKSQkFOgwlQ-1
+In-Reply-To: <f31eff75-b328-de41-c2cc-e55471aa27d8@redhat.com>
+X-MC-Unique: 2Jow0kZQPaK5TlCvjzGk0g-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: linux-kernel@vger.kernel.org, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, Nadav Amit <namit@vmware.com>,
- David Rientjes <rientjes@google.com>,
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Tyler Sanderson <tysand@google.com>, linux-mm@kvack.org,
+ Nadav Amit <namit@vmware.com>, David Rientjes <rientjes@google.com>,
  Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- virtualization@lists.linux-foundation.org
+ Michal Hocko <mhocko@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -115,106 +109,74 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 14, 2020 at 12:48:42PM -0800, Tyler Sanderson wrote:
-> Regarding Wei's patch that modifies the shrinker implementation, versus t=
-his
-> patch which reverts to OOM notifier:
-> I am in favor of both patches. But I do want to make sure a fix gets back
-> ported to 4.19 where the performance regression was first introduced.
-> My concern with reverting to the OOM notifier is, as mst@ put it (in the =
-other
-> thread):
-> "when linux hits OOM=C2=A0all kind of error paths are being hit, latent b=
-ugs start
-> triggering,=C2=A0latency goes up drastically."
-> The guest could be in a lot of pain before the OOM notifier is invoked, a=
-nd it
-> seems like the shrinker API might allow more fine grained control of when=
- we
-> deflate.
-> =
+On Fri, Feb 14, 2020 at 10:51:43AM +0100, David Hildenbrand wrote:
+> On 05.02.20 17:34, David Hildenbrand wrote:
+> > Commit 71994620bb25 ("virtio_balloon: replace oom notifier with shrinker")
+> > changed the behavior when deflation happens automatically. Instead of
+> > deflating when called by the OOM handler, the shrinker is used.
+> > 
+> > However, the balloon is not simply some slab cache that should be
+> > shrunk when under memory pressure. The shrinker does not have a concept of
+> > priorities, so this behavior cannot be configured.
+> > 
+> > There was a report that this results in undesired side effects when
+> > inflating the balloon to shrink the page cache. [1]
+> > 	"When inflating the balloon against page cache (i.e. no free memory
+> > 	 remains) vmscan.c will both shrink page cache, but also invoke the
+> > 	 shrinkers -- including the balloon's shrinker. So the balloon
+> > 	 driver allocates memory which requires reclaim, vmscan gets this
+> > 	 memory by shrinking the balloon, and then the driver adds the
+> > 	 memory back to the balloon. Basically a busy no-op."
+> > 
+> > The name "deflate on OOM" makes it pretty clear when deflation should
+> > happen - after other approaches to reclaim memory failed, not while
+> > reclaiming. This allows to minimize the footprint of a guest - memory
+> > will only be taken out of the balloon when really needed.
+> > 
+> > Especially, a drop_slab() will result in the whole balloon getting
+> > deflated - undesired. While handling it via the OOM handler might not be
+> > perfect, it keeps existing behavior. If we want a different behavior, then
+> > we need a new feature bit and document it properly (although, there should
+> > be a clear use case and the intended effects should be well described).
+> > 
+> > Keep using the shrinker for VIRTIO_BALLOON_F_FREE_PAGE_HINT, because
+> > this has no such side effects. Always register the shrinker with
+> > VIRTIO_BALLOON_F_FREE_PAGE_HINT now. We are always allowed to reuse free
+> > pages that are still to be processed by the guest. The hypervisor takes
+> > care of identifying and resolving possible races between processing a
+> > hinting request and the guest reusing a page.
+> > 
+> > In contrast to pre commit 71994620bb25 ("virtio_balloon: replace oom
+> > notifier with shrinker"), don't add a moodule parameter to configure the
+> > number of pages to deflate on OOM. Can be re-added if really needed.
+> > Also, pay attention that leak_balloon() returns the number of 4k pages -
+> > convert it properly in virtio_balloon_oom_notify().
+> > 
+> > Note1: using the OOM handler is frowned upon, but it really is what we
+> >        need for this feature.
+> > 
+> > Note2: without VIRTIO_BALLOON_F_MUST_TELL_HOST (iow, always with QEMU) we
+> >        could actually skip sending deflation requests to our hypervisor,
+> >        making the OOM path *very* simple. Besically freeing pages and
+> >        updating the balloon. If the communication with the host ever
+> >        becomes a problem on this call path.
+> > 
+> 
+> @Michael, how to proceed with this?
+> 
 
-> On the other hand, I'm not totally convinced that Wei's patch is an expec=
-ted
-> use of the shrinker/page-cache APIs, and maybe it is fragile. Needs more
-> testing=C2=A0and scrutiny.
-> =
+I'd like to see some reports that this helps people.
+e.g. a tested-by tag.
 
-> It seems to me like the shrinker API is the right API in the long run, pe=
-rhaps
-> with some fixes and modifications. But maybe reverting to OOM notifier is=
- the
-> best patch to back port?
-
-In that case can I see some Tested-by reports pls?
-
-
-> On Fri, Feb 14, 2020 at 6:19 AM David Hildenbrand <david@redhat.com> wrot=
-e:
-> =
-
->     >> There was a report that this results in undesired side effects when
->     >> inflating the balloon to shrink the page cache. [1]
->     >>=C2=A0 =C2=A0 =C2=A0 "When inflating the balloon against page cache=
- (i.e. no free memory
->     >>=C2=A0 =C2=A0 =C2=A0 =C2=A0remains) vmscan.c will both shrink page =
-cache, but also invoke the
->     >>=C2=A0 =C2=A0 =C2=A0 =C2=A0shrinkers -- including the balloon's shr=
-inker. So the balloon
->     >>=C2=A0 =C2=A0 =C2=A0 =C2=A0driver allocates memory which requires r=
-eclaim, vmscan gets this
->     >>=C2=A0 =C2=A0 =C2=A0 =C2=A0memory by shrinking the balloon, and the=
-n the driver adds the
->     >>=C2=A0 =C2=A0 =C2=A0 =C2=A0memory back to the balloon. Basically a =
-busy no-op."
->     >>
->     >> The name "deflate on OOM" makes it pretty clear when deflation sho=
-uld
->     >> happen - after other approaches to reclaim memory failed, not while
->     >> reclaiming. This allows to minimize the footprint of a guest - mem=
-ory
->     >> will only be taken out of the balloon when really needed.
->     >>
->     >> Especially, a drop_slab() will result in the whole balloon getting
->     >> deflated - undesired.
->     >
->     > Could you explain why some more? drop_caches shouldn't be really us=
-ed in
->     > any production workloads and if somebody really wants all the cache=
- to
->     > be dropped then why is balloon any different?
->     >
-> =
-
->     Deflation should happen when the guest is out of memory, not when
->     somebody thinks it's time to reclaim some memory. That's what the
->     feature promised from the beginning: Only give the guest more memory =
-in
->     case it *really* needs more memory.
-> =
-
->     Deflate on oom, not deflate on reclaim/memory pressure. (that's what =
-the
->     report was all about)
-> =
-
->     A priority for shrinkers might be a step into the right direction.
-> =
-
->     --
->     Thanks,
-> =
-
->     David / dhildenb
-> =
-
-> =
-
+> -- 
+> Thanks,
+> 
+> David / dhildenb
 
 _______________________________________________
 Virtualization mailing list
