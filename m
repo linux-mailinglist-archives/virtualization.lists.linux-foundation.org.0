@@ -1,91 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 573D7160E34
-	for <lists.virtualization@lfdr.de>; Mon, 17 Feb 2020 10:12:38 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F802161296
+	for <lists.virtualization@lfdr.de>; Mon, 17 Feb 2020 14:02:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0D6E020030;
-	Mon, 17 Feb 2020 09:12:37 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0B0EB861A4;
+	Mon, 17 Feb 2020 13:02:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XoeKUurjhd7Z; Mon, 17 Feb 2020 09:12:35 +0000 (UTC)
+	with ESMTP id 2an5L7CMerVB; Mon, 17 Feb 2020 13:02:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8B6951FE41;
-	Mon, 17 Feb 2020 09:12:35 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id ED4EE861A0;
+	Mon, 17 Feb 2020 13:02:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3DD7DC013E;
-	Mon, 17 Feb 2020 09:12:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C7B8EC1D89;
+	Mon, 17 Feb 2020 13:02:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6A0EDC013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8BFBC013E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Feb 2020 09:12:33 +0000 (UTC)
+ Mon, 17 Feb 2020 13:02:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 520FB20111
+ by silver.osuosl.org (Postfix) with ESMTP id CF65620111
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Feb 2020 09:12:33 +0000 (UTC)
+ Mon, 17 Feb 2020 13:02:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OCs+CUjmCA5J
+ with ESMTP id 9dplBfklJG7W
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Feb 2020 09:12:32 +0000 (UTC)
+ Mon, 17 Feb 2020 13:02:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
- [209.85.221.68])
- by silver.osuosl.org (Postfix) with ESMTPS id 43DE220030
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id 25B732002C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Feb 2020 09:12:32 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id w12so18681049wrt.2
+ Mon, 17 Feb 2020 13:02:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1581944522;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=TP4MnY7tGPhZNJTAZItTt9kiyklHpFFJJPLHhX1/LOE=;
+ b=hX31T17MTaJbEWb7LfEG3wNXS/qY3INES+eWfUbrIRQ2522tYUziFXtMiPlKfJPuoJpe2v
+ 9cbKSrkFZ7oaVe45uPkp80Uy/zr/Lm03P+ui/4XLjHMaDEQ0ErLRUd9NRqKhjytYNhjllP
+ Yi4Sbl3mmojyYctcFDbErK6JNQYOVcE=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-119-Lld68k4IMJG93RdOEi-QJg-1; Mon, 17 Feb 2020 08:01:56 -0500
+Received: by mail-qt1-f199.google.com with SMTP id m8so10892882qta.20
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Feb 2020 01:12:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=3xReXtDN4LyAJUffUOB2fEzxHj5w+bYneLaFyHrhb/I=;
- b=GI1HEZGX5Puf2LLrSwwBVyM71kCTbxTvC+JtBQ8Axtt2gtfpwmC28LBW78V5qH7fKP
- 0xpuXMLzitdJtwKfCYZwhRb0OtE746KFP03x5+2sH58M+pBmfxlPqYyk1VaIdvyQ/rR4
- kbroefLW49Y8QNEw3NqlKuwdFljmv+N1NGnc7Ayhpv8IKMuHXPI+NXgaWMylU2QuVWX+
- lxyRkocrR+9DAN3hR5jjIm+248w3FcgUr3iBOSakgPGi6mBgKNkF5EZrUG4SQtiKaNuT
- j1OopcgprxWCGEXPMEo6JHTwWo9Tq0Q+nlzlRCr/nQZ98qGCo1ma5YhsXqZptzdJewW0
- G4Xw==
+ Mon, 17 Feb 2020 05:01:56 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=3xReXtDN4LyAJUffUOB2fEzxHj5w+bYneLaFyHrhb/I=;
- b=Wnd+OXpPwP6s3MkXhdC+HWnotZUvccNHCW0nMmPov+rbqD9CUCZgUvRTXMRt3q35mE
- 98kNvjCUpoB8/PaUpEx9UtZOS+ObJoeeRR5MWRbt0uPU7Qnsg9g17vKs+z0sFz3kZqLE
- SsGYM+4gHSncIkBPqSwgB/+qz8k57id8ighNUxpg7CEJyJI7/vhD0qD45eU7YfveNake
- 9c68X2lD24Gut8Awx7zWtlb63iybcy9ZxgtQqYkGX0iB9o3GUwqIIIm7rDi2hSrex2qQ
- ZKTNiRIvEh3205RQ7opPKo16K1/PS/XisRR3eIQpDqzNIdFQ10xAhjS5zxNApvTarQSA
- X9eg==
-X-Gm-Message-State: APjAAAUaCIqYnJAuGmxC749VqN6rwnBV97Lb63JwfK7dRbocXyrpOfG0
- gHanEq/CZIVQW/n4pt7Yurc40w==
-X-Google-Smtp-Source: APXvYqy0+uCZz56gg9KY1CEZhOwTKCImzEBdQ7HaHkQZVJwABbD3oUbmhF4dXY4WjZGNxC5GhUv0GQ==
-X-Received: by 2002:a5d:4fce:: with SMTP id h14mr22612667wrw.60.1581930750507; 
- Mon, 17 Feb 2020 01:12:30 -0800 (PST)
-Received: from myrica ([2001:171b:2276:930:116c:c27a:3e7f:5eaf])
- by smtp.gmail.com with ESMTPSA id t10sm19040467wmi.40.2020.02.17.01.12.29
+ bh=TP4MnY7tGPhZNJTAZItTt9kiyklHpFFJJPLHhX1/LOE=;
+ b=MTMnpMI02OX3+UtmPWbQuVowmYQM33RqHj6T61AaF+MCIE4DPcoU7jOb55oKQcoUct
+ Uh7KuYy1uPEKzjqC+fTH3wTErHiTSLmne4i50j3UXgNZgGKbbHyRF0+yVI+3nIKnNqPn
+ evMkwLe7UerdWvm72VHfVV/BYO7pNSd1AsLmg0bv5KqV0X3dmJIX5mDnwNCmUtu2IxAz
+ evOqA/uLAC3mePnUkeosvPXjNKwPj2nJAH1txZdgO7r12rsgElhFWP2/xNLzCWaOx8fN
+ IsL9fG0oGfz8MfmMVZGP9zrUYJFz3j60AYSYbvWR1k4yg5ZV/PZkcGklBImr8M9L8aDJ
+ F3cA==
+X-Gm-Message-State: APjAAAVgBmuHCyHEcU2bt8m7vOtuezuB3wOUztLJ8aGfhFCMS6+U6xUm
+ PX38VvMcQOftU+izYT46p5wjdoRhdjeLwnOFWf8jMG6XVkeaIWDWOURid1iLnaHnrdRhQpLLPrq
+ E4LEwv/cjBdx5tjvuRD3BttqTnkBLSVKsDDY+7p0Z0A==
+X-Received: by 2002:a37:9d7:: with SMTP id 206mr11068869qkj.416.1581944516137; 
+ Mon, 17 Feb 2020 05:01:56 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyQ8C5G4SdbUsD8P4MFfVMK/CjTlG/8dSUmGSJJgcnBeSViAiOdw0hxzTa6igiB5lQZky9sqA==
+X-Received: by 2002:a37:9d7:: with SMTP id 206mr11068844qkj.416.1581944515885; 
+ Mon, 17 Feb 2020 05:01:55 -0800 (PST)
+Received: from redhat.com (bzq-79-176-28-95.red.bezeqint.net. [79.176.28.95])
+ by smtp.gmail.com with ESMTPSA id
+ n4sm133284qti.55.2020.02.17.05.01.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2020 01:12:29 -0800 (PST)
-Date: Mon, 17 Feb 2020 10:12:22 +0100
-From: Jean-Philippe Brucker <jean-philippe@linaro.org>
-To: Robin Murphy <robin.murphy@arm.com>
-Subject: Re: [PATCH 2/3] PCI: Add DMA configuration for virtual platforms
-Message-ID: <20200217091222.GB1650092@myrica>
+ Mon, 17 Feb 2020 05:01:55 -0800 (PST)
+Date: Mon, 17 Feb 2020 08:01:49 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jean-Philippe Brucker <jean-philippe@linaro.org>
+Subject: Re: [PATCH 3/3] iommu/virtio: Enable x86 support
+Message-ID: <20200217080129-mutt-send-email-mst@kernel.org>
 References: <20200214160413.1475396-1-jean-philippe@linaro.org>
- <20200214160413.1475396-3-jean-philippe@linaro.org>
- <393cce27-dbed-f075-2a67-9882bed801e7@arm.com>
+ <20200214160413.1475396-4-jean-philippe@linaro.org>
+ <311a1885-c619-3c8d-29dd-14fbfbf74898@arm.com>
+ <20200216045006-mutt-send-email-mst@kernel.org>
+ <20200217090107.GA1650092@myrica>
 MIME-Version: 1.0
+In-Reply-To: <20200217090107.GA1650092@myrica>
+X-MC-Unique: Lld68k4IMJG93RdOEi-QJg-1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <393cce27-dbed-f075-2a67-9882bed801e7@arm.com>
-Cc: mst@redhat.com, linux-pci@vger.kernel.org,
- virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
- sebastien.boeuf@intel.com, jacob.jun.pan@intel.com, bhelgaas@google.com
+Cc: linux-pci@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
+ jacob.jun.pan@intel.com, bhelgaas@google.com,
+ Robin Murphy <robin.murphy@arm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,43 +114,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 14, 2020 at 05:03:16PM +0000, Robin Murphy wrote:
-> On 14/02/2020 4:04 pm, Jean-Philippe Brucker wrote:
-> > Hardware platforms usually describe the IOMMU topology using either
-> > device-tree pointers or vendor-specific ACPI tables.  For virtual
-> > platforms that don't provide a device-tree, the virtio-iommu device
-> > contains a description of the endpoints it manages.  That information
-> > allows us to probe endpoints after the IOMMU is probed (possibly as late
-> > as userspace modprobe), provided it is discovered early enough.
+On Mon, Feb 17, 2020 at 10:01:07AM +0100, Jean-Philippe Brucker wrote:
+> On Sun, Feb 16, 2020 at 04:50:33AM -0500, Michael S. Tsirkin wrote:
+> > On Fri, Feb 14, 2020 at 04:57:11PM +0000, Robin Murphy wrote:
+> > > On 14/02/2020 4:04 pm, Jean-Philippe Brucker wrote:
+> > > > With the built-in topology description in place, x86 platforms can now
+> > > > use the virtio-iommu.
+> > > > 
+> > > > Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
+> > > > ---
+> > > >   drivers/iommu/Kconfig | 3 ++-
+> > > >   1 file changed, 2 insertions(+), 1 deletion(-)
+> > > > 
+> > > > diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
+> > > > index 068d4e0e3541..adcbda44d473 100644
+> > > > --- a/drivers/iommu/Kconfig
+> > > > +++ b/drivers/iommu/Kconfig
+> > > > @@ -508,8 +508,9 @@ config HYPERV_IOMMU
+> > > >   config VIRTIO_IOMMU
+> > > >   	bool "Virtio IOMMU driver"
+> > > >   	depends on VIRTIO=y
+> > > > -	depends on ARM64
+> > > > +	depends on (ARM64 || X86)
+> > > >   	select IOMMU_API
+> > > > +	select IOMMU_DMA
+> > > 
+> > > Can that have an "if X86" for clarity? AIUI it's not necessary for
+> > > virtio-iommu itself (and really shouldn't be), but is merely to satisfy the
+> > > x86 arch code's expectation that IOMMU drivers bring their own DMA ops,
+> > > right?
+> > > 
+> > > Robin.
 > > 
-> > Add a hook to pci_dma_configure(), which returns -EPROBE_DEFER if the
-> > endpoint is managed by a vIOMMU that will be loaded later, or 0 in any
-> > other case to avoid disturbing the normal DMA configuration methods.
-> > When CONFIG_VIRTIO_IOMMU_TOPOLOGY isn't selected, the call to
-> > virt_dma_configure() is compiled out.
-> > 
-> > As long as the information is consistent, platforms can provide both a
-> > device-tree and a built-in topology, and the IOMMU infrastructure is
-> > able to deal with multiple DMA configuration methods.
+> > In fact does not this work on any platform now?
 > 
-> Urgh, it's already been established[1] that having IOMMU setup tied to DMA
-> configuration at driver probe time is not just conceptually wrong but
-> actually broken, so the concept here worries me a bit. In a world where
-> of_iommu_configure() and friends are being called much earlier around
-> iommu_probe_device() time, how badly will this fall apart?
+> There is ongoing work to use the generic IOMMU_DMA ops on X86. AMD IOMMU
+> has been converted recently [1] but VT-d still implements its own DMA ops
+> (conversion patches are on the list [2]). On Arm the arch Kconfig selects
+> IOMMU_DMA, and I assume we'll have the same on X86 once Tom's work is
+> complete. Until then I can add a "if X86" here for clarity.
+> 
+> Thanks,
+> Jean
+> 
+> [1] https://lore.kernel.org/linux-iommu/20190613223901.9523-1-murphyt7@tcd.ie/
+> [2] https://lore.kernel.org/linux-iommu/20191221150402.13868-1-murphyt7@tcd.ie/
 
-If present the DT configuration should take precedence over this built-in
-method, so the earlier it is called the better. virt_dma_configure()
-currently gives up if the device already has iommu_ops (well, still calls
-setup_dma_ops() which is safe enough, but I think I'll change that to have
-virt_iommu_setup() return NULL if iommu_ops are present).
+What about others? E.g. PPC?
 
-I don't have the full picture of the changes you intend for
-{of,acpi}_iommu_configure(), do you think checking the validity of
-dev->iommu_fwspec will remain sufficient to have both methods coexist?
+-- 
+MST
 
-Thanks,
-Jean
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
