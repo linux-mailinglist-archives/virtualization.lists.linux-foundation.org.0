@@ -1,91 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1208E161EEB
-	for <lists.virtualization@lfdr.de>; Tue, 18 Feb 2020 03:21:36 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 81F2A16229C
+	for <lists.virtualization@lfdr.de>; Tue, 18 Feb 2020 09:48:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 78DC786887;
-	Tue, 18 Feb 2020 02:21:34 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id D30A72014B;
+	Tue, 18 Feb 2020 08:48:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1UDTfkmrX3zA; Tue, 18 Feb 2020 02:21:34 +0000 (UTC)
+	with ESMTP id dmIfkhq1yZdY; Tue, 18 Feb 2020 08:48:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 079AD86747;
-	Tue, 18 Feb 2020 02:21:34 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 6628620398;
+	Tue, 18 Feb 2020 08:48:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E55B7C013E;
-	Tue, 18 Feb 2020 02:21:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2F966C013E;
+	Tue, 18 Feb 2020 08:48:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4B563C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3F51FC013E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 02:21:32 +0000 (UTC)
+ Tue, 18 Feb 2020 08:48:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 385DE84AB2
+ by whitealder.osuosl.org (Postfix) with ESMTP id 36B1685CF0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 02:21:32 +0000 (UTC)
+ Tue, 18 Feb 2020 08:48:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id azS1v5Vij8XO
+ with ESMTP id yVwWSgJzd8vd
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 02:21:31 +0000 (UTC)
+ Tue, 18 Feb 2020 08:48:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
- [209.85.128.67])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 330E884906
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 7B0D285C90
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 02:21:31 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id t14so1188719wmi.5
- for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Feb 2020 18:21:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=eY7gqSVNopqtgZAFLrrVT+eoXLnh2uTk4VjIyhxxVUI=;
- b=lWfEjZdwTlpzTJU/5rhFxfMC9DhmiD6MQKthqW76Hbv0XfOiGyqGDu5RldcdpYXDW8
- 8VC2MGu7JmRBUL9fqnyzhiIDG3lvptGawu3597QnUhz3j5vLjUvlxqf/5+0NIUht2qA6
- uWtDKT3in5vo4L05ycc8PSKWD8SX6KfjeE/VrkPHoXR6vYccQNX6hznzbhKuUHFPgrjn
- dU8UTGnKjuMJikK87oHmZHLKnJRriEiSnKE3m9Jf9zKK0NQynG9nod5ORwABMAmNSD73
- iWWpflgLYPICza/RpijPeYAYt6nJdVlb+5kUCHV5nhUDfMDi/MN5OigyycC/QcKsiuKL
- UE2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eY7gqSVNopqtgZAFLrrVT+eoXLnh2uTk4VjIyhxxVUI=;
- b=WT18BamuTWIRbDy+OCsD2uHBKxk/nLEcYl/JzbsRVpOg0DAxyPhis2tod0Egb/hHJv
- i2BF7XLVMBLC20prmS4BARArZMgaurIidfNchc98a9xQmA2jO788TQn4UkrZhss4U3CY
- R7MkQoclShLjkEFkRn0fcuK970dfT61fz8M3eSrmaxlO5IboWJIQKVJle/1gaipX//Um
- Bl10RIOO4xgwh+ys0hCa5tK25jiLdetXDj97hBzzasEuB3se4FI0mypz2mGNPeeueij4
- PZXl/dNrqG/mcqlBsTafBzrV0lpZNJ7Xe00yLgacXlKBuCD3fdfDxSf80lNI5hRUYKNV
- joPQ==
-X-Gm-Message-State: APjAAAVedqxnCtTZ03BgReCel+wjnJ6ADOKbiYfen6HhljZuNu/jZaGB
- bOi3D/LfJzYLcFNPZlRiJUJL7+Gcvigaxy/oOvE=
-X-Google-Smtp-Source: APXvYqyDtuMB29KXJ2WCyqWXVgI1TB7/0mLR6wN9PM4aCO4sInPlQNWZ2Ru4+ybFn+ncPUAjgjEnVEw1970/5hQdhZ8=
-X-Received: by 2002:a1c:5441:: with SMTP id p1mr2198840wmi.161.1581992489535; 
- Mon, 17 Feb 2020 18:21:29 -0800 (PST)
+ Tue, 18 Feb 2020 08:48:24 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 5011CAD45;
+ Tue, 18 Feb 2020 08:48:20 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
+ sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
+Subject: [PATCH v2 0/4] drm: Provide a simple encoder
+Date: Tue, 18 Feb 2020 09:48:11 +0100
+Message-Id: <20200218084815.2137-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <20200213123728.61216-1-pasic@linux.ibm.com>
- <20200213123728.61216-2-pasic@linux.ibm.com>
-In-Reply-To: <20200213123728.61216-2-pasic@linux.ibm.com>
-From: Ming Lei <tom.leiming@gmail.com>
-Date: Tue, 18 Feb 2020 10:21:18 +0800
-Message-ID: <CACVXFVNiADTW_vLVc1bUSa0CoViLbVzoMnSJW4=sx=MCE-xUPw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] virtio-blk: fix hw_queue stopped on arbitrary error
-To: Halil Pasic <pasic@linux.ibm.com>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-s390 <linux-s390@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- Ram Pai <linuxram@us.ibm.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Virtualization <virtualization@lists.linux-foundation.org>,
- linux-block <linux-block@vger.kernel.org>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
- Viktor Mihajlovski <mihajlov@linux.ibm.com>
+Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,29 +69,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Feb 13, 2020 at 8:38 PM Halil Pasic <pasic@linux.ibm.com> wrote:
->
-> Since nobody else is going to restart our hw_queue for us, the
-> blk_mq_start_stopped_hw_queues() is in virtblk_done() is not sufficient
-> necessarily sufficient to ensure that the queue will get started again.
-> In case of global resource outage (-ENOMEM because mapping failure,
-> because of swiotlb full) our virtqueue may be empty and we can get
-> stuck with a stopped hw_queue.
->
-> Let us not stop the queue on arbitrary errors, but only on -EONSPC which
-> indicates a full virtqueue, where the hw_queue is guaranteed to get
-> started by virtblk_done() before when it makes sense to carry on
-> submitting requests. Let us also remove a stale comment.
+Many DRM drivers implement an encoder with an empty implementation. This
+patchset adds drm_simple_encoder_init() and drm_simple_encoder_create(),
+which can be used by drivers instead. Except for the destroy callback, the
+simple encoder's implementation is empty.
 
-The generic solution may be to stop queue only when there is any
-in-flight request
-not completed.
+The patchset also converts 4 encoder instances to use the simple-encoder
+helpers. But there are at least 11 other drivers which can use the helper
+and I think I did not examine all drivers yet.
 
-Checking -ENOMEM may not be enough, given -EIO can be returned from
-virtqueue_add()
-too in case of dma map failure.
+The patchset was smoke-tested on mgag200 by running the fbdev console
+and Gnome on X11.
 
-Thanks,
+v2:
+	* move simple encoder to KMS helpers (Daniel)
+	* remove name argument; simplifies implementation (Gerd)
+	* don't allocate with devm_ interfaces; unsafe with DRM (Noralf)
+
+Thomas Zimmermann (4):
+  drm/simple-kms: Add drm_simple_encoder_{init,create}()
+  drm/ast: Use simple encoder
+  drm/mgag200: Use simple encoder
+  drm/qxl: Use simple encoder
+
+ drivers/gpu/drm/ast/ast_drv.h           |  6 +-
+ drivers/gpu/drm/ast/ast_mode.c          | 25 +++-----
+ drivers/gpu/drm/drm_simple_kms_helper.c | 83 ++++++++++++++++++++++++-
+ drivers/gpu/drm/mgag200/mgag200_drv.h   |  7 ---
+ drivers/gpu/drm/mgag200/mgag200_mode.c  | 61 +-----------------
+ drivers/gpu/drm/qxl/qxl_display.c       | 18 +-----
+ include/drm/drm_simple_kms_helper.h     |  7 +++
+ 7 files changed, 102 insertions(+), 105 deletions(-)
+
+--
+2.25.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
