@@ -1,66 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99F35161433
-	for <lists.virtualization@lfdr.de>; Mon, 17 Feb 2020 15:10:35 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2BFF28575B;
-	Mon, 17 Feb 2020 14:10:34 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cd86OH8oTZdP; Mon, 17 Feb 2020 14:10:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id F3981857CB;
-	Mon, 17 Feb 2020 14:10:32 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DB492C013E;
-	Mon, 17 Feb 2020 14:10:32 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7E0B4C013E;
- Mon, 17 Feb 2020 14:10:31 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1208E161EEB
+	for <lists.virtualization@lfdr.de>; Tue, 18 Feb 2020 03:21:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 6BC5C86D73;
- Mon, 17 Feb 2020 14:10:31 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 78DC786887;
+	Tue, 18 Feb 2020 02:21:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1UDTfkmrX3zA; Tue, 18 Feb 2020 02:21:34 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 079AD86747;
+	Tue, 18 Feb 2020 02:21:34 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E55B7C013E;
+	Tue, 18 Feb 2020 02:21:33 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4B563C013E
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Feb 2020 02:21:32 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 385DE84AB2
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Feb 2020 02:21:32 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ngc5RcpYYCjy; Mon, 17 Feb 2020 14:10:30 +0000 (UTC)
+ with ESMTP id azS1v5Vij8XO
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Feb 2020 02:21:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by hemlock.osuosl.org (Postfix) with ESMTP id 7AE7186D11;
- Mon, 17 Feb 2020 14:10:30 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C2C7D30E;
- Mon, 17 Feb 2020 06:10:29 -0800 (PST)
-Received: from [10.1.196.37] (e121345-lin.cambridge.arm.com [10.1.196.37])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4A66A3F703;
- Mon, 17 Feb 2020 06:10:28 -0800 (PST)
-Subject: Re: [PATCH 3/3] iommu/virtio: Enable x86 support
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20200214160413.1475396-1-jean-philippe@linaro.org>
- <20200214160413.1475396-4-jean-philippe@linaro.org>
- <311a1885-c619-3c8d-29dd-14fbfbf74898@arm.com>
- <20200216045006-mutt-send-email-mst@kernel.org>
- <20200217090107.GA1650092@myrica>
- <20200217080129-mutt-send-email-mst@kernel.org>
- <915044ae-6972-e0eb-43e8-d071af848fe3@arm.com>
- <20200217083112-mutt-send-email-mst@kernel.org>
-From: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <057a460a-4b8e-54ca-0181-a5e5c16d7206@arm.com>
-Date: Mon, 17 Feb 2020 14:10:27 +0000
-User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+ [209.85.128.67])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 330E884906
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Feb 2020 02:21:31 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id t14so1188719wmi.5
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 17 Feb 2020 18:21:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=eY7gqSVNopqtgZAFLrrVT+eoXLnh2uTk4VjIyhxxVUI=;
+ b=lWfEjZdwTlpzTJU/5rhFxfMC9DhmiD6MQKthqW76Hbv0XfOiGyqGDu5RldcdpYXDW8
+ 8VC2MGu7JmRBUL9fqnyzhiIDG3lvptGawu3597QnUhz3j5vLjUvlxqf/5+0NIUht2qA6
+ uWtDKT3in5vo4L05ycc8PSKWD8SX6KfjeE/VrkPHoXR6vYccQNX6hznzbhKuUHFPgrjn
+ dU8UTGnKjuMJikK87oHmZHLKnJRriEiSnKE3m9Jf9zKK0NQynG9nod5ORwABMAmNSD73
+ iWWpflgLYPICza/RpijPeYAYt6nJdVlb+5kUCHV5nhUDfMDi/MN5OigyycC/QcKsiuKL
+ UE2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=eY7gqSVNopqtgZAFLrrVT+eoXLnh2uTk4VjIyhxxVUI=;
+ b=WT18BamuTWIRbDy+OCsD2uHBKxk/nLEcYl/JzbsRVpOg0DAxyPhis2tod0Egb/hHJv
+ i2BF7XLVMBLC20prmS4BARArZMgaurIidfNchc98a9xQmA2jO788TQn4UkrZhss4U3CY
+ R7MkQoclShLjkEFkRn0fcuK970dfT61fz8M3eSrmaxlO5IboWJIQKVJle/1gaipX//Um
+ Bl10RIOO4xgwh+ys0hCa5tK25jiLdetXDj97hBzzasEuB3se4FI0mypz2mGNPeeueij4
+ PZXl/dNrqG/mcqlBsTafBzrV0lpZNJ7Xe00yLgacXlKBuCD3fdfDxSf80lNI5hRUYKNV
+ joPQ==
+X-Gm-Message-State: APjAAAVedqxnCtTZ03BgReCel+wjnJ6ADOKbiYfen6HhljZuNu/jZaGB
+ bOi3D/LfJzYLcFNPZlRiJUJL7+Gcvigaxy/oOvE=
+X-Google-Smtp-Source: APXvYqyDtuMB29KXJ2WCyqWXVgI1TB7/0mLR6wN9PM4aCO4sInPlQNWZ2Ru4+ybFn+ncPUAjgjEnVEw1970/5hQdhZ8=
+X-Received: by 2002:a1c:5441:: with SMTP id p1mr2198840wmi.161.1581992489535; 
+ Mon, 17 Feb 2020 18:21:29 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200217083112-mutt-send-email-mst@kernel.org>
-Content-Language: en-GB
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>, linux-pci@vger.kernel.org,
- virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
- sebastien.boeuf@intel.com, jacob.jun.pan@intel.com, bhelgaas@google.com
+References: <20200213123728.61216-1-pasic@linux.ibm.com>
+ <20200213123728.61216-2-pasic@linux.ibm.com>
+In-Reply-To: <20200213123728.61216-2-pasic@linux.ibm.com>
+From: Ming Lei <tom.leiming@gmail.com>
+Date: Tue, 18 Feb 2020 10:21:18 +0800
+Message-ID: <CACVXFVNiADTW_vLVc1bUSa0CoViLbVzoMnSJW4=sx=MCE-xUPw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] virtio-blk: fix hw_queue stopped on arbitrary error
+To: Halil Pasic <pasic@linux.ibm.com>
+Cc: Jens Axboe <axboe@kernel.dk>, linux-s390 <linux-s390@vger.kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ Ram Pai <linuxram@us.ibm.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Virtualization <virtualization@lists.linux-foundation.org>,
+ linux-block <linux-block@vger.kernel.org>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
+ Viktor Mihajlovski <mihajlov@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,93 +97,34 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 17/02/2020 1:31 pm, Michael S. Tsirkin wrote:
-> On Mon, Feb 17, 2020 at 01:22:44PM +0000, Robin Murphy wrote:
->> On 17/02/2020 1:01 pm, Michael S. Tsirkin wrote:
->>> On Mon, Feb 17, 2020 at 10:01:07AM +0100, Jean-Philippe Brucker wrote:
->>>> On Sun, Feb 16, 2020 at 04:50:33AM -0500, Michael S. Tsirkin wrote:
->>>>> On Fri, Feb 14, 2020 at 04:57:11PM +0000, Robin Murphy wrote:
->>>>>> On 14/02/2020 4:04 pm, Jean-Philippe Brucker wrote:
->>>>>>> With the built-in topology description in place, x86 platforms can now
->>>>>>> use the virtio-iommu.
->>>>>>>
->>>>>>> Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
->>>>>>> ---
->>>>>>>     drivers/iommu/Kconfig | 3 ++-
->>>>>>>     1 file changed, 2 insertions(+), 1 deletion(-)
->>>>>>>
->>>>>>> diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
->>>>>>> index 068d4e0e3541..adcbda44d473 100644
->>>>>>> --- a/drivers/iommu/Kconfig
->>>>>>> +++ b/drivers/iommu/Kconfig
->>>>>>> @@ -508,8 +508,9 @@ config HYPERV_IOMMU
->>>>>>>     config VIRTIO_IOMMU
->>>>>>>     	bool "Virtio IOMMU driver"
->>>>>>>     	depends on VIRTIO=y
->>>>>>> -	depends on ARM64
->>>>>>> +	depends on (ARM64 || X86)
->>>>>>>     	select IOMMU_API
->>>>>>> +	select IOMMU_DMA
->>>>>>
->>>>>> Can that have an "if X86" for clarity? AIUI it's not necessary for
->>>>>> virtio-iommu itself (and really shouldn't be), but is merely to satisfy the
->>>>>> x86 arch code's expectation that IOMMU drivers bring their own DMA ops,
->>>>>> right?
->>>>>>
->>>>>> Robin.
->>>>>
->>>>> In fact does not this work on any platform now?
->>>>
->>>> There is ongoing work to use the generic IOMMU_DMA ops on X86. AMD IOMMU
->>>> has been converted recently [1] but VT-d still implements its own DMA ops
->>>> (conversion patches are on the list [2]). On Arm the arch Kconfig selects
->>>> IOMMU_DMA, and I assume we'll have the same on X86 once Tom's work is
->>>> complete. Until then I can add a "if X86" here for clarity.
->>>>
->>>> Thanks,
->>>> Jean
->>>>
->>>> [1] https://lore.kernel.org/linux-iommu/20190613223901.9523-1-murphyt7@tcd.ie/
->>>> [2] https://lore.kernel.org/linux-iommu/20191221150402.13868-1-murphyt7@tcd.ie/
->>>
->>> What about others? E.g. PPC?
->>
->> That was the point I was getting at - while iommu-dma should build just fine
->> for the likes of PPC, s390, 32-bit Arm, etc., they have no architecture code
->> to correctly wire up iommu_dma_ops to devices. Thus there's currently no
->> point pulling it in and pretending it's anything more than a waste of space
->> for architectures other than arm64 and x86. It's merely a historical
->> artefact of the x86 DMA API implementation that when the IOMMU drivers were
->> split out to form drivers/iommu they took some of their relevant arch code
->> with them.
->>
->> Robin.
-> 
-> 
-> Rather than white-listing architectures, how about making the
-> architectures in question set some kind of symbol, and depend on it?
+On Thu, Feb 13, 2020 at 8:38 PM Halil Pasic <pasic@linux.ibm.com> wrote:
+>
+> Since nobody else is going to restart our hw_queue for us, the
+> blk_mq_start_stopped_hw_queues() is in virtblk_done() is not sufficient
+> necessarily sufficient to ensure that the queue will get started again.
+> In case of global resource outage (-ENOMEM because mapping failure,
+> because of swiotlb full) our virtqueue may be empty and we can get
+> stuck with a stopped hw_queue.
+>
+> Let us not stop the queue on arbitrary errors, but only on -EONSPC which
+> indicates a full virtqueue, where the hw_queue is guaranteed to get
+> started by virtblk_done() before when it makes sense to carry on
+> submitting requests. Let us also remove a stale comment.
 
-Umm, that's basically what we have already? Architectures that use 
-iommu_dma_ops select IOMMU_DMA.
+The generic solution may be to stop queue only when there is any
+in-flight request
+not completed.
 
-The only issue is the oddity of x86 treating IOMMU drivers as part of 
-its arch code, which has never come up against a cross-architecture 
-driver until now. Hence the options of either maintaining that paradigm 
-and having the 'x86 arch code' aspect of this driver "select IOMMU_DMA 
-if x86" such that it works out equivalent to AMD_IOMMU, or a more 
-involved cleanup to move that responsibility out of 
-drivers/iommu/Kconfig entirely and have arch/x86/Kconfig do something 
-like "select IOMMU_DMA if IOMMU_API", as Jean suggested up-thread.
+Checking -ENOMEM may not be enough, given -EIO can be returned from
+virtqueue_add()
+too in case of dma map failure.
 
-In the specific context of IOMMU_DMA we're not talking about any kind of 
-white-list, merely a one-off special case for one particular architecture.
-
-Robin.
+Thanks,
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
