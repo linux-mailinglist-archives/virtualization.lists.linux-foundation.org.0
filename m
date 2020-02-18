@@ -1,60 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FA651629C2
-	for <lists.virtualization@lfdr.de>; Tue, 18 Feb 2020 16:47:25 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2B7E1633BF
+	for <lists.virtualization@lfdr.de>; Tue, 18 Feb 2020 22:03:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9DDBD848A9;
-	Tue, 18 Feb 2020 15:47:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 59A4687635;
+	Tue, 18 Feb 2020 21:03:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fE-fjIWuKxuZ; Tue, 18 Feb 2020 15:47:22 +0000 (UTC)
+	with ESMTP id SDfH+ub7C093; Tue, 18 Feb 2020 21:03:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 140D385C04;
-	Tue, 18 Feb 2020 15:47:22 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2C3B387634;
+	Tue, 18 Feb 2020 21:03:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id ED576C013E;
-	Tue, 18 Feb 2020 15:47:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 05FB3C013E;
+	Tue, 18 Feb 2020 21:03:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 11D2EC013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 48B21C013E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 15:47:20 +0000 (UTC)
+ Tue, 18 Feb 2020 21:03:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 0E04F8493F
+ by silver.osuosl.org (Postfix) with ESMTP id 37753204D1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 15:47:20 +0000 (UTC)
+ Tue, 18 Feb 2020 21:03:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DadQDwEBbFPG
+ with ESMTP id QmWFK84zx5Pg
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 15:47:19 +0000 (UTC)
+ Tue, 18 Feb 2020 21:03:17 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by whitealder.osuosl.org (Postfix) with ESMTPS id C4B86848A9
+Received: from Galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by silver.osuosl.org (Postfix) with ESMTPS id A740C204CD
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 15:47:18 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id C13E1AE2A;
- Tue, 18 Feb 2020 15:47:15 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org, x86@kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
-Subject: [PATCH] x86/ioperm: add new paravirt function update_io_bitmap
-Date: Tue, 18 Feb 2020 16:47:12 +0100
-Message-Id: <20200218154712.25490-1-jgross@suse.com>
-X-Mailer: git-send-email 2.16.4
+ Tue, 18 Feb 2020 21:03:17 +0000 (UTC)
+Received: from p5de0bf0b.dip0.t-ipconnect.de ([93.224.191.11]
+ helo=nanos.tec.linutronix.de)
+ by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
+ (Exim 4.80) (envelope-from <tglx@linutronix.de>)
+ id 1j4A1O-0006ER-Ar; Tue, 18 Feb 2020 22:03:10 +0100
+Received: by nanos.tec.linutronix.de (Postfix, from userid 1000)
+ id B684E100617; Tue, 18 Feb 2020 22:03:09 +0100 (CET)
+From: Thomas Gleixner <tglx@linutronix.de>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
+Subject: Re: [PATCH] x86/ioperm: add new paravirt function update_io_bitmap
+In-Reply-To: <20200218154712.25490-1-jgross@suse.com>
+References: <20200218154712.25490-1-jgross@suse.com>
+Date: Tue, 18 Feb 2020 22:03:09 +0100
+Message-ID: <87mu9fr4ky.fsf@nanos.tec.linutronix.de>
+MIME-Version: 1.0
+X-Linutronix-Spam-Score: -1.0
+X-Linutronix-Spam-Level: -
+X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required, ALL_TRUSTED=-1,
+ SHORTCIRCUIT=-0.0001
 Cc: Juergen Gross <jgross@suse.com>, Thomas Hellstrom <thellstrom@vmware.com>,
  Stefano Stabellini <sstabellini@kernel.org>, "VMware,
  Inc." <pv-drivers@vmware.com>, stable@vger.kernel.org,
  Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
+ "H. Peter Anvin" <hpa@zytor.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,179 +75,38 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Commit 111e7b15cf10f6 ("x86/ioperm: Extend IOPL config to control
-ioperm() as well") reworked the iopl syscall to use I/O bitmaps.
+Juergen Gross <jgross@suse.com> writes:
+> Commit 111e7b15cf10f6 ("x86/ioperm: Extend IOPL config to control
+> ioperm() as well") reworked the iopl syscall to use I/O bitmaps.
+>
+> Unfortunately this broke Xen PV domains using that syscall as there
+> is currently no I/O bitmap support in PV domains.
+>
+> Add I/O bitmap support via a new paravirt function update_io_bitmap
+> which Xen PV domains can use to update their I/O bitmaps via a
+> hypercall.
+>
+> Fixes: 111e7b15cf10f6 ("x86/ioperm: Extend IOPL config to control ioperm() as well")
+> Reported-by: Jan Beulich <jbeulich@suse.com>
+> Cc: <stable@vger.kernel.org> # 5.5
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> Tested-by: Jan Beulich <jbeulich@suse.com>
 
-Unfortunately this broke Xen PV domains using that syscall as there
-is currently no I/O bitmap support in PV domains.
+Duh, sorry about that and thanks for fixing it.
 
-Add I/O bitmap support via a new paravirt function update_io_bitmap
-which Xen PV domains can use to update their I/O bitmaps via a
-hypercall.
+BTW, why isn't stuff like this not catched during next or at least
+before the final release? Is nothing running CI on upstream with all
+that XEN muck active?
 
-Fixes: 111e7b15cf10f6 ("x86/ioperm: Extend IOPL config to control ioperm() as well")
-Reported-by: Jan Beulich <jbeulich@suse.com>
-Cc: <stable@vger.kernel.org> # 5.5
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Tested-by: Jan Beulich <jbeulich@suse.com>
----
- arch/x86/include/asm/io_bitmap.h      |  9 ++++++++-
- arch/x86/include/asm/paravirt.h       |  7 +++++++
- arch/x86/include/asm/paravirt_types.h |  4 ++++
- arch/x86/kernel/paravirt.c            |  5 +++++
- arch/x86/kernel/process.c             |  2 +-
- arch/x86/xen/enlighten_pv.c           | 25 +++++++++++++++++++++++++
- 6 files changed, 50 insertions(+), 2 deletions(-)
+Thanks,
 
-diff --git a/arch/x86/include/asm/io_bitmap.h b/arch/x86/include/asm/io_bitmap.h
-index 02c6ef8f7667..07344d82e88e 100644
---- a/arch/x86/include/asm/io_bitmap.h
-+++ b/arch/x86/include/asm/io_bitmap.h
-@@ -19,7 +19,14 @@ struct task_struct;
- void io_bitmap_share(struct task_struct *tsk);
- void io_bitmap_exit(void);
- 
--void tss_update_io_bitmap(void);
-+void native_tss_update_io_bitmap(void);
-+
-+#ifdef CONFIG_PARAVIRT_XXL
-+#include <asm/paravirt.h>
-+#else
-+#define tss_update_io_bitmap native_tss_update_io_bitmap
-+#endif
-+
- #else
- static inline void io_bitmap_share(struct task_struct *tsk) { }
- static inline void io_bitmap_exit(void) { }
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 86e7317eb31f..694d8daf4983 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -295,6 +295,13 @@ static inline void write_idt_entry(gate_desc *dt, int entry, const gate_desc *g)
- 	PVOP_VCALL3(cpu.write_idt_entry, dt, entry, g);
- }
- 
-+#ifdef CONFIG_X86_IOPL_IOPERM
-+static inline void tss_update_io_bitmap(void)
-+{
-+	PVOP_VCALL0(cpu.update_io_bitmap);
-+}
-+#endif
-+
- static inline void paravirt_activate_mm(struct mm_struct *prev,
- 					struct mm_struct *next)
- {
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 84812964d3dd..732f62e04ddb 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -140,6 +140,10 @@ struct pv_cpu_ops {
- 
- 	void (*load_sp0)(unsigned long sp0);
- 
-+#ifdef CONFIG_X86_IOPL_IOPERM
-+	void (*update_io_bitmap)(void);
-+#endif
-+
- 	void (*wbinvd)(void);
- 
- 	/* cpuid emulation, mostly so that caps bits can be disabled */
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index 789f5e4f89de..c131ba4e70ef 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -30,6 +30,7 @@
- #include <asm/timer.h>
- #include <asm/special_insns.h>
- #include <asm/tlb.h>
-+#include <asm/io_bitmap.h>
- 
- /*
-  * nop stub, which must not clobber anything *including the stack* to
-@@ -341,6 +342,10 @@ struct paravirt_patch_template pv_ops = {
- 	.cpu.iret		= native_iret,
- 	.cpu.swapgs		= native_swapgs,
- 
-+#ifdef CONFIG_X86_IOPL_IOPERM
-+	.cpu.update_io_bitmap	= native_tss_update_io_bitmap,
-+#endif
-+
- 	.cpu.start_context_switch	= paravirt_nop,
- 	.cpu.end_context_switch		= paravirt_nop,
- 
-diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
-index 839b5244e3b7..3053c85e0e42 100644
---- a/arch/x86/kernel/process.c
-+++ b/arch/x86/kernel/process.c
-@@ -374,7 +374,7 @@ static void tss_copy_io_bitmap(struct tss_struct *tss, struct io_bitmap *iobm)
- /**
-  * tss_update_io_bitmap - Update I/O bitmap before exiting to usermode
-  */
--void tss_update_io_bitmap(void)
-+void native_tss_update_io_bitmap(void)
- {
- 	struct tss_struct *tss = this_cpu_ptr(&cpu_tss_rw);
- 	struct thread_struct *t = &current->thread;
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 1f756ffffe8b..feaf2e68ee5c 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -72,6 +72,9 @@
- #include <asm/mwait.h>
- #include <asm/pci_x86.h>
- #include <asm/cpu.h>
-+#ifdef CONFIG_X86_IOPL_IOPERM
-+#include <asm/io_bitmap.h>
-+#endif
- 
- #ifdef CONFIG_ACPI
- #include <linux/acpi.h>
-@@ -837,6 +840,25 @@ static void xen_load_sp0(unsigned long sp0)
- 	this_cpu_write(cpu_tss_rw.x86_tss.sp0, sp0);
- }
- 
-+#ifdef CONFIG_X86_IOPL_IOPERM
-+static void xen_update_io_bitmap(void)
-+{
-+	struct physdev_set_iobitmap iobitmap;
-+	struct tss_struct *tss = this_cpu_ptr(&cpu_tss_rw);
-+
-+	native_tss_update_io_bitmap();
-+
-+	iobitmap.bitmap = (uint8_t *)(&tss->x86_tss) +
-+			  tss->x86_tss.io_bitmap_base;
-+	if (tss->x86_tss.io_bitmap_base == IO_BITMAP_OFFSET_INVALID)
-+		iobitmap.nr_ports = 0;
-+	else
-+		iobitmap.nr_ports = IO_BITMAP_BITS;
-+
-+	HYPERVISOR_physdev_op(PHYSDEVOP_set_iobitmap, &iobitmap);
-+}
-+#endif
-+
- static void xen_io_delay(void)
- {
- }
-@@ -1046,6 +1068,9 @@ static const struct pv_cpu_ops xen_cpu_ops __initconst = {
- 	.write_idt_entry = xen_write_idt_entry,
- 	.load_sp0 = xen_load_sp0,
- 
-+#ifdef CONFIG_X86_IOPL_IOPERM
-+	.update_io_bitmap = xen_update_io_bitmap,
-+#endif
- 	.io_delay = xen_io_delay,
- 
- 	/* Xen takes care of %gs when switching to usermode for us */
--- 
-2.16.4
-
+        tglx
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
