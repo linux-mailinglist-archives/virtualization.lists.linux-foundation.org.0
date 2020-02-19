@@ -2,92 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29FB616398F
-	for <lists.virtualization@lfdr.de>; Wed, 19 Feb 2020 02:47:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EFDB163A8D
+	for <lists.virtualization@lfdr.de>; Wed, 19 Feb 2020 03:52:59 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9A5A88643F;
-	Wed, 19 Feb 2020 01:47:12 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E8F6784EB9;
+	Wed, 19 Feb 2020 02:52:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4uvvtjXDQXid; Wed, 19 Feb 2020 01:47:12 +0000 (UTC)
+	with ESMTP id YONCs23YzgWD; Wed, 19 Feb 2020 02:52:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0A0B6842B8;
-	Wed, 19 Feb 2020 01:47:12 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id EACD984D9F;
+	Wed, 19 Feb 2020 02:52:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D109FC013E;
-	Wed, 19 Feb 2020 01:47:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C5858C013E;
+	Wed, 19 Feb 2020 02:52:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7D5F1C013E
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0312CC013E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Feb 2020 01:47:10 +0000 (UTC)
+ Wed, 19 Feb 2020 02:52:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 6BD87860DC
+ by fraxinus.osuosl.org (Postfix) with ESMTP id F293E845C0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Feb 2020 01:47:10 +0000 (UTC)
+ Wed, 19 Feb 2020 02:52:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Cc3b4w7cY61Q
+ with ESMTP id gTb4EAcJJM8y
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Feb 2020 01:47:09 +0000 (UTC)
+ Wed, 19 Feb 2020 02:52:54 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
- [209.85.128.66])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 90D7D84173
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 2BAEE84553
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Feb 2020 01:47:09 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id c84so4985646wme.4
- for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Feb 2020 17:47:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0fVrJXKQFBq1+DGIaqCpMFpVnwhHK6KBaU4A547suOs=;
- b=YLgqtn1vXiFmrY2qtcO4cITsJLHu/AVbBSZEJXUjgEko2za6mFlRXo65+dWkQXKRgO
- oyBH45ZP6ovZa90w72vhBPA/kdwQ5l4Wb6ww2v4tsfqrpiNr7wJJr6qDkQxGAq6UNzYu
- 7/x8FMTWoPNKGNhE4+jxj9C/trMmqmjjwxMJZujH5pncP7uKTDGvYc9sUwjK8KZYa6Nb
- fGR0/n70ccFqpNmW5VzoivbPHUQrUmfIbjH3P/GH2fkkj2J908pE1+IOMjtK0wRvkR64
- 3oBrPq0e4MK8O9EwGEEJSyHaZUvoBsFww7Px/X0M//l5pky9UaU1PoheuYo2Bn2CYrML
- ehUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=0fVrJXKQFBq1+DGIaqCpMFpVnwhHK6KBaU4A547suOs=;
- b=ncFfmmzr7w1VBeZs90ylTsYAFvsNS2LWm2Az5Hrzk3wmeT5UXDFQYgK5vqht/cMzDW
- LghKidK5xcKxG9icPOCwrWZzre7ArUSctrpq3dKgP1PJRD3B4CvrqT+JAsCNkyg7Lri5
- fqYQ+iOhhPowrQqBEM1ns9SLkngEBemzd/sc3aBsLu189/KeaoL3QgxFfq5SRI+aWSZi
- mqVHGZD6XEb6tyxWlvDU/cCMLAWsWZ03kwuAPq1fnu2JEayPTGI9VzIUM7+0+TQ4vOeA
- oGM2J15+1neYr8fpyzesUimjYlfimiITdaFPOAG1qFO03PXm8lUT1m1RYuIx25IZspxx
- 0Hww==
-X-Gm-Message-State: APjAAAV5jyhRmcoj71c0zKx7fjMrE3N8h1kyYNNodAjfphKjyspj9qgP
- jPzcZMp+Bciq6zD4TzrLQ1CgnXi/D0cFytkJu4k=
-X-Google-Smtp-Source: APXvYqz/18W0f7bNjt6tGI58SVmP1FmnZYrDg6ZokZyrHZqy2s5BaPpIsHcEE+bP4h8WKGWdiuCoYqOW2DZrhZYGBqA=
-X-Received: by 2002:a1c:5441:: with SMTP id p1mr6603389wmi.161.1582076827865; 
- Tue, 18 Feb 2020 17:47:07 -0800 (PST)
+ Wed, 19 Feb 2020 02:52:54 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 18 Feb 2020 18:52:53 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,458,1574150400"; d="scan'208";a="258770970"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+ by fmsmga004.fm.intel.com with ESMTP; 18 Feb 2020 18:52:48 -0800
+Date: Wed, 19 Feb 2020 10:52:38 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+Subject: Re: [PATCH] vhost: introduce vDPA based backend
+Message-ID: <20200219025217.GA971968@___>
+References: <20200131033651.103534-1-tiwei.bie@intel.com>
+ <20200218135359.GA9608@ziepe.ca>
 MIME-Version: 1.0
-References: <20200213123728.61216-1-pasic@linux.ibm.com>
- <20200213123728.61216-2-pasic@linux.ibm.com>
- <CACVXFVNiADTW_vLVc1bUSa0CoViLbVzoMnSJW4=sx=MCE-xUPw@mail.gmail.com>
- <20200218133531.3eb08120.pasic@linux.ibm.com>
-In-Reply-To: <20200218133531.3eb08120.pasic@linux.ibm.com>
-From: Ming Lei <tom.leiming@gmail.com>
-Date: Wed, 19 Feb 2020 09:46:56 +0800
-Message-ID: <CACVXFVPBPCzr+sfQ4HOw1DNPGnEfp+5BLqQkXWQgkaBKqr3yVQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] virtio-blk: fix hw_queue stopped on arbitrary error
-To: Halil Pasic <pasic@linux.ibm.com>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-s390 <linux-s390@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- Ram Pai <linuxram@us.ibm.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Virtualization <virtualization@lists.linux-foundation.org>,
- linux-block <linux-block@vger.kernel.org>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
- Viktor Mihajlovski <mihajlov@linux.ibm.com>
+Content-Disposition: inline
+In-Reply-To: <20200218135359.GA9608@ziepe.ca>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: kvm@vger.kernel.org, mst@redhat.com,
+ virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
+ lulu@redhat.com, maxime.coquelin@redhat.com, hch@infradead.org,
+ eperezma@redhat.com, haotian.wang@sifive.com, mhabets@solarflare.com,
+ shahafs@mellanox.com, parav@mellanox.com, jiri@mellanox.com,
+ zhihong.wang@intel.com, netdev@vger.kernel.org, rdunlap@infradead.org,
+ linux-kernel@vger.kernel.org, hanand@xilinx.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,48 +82,190 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Feb 18, 2020 at 8:35 PM Halil Pasic <pasic@linux.ibm.com> wrote:
->
-> On Tue, 18 Feb 2020 10:21:18 +0800
-> Ming Lei <tom.leiming@gmail.com> wrote:
->
-> > On Thu, Feb 13, 2020 at 8:38 PM Halil Pasic <pasic@linux.ibm.com> wrote:
-> > >
-> > > Since nobody else is going to restart our hw_queue for us, the
-> > > blk_mq_start_stopped_hw_queues() is in virtblk_done() is not sufficient
-> > > necessarily sufficient to ensure that the queue will get started again.
-> > > In case of global resource outage (-ENOMEM because mapping failure,
-> > > because of swiotlb full) our virtqueue may be empty and we can get
-> > > stuck with a stopped hw_queue.
-> > >
-> > > Let us not stop the queue on arbitrary errors, but only on -EONSPC which
-> > > indicates a full virtqueue, where the hw_queue is guaranteed to get
-> > > started by virtblk_done() before when it makes sense to carry on
-> > > submitting requests. Let us also remove a stale comment.
-> >
-> > The generic solution may be to stop queue only when there is any
-> > in-flight request
-> > not completed.
-> >
->
-> I think this is a pretty close to that. The queue is stopped only on
-> ENOSPC, which means virtqueue is full.
->
-> > Checking -ENOMEM may not be enough, given -EIO can be returned from
-> > virtqueue_add()
-> > too in case of dma map failure.
->
-> I'm not checking on -ENOMEM. So the queue would not be stopped on EIO.
-> Maybe I'm misunderstanding something In any case, please have another
-> look at the diff, and if your concerns persist please help me understand.
+On Tue, Feb 18, 2020 at 09:53:59AM -0400, Jason Gunthorpe wrote:
+> On Fri, Jan 31, 2020 at 11:36:51AM +0800, Tiwei Bie wrote:
+> 
+> > +static int vhost_vdpa_alloc_minor(struct vhost_vdpa *v)
+> > +{
+> > +	return idr_alloc(&vhost_vdpa.idr, v, 0, MINORMASK + 1,
+> > +			 GFP_KERNEL);
+> > +}
+> 
+> Please don't use idr in new code, use xarray directly
+> 
+> > +static int vhost_vdpa_probe(struct device *dev)
+> > +{
+> > +	struct vdpa_device *vdpa = dev_to_vdpa(dev);
+> > +	const struct vdpa_config_ops *ops = vdpa->config;
+> > +	struct vhost_vdpa *v;
+> > +	struct device *d;
+> > +	int minor, nvqs;
+> > +	int r;
+> > +
+> > +	/* Currently, we only accept the network devices. */
+> > +	if (ops->get_device_id(vdpa) != VIRTIO_ID_NET) {
+> > +		r = -ENOTSUPP;
+> > +		goto err;
+> > +	}
+> > +
+> > +	v = kzalloc(sizeof(*v), GFP_KERNEL | __GFP_RETRY_MAYFAIL);
+> > +	if (!v) {
+> > +		r = -ENOMEM;
+> > +		goto err;
+> > +	}
+> > +
+> > +	nvqs = VHOST_VDPA_VQ_MAX;
+> > +
+> > +	v->vqs = kmalloc_array(nvqs, sizeof(struct vhost_virtqueue),
+> > +			       GFP_KERNEL);
+> > +	if (!v->vqs) {
+> > +		r = -ENOMEM;
+> > +		goto err_alloc_vqs;
+> > +	}
+> > +
+> > +	mutex_init(&v->mutex);
+> > +	atomic_set(&v->opened, 0);
+> > +
+> > +	v->vdpa = vdpa;
+> > +	v->nvqs = nvqs;
+> > +	v->virtio_id = ops->get_device_id(vdpa);
+> > +
+> > +	mutex_lock(&vhost_vdpa.mutex);
+> > +
+> > +	minor = vhost_vdpa_alloc_minor(v);
+> > +	if (minor < 0) {
+> > +		r = minor;
+> > +		goto err_alloc_minor;
+> > +	}
+> > +
+> > +	d = device_create(vhost_vdpa.class, NULL,
+> > +			  MKDEV(MAJOR(vhost_vdpa.devt), minor),
+> > +			  v, "%d", vdpa->index);
+> > +	if (IS_ERR(d)) {
+> > +		r = PTR_ERR(d);
+> > +		goto err_device_create;
+> > +	}
+> > +
+> 
+> I can't understand what this messing around with major/minor numbers
+> does. Without allocating a cdev via cdev_add/etc there is only a
+> single char dev in existence here. This and the stuff in
+> vhost_vdpa_open() looks non-functional.
 
-Looks I misread the patch, and this patch is fine:
+I followed the code in VFIO. Please see more details below.
 
-Reviewed-by: Ming Lei <ming.lei@redhat.com>
+> 
+> > +static void vhost_vdpa_remove(struct device *dev)
+> > +{
+> > +	DEFINE_WAIT_FUNC(wait, woken_wake_function);
+> > +	struct vhost_vdpa *v = dev_get_drvdata(dev);
+> > +	int opened;
+> > +
+> > +	add_wait_queue(&vhost_vdpa.release_q, &wait);
+> > +
+> > +	do {
+> > +		opened = atomic_cmpxchg(&v->opened, 0, 1);
+> > +		if (!opened)
+> > +			break;
+> > +		wait_woken(&wait, TASK_UNINTERRUPTIBLE, HZ * 10);
+> > +	} while (1);
+> > +
+> > +	remove_wait_queue(&vhost_vdpa.release_q, &wait);
+> 
+> *barf* use the normal refcount pattern please
+> 
+> read side:
+> 
+>   refcount_inc_not_zero(uses)
+>   //stuff
+>   if (refcount_dec_and_test(uses))
+>      complete(completer)
+> 
+> destroy side:
+>   if (refcount_dec_and_test(uses))
+>      complete(completer)
+>   wait_for_completion(completer)
+>   // refcount now permanently == 0
+> 
+> Use a completion in driver code
+> 
+> > +	mutex_lock(&vhost_vdpa.mutex);
+> > +	device_destroy(vhost_vdpa.class,
+> > +		       MKDEV(MAJOR(vhost_vdpa.devt), v->minor));
+> > +	vhost_vdpa_free_minor(v->minor);
+> > +	mutex_unlock(&vhost_vdpa.mutex);
+> > +	kfree(v->vqs);
+> > +	kfree(v);
+> 
+> This use after-fress vs vhost_vdpa_open prior to it setting the open
+> bit. Maybe use xarray, rcu and kfree_rcu ..
+> 
+> > +static int __init vhost_vdpa_init(void)
+> > +{
+> > +	int r;
+> > +
+> > +	idr_init(&vhost_vdpa.idr);
+> > +	mutex_init(&vhost_vdpa.mutex);
+> > +	init_waitqueue_head(&vhost_vdpa.release_q);
+> > +
+> > +	/* /dev/vhost-vdpa/$vdpa_device_index */
+> > +	vhost_vdpa.class = class_create(THIS_MODULE, "vhost-vdpa");
+> > +	if (IS_ERR(vhost_vdpa.class)) {
+> > +		r = PTR_ERR(vhost_vdpa.class);
+> > +		goto err_class;
+> > +	}
+> > +
+> > +	vhost_vdpa.class->devnode = vhost_vdpa_devnode;
+> > +
+> > +	r = alloc_chrdev_region(&vhost_vdpa.devt, 0, MINORMASK + 1,
+> > +				"vhost-vdpa");
+> > +	if (r)
+> > +		goto err_alloc_chrdev;
+> > +
+> > +	cdev_init(&vhost_vdpa.cdev, &vhost_vdpa_fops);
+> > +	r = cdev_add(&vhost_vdpa.cdev, vhost_vdpa.devt, MINORMASK + 1);
+> > +	if (r)
+> > +		goto err_cdev_add;
+> 
+> It is very strange, is the intention to create a single global char
+> dev?
 
+No. It's to create a per-vdpa char dev named
+vhost-vdpa/$vdpa_device_index in dev.
 
-Thanks,
-Ming Lei
+I followed the code in VFIO which creates char dev
+vfio/$GROUP dynamically, e.g.:
+
+https://github.com/torvalds/linux/blob/b1da3acc781c/drivers/vfio/vfio.c#L2164-L2180
+https://github.com/torvalds/linux/blob/b1da3acc781c/drivers/vfio/vfio.c#L373-L387
+https://github.com/torvalds/linux/blob/b1da3acc781c/drivers/vfio/vfio.c#L1553
+
+Is it something unwanted?
+
+Thanks for the review.
+
+Regards,
+Tiwei
+
+> 
+> If so, why is there this:
+> 
+> +static int vhost_vdpa_open(struct inode *inode, struct file *filep)
+> +{
+> +	struct vhost_vdpa *v;
+> +	struct vhost_dev *dev;
+> +	struct vhost_virtqueue **vqs;
+> +	int nvqs, i, r, opened;
+> +
+> +	v = vhost_vdpa_get_from_minor(iminor(inode));
+> 
+> ?
+> 
+> If the idea is to create a per-vdpa char dev then this stuff belongs
+> in vhost_vdpa_probe(), the cdev should be part of the vhost_vdpa, and
+> the above should be container_of not an idr lookup.
+> 
+> Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
