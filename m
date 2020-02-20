@@ -1,159 +1,144 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65047165A72
-	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 10:48:46 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D5DB1660E7
+	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 16:27:15 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 8BDFA84AE3;
-	Thu, 20 Feb 2020 09:48:44 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 55AA120355;
+	Thu, 20 Feb 2020 15:27:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vKC63pclTFCT; Thu, 20 Feb 2020 09:48:43 +0000 (UTC)
+	with ESMTP id 2-kttXhXxCkP; Thu, 20 Feb 2020 15:27:13 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9378386B6B;
-	Thu, 20 Feb 2020 09:48:43 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4C1A52036E;
+	Thu, 20 Feb 2020 15:27:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 75112C013E;
-	Thu, 20 Feb 2020 09:48:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3E4F1C013E;
+	Thu, 20 Feb 2020 15:27:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1CAF1C013E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 69454C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 09:48:42 +0000 (UTC)
+ Thu, 20 Feb 2020 15:27:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 0B2BE85EC2
+ by whitealder.osuosl.org (Postfix) with ESMTP id 51652872F8
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 09:48:42 +0000 (UTC)
+ Thu, 20 Feb 2020 15:27:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id k5KZKDBrJUiu
+ with ESMTP id FXNtrm9bz3HW
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 09:48:39 +0000 (UTC)
+ Thu, 20 Feb 2020 15:27:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
- [209.85.128.66])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 0A5A785E85
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-eopbgr80058.outbound.protection.outlook.com [40.107.8.58])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4CC88872E9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 09:48:39 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id n3so1263011wmk.4
- for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 01:48:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:references:from:autocrypt:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=E4lJsyRn5c8MRRBS5Cfwnz0ljZFD9tB/hN4lq7BDblw=;
- b=WkpaZeHVz17Y1TMUSg/nKktlNbfBErrdzoba0X8m4cd2P+F0769UaDz6I4KmBu48o2
- lMoOi/Cwm+PHYYNbWqK7Ddg/jlaRJig2OiNl83hjM8JEctgMO879Fa5MFFDWMnuNi1k3
- oB1m3BjwL1HKQZvs4FU4NBj4c0gf6LY8jqmIItkPOMh1NVaVIR8uNdWFlGs43xKkFye8
- MIRnGs1ImZeWy/9DqLH6/lyVmwBM206+HSE37MuJ7ym2aMui87j7PTvT1b25lk2LHNCf
- oSNvige6GVgAR0IuWMvroCs7ZPRfiu/roVTLsk7djT08it5jZA0EliiUAAzBaB6lW8jC
- eAew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=E4lJsyRn5c8MRRBS5Cfwnz0ljZFD9tB/hN4lq7BDblw=;
- b=EGkdmttyz4lMgNFLwEwX3upQ0fAzqkIKpd1//glxfApdG6JkJYoMdVyYuxnZo1KyCc
- U3XHa4jUPE//J7pHE/aOvryURGniLlXE0VloChVLux/dPiTt0i6TtQKBlXy2FUYRmbdU
- ItaOctT5H8sQJFyfzY+GRWXIxq2HEJZI519dpoMn4ds8fZP6+9Nz3ZRlVJxhUUKP65IF
- LxGLcJQmbcrsqaJ6ff3EWWtioZ+B2BpFlfqKoapu3TOgitua68MS4zDlQ00j7a6QtdVk
- 5nuAn4GzGSEZt9LVY7j+g4oMCiH64hwIbSbah+K703ynJwL0GI8wvM+kew4z2/YJRvtf
- Hd2g==
-X-Gm-Message-State: APjAAAVeI6qerjDinFp6OEbfteFo2ZbMBenAtYqSOkOV3KD9ZSZ+LscP
- 499UEpihTFfVegPaxMNXLyM=
-X-Google-Smtp-Source: APXvYqyPmzwx/Erf5L+zeER2/OS5TZCx8jTOE2DdSiG/Rt9EQsSfncEy52jqOK7Nu9XPwLSMgu1jIg==
-X-Received: by 2002:a1c:451:: with SMTP id 78mr3269673wme.125.1582192117251;
- Thu, 20 Feb 2020 01:48:37 -0800 (PST)
-Received: from ?IPv6:2a0b:e7c0:0:107::49? ([2a0b:e7c0:0:107::49])
- by smtp.gmail.com with ESMTPSA id k10sm3752046wrd.68.2020.02.20.01.48.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2020 01:48:36 -0800 (PST)
-Subject: Re: [RESEND PATCH v2 9/9] ath5k: Constify ioreadX() iomem argument
- (as in generic implementation)
-To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
- <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Matt Turner <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
- Vineet Gupta <vgupta@synopsys.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Nick Kossifidis <mickflemm@gmail.com>, Luis Chamberlain <mcgrof@kernel.org>,
- Kalle Valo <kvalo@codeaurora.org>, "David S. Miller" <davem@davemloft.net>,
- Dave Jiang <dave.jiang@intel.com>, Jon Mason <jdmason@kudzu.us>,
- Allen Hubbe <allenbh@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Jason Wang <jasowang@redhat.com>, Arnd Bergmann <arnd@arndb.de>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- Andrew Morton <akpm@linux-foundation.org>,
- Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
- linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-sh@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-media@vger.kernel.org,
- linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
- linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
- linux-arch@vger.kernel.org
-References: <20200219175007.13627-1-krzk@kernel.org>
- <20200219175007.13627-10-krzk@kernel.org>
-From: Jiri Slaby <jirislaby@gmail.com>
-Autocrypt: addr=jirislaby@gmail.com; prefer-encrypt=mutual; keydata=
- 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
-Message-ID: <518a9023-f802-17b3-fca5-582400bc34ae@gmail.com>
-Date: Thu, 20 Feb 2020 10:48:33 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.2
-MIME-Version: 1.0
-In-Reply-To: <20200219175007.13627-10-krzk@kernel.org>
+ Thu, 20 Feb 2020 15:27:11 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=R1AS9DIBnc6Z+86E8NjJlkCHPVZmJegGmRTwaKZNnXjtrng9lDNmdGntGoM8Jf3ploNXYtA7YqUkJKY1e4q2P+zHQEwsVQ71TGF8XfjTqA10m+mug+arUV7ftCYjjg+6PLBLBrTPzE/Czyaimr1Qj90k/H30NJBRJRsgC/Hg34A+MmfwK47IV7zRtKynyIk2hoQcv/+NPUrYp2ib2YPbuSrXdU6xh9pM9OSeSbcEmHPvJiOrmkDRHo0BeJbJ1YZ92m+tPXSbhIPGLH/p0WEbrrcT1mxO8iVWiGt4DyxClPWlXK9Pqsugy5LaAPfmc8R8tA2D8PxTkcXaNhR3IksJ8A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CZH9ftVJglR/snWZrUTd41dkvh56vFT33EBMV4zawWk=;
+ b=jI5qjqxVqCBf9meDTrd2YWqMqDZGmuIdlYCraPzFDPzTx2IdyIQ+1b23Md65Ph/VudH0Qor0sIoTBSLnfKAsbeCxVB1+XZ2Z8djRffdqk0nmfoqUwcqt/aTRoJ7pYyi/WqVPyPza4D90ooe50shNAL1GVafMcsiUo9/W8Z8ZiqKpr5Ri5ivI2V75tQxjadHCR6I4vZZMZrw/HNJB2ABcAmUrpXElMWpvOcK01RCBR17cO1N9+6qbEWkcMiKkb1nJ27BfIbfs7mBm1yMcKbCUzYTi6Zk+YvnWykpwiyffGKcX8wleVYnjKXzNQZC/S3IFIQFNtXjNy/6iNyMH6TloZA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CZH9ftVJglR/snWZrUTd41dkvh56vFT33EBMV4zawWk=;
+ b=JycOTVBiTn4tQ+HfTPw3R6RxJSH5XM2F/pIlyTrijXfvHzPzUIfnix1QXcflIp1m+PfPmxPSJtkaDkPGfYLFJvJOuLoSC/6gzS6CwSqzZdk7eA56lE+HfITdI79ueb8Rp6ss+jKZuVb6WPmeCg3rxNh0uOIdufJlKQRhhSIGPb8=
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
+ VI1PR05MB4830.eurprd05.prod.outlook.com (20.177.48.203) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2729.22; Thu, 20 Feb 2020 15:12:18 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2729.033; Thu, 20 Feb 2020
+ 15:12:18 +0000
+Received: from mlx.ziepe.ca (142.68.57.212) by
+ MN2PR17CA0003.namprd17.prod.outlook.com (2603:10b6:208:15e::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2750.18 via Frontend
+ Transport; Thu, 20 Feb 2020 15:12:17 +0000
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
+ <jgg@mellanox.com>)	id 1j4nUt-0002sj-4e; Thu, 20 Feb 2020 11:12:15 -0400
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V4 5/5] vdpasim: vDPA device simulator
+Thread-Topic: [PATCH V4 5/5] vdpasim: vDPA device simulator
+Thread-Index: AQHV57Tl/t7aCF25gE6qK0wpcX6V56gkMNqA
+Date: Thu, 20 Feb 2020 15:12:18 +0000
+Message-ID: <20200220151215.GU23930@mellanox.com>
+References: <20200220061141.29390-1-jasowang@redhat.com>
+ <20200220061141.29390-6-jasowang@redhat.com>
+In-Reply-To: <20200220061141.29390-6-jasowang@redhat.com>
+Accept-Language: en-US
 Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: MN2PR17CA0003.namprd17.prod.outlook.com
+ (2603:10b6:208:15e::16) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [142.68.57.212]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 19be9418-cf9a-4595-655d-08d7b617467c
+x-ms-traffictypediagnostic: VI1PR05MB4830:|VI1PR05MB4830:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <VI1PR05MB48301A8E29CA9CA55333B25ECF130@VI1PR05MB4830.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:519;
+x-forefront-prvs: 031996B7EF
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(346002)(136003)(366004)(39850400004)(396003)(376002)(189003)(199004)(2616005)(6916009)(86362001)(52116002)(81156014)(71200400001)(8936002)(8676002)(4326008)(9746002)(81166006)(36756003)(9786002)(1076003)(478600001)(2906002)(5660300002)(186003)(33656002)(66446008)(66556008)(316002)(26005)(7416002)(66946007)(66476007)(64756008)(54906003)(24400500001);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4830;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: bCH8r5H6eoHo4wgDLqb5d0Sjeyqs03os+uRy2mobj91Co1bE2AcipEUy8NR/pAYyxfIoOSialteMtxvTgLlbyJZDXA0yC02SCag1vpezeX9WrSpO1aX2JQ+dJB3Ngla4JmRihqs+880JOF0Jm4G0m5X1O0JUyWpXS6KCEUmsyKs87QrGrUNWhkATDzvXoS1t510IFYoCFdVBhe8/RD7gDYpYoXMRgwvRbCMJFOf40aVZuSqmdiVhvg3hUJnMcC8T5KeArIWKSr7q5FG2EviDIkTY7IQgXktH15ZqfR6Flkie/mMLE0vbbVIyzStI05aNkWRElWroFZwlHWR+f9FytMNwGfEB1964Vl+rJ7yfrUJmnEGwnLmfeSf7M8g9+UrZOOrbJR8CpWYqgc9BRd+2Ij/u6P3NeaeWwGoB9pOrsx+a8mCq18tEp4SP2Bo1LCJfMxkvrdRA1S+JRUvr2ffgpVA7GKbZsIYDTPUqPO4XhULbmT7F7w+lQ2z7BovguSGv
+x-ms-exchange-antispam-messagedata: brKauSbNI0jj74DfPsEh3D2SMrswkbsa33ZOkMXPRkENK2rqKndQim/p32fEw7OUsh9k+flh3hQJWtn3SIO2bqC54AaW21+kB4cua0bMGr9N0UHZS+GOcwUj29tf74bpQMbv8PQ9msQVVLQwvU5omA==
+Content-ID: <27D03B0CCFB76D4196FC8C2FF59A0D07@eurprd05.prod.outlook.com>
+MIME-Version: 1.0
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 19be9418-cf9a-4595-655d-08d7b617467c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Feb 2020 15:12:18.2433 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 1/uYslA456LI7zqcojZRMolOqxSlEfek5Xtspy/Wef0GJEw5J+Y5Ocib4REsTxKqegdxgqjOalOMUZhcP4LMaQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4830
+Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "mst@redhat.com" <mst@redhat.com>,
+ "mhabets@solarflare.com" <mhabets@solarflare.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "rob.miller@broadcom.com" <rob.miller@broadcom.com>,
+ "lulu@redhat.com" <lulu@redhat.com>, "hanand@xilinx.com" <hanand@xilinx.com>,
+ "hch@infradead.org" <hch@infradead.org>,
+ "eperezma@redhat.com" <eperezma@redhat.com>,
+ "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
+ Shahaf Shuler <shahafs@mellanox.com>, Parav Pandit <parav@mellanox.com>,
+ Jiri Pirko <jiri@mellanox.com>,
+ "xiao.w.wang@intel.com" <xiao.w.wang@intel.com>,
+ "stefanha@redhat.com" <stefanha@redhat.com>,
+ "zhihong.wang@intel.com" <zhihong.wang@intel.com>,
+ "rdunlap@infradead.org" <rdunlap@infradead.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -170,38 +155,119 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 19. 02. 20, 18:50, Krzysztof Kozlowski wrote:
-> The ioreadX() helpers have inconsistent interface.  On some architectures
-> void *__iomem address argument is a pointer to const, on some not.
-> 
-> Implementations of ioreadX() do not modify the memory under the address
-> so they can be converted to a "const" version for const-safety and
-> consistency among architectures.
-> 
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-> Acked-by: Kalle Valo <kvalo@codeaurora.org>
-> ---
->  drivers/net/wireless/ath/ath5k/ahb.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/net/wireless/ath/ath5k/ahb.c b/drivers/net/wireless/ath/ath5k/ahb.c
-> index 2c9cec8b53d9..8bd01df369fb 100644
-> --- a/drivers/net/wireless/ath/ath5k/ahb.c
-> +++ b/drivers/net/wireless/ath/ath5k/ahb.c
-> @@ -138,18 +138,18 @@ static int ath_ahb_probe(struct platform_device *pdev)
->  
->  	if (bcfg->devid >= AR5K_SREV_AR2315_R6) {
->  		/* Enable WMAC AHB arbitration */
-> -		reg = ioread32((void __iomem *) AR5K_AR2315_AHB_ARB_CTL);
-> +		reg = ioread32((const void __iomem *) AR5K_AR2315_AHB_ARB_CTL);
+On Thu, Feb 20, 2020 at 02:11:41PM +0800, Jason Wang wrote:
+> +static void vdpasim_device_release(struct device *dev)
+> +{
+> +	struct vdpasim *vdpasim = dev_to_sim(dev);
+> +
+> +	cancel_work_sync(&vdpasim->work);
+> +	kfree(vdpasim->buffer);
+> +	vhost_iotlb_free(vdpasim->iommu);
+> +	kfree(vdpasim);
+> +}
+> +
+> +static struct vdpasim *vdpasim_create(void)
+> +{
+> +	struct virtio_net_config *config;
+> +	struct vhost_iotlb *iommu;
+> +	struct vdpasim *vdpasim;
+> +	struct device *dev;
+> +	void *buffer;
+> +	int ret = -ENOMEM;
+> +
+> +	iommu = vhost_iotlb_alloc(2048, 0);
+> +	if (!iommu)
+> +		goto err;
+> +
+> +	buffer = kmalloc(PAGE_SIZE, GFP_KERNEL);
+> +	if (!buffer)
+> +		goto err_buffer;
+> +
+> +	vdpasim = kzalloc(sizeof(*vdpasim), GFP_KERNEL);
+> +	if (!vdpasim)
+> +		goto err_alloc;
+> +
+> +	vdpasim->buffer = buffer;
+> +	vdpasim->iommu = iommu;
+> +
+> +	config = &vdpasim->config;
+> +	config->mtu = 1500;
+> +	config->status = VIRTIO_NET_S_LINK_UP;
+> +	eth_random_addr(config->mac);
+> +
+> +	INIT_WORK(&vdpasim->work, vdpasim_work);
+> +	spin_lock_init(&vdpasim->lock);
+> +
+> +	vringh_set_iotlb(&vdpasim->vqs[0].vring, vdpasim->iommu);
+> +	vringh_set_iotlb(&vdpasim->vqs[1].vring, vdpasim->iommu);
+> +
+> +	dev = &vdpasim->dev;
+> +	dev->release = vdpasim_device_release;
+> +	dev->coherent_dma_mask = DMA_BIT_MASK(64);
+> +	set_dma_ops(dev, &vdpasim_dma_ops);
+> +	dev_set_name(dev, "%s", VDPASIM_NAME);
+> +
+> +	ret = device_register(&vdpasim->dev);
+> +	if (ret)
+> +		goto err_init;
 
-While I understand why the parameter of ioread32 should be const, I
-don't see a reason for these casts on the users' side. What does it
-bring except longer code to read?
+It is a bit weird to be creating this dummy parent, couldn't this be
+done by just passing a NULL parent to vdpa_alloc_device, doing
+set_dma_ops() on the vdpasim->vdpa->dev and setting dma_device to
+vdpasim->vdpa->dev ?
 
-thanks,
--- 
-js
+> +	vdpasim->vdpa = vdpa_alloc_device(dev, dev, &vdpasim_net_config_ops);
+> +	if (ret)
+> +		goto err_vdpa;
+
+> +	ret = vdpa_register_device(vdpasim->vdpa);
+> +	if (ret)
+> +		goto err_register;
+> +
+> +	return vdpasim;
+> +
+> +err_register:
+> +	put_device(&vdpasim->vdpa->dev);
+> +err_vdpa:
+> +	device_del(&vdpasim->dev);
+> +	goto err;
+> +err_init:
+> +	put_device(&vdpasim->dev);
+> +	goto err;
+
+If you do the vdmasim alloc first, and immediately do
+device_initialize() then all the failure paths can do put_device
+instead of having this ugly goto unwind split. Just check for
+vdpasim->iommu == NULL during release.
+
+> +static int __init vdpasim_dev_init(void)
+> +{
+> +	vdpasim_dev = vdpasim_create();
+> +
+> +	if (!IS_ERR(vdpasim_dev))
+> +		return 0;
+> +
+> +	return PTR_ERR(vdpasim_dev);
+> +}
+> +
+> +static int vdpasim_device_remove_cb(struct device *dev, void *data)
+> +{
+> +	struct vdpa_device *vdpa = dev_to_vdpa(dev);
+> +
+> +	vdpa_unregister_device(vdpa);
+> +
+> +	return 0;
+> +}
+> +
+> +static void __exit vdpasim_dev_exit(void)
+> +{
+> +	device_for_each_child(&vdpasim_dev->dev, NULL,
+> +			      vdpasim_device_remove_cb);
+
+Why the loop? There is only one device, and it is in the global
+varaible vdmasim_dev ?
+
+Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
