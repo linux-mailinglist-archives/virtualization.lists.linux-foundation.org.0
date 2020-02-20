@@ -1,84 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3152A16551B
-	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 03:32:10 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id D9C7116552F
+	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 03:42:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id F361D2051F;
-	Thu, 20 Feb 2020 02:32:07 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 66D5784B37;
+	Thu, 20 Feb 2020 02:42:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id h3Pm7wW7tmGX; Thu, 20 Feb 2020 02:32:06 +0000 (UTC)
+	with ESMTP id eAwob-H-Ei9a; Thu, 20 Feb 2020 02:42:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id D33D2204A7;
-	Thu, 20 Feb 2020 02:32:06 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 2385384AE3;
+	Thu, 20 Feb 2020 02:42:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B4AFDC1D89;
-	Thu, 20 Feb 2020 02:32:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0AA21C013E;
+	Thu, 20 Feb 2020 02:42:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D3128C013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 32149C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 02:32:05 +0000 (UTC)
+ Thu, 20 Feb 2020 02:42:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C016882063
+ by silver.osuosl.org (Postfix) with ESMTP id 220BA204A7
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 02:32:05 +0000 (UTC)
+ Thu, 20 Feb 2020 02:42:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id joNoQYQEf4cF
+ with ESMTP id xr5bWvaMJt-m
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 02:32:04 +0000 (UTC)
+ Thu, 20 Feb 2020 02:42:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
- [209.85.215.195])
- by hemlock.osuosl.org (Postfix) with ESMTPS id ABFDB82261
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by silver.osuosl.org (Postfix) with ESMTPS id A5E8D203EE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 02:32:04 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id d9so1140075pgu.3
- for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Feb 2020 18:32:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id;
- bh=zr5u8Chlfff2X4LtdmxMDdWIdJ3E6W1Jd7u1xAH1pgY=;
- b=YqLME2Upvbgry5x4ZwXh9NuaSkibHeECcLimobVcOq4rOxlslvdQi8bQpj47MPJpsT
- XZtF06I6/FVkWNuddpU0pb2IaHw9VWTjxq8wbM85XIePqlc8tqUew/GVhGEinnKRLCpz
- AswZ5COmSocVAf7kBzRzLtMgqRMw4d2zALjO31HxM/Bc97gieySrjgjX+Pr9z0JjyBz7
- zc009QD4iwZcjRkF0Rzk0AyezUcy1IwKYG3kAH1vvIXeFdiZo0yBCMuZYYcMtgM8xkq0
- a6GcBN8UlwayRhqvIdv5xrOXcR2p5NIBW9eDQjUc60ESzxdh2DbKy0NM3T43pDPM4SI3
- 9kFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
- bh=zr5u8Chlfff2X4LtdmxMDdWIdJ3E6W1Jd7u1xAH1pgY=;
- b=Lz0PgCjiMaqS8RgFmNQiglXA887XN09AGMRmgpZqra9fuRjCXi0pLXM8/6iI3o0gFU
- XTDHLdIPNsLnFQa/uMtB7NNY43tqVTz/Fr7pvR3TJ5B9liGTDgx2r1pQJx8h88hsuiUg
- noNqNRd1fJrWH2sgZe+a0CB/xKDGi1KiIpS9cnGStX0QMkv0UWHtmdumDXqD5S/DVW6+
- 34ojpQDZPnTdtdeaASIRncLtI5z0EXXq8t2J+OnstjaawfaAid0+NUGuNteC503izLWu
- GnbMNjvAVUSRqgwu6AeUHo3/F8WpaEh6EJYRuoJFBnnFeK1srvE6S/BWEQq39QVdNX7d
- zDLQ==
-X-Gm-Message-State: APjAAAW+QtqhV9x4Y6E27hJyg+gfiW3zKVwuUHjobsLVcvRmunIjta6q
- jdQYARMBF60p/p1Il+HXJww=
-X-Google-Smtp-Source: APXvYqyep9F5J3KoDhiCL/yaP5HvZoAj87AsHQagc3pwSgMRkO7tnGn55MApTjed/2XjmAO6L8mFMQ==
-X-Received: by 2002:a63:8c5c:: with SMTP id q28mr30401414pgn.324.1582165924216; 
- Wed, 19 Feb 2020 18:32:04 -0800 (PST)
-Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
- by smtp.gmail.com with ESMTPSA id l12sm1049427pgj.16.2020.02.19.18.32.02
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 19 Feb 2020 18:32:03 -0800 (PST)
-From: Guenter Roeck <linux@roeck-us.net>
-To: "Michael S . Tsirkin" <mst@redhat.com>
-Subject: [PATCH] virtio_balloon: Fix build error seen with
- CONFIG_BALLOON_COMPACTION=n
-Date: Wed, 19 Feb 2020 18:31:56 -0800
-Message-Id: <20200220023156.20636-1-linux@roeck-us.net>
-X-Mailer: git-send-email 2.17.1
-Cc: linux-kernel@vger.kernel.org, Guenter Roeck <linux@roeck-us.net>,
- virtualization@lists.linux-foundation.org
+ Thu, 20 Feb 2020 02:42:49 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 19 Feb 2020 18:42:49 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,462,1574150400"; d="scan'208";a="229327721"
+Received: from dpdk-virtio-tbie-2.sh.intel.com (HELO ___) ([10.67.104.74])
+ by orsmga008.jf.intel.com with ESMTP; 19 Feb 2020 18:42:42 -0800
+Date: Thu, 20 Feb 2020 10:42:21 +0800
+From: Tiwei Bie <tiwei.bie@intel.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+Subject: Re: [PATCH] vhost: introduce vDPA based backend
+Message-ID: <20200220024220.GA43609@___>
+References: <20200131033651.103534-1-tiwei.bie@intel.com>
+ <20200218135359.GA9608@ziepe.ca> <20200219025217.GA971968@___>
+ <20200219131102.GN31668@ziepe.ca>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200219131102.GN31668@ziepe.ca>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: kvm@vger.kernel.org, mst@redhat.com,
+ virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
+ lulu@redhat.com, maxime.coquelin@redhat.com, hch@infradead.org,
+ eperezma@redhat.com, haotian.wang@sifive.com, mhabets@solarflare.com,
+ shahafs@mellanox.com, parav@mellanox.com, jiri@mellanox.com,
+ zhihong.wang@intel.com, netdev@vger.kernel.org, rdunlap@infradead.org,
+ linux-kernel@vger.kernel.org, hanand@xilinx.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,46 +78,70 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-0day reports:
+On Wed, Feb 19, 2020 at 09:11:02AM -0400, Jason Gunthorpe wrote:
+> On Wed, Feb 19, 2020 at 10:52:38AM +0800, Tiwei Bie wrote:
+> > > > +static int __init vhost_vdpa_init(void)
+> > > > +{
+> > > > +	int r;
+> > > > +
+> > > > +	idr_init(&vhost_vdpa.idr);
+> > > > +	mutex_init(&vhost_vdpa.mutex);
+> > > > +	init_waitqueue_head(&vhost_vdpa.release_q);
+> > > > +
+> > > > +	/* /dev/vhost-vdpa/$vdpa_device_index */
+> > > > +	vhost_vdpa.class = class_create(THIS_MODULE, "vhost-vdpa");
+> > > > +	if (IS_ERR(vhost_vdpa.class)) {
+> > > > +		r = PTR_ERR(vhost_vdpa.class);
+> > > > +		goto err_class;
+> > > > +	}
+> > > > +
+> > > > +	vhost_vdpa.class->devnode = vhost_vdpa_devnode;
+> > > > +
+> > > > +	r = alloc_chrdev_region(&vhost_vdpa.devt, 0, MINORMASK + 1,
+> > > > +				"vhost-vdpa");
+> > > > +	if (r)
+> > > > +		goto err_alloc_chrdev;
+> > > > +
+> > > > +	cdev_init(&vhost_vdpa.cdev, &vhost_vdpa_fops);
+> > > > +	r = cdev_add(&vhost_vdpa.cdev, vhost_vdpa.devt, MINORMASK + 1);
+> > > > +	if (r)
+> > > > +		goto err_cdev_add;
+> > > 
+> > > It is very strange, is the intention to create a single global char
+> > > dev?
+> > 
+> > No. It's to create a per-vdpa char dev named
+> > vhost-vdpa/$vdpa_device_index in dev.
+> > 
+> > I followed the code in VFIO which creates char dev
+> > vfio/$GROUP dynamically, e.g.:
+> > 
+> > https://github.com/torvalds/linux/blob/b1da3acc781c/drivers/vfio/vfio.c#L2164-L2180
+> > https://github.com/torvalds/linux/blob/b1da3acc781c/drivers/vfio/vfio.c#L373-L387
+> > https://github.com/torvalds/linux/blob/b1da3acc781c/drivers/vfio/vfio.c#L1553
+> > 
+> > Is it something unwanted?
+> 
+> Yes it is unwanted. This is some special pattern for vfio's unique
+> needs. 
+> 
+> Since this has a struct device for each char dev instance please use
+> the normal cdev_device_add() driven pattern here, or justify why it
+> needs to be special like this.
 
-drivers//virtio/virtio_balloon.c: In function 'virtballoon_probe':
-drivers//virtio/virtio_balloon.c:960:1: error:
-	label 'out_del_vqs' defined but not used [-Werror=unused-label]
+I see. Thanks! I will embed the cdev in each vhost_vdpa
+structure directly.
 
-This is seen with CONFIG_BALLOON_COMPACTION=n.
+Regards,
+Tiwei
 
-Reported-by: kbuild test robot <lkp@intel.com>
-Fixes: 1ad6f58ea936 ("virtio_balloon: Fix memory leaks on errors in virtballoon_probe()")
-Cc: David Hildenbrand <david@redhat.com>
-Cc: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Guenter Roeck <linux@roeck-us.net>
----
- drivers/virtio/virtio_balloon.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
-index 7bfe365d9372..341458fd95ca 100644
---- a/drivers/virtio/virtio_balloon.c
-+++ b/drivers/virtio/virtio_balloon.c
-@@ -959,8 +959,8 @@ static int virtballoon_probe(struct virtio_device *vdev)
- 	iput(vb->vb_dev_info.inode);
- out_kern_unmount:
- 	kern_unmount(balloon_mnt);
--#endif
- out_del_vqs:
-+#endif
- 	vdev->config->del_vqs(vdev);
- out_free_vb:
- 	kfree(vb);
--- 
-2.17.1
-
+> 
+> Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
