@@ -1,94 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22EF91668DE
-	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 21:48:54 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A892166913
+	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 21:55:32 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id BA46C863DD;
-	Thu, 20 Feb 2020 20:48:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8B63D87DAA;
+	Thu, 20 Feb 2020 20:55:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Hu0Cb_qvyVEa; Thu, 20 Feb 2020 20:48:52 +0000 (UTC)
+	with ESMTP id 4iO71deIsS5U; Thu, 20 Feb 2020 20:55:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 32DA086403;
-	Thu, 20 Feb 2020 20:48:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A7EA887DAF;
+	Thu, 20 Feb 2020 20:55:29 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 17BCAC013E;
-	Thu, 20 Feb 2020 20:48:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7264DC013E;
+	Thu, 20 Feb 2020 20:55:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C13B4C013E
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BE7B3C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 20:48:50 +0000 (UTC)
+ Thu, 20 Feb 2020 20:55:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id AA8EF87678
+ by fraxinus.osuosl.org (Postfix) with ESMTP id A814486403
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 20:48:50 +0000 (UTC)
+ Thu, 20 Feb 2020 20:55:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HRLpBoFwffRK
+ with ESMTP id G_enpVBewZfT
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 20:48:49 +0000 (UTC)
+ Thu, 20 Feb 2020 20:55:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 6FE718742D
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6A51E86055
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 20:48:49 +0000 (UTC)
+ Thu, 20 Feb 2020 20:55:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582231728;
+ s=mimecast20190719; t=1582232125;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=ehW/C4q3o/MFSLK01WJohdnOjzA4tnd/QR6FiiqgjL0=;
- b=ihUeyTOaiPQyns6nlCwZ6sB8YIhFaaLMWzQIf3SMTGDc8wZCOE962N4E8/vGpL9mNNglqV
- aK5dSbPzHj1rm/kVAeDgor4oNqLm21v/ETkEVM24Um6aY+/SqxJ/x/tSjh1sUbCy+RCIKH
- 3GIq0hIjMueHxLBBV22uuMUJq2HR1yY=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-107-sAx9HMD7O6qA9epxvf-mkw-1; Thu, 20 Feb 2020 15:48:44 -0500
-X-MC-Unique: sAx9HMD7O6qA9epxvf-mkw-1
-Received: by mail-qt1-f200.google.com with SMTP id c22so3474097qtn.23
+ bh=n59pKOcdTZlkr3iRkuuDYSYR3kx21EL+m/7qJp3dlcc=;
+ b=OxDQkgG+l3mkTGVsRSInXXmLoxDkX4gJGZA6PxrRHPU3tCQlKxgd43v1HAFknkL2i2iqNa
+ 23KodkJ7RyQk/uXhlIIExzkPVS5O2oGGsKe8HwZObi7nVhfPlMDOqlJWB2Gie5Prpdsuj4
+ ZaQdyYZq5YcuYmeCzikSXC1nGtF52tg=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-490-_2b2aHf6OiWoHQ0HocQZ-w-1; Thu, 20 Feb 2020 15:55:22 -0500
+Received: by mail-qt1-f197.google.com with SMTP id o24so9919qtr.17
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 12:48:44 -0800 (PST)
+ Thu, 20 Feb 2020 12:55:22 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=ehW/C4q3o/MFSLK01WJohdnOjzA4tnd/QR6FiiqgjL0=;
- b=CYcB1LmoeCrr0mJTrKpIFKoSgr6t8/7AukXdFz4b6Eys0BllNc2ZG5/0OwBOcZKR/i
- xIIq0YMIBVRqCCFzxomsmmeCBkczPKtqaNT70QL6L89gcem6wk+RuZtM8iguXXLiqvTN
- wpneb4f/Ttr8+kwO4/Ge4LMLfw9RCoSFNvGbIlzBPkUI6k/6eKW88dr3qvSxPRhHnYeP
- SDs8yyyQ4mpV7EPYcigkmpIPZVCDbUvA7CiMuRFmCDVeI1PZ+PZPu+CzwJXPH5RyQigW
- 9tdwWNGiTrUQC8MdHXmbStoArNz1pS2RoTfTrPqoRZtXrT/2YGVVr4OFhr1O2Fs5r6BN
- 74TA==
-X-Gm-Message-State: APjAAAVuiRtvhM10mVYaUBuci/wTsn7k1tSKIsBC9I28PodlLMrawnld
- bMmHEYFMGwdkW2vFmGcL+L4bScEUMoFTtWBxmtDY+mQgM0gNooSSviEf5f1o6UJhwh7RKcU3g47
- J+Yy73qIQnM9U6Jz+gw+Xumxtq/F+5X1CTgTkMz4tPw==
-X-Received: by 2002:a05:620a:1279:: with SMTP id
- b25mr27577874qkl.385.1582231723839; 
- Thu, 20 Feb 2020 12:48:43 -0800 (PST)
-X-Google-Smtp-Source: APXvYqx8/6ncIbfogJ3gGTu5AoGgDYIF/agRj+iWjgwKDztDiB0lAfpoI0718ywEcHd9ifb45n14Hw==
-X-Received: by 2002:a05:620a:1279:: with SMTP id
- b25mr27577859qkl.385.1582231723602; 
- Thu, 20 Feb 2020 12:48:43 -0800 (PST)
+ bh=n59pKOcdTZlkr3iRkuuDYSYR3kx21EL+m/7qJp3dlcc=;
+ b=m2XDXBdsSHSystqy2eXflkAe9ikt2j3OvfIyMpJ03pIbOqyfaFd6BbX+5kDy9DZmMV
+ VSPYZC2WKQfB506HYj1y7nhe+SKiWwDlYW2w11/f+YrwIzlKkbv/Zpnl06cUZoMtlDxk
+ aw4/7LLkBzDavaS82f4SjGgu0a3wEQPLbKVwiki+PCmRaKczcJd1lMwuGqBtk5yh2NlQ
+ TN2WXjnR8UjOrbHyR4Yn55aOWfyEq7xYKRNdD12n0g3+/gVZgVz/4bq+MUlL1EEXab3A
+ o6bJgvuv/KK4Lfu3//7KlymFJOZeSsA0Yv1XcMOnbhUIa4eh1OpNQj+oqtiHI/xr7ZVd
+ nxCQ==
+X-Gm-Message-State: APjAAAVN4JAl4443g21FUGrYe8bQ9i5dVjgqnDIOUiBKEkzSuVdj/yB0
+ EnCb3w2mvaUwxOkuMAuhrivgPtf4vmuBsZQpPCzKu3GTMDE7fDnUvzshpki582oPgRNjmUrNIf+
+ qqsY5E/Te+WZnnkaWCtml8OwODtqzm7m0gEyYHEiQaw==
+X-Received: by 2002:a0c:b920:: with SMTP id u32mr26145213qvf.173.1582232121721; 
+ Thu, 20 Feb 2020 12:55:21 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyYbEyWlyA1CtyLkpPuUF6uywJfTlRwR2s/p8kqFjjrgLX6Ni1df+OO/USj4ggxNDPJ4/sgrw==
+X-Received: by 2002:a0c:b920:: with SMTP id u32mr26145171qvf.173.1582232121178; 
+ Thu, 20 Feb 2020 12:55:21 -0800 (PST)
 Received: from redhat.com (bzq-109-67-14-209.red.bezeqint.net. [109.67.14.209])
- by smtp.gmail.com with ESMTPSA id p8sm358226qtn.71.2020.02.20.12.48.37
+ by smtp.gmail.com with ESMTPSA id g19sm391571qkk.91.2020.02.20.12.55.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2020 12:48:42 -0800 (PST)
-Date: Thu, 20 Feb 2020 15:48:35 -0500
+ Thu, 20 Feb 2020 12:55:20 -0800 (PST)
+Date: Thu, 20 Feb 2020 15:55:14 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Halil Pasic <pasic@linux.ibm.com>
-Subject: Re: [PATCH 0/2] virtio: decouple protected guest RAM form
- VIRTIO_F_IOMMU_PLATFORM
-Message-ID: <20200220154718-mutt-send-email-mst@kernel.org>
+Subject: Re: [PATCH 2/2] virtio: let virtio use DMA API when guest RAM is
+ protected
+Message-ID: <20200220154904-mutt-send-email-mst@kernel.org>
 References: <20200220160606.53156-1-pasic@linux.ibm.com>
+ <20200220160606.53156-3-pasic@linux.ibm.com>
 MIME-Version: 1.0
-In-Reply-To: <20200220160606.53156-1-pasic@linux.ibm.com>
+In-Reply-To: <20200220160606.53156-3-pasic@linux.ibm.com>
+X-MC-Unique: _2b2aHf6OiWoHQ0HocQZ-w-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -118,53 +117,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Feb 20, 2020 at 05:06:04PM +0100, Halil Pasic wrote:
-> Currently if one intends to run a memory protection enabled VM with
-> virtio devices and linux as the guest OS, one needs to specify the
-> VIRTIO_F_IOMMU_PLATFORM flag for each virtio device to make the guest
-> linux use the DMA API, which in turn handles the memory
-> encryption/protection stuff if the guest decides to turn itself into
-> a protected one. This however makes no sense due to multiple reasons:
-> * The device is not changed by the fact that the guest RAM is
-> protected. The so called IOMMU bypass quirk is not affected.
-> * This usage is not congruent with  standardised semantics of
-> VIRTIO_F_IOMMU_PLATFORM. Guest memory protected is an orthogonal reason
-> for using DMA API in virtio (orthogonal with respect to what is
-> expressed by VIRTIO_F_IOMMU_PLATFORM). 
+On Thu, Feb 20, 2020 at 05:06:06PM +0100, Halil Pasic wrote:
+> Currently the advanced guest memory protection technologies (AMD SEV,
+> powerpc secure guest technology and s390 Protected VMs) abuse the
+> VIRTIO_F_IOMMU_PLATFORM flag to make virtio core use the DMA API, which
+> is in turn necessary, to make IO work with guest memory protection.
 > 
-> This series aims to decouple 'have to use DMA API because my (guest) RAM
-> is protected' and 'have to use DMA API because the device told me
-> VIRTIO_F_IOMMU_PLATFORM'.
+> But VIRTIO_F_IOMMU_PLATFORM a.k.a. VIRTIO_F_ACCESS_PLATFORM is really a
+> different beast: with virtio devices whose implementation runs on an SMP
+> CPU we are still fine with doing all the usual optimizations, it is just
+> that we need to make sure that the memory protection mechanism does not
+> get in the way. The VIRTIO_F_ACCESS_PLATFORM mandates more work on the
+> side of the guest (and possibly he host side as well) than we actually
+> need.
 > 
-> Please find more detailed explanations about the conceptual aspects in
-> the individual patches. There is however also a very practical problem
-> that is addressed by this series. 
+> An additional benefit of teaching the guest to make the right decision
+> (and use DMA API) on it's own is: removing the need, to mandate special
+> VM configuration for guests that may run with protection. This is
+> especially interesting for s390 as VIRTIO_F_IOMMU_PLATFORM pushes all
+> the virtio control structures into the first 2G of guest memory:
+> something we don't necessarily want to do per-default.
 > 
-> For vhost-net the feature VIRTIO_F_IOMMU_PLATFORM has the following side
-> effect The vhost code assumes it the addresses on the virtio descriptor
-> ring are not guest physical addresses but iova's, and insists on doing a
-> translation of these regardless of what transport is used (e.g. whether
-> we emulate a PCI or a CCW device). (For details see commit 6b1e6cc7855b
-> "vhost: new device IOTLB API".) On s390 this results in severe
-> performance degradation (c.a. factor 10). BTW with ccw I/O there is
-> (architecturally) no IOMMU, so the whole address translation makes no
-> sense in the context of virtio-ccw.
+> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> Tested-by: Ram Pai <linuxram@us.ibm.com>
+> Tested-by: Michael Mueller <mimu@linux.ibm.com>
 
-That's just a QEMU thing. It uses the same flag for VIRTIO_F_ACCESS_PLATFORM
-and vhost IOTLB. QEMU can separate them, no need to change linux.
+This might work for you but it's fragile, since without
+VIRTIO_F_ACCESS_PLATFORM hypervisor assumes it gets
+GPA's, not DMA addresses.
 
 
-> Halil Pasic (2):
->   mm: move force_dma_unencrypted() to mem_encrypt.h
->   virtio: let virtio use DMA API when guest RAM is protected
+
+IOW this looks like another iteration of:
+
+	virtio: Support encrypted memory on powerpc secure guests
+
+which I was under the impression was abandoned as unnecessary.
+
+
+To summarize, the necessary conditions for a hack along these lines
+(using DMA API without VIRTIO_F_ACCESS_PLATFORM) are that we detect that:
+
+  - secure guest mode is enabled - so we know that since we don't share
+    most memory regular virtio code won't
+    work, even though the buggy hypervisor didn't set VIRTIO_F_ACCESS_PLATFORM
+  - DMA API is giving us addresses that are actually also physical
+    addresses
+  - Hypervisor is buggy and didn't enable VIRTIO_F_ACCESS_PLATFORM
+ 
+I don't see how this patch does this.
+
+
+> ---
+>  drivers/virtio/virtio_ring.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
->  drivers/virtio/virtio_ring.c |  3 +++
->  include/linux/dma-direct.h   |  9 ---------
->  include/linux/mem_encrypt.h  | 10 ++++++++++
->  3 files changed, 13 insertions(+), 9 deletions(-)
-> 
-> 
-> base-commit: ca7e1fd1026c5af6a533b4b5447e1d2f153e28f2
+> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+> index 867c7ebd3f10..fafc8f924955 100644
+> --- a/drivers/virtio/virtio_ring.c
+> +++ b/drivers/virtio/virtio_ring.c
+> @@ -243,6 +243,9 @@ static bool vring_use_dma_api(struct virtio_device *vdev)
+>  	if (!virtio_has_iommu_quirk(vdev))
+>  		return true;
+>  
+> +	if (force_dma_unencrypted(&vdev->dev))
+> +		return true;
+> +
+>  	/* Otherwise, we are left to guess. */
+>  	/*
+>  	 * In theory, it's possible to have a buggy QEMU-supposed
 > -- 
 > 2.17.1
 
