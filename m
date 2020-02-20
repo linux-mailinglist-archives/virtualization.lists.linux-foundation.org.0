@@ -2,73 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32E4D1655F7
-	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 04:58:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C39FF1655F8
+	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 04:58:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id DF84A84E6B;
-	Thu, 20 Feb 2020 03:58:22 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7B06C84E3A;
+	Thu, 20 Feb 2020 03:58:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LtMEOP7kI-Bo; Thu, 20 Feb 2020 03:58:22 +0000 (UTC)
+	with ESMTP id a0ow7gmElySA; Thu, 20 Feb 2020 03:58:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id F11A4843E9;
-	Thu, 20 Feb 2020 03:58:21 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4456A84E77;
+	Thu, 20 Feb 2020 03:58:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E64DBC013E;
-	Thu, 20 Feb 2020 03:58:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 238BFC013E;
+	Thu, 20 Feb 2020 03:58:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 791F0C013E
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A654FC013E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 03:58:20 +0000 (UTC)
+ Thu, 20 Feb 2020 03:58:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 6740B86566
+ by fraxinus.osuosl.org (Postfix) with ESMTP id A297C84E3A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 03:58:20 +0000 (UTC)
+ Thu, 20 Feb 2020 03:58:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id G79QLANFA6gA
+ with ESMTP id cn0pg64peGPH
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 03:58:19 +0000 (UTC)
+ Thu, 20 Feb 2020 03:58:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 1B84584C23
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 30444843E9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 03:58:19 +0000 (UTC)
+ Thu, 20 Feb 2020 03:58:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582171098;
+ s=mimecast20190719; t=1582171113;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=0NrIsznZgT1XBTDWmxVoUSynAoX0D+HL+ThjY7xYyAI=;
- b=BxZkqH9qpB36oZqgMruNd0mNvBVaN8bHDPboHUja6Qw5Dm/kQ4tJXtyeuJjGrE0vU5y0c0
- quTNv+E9LFoSHHwZCS0zks+5mT+96Q9LoqyILs5lBS56OwK3wx5PXUStOMaMViw8ebVrpy
- +cS0olP3gmel+VMDKjcLYp2bNuVIZdI=
+ bh=Ssepvtysw8xWLGk5qhKC4YUFIF/5n2sYIB99XY8DZ5M=;
+ b=HtMUM83cvkVQ/e20XpkPetYn3Sn1BrEaPRitaLOibLHoY66D8gBu2deoQnuR+Bcj3CXoVd
+ cCATRwMmE47k1x8c9n4uqulTCoI7zDkSWoImMIaI87ULsUX+7KAn2tWKtBAvalzhrZaGON
+ 7OjevqRjrp8mTquKTjEClKfK8v+L/vA=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-202-8pFIcwPrPiesNGJhFOZ7HQ-1; Wed, 19 Feb 2020 22:58:16 -0500
-X-MC-Unique: 8pFIcwPrPiesNGJhFOZ7HQ-1
+ us-mta-375-lOSGvKUYPm2hTep9Q_mS3w-1; Wed, 19 Feb 2020 22:58:31 -0500
+X-MC-Unique: lOSGvKUYPm2hTep9Q_mS3w-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
  [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7CB7D1005513;
- Thu, 20 Feb 2020 03:58:13 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 634481005512;
+ Thu, 20 Feb 2020 03:58:28 +0000 (UTC)
 Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
  (ovpn-12-159.pek2.redhat.com [10.72.12.159])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E61E35C219;
- Thu, 20 Feb 2020 03:57:55 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8081D5C651;
+ Thu, 20 Feb 2020 03:58:13 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
  virtualization@lists.linux-foundation.org, netdev@vger.kernel.org
-Subject: [PATCH V3 4/5] virtio: introduce a vDPA based transport
-Date: Thu, 20 Feb 2020 11:56:49 +0800
-Message-Id: <20200220035650.7986-5-jasowang@redhat.com>
+Subject: [PATCH V3 5/5] vdpasim: vDPA device simulator
+Date: Thu, 20 Feb 2020 11:56:50 +0800
+Message-Id: <20200220035650.7986-6-jasowang@redhat.com>
 In-Reply-To: <20200220035650.7986-1-jasowang@redhat.com>
 References: <20200220035650.7986-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -95,69 +95,83 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch introduces a vDPA transport for virtio. This is used to
-use kernel virtio driver to drive the vDPA device that is capable
-of populating virtqueue directly.
+This patch implements a software vDPA networking device. The datapath
+is implemented through vringh and workqueue. The device has an on-chip
+IOMMU which translates IOVA to PA. For kernel virtio drivers, vDPA
+simulator driver provides dma_ops. For vhost driers, set_map() methods
+of vdpa_config_ops is implemented to accept mappings from vhost.
 
-A new virtio-vdpa driver will be registered to the vDPA bus, when a
-new virtio-vdpa device is probed, it will register the device with
-vdpa based config ops. This means it is a software transport between
-vDPA driver and vDPA device. The transport was implemented through
-bus_ops of vDPA parent.
+Currently, vDPA device simulator will loopback TX traffic to RX. So
+the main use case for the device is vDPA feature testing, prototyping
+and development.
+
+Note, there's no management API implemented, a vDPA device will be
+registered once the module is probed. We need to handle this in the
+future development.
 
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/Kconfig       |  13 ++
- drivers/virtio/Makefile      |   1 +
- drivers/virtio/virtio_vdpa.c | 392 +++++++++++++++++++++++++++++++++++
- 3 files changed, 406 insertions(+)
- create mode 100644 drivers/virtio/virtio_vdpa.c
+ drivers/virtio/vdpa/Kconfig             |  18 +
+ drivers/virtio/vdpa/Makefile            |   1 +
+ drivers/virtio/vdpa/vdpa_sim/Makefile   |   2 +
+ drivers/virtio/vdpa/vdpa_sim/vdpa_sim.c | 660 ++++++++++++++++++++++++
+ 4 files changed, 681 insertions(+)
+ create mode 100644 drivers/virtio/vdpa/vdpa_sim/Makefile
+ create mode 100644 drivers/virtio/vdpa/vdpa_sim/vdpa_sim.c
 
-diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
-index 9c4fdb64d9ac..0df3676b0f4f 100644
---- a/drivers/virtio/Kconfig
-+++ b/drivers/virtio/Kconfig
-@@ -43,6 +43,19 @@ config VIRTIO_PCI_LEGACY
+diff --git a/drivers/virtio/vdpa/Kconfig b/drivers/virtio/vdpa/Kconfig
+index 7a99170e6c30..e3656b722654 100644
+--- a/drivers/virtio/vdpa/Kconfig
++++ b/drivers/virtio/vdpa/Kconfig
+@@ -7,3 +7,21 @@ config VDPA
+           datapath which complies with virtio specifications with
+           vendor specific control path.
  
- 	  If unsure, say Y.
- 
-+config VIRTIO_VDPA
-+	tristate "vDPA driver for virtio devices"
++menuconfig VDPA_MENU
++	bool "VDPA drivers"
++	default n
++
++if VDPA_MENU
++
++config VDPA_SIM
++	tristate "vDPA device simulator"
 +        select VDPA
-+        select VIRTIO
-+	help
-+	  This driver provides support for virtio based paravirtual
-+	  device driver over vDPA bus. For this to be useful, you need
-+	  an appropriate vDPA device implementation that operates on a
-+          physical device to allow the datapath of virtio to be
-+	  offloaded to hardware.
++        depends on RUNTIME_TESTING_MENU
++        default n
++        help
++          vDPA networking device simulator which loop TX traffic back
++          to RX. This device is used for testing, prototyping and
++          development of vDPA.
 +
-+	  If unsure, say M.
++endif # VDPA_MENU
 +
- config VIRTIO_PMEM
- 	tristate "Support for virtio pmem driver"
- 	depends on VIRTIO
-diff --git a/drivers/virtio/Makefile b/drivers/virtio/Makefile
-index fdf5eacd0d0a..3407ac03fe60 100644
---- a/drivers/virtio/Makefile
-+++ b/drivers/virtio/Makefile
-@@ -6,4 +6,5 @@ virtio_pci-y := virtio_pci_modern.o virtio_pci_common.o
- virtio_pci-$(CONFIG_VIRTIO_PCI_LEGACY) += virtio_pci_legacy.o
- obj-$(CONFIG_VIRTIO_BALLOON) += virtio_balloon.o
- obj-$(CONFIG_VIRTIO_INPUT) += virtio_input.o
-+obj-$(CONFIG_VIRTIO_VDPA) += virtio_vdpa.o
- obj-$(CONFIG_VDPA) += vdpa/
-diff --git a/drivers/virtio/virtio_vdpa.c b/drivers/virtio/virtio_vdpa.c
+diff --git a/drivers/virtio/vdpa/Makefile b/drivers/virtio/vdpa/Makefile
+index ee6a35e8a4fb..3814af8e097b 100644
+--- a/drivers/virtio/vdpa/Makefile
++++ b/drivers/virtio/vdpa/Makefile
+@@ -1,2 +1,3 @@
+ # SPDX-License-Identifier: GPL-2.0
+ obj-$(CONFIG_VDPA) += vdpa.o
++obj-$(CONFIG_VDPA_SIM) += vdpa_sim/
+diff --git a/drivers/virtio/vdpa/vdpa_sim/Makefile b/drivers/virtio/vdpa/vdpa_sim/Makefile
 new file mode 100644
-index 000000000000..077796087abf
+index 000000000000..b40278f65e04
 --- /dev/null
-+++ b/drivers/virtio/virtio_vdpa.c
-@@ -0,0 +1,392 @@
++++ b/drivers/virtio/vdpa/vdpa_sim/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier: GPL-2.0
++obj-$(CONFIG_VDPA_SIM) += vdpa_sim.o
+diff --git a/drivers/virtio/vdpa/vdpa_sim/vdpa_sim.c b/drivers/virtio/vdpa/vdpa_sim/vdpa_sim.c
+new file mode 100644
+index 000000000000..59d464f72ac2
+--- /dev/null
++++ b/drivers/virtio/vdpa/vdpa_sim/vdpa_sim.c
+@@ -0,0 +1,660 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * VIRTIO based driver for vDPA device
++ * VDPA networking device simulator.
 + *
-+ * Copyright (c) 2020, Red Hat. All rights reserved.
++ * Copyright (c) 2020, Red Hat Inc. All rights reserved.
 + *     Author: Jason Wang <jasowang@redhat.com>
 + *
 + */
@@ -166,385 +180,653 @@ index 000000000000..077796087abf
 +#include <linux/module.h>
 +#include <linux/device.h>
 +#include <linux/kernel.h>
++#include <linux/fs.h>
++#include <linux/poll.h>
 +#include <linux/slab.h>
++#include <linux/sched.h>
++#include <linux/wait.h>
 +#include <linux/uuid.h>
-+#include <linux/virtio.h>
++#include <linux/iommu.h>
++#include <linux/sysfs.h>
++#include <linux/file.h>
++#include <linux/etherdevice.h>
++#include <linux/vringh.h>
 +#include <linux/vdpa.h>
-+#include <linux/virtio_config.h>
-+#include <linux/virtio_ring.h>
++#include <linux/vhost_iotlb.h>
++#include <uapi/linux/virtio_config.h>
++#include <uapi/linux/virtio_net.h>
 +
-+#define MOD_VERSION  "0.1"
-+#define MOD_AUTHOR   "Jason Wang <jasowang@redhat.com>"
-+#define MOD_DESC     "vDPA bus driver for virtio devices"
-+#define MOD_LICENSE  "GPL v2"
++#define DRV_VERSION  "0.1"
++#define DRV_AUTHOR   "Jason Wang <jasowang@redhat.com>"
++#define DRV_DESC     "vDPA Device Simulator"
++#define DRV_LICENSE  "GPL v2"
 +
-+struct virtio_vdpa_device {
-+	struct virtio_device vdev;
-+	struct vdpa_device *vdpa;
-+	u64 features;
++struct vdpasim_virtqueue {
++	struct vringh vring;
++	struct vringh_kiov iov;
++	unsigned short head;
++	bool ready;
++	u64 desc_addr;
++	u64 device_addr;
++	u64 driver_addr;
++	u32 num;
++	void *private;
++	irqreturn_t (*cb)(void *data);
++};
 +
-+	/* The lock to protect virtqueue list */
++#define VDPASIM_QUEUE_ALIGN PAGE_SIZE
++#define VDPASIM_QUEUE_MAX 256
++#define VDPASIM_DEVICE_ID 0x1
++#define VDPASIM_VENDOR_ID 0
++#define VDPASIM_VQ_NUM 0x2
++#define VDPASIM_NAME "vdpasim-netdev"
++
++static u64 vdpasim_features = (1ULL << VIRTIO_F_ANY_LAYOUT) |
++			      (1ULL << VIRTIO_F_VERSION_1)  |
++			      (1ULL << VIRTIO_F_IOMMU_PLATFORM);
++
++/* State of each vdpasim device */
++struct vdpasim {
++	struct vdpasim_virtqueue vqs[2];
++	struct work_struct work;
++	/* spinlock to synchronize virtqueue state */
 +	spinlock_t lock;
-+	/* List of virtio_vdpa_vq_info */
-+	struct list_head virtqueues;
++	struct vdpa_device *vdpa;
++	struct device dev;
++	struct virtio_net_config config;
++	struct vhost_iotlb *iommu;
++	void *buffer;
++	u32 status;
++	u32 generation;
++	u64 features;
 +};
 +
-+struct virtio_vdpa_vq_info {
-+	/* the actual virtqueue */
-+	struct virtqueue *vq;
++struct vdpasim *vdpasim_dev;
 +
-+	/* the list node for the virtqueues list */
-+	struct list_head node;
-+};
-+
-+static inline struct virtio_vdpa_device *
-+to_virtio_vdpa_device(struct virtio_device *dev)
++static struct vdpasim *dev_to_sim(struct device *dev)
 +{
-+	return container_of(dev, struct virtio_vdpa_device, vdev);
++	return container_of(dev, struct vdpasim, dev);
 +}
 +
-+static struct vdpa_device *vd_get_vdpa(struct virtio_device *vdev)
++static struct vdpasim *vdpa_to_sim(struct vdpa_device *vdpa)
 +{
-+	return to_virtio_vdpa_device(vdev)->vdpa;
++	struct device *d = &vdpa->dev;
++
++	return dev_to_sim(d->parent);
 +}
 +
-+static void virtio_vdpa_get(struct virtio_device *vdev, unsigned offset,
-+			    void *buf, unsigned len)
++static void vdpasim_queue_ready(struct vdpasim *vdpasim, unsigned int idx)
 +{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++	int ret;
 +
-+	ops->get_config(vdpa, offset, buf, len);
++	ret = vringh_init_iotlb(&vq->vring, vdpasim_features,
++				VDPASIM_QUEUE_MAX, false,
++				(struct vring_desc *)(uintptr_t)vq->desc_addr,
++				(struct vring_avail *)
++				(uintptr_t)vq->driver_addr,
++				(struct vring_used *)
++				(uintptr_t)vq->device_addr);
 +}
 +
-+static void virtio_vdpa_set(struct virtio_device *vdev, unsigned offset,
-+			    const void *buf, unsigned len)
++static void vdpasim_vq_reset(struct vdpasim_virtqueue *vq)
 +{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	ops->set_config(vdpa, offset, buf, len);
++	vq->ready = 0;
++	vq->desc_addr = 0;
++	vq->driver_addr = 0;
++	vq->device_addr = 0;
++	vq->cb = NULL;
++	vq->private = NULL;
++	vringh_init_iotlb(&vq->vring, vdpasim_features, VDPASIM_QUEUE_MAX,
++			  false, 0, 0, 0);
 +}
 +
-+static u32 virtio_vdpa_generation(struct virtio_device *vdev)
++static void vdpasim_reset(struct vdpasim *vdpasim)
 +{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
++	int i;
 +
-+	if (ops->get_generation)
-+		return ops->get_generation(vdpa);
++	for (i = 0; i < VDPASIM_VQ_NUM; i++)
++		vdpasim_vq_reset(&vdpasim->vqs[i]);
 +
-+	return 0;
++	vhost_iotlb_reset(vdpasim->iommu);
++
++	vdpasim->features = 0;
++	vdpasim->status = 0;
++	++vdpasim->generation;
 +}
 +
-+static u8 virtio_vdpa_get_status(struct virtio_device *vdev)
++static void vdpasim_work(struct work_struct *work)
 +{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	return ops->get_status(vdpa);
-+}
-+
-+static void virtio_vdpa_set_status(struct virtio_device *vdev, u8 status)
-+{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	return ops->set_status(vdpa, status);
-+}
-+
-+static void virtio_vdpa_reset(struct virtio_device *vdev)
-+{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	return ops->set_status(vdpa, 0);
-+}
-+
-+static bool virtio_vdpa_notify(struct virtqueue *vq)
-+{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vq->vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	ops->kick_vq(vdpa, vq->index);
-+
-+	return true;
-+}
-+
-+static irqreturn_t virtio_vdpa_config_cb(void *private)
-+{
-+	struct virtio_vdpa_device *vd_dev = private;
-+
-+	virtio_config_changed(&vd_dev->vdev);
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static irqreturn_t virtio_vdpa_virtqueue_cb(void *private)
-+{
-+	struct virtio_vdpa_vq_info *info = private;
-+
-+	return vring_interrupt(0, info->vq);
-+}
-+
-+static struct virtqueue *
-+virtio_vdpa_setup_vq(struct virtio_device *vdev, unsigned int index,
-+		     void (*callback)(struct virtqueue *vq),
-+		     const char *name, bool ctx)
-+{
-+	struct virtio_vdpa_device *vd_dev = to_virtio_vdpa_device(vdev);
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+	struct virtio_vdpa_vq_info *info;
-+	struct vdpa_callback cb;
-+	struct virtqueue *vq;
-+	u64 desc_addr, driver_addr, device_addr;
-+	unsigned long flags;
-+	u32 align, num;
++	struct vdpasim *vdpasim = container_of(work, struct
++						 vdpasim, work);
++	struct vdpasim_virtqueue *txq = &vdpasim->vqs[1];
++	struct vdpasim_virtqueue *rxq = &vdpasim->vqs[0];
++	size_t read, write, total_write;
 +	int err;
++	int pkts = 0;
 +
-+	if (!name)
-+		return NULL;
++	spin_lock(&vdpasim->lock);
 +
-+	/* Queue shouldn't already be set up. */
-+	if (ops->get_vq_ready(vdpa, index))
-+		return ERR_PTR(-ENOENT);
++	if (!(vdpasim->status & VIRTIO_CONFIG_S_DRIVER_OK))
++		goto out;
 +
-+	/* Allocate and fill out our active queue description */
-+	info = kmalloc(sizeof(*info), GFP_KERNEL);
-+	if (!info)
-+		return ERR_PTR(-ENOMEM);
++	if (!txq->ready || !rxq->ready)
++		goto out;
 +
-+	num = ops->get_vq_num_max(vdpa);
-+	if (num == 0) {
-+		err = -ENOENT;
-+		goto error_new_virtqueue;
-+	}
++	while (true) {
++		total_write = 0;
++		err = vringh_getdesc_iotlb(&txq->vring, &txq->iov, NULL,
++					   &txq->head, GFP_ATOMIC);
++		if (err <= 0)
++			break;
 +
-+	/* Create the vring */
-+	align = ops->get_vq_align(vdpa);
-+	vq = vring_create_virtqueue(index, num, align, vdev,
-+				    true, true, ctx,
-+				    virtio_vdpa_notify, callback, name);
-+	if (!vq) {
-+		err = -ENOMEM;
-+		goto error_new_virtqueue;
-+	}
-+
-+	/* Setup virtqueue callback */
-+	cb.callback = virtio_vdpa_virtqueue_cb;
-+	cb.private = info;
-+	ops->set_vq_cb(vdpa, index, &cb);
-+	ops->set_vq_num(vdpa, index, virtqueue_get_vring_size(vq));
-+
-+	desc_addr = virtqueue_get_desc_addr(vq);
-+	driver_addr = virtqueue_get_avail_addr(vq);
-+	device_addr = virtqueue_get_used_addr(vq);
-+
-+	if (ops->set_vq_address(vdpa, index,
-+				desc_addr, driver_addr,
-+				device_addr)) {
-+		err = -EINVAL;
-+		goto err_vq;
-+	}
-+
-+	ops->set_vq_ready(vdpa, index, 1);
-+
-+	vq->priv = info;
-+	info->vq = vq;
-+
-+	spin_lock_irqsave(&vd_dev->lock, flags);
-+	list_add(&info->node, &vd_dev->virtqueues);
-+	spin_unlock_irqrestore(&vd_dev->lock, flags);
-+
-+	return vq;
-+
-+err_vq:
-+	vring_del_virtqueue(vq);
-+error_new_virtqueue:
-+	ops->set_vq_ready(vdpa, index, 0);
-+	/* VDPA driver should make sure vq is stopeed here */
-+	WARN_ON(ops->get_vq_ready(vdpa, index));
-+	kfree(info);
-+	return ERR_PTR(err);
-+}
-+
-+static void virtio_vdpa_del_vq(struct virtqueue *vq)
-+{
-+	struct virtio_vdpa_device *vd_dev = to_virtio_vdpa_device(vq->vdev);
-+	struct vdpa_device *vdpa = vd_dev->vdpa;
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+	struct virtio_vdpa_vq_info *info = vq->priv;
-+	unsigned int index = vq->index;
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&vd_dev->lock, flags);
-+	list_del(&info->node);
-+	spin_unlock_irqrestore(&vd_dev->lock, flags);
-+
-+	/* Select and deactivate the queue */
-+	ops->set_vq_ready(vdpa, index, 0);
-+	WARN_ON(ops->get_vq_ready(vdpa, index));
-+
-+	vring_del_virtqueue(vq);
-+
-+	kfree(info);
-+}
-+
-+static void virtio_vdpa_del_vqs(struct virtio_device *vdev)
-+{
-+	struct virtqueue *vq, *n;
-+
-+	list_for_each_entry_safe(vq, n, &vdev->vqs, list)
-+		virtio_vdpa_del_vq(vq);
-+}
-+
-+static int virtio_vdpa_find_vqs(struct virtio_device *vdev, unsigned nvqs,
-+				struct virtqueue *vqs[],
-+				vq_callback_t *callbacks[],
-+				const char * const names[],
-+				const bool *ctx,
-+				struct irq_affinity *desc)
-+{
-+	struct virtio_vdpa_device *vd_dev = to_virtio_vdpa_device(vdev);
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+	struct vdpa_callback cb;
-+	int i, err, queue_idx = 0;
-+
-+	for (i = 0; i < nvqs; ++i) {
-+		if (!names[i]) {
-+			vqs[i] = NULL;
-+			continue;
++		err = vringh_getdesc_iotlb(&rxq->vring, NULL, &rxq->iov,
++					   &rxq->head, GFP_ATOMIC);
++		if (err <= 0) {
++			vringh_complete_iotlb(&txq->vring, txq->head, 0);
++			break;
 +		}
 +
-+		vqs[i] = virtio_vdpa_setup_vq(vdev, queue_idx++,
-+					      callbacks[i], names[i], ctx ?
-+					      ctx[i] : false);
-+		if (IS_ERR(vqs[i])) {
-+			err = PTR_ERR(vqs[i]);
-+			goto err_setup_vq;
++		while (true) {
++			read = vringh_iov_pull_iotlb(&txq->vring, &txq->iov,
++						     vdpasim->buffer,
++						     PAGE_SIZE);
++			if (read <= 0)
++				break;
++
++			write = vringh_iov_push_iotlb(&rxq->vring, &rxq->iov,
++						      vdpasim->buffer, read);
++			if (write <= 0)
++				break;
++
++			total_write += write;
++		}
++
++		/* Make sure data is wrote before advancing index */
++		smp_wmb();
++
++		vringh_complete_iotlb(&txq->vring, txq->head, 0);
++		vringh_complete_iotlb(&rxq->vring, rxq->head, total_write);
++
++		/* Make sure used is visible before rasing the interrupt. */
++		smp_wmb();
++
++		local_bh_disable();
++		if (txq->cb)
++			txq->cb(txq->private);
++		if (rxq->cb)
++			rxq->cb(rxq->private);
++		local_bh_enable();
++
++		if (++pkts > 4) {
++			schedule_work(&vdpasim->work);
++			goto out;
 +		}
 +	}
 +
-+	cb.callback = virtio_vdpa_config_cb;
-+	cb.private = vd_dev;
-+	ops->set_config_cb(vdpa, &cb);
-+
-+	return 0;
-+
-+err_setup_vq:
-+	virtio_vdpa_del_vqs(vdev);
-+	return err;
++out:
++	spin_unlock(&vdpasim->lock);
 +}
 +
-+static u64 virtio_vdpa_get_features(struct virtio_device *vdev)
++static int dir_to_perm(enum dma_data_direction dir)
 +{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
++	int perm = -EFAULT;
 +
-+	return ops->get_features(vdpa);
++	switch (dir) {
++	case DMA_FROM_DEVICE:
++		perm = VHOST_MAP_WO;
++		break;
++	case DMA_TO_DEVICE:
++		perm = VHOST_MAP_RO;
++		break;
++	case DMA_BIDIRECTIONAL:
++		perm = VHOST_MAP_RW;
++		break;
++	default:
++		break;
++	}
++
++	return perm;
 +}
 +
-+static int virtio_vdpa_finalize_features(struct virtio_device *vdev)
++static dma_addr_t vdpasim_map_page(struct device *dev, struct page *page,
++				   unsigned long offset, size_t size,
++				   enum dma_data_direction dir,
++				   unsigned long attrs)
 +{
-+	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	const struct vdpa_config_ops *ops = vdpa->config;
++	struct vdpasim *vdpasim = dev_to_sim(dev);
++	struct vhost_iotlb *iommu = vdpasim->iommu;
++	u64 pa = (page_to_pfn(page) << PAGE_SHIFT) + offset;
++	int ret, perm = dir_to_perm(dir);
 +
-+	/* Give virtio_ring a chance to accept features. */
-+	vring_transport_features(vdev);
++	if (perm < 0)
++		return DMA_MAPPING_ERROR;
 +
-+	return ops->set_features(vdpa, vdev->features);
++	/* For simplicity, use identical mapping to avoid e.g iova
++	 * allocator.
++	 */
++	ret = vhost_iotlb_add_range(iommu, pa, pa + size - 1,
++				    pa, dir_to_perm(dir));
++	if (ret)
++		return DMA_MAPPING_ERROR;
++
++	return (dma_addr_t)(pa);
 +}
 +
-+static const char *virtio_vdpa_bus_name(struct virtio_device *vdev)
++static void vdpasim_unmap_page(struct device *dev, dma_addr_t dma_addr,
++			       size_t size, enum dma_data_direction dir,
++			       unsigned long attrs)
 +{
-+	struct virtio_vdpa_device *vd_dev = to_virtio_vdpa_device(vdev);
-+	struct vdpa_device *vdpa = vd_dev->vdpa;
++	struct vdpasim *vdpasim = dev_to_sim(dev);
++	struct vhost_iotlb *iommu = vdpasim->iommu;
 +
-+	return dev_name(&vdpa->dev);
++	vhost_iotlb_del_range(iommu, (u64)dma_addr,
++			      (u64)dma_addr + size - 1);
 +}
 +
-+static const struct virtio_config_ops virtio_vdpa_config_ops = {
-+	.get		= virtio_vdpa_get,
-+	.set		= virtio_vdpa_set,
-+	.generation	= virtio_vdpa_generation,
-+	.get_status	= virtio_vdpa_get_status,
-+	.set_status	= virtio_vdpa_set_status,
-+	.reset		= virtio_vdpa_reset,
-+	.find_vqs	= virtio_vdpa_find_vqs,
-+	.del_vqs	= virtio_vdpa_del_vqs,
-+	.get_features	= virtio_vdpa_get_features,
-+	.finalize_features = virtio_vdpa_finalize_features,
-+	.bus_name	= virtio_vdpa_bus_name,
++static void *vdpasim_alloc_coherent(struct device *dev, size_t size,
++				    dma_addr_t *dma_addr, gfp_t flag,
++				    unsigned long attrs)
++{
++	struct vdpasim *vdpasim = dev_to_sim(dev);
++	struct vhost_iotlb *iommu = vdpasim->iommu;
++	void *addr = kmalloc(size, flag);
++	int ret;
++
++	if (!addr)
++		*dma_addr = DMA_MAPPING_ERROR;
++	else {
++		u64 pa = virt_to_phys(addr);
++
++		ret = vhost_iotlb_add_range(iommu, (u64)pa,
++					    (u64)pa + size - 1,
++					    pa, VHOST_MAP_RW);
++		if (ret) {
++			*dma_addr = DMA_MAPPING_ERROR;
++			kfree(addr);
++			addr = NULL;
++		} else
++			*dma_addr = (dma_addr_t)pa;
++	}
++
++	return addr;
++}
++
++static void vdpasim_free_coherent(struct device *dev, size_t size,
++				void *vaddr, dma_addr_t dma_addr,
++				unsigned long attrs)
++{
++	struct vdpasim *vdpasim = dev_to_sim(dev);
++	struct vhost_iotlb *iommu = vdpasim->iommu;
++
++	vhost_iotlb_del_range(iommu, (u64)dma_addr,
++			      (u64)dma_addr + size - 1);
++	kfree(phys_to_virt((uintptr_t)dma_addr));
++}
++
++static const struct dma_map_ops vdpasim_dma_ops = {
++	.map_page = vdpasim_map_page,
++	.unmap_page = vdpasim_unmap_page,
++	.alloc = vdpasim_alloc_coherent,
++	.free = vdpasim_free_coherent,
 +};
 +
-+static void virtio_vdpa_release_dev(struct device *_d)
-+{
-+	struct virtio_device *vdev =
-+	       container_of(_d, struct virtio_device, dev);
-+	struct virtio_vdpa_device *vd_dev =
-+	       container_of(vdev, struct virtio_vdpa_device, vdev);
++static const struct vdpa_config_ops vdpasim_net_config_ops;
 +
-+	kfree(vd_dev);
++static void vdpasim_device_release(struct device *dev)
++{
++	struct vdpasim *vdpasim = dev_to_sim(dev);
++
++	cancel_work_sync(&vdpasim->work);
++	kfree(vdpasim->buffer);
++	vhost_iotlb_free(vdpasim->iommu);
++	kfree(vdpasim);
 +}
 +
-+static int virtio_vdpa_probe(struct vdpa_device *vdpa)
++static struct vdpasim *vdpasim_create(void)
 +{
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+	struct virtio_vdpa_device *vd_dev;
-+	int ret = -EINVAL;
++	struct virtio_net_config *config;
++	struct vhost_iotlb *iommu;
++	struct vdpasim *vdpasim;
++	struct device *dev;
++	void *buffer;
++	int ret = -ENOMEM;
 +
-+	vd_dev = kzalloc(sizeof(*vd_dev), GFP_KERNEL);
-+	if (!vd_dev)
-+		return -ENOMEM;
-+
-+	vd_dev->vdev.dev.parent = vdpa_get_dma_dev(vdpa);
-+	vd_dev->vdev.dev.release = virtio_vdpa_release_dev;
-+	vd_dev->vdev.config = &virtio_vdpa_config_ops;
-+	vd_dev->vdpa = vdpa;
-+	INIT_LIST_HEAD(&vd_dev->virtqueues);
-+	spin_lock_init(&vd_dev->lock);
-+
-+	vd_dev->vdev.id.device = ops->get_device_id(vdpa);
-+	if (vd_dev->vdev.id.device == 0)
++	iommu = vhost_iotlb_alloc(2048, 0);
++	if (!iommu)
 +		goto err;
 +
-+	vd_dev->vdev.id.vendor = ops->get_vendor_id(vdpa);
-+	ret = register_virtio_device(&vd_dev->vdev);
++	buffer = kmalloc(PAGE_SIZE, GFP_KERNEL);
++	if (!buffer)
++		goto err_buffer;
++
++	vdpasim = kzalloc(sizeof(*vdpasim), GFP_KERNEL);
++	if (!vdpasim)
++		goto err_alloc;
++
++	vdpasim->buffer = buffer;
++	vdpasim->iommu = iommu;
++
++	config = &vdpasim->config;
++	config->mtu = 1500;
++	config->status = VIRTIO_NET_S_LINK_UP;
++	eth_random_addr(config->mac);
++
++	INIT_WORK(&vdpasim->work, vdpasim_work);
++	spin_lock_init(&vdpasim->lock);
++
++	vringh_set_iotlb(&vdpasim->vqs[0].vring, vdpasim->iommu);
++	vringh_set_iotlb(&vdpasim->vqs[1].vring, vdpasim->iommu);
++
++	dev = &vdpasim->dev;
++	dev->release = vdpasim_device_release;
++	dev->coherent_dma_mask = DMA_BIT_MASK(64);
++	set_dma_ops(dev, &vdpasim_dma_ops);
++	dev_set_name(dev, "%s", VDPASIM_NAME);
++
++	ret = device_register(&vdpasim->dev);
 +	if (ret)
-+		goto err;
++		goto err_init;
 +
-+	vdpa_set_drvdata(vdpa, vd_dev);
++	vdpasim->vdpa = vdpa_alloc_device(dev, dev, &vdpasim_net_config_ops);
++	if (ret)
++		goto err_vdpa;
 +
++	ret = vdpa_register_device(vdpasim->vdpa);
++	if (ret)
++		goto err_register;
++
++	return vdpasim;
++
++err_register:
++	put_device(&vdpasim->vdpa->dev);
++err_vdpa:
++	device_del(&vdpasim->dev);
++	goto err;
++err_init:
++	put_device(&vdpasim->dev);
++	goto err;
++err_alloc:
++	kfree(buffer);
++err_buffer:
++	vhost_iotlb_free(iommu);
++err:
++	return ERR_PTR(ret);
++}
++
++static int vdpasim_set_vq_address(struct vdpa_device *vdpa, u16 idx,
++				  u64 desc_area, u64 driver_area,
++				  u64 device_area)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++
++	vq->desc_addr = desc_area;
++	vq->driver_addr = driver_area;
++	vq->device_addr = device_area;
++
++	return 0;
++}
++
++static void vdpasim_set_vq_num(struct vdpa_device *vdpa, u16 idx, u32 num)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++
++	vq->num = num;
++}
++
++static void vdpasim_kick_vq(struct vdpa_device *vdpa, u16 idx)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++
++	if (vq->ready)
++		schedule_work(&vdpasim->work);
++}
++
++static void vdpasim_set_vq_cb(struct vdpa_device *vdpa, u16 idx,
++			      struct vdpa_callback *cb)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++
++	vq->cb = cb->callback;
++	vq->private = cb->private;
++}
++
++static void vdpasim_set_vq_ready(struct vdpa_device *vdpa, u16 idx, bool ready)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++
++	spin_lock(&vdpasim->lock);
++	vq->ready = ready;
++	if (vq->ready)
++		vdpasim_queue_ready(vdpasim, idx);
++	spin_unlock(&vdpasim->lock);
++}
++
++static bool vdpasim_get_vq_ready(struct vdpa_device *vdpa, u16 idx)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++
++	return vq->ready;
++}
++
++static int vdpasim_set_vq_state(struct vdpa_device *vdpa, u16 idx, u64 state)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++	struct vringh *vrh = &vq->vring;
++
++	spin_lock(&vdpasim->lock);
++	vrh->last_avail_idx = state;
++	spin_unlock(&vdpasim->lock);
++
++	return 0;
++}
++
++static u64 vdpasim_get_vq_state(struct vdpa_device *vdpa, u16 idx)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
++	struct vringh *vrh = &vq->vring;
++
++	return vrh->last_avail_idx;
++}
++
++static u16 vdpasim_get_vq_align(struct vdpa_device *vdpa)
++{
++	return VDPASIM_QUEUE_ALIGN;
++}
++
++static u64 vdpasim_get_features(struct vdpa_device *vdpa)
++{
++	return vdpasim_features;
++}
++
++static int vdpasim_set_features(struct vdpa_device *vdpa, u64 features)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++
++	/* DMA mapping must be done by driver */
++	if (!(features & (1ULL << VIRTIO_F_IOMMU_PLATFORM)))
++		return -EINVAL;
++
++	vdpasim->features = features & vdpasim_features;
++
++	return 0;
++}
++
++static void vdpasim_set_config_cb(struct vdpa_device *vdpa,
++				  struct vdpa_callback *cb)
++{
++	/* We don't support config interrupt */
++}
++
++static u16 vdpasim_get_vq_num_max(struct vdpa_device *vdpa)
++{
++	return VDPASIM_QUEUE_MAX;
++}
++
++static u32 vdpasim_get_device_id(struct vdpa_device *vdpa)
++{
++	return VDPASIM_DEVICE_ID;
++}
++
++static u32 vdpasim_get_vendor_id(struct vdpa_device *vdpa)
++{
++	return VDPASIM_VENDOR_ID;
++}
++
++static u8 vdpasim_get_status(struct vdpa_device *vdpa)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	u8 status;
++
++	spin_lock(&vdpasim->lock);
++	status = vdpasim->status;
++	spin_unlock(&vdpasim->lock);
++
++	return vdpasim->status;
++}
++
++static void vdpasim_set_status(struct vdpa_device *vdpa, u8 status)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++
++	spin_lock(&vdpasim->lock);
++	vdpasim->status = status;
++	if (status == 0)
++		vdpasim_reset(vdpasim);
++	spin_unlock(&vdpasim->lock);
++}
++
++static void vdpasim_get_config(struct vdpa_device *vdpa, unsigned int offset,
++			     void *buf, unsigned int len)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++
++	if (offset + len < sizeof(struct virtio_net_config))
++		memcpy(buf, &vdpasim->config + offset, len);
++}
++
++static void vdpasim_set_config(struct vdpa_device *vdpa, unsigned int offset,
++			     const void *buf, unsigned int len)
++{
++	/* No writable config supportted by vdpasim */
++}
++
++static u32 vdpasim_get_generation(struct vdpa_device *vdpa)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++
++	return vdpasim->generation;
++}
++
++static int vdpasim_set_map(struct vdpa_device *vdpa,
++			   struct vhost_iotlb *iotlb)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++	struct vhost_iotlb_map *map;
++	u64 start = 0ULL, last = 0ULL - 1;
++	int ret;
++
++	vhost_iotlb_reset(vdpasim->iommu);
++
++	for (map = vhost_iotlb_itree_first(iotlb, start, last); map;
++	     map = vhost_iotlb_itree_next(map, start, last)) {
++		ret = vhost_iotlb_add_range(vdpasim->iommu, map->start,
++					    map->last, map->addr, map->perm);
++		if (ret)
++			goto err;
++	}
 +	return 0;
 +
 +err:
-+	kfree(vd_dev);
++	vhost_iotlb_reset(vdpasim->iommu);
 +	return ret;
 +}
 +
-+static void virtio_vdpa_remove(struct vdpa_device *vdpa)
++static int vdpasim_dma_map(struct vdpa_device *vdpa, u64 iova, u64 size,
++			   u64 pa, u32 perm)
 +{
-+	struct virtio_vdpa_device *vd_dev = vdpa_get_drvdata(vdpa);
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
 +
-+	unregister_virtio_device(&vd_dev->vdev);
++	return vhost_iotlb_add_range(vdpasim->iommu, iova,
++				     iova + size - 1, pa, perm);
 +}
 +
-+static struct vdpa_driver virtio_vdpa_driver = {
-+	.driver = {
-+		.name	= "virtio_vdpa",
-+	},
-+	.probe	= virtio_vdpa_probe,
-+	.remove = virtio_vdpa_remove,
++static int vdpasim_dma_unmap(struct vdpa_device *vdpa, u64 iova, u64 size)
++{
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++
++	vhost_iotlb_del_range(vdpasim->iommu, iova, iova + size - 1);
++
++	return 0;
++}
++
++static const struct vdpa_config_ops vdpasim_net_config_ops = {
++	.set_vq_address         = vdpasim_set_vq_address,
++	.set_vq_num             = vdpasim_set_vq_num,
++	.kick_vq                = vdpasim_kick_vq,
++	.set_vq_cb              = vdpasim_set_vq_cb,
++	.set_vq_ready           = vdpasim_set_vq_ready,
++	.get_vq_ready           = vdpasim_get_vq_ready,
++	.set_vq_state           = vdpasim_set_vq_state,
++	.get_vq_state           = vdpasim_get_vq_state,
++	.get_vq_align           = vdpasim_get_vq_align,
++	.get_features           = vdpasim_get_features,
++	.set_features           = vdpasim_set_features,
++	.set_config_cb          = vdpasim_set_config_cb,
++	.get_vq_num_max         = vdpasim_get_vq_num_max,
++	.get_device_id          = vdpasim_get_device_id,
++	.get_vendor_id          = vdpasim_get_vendor_id,
++	.get_status             = vdpasim_get_status,
++	.set_status             = vdpasim_set_status,
++	.get_config             = vdpasim_get_config,
++	.set_config             = vdpasim_set_config,
++	.get_generation         = vdpasim_get_generation,
++	.set_map                = vdpasim_set_map,
++	.dma_map                = vdpasim_dma_map,
++	.dma_unmap              = vdpasim_dma_unmap,
 +};
 +
-+module_vdpa_driver(virtio_vdpa_driver);
++static int __init vdpasim_dev_init(void)
++{
++	vdpasim_dev = vdpasim_create();
 +
-+MODULE_VERSION(MOD_VERSION);
-+MODULE_LICENSE(MOD_LICENSE);
-+MODULE_AUTHOR(MOD_AUTHOR);
-+MODULE_DESCRIPTION(MOD_DESC);
++	if (!IS_ERR(vdpasim_dev))
++		return 0;
++
++	return PTR_ERR(vdpasim_dev);
++}
++
++static int vdpasim_device_remove_cb(struct device *dev, void *data)
++{
++	struct vdpa_device *vdpa = dev_to_vdpa(dev);
++
++	vdpa_unregister_device(vdpa);
++
++	return 0;
++}
++
++static void __exit vdpasim_dev_exit(void)
++{
++	device_for_each_child(&vdpasim_dev->dev, NULL,
++			      vdpasim_device_remove_cb);
++	device_unregister(&vdpasim_dev->dev);
++}
++
++module_init(vdpasim_dev_init)
++module_exit(vdpasim_dev_exit)
++
++MODULE_VERSION(DRV_VERSION);
++MODULE_LICENSE(DRV_LICENSE);
++MODULE_AUTHOR(DRV_AUTHOR);
++MODULE_DESCRIPTION(DRV_DESC);
 -- 
 2.19.1
 
