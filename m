@@ -1,143 +1,109 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id F14031660C8
-	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 16:19:30 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id CCDAB1661D9
+	for <lists.virtualization@lfdr.de>; Thu, 20 Feb 2020 17:08:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0F4A120380;
-	Thu, 20 Feb 2020 15:19:29 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7836B870B3;
+	Thu, 20 Feb 2020 16:08:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id I-vfT878yEdU; Thu, 20 Feb 2020 15:19:26 +0000 (UTC)
+	with ESMTP id Ew6K0ieIrhKZ; Thu, 20 Feb 2020 16:08:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 585B2214F6;
-	Thu, 20 Feb 2020 15:19:26 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9A1C8875E0;
+	Thu, 20 Feb 2020 16:08:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C804C1D8E;
-	Thu, 20 Feb 2020 15:19:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7F74FC1D90;
+	Thu, 20 Feb 2020 16:08:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7B52CC013E
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 57AB4C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 15:19:24 +0000 (UTC)
+ Thu, 20 Feb 2020 16:08:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 64BD7203BA
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4639685FEB
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 15:19:24 +0000 (UTC)
+ Thu, 20 Feb 2020 16:08:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id uFahNw28S5YN
+ with ESMTP id TgQKGx0WDsrT
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 15:19:23 +0000 (UTC)
+ Thu, 20 Feb 2020 16:08:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr70050.outbound.protection.outlook.com [40.107.7.50])
- by silver.osuosl.org (Postfix) with ESMTPS id 4EC3420380
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1627685FCB
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Feb 2020 15:19:23 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JPkYoPFKnXifOx/hPhJRDVleCyYiHWLcWimSMRBW7dcIVgpdZ+7yE2YzDW77o71GNVffZGspNI6W6yBg4UaY4K6WjHUuW7EMJf1Dx7OIbpFfijJiMmZInQbN+ZTy7GSQIhMbnQc8CFdQfjltmEvoCIyT4BhxukIgNzOncsoZnFG0amugYpo8Ie2OWLPmLKRpQn437lywuSr/cj0urRo0iiy22q0KokgFod3mFj6G3x+N3tFz53lCHdSgPKKN6/3q1IHsCfltkE4Ky7aCQLNhiiW/m0imSma7AS6W1mWglAgos0dIzOtiShUQMiiJLLLb7B+utm9SPiQQf5jTZeqWQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LpgYwZTzNlUbboAFsXb/b/tpOxyoDQodk6oynpTqT2Q=;
- b=nKN5wpis7GXpgM9FKofSbljk9ArvOILXjt429x5KSl3boIWFO1y4DZ/JMVunkT1N/DOZEmoFYy+sONUvUqD+jgz7kafOgma+qi8VaNQiUc7qbJCk9nnWaD0SXg6vDq/b6PiS7AB9+JuyXOcqMPJKa5lRqFJYnVSpnRTi3OD+WDeqml1aNJRcSQOA15zd0VzQWsyKiSjoZPKQYnU3Xg7R1CanaWc8i6GAR5ypDHKKZ2kV6knsFMo+KP069lYB0plpIcCUySWLhdxDtlSfBrv6dZaP1d1iRmLL/jUb8Xh2wXrcCbBcIM+tHO6MS3zkrvp3cCrkpo3jEKfNreLb9KhbeA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LpgYwZTzNlUbboAFsXb/b/tpOxyoDQodk6oynpTqT2Q=;
- b=IjZN1+VfSez/FCpYBM/ahb+ZuhP34uMvsXNJ4gghCUSEkv52ba3dQvThtDx7tGMGeTdYfupuoPn0lw6wpGrmticmRW5r4nWIe4HXnbrODg+uh7yGSTyBVj5Cbztt23W4qgy09d+OPmgnD7ddMCl1G9davX5U3Jb0aRzkeZR993A=
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB4736.eurprd05.prod.outlook.com (20.176.4.21) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2729.25; Thu, 20 Feb 2020 15:19:19 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2729.033; Thu, 20 Feb 2020
- 15:19:19 +0000
-Received: from mlx.ziepe.ca (142.68.57.212) by
- MN2PR06CA0002.namprd06.prod.outlook.com (2603:10b6:208:23d::7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2750.17 via Frontend Transport; Thu, 20 Feb 2020 15:19:18 +0000
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
- <jgg@mellanox.com>)	id 1j4nbe-00030u-7e; Thu, 20 Feb 2020 11:19:14 -0400
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V4 4/5] virtio: introduce a vDPA based transport
-Thread-Topic: [PATCH V4 4/5] virtio: introduce a vDPA based transport
-Thread-Index: AQHV57TY4pPnijWOKk2zaNVux8dIL6gkMs4A
-Date: Thu, 20 Feb 2020 15:19:18 +0000
-Message-ID: <20200220151914.GW23930@mellanox.com>
-References: <20200220061141.29390-1-jasowang@redhat.com>
- <20200220061141.29390-5-jasowang@redhat.com>
-In-Reply-To: <20200220061141.29390-5-jasowang@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: MN2PR06CA0002.namprd06.prod.outlook.com
- (2603:10b6:208:23d::7) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [142.68.57.212]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 4b2282ec-6a5c-4833-c0d3-08d7b61840fe
-x-ms-traffictypediagnostic: VI1PR05MB4736:|VI1PR05MB4736:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <VI1PR05MB4736A964FD422C29FE7DF6A8CF130@VI1PR05MB4736.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:6790;
-x-forefront-prvs: 031996B7EF
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(366004)(396003)(346002)(39850400004)(136003)(376002)(199004)(189003)(54906003)(8936002)(316002)(9746002)(81166006)(66446008)(9786002)(7416002)(8676002)(4326008)(33656002)(71200400001)(5660300002)(1076003)(81156014)(52116002)(186003)(66946007)(478600001)(86362001)(36756003)(64756008)(6916009)(2906002)(66476007)(2616005)(26005)(66556008)(24400500001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4736;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: oiTL7fs5IJIIpdnibn3q4mNdYGkH+ZAVkDVwJNq5LEKmeehX4XWWBSxP04xNxI2fNJJizRBtzH1WtNPNwT7pI95lWX+bOl1PdU3JrDApbvgXLygiTTulqLc0mjm88ROJ1d6fcJJEQCCRbUmUvtcjRHTiybdWK7mMn0HnXrI0PxCEjGiGN51trfY+7WJVe/FPu3SN7YMJct3o+LskQqNJdJnGy9f7AjeGtWD5cfFrl0Cl9G0md2qza3R5clJnQWsG4/yRITvFQubSe8VcO6h4spv9tHX1BlWlZ1eQQ6kNTjv/gqpcsGjQUejtn43XWZuavpPHSEj6AIduPZr5LfsP2WceyPv/UpiYokwGZrx6sQ/Jh2j8iKYoCJTBHLtEnQkDkX72/fXctRCfHYchSoTTU/uvpunM9HzGZa+2vPd9CuuTu7I/roFt/G0g+W3vuxZ4O2zDmsFKx6zOaBNQX/Fdi/IbTGmn0Bcyn+OJTovBnkCdwOFTWEWr9d1oAiSKiuJQ
-x-ms-exchange-antispam-messagedata: zW65RzzzcRJ+oQeSGRnwWIU8eBXfNN2UPh39835UWTVZJ+GCSfGThD8a3z2qypcKGlnJEpuuC6z4EszkPNSlFLKhjckr1h52M7jL1fqVgbdmG5o0IZf5/7JKRDZvZNVVOr4AZqIN5Xq+IhdAnWaURA==
-Content-ID: <580C49A7720E4D419B954616884CC2C0@eurprd05.prod.outlook.com>
-MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b2282ec-6a5c-4833-c0d3-08d7b61840fe
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Feb 2020 15:19:18.8478 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Weq96eaWi7b22KBmOzOVtxoJbb+4aCPFy0kNbFOThkhE+au1Gjtj4/dTDSI3zYbblxmbwI2CNBzHJg4xoNq+hA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4736
-Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "mst@redhat.com" <mst@redhat.com>,
- "mhabets@solarflare.com" <mhabets@solarflare.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "rob.miller@broadcom.com" <rob.miller@broadcom.com>,
- "lulu@redhat.com" <lulu@redhat.com>, "hanand@xilinx.com" <hanand@xilinx.com>,
- "hch@infradead.org" <hch@infradead.org>,
- "eperezma@redhat.com" <eperezma@redhat.com>,
- "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
- Shahaf Shuler <shahafs@mellanox.com>, Parav Pandit <parav@mellanox.com>,
- Jiri Pirko <jiri@mellanox.com>,
- "xiao.w.wang@intel.com" <xiao.w.wang@intel.com>,
- "stefanha@redhat.com" <stefanha@redhat.com>,
- "zhihong.wang@intel.com" <zhihong.wang@intel.com>,
- "rdunlap@infradead.org" <rdunlap@infradead.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
+ Thu, 20 Feb 2020 16:08:03 +0000 (UTC)
+Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 01KG5wnZ044379 for <virtualization@lists.linux-foundation.org>;
+ Thu, 20 Feb 2020 11:08:02 -0500
+Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2y9sbuh99x-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 20 Feb 2020 11:08:01 -0500
+Received: from localhost
+ by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <virtualization@lists.linux-foundation.org> from <pasic@linux.ibm.com>;
+ Thu, 20 Feb 2020 16:07:58 -0000
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
+ by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Thu, 20 Feb 2020 16:07:53 -0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+ [9.149.105.62])
+ by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 01KG6bC651511464
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 20 Feb 2020 16:06:37 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 3E262AE055;
+ Thu, 20 Feb 2020 16:06:37 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id AF0B3AE058;
+ Thu, 20 Feb 2020 16:06:36 +0000 (GMT)
+Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
+ by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Thu, 20 Feb 2020 16:06:36 +0000 (GMT)
+From: Halil Pasic <pasic@linux.ibm.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>
+Subject: [PATCH 0/2] virtio: decouple protected guest RAM form
+ VIRTIO_F_IOMMU_PLATFORM 
+Date: Thu, 20 Feb 2020 17:06:04 +0100
+X-Mailer: git-send-email 2.17.1
+X-TM-AS-GCONF: 00
+x-cbid: 20022016-0016-0000-0000-000002E8A994
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20022016-0017-0000-0000-0000334BC6D6
+Message-Id: <20200220160606.53156-1-pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-02-20_04:2020-02-19,
+ 2020-02-20 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0
+ mlxscore=0 malwarescore=0 bulkscore=0 mlxlogscore=945 impostorscore=0
+ priorityscore=1501 lowpriorityscore=0 adultscore=0 suspectscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2001150001 definitions=main-2002200118
+Cc: linux-s390@vger.kernel.org, Janosch Frank <frankja@linux.ibm.com>,
+ "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
+ Cornelia Huck <cohuck@redhat.com>, Ram Pai <linuxram@us.ibm.com>,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ iommu@lists.linux-foundation.org, Michael Mueller <mimu@linux.ibm.com>,
+ Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+ David Gibson <david@gibson.dropbear.id.au>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -149,47 +115,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Feb 20, 2020 at 02:11:40PM +0800, Jason Wang wrote:
-> +static int virtio_vdpa_probe(struct vdpa_device *vdpa)
-> +{
-> +	const struct vdpa_config_ops *ops = vdpa->config;
-> +	struct virtio_vdpa_device *vd_dev;
-> +	int ret = -EINVAL;
-> +
-> +	vd_dev = kzalloc(sizeof(*vd_dev), GFP_KERNEL);
-> +	if (!vd_dev)
-> +		return -ENOMEM;
-> +
-> +	vd_dev->vdev.dev.parent = vdpa_get_dma_dev(vdpa);
-> +	vd_dev->vdev.dev.release = virtio_vdpa_release_dev;
-> +	vd_dev->vdev.config = &virtio_vdpa_config_ops;
-> +	vd_dev->vdpa = vdpa;
-> +	INIT_LIST_HEAD(&vd_dev->virtqueues);
-> +	spin_lock_init(&vd_dev->lock);
-> +
-> +	vd_dev->vdev.id.device = ops->get_device_id(vdpa);
-> +	if (vd_dev->vdev.id.device == 0)
-> +		goto err;
-> +
-> +	vd_dev->vdev.id.vendor = ops->get_vendor_id(vdpa);
-> +	ret = register_virtio_device(&vd_dev->vdev);
-> +	if (ret)
-> +		goto err;
+Currently if one intends to run a memory protection enabled VM with
+virtio devices and linux as the guest OS, one needs to specify the
+VIRTIO_F_IOMMU_PLATFORM flag for each virtio device to make the guest
+linux use the DMA API, which in turn handles the memory
+encryption/protection stuff if the guest decides to turn itself into
+a protected one. This however makes no sense due to multiple reasons:
+* The device is not changed by the fact that the guest RAM is
+protected. The so called IOMMU bypass quirk is not affected.
+* This usage is not congruent with  standardised semantics of
+VIRTIO_F_IOMMU_PLATFORM. Guest memory protected is an orthogonal reason
+for using DMA API in virtio (orthogonal with respect to what is
+expressed by VIRTIO_F_IOMMU_PLATFORM). 
 
-This error unwind is wrong. register_virtio_device() does
-device_initialize() as it's first action. After that point error
-unwind must be done with put_device() - particularly calling
-kfree(vd_dev) after doing dev_set_name() leaks memory.
+This series aims to decouple 'have to use DMA API because my (guest) RAM
+is protected' and 'have to use DMA API because the device told me
+VIRTIO_F_IOMMU_PLATFORM'.
 
-Looks like about half of the register_virtio_device() users did this
-right, the others not. Perhaps you should fix them too...
+Please find more detailed explanations about the conceptual aspects in
+the individual patches. There is however also a very practical problem
+that is addressed by this series. 
 
-Jason
+For vhost-net the feature VIRTIO_F_IOMMU_PLATFORM has the following side
+effect The vhost code assumes it the addresses on the virtio descriptor
+ring are not guest physical addresses but iova's, and insists on doing a
+translation of these regardless of what transport is used (e.g. whether
+we emulate a PCI or a CCW device). (For details see commit 6b1e6cc7855b
+"vhost: new device IOTLB API".) On s390 this results in severe
+performance degradation (c.a. factor 10). BTW with ccw I/O there is
+(architecturally) no IOMMU, so the whole address translation makes no
+sense in the context of virtio-ccw.
+
+Halil Pasic (2):
+  mm: move force_dma_unencrypted() to mem_encrypt.h
+  virtio: let virtio use DMA API when guest RAM is protected
+
+ drivers/virtio/virtio_ring.c |  3 +++
+ include/linux/dma-direct.h   |  9 ---------
+ include/linux/mem_encrypt.h  | 10 ++++++++++
+ 3 files changed, 13 insertions(+), 9 deletions(-)
+
+
+base-commit: ca7e1fd1026c5af6a533b4b5447e1d2f153e28f2
+-- 
+2.17.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
