@@ -1,90 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 521CE166F9F
-	for <lists.virtualization@lfdr.de>; Fri, 21 Feb 2020 07:22:51 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C970F2155D;
-	Fri, 21 Feb 2020 06:22:49 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id R1LPyqS6ON+Y; Fri, 21 Feb 2020 06:22:48 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 7E38220424;
-	Fri, 21 Feb 2020 06:22:48 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F6B5C1D8E;
-	Fri, 21 Feb 2020 06:22:48 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6D327C07FE
- for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 06:22:46 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFA701670C5
+	for <lists.virtualization@lfdr.de>; Fri, 21 Feb 2020 08:49:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 54D4F86191
- for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 06:22:46 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6629A8610E;
+	Fri, 21 Feb 2020 07:49:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id OlRcH54CrwUV; Fri, 21 Feb 2020 07:49:00 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6A94586103;
+	Fri, 21 Feb 2020 07:49:00 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4A8DCC013E;
+	Fri, 21 Feb 2020 07:49:00 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6EF48C013E
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 21 Feb 2020 07:48:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 585FD87EA8
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 21 Feb 2020 07:48:58 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id BZXEhYxC3swK
+ with ESMTP id OgW4HVUX3w3x
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 06:22:45 +0000 (UTC)
+ Fri, 21 Feb 2020 07:48:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8854386160
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 550A787EA6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 06:22:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582266164;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6qXib0FabgbTKY5pRwiBWRR8XUkKsOvRz+kOZ5ar6RE=;
- b=YFCGWwUfbD88FuIbdOoYvQsEqX6JsniOuHKdu+17gwQxYo6HDv1mqqvHVDQUAm9gOFxS6i
- dTIfiZHpcUDH4w8H5TJJPqUW+gdUZD3/9XVrXaQZNVZ3JdEmzt9vn4TCdbeojiJsiOpk2g
- 6YBQtjMJ6TsW/2qFDOU9VqqGq5pEjk4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-469-4HogxvKtMr2o0vgcZfl8sQ-1; Fri, 21 Feb 2020 01:22:40 -0500
-X-MC-Unique: 4HogxvKtMr2o0vgcZfl8sQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 15F968018A7;
- Fri, 21 Feb 2020 06:22:37 +0000 (UTC)
-Received: from [10.72.13.208] (ovpn-13-208.pek2.redhat.com [10.72.13.208])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C4A528B57B;
- Fri, 21 Feb 2020 06:22:27 +0000 (UTC)
-Subject: Re: [PATCH 0/2] virtio: decouple protected guest RAM form
- VIRTIO_F_IOMMU_PLATFORM
-To: Halil Pasic <pasic@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>
-References: <20200220160606.53156-1-pasic@linux.ibm.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <426e6972-0565-c931-e171-da0f58fbf856@redhat.com>
-Date: Fri, 21 Feb 2020 14:22:26 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ Fri, 21 Feb 2020 07:48:57 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 342C7AD5C;
+ Fri, 21 Feb 2020 07:48:54 +0000 (UTC)
+Subject: Re: [PATCH v2 3/4] drm/mgag200: Use simple encoder
+To: Sam Ravnborg <sam@ravnborg.org>
+References: <20200218084815.2137-1-tzimmermann@suse.de>
+ <20200218084815.2137-4-tzimmermann@suse.de>
+ <20200220185642.GA20011@ravnborg.org>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <3044661c-7552-e685-37b3-88865f97a991@suse.de>
+Date: Fri, 21 Feb 2020 08:48:48 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200220160606.53156-1-pasic@linux.ibm.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: linux-s390@vger.kernel.org, Janosch Frank <frankja@linux.ibm.com>,
- "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
- Cornelia Huck <cohuck@redhat.com>, Ram Pai <linuxram@us.ibm.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- iommu@lists.linux-foundation.org, Michael Mueller <mimu@linux.ibm.com>,
- Viktor Mihajlovski <mihajlov@linux.ibm.com>,
- David Gibson <david@gibson.dropbear.id.au>
+In-Reply-To: <20200220185642.GA20011@ravnborg.org>
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ virtualization@lists.linux-foundation.org, noralf@tronnes.org, daniel@ffwll.ch,
+ alexander.deucher@amd.com, spice-devel@lists.freedesktop.org,
+ emil.velikov@collabora.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,56 +95,243 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============3254062500935002867=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMi8yMSDkuIrljYgxMjowNiwgSGFsaWwgUGFzaWMgd3JvdGU6Cj4gQ3VycmVudGx5
-IGlmIG9uZSBpbnRlbmRzIHRvIHJ1biBhIG1lbW9yeSBwcm90ZWN0aW9uIGVuYWJsZWQgVk0gd2l0
-aAo+IHZpcnRpbyBkZXZpY2VzIGFuZCBsaW51eCBhcyB0aGUgZ3Vlc3QgT1MsIG9uZSBuZWVkcyB0
-byBzcGVjaWZ5IHRoZQo+IFZJUlRJT19GX0lPTU1VX1BMQVRGT1JNIGZsYWcgZm9yIGVhY2ggdmly
-dGlvIGRldmljZSB0byBtYWtlIHRoZSBndWVzdAo+IGxpbnV4IHVzZSB0aGUgRE1BIEFQSSwgd2hp
-Y2ggaW4gdHVybiBoYW5kbGVzIHRoZSBtZW1vcnkKPiBlbmNyeXB0aW9uL3Byb3RlY3Rpb24gc3R1
-ZmYgaWYgdGhlIGd1ZXN0IGRlY2lkZXMgdG8gdHVybiBpdHNlbGYgaW50bwo+IGEgcHJvdGVjdGVk
-IG9uZS4gVGhpcyBob3dldmVyIG1ha2VzIG5vIHNlbnNlIGR1ZSB0byBtdWx0aXBsZSByZWFzb25z
-Ogo+ICogVGhlIGRldmljZSBpcyBub3QgY2hhbmdlZCBieSB0aGUgZmFjdCB0aGF0IHRoZSBndWVz
-dCBSQU0gaXMKPiBwcm90ZWN0ZWQuIFRoZSBzbyBjYWxsZWQgSU9NTVUgYnlwYXNzIHF1aXJrIGlz
-IG5vdCBhZmZlY3RlZC4KPiAqIFRoaXMgdXNhZ2UgaXMgbm90IGNvbmdydWVudCB3aXRoICBzdGFu
-ZGFyZGlzZWQgc2VtYW50aWNzIG9mCj4gVklSVElPX0ZfSU9NTVVfUExBVEZPUk0uIEd1ZXN0IG1l
-bW9yeSBwcm90ZWN0ZWQgaXMgYW4gb3J0aG9nb25hbCByZWFzb24KPiBmb3IgdXNpbmcgRE1BIEFQ
-SSBpbiB2aXJ0aW8gKG9ydGhvZ29uYWwgd2l0aCByZXNwZWN0IHRvIHdoYXQgaXMKPiBleHByZXNz
-ZWQgYnkgVklSVElPX0ZfSU9NTVVfUExBVEZPUk0pLgo+Cj4gVGhpcyBzZXJpZXMgYWltcyB0byBk
-ZWNvdXBsZSAnaGF2ZSB0byB1c2UgRE1BIEFQSSBiZWNhdXNlIG15IChndWVzdCkgUkFNCj4gaXMg
-cHJvdGVjdGVkJyBhbmQgJ2hhdmUgdG8gdXNlIERNQSBBUEkgYmVjYXVzZSB0aGUgZGV2aWNlIHRv
-bGQgbWUKPiBWSVJUSU9fRl9JT01NVV9QTEFURk9STScuCj4KPiBQbGVhc2UgZmluZCBtb3JlIGRl
-dGFpbGVkIGV4cGxhbmF0aW9ucyBhYm91dCB0aGUgY29uY2VwdHVhbCBhc3BlY3RzIGluCj4gdGhl
-IGluZGl2aWR1YWwgcGF0Y2hlcy4gVGhlcmUgaXMgaG93ZXZlciBhbHNvIGEgdmVyeSBwcmFjdGlj
-YWwgcHJvYmxlbQo+IHRoYXQgaXMgYWRkcmVzc2VkIGJ5IHRoaXMgc2VyaWVzLgo+Cj4gRm9yIHZo
-b3N0LW5ldCB0aGUgZmVhdHVyZSBWSVJUSU9fRl9JT01NVV9QTEFURk9STSBoYXMgdGhlIGZvbGxv
-d2luZyBzaWRlCj4gZWZmZWN0IFRoZSB2aG9zdCBjb2RlIGFzc3VtZXMgaXQgdGhlIGFkZHJlc3Nl
-cyBvbiB0aGUgdmlydGlvIGRlc2NyaXB0b3IKPiByaW5nIGFyZSBub3QgZ3Vlc3QgcGh5c2ljYWwg
-YWRkcmVzc2VzIGJ1dCBpb3ZhJ3MsIGFuZCBpbnNpc3RzIG9uIGRvaW5nIGEKPiB0cmFuc2xhdGlv
-biBvZiB0aGVzZSByZWdhcmRsZXNzIG9mIHdoYXQgdHJhbnNwb3J0IGlzIHVzZWQgKGUuZy4gd2hl
-dGhlcgo+IHdlIGVtdWxhdGUgYSBQQ0kgb3IgYSBDQ1cgZGV2aWNlKS4gKEZvciBkZXRhaWxzIHNl
-ZSBjb21taXQgNmIxZTZjYzc4NTViCj4gInZob3N0OiBuZXcgZGV2aWNlIElPVExCIEFQSSIuKSBP
-biBzMzkwIHRoaXMgcmVzdWx0cyBpbiBzZXZlcmUKPiBwZXJmb3JtYW5jZSBkZWdyYWRhdGlvbiAo
-Yy5hLiBmYWN0b3IgMTApLgoKCkRvIHlvdSBzZWUgYSBjb25zaXN0ZW50IGRlZ3JhZGF0aW9uIG9u
-IHRoZSBwZXJmb3JtYW5jZSwgb3IgaXQgb25seSAKaGFwcGVuIHdoZW4gZm9yIGR1cmluZyB0aGUg
-YmVnaW5uaW5nIG9mIHRoZSB0ZXN0PwoKCj4gQlRXIHdpdGggY2N3IEkvTyB0aGVyZSBpcwo+IChh
-cmNoaXRlY3R1cmFsbHkpIG5vIElPTU1VLCBzbyB0aGUgd2hvbGUgYWRkcmVzcyB0cmFuc2xhdGlv
-biBtYWtlcyBubwo+IHNlbnNlIGluIHRoZSBjb250ZXh0IG9mIHZpcnRpby1jY3cuCgoKSSBzdXNw
-ZWN0IHdlIGNhbiBkbyBvcHRpbWl6YXRpb24gaW4gcWVtdSBzaWRlLgoKRS5nIHNlbmQgbWVtdGFi
-bGUgZW50cnkgdmlhIElPVExCIEFQSSB3aGVuIHZJT01NVSBpcyBub3QgZW5hYmxlZC4KCklmIHRo
-aXMgbWFrZXMgc2Vuc2UsIEkgY2FuIGRyYWZ0IHBhdGNoIHRvIHNlZSBpZiB0aGVyZSdzIGFueSBk
-aWZmZXJlbmNlLgoKVGhhbmtzCgoKPgo+IEhhbGlsIFBhc2ljICgyKToKPiAgICBtbTogbW92ZSBm
-b3JjZV9kbWFfdW5lbmNyeXB0ZWQoKSB0byBtZW1fZW5jcnlwdC5oCj4gICAgdmlydGlvOiBsZXQg
-dmlydGlvIHVzZSBETUEgQVBJIHdoZW4gZ3Vlc3QgUkFNIGlzIHByb3RlY3RlZAo+Cj4gICBkcml2
-ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jIHwgIDMgKysrCj4gICBpbmNsdWRlL2xpbnV4L2RtYS1k
-aXJlY3QuaCAgIHwgIDkgLS0tLS0tLS0tCj4gICBpbmNsdWRlL2xpbnV4L21lbV9lbmNyeXB0Lmgg
-IHwgMTAgKysrKysrKysrKwo+ICAgMyBmaWxlcyBjaGFuZ2VkLCAxMyBpbnNlcnRpb25zKCspLCA5
-IGRlbGV0aW9ucygtKQo+Cj4KPiBiYXNlLWNvbW1pdDogY2E3ZTFmZDEwMjZjNWFmNmE1MzNiNGI1
-NDQ3ZTFkMmYxNTNlMjhmMgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3Rz
-LmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============3254062500935002867==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="DUBWN9ElGP8OsLUD5XE3WCTOucgrt5Zs9"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--DUBWN9ElGP8OsLUD5XE3WCTOucgrt5Zs9
+Content-Type: multipart/mixed; boundary="Z9QfqVzg1HcrcJJFQy30vOtUHaPfVRzvn";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Sam Ravnborg <sam@ravnborg.org>
+Cc: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
+ alexander.deucher@amd.com, emil.velikov@collabora.com,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ spice-devel@lists.freedesktop.org
+Message-ID: <3044661c-7552-e685-37b3-88865f97a991@suse.de>
+Subject: Re: [PATCH v2 3/4] drm/mgag200: Use simple encoder
+References: <20200218084815.2137-1-tzimmermann@suse.de>
+ <20200218084815.2137-4-tzimmermann@suse.de>
+ <20200220185642.GA20011@ravnborg.org>
+In-Reply-To: <20200220185642.GA20011@ravnborg.org>
+
+--Z9QfqVzg1HcrcJJFQy30vOtUHaPfVRzvn
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi Sam
+
+thanks for reviewing the patch set.
+
+Am 20.02.20 um 19:56 schrieb Sam Ravnborg:
+> Hi Thomas.
+>=20
+> On Tue, Feb 18, 2020 at 09:48:14AM +0100, Thomas Zimmermann wrote:
+>> The mgag200 driver uses an empty implementation for its encoder. Repla=
+ce
+>> the code with the generic simple encoder.
+>>
+>> v2:
+>> 	* rebase onto new simple-encoder interface
+>>
+>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>> ---
+>>  drivers/gpu/drm/mgag200/mgag200_drv.h  |  7 ---
+>>  drivers/gpu/drm/mgag200/mgag200_mode.c | 61 ++-----------------------=
+-
+>>  2 files changed, 3 insertions(+), 65 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/m=
+gag200/mgag200_drv.h
+>> index aa32aad222c2..9bb9e8e14539 100644
+>> --- a/drivers/gpu/drm/mgag200/mgag200_drv.h
+>> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
+>> @@ -95,7 +95,6 @@
+>>  #define MATROX_DPMS_CLEARED (-1)
+>> =20
+>>  #define to_mga_crtc(x) container_of(x, struct mga_crtc, base)
+>> -#define to_mga_encoder(x) container_of(x, struct mga_encoder, base)
+>>  #define to_mga_connector(x) container_of(x, struct mga_connector, bas=
+e)
+>> =20
+>>  struct mga_crtc {
+>> @@ -110,12 +109,6 @@ struct mga_mode_info {
+>>  	struct mga_crtc *crtc;
+>>  };
+>> =20
+>> -struct mga_encoder {
+>> -	struct drm_encoder base;
+>> -	int last_dpms;
+>> -};
+>> -
+>> -
+>>  struct mga_i2c_chan {
+>>  	struct i2c_adapter adapter;
+>>  	struct drm_device *dev;
+>=20
+> Any particular reason why the drm_encoder is not embedded in struct
+> mga_device?
+>=20
+> I found it more elegant - like you did it for ast in the previous patch=
+=2E
+
+I think I wanted something that uses drm_simple_encoder_create(). But I
+can change that. The embedded variant is indeed better.
+
+Best regards
+Thomas
+
+>=20
+> I also noted there is one more unused "last_dpms" - but it is outside
+> the scope of this patch to remove it.
+>=20
+> 	Sam
+>=20
+>> diff --git a/drivers/gpu/drm/mgag200/mgag200_mode.c b/drivers/gpu/drm/=
+mgag200/mgag200_mode.c
+>> index 62a8e9ccb16d..957ea1057b6c 100644
+>> --- a/drivers/gpu/drm/mgag200/mgag200_mode.c
+>> +++ b/drivers/gpu/drm/mgag200/mgag200_mode.c
+>> @@ -15,6 +15,7 @@
+>>  #include <drm/drm_fourcc.h>
+>>  #include <drm/drm_plane_helper.h>
+>>  #include <drm/drm_probe_helper.h>
+>> +#include <drm/drm_simple_kms_helper.h>
+>> =20
+>>  #include "mgag200_drv.h"
+>> =20
+>> @@ -1449,72 +1450,16 @@ static void mga_crtc_init(struct mga_device *m=
+dev)
+>>  	drm_crtc_helper_add(&mga_crtc->base, &mga_helper_funcs);
+>>  }
+>> =20
+>> -/*
+>> - * The encoder comes after the CRTC in the output pipeline, but befor=
+e
+>> - * the connector. It's responsible for ensuring that the digital
+>> - * stream is appropriately converted into the output format. Setup is=
+
+>> - * very simple in this case - all we have to do is inform qemu of the=
+
+>> - * colour depth in order to ensure that it displays appropriately
+>> - */
+>> -
+>> -/*
+>> - * These functions are analagous to those in the CRTC code, but are i=
+ntended
+>> - * to handle any encoder-specific limitations
+>> - */
+>> -static void mga_encoder_mode_set(struct drm_encoder *encoder,
+>> -				struct drm_display_mode *mode,
+>> -				struct drm_display_mode *adjusted_mode)
+>> -{
+>> -
+>> -}
+>> -
+>> -static void mga_encoder_dpms(struct drm_encoder *encoder, int state)
+>> -{
+>> -	return;
+>> -}
+>> -
+>> -static void mga_encoder_prepare(struct drm_encoder *encoder)
+>> -{
+>> -}
+>> -
+>> -static void mga_encoder_commit(struct drm_encoder *encoder)
+>> -{
+>> -}
+>> -
+>> -static void mga_encoder_destroy(struct drm_encoder *encoder)
+>> -{
+>> -	struct mga_encoder *mga_encoder =3D to_mga_encoder(encoder);
+>> -	drm_encoder_cleanup(encoder);
+>> -	kfree(mga_encoder);
+>> -}
+>> -
+>> -static const struct drm_encoder_helper_funcs mga_encoder_helper_funcs=
+ =3D {
+>> -	.dpms =3D mga_encoder_dpms,
+>> -	.mode_set =3D mga_encoder_mode_set,
+>> -	.prepare =3D mga_encoder_prepare,
+>> -	.commit =3D mga_encoder_commit,
+>> -};
+>> -
+>> -static const struct drm_encoder_funcs mga_encoder_encoder_funcs =3D {=
+
+>> -	.destroy =3D mga_encoder_destroy,
+>> -};
+>> -
+>>  static struct drm_encoder *mga_encoder_init(struct drm_device *dev)
+>>  {
+>>  	struct drm_encoder *encoder;
+>> -	struct mga_encoder *mga_encoder;
+>> =20
+>> -	mga_encoder =3D kzalloc(sizeof(struct mga_encoder), GFP_KERNEL);
+>> -	if (!mga_encoder)
+>> +	encoder =3D drm_simple_encoder_create(dev, DRM_MODE_ENCODER_DAC);
+>> +	if (IS_ERR(encoder))
+>>  		return NULL;
+>> =20
+>> -	encoder =3D &mga_encoder->base;
+>>  	encoder->possible_crtcs =3D 0x1;
+>> =20
+>> -	drm_encoder_init(dev, encoder, &mga_encoder_encoder_funcs,
+>> -			 DRM_MODE_ENCODER_DAC, NULL);
+>> -	drm_encoder_helper_add(encoder, &mga_encoder_helper_funcs);
+>> -
+>>  	return encoder;
+>>  }
+>> =20
+>> --=20
+>> 2.25.0
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--Z9QfqVzg1HcrcJJFQy30vOtUHaPfVRzvn--
+
+--DUBWN9ElGP8OsLUD5XE3WCTOucgrt5Zs9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5Pi2MACgkQaA3BHVML
+eiMSbggAkKW4IPwzooc5SmxndNtmXeGJBR7GSbpTrkC93svgAJek8UbcW8W1L2fT
+xhwoCFC3AqyDHX85Bvw4FVOXQW7jeozq0TeOrMZ8L2rIZMXgXJSOqU+9fILF7hfN
+nTRQnh26fPvM+gf30BK7OxIEU29+xP3Qgk6YtybUkxZ085ye9WNdDwolSOUaCU+m
+Jo+gsNnaGESGyznHsDI+AFA6BqFoSVon6YtI0Gh0h4dKRW8jdIKJnGvGiaAY2eqn
+iZJoOb2X6ViMHwTDTkV6DCwZbtiNSLpWqjtcfLAEtmuCtQqJd14CAS2Grkq0nmi/
++EzQZc6CBEzUofFnXoi+FJ+njNaI0A==
+=Pd8i
+-----END PGP SIGNATURE-----
+
+--DUBWN9ElGP8OsLUD5XE3WCTOucgrt5Zs9--
+
+--===============3254062500935002867==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============3254062500935002867==--
