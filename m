@@ -2,91 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB81916872D
-	for <lists.virtualization@lfdr.de>; Fri, 21 Feb 2020 20:03:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30F70168887
+	for <lists.virtualization@lfdr.de>; Fri, 21 Feb 2020 22:03:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3937D8655C;
-	Fri, 21 Feb 2020 19:03:16 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B997F86433;
+	Fri, 21 Feb 2020 21:03:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cdP2wjKjT4Ps; Fri, 21 Feb 2020 19:03:15 +0000 (UTC)
+	with ESMTP id zZjMx5m2PPd6; Fri, 21 Feb 2020 21:03:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 73DA986546;
-	Fri, 21 Feb 2020 19:03:15 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C2028863D9;
+	Fri, 21 Feb 2020 21:03:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 59DC6C013E;
-	Fri, 21 Feb 2020 19:03:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AA084C013E;
+	Fri, 21 Feb 2020 21:03:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3EFC2C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2DE8CC013E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 19:03:13 +0000 (UTC)
+ Fri, 21 Feb 2020 21:03:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 360FB87476
+ by whitealder.osuosl.org (Postfix) with ESMTP id 15CE686917
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 19:03:13 +0000 (UTC)
+ Fri, 21 Feb 2020 21:03:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Eks7waJLvHBw
+ with ESMTP id olqiZKuo+WdI
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 19:03:12 +0000 (UTC)
+ Fri, 21 Feb 2020 21:03:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by whitealder.osuosl.org (Postfix) with ESMTPS id EC0088708C
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4E0098620B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 19:03:11 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id c9so3204776wrw.8
+ Fri, 21 Feb 2020 21:03:39 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id e8so3532899wrm.5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Feb 2020 11:03:11 -0800 (PST)
+ Fri, 21 Feb 2020 13:03:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=MJU4yIJ1OecX1mHUKDbEObOQjruIXSQ2ZxBhWrTtUGg=;
- b=Y5e6uRfE6sLzhHzmCheSW3DLIJ4hXkZ9XEIfb0xh9bXuteIGhYNEU0mHcCQLbsRBbq
- gx6pOJEzdbXGegCYo9FUpGTMA6UJUGZtiqKHWkukU4xEn119Y7DYpO9AIq2kYLsaU/MJ
- LiRE+LdAtDE7mSXCefIPi88xXWEvYwCveFd3U=
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=OUs744sfBj5Yz8FxWBbt8pW3CMj0kJQQuffQ6w3kONmB7i7nLUpEo6lRzYKC9JV7i8
+ 9TpKdlpvdxRAbYZqx3zz4rE0OH6c3o/y5Fpet2Z6OUurTg1yZRHHBiYlNaBdnqY/abnm
+ Osr1M+2I5bcERAqC/o5bxjfmgVS5FgYaCozLI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=MJU4yIJ1OecX1mHUKDbEObOQjruIXSQ2ZxBhWrTtUGg=;
- b=qrDm/Ax5qoqSidV5tVeVWDk5yY2cA+sex0MAO9eI9BRU8zL0M//E6hS4OvuoysH8kB
- EuvS1sui5i0W4oqYMzPo5Qy3rvxQjnO8PpJ7AmGiG+AtgJ8kqvekv9mtiV54g5ubhejj
- N4FDS28EfNH9XhYMxmZQ4cAdVEDbTudHqwo4MHoVFsDH9wFhwsvzvY1JXC3fmH5iztjP
- RGLLrbXpuq7BG294Bob6lLTqlnRfq6yfMXRBDNQXH/gdTjbwSmvbXLofogLM9Kbkr/g7
- zVb09iXrwy1pW6OVVvrmQAea0pO3CU7Yc2tpc7HuzCVGyvEh9GJOb9oGagmcFeXcOydv
- RfaQ==
-X-Gm-Message-State: APjAAAXtLwK40FwWxJkbfeoHCaqMdbOx/LGi3sgBUMEsYz6fqp37N+nc
- 6Lvn6BTTCFqFSqcTqgKVFWZyaw==
-X-Google-Smtp-Source: APXvYqyIsxVr3qhWNgflnJwy5Wr/iFuVcPl1oz3Oo8BPA8Ltenpsf+FYTeR4zPjyGhXyag79xnUhOQ==
-X-Received: by 2002:adf:e9d2:: with SMTP id l18mr1330674wrn.344.1582311790198; 
- Fri, 21 Feb 2020 11:03:10 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=uQt93lqpNg2E5g+DKG/yZz9gziaxMB1ajSZkWDnaYZwFLJkb2rBnbW92mAwx7S1y/K
+ m+/p+UWFgx3q8QYyHbrdL+qY2M/8WBnAaW0GcycTanLBmpqUvNy89WdYFlLvEtpG+H26
+ AZ0jJ2qpBPaZ1TGwJJJimXqr1DZw4osFFiVcgTot6g/Zi+NzOpUutaeZoueCrNjF+AAu
+ M+QkzEEx0vyfXr81u5sRhdB3XyYi/gvMSzrtbeX37wVvv0/mDIdaztD6uyPleLPClImV
+ nNn9XxeElZ0Jn5HP5J+a2PSq/LrfzkInJFKkb4HlnVVGy/sgm5JTLk6sL8fT0VkmNO83
+ vOmQ==
+X-Gm-Message-State: APjAAAV4LDAIrCl12LYA3NZIJPMWPqX2hi0bKxE4pOuHtQE1VaLpo9oZ
+ ClF3n3qQNeUr4Vp6oO6UJGYv1w==
+X-Google-Smtp-Source: APXvYqzmMEGPKaIKETbiA7OJ6Ovghfws0dfiq7Mol0uFNN7+X3yV0LhNGEsGp238gAJXe0N+E0ExQw==
+X-Received: by 2002:a5d:5011:: with SMTP id e17mr47740612wrt.134.1582319017533; 
+ Fri, 21 Feb 2020 13:03:37 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id t12sm4985772wrq.97.2020.02.21.11.03.09
+ by smtp.gmail.com with ESMTPSA id z6sm5483930wrw.36.2020.02.21.13.03.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2020 11:03:09 -0800 (PST)
-Date: Fri, 21 Feb 2020 20:03:07 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Sam Ravnborg <sam@ravnborg.org>
-Subject: Re: [PATCH v2 3/4] drm/mgag200: Use simple encoder
-Message-ID: <20200221190307.GG2363188@phenom.ffwll.local>
-References: <20200218084815.2137-1-tzimmermann@suse.de>
- <20200218084815.2137-4-tzimmermann@suse.de>
- <20200220185642.GA20011@ravnborg.org>
- <3044661c-7552-e685-37b3-88865f97a991@suse.de>
- <20200221190057.GA27701@ravnborg.org>
+ Fri, 21 Feb 2020 13:03:36 -0800 (PST)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Subject: [PATCH 07/51] drm/qxl: Use drmm_add_final_kfree
+Date: Fri, 21 Feb 2020 22:02:35 +0100
+Message-Id: <20200221210319.2245170-8-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20200221210319.2245170-1-daniel.vetter@ffwll.ch>
+References: <20200221210319.2245170-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200221190057.GA27701@ravnborg.org>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
-Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  virtualization@lists.linux-foundation.org,
- Thomas Zimmermann <tzimmermann@suse.de>, alexander.deucher@amd.com,
- spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
+ Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,74 +98,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 21, 2020 at 08:00:57PM +0100, Sam Ravnborg wrote:
-> Hi Thomas.
-> 
-> On Fri, Feb 21, 2020 at 08:48:48AM +0100, Thomas Zimmermann wrote:
-> > Hi Sam
-> > 
-> > thanks for reviewing the patch set.
-> > 
-> > Am 20.02.20 um 19:56 schrieb Sam Ravnborg:
-> > > Hi Thomas.
-> > > 
-> > > On Tue, Feb 18, 2020 at 09:48:14AM +0100, Thomas Zimmermann wrote:
-> > >> The mgag200 driver uses an empty implementation for its encoder. Replace
-> > >> the code with the generic simple encoder.
-> > >>
-> > >> v2:
-> > >> 	* rebase onto new simple-encoder interface
-> > >>
-> > >> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> > >> ---
-> > >>  drivers/gpu/drm/mgag200/mgag200_drv.h  |  7 ---
-> > >>  drivers/gpu/drm/mgag200/mgag200_mode.c | 61 ++------------------------
-> > >>  2 files changed, 3 insertions(+), 65 deletions(-)
-> > >>
-> > >> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mgag200/mgag200_drv.h
-> > >> index aa32aad222c2..9bb9e8e14539 100644
-> > >> --- a/drivers/gpu/drm/mgag200/mgag200_drv.h
-> > >> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
-> > >> @@ -95,7 +95,6 @@
-> > >>  #define MATROX_DPMS_CLEARED (-1)
-> > >>  
-> > >>  #define to_mga_crtc(x) container_of(x, struct mga_crtc, base)
-> > >> -#define to_mga_encoder(x) container_of(x, struct mga_encoder, base)
-> > >>  #define to_mga_connector(x) container_of(x, struct mga_connector, base)
-> > >>  
-> > >>  struct mga_crtc {
-> > >> @@ -110,12 +109,6 @@ struct mga_mode_info {
-> > >>  	struct mga_crtc *crtc;
-> > >>  };
-> > >>  
-> > >> -struct mga_encoder {
-> > >> -	struct drm_encoder base;
-> > >> -	int last_dpms;
-> > >> -};
-> > >> -
-> > >> -
-> > >>  struct mga_i2c_chan {
-> > >>  	struct i2c_adapter adapter;
-> > >>  	struct drm_device *dev;
-> > > 
-> > > Any particular reason why the drm_encoder is not embedded in struct
-> > > mga_device?
-> > > 
-> > > I found it more elegant - like you did it for ast in the previous patch.
-> > 
-> > I think I wanted something that uses drm_simple_encoder_create(). But I
-> > can change that. The embedded variant is indeed better.
-> 
-> You should consider to drop drm_simple_encoder_create() until there
-> is a driver that really needs it.
+With this we can drop the final kfree from the release function.
 
-Yeah +1 on only the _init version. The create version really should use
-drmm_kzalloc I think, but we're not quite there yet :-)
--Daniel
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+---
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+ drivers/gpu/drm/qxl/qxl_kms.c | 2 ++
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 4fda3f9b29f4..09102e2efabc 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 */
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+-	dev->dev_private = NULL;
+-	kfree(qdev);
+ }
+ 
+ static void
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 70b20ee4741a..09d7b5f6d172 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -27,6 +27,7 @@
+ #include <linux/pci.h>
+ 
+ #include <drm/drm_drv.h>
++#include <drm/drm_managed.h>
+ #include <drm/drm_probe_helper.h>
+ 
+ #include "qxl_drv.h"
+@@ -121,6 +122,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	qdev->ddev.pdev = pdev;
+ 	pci_set_drvdata(pdev, &qdev->ddev);
+ 	qdev->ddev.dev_private = qdev;
++	drmm_add_final_kfree(&qdev->ddev, qdev);
+ 
+ 	mutex_init(&qdev->gem.mutex);
+ 	mutex_init(&qdev->update_area_mutex);
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.24.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
