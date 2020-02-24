@@ -2,100 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70ECA169EC8
-	for <lists.virtualization@lfdr.de>; Mon, 24 Feb 2020 07:49:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3527169ED0
+	for <lists.virtualization@lfdr.de>; Mon, 24 Feb 2020 07:51:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 943D586F21;
-	Mon, 24 Feb 2020 06:49:17 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id AC50286FCD;
+	Mon, 24 Feb 2020 06:51:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ebdQ1tIchz+T; Mon, 24 Feb 2020 06:49:17 +0000 (UTC)
+	with ESMTP id rjqdQPKRtnJ2; Mon, 24 Feb 2020 06:51:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BDAF386F3A;
-	Mon, 24 Feb 2020 06:49:16 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id CEE8386FF8;
+	Mon, 24 Feb 2020 06:51:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F048C0177;
-	Mon, 24 Feb 2020 06:49:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A51FAC0177;
+	Mon, 24 Feb 2020 06:51:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 84824C0177
- for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 06:49:14 +0000 (UTC)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CD702C0177;
+ Mon, 24 Feb 2020 06:51:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 7B4B58622A
- for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 06:49:14 +0000 (UTC)
+ by silver.osuosl.org (Postfix) with ESMTP id B5131203F0;
+ Mon, 24 Feb 2020 06:51:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lnIUwQxTmJxa
- for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 06:49:13 +0000 (UTC)
+ with ESMTP id B8u5R8mBRahM; Mon, 24 Feb 2020 06:51:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id BB0DC81D35
- for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 06:49:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582526952;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OFrZl6Sw3yEf+caSATqePnmBvtnNQFZ6PQ2MTTPkWY4=;
- b=ZPUPeHm7W7bYUdLzxTLyCr/4UluFXuIVJj3AewnyRmTYQnCzMb2yOIRCyCEAnXam55Gfxh
- J9JAqxZ6BTpOmeurmPNNDpX8KOqZNoaU67nTlKK+k5p5HnTT6qb2qXzPCkqPuVlMqLkMK6
- pxpXLOoFT3779sf3VvExMkMVmiFliOU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-103-2pKoJM5WNTO2krrL8cQnhw-1; Mon, 24 Feb 2020 01:49:10 -0500
-X-MC-Unique: 2pKoJM5WNTO2krrL8cQnhw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CB5E0800D54;
- Mon, 24 Feb 2020 06:49:07 +0000 (UTC)
-Received: from [10.72.13.147] (ovpn-13-147.pek2.redhat.com [10.72.13.147])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4035A5C21B;
- Mon, 24 Feb 2020 06:48:49 +0000 (UTC)
-Subject: Re: [PATCH V4 3/5] vDPA: introduce vDPA bus
-To: Harpreet Singh Anand <hanand@xilinx.com>, "mst@redhat.com"
- <mst@redhat.com>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>
-References: <20200220061141.29390-1-jasowang@redhat.com>
- <20200220061141.29390-4-jasowang@redhat.com>
- <BY5PR02MB63714A03B7135F8C4054C1E8BBEC0@BY5PR02MB6371.namprd02.prod.outlook.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <d6ea5dcb-3933-920b-523e-a494d323ef8a@redhat.com>
-Date: Mon, 24 Feb 2020 14:48:48 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from ozlabs.org (bilbo.ozlabs.org [203.11.71.1])
+ by silver.osuosl.org (Postfix) with ESMTPS id A6EC3203E4;
+ Mon, 24 Feb 2020 06:51:27 +0000 (UTC)
+Received: by ozlabs.org (Postfix, from userid 1007)
+ id 48Qt596JR7z9sRQ; Mon, 24 Feb 2020 17:51:25 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=gibson.dropbear.id.au; s=201602; t=1582527085;
+ bh=4toq+o4FWYWnXZF2qhVnr45b/rNEVYKG5cy9H9uQF6w=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=gMA87Wx6tBiuJB6UgG+glqvbxC6ABwj/iRhqAEx62Xk9uiswratDNTSr3AAa71CXv
+ GPUNJKQ/bDn7vXGBXFm2T/BC6o2tFusk2R+id/HezhrRbfqJ0xpErOvpDBEnHAlL93
+ 576GQ8Ja7NR/3iFZTxbI/J02SIr0x/x5yeKPtEZk=
+Date: Mon, 24 Feb 2020 17:50:53 +1100
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH 2/2] virtio: let virtio use DMA API when guest RAM is
+ protected
+Message-ID: <20200224065053.GM1751@umbus.fritz.box>
+References: <20200220160606.53156-1-pasic@linux.ibm.com>
+ <20200220160606.53156-3-pasic@linux.ibm.com>
+ <20200220161309.GB12709@lst.de>
+ <20200221025915.GB2298@umbus.fritz.box>
+ <20200221163645.GB10054@lst.de>
 MIME-Version: 1.0
-In-Reply-To: <BY5PR02MB63714A03B7135F8C4054C1E8BBEC0@BY5PR02MB6371.namprd02.prod.outlook.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: "shahafs@mellanox.com" <shahafs@mellanox.com>,
- "rdunlap@infradead.org" <rdunlap@infradead.org>,
- "jiri@mellanox.com" <jiri@mellanox.com>, "lulu@redhat.com" <lulu@redhat.com>,
- "xiao.w.wang@intel.com" <xiao.w.wang@intel.com>,
- "stefanha@redhat.com" <stefanha@redhat.com>,
- "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
- "hch@infradead.org" <hch@infradead.org>,
- "eperezma@redhat.com" <eperezma@redhat.com>,
- "maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>,
- "jgg@mellanox.com" <jgg@mellanox.com>,
- "parav@mellanox.com" <parav@mellanox.com>,
- "zhihong.wang@intel.com" <zhihong.wang@intel.com>,
- "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>,
- "mhabets@solarflare.com" <mhabets@solarflare.com>,
- "rob.miller@broadcom.com" <rob.miller@broadcom.com>
+In-Reply-To: <20200221163645.GB10054@lst.de>
+Cc: linux-s390@vger.kernel.org, Janosch Frank <frankja@linux.ibm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ iommu@lists.linux-foundation.org, Michael Mueller <mimu@linux.ibm.com>,
+ "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
+ Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+ Robin Murphy <robin.murphy@arm.com>,
+ Marek Szyprowski <m.szyprowski@samsung.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,26 +77,93 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============3387094857185492849=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMi8yNCDkuIvljYgyOjE0LCBIYXJwcmVldCBTaW5naCBBbmFuZCB3cm90ZToKPiBJ
-cyB0aGVyZSBhIHBsYW4gdG8gYWRkIGFuIEFQSSBpbiB2RFBBX2NvbmZpZ19vcHMgZm9yIGdldHRp
-bmcgdGhlIG5vdGlmaWNhdGlvbiBhcmVhIGZyb20gdGhlIFZEUEEgZGV2aWNlIChzb21ldGhpbmcg
-c2ltaWxhciB0byBnZXRfbm90aWZ5X2FyZWEgaW4gdGhlIFZEUEEgRFBESyBjYXNlKT8gVGhpcyB3
-aWxsIG1ha2UgdGhlIG5vdGlmaWNhdGlvbnMgZnJvbSB0aGUgZ3Vlc3QgICh2aG9zdF92ZHBhIHVz
-ZSBjYXNlKSB0byB0aGUgVkRQQSBkZXZpY2UgbW9yZSBlZmZpY2llbnQgLSBhdCBsZWFzdCBmb3Ig
-dmlydGlvIDEuMCsgZHJpdmVycyBpbiB0aGUgVk0uCj4KPiBJIGJlbGlldmUgdGhpcyB3b3VsZCBy
-ZXF1aXJlIGVuaGFuY2VtZW50IHRvIHRoZSB2aG9zdCBpb2N0bCAoc29tZXRoaW5nIHNpbWlsYXIg
-dG8gdGhlICBWSE9TVF9VU0VSX1NMQVZFX1ZSSU5HX0hPU1RfTk9USUZJRVJfTVNHKS4KCgpZZXMs
-IHdlIHBsYW4gdG8gYWRkIHRoYXQgb24gdG9wLiBCYXNpY2FsbHksIGhlcmUncyB3aGF0IHdlIHBs
-YW4gdG8gZG86IAooc29ydGVkIGJ5IHVyZ2VuY3kpCgoxKSBkaXJlY3QgZG9vcmJlbGwgbWFwcGlu
-ZyBhcyB5b3UgYXNrZWQgaGVyZQoyKSBkaXJlY3QgaW50ZXJydXB0IGluamVjdGlvbiAod2hlbiBw
-bGF0Zm9ybSBzdXBwb3J0LCBlLmcgdGhyb3VnaCBwb3N0ZWQgCmludGVycnVwdCkKMykgY29udHJv
-bCB2aXJ0cXVldWUgc3VwcG9ydAoKVGhhbmtzCgoKPgo+Cj4gUmVnYXJkcywKPiBIYXJwcmVldAo+
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFs
-aXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlv
-bi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8v
-dmlydHVhbGl6YXRpb24=
+
+--===============3387094857185492849==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="tv2SIFopg1r47n4a"
+Content-Disposition: inline
+
+
+--tv2SIFopg1r47n4a
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 21, 2020 at 05:36:45PM +0100, Christoph Hellwig wrote:
+> On Fri, Feb 21, 2020 at 01:59:15PM +1100, David Gibson wrote:
+> > > Hell no.  This is a detail of the platform DMA direct implementation.
+> > > Drivers have no business looking at this flag, and virtio finally nee=
+ds
+> > > to be fixed to use the DMA API properly for everything but legacy dev=
+ices.
+> >=20
+> > So, this patch definitely isn't right as it stands, but I'm struggling
+> > to understand what it is you're saying is the right way.
+> >=20
+> > By "legacy devices" I assume you mean pre-virtio-1.0 devices, that
+> > lack the F_VERSION_1 feature flag.  Is that right?  Because I don't
+> > see how being a legacy device or not relates to use of the DMA API.
+>=20
+> No.   "legacy" is anything that does not set F_ACCESS_PLATFORM.
+
+Hm, I see.
+
+The trouble is I think we can only reasonably call things "legacy"
+when essentially all currently in use OSes have support for the new,
+better way of doing things.  That is, alas, not really the case for
+F_ACCESS_PLATFORM.
+
+> > I *think* what you are suggesting here is that virtio devices that
+> > have !F_IOMMU_PLATFORM should have their dma_ops set up so that the
+> > DMA API treats IOVA=3D=3DPA, which will satisfy what the device expects.
+> > Then the virtio driver can use the DMA API the same way for both
+> > F_IOMMU_PLATFORM and !F_IOMMU_PLATFORM devices.
+>=20
+> No.  Those should just keep using the existing legacy non-dma ops
+> case and be done with it.  No changes to that and most certainly
+> no new features.
+>=20
+
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--tv2SIFopg1r47n4a
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl5TckoACgkQbDjKyiDZ
+s5K3ZRAAhMCdmN1OrUKfgLFhJWQQeC89dOZY69wRPSGHIRGqp2vdz/84iVFYTXtM
+KJIVtt/k4q5tdpB8FDlRYkPkBjAxZxwUXCQ5ErZ8bUW+1l9qidMcmM81ud6CuDo5
+JnNILm61f05ut+aJtoH8N9pHLWVp6Xd7D0U2EuZm3O1E1Ru7eWh89XVqZszqy/0v
+wU+HF11K6jWai0ZBUmsbHzRzklrXB832SfHRxREYTgaAnfIJciC+VoYClfLDdz5l
+IHqFw/HkmOM0gbiuTsirWTmIZYgdiGm2luvqn3UJRSUeMur5r1KAQb54VdTXoxm6
+85M7AILjY82m3QKG4xWbSzH778IFxv3fhbfNo1lOT0f4IAn3bJ3xNrlP72vmzq03
+mnU3XYWDD7Bi7ohPJmNL/KatbmLDSBGW55f6VxdcydKUEWC4EOdLhAm3D1L9GOI7
+m9MOyhkKifhvysv3yA4+Wu6lEhJS7C/xLLzZIKuXS/2YWeplK4meqBoIgBnLD9L1
+oD4EK/yI9AQu0WLj2SPUP5jWzMxaUzKHrseBf8Lzk1i/IrMrOxqYF3+Mz6hHZkey
++3lNPAAPuD+FeZC34MWsH7jL/JPT3RPDGHjtIf7fP2f/VPZygVJCOUh5/vYnX4dI
+v2Jd5yIETXGCRsGnZcxnszGVK3J0zN+skCNsyIZKwRBsZuBTLj0=
+=Q89/
+-----END PGP SIGNATURE-----
+
+--tv2SIFopg1r47n4a--
+
+--===============3387094857185492849==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============3387094857185492849==--
