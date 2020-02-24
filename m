@@ -2,115 +2,106 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6448B16A7BD
-	for <lists.virtualization@lfdr.de>; Mon, 24 Feb 2020 14:56:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F26116A7CA
+	for <lists.virtualization@lfdr.de>; Mon, 24 Feb 2020 15:00:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1791E85D21;
-	Mon, 24 Feb 2020 13:56:26 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DCA0185497;
+	Mon, 24 Feb 2020 14:00:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 06tKTFyrObiW; Mon, 24 Feb 2020 13:56:21 +0000 (UTC)
+	with ESMTP id Bjg78svhL6CB; Mon, 24 Feb 2020 14:00:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 8E9A785EF5;
-	Mon, 24 Feb 2020 13:56:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4547384F75;
+	Mon, 24 Feb 2020 14:00:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B2B9C0177;
-	Mon, 24 Feb 2020 13:56:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 288EEC0177;
+	Mon, 24 Feb 2020 14:00:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0C369C0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 852C5C0177
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 13:56:20 +0000 (UTC)
+ Mon, 24 Feb 2020 14:00:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id ED57E83527
+ by whitealder.osuosl.org (Postfix) with ESMTP id 8146C84EAD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 13:56:19 +0000 (UTC)
+ Mon, 24 Feb 2020 14:00:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bidiaQ2KgQoT
+ with ESMTP id KwwrSp+5ADnS
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 13:56:19 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 712BC8357C
+ Mon, 24 Feb 2020 14:00:13 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from eu-smtp-delivery-151.mimecast.com
+ (eu-smtp-delivery-151.mimecast.com [207.82.80.151])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 13A4E8489F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 13:56:19 +0000 (UTC)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01ODtE1w090889 for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 08:56:18 -0500
-Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2yaygntqec-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 08:56:17 -0500
-Received: from localhost
- by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <virtualization@lists.linux-foundation.org> from <pasic@linux.ibm.com>;
- Mon, 24 Feb 2020 13:56:15 -0000
-Received: from b06avi18878370.portsmouth.uk.ibm.com (9.149.26.194)
- by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Mon, 24 Feb 2020 13:56:10 -0000
-Received: from d06av21.portsmouth.uk.ibm.com (d06av21.portsmouth.uk.ibm.com
- [9.149.105.232])
- by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 01ODu9Cv32571682
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 24 Feb 2020 13:56:09 GMT
-Received: from d06av21.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 1746B52057;
- Mon, 24 Feb 2020 13:56:09 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.152.224.149])
- by d06av21.portsmouth.uk.ibm.com (Postfix) with ESMTP id 9201452054;
- Mon, 24 Feb 2020 13:56:08 +0000 (GMT)
-Date: Mon, 24 Feb 2020 14:56:07 +0100
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 0/2] virtio: decouple protected guest RAM form
- VIRTIO_F_IOMMU_PLATFORM
-In-Reply-To: <08d6bdfb-9b49-c278-3c0b-2e02376cf0cf@redhat.com>
-References: <20200220160606.53156-1-pasic@linux.ibm.com>
- <426e6972-0565-c931-e171-da0f58fbf856@redhat.com>
- <20200221155602.4de41fa7.pasic@linux.ibm.com>
- <0181712c-e533-fcfd-2638-8a0649d713dd@redhat.com>
- <20200224010607-mutt-send-email-mst@kernel.org>
- <b3c52c67-c740-a50e-2595-fe04d179c881@redhat.com>
- <20200224024641-mutt-send-email-mst@kernel.org>
- <08d6bdfb-9b49-c278-3c0b-2e02376cf0cf@redhat.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+ Mon, 24 Feb 2020 14:00:12 +0000 (UTC)
+Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ uk-mta-190-X-jO3NgOPBOoEBZfQglW1g-1; Mon, 24 Feb 2020 14:00:07 +0000
+X-MC-Unique: X-jO3NgOPBOoEBZfQglW1g-1
+Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) by
+ AcuMS.aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) with Microsoft SMTP
+ Server (TLS) id 15.0.1347.2; Mon, 24 Feb 2020 14:00:06 +0000
+Received: from AcuMS.Aculab.com ([fe80::43c:695e:880f:8750]) by
+ AcuMS.aculab.com ([fe80::43c:695e:880f:8750%12]) with mapi id 15.00.1347.000; 
+ Mon, 24 Feb 2020 14:00:06 +0000
+From: David Laight <David.Laight@ACULAB.COM>
+To: 'Geert Uytterhoeven' <geert@linux-m68k.org>, Krzysztof Kozlowski
+ <krzk@kernel.org>
+Subject: RE: [RESEND PATCH v2 9/9] ath5k: Constify ioreadX() iomem argument
+ (as in generic implementation)
+Thread-Topic: [RESEND PATCH v2 9/9] ath5k: Constify ioreadX() iomem argument
+ (as in generic implementation)
+Thread-Index: AQHV6xHi6Is+qzzWUUeYTT3fGXH4hqgqXtwg
+Date: Mon, 24 Feb 2020 14:00:06 +0000
+Message-ID: <ef12bfd658504d928996681f8a9ee96f@AcuMS.aculab.com>
+References: <20200219175007.13627-1-krzk@kernel.org>
+ <20200219175007.13627-10-krzk@kernel.org>
+ <518a9023-f802-17b3-fca5-582400bc34ae@gmail.com> <20200224124744.GA1949@pi3>
+ <CAMuHMdVev0PLF=8bD3nHrhcU9UgM-DAgdQpXi09PgvAxdbt24A@mail.gmail.com>
+In-Reply-To: <CAMuHMdVev0PLF=8bD3nHrhcU9UgM-DAgdQpXi09PgvAxdbt24A@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 20022413-0008-0000-0000-00000355F424
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 20022413-0009-0000-0000-00004A770CC7
-Message-Id: <20200224145607.2729f47b.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-02-24_04:2020-02-21,
- 2020-02-24 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 suspectscore=0
- bulkscore=0 malwarescore=0 adultscore=0 priorityscore=1501 spamscore=0
- phishscore=0 clxscore=1015 impostorscore=0 mlxlogscore=999
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2001150001 definitions=main-2002240115
-Cc: linux-s390@vger.kernel.org, Janosch Frank <frankja@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- iommu@lists.linux-foundation.org, David Gibson <david@gibson.dropbear.id.au>,
- Michael Mueller <mimu@linux.ibm.com>, "Lendacky,
- Thomas" <Thomas.Lendacky@amd.com>, Viktor Mihajlovski <mihajlov@linux.ibm.com>,
- Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>,
- Marek Szyprowski <m.szyprowski@samsung.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: aculab.com
+Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>, Geert
+ Uytterhoeven <geert+renesas@glider.be>, "Michael S. Tsirkin" <mst@redhat.com>,
+ David Airlie <airlied@linux.ie>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ Paul Mackerras <paulus@samba.org>, Linux-Arch <linux-arch@vger.kernel.org>,
+ Dave Jiang <dave.jiang@intel.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Helge Deller <deller@gmx.de>, Linux-sh list <linux-sh@vger.kernel.org>,
+ Alexey Brodkin <abrodkin@synopsys.com>, Ben
+ Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>, Matt
+ Turner <mattst88@gmail.com>, arcml <linux-snps-arc@lists.infradead.org>,
+ Nick Kossifidis <mickflemm@gmail.com>, Allen Hubbe <allenbh@gmail.com>,
+ Arnd Bergmann <arnd@arndb.de>, Jon Mason <jdmason@kudzu.us>, Ivan
+ Kokshaysky <ink@jurassic.park.msu.ru>, Thomas Gleixner <tglx@linutronix.de>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
+ Richard Henderson <rth@twiddle.net>,
+ Parisc List <linux-parisc@vger.kernel.org>, netdev <netdev@vger.kernel.org>,
+ linux-wireless <linux-wireless@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Vineet Gupta <vgupta@synopsys.com>,
+ Daniel Vetter <daniel@ffwll.ch>, alpha <linux-alpha@vger.kernel.org>,
+ "linux-ntb@googlegroups.com" <linux-ntb@googlegroups.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -122,66 +113,40 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, 24 Feb 2020 17:26:20 +0800
-Jason Wang <jasowang@redhat.com> wrote:
-
-> That's better.
-> 
-> How about attached?
-> 
-> Thanks
-
-Thanks Jason! It does avoid the translation overhead in vhost.
-
-Tested-by: Halil Pasic <pasic@linux.ibm.com>
-
-Regarding the code, you fence it in virtio-net.c, but AFAIU this feature
-has relevance for other vhost devices as well. E.g. what about vhost
-user? Would it be the responsibility of each virtio device to fence this
-on its own?
-
-I'm also a bit confused about the semantics of the vhost feature bit
-F_ACCESS_PLATFORM. What we have specified on virtio level is:
-"""
-This feature indicates that the device can be used on a platform where
-device access to data in memory is limited and/or translated. E.g. this
-is the case if the device can be located behind an IOMMU that translates
-bus addresses from the device into physical addresses in memory, if the
-device can be limited to only access certain memory addresses or if
-special commands such as a cache flush can be needed to synchronise data
-in memory with the device. Whether accesses are actually limited or
-translated is described by platform-specific means. If this feature bit
-is set to 0, then the device has same access to memory addresses
-supplied to it as the driver has. In particular, the device will always
-use physical addresses matching addresses used by the driver (typically
-meaning physical addresses used by the CPU) and not translated further,
-and can access any address supplied to it by the driver. When clear,
-this overrides any platform-specific description of whether device
-access is limited or translated in any way, e.g. whether an IOMMU may be
-present.
-"""
-
-I read this like the addresses may be IOVAs which require
-IMMU translation or GPAs which don't.
-
-On the vhost level however, it seems that F_IOMMU_PLATFORM means that
-vhost has to do the translation (via IOTLB API).
-
-Do I understand this correctly? If yes, I believe we should document
-this properly.
-
-BTW I'm still not 100% on the purpose and semantics of the
-F_ACCESS_PLATFORM feature bit. But that is a different problem.
-
-Regards,
-Halil
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+RnJvbTogR2VlcnQgVXl0dGVyaG9ldmVuDQo+IFNlbnQ6IDI0IEZlYnJ1YXJ5IDIwMjAgMTI6NTQN
+Cj4gVG86IEtyenlzenRvZiBLb3psb3dza2kgPGtyemtAa2VybmVsLm9yZz4NCi4uLg0KPiA+ID4g
+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvd2lyZWxlc3MvYXRoL2F0aDVrL2FoYi5jIGIvZHJp
+dmVycy9uZXQvd2lyZWxlc3MvYXRoL2F0aDVrL2FoYi5jDQo+ID4gPiA+IGluZGV4IDJjOWNlYzhi
+NTNkOS4uOGJkMDFkZjM2OWZiIDEwMDY0NA0KPiA+ID4gPiAtLS0gYS9kcml2ZXJzL25ldC93aXJl
+bGVzcy9hdGgvYXRoNWsvYWhiLmMNCj4gPiA+ID4gKysrIGIvZHJpdmVycy9uZXQvd2lyZWxlc3Mv
+YXRoL2F0aDVrL2FoYi5jDQo+ID4gPiA+IEBAIC0xMzgsMTggKzEzOCwxOCBAQCBzdGF0aWMgaW50
+IGF0aF9haGJfcHJvYmUoc3RydWN0IHBsYXRmb3JtX2RldmljZSAqcGRldikNCj4gPiA+ID4NCj4g
+PiA+ID4gICAgIGlmIChiY2ZnLT5kZXZpZCA+PSBBUjVLX1NSRVZfQVIyMzE1X1I2KSB7DQo+ID4g
+PiA+ICAgICAgICAgICAgIC8qIEVuYWJsZSBXTUFDIEFIQiBhcmJpdHJhdGlvbiAqLw0KPiA+ID4g
+PiAtICAgICAgICAgICByZWcgPSBpb3JlYWQzMigodm9pZCBfX2lvbWVtICopIEFSNUtfQVIyMzE1
+X0FIQl9BUkJfQ1RMKTsNCj4gPiA+ID4gKyAgICAgICAgICAgcmVnID0gaW9yZWFkMzIoKGNvbnN0
+IHZvaWQgX19pb21lbSAqKSBBUjVLX0FSMjMxNV9BSEJfQVJCX0NUTCk7DQo+ID4gPg0KPiA+ID4g
+V2hpbGUgSSB1bmRlcnN0YW5kIHdoeSB0aGUgcGFyYW1ldGVyIG9mIGlvcmVhZDMyIHNob3VsZCBi
+ZSBjb25zdCwgSQ0KPiA+ID4gZG9uJ3Qgc2VlIGEgcmVhc29uIGZvciB0aGVzZSBjYXN0cyBvbiB0
+aGUgdXNlcnMnIHNpZGUuIFdoYXQgZG9lcyBpdA0KPiA+ID4gYnJpbmcgZXhjZXB0IGxvbmdlciBj
+b2RlIHRvIHJlYWQ/DQo+ID4NCj4gPiBCZWNhdXNlIHRoZSBhcmd1bWVudCBpcyBhbiBpbnQ6DQo+
+ID4NCj4gPiBkcml2ZXJzL25ldC93aXJlbGVzcy9hdGgvYXRoNWsvYWhiLmM6IEluIGZ1bmN0aW9u
+IOKAmGF0aF9haGJfcHJvYmXigJk6DQo+ID4gZHJpdmVycy9uZXQvd2lyZWxlc3MvYXRoL2F0aDVr
+L2FoYi5jOjE0MToxODogd2FybmluZzogcGFzc2luZyBhcmd1bWVudCAxIG9mIOKAmGlvcmVhZDMy
+4oCZIG1ha2VzIHBvaW50ZXINCj4gZnJvbSBpbnRlZ2VyIHdpdGhvdXQgYSBjYXN0IFstV2ludC1j
+b252ZXJzaW9uXQ0KPiA+ICAgIHJlZyA9IGlvcmVhZDMyKEFSNUtfQVIyMzE1X0FIQl9BUkJfQ1RM
+KTsNCj4gDQo+IFRoYXQncyBhbiBhcmd1bWVudCBmb3Iga2VlcGluZyB0aGUgY2FzdCB0byAidm9p
+ZCBfX2lvbWVtICoiLCBub3QgZm9yDQo+IGFkZGluZyB0aGUgImNvbnN0IiwgcmlnaHQ/DQoNCk9y
+IG1vcmUgbGlrZWx5IGNoYW5nZSB0aGUgZGVmaW5pdGlvbnMgdG8gdXNlIGEgc3RydWN0IGZvciB0
+aGUgbGF5b3V0Lg0KVGhhdCBhbHNvIHN0b3BzIHRoZSBjb25zdGFudHMgYmVpbmcgdXNlZCBpbiB0
+aGUgd3JvbmcgcGxhY2UuDQoNCglEYXZpZA0KDQotDQpSZWdpc3RlcmVkIEFkZHJlc3MgTGFrZXNp
+ZGUsIEJyYW1sZXkgUm9hZCwgTW91bnQgRmFybSwgTWlsdG9uIEtleW5lcywgTUsxIDFQVCwgVUsN
+ClJlZ2lzdHJhdGlvbiBObzogMTM5NzM4NiAoV2FsZXMpDQpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmly
+dHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51
+eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
