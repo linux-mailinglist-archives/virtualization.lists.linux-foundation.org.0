@@ -1,97 +1,113 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E22016A849
-	for <lists.virtualization@lfdr.de>; Mon, 24 Feb 2020 15:25:53 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id B263716A8B7
+	for <lists.virtualization@lfdr.de>; Mon, 24 Feb 2020 15:44:27 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B10B886FBB;
-	Mon, 24 Feb 2020 14:25:51 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id F110D82DDF;
+	Mon, 24 Feb 2020 14:44:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YxnYffNkb5Tr; Mon, 24 Feb 2020 14:25:47 +0000 (UTC)
+	with ESMTP id XVV6IwLe_C7l; Mon, 24 Feb 2020 14:44:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 88CC286FF8;
-	Mon, 24 Feb 2020 14:25:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4C81580AD2;
+	Mon, 24 Feb 2020 14:44:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6925CC0177;
-	Mon, 24 Feb 2020 14:25:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 26346C0177;
+	Mon, 24 Feb 2020 14:44:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8A580C0177
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0C2ACC0177
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 14:25:45 +0000 (UTC)
+ Mon, 24 Feb 2020 14:44:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 870DE859E3
+ by fraxinus.osuosl.org (Postfix) with ESMTP id EE3AE85DCF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 14:25:45 +0000 (UTC)
+ Mon, 24 Feb 2020 14:44:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nBaCicHRTxWo
+ with ESMTP id 1sHOg6O5emUp
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 14:25:42 +0000 (UTC)
+ Mon, 24 Feb 2020 14:44:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id C317684AC5
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+ [209.85.208.68])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id B9BEC809CB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 14:25:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582554341;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=TB7sUf2pFHZ1gfff7bVBVaPbnW5iGaEMa9gLQVlWv7I=;
- b=SZyKbdoU2qqKqf7ErNqMMpe8nZCOaJ5ZpGL27HjhJJUSUXw8h4fvXrOq4ksIFYHxGGV8j0
- n1GB5PatGDqHppeCNhDu20Mdc8dlQnTypB/CjnIf8I17lu0OEiheGmP9jRDlaYdp5eaOmX
- /C98OSaT1fGdKBEugctU0siFkH/m+xc=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-457-dyp_qW7SPw6clB5rdqYdrA-1; Mon, 24 Feb 2020 09:25:37 -0500
-X-MC-Unique: dyp_qW7SPw6clB5rdqYdrA-1
-Received: by mail-qv1-f70.google.com with SMTP id cn2so9112002qvb.1
+ Mon, 24 Feb 2020 14:44:20 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id p23so12165634edr.5
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Feb 2020 06:25:37 -0800 (PST)
+ Mon, 24 Feb 2020 06:44:20 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=TB7sUf2pFHZ1gfff7bVBVaPbnW5iGaEMa9gLQVlWv7I=;
- b=pDJ9qdkcnkCU4LXgAApQIJ9H9mBkmK1u0pxjjqqOClF+qxgK4TuyJXyzRfgcfDH0Oh
- rfpREX3kuJIxvzTGeP8gU+yYSQYjJefA0FuEOdOhuQyKrcsQNB8qkwxLmEY5w7+5iB0n
- Rl+qRrZ/ukEmsugcwA9x6wl0uBUXkL2pg3NWmhODICiBB9MLzacSB1824I8wxvt/8s4J
- x5Bdn3ynWoKcq1w54FyWWg20iREFj/A/Ipk1jwrTBVBAMmXgicAKzCWg6kT8sF34Y+9x
- fHQIi9KdJPddz/oYqw+6NoxiB2kGT/qOzGvCX3V8rp//HleaYBjG2TYcfA6tn/YCAdCg
- /umA==
-X-Gm-Message-State: APjAAAV0MFjYPOTCB8QxKJRue4vIgmg2C66DcSAIsdjpXU4Vi8X9ffS6
- dqA6pbi7pyeNFUdLlMcqAWA4l1FXjJyOxfzCVnK9Lk3tKswCBMorM8Pr1eHIigZm5Zhmb0a43uS
- qIQuzN7LBdWktOPhTRYUivn0r823E5M154JYLyzoVdg==
-X-Received: by 2002:ac8:7657:: with SMTP id i23mr48528798qtr.197.1582554337426; 
- Mon, 24 Feb 2020 06:25:37 -0800 (PST)
-X-Google-Smtp-Source: APXvYqznUlCcqXeerYYf+szsmuv/Ph5idwuFaPaAFKrIhkobzWbc5eRNhdpX5HexMXIGUCrH38q8gw==
-X-Received: by 2002:ac8:7657:: with SMTP id i23mr48528784qtr.197.1582554337178; 
- Mon, 24 Feb 2020 06:25:37 -0800 (PST)
-Received: from redhat.com (bzq-79-178-2-214.red.bezeqint.net. [79.178.2.214])
- by smtp.gmail.com with ESMTPSA id
- g26sm5921357qkk.68.2020.02.24.06.25.34
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=9BiQIzqw1g4Lc7fCMo41b2Sms1ZkrHji7czRtN4yRpY=;
+ b=EFuSVevqIcEzZ1UjFD+bGnYEvcUqEQSMsEc+hBYTO7RdV6fQ/eyhQwjdoxLTTjkYFL
+ OGLFZxFtwnnn2D2QjNCjOKQhFBOr9UYjObFeJeMj6xZBP15VQZEhMA60LSPmKYEetT2X
+ eIReNXMRSYmkY1K+ibgFWaK052oTEgbi1MxBFEFggbQxRBxdYo2nR5eDiwPIfa0k6XxX
+ BWh9lWg10Xg+wbk9YAOm2VN3fyDFXgbCuNZuOK1uj9kpCrouRb6mCSuxbeshHbnVcvLh
+ w908z/FXq/3ZBceucYEiTWIFxZma+LSc+QIcN2MgoAJ4aJlgc2mzDQJHnjjDgCSFS0dU
+ 1Gyg==
+X-Gm-Message-State: APjAAAUG/OxlycYc5tzpv/IJ8NKH6xVZ04Q7cS70oAk/jbnIadRJsjve
+ wZ6OV7akO8XOwrkWcFjVpUQ=
+X-Google-Smtp-Source: APXvYqzwji2Ykgei/T3ukpc15pByx2S09B2SSkaAFB5FVLPyRnARm/VtcP3TWvca57zCxPIFcvsdrw==
+X-Received: by 2002:a17:906:5604:: with SMTP id
+ f4mr47998768ejq.255.1582555459077; 
+ Mon, 24 Feb 2020 06:44:19 -0800 (PST)
+Received: from pi3 ([194.230.155.125])
+ by smtp.googlemail.com with ESMTPSA id a10sm961255edt.50.2020.02.24.06.44.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2020 06:25:36 -0800 (PST)
-Date: Mon, 24 Feb 2020 09:25:32 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: anton.ivanov@cambridgegreys.com
-Subject: Re: [PATCH v3] virtio: Work around frames incorrectly marked as gso
-Message-ID: <20200224092526-mutt-send-email-mst@kernel.org>
-References: <20200224132550.2083-1-anton.ivanov@cambridgegreys.com>
+ Mon, 24 Feb 2020 06:44:17 -0800 (PST)
+Date: Mon, 24 Feb 2020 15:44:13 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Subject: Re: [RESEND PATCH v2 9/9] ath5k: Constify ioreadX() iomem argument
+ (as in generic implementation)
+Message-ID: <20200224144413.GA2054@pi3>
+References: <20200219175007.13627-1-krzk@kernel.org>
+ <20200219175007.13627-10-krzk@kernel.org>
+ <518a9023-f802-17b3-fca5-582400bc34ae@gmail.com>
+ <20200224124744.GA1949@pi3>
+ <CAMuHMdVev0PLF=8bD3nHrhcU9UgM-DAgdQpXi09PgvAxdbt24A@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20200224132550.2083-1-anton.ivanov@cambridgegreys.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: netdev@vger.kernel.org, linux-um@lists.infradead.org,
- eric.dumazet@gmail.com, virtualization@lists.linux-foundation.org
+In-Reply-To: <CAMuHMdVev0PLF=8bD3nHrhcU9UgM-DAgdQpXi09PgvAxdbt24A@mail.gmail.com>
+Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ "Michael S. Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ netdev <netdev@vger.kernel.org>, Paul Mackerras <paulus@samba.org>,
+ Linux-Arch <linux-arch@vger.kernel.org>, Dave Jiang <dave.jiang@intel.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Michael Ellerman <mpe@ellerman.id.au>, Helge Deller <deller@gmx.de>,
+ Linux-sh list <linux-sh@vger.kernel.org>,
+ Alexey Brodkin <abrodkin@synopsys.com>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ Matt Turner <mattst88@gmail.com>, arcml <linux-snps-arc@lists.infradead.org>,
+ Nick Kossifidis <mickflemm@gmail.com>, Allen Hubbe <allenbh@gmail.com>,
+ Arnd Bergmann <arnd@arndb.de>, alpha <linux-alpha@vger.kernel.org>,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
+ Richard Henderson <rth@twiddle.net>,
+ Parisc List <linux-parisc@vger.kernel.org>, Vineet Gupta <vgupta@synopsys.com>,
+ linux-wireless <linux-wireless@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Jon Mason <jdmason@kudzu.us>, linux-ntb@googlegroups.com,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,63 +119,56 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Feb 24, 2020 at 01:25:50PM +0000, anton.ivanov@cambridgegreys.com wrote:
-> From: Anton Ivanov <anton.ivanov@cambridgegreys.com>
-> 
-> Some of the locally generated frames marked as GSO which
-> arrive at virtio_net_hdr_from_skb() have no GSO_TYPE, no
-> fragments (data_len = 0) and length significantly shorter
-> than the MTU (752 in my experiments).
-> 
-> This is observed on raw sockets reading off vEth interfaces
-> in all 4.x and 5.x kernels. The frames are reported as
-> invalid, while they are in fact gso-less frames.
-> 
-> The easiest way to reproduce is to connect a User Mode
-> Linux instance to the host using the vector raw transport
-> and a vEth interface. Vector raw uses recvmmsg/sendmmsg
-> with virtio headers on af_packet sockets. When running iperf
-> between the UML and the host, UML regularly complains about
-> EINVAL return from recvmmsg.
-> 
-> This patch marks the vnet header as non-GSO instead of
-> reporting it as invalid.
-> 
-> Signed-off-by: Anton Ivanov <anton.ivanov@cambridgegreys.com>
-
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-
-> ---
->  include/linux/virtio_net.h | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/include/linux/virtio_net.h b/include/linux/virtio_net.h
-> index 0d1fe9297ac6..2c99c752cb20 100644
-> --- a/include/linux/virtio_net.h
-> +++ b/include/linux/virtio_net.h
-> @@ -98,10 +98,11 @@ static inline int virtio_net_hdr_from_skb(const struct sk_buff *skb,
->  					  bool has_data_valid,
->  					  int vlan_hlen)
->  {
-> +	struct skb_shared_info *sinfo = skb_shinfo(skb);
-> +
->  	memset(hdr, 0, sizeof(*hdr));   /* no info leak */
->  
-> -	if (skb_is_gso(skb)) {
-> -		struct skb_shared_info *sinfo = skb_shinfo(skb);
-> +	if (skb_is_gso(skb) && sinfo->gso_type) {
->  
->  		/* This is a hint as to how much should be linear. */
->  		hdr->hdr_len = __cpu_to_virtio16(little_endian,
-> -- 
-> 2.20.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gTW9uLCBGZWIgMjQsIDIwMjAgYXQgMDE6NTQ6MDBQTSArMDEwMCwgR2VlcnQgVXl0dGVyaG9l
+dmVuIHdyb3RlOgo+IEhpIEtyenlzenRvZiwKPiAKPiBPbiBNb24sIEZlYiAyNCwgMjAyMCBhdCAx
+OjQ3IFBNIEtyenlzenRvZiBLb3psb3dza2kgPGtyemtAa2VybmVsLm9yZz4gd3JvdGU6Cj4gPiBP
+biBUaHUsIEZlYiAyMCwgMjAyMCBhdCAxMDo0ODozM0FNICswMTAwLCBKaXJpIFNsYWJ5IHdyb3Rl
+Ogo+ID4gPiBPbiAxOS4gMDIuIDIwLCAxODo1MCwgS3J6eXN6dG9mIEtvemxvd3NraSB3cm90ZToK
+PiA+ID4gPiBUaGUgaW9yZWFkWCgpIGhlbHBlcnMgaGF2ZSBpbmNvbnNpc3RlbnQgaW50ZXJmYWNl
+LiAgT24gc29tZSBhcmNoaXRlY3R1cmVzCj4gPiA+ID4gdm9pZCAqX19pb21lbSBhZGRyZXNzIGFy
+Z3VtZW50IGlzIGEgcG9pbnRlciB0byBjb25zdCwgb24gc29tZSBub3QuCj4gPiA+ID4KPiA+ID4g
+PiBJbXBsZW1lbnRhdGlvbnMgb2YgaW9yZWFkWCgpIGRvIG5vdCBtb2RpZnkgdGhlIG1lbW9yeSB1
+bmRlciB0aGUgYWRkcmVzcwo+ID4gPiA+IHNvIHRoZXkgY2FuIGJlIGNvbnZlcnRlZCB0byBhICJj
+b25zdCIgdmVyc2lvbiBmb3IgY29uc3Qtc2FmZXR5IGFuZAo+ID4gPiA+IGNvbnNpc3RlbmN5IGFt
+b25nIGFyY2hpdGVjdHVyZXMuCj4gPiA+ID4KPiA+ID4gPiBTaWduZWQtb2ZmLWJ5OiBLcnp5c3p0
+b2YgS296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+Cj4gPiA+ID4gQWNrZWQtYnk6IEthbGxlIFZh
+bG8gPGt2YWxvQGNvZGVhdXJvcmEub3JnPgo+ID4gPiA+IC0tLQo+ID4gPiA+ICBkcml2ZXJzL25l
+dC93aXJlbGVzcy9hdGgvYXRoNWsvYWhiLmMgfCAxMCArKysrKy0tLS0tCj4gPiA+ID4gIDEgZmls
+ZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pCj4gPiA+ID4KPiA+ID4g
+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvd2lyZWxlc3MvYXRoL2F0aDVrL2FoYi5jIGIvZHJp
+dmVycy9uZXQvd2lyZWxlc3MvYXRoL2F0aDVrL2FoYi5jCj4gPiA+ID4gaW5kZXggMmM5Y2VjOGI1
+M2Q5Li44YmQwMWRmMzY5ZmIgMTAwNjQ0Cj4gPiA+ID4gLS0tIGEvZHJpdmVycy9uZXQvd2lyZWxl
+c3MvYXRoL2F0aDVrL2FoYi5jCj4gPiA+ID4gKysrIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvYXRo
+L2F0aDVrL2FoYi5jCj4gPiA+ID4gQEAgLTEzOCwxOCArMTM4LDE4IEBAIHN0YXRpYyBpbnQgYXRo
+X2FoYl9wcm9iZShzdHJ1Y3QgcGxhdGZvcm1fZGV2aWNlICpwZGV2KQo+ID4gPiA+Cj4gPiA+ID4g
+ICAgIGlmIChiY2ZnLT5kZXZpZCA+PSBBUjVLX1NSRVZfQVIyMzE1X1I2KSB7Cj4gPiA+ID4gICAg
+ICAgICAgICAgLyogRW5hYmxlIFdNQUMgQUhCIGFyYml0cmF0aW9uICovCj4gPiA+ID4gLSAgICAg
+ICAgICAgcmVnID0gaW9yZWFkMzIoKHZvaWQgX19pb21lbSAqKSBBUjVLX0FSMjMxNV9BSEJfQVJC
+X0NUTCk7Cj4gPiA+ID4gKyAgICAgICAgICAgcmVnID0gaW9yZWFkMzIoKGNvbnN0IHZvaWQgX19p
+b21lbSAqKSBBUjVLX0FSMjMxNV9BSEJfQVJCX0NUTCk7Cj4gPiA+Cj4gPiA+IFdoaWxlIEkgdW5k
+ZXJzdGFuZCB3aHkgdGhlIHBhcmFtZXRlciBvZiBpb3JlYWQzMiBzaG91bGQgYmUgY29uc3QsIEkK
+PiA+ID4gZG9uJ3Qgc2VlIGEgcmVhc29uIGZvciB0aGVzZSBjYXN0cyBvbiB0aGUgdXNlcnMnIHNp
+ZGUuIFdoYXQgZG9lcyBpdAo+ID4gPiBicmluZyBleGNlcHQgbG9uZ2VyIGNvZGUgdG8gcmVhZD8K
+PiA+Cj4gPiBCZWNhdXNlIHRoZSBhcmd1bWVudCBpcyBhbiBpbnQ6Cj4gPgo+ID4gZHJpdmVycy9u
+ZXQvd2lyZWxlc3MvYXRoL2F0aDVrL2FoYi5jOiBJbiBmdW5jdGlvbiDigJhhdGhfYWhiX3Byb2Jl
+4oCZOgo+ID4gZHJpdmVycy9uZXQvd2lyZWxlc3MvYXRoL2F0aDVrL2FoYi5jOjE0MToxODogd2Fy
+bmluZzogcGFzc2luZyBhcmd1bWVudCAxIG9mIOKAmGlvcmVhZDMy4oCZIG1ha2VzIHBvaW50ZXIg
+ZnJvbSBpbnRlZ2VyIHdpdGhvdXQgYSBjYXN0IFstV2ludC1jb252ZXJzaW9uXQo+ID4gICAgcmVn
+ID0gaW9yZWFkMzIoQVI1S19BUjIzMTVfQUhCX0FSQl9DVEwpOwo+IAo+IFRoYXQncyBhbiBhcmd1
+bWVudCBmb3Iga2VlcGluZyB0aGUgY2FzdCB0byAidm9pZCBfX2lvbWVtICoiLCBub3QgZm9yCj4g
+YWRkaW5nIHRoZSAiY29uc3QiLCByaWdodD8KClllcywgY29ycmVjdC4gTWF5YmUgSSBtaXN1bmRl
+cnN0b29kIHRoZSBxdWVzdGlvbi4uLiBUaGUgY29uc3Qgb24gdGhlCm90aGVyIGhhbmQgZG9lcyBu
+b3QgaGF2ZSB0byBiZSBpbiB0aGUgY2FzdC4gSXQgaXMgbWVyZWx5IGZvciBtYWtpbmcgaXQKY29u
+c2lzdGVudCB3aXRoIGludGVyZmFjZS4gSXQgaXMgbm90IHJlcXVpcmVkLiBJIGFsc28gbWVudGlv
+bmVkIGl0IGluCnRoZSBjb3ZlciBsZXR0ZXI6CiJQQXRjaGVzIDUtOSBhcmUgb3B0aW9uYWwgY2xl
+YW51cCwgd2l0aG91dCBhY3R1YWwgaW1wYWN0IgoKRmVlbCBmcmVlIHRvIGlnbm9yZSB0aGlzIG9u
+ZSBpZiBpdCBpcyBub3Qgd29ydGggdGhlIGVmZm9ydC4KCkJlc3QgcmVnYXJkcywKS3J6eXN6dG9m
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFs
+aXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlv
+bi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8v
+dmlydHVhbGl6YXRpb24=
