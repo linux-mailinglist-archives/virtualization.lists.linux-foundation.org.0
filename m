@@ -2,75 +2,91 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 497D916983A
-	for <lists.virtualization@lfdr.de>; Sun, 23 Feb 2020 16:06:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4450169CDB
+	for <lists.virtualization@lfdr.de>; Mon, 24 Feb 2020 05:02:28 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id CED8F203A6;
-	Sun, 23 Feb 2020 15:06:21 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3C035204E5;
+	Mon, 24 Feb 2020 04:02:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id URcsI5FKIlQV; Sun, 23 Feb 2020 15:06:19 +0000 (UTC)
+	with ESMTP id 7hscO-kclbQ8; Mon, 24 Feb 2020 04:02:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 0158C20368;
-	Sun, 23 Feb 2020 15:06:18 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 6FDDF22201;
+	Mon, 24 Feb 2020 04:02:24 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CEEA9C1D8E;
-	Sun, 23 Feb 2020 15:06:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4B867C0177;
+	Mon, 24 Feb 2020 04:02:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9BF34C0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 16F21C18DA
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Feb 2020 15:06:16 +0000 (UTC)
+ Mon, 24 Feb 2020 04:02:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 88E6D85218
+ by silver.osuosl.org (Postfix) with ESMTP id 093EE204E4
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Feb 2020 15:06:16 +0000 (UTC)
+ Mon, 24 Feb 2020 04:02:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 162x9kFdUubc
+ with ESMTP id EGCkYJzTZF6I
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Feb 2020 15:06:15 +0000 (UTC)
+ Mon, 24 Feb 2020 04:02:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from huawei.com (szxga01-in.huawei.com [45.249.212.187])
- by whitealder.osuosl.org (Postfix) with ESMTPS id ACE1584E0C
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by silver.osuosl.org (Postfix) with ESMTPS id 87FAB204DE
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Feb 2020 15:06:14 +0000 (UTC)
-Received: from dggeml405-hub.china.huawei.com (unknown [172.30.72.54])
- by Forcepoint Email with ESMTP id 24FA44E78D2DE86FD79A;
- Sun, 23 Feb 2020 23:06:10 +0800 (CST)
-Received: from DGGEML511-MBX.china.huawei.com ([169.254.1.89]) by
- dggeml405-hub.china.huawei.com ([10.3.17.49]) with mapi id 14.03.0439.000;
- Sun, 23 Feb 2020 23:06:01 +0800
-From: "Gonglei (Arei)" <arei.gonglei@huawei.com>
-To: LABBE Corentin <clabbe@baylibre.com>
-Subject: RE: [CRASH] crypto: virtio: crash when modprobing tcrypt on 5.5-rc7
- / next-20200122
-Thread-Topic: [CRASH] crypto: virtio: crash when modprobing tcrypt on
- 5.5-rc7 / next-20200122
-Thread-Index: AQHV0dVNhsJsLHebl0+mdNNoLPAyfKgKTXoAgBnNFYCABPE9UA==
-Date: Sun, 23 Feb 2020 15:06:00 +0000
-Message-ID: <33183CC9F5247A488A2544077AF19020DF4B2ED4@dggeml511-mbx.china.huawei.com>
-References: <20200123101000.GB24255@Red>
- <20200204041419-mutt-send-email-mst@kernel.org> <20200220191553.GA30549@Red>
-In-Reply-To: <20200220191553.GA30549@Red>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.133.225.234]
+ Mon, 24 Feb 2020 04:02:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582516939;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=jMt7aQ9pDIFoF8MXPWrUB8nziLJeM4YhEWRgKCHSf8Q=;
+ b=fwSMQHR5qAm6l4Q8qCx9b0y+TskObdabEDJ+T571U3OGfO6fUE6DnqlUjk5Y/hPFJXnU6i
+ eI96yMWqwm3EA2F7KUW8QNFY0uPRhVZPrsvtimNWG+9cxLWMheeNEPXynjRBkkgsctqkuw
+ j3TekEp7pT6er/vb/NuJO0oI26XCt2U=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-230-8HLUA13KPguNUh1BEEJjqA-1; Sun, 23 Feb 2020 23:02:11 -0500
+X-MC-Unique: 8HLUA13KPguNUh1BEEJjqA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2DDA213E2;
+ Mon, 24 Feb 2020 04:02:09 +0000 (UTC)
+Received: from [10.72.13.147] (ovpn-13-147.pek2.redhat.com [10.72.13.147])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 13BB460BF4;
+ Mon, 24 Feb 2020 04:01:58 +0000 (UTC)
+Subject: Re: [PATCH 0/2] virtio: decouple protected guest RAM form
+ VIRTIO_F_IOMMU_PLATFORM
+To: Halil Pasic <pasic@linux.ibm.com>
+References: <20200220160606.53156-1-pasic@linux.ibm.com>
+ <426e6972-0565-c931-e171-da0f58fbf856@redhat.com>
+ <20200221155602.4de41fa7.pasic@linux.ibm.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <0181712c-e533-fcfd-2638-8a0649d713dd@redhat.com>
+Date: Mon, 24 Feb 2020 12:01:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-Cc: "Liujinsong \(Paul\)" <liu.jinsong@huawei.com>,
- "herbert@gondor.apana.org.au" <herbert@gondor.apana.org.au>,
- "mst@redhat.com" <mst@redhat.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
- "davem@davemloft.net" <davem@davemloft.net>
+In-Reply-To: <20200221155602.4de41fa7.pasic@linux.ibm.com>
+Content-Type: multipart/mixed; boundary="------------323EAFF568B452B8B5C3BA24"
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Cc: linux-s390@vger.kernel.org, Janosch Frank <frankja@linux.ibm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ iommu@lists.linux-foundation.org, David Gibson <david@gibson.dropbear.id.au>,
+ Michael Mueller <mimu@linux.ibm.com>, "Lendacky,
+ Thomas" <Thomas.Lendacky@amd.com>, Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+ Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>,
+ Marek Szyprowski <m.szyprowski@samsung.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,175 +98,174 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+This is a multi-part message in MIME format.
+--------------323EAFF568B452B8B5C3BA24
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: LABBE Corentin [mailto:clabbe@baylibre.com]
-> Sent: Friday, February 21, 2020 3:16 AM
-> To: Gonglei (Arei) <arei.gonglei@huawei.com>
-> Cc: jasowang@redhat.com; herbert@gondor.apana.org.au;
-> davem@davemloft.net; virtualization@lists.linux-foundation.org;
-> linux-crypto@vger.kernel.org; linux-kernel@vger.kernel.org; mst@redhat.com
-> Subject: Re: [CRASH] crypto: virtio: crash when modprobing tcrypt on 5.5-rc7 /
-> next-20200122
-> 
-> On Tue, Feb 04, 2020 at 04:15:22AM -0500, Michael S. Tsirkin wrote:
-> > On Thu, Jan 23, 2020 at 11:10:00AM +0100, LABBE Corentin wrote:
-> > > Hello
-> > >
-> > > When modprobing tcrypt on qemu 4.1.0 I get a kernel panic on 5.5-rc7
-> > > and next-20200122 qemu is started by:
-> > > /usr/bin/qemu-system-x86_64 -cpu host -enable-kvm -nographic -net
-> > > nic,model=e1000,macaddr=52:54:00:12:34:58 -net tap -m 512 -monitor
-> > > none -object cryptodev-backend-builtin,id=cryptodev0 -device
-> > > virtio-crypto-pci,id=crypto0,cryptodev=cryptodev0 -append
-> > > 'console=ttyS0 root=/dev/ram0 ip=dhcp' -kernel
-> > > /var/lib/lava/dispatcher/tmp/41332/deployimages-td18675m/kernel/bzIm
-> > > age -initrd
-> > > /var/lib/lava/dispatcher/tmp/41332/deployimages-td18675m/ramdisk/roo
-> > > tfs.cpio.gz -drive
-> > > format=qcow2,file=/var/lib/lava/dispatcher/tmp/41332/apply-overlay-g
-> > > uest-icy4k1ol/lava-guest.qcow2,media=disk,if=ide,id=lavatest
-> > >
-> > > [  112.771925] general protection fault: 0000 [#1] SMP PTI [
-> > > 112.772686] CPU: 0 PID: 126 Comm: virtio0-engine Not tainted
-> > > 5.5.0-rc7+ #1 [  112.773576] Hardware name: QEMU Standard PC (i440FX
-> > > + PIIX, 1996), BIOS
-> > > ?-20190711_202441-buildvm-armv7-10.arm.fedoraproject.org-2.fc31
-> > > 04/01/2014 [  112.775319] RIP: 0010:sg_next+0x0/0x20 [  112.775821]
-> > > Code: cc cc cc cc cc cc cc cc cc cc c7 47 10 00 00 00 00 89 57 0c 48
-> > > 89 37 89 4f 08 c3 0f 1f 44 00 00 66 2e 0f 1f 84 00 00 00 00 00 <f6>
-> > > 07 02 75 17 48 8b 57 20 48 8d 47 20 48 89 d1 48 83 e1 fc 83 e2 [
-> > > 112.778330] RSP: 0018:ffffa92440237d90 EFLAGS: 00010006 [
-> > > 112.779071] RAX: fefefefe00000000 RBX: 000000000000000a RCX:
-> > > fefefefe00000000 [  112.780081] RDX: 0000000000000001 RSI:
-> > > ffff9b19da1a2180 RDI: fefefefe00000000 [  112.781081] RBP:
-> > > ffff9b19da1a2198 R08: ffff9b19dfb24ee8 R09: 0000000000000a20 [
-> > > 112.782079] R10: ffff9b19da125010 R11: 0000000000000000 R12:
-> ffff9b19da1a21b8 [  112.783079] R13: 0000000000000003 R14:
-> ffff9b19da1a2180 R15: 0000000000000004 [  112.784077] FS:
-> 0000000000000000(0000) GS:ffff9b19de400000(0000)
-> knlGS:0000000000000000 [  112.785202] CS:  0010 DS: 0000 ES: 0000 CR0:
-> 0000000080050033 [  112.786030] CR2: 00007f18a157b050 CR3:
-> 000000001040a004 CR4: 0000000000060ef0 [  112.787034] Call Trace:
-> > > [  112.787393]  virtqueue_add_sgs+0x4c/0x90 [  112.787998]
-> > > virtio_crypto_skcipher_crypt_req+0x310/0x3e0
-> > > [  112.788817]  crypto_pump_work+0x10c/0x240 [  112.789420]  ?
-> > > __kthread_init_worker+0x50/0x50 [  112.790082]
-> > > kthread_worker_fn+0x89/0x180 [  112.790690]  kthread+0x10e/0x130 [
-> > > 112.791182]  ? kthread_park+0x80/0x80 [  112.791736]
-> > > ret_from_fork+0x35/0x40 [  112.792282] Modules linked in: cts lzo
-> > > salsa20_generic camellia_x86_64 camellia_generic fcrypt pcbc tgr192
-> > > anubis wp512 khazad tea michael_mic arc4 cast6_generic cast5_generic
-> > > cast_common deflate sha512_ssse3 sha512_generic cfb ofb
-> > > serpent_sse2_x86_64 serpent_generic lrw twofish_x86_64_3way
-> > > twofish_x86_64 crypto_simd cryptd glue_helper twofish_generic
-> > > twofish_common blowfish_x86_64 blowfish_generic blowfish_common md4
-> > > tcrypt(+) [  112.797652] ---[ end trace 4a8142d4a08c2518 ]--- [
-> > > 112.798320] RIP: 0010:sg_next+0x0/0x20 [  112.798865] Code: cc cc cc
-> > > cc cc cc cc cc cc cc c7 47 10 00 00 00 00 89 57 0c 48 89 37 89 4f 08
-> > > c3 0f 1f 44 00 00 66 2e 0f 1f 84 00 00 00 00 00 <f6> 07 02 75 17 48
-> > > 8b 57 20 48 8d 47 20 48 89 d1 48 83 e1 fc 83 e2 [  112.801452] RSP:
-> > > 0018:ffffa92440237d90 EFLAGS: 00010006 [  112.802189] RAX:
-> > > fefefefe00000000 RBX: 000000000000000a RCX: fefefefe00000000 [
-> > > 112.803190] RDX: 0000000000000001 RSI: ffff9b19da1a2180 RDI:
-> > > fefefefe00000000 [  112.804192] RBP: ffff9b19da1a2198 R08:
-> > > ffff9b19dfb24ee8 R09: 0000000000000a20 [  112.805201] R10:
-> > > ffff9b19da125010 R11: 0000000000000000 R12: ffff9b19da1a21b8 [
-> > > 112.806195] R13: 0000000000000003 R14: ffff9b19da1a2180 R15:
-> > > 0000000000000004 [  112.807222] FS:  0000000000000000(0000)
-> > > GS:ffff9b19de400000(0000) knlGS:0000000000000000 [  112.808352] CS:
-> > > 0010 DS: 0000 ES: 0000 CR0: 0000000080050033 [  112.809169] CR2:
-> > > 00007f18a157b050 CR3: 000000001040a004 CR4: 0000000000060ef0
-> > >
-> > > I have tested also 5.4.14
-> > > and I got random freeze with:
-> > > qemu-system-x86_64: virtio: zero sized buffers are not allowed
-> > >
-> > > Regards
-> >
-> > Cc: Gonglei <arei.gonglei@huawei.com>
-> >
-> 
-> Hello Gonglei
-> 
-> Any plan to fix the driver ? It is broken since its introduction.
-> 
-Thanks for your report firstly.
-I've been busy launching new products recently, so I don't have much time
-to invest in the open source community. 
 
-I spent some time investigating the BUG this weekend, 
-and IMO I found the root cause. The following patch, please help test it, thanks!
+On 2020/2/21 =E4=B8=8B=E5=8D=8810:56, Halil Pasic wrote:
+> On Fri, 21 Feb 2020 14:22:26 +0800
+> Jason Wang <jasowang@redhat.com> wrote:
+>
+>> On 2020/2/21 =E4=B8=8A=E5=8D=8812:06, Halil Pasic wrote:
+>>> Currently if one intends to run a memory protection enabled VM with
+>>> virtio devices and linux as the guest OS, one needs to specify the
+>>> VIRTIO_F_IOMMU_PLATFORM flag for each virtio device to make the guest
+>>> linux use the DMA API, which in turn handles the memory
+>>> encryption/protection stuff if the guest decides to turn itself into
+>>> a protected one. This however makes no sense due to multiple reasons:
+>>> * The device is not changed by the fact that the guest RAM is
+>>> protected. The so called IOMMU bypass quirk is not affected.
+>>> * This usage is not congruent with  standardised semantics of
+>>> VIRTIO_F_IOMMU_PLATFORM. Guest memory protected is an orthogonal reas=
+on
+>>> for using DMA API in virtio (orthogonal with respect to what is
+>>> expressed by VIRTIO_F_IOMMU_PLATFORM).
+>>>
+>>> This series aims to decouple 'have to use DMA API because my (guest) =
+RAM
+>>> is protected' and 'have to use DMA API because the device told me
+>>> VIRTIO_F_IOMMU_PLATFORM'.
+>>>
+>>> Please find more detailed explanations about the conceptual aspects i=
+n
+>>> the individual patches. There is however also a very practical proble=
+m
+>>> that is addressed by this series.
+>>>
+>>> For vhost-net the feature VIRTIO_F_IOMMU_PLATFORM has the following s=
+ide
+>>> effect The vhost code assumes it the addresses on the virtio descript=
+or
+>>> ring are not guest physical addresses but iova's, and insists on doin=
+g a
+>>> translation of these regardless of what transport is used (e.g. wheth=
+er
+>>> we emulate a PCI or a CCW device). (For details see commit 6b1e6cc785=
+5b
+>>> "vhost: new device IOTLB API".) On s390 this results in severe
+>>> performance degradation (c.a. factor 10).
+>>
+>> Do you see a consistent degradation on the performance, or it only
+>> happen when for during the beginning of the test?
+>>
+> AFAIK the degradation is consistent.
+>
+>>> BTW with ccw I/O there is
+>>> (architecturally) no IOMMU, so the whole address translation makes no
+>>> sense in the context of virtio-ccw.
+>>
+>> I suspect we can do optimization in qemu side.
+>>
+>> E.g send memtable entry via IOTLB API when vIOMMU is not enabled.
+>>
+>> If this makes sense, I can draft patch to see if there's any differenc=
+e.
+> Frankly I would prefer to avoid IOVAs on the descriptor ring (and the
+> then necessary translation) for virtio-ccw altogether. But Michael
+> voiced his opinion that we should mandate F_IOMMU_PLATFORM for devices
+> that could be used with guests running in protected mode. I don't share
+> his opinion, but that's an ongoing discussion.
+>
+> Should we end up having to do translation from IOVA in vhost, we are
+> very interested in that translation being fast and efficient.
+>
+> In that sense we would be very happy to test any optimization that aim
+> into that direction.
+>
+> Thank you very much for your input!
 
-[PATCH] virtio-crypto: fix src/dst scatterlist calculation
 
-Usually the next entry of one sg will be @sg@ + 1, but if this sg element
-is part of a chained scatterlist, it could jump to the start of a new
-scatterlist array. Let's fix it by sg_next() on calculation of src/dst
-scatterlist.
+Using IOTLB API on platform without IOMMU support is not intended.=20
+Please try the attached patch to see if it helps.
 
-BTW I add a check for sg_nents_for_len() its return value since
-sg_nents_for_len() function could fail.
+Thanks
 
-Signed-off-by: Gonglei <arei.gonglei@huawei.com>
+
+>
+> Regards,
+> Halil
+>
+>> Thanks
+>>
+>>
+>>> Halil Pasic (2):
+>>>     mm: move force_dma_unencrypted() to mem_encrypt.h
+>>>     virtio: let virtio use DMA API when guest RAM is protected
+>>>
+>>>    drivers/virtio/virtio_ring.c |  3 +++
+>>>    include/linux/dma-direct.h   |  9 ---------
+>>>    include/linux/mem_encrypt.h  | 10 ++++++++++
+>>>    3 files changed, 13 insertions(+), 9 deletions(-)
+>>>
+>>>
+>>> base-commit: ca7e1fd1026c5af6a533b4b5447e1d2f153e28f2
+
+--------------323EAFF568B452B8B5C3BA24
+Content-Type: text/x-patch;
+ name="0001-virtio-turn-on-IOMMU_PLATFORM-properly.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-virtio-turn-on-IOMMU_PLATFORM-properly.patch"
+
+From 66fa730460875ac99e81d7db2334cd16bb1d2b27 Mon Sep 17 00:00:00 2001
+From: Jason Wang <jasowang@redhat.com>
+Date: Mon, 24 Feb 2020 12:00:10 +0800
+Subject: [PATCH] virtio: turn on IOMMU_PLATFORM properly
+
+When transport does not support IOMMU, we should clear IOMMU_PLATFORM
+even if the device and vhost claims to support that. This help to
+avoid the performance overhead caused by unnecessary IOTLB miss/update
+transactions on such platform.
+
+Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/crypto/virtio/virtio_crypto_algs.c | 20 ++++++++++++++++----
- 1 file changed, 16 insertions(+), 4 deletions(-)
+ hw/virtio/virtio-bus.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/crypto/virtio/virtio_crypto_algs.c b/drivers/crypto/virtio/virtio_crypto_algs.c
-index fd045e64..bde0539 100644
---- a/drivers/crypto/virtio/virtio_crypto_algs.c
-+++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -355,8 +355,14 @@ static int virtio_crypto_skcipher_setkey(struct crypto_skcipher *tfm,
- 	unsigned int num_out = 0, num_in = 0;
- 	int sg_total;
- 	uint8_t *iv;
-+	struct scatterlist *sg;
+diff --git a/hw/virtio/virtio-bus.c b/hw/virtio/virtio-bus.c
+index d6332d45c3..2741b9fdd2 100644
+--- a/hw/virtio/virtio-bus.c
++++ b/hw/virtio/virtio-bus.c
+@@ -47,7 +47,6 @@ void virtio_bus_device_plugged(VirtIODevice *vdev, Error **errp)
+     VirtioBusState *bus = VIRTIO_BUS(qbus);
+     VirtioBusClass *klass = VIRTIO_BUS_GET_CLASS(bus);
+     VirtioDeviceClass *vdc = VIRTIO_DEVICE_GET_CLASS(vdev);
+-    bool has_iommu = virtio_host_has_feature(vdev, VIRTIO_F_IOMMU_PLATFORM);
+     Error *local_err = NULL;
  
- 	src_nents = sg_nents_for_len(req->src, req->cryptlen);
-+	if (src_nents < 0) {
-+		pr_err("Invalid number of src SG.\n");
-+		return src_nents;
-+	}
-+
- 	dst_nents = sg_nents(req->dst);
+     DPRINTF("%s: plug device.\n", qbus->name);
+@@ -77,10 +76,11 @@ void virtio_bus_device_plugged(VirtIODevice *vdev, Error **errp)
+         return;
+     }
  
- 	pr_debug("virtio_crypto: Number of sgs (src_nents: %d, dst_nents: %d)\n",
-@@ -442,12 +448,18 @@ static int virtio_crypto_skcipher_setkey(struct crypto_skcipher *tfm,
- 	vc_sym_req->iv = iv;
- 
- 	/* Source data */
--	for (i = 0; i < src_nents; i++)
--		sgs[num_out++] = &req->src[i];
-+	sg = req->src;
-+	for (i = 0; sg && i < src_nents; sg = sg_next(sg)) {
-+		i++;
-+		sgs[num_out++] = sg;
-+	}
- 
- 	/* Destination data */
--	for (i = 0; i < dst_nents; i++)
--		sgs[num_out + num_in++] = &req->dst[i];
-+	sg = req->dst;
-+	for (i = 0; sg && i < dst_nents; sg = sg_next(sg)) {
-+		i++;
-+		sgs[num_out + num_in++] = sg;
-+	}
- 
- 	/* Status */
- 	sg_init_one(&status_sg, &vc_req->status, sizeof(vc_req->status));
+-    if (klass->get_dma_as != NULL && has_iommu) {
+-        virtio_add_feature(&vdev->host_features, VIRTIO_F_IOMMU_PLATFORM);
++    if (false && klass->get_dma_as != NULL &&
++        virtio_host_has_feature(vdev, VIRTIO_F_IOMMU_PLATFORM)) {
+         vdev->dma_as = klass->get_dma_as(qbus->parent);
+     } else {
++        virtio_clear_feature(&vdev->host_features, VIRTIO_F_IOMMU_PLATFORM);
+         vdev->dma_as = &address_space_memory;
+     }
+ }
 -- 
-1.8.3.1
+2.19.1
 
 
-Regards
--Gonglei
+--------------323EAFF568B452B8B5C3BA24
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--------------323EAFF568B452B8B5C3BA24--
+
