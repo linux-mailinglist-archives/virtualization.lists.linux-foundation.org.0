@@ -2,131 +2,97 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFE6816EC6A
-	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 18:23:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58FDC16ED7F
+	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 19:08:41 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 451EF85FE6;
-	Tue, 25 Feb 2020 17:23:39 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E342B86031;
+	Tue, 25 Feb 2020 18:08:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BPIxBPlDtWJu; Tue, 25 Feb 2020 17:23:38 +0000 (UTC)
+	with ESMTP id OMEe7CDqZwJ6; Tue, 25 Feb 2020 18:08:39 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C2CBE85FC1;
-	Tue, 25 Feb 2020 17:23:38 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 03F1085FD7;
+	Tue, 25 Feb 2020 18:08:39 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A4ACBC0177;
-	Tue, 25 Feb 2020 17:23:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E25C5C0177;
+	Tue, 25 Feb 2020 18:08:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 04901C0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C78E3C0177
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 17:23:37 +0000 (UTC)
+ Tue, 25 Feb 2020 18:08:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E13D185FBA
+ by hemlock.osuosl.org (Postfix) with ESMTP id ADC1485077
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 17:23:36 +0000 (UTC)
+ Tue, 25 Feb 2020 18:08:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NFmqOF01jV3L
+ with ESMTP id QLtoxiiNpQ9N
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 17:23:36 +0000 (UTC)
+ Tue, 25 Feb 2020 18:08:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3789685FA4
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6A5EE81BBA
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 17:23:36 +0000 (UTC)
+ Tue, 25 Feb 2020 18:08:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582651414;
+ s=mimecast20190719; t=1582654115;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=IoCi0iBaspXw/yP3KM/TOlfiJk3jWe8/C1RZOLA99tE=;
- b=ccyHoO3W+NhR6OXAQe87a9KX5Z60K00mmYab8aBWE7QTYX1Kchhc5w0oXzKCwlrXY2w2te
- IJ4Don20DzYQXJfuy7iXnm5L6FKxZ8D5Q0XS5wBxLdTqjqd4tPPjOY2Qg8y2w5pne3wViI
- gp4TtUe/5B4h0ysySdkNTB039IXDeYc=
+ in-reply-to:in-reply-to:references:references;
+ bh=5IV9iCfY5c3a7JirX2PZ8bK4FpcRRJ4TVXDCckUK82Y=;
+ b=TBMp/KNDKx2bf3oIPD9/BuVJfRfwsfqJ5ZhcS0tHhcv271i6VJGlqyLTyNmq8OYl1abBUn
+ cWkFR+NkIPT4RuRes/nZJA+yh4NgBPVZ5myRoa939vxLnHofmI7OAvXNG7cHK+V/2vJXtp
+ oNe8Jed31drxn3tu++8HYsfn/Aekq6A=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-40-bC5DqIZ8MBy5tpKLMLXxYg-1; Tue, 25 Feb 2020 12:23:31 -0500
-X-MC-Unique: bC5DqIZ8MBy5tpKLMLXxYg-1
+ us-mta-430-mkytsSLnM3-EPh-T7JujmQ-1; Tue, 25 Feb 2020 13:08:25 -0500
+X-MC-Unique: mkytsSLnM3-EPh-T7JujmQ-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 44CDAA899E7;
- Tue, 25 Feb 2020 17:23:29 +0000 (UTC)
-Received: from [10.36.117.12] (ovpn-117-12.ams2.redhat.com [10.36.117.12])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4A6D4271A0;
- Tue, 25 Feb 2020 17:23:24 +0000 (UTC)
-Subject: Re: [PATCH RFC v4 12/13] mm/vmscan: Export drop_slab() and
- drop_slab_node()
-To: Michal Hocko <mhocko@kernel.org>
-References: <20191212171137.13872-1-david@redhat.com>
- <20191212171137.13872-13-david@redhat.com>
- <20200225145829.GW22443@dhcp22.suse.cz>
- <afdf8600-2339-6d74-5e3d-fa1a23384318@redhat.com>
- <20200225170619.GC32720@dhcp22.suse.cz>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 98A151902EC6;
+ Tue, 25 Feb 2020 18:08:22 +0000 (UTC)
+Received: from gondolin (ovpn-116-60.ams2.redhat.com [10.36.116.60])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 915BB2718C;
+ Tue, 25 Feb 2020 18:08:15 +0000 (UTC)
+Date: Tue, 25 Feb 2020 19:08:02 +0100
+From: Cornelia Huck <cohuck@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: Re: [PATCH 1/2] mm: move force_dma_unencrypted() to mem_encrypt.h
+Message-ID: <20200225190802.753cffef.cohuck@redhat.com>
+In-Reply-To: <20200224194953.37c0d6b8.pasic@linux.ibm.com>
+References: <20200220160606.53156-1-pasic@linux.ibm.com>
+ <20200220160606.53156-2-pasic@linux.ibm.com>
+ <20200220161146.GA12709@lst.de>
+ <4369f099-e4e4-4a58-b38b-642cf53ccca6@de.ibm.com>
+ <20200220163135.GA13192@lst.de>
+ <20200221032727.GC2298@umbus.fritz.box>
+ <20200221140639.54928efe.pasic@linux.ibm.com>
+ <20200221104724-mutt-send-email-mst@kernel.org>
+ <20200221190702.68fd57fc.pasic@linux.ibm.com>
+ <20200224033314.GC1751@umbus.fritz.box>
+ <20200224194953.37c0d6b8.pasic@linux.ibm.com>
 Organization: Red Hat GmbH
-Message-ID: <9c21be0c-5eef-58c2-bfb9-ff787a5a2c08@redhat.com>
-Date: Tue, 25 Feb 2020 18:23:23 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200225170619.GC32720@dhcp22.suse.cz>
-Content-Language: en-US
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- Andrew Morton <akpm@linux-foundation.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: linux-s390@vger.kernel.org, Viktor Mihajlovski <mihajlov@linux.ibm.com>,
+ Janosch Frank <frankja@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ iommu@lists.linux-foundation.org, Michael Mueller <mimu@linux.ibm.com>,
+ "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>,
+ Marek Szyprowski <m.szyprowski@samsung.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -138,74 +104,263 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============8027117434365899616=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 25.02.20 18:06, Michal Hocko wrote:
-> On Tue 25-02-20 16:09:29, David Hildenbrand wrote:
->> On 25.02.20 15:58, Michal Hocko wrote:
->>> On Thu 12-12-19 18:11:36, David Hildenbrand wrote:
->>>> We already have a way to trigger reclaiming of all reclaimable slab objects
->>>> from user space (echo 2 > /proc/sys/vm/drop_caches). Let's allow drivers
->>>> to also trigger this when they really want to make progress and know what
->>>> they are doing.
->>>
->>> I cannot say I would be fan of this. This is a global action with user
->>> visible performance impact. I am worried that we will find out that all
->>> sorts of drivers have a very good idea that dropping slab caches is
->>> going to help their problem whatever it is. We have seen the same patter
->>> in the userspace already and that is the reason we are logging the usage
->>> to the log and count invocations in the counter.
->>
->> Yeah, I decided to hold back patch 11-13 for the v1 (which I am planning
->> to post in March after more testing). What we really want is to make
->> memory offlining an alloc_contig_range() work better with reclaimable
->> objects.
->>
->>>
->>>> virtio-mem wants to use these functions when it failed to unplug memory
->>>> for quite some time (e.g., after 30 minutes). It will then try to
->>>> free up reclaimable objects by dropping the slab caches every now and
->>>> then (e.g., every 30 minutes) as long as necessary. There will be a way to
->>>> disable this feature and info messages will be logged.
->>>>
->>>> In the future, we want to have a drop_slab_range() functionality
->>>> instead. Memory offlining code has similar demands and also other
->>>> alloc_contig_range() users (e.g., gigantic pages) could make good use of
->>>> this feature. Adding it, however, requires more work/thought.
->>>
->>> We already do have a memory_notify(MEM_GOING_OFFLINE) for that purpose
->>> and slab allocator implements a callback (slab_mem_going_offline_callback).
->>> The callback is quite dumb and it doesn't really try to free objects
->>> from the given memory range or even try to drop active objects which
->>> might turn out to be hard but this sounds like a more robust way to
->>> achieve what you want.
->>
->> Two things:
->>
->> 1. memory_notify(MEM_GOING_OFFLINE) is called after trying to isolate
->> the page range and checking if we only have movable pages. Won't help
->> much I guess.
-> 
-> You are right, I have missed that. Can we reorder those two calls?
+--===============8027117434365899616==
+Content-Type: multipart/signed; boundary="Sig_/7XSgLlA.c4LHCPdTbS+mPE=";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
 
-AFAIK no (would have to look up the details, but there was a good reason
-for the order, e.g., avoid races with other users of page isolation like
-alloc_contig_range()).
+--Sig_/7XSgLlA.c4LHCPdTbS+mPE=
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Especially, "[PATCH RFC v4 06/13] mm: Allow to offline unmovable
-PageOffline() pages via MEM_GOING_OFFLINE" (which is still impatiently
-waiting for an ACK ;) ) also works around that ordering issue in a way
-we discussed back then.
+On Mon, 24 Feb 2020 19:49:53 +0100
+Halil Pasic <pasic@linux.ibm.com> wrote:
 
--- 
-Thanks,
+> On Mon, 24 Feb 2020 14:33:14 +1100
+> David Gibson <david@gibson.dropbear.id.au> wrote:
+>=20
+> > On Fri, Feb 21, 2020 at 07:07:02PM +0100, Halil Pasic wrote: =20
+> > > On Fri, 21 Feb 2020 10:48:15 -0500
+> > > "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> > >  =20
+> > > > On Fri, Feb 21, 2020 at 02:06:39PM +0100, Halil Pasic wrote: =20
+> > > > > On Fri, 21 Feb 2020 14:27:27 +1100
+> > > > > David Gibson <david@gibson.dropbear.id.au> wrote:
+> > > > >  =20
+> > > > > > On Thu, Feb 20, 2020 at 05:31:35PM +0100, Christoph Hellwig wro=
+te: =20
+> > > > > > > On Thu, Feb 20, 2020 at 05:23:20PM +0100, Christian Borntraeg=
+er wrote: =20
+> > > > > > > > >From a users perspective it makes absolutely perfect sense=
+ to use the =20
+> > > > > > > > bounce buffers when they are NEEDED.=20
+> > > > > > > > Forcing the user to specify iommu_platform just because you=
+ need bounce buffers
+> > > > > > > > really feels wrong. And obviously we have a severe performa=
+nce issue
+> > > > > > > > because of the indirections. =20
+> > > > > > >=20
+> > > > > > > The point is that the user should not have to specify iommu_p=
+latform.
+> > > > > > > We need to make sure any new hypervisor (especially one that =
+might require
+> > > > > > > bounce buffering) always sets it, =20
+> > > > > >=20
+> > > > > > So, I have draft qemu patches which enable iommu_platform by de=
+fault.
+> > > > > > But that's really because of other problems with !iommu_platfor=
+m, not
+> > > > > > anything to do with bounce buffering or secure VMs.
+> > > > > >=20
+> > > > > > The thing is that the hypervisor *doesn't* require bounce buffe=
+ring.
+> > > > > > In the POWER (and maybe s390 as well) models for Secure VMs, it=
+'s the
+> > > > > > *guest*'s choice to enter secure mode, so the hypervisor has no=
+ reason
+> > > > > > to know whether the guest needs bounce buffering.  As far as th=
+e
+> > > > > > hypervisor and qemu are concerned that's a guest internal detai=
+l, it
+> > > > > > just expects to get addresses it can access whether those are G=
+PAs
+> > > > > > (iommu_platform=3Doff) or IOVAs (iommu_platform=3Don). =20
+> > > > >=20
+> > > > > I very much agree!
+> > > > >  =20
+> > > > > >  =20
+> > > > > > > as was a rather bogus legacy hack =20
+> > > > > >=20
+> > > > > > It was certainly a bad idea, but it was a bad idea that went in=
+to a
+> > > > > > public spec and has been widely deployed for many years.  We ca=
+n't
+> > > > > > just pretend it didn't happen and move on.
+> > > > > >=20
+> > > > > > Turning iommu_platform=3Don by default breaks old guests, some =
+of which
+> > > > > > we still care about.  We can't (automatically) do it only for g=
+uests
+> > > > > > that need bounce buffering, because the hypervisor doesn't know=
+ that
+> > > > > > ahead of time. =20
 
-David / dhildenb
+We could default to iommu_platform=3Don on s390 when the host has active
+support for protected virtualization... but that's just another kind of
+horrible, so let's just pretend I didn't suggest it.
+
+> > > > >=20
+> > > > > Turning iommu_platform=3Don for virtio-ccw makes no sense whatsov=
+er,
+> > > > > because for CCW I/O there is no such thing as IOMMU and the addre=
+sses
+> > > > > are always physical addresses. =20
+> > > >=20
+> > > > Fix the name then. The spec calls is ACCESS_PLATFORM now, which
+> > > > makes much more sense. =20
+> > >=20
+> > > I don't quite get it. Sorry. Maybe I will revisit this later. =20
+> >=20
+> > Halil, I think I can clarify this.
+> >=20
+> > The "iommu_platform" flag doesn't necessarily have anything to do with
+> > an iommu, although it often will.  Basically it means "access guest
+> > memory via the bus's normal DMA mechanism" rather than "access guest
+> > memory using GPA, because you're the hypervisor and you can do that".
+> >  =20
+>=20
+> Unfortunately, I don't think this is what is conveyed to the end users.
+> Let's see what do we have documented:
+>=20
+> Neither Qemu user documentation
+> (https://www.qemu.org/docs/master/qemu-doc.html) nor online help:
+> qemu-system-s390x -device virtio-net-ccw,?|grep iommu
+>   iommu_platform=3D<bool>  - on/off (default: false)
+> has any documentation on it.
+
+Now, that's 'helpful' -- this certainly calls out for a bit of doc...
+
+>=20
+> But libvirt does have have documenttion on the knob that contros
+> iommu_platform for QEMU (when  QEMU is managed by libvirt):
+> """
+> Virtio-related options=20
+>=20
+> QEMU's virtio devices have some attributes related to the virtio
+> transport under the driver element: The iommu attribute enables the use
+> of emulated IOMMU by the device. The attribute ats controls the Address
+> Translation Service support for PCIe devices. This is needed to make use
+> of IOTLB support (see IOMMU device). Possible values are on or off.
+> Since 3.5.0=20
+> """
+> (https://libvirt.org/formatdomain.html#elementsVirtio)
+>=20
+> Thus it seems the only available documentation says that it "enables the =
+use
+> of emulated IOMMU by the device".
+>=20
+> And for vhost-user we have
+> """
+> When the ``VIRTIO_F_IOMMU_PLATFORM`` feature has not been negotiated:
+>=20
+> * Guest addresses map to the vhost memory region containing that guest
+>   address.
+>=20
+> When the ``VIRTIO_F_IOMMU_PLATFORM`` feature has been negotiated:
+>=20
+> * Guest addresses are also called I/O virtual addresses (IOVAs).  They ar=
+e
+>   translated to user addresses via the IOTLB.
+> """
+> (docs/interop/vhost-user.rst)
+>=20
+> > For the case of ccw, both mechanisms end up being the same thing,
+> > since CCW's normal DMA *is* untranslated GPA access.
+> >  =20
+>=20
+> Nod.
+>=20
+> > For this reason, the flag in the spec was renamed to ACCESS_PLATFORM,
+> > but the flag in qemu still has the old name.
+> >  =20
+>=20
+> Yes, the name in the spec is more neutral.
+>=20
+> > AIUI, Michael is saying you could trivially change the name in qemu
+> > (obviously you'd need to alias the old name to the new one for
+> > compatibility).
+> >  =20
+>=20
+> I could, and the I could also ask the libvirt guys to change <driver
+> iommu=3D'X'> to <driver access_platform=3D'X'> or similar and to change =
+=20
+> their documentation to something that is harder to comprehend. Although
+> I'm not sure they would like the idea.
+
+Hopefully, the documentation can be changed to something that is _not_
+harder to comprehend :) (with a bit more text, I suppose.) Renaming to
+something like access_platform seems like a good idea, even with the
+required compat dance.
+
+>=20
+> >=20
+> > Actually, the fact that ccw has no translation makes things easier for
+> > you: you don't really have any impediment to turning ACCESS_PLATFORM
+> > on by default, since it doesn't make any real change to how things
+> > work. =20
+>=20
+> Yeah, it should not, in theory, but currently it does in practice.
+> Currently vhost will try to do the IOTLB dance (Jason has a patch that
+> should help with that), and we get the 'use dma api' side effects in the
+> guest (e.g. virtqueue's data go <2G + some overhead).
+
+Nod.
+
+>=20
+> >=20
+> > The remaining difficulty is that the virtio driver - since it can sit
+> > on multiple buses - won't know this, and will reject the
+> > ACCESS_PLATFORM flag, even though it could just do what it normally
+> > does on ccw and it would work. =20
+>=20
+> Right ACCESS_PLATFORM is a funny feature where the device refuses to
+> work if the driver does not ack.
+>=20
+> >=20
+> > For that case, we could consider a hack in qemu where for virtio-ccw
+> > devices *only* we allow the guest to nack the ACCESS_PLATFORM flag and
+> > carry on anyway.  Normally we insist that the guest accept the
+> > ACCESS_PLATFORM flag if offered, because on most platforms they
+> > *don't* amount to the same thing. =20
+>=20
+> Jason found a nice way to differentiate between needs translation and
+> does not need translation. But that patch still requires the ack by the
+> driver (and as Michael has pointed out we have to consider migration).
+>=20
+> I'm afraid that  F_IOMMU_PLATFORM means different things in different
+> contexts, and that this ain't sufficiently documented. I'm tempted to do
+> a proper write-up on this (let's hope my motivation will and my time
+> will allow). I would also very much like to have Conny's opinion on this.
+
+More documentation is never a bad idea; but I'm afraid I don't have any
+further insights at the moment.
+
+--Sig_/7XSgLlA.c4LHCPdTbS+mPE=
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEw9DWbcNiT/aowBjO3s9rk8bwL68FAl5VYoIACgkQ3s9rk8bw
+L6/mjRAAoslzkMKwoGgYUCinI1dNjxuvwTQ8vr4DZ1zeWi+bPXfDsBvjciNW1lh9
+ikehLfdOu8vvx+e6AAnc12h5QPs+GgBeIIE8mPZVHaXcX1nVoKLr7LB0ByguUNNh
+zRGYp+Fd0ESEsjUYVDsvTQOHuS0bwEHCVc3Nr+K9znpSXuS4N8eHcKMMBnCDGqvM
+tUcr7TAISLjiasCihiRMpld0enauOLO5DdlfQCMRHSvWAdxT3brcGjxbBFJ+tR/t
+hUphD5u5TTiKUMvBmpWRjCxihJnvN9lYn1CKa/HEo4wjhBzG48ZzrJ2K+NkP1kEh
+fgIt2DnBDebZ5fmWZF2hbuAXl6BWqZ0szMcbarIezxBxjmY22tRtue+6DMyQHrHd
+eW0OVK6v3b4niqA65Ica2tR/YNLrkDMWJRPeHBfsSWlIQdBuSZxPmymgaXdWexUQ
+j7zBC9yxCqMmZj4RFsNS/UGD8aGu6zvV4Ks7KJRhPx09/vP/BKWzSNTh7xozyTKM
+q5Q8VW46cebaHtUd6l2c+7eEJQQXYyc94lXkUVbY18uK9LvAXF2nYtW1OS6ahc6U
+QQ6jmXUqME6Z/ou2jJUCowu0r/+c7etX3mPtk+UmZq6VAiGJrPgUX8lJ6Qkfus1S
+NiNXjpGhkgoDqPF6LUZv6sq7zzx6G/qfaLhIYpEldryZDC4KxTs=
+=x9eH
+-----END PGP SIGNATURE-----
+
+--Sig_/7XSgLlA.c4LHCPdTbS+mPE=--
+
+
+--===============8027117434365899616==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============8027117434365899616==--
+
