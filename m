@@ -1,60 +1,113 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D53A16C1CE
-	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 14:11:18 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA65B16C450
+	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 15:47:59 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E21B18694A;
-	Tue, 25 Feb 2020 13:11:16 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 5AC6E87850;
+	Tue, 25 Feb 2020 14:47:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0_a87gjpp0Qa; Tue, 25 Feb 2020 13:11:12 +0000 (UTC)
+	with ESMTP id s52ltYaB0930; Tue, 25 Feb 2020 14:47:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3404586975;
-	Tue, 25 Feb 2020 13:11:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 4913186190;
+	Tue, 25 Feb 2020 14:47:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 260CCC0177;
-	Tue, 25 Feb 2020 13:11:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 29AC0C0177;
+	Tue, 25 Feb 2020 14:47:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4B597C18DA
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C7C3FC0177
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 13:11:10 +0000 (UTC)
+ Tue, 25 Feb 2020 14:47:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 48344868A8
+ by hemlock.osuosl.org (Postfix) with ESMTP id BEEAA86190
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 13:11:10 +0000 (UTC)
+ Tue, 25 Feb 2020 14:47:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id S9FAhPIbvUz7
+ with ESMTP id b+aZJPt98-6m
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 13:11:05 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A4CDE84D49
+ Tue, 25 Feb 2020 14:47:48 +0000 (UTC)
+X-Greylist: delayed 00:25:00 by SQLgrey-1.7.6
+Received: from gateway36.websitewelcome.com (gateway36.websitewelcome.com
+ [192.185.197.22])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 28EB88608F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 13:11:05 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 4625EB1A8;
- Tue, 25 Feb 2020 13:11:03 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
- sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
-Subject: [PATCH v3 4/4] drm/qxl: Use simple encoder
-Date: Tue, 25 Feb 2020 14:10:55 +0100
-Message-Id: <20200225131055.27550-5-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200225131055.27550-1-tzimmermann@suse.de>
-References: <20200225131055.27550-1-tzimmermann@suse.de>
+ Tue, 25 Feb 2020 14:47:48 +0000 (UTC)
+Received: from cm17.websitewelcome.com (cm17.websitewelcome.com [100.42.49.20])
+ by gateway36.websitewelcome.com (Postfix) with ESMTP id EB483400F21D2
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 25 Feb 2020 07:15:56 -0600 (CST)
+Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
+ id 6alqj1g7bAGTX6alqjBDSb; Tue, 25 Feb 2020 08:01:11 -0600
+X-Authority-Reason: nr=8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=embeddedor.com; s=default; h=Content-Type:MIME-Version:Message-ID:Subject:
+ Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=RUoiJPKbXOORUMcByfg3y59aLbGOyCajhNRZHKwxYdM=; b=K2TmY80nKM6JNCRMaqOjv6Y2II
+ XFqNYwg3sy7pV8Klv6Z2CYpDDYYf3KFpYCENAtHow/6zmfi1f5q6y9f2zAkS9jI/oYF4JoAq+wcST
+ AJvHG3FrQ7FB4RDL0KCggXRvfAB9mLOHtLxM4N9XJxuGDQXCDr09AhZkPVaQ9WHITZXV0N+oC/5vX
+ i4tsYSH5RXHtjYhQ+ymmn1vXlNxuQXTnaGZlVoSlMissVsAOwJ5GiFCvfz9gDgQb3M4rd1vkhzFdL
+ wjuWLRYQKT5yXwh7t7fk5QpAOoAYW2enhrqXF1i/udxOwjZOK/vU2qCxp0TyiL/cLLfqcR1NIu8T8
+ 5HxBx97Q==;
+Received: from [201.162.241.105] (port=19602 helo=embeddedor)
+ by gator4166.hostgator.com with esmtpa (Exim 4.92)
+ (envelope-from <gustavo@embeddedor.com>)
+ id 1j6alo-001QK9-7P; Tue, 25 Feb 2020 08:01:08 -0600
+Date: Tue, 25 Feb 2020 08:03:47 -0600
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+To: Lucas Stach <l.stach@pengutronix.de>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Rob Clark <robdclark@gmail.com>, Sean Paul <sean@poorly.run>,
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Hans de Goede <hdegoede@redhat.com>, Eric Anholt <eric@anholt.net>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH][next] drm: Replace zero-length array with flexible-array
+ member
+Message-ID: <20200225140347.GA22864@embeddedor>
 MIME-Version: 1.0
-Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - lists.linux-foundation.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 201.162.241.105
+X-Source-L: No
+X-Exim-ID: 1j6alo-001QK9-7P
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: (embeddedor) [201.162.241.105]:19602
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 27
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+Cc: "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, spice-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, freedreno@lists.freedesktop.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,75 +124,259 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The qxl driver uses an empty implementation for its encoder. Replace
-the code with the generic simple encoder.
+The current codebase makes use of the zero-length array language
+extension to the C90 standard, but the preferred mechanism to declare
+variable-length types such as these ones is a flexible array member[1][2],
+introduced in C99:
 
-v2:
-	* rebase onto new simple-encoder interface
+struct foo {
+        int stuff;
+        struct boo array[];
+};
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Acked-by: Sam Ravnborg <sam@ravnborg.org>
-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+By making use of the mechanism above, we will get a compiler warning
+in case the flexible array does not occur last in the structure, which
+will help us prevent some kind of undefined behavior bugs from being
+inadvertently introduced[3] to the codebase from now on.
+
+Also, notice that, dynamic memory allocations won't be affected by
+this change:
+
+"Flexible array members have incomplete type, and so the sizeof operator
+may not be applied. As a quirk of the original implementation of
+zero-length arrays, sizeof evaluates to zero."[1]
+
+This issue was found with the help of Coccinelle.
+
+[1] https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html
+[2] https://github.com/KSPP/linux/issues/21
+[3] commit 76497732932f ("cxgb3/l2t: Fix undefined behaviour")
+
+Signed-off-by: Gustavo A. R. Silva <gustavo@embeddedor.com>
 ---
- drivers/gpu/drm/qxl/qxl_display.c | 18 +++---------------
- 1 file changed, 3 insertions(+), 15 deletions(-)
+ drivers/gpu/drm/etnaviv/etnaviv_gem.h         | 2 +-
+ drivers/gpu/drm/gma500/intel_bios.h           | 2 +-
+ drivers/gpu/drm/i915/display/intel_vbt_defs.h | 4 ++--
+ drivers/gpu/drm/i915/gt/intel_lrc.c           | 2 +-
+ drivers/gpu/drm/i915/i915_gpu_error.h         | 2 +-
+ drivers/gpu/drm/msm/msm_gem.h                 | 2 +-
+ drivers/gpu/drm/qxl/qxl_cmd.c                 | 2 +-
+ drivers/gpu/drm/vboxvideo/vboxvideo.h         | 2 +-
+ drivers/gpu/drm/vc4/vc4_drv.h                 | 2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c    | 2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_surface.c       | 2 +-
+ include/drm/bridge/mhl.h                      | 4 ++--
+ include/drm/drm_displayid.h                   | 2 +-
+ include/uapi/drm/i915_drm.h                   | 4 ++--
+ 14 files changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index ab4f8dd00400..9c0e1add59fb 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -31,6 +31,7 @@
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_plane_helper.h>
- #include <drm/drm_probe_helper.h>
-+#include <drm/drm_simple_kms_helper.h>
- 
- #include "qxl_drv.h"
- #include "qxl_object.h"
-@@ -1007,9 +1008,6 @@ static struct drm_encoder *qxl_best_encoder(struct drm_connector *connector)
- 	return &qxl_output->enc;
- }
- 
--static const struct drm_encoder_helper_funcs qxl_enc_helper_funcs = {
--};
--
- static const struct drm_connector_helper_funcs qxl_connector_helper_funcs = {
- 	.get_modes = qxl_conn_get_modes,
- 	.mode_valid = qxl_conn_mode_valid,
-@@ -1059,15 +1057,6 @@ static const struct drm_connector_funcs qxl_connector_funcs = {
- 	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.h b/drivers/gpu/drm/etnaviv/etnaviv_gem.h
+index 6b68fe16041b..98e60df882b6 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_gem.h
++++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.h
+@@ -105,7 +105,7 @@ struct etnaviv_gem_submit {
+ 	unsigned int nr_pmrs;
+ 	struct etnaviv_perfmon_request *pmrs;
+ 	unsigned int nr_bos;
+-	struct etnaviv_gem_submit_bo bos[0];
++	struct etnaviv_gem_submit_bo bos[];
+ 	/* No new members here, the previous one is variable-length! */
  };
  
--static void qxl_enc_destroy(struct drm_encoder *encoder)
--{
--	drm_encoder_cleanup(encoder);
--}
--
--static const struct drm_encoder_funcs qxl_enc_funcs = {
--	.destroy = qxl_enc_destroy,
--};
--
- static int qxl_mode_create_hotplug_mode_update_property(struct qxl_device *qdev)
- {
- 	if (qdev->hotplug_mode_update_property)
-@@ -1098,15 +1087,14 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
- 	drm_connector_init(dev, &qxl_output->base,
- 			   &qxl_connector_funcs, DRM_MODE_CONNECTOR_VIRTUAL);
+diff --git a/drivers/gpu/drm/gma500/intel_bios.h b/drivers/gpu/drm/gma500/intel_bios.h
+index a1f9ce9465a5..0e6facf21e33 100644
+--- a/drivers/gpu/drm/gma500/intel_bios.h
++++ b/drivers/gpu/drm/gma500/intel_bios.h
+@@ -227,7 +227,7 @@ struct bdb_general_definitions {
+ 	 * number = (block_size - sizeof(bdb_general_definitions))/
+ 	 *	     sizeof(child_device_config);
+ 	 */
+-	struct child_device_config devices[0];
++	struct child_device_config devices[];
+ };
  
--	drm_encoder_init(dev, &qxl_output->enc, &qxl_enc_funcs,
--			 DRM_MODE_ENCODER_VIRTUAL, NULL);
-+	drm_simple_encoder_init(dev, &qxl_output->enc,
-+				DRM_MODE_ENCODER_VIRTUAL);
+ struct bdb_lvds_options {
+diff --git a/drivers/gpu/drm/i915/display/intel_vbt_defs.h b/drivers/gpu/drm/i915/display/intel_vbt_defs.h
+index 05c7cbe32eb4..aef7fe932d1a 100644
+--- a/drivers/gpu/drm/i915/display/intel_vbt_defs.h
++++ b/drivers/gpu/drm/i915/display/intel_vbt_defs.h
+@@ -462,7 +462,7 @@ struct bdb_general_definitions {
+ 	 * number = (block_size - sizeof(bdb_general_definitions))/
+ 	 *	     defs->child_dev_size;
+ 	 */
+-	u8 devices[0];
++	u8 devices[];
+ } __packed;
  
- 	/* we get HPD via client monitors config */
- 	connector->polled = DRM_CONNECTOR_POLL_HPD;
- 	encoder->possible_crtcs = 1 << num_output;
- 	drm_connector_attach_encoder(&qxl_output->base,
- 					  &qxl_output->enc);
--	drm_encoder_helper_add(encoder, &qxl_enc_helper_funcs);
- 	drm_connector_helper_add(connector, &qxl_connector_helper_funcs);
+ /*
+@@ -839,7 +839,7 @@ struct bdb_mipi_config {
  
- 	drm_object_attach_property(&connector->base,
+ struct bdb_mipi_sequence {
+ 	u8 version;
+-	u8 data[0]; /* up to 6 variable length blocks */
++	u8 data[]; /* up to 6 variable length blocks */
+ } __packed;
+ 
+ /*
+diff --git a/drivers/gpu/drm/i915/gt/intel_lrc.c b/drivers/gpu/drm/i915/gt/intel_lrc.c
+index 47561dc29304..5cec79152f17 100644
+--- a/drivers/gpu/drm/i915/gt/intel_lrc.c
++++ b/drivers/gpu/drm/i915/gt/intel_lrc.c
+@@ -216,7 +216,7 @@ struct virtual_engine {
+ 
+ 	/* And finally, which physical engines this virtual engine maps onto. */
+ 	unsigned int num_siblings;
+-	struct intel_engine_cs *siblings[0];
++	struct intel_engine_cs *siblings[];
+ };
+ 
+ static struct virtual_engine *to_virtual_engine(struct intel_engine_cs *engine)
+diff --git a/drivers/gpu/drm/i915/i915_gpu_error.h b/drivers/gpu/drm/i915/i915_gpu_error.h
+index 0d1f6c8ff355..5a6561f7a210 100644
+--- a/drivers/gpu/drm/i915/i915_gpu_error.h
++++ b/drivers/gpu/drm/i915/i915_gpu_error.h
+@@ -42,7 +42,7 @@ struct i915_vma_coredump {
+ 	int num_pages;
+ 	int page_count;
+ 	int unused;
+-	u32 *pages[0];
++	u32 *pages[];
+ };
+ 
+ struct i915_request_coredump {
+diff --git a/drivers/gpu/drm/msm/msm_gem.h b/drivers/gpu/drm/msm/msm_gem.h
+index 9e0953c2b7ce..37aa556c5f92 100644
+--- a/drivers/gpu/drm/msm/msm_gem.h
++++ b/drivers/gpu/drm/msm/msm_gem.h
+@@ -157,7 +157,7 @@ struct msm_gem_submit {
+ 			uint32_t handle;
+ 		};
+ 		uint64_t iova;
+-	} bos[0];
++	} bos[];
+ };
+ 
+ #endif /* __MSM_GEM_H__ */
+diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
+index ef09dc6bc635..d1086b2a6892 100644
+--- a/drivers/gpu/drm/qxl/qxl_cmd.c
++++ b/drivers/gpu/drm/qxl/qxl_cmd.c
+@@ -36,7 +36,7 @@ static int qxl_reap_surface_id(struct qxl_device *qdev, int max_to_reap);
+ 
+ struct ring {
+ 	struct qxl_ring_header      header;
+-	uint8_t                     elements[0];
++	uint8_t                     elements[];
+ };
+ 
+ struct qxl_ring {
+diff --git a/drivers/gpu/drm/vboxvideo/vboxvideo.h b/drivers/gpu/drm/vboxvideo/vboxvideo.h
+index 0592004f71aa..a5de40fe1a76 100644
+--- a/drivers/gpu/drm/vboxvideo/vboxvideo.h
++++ b/drivers/gpu/drm/vboxvideo/vboxvideo.h
+@@ -138,7 +138,7 @@ struct vbva_buffer {
+ 
+ 	u32 data_len;
+ 	/* variable size for the rest of the vbva_buffer area in VRAM. */
+-	u8 data[0];
++	u8 data[];
+ } __packed;
+ 
+ #define VBVA_MAX_RECORD_SIZE (128 * 1024 * 1024)
+diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.h
+index 6627b20c99e9..282293e6f751 100644
+--- a/drivers/gpu/drm/vc4/vc4_drv.h
++++ b/drivers/gpu/drm/vc4/vc4_drv.h
+@@ -65,7 +65,7 @@ struct vc4_perfmon {
+ 	 * Note that counter values can't be reset, but you can fake a reset by
+ 	 * destroying the perfmon and creating a new one.
+ 	 */
+-	u64 counters[0];
++	u64 counters[];
+ };
+ 
+ struct vc4_dev {
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c b/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c
+index f07aa857587c..60cfbfadd3f2 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c
+@@ -69,7 +69,7 @@ struct vmw_bo_dirty {
+ 	unsigned int ref_count;
+ 	unsigned long bitmap_size;
+ 	size_t size;
+-	unsigned long bitmap[0];
++	unsigned long bitmap[];
+ };
+ 
+ /**
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
+index 3ce630aa4fde..ec893cd17b50 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
+@@ -79,7 +79,7 @@ struct vmw_surface_dirty {
+ 	struct svga3dsurface_cache cache;
+ 	size_t size;
+ 	u32 num_subres;
+-	SVGA3dBox boxes[0];
++	SVGA3dBox boxes[];
+ };
+ 
+ static void vmw_user_surface_free(struct vmw_resource *res);
+diff --git a/include/drm/bridge/mhl.h b/include/drm/bridge/mhl.h
+index 1cc77bf38324..d96626a0e3fa 100644
+--- a/include/drm/bridge/mhl.h
++++ b/include/drm/bridge/mhl.h
+@@ -327,13 +327,13 @@ struct mhl_burst_bits_per_pixel_fmt {
+ 	struct {
+ 		u8 stream_id;
+ 		u8 pixel_format;
+-	} __packed desc[0];
++	} __packed desc[];
+ } __packed;
+ 
+ struct mhl_burst_emsc_support {
+ 	struct mhl3_burst_header hdr;
+ 	u8 num_entries;
+-	__be16 burst_id[0];
++	__be16 burst_id[];
+ } __packed;
+ 
+ struct mhl_burst_audio_descr {
+diff --git a/include/drm/drm_displayid.h b/include/drm/drm_displayid.h
+index 9d3b745c3107..94b4390bf990 100644
+--- a/include/drm/drm_displayid.h
++++ b/include/drm/drm_displayid.h
+@@ -89,7 +89,7 @@ struct displayid_detailed_timings_1 {
+ 
+ struct displayid_detailed_timing_block {
+ 	struct displayid_block base;
+-	struct displayid_detailed_timings_1 timings[0];
++	struct displayid_detailed_timings_1 timings[];
+ };
+ 
+ #define for_each_displayid_db(displayid, block, idx, length) \
+diff --git a/include/uapi/drm/i915_drm.h b/include/uapi/drm/i915_drm.h
+index 829c0a48577f..33de5dfadaf5 100644
+--- a/include/uapi/drm/i915_drm.h
++++ b/include/uapi/drm/i915_drm.h
+@@ -1708,7 +1708,7 @@ struct i915_context_engines_load_balance {
+ 
+ 	__u64 mbz64; /* reserved for future use; must be zero */
+ 
+-	struct i915_engine_class_instance engines[0];
++	struct i915_engine_class_instance engines[];
+ } __attribute__((packed));
+ 
+ #define I915_DEFINE_CONTEXT_ENGINES_LOAD_BALANCE(name__, N__) struct { \
+@@ -1746,7 +1746,7 @@ struct i915_context_engines_bond {
+ 	__u64 flags; /* all undefined flags must be zero */
+ 	__u64 mbz64[4]; /* reserved for future use; must be zero */
+ 
+-	struct i915_engine_class_instance engines[0];
++	struct i915_engine_class_instance engines[];
+ } __attribute__((packed));
+ 
+ #define I915_DEFINE_CONTEXT_ENGINES_BOND(name__, N__) struct { \
 -- 
 2.25.0
 
