@@ -1,67 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 723B716EE54
-	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 19:49:42 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8514516F285
+	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 23:19:47 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C7D2B84581;
-	Tue, 25 Feb 2020 18:49:40 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4201520477;
+	Tue, 25 Feb 2020 22:19:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rgF-eX4IG-Rd; Tue, 25 Feb 2020 18:49:39 +0000 (UTC)
+	with ESMTP id IKf-Ahxm85I0; Tue, 25 Feb 2020 22:19:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CAD5284546;
-	Tue, 25 Feb 2020 18:49:39 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7A943203B4;
+	Tue, 25 Feb 2020 22:19:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AAD35C1D87;
-	Tue, 25 Feb 2020 18:49:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5582FC0177;
+	Tue, 25 Feb 2020 22:19:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 42AE2C0177
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C8C20C0177
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 18:49:38 +0000 (UTC)
+ Tue, 25 Feb 2020 22:19:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 2161F866AB
+ by fraxinus.osuosl.org (Postfix) with ESMTP id B16C38458C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 18:49:38 +0000 (UTC)
+ Tue, 25 Feb 2020 22:19:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YPG1krzeWwDL
+ with ESMTP id 2MVdujfmvHYy
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 18:49:37 +0000 (UTC)
+ Tue, 25 Feb 2020 22:19:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id EC53A8405F
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id ADF3884546
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 18:49:36 +0000 (UTC)
+ Tue, 25 Feb 2020 22:19:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582656575;
+ s=mimecast20190719; t=1582669178;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=0U2YIjcaH0sfDbbfCVMq4B9fMc4mFyqws5g8Fj7EgeU=;
- b=fZV0fd6W2yfWNapbPXgaS2PC1dR/ohv1yVuh3JJrLkn8PimHMJuScszAQVvHElc1SN7ue6
- aKHjEM4eiytEp/DIIXo8c6w0KKeA7L5+Um9HUWLw8s6TaBXq/eoEYWZGXjI0GnTckID3Wa
- 41SRqVr6xn0bs4P28j2ZRDyGjnAfMAw=
+ bh=gCSArIx/3mY9oSIUMRjqx2+R3OvuPX6j2QVZuQeM+/k=;
+ b=GHTS+twZm7rThRIRTIan3iEXMMTE22tyYPOnP0HDibeyc2iN4QA6J8xVzZ1eYEGNgIeo+K
+ 7uAiQ0surOa3O/HWcIpbGl7SRFRIWJ8ODZEUJFjwTawr+RMy0bdb6WUWsvDPvlBZ5lnZaf
+ 3Gpy7M1+EAIUHt9prW1N6Fy/s0U60to=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-134-mEPfYc_cPrak1wILQNMV6A-1; Tue, 25 Feb 2020 13:49:32 -0500
-X-MC-Unique: mEPfYc_cPrak1wILQNMV6A-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-478-W7WYJUYZNry96hYG-fYhtA-1; Tue, 25 Feb 2020 17:19:30 -0500
+X-MC-Unique: W7WYJUYZNry96hYG-fYhtA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id ADB381005512;
- Tue, 25 Feb 2020 18:49:29 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1AE78107ACC4;
+ Tue, 25 Feb 2020 22:19:27 +0000 (UTC)
 Received: from [10.36.117.12] (ovpn-117-12.ams2.redhat.com [10.36.117.12])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3C7CA1001DC0;
- Tue, 25 Feb 2020 18:49:22 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DA1208B759;
+ Tue, 25 Feb 2020 22:19:18 +0000 (UTC)
 Subject: Re: [PATCH RFC v4 06/13] mm: Allow to offline unmovable PageOffline()
  pages via MEM_GOING_OFFLINE
 To: Alexander Duyck <alexander.h.duyck@linux.intel.com>,
@@ -69,6 +69,8 @@ To: Alexander Duyck <alexander.h.duyck@linux.intel.com>,
 References: <20191212171137.13872-1-david@redhat.com>
  <20191212171137.13872-7-david@redhat.com>
  <6ec496580ddcb629d22589a1cba8cd61cbd53206.camel@linux.intel.com>
+ <267ea186-aba8-1a93-bd55-ac641f78d07e@redhat.com>
+ <3d719897039273a2bb8d0fe7d12563498ebd2897.camel@linux.intel.com>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -114,14 +116,14 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <267ea186-aba8-1a93-bd55-ac641f78d07e@redhat.com>
-Date: Tue, 25 Feb 2020 19:49:21 +0100
+Message-ID: <e0892179-b14c-84c3-1284-fc789f16e1c7@redhat.com>
+Date: Tue, 25 Feb 2020 23:19:18 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <6ec496580ddcb629d22589a1cba8cd61cbd53206.camel@linux.intel.com>
+In-Reply-To: <3d719897039273a2bb8d0fe7d12563498ebd2897.camel@linux.intel.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Cc: Juergen Gross <jgross@suse.com>, virtio-dev@lists.oasis-open.org,
  Michal Hocko <mhocko@suse.com>, Mike Rapoport <rppt@linux.ibm.com>,
  kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
@@ -152,173 +154,145 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
->>  /*
->>   * Scan pfn range [start,end) to find movable/migratable pages (LRU pages,
->> - * non-lru movable pages and hugepages). We scan pfn because it's much
->> - * easier than scanning over linked list. This function returns the pfn
->> - * of the first found movable page if it's found, otherwise 0.
->> + * non-lru movable pages and hugepages).
->> + *
->> + * Returns:
->> + *	0 in case a movable page is found and movable_pfn was updated.
->> + *	-ENOENT in case no movable page was found.
->> + *	-EBUSY in case a definetly unmovable page was found.
->>   */
->> -static unsigned long scan_movable_pages(unsigned long start, unsigned long end)
->> +static int scan_movable_pages(unsigned long start, unsigned long end,
->> +			      unsigned long *movable_pfn)
->>  {
->>  	unsigned long pfn;
->>  
->> @@ -1247,18 +1251,29 @@ static unsigned long scan_movable_pages(unsigned long start, unsigned long end)
->>  			continue;
->>  		page = pfn_to_page(pfn);
->>  		if (PageLRU(page))
->> -			return pfn;
->> +			goto found;
->>  		if (__PageMovable(page))
->> -			return pfn;
->> +			goto found;
->> +
->> +		/*
->> +		 * Unmovable PageOffline() pages where somebody still holds
->> +		 * a reference count (after MEM_GOING_OFFLINE) can definetly
->> +		 * not be offlined.
->> +		 */
->> +		if (PageOffline(page) && page_count(page))
->> +			return -EBUSY;
+On 25.02.20 22:46, Alexander Duyck wrote:
+> On Tue, 2020-02-25 at 19:49 +0100, David Hildenbrand wrote:
+>>>>  /*
+>>>>   * Scan pfn range [start,end) to find movable/migratable pages (LRU pages,
+>>>> - * non-lru movable pages and hugepages). We scan pfn because it's much
+>>>> - * easier than scanning over linked list. This function returns the pfn
+>>>> - * of the first found movable page if it's found, otherwise 0.
+>>>> + * non-lru movable pages and hugepages).
+>>>> + *
+>>>> + * Returns:
+>>>> + *	0 in case a movable page is found and movable_pfn was updated.
+>>>> + *	-ENOENT in case no movable page was found.
+>>>> + *	-EBUSY in case a definetly unmovable page was found.
+>>>>   */
+>>>> -static unsigned long scan_movable_pages(unsigned long start, unsigned long end)
+>>>> +static int scan_movable_pages(unsigned long start, unsigned long end,
+>>>> +			      unsigned long *movable_pfn)
+>>>>  {
+>>>>  	unsigned long pfn;
+>>>>  
+>>>> @@ -1247,18 +1251,29 @@ static unsigned long scan_movable_pages(unsigned long start, unsigned long end)
+>>>>  			continue;
+>>>>  		page = pfn_to_page(pfn);
+>>>>  		if (PageLRU(page))
+>>>> -			return pfn;
+>>>> +			goto found;
+>>>>  		if (__PageMovable(page))
+>>>> -			return pfn;
+>>>> +			goto found;
+>>>> +
+>>>> +		/*
+>>>> +		 * Unmovable PageOffline() pages where somebody still holds
+>>>> +		 * a reference count (after MEM_GOING_OFFLINE) can definetly
+>>>> +		 * not be offlined.
+>>>> +		 */
+>>>> +		if (PageOffline(page) && page_count(page))
+>>>> +			return -EBUSY;
+>>>
+>>> So the comment confused me a bit because technically this function isn't
+>>> about offlining memory, it is about finding movable pages. I had to do a
+>>> bit of digging to find the only consumer is __offline_pages, but if we are
+>>> going to talk about "offlining" instead of "moving" in this function it
+>>> might make sense to rename it.
+>>
+>> Well, it's contained in memory_hotplug.c, and the only user of moving
+>> pages around in there is offlining code :) And it's job is to locate
+>> movable pages, skip over some (temporary? unmovable ones) and (now)
+>> indicate definitely unmovable ones.
+>>
+>> Any idea for a better name?
+>> scan_movable_pages_and_stop_on_definitely_unmovable() is not so nice :)
 > 
-> So the comment confused me a bit because technically this function isn't
-> about offlining memory, it is about finding movable pages. I had to do a
-> bit of digging to find the only consumer is __offline_pages, but if we are
-> going to talk about "offlining" instead of "moving" in this function it
-> might make sense to rename it.
+> I dunno. What I was getting at is that the wording here would make it
+> clearer if you simply stated that these pages "can definately not be
+> moved". Saying you cannot offline a page that is PageOffline seems kind of
+> redundant, then again calling it an Unmovable and then saying it cannot be
+> moves is also redundant I suppose. In the end you don't move them, but
 
-Well, it's contained in memory_hotplug.c, and the only user of moving
-pages around in there is offlining code :) And it's job is to locate
-movable pages, skip over some (temporary? unmovable ones) and (now)
-indicate definitely unmovable ones.
+So, in summary, there are
+- PageOffline() pages that are movable (balloon compaction).
+- PageOffline() pages that cannot be moved and cannot be offlined (e.g.,
+  no balloon compaction enabled, XEN, HyperV, ...) . page_count(page) >=
+  0
+- PageOffline() pages that cannot be moved, but can be offlined.
+  page_count(page) == 0.
 
-Any idea for a better name?
-scan_movable_pages_and_stop_on_definitely_unmovable() is not so nice :)
 
+> they can be switched to offline if the page count hits 0. When that
+> happens you simply end up skipping over them in the code for
+> __test_page_isolated_in_pageblock and __offline_isolated_pages.
+
+Yes. The thing with the wording is that pages with (PageOffline(page) &&
+!page_count(page)) can also not really be moved, but they can be skipped
+when offlining. If we call that "moving them to /dev/null", then yes,
+they can be moved to some degree :)
+
+I can certainly do here e.g.,
+
+/*
+ * PageOffline() pages that are not marked __PageMovable() and have a
+ * reference count > 0 (after MEM_GOING_OFFLINE) are definitely
+ * unmovable. If their reference count would be 0, they could be skipped
+ * when offlining memory sections.
+ */
+
+And maybe I'll add to the function doc, that unmovable pages that are
+skipped in this function can include pages that can be skipped when
+offlining (moving them to nirvana).
+
+Other suggestions?
+
+[...]
+
+>>
+>> [1] we detect a definite offlining blocker and
+>>
+>>>> +		} while (!ret);
+>>>> +
+>>>> +		if (ret != -ENOENT) {
+>>>> +			reason = "unmovable page";
+>>
+>> [2] we abort offlining
+>>
+>>>> +			goto failed_removal_isolated;
+>>>>  		}
+>>>>  
+>>>>  		/*
+> 
+> Yeah, this is the piece I misread.  I knew the loop this was in previously
+> was looping when returning -ENOENT so for some reason I had it in my head
+> that you were still looping on -EBUSY.
+
+Ah okay, I see. Yeah, that wouldn't make sense for the use case I have :)
 
 > 
->>  
->>  		if (!PageHuge(page))
->>  			continue;
->>  		head = compound_head(page);
->>  		if (page_huge_active(head))
->> -			return pfn;
->> +			goto found;
->>  		skip = compound_nr(head) - (page - head);
->>  		pfn += skip - 1;
->>  	}
->> +	return -ENOENT;
->> +found:
->> +	*movable_pfn = pfn;
->>  	return 0;
->>  }
-> 
-> So I am looking at this function and it seems like your change completely
-> changes the behavior. The code before would walk the entire range and if
-> at least 1 page was available to move you would return the PFN of that
-> page. Now what seems to happen is that you will return -EBUSY as soon as
-> you encounter an offline page with a page count. I would think that would
-> slow down the offlining process since you have made the Unmovable
-> PageOffline() page a head of line blocker that you have to wait to get
-> around.
+> So the one question I would have is if at this point are we guaranteed
+> that the balloon drivers have already taken care of the page count for all
+> the pages they set to PageOffline? Based on the patch description I was
+> thinking that this was going to be looping for a while waiting for the
+> driver to clear the pages and then walking through them at the end of the
+> loop via check_pages_isolated_cb.
 
-So, the comment says "Unmovable PageOffline() pages where somebody still
-holds a reference count (after MEM_GOING_OFFLINE) can definitely not be
-offlined". And the doc "-EBUSY in case a definitely unmovable page was
-found."
+So, e.g., the patch description states
 
-So why would this make offlining slow? Offlining will be aborted,
-because offlining is not possible.
+"Let's allow to do that by allowing to isolate any PageOffline() page
+when offlining. This way, we can reach the memory hotplug notifier
+MEM_GOING_OFFLINE, where the driver can signal that he is fine with
+offlining this page by dropping its reference count."
 
-Please note that this is the exact old behavior, where isolating the
-page range would have failed directly and offlining would have been
-aborted early. The old offlining failure in the case in the offlining
-path would have been "failure to isolate range".
+Any balloon driver that does not allow offlining (e.g., XEN, HyperV,
+virtio-balloon), will always have a refcount of (at least) 1. Drivers
+that want to make use of that (esp. virtio-mem, but eventually also
+HyperV), will drop their refcount via the MEM_GOING_OFFLINE call.
 
-Also, note that the users of PageOffline() with unmovable pages are very
-rare (only balloon drivers for now).
+So yes, at this point, all applicable users were notified via
+MEM_GOING_OFFLINE and had their chance to decrement the refcount. If
+they didn't, offlining will be aborted.
 
-> 
-> Would it perhaps make more sense to add a return value initialized to
-> ENOENT, and if you encounter one of these offline pages you change the
-> return value to EBUSY, and then if you walk through the entire list
-> without finding a movable page you just return the value?
-
-Did you have a look in  which context this function is used, especially
-[1] and [2]?
-
-> 
-> Otherwise you might want to add a comment explaining why the function
-> should stall instead of skipping over the unmovable section that will
-> hopefully become movable later.
-
-So we have "-EBUSY in case a definitely unmovable page was found.". Do
-you have a better suggestion?
-
-> 
->> @@ -1528,7 +1543,8 @@ static int __ref __offline_pages(unsigned long start_pfn,
->>  	}
->>  
->>  	do {
->> -		for (pfn = start_pfn; pfn;) {
->> +		pfn = start_pfn;
->> +		do {
->>  			if (signal_pending(current)) {
->>  				ret = -EINTR;
->>  				reason = "signal backoff";
->> @@ -1538,14 +1554,19 @@ static int __ref __offline_pages(unsigned long start_pfn,
->>  			cond_resched();
->>  			lru_add_drain_all();
->>  
->> -			pfn = scan_movable_pages(pfn, end_pfn);
->> -			if (pfn) {
->> +			ret = scan_movable_pages(pfn, end_pfn, &pfn);
->> +			if (!ret) {
->>  				/*
->>  				 * TODO: fatal migration failures should bail
->>  				 * out
->>  				 */
->>  				do_migrate_range(pfn, end_pfn);
->>  			}
-
-[1] we detect a definite offlining blocker and
-
->> +		} while (!ret);
->> +
->> +		if (ret != -ENOENT) {
->> +			reason = "unmovable page";
-
-[2] we abort offlining
-
->> +			goto failed_removal_isolated;
->>  		}
->>  
->>  		/*
->> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
->> index 5334decc9e06..840c0bbe2d9f 100644
->> --- a/mm/page_alloc.c
->> +++ b/mm/page_alloc.c
->> @@ -8256,6 +8256,19 @@ bool has_unmovable_pages(struct zone *zone, struct page *page, int count,
->>  		if ((flags & MEMORY_OFFLINE) && PageHWPoison(page))
->>  			continue;
->>  
->> +		/*
->> +		 * We treat all PageOffline() pages as movable when offlining
->> +		 * to give drivers a chance to decrement their reference count
->> +		 * in MEM_GOING_OFFLINE in order to signalize that these pages
-> 
-> You can probably just use "signal" or "indicate" instead of "signalize".
-
-Makes sense, "indicate" it is!
-
-Thanks!
+Thanks again!
 
 -- 
 Thanks,
