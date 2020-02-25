@@ -1,74 +1,148 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 766A716BD85
-	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 10:41:09 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 34D8616BE17
+	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 10:59:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 08C0C20773;
-	Tue, 25 Feb 2020 09:41:08 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BA83A867A5;
+	Tue, 25 Feb 2020 09:59:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fFGIL7mGTWdz; Tue, 25 Feb 2020 09:41:03 +0000 (UTC)
+	with ESMTP id abJTNikelIWq; Tue, 25 Feb 2020 09:59:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 344C320797;
-	Tue, 25 Feb 2020 09:41:03 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 811A0868F3;
+	Tue, 25 Feb 2020 09:59:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 100E5C0177;
-	Tue, 25 Feb 2020 09:41:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 56D2EC0177;
+	Tue, 25 Feb 2020 09:59:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C7F86C0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AC8F0C0177
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 09:41:01 +0000 (UTC)
+ Tue, 25 Feb 2020 09:59:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id B734F20773
+ by hemlock.osuosl.org (Postfix) with ESMTP id 98AB9877ED
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 09:41:01 +0000 (UTC)
+ Tue, 25 Feb 2020 09:59:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4qd4FP8EvAIU
+ with ESMTP id M+fmkxi882I8
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 09:40:57 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from www.kot-begemot.co.uk (ivanoab7.miniserver.com [37.128.132.42])
- by silver.osuosl.org (Postfix) with ESMTPS id 48F432052F
+ Tue, 25 Feb 2020 09:59:11 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id AAF2F8518E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 09:40:56 +0000 (UTC)
-Received: from tun252.jain.kot-begemot.co.uk ([192.168.18.6]
- helo=jain.kot-begemot.co.uk)
- by www.kot-begemot.co.uk with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <anton.ivanov@cambridgegreys.com>)
- id 1j6Whu-0001Hu-4c; Tue, 25 Feb 2020 09:40:54 +0000
-Received: from jain.kot-begemot.co.uk ([192.168.3.3])
- by jain.kot-begemot.co.uk with esmtp (Exim 4.92)
- (envelope-from <anton.ivanov@cambridgegreys.com>)
- id 1j6Whp-0002XQ-I8; Tue, 25 Feb 2020 09:40:49 +0000
-Subject: Re: [PATCH v3] virtio: Work around frames incorrectly marked as gso
-From: Anton Ivanov <anton.ivanov@cambridgegreys.com>
-To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-References: <20200224132550.2083-1-anton.ivanov@cambridgegreys.com>
- <CA+FuTSd8P6uQnwisZEh7+nfowW9qKLBEvA4GPg+xUkjBa-6TDA@mail.gmail.com>
- <4e7757cf-148e-4585-b358-3b38f391275d@cambridgegreys.com>
- <CA+FuTSdOCJZCVS4xohx+BQmkmq8JALnK=gGc0=qy1TbjY707ag@mail.gmail.com>
- <93cb2b3f-6cae-8cf1-5fab-93fa34c14628@cambridgegreys.com>
- <CA+FuTScEXRwYtFzn-jtFhV0dNKNQqKPBwCWaNORJW=ERU=izMA@mail.gmail.com>
- <6b83116c-2cca-fb03-1c13-bb436dccf1b3@cambridgegreys.com>
-Message-ID: <cd1b4084-af6b-7fd9-f182-8b32a3c8d837@cambridgegreys.com>
-Date: Tue, 25 Feb 2020 09:40:45 +0000
+ Tue, 25 Feb 2020 09:59:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582624749;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=J/Mi6rDCY5eLnkB+9yBI5Ttpb9AEbFnJ/WIktz+1rHI=;
+ b=eFSfgnAMtivWbs6xRL3WLQMknjWv5ZPCo5FJu2EVk03MOrkaw5DE25PQJUowklv1ozb7AX
+ vHZSW1NAKE7O8P+JunRWfPRvDf4qsDY3GyUg1FCUHt5XkEOoU8KV6ixwShLepu6NIQMN09
+ VJA7kRXHy7c6zkGjK4ouBnu0/UcTouY=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-400-7Sl-MTBrMhS_ArbmBoVgng-1; Tue, 25 Feb 2020 04:59:00 -0500
+X-MC-Unique: 7Sl-MTBrMhS_ArbmBoVgng-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5FD2C18C8C04;
+ Tue, 25 Feb 2020 09:58:56 +0000 (UTC)
+Received: from [10.36.117.12] (ovpn-117-12.ams2.redhat.com [10.36.117.12])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1D61C92965;
+ Tue, 25 Feb 2020 09:58:36 +0000 (UTC)
+Subject: Re: [PATCH RFC v4 00/13] virtio-mem: paravirtualized memory
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org, Michal Hocko <mhocko@kernel.org>
+References: <20191212171137.13872-1-david@redhat.com>
+ <9acc5d04-c8e9-ef53-85e4-709030997ca6@redhat.com>
+ <d07c6b4a-46e3-3f81-04db-ea1475fe48c2@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <3468efe4-0878-3d22-4f74-3092acfd0c47@redhat.com>
+Date: Tue, 25 Feb 2020 10:58:36 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <6b83116c-2cca-fb03-1c13-bb436dccf1b3@cambridgegreys.com>
+In-Reply-To: <d07c6b4a-46e3-3f81-04db-ea1475fe48c2@redhat.com>
 Content-Language: en-US
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Eric Dumazet <eric.dumazet@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Network Development <netdev@vger.kernel.org>, linux-um@lists.infradead.org,
- virtualization@lists.linux-foundation.org
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
+ Robert Bradford <robert.bradford@intel.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>, Pingfan Liu <kernelfans@gmail.com>,
+ virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ Alexander Potapenko <glider@google.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Mike Rapoport <rppt@linux.ibm.com>, Wei Yang <richard.weiyang@gmail.com>,
+ Anthony Yznaga <anthony.yznaga@oracle.com>, Dave Young <dyoung@redhat.com>,
+ Len Brown <lenb@kernel.org>, Pavel Tatashin <pavel.tatashin@microsoft.com>,
+ Pavel Tatashin <pasha.tatashin@soleen.com>,
+ Anshuman Khandual <anshuman.khandual@arm.com>, Qian Cai <cai@lca.pw>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Samuel Ortiz <samuel.ortiz@intel.com>,
+ Dan Williams <dan.j.williams@intel.com>,
+ Luiz Capitulino <lcapitulino@redhat.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+ Sebastien Boeuf <sebastien.boeuf@intel.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Igor Mammedov <imammedo@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,111 +154,374 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-CgpPbiAyNS8wMi8yMDIwIDA3OjQ4LCBBbnRvbiBJdmFub3Ygd3JvdGU6Cj4gCj4gCj4gT24gMjQv
-MDIvMjAyMCAyMjoyMiwgV2lsbGVtIGRlIEJydWlqbiB3cm90ZToKPj4gT24gTW9uLCBGZWIgMjQs
-IDIwMjAgYXQgNDowMCBQTSBBbnRvbiBJdmFub3YKPj4gPGFudG9uLml2YW5vdkBjYW1icmlkZ2Vn
-cmV5cy5jb20+IHdyb3RlOgo+Pj4KPj4+IE9uIDI0LzAyLzIwMjAgMjA6MjAsIFdpbGxlbSBkZSBC
-cnVpam4gd3JvdGU6Cj4+Pj4gT24gTW9uLCBGZWIgMjQsIDIwMjAgYXQgMjo1NSBQTSBBbnRvbiBJ
-dmFub3YKPj4+PiA8YW50b24uaXZhbm92QGNhbWJyaWRnZWdyZXlzLmNvbT4gd3JvdGU6Cj4+Pj4+
-IE9uIDI0LzAyLzIwMjAgMTk6MjcsIFdpbGxlbSBkZSBCcnVpam4gd3JvdGU6Cj4+Pj4+PiBPbiBN
-b24sIEZlYiAyNCwgMjAyMCBhdCA4OjI2IEFNIDxhbnRvbi5pdmFub3ZAY2FtYnJpZGdlZ3JleXMu
-Y29tPiB3cm90ZToKPj4+Pj4+PiBGcm9tOiBBbnRvbiBJdmFub3YgPGFudG9uLml2YW5vdkBjYW1i
-cmlkZ2VncmV5cy5jb20+Cj4+Pj4+Pj4KPj4+Pj4+PiBTb21lIG9mIHRoZSBsb2NhbGx5IGdlbmVy
-YXRlZCBmcmFtZXMgbWFya2VkIGFzIEdTTyB3aGljaAo+Pj4+Pj4+IGFycml2ZSBhdCB2aXJ0aW9f
-bmV0X2hkcl9mcm9tX3NrYigpIGhhdmUgbm8gR1NPX1RZUEUsIG5vCj4+Pj4+Pj4gZnJhZ21lbnRz
-IChkYXRhX2xlbiA9IDApIGFuZCBsZW5ndGggc2lnbmlmaWNhbnRseSBzaG9ydGVyCj4+Pj4+Pj4g
-dGhhbiB0aGUgTVRVICg3NTIgaW4gbXkgZXhwZXJpbWVudHMpLgo+Pj4+Pj4gRG8gd2UgdW5kZXJz
-dGFuZCBob3cgdGhlc2UgcGFja2V0cyBhcmUgZ2VuZXJhdGVkPwo+Pj4+PiBObywgd2UgaGF2ZSBu
-b3QgYmVlbiBhYmxlIHRvIHRyYWNlIHRoZW0uCj4+Pj4+Cj4+Pj4+IFRoZSBvbmx5IHRoaW5nIHdl
-IGtub3cgaXMgdGhhdCB0aGlzIGlzIHNwZWNpZmljIHRvIGxvY2FsbHkgZ2VuZXJhdGVkCj4+Pj4+
-IHBhY2tldHMuIFNvbWV0aGluZyBhcnJpdmluZyBmcm9tIHRoZSBuZXR3b3JrIGRvZXMgbm90IHNo
-b3cgdGhpcy4KPj4+Pj4KPj4+Pj4+IEVsc2UgaXQgc2VlbXMgdGhpcwo+Pj4+Pj4gbWlnaHQgYmUg
-cGFwZXJpbmcgb3ZlciBhIGRlZXBlciBwcm9ibGVtLgo+Pj4+Pj4KPj4+Pj4+IFRoZSBzdGFjayBz
-aG91bGQgbm90IGNyZWF0ZSBHU08gcGFja2V0cyBsZXNzIHRoYW4gb3IgZXF1YWwgdG8KPj4+Pj4+
-IHNrYl9zaGluZm8oc2tiKS0+Z3NvX3NpemUuIFNlZSBmb3IgaW5zdGFuY2UgdGhlIGNoZWNrIGlu
-Cj4+Pj4+PiB0Y3BfZ3NvX3NlZ21lbnQgYWZ0ZXIgcHVsbGluZyB0aGUgdGNwIGhlYWRlcjoKPj4+
-Pj4+Cj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtc3MgPSBza2Jfc2hpbmZvKHNrYiktPmdz
-b19zaXplOwo+Pj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHVubGlrZWx5KHNrYi0+bGVu
-IDw9IG1zcykpCj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290
-byBvdXQ7Cj4+Pj4+Pgo+Pj4+Pj4gV2hhdCBpcyB0aGUgZ3NvX3R5cGUsIGFuZCBkb2VzIGl0IGlu
-Y2x1ZGUgU0tCX0dTT19ET0RHWT8KPj4+Pj4+Cj4+Pj4+Cj4+Pj4+IDAgLSBub3Qgc2V0Lgo+Pj4+
-IFRoYW5rcyBmb3IgdGhlIGZvbGxvdy11cCBkZXRhaWxzLiBJcyB0aGlzIHNvbWV0aGluZyB0aGF0
-IHlvdSBjYW4gdHJpZ2dlciBlYXNpbHk/Cj4+Pgo+Pj4gWWVzLCBpZiB5b3UgaGF2ZSBhIFVNTCBp
-bnN0YW5jZSBoYW5keS4KPj4+Cj4+PiBSdW5uaW5nIGlwZXJmIGJldHdlZW4gdGhlIGhvc3QgYW5k
-IGEgVU1MIGd1ZXN0IHVzaW5nIHJhdyBzb2NrZXQKPj4+IHRyYW5zcG9ydCB0cmlnZ2VycyBpdCBp
-bW1lZGlhdGVseS4KPj4+Cj4+PiBUaGlzIGlzIG15IFVNTCBjb21tYW5kIGxpbmU6Cj4+Pgo+Pj4g
-dm1saW51eCBtZW09MjA0OE0gdW1pZD1PUFggXAo+Pj4gwqDCoMKgwqDCoCB1YmQwPU9QWC0zLjAt
-V29yay5pbWcgXAo+Pj4gdmVjMDp0cmFuc3BvcnQ9cmF3LGlmbmFtZT1wLXZldGgwLGRlcHRoPTEy
-OCxncm89MSxtYWM9OTI6OWI6MzY6NWU6Mzg6NjkgXAo+Pj4gwqDCoMKgwqDCoCByb290PS9kZXYv
-dWJkYSBybyBjb249bnVsbCBjb24wPW51bGwsZmQ6MiBjb24xPWZkOjAsZmQ6MQo+Pj4KPj4+IHAt
-cmlnaHQgaXMgYSBwYXJ0IG9mIGEgdkV0aCBwYWlyOgo+Pj4KPj4+IGlwIGxpbmsgYWRkIGwtdmV0
-aDAgdHlwZSB2ZXRoIHBlZXIgbmFtZSBwLXZldGgwICYmIGlmY29uZmlnIHAtdmV0aDAgdXAKPj4+
-Cj4+PiBpcGVyZiBzZXJ2ZXIgaXMgb24gaG9zdCwgaXBlcmYgLWMgaW4gdGhlIGd1ZXN0Lgo+Pj4K
-Pj4+Pgo+Pj4+IEFuIHNrYl9kdW1wKCkgKyBkdW1wX3N0YWNrKCkgd2hlbiB0aGUgcGFja2V0IHNv
-Y2tldCBnZXRzIHN1Y2ggYQo+Pj4+IHBhY2tldCBtYXkgcG9pbnQgdXMgdG8gdGhlIHJvb3QgY2F1
-c2UgYW5kIGZpeCB0aGF0Lgo+Pj4KPj4+IFdlIHRyaWVkIGR1bXAgc3RhY2ssIGl0IHdhcyBub3Qg
-aW5mb3JtYXRpdmUgLSBpdCB3YXMganVzdCB0aGUgcmVjdm1tc2cKPj4+IGNhbGwgc3RhY2sgY29t
-aW5nIGZyb20gdGhlIFVNTCB1bnRpbCBpdCBoaXRzIHRoZSByZWxldmFudCByZWN2IGJpdCBpbgo+
-Pj4gYWZfcGFja2V0IC0gaXQgZG9lcyBub3QgdGVsbCB1cyB3aGVyZSB0aGUgcGFja2V0IGlzIGNv
-bWluZyBmcm9tLgo+Pj4KPj4+IFF1b3RpbmcgZnJvbSB0aGUgbWVzc2FnZSBlYXJsaWVyIGluIHRo
-ZSB0aHJlYWQ6Cj4+Pgo+Pj4gWyAyMzM0LjE4MDg1NF0gQ2FsbCBUcmFjZToKPj4+IFsgMjMzNC4x
-ODE5NDddwqAgZHVtcF9zdGFjaysweDVjLzB4ODAKPj4+IFsgMjMzNC4xODMwMjFdwqAgcGFja2V0
-X3JlY3Ztc2cuY29sZCsweDIzLzB4NDkKPj4+IFsgMjMzNC4xODQwNjNdwqAgX19fc3lzX3JlY3Zt
-c2crMHhlMS8weDFmMAo+Pj4gWyAyMzM0LjE4NTAzNF3CoCA/IHBhY2tldF9wb2xsKzB4Y2EvMHgx
-MzAKPj4+IFsgMjMzNC4xODYwMTRdwqAgPyBzb2NrX3BvbGwrMHg3Ny8weGIwCj4+PiBbIDIzMzQu
-MTg2OTc3XcKgID8gZXBfaXRlbV9wb2xsLmlzcmEuMCsweDNmLzB4YjAKPj4+IFsgMjMzNC4xODc5
-MzZdwqAgPyBlcF9zZW5kX2V2ZW50c19wcm9jKzB4ZjEvMHgyNDAKPj4+IFsgMjMzNC4xODg5MDFd
-wqAgPyBkZXF1ZXVlX3NpZ25hbCsweGRiLzB4MTgwCj4+PiBbIDIzMzQuMTg5ODQ4XcKgIGRvX3Jl
-Y3ZtbXNnKzB4YzgvMHgyZDAKPj4+IFsgMjMzNC4xOTA3MjhdwqAgPyBlcF9wb2xsKzB4OGMvMHg0
-NzAKPj4+IFsgMjMzNC4xOTE1ODFdwqAgX19zeXNfcmVjdm1tc2crMHgxMDgvMHgxNTAKPj4+IFsg
-MjMzNC4xOTI0NDFdwqAgX194NjRfc3lzX3JlY3ZtbXNnKzB4MjUvMHgzMAo+Pj4gWyAyMzM0LjE5
-MzM0Nl3CoCBkb19zeXNjYWxsXzY0KzB4NTMvMHgxNDAKPj4+IFsgMjMzNC4xOTQyNjJdwqAgZW50
-cnlfU1lTQ0FMTF82NF9hZnRlcl9od2ZyYW1lKzB4NDQvMHhhOQo+Pgo+PiBUaGF0IG1ha2VzIHNl
-bnNlLiBza2JfZHVtcCBtaWdodCBzaG93IG1vcmUgaW50ZXJlc3RpbmcgZGV0YWlscyBhYm91dAo+
-PiB0aGUgcGFja2V0Lgo+IAo+IEkgd2lsbCBhZGQgdGhhdCBhbmQgcmV0ZXN0IGxhdGVyIHRvZGF5
-LgoKCnNrYiBsZW49ODE4IGhlYWRyb29tPTIgaGVhZGxlbj04MTggdGFpbHJvb209OTA4Cm1hYz0o
-MiwxNCkgbmV0PSgxNiwwKSB0cmFucz0xNgpzaGluZm8odHhmbGFncz0wIG5yX2ZyYWdzPTAgZ3Nv
-KHNpemU9NzUyIHR5cGU9MCBzZWdzPTEpKQpjc3VtKDB4MTAwMDI0IGlwX3N1bW1lZD0zIGNvbXBs
-ZXRlX3N3PTAgdmFsaWQ9MCBsZXZlbD0wKQpoYXNoKDB4MCBzdz0wIGw0PTApIHByb3RvPTB4MDgw
-MCBwa3R0eXBlPTQgaWlmPTAKc2sgZmFtaWx5PTE3IHR5cGU9MyBwcm90bz0wCgpEZWNpcGhlcmlu
-ZyB0aGUgYWN0dWFsIHBhY2tldCBkYXRhIGdpdmVzIGEKClRDUCBwYWNrZXQsIEFDSyBhbmQgUFNI
-IHNldC4KClRoZSBQU0ggZmxhZyBsb29rcyBsaWtlIHRoZSBvbmx5ICJpbnRlcmVzdGluZyIgdGhp
-bmcgYWJvdXQgaXQgaW4gZmlyc3QgcmVhZC4KCj4gCj4+IEZyb20gdGhlIHByZXZpb3VzIHRocmVh
-ZCwgdGhlc2UgYXJlIGFzc3VtZWQgdG8gYmUgVENQCj4+IHBhY2tldHM/Cj4gCj4gWWVzCj4gCj4+
-Cj4+IEkgaGFkIG1pc3NlZCB0aGUgb3JpZ2luYWwgdGhyZWFkLiBJZiB0aGUgcGFja2V0IGhhcwo+
-Pgo+PiDCoMKgwqDCoCBzaW5mbyhza2IpLT5nc29fc2l6ZSA9IDc1Mi4KPj4gwqDCoMKgwqAgc2ti
-LT5sZW4gPSA4MTgKPj4KPj4gdGhlbiB0aGlzIGlzIGEgR1NPIHBhY2tldC4gRXZlbiB0aG91Z2gg
-VU1MIHdpbGwgY29ycmVjdGx5IHByb2Nlc3MgaXQKPj4gYXMgYSBub3JtYWwgODE4IEIgcGFja2V0
-IGlmIHBzb2NrX3JjdiBwcmV0ZW5kcyB0aGF0IGl0IGlzLCB0cmVhdGluZyBpdAo+PiBsaWtlIHRo
-YXQgaXMgbm90IHN0cmljdGx5IGNvcnJlY3QuIEEgcmVsYXRlZCBxdWVzdGlvbiBpcyBob3cgdGhl
-IHNldHVwCj4+IGFycml2ZWQgYXQgdGhhdCBsb3cgTVRVIHNpemUsIGFzc3VtaW5nIHRoYXQgaXMg
-bm90IGV4cGxpY2l0bHkKPj4gY29uZmlndXJlZCB0aGF0IGxvdy4KPiAKPiBUaGUgbXR1IG9uIHRo
-ZSBpbnRlcmZhY2UgaXMgbm9ybWFsLiBJIHN1c3BlY3QgaXQgaXMgb25lIG9mIHRoZSBmaXJzdCBw
-YWNrZXRzCj4gaW4gdGhlIHN0cmVhbSBvciBzb21ldGhpbmcgaXBlcmYgdXNlcyBmb3IgY29tbXVu
-aWNhdGlvbiBiZXR3ZWVuIHRoZSBzZXJ2ZXIgYW5kCj4gdGhlIGNsaWVudCB3aGljaCBhbHdheXMg
-ZW5kcyB1cCB0aGF0IHNpemUuCj4gCj4+Cj4+IEFzIG9mIGNvbW1pdCA1MTQ2NmE3NTQ1YjcgKCJ0
-Y3A6IGZpbGwgc2hpbmZvLT5nc29fdHlwZSBhdCBsYXN0Cj4+IG1vbWVudCIpIHRjcCB1bmNvbmRp
-dGlvbmFsbHkgc2V0cyBnc29fdHlwZSwgZXZlbiBmb3Igbm9uIGdzbyBwYWNrZXRzLgo+PiBTbyBl
-aXRoZXIgdGhpcyBpcyBub3QgYSB0Y3AgcGFja2V0IG9yIHRoZSBmaWVsZCBnZXRzIHplcm9lZCBz
-b21ld2hlcmUKPj4gYWxvbmcgdGhlIHdheS4gSSBjb3VsZCBub3QgcXVpY2tseSBmaW5kIGEgcG9z
-c2libGUgcGF0aCB0bwo+PiBza2JfZ3NvX3Jlc2V0IG9yIGEgcmF3IHdyaXRlLgo+IAo+IFNhbWUu
-IEkgaGF2ZSB0cmllZCB0byB0cmFjZSBhIHBvc3NpYmxlIG9yaWdpbiBhbmQgSSBoYXZlIG5vdCBz
-ZWVuIGFueXRoaW5nIHdoaWNoIG1heSBjYXVzZSBpdC4KPiAKPj4KPj4gSXQgbWF5IGJlIHVzZWZ1
-bCB0byBpbnNlcnQgdGVzdHMgZm9yIHRoaXMgY29uZGl0aW9uIChza2JfaXNfZ3NvKHNrYikKPj4g
-JiYgIXNrYl9zaGluZm8oc2tiKS0+Z3NvX3R5cGUpIHRoYXQgY2FsbCBza2JfZHVtcCBhdCBvdGhl
-ciBwb2ludHMgaW4KPj4gdGhlIG5ldHdvcmsgc3RhY2suIEZvciBpbnN0YW5jZSBpbiBfX2lwX3F1
-ZXVlX3htaXQgYW5kCj4+IF9fZGV2X3F1ZXVlX3htaXQuCj4+Cj4+IFNpbmNlIHNrYiBzZWdtZW50
-YXRpb24gZmFpbHMgaW4gdGNwX2dzb19zZWdtZW50IGZvciBzdWNoIHBhY2tldHMsIGl0Cj4+IG1h
-eSBhbHNvIGJlIGluZm9ybWF0aXZlIHRvIGRpc2FibGUgVFNPIG9uIHRoZSB2ZXRoIGRldmljZSBh
-bmQgc2VlIGlmCj4+IHRoZSB0ZXN0IGZhaWxzLgo+IAo+IEFjay4KPiAKPj4KPiAKCi0tIApBbnRv
-biBSLiBJdmFub3YKQ2FtYnJpZGdlZ3JleXMgTGltaXRlZC4gUmVnaXN0ZXJlZCBpbiBFbmdsYW5k
-LiBDb21wYW55IE51bWJlciAxMDI3MzY2MQpodHRwczovL3d3dy5jYW1icmlkZ2VncmV5cy5jb20v
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxp
-emF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9u
-Lm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92
-aXJ0dWFsaXphdGlvbg==
+On 29.01.20 10:41, David Hildenbrand wrote:
+> On 09.01.20 14:48, David Hildenbrand wrote:
+>> On 12.12.19 18:11, David Hildenbrand wrote:
+>>> This series is based on latest linux-next. The patches are located at:
+>>>     https://github.com/davidhildenbrand/linux.git virtio-mem-rfc-v4
+>>>
+>>> The basic idea of virtio-mem is to provide a flexible,
+>>> cross-architecture memory hot(un)plug solution that avoids many limitations
+>>> imposed by existing technologies, architectures, and interfaces. More
+>>> details can be found below and in linked material.
+>>>
+>>> This RFC is limited to x86-64, however, should theoretically work on any
+>>> architecture that supports virtio and implements memory hot(un)plug under
+>>> Linux - like s390x, powerpc64 and arm64. On x86-64, it is currently
+>>> possible to add/remove memory to the system in >= 4MB granularity.
+>>> Memory hotplug works very reliably. For memory unplug, there are no
+>>> guarantees how much memory can actually get unplugged, it depends on the
+>>> setup (especially: fragmentation of (unmovable) memory). I have plans to
+>>> improve that in the future.
+>>>
+>>> --------------------------------------------------------------------------
+>>> 1. virtio-mem
+>>> --------------------------------------------------------------------------
+>>>
+>>> The basic idea behind virtio-mem was presented at KVM Forum 2018. The
+>>> slides can be found at [1]. The previous RFC can be found at [2]. The
+>>> first RFC can be found at [3]. However, the concept evolved over time. The
+>>> KVM Forum slides roughly match the current design.
+>>>
+>>> Patch #2 ("virtio-mem: Paravirtualized memory hotplug") contains quite some
+>>> information, especially in "include/uapi/linux/virtio_mem.h":
+>>>
+>>>   Each virtio-mem device manages a dedicated region in physical address
+>>>   space. Each device can belong to a single NUMA node, multiple devices
+>>>   for a single NUMA node are possible. A virtio-mem device is like a
+>>>   "resizable DIMM" consisting of small memory blocks that can be plugged
+>>>   or unplugged. The device driver is responsible for (un)plugging memory
+>>>   blocks on demand.
+>>>
+>>>   Virtio-mem devices can only operate on their assigned memory region in
+>>>   order to (un)plug memory. A device cannot (un)plug memory belonging to
+>>>   other devices.
+>>>
+>>>   The "region_size" corresponds to the maximum amount of memory that can
+>>>   be provided by a device. The "size" corresponds to the amount of memory
+>>>   that is currently plugged. "requested_size" corresponds to a request
+>>>   from the device to the device driver to (un)plug blocks. The
+>>>   device driver should try to (un)plug blocks in order to reach the
+>>>   "requested_size". It is impossible to plug more memory than requested.
+>>>
+>>>   The "usable_region_size" represents the memory region that can actually
+>>>   be used to (un)plug memory. It is always at least as big as the
+>>>   "requested_size" and will grow dynamically. It will only shrink when
+>>>   explicitly triggered (VIRTIO_MEM_REQ_UNPLUG).
+>>>
+>>>   Memory in the usable region can usually be read, however, there are no
+>>>   guarantees. It can happen that the device cannot process a request,
+>>>   because it is busy. The device driver has to retry later.
+>>>
+>>>   Usually, during system resets all memory will get unplugged, so the
+>>>   device driver can start with a clean state. However, in specific
+>>>   scenarios (if the device is busy) it can happen that the device still
+>>>   has memory plugged. The device driver can request to unplug all memory
+>>>   (VIRTIO_MEM_REQ_UNPLUG) - which might take a while to succeed if the
+>>>   device is busy.
+>>>
+>>> --------------------------------------------------------------------------
+>>> 2. Linux Implementation
+>>> --------------------------------------------------------------------------
+>>>
+>>> This RFC reuses quite some existing MM infrastructure, however, has to
+>>> expose some additional functionality.
+>>>
+>>> Memory blocks (e.g., 128MB) are added/removed on demand. Within these
+>>> memory blocks, subblocks (e.g., 4MB) are plugged/unplugged. The sizes
+>>> depend on the target architecture, MAX_ORDER + pageblock_order, and
+>>> the block size of a virtio-mem device.
+>>>
+>>> add_memory()/try_remove_memory() is used to add/remove memory blocks.
+>>> virtio-mem will not online memory blocks itself. This has to be done by
+>>> user space, or configured into the kernel
+>>> (CONFIG_MEMORY_HOTPLUG_DEFAULT_ONLINE). virtio-mem will only unplug memory
+>>> that was online to the ZONE_NORMAL. Memory is suggested to be onlined to
+>>> the ZONE_NORMAL for now.
+>>>
+>>> The memory hotplug notifier is used to properly synchronize against
+>>> onlining/offlining of memory blocks and to track the states of memory
+>>> blocks (including the zone memory blocks are onlined to).
+>>>
+>>> The set_online_page() callback is used to keep unplugged subblocks
+>>> of a memory block fake-offline when onlining the memory block.
+>>> generic_online_page() is used to fake-online plugged subblocks. This
+>>> handling is similar to the Hyper-V balloon driver.
+>>>
+>>> PG_offline is used to mark unplugged subblocks as offline, so e.g.,
+>>> dumping tools (makedumpfile) will skip these pages. This is similar to
+>>> other balloon drivers like virtio-balloon and Hyper-V.
+>>>
+>>> Memory offlining code is extended to allow drivers to drop their reference
+>>> to PG_offline pages when MEM_GOING_OFFLINE, so these pages can be skipped
+>>> when offlining memory blocks. This allows to offline memory blocks that
+>>> have partially unplugged (allocated e.g., via alloc_contig_range())
+>>> subblocks - or are completely unplugged.
+>>>
+>>> alloc_contig_range()/free_contig_range() [now exposed] is used to
+>>> unplug/plug subblocks of memory blocks the are already exposed to Linux.
+>>>
+>>> offline_and_remove_memory() [new] is used to offline a fully unplugged
+>>> memory block and remove it from Linux.
+>>>
+>>>
+>>> A lot of additional information can be found in the separate patches and
+>>> as comments in the code itself.
+>>>
+>>> --------------------------------------------------------------------------
+>>> 3. Changes RFC v2 -> v3
+>>> --------------------------------------------------------------------------
+>>>
+>>> A lot of things changed, especially also on the QEMU + virtio side. The
+>>> biggest changes on the Linux driver side are:
+>>> - Onlining/offlining of subblocks is now emulated on top of memory blocks.
+>>>   set_online_page()+alloc_contig_range()+free_contig_range() is now used
+>>>   for that. Core MM does not have to be modified and will continue to
+>>>   online/offline full memory blocks.
+>>> - Onlining/offlining of memory blocks is no longer performed by virtio-mem.
+>>> - Pg_offline is upstream and can be used. It is also used to allow
+>>>   offlining of partially unplugged memory blocks.
+>>> - Memory block states + subblocks are now tracked more space-efficient.
+>>> - Proper kexec(), kdump(), driver unload, driver reload, ZONE_MOVABLE, ...
+>>>   handling.
+>>>
+>>> --------------------------------------------------------------------------
+>>> 4. Changes RFC v3 -> RFC v4
+>>> --------------------------------------------------------------------------
+>>>
+>>> Only minor things changed, especially nothing on the QEMU + virtio side.
+>>> Interresting changes on the Linux driver side are:
+>>> - "mm: Allow to offline unmovable PageOffline() pages via
+>>>    MEM_GOING_OFFLINE"
+>>> -- Rework to Michals suggestion (allow to isolate all PageOffline() pages
+>>>    by skipping all PageOffline() pages in has_unmovable_pages(). Fail
+>>>    offlining later if the pages cannot be offlined/migrated).
+>>> - "virtio-mem: Allow to offline partially unplugged memory blocks"
+>>> -- Adapt to Michals suggestion on core-mm part.
+>>> - "virtio-mem: Better retry handling"
+>>> -- Optimize retry intervals
+>>> - "virtio-mem: Drop slab objects when unplug continues to fail"
+>>> -- Call drop_slab()/drop_slab_node() when unplug keeps failing for a longer
+>>>    time.
+>>> - Multiple cleanups and fixes.
+>>>
+>>> --------------------------------------------------------------------------
+>>> 5. Future work
+>>> --------------------------------------------------------------------------
+>>>
+>>> The separate patches contain a lot of future work items. One of the next
+>>> steps is to make memory unplug more likely to succeed - currently, there
+>>> are no guarantees on how much memory can get unplugged again. I have
+>>> various ideas on how to limit fragmentation of all memory blocks that
+>>> virtio-mem added.
+>>>
+>>> Memory hotplug:
+>>> - Reduce the amount of memory resources if that turnes out to be an
+>>>   issue. Or try to speed up relevant code paths to deal with many
+>>>   resources.
+>>> - Allocate the vmemmap from the added memory. Makes hotplug more likely
+>>>   to succeed, the vmemmap is stored on the same NUMA node and that
+>>>   unmovable memory will later not hinder unplug.
+>>>
+>>> Memory hotunplug:
+>>> - Performance improvements:
+>>> -- Sense (lockless) if it make sense to try alloc_contig_range() at all
+>>>    before directly trying to isolate and taking locks.
+>>> -- Try to unplug bigger chunks if possible first.
+>>> -- Identify free areas first, that don't have to be evacuated.
+>>> - Make unplug more likely to succeed:
+>>> -- There are various idea to limit fragmentation on memory block
+>>>    granularity. (e.g., ZONE_PREFER_MOVABLE and smart balancing)
+>>> -- Allocate memmap from added memory. This way, less unmovable data can
+>>>    end up on the memory blocks.
+>>> - OOM handling, e.g., via an OOM handler.
+>>> - Defragmentation
+>>> -- Will require a new virtio-mem CMD to exchange plugged<->unplugged blocks
+>>>
+>>> --------------------------------------------------------------------------
+>>> 6. Example Usage
+>>> --------------------------------------------------------------------------
+>>>
+>>> A very basic QEMU prototype (kept updated) is available at:
+>>>     https://github.com/davidhildenbrand/qemu.git virtio-mem
+>>>
+>>> It lacks various features, however, works to test the guest driver side:
+>>> - No support for resizable memory regions / memory backends yet
+>>> - No protection of unplugged memory (esp., userfaultfd-wp) yet
+>>> - No dump/migration/XXX optimizations to skip unplugged memory (and avoid
+>>>   touching it)
+>>>
+>>> Start QEMU with two virtio-mem devices (one per NUMA node):
+>>>  $ qemu-system-x86_64 -m 4G,maxmem=20G \
+>>>   -smp sockets=2,cores=2 \
+>>>   -numa node,nodeid=0,cpus=0-1 -numa node,nodeid=1,cpus=2-3 \
+>>>   [...]
+>>>   -object memory-backend-ram,id=mem0,size=8G \
+>>>   -device virtio-mem-pci,id=vm0,memdev=mem0,node=0,requested-size=128M \
+>>>   -object memory-backend-ram,id=mem1,size=8G \
+>>>   -device virtio-mem-pci,id=vm1,memdev=mem1,node=1,requested-size=80M
+>>>
+>>> Query the configuration:
+>>>  QEMU 4.1.95 monitor - type 'help' for more information
+>>>  (qemu) info memory-devices
+>>>  Memory device [virtio-mem]: "vm0"
+>>>    memaddr: 0x140000000
+>>>    node: 0
+>>>    requested-size: 134217728
+>>>    size: 134217728
+>>>    max-size: 8589934592
+>>>    block-size: 2097152
+>>>    memdev: /objects/mem0
+>>>  Memory device [virtio-mem]: "vm1"
+>>>    memaddr: 0x340000000
+>>>    node: 1
+>>>    requested-size: 83886080
+>>>    size: 83886080
+>>>    max-size: 8589934592
+>>>    block-size: 2097152
+>>>    memdev: /objects/mem1
+>>>
+>>> Add some memory to node 1:
+>>>  QEMU 4.1.95 monitor - type 'help' for more information
+>>>  (qemu) qom-set vm1 requested-size 1G
+>>>
+>>> Remove some memory from node 0:
+>>>  QEMU 4.1.95 monitor - type 'help' for more information
+>>>  (qemu) qom-set vm0 requested-size 64M
+>>>
+>>> Query the configuration again:
+>>>  (qemu) info memory-devices
+>>>  Memory device [virtio-mem]: "vm0"
+>>>    memaddr: 0x140000000
+>>>    node: 0
+>>>    requested-size: 67108864
+>>>    size: 67108864
+>>>    max-size: 8589934592
+>>>    block-size: 2097152
+>>>    memdev: /objects/mem0
+>>>  Memory device [virtio-mem]: "vm1"
+>>>    memaddr: 0x340000000
+>>>    node: 1
+>>>    requested-size: 1073741824
+>>>    size: 1073741824
+>>>    max-size: 8589934592
+>>>    block-size: 2097152
+>>>    memdev: /objects/mem1
+>>>
+>>> --------------------------------------------------------------------------
+>>> 7. Q/A
+>>> --------------------------------------------------------------------------
+>>>
+>>> Q: Why add/remove parts ("subblocks") of memory blocks/sections?
+>>> A: Flexibility (section size depends on the architecture) - e.g., some
+>>>    architectures have a section size of 2GB. Also, the memory block size
+>>>    is variable (e.g., on x86-64). I want to avoid any such restrictions.
+>>>    Some use cases want to add/remove memory in smaller granularities to a
+>>>    VM (e.g., the Hyper-V balloon also implements this) - especially smaller
+>>>    VMs like used for kata containers. Also, on memory unplug, it is more
+>>>    reliable to free-up and unplug multiple small chunks instead
+>>>    of one big chunk. E.g., if one page of a DIMM is either unmovable or
+>>>    pinned, the DIMM can't get unplugged. This approach is basically a
+>>>    compromise between DIMM-based memory hot(un)plug and balloon
+>>>    inflation/deflation, which works mostly on page granularity.
+>>>
+>>> Q: Why care about memory blocks?
+>>> A: They are the way to tell user space about new memory. This way,
+>>>    memory can get onlined/offlined by user space. Also, e.g., kdump
+>>>    relies on udev events to reload kexec when memory blocks are
+>>>    onlined/offlined. Memory blocks are the "real" memory hot(un)plug
+>>>    granularity. Everything that's smaller has to be emulated "on top".
+>>>
+>>> Q: Won't memory unplug of subblocks fragment memory?
+>>> A: Yes and no. Unplugging e.g., >=4MB subblocks on x86-64 will not really
+>>>    fragment memory like unplugging random pages like a balloon driver does.
+>>>    Buddy merging will not be limited. However, any allocation that requires
+>>>    bigger consecutive memory chunks (e.g., gigantic pages) might observe
+>>>    the fragmentation. Possible solutions: Allocate gigantic huge pages
+>>>    before unplugging memory, don't unplug memory, combine virtio-mem with
+>>>    DIMM based memory or bigger initial memory. Remember, a virtio-mem
+>>>    device will only unplug on the memory range it manages, not on other
+>>>    DIMMs. Unplug of single memory blocks will result in similar
+>>>    fragmentation in respect to gigantic huge pages. I ahve plans for a
+>>>    virtio-mem defragmentation feature in the future.
+>>>
+>>> Q: How reliable is memory unplug?
+>>> A: There are no guarantees on how much memory can get unplugged
+>>>    again. However, it is more likely to find 4MB chunks to unplug than
+>>>    e.g., 128MB chunks. If memory is terribly fragmented, there is nothing
+>>>    we can do - for now. I consider memory hotplug the first primary use
+>>>    of virtio-mem. Memory unplug might usually work, but we want to improve
+>>>    the performance and the amount of memory we can actually unplug later.
+>>>
+>>> Q: Why not unplug from the ZONE_MOVABLE?
+>>> A: Unplugged memory chunks are unmovable. Unmovable data must not end up
+>>>    on the ZONE_MOVABLE - similar to gigantic pages - they will never be
+>>>    allocated from ZONE_MOVABLE. virtio-mem added memory can be onlined
+>>>    to the ZONE_MOVABLE, but subblocks will not get unplugged from it.
+>>>
+>>> Q: How big should the initial (!virtio-mem) memory of a VM be?
+>>> A: virtio-mem memory will not go to the DMA zones. So to avoid running out
+>>>    of DMA memory, I suggest something like 2-3GB on x86-64. But many
+>>>    VMs can most probably deal with less DMA memory - depends on the use
+>>>    case.
+>>>
+>>> [1] https://events.linuxfoundation.org/wp-content/uploads/2017/12/virtio-mem-Paravirtualized-Memory-David-Hildenbrand-Red-Hat-1.pdf
+>>> [2] https://lkml.kernel.org/r/20190919142228.5483-1-david@redhat.com
+>>> [3] https://lkml.kernel.org/r/547865a9-d6c2-7140-47e2-5af01e7d761d@redhat.com
+>>>
+>>> Cc: Sebastien Boeuf  <sebastien.boeuf@intel.com>
+>>> Cc: Samuel Ortiz <samuel.ortiz@intel.com>
+>>> Cc: Robert Bradford <robert.bradford@intel.com>
+>>> Cc: Luiz Capitulino <lcapitulino@redhat.com>
+>>>
+>>> David Hildenbrand (13):
+>>>   ACPI: NUMA: export pxm_to_node
+>>>   virtio-mem: Paravirtualized memory hotplug
+>>>   virtio-mem: Paravirtualized memory hotunplug part 1
+>>>   mm: Export alloc_contig_range() / free_contig_range()
+>>>   virtio-mem: Paravirtualized memory hotunplug part 2
+>>>   mm: Allow to offline unmovable PageOffline() pages via
+>>>     MEM_GOING_OFFLINE
+>>>   virtio-mem: Allow to offline partially unplugged memory blocks
+>>>   mm/memory_hotplug: Introduce offline_and_remove_memory()
+>>>   virtio-mem: Offline and remove completely unplugged memory blocks
+>>>   virtio-mem: Better retry handling
+>>>   mm/vmscan: Move count_vm_event(DROP_SLAB) into drop_slab()
+>>>   mm/vmscan: Export drop_slab() and drop_slab_node()
+>>>   virtio-mem: Drop slab objects when unplug continues to fail
+>>
+>> Ping,
+>>
+>> I'd love to get some feedback on
+>>
+>> a) The remaining MM bits from MM folks (especially, patch #6 and #8).
+> 
+> Friendly ping again:
+> 
+> Can I get some feedback on the two important MM changes in this series
+> 
+> "[PATCH RFC v4 06/13] mm: Allow to offline unmovable PageOffline() pages
+> via MEM_GOING_OFFLINE"
+> 
+> and
+> 
+> "[PATCH RFC v4 08/13] mm/memory_hotplug: Introduce
+> offline_and_remove_memory()"
+> 
+
+Yet another ping.
+
+-- 
+Thanks,
+
+David / dhildenb
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
