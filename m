@@ -2,53 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5336016C1CF
-	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 14:11:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CC3916C1D2
+	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 14:11:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id AA6F58789B;
-	Tue, 25 Feb 2020 13:11:16 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 098F2878E3;
+	Tue, 25 Feb 2020 13:11:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4T8df6PQ86Cm; Tue, 25 Feb 2020 13:11:12 +0000 (UTC)
+	with ESMTP id EJw8RbrVipCv; Tue, 25 Feb 2020 13:11:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5D9CC878CD;
-	Tue, 25 Feb 2020 13:11:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id ACA6C878F1;
+	Tue, 25 Feb 2020 13:11:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 486C2C0177;
-	Tue, 25 Feb 2020 13:11:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8BC12C18DA;
+	Tue, 25 Feb 2020 13:11:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 57338C1D88
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8A72CC0177
  for <virtualization@lists.linux-foundation.org>;
  Tue, 25 Feb 2020 13:11:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 53D08878C4
+ by hemlock.osuosl.org (Postfix) with ESMTP id 78F9F8789B
  for <virtualization@lists.linux-foundation.org>;
  Tue, 25 Feb 2020 13:11:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EpO-esQagURa
+ with ESMTP id ApB9vSqxA+HN
  for <virtualization@lists.linux-foundation.org>;
  Tue, 25 Feb 2020 13:11:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by hemlock.osuosl.org (Postfix) with ESMTPS id DB4CF8789B
+ by hemlock.osuosl.org (Postfix) with ESMTPS id DB45F8788E
  for <virtualization@lists.linux-foundation.org>;
  Tue, 25 Feb 2020 13:11:05 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 2F9DEB19D;
+ by mx2.suse.de (Postfix) with ESMTP id 2FB1EB1A4;
  Tue, 25 Feb 2020 13:11:03 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
  mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
  sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
-Subject: [PATCH v3 1/4] drm/simple-kms: Add drm_simple_encoder_{init, create}()
-Date: Tue, 25 Feb 2020 14:10:52 +0100
-Message-Id: <20200225131055.27550-2-tzimmermann@suse.de>
+Subject: [PATCH v3 2/4] drm/ast: Use simple encoder
+Date: Tue, 25 Feb 2020 14:10:53 +0100
+Message-Id: <20200225131055.27550-3-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200225131055.27550-1-tzimmermann@suse.de>
 References: <20200225131055.27550-1-tzimmermann@suse.de>
@@ -71,99 +71,93 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch makes the internal encoder implementation of the simple
-KMS helpers available to drivers.
+The ast driver uses an empty implementation for its encoder. Replace
+the code with the generic simple encoder.
 
-These simple-encoder helpers initialize an encoder with an empty
-implementation. This covers the requirements of most of the existing
-DRM drivers. A call to drm_simple_encoder_create() allocates and
-initializes an encoder instance, a call to drm_simple_encoder_init()
-initializes a pre-allocated instance.
-
-v3:
-	* remove drm_simple_encoder_create(); not required yet
-	* provide more precise documentation
 v2:
-	* move simple encoder to KMS helpers
-	* remove name argument; simplifies implementation
-	* don't allocate with devm_ interfaces; unsafe with DRM
+	* rebase onto new simple-encoder interface
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Acked-by: Sam Ravnborg <sam@ravnborg.org>
 ---
- drivers/gpu/drm/drm_simple_kms_helper.c | 34 ++++++++++++++++++++++---
- include/drm/drm_simple_kms_helper.h     |  4 +++
- 2 files changed, 35 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/ast/ast_drv.h  |  6 +-----
+ drivers/gpu/drm/ast/ast_mode.c | 25 ++++++++-----------------
+ 2 files changed, 9 insertions(+), 22 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/drm/drm_simple_kms_helper.c
-index 15fb516ae2d8..04309e4660de 100644
---- a/drivers/gpu/drm/drm_simple_kms_helper.c
-+++ b/drivers/gpu/drm/drm_simple_kms_helper.c
-@@ -26,12 +26,41 @@
-  * entity. Some flexibility for code reuse is provided through a separately
-  * allocated &drm_connector object and supporting optional &drm_bridge
-  * encoder drivers.
-+ *
-+ * Many drivers require only a very simple encoder that fulfills the minimum
-+ * requirements of the display pipeline and does not add additional
-+ * functionality. The function drm_simple_encoder_init() provides an
-+ * implementation of such an encoder.
-  */
+diff --git a/drivers/gpu/drm/ast/ast_drv.h b/drivers/gpu/drm/ast/ast_drv.h
+index f5d8780776ae..656d591b154b 100644
+--- a/drivers/gpu/drm/ast/ast_drv.h
++++ b/drivers/gpu/drm/ast/ast_drv.h
+@@ -121,6 +121,7 @@ struct ast_private {
+ 		unsigned int next_index;
+ 	} cursor;
  
--static const struct drm_encoder_funcs drm_simple_kms_encoder_funcs = {
-+static const struct drm_encoder_funcs drm_simple_encoder_funcs_cleanup = {
- 	.destroy = drm_encoder_cleanup,
++	struct drm_encoder encoder;
+ 	struct drm_plane primary_plane;
+ 	struct drm_plane cursor_plane;
+ 
+@@ -238,13 +239,8 @@ struct ast_crtc {
+ 	u8 offset_x, offset_y;
  };
  
-+/**
-+ * drm_simple_encoder_init - Initialize a preallocated encoder
-+ * @dev: drm device
-+ * @funcs: callbacks for this encoder
-+ * @encoder_type: user visible type of the encoder
-+ *
-+ * Initialises a preallocated encoder that has no further functionality.
-+ * Settings for possible CRTC and clones are left to their initial values.
-+ * The encoder will be cleaned up automatically as part of the mode-setting
-+ * cleanup.
-+ *
-+ * Returns:
-+ * Zero on success, error code on failure.
-+ */
-+int drm_simple_encoder_init(struct drm_device *dev,
-+			    struct drm_encoder *encoder,
-+			    int encoder_type)
-+{
-+	return drm_encoder_init(dev, encoder,
-+				&drm_simple_encoder_funcs_cleanup,
-+				encoder_type, NULL);
-+}
-+EXPORT_SYMBOL(drm_simple_encoder_init);
-+
- static enum drm_mode_status
- drm_simple_kms_crtc_mode_valid(struct drm_crtc *crtc,
- 			       const struct drm_display_mode *mode)
-@@ -288,8 +317,7 @@ int drm_simple_display_pipe_init(struct drm_device *dev,
- 		return ret;
+-struct ast_encoder {
+-	struct drm_encoder base;
+-};
+-
+ #define to_ast_crtc(x) container_of(x, struct ast_crtc, base)
+ #define to_ast_connector(x) container_of(x, struct ast_connector, base)
+-#define to_ast_encoder(x) container_of(x, struct ast_encoder, base)
  
- 	encoder->possible_crtcs = drm_crtc_mask(crtc);
--	ret = drm_encoder_init(dev, encoder, &drm_simple_kms_encoder_funcs,
--			       DRM_MODE_ENCODER_NONE, NULL);
-+	ret = drm_simple_encoder_init(dev, encoder, DRM_MODE_ENCODER_NONE);
- 	if (ret || !connector)
- 		return ret;
+ struct ast_vbios_stdtable {
+ 	u8 misc;
+diff --git a/drivers/gpu/drm/ast/ast_mode.c b/drivers/gpu/drm/ast/ast_mode.c
+index 562ea6d9df13..7a9f20a2fd30 100644
+--- a/drivers/gpu/drm/ast/ast_mode.c
++++ b/drivers/gpu/drm/ast/ast_mode.c
+@@ -40,6 +40,7 @@
+ #include <drm/drm_gem_vram_helper.h>
+ #include <drm/drm_plane_helper.h>
+ #include <drm/drm_probe_helper.h>
++#include <drm/drm_simple_kms_helper.h>
  
-diff --git a/include/drm/drm_simple_kms_helper.h b/include/drm/drm_simple_kms_helper.h
-index e253ba7bea9d..a026375464ff 100644
---- a/include/drm/drm_simple_kms_helper.h
-+++ b/include/drm/drm_simple_kms_helper.h
-@@ -181,4 +181,8 @@ int drm_simple_display_pipe_init(struct drm_device *dev,
- 			const uint64_t *format_modifiers,
- 			struct drm_connector *connector);
+ #include "ast_drv.h"
+ #include "ast_tables.h"
+@@ -968,28 +969,18 @@ static int ast_crtc_init(struct drm_device *dev)
+  * Encoder
+  */
  
-+int drm_simple_encoder_init(struct drm_device *dev,
-+			    struct drm_encoder *encoder,
-+			    int encoder_type);
-+
- #endif /* __LINUX_DRM_SIMPLE_KMS_HELPER_H */
+-static void ast_encoder_destroy(struct drm_encoder *encoder)
+-{
+-	drm_encoder_cleanup(encoder);
+-	kfree(encoder);
+-}
+-
+-static const struct drm_encoder_funcs ast_enc_funcs = {
+-	.destroy = ast_encoder_destroy,
+-};
+-
+ static int ast_encoder_init(struct drm_device *dev)
+ {
+-	struct ast_encoder *ast_encoder;
++	struct ast_private *ast = dev->dev_private;
++	struct drm_encoder *encoder = &ast->encoder;
++	int ret;
+ 
+-	ast_encoder = kzalloc(sizeof(struct ast_encoder), GFP_KERNEL);
+-	if (!ast_encoder)
+-		return -ENOMEM;
++	ret = drm_simple_encoder_init(dev, encoder, DRM_MODE_ENCODER_DAC);
++	if (ret)
++		return ret;
+ 
+-	drm_encoder_init(dev, &ast_encoder->base, &ast_enc_funcs,
+-			 DRM_MODE_ENCODER_DAC, NULL);
++	encoder->possible_crtcs = 1;
+ 
+-	ast_encoder->base.possible_crtcs = 1;
+ 	return 0;
+ }
+ 
 -- 
 2.25.0
 
