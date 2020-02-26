@@ -1,82 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 668CB17030D
-	for <lists.virtualization@lfdr.de>; Wed, 26 Feb 2020 16:48:14 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C82D21703C8
+	for <lists.virtualization@lfdr.de>; Wed, 26 Feb 2020 17:07:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9B9AE86E0A;
-	Wed, 26 Feb 2020 15:48:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6DFAF87A8D;
+	Wed, 26 Feb 2020 16:07:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KAFYiuT06z-V; Wed, 26 Feb 2020 15:48:11 +0000 (UTC)
+	with ESMTP id Av-VjI4I2r0l; Wed, 26 Feb 2020 16:07:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9A0F7876DB;
-	Wed, 26 Feb 2020 15:48:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 60B3785933;
+	Wed, 26 Feb 2020 16:07:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 80DA6C0177;
-	Wed, 26 Feb 2020 15:48:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 53DE7C0177;
+	Wed, 26 Feb 2020 16:07:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 11C8AC0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 538BCC0177
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 15:48:10 +0000 (UTC)
+ Wed, 26 Feb 2020 16:07:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 000AC86B1C
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3DBBE870B3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 15:48:09 +0000 (UTC)
+ Wed, 26 Feb 2020 16:07:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QK2nPX5_FXnP
+ with ESMTP id DS5o4IM1t9Bo
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 15:48:06 +0000 (UTC)
+ Wed, 26 Feb 2020 16:07:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id E82B2862B4
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 9FD698172A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 15:48:05 +0000 (UTC)
+ Wed, 26 Feb 2020 16:07:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582732084;
+ s=mimecast20190719; t=1582733244;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:in-reply-to:in-reply-to:references:references;
- bh=0hBOHXRxGQzs7sC6MP4NSUkQgLwz4qRn+BWsljwDM7Q=;
- b=eDfIyeCdBgkGP/nzsUjHA0hDpt7lpso1EVy0fnI4aHgh5x46jdd2LsJYYwxkdOkpCk8RIA
- /9bJn2ZYnkCcG2E4WcyGeUAvPOpA5zkflJMUiMKEdZzdRRCJh1D3WtFOyqrBh2yPwL8Fth
- SkbkoqnwnuX9aIUL2WSh0wfEjCmWGYU=
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=VC/fSjW6Q9Zf1CVil4K0XbAX6oR7WGL2RegTKV0OEzU=;
+ b=VV8ZZEsOg+iP2dzMQmnmeE1uyL4OQyIMvecZ9OyXv7JsDRKFjnIZFUZLQJKYMNznu2/cvB
+ nRzHbp43wYFKwKdw+mnyU81jkTtsgjOY1Yfzr1bor27e+ZtAtxiLlt6NuWOCuL0nekqIlO
+ Fy+3SVot8P/6bDspw//r8FdXTkpelqc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-397-3H3FylnoMz6nWrRPDbsPGQ-1; Wed, 26 Feb 2020 10:47:59 -0500
-X-MC-Unique: 3H3FylnoMz6nWrRPDbsPGQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ us-mta-189-WhzkhL_bOrG6VaE3qtfNWQ-1; Wed, 26 Feb 2020 11:07:20 -0500
+X-MC-Unique: WhzkhL_bOrG6VaE3qtfNWQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AA4141137840;
- Wed, 26 Feb 2020 15:47:57 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BBC398018A1;
+ Wed, 26 Feb 2020 16:07:18 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-150.ams2.redhat.com
  [10.36.116.150])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 10D1A60BE1;
- Wed, 26 Feb 2020 15:47:54 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CA69319C69;
+ Wed, 26 Feb 2020 16:07:15 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2D95E1FCE8; Wed, 26 Feb 2020 16:47:53 +0100 (CET)
+ id BCA821FCE8; Wed, 26 Feb 2020 17:07:14 +0100 (CET)
+Date: Wed, 26 Feb 2020 17:07:14 +0100
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v5 2/3] drm/virtio: fix mmap page attributes
-Date: Wed, 26 Feb 2020 16:47:51 +0100
-Message-Id: <20200226154752.24328-3-kraxel@redhat.com>
-In-Reply-To: <20200226154752.24328-1-kraxel@redhat.com>
-References: <20200226154752.24328-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: Guillaume.Gardet@arm.com, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel.vetter@ffwll.ch>,
- open list <linux-kernel@vger.kernel.org>, stable@vger.kernel.org,
- gurchetansingh@chromium.org, tzimmermann@suse.de,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- olvaffe@gmail.com
+To: David Stevens <stevensd@chromium.org>
+Subject: Re: [virtio-dev] Re: [PATCH 1/2] virtio: add dma-buf support for
+ exported objects
+Message-ID: <20200226160714.y2wt5ubtklljn576@sirius.home.kraxel.org>
+References: <20200219080637.61312-1-stevensd@chromium.org>
+ <20200219080637.61312-2-stevensd@chromium.org>
+ <20200225061008.wqxqppfglzmwvtid@sirius.home.kraxel.org>
+ <CAD=HUj7h1d8dXG94FUtj4fmeUvUM0dm6NW8WHGZAceHae0zGLw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAD=HUj7h1d8dXG94FUtj4fmeUvUM0dm6NW8WHGZAceHae0zGLw@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: virtio-dev@lists.oasis-open.org, "Michael S . Tsirkin" <mst@redhat.com>,
+ David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, Daniel Vetter <daniel@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,38 +95,24 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtio-gpu uses cached mappings, set
-drm_gem_shmem_object.map_cached accordingly.
+On Wed, Feb 26, 2020 at 12:56:58PM +0900, David Stevens wrote:
+> On Tue, Feb 25, 2020 at 3:10 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
+> >
+> > How about dma_buf_{get,set}_uuid, simliar to dma_buf_set_name?
+> 
+> While I'm not opposed to such an API, I'm also hesitant to make
+> changes to the dma-buf API for a single use case.
 
-Cc: stable@vger.kernel.org
-Fixes: c66df701e783 ("drm/virtio: switch from ttm to gem shmem helpers")
-Reported-by: Gurchetan Singh <gurchetansingh@chromium.org>
-Reported-by: Guillaume Gardet <Guillaume.Gardet@arm.com>
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/virtio/virtgpu_object.c | 1 +
- 1 file changed, 1 insertion(+)
+See virtio-wayland discussion.  I expect we will see more cases show up.
+Maybe this should even go one level up, to struct file.
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
-index 3d2a6d489bfc..59319435218f 100644
---- a/drivers/gpu/drm/virtio/virtgpu_object.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_object.c
-@@ -119,6 +119,7 @@ struct drm_gem_object *virtio_gpu_create_object(struct drm_device *dev,
- 		return NULL;
- 
- 	bo->base.base.funcs = &virtio_gpu_gem_funcs;
-+	bo->base.map_cached = true;
- 	return &bo->base.base;
- }
- 
--- 
-2.18.2
+cheers,
+  Gerd
 
 _______________________________________________
 Virtualization mailing list
