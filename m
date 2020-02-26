@@ -1,143 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8514516F285
-	for <lists.virtualization@lfdr.de>; Tue, 25 Feb 2020 23:19:47 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 4201520477;
-	Tue, 25 Feb 2020 22:19:45 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IKf-Ahxm85I0; Tue, 25 Feb 2020 22:19:42 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 7A943203B4;
-	Tue, 25 Feb 2020 22:19:42 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5582FC0177;
-	Tue, 25 Feb 2020 22:19:42 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C8C20C0177
- for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 22:19:40 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1696916F602
+	for <lists.virtualization@lfdr.de>; Wed, 26 Feb 2020 04:14:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id B16C38458C
- for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 22:19:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id EE3E286A9D;
+	Wed, 26 Feb 2020 03:14:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id uZx370F2NUeR; Wed, 26 Feb 2020 03:14:20 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 758A2868BF;
+	Wed, 26 Feb 2020 03:14:20 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4BC0AC0177;
+	Wed, 26 Feb 2020 03:14:20 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8387C0177
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 26 Feb 2020 03:14:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id D598986269
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 26 Feb 2020 03:14:18 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2MVdujfmvHYy
+ with ESMTP id LBGlzYSGzRmA
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 22:19:39 +0000 (UTC)
+ Wed, 26 Feb 2020 03:14:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id ADF3884546
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id E286F81DE3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Feb 2020 22:19:39 +0000 (UTC)
+ Wed, 26 Feb 2020 03:14:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582669178;
+ s=mimecast20190719; t=1582686856;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=gCSArIx/3mY9oSIUMRjqx2+R3OvuPX6j2QVZuQeM+/k=;
- b=GHTS+twZm7rThRIRTIan3iEXMMTE22tyYPOnP0HDibeyc2iN4QA6J8xVzZ1eYEGNgIeo+K
- 7uAiQ0surOa3O/HWcIpbGl7SRFRIWJ8ODZEUJFjwTawr+RMy0bdb6WUWsvDPvlBZ5lnZaf
- 3Gpy7M1+EAIUHt9prW1N6Fy/s0U60to=
+ in-reply-to:in-reply-to:references:references;
+ bh=zPO9Q4VBlPr6ggd2qAuWkleMNlATunLXOSzyCdyykww=;
+ b=H5aznvu46t8bRVjhT7Hw3bTIYopefPdiwIuQR2OCq8YClu4cZE4WZ2iOP+OzPLXLLqVAYd
+ iz6W+2eBQHmDB8By880Jrgz8LjwUgRVfVZTnluXKdSV9EsznznZw+NFNLcbXwBTZMOS5Mc
+ +qTaNCAs2wefyRD9RN6ccJIPr6F2n1E=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-478-W7WYJUYZNry96hYG-fYhtA-1; Tue, 25 Feb 2020 17:19:30 -0500
-X-MC-Unique: W7WYJUYZNry96hYG-fYhtA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-354-DyPfyrCDO6K9EjXf8mESqA-1; Tue, 25 Feb 2020 22:14:14 -0500
+X-MC-Unique: DyPfyrCDO6K9EjXf8mESqA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1AE78107ACC4;
- Tue, 25 Feb 2020 22:19:27 +0000 (UTC)
-Received: from [10.36.117.12] (ovpn-117-12.ams2.redhat.com [10.36.117.12])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DA1208B759;
- Tue, 25 Feb 2020 22:19:18 +0000 (UTC)
-Subject: Re: [PATCH RFC v4 06/13] mm: Allow to offline unmovable PageOffline()
- pages via MEM_GOING_OFFLINE
-To: Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- linux-kernel@vger.kernel.org
-References: <20191212171137.13872-1-david@redhat.com>
- <20191212171137.13872-7-david@redhat.com>
- <6ec496580ddcb629d22589a1cba8cd61cbd53206.camel@linux.intel.com>
- <267ea186-aba8-1a93-bd55-ac641f78d07e@redhat.com>
- <3d719897039273a2bb8d0fe7d12563498ebd2897.camel@linux.intel.com>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <e0892179-b14c-84c3-1284-fc789f16e1c7@redhat.com>
-Date: Tue, 25 Feb 2020 23:19:18 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 11C7E1034B20;
+ Wed, 26 Feb 2020 03:14:13 +0000 (UTC)
+Received: from [10.72.13.217] (ovpn-13-217.pek2.redhat.com [10.72.13.217])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AC1435C13D;
+ Wed, 26 Feb 2020 03:14:00 +0000 (UTC)
+Subject: Re: [PATCH] virtio_ring: Fix mem leak with vring_new_virtqueue()
+To: Suman Anna <s-anna@ti.com>, "Michael S. Tsirkin" <mst@redhat.com>
+References: <20200224212643.30672-1-s-anna@ti.com>
+ <b622c831-9adb-b9af-dd4a-21605bc124a8@redhat.com>
+ <0ace3a3b-cf2f-7977-5337-f74f530afbe1@ti.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <1ce2bee4-64ed-f630-2695-8e8b9b8e27c1@redhat.com>
+Date: Wed, 26 Feb 2020 11:13:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <3d719897039273a2bb8d0fe7d12563498ebd2897.camel@linux.intel.com>
+In-Reply-To: <0ace3a3b-cf2f-7977-5337-f74f530afbe1@ti.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: Juergen Gross <jgross@suse.com>, virtio-dev@lists.oasis-open.org,
- Michal Hocko <mhocko@suse.com>, Mike Rapoport <rppt@linux.ibm.com>,
- kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
- Anshuman Khandual <anshuman.khandual@arm.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Pingfan Liu <kernelfans@gmail.com>, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, Pavel Tatashin <pavel.tatashin@microsoft.com>,
- Qian Cai <cai@lca.pw>, Johannes Weiner <hannes@cmpxchg.org>,
- Anthony Yznaga <anthony.yznaga@oracle.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- virtualization@lists.linux-foundation.org,
- Mel Gorman <mgorman@techsingularity.net>,
- Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
- Oscar Salvador <osalvador@suse.de>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: linux-kernel@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+ "David S. Miller" <davem@davemloft.net>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -149,157 +90,52 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 25.02.20 22:46, Alexander Duyck wrote:
-> On Tue, 2020-02-25 at 19:49 +0100, David Hildenbrand wrote:
->>>>  /*
->>>>   * Scan pfn range [start,end) to find movable/migratable pages (LRU pages,
->>>> - * non-lru movable pages and hugepages). We scan pfn because it's much
->>>> - * easier than scanning over linked list. This function returns the pfn
->>>> - * of the first found movable page if it's found, otherwise 0.
->>>> + * non-lru movable pages and hugepages).
->>>> + *
->>>> + * Returns:
->>>> + *	0 in case a movable page is found and movable_pfn was updated.
->>>> + *	-ENOENT in case no movable page was found.
->>>> + *	-EBUSY in case a definetly unmovable page was found.
->>>>   */
->>>> -static unsigned long scan_movable_pages(unsigned long start, unsigned long end)
->>>> +static int scan_movable_pages(unsigned long start, unsigned long end,
->>>> +			      unsigned long *movable_pfn)
->>>>  {
->>>>  	unsigned long pfn;
->>>>  
->>>> @@ -1247,18 +1251,29 @@ static unsigned long scan_movable_pages(unsigned long start, unsigned long end)
->>>>  			continue;
->>>>  		page = pfn_to_page(pfn);
->>>>  		if (PageLRU(page))
->>>> -			return pfn;
->>>> +			goto found;
->>>>  		if (__PageMovable(page))
->>>> -			return pfn;
->>>> +			goto found;
->>>> +
->>>> +		/*
->>>> +		 * Unmovable PageOffline() pages where somebody still holds
->>>> +		 * a reference count (after MEM_GOING_OFFLINE) can definetly
->>>> +		 * not be offlined.
->>>> +		 */
->>>> +		if (PageOffline(page) && page_count(page))
->>>> +			return -EBUSY;
->>>
->>> So the comment confused me a bit because technically this function isn't
->>> about offlining memory, it is about finding movable pages. I had to do a
->>> bit of digging to find the only consumer is __offline_pages, but if we are
->>> going to talk about "offlining" instead of "moving" in this function it
->>> might make sense to rename it.
->>
->> Well, it's contained in memory_hotplug.c, and the only user of moving
->> pages around in there is offlining code :) And it's job is to locate
->> movable pages, skip over some (temporary? unmovable ones) and (now)
->> indicate definitely unmovable ones.
->>
->> Any idea for a better name?
->> scan_movable_pages_and_stop_on_definitely_unmovable() is not so nice :)
-> 
-> I dunno. What I was getting at is that the wording here would make it
-> clearer if you simply stated that these pages "can definately not be
-> moved". Saying you cannot offline a page that is PageOffline seems kind of
-> redundant, then again calling it an Unmovable and then saying it cannot be
-> moves is also redundant I suppose. In the end you don't move them, but
-
-So, in summary, there are
-- PageOffline() pages that are movable (balloon compaction).
-- PageOffline() pages that cannot be moved and cannot be offlined (e.g.,
-  no balloon compaction enabled, XEN, HyperV, ...) . page_count(page) >=
-  0
-- PageOffline() pages that cannot be moved, but can be offlined.
-  page_count(page) == 0.
-
-
-> they can be switched to offline if the page count hits 0. When that
-> happens you simply end up skipping over them in the code for
-> __test_page_isolated_in_pageblock and __offline_isolated_pages.
-
-Yes. The thing with the wording is that pages with (PageOffline(page) &&
-!page_count(page)) can also not really be moved, but they can be skipped
-when offlining. If we call that "moving them to /dev/null", then yes,
-they can be moved to some degree :)
-
-I can certainly do here e.g.,
-
-/*
- * PageOffline() pages that are not marked __PageMovable() and have a
- * reference count > 0 (after MEM_GOING_OFFLINE) are definitely
- * unmovable. If their reference count would be 0, they could be skipped
- * when offlining memory sections.
- */
-
-And maybe I'll add to the function doc, that unmovable pages that are
-skipped in this function can include pages that can be skipped when
-offlining (moving them to nirvana).
-
-Other suggestions?
-
-[...]
-
->>
->> [1] we detect a definite offlining blocker and
->>
->>>> +		} while (!ret);
->>>> +
->>>> +		if (ret != -ENOENT) {
->>>> +			reason = "unmovable page";
->>
->> [2] we abort offlining
->>
->>>> +			goto failed_removal_isolated;
->>>>  		}
->>>>  
->>>>  		/*
-> 
-> Yeah, this is the piece I misread.  I knew the loop this was in previously
-> was looping when returning -ENOENT so for some reason I had it in my head
-> that you were still looping on -EBUSY.
-
-Ah okay, I see. Yeah, that wouldn't make sense for the use case I have :)
-
-> 
-> So the one question I would have is if at this point are we guaranteed
-> that the balloon drivers have already taken care of the page count for all
-> the pages they set to PageOffline? Based on the patch description I was
-> thinking that this was going to be looping for a while waiting for the
-> driver to clear the pages and then walking through them at the end of the
-> loop via check_pages_isolated_cb.
-
-So, e.g., the patch description states
-
-"Let's allow to do that by allowing to isolate any PageOffline() page
-when offlining. This way, we can reach the memory hotplug notifier
-MEM_GOING_OFFLINE, where the driver can signal that he is fine with
-offlining this page by dropping its reference count."
-
-Any balloon driver that does not allow offlining (e.g., XEN, HyperV,
-virtio-balloon), will always have a refcount of (at least) 1. Drivers
-that want to make use of that (esp. virtio-mem, but eventually also
-HyperV), will drop their refcount via the MEM_GOING_OFFLINE call.
-
-So yes, at this point, all applicable users were notified via
-MEM_GOING_OFFLINE and had their chance to decrement the refcount. If
-they didn't, offlining will be aborted.
-
-Thanks again!
-
--- 
-Thanks,
-
-David / dhildenb
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvMi8yNiDkuIrljYgxMjo1MSwgU3VtYW4gQW5uYSB3cm90ZToKPiBIaSBKYXNvbiwK
+Pgo+IE9uIDIvMjQvMjAgMTE6MzkgUE0sIEphc29uIFdhbmcgd3JvdGU6Cj4+IE9uIDIwMjAvMi8y
+NSDkuIrljYg1OjI2LCBTdW1hbiBBbm5hIHdyb3RlOgo+Pj4gVGhlIGZ1bmN0aW9ucyB2cmluZ19u
+ZXdfdmlydHF1ZXVlKCkgYW5kIF9fdnJpbmdfbmV3X3ZpcnRxdWV1ZSgpIGFyZSB1c2VkCj4+PiB3
+aXRoIHNwbGl0IHJpbmdzLCBhbmQgYW55IGFsbG9jYXRpb25zIHdpdGhpbiB0aGVzZSBmdW5jdGlv
+bnMgYXJlIG1hbmFnZWQKPj4+IG91dHNpZGUgb2YgdGhlIC53ZV9vd25fcmluZyBmbGFnLiBUaGUg
+Y29tbWl0IGNiZWVkYjcyYjk3YSAoInZpcnRpb19yaW5nOgo+Pj4gYWxsb2NhdGUgZGVzYyBzdGF0
+ZSBmb3Igc3BsaXQgcmluZyBzZXBhcmF0ZWx5IikgYWxsb2NhdGVzIHRoZSBkZXNjIHN0YXRlCj4+
+PiB3aXRoaW4gdGhlIF9fdnJpbmdfbmV3X3ZpcnRxdWV1ZSgpIGJ1dCBmcmVlcyBpdCBvbmx5IHdo
+ZW4gdGhlCj4+PiAud2Vfb3duX3JpbmcKPj4+IGZsYWcgaXMgc2V0LiBUaGlzIGxlYWRzIHRvIGEg
+bWVtb3J5IGxlYWsgd2hlbiBmcmVlaW5nIHN1Y2ggYWxsb2NhdGVkCj4+PiB2aXJ0cXVldWVzIHdp
+dGggdGhlIHZyaW5nX2RlbF92aXJ0cXVldWUoKSBmdW5jdGlvbi4KPj4+Cj4+PiBGaXggdGhpcyBi
+eSBtb3ZpbmcgdGhlIGRlc2Nfc3RhdGUgZnJlZSBjb2RlIG91dHNpZGUgdGhlIGZsYWcgYW5kIG9u
+bHkKPj4+IGZvciBzcGxpdCByaW5ncy4gSXNzdWUgd2FzIGRpc2NvdmVyZWQgZHVyaW5nIHRlc3Rp
+bmcgd2l0aCByZW1vdGVwcm9jCj4+PiBhbmQgdmlydGlvX3JwbXNnLgo+Pj4KPj4+IEZpeGVzOiBj
+YmVlZGI3MmI5N2EgKCJ2aXJ0aW9fcmluZzogYWxsb2NhdGUgZGVzYyBzdGF0ZSBmb3Igc3BsaXQg
+cmluZwo+Pj4gc2VwYXJhdGVseSIpCj4+PiBTaWduZWQtb2ZmLWJ5OiBTdW1hbiBBbm5hPHMtYW5u
+YUB0aS5jb20+Cj4+PiAtLS0KPj4+ICDCoCBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jIHwg
+NCArKy0tCj4+PiAgwqAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlv
+bnMoLSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYyBi
+L2RyaXZlcnMvdmlydGlvL3ZpcnRpb19yaW5nLmMKPj4+IGluZGV4IDg2N2M3ZWJkM2YxMC4uNThi
+OTZiYWE4ZDQ4IDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYwo+
+Pj4gKysrIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYwo+Pj4gQEAgLTIyMDMsMTAgKzIy
+MDMsMTAgQEAgdm9pZCB2cmluZ19kZWxfdmlydHF1ZXVlKHN0cnVjdCB2aXJ0cXVldWUgKl92cSkK
+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2cS0+c3Bs
+aXQucXVldWVfc2l6ZV9pbl9ieXRlcywKPj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB2cS0+c3BsaXQudnJpbmcuZGVzYywKPj4+ICDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2cS0+c3BsaXQucXVldWVfZG1hX2FkZHIp
+Owo+Pj4gLQo+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAga2ZyZWUodnEtPnNwbGl0LmRlc2Nf
+c3RhdGUpOwo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+PiAgwqDCoMKgwqDCoCB9Cj4+PiAr
+wqDCoMKgIGlmICghdnEtPnBhY2tlZF9yaW5nKQo+Pj4gK8KgwqDCoMKgwqDCoMKgIGtmcmVlKHZx
+LT5zcGxpdC5kZXNjX3N0YXRlKTsKPj4gTml0cGljaywgaXQgbG9va3MgdG8gbWUgaXQgd291bGQg
+YmUgbW9yZSBjbGVhciBpZiB3ZSBqdXN0IGZyZWUKPj4gZGVzY19zdGF0ZSB1bmNvbmRpdGlvbmFs
+bHkgaGVyZSAoYW5kIHJlbW92ZSB0aGUga2ZyZWUgZm9yIHBhY2tlZCBhYm92ZSkuCj4gT0ssIGFy
+ZSB5b3Ugc3VyZSB5b3Ugd2FudCB0aGF0IHRvIGJlIGZvbGRlZCBpbnRvIHRoaXMgcGF0Y2g/IEl0
+IGxvb2tzIHRvCj4gbWUgYSBzZXBhcmF0ZSBjbGVhbnVwL2NvbnNvbGlkYXRpb24gcGF0Y2gsIGFu
+ZCBwYWNrZWQgZGVzY19zdGF0ZSBkb2VzCj4gbm90IHN1ZmZlciB0aGlzIG1lbWxlYWssIGFuZCBu
+ZWVkIG5vdCBiZSBiYWNrcG9ydGVkIGludG8gc3RhYmxlIGtlcm5lbHMuCj4KPiByZWdhcmRzCj4g
+U3VtYW4KCgpUaG91Z2ggaXQncyBqdXN0IGEgc21hbGwgdHdlYWssIEknbSBmaW5lIGZvciBsZWF2
+aW5nIGl0IGZvciBmdXR1cmUuCgpTbwoKQWNrZWQtYnk6IEphc29uIFdhbmcgPGphc293YW5nQHJl
+ZGhhdC5jb20+CgpUaGFua3MKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0
+cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcv
+bWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
