@@ -2,101 +2,77 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF76F16F7CC
-	for <lists.virtualization@lfdr.de>; Wed, 26 Feb 2020 07:13:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06D4716F8CF
+	for <lists.virtualization@lfdr.de>; Wed, 26 Feb 2020 08:53:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0911886AC4;
-	Wed, 26 Feb 2020 06:13:13 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B40FA868BD;
+	Wed, 26 Feb 2020 07:53:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1qXIraOusOAl; Wed, 26 Feb 2020 06:13:12 +0000 (UTC)
+	with ESMTP id SQlGHNfPO9KD; Wed, 26 Feb 2020 07:53:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 8E73586AB1;
-	Wed, 26 Feb 2020 06:13:12 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8F40B8688A;
+	Wed, 26 Feb 2020 07:53:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 69F58C0177;
-	Wed, 26 Feb 2020 06:13:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B758C0177;
+	Wed, 26 Feb 2020 07:53:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D20CEC0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 77D15C0177
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 06:13:10 +0000 (UTC)
+ Wed, 26 Feb 2020 07:53:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id C91A285CAA
+ by whitealder.osuosl.org (Postfix) with ESMTP id 6C7A687583
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 06:13:10 +0000 (UTC)
+ Wed, 26 Feb 2020 07:53:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hjZr4wkKZeq9
+ with ESMTP id rVTBzD67C+4d
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 06:13:10 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 441B1851AA
+ Wed, 26 Feb 2020 07:53:18 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from www.kot-begemot.co.uk (ivanoab7.miniserver.com [37.128.132.42])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 18B33872E9
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Feb 2020 06:13:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582697588;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Qomx+ZbKWIrzZtErXMfwcPJrjlc3eZgjsPhGLKwY99k=;
- b=ikzo3AStrM2846tHd/S5/F/ytuVHn8z+qpwTGY8EK53fqgxvWuN3kXXuzl95M4KZIf28JZ
- hWefZKC+SCzVFyZhCds5+TrngI2OjrPDKPTF4RtqzyhDDrSoMhyldTdm+kyaCgdUEGRFRV
- aDiz701cRWmQwUVYQ0ZpTFfAyIUupO4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-147-mlezykjlOrKrQv0WTr5MZQ-1; Wed, 26 Feb 2020 01:13:07 -0500
-X-MC-Unique: mlezykjlOrKrQv0WTr5MZQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4343A800053;
- Wed, 26 Feb 2020 06:13:04 +0000 (UTC)
-Received: from [10.72.13.217] (ovpn-13-217.pek2.redhat.com [10.72.13.217])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 09EC0396;
- Wed, 26 Feb 2020 06:12:30 +0000 (UTC)
-Subject: Re: [PATCH V4 5/5] vdpasim: vDPA device simulator
-From: Jason Wang <jasowang@redhat.com>
-To: Jason Gunthorpe <jgg@mellanox.com>
-References: <20200220061141.29390-1-jasowang@redhat.com>
- <20200220061141.29390-6-jasowang@redhat.com>
- <20200220151215.GU23930@mellanox.com>
- <6c341a77-a297-b7c7-dea5-b3f7b920b1f3@redhat.com>
-Message-ID: <793a1b81-4f78-c405-4aae-f32a2bf67d87@redhat.com>
-Date: Wed, 26 Feb 2020 14:12:26 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ Wed, 26 Feb 2020 07:53:17 +0000 (UTC)
+Received: from tun252.jain.kot-begemot.co.uk ([192.168.18.6]
+ helo=jain.kot-begemot.co.uk)
+ by www.kot-begemot.co.uk with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <anton.ivanov@cambridgegreys.com>)
+ id 1j6rVK-00054O-IM; Wed, 26 Feb 2020 07:53:14 +0000
+Received: from sleer.kot-begemot.co.uk ([192.168.3.72])
+ by jain.kot-begemot.co.uk with esmtps
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <anton.ivanov@cambridgegreys.com>)
+ id 1j6rVI-0004Iu-4J; Wed, 26 Feb 2020 07:53:14 +0000
+Subject: Re: [PATCH v3] virtio: Work around frames incorrectly marked as gso
+To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+References: <20200224132550.2083-1-anton.ivanov@cambridgegreys.com>
+ <CA+FuTSd8P6uQnwisZEh7+nfowW9qKLBEvA4GPg+xUkjBa-6TDA@mail.gmail.com>
+ <4e7757cf-148e-4585-b358-3b38f391275d@cambridgegreys.com>
+ <CA+FuTSdOCJZCVS4xohx+BQmkmq8JALnK=gGc0=qy1TbjY707ag@mail.gmail.com>
+ <93cb2b3f-6cae-8cf1-5fab-93fa34c14628@cambridgegreys.com>
+ <CA+FuTScEXRwYtFzn-jtFhV0dNKNQqKPBwCWaNORJW=ERU=izMA@mail.gmail.com>
+ <6b83116c-2cca-fb03-1c13-bb436dccf1b3@cambridgegreys.com>
+ <cd1b4084-af6b-7fd9-f182-8b32a3c8d837@cambridgegreys.com>
+ <CA+FuTSebC064cZXTz_n7jXLrtAcuXxp2N_jiAdi3v2=A6fBBJw@mail.gmail.com>
+From: Anton Ivanov <anton.ivanov@cambridgegreys.com>
+Organization: Cambridge Greys
+Message-ID: <f7983902-6f53-fe5f-263b-6555b5a1e883@cambridgegreys.com>
+Date: Wed, 26 Feb 2020 07:53:11 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <6c341a77-a297-b7c7-dea5-b3f7b920b1f3@redhat.com>
+In-Reply-To: <CA+FuTSebC064cZXTz_n7jXLrtAcuXxp2N_jiAdi3v2=A6fBBJw@mail.gmail.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "mst@redhat.com" <mst@redhat.com>,
- "mhabets@solarflare.com" <mhabets@solarflare.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "rob.miller@broadcom.com" <rob.miller@broadcom.com>,
- "lulu@redhat.com" <lulu@redhat.com>, "hanand@xilinx.com" <hanand@xilinx.com>,
- "hch@infradead.org" <hch@infradead.org>,
- "eperezma@redhat.com" <eperezma@redhat.com>,
- "haotian.wang@sifive.com" <haotian.wang@sifive.com>,
- Shahaf Shuler <shahafs@mellanox.com>, Parav Pandit <parav@mellanox.com>,
- Jiri Pirko <jiri@mellanox.com>,
- "xiao.w.wang@intel.com" <xiao.w.wang@intel.com>,
- "stefanha@redhat.com" <stefanha@redhat.com>,
- "zhihong.wang@intel.com" <zhihong.wang@intel.com>,
- "rdunlap@infradead.org" <rdunlap@infradead.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "maxime.coquelin@redhat.com" <maxime.coquelin@redhat.com>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Eric Dumazet <eric.dumazet@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Network Development <netdev@vger.kernel.org>, linux-um@lists.infradead.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,54 +84,124 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMi8yMSDkuIvljYgzOjU3LCBKYXNvbiBXYW5nIHdyb3RlOgo+Cj4gT24gMjAyMC8y
-LzIwIOS4i+WNiDExOjEyLCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6Cj4+IE9uIFRodSwgRmViIDIw
-LCAyMDIwIGF0IDAyOjExOjQxUE0gKzA4MDAsIEphc29uIFdhbmcgd3JvdGU6Cj4+PiArc3RhdGlj
-IHZvaWQgdmRwYXNpbV9kZXZpY2VfcmVsZWFzZShzdHJ1Y3QgZGV2aWNlICpkZXYpCj4+PiArewo+
-Pj4gK8KgwqDCoCBzdHJ1Y3QgdmRwYXNpbSAqdmRwYXNpbSA9IGRldl90b19zaW0oZGV2KTsKPj4+
-ICsKPj4+ICvCoMKgwqAgY2FuY2VsX3dvcmtfc3luYygmdmRwYXNpbS0+d29yayk7Cj4+PiArwqDC
-oMKgIGtmcmVlKHZkcGFzaW0tPmJ1ZmZlcik7Cj4+PiArwqDCoMKgIHZob3N0X2lvdGxiX2ZyZWUo
-dmRwYXNpbS0+aW9tbXUpOwo+Pj4gK8KgwqDCoCBrZnJlZSh2ZHBhc2ltKTsKPj4+ICt9Cj4+PiAr
-Cj4+PiArc3RhdGljIHN0cnVjdCB2ZHBhc2ltICp2ZHBhc2ltX2NyZWF0ZSh2b2lkKQo+Pj4gK3sK
-Pj4+ICvCoMKgwqAgc3RydWN0IHZpcnRpb19uZXRfY29uZmlnICpjb25maWc7Cj4+PiArwqDCoMKg
-IHN0cnVjdCB2aG9zdF9pb3RsYiAqaW9tbXU7Cj4+PiArwqDCoMKgIHN0cnVjdCB2ZHBhc2ltICp2
-ZHBhc2ltOwo+Pj4gK8KgwqDCoCBzdHJ1Y3QgZGV2aWNlICpkZXY7Cj4+PiArwqDCoMKgIHZvaWQg
-KmJ1ZmZlcjsKPj4+ICvCoMKgwqAgaW50IHJldCA9IC1FTk9NRU07Cj4+PiArCj4+PiArwqDCoMKg
-IGlvbW11ID0gdmhvc3RfaW90bGJfYWxsb2MoMjA0OCwgMCk7Cj4+PiArwqDCoMKgIGlmICghaW9t
-bXUpCj4+PiArwqDCoMKgwqDCoMKgwqAgZ290byBlcnI7Cj4+PiArCj4+PiArwqDCoMKgIGJ1ZmZl
-ciA9IGttYWxsb2MoUEFHRV9TSVpFLCBHRlBfS0VSTkVMKTsKPj4+ICvCoMKgwqAgaWYgKCFidWZm
-ZXIpCj4+PiArwqDCoMKgwqDCoMKgwqAgZ290byBlcnJfYnVmZmVyOwo+Pj4gKwo+Pj4gK8KgwqDC
-oCB2ZHBhc2ltID0ga3phbGxvYyhzaXplb2YoKnZkcGFzaW0pLCBHRlBfS0VSTkVMKTsKPj4+ICvC
-oMKgwqAgaWYgKCF2ZHBhc2ltKQo+Pj4gK8KgwqDCoMKgwqDCoMKgIGdvdG8gZXJyX2FsbG9jOwo+
-Pj4gKwo+Pj4gK8KgwqDCoCB2ZHBhc2ltLT5idWZmZXIgPSBidWZmZXI7Cj4+PiArwqDCoMKgIHZk
-cGFzaW0tPmlvbW11ID0gaW9tbXU7Cj4+PiArCj4+PiArwqDCoMKgIGNvbmZpZyA9ICZ2ZHBhc2lt
-LT5jb25maWc7Cj4+PiArwqDCoMKgIGNvbmZpZy0+bXR1ID0gMTUwMDsKPj4+ICvCoMKgwqAgY29u
-ZmlnLT5zdGF0dXMgPSBWSVJUSU9fTkVUX1NfTElOS19VUDsKPj4+ICvCoMKgwqAgZXRoX3JhbmRv
-bV9hZGRyKGNvbmZpZy0+bWFjKTsKPj4+ICsKPj4+ICvCoMKgwqAgSU5JVF9XT1JLKCZ2ZHBhc2lt
-LT53b3JrLCB2ZHBhc2ltX3dvcmspOwo+Pj4gK8KgwqDCoCBzcGluX2xvY2tfaW5pdCgmdmRwYXNp
-bS0+bG9jayk7Cj4+PiArCj4+PiArwqDCoMKgIHZyaW5naF9zZXRfaW90bGIoJnZkcGFzaW0tPnZx
-c1swXS52cmluZywgdmRwYXNpbS0+aW9tbXUpOwo+Pj4gK8KgwqDCoCB2cmluZ2hfc2V0X2lvdGxi
-KCZ2ZHBhc2ltLT52cXNbMV0udnJpbmcsIHZkcGFzaW0tPmlvbW11KTsKPj4+ICsKPj4+ICvCoMKg
-wqAgZGV2ID0gJnZkcGFzaW0tPmRldjsKPj4+ICvCoMKgwqAgZGV2LT5yZWxlYXNlID0gdmRwYXNp
-bV9kZXZpY2VfcmVsZWFzZTsKPj4+ICvCoMKgwqAgZGV2LT5jb2hlcmVudF9kbWFfbWFzayA9IERN
-QV9CSVRfTUFTSyg2NCk7Cj4+PiArwqDCoMKgIHNldF9kbWFfb3BzKGRldiwgJnZkcGFzaW1fZG1h
-X29wcyk7Cj4+PiArwqDCoMKgIGRldl9zZXRfbmFtZShkZXYsICIlcyIsIFZEUEFTSU1fTkFNRSk7
-Cj4+PiArCj4+PiArwqDCoMKgIHJldCA9IGRldmljZV9yZWdpc3RlcigmdmRwYXNpbS0+ZGV2KTsK
-Pj4+ICvCoMKgwqAgaWYgKHJldCkKPj4+ICvCoMKgwqDCoMKgwqDCoCBnb3RvIGVycl9pbml0Owo+
-PiBJdCBpcyBhIGJpdCB3ZWlyZCB0byBiZSBjcmVhdGluZyB0aGlzIGR1bW15IHBhcmVudCwgY291
-bGRuJ3QgdGhpcyBiZQo+PiBkb25lIGJ5IGp1c3QgcGFzc2luZyBhIE5VTEwgcGFyZW50IHRvIHZk
-cGFfYWxsb2NfZGV2aWNlLCBkb2luZwo+PiBzZXRfZG1hX29wcygpIG9uIHRoZSB2ZHBhc2ltLT52
-ZHBhLT5kZXYgYW5kIHNldHRpbmcgZG1hX2RldmljZSB0bwo+PiB2ZHBhc2ltLT52ZHBhLT5kZXYg
-Pwo+Cj4KPiBJIHRoaW5rIGl0IHdvcmtzLgoKClJldGhpbmsgYWJvdXQgdGhpcywgc2luY2UgbW9z
-dCBoYXJkd2FyZSB2RFBBIGRyaXZlciB3aWxsIGhhdmUgYSBwYXJlbnQgCmFuZCB3aWxsIHVzZSBp
-dCB0byBmaW5kIHRoZSBwYXJlbnQgc3RydWN0dXJlIGUuZwoKZGV2X2dldF9kcnZkYXRhKHZkcGEt
-PmRldi0+cGFyZW50KQoKU28gSSBrZWVwIHRoaXMgZHVtbXkgcGFyZW50IGluIFY1LgoKVGhhbmtz
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVh
-bGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRp
-b24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3ZpcnR1YWxpemF0aW9u
+On 25/02/2020 16:26, Willem de Bruijn wrote:
+>>>>>> An skb_dump() + dump_stack() when the packet socket gets such a
+>>>>>> packet may point us to the root cause and fix that.
+>>>>>
+>>>>> We tried dump stack, it was not informative - it was just the recvmmsg
+>>>>> call stack coming from the UML until it hits the relevant recv bit in
+>>>>> af_packet - it does not tell us where the packet is coming from.
+>>>>>
+>>>>> Quoting from the message earlier in the thread:
+>>>>>
+>>>>> [ 2334.180854] Call Trace:
+>>>>> [ 2334.181947]  dump_stack+0x5c/0x80
+>>>>> [ 2334.183021]  packet_recvmsg.cold+0x23/0x49
+>>>>> [ 2334.184063]  ___sys_recvmsg+0xe1/0x1f0
+>>>>> [ 2334.185034]  ? packet_poll+0xca/0x130
+>>>>> [ 2334.186014]  ? sock_poll+0x77/0xb0
+>>>>> [ 2334.186977]  ? ep_item_poll.isra.0+0x3f/0xb0
+>>>>> [ 2334.187936]  ? ep_send_events_proc+0xf1/0x240
+>>>>> [ 2334.188901]  ? dequeue_signal+0xdb/0x180
+>>>>> [ 2334.189848]  do_recvmmsg+0xc8/0x2d0
+>>>>> [ 2334.190728]  ? ep_poll+0x8c/0x470
+>>>>> [ 2334.191581]  __sys_recvmmsg+0x108/0x150
+>>>>> [ 2334.192441]  __x64_sys_recvmmsg+0x25/0x30
+>>>>> [ 2334.193346]  do_syscall_64+0x53/0x140
+>>>>> [ 2334.194262]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+>>>>
+>>>> That makes sense. skb_dump might show more interesting details about
+>>>> the packet.
+>>>
+>>> I will add that and retest later today.
+>>
+>>
+>> skb len=818 headroom=2 headlen=818 tailroom=908
+>> mac=(2,14) net=(16,0) trans=16
+>> shinfo(txflags=0 nr_frags=0 gso(size=752 type=0 segs=1))
+>> csum(0x100024 ip_summed=3 complete_sw=0 valid=0 level=0)
+>> hash(0x0 sw=0 l4=0) proto=0x0800 pkttype=4 iif=0
+>> sk family=17 type=3 proto=0
+>>
+>> Deciphering the actual packet data gives a
+>>
+>> TCP packet, ACK and PSH set.
+>>
+>> The PSH flag looks like the only "interesting" thing about it in first read.
+> 
+> Thanks.
+> 
+> TCP always sets the PSH bit on a GSO packet as of commit commit
+> 051ba67447de  ("tcp: force a PSH flag on TSO packets"), so that is
+> definitely informative.
+> 
+> The lower gso size might come from a path mtu probing depending on
+> tcp_base_mss, but that's definitely wild speculation. Increasing that
+> value to, say, 1024, could tell us.
+> 
+> In this case it may indeed not be a GSO packet. As 752 is the MSS + 28
+> B TCP header including timestamp + 20 B IPv4 header + 14B Eth header.
+> Which adds up to 814 already.
+> 
+> Not sure what those 2 B between skb->data and mac_header are. Was this
+> captured inside packet_rcv? 
+
+af_packet, packet_rcv
+
+https://elixir.bootlin.com/linux/latest/source/net/packet/af_packet.c#L2026
+
+> network_header and transport_header both
+> at 16B offset is also sketchy, but again may be an artifact of where
+> exactly this is being read.
+> 
+> Perhaps this is a segment of a larger GSO packet that is retransmitted
+> in part. Like an mtu probe or loss probe. See for instance this in
+> tcp_send_loss_probe for  how a single MSS is extracted:
+> 
+>         if ((pcount > 1) && (skb->len > (pcount - 1) * mss)) {
+>                  if (unlikely(tcp_fragment(sk, TCP_FRAG_IN_RTX_QUEUE, skb,
+>                                            (pcount - 1) * mss, mss,
+>                                            GFP_ATOMIC)))
+>                          goto rearm_timer;
+>                  skb = skb_rb_next(skb);
+>          }
+> 
+> Note that I'm not implicating this specific code. I don't see anything
+> wrong with it. Just an indication that a trace would be very
+> informative, as it could tell if any of these edge cases is being hit.
+
+I will be honest, I have found it a bit difficult to trace.
+
+At the point where this is detected, the packet is already in the vEth 
+interface queue and is being read by recvmmsg on a raw socket.
+
+The flags + gso size combination happened long before that - even before 
+it was being placed in the queue.
+
+What is clear so far is that while the packet has invalid 
+gso_size/gso_type combination, it is an otherwise valid tcp frame.
+
+I will stick the debug into is_gso (with a backtrace) instead and re-run 
+it later today to see if this can pick it up elsewhere in the stack.
+
+> 
+> _______________________________________________
+> linux-um mailing list
+> linux-um@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/linux-um
+> 
+
+
+-- 
+Anton R. Ivanov
+Cambridgegreys Limited. Registered in England. Company Number 10273661
+https://www.cambridgegreys.com/
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
