@@ -1,103 +1,57 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D1091735FB
-	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 12:21:48 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D16C173ABB
+	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 16:08:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 246C786D62;
-	Fri, 28 Feb 2020 11:21:47 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C87DB88184;
+	Fri, 28 Feb 2020 15:08:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rQ-DZT6dSPiG; Fri, 28 Feb 2020 11:21:46 +0000 (UTC)
+	with ESMTP id q1fv7zT6levu; Fri, 28 Feb 2020 15:08:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C597686D59;
-	Fri, 28 Feb 2020 11:21:46 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 15CDA8817F;
+	Fri, 28 Feb 2020 15:08:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A16B5C0177;
-	Fri, 28 Feb 2020 11:21:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D4050C0177;
+	Fri, 28 Feb 2020 15:08:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C8A37C0177
- for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:21:44 +0000 (UTC)
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 78C6EC0177;
+ Fri, 28 Feb 2020 15:08:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id B1D9D86D59
- for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:21:44 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 66DB986CBB;
+ Fri, 28 Feb 2020 15:08:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IamT4D-RFX72
- for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:21:44 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 155AB86D55
- for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:21:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582888902;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OmP9QnBCw2YJQJIPW/QHveI7lGzTStctEOZNIPuqkxA=;
- b=OkzOGw5G6WFd+PSeQkrTQxdJgAAV8XtGOFqka2wbFJEiLalFajrLceh7mztHW1zFd8RQ3G
- bLi5Gxfc0/8cAaLlco38pIoFUW7mNTBz5z0cDKtUMdcA68BskvamQ5hTrsbsUWSYYI4mV5
- Dw0U63qcocIABHbvw8GbByhT21dSXIY=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-60-SbdkB5sgPEGFh3K5QWpFMw-1; Fri, 28 Feb 2020 06:21:40 -0500
-X-MC-Unique: SbdkB5sgPEGFh3K5QWpFMw-1
-Received: by mail-wr1-f71.google.com with SMTP id u18so1192302wrn.11
- for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 03:21:40 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=OmP9QnBCw2YJQJIPW/QHveI7lGzTStctEOZNIPuqkxA=;
- b=qUL+nrJ3RJuV21bjESUEUT1Mfr78Ld2pdVmgjmE3wVXKayPkMDK4LUxdobBKw0RdY6
- WgtTYFfvzkAD4JV3CqlaeNaNF2nelFgVCfTBnDtOW302TnDvoy99jhMCzFdrdGbWdLs3
- MxuF73w2l1dwOXnvFvHmHtWGPcp8lMrYVzeFYonkbe1BqWX5bIw81iJhoKFBJpCo8Bic
- EyGcKvTroQztWuqMUuHysHlfgwsWtgLWGzPUYegbwBJ0sNT3ND+R/X8Q4+B6k+L8omWo
- dZl3aalXxAJvkWBJ8kbfQjuxAsl5i1b72UkGK6lt5GBmpQ7gI3ReMLp4u3eiwS20ygzg
- cTuw==
-X-Gm-Message-State: APjAAAW/PNONTxJSCBKdq1ScchrIFeyt0YgYoVO2PG7sSQEB/DNsBPtn
- YtWumGTjNEFul0ynNH1tn6OVudYGh5t+dRi7OufEVFlO0JSOxyraljAGqJ07jkjox+xkmIG4GzP
- AGgyEy4YFCne2Mh4jktWDkDSseJaWEZlW7wghwceZDA==
-X-Received: by 2002:adf:f84d:: with SMTP id d13mr4552705wrq.92.1582888899685; 
- Fri, 28 Feb 2020 03:21:39 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwu+eedluZq+tfSsf4HCoSRE+8TOQr8FvdgA3fees6Gr2KY5+Lp2eWu0FRBg+JBelZ7ch+k9Q==
-X-Received: by 2002:adf:f84d:: with SMTP id d13mr4552677wrq.92.1582888899401; 
- Fri, 28 Feb 2020 03:21:39 -0800 (PST)
-Received: from ?IPv6:2001:b07:6468:f312:d0d9:ea10:9775:f33f?
- ([2001:b07:6468:f312:d0d9:ea10:9775:f33f])
- by smtp.gmail.com with ESMTPSA id 18sm1802186wmf.1.2020.02.28.03.21.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Feb 2020 03:21:38 -0800 (PST)
-Subject: Re: [virtio-dev] VIRTIO adoption in other hypervisors
-To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
-References: <87mu93vwy2.fsf@linaro.org>
- <fca8366e-662f-af2f-382c-0216d9df63f8@redhat.com> <87k147vu29.fsf@linaro.org>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <71f1773d-579d-fec9-cd49-e500bbca1bc4@redhat.com>
-Date: Fri, 28 Feb 2020 12:21:35 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <87k147vu29.fsf@linaro.org>
-Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: Wei Liu <liuw@liuw.name>, jan.kiszka@siemens.com,
- Stefano Stabellini <sstabellini@kernel.org>, virtio-dev@lists.oasis-open.org,
- virtualization@lists.linux-foundation.org
+ with ESMTP id aicAfVxAK_xY; Fri, 28 Feb 2020 15:08:32 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id E762986AB3;
+ Fri, 28 Feb 2020 15:08:31 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id 8E595431; Fri, 28 Feb 2020 16:08:28 +0100 (CET)
+From: Joerg Roedel <joro@8bytes.org>
+To: iommu@lists.linux-foundation.org
+Subject: [PATCH 00/14] iommu: Move iommu_fwspec out of 'struct device'
+Date: Fri, 28 Feb 2020 16:08:06 +0100
+Message-Id: <20200228150820.15340-1-joro@8bytes.org>
+X-Mailer: git-send-email 2.17.1
+Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
+ Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>, Will Deacon <will@kernel.org>,
+ linux-arm-msm@vger.kernel.org, Joerg Roedel <joro@8bytes.org>,
+ Sudeep Holla <sudeep.holla@arm.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Rob Clark <robdclark@gmail.com>,
+ Thierry Reding <thierry.reding@gmail.com>, linux-mediatek@lists.infradead.org,
+ Andy Gross <agross@kernel.org>, Hanjun Guo <guohanjun@huawei.com>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>, Sean Paul <sean@poorly.run>,
+ Robin Murphy <robin.murphy@arm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,17 +63,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gMjgvMDIvMjAgMTI6MTgsIEFsZXggQmVubsOpZSB3cm90ZToKPj4gT1MgWCBIeXBlcnZpc29y
-LmZyYW1ld29yayBqdXN0IHVzZXMgUUVNVSwgc28gaXQgY2FuIHVzZSB2aXJ0aW8gZGV2aWNlcwo+
-PiB0b28uICBWaXJ0dWFsQm94IGFsc28gc3VwcG9ydHMgdmlydGlvIGRldmljZXMuCj4gSSBndWVz
-cyB0aGVzZSBkb24ndCBkbyBhbnkgc29ydCBvZiB2aG9zdCBzdXBwb3J0IHNvIGFsbCB2aXJ0aW8g
-ZGV2aWNlcwo+IGFyZSBoYW5kbGVkIGRpcmVjdGx5IGluIFFFTVU/CgpPUyBYIGNhbiB1c2Ugdmhv
-c3QtdXNlci4KClBhb2xvCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMu
-bGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21h
-aWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+Hi,
+
+here is a patch-set to rename iommu_param to dev_iommu and
+establish it as a struct for generic per-device iommu-data.
+Also move the iommu_fwspec pointer from struct device into
+dev_iommu to have less iommu-related pointers in struct
+device.
+
+The bigger part of this patch-set moves the iommu_priv
+pointer from struct iommu_fwspec to dev_iommu, making is
+usable for iommu-drivers which do not use fwspecs.
+
+The changes for that were mostly straightforward, except for
+the arm-smmu (_not_ arm-smmu-v3) and the qcom iommu driver.
+Unfortunatly I don't have the hardware for those, so any
+testing of these drivers is greatly appreciated.
+
+I boot-tested these changes on arm-smmu-v3 enabled KVM VM.
+
+Please review.
+
+Regards,
+
+	Joerg
+
+Joerg Roedel (14):
+  ACPI/IORT: Remove direct access of dev->iommu_fwspec
+  drm/msm/mdp5: Remove direct access of dev->iommu_fwspec
+  iommu/tegra-gart: Remove direct access of dev->iommu_fwspec
+  iommu/arm-smmu: Fix uninitilized variable warning
+  iommu: Rename struct iommu_param to dev_iommu
+  iommu: Move iommu_fwspec to struct dev_iommu
+  iommu: Introduce accessors for iommu private data
+  iommu/arm-smmu-v3: Use accessor functions for iommu private data
+  iommu/arm-smmu: Use accessor functions for iommu private data
+  iommu/renesas: Use accessor functions for iommu private data
+  iommu/mediatek: Use accessor functions for iommu private data
+  iommu/qcom: Use accessor functions for iommu private data
+  iommu/virtio: Use accessor functions for iommu private data
+  iommu: Move fwspec->iommu_priv to struct dev_iommu
+
+ drivers/acpi/arm64/iort.c                |  3 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c |  2 +-
+ drivers/iommu/arm-smmu-v3.c              | 10 ++--
+ drivers/iommu/arm-smmu.c                 | 58 +++++++++++-----------
+ drivers/iommu/iommu.c                    | 31 ++++++------
+ drivers/iommu/ipmmu-vmsa.c               |  7 +--
+ drivers/iommu/mtk_iommu.c                | 13 +++--
+ drivers/iommu/mtk_iommu_v1.c             | 14 +++---
+ drivers/iommu/qcom_iommu.c               | 61 ++++++++++++++----------
+ drivers/iommu/tegra-gart.c               |  2 +-
+ drivers/iommu/virtio-iommu.c             | 11 ++---
+ include/linux/device.h                   |  7 ++-
+ include/linux/iommu.h                    | 29 ++++++++---
+ 13 files changed, 137 insertions(+), 111 deletions(-)
+
+-- 
+2.17.1
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
