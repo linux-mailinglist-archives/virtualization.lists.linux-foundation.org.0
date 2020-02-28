@@ -1,70 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9019E173ECB
-	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 18:47:52 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F5FC174056
+	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 20:36:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3E32F86EC7;
-	Fri, 28 Feb 2020 17:47:51 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id BBF86876CC;
+	Fri, 28 Feb 2020 19:36:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id q3b05mw9Jiye; Fri, 28 Feb 2020 17:47:49 +0000 (UTC)
+	with ESMTP id yCeh-sqrrQMI; Fri, 28 Feb 2020 19:36:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 6EAC386ED0;
-	Fri, 28 Feb 2020 17:47:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0E3BA876D4;
+	Fri, 28 Feb 2020 19:36:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5A0C4C1D89;
-	Fri, 28 Feb 2020 17:47:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E18F4C0177;
+	Fri, 28 Feb 2020 19:36:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4BAF2C0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 06437C0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:47:47 +0000 (UTC)
+ Fri, 28 Feb 2020 19:36:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4793588273
+ by whitealder.osuosl.org (Postfix) with ESMTP id E0B71876C9
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:47:47 +0000 (UTC)
+ Fri, 28 Feb 2020 19:36:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CmOe5XC9Td-V
+ with ESMTP id xlH6BJgXr1oy
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:47:46 +0000 (UTC)
+ Fri, 28 Feb 2020 19:36:10 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from Galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by hemlock.osuosl.org (Postfix) with ESMTPS id BFC3A88271
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4941385B9D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:47:46 +0000 (UTC)
-Received: from p5de0bf0b.dip0.t-ipconnect.de ([93.224.191.11]
- helo=nanos.tec.linutronix.de)
- by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
- (Exim 4.80) (envelope-from <tglx@linutronix.de>)
- id 1j7jjh-0003xG-Gx; Fri, 28 Feb 2020 18:47:41 +0100
-Received: by nanos.tec.linutronix.de (Postfix, from userid 1000)
- id E66F2100EA1; Fri, 28 Feb 2020 18:47:40 +0100 (CET)
-From: Thomas Gleixner <tglx@linutronix.de>
-To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- xen-devel@lists.xenproject.org, x86@kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
-Subject: Re: [PATCH] x86/ioperm: add new paravirt function update_io_bitmap
-In-Reply-To: <4715c1af-5854-9f2c-2145-fba43e82d350@suse.com>
-References: <20200218154712.25490-1-jgross@suse.com>
- <4715c1af-5854-9f2c-2145-fba43e82d350@suse.com>
-Date: Fri, 28 Feb 2020 18:47:40 +0100
-Message-ID: <87wo86fvsz.fsf@nanos.tec.linutronix.de>
+ Fri, 28 Feb 2020 19:36:10 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk4.altibox.net (Postfix) with ESMTPS id 0483980514;
+ Fri, 28 Feb 2020 20:36:04 +0100 (CET)
+Date: Fri, 28 Feb 2020 20:36:03 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Subject: Re: [PATCH v4 0/4] drm: Provide a simple encoder
+Message-ID: <20200228193603.GA22966@ravnborg.org>
+References: <20200228081828.18463-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-X-Linutronix-Spam-Score: -1.0
-X-Linutronix-Spam-Level: -
-X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required, ALL_TRUSTED=-1,
- SHORTCIRCUIT=-0.0001
-Cc: Thomas Hellstrom <thellstrom@vmware.com>,
- Stefano Stabellini <sstabellini@kernel.org>, "VMware,
- Inc." <pv-drivers@vmware.com>, stable@vger.kernel.org,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- "H. Peter Anvin" <hpa@zytor.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Content-Disposition: inline
+In-Reply-To: <20200228081828.18463-1-tzimmermann@suse.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=XpTUx2N9 c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10
+ a=M3ojcJYEX91-BlvvUz8A:9 a=CjuIK1q_8ugA:10
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ virtualization@lists.linux-foundation.org, noralf@tronnes.org, daniel@ffwll.ch,
+ alexander.deucher@amd.com, spice-devel@lists.freedesktop.org,
+ emil.velikov@collabora.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,14 +74,35 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-SsO8cmdlbiBHcm/DnyA8amdyb3NzQHN1c2UuY29tPiB3cml0ZXM6Cgo+IEZyaWVuZGx5IHBpbmcu
-Li4KCk9vb3BzLiBJIHBpY2sgaXQgdXAgZmlyc3QgdGhpbmcgdG9tb3Jyb3cgbW9ybmluZwpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlv
-biBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcK
-aHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVh
-bGl6YXRpb24=
+Hi Thomas.
+
+On Fri, Feb 28, 2020 at 09:18:24AM +0100, Thomas Zimmermann wrote:
+> Many DRM drivers implement an encoder with an empty implementation. This
+> patchset adds drm_simple_encoder_init(), which drivers can use instead.
+> Except for the destroy callback, the simple encoder's implementation is
+> empty.
+> 
+> The patchset also converts 4 encoder instances to use the simple-encoder
+> helpers. But there are at least 11 other drivers which can use the helper
+> and I think I did not examine all drivers yet.
+> 
+> The patchset was smoke-tested on mgag200 by running the fbdev console
+> and Gnome on X11.
+> 
+> v4:
+> 	* print error messages with drm_err() (Sam)
+> 	* qxl: handle errors of drm_simple_encoder_init() (Sam)
+
+Looked through the patches - all looked good.
+IMO ready to apply.
+
+	Sam
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
