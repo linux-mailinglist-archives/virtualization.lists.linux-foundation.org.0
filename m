@@ -1,65 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D02C4173B85
-	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 16:35:58 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 34B58173D6F
+	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 17:47:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 8354686E42;
-	Fri, 28 Feb 2020 15:35:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id D9B7620429;
+	Fri, 28 Feb 2020 16:47:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uDZovt6sfS1g; Fri, 28 Feb 2020 15:35:56 +0000 (UTC)
+	with ESMTP id Z6S4vz77GumP; Fri, 28 Feb 2020 16:47:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B4B4186A16;
-	Fri, 28 Feb 2020 15:35:56 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 1749B20402;
+	Fri, 28 Feb 2020 16:47:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F561C0177;
-	Fri, 28 Feb 2020 15:35:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D194AC0177;
+	Fri, 28 Feb 2020 16:47:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 19EB9C0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C5BEFC0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 15:35:55 +0000 (UTC)
+ Fri, 28 Feb 2020 16:47:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 09589863A1
+ by silver.osuosl.org (Postfix) with ESMTP id B109E20390
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 15:35:55 +0000 (UTC)
+ Fri, 28 Feb 2020 16:47:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xj6KpknQEKX5
+ with ESMTP id QeksFArCEY2E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 15:35:53 +0000 (UTC)
+ Fri, 28 Feb 2020 16:47:37 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8B2F886371
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by silver.osuosl.org (Postfix) with ESMTPS id 588EF20402
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 15:35:53 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 01DFFAD5D;
- Fri, 28 Feb 2020 15:35:51 +0000 (UTC)
-Subject: Re: [PATCH] x86/ioperm: add new paravirt function update_io_bitmap
-To: xen-devel@lists.xenproject.org, x86@kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
-References: <20200218154712.25490-1-jgross@suse.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <4715c1af-5854-9f2c-2145-fba43e82d350@suse.com>
-Date: Fri, 28 Feb 2020 16:35:50 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Fri, 28 Feb 2020 16:47:37 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id j16so3722022wrt.3
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 28 Feb 2020 08:47:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=references:user-agent:from:to:cc:subject:in-reply-to:date
+ :message-id:mime-version:content-transfer-encoding;
+ bh=hqdZ3zfVfi4HzE+vP/ibkIaCWKQSGWKHZPLXxris7LE=;
+ b=u5FDX5Rom/VOg3uNakTyD8XyRkpyXcIUF7NME9VcB9GU7IvnfGN4xF84K3LdyI0OUs
+ otcOA9PXm4qhA6Pc8nrvr7BlLejLovpuy29uLeZGqXvcsESxnithzW2S3LCse/NXjnuc
+ AOQKe/a6ybnazAzVT99Z5Eff6iFAeZZzAJnr2m7JBZOy9CkEULwalkK+WSlc8z1oDaPB
+ N6YpS66rrj+qE+kFUol7c3YDJSHOFjFgddcdGbZkmvIhM6TnoocNEHmb+14VA2U8D1ap
+ qziG0BLedEBpH0pphjbf0hdrmWnVYBvwxDp3TwYAzCGxnaBW3jlBE/+eaCxoiQ6OeSjG
+ G+aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:references:user-agent:from:to:cc:subject
+ :in-reply-to:date:message-id:mime-version:content-transfer-encoding;
+ bh=hqdZ3zfVfi4HzE+vP/ibkIaCWKQSGWKHZPLXxris7LE=;
+ b=e9DTCd4n1e0RdW73ZLeZp1HzP+jNMTRTyAGGyqiGLqvHVv0uCvJPJFIDTpBUy3A458
+ CtfkCjH78wJDzPWMYZndcv4qBil6Jd1TaR3IlPf+Zm4GuFjjN3sg7HIVBrmniCr4qMxe
+ nBvhYWZyqyTOYi76scCkr/TSsRjR+lxaQypxTI/mL9o9Dhb3KAlkJ1J/RDOIoxcnEur5
+ IkqVMsp56LSO6tF/TQ8Ohr3TadaiZNTvETXeicZ/BPeYmhMPr0PMXE6ISsQZniweS3GR
+ O4Ezl0nDRSZGPU9VzWMDDqRvsThvCxMx1hGVUowwnNPg68mlOJyOiPYKHlG3/VOlk2/R
+ zZsQ==
+X-Gm-Message-State: APjAAAXyMrkPcEZhO25wFBXUsXsGukUjIZqRkxQZpbEtxCszeecx3Jvu
+ jDY9F+XTfnJVHK9Sqra2QEIOaA==
+X-Google-Smtp-Source: APXvYqzr2cH4P2puxpWH8SHeBt+Zm46X7F7zRT6kTCEm1ea2UhVEQKraegBDoLNNxapdbGA2CAHN9A==
+X-Received: by 2002:adf:90e1:: with SMTP id i88mr5786187wri.95.1582908455799; 
+ Fri, 28 Feb 2020 08:47:35 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id 16sm3008915wmi.0.2020.02.28.08.47.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Feb 2020 08:47:34 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 358E61FF87;
+ Fri, 28 Feb 2020 16:47:33 +0000 (GMT)
+References: <87mu93vwy2.fsf@linaro.org>
+ <db75fc2b-ac2e-2351-cc3c-cdb42a50ac24@siemens.com>
+ <0b80da21-ed40-c550-c605-031a209115b1@siemens.com>
+User-agent: mu4e 1.3.8; emacs 27.0.60
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: VIRTIO adoption in other hypervisors
+In-reply-to: <0b80da21-ed40-c550-c605-031a209115b1@siemens.com>
+Date: Fri, 28 Feb 2020 16:47:33 +0000
+Message-ID: <878skmwtei.fsf@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20200218154712.25490-1-jgross@suse.com>
-Content-Language: en-US
-Cc: Thomas Hellstrom <thellstrom@vmware.com>,
- Stefano Stabellini <sstabellini@kernel.org>, "VMware,
- Inc." <pv-drivers@vmware.com>, stable@vger.kernel.org,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Wei Liu <liuw@liuw.name>, virtio-dev@lists.oasis-open.org,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,181 +100,43 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Friendly ping...
-
-On 18.02.20 16:47, Juergen Gross wrote:
-> Commit 111e7b15cf10f6 ("x86/ioperm: Extend IOPL config to control
-> ioperm() as well") reworked the iopl syscall to use I/O bitmaps.
-> 
-> Unfortunately this broke Xen PV domains using that syscall as there
-> is currently no I/O bitmap support in PV domains.
-> 
-> Add I/O bitmap support via a new paravirt function update_io_bitmap
-> which Xen PV domains can use to update their I/O bitmaps via a
-> hypercall.
-> 
-> Fixes: 111e7b15cf10f6 ("x86/ioperm: Extend IOPL config to control ioperm() as well")
-> Reported-by: Jan Beulich <jbeulich@suse.com>
-> Cc: <stable@vger.kernel.org> # 5.5
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> Tested-by: Jan Beulich <jbeulich@suse.com>
-> ---
->   arch/x86/include/asm/io_bitmap.h      |  9 ++++++++-
->   arch/x86/include/asm/paravirt.h       |  7 +++++++
->   arch/x86/include/asm/paravirt_types.h |  4 ++++
->   arch/x86/kernel/paravirt.c            |  5 +++++
->   arch/x86/kernel/process.c             |  2 +-
->   arch/x86/xen/enlighten_pv.c           | 25 +++++++++++++++++++++++++
->   6 files changed, 50 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/x86/include/asm/io_bitmap.h b/arch/x86/include/asm/io_bitmap.h
-> index 02c6ef8f7667..07344d82e88e 100644
-> --- a/arch/x86/include/asm/io_bitmap.h
-> +++ b/arch/x86/include/asm/io_bitmap.h
-> @@ -19,7 +19,14 @@ struct task_struct;
->   void io_bitmap_share(struct task_struct *tsk);
->   void io_bitmap_exit(void);
->   
-> -void tss_update_io_bitmap(void);
-> +void native_tss_update_io_bitmap(void);
-> +
-> +#ifdef CONFIG_PARAVIRT_XXL
-> +#include <asm/paravirt.h>
-> +#else
-> +#define tss_update_io_bitmap native_tss_update_io_bitmap
-> +#endif
-> +
->   #else
->   static inline void io_bitmap_share(struct task_struct *tsk) { }
->   static inline void io_bitmap_exit(void) { }
-> diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-> index 86e7317eb31f..694d8daf4983 100644
-> --- a/arch/x86/include/asm/paravirt.h
-> +++ b/arch/x86/include/asm/paravirt.h
-> @@ -295,6 +295,13 @@ static inline void write_idt_entry(gate_desc *dt, int entry, const gate_desc *g)
->   	PVOP_VCALL3(cpu.write_idt_entry, dt, entry, g);
->   }
->   
-> +#ifdef CONFIG_X86_IOPL_IOPERM
-> +static inline void tss_update_io_bitmap(void)
-> +{
-> +	PVOP_VCALL0(cpu.update_io_bitmap);
-> +}
-> +#endif
-> +
->   static inline void paravirt_activate_mm(struct mm_struct *prev,
->   					struct mm_struct *next)
->   {
-> diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-> index 84812964d3dd..732f62e04ddb 100644
-> --- a/arch/x86/include/asm/paravirt_types.h
-> +++ b/arch/x86/include/asm/paravirt_types.h
-> @@ -140,6 +140,10 @@ struct pv_cpu_ops {
->   
->   	void (*load_sp0)(unsigned long sp0);
->   
-> +#ifdef CONFIG_X86_IOPL_IOPERM
-> +	void (*update_io_bitmap)(void);
-> +#endif
-> +
->   	void (*wbinvd)(void);
->   
->   	/* cpuid emulation, mostly so that caps bits can be disabled */
-> diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-> index 789f5e4f89de..c131ba4e70ef 100644
-> --- a/arch/x86/kernel/paravirt.c
-> +++ b/arch/x86/kernel/paravirt.c
-> @@ -30,6 +30,7 @@
->   #include <asm/timer.h>
->   #include <asm/special_insns.h>
->   #include <asm/tlb.h>
-> +#include <asm/io_bitmap.h>
->   
->   /*
->    * nop stub, which must not clobber anything *including the stack* to
-> @@ -341,6 +342,10 @@ struct paravirt_patch_template pv_ops = {
->   	.cpu.iret		= native_iret,
->   	.cpu.swapgs		= native_swapgs,
->   
-> +#ifdef CONFIG_X86_IOPL_IOPERM
-> +	.cpu.update_io_bitmap	= native_tss_update_io_bitmap,
-> +#endif
-> +
->   	.cpu.start_context_switch	= paravirt_nop,
->   	.cpu.end_context_switch		= paravirt_nop,
->   
-> diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
-> index 839b5244e3b7..3053c85e0e42 100644
-> --- a/arch/x86/kernel/process.c
-> +++ b/arch/x86/kernel/process.c
-> @@ -374,7 +374,7 @@ static void tss_copy_io_bitmap(struct tss_struct *tss, struct io_bitmap *iobm)
->   /**
->    * tss_update_io_bitmap - Update I/O bitmap before exiting to usermode
->    */
-> -void tss_update_io_bitmap(void)
-> +void native_tss_update_io_bitmap(void)
->   {
->   	struct tss_struct *tss = this_cpu_ptr(&cpu_tss_rw);
->   	struct thread_struct *t = &current->thread;
-> diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-> index 1f756ffffe8b..feaf2e68ee5c 100644
-> --- a/arch/x86/xen/enlighten_pv.c
-> +++ b/arch/x86/xen/enlighten_pv.c
-> @@ -72,6 +72,9 @@
->   #include <asm/mwait.h>
->   #include <asm/pci_x86.h>
->   #include <asm/cpu.h>
-> +#ifdef CONFIG_X86_IOPL_IOPERM
-> +#include <asm/io_bitmap.h>
-> +#endif
->   
->   #ifdef CONFIG_ACPI
->   #include <linux/acpi.h>
-> @@ -837,6 +840,25 @@ static void xen_load_sp0(unsigned long sp0)
->   	this_cpu_write(cpu_tss_rw.x86_tss.sp0, sp0);
->   }
->   
-> +#ifdef CONFIG_X86_IOPL_IOPERM
-> +static void xen_update_io_bitmap(void)
-> +{
-> +	struct physdev_set_iobitmap iobitmap;
-> +	struct tss_struct *tss = this_cpu_ptr(&cpu_tss_rw);
-> +
-> +	native_tss_update_io_bitmap();
-> +
-> +	iobitmap.bitmap = (uint8_t *)(&tss->x86_tss) +
-> +			  tss->x86_tss.io_bitmap_base;
-> +	if (tss->x86_tss.io_bitmap_base == IO_BITMAP_OFFSET_INVALID)
-> +		iobitmap.nr_ports = 0;
-> +	else
-> +		iobitmap.nr_ports = IO_BITMAP_BITS;
-> +
-> +	HYPERVISOR_physdev_op(PHYSDEVOP_set_iobitmap, &iobitmap);
-> +}
-> +#endif
-> +
->   static void xen_io_delay(void)
->   {
->   }
-> @@ -1046,6 +1068,9 @@ static const struct pv_cpu_ops xen_cpu_ops __initconst = {
->   	.write_idt_entry = xen_write_idt_entry,
->   	.load_sp0 = xen_load_sp0,
->   
-> +#ifdef CONFIG_X86_IOPL_IOPERM
-> +	.update_io_bitmap = xen_update_io_bitmap,
-> +#endif
->   	.io_delay = xen_io_delay,
->   
->   	/* Xen takes care of %gs when switching to usermode for us */
-> 
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+CkphbiBLaXN6a2EgPGphbi5raXN6a2FAc2llbWVucy5jb20+IHdyaXRlczoKCj4gT24gMjguMDIu
+MjAgMTE6MzAsIEphbiBLaXN6a2Egd3JvdGU6Cj4+IE9uIDI4LjAyLjIwIDExOjE2LCBBbGV4IEJl
+bm7DqWUgd3JvdGU6Cj4+PiBIaSwKPj4+CjxzbmlwPgo+Pj4gSSBiZWxpZXZlIHRoZXJlIGhhcyBi
+ZWVuIHNvbWUgZGV2ZWxvcG1lbnQgd29yayBmb3Igc3VwcG9ydGluZyBWSVJUSU8gb24KPj4+IFhl
+biBhbHRob3VnaCBpdCBzZWVtcyB0byBoYXZlIHN0YWxsZWQgYWNjb3JkaW5nIHRvOgo+Pj4KPj4+
+ICAgIGh0dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1ZpcnRpb19Pbl9YZW4KPj4+Cj4+
+PiBSZWNlbnRseSBhdCBLVk0gRm9ydW0gdGhlcmUgd2FzIEphbidzIHRhbGsgYWJvdXQgSW50ZXIt
+Vk0gc2hhcmVkIG1lbW9yeQo+Pj4gd2hpY2ggcHJvcG9zZWQgaXZzaG1lbXYyIGFzIGEgVklSVElP
+IHRyYW5zcG9ydDoKPj4+Cj4+PiAgICBodHRwczovL2V2ZW50czE5LmxpbnV4Zm91bmRhdGlvbi5v
+cmcvZXZlbnRzL2t2bS1mb3J1bS0yMDE5L3Byb2dyYW0vc2NoZWR1bGUvIAo+Pj4KPj4+Cj4+PiBB
+cyBJIHVuZGVyc3Rvb2QgaXQgdGhpcyB3b3VsZCBhbGxvdyBYZW4gKGFuZCBvdGhlciBoeXBlcnZp
+c29ycykgYSBzaW1wbGUKPj4+IHdheSB0byBiZSBhYmxlIHRvIGNhcnJ5IHZpcnRpbyB0cmFmZmlj
+IGJldHdlZW4gZ3Vlc3QgYW5kIGVuZCBwb2ludC4KPgo+IEFuZCB0byBjbGFyaWZ5IHRoZSBzY29w
+ZSBvZiB0aGlzIGVmZm9ydDogdmlydGlvLW92ZXItaXZzaG1lbSBpcyBub3QKPiB0aGUgZmFzdGVz
+dCBvcHRpb24gdG8gb2ZmZXIgdmlydGlvIHRvIGEgZ3Vlc3QgKHN0YXRpYyAiRE1BIiB3aW5kb3cp
+LAo+IGJ1dCBpdCBpcyB0aGUgc2ltcGxlc3Qgb25lIGZyb20gdGhlIGh5cGVydmlzb3IgUG9WIGFu
+ZCwgdGh1cywgYWxzbwo+IGxpa2VseSB0aGUgZWFzaWVzdCBvbmUgdG8gYXJndWUgb3ZlciB3aGVu
+IGl0IGNvbWVzIHRvIHNlY3VyaXR5IGFuZAo+IHNhZmV0eS4KClNvIHRvIGRyaWxsIGRvd24gb24g
+dGhpcyBpcyB0aGlzIGEgcGFydGljdWxhciBwcm9ibGVtIHdpdGggdHlwZS0xCmh5cGVydmlzb3Jz
+PwoKSXQgc2VlbXMgdG8gbWUgYW55IEtWTS1saWtlIHJ1biBsb29wIHRyaXZpYWxseSBzdXBwb3J0
+cyBhIHJhbmdlIG9mCnZpcnRpbyBkZXZpY2VzIGJ5IHZpcnR1ZSBvZiB0cmFwcGluZyBhY2Nlc3Nl
+cyB0byB0aGUgc2lnbmFsbGluZyBhcmVhIG9mCmEgdmlydHF1ZXVlIGFuZCBhbGxvd2luZyB0aGUg
+Vk1NIHRvIGhhbmRsZSB0aGUgdHJhbnNhY3Rpb24gd2hpY2ggZXZlcgp3YXkgaXQgc2VlcyBmaXQu
+CgpJJ3ZlIG5vdCBxdWl0ZSB1bmRlcnN0b29kIHRoZSB3YXkgWGVuIGludGVyZmFjZXMgdG8gUUVN
+VSBhc2lkZSBmcm9tIGl0J3MKZGlmZmVyZW50IHRvIGV2ZXJ5dGhpbmcgZWxzZS4gTW9yZSBvdmVy
+IGl0IHNlZW1zIHRoZSB0eXBlLTEgaHlwZXJ2aXNvcnMKYXJlIG1vcmUgaW50ZXJlc3RlZCBpbiBw
+cm92aWRpbmcgYmV0dGVyIGlzb2xhdGlvbiBiZXR3ZWVuIHNlZ21lbnRzIG9mIGEKc3lzdGVtIHdo
+ZXJlYXMgVklSVElPIGN1cnJlbnRseSBhc3N1bWVzIGVpdGhlciB0aGUgVk1NIG9yIHRoZSBoeXBl
+cnZpc29yCmhhcyBmdWxsIGFjY2VzcyB0aGUgZnVsbCBndWVzdCBhZGRyZXNzIHNwYWNlLiBJJ3Zl
+IHNlZW4gcXVpdGUgYSBsb3Qgb2YKc2xpZGVzIHRoYXQgd2FudCB0byBpc29sYXRlIHNlY3Rpb25z
+IG9mIGRldmljZSBlbXVsYXRpb24gdG8gc2VwYXJhdGUKcHJvY2Vzc2VzIG9yIGV2ZW4gc2VwYXJh
+dGUgZ3Vlc3QgVk1zLgoKLS0gCkFsZXggQmVubsOpZQpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVh
+bGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZv
+dW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
