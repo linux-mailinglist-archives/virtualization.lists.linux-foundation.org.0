@@ -1,84 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CD3A173E87
-	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 18:29:13 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB28F173E89
+	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 18:29:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 8B9FE86EDD;
-	Fri, 28 Feb 2020 17:29:11 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 6CE5B22686;
+	Fri, 28 Feb 2020 17:29:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vgxM-JbqHvOZ; Fri, 28 Feb 2020 17:29:10 +0000 (UTC)
+	with ESMTP id ZR-GvPxupGhW; Fri, 28 Feb 2020 17:29:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 935B286EEE;
-	Fri, 28 Feb 2020 17:29:10 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4D61822661;
+	Fri, 28 Feb 2020 17:29:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7D5D0C0177;
-	Fri, 28 Feb 2020 17:29:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 31542C0177;
+	Fri, 28 Feb 2020 17:29:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3D3D7C0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9D995C0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:29:08 +0000 (UTC)
+ Fri, 28 Feb 2020 17:29:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 2CB7D8601E
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8956688222
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:29:08 +0000 (UTC)
+ Fri, 28 Feb 2020 17:29:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0bhqwKmpegx3
+ with ESMTP id XQ0QjJpc1EgK
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:29:07 +0000 (UTC)
+ Fri, 28 Feb 2020 17:29:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 54D9286D90
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+ [209.85.221.65])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 016A288265
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 17:29:07 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id y17so3870484wrn.6
+ Fri, 28 Feb 2020 17:29:10 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id e10so2422572wrr.10
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 09:29:07 -0800 (PST)
+ Fri, 28 Feb 2020 09:29:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=UVzPEuR2GzNf0eW4z63MDHB1xQMo/xWUQqLWfLG280k=;
- b=CbMmHBQFWNap3SvvT/pd4tFwlHy/0p/eszdAWT3G2kZuQjh8VT6iBemJ8mEEVvM8DG
- gYzsRDXklS9k3ia0O6auURvqastCyNghO4JhFNgAdpHO53/OjuMAloQqaLoz7KFR/E30
- uDgJYmBBMcMtAEG0IUmBMCkpWifeWcPr3hms0C4RZNN3dchhhB1QDC6I2qyQzjctPZsF
- uxasWOOfceSTO4CZaeNc3l7d5TUOmQ7EmNh6owaXwKVSkJITT19Ny9z5pDLa3fH6FJWE
- OrlY2pz7c1kUntJZ0voKPpcEyk9b6tzY+C4ZLrdSX1aO7Z4vbO9TotUhVgu95nrySL/F
- xT3Q==
+ bh=jos+UmzK8Hc9Z4PLlKLT5wM1USAOZpd5S+CdEr/za4M=;
+ b=yZGrvgqQ3a9ydAmqTudY9IPdx/DjncbPCa+rQvZU9WCCULTVwu2UGa5TOBot6AcdAG
+ Kea81JX8LljjFV+j8BdSJpCyXxETCHdToyup/qvOs2Kn/fZyBQP4EcHVQVMY//0PDYs8
+ SwcXTnK7YZ6v3S+y6nKkPQibqpCdCoHJqW4g0nJu/BIO9DBIa3lGcvtNA2prifHT/Oxw
+ mIbbtRN7Vlm0MUeryNgWY+DQRCOUVg7Y7AL5rM3IrhRJM50B+aLgnA02feYoB5UL1UQX
+ OV1jj+4Aepoo957kJ/DUrhNRR3P3hpqS7hEv+rVY3PJ+0f87zExAbBJD5I+PfPnq0iQz
+ 2xAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=UVzPEuR2GzNf0eW4z63MDHB1xQMo/xWUQqLWfLG280k=;
- b=nSDBO8rC+VcDqQqM38Ka3WgbDJ2ePunJsV884v+hl8EDZxQY5TVV4ILp9+/N8e3HeV
- JGLo2lrtH3DcfwA0inXO0bXyfL3zOMdFafvb7IRg+Gs2x9TeVjG1QpYRvxhR4lpLnlGW
- DLDUoeDqEWenL1EdSucDbWbs/PmMCEaGvf/dQD72XrCkF0VPn7oWRdPeVK9uRTtgnKh+
- K0MOj+mMQrKXuXZDfKgbWEcEzHMu5LJW0kNrdMHHMdFS6ZPihdqrFcnjirsPILUGxm6O
- Esy25g770tpyOEDw70Jz9ytWkPc5hDACHDS5p9xnvkvNWsLSKcQtuv6lbwv7rFpW0lkL
- /xcg==
-X-Gm-Message-State: APjAAAVz1Q2wY8retSqcSY68M7s/EA5EW8jXbvUXhDQ2mlWO1+UC4xJV
- XNAgVO8tU8AOTr4F2FupwFWC2g==
-X-Google-Smtp-Source: APXvYqwoODJ182W+tU34PDRQU6ZjdWMfRs889Si422AXkoD4YBlI28yghK+V6XaUBNiOO+Pcm+sNDw==
-X-Received: by 2002:adf:f3d1:: with SMTP id g17mr5505559wrp.378.1582910945709; 
- Fri, 28 Feb 2020 09:29:05 -0800 (PST)
+ bh=jos+UmzK8Hc9Z4PLlKLT5wM1USAOZpd5S+CdEr/za4M=;
+ b=SGF18Z05EKaYrj8KSXQD8UHkm+P0rtNnBUsgFEDTDBzttcxWRlfqtsU6RewDSF+NC4
+ 3mS/JmXqN/F1mHdJqWfTTEPLg/r4HlPqp/oPESOI4aWO/mi5dTGlpZExOeEMqtn+x7K+
+ 5dbv9SIuQQoAuuB+FxIm8xZxiNoMkS3fO9ibk2twmnEmPGQB0x7wQKMExjZ7GiJmhtFn
+ Fduk6Gamgu3VcbFR6R2yFaJ2fS9UpHWRF42d+T6pfM0Br+c7tBZMcS8at8AH7AfXdwV6
+ 4j9DyCc2N3lRh0lA/hYlMGImM/6nQlklYC2dfNUesvOOlve1emiZmz2SQAGiwkPMR6++
+ 3rdw==
+X-Gm-Message-State: APjAAAXtG16MvFv9a1N1likH/Lduj0R5KzGeJmqWV0Fj8ePZdPS33JKU
+ DPzCm+P2MoVdP6Lyr3n1KvNP4Q==
+X-Google-Smtp-Source: APXvYqzT3P7sA/CZ/b1UMh6+05HJ/72/05Zr7K58Lo6dOwmy5w3WAhfYStmzvZK+P8kUpQEHVNKUng==
+X-Received: by 2002:adf:cc85:: with SMTP id p5mr5683415wrj.196.1582910948537; 
+ Fri, 28 Feb 2020 09:29:08 -0800 (PST)
 Received: from localhost.localdomain
  ([2001:171b:c9a8:fbc0:116c:c27a:3e7f:5eaf])
- by smtp.gmail.com with ESMTPSA id m125sm3004795wmf.8.2020.02.28.09.29.04
+ by smtp.gmail.com with ESMTPSA id m125sm3004795wmf.8.2020.02.28.09.29.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Feb 2020 09:29:05 -0800 (PST)
+ Fri, 28 Feb 2020 09:29:08 -0800 (PST)
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: iommu@lists.linux-foundation.org,
  virtualization@lists.linux-foundation.org, linux-pci@vger.kernel.org
-Subject: [PATCH v2 2/3] PCI: Add DMA configuration for virtual platforms
-Date: Fri, 28 Feb 2020 18:25:37 +0100
-Message-Id: <20200228172537.377327-3-jean-philippe@linaro.org>
+Subject: [PATCH v2 3/3] iommu/virtio: Enable x86 support
+Date: Fri, 28 Feb 2020 18:25:38 +0100
+Message-Id: <20200228172537.377327-4-jean-philippe@linaro.org>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200228172537.377327-1-jean-philippe@linaro.org>
 References: <20200228172537.377327-1-jean-philippe@linaro.org>
@@ -102,51 +102,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hardware platforms usually describe the IOMMU topology using either
-device-tree pointers or vendor-specific ACPI tables.  For virtual
-platforms that don't provide a device-tree, the virtio-iommu device
-contains a description of the endpoints it manages.  That information
-allows us to probe endpoints after the IOMMU is probed (possibly as late
-as userspace modprobe), provided it is discovered early enough.
+With the built-in topology description in place, x86 platforms can now
+use the virtio-iommu.
 
-Add a hook to pci_dma_configure(), which returns -EPROBE_DEFER if the
-endpoint is managed by a vIOMMU that will be loaded later, or 0 in any
-other case to avoid disturbing the normal DMA configuration methods.
-When CONFIG_VIRTIO_IOMMU_TOPOLOGY isn't selected, the call to
-virt_dma_configure() is compiled out.
-
-As long as the information is consistent, platforms can provide both a
-device-tree and a built-in topology, and the IOMMU infrastructure is
-able to deal with multiple DMA configuration methods.
+Architectures that use the generic iommu_dma_ops should normally select
+CONFIG_IOMMU_DMA themselves (from arch/*/Kconfig). Since not all x86
+drivers have been converted yet, it's currently up to the IOMMU Kconfig
+to select it.
 
 Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
 ---
- drivers/pci/pci-driver.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/iommu/Kconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
-index 0454ca0e4e3f..69303a814f21 100644
---- a/drivers/pci/pci-driver.c
-+++ b/drivers/pci/pci-driver.c
-@@ -18,6 +18,7 @@
- #include <linux/kexec.h>
- #include <linux/of_device.h>
- #include <linux/acpi.h>
-+#include <linux/virt_iommu.h>
- #include "pci.h"
- #include "pcie/portdrv.h"
- 
-@@ -1602,6 +1603,10 @@ static int pci_dma_configure(struct device *dev)
- 	struct device *bridge;
- 	int ret = 0;
- 
-+	ret = virt_dma_configure(dev);
-+	if (ret)
-+		return ret;
-+
- 	bridge = pci_get_host_bridge_device(to_pci_dev(dev));
- 
- 	if (IS_ENABLED(CONFIG_OF) && bridge->parent &&
+diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
+index f8cb45d84bb0..87efc48c244e 100644
+--- a/drivers/iommu/Kconfig
++++ b/drivers/iommu/Kconfig
+@@ -508,8 +508,9 @@ config HYPERV_IOMMU
+ config VIRTIO_IOMMU
+ 	tristate "Virtio IOMMU driver"
+ 	depends on VIRTIO
+-	depends on ARM64
++	depends on (ARM64 || X86)
+ 	select IOMMU_API
++	select IOMMU_DMA if X86
+ 	select INTERVAL_TREE
+ 	help
+ 	  Para-virtualised IOMMU driver with virtio.
 -- 
 2.25.0
 
