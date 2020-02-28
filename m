@@ -1,90 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EC7B1735F1
-	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 12:18:47 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D1091735FB
+	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 12:21:48 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BD218880CC;
-	Fri, 28 Feb 2020 11:18:45 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 246C786D62;
+	Fri, 28 Feb 2020 11:21:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5w1tnvbl5Mgd; Fri, 28 Feb 2020 11:18:45 +0000 (UTC)
+	with ESMTP id rQ-DZT6dSPiG; Fri, 28 Feb 2020 11:21:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 3D2D4880A1;
-	Fri, 28 Feb 2020 11:18:45 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C597686D59;
+	Fri, 28 Feb 2020 11:21:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 17EACC1D89;
-	Fri, 28 Feb 2020 11:18:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A16B5C0177;
+	Fri, 28 Feb 2020 11:21:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 20063C0177
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C8A37C0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:18:43 +0000 (UTC)
+ Fri, 28 Feb 2020 11:21:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 07FAD20455
+ by fraxinus.osuosl.org (Postfix) with ESMTP id B1D9D86D59
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:18:43 +0000 (UTC)
+ Fri, 28 Feb 2020 11:21:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MWkSksLpvgqs
+ with ESMTP id IamT4D-RFX72
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:18:42 +0000 (UTC)
+ Fri, 28 Feb 2020 11:21:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
- [209.85.128.49])
- by silver.osuosl.org (Postfix) with ESMTPS id D4E992044C
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 155AB86D55
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 11:18:41 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id q9so2759871wmj.5
+ Fri, 28 Feb 2020 11:21:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582888902;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=OmP9QnBCw2YJQJIPW/QHveI7lGzTStctEOZNIPuqkxA=;
+ b=OkzOGw5G6WFd+PSeQkrTQxdJgAAV8XtGOFqka2wbFJEiLalFajrLceh7mztHW1zFd8RQ3G
+ bLi5Gxfc0/8cAaLlco38pIoFUW7mNTBz5z0cDKtUMdcA68BskvamQ5hTrsbsUWSYYI4mV5
+ Dw0U63qcocIABHbvw8GbByhT21dSXIY=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-60-SbdkB5sgPEGFh3K5QWpFMw-1; Fri, 28 Feb 2020 06:21:40 -0500
+X-MC-Unique: SbdkB5sgPEGFh3K5QWpFMw-1
+Received: by mail-wr1-f71.google.com with SMTP id u18so1192302wrn.11
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Feb 2020 03:18:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=references:user-agent:from:to:cc:subject:in-reply-to:date
- :message-id:mime-version:content-transfer-encoding;
- bh=c/Ym0egalVBXf93aw9WsuThWw+1/VA4cwSu0HJ2qtuE=;
- b=gJ+uZA2EvXabSadMnPv334OnIY6mjJbJ5ogfaiMnJO9YupCCKxmz7HuW2OhUdoOgJs
- mFAtzINI3raptFLcBjYqK3/P5hOzBCEIHNUhMpq9FVxcG+zpkNwH2gHBNy2IXMWLvF3C
- iCY184ZpRT4ZxbNLAmXtBfgBXy1qT8NwOEyxpDM2pOzOpF1smMwXhfVeznr6xPKc9LiC
- AaxSpuk9NIH6Dxh7HLWuHzhQuLH0FyW+HvLzd5w6SkgB/rIPDOPRYxPyV32uoWKLndq4
- DQqSYgZ+GWHgSQF8jsYStvSDOs39HspyUq/Uwj/fgLEDOWnAjSaiss6omaLD6Zzv7czZ
- OJKA==
+ Fri, 28 Feb 2020 03:21:40 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:references:user-agent:from:to:cc:subject
- :in-reply-to:date:message-id:mime-version:content-transfer-encoding;
- bh=c/Ym0egalVBXf93aw9WsuThWw+1/VA4cwSu0HJ2qtuE=;
- b=ZH9MBppxdJywyAWNg8GG3leOeBu89EU9n0GLSaWNFWI9P7tOZ2IXHbY22WRDwevwdC
- B2Dkp/4TtIAwm/h7j1CNBteFoIEWS638HQJU66EHoEJlNa8XW1KA+/NQa+Gt9wFsDYE8
- zDcLpJPhOD08Vrgk5sytl5Gwg718HtotDQaoFeIX51KD9wDOM2eV4OCgLvydjDdmbFhF
- Zi6/O4DGzov807eu4ejHNxw52diwaLpnEsQmGdXlVj4Kxg5xJ+TPSdPkS+rGG7EAoeow
- QXjY1IN+rWMmr57kE3JILb4+hLb3jgvOiVmLg+2Lh8Fhn1GfTT5vAexRzMcFgrPtJDoF
- 42MQ==
-X-Gm-Message-State: APjAAAX0K21XO4FlD8/x6uGgsK2cqR6u4kcfnO94q1eT9lAlky1mGXQ/
- EtWSwfbwrFS8ZdX8Asn1YDh2Hw==
-X-Google-Smtp-Source: APXvYqwEjD+uH4GLtaIUfRbO3r95WuTpyN591p05HN8+9ZRX4Aw9L+brtlVVKcVKha7UYBygcHSxKQ==
-X-Received: by 2002:a1c:9e89:: with SMTP id h131mr4342446wme.161.1582888720125; 
- Fri, 28 Feb 2020 03:18:40 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id d17sm1685290wmb.36.2020.02.28.03.18.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Feb 2020 03:18:38 -0800 (PST)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 4B7991FF87;
- Fri, 28 Feb 2020 11:18:38 +0000 (GMT)
-References: <87mu93vwy2.fsf@linaro.org>
- <fca8366e-662f-af2f-382c-0216d9df63f8@redhat.com>
-User-agent: mu4e 1.3.8; emacs 27.0.60
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Paolo Bonzini <pbonzini@redhat.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=OmP9QnBCw2YJQJIPW/QHveI7lGzTStctEOZNIPuqkxA=;
+ b=qUL+nrJ3RJuV21bjESUEUT1Mfr78Ld2pdVmgjmE3wVXKayPkMDK4LUxdobBKw0RdY6
+ WgtTYFfvzkAD4JV3CqlaeNaNF2nelFgVCfTBnDtOW302TnDvoy99jhMCzFdrdGbWdLs3
+ MxuF73w2l1dwOXnvFvHmHtWGPcp8lMrYVzeFYonkbe1BqWX5bIw81iJhoKFBJpCo8Bic
+ EyGcKvTroQztWuqMUuHysHlfgwsWtgLWGzPUYegbwBJ0sNT3ND+R/X8Q4+B6k+L8omWo
+ dZl3aalXxAJvkWBJ8kbfQjuxAsl5i1b72UkGK6lt5GBmpQ7gI3ReMLp4u3eiwS20ygzg
+ cTuw==
+X-Gm-Message-State: APjAAAW/PNONTxJSCBKdq1ScchrIFeyt0YgYoVO2PG7sSQEB/DNsBPtn
+ YtWumGTjNEFul0ynNH1tn6OVudYGh5t+dRi7OufEVFlO0JSOxyraljAGqJ07jkjox+xkmIG4GzP
+ AGgyEy4YFCne2Mh4jktWDkDSseJaWEZlW7wghwceZDA==
+X-Received: by 2002:adf:f84d:: with SMTP id d13mr4552705wrq.92.1582888899685; 
+ Fri, 28 Feb 2020 03:21:39 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwu+eedluZq+tfSsf4HCoSRE+8TOQr8FvdgA3fees6Gr2KY5+Lp2eWu0FRBg+JBelZ7ch+k9Q==
+X-Received: by 2002:adf:f84d:: with SMTP id d13mr4552677wrq.92.1582888899401; 
+ Fri, 28 Feb 2020 03:21:39 -0800 (PST)
+Received: from ?IPv6:2001:b07:6468:f312:d0d9:ea10:9775:f33f?
+ ([2001:b07:6468:f312:d0d9:ea10:9775:f33f])
+ by smtp.gmail.com with ESMTPSA id 18sm1802186wmf.1.2020.02.28.03.21.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Feb 2020 03:21:38 -0800 (PST)
 Subject: Re: [virtio-dev] VIRTIO adoption in other hypervisors
-In-reply-to: <fca8366e-662f-af2f-382c-0216d9df63f8@redhat.com>
-Date: Fri, 28 Feb 2020 11:18:38 +0000
-Message-ID: <87k147vu29.fsf@linaro.org>
+To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+References: <87mu93vwy2.fsf@linaro.org>
+ <fca8366e-662f-af2f-382c-0216d9df63f8@redhat.com> <87k147vu29.fsf@linaro.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <71f1773d-579d-fec9-cd49-e500bbca1bc4@redhat.com>
+Date: Fri, 28 Feb 2020 12:21:35 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
+In-Reply-To: <87k147vu29.fsf@linaro.org>
+Content-Language: en-US
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Cc: Wei Liu <liuw@liuw.name>, jan.kiszka@siemens.com,
  Stefano Stabellini <sstabellini@kernel.org>, virtio-dev@lists.oasis-open.org,
  virtualization@lists.linux-foundation.org
@@ -104,13 +114,12 @@ Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-ClBhb2xvIEJvbnppbmkgPHBib256aW5pQHJlZGhhdC5jb20+IHdyaXRlczoKCj4gT24gMjgvMDIv
-MjAgMTE6MTYsIEFsZXggQmVubsOpZSB3cm90ZToKPj4gICAtIEhvdyBhYm91dCBIeXBlclYgYW5k
-IHRoZSBPU1ggZXF1aXZhbGVudD8KPgo+IE9TIFggSHlwZXJ2aXNvci5mcmFtZXdvcmsganVzdCB1
-c2VzIFFFTVUsIHNvIGl0IGNhbiB1c2UgdmlydGlvIGRldmljZXMKPiB0b28uICBWaXJ0dWFsQm94
-IGFsc28gc3VwcG9ydHMgdmlydGlvIGRldmljZXMuCgpJIGd1ZXNzIHRoZXNlIGRvbid0IGRvIGFu
-eSBzb3J0IG9mIHZob3N0IHN1cHBvcnQgc28gYWxsIHZpcnRpbyBkZXZpY2VzCmFyZSBoYW5kbGVk
-IGRpcmVjdGx5IGluIFFFTVU/CgotLSAKQWxleCBCZW5uw6llCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApW
-aXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxp
-bnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+T24gMjgvMDIvMjAgMTI6MTgsIEFsZXggQmVubsOpZSB3cm90ZToKPj4gT1MgWCBIeXBlcnZpc29y
+LmZyYW1ld29yayBqdXN0IHVzZXMgUUVNVSwgc28gaXQgY2FuIHVzZSB2aXJ0aW8gZGV2aWNlcwo+
+PiB0b28uICBWaXJ0dWFsQm94IGFsc28gc3VwcG9ydHMgdmlydGlvIGRldmljZXMuCj4gSSBndWVz
+cyB0aGVzZSBkb24ndCBkbyBhbnkgc29ydCBvZiB2aG9zdCBzdXBwb3J0IHNvIGFsbCB2aXJ0aW8g
+ZGV2aWNlcwo+IGFyZSBoYW5kbGVkIGRpcmVjdGx5IGluIFFFTVU/CgpPUyBYIGNhbiB1c2Ugdmhv
+c3QtdXNlci4KClBhb2xvCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMu
+bGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21h
+aWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
