@@ -2,74 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7C6A172DEE
-	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 02:05:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AA1017318E
+	for <lists.virtualization@lfdr.de>; Fri, 28 Feb 2020 08:08:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 51D07862BE;
-	Fri, 28 Feb 2020 01:05:01 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8C29C86CAF;
+	Fri, 28 Feb 2020 07:08:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8zud1x2ISmOF; Fri, 28 Feb 2020 01:05:00 +0000 (UTC)
+	with ESMTP id VqDA9CHIQfbK; Fri, 28 Feb 2020 07:08:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C7BC58612B;
-	Fri, 28 Feb 2020 01:05:00 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0094486CB5;
+	Fri, 28 Feb 2020 07:08:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B04ACC08A0;
-	Fri, 28 Feb 2020 01:05:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C9F95C0177;
+	Fri, 28 Feb 2020 07:08:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4B89FC0177;
- Fri, 28 Feb 2020 01:04:57 +0000 (UTC)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A7CC8C0177
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 28 Feb 2020 07:08:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3A45185DB1;
- Fri, 28 Feb 2020 01:04:57 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 94BBB86CB2
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 28 Feb 2020 07:08:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZxLb9JzzjR7i; Fri, 28 Feb 2020 01:04:54 +0000 (UTC)
+ with ESMTP id 9KHxji-hDdmD
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 28 Feb 2020 07:08:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from ozlabs.org (bilbo.ozlabs.org [203.11.71.1])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5278185B8D;
- Fri, 28 Feb 2020 01:04:54 +0000 (UTC)
-Received: by ozlabs.org (Postfix, from userid 1007)
- id 48TBCR4GXXz9sRR; Fri, 28 Feb 2020 12:04:51 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=gibson.dropbear.id.au; s=201602; t=1582851891;
- bh=bDF0YnZ0Ji7KIpNOME8A9+GnboyyHLm+51d5sgfbrXg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=VSExQPM54mGS3q5ixPtCfJOcB9KtQ+FzWatNARyCA4xu7wLfK+gz0Ez94swVm2PMe
- q1bWrFrri/Ez/GKUaD8+ihbfU4GfFrXbRLT5HU3YbFqjaXhlU3udppCAi/1KL39awy
- DJTBNnHoW/jk6W+//WwyOVIHhKC7g/W256PliEQk=
-Date: Fri, 28 Feb 2020 11:23:53 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [PATCH 1/2] mm: move force_dma_unencrypted() to mem_encrypt.h
-Message-ID: <20200228002353.GA1842@umbus.fritz.box>
-References: <20200220161146.GA12709@lst.de>
- <4369f099-e4e4-4a58-b38b-642cf53ccca6@de.ibm.com>
- <20200220163135.GA13192@lst.de>
- <20200221032727.GC2298@umbus.fritz.box>
- <20200221140639.54928efe.pasic@linux.ibm.com>
- <20200221104724-mutt-send-email-mst@kernel.org>
- <20200221190702.68fd57fc.pasic@linux.ibm.com>
- <20200224033314.GC1751@umbus.fritz.box>
- <20200224194953.37c0d6b8.pasic@linux.ibm.com>
- <20200225190802.753cffef.cohuck@redhat.com>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 064FD86CAF
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 28 Feb 2020 07:08:23 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 67479B004;
+ Fri, 28 Feb 2020 07:08:20 +0000 (UTC)
+Subject: Re: [PATCH v3 4/4] drm/qxl: Use simple encoder
+To: Sam Ravnborg <sam@ravnborg.org>
+References: <20200225131055.27550-1-tzimmermann@suse.de>
+ <20200225131055.27550-5-tzimmermann@suse.de>
+ <20200227204536.GF27592@ravnborg.org>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <f5f81e06-edda-16c6-82fb-f74f1c99ea22@suse.de>
+Date: Fri, 28 Feb 2020 08:08:14 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200225190802.753cffef.cohuck@redhat.com>
-Cc: linux-s390@vger.kernel.org, Janosch Frank <frankja@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Ram Pai <linuxram@us.ibm.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- iommu@lists.linux-foundation.org, Michael Mueller <mimu@linux.ibm.com>,
- "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
- Viktor Mihajlovski <mihajlov@linux.ibm.com>,
- Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>,
- Marek Szyprowski <m.szyprowski@samsung.com>
+In-Reply-To: <20200227204536.GF27592@ravnborg.org>
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, alexander.deucher@amd.com,
+ spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,133 +93,181 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2465507293294821803=="
+Content-Type: multipart/mixed; boundary="===============6308414361688043242=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-
---===============2465507293294821803==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============6308414361688043242==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="HcAYCG3uE/tztfnV"
-Content-Disposition: inline
+ protocol="application/pgp-signature";
+ boundary="XM2oQaHof9k2M6exApwAQnSqigP4LQMrR"
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--XM2oQaHof9k2M6exApwAQnSqigP4LQMrR
+Content-Type: multipart/mixed; boundary="lMK05n7UFNCj751Z8nE6GTcI3v8AWzFOW";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Sam Ravnborg <sam@ravnborg.org>
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, kraxel@redhat.com,
+ alexander.deucher@amd.com, spice-devel@lists.freedesktop.org,
+ emil.velikov@collabora.com
+Message-ID: <f5f81e06-edda-16c6-82fb-f74f1c99ea22@suse.de>
+Subject: Re: [PATCH v3 4/4] drm/qxl: Use simple encoder
+References: <20200225131055.27550-1-tzimmermann@suse.de>
+ <20200225131055.27550-5-tzimmermann@suse.de>
+ <20200227204536.GF27592@ravnborg.org>
+In-Reply-To: <20200227204536.GF27592@ravnborg.org>
 
---HcAYCG3uE/tztfnV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--lMK05n7UFNCj751Z8nE6GTcI3v8AWzFOW
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 25, 2020 at 07:08:02PM +0100, Cornelia Huck wrote:
-> On Mon, 24 Feb 2020 19:49:53 +0100
-> Halil Pasic <pasic@linux.ibm.com> wrote:
->=20
-> > On Mon, 24 Feb 2020 14:33:14 +1100
-> > David Gibson <david@gibson.dropbear.id.au> wrote:
-> >=20
-> > > On Fri, Feb 21, 2020 at 07:07:02PM +0100, Halil Pasic wrote: =20
-> > > > On Fri, 21 Feb 2020 10:48:15 -0500
-> > > > "Michael S. Tsirkin" <mst@redhat.com> wrote:
-> > > >  =20
-> > > > > On Fri, Feb 21, 2020 at 02:06:39PM +0100, Halil Pasic wrote: =20
-> > > > > > On Fri, 21 Feb 2020 14:27:27 +1100
-> > > > > > David Gibson <david@gibson.dropbear.id.au> wrote:
-> > > > > >  =20
-> > > > > > > On Thu, Feb 20, 2020 at 05:31:35PM +0100, Christoph Hellwig w=
-rote: =20
-> > > > > > > > On Thu, Feb 20, 2020 at 05:23:20PM +0100, Christian Borntra=
-eger wrote: =20
-> > > > > > > > > >From a users perspective it makes absolutely perfect sen=
-se to use the =20
-> > > > > > > > > bounce buffers when they are NEEDED.=20
-> > > > > > > > > Forcing the user to specify iommu_platform just because y=
-ou need bounce buffers
-> > > > > > > > > really feels wrong. And obviously we have a severe perfor=
-mance issue
-> > > > > > > > > because of the indirections. =20
-> > > > > > > >=20
-> > > > > > > > The point is that the user should not have to specify iommu=
-_platform.
-> > > > > > > > We need to make sure any new hypervisor (especially one tha=
-t might require
-> > > > > > > > bounce buffering) always sets it, =20
-> > > > > > >=20
-> > > > > > > So, I have draft qemu patches which enable iommu_platform by =
-default.
-> > > > > > > But that's really because of other problems with !iommu_platf=
-orm, not
-> > > > > > > anything to do with bounce buffering or secure VMs.
-> > > > > > >=20
-> > > > > > > The thing is that the hypervisor *doesn't* require bounce buf=
-fering.
-> > > > > > > In the POWER (and maybe s390 as well) models for Secure VMs, =
-it's the
-> > > > > > > *guest*'s choice to enter secure mode, so the hypervisor has =
-no reason
-> > > > > > > to know whether the guest needs bounce buffering.  As far as =
-the
-> > > > > > > hypervisor and qemu are concerned that's a guest internal det=
-ail, it
-> > > > > > > just expects to get addresses it can access whether those are=
- GPAs
-> > > > > > > (iommu_platform=3Doff) or IOVAs (iommu_platform=3Don). =20
-> > > > > >=20
-> > > > > > I very much agree!
-> > > > > >  =20
-> > > > > > >  =20
-> > > > > > > > as was a rather bogus legacy hack =20
-> > > > > > >=20
-> > > > > > > It was certainly a bad idea, but it was a bad idea that went =
-into a
-> > > > > > > public spec and has been widely deployed for many years.  We =
-can't
-> > > > > > > just pretend it didn't happen and move on.
-> > > > > > >=20
-> > > > > > > Turning iommu_platform=3Don by default breaks old guests, som=
-e of which
-> > > > > > > we still care about.  We can't (automatically) do it only for=
- guests
-> > > > > > > that need bounce buffering, because the hypervisor doesn't kn=
-ow that
-> > > > > > > ahead of time. =20
->=20
-> We could default to iommu_platform=3Don on s390 when the host has active
-> support for protected virtualization... but that's just another kind of
-> horrible, so let's just pretend I didn't suggest it.
+Hi Sam
 
-Yeah, that would break migration between hosts with the feature and
-hosts without - for everything, not just protected guests.  In general
-any kind of guest visible configuration change based on host
-properties is incompatible with the qemu/KVM migration model.
+Am 27.02.20 um 21:45 schrieb Sam Ravnborg:
+> Hi Thomas.
+>=20
+> On Tue, Feb 25, 2020 at 02:10:55PM +0100, Thomas Zimmermann wrote:
+>> The qxl driver uses an empty implementation for its encoder. Replace
+>> the code with the generic simple encoder.
+>>
+>> v2:
+>> 	* rebase onto new simple-encoder interface
+>>
+>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>> Acked-by: Sam Ravnborg <sam@ravnborg.org>
+>> Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+>> ---
+>>  drivers/gpu/drm/qxl/qxl_display.c | 18 +++---------------
+>>  1 file changed, 3 insertions(+), 15 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/q=
+xl_display.c
+>> index ab4f8dd00400..9c0e1add59fb 100644
+>> --- a/drivers/gpu/drm/qxl/qxl_display.c
+>> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+>> @@ -31,6 +31,7 @@
+>>  #include <drm/drm_gem_framebuffer_helper.h>
+>>  #include <drm/drm_plane_helper.h>
+>>  #include <drm/drm_probe_helper.h>
+>> +#include <drm/drm_simple_kms_helper.h>
+>> =20
+>>  #include "qxl_drv.h"
+>>  #include "qxl_object.h"
+>> @@ -1007,9 +1008,6 @@ static struct drm_encoder *qxl_best_encoder(stru=
+ct drm_connector *connector)
+>>  	return &qxl_output->enc;
+>>  }
+>> =20
+>> -static const struct drm_encoder_helper_funcs qxl_enc_helper_funcs =3D=
+ {
+>> -};
+>> -
+>>  static const struct drm_connector_helper_funcs qxl_connector_helper_f=
+uncs =3D {
+>>  	.get_modes =3D qxl_conn_get_modes,
+>>  	.mode_valid =3D qxl_conn_mode_valid,
+>> @@ -1059,15 +1057,6 @@ static const struct drm_connector_funcs qxl_con=
+nector_funcs =3D {
+>>  	.atomic_destroy_state =3D drm_atomic_helper_connector_destroy_state,=
+
+>>  };
+>> =20
+>> -static void qxl_enc_destroy(struct drm_encoder *encoder)
+>> -{
+>> -	drm_encoder_cleanup(encoder);
+>> -}
+>> -
+>> -static const struct drm_encoder_funcs qxl_enc_funcs =3D {
+>> -	.destroy =3D qxl_enc_destroy,
+>> -};
+>> -
+>>  static int qxl_mode_create_hotplug_mode_update_property(struct qxl_de=
+vice *qdev)
+>>  {
+>>  	if (qdev->hotplug_mode_update_property)
+>> @@ -1098,15 +1087,14 @@ static int qdev_output_init(struct drm_device =
+*dev, int num_output)
+>>  	drm_connector_init(dev, &qxl_output->base,
+>>  			   &qxl_connector_funcs, DRM_MODE_CONNECTOR_VIRTUAL);
+>> =20
+>> -	drm_encoder_init(dev, &qxl_output->enc, &qxl_enc_funcs,
+>> -			 DRM_MODE_ENCODER_VIRTUAL, NULL);
+>> +	drm_simple_encoder_init(dev, &qxl_output->enc,
+>> +				DRM_MODE_ENCODER_VIRTUAL);
+> return value is ignored - as it was before.
+> A quick grep told that it is 50/50 if return value is checked.
+> So OK.
+
+Well, now that you bring it up, I rather test for the returned value.
+Continuing without an initialized encoder doesn't seem to make much sense=
+=2E
+
+Thanks for reviewing the patchset. I'll address the comments you had and
+post another update before merging.
+
+Best regards
+Thomas
+
+>=20
+> Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
+>> =20
+>>  	/* we get HPD via client monitors config */
+>>  	connector->polled =3D DRM_CONNECTOR_POLL_HPD;
+>>  	encoder->possible_crtcs =3D 1 << num_output;
+>>  	drm_connector_attach_encoder(&qxl_output->base,
+>>  					  &qxl_output->enc);
+>> -	drm_encoder_helper_add(encoder, &qxl_enc_helper_funcs);
+>>  	drm_connector_helper_add(connector, &qxl_connector_helper_funcs);
+>> =20
+>>  	drm_object_attach_property(&connector->base,
+>> --=20
+>> 2.25.0
+>>
+>> _______________________________________________
+>> dri-devel mailing list
+>> dri-devel@lists.freedesktop.org
+>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+>=20
 
 --=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
---HcAYCG3uE/tztfnV
+
+--lMK05n7UFNCj751Z8nE6GTcI3v8AWzFOW--
+
+--XM2oQaHof9k2M6exApwAQnSqigP4LQMrR
 Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl5YXZcACgkQbDjKyiDZ
-s5LdKA//U9QbJilQoiEQCinA1xGVHP1Hm7w/1rqgbm4B30D4A7I3ioERM/uwdqkQ
-ks4shzQNPfx3O2Bkiit5DGE/A4C9CODYVqjvPw0pDpMaYJI6tDVcjd3bgYhyE2QI
-Gp5oQ4l40a4C5oUH9YYoOS7eyx0rg6q1HstQDyTtTUP8MURr5XsqMIU4086N8bDI
-JrYkBRXTU/W5FCuHnKR8wUwuKGUqTu64yEtzlT40YuWCrUw2PRtaG6jjP9CMisqL
-BS2ISdY2UeTZXNnavX0LycUAwUDo4gy/ux4TcSuzSii7A0ztiqqrbs/UFNs/GCUg
-pfcr9JbU7dsT4po/YKERdQ/6PiYuVufHASLOhDdDw6pNVLyuTnzHgmRkWSrRV4NP
-haSVx1u2JbRmJmO66RgJdt774tVxyDVIRhZprWlvg5yX0ad0TAHvx2MqitDgjCiV
-XZdu7rCfKQVCXU35ODteapV9n+CguP8f2KYIVWXJIHCbjLg65nVr4moJNupn/5nd
-kvhC+2MOoszj0PXtMEPTWe7N/H9KDfp4Vv861JhZL5pe3GluF9qsHDk/vHWuovCK
-Vab8lroMXU5o345o4w70Cu/X+PO1lkVeml+MTI3c+hfZHcaGlvnsVehQGDYhwX4I
-XvNb0jeVjkJJRHVxOIIgzD4PxiBaYtpfFV+cBvysaDf5aaCX2Zk=
-=MCKa
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5YvGEACgkQaA3BHVML
+eiP1Hgf9Fwq4pHaXFCK0/GJAC5J6hu19bTlurzmrhKFzz1DL2TA3fl9xNZ0DYUYw
+7QFKU88Dmtb4NVjW8yXFcrmMstYmAG+KB1JVDAUTNi4i6p7KK99wovSc+1Rb1q/y
+siHk+UHOriHk+Qy+J3z21OzR5E7TUNoVCnVO+OxvZdAEXwUfTISuhrMqTJJ2S3MN
+zdfqoTNLoo+SO/WhaGNgd7DYJcdEOaknGvl9FuHqPPKqRxQuxSJc6rlUWJlgKDNT
+U8vFjx7RD2X1ODzqaDHxPRB4EL/k5FHizyAnevoh5m5DwGZ3/r6JxQa1zLYHEvLT
+KaiQj7E/NbOrGaCNQLdC0WGdyxXEwA==
+=QBcS
 -----END PGP SIGNATURE-----
 
---HcAYCG3uE/tztfnV--
+--XM2oQaHof9k2M6exApwAQnSqigP4LQMrR--
 
---===============2465507293294821803==
+--===============6308414361688043242==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -217,4 +277,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============2465507293294821803==--
+--===============6308414361688043242==--
