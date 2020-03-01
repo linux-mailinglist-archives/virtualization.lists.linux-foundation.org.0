@@ -1,85 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C73B2174CDE
-	for <lists.virtualization@lfdr.de>; Sun,  1 Mar 2020 12:07:49 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 20023174CDF
+	for <lists.virtualization@lfdr.de>; Sun,  1 Mar 2020 12:07:51 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2B3A888604;
-	Sun,  1 Mar 2020 11:07:48 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B220C87D58;
+	Sun,  1 Mar 2020 11:07:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Uu4N9GazPDCk; Sun,  1 Mar 2020 11:07:47 +0000 (UTC)
+	with ESMTP id rDs1cEwaHXTm; Sun,  1 Mar 2020 11:07:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id CDBF588607;
-	Sun,  1 Mar 2020 11:07:46 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1C61287D55;
+	Sun,  1 Mar 2020 11:07:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AF8ABC013E;
-	Sun,  1 Mar 2020 11:07:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 04251C013E;
+	Sun,  1 Mar 2020 11:07:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C8B65C013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 54666C013E
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Mar 2020 11:07:45 +0000 (UTC)
+ Sun,  1 Mar 2020 11:07:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id B459B885FC
+ by silver.osuosl.org (Postfix) with ESMTP id 5073A204E1
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Mar 2020 11:07:45 +0000 (UTC)
+ Sun,  1 Mar 2020 11:07:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CTtQ90VO3sjv
+ with ESMTP id Z0JMAyIzVMQC
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Mar 2020 11:07:45 +0000 (UTC)
+ Sun,  1 Mar 2020 11:07:46 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
- [209.85.128.66])
- by hemlock.osuosl.org (Postfix) with ESMTPS id E595788600
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by silver.osuosl.org (Postfix) with ESMTPS id 181A0204D7
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Mar 2020 11:07:44 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id 9so1829181wmo.1
+ Sun,  1 Mar 2020 11:07:46 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id e10so7405007wrr.10
  for <virtualization@lists.linux-foundation.org>;
- Sun, 01 Mar 2020 03:07:44 -0800 (PST)
+ Sun, 01 Mar 2020 03:07:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=daynix-com.20150623.gappssmtp.com; s=20150623;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Yg9kvojyXnDbsovT1uTdB7qbadbXVtmLGtNtJuE+gZw=;
- b=YslySjgNaQMeMU0Ns8vkbpy0LRoRd/t9DsbdvEunT5LupIjiqFO6DnI/4Od3Tlve0O
- YMlpW8Zr5uThUXcai2dbpIZLLkAKI4MQdGMljvTqTYK62w2FjMOggSlkg+cSbgmczkGW
- hlV0ULlBATutiFuU97WMXnsjZVLii/BYXnbcePyROlxvEqQc7bOCQXVqEydNuwt+p2O9
- 56JfCMum+PQuXMlMD3DBeBhT0srGe3K2SxqP0EVux6RHb6fpcKU73H6nD192HtE35bl8
- /TfLFMH0XHRcEaxHA3wi6mi3cor8w/lPT8TXInrtOWy3WSLb36OpNx9kIbhhFtMkeaJG
- DTtA==
+ bh=p/KmgnJg9kBEfvlzJJFSl6WfUIRmWHlWaOmzFYMMrw0=;
+ b=NR0iRoFKv1Y0daC49tBZsWfbMDIN1XjcnZR8nA0VyEAKoGG8Zv6I6SVpsb5jyK7AdO
+ 3Fi/genDMftosGJnlvFCyxJaPM8w8QlZjV0WHy6wMiTnPAqwFzM62XZdis0CtSKmThfn
+ 0u/SvS7a55aezXHVJK0QUDAOaN9nQUd4kMl7bHnRt7jdaU5iAOY6wKqOZAxuBjuVTs9Y
+ vrLu6bgyLBpZiHLz0c+zuGVWYa+jnZnx43U4dnlQUzCPHu0hhrf8C6HKxe2OfuV3bEks
+ 5NOpcHlb9Tlat4tsArmpvIKNoqB6220SJFmUaJSGdbro37/A+o3YwHLX9K6HwkQAVBit
+ IuGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=Yg9kvojyXnDbsovT1uTdB7qbadbXVtmLGtNtJuE+gZw=;
- b=FaHpWRIffC+ZHOWNQ6M0O+IPQ2pjc5UAYC8Hyo3O7UEfeVCj26E/vXQu8QdoAR9faL
- 4KiSLxExYqWvq2xIqVvGpbyKr+j+Mvo6UYVpL6wMYSgf4bHQWx4SpAcZgkjbleMseatm
- CvB4ukySNVATBu/LcpJfYKLOKmy3n6rR4oy5HiKiMKQRmENJe75F1lF95RW+CwK8feCc
- 9N5dKvJxTumAT7XbJiqPdx2+Dbr59YIgsuJjWNfNvsiQ1Kg1LjclTxr/l+nPp4+tMKHY
- +id9SWpQ3EWvMPKm5OtuGDDm6nkfdolr2dKGCZ353WN0ZzSZsd8cNBfNa0e6bbyyLJjh
- HfcA==
-X-Gm-Message-State: APjAAAXMhJeAxcpPPntcfRir4EW/TKxZtRAzGSmAiTj6kQ3RpyNb04e2
- v9NekP69Ui0hCvYWu+bOkz8MVg==
-X-Google-Smtp-Source: APXvYqwQZJzOMZ4wRgt6rgzM+BOmcnSo2rAYLizkdgCozE5E38jCetXcG1Ra6BudFHTyH6tiO3U10Q==
-X-Received: by 2002:a05:600c:4151:: with SMTP id
- h17mr15105633wmm.189.1583060863123; 
- Sun, 01 Mar 2020 03:07:43 -0800 (PST)
+ bh=p/KmgnJg9kBEfvlzJJFSl6WfUIRmWHlWaOmzFYMMrw0=;
+ b=uj76EGLyS2DdyDlrshNkc03Wo0NFUtB+Tp6DknWrl2LuB7zQCF3RAsopjjtQCLEYVP
+ LZM6o1YoB5gTrRGHG9fNu8hyPWzfW3qBv326zvzOn7N1WTCV8ZvEVCBI1Rb0NfcPpCQi
+ I0O/pDEt0ik/VgSW2nkmFiav32uh+RetLbHgFZbKjS5djnWf/vgNRoHf5XbCv6hU8Gis
+ UKwyNZSs3k9UbrZ/M9SGRhpBZ391UkwaENFbeeHqofjW3NIuV/vrAq1Cnh0zGuhhV/63
+ 5RHZjK1sj1BZ3VJ/ajPG6CyGsy/wwebzqz7ygG/FBq4LNW10VH8Wh6J+TowJ1EQjOQ6+
+ Pbvw==
+X-Gm-Message-State: APjAAAWLhJKQ0hPN+n7G8ORNwg1ZOL6LVq2j2gIXRMtl+FhAtnmPVvwE
+ 3SdVlbElWkY00rxb77mqZN+jEA==
+X-Google-Smtp-Source: APXvYqxPL7x56TY1BrWRmoLhp0P70FyZV8p48kmLRnJLaOrD6PswXgPjUHoAnKbl/91J/HWSYDim1Q==
+X-Received: by 2002:a5d:5286:: with SMTP id c6mr9721951wrv.418.1583060864461; 
+ Sun, 01 Mar 2020 03:07:44 -0800 (PST)
 Received: from f2.redhat.com (bzq-79-177-42-131.red.bezeqint.net.
  [79.177.42.131])
- by smtp.gmail.com with ESMTPSA id i7sm11563243wma.32.2020.03.01.03.07.41
+ by smtp.gmail.com with ESMTPSA id i7sm11563243wma.32.2020.03.01.03.07.43
  (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Sun, 01 Mar 2020 03:07:42 -0800 (PST)
+ Sun, 01 Mar 2020 03:07:43 -0800 (PST)
 From: Yuri Benditovich <yuri.benditovich@daynix.com>
 To: mst@redhat.com, jasowang@redhat.com,
  virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/3] virtio-net: Introduce RSS receive steering feature
-Date: Sun,  1 Mar 2020 13:07:32 +0200
-Message-Id: <20200301110733.20197-3-yuri.benditovich@daynix.com>
+Subject: [PATCH v2 3/3] virtio-net: Introduce hash report feature
+Date: Sun,  1 Mar 2020 13:07:33 +0200
+Message-Id: <20200301110733.20197-4-yuri.benditovich@daynix.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200301110733.20197-1-yuri.benditovich@daynix.com>
 References: <20200301110733.20197-1-yuri.benditovich@daynix.com>
@@ -101,100 +100,73 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-RSS (Receive-side scaling) defines hash calculation
-rules and decision on receive virtqueue according to
-the calculated hash, provided mask to apply and
-provided indirection table containing indices of
-receive virqueues. The driver sends the control
-command to enable multiqueue and provide parameters
-for receive steering.
+The feature VIRTIO_NET_F_HASH_REPORT extends the
+layout of the packet and requests the device to
+calculate hash on incoming packets and report it
+in the packet header.
 
 Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
 ---
- include/uapi/linux/virtio_net.h | 42 +++++++++++++++++++++++++++++++--
- 1 file changed, 40 insertions(+), 2 deletions(-)
+ include/uapi/linux/virtio_net.h | 36 +++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
 diff --git a/include/uapi/linux/virtio_net.h b/include/uapi/linux/virtio_net.h
-index 536152fad3c4..6b309fe23671 100644
+index 6b309fe23671..c9ca62dd77a4 100644
 --- a/include/uapi/linux/virtio_net.h
 +++ b/include/uapi/linux/virtio_net.h
 @@ -57,6 +57,7 @@
  					 * Steering */
  #define VIRTIO_NET_F_CTRL_MAC_ADDR 23	/* Set MAC address */
  
-+#define VIRTIO_NET_F_RSS	  60	/* Supports RSS RX steering */
++#define VIRTIO_NET_F_HASH_REPORT  57	/* Supports hash report */
+ #define VIRTIO_NET_F_RSS	  60	/* Supports RSS RX steering */
  #define VIRTIO_NET_F_RSC_EXT	  61	/* extended coalescing info */
  #define VIRTIO_NET_F_STANDBY	  62	/* Act as standby for another device
- 					 * with the same MAC.
-@@ -70,6 +71,17 @@
- #define VIRTIO_NET_S_LINK_UP	1	/* Link is up */
- #define VIRTIO_NET_S_ANNOUNCE	2	/* Announcement is needed */
- 
-+/* supported/enabled hash types */
-+#define VIRTIO_NET_RSS_HASH_TYPE_IPv4          (1 << 0)
-+#define VIRTIO_NET_RSS_HASH_TYPE_TCPv4         (1 << 1)
-+#define VIRTIO_NET_RSS_HASH_TYPE_UDPv4         (1 << 2)
-+#define VIRTIO_NET_RSS_HASH_TYPE_IPv6          (1 << 3)
-+#define VIRTIO_NET_RSS_HASH_TYPE_TCPv6         (1 << 4)
-+#define VIRTIO_NET_RSS_HASH_TYPE_UDPv6         (1 << 5)
-+#define VIRTIO_NET_RSS_HASH_TYPE_IP_EX         (1 << 6)
-+#define VIRTIO_NET_RSS_HASH_TYPE_TCP_EX        (1 << 7)
-+#define VIRTIO_NET_RSS_HASH_TYPE_UDP_EX        (1 << 8)
-+
- struct virtio_net_config {
- 	/* The config defining mac address (if VIRTIO_NET_F_MAC) */
- 	__u8 mac[ETH_ALEN];
-@@ -93,6 +105,12 @@ struct virtio_net_config {
- 	 * Any other value stands for unknown.
- 	 */
- 	__u8 duplex;
-+	/* maximum size of RSS key */
-+	__u8 rss_max_key_size;
-+	/* maximum number of indirection table entries */
-+	__le16 rss_max_indirection_table_length;
-+	/* bitmask of supported VIRTIO_NET_RSS_HASH_ types */
-+	__le32 supported_hash_types;
- } __attribute__((packed));
- 
- /*
-@@ -236,7 +254,9 @@ struct virtio_net_ctrl_mac {
- 
- /*
-  * Control Receive Flow Steering
-- *
-+ */
-+#define VIRTIO_NET_CTRL_MQ   4
-+/*
-  * The command VIRTIO_NET_CTRL_MQ_VQ_PAIRS_SET
-  * enables Receive Flow Steering, specifying the number of the transmit and
-  * receive queues that will be used. After the command is consumed and acked by
-@@ -249,11 +269,29 @@ struct virtio_net_ctrl_mq {
- 	__virtio16 virtqueue_pairs;
+@@ -144,6 +145,23 @@ struct virtio_net_hdr_v1 {
+ 	__virtio16 num_buffers;	/* Number of merged rx buffers */
  };
  
--#define VIRTIO_NET_CTRL_MQ   4
-  #define VIRTIO_NET_CTRL_MQ_VQ_PAIRS_SET        0
-  #define VIRTIO_NET_CTRL_MQ_VQ_PAIRS_MIN        1
-  #define VIRTIO_NET_CTRL_MQ_VQ_PAIRS_MAX        0x8000
++struct virtio_net_hdr_v1_hash {
++	struct virtio_net_hdr_v1 hdr;
++	__le32 hash_value;
++#define VIRTIO_NET_HASH_REPORT_NONE            0
++#define VIRTIO_NET_HASH_REPORT_IPv4            1
++#define VIRTIO_NET_HASH_REPORT_TCPv4           2
++#define VIRTIO_NET_HASH_REPORT_UDPv4           3
++#define VIRTIO_NET_HASH_REPORT_IPv6            4
++#define VIRTIO_NET_HASH_REPORT_TCPv6           5
++#define VIRTIO_NET_HASH_REPORT_UDPv6           6
++#define VIRTIO_NET_HASH_REPORT_IPv6_EX         7
++#define VIRTIO_NET_HASH_REPORT_TCPv6_EX        8
++#define VIRTIO_NET_HASH_REPORT_UDPv6_EX        9
++	__le16 hash_report;
++	__le16 padding;
++};
++
+ #ifndef VIRTIO_NET_NO_LEGACY
+ /* This header comes first in the scatter-gather list.
+  * For legacy virtio, if VIRTIO_F_ANY_LAYOUT is not negotiated, it must
+@@ -292,6 +310,24 @@ struct virtio_net_rss_config {
+ 
+  #define VIRTIO_NET_CTRL_MQ_RSS_CONFIG          1
  
 +/*
-+ * The command VIRTIO_NET_CTRL_MQ_RSS_CONFIG has the same effect as
-+ * VIRTIO_NET_CTRL_MQ_VQ_PAIRS_SET does and additionally configures
-+ * the receive steering to use a hash calculated for incoming packet
-+ * to decide on receive virtqueue to place the packet. The command
-+ * also provides parameters to calculate a hash and receive virtqueue.
++ * The command VIRTIO_NET_CTRL_MQ_HASH_CONFIG requests the device
++ * to include in the virtio header of the packet the value of the
++ * calculated hash and the report type of hash. It also provides
++ * parameters for hash calculation. The command requires feature
++ * VIRTIO_NET_F_HASH_REPORT to be negotiated to extend the
++ * layout of virtio header as defined in virtio_net_hdr_v1_hash.
 + */
-+struct virtio_net_rss_config {
++struct virtio_net_hash_config {
 +	__le32 hash_types;
-+	__le16 indirection_table_mask;
-+	__le16 unclassified_queue;
-+	__le16 indirection_table[1/* + indirection_table_mask */];
-+	__le16 max_tx_vq;
++	/* for compatibility with virtio_net_rss_config */
++	__le16 reserved[4];
 +	__u8 hash_key_length;
 +	__u8 hash_key_data[/* hash_key_length */];
 +};
 +
-+ #define VIRTIO_NET_CTRL_MQ_RSS_CONFIG          1
++ #define VIRTIO_NET_CTRL_MQ_HASH_CONFIG         2
 +
  /*
   * Control network offloads
