@@ -2,88 +2,96 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id E98A017485B
-	for <lists.virtualization@lfdr.de>; Sat, 29 Feb 2020 18:18:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D7C4174C29
+	for <lists.virtualization@lfdr.de>; Sun,  1 Mar 2020 08:32:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4A7D8845C1;
-	Sat, 29 Feb 2020 17:18:30 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7520C872CA;
+	Sun,  1 Mar 2020 07:32:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5NllRFG4SxV7; Sat, 29 Feb 2020 17:18:29 +0000 (UTC)
+	with ESMTP id b2PDFWywEViF; Sun,  1 Mar 2020 07:32:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C27C7845A3;
-	Sat, 29 Feb 2020 17:18:29 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 047AB8723F;
+	Sun,  1 Mar 2020 07:32:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A644FC1D8E;
-	Sat, 29 Feb 2020 17:18:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DE6E8C013E;
+	Sun,  1 Mar 2020 07:32:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4F321C0177
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 084DAC013E
  for <virtualization@lists.linux-foundation.org>;
- Sat, 29 Feb 2020 17:18:28 +0000 (UTC)
+ Sun,  1 Mar 2020 07:32:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 336F7879C3
+ by hemlock.osuosl.org (Postfix) with ESMTP id E87028A12A
  for <virtualization@lists.linux-foundation.org>;
- Sat, 29 Feb 2020 17:18:28 +0000 (UTC)
+ Sun,  1 Mar 2020 07:32:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JzB-j3BkUIl0
+ with ESMTP id yu75z-UxCTzX
  for <virtualization@lists.linux-foundation.org>;
- Sat, 29 Feb 2020 17:18:27 +0000 (UTC)
-X-Greylist: delayed 00:05:16 by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
- [209.85.128.66])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 757A0879A7
+ Sun,  1 Mar 2020 07:32:41 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id C29C889F62
  for <virtualization@lists.linux-foundation.org>;
- Sat, 29 Feb 2020 17:18:27 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id f15so6840332wml.3
+ Sun,  1 Mar 2020 07:32:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583047959;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=A3MMtrcMRfqYU2oZvn0CHa1Q2NrFI6ZpcljGvsY/uNA=;
+ b=ApgXQzmLXHVWI3QHFWppZil2bnB6s+S775AUaZtNz2cSZUFnWnRbJT221no23YwpzjiW4h
+ rQ8Dy4/0wfa3CrRqTle+XEeAy8iBhipyc+IxbjMOTZ0CCTOmW4ESd1LMwhHAhnKup6A9YW
+ zrdQKZgnJxjV8D7t7arYIqlrkJBHz/I=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-217-Kw7c_1p4O2KYfhdJ8UMzQA-1; Sun, 01 Mar 2020 02:32:37 -0500
+X-MC-Unique: Kw7c_1p4O2KYfhdJ8UMzQA-1
+Received: by mail-qt1-f197.google.com with SMTP id o24so6631990qtr.17
  for <virtualization@lists.linux-foundation.org>;
- Sat, 29 Feb 2020 09:18:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=XFcDlTrKIHj2foS9qGqB/jgRVxoWhysNTBBaTEafaDQ=;
- b=zeGutF9tzPl0q7tv0RmDUy0O/CtHNm/XDcg82ysRNGPKvpSSBi8dPNoE7egnm5PHXT
- tU5nwxXPi5k+XOdzGci2EUZEPrIVrdKWFnbZ5f33Y4/I2d97bJROJx+f/iZd7l8zesn1
- oRQ20/1zHkitB6W6h/QqQRKEtBilIU+LO3DRuCQ9QQUd4Ml/vb5TQk3cg9pDmxyUmpW+
- wjS/KhgbRbZad0wAjhl5h5eWHGFQffwc6jPewA3ZsurKfQ/PbzQVr9jbg4HLmHvoC9k6
- N50rThX5j6dJ/q6OZ4gGvy9+ymgqupgVo2yZCBtLQrUMaeuVFqDoDJUFNNJ4QJEYiHg4
- jXMg==
+ Sat, 29 Feb 2020 23:32:37 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=XFcDlTrKIHj2foS9qGqB/jgRVxoWhysNTBBaTEafaDQ=;
- b=QQq5n6ZZaJkGfDiJpHfhZZcQCgOkesdbH4NximREwaBhCRgNc3U9AChgQutZSvLsx1
- NPscxZ+xrv7ki5IfPaRmGonwrIJbQwJOhAB5I6xNkJIBDQciHMRo1W3basQa3M/I9Dei
- SYCWy284AfBt0A1MXaZ/CIqhXbEZqXT34gL3XTSS03Fea0Rzgt/9Pl8yB1XbCo6onISV
- CqV0XvCZaK5fBPlT6KbZIwtHTJmTvXODeEhccC0qMT2M7pzeJ/x3BmBAkWmW8h8qO4bt
- Os623/pnkXEWkTKL83wjUow08mvZmUTMNwzL8SpXR1Ugd7hQNmwjDKE2unLamE/DAKka
- Ee+Q==
-X-Gm-Message-State: APjAAAVH66u93b9mrxEJNPOIHflwt3ylP+ct7N9Ho864menmjtvVfjk8
- o2lVnLQPa/uWua9PJjVrHYQ5LvEqXIs=
-X-Google-Smtp-Source: APXvYqyfXOsAkfb+WZU94O3Uhfef8Bs7qDGwfrmczN9tcH4C4qyns8k0e3hADV1FZJVNG/VDNUQKOA==
-X-Received: by 2002:a05:600c:2283:: with SMTP id
- 3mr10573988wmf.100.1582996392052; 
- Sat, 29 Feb 2020 09:13:12 -0800 (PST)
-Received: from f2.redhat.com (bzq-79-177-42-131.red.bezeqint.net.
- [79.177.42.131])
- by smtp.gmail.com with ESMTPSA id r1sm17045046wrx.11.2020.02.29.09.13.11
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Sat, 29 Feb 2020 09:13:11 -0800 (PST)
-From: Yuri Benditovich <yuri.benditovich@daynix.com>
-To: mst@redhat.com, jasowang@redhat.com,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 3/3] virtio-net: Introduce hash report feature
-Date: Sat, 29 Feb 2020 19:13:01 +0200
-Message-Id: <20200229171301.15234-4-yuri.benditovich@daynix.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200229171301.15234-1-yuri.benditovich@daynix.com>
-References: <20200229171301.15234-1-yuri.benditovich@daynix.com>
-Cc: yan@daynix.com
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=A3MMtrcMRfqYU2oZvn0CHa1Q2NrFI6ZpcljGvsY/uNA=;
+ b=Pfa+NTH/gwdDShBikwrN125p98yCw2FNlq1p3LdnyG8e5EfDLBR0rrHu1WJA7Dd+3k
+ 4+XHbDahtMB9N/Grmf/JrMU1oFMCjrwrgFNtcviFu8TcAmR9eC58ne4DIHgEunOf68Uu
+ sx7CPGeJIP7247O/hBVFwrI/hSe2S2jBYuH6aa7qagk6DltPInf9me4oCyW1OC7NjoQt
+ 6S13PA6j7T0u/qKR7xVgig+/Y4txxGMXnxXyatvGKdhENGKB/Wuzm8qjecLv07IkpxHv
+ zQHx7lHV438IPu8GL4PN5GbYtigZT6tDG9IlZeIoOjVwF/ZOGFxQffE9seL6togMYJA/
+ 99cg==
+X-Gm-Message-State: APjAAAULZGZU4a4sy/ANJak+vhVPhHIc2tOkGr5LQqj/tzPoFHIlwrE9
+ /1doKZRIHwhbwMFPSOC5hTuB7xnS59N4UUZgLjgWDi5yuZvEoZyvosaWreoMcHapvuAXwpz9ndX
+ KXaMNVMHLR6f85ebRxXFE8po7nJxmz2W+iZBtjVHXVg==
+X-Received: by 2002:aed:2961:: with SMTP id s88mr9089086qtd.292.1583047957507; 
+ Sat, 29 Feb 2020 23:32:37 -0800 (PST)
+X-Google-Smtp-Source: APXvYqz4o0NEf1dzwXYaj5wYtjW9Bg5oEwnhhA9tWLJVrxErw/9mkSdYS/F6D4AtFN66bw9c8E/rYg==
+X-Received: by 2002:aed:2961:: with SMTP id s88mr9089075qtd.292.1583047957280; 
+ Sat, 29 Feb 2020 23:32:37 -0800 (PST)
+Received: from redhat.com (bzq-79-180-48-224.red.bezeqint.net. [79.180.48.224])
+ by smtp.gmail.com with ESMTPSA id f26sm7779304qtv.77.2020.02.29.23.32.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 29 Feb 2020 23:32:35 -0800 (PST)
+Date: Sun, 1 Mar 2020 02:32:30 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Ram Muthiah <rammuthiah@google.com>
+Subject: Re: [PATCH RESEND] virtio: virtio_pci_legacy: Remove default y from
+ Kconfig
+Message-ID: <20200301023025-mutt-send-email-mst@kernel.org>
+References: <20200228232736.182780-1-rammuthiah@google.com>
+MIME-Version: 1.0
+In-Reply-To: <20200228232736.182780-1-rammuthiah@google.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: kernel-team@android.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,85 +103,51 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The feature VIRTIO_NET_F_HASH_REPORT extends the
-layout of the packet and requests the device to
-calculate hash on incoming packets and report it
-in the packet header.
+On Fri, Feb 28, 2020 at 03:27:36PM -0800, Ram Muthiah wrote:
+> The legacy pci driver should no longer be default enabled. QEMU has
+> implemented support for Virtio 1 for virtio-pci since June 2015
+> on SHA dfb8e184db75.
+> 
+> Signed-off-by: Ram Muthiah <rammuthiah@google.com>
 
-Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
----
- include/uapi/linux/virtio_net.h | 36 +++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+I see little reason to do this: y is safer and will boot on more
+hypervisors, so people that aren't sure should enable it.
 
-diff --git a/include/uapi/linux/virtio_net.h b/include/uapi/linux/virtio_net.h
-index 7a342657fb6c..6d7230469c57 100644
---- a/include/uapi/linux/virtio_net.h
-+++ b/include/uapi/linux/virtio_net.h
-@@ -57,6 +57,7 @@
- 					 * Steering */
- #define VIRTIO_NET_F_CTRL_MAC_ADDR 23	/* Set MAC address */
- 
-+#define VIRTIO_NET_F_HASH_REPORT  57	/* Supports hash report */
- #define VIRTIO_NET_F_RSS	  60	/* Supports RSS RX steering */
- #define VIRTIO_NET_F_RSC_EXT	  61	/* extended coalescing info */
- #define VIRTIO_NET_F_STANDBY	  62	/* Act as standby for another device
-@@ -144,6 +145,23 @@ struct virtio_net_hdr_v1 {
- 	__virtio16 num_buffers;	/* Number of merged rx buffers */
- };
- 
-+struct virtio_net_hdr_v1_hash {
-+	struct virtio_net_hdr_v1 hdr;
-+	__virtio32 hash_value;
-+#define VIRTIO_NET_HASH_REPORT_NONE            0
-+#define VIRTIO_NET_HASH_REPORT_IPv4            1
-+#define VIRTIO_NET_HASH_REPORT_TCPv4           2
-+#define VIRTIO_NET_HASH_REPORT_UDPv4           3
-+#define VIRTIO_NET_HASH_REPORT_IPv6            4
-+#define VIRTIO_NET_HASH_REPORT_TCPv6           5
-+#define VIRTIO_NET_HASH_REPORT_UDPv6           6
-+#define VIRTIO_NET_HASH_REPORT_IPv6_EX         7
-+#define VIRTIO_NET_HASH_REPORT_TCPv6_EX        8
-+#define VIRTIO_NET_HASH_REPORT_UDPv6_EX        9
-+	__virtio16 hash_report;
-+	__virtio16 padding;
-+};
-+
- #ifndef VIRTIO_NET_NO_LEGACY
- /* This header comes first in the scatter-gather list.
-  * For legacy virtio, if VIRTIO_F_ANY_LAYOUT is not negotiated, it must
-@@ -292,6 +310,24 @@ struct virtio_net_rss_config {
- 
-  #define VIRTIO_NET_CTRL_MQ_RSS_CONFIG          1
- 
-+/*
-+ * The command VIRTIO_NET_CTRL_MQ_HASH_CONFIG requests the device
-+ * to include in the virtio header of the packet the value of the
-+ * calculated hash and the report type of hash. It also provides
-+ * parameters for hash calculation. The command requires feature
-+ * VIRTIO_NET_F_HASH_REPORT to be negotiated to extend the
-+ * layout of virtio header as defined in virtio_net_hdr_v1_hash.
-+ */
-+struct virtio_net_hash_config {
-+	__virtio32 hash_types;
-+	/* for compatibility with virtio_net_rss_config */
-+	__virtio16 reserved[4];
-+	__u8 hash_key_length;
-+	__u8 hash_key_data[/*hash_key_length*/];
-+};
-+
-+ #define VIRTIO_NET_CTRL_MQ_HASH_CONFIG         2
-+
- /*
-  * Control network offloads
-  *
--- 
-2.17.1
+> ---
+>  drivers/virtio/Kconfig | 6 ------
+>  1 file changed, 6 deletions(-)
+> 
+> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
+> index 078615cf2afc..eacd0b90d32b 100644
+> --- a/drivers/virtio/Kconfig
+> +++ b/drivers/virtio/Kconfig
+> @@ -26,7 +26,6 @@ config VIRTIO_PCI
+>  
+>  config VIRTIO_PCI_LEGACY
+>  	bool "Support for legacy virtio draft 0.9.X and older devices"
+> -	default y
+>  	depends on VIRTIO_PCI
+>  	---help---
+>            Virtio PCI Card 0.9.X Draft (circa 2014) and older device support.
+> @@ -36,11 +35,6 @@ config VIRTIO_PCI_LEGACY
+>  	  If disabled, you get a slightly smaller, non-transitional driver,
+>  	  with no legacy compatibility.
+>  
+> -          So look out into your driveway.  Do you have a flying car?  If
+> -          so, you can happily disable this option and virtio will not
+> -          break.  Otherwise, leave it set.  Unless you're testing what
+> -          life will be like in The Future.
+> -
+>  	  If unsure, say Y.
+>  
+>  config VIRTIO_PMEM
+> -- 
+> 2.25.0.265.gbab2e86ba0-goog
 
 _______________________________________________
 Virtualization mailing list
