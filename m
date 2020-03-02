@@ -1,80 +1,128 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3C44175ACB
-	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 13:49:00 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E54D0175AD8
+	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 13:53:28 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 6A4E08147D;
-	Mon,  2 Mar 2020 12:48:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 731FE83F06;
+	Mon,  2 Mar 2020 12:53:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KPs5xHpk9dVr; Mon,  2 Mar 2020 12:48:58 +0000 (UTC)
+	with ESMTP id UEXcV03pKJZm; Mon,  2 Mar 2020 12:53:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B352681422;
-	Mon,  2 Mar 2020 12:48:58 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id F3E1C841D4;
+	Mon,  2 Mar 2020 12:53:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 92764C013E;
-	Mon,  2 Mar 2020 12:48:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D7566C013E;
+	Mon,  2 Mar 2020 12:53:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 12DE8C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 13000C013E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 12:48:57 +0000 (UTC)
+ Mon,  2 Mar 2020 12:53:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 00EA48536C
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 0A21483F06
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 12:48:57 +0000 (UTC)
+ Mon,  2 Mar 2020 12:53:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OXOwoN-ZwuZ0
+ with ESMTP id pd0vGjr4hPij
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 12:48:55 +0000 (UTC)
+ Mon,  2 Mar 2020 12:53:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
- [209.85.128.66])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 575E48535F
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id ED8E18407F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 12:48:55 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id 6so2563700wmi.5
- for <virtualization@lists.linux-foundation.org>;
- Mon, 02 Mar 2020 04:48:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=s+VyaNhmOd6f42VIDi6KHAKXCWAclUlFckZ+VTZz/lc=;
- b=WQWk74uq0uW7c6N2JxEUPuhvrSjadUOVzH2RBfuXiIQxruG/xG1mdSzbuQGB8MmoH9
- +77T5lyOGQeQTc9L+8QNyZ2SVYCtmnGeNxV1RCotqvidIuIlI3jb8PGjWxhKSOGJEch/
- cqSZPL/Pb/dYuWA7Ye8C8biRegEYAJTFlssXl+reU0vHs/D9HpaIwthun3UzKZj+Zpkg
- 3GE7G6BOgdt86ni6X+pC08h6gtdYKPd/a/BMt918u0Gv+IZD5eIG2mLXCj/ZvHk6TOGg
- wvv5kmlRh5Y8JzclIXa6oJvQW/Dw3DzC8VXWXpdEYFOAoSNrhTQzxt8b6Fho/3ck++Oa
- tA6Q==
-X-Gm-Message-State: ANhLgQ0gqWUvLq9Bj7WjlCPt4ZDDHkwsy6PH0O4O9RqqB7T788Zv0CbA
- 8p2LiBYu8qF1+hQyKwibtqo=
-X-Google-Smtp-Source: ADFU+vu2qgToohf1Ho0XOtqDdOYGWkWtP/VPHfRQw8HJnTcjtKh7DPXkwvVpSUhS0/HRLDYCsIxTfA==
-X-Received: by 2002:a7b:cc69:: with SMTP id n9mr2851092wmj.175.1583153333837; 
- Mon, 02 Mar 2020 04:48:53 -0800 (PST)
-Received: from localhost (prg-ext-pat.suse.com. [213.151.95.130])
- by smtp.gmail.com with ESMTPSA id z14sm28071107wru.31.2020.03.02.04.48.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2020 04:48:53 -0800 (PST)
-Date: Mon, 2 Mar 2020 13:48:52 +0100
-From: Michal Hocko <mhocko@kernel.org>
-To: David Hildenbrand <david@redhat.com>
+ Mon,  2 Mar 2020 12:53:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583153603;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=9PtSLdZCaRnvpSBdCFBQ5RSyzQpwkCGpqNVbV6e41Lg=;
+ b=LUYOxDtVgXpyRAKj8BstfLHdjlBy47J+/c1KjotufOoIQnsJ6zLTDKnxn03G7pHHZsN6T4
+ nRL1aRbNh5UySl+ryZAgNzsbU9ckH+60LDgnl1he9nlp+XuTmbF4pc24Y4Y9xno2jwz3TZ
+ SyvfsUKznofEMu0G+MN0ooHpsDGm9Oc=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-205-TwRprTWlNmCszp0mRNiWlg-1; Mon, 02 Mar 2020 07:53:20 -0500
+X-MC-Unique: TwRprTWlNmCszp0mRNiWlg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9395B8017DF;
+ Mon,  2 Mar 2020 12:53:17 +0000 (UTC)
+Received: from [10.36.116.114] (ovpn-116-114.ams2.redhat.com [10.36.116.114])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 21EB9100E805;
+ Mon,  2 Mar 2020 12:53:08 +0000 (UTC)
 Subject: Re: [PATCH RFC v4 08/13] mm/memory_hotplug: Introduce
  offline_and_remove_memory()
-Message-ID: <20200302124852.GJ4380@dhcp22.suse.cz>
+To: Michal Hocko <mhocko@kernel.org>
 References: <20191212171137.13872-1-david@redhat.com>
  <20191212171137.13872-9-david@redhat.com>
  <20200225141134.GU22443@dhcp22.suse.cz>
  <d1dbb687-7959-f4f1-6a64-33ee039782ef@redhat.com>
+ <20200302124852.GJ4380@dhcp22.suse.cz>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <db703da8-cef6-c4bd-a4ba-0863408574d3@redhat.com>
+Date: Mon, 2 Mar 2020 13:53:08 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <d1dbb687-7959-f4f1-6a64-33ee039782ef@redhat.com>
+In-Reply-To: <20200302124852.GJ4380@dhcp22.suse.cz>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Cc: Oscar Salvador <osalvador@suse.com>, virtio-dev@lists.oasis-open.org,
  Pavel Tatashin <pasha.tatashin@soleen.com>, kvm@vger.kernel.org,
  "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
@@ -97,44 +145,52 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue 25-02-20 15:27:28, David Hildenbrand wrote:
-> On 25.02.20 15:11, Michal Hocko wrote:
-> > On Thu 12-12-19 18:11:32, David Hildenbrand wrote:
-> >> virtio-mem wants to offline and remove a memory block once it unplugged
-> >> all subblocks (e.g., using alloc_contig_range()). Let's provide
-> >> an interface to do that from a driver. virtio-mem already supports to
-> >> offline partially unplugged memory blocks. Offlining a fully unplugged
-> >> memory block will not require to migrate any pages. All unplugged
-> >> subblocks are PageOffline() and have a reference count of 0 - so
-> >> offlining code will simply skip them.
-> >>
-> >> All we need an interface to trigger the "offlining" and the removing in a
-> >> single operation - to make sure the memory block cannot get onlined by
-> >> user space again before it gets removed.
-> > 
-> > Why does that matter? Is it really likely that the userspace would
-> > interfere? What would be the scenario?
+On 02.03.20 13:48, Michal Hocko wrote:
+> On Tue 25-02-20 15:27:28, David Hildenbrand wrote:
+>> On 25.02.20 15:11, Michal Hocko wrote:
+>>> On Thu 12-12-19 18:11:32, David Hildenbrand wrote:
+>>>> virtio-mem wants to offline and remove a memory block once it unplugged
+>>>> all subblocks (e.g., using alloc_contig_range()). Let's provide
+>>>> an interface to do that from a driver. virtio-mem already supports to
+>>>> offline partially unplugged memory blocks. Offlining a fully unplugged
+>>>> memory block will not require to migrate any pages. All unplugged
+>>>> subblocks are PageOffline() and have a reference count of 0 - so
+>>>> offlining code will simply skip them.
+>>>>
+>>>> All we need an interface to trigger the "offlining" and the removing in a
+>>>> single operation - to make sure the memory block cannot get onlined by
+>>>> user space again before it gets removed.
+>>>
+>>> Why does that matter? Is it really likely that the userspace would
+>>> interfere? What would be the scenario?
+>>
+>> I guess it's not that relevant after all (I think this comment dates
+>> back to the times where we didn't have try_remove_memory() and could
+>> actually BUG_ON() in remove_memory() if there would have been a race).
+>> Can drop that part.
+>>
+>>>
+>>> Or is still mostly about not requiring callers to open code this general
+>>> patter?
+>>
+>> From kernel module context, I cannot get access to the actual memory
+>> block device (find_memory_block()) and call the device_unregister().
+>>
+>> Especially, also the device hotplug lock is not exported. So this is a
+>> clean helper function to be used from kernel module context. (e.g., also
+>> hyper-v showed interest for using that)
 > 
-> I guess it's not that relevant after all (I think this comment dates
-> back to the times where we didn't have try_remove_memory() and could
-> actually BUG_ON() in remove_memory() if there would have been a race).
-> Can drop that part.
+> Fair enough.
 > 
-> > 
-> > Or is still mostly about not requiring callers to open code this general
-> > patter?
-> 
-> From kernel module context, I cannot get access to the actual memory
-> block device (find_memory_block()) and call the device_unregister().
-> 
-> Especially, also the device hotplug lock is not exported. So this is a
-> clean helper function to be used from kernel module context. (e.g., also
-> hyper-v showed interest for using that)
 
-Fair enough.
+I'll send a v1 shortly, I rephrased the description to make this clear.
+Thanks!
+
 -- 
-Michal Hocko
-SUSE Labs
+Thanks,
+
+David / dhildenb
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
