@@ -2,140 +2,84 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1B061762E6
-	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 19:42:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E95A1766CC
+	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 23:21:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 1A8F0204A9;
-	Mon,  2 Mar 2020 18:42:18 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4BEE8204C6;
+	Mon,  2 Mar 2020 22:21:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MDXDL6Fh78YL; Mon,  2 Mar 2020 18:42:15 +0000 (UTC)
+	with ESMTP id Njpa-vQOFq5l; Mon,  2 Mar 2020 22:21:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 586C41FEF0;
-	Mon,  2 Mar 2020 18:42:15 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 5E258204C0;
+	Mon,  2 Mar 2020 22:21:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3D1B5C013E;
-	Mon,  2 Mar 2020 18:42:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 41351C013E;
+	Mon,  2 Mar 2020 22:21:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C6166C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5DCF4C013E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 18:42:12 +0000 (UTC)
+ Mon,  2 Mar 2020 22:21:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id BC135855F7
+ by hemlock.osuosl.org (Postfix) with ESMTP id 467BC87020
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 18:42:12 +0000 (UTC)
+ Mon,  2 Mar 2020 22:21:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AtPxiDtVAyUW
+ with ESMTP id TnjMZEl2YQtN
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 18:42:12 +0000 (UTC)
+ Mon,  2 Mar 2020 22:21:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id E3901854D1
+Received: from mail-vk1-f193.google.com (mail-vk1-f193.google.com
+ [209.85.221.193])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 9C3DB86FF9
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 18:42:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583174530;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=x+PcEaMz7vD6r/sekHWdoFeMEXe7RrhKK1hXyARhweQ=;
- b=Zvw7P6UezZW0uzjslnqGdGXALYEl3gct2vxZAg9UMzh3crsCgN6MrlwK+5TmKLXNhaYRCg
- rv2qp2wlFvnbONUkRDVt0Be85/AaZZmhKdnT5Jtrc65vbRUGGBa4ZQLkVz+UcbV5lly/DU
- zCv+x6YFvsTf/6nSkySeh6FjAIsLQkw=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-361-SKy6hr5lPZykom0-L2Nqvw-1; Mon, 02 Mar 2020 13:42:06 -0500
-X-MC-Unique: SKy6hr5lPZykom0-L2Nqvw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 77684107ACC4;
- Mon,  2 Mar 2020 18:42:03 +0000 (UTC)
-Received: from [10.36.116.60] (ovpn-116-60.ams2.redhat.com [10.36.116.60])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DCDBB19C7F;
- Mon,  2 Mar 2020 18:41:55 +0000 (UTC)
-Subject: Re: [PATCH v1 06/11] mm: Allow to offline unmovable PageOffline()
- pages via MEM_GOING_OFFLINE
-To: Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- linux-kernel@vger.kernel.org
-References: <20200302134941.315212-1-david@redhat.com>
- <20200302134941.315212-7-david@redhat.com>
- <abac569d8d1978aebadf71b65cdeb240a6256ad2.camel@linux.intel.com>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <65d4aadd-4d19-865a-3b65-d6a6d4f23dc5@redhat.com>
-Date: Mon, 2 Mar 2020 19:41:39 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Mon,  2 Mar 2020 22:21:40 +0000 (UTC)
+Received: by mail-vk1-f193.google.com with SMTP id c129so306763vkh.7
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 02 Mar 2020 14:21:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=H/ZXePw08jIq7OBB1YUZ7Aye4n93ozY+7PwFaAkmQrs=;
+ b=e0zMyqz+F+6zRjoWtD/mmEgf34GKDHSCQlnC/uFR2APNtgaNTLYdn/QIN8teuoIAIM
+ rff9jQj/X45gNaRymYGKIMomIBf61QRu0cSWCxImAgLP2bGNh7kxVBOw9RxTu3c/ObV9
+ w6VlRCQMySed3qvqkTtidujVwrsaEQIQO2ye2MqYmi/E97frP8ZV4KBO/a6zgm7b5gDy
+ fi7YE9kwimD1YdzUI/ow0fLyrYA4zPh63n6XoJUb7TrsyOTHqtwjnkvWjMfi560AYAe1
+ nhM+BOAVhrxNIhnQoGdJw164oDxtFr1/SVpWWMI74s4/mGAfgAiiY3xH+RUsO/p6kIBU
+ d1pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=H/ZXePw08jIq7OBB1YUZ7Aye4n93ozY+7PwFaAkmQrs=;
+ b=Yf0EB/vsKlp8GDPPfKyfRN75a0QpUquPFQxk6tkGBcEWmw7b7LFrl7oCUypW8H0LTw
+ MXjS3wjhQIw7jtNKj/3JCgZ0Yo1uINGg+1Fnbdun/G/4AUAuogZvpp+GJaSQ7ewAUyRQ
+ UJNdTbGgxGclzuH2QPgVBbodJGfuy8ahYi2nFYcdHRgq9KOM0VhhsXNfXzoAYBn75hgw
+ +cSPoQ5GyqRujQik98X0PxPNIcX/6UIph9fOZI/FSZ9gHZGTFAjJDnBd/veWN+oZPAdG
+ C+OOdNc9VruiSIzNt5b6M+3LGnwO+m6rQOgxkwe7pxgIIdsNYysyz84cqjsPweEGXbhT
+ +cJg==
+X-Gm-Message-State: ANhLgQ1gBT4vwaA3QchZ9Dhf0zMcqP1r2OXthNQC8/gugIKkHsPXKwIB
+ q75LnJX3Ebz0QufgTXv1ZaLRCYLuKX+F4HZtHjk=
+X-Google-Smtp-Source: ADFU+vtgTWEvlHrNTmJtHyKDJof9QYg21GqyVkzf3O6lrAwFQuvxk7BBzUe3gFp1CedXXmdr/MQo9bYXpNXIavJAaGY=
+X-Received: by 2002:a1f:284:: with SMTP id 126mr151121vkc.16.1583187699557;
+ Mon, 02 Mar 2020 14:21:39 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <abac569d8d1978aebadf71b65cdeb240a6256ad2.camel@linux.intel.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: Juergen Gross <jgross@suse.com>, virtio-dev@lists.oasis-open.org,
- Michal Hocko <mhocko@suse.com>, Mike Rapoport <rppt@linux.ibm.com>,
- kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
- Anshuman Khandual <anshuman.khandual@arm.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Pingfan Liu <kernelfans@gmail.com>, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, Pavel Tatashin <pavel.tatashin@microsoft.com>,
- Qian Cai <cai@lca.pw>, Johannes Weiner <hannes@cmpxchg.org>,
- Anthony Yznaga <anthony.yznaga@oracle.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- virtualization@lists.linux-foundation.org,
- Mel Gorman <mgorman@techsingularity.net>,
- Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
- Oscar Salvador <osalvador@suse.de>
+References: <20200227210454.18217-1-alistair.francis@wdc.com>
+ <20200228095748.uu4sqkz6y477eabc@sirius.home.kraxel.org>
+In-Reply-To: <20200228095748.uu4sqkz6y477eabc@sirius.home.kraxel.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 2 Mar 2020 14:14:02 -0800
+Message-ID: <CAKmqyKOTjyRL9vxZrZW8Q+yBM0n-Nw-o-Cn3dUDDfAAa7Nswrg@mail.gmail.com>
+Subject: Re: [PATCH] drm/bochs: Remove vga write
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: airlied@linux.ie, Khem Raj <raj.khem@gmail.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Alistair Francis <alistair.francis@wdc.com>, daniel@ffwll.ch
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -152,16 +96,92 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 02.03.20 18:40, Alexander Duyck wrote:
-> Reviewed-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+On Fri, Feb 28, 2020 at 1:57 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> On Thu, Feb 27, 2020 at 01:04:54PM -0800, Alistair Francis wrote:
+> > The QEMU model for the Bochs display has no VGA memory section at offset
+> > 0x400 [1]. By writing to this register Linux can create a write to
+> > unassigned memory which depending on machine and architecture can result
+> > in a store fault.
+> >
+> > I don't see any reference to this address at OSDev [2] or in the Bochs
+> > source code.
+> >
+> > Removing this write still allows graphics to work inside QEMU with
+> > the bochs-display.
+>
+> It's not that simple.  The driver also handles the qemu stdvga (-device
+> VGA, -device secondary-vga) which *does* need the vga port write.
+> There is no way for the guest to figure whenever the device is
+> secondary-vga or bochs-display.
+>
+> So how about fixing things on the host side?  Does qemu patch below
+> help?
 
-Thanks a lot Alex!
+That patch looks like it will fix the problem, but it doesn't seem
+like the correct fix. I would rather avoid adding a large chunk of
+dummy I/O to handle the two devices.
 
--- 
-Thanks,
+>
+> Maybe another possible approach is to enable/disable vga access per
+> arch.  On x86 this doesn't cause any problems.  I guess you are on
+> risc-v?
 
-David / dhildenb
+I would prefer this option. I do see this on RISC-V, but I suspect the
+issue will appear on other architectures (although how they handle I/O
+failures in QEMU is a different story).
 
+Can I just do the VGA write if x86?
+
+Alistair
+
+>
+> cheers,
+>   Gerd
+>
+> diff --git a/hw/display/bochs-display.c b/hw/display/bochs-display.c
+> index 62085f9fc063..e93e838243b8 100644
+> --- a/hw/display/bochs-display.c
+> +++ b/hw/display/bochs-display.c
+> @@ -151,6 +151,26 @@ static const MemoryRegionOps bochs_display_qext_ops = {
+>      .endianness = DEVICE_LITTLE_ENDIAN,
+>  };
+>
+> +static uint64_t dummy_read(void *ptr, hwaddr addr, unsigned size)
+> +{
+> +    return -1;
+> +}
+> +
+> +static void dummy_write(void *ptr, hwaddr addr,
+> +                        uint64_t val, unsigned size)
+> +{
+> +}
+> +
+> +static const MemoryRegionOps dummy_ops = {
+> +    .read = dummy_read,
+> +    .write = dummy_write,
+> +    .valid.min_access_size = 1,
+> +    .valid.max_access_size = 4,
+> +    .impl.min_access_size = 1,
+> +    .impl.max_access_size = 1,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +};
+> +
+>  static int bochs_display_get_mode(BochsDisplayState *s,
+>                                     BochsDisplayMode *mode)
+>  {
+> @@ -284,8 +304,8 @@ static void bochs_display_realize(PCIDevice *dev, Error **errp)
+>      memory_region_init_io(&s->qext, obj, &bochs_display_qext_ops, s,
+>                            "qemu extended regs", PCI_VGA_QEXT_SIZE);
+>
+> -    memory_region_init(&s->mmio, obj, "bochs-display-mmio",
+> -                       PCI_VGA_MMIO_SIZE);
+> +    memory_region_init_io(&s->mmio, obj, &dummy_ops, NULL,
+> +                          "bochs-display-mmio", PCI_VGA_MMIO_SIZE);
+>      memory_region_add_subregion(&s->mmio, PCI_VGA_BOCHS_OFFSET, &s->vbe);
+>      memory_region_add_subregion(&s->mmio, PCI_VGA_QEXT_OFFSET, &s->qext);
+>
+>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
