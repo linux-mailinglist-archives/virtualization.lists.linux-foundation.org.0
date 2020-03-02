@@ -1,85 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E95A1766CC
-	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 23:21:45 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id B9B6C1766EA
+	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 23:26:57 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 4BEE8204C6;
-	Mon,  2 Mar 2020 22:21:43 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 412B58522E;
+	Mon,  2 Mar 2020 22:26:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Njpa-vQOFq5l; Mon,  2 Mar 2020 22:21:42 +0000 (UTC)
+	with ESMTP id yhIfBkjWGQyZ; Mon,  2 Mar 2020 22:26:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 5E258204C0;
-	Mon,  2 Mar 2020 22:21:42 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 65C698517E;
+	Mon,  2 Mar 2020 22:26:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 41351C013E;
-	Mon,  2 Mar 2020 22:21:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 38492C013E;
+	Mon,  2 Mar 2020 22:26:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5DCF4C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7C3AEC013E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 22:21:41 +0000 (UTC)
+ Mon,  2 Mar 2020 22:26:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 467BC87020
+ by hemlock.osuosl.org (Postfix) with ESMTP id 6B0DE83DD9
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 22:21:41 +0000 (UTC)
+ Mon,  2 Mar 2020 22:26:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TnjMZEl2YQtN
+ with ESMTP id 9F6UuUvKRhee
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 22:21:40 +0000 (UTC)
+ Mon,  2 Mar 2020 22:26:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-vk1-f193.google.com (mail-vk1-f193.google.com
- [209.85.221.193])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 9C3DB86FF9
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id F2B5C81F17
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 22:21:40 +0000 (UTC)
-Received: by mail-vk1-f193.google.com with SMTP id c129so306763vkh.7
+ Mon,  2 Mar 2020 22:26:51 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id v2so1792981wrp.12
  for <virtualization@lists.linux-foundation.org>;
- Mon, 02 Mar 2020 14:21:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=H/ZXePw08jIq7OBB1YUZ7Aye4n93ozY+7PwFaAkmQrs=;
- b=e0zMyqz+F+6zRjoWtD/mmEgf34GKDHSCQlnC/uFR2APNtgaNTLYdn/QIN8teuoIAIM
- rff9jQj/X45gNaRymYGKIMomIBf61QRu0cSWCxImAgLP2bGNh7kxVBOw9RxTu3c/ObV9
- w6VlRCQMySed3qvqkTtidujVwrsaEQIQO2ye2MqYmi/E97frP8ZV4KBO/a6zgm7b5gDy
- fi7YE9kwimD1YdzUI/ow0fLyrYA4zPh63n6XoJUb7TrsyOTHqtwjnkvWjMfi560AYAe1
- nhM+BOAVhrxNIhnQoGdJw164oDxtFr1/SVpWWMI74s4/mGAfgAiiY3xH+RUsO/p6kIBU
- d1pw==
+ Mon, 02 Mar 2020 14:26:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=MA9znzX6PSPw0c84+budp0d6oKomgQq8cGkmxmDu0akNSUdRvqlf2aitHlQ5625qeJ
+ 0FNBlJ3tzHkRi5Y4nNifIYnMno5hw7ddpfLmsRUsTyQPivjedLayzvJ0DDFjQOK1mNwR
+ DpRYYirYkqYSM2gBR9H213TBJgBYuo3bPgPCs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=H/ZXePw08jIq7OBB1YUZ7Aye4n93ozY+7PwFaAkmQrs=;
- b=Yf0EB/vsKlp8GDPPfKyfRN75a0QpUquPFQxk6tkGBcEWmw7b7LFrl7oCUypW8H0LTw
- MXjS3wjhQIw7jtNKj/3JCgZ0Yo1uINGg+1Fnbdun/G/4AUAuogZvpp+GJaSQ7ewAUyRQ
- UJNdTbGgxGclzuH2QPgVBbodJGfuy8ahYi2nFYcdHRgq9KOM0VhhsXNfXzoAYBn75hgw
- +cSPoQ5GyqRujQik98X0PxPNIcX/6UIph9fOZI/FSZ9gHZGTFAjJDnBd/veWN+oZPAdG
- C+OOdNc9VruiSIzNt5b6M+3LGnwO+m6rQOgxkwe7pxgIIdsNYysyz84cqjsPweEGXbhT
- +cJg==
-X-Gm-Message-State: ANhLgQ1gBT4vwaA3QchZ9Dhf0zMcqP1r2OXthNQC8/gugIKkHsPXKwIB
- q75LnJX3Ebz0QufgTXv1ZaLRCYLuKX+F4HZtHjk=
-X-Google-Smtp-Source: ADFU+vtgTWEvlHrNTmJtHyKDJof9QYg21GqyVkzf3O6lrAwFQuvxk7BBzUe3gFp1CedXXmdr/MQo9bYXpNXIavJAaGY=
-X-Received: by 2002:a1f:284:: with SMTP id 126mr151121vkc.16.1583187699557;
- Mon, 02 Mar 2020 14:21:39 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=pBa7LhR4z6i3qMIdNGUuobsbNyLEspudlP54w+aM7BiRnBMPqadkvHE2iHmqaSJPhl
+ EUNuRWmkRV45rsFUBzSWJwgXyKo7bvMGfKKk39rsTa10DD8FLto3OQDqoDrgP+gzW/MK
+ 7/bLB79gnacNL37axIq0OEtZA0PoR7ZedBjyqs2gp392of5NHVkMAVvI7kLphCjTAjrs
+ mxeVFCdZWZqUN3/RFp996wz8dyOQgpkPXAUba0ja5q3+2EJJQQOMUhJaisIOj0gPvbB3
+ gGkl5oPU7vEV9FG318db9x8CMgA8AWrEjVJ225t/Fnr5CbbjalJ7USaq0kpXE35/CBj3
+ mUaA==
+X-Gm-Message-State: ANhLgQ2ksnaGEOEt4FoLZ7rQwEjK09UVJio0bWNVTZYxZ69s4h9/ugnF
+ EAfqo1OfQauaUNDd++E58d9FPg==
+X-Google-Smtp-Source: ADFU+vuSBRdlflNUeP9EnuI+BYYbndFMXhPLsuN6txSf0X9eWdDEYLgp1bvh8z03OlpWF/CpQyjUHw==
+X-Received: by 2002:adf:de83:: with SMTP id w3mr1596369wrl.275.1583188010384; 
+ Mon, 02 Mar 2020 14:26:50 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id o18sm26114589wrv.60.2020.03.02.14.26.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Mar 2020 14:26:49 -0800 (PST)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Subject: [PATCH 07/51] drm/qxl: Use drmm_add_final_kfree
+Date: Mon,  2 Mar 2020 23:25:47 +0100
+Message-Id: <20200302222631.3861340-8-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20200302222631.3861340-1-daniel.vetter@ffwll.ch>
+References: <20200302222631.3861340-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-References: <20200227210454.18217-1-alistair.francis@wdc.com>
- <20200228095748.uu4sqkz6y477eabc@sirius.home.kraxel.org>
-In-Reply-To: <20200228095748.uu4sqkz6y477eabc@sirius.home.kraxel.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 2 Mar 2020 14:14:02 -0800
-Message-ID: <CAKmqyKOTjyRL9vxZrZW8Q+yBM0n-Nw-o-Cn3dUDDfAAa7Nswrg@mail.gmail.com>
-Subject: Re: [PATCH] drm/bochs: Remove vga write
-To: Gerd Hoffmann <kraxel@redhat.com>
-Cc: airlied@linux.ie, Khem Raj <raj.khem@gmail.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Alistair Francis <alistair.francis@wdc.com>, daniel@ffwll.ch
+Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,92 +98,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 28, 2020 at 1:57 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
-> On Thu, Feb 27, 2020 at 01:04:54PM -0800, Alistair Francis wrote:
-> > The QEMU model for the Bochs display has no VGA memory section at offset
-> > 0x400 [1]. By writing to this register Linux can create a write to
-> > unassigned memory which depending on machine and architecture can result
-> > in a store fault.
-> >
-> > I don't see any reference to this address at OSDev [2] or in the Bochs
-> > source code.
-> >
-> > Removing this write still allows graphics to work inside QEMU with
-> > the bochs-display.
->
-> It's not that simple.  The driver also handles the qemu stdvga (-device
-> VGA, -device secondary-vga) which *does* need the vga port write.
-> There is no way for the guest to figure whenever the device is
-> secondary-vga or bochs-display.
->
-> So how about fixing things on the host side?  Does qemu patch below
-> help?
+With this we can drop the final kfree from the release function.
 
-That patch looks like it will fix the problem, but it doesn't seem
-like the correct fix. I would rather avoid adding a large chunk of
-dummy I/O to handle the two devices.
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+---
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+ drivers/gpu/drm/qxl/qxl_kms.c | 2 ++
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
->
-> Maybe another possible approach is to enable/disable vga access per
-> arch.  On x86 this doesn't cause any problems.  I guess you are on
-> risc-v?
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 4fda3f9b29f4..09102e2efabc 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 */
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+-	dev->dev_private = NULL;
+-	kfree(qdev);
+ }
+ 
+ static void
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 70b20ee4741a..09d7b5f6d172 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -27,6 +27,7 @@
+ #include <linux/pci.h>
+ 
+ #include <drm/drm_drv.h>
++#include <drm/drm_managed.h>
+ #include <drm/drm_probe_helper.h>
+ 
+ #include "qxl_drv.h"
+@@ -121,6 +122,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	qdev->ddev.pdev = pdev;
+ 	pci_set_drvdata(pdev, &qdev->ddev);
+ 	qdev->ddev.dev_private = qdev;
++	drmm_add_final_kfree(&qdev->ddev, qdev);
+ 
+ 	mutex_init(&qdev->gem.mutex);
+ 	mutex_init(&qdev->update_area_mutex);
+-- 
+2.24.1
 
-I would prefer this option. I do see this on RISC-V, but I suspect the
-issue will appear on other architectures (although how they handle I/O
-failures in QEMU is a different story).
-
-Can I just do the VGA write if x86?
-
-Alistair
-
->
-> cheers,
->   Gerd
->
-> diff --git a/hw/display/bochs-display.c b/hw/display/bochs-display.c
-> index 62085f9fc063..e93e838243b8 100644
-> --- a/hw/display/bochs-display.c
-> +++ b/hw/display/bochs-display.c
-> @@ -151,6 +151,26 @@ static const MemoryRegionOps bochs_display_qext_ops = {
->      .endianness = DEVICE_LITTLE_ENDIAN,
->  };
->
-> +static uint64_t dummy_read(void *ptr, hwaddr addr, unsigned size)
-> +{
-> +    return -1;
-> +}
-> +
-> +static void dummy_write(void *ptr, hwaddr addr,
-> +                        uint64_t val, unsigned size)
-> +{
-> +}
-> +
-> +static const MemoryRegionOps dummy_ops = {
-> +    .read = dummy_read,
-> +    .write = dummy_write,
-> +    .valid.min_access_size = 1,
-> +    .valid.max_access_size = 4,
-> +    .impl.min_access_size = 1,
-> +    .impl.max_access_size = 1,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +};
-> +
->  static int bochs_display_get_mode(BochsDisplayState *s,
->                                     BochsDisplayMode *mode)
->  {
-> @@ -284,8 +304,8 @@ static void bochs_display_realize(PCIDevice *dev, Error **errp)
->      memory_region_init_io(&s->qext, obj, &bochs_display_qext_ops, s,
->                            "qemu extended regs", PCI_VGA_QEXT_SIZE);
->
-> -    memory_region_init(&s->mmio, obj, "bochs-display-mmio",
-> -                       PCI_VGA_MMIO_SIZE);
-> +    memory_region_init_io(&s->mmio, obj, &dummy_ops, NULL,
-> +                          "bochs-display-mmio", PCI_VGA_MMIO_SIZE);
->      memory_region_add_subregion(&s->mmio, PCI_VGA_BOCHS_OFFSET, &s->vbe);
->      memory_region_add_subregion(&s->mmio, PCI_VGA_QEXT_OFFSET, &s->qext);
->
->
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
