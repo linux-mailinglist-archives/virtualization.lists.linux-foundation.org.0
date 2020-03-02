@@ -1,72 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97F63175C97
-	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 15:09:27 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B4E16175CC4
+	for <lists.virtualization@lfdr.de>; Mon,  2 Mar 2020 15:17:58 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3291785BFA;
-	Mon,  2 Mar 2020 14:09:26 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 5D48C860FC;
+	Mon,  2 Mar 2020 14:17:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id g6Y5y2yjUp14; Mon,  2 Mar 2020 14:09:25 +0000 (UTC)
+	with ESMTP id pZhf4Swtv9vP; Mon,  2 Mar 2020 14:17:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 40C3B854B3;
-	Mon,  2 Mar 2020 14:09:25 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D09CB860BC;
+	Mon,  2 Mar 2020 14:17:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0A164C1D8E;
-	Mon,  2 Mar 2020 14:09:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B730BC013E;
+	Mon,  2 Mar 2020 14:17:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D9DA8C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B7EB1C013E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 14:09:23 +0000 (UTC)
+ Mon,  2 Mar 2020 14:17:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id D1A3F875B9
+ by hemlock.osuosl.org (Postfix) with ESMTP id A1B79860BC
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 14:09:23 +0000 (UTC)
+ Mon,  2 Mar 2020 14:17:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7NnwDd4ELmXX
+ with ESMTP id ZsP8qQO5JI1R
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 14:09:23 +0000 (UTC)
+ Mon,  2 Mar 2020 14:17:54 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 357CA87554
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 0810D85E1A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Mar 2020 14:09:23 +0000 (UTC)
+ Mon,  2 Mar 2020 14:17:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583158161;
+ s=mimecast20190719; t=1583158672;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=lsSEpDEIdaSjPCaTAzHcypnn9SKd5JBtv3AdQccvjrA=;
- b=H3SoCXKv0nh6m2i3uyHS3Ist932YwqEkqG1GC00/nkLmghyeNXHnvxg6eBXvIeSMBRagFy
- tI4gvHByWRlkYdYdzPoeVH1OCk4MJLDtoWmhe6kKktnnM7Tw6zOQnf0I3eYfRizbEZ/yKD
- ELI77hT493WMLiR+N2n73xs1UAzST1s=
+ bh=aSlbqTfXB8KK40C4UbS0ygfhPT9hTLVPTl4nVXr8U48=;
+ b=WG/2WBrbf7lPNY5fvHa+BZo+XNIS8hra5g6m6R0qHrP9g3dbONuCd1Wfaivp+FE5rWsaV+
+ ebLTR44IpPcFR3LXgLphstSg3uskGFfrad7BwP6BDSpb1ewO5j2u47+HVxtXSJ0VQpOb07
+ uCfIRdJxqI6AWLnLCLnUnjIPxok0sOo=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-436-gB2LR1ftNb2ukcpmkyuakw-1; Mon, 02 Mar 2020 09:09:19 -0500
-X-MC-Unique: gB2LR1ftNb2ukcpmkyuakw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-360-cJl0n0beP5iUYhC6PrB-kA-1; Mon, 02 Mar 2020 09:17:50 -0500
+X-MC-Unique: cJl0n0beP5iUYhC6PrB-kA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 25D581005510;
- Mon,  2 Mar 2020 14:09:18 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CBBE1190B2D3;
+ Mon,  2 Mar 2020 14:17:47 +0000 (UTC)
 Received: from [10.36.116.114] (ovpn-116-114.ams2.redhat.com [10.36.116.114])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7C0C15C122;
- Mon,  2 Mar 2020 14:09:11 +0000 (UTC)
-Subject: Re: [PATCH v1 01/11] ACPI: NUMA: export pxm_to_node
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BB7CD60C80;
+ Mon,  2 Mar 2020 14:17:39 +0000 (UTC)
+Subject: Re: [PATCH v1 04/11] mm: Export alloc_contig_range() /
+ free_contig_range()
 To: Michal Hocko <mhocko@kernel.org>
 References: <20200302134941.315212-1-david@redhat.com>
- <20200302134941.315212-2-david@redhat.com>
- <20200302140309.GM4380@dhcp22.suse.cz>
+ <20200302134941.315212-5-david@redhat.com>
+ <20200302140519.GN4380@dhcp22.suse.cz>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -112,19 +113,24 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <baff6701-fc75-d205-2e78-904166f63030@redhat.com>
-Date: Mon, 2 Mar 2020 15:09:10 +0100
+Message-ID: <dd34277f-21ad-cae8-8f07-10915fea305e@redhat.com>
+Date: Mon, 2 Mar 2020 15:17:38 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200302140309.GM4380@dhcp22.suse.cz>
+In-Reply-To: <20200302140519.GN4380@dhcp22.suse.cz>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: virtio-dev@lists.oasis-open.org, linux-acpi@vger.kernel.org,
- kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- Andrew Morton <akpm@linux-foundation.org>, Len Brown <lenb@kernel.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-mm@kvack.org, Pavel Tatashin <pavel.tatashin@microsoft.com>,
+ Alexander Potapenko <glider@google.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Mike Rapoport <rppt@linux.ibm.com>,
+ Mel Gorman <mgorman@techsingularity.net>,
+ Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Oscar Salvador <osalvador@suse.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -141,24 +147,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 02.03.20 15:03, Michal Hocko wrote:
-> On Mon 02-03-20 14:49:31, David Hildenbrand wrote:
->> Will be needed by virtio-mem to identify the node from a pxm.
+On 02.03.20 15:05, Michal Hocko wrote:
+> On Mon 02-03-20 14:49:34, David Hildenbrand wrote:
+>> A virtio-mem device wants to allocate memory from the memory region it
+>> manages in order to unplug it in the hypervisor - similar to
+>> a balloon driver. Also, it might want to plug previously unplugged
+>> (allocated) memory and give it back to Linux. alloc_contig_range() /
+>> free_contig_range() seem to be the perfect interface for this task.
+>>
+>> In contrast to existing balloon devices, a virtio-mem device operates
+>> on bigger chunks (e.g., 4MB) and only on physical memory it manages. It
+>> tracks which chunks (subblocks) are still plugged, so it can go ahead
+>> and try to alloc_contig_range()+unplug them on unplug request, or
+>> plug+free_contig_range() unplugged chunks on plug requests.
+>>
+>> A virtio-mem device will use alloc_contig_range() / free_contig_range()
+>> only on ranges that belong to the same node/zone in at least
+>> MAX(MAX_ORDER - 1, pageblock_order) order granularity - e.g., 4MB on
+>> x86-64. The virtio-mem device added that memory, so the memory
+>> exists and does not contain any holes. virtio-mem will only try to allocate
+>> on ZONE_NORMAL, never on ZONE_MOVABLE, just like when allocating
+>> gigantic pages (we don't put unmovable data into the movable zone).
 > 
-> No objection to export the symbol. But it is almost always better to add
-> the export in the patch that actually uses it. The intention is much
-> more clear that way.
+> Same feedback as in pxm_to_node export. No objections to exporting the
+> symbol but it would be better to squash this function into the patch
+> which uses it. The changelog is highly virtio-mem specific anyway.
+> Maybe it is just a dejavu but I feel I have already said that but I do
+> not remember any details.
 
-Yeah, but I guess this way people might take more likely a look as if
-this would be squashed into a
- 5 files changed, 1786 insertions(+)
+As I said back then, I am not a friend of squashing core changes into
+driver changes (and AFAIK separating such is the common practice - well
+I have never written a driver myself). I doubt it will make review
+easier or faster (especially when it comes to patch #1).
 
-patch. At least that's what my experience tells me :)
-
-If there are hard feelings, I can squash (but I am afraid it will be
-even harder to get ACKs/RBs for core-mm changes that way ...)
-
-Thanks for having a look!
+I can squash #4 into #5, #6 into #7, #8 into #9 if it makes your review
+easier.
 
 -- 
 Thanks,
