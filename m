@@ -1,91 +1,110 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8ED7177BC7
-	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 17:21:47 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id BE2D1177CAC
+	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 18:02:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 6184486430;
-	Tue,  3 Mar 2020 16:21:46 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 73D7485A56;
+	Tue,  3 Mar 2020 17:02:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id V7lrnIUb13js; Tue,  3 Mar 2020 16:21:45 +0000 (UTC)
+	with ESMTP id W6-Hbmuu8sCL; Tue,  3 Mar 2020 17:02:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 356EF84C09;
-	Tue,  3 Mar 2020 16:21:45 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E865C85D7E;
+	Tue,  3 Mar 2020 17:02:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1A380C013E;
-	Tue,  3 Mar 2020 16:21:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BBB48C013E;
+	Tue,  3 Mar 2020 17:02:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AA76AC013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3BABAC013E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 16:21:43 +0000 (UTC)
+ Tue,  3 Mar 2020 17:02:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id A0FFC84C09
+ by whitealder.osuosl.org (Postfix) with ESMTP id 2743E81EE4
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 16:21:43 +0000 (UTC)
+ Tue,  3 Mar 2020 17:02:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QzOHcd5ZTcQk
+ with ESMTP id 5N9QBoBIOOqc
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 16:21:42 +0000 (UTC)
+ Tue,  3 Mar 2020 17:02:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A648E80A5E
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 3557A81E7B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 16:21:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583252501;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uXLTy0K7QJVZnARt6TsxatW+cz6I9HUr6tGiByFrAEw=;
- b=G7IPmS+j9he7BFMkrIUQ35ZPr0V2owqLAxtW4BkRFXSpklyPhUDuqKbYyEWkYFgWlFS+J+
- 3XPlpvielPCqy5t05517H0DVFEgQrPKRcxDuZTvuYoMkLYyUcWWnhB5VrQFp6qA2ipNXXR
- HHh4T2GRegBF4LyLpYVAvENFxzQMIf8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-198-hfMzhCJMMem1uyTrarRfig-1; Tue, 03 Mar 2020 11:21:37 -0500
-X-MC-Unique: hfMzhCJMMem1uyTrarRfig-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4F41A92717;
- Tue,  3 Mar 2020 16:21:35 +0000 (UTC)
-Received: from [10.36.116.59] (ovpn-116-59.ams2.redhat.com [10.36.116.59])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id B2B7B19C7F;
- Tue,  3 Mar 2020 16:21:28 +0000 (UTC)
-Subject: Re: [PATCH v2 1/3] iommu/virtio: Add topology description to
- virtio-iommu config space
-To: "Michael S. Tsirkin" <mst@redhat.com>, Joerg Roedel <joro@8bytes.org>
-References: <20200228172537.377327-1-jean-philippe@linaro.org>
- <20200228172537.377327-2-jean-philippe@linaro.org>
- <20200302161611.GD7829@8bytes.org>
- <9004f814-2f7c-9024-3465-6f9661b97b7a@redhat.com>
- <20200303130155.GA13185@8bytes.org>
- <20200303084753-mutt-send-email-mst@kernel.org>
- <20200303155318.GA3954@8bytes.org>
- <20200303105523-mutt-send-email-mst@kernel.org>
-From: Auger Eric <eric.auger@redhat.com>
-Message-ID: <9d1ad38f-0335-814f-f0b7-48c5b1b71dcd@redhat.com>
-Date: Tue, 3 Mar 2020 17:21:27 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.4.0
+ Tue,  3 Mar 2020 17:02:30 +0000 (UTC)
+Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 023GoXYe008541
+ for <virtualization@lists.linux-foundation.org>; Tue, 3 Mar 2020 12:02:29 -0500
+Received: from e06smtp01.uk.ibm.com (e06smtp01.uk.ibm.com [195.75.94.97])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2yfmu5e59e-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 03 Mar 2020 12:02:28 -0500
+Received: from localhost
+ by e06smtp01.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <virtualization@lists.linux-foundation.org> from <pasic@linux.ibm.com>;
+ Tue, 3 Mar 2020 17:02:26 -0000
+Received: from b06avi18878370.portsmouth.uk.ibm.com (9.149.26.194)
+ by e06smtp01.uk.ibm.com (192.168.101.131) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Tue, 3 Mar 2020 17:02:23 -0000
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
+ [9.149.105.58])
+ by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
+ id 023H2M4V37880164
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 3 Mar 2020 17:02:22 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id DFC684C052;
+ Tue,  3 Mar 2020 17:02:21 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 823854C04A;
+ Tue,  3 Mar 2020 17:02:21 +0000 (GMT)
+Received: from oc2783563651 (unknown [9.152.224.80])
+ by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Tue,  3 Mar 2020 17:02:21 +0000 (GMT)
+Date: Tue, 3 Mar 2020 18:02:20 +0100
+From: Halil Pasic <pasic@linux.ibm.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH 0/2] virtio-blk: improve handling of DMA mapping failures
+In-Reply-To: <20200303094909-mutt-send-email-mst@kernel.org>
+References: <20200213123728.61216-1-pasic@linux.ibm.com>
+ <20200303151252.59d45e86.pasic@linux.ibm.com>
+ <20200303094909-mutt-send-email-mst@kernel.org>
+Organization: IBM
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <20200303105523-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>, linux-pci@vger.kernel.org,
- virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
- sebastien.boeuf@intel.com, jacob.jun.pan@intel.com, bhelgaas@google.com,
- robin.murphy@arm.com
+X-TM-AS-GCONF: 00
+x-cbid: 20030317-4275-0000-0000-000003A80899
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20030317-4276-0000-0000-000038BD117E
+Message-Id: <20200303180220.7e38f9fd.pasic@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-03-03_05:2020-03-03,
+ 2020-03-03 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ suspectscore=0 spamscore=0 malwarescore=0 adultscore=0 mlxlogscore=999
+ bulkscore=0 mlxscore=0 impostorscore=0 clxscore=1015 phishscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2001150001 definitions=main-2003030116
+Cc: Jens Axboe <axboe@kernel.dk>, linux-s390@vger.kernel.org, "Lendacky,
+ Thomas" <Thomas.Lendacky@amd.com>, Cornelia Huck <cohuck@redhat.com>,
+ Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Viktor Mihajlovski <mihajlov@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,72 +121,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Michael, Joerg,
+On Tue, 3 Mar 2020 09:49:21 -0500
+"Michael S. Tsirkin" <mst@redhat.com> wrote:
 
-On 3/3/20 5:09 PM, Michael S. Tsirkin wrote:
-> On Tue, Mar 03, 2020 at 04:53:19PM +0100, Joerg Roedel wrote:
->> On Tue, Mar 03, 2020 at 09:00:05AM -0500, Michael S. Tsirkin wrote:
->>> Not necessarily. E.g. some power systems have neither.
->>> There are also systems looking to bypass ACPI e.g. for boot speed.
->>
->> If there is no firmware layer between the hardware and the OS the
->> necessary information the OS needs to run on the hardware is probably
->> hard-coded into the kernel?
+> On Tue, Mar 03, 2020 at 03:12:52PM +0100, Halil Pasic wrote:
+> > On Thu, 13 Feb 2020 13:37:26 +0100
+> > Halil Pasic <pasic@linux.ibm.com> wrote:
+> > 
+> > > Two patches are handling new edge cases introduced by doing DMA mappings
+> > > (which can fail) in virtio core.
+> > > 
+> > > I stumbled upon this while stress testing I/O for Protected Virtual
+> > > Machines. I deliberately chose a tiny swiotlb size and have generated
+> > > load with fio. With more than one virtio-blk disk in use I experienced
+> > > hangs.
+> > > 
+> > > The goal of this series is to fix those hangs.
+> > > 
+> > > Halil Pasic (2):
+> > >   virtio-blk: fix hw_queue stopped on arbitrary error
+> > >   virtio-blk: improve virtqueue error to BLK_STS
+> > > 
+> > >  drivers/block/virtio_blk.c | 17 ++++++++++++-----
+> > >  1 file changed, 12 insertions(+), 5 deletions(-)
+> > > 
+> > > 
+> > > base-commit: 39bed42de2e7d74686a2d5a45638d6a5d7e7d473
+> > 
+> > ping
+> > 
+> > Hi Michael, hi Jason,
+> > 
+> > I got some favorable reviews for this, but AFAIK I got nothing form the
+> > maintainers yet.
+> > 
+> > Is some of you going to pick these?
+> > 
+> > Regards,
+> > Halil
 > 
-> No. It's coded into the hardware. Which might even be practical
-> for bare-metal (e.g. on-board flash), but is very practical
-> when the device is part of a hypervisor.
+> I've queued this, thanks!
 > 
->> In that case the same can be done with
->> virtio-iommu tolopology.
->>
->>> That sentence doesn't really answer the question, does it?
->>
->> To be more elaborate, putting this information into config space is a
->> layering violation. Hardware is never completly self-descriptive
-> 
-> 
-> This "hardware" is actually part of hypervisor so there's no
-> reason it can't be completely self-descriptive. It's specified
-> by the same entity as the "firmware".
 
-Yes in the QEMU case the machine code would fill this information as it
-knows all the devices connected to the iommu. In the same way it would
-generate the DT description or the ACPI tables
-> 
->> and
->> that is why there is the firmware which provides the information about
->> the hardware to the OS in a generic way.
->>
->>> Frankly with platform specific interfaces like ACPI, virtio-iommu is
->>> much less compelling.  Describing topology as part of the device in a
->>> way that is first, portable, and second, is a good fit for hypervisors,
->>> is to me one of the main reasons virtio-iommu makes sense at all.
->>
->> Virtio-IOMMU makes sense in the first place because it is much faster
->> than emulating one of the hardware IOMMUs.
-> 
-> I don't see why it would be much faster. The interface isn't that
-> different from command queues of VTD.
-
-> 
->> And an ACPI table is also
->> portable to all ACPI platforms, same with device-tree.
->>
->> Regards,
->>
->> 	Joerg
-> 
-> Making ACPI meet the goals of embedded projects such as kata containers
-> would be a gigantic task with huge stability implications.  By
-> comparison this 400-line parser is well contained and does the job.  I
-> didn't yet see compelling reasons not to merge this, but I'll be
-> interested to see some more specific concerns.
-> 
-> 
-Thanks
-
-Eric
+Thank you!
 
 _______________________________________________
 Virtualization mailing list
