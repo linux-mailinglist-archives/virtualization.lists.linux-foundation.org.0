@@ -1,93 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45D30177329
-	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 10:56:07 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id EB0AF1773DD
+	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 11:19:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 98DB2840A3;
-	Tue,  3 Mar 2020 09:56:05 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 9920B86F5C;
+	Tue,  3 Mar 2020 10:19:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hptr6-XaRdUB; Tue,  3 Mar 2020 09:56:02 +0000 (UTC)
+	with ESMTP id FSB6rD3C1gnq; Tue,  3 Mar 2020 10:19:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 7769584237;
-	Tue,  3 Mar 2020 09:56:02 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2ED4686F3F;
+	Tue,  3 Mar 2020 10:19:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 68244C013E;
-	Tue,  3 Mar 2020 09:56:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0866DC013E;
+	Tue,  3 Mar 2020 10:19:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1EC0CC013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3308AC013E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 09:56:01 +0000 (UTC)
+ Tue,  3 Mar 2020 10:19:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 068A220023
+ by silver.osuosl.org (Postfix) with ESMTP id 20DBD20467
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 09:56:01 +0000 (UTC)
+ Tue,  3 Mar 2020 10:19:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FZ5AOM5Adcg8
+ with ESMTP id L+mLgKvJZHJQ
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 09:56:00 +0000 (UTC)
+ Tue,  3 Mar 2020 10:19:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
- by silver.osuosl.org (Postfix) with ESMTPS id 491011FE0A
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id 1B4DB20243
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 09:56:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=xjAYzYZJidsTEHXSs//Oe4SJs+qAxcjB8dKxwUENenQ=; b=zrXbi+1XYsYg1hOUfgotstGR1s
- A/yiklisppTF0E9uRLa0vly9Whs1m5MF6QXAFqbz0RIOZTQ3IBkvmXEsEzAH7H4G/eUNCE9COhaKf
- Jt1sB06ShmrP6pL5etFIXieKzux9rI1PRF59uv6SLpF0G2BI2GBcdWRCspKTvO/2p1jLRtrNUi6Sh
- HA8kSw8UO5dmWtltons0CLJ0nXm+Y659s9TY0lr4a4KSUKIjb7SJaBWwJIkbCrpzdLCOQb8EEI+W+
- eVFHzpAPkRg2pOXnstpM7fhlRyhkazF7U53uvuy8CCxYkEUPSwaZ6iuVSdlA2OHKAJpd7ZHKu3O6I
- dRuWKx+w==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1j94Gm-0001E5-NN; Tue, 03 Mar 2020 09:55:20 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 8918A30110E;
- Tue,  3 Mar 2020 10:53:16 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id 780FD2119B2EB; Tue,  3 Mar 2020 10:55:14 +0100 (CET)
-Date: Tue, 3 Mar 2020 10:55:14 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Kees Cook <keescook@chromium.org>
-Subject: Re: [PATCH v11 00/11] x86: PIE support to extend KASLR randomization
-Message-ID: <20200303095514.GA2596@hirez.programming.kicks-ass.net>
-References: <20200228000105.165012-1-thgarnie@chromium.org>
- <202003022100.54CEEE60F@keescook>
+ Tue,  3 Mar 2020 10:19:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583230772;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+UK+NMIgmwHXQhkRXAJ4Lsi7p+Mwd36pSYsGKvj2cB0=;
+ b=SfKRCoZ+rSSPDJrk/l8A56OJItYNdPcG/NDdEkldIeOQYLiikgifSXnZh0I3PCCcT/3Dqd
+ dyWj/vbLqtq0hjWbaBQrbi0r+cY7sCXF2dg2Fg0pLCmZ5kA1iMtwQnMTHvCY0hX2chskp/
+ jEzTs1uxKK/gyEujr+QRI2rgweOC3sg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-401-3lbbavzDNpGMbY6vLt0Brg-1; Tue, 03 Mar 2020 05:19:29 -0500
+X-MC-Unique: 3lbbavzDNpGMbY6vLt0Brg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 50AEB100550E;
+ Tue,  3 Mar 2020 10:19:27 +0000 (UTC)
+Received: from [10.36.116.59] (ovpn-116-59.ams2.redhat.com [10.36.116.59])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 02A3A1001B09;
+ Tue,  3 Mar 2020 10:19:21 +0000 (UTC)
+Subject: Re: [PATCH v2 1/3] iommu/virtio: Add topology description to
+ virtio-iommu config space
+To: Joerg Roedel <joro@8bytes.org>,
+ Jean-Philippe Brucker <jean-philippe@linaro.org>
+References: <20200228172537.377327-1-jean-philippe@linaro.org>
+ <20200228172537.377327-2-jean-philippe@linaro.org>
+ <20200302161611.GD7829@8bytes.org>
+From: Auger Eric <eric.auger@redhat.com>
+Message-ID: <9004f814-2f7c-9024-3465-6f9661b97b7a@redhat.com>
+Date: Tue, 3 Mar 2020 11:19:20 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.4.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <202003022100.54CEEE60F@keescook>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: kristen@linux.intel.com, kernel-hardening@lists.openwall.com, "VMware,
- Inc." <pv-drivers@vmware.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- virtualization@lists.linux-foundation.org,
- Thomas Garnier <thgarnie@chromium.org>, Pavel Machek <pavel@ucw.cz>,
- "H. Peter Anvin" <hpa@zytor.com>, Will Deacon <will@kernel.org>,
- Ard Biesheuvel <ardb@kernel.org>, Thomas Hellstrom <thellstrom@vmware.com>,
- Herbert Xu <herbert@gondor.apana.org.au>, Jiri Slaby <jslaby@suse.cz>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, x86@kernel.org,
- Ingo Molnar <mingo@redhat.com>, linux-crypto@vger.kernel.org,
- Len Brown <len.brown@intel.com>, linux-pm@vger.kernel.org,
- Cao jin <caoj.fnst@cn.fujitsu.com>, Borislav Petkov <bp@alien8.de>,
- Andy Lutomirski <luto@kernel.org>, Josh Poimboeuf <jpoimboe@redhat.com>,
- Thomas Gleixner <tglx@linutronix.de>, Allison Randal <allison@lohutok.net>,
- Juergen Gross <jgross@suse.com>, "Rafael J. Wysocki" <rjw@rjwysocki.net>,
- linux-kernel@vger.kernel.org, Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- "David S. Miller" <davem@davemloft.net>
+In-Reply-To: <20200302161611.GD7829@8bytes.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Cc: mst@redhat.com, linux-pci@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
+ sebastien.boeuf@intel.com, jacob.jun.pan@intel.com, bhelgaas@google.com,
+ robin.murphy@arm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,32 +98,48 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Mar 02, 2020 at 09:02:15PM -0800, Kees Cook wrote:
-> On Thu, Feb 27, 2020 at 04:00:45PM -0800, Thomas Garnier wrote:
-> > Minor changes based on feedback and rebase from v10.
-> > 
-> > Splitting the previous serie in two. This part contains assembly code
-> > changes required for PIE but without any direct dependencies with the
-> > rest of the patchset.
-> > 
-> > Note: Using objtool to detect non-compliant PIE relocations is not yet
-> > possible as this patchset only includes the simplest PIE changes.
-> > Additional changes are needed in kvm, xen and percpu code.
-> > 
-> > Changes:
-> >  - patch v11 (assembly);
-> >    - Fix comments on x86/entry/64.
-> >    - Remove KASLR PIE explanation on all commits.
-> >    - Add note on objtool not being possible at this stage of the patchset.
+Hi Joerg,
+
+On 3/2/20 5:16 PM, Joerg Roedel wrote:
+> On Fri, Feb 28, 2020 at 06:25:36PM +0100, Jean-Philippe Brucker wrote:
+>> This solution isn't elegant nor foolproof, but is the best we can do at
+>> the moment and works with existing virtio-iommu implementations. It also
+>> enables an IOMMU for lightweight hypervisors that do not rely on
+>> firmware methods for booting.
 > 
-> This moves us closer to PIE in a clean first step. I think these patches
-> look good to go, and unblock the work in kvm, xen, and percpu code. Can
-> one of the x86 maintainers pick this series up?
+> I appreciate the enablement on x86, but putting the conmfiguration into
+> mmio-space isn't really something I want to see upstream. What is the
+> problem with defining an ACPI table instead? This would also make things
+> work on AARCH64 UEFI machines.
+Michael has pushed this solution (putting the "configuration in the PCI
+config space"), I think for those main reasons:
+- ACPI may not be supported on some archs/hyps
+- the virtio-iommu is a PCIe device so binding should not need ACPI
+description
 
-But,... do we still need this in the light of that fine-grained kaslr
-stuff?
+Another issue with ACPI integration is we have different flavours of
+tables that exist: IORT, DMAR, IVRS
 
-What is the actual value of this PIE crud in the face of that?
+x86 ACPI integration was suggested with IORT. But it seems ARM is
+reluctant to extend IORT to support para-virtualized IOMMU. So the VIOT
+was proposed as a different atternative in "[RFC 00/13] virtio-iommu on
+non-devicetree platforms"
+(https://patchwork.kernel.org/cover/11257727/). Proposing a table that
+may be used by different vendors seems to be a challenging issue here.
+
+So even if the above solution does not look perfect, it looked a
+sensible compromise given the above arguments. Please could you explain
+what are the most compelling arguments against it?
+
+Thanks
+
+Eric
+> 
+> Regards,
+> 
+> 	Joerg
+> 
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
