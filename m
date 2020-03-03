@@ -1,101 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93AB9177814
-	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 15:00:22 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8451D17781B
+	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 15:02:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3A0AF8586A;
-	Tue,  3 Mar 2020 14:00:21 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 2BCA5204FC;
+	Tue,  3 Mar 2020 14:02:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hyUMXAwNq6xb; Tue,  3 Mar 2020 14:00:20 +0000 (UTC)
+	with ESMTP id J2GiF-mHNPsg; Tue,  3 Mar 2020 14:02:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3259A84D11;
-	Tue,  3 Mar 2020 14:00:20 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 8C9F3204FB;
+	Tue,  3 Mar 2020 14:02:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 10473C013E;
-	Tue,  3 Mar 2020 14:00:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 32552C013E;
+	Tue,  3 Mar 2020 14:02:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3D349C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D3B60C013E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:00:19 +0000 (UTC)
+ Tue,  3 Mar 2020 14:02:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 294F684D11
+ by fraxinus.osuosl.org (Postfix) with ESMTP id BAA5E858A6
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:00:19 +0000 (UTC)
+ Tue,  3 Mar 2020 14:02:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iqB8kTEJQVGG
+ with ESMTP id aN4HODIizMEL
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:00:18 +0000 (UTC)
+ Tue,  3 Mar 2020 14:02:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4DF0F84D0F
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1A44D858BA
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:00:18 +0000 (UTC)
+ Tue,  3 Mar 2020 14:02:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583244016;
+ s=mimecast20190719; t=1583244154;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=aa6HtSeh49MIF/xjAgoQ7EQau/N+kwzDq7RM+vAw+Uo=;
- b=idd0hF0HzLrt9N4JAL6p2MgfJHMl1rOYhQcnYk8y5kNu9jvhn9Bq42IGjoH0qmCBZfu56J
- Mu2GLx9fG+gSzuXywk6E1dmYPNKhNAWy8LaSaDuzo2qGMcS55fnjwXL1pCiLh2lflee+P5
- 0IsPPknNIWIZ+/Bm9aZ9tRsurEaYiCg=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-250-EcqP2BGWMOKU1KwuTMlbCw-1; Tue, 03 Mar 2020 09:00:12 -0500
-X-MC-Unique: EcqP2BGWMOKU1KwuTMlbCw-1
-Received: by mail-qt1-f200.google.com with SMTP id o9so2232690qtt.8
+ bh=vURXmaMa/jNw8/wDeynB3tRJrpHBF8mvDGbk4U2gsFk=;
+ b=C1INq8GUoIYUXXycWyMqGzUVDf06rhqfYoqlGBt6Y8WGXvbuu7yAZVJ2zGpFI78YnQL1Js
+ jNsFqHzqBvN2bjA3cDd5KreAnDioMB9ikmBpXzZONIontilHQUGepmrZz+YHdJMVX0leRS
+ Mcedh4R4FtR2XalS1BIGlzqgKIiOn70=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-17-3ENDRVwGMWGYV7Dc-ZiZ7g-1; Tue, 03 Mar 2020 09:02:30 -0500
+X-MC-Unique: 3ENDRVwGMWGYV7Dc-ZiZ7g-1
+Received: by mail-qt1-f199.google.com with SMTP id r19so2233827qtb.10
  for <virtualization@lists.linux-foundation.org>;
- Tue, 03 Mar 2020 06:00:12 -0800 (PST)
+ Tue, 03 Mar 2020 06:02:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=aa6HtSeh49MIF/xjAgoQ7EQau/N+kwzDq7RM+vAw+Uo=;
- b=S1D04jSeIqx6yjG5A/IuXa0JO1g6OS/aEXO0x6727I+gai4R8jOPg0EK7ypQ8/lGpg
- Q/TXZShuZbAfOHRDwdWwzB+YSWaSa98cGVBtpgccPogc9wJ/xCuoICnpOjTuavRugttp
- zqVx7LDtdXWqG4kOaCmCNSd1MdMITeH/6MW0jaaDXgWrJ/2DOgdJQ4arNoxuIYyuwhui
- 3zmt2lZzSO906vrM+cWWBoXOhrrHzVEIn4Ya0zybMcM4u9Ga2me/PsgpFSGxbAhf3RDf
- E5CYbd/ppMZaYRVLw4XufZ2FnOhajkHCCWwkHPCYlkFGUWOJN/NZpEMADa369NHLNCY+
- Ppdg==
-X-Gm-Message-State: ANhLgQ3x+zYLRyZ7FDS8ypszV0NXIEHqiW3ovRRBTgc2kpikXWlyJZ61
- rfBSXDBjrNttNtvDq4bgwAqf21PUtmar2Z/OIFMTmvRGpTJylkL99TlWTjXfvtew2u84Vw5uVEg
- VvgJ/cm7JDOgSCXnJZyVX2L/R7GtlCrLJCH03F/CLBg==
-X-Received: by 2002:ac8:1c7a:: with SMTP id j55mr4453357qtk.311.1583244012066; 
- Tue, 03 Mar 2020 06:00:12 -0800 (PST)
-X-Google-Smtp-Source: ADFU+vuZwadsAvkhUcJH4/W47LkbDsji9AWmjLQIpqUobhWh56z5UC579vb1nzWGmKUdc6OPFj59sQ==
-X-Received: by 2002:ac8:1c7a:: with SMTP id j55mr4453330qtk.311.1583244011778; 
- Tue, 03 Mar 2020 06:00:11 -0800 (PST)
+ bh=vURXmaMa/jNw8/wDeynB3tRJrpHBF8mvDGbk4U2gsFk=;
+ b=KdubNJUWKOni+bSyMRSzZgZEx0YoQmFLGJLYoExBqHyEt4Z3VnQa5Q82tJYIFecFyf
+ +v1LoEZ+F2NVid8xrbJ3hJa3Y+k3YegJEt8GNpraEmP84PTj5hCSD7oxmi9SsLuaBbwB
+ bp3SuOHRp1pLGjAQVuy6hMi8e0WGg5eOLp74E1hU/mxw8JC43v39z7PpQ4PM31aiOuQ6
+ 9b+HYZXVGtufVM1EMyr0X/RQxYvvRHNHODosTLwDOY+kaBvDoW4J5BELIoDRJeDV6HGh
+ FEPqnXOaBlclw39c5kIA4apLLqNNvlNdklJGsGdpH3z7yVmWUe/H637ZmRM/d8SxkUkn
+ JbPg==
+X-Gm-Message-State: ANhLgQ3f7/31aZczjEl7/SMnyzqaY6xBYKVMRgFwjX4GU/Aj5X9iyyau
+ KuIBryjpm0My9fLGQk/eun+iroL5AxUX267qyBboLIJ4uWmUn8KN8aR/GmPoHUTbraiFJuQXrPi
+ 5jLwgxKAUoml+omXt65pGlQNqAa9m39OSaGNs3YbHGQ==
+X-Received: by 2002:ac8:8d6:: with SMTP id y22mr4331363qth.85.1583244149958;
+ Tue, 03 Mar 2020 06:02:29 -0800 (PST)
+X-Google-Smtp-Source: ADFU+vsrHkcUNU/JWr3iaSlnrdpMaoXDL9dgR2gjUhWQ2iO+BPmktHURohbRSLr525HkXxY5rlNBXQ==
+X-Received: by 2002:ac8:8d6:: with SMTP id y22mr4331328qth.85.1583244149723;
+ Tue, 03 Mar 2020 06:02:29 -0800 (PST)
 Received: from redhat.com (bzq-79-180-48-224.red.bezeqint.net. [79.180.48.224])
- by smtp.gmail.com with ESMTPSA id j1sm9081095qtd.66.2020.03.03.06.00.08
+ by smtp.gmail.com with ESMTPSA id j7sm8343441qti.14.2020.03.03.06.02.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Mar 2020 06:00:10 -0800 (PST)
-Date: Tue, 3 Mar 2020 09:00:05 -0500
+ Tue, 03 Mar 2020 06:02:28 -0800 (PST)
+Date: Tue, 3 Mar 2020 09:02:23 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Joerg Roedel <joro@8bytes.org>
 Subject: Re: [PATCH v2 1/3] iommu/virtio: Add topology description to
  virtio-iommu config space
-Message-ID: <20200303084753-mutt-send-email-mst@kernel.org>
+Message-ID: <20200303090046-mutt-send-email-mst@kernel.org>
 References: <20200228172537.377327-1-jean-philippe@linaro.org>
  <20200228172537.377327-2-jean-philippe@linaro.org>
  <20200302161611.GD7829@8bytes.org>
- <9004f814-2f7c-9024-3465-6f9661b97b7a@redhat.com>
- <20200303130155.GA13185@8bytes.org>
 MIME-Version: 1.0
-In-Reply-To: <20200303130155.GA13185@8bytes.org>
+In-Reply-To: <20200302161611.GD7829@8bytes.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
 Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>, linux-pci@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Auger Eric <eric.auger@redhat.com>,
+ virtualization@lists.linux-foundation.org, eric.auger@redhat.com,
  iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
  jacob.jun.pan@intel.com, bhelgaas@google.com, robin.murphy@arm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -114,60 +112,22 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Mar 03, 2020 at 02:01:56PM +0100, Joerg Roedel wrote:
-> Hi Eric,
+On Mon, Mar 02, 2020 at 05:16:12PM +0100, Joerg Roedel wrote:
+> On Fri, Feb 28, 2020 at 06:25:36PM +0100, Jean-Philippe Brucker wrote:
+> > This solution isn't elegant nor foolproof, but is the best we can do at
+> > the moment and works with existing virtio-iommu implementations. It also
+> > enables an IOMMU for lightweight hypervisors that do not rely on
+> > firmware methods for booting.
 > 
-> On Tue, Mar 03, 2020 at 11:19:20AM +0100, Auger Eric wrote:
-> > Michael has pushed this solution (putting the "configuration in the PCI
-> > config space"), I think for those main reasons:
-> > - ACPI may not be supported on some archs/hyps
-> 
-> But on those there is device-tree, right?
+> I appreciate the enablement on x86, but putting the conmfiguration into
+> mmio-space isn't really something I want to see upstream.
 
-Not necessarily. E.g. some power systems have neither.
-There are also systems looking to bypass ACPI e.g. for boot speed.
+It's in virtio config space, not in mmio-space. With a PCI virtio-IOMMU
+device this will be in memory.
 
-
-> > - the virtio-iommu is a PCIe device so binding should not need ACPI
-> > description
-> 
-> The other x86 IOMMUs are PCI devices too and they definitly need a ACPI
-> table to be configured.
-> 
-> > Another issue with ACPI integration is we have different flavours of
-> > tables that exist: IORT, DMAR, IVRS
-> 
-> An integration with IORT might be the best, but if it is not possible
-> ther can be a new table-type for Virtio-iommu. That would still follow
-> platform best practices.
-> 
-> > x86 ACPI integration was suggested with IORT. But it seems ARM is
-> > reluctant to extend IORT to support para-virtualized IOMMU. So the VIOT
-> > was proposed as a different atternative in "[RFC 00/13] virtio-iommu on
-> > non-devicetree platforms"
-> > (https://patchwork.kernel.org/cover/11257727/). Proposing a table that
-> > may be used by different vendors seems to be a challenging issue here.
-> 
-> Yeah, if I am reading that right this proposes a one-fits-all solution.
-> That is not needed as the other x86 IOMMUs already have their tables
-> defined and implemented. There is no need to change anything there.
-> 
-> > So even if the above solution does not look perfect, it looked a
-> > sensible compromise given the above arguments. Please could you explain
-> > what are the most compelling arguments against it?
-> 
-> It is a hack and should be avoided if at all possible.
-
-That sentence doesn't really answer the question, does it?
-
-> And defining an
-> own ACPI table type seems very much possible.
-
-Frankly with platform specific interfaces like ACPI, virtio-iommu is
-much less compelling.  Describing topology as part of the device in a
-way that is first, portable, and second, is a good fit for hypervisors,
-is to me one of the main reasons virtio-iommu makes sense at all.
-
+> What is the
+> problem with defining an ACPI table instead? This would also make things
+> work on AARCH64 UEFI machines.
 > 
 > Regards,
 > 
