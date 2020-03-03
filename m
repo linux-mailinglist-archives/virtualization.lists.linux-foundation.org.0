@@ -1,100 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE629177880
-	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 15:13:07 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D82DC177982
+	for <lists.virtualization@lfdr.de>; Tue,  3 Mar 2020 15:49:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 619402001D;
-	Tue,  3 Mar 2020 14:13:06 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8FB9785BC8;
+	Tue,  3 Mar 2020 14:49:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hZ-Tswr8rHgn; Tue,  3 Mar 2020 14:13:05 +0000 (UTC)
+	with ESMTP id qUONiQ5lhMlj; Tue,  3 Mar 2020 14:49:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 6A29320507;
-	Tue,  3 Mar 2020 14:13:05 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 1F14985A74;
+	Tue,  3 Mar 2020 14:49:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 36EC5C013E;
-	Tue,  3 Mar 2020 14:13:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 027AEC013E;
+	Tue,  3 Mar 2020 14:49:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BF830C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7225EC013E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:13:03 +0000 (UTC)
+ Tue,  3 Mar 2020 14:49:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id A606E86DEE
+ by hemlock.osuosl.org (Postfix) with ESMTP id 6B93687360
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:13:03 +0000 (UTC)
+ Tue,  3 Mar 2020 14:49:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id turibjtyCIpN
+ with ESMTP id JqdjWKebXtBJ
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:13:02 +0000 (UTC)
+ Tue,  3 Mar 2020 14:49:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 39ABB86DEA
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7018887263
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Mar 2020 14:13:02 +0000 (UTC)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 023DxY2g081857
- for <virtualization@lists.linux-foundation.org>; Tue, 3 Mar 2020 09:13:01 -0500
-Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2yfk5n6rjp-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ Tue,  3 Mar 2020 14:49:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583246970;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZAMz9trEBbggImBzI8TwjqrfBpm7beP6aWAuQ0+PcZA=;
+ b=eE0+UcwgNrtQ7W4swxVaZv4ztdpWTyVWPVBnmdeiJ7GlDrVNl/+Y4gEbyeY17hHw7dEGaj
+ IU2fDDhCVmsALWZckBJM1xk0HAo+pCZ4wMl6LgCyNBe+bfy9TKsMYijvh99zaE0g1YMR2S
+ voRk1KCNCy93zIz2wHiOnLud+hvcEgE=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-330-XPoy1jzrO061A-U3jZ84tw-1; Tue, 03 Mar 2020 09:49:27 -0500
+X-MC-Unique: XPoy1jzrO061A-U3jZ84tw-1
+Received: by mail-qv1-f71.google.com with SMTP id s5so2188807qvr.15
  for <virtualization@lists.linux-foundation.org>;
- Tue, 03 Mar 2020 09:13:00 -0500
-Received: from localhost
- by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <virtualization@lists.linux-foundation.org> from <pasic@linux.ibm.com>;
- Tue, 3 Mar 2020 14:12:58 -0000
-Received: from b06cxnps4074.portsmouth.uk.ibm.com (9.149.109.196)
- by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Tue, 3 Mar 2020 14:12:55 -0000
-Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
- by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 023ECrkS50069520
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 3 Mar 2020 14:12:54 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id D75FC4204B;
- Tue,  3 Mar 2020 14:12:53 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 6C2484203F;
- Tue,  3 Mar 2020 14:12:53 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.152.224.80])
- by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue,  3 Mar 2020 14:12:53 +0000 (GMT)
-Date: Tue, 3 Mar 2020 15:12:52 +0100
-From: Halil Pasic <pasic@linux.ibm.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>
+ Tue, 03 Mar 2020 06:49:27 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=ZAMz9trEBbggImBzI8TwjqrfBpm7beP6aWAuQ0+PcZA=;
+ b=LqN7j+dLMVpvYCSHMGq0Ejjd8wZwj86O3xGs6okWQQjprv+t/tImh7I93YDCjBabq0
+ icC89zOh0IM/dmSyQTLAEBmkV2eh75n3KNsbrg//q8uJsr6919PgtgTTgDi6lNdQCDAg
+ vvVOEr7GMq75xzBpbPK6KxtW+PIlAS25wMx1yaLrUObpIMNt3rAsIqpOztvavVVQiFjM
+ tU9OBgJVY5i70S8UHyGCR7nl3IA53hWwziULh2xSrJY6oHE5jcbRe6glUHc2HV9fSXTd
+ C2+/VWN9fr3Nf4YOPvKKJiW9tBK0ZzF9XgpkGLCDXLUzYfsHwLOy9WkL8LQPwrkfxpdB
+ leSw==
+X-Gm-Message-State: ANhLgQ2jkNkAfMBBb/rXO0q8KLpMtCY8ZclwblcAWxmTnYhh0SViZfqw
+ fxARZPm9xmE6FAakkOQqOEk7xxhkxcUz+L1SGYEIH8IylN7mKsFwNTAEIx7Q+IRiv76QyAWLP7W
+ ICVfbuj8RAWlzsbmdJT3TSDtSpQOvLuNUndcbLLYXyA==
+X-Received: by 2002:a0c:f692:: with SMTP id p18mr4372498qvn.61.1583246967038; 
+ Tue, 03 Mar 2020 06:49:27 -0800 (PST)
+X-Google-Smtp-Source: ADFU+vsyjBrEg2YMLlS4Ny5GGY4zKEspwxCc/KeO/4ULBZu3vu5BQGOxB/vGW3jXL4KM69SWf9Bpkw==
+X-Received: by 2002:a0c:f692:: with SMTP id p18mr4372474qvn.61.1583246966856; 
+ Tue, 03 Mar 2020 06:49:26 -0800 (PST)
+Received: from redhat.com (bzq-79-180-48-224.red.bezeqint.net. [79.180.48.224])
+ by smtp.gmail.com with ESMTPSA id g8sm3079010qke.1.2020.03.03.06.49.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Mar 2020 06:49:26 -0800 (PST)
+Date: Tue, 3 Mar 2020 09:49:21 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>
 Subject: Re: [PATCH 0/2] virtio-blk: improve handling of DMA mapping failures
-In-Reply-To: <20200213123728.61216-1-pasic@linux.ibm.com>
+Message-ID: <20200303094909-mutt-send-email-mst@kernel.org>
 References: <20200213123728.61216-1-pasic@linux.ibm.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+ <20200303151252.59d45e86.pasic@linux.ibm.com>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 20030314-0020-0000-0000-000003B0199C
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 20030314-0021-0000-0000-000022084913
-Message-Id: <20200303151252.59d45e86.pasic@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-03_04:2020-03-03,
- 2020-03-03 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 phishscore=0
- mlxlogscore=999 clxscore=1015 impostorscore=0 spamscore=0 malwarescore=0
- priorityscore=1501 lowpriorityscore=0 bulkscore=0 adultscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2001150001 definitions=main-2003030107
+In-Reply-To: <20200303151252.59d45e86.pasic@linux.ibm.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 Cc: Jens Axboe <axboe@kernel.dk>, linux-s390@vger.kernel.org, "Lendacky,
  Thomas" <Thomas.Lendacky@amd.com>, Cornelia Huck <cohuck@redhat.com>,
  Ram Pai <linuxram@us.ibm.com>, linux-kernel@vger.kernel.org,
@@ -118,40 +113,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, 13 Feb 2020 13:37:26 +0100
-Halil Pasic <pasic@linux.ibm.com> wrote:
-
-> Two patches are handling new edge cases introduced by doing DMA mappings
-> (which can fail) in virtio core.
+On Tue, Mar 03, 2020 at 03:12:52PM +0100, Halil Pasic wrote:
+> On Thu, 13 Feb 2020 13:37:26 +0100
+> Halil Pasic <pasic@linux.ibm.com> wrote:
 > 
-> I stumbled upon this while stress testing I/O for Protected Virtual
-> Machines. I deliberately chose a tiny swiotlb size and have generated
-> load with fio. With more than one virtio-blk disk in use I experienced
-> hangs.
+> > Two patches are handling new edge cases introduced by doing DMA mappings
+> > (which can fail) in virtio core.
+> > 
+> > I stumbled upon this while stress testing I/O for Protected Virtual
+> > Machines. I deliberately chose a tiny swiotlb size and have generated
+> > load with fio. With more than one virtio-blk disk in use I experienced
+> > hangs.
+> > 
+> > The goal of this series is to fix those hangs.
+> > 
+> > Halil Pasic (2):
+> >   virtio-blk: fix hw_queue stopped on arbitrary error
+> >   virtio-blk: improve virtqueue error to BLK_STS
+> > 
+> >  drivers/block/virtio_blk.c | 17 ++++++++++++-----
+> >  1 file changed, 12 insertions(+), 5 deletions(-)
+> > 
+> > 
+> > base-commit: 39bed42de2e7d74686a2d5a45638d6a5d7e7d473
 > 
-> The goal of this series is to fix those hangs.
+> ping
 > 
-> Halil Pasic (2):
->   virtio-blk: fix hw_queue stopped on arbitrary error
->   virtio-blk: improve virtqueue error to BLK_STS
+> Hi Michael, hi Jason,
 > 
->  drivers/block/virtio_blk.c | 17 ++++++++++++-----
->  1 file changed, 12 insertions(+), 5 deletions(-)
+> I got some favorable reviews for this, but AFAIK I got nothing form the
+> maintainers yet.
 > 
+> Is some of you going to pick these?
 > 
-> base-commit: 39bed42de2e7d74686a2d5a45638d6a5d7e7d473
+> Regards,
+> Halil
 
-ping
-
-Hi Michael, hi Jason,
-
-I got some favorable reviews for this, but AFAIK I got nothing form the
-maintainers yet.
-
-Is some of you going to pick these?
-
-Regards,
-Halil
+I've queued this, thanks!
 
 _______________________________________________
 Virtualization mailing list
