@@ -1,80 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15703178BE5
-	for <lists.virtualization@lfdr.de>; Wed,  4 Mar 2020 08:48:58 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F6D5178C12
+	for <lists.virtualization@lfdr.de>; Wed,  4 Mar 2020 09:01:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A71BA87327;
-	Wed,  4 Mar 2020 07:48:56 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D996986416;
+	Wed,  4 Mar 2020 08:01:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XFG8Tp03WZSY; Wed,  4 Mar 2020 07:48:56 +0000 (UTC)
+	with ESMTP id M8oiNdaubov9; Wed,  4 Mar 2020 08:01:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 25D3387152;
-	Wed,  4 Mar 2020 07:48:56 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 03BDC86614;
+	Wed,  4 Mar 2020 08:01:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EDD4AC013E;
-	Wed,  4 Mar 2020 07:48:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DE720C013E;
+	Wed,  4 Mar 2020 08:01:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DE262C013E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 98B05C013E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 07:48:53 +0000 (UTC)
+ Wed,  4 Mar 2020 08:01:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 9FE30203BE
+ by whitealder.osuosl.org (Postfix) with ESMTP id 87A5686569
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 07:48:53 +0000 (UTC)
+ Wed,  4 Mar 2020 08:01:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IGOtMZZd0Vil
+ with ESMTP id es08ExPAXDtH
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 07:48:51 +0000 (UTC)
+ Wed,  4 Mar 2020 08:01:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id C405720116
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 429D881DD2
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 07:48:51 +0000 (UTC)
+ Wed,  4 Mar 2020 08:01:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583308130;
+ s=mimecast20190719; t=1583308890;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=VHfVr/tC6mnm30TtswDnaZCgkdF5cd/cEuR4XHAYi4k=;
- b=ZS4i3XB5kv2K/meeUGmtOB9Bz22zTb3Ar2gAte/8fhDO9+SyVZBMQLmG9tfe+KhwcnmwUl
- qgot3LxBKoahAaVECoQI+LEyAV5KlyC3iDJJzZIysDgoKW+QRFiAEEYsfT8/aItgoPg8tF
- P9/bfvnj7ccYvr8KWV8JCMdRSx00Zrg=
+ bh=zRcprHlNKHf2Y4uTuJshwgaM2L8IjHdUUjSNLW2L6Ws=;
+ b=bPwA8DVqIel19xIFS+Lv+tYYa3kWiC8Wg2rvyRBuIAevGcB24yAEQvFpIawPMFgIiCxccu
+ BBqYLyxBz3HrNIkqegElhvCZBIJWsso/oxCfMeiaAwYG3ckzaoJfZstUXCjGNSqxvIJGGT
+ ofIhqOAxfQyHVSkDefKbIaZh1H/OA7w=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-467-fXX0MZD-OeewdNcRAR5oGg-1; Wed, 04 Mar 2020 02:48:48 -0500
-X-MC-Unique: fXX0MZD-OeewdNcRAR5oGg-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ us-mta-76-7VMskJu9NeKxqy4Gs6rfng-1; Wed, 04 Mar 2020 03:01:26 -0500
+X-MC-Unique: 7VMskJu9NeKxqy4Gs6rfng-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1483C8018A6;
- Wed,  4 Mar 2020 07:48:45 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C8551801E5C;
+ Wed,  4 Mar 2020 08:01:23 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-150.ams2.redhat.com
  [10.36.116.150])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EBD0891D6E;
- Wed,  4 Mar 2020 07:48:41 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B825D1BC6D;
+ Wed,  4 Mar 2020 08:01:20 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2D00B17506; Wed,  4 Mar 2020 08:48:41 +0100 (CET)
-Date: Wed, 4 Mar 2020 08:48:41 +0100
+ id 0266617506; Wed,  4 Mar 2020 09:01:20 +0100 (CET)
+Date: Wed, 4 Mar 2020 09:01:19 +0100
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: David Stevens <stevensd@chromium.org>
-Subject: Re: [PATCH v2 1/4] dma-buf: add support for virtio exported objects
-Message-ID: <20200304074841.gbfzhxorta3pfk4f@sirius.home.kraxel.org>
+Subject: Re: [PATCH v2 4/4] drm/virtio: Support virtgpu exported resources
+Message-ID: <20200304080119.i55opxkhk4kdt4hp@sirius.home.kraxel.org>
 References: <20200302121524.7543-1-stevensd@chromium.org>
- <20200302121524.7543-2-stevensd@chromium.org>
+ <20200302121524.7543-5-stevensd@chromium.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200302121524.7543-2-stevensd@chromium.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+In-Reply-To: <20200302121524.7543-5-stevensd@chromium.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Cc: virtio-dev@lists.oasis-open.org, Thomas Zimmermann <tzimmermann@suse.de>,
  "Michael S . Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
@@ -98,30 +98,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Mar 02, 2020 at 09:15:21PM +0900, David Stevens wrote:
-> This change adds a new dma-buf operation that allows dma-bufs to be used
-> by virtio drivers to share exported objects. The new operation allows
-> the importing driver to query the exporting driver for the UUID which
-> identifies the underlying exported object.
-> 
-> Signed-off-by: David Stevens <stevensd@chromium.org>
-> ---
->  drivers/dma-buf/dma-buf.c | 14 ++++++++++++++
->  include/linux/dma-buf.h   | 22 ++++++++++++++++++++++
->  2 files changed, 36 insertions(+)
-> 
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index d4097856c86b..a04632284ec2 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -1158,6 +1158,20 @@ void dma_buf_vunmap(struct dma_buf *dmabuf, void *vaddr)
->  }
->  EXPORT_SYMBOL_GPL(dma_buf_vunmap);
->  
-> +#ifdef CONFIG_VIRTIO
-> +int dma_buf_get_uuid(struct dma_buf *dmabuf, uuid_t *uuid)
+  Hi,
 
-Hmm, I think I would drop the #ifdef
+> +	if (vgdev->has_resource_assign_uuid) {
+> +		spin_lock(&vgdev->resource_export_lock);
+> +		if (bo->uuid_state == UUID_NOT_INITIALIZED) {
+> +			bo->uuid_state = UUID_INITIALIZING;
+> +			needs_init = true;
+> +		}
+> +		spin_unlock(&vgdev->resource_export_lock);
+> +
+> +		if (needs_init) {
+> +			ret = virtio_gpu_cmd_resource_assign_uuid(vgdev, bo);
+
+You can submit a fenced command, then wait on the fence here.  Removes
+the need for UUID_INITIALIZING.
+
+Also note that this function will be called only once, on the first
+export.  When exporting the same object again drm will simply reuse
+the existing dmabuf.  You can drop UUID_NOT_INITIALIZED and needs_init.
+
+So you are left with only two uuid_state states.  You could turn uuid
+into a pointer, so it gets only allocated when needed.  Also uuid ==
+NULL can be used for "uuid not available" then.
 
 cheers,
   Gerd
