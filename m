@@ -1,100 +1,127 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC67F1798E6
-	for <lists.virtualization@lfdr.de>; Wed,  4 Mar 2020 20:22:35 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B08E17990A
+	for <lists.virtualization@lfdr.de>; Wed,  4 Mar 2020 20:30:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4AA4286DEE;
-	Wed,  4 Mar 2020 19:22:34 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 055E381B75;
+	Wed,  4 Mar 2020 19:30:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Q-45DhsYu6+L; Wed,  4 Mar 2020 19:22:33 +0000 (UTC)
+	with ESMTP id 4Iw4vihdt8Wb; Wed,  4 Mar 2020 19:30:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E0B6186D92;
-	Wed,  4 Mar 2020 19:22:33 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 92C3C85CC7;
+	Wed,  4 Mar 2020 19:30:00 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B31DCC1D8E;
-	Wed,  4 Mar 2020 19:22:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 73B51C013E;
+	Wed,  4 Mar 2020 19:30:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 11EF6C013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9F8C1C013E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:22:32 +0000 (UTC)
+ Wed,  4 Mar 2020 19:29:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 00A0C84597
+ by silver.osuosl.org (Postfix) with ESMTP id 8D040203A7
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:22:32 +0000 (UTC)
+ Wed,  4 Mar 2020 19:29:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2JlAiLVBd8rc
+ with ESMTP id ZXpkgEuPTLF5
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:22:31 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5619784536
+ Wed,  4 Mar 2020 19:29:58 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr70073.outbound.protection.outlook.com [40.107.7.73])
+ by silver.osuosl.org (Postfix) with ESMTPS id 174C020392
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:22:31 +0000 (UTC)
-Received: from hanvin-mobl2.amr.corp.intel.com ([192.55.55.45])
- (authenticated bits=0)
- by mail.zytor.com (8.15.2/8.15.2) with ESMTPSA id 024JM4WA436200
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Wed, 4 Mar 2020 11:22:05 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 024JM4WA436200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
- s=2020022001; t=1583349727;
- bh=g6Mtry4glpDMxH5UiOpY16heGYyer5fR7lVfPBWaveE=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=ar6nn8Ge/T+692bP42wyhN6/gA6zy1dzCiGF74CRXJXFqjrk6VwRkFpBhRP3+cZ6P
- aoecjqhhdSeSkR9EesGi+ThpGixJViS9m59hDZE5MkhJCppsl9CGI+XaXJHL6N9PSz
- N15YsSpDSe2BGbMQ73a5iqbaYgTLZGuuCk9xtQ+bYyE3yGCxvvNHQZ7Xw/jQnA8xUa
- jCODCawM3hNRUyrc1PnA5eoR37ZT81R1OELgMwfxsZpMMFvL9tLT1LJphQQCaZE+6J
- TgBBCCGkC2zFLRAajE3d9FAm6PTlGUqxGMq/StoWIgr6Tz8ZPVJwmUM93IFzinAgT+
- QzoETf31D45JA==
-Subject: Re: [PATCH v11 00/11] x86: PIE support to extend KASLR randomization
-To: Thomas Garnier <thgarnie@chromium.org>
-References: <20200228000105.165012-1-thgarnie@chromium.org>
- <202003022100.54CEEE60F@keescook>
- <20200303095514.GA2596@hirez.programming.kicks-ass.net>
- <CAJcbSZH1oON2VC2U8HjfC-6=M-xn5eU+JxHG2575iMpVoheKdA@mail.gmail.com>
- <6e7e4191612460ba96567c16b4171f2d2f91b296.camel@linux.intel.com>
- <202003031314.1AFFC0E@keescook>
- <20200304092136.GI2596@hirez.programming.kicks-ass.net>
- <202003041019.C6386B2F7@keescook>
- <e60876d0-4f7d-9523-bcec-6d002f717623@zytor.com>
- <CAJcbSZHBB1u2Vq0jZKsmd0UcRj=aichxTtbGvbWgf8-g8WPa7w@mail.gmail.com>
-From: "H. Peter Anvin" <hpa@zytor.com>
-Message-ID: <627fe5d2-e6c3-4eff-1a58-14e17dc04ac5@zytor.com>
-Date: Wed, 4 Mar 2020 11:22:04 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ Wed,  4 Mar 2020 19:29:58 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=O28yo6HF05cOsDBFSqz1xMDAtNrElXsrbcRnlYMGaj2kyYG4lQSelyzHTf8j+k7ZFPi61Xz+B0JDTn5V4o/w8UpVsrhHegKh2ibvYPw2iG5bc353ghz2hzsC6qtzsqhMj4qmh7dCCUrf9Bh8Nl52Kq8yHp1IrsfoYKERvWMixe24BgPyZXOMqEZ4x0u9XFPuiuZWt2BNe4mypSBT+v1BVNRzXlnNho+UyjJzGhPXadfuVTXny+j4kxUbuwCAsbaYto2QNkATYpDMoPTq/XoL7D2Fxsq3UkXOyoweyRR+Saq9aynNXs2cYQydhVf/ja4KoE1jmj9BOXAndFKnNnaw+Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BdAaCaeS6gH3f4tq2Jl1Gb8UTkCxekN4gIDIDC+Aqrg=;
+ b=NPkj7Xw6JJhBzULl8qRtCh5SdrJhHVx1Ky7opqsmY3dXeFQ5yp4mPYKXdU3ztXqx1KAjO1CeYpL7sMx43iQ6FhDKNBWQdGWex4wUOGhPxbal9SNg1jP2/kmdx5dMpk4pj9NQPcHDnV9T+9vKlA5OpJ9IrevbxISiPF/RUThUcWcUzcil73wZJzJiGfVePm7h5/fltnaZ1yDCXj/IeRWRyCe6YtlZX0dApyno4cJVKzem/AX+3c894tHE8rL/eFtUuAkKas1O0SaS+wSBjbz7wgU4HSfjRZ146uNWrX5NHUWp+mTOtM8T56J+SdAR4OufOmQVFQ3lha48907Rw8Xqcg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BdAaCaeS6gH3f4tq2Jl1Gb8UTkCxekN4gIDIDC+Aqrg=;
+ b=XdhUAXzgUWUmvJv97oAXj/MKjzreQtkMbpM5u2QjlMiqBcNAbPkXLpx1K4GfuDRmOrYDDgGPtRKjHVIWLLDQDD+TJf8JKRHRQIbjI4ghmlKmX0crc8EoXY6kxmx4E6rgvelsc25O9Y50WEv1fzvZ7gz/PElgvbFPbS8tF4DCsgk=
+Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
+ VI1PR05MB5517.eurprd05.prod.outlook.com (20.177.63.157) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2772.15; Wed, 4 Mar 2020 19:29:54 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2772.019; Wed, 4 Mar 2020
+ 19:29:53 +0000
+Date: Wed, 4 Mar 2020 15:29:49 -0400
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V5 3/5] vDPA: introduce vDPA bus
+Message-ID: <20200304192949.GR26318@mellanox.com>
+References: <20200226060456.27275-1-jasowang@redhat.com>
+ <20200226060456.27275-4-jasowang@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20200226060456.27275-4-jasowang@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-ClientProxiedBy: MN2PR10CA0033.namprd10.prod.outlook.com
+ (2603:10b6:208:120::46) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
 MIME-Version: 1.0
-In-Reply-To: <CAJcbSZHBB1u2Vq0jZKsmd0UcRj=aichxTtbGvbWgf8-g8WPa7w@mail.gmail.com>
-Content-Language: en-US
-Cc: Kristen Carlson Accardi <kristen@linux.intel.com>,
- Kernel Hardening <kernel-hardening@lists.openwall.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- virtualization@lists.linux-foundation.org, Pavel Machek <pavel@ucw.cz>,
- Will Deacon <will@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Herbert Xu <herbert@gondor.apana.org.au>, Jiri Slaby <jslaby@suse.cz>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- the arch/x86 maintainers <x86@kernel.org>, "VMware,
- Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
- Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
- Len Brown <len.brown@intel.com>, Kees Cook <keescook@chromium.org>,
- Linux PM list <linux-pm@vger.kernel.org>, Cao jin <caoj.fnst@cn.fujitsu.com>,
- Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
- Josh Poimboeuf <jpoimboe@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
- Allison Randal <allison@lohutok.net>, Juergen Gross <jgross@suse.com>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- "David S. Miller" <davem@davemloft.net>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (142.68.57.212) by
+ MN2PR10CA0033.namprd10.prod.outlook.com (2603:10b6:208:120::46) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.15 via Frontend
+ Transport; Wed, 4 Mar 2020 19:29:53 +0000
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
+ <jgg@mellanox.com>)	id 1j9ZiH-00049z-RF; Wed, 04 Mar 2020 15:29:49 -0400
+X-Originating-IP: [142.68.57.212]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: d98aec35-0972-4f40-4e0b-08d7c0726a09
+X-MS-TrafficTypeDiagnostic: VI1PR05MB5517:|VI1PR05MB5517:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <VI1PR05MB55177CA4E470400BD227AFACCFE50@VI1PR05MB5517.eurprd05.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3631;
+X-Forefront-PRVS: 0332AACBC3
+X-Forefront-Antispam-Report: SFV:NSPM;
+ SFS:(10009020)(4636009)(396003)(366004)(346002)(136003)(376002)(39860400002)(189003)(199004)(5660300002)(66476007)(66556008)(1076003)(2906002)(186003)(26005)(66946007)(4744005)(2616005)(478600001)(4326008)(9786002)(86362001)(7416002)(9746002)(33656002)(316002)(52116002)(8936002)(6916009)(81156014)(36756003)(8676002)(81166006)(24400500001);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB5517;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+Received-SPF: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Cs+Oqh1WVP0VX5f10uU7496uwqpHzFRQZ4St/l9G0+aHAHkA2m4poO6MRBAy8QDNkUHGmlh4tyNxDBYGal8BQq9DUvrKmoUs2fff6Js7+pS3dEMm5g+RFg6nDvx/GZfG7ppJffjFhFq5BsboG9ZQtY+b4CvkKmvyJrVw4WQ1sgyewj9iPdq29jMuT21bqCUc39Rf/etKlAgrESAj2LZO1++GLdCF0S9eRUG2KXlLn0z0zkkjew5qFSHJzpOC7PyT5CtQ4q8EvmHgn4qGq1N6Xty9EyME05XUV4qhOwymtvPE5Ol6kp5g72PIPUEO6uFEOjg5m490cQARg53YkgejufLAgB3+NGG0fAfBod1U+eFRuBZ2Z+ItF3g3SX7FnFgkLJNOyDYZ0PhE08QabNQMiljN/uCx31xdRKHsgRpArp2OZoi5+UTss2ZJ0XR9Xux2dy0wxIFgL/GfABVC7os2dopjgDpLNZZFsSFJLWXv3EFL1GZpDWj9eZFzM5FEEdce
+X-MS-Exchange-AntiSpam-MessageData: G5bmvnIdH/p+8eBLKd/Pv2g3KSi+XqfhCywq5AL8n2zB8cW+S6JbYTF7KdzfKnEPuJ1RLvgKKCns1nRhSwbWgpvOdE/jfPkXdLZW6FP2R/OpHrv3R6PWJNkBvObHMyiM4dUTHSgc//c358DLdm+Hdg==
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d98aec35-0972-4f40-4e0b-08d7c0726a09
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2020 19:29:53.7052 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Gm95soseglM49q+o7mL7+vmRjQK8qoTKXNbiKqcZ/f/ZYos7+evrQihzO6cBRFlQv4URKt3+4bsSiLOrxBlcDg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB5517
+Cc: kvm@vger.kernel.org, mst@redhat.com, mhabets@solarflare.com,
+ virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
+ saugatm@xilinx.com, lulu@redhat.com, hanand@xilinx.com, hch@infradead.org,
+ eperezma@redhat.com, haotian.wang@sifive.com, shahafs@mellanox.com,
+ parav@mellanox.com, vmireyno@marvell.com, gdawar@xilinx.com, jiri@mellanox.com,
+ xiao.w.wang@intel.com, stefanha@redhat.com, zhihong.wang@intel.com,
+ rdunlap@infradead.org, linux-kernel@vger.kernel.org,
+ maxime.coquelin@redhat.com, netdev@vger.kernel.org, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,20 +138,46 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 2020-03-04 11:19, Thomas Garnier wrote:
->>
->> The huge memory model, required for arbitrary placement, has a very
->> significant performance impact.
-> 
-> I assume you mean mcmodel=large, it doesn't use it. It uses -fPIE and
-> removes -mcmodel=kernel. It favors relative references whenever
-> possible.
-> 
+On Wed, Feb 26, 2020 at 02:04:54PM +0800, Jason Wang wrote:
+> +struct vdpa_device *vdpa_alloc_device(struct device *parent,
+> +				      struct device *dma_dev,
+> +				      const struct vdpa_config_ops *config)
+> +{
+> +	struct vdpa_device *vdev;
+> +	int err = -ENOMEM;
+> +
+> +	if (!parent || !dma_dev || !config)
+> +		goto err;
+> +
+> +	vdev = kzalloc(sizeof(*vdev), GFP_KERNEL);
+> +	if (!vdev)
+> +		goto err;
+> +
+> +	err = ida_simple_get(&vdpa_index_ida, 0, 0, GFP_KERNEL);
+> +	if (err < 0)
+> +		goto err_ida;
+> +
+> +	vdev->dev.bus = &vdpa_bus;
+> +	vdev->dev.parent = parent;
+> +	vdev->dev.release = vdpa_release_dev;
+> +
+> +	device_initialize(&vdev->dev);
+> +
+> +	vdev->index = err;
+> +	vdev->dma_dev = dma_dev;
+> +	vdev->config = config;
+> +
+> +	dev_set_name(&vdev->dev, "vdpa%u", vdev->index);
 
-I know... this was in reference to a comment of Kees'.
+Probably shouldn't ignore the error for dev_set_name ?
 
-	-hpa
+err = dev_set_name()
+if (err) {
+   put_device(&vdev->dev);
+   return ERR_PTR(err);
+}
 
+Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
