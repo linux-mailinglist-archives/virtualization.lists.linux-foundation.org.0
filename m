@@ -1,127 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B08E17990A
-	for <lists.virtualization@lfdr.de>; Wed,  4 Mar 2020 20:30:02 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48F78179915
+	for <lists.virtualization@lfdr.de>; Wed,  4 Mar 2020 20:34:50 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 055E381B75;
-	Wed,  4 Mar 2020 19:30:01 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 9B9C1879CF;
+	Wed,  4 Mar 2020 19:34:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4Iw4vihdt8Wb; Wed,  4 Mar 2020 19:30:00 +0000 (UTC)
+	with ESMTP id sgwi1zoSSm8G; Wed,  4 Mar 2020 19:34:47 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 92C3C85CC7;
-	Wed,  4 Mar 2020 19:30:00 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A5565879C5;
+	Wed,  4 Mar 2020 19:34:47 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 73B51C013E;
-	Wed,  4 Mar 2020 19:30:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8CEFFC013E;
+	Wed,  4 Mar 2020 19:34:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9F8C1C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0F01EC013E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:29:59 +0000 (UTC)
+ Wed,  4 Mar 2020 19:34:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 8D040203A7
+ by silver.osuosl.org (Postfix) with ESMTP id 0A9FD203A6
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:29:59 +0000 (UTC)
+ Wed,  4 Mar 2020 19:34:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZXpkgEuPTLF5
+ with ESMTP id zA2wTX9bBqXi
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:29:58 +0000 (UTC)
+ Wed,  4 Mar 2020 19:34:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr70073.outbound.protection.outlook.com [40.107.7.73])
- by silver.osuosl.org (Postfix) with ESMTPS id 174C020392
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id AFD0420392
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Mar 2020 19:29:58 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=O28yo6HF05cOsDBFSqz1xMDAtNrElXsrbcRnlYMGaj2kyYG4lQSelyzHTf8j+k7ZFPi61Xz+B0JDTn5V4o/w8UpVsrhHegKh2ibvYPw2iG5bc353ghz2hzsC6qtzsqhMj4qmh7dCCUrf9Bh8Nl52Kq8yHp1IrsfoYKERvWMixe24BgPyZXOMqEZ4x0u9XFPuiuZWt2BNe4mypSBT+v1BVNRzXlnNho+UyjJzGhPXadfuVTXny+j4kxUbuwCAsbaYto2QNkATYpDMoPTq/XoL7D2Fxsq3UkXOyoweyRR+Saq9aynNXs2cYQydhVf/ja4KoE1jmj9BOXAndFKnNnaw+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BdAaCaeS6gH3f4tq2Jl1Gb8UTkCxekN4gIDIDC+Aqrg=;
- b=NPkj7Xw6JJhBzULl8qRtCh5SdrJhHVx1Ky7opqsmY3dXeFQ5yp4mPYKXdU3ztXqx1KAjO1CeYpL7sMx43iQ6FhDKNBWQdGWex4wUOGhPxbal9SNg1jP2/kmdx5dMpk4pj9NQPcHDnV9T+9vKlA5OpJ9IrevbxISiPF/RUThUcWcUzcil73wZJzJiGfVePm7h5/fltnaZ1yDCXj/IeRWRyCe6YtlZX0dApyno4cJVKzem/AX+3c894tHE8rL/eFtUuAkKas1O0SaS+wSBjbz7wgU4HSfjRZ146uNWrX5NHUWp+mTOtM8T56J+SdAR4OufOmQVFQ3lha48907Rw8Xqcg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BdAaCaeS6gH3f4tq2Jl1Gb8UTkCxekN4gIDIDC+Aqrg=;
- b=XdhUAXzgUWUmvJv97oAXj/MKjzreQtkMbpM5u2QjlMiqBcNAbPkXLpx1K4GfuDRmOrYDDgGPtRKjHVIWLLDQDD+TJf8JKRHRQIbjI4ghmlKmX0crc8EoXY6kxmx4E6rgvelsc25O9Y50WEv1fzvZ7gz/PElgvbFPbS8tF4DCsgk=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB5517.eurprd05.prod.outlook.com (20.177.63.157) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2772.15; Wed, 4 Mar 2020 19:29:54 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2772.019; Wed, 4 Mar 2020
- 19:29:53 +0000
-Date: Wed, 4 Mar 2020 15:29:49 -0400
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V5 3/5] vDPA: introduce vDPA bus
-Message-ID: <20200304192949.GR26318@mellanox.com>
-References: <20200226060456.27275-1-jasowang@redhat.com>
- <20200226060456.27275-4-jasowang@redhat.com>
-Content-Disposition: inline
-In-Reply-To: <20200226060456.27275-4-jasowang@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-ClientProxiedBy: MN2PR10CA0033.namprd10.prod.outlook.com
- (2603:10b6:208:120::46) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+ Wed,  4 Mar 2020 19:34:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583350483;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LVZr990W9iLEEqbjHHLM4X6TgtqyzP5bDocd/dkFa7Q=;
+ b=jHXRiSev2wxWV10iQltFQ9CpPReiNf5wAB2O7YDEqHcExdNtoRbP4Rk6JeNImVvMDT/rDg
+ kAUkn0n+a48AS2ICLoiv0crpoMEeWqxW+70hU/AlK1nn00H0wZmi6iIG37JLkwb5d3aqR5
+ fKDcg+7US1Qanu04Bi8TZBsgaHtkzIo=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-179-Tv-3KjzPMWeEM0IP5-eptQ-1; Wed, 04 Mar 2020 14:34:41 -0500
+X-MC-Unique: Tv-3KjzPMWeEM0IP5-eptQ-1
+Received: by mail-qt1-f198.google.com with SMTP id f24so2169161qte.22
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 04 Mar 2020 11:34:41 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=LVZr990W9iLEEqbjHHLM4X6TgtqyzP5bDocd/dkFa7Q=;
+ b=R5jyNvlQ12xEoo1LRA8bE36QyirwNBrvg5Olt5IjZx+R49BMfJOekKlWh6edqsnWY0
+ QViJhxyI6d7yM1k4VDzvP6mVfVjBhBubhN0Fx1bNretWTj+OfJCNFmoczXHIQckcSegq
+ /EUfdR+ia3eSRbeVfnXA/+g20M7EIOTOp+SDNyr6QhnVvhU9FvVD+Xh1DueJpd20ggae
+ r2MZlABAA0fAc8/mEwH5cSImhdduEfloTSAnBphwmho8itjwQ3wDUwpi9Uifq+ylhPWR
+ 2Ptf/QjXj9euGW7B1DZV4rglKlm53sbJ4syI1PN7iajPZcrGOO20NFHlczyJeMvYrBhm
+ C8tQ==
+X-Gm-Message-State: ANhLgQ14f5pm28yCJFOmKuiLpry0XzBYzIiMdoLDMOQUWqIjcr25Va5j
+ OUbyhIGNRKNxMFH51iSBwmi7JjBQFzyev7hq/PLHFR/+ZVp1zKsau8lj7Loplo5/E0l8SWfZpTl
+ hFfpFqhOeqUCaTdqIgcQ9Hz+szAzFTTCbflj/I1g3Aw==
+X-Received: by 2002:ac8:4581:: with SMTP id l1mr3852960qtn.59.1583350481249;
+ Wed, 04 Mar 2020 11:34:41 -0800 (PST)
+X-Google-Smtp-Source: ADFU+vsHn2bzjYBh7yhIwOYSFDd0efbpFoWGSCiIqYDJtY0uHAZJqjWQvAouRmL7W3iDyAP6JRkM+g==
+X-Received: by 2002:ac8:4581:: with SMTP id l1mr3852927qtn.59.1583350480930;
+ Wed, 04 Mar 2020 11:34:40 -0800 (PST)
+Received: from redhat.com (bzq-79-180-48-224.red.bezeqint.net. [79.180.48.224])
+ by smtp.gmail.com with ESMTPSA id k4sm14181293qtj.74.2020.03.04.11.34.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Mar 2020 11:34:40 -0800 (PST)
+Date: Wed, 4 Mar 2020 14:34:33 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Joerg Roedel <joro@8bytes.org>
+Subject: Re: [PATCH v2 1/3] iommu/virtio: Add topology description to
+ virtio-iommu config space
+Message-ID: <20200304142838-mutt-send-email-mst@kernel.org>
+References: <20200228172537.377327-1-jean-philippe@linaro.org>
+ <20200228172537.377327-2-jean-philippe@linaro.org>
+ <20200302161611.GD7829@8bytes.org>
+ <9004f814-2f7c-9024-3465-6f9661b97b7a@redhat.com>
+ <20200303130155.GA13185@8bytes.org>
+ <20200303084753-mutt-send-email-mst@kernel.org>
+ <20200303155318.GA3954@8bytes.org>
+ <20200303105523-mutt-send-email-mst@kernel.org>
+ <20200304133707.GB4177@8bytes.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (142.68.57.212) by
- MN2PR10CA0033.namprd10.prod.outlook.com (2603:10b6:208:120::46) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.15 via Frontend
- Transport; Wed, 4 Mar 2020 19:29:53 +0000
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
- <jgg@mellanox.com>)	id 1j9ZiH-00049z-RF; Wed, 04 Mar 2020 15:29:49 -0400
-X-Originating-IP: [142.68.57.212]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: d98aec35-0972-4f40-4e0b-08d7c0726a09
-X-MS-TrafficTypeDiagnostic: VI1PR05MB5517:|VI1PR05MB5517:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <VI1PR05MB55177CA4E470400BD227AFACCFE50@VI1PR05MB5517.eurprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3631;
-X-Forefront-PRVS: 0332AACBC3
-X-Forefront-Antispam-Report: SFV:NSPM;
- SFS:(10009020)(4636009)(396003)(366004)(346002)(136003)(376002)(39860400002)(189003)(199004)(5660300002)(66476007)(66556008)(1076003)(2906002)(186003)(26005)(66946007)(4744005)(2616005)(478600001)(4326008)(9786002)(86362001)(7416002)(9746002)(33656002)(316002)(52116002)(8936002)(6916009)(81156014)(36756003)(8676002)(81166006)(24400500001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB5517;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-Received-SPF: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Cs+Oqh1WVP0VX5f10uU7496uwqpHzFRQZ4St/l9G0+aHAHkA2m4poO6MRBAy8QDNkUHGmlh4tyNxDBYGal8BQq9DUvrKmoUs2fff6Js7+pS3dEMm5g+RFg6nDvx/GZfG7ppJffjFhFq5BsboG9ZQtY+b4CvkKmvyJrVw4WQ1sgyewj9iPdq29jMuT21bqCUc39Rf/etKlAgrESAj2LZO1++GLdCF0S9eRUG2KXlLn0z0zkkjew5qFSHJzpOC7PyT5CtQ4q8EvmHgn4qGq1N6Xty9EyME05XUV4qhOwymtvPE5Ol6kp5g72PIPUEO6uFEOjg5m490cQARg53YkgejufLAgB3+NGG0fAfBod1U+eFRuBZ2Z+ItF3g3SX7FnFgkLJNOyDYZ0PhE08QabNQMiljN/uCx31xdRKHsgRpArp2OZoi5+UTss2ZJ0XR9Xux2dy0wxIFgL/GfABVC7os2dopjgDpLNZZFsSFJLWXv3EFL1GZpDWj9eZFzM5FEEdce
-X-MS-Exchange-AntiSpam-MessageData: G5bmvnIdH/p+8eBLKd/Pv2g3KSi+XqfhCywq5AL8n2zB8cW+S6JbYTF7KdzfKnEPuJ1RLvgKKCns1nRhSwbWgpvOdE/jfPkXdLZW6FP2R/OpHrv3R6PWJNkBvObHMyiM4dUTHSgc//c358DLdm+Hdg==
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d98aec35-0972-4f40-4e0b-08d7c0726a09
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2020 19:29:53.7052 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Gm95soseglM49q+o7mL7+vmRjQK8qoTKXNbiKqcZ/f/ZYos7+evrQihzO6cBRFlQv4URKt3+4bsSiLOrxBlcDg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB5517
-Cc: kvm@vger.kernel.org, mst@redhat.com, mhabets@solarflare.com,
- virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
- saugatm@xilinx.com, lulu@redhat.com, hanand@xilinx.com, hch@infradead.org,
- eperezma@redhat.com, haotian.wang@sifive.com, shahafs@mellanox.com,
- parav@mellanox.com, vmireyno@marvell.com, gdawar@xilinx.com, jiri@mellanox.com,
- xiao.w.wang@intel.com, stefanha@redhat.com, zhihong.wang@intel.com,
- rdunlap@infradead.org, linux-kernel@vger.kernel.org,
- maxime.coquelin@redhat.com, netdev@vger.kernel.org, lingshan.zhu@intel.com
+In-Reply-To: <20200304133707.GB4177@8bytes.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>, linux-pci@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Auger Eric <eric.auger@redhat.com>,
+ iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
+ jacob.jun.pan@intel.com, bhelgaas@google.com, robin.murphy@arm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -138,46 +118,66 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Feb 26, 2020 at 02:04:54PM +0800, Jason Wang wrote:
-> +struct vdpa_device *vdpa_alloc_device(struct device *parent,
-> +				      struct device *dma_dev,
-> +				      const struct vdpa_config_ops *config)
-> +{
-> +	struct vdpa_device *vdev;
-> +	int err = -ENOMEM;
-> +
-> +	if (!parent || !dma_dev || !config)
-> +		goto err;
-> +
-> +	vdev = kzalloc(sizeof(*vdev), GFP_KERNEL);
-> +	if (!vdev)
-> +		goto err;
-> +
-> +	err = ida_simple_get(&vdpa_index_ida, 0, 0, GFP_KERNEL);
-> +	if (err < 0)
-> +		goto err_ida;
-> +
-> +	vdev->dev.bus = &vdpa_bus;
-> +	vdev->dev.parent = parent;
-> +	vdev->dev.release = vdpa_release_dev;
-> +
-> +	device_initialize(&vdev->dev);
-> +
-> +	vdev->index = err;
-> +	vdev->dma_dev = dma_dev;
-> +	vdev->config = config;
-> +
-> +	dev_set_name(&vdev->dev, "vdpa%u", vdev->index);
+On Wed, Mar 04, 2020 at 02:37:08PM +0100, Joerg Roedel wrote:
+> Hi Michael,
+> 
+> On Tue, Mar 03, 2020 at 11:09:41AM -0500, Michael S. Tsirkin wrote:
+> > No. It's coded into the hardware. Which might even be practical
+> > for bare-metal (e.g. on-board flash), but is very practical
+> > when the device is part of a hypervisor.
+> 
+> If its that way on PPC, than fine for them. But since this is enablement
+> for x86, it should follow the x86 platform best practices, and that
+> means describing hardware through ACPI.
 
-Probably shouldn't ignore the error for dev_set_name ?
+For hardware, sure.  Hypervisors aren't hardware
+though and a bunch of hypervisors don't use ACPI.
 
-err = dev_set_name()
-if (err) {
-   put_device(&vdev->dev);
-   return ERR_PTR(err);
-}
 
-Jason
+> > This "hardware" is actually part of hypervisor so there's no
+> > reason it can't be completely self-descriptive. It's specified
+> > by the same entity as the "firmware".
+> 
+> That is just an implementation detail. Yes, QEMU emulates the hardware
+> and builds the ACPI tables. But it could also be implemented in a way
+> where the ACPI tables are build by guest firmware.
+
+All these extra levels of indirection is one of the reasons
+hypervisors such as kata try to avoid ACPI.
+
+> > I don't see why it would be much faster. The interface isn't that
+> > different from command queues of VTD.
+> 
+> VirtIO IOMMU doesn't need to build page-tables that the hypervisor then
+> has to shadow, which makes things much faster. If you emulate one of the
+> other IOMMUs (VT-d or AMD-Vi) the code has to shadow the full page-table
+> at once when device passthrough is used. VirtIO-IOMMU doesn't need that,
+> and that makes it much faster and efficient.
+
+
+IIUC VT-d at least supports range invalidations.
+
+> 
+> > Making ACPI meet the goals of embedded projects such as kata containers
+> > would be a gigantic task with huge stability implications.  By
+> > comparison this 400-line parser is well contained and does the job.  I
+> > didn't yet see compelling reasons not to merge this, but I'll be
+> > interested to see some more specific concerns.
+> 
+> An ACPI table parse wouldn't need more lines of code.
+
+It realies on ACPI OSPM itself to handle ACPI bytecode, which is huge.
+
+
+> For embedded
+> systems there is still the DT way of describing things.
+
+For some embedded systems.
+
+> Regards,
+> 
+> 	Joerg
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
