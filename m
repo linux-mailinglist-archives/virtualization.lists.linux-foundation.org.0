@@ -1,47 +1,47 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57C4617A996
-	for <lists.virtualization@lfdr.de>; Thu,  5 Mar 2020 17:00:14 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B79E917A9A2
+	for <lists.virtualization@lfdr.de>; Thu,  5 Mar 2020 17:00:17 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id CD1D42154A;
-	Thu,  5 Mar 2020 16:00:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 501D587E16;
+	Thu,  5 Mar 2020 16:00:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XDIRTZMYxsDk; Thu,  5 Mar 2020 16:00:11 +0000 (UTC)
+	with ESMTP id 7r-jb+DFRIyE; Thu,  5 Mar 2020 16:00:13 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 0318A2154F;
-	Thu,  5 Mar 2020 16:00:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C061187E4C;
+	Thu,  5 Mar 2020 16:00:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DFAA4C013E;
-	Thu,  5 Mar 2020 16:00:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A6B78C013E;
+	Thu,  5 Mar 2020 16:00:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CCBDEC013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 21262C013E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 16:00:08 +0000 (UTC)
+ Thu,  5 Mar 2020 16:00:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id B180E86199
+ by silver.osuosl.org (Postfix) with ESMTP id 14DC22154E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 16:00:08 +0000 (UTC)
+ Thu,  5 Mar 2020 16:00:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QYoksKMCyCrl
+ with ESMTP id AEifXNlt4me9
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 16:00:08 +0000 (UTC)
+ Thu,  5 Mar 2020 16:00:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 166D9861EE
+ by silver.osuosl.org (Postfix) with ESMTPS id 1196C21551
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 16:00:08 +0000 (UTC)
+ Thu,  5 Mar 2020 16:00:11 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 78FAAB03C;
- Thu,  5 Mar 2020 16:00:06 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 02B60B03E;
+ Thu,  5 Mar 2020 16:00:07 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: airlied@linux.ie, daniel@ffwll.ch, sam@ravnborg.org, abrodkin@synopsys.com,
  bbrezillon@kernel.org, nicolas.ferre@microchip.com,
@@ -63,9 +63,9 @@ To: airlied@linux.ie, daniel@ffwll.ch, sam@ravnborg.org, abrodkin@synopsys.com,
  tomi.valkeinen@ti.com, eric@anholt.net, kraxel@redhat.com,
  rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
  sebastian.reichel@collabora.com
-Subject: [PATCH 09/22] drm/ingenic: Use simple encoder
-Date: Thu,  5 Mar 2020 16:59:37 +0100
-Message-Id: <20200305155950.2705-10-tzimmermann@suse.de>
+Subject: [PATCH 10/22] drm/mediatek: Use simple encoder
+Date: Thu,  5 Mar 2020 16:59:38 +0100
+Message-Id: <20200305155950.2705-11-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200305155950.2705-1-tzimmermann@suse.de>
 References: <20200305155950.2705-1-tzimmermann@suse.de>
@@ -90,47 +90,92 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The ingenic driver uses an empty implementation for its encoder. Replace
+The mediatak driver uses empty implementations for its encoders. Replace
 the code with the generic simple encoder.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/ingenic/ingenic-drm.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ drivers/gpu/drm/mediatek/mtk_dpi.c | 14 +++-----------
+ drivers/gpu/drm/mediatek/mtk_dsi.c | 14 +++-----------
+ 2 files changed, 6 insertions(+), 22 deletions(-)
 
-diff --git a/drivers/gpu/drm/ingenic/ingenic-drm.c b/drivers/gpu/drm/ingenic/ingenic-drm.c
-index 9dfe7cb530e1..9f7983a97392 100644
---- a/drivers/gpu/drm/ingenic/ingenic-drm.c
-+++ b/drivers/gpu/drm/ingenic/ingenic-drm.c
-@@ -28,6 +28,7 @@
- #include <drm/drm_plane.h>
- #include <drm/drm_plane_helper.h>
- #include <drm/drm_probe_helper.h>
+diff --git a/drivers/gpu/drm/mediatek/mtk_dpi.c b/drivers/gpu/drm/mediatek/mtk_dpi.c
+index 14fbe1c09ce9..9c90c58e5acd 100644
+--- a/drivers/gpu/drm/mediatek/mtk_dpi.c
++++ b/drivers/gpu/drm/mediatek/mtk_dpi.c
+@@ -20,6 +20,7 @@
+ #include <drm/drm_bridge.h>
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_of.h>
 +#include <drm/drm_simple_kms_helper.h>
- #include <drm/drm_vblank.h>
  
- #define JZ_REG_LCD_CFG				0x00
-@@ -592,10 +593,6 @@ static const struct drm_mode_config_funcs ingenic_drm_mode_config_funcs = {
- 	.atomic_commit		= drm_atomic_helper_commit,
- };
+ #include "mtk_dpi_regs.h"
+ #include "mtk_drm_ddp_comp.h"
+@@ -509,15 +510,6 @@ static int mtk_dpi_set_display_mode(struct mtk_dpi *dpi,
+ 	return 0;
+ }
  
--static const struct drm_encoder_funcs ingenic_drm_encoder_funcs = {
--	.destroy		= drm_encoder_cleanup,
+-static void mtk_dpi_encoder_destroy(struct drm_encoder *encoder)
+-{
+-	drm_encoder_cleanup(encoder);
+-}
+-
+-static const struct drm_encoder_funcs mtk_dpi_encoder_funcs = {
+-	.destroy = mtk_dpi_encoder_destroy,
 -};
 -
- static void ingenic_drm_free_dma_hwdesc(void *d)
- {
- 	struct ingenic_drm *priv = d;
-@@ -730,8 +727,8 @@ static int ingenic_drm_probe(struct platform_device *pdev)
- 	drm_encoder_helper_add(&priv->encoder,
- 			       &ingenic_drm_encoder_helper_funcs);
+ static bool mtk_dpi_encoder_mode_fixup(struct drm_encoder *encoder,
+ 				       const struct drm_display_mode *mode,
+ 				       struct drm_display_mode *adjusted_mode)
+@@ -596,8 +588,8 @@ static int mtk_dpi_bind(struct device *dev, struct device *master, void *data)
+ 		return ret;
+ 	}
  
--	ret = drm_encoder_init(drm, &priv->encoder, &ingenic_drm_encoder_funcs,
--			       DRM_MODE_ENCODER_DPI, NULL);
-+	ret = drm_simple_encoder_init(drm, &priv->encoder,
-+				      DRM_MODE_ENCODER_DPI);
+-	ret = drm_encoder_init(drm_dev, &dpi->encoder, &mtk_dpi_encoder_funcs,
+-			       DRM_MODE_ENCODER_TMDS, NULL);
++	ret = drm_simple_encoder_init(drm_dev, &dpi->encoder,
++				      DRM_MODE_ENCODER_TMDS);
  	if (ret) {
- 		dev_err(dev, "Failed to init encoder: %i", ret);
+ 		dev_err(dev, "Failed to initialize decoder: %d\n", ret);
+ 		goto err_unregister;
+diff --git a/drivers/gpu/drm/mediatek/mtk_dsi.c b/drivers/gpu/drm/mediatek/mtk_dsi.c
+index 0ede69830a9d..a9a25087112f 100644
+--- a/drivers/gpu/drm/mediatek/mtk_dsi.c
++++ b/drivers/gpu/drm/mediatek/mtk_dsi.c
+@@ -22,6 +22,7 @@
+ #include <drm/drm_panel.h>
+ #include <drm/drm_print.h>
+ #include <drm/drm_probe_helper.h>
++#include <drm/drm_simple_kms_helper.h>
+ 
+ #include "mtk_drm_ddp_comp.h"
+ 
+@@ -787,15 +788,6 @@ static void mtk_output_dsi_disable(struct mtk_dsi *dsi)
+ 	dsi->enabled = false;
+ }
+ 
+-static void mtk_dsi_encoder_destroy(struct drm_encoder *encoder)
+-{
+-	drm_encoder_cleanup(encoder);
+-}
+-
+-static const struct drm_encoder_funcs mtk_dsi_encoder_funcs = {
+-	.destroy = mtk_dsi_encoder_destroy,
+-};
+-
+ static bool mtk_dsi_encoder_mode_fixup(struct drm_encoder *encoder,
+ 				       const struct drm_display_mode *mode,
+ 				       struct drm_display_mode *adjusted_mode)
+@@ -888,8 +880,8 @@ static int mtk_dsi_create_conn_enc(struct drm_device *drm, struct mtk_dsi *dsi)
+ {
+ 	int ret;
+ 
+-	ret = drm_encoder_init(drm, &dsi->encoder, &mtk_dsi_encoder_funcs,
+-			       DRM_MODE_ENCODER_DSI, NULL);
++	ret = drm_simple_encoder_init(drm, &dsi->encoder,
++				      DRM_MODE_ENCODER_DSI);
+ 	if (ret) {
+ 		DRM_ERROR("Failed to encoder init to drm\n");
  		return ret;
 -- 
 2.25.1
