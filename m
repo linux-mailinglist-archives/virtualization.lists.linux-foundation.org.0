@@ -1,111 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF0BB17A919
-	for <lists.virtualization@lfdr.de>; Thu,  5 Mar 2020 16:43:08 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67DA817A997
+	for <lists.virtualization@lfdr.de>; Thu,  5 Mar 2020 17:00:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 43CC28619E;
-	Thu,  5 Mar 2020 15:43:07 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 97AB087E49;
+	Thu,  5 Mar 2020 16:00:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QM_Y0Rz2rRrv; Thu,  5 Mar 2020 15:43:06 +0000 (UTC)
+	with ESMTP id 2-s9pibvPyaJ; Thu,  5 Mar 2020 16:00:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D01C286194;
-	Thu,  5 Mar 2020 15:43:06 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 5898287E13;
+	Thu,  5 Mar 2020 16:00:10 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BB195C013E;
-	Thu,  5 Mar 2020 15:43:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4F72EC013E;
+	Thu,  5 Mar 2020 16:00:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DE07BC013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 170F9C18DA
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 15:43:05 +0000 (UTC)
+ Thu,  5 Mar 2020 16:00:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id C10E92152A
+ by silver.osuosl.org (Postfix) with ESMTP id 11FBB21544
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 15:43:05 +0000 (UTC)
+ Thu,  5 Mar 2020 16:00:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gE0LOp5Y157f
+ with ESMTP id Hj4MCoe6Fq6o
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 15:43:03 +0000 (UTC)
+ Thu,  5 Mar 2020 16:00:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id A56642002D
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id 1B5142153E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Mar 2020 15:43:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583422982;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=v5mw+5LGP9RE5YEazC7GDzkU8nm5NgoMOCIQaMpmC7k=;
- b=BFZ1EMhJ6V5lGIVZHN6rRRiHinm2TXnuWC9ISERNQHioK1ms2f6nZH07yFqkY4XASYJONQ
- 5EiR7xtxkq868Xes4GT4HN0ieimFG12iwNtPEf5VMI1C4z/oRqf1BEmD+SzgxHKoSlIRQo
- e4hEDdWGz6V1AxXReImYVHLtTZr8Rok=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-433-3XyBtToNMr62k_9CWE9oZw-1; Thu, 05 Mar 2020 10:42:59 -0500
-X-MC-Unique: 3XyBtToNMr62k_9CWE9oZw-1
-Received: by mail-qv1-f69.google.com with SMTP id r16so3256198qvp.13
- for <virtualization@lists.linux-foundation.org>;
- Thu, 05 Mar 2020 07:42:59 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=v5mw+5LGP9RE5YEazC7GDzkU8nm5NgoMOCIQaMpmC7k=;
- b=mkuzzTvUEPbWwmK43RWjo6up3efnuR+KMD2gY4bAyhmp/+qE7LRC8DYP6odRb1Lv85
- HdkVCCglzTWGl8kM6d5xpWJEBdtwiYo6woKT9aIbcGngZrex+3X1XCmBpVnizvp6X3qn
- VenlP96t0HRncG50Laseqei30oLPFVvMSusBRMloatqrGlRszNVeDfYhFWl3FBkaosId
- +12F8CHRrfNBXElNAFnasnC0p2XE1q5w0sQUWm+Zxw/rTvdU+OLKf7wROyoIOV3oauCj
- 73Kf1tq6b8iVRd7u7PTTlzkK7/Q9VAzB5K7O8fIA7Pfc/XvYXoqHpEAtPDDP1xUUJmJi
- IG/Q==
-X-Gm-Message-State: ANhLgQ3O2yP83ftsZVpNwOKyXMj5lR86ePxH536Kft8lawmbM1sYW6ir
- +Ctr/sFwgYIhOkjGJ346HE8SZ64q9xOdzVvcf1cc92oGgwNXLYlgx/Q+aWHRRE9hysmhsPXjjES
- XRVM7yXbuDhywRyXjWGzvjErijvOEVjQ9qX1iOa2XgQ==
-X-Received: by 2002:a05:6214:1404:: with SMTP id
- n4mr6985873qvx.237.1583422978683; 
- Thu, 05 Mar 2020 07:42:58 -0800 (PST)
-X-Google-Smtp-Source: ADFU+vupwTlYbbOVLm7I6MzJJZnvoKTQidVVSGtwHtFKHWgU4GKKZRAi3AoaWmSSz3B5Prm1w8y2nQ==
-X-Received: by 2002:a05:6214:1404:: with SMTP id
- n4mr6985848qvx.237.1583422978417; 
- Thu, 05 Mar 2020 07:42:58 -0800 (PST)
-Received: from redhat.com (bzq-79-180-48-224.red.bezeqint.net. [79.180.48.224])
- by smtp.gmail.com with ESMTPSA id n8sm15851215qke.37.2020.03.05.07.42.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2020 07:42:57 -0800 (PST)
-Date: Thu, 5 Mar 2020 10:42:51 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v2 1/3] iommu/virtio: Add topology description to
- virtio-iommu config space
-Message-ID: <20200305104002-mutt-send-email-mst@kernel.org>
-References: <9004f814-2f7c-9024-3465-6f9661b97b7a@redhat.com>
- <20200303130155.GA13185@8bytes.org>
- <20200303084753-mutt-send-email-mst@kernel.org>
- <20200303155318.GA3954@8bytes.org>
- <20200303105523-mutt-send-email-mst@kernel.org>
- <20200304133707.GB4177@8bytes.org> <20200304153821.GE646000@myrica>
- <20200304174045.GC3315@8bytes.org>
- <20200304133744.00000fdb@intel.com>
- <20200304215449.GE3315@8bytes.org>
+ Thu,  5 Mar 2020 16:00:05 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 5CD7BAF9F;
+ Thu,  5 Mar 2020 15:59:59 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@linux.ie, daniel@ffwll.ch, sam@ravnborg.org, abrodkin@synopsys.com,
+ bbrezillon@kernel.org, nicolas.ferre@microchip.com,
+ alexandre.belloni@bootlin.com, ludovic.desroches@microchip.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ jingoohan1@gmail.com, inki.dae@samsung.com, jy0922.shim@samsung.com,
+ sw0312.kim@samsung.com, kyungmin.park@samsung.com, kgene@kernel.org,
+ krzk@kernel.org, stefan@agner.ch, alison.wang@nxp.com,
+ patrik.r.jakobsson@gmail.com, xinliang.liu@linaro.org,
+ zourongrong@gmail.com, john.stultz@linaro.org,
+ kong.kongxinwei@hisilicon.com, puck.chen@hisilicon.com,
+ linux@armlinux.org.uk, p.zabel@pengutronix.de, shawnguo@kernel.org,
+ s.hauer@pengutronix.de, kernel@pengutronix.de, festevam@gmail.com,
+ linux-imx@nxp.com, paul@crapouillou.net, ck.hu@mediatek.com,
+ matthias.bgg@gmail.com, laurent.pinchart@ideasonboard.com,
+ kieran.bingham+renesas@ideasonboard.com, hjc@rock-chips.com,
+ heiko@sntech.de, wens@csie.org, jernej.skrabec@siol.net,
+ thierry.reding@gmail.com, jonathanh@nvidia.com, jsarha@ti.com,
+ tomi.valkeinen@ti.com, eric@anholt.net, kraxel@redhat.com,
+ rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
+ sebastian.reichel@collabora.com
+Subject: [PATCH 00/22] drm: Convert drivers to drm_simple_encoder_init()
+Date: Thu,  5 Mar 2020 16:59:28 +0100
+Message-Id: <20200305155950.2705-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20200304215449.GE3315@8bytes.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>, "Rothman,
- Michael A" <michael.a.rothman@intel.com>, linux-pci@vger.kernel.org, "Kaneda,
- Erik" <erik.kaneda@intel.com>, virtualization@lists.linux-foundation.org,
- Auger Eric <eric.auger@redhat.com>, iommu@lists.linux-foundation.org,
- sebastien.boeuf@intel.com, "Jacob Pan \(Jun\)" <jacob.jun.pan@intel.com>,
- bhelgaas@google.com, robin.murphy@arm.com
+Cc: linux-samsung-soc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, linux-rockchip@lists.infradead.org,
+ linux-mediatek@lists.infradead.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ linux-tegra@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -122,30 +88,127 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Mar 04, 2020 at 10:54:49PM +0100, Joerg Roedel wrote:
-> On Wed, Mar 04, 2020 at 01:37:44PM -0800, Jacob Pan (Jun) wrote:
-> > + Mike and Erik who work closely on UEFI and ACPICA.
-> > 
-> > Copy paste Erik's initial response below on how to get a new table,
-> > seems to confirm with the process you stated above.
-> > 
-> > "Fairly easy. You reserve a 4-letter symbol by sending a message
-> > requesting to reserve the signature to Mike or the ASWG mailing list or
-> > info@acpi.info
-> 
-> Great! I think this is going to be the path forward here.
-> 
-> Regards,
-> 
-> 	Joerg
+A call to drm_simple_encoder_init() initializes an encoder without
+further functionality. It only provides the destroy callback to
+cleanup the encoder's state. Only few drivers implement more
+sophisticated encoders than that. Most drivers implement such a
+simple encoder and can use drm_simple_encoder_init() instead.
 
-I don't, I don't see why we should bother with ACPI. This is a PV device
-anyway, we can just make it self-describing. The need for extra firmware
-on some platforms is a bug not a feature. No point in emulating that.
+The patchset converts drivers where the encoder's instance is
+embedded in a larger data structure. The driver releases the
+memory during cleanup. Each patch replaces drm_encoder_init() with
+drm_simple_encoder_init() and removes the (now unused) driver's
+encoder functions.
 
-> > 
-> > There is also another option. You can have ASWG own this new table so
-> > that not one entity or company owns the new table."
+While the patchset is fairly large, the indiviual patches are self-
+contained and can be merged independently from each other. The
+simple-encoder functionality is currently in drm-misc-next, where
+these patches could go as well.
+
+Future directions: There's another common case where the driver
+calls kzalloc() plus drm_encoder_init(). Such drivers are not
+handled by this patchset. The plan here is to use a simple encoder
+with either managed memory allocation (once it's merged), or embed
+the encoder in a larger data structure and drop kzalloc() entirely.
+
+The patchset has been compile-tested on x86-64, aarch64 and arm.
+
+Thomas Zimmermann (22):
+  drm/arc: Use simple encoder
+  drm/atmel-hlcdc: Use simple encoder
+  drm/exynos: Use simple encoder
+  drm/fsl-dcu: Use simple encoder
+  drm/gma500: Use simple encoder
+  drm/hisilicon/kirin: Use simple encoder
+  drm/i2c/tda998x: Use simple encoder
+  drm/imx: Use simple encoder
+  drm/ingenic: Use simple encoder
+  drm/mediatek: Use simple encoder
+  drm/rcar-du: Use simple encoder
+  drm/rockchip: Use simple encoder
+  drm/shmobile: Use simple encoder
+  drm/sun4i: Use simple encoder
+  drm/tegra: Use simple encoder
+  drm/tidss: Use simple encoder
+  drm/tilcdc: Use simple encoder
+  drm/vc4: Use simple encoder
+  drm/virtgpu: Use simple encoder
+  drm/vkms: Use simple encoder
+  drm/writeback: Use simple encoder
+  drm/zte: Use simple encoder
+
+ drivers/gpu/drm/arc/arcpgu_hdmi.c              | 10 +++-------
+ drivers/gpu/drm/arc/arcpgu_sim.c               |  8 ++------
+ .../gpu/drm/atmel-hlcdc/atmel_hlcdc_output.c   | 12 ++++--------
+ drivers/gpu/drm/drm_writeback.c                | 10 +++-------
+ drivers/gpu/drm/exynos/exynos_dp.c             |  8 ++------
+ drivers/gpu/drm/exynos/exynos_drm_dpi.c        |  8 ++------
+ drivers/gpu/drm/exynos/exynos_drm_dsi.c        |  8 ++------
+ drivers/gpu/drm/exynos/exynos_drm_vidi.c       |  8 ++------
+ drivers/gpu/drm/exynos/exynos_hdmi.c           |  8 ++------
+ drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_rgb.c      | 14 +++-----------
+ drivers/gpu/drm/gma500/cdv_intel_crt.c         | 14 +++-----------
+ drivers/gpu/drm/gma500/cdv_intel_dp.c          | 16 +++-------------
+ drivers/gpu/drm/gma500/cdv_intel_hdmi.c        |  4 ++--
+ drivers/gpu/drm/gma500/cdv_intel_lvds.c        | 17 +++--------------
+ drivers/gpu/drm/gma500/mdfld_dsi_dpi.c         |  7 +++----
+ drivers/gpu/drm/gma500/mdfld_output.h          |  1 -
+ drivers/gpu/drm/gma500/mdfld_tmd_vid.c         |  6 ------
+ drivers/gpu/drm/gma500/mdfld_tpo_vid.c         |  6 ------
+ drivers/gpu/drm/gma500/oaktrail_hdmi.c         | 14 ++------------
+ drivers/gpu/drm/gma500/oaktrail_lvds.c         |  5 +++--
+ drivers/gpu/drm/gma500/psb_intel_drv.h         |  1 -
+ drivers/gpu/drm/gma500/psb_intel_lvds.c        | 18 +++---------------
+ drivers/gpu/drm/gma500/tc35876x-dsi-lvds.c     |  5 -----
+ drivers/gpu/drm/hisilicon/kirin/dw_drm_dsi.c   |  8 ++------
+ drivers/gpu/drm/i2c/tda998x_drv.c              | 14 +++-----------
+ drivers/gpu/drm/imx/dw_hdmi-imx.c              |  8 ++------
+ drivers/gpu/drm/imx/imx-drm-core.c             |  6 ------
+ drivers/gpu/drm/imx/imx-drm.h                  |  1 -
+ drivers/gpu/drm/imx/imx-ldb.c                  |  8 ++------
+ drivers/gpu/drm/imx/imx-tve.c                  |  8 ++------
+ drivers/gpu/drm/imx/parallel-display.c         |  8 ++------
+ drivers/gpu/drm/ingenic/ingenic-drm.c          |  9 +++------
+ drivers/gpu/drm/mediatek/mtk_dpi.c             | 14 +++-----------
+ drivers/gpu/drm/mediatek/mtk_dsi.c             | 14 +++-----------
+ drivers/gpu/drm/rcar-du/rcar_du_encoder.c      | 14 +++-----------
+ .../gpu/drm/rockchip/analogix_dp-rockchip.c    |  9 +++------
+ drivers/gpu/drm/rockchip/cdn-dp-core.c         |  9 +++------
+ .../gpu/drm/rockchip/dw-mipi-dsi-rockchip.c    |  8 ++------
+ drivers/gpu/drm/rockchip/dw_hdmi-rockchip.c    |  8 ++------
+ drivers/gpu/drm/rockchip/inno_hdmi.c           |  8 ++------
+ drivers/gpu/drm/rockchip/rk3066_hdmi.c         |  8 ++------
+ drivers/gpu/drm/rockchip/rockchip_lvds.c       | 10 +++-------
+ drivers/gpu/drm/rockchip/rockchip_rgb.c        |  8 ++------
+ drivers/gpu/drm/shmobile/shmob_drm_crtc.c      | 14 +++-----------
+ drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c         | 12 +++---------
+ drivers/gpu/drm/sun4i/sun4i_lvds.c             | 12 +++---------
+ drivers/gpu/drm/sun4i/sun4i_rgb.c              | 17 +++--------------
+ drivers/gpu/drm/sun4i/sun4i_tv.c               | 17 +++--------------
+ drivers/gpu/drm/sun4i/sun6i_mipi_dsi.c         | 12 +++---------
+ drivers/gpu/drm/sun4i/sun8i_dw_hdmi.c          |  8 ++------
+ drivers/gpu/drm/tegra/drm.h                    |  2 --
+ drivers/gpu/drm/tegra/dsi.c                    | 10 +++-------
+ drivers/gpu/drm/tegra/hdmi.c                   |  9 +++------
+ drivers/gpu/drm/tegra/output.c                 |  6 +-----
+ drivers/gpu/drm/tegra/rgb.c                    |  8 ++------
+ drivers/gpu/drm/tegra/sor.c                    |  8 ++------
+ drivers/gpu/drm/tidss/tidss_encoder.c          | 10 +++-------
+ drivers/gpu/drm/tilcdc/tilcdc_external.c       | 10 +++-------
+ drivers/gpu/drm/tilcdc/tilcdc_panel.c          |  8 ++------
+ drivers/gpu/drm/vc4/vc4_dpi.c                  |  8 ++------
+ drivers/gpu/drm/vc4/vc4_dsi.c                  | 15 +++------------
+ drivers/gpu/drm/vc4/vc4_hdmi.c                 | 17 ++++-------------
+ drivers/gpu/drm/vc4/vc4_vec.c                  |  8 ++------
+ drivers/gpu/drm/virtio/virtgpu_display.c       |  8 ++------
+ drivers/gpu/drm/vkms/vkms_output.c             |  8 ++------
+ drivers/gpu/drm/zte/zx_hdmi.c                  |  8 ++------
+ drivers/gpu/drm/zte/zx_tvenc.c                 |  8 ++------
+ drivers/gpu/drm/zte/zx_vga.c                   |  8 ++------
+ 68 files changed, 151 insertions(+), 488 deletions(-)
+
+--
+2.25.1
 
 _______________________________________________
 Virtualization mailing list
