@@ -1,51 +1,51 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CA6517C15C
-	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 16:10:53 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B45D17C18F
+	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 16:19:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D74B988324;
-	Fri,  6 Mar 2020 15:10:51 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 1913E227CD;
+	Fri,  6 Mar 2020 15:19:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NRredvt249se; Fri,  6 Mar 2020 15:10:50 +0000 (UTC)
+	with ESMTP id 9s-zqK-ji1B5; Fri,  6 Mar 2020 15:19:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DDE4488321;
-	Fri,  6 Mar 2020 15:10:50 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7392F227FC;
+	Fri,  6 Mar 2020 15:19:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B14F4C013E;
-	Fri,  6 Mar 2020 15:10:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4887EC013E;
+	Fri,  6 Mar 2020 15:19:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2919CC013E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DDFE3C013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 15:10:49 +0000 (UTC)
+ Fri,  6 Mar 2020 15:19:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 175A286B8A
+ by hemlock.osuosl.org (Postfix) with ESMTP id D91EA8833F
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 15:10:49 +0000 (UTC)
+ Fri,  6 Mar 2020 15:19:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id w6cTNyVO7zLn
+ with ESMTP id DgZPrVVlcZbt
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 15:10:47 +0000 (UTC)
+ Fri,  6 Mar 2020 15:19:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2392386B84
+ by hemlock.osuosl.org (Postfix) with ESMTPS id AA5E78833C
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 15:10:47 +0000 (UTC)
+ Fri,  6 Mar 2020 15:19:06 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 45744AE5A;
- Fri,  6 Mar 2020 15:10:43 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 7BF3BAF55;
+ Fri,  6 Mar 2020 15:19:03 +0000 (UTC)
 Subject: Re: [PATCH 00/22] drm: Convert drivers to drm_simple_encoder_init()
-To: Daniel Vetter <daniel@ffwll.ch>
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 References: <20200305155950.2705-1-tzimmermann@suse.de>
- <20200306105659.GY2363188@phenom.ffwll.local>
+ <20200306142212.GF4878@pendragon.ideasonboard.com>
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
  mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
@@ -72,12 +72,12 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
  HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
  3H26qrE=
-Message-ID: <cd96a901-286c-76b3-3fd6-e1bf3c6f6145@suse.de>
-Date: Fri, 6 Mar 2020 16:10:37 +0100
+Message-ID: <bccc380a-8925-81a7-34fe-5a1744a766d0@suse.de>
+Date: Fri, 6 Mar 2020 16:18:52 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200306105659.GY2363188@phenom.ffwll.local>
+In-Reply-To: <20200306142212.GF4878@pendragon.ideasonboard.com>
 Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, airlied@linux.ie,
  dri-devel@lists.freedesktop.org, sebastian.reichel@collabora.com,
  paul@crapouillou.net, matthias.bgg@gmail.com, wens@csie.org,
@@ -93,7 +93,7 @@ Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, airlied@linux.ie,
  jingoohan1@gmail.com, sw0312.kim@samsung.com, hjc@rock-chips.com,
  kyungmin.park@samsung.com, kieran.bingham+renesas@ideasonboard.com,
  ludovic.desroches@microchip.com, kernel@pengutronix.de, zourongrong@gmail.com,
- shawnguo@kernel.org, laurent.pinchart@ideasonboard.com
+ shawnguo@kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,22 +105,22 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5244587455547775381=="
+Content-Type: multipart/mixed; boundary="===============0010631041882808326=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5244587455547775381==
+--===============0010631041882808326==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="QIZEuRDQVJSC8aNPEipGHDGTrjKCimeWL"
+ boundary="zLjI9bAGFBvHKwEMe397vRdtLj3HUCSWe"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---QIZEuRDQVJSC8aNPEipGHDGTrjKCimeWL
-Content-Type: multipart/mixed; boundary="JKL2xkfds1OalxCbI49nz3IqpCVHOQuRj";
+--zLjI9bAGFBvHKwEMe397vRdtLj3HUCSWe
+Content-Type: multipart/mixed; boundary="7ZEUhC7vXaHUKdhpsAsTVaSFl7q2PnfOJ";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel@ffwll.ch>
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, airlied@linux.ie,
  linux@armlinux.org.uk, paul@crapouillou.net, thierry.reding@gmail.com,
  krzk@kernel.org, sam@ravnborg.org, sebastian.reichel@collabora.com,
@@ -132,27 +132,30 @@ Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, airlied@linux.ie,
  virtualization@lists.linux-foundation.org, linux-tegra@vger.kernel.org,
  puck.chen@hisilicon.com, s.hauer@pengutronix.de, alison.wang@nxp.com,
  jsarha@ti.com, matthias.bgg@gmail.com, wens@csie.org, kernel@pengutronix.de,
- jernej.skrabec@siol.net, kraxel@redhat.com, rodrigosiqueiramelo@gmail.com,
+ jernej.skrabec@siol.net, rodrigosiqueiramelo@gmail.com,
  tomi.valkeinen@ti.com, bbrezillon@kernel.org, jingoohan1@gmail.com,
  dri-devel@lists.freedesktop.org, sw0312.kim@samsung.com,
  nicolas.ferre@microchip.com, kyungmin.park@samsung.com,
  kieran.bingham+renesas@ideasonboard.com, zourongrong@gmail.com,
- linux-mediatek@lists.infradead.org, shawnguo@kernel.org,
- laurent.pinchart@ideasonboard.com
-Message-ID: <cd96a901-286c-76b3-3fd6-e1bf3c6f6145@suse.de>
+ linux-mediatek@lists.infradead.org, shawnguo@kernel.org, kraxel@redhat.com
+Message-ID: <bccc380a-8925-81a7-34fe-5a1744a766d0@suse.de>
 Subject: Re: [PATCH 00/22] drm: Convert drivers to drm_simple_encoder_init()
 References: <20200305155950.2705-1-tzimmermann@suse.de>
- <20200306105659.GY2363188@phenom.ffwll.local>
-In-Reply-To: <20200306105659.GY2363188@phenom.ffwll.local>
+ <20200306142212.GF4878@pendragon.ideasonboard.com>
+In-Reply-To: <20200306142212.GF4878@pendragon.ideasonboard.com>
 
---JKL2xkfds1OalxCbI49nz3IqpCVHOQuRj
+--7ZEUhC7vXaHUKdhpsAsTVaSFl7q2PnfOJ
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Hi
+Hi Laurent
 
-Am 06.03.20 um 11:56 schrieb Daniel Vetter:
+Am 06.03.20 um 15:22 schrieb Laurent Pinchart:
+> Hi Thomas,
+>=20
+> Thank you for the patch.
+>=20
 > On Thu, Mar 05, 2020 at 04:59:28PM +0100, Thomas Zimmermann wrote:
 >> A call to drm_simple_encoder_init() initializes an encoder without
 >> further functionality. It only provides the destroy callback to
@@ -170,25 +173,49 @@ Am 06.03.20 um 11:56 schrieb Daniel Vetter:
 >> contained and can be merged independently from each other. The
 >> simple-encoder functionality is currently in drm-misc-next, where
 >> these patches could go as well.
->>
+>=20
+> I've reviewed the whole series, including verifying that the few
+> instances of struct drm_encoder_funcs that were not declared const were=
+
+> not modified somewhere to add more function pointers.
+>=20
+> Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+Thanks for the detailed review.
+
+>=20
+> for all the patches.
+>=20
+> However, I'd like to note that drm_simple_encoder_init() is a bit of a
+> misnommer here. Several of the encoders in those drivers to implement
+> additional functionality. They just expose them through
+> drm_encoder_helper_funcs, not drm_encoder_funcs.
+
+True. It's called 'simple encoder' for the lack of a better name. It's
+part of the simple KMS helpers, so the name's at least consistent. OTOH
+I always find drm_simple_display_pipe a bad name.
+
+We can still rename the simple-encoder function without much effort. I'm
+open for suggestions.
+
+Best regards
+Thomas
+
+>=20
 >> Future directions: There's another common case where the driver
 >> calls kzalloc() plus drm_encoder_init(). Such drivers are not
 >> handled by this patchset. The plan here is to use a simple encoder
 >> with either managed memory allocation (once it's merged), or embed
 >> the encoder in a larger data structure and drop kzalloc() entirely.
->>
+>=20
+> I think an even more interesting future enhancement would be to add
+> encoder support to the newly added drm_bridge_connector_init(), for
+> drivers that are fully based on bridges and don't implement any encoder=
+
+> operation, neither through drm_encoder_funcs nor through
+> drm_encoder_helper_funcs.
+>=20
 >> The patchset has been compile-tested on x86-64, aarch64 and arm.
->=20
-> So from a cursory look all these drivers get it wrong and devm_kzalloc
-> their encoders. But I guess simplifying stuff like you do here will at
-> least give us a nice list of things to look at once we get to the
-> drmm_simple_encoder_init version of all this. On the series:
->=20
-> Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-Thanks!
-
->=20
 >>
 >> Thomas Zimmermann (22):
 >>   drm/arc: Use simple encoder
@@ -288,10 +315,6 @@ Thanks!
 >>  drivers/gpu/drm/zte/zx_tvenc.c                 |  8 ++------
 >>  drivers/gpu/drm/zte/zx_vga.c                   |  8 ++------
 >>  68 files changed, 151 insertions(+), 488 deletions(-)
->>
->> --
->> 2.25.1
->>
 >=20
 
 --=20
@@ -303,28 +326,28 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---JKL2xkfds1OalxCbI49nz3IqpCVHOQuRj--
+--7ZEUhC7vXaHUKdhpsAsTVaSFl7q2PnfOJ--
 
---QIZEuRDQVJSC8aNPEipGHDGTrjKCimeWL
+--zLjI9bAGFBvHKwEMe397vRdtLj3HUCSWe
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5iZ+0ACgkQaA3BHVML
-eiNCAQf/Vi6XRmClK7XJkLEes7vkrRNJ/f8RnH3A1pY6H/JaVQoWgbMHfTulOLcV
-iZin8MhKVOOfjieWzMspYMEcu5BpQJQ0PZihfcCFyRP7MOkHnL1tbKGVG49sAmxK
-/1reaSf9W4AKjKgRR89+lz3AI01A6GWZNmTHbtEzcUxOd0r2//JEylWk9nAlIJqV
-1E2GIh5bZ+HvQNDleD7tEHTHCd9kpkoLChibG6dMG/ACfbSdoBRG+xVygElGbPxx
-ucAo82r0ByDwRvAThiLMu/NFSx2CquNw/C4lmgNlTdVURpqBfOFSAy8Lh3IMpJ4B
-WMFB2IDE1UW45kGV/z1NF8Z4+pAmaw==
-=KASR
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5iadwACgkQaA3BHVML
+eiO0kQf+MIM+f6/DNKocn671bllssFCEGKWrX1wgTabB1iiRSL7ARnr03xMcYvzP
+Ik/PoetXfawz8fIw2Xm6VeEHT6+62AY3l/GmWWi0BlHNfpAvSwLnmgBT95Rkqxhl
+fVnkuw/R9c25A/WZMABTJ05EJhytBN4Iu42F+J6x2Jy+SpBNNETqwpvVPYL45Ou9
+4QUL5Rj+xtwAzce+WOLqcL+LQmYDDrLlwOIS884Xfi4B6o8aSh9L2m2SJPCR1U6n
+mdKcRZk/ztKJrkm/udvjRymVO/VT/ai9N4v6KNJ+dI6ko2jJZHrEpMDYdyGR840X
+Y2HKoexIUwvdHV/Qy7ihnx7889lJNQ==
+=LTju
 -----END PGP SIGNATURE-----
 
---QIZEuRDQVJSC8aNPEipGHDGTrjKCimeWL--
+--zLjI9bAGFBvHKwEMe397vRdtLj3HUCSWe--
 
---===============5244587455547775381==
+--===============0010631041882808326==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -334,4 +357,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============5244587455547775381==--
+--===============0010631041882808326==--
