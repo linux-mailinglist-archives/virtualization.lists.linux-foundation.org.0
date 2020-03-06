@@ -1,67 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DA5F17BB47
-	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 12:13:38 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AAD417BCEE
+	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 13:39:17 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id D054420016;
-	Fri,  6 Mar 2020 11:13:36 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 451318815E;
+	Fri,  6 Mar 2020 12:39:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PaaBIOetxorw; Fri,  6 Mar 2020 11:13:35 +0000 (UTC)
+	with ESMTP id hrNVFsT0RkbH; Fri,  6 Mar 2020 12:39:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id CAB8620015;
-	Fri,  6 Mar 2020 11:13:35 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 490C2880D4;
+	Fri,  6 Mar 2020 12:39:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B0D3CC013E;
-	Fri,  6 Mar 2020 11:13:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1F3FBC013E;
+	Fri,  6 Mar 2020 12:39:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 20D19C013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3D86DC013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 11:13:34 +0000 (UTC)
+ Fri,  6 Mar 2020 12:39:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 36EEB1FC71
+ by silver.osuosl.org (Postfix) with ESMTP id 1A4AC203D7
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 11:13:33 +0000 (UTC)
+ Fri,  6 Mar 2020 12:39:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PbC4U635uTSx
+ with ESMTP id 8oDbPkXWZend
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 11:13:31 +0000 (UTC)
+ Fri,  6 Mar 2020 12:39:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by silver.osuosl.org (Postfix) with ESMTPS id 0E006203D7
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id 4770120364
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 11:13:30 +0000 (UTC)
+ Fri,  6 Mar 2020 12:39:12 +0000 (UTC)
 X-Amp-Result: UNKNOWN
 X-Amp-Original-Verdict: FILE UNKNOWN
 X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 06 Mar 2020 03:13:29 -0800
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 06 Mar 2020 04:39:11 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,521,1574150400"; 
- d="gz'50?scan'50,208,50";a="440084132"
+X-IronPort-AV: E=Sophos;i="5.70,522,1574150400"; 
+ d="gz'50?scan'50,208,50";a="234792907"
 Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
- by fmsmga005.fm.intel.com with ESMTP; 06 Mar 2020 03:13:13 -0800
+ by orsmga008.jf.intel.com with ESMTP; 06 Mar 2020 04:38:56 -0800
 Received: from kbuild by lkp-server01 with local (Exim 4.89)
  (envelope-from <lkp@intel.com>)
- id 1jAAun-0008mH-2t; Fri, 06 Mar 2020 19:13:13 +0800
-Date: Fri, 6 Mar 2020 19:12:30 +0800
+ id 1jACFj-0002Bg-Ff; Fri, 06 Mar 2020 20:38:55 +0800
+Date: Fri, 6 Mar 2020 20:38:53 +0800
 From: kbuild test robot <lkp@intel.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 14/22] drm/sun4i: Use simple encoder
-Message-ID: <202003061907.fMUbMEuY%lkp@intel.com>
-References: <20200305155950.2705-15-tzimmermann@suse.de>
+Subject: Re: [PATCH 15/22] drm/tegra: Use simple encoder
+Message-ID: <202003062053.isBJJQ7H%lkp@intel.com>
+References: <20200305155950.2705-16-tzimmermann@suse.de>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="RnlQjJ0d97Da+TV1"
+Content-Type: multipart/mixed; boundary="6TrnltStXW4iwmi0"
 Content-Disposition: inline
-In-Reply-To: <20200305155950.2705-15-tzimmermann@suse.de>
+In-Reply-To: <20200305155950.2705-16-tzimmermann@suse.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, heiko@sntech.de,
  airlied@linux.ie, stefan@agner.ch, linux@armlinux.org.uk, paul@crapouillou.net,
@@ -100,7 +100,7 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 
---RnlQjJ0d97Da+TV1
+--6TrnltStXW4iwmi0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
@@ -126,96 +126,94 @@ Reported-by: kbuild test robot <lkp@intel.com>
 
 All errors (new ones prefixed by >>):
 
->> drivers/gpu/drm/sun4i/sun4i_lvds.c:121:8: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           ret = drm_simple_encoder_init(drm, &lvds->encoder,
-                 ^
-   drivers/gpu/drm/sun4i/sun4i_lvds.c:121:8: note: did you mean 'drm_encoder_init'?
-   include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
-   int drm_encoder_init(struct drm_device *dev,
-       ^
-   1 error generated.
---
->> drivers/gpu/drm/sun4i/sun4i_rgb.c:213:8: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           ret = drm_simple_encoder_init(drm, &rgb->encoder,
-                 ^
-   drivers/gpu/drm/sun4i/sun4i_rgb.c:213:8: note: did you mean 'drm_encoder_init'?
-   include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
-   int drm_encoder_init(struct drm_device *dev,
-       ^
-   1 error generated.
---
->> drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c:611:8: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           ret = drm_simple_encoder_init(drm, &hdmi->encoder,
-                 ^
-   drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c:611:8: note: did you mean 'drm_encoder_init'?
-   include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
-   int drm_encoder_init(struct drm_device *dev,
-       ^
-   1 error generated.
---
->> drivers/gpu/drm/sun4i/sun8i_dw_hdmi.c:220:2: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           drm_simple_encoder_init(drm, encoder, DRM_MODE_ENCODER_TMDS);
+>> drivers/gpu/drm/tegra/rgb.c:281:2: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
+           drm_simple_encoder_init(drm, &output->encoder, DRM_MODE_ENCODER_LVDS);
            ^
-   drivers/gpu/drm/sun4i/sun8i_dw_hdmi.c:220:2: note: did you mean 'drm_encoder_init'?
+   drivers/gpu/drm/tegra/rgb.c:281:2: note: did you mean 'drm_encoder_init'?
    include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
    int drm_encoder_init(struct drm_device *dev,
        ^
    1 error generated.
 --
->> drivers/gpu/drm/sun4i/sun4i_tv.c:587:8: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           ret = drm_simple_encoder_init(drm, &tv->encoder,
-                 ^
-   drivers/gpu/drm/sun4i/sun4i_tv.c:587:8: note: did you mean 'drm_encoder_init'?
+>> drivers/gpu/drm/tegra/hdmi.c:1445:2: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
+           drm_simple_encoder_init(drm, &hdmi->output.encoder,
+           ^
+   drivers/gpu/drm/tegra/hdmi.c:1445:2: note: did you mean 'drm_encoder_init'?
    include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
    int drm_encoder_init(struct drm_device *dev,
        ^
    1 error generated.
 --
->> drivers/gpu/drm/sun4i/sun6i_mipi_dsi.c:1062:8: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           ret = drm_simple_encoder_init(drm, &dsi->encoder,
-                 ^
-   drivers/gpu/drm/sun4i/sun6i_mipi_dsi.c:1062:8: note: did you mean 'drm_encoder_init'?
+>> drivers/gpu/drm/tegra/dsi.c:1058:3: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
+                   drm_simple_encoder_init(drm, &dsi->output.encoder,
+                   ^
+   drivers/gpu/drm/tegra/dsi.c:1058:3: note: did you mean 'drm_encoder_init'?
+   include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
+   int drm_encoder_init(struct drm_device *dev,
+       ^
+   1 error generated.
+--
+>> drivers/gpu/drm/tegra/sor.c:3102:2: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
+           drm_simple_encoder_init(drm, &sor->output.encoder, encoder);
+           ^
+   drivers/gpu/drm/tegra/sor.c:3102:2: note: did you mean 'drm_encoder_init'?
    include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
    int drm_encoder_init(struct drm_device *dev,
        ^
    1 error generated.
 
-vim +/drm_simple_encoder_init +121 drivers/gpu/drm/sun4i/sun4i_lvds.c
+vim +/drm_simple_encoder_init +281 drivers/gpu/drm/tegra/rgb.c
 
-    99	
-   100	int sun4i_lvds_init(struct drm_device *drm, struct sun4i_tcon *tcon)
-   101	{
-   102		struct drm_encoder *encoder;
-   103		struct drm_bridge *bridge;
-   104		struct sun4i_lvds *lvds;
-   105		int ret;
-   106	
-   107		lvds = devm_kzalloc(drm->dev, sizeof(*lvds), GFP_KERNEL);
-   108		if (!lvds)
-   109			return -ENOMEM;
-   110		encoder = &lvds->encoder;
-   111	
-   112		ret = drm_of_find_panel_or_bridge(tcon->dev->of_node, 1, 0,
-   113						  &lvds->panel, &bridge);
-   114		if (ret) {
-   115			dev_info(drm->dev, "No panel or bridge found... LVDS output disabled\n");
-   116			return 0;
-   117		}
-   118	
-   119		drm_encoder_helper_add(&lvds->encoder,
-   120				       &sun4i_lvds_enc_helper_funcs);
- > 121		ret = drm_simple_encoder_init(drm, &lvds->encoder,
+   266	
+   267	int tegra_dc_rgb_init(struct drm_device *drm, struct tegra_dc *dc)
+   268	{
+   269		struct tegra_output *output = dc->rgb;
+   270		int err;
+   271	
+   272		if (!dc->rgb)
+   273			return -ENODEV;
+   274	
+   275		drm_connector_init(drm, &output->connector, &tegra_rgb_connector_funcs,
+   276				   DRM_MODE_CONNECTOR_LVDS);
+   277		drm_connector_helper_add(&output->connector,
+   278					 &tegra_rgb_connector_helper_funcs);
+   279		output->connector.dpms = DRM_MODE_DPMS_OFF;
+   280	
+ > 281		drm_simple_encoder_init(drm, &output->encoder, DRM_MODE_ENCODER_LVDS);
+   282		drm_encoder_helper_add(&output->encoder,
+   283				       &tegra_rgb_encoder_helper_funcs);
+   284	
+   285		drm_connector_attach_encoder(&output->connector,
+   286						  &output->encoder);
+   287		drm_connector_register(&output->connector);
+   288	
+   289		err = tegra_output_init(drm, output);
+   290		if (err < 0) {
+   291			dev_err(output->dev, "failed to initialize output: %d\n", err);
+   292			return err;
+   293		}
+   294	
+   295		/*
+   296		 * Other outputs can be attached to either display controller. The RGB
+   297		 * outputs are an exception and work only with their parent display
+   298		 * controller.
+   299		 */
+   300		output->encoder.possible_crtcs = drm_crtc_mask(&dc->base);
+   301	
+   302		return 0;
+   303	}
+   304	
 
 ---
 0-DAY CI Kernel Test Service, Intel Corporation
 https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
 
---RnlQjJ0d97Da+TV1
+--6TrnltStXW4iwmi0
 Content-Type: application/gzip
 Content-Disposition: attachment; filename=".config.gz"
 Content-Transfer-Encoding: base64
 
-H4sICCMqYl4AAy5jb25maWcAnDzJdhu3svv7FTzJJlnE4SRKue9oAaLRJMKeDKBJSps+tEQ5
+H4sICOc/Yl4AAy5jb25maWcAnDzJdhu3svv7FTzJJlnE4SRKue9oAaLRJMKeDKBJSps+tEQ5
 etHgS0lO/Pe3CugBQKMVv5eTOGZVYS7UjP7xXz+OyNvr8+Ph9f7m8PDwbfT5+HQ8HV6Pt6O7
 +4fj/4yifJTlasQirj4AcXL/9Pb3r4fT42I+Ovuw+DD+5XQzH22Op6fjw4g+P93df36D5vfP
 T//68V/w748AfPwCPZ3+Pbp5ODx9Hn09nl4APZpMPow/jEc/fb5//fevv8Kfj/en0/Pp14eH
@@ -1101,7 +1099,7 @@ wEsOxceLESa/id2aruo8uus6I6nVCGZjw48uHHM8QwbZzQuGMAlwFnpPC3dt0zCPQREdGSiV
 JnKkP+4j6IYhKfDbHY5PTBmnIxwBO5QvgDFHP4J2gUOstpUMAQ0ZKIjQj7lHJbkVu6suF/4H
 +SLxE204AwA=
 
---RnlQjJ0d97Da+TV1
+--6TrnltStXW4iwmi0
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -1111,4 +1109,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---RnlQjJ0d97Da+TV1--
+--6TrnltStXW4iwmi0--
