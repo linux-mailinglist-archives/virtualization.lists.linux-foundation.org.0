@@ -1,72 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64F1117C6E0
-	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 21:15:09 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6631C17C7C0
+	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 22:18:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 14ABE8762A;
-	Fri,  6 Mar 2020 20:15:08 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 865F6883F0;
+	Fri,  6 Mar 2020 21:18:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Pko2IdWagIWt; Fri,  6 Mar 2020 20:15:06 +0000 (UTC)
+	with ESMTP id MmLq8Zy-5G6c; Fri,  6 Mar 2020 21:18:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CF064875F9;
-	Fri,  6 Mar 2020 20:15:06 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C797A883EB;
+	Fri,  6 Mar 2020 21:18:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B1BC4C013E;
-	Fri,  6 Mar 2020 20:15:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A8606C013E;
+	Fri,  6 Mar 2020 21:18:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AC662C013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 44C11C013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 20:15:05 +0000 (UTC)
+ Fri,  6 Mar 2020 21:18:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 9BB9D86A94
+ by silver.osuosl.org (Postfix) with ESMTP id 32FA82284C
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 20:15:05 +0000 (UTC)
+ Fri,  6 Mar 2020 21:18:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fWxftauDxtHO
+ with ESMTP id 38z+BA86DppL
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 20:15:04 +0000 (UTC)
+ Fri,  6 Mar 2020 21:18:20 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id C814186A36
+ by silver.osuosl.org (Postfix) with ESMTPS id 9BCBE228A4
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 20:15:03 +0000 (UTC)
+ Fri,  6 Mar 2020 21:18:19 +0000 (UTC)
 Received: from ravnborg.org (unknown [158.248.194.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by asavdk3.altibox.net (Postfix) with ESMTPS id F286920020;
- Fri,  6 Mar 2020 21:14:58 +0100 (CET)
-Date: Fri, 6 Mar 2020 21:14:57 +0100
+ by asavdk3.altibox.net (Postfix) with ESMTPS id 92F132001E;
+ Fri,  6 Mar 2020 22:18:04 +0100 (CET)
+Date: Fri, 6 Mar 2020 22:18:03 +0100
 From: Sam Ravnborg <sam@ravnborg.org>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: Re: [PATCH 28/51] drm/bochs: Drop explicit drm_mode_config_cleanup
-Message-ID: <20200306201457.GC13014@ravnborg.org>
-References: <20200302222631.3861340-1-daniel.vetter@ffwll.ch>
- <20200302222631.3861340-29-daniel.vetter@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Subject: Re: [PATCH 01/22] drm/arc: Use simple encoder
+Message-ID: <20200306211802.GA17369@ravnborg.org>
+References: <20200305155950.2705-1-tzimmermann@suse.de>
+ <20200305155950.2705-2-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200302222631.3861340-29-daniel.vetter@ffwll.ch>
+In-Reply-To: <20200305155950.2705-2-tzimmermann@suse.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-CMAE-Score: 0
 X-CMAE-Analysis: v=2.3 cv=eMA9ckh1 c=1 sm=1 tr=0
  a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
  a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8
- a=P1BnusSwAAAA:8 a=QyXUC8HyAAAA:8 a=20KFwNOVAAAA:8 a=Z4Rwk6OoAAAA:8
- a=k5p89Q0gtKR_RmKz35gA:9 a=CjuIK1q_8ugA:10 a=E9Po1WZjFZOl8hwRPBS3:22
- a=D0XLA9XvdZm18NrgonBM:22 a=HkZW87K1Qel5hWWM3VKY:22
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+ a=rqCPFu_3IIfdMowE660A:9 a=CjuIK1q_8ugA:10 a=E9Po1WZjFZOl8hwRPBS3:22
+Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, heiko@sntech.de,
+ airlied@linux.ie, stefan@agner.ch, linux@armlinux.org.uk, paul@crapouillou.net,
+ eric@anholt.net, thierry.reding@gmail.com, krzk@kernel.org, festevam@gmail.com,
+ sebastian.reichel@collabora.com, linux-samsung-soc@vger.kernel.org,
+ jy0922.shim@samsung.com, hjc@rock-chips.com, tomi.valkeinen@ti.com,
+ abrodkin@synopsys.com, kong.kongxinwei@hisilicon.com,
+ patrik.r.jakobsson@gmail.com, jonathanh@nvidia.com, xinliang.liu@linaro.org,
+ ludovic.desroches@microchip.com, kgene@kernel.org, linux-imx@nxp.com,
+ ck.hu@mediatek.com, linux-rockchip@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, linux-tegra@vger.kernel.org,
+ p.zabel@pengutronix.de, puck.chen@hisilicon.com, s.hauer@pengutronix.de,
+ alison.wang@nxp.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ inki.dae@samsung.com, john.stultz@linaro.org, jsarha@ti.com,
+ matthias.bgg@gmail.com, wens@csie.org, kernel@pengutronix.de,
+ jernej.skrabec@siol.net, rodrigosiqueiramelo@gmail.com, bbrezillon@kernel.org,
+ jingoohan1@gmail.com, dri-devel@lists.freedesktop.org, sw0312.kim@samsung.com,
+ nicolas.ferre@microchip.com, kyungmin.park@samsung.com,
+ kieran.bingham+renesas@ideasonboard.com, daniel@ffwll.ch,
+ zourongrong@gmail.com, linux-mediatek@lists.infradead.org, shawnguo@kernel.org,
+ laurent.pinchart@ideasonboard.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,112 +95,92 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Mar 02, 2020 at 11:26:08PM +0100, Daniel Vetter wrote:
-> Instead rely on the automatic clean, for which we just need to check
-> that drm_mode_config_init succeeded. To avoid an inversion in the
-> cleanup we also have to move the dev_private allocation over to
-> drmm_kzalloc.
-> 
-> This is made possible by a preceeding patch which added a drmm_
-> cleanup action to drm_mode_config_init(), hence all we need to do to
-> ensure that drm_mode_config_cleanup() is run on final drm_device
-> cleanup is check the new error code for _init().
-> 
-> v2: Explain why this cleanup is possible (Laurent).
-> 
-> v3: Use drmm_mode_config_init() for more clarity (Sam, Thomas)
-> 
-> Cc: Sam Ravnborg <sam@ravnborg.org>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: virtualization@lists.linux-foundation.org
+On Thu, Mar 05, 2020 at 04:59:29PM +0100, Thomas Zimmermann wrote:
+> The arc driver uses empty implementations for its encoders. Replace
+> the code with the generic simple encoder.
+
+We should , as a follow-up patch, embed the encoder in
+arcgpu_drm_private.
+Then we drop the kzalloc() and avoid that life-time challenge.
+
+This patch looks good for what it does.
 
 Acked-by: Sam Ravnborg <sam@ravnborg.org>
 
-
-> ---
->  drivers/gpu/drm/bochs/bochs.h     |  1 -
->  drivers/gpu/drm/bochs/bochs_drv.c |  6 ++----
->  drivers/gpu/drm/bochs/bochs_kms.c | 14 +++++---------
->  3 files changed, 7 insertions(+), 14 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/bochs/bochs.h b/drivers/gpu/drm/bochs/bochs.h
-> index 917767173ee6..e5bd1d517a18 100644
-> --- a/drivers/gpu/drm/bochs/bochs.h
-> +++ b/drivers/gpu/drm/bochs/bochs.h
-> @@ -92,7 +92,6 @@ void bochs_mm_fini(struct bochs_device *bochs);
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/gpu/drm/arc/arcpgu_hdmi.c | 10 +++-------
+>  drivers/gpu/drm/arc/arcpgu_sim.c  |  8 ++------
+>  2 files changed, 5 insertions(+), 13 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/arc/arcpgu_hdmi.c b/drivers/gpu/drm/arc/arcpgu_hdmi.c
+> index 52839934f2fb..780911765e2e 100644
+> --- a/drivers/gpu/drm/arc/arcpgu_hdmi.c
+> +++ b/drivers/gpu/drm/arc/arcpgu_hdmi.c
+> @@ -7,15 +7,12 @@
 >  
->  /* bochs_kms.c */
->  int bochs_kms_init(struct bochs_device *bochs);
-> -void bochs_kms_fini(struct bochs_device *bochs);
+>  #include <drm/drm_bridge.h>
+>  #include <drm/drm_crtc.h>
+> -#include <drm/drm_encoder.h>
+>  #include <drm/drm_device.h>
+> +#include <drm/drm_encoder.h>
+> +#include <drm/drm_simple_kms_helper.h>
 >  
->  /* bochs_fbdev.c */
->  extern const struct drm_mode_config_funcs bochs_mode_funcs;
-> diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
-> index addb0568c1af..e18c51de1196 100644
-> --- a/drivers/gpu/drm/bochs/bochs_drv.c
-> +++ b/drivers/gpu/drm/bochs/bochs_drv.c
-> @@ -7,6 +7,7 @@
+>  #include "arcpgu.h"
 >  
->  #include <drm/drm_drv.h>
+> -static struct drm_encoder_funcs arcpgu_drm_encoder_funcs = {
+> -	.destroy = drm_encoder_cleanup,
+> -};
+> -
+>  int arcpgu_drm_hdmi_init(struct drm_device *drm, struct device_node *np)
+>  {
+>  	struct drm_encoder *encoder;
+> @@ -34,8 +31,7 @@ int arcpgu_drm_hdmi_init(struct drm_device *drm, struct device_node *np)
+>  
+>  	encoder->possible_crtcs = 1;
+>  	encoder->possible_clones = 0;
+> -	ret = drm_encoder_init(drm, encoder, &arcpgu_drm_encoder_funcs,
+> -			       DRM_MODE_ENCODER_TMDS, NULL);
+> +	ret = drm_simple_encoder_init(drm, encoder, DRM_MODE_ENCODER_TMDS);
+>  	if (ret)
+>  		return ret;
+>  
+> diff --git a/drivers/gpu/drm/arc/arcpgu_sim.c b/drivers/gpu/drm/arc/arcpgu_sim.c
+> index 37d961668dfe..66ca2c26e339 100644
+> --- a/drivers/gpu/drm/arc/arcpgu_sim.c
+> +++ b/drivers/gpu/drm/arc/arcpgu_sim.c
+> @@ -8,6 +8,7 @@
 >  #include <drm/drm_atomic_helper.h>
-> +#include <drm/drm_managed.h>
+>  #include <drm/drm_device.h>
+>  #include <drm/drm_probe_helper.h>
+> +#include <drm/drm_simple_kms_helper.h>
 >  
->  #include "bochs.h"
+>  #include "arcpgu.h"
 >  
-> @@ -21,10 +22,7 @@ static void bochs_unload(struct drm_device *dev)
->  {
->  	struct bochs_device *bochs = dev->dev_private;
+> @@ -50,10 +51,6 @@ static const struct drm_connector_funcs arcpgu_drm_connector_funcs = {
+>  	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
+>  };
 >  
-> -	bochs_kms_fini(bochs);
->  	bochs_mm_fini(bochs);
-> -	kfree(bochs);
-> -	dev->dev_private = NULL;
->  }
->  
->  static int bochs_load(struct drm_device *dev)
-> @@ -32,7 +30,7 @@ static int bochs_load(struct drm_device *dev)
->  	struct bochs_device *bochs;
->  	int ret;
->  
-> -	bochs = kzalloc(sizeof(*bochs), GFP_KERNEL);
-> +	bochs = drmm_kzalloc(dev, sizeof(*bochs), GFP_KERNEL);
->  	if (bochs == NULL)
->  		return -ENOMEM;
->  	dev->dev_private = bochs;
-> diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/bochs_kms.c
-> index e8cc8156d773..7f4bcfad87e9 100644
-> --- a/drivers/gpu/drm/bochs/bochs_kms.c
-> +++ b/drivers/gpu/drm/bochs/bochs_kms.c
-> @@ -134,7 +134,11 @@ const struct drm_mode_config_funcs bochs_mode_funcs = {
->  
->  int bochs_kms_init(struct bochs_device *bochs)
->  {
-> -	drm_mode_config_init(bochs->dev);
-> +	int ret;
-> +
-> +	ret = drmm_mode_config_init(bochs->dev);
-> +	if (ret)
-> +		return ret;
->  
->  	bochs->dev->mode_config.max_width = 8192;
->  	bochs->dev->mode_config.max_height = 8192;
-> @@ -160,11 +164,3 @@ int bochs_kms_init(struct bochs_device *bochs)
->  
->  	return 0;
->  }
+> -static struct drm_encoder_funcs arcpgu_drm_encoder_funcs = {
+> -	.destroy = drm_encoder_cleanup,
+> -};
 > -
-> -void bochs_kms_fini(struct bochs_device *bochs)
-> -{
-> -	if (!bochs->dev->mode_config.num_connector)
-> -		return;
-> -
-> -	drm_mode_config_cleanup(bochs->dev);
-> -}
+>  int arcpgu_drm_sim_init(struct drm_device *drm, struct device_node *np)
+>  {
+>  	struct arcpgu_drm_connector *arcpgu_connector;
+> @@ -68,8 +65,7 @@ int arcpgu_drm_sim_init(struct drm_device *drm, struct device_node *np)
+>  	encoder->possible_crtcs = 1;
+>  	encoder->possible_clones = 0;
+>  
+> -	ret = drm_encoder_init(drm, encoder, &arcpgu_drm_encoder_funcs,
+> -			       DRM_MODE_ENCODER_VIRTUAL, NULL);
+> +	ret = drm_simple_encoder_init(drm, encoder, DRM_MODE_ENCODER_VIRTUAL);
+>  	if (ret)
+>  		return ret;
+>  
 > -- 
-> 2.24.1
+> 2.25.1
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
