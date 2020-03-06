@@ -1,67 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47E5617B60E
-	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 06:15:15 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FE1617B6A1
+	for <lists.virtualization@lfdr.de>; Fri,  6 Mar 2020 07:17:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C228F20528;
-	Fri,  6 Mar 2020 05:15:13 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C948C87E63;
+	Fri,  6 Mar 2020 06:17:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UN6toXr2-SSs; Fri,  6 Mar 2020 05:15:11 +0000 (UTC)
+	with ESMTP id jd3lVcgTG+K1; Fri,  6 Mar 2020 06:17:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 31A792050D;
-	Fri,  6 Mar 2020 05:15:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id F3E5287E4C;
+	Fri,  6 Mar 2020 06:17:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 12A58C013E;
-	Fri,  6 Mar 2020 05:15:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D1E6DC013E;
+	Fri,  6 Mar 2020 06:17:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C918EC013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C7488C013E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 05:15:09 +0000 (UTC)
+ Fri,  6 Mar 2020 06:17:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id B361188047
+ by hemlock.osuosl.org (Postfix) with ESMTP id A478A87E4C
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 05:15:09 +0000 (UTC)
+ Fri,  6 Mar 2020 06:17:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rTsHZbbJeGFz
+ with ESMTP id IWTpeh5BQO9W
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 05:15:08 +0000 (UTC)
+ Fri,  6 Mar 2020 06:17:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 6BFA188018
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 8F57687DFF
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Mar 2020 05:15:08 +0000 (UTC)
+ Fri,  6 Mar 2020 06:17:25 +0000 (UTC)
 X-Amp-Result: UNKNOWN
 X-Amp-Original-Verdict: FILE UNKNOWN
 X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 05 Mar 2020 21:15:07 -0800
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 05 Mar 2020 22:17:24 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,520,1574150400"; 
- d="gz'50?scan'50,208,50";a="234753968"
+X-IronPort-AV: E=Sophos;i="5.70,521,1574150400"; 
+ d="gz'50?scan'50,208,50";a="275424251"
 Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
- by fmsmga008.fm.intel.com with ESMTP; 05 Mar 2020 21:14:54 -0800
+ by fmsmga002.fm.intel.com with ESMTP; 05 Mar 2020 22:17:11 -0800
 Received: from kbuild by lkp-server01 with local (Exim 4.89)
  (envelope-from <lkp@intel.com>)
- id 1jA5K1-0007uK-Lv; Fri, 06 Mar 2020 13:14:53 +0800
-Date: Fri, 6 Mar 2020 13:14:04 +0800
+ id 1jA6II-000J5f-Lb; Fri, 06 Mar 2020 14:17:10 +0800
+Date: Fri, 6 Mar 2020 14:16:48 +0800
 From: kbuild test robot <lkp@intel.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 03/22] drm/exynos: Use simple encoder
-Message-ID: <202003061311.5Ii8rcnV%lkp@intel.com>
-References: <20200305155950.2705-4-tzimmermann@suse.de>
+Subject: Re: [PATCH 06/22] drm/hisilicon/kirin: Use simple encoder
+Message-ID: <202003061415.76jjt0tz%lkp@intel.com>
+References: <20200305155950.2705-7-tzimmermann@suse.de>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="k+w/mQv8wyuph6w0"
+Content-Type: multipart/mixed; boundary="2oS5YaxWCcQjTEyO"
 Content-Disposition: inline
-In-Reply-To: <20200305155950.2705-4-tzimmermann@suse.de>
+In-Reply-To: <20200305155950.2705-7-tzimmermann@suse.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, heiko@sntech.de,
  airlied@linux.ie, stefan@agner.ch, linux@armlinux.org.uk, paul@crapouillou.net,
@@ -100,7 +100,7 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 
---k+w/mQv8wyuph6w0
+--2oS5YaxWCcQjTEyO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
@@ -127,64 +127,53 @@ Reported-by: kbuild test robot <lkp@intel.com>
 
 All errors (new ones prefixed by >>):
 
->> drivers/gpu/drm/exynos/exynos_drm_dsi.c:1705:2: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           drm_simple_encoder_init(drm_dev, encoder, DRM_MODE_ENCODER_TMDS);
-           ^
-   drivers/gpu/drm/exynos/exynos_drm_dsi.c:1705:2: note: did you mean 'drm_encoder_init'?
-   include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
-   int drm_encoder_init(struct drm_device *dev,
-       ^
-   1 error generated.
---
->> drivers/gpu/drm/exynos/exynos_hdmi.c:1851:2: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
-           drm_simple_encoder_init(drm_dev, encoder, DRM_MODE_ENCODER_TMDS);
-           ^
-   drivers/gpu/drm/exynos/exynos_hdmi.c:1851:2: note: did you mean 'drm_encoder_init'?
-   include/drm/drm_encoder.h:189:5: note: 'drm_encoder_init' declared here
-   int drm_encoder_init(struct drm_device *dev,
+>> drivers/gpu//drm/hisilicon/kirin/dw_drm_dsi.c:713:8: error: implicit declaration of function 'drm_simple_encoder_init' [-Werror,-Wimplicit-function-declaration]
+           ret = drm_simple_encoder_init(drm_dev, encoder, DRM_MODE_ENCODER_DSI);
+                 ^
+   drivers/gpu//drm/hisilicon/kirin/dw_drm_dsi.c:713:8: note: did you mean 'drm_i2c_encoder_init'?
+   include/drm/drm_encoder_slave.h:104:5: note: 'drm_i2c_encoder_init' declared here
+   int drm_i2c_encoder_init(struct drm_device *dev,
        ^
    1 error generated.
 
-vim +/drm_simple_encoder_init +1705 drivers/gpu/drm/exynos/exynos_drm_dsi.c
+vim +/drm_simple_encoder_init +713 drivers/gpu//drm/hisilicon/kirin/dw_drm_dsi.c
 
-  1695	
-  1696	static int exynos_dsi_bind(struct device *dev, struct device *master,
-  1697					void *data)
-  1698	{
-  1699		struct drm_encoder *encoder = dev_get_drvdata(dev);
-  1700		struct exynos_dsi *dsi = encoder_to_dsi(encoder);
-  1701		struct drm_device *drm_dev = data;
-  1702		struct drm_bridge *in_bridge;
-  1703		int ret;
-  1704	
-> 1705		drm_simple_encoder_init(drm_dev, encoder, DRM_MODE_ENCODER_TMDS);
-  1706	
-  1707		drm_encoder_helper_add(encoder, &exynos_dsi_encoder_helper_funcs);
-  1708	
-  1709		ret = exynos_drm_set_possible_crtcs(encoder, EXYNOS_DISPLAY_TYPE_LCD);
-  1710		if (ret < 0)
-  1711			return ret;
-  1712	
-  1713		if (dsi->in_bridge_node) {
-  1714			in_bridge = of_drm_find_bridge(dsi->in_bridge_node);
-  1715			if (in_bridge)
-  1716				drm_bridge_attach(encoder, in_bridge, NULL, 0);
-  1717		}
-  1718	
-  1719		return mipi_dsi_host_register(&dsi->dsi_host);
-  1720	}
-  1721	
+   699	
+   700	static int dw_drm_encoder_init(struct device *dev,
+   701				       struct drm_device *drm_dev,
+   702				       struct drm_encoder *encoder)
+   703	{
+   704		int ret;
+   705		u32 crtc_mask = drm_of_find_possible_crtcs(drm_dev, dev->of_node);
+   706	
+   707		if (!crtc_mask) {
+   708			DRM_ERROR("failed to find crtc mask\n");
+   709			return -EINVAL;
+   710		}
+   711	
+   712		encoder->possible_crtcs = crtc_mask;
+ > 713		ret = drm_simple_encoder_init(drm_dev, encoder, DRM_MODE_ENCODER_DSI);
+   714		if (ret) {
+   715			DRM_ERROR("failed to init dsi encoder\n");
+   716			return ret;
+   717		}
+   718	
+   719		drm_encoder_helper_add(encoder, &dw_encoder_helper_funcs);
+   720	
+   721		return 0;
+   722	}
+   723	
 
 ---
 0-DAY CI Kernel Test Service, Intel Corporation
 https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
 
---k+w/mQv8wyuph6w0
+--2oS5YaxWCcQjTEyO
 Content-Type: application/gzip
 Content-Disposition: attachment; filename=".config.gz"
 Content-Transfer-Encoding: base64
 
-H4sICDPYYV4AAy5jb25maWcAnDzJdhu3svv7FTzJJlnE4SRKue9oAaLRJMKeDKBJSps+tEQ5
+H4sICAnmYV4AAy5jb25maWcAnDzJdhu3svv7FTzJJlnE4SRKue9oAaLRJMKeDKBJSps+tEQ5
 etHgS0lO/Pe3CugBQKMVv5eTOGZVYS7UjP7xXz+OyNvr8+Ph9f7m8PDwbfT5+HQ8HV6Pt6O7
 +4fj/4yifJTlasQirj4AcXL/9Pb3r4fT42I+Ovuw+DD+5XQzH22Op6fjw4g+P93df36D5vfP
 T//68V/w748AfPwCPZ3+Pbp5ODx9Hn09nl4APZpMPow/jEc/fb5//fevv8Kfj/en0/Pp14eH
@@ -1070,7 +1059,7 @@ wEsOxceLESa/id2aruo8uus6I6nVCGZjw48uHHM8QwbZzQuGMAlwFnpPC3dt0zCPQREdGSiV
 JnKkP+4j6IYhKfDbHY5PTBmnIxwBO5QvgDFHP4J2gUOstpUMAQ0ZKIjQj7lHJbkVu6suF/4H
 +SLxE204AwA=
 
---k+w/mQv8wyuph6w0
+--2oS5YaxWCcQjTEyO
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -1080,4 +1069,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---k+w/mQv8wyuph6w0--
+--2oS5YaxWCcQjTEyO--
