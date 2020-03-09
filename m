@@ -1,104 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54B9B17DA14
-	for <lists.virtualization@lfdr.de>; Mon,  9 Mar 2020 08:55:18 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CE6717DA48
+	for <lists.virtualization@lfdr.de>; Mon,  9 Mar 2020 09:08:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E8725887F0;
-	Mon,  9 Mar 2020 07:55:16 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 17AFB80657;
+	Mon,  9 Mar 2020 08:08:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VbMWvE7gdYYz; Mon,  9 Mar 2020 07:55:16 +0000 (UTC)
+	with ESMTP id zxh9vD12lBUF; Mon,  9 Mar 2020 08:08:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4FEC9887EB;
-	Mon,  9 Mar 2020 07:55:16 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 1E6B5869FD;
+	Mon,  9 Mar 2020 08:08:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2180DC0177;
-	Mon,  9 Mar 2020 07:55:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E5C07C18D3;
+	Mon,  9 Mar 2020 08:08:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A3B79C0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2D1C8C0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Mar 2020 07:55:14 +0000 (UTC)
+ Mon,  9 Mar 2020 08:08:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8F3608609F
+ by silver.osuosl.org (Postfix) with ESMTP id 60C84203BE
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Mar 2020 07:55:14 +0000 (UTC)
+ Mon,  9 Mar 2020 08:08:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Yw-mfT4EFHqP
+ with ESMTP id E4dk7OAgA-dj
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Mar 2020 07:55:14 +0000 (UTC)
+ Mon,  9 Mar 2020 08:08:37 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A336B85DB1
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by silver.osuosl.org (Postfix) with ESMTPS id 41DB6203BD
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Mar 2020 07:55:13 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 5CF7BAC5C;
- Mon,  9 Mar 2020 07:55:10 +0000 (UTC)
-Subject: Re: [PATCH 01/22] drm/arc: Use simple encoder
-To: Sam Ravnborg <sam@ravnborg.org>
-References: <20200305155950.2705-1-tzimmermann@suse.de>
- <20200305155950.2705-2-tzimmermann@suse.de>
- <20200306211802.GA17369@ravnborg.org>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <2cded827-de52-6110-505d-eacab9f28772@suse.de>
-Date: Mon, 9 Mar 2020 08:55:04 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Mon,  9 Mar 2020 08:08:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583741315;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=T8KT/+n14Cn5HelmWM4TG6Zo6L21o7FLn2E43AQONUI=;
+ b=I7sjVMFrQyszBieK7l81PBbXu3hkzHcGu1wuxeWxaxy9mt8RSC0xHZHxIpqw6fCdX+kdjD
+ LJZeHKJOz3OCKFK+WvKMsJJkcgBYPptT+LM8wEl1p8plGMF4Dxb8a7S9QVfzUbhds9JWPM
+ eFNtJt5Hel2J2my9omQ3Hwovm7F6RS4=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-186-2U0mrg9TNxOJv1e4ummcVA-1; Mon, 09 Mar 2020 04:08:32 -0400
+X-MC-Unique: 2U0mrg9TNxOJv1e4ummcVA-1
+Received: by mail-qt1-f197.google.com with SMTP id y3so6295823qti.15
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 09 Mar 2020 01:08:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition;
+ bh=T8KT/+n14Cn5HelmWM4TG6Zo6L21o7FLn2E43AQONUI=;
+ b=ClXTGNvBvZ6pAvQDnAgfCE5RbyQypTv6BRlu0ex21GztKPZa694AcddaAo8FeGUXqN
+ hAglJUle7XwOkyQiAimvYXaCtzq6OmzywDaImaCEkLEZGyDWOIfBdSgLcKdjLopBL9we
+ xbceJC8MO02lvAHn33r4eqh46bw+D5D/+PPJGyer5/3ShmAGkOPO5yrJrZ5uUGmHo6cY
+ EgwCcoW1JxSW+X3QzUCx+3IdTg17AccZdDQBnKTRMgx3TE6b6UHA5OIAMtFyaPOnLCni
+ JjA6XCVoQru/AnvsY6WZBBw4d1nipEeY1v+5CtewaVfbZ/uHjfAGfvYyUyrHuSjyeqTc
+ eQjA==
+X-Gm-Message-State: ANhLgQ0T1of/IWBYe2tIZU6F6+ZIjK+tVrQLjlSWSvOTlg7Mx5a/A6Ok
+ bDAJih0zF1eOYkK3ttSyMGmUPZ54duw1mqrkF1t45UdgL1yQS8PGMxhWZaTsDNCG3v6XNZ44GsV
+ aM8yzt8T5KOlDSY4n+iuYgSfUz+UeXf+oWdexMoYHtw==
+X-Received: by 2002:a0c:c244:: with SMTP id w4mr13815577qvh.104.1583741311602; 
+ Mon, 09 Mar 2020 01:08:31 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vsDCYFx3tgEt/18zqy2Hj0onYaUrEMtYoBKu3yJ+l1tw+IzBr80xlV0fKvKv/QcwEaRhnxGPw==
+X-Received: by 2002:a0c:c244:: with SMTP id w4mr13815565qvh.104.1583741311386; 
+ Mon, 09 Mar 2020 01:08:31 -0700 (PDT)
+Received: from redhat.com (bzq-79-178-2-19.red.bezeqint.net. [79.178.2.19])
+ by smtp.gmail.com with ESMTPSA id k11sm21885175qti.68.2020.03.09.01.08.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2020 01:08:30 -0700 (PDT)
+Date: Mon, 9 Mar 2020 04:08:25 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: [GIT PULL] virtio: fixes
+Message-ID: <20200309040825-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20200306211802.GA17369@ravnborg.org>
-Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, heiko@sntech.de,
- airlied@linux.ie, stefan@agner.ch, linux@armlinux.org.uk, paul@crapouillou.net,
- eric@anholt.net, thierry.reding@gmail.com, krzk@kernel.org, festevam@gmail.com,
- sebastian.reichel@collabora.com, linux-samsung-soc@vger.kernel.org,
- jy0922.shim@samsung.com, hjc@rock-chips.com, tomi.valkeinen@ti.com,
- abrodkin@synopsys.com, kong.kongxinwei@hisilicon.com,
- patrik.r.jakobsson@gmail.com, jonathanh@nvidia.com, xinliang.liu@linaro.org,
- ludovic.desroches@microchip.com, kgene@kernel.org, linux-imx@nxp.com,
- ck.hu@mediatek.com, linux-rockchip@lists.infradead.org,
- virtualization@lists.linux-foundation.org, linux-tegra@vger.kernel.org,
- p.zabel@pengutronix.de, puck.chen@hisilicon.com, s.hauer@pengutronix.de,
- alison.wang@nxp.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- inki.dae@samsung.com, john.stultz@linaro.org, jsarha@ti.com,
- matthias.bgg@gmail.com, wens@csie.org, kernel@pengutronix.de,
- jernej.skrabec@siol.net, rodrigosiqueiramelo@gmail.com, bbrezillon@kernel.org,
- jingoohan1@gmail.com, dri-devel@lists.freedesktop.org, sw0312.kim@samsung.com,
- nicolas.ferre@microchip.com, kyungmin.park@samsung.com,
- kieran.bingham+renesas@ideasonboard.com, daniel@ffwll.ch,
- zourongrong@gmail.com, linux-mediatek@lists.infradead.org, shawnguo@kernel.org,
- laurent.pinchart@ideasonboard.com
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: axboe@kernel.dk, kvm@vger.kernel.org, mst@redhat.com,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
+ natechancellor@gmail.com, s-anna@ti.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,205 +102,47 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5084912579914325904=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5084912579914325904==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="MGskBhwtfwJu2ES79w1QlBRF0CsXl3V4l"
+The following changes since commit 98d54f81e36ba3bf92172791eba5ca5bd813989b:
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---MGskBhwtfwJu2ES79w1QlBRF0CsXl3V4l
-Content-Type: multipart/mixed; boundary="dfC3HwP1w1SRemUUkRjXLmFHcLkGVwl1e";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Sam Ravnborg <sam@ravnborg.org>
-Cc: airlied@linux.ie, daniel@ffwll.ch, abrodkin@synopsys.com,
- bbrezillon@kernel.org, nicolas.ferre@microchip.com,
- alexandre.belloni@bootlin.com, ludovic.desroches@microchip.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, jingoohan1@gmail.com,
- inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
- kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
- stefan@agner.ch, alison.wang@nxp.com, patrik.r.jakobsson@gmail.com,
- xinliang.liu@linaro.org, zourongrong@gmail.com, john.stultz@linaro.org,
- kong.kongxinwei@hisilicon.com, puck.chen@hisilicon.com,
- linux@armlinux.org.uk, p.zabel@pengutronix.de, shawnguo@kernel.org,
- s.hauer@pengutronix.de, kernel@pengutronix.de, festevam@gmail.com,
- linux-imx@nxp.com, paul@crapouillou.net, ck.hu@mediatek.com,
- matthias.bgg@gmail.com, laurent.pinchart@ideasonboard.com,
- kieran.bingham+renesas@ideasonboard.com, hjc@rock-chips.com,
- heiko@sntech.de, wens@csie.org, jernej.skrabec@siol.net,
- thierry.reding@gmail.com, jonathanh@nvidia.com, jsarha@ti.com,
- tomi.valkeinen@ti.com, eric@anholt.net, kraxel@redhat.com,
- rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
- sebastian.reichel@collabora.com, dri-devel@lists.freedesktop.org,
- linux-samsung-soc@vger.kernel.org, linux-mediatek@lists.infradead.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- virtualization@lists.linux-foundation.org
-Message-ID: <2cded827-de52-6110-505d-eacab9f28772@suse.de>
-Subject: Re: [PATCH 01/22] drm/arc: Use simple encoder
-References: <20200305155950.2705-1-tzimmermann@suse.de>
- <20200305155950.2705-2-tzimmermann@suse.de>
- <20200306211802.GA17369@ravnborg.org>
-In-Reply-To: <20200306211802.GA17369@ravnborg.org>
+  Linux 5.6-rc4 (2020-03-01 16:38:46 -0600)
 
---dfC3HwP1w1SRemUUkRjXLmFHcLkGVwl1e
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+are available in the Git repository at:
 
-Hi Sam
+  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
 
-Am 06.03.20 um 22:18 schrieb Sam Ravnborg:
-> On Thu, Mar 05, 2020 at 04:59:29PM +0100, Thomas Zimmermann wrote:
->> The arc driver uses empty implementations for its encoders. Replace
->> the code with the generic simple encoder.
->=20
-> We should , as a follow-up patch, embed the encoder in
-> arcgpu_drm_private.
-> Then we drop the kzalloc() and avoid that life-time challenge.
+for you to fetch changes up to 6ae4edab2fbf86ec92fbf0a8f0c60b857d90d50f:
 
-You're right, there's a devm_kzalloc() for the encoder. I didn't notice
-before. And from what I learned from the drmm_ patches, this doesn't
-work reliably.
+  virtio_balloon: Adjust label in virtballoon_probe (2020-03-08 05:35:24 -0400)
 
-I'll drop this patch, as the series is supposed to handle embedded
-encoders. arcgpu will be fixed later when the managed API is ready.
+----------------------------------------------------------------
+virtio: fixes
 
-Best regards
-Thomas
+Some bug fixes all over the place.
 
->=20
-> This patch looks good for what it does.
->=20
-> Acked-by: Sam Ravnborg <sam@ravnborg.org>
->=20
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> ---
->>  drivers/gpu/drm/arc/arcpgu_hdmi.c | 10 +++-------
->>  drivers/gpu/drm/arc/arcpgu_sim.c  |  8 ++------
->>  2 files changed, 5 insertions(+), 13 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/arc/arcpgu_hdmi.c b/drivers/gpu/drm/arc/a=
-rcpgu_hdmi.c
->> index 52839934f2fb..780911765e2e 100644
->> --- a/drivers/gpu/drm/arc/arcpgu_hdmi.c
->> +++ b/drivers/gpu/drm/arc/arcpgu_hdmi.c
->> @@ -7,15 +7,12 @@
->> =20
->>  #include <drm/drm_bridge.h>
->>  #include <drm/drm_crtc.h>
->> -#include <drm/drm_encoder.h>
->>  #include <drm/drm_device.h>
->> +#include <drm/drm_encoder.h>
->> +#include <drm/drm_simple_kms_helper.h>
->> =20
->>  #include "arcpgu.h"
->> =20
->> -static struct drm_encoder_funcs arcpgu_drm_encoder_funcs =3D {
->> -	.destroy =3D drm_encoder_cleanup,
->> -};
->> -
->>  int arcpgu_drm_hdmi_init(struct drm_device *drm, struct device_node *=
-np)
->>  {
->>  	struct drm_encoder *encoder;
->> @@ -34,8 +31,7 @@ int arcpgu_drm_hdmi_init(struct drm_device *drm, str=
-uct device_node *np)
->> =20
->>  	encoder->possible_crtcs =3D 1;
->>  	encoder->possible_clones =3D 0;
->> -	ret =3D drm_encoder_init(drm, encoder, &arcpgu_drm_encoder_funcs,
->> -			       DRM_MODE_ENCODER_TMDS, NULL);
->> +	ret =3D drm_simple_encoder_init(drm, encoder, DRM_MODE_ENCODER_TMDS)=
-;
->>  	if (ret)
->>  		return ret;
->> =20
->> diff --git a/drivers/gpu/drm/arc/arcpgu_sim.c b/drivers/gpu/drm/arc/ar=
-cpgu_sim.c
->> index 37d961668dfe..66ca2c26e339 100644
->> --- a/drivers/gpu/drm/arc/arcpgu_sim.c
->> +++ b/drivers/gpu/drm/arc/arcpgu_sim.c
->> @@ -8,6 +8,7 @@
->>  #include <drm/drm_atomic_helper.h>
->>  #include <drm/drm_device.h>
->>  #include <drm/drm_probe_helper.h>
->> +#include <drm/drm_simple_kms_helper.h>
->> =20
->>  #include "arcpgu.h"
->> =20
->> @@ -50,10 +51,6 @@ static const struct drm_connector_funcs arcpgu_drm_=
-connector_funcs =3D {
->>  	.atomic_destroy_state =3D drm_atomic_helper_connector_destroy_state,=
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 
->>  };
->> =20
->> -static struct drm_encoder_funcs arcpgu_drm_encoder_funcs =3D {
->> -	.destroy =3D drm_encoder_cleanup,
->> -};
->> -
->>  int arcpgu_drm_sim_init(struct drm_device *drm, struct device_node *n=
-p)
->>  {
->>  	struct arcpgu_drm_connector *arcpgu_connector;
->> @@ -68,8 +65,7 @@ int arcpgu_drm_sim_init(struct drm_device *drm, stru=
-ct device_node *np)
->>  	encoder->possible_crtcs =3D 1;
->>  	encoder->possible_clones =3D 0;
->> =20
->> -	ret =3D drm_encoder_init(drm, encoder, &arcpgu_drm_encoder_funcs,
->> -			       DRM_MODE_ENCODER_VIRTUAL, NULL);
->> +	ret =3D drm_simple_encoder_init(drm, encoder, DRM_MODE_ENCODER_VIRTU=
-AL);
->>  	if (ret)
->>  		return ret;
->> =20
->> --=20
->> 2.25.1
+----------------------------------------------------------------
+Halil Pasic (2):
+      virtio-blk: fix hw_queue stopped on arbitrary error
+      virtio-blk: improve virtqueue error to BLK_STS
 
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+Nathan Chancellor (1):
+      virtio_balloon: Adjust label in virtballoon_probe
 
+Suman Anna (1):
+      virtio_ring: Fix mem leak with vring_new_virtqueue()
 
---dfC3HwP1w1SRemUUkRjXLmFHcLkGVwl1e--
-
---MGskBhwtfwJu2ES79w1QlBRF0CsXl3V4l
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5l9lgACgkQaA3BHVML
-eiMBRAgApqR+Law2DXZaFiuIJ24c8VPSKEu7Giq7JYiLOVGmKsm1p0fLKQq8TmFi
-bwgTe5PfO3G5rI3dzNv1j7u/c5JmQoOr5HqaKBFYz212GbEf25k2r2I9QDiO4yOb
-y37Fc7QVRj2rGJXyS9Zal6hvTZKpHBGlxCNBW0xuL5xwNiIUXHKta+13mqb3+PEg
-Td2cB8ln0K0sQG6kHgzlc3abvBRu1s8z0hXfpIkxlwvBdq/w0bgNxKcPf51KkbZX
-JW6WnFBik8AmFzdbOueul3n0oR+ax7JhtbFqbgi3sipfBbVep3SptrkVgUG4XVqR
-yxbVG3sywas5MF21bJOKVgiEQP3f7A==
-=tCLj
------END PGP SIGNATURE-----
-
---MGskBhwtfwJu2ES79w1QlBRF0CsXl3V4l--
-
---===============5084912579914325904==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+ drivers/block/virtio_blk.c      | 17 ++++++++++++-----
+ drivers/virtio/virtio_balloon.c |  2 +-
+ drivers/virtio/virtio_ring.c    |  4 ++--
+ 3 files changed, 15 insertions(+), 8 deletions(-)
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============5084912579914325904==--
