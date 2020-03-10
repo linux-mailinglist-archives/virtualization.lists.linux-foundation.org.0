@@ -2,45 +2,46 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A75D517F2DF
-	for <lists.virtualization@lfdr.de>; Tue, 10 Mar 2020 10:12:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 995A417F2E1
+	for <lists.virtualization@lfdr.de>; Tue, 10 Mar 2020 10:12:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C8E988644F;
-	Tue, 10 Mar 2020 09:12:43 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 27F8E86DD7;
+	Tue, 10 Mar 2020 09:12:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yp31LRWroM9I; Tue, 10 Mar 2020 09:12:42 +0000 (UTC)
+	with ESMTP id QQ7xVp8NKb-k; Tue, 10 Mar 2020 09:12:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0AD6F86916;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B5980861F1;
 	Tue, 10 Mar 2020 09:12:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DEC62C0177;
-	Tue, 10 Mar 2020 09:12:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9D2DBC18D3;
+	Tue, 10 Mar 2020 09:12:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F09B7C0177;
- Tue, 10 Mar 2020 09:12:38 +0000 (UTC)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 358ACC0177;
+ Tue, 10 Mar 2020 09:12:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id ECF888832A;
- Tue, 10 Mar 2020 09:12:38 +0000 (UTC)
+ by whitealder.osuosl.org (Postfix) with ESMTP id 23526883BF;
+ Tue, 10 Mar 2020 09:12:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WXjDZhzeC+4Z; Tue, 10 Mar 2020 09:12:37 +0000 (UTC)
+ with ESMTP id vXjt-mPPcRwV; Tue, 10 Mar 2020 09:12:37 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7DB4188311;
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 16FD1883D2;
  Tue, 10 Mar 2020 09:12:37 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 4F2504B7; Tue, 10 Mar 2020 10:12:32 +0100 (CET)
+ id 6C468608; Tue, 10 Mar 2020 10:12:32 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: iommu@lists.linux-foundation.org
-Subject: [PATCH 03/15] drm/msm/mdp5: Remove direct access of dev->iommu_fwspec
-Date: Tue, 10 Mar 2020 10:12:17 +0100
-Message-Id: <20200310091229.29830-4-joro@8bytes.org>
+Subject: [PATCH 04/15] iommu/tegra-gart: Remove direct access of
+ dev->iommu_fwspec
+Date: Tue, 10 Mar 2020 10:12:18 +0100
+Message-Id: <20200310091229.29830-5-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200310091229.29830-1-joro@8bytes.org>
 References: <20200310091229.29830-1-joro@8bytes.org>
@@ -78,22 +79,22 @@ dev->iommu_fwspec.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c | 2 +-
+ drivers/iommu/tegra-gart.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-index e43ecd4be10a..1252e1d76340 100644
---- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-@@ -725,7 +725,7 @@ struct msm_kms *mdp5_kms_init(struct drm_device *dev)
+diff --git a/drivers/iommu/tegra-gart.c b/drivers/iommu/tegra-gart.c
+index 3fb7ba72507d..db6559e8336f 100644
+--- a/drivers/iommu/tegra-gart.c
++++ b/drivers/iommu/tegra-gart.c
+@@ -247,7 +247,7 @@ static int gart_iommu_add_device(struct device *dev)
+ {
+ 	struct iommu_group *group;
  
- 	if (config->platform.iommu) {
- 		iommu_dev = &pdev->dev;
--		if (!iommu_dev->iommu_fwspec)
-+		if (!dev_iommu_fwspec_get(iommu_dev))
- 			iommu_dev = iommu_dev->parent;
+-	if (!dev->iommu_fwspec)
++	if (!dev_iommu_fwspec_get(dev))
+ 		return -ENODEV;
  
- 		aspace = msm_gem_address_space_create(iommu_dev,
+ 	group = iommu_group_get_for_dev(dev);
 -- 
 2.17.1
 
