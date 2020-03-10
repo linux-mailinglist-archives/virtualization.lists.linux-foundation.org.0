@@ -2,66 +2,65 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02E1A180681
-	for <lists.virtualization@lfdr.de>; Tue, 10 Mar 2020 19:33:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99F8D1806BA
+	for <lists.virtualization@lfdr.de>; Tue, 10 Mar 2020 19:35:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4B89B875BD;
-	Tue, 10 Mar 2020 18:33:02 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 46D23875AC;
+	Tue, 10 Mar 2020 18:35:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UzzFp5a4cGhA; Tue, 10 Mar 2020 18:33:01 +0000 (UTC)
+	with ESMTP id XASf2UGLeNsy; Tue, 10 Mar 2020 18:35:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4CB4E875B7;
-	Tue, 10 Mar 2020 18:33:01 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CF5FD87563;
+	Tue, 10 Mar 2020 18:35:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 20F6DC0177;
-	Tue, 10 Mar 2020 18:33:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B325AC0177;
+	Tue, 10 Mar 2020 18:35:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 90D0AC0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F2F30C0177
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Mar 2020 18:32:54 +0000 (UTC)
+ Tue, 10 Mar 2020 18:35:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8602287E37
+ by whitealder.osuosl.org (Postfix) with ESMTP id ECC2288659
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Mar 2020 18:32:54 +0000 (UTC)
+ Tue, 10 Mar 2020 18:35:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zBUFDy+Qte3P
+ with ESMTP id QYLk-zcggqAv
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Mar 2020 18:32:54 +0000 (UTC)
+ Tue, 10 Mar 2020 18:35:14 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [198.137.202.133])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 1806687E23
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 83A1B88653
  for <virtualization@lists.linux-foundation.org>;
- Tue, 10 Mar 2020 18:32:54 +0000 (UTC)
+ Tue, 10 Mar 2020 18:35:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=BM1rOj2mhNiPAl7HQ9Dqr15pnyhMXu6TgEmfxY4G2dE=; b=ed6zJKUMN0NHTWgGMZZSTBEMDJ
- ZDwYVpOOtBbWFiUHnmoG6GaShnCVBNtgLFdocdwwRDKj4qutRI2XnmiCFY3FvYu0H6LTim5ZMYG7l
- er2Lg68TxUnu7dgmzliLVYHYuWZlDRVJZnXxTrNbeyTmFNxMT/4eKfoklcs5lYKYFagBDGM3D1DXQ
- Mfob/seec8sdaZisq4mZffAyZUetOdUKq7p7SqhAx2aZ6sX/rk12t8fIAlAmkmzXB/Fu5MVzj1oNr
- 3IDqAJiLb2d029n6cYMi7pHsO0hMT85id6WaFxFPrLWgXPuuRoplFfqkZd8EvysaP2+Sgd06AOwkD
- QGZb4vxQ==;
+ bh=f2QIKjI8cYNlOJbeMqgxIhxEPRSUmrEl+tsAYjSK8m8=; b=H7Hg3iHhU9Pw60VhTAE9cYI6HR
+ 2toN/jrJZ6zBbyrU0G7lJrEeLpeekDWBK9hhLqMI5Koq3UHLf0o/gLNWYajwyZEp9mivPiKG5dbHU
+ lYv2ueIuG2okv8ihdoPp19X46Uuk0YubE/yk/cUdeH85mHgOHyQR/Z40XEGShkUtc2WQsjM5tNdn1
+ u7KUHl8+5GQ455+JRI2KBRzr1CKF9+Ti8uSEuxAYcFqpnDuQXCKNGa4NYktKWVRUN95/brwwxfDQ7
+ U7gQA1jmJuWgJAcoJnQ/dK64b99M7ZqjRhMIPA5KZpMYYoAiIG4d8MEvM9enYix/NFph/hu+l1qzX
+ 0Apbw/eA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jBjgJ-0005Yb-SK; Tue, 10 Mar 2020 18:32:43 +0000
-Date: Tue, 10 Mar 2020 11:32:43 -0700
+ Hat Linux)) id 1jBjia-0007xl-Nv; Tue, 10 Mar 2020 18:35:04 +0000
+Date: Tue, 10 Mar 2020 11:35:04 -0700
 From: Christoph Hellwig <hch@infradead.org>
 To: John Garry <john.garry@huawei.com>
-Subject: Re: [PATCH RFC v2 02/24] scsi: allocate separate queue for reserved
- commands
-Message-ID: <20200310183243.GA14549@infradead.org>
+Subject: Re: [PATCH RFC v2 22/24] scsi: drop scsi command list
+Message-ID: <20200310183504.GB14549@infradead.org>
 References: <1583857550-12049-1-git-send-email-john.garry@huawei.com>
- <1583857550-12049-3-git-send-email-john.garry@huawei.com>
+ <1583857550-12049-23-git-send-email-john.garry@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1583857550-12049-3-git-send-email-john.garry@huawei.com>
+In-Reply-To: <1583857550-12049-23-git-send-email-john.garry@huawei.com>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 Cc: axboe@kernel.dk, linux-block@vger.kernel.org,
@@ -86,12 +85,14 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Mar 11, 2020 at 12:25:28AM +0800, John Garry wrote:
+On Wed, Mar 11, 2020 at 12:25:48AM +0800, John Garry wrote:
 > From: Hannes Reinecke <hare@suse.com>
 > 
-> Allocate a separate 'reserved_cmd_q' for sending reserved commands.
+> No users left, kill it.
+> 
+> Signed-off-by: Hannes Reinecke <hare@suse.com>
 
-Why?  Reserved command specifically are not in any way tied to queues.
+Wasn't this part of a series from Hannes that already got merged?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
