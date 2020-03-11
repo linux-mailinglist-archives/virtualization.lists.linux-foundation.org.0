@@ -2,84 +2,84 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B958181F03
-	for <lists.virtualization@lfdr.de>; Wed, 11 Mar 2020 18:16:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1ACA3181F04
+	for <lists.virtualization@lfdr.de>; Wed, 11 Mar 2020 18:16:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A822F882BB;
-	Wed, 11 Mar 2020 17:16:26 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id BAF6289377;
+	Wed, 11 Mar 2020 17:16:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id T5AmcfmHRKOh; Wed, 11 Mar 2020 17:16:25 +0000 (UTC)
+	with ESMTP id oH-c2nzVM4G5; Wed, 11 Mar 2020 17:16:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C1677882EB;
-	Wed, 11 Mar 2020 17:16:25 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 298CD88C05;
+	Wed, 11 Mar 2020 17:16:29 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B8E73C0177;
-	Wed, 11 Mar 2020 17:16:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0AC24C0177;
+	Wed, 11 Mar 2020 17:16:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9DD40C0177
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A3584C0177
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Mar 2020 17:16:24 +0000 (UTC)
+ Wed, 11 Mar 2020 17:16:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8CE9A882EB
+ by hemlock.osuosl.org (Postfix) with ESMTP id 92E0289377
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Mar 2020 17:16:24 +0000 (UTC)
+ Wed, 11 Mar 2020 17:16:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7tLs4FUEDK5O
+ with ESMTP id 2RvrFZodsR5M
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Mar 2020 17:16:23 +0000 (UTC)
+ Wed, 11 Mar 2020 17:16:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id A5DE8882BB
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id D3D0C88C05
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Mar 2020 17:16:23 +0000 (UTC)
+ Wed, 11 Mar 2020 17:16:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583946982;
+ s=mimecast20190719; t=1583946985;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ot3bLJFwuo4lkKRtsoi7Qd7G2W6PwTomwlXMrLNPwcA=;
- b=WpZ3yNS1GZalXYCnmKB/MAFaOlJ6yCsGG36K7j4hfsZA1sjI6x2HFdpXMqUU7zdWiekv/R
- oeorJAVICPsuc8VQxQOoB70GIBGW5Rehsr0VgI2V3Ly6yrTvFkbJn72XEoLaGL7OVq5Gaj
- 24mAsuM9SHCRNcvlxmSNlISXUlD33DQ=
+ bh=R9YlCAxZTLeLO624BWfRaiPaRVXS4Jlz4OonzSFN6/Y=;
+ b=McMmTybSJ1vCrmZfwO2N0lxXniCJ6wTYgPY5NWDHLxWOQbmYP8XY6WTXh9URggoqKVK4R7
+ QfeM5+RpTEJ1hC5xV0TP0qc9k3PAVm350SwjNthB6m5xLu5+a1Iuksgc8BHKqeIYRlxwFw
+ /JZRwLkdZ4s4XGrPHJASKCh7i1yl9SU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-348-cN3X7QvSNBWIDIyTHzciPA-1; Wed, 11 Mar 2020 13:16:18 -0400
-X-MC-Unique: cN3X7QvSNBWIDIyTHzciPA-1
+ us-mta-248-cSO6Lp6oPDiaSdR8FyW8Rw-1; Wed, 11 Mar 2020 13:16:21 -0400
+X-MC-Unique: cSO6Lp6oPDiaSdR8FyW8Rw-1
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CAF6BDBA3;
- Wed, 11 Mar 2020 17:16:16 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F0C6D107ACCA;
+ Wed, 11 Mar 2020 17:16:19 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-116-132.ams2.redhat.com [10.36.116.132])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2661492D25;
- Wed, 11 Mar 2020 17:16:01 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 26F5D60BEE;
+ Wed, 11 Mar 2020 17:16:16 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 06/10] virtio-mem: Allow to offline partially unplugged
- memory blocks
-Date: Wed, 11 Mar 2020 18:14:18 +0100
-Message-Id: <20200311171422.10484-7-david@redhat.com>
+Subject: [PATCH v2 07/10] mm/memory_hotplug: Introduce
+ offline_and_remove_memory()
+Date: Wed, 11 Mar 2020 18:14:19 +0100
+Message-Id: <20200311171422.10484-8-david@redhat.com>
 In-Reply-To: <20200311171422.10484-1-david@redhat.com>
 References: <20200311171422.10484-1-david@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Cc: virtio-dev@lists.oasis-open.org, Pavel Tatashin <pasha.tatashin@soleen.com>,
+Cc: Oscar Salvador <osalvador@suse.com>, virtio-dev@lists.oasis-open.org,
+ Michal Hocko <mhocko@suse.com>, Pavel Tatashin <pasha.tatashin@soleen.com>,
  kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
  Michal Hocko <mhocko@kernel.org>, linux-mm@kvack.org,
- Stefan Hajnoczi <stefanha@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Wei Yang <richard.weiyang@gmail.com>, Qian Cai <cai@lca.pw>,
  Andrew Morton <akpm@linux-foundation.org>,
- virtualization@lists.linux-foundation.org, Dave Young <dyoung@redhat.com>,
- Dan Williams <dan.j.williams@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
- Oscar Salvador <osalvador@suse.de>
+ virtualization@lists.linux-foundation.org,
+ Dan Williams <dan.j.williams@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,140 +96,93 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Dropping the reference count of PageOffline() pages during MEM_GOING_ONLINE
-allows offlining code to skip them. However, we also have to clear
-PG_reserved, because PG_reserved pages get detected as unmovable right
-away. Take care of restoring the reference count when offlining is
-canceled.
+virtio-mem wants to offline and remove a memory block once it unplugged
+all subblocks (e.g., using alloc_contig_range()). Let's provide
+an interface to do that from a driver. virtio-mem already supports to
+offline partially unplugged memory blocks. Offlining a fully unplugged
+memory block will not require to migrate any pages. All unplugged
+subblocks are PageOffline() and have a reference count of 0 - so
+offlining code will simply skip them.
 
-Clarify why we don't have to perform any action when unloading the
-driver. Also, let's add a warning if anybody is still holding a
-reference to unplugged pages when offlining.
+All we need is an interface to offline and remove the memory from kernel
+module context, where we don't have access to the memory block devices
+(esp. find_memory_block() and device_offline()) and the device hotplug
+lock.
 
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Oscar Salvador <osalvador@suse.de>
-Cc: Michal Hocko <mhocko@kernel.org>
-Cc: Igor Mammedov <imammedo@redhat.com>
-Cc: Dave Young <dyoung@redhat.com>
+To keep things simple, allow to only work on a single memory block.
+
 Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Dan Williams <dan.j.williams@intel.com>
+Cc: David Hildenbrand <david@redhat.com>
+Cc: Oscar Salvador <osalvador@suse.com>
+Cc: Michal Hocko <mhocko@suse.com>
 Cc: Pavel Tatashin <pasha.tatashin@soleen.com>
-Cc: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: Vlastimil Babka <vbabka@suse.cz>
+Cc: Wei Yang <richard.weiyang@gmail.com>
+Cc: Dan Williams <dan.j.williams@intel.com>
+Cc: Qian Cai <cai@lca.pw>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 68 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 67 insertions(+), 1 deletion(-)
+ include/linux/memory_hotplug.h |  1 +
+ mm/memory_hotplug.c            | 37 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 38 insertions(+)
 
-diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index 5b26d57be551..35f20232770c 100644
---- a/drivers/virtio/virtio_mem.c
-+++ b/drivers/virtio/virtio_mem.c
-@@ -570,6 +570,57 @@ static void virtio_mem_notify_online(struct virtio_mem *vm, unsigned long mb_id,
- 		virtio_mem_retry(vm);
+diff --git a/include/linux/memory_hotplug.h b/include/linux/memory_hotplug.h
+index f4d59155f3d4..a98aa16dbfa1 100644
+--- a/include/linux/memory_hotplug.h
++++ b/include/linux/memory_hotplug.h
+@@ -311,6 +311,7 @@ extern void try_offline_node(int nid);
+ extern int offline_pages(unsigned long start_pfn, unsigned long nr_pages);
+ extern int remove_memory(int nid, u64 start, u64 size);
+ extern void __remove_memory(int nid, u64 start, u64 size);
++extern int offline_and_remove_memory(int nid, u64 start, u64 size);
+ 
+ #else
+ static inline bool is_mem_section_removable(unsigned long pfn,
+diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+index ab1c31e67fd1..d0d337918a15 100644
+--- a/mm/memory_hotplug.c
++++ b/mm/memory_hotplug.c
+@@ -1818,4 +1818,41 @@ int remove_memory(int nid, u64 start, u64 size)
+ 	return rc;
  }
- 
-+static void virtio_mem_notify_going_offline(struct virtio_mem *vm,
-+					    unsigned long mb_id)
+ EXPORT_SYMBOL_GPL(remove_memory);
++
++/*
++ * Try to offline and remove a memory block. Might take a long time to
++ * finish in case memory is still in use. Primarily useful for memory devices
++ * that logically unplugged all memory (so it's no longer in use) and want to
++ * offline + remove the memory block.
++ */
++int offline_and_remove_memory(int nid, u64 start, u64 size)
 +{
-+	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size);
-+	struct page *page;
-+	unsigned long pfn;
-+	int sb_id, i;
++	struct memory_block *mem;
++	int rc = -EINVAL;
 +
-+	for (sb_id = 0; sb_id < vm->nb_sb_per_mb; sb_id++) {
-+		if (virtio_mem_mb_test_sb_plugged(vm, mb_id, sb_id, 1))
-+			continue;
-+		/*
-+		 * Drop our reference to the pages so the memory can get
-+		 * offlined and add the unplugged pages to the managed
-+		 * page counters (so offlining code can correctly subtract
-+		 * them again).
-+		 */
-+		pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
-+			       sb_id * vm->subblock_size);
-+		adjust_managed_page_count(pfn_to_page(pfn), nr_pages);
-+		for (i = 0; i < nr_pages; i++) {
-+			page = pfn_to_page(pfn + i);
-+			if (WARN_ON(!page_ref_dec_and_test(page)))
-+				dump_page(page, "unplugged page referenced");
-+		}
-+	}
-+}
++	if (!IS_ALIGNED(start, memory_block_size_bytes()) ||
++	    size != memory_block_size_bytes())
++		return rc;
 +
-+static void virtio_mem_notify_cancel_offline(struct virtio_mem *vm,
-+					     unsigned long mb_id)
-+{
-+	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size);
-+	unsigned long pfn;
-+	int sb_id, i;
++	lock_device_hotplug();
++	mem = find_memory_block(__pfn_to_section(PFN_DOWN(start)));
++	if (mem)
++		rc = device_offline(&mem->dev);
++	/* Ignore if the device is already offline. */
++	if (rc > 0)
++		rc = 0;
 +
-+	for (sb_id = 0; sb_id < vm->nb_sb_per_mb; sb_id++) {
-+		if (virtio_mem_mb_test_sb_plugged(vm, mb_id, sb_id, 1))
-+			continue;
-+		/*
-+		 * Get the reference we dropped when going offline and
-+		 * subtract the unplugged pages from the managed page
-+		 * counters.
-+		 */
-+		pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
-+			       sb_id * vm->subblock_size);
-+		adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
-+		for (i = 0; i < nr_pages; i++)
-+			page_ref_inc(pfn_to_page(pfn + i));
-+	}
-+}
-+
- /*
-  * This callback will either be called synchronously from add_memory() or
-  * asynchronously (e.g., triggered via user space). We have to be careful
-@@ -616,6 +667,7 @@ static int virtio_mem_memory_notifier_cb(struct notifier_block *nb,
- 			break;
- 		}
- 		vm->hotplug_active = true;
-+		virtio_mem_notify_going_offline(vm, mb_id);
- 		break;
- 	case MEM_GOING_ONLINE:
- 		mutex_lock(&vm->hotplug_mutex);
-@@ -640,6 +692,12 @@ static int virtio_mem_memory_notifier_cb(struct notifier_block *nb,
- 		mutex_unlock(&vm->hotplug_mutex);
- 		break;
- 	case MEM_CANCEL_OFFLINE:
-+		if (!vm->hotplug_active)
-+			break;
-+		virtio_mem_notify_cancel_offline(vm, mb_id);
-+		vm->hotplug_active = false;
-+		mutex_unlock(&vm->hotplug_mutex);
-+		break;
- 	case MEM_CANCEL_ONLINE:
- 		if (!vm->hotplug_active)
- 			break;
-@@ -666,8 +724,11 @@ static void virtio_mem_set_fake_offline(unsigned long pfn,
- 		struct page *page = pfn_to_page(pfn);
- 
- 		__SetPageOffline(page);
--		if (!onlined)
-+		if (!onlined) {
- 			SetPageDirty(page);
-+			/* FIXME: remove after cleanups */
-+			ClearPageReserved(page);
-+		}
- 	}
- }
- 
-@@ -1717,6 +1778,11 @@ static void virtio_mem_remove(struct virtio_device *vdev)
- 		rc = virtio_mem_mb_remove(vm, mb_id);
- 		BUG_ON(rc);
- 	}
 +	/*
-+	 * After we unregistered our callbacks, user space can no longer
-+	 * offline partially plugged online memory blocks. No need to worry
-+	 * about them.
++	 * In case we succeeded to offline the memory block, remove it.
++	 * This cannot fail as it cannot get onlined in the meantime.
 +	 */
- 
- 	/* unregister callbacks */
- 	unregister_virtio_mem_device(vm);
++	if (!rc) {
++		rc = try_remove_memory(nid, start, size);
++		WARN_ON_ONCE(rc);
++	}
++	unlock_device_hotplug();
++
++	return rc;
++}
++EXPORT_SYMBOL_GPL(offline_and_remove_memory);
+ #endif /* CONFIG_MEMORY_HOTREMOVE */
 -- 
 2.24.1
 
