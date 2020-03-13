@@ -1,81 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 318C5184975
-	for <lists.virtualization@lfdr.de>; Fri, 13 Mar 2020 15:35:41 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8CB5184E73
+	for <lists.virtualization@lfdr.de>; Fri, 13 Mar 2020 19:16:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id BEB6288BE0;
-	Fri, 13 Mar 2020 14:35:39 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 5759C87880;
+	Fri, 13 Mar 2020 18:16:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LnWzIKjiRlWt; Fri, 13 Mar 2020 14:35:39 +0000 (UTC)
+	with ESMTP id yx3jbQBS79p4; Fri, 13 Mar 2020 18:16:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0892088BCB;
-	Fri, 13 Mar 2020 14:35:39 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 554C18787B;
+	Fri, 13 Mar 2020 18:16:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E6D71C0177;
-	Fri, 13 Mar 2020 14:35:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3A6EAC0177;
+	Fri, 13 Mar 2020 18:16:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3A1F8C0177
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B004BC0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Mar 2020 14:35:37 +0000 (UTC)
+ Fri, 13 Mar 2020 18:16:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 35512203F8
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 951E68787B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Mar 2020 14:35:37 +0000 (UTC)
+ Fri, 13 Mar 2020 18:16:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nRQcJcas0lh1
+ with ESMTP id iPKEDiHTUVOb
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Mar 2020 14:35:36 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 55C42203AD
+ Fri, 13 Mar 2020 18:16:08 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 0510987876
  for <virtualization@lists.linux-foundation.org>;
- Fri, 13 Mar 2020 14:35:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1584110134;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=WezdpOlVzbaVEs6vfCIvevGk8ide+y5ytNMFt7/McDI=;
- b=OQiDJfsMfXrisXCbzA7Q1mFgNbAFWXWvNRTj8BnzXR/oL7J9TuLlFT9B6oN0PsnaoJNLG5
- uDe+wMKHRINU+S4BTeRHTlT10gzwhnbRlvJV+3xyPxiuZ3ZRp8P65HsF7mvL6MjIimRhmM
- LSqyT7AbFULDGjHHllaABjgy3AJqKPs=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-266-2q7-IqrANO65NjR6AP5ocw-1; Fri, 13 Mar 2020 10:35:33 -0400
-X-MC-Unique: 2q7-IqrANO65NjR6AP5ocw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ Fri, 13 Mar 2020 18:16:08 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AF02E1005509;
- Fri, 13 Mar 2020 14:35:31 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-117.ams2.redhat.com
- [10.36.116.117])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 225AF907F7;
- Fri, 13 Mar 2020 14:35:31 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 1C1A29DB3; Fri, 13 Mar 2020 15:35:30 +0100 (CET)
-Date: Fri, 13 Mar 2020 15:35:30 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Sam Ravnborg <sam@ravnborg.org>
+ by asavdk3.altibox.net (Postfix) with ESMTPS id 9D2E320039;
+ Fri, 13 Mar 2020 19:16:03 +0100 (CET)
+Date: Fri, 13 Mar 2020 19:16:02 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Gerd Hoffmann <kraxel@redhat.com>
 Subject: Re: [PATCH v3] drm/bochs: downgrade pci_request_region failure from
  error to warning
-Message-ID: <20200313143530.6aoagldak3kpe3xv@sirius.home.kraxel.org>
+Message-ID: <20200313181602.GA16474@ravnborg.org>
 References: <20200313084152.2734-1-kraxel@redhat.com>
  <20200313090338.GA31815@ravnborg.org>
+ <20200313143530.6aoagldak3kpe3xv@sirius.home.kraxel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200313090338.GA31815@ravnborg.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+In-Reply-To: <20200313143530.6aoagldak3kpe3xv@sirius.home.kraxel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=eMA9ckh1 c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10
+ a=TKvIToawjpI_eSArduEA:9 a=CjuIK1q_8ugA:10
 Cc: David Airlie <airlied@linux.ie>,
  "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>, marmarek@invisiblethingslab.com,
@@ -96,17 +81,18 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-  Hi,
+On Fri, Mar 13, 2020 at 03:35:30PM +0100, Gerd Hoffmann wrote:
+>   Hi,
+> 
+> > > +	if (pci_request_region(pdev, 0, "bochs-drm") != 0)
+> > > +		DRM_WARN("Cannot request framebuffer, boot fb still active?\n");
+> > So you could use drm_WARN() which is what is preferred these days.
+> 
+> Nope, this isn't yet in -fixes.
+Ups, did not see this was for -fixes.
+My ack stands without ths change then.
 
-> > +	if (pci_request_region(pdev, 0, "bochs-drm") != 0)
-> > +		DRM_WARN("Cannot request framebuffer, boot fb still active?\n");
-> So you could use drm_WARN() which is what is preferred these days.
-
-Nope, this isn't yet in -fixes.
-
-cheers,
-  Gerd
-
+	Sam
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
