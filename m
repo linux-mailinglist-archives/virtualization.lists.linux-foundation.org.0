@@ -1,105 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2924618558D
-	for <lists.virtualization@lfdr.de>; Sat, 14 Mar 2020 12:03:09 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 38535185BDC
+	for <lists.virtualization@lfdr.de>; Sun, 15 Mar 2020 11:12:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CEF0D87AE6;
-	Sat, 14 Mar 2020 11:03:07 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 544E888334;
+	Sun, 15 Mar 2020 10:12:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IYm3UkxCbPno; Sat, 14 Mar 2020 11:03:07 +0000 (UTC)
+	with ESMTP id tsINOMr0nlp1; Sun, 15 Mar 2020 10:12:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 44F1887ADA;
-	Sat, 14 Mar 2020 11:03:07 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8BC9C883C2;
+	Sun, 15 Mar 2020 10:12:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2B017C0177;
-	Sat, 14 Mar 2020 11:03:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7B68DC013E;
+	Sun, 15 Mar 2020 10:12:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 060B8C0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D79D4C013E
  for <virtualization@lists.linux-foundation.org>;
- Sat, 14 Mar 2020 11:03:06 +0000 (UTC)
+ Sun, 15 Mar 2020 10:12:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E85CE87AD4
+ by whitealder.osuosl.org (Postfix) with ESMTP id CD0C489099
  for <virtualization@lists.linux-foundation.org>;
- Sat, 14 Mar 2020 11:03:05 +0000 (UTC)
+ Sun, 15 Mar 2020 10:12:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mv77uzXga2-U
+ with ESMTP id hRENeAh4DsS2
  for <virtualization@lists.linux-foundation.org>;
- Sat, 14 Mar 2020 11:03:05 +0000 (UTC)
+ Sun, 15 Mar 2020 10:12:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
- [209.85.208.67])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id EA8C3879EE
+Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 1AB3A88568
  for <virtualization@lists.linux-foundation.org>;
- Sat, 14 Mar 2020 11:03:04 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id i24so11429962eds.1
- for <virtualization@lists.linux-foundation.org>;
- Sat, 14 Mar 2020 04:03:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=HXvNDpxcelYwn8PoDas8bnx/K7bC0ycG2928PB68YGs=;
- b=uU0ctPonyxVWEYD77osGE/OFGT08k7QxI0fpYtSDkXmU79kWgV8kecbPLIJO2teAZc
- sdC0ShExZZn2794Bklw6xMbk6/lWwvQMC1fPqbv4+89yMyETbWYvyuczYpc/gGiuMHQt
- f0kePA9o3ezO4hHvMi/BPCnCYxSkdezL2MO1pFJF7/Cj3CtwYF5Gl8CuTnaWWw+dguPu
- zFIS7l4yWppr0JWTHFe+a+M+JHUbvHSP5PBvtWEVAAcesII1kjtvgvzGkTQNS3pVTvl8
- pnCKXBfY7J3Kvq8qwTZJrkne00LbTRFHXs2K3iWfDnVrhiDw3J85B3WWyYN+nJRNuK28
- 9O0g==
-X-Gm-Message-State: ANhLgQ2YdkcVGI0suTJDzLypaSRvyBNtwY+YuoGvXeOo3mhYO1y7sjnm
- 69Kb++q9u4E0XymqnCB/y9U=
-X-Google-Smtp-Source: ADFU+vv8nT7z/vEu1bvfu6+AMeellIORI/K4LaHKfZcEsgQyhBKLzYnFTNlP0g88C9JmPdb6eGvarg==
-X-Received: by 2002:a17:907:429c:: with SMTP id
- ny20mr14725961ejb.278.1584183783358; 
- Sat, 14 Mar 2020 04:03:03 -0700 (PDT)
-Received: from kozik-lap ([194.230.155.125])
- by smtp.googlemail.com with ESMTPSA id 94sm2657013eda.7.2020.03.14.04.03.00
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Sat, 14 Mar 2020 04:03:02 -0700 (PDT)
-Date: Sat, 14 Mar 2020 12:02:58 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Arnd Bergmann <arnd@arndb.de>
-Subject: Re: [RESEND PATCH v2 1/9] iomap: Constify ioreadX() iomem argument
- (as in generic implementation)
-Message-ID: <20200314110258.GA16135@kozik-lap>
-References: <20200219175007.13627-1-krzk@kernel.org>
- <20200219175007.13627-2-krzk@kernel.org>
+ Sun, 15 Mar 2020 10:12:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1584267146;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=8fYeknRcTWmnQg8ZYRz0ZJkyEQG95MNGzU7Kd6SLL+M=;
+ b=ZEFV0OjbS8/G3s5wKNjn586CBurViMN+vYtN1cddOsyLLrHNvrBvfbrgWhx0whMWT4JaEp
+ /SOisYgd+udsoSjDrDtDd+4hyLTIT2qQ551LDRgMN8+Ps0FCyuQ5PtO4cEmMp3pLp7UOUt
+ SstaGIB3rmB/MTOKpJYfRMwebwQj9oA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-4-ojHza0DOPKSAkDn91LjYXg-1; Sun, 15 Mar 2020 06:12:21 -0400
+X-MC-Unique: ojHza0DOPKSAkDn91LjYXg-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6A3A91005512;
+ Sun, 15 Mar 2020 10:12:18 +0000 (UTC)
+Received: from localhost (ovpn-116-26.ams2.redhat.com [10.36.116.26])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1792A5C1B2;
+ Sun, 15 Mar 2020 10:12:16 +0000 (UTC)
+Date: Sun, 15 Mar 2020 10:12:15 +0000
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Wang Wenhu <wenhu.wang@vivo.com>
+Subject: Re: [PATCH 0/2] doc: zh_CN: facilitate translation for filesystems
+Message-ID: <20200315101215.GA325031@stefanha-x1.localdomain>
+References: <20200315092810.87008-1-wenhu.wang@vivo.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200219175007.13627-2-krzk@kernel.org>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- "Michael S. Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- netdev@vger.kernel.org, Paul Mackerras <paulus@samba.org>,
- linux-arch@vger.kernel.org, Dave Jiang <dave.jiang@intel.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Michael Ellerman <mpe@ellerman.id.au>, Helge Deller <deller@gmx.de>,
- linux-sh@vger.kernel.org, Alexey Brodkin <abrodkin@synopsys.com>,
- Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, Matt Turner <mattst88@gmail.com>,
- linux-snps-arc@lists.infradead.org, Nick Kossifidis <mickflemm@gmail.com>,
- Allen Hubbe <allenbh@gmail.com>, linux-alpha@vger.kernel.org,
- Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Thomas Gleixner <tglx@linutronix.de>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
- Richard Henderson <rth@twiddle.net>, linux-parisc@vger.kernel.org,
- Vineet Gupta <vgupta@synopsys.com>, linux-wireless@vger.kernel.org,
- linux-kernel@vger.kernel.org, Luis Chamberlain <mcgrof@kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, Jon Mason <jdmason@kudzu.us>,
- linux-ntb@googlegroups.com, Andrew Morton <akpm@linux-foundation.org>,
- linux-media@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- "David S. Miller" <davem@davemloft.net>
+In-Reply-To: <20200315092810.87008-1-wenhu.wang@vivo.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: Miklos Szeredi <miklos@szeredi.hu>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ virtualization@lists.linux-foundation.org, kernel@vivo.com,
+ Harry Wei <harryxiyou@gmail.com>, Eric Biggers <ebiggers@google.com>,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Alex Shi <alex.shi@linux.alibaba.com>,
+ "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>,
+ Vivek Goyal <vgoyal@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,67 +93,85 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3739069146261955507=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Feb 19, 2020 at 06:49:59PM +0100, Krzysztof Kozlowski wrote:
-> The ioreadX() and ioreadX_rep() helpers have inconsistent interface.  On
-> some architectures void *__iomem address argument is a pointer to const,
-> on some not.
-> 
-> Implementations of ioreadX() do not modify the memory under the address
-> so they can be converted to a "const" version for const-safety and
-> consistency among architectures.
-> 
-> Suggested-by: Geert Uytterhoeven <geert@linux-m68k.org>
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-> Reviewed-by: Arnd Bergmann <arnd@arndb.de>
+--===============3739069146261955507==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="SLDf9lqlvOQaIe6s"
+Content-Disposition: inline
 
-Hi Arnd,
+--SLDf9lqlvOQaIe6s
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This patch touches multipel file systems so no one is brave enough to
-pick it up. However you are mentioned as maintainer of generic asm
-headers so maybe you could apply it to arm-soc?
-
-Best regards,
-Krzysztof
-
-
-> 
+On Sun, Mar 15, 2020 at 02:27:58AM -0700, Wang Wenhu wrote:
+> This patch series set up the basic facility for the translation work
+> of the docs residing on filesystems into Chinese, indexing the filesystem=
+s
+> directory and adding one indexed translation into it. The virtiofs.rst
+> added is not only a translation itself but also an simple example that
+> future developers would take.
+>=20
+> The detailed diff info also shows the basic essential markups of
+> the toctree and reStructuredText, at least for the most simple occasions.
+> More translations of filesystems are on their way, and futher,
+> of more subsystems.
+>=20
 > ---
-> 
-> Changes since v1:
-> 1. Constify also ioreadX_rep() and mmio_insX(),
-> 2. Squash lib+alpha+powerpc+parisc+sh into one patch for bisectability,
-> 3. Add Geert's review.
-> 4. Add Arnd's review.
-> ---
->  arch/alpha/include/asm/core_apecs.h   |  6 +--
->  arch/alpha/include/asm/core_cia.h     |  6 +--
->  arch/alpha/include/asm/core_lca.h     |  6 +--
->  arch/alpha/include/asm/core_marvel.h  |  4 +-
->  arch/alpha/include/asm/core_mcpcia.h  |  6 +--
->  arch/alpha/include/asm/core_t2.h      |  2 +-
->  arch/alpha/include/asm/io.h           | 12 ++---
->  arch/alpha/include/asm/io_trivial.h   | 16 +++---
->  arch/alpha/include/asm/jensen.h       |  2 +-
->  arch/alpha/include/asm/machvec.h      |  6 +--
->  arch/alpha/kernel/core_marvel.c       |  2 +-
->  arch/alpha/kernel/io.c                | 12 ++---
->  arch/parisc/include/asm/io.h          |  4 +-
->  arch/parisc/lib/iomap.c               | 72 +++++++++++++--------------
->  arch/powerpc/kernel/iomap.c           | 28 +++++------
->  arch/sh/kernel/iomap.c                | 22 ++++----
->  include/asm-generic/iomap.h           | 28 +++++------
->  include/linux/io-64-nonatomic-hi-lo.h |  4 +-
->  include/linux/io-64-nonatomic-lo-hi.h |  4 +-
->  lib/iomap.c                           | 30 +++++------
->  20 files changed, 136 insertions(+), 136 deletions(-)
-> 
+> Wang Wenhu (2):
+>   doc: zh_CN: index files in filesystems subdirectory
+>   doc: zh_CN: add translation for virtiofs
+>=20
+>  Documentation/filesystems/index.rst           |  2 +
+>  Documentation/filesystems/virtiofs.rst        |  2 +
+>  .../translations/zh_CN/filesystems/index.rst  | 29 +++++++++
+>  .../zh_CN/filesystems/virtiofs.rst            | 62 +++++++++++++++++++
+>  Documentation/translations/zh_CN/index.rst    |  1 +
+>  5 files changed, 96 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/filesystems/index.rs=
+t
+>  create mode 100644 Documentation/translations/zh_CN/filesystems/virtiofs=
+.rst
+>=20
+> --=20
+> 2.17.1
+>=20
+
+I am not a Chinese speaker but thank you for translation the
+documentation!
+
+Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
+
+--SLDf9lqlvOQaIe6s
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl5t/38ACgkQnKSrs4Gr
+c8i7pggAxFGK9yalFhtI40r+K7LMZVxPGH3zc20Ho6hCuGGbk0pnrVxuDOyAsgTo
+w809N9Ypju11BY4lh8vzpA8wmi+mrjCI1I+/Md87gv+vIuur17n6v895rHas9rkh
+VN6uRiHTxQR/zaDSaUM3yrR/KDCqHqe26T77B8//ope+JTqpWRNrhNccDtz5x/Kt
+BVWkyKGmHwKK2LZm3OkHHYXhZx519RS6gBrxbzSySnBbwPbBWcY75et0o8c3FSJP
+qh/pJ8keEtMEKVj/EGTZ2B9MN5d4nSi1yhxVizGHWkeDJ/yg6/l2kMKQ7MzAxPIP
+iM5LDusm9auID4W1sU3363No0ZF+4Q==
+=Sx9O
+-----END PGP SIGNATURE-----
+
+--SLDf9lqlvOQaIe6s--
+
+
+--===============3739069146261955507==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============3739069146261955507==--
+
