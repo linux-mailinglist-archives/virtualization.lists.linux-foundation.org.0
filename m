@@ -2,86 +2,87 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5515186F01
-	for <lists.virtualization@lfdr.de>; Mon, 16 Mar 2020 16:48:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADB63186F18
+	for <lists.virtualization@lfdr.de>; Mon, 16 Mar 2020 16:50:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3295088445;
-	Mon, 16 Mar 2020 15:48:03 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 538E088259;
+	Mon, 16 Mar 2020 15:50:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TdYq88+gSwB2; Mon, 16 Mar 2020 15:48:02 +0000 (UTC)
+	with ESMTP id 50OBqFo+iMYD; Mon, 16 Mar 2020 15:50:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id EBC1388422;
-	Mon, 16 Mar 2020 15:48:01 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3151588447;
+	Mon, 16 Mar 2020 15:50:02 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D2B55C013E;
-	Mon, 16 Mar 2020 15:48:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1A061C013E;
+	Mon, 16 Mar 2020 15:50:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0B1EBC013E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8AFCBC013E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Mar 2020 15:48:00 +0000 (UTC)
+ Mon, 16 Mar 2020 15:49:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id EE01887285
+ by silver.osuosl.org (Postfix) with ESMTP id 794AD20472
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Mar 2020 15:47:59 +0000 (UTC)
+ Mon, 16 Mar 2020 15:49:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id l3EdvYruui4r
+ with ESMTP id tVuTRDi0Oj-4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Mar 2020 15:47:59 +0000 (UTC)
+ Mon, 16 Mar 2020 15:49:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
- [209.85.221.68])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3EE1E87257
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+ [209.85.128.65])
+ by silver.osuosl.org (Postfix) with ESMTPS id 6297F203D3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Mar 2020 15:47:59 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id f11so5072267wrp.8
+ Mon, 16 Mar 2020 15:49:58 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id g62so18661182wme.1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Mar 2020 08:47:59 -0700 (PDT)
+ Mon, 16 Mar 2020 08:49:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=J+yCX5u1YDN6eK0N92vhv3vwdN0qX/QOnRznwSw/NEU=;
- b=wqEM+8T/4h/xHj/JCPK+rRTCXxcVR4eDf7FRmVy6tL77x3zHH/AiX26KSVcpaAUPYM
- H2E3TxgVcsUZps0ZwbKrOGHGA1w+q7Tk9JZyHOG4r0miXlsNK9DAr6ASz77gWGMYoThi
- aqIcdck8zrW9cmOsVNIVfmvriv2jyBKV2gCHKWxDzNBhDSaeuNibLyNo1rN/KPESbvGx
- bYFXAMI7K3kXwTe2xy6IA/A4hJbQRhpt2ZZKRbDn2/H/Lo/rmmzCexG9w/kcno6ZiI77
- ppej5XGet0RlmPFvfqjzVDbUXtrDAc80RMkysk6JhzvWsm3/Qn/rhmBAkBM9JFQCl/h+
- nSCQ==
+ bh=cOIEYtWNEzlYYthtD0spEjkukXqfmxlfoFYyEio2yD4=;
+ b=bLP9tzXHgsnZOO+gQY30NTwMxHujM+PxDf2Pr2BsRs9UN3PNl67882FriKQhyCzQBr
+ TQvoYRDzZIEuZjT7HWvj9ryRh0wafj4b7mSPg86iUfXDu3MNCvfAIbQ4I6SS/cLilfBh
+ zMVdnQIcxINkndSo9MyT7JC/g4ws4131+16aS9y6jaXhUaO7tb8k1sGg+cmElZUSjHvf
+ nKD3AWMMSBYWgumDkjJNP77sHEVHIJpLXozOmkpGlN6fzZlvjPS6WDKFGpj2t6vQjwFm
+ 6iyRvLJuu8HH4z1PQSOJsYFBsODpIu2hXolpCRed+/OXwkJGe0xQdQ4Mvpx9JFxwkUU9
+ wcFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=J+yCX5u1YDN6eK0N92vhv3vwdN0qX/QOnRznwSw/NEU=;
- b=Ryfk/IyBiWVLPaReGBheRybXAPEAwJoHzz9Y1+nGhPGH+JTJdmUopFs59NNRH8sJE6
- 5Fg+EnV5paqC2Kx8CT3EdkRy24ItQbtQgmguDjWBJfwyr1YV9xRH0ue0n4HJzoxHiK03
- yMUoeDAMMOFh+XvAnVb/CHUglN//qI3YZ6uhotiDUE4hr0ApnFCwBzgZ/KYXviKoPfXc
- 5dWQD/XpVFVei9eTrFowVOl8mqBvLDkUBt8Mk6hMe2jMsyuHZSiOXUtFf6xQ5RiLKcve
- IBcUIyiYP9H4wQhdDfOpGfir5Q2MYm5oyjuNIDZV3pSKdmO2893bC2YeIzD4nnQonPwy
- Z/Bg==
-X-Gm-Message-State: ANhLgQ1hKyb9f2s568FsFV25bSqwLFnLQ7Hxo8m3W7Ck6KvmgrfSEpcT
- mnxhtpn2FKD3kqROLDbQcjiioA==
-X-Google-Smtp-Source: ADFU+vu7BwV9+IRhzha1mvLv+qxjTZOswhDVu8mc2cK8kbLXKQAY/jWE86j0EqeFBPhJwYU3dCMzFg==
-X-Received: by 2002:adf:f510:: with SMTP id q16mr6841064wro.43.1584373677809; 
- Mon, 16 Mar 2020 08:47:57 -0700 (PDT)
+ bh=cOIEYtWNEzlYYthtD0spEjkukXqfmxlfoFYyEio2yD4=;
+ b=mA7UE2al0WTK3b9uWDlIAnFiya15hAg9gu8comYuJTh2bPGrtqV1nPPzqXo5WMYjgN
+ Ke/50AM+6INa+QHRJPS+9hb0ozuyo/W481Hu+0h5gfZo7holgz+eD0MHbeg5xJrojWkP
+ ZnEoFxYHUHbB4NUIV13Sa3j3Oo3aHnZ6E3ZqpyVVK5yAY5zBZsMiZy43+5pWyO4Gnw3P
+ RnqacRKgkG5cnVDyjC4PmuGM1fhqaYBYUQ5U4kR59R9u1iRX/lXHe7mkpsn21qfkSfy5
+ syYFxxDC4/flXlDt8+Odh5aHc1xIrT4U4edFxAIEBYUhaftd8F8Ket/u4JQcttekVi+m
+ liIg==
+X-Gm-Message-State: ANhLgQ085VlB8nrwLKAKk94ACYbCZmuYiyFkmfe1r9YwfRXDr++eirH7
+ WX+TwZWb4O+h7k4+DDf8IPY9LQ==
+X-Google-Smtp-Source: ADFU+vv4N7xQNm1wFNrIZmN2Kg+Ua4DIBj8t6C6sgaFA18dYvUkMu368tWpVIaA4w1ORNN6r5eo5hg==
+X-Received: by 2002:a1c:7c05:: with SMTP id x5mr28123545wmc.67.1584373796917; 
+ Mon, 16 Mar 2020 08:49:56 -0700 (PDT)
 Received: from myrica ([2001:171b:226b:54a0:116c:c27a:3e7f:5eaf])
- by smtp.gmail.com with ESMTPSA id l7sm488506wrw.33.2020.03.16.08.47.56
+ by smtp.gmail.com with ESMTPSA id 9sm127395wmx.32.2020.03.16.08.49.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2020 08:47:57 -0700 (PDT)
-Date: Mon, 16 Mar 2020 16:47:49 +0100
+ Mon, 16 Mar 2020 08:49:56 -0700 (PDT)
+Date: Mon, 16 Mar 2020 16:49:48 +0100
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH 08/15] iommu: Introduce accessors for iommu private data
-Message-ID: <20200316154749.GI304669@myrica>
+Subject: Re: [PATCH 09/15] iommu/arm-smmu-v3: Use accessor functions for
+ iommu private data
+Message-ID: <20200316154948.GJ304669@myrica>
 References: <20200310091229.29830-1-joro@8bytes.org>
- <20200310091229.29830-9-joro@8bytes.org>
+ <20200310091229.29830-10-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200310091229.29830-9-joro@8bytes.org>
+In-Reply-To: <20200310091229.29830-10-joro@8bytes.org>
 Cc: Rob Clark <robdclark@gmail.com>,
  Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>, Will Deacon <will@kernel.org>,
  linux-arm-msm@vger.kernel.org, Sudeep Holla <sudeep.holla@arm.com>,
@@ -108,43 +109,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Mar 10, 2020 at 10:12:22AM +0100, Joerg Roedel wrote:
+On Tue, Mar 10, 2020 at 10:12:23AM +0100, Joerg Roedel wrote:
 > From: Joerg Roedel <jroedel@suse.de>
 > 
-> Add dev_iommu_priv_get/set() functions to access per-device iommu
-> private data. This makes it easier to move the pointer to a different
-> location.
+> Make use of dev_iommu_priv_set/get() functions in the code.
 > 
-> Tested-by: Will Deacon <will@kernel.org> # arm-smmu
+> Tested-by: Hanjun Guo <guohanjun@huawei.com>
 > Signed-off-by: Joerg Roedel <jroedel@suse.de>
 
 Reviewed-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
 
 > ---
->  include/linux/iommu.h | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+>  drivers/iommu/arm-smmu-v3.c | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 > 
-> diff --git a/include/linux/iommu.h b/include/linux/iommu.h
-> index f5edc21a644d..056900e75758 100644
-> --- a/include/linux/iommu.h
-> +++ b/include/linux/iommu.h
-> @@ -627,6 +627,16 @@ static inline void dev_iommu_fwspec_set(struct device *dev,
->  	dev->iommu->fwspec = fwspec;
+> diff --git a/drivers/iommu/arm-smmu-v3.c b/drivers/iommu/arm-smmu-v3.c
+> index aa3ac2a03807..2b68498dfb66 100644
+> --- a/drivers/iommu/arm-smmu-v3.c
+> +++ b/drivers/iommu/arm-smmu-v3.c
+> @@ -2659,7 +2659,7 @@ static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
+>  	if (!fwspec)
+>  		return -ENOENT;
+>  
+> -	master = fwspec->iommu_priv;
+> +	master = dev_iommu_priv_get(dev);
+>  	smmu = master->smmu;
+>  
+>  	arm_smmu_detach_dev(master);
+> @@ -2795,7 +2795,7 @@ static int arm_smmu_add_device(struct device *dev)
+>  	if (!fwspec || fwspec->ops != &arm_smmu_ops)
+>  		return -ENODEV;
+>  
+> -	if (WARN_ON_ONCE(fwspec->iommu_priv))
+> +	if (WARN_ON_ONCE(dev_iommu_priv_get(dev)))
+>  		return -EBUSY;
+>  
+>  	smmu = arm_smmu_get_by_fwnode(fwspec->iommu_fwnode);
+> @@ -2810,7 +2810,7 @@ static int arm_smmu_add_device(struct device *dev)
+>  	master->smmu = smmu;
+>  	master->sids = fwspec->ids;
+>  	master->num_sids = fwspec->num_ids;
+> -	fwspec->iommu_priv = master;
+> +	dev_iommu_priv_set(dev, master);
+>  
+>  	/* Check the SIDs are in range of the SMMU and our stream table */
+>  	for (i = 0; i < master->num_sids; i++) {
+> @@ -2852,7 +2852,7 @@ static int arm_smmu_add_device(struct device *dev)
+>  	iommu_device_unlink(&smmu->iommu, dev);
+>  err_free_master:
+>  	kfree(master);
+> -	fwspec->iommu_priv = NULL;
+> +	dev_iommu_priv_set(dev, NULL);
+>  	return ret;
 >  }
 >  
-> +static inline void *dev_iommu_priv_get(struct device *dev)
-> +{
-> +	return dev->iommu->fwspec->iommu_priv;
-> +}
-> +
-> +static inline void dev_iommu_priv_set(struct device *dev, void *priv)
-> +{
-> +	dev->iommu->fwspec->iommu_priv = priv;
-> +}
-> +
->  int iommu_probe_device(struct device *dev);
->  void iommu_release_device(struct device *dev);
+> @@ -2865,7 +2865,7 @@ static void arm_smmu_remove_device(struct device *dev)
+>  	if (!fwspec || fwspec->ops != &arm_smmu_ops)
+>  		return;
 >  
+> -	master = fwspec->iommu_priv;
+> +	master = dev_iommu_priv_get(dev);
+>  	smmu = master->smmu;
+>  	arm_smmu_detach_dev(master);
+>  	iommu_group_remove_device(dev);
 > -- 
 > 2.17.1
 > 
