@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 877F618A4A5
-	for <lists.virtualization@lfdr.de>; Wed, 18 Mar 2020 21:55:41 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 41A1218A4AE
+	for <lists.virtualization@lfdr.de>; Wed, 18 Mar 2020 21:56:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 3CFD225E8F;
-	Wed, 18 Mar 2020 20:55:40 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id AFA3287487;
+	Wed, 18 Mar 2020 20:56:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fBE2S8ghzh11; Wed, 18 Mar 2020 20:55:39 +0000 (UTC)
+	with ESMTP id o-FFvBarklgr; Wed, 18 Mar 2020 20:56:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 317A125B01;
-	Wed, 18 Mar 2020 20:55:39 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D7967875B4;
+	Wed, 18 Mar 2020 20:56:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C55FC013E;
-	Wed, 18 Mar 2020 20:55:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C05C6C013E;
+	Wed, 18 Mar 2020 20:56:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 148DDC013E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EE082C013E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:55:38 +0000 (UTC)
+ Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 0136987D11
+ by hemlock.osuosl.org (Postfix) with ESMTP id DC64587D11
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:55:38 +0000 (UTC)
+ Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3Vv48aWvvQCH
+ with ESMTP id YOQWQ3zgk7Rw
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:55:37 +0000 (UTC)
+ Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 8CBCA8789B
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6271F8789B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:55:37 +0000 (UTC)
+ Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7D8C1208FE;
- Wed, 18 Mar 2020 20:55:36 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 561D420B1F;
+ Wed, 18 Mar 2020 20:56:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584564937;
- bh=/oFbRhzX1PU/IalooWt4ApsEVuoQyc21nlRUzz8UngA=;
+ s=default; t=1584564979;
+ bh=42J0861Sc9p/xPMPpZePXMkomnaCTvjQRTecYhjzpUA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=o6lnyre0w2UUUrxIaOltqrdzpQpupj1FoTmsOdx8vMhZrqbAfDTMpxH9Taf9iOWod
- lMgw6ScySFbGLwBylL29z3dybKz1AGF/DfZIqRDFJ1ns8q8uL6RQAwes5KzHuaz8KF
- BvCRC5irEPjf30U9pZ7NorCjIVF+a34HiEcDm1OA=
+ b=ycejR//NFAk/yqrhHfNbUyjL5gaXotJAFo45Hsss3odDq4bz3aO5KkpUa+Cx3DkLf
+ gMSsTCPgpFNE8wtBO7E0tb5N6mVbnoKxQ8ZkxtVB7cY3L68eiMhoF0zfapLYlrO+Y5
+ HzNcogGlNekaKFnZtaVaIEyUgdO0c8K3qgSypVOo=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 23/37] virtio-blk: fix hw_queue stopped on
+Subject: [PATCH AUTOSEL 4.14 20/28] virtio-blk: fix hw_queue stopped on
  arbitrary error
-Date: Wed, 18 Mar 2020 16:54:55 -0400
-Message-Id: <20200318205509.17053-23-sashal@kernel.org>
+Date: Wed, 18 Mar 2020 16:55:47 -0400
+Message-Id: <20200318205555.17447-20-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200318205509.17053-1-sashal@kernel.org>
-References: <20200318205509.17053-1-sashal@kernel.org>
+In-Reply-To: <20200318205555.17447-1-sashal@kernel.org>
+References: <20200318205555.17447-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -112,7 +112,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index dd64f586679e1..728c9a9609f0c 100644
+index 8767401f75e04..19d226ff15ef8 100644
 --- a/drivers/block/virtio_blk.c
 +++ b/drivers/block/virtio_blk.c
 @@ -271,10 +271,12 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
@@ -129,7 +129,7 @@ index dd64f586679e1..728c9a9609f0c 100644
 -		/* Out of mem doesn't actually happen, since we fall back
 -		 * to direct descriptors */
  		if (err == -ENOMEM || err == -ENOSPC)
- 			return BLK_STS_DEV_RESOURCE;
+ 			return BLK_STS_RESOURCE;
  		return BLK_STS_IOERR;
 -- 
 2.20.1
