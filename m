@@ -2,72 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A08E18A4B2
-	for <lists.virtualization@lfdr.de>; Wed, 18 Mar 2020 21:56:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76EAB18A6B6
+	for <lists.virtualization@lfdr.de>; Wed, 18 Mar 2020 22:10:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 406268828C;
-	Wed, 18 Mar 2020 20:56:45 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id BB88A87CB8;
+	Wed, 18 Mar 2020 21:10:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hxVUBCRlPwPf; Wed, 18 Mar 2020 20:56:44 +0000 (UTC)
+	with ESMTP id m9kcQl5Tu6Pg; Wed, 18 Mar 2020 21:10:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BE43287E2E;
-	Wed, 18 Mar 2020 20:56:44 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2041687C70;
+	Wed, 18 Mar 2020 21:10:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9AF65C18DA;
-	Wed, 18 Mar 2020 20:56:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 05576C013E;
+	Wed, 18 Mar 2020 21:10:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DE900C013E
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DE567C013E;
+ Wed, 18 Mar 2020 21:10:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id CC22123120
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
+ by whitealder.osuosl.org (Postfix) with ESMTP id CCED987745;
+ Wed, 18 Mar 2020 21:10:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YH-URqKEmxF9
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
+ with ESMTP id 2ccd+XtdQDWg; Wed, 18 Mar 2020 21:10:04 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by silver.osuosl.org (Postfix) with ESMTPS id 0DD7F22797
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 674F1874CD;
+ Wed, 18 Mar 2020 21:10:04 +0000 (UTC)
+Received: from localhost (mobile-166-175-186-165.mycingular.net
+ [166.175.186.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F1BD421707;
- Wed, 18 Mar 2020 20:56:40 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DDF2620409;
+ Wed, 18 Mar 2020 21:10:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584565001;
- bh=oY0SUiEeXSxBkyGUXp0/nvA1R5EflvNU30qHwxT+EX0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bKaW29Cl6wLJK+RXjhAqvvpsYsQNWM4L6DraYK9u7vR7/RU3rAm9IOLXeX35zx9li
- M3vqIy9mIpE2oFw+2xHvWhE6Lp9r74Ub8Ape0YI/pvQYnN5AAGuMtv4Yz0kKHxssyf
- sdN/pF7OHoYXOWLkUAeLecLCdfbe8OE3Gqkg1ci4=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 10/15] virtio-blk: fix hw_queue stopped on
- arbitrary error
-Date: Wed, 18 Mar 2020 16:56:24 -0400
-Message-Id: <20200318205629.17750-10-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200318205629.17750-1-sashal@kernel.org>
-References: <20200318205629.17750-1-sashal@kernel.org>
+ s=default; t=1584565804;
+ bh=3sXdSdhyiwUJD9GULDXvtPZES5Ttbh4g1SxSYnQUp9A=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=H4yA8RvkRdbsQIqVXba5XF2I8yPR3rsPpuHgZBXlBgWBwwRh0F7BdWeW3S2geRVWy
+ VasoGsmaYUDB0U8J2upyi7m67M7+OEWQc2ye0M/6HQ/6Xj3490Rut7wXTRxbL1crdO
+ 0yXxmaCUKGAkMvdzxslzJT8+BefbhTYtxhlqlmPk=
+Date: Wed, 18 Mar 2020 16:10:02 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Jean-Philippe Brucker <jean-philippe@linaro.org>
+Subject: Re: [PATCH v2 2/3] PCI: Add DMA configuration for virtual platforms
+Message-ID: <20200318211002.GA237687@google.com>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Cc: Jens Axboe <axboe@kernel.dk>, Sasha Levin <sashal@kernel.org>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org, Halil Pasic <pasic@linux.ibm.com>,
- linux-block@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20200228172537.377327-3-jean-philippe@linaro.org>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+Cc: mst@redhat.com, linux-pci@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, eric.auger@redhat.com,
+ iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
+ jacob.jun.pan@intel.com, robin.murphy@arm.com, joro@8bytes.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,56 +76,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Halil Pasic <pasic@linux.ibm.com>
+On Fri, Feb 28, 2020 at 06:25:37PM +0100, Jean-Philippe Brucker wrote:
+> Hardware platforms usually describe the IOMMU topology using either
+> device-tree pointers or vendor-specific ACPI tables.  For virtual
+> platforms that don't provide a device-tree, the virtio-iommu device
+> contains a description of the endpoints it manages.  That information
+> allows us to probe endpoints after the IOMMU is probed (possibly as late
+> as userspace modprobe), provided it is discovered early enough.
+> 
+> Add a hook to pci_dma_configure(), which returns -EPROBE_DEFER if the
+> endpoint is managed by a vIOMMU that will be loaded later, or 0 in any
+> other case to avoid disturbing the normal DMA configuration methods.
+> When CONFIG_VIRTIO_IOMMU_TOPOLOGY isn't selected, the call to
+> virt_dma_configure() is compiled out.
+> 
+> As long as the information is consistent, platforms can provide both a
+> device-tree and a built-in topology, and the IOMMU infrastructure is
+> able to deal with multiple DMA configuration methods.
+> 
+> Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
 
-[ Upstream commit f5f6b95c72f7f8bb46eace8c5306c752d0133daa ]
+Acked-by: Bjorn Helgaas <bhelgaas@google.com>
 
-Since nobody else is going to restart our hw_queue for us, the
-blk_mq_start_stopped_hw_queues() is in virtblk_done() is not sufficient
-necessarily sufficient to ensure that the queue will get started again.
-In case of global resource outage (-ENOMEM because mapping failure,
-because of swiotlb full) our virtqueue may be empty and we can get
-stuck with a stopped hw_queue.
-
-Let us not stop the queue on arbitrary errors, but only on -EONSPC which
-indicates a full virtqueue, where the hw_queue is guaranteed to get
-started by virtblk_done() before when it makes sense to carry on
-submitting requests. Let us also remove a stale comment.
-
-Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-Cc: Jens Axboe <axboe@kernel.dk>
-Fixes: f7728002c1c7 ("virtio_ring: fix return code on DMA mapping fails")
-Link: https://lore.kernel.org/r/20200213123728.61216-2-pasic@linux.ibm.com
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/block/virtio_blk.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 44ef1d66caa68..f287eec36b282 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -215,10 +215,12 @@ static int virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
- 	err = __virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
- 	if (err) {
- 		virtqueue_kick(vblk->vqs[qid].vq);
--		blk_mq_stop_hw_queue(hctx);
-+		/* Don't stop the queue if -ENOMEM: we may have failed to
-+		 * bounce the buffer due to global resource outage.
-+		 */
-+		if (err == -ENOSPC)
-+			blk_mq_stop_hw_queue(hctx);
- 		spin_unlock_irqrestore(&vblk->vqs[qid].lock, flags);
--		/* Out of mem doesn't actually happen, since we fall back
--		 * to direct descriptors */
- 		if (err == -ENOMEM || err == -ENOSPC)
- 			return BLK_MQ_RQ_QUEUE_BUSY;
- 		return BLK_MQ_RQ_QUEUE_ERROR;
--- 
-2.20.1
-
+> ---
+>  drivers/pci/pci-driver.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
+> index 0454ca0e4e3f..69303a814f21 100644
+> --- a/drivers/pci/pci-driver.c
+> +++ b/drivers/pci/pci-driver.c
+> @@ -18,6 +18,7 @@
+>  #include <linux/kexec.h>
+>  #include <linux/of_device.h>
+>  #include <linux/acpi.h>
+> +#include <linux/virt_iommu.h>
+>  #include "pci.h"
+>  #include "pcie/portdrv.h"
+>  
+> @@ -1602,6 +1603,10 @@ static int pci_dma_configure(struct device *dev)
+>  	struct device *bridge;
+>  	int ret = 0;
+>  
+> +	ret = virt_dma_configure(dev);
+> +	if (ret)
+> +		return ret;
+> +
+>  	bridge = pci_get_host_bridge_device(to_pci_dev(dev));
+>  
+>  	if (IS_ENABLED(CONFIG_OF) && bridge->parent &&
+> -- 
+> 2.25.0
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
