@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41A1218A4AE
-	for <lists.virtualization@lfdr.de>; Wed, 18 Mar 2020 21:56:24 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id AFA3287487;
-	Wed, 18 Mar 2020 20:56:22 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id o-FFvBarklgr; Wed, 18 Mar 2020 20:56:21 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D7967875B4;
-	Wed, 18 Mar 2020 20:56:21 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C05C6C013E;
-	Wed, 18 Mar 2020 20:56:21 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EE082C013E
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A08E18A4B2
+	for <lists.virtualization@lfdr.de>; Wed, 18 Mar 2020 21:56:47 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id DC64587D11
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 406268828C;
+	Wed, 18 Mar 2020 20:56:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YOQWQ3zgk7Rw
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id hxVUBCRlPwPf; Wed, 18 Mar 2020 20:56:44 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id BE43287E2E;
+	Wed, 18 Mar 2020 20:56:44 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9AF65C18DA;
+	Wed, 18 Mar 2020 20:56:44 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DE900C013E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
+ Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id CC22123120
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YH-URqKEmxF9
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 6271F8789B
+ by silver.osuosl.org (Postfix) with ESMTPS id 0DD7F22797
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Mar 2020 20:56:19 +0000 (UTC)
+ Wed, 18 Mar 2020 20:56:42 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 561D420B1F;
- Wed, 18 Mar 2020 20:56:18 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id F1BD421707;
+ Wed, 18 Mar 2020 20:56:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584564979;
- bh=42J0861Sc9p/xPMPpZePXMkomnaCTvjQRTecYhjzpUA=;
+ s=default; t=1584565001;
+ bh=oY0SUiEeXSxBkyGUXp0/nvA1R5EflvNU30qHwxT+EX0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ycejR//NFAk/yqrhHfNbUyjL5gaXotJAFo45Hsss3odDq4bz3aO5KkpUa+Cx3DkLf
- gMSsTCPgpFNE8wtBO7E0tb5N6mVbnoKxQ8ZkxtVB7cY3L68eiMhoF0zfapLYlrO+Y5
- HzNcogGlNekaKFnZtaVaIEyUgdO0c8K3qgSypVOo=
+ b=bKaW29Cl6wLJK+RXjhAqvvpsYsQNWM4L6DraYK9u7vR7/RU3rAm9IOLXeX35zx9li
+ M3vqIy9mIpE2oFw+2xHvWhE6Lp9r74Ub8Ape0YI/pvQYnN5AAGuMtv4Yz0kKHxssyf
+ sdN/pF7OHoYXOWLkUAeLecLCdfbe8OE3Gqkg1ci4=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.14 20/28] virtio-blk: fix hw_queue stopped on
+Subject: [PATCH AUTOSEL 4.9 10/15] virtio-blk: fix hw_queue stopped on
  arbitrary error
-Date: Wed, 18 Mar 2020 16:55:47 -0400
-Message-Id: <20200318205555.17447-20-sashal@kernel.org>
+Date: Wed, 18 Mar 2020 16:56:24 -0400
+Message-Id: <20200318205629.17750-10-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200318205555.17447-1-sashal@kernel.org>
-References: <20200318205555.17447-1-sashal@kernel.org>
+In-Reply-To: <20200318205629.17750-1-sashal@kernel.org>
+References: <20200318205629.17750-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -112,11 +112,11 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 8767401f75e04..19d226ff15ef8 100644
+index 44ef1d66caa68..f287eec36b282 100644
 --- a/drivers/block/virtio_blk.c
 +++ b/drivers/block/virtio_blk.c
-@@ -271,10 +271,12 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
- 		err = virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
+@@ -215,10 +215,12 @@ static int virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 	err = __virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
  	if (err) {
  		virtqueue_kick(vblk->vqs[qid].vq);
 -		blk_mq_stop_hw_queue(hctx);
@@ -129,8 +129,8 @@ index 8767401f75e04..19d226ff15ef8 100644
 -		/* Out of mem doesn't actually happen, since we fall back
 -		 * to direct descriptors */
  		if (err == -ENOMEM || err == -ENOSPC)
- 			return BLK_STS_RESOURCE;
- 		return BLK_STS_IOERR;
+ 			return BLK_MQ_RQ_QUEUE_BUSY;
+ 		return BLK_MQ_RQ_QUEUE_ERROR;
 -- 
 2.20.1
 
