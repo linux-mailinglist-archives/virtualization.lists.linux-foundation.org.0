@@ -2,49 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E18D18AF13
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E979518AF0A
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0457320522;
-	Thu, 19 Mar 2020 09:14:32 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 6B9F720519;
+	Thu, 19 Mar 2020 09:14:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5UuWkXGuembF; Thu, 19 Mar 2020 09:14:29 +0000 (UTC)
+	with ESMTP id dAo0N355STsm; Thu, 19 Mar 2020 09:14:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 53FA62051D;
-	Thu, 19 Mar 2020 09:14:27 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id E0C032051A;
+	Thu, 19 Mar 2020 09:14:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 320B3C07FF;
-	Thu, 19 Mar 2020 09:14:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D62E6C07FF;
+	Thu, 19 Mar 2020 09:14:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DB27CC07FF
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 981A2C07FF
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id D81B287CB2
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8691887CB8
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id n68SI-GCHy3d
+ with ESMTP id CYffaFjSRu+k
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:22 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 4313587CB1
+ by hemlock.osuosl.org (Postfix) with ESMTPS id B3BCC87CB2
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:22 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 6C7E31E6; Thu, 19 Mar 2020 10:14:16 +0100 (CET)
+ id C107F1C7; Thu, 19 Mar 2020 10:14:16 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 04/70] x86/traps: Move some definitions to <asm/trap_defs.h>
-Date: Thu, 19 Mar 2020 10:13:01 +0100
-Message-Id: <20200319091407.1481-5-joro@8bytes.org>
+Subject: [PATCH 05/70] x86/insn: Make inat-tables.c suitable for
+ pre-decompression code
+Date: Thu, 19 Mar 2020 10:13:02 +0100
+Message-Id: <20200319091407.1481-6-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -75,133 +76,155 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Move the definition of x86 trap vector numbers and the page-fault
-error code bits to the new header file asm/trap_defs.h. This makes it
-easier to include them into pre-decompression boot code. No functional
-changes.
+The inat-tables.c file has some arrays in it that contain pointers to
+other arrays. These pointers need to be relocated when the kernel
+image is moved to a different location.
+
+The pre-decompression boot-code has no support for applying ELF
+relocations, so initialize these arrays at runtime in the
+pre-decompression code to make sure all pointers are correctly
+initialized.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/trap_defs.h | 49 ++++++++++++++++++++++++++++++++
- arch/x86/include/asm/traps.h     | 44 +---------------------------
- 2 files changed, 50 insertions(+), 43 deletions(-)
- create mode 100644 arch/x86/include/asm/trap_defs.h
+ arch/x86/tools/gen-insn-attr-x86.awk       | 50 +++++++++++++++++++++-
+ tools/arch/x86/tools/gen-insn-attr-x86.awk | 50 +++++++++++++++++++++-
+ 2 files changed, 98 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/include/asm/trap_defs.h b/arch/x86/include/asm/trap_defs.h
-new file mode 100644
-index 000000000000..488f82ac36da
---- /dev/null
-+++ b/arch/x86/include/asm/trap_defs.h
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _ASM_X86_TRAP_DEFS_H
-+#define _ASM_X86_TRAP_DEFS_H
+diff --git a/arch/x86/tools/gen-insn-attr-x86.awk b/arch/x86/tools/gen-insn-attr-x86.awk
+index a42015b305f4..af38469afd14 100644
+--- a/arch/x86/tools/gen-insn-attr-x86.awk
++++ b/arch/x86/tools/gen-insn-attr-x86.awk
+@@ -362,6 +362,9 @@ function convert_operands(count,opnd,       i,j,imm,mod)
+ END {
+ 	if (awkchecked != "")
+ 		exit 1
 +
-+/* Interrupts/Exceptions */
-+enum {
-+	X86_TRAP_DE = 0,	/*  0, Divide-by-zero */
-+	X86_TRAP_DB,		/*  1, Debug */
-+	X86_TRAP_NMI,		/*  2, Non-maskable Interrupt */
-+	X86_TRAP_BP,		/*  3, Breakpoint */
-+	X86_TRAP_OF,		/*  4, Overflow */
-+	X86_TRAP_BR,		/*  5, Bound Range Exceeded */
-+	X86_TRAP_UD,		/*  6, Invalid Opcode */
-+	X86_TRAP_NM,		/*  7, Device Not Available */
-+	X86_TRAP_DF,		/*  8, Double Fault */
-+	X86_TRAP_OLD_MF,	/*  9, Coprocessor Segment Overrun */
-+	X86_TRAP_TS,		/* 10, Invalid TSS */
-+	X86_TRAP_NP,		/* 11, Segment Not Present */
-+	X86_TRAP_SS,		/* 12, Stack Segment Fault */
-+	X86_TRAP_GP,		/* 13, General Protection Fault */
-+	X86_TRAP_PF,		/* 14, Page Fault */
-+	X86_TRAP_SPURIOUS,	/* 15, Spurious Interrupt */
-+	X86_TRAP_MF,		/* 16, x87 Floating-Point Exception */
-+	X86_TRAP_AC,		/* 17, Alignment Check */
-+	X86_TRAP_MC,		/* 18, Machine Check */
-+	X86_TRAP_XF,		/* 19, SIMD Floating-Point Exception */
-+	X86_TRAP_IRET = 32,	/* 32, IRET Exception */
-+};
++	print "#ifndef __BOOT_COMPRESSED\n"
 +
-+/*
-+ * Page fault error code bits:
-+ *
-+ *   bit 0 ==	 0: no page found	1: protection fault
-+ *   bit 1 ==	 0: read access		1: write access
-+ *   bit 2 ==	 0: kernel-mode access	1: user-mode access
-+ *   bit 3 ==				1: use of reserved bit detected
-+ *   bit 4 ==				1: fault was an instruction fetch
-+ *   bit 5 ==				1: protection keys block access
-+ */
-+enum x86_pf_error_code {
-+	X86_PF_PROT	=		1 << 0,
-+	X86_PF_WRITE	=		1 << 1,
-+	X86_PF_USER	=		1 << 2,
-+	X86_PF_RSVD	=		1 << 3,
-+	X86_PF_INSTR	=		1 << 4,
-+	X86_PF_PK	=		1 << 5,
-+};
+ 	# print escape opcode map's array
+ 	print "/* Escape opcode map array */"
+ 	print "const insn_attr_t * const inat_escape_tables[INAT_ESC_MAX + 1]" \
+@@ -388,6 +391,51 @@ END {
+ 		for (j = 0; j < max_lprefix; j++)
+ 			if (atable[i,j])
+ 				print "	["i"]["j"] = "atable[i,j]","
+-	print "};"
++	print "};\n"
 +
-+#endif /* _ASM_X86_TRAP_DEFS_H */
-diff --git a/arch/x86/include/asm/traps.h b/arch/x86/include/asm/traps.h
-index ffa0dc8a535e..2aa786484bb1 100644
---- a/arch/x86/include/asm/traps.h
-+++ b/arch/x86/include/asm/traps.h
-@@ -5,6 +5,7 @@
- #include <linux/context_tracking_state.h>
- #include <linux/kprobes.h>
++	print "#else /* !__BOOT_COMPRESSED */\n"
++
++	print "/* Escape opcode map array */"
++	print "static const insn_attr_t *inat_escape_tables[INAT_ESC_MAX + 1]" \
++	      "[INAT_LSTPFX_MAX + 1];"
++	print ""
++
++	print "/* Group opcode map array */"
++	print "static const insn_attr_t *inat_group_tables[INAT_GRP_MAX + 1]"\
++	      "[INAT_LSTPFX_MAX + 1];"
++	print ""
++
++	print "/* AVX opcode map array */"
++	print "static const insn_attr_t *inat_avx_tables[X86_VEX_M_MAX + 1]"\
++	      "[INAT_LSTPFX_MAX + 1];"
++	print ""
++
++	print "static void inat_init_tables(void)"
++	print "{"
++
++	# print escape opcode map's array
++	print "\t/* Print Escape opcode map array */"
++	for (i = 0; i < geid; i++)
++		for (j = 0; j < max_lprefix; j++)
++			if (etable[i,j])
++				print "\tinat_escape_tables["i"]["j"] = "etable[i,j]";"
++	print ""
++
++	# print group opcode map's array
++	print "\t/* Print Group opcode map array */"
++	for (i = 0; i < ggid; i++)
++		for (j = 0; j < max_lprefix; j++)
++			if (gtable[i,j])
++				print "\tinat_group_tables["i"]["j"] = "gtable[i,j]";"
++	print ""
++	# print AVX opcode map's array
++	print "\t/* Print AVX opcode map array */"
++	for (i = 0; i < gaid; i++)
++		for (j = 0; j < max_lprefix; j++)
++			if (atable[i,j])
++				print "\tinat_avx_tables["i"]["j"] = "atable[i,j]";"
++
++	print "}"
++	print "#endif"
+ }
  
-+#include <asm/trap_defs.h>
- #include <asm/debugreg.h>
- #include <asm/siginfo.h>			/* TRAP_TRACE, ... */
+diff --git a/tools/arch/x86/tools/gen-insn-attr-x86.awk b/tools/arch/x86/tools/gen-insn-attr-x86.awk
+index a42015b305f4..af38469afd14 100644
+--- a/tools/arch/x86/tools/gen-insn-attr-x86.awk
++++ b/tools/arch/x86/tools/gen-insn-attr-x86.awk
+@@ -362,6 +362,9 @@ function convert_operands(count,opnd,       i,j,imm,mod)
+ END {
+ 	if (awkchecked != "")
+ 		exit 1
++
++	print "#ifndef __BOOT_COMPRESSED\n"
++
+ 	# print escape opcode map's array
+ 	print "/* Escape opcode map array */"
+ 	print "const insn_attr_t * const inat_escape_tables[INAT_ESC_MAX + 1]" \
+@@ -388,6 +391,51 @@ END {
+ 		for (j = 0; j < max_lprefix; j++)
+ 			if (atable[i,j])
+ 				print "	["i"]["j"] = "atable[i,j]","
+-	print "};"
++	print "};\n"
++
++	print "#else /* !__BOOT_COMPRESSED */\n"
++
++	print "/* Escape opcode map array */"
++	print "static const insn_attr_t *inat_escape_tables[INAT_ESC_MAX + 1]" \
++	      "[INAT_LSTPFX_MAX + 1];"
++	print ""
++
++	print "/* Group opcode map array */"
++	print "static const insn_attr_t *inat_group_tables[INAT_GRP_MAX + 1]"\
++	      "[INAT_LSTPFX_MAX + 1];"
++	print ""
++
++	print "/* AVX opcode map array */"
++	print "static const insn_attr_t *inat_avx_tables[X86_VEX_M_MAX + 1]"\
++	      "[INAT_LSTPFX_MAX + 1];"
++	print ""
++
++	print "static void inat_init_tables(void)"
++	print "{"
++
++	# print escape opcode map's array
++	print "\t/* Print Escape opcode map array */"
++	for (i = 0; i < geid; i++)
++		for (j = 0; j < max_lprefix; j++)
++			if (etable[i,j])
++				print "\tinat_escape_tables["i"]["j"] = "etable[i,j]";"
++	print ""
++
++	# print group opcode map's array
++	print "\t/* Print Group opcode map array */"
++	for (i = 0; i < ggid; i++)
++		for (j = 0; j < max_lprefix; j++)
++			if (gtable[i,j])
++				print "\tinat_group_tables["i"]["j"] = "gtable[i,j]";"
++	print ""
++	# print AVX opcode map's array
++	print "\t/* Print AVX opcode map array */"
++	for (i = 0; i < gaid; i++)
++		for (j = 0; j < max_lprefix; j++)
++			if (atable[i,j])
++				print "\tinat_avx_tables["i"]["j"] = "atable[i,j]";"
++
++	print "}"
++	print "#endif"
+ }
  
-@@ -132,47 +133,4 @@ void __noreturn handle_stack_overflow(const char *message,
- 				      unsigned long fault_address);
- #endif
- 
--/* Interrupts/Exceptions */
--enum {
--	X86_TRAP_DE = 0,	/*  0, Divide-by-zero */
--	X86_TRAP_DB,		/*  1, Debug */
--	X86_TRAP_NMI,		/*  2, Non-maskable Interrupt */
--	X86_TRAP_BP,		/*  3, Breakpoint */
--	X86_TRAP_OF,		/*  4, Overflow */
--	X86_TRAP_BR,		/*  5, Bound Range Exceeded */
--	X86_TRAP_UD,		/*  6, Invalid Opcode */
--	X86_TRAP_NM,		/*  7, Device Not Available */
--	X86_TRAP_DF,		/*  8, Double Fault */
--	X86_TRAP_OLD_MF,	/*  9, Coprocessor Segment Overrun */
--	X86_TRAP_TS,		/* 10, Invalid TSS */
--	X86_TRAP_NP,		/* 11, Segment Not Present */
--	X86_TRAP_SS,		/* 12, Stack Segment Fault */
--	X86_TRAP_GP,		/* 13, General Protection Fault */
--	X86_TRAP_PF,		/* 14, Page Fault */
--	X86_TRAP_SPURIOUS,	/* 15, Spurious Interrupt */
--	X86_TRAP_MF,		/* 16, x87 Floating-Point Exception */
--	X86_TRAP_AC,		/* 17, Alignment Check */
--	X86_TRAP_MC,		/* 18, Machine Check */
--	X86_TRAP_XF,		/* 19, SIMD Floating-Point Exception */
--	X86_TRAP_IRET = 32,	/* 32, IRET Exception */
--};
--
--/*
-- * Page fault error code bits:
-- *
-- *   bit 0 ==	 0: no page found	1: protection fault
-- *   bit 1 ==	 0: read access		1: write access
-- *   bit 2 ==	 0: kernel-mode access	1: user-mode access
-- *   bit 3 ==				1: use of reserved bit detected
-- *   bit 4 ==				1: fault was an instruction fetch
-- *   bit 5 ==				1: protection keys block access
-- */
--enum x86_pf_error_code {
--	X86_PF_PROT	=		1 << 0,
--	X86_PF_WRITE	=		1 << 1,
--	X86_PF_USER	=		1 << 2,
--	X86_PF_RSVD	=		1 << 3,
--	X86_PF_INSTR	=		1 << 4,
--	X86_PF_PK	=		1 << 5,
--};
- #endif /* _ASM_X86_TRAPS_H */
 -- 
 2.17.1
 
