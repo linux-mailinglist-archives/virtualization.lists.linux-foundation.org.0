@@ -2,55 +2,55 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9370C18BC09
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 17:12:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9CFE18BC5A
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 17:24:47 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 42D5188411;
-	Thu, 19 Mar 2020 16:12:53 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 27DCB883E1;
+	Thu, 19 Mar 2020 16:24:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LwS1eo+RshdE; Thu, 19 Mar 2020 16:12:51 +0000 (UTC)
+	with ESMTP id 6KDCZGwcMRsX; Thu, 19 Mar 2020 16:24:45 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6D24D88415;
-	Thu, 19 Mar 2020 16:12:51 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 91D48883CC;
+	Thu, 19 Mar 2020 16:24:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5E18DC1D89;
-	Thu, 19 Mar 2020 16:12:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6473BC07FF;
+	Thu, 19 Mar 2020 16:24:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AA180C07FF
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 72570C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 16:12:50 +0000 (UTC)
+ Thu, 19 Mar 2020 16:24:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 9068B883F5
+ by whitealder.osuosl.org (Postfix) with ESMTP id 570F887E96
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 16:12:50 +0000 (UTC)
+ Thu, 19 Mar 2020 16:24:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KFrdoNf7wYVv
+ with ESMTP id s7qFNT77DreC
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 16:12:49 +0000 (UTC)
+ Thu, 19 Mar 2020 16:24:42 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7BE0B883E6
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 98DF887E15
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 16:12:49 +0000 (UTC)
+ Thu, 19 Mar 2020 16:24:42 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 885FC217; Thu, 19 Mar 2020 17:12:47 +0100 (CET)
-Date: Thu, 19 Mar 2020 17:12:46 +0100
+ id 9C464217; Thu, 19 Mar 2020 17:24:40 +0100 (CET)
+Date: Thu, 19 Mar 2020 17:24:39 +0100
 From: Joerg Roedel <joro@8bytes.org>
 To: Andy Lutomirski <luto@kernel.org>
-Subject: Re: [PATCH 42/70] x86/sev-es: Support nested #VC exceptions
-Message-ID: <20200319161245.GD5122@8bytes.org>
+Subject: Re: [PATCH 41/70] x86/sev-es: Add Runtime #VC Exception Handler
+Message-ID: <20200319162439.GE5122@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
- <20200319091407.1481-43-joro@8bytes.org>
- <CALCETrXiWjALMTcG=92DmMn_H=yR88e0-3cj8CjTAjtjTvBR8w@mail.gmail.com>
+ <20200319091407.1481-42-joro@8bytes.org>
+ <CALCETrW9EYi5dzCKNtKkxM18CC4n5BZxTp1=qQ5qZccwstXjzg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CALCETrXiWjALMTcG=92DmMn_H=yR88e0-3cj8CjTAjtjTvBR8w@mail.gmail.com>
+In-Reply-To: <CALCETrW9EYi5dzCKNtKkxM18CC4n5BZxTp1=qQ5qZccwstXjzg@mail.gmail.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -76,21 +76,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Mar 19, 2020 at 08:46:36AM -0700, Andy Lutomirski wrote:
-> This can't possibly end well.  Maybe have a little percpu list of
-> GHCBs and make sure there are enough for any possible nesting?
+On Thu, Mar 19, 2020 at 08:44:03AM -0700, Andy Lutomirski wrote:
+> On Thu, Mar 19, 2020 at 2:14 AM Joerg Roedel <joro@8bytes.org> wrote:
+> >
+> > From: Tom Lendacky <thomas.lendacky@amd.com>
+> >
+> > Add the handler for #VC exceptions invoked at runtime.
+> 
+> If I read this correctly, this does not use IST.  If that's true, I
+> don't see how this can possibly work.  There at least two nasty cases
+> that come to mind:
+> 
+> 1. SYSCALL followed by NMI.  The NMI IRET hack gets to #VC and we
+> explode.  This is fixable by getting rid of the NMI EFLAGS.TF hack.
 
-Yeah, it is not entirely robust yet. Without NMI nesting the number of
-possible #VC nesting levels should be limited. At least one backup GHCB
-pre-allocated is probably a good idea.
+Not an issue in this patch-set, the confusion comes from the fact that I
+left some parts of the single-step-over-iret code in the patch. But it
+is not used. The NMI handling in this patch-set sends the NMI-complete
+message before the IRET, when the kernel is still in a safe environment
+(kernel stack, kernel cr3).
 
-> Also, I admit confusion.  Isn't the GHCB required to be unencrypted?
-> How does that work with kzalloc()?
+> 2. tools/testing/selftests/x86/mov_ss_trap_64.  User code does MOV
+> (addr), SS; SYSCALL, where addr has a data breakpoint.  We get #DB
+> promoted to #VC with no stack.
 
-Yes, but the kzalloc'ed ghcb is just the backup space for the real GHCB,
-which is mapped unencrypted. The contents of the unencrypted GHCB is
-copied to the backup and restored on return, so that the interrupted #VC
-handler finds the GHCB unmodified.
+Also not an issue, as debugging is not supported at the moment in SEV-ES
+guests (hardware has no way yet to save/restore the debug registers
+across #VMEXITs). But this will change with future hardware. If you look
+at the implementation for dr7 read/write events, you see that the dr7
+value is cached and returned, but does not make it to the hardware dr7.
+
+I though about using IST for the #VC handler, but the implications for
+nesting #VC handlers made me decide against it. But for future hardware
+that supports debugging inside SEV-ES guests it will be an issue. I'll
+think about how to fix the problem, it probably has to be IST :(
 
 Regards,
 
