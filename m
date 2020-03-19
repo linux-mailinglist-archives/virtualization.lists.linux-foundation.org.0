@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8284718AFFC
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:23:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE17218B002
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:23:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 99716882C3;
-	Thu, 19 Mar 2020 09:23:48 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7DE3D88236;
+	Thu, 19 Mar 2020 09:23:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JmSX2fwd3xXi; Thu, 19 Mar 2020 09:23:47 +0000 (UTC)
+	with ESMTP id d1r1aiBNc2CH; Thu, 19 Mar 2020 09:23:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BAD1588299;
-	Thu, 19 Mar 2020 09:23:47 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D4AAB88299;
+	Thu, 19 Mar 2020 09:23:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8D2EAC1D85;
-	Thu, 19 Mar 2020 09:23:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8E274C07FF;
+	Thu, 19 Mar 2020 09:23:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A101EC07FF
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 843ADC07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:45 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 9093E88252
+ by hemlock.osuosl.org (Postfix) with ESMTP id 7306188231
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:45 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ra-JzSXSAcFX
+ with ESMTP id Igi0+BH1TEd3
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:23:45 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id EA0D288231
+ by hemlock.osuosl.org (Postfix) with ESMTPS id F094988236
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:23:44 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 71994E9B; Thu, 19 Mar 2020 10:14:26 +0100 (CET)
+ id 95E19E97; Thu, 19 Mar 2020 10:14:26 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 54/70] x86/sev-es: Handle INVD Events
-Date: Thu, 19 Mar 2020 10:13:51 +0100
-Message-Id: <20200319091407.1481-55-joro@8bytes.org>
+Subject: [PATCH 55/70] x86/sev-es: Handle RDTSCP Events
+Date: Thu, 19 Mar 2020 10:13:52 +0100
+Message-Id: <20200319091407.1481-56-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -73,34 +73,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Joerg Roedel <jroedel@suse.de>
 
-Implement a handler for #VC exceptions caused by INVD instructions.
-Since Linux should never use INVD, just mark it as unsupported.
+Extend the RDTSC handler to also handle RDTSCP events.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: Adapt to #VC handling infrastructure ]
-Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/x86/kernel/sev-es.c | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index ec11088497a4..a4f136b2e149 100644
+index a4f136b2e149..11947b648b43 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -721,6 +721,10 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+@@ -665,19 +665,25 @@ static enum es_result vc_handle_wbinvd(struct ghcb *ghcb,
+ 	return sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_WBINVD, 0, 0);
+ }
+ 
+-static enum es_result vc_handle_rdtsc(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
++static enum es_result vc_handle_rdtsc(struct ghcb *ghcb,
++				      struct es_em_ctxt *ctxt,
++				      unsigned long exit_code)
+ {
++	bool rdtscp = (exit_code == SVM_EXIT_RDTSCP);
+ 	enum es_result ret;
+ 
+-	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_RDTSC, 0, 0);
++	ret = sev_es_ghcb_hv_call(ghcb, ctxt, exit_code, 0, 0);
+ 	if (ret != ES_OK)
+ 		return ret;
+ 
+-	if (!(ghcb_is_valid_rax(ghcb) && ghcb_is_valid_rdx(ghcb)))
++	if (!(ghcb_is_valid_rax(ghcb) && ghcb_is_valid_rdx(ghcb) &&
++	     (!rdtscp || ghcb_is_valid_rcx(ghcb))))
+ 		return ES_VMM_ERROR;
+ 
+ 	ctxt->regs->ax = ghcb->save.rax;
+ 	ctxt->regs->dx = ghcb->save.rdx;
++	if (rdtscp)
++		ctxt->regs->cx = ghcb->save.rcx;
+ 
+ 	return ES_OK;
+ }
+@@ -716,7 +722,8 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 		result = vc_handle_dr7_write(ghcb, ctxt, early);
+ 		break;
+ 	case SVM_EXIT_RDTSC:
+-		result = vc_handle_rdtsc(ghcb, ctxt);
++	case SVM_EXIT_RDTSCP:
++		result = vc_handle_rdtsc(ghcb, ctxt, exit_code);
+ 		break;
  	case SVM_EXIT_RDPMC:
  		result = vc_handle_rdpmc(ghcb, ctxt);
- 		break;
-+	case SVM_EXIT_INVD:
-+		pr_err_ratelimited("#VC exception for INVD??? Seriously???\n");
-+		result = ES_UNSUPPORTED;
-+		break;
- 	case SVM_EXIT_CPUID:
- 		result = vc_handle_cpuid(ghcb, ctxt);
- 		break;
 -- 
 2.17.1
 
