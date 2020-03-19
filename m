@@ -1,84 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7ACBF18BB77
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 16:46:53 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B0F518BBE4
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 17:08:01 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2DE6186CA6;
-	Thu, 19 Mar 2020 15:46:52 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id F1603203CA;
+	Thu, 19 Mar 2020 16:07:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kD-o8VaI5a8E; Thu, 19 Mar 2020 15:46:51 +0000 (UTC)
+	with ESMTP id vcgMFzHvlm7O; Thu, 19 Mar 2020 16:07:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 57C0486C8C;
-	Thu, 19 Mar 2020 15:46:51 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id C0DC7231E9;
+	Thu, 19 Mar 2020 16:07:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3CD25C07FF;
-	Thu, 19 Mar 2020 15:46:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 97D3FC07FF;
+	Thu, 19 Mar 2020 16:07:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 82134C07FF
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5F9A5C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
+ Thu, 19 Mar 2020 16:07:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 795E486C8C
+ by silver.osuosl.org (Postfix) with ESMTP id 4B1CE230F6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
+ Thu, 19 Mar 2020 16:07:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id J4CQ7DFMLEOr
+ with ESMTP id hcItvkABXHGV
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 0C50086C76
+ Thu, 19 Mar 2020 16:07:54 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by silver.osuosl.org (Postfix) with ESMTPS id 12FE6203CA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
- [209.85.221.44])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9B45A208C3
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:46:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584632809;
- bh=Cn1m0nZsjDiV+FYhoJLlELXGkyDw2CZ03wWFmubUPo8=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=XngItLjx0RxK+PimP3jEzaqooTBTwBy4kih8MW6Imxm+fj223z/qpfIE2BKk4Fzdd
- RiQqOnv5aQwLbox4Z/d8xAdb9GpLC9QnI7Ux5YIJViMyGg+L/UawGnm256GEoDCKRq
- ZtMTYkqWdljH2vRVcgKhtW3oQUDlWRYQ14szfV74=
-Received: by mail-wr1-f44.google.com with SMTP id j17so226304wru.13
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 08:46:49 -0700 (PDT)
-X-Gm-Message-State: ANhLgQ3BKSnxhH0CV2Xd8TVhtpVIR/qLlcnbiN41qwFIsvNkmCsjF+ff
- JMfCPldpCeVs6SZ5SE1SB2N5KH23jcUFh6rPGMOjHg==
-X-Google-Smtp-Source: ADFU+vtRWY7b1vbCxAUKKJKmAYVxdIrYpSMuMiWvH4H8RWo6SRJpLSPLzDmmHbdXmaoFC1CnppEqPqcDFxLdoNnM7Rk=
-X-Received: by 2002:adf:e883:: with SMTP id d3mr4992846wrm.75.1584632808043;
- Thu, 19 Mar 2020 08:46:48 -0700 (PDT)
-MIME-Version: 1.0
+ Thu, 19 Mar 2020 16:07:54 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id 2F7C1217; Thu, 19 Mar 2020 17:07:51 +0100 (CET)
+Date: Thu, 19 Mar 2020 17:07:49 +0100
+From: Joerg Roedel <joro@8bytes.org>
+To: Andy Lutomirski <luto@kernel.org>
+Subject: Re: [PATCH 70/70] x86/sev-es: Add NMI state tracking
+Message-ID: <20200319160749.GC5122@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
- <20200319091407.1481-43-joro@8bytes.org>
-In-Reply-To: <20200319091407.1481-43-joro@8bytes.org>
-From: Andy Lutomirski <luto@kernel.org>
-Date: Thu, 19 Mar 2020 08:46:36 -0700
-X-Gmail-Original-Message-ID: <CALCETrXiWjALMTcG=92DmMn_H=yR88e0-3cj8CjTAjtjTvBR8w@mail.gmail.com>
-Message-ID: <CALCETrXiWjALMTcG=92DmMn_H=yR88e0-3cj8CjTAjtjTvBR8w@mail.gmail.com>
-Subject: Re: [PATCH 42/70] x86/sev-es: Support nested #VC exceptions
-To: Joerg Roedel <joro@8bytes.org>
+ <20200319091407.1481-71-joro@8bytes.org>
+ <CALCETrUOQneBHjoZkP-7T5PDijb=WOyv7xF7TD0GLR2Aw77vyA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CALCETrUOQneBHjoZkP-7T5PDijb=WOyv7xF7TD0GLR2Aw77vyA@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Kees Cook <keescook@chromium.org>,
  kvm list <kvm@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>,
  X86 ML <x86@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
  Linux Virtualization <virtualization@lists.linux-foundation.org>,
- Joerg Roedel <jroedel@suse.de>, Andy Lutomirski <luto@kernel.org>,
- "H. Peter Anvin" <hpa@zytor.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+ Joerg Roedel <jroedel@suse.de>, "H. Peter Anvin" <hpa@zytor.com>,
+ Dan Williams <dan.j.williams@intel.com>, Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,61 +76,82 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Mar 19, 2020 at 2:14 AM Joerg Roedel <joro@8bytes.org> wrote:
->
-> From: Joerg Roedel <jroedel@suse.de>
->
-> Handle #VC exceptions that happen while the GHCB is in use. This can
-> happen when an NMI happens in the #VC exception handler and the NMI
-> handler causes a #VC exception itself. Save the contents of the GHCB
-> when nesting is detected and restore it when the GHCB is no longer
-> used.
->
-> Signed-off-by: Joerg Roedel <jroedel@suse.de>
-> ---
->  arch/x86/kernel/sev-es.c | 63 +++++++++++++++++++++++++++++++++++++---
->  1 file changed, 59 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-> index 97241d2f0f70..3b7bbc8d841e 100644
-> --- a/arch/x86/kernel/sev-es.c
-> +++ b/arch/x86/kernel/sev-es.c
-> @@ -32,9 +32,57 @@ struct ghcb boot_ghcb_page __bss_decrypted __aligned(PAGE_SIZE);
->   */
->  struct ghcb __initdata *boot_ghcb;
->
-> +struct ghcb_state {
-> +       struct ghcb *ghcb;
-> +};
-> +
->  /* Runtime GHCB pointers */
->  static struct ghcb __percpu *ghcb_page;
->
-> +/*
-> + * Mark the per-cpu GHCB as in-use to detect nested #VC exceptions.
-> + * There is no need for it to be atomic, because nothing is written to the GHCB
-> + * between the read and the write of ghcb_active. So it is safe to use it when a
-> + * nested #VC exception happens before the write.
-> + */
-> +static DEFINE_PER_CPU(bool, ghcb_active);
-> +
-> +static struct ghcb *sev_es_get_ghcb(struct ghcb_state *state)
-> +{
-> +       struct ghcb *ghcb = (struct ghcb *)this_cpu_ptr(ghcb_page);
-> +       bool *active = this_cpu_ptr(&ghcb_active);
-> +
-> +       if (unlikely(*active)) {
-> +               /* GHCB is already in use - save its contents */
-> +
-> +               state->ghcb = kzalloc(sizeof(struct ghcb), GFP_ATOMIC);
-> +               if (!state->ghcb)
-> +                       return NULL;
+Hi Andy,
 
-This can't possibly end well.  Maybe have a little percpu list of
-GHCBs and make sure there are enough for any possible nesting?
+On Thu, Mar 19, 2020 at 08:35:59AM -0700, Andy Lutomirski wrote:
+> On Thu, Mar 19, 2020 at 2:14 AM Joerg Roedel <joro@8bytes.org> wrote:
+> >
+> > From: Joerg Roedel <jroedel@suse.de>
+> >
+> > Keep NMI state in SEV-ES code so the kernel can re-enable NMIs for the
+> > vCPU when it reaches IRET.
+> 
+> IIRC I suggested just re-enabling NMI in C from do_nmi().  What was
+> wrong with that approach?
 
-Also, I admit confusion.  Isn't the GHCB required to be unencrypted?
-How does that work with kzalloc()?
+If I understand the code correctly a nested NMI will just reset the
+interrupted NMI handler to start executing again at 'restart_nmi'.
+The interrupted NMI handler could be in the #VC handler, and it is not
+safe to just jump back to the start of the NMI handler from somewhere
+within the #VC handler.
+
+So I decided to not allow NMI nesting for SEV-ES and only re-enable the
+NMI window when the first NMI returns. This is not implemented in this
+patch, but I will do that once Thomas' entry-code rewrite is upstream.
+
+> This causes us to pop the NMI frame off the stack.  Assuming the NMI
+> restart logic is invoked (which is maybe impossible?), we get #DB,
+> which presumably is actually delivered.  And we end up on the #DB
+> stack, which might already have been in use, so we have a potential
+> increase in nesting.  Also, #DB may be called from an unexpected
+> context.
+
+An SEV-ES hypervisor is required to intercept #DB, which means that the
+#DB exception actually ends up being a #VC exception. So it will not end
+up on the #DB stack.
+
+> Now somehow #DB is supposed to invoke #VC, which is supposed to do the
+> magic hypercall, and all of this is supposed to be safe?  Or is #DB
+> unconditionally redirected to #VC?  What happens if we had no stack
+> (e.g. we interrupted SYSCALL) or we were already in #VC to begin with?
+
+Yeah, as I said above, the #DB is redirected to #VC, as the hypervisor
+has to intercept #DB.
+
+The stack-problem is the one that prevents the Single-step-over-iret
+approach right now, because the NMI can hit while in kernel mode and on
+entry stack, which the generic entry code (besided NMI) does not handle.
+Getting a #VC exception there (like after an IRET to that state) breaks
+things.
+
+Last, in this version of the patch-set the #VC handler became
+nesting-safe. It detects whether the per-cpu GHCB is in use and
+safes/restores its contents in this case.
+
+
+> I think there are two credible ways to approach this:
+> 
+> 1. Just put the NMI unmask in do_nmi().  The kernel *already* knows
+> how to handle running do_nmi() with NMIs unmasked.  This is much, much
+> simpler than your code.
+
+Right, and I thought about that, but the implication is that the
+complexity is moved somewhere else, namely into the #VC handler, which
+then has to be restartable.
+
+> 2. Have an entirely separate NMI path for the
+> SEV-ES-on-misdesigned-CPU case.  And have very clear documentation for
+> what prevents this code from being executed on future CPUs (Zen3?)
+> that have this issue fixed for real?
+
+That sounds like a good alternative, I will investigate this approach.
+The NMI handler should be much simpler as it doesn't need to allow NMI
+nesting. The question is, does the C code down the NMI path depend on
+the NMI handlers stack frame layout (e.g. the in-nmi flag)?
+
+Regards,
+
+	Joerg
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
