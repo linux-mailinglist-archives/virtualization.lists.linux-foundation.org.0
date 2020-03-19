@@ -2,49 +2,50 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id E046B18AF27
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9FCF18AF30
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:58 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 855E287C55;
-	Thu, 19 Mar 2020 09:14:53 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 738E9879E1;
+	Thu, 19 Mar 2020 09:14:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QU-aBg9YEACw; Thu, 19 Mar 2020 09:14:49 +0000 (UTC)
+	with ESMTP id R0sVuv7wdsgk; Thu, 19 Mar 2020 09:14:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4537787D47;
-	Thu, 19 Mar 2020 09:14:38 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B813587DA2;
+	Thu, 19 Mar 2020 09:14:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 192E6C07FF;
-	Thu, 19 Mar 2020 09:14:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9E622C1830;
+	Thu, 19 Mar 2020 09:14:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6BD11C07FF
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7F44DC1830
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:35 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 58B2A881E9
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 21EBF86B3A
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 19 Mar 2020 09:14:36 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id uh59UxNiyCii
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:35 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 316vD6Rrh+06
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:34 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id C406187CB1
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id A1AAD86B76
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:34 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:35 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 978845BC; Thu, 19 Mar 2020 10:14:21 +0100 (CET)
+ id CBEAB63F; Thu, 19 Mar 2020 10:14:21 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 29/70] x86/head/64: Install boot GDT
-Date: Thu, 19 Mar 2020 10:13:26 +0100
-Message-Id: <20200319091407.1481-30-joro@8bytes.org>
+Subject: [PATCH 30/70] x86/head/64: Reload GDT after switch to virtual
+ addresses
+Date: Thu, 19 Mar 2020 10:13:27 +0100
+Message-Id: <20200319091407.1481-31-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -75,64 +76,30 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Handling exceptions during boot requires a working GDT. The kernel GDT
-is not yet ready for use, so install a temporary boot GDT.
+Reload the GDT after switching to virtual addresses to make sure it will
+not go away when the lower mappings are removed.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/head_64.S | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ arch/x86/kernel/head_64.S | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index 4bbc770af632..5219a70b3fb4 100644
+index 5219a70b3fb4..ebb7d512c9d3 100644
 --- a/arch/x86/kernel/head_64.S
 +++ b/arch/x86/kernel/head_64.S
-@@ -72,6 +72,26 @@ SYM_CODE_START_NOALIGN(startup_64)
- 	/* Set up the stack for verify_cpu(), similar to initial_stack below */
- 	leaq	(__end_init_task - SIZEOF_PTREGS)(%rip), %rsp
+@@ -163,6 +163,11 @@ SYM_CODE_START(secondary_startup_64)
+ 1:
+ 	UNWIND_HINT_EMPTY
  
 +	/* Setup boot GDT descriptor and load boot GDT */
 +	leaq	boot_gdt(%rip), %rax
 +	movq	%rax, boot_gdt_base(%rip)
 +	lgdt	boot_gdt_descr(%rip)
 +
-+	/* New GDT is live - reload data segment registers */
-+	movl	$__KERNEL_DS, %eax
-+	movl	%eax, %ds
-+	movl	%eax, %ss
-+	movl	%eax, %es
-+
-+	/* Now switch to __KERNEL_CS so IRET works reliably */
-+	pushq	$__KERNEL_CS
-+	leaq	.Lon_kernel_cs(%rip), %rax
-+	pushq	%rax
-+	lretq
-+
-+.Lon_kernel_cs:
-+	UNWIND_HINT_EMPTY
-+
- 	/* Sanitize CPU configuration */
- 	call verify_cpu
- 
-@@ -480,6 +500,18 @@ SYM_DATA_LOCAL(early_gdt_descr_base,	.quad INIT_PER_CPU_VAR(gdt_page))
- SYM_DATA(phys_base, .quad 0x0)
- EXPORT_SYMBOL(phys_base)
- 
-+/* Boot GDT used when kernel addresses are not mapped yet */
-+SYM_DATA_LOCAL(boot_gdt_descr,		.word boot_gdt_end - boot_gdt)
-+SYM_DATA_LOCAL(boot_gdt_base,		.quad 0)
-+SYM_DATA_START(boot_gdt)
-+	.quad	0
-+	.quad   0x00cf9a000000ffff      /* __KERNEL32_CS */
-+	.quad   0x00af9a000000ffff      /* __KERNEL_CS */
-+	.quad   0x00cf92000000ffff      /* __KERNEL_DS */
-+	.quad   0x0080890000000000      /* TS descriptor */
-+	.quad   0x0000000000000000      /* TS continued */
-+SYM_DATA_END_LABEL(boot_gdt, SYM_L_LOCAL, boot_gdt_end)
-+
- #include "../../x86/xen/xen-head.S"
- 
- 	__PAGE_ALIGNED_BSS
+ 	/* Check if nx is implemented */
+ 	movl	$0x80000001, %eax
+ 	cpuid
 -- 
 2.17.1
 
