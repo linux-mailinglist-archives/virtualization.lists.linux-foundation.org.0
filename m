@@ -1,50 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6831618AF39
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:15:02 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FF9618AF23
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:50 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 01B4A87C8A;
-	Thu, 19 Mar 2020 09:15:01 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 367712107A;
+	Thu, 19 Mar 2020 09:14:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id H1W5D3CwHKXN; Thu, 19 Mar 2020 09:14:58 +0000 (UTC)
+	with ESMTP id a6ZB5EFvcdM3; Thu, 19 Mar 2020 09:14:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id AD21087C0E;
+	by silver.osuosl.org (Postfix) with ESMTP id 3069522703;
 	Thu, 19 Mar 2020 09:14:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 90D45C07FF;
-	Thu, 19 Mar 2020 09:14:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ED976C1830;
+	Thu, 19 Mar 2020 09:14:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5404DC1D89
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 01CDBC1830
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:37 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 5177F2094B
+ by silver.osuosl.org (Postfix) with ESMTP id AF3C221541
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:37 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SlWrUYptfwMw
+ with ESMTP id 9Z8KgUVz6UDe
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:34 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:35 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id E819A2036D
+ by silver.osuosl.org (Postfix) with ESMTPS id 048AE220EC
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:33 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:34 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id C872F4CA; Thu, 19 Mar 2020 10:14:20 +0100 (CET)
+ id F1A6B4F1; Thu, 19 Mar 2020 10:14:20 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 25/70] x86/sev-es: Add CPUID handling to #VC handler
-Date: Thu, 19 Mar 2020 10:13:22 +0100
-Message-Id: <20200319091407.1481-26-joro@8bytes.org>
+Subject: [PATCH 26/70] x86/idt: Move IDT to data segment
+Date: Thu, 19 Mar 2020 10:13:23 +0100
+Message-Id: <20200319091407.1481-27-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -73,85 +73,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Joerg Roedel <jroedel@suse.de>
 
-Handle #VC exceptions caused by CPUID instructions. These happen in
-early boot code when the KASLR code checks for RDTSC.
+With SEV-ES, exception handling is needed very early, even before the
+kernel has cleared the bss segment. In order to prevent clearing the
+currently used IDT, move the IDT to the data segment.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: Adapt to #VC handling framework ]
-Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/boot/compressed/sev-es.c |  4 ++++
- arch/x86/kernel/sev-es-shared.c   | 35 +++++++++++++++++++++++++++++++
- 2 files changed, 39 insertions(+)
+ arch/x86/kernel/idt.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/boot/compressed/sev-es.c b/arch/x86/boot/compressed/sev-es.c
-index ae5fbd371fd9..40eaf24db641 100644
---- a/arch/x86/boot/compressed/sev-es.c
-+++ b/arch/x86/boot/compressed/sev-es.c
-@@ -10,6 +10,7 @@
- #include <asm/sev-es.h>
- #include <asm/trap_defs.h>
- #include <asm/msr-index.h>
-+#include <asm/fpu/xcr.h>
- #include <asm/ptrace.h>
- #include <asm/svm.h>
+diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
+index 87ef69a72c52..a8fc01ea602a 100644
+--- a/arch/x86/kernel/idt.c
++++ b/arch/x86/kernel/idt.c
+@@ -165,8 +165,12 @@ static const __initconst struct idt_data dbg_idts[] = {
+ };
+ #endif
  
-@@ -149,6 +150,9 @@ void boot_vc_handler(struct pt_regs *regs, unsigned long exit_code)
- 	case SVM_EXIT_IOIO:
- 		result = vc_handle_ioio(boot_ghcb, &ctxt);
- 		break;
-+	case SVM_EXIT_CPUID:
-+		result = vc_handle_cpuid(boot_ghcb, &ctxt);
-+		break;
- 	default:
- 		result = ES_UNSUPPORTED;
- 		break;
-diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
-index 46fc5318d1d7..a632b8f041ec 100644
---- a/arch/x86/kernel/sev-es-shared.c
-+++ b/arch/x86/kernel/sev-es-shared.c
-@@ -407,3 +407,38 @@ static enum es_result vc_handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
+-/* Must be page-aligned because the real IDT is used in a fixmap. */
+-gate_desc idt_table[IDT_ENTRIES] __page_aligned_bss;
++/*
++ * Must be page-aligned because the real IDT is used in a fixmap.
++ * Also needs to be in the .data segment, because the idt_table is
++ * needed before the kernel clears the .bss segment.
++ */
++gate_desc idt_table[IDT_ENTRIES] __page_aligned_data;
  
- 	return ret;
- }
-+
-+static enum es_result vc_handle_cpuid(struct ghcb *ghcb,
-+				      struct es_em_ctxt *ctxt)
-+{
-+	struct pt_regs *regs = ctxt->regs;
-+	u32 cr4 = native_read_cr4();
-+	enum es_result ret;
-+
-+	ghcb_set_rax(ghcb, regs->ax);
-+	ghcb_set_rcx(ghcb, regs->cx);
-+
-+	if (cr4 & X86_CR4_OSXSAVE)
-+		/* Safe to read xcr0 */
-+		ghcb_set_xcr0(ghcb, xgetbv(XCR_XFEATURE_ENABLED_MASK));
-+	else
-+		/* xgetbv will cause #GP - use reset value for xcr0 */
-+		ghcb_set_xcr0(ghcb, 1);
-+
-+	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_CPUID, 0, 0);
-+	if (ret != ES_OK)
-+		return ret;
-+
-+	if (!(ghcb_is_valid_rax(ghcb) &&
-+	      ghcb_is_valid_rbx(ghcb) &&
-+	      ghcb_is_valid_rcx(ghcb) &&
-+	      ghcb_is_valid_rdx(ghcb)))
-+		return ES_VMM_ERROR;
-+
-+	regs->ax = ghcb->save.rax;
-+	regs->bx = ghcb->save.rbx;
-+	regs->cx = ghcb->save.rcx;
-+	regs->dx = ghcb->save.rdx;
-+
-+	return ES_OK;
-+}
+ struct desc_ptr idt_descr __ro_after_init = {
+ 	.size		= (IDT_ENTRIES * 2 * sizeof(unsigned long)) - 1,
 -- 
 2.17.1
 
