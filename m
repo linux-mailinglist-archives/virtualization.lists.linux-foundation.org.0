@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DE7218AF12
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6070E18AF16
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id DCCDC86B45;
-	Thu, 19 Mar 2020 09:14:31 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0F7E886B60;
+	Thu, 19 Mar 2020 09:14:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iHdiP-1aA4pG; Thu, 19 Mar 2020 09:14:29 +0000 (UTC)
+	with ESMTP id EIQB-xQIaVnf; Thu, 19 Mar 2020 09:14:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2138E86B70;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9193886B3A;
 	Thu, 19 Mar 2020 09:14:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 160FAC1830;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 68B02C07FF;
 	Thu, 19 Mar 2020 09:14:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A8FE0C07FF
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 37359C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:25 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 9801A87CB1
+ by silver.osuosl.org (Postfix) with ESMTP id 25D1920373
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:25 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IdaGO6Ytgt83
+ with ESMTP id oqt28JEbA1AE
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:25 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7724C881E9
+ by silver.osuosl.org (Postfix) with ESMTPS id 329702036D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:24 +0000 (UTC)
+ Thu, 19 Mar 2020 09:14:25 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 104A7217; Thu, 19 Mar 2020 10:14:16 +0100 (CET)
+ id 6CB3B25C; Thu, 19 Mar 2020 10:14:17 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 07/70] x86/umip: Factor out instruction decoding
-Date: Thu, 19 Mar 2020 10:13:04 +0100
-Message-Id: <20200319091407.1481-8-joro@8bytes.org>
+Subject: [PATCH 08/70] x86/insn: Add insn_get_modrm_reg_off()
+Date: Thu, 19 Mar 2020 10:13:05 +0100
+Message-Id: <20200319091407.1481-9-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -75,122 +75,75 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Factor out the code used to decode an instruction with the correct
-address and operand sizes to a helper function.
+Add a function to the instruction decoder which returns the pt_regs
+offset of the register specified in the reg field of the modrm byte.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/insn-eval.h |  2 ++
- arch/x86/kernel/umip.c           | 23 +---------------
- arch/x86/lib/insn-eval.c         | 45 ++++++++++++++++++++++++++++++++
- 3 files changed, 48 insertions(+), 22 deletions(-)
+ arch/x86/include/asm/insn-eval.h |  1 +
+ arch/x86/lib/insn-eval.c         | 23 +++++++++++++++++++++++
+ 2 files changed, 24 insertions(+)
 
 diff --git a/arch/x86/include/asm/insn-eval.h b/arch/x86/include/asm/insn-eval.h
-index b8b9ef1bbd06..b4ff3e3316d1 100644
+index b4ff3e3316d1..1e343010129e 100644
 --- a/arch/x86/include/asm/insn-eval.h
 +++ b/arch/x86/include/asm/insn-eval.h
-@@ -21,5 +21,7 @@ unsigned long insn_get_seg_base(struct pt_regs *regs, int seg_reg_idx);
+@@ -17,6 +17,7 @@
+ 
+ void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs);
+ int insn_get_modrm_rm_off(struct insn *insn, struct pt_regs *regs);
++int insn_get_modrm_reg_off(struct insn *insn, struct pt_regs *regs);
+ unsigned long insn_get_seg_base(struct pt_regs *regs, int seg_reg_idx);
  int insn_get_code_seg_params(struct pt_regs *regs);
  int insn_fetch_from_user(struct pt_regs *regs,
- 			 unsigned char buf[MAX_INSN_SIZE]);
-+bool insn_decode(struct pt_regs *regs, struct insn *insn,
-+		 unsigned char buf[MAX_INSN_SIZE], int buf_size);
- 
- #endif /* _ASM_X86_INSN_EVAL_H */
-diff --git a/arch/x86/kernel/umip.c b/arch/x86/kernel/umip.c
-index 00cb157673b1..ff6d67242eee 100644
---- a/arch/x86/kernel/umip.c
-+++ b/arch/x86/kernel/umip.c
-@@ -324,7 +324,6 @@ bool fixup_umip_exception(struct pt_regs *regs)
- 	unsigned long *reg_addr;
- 	void __user *uaddr;
- 	struct insn insn;
--	int seg_defs;
- 
- 	if (!regs)
- 		return false;
-@@ -339,27 +338,7 @@ bool fixup_umip_exception(struct pt_regs *regs)
- 	if (!nr_copied)
- 		return false;
- 
--	insn_init(&insn, buf, nr_copied, user_64bit_mode(regs));
--
--	/*
--	 * Override the default operand and address sizes with what is specified
--	 * in the code segment descriptor. The instruction decoder only sets
--	 * the address size it to either 4 or 8 address bytes and does nothing
--	 * for the operand bytes. This OK for most of the cases, but we could
--	 * have special cases where, for instance, a 16-bit code segment
--	 * descriptor is used.
--	 * If there is an address override prefix, the instruction decoder
--	 * correctly updates these values, even for 16-bit defaults.
--	 */
--	seg_defs = insn_get_code_seg_params(regs);
--	if (seg_defs == -EINVAL)
--		return false;
--
--	insn.addr_bytes = INSN_CODE_SEG_ADDR_SZ(seg_defs);
--	insn.opnd_bytes = INSN_CODE_SEG_OPND_SZ(seg_defs);
--
--	insn_get_length(&insn);
--	if (nr_copied < insn.length)
-+	if (!insn_decode(regs, &insn, buf, nr_copied))
- 		return false;
- 
- 	umip_inst = identify_insn(&insn);
 diff --git a/arch/x86/lib/insn-eval.c b/arch/x86/lib/insn-eval.c
-index 95ae3953e2a2..1949f5258f9e 100644
+index 1949f5258f9e..f18260a19960 100644
 --- a/arch/x86/lib/insn-eval.c
 +++ b/arch/x86/lib/insn-eval.c
-@@ -1407,3 +1407,48 @@ int insn_fetch_from_user(struct pt_regs *regs,
+@@ -20,6 +20,7 @@
  
- 	return MAX_INSN_SIZE - not_copied;
- }
+ enum reg_type {
+ 	REG_TYPE_RM = 0,
++	REG_TYPE_REG,
+ 	REG_TYPE_INDEX,
+ 	REG_TYPE_BASE,
+ };
+@@ -441,6 +442,13 @@ static int get_reg_offset(struct insn *insn, struct pt_regs *regs,
+ 			regno += 8;
+ 		break;
+ 
++	case REG_TYPE_REG:
++		regno = X86_MODRM_REG(insn->modrm.value);
 +
++		if (X86_REX_R(insn->rex_prefix.value))
++			regno += 8;
++		break;
++
+ 	case REG_TYPE_INDEX:
+ 		regno = X86_SIB_INDEX(insn->sib.value);
+ 		if (X86_REX_X(insn->rex_prefix.value))
+@@ -809,6 +817,21 @@ int insn_get_modrm_rm_off(struct insn *insn, struct pt_regs *regs)
+ 	return get_reg_offset(insn, regs, REG_TYPE_RM);
+ }
+ 
 +/**
-+ * insn_decode() - Decode an instruction
-+ * @regs:	Structure with register values as seen when entering kernel mode
-+ * @insn:	Structure to store decoded instruction
-+ * @buf:	Buffer containing the instruction bytes
-+ * @buf_size:   Number of instruction bytes available in buf
-+ *
-+ * Decodes the instruction provided in buf and stores the decoding results in
-+ * insn. Also determines the correct address and operand sizes.
++ * insn_get_modrm_reg_off() - Obtain register in reg part of the ModRM byte
++ * @insn:	Instruction containing the ModRM byte
++ * @regs:	Register values as seen when entering kernel mode
 + *
 + * Returns:
 + *
-+ * True if instruction was decoded, False otherwise.
++ * The register indicated by the reg part of the ModRM byte. The
++ * register is obtained as an offset from the base of pt_regs.
 + */
-+bool insn_decode(struct pt_regs *regs, struct insn *insn,
-+		 unsigned char buf[MAX_INSN_SIZE], int buf_size)
++int insn_get_modrm_reg_off(struct insn *insn, struct pt_regs *regs)
 +{
-+	int seg_defs;
-+
-+	insn_init(insn, buf, buf_size, user_64bit_mode(regs));
-+
-+	/*
-+	 * Override the default operand and address sizes with what is specified
-+	 * in the code segment descriptor. The instruction decoder only sets
-+	 * the address size it to either 4 or 8 address bytes and does nothing
-+	 * for the operand bytes. This OK for most of the cases, but we could
-+	 * have special cases where, for instance, a 16-bit code segment
-+	 * descriptor is used.
-+	 * If there is an address override prefix, the instruction decoder
-+	 * correctly updates these values, even for 16-bit defaults.
-+	 */
-+	seg_defs = insn_get_code_seg_params(regs);
-+	if (seg_defs == -EINVAL)
-+		return false;
-+
-+	insn->addr_bytes = INSN_CODE_SEG_ADDR_SZ(seg_defs);
-+	insn->opnd_bytes = INSN_CODE_SEG_OPND_SZ(seg_defs);
-+
-+	insn_get_length(insn);
-+	if (buf_size < insn->length)
-+		return false;
-+
-+	return true;
++	return get_reg_offset(insn, regs, REG_TYPE_REG);
 +}
++
+ /**
+  * get_seg_base_limit() - obtain base address and limit of a segment
+  * @insn:	Instruction. Must be valid.
 -- 
 2.17.1
 
