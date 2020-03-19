@@ -1,50 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0128718AF0E
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:32 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 7C1442153B;
-	Thu, 19 Mar 2020 09:14:30 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wY9W-TjuS-SY; Thu, 19 Mar 2020 09:14:26 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id B00CB20373;
-	Thu, 19 Mar 2020 09:14:26 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A42FDC07FF;
-	Thu, 19 Mar 2020 09:14:26 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5547BC07FF
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:23 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0169018AEFE
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:14:27 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 50B4587CB8
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:14:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E6C608828C;
+	Thu, 19 Mar 2020 09:14:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5PQHpZV+8Jlg; Thu, 19 Mar 2020 09:14:24 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 671AC881DE;
+	Thu, 19 Mar 2020 09:14:24 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 468F3C07FF;
+	Thu, 19 Mar 2020 09:14:24 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A5F25C07FF
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 19 Mar 2020 09:14:21 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 935F786838
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 19 Mar 2020 09:14:21 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id P05F4yvoaj9U
+ with ESMTP id JfR36dcAgxMC
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:20 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 73FA587C9A
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 18CD586439
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:14:20 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id D3105B0; Thu, 19 Mar 2020 10:14:15 +0100 (CET)
+ id F0D17189; Thu, 19 Mar 2020 10:14:15 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 01/70] KVM: SVM: Add GHCB definitions
-Date: Thu, 19 Mar 2020 10:12:58 +0100
-Message-Id: <20200319091407.1481-2-joro@8bytes.org>
+Subject: [PATCH 02/70] KVM: SVM: Add GHCB Accessor functions
+Date: Thu, 19 Mar 2020 10:12:59 +0100
+Message-Id: <20200319091407.1481-3-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -73,70 +73,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Joerg Roedel <jroedel@suse.de>
 
-Extend the vmcb_safe_area with SEV-ES fields and add a new
-'struct ghcb' which will be used for guest-hypervisor communication.
+Building a correct GHCB for the hypervisor requires setting valid bits
+in the GHCB. Simplify that process by providing accessor functions to
+set values and to update the valid bitmap.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/svm.h | 42 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
+ arch/x86/include/asm/svm.h | 61 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 61 insertions(+)
 
 diff --git a/arch/x86/include/asm/svm.h b/arch/x86/include/asm/svm.h
-index 6ece8561ba66..f36288c659b5 100644
+index f36288c659b5..e4e9f6bacfaa 100644
 --- a/arch/x86/include/asm/svm.h
 +++ b/arch/x86/include/asm/svm.h
-@@ -201,6 +201,48 @@ struct __attribute__ ((__packed__)) vmcb_save_area {
- 	u64 br_to;
- 	u64 last_excp_from;
- 	u64 last_excp_to;
-+
-+	/*
-+	 * The following part of the save area is valid only for
-+	 * SEV-ES guests when referenced through the GHCB.
-+	 */
-+	u8 reserved_7[104];
-+	u64 reserved_8;		/* rax already available at 0x01f8 */
-+	u64 rcx;
-+	u64 rdx;
-+	u64 rbx;
-+	u64 reserved_9;		/* rsp already available at 0x01d8 */
-+	u64 rbp;
-+	u64 rsi;
-+	u64 rdi;
-+	u64 r8;
-+	u64 r9;
-+	u64 r10;
-+	u64 r11;
-+	u64 r12;
-+	u64 r13;
-+	u64 r14;
-+	u64 r15;
-+	u8 reserved_10[16];
-+	u64 sw_exit_code;
-+	u64 sw_exit_info_1;
-+	u64 sw_exit_info_2;
-+	u64 sw_scratch;
-+	u8 reserved_11[56];
-+	u64 xcr0;
-+	u8 valid_bitmap[16];
-+	u64 x87_state_gpa;
-+	u8 reserved_12[1016];
-+};
-+
-+struct __attribute__ ((__packed__)) ghcb {
-+	struct vmcb_save_area save;
-+
-+	u8 shared_buffer[2032];
-+
-+	u8 reserved_1[10];
-+	u16 protocol_version;	/* negotiated SEV-ES/GHCB protocol version */
-+	u32 ghcb_usage;
- };
+@@ -333,4 +333,65 @@ struct __attribute__ ((__packed__)) vmcb {
  
- struct __attribute__ ((__packed__)) vmcb {
+ #define SVM_CR0_SELECTIVE_MASK (X86_CR0_TS | X86_CR0_MP)
+ 
++/* GHCB Accessor functions */
++
++#define DEFINE_GHCB_INDICES(field)					\
++	u16 idx = offsetof(struct vmcb_save_area, field) / 8;		\
++	u16 byte_idx  = idx / 8;					\
++	u16 bit_idx   = idx % 8;					\
++	BUILD_BUG_ON(byte_idx > ARRAY_SIZE(ghcb->save.valid_bitmap));
++
++#define GHCB_SET_VALID(ghcb, field)					\
++	{								\
++		DEFINE_GHCB_INDICES(field)				\
++		(ghcb)->save.valid_bitmap[byte_idx] |= BIT(bit_idx);	\
++	}
++
++#define DEFINE_GHCB_SETTER(field)					\
++	static inline void						\
++	ghcb_set_##field(struct ghcb *ghcb, u64 value)			\
++	{								\
++		GHCB_SET_VALID(ghcb, field)				\
++		(ghcb)->save.field = value;				\
++	}
++
++#define DEFINE_GHCB_ACCESSORS(field)					\
++	static inline bool ghcb_is_valid_##field(const struct ghcb *ghcb)	\
++	{								\
++		DEFINE_GHCB_INDICES(field)				\
++		return !!((ghcb)->save.valid_bitmap[byte_idx]		\
++						& BIT(bit_idx));	\
++	}								\
++									\
++	static inline void						\
++	ghcb_set_##field(struct ghcb *ghcb, u64 value)			\
++	{								\
++		GHCB_SET_VALID(ghcb, field)				\
++		(ghcb)->save.field = value;				\
++	}
++
++DEFINE_GHCB_ACCESSORS(cpl)
++DEFINE_GHCB_ACCESSORS(rip)
++DEFINE_GHCB_ACCESSORS(rsp)
++DEFINE_GHCB_ACCESSORS(rax)
++DEFINE_GHCB_ACCESSORS(rcx)
++DEFINE_GHCB_ACCESSORS(rdx)
++DEFINE_GHCB_ACCESSORS(rbx)
++DEFINE_GHCB_ACCESSORS(rbp)
++DEFINE_GHCB_ACCESSORS(rsi)
++DEFINE_GHCB_ACCESSORS(rdi)
++DEFINE_GHCB_ACCESSORS(r8)
++DEFINE_GHCB_ACCESSORS(r9)
++DEFINE_GHCB_ACCESSORS(r10)
++DEFINE_GHCB_ACCESSORS(r11)
++DEFINE_GHCB_ACCESSORS(r12)
++DEFINE_GHCB_ACCESSORS(r13)
++DEFINE_GHCB_ACCESSORS(r14)
++DEFINE_GHCB_ACCESSORS(r15)
++DEFINE_GHCB_ACCESSORS(sw_exit_code)
++DEFINE_GHCB_ACCESSORS(sw_exit_info_1)
++DEFINE_GHCB_ACCESSORS(sw_exit_info_2)
++DEFINE_GHCB_ACCESSORS(sw_scratch)
++DEFINE_GHCB_ACCESSORS(xcr0)
++
+ #endif
 -- 
 2.17.1
 
