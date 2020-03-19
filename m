@@ -1,89 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id A416318AE2F
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 09:15:57 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id DF6E918AE8C
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 09:46:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 392AE88287;
-	Thu, 19 Mar 2020 08:15:56 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2179086AB7;
+	Thu, 19 Mar 2020 08:46:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MjINTjnqCQaX; Thu, 19 Mar 2020 08:15:55 +0000 (UTC)
+	with ESMTP id FBoOghYzaq3l; Thu, 19 Mar 2020 08:46:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A5D5688281;
-	Thu, 19 Mar 2020 08:15:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2C96686AAC;
+	Thu, 19 Mar 2020 08:46:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 837CCC07FF;
-	Thu, 19 Mar 2020 08:15:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0A8D1C07FF;
+	Thu, 19 Mar 2020 08:46:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C901DC07FF
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BC4AAC07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 08:15:53 +0000 (UTC)
+ Thu, 19 Mar 2020 08:46:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id B6890204BC
+ by whitealder.osuosl.org (Postfix) with ESMTP id A3EF1879AA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 08:15:53 +0000 (UTC)
+ Thu, 19 Mar 2020 08:46:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id b-EEsrpU1uPO
+ with ESMTP id 0ehW7nq2QILy
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 08:15:53 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-74.mimecast.com
- (us-smtp-delivery-74.mimecast.com [63.128.21.74])
- by silver.osuosl.org (Postfix) with ESMTPS id E09FB203C9
+ Thu, 19 Mar 2020 08:46:01 +0000 (UTC)
+X-Greylist: delayed 00:05:57 by SQLgrey-1.7.6
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+ [209.85.167.194])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 426D587988
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 08:15:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1584605751;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TgtDtG3cRVj31mITgFClFTokcEIBD9CXpdML9H7Wb8k=;
- b=OQZKXqXxdyRhU92rEGhd7sJG3gAi4j5gU6xdxv8iZ4VD99LArR56QY+N/pCIwGQBAxx4Z6
- 1iTx6grokSq+CHArLU/s2fLFzfO5gWvroP+U3t5RoS6zvvMIHlOdo4tC4Z/h1AflHFP8nH
- GJzY3y1BvqHfAEoVWCg+kMqcG7pa3HI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-270-1bCvthWzPxO0ZFGWraD_bQ-1; Thu, 19 Mar 2020 04:15:50 -0400
-X-MC-Unique: 1bCvthWzPxO0ZFGWraD_bQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 49FA9189D6C3;
- Thu, 19 Mar 2020 08:15:47 +0000 (UTC)
-Received: from [10.72.12.119] (ovpn-12-119.pek2.redhat.com [10.72.12.119])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3A67B19756;
- Thu, 19 Mar 2020 08:14:40 +0000 (UTC)
-Subject: Re: [PATCH V6 8/8] virtio: Intel IFC VF driver for VDPA
-To: Jason Gunthorpe <jgg@mellanox.com>
-References: <20200318080327.21958-1-jasowang@redhat.com>
- <20200318080327.21958-9-jasowang@redhat.com>
- <20200318122255.GG13183@mellanox.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <30359bae-d66a-0311-0028-d7d33b8295f2@redhat.com>
-Date: Thu, 19 Mar 2020 16:14:37 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ Thu, 19 Mar 2020 08:46:01 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id d62so1808599oia.11
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 19 Mar 2020 01:46:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ACN5TXHytCQ9oPIhIdCfNcH/pNHuSSltZdjJw7+EaRg=;
+ b=A7NboF2/Hz8lWvoBTGeYPrQgAwRxBjdgXIJR/1akF0SZVx5wIQu0CN/7CL80GXNQmg
+ 4rmVYRb0lYTdlQaiJRmDTsoYiGLCBJ+IDGv1Lp33jY1utb0+pr9jXvzBwAbmqtuCuxtb
+ rbnTIa/mG4eu6te9zzbxaeRET942OOWKDEDgM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ACN5TXHytCQ9oPIhIdCfNcH/pNHuSSltZdjJw7+EaRg=;
+ b=F1IJ3w1rNzvfBe3asvvddntpHZVuf58T5nEjF0KiGVWg+gW/7XiL3ZWiCZOWlPrdHX
+ lJiHemWAhHMxK/iirKPT/t/jU3eFgSE9RjsHrHycOI6c8qBtDFV9Ta0gCUhh6DidysU+
+ xlz1EBcClvGmM2Y1nvfniBs66bKaSVz5mqQZr8EAhAw7mn2/1SWT1sTFZ7ohNcbYJzOA
+ K/guLIWwKBq0BeEtCL+gmYKJubNEGt+NWm+1AADbsv/9s+CSSY1dmyGhjnYA7RiUuPwS
+ oJPG21Vp2xROMQEG2wNCkdPJ3hnWNjtE3+uK0WLJOC0ToiMV0g8+Iqir7zIuFLKXb3eP
+ nkPA==
+X-Gm-Message-State: ANhLgQ2llhROCPYoBiBwznuT7gsZoMLHTT7v7JqQPaNgA6tYdvVQFSnT
+ PYOI5jKFKnym9D4419pGzbTAO2UFuswFp6IMPgMLM0fq
+X-Google-Smtp-Source: ADFU+vt3ZzgRUF2QVHwIZ2Dg+soGlY7nM/mYmDu2kjCnCgsthelSdzxb44Mh83yzZ1MJ1ma3yWffDCZUEBGsisIAZiA=
+X-Received: by 2002:aca:be08:: with SMTP id o8mr1404601oif.101.1584607203202; 
+ Thu, 19 Mar 2020 01:40:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200318122255.GG13183@mellanox.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: kvm@vger.kernel.org, mst@redhat.com, mhabets@solarflare.com,
- virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
- saugatm@xilinx.com, lulu@redhat.com, hanand@xilinx.com, hch@infradead.org,
- eperezma@redhat.com, shahafs@mellanox.com, parav@mellanox.com,
- vmireyno@marvell.com, gdawar@xilinx.com, jiri@mellanox.com,
- xiao.w.wang@intel.com, stefanha@redhat.com, zhihong.wang@intel.com,
- rdunlap@infradead.org, linux-kernel@vger.kernel.org,
- maxime.coquelin@redhat.com, netdev@vger.kernel.org, lingshan.zhu@intel.com
+References: <20200313084152.2734-1-kraxel@redhat.com>
+ <20200317164941.GP2363188@phenom.ffwll.local>
+ <20200318064211.rg5s4sgrnqhht3f4@sirius.home.kraxel.org>
+In-Reply-To: <20200318064211.rg5s4sgrnqhht3f4@sirius.home.kraxel.org>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Thu, 19 Mar 2020 09:39:52 +0100
+Message-ID: <CAKMK7uE52i2_BhFoH0timOG_jUQP3OThA+wUWoMx6tfH9mMT6w@mail.gmail.com>
+Subject: Re: [PATCH v3] drm/bochs: downgrade pci_request_region failure from
+ error to warning
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ marmarek@invisiblethingslab.com, dri-devel <dri-devel@lists.freedesktop.org>,
+ "open list:DRM DRIVER FOR BOCHS VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,46 +90,49 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMy8xOCDkuIvljYg4OjIyLCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6Cj4gT24gV2Vk
-LCBNYXIgMTgsIDIwMjAgYXQgMDQ6MDM6MjdQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToKPj4g
-RnJvbTogWmh1IExpbmdzaGFuIDxsaW5nc2hhbi56aHVAaW50ZWwuY29tPgo+PiArCj4+ICtzdGF0
-aWMgaW50IGlmY3ZmX3ZkcGFfYXR0YWNoKHN0cnVjdCBpZmN2Zl9hZGFwdGVyICphZGFwdGVyKQo+
-PiArewo+PiArCWludCByZXQ7Cj4+ICsKPj4gKwlhZGFwdGVyLT52ZHBhX2RldiAgPSB2ZHBhX2Fs
-bG9jX2RldmljZShhZGFwdGVyLT5kZXYsIGFkYXB0ZXItPmRldiwKPj4gKwkJCQkJICAgICAgICZp
-ZmNfdmRwYV9vcHMpOwo+PiArCWlmIChJU19FUlIoYWRhcHRlci0+dmRwYV9kZXYpKSB7Cj4+ICsJ
-CUlGQ1ZGX0VSUihhZGFwdGVyLT5kZXYsICJGYWlsZWQgdG8gaW5pdCBpZmN2ZiBvbiB2ZHBhIGJ1
-cyIpOwo+PiArCQlwdXRfZGV2aWNlKCZhZGFwdGVyLT52ZHBhX2Rldi0+ZGV2KTsKPj4gKwkJcmV0
-dXJuIC1FTk9ERVY7Cj4+ICsJfQo+IFRoZSBwb2ludCBvZiBoYXZpbmcgYW4gYWxsb2MgY2FsbCBp
-cyBzbyB0aGF0IHRoZSBkcml2ZXJzCj4gaWZjdmZfYWRhcHRvciBtZW1vcnkgY291bGQgYmUgcGxh
-Y2VkIGluIHRoZSBzYW1lIHN0cnVjdCAtIGVnIHVzZQo+IGNvbnRhaW5lcl9vZiB0byBmbGlwIGJl
-dHdlZW4gdGhlbSwgYW5kIGhhdmUgYSBrcmVmIGZvciBib3RoIG1lbW9yaWVzLgo+Cj4gSXQgc2Vl
-bSByZWFsbHkgd2VpcmQgdG8gaGF2ZSBhbiBhbGxvYyBmb2xsb3dlZCBpbW1lZGlhdGVseSBieQo+
-IHJlZ2lzdGVyLgoKCkkgYWRtaXQgdGhlIGlmY3ZmX2FkYXB0ZXIgaXMgbm90IGNvcnJlY3RseSBy
-ZWYtY291bnRlZC4gV2hhdCB5b3Ugc3VnZ2VzdCAKc2hvdWxkIHdvcmsuIEJ1dCBpdCBsb29rcyB0
-byBtZSB0aGUgZm9sbG93aW5nIGlzIG1vcmUgY2xlYW5lciBzaW5jZSB0aGUgCm1lbWJlcnMgb2Yg
-aWZjdmZfYWRhcHRlciBhcmUgYWxsIHJlbGF0ZWQgdG8gUENJIGRldmljZSBub3QgdkRQQSBpdHNl
-bGYuCgotIGtlZXAgdGhlIGN1cnJlbnQgbGF5b3V0IG9mIGlmY3ZmX2FkYXB0ZXIKLSBtZXJnZSB2
-ZHBhX2FsbG9jX2RldmljZSgpIGFuZCB2ZHBhX3JlZ2lzdGVyX2RldmljZSgpCi0gdXNlIGRldnJl
-cyB0byBiaW5kIGlmY3ZmX2FkYXB0ZXIgcmVmY250L2xpZmN5Y2xlIHRvIHRoZSB1bmRlciBQQ0kg
-ZGV2aWNlCgpJZiB3ZSBnbyBmb3IgdGhlIGNvbnRhaW5lcl9vZiBtZXRob2QsIHdlIHByb2JhYmx5
-IG5lZWQKCi0gYWNjZXB0IGEgc2l6ZSBvZiBwYXJlbnQgcGFyZW50IHN0cnVjdHVyZSBpbiB2ZHBh
-X2FsbG9jX2RldmljZSgpIGFuZCAKbWFuZGF0ZSB2ZHBhX2RldmljZSB0byBiZSB0aGUgZmlyc3Qg
-bWVtYmVyIG9mIGlmY3ZmX2FkYXB0ZXIKLSB3ZSBuZWVkIHByb3ZpZGUgYSB3YXkgdG8gZnJlZSBy
-ZXNvdXJjZXMgb2YgcGFyZW50IHN0cnVjdHVyZSB3aGVuIHdlIApkZXN0cm95IHZEUEEgZGV2aWNl
-CgpXaGF0J3MgeW91ciB0aG91Z2h0PwoKCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpcnRpby92
-aXJ0aW9fdmRwYS5jIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX3ZkcGEuYwo+PiBpbmRleCBjMzBl
-YjU1MDMwYmUuLmRlNjRiODhlZTdlNCAxMDA2NDQKPj4gKysrIGIvZHJpdmVycy92aXJ0aW8vdmly
-dGlvX3ZkcGEuYwo+PiBAQCAtMzYyLDYgKzM2Miw3IEBAIHN0YXRpYyBpbnQgdmlydGlvX3ZkcGFf
-cHJvYmUoc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhKQo+PiAgIAkJZ290byBlcnI7Cj4+ICAgCj4+
-ICAgCXZkcGFfc2V0X2RydmRhdGEodmRwYSwgdmRfZGV2KTsKPj4gKwlkZXZfaW5mbyh2ZF9kZXYt
-PnZkZXYuZGV2LnBhcmVudCwgImRldmljZSBhdHRhY2hlZCB0byBWRFBBIGJ1c1xuIik7Cj4+ICAg
-Cj4+ICAgCXJldHVybiAwOwo+IFRoaXMgaHVuayBzZWVtcyBvdXQgb2YgcGxhY2UKPgo+IEphc29u
-CgoKUmlnaHQsIHdpbGwgZml4LgoKVGhhbmtzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6
-YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5k
-YXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Wed, Mar 18, 2020 at 7:49 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> On Tue, Mar 17, 2020 at 05:49:41PM +0100, Daniel Vetter wrote:
+> > On Fri, Mar 13, 2020 at 09:41:52AM +0100, Gerd Hoffmann wrote:
+> > > Shutdown of firmware framebuffer has a bunch of problems.  Because
+> > > of this the framebuffer region might still be reserved even after
+> > > drm_fb_helper_remove_conflicting_pci_framebuffers() returned.
+> >
+> > Is that still the fbdev lifetime fun where the cleanup might be delayed if
+> > the char device node is still open?
+>
+> Yes.
+
+In that case I think a FIXME comment that this should be upgraded
+again to a full error once fbdev unloading is fixed should be added.
+With that:
+
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+I guess you might want a cc: stable on this too?
+-Daniel
+
+>
+> cheers,
+>   Gerd
+>
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
++41 (0) 79 365 57 48 - http://blog.ffwll.ch
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
