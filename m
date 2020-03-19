@@ -1,74 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5BBA18BB66
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 16:44:21 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ACBF18BB77
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 16:46:53 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 58FBA87E6E;
-	Thu, 19 Mar 2020 15:44:20 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2DE6186CA6;
+	Thu, 19 Mar 2020 15:46:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LAkNEhLVWGnG; Thu, 19 Mar 2020 15:44:19 +0000 (UTC)
+	with ESMTP id kD-o8VaI5a8E; Thu, 19 Mar 2020 15:46:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id ADF0A87E74;
-	Thu, 19 Mar 2020 15:44:19 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 57C0486C8C;
+	Thu, 19 Mar 2020 15:46:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 734A0C07FF;
-	Thu, 19 Mar 2020 15:44:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3CD25C07FF;
+	Thu, 19 Mar 2020 15:46:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 73457C07FF
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 82134C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:44:17 +0000 (UTC)
+ Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 61FD086C48
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 795E486C8C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:44:17 +0000 (UTC)
+ Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ahkx3uZLKX2H
+ with ESMTP id J4CQ7DFMLEOr
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:44:16 +0000 (UTC)
+ Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id ED02686C47
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 0C50086C76
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:44:16 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
+ Thu, 19 Mar 2020 15:46:50 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+ [209.85.221.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 82DE9208D6
+ by mail.kernel.org (Postfix) with ESMTPSA id 9B45A208C3
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 15:44:16 +0000 (UTC)
+ Thu, 19 Mar 2020 15:46:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584632656;
- bh=FVF/u9TSzlMdhf4kpAsywZwLbl/sGhd8ENC//u14qkk=;
+ s=default; t=1584632809;
+ bh=Cn1m0nZsjDiV+FYhoJLlELXGkyDw2CZ03wWFmubUPo8=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=I0y8sUtct/Bh3UhCYALlKYXq+6n0HLrW6vax7RdHHsEFi5n3GSL+JQMq0m0DjnndW
- Xnlr5ugUwiw8Ty8NfSG7okzMxvecohY1DohE1VEjUTEVJLbVTbJhrexGrjUrcjgFHl
- WDAK45zaZZs97psWeLFp4eLJq6uLqm/BJjrLdIjE=
-Received: by mail-wr1-f48.google.com with SMTP id s1so3640579wrv.5
+ b=XngItLjx0RxK+PimP3jEzaqooTBTwBy4kih8MW6Imxm+fj223z/qpfIE2BKk4Fzdd
+ RiQqOnv5aQwLbox4Z/d8xAdb9GpLC9QnI7Ux5YIJViMyGg+L/UawGnm256GEoDCKRq
+ ZtMTYkqWdljH2vRVcgKhtW3oQUDlWRYQ14szfV74=
+Received: by mail-wr1-f44.google.com with SMTP id j17so226304wru.13
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 08:44:16 -0700 (PDT)
-X-Gm-Message-State: ANhLgQ05Iky2CihiZRBfzAZUFuBY2MudH9iAoypGF7mnJ2RjVN12cpsy
- VmO5VGo2ZxpV9Ydm3pINv1qjryyAI/zo0SUhOipYpw==
-X-Google-Smtp-Source: ADFU+vu9xO32MybzBmacdPgCqlG7WVDPKTtdn223Fbu4PAIymbvyrGwQMSSWxAV7RNpXhGgQhHa1JuyvGJ5sDsUdXMI=
-X-Received: by 2002:adf:a30b:: with SMTP id c11mr4940938wrb.257.1584632654996; 
- Thu, 19 Mar 2020 08:44:14 -0700 (PDT)
+ Thu, 19 Mar 2020 08:46:49 -0700 (PDT)
+X-Gm-Message-State: ANhLgQ3BKSnxhH0CV2Xd8TVhtpVIR/qLlcnbiN41qwFIsvNkmCsjF+ff
+ JMfCPldpCeVs6SZ5SE1SB2N5KH23jcUFh6rPGMOjHg==
+X-Google-Smtp-Source: ADFU+vtRWY7b1vbCxAUKKJKmAYVxdIrYpSMuMiWvH4H8RWo6SRJpLSPLzDmmHbdXmaoFC1CnppEqPqcDFxLdoNnM7Rk=
+X-Received: by 2002:adf:e883:: with SMTP id d3mr4992846wrm.75.1584632808043;
+ Thu, 19 Mar 2020 08:46:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200319091407.1481-1-joro@8bytes.org>
- <20200319091407.1481-42-joro@8bytes.org>
-In-Reply-To: <20200319091407.1481-42-joro@8bytes.org>
+ <20200319091407.1481-43-joro@8bytes.org>
+In-Reply-To: <20200319091407.1481-43-joro@8bytes.org>
 From: Andy Lutomirski <luto@kernel.org>
-Date: Thu, 19 Mar 2020 08:44:03 -0700
-X-Gmail-Original-Message-ID: <CALCETrW9EYi5dzCKNtKkxM18CC4n5BZxTp1=qQ5qZccwstXjzg@mail.gmail.com>
-Message-ID: <CALCETrW9EYi5dzCKNtKkxM18CC4n5BZxTp1=qQ5qZccwstXjzg@mail.gmail.com>
-Subject: Re: [PATCH 41/70] x86/sev-es: Add Runtime #VC Exception Handler
+Date: Thu, 19 Mar 2020 08:46:36 -0700
+X-Gmail-Original-Message-ID: <CALCETrXiWjALMTcG=92DmMn_H=yR88e0-3cj8CjTAjtjTvBR8w@mail.gmail.com>
+Message-ID: <CALCETrXiWjALMTcG=92DmMn_H=yR88e0-3cj8CjTAjtjTvBR8w@mail.gmail.com>
+Subject: Re: [PATCH 42/70] x86/sev-es: Support nested #VC exceptions
 To: Joerg Roedel <joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -97,20 +97,59 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On Thu, Mar 19, 2020 at 2:14 AM Joerg Roedel <joro@8bytes.org> wrote:
 >
-> From: Tom Lendacky <thomas.lendacky@amd.com>
+> From: Joerg Roedel <jroedel@suse.de>
 >
-> Add the handler for #VC exceptions invoked at runtime.
+> Handle #VC exceptions that happen while the GHCB is in use. This can
+> happen when an NMI happens in the #VC exception handler and the NMI
+> handler causes a #VC exception itself. Save the contents of the GHCB
+> when nesting is detected and restore it when the GHCB is no longer
+> used.
+>
+> Signed-off-by: Joerg Roedel <jroedel@suse.de>
+> ---
+>  arch/x86/kernel/sev-es.c | 63 +++++++++++++++++++++++++++++++++++++---
+>  1 file changed, 59 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
+> index 97241d2f0f70..3b7bbc8d841e 100644
+> --- a/arch/x86/kernel/sev-es.c
+> +++ b/arch/x86/kernel/sev-es.c
+> @@ -32,9 +32,57 @@ struct ghcb boot_ghcb_page __bss_decrypted __aligned(PAGE_SIZE);
+>   */
+>  struct ghcb __initdata *boot_ghcb;
+>
+> +struct ghcb_state {
+> +       struct ghcb *ghcb;
+> +};
+> +
+>  /* Runtime GHCB pointers */
+>  static struct ghcb __percpu *ghcb_page;
+>
+> +/*
+> + * Mark the per-cpu GHCB as in-use to detect nested #VC exceptions.
+> + * There is no need for it to be atomic, because nothing is written to the GHCB
+> + * between the read and the write of ghcb_active. So it is safe to use it when a
+> + * nested #VC exception happens before the write.
+> + */
+> +static DEFINE_PER_CPU(bool, ghcb_active);
+> +
+> +static struct ghcb *sev_es_get_ghcb(struct ghcb_state *state)
+> +{
+> +       struct ghcb *ghcb = (struct ghcb *)this_cpu_ptr(ghcb_page);
+> +       bool *active = this_cpu_ptr(&ghcb_active);
+> +
+> +       if (unlikely(*active)) {
+> +               /* GHCB is already in use - save its contents */
+> +
+> +               state->ghcb = kzalloc(sizeof(struct ghcb), GFP_ATOMIC);
+> +               if (!state->ghcb)
+> +                       return NULL;
 
-If I read this correctly, this does not use IST.  If that's true, I
-don't see how this can possibly work.  There at least two nasty cases
-that come to mind:
+This can't possibly end well.  Maybe have a little percpu list of
+GHCBs and make sure there are enough for any possible nesting?
 
-1. SYSCALL followed by NMI.  The NMI IRET hack gets to #VC and we
-explode.  This is fixable by getting rid of the NMI EFLAGS.TF hack.
-
-2. tools/testing/selftests/x86/mov_ss_trap_64.  User code does MOV
-(addr), SS; SYSCALL, where addr has a data breakpoint.  We get #DB
-promoted to #VC with no stack.
+Also, I admit confusion.  Isn't the GHCB required to be unencrypted?
+How does that work with kzalloc()?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
