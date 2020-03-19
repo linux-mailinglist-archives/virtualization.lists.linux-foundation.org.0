@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95F6118B006
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:23:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 139D918B00D
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:24:03 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 96BF386B84;
-	Thu, 19 Mar 2020 09:23:54 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C673486479;
+	Thu, 19 Mar 2020 09:23:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9RwoAQsb8D0s; Thu, 19 Mar 2020 09:23:53 +0000 (UTC)
+	with ESMTP id kuJFAILz4GoS; Thu, 19 Mar 2020 09:23:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id EAAE686448;
-	Thu, 19 Mar 2020 09:23:52 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D05A286B90;
+	Thu, 19 Mar 2020 09:23:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CA221C18DA;
-	Thu, 19 Mar 2020 09:23:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BC8D8C07FF;
+	Thu, 19 Mar 2020 09:23:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7E398C07FF
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5157FC07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:49 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 6C4AC204E8
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3A32987C03
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:49 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0Rc9ZheMIu3c
+ with ESMTP id uxEZVNk-u9gc
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:23:47 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id C3CB42037B
+ by whitealder.osuosl.org (Postfix) with ESMTPS id CE67687BE0
  for <virtualization@lists.linux-foundation.org>;
  Thu, 19 Mar 2020 09:23:46 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id E6D2AE89; Thu, 19 Mar 2020 10:14:25 +0100 (CET)
+ id 1EB7AE8D; Thu, 19 Mar 2020 10:14:26 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 51/70] x86/sev-es: Handle WBINVD Events
-Date: Thu, 19 Mar 2020 10:13:48 +0100
-Message-Id: <20200319091407.1481-52-joro@8bytes.org>
+Subject: [PATCH 52/70] x86/sev-es: Handle RDTSC Events
+Date: Thu, 19 Mar 2020 10:13:49 +0100
+Message-Id: <20200319091407.1481-53-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -75,42 +75,53 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Implement a handler for #VC exceptions caused by WBINVD instructions.
+Implement a handler for #VC exceptions caused by RDTSC instructions.
 
 Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: Adapt to #VC handling framework ]
+[ jroedel@suse.de: Adapt to #VC handling infrastructure ]
 Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/x86/kernel/sev-es.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 7a9cdc660637..5b024ee54307 100644
+index 5b024ee54307..afbe574126f3 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -659,6 +659,12 @@ static enum es_result vc_handle_dr7_read(struct ghcb *ghcb,
- 	return ES_OK;
+@@ -665,6 +665,23 @@ static enum es_result vc_handle_wbinvd(struct ghcb *ghcb,
+ 	return sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_WBINVD, 0, 0);
  }
  
-+static enum es_result vc_handle_wbinvd(struct ghcb *ghcb,
-+				       struct es_em_ctxt *ctxt)
++static enum es_result vc_handle_rdtsc(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
 +{
-+	return sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_WBINVD, 0, 0);
++	enum es_result ret;
++
++	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_RDTSC, 0, 0);
++	if (ret != ES_OK)
++		return ret;
++
++	if (!(ghcb_is_valid_rax(ghcb) && ghcb_is_valid_rdx(ghcb)))
++		return ES_VMM_ERROR;
++
++	ctxt->regs->ax = ghcb->save.rax;
++	ctxt->regs->dx = ghcb->save.rdx;
++
++	return ES_OK;
 +}
 +
  static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
  					 struct ghcb *ghcb,
  					 unsigned long exit_code,
-@@ -682,6 +688,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
- 	case SVM_EXIT_MSR:
- 		result = vc_handle_msr(ghcb, ctxt);
+@@ -679,6 +696,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 	case SVM_EXIT_WRITE_DR7:
+ 		result = vc_handle_dr7_write(ghcb, ctxt, early);
  		break;
-+	case SVM_EXIT_WBINVD:
-+		result = vc_handle_wbinvd(ghcb, ctxt);
++	case SVM_EXIT_RDTSC:
++		result = vc_handle_rdtsc(ghcb, ctxt);
 +		break;
- 	case SVM_EXIT_NPF:
- 		result = vc_handle_mmio(ghcb, ctxt);
+ 	case SVM_EXIT_CPUID:
+ 		result = vc_handle_cpuid(ghcb, ctxt);
  		break;
 -- 
 2.17.1
