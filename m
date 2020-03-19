@@ -1,50 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A7A018B00E
-	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:24:03 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DAD118B000
+	for <lists.virtualization@lfdr.de>; Thu, 19 Mar 2020 10:23:53 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 42D2D883A8;
-	Thu, 19 Mar 2020 09:24:02 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BF3CD86356;
+	Thu, 19 Mar 2020 09:23:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rq5vSOwB2zY9; Thu, 19 Mar 2020 09:24:00 +0000 (UTC)
+	with ESMTP id w7v-5GQhISJV; Thu, 19 Mar 2020 09:23:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B37C688355;
-	Thu, 19 Mar 2020 09:23:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 34DE686308;
+	Thu, 19 Mar 2020 09:23:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F113C18DA;
-	Thu, 19 Mar 2020 09:23:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2201CC07FF;
+	Thu, 19 Mar 2020 09:23:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 35080C18DA
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 39F20C18DA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:51 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 2D8E1203BB
+ by hemlock.osuosl.org (Postfix) with ESMTP id 2A49E8829D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:51 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id H4M-sE9KxTh6
+ with ESMTP id 8C0ApMU1VpH5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:48 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:47 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 976082037E
+ by hemlock.osuosl.org (Postfix) with ESMTPS id CDB9388236
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Mar 2020 09:23:48 +0000 (UTC)
+ Thu, 19 Mar 2020 09:23:46 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 55DCAD19; Thu, 19 Mar 2020 10:14:25 +0100 (CET)
+ id 876FDE7B; Thu, 19 Mar 2020 10:14:25 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 48/70] x86/sev-es: Handle MMIO String Instructions
-Date: Thu, 19 Mar 2020 10:13:45 +0100
-Message-Id: <20200319091407.1481-49-joro@8bytes.org>
+Subject: [PATCH 49/70] x86/sev-es: Handle MSR events
+Date: Thu, 19 Mar 2020 10:13:46 +0100
+Message-Id: <20200319091407.1481-50-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200319091407.1481-1-joro@8bytes.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
@@ -73,112 +73,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Joerg Roedel <jroedel@suse.de>
+From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Add handling for emulation the MOVS instruction on MMIO regions, as done
-by the memcpy_toio() and memcpy_fromio() functions.
+Implement a handler for #VC exceptions caused by RDMSR/WRMSR
+instructions.
 
+Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
+[ jroedel@suse.de: Adapt to #VC handling infrastructure ]
+Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 78 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 78 insertions(+)
+ arch/x86/kernel/sev-es.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 6b0f82f81229..a040959e512d 100644
+index a040959e512d..163b8a7f98a4 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -415,6 +415,74 @@ static enum es_result vc_handle_mmio_twobyte_ops(struct ghcb *ghcb,
- 	return ret;
- }
+@@ -262,6 +262,35 @@ static phys_addr_t vc_slow_virt_to_phys(struct ghcb *ghcb, long vaddr)
+ /* Include code shared with pre-decompression boot stage */
+ #include "sev-es-shared.c"
  
-+/*
-+ * The MOVS instruction has two memory operands, which raises the
-+ * problem that it is not known whether the access to the source or the
-+ * destination caused the #VC exception (and hence whether an MMIO read
-+ * or write operation needs to be emulated).
-+ *
-+ * Instead of playing games with walking page-tables and trying to guess
-+ * whether the source or destination is an MMIO range, this code splits
-+ * the move into two operations, a read and a write with only one
-+ * memory operand. This will cause a nested #VC exception on the MMIO
-+ * address which can then be handled.
-+ *
-+ * This implementation has the benefit that it also supports MOVS where
-+ * source _and_ destination are MMIO regions.
-+ *
-+ * It will slow MOVS on MMIO down a lot, but in SEV-ES guests it is a
-+ * rare operation. If it turns out to be a performance problem the split
-+ * operations can be moved to memcpy_fromio() and memcpy_toio().
-+ */
-+static enum es_result vc_handle_mmio_movs(struct es_em_ctxt *ctxt,
-+					  unsigned int bytes)
++static enum es_result vc_handle_msr(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
 +{
-+	unsigned long ds_base, es_base;
-+	unsigned char *src, *dst;
-+	unsigned char buffer[8];
++	struct pt_regs *regs = ctxt->regs;
 +	enum es_result ret;
-+	bool rep;
-+	int off;
++	bool write;
++	u64 exit_info_1;
 +
-+	ds_base = insn_get_seg_base(ctxt->regs, INAT_SEG_REG_DS);
-+	es_base = insn_get_seg_base(ctxt->regs, INAT_SEG_REG_ES);
++	write = (ctxt->insn.opcode.bytes[1] == 0x30);
 +
-+	if (ds_base == -1L || es_base == -1L) {
-+		ctxt->fi.vector = X86_TRAP_GP;
-+		ctxt->fi.error_code = 0;
-+		return ES_EXCEPTION;
++	ghcb_set_rcx(ghcb, regs->cx);
++	if (write) {
++		ghcb_set_rax(ghcb, regs->ax);
++		ghcb_set_rdx(ghcb, regs->dx);
++		exit_info_1 = 1;
++	} else {
++		exit_info_1 = 0;
 +	}
 +
-+	src = ds_base + (unsigned char *)ctxt->regs->si;
-+	dst = es_base + (unsigned char *)ctxt->regs->di;
-+
-+	ret = vc_read_mem(ctxt, src, buffer, bytes);
++	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_MSR, exit_info_1, 0);
 +	if (ret != ES_OK)
 +		return ret;
++	else if (!write) {
++		regs->ax = ghcb->save.rax;
++		regs->dx = ghcb->save.rdx;
++	}
 +
-+	ret = vc_write_mem(ctxt, dst, buffer, bytes);
-+	if (ret != ES_OK)
-+		return ret;
-+
-+	if (ctxt->regs->flags & X86_EFLAGS_DF)
-+		off = -bytes;
-+	else
-+		off =  bytes;
-+
-+	ctxt->regs->si += off;
-+	ctxt->regs->di += off;
-+
-+	rep = insn_rep_prefix(&ctxt->insn);
-+
-+	if (rep)
-+		ctxt->regs->cx -= 1;
-+
-+	if (!rep || ctxt->regs->cx == 0)
-+		return ES_OK;
-+	else
-+		return ES_RETRY;
++	return ret;
 +}
 +
- static enum es_result vc_handle_mmio(struct ghcb *ghcb,
- 				     struct es_em_ctxt *ctxt)
- {
-@@ -469,6 +537,16 @@ static enum es_result vc_handle_mmio(struct ghcb *ghcb,
- 		memcpy(reg_data, ghcb->shared_buffer, bytes);
+ /*
+  * This function runs on the first #VC exception after the kernel
+  * switched to virtual addresses.
+@@ -571,6 +600,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 	case SVM_EXIT_IOIO:
+ 		result = vc_handle_ioio(ghcb, ctxt);
  		break;
- 
-+		/* MOVS instruction */
-+	case 0xa4:
-+		bytes = 1;
-+		/* Fallthrough */
-+	case 0xa5:
-+		if (!bytes)
-+			bytes = insn->opnd_bytes;
-+
-+		ret = vc_handle_mmio_movs(ctxt, bytes);
++	case SVM_EXIT_MSR:
++		result = vc_handle_msr(ghcb, ctxt);
 +		break;
- 		/* Two-Byte Opcodes */
- 	case 0x0f:
- 		ret = vc_handle_mmio_twobyte_ops(ghcb, ctxt);
+ 	case SVM_EXIT_NPF:
+ 		result = vc_handle_mmio(ghcb, ctxt);
+ 		break;
 -- 
 2.17.1
 
