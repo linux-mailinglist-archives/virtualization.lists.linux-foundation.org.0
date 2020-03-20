@@ -1,57 +1,115 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB90C18CE9E
-	for <lists.virtualization@lfdr.de>; Fri, 20 Mar 2020 14:17:18 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C357318D151
+	for <lists.virtualization@lfdr.de>; Fri, 20 Mar 2020 15:42:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 173E724F51;
-	Fri, 20 Mar 2020 13:17:17 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6C0A987E8E;
+	Fri, 20 Mar 2020 14:42:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id evMaDFGXUxAp; Fri, 20 Mar 2020 13:17:15 +0000 (UTC)
+	with ESMTP id lRG-MmkP9KLt; Fri, 20 Mar 2020 14:42:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id DEAE023DA9;
-	Fri, 20 Mar 2020 13:17:15 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7745887E88;
+	Fri, 20 Mar 2020 14:42:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B5CCBC07FF;
-	Fri, 20 Mar 2020 13:17:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4DE65C07FF;
+	Fri, 20 Mar 2020 14:42:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4FA5BC07FF
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A92A4C07FF
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Mar 2020 13:17:14 +0000 (UTC)
+ Fri, 20 Mar 2020 14:42:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 45B838645E
+ by silver.osuosl.org (Postfix) with ESMTP id 90D8C20449
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Mar 2020 13:17:14 +0000 (UTC)
+ Fri, 20 Mar 2020 14:42:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dCeF2AqvsIzM
+ with ESMTP id 2GUb1Av3PbNL
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Mar 2020 13:17:13 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 067BE86500
+ Fri, 20 Mar 2020 14:42:11 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+ by silver.osuosl.org (Postfix) with ESMTPS id 984A02042C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Mar 2020 13:17:13 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id EDAE0364; Fri, 20 Mar 2020 14:17:09 +0100 (CET)
-Date: Fri, 20 Mar 2020 14:17:07 +0100
-From: Joerg Roedel <joro@8bytes.org>
-To: Andy Lutomirski <luto@kernel.org>
-Subject: [RFC PATCH v2.1] x86/sev-es: Handle NMI State
-Message-ID: <20200320131707.GF5122@8bytes.org>
+ Fri, 20 Mar 2020 14:42:11 +0000 (UTC)
+IronPort-SDR: A/HukexVdThKmUYn5Rtxg5gwWVOSg3jkPyzgbW2qUIPmewmPHXT0B8S3u42PpjDYkRLeaJz2NO
+ biKzPTh77Nfg==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Mar 2020 07:42:10 -0700
+IronPort-SDR: y/DCTPYeHhLQXTi1kZajrLL8cvBlcF7sM9Lmzxo489dLbGXXuET+DQx7RX/5KtgB3xcn9E6HfG
+ ldu8qJw/s5/w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.72,284,1580803200"; d="scan'208";a="248896586"
+Received: from jralexan-mobl.amr.corp.intel.com (HELO [10.254.187.105])
+ ([10.254.187.105])
+ by orsmga006.jf.intel.com with ESMTP; 20 Mar 2020 07:42:09 -0700
+Subject: Re: [RFC PATCH v2.1] x86/sev-es: Handle NMI State
+To: Joerg Roedel <joro@8bytes.org>, Andy Lutomirski <luto@kernel.org>
 References: <20200319091407.1481-1-joro@8bytes.org>
  <20200319091407.1481-71-joro@8bytes.org>
  <CALCETrUOQneBHjoZkP-7T5PDijb=WOyv7xF7TD0GLR2Aw77vyA@mail.gmail.com>
+ <20200320131707.GF5122@8bytes.org>
+From: Dave Hansen <dave.hansen@intel.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=dave.hansen@intel.com; keydata=
+ mQINBE6HMP0BEADIMA3XYkQfF3dwHlj58Yjsc4E5y5G67cfbt8dvaUq2fx1lR0K9h1bOI6fC
+ oAiUXvGAOxPDsB/P6UEOISPpLl5IuYsSwAeZGkdQ5g6m1xq7AlDJQZddhr/1DC/nMVa/2BoY
+ 2UnKuZuSBu7lgOE193+7Uks3416N2hTkyKUSNkduyoZ9F5twiBhxPJwPtn/wnch6n5RsoXsb
+ ygOEDxLEsSk/7eyFycjE+btUtAWZtx+HseyaGfqkZK0Z9bT1lsaHecmB203xShwCPT49Blxz
+ VOab8668QpaEOdLGhtvrVYVK7x4skyT3nGWcgDCl5/Vp3TWA4K+IofwvXzX2ON/Mj7aQwf5W
+ iC+3nWC7q0uxKwwsddJ0Nu+dpA/UORQWa1NiAftEoSpk5+nUUi0WE+5DRm0H+TXKBWMGNCFn
+ c6+EKg5zQaa8KqymHcOrSXNPmzJuXvDQ8uj2J8XuzCZfK4uy1+YdIr0yyEMI7mdh4KX50LO1
+ pmowEqDh7dLShTOif/7UtQYrzYq9cPnjU2ZW4qd5Qz2joSGTG9eCXLz5PRe5SqHxv6ljk8mb
+ ApNuY7bOXO/A7T2j5RwXIlcmssqIjBcxsRRoIbpCwWWGjkYjzYCjgsNFL6rt4OL11OUF37wL
+ QcTl7fbCGv53KfKPdYD5hcbguLKi/aCccJK18ZwNjFhqr4MliQARAQABtEVEYXZpZCBDaHJp
+ c3RvcGhlciBIYW5zZW4gKEludGVsIFdvcmsgQWRkcmVzcykgPGRhdmUuaGFuc2VuQGludGVs
+ LmNvbT6JAjgEEwECACIFAlQ+9J0CGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAAoJEGg1
+ lTBwyZKwLZUP/0dnbhDc229u2u6WtK1s1cSd9WsflGXGagkR6liJ4um3XCfYWDHvIdkHYC1t
+ MNcVHFBwmQkawxsYvgO8kXT3SaFZe4ISfB4K4CL2qp4JO+nJdlFUbZI7cz/Td9z8nHjMcWYF
+ IQuTsWOLs/LBMTs+ANumibtw6UkiGVD3dfHJAOPNApjVr+M0P/lVmTeP8w0uVcd2syiaU5jB
+ aht9CYATn+ytFGWZnBEEQFnqcibIaOrmoBLu2b3fKJEd8Jp7NHDSIdrvrMjYynmc6sZKUqH2
+ I1qOevaa8jUg7wlLJAWGfIqnu85kkqrVOkbNbk4TPub7VOqA6qG5GCNEIv6ZY7HLYd/vAkVY
+ E8Plzq/NwLAuOWxvGrOl7OPuwVeR4hBDfcrNb990MFPpjGgACzAZyjdmYoMu8j3/MAEW4P0z
+ F5+EYJAOZ+z212y1pchNNauehORXgjrNKsZwxwKpPY9qb84E3O9KYpwfATsqOoQ6tTgr+1BR
+ CCwP712H+E9U5HJ0iibN/CDZFVPL1bRerHziuwuQuvE0qWg0+0SChFe9oq0KAwEkVs6ZDMB2
+ P16MieEEQ6StQRlvy2YBv80L1TMl3T90Bo1UUn6ARXEpcbFE0/aORH/jEXcRteb+vuik5UGY
+ 5TsyLYdPur3TXm7XDBdmmyQVJjnJKYK9AQxj95KlXLVO38lcuQINBFRjzmoBEACyAxbvUEhd
+ GDGNg0JhDdezyTdN8C9BFsdxyTLnSH31NRiyp1QtuxvcqGZjb2trDVuCbIzRrgMZLVgo3upr
+ MIOx1CXEgmn23Zhh0EpdVHM8IKx9Z7V0r+rrpRWFE8/wQZngKYVi49PGoZj50ZEifEJ5qn/H
+ Nsp2+Y+bTUjDdgWMATg9DiFMyv8fvoqgNsNyrrZTnSgoLzdxr89FGHZCoSoAK8gfgFHuO54B
+ lI8QOfPDG9WDPJ66HCodjTlBEr/Cwq6GruxS5i2Y33YVqxvFvDa1tUtl+iJ2SWKS9kCai2DR
+ 3BwVONJEYSDQaven/EHMlY1q8Vln3lGPsS11vSUK3QcNJjmrgYxH5KsVsf6PNRj9mp8Z1kIG
+ qjRx08+nnyStWC0gZH6NrYyS9rpqH3j+hA2WcI7De51L4Rv9pFwzp161mvtc6eC/GxaiUGuH
+ BNAVP0PY0fqvIC68p3rLIAW3f97uv4ce2RSQ7LbsPsimOeCo/5vgS6YQsj83E+AipPr09Caj
+ 0hloj+hFoqiticNpmsxdWKoOsV0PftcQvBCCYuhKbZV9s5hjt9qn8CE86A5g5KqDf83Fxqm/
+ vXKgHNFHE5zgXGZnrmaf6resQzbvJHO0Fb0CcIohzrpPaL3YepcLDoCCgElGMGQjdCcSQ+Ci
+ FCRl0Bvyj1YZUql+ZkptgGjikQARAQABiQIfBBgBAgAJBQJUY85qAhsMAAoJEGg1lTBwyZKw
+ l4IQAIKHs/9po4spZDFyfDjunimEhVHqlUt7ggR1Hsl/tkvTSze8pI1P6dGp2XW6AnH1iayn
+ yRcoyT0ZJ+Zmm4xAH1zqKjWplzqdb/dO28qk0bPso8+1oPO8oDhLm1+tY+cOvufXkBTm+whm
+ +AyNTjaCRt6aSMnA/QHVGSJ8grrTJCoACVNhnXg/R0g90g8iV8Q+IBZyDkG0tBThaDdw1B2l
+ asInUTeb9EiVfL/Zjdg5VWiF9LL7iS+9hTeVdR09vThQ/DhVbCNxVk+DtyBHsjOKifrVsYep
+ WpRGBIAu3bK8eXtyvrw1igWTNs2wazJ71+0z2jMzbclKAyRHKU9JdN6Hkkgr2nPb561yjcB8
+ sIq1pFXKyO+nKy6SZYxOvHxCcjk2fkw6UmPU6/j/nQlj2lfOAgNVKuDLothIxzi8pndB8Jju
+ KktE5HJqUUMXePkAYIxEQ0mMc8Po7tuXdejgPMwgP7x65xtfEqI0RuzbUioFltsp1jUaRwQZ
+ MTsCeQDdjpgHsj+P2ZDeEKCbma4m6Ez/YWs4+zDm1X8uZDkZcfQlD9NldbKDJEXLIjYWo1PH
+ hYepSffIWPyvBMBTW2W5FRjJ4vLRrJSUoEfJuPQ3vW9Y73foyo/qFoURHO48AinGPZ7PC7TF
+ vUaNOTjKedrqHkaOcqB185ahG2had0xnFsDPlx5y
+Message-ID: <7d1ee9d9-d333-4529-b21b-19758c99e029@intel.com>
+Date: Fri, 20 Mar 2020 07:42:09 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CALCETrUOQneBHjoZkP-7T5PDijb=WOyv7xF7TD0GLR2Aw77vyA@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20200320131707.GF5122@8bytes.org>
+Content-Language: en-US
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Kees Cook <keescook@chromium.org>,
@@ -76,125 +134,19 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Mar 19, 2020 at 08:35:59AM -0700, Andy Lutomirski wrote:
-> 1. Just put the NMI unmask in do_nmi().  The kernel *already* knows
-> how to handle running do_nmi() with NMIs unmasked.  This is much, much
-> simpler than your code.
+On 3/20/20 6:17 AM, Joerg Roedel wrote:
+> On Thu, Mar 19, 2020 at 08:35:59AM -0700, Andy Lutomirski wrote:
+>> 1. Just put the NMI unmask in do_nmi().  The kernel *already* knows
+>> how to handle running do_nmi() with NMIs unmasked.  This is much, much
+>> simpler than your code.
+> Okay, attached is the updated patch which implements this approach. I
+> tested it in an SEV-ES guest with 'perf top' running for a little more
+> than 30 minutes and all looked good. I also removed the dead code from
+> the patch.
 
-Okay, attached is the updated patch which implements this approach. I
-tested it in an SEV-ES guest with 'perf top' running for a little more
-than 30 minutes and all looked good. I also removed the dead code from
-the patch.
-
-
-From ec3b021c5d9130fd66e00d823c4fabc675c4b49e Mon Sep 17 00:00:00 2001
-From: Joerg Roedel <jroedel@suse.de>
-Date: Tue, 28 Jan 2020 17:31:05 +0100
-Subject: [PATCH] x86/sev-es: Handle NMI State
-
-When running under SEV-ES the kernel has to tell the hypervisor when to
-open the NMI window again after an NMI was injected. This is done with
-an NMI-complete message to the hypervisor.
-
-Add code to the kernels NMI handler to send this message right at the
-beginning of do_nmi(). This always allows nesting NMIs.
-
-Signed-off-by: Joerg Roedel <jroedel@suse.de>
----
- arch/x86/include/asm/sev-es.h   |  2 ++
- arch/x86/include/uapi/asm/svm.h |  1 +
- arch/x86/kernel/nmi.c           |  8 ++++++++
- arch/x86/kernel/sev-es.c        | 18 ++++++++++++++++++
- 4 files changed, 29 insertions(+)
-
-diff --git a/arch/x86/include/asm/sev-es.h b/arch/x86/include/asm/sev-es.h
-index 63acf50e6280..441ec1ba2cc7 100644
---- a/arch/x86/include/asm/sev-es.h
-+++ b/arch/x86/include/asm/sev-es.h
-@@ -82,11 +82,13 @@ struct real_mode_header;
- 
- #ifdef CONFIG_AMD_MEM_ENCRYPT
- int sev_es_setup_ap_jump_table(struct real_mode_header *rmh);
-+void sev_es_nmi_complete(void);
- #else /* CONFIG_AMD_MEM_ENCRYPT */
- static inline int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
- {
- 	return 0;
- }
-+static inline void sev_es_nmi_complete(void) { }
- #endif /* CONFIG_AMD_MEM_ENCRYPT*/
- 
- #endif
-diff --git a/arch/x86/include/uapi/asm/svm.h b/arch/x86/include/uapi/asm/svm.h
-index 20a05839dd9a..0f837339db66 100644
---- a/arch/x86/include/uapi/asm/svm.h
-+++ b/arch/x86/include/uapi/asm/svm.h
-@@ -84,6 +84,7 @@
- /* SEV-ES software-defined VMGEXIT events */
- #define SVM_VMGEXIT_MMIO_READ			0x80000001
- #define SVM_VMGEXIT_MMIO_WRITE			0x80000002
-+#define SVM_VMGEXIT_NMI_COMPLETE		0x80000003
- #define SVM_VMGEXIT_AP_HLT_LOOP			0x80000004
- #define SVM_VMGEXIT_AP_JUMP_TABLE		0x80000005
- #define		SVM_VMGEXIT_SET_AP_JUMP_TABLE			0
-diff --git a/arch/x86/kernel/nmi.c b/arch/x86/kernel/nmi.c
-index 54c21d6abd5a..fc872a7e0ed1 100644
---- a/arch/x86/kernel/nmi.c
-+++ b/arch/x86/kernel/nmi.c
-@@ -37,6 +37,7 @@
- #include <asm/reboot.h>
- #include <asm/cache.h>
- #include <asm/nospec-branch.h>
-+#include <asm/sev-es.h>
- 
- #define CREATE_TRACE_POINTS
- #include <trace/events/nmi.h>
-@@ -510,6 +511,13 @@ NOKPROBE_SYMBOL(is_debug_stack);
- dotraplinkage notrace void
- do_nmi(struct pt_regs *regs, long error_code)
- {
-+	/*
-+	 * Re-enable NMIs right here when running as an SEV-ES guest. This might
-+	 * cause nested NMIs, but those can be handled safely.
-+	 */
-+	if (sev_es_active())
-+		sev_es_nmi_complete();
-+
- 	if (IS_ENABLED(CONFIG_SMP) && cpu_is_offline(smp_processor_id()))
- 		return;
- 
-diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 3c22f256645e..a7e2739771e7 100644
---- a/arch/x86/kernel/sev-es.c
-+++ b/arch/x86/kernel/sev-es.c
-@@ -270,6 +270,24 @@ static phys_addr_t vc_slow_virt_to_phys(struct ghcb *ghcb, long vaddr)
- /* Include code shared with pre-decompression boot stage */
- #include "sev-es-shared.c"
- 
-+void sev_es_nmi_complete(void)
-+{
-+	struct ghcb_state state;
-+	struct ghcb *ghcb;
-+
-+	ghcb = sev_es_get_ghcb(&state);
-+
-+	vc_ghcb_invalidate(ghcb);
-+	ghcb_set_sw_exit_code(ghcb, SVM_VMGEXIT_NMI_COMPLETE);
-+	ghcb_set_sw_exit_info_1(ghcb, 0);
-+	ghcb_set_sw_exit_info_2(ghcb, 0);
-+
-+	sev_es_wr_ghcb_msr(__pa(ghcb));
-+	VMGEXIT();
-+
-+	sev_es_put_ghcb(&state);
-+}
-+
- static u64 sev_es_get_jump_table_addr(void)
- {
- 	struct ghcb_state state;
--- 
-2.16.4
-
+FWIW, perf plus the x86 selftests run in a big loop was my best way of
+stressing the NMI path when we mucked with it for PTI.  The selftests
+make sure to hit some of the more rare entry/exit paths.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
