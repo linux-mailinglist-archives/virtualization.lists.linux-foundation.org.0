@@ -1,77 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A88B18F5A5
-	for <lists.virtualization@lfdr.de>; Mon, 23 Mar 2020 14:23:33 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 73D0518F738
+	for <lists.virtualization@lfdr.de>; Mon, 23 Mar 2020 15:50:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A4EAC87613;
-	Mon, 23 Mar 2020 13:23:31 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 07D712002F;
+	Mon, 23 Mar 2020 14:50:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nV58rM2Lp1wj; Mon, 23 Mar 2020 13:23:30 +0000 (UTC)
+	with ESMTP id x97bQ9Iw004z; Mon, 23 Mar 2020 14:50:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E752188197;
-	Mon, 23 Mar 2020 13:23:29 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 094FD203FF;
+	Mon, 23 Mar 2020 14:50:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9AD8C0177;
-	Mon, 23 Mar 2020 13:23:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D29B2C1D8E;
+	Mon, 23 Mar 2020 14:50:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 56568C0177
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 50BA8C0177
  for <virtualization@lists.linux-foundation.org>;
- Mon, 23 Mar 2020 13:23:28 +0000 (UTC)
+ Mon, 23 Mar 2020 14:50:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 3ABAC22CC6
+ by silver.osuosl.org (Postfix) with ESMTP id 3E95720380
  for <virtualization@lists.linux-foundation.org>;
- Mon, 23 Mar 2020 13:23:28 +0000 (UTC)
+ Mon, 23 Mar 2020 14:50:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hNV8vZgksvuH
+ with ESMTP id YcLyit6Pin6g
  for <virtualization@lists.linux-foundation.org>;
- Mon, 23 Mar 2020 13:23:25 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by silver.osuosl.org (Postfix) with ESMTPS id 95DC522C51
+ Mon, 23 Mar 2020 14:50:08 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by silver.osuosl.org (Postfix) with ESMTPS id 205CB2002F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 23 Mar 2020 13:23:25 +0000 (UTC)
-Received: from zn.tnic (p200300EC2F04F900B1314F6DF04CED4B.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f04:f900:b131:4f6d:f04c:ed4b])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 028CE1EC0C68;
- Mon, 23 Mar 2020 14:23:21 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1584969802;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=xW0/HOW9n0qQhxLBUQ2kpOFSlOwhGdDkXLxiBO1huwU=;
- b=Mh0hkLpItJ3GqPbFtp3Zs3wYWNJ6OyGdo9cNRHVORoSYUH3E1Y++GM6WGUkA11+ulapHcJ
- 0ONe1jWO6b9GKgjTjuXcU+WiwgDLLtd59L7MWC8zWdX3CfEeB1YkEOJRimSpiK2R/QUr5M
- Q15J8b+p5WjOAtRzFfDaZsS+mbb8Rxo=
-Date: Mon, 23 Mar 2020 14:23:15 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: [PATCH] KVM: SVM: Use __packed shorthard
-Message-ID: <20200323132315.GB4649@zn.tnic>
-References: <20200319091407.1481-1-joro@8bytes.org>
- <20200319091407.1481-2-joro@8bytes.org>
+ Mon, 23 Mar 2020 14:50:08 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id h15so5221185wrx.9
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 23 Mar 2020 07:50:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=8EEdhlDxPGCszNH39KDQNapCEw4c4r8sQpDp4YCg1tQ=;
+ b=k6urjDIZuhuoPs7ZD1FcgK966/qfJ2UPTH/pF2x/0l3M2i5NjEOO2+CAPg/c5Jgmy7
+ Xqox1R+kNuDHbksH1YUUSK19MipDveHSjMjRL/WnIAQU+7rjQkYIBFV8dOhNc4rjoz9u
+ QPYbQbxCarRmHX4lypKkyIWHvlxsSzatXbFp8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=8EEdhlDxPGCszNH39KDQNapCEw4c4r8sQpDp4YCg1tQ=;
+ b=fb7g17aKYj5zuCUFCQVknMOzfdoWK7UBJ3FOTdM+rOSFueioyhsYHZmAlqAEqyPgzq
+ VJ+O60mKMP2BQc/6icprD/a7IspAzUaiJcoFQI2QaSfbCiPdzTZjHyJUYcGQuPH1Uo32
+ 1PVNasa3yHopvhniTx+GHV8U+QbII7ODV/2hr/5FsAzrbXBEKPvkIoVSLZlLvYVx/TYR
+ oIX/EU/P5yBAgOXrPrEowOUJXFumCM92caeMXYheB44a/cAxuFFyNUsS70ZsavqR6fUi
+ PDVxJqDCI3+wEkOQ4Vja8772vqu8ZGNCramJh1jZplBYVB/3uYHWtiICfsWmWHquG908
+ gVoA==
+X-Gm-Message-State: ANhLgQ28pYT0rsyxMbMxMYIk0qsdS3Tya4h3cruXnn8u1dl8yJaBolex
+ x+zuOPkrBpndKhFP58yisF6j8A==
+X-Google-Smtp-Source: ADFU+vvH2AC0AyJuWazp1JxP6K2wqcG7brSho8DLZzVQcpb9YvutEdwaVpcxqLcib+NAIqWSIGA0qA==
+X-Received: by 2002:a5d:5286:: with SMTP id c6mr30023307wrv.418.1584975006564; 
+ Mon, 23 Mar 2020 07:50:06 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id s22sm20376522wmc.16.2020.03.23.07.50.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Mar 2020 07:50:05 -0700 (PDT)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Subject: [PATCH 07/51] drm/qxl: Use drmm_add_final_kfree
+Date: Mon, 23 Mar 2020 15:49:06 +0100
+Message-Id: <20200323144950.3018436-8-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200323144950.3018436-1-daniel.vetter@ffwll.ch>
+References: <20200323144950.3018436-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200319091407.1481-2-joro@8bytes.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Kees Cook <keescook@chromium.org>,
- kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Joerg Roedel <jroedel@suse.de>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,79 +98,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-I guess we can do that ontop.
+With this we can drop the final kfree from the release function.
 
+Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
 ---
-From: Borislav Petkov <bp@suse.de>
-Date: Mon, 23 Mar 2020 14:20:08 +0100
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+ drivers/gpu/drm/qxl/qxl_kms.c | 2 ++
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-... to make it more readable.
-
-No functional changes.
-
-Signed-off-by: Borislav Petkov <bp@suse.de>
----
- arch/x86/include/asm/svm.h | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
-
-diff --git a/arch/x86/include/asm/svm.h b/arch/x86/include/asm/svm.h
-index f36288c659b5..1ec813f02c58 100644
---- a/arch/x86/include/asm/svm.h
-+++ b/arch/x86/include/asm/svm.h
-@@ -151,14 +151,14 @@ struct __attribute__ ((__packed__)) vmcb_control_area {
- #define SVM_NESTED_CTL_NP_ENABLE	BIT(0)
- #define SVM_NESTED_CTL_SEV_ENABLE	BIT(1)
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 4fda3f9b29f4..09102e2efabc 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 */
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+-	dev->dev_private = NULL;
+-	kfree(qdev);
+ }
  
--struct __attribute__ ((__packed__)) vmcb_seg {
-+struct vmcb_seg {
- 	u16 selector;
- 	u16 attrib;
- 	u32 limit;
- 	u64 base;
--};
-+} __packed;
+ static void
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 70b20ee4741a..09d7b5f6d172 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -27,6 +27,7 @@
+ #include <linux/pci.h>
  
--struct __attribute__ ((__packed__)) vmcb_save_area {
-+struct vmcb_save_area {
- 	struct vmcb_seg es;
- 	struct vmcb_seg cs;
- 	struct vmcb_seg ss;
-@@ -233,9 +233,9 @@ struct __attribute__ ((__packed__)) vmcb_save_area {
- 	u8 valid_bitmap[16];
- 	u64 x87_state_gpa;
- 	u8 reserved_12[1016];
--};
-+} __packed;
+ #include <drm/drm_drv.h>
++#include <drm/drm_managed.h>
+ #include <drm/drm_probe_helper.h>
  
--struct __attribute__ ((__packed__)) ghcb {
-+struct ghcb {
- 	struct vmcb_save_area save;
+ #include "qxl_drv.h"
+@@ -121,6 +122,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	qdev->ddev.pdev = pdev;
+ 	pci_set_drvdata(pdev, &qdev->ddev);
+ 	qdev->ddev.dev_private = qdev;
++	drmm_add_final_kfree(&qdev->ddev, qdev);
  
- 	u8 shared_buffer[2032];
-@@ -243,12 +243,12 @@ struct __attribute__ ((__packed__)) ghcb {
- 	u8 reserved_1[10];
- 	u16 protocol_version;	/* negotiated SEV-ES/GHCB protocol version */
- 	u32 ghcb_usage;
--};
-+} __packed;
- 
--struct __attribute__ ((__packed__)) vmcb {
-+struct vmcb {
- 	struct vmcb_control_area control;
- 	struct vmcb_save_area save;
--};
-+} __packed;
- 
- #define SVM_CPUID_FUNC 0x8000000a
- 
+ 	mutex_init(&qdev->gem.mutex);
+ 	mutex_init(&qdev->update_area_mutex);
 -- 
-2.21.0
+2.25.1
 
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
