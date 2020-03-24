@@ -1,111 +1,106 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60FF91907D3
-	for <lists.virtualization@lfdr.de>; Tue, 24 Mar 2020 09:39:33 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E98F190CEB
+	for <lists.virtualization@lfdr.de>; Tue, 24 Mar 2020 12:59:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0EDDF23039;
-	Tue, 24 Mar 2020 08:39:32 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2B55385FB9;
+	Tue, 24 Mar 2020 11:59:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HOVk6p6Jdsdu; Tue, 24 Mar 2020 08:39:31 +0000 (UTC)
+	with ESMTP id oVjsDWsrDVgh; Tue, 24 Mar 2020 11:59:16 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 1E23520378;
-	Tue, 24 Mar 2020 08:39:31 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A6A8385CD0;
+	Tue, 24 Mar 2020 11:59:16 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E8B37C0177;
-	Tue, 24 Mar 2020 08:39:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 855BDC0177;
+	Tue, 24 Mar 2020 11:59:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C4A9CC0177
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B4326C0177
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Mar 2020 08:39:28 +0000 (UTC)
+ Tue, 24 Mar 2020 11:59:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id B2DEB20130
+ by fraxinus.osuosl.org (Postfix) with ESMTP id A23B2820A0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Mar 2020 08:39:28 +0000 (UTC)
+ Tue, 24 Mar 2020 11:59:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EWqxqa51VCxb
+ with ESMTP id DMJJwtiSfJmI
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Mar 2020 08:39:27 +0000 (UTC)
+ Tue, 24 Mar 2020 11:59:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by silver.osuosl.org (Postfix) with ESMTPS id 8120F1FEBF
+Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
+ [209.85.219.68])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id B45F382072
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Mar 2020 08:39:27 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 6E501AE85;
- Tue, 24 Mar 2020 08:39:23 +0000 (UTC)
-Subject: Re: [RESEND PATCH v2 6/9] drm/mgag200: Constify ioreadX() iomem
- argument (as in generic implementation)
-To: Krzysztof Kozlowski <krzk@kernel.org>
-References: <20200219175007.13627-1-krzk@kernel.org>
- <20200219175007.13627-7-krzk@kernel.org>
- <90baef2d-25fe-fac4-6a7e-b103b4b6721e@suse.de>
- <20200314105944.GA16044@kozik-lap>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <b19bd919-3af5-855f-65a7-fa6f16b07b31@suse.de>
-Date: Tue, 24 Mar 2020 09:39:18 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Tue, 24 Mar 2020 11:59:13 +0000 (UTC)
+Received: by mail-qv1-f68.google.com with SMTP id c28so8992991qvb.10
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 24 Mar 2020 04:59:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=IzasdxRYqM7rOFN66DBG3h2VMkVrFQ3GhK1sACp5S8U=;
+ b=Q5OL7hM7fhWYS7E1vvbqxwxRQU8X06B/qc/qoWD7sTquEt4AdWaJ1sJ2KH16uIw8P5
+ JlylgRJqGl9LOMT+8ib1IR+jISmtrNuwj1cujpS+JjdlrGemau0YqDswan/GNG9gW4ul
+ f3g8/tQJglQFuWT2C98zBaPwT/lxC5nd84FkPLpC8mlinjlf6xqdPGm30uOO29ZdCRSB
+ 9J7nvn2vrwACeElwn1eXKQfXZTRsIy92MHiaXyhDkOsWgowcqpYCD43Di3dQj8J5gRO6
+ 3CdGLfY7noTkcnXpNlnG0RQc2PLwEXZX06wRkIfiYcKJKFbRJJb5VV/j89Vw5UAS0Hrt
+ JwPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=IzasdxRYqM7rOFN66DBG3h2VMkVrFQ3GhK1sACp5S8U=;
+ b=JavuKtFcpw67/vidWO3PTYjmqeRlnfvGvjdElLWCDtda17JqwGivUMyRuTF2++8au4
+ PtFAbW0d+8quRBJ2//otsB3+BZy1tOZLoeuWGdFgcImhe365Ihnak+DtOroVj8LwY7VS
+ Plfx1obY+oJhtduLUS/lVNDZxqnXM9jVfwZngP+AZ5S37zXUqYhziMYy7HxY1oRmamhr
+ AajRQiqUDS7MaJi6N4AMPySRLNAlliuzxQ6f+XD4aiW9PiiuWhTTsi1Mt3NWN5+6N+aF
+ Q9/uUj2sQmer5l8OieSrksCXgfLjZWqUsVR8R2zpVVKazG+ArNli4MiotqS5sO0N127+
+ uVsg==
+X-Gm-Message-State: ANhLgQ3pAVfcfIEf6g4C9IXdWqcc3HEEU6MPtlWXP3D+MokTZxy7l2aK
+ utoM2/hJx9SbatwNAebOPro=
+X-Google-Smtp-Source: ADFU+vsRrRM8GomjFcPHutO/gZSvZ9pBrvIDKkaAb0+Vm+OeJtn1ews7WZEp9PklwYeqveQN1bHBCQ==
+X-Received: by 2002:a0c:edca:: with SMTP id i10mr6735372qvr.130.1585051152710; 
+ Tue, 24 Mar 2020 04:59:12 -0700 (PDT)
+Received: from smtp.gmail.com ([2607:fea8:56a0:11a1::4])
+ by smtp.gmail.com with ESMTPSA id x124sm2222237qkc.70.2020.03.24.04.59.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Mar 2020 04:59:11 -0700 (PDT)
+Date: Tue, 24 Mar 2020 07:59:05 -0400
+From: Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Subject: Re: [PATCH 20/22] drm/vkms: Use simple encoder
+Message-ID: <20200324115905.dp5jqzbmvhbmk2rn@smtp.gmail.com>
+References: <20200305155950.2705-1-tzimmermann@suse.de>
+ <20200305155950.2705-21-tzimmermann@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20200314105944.GA16044@kozik-lap>
-Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- "Michael S. Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- netdev@vger.kernel.org, Paul Mackerras <paulus@samba.org>,
- linux-arch@vger.kernel.org, Dave Jiang <dave.jiang@intel.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Michael Ellerman <mpe@ellerman.id.au>, Helge Deller <deller@gmx.de>,
- linux-sh@vger.kernel.org, Alexey Brodkin <abrodkin@synopsys.com>,
- Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, Matt Turner <mattst88@gmail.com>,
- linux-snps-arc@lists.infradead.org, Nick Kossifidis <mickflemm@gmail.com>,
- Allen Hubbe <allenbh@gmail.com>, Arnd Bergmann <arnd@arndb.de>,
- linux-alpha@vger.kernel.org, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Thomas Gleixner <tglx@linutronix.de>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
- Richard Henderson <rth@twiddle.net>, linux-parisc@vger.kernel.org,
- Vineet Gupta <vgupta@synopsys.com>, linux-wireless@vger.kernel.org,
- linux-kernel@vger.kernel.org, Luis Chamberlain <mcgrof@kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, Jon Mason <jdmason@kudzu.us>,
- linux-ntb@googlegroups.com, Andrew Morton <akpm@linux-foundation.org>,
- linux-media@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- "David S. Miller" <davem@davemloft.net>
+In-Reply-To: <20200305155950.2705-21-tzimmermann@suse.de>
+Cc: hamohammed.sa@gmail.com, alexandre.belloni@bootlin.com, heiko@sntech.de,
+ airlied@linux.ie, stefan@agner.ch, linux@armlinux.org.uk, paul@crapouillou.net,
+ eric@anholt.net, thierry.reding@gmail.com, krzk@kernel.org, sam@ravnborg.org,
+ sebastian.reichel@collabora.com, linux-samsung-soc@vger.kernel.org,
+ jy0922.shim@samsung.com, hjc@rock-chips.com, festevam@gmail.com,
+ abrodkin@synopsys.com, kong.kongxinwei@hisilicon.com,
+ patrik.r.jakobsson@gmail.com, jonathanh@nvidia.com, xinliang.liu@linaro.org,
+ ludovic.desroches@microchip.com, kgene@kernel.org, linux-imx@nxp.com,
+ ck.hu@mediatek.com, linux-rockchip@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, linux-tegra@vger.kernel.org,
+ p.zabel@pengutronix.de, puck.chen@hisilicon.com, s.hauer@pengutronix.de,
+ alison.wang@nxp.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ inki.dae@samsung.com, john.stultz@linaro.org, jsarha@ti.com,
+ matthias.bgg@gmail.com, wens@csie.org, kernel@pengutronix.de,
+ jernej.skrabec@siol.net, tomi.valkeinen@ti.com, bbrezillon@kernel.org,
+ jingoohan1@gmail.com, dri-devel@lists.freedesktop.org, sw0312.kim@samsung.com,
+ nicolas.ferre@microchip.com, kyungmin.park@samsung.com,
+ kieran.bingham+renesas@ideasonboard.com, daniel@ffwll.ch,
+ zourongrong@gmail.com, linux-mediatek@lists.infradead.org, shawnguo@kernel.org,
+ laurent.pinchart@ideasonboard.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,122 +112,115 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6976773561505355004=="
+Content-Type: multipart/mixed; boundary="===============4800833541238365840=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============6976773561505355004==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="5JHKoPMDjFIljnahlEBkrPhFBMFaUgU8x"
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---5JHKoPMDjFIljnahlEBkrPhFBMFaUgU8x
-Content-Type: multipart/mixed; boundary="hhPGeJseFbtGrgGh6f1kgq7y0jySVSvgE";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Richard Henderson <rth@twiddle.net>,
- Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Matt Turner
- <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
- Vineet Gupta <vgupta@synopsys.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Jiri Slaby
- <jirislaby@gmail.com>, Nick Kossifidis <mickflemm@gmail.com>,
- Luis Chamberlain <mcgrof@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
- "David S. Miller" <davem@davemloft.net>, Dave Jiang <dave.jiang@intel.com>,
- Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
- Andrew Morton <akpm@linux-foundation.org>,
- Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
- linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-sh@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-media@vger.kernel.org,
- linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
- linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
- linux-arch@vger.kernel.org
-Message-ID: <b19bd919-3af5-855f-65a7-fa6f16b07b31@suse.de>
-Subject: Re: [RESEND PATCH v2 6/9] drm/mgag200: Constify ioreadX() iomem
- argument (as in generic implementation)
-References: <20200219175007.13627-1-krzk@kernel.org>
- <20200219175007.13627-7-krzk@kernel.org>
- <90baef2d-25fe-fac4-6a7e-b103b4b6721e@suse.de>
- <20200314105944.GA16044@kozik-lap>
-In-Reply-To: <20200314105944.GA16044@kozik-lap>
+--===============4800833541238365840==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="xyxw5g6b72ps7vfq"
+Content-Disposition: inline
 
---hhPGeJseFbtGrgGh6f1kgq7y0jySVSvgE
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+
+--xyxw5g6b72ps7vfq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi
+Hi Thomas,
 
-Am 14.03.20 um 11:59 schrieb Krzysztof Kozlowski:
-> On Thu, Mar 12, 2020 at 11:49:05AM +0100, Thomas Zimmermann wrote:
->> Hi Krzysztof,
->>
->> I just received a resend email from 3 weeks ago :/
->>
->> Do you want me to merge the mgag200 patch into drm-misc-next?
+First of all, thanks for your patch!
+
+I applied all your series, compiled it, and when I tried
+`make INSTALL_MOD_PATH=3D/PATH/ modules_instal` I got the following
+message:
+
+ depmod: ERROR: Cycle detected: drm_kms_helper -> drm -> drm_kms_helper
+ depmod: ERROR: Found 2 modules in dependency cycles!
+ make: *** [Makefile:1317: _modinst_post] Error 1
+
+I cleaned up my local files and tried again, but I got the same error;
+If I just use `drm-misc-next` everything is fine.  Did I miss something?
+
+Thanks
+
+On 03/05, Thomas Zimmermann wrote:
+> The vkms driver uses an empty implementation for its encoder. Replace
+> the code with the generic simple encoder.
 >=20
-> Thanks but it depends on the first patch in the series so either it
-> could go with your ack through other tree or I will send it later (once=
-
-> 1st patch gets to mainline).
-
-Ok. You're welcome to send it through any tree that works best for you.
-mgag200 sees only little change. I wouldn't expect major merge
-conflicts, if any.
-
-Best regards
-Thomas
-
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/gpu/drm/vkms/vkms_output.c | 8 ++------
+>  1 file changed, 2 insertions(+), 6 deletions(-)
 >=20
->=20
-> Best regards,
-> Krzysztof
+> diff --git a/drivers/gpu/drm/vkms/vkms_output.c b/drivers/gpu/drm/vkms/vk=
+ms_output.c
+> index fb1941a6522c..85afb77e97f0 100644
+> --- a/drivers/gpu/drm/vkms/vkms_output.c
+> +++ b/drivers/gpu/drm/vkms/vkms_output.c
+> @@ -3,6 +3,7 @@
+>  #include "vkms_drv.h"
+>  #include <drm/drm_atomic_helper.h>
+>  #include <drm/drm_probe_helper.h>
+> +#include <drm/drm_simple_kms_helper.h>
+> =20
+>  static void vkms_connector_destroy(struct drm_connector *connector)
+>  {
+> @@ -17,10 +18,6 @@ static const struct drm_connector_funcs vkms_connector=
+_funcs =3D {
+>  	.atomic_destroy_state =3D drm_atomic_helper_connector_destroy_state,
+>  };
+> =20
+> -static const struct drm_encoder_funcs vkms_encoder_funcs =3D {
+> -	.destroy =3D drm_encoder_cleanup,
+> -};
+> -
+>  static int vkms_conn_get_modes(struct drm_connector *connector)
+>  {
+>  	int count;
+> @@ -70,8 +67,7 @@ int vkms_output_init(struct vkms_device *vkmsdev, int i=
+ndex)
+> =20
+>  	drm_connector_helper_add(connector, &vkms_conn_helper_funcs);
+> =20
+> -	ret =3D drm_encoder_init(dev, encoder, &vkms_encoder_funcs,
+> -			       DRM_MODE_ENCODER_VIRTUAL, NULL);
+> +	ret =3D drm_simple_encoder_init(dev, encoder, DRM_MODE_ENCODER_VIRTUAL);
+>  	if (ret) {
+>  		DRM_ERROR("Failed to init encoder\n");
+>  		goto err_encoder;
+> --=20
+> 2.25.1
 >=20
 
 --=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+Rodrigo Siqueira
+https://siqueira.tech
 
-
---hhPGeJseFbtGrgGh6f1kgq7y0jySVSvgE--
-
---5JHKoPMDjFIljnahlEBkrPhFBMFaUgU8x
+--xyxw5g6b72ps7vfq
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl55xzYACgkQaA3BHVML
-eiNG1wgAnt3qyju9VoZCaXPbgeTj4gxLN24UZYPowzBMiEUgsJRz8b2iRuEoEKGb
-X+o80inBpVTWe/a+HI6wAQWEwidrIXUquQe1fSSpn2+h69aSApCBWBuxTuKZOLWq
-z9ZpyDKo+VD0/zWGgOZttJXPQJYEfckuCoLN9qcVf+CmgXQNC0m6ZVg6kf59xrca
-KEMDM4x2XhouIaoAtLYLQpt3U9YKgTphMMisTdha7xJt4h7CVx1uztnUyD2triFq
-meU3vxWwePFuQF/1reT0Vr5FU18Z88+wOLZyu3oa+GMA5lp/DKlJJmTGH+VsQA9l
-T/IiW9kxcWlBxT0ylEqlmHr82hqCAQ==
-=iz+q
+iQIzBAABCgAdFiEE4tZ+ii1mjMCMQbfkWJzP/comvP8FAl559gMACgkQWJzP/com
+vP9BEQ//bENFpSJc2y0XTYIOh3A9lmWbJYMBLW1j5T3uUJJu8x0lC0hqd0fJW3V8
+iT1Pedxmmf7duluAn7uKjUQ1sPztm2PcJB8F9ADs+bJdKN2CqmsL3kB4Ip1Q+US7
+t7cptBTF6FrLPo4e1WpZAEEu4UdyVsq16+0v3+8icC0YSX6KMQdI9QNvvp/5PmXF
+xYc6wwyGGqNZhmVRyLu0Im+zG5TvscTmK3iIu1BOMEubsgZD/BP8ZSx0efQJKRhA
+aPhzGs8S7Sp+EnE4wiTU6iZch3+KUw6D0lc398rdlvbZXmvxSxe8WxCwciMksgu5
+c+A/+oJ80KIhkjWCQNpF5oddWXUUqy6yHZrzIWzkPAj9oVxQa0jr7EwAkT1h+Zp1
+wUDLrQw9ZRw/GHv6awiSFDukLpHIabDgN9F0fsvx9aa/PJ53FOR6hilCOn8tIVnJ
+oZabUjqa7pV3L8N5CFott+8EV2y4GZK5R+VW6MX8px2bfa7SaJl+9HgeKssOYOkF
+6cwm+IquaD3wz9h7elWGmEQgqj3jOviny3HT7I8U+ZlmMa6+JCMt4iq5e1R9q4du
+PP4mh695VhSas/mbB3qjZFy/FCj1bvJ8J6AdHOoNDmjM4JVv9F5S5yi3UN5uEBXC
+ZtKmSxghh2GJS2LFK6b88yxVNVNYrCX6bYWSyfovToU6C0QzbKs=
+=srDw
 -----END PGP SIGNATURE-----
 
---5JHKoPMDjFIljnahlEBkrPhFBMFaUgU8x--
+--xyxw5g6b72ps7vfq--
 
---===============6976773561505355004==
+--===============4800833541238365840==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -242,4 +230,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6976773561505355004==--
+--===============4800833541238365840==--
