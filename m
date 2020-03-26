@@ -1,74 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB6701940C4
-	for <lists.virtualization@lfdr.de>; Thu, 26 Mar 2020 15:03:26 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 118A41940C5
+	for <lists.virtualization@lfdr.de>; Thu, 26 Mar 2020 15:03:43 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 4278626284;
-	Thu, 26 Mar 2020 14:03:25 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A97FD864F3;
+	Thu, 26 Mar 2020 14:03:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0R9WRKns2K8e; Thu, 26 Mar 2020 14:03:22 +0000 (UTC)
+	with ESMTP id Ciu4eoIZkb86; Thu, 26 Mar 2020 14:03:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id ECA95204F8;
-	Thu, 26 Mar 2020 14:03:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4EB0486519;
+	Thu, 26 Mar 2020 14:03:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BF468C0177;
-	Thu, 26 Mar 2020 14:03:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2AA8CC0177;
+	Thu, 26 Mar 2020 14:03:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ADD35C0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 42F4DC0177
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 14:03:20 +0000 (UTC)
+ Thu, 26 Mar 2020 14:03:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 965DA8889F
+ by silver.osuosl.org (Postfix) with ESMTP id 3127C203CE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 14:03:20 +0000 (UTC)
+ Thu, 26 Mar 2020 14:03:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 761Iy01RafO8
+ with ESMTP id JBhg7jFbel8t
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 14:03:18 +0000 (UTC)
+ Thu, 26 Mar 2020 14:03:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-74.mimecast.com
- (us-smtp-delivery-74.mimecast.com [63.128.21.74])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 4D94F87BC2
+ (us-smtp-delivery-74.mimecast.com [216.205.24.74])
+ by silver.osuosl.org (Postfix) with ESMTPS id A7E44204F8
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 14:03:18 +0000 (UTC)
+ Thu, 26 Mar 2020 14:03:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585231396;
+ s=mimecast20190719; t=1585231412;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dSL0wjijVrYEZDDJ2onQj9ynBTFoz5VXYC2NOe1umXU=;
- b=fCIPrp0kBKDbLX0hR8u8++5S5l7QNmtkF+pwr0MfrzD4YMNrCe3eIKg0nJ2eLxwBYddhXe
- rMcPDmEtvnCdxSxVgnyZj9zXNrjYG0ir5ReJo74DwdCt/nGHS69ZAbbgsoZggftkNIAJiG
- 3moWs3VqlCeGEcWiuqBW9Ic2TYHG5vY=
+ bh=ezal15hgulE5KkDZEmS+B/Xi9s+uUpzAylUKzo6x+cE=;
+ b=PuYgd1w/AIHM/7ekFoP62CwU11V1knXscaQvhVLQtFGkkPkiid8GZh2eVHOud57BJxamGg
+ +1a9znnq2mmRnbqR6AFUYVoXNdCIUl1RregcEk1XlUx0Vap+gZb5giiKcBxkMtLMbsMR1M
+ o3I7aHj7mdkJNPcRVXqhzSaE4GlD0pE=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-182-k5C_NDYMOQC-ht0CrmAB2w-1; Thu, 26 Mar 2020 10:03:10 -0400
-X-MC-Unique: k5C_NDYMOQC-ht0CrmAB2w-1
+ us-mta-459-yKsswqrfM22l95ILfNYLEQ-1; Thu, 26 Mar 2020 10:03:29 -0400
+X-MC-Unique: yKsswqrfM22l95ILfNYLEQ-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
  [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4B6551137842;
- Thu, 26 Mar 2020 14:03:07 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3CDFA800EBD;
+ Thu, 26 Mar 2020 14:03:26 +0000 (UTC)
 Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
  (ovpn-12-19.pek2.redhat.com [10.72.12.19])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 59FD860BF3;
- Thu, 26 Mar 2020 14:02:48 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9984160BF7;
+ Thu, 26 Mar 2020 14:03:07 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
  virtualization@lists.linux-foundation.org, netdev@vger.kernel.org
-Subject: [PATCH V9 3/9] vhost: factor out IOTLB
-Date: Thu, 26 Mar 2020 22:01:19 +0800
-Message-Id: <20200326140125.19794-4-jasowang@redhat.com>
+Subject: [PATCH V9 4/9] vringh: IOTLB support
+Date: Thu, 26 Mar 2020 22:01:20 +0800
+Message-Id: <20200326140125.19794-5-jasowang@redhat.com>
 In-Reply-To: <20200326140125.19794-1-jasowang@redhat.com>
 References: <20200326140125.19794-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -96,879 +96,675 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch factors out IOTLB into a dedicated module in order to be
-reused by other modules like vringh. User may choose to enable the
-automatic retiring by specifying VHOST_IOTLB_FLAG_RETIRE flag to fit
-for the case of vhost device IOTLB implementation.
+This patch implements the third memory accessor for vringh besides
+current kernel and userspace accessors. This idea is to allow vringh
+to do the address translation through an IOTLB which is implemented
+via vhost_map interval tree. Users should setup and IOVA to PA mapping
+in this IOTLB.
+
+This allows us to:
+
+- Use vringh to access virtqueues with vIOMMU
+- Use vringh to implement software virtqueues for vDPA devices
 
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- MAINTAINERS                 |   1 +
- drivers/vhost/Kconfig       |   9 ++
- drivers/vhost/Makefile      |   3 +
- drivers/vhost/iotlb.c       | 177 +++++++++++++++++++++++++++++
- drivers/vhost/net.c         |   2 +-
- drivers/vhost/vhost.c       | 221 +++++++++++-------------------------
- drivers/vhost/vhost.h       |  39 ++-----
- include/linux/vhost_iotlb.h |  47 ++++++++
- 8 files changed, 318 insertions(+), 181 deletions(-)
- create mode 100644 drivers/vhost/iotlb.c
- create mode 100644 include/linux/vhost_iotlb.h
+ drivers/vhost/Kconfig  |   1 +
+ drivers/vhost/vringh.c | 421 ++++++++++++++++++++++++++++++++++++++---
+ include/linux/vringh.h |  36 ++++
+ 3 files changed, 435 insertions(+), 23 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c74e4ea714a5..0fb645b5a7df 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17768,6 +17768,7 @@ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git
- S:	Maintained
- F:	drivers/vhost/
- F:	include/uapi/linux/vhost.h
-+F:	include/linux/vhost_iotlb.h
- 
- VIRTIO INPUT DRIVER
- M:	Gerd Hoffmann <kraxel@redhat.com>
 diff --git a/drivers/vhost/Kconfig b/drivers/vhost/Kconfig
-index 4aef10a54cd1..2f6c2105b953 100644
+index 2f6c2105b953..b03872886901 100644
 --- a/drivers/vhost/Kconfig
 +++ b/drivers/vhost/Kconfig
-@@ -1,4 +1,9 @@
- # SPDX-License-Identifier: GPL-2.0-only
-+config VHOST_IOTLB
-+	tristate
-+	help
-+	  Generic IOTLB implementation for vhost and vringh.
-+
+@@ -6,6 +6,7 @@ config VHOST_IOTLB
+ 
  config VHOST_RING
  	tristate
- 	help
-@@ -7,9 +12,11 @@ config VHOST_RING
- 
- menuconfig VHOST
- 	tristate "Host kernel accelerator for virtio (VHOST)"
 +	select VHOST_IOTLB
  	help
  	  This option is selected by any driver which needs to access
- 	  the core of vhost.
-+
- if VHOST
- 
- config VHOST_NET
-@@ -58,4 +65,6 @@ config VHOST_CROSS_ENDIAN_LEGACY
- 	  adds some overhead, it is disabled by default.
- 
- 	  If unsure, say "N".
-+
- endif
-+
-diff --git a/drivers/vhost/Makefile b/drivers/vhost/Makefile
-index 6c6df24f770c..fb831002bcf0 100644
---- a/drivers/vhost/Makefile
-+++ b/drivers/vhost/Makefile
-@@ -11,3 +11,6 @@ vhost_vsock-y := vsock.o
- obj-$(CONFIG_VHOST_RING) += vringh.o
- 
- obj-$(CONFIG_VHOST)	+= vhost.o
-+
-+obj-$(CONFIG_VHOST_IOTLB) += vhost_iotlb.o
-+vhost_iotlb-y := iotlb.o
-diff --git a/drivers/vhost/iotlb.c b/drivers/vhost/iotlb.c
-new file mode 100644
-index 000000000000..1f0ca6e44410
---- /dev/null
-+++ b/drivers/vhost/iotlb.c
-@@ -0,0 +1,177 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/* Copyright (C) 2020 Red Hat, Inc.
-+ * Author: Jason Wang <jasowang@redhat.com>
-+ *
-+ * IOTLB implementation for vhost.
-+ */
-+#include <linux/slab.h>
+ 	  the host side of a virtio ring.
+diff --git a/drivers/vhost/vringh.c b/drivers/vhost/vringh.c
+index a0a2d74967ef..ee0491f579ac 100644
+--- a/drivers/vhost/vringh.c
++++ b/drivers/vhost/vringh.c
+@@ -13,6 +13,9 @@
+ #include <linux/uaccess.h>
+ #include <linux/slab.h>
+ #include <linux/export.h>
++#include <linux/bvec.h>
++#include <linux/highmem.h>
 +#include <linux/vhost_iotlb.h>
-+#include <linux/module.h>
+ #include <uapi/linux/virtio_config.h>
+ 
+ static __printf(1,2) __cold void vringh_bad(const char *fmt, ...)
+@@ -71,9 +74,11 @@ static inline int __vringh_get_head(const struct vringh *vrh,
+ }
+ 
+ /* Copy some bytes to/from the iovec.  Returns num copied. */
+-static inline ssize_t vringh_iov_xfer(struct vringh_kiov *iov,
++static inline ssize_t vringh_iov_xfer(struct vringh *vrh,
++				      struct vringh_kiov *iov,
+ 				      void *ptr, size_t len,
+-				      int (*xfer)(void *addr, void *ptr,
++				      int (*xfer)(const struct vringh *vrh,
++						  void *addr, void *ptr,
+ 						  size_t len))
+ {
+ 	int err, done = 0;
+@@ -82,7 +87,7 @@ static inline ssize_t vringh_iov_xfer(struct vringh_kiov *iov,
+ 		size_t partlen;
+ 
+ 		partlen = min(iov->iov[iov->i].iov_len, len);
+-		err = xfer(iov->iov[iov->i].iov_base, ptr, partlen);
++		err = xfer(vrh, iov->iov[iov->i].iov_base, ptr, partlen);
+ 		if (err)
+ 			return err;
+ 		done += partlen;
+@@ -96,6 +101,7 @@ static inline ssize_t vringh_iov_xfer(struct vringh_kiov *iov,
+ 			/* Fix up old iov element then increment. */
+ 			iov->iov[iov->i].iov_len = iov->consumed;
+ 			iov->iov[iov->i].iov_base -= iov->consumed;
 +
-+#define MOD_VERSION  "0.1"
-+#define MOD_DESC     "VHOST IOTLB"
-+#define MOD_AUTHOR   "Jason Wang <jasowang@redhat.com>"
-+#define MOD_LICENSE  "GPL v2"
-+
-+#define START(map) ((map)->start)
-+#define LAST(map) ((map)->last)
-+
-+INTERVAL_TREE_DEFINE(struct vhost_iotlb_map,
-+		     rb, __u64, __subtree_last,
-+		     START, LAST, static inline, vhost_iotlb_itree);
-+
-+/**
-+ * vhost_iotlb_map_free - remove a map node and free it
-+ * @iotlb: the IOTLB
-+ * @map: the map that want to be remove and freed
-+ */
-+void vhost_iotlb_map_free(struct vhost_iotlb *iotlb,
-+			  struct vhost_iotlb_map *map)
-+{
-+	vhost_iotlb_itree_remove(map, &iotlb->root);
-+	list_del(&map->link);
-+	kfree(map);
-+	iotlb->nmaps--;
-+}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_map_free);
-+
-+/**
-+ * vhost_iotlb_add_range - add a new range to vhost IOTLB
-+ * @iotlb: the IOTLB
-+ * @start: start of the IOVA range
-+ * @last: last of IOVA range
-+ * @addr: the address that is mapped to @start
-+ * @perm: access permission of this range
-+ *
-+ * Returns an error last is smaller than start or memory allocation
-+ * fails
-+ */
-+int vhost_iotlb_add_range(struct vhost_iotlb *iotlb,
-+			  u64 start, u64 last,
-+			  u64 addr, unsigned int perm)
+ 			
+ 			iov->consumed = 0;
+ 			iov->i++;
+@@ -227,7 +233,8 @@ static int slow_copy(struct vringh *vrh, void *dst, const void *src,
+ 				      u64 addr,
+ 				      struct vringh_range *r),
+ 		     struct vringh_range *range,
+-		     int (*copy)(void *dst, const void *src, size_t len))
++		     int (*copy)(const struct vringh *vrh,
++				 void *dst, const void *src, size_t len))
+ {
+ 	size_t part, len = sizeof(struct vring_desc);
+ 
+@@ -241,7 +248,7 @@ static int slow_copy(struct vringh *vrh, void *dst, const void *src,
+ 		if (!rcheck(vrh, addr, &part, range, getrange))
+ 			return -EINVAL;
+ 
+-		err = copy(dst, src, part);
++		err = copy(vrh, dst, src, part);
+ 		if (err)
+ 			return err;
+ 
+@@ -262,7 +269,8 @@ __vringh_iov(struct vringh *vrh, u16 i,
+ 					     struct vringh_range *)),
+ 	     bool (*getrange)(struct vringh *, u64, struct vringh_range *),
+ 	     gfp_t gfp,
+-	     int (*copy)(void *dst, const void *src, size_t len))
++	     int (*copy)(const struct vringh *vrh,
++			 void *dst, const void *src, size_t len))
+ {
+ 	int err, count = 0, up_next, desc_max;
+ 	struct vring_desc desc, *descs;
+@@ -291,7 +299,7 @@ __vringh_iov(struct vringh *vrh, u16 i,
+ 			err = slow_copy(vrh, &desc, &descs[i], rcheck, getrange,
+ 					&slowrange, copy);
+ 		else
+-			err = copy(&desc, &descs[i], sizeof(desc));
++			err = copy(vrh, &desc, &descs[i], sizeof(desc));
+ 		if (unlikely(err))
+ 			goto fail;
+ 
+@@ -404,7 +412,8 @@ static inline int __vringh_complete(struct vringh *vrh,
+ 				    unsigned int num_used,
+ 				    int (*putu16)(const struct vringh *vrh,
+ 						  __virtio16 *p, u16 val),
+-				    int (*putused)(struct vring_used_elem *dst,
++				    int (*putused)(const struct vringh *vrh,
++						   struct vring_used_elem *dst,
+ 						   const struct vring_used_elem
+ 						   *src, unsigned num))
+ {
+@@ -420,12 +429,12 @@ static inline int __vringh_complete(struct vringh *vrh,
+ 	/* Compiler knows num_used == 1 sometimes, hence extra check */
+ 	if (num_used > 1 && unlikely(off + num_used >= vrh->vring.num)) {
+ 		u16 part = vrh->vring.num - off;
+-		err = putused(&used_ring->ring[off], used, part);
++		err = putused(vrh, &used_ring->ring[off], used, part);
+ 		if (!err)
+-			err = putused(&used_ring->ring[0], used + part,
++			err = putused(vrh, &used_ring->ring[0], used + part,
+ 				      num_used - part);
+ 	} else
+-		err = putused(&used_ring->ring[off], used, num_used);
++		err = putused(vrh, &used_ring->ring[off], used, num_used);
+ 
+ 	if (err) {
+ 		vringh_bad("Failed to write %u used entries %u at %p",
+@@ -564,13 +573,15 @@ static inline int putu16_user(const struct vringh *vrh, __virtio16 *p, u16 val)
+ 	return put_user(v, (__force __virtio16 __user *)p);
+ }
+ 
+-static inline int copydesc_user(void *dst, const void *src, size_t len)
++static inline int copydesc_user(const struct vringh *vrh,
++				void *dst, const void *src, size_t len)
+ {
+ 	return copy_from_user(dst, (__force void __user *)src, len) ?
+ 		-EFAULT : 0;
+ }
+ 
+-static inline int putused_user(struct vring_used_elem *dst,
++static inline int putused_user(const struct vringh *vrh,
++			       struct vring_used_elem *dst,
+ 			       const struct vring_used_elem *src,
+ 			       unsigned int num)
+ {
+@@ -578,13 +589,15 @@ static inline int putused_user(struct vring_used_elem *dst,
+ 			    sizeof(*dst) * num) ? -EFAULT : 0;
+ }
+ 
+-static inline int xfer_from_user(void *src, void *dst, size_t len)
++static inline int xfer_from_user(const struct vringh *vrh, void *src,
++				 void *dst, size_t len)
+ {
+ 	return copy_from_user(dst, (__force void __user *)src, len) ?
+ 		-EFAULT : 0;
+ }
+ 
+-static inline int xfer_to_user(void *dst, void *src, size_t len)
++static inline int xfer_to_user(const struct vringh *vrh,
++			       void *dst, void *src, size_t len)
+ {
+ 	return copy_to_user((__force void __user *)dst, src, len) ?
+ 		-EFAULT : 0;
+@@ -706,7 +719,7 @@ EXPORT_SYMBOL(vringh_getdesc_user);
+  */
+ ssize_t vringh_iov_pull_user(struct vringh_iov *riov, void *dst, size_t len)
+ {
+-	return vringh_iov_xfer((struct vringh_kiov *)riov,
++	return vringh_iov_xfer(NULL, (struct vringh_kiov *)riov,
+ 			       dst, len, xfer_from_user);
+ }
+ EXPORT_SYMBOL(vringh_iov_pull_user);
+@@ -722,7 +735,7 @@ EXPORT_SYMBOL(vringh_iov_pull_user);
+ ssize_t vringh_iov_push_user(struct vringh_iov *wiov,
+ 			     const void *src, size_t len)
+ {
+-	return vringh_iov_xfer((struct vringh_kiov *)wiov,
++	return vringh_iov_xfer(NULL, (struct vringh_kiov *)wiov,
+ 			       (void *)src, len, xfer_to_user);
+ }
+ EXPORT_SYMBOL(vringh_iov_push_user);
+@@ -832,13 +845,15 @@ static inline int putu16_kern(const struct vringh *vrh, __virtio16 *p, u16 val)
+ 	return 0;
+ }
+ 
+-static inline int copydesc_kern(void *dst, const void *src, size_t len)
++static inline int copydesc_kern(const struct vringh *vrh,
++				void *dst, const void *src, size_t len)
+ {
+ 	memcpy(dst, src, len);
+ 	return 0;
+ }
+ 
+-static inline int putused_kern(struct vring_used_elem *dst,
++static inline int putused_kern(const struct vringh *vrh,
++			       struct vring_used_elem *dst,
+ 			       const struct vring_used_elem *src,
+ 			       unsigned int num)
+ {
+@@ -846,13 +861,15 @@ static inline int putused_kern(struct vring_used_elem *dst,
+ 	return 0;
+ }
+ 
+-static inline int xfer_kern(void *src, void *dst, size_t len)
++static inline int xfer_kern(const struct vringh *vrh, void *src,
++			    void *dst, size_t len)
+ {
+ 	memcpy(dst, src, len);
+ 	return 0;
+ }
+ 
+-static inline int kern_xfer(void *dst, void *src, size_t len)
++static inline int kern_xfer(const struct vringh *vrh, void *dst,
++			    void *src, size_t len)
+ {
+ 	memcpy(dst, src, len);
+ 	return 0;
+@@ -949,7 +966,7 @@ EXPORT_SYMBOL(vringh_getdesc_kern);
+  */
+ ssize_t vringh_iov_pull_kern(struct vringh_kiov *riov, void *dst, size_t len)
+ {
+-	return vringh_iov_xfer(riov, dst, len, xfer_kern);
++	return vringh_iov_xfer(NULL, riov, dst, len, xfer_kern);
+ }
+ EXPORT_SYMBOL(vringh_iov_pull_kern);
+ 
+@@ -964,7 +981,7 @@ EXPORT_SYMBOL(vringh_iov_pull_kern);
+ ssize_t vringh_iov_push_kern(struct vringh_kiov *wiov,
+ 			     const void *src, size_t len)
+ {
+-	return vringh_iov_xfer(wiov, (void *)src, len, kern_xfer);
++	return vringh_iov_xfer(NULL, wiov, (void *)src, len, kern_xfer);
+ }
+ EXPORT_SYMBOL(vringh_iov_push_kern);
+ 
+@@ -1042,4 +1059,362 @@ int vringh_need_notify_kern(struct vringh *vrh)
+ }
+ EXPORT_SYMBOL(vringh_need_notify_kern);
+ 
++static int iotlb_translate(const struct vringh *vrh,
++			   u64 addr, u64 len, struct bio_vec iov[],
++			   int iov_size, u32 perm)
 +{
 +	struct vhost_iotlb_map *map;
++	struct vhost_iotlb *iotlb = vrh->iotlb;
++	int ret = 0;
++	u64 s = 0;
 +
-+	if (last < start)
-+		return -EFAULT;
++	while (len > s) {
++		u64 size, pa, pfn;
 +
-+	if (iotlb->limit &&
-+	    iotlb->nmaps == iotlb->limit &&
-+	    iotlb->flags & VHOST_IOTLB_FLAG_RETIRE) {
-+		map = list_first_entry(&iotlb->list, typeof(*map), link);
-+		vhost_iotlb_map_free(iotlb, map);
++		if (unlikely(ret >= iov_size)) {
++			ret = -ENOBUFS;
++			break;
++		}
++
++		map = vhost_iotlb_itree_first(iotlb, addr,
++					      addr + len - 1);
++		if (!map || map->start > addr) {
++			ret = -EINVAL;
++			break;
++		} else if (!(map->perm & perm)) {
++			ret = -EPERM;
++			break;
++		}
++
++		size = map->size - addr + map->start;
++		pa = map->addr + addr - map->start;
++		pfn = pa >> PAGE_SHIFT;
++		iov[ret].bv_page = pfn_to_page(pfn);
++		iov[ret].bv_len = min(len - s, size);
++		iov[ret].bv_offset = pa & (PAGE_SIZE - 1);
++		s += size;
++		addr += size;
++		++ret;
 +	}
 +
-+	map = kmalloc(sizeof(*map), GFP_ATOMIC);
-+	if (!map)
-+		return -ENOMEM;
++	return ret;
++}
 +
-+	map->start = start;
-+	map->size = last - start + 1;
-+	map->last = last;
-+	map->addr = addr;
-+	map->perm = perm;
++static inline int copy_from_iotlb(const struct vringh *vrh, void *dst,
++				  void *src, size_t len)
++{
++	struct iov_iter iter;
++	struct bio_vec iov[16];
++	int ret;
 +
-+	iotlb->nmaps++;
-+	vhost_iotlb_itree_insert(map, &iotlb->root);
++	ret = iotlb_translate(vrh, (u64)(uintptr_t)src,
++			      len, iov, 16, VHOST_MAP_RO);
++	if (ret < 0)
++		return ret;
 +
-+	INIT_LIST_HEAD(&map->link);
-+	list_add_tail(&map->link, &iotlb->list);
++	iov_iter_bvec(&iter, READ, iov, ret, len);
++
++	ret = copy_from_iter(dst, len, &iter);
++
++	return ret;
++}
++
++static inline int copy_to_iotlb(const struct vringh *vrh, void *dst,
++				void *src, size_t len)
++{
++	struct iov_iter iter;
++	struct bio_vec iov[16];
++	int ret;
++
++	ret = iotlb_translate(vrh, (u64)(uintptr_t)dst,
++			      len, iov, 16, VHOST_MAP_WO);
++	if (ret < 0)
++		return ret;
++
++	iov_iter_bvec(&iter, WRITE, iov, ret, len);
++
++	return copy_to_iter(src, len, &iter);
++}
++
++static inline int getu16_iotlb(const struct vringh *vrh,
++			       u16 *val, const __virtio16 *p)
++{
++	struct bio_vec iov;
++	void *kaddr, *from;
++	int ret;
++
++	/* Atomic read is needed for getu16 */
++	ret = iotlb_translate(vrh, (u64)(uintptr_t)p, sizeof(*p),
++			      &iov, 1, VHOST_MAP_RO);
++	if (ret < 0)
++		return ret;
++
++	kaddr = kmap_atomic(iov.bv_page);
++	from = kaddr + iov.bv_offset;
++	*val = vringh16_to_cpu(vrh, READ_ONCE(*(__virtio16 *)from));
++	kunmap_atomic(kaddr);
 +
 +	return 0;
 +}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_add_range);
 +
-+/**
-+ * vring_iotlb_del_range - delete overlapped ranges from vhost IOTLB
-+ * @iotlb: the IOTLB
-+ * @start: start of the IOVA range
-+ * @last: last of IOVA range
-+ */
-+void vhost_iotlb_del_range(struct vhost_iotlb *iotlb, u64 start, u64 last)
++static inline int putu16_iotlb(const struct vringh *vrh,
++			       __virtio16 *p, u16 val)
 +{
-+	struct vhost_iotlb_map *map;
++	struct bio_vec iov;
++	void *kaddr, *to;
++	int ret;
 +
-+	while ((map = vhost_iotlb_itree_iter_first(&iotlb->root,
-+						   start, last)))
-+		vhost_iotlb_map_free(iotlb, map);
++	/* Atomic write is needed for putu16 */
++	ret = iotlb_translate(vrh, (u64)(uintptr_t)p, sizeof(*p),
++			      &iov, 1, VHOST_MAP_WO);
++	if (ret < 0)
++		return ret;
++
++	kaddr = kmap_atomic(iov.bv_page);
++	to = kaddr + iov.bv_offset;
++	WRITE_ONCE(*(__virtio16 *)to, cpu_to_vringh16(vrh, val));
++	kunmap_atomic(kaddr);
++
++	return 0;
 +}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_del_range);
++
++static inline int copydesc_iotlb(const struct vringh *vrh,
++				 void *dst, const void *src, size_t len)
++{
++	int ret;
++
++	ret = copy_from_iotlb(vrh, dst, (void *)src, len);
++	if (ret != len)
++		return -EFAULT;
++
++	return 0;
++}
++
++static inline int xfer_from_iotlb(const struct vringh *vrh, void *src,
++				  void *dst, size_t len)
++{
++	int ret;
++
++	ret = copy_from_iotlb(vrh, dst, src, len);
++	if (ret != len)
++		return -EFAULT;
++
++	return 0;
++}
++
++static inline int xfer_to_iotlb(const struct vringh *vrh,
++			       void *dst, void *src, size_t len)
++{
++	int ret;
++
++	ret = copy_to_iotlb(vrh, dst, src, len);
++	if (ret != len)
++		return -EFAULT;
++
++	return 0;
++}
++
++static inline int putused_iotlb(const struct vringh *vrh,
++				struct vring_used_elem *dst,
++				const struct vring_used_elem *src,
++				unsigned int num)
++{
++	int size = num * sizeof(*dst);
++	int ret;
++
++	ret = copy_to_iotlb(vrh, dst, (void *)src, num * sizeof(*dst));
++	if (ret != size)
++		return -EFAULT;
++
++	return 0;
++}
 +
 +/**
-+ * vhost_iotlb_alloc - add a new vhost IOTLB
-+ * @limit: maximum number of IOTLB entries
-+ * @flags: VHOST_IOTLB_FLAG_XXX
++ * vringh_init_iotlb - initialize a vringh for a ring with IOTLB.
++ * @vrh: the vringh to initialize.
++ * @features: the feature bits for this ring.
++ * @num: the number of elements.
++ * @weak_barriers: true if we only need memory barriers, not I/O.
++ * @desc: the userpace descriptor pointer.
++ * @avail: the userpace avail pointer.
++ * @used: the userpace used pointer.
 + *
-+ * Returns an error is memory allocation fails
++ * Returns an error if num is invalid.
 + */
-+struct vhost_iotlb *vhost_iotlb_alloc(unsigned int limit, unsigned int flags)
++int vringh_init_iotlb(struct vringh *vrh, u64 features,
++		      unsigned int num, bool weak_barriers,
++		      struct vring_desc *desc,
++		      struct vring_avail *avail,
++		      struct vring_used *used)
 +{
-+	struct vhost_iotlb *iotlb = kzalloc(sizeof(*iotlb), GFP_KERNEL);
-+
-+	if (!iotlb)
-+		return NULL;
-+
-+	iotlb->root = RB_ROOT_CACHED;
-+	iotlb->limit = limit;
-+	iotlb->nmaps = 0;
-+	iotlb->flags = flags;
-+	INIT_LIST_HEAD(&iotlb->list);
-+
-+	return iotlb;
++	return vringh_init_kern(vrh, features, num, weak_barriers,
++				desc, avail, used);
 +}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_alloc);
++EXPORT_SYMBOL(vringh_init_iotlb);
 +
 +/**
-+ * vhost_iotlb_reset - reset vhost IOTLB (free all IOTLB entries)
-+ * @iotlb: the IOTLB to be reset
++ * vringh_set_iotlb - initialize a vringh for a ring with IOTLB.
++ * @vrh: the vring
++ * @iotlb: iotlb associated with this vring
 + */
-+void vhost_iotlb_reset(struct vhost_iotlb *iotlb)
++void vringh_set_iotlb(struct vringh *vrh, struct vhost_iotlb *iotlb)
 +{
-+	vhost_iotlb_del_range(iotlb, 0ULL, 0ULL - 1);
++	vrh->iotlb = iotlb;
 +}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_reset);
++EXPORT_SYMBOL(vringh_set_iotlb);
 +
 +/**
-+ * vhost_iotlb_free - reset and free vhost IOTLB
-+ * @iotlb: the IOTLB to be freed
++ * vringh_getdesc_iotlb - get next available descriptor from ring with
++ * IOTLB.
++ * @vrh: the kernelspace vring.
++ * @riov: where to put the readable descriptors (or NULL)
++ * @wiov: where to put the writable descriptors (or NULL)
++ * @head: head index we received, for passing to vringh_complete_iotlb().
++ * @gfp: flags for allocating larger riov/wiov.
++ *
++ * Returns 0 if there was no descriptor, 1 if there was, or -errno.
++ *
++ * Note that on error return, you can tell the difference between an
++ * invalid ring and a single invalid descriptor: in the former case,
++ * *head will be vrh->vring.num.  You may be able to ignore an invalid
++ * descriptor, but there's not much you can do with an invalid ring.
++ *
++ * Note that you may need to clean up riov and wiov, even on error!
 + */
-+void vhost_iotlb_free(struct vhost_iotlb *iotlb)
++int vringh_getdesc_iotlb(struct vringh *vrh,
++			 struct vringh_kiov *riov,
++			 struct vringh_kiov *wiov,
++			 u16 *head,
++			 gfp_t gfp)
 +{
-+	if (iotlb) {
-+		vhost_iotlb_reset(iotlb);
-+		kfree(iotlb);
-+	}
++	int err;
++
++	err = __vringh_get_head(vrh, getu16_iotlb, &vrh->last_avail_idx);
++	if (err < 0)
++		return err;
++
++	/* Empty... */
++	if (err == vrh->vring.num)
++		return 0;
++
++	*head = err;
++	err = __vringh_iov(vrh, *head, riov, wiov, no_range_check, NULL,
++			   gfp, copydesc_iotlb);
++	if (err)
++		return err;
++
++	return 1;
 +}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_free);
++EXPORT_SYMBOL(vringh_getdesc_iotlb);
 +
 +/**
-+ * vhost_iotlb_itree_first - return the first overlapped range
-+ * @iotlb: the IOTLB
-+ * @start: start of IOVA range
-+ * @end: end of IOVA range
++ * vringh_iov_pull_iotlb - copy bytes from vring_iov.
++ * @vrh: the vring.
++ * @riov: the riov as passed to vringh_getdesc_iotlb() (updated as we consume)
++ * @dst: the place to copy.
++ * @len: the maximum length to copy.
++ *
++ * Returns the bytes copied <= len or a negative errno.
 + */
-+struct vhost_iotlb_map *
-+vhost_iotlb_itree_first(struct vhost_iotlb *iotlb, u64 start, u64 last)
++ssize_t vringh_iov_pull_iotlb(struct vringh *vrh,
++			      struct vringh_kiov *riov,
++			      void *dst, size_t len)
 +{
-+	return vhost_iotlb_itree_iter_first(&iotlb->root, start, last);
++	return vringh_iov_xfer(vrh, riov, dst, len, xfer_from_iotlb);
 +}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_itree_first);
++EXPORT_SYMBOL(vringh_iov_pull_iotlb);
 +
 +/**
-+ * vhost_iotlb_itree_first - return the next overlapped range
-+ * @iotlb: the IOTLB
-+ * @start: start of IOVA range
-+ * @end: end of IOVA range
++ * vringh_iov_push_iotlb - copy bytes into vring_iov.
++ * @vrh: the vring.
++ * @wiov: the wiov as passed to vringh_getdesc_iotlb() (updated as we consume)
++ * @dst: the place to copy.
++ * @len: the maximum length to copy.
++ *
++ * Returns the bytes copied <= len or a negative errno.
 + */
-+struct vhost_iotlb_map *
-+vhost_iotlb_itree_next(struct vhost_iotlb_map *map, u64 start, u64 last)
++ssize_t vringh_iov_push_iotlb(struct vringh *vrh,
++			      struct vringh_kiov *wiov,
++			      const void *src, size_t len)
 +{
-+	return vhost_iotlb_itree_iter_next(map, start, last);
++	return vringh_iov_xfer(vrh, wiov, (void *)src, len, xfer_to_iotlb);
 +}
-+EXPORT_SYMBOL_GPL(vhost_iotlb_itree_next);
++EXPORT_SYMBOL(vringh_iov_push_iotlb);
 +
-+MODULE_VERSION(MOD_VERSION);
-+MODULE_DESCRIPTION(MOD_DESC);
-+MODULE_AUTHOR(MOD_AUTHOR);
-+MODULE_LICENSE(MOD_LICENSE);
-diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-index c8ab8d83b530..c7298b192ab4 100644
---- a/drivers/vhost/net.c
-+++ b/drivers/vhost/net.c
-@@ -1595,7 +1595,7 @@ static long vhost_net_reset_owner(struct vhost_net *n)
- 	struct socket *tx_sock = NULL;
- 	struct socket *rx_sock = NULL;
- 	long err;
--	struct vhost_umem *umem;
-+	struct vhost_iotlb *umem;
- 
- 	mutex_lock(&n->dev.mutex);
- 	err = vhost_dev_check_owner(&n->dev);
-diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index 8e9e2341e40a..d450e16c5c25 100644
---- a/drivers/vhost/vhost.c
-+++ b/drivers/vhost/vhost.c
-@@ -50,10 +50,6 @@ enum {
- #define vhost_used_event(vq) ((__virtio16 __user *)&vq->avail->ring[vq->num])
- #define vhost_avail_event(vq) ((__virtio16 __user *)&vq->used->ring[vq->num])
- 
--INTERVAL_TREE_DEFINE(struct vhost_umem_node,
--		     rb, __u64, __subtree_last,
--		     START, LAST, static inline, vhost_umem_interval_tree);
--
- #ifdef CONFIG_VHOST_CROSS_ENDIAN_LEGACY
- static void vhost_disable_cross_endian(struct vhost_virtqueue *vq)
- {
-@@ -584,21 +580,25 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
- }
- EXPORT_SYMBOL_GPL(vhost_dev_set_owner);
- 
--struct vhost_umem *vhost_dev_reset_owner_prepare(void)
-+static struct vhost_iotlb *iotlb_alloc(void)
++/**
++ * vringh_abandon_iotlb - we've decided not to handle the descriptor(s).
++ * @vrh: the vring.
++ * @num: the number of descriptors to put back (ie. num
++ *	 vringh_get_iotlb() to undo).
++ *
++ * The next vringh_get_iotlb() will return the old descriptor(s) again.
++ */
++void vringh_abandon_iotlb(struct vringh *vrh, unsigned int num)
 +{
-+	return vhost_iotlb_alloc(max_iotlb_entries,
-+				 VHOST_IOTLB_FLAG_RETIRE);
++	/* We only update vring_avail_event(vr) when we want to be notified,
++	 * so we haven't changed that yet.
++	 */
++	vrh->last_avail_idx -= num;
 +}
++EXPORT_SYMBOL(vringh_abandon_iotlb);
 +
-+struct vhost_iotlb *vhost_dev_reset_owner_prepare(void)
- {
--	return kvzalloc(sizeof(struct vhost_umem), GFP_KERNEL);
-+	return iotlb_alloc();
- }
- EXPORT_SYMBOL_GPL(vhost_dev_reset_owner_prepare);
- 
- /* Caller should have device mutex */
--void vhost_dev_reset_owner(struct vhost_dev *dev, struct vhost_umem *umem)
-+void vhost_dev_reset_owner(struct vhost_dev *dev, struct vhost_iotlb *umem)
- {
- 	int i;
- 
- 	vhost_dev_cleanup(dev);
- 
--	/* Restore memory to default empty mapping. */
--	INIT_LIST_HEAD(&umem->umem_list);
- 	dev->umem = umem;
- 	/* We don't need VQ locks below since vhost_dev_cleanup makes sure
- 	 * VQs aren't running.
-@@ -621,28 +621,6 @@ void vhost_dev_stop(struct vhost_dev *dev)
- }
- EXPORT_SYMBOL_GPL(vhost_dev_stop);
- 
--static void vhost_umem_free(struct vhost_umem *umem,
--			    struct vhost_umem_node *node)
--{
--	vhost_umem_interval_tree_remove(node, &umem->umem_tree);
--	list_del(&node->link);
--	kfree(node);
--	umem->numem--;
--}
--
--static void vhost_umem_clean(struct vhost_umem *umem)
--{
--	struct vhost_umem_node *node, *tmp;
--
--	if (!umem)
--		return;
--
--	list_for_each_entry_safe(node, tmp, &umem->umem_list, link)
--		vhost_umem_free(umem, node);
--
--	kvfree(umem);
--}
--
- static void vhost_clear_msg(struct vhost_dev *dev)
- {
- 	struct vhost_msg_node *node, *n;
-@@ -680,9 +658,9 @@ void vhost_dev_cleanup(struct vhost_dev *dev)
- 		eventfd_ctx_put(dev->log_ctx);
- 	dev->log_ctx = NULL;
- 	/* No one will access memory at this point */
--	vhost_umem_clean(dev->umem);
-+	vhost_iotlb_free(dev->umem);
- 	dev->umem = NULL;
--	vhost_umem_clean(dev->iotlb);
-+	vhost_iotlb_free(dev->iotlb);
- 	dev->iotlb = NULL;
- 	vhost_clear_msg(dev);
- 	wake_up_interruptible_poll(&dev->wait, EPOLLIN | EPOLLRDNORM);
-@@ -718,27 +696,26 @@ static bool vhost_overflow(u64 uaddr, u64 size)
- }
- 
- /* Caller should have vq mutex and device mutex. */
--static bool vq_memory_access_ok(void __user *log_base, struct vhost_umem *umem,
-+static bool vq_memory_access_ok(void __user *log_base, struct vhost_iotlb *umem,
- 				int log_all)
- {
--	struct vhost_umem_node *node;
-+	struct vhost_iotlb_map *map;
- 
- 	if (!umem)
- 		return false;
- 
--	list_for_each_entry(node, &umem->umem_list, link) {
--		unsigned long a = node->userspace_addr;
-+	list_for_each_entry(map, &umem->list, link) {
-+		unsigned long a = map->addr;
- 
--		if (vhost_overflow(node->userspace_addr, node->size))
-+		if (vhost_overflow(map->addr, map->size))
- 			return false;
- 
- 
--		if (!access_ok((void __user *)a,
--				    node->size))
-+		if (!access_ok((void __user *)a, map->size))
- 			return false;
- 		else if (log_all && !log_access_ok(log_base,
--						   node->start,
--						   node->size))
-+						   map->start,
-+						   map->size))
- 			return false;
- 	}
- 	return true;
-@@ -748,17 +725,17 @@ static inline void __user *vhost_vq_meta_fetch(struct vhost_virtqueue *vq,
- 					       u64 addr, unsigned int size,
- 					       int type)
- {
--	const struct vhost_umem_node *node = vq->meta_iotlb[type];
-+	const struct vhost_iotlb_map *map = vq->meta_iotlb[type];
- 
--	if (!node)
-+	if (!map)
- 		return NULL;
- 
--	return (void *)(uintptr_t)(node->userspace_addr + addr - node->start);
-+	return (void *)(uintptr_t)(map->addr + addr - map->start);
- }
- 
- /* Can we switch to this memory table? */
- /* Caller should have device mutex but not vq mutex */
--static bool memory_access_ok(struct vhost_dev *d, struct vhost_umem *umem,
-+static bool memory_access_ok(struct vhost_dev *d, struct vhost_iotlb *umem,
- 			     int log_all)
- {
- 	int i;
-@@ -1023,47 +1000,6 @@ static inline int vhost_get_desc(struct vhost_virtqueue *vq,
- 	return vhost_copy_from_user(vq, desc, vq->desc + idx, sizeof(*desc));
- }
- 
--static int vhost_new_umem_range(struct vhost_umem *umem,
--				u64 start, u64 size, u64 end,
--				u64 userspace_addr, int perm)
--{
--	struct vhost_umem_node *tmp, *node;
--
--	if (!size)
--		return -EFAULT;
--
--	node = kmalloc(sizeof(*node), GFP_ATOMIC);
--	if (!node)
--		return -ENOMEM;
--
--	if (umem->numem == max_iotlb_entries) {
--		tmp = list_first_entry(&umem->umem_list, typeof(*tmp), link);
--		vhost_umem_free(umem, tmp);
--	}
--
--	node->start = start;
--	node->size = size;
--	node->last = end;
--	node->userspace_addr = userspace_addr;
--	node->perm = perm;
--	INIT_LIST_HEAD(&node->link);
--	list_add_tail(&node->link, &umem->umem_list);
--	vhost_umem_interval_tree_insert(node, &umem->umem_tree);
--	umem->numem++;
--
--	return 0;
--}
--
--static void vhost_del_umem_range(struct vhost_umem *umem,
--				 u64 start, u64 end)
--{
--	struct vhost_umem_node *node;
--
--	while ((node = vhost_umem_interval_tree_iter_first(&umem->umem_tree,
--							   start, end)))
--		vhost_umem_free(umem, node);
--}
--
- static void vhost_iotlb_notify_vq(struct vhost_dev *d,
- 				  struct vhost_iotlb_msg *msg)
- {
-@@ -1120,9 +1056,9 @@ static int vhost_process_iotlb_msg(struct vhost_dev *dev,
- 			break;
- 		}
- 		vhost_vq_meta_reset(dev);
--		if (vhost_new_umem_range(dev->iotlb, msg->iova, msg->size,
--					 msg->iova + msg->size - 1,
--					 msg->uaddr, msg->perm)) {
-+		if (vhost_iotlb_add_range(dev->iotlb, msg->iova,
-+					  msg->iova + msg->size - 1,
-+					  msg->uaddr, msg->perm)) {
- 			ret = -ENOMEM;
- 			break;
- 		}
-@@ -1134,8 +1070,8 @@ static int vhost_process_iotlb_msg(struct vhost_dev *dev,
- 			break;
- 		}
- 		vhost_vq_meta_reset(dev);
--		vhost_del_umem_range(dev->iotlb, msg->iova,
--				     msg->iova + msg->size - 1);
-+		vhost_iotlb_del_range(dev->iotlb, msg->iova,
-+				      msg->iova + msg->size - 1);
- 		break;
- 	default:
- 		ret = -EINVAL;
-@@ -1319,44 +1255,42 @@ static bool vq_access_ok(struct vhost_virtqueue *vq, unsigned int num,
- }
- 
- static void vhost_vq_meta_update(struct vhost_virtqueue *vq,
--				 const struct vhost_umem_node *node,
-+				 const struct vhost_iotlb_map *map,
- 				 int type)
- {
- 	int access = (type == VHOST_ADDR_USED) ?
- 		     VHOST_ACCESS_WO : VHOST_ACCESS_RO;
- 
--	if (likely(node->perm & access))
--		vq->meta_iotlb[type] = node;
-+	if (likely(map->perm & access))
-+		vq->meta_iotlb[type] = map;
- }
- 
- static bool iotlb_access_ok(struct vhost_virtqueue *vq,
- 			    int access, u64 addr, u64 len, int type)
- {
--	const struct vhost_umem_node *node;
--	struct vhost_umem *umem = vq->iotlb;
-+	const struct vhost_iotlb_map *map;
-+	struct vhost_iotlb *umem = vq->iotlb;
- 	u64 s = 0, size, orig_addr = addr, last = addr + len - 1;
- 
- 	if (vhost_vq_meta_fetch(vq, addr, len, type))
- 		return true;
- 
- 	while (len > s) {
--		node = vhost_umem_interval_tree_iter_first(&umem->umem_tree,
--							   addr,
--							   last);
--		if (node == NULL || node->start > addr) {
-+		map = vhost_iotlb_itree_first(umem, addr, last);
-+		if (map == NULL || map->start > addr) {
- 			vhost_iotlb_miss(vq, addr, access);
- 			return false;
--		} else if (!(node->perm & access)) {
-+		} else if (!(map->perm & access)) {
- 			/* Report the possible access violation by
- 			 * request another translation from userspace.
- 			 */
- 			return false;
- 		}
- 
--		size = node->size - addr + node->start;
-+		size = map->size - addr + map->start;
- 
- 		if (orig_addr == addr && size >= len)
--			vhost_vq_meta_update(vq, node, type);
-+			vhost_vq_meta_update(vq, map, type);
- 
- 		s += size;
- 		addr += size;
-@@ -1372,12 +1306,12 @@ int vq_meta_prefetch(struct vhost_virtqueue *vq)
- 	if (!vq->iotlb)
- 		return 1;
- 
--	return iotlb_access_ok(vq, VHOST_ACCESS_RO, (u64)(uintptr_t)vq->desc,
-+	return iotlb_access_ok(vq, VHOST_MAP_RO, (u64)(uintptr_t)vq->desc,
- 			       vhost_get_desc_size(vq, num), VHOST_ADDR_DESC) &&
--	       iotlb_access_ok(vq, VHOST_ACCESS_RO, (u64)(uintptr_t)vq->avail,
-+	       iotlb_access_ok(vq, VHOST_MAP_RO, (u64)(uintptr_t)vq->avail,
- 			       vhost_get_avail_size(vq, num),
- 			       VHOST_ADDR_AVAIL) &&
--	       iotlb_access_ok(vq, VHOST_ACCESS_WO, (u64)(uintptr_t)vq->used,
-+	       iotlb_access_ok(vq, VHOST_MAP_WO, (u64)(uintptr_t)vq->used,
- 			       vhost_get_used_size(vq, num), VHOST_ADDR_USED);
- }
- EXPORT_SYMBOL_GPL(vq_meta_prefetch);
-@@ -1416,25 +1350,11 @@ bool vhost_vq_access_ok(struct vhost_virtqueue *vq)
- }
- EXPORT_SYMBOL_GPL(vhost_vq_access_ok);
- 
--static struct vhost_umem *vhost_umem_alloc(void)
--{
--	struct vhost_umem *umem = kvzalloc(sizeof(*umem), GFP_KERNEL);
--
--	if (!umem)
--		return NULL;
--
--	umem->umem_tree = RB_ROOT_CACHED;
--	umem->numem = 0;
--	INIT_LIST_HEAD(&umem->umem_list);
--
--	return umem;
--}
--
- static long vhost_set_memory(struct vhost_dev *d, struct vhost_memory __user *m)
- {
- 	struct vhost_memory mem, *newmem;
- 	struct vhost_memory_region *region;
--	struct vhost_umem *newumem, *oldumem;
-+	struct vhost_iotlb *newumem, *oldumem;
- 	unsigned long size = offsetof(struct vhost_memory, regions);
- 	int i;
- 
-@@ -1456,7 +1376,7 @@ static long vhost_set_memory(struct vhost_dev *d, struct vhost_memory __user *m)
- 		return -EFAULT;
- 	}
- 
--	newumem = vhost_umem_alloc();
-+	newumem = iotlb_alloc();
- 	if (!newumem) {
- 		kvfree(newmem);
- 		return -ENOMEM;
-@@ -1465,13 +1385,12 @@ static long vhost_set_memory(struct vhost_dev *d, struct vhost_memory __user *m)
- 	for (region = newmem->regions;
- 	     region < newmem->regions + mem.nregions;
- 	     region++) {
--		if (vhost_new_umem_range(newumem,
--					 region->guest_phys_addr,
--					 region->memory_size,
--					 region->guest_phys_addr +
--					 region->memory_size - 1,
--					 region->userspace_addr,
--					 VHOST_ACCESS_RW))
-+		if (vhost_iotlb_add_range(newumem,
-+					  region->guest_phys_addr,
-+					  region->guest_phys_addr +
-+					  region->memory_size - 1,
-+					  region->userspace_addr,
-+					  VHOST_MAP_RW))
- 			goto err;
- 	}
- 
-@@ -1489,11 +1408,11 @@ static long vhost_set_memory(struct vhost_dev *d, struct vhost_memory __user *m)
- 	}
- 
- 	kvfree(newmem);
--	vhost_umem_clean(oldumem);
-+	vhost_iotlb_free(oldumem);
- 	return 0;
- 
- err:
--	vhost_umem_clean(newumem);
-+	vhost_iotlb_free(newumem);
- 	kvfree(newmem);
- 	return -EFAULT;
- }
-@@ -1734,10 +1653,10 @@ EXPORT_SYMBOL_GPL(vhost_vring_ioctl);
- 
- int vhost_init_device_iotlb(struct vhost_dev *d, bool enabled)
- {
--	struct vhost_umem *niotlb, *oiotlb;
-+	struct vhost_iotlb *niotlb, *oiotlb;
- 	int i;
- 
--	niotlb = vhost_umem_alloc();
-+	niotlb = iotlb_alloc();
- 	if (!niotlb)
- 		return -ENOMEM;
- 
-@@ -1753,7 +1672,7 @@ int vhost_init_device_iotlb(struct vhost_dev *d, bool enabled)
- 		mutex_unlock(&vq->mutex);
- 	}
- 
--	vhost_umem_clean(oiotlb);
-+	vhost_iotlb_free(oiotlb);
- 
- 	return 0;
- }
-@@ -1883,8 +1802,8 @@ static int log_write(void __user *log_base,
- 
- static int log_write_hva(struct vhost_virtqueue *vq, u64 hva, u64 len)
- {
--	struct vhost_umem *umem = vq->umem;
--	struct vhost_umem_node *u;
-+	struct vhost_iotlb *umem = vq->umem;
-+	struct vhost_iotlb_map *u;
- 	u64 start, end, l, min;
- 	int r;
- 	bool hit = false;
-@@ -1894,16 +1813,15 @@ static int log_write_hva(struct vhost_virtqueue *vq, u64 hva, u64 len)
- 		/* More than one GPAs can be mapped into a single HVA. So
- 		 * iterate all possible umems here to be safe.
- 		 */
--		list_for_each_entry(u, &umem->umem_list, link) {
--			if (u->userspace_addr > hva - 1 + len ||
--			    u->userspace_addr - 1 + u->size < hva)
-+		list_for_each_entry(u, &umem->list, link) {
-+			if (u->addr > hva - 1 + len ||
-+			    u->addr - 1 + u->size < hva)
- 				continue;
--			start = max(u->userspace_addr, hva);
--			end = min(u->userspace_addr - 1 + u->size,
--				  hva - 1 + len);
-+			start = max(u->addr, hva);
-+			end = min(u->addr - 1 + u->size, hva - 1 + len);
- 			l = end - start + 1;
- 			r = log_write(vq->log_base,
--				      u->start + start - u->userspace_addr,
-+				      u->start + start - u->addr,
- 				      l);
- 			if (r < 0)
- 				return r;
-@@ -2054,9 +1972,9 @@ EXPORT_SYMBOL_GPL(vhost_vq_init_access);
- static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
- 			  struct iovec iov[], int iov_size, int access)
- {
--	const struct vhost_umem_node *node;
-+	const struct vhost_iotlb_map *map;
- 	struct vhost_dev *dev = vq->dev;
--	struct vhost_umem *umem = dev->iotlb ? dev->iotlb : dev->umem;
-+	struct vhost_iotlb *umem = dev->iotlb ? dev->iotlb : dev->umem;
- 	struct iovec *_iov;
- 	u64 s = 0;
- 	int ret = 0;
-@@ -2068,25 +1986,24 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
- 			break;
- 		}
- 
--		node = vhost_umem_interval_tree_iter_first(&umem->umem_tree,
--							addr, addr + len - 1);
--		if (node == NULL || node->start > addr) {
-+		map = vhost_iotlb_itree_first(umem, addr, addr + len - 1);
-+		if (map == NULL || map->start > addr) {
- 			if (umem != dev->iotlb) {
- 				ret = -EFAULT;
- 				break;
- 			}
- 			ret = -EAGAIN;
- 			break;
--		} else if (!(node->perm & access)) {
-+		} else if (!(map->perm & access)) {
- 			ret = -EPERM;
- 			break;
- 		}
- 
- 		_iov = iov + ret;
--		size = node->size - addr + node->start;
-+		size = map->size - addr + map->start;
- 		_iov->iov_len = min((u64)len - s, size);
- 		_iov->iov_base = (void __user *)(unsigned long)
--			(node->userspace_addr + addr - node->start);
-+				 (map->addr + addr - map->start);
- 		s += size;
- 		addr += size;
- 		++ret;
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index f9d1a03dd153..181382185bbc 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -12,6 +12,7 @@
- #include <linux/virtio_config.h>
- #include <linux/virtio_ring.h>
- #include <linux/atomic.h>
++/**
++ * vringh_complete_iotlb - we've finished with descriptor, publish it.
++ * @vrh: the vring.
++ * @head: the head as filled in by vringh_getdesc_iotlb.
++ * @len: the length of data we have written.
++ *
++ * You should check vringh_need_notify_iotlb() after one or more calls
++ * to this function.
++ */
++int vringh_complete_iotlb(struct vringh *vrh, u16 head, u32 len)
++{
++	struct vring_used_elem used;
++
++	used.id = cpu_to_vringh32(vrh, head);
++	used.len = cpu_to_vringh32(vrh, len);
++
++	return __vringh_complete(vrh, &used, 1, putu16_iotlb, putused_iotlb);
++}
++EXPORT_SYMBOL(vringh_complete_iotlb);
++
++/**
++ * vringh_notify_enable_iotlb - we want to know if something changes.
++ * @vrh: the vring.
++ *
++ * This always enables notifications, but returns false if there are
++ * now more buffers available in the vring.
++ */
++bool vringh_notify_enable_iotlb(struct vringh *vrh)
++{
++	return __vringh_notify_enable(vrh, getu16_iotlb, putu16_iotlb);
++}
++EXPORT_SYMBOL(vringh_notify_enable_iotlb);
++
++/**
++ * vringh_notify_disable_iotlb - don't tell us if something changes.
++ * @vrh: the vring.
++ *
++ * This is our normal running state: we disable and then only enable when
++ * we're going to sleep.
++ */
++void vringh_notify_disable_iotlb(struct vringh *vrh)
++{
++	__vringh_notify_disable(vrh, putu16_iotlb);
++}
++EXPORT_SYMBOL(vringh_notify_disable_iotlb);
++
++/**
++ * vringh_need_notify_iotlb - must we tell the other side about used buffers?
++ * @vrh: the vring we've called vringh_complete_iotlb() on.
++ *
++ * Returns -errno or 0 if we don't need to tell the other side, 1 if we do.
++ */
++int vringh_need_notify_iotlb(struct vringh *vrh)
++{
++	return __vringh_need_notify(vrh, getu16_iotlb);
++}
++EXPORT_SYMBOL(vringh_need_notify_iotlb);
++
++
+ MODULE_LICENSE("GPL");
+diff --git a/include/linux/vringh.h b/include/linux/vringh.h
+index d237087eb257..bd0503ca6f8f 100644
+--- a/include/linux/vringh.h
++++ b/include/linux/vringh.h
+@@ -14,6 +14,8 @@
+ #include <linux/virtio_byteorder.h>
+ #include <linux/uio.h>
+ #include <linux/slab.h>
++#include <linux/dma-direction.h>
 +#include <linux/vhost_iotlb.h>
+ #include <asm/barrier.h>
  
- struct vhost_work;
- typedef void (*vhost_work_fn_t)(struct vhost_work *work);
-@@ -52,27 +53,6 @@ struct vhost_log {
- 	u64 len;
+ /* virtio_ring with information needed for host access. */
+@@ -39,6 +41,9 @@ struct vringh {
+ 	/* The vring (note: it may contain user pointers!) */
+ 	struct vring vring;
+ 
++	/* IOTLB for this vring */
++	struct vhost_iotlb *iotlb;
++
+ 	/* The function to call to notify the guest about added buffers */
+ 	void (*notify)(struct vringh *);
  };
- 
--#define START(node) ((node)->start)
--#define LAST(node) ((node)->last)
--
--struct vhost_umem_node {
--	struct rb_node rb;
--	struct list_head link;
--	__u64 start;
--	__u64 last;
--	__u64 size;
--	__u64 userspace_addr;
--	__u32 perm;
--	__u32 flags_padding;
--	__u64 __subtree_last;
--};
--
--struct vhost_umem {
--	struct rb_root_cached umem_tree;
--	struct list_head umem_list;
--	int numem;
--};
--
- enum vhost_uaddr_type {
- 	VHOST_ADDR_DESC = 0,
- 	VHOST_ADDR_AVAIL = 1,
-@@ -90,7 +70,7 @@ struct vhost_virtqueue {
- 	struct vring_desc __user *desc;
- 	struct vring_avail __user *avail;
- 	struct vring_used __user *used;
--	const struct vhost_umem_node *meta_iotlb[VHOST_NUM_ADDRS];
-+	const struct vhost_iotlb_map *meta_iotlb[VHOST_NUM_ADDRS];
- 	struct file *kick;
- 	struct eventfd_ctx *call_ctx;
- 	struct eventfd_ctx *error_ctx;
-@@ -128,8 +108,8 @@ struct vhost_virtqueue {
- 	struct iovec *indirect;
- 	struct vring_used_elem *heads;
- 	/* Protected by virtqueue mutex. */
--	struct vhost_umem *umem;
--	struct vhost_umem *iotlb;
-+	struct vhost_iotlb *umem;
-+	struct vhost_iotlb *iotlb;
- 	void *private_data;
- 	u64 acked_features;
- 	u64 acked_backend_features;
-@@ -164,8 +144,8 @@ struct vhost_dev {
- 	struct eventfd_ctx *log_ctx;
- 	struct llist_head work_list;
- 	struct task_struct *worker;
--	struct vhost_umem *umem;
--	struct vhost_umem *iotlb;
-+	struct vhost_iotlb *umem;
-+	struct vhost_iotlb *iotlb;
- 	spinlock_t iotlb_lock;
- 	struct list_head read_list;
- 	struct list_head pending_list;
-@@ -186,8 +166,8 @@ void vhost_dev_init(struct vhost_dev *, struct vhost_virtqueue **vqs,
- long vhost_dev_set_owner(struct vhost_dev *dev);
- bool vhost_dev_has_owner(struct vhost_dev *dev);
- long vhost_dev_check_owner(struct vhost_dev *);
--struct vhost_umem *vhost_dev_reset_owner_prepare(void);
--void vhost_dev_reset_owner(struct vhost_dev *, struct vhost_umem *);
-+struct vhost_iotlb *vhost_dev_reset_owner_prepare(void);
-+void vhost_dev_reset_owner(struct vhost_dev *dev, struct vhost_iotlb *iotlb);
- void vhost_dev_cleanup(struct vhost_dev *);
- void vhost_dev_stop(struct vhost_dev *);
- long vhost_dev_ioctl(struct vhost_dev *, unsigned int ioctl, void __user *argp);
-@@ -233,6 +213,9 @@ ssize_t vhost_chr_write_iter(struct vhost_dev *dev,
- 			     struct iov_iter *from);
- int vhost_init_device_iotlb(struct vhost_dev *d, bool enabled);
- 
-+void vhost_iotlb_map_free(struct vhost_iotlb *iotlb,
-+			  struct vhost_iotlb_map *map);
+@@ -248,4 +253,35 @@ static inline __virtio64 cpu_to_vringh64(const struct vringh *vrh, u64 val)
+ {
+ 	return __cpu_to_virtio64(vringh_is_little_endian(vrh), val);
+ }
 +
- #define vq_err(vq, fmt, ...) do {                                  \
- 		pr_debug(pr_fmt(fmt), ##__VA_ARGS__);       \
- 		if ((vq)->error_ctx)                               \
-diff --git a/include/linux/vhost_iotlb.h b/include/linux/vhost_iotlb.h
-new file mode 100644
-index 000000000000..6b09b786a762
---- /dev/null
-+++ b/include/linux/vhost_iotlb.h
-@@ -0,0 +1,47 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _LINUX_VHOST_IOTLB_H
-+#define _LINUX_VHOST_IOTLB_H
++void vringh_set_iotlb(struct vringh *vrh, struct vhost_iotlb *iotlb);
 +
-+#include <linux/interval_tree_generic.h>
++int vringh_init_iotlb(struct vringh *vrh, u64 features,
++		      unsigned int num, bool weak_barriers,
++		      struct vring_desc *desc,
++		      struct vring_avail *avail,
++		      struct vring_used *used);
 +
-+struct vhost_iotlb_map {
-+	struct rb_node rb;
-+	struct list_head link;
-+	u64 start;
-+	u64 last;
-+	u64 size;
-+	u64 addr;
-+#define VHOST_MAP_RO 0x1
-+#define VHOST_MAP_WO 0x2
-+#define VHOST_MAP_RW 0x3
-+	u32 perm;
-+	u32 flags_padding;
-+	u64 __subtree_last;
-+};
++int vringh_getdesc_iotlb(struct vringh *vrh,
++			 struct vringh_kiov *riov,
++			 struct vringh_kiov *wiov,
++			 u16 *head,
++			 gfp_t gfp);
 +
-+#define VHOST_IOTLB_FLAG_RETIRE 0x1
++ssize_t vringh_iov_pull_iotlb(struct vringh *vrh,
++			      struct vringh_kiov *riov,
++			      void *dst, size_t len);
++ssize_t vringh_iov_push_iotlb(struct vringh *vrh,
++			      struct vringh_kiov *wiov,
++			      const void *src, size_t len);
 +
-+struct vhost_iotlb {
-+	struct rb_root_cached root;
-+	struct list_head list;
-+	unsigned int limit;
-+	unsigned int nmaps;
-+	unsigned int flags;
-+};
++void vringh_abandon_iotlb(struct vringh *vrh, unsigned int num);
 +
-+int vhost_iotlb_add_range(struct vhost_iotlb *iotlb, u64 start, u64 last,
-+			  u64 addr, unsigned int perm);
-+void vhost_iotlb_del_range(struct vhost_iotlb *iotlb, u64 start, u64 last);
++int vringh_complete_iotlb(struct vringh *vrh, u16 head, u32 len);
 +
-+struct vhost_iotlb *vhost_iotlb_alloc(unsigned int limit, unsigned int flags);
-+void vhost_iotlb_free(struct vhost_iotlb *iotlb);
-+void vhost_iotlb_reset(struct vhost_iotlb *iotlb);
++bool vringh_notify_enable_iotlb(struct vringh *vrh);
++void vringh_notify_disable_iotlb(struct vringh *vrh);
 +
-+struct vhost_iotlb_map *
-+vhost_iotlb_itree_first(struct vhost_iotlb *iotlb, u64 start, u64 last);
-+struct vhost_iotlb_map *
-+vhost_iotlb_itree_next(struct vhost_iotlb_map *map, u64 start, u64 last);
++int vringh_need_notify_iotlb(struct vringh *vrh);
 +
-+void vhost_iotlb_map_free(struct vhost_iotlb *iotlb,
-+			  struct vhost_iotlb_map *map);
-+#endif
+ #endif /* _LINUX_VRINGH_H */
 -- 
 2.20.1
 
