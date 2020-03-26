@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82D2C194C6D
-	for <lists.virtualization@lfdr.de>; Fri, 27 Mar 2020 00:25:06 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 519E9194C7F
+	for <lists.virtualization@lfdr.de>; Fri, 27 Mar 2020 00:25:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 207A021519;
-	Thu, 26 Mar 2020 23:25:05 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0017788A1C;
+	Thu, 26 Mar 2020 23:25:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yjOtVZr0JQDQ; Thu, 26 Mar 2020 23:25:03 +0000 (UTC)
+	with ESMTP id W72ptFTtmOD1; Thu, 26 Mar 2020 23:25:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8521F20402;
-	Thu, 26 Mar 2020 23:25:03 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C148688A0E;
+	Thu, 26 Mar 2020 23:25:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 522F6C0177;
-	Thu, 26 Mar 2020 23:25:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AA620C0177;
+	Thu, 26 Mar 2020 23:25:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 53A80C0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4FEECC0177
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:25:02 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 4A525875D9
+ by silver.osuosl.org (Postfix) with ESMTP id 3DF9025DCE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:25:02 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id BrCImuKc4rMW
+ with ESMTP id LzsW2B2UnBEo
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:25:01 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id DEB5187556
+ by silver.osuosl.org (Postfix) with ESMTPS id DF3D6204AF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:25:01 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:17 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E6ACD21707;
- Thu, 26 Mar 2020 23:25:00 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DBD852082D;
+ Thu, 26 Mar 2020 23:25:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585265101;
+ s=default; t=1585265117;
  bh=TOlzQZqFBlXXk6vVW3nEQ7OnPHurudRh2uEU+6f1lvY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=G1ijmhJ07r5cQ5V+GQ/wAvyxZcHh6HIAZhwPkrjdwomjNwkjWkzbHD7sH5Jcj7xW6
- Puy0dGqRpoLXBJndQ31urDnH5tP08XE+2qoeioayuuKYd1QiNKFDSIF3TKwhC20rxw
- M+5RJT+d1eUk+uHgxlYP4evFJegW3AdbJgeFEMAE=
+ b=VcyCalg0QfG6orqJTIAZRpTozXFiSat3BqSSKA1MIv+ffexmLQSJFGW2L0KjUZDCy
+ KvQpMRMDTYa5iIQaOgIccJ1tiyDWPERlBNiVS6HvOGhKmDIr6XW90Jyoa1HXQZ89G6
+ bz7wrTSOlgfJrl2xH0PuPjj4bMHavmO0MYf2zCP0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 05/15] drm/bochs: downgrade pci_request_region
+Subject: [PATCH AUTOSEL 4.14 03/10] drm/bochs: downgrade pci_request_region
  failure from error to warning
-Date: Thu, 26 Mar 2020 19:24:45 -0400
-Message-Id: <20200326232455.8029-5-sashal@kernel.org>
+Date: Thu, 26 Mar 2020 19:25:06 -0400
+Message-Id: <20200326232513.8212-3-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200326232455.8029-1-sashal@kernel.org>
-References: <20200326232455.8029-1-sashal@kernel.org>
+In-Reply-To: <20200326232513.8212-1-sashal@kernel.org>
+References: <20200326232513.8212-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
