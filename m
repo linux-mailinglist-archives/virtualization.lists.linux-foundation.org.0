@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A290194C54
-	for <lists.virtualization@lfdr.de>; Fri, 27 Mar 2020 00:24:43 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82D2C194C6D
+	for <lists.virtualization@lfdr.de>; Fri, 27 Mar 2020 00:25:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 36FB089338;
-	Thu, 26 Mar 2020 23:24:42 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 207A021519;
+	Thu, 26 Mar 2020 23:25:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8FDFEXKcnPMo; Thu, 26 Mar 2020 23:24:42 +0000 (UTC)
+	with ESMTP id yjOtVZr0JQDQ; Thu, 26 Mar 2020 23:25:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 12BDC89339;
-	Thu, 26 Mar 2020 23:24:42 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 8521F20402;
+	Thu, 26 Mar 2020 23:25:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0AD15C0177;
-	Thu, 26 Mar 2020 23:24:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 522F6C0177;
+	Thu, 26 Mar 2020 23:25:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2A016C0177
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 53A80C0177
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:24:40 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 1771488A0E
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4A525875D9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:24:40 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FXk2aIPT-9oe
+ with ESMTP id BrCImuKc4rMW
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:24:39 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 8627288A00
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id DEB5187556
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Mar 2020 23:24:39 +0000 (UTC)
+ Thu, 26 Mar 2020 23:25:01 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 89DBD20409;
- Thu, 26 Mar 2020 23:24:38 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id E6ACD21707;
+ Thu, 26 Mar 2020 23:25:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585265079;
- bh=JZKbPbuU2UHbrb6VuFFKYu3d0IBGpuh9U6WpdN5Q95o=;
+ s=default; t=1585265101;
+ bh=TOlzQZqFBlXXk6vVW3nEQ7OnPHurudRh2uEU+6f1lvY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=q85PokZ2dhFL2w2cjl+pt4aJsxsGn8rSQqaWZN0Su9jLT7w038vLGmLXxn4iYe8J0
- HqsRRX9+JfHKQp+EGEmIwKmNx7lAYHCxh20AOVFFz5Hxj4VhrBPlZhq4RAJMtRiI5A
- 069I/f0J7/hN4SFkIWC+18m8iERA/XG6Zt6NLBis=
+ b=G1ijmhJ07r5cQ5V+GQ/wAvyxZcHh6HIAZhwPkrjdwomjNwkjWkzbHD7sH5Jcj7xW6
+ Puy0dGqRpoLXBJndQ31urDnH5tP08XE+2qoeioayuuKYd1QiNKFDSIF3TKwhC20rxw
+ M+5RJT+d1eUk+uHgxlYP4evFJegW3AdbJgeFEMAE=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.4 06/19] drm/bochs: downgrade pci_request_region
+Subject: [PATCH AUTOSEL 4.19 05/15] drm/bochs: downgrade pci_request_region
  failure from error to warning
-Date: Thu, 26 Mar 2020 19:24:18 -0400
-Message-Id: <20200326232431.7816-6-sashal@kernel.org>
+Date: Thu, 26 Mar 2020 19:24:45 -0400
+Message-Id: <20200326232455.8029-5-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200326232431.7816-1-sashal@kernel.org>
-References: <20200326232431.7816-1-sashal@kernel.org>
+In-Reply-To: <20200326232455.8029-1-sashal@kernel.org>
+References: <20200326232455.8029-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -99,17 +99,17 @@ ZC8yMDIwMDMxMzA4NDE1Mi4yNzM0LTEta3JheGVsQHJlZGhhdC5jb20KU2lnbmVkLW9mZi1ieTog
 U2FzaGEgTGV2aW4gPHNhc2hhbEBrZXJuZWwub3JnPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ib2No
 cy9ib2Noc19ody5jIHwgNiArKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyks
 IDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2JvY2hzL2JvY2hz
-X2h3LmMgYi9kcml2ZXJzL2dwdS9kcm0vYm9jaHMvYm9jaHNfaHcuYwppbmRleCBlNTY3YmRmYTJh
-YjhlLi5iYjEzOTE3ODRjYWYwIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vYm9jaHMvYm9j
-aHNfaHcuYworKysgYi9kcml2ZXJzL2dwdS9kcm0vYm9jaHMvYm9jaHNfaHcuYwpAQCAtMTU2LDEw
-ICsxNTYsOCBAQCBpbnQgYm9jaHNfaHdfaW5pdChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2KQogCQlz
-aXplID0gbWluKHNpemUsIG1lbSk7CiAJfQogCi0JaWYgKHBjaV9yZXF1ZXN0X3JlZ2lvbihwZGV2
-LCAwLCAiYm9jaHMtZHJtIikgIT0gMCkgewotCQlEUk1fRVJST1IoIkNhbm5vdCByZXF1ZXN0IGZy
-YW1lYnVmZmVyXG4iKTsKLQkJcmV0dXJuIC1FQlVTWTsKLQl9CisJaWYgKHBjaV9yZXF1ZXN0X3Jl
-Z2lvbihwZGV2LCAwLCAiYm9jaHMtZHJtIikgIT0gMCkKKwkJRFJNX1dBUk4oIkNhbm5vdCByZXF1
-ZXN0IGZyYW1lYnVmZmVyLCBib290IGZiIHN0aWxsIGFjdGl2ZT9cbiIpOwogCiAJYm9jaHMtPmZi
-X21hcCA9IGlvcmVtYXAoYWRkciwgc2l6ZSk7CiAJaWYgKGJvY2hzLT5mYl9tYXAgPT0gTlVMTCkg
-ewotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGlu
-dXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxt
-YW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+X2h3LmMgYi9kcml2ZXJzL2dwdS9kcm0vYm9jaHMvYm9jaHNfaHcuYwppbmRleCBhMzliMDM0M2Mx
+OTdkLi40MDFjMjE4NTY3YWY5IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vYm9jaHMvYm9j
+aHNfaHcuYworKysgYi9kcml2ZXJzL2dwdS9kcm0vYm9jaHMvYm9jaHNfaHcuYwpAQCAtOTcsMTAg
+Kzk3LDggQEAgaW50IGJvY2hzX2h3X2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdWludDMy
+X3QgZmxhZ3MpCiAJCXNpemUgPSBtaW4oc2l6ZSwgbWVtKTsKIAl9CiAKLQlpZiAocGNpX3JlcXVl
+c3RfcmVnaW9uKHBkZXYsIDAsICJib2Nocy1kcm0iKSAhPSAwKSB7Ci0JCURSTV9FUlJPUigiQ2Fu
+bm90IHJlcXVlc3QgZnJhbWVidWZmZXJcbiIpOwotCQlyZXR1cm4gLUVCVVNZOwotCX0KKwlpZiAo
+cGNpX3JlcXVlc3RfcmVnaW9uKHBkZXYsIDAsICJib2Nocy1kcm0iKSAhPSAwKQorCQlEUk1fV0FS
+TigiQ2Fubm90IHJlcXVlc3QgZnJhbWVidWZmZXIsIGJvb3QgZmIgc3RpbGwgYWN0aXZlP1xuIik7
+CiAKIAlib2Nocy0+ZmJfbWFwID0gaW9yZW1hcChhZGRyLCBzaXplKTsKIAlpZiAoYm9jaHMtPmZi
+X21hcCA9PSBOVUxMKSB7Ci0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXph
+dGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRh
+dGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
