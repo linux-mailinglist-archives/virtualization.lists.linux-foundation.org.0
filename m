@@ -2,96 +2,94 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73087196D48
-	for <lists.virtualization@lfdr.de>; Sun, 29 Mar 2020 14:25:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F48D196D66
+	for <lists.virtualization@lfdr.de>; Sun, 29 Mar 2020 14:36:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id F2678875BF;
-	Sun, 29 Mar 2020 12:25:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1F1B8875BF;
+	Sun, 29 Mar 2020 12:36:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8tKFZI6GiFNs; Sun, 29 Mar 2020 12:25:16 +0000 (UTC)
+	with ESMTP id nvCt3i2y+VWT; Sun, 29 Mar 2020 12:36:23 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 052F286DE2;
-	Sun, 29 Mar 2020 12:25:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 68332875A9;
+	Sun, 29 Mar 2020 12:36:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C6E69C07FF;
-	Sun, 29 Mar 2020 12:25:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 40E4EC07FF;
+	Sun, 29 Mar 2020 12:36:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 92681C07FF
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C9EC0C07FF
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Mar 2020 12:25:14 +0000 (UTC)
+ Sun, 29 Mar 2020 12:36:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 7972886D16
+ by silver.osuosl.org (Postfix) with ESMTP id ABACF20336
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Mar 2020 12:25:14 +0000 (UTC)
+ Sun, 29 Mar 2020 12:36:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XxaQQ69BP5iq
+ with ESMTP id Caxc3pC-pK8G
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Mar 2020 12:25:13 +0000 (UTC)
+ Sun, 29 Mar 2020 12:36:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-74.mimecast.com
- (us-smtp-delivery-74.mimecast.com [63.128.21.74])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5CD4486CF9
+ (us-smtp-delivery-74.mimecast.com [216.205.24.74])
+ by silver.osuosl.org (Postfix) with ESMTPS id 7DD2D20243
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Mar 2020 12:25:13 +0000 (UTC)
+ Sun, 29 Mar 2020 12:36:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585484712;
+ s=mimecast20190719; t=1585485378;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7aYQvfE9ZI6p73CzOSPy+6jJYmr2roJlefLeW6BGFEU=;
- b=audLTlvkN/cqG3duALmJJMP6xDmaM84YXLiWiteLA1VIrIN/86fopvl3aOWY/XHdYwMTml
- tEMrvGTrkQ/TbTRpoz+LD2igaaz8YzDO7zp25gTH8j38QLUOr59F9623ZlCfbElH7dJbEZ
- QapcclV/Zgt0tDLKMbZCJwYoNF3XYNE=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-146-QTvOqIcfNnGzrafFuRprKw-1; Sun, 29 Mar 2020 08:25:10 -0400
-X-MC-Unique: QTvOqIcfNnGzrafFuRprKw-1
-Received: by mail-wr1-f71.google.com with SMTP id h95so3200017wrh.11
+ bh=KjDtJRhNQTsVmF4NvU8oxfnWMMP0pizbjtN+Id7OBh8=;
+ b=g0Bi5YVC0gXHD6z/urOrQ/Noy6qkzIPn3yQ7ha61KKkQaFsq67ITpwxfjq6curOKcQSBKD
+ OkGaZVzsxgypyrKriUwLMu7o/x4t05wBEr2loXHP4IzIu5JBoa+NR0IPYSzHk7sYldpgo/
+ mFEVpzx8qjJkyvgUNA7J8W3aNo5wLN0=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-343-JkVwnHdBO-qBYCsSA_Oy8g-1; Sun, 29 Mar 2020 08:36:16 -0400
+X-MC-Unique: JkVwnHdBO-qBYCsSA_Oy8g-1
+Received: by mail-wr1-f72.google.com with SMTP id e10so8401222wru.6
  for <virtualization@lists.linux-foundation.org>;
- Sun, 29 Mar 2020 05:25:10 -0700 (PDT)
+ Sun, 29 Mar 2020 05:36:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=7vKFOd347o9WoHxHI6B5j1Zjim146jeGZmfmqH7fBaE=;
- b=WjfDcD/vbnXiQGXOSopVQsQwJyMkEwIZj+VdTnd3npGoTnLuJLJqr90uVGKljiBnU+
- AWN9IKZaCN8BNjJqxidJUt/IjAJn0b0zSQ2zn0wUvpkRiE2CpfRay/V+UA6Broy1R89n
- mQ8TlXi4AQ9W2IRYXBdgrMs5pu7AxbOCi46dVY9jgXRZoP7xJaFP4K/wf6ji7wuJ/KSS
- LNLOa4QOec2lIKsLReCvnSbB8jncOUtta78snmyArHwc6kKVO9pK8IBnU2My6J83OpB5
- meTbwSolUgqmdxepHjaafh1uEMZYSiZ/+DC1iu2FSy+ozwsmzvPtZPlaWnPHmOQnuNCq
- 2mSQ==
-X-Gm-Message-State: ANhLgQ0stffXvLLtZ5SGaCtJNdKs89i7xvU/CjcM+iHizwrgP/Q1e237
- KZWGh1yeXqfH5tExaf+I9lfMrSVuNlzAztiBZjIMjaYBuwDCYL3cBjzufGw3jRyOeJ62RMA53Q6
- tL7eoC0OyOoc6SSmSthQleTwmo/olL5ixHTyLQ04l9g==
-X-Received: by 2002:adf:e942:: with SMTP id m2mr9560597wrn.364.1585484709181; 
- Sun, 29 Mar 2020 05:25:09 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vuHbrAQAMGspN3vkSyUCV4rlxQ2qSDmnNPRnKfein9CsAMF+8qjUPe34LCmI1NXow9ZnUY3qA==
-X-Received: by 2002:adf:e942:: with SMTP id m2mr9560582wrn.364.1585484708917; 
- Sun, 29 Mar 2020 05:25:08 -0700 (PDT)
+ bh=hwBJNIszh6TC6VU12FXZ4Vd7wn8RSesK/NNxIOU/Few=;
+ b=Ke95wxgGwdgSlD8iXK89X+3MCIle+x6Rigwo59/bXLtStjQ4uLSxi7CGBWv30MYkOL
+ Y7h2NKazOdtJpqwo2Qt5kgTrRI+JHkWrJes+26gsYGDzHFUNTbBesdGBXqljQJOJPQBI
+ AoHSLIuSrxk4PVtjIBsVDm31bow3s+zi4d2a40629zTtU8RG9LMEcsfy3QkZ2qxzkwzO
+ EF0bOGpBqGVzbizvQKMgyqUl0cQuE+nL+irX3m5V2M80ycgBDofYMm1uvVSAUdsuBKQr
+ bVCp/0Et/r6+5W1Nln62ypQW68kd7REH+iZgQnixqAnDK5wHRHD8488aIfgYfl7qamY4
+ I9SQ==
+X-Gm-Message-State: ANhLgQ3dQcm53IR/YeC32e9CqrXg0wosihhRnj1btolBON7PC/3VaeX2
+ gN7vxqvltzDSwYnY0jZEhAP0tUri6UNILQwzbVGsUcu70RNoFzbBn11gklzMfq0pMKv702qeZ0C
+ mSldc/4dINwPCQzb0OmrcDqeb9SgEmyqOnUsGW6wBYQ==
+X-Received: by 2002:a1c:f70a:: with SMTP id v10mr8143936wmh.72.1585485375627; 
+ Sun, 29 Mar 2020 05:36:15 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vuI9saIsl2zcWQGqaeDKgmx/oMIL5wQ54Rlrl1U1iP0jFOdf2pPLW21ixwNKW8n8TFOnKAcZQ==
+X-Received: by 2002:a1c:f70a:: with SMTP id v10mr8143921wmh.72.1585485375355; 
+ Sun, 29 Mar 2020 05:36:15 -0700 (PDT)
 Received: from redhat.com (bzq-79-183-139-129.red.bezeqint.net.
  [79.183.139.129])
- by smtp.gmail.com with ESMTPSA id z129sm16715180wmb.7.2020.03.29.05.25.07
+ by smtp.gmail.com with ESMTPSA id b187sm17230248wmc.14.2020.03.29.05.36.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Mar 2020 05:25:08 -0700 (PDT)
-Date: Sun, 29 Mar 2020 08:25:05 -0400
+ Sun, 29 Mar 2020 05:36:14 -0700 (PDT)
+Date: Sun, 29 Mar 2020 08:36:12 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Eugenio Perez Martin <eperezma@redhat.com>
-Subject: Re: [PATCH 0/6] vhost: Reset batched descriptors on SET_VRING_BASE
- call
-Message-ID: <20200329082055-mutt-send-email-mst@kernel.org>
+To: Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>
+Subject: Re: [PATCH 4/6] tools/virtio: Make --reset reset ring idx
+Message-ID: <20200329083047-mutt-send-email-mst@kernel.org>
 References: <20200329113359.30960-1-eperezma@redhat.com>
- <20200329074023-mutt-send-email-mst@kernel.org>
- <CAJaqyWdO8CHuWFJv+TRgYJ7a3Cb06Ln3prnQZs69L1PPw4Rj1Q@mail.gmail.com>
+ <20200329113359.30960-5-eperezma@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAJaqyWdO8CHuWFJv+TRgYJ7a3Cb06Ln3prnQZs69L1PPw4Rj1Q@mail.gmail.com>
+In-Reply-To: <20200329113359.30960-5-eperezma@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -118,78 +116,154 @@ Content-Transfer-Encoding: quoted-printable
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sun, Mar 29, 2020 at 02:19:55PM +0200, Eugenio Perez Martin wrote:
-> On Sun, Mar 29, 2020 at 1:49 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
-> > On Sun, Mar 29, 2020 at 01:33:53PM +0200, Eugenio P=C3=A9rez wrote:
-> > > Vhost did not reset properly the batched descriptors on SET_VRING_BAS=
-E event. Because of that, is possible to return an invalid descriptor to th=
-e guest.
-> > > This series ammend this, and creates a test to assert correct behavio=
-r. To do that, they need to expose a new function in virtio_ring, virtqueue=
-_reset_free_head. Not sure if this can be avoided.
-> >
-> > Question: why not reset the batch when private_data changes?
-> > At the moment both net and scsi poke at private data directly,
-> > if they do this through a wrapper we can use that to
-> > 1. check that vq mutex is taken properly
-> > 2. reset batching
-> >
-> > This seems like a slightly better API
-> >
+On Sun, Mar 29, 2020 at 01:33:57PM +0200, Eugenio P=C3=A9rez wrote:
+> Signed-off-by: Eugenio P=C3=A9rez <eperezma@redhat.com>
+> ---
+>  drivers/virtio/virtio_ring.c | 18 ++++++++++++++++++
+>  include/linux/virtio.h       |  2 ++
+>  tools/virtio/linux/virtio.h  |  2 ++
+>  tools/virtio/virtio_test.c   | 28 +++++++++++++++++++++++++++-
+>  4 files changed, 49 insertions(+), 1 deletion(-)
 > =
 
-> I didn't do that way because qemu could just SET_BACKEND to -1 and
-> SET_BACKEND to the same one, with no call to SET_VRING. In this case,
-> I think that qemu should not change the descriptors already pushed.
+> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+> index 867c7ebd3f10..aba44ac3f0d6 100644
+> --- a/drivers/virtio/virtio_ring.c
+> +++ b/drivers/virtio/virtio_ring.c
+> @@ -1810,6 +1810,24 @@ int virtqueue_add_inbuf_ctx(struct virtqueue *vq,
+>  }
+>  EXPORT_SYMBOL_GPL(virtqueue_add_inbuf_ctx);
+>  =
 
-Well dropping the batch is always safe, batch is an optimization.
+> +void virtqueue_reset_free_head(struct virtqueue *_vq)
+> +{
+> +	struct vring_virtqueue *vq =3D to_vvq(_vq);
+> +
+> +	// vq->last_used_idx =3D 0;
+> +	vq->num_added =3D 0;
+> +
+> +	vq->split.queue_size_in_bytes =3D 0;
+> +	vq->split.avail_flags_shadow =3D 0;
+> +	vq->split.avail_idx_shadow =3D 0;
+> +
+> +	memset(vq->split.desc_state, 0, vq->split.vring.num *
+> +			sizeof(struct vring_desc_state_split));
+> +
+> +	vq->free_head =3D 0;
+> +}
+> +EXPORT_SYMBOL_GPL(virtqueue_reset_free_head);
+> +
+>  /**
+>   * virtqueue_kick_prepare - first half of split virtqueue_kick call.
+>   * @_vq: the struct virtqueue
+
+Add documentation please. When should this be called?
+If it's just for testing, we can put this within some ifdef
+that only triggers when building the test ...
 
 
-> I
-> do agree with the interface to modify private_data properly (regarding
-> the mutex).
-> =
+> diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+> index 15f906e4a748..286a0048fbeb 100644
+> --- a/include/linux/virtio.h
+> +++ b/include/linux/virtio.h
+> @@ -58,6 +58,8 @@ int virtqueue_add_sgs(struct virtqueue *vq,
+>  		      void *data,
+>  		      gfp_t gfp);
+>  =
 
-> However, I can see how your proposal is safer, so we don't even need
-> to check if private_data is !=3D NULL when we have descriptors in the
-> batch_descs array. Also, this ioctls should not be in the hot path, so
-> we can change to that mode anyway.
-> =
+> +void virtqueue_reset_free_head(struct virtqueue *vq);
+> +
+>  bool virtqueue_kick(struct virtqueue *vq);
+>  =
 
-> > >
-> > > Also, change from https://lkml.org/lkml/2020/3/27/108 is not included=
-, that avoids to update a variable in a loop where it can be updated once.
-> > >
-> > > This is meant to be applied on top of eccb852f1fe6bede630e2e4f1a121a8=
-1e34354ab in git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git, and som=
-e commits should be squashed with that series.
-> >
-> > Thanks a lot! I'll apply this for now so Christian can start testing,
-> > but I'd like the comment above addressed before I push this to Linus.
-> >
-> > > Eugenio P=C3=A9rez (6):
-> > >   tools/virtio: Add --batch option
-> > >   tools/virtio: Add --batch=3Drandom option
-> > >   tools/virtio: Add --reset=3Drandom
-> > >   tools/virtio: Make --reset reset ring idx
-> > >   vhost: Delete virtqueue batch_descs member
-> > >   fixup! vhost: batching fetches
-> > >
-> > >  drivers/vhost/test.c         |  57 ++++++++++++++++
-> > >  drivers/vhost/test.h         |   1 +
-> > >  drivers/vhost/vhost.c        |  12 +++-
-> > >  drivers/vhost/vhost.h        |   1 -
-> > >  drivers/virtio/virtio_ring.c |  18 +++++
-> > >  include/linux/virtio.h       |   2 +
-> > >  tools/virtio/linux/virtio.h  |   2 +
-> > >  tools/virtio/virtio_test.c   | 123 +++++++++++++++++++++++++++++++--=
---
-> > >  8 files changed, 201 insertions(+), 15 deletions(-)
-> > >
-> > > --
-> > > 2.18.1
-> >
+>  bool virtqueue_kick_prepare(struct virtqueue *vq);
+> diff --git a/tools/virtio/linux/virtio.h b/tools/virtio/linux/virtio.h
+> index b751350d4ce8..cf2e9ccf4de2 100644
+> --- a/tools/virtio/linux/virtio.h
+> +++ b/tools/virtio/linux/virtio.h
+> @@ -43,6 +43,8 @@ int virtqueue_add_inbuf(struct virtqueue *vq,
+>  			void *data,
+>  			gfp_t gfp);
+>  =
+
+> +void virtqueue_reset_free_head(struct virtqueue *vq);
+> +
+>  bool virtqueue_kick(struct virtqueue *vq);
+>  =
+
+>  void *virtqueue_get_buf(struct virtqueue *vq, unsigned int *len);
+> diff --git a/tools/virtio/virtio_test.c b/tools/virtio/virtio_test.c
+> index 93d81cd64ba0..bf21ece30594 100644
+> --- a/tools/virtio/virtio_test.c
+> +++ b/tools/virtio/virtio_test.c
+> @@ -49,6 +49,7 @@ struct vdev_info {
+>  =
+
+>  static const struct vhost_vring_file no_backend =3D { .fd =3D -1 },
+>  				     backend =3D { .fd =3D 1 };
+> +static const struct vhost_vring_state null_state =3D {};
+>  =
+
+>  bool vq_notify(struct virtqueue *vq)
+>  {
+> @@ -218,10 +219,33 @@ static void run_test(struct vdev_info *dev, struct =
+vq_info *vq,
+>  			}
+>  =
+
+>  			if (reset) {
+> +				struct vhost_vring_state s =3D { .index =3D 0 };
+> +				int i;
+> +				vq->vring.avail->idx =3D 0;
+> +				vq->vq->num_free =3D vq->vring.num;
+> +
+> +				// Put everything in free lists.
+> +				for (i =3D 0; i < vq->vring.num-1; i++)
+> +					vq->vring.desc[i].next =3D
+> +						cpu_to_virtio16(&dev->vdev,
+> +								i + 1);
+> +				vq->vring.desc[vq->vring.num-1].next =3D 0;
+> +				virtqueue_reset_free_head(vq->vq);
+> +
+
+
+Hmm this is poking at internal vq format ...
+
+
+> +				r =3D ioctl(dev->control, VHOST_GET_VRING_BASE,
+> +					  &s);
+> +				assert(!r);
+> +
+> +				s.num =3D 0;
+> +				r =3D ioctl(dev->control, VHOST_SET_VRING_BASE,
+> +					  &null_state);
+> +				assert(!r);
+> +
+>  				r =3D ioctl(dev->control, VHOST_TEST_SET_BACKEND,
+>  					  &backend);
+>  				assert(!r);
+>  =
+
+> +				started =3D completed;
+>                                  while (completed > next_reset)
+>  					next_reset +=3D completed;
+>  			}
+> @@ -243,7 +267,9 @@ static void run_test(struct vdev_info *dev, struct vq=
+_info *vq,
+>  	test =3D 0;
+>  	r =3D ioctl(dev->control, VHOST_TEST_RUN, &test);
+>  	assert(r >=3D 0);
+> -	fprintf(stderr, "spurious wakeups: 0x%llx\n", spurious);
+> +	fprintf(stderr,
+> +		"spurious wakeups: 0x%llx started=3D0x%lx completed=3D0x%lx\n",
+> +		spurious, started, completed);
+>  }
+>  =
+
+>  const char optstring[] =3D "h";
+> -- =
+
+> 2.18.1
 
 _______________________________________________
 Virtualization mailing list
