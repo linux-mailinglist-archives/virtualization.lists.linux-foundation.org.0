@@ -1,61 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53A66197894
-	for <lists.virtualization@lfdr.de>; Mon, 30 Mar 2020 12:13:26 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id EFE03878E5;
-	Mon, 30 Mar 2020 10:13:24 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Icq2MbLcfNAe; Mon, 30 Mar 2020 10:13:19 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A466E87AB1;
-	Mon, 30 Mar 2020 10:13:13 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7B370C1D85;
-	Mon, 30 Mar 2020 10:13:13 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BED2DC1D92
- for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 10:12:59 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0D0E1978C1
+	for <lists.virtualization@lfdr.de>; Mon, 30 Mar 2020 12:19:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id A23618699B
- for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 10:12:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BE80F86AA4;
+	Mon, 30 Mar 2020 10:19:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wg9fAAIb1fZU
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id PRVwPLAwdgW9; Mon, 30 Mar 2020 10:19:55 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 499E086A54;
+	Mon, 30 Mar 2020 10:19:54 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2572FC07FF;
+	Mon, 30 Mar 2020 10:19:54 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0B80FC07FF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 10:12:58 +0000 (UTC)
+ Mon, 30 Mar 2020 10:19:51 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id F07DF8843F
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 30 Mar 2020 10:19:50 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id zoPhzoE0dX1T
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 30 Mar 2020 10:19:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx01.bbu.dsd.mx.bitdefender.com
  (mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 507F186A02
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6810488437
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 10:12:56 +0000 (UTC)
+ Mon, 30 Mar 2020 10:19:50 +0000 (UTC)
 Received: from smtp.bitdefender.com (smtp02.buh.bitdefender.net [10.17.80.76])
  by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
- 4F9873074B70; Mon, 30 Mar 2020 13:12:54 +0300 (EEST)
+ 8533D3074B71; Mon, 30 Mar 2020 13:12:54 +0300 (EEST)
 Received: from localhost.localdomain (unknown [91.199.104.28])
- by smtp.bitdefender.com (Postfix) with ESMTPSA id 24CC5305B7A1;
+ by smtp.bitdefender.com (Postfix) with ESMTPSA id 528F0305B7A2;
  Mon, 30 Mar 2020 13:12:54 +0300 (EEST)
 From: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>
 To: kvm@vger.kernel.org
-Subject: [PATCH v8 36/81] KVM: x86: intercept the write access on sidt and
- other emulated instructions
-Date: Mon, 30 Mar 2020 13:12:23 +0300
-Message-Id: <20200330101308.21702-37-alazar@bitdefender.com>
+Subject: [PATCH v8 37/81] KVM: x86: disable gpa_available optimization for
+ fetch and page-walk NPF/EPT violations
+Date: Mon, 30 Mar 2020 13:12:24 +0300
+Message-Id: <20200330101308.21702-38-alazar@bitdefender.com>
 In-Reply-To: <20200330101308.21702-1-alazar@bitdefender.com>
 References: <20200330101308.21702-1-alazar@bitdefender.com>
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>,
- Paolo Bonzini <pbonzini@redhat.com>, virtualization@lists.linux-foundation.org
+Cc: =?UTF-8?q?Mircea=20C=C3=AErjaliu?= <mcirjaliu@bitdefender.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,22 +74,28 @@ Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-VGhpcyBpcyBuZWVkZWQgZm9yIHRoZSBpbnRyb3NwZWN0aW9uIHN1YnN5c3RlbSB0byB0cmFjayB0
-aGUgY2hhbmdlcyB0bwpkZXNjcmlwdG9yIHRhYmxlIHJlZ2lzdGVycy4KClNpZ25lZC1vZmYtYnk6
-IEFkYWxiZXJ0IExhesSDciA8YWxhemFyQGJpdGRlZmVuZGVyLmNvbT4KLS0tCiBhcmNoL3g4Ni9r
-dm0veDg2LmMgfCAzICsrKwogMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKQoKZGlmZiAt
-LWdpdCBhL2FyY2gveDg2L2t2bS94ODYuYyBiL2FyY2gveDg2L2t2bS94ODYuYwppbmRleCBkMzVj
-ZGRhMTE1Y2MuLjJhYWEwZGQ4YjAyYSAxMDA2NDQKLS0tIGEvYXJjaC94ODYva3ZtL3g4Ni5jCisr
-KyBiL2FyY2gveDg2L2t2bS94ODYuYwpAQCAtNTUzOSwxMSArNTUzOSwxNCBAQCBzdGF0aWMgaW50
-IGt2bV93cml0ZV9ndWVzdF92aXJ0X2hlbHBlcihndmFfdCBhZGRyLCB2b2lkICp2YWwsIHVuc2ln
-bmVkIGludCBieXRlcwogCiAJCWlmIChncGEgPT0gVU5NQVBQRURfR1ZBKQogCQkJcmV0dXJuIFg4
-NkVNVUxfUFJPUEFHQVRFX0ZBVUxUOworCQlpZiAoIWt2bV9wYWdlX3RyYWNrX3ByZXdyaXRlKHZj
-cHUsIGdwYSwgYWRkciwgZGF0YSwgdG93cml0ZSkpCisJCQlyZXR1cm4gWDg2RU1VTF9SRVRSWV9J
-TlNUUjsKIAkJcmV0ID0ga3ZtX3ZjcHVfd3JpdGVfZ3Vlc3QodmNwdSwgZ3BhLCBkYXRhLCB0b3dy
-aXRlKTsKIAkJaWYgKHJldCA8IDApIHsKIAkJCXIgPSBYODZFTVVMX0lPX05FRURFRDsKIAkJCWdv
-dG8gb3V0OwogCQl9CisJCWt2bV9wYWdlX3RyYWNrX3dyaXRlKHZjcHUsIGdwYSwgYWRkciwgZGF0
-YSwgdG93cml0ZSk7CiAKIAkJYnl0ZXMgLT0gdG93cml0ZTsKIAkJZGF0YSArPSB0b3dyaXRlOwpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
-dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
-cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
-dHVhbGl6YXRpb24=
+RnJvbTogTWlyY2VhIEPDrnJqYWxpdSA8bWNpcmphbGl1QGJpdGRlZmVuZGVyLmNvbT4KClRoaXMg
+Y2hhbmdlIGlzIG5lZWRlZCBiZWNhdXNlIHRoZSBpbnRyb3NwZWN0aW9uIHRvb2wgY2FuIHdyaXRl
+LXByb3RlY3QKZ3Vlc3QgcGFnZSB0YWJsZXMgb3IgZXhlYy1wcm90ZWN0IGhlYXAvc3RhY2sgcGFn
+ZXMuCgpTaWduZWQtb2ZmLWJ5OiBNaXJjZWEgQ8OucmphbGl1IDxtY2lyamFsaXVAYml0ZGVmZW5k
+ZXIuY29tPgpTaWduZWQtb2ZmLWJ5OiBBZGFsYmVydCBMYXrEg3IgPGFsYXphckBiaXRkZWZlbmRl
+ci5jb20+Ci0tLQogYXJjaC94ODYva3ZtL21tdS9tbXUuYyB8IDkgKysrKysrKy0tCiAxIGZpbGUg
+Y2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2Fy
+Y2gveDg2L2t2bS9tbXUvbW11LmMgYi9hcmNoL3g4Ni9rdm0vbW11L21tdS5jCmluZGV4IDdjNjM2
+OGRkYzZhNS4uMzViZTlmMmEyZmM3IDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9rdm0vbW11L21tdS5j
+CisrKyBiL2FyY2gveDg2L2t2bS9tbXUvbW11LmMKQEAgLTU1MzYsOCArNTUzNiwxMyBAQCBpbnQg
+a3ZtX21tdV9wYWdlX2ZhdWx0KHN0cnVjdCBrdm1fdmNwdSAqdmNwdSwgZ3BhX3QgY3IyX29yX2dw
+YSwgdTY0IGVycm9yX2NvZGUsCiAJaWYgKFdBUk5fT04oIVZBTElEX1BBR0UodmNwdS0+YXJjaC5t
+bXUtPnJvb3RfaHBhKSkpCiAJCXJldHVybiBSRVRfUEZfUkVUUlk7CiAKLQkvKiBXaXRoIHNoYWRv
+dyBwYWdlIHRhYmxlcywgZmF1bHRfYWRkcmVzcyBjb250YWlucyBhIEdWQSBvciBuR1BBLiAgKi8K
+LQlpZiAodmNwdS0+YXJjaC5tbXUtPmRpcmVjdF9tYXApIHsKKwkvKgorCSAqIFdpdGggc2hhZG93
+IHBhZ2UgdGFibGVzLCBmYXVsdF9hZGRyZXNzIGNvbnRhaW5zIGEgR1ZBIG9yIG5HUEEuCisJICog
+T24gYSBmZXRjaCBmYXVsdCwgZmF1bHRfYWRkcmVzcyBjb250YWlucyB0aGUgaW5zdHJ1Y3Rpb24g
+cG9pbnRlci4KKwkgKi8KKwlpZiAodmNwdS0+YXJjaC5tbXUtPmRpcmVjdF9tYXAgJiYKKwkgICAg
+bGlrZWx5KCEoZXJyb3JfY29kZSAmIFBGRVJSX0ZFVENIX01BU0spKSAmJgorCSAgICAoZXJyb3Jf
+Y29kZSAmIFBGRVJSX0dVRVNUX0ZJTkFMX01BU0spKSB7CiAJCXZjcHUtPmFyY2guZ3BhX2F2YWls
+YWJsZSA9IHRydWU7CiAJCXZjcHUtPmFyY2guZ3BhX3ZhbCA9IGNyMl9vcl9ncGE7CiAJfQpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlv
+biBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcK
+aHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVh
+bGl6YXRpb24=
