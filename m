@@ -1,154 +1,149 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 080361975CC
-	for <lists.virtualization@lfdr.de>; Mon, 30 Mar 2020 09:34:38 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B1EF19764B
+	for <lists.virtualization@lfdr.de>; Mon, 30 Mar 2020 10:17:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 8DF268762A;
-	Mon, 30 Mar 2020 07:34:36 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 9388A228A7;
+	Mon, 30 Mar 2020 08:17:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id R-oW+w+jaNzi; Mon, 30 Mar 2020 07:34:34 +0000 (UTC)
+	with ESMTP id BWjWD1RoeibD; Mon, 30 Mar 2020 08:17:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 972F3876F6;
-	Mon, 30 Mar 2020 07:34:34 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 275742286F;
+	Mon, 30 Mar 2020 08:17:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7E2D1C07FF;
-	Mon, 30 Mar 2020 07:34:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 014DFC07FF;
+	Mon, 30 Mar 2020 08:17:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0B02BC07FF
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 557B2C07FF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 07:34:33 +0000 (UTC)
+ Mon, 30 Mar 2020 08:17:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id EDDAB85F8A
+ by silver.osuosl.org (Postfix) with ESMTP id 19C2122865
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 07:34:32 +0000 (UTC)
+ Mon, 30 Mar 2020 08:17:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Q7-Js6kJbjWJ
+ with ESMTP id c1UOXVsGmy9q
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 07:34:31 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id B32D4850E1
+ Mon, 30 Mar 2020 08:17:31 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-74.mimecast.com
+ (us-smtp-delivery-74.mimecast.com [63.128.21.74])
+ by silver.osuosl.org (Postfix) with ESMTPS id 1578220443
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 07:34:31 +0000 (UTC)
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02U7WucG106146 for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 03:34:30 -0400
-Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
- by mx0b-001b2d01.pphosted.com with ESMTP id 303bgdhk8c-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 03:34:30 -0400
-Received: from localhost
- by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <virtualization@lists.linux-foundation.org> from <borntraeger@de.ibm.com>; 
- Mon, 30 Mar 2020 08:34:27 +0100
-Received: from b06avi18626390.portsmouth.uk.ibm.com (9.149.26.192)
- by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Mon, 30 Mar 2020 08:34:23 +0100
-Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
- [9.149.105.58])
- by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 02U7XKhM46203184
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 30 Mar 2020 07:33:20 GMT
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 82E984C05A;
- Mon, 30 Mar 2020 07:34:23 +0000 (GMT)
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 0242D4C050;
- Mon, 30 Mar 2020 07:34:23 +0000 (GMT)
-Received: from oc7455500831.ibm.com (unknown [9.145.3.56])
- by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Mon, 30 Mar 2020 07:34:22 +0000 (GMT)
-Subject: Re: [PATCH 0/6] vhost: Reset batched descriptors on SET_VRING_BASE
- call
-To: Eugenio Perez Martin <eperezma@redhat.com>
-References: <20200329113359.30960-1-eperezma@redhat.com>
- <bb95e827-f219-32fd-0046-41046eec058b@de.ibm.com>
- <CAJaqyWePfMcXhYEPxKYV22J3cYtO=DUXCj1Yf=7XH+khXHop9A@mail.gmail.com>
-From: Christian Borntraeger <borntraeger@de.ibm.com>
-Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
- 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
- nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
-Date: Mon, 30 Mar 2020 09:34:22 +0200
+ Mon, 30 Mar 2020 08:17:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1585556249;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=HWhsW58w0xu9vw0AmztI9/TjQhaNX/7jXTiRqwwodAM=;
+ b=ceGPcLAuom/uNTXrNdh2fKVTYi8VHoSwRFzzLeXr9COdALrRXHIU206wWezCoHr7BBVdIy
+ nSWetTUaIEqpxxciLMRCvKxcCb+4DQJPXNbHUMnxpSniv9B3iCtW8U2uiKMdpx54U4ZHD3
+ vWerALkY2HbL/SUppZ2mneMJ+QMIw90=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-394-zvBM7skfOdith1yvqBUEvQ-1; Mon, 30 Mar 2020 04:17:25 -0400
+X-MC-Unique: zvBM7skfOdith1yvqBUEvQ-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C97B918C43C6;
+ Mon, 30 Mar 2020 08:17:20 +0000 (UTC)
+Received: from [10.36.113.227] (ovpn-113-227.ams2.redhat.com [10.36.113.227])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id EF4615E009;
+ Mon, 30 Mar 2020 08:16:59 +0000 (UTC)
+Subject: Re: [PATCH v2 00/10] virtio-mem: paravirtualized memory
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20200311171422.10484-1-david@redhat.com>
+ <20200329084128-mutt-send-email-mst@kernel.org>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <055ec03c-06e5-ef06-691d-7a19d8b2792a@redhat.com>
+Date: Mon, 30 Mar 2020 10:16:59 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <CAJaqyWePfMcXhYEPxKYV22J3cYtO=DUXCj1Yf=7XH+khXHop9A@mail.gmail.com>
+In-Reply-To: <20200329084128-mutt-send-email-mst@kernel.org>
 Content-Language: en-US
-X-TM-AS-GCONF: 00
-x-cbid: 20033007-0028-0000-0000-000003EE85D0
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 20033007-0029-0000-0000-000024B40335
-Message-Id: <41dfa0e5-8013-db15-cbfe-aa4574cfb9a0@de.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
- definitions=2020-03-30_01:2020-03-27,
- 2020-03-30 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0
- priorityscore=1501 lowpriorityscore=0 mlxlogscore=999 clxscore=1015
- impostorscore=0 spamscore=0 suspectscore=0 bulkscore=0 phishscore=0
- mlxscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2003020000 definitions=main-2003300067
-Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
- Linux Next Mailing List <linux-next@vger.kernel.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
+ Robert Bradford <robert.bradford@intel.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pingfan Liu <kernelfans@gmail.com>,
+ Luiz Capitulino <lcapitulino@redhat.com>, linux-mm@kvack.org,
+ Alexander Potapenko <glider@google.com>,
+ teawater <teawaterz@linux.alibaba.com>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Mike Rapoport <rppt@linux.ibm.com>, Wei Yang <richard.weiyang@gmail.com>,
+ Anthony Yznaga <anthony.yznaga@oracle.com>, Dave Young <dyoung@redhat.com>,
+ Len Brown <lenb@kernel.org>, Pavel Tatashin <pavel.tatashin@microsoft.com>,
+ Pavel Tatashin <pasha.tatashin@soleen.com>,
+ Anshuman Khandual <anshuman.khandual@arm.com>,
+ "Dr . David Alan Gilbert" <dgilbert@redhat.com>, Qian Cai <cai@lca.pw>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Samuel Ortiz <samuel.ortiz@intel.com>,
+ Dan Williams <dan.j.williams@intel.com>, Michal Hocko <mhocko@kernel.org>,
+ Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>,
+ Juergen Gross <jgross@suse.com>, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
+ Sebastien Boeuf <sebastien.boeuf@intel.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Igor Mammedov <imammedo@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -160,72 +155,41 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-CgpPbiAzMC4wMy4yMCAwOToxOCwgRXVnZW5pbyBQZXJleiBNYXJ0aW4gd3JvdGU6Cj4gT24gTW9u
-LCBNYXIgMzAsIDIwMjAgYXQgOToxNCBBTSBDaHJpc3RpYW4gQm9ybnRyYWVnZXIKPiA8Ym9ybnRy
-YWVnZXJAZGUuaWJtLmNvbT4gd3JvdGU6Cj4+Cj4+Cj4+IE9uIDI5LjAzLjIwIDEzOjMzLCBFdWdl
-bmlvIFDDqXJleiB3cm90ZToKPj4+IFZob3N0IGRpZCBub3QgcmVzZXQgcHJvcGVybHkgdGhlIGJh
-dGNoZWQgZGVzY3JpcHRvcnMgb24gU0VUX1ZSSU5HX0JBU0UgZXZlbnQuIEJlY2F1c2Ugb2YgdGhh
-dCwgaXMgcG9zc2libGUgdG8gcmV0dXJuIGFuIGludmFsaWQgZGVzY3JpcHRvciB0byB0aGUgZ3Vl
-c3QuCj4+Cj4+IEkgZ3Vlc3MgdGhpcyBjb3VsZCBleHBsYWluIG15IHByb2JsZW1zIHRoYXQgSSBo
-YXZlIHNlZW4gZHVyaW5nIHJlc2V0Pwo+Pgo+IAo+IFllcywgSSB0aGluayBzby4gVGhlIHNlcmll
-cyBoYXMgYSB0ZXN0IHRoYXQgc2hvdWxkIHJlcHJvZHVjZSBtb3JlIG9yCj4gbGVzcyB3aGF0IHlv
-dSBhcmUgc2VlaW5nLiBIb3dldmVyLCBpdCB3b3VsZCBiZSB1c2VmdWwgdG8gcmVwcm9kdWNlIG9u
-Cj4geW91ciBzeXN0ZW0gYW5kIHRvIGtub3cgd2hhdCBjYXVzZXMgcWVtdSB0byBzZW5kIHRoZSBy
-ZXNldCA6KS4KCkkgZG8gc2VlIFNFVF9WUklOR19CQVNFIGluIHRoZSBkZWJ1ZyBvdXRwdXQKWzIy
-ODEwMS40Mzg2MzBdIFsyMTEzXSB2aG9zdDp2aG9zdF92cmluZ19pb2N0bDoxNjY4OiBWSE9TVF9H
-RVRfVlJJTkdfQkFTRSBbdnE9MDAwMDAwMDA2MTg5MDVmY11bcy5pbmRleD0xXVtzLm51bT00MjQy
-NF1bdnEtPmF2YWlsX2lkeD00MjQyNF1bdnEtPmxhc3RfYXZhaWxfaWR4PTQyNDI0XVt2cS0+bmRl
-c2NzPTBdW3ZxLT5maXJzdF9kZXNjPTBdClsyMjgxMDEuNDM4NjMxXSBDUFU6IDU0IFBJRDogMjEx
-MyBDb21tOiBxZW11LXN5c3RlbS1zMzkgTm90IHRhaW50ZWQgNS41LjArICMzNDQKWzIyODEwMS40
-Mzg2MzJdIEhhcmR3YXJlIG5hbWU6IElCTSAzOTA2IE0wNCA3MDQgKExQQVIpClsyMjgxMDEuNDM4
-NjMzXSBDYWxsIFRyYWNlOgpbMjI4MTAxLjQzODYzNF0gIFs8MDAwMDAwMDRmYzcxYzEzMj5dIHNo
-b3dfc3RhY2srMHg4YS8weGQwIApbMjI4MTAxLjQzODYzNl0gIFs8MDAwMDAwMDRmZDEwZTcyYT5d
-IGR1bXBfc3RhY2srMHg4YS8weGI4IApbMjI4MTAxLjQzODYzOV0gIFs8MDAwMDAzZmY4MDM3NzYw
-MD5dIHZob3N0X3ZyaW5nX2lvY3RsKzB4NjY4LzB4ODQ4IFt2aG9zdF0gClsyMjgxMDEuNDM4NjQw
-XSAgWzwwMDAwMDNmZjgwMzk1ZmQ0Pl0gdmhvc3RfbmV0X2lvY3RsKzB4NGY0LzB4NTcwIFt2aG9z
-dF9uZXRdIApbMjI4MTAxLjQzODY0Ml0gIFs8MDAwMDAwMDRmYzljY2RkOD5dIGRvX3Zmc19pb2N0
-bCsweDQzMC8weDZmOCAKWzIyODEwMS40Mzg2NDNdICBbPDAwMDAwMDA0ZmM5Y2QxMjQ+XSBrc3lz
-X2lvY3RsKzB4ODQvMHhiMCAKWzIyODEwMS40Mzg2NDVdICBbPDAwMDAwMDA0ZmM5Y2QxYmE+XSBf
-X3MzOTB4X3N5c19pb2N0bCsweDJhLzB4MzggClsyMjgxMDEuNDM4NjQ2XSAgWzwwMDAwMDAwNGZk
-MTJmZjcyPl0gc3lzdGVtX2NhbGwrMHgyYTYvMHgyYzggClsyMjgxMDMuNjgyNzMyXSBbMjEyMl0g
-dmhvc3Q6dmhvc3RfdnJpbmdfaW9jdGw6MTY1MzogVkhPU1RfU0VUX1ZSSU5HX0JBU0UgW3ZxPTAw
-MDAwMDAwOWUxYWMzZTddW3MuaW5kZXg9MF1bcy5udW09MF1bdnEtPmF2YWlsX2lkeD0yNzg3NV1b
-dnEtPmxhc3RfYXZhaWxfaWR4PTI3NzA5XVt2cS0+bmRlc2NzPTY1XVt2cS0+Zmlyc3RfZGVzYz0y
-Ml0KWzIyODEwMy42ODI3MzVdIENQVTogNDQgUElEOiAyMTIyIENvbW06IENQVSAwL0tWTSBOb3Qg
-dGFpbnRlZCA1LjUuMCsgIzM0NApbMjI4MTAzLjY4MjczOV0gSGFyZHdhcmUgbmFtZTogSUJNIDM5
-MDYgTTA0IDcwNCAoTFBBUikKWzIyODEwMy42ODI3NDFdIENhbGwgVHJhY2U6ClsyMjgxMDMuNjgy
-NzQ4XSAgWzwwMDAwMDAwNGZjNzFjMTMyPl0gc2hvd19zdGFjaysweDhhLzB4ZDAgClsyMjgxMDMu
-NjgyNzUyXSAgWzwwMDAwMDAwNGZkMTBlNzJhPl0gZHVtcF9zdGFjaysweDhhLzB4YjggClsyMjgx
-MDMuNjgyNzYxXSAgWzwwMDAwMDNmZjgwMzc3NDIyPl0gdmhvc3RfdnJpbmdfaW9jdGwrMHg0OGEv
-MHg4NDggW3Zob3N0XSAKWzIyODEwMy42ODI3NjRdICBbPDAwMDAwM2ZmODAzOTVmZDQ+XSB2aG9z
-dF9uZXRfaW9jdGwrMHg0ZjQvMHg1NzAgW3Zob3N0X25ldF0gClsyMjgxMDMuNjgyNzY3XSAgWzww
-MDAwMDAwNGZjOWNjZGQ4Pl0gZG9fdmZzX2lvY3RsKzB4NDMwLzB4NmY4IApbMjI4MTAzLjY4Mjc2
-OV0gIFs8MDAwMDAwMDRmYzljZDEyND5dIGtzeXNfaW9jdGwrMHg4NC8weGIwIApbMjI4MTAzLjY4
-Mjc3MV0gIFs8MDAwMDAwMDRmYzljZDFiYT5dIF9fczM5MHhfc3lzX2lvY3RsKzB4MmEvMHgzOCAK
-WzIyODEwMy42ODI3NzNdICBbPDAwMDAwMDA0ZmQxMmZmNzI+XSBzeXN0ZW1fY2FsbCsweDJhNi8w
-eDJjOCAKWzIyODEwMy42ODI3OTRdIFsyMTIyXSB2aG9zdDp2aG9zdF92cmluZ19pb2N0bDoxNjUz
-OiBWSE9TVF9TRVRfVlJJTkdfQkFTRSBbdnE9MDAwMDAwMDA2MTg5MDVmY11bcy5pbmRleD0xXVtz
-Lm51bT0wXVt2cS0+YXZhaWxfaWR4PTQyNDI0XVt2cS0+bGFzdF9hdmFpbF9pZHg9NDI0MjRdW3Zx
-LT5uZGVzY3M9MF1bdnEtPmZpcnN0X2Rlc2M9MF0KWzIyODEwMy42ODI3OTVdIENQVTogNDQgUElE
-OiAyMTIyIENvbW06IENQVSAwL0tWTSBOb3QgdGFpbnRlZCA1LjUuMCsgIzM0NApbMjI4MTAzLjY4
-Mjc5N10gSGFyZHdhcmUgbmFtZTogSUJNIDM5MDYgTTA0IDcwNCAoTFBBUikKWzIyODEwMy42ODI3
-OTddIENhbGwgVHJhY2U6ClsyMjgxMDMuNjgyNzk5XSAgWzwwMDAwMDAwNGZjNzFjMTMyPl0gc2hv
-d19zdGFjaysweDhhLzB4ZDAgClsyMjgxMDMuNjgyODAxXSAgWzwwMDAwMDAwNGZkMTBlNzJhPl0g
-ZHVtcF9zdGFjaysweDhhLzB4YjggClsyMjgxMDMuNjgyODA0XSAgWzwwMDAwMDNmZjgwMzc3NDIy
-Pl0gdmhvc3RfdnJpbmdfaW9jdGwrMHg0OGEvMHg4NDggW3Zob3N0XSAKWzIyODEwMy42ODI4MDZd
-ICBbPDAwMDAwM2ZmODAzOTVmZDQ+XSB2aG9zdF9uZXRfaW9jdGwrMHg0ZjQvMHg1NzAgW3Zob3N0
-X25ldF0gClsyMjgxMDMuNjgyODA4XSAgWzwwMDAwMDAwNGZjOWNjZGQ4Pl0gZG9fdmZzX2lvY3Rs
-KzB4NDMwLzB4NmY4IApbMjI4MTAzLjY4MjgxMF0gIFs8MDAwMDAwMDRmYzljZDEyND5dIGtzeXNf
-aW9jdGwrMHg4NC8weGIwIApbMjI4MTAzLjY4MjgxMl0gIFs8MDAwMDAwMDRmYzljZDFiYT5dIF9f
-czM5MHhfc3lzX2lvY3RsKzB4MmEvMHgzOCAKWzIyODEwMy42ODI4MTNdICBbPDAwMDAwMDA0ZmQx
-MmZmNzI+XSBzeXN0ZW1fY2FsbCsweDJhNi8weDJjOCAKCgpJc250IHRoYXQgdHJpZ2dlcmVkIGJ5
-IHJlc2V0dGluZyB0aGUgdmlydGlvIGRldmljZXMgZHVyaW5nIHN5c3RlbSByZWJvb3Q/CgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlv
-biBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcK
-aHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVh
-bGl6YXRpb24=
+On 29.03.20 14:42, Michael S. Tsirkin wrote:
+> On Wed, Mar 11, 2020 at 06:14:12PM +0100, David Hildenbrand wrote:
+>> This series is based on latest linux-next. The patches are located at:
+>>     https://github.com/davidhildenbrand/linux.git virtio-mem-v2
+>>
+>> I now have acks for all !virtio-mem changes. I'll be happy to get review
+>> feedback, testing reports, etc. for the virtio-mem changes. If there are
+>> no further comments, I guess this is good to go as a v1 soon.
+> 
+> I'd like to queue it for merge after the release. If you feel it's ready
+> please ping me after the release to help make sure it didn't get
+> dropped.  I see there were some reports about people having trouble
+> using this, pls keep working on this meanwhile.
+> 
+
+Yes, will ping you. The cloud-hypervisor implementation has already been
+merged. I'll be posting the initial QEMU version once the next release
+is close.
+
+Thanks!
+
+> Thanks!
+
+
+-- 
+Thanks,
+
+David / dhildenb
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
