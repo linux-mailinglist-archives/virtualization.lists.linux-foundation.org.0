@@ -1,71 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B1EF19764B
-	for <lists.virtualization@lfdr.de>; Mon, 30 Mar 2020 10:17:37 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AC2C1976D3
+	for <lists.virtualization@lfdr.de>; Mon, 30 Mar 2020 10:43:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 9388A228A7;
-	Mon, 30 Mar 2020 08:17:35 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8445F85F5F;
+	Mon, 30 Mar 2020 08:43:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BWjWD1RoeibD; Mon, 30 Mar 2020 08:17:34 +0000 (UTC)
+	with ESMTP id hwETGSkXi-rf; Mon, 30 Mar 2020 08:43:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 275742286F;
-	Mon, 30 Mar 2020 08:17:34 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9279685F53;
+	Mon, 30 Mar 2020 08:43:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 014DFC07FF;
-	Mon, 30 Mar 2020 08:17:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7346DC1D89;
+	Mon, 30 Mar 2020 08:43:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 557B2C07FF
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 58079C07FF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 08:17:32 +0000 (UTC)
+ Mon, 30 Mar 2020 08:43:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 19C2122865
+ by hemlock.osuosl.org (Postfix) with ESMTP id 3825188012
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 08:17:32 +0000 (UTC)
+ Mon, 30 Mar 2020 08:43:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id c1UOXVsGmy9q
+ with ESMTP id wVLf8693CAXF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 08:17:31 +0000 (UTC)
+ Mon, 30 Mar 2020 08:43:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-74.mimecast.com
- (us-smtp-delivery-74.mimecast.com [63.128.21.74])
- by silver.osuosl.org (Postfix) with ESMTPS id 1578220443
+ (us-smtp-delivery-74.mimecast.com [216.205.24.74])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id E0C1088020
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Mar 2020 08:17:30 +0000 (UTC)
+ Mon, 30 Mar 2020 08:43:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585556249;
+ s=mimecast20190719; t=1585557795;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=HWhsW58w0xu9vw0AmztI9/TjQhaNX/7jXTiRqwwodAM=;
- b=ceGPcLAuom/uNTXrNdh2fKVTYi8VHoSwRFzzLeXr9COdALrRXHIU206wWezCoHr7BBVdIy
- nSWetTUaIEqpxxciLMRCvKxcCb+4DQJPXNbHUMnxpSniv9B3iCtW8U2uiKMdpx54U4ZHD3
- vWerALkY2HbL/SUppZ2mneMJ+QMIw90=
+ bh=1n4MQR13LQJ/iU4eTwU6XCrDpEx8dLHzuKsg0M7QhLo=;
+ b=McQg0+3LAVeS1Kipfqr0VueGFMl3TZtIQ7ha/+V7kHXCWPqlVXqzlITSeHsh75HM8aSQ/a
+ tuDJ0V0qoTZq/95w+pp5+K2vp9wykclixXNYct+XxgqXqMEJWA9phYvYjk1n0MoBWVac13
+ leu+uW56bqRpLAtV2g6HURR7Ev8yFcg=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-394-zvBM7skfOdith1yvqBUEvQ-1; Mon, 30 Mar 2020 04:17:25 -0400
-X-MC-Unique: zvBM7skfOdith1yvqBUEvQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-99-bHpM919_OYiB-wBZsfyfnw-1; Mon, 30 Mar 2020 04:43:11 -0400
+X-MC-Unique: bHpM919_OYiB-wBZsfyfnw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C97B918C43C6;
- Mon, 30 Mar 2020 08:17:20 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E206D107ACC4;
+ Mon, 30 Mar 2020 08:43:06 +0000 (UTC)
 Received: from [10.36.113.227] (ovpn-113-227.ams2.redhat.com [10.36.113.227])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EF4615E009;
- Mon, 30 Mar 2020 08:16:59 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 369E619756;
+ Mon, 30 Mar 2020 08:42:48 +0000 (UTC)
 Subject: Re: [PATCH v2 00/10] virtio-mem: paravirtualized memory
-To: "Michael S. Tsirkin" <mst@redhat.com>
+To: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 References: <20200311171422.10484-1-david@redhat.com>
- <20200329084128-mutt-send-email-mst@kernel.org>
+ <CAM9Jb+g6DEL1=L1ESfW+Jnr_rfO5rEtOwnp10eCLpajaAv8wvg@mail.gmail.com>
+ <6858c4d8-7570-2c2b-5d53-1a7f994c14ee@redhat.com>
+ <CAM9Jb+jbVciBwHBj09w4+sXbJ_dRwiXwe2DPUsx0P1fRsdAi0w@mail.gmail.com>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -111,17 +113,17 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <055ec03c-06e5-ef06-691d-7a19d8b2792a@redhat.com>
-Date: Mon, 30 Mar 2020 10:16:59 +0200
+Message-ID: <11c87dee-e94e-0475-76d2-143adfd50d9d@redhat.com>
+Date: Mon, 30 Mar 2020 10:42:47 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200329084128-mutt-send-email-mst@kernel.org>
+In-Reply-To: <CAM9Jb+jbVciBwHBj09w4+sXbJ_dRwiXwe2DPUsx0P1fRsdAi0w@mail.gmail.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
  Robert Bradford <robert.bradford@intel.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
  "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pingfan Liu <kernelfans@gmail.com>,
  Luiz Capitulino <lcapitulino@redhat.com>, linux-mm@kvack.org,
  Alexander Potapenko <glider@google.com>,
@@ -138,11 +140,10 @@ Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
  Stefan Hajnoczi <stefanha@redhat.com>, Samuel Ortiz <samuel.ortiz@intel.com>,
  Dan Williams <dan.j.williams@intel.com>, Michal Hocko <mhocko@kernel.org>,
  Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>,
- Juergen Gross <jgross@suse.com>, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
- Sebastien Boeuf <sebastien.boeuf@intel.com>,
- Johannes Weiner <hannes@cmpxchg.org>, Igor Mammedov <imammedo@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>,
+ Juergen Gross <jgross@suse.com>, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, Sebastien Boeuf <sebastien.boeuf@intel.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Igor Mammedov <imammedo@redhat.com>, Andrew Morton <akpm@linux-foundation.org>,
  Mel Gorman <mgorman@techsingularity.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -160,29 +161,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 29.03.20 14:42, Michael S. Tsirkin wrote:
-> On Wed, Mar 11, 2020 at 06:14:12PM +0100, David Hildenbrand wrote:
->> This series is based on latest linux-next. The patches are located at:
->>     https://github.com/davidhildenbrand/linux.git virtio-mem-v2
+On 29.03.20 17:41, Pankaj Gupta wrote:
+>>> Hi David,
+>>>
+>>> Trying to test the series with the Qemu branch(virtio-mem) mentioned.
+>>> Unfortunately,
+>>> not able to hotplug memory. Is anything changed from your previous posting
+>>> or I am doing something wrong?
+>>>
+>>> After giving value to "requested-size", I see size as zero.
+>>>
+>>> (qemu) qom-set vm0 requested-size 10G
+>>> (qemu) info memory-devices
+>>> Memory device [virtio-mem]: "vm0"
+>>>   memaddr: 0x240000000
+>>>   node: 0
+>>>   requested-size: 10737418240
+>>>   size: 0
+>>>   max-size: 107374182400
+>>>   block-size: 2097152
+>>>   memdev: /objects/mem0
+>>>
+>>> Guest kernel: 5.6.0-rc4
+>>> Using same Qemu commandline arguments mentioned in cover-letter.
 >>
->> I now have acks for all !virtio-mem changes. I'll be happy to get review
->> feedback, testing reports, etc. for the virtio-mem changes. If there are
->> no further comments, I guess this is good to go as a v1 soon.
+>> Are you booting from an initrd? Are you compiling virtio-mem as a kernel
+>> module or into the kernel binary?
+> Ah was booting into wrong kernel version. Sorry! for the noise.
 > 
-> I'd like to queue it for merge after the release. If you feel it's ready
-> please ping me after the release to help make sure it didn't get
-> dropped.  I see there were some reports about people having trouble
-> using this, pls keep working on this meanwhile.
+> Working perfectly for me. Tried various cmbinations for both
+> hotplug/unplug with multiple
+> NUMA nodes and verified result in guest.
 > 
+> For the series, you can add:
+> Tested-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 
-Yes, will ping you. The cloud-hypervisor implementation has already been
-merged. I'll be posting the initial QEMU version once the next release
-is close.
-
-Thanks!
-
-> Thanks!
-
+Awesome, thanks!
 
 -- 
 Thanks,
