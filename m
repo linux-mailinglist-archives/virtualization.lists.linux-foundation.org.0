@@ -1,69 +1,70 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFABE19986E
-	for <lists.virtualization@lfdr.de>; Tue, 31 Mar 2020 16:29:21 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id F2AD01998A7
+	for <lists.virtualization@lfdr.de>; Tue, 31 Mar 2020 16:35:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 703F0879A1;
-	Tue, 31 Mar 2020 14:29:20 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 9470724F0C;
+	Tue, 31 Mar 2020 14:35:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TLE8xCNOkeUS; Tue, 31 Mar 2020 14:29:19 +0000 (UTC)
+	with ESMTP id 0-ucyZXla5OZ; Tue, 31 Mar 2020 14:35:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id BF5CF87D53;
-	Tue, 31 Mar 2020 14:29:19 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A0C4F24F04;
+	Tue, 31 Mar 2020 14:35:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 993ABC07FF;
-	Tue, 31 Mar 2020 14:29:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 67470C07FF;
+	Tue, 31 Mar 2020 14:35:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 91540C07FF
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B8C18C07FF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 14:29:18 +0000 (UTC)
+ Tue, 31 Mar 2020 14:35:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 80BE28887B
+ by silver.osuosl.org (Postfix) with ESMTP id B3C4B24BA1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 14:29:18 +0000 (UTC)
+ Tue, 31 Mar 2020 14:35:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xY5h1dqgLqkx
+ with ESMTP id jJoNGW-AJOGv
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 14:29:17 +0000 (UTC)
+ Tue, 31 Mar 2020 14:35:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id AC15388833
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id 3539824F43
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 14:29:17 +0000 (UTC)
+ Tue, 31 Mar 2020 14:35:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585664956;
+ s=mimecast20190719; t=1585665302;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=Mzgr//hDkLeHQLBr90XbRT7zGijeqwN8oOrj2vqTs4c=;
- b=iJ4WiTe1QTwKSsaYW25O3s1kI7cwM7R9aH7Y67KDg+J2bxQudLT8kBDKiIfARLgcHZp5Yo
- op7aMsSRiMzSA+mNinFipzQe4Eyp3wfToVwqxq6RBV7hdyvp09CIkSfIDXhBOAGjEtU4F1
- U5oMsVv2siirp/GQeJDE1kX21cQ45yo=
+ bh=xxKSX2erUXm8teiGRhQpTXCwL1APOTWOaLSEEHORbD8=;
+ b=LtHeYy1T8u7Nad945q35deM3CrM1QPE4XgbqY7dacvX1fOJIbebVEUjYT+Hi1i2siaCt6G
+ YH4m3ib0/LCfyKDyIUU9ZrU5uMZbXa2a6kmuPT0eKomrsNAc7MHj6Aw5N3aqCpyAkr2+x5
+ NT4sEU4GDkh0RjDsWVEwG0uLrHG3OPY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-424-iI4Mk7qJOiW353q9KqAu3A-1; Tue, 31 Mar 2020 10:29:14 -0400
-X-MC-Unique: iI4Mk7qJOiW353q9KqAu3A-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-114-n3JoleztP1i8sdheYhPpLA-1; Tue, 31 Mar 2020 10:34:58 -0400
+X-MC-Unique: n3JoleztP1i8sdheYhPpLA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 15CD3108443F;
- Tue, 31 Mar 2020 14:29:12 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2B2268017CE;
+ Tue, 31 Mar 2020 14:34:57 +0000 (UTC)
 Received: from [10.36.114.0] (ovpn-114-0.ams2.redhat.com [10.36.114.0])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5733D5E009;
- Tue, 31 Mar 2020 14:29:03 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 363825D9C5;
+ Tue, 31 Mar 2020 14:34:49 +0000 (UTC)
 Subject: Re: [RFC for Linux] virtio_balloon: Add VIRTIO_BALLOON_F_THP_ORDER to
  handle THP spilt issue
+From: David Hildenbrand <david@redhat.com>
 To: "Michael S. Tsirkin" <mst@redhat.com>
 References: <20200326031817-mutt-send-email-mst@kernel.org>
  <C4C6BAF7-C040-403D-997C-48C7AB5A7D6B@redhat.com>
@@ -76,7 +77,7 @@ References: <20200326031817-mutt-send-email-mst@kernel.org>
  <20200331100359-mutt-send-email-mst@kernel.org>
  <85f699d4-459a-a319-0a8f-96c87d345c49@redhat.com>
  <20200331101117-mutt-send-email-mst@kernel.org>
-From: David Hildenbrand <david@redhat.com>
+ <118bc13b-76b2-f5a1-6aca-65bd10a22f6c@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
  dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
@@ -121,14 +122,14 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <118bc13b-76b2-f5a1-6aca-65bd10a22f6c@redhat.com>
-Date: Tue, 31 Mar 2020 16:29:02 +0200
+Message-ID: <00dc8bad-05e5-6085-525c-ce9fded672cc@redhat.com>
+Date: Tue, 31 Mar 2020 16:34:48 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200331101117-mutt-send-email-mst@kernel.org>
+In-Reply-To: <118bc13b-76b2-f5a1-6aca-65bd10a22f6c@redhat.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Cc: pagupta@redhat.com, Alexander Duyck <alexander.h.duyck@linux.intel.com>,
  qemu-devel@nongnu.org, mojha@codeaurora.org, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org, namit@vmware.com,
@@ -150,56 +151,67 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 31.03.20 16:18, Michael S. Tsirkin wrote:
-> On Tue, Mar 31, 2020 at 04:09:59PM +0200, David Hildenbrand wrote:
-> 
-> ...
-> 
->>>>>>>>>>>>> So if we want to address this, IMHO this calls for a new API.
->>>>>>>>>>>>> Along the lines of
->>>>>>>>>>>>>
->>>>>>>>>>>>>    struct page *alloc_page_range(gfp_t gfp, unsigned int min_order,
->>>>>>>>>>>>>                    unsigned int max_order, unsigned int *order)
->>>>>>>>>>>>>
->>>>>>>>>>>>> the idea would then be to return at a number of pages in the given
->>>>>>>>>>>>> range.
->>>>>>>>>>>>>
->>>>>>>>>>>>> What do you think? Want to try implementing that?
-> 
-> ..
-> 
->> I expect the whole "steal huge pages from your guest" to be problematic,
->> as I already mentioned to Alex. This needs a performance evaluation.
+On 31.03.20 16:29, David Hildenbrand wrote:
+> On 31.03.20 16:18, Michael S. Tsirkin wrote:
+>> On Tue, Mar 31, 2020 at 04:09:59PM +0200, David Hildenbrand wrote:
 >>
->> This all smells like a lot of workload dependent fine-tuning. :)
+>> ...
+>>
+>>>>>>>>>>>>>> So if we want to address this, IMHO this calls for a new API.
+>>>>>>>>>>>>>> Along the lines of
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>    struct page *alloc_page_range(gfp_t gfp, unsigned int min_order,
+>>>>>>>>>>>>>>                    unsigned int max_order, unsigned int *order)
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> the idea would then be to return at a number of pages in the given
+>>>>>>>>>>>>>> range.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> What do you think? Want to try implementing that?
+>>
+>> ..
+>>
+>>> I expect the whole "steal huge pages from your guest" to be problematic,
+>>> as I already mentioned to Alex. This needs a performance evaluation.
+>>>
+>>> This all smells like a lot of workload dependent fine-tuning. :)
+>>
+>>
+>> So that's why I proposed the API above.
+>>
+>> The idea is that *if we are allocating a huge page anyway*,
+>> rather than break it up let's send it whole to the device.
+>> If we have smaller pages, return smaller pages.
+>>
 > 
+> Sorry, I still fail to see why you cannot do that with my version of
+> balloon_pages_alloc(). But maybe I haven't understood the magic you
+> expect to happen in alloc_page_range() :)
 > 
-> So that's why I proposed the API above.
+> It's just going via a different inflate queue once we have that page, as
+> I stated in front of my draft patch "but with an
+> optimized reporting interface".
 > 
-> The idea is that *if we are allocating a huge page anyway*,
-> rather than break it up let's send it whole to the device.
-> If we have smaller pages, return smaller pages.
+>> That seems like it would always be an improvement, whatever the
+>> workload.
+>>
 > 
+> Don't think so. Assume there are plenty of 4k pages lying around. It
+> might actually be *bad* for guest performance if you take a huge page
+> instead of all the leftover 4k pages that cannot be merged. Only at the
+> point where you would want to break a bigger page up and report it in
+> pieces, where it would definitely make no difference.
 
-Sorry, I still fail to see why you cannot do that with my version of
-balloon_pages_alloc(). But maybe I haven't understood the magic you
-expect to happen in alloc_page_range() :)
+I just understood what you mean :) and now it makes sense - it avoids
+exactly that. Basically
 
-It's just going via a different inflate queue once we have that page, as
-I stated in front of my draft patch "but with an
-optimized reporting interface".
+1. Try to allocate order-0. No split necessary? return the page
+2. Try to allocate order-1. No split necessary? return the page
+...
 
-> That seems like it would always be an improvement, whatever the
-> workload.
-> 
+up to MAX_ORDER - 1.
 
-Don't think so. Assume there are plenty of 4k pages lying around. It
-might actually be *bad* for guest performance if you take a huge page
-instead of all the leftover 4k pages that cannot be merged. Only at the
-point where you would want to break a bigger page up and report it in
-pieces, where it would definitely make no difference.
+Yeah, I guess this will need a new kernel API.
 
-I guess Hui Zhu now has something to look into/work on :)
 
 -- 
 Thanks,
