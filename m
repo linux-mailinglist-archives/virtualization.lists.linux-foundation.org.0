@@ -2,101 +2,103 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E19E199EDA
-	for <lists.virtualization@lfdr.de>; Tue, 31 Mar 2020 21:23:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A898199F7D
+	for <lists.virtualization@lfdr.de>; Tue, 31 Mar 2020 21:53:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 8AF31888C8;
-	Tue, 31 Mar 2020 19:23:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 3879E8891A;
+	Tue, 31 Mar 2020 19:53:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5mxMVfRdpJFj; Tue, 31 Mar 2020 19:23:11 +0000 (UTC)
+	with ESMTP id cvV6ZUNnNrs1; Tue, 31 Mar 2020 19:53:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D8F8A888CF;
-	Tue, 31 Mar 2020 19:23:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8EB65888E5;
+	Tue, 31 Mar 2020 19:53:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B59CCC07FF;
-	Tue, 31 Mar 2020 19:23:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 720F8C07FF;
+	Tue, 31 Mar 2020 19:53:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4F447C07FF
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7395BC07FF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 19:23:10 +0000 (UTC)
+ Tue, 31 Mar 2020 19:53:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 4A8CD25281
+ by whitealder.osuosl.org (Postfix) with ESMTP id 65D8E87EAC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 19:23:10 +0000 (UTC)
+ Tue, 31 Mar 2020 19:53:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id V6Qzd-4hh91c
+ with ESMTP id 5giarkyJh1cq
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 19:23:09 +0000 (UTC)
+ Tue, 31 Mar 2020 19:53:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 4F73B2045E
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id B378087EA7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 19:23:09 +0000 (UTC)
+ Tue, 31 Mar 2020 19:53:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585682587;
+ s=mimecast20190719; t=1585684385;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/e6nQfwC87/bpSm3h+1zpH7ZWFpAx96l++8B4RdaGPs=;
- b=PCrf2183OAtRa0fCrKMkg+/N3QvFHNrhK6n77ayiRQqLI8rVNkdRdk85QP86Oe9ooxLOZx
- dclG+qnFequXC/h6B6rfs56o86fU4WW+cseVeaZEIgxDac7t/Xb1rRt+PBX7aqzCePIumz
- eIgJG885gU2gqheZ7GBCgjoSnNRGIrU=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-388-rrqn8xy2OKezwML5fPpqZw-1; Tue, 31 Mar 2020 15:22:58 -0400
-X-MC-Unique: rrqn8xy2OKezwML5fPpqZw-1
-Received: by mail-wr1-f70.google.com with SMTP id i18so13314684wrx.17
+ bh=1+0L18ghMBeJFqgkk8fraiAJt9W7Fj8n4olMso+0R4s=;
+ b=U8sJC9LcIH/cyG49HuvLHSEsLhWc/nwsbMcbOJIeOLCOo53DRSWrRyCpk6JxGinkhzFFGI
+ y7zL6rCKP6sPCIDpxl5kmyYzcSTI4M9rW46zDcI0zmb1grf8rPNW+W75zoESxsGRsQxz7t
+ qDVdPtxo2rSgAX7+zIxdV32CBlcCZo4=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-316-dksAp6bePc-m8H3AIlSMWw-1; Tue, 31 Mar 2020 15:51:14 -0400
+X-MC-Unique: dksAp6bePc-m8H3AIlSMWw-1
+Received: by mail-wm1-f69.google.com with SMTP id z24so548550wml.9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 12:22:58 -0700 (PDT)
+ Tue, 31 Mar 2020 12:51:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=/e6nQfwC87/bpSm3h+1zpH7ZWFpAx96l++8B4RdaGPs=;
- b=a4WfaeBVud7tMQYXrMvx2DWtLA1Eq+gb5MuNV7T+LxiwRtDrhNJ5bQpSyp9Wy8lAz3
- vJz1Y8BO2hJ3viIq57pZmeW7kRHce6exMQEUfB1MhbG9dAS32dKN2VHBSoluvmnk4JJ7
- o1qYRQCp1USyHh0ZNnoPqWLn3/VimAl1tXnk35orxsEjo/344fyoqQt2E9YonovUVS9F
- eFjaB50WN41z1ih3JXtUnKmKvaDockQchuLRBWNkNMBk6xVMHBxGMTvqseG55+bUTp+2
- rN4oPkNSwKW7S48587Jsnpv/4STpdu47osXwmvH1KAsHn8O0cYklsxIN2ZuJ6YBh71qd
- E+cw==
-X-Gm-Message-State: AGi0PuZ5igzI8NSPaqB/8xDUQ367r5kRf2UktuOURBeW1V65VSn0uQws
- doAztzwhnEuqKdTQuTmgmYDe1Mk2JFoyTWigCi9F7ivAGiUJ/a3XBV2DCAIgcDSWC+rG7GmH05v
- Qrdsk91nHC67HZRJr3DDIFswD9M0XyJaYIV3QSu+Q7Q==
-X-Received: by 2002:a1c:8108:: with SMTP id c8mr410462wmd.50.1585682577019;
- Tue, 31 Mar 2020 12:22:57 -0700 (PDT)
-X-Google-Smtp-Source: APiQypL6Aptv5lg4jzAxGBVMyYmTlEWQ5XMw3Zc2nN0PSD/j3eiBvj2Rc762TemaQntDs3cCx4+NfA==
-X-Received: by 2002:a1c:8108:: with SMTP id c8mr410435wmd.50.1585682576785;
- Tue, 31 Mar 2020 12:22:56 -0700 (PDT)
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=b2UFMAgHLjerJ9NMZry/HpffFH2cpApwyp5N9quNxNg=;
+ b=VBGiTIE98PJq2x3rHoYYHWr7FkeInrC7BPTgXwHK2d8Uhcw1maaicU6WZvR+r2aKNJ
+ QCDAxDpXjlm4lHmRIsNhjxH3fvUxfpraLXhd/ZNkc/q7TOV2yGUU8rgjWwTejw+hXIyX
+ l5mfvp5yFCI5E3m+hkJ3kgrke19EFpZCeOfq5wrjdZn5kQ46I1x8WsLVmHqBdvZQjPYb
+ isypUH8bgcMNH9fwkVrR/3MkCv77Wy/x/1ZZO/oS2g/nizZHmtKwF8jziEeFQvocypTF
+ F8t07YTiTh8uhaunsGKyhm8mjW/Zxn3ilwZxsUhXbYxreVLlyY5L5NoLX44mXUb/CPZ9
+ pCpA==
+X-Gm-Message-State: ANhLgQ2qXoiaszuGU17b757AwOwtfAgO9h3bu+0pp6BWOtUlFK7Woj80
+ J1qWVSyrq41HeZ0FUb5y1EdwshikxVtdxOTcROFP082B/oevQSjKXfVVYjpizNMq087htGBlCI9
+ UDz45GqoKVQr38EDl5F86HfMXr3fu8BObAIKh1jKbyQ==
+X-Received: by 2002:adf:90c6:: with SMTP id i64mr21178497wri.88.1585684273179; 
+ Tue, 31 Mar 2020 12:51:13 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vsBF9cECw6xLYUjwBS31gILdZtjJFvdt8FOUuQyT0OA1wSrJbotTajrFFZAFpWOR4/ADVtrdQ==
+X-Received: by 2002:adf:90c6:: with SMTP id i64mr21178477wri.88.1585684272926; 
+ Tue, 31 Mar 2020 12:51:12 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id v7sm25508548wrs.96.2020.03.31.12.22.54
+ by smtp.gmail.com with ESMTPSA id y15sm1290983wrh.50.2020.03.31.12.51.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2020 12:22:56 -0700 (PDT)
-Date: Tue, 31 Mar 2020 15:22:53 -0400
+ Tue, 31 Mar 2020 12:51:12 -0700 (PDT)
+Date: Tue, 31 Mar 2020 15:51:09 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: mmotm 2020-03-30-18-46 uploaded (VDPA + vhost)
-Message-ID: <20200331152106-mutt-send-email-mst@kernel.org>
-References: <20200331014748.ajL0G62jF%akpm@linux-foundation.org>
- <969cacf1-d420-223d-7cc7-5b1b2405ec2a@infradead.org>
- <20200331143437-mutt-send-email-mst@kernel.org>
- <9c03fee8-af1a-2035-b903-611a631094b0@infradead.org>
+To: Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>
+Subject: Re: [PATCH v3 0/8] vhost: Reset batched descriptors on
+ SET_VRING_BASE call
+Message-ID: <20200331155049-mutt-send-email-mst@kernel.org>
+References: <20200331192804.6019-1-eperezma@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <9c03fee8-af1a-2035-b903-611a631094b0@infradead.org>
+In-Reply-To: <20200331192804.6019-1-eperezma@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: sfr@canb.auug.org.au, mm-commits@vger.kernel.org,
- Masahiro Yamada <yamada.masahiro@socionext.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, mhocko@suse.cz, linux-mm@kvack.org,
- broonie@kernel.org, linux-next@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- akpm@linux-foundation.org
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ Cornelia Huck <cohuck@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,78 +110,75 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Mar 31, 2020 at 11:42:47AM -0700, Randy Dunlap wrote:
-> On 3/31/20 11:37 AM, Michael S. Tsirkin wrote:
-> > On Tue, Mar 31, 2020 at 11:27:54AM -0700, Randy Dunlap wrote:
-> >> On 3/30/20 6:47 PM, akpm@linux-foundation.org wrote:
-> >>> The mm-of-the-moment snapshot 2020-03-30-18-46 has been uploaded to
-> >>>
-> >>>    http://www.ozlabs.org/~akpm/mmotm/
-> >>>
-> >>> mmotm-readme.txt says
-> >>>
-> >>> README for mm-of-the-moment:
-> >>>
-> >>> http://www.ozlabs.org/~akpm/mmotm/
-> >>>
-> >>> This is a snapshot of my -mm patch queue.  Uploaded at random hopefully
-> >>> more than once a week.
-> >>>
-> >>> You will need quilt to apply these patches to the latest Linus release (5.x
-> >>> or 5.x-rcY).  The series file is in broken-out.tar.gz and is duplicated in
-> >>> http://ozlabs.org/~akpm/mmotm/series
-> >>>
-> >>> The file broken-out.tar.gz contains two datestamp files: .DATE and
-> >>> .DATE-yyyy-mm-dd-hh-mm-ss.  Both contain the string yyyy-mm-dd-hh-mm-ss,
-> >>> followed by the base kernel version against which this patch series is to
-> >>> be applied.
-> >>>
-> >>> This tree is partially included in linux-next.  To see which patches are
-> >>> included in linux-next, consult the `series' file.  Only the patches
-> >>> within the #NEXT_PATCHES_START/#NEXT_PATCHES_END markers are included in
-> >>> linux-next.
-> >>>
-> >>>
-> >>> A full copy of the full kernel tree with the linux-next and mmotm patches
-> >>> already applied is available through git within an hour of the mmotm
-> >>> release.  Individual mmotm releases are tagged.  The master branch always
-> >>> points to the latest release, so it's constantly rebasing.
-> >>>
-> >>> 	https://github.com/hnaz/linux-mm
-> >>
-> >> on i386:
-> >>
-> >> ld: drivers/vhost/vdpa.o: in function `vhost_vdpa_init':
-> >> vdpa.c:(.init.text+0x52): undefined reference to `__vdpa_register_driver'
-> >> ld: drivers/vhost/vdpa.o: in function `vhost_vdpa_exit':
-> >> vdpa.c:(.exit.text+0x14): undefined reference to `vdpa_unregister_driver'
-> >>
-> >>
-> >>
-> >> drivers/virtio/vdpa/ is not being built. (confusing!)
-> >>
-> >> CONFIG_VIRTIO=m
-> >> # CONFIG_VIRTIO_MENU is not set
-> >> CONFIG_VDPA=y
-> > 
-> > Hmm. OK. Can't figure it out. CONFIG_VDPA is set why isn't
-> > drivers/virtio/vdpa/ built?
-> > we have:
-> > 
-> 
-> Ack.  Hopefully Yamada-san can tell us what is happening here.
+On Tue, Mar 31, 2020 at 09:27:56PM +0200, Eugenio P=C3=A9rez wrote:
+> Vhost did not reset properly the batched descriptors on SET_VRING_BASE
+> event. Because of that, is possible to return an invalid descriptor to
+> the guest.
+> =
 
-OK I pushed a fix (moving the vdpa subsystem up a level) and pushed into
-my tree, refs/heads/next .  Seems to build fine now, but I'd appreciate
-it if you can give it a spin.
+> This series ammend this, resetting them every time backend changes, and
+> creates a test to assert correct behavior. To do that, they need to
+> expose a new function in virtio_ring, virtqueue_reset_free_head, only
+> on test code.
+> =
 
--- 
-MST
+> Another useful thing would be to check if mutex is properly get in
+> vq private_data accessors. Not sure if mutex debug code allow that,
+> similar to C++ unique lock::owns_lock. Not acquiring in the function
+> because caller code holds the mutex in order to perform more actions.
+
+I pushed vhost branch with patch 1, pls send patches on top of that!
+
+> v3:
+> * Rename accesors functions.
+> * Make scsi and test use the accesors too.
+> =
+
+> v2:
+> * Squashed commits.
+> * Create vq private_data accesors (mst).
+> =
+
+> This is meant to be applied on top of
+> c4f1c41a6094582903c75c0dcfacb453c959d457 in
+> git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git.
+> =
+
+> Eugenio P=C3=A9rez (5):
+>   vhost: Create accessors for virtqueues private_data
+>   tools/virtio: Add --batch option
+>   tools/virtio: Add --batch=3Drandom option
+>   tools/virtio: Add --reset=3Drandom
+>   tools/virtio: Make --reset reset ring idx
+> =
+
+> Michael S. Tsirkin (3):
+>   vhost: option to fetch descriptors through an independent struct
+>   vhost: use batched version by default
+>   vhost: batching fetches
+> =
+
+>  drivers/vhost/net.c          |  28 ++--
+>  drivers/vhost/scsi.c         |  14 +-
+>  drivers/vhost/test.c         |  69 ++++++++-
+>  drivers/vhost/test.h         |   1 +
+>  drivers/vhost/vhost.c        | 271 +++++++++++++++++++++++------------
+>  drivers/vhost/vhost.h        |  44 +++++-
+>  drivers/vhost/vsock.c        |  14 +-
+>  drivers/virtio/virtio_ring.c |  29 ++++
+>  tools/virtio/linux/virtio.h  |   2 +
+>  tools/virtio/virtio_test.c   | 123 ++++++++++++++--
+>  10 files changed, 456 insertions(+), 139 deletions(-)
+> =
+
+> -- =
+
+> 2.18.1
 
 _______________________________________________
 Virtualization mailing list
