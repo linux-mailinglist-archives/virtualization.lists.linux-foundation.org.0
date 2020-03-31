@@ -2,87 +2,87 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3455199E6F
-	for <lists.virtualization@lfdr.de>; Tue, 31 Mar 2020 20:55:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D806199E75
+	for <lists.virtualization@lfdr.de>; Tue, 31 Mar 2020 20:57:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E4C3324E83;
-	Tue, 31 Mar 2020 18:55:56 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id B448325397;
+	Tue, 31 Mar 2020 18:57:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xxnK3KKC234U; Tue, 31 Mar 2020 18:55:55 +0000 (UTC)
+	with ESMTP id QM5hU31AnPLE; Tue, 31 Mar 2020 18:57:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id CFC43250D0;
-	Tue, 31 Mar 2020 18:55:55 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A511825379;
+	Tue, 31 Mar 2020 18:57:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AE23BC07FF;
-	Tue, 31 Mar 2020 18:55:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8C38FC07FF;
+	Tue, 31 Mar 2020 18:57:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 69F94C07FF
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E24A8C07FF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 18:55:54 +0000 (UTC)
+ Tue, 31 Mar 2020 18:57:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 541A286C32
+ by whitealder.osuosl.org (Postfix) with ESMTP id DA4C487EA7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 18:55:54 +0000 (UTC)
+ Tue, 31 Mar 2020 18:57:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oS88-nsNGP-L
+ with ESMTP id 4Bc0YpLUeV04
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 18:55:51 +0000 (UTC)
+ Tue, 31 Mar 2020 18:57:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4E26C86C28
+ [207.211.31.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6EC8287E7B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 18:55:51 +0000 (UTC)
+ Tue, 31 Mar 2020 18:57:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585680950;
+ s=mimecast20190719; t=1585681070;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=9N83ulIWUt944dVDEJ06AJzgWaetQqP5tl+Ibkm3ba4=;
- b=hDb/puwpT4Iu1MHaTt4AKvXL2NAyF0iXNZ0+xRa1/g4IKaFpKe4Q1MlGqBWy2fNGEoaolX
- yvEDHK1rieRLs96sLwz3bO7sX/E5FlIirwiwcq3ycgm0dTkr6DUTftxzxZ5KyNnLzVCea+
- LLHRW2piPxeL1LYKj35WZsQ5R6eVLfY=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-326-hgcsbmlkOKyV5Xn4Ntbv-A-1; Tue, 31 Mar 2020 14:55:46 -0400
-X-MC-Unique: hgcsbmlkOKyV5Xn4Ntbv-A-1
-Received: by mail-wr1-f71.google.com with SMTP id r15so5541632wrm.22
+ bh=bjuPWfP4XM6yz96SvNfUrwVZXF7xkmhK3kaB303goaM=;
+ b=Xz2IgbEeXhSId1NulgD4VHEdab+EjMgB9W/XiJ7ezJEkU/P2BdWlKgDHxWNxCcFc0mCWiI
+ PMJIKKjdEx8bL4lKmvb9v+ymYVdWkX4GtklSbgywPGu3gdxMWGcoqV0ioFeFq616CKnZXB
+ Zhfo2WjmA8Zq+5AA7IY/Bdz21awJql8=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-135-I3bfmif7PcCDLpgUIaokww-1; Tue, 31 Mar 2020 14:57:48 -0400
+X-MC-Unique: I3bfmif7PcCDLpgUIaokww-1
+Received: by mail-wr1-f72.google.com with SMTP id t25so11013981wrb.16
  for <virtualization@lists.linux-foundation.org>;
- Tue, 31 Mar 2020 11:55:46 -0700 (PDT)
+ Tue, 31 Mar 2020 11:57:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=9N83ulIWUt944dVDEJ06AJzgWaetQqP5tl+Ibkm3ba4=;
- b=OvAynKj5X4FQAbYXywuA/ByfqjOf2IYEO77YFEfsvSDRmWa8YCbaXvMfvYMilpyVtH
- kmzvpnzSobhCRRZRBI/BCeNeXZ0AWCWZHWlCl/tFKoB9Yz6tCuxNVnPUian7scHsyC2F
- UEgNUr1axk121/uIA5Pifuzvqq7hu5Me94vABO6aO4/uJvoJZtaSBgG2IQ6mlnBYjAmm
- x0AcuvjdqLvLzVlcSJPrHYe3bFDEWz521+35a7diMgS7NsXcIPZ6VYjklpX4jNrdJsqw
- NTNgZLANgSTYq0kLZwclU5zD1vw2GkFLtgqbm0zWou4n/Txc8SaLWRyHQGf+b2MMyUSm
- HW2w==
-X-Gm-Message-State: AGi0PubMc8SmP4b/5f8nIrTwKRjHz0rNm0Q/lpwuEeCksaToLXqgX7GD
- L3zZIArmuUHt+1R5yd0eBBmj/xeFMtU0wjaOBgQj/0NWzar7WdfltWFJGgi2SFRhQ+u2h1WezM6
- 2KnZ5HnZWIQc9o8aZG+Suzvp+WejIKFqOEZxc+QAalg==
-X-Received: by 2002:a1c:82:: with SMTP id 124mr257860wma.63.1585680945318;
- Tue, 31 Mar 2020 11:55:45 -0700 (PDT)
-X-Google-Smtp-Source: APiQypIItSTAIpN2eJyUg/bKQdlRjERgE+twajxI2WUL+EtqTwGmwdqtCNM2ixY8sVPtXuyHJWpU4g==
-X-Received: by 2002:a1c:82:: with SMTP id 124mr257825wma.63.1585680944950;
- Tue, 31 Mar 2020 11:55:44 -0700 (PDT)
+ bh=bjuPWfP4XM6yz96SvNfUrwVZXF7xkmhK3kaB303goaM=;
+ b=jLsTdxDjUMyOnVMwJYybQyYS/E1DBPgBUHgQkKW1pHpt2lkskTgiFndoqeqfxp8cA+
+ MlT58XUKAwNK3V3NsgCHnRI9zy7JrxT0IeKgzf9uWkZTG9YXApBe/2yRxdpOB/SJwnKn
+ prliTBsZq4JejlKEoDwBVH8F2jdNOfHPzlPnUWULEuagz8dYJTALwjcKAN2D9wEE6ZLw
+ tp/aBN9C13TDzXx3uLHFnNPpX0CG7xVtwmE+paKI+HM18TTNhQsFegh2hzA062Q+t1X6
+ 8WWoXRz9KN2l/NWtBE/+xyWe12Ofst9dJIovKIQusfLiAhM0BSilkKrVJh41jU97aIHA
+ fT3Q==
+X-Gm-Message-State: ANhLgQ2Q1RInPiV5YVObiaJ2DpWJyW3IdGsovgFNrPDWOvOFeEKbqP7T
+ a44ZsjIu7Hx7j2uYohB9nzjjkwZRi6zzv1eTWXocKE1yBzq3O5OvtEDqFfip3DK/TYCZMr7/C54
+ jsshiJ9D4BNTnK05p7ZsIWWOnYeOjK0Ba16xW09oeaw==
+X-Received: by 2002:adf:a549:: with SMTP id j9mr20849164wrb.183.1585681067704; 
+ Tue, 31 Mar 2020 11:57:47 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vumkiVUnoTFzxgxNV8v2tnIE0AdT7rk4DqQxWt81v0qN5/05onGh4L9duOpOsKKqaOy2HvO9w==
+X-Received: by 2002:adf:a549:: with SMTP id j9mr20849150wrb.183.1585681067499; 
+ Tue, 31 Mar 2020 11:57:47 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id y7sm30626556wrq.54.2020.03.31.11.55.43
+ by smtp.gmail.com with ESMTPSA id f13sm586160wrx.56.2020.03.31.11.57.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2020 11:55:44 -0700 (PDT)
-Date: Tue, 31 Mar 2020 14:55:41 -0400
+ Tue, 31 Mar 2020 11:57:46 -0700 (PDT)
+Date: Tue, 31 Mar 2020 14:57:43 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Randy Dunlap <rdunlap@infradead.org>
 Subject: Re: mmotm 2020-03-30-18-46 uploaded (VDPA + vhost)
-Message-ID: <20200331144650-mutt-send-email-mst@kernel.org>
+Message-ID: <20200331145630-mutt-send-email-mst@kernel.org>
 References: <20200331014748.ajL0G62jF%akpm@linux-foundation.org>
  <969cacf1-d420-223d-7cc7-5b1b2405ec2a@infradead.org>
  <20200331143437-mutt-send-email-mst@kernel.org>
@@ -175,7 +175,14 @@ On Tue, Mar 31, 2020 at 11:42:47AM -0700, Randy Dunlap wrote:
 > Ack.  Hopefully Yamada-san can tell us what is happening here.
 
 
-I reproduced this without difficulty btw, thanks for the report!
+Oh wait a second:
+
+obj-$(CONFIG_VIRTIO)            += virtio/
+
+So CONFIG_VIRTIO=m and build does not even interate into drivers/virtio.
+
+
+
 
 
 > > 
