@@ -1,88 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4282919AF51
-	for <lists.virtualization@lfdr.de>; Wed,  1 Apr 2020 18:05:54 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D5D5786DD6;
-	Wed,  1 Apr 2020 16:05:52 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KWI2ykfjpzS7; Wed,  1 Apr 2020 16:05:50 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2352986E69;
-	Wed,  1 Apr 2020 16:05:50 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 00B8EC089F;
-	Wed,  1 Apr 2020 16:05:50 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1C93BC089F
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 16:05:49 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C48019AF64
+	for <lists.virtualization@lfdr.de>; Wed,  1 Apr 2020 18:08:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 181C186DB2
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 16:05:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 395DE852DB;
+	Wed,  1 Apr 2020 16:08:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id unBEtnBOFc3q; Wed,  1 Apr 2020 16:08:15 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C0512869E2;
+	Wed,  1 Apr 2020 16:08:15 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9C2ABC1AE2;
+	Wed,  1 Apr 2020 16:08:15 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6A4E3C089F
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Apr 2020 16:08:14 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 585FE854E7
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Apr 2020 16:08:14 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id K1zfEI10VRa5
+ with ESMTP id fH7lsCbLg04E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 16:05:48 +0000 (UTC)
+ Wed,  1 Apr 2020 16:08:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 767EE852DB
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 8923784794
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 16:05:48 +0000 (UTC)
+ Wed,  1 Apr 2020 16:08:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585757147;
+ s=mimecast20190719; t=1585757292;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=zUy3j+yrovQDgWmfFKd1F++ymnkOiTPGFKNkP/D2nvI=;
- b=cx5gymKEwf9duUvn/nMJxHRaCJySNMc4x2lICmWo/BThypEu24W7PLQ4lSLIv3jqSqeCBO
- z/aLOZ4jyzmo9fvmQeOpEiC3ikfNH4m1otkZY1Vgyg6XruR4lOTA8Az/oYFU/rvpHNrmWJ
- fbKmq3LnUu7UsoC28/th/8cMnajxhZ4=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-352-c4fD1UzINc6NIwYtT1H94Q-1; Wed, 01 Apr 2020 12:05:45 -0400
-X-MC-Unique: c4fD1UzINc6NIwYtT1H94Q-1
-Received: by mail-wm1-f69.google.com with SMTP id w8so157994wmk.5
+ bh=hOVDtyF1AE9D3PmM9Cg9VpMJ2l3FcGqxQ8lNxLr5dIs=;
+ b=iuDdgL2xit7zWebGuUFkGDfUxrz48YKwRipi3Pr0zEMivtXE+EF7p4Eq8pdkawJs+34Roc
+ zsj+088Urgw7IgQkBggGkHn50TWBTquZwIH7pUw5HnkeAKjx8YbC3Z0VWj4USpu+2St9Nc
+ TY7IeR8WUAWX5O6G0kaspY6xL81AmRc=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-301-T_sNoc3lN3eJy4YSvr_uUg-1; Wed, 01 Apr 2020 12:08:08 -0400
+X-MC-Unique: T_sNoc3lN3eJy4YSvr_uUg-1
+Received: by mail-wr1-f72.google.com with SMTP id m15so69472wrb.0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 01 Apr 2020 09:05:45 -0700 (PDT)
+ Wed, 01 Apr 2020 09:08:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=zUy3j+yrovQDgWmfFKd1F++ymnkOiTPGFKNkP/D2nvI=;
- b=tY3OOKwdnm25SdUAHogtjeHyM+ZB/pv0W/DTQLhvA+3AShqcRf39YRl7TxUo5vYVz3
- LcG12cytsu2UuzjMLGnNyCEjoMB9IVPnIpLeB99c432nBR4sDjq/PzC4slijGt0RSxPT
- hTTKtBtglrlx9ctUeRFPqKhUCJ3lzXLKkPpQJWJqiVVbNASxmqlAlkjKT8uMa2YSxFlS
- ztJt7ZE0UxWxIO6JwQfLeXSnUjjx/h3zx/6WR1rLLp/NL8qncxVchjVyr7fYn9hIf4YE
- UMHpCgLwvG3zc+8EEVNasfrlcnNlJa//rb4DqxJWBOkFx9gETvVJAzqCDFoYo6B9bpf0
- yP0w==
-X-Gm-Message-State: ANhLgQ1+Erfz1pHdb/GFTALWg6cvRiJlCxyIcKtAn5CLOIQ7HLQHpo3q
- Ac74nnc94wquVIVKLztZXNyAsWZ/AeuPoKHpYW+UIqtzcBuafYN/kpPxtL+w5ZvM457a6ub5cVg
- FIw8Pm4Nx54y20U9dP/uoGyvp+p0s3crmYUgUbLYO8g==
-X-Received: by 2002:a5d:53d1:: with SMTP id a17mr28165165wrw.41.1585757144320; 
- Wed, 01 Apr 2020 09:05:44 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vuk07VIBkno7jCUb5wxynsgoXQ+nPbZKJ9NnXIKxpKfUHmNte/+b09H0WL7N2rcv9cUMY4tCg==
-X-Received: by 2002:a5d:53d1:: with SMTP id a17mr28165122wrw.41.1585757144100; 
- Wed, 01 Apr 2020 09:05:44 -0700 (PDT)
+ bh=hOVDtyF1AE9D3PmM9Cg9VpMJ2l3FcGqxQ8lNxLr5dIs=;
+ b=KSf1cL9G1IJPwAPSanhskUrGkhSflIHZIN4D2QmwZhS84BAHm0VcEyUm65dHDmCGcO
+ WyDlqUpilfPaU6bkHAZgtQYLnlt7Y8kkpIzVsydVcEk5Si9FAWgqXfwWSq/i56WiYWTd
+ tO042Yb1s94OxrsoskJvoQpCMHVIQ6LsamJGZsKFxEu76jXSbLaEDkoQCbnwSvupdPkq
+ ipIxkNEk8tVijPjQTQAIjtR64ipkMpW3UTNBvTWhGEJBtPDjHc/CP35YAnj33HCTY3xg
+ VPDWjOYMZF54zb9RPE5RiG4OgY2AJWcfyqr9HtYpXhsgDwhr7QSWRxHUdkA1C3wt8la2
+ 8Y1A==
+X-Gm-Message-State: ANhLgQ3rtSP8oOd9l5zHszvAgVRjgy15vSzyKf3cYSh8dz5AptMXp+SZ
+ +InLSeCqLxoKk0ucvoBvBh7VH5k/4Mc8NiXANWiVcNMUZzuY38QY8Nv6k0xssfy4rP2GEm05LnQ
+ vmkBURCf2zpI92h36+q/EE7EKmjx9E883haxKz1dozg==
+X-Received: by 2002:a5d:5704:: with SMTP id a4mr27653002wrv.95.1585757287415; 
+ Wed, 01 Apr 2020 09:08:07 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vu/0IpuTVbC9txesB4+4J8VJA6MAuurHQYjHbAmRAHqQl2A8Juskzx4t/Kit00vNhGBgfiZ4Q==
+X-Received: by 2002:a5d:5704:: with SMTP id a4mr27652949wrv.95.1585757287093; 
+ Wed, 01 Apr 2020 09:08:07 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id f13sm3329290wrx.56.2020.04.01.09.05.40
+ by smtp.gmail.com with ESMTPSA id n6sm3579451wrp.30.2020.04.01.09.08.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Apr 2020 09:05:43 -0700 (PDT)
-Date: Wed, 1 Apr 2020 12:05:39 -0400
+ Wed, 01 Apr 2020 09:08:06 -0700 (PDT)
+Date: Wed, 1 Apr 2020 12:08:01 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Jason Wang <jasowang@redhat.com>
 Subject: Re: [PATCH V9 1/9] vhost: refine vhost and vringh kconfig
-Message-ID: <20200401120352-mutt-send-email-mst@kernel.org>
+Message-ID: <20200401120643-mutt-send-email-mst@kernel.org>
 References: <20200326140125.19794-1-jasowang@redhat.com>
  <20200326140125.19794-2-jasowang@redhat.com>
  <20200401092004-mutt-send-email-mst@kernel.org>
@@ -153,12 +153,7 @@ On Wed, Apr 01, 2020 at 10:29:32PM +0800, Jason Wang wrote:
 >  	help
 >  	  This option is selected by any driver which needs to access
 >  	  the core of vhost.
-
-
-OK so don't we need the dependency on EVENTFD though?
-I recall there was a bug this was supposed to fix ...
-
-
+>  
 > -if VHOST
 > +menuconfig VHOST_MENU
 > +	bool "VHOST drivers"
@@ -197,9 +192,15 @@ I recall there was a bug this was supposed to fix ...
 >  	select VDPA
 >  	help
 >  	  This kernel module can be loaded in host kernel to accelerate
-> -- 
-> 2.20.1
-> 
+
+OK so I squashed this into the original buggy patch.
+Could you please play with vhost branch of my tree on various
+arches? If it looks ok to you let me know I'll push
+this to next.
+
+
+-- 
+MST
 
 _______________________________________________
 Virtualization mailing list
