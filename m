@@ -1,96 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2350419AE4A
-	for <lists.virtualization@lfdr.de>; Wed,  1 Apr 2020 16:51:23 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A5CBC883F1;
-	Wed,  1 Apr 2020 14:51:21 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Z07omb9+loDg; Wed,  1 Apr 2020 14:51:20 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E5C3E883E2;
-	Wed,  1 Apr 2020 14:51:20 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BEB67C089F;
-	Wed,  1 Apr 2020 14:51:20 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 19285C089F
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 14:51:19 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AEC319AF0B
+	for <lists.virtualization@lfdr.de>; Wed,  1 Apr 2020 17:49:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 10D6986DD6
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 14:51:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C214E86DDE;
+	Wed,  1 Apr 2020 15:49:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BOiRQZlfm6ch; Wed,  1 Apr 2020 15:49:48 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 11F1B86DB3;
+	Wed,  1 Apr 2020 15:49:48 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E3DB5C1D7F;
+	Wed,  1 Apr 2020 15:49:47 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EA894C089F
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Apr 2020 15:49:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id D99D086C6A
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Apr 2020 15:49:45 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MCnAarq3Yh1A
+ with ESMTP id q85XAA_Jpf55
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 14:51:18 +0000 (UTC)
+ Wed,  1 Apr 2020 15:49:43 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 2C68F86D90
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+ [209.85.221.67])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 408B486C63
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 14:51:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1585752676;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5n1TpAtrCmO/OxJ7W2yFz2Sp/6yT7ouLorwkqMfl51s=;
- b=Yub8mjC4FnLy3UWZawBaOh4tRD3oQFFXbr60wcO43qUnNxo5RYI+5KpRfmJVfsKZsHGC8J
- FwFJ41Fj/RGMM0ct/nlD6cL22WTVxrITv5PeVIicrCG2sLL23/iUjZPYQzsb2C4tvNiYu+
- aKQMaSWfrJ/+6RWqXsX0UfS2XHQr5Wk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-474-6pRfZq5iMh24YqoQc1E2ag-1; Wed, 01 Apr 2020 10:51:14 -0400
-X-MC-Unique: 6pRfZq5iMh24YqoQc1E2ag-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 20A95477;
- Wed,  1 Apr 2020 14:51:11 +0000 (UTC)
-Received: from [10.72.12.139] (ovpn-12-139.pek2.redhat.com [10.72.12.139])
- by smtp.corp.redhat.com (Postfix) with ESMTP id CC87D98A53;
- Wed,  1 Apr 2020 14:50:52 +0000 (UTC)
-Subject: Re: [PATCH V9 1/9] vhost: refine vhost and vringh kconfig
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20200326140125.19794-1-jasowang@redhat.com>
- <20200326140125.19794-2-jasowang@redhat.com>
- <fde312a4-56bd-f11f-799f-8aa952008012@de.ibm.com>
- <41ee1f6a-3124-d44b-bf34-0f26604f9514@redhat.com>
- <4726da4c-11ec-3b6e-1218-6d6d365d5038@de.ibm.com>
- <39b96e3a-9f4e-6e1d-e988-8c4bcfb55879@de.ibm.com>
- <c423c5b1-7817-7417-d7af-e07bef6368e7@redhat.com>
- <20200401102631-mutt-send-email-mst@kernel.org>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <5e409bb4-2b06-5193-20c3-a9ddaafacf5a@redhat.com>
-Date: Wed, 1 Apr 2020 22:50:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ Wed,  1 Apr 2020 15:49:43 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id 65so679650wrl.1
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 01 Apr 2020 08:49:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=C/6o2vAlNYHnEoJMtN8wwi/oRzeStDRZUTB/Nd2Hv7M=;
+ b=V1X71f5rZiDGmnBfh3sBWCp7T9Jp+5xgMJtds1xfZSu8D+O/hvzseXEbwd0hbE/ic5
+ x2TkT+43IaifgxbqN3WD5qF0jkxiEJn/vxu7PJRb8DLrWPo6nyc2sc0xJTT/Dgr5U/Ks
+ I+dljP0laNt/dwhmWSN9NgnGnsQ5TIJIRWzDiczColatMsLZ4AxN0FV2nGqCjw0hr5vA
+ Zoy0T/CjYuH6DlYK8xB91i5btiy69jf9MTCkULGVja5Tvk+K0iLwEzJSa0OqQVJ5Ulf2
+ xfg3KFSYDoo0qFQSaOx3myBfeqcG6DhAd2eTiiX5P4BHoNaXawbCHD7VO9oOVywNrhMn
+ kYog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=C/6o2vAlNYHnEoJMtN8wwi/oRzeStDRZUTB/Nd2Hv7M=;
+ b=tA0wduB6p8kRoFO89Zr9sgtFPWfpGrUg2xbfLNlwfL6fVnrCnCn5tPPh5OZ9OxYFQq
+ qfmubUWLx8lFyCj9STFjIexkOP22oXQ1nDNznNkf3tNWJE08jgr/ZE20jfgsd31m5IJ5
+ TWV/RuBB8OLqADdSzZw3oaBnY7M1nk8Ypa6hEoQdZaUZdfu4RjxJ2/Nlz3RTiG04eHnd
+ IHncdVzs1HcpDmcASvEKBcUUCxehcXpQsp7XzRB9B5fMzWJImz8N7Y8We84C/mTCCxWs
+ TOxEQYTyTl+Tjn340NG5jsPeiw794Xa7rlBi2+MjVnJxcZdglHm+blz8RaQ/PPb1p/Ax
+ m8PA==
+X-Gm-Message-State: ANhLgQ2CjzxuE+YJ2ldcWJemhxFpS38Mrvjsk88rziX1lkTlqzZ8dQwR
+ RrLS0FhirvZZ1UGweJshXgbPtg==
+X-Google-Smtp-Source: ADFU+vsj+IPnTlTnW8cEeiZkmxOp3zrZSNdsM6O5dJ55cTv7aer2xndG3sAVVLsjPUulI2AMAH/7/g==
+X-Received: by 2002:adf:84a3:: with SMTP id 32mr25563249wrg.378.1585756181494; 
+ Wed, 01 Apr 2020 08:49:41 -0700 (PDT)
+Received: from myrica ([2001:171b:226b:54a0:6097:1406:6470:33b5])
+ by smtp.gmail.com with ESMTPSA id s131sm3258684wmf.35.2020.04.01.08.49.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Apr 2020 08:49:40 -0700 (PDT)
+Date: Wed, 1 Apr 2020 17:49:32 +0200
+From: Jean-Philippe Brucker <jean-philippe@linaro.org>
+To: Robin Murphy <robin.murphy@arm.com>
+Subject: Re: [RFC PATCH v2] iommu/virtio: Use page size bitmap supported by
+ endpoint
+Message-ID: <20200401154932.GA1124215@myrica>
+References: <20200401113804.21616-1-bbhushan2@marvell.com>
+ <b75beb74-89ce-fd6a-6207-3c0d7f479215@arm.com>
 MIME-Version: 1.0
-In-Reply-To: <20200401102631-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Cc: kvm@vger.kernel.org, mhabets@solarflare.com,
- virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
- saugatm@xilinx.com, lulu@redhat.com,
- Christian Borntraeger <borntraeger@de.ibm.com>, hanand@xilinx.com,
- hch@infradead.org, eperezma@redhat.com, jgg@mellanox.com, shahafs@mellanox.com,
- parav@mellanox.com, vmireyno@marvell.com, gdawar@xilinx.com, jiri@mellanox.com,
- xiao.w.wang@intel.com, stefanha@redhat.com, zhihong.wang@intel.com,
- zhangweining@ruijie.com.cn, netdev@vger.kernel.org, rdunlap@infradead.org,
- linux-kernel@vger.kernel.org, maxime.coquelin@redhat.com,
- lingshan.zhu@intel.com
+Content-Disposition: inline
+In-Reply-To: <b75beb74-89ce-fd6a-6207-3c0d7f479215@arm.com>
+Cc: mst@redhat.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, eric.auger@redhat.com,
+ iommu@lists.linux-foundation.org, Bharat Bhushan <bbhushan2@marvell.com>,
+ joro@8bytes.org, eric.auger.pro@gmail.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,96 +98,196 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNC8xIOS4i+WNiDEwOjI3LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4gT24g
-V2VkLCBBcHIgMDEsIDIwMjAgYXQgMTA6MTM6MjlQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToK
-Pj4gT24gMjAyMC80LzEg5LiL5Y2IOTowMiwgQ2hyaXN0aWFuIEJvcm50cmFlZ2VyIHdyb3RlOgo+
-Pj4gT24gMDEuMDQuMjAgMTQ6NTYsIENocmlzdGlhbiBCb3JudHJhZWdlciB3cm90ZToKPj4+PiBP
-biAwMS4wNC4yMCAxNDo1MCwgSmFzb24gV2FuZyB3cm90ZToKPj4+Pj4gT24gMjAyMC80LzEg5LiL
-5Y2INzoyMSwgQ2hyaXN0aWFuIEJvcm50cmFlZ2VyIHdyb3RlOgo+Pj4+Pj4gT24gMjYuMDMuMjAg
-MTU6MDEsIEphc29uIFdhbmcgd3JvdGU6Cj4+Pj4+Pj4gQ3VycmVudGx5LCBDT05GSUdfVkhPU1Qg
-ZGVwZW5kcyBvbiBDT05GSUdfVklSVFVBTElaQVRJT04uIEJ1dCB2aG9zdCBpcwo+Pj4+Pj4+IG5v
-dCBuZWNlc3NhcmlseSBmb3IgVk0gc2luY2UgaXQncyBhIGdlbmVyaWMgdXNlcnNwYWNlIGFuZCBr
-ZXJuZWwKPj4+Pj4+PiBjb21tdW5pY2F0aW9uIHByb3RvY29sLiBTdWNoIGRlcGVuZGVuY3kgbWF5
-IHByZXZlbnQgYXJjaHMgd2l0aG91dAo+Pj4+Pj4+IHZpcnR1YWxpemF0aW9uIHN1cHBvcnQgZnJv
-bSB1c2luZyB2aG9zdC4KPj4+Pj4+Pgo+Pj4+Pj4+IFRvIHNvbHZlIHRoaXMsIGEgZGVkaWNhdGVk
-IHZob3N0IG1lbnUgaXMgY3JlYXRlZCB1bmRlciBkcml2ZXJzIHNvCj4+Pj4+Pj4gQ09OSUZHX1ZI
-T1NUIGNhbiBiZSBkZWNvdXBsZWQgb3V0IG9mIENPTkZJR19WSVJUVUFMSVpBVElPTi4KPj4+Pj4+
-IEZXSVcsIHRoaXMgbm93IHJlc3VsdHMgaW4gdmhvc3Qgbm90IGJlaW5nIGJ1aWxkIHdpdGggZGVm
-Y29uZmlnIGtlcm5lbHMgKGluIHRvZGF5cwo+Pj4+Pj4gbGludXgtbmV4dCkuCj4+Pj4+Pgo+Pj4+
-PiBIaSBDaHJpc3RpYW46Cj4+Pj4+Cj4+Pj4+IERpZCB5b3UgbWVldCBpdCBldmVuIHdpdGggdGhp
-cyBjb21taXTCoGh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0
-L25leHQvbGludXgtbmV4dC5naXQvY29tbWl0Lz9pZD1hNGJlNDBjYmNlZGJhOWI1YjcxNGYzYzk1
-MTgyZThhNDUxNzZlNDJkPwo+Pj4+IEkgc2ltcGx5IHVzZWQgbGludXgtbmV4dC4gVGhlIGRlZmNv
-bmZpZyBkb2VzIE5PVCBjb250YWluIENPTkZJR19WSE9TVCBhbmQgdGhlcmVmb3JlIENPTkZJR19W
-SE9TVF9ORVQgYW5kIGZyaWVuZHMKPj4+PiBjYW4gbm90IGJlIHNlbGVjdGVkLgo+Pj4+Cj4+Pj4g
-JCBnaXQgY2hlY2tvdXQgbmV4dC0yMDIwMDQwMQo+Pj4+ICQgbWFrZSBkZWZjb25maWcKPj4+PiAg
-ICAgSE9TVENDICBzY3JpcHRzL2Jhc2ljL2ZpeGRlcAo+Pj4+ICAgICBIT1NUQ0MgIHNjcmlwdHMv
-a2NvbmZpZy9jb25mLm8KPj4+PiAgICAgSE9TVENDICBzY3JpcHRzL2tjb25maWcvY29uZmRhdGEu
-bwo+Pj4+ICAgICBIT1NUQ0MgIHNjcmlwdHMva2NvbmZpZy9leHByLm8KPj4+PiAgICAgTEVYICAg
-ICBzY3JpcHRzL2tjb25maWcvbGV4ZXIubGV4LmMKPj4+PiAgICAgWUFDQyAgICBzY3JpcHRzL2tj
-b25maWcvcGFyc2VyLnRhYi5bY2hdCj4+Pj4gICAgIEhPU1RDQyAgc2NyaXB0cy9rY29uZmlnL2xl
-eGVyLmxleC5vCj4+Pj4gICAgIEhPU1RDQyAgc2NyaXB0cy9rY29uZmlnL3BhcnNlci50YWIubwo+
-Pj4+ICAgICBIT1NUQ0MgIHNjcmlwdHMva2NvbmZpZy9wcmVwcm9jZXNzLm8KPj4+PiAgICAgSE9T
-VENDICBzY3JpcHRzL2tjb25maWcvc3ltYm9sLm8KPj4+PiAgICAgSE9TVENDICBzY3JpcHRzL2tj
-b25maWcvdXRpbC5vCj4+Pj4gICAgIEhPU1RMRCAgc2NyaXB0cy9rY29uZmlnL2NvbmYKPj4+PiAq
-KiogRGVmYXVsdCBjb25maWd1cmF0aW9uIGlzIGJhc2VkIG9uICd4ODZfNjRfZGVmY29uZmlnJwo+
-Pj4+ICMKPj4+PiAjIGNvbmZpZ3VyYXRpb24gd3JpdHRlbiB0byAuY29uZmlnCj4+Pj4gIwo+Pj4+
-Cj4+Pj4gJCBncmVwIFZIT1NUIC5jb25maWcKPj4+PiAjIENPTkZJR19WSE9TVCBpcyBub3Qgc2V0
-Cj4+Pj4KPj4+Pj4gSWYgeWVzLCB3aGF0J3MgeW91ciBidWlsZCBjb25maWcgbG9va3MgbGlrZT8K
-Pj4+Pj4KPj4+Pj4gVGhhbmtzCj4+PiBUaGlzIHdhcyB4ODYuIE5vdCBzdXJlIGlmIHRoYXQgZGlk
-IHdvcmsgYmVmb3JlLgo+Pj4gT24gczM5MCB0aGlzIGlzIGRlZmluaXRlbHkgYSByZWdyZXNzaW9u
-IGFzIHRoZSBkZWZjb25maWcgZmlsZXMKPj4+IGZvciBzMzkwIGRvIHNlbGVjdCBWSE9TVF9ORVQK
-Pj4+Cj4+PiBncmVwIFZIT1NUIGFyY2gvczM5MC9jb25maWdzLyoKPj4+IGFyY2gvczM5MC9jb25m
-aWdzL2RlYnVnX2RlZmNvbmZpZzpDT05GSUdfVkhPU1RfTkVUPW0KPj4+IGFyY2gvczM5MC9jb25m
-aWdzL2RlYnVnX2RlZmNvbmZpZzpDT05GSUdfVkhPU1RfVlNPQ0s9bQo+Pj4gYXJjaC9zMzkwL2Nv
-bmZpZ3MvZGVmY29uZmlnOkNPTkZJR19WSE9TVF9ORVQ9bQo+Pj4gYXJjaC9zMzkwL2NvbmZpZ3Mv
-ZGVmY29uZmlnOkNPTkZJR19WSE9TVF9WU09DSz1tCj4+Pgo+Pj4gYW5kIHRoaXMgd29ya2VkIHdp
-dGggNS42LCBidXQgZG9lcyBub3Qgd29yayB3aXRoIG5leHQuIEp1c3QgYWRkaW5nCj4+PiBDT05G
-SUdfVkhPU1Q9bSB0byB0aGUgZGVmY29uZmlnIHNvbHZlcyB0aGUgaXNzdWUsIHNvbWV0aGluZyBs
-aWtlCj4+Cj4+IFJpZ2h0LCBJIHRoaW5rIHdlIHByb2JhYmx5IG5lZWQKPj4KPj4gMSkgYWRkIENP
-TkZJR19WSE9TVD1tIHRvIGFsbCBkZWZjb25maWdzIHRoYXQgZW5hYmxlcwo+PiBDT05GSUdfVkhP
-U1RfTkVUL1ZTT0NLL1NDU0kuCj4+Cj4+IG9yCj4+Cj4+IDIpIGRvbid0IHVzZSBtZW51Y29uZmln
-IGZvciBDT05GSUdfVkhPU1QsIGxldCBORVQvU0NTSS9WRFBBIGp1c3Qgc2VsZWN0IGl0Lgo+Pgo+
-PiBUaGFua3MKPiBPSyBJIHRyaWVkIHRoaXM6Cj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aG9z
-dC9LY29uZmlnIGIvZHJpdmVycy92aG9zdC9LY29uZmlnCj4gaW5kZXggMjUyM2ExZDQyOTBhLi5h
-MzE0YjkwMGQ0NzkgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92aG9zdC9LY29uZmlnCj4gKysrIGIv
-ZHJpdmVycy92aG9zdC9LY29uZmlnCj4gQEAgLTE5LDExICsxOSwxMCBAQCBtZW51Y29uZmlnIFZI
-T1NUCj4gICAJICBUaGlzIG9wdGlvbiBpcyBzZWxlY3RlZCBieSBhbnkgZHJpdmVyIHdoaWNoIG5l
-ZWRzIHRvIGFjY2Vzcwo+ICAgCSAgdGhlIGNvcmUgb2Ygdmhvc3QuCj4gICAKPiAtaWYgVkhPU1QK
-PiAtCj4gICBjb25maWcgVkhPU1RfTkVUCj4gICAJdHJpc3RhdGUgIkhvc3Qga2VybmVsIGFjY2Vs
-ZXJhdG9yIGZvciB2aXJ0aW8gbmV0Igo+ICAgCWRlcGVuZHMgb24gTkVUICYmIEVWRU5URkQgJiYg
-KFRVTiB8fCAhVFVOKSAmJiAoVEFQIHx8ICFUQVApCj4gKwlzZWxlY3QgVkhPU1QKPiAgIAktLS1o
-ZWxwLS0tCj4gICAJICBUaGlzIGtlcm5lbCBtb2R1bGUgY2FuIGJlIGxvYWRlZCBpbiBob3N0IGtl
-cm5lbCB0byBhY2NlbGVyYXRlCj4gICAJICBndWVzdCBuZXR3b3JraW5nIHdpdGggdmlydGlvX25l
-dC4gTm90IHRvIGJlIGNvbmZ1c2VkIHdpdGggdmlydGlvX25ldAo+IEBAIC0zNSw2ICszNCw3IEBA
-IGNvbmZpZyBWSE9TVF9ORVQKPiAgIGNvbmZpZyBWSE9TVF9TQ1NJCj4gICAJdHJpc3RhdGUgIlZI
-T1NUX1NDU0kgVENNIGZhYnJpYyBkcml2ZXIiCj4gICAJZGVwZW5kcyBvbiBUQVJHRVRfQ09SRSAm
-JiBFVkVOVEZECj4gKwlzZWxlY3QgVkhPU1QKPiAgIAlkZWZhdWx0IG4KPiAgIAktLS1oZWxwLS0t
-Cj4gICAJU2F5IE0gaGVyZSB0byBlbmFibGUgdGhlIHZob3N0X3Njc2kgVENNIGZhYnJpYyBtb2R1
-bGUKPiBAQCAtNDQsNiArNDQsNyBAQCBjb25maWcgVkhPU1RfVlNPQ0sKPiAgIAl0cmlzdGF0ZSAi
-dmhvc3QgdmlydGlvLXZzb2NrIGRyaXZlciIKPiAgIAlkZXBlbmRzIG9uIFZTT0NLRVRTICYmIEVW
-RU5URkQKPiAgIAlzZWxlY3QgVklSVElPX1ZTT0NLRVRTX0NPTU1PTgo+ICsJc2VsZWN0IFZIT1NU
-Cj4gICAJZGVmYXVsdCBuCj4gICAJLS0taGVscC0tLQo+ICAgCVRoaXMga2VybmVsIG1vZHVsZSBj
-YW4gYmUgbG9hZGVkIGluIHRoZSBob3N0IGtlcm5lbCB0byBwcm92aWRlIEFGX1ZTT0NLCj4gQEAg
-LTU3LDYgKzU4LDcgQEAgY29uZmlnIFZIT1NUX1ZEUEEKPiAgIAl0cmlzdGF0ZSAiVmhvc3QgZHJp
-dmVyIGZvciB2RFBBLWJhc2VkIGJhY2tlbmQiCj4gICAJZGVwZW5kcyBvbiBFVkVOVEZECj4gICAJ
-c2VsZWN0IFZEUEEKPiArCXNlbGVjdCBWSE9TVAo+ICAgCWhlbHAKPiAgIAkgIFRoaXMga2VybmVs
-IG1vZHVsZSBjYW4gYmUgbG9hZGVkIGluIGhvc3Qga2VybmVsIHRvIGFjY2VsZXJhdGUKPiAgIAkg
-IGd1ZXN0IHZpcnRpbyBkZXZpY2VzIHdpdGggdGhlIHZEUEEtYmFzZWQgYmFja2VuZHMuCj4gQEAg
-LTc4LDUgKzgwLDMgQEAgY29uZmlnIFZIT1NUX0NST1NTX0VORElBTl9MRUdBQ1kKPiAgIAkgIGFk
-ZHMgc29tZSBvdmVyaGVhZCwgaXQgaXMgZGlzYWJsZWQgYnkgZGVmYXVsdC4KPiAgIAo+ICAgCSAg
-SWYgdW5zdXJlLCBzYXkgIk4iLgo+IC0KPiAtZW5kaWYKPgo+Cj4gQnV0IG5vdyBDT05GSUdfVkhP
-U1QgaXMgYWx3YXlzICJ5IiwgbmV2ZXIgIm0iLgo+IFdoaWNoIEkgdGhpbmsgd2lsbCBtYWtlIGl0
-IGEgYnVpbHQtaW4uCj4gRGlkbid0IGZpZ3VyZSBvdXQgd2h5IHlldC4KCgpJcyBpdCBiZWNhdXNl
-IHRoZSBkZXBlbmRlbmN5IG9mIEVWRU5URkQgZm9yIENPTkZJR19WSE9TVD8KClJlbW92ZSB0aGF0
-IG9uZSBmb3IgdGhpcyBwYXRjaCwgSSBjYW4gZ2V0IENPTkZJR19WSE9TVD1tLgoKQnV0IGFjY29y
-ZGluZyB0byBkb2N1bWVudGF0aW9uL2tidWlsZC9rY29uZmlnLnJzdCwgc2VsZWN0IGlzIHVzZWQg
-Zm9yIApvcHRpb24gd2l0aG91dCBwcm9tcHQuCgpUaGFua3MKCgo+CgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxp
-c3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0
-cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Wed, Apr 01, 2020 at 02:00:13PM +0100, Robin Murphy wrote:
+> On 2020-04-01 12:38 pm, Bharat Bhushan wrote:
+> > Different endpoint can support different page size, probe
+> > endpoint if it supports specific page size otherwise use
+> > global page sizes.
+> > 
+> > Signed-off-by: Bharat Bhushan <bbhushan2@marvell.com>
+> > ---
+> >   drivers/iommu/virtio-iommu.c      | 33 +++++++++++++++++++++++++++----
+> >   include/uapi/linux/virtio_iommu.h |  7 +++++++
+> >   2 files changed, 36 insertions(+), 4 deletions(-)
+> > 
+> > diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
+> > index cce329d71fba..c794cb5b7b3e 100644
+> > --- a/drivers/iommu/virtio-iommu.c
+> > +++ b/drivers/iommu/virtio-iommu.c
+> > @@ -78,6 +78,7 @@ struct viommu_endpoint {
+> >   	struct viommu_dev		*viommu;
+> >   	struct viommu_domain		*vdomain;
+> >   	struct list_head		resv_regions;
+> > +	u64				pgsize_bitmap;
+> >   };
+> >   struct viommu_request {
+> > @@ -415,6 +416,20 @@ static int viommu_replay_mappings(struct viommu_domain *vdomain)
+> >   	return ret;
+> >   }
+> > +static int viommu_set_pgsize_bitmap(struct viommu_endpoint *vdev,
+> > +				    struct virtio_iommu_probe_pgsize_mask *mask,
+> > +				    size_t len)
+> > +
+> > +{
+> > +	u64 pgsize_bitmap = le64_to_cpu(mask->pgsize_bitmap);
+> > +
+> > +	if (len < sizeof(*mask))
+> > +		return -EINVAL;
+> > +
+> > +	vdev->pgsize_bitmap = pgsize_bitmap;
+> > +	return 0;
+> > +}
+> > +
+> >   static int viommu_add_resv_mem(struct viommu_endpoint *vdev,
+> >   			       struct virtio_iommu_probe_resv_mem *mem,
+> >   			       size_t len)
+> > @@ -494,11 +509,13 @@ static int viommu_probe_endpoint(struct viommu_dev *viommu, struct device *dev)
+> >   	while (type != VIRTIO_IOMMU_PROBE_T_NONE &&
+> >   	       cur < viommu->probe_size) {
+> >   		len = le16_to_cpu(prop->length) + sizeof(*prop);
+> > -
+
+Whitespace change
+
+> >   		switch (type) {
+> >   		case VIRTIO_IOMMU_PROBE_T_RESV_MEM:
+> >   			ret = viommu_add_resv_mem(vdev, (void *)prop, len);
+> >   			break;
+> > +		case VIRTIO_IOMMU_PROBE_T_PAGE_SIZE_MASK:
+> > +			ret = viommu_set_pgsize_bitmap(vdev, (void *)prop, len);
+> > +			break;
+> >   		default:
+> >   			dev_err(dev, "unknown viommu prop 0x%x\n", type);
+> >   		}
+> > @@ -607,16 +624,23 @@ static struct iommu_domain *viommu_domain_alloc(unsigned type)
+> >   	return &vdomain->domain;
+> >   }
+> > -static int viommu_domain_finalise(struct viommu_dev *viommu,
+> > +static int viommu_domain_finalise(struct viommu_endpoint *vdev,
+> >   				  struct iommu_domain *domain)
+> >   {
+> >   	int ret;
+> >   	struct viommu_domain *vdomain = to_viommu_domain(domain);
+> > +	struct viommu_dev *viommu = vdev->viommu;
+> >   	vdomain->viommu		= viommu;
+> >   	vdomain->map_flags	= viommu->map_flags;
+> > -	domain->pgsize_bitmap	= viommu->pgsize_bitmap;
+> > +	/* Devices in same domain must support same size pages */
+> 
+> AFAICS what the code appears to do is enforce that the first endpoint
+> attached to any domain has the same pgsize_bitmap as the most recently
+> probed viommu_dev instance, then ignore any subsequent endpoints attached to
+> the same domain. Thus I'm not sure that comment is accurate.
+> 
+
+Yes viommu_domain_finalise() is only called once. What I had in mind is
+something like:
+
+---- 8< ----
+diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
+index 750f69c49b95..8303b7b513ff 100644
+--- a/drivers/iommu/virtio-iommu.c
++++ b/drivers/iommu/virtio-iommu.c
+@@ -639,6 +639,29 @@ static int viommu_domain_finalise(struct viommu_endpoint *vdev,
+ 	return 0;
+ }
+ 
++/*
++ * Check whether the endpoint's capabilities are compatible with other endpoints
++ * in the domain. Report any inconsistency.
++ */
++static bool viommu_endpoint_is_compatible(struct viommu_endpoint *vdev,
++					  struct viommu_domain *vdomain)
++{
++	struct device *dev = vdev->dev;
++
++	if (vdomain->viommu != vdev->viommu) {
++		dev_err(dev, "cannot attach to foreign vIOMMU\n");
++		return false;
++	}
++
++	if (vdomain->domain.pgsize_bitmap != vdev->pgsize_bitmap) {
++		dev_err(dev, "incompatible domain bitmap 0x%lx != 0x%lx\n",
++			vdomain->domain.pgsize_bitmap, vdev->pgsize_bitmap);
++		return false;
++	}
++
++	return true;
++}
++
+ static void viommu_domain_free(struct iommu_domain *domain)
+ {
+ 	struct viommu_domain *vdomain = to_viommu_domain(domain);
+@@ -670,9 +693,8 @@ static int viommu_attach_dev(struct iommu_domain *domain, struct device *dev)
+ 		 * owns it.
+ 		 */
+ 		ret = viommu_domain_finalise(vdev, domain);
+-	} else if (vdomain->viommu != vdev->viommu) {
+-		dev_err(dev, "cannot attach to foreign vIOMMU\n");
+-		ret = -EXDEV;
++	} else if (!viommu_endpoint_is_compatible(vdev, vdomain)) {
++		ret = -EINVAL;
+ 	}
+ 	mutex_unlock(&vdomain->mutex);
+---- >8 ----
+
+> 
+> > +	if ((domain->pgsize_bitmap != viommu->pgsize_bitmap) &&
+> > +	    (domain->pgsize_bitmap != vdev->pgsize_bitmap))
+> > +		return -EINVAL;
+> > +
+> > +	domain->pgsize_bitmap = vdev->pgsize_bitmap;
+> > +
+> >   	domain->geometry	= viommu->geometry;
+> >   	ret = ida_alloc_range(&viommu->domain_ids, viommu->first_domain,
+> > @@ -657,7 +681,7 @@ static int viommu_attach_dev(struct iommu_domain *domain, struct device *dev)
+> >   		 * Properly initialize the domain now that we know which viommu
+> >   		 * owns it.
+> >   		 */
+> > -		ret = viommu_domain_finalise(vdev->viommu, domain);
+> > +		ret = viommu_domain_finalise(vdev, domain);
+> >   	} else if (vdomain->viommu != vdev->viommu) {
+> >   		dev_err(dev, "cannot attach to foreign vIOMMU\n");
+> >   		ret = -EXDEV;
+> > @@ -875,6 +899,7 @@ static int viommu_add_device(struct device *dev)
+> >   	vdev->dev = dev;
+> >   	vdev->viommu = viommu;
+> > +	vdev->pgsize_bitmap = viommu->pgsize_bitmap;
+> >   	INIT_LIST_HEAD(&vdev->resv_regions);
+> >   	fwspec->iommu_priv = vdev;
+> > diff --git a/include/uapi/linux/virtio_iommu.h b/include/uapi/linux/virtio_iommu.h
+> > index 237e36a280cb..dc9d3f40bcd8 100644
+> > --- a/include/uapi/linux/virtio_iommu.h
+> > +++ b/include/uapi/linux/virtio_iommu.h
+> > @@ -111,6 +111,7 @@ struct virtio_iommu_req_unmap {
+> >   #define VIRTIO_IOMMU_PROBE_T_NONE		0
+> >   #define VIRTIO_IOMMU_PROBE_T_RESV_MEM		1
+> > +#define VIRTIO_IOMMU_PROBE_T_PAGE_SIZE_MASK	2
+> >   #define VIRTIO_IOMMU_PROBE_T_MASK		0xfff
+> > @@ -119,6 +120,12 @@ struct virtio_iommu_probe_property {
+> >   	__le16					length;
+> >   };
+> > +struct virtio_iommu_probe_pgsize_mask {
+> > +	struct virtio_iommu_probe_property	head;
+> > +	__u8					reserved[4];
+> > +	__u64					pgsize_bitmap;
+
+Should be __le64
+
+Thanks,
+Jean
+
+> > +};
+> > +
+> >   #define VIRTIO_IOMMU_RESV_MEM_T_RESERVED	0
+> >   #define VIRTIO_IOMMU_RESV_MEM_T_MSI		1
+> > 
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
