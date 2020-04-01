@@ -1,77 +1,154 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id F163919B493
-	for <lists.virtualization@lfdr.de>; Wed,  1 Apr 2020 19:13:22 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F91019B5DC
+	for <lists.virtualization@lfdr.de>; Wed,  1 Apr 2020 20:44:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 7F72D24BE6;
-	Wed,  1 Apr 2020 17:13:20 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 27C8D85B3D;
+	Wed,  1 Apr 2020 18:44:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zSgw4nwR3e7U; Wed,  1 Apr 2020 17:13:17 +0000 (UTC)
+	with ESMTP id z0jpb0NJq_HP; Wed,  1 Apr 2020 18:44:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 57F41231F2;
-	Wed,  1 Apr 2020 17:13:17 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B2E46859D9;
+	Wed,  1 Apr 2020 18:44:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2C019C089F;
-	Wed,  1 Apr 2020 17:13:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9A07EC089F;
+	Wed,  1 Apr 2020 18:44:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9EB1EC089F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 99E8FC089F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 17:13:15 +0000 (UTC)
+ Wed,  1 Apr 2020 18:44:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8C79288611
+ by hemlock.osuosl.org (Postfix) with ESMTP id 93A7B88699
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 17:13:15 +0000 (UTC)
+ Wed,  1 Apr 2020 18:44:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VPpZ+NbSob0y
+ with ESMTP id F0Lp-GWJ0onX
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 17:13:14 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [198.137.202.133])
- by hemlock.osuosl.org (Postfix) with ESMTPS id C40B388551
+ Wed,  1 Apr 2020 18:44:12 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id DFB43882AD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Apr 2020 17:13:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
- Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
- Subject:Sender:Reply-To:Content-ID:Content-Description;
- bh=wdgTSKNxkD1QrwAjRgDdie5nQ4gbwZFe8HVIvvfYi0s=; b=KJntRMJ8Qks9UoOE0UgBNQ4Dyr
- oTcjRKMZ6Jf3Gk/IJlNgmVLKtTXcnPwXUsOSjEOz5uphzyUiBLQJo5o7PNsl5LrPcwVNnSiAKVvsb
- EyuIe9gLPIJpM69FvjZNpfYVsJZoOmOs+Ik5+N0tX3FfjD3I1dSBXGZWHv9ASkPKrJValKJth9X0/
- 6qWTivVQG1Q4mPA/b4MTBvIzD3/W8/Z5t1IHR66LpXrQnSzPUGwU9UDR5BWrWiQvR8AWjNiN+T4wg
- qrl22e1u2+csSEP8rhDaM5Xz9aNdmcjZXcpO4P4n77fobZ+0b07wCIh/WYLt/XTgeqmcKmYcvVp2R
- +8bmJBbA==;
-Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
- by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jJgvR-0000rx-7y; Wed, 01 Apr 2020 17:13:13 +0000
-Subject: Re: mmotm 2020-03-30-18-46 uploaded (VDPA + vhost)
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20200331014748.ajL0G62jF%akpm@linux-foundation.org>
- <969cacf1-d420-223d-7cc7-5b1b2405ec2a@infradead.org>
- <20200331143437-mutt-send-email-mst@kernel.org>
- <9c03fee8-af1a-2035-b903-611a631094b0@infradead.org>
- <20200331152106-mutt-send-email-mst@kernel.org>
-From: Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <cd94bd62-57c4-b82e-0434-8a470a9ea613@infradead.org>
-Date: Wed, 1 Apr 2020 10:13:10 -0700
+ Wed,  1 Apr 2020 18:44:11 +0000 (UTC)
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 031IYF3X029626
+ for <virtualization@lists.linux-foundation.org>; Wed, 1 Apr 2020 14:44:10 -0400
+Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 304wngvtet-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 01 Apr 2020 14:44:10 -0400
+Received: from localhost
+ by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <virtualization@lists.linux-foundation.org> from <borntraeger@de.ibm.com>; 
+ Wed, 1 Apr 2020 19:43:53 +0100
+Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
+ by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Wed, 1 Apr 2020 19:43:48 +0100
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
+ [9.149.105.58])
+ by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 031Ii2Gb44105962
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 1 Apr 2020 18:44:02 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 8491B4C040;
+ Wed,  1 Apr 2020 18:44:02 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 105F84C044;
+ Wed,  1 Apr 2020 18:44:02 +0000 (GMT)
+Received: from oc7455500831.ibm.com (unknown [9.145.71.143])
+ by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Wed,  1 Apr 2020 18:44:01 +0000 (GMT)
+Subject: Re: [PATCH v3 0/8] vhost: Reset batched descriptors on SET_VRING_BASE
+ call
+To: Eugenio Perez Martin <eperezma@redhat.com>
+References: <20200331192804.6019-1-eperezma@redhat.com>
+ <c4d2b0b4-0b6d-cd74-0eb5-e7fdfe063d42@de.ibm.com>
+ <CAJaqyWc+fNzHE_p-pApZtj2ypNQfFLawCWf8GJmP8e=k=C+EgA@mail.gmail.com>
+From: Christian Borntraeger <borntraeger@de.ibm.com>
+Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
+ 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
+ nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
+Date: Wed, 1 Apr 2020 20:44:01 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200331152106-mutt-send-email-mst@kernel.org>
+In-Reply-To: <CAJaqyWc+fNzHE_p-pApZtj2ypNQfFLawCWf8GJmP8e=k=C+EgA@mail.gmail.com>
 Content-Language: en-US
-Cc: sfr@canb.auug.org.au, mm-commits@vger.kernel.org,
- Masahiro Yamada <yamada.masahiro@socionext.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, mhocko@suse.cz, linux-mm@kvack.org,
- broonie@kernel.org, linux-next@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- akpm@linux-foundation.org
+X-TM-AS-GCONF: 00
+x-cbid: 20040118-0016-0000-0000-000002FC7C04
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20040118-0017-0000-0000-000033604223
+Message-Id: <916e60f8-45fe-5cc1-d5a1-defdcd00d75b@de.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
+ definitions=2020-04-01_04:2020-03-31,
+ 2020-04-01 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=2
+ mlxlogscore=999 impostorscore=0 adultscore=0 lowpriorityscore=0
+ phishscore=0 bulkscore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ mlxscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2003020000 definitions=main-2004010150
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,85 +160,37 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 3/31/20 12:22 PM, Michael S. Tsirkin wrote:
-> On Tue, Mar 31, 2020 at 11:42:47AM -0700, Randy Dunlap wrote:
->> On 3/31/20 11:37 AM, Michael S. Tsirkin wrote:
->>> On Tue, Mar 31, 2020 at 11:27:54AM -0700, Randy Dunlap wrote:
->>>> On 3/30/20 6:47 PM, akpm@linux-foundation.org wrote:
->>>>> The mm-of-the-moment snapshot 2020-03-30-18-46 has been uploaded to
->>>>>
->>>>>    http://www.ozlabs.org/~akpm/mmotm/
->>>>>
->>>>> mmotm-readme.txt says
->>>>>
->>>>> README for mm-of-the-moment:
->>>>>
->>>>> http://www.ozlabs.org/~akpm/mmotm/
->>>>>
->>>>> This is a snapshot of my -mm patch queue.  Uploaded at random hopefully
->>>>> more than once a week.
->>>>>
->>>>> You will need quilt to apply these patches to the latest Linus release (5.x
->>>>> or 5.x-rcY).  The series file is in broken-out.tar.gz and is duplicated in
->>>>> http://ozlabs.org/~akpm/mmotm/series
->>>>>
->>>>> The file broken-out.tar.gz contains two datestamp files: .DATE and
->>>>> .DATE-yyyy-mm-dd-hh-mm-ss.  Both contain the string yyyy-mm-dd-hh-mm-ss,
->>>>> followed by the base kernel version against which this patch series is to
->>>>> be applied.
->>>>>
->>>>> This tree is partially included in linux-next.  To see which patches are
->>>>> included in linux-next, consult the `series' file.  Only the patches
->>>>> within the #NEXT_PATCHES_START/#NEXT_PATCHES_END markers are included in
->>>>> linux-next.
->>>>>
->>>>>
->>>>> A full copy of the full kernel tree with the linux-next and mmotm patches
->>>>> already applied is available through git within an hour of the mmotm
->>>>> release.  Individual mmotm releases are tagged.  The master branch always
->>>>> points to the latest release, so it's constantly rebasing.
->>>>>
->>>>> 	https://github.com/hnaz/linux-mm
->>>>
->>>> on i386:
->>>>
->>>> ld: drivers/vhost/vdpa.o: in function `vhost_vdpa_init':
->>>> vdpa.c:(.init.text+0x52): undefined reference to `__vdpa_register_driver'
->>>> ld: drivers/vhost/vdpa.o: in function `vhost_vdpa_exit':
->>>> vdpa.c:(.exit.text+0x14): undefined reference to `vdpa_unregister_driver'
->>>>
->>>>
->>>>
->>>> drivers/virtio/vdpa/ is not being built. (confusing!)
->>>>
->>>> CONFIG_VIRTIO=m
->>>> # CONFIG_VIRTIO_MENU is not set
->>>> CONFIG_VDPA=y
->>>
->>> Hmm. OK. Can't figure it out. CONFIG_VDPA is set why isn't
->>> drivers/virtio/vdpa/ built?
->>> we have:
->>>
->>
->> Ack.  Hopefully Yamada-san can tell us what is happening here.
-> 
-> OK I pushed a fix (moving the vdpa subsystem up a level) and pushed into
-> my tree, refs/heads/next .  Seems to build fine now, but I'd appreciate
-> it if you can give it a spin.
-
-This now builds successfully on linux-next of 20200401.
-
-Thanks.
-
--- 
-~Randy
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+CgpPbiAwMS4wNC4yMCAyMDo0MCwgRXVnZW5pbyBQZXJleiBNYXJ0aW4gd3JvdGU6Cj4gT24gV2Vk
+LCBBcHIgMSwgMjAyMCBhdCA5OjE5IEFNIENocmlzdGlhbiBCb3JudHJhZWdlcgo+IDxib3JudHJh
+ZWdlckBkZS5pYm0uY29tPiB3cm90ZToKPj4KPj4gT24gMzEuMDMuMjAgMjE6MjcsIEV1Z2VuaW8g
+UMOpcmV6IHdyb3RlOgo+Pj4gVmhvc3QgZGlkIG5vdCByZXNldCBwcm9wZXJseSB0aGUgYmF0Y2hl
+ZCBkZXNjcmlwdG9ycyBvbiBTRVRfVlJJTkdfQkFTRQo+Pj4gZXZlbnQuIEJlY2F1c2Ugb2YgdGhh
+dCwgaXMgcG9zc2libGUgdG8gcmV0dXJuIGFuIGludmFsaWQgZGVzY3JpcHRvciB0bwo+Pj4gdGhl
+IGd1ZXN0Lgo+Pj4KPj4+IFRoaXMgc2VyaWVzIGFtbWVuZCB0aGlzLCByZXNldHRpbmcgdGhlbSBl
+dmVyeSB0aW1lIGJhY2tlbmQgY2hhbmdlcywgYW5kCj4+PiBjcmVhdGVzIGEgdGVzdCB0byBhc3Nl
+cnQgY29ycmVjdCBiZWhhdmlvci4gVG8gZG8gdGhhdCwgdGhleSBuZWVkIHRvCj4+PiBleHBvc2Ug
+YSBuZXcgZnVuY3Rpb24gaW4gdmlydGlvX3JpbmcsIHZpcnRxdWV1ZV9yZXNldF9mcmVlX2hlYWQs
+IG9ubHkKPj4+IG9uIHRlc3QgY29kZS4KPj4+Cj4+PiBBbm90aGVyIHVzZWZ1bCB0aGluZyB3b3Vs
+ZCBiZSB0byBjaGVjayBpZiBtdXRleCBpcyBwcm9wZXJseSBnZXQgaW4KPj4+IHZxIHByaXZhdGVf
+ZGF0YSBhY2Nlc3NvcnMuIE5vdCBzdXJlIGlmIG11dGV4IGRlYnVnIGNvZGUgYWxsb3cgdGhhdCwK
+Pj4+IHNpbWlsYXIgdG8gQysrIHVuaXF1ZSBsb2NrOjpvd25zX2xvY2suIE5vdCBhY3F1aXJpbmcg
+aW4gdGhlIGZ1bmN0aW9uCj4+PiBiZWNhdXNlIGNhbGxlciBjb2RlIGhvbGRzIHRoZSBtdXRleCBp
+biBvcmRlciB0byBwZXJmb3JtIG1vcmUgYWN0aW9ucy4KPj4KPj4KPj4KPj4+Cj4+PiB2MzoKPj4+
+ICogUmVuYW1lIGFjY2Vzb3JzIGZ1bmN0aW9ucy4KPj4+ICogTWFrZSBzY3NpIGFuZCB0ZXN0IHVz
+ZSB0aGUgYWNjZXNvcnMgdG9vLgo+Pj4KPj4+IHYyOgo+Pj4gKiBTcXVhc2hlZCBjb21taXRzLgo+
+Pj4gKiBDcmVhdGUgdnEgcHJpdmF0ZV9kYXRhIGFjY2Vzb3JzIChtc3QpLgo+Pj4KPj4+IFRoaXMg
+aXMgbWVhbnQgdG8gYmUgYXBwbGllZCBvbiB0b3Agb2YKPj4+IGM0ZjFjNDFhNjA5NDU4MjkwM2M3
+NWMwZGNmYWNiNDUzYzk1OWQ0NTcgaW4KPj4+IGdpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgv
+a2VybmVsL2dpdC9tc3Qvdmhvc3QuZ2l0Lgo+Pgo+Pgo+PiBBIHF1aWNrIHRlc3Qgb24gczM5MCBs
+b29rcyBnb29kLgo+Pgo+IAo+IFJlYWxseSBnb29kIHRvIGtub3cgOikuCj4gCj4gV291bGQgaXQg
+YmUgcG9zc2libGUgdG8gaW52ZXN0aWdhdGUgd2hlbiBxZW11IGxhdW5jaGVzIHRoZSBvZmZlbmRp
+bmcgaW9jdGxzPwoKRHVyaW5nIGd1ZXN0IHJlYm9vdC4gVGhpcyBpcyBvYnZpb3VzLCBubz8KCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0
+aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9y
+ZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0
+dWFsaXphdGlvbg==
