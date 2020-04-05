@@ -1,96 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EC9C19E9D7
-	for <lists.virtualization@lfdr.de>; Sun,  5 Apr 2020 10:14:12 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08ADF19EA49
+	for <lists.virtualization@lfdr.de>; Sun,  5 Apr 2020 12:04:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 00C1A87606;
-	Sun,  5 Apr 2020 08:14:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 75CE786ECC;
+	Sun,  5 Apr 2020 10:04:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HvlQm8POMOD6; Sun,  5 Apr 2020 08:14:10 +0000 (UTC)
+	with ESMTP id rh30Cv5yLJiQ; Sun,  5 Apr 2020 10:04:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id ED078875DC;
-	Sun,  5 Apr 2020 08:14:09 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C6D9786E1A;
+	Sun,  5 Apr 2020 10:04:29 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C0C2AC0177;
-	Sun,  5 Apr 2020 08:14:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 95C2AC0177;
+	Sun,  5 Apr 2020 10:04:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4A56FC0177
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 63377C0177
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Apr 2020 08:14:08 +0000 (UTC)
+ Sun,  5 Apr 2020 10:04:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 3F7E98593F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4CBED840E4
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Apr 2020 08:14:08 +0000 (UTC)
+ Sun,  5 Apr 2020 10:04:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3U9taducHGlQ
+ with ESMTP id lMuCWufkAeYY
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Apr 2020 08:14:07 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 9C50185531
+ Sun,  5 Apr 2020 10:04:24 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from smtp.domeneshop.no (smtp.domeneshop.no [194.63.252.55])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 62D1484083
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Apr 2020 08:14:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586074446;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=ouQfW90npHD033GMDM+a2FinSD7SQ9pCB41aFB2pv8M=;
- b=TF4MhJ8ilZ3z80sTnRyU8vqcXjxl5/ufWgK9Q9ebcq65MmGWE/zHOGqO81+0J9+uBQWPuw
- SmQsFhEBY0DjroWq0UQWiXhVch+tIZVeMlkAZqmS/gFJ74AsalcKVHQSzmeqUcYAYOx66g
- NKB7KBrTumYAJIPGUaJdvSl5UoeoOT4=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-10--gS3on7jNRulJe-9xylklw-1; Sun, 05 Apr 2020 04:14:04 -0400
-X-MC-Unique: -gS3on7jNRulJe-9xylklw-1
-Received: by mail-wr1-f70.google.com with SMTP id t25so6114233wrb.16
- for <virtualization@lists.linux-foundation.org>;
- Sun, 05 Apr 2020 01:14:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=ouQfW90npHD033GMDM+a2FinSD7SQ9pCB41aFB2pv8M=;
- b=HnVZafmS8+PxpQEyTcQWpQyYDUq93gytG36VGKbA+i9CEq5JeGkMIDUgs3vGt/Aeiu
- PRiUSdJw0UYQW5JoOwGcclmlvF/FbDwej6zO4yfvbhUFKZBQVb9jQy0JxDygXzLPSIgr
- gSu+i3HaDWVk7p5iLomYjQBQkH4ZFqVx164pCBiTGMhno0AXx47PzSImXGrB9ap5mERE
- LsA/3zQ9zjdgZMHsBYSK/lS2FEJaVXdrZYI0I90SVVmgZ5CixKnzlzNkWyepWmsMGa+Y
- 0F9NEXU37UF8gSYPGD4rrlnV1SgKrrVqGbx9UfyyIQ6qUuFbKjqF9YHV9V7bKVPUuwkO
- S1zQ==
-X-Gm-Message-State: AGi0PubIThOOZljAS3IsoE5UQErXgchguiEIVb5jaZKpmlmL5TfjAhnb
- UOu0PSdI0XE/fDc2mq3a3F492LUDEAvg0daevITh9VHxeDPhpKzu51gh46/Tax2xqUJBKg8Ciwk
- ej2POQvk7WRH/N5dqV7up9xmMOPoni7Rx89qs+a/UQQ==
-X-Received: by 2002:a1c:96cf:: with SMTP id
- y198mr16757527wmd.186.1586074443074; 
- Sun, 05 Apr 2020 01:14:03 -0700 (PDT)
-X-Google-Smtp-Source: APiQypLsqstklH0xgI1XJZTMg34Svue6TUFMK2IJ5TbkAsLUDmWLphQPBmK7xc/ECUJgj3fwvYDLwg==
-X-Received: by 2002:a1c:96cf:: with SMTP id
- y198mr16757512wmd.186.1586074442920; 
- Sun, 05 Apr 2020 01:14:02 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id h188sm5491054wme.8.2020.04.05.01.14.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Apr 2020 01:14:02 -0700 (PDT)
-Date: Sun, 5 Apr 2020 04:14:00 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH] vdpa-sim: depend on HAS_DMA
-Message-ID: <20200405081355.2870-1-mst@redhat.com>
+ Sun,  5 Apr 2020 10:04:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds201912;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=kXqVETQ6HwlMNbJP1LUZRWtmQa7bX8KUkbe47d74A0Q=; b=JkphJILBFUVALzvUll6axi2Tqj
+ 8jggX7ro7l2vU02glyiXHvuVIZ0uErz8nh/kVgFnto4xAsKHt51GqQKWnl5o5MJoRq3XdhiXuMOpv
+ u4Moc62HPFuKcGfT/LV3Y9ccaKrNMjU0JuHddU7UbYzcn2HnQ/QzC5T9UCPtvl5oQv1zRpUa1lcko
+ SKzAZfmiKaiTxS/g8BHq097Pdfyv3oYSVyLe/yoP6m/z0L4GbwbZE8OCF9mMpw7R+PUC5hwSpJBrO
+ AjJbwdLoeB+qrPR3wvE5xhZU+RVZA97Y555mMiGIDpKVU7Zkjqc8AxbGxzU7b3zlybqfHddE6yWTE
+ VLKqrEWg==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:51680
+ helo=[192.168.10.61])
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1jL28b-0003Qt-IA; Sun, 05 Apr 2020 12:04:21 +0200
+Subject: Re: [PATCH 39/44] drm/cirrus: Use devm_drm_dev_alloc
+To: Daniel Vetter <daniel.vetter@ffwll.ch>,
+ DRI Development <dri-devel@lists.freedesktop.org>
+References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
+ <20200403135828.2542770-40-daniel.vetter@ffwll.ch>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Message-ID: <1386c02d-8e55-d278-19b4-825290e148cc@tronnes.org>
+Date: Sun, 5 Apr 2020 12:04:17 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-X-Mailer: git-send-email 2.24.1.751.gd10ce2899c
-X-Mutt-Fcc: =sent
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org
+In-Reply-To: <20200403135828.2542770-40-daniel.vetter@ffwll.ch>
+Cc: Rob Herring <robh@kernel.org>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, Dave Airlie <airlied@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, Sam Ravnborg <sam@ravnborg.org>,
+ Emil Velikov <emil.velikov@collabora.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,45 +85,22 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-set_dma_ops isn't available on all architectures:
-
-        make ARCH=um
-...
-
-   drivers/vdpa/vdpa_sim/vdpa_sim.c: In function 'vdpasim_create':
->> drivers/vdpa/vdpa_sim/vdpa_sim.c:324:2: error: implicit declaration of function 'set_dma_ops'; did you mean 'set_groups'?
-+[-Werror=implicit-function-declaration]
-     set_dma_ops(dev, &vdpasim_dma_ops);
-     ^~~~~~~~~~~
-     set_groups
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- drivers/vdpa/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
-index 08b615f2da39..d0cb0e583a5d 100644
---- a/drivers/vdpa/Kconfig
-+++ b/drivers/vdpa/Kconfig
-@@ -14,7 +14,7 @@ if VDPA_MENU
- 
- config VDPA_SIM
- 	tristate "vDPA device simulator"
--	depends on RUNTIME_TESTING_MENU
-+	depends on RUNTIME_TESTING_MENU && HAS_DMA
- 	select VDPA
- 	select VHOST_RING
- 	select VHOST_IOTLB
--- 
-MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+CgpEZW4gMDMuMDQuMjAyMCAxNS41OCwgc2tyZXYgRGFuaWVsIFZldHRlcjoKPiBBbHJlYWR5IHVz
+aW5nIGRldm1fZHJtX2Rldl9pbml0LCBzbyB2ZXJ5IHNpbXBsZSByZXBsYWNtZW50Lgo+IAo+IFNp
+Z25lZC1vZmYtYnk6IERhbmllbCBWZXR0ZXIgPGRhbmllbC52ZXR0ZXJAaW50ZWwuY29tPgo+IENj
+OiBEYXZlIEFpcmxpZSA8YWlybGllZEByZWRoYXQuY29tPgo+IENjOiBHZXJkIEhvZmZtYW5uIDxr
+cmF4ZWxAcmVkaGF0LmNvbT4KPiBDYzogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBmZnds
+bC5jaD4KPiBDYzogU2FtIFJhdm5ib3JnIDxzYW1AcmF2bmJvcmcub3JnPgo+IENjOiAiTm9yYWxm
+IFRyw7hubmVzIiA8bm9yYWxmQHRyb25uZXMub3JnPgo+IENjOiBSb2IgSGVycmluZyA8cm9iaEBr
+ZXJuZWwub3JnPgo+IENjOiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4K
+PiBDYzogdmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKPiBDYzogRW1p
+bCBWZWxpa292IDxlbWlsLnZlbGlrb3ZAY29sbGFib3JhLmNvbT4KPiAtLS0KCkFja2VkLWJ5OiBO
+b3JhbGYgVHLDuG5uZXMgPG5vcmFsZkB0cm9ubmVzLm9yZz4KX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZp
+cnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGlu
+dXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
