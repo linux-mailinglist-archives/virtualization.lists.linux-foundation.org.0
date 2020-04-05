@@ -2,103 +2,95 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1753C19E46E
-	for <lists.virtualization@lfdr.de>; Sat,  4 Apr 2020 12:14:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EC9C19E9D7
+	for <lists.virtualization@lfdr.de>; Sun,  5 Apr 2020 10:14:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C0FF387A9D;
-	Sat,  4 Apr 2020 10:14:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 00C1A87606;
+	Sun,  5 Apr 2020 08:14:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FS1M9Q8RMf+4; Sat,  4 Apr 2020 10:14:22 +0000 (UTC)
+	with ESMTP id HvlQm8POMOD6; Sun,  5 Apr 2020 08:14:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 221CA87A24;
-	Sat,  4 Apr 2020 10:14:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id ED078875DC;
+	Sun,  5 Apr 2020 08:14:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0DF43C07FF;
-	Sat,  4 Apr 2020 10:14:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C0C2AC0177;
+	Sun,  5 Apr 2020 08:14:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EC039C07FF
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4A56FC0177
  for <virtualization@lists.linux-foundation.org>;
- Sat,  4 Apr 2020 10:14:20 +0000 (UTC)
+ Sun,  5 Apr 2020 08:14:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id CF12820354
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 3F7E98593F
  for <virtualization@lists.linux-foundation.org>;
- Sat,  4 Apr 2020 10:14:20 +0000 (UTC)
+ Sun,  5 Apr 2020 08:14:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8FvxhuxQT6ZY
+ with ESMTP id 3U9taducHGlQ
  for <virtualization@lists.linux-foundation.org>;
- Sat,  4 Apr 2020 10:14:20 +0000 (UTC)
-X-Greylist: delayed 00:08:20 by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
- [209.85.208.65])
- by silver.osuosl.org (Postfix) with ESMTPS id BD3B920343
+ Sun,  5 Apr 2020 08:14:07 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 9C50185531
  for <virtualization@lists.linux-foundation.org>;
- Sat,  4 Apr 2020 10:14:19 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id i16so12368024edy.11
+ Sun,  5 Apr 2020 08:14:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1586074446;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=ouQfW90npHD033GMDM+a2FinSD7SQ9pCB41aFB2pv8M=;
+ b=TF4MhJ8ilZ3z80sTnRyU8vqcXjxl5/ufWgK9Q9ebcq65MmGWE/zHOGqO81+0J9+uBQWPuw
+ SmQsFhEBY0DjroWq0UQWiXhVch+tIZVeMlkAZqmS/gFJ74AsalcKVHQSzmeqUcYAYOx66g
+ NKB7KBrTumYAJIPGUaJdvSl5UoeoOT4=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-10--gS3on7jNRulJe-9xylklw-1; Sun, 05 Apr 2020 04:14:04 -0400
+X-MC-Unique: -gS3on7jNRulJe-9xylklw-1
+Received: by mail-wr1-f70.google.com with SMTP id t25so6114233wrb.16
  for <virtualization@lists.linux-foundation.org>;
- Sat, 04 Apr 2020 03:14:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cogentembedded-com.20150623.gappssmtp.com; s=20150623;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=f5WeYVcExZ58viobGo5xENBYY/7iA5WtiHNaBP74Ohk=;
- b=aTi0ATN9MaY24407laRnBef6LfGPpOgdRBwSwCQz2c3RW4Gj/WkUSmsjFupt1+Si1I
- /jw0cOt3bzoZ1L8XI8Cd7xl4uND//yB9GJHWzUv8WZWdrs2vMEb5P/6AngfEuXPZiSGf
- XPfLEX+uHTRcYFmBj3aEbcKNRHtdDgUwBBnViuTIu3RWq8uVF0MXaSq7dRYUFOEfUxag
- Me75vpJfK3iUGksokG2xHslbFjKJVBBYOFEjoY7PYPAXlsjqaldQ3YKyfSNa7FMzpHkn
- t+K46duTvK6NW20LFcqGjElqmIe9KQb5vJm4zg6VH9x14j7uPUY0uawotq+psxvUvGUB
- UXxg==
+ Sun, 05 Apr 2020 01:14:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=f5WeYVcExZ58viobGo5xENBYY/7iA5WtiHNaBP74Ohk=;
- b=VeK2e2HCFe+fBx6ndMCAk8h4D529ZI5e/AZfZqPTY/nc/hlUKR55P2m82wSNwn2wfO
- Bs1OKtIi63AE9+NUspa5CW/WP2kGiYQ8+TQ/8YWE2EUyJzcEUHwZY69UeUTRZqDpm5Ig
- Jta2NqS7UOyGIVN/lhhVjdHPUFPUJPWtxsqmLpiyKdq7C/6G5YSj6Vd35V1FtEoIy5yH
- d4+WKsiYmo2JXqe56A3WanDszQOcIPr0p1f/FVgOuii3eGIKoIPIk5tZHE4OT9ftRTbO
- 5UMoyie49J2RyH28n64Ggi0BjEGzBrrHSMUtnC43dgpdyQOE4q+i7qMt5Zg8gBWDJg2m
- P+gA==
-X-Gm-Message-State: AGi0Puaao1UxKZwKLCQe0bwnnrRo2PGLkx1bL+CG2LkWwujWV33SQHmX
- tX1tU6GDzDa6JWrJnsDTgYQBZUbsNY/iiA==
-X-Google-Smtp-Source: APiQypJgK3TXAPv85OfJ7vCTcz4u4tUzYYbvpr+INBxhiypWT+murLDDhRYYaeJT38bk35encw/Ldg==
-X-Received: by 2002:a2e:818e:: with SMTP id e14mr7232769ljg.225.1585994757852; 
- Sat, 04 Apr 2020 03:05:57 -0700 (PDT)
-Received: from ?IPv6:2a00:1fa0:6f0:5f98:6c2c:3527:3946:ae?
- ([2a00:1fa0:6f0:5f98:6c2c:3527:3946:ae])
- by smtp.gmail.com with ESMTPSA id p21sm6378055ljg.5.2020.04.04.03.05.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Apr 2020 03:05:57 -0700 (PDT)
-Subject: Re: [PATCH 2/6] i915/gvt/kvm: a NULL ->mm does not mean a thread is a
- kthread
-To: Christoph Hellwig <hch@lst.de>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Andrew Morton <akpm@linux-foundation.org>
-References: <20200404094101.672954-1-hch@lst.de>
- <20200404094101.672954-3-hch@lst.de>
-From: Sergei Shtylyov <sergei.shtylyov@cogentembedded.com>
-Message-ID: <0fb3cce8-fa3d-5c97-1eba-0f359797eea2@cogentembedded.com>
-Date: Sat, 4 Apr 2020 13:05:52 +0300
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition;
+ bh=ouQfW90npHD033GMDM+a2FinSD7SQ9pCB41aFB2pv8M=;
+ b=HnVZafmS8+PxpQEyTcQWpQyYDUq93gytG36VGKbA+i9CEq5JeGkMIDUgs3vGt/Aeiu
+ PRiUSdJw0UYQW5JoOwGcclmlvF/FbDwej6zO4yfvbhUFKZBQVb9jQy0JxDygXzLPSIgr
+ gSu+i3HaDWVk7p5iLomYjQBQkH4ZFqVx164pCBiTGMhno0AXx47PzSImXGrB9ap5mERE
+ LsA/3zQ9zjdgZMHsBYSK/lS2FEJaVXdrZYI0I90SVVmgZ5CixKnzlzNkWyepWmsMGa+Y
+ 0F9NEXU37UF8gSYPGD4rrlnV1SgKrrVqGbx9UfyyIQ6qUuFbKjqF9YHV9V7bKVPUuwkO
+ S1zQ==
+X-Gm-Message-State: AGi0PubIThOOZljAS3IsoE5UQErXgchguiEIVb5jaZKpmlmL5TfjAhnb
+ UOu0PSdI0XE/fDc2mq3a3F492LUDEAvg0daevITh9VHxeDPhpKzu51gh46/Tax2xqUJBKg8Ciwk
+ ej2POQvk7WRH/N5dqV7up9xmMOPoni7Rx89qs+a/UQQ==
+X-Received: by 2002:a1c:96cf:: with SMTP id
+ y198mr16757527wmd.186.1586074443074; 
+ Sun, 05 Apr 2020 01:14:03 -0700 (PDT)
+X-Google-Smtp-Source: APiQypLsqstklH0xgI1XJZTMg34Svue6TUFMK2IJ5TbkAsLUDmWLphQPBmK7xc/ECUJgj3fwvYDLwg==
+X-Received: by 2002:a1c:96cf:: with SMTP id
+ y198mr16757512wmd.186.1586074442920; 
+ Sun, 05 Apr 2020 01:14:02 -0700 (PDT)
+Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
+ by smtp.gmail.com with ESMTPSA id h188sm5491054wme.8.2020.04.05.01.14.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Apr 2020 01:14:02 -0700 (PDT)
+Date: Sun, 5 Apr 2020 04:14:00 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH] vdpa-sim: depend on HAS_DMA
+Message-ID: <20200405081355.2870-1-mst@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200404094101.672954-3-hch@lst.de>
-Content-Language: en-US
-Cc: Jens Axboe <axboe@kernel.dk>, Felipe Balbi <balbi@kernel.org>,
- amd-gfx@lists.freedesktop.org, "Michael S. Tsirkin" <mst@redhat.com>,
- Felix Kuehling <Felix.Kuehling@amd.com>, linux-usb@vger.kernel.org,
- io-uring@vger.kernel.org, linux-kernel@vger.kernel.org,
- Zhenyu Wang <zhenyuw@linux.intel.com>,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- linux-fsdevel@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>,
- intel-gfx@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
- intel-gvt-dev@lists.freedesktop.org, Zhi Wang <zhi.a.wang@intel.com>
+X-Mailer: git-send-email 2.24.1.751.gd10ce2899c
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,39 +102,44 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hello!
+set_dma_ops isn't available on all architectures:
 
-On 04.04.2020 12:40, Christoph Hellwig wrote:
+        make ARCH=um
+...
 
-> Use the proper API instead.
-> 
-> Fixes: f440c8a572d7 ("drm/i915/gvt/kvmgt: read/write GPA via KVM API")
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->   drivers/gpu/drm/i915/gvt/kvmgt.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/i915/gvt/kvmgt.c b/drivers/gpu/drm/i915/gvt/kvmgt.c
-> index 074c4efb58eb..5848400620b4 100644
-> --- a/drivers/gpu/drm/i915/gvt/kvmgt.c
-> +++ b/drivers/gpu/drm/i915/gvt/kvmgt.c
-> @@ -2037,7 +2037,7 @@ static int kvmgt_rw_gpa(unsigned long handle, unsigned long gpa,
->   	struct kvmgt_guest_info *info;
->   	struct kvm *kvm;
->   	int idx, ret;
-> -	bool kthread = current->mm == NULL;
-> +	bool kthread = (current->flags & PF_KTHREAD);
+   drivers/vdpa/vdpa_sim/vdpa_sim.c: In function 'vdpasim_create':
+>> drivers/vdpa/vdpa_sim/vdpa_sim.c:324:2: error: implicit declaration of function 'set_dma_ops'; did you mean 'set_groups'?
++[-Werror=implicit-function-declaration]
+     set_dma_ops(dev, &vdpasim_dma_ops);
+     ^~~~~~~~~~~
+     set_groups
 
-    Don't need the parens.
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+---
+ drivers/vdpa/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-[...]
+diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
+index 08b615f2da39..d0cb0e583a5d 100644
+--- a/drivers/vdpa/Kconfig
++++ b/drivers/vdpa/Kconfig
+@@ -14,7 +14,7 @@ if VDPA_MENU
+ 
+ config VDPA_SIM
+ 	tristate "vDPA device simulator"
+-	depends on RUNTIME_TESTING_MENU
++	depends on RUNTIME_TESTING_MENU && HAS_DMA
+ 	select VDPA
+ 	select VHOST_RING
+ 	select VHOST_IOTLB
+-- 
+MST
 
-MBR, Sergei
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
