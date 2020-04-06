@@ -1,97 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8A4A19F6C0
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 15:20:51 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 16C5319F6A7
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 15:17:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2564287E96;
-	Mon,  6 Apr 2020 13:20:50 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id C035523307;
+	Mon,  6 Apr 2020 13:17:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3s7CjiPCovow; Mon,  6 Apr 2020 13:20:48 +0000 (UTC)
+	with ESMTP id 4ZX-mSPSvmRF; Mon,  6 Apr 2020 13:17:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4829087E8F;
-	Mon,  6 Apr 2020 13:20:48 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 5B56C23B2B;
+	Mon,  6 Apr 2020 13:16:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 29C87C0177;
-	Mon,  6 Apr 2020 13:20:48 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4C95BC0177;
+	Mon,  6 Apr 2020 13:16:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 52ADFC0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 737AEC0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 13:20:46 +0000 (UTC)
+ Mon,  6 Apr 2020 13:16:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3EA7387E1F
+ by hemlock.osuosl.org (Postfix) with ESMTP id 705EE882FB
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 13:20:46 +0000 (UTC)
+ Mon,  6 Apr 2020 13:16:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JME0niyNn1G5
+ with ESMTP id UqwPgS9SVSlI
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 13:20:45 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.74])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 0452287D36
+ Mon,  6 Apr 2020 13:16:45 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 268268858A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 13:20:44 +0000 (UTC)
-Received: from mail-qt1-f174.google.com ([209.85.160.174]) by
- mrelayeu.kundenserver.de (mreue109 [212.227.15.145]) with ESMTPSA (Nemesis)
- id 1N7Qp1-1jFqxo1rLR-017ibr for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Apr 2020 15:15:37 +0200
-Received: by mail-qt1-f174.google.com with SMTP id a5so12676234qtw.10
- for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Apr 2020 06:15:37 -0700 (PDT)
-X-Gm-Message-State: AGi0PuaP+qdd5pkLrhHok7CQLrsRWwqIgAz0kSPxK1SxT0sPwPfgsECw
- x1JOv0OxYiAnblC08kmPtilRTgu+6xnwEnZhpQ0=
-X-Google-Smtp-Source: APiQypLa5L7CKwlGZNhn/7xAjUoLc+7MSyvfCvi3f7raJ3Pm4QCoa8xTD4iijCH0Ufx8gGRQ4K6mPgVfCzePn/2MrKM=
-X-Received: by 2002:ac8:12c2:: with SMTP id b2mr379999qtj.7.1586178935967;
- Mon, 06 Apr 2020 06:15:35 -0700 (PDT)
+ Mon,  6 Apr 2020 13:16:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1586178969;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=i9EytxK/zu+9ecojVcCWTRmH9NFAwPvCvkkFp6J4c3I=;
+ b=feMfoQVMkmvUAbeleIfuBsT8DQcvm3+NiDwhruJ+vOnQBmDniUEt7FqByTJZgu5bVjRsxc
+ Pdmayx4vJhxD1lW7t3ruVD1/0L7m1lc7WMWY83vveYqIDctqUY2dVlusvngP+oWdMcjTfM
+ QMX20hAoaRCmQ8TvgyNPkNc7u53fADg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-79-zKRNp85SOqSB19QETQFpVg-1; Mon, 06 Apr 2020 09:16:06 -0400
+X-MC-Unique: zKRNp85SOqSB19QETQFpVg-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E05768017F4;
+ Mon,  6 Apr 2020 13:16:03 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-113-60.ams2.redhat.com
+ [10.36.113.60])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 77BB79D352;
+ Mon,  6 Apr 2020 13:16:03 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 653C716E2C; Mon,  6 Apr 2020 15:16:02 +0200 (CEST)
+Date: Mon, 6 Apr 2020 15:16:02 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+Subject: Re: upstream boot error: KASAN: slab-out-of-bounds Write in
+ virtio_gpu_object_create
+Message-ID: <20200406131602.ggugjwkm36r4zvkr@sirius.home.kraxel.org>
+References: <00000000000091056b05a2999f1e@google.com>
+ <CACT4Y+b4RcgG_GrcpaghmqhX47zUVsAcGGd6vb6MYJT=6gf89g@mail.gmail.com>
+ <20200406080612.v5ubxvyliuso6v5h@sirius.home.kraxel.org>
+ <CAKMK7uE9uQ_YCXfDOH9zQBu_ffoz546hqRd1R_r1+L-T072Lew@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200406121233.109889-1-mst@redhat.com>
- <20200406121233.109889-3-mst@redhat.com>
- <CAK8P3a1nce31itwMKbmXoNZh-Y68m3GX_WwzNiaBuk280VFh-Q@mail.gmail.com>
- <20200406085707-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20200406085707-mutt-send-email-mst@kernel.org>
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Mon, 6 Apr 2020 15:15:20 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a1=-rhiMyAh6=6EwhxSmNnYaXR9NWhh+ZGh4Hh=U_gEuA@mail.gmail.com>
-Message-ID: <CAK8P3a1=-rhiMyAh6=6EwhxSmNnYaXR9NWhh+ZGh4Hh=U_gEuA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] vhost: disable for OABI
-To: "Michael S. Tsirkin" <mst@redhat.com>
-X-Provags-ID: V03:K1:bZ3oM/85Pd5YKwOzSLnWHTENABkxuwm8FmSKliyrLFZrJ8FLYdS
- pAsf5xFWtOjAybqnUsKb0QlHDYIW5s40plfGoSIvZLywCzQ+ma1O9s02SBQ3W3GwJuR7unQ
- A5XefFLPHuiIldxyJX5bfKOqLFFJYvKXClVBpG2fdmEEooZO1wBw9NwsddvpFky/JDJCrlS
- tLnJDqYmSxC/HZVGOPEgQ==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:LIksEMfoows=:TZjmarGg70R3r1+XHMM/hH
- 7VDIcm8PosR+9yzSOut4cfVdLBOPOZp1AUEy/ZdMDeV7rDyDjmgljsBqFeIoVWS3tdnYqGB8Z
- H/7QsgWGqQc0MgxPIr0y6LQJom4Onzt+iOVA6QcrS7i4stmGC9EXTV0CIMBLPH7tFEg2Lniwl
- Eet6PrqnaxEwtBbaGeLW0Y9dndbtaUSFh1yNxUVKbiOCE3xqDfhb6ywOPLvi0w8cZZThK9XfB
- 8NabUmpVphpPCV6OGiiFUPVOH5UkbaCD4yvWtauTEbdmbzf0suIA+HRdpSEwe/3UlJxIst6HS
- 9uT7e+ZwsYp779839rqqBVYSPM/xT7FsDz2DI5BHeUTtpcgNcQEBd6ZPk11cCIXBcTKuDiMyA
- e/4uKMH0xqWPGkcEFeOsQLrysWOXjCnvnGck/jrSr3PZTrEh4x59RBwLQzwnhLZjWkfs5Fdzs
- 9hIvsmbuOMnEWXF3NxSCrqr8d/foxX2eZ4UQ8Ay+MEypU9L5uYkrHkcHLuLq/YG2GOmHzJJDG
- WBi72dQWtEBLAENEeaE7ynVgxx4AWhUXcY6pCUsHQKZvkfIbpOQuvTFnWp+95YmKdVvJYHdT0
- A9eFF/zF4WPEALRJjrgtPXGjQ2/Wj7QrGSTSImJFhccOmoACZrTYjQoKZNfJbOq6BI71QaJE2
- HECqvSoPf3LlnmC2Y4jCSI4taVbqP4UT2uSPJR3cbE0HeCtuECL7sdafAuNarxXT7EPepbOn7
- B0mL91NvKksu+hu7fM1DBuSL/bspaM5+UuZOvM4+x12rp6qOdmhwm1vcZ6M62kTIY7yQtbn3r
- ukFy8BfxjfTECEiLzLZ86/zJO/T4ETj4/nEdZCTxedVfDohG6E=
-Cc: Richard Earnshaw <Richard.Earnshaw@arm.com>,
- "kbuild-all@lists.01.org" <kbuild-all@lists.01.org>,
- kbuild test robot <lkp@intel.com>, kvm list <kvm@vger.kernel.org>,
- "christophe.lyon@st.com" <christophe.lyon@st.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "richard.henderson@linaro.org" <richard.henderson@linaro.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Sudeep Dutt <sudeep.dutt@intel.com>, Ashutosh Dixit <ashutosh.dixit@intel.com>,
- "daniel.santos@pobox.com" <daniel.santos@pobox.com>,
- Russell King <rmk+kernel@armlinux.org.uk>,
- "David S. Miller" <davem@davemloft.net>, Networking <netdev@vger.kernel.org>,
- virtualization@lists.linux-foundation.org, Ard Biesheuvel <ardb@kernel.org>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>
+Content-Disposition: inline
+In-Reply-To: <CAKMK7uE9uQ_YCXfDOH9zQBu_ffoz546hqRd1R_r1+L-T072Lew@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: David Airlie <airlied@linux.ie>,
+ syzbot <syzbot+d3a7951ed361037407db@syzkaller.appspotmail.com>,
+ syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
+ LKML <linux-kernel@vger.kernel.org>, DRI <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
+ Dmitry Vyukov <dvyukov@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,40 +100,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Apr 6, 2020 at 3:02 PM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> On Mon, Apr 06, 2020 at 02:50:32PM +0200, Arnd Bergmann wrote:
-> > On Mon, Apr 6, 2020 at 2:12 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
+  Hi,
+
+> > > +drivers/gpu/drm/virtio/virtgpu_object.c maintainers
+> > > Now we have both mainline and linux-next boot broken (linux-next is
+> > > broken for the past 40 days).
+> > > No testing of new code happens.
 > > >
-> > > +config VHOST_DPN
-> > > +       bool "VHOST dependencies"
-> > > +       depends on !ARM || AEABI
-> > > +       default y
-> > > +       help
-> > > +         Anything selecting VHOST or VHOST_RING must depend on VHOST_DPN.
-> > > +         This excludes the deprecated ARM ABI since that forces a 4 byte
-> > > +         alignment on all structs - incompatible with virtio spec requirements.
-> > > +
+> > > >  virtio_gpu_object_shmem_init drivers/gpu/drm/virtio/virtgpu_object.c:151 [inline]
+> > > >  virtio_gpu_object_create+0x9f3/0xaa0 drivers/gpu/drm/virtio/virtgpu_object.c:230
 > >
-> > This should not be a user-visible option, so just make this 'def_bool
-> > !ARM || AEABI'
+> > Ah, that one.
 > >
->
-> I like keeping some kind of hint around for when one tries to understand
-> why is a specific symbol visible.
+> > broken patch: f651c8b05542 ("drm/virtio: factor out the sg_table from virtio_gpu_object")
+> > fixed by: 0666a8d7f6a4 ("drm/virtio: fix OOB in virtio_gpu_object_create")
+> >
+> > Both are in drm-misc-next.  I suspect the fix was added after
+> > drm-misc-next was closed for the 5.7 merge window and thus should
+> > have been submitted to drm-misc-next-fixes instead.
+> >
+> > So, what to do now?  Should I cherry-pick 0666a8d7f6a4 into
+> > drm-misc-next-fixes?  Or should it go into drm-misc-fixes instead?
+> 
+> Yup cherry-pick it over, with -x, to drm-misc-next-fixes.
+> -Daniel
 
-I meant you should remove the "VHOST dependencies" prompt, not the
-help text, which is certainly useful here. You can also use the three lines
+Done.  So the next linux-next build should be green again.  mainline
+should get the fix with the next drm pull (may take a few days).
 
-     bool
-     depends on !ARM || AEABI
-     default y
+take care,
+  Gerd
 
-in front of the help text, but those are equivalent to the one-line version
-I suggested.
-
-     Arnd
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
