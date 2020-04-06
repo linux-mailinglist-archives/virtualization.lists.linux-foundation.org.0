@@ -1,79 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70AF119F07B
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 08:55:18 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E47E19F07E
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 08:55:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 1E41385F7F;
-	Mon,  6 Apr 2020 06:55:17 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id BB23622C1A;
+	Mon,  6 Apr 2020 06:55:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6Up4JS15hbgG; Mon,  6 Apr 2020 06:55:16 +0000 (UTC)
+	with ESMTP id czkNu4xp2Gg5; Mon,  6 Apr 2020 06:55:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0681A85F77;
-	Mon,  6 Apr 2020 06:55:16 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 266CA22FEE;
+	Mon,  6 Apr 2020 06:55:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D6386C0177;
-	Mon,  6 Apr 2020 06:55:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 10168C0177;
+	Mon,  6 Apr 2020 06:55:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C8A87C0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 261CBC0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 06:55:14 +0000 (UTC)
+ Mon,  6 Apr 2020 06:55:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id C091A87872
+ by silver.osuosl.org (Postfix) with ESMTP id 1529322C1A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 06:55:14 +0000 (UTC)
+ Mon,  6 Apr 2020 06:55:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mFQSpFEHouia
+ with ESMTP id 2fOktIhL2i12
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 06:55:13 +0000 (UTC)
+ Mon,  6 Apr 2020 06:55:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 4990C87863
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id D3623226FF
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 06:55:13 +0000 (UTC)
+ Mon,  6 Apr 2020 06:55:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586156111;
+ s=mimecast20190719; t=1586156123;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=ulAIL9liX5062YrP+LP0JrQix7wOHt1SuaxLWgPVMzY=;
- b=RoNgY2lqBd2lq5ts8K64fNR8Oezn6ha0OZIuDN1xDX53ZUcOh5R7b0g0kSOWBsB78ru/M0
- Df1yMlcTeVRu1F8rHSH2h2m7N8Rus3B6X9Ydh04iGrODvLqMHyzOYq4XjVYDWVK94LfLNk
- xW0e+jzXHTNlFD8mCJh5PuOQ7Mo9fNU=
+ bh=+DuuhWh5WS/zqYHNwoD712nIR0gIu2uvaH38DF6AVX8=;
+ b=USTq9NpQ0QaUR0f8TE0ZQrkRULIxjcOTo4Pm6aYcrNeoz/gJoM1j0rebNExJiQDPEtTA2j
+ ZaoWva1t6L2DM01tLdc+ccK21ST/hH8Zp4y+1MuErOWDlszYnSPJUjiGTR4L3VC/VlcGKF
+ iwnPW7a9WW6l2TPh+ZB2VLK13sGp+Pw=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-388-j_6RZmLlORWxwieIG5NG_g-1; Mon, 06 Apr 2020 02:55:10 -0400
-X-MC-Unique: j_6RZmLlORWxwieIG5NG_g-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ us-mta-71-0dmzAn_mPAKouxlVuZ8OJw-1; Mon, 06 Apr 2020 02:55:21 -0400
+X-MC-Unique: 0dmzAn_mPAKouxlVuZ8OJw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A55E2DB67;
- Mon,  6 Apr 2020 06:55:08 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9AD931005509;
+ Mon,  6 Apr 2020 06:55:20 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-113-60.ams2.redhat.com
  [10.36.113.60])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 54D6927186;
- Mon,  6 Apr 2020 06:55:08 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4C94C90CE0;
+ Mon,  6 Apr 2020 06:55:20 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 4679E1750C; Mon,  6 Apr 2020 08:55:07 +0200 (CEST)
-Date: Mon, 6 Apr 2020 08:55:07 +0200
+ id 99F881750C; Mon,  6 Apr 2020 08:55:19 +0200 (CEST)
+Date: Mon, 6 Apr 2020 08:55:19 +0200
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: Re: [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
-Message-ID: <20200406065507.ps2w3xaef7e6ual7@sirius.home.kraxel.org>
+Subject: Re: [PATCH 31/44] drm/qxl: Don't use drm_device->dev_private
+Message-ID: <20200406065519.b6xj6gbn7y3sjr5h@sirius.home.kraxel.org>
 References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
+ <20200403135828.2542770-32-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-In-Reply-To: <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+In-Reply-To: <20200403135828.2542770-32-daniel.vetter@ffwll.ch>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -98,8 +98,9 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Apr 03, 2020 at 03:58:14PM +0200, Daniel Vetter wrote:
-> Also need to remove the drm_dev_put from the remove hook.
+On Fri, Apr 03, 2020 at 03:58:15PM +0200, Daniel Vetter wrote:
+> Upcasting using a container_of macro is more typesafe, faster and
+> easier for the compiler to optimize.
 > 
 > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
 > Cc: Dave Airlie <airlied@redhat.com>
