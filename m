@@ -2,108 +2,85 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 900D419F59D
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 14:12:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8484F19F607
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 14:47:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 458DE884BF;
-	Mon,  6 Apr 2020 12:12:57 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 41E3D87A5A;
+	Mon,  6 Apr 2020 12:47:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RKi7sbfu4kmY; Mon,  6 Apr 2020 12:12:56 +0000 (UTC)
+	with ESMTP id jmmidmYcu011; Mon,  6 Apr 2020 12:47:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B0437884B9;
-	Mon,  6 Apr 2020 12:12:56 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 9513787774;
+	Mon,  6 Apr 2020 12:47:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9851CC0177;
-	Mon,  6 Apr 2020 12:12:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8611FC0177;
+	Mon,  6 Apr 2020 12:47:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EE77DC0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AAC0BC0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:12:54 +0000 (UTC)
+ Mon,  6 Apr 2020 12:47:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E8AA786044
+ by silver.osuosl.org (Postfix) with ESMTP id 92EB82324E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:12:54 +0000 (UTC)
+ Mon,  6 Apr 2020 12:47:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CnGFhIKcIXsp
+ with ESMTP id BTWpVJ+Dt1-v
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:12:53 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8C1D5860FE
+ Mon,  6 Apr 2020 12:47:02 +0000 (UTC)
+X-Greylist: delayed 00:05:29 by SQLgrey-1.7.6
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
+ [209.85.210.68])
+ by silver.osuosl.org (Postfix) with ESMTPS id 9381D23086
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:12:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586175171;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dQAEJjJ23njMAMzpYV3TzkQNiOgjGmbglBN46bPRZ/k=;
- b=gYIf1n5izJhhYSb1Ha8s2lsQv9JrcBRLyNBUux6Ug5PioZWUGMAhbJmogKI4v1WRsNiIkA
- tkKVVURcMpT80ppoOOWBEjwKXHZyRGYbWiupQ1HMCf1mqW89JDU+on4IIHib2gmL66mhd7
- uWKEBWrUN/oE3FugSz86EySgDkevA5w=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-466-ASvBKhiaN7eR68G7rIJegg-1; Mon, 06 Apr 2020 08:12:49 -0400
-X-MC-Unique: ASvBKhiaN7eR68G7rIJegg-1
-Received: by mail-wr1-f70.google.com with SMTP id t25so8254831wrb.16
+ Mon,  6 Apr 2020 12:47:02 +0000 (UTC)
+Received: by mail-ot1-f68.google.com with SMTP id z5so15104715oth.9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Apr 2020 05:12:48 -0700 (PDT)
+ Mon, 06 Apr 2020 05:47:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=sr72t4r7lxhc/Q3B1vivttix8afMzynpg5rTdMjQSoY=;
+ b=entol2rHnqykEsDN6YkZxSuwSctDqAnKsid7hRR+PoqC5lMipLmtfJhXeba6wjsCWm
+ rfaehblGx+Me4JYjbyW4WDcJeNAIw072KujfJUYa5Ld5UR+7o3ji9LNAJu4QZHm7mDfm
+ U9KG1jjMrh/5skPTpZMtN9W1LtYTC7V9W6cd4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=dQAEJjJ23njMAMzpYV3TzkQNiOgjGmbglBN46bPRZ/k=;
- b=fjFu8t7LCkSy0ZIb/0WX8LKbCLIrjFo7XANv+DrDulXpq5LVa51+wtDzCitNwJYAPJ
- 3qW0Fp1Jqx0sXeKqID8SvlPDSzTR/sHdM/UvT6sBPK5lHoUeCJtnPURRFSDsx9aVrtba
- bR8/8C+T0PjFtCSM73Ss+GZMqVQroBhNn0YlkvY5fmgC3Un9rS/OPadx9IF+AnYZ10Ps
- EQd6oi/FG3wVi4G1x1IzwBweZkbE1DPDT++r06Si9lA4Ue3N734z2GIpG9H/wePiZt76
- y1++Vt96e+8qqX09NdGV4leHHD1mAykNzkIoEp49kgtqFwkrbffmRAlJgcMDt0sfOZrv
- gXLg==
-X-Gm-Message-State: AGi0PuaQOrcgY+VLael9uRLn9g2Fl1v+Y8XgIFFwUbzDArk53LbuaMrj
- gq0hTWpr9PbcyXG619jKXbURxI4MHHXzhG+DD1HlkCsRhSlfHCuZxmQD8vvzFatTOU/Xo2phtra
- sbR8fX3uW8IA+8MR2cPjTW/5mjjWbOCTOfuEIhPmiQA==
-X-Received: by 2002:adf:bc12:: with SMTP id s18mr25165013wrg.220.1586175167832; 
- Mon, 06 Apr 2020 05:12:47 -0700 (PDT)
-X-Google-Smtp-Source: APiQypLwgTks29i/561QCQdpKOflCqiUKEhbZa/gBiQmA5aq0hS0WhmnIdFdpGtSrxr+GiRrPLsSEg==
-X-Received: by 2002:adf:bc12:: with SMTP id s18mr25164995wrg.220.1586175167620; 
- Mon, 06 Apr 2020 05:12:47 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id c20sm11334886wmd.36.2020.04.06.05.12.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2020 05:12:47 -0700 (PDT)
-Date: Mon, 6 Apr 2020 08:12:44 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/2] vhost: disable for OABI
-Message-ID: <20200406121233.109889-3-mst@redhat.com>
-References: <20200406121233.109889-1-mst@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=sr72t4r7lxhc/Q3B1vivttix8afMzynpg5rTdMjQSoY=;
+ b=c42E82q9PDynPKKqslPG/AFYyhEmAqEDiCJlkMH1VzwKZ7bis1gUBeXwvy1IG7z5HL
+ K6ahO+kUTTTz5QnYADL242y4smO11MRf9OGf4kw0DKXPjgQwqBhAKjMiYtdJogjncEX4
+ UXbM9398oxZ1AC81o1pJ0Tam8L6V6dUhrc3QERWV90NsY9Y5vbDDV+79mS/Wov09cobX
+ Z0BhziKOiEe7MztAcXWBPtCDSSrbsPYkoI48/zNZpQMD45Qzsw5Kng2OoUllrnRWb4Tp
+ tp0qkVEO8pqL2OJLqfmt2aHb1xpCRZhOMJvto9ug/4r8fif7XKhIDo57qdupJPjc55Ho
+ C2GQ==
+X-Gm-Message-State: AGi0PuZ+Gv7pbeu+ZP6HDt2ocWLOz1fOZNfhSagtbt4QHFlHvdjLEG8t
+ iNGIzvrwOTmTN/w/BMpDqPUbtLpRfeRAgzE/XSGU5hlw
+X-Google-Smtp-Source: APiQypJhwSTomdaZtFjbOnK4dQzBkSIMoNjO/uvTMoS9iCK7mUxexLxDXb1kSUc2EnvnB9OZEl1Z8vmKzFMuNZf8nBs=
+X-Received: by 2002:a9d:6e8f:: with SMTP id a15mr18136881otr.188.1586176891766; 
+ Mon, 06 Apr 2020 05:41:31 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200406121233.109889-1-mst@redhat.com>
-X-Mailer: git-send-email 2.24.1.751.gd10ce2899c
-X-Mutt-Fcc: =sent
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Richard Earnshaw <Richard.Earnshaw@arm.com>,
- "kbuild-all@lists.01.org" <kbuild-all@lists.01.org>,
- kbuild test robot <lkp@intel.com>, Arnd Bergmann <arnd@arndb.de>,
- "christophe.lyon@st.com" <christophe.lyon@st.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "richard.henderson@linaro.org" <richard.henderson@linaro.org>,
- Sudeep Dutt <sudeep.dutt@intel.com>, "David S. Miller" <davem@davemloft.net>,
- Ashutosh Dixit <ashutosh.dixit@intel.com>,
- "daniel.santos@pobox.com" <daniel.santos@pobox.com>,
- Russell King <rmk+kernel@armlinux.org.uk>, kvm@vger.kernel.org,
- netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Ard Biesheuvel <ardb@kernel.org>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>
+References: <00000000000091056b05a2999f1e@google.com>
+ <CACT4Y+b4RcgG_GrcpaghmqhX47zUVsAcGGd6vb6MYJT=6gf89g@mail.gmail.com>
+ <20200406080612.v5ubxvyliuso6v5h@sirius.home.kraxel.org>
+In-Reply-To: <20200406080612.v5ubxvyliuso6v5h@sirius.home.kraxel.org>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Mon, 6 Apr 2020 14:41:20 +0200
+Message-ID: <CAKMK7uE9uQ_YCXfDOH9zQBu_ffoz546hqRd1R_r1+L-T072Lew@mail.gmail.com>
+Subject: Re: upstream boot error: KASAN: slab-out-of-bounds Write in
+ virtio_gpu_object_create
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: David Airlie <airlied@linux.ie>,
+ syzbot <syzbot+d3a7951ed361037407db@syzkaller.appspotmail.com>,
+ syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
+ LKML <linux-kernel@vger.kernel.org>, DRI <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
+ Dmitry Vyukov <dvyukov@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,130 +97,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vhost is currently broken on the default ARM config.
+On Mon, Apr 6, 2020 at 10:06 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> On Mon, Apr 06, 2020 at 09:07:44AM +0200, Dmitry Vyukov wrote:
+> > On Mon, Apr 6, 2020 at 8:46 AM syzbot
+> > <syzbot+d3a7951ed361037407db@syzkaller.appspotmail.com> wrote:
+> > >
+> > > Hello,
+> > >
+> > > syzbot found the following crash on:
+> > >
+> > > HEAD commit:    ffc1c20c Merge tag 'for-5.7/dm-changes' of git://git.kerne..
+> > > git tree:       upstream
+> > > console output: https://syzkaller.appspot.com/x/log.txt?x=1690471fe00000
+> > > kernel config:  https://syzkaller.appspot.com/x/.config?x=d6a1e2f9a9986236
+> > > dashboard link: https://syzkaller.appspot.com/bug?extid=d3a7951ed361037407db
+> > > compiler:       gcc (GCC) 9.0.0 20181231 (experimental)
+> > >
+> > > Unfortunately, I don't have any reproducer for this crash yet.
+> > >
+> > > IMPORTANT: if you fix the bug, please add the following tag to the commit:
+> > > Reported-by: syzbot+d3a7951ed361037407db@syzkaller.appspotmail.com
+> >
+> >
+> > +drivers/gpu/drm/virtio/virtgpu_object.c maintainers
+> > Now we have both mainline and linux-next boot broken (linux-next is
+> > broken for the past 40 days).
+> > No testing of new code happens.
+> >
+> > >  virtio_gpu_object_shmem_init drivers/gpu/drm/virtio/virtgpu_object.c:151 [inline]
+> > >  virtio_gpu_object_create+0x9f3/0xaa0 drivers/gpu/drm/virtio/virtgpu_object.c:230
+>
+> Ah, that one.
+>
+> broken patch: f651c8b05542 ("drm/virtio: factor out the sg_table from virtio_gpu_object")
+> fixed by: 0666a8d7f6a4 ("drm/virtio: fix OOB in virtio_gpu_object_create")
+>
+> Both are in drm-misc-next.  I suspect the fix was added after
+> drm-misc-next was closed for the 5.7 merge window and thus should
+> have been submitted to drm-misc-next-fixes instead.
+>
+> So, what to do now?  Should I cherry-pick 0666a8d7f6a4 into
+> drm-misc-next-fixes?  Or should it go into drm-misc-fixes instead?
 
-The reason is that that uses apcs-gnu which is the ancient OABI that is been
-deprecated for a long time.
-
-Given that virtio support on such ancient systems is not needed in the
-first place, let's just add something along the lines of
-
-	depends on !ARM || AEABI
-
-to the virtio Kconfig declaration, and add a comment that it has to do
-with struct member alignment.
-
-Note: we can't make VHOST and VHOST_RING themselves have
-a dependency since these are selected. Add a new symbol for that.
-
-Suggested-by: Ard Biesheuvel <ardb@kernel.org>
-Siggested-by: Richard Earnshaw <Richard.Earnshaw@arm.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- drivers/misc/mic/Kconfig |  2 +-
- drivers/net/caif/Kconfig |  2 +-
- drivers/vdpa/Kconfig     |  2 +-
- drivers/vhost/Kconfig    | 17 +++++++++++++----
- 4 files changed, 16 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/misc/mic/Kconfig b/drivers/misc/mic/Kconfig
-index 8f201d019f5a..3bfe72c59864 100644
---- a/drivers/misc/mic/Kconfig
-+++ b/drivers/misc/mic/Kconfig
-@@ -116,7 +116,7 @@ config MIC_COSM
- 
- config VOP
- 	tristate "VOP Driver"
--	depends on VOP_BUS
-+	depends on VOP_BUS && VHOST_DPN
- 	select VHOST_RING
- 	select VIRTIO
- 	help
-diff --git a/drivers/net/caif/Kconfig b/drivers/net/caif/Kconfig
-index 9db0570c5beb..661c25eb1c46 100644
---- a/drivers/net/caif/Kconfig
-+++ b/drivers/net/caif/Kconfig
-@@ -50,7 +50,7 @@ config CAIF_HSI
- 
- config CAIF_VIRTIO
- 	tristate "CAIF virtio transport driver"
--	depends on CAIF && HAS_DMA
-+	depends on CAIF && HAS_DMA && VHOST_DPN
- 	select VHOST_RING
- 	select VIRTIO
- 	select GENERIC_ALLOCATOR
-diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
-index d0cb0e583a5d..aee28def466b 100644
---- a/drivers/vdpa/Kconfig
-+++ b/drivers/vdpa/Kconfig
-@@ -14,7 +14,7 @@ if VDPA_MENU
- 
- config VDPA_SIM
- 	tristate "vDPA device simulator"
--	depends on RUNTIME_TESTING_MENU && HAS_DMA
-+	depends on RUNTIME_TESTING_MENU && HAS_DMA && VHOST_DPN
- 	select VDPA
- 	select VHOST_RING
- 	select VHOST_IOTLB
-diff --git a/drivers/vhost/Kconfig b/drivers/vhost/Kconfig
-index cb6b17323eb2..b3486e218f62 100644
---- a/drivers/vhost/Kconfig
-+++ b/drivers/vhost/Kconfig
-@@ -12,6 +12,15 @@ config VHOST_RING
- 	  This option is selected by any driver which needs to access
- 	  the host side of a virtio ring.
- 
-+config VHOST_DPN
-+	bool "VHOST dependencies"
-+	depends on !ARM || AEABI
-+	default y
-+	help
-+	  Anything selecting VHOST or VHOST_RING must depend on VHOST_DPN.
-+	  This excludes the deprecated ARM ABI since that forces a 4 byte
-+	  alignment on all structs - incompatible with virtio spec requirements.
-+
- config VHOST
- 	tristate
- 	select VHOST_IOTLB
-@@ -27,7 +36,7 @@ if VHOST_MENU
- 
- config VHOST_NET
- 	tristate "Host kernel accelerator for virtio net"
--	depends on NET && EVENTFD && (TUN || !TUN) && (TAP || !TAP)
-+	depends on NET && EVENTFD && (TUN || !TUN) && (TAP || !TAP) && VHOST_DPN
- 	select VHOST
- 	---help---
- 	  This kernel module can be loaded in host kernel to accelerate
-@@ -39,7 +48,7 @@ config VHOST_NET
- 
- config VHOST_SCSI
- 	tristate "VHOST_SCSI TCM fabric driver"
--	depends on TARGET_CORE && EVENTFD
-+	depends on TARGET_CORE && EVENTFD && VHOST_DPN
- 	select VHOST
- 	default n
- 	---help---
-@@ -48,7 +57,7 @@ config VHOST_SCSI
- 
- config VHOST_VSOCK
- 	tristate "vhost virtio-vsock driver"
--	depends on VSOCKETS && EVENTFD
-+	depends on VSOCKETS && EVENTFD && VHOST_DPN
- 	select VHOST
- 	select VIRTIO_VSOCKETS_COMMON
- 	default n
-@@ -62,7 +71,7 @@ config VHOST_VSOCK
- 
- config VHOST_VDPA
- 	tristate "Vhost driver for vDPA-based backend"
--	depends on EVENTFD
-+	depends on EVENTFD && VHOST_DPN
- 	select VHOST
- 	select VDPA
- 	help
+Yup cherry-pick it over, with -x, to drm-misc-next-fixes.
+-Daniel
 -- 
-MST
-
+Daniel Vetter
+Software Engineer, Intel Corporation
++41 (0) 79 365 57 48 - http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
