@@ -2,94 +2,105 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D879419F61B
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 14:51:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75BB819F632
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 14:57:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2EEE4861DE;
-	Mon,  6 Apr 2020 12:51:11 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 144198625F;
+	Mon,  6 Apr 2020 12:57:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JuTdm6nRpMXa; Mon,  6 Apr 2020 12:51:10 +0000 (UTC)
+	with ESMTP id J1P2UqCwaEUQ; Mon,  6 Apr 2020 12:57:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A543686200;
-	Mon,  6 Apr 2020 12:51:10 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7B82C8625D;
+	Mon,  6 Apr 2020 12:57:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 906DCC0177;
-	Mon,  6 Apr 2020 12:51:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5AB40C1D89;
+	Mon,  6 Apr 2020 12:57:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8BD68C0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0214EC0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:51:08 +0000 (UTC)
+ Mon,  6 Apr 2020 12:57:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 8248E2324E
+ by hemlock.osuosl.org (Postfix) with ESMTP id E00B687568
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:51:08 +0000 (UTC)
+ Mon,  6 Apr 2020 12:57:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hbzPkSYsonEc
+ with ESMTP id rRTIbJSlrW-y
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:51:04 +0000 (UTC)
+ Mon,  6 Apr 2020 12:57:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id 0995C23086
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id D04F18742F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 12:51:03 +0000 (UTC)
+ Mon,  6 Apr 2020 12:57:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586177462;
+ s=mimecast20190719; t=1586177823;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=7A/JZx9mU7o1VoLWOXJ3u/SJqb7Gm6YpvdN2hJBccMY=;
- b=eMHmHx30CqfaGnkyucLNlUoVZj2nZjiM/6Xu7BH02W7aJDgBJ1xzgp5XElhM7+lnQLi0QG
- Rop0oxdvVCzNj+oLsijnERqJ44qDakQ/tftvCDQ3iJ+Nuf0eozgiHk2UOE09RGXMCjc/uf
- +s8kkJoSdB7yTi0/vctv8lEdZMqXj8U=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-439-fZoEnqOZO6qp622ElAIc6Q-1; Mon, 06 Apr 2020 08:50:59 -0400
-X-MC-Unique: fZoEnqOZO6qp622ElAIc6Q-1
-Received: by mail-wm1-f70.google.com with SMTP id e16so4078353wmh.5
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zA3oXFlf+tA0XqNfZvZ8NSCiPUHKJG3g0r1brnP9MhE=;
+ b=d/ZghukpLXCm251ZuwmTBAnvMFwEnxyih7Ipdoo/a7ea6bjLUk6CPbTBlN3OVM3jI67qwu
+ QLNnh9Pa+bdLOlH3DByvLGwPnBGVJV2TuQCrqUOfhaMXSNr5vzx4o4rldjoLJKC3w3EL+e
+ qW2hVMdA3B4SJIhF/GxAbGg5Pql2+Lk=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-404-6d_XAFq4OVe16zVq1pMhig-1; Mon, 06 Apr 2020 08:57:01 -0400
+X-MC-Unique: 6d_XAFq4OVe16zVq1pMhig-1
+Received: by mail-wr1-f70.google.com with SMTP id d1so8295311wru.15
  for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Apr 2020 05:50:58 -0700 (PDT)
+ Mon, 06 Apr 2020 05:57:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=7A/JZx9mU7o1VoLWOXJ3u/SJqb7Gm6YpvdN2hJBccMY=;
- b=J3vCGl2MQVlH7nKqH+UjQznnm3x1vg9QUMKR5tO/4FVdpBPW8L9ReaxciPAovV4Wka
- DL0YvJp1mqV6HafBCJRFyR4aPm51syKjcONcRjzErEINHGBmMO2K74e0TS9QX6i93nja
- bLw2LlQ9k2TscUn3IHefEjBvZwCuWj5lcPk0Nsuw37CNoZf3+g/U2LMeUrxwCuv34HJk
- wv86m1n7k5LvdBRYCcSJHlt7nO7YtPXUDxgTQdHpDAOhaC1jEqt6VcV6Gy9KeociNRGm
- vaxC10wj6wsFwA0LdXt9v9FO7u40AJJErZPgOHWvFDAMCmX6/hn71rd7MfTefniDHJeC
- GtpQ==
-X-Gm-Message-State: AGi0PuYQweWyuCmMJWv8RHlyIIFhBoTOcqFnczVCuRn6skXupHCfdFcc
- W/Zbf07SGOyguHvvVmJlZWuZAQbs3w8gbaMp5LdK5nkyX0mzUTCVwv0KsJXLz9b169Inw6hN+8u
- cMkx/skISAy4iYbKSOLwWLoHYoTc1b3kHG0s9NfkRjA==
-X-Received: by 2002:adf:81b6:: with SMTP id 51mr17298388wra.229.1586177457394; 
- Mon, 06 Apr 2020 05:50:57 -0700 (PDT)
-X-Google-Smtp-Source: APiQypI7/DS77HBZ8L/FNXyj60fPbTTo/BHYI/NHwMQ/9pXpk2TSq6zGsv9CKDz2v5JeoEWm2YjQcw==
-X-Received: by 2002:adf:81b6:: with SMTP id 51mr17298368wra.229.1586177457169; 
- Mon, 06 Apr 2020 05:50:57 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=zA3oXFlf+tA0XqNfZvZ8NSCiPUHKJG3g0r1brnP9MhE=;
+ b=IH+SOIA3Av6oiMfFg+Jhsn0BZK/ZtOct+aIFXDITuhh0m727WVianQYEFoJaC6Tkcg
+ 5lreybhp98hcK9WWK+WmAje+k5uWB9+ZoPzsHSgqDFMjIy8TtrJ46XVyXrhUwr9sEQQp
+ D4JPnOEyUQviT2MJ/nme27gvJ8cgEv5n1Gnm7t0D2rskB/ztxy651Fl+OtEVDiCIlfZf
+ TAFo9qzxFogtLInsxYqpaWW4HSSZq0vNL3feFQt+zRlfJ29SvFUVWeQdtC0NHVh9MF6+
+ 59gm2ro1e/NIX1/ZQGf8JPBpoN6Ybi6Ua5h0RwDQYz9fw69uQ0RWue3Z4mXJff6ONmhC
+ jweQ==
+X-Gm-Message-State: AGi0PuZkBQROTg7w7yQqfT5ms6WK0nri+yOXi1fMFZz7e70oM0rLGAR0
+ DqmkVSsX39NxL774aHXrlsttmQmJ3g5o7t9CZnH/bl2Nm8ALYmHr8t3wiXc+/A1slTN+LIQYFeF
+ x+q6nMUMIw70W98tzxgDhHx+u6AQg2HDhXJ6ZDthvsA==
+X-Received: by 2002:a7b:c359:: with SMTP id l25mr22974365wmj.149.1586177820031; 
+ Mon, 06 Apr 2020 05:57:00 -0700 (PDT)
+X-Google-Smtp-Source: APiQypLkRAUfyI4Cg7RaR/a2JYi9c2Rr5Wp8n4wDNVakzk3f4Q2RbJ2sjxo/Naa7H/tihWUIO6KVSg==
+X-Received: by 2002:a7b:c359:: with SMTP id l25mr22974349wmj.149.1586177819765; 
+ Mon, 06 Apr 2020 05:56:59 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id y22sm7895262wma.0.2020.04.06.05.50.55
+ by smtp.gmail.com with ESMTPSA id i1sm1637648wmb.33.2020.04.06.05.56.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2020 05:50:56 -0700 (PDT)
-Date: Mon, 6 Apr 2020 08:50:55 -0400
+ Mon, 06 Apr 2020 05:56:59 -0700 (PDT)
+Date: Mon, 6 Apr 2020 08:56:56 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH] vhost: force spec specified alignment on types
-Message-ID: <20200406124931.120768-1-mst@redhat.com>
+To: Ard Biesheuvel <ardb@kernel.org>
+Subject: Re: [PATCH v2 2/2] vhost: disable for OABI
+Message-ID: <20200406085453-mutt-send-email-mst@kernel.org>
+References: <20200406121233.109889-1-mst@redhat.com>
+ <20200406121233.109889-3-mst@redhat.com>
+ <CAMj1kXFNeuZU66swwf_Cx7PrQJV34C0VJ7Rte5aga2Jx4S-yHw@mail.gmail.com>
 MIME-Version: 1.0
-X-Mailer: git-send-email 2.24.1.751.gd10ce2899c
-X-Mutt-Fcc: =sent
+In-Reply-To: <CAMj1kXFNeuZU66swwf_Cx7PrQJV34C0VJ7Rte5aga2Jx4S-yHw@mail.gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: netdev@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Cc: "kbuild-all@lists.01.org" <kbuild-all@lists.01.org>,
+ kbuild test robot <lkp@intel.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Sudeep Dutt <sudeep.dutt@intel.com>, Ashutosh Dixit <ashutosh.dixit@intel.com>,
+ "daniel.santos@pobox.com" <daniel.santos@pobox.com>,
+ Russell King <rmk+kernel@armlinux.org.uk>, kvm@vger.kernel.org,
+ netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ "David S. Miller" <davem@davemloft.net>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,108 +117,152 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The ring element addresses are passed between components with different
-alignments assumptions. Thus, if guest/userspace selects a pointer and
-host then gets and dereferences it, we might need to decrease the
-compiler-selected alignment to prevent compiler on the host from
-assuming pointer is aligned.
+On Mon, Apr 06, 2020 at 02:45:13PM +0200, Ard Biesheuvel wrote:
+> On Mon, 6 Apr 2020 at 14:12, Michael S. Tsirkin <mst@redhat.com> wrote:
+> >
+> > vhost is currently broken on the default ARM config.
+> >
+> 
+> Where did you get this idea? The report from the robot was using a
+> randconfig build, and in general, AEABI is required to run anything on
+> any modern ARM system .
 
-This actually triggers on ARM with -mabi=apcs-gnu - which is a
-deprecated configuration, but it seems safer to handle this
-generally.
+Oh - I forgot it's randconfig. This part is wrong, sorry.
+I decided to just force 2-byte alignment
+instead (seems more robust) but I'll take this into account
+if we do decide to add this dependency.
 
-I verified that the produced binary is exactly identical on x86.
 
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
+> 
+> > The reason is that that uses apcs-gnu which is the ancient OABI that is been
+> > deprecated for a long time.
+> >
+> > Given that virtio support on such ancient systems is not needed in the
+> > first place, let's just add something along the lines of
+> >
+> >         depends on !ARM || AEABI
+> >
+> > to the virtio Kconfig declaration, and add a comment that it has to do
+> > with struct member alignment.
+> >
+> > Note: we can't make VHOST and VHOST_RING themselves have
+> > a dependency since these are selected. Add a new symbol for that.
+> >
+> > Suggested-by: Ard Biesheuvel <ardb@kernel.org>
+> > Siggested-by: Richard Earnshaw <Richard.Earnshaw@arm.com>
+> 
+> typo ^^^
 
-This is my preferred way to handle the ARM incompatibility issues
-(in preference to kconfig hacks).
-I will push this into next now.
-Comments?
 
- drivers/vhost/vhost.h            |  6 ++---
- include/uapi/linux/virtio_ring.h | 41 ++++++++++++++++++++++++--------
- 2 files changed, 34 insertions(+), 13 deletions(-)
+Thanks!
 
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index cc82918158d2..a67bda9792ec 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -74,9 +74,9 @@ struct vhost_virtqueue {
- 	/* The actual ring of buffers. */
- 	struct mutex mutex;
- 	unsigned int num;
--	struct vring_desc __user *desc;
--	struct vring_avail __user *avail;
--	struct vring_used __user *used;
-+	vring_desc_t __user *desc;
-+	vring_avail_t __user *avail;
-+	vring_used_t __user *used;
- 	const struct vhost_iotlb_map *meta_iotlb[VHOST_NUM_ADDRS];
- 
- 	struct vhost_desc *descs;
-diff --git a/include/uapi/linux/virtio_ring.h b/include/uapi/linux/virtio_ring.h
-index 559f42e73315..cd6e0b2eaf2f 100644
---- a/include/uapi/linux/virtio_ring.h
-+++ b/include/uapi/linux/virtio_ring.h
-@@ -118,16 +118,6 @@ struct vring_used {
- 	struct vring_used_elem ring[];
- };
- 
--struct vring {
--	unsigned int num;
--
--	struct vring_desc *desc;
--
--	struct vring_avail *avail;
--
--	struct vring_used *used;
--};
--
- /* Alignment requirements for vring elements.
-  * When using pre-virtio 1.0 layout, these fall out naturally.
-  */
-@@ -164,6 +154,37 @@ struct vring {
- #define vring_used_event(vr) ((vr)->avail->ring[(vr)->num])
- #define vring_avail_event(vr) (*(__virtio16 *)&(vr)->used->ring[(vr)->num])
- 
-+/*
-+ * The ring element addresses are passed between components with different
-+ * alignments assumptions. Thus, we might need to decrease the compiler-selected
-+ * alignment, and so must use a typedef to make sure the __aligned attribute
-+ * actually takes hold:
-+ *
-+ * https://gcc.gnu.org/onlinedocs//gcc/Common-Type-Attributes.html#Common-Type-Attributes
-+ *
-+ * When used on a struct, or struct member, the aligned attribute can only
-+ * increase the alignment; in order to decrease it, the packed attribute must
-+ * be specified as well. When used as part of a typedef, the aligned attribute
-+ * can both increase and decrease alignment, and specifying the packed
-+ * attribute generates a warning.
-+ */
-+typedef struct vring_desc __attribute__((aligned(VRING_DESC_ALIGN_SIZE)))
-+	vring_desc_t;
-+typedef struct vring_avail __attribute__((aligned(VRING_AVAIL_ALIGN_SIZE)))
-+	vring_avail_t;
-+typedef struct vring_used __attribute__((aligned(VRING_USED_ALIGN_SIZE)))
-+	vring_used_t;
-+
-+struct vring {
-+	unsigned int num;
-+
-+	vring_desc_t *desc;
-+
-+	vring_avail_t *avail;
-+
-+	vring_used_t *used;
-+};
-+
- static inline void vring_init(struct vring *vr, unsigned int num, void *p,
- 			      unsigned long align)
- {
--- 
-MST
+> 
+> > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> > ---
+> >  drivers/misc/mic/Kconfig |  2 +-
+> >  drivers/net/caif/Kconfig |  2 +-
+> >  drivers/vdpa/Kconfig     |  2 +-
+> >  drivers/vhost/Kconfig    | 17 +++++++++++++----
+> >  4 files changed, 16 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/drivers/misc/mic/Kconfig b/drivers/misc/mic/Kconfig
+> > index 8f201d019f5a..3bfe72c59864 100644
+> > --- a/drivers/misc/mic/Kconfig
+> > +++ b/drivers/misc/mic/Kconfig
+> > @@ -116,7 +116,7 @@ config MIC_COSM
+> >
+> >  config VOP
+> >         tristate "VOP Driver"
+> > -       depends on VOP_BUS
+> > +       depends on VOP_BUS && VHOST_DPN
+> >         select VHOST_RING
+> >         select VIRTIO
+> >         help
+> > diff --git a/drivers/net/caif/Kconfig b/drivers/net/caif/Kconfig
+> > index 9db0570c5beb..661c25eb1c46 100644
+> > --- a/drivers/net/caif/Kconfig
+> > +++ b/drivers/net/caif/Kconfig
+> > @@ -50,7 +50,7 @@ config CAIF_HSI
+> >
+> >  config CAIF_VIRTIO
+> >         tristate "CAIF virtio transport driver"
+> > -       depends on CAIF && HAS_DMA
+> > +       depends on CAIF && HAS_DMA && VHOST_DPN
+> >         select VHOST_RING
+> >         select VIRTIO
+> >         select GENERIC_ALLOCATOR
+> > diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
+> > index d0cb0e583a5d..aee28def466b 100644
+> > --- a/drivers/vdpa/Kconfig
+> > +++ b/drivers/vdpa/Kconfig
+> > @@ -14,7 +14,7 @@ if VDPA_MENU
+> >
+> >  config VDPA_SIM
+> >         tristate "vDPA device simulator"
+> > -       depends on RUNTIME_TESTING_MENU && HAS_DMA
+> > +       depends on RUNTIME_TESTING_MENU && HAS_DMA && VHOST_DPN
+> >         select VDPA
+> >         select VHOST_RING
+> >         select VHOST_IOTLB
+> > diff --git a/drivers/vhost/Kconfig b/drivers/vhost/Kconfig
+> > index cb6b17323eb2..b3486e218f62 100644
+> > --- a/drivers/vhost/Kconfig
+> > +++ b/drivers/vhost/Kconfig
+> > @@ -12,6 +12,15 @@ config VHOST_RING
+> >           This option is selected by any driver which needs to access
+> >           the host side of a virtio ring.
+> >
+> > +config VHOST_DPN
+> > +       bool "VHOST dependencies"
+> > +       depends on !ARM || AEABI
+> > +       default y
+> > +       help
+> > +         Anything selecting VHOST or VHOST_RING must depend on VHOST_DPN.
+> > +         This excludes the deprecated ARM ABI since that forces a 4 byte
+> > +         alignment on all structs - incompatible with virtio spec requirements.
+> > +
+> >  config VHOST
+> >         tristate
+> >         select VHOST_IOTLB
+> > @@ -27,7 +36,7 @@ if VHOST_MENU
+> >
+> >  config VHOST_NET
+> >         tristate "Host kernel accelerator for virtio net"
+> > -       depends on NET && EVENTFD && (TUN || !TUN) && (TAP || !TAP)
+> > +       depends on NET && EVENTFD && (TUN || !TUN) && (TAP || !TAP) && VHOST_DPN
+> >         select VHOST
+> >         ---help---
+> >           This kernel module can be loaded in host kernel to accelerate
+> > @@ -39,7 +48,7 @@ config VHOST_NET
+> >
+> >  config VHOST_SCSI
+> >         tristate "VHOST_SCSI TCM fabric driver"
+> > -       depends on TARGET_CORE && EVENTFD
+> > +       depends on TARGET_CORE && EVENTFD && VHOST_DPN
+> >         select VHOST
+> >         default n
+> >         ---help---
+> > @@ -48,7 +57,7 @@ config VHOST_SCSI
+> >
+> >  config VHOST_VSOCK
+> >         tristate "vhost virtio-vsock driver"
+> > -       depends on VSOCKETS && EVENTFD
+> > +       depends on VSOCKETS && EVENTFD && VHOST_DPN
+> >         select VHOST
+> >         select VIRTIO_VSOCKETS_COMMON
+> >         default n
+> > @@ -62,7 +71,7 @@ config VHOST_VSOCK
+> >
+> >  config VHOST_VDPA
+> >         tristate "Vhost driver for vDPA-based backend"
+> > -       depends on EVENTFD
+> > +       depends on EVENTFD && VHOST_DPN
+> >         select VHOST
+> >         select VDPA
+> >         help
+> > --
+> > MST
+> >
 
 _______________________________________________
 Virtualization mailing list
