@@ -1,52 +1,52 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A0B919FD0E
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 20:24:17 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 51CED19FB90
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 19:29:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C3EA18856C;
-	Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DF39D86DFF;
+	Mon,  6 Apr 2020 17:29:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9sAem3s5SaHr; Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
+	with ESMTP id UlFTM1QUQMdc; Mon,  6 Apr 2020 17:29:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2492088538;
-	Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1E51A86DEA;
+	Mon,  6 Apr 2020 17:29:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 03C81C1D89;
-	Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F3800C0177;
+	Mon,  6 Apr 2020 17:29:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BF853C0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1F97DC0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 18:24:13 +0000 (UTC)
+ Mon,  6 Apr 2020 17:29:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id AEAB385742
+ by hemlock.osuosl.org (Postfix) with ESMTP id 0E4888852A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 18:24:13 +0000 (UTC)
+ Mon,  6 Apr 2020 17:29:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XVEyKoLJZWUf
+ with ESMTP id sjOCJDvE6NmB
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 18:24:13 +0000 (UTC)
+ Mon,  6 Apr 2020 17:29:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id B793A855D1
+ by hemlock.osuosl.org (Postfix) with ESMTPS id D7A8088527
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 18:24:12 +0000 (UTC)
+ Mon,  6 Apr 2020 17:29:40 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id E4DB7BC39;
- Mon,  6 Apr 2020 18:24:09 +0000 (UTC)
-Subject: Re: [PATCH 40/44] drm/cirrus: Don't use drm_device->dev_private
+ by mx2.suse.de (Postfix) with ESMTP id 26AD5B1FC1;
+ Mon,  6 Apr 2020 17:29:37 +0000 (UTC)
+Subject: Re: [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
 To: Daniel Vetter <daniel.vetter@ffwll.ch>,
  DRI Development <dri-devel@lists.freedesktop.org>
 References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
+ <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
  mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
@@ -73,15 +73,16 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
  HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
  3H26qrE=
-Message-ID: <a7bb7d54-2c71-b087-8347-888a5019aacc@suse.de>
-Date: Mon, 6 Apr 2020 13:58:54 +0200
+Message-ID: <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
+Date: Mon, 6 Apr 2020 14:11:09 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, Dave Airlie <airlied@redhat.com>,
- Daniel Vetter <daniel.vetter@intel.com>, Sam Ravnborg <sam@ravnborg.org>
+In-Reply-To: <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
+Cc: Dave Airlie <airlied@redhat.com>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel.vetter@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,34 +94,35 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8823516398673950948=="
+Content-Type: multipart/mixed; boundary="===============0066093547095259064=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============8823516398673950948==
+--===============0066093547095259064==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O"
+ boundary="U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O
-Content-Type: multipart/mixed; boundary="p7Xmz135DVUfuKl4aSOJzeqQjGKxCkWvv";
+--U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS
+Content-Type: multipart/mixed; boundary="6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: Daniel Vetter <daniel.vetter@ffwll.ch>,
  DRI Development <dri-devel@lists.freedesktop.org>
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+Cc: spice-devel@lists.freedesktop.org,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  virtualization@lists.linux-foundation.org, Gerd Hoffmann
  <kraxel@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>,
- Dave Airlie <airlied@redhat.com>, Sam Ravnborg <sam@ravnborg.org>
-Message-ID: <a7bb7d54-2c71-b087-8347-888a5019aacc@suse.de>
-Subject: Re: [PATCH 40/44] drm/cirrus: Don't use drm_device->dev_private
+ Dave Airlie <airlied@redhat.com>
+Message-ID: <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
+Subject: Re: [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
 References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
-In-Reply-To: <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
+ <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
+In-Reply-To: <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
 
---p7Xmz135DVUfuKl4aSOJzeqQjGKxCkWvv
+--6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
@@ -128,84 +130,145 @@ Content-Transfer-Encoding: quoted-printable
 
 
 Am 03.04.20 um 15:58 schrieb Daniel Vetter:
-> Upcasting using a container_of macro is more typesafe, faster and
-> easier for the compiler to optimize.
+> Also need to remove the drm_dev_put from the remove hook.
 >=20
 > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
 > Cc: Dave Airlie <airlied@redhat.com>
 > Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
-> Cc: "Noralf Tr=C3=B8nnes" <noralf@tronnes.org>
-> Cc: Sam Ravnborg <sam@ravnborg.org>
-> Cc: Eric Anholt <eric@anholt.net>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
 > Cc: virtualization@lists.linux-foundation.org
+> Cc: spice-devel@lists.freedesktop.org
 > ---
->  drivers/gpu/drm/cirrus/cirrus.c | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
+>  drivers/gpu/drm/qxl/qxl_drv.c | 15 ++++++++-------
+>  drivers/gpu/drm/qxl/qxl_drv.h |  3 +--
+>  drivers/gpu/drm/qxl/qxl_kms.c | 12 +-----------
+>  3 files changed, 10 insertions(+), 20 deletions(-)
 >=20
-> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus/c=
-irrus.c
-> index 4b65637147ba..744a8e337e41 100644
-> --- a/drivers/gpu/drm/cirrus/cirrus.c
-> +++ b/drivers/gpu/drm/cirrus/cirrus.c
-> @@ -59,6 +59,8 @@ struct cirrus_device {
->  	void __iomem		       *mmio;
->  };
+> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_dr=
+v.c
+> index 09102e2efabc..6b4ae4c5fb76 100644
+> --- a/drivers/gpu/drm/qxl/qxl_drv.c
+> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+> @@ -81,13 +81,16 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
+i_device_id *ent)
+>  		return -EINVAL; /* TODO: ENODEV ? */
+>  	}
 > =20
-> +#define to_cirrus(_dev) container_of(_dev, struct cirrus_device, dev)
-> +
+> -	qdev =3D kzalloc(sizeof(struct qxl_device), GFP_KERNEL);
+> -	if (!qdev)
+> +	qdev =3D devm_drm_dev_alloc(&pdev->dev, &qxl_driver,
+> +				  struct qxl_device, ddev);
+> +	if (IS_ERR(qdev)) {
+> +		pr_err("Unable to init drm dev");
+>  		return -ENOMEM;
+> +	}
 
-Maybe to_cirrus_device() ? I had the same comment for vbox and I think
-it applies to all patches.
+My feeling is that it is too early to allocate. Wouldn't it be better to
+first do the pdev and conflicting-fb stuff and allocate right before
+qxl_device_init() ?
 
 Best regards
 Thomas
 
->  /* ------------------------------------------------------------------ =
-*/
->  /*
->   * The meat of this driver. The core passes us a mode and we have to p=
-rogram
-> @@ -311,7 +313,7 @@ static int cirrus_mode_set(struct cirrus_device *ci=
-rrus,
->  static int cirrus_fb_blit_rect(struct drm_framebuffer *fb,
->  			       struct drm_rect *rect)
+> =20
+>  	ret =3D pci_enable_device(pdev);
+>  	if (ret)
+> -		goto free_dev;
+> +		return ret;
+> =20
+>  	ret =3D drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, "qxl"=
+);
+>  	if (ret)
+> @@ -101,7 +104,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
+i_device_id *ent)
+>  		}
+>  	}
+> =20
+> -	ret =3D qxl_device_init(qdev, &qxl_driver, pdev);
+> +	ret =3D qxl_device_init(qdev, pdev);
+>  	if (ret)
+>  		goto put_vga;
+> =20
+> @@ -128,8 +131,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
+i_device_id *ent)
+>  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+>  disable_pci:
+>  	pci_disable_device(pdev);
+> -free_dev:
+> -	kfree(qdev);
+> +
+>  	return ret;
+>  }
+> =20
+> @@ -155,7 +157,6 @@ qxl_pci_remove(struct pci_dev *pdev)
+>  	drm_atomic_helper_shutdown(dev);
+>  	if (is_vga(pdev))
+>  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+> -	drm_dev_put(dev);
+>  }
+> =20
+>  DEFINE_DRM_GEM_FOPS(qxl_fops);
+> diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_dr=
+v.h
+> index 435126facc9b..86ac191d9205 100644
+> --- a/drivers/gpu/drm/qxl/qxl_drv.h
+> +++ b/drivers/gpu/drm/qxl/qxl_drv.h
+> @@ -276,8 +276,7 @@ struct qxl_device {
+>  extern const struct drm_ioctl_desc qxl_ioctls[];
+>  extern int qxl_max_ioctl;
+> =20
+> -int qxl_device_init(struct qxl_device *qdev, struct drm_driver *drv,
+> -		    struct pci_dev *pdev);
+> +int qxl_device_init(struct qxl_device *qdev, struct pci_dev *pdev);
+>  void qxl_device_fini(struct qxl_device *qdev);
+> =20
+>  int qxl_modeset_init(struct qxl_device *qdev);
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_km=
+s.c
+> index 9eed1a375f24..91a34dd835d7 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -108,21 +108,13 @@ static void qxl_gc_work(struct work_struct *work)=
+
+>  }
+> =20
+>  int qxl_device_init(struct qxl_device *qdev,
+> -		    struct drm_driver *drv,
+>  		    struct pci_dev *pdev)
 >  {
-> -	struct cirrus_device *cirrus =3D fb->dev->dev_private;
-> +	struct cirrus_device *cirrus =3D to_cirrus(fb->dev);
->  	void *vmap;
->  	int idx, ret;
+>  	int r, sb;
 > =20
-> @@ -436,7 +438,7 @@ static void cirrus_pipe_enable(struct drm_simple_di=
-splay_pipe *pipe,
->  			       struct drm_crtc_state *crtc_state,
->  			       struct drm_plane_state *plane_state)
->  {
-> -	struct cirrus_device *cirrus =3D pipe->crtc.dev->dev_private;
-> +	struct cirrus_device *cirrus =3D to_cirrus(pipe->crtc.dev);
+> -	r =3D drm_dev_init(&qdev->ddev, drv, &pdev->dev);
+> -	if (r) {
+> -		pr_err("Unable to init drm dev");
+> -		goto error;
+> -	}
+> -
+>  	qdev->ddev.pdev =3D pdev;
+>  	pci_set_drvdata(pdev, &qdev->ddev);
+>  	qdev->ddev.dev_private =3D qdev;
+> -	drmm_add_final_kfree(&qdev->ddev, qdev);
 > =20
->  	cirrus_mode_set(cirrus, &crtc_state->mode, plane_state->fb);
->  	cirrus_fb_blit_fullscreen(plane_state->fb);
-> @@ -445,7 +447,7 @@ static void cirrus_pipe_enable(struct drm_simple_di=
-splay_pipe *pipe,
->  static void cirrus_pipe_update(struct drm_simple_display_pipe *pipe,
->  			       struct drm_plane_state *old_state)
->  {
-> -	struct cirrus_device *cirrus =3D pipe->crtc.dev->dev_private;
-> +	struct cirrus_device *cirrus =3D to_cirrus(pipe->crtc.dev);
->  	struct drm_plane_state *state =3D pipe->plane.state;
->  	struct drm_crtc *crtc =3D &pipe->crtc;
->  	struct drm_rect rect;
-> @@ -573,7 +575,6 @@ static int cirrus_pci_probe(struct pci_dev *pdev,
->  		return PTR_ERR(cirrus);
+>  	mutex_init(&qdev->gem.mutex);
+>  	mutex_init(&qdev->update_area_mutex);
+> @@ -138,8 +130,7 @@ int qxl_device_init(struct qxl_device *qdev,
+>  	qdev->vram_mapping =3D io_mapping_create_wc(qdev->vram_base, pci_reso=
+urce_len(pdev, 0));
+>  	if (!qdev->vram_mapping) {
+>  		pr_err("Unable to create vram_mapping");
+> -		r =3D -ENOMEM;
+> -		goto error;
+> +		return -ENOMEM;
+>  	}
 > =20
->  	dev =3D &cirrus->dev;
-> -	dev->dev_private =3D cirrus;
+>  	if (pci_resource_len(pdev, 4) > 0) {
+> @@ -293,7 +284,6 @@ int qxl_device_init(struct qxl_device *qdev,
+>  	io_mapping_free(qdev->surface_mapping);
+>  vram_mapping_free:
+>  	io_mapping_free(qdev->vram_mapping);
+> -error:
+>  	return r;
+>  }
 > =20
->  	cirrus->vram =3D devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0)=
-,
->  				    pci_resource_len(pdev, 0));
 >=20
 
 --=20
@@ -217,28 +280,28 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---p7Xmz135DVUfuKl4aSOJzeqQjGKxCkWvv--
+--6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG--
 
---dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O
+--U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl6LGX4ACgkQaA3BHVML
-eiO7Xwf/RXZYBWOH9u7qutpw+M6TiyzhA0dsQU23i/2TA0BaluPl8zMzZFE7VC5c
-p9V9PyLkNptBgMVrQrm4FMTz/e+ndZYipHRX2OoFjoCXzuWC21ovliQ+0YKg7DXP
-W27P4t/q0dgCHAl/7DxWB/R/fcCMEwnYDYg34epY7Evz52MMRsysVAgGhbQU/wK8
-HRdX1NfZw3dIIH9B7Qn+dPZSGeXhuBGq8+fkJ3BqNccctOy7JCJVVfNUwHmD4+WF
-uNwDAWarsUjxdtOWzihAqcJDQnNbmrTI2m8UtFyoVetcC9S8saYUcwmHeRptOCCA
-2opfja1lF05o3eVbMAbzxmoT7FRI0A==
-=Exn2
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl6LHF0ACgkQaA3BHVML
+eiN5oAgAiGX1c+294XzOEnNtdftBXz6wvc9tUg7FAMoBixHQK3BrcgYD9CIZ5RkA
+EMKoRH7GkgVruL7ABjv6Pw2h/Gb3ywxUui1pNONAmqj5mk59l7ZpNxHHgtArTvV1
++puo9VV2l7UklAoH+w8xf9obXFKSwfwyRX+bIuemq1pJGwRbIQ0/XxkTe4fK6CVu
+g8+b9arcUfykEiZXH6MUWOZwUkj2nvC/oVVdc3+sFThfbKhkAd2j+Zbfa2OOXWJ6
+Rf1no3zjvXrwawkGBd6k/WpwHBziIM5C6LHeAOR4OVckgLFI+cLjEiix7VyYcwYR
+kiWzBaGT9GfEkX90fAqhSFia/0GXQA==
+=mZNW
 -----END PGP SIGNATURE-----
 
---dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O--
+--U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS--
 
---===============8823516398673950948==
+--===============0066093547095259064==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -248,4 +311,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8823516398673950948==--
+--===============0066093547095259064==--
