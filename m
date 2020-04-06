@@ -2,77 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E64FB19F544
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 13:57:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A0B919FD0E
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 20:24:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 797B28823A;
-	Mon,  6 Apr 2020 11:57:18 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C3EA18856C;
+	Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SbjTXB18DGMi; Mon,  6 Apr 2020 11:57:16 +0000 (UTC)
+	with ESMTP id 9sAem3s5SaHr; Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 7FCE6882FC;
-	Mon,  6 Apr 2020 11:57:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2492088538;
+	Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5F0D4C0177;
-	Mon,  6 Apr 2020 11:57:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 03C81C1D89;
+	Mon,  6 Apr 2020 18:24:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D0E76C0177
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BF853C0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 11:57:08 +0000 (UTC)
+ Mon,  6 Apr 2020 18:24:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id B9B9522739
+ by fraxinus.osuosl.org (Postfix) with ESMTP id AEAB385742
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 11:57:08 +0000 (UTC)
+ Mon,  6 Apr 2020 18:24:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gxuBdbehNidI
+ with ESMTP id XVEyKoLJZWUf
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 11:57:07 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by silver.osuosl.org (Postfix) with ESMTPS id 3C40E2326C
+ Mon,  6 Apr 2020 18:24:13 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id B793A855D1
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 11:57:06 +0000 (UTC)
-Received: from zn.tnic (p200300EC2F04F600C571FE02886A814C.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f04:f600:c571:fe02:886a:814c])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id E7D3D1EC05D6;
- Mon,  6 Apr 2020 13:57:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1586174223;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=6mkdJTICOEGUmg5Sf3oUN1anrQ+rTmVREXUkf1ARKJE=;
- b=VpNMhbNpDvCpH+/+qc/IbAFhZgdcKcDPIv/3B+xtociH+gmByxjgr8ZIS1cyqpzEo/hLxo
- BnNbctTh99zUhG3w9BT1hjF7Pwe3F5rqrzQnxfkrH4Ry50KxU+imvuvl55NhxW0Dm9raTc
- 3ccjkXu8dg6Ngh1tCvTKYVw8unLL30w=
-Date: Mon, 6 Apr 2020 13:56:59 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH 15/70] x86/boot/compressed/64: Always switch to own
- page-table
-Message-ID: <20200406115659.GD2520@zn.tnic>
-References: <20200319091407.1481-1-joro@8bytes.org>
- <20200319091407.1481-16-joro@8bytes.org>
+ Mon,  6 Apr 2020 18:24:12 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id E4DB7BC39;
+ Mon,  6 Apr 2020 18:24:09 +0000 (UTC)
+Subject: Re: [PATCH 40/44] drm/cirrus: Don't use drm_device->dev_private
+To: Daniel Vetter <daniel.vetter@ffwll.ch>,
+ DRI Development <dri-devel@lists.freedesktop.org>
+References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
+ <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <a7bb7d54-2c71-b087-8347-888a5019aacc@suse.de>
+Date: Mon, 6 Apr 2020 13:58:54 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200319091407.1481-16-joro@8bytes.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Kees Cook <keescook@chromium.org>,
- kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Joerg Roedel <jroedel@suse.de>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+In-Reply-To: <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Dave Airlie <airlied@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, Sam Ravnborg <sam@ravnborg.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,31 +93,159 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============8823516398673950948=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Mar 19, 2020 at 10:13:12AM +0100, Joerg Roedel wrote:
-> From: Joerg Roedel <jroedel@suse.de>
-> 
-> When booted through startup_64 the kernel keeps running on the EFI
-> page-table until the KASLR code sets up its own page-table. Without
-> KASLR the pre-decompression boot code never switches off the EFI
-> page-table. Change that by unconditionally switching to our own
-> page-table once the kernel is relocated.
-> 
-> This makes sure we can make changes to the mapping when necessary, for
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============8823516398673950948==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O"
 
-Pls use passive voice in your commit message: no "we" or "I", etc, and
-describe your changes in imperative mood.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O
+Content-Type: multipart/mixed; boundary="p7Xmz135DVUfuKl4aSOJzeqQjGKxCkWvv";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>,
+ DRI Development <dri-devel@lists.freedesktop.org>
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann
+ <kraxel@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>,
+ Dave Airlie <airlied@redhat.com>, Sam Ravnborg <sam@ravnborg.org>
+Message-ID: <a7bb7d54-2c71-b087-8347-888a5019aacc@suse.de>
+Subject: Re: [PATCH 40/44] drm/cirrus: Don't use drm_device->dev_private
+References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
+ <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
+In-Reply-To: <20200403135828.2542770-41-daniel.vetter@ffwll.ch>
 
--- 
-Regards/Gruss,
-    Boris.
+--p7Xmz135DVUfuKl4aSOJzeqQjGKxCkWvv
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-https://people.kernel.org/tglx/notes-about-netiquette
+
+
+Am 03.04.20 um 15:58 schrieb Daniel Vetter:
+> Upcasting using a container_of macro is more typesafe, faster and
+> easier for the compiler to optimize.
+>=20
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+> Cc: "Noralf Tr=C3=B8nnes" <noralf@tronnes.org>
+> Cc: Sam Ravnborg <sam@ravnborg.org>
+> Cc: Eric Anholt <eric@anholt.net>
+> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: virtualization@lists.linux-foundation.org
+> ---
+>  drivers/gpu/drm/cirrus/cirrus.c | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/cirrus/c=
+irrus.c
+> index 4b65637147ba..744a8e337e41 100644
+> --- a/drivers/gpu/drm/cirrus/cirrus.c
+> +++ b/drivers/gpu/drm/cirrus/cirrus.c
+> @@ -59,6 +59,8 @@ struct cirrus_device {
+>  	void __iomem		       *mmio;
+>  };
+> =20
+> +#define to_cirrus(_dev) container_of(_dev, struct cirrus_device, dev)
+> +
+
+Maybe to_cirrus_device() ? I had the same comment for vbox and I think
+it applies to all patches.
+
+Best regards
+Thomas
+
+>  /* ------------------------------------------------------------------ =
+*/
+>  /*
+>   * The meat of this driver. The core passes us a mode and we have to p=
+rogram
+> @@ -311,7 +313,7 @@ static int cirrus_mode_set(struct cirrus_device *ci=
+rrus,
+>  static int cirrus_fb_blit_rect(struct drm_framebuffer *fb,
+>  			       struct drm_rect *rect)
+>  {
+> -	struct cirrus_device *cirrus =3D fb->dev->dev_private;
+> +	struct cirrus_device *cirrus =3D to_cirrus(fb->dev);
+>  	void *vmap;
+>  	int idx, ret;
+> =20
+> @@ -436,7 +438,7 @@ static void cirrus_pipe_enable(struct drm_simple_di=
+splay_pipe *pipe,
+>  			       struct drm_crtc_state *crtc_state,
+>  			       struct drm_plane_state *plane_state)
+>  {
+> -	struct cirrus_device *cirrus =3D pipe->crtc.dev->dev_private;
+> +	struct cirrus_device *cirrus =3D to_cirrus(pipe->crtc.dev);
+> =20
+>  	cirrus_mode_set(cirrus, &crtc_state->mode, plane_state->fb);
+>  	cirrus_fb_blit_fullscreen(plane_state->fb);
+> @@ -445,7 +447,7 @@ static void cirrus_pipe_enable(struct drm_simple_di=
+splay_pipe *pipe,
+>  static void cirrus_pipe_update(struct drm_simple_display_pipe *pipe,
+>  			       struct drm_plane_state *old_state)
+>  {
+> -	struct cirrus_device *cirrus =3D pipe->crtc.dev->dev_private;
+> +	struct cirrus_device *cirrus =3D to_cirrus(pipe->crtc.dev);
+>  	struct drm_plane_state *state =3D pipe->plane.state;
+>  	struct drm_crtc *crtc =3D &pipe->crtc;
+>  	struct drm_rect rect;
+> @@ -573,7 +575,6 @@ static int cirrus_pci_probe(struct pci_dev *pdev,
+>  		return PTR_ERR(cirrus);
+> =20
+>  	dev =3D &cirrus->dev;
+> -	dev->dev_private =3D cirrus;
+> =20
+>  	cirrus->vram =3D devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0)=
+,
+>  				    pci_resource_len(pdev, 0));
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--p7Xmz135DVUfuKl4aSOJzeqQjGKxCkWvv--
+
+--dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl6LGX4ACgkQaA3BHVML
+eiO7Xwf/RXZYBWOH9u7qutpw+M6TiyzhA0dsQU23i/2TA0BaluPl8zMzZFE7VC5c
+p9V9PyLkNptBgMVrQrm4FMTz/e+ndZYipHRX2OoFjoCXzuWC21ovliQ+0YKg7DXP
+W27P4t/q0dgCHAl/7DxWB/R/fcCMEwnYDYg34epY7Evz52MMRsysVAgGhbQU/wK8
+HRdX1NfZw3dIIH9B7Qn+dPZSGeXhuBGq8+fkJ3BqNccctOy7JCJVVfNUwHmD4+WF
+uNwDAWarsUjxdtOWzihAqcJDQnNbmrTI2m8UtFyoVetcC9S8saYUcwmHeRptOCCA
+2opfja1lF05o3eVbMAbzxmoT7FRI0A==
+=Exn2
+-----END PGP SIGNATURE-----
+
+--dD9lAIfGQLeukxuvp6esfQcqRLXqsbd6O--
+
+--===============8823516398673950948==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============8823516398673950948==--
