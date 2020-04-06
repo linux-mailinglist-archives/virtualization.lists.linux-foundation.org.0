@@ -2,87 +2,87 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FB9C1A003C
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 23:35:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C9951A0043
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 23:35:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C47CF882CC;
-	Mon,  6 Apr 2020 21:35:09 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 39F29882ED;
+	Mon,  6 Apr 2020 21:35:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IX2L3gwi3HmM; Mon,  6 Apr 2020 21:35:09 +0000 (UTC)
+	with ESMTP id wVIFfYImICfe; Mon,  6 Apr 2020 21:35:16 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 9B6E388268;
-	Mon,  6 Apr 2020 21:35:09 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6D678882CC;
+	Mon,  6 Apr 2020 21:35:16 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 95261C0177;
-	Mon,  6 Apr 2020 21:35:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 58DCEC0177;
+	Mon,  6 Apr 2020 21:35:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1CDBFC0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1D1EDC0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 21:35:08 +0000 (UTC)
+ Mon,  6 Apr 2020 21:35:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 13780204B0
+ by whitealder.osuosl.org (Postfix) with ESMTP id 0D70087CAB
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 21:35:08 +0000 (UTC)
+ Mon,  6 Apr 2020 21:35:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id N1oIKX6MVhdu
+ with ESMTP id wyDy2-EcM6fp
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 21:35:06 +0000 (UTC)
+ Mon,  6 Apr 2020 21:35:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 842F222850
+ [207.211.31.81])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 25F0287C8A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 21:35:06 +0000 (UTC)
+ Mon,  6 Apr 2020 21:35:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586208905;
+ s=mimecast20190719; t=1586208908;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=qWI++drUheRLgJRLP25chFJvpGmbc+MWUzzhPso8aKg=;
- b=hGQDNFBhCtLPo3kFLlMANxSX7C8lkqkf8wWbP9w54kzZMlAz+qy4NhVKU0cx7V3XCwKewQ
- 84P6kmFX38ce73CtIYLIhgUYxdsDXa5yREJyUDY7rcod+9X3B/xKxh6wgf+GVey7cQszjf
- hR7ARktooUzenua3zeYSizOQpfGMN/g=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-334-SFyrFlQUOjyEAU8ECvdIQg-1; Mon, 06 Apr 2020 17:35:03 -0400
-X-MC-Unique: SFyrFlQUOjyEAU8ECvdIQg-1
-Received: by mail-wr1-f72.google.com with SMTP id h14so573875wrr.12
+ bh=s9Mom4OhtTxtDHxzUnnXxvRU3zaONixqwgs5hBxczCA=;
+ b=XQ+aDFZ9+4bYDdDkcoVe7fU6mRMoRPkTQTE6JyK+HbWCsnQUpM84/Idmyc35Qg6vf8mbDF
+ vlWexOuJsDd3V8KsjwZeB/N+KLzEiPyHA2Gj92/6MWCJeupL1aGzW/MKni1JD81w8nftwn
+ hJVxboMbttrrMD3bkz8AxCwOYZpPw1o=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-273-HMlGzWEkMladYQe1Xcg30g-1; Mon, 06 Apr 2020 17:35:06 -0400
+X-MC-Unique: HMlGzWEkMladYQe1Xcg30g-1
+Received: by mail-wr1-f71.google.com with SMTP id 88so589201wrq.4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Apr 2020 14:35:03 -0700 (PDT)
+ Mon, 06 Apr 2020 14:35:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=qWI++drUheRLgJRLP25chFJvpGmbc+MWUzzhPso8aKg=;
- b=nNdqYjPAj+59Zdv61ckcYeWdM57sbzceMrKITiivfqb3+dSAGktM2/voTMLp0PylT/
- PQxWRjdodEE+CjdqUm1Z0HrqH0d0/VDBKYZrSm/mqUyxVBZqvEFRUbtyE4i2IvC4fL6G
- HHl85OAZXxBlcm29ktHv4JvfE4sMEwJ6Qw+nTkvilGEGWL/KWbLiTJaeCDbpLOue9ze4
- 1vYeaHaFOMYxYCUZZixF+xhLs+QclEHiMTgQOto4K+1XUKDh59K7TqB6DyIWMy6ntHUH
- UWbzCT4cPTBUXN5wmPxwHEIoTH30k5RO+Vs+E/Rcxot1cE0kAwJsLgfr9n/+bhFD4VMq
- 1eqA==
-X-Gm-Message-State: AGi0Pua1FxT+v1DCZg8URaEMkGWYJIxAln4onF10U/j4+Lma9KW44j76
- y4isHL98zy8unLBLTtV3hjD1Uyzg/IL2Xx6CNhuUqScVR4LyRyjZin4OaUx0sA+TO6ugfP9n3r0
- o8UVONIpFyP45ErFMawAtGeUdkFxJRG8nSKK4r9NJng==
-X-Received: by 2002:a1c:6189:: with SMTP id v131mr1379081wmb.69.1586208902288; 
- Mon, 06 Apr 2020 14:35:02 -0700 (PDT)
-X-Google-Smtp-Source: APiQypIGMFjC6JEE4rj0+kmWXxAPv5VbkaMdS8mzLAfjCwSQ+lPL71eAN+wnTMem5IdlA9ywESErYA==
-X-Received: by 2002:a1c:6189:: with SMTP id v131mr1379063wmb.69.1586208902051; 
- Mon, 06 Apr 2020 14:35:02 -0700 (PDT)
+ bh=s9Mom4OhtTxtDHxzUnnXxvRU3zaONixqwgs5hBxczCA=;
+ b=GdEifbFfoPOkCbn9v6Cre+LJh6+T8cKoJQtH6u5UxnfW4EL7H4JgKOR/myNgSG8e2/
+ 5GlXXChmNXBah0IGJY9SJQTHrdE7ScrdrX0JyILSY7Yk7uqk3R+Ad/ETO5qId/VPLLKt
+ LwNS75GhXeYT7xjFW2eNcZ09ZNsSeDX8THzkqYcw2Sb0YJK3WqXjgY1N5+Ca3naxlE1b
+ BgaMAV99LbgV5sPE1BmFZUjsPUfjD6+OmUdqiDv/5vVQuKdfl3GGGVqO0fHwKsV+4G2k
+ wzZmqSlgzN2ASO2U0YNmuk803i5DPpM3/xDRMAuHhU6I61pqz7eZWsF6OkOmC6Oro1q4
+ KgoQ==
+X-Gm-Message-State: AGi0PuZjZ37HEguwgp+EjiG2oWpW7KDAuU3P6o+D/j031NVpbFGYqSJM
+ 08TBoltPtX4Q1u4NZPt40Eb0IagVKq4xWJ/vZVnf56dakJYmWdPYv0oNQHcG5ALERpX9uUwIiin
+ /BDFLZLICUtnkPhMhCpUyPtlp561+CYwYmpS2TW+BrA==
+X-Received: by 2002:a1c:a344:: with SMTP id m65mr1085020wme.20.1586208904590; 
+ Mon, 06 Apr 2020 14:35:04 -0700 (PDT)
+X-Google-Smtp-Source: APiQypKQS8eELGxP1CiHyVt8zaFr65G004GNObWifgUCCYuDSdGnBqNiBsJWh3gS5NLmtJObwlGW/A==
+X-Received: by 2002:a1c:a344:: with SMTP id m65mr1084996wme.20.1586208904336; 
+ Mon, 06 Apr 2020 14:35:04 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id u17sm31576241wra.63.2020.04.06.14.35.01
+ by smtp.gmail.com with ESMTPSA id h2sm1041241wmb.16.2020.04.06.14.35.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2020 14:35:01 -0700 (PDT)
-Date: Mon, 6 Apr 2020 17:35:00 -0400
+ Mon, 06 Apr 2020 14:35:03 -0700 (PDT)
+Date: Mon, 6 Apr 2020 17:35:02 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v5 04/12] virtio: add VIRTIO_RING_NO_LEGACY
-Message-ID: <20200406213314.248038-5-mst@redhat.com>
+Subject: [PATCH v5 05/12] virtio: stop using legacy struct vring in kernel
+Message-ID: <20200406213314.248038-6-mst@redhat.com>
 References: <20200406213314.248038-1-mst@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20200406213314.248038-1-mst@redhat.com>
@@ -91,8 +91,9 @@ X-Mutt-Fcc: =sent
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Matej Genci <matej.genci@nutanix.com>,
- virtualization@lists.linux-foundation.org
+Cc: Jens Axboe <axboe@kernel.dk>, virtualization@lists.linux-foundation.org,
+ linux-block@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,52 +110,133 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Matej Genci <matej.genci@nutanix.com>
+struct vring (in the uapi directory) and supporting APIs are kept
+around to solely avoid breaking old userspace builds.
+It's not actually part of the UAPI - it was kept in the UAPI
+header by mistake, and using it in kernel isn't necessary
+and prevents us from making changes safely.
+In particular, the APIs actually assume the legacy layout.
 
-Add macro to disable legacy vring functions.
+Add an internal kernel-only struct vring and
+switch everyone to use that.
 
-Signed-off-by: Matej Genci <matej.genci@nutanix.com>
-Link: https://lore.kernel.org/r/20190911124942.243713-1-matej.genci@nutanix.com
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- drivers/virtio/virtio_pci_modern.c | 1 +
- include/uapi/linux/virtio_ring.h   | 4 ++++
- 2 files changed, 5 insertions(+)
+ drivers/block/virtio_blk.c       |  1 +
+ include/linux/virtio.h           |  1 -
+ include/linux/virtio_ring.h      | 10 ++++++++++
+ include/linux/vringh.h           |  1 +
+ include/uapi/linux/virtio_ring.h | 26 ++++++++++++++++----------
+ 5 files changed, 28 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
-index 7abcc50838b8..db93cedd262f 100644
---- a/drivers/virtio/virtio_pci_modern.c
-+++ b/drivers/virtio/virtio_pci_modern.c
-@@ -16,6 +16,7 @@
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index 0736248999b0..dd5732dc4b07 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -15,6 +15,7 @@
+ #include <linux/blk-mq.h>
+ #include <linux/blk-mq-virtio.h>
+ #include <linux/numa.h>
++#include <uapi/linux/virtio_ring.h>
  
- #include <linux/delay.h>
- #define VIRTIO_PCI_NO_LEGACY
-+#define VIRTIO_RING_NO_LEGACY
- #include "virtio_pci_common.h"
+ #define PART_BITS 4
+ #define VQ_NAME_LEN 16
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index 15f906e4a748..a493eac08393 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -9,7 +9,6 @@
+ #include <linux/device.h>
+ #include <linux/mod_devicetable.h>
+ #include <linux/gfp.h>
+-#include <linux/vringh.h>
  
+ /**
+  * virtqueue - a queue to register buffers for sending or receiving.
+diff --git a/include/linux/virtio_ring.h b/include/linux/virtio_ring.h
+index 3dc70adfe5f5..11680e74761a 100644
+--- a/include/linux/virtio_ring.h
++++ b/include/linux/virtio_ring.h
+@@ -60,6 +60,16 @@ static inline void virtio_store_mb(bool weak_barriers,
+ struct virtio_device;
+ struct virtqueue;
+ 
++struct vring {
++	unsigned int num;
++
++	struct vring_desc *desc;
++
++	struct vring_avail *avail;
++
++	struct vring_used *used;
++};
++
  /*
+  * Creates a virtqueue and allocates the descriptor ring.  If
+  * may_reduce_num is set, then this may allocate a smaller ring than
+diff --git a/include/linux/vringh.h b/include/linux/vringh.h
+index 9e2763d7c159..d71b3710f58e 100644
+--- a/include/linux/vringh.h
++++ b/include/linux/vringh.h
+@@ -11,6 +11,7 @@
+ #ifndef _LINUX_VRINGH_H
+ #define _LINUX_VRINGH_H
+ #include <uapi/linux/virtio_ring.h>
++#include <linux/virtio_ring.h>
+ #include <linux/virtio_byteorder.h>
+ #include <linux/uio.h>
+ #include <linux/slab.h>
 diff --git a/include/uapi/linux/virtio_ring.h b/include/uapi/linux/virtio_ring.h
-index 559f42e73315..9223c3a5c46a 100644
+index 9223c3a5c46a..8961a4adda5c 100644
 --- a/include/uapi/linux/virtio_ring.h
 +++ b/include/uapi/linux/virtio_ring.h
-@@ -135,6 +135,8 @@ struct vring {
- #define VRING_USED_ALIGN_SIZE 4
- #define VRING_DESC_ALIGN_SIZE 16
+@@ -118,16 +118,6 @@ struct vring_used {
+ 	struct vring_used_elem ring[];
+ };
  
-+#ifndef VIRTIO_RING_NO_LEGACY
+-struct vring {
+-	unsigned int num;
+-
+-	struct vring_desc *desc;
+-
+-	struct vring_avail *avail;
+-
+-	struct vring_used *used;
+-};
+-
+ /* Alignment requirements for vring elements.
+  * When using pre-virtio 1.0 layout, these fall out naturally.
+  */
+@@ -166,6 +156,21 @@ struct vring {
+ #define vring_used_event(vr) ((vr)->avail->ring[(vr)->num])
+ #define vring_avail_event(vr) (*(__virtio16 *)&(vr)->used->ring[(vr)->num])
+ 
++#ifndef __KERNEL__
++/*
++ * The following definitions have been put in the UAPI header by mistake. We
++ * keep them around to avoid breaking old userspace builds.
++ */
++struct vring {
++	unsigned int num;
 +
- /* The standard layout for the ring is a continuous chunk of memory which looks
-  * like this.  We assume num is a power of 2.
-  *
-@@ -181,6 +183,8 @@ static inline unsigned vring_size(unsigned int num, unsigned long align)
++	struct vring_desc *desc;
++
++	struct vring_avail *avail;
++
++	struct vring_used *used;
++};
++
+ static inline void vring_init(struct vring *vr, unsigned int num, void *p,
+ 			      unsigned long align)
+ {
+@@ -182,6 +187,7 @@ static inline unsigned vring_size(unsigned int num, unsigned long align)
+ 		 + align - 1) & ~(align - 1))
  		+ sizeof(__virtio16) * 3 + sizeof(struct vring_used_elem) * num;
  }
++#endif
  
-+#endif /* VIRTIO_RING_NO_LEGACY */
-+
- /* The following is used with USED_EVENT_IDX and AVAIL_EVENT_IDX */
- /* Assuming a given event_idx value from the other side, if
-  * we have just incremented index from old to new_idx,
+ #endif /* VIRTIO_RING_NO_LEGACY */
+ 
 -- 
 MST
 
