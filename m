@@ -1,88 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51CED19FB90
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 19:29:46 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id DF39D86DFF;
-	Mon,  6 Apr 2020 17:29:44 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UlFTM1QUQMdc; Mon,  6 Apr 2020 17:29:44 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1E51A86DEA;
-	Mon,  6 Apr 2020 17:29:44 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F3800C0177;
-	Mon,  6 Apr 2020 17:29:43 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1F97DC0177
- for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 17:29:42 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3894119F59A
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 14:12:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 0E4888852A
- for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 17:29:42 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id DFE11884C5;
+	Mon,  6 Apr 2020 12:12:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id PMytGuENRisl; Mon,  6 Apr 2020 12:12:53 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 71BC1884BF;
+	Mon,  6 Apr 2020 12:12:53 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5441EC0177;
+	Mon,  6 Apr 2020 12:12:53 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6CC53C0177
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  6 Apr 2020 12:12:51 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 562B587C24
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  6 Apr 2020 12:12:51 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id sjOCJDvE6NmB
+ with ESMTP id LoTkJAWMCIlS
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 17:29:41 +0000 (UTC)
+ Mon,  6 Apr 2020 12:12:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by hemlock.osuosl.org (Postfix) with ESMTPS id D7A8088527
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 78B0186CC5
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 17:29:40 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 26AD5B1FC1;
- Mon,  6 Apr 2020 17:29:37 +0000 (UTC)
-Subject: Re: [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
-To: Daniel Vetter <daniel.vetter@ffwll.ch>,
- DRI Development <dri-devel@lists.freedesktop.org>
-References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
-Date: Mon, 6 Apr 2020 14:11:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ Mon,  6 Apr 2020 12:12:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1586175169;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ouQfW90npHD033GMDM+a2FinSD7SQ9pCB41aFB2pv8M=;
+ b=erBtvvthDEXSWpstqM67JfBIHDh7CGvDx4Qr3tfsmZPcnQvVguSfU9yxPAc8T42BoF8442
+ 4Dh7HDkXEE/wOKUlpnDgyVgR/Ct5QbPD8Nl9QMKNpXtvXE0VVMiXEB8KWU2saHKPHXefax
+ YLwzZumfWf39ZurTouLYA0BGq3rZbVM=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-479-rysEEb85O5Wsp1Gj8y4__w-1; Mon, 06 Apr 2020 08:12:45 -0400
+X-MC-Unique: rysEEb85O5Wsp1Gj8y4__w-1
+Received: by mail-wr1-f70.google.com with SMTP id q9so1154676wrw.22
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 06 Apr 2020 05:12:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=ouQfW90npHD033GMDM+a2FinSD7SQ9pCB41aFB2pv8M=;
+ b=DqD1KjQ/2tyB4MBTDIMf2qfhARQTpI7Xqt3qoZEa42JE+xSlwRuQVhH7/IxRxC1JSv
+ 9xZmvISQJWmG2hYw3Lqg0dDWZTW8w/jPM3n9NI9xX+d0Ww9W8BeQjvwxvV7cOEILS3mU
+ 79cwEE1yzhbdd69+4ZHlAKFXeW+0Q1DloKpQNB6uTLS1b4JbZv3dhiDLVk68dEtNERgh
+ /oyeA6IAu6XxanOydYyF+Ygj0k8nOlAswPtUEZu3QC9v8EgbnYdedOBT0vDURKdrK1GS
+ jMDdSaYEBAF5rVFfICO2Wv5mzQJLHfFMqUNrqRtuufaM6cgkSs/Vh/7Bt0bboEJHbvaw
+ DZhQ==
+X-Gm-Message-State: AGi0PuZeLbLm5v4754OnGCsUNptzlI2pXNG8jQWq3tilUIAZXH/rzuFL
+ h9FaA5YA6PC6sR0J3bzwCmyKe8Nv1lleB2ejV2iF1bz44K8AN+FCvrj6+GVyF2rOyUOQFP3md49
+ TeAlYxfd6JAp5J5sj3BZgQYTVgzifu6YKoGTfq8GHHQ==
+X-Received: by 2002:a7b:cb03:: with SMTP id u3mr20975147wmj.12.1586175164696; 
+ Mon, 06 Apr 2020 05:12:44 -0700 (PDT)
+X-Google-Smtp-Source: APiQypK4UDlctUcc5AyT0Y1eM00Stu92bOV1riiMCGdPiZpDMtuNKkpU/qBM4BYhbqFnYLAuIIxflQ==
+X-Received: by 2002:a7b:cb03:: with SMTP id u3mr20975119wmj.12.1586175164472; 
+ Mon, 06 Apr 2020 05:12:44 -0700 (PDT)
+Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
+ by smtp.gmail.com with ESMTPSA id h13sm870991wru.64.2020.04.06.05.12.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Apr 2020 05:12:43 -0700 (PDT)
+Date: Mon, 6 Apr 2020 08:12:42 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v2 1/2] vdpa-sim: depend on HAS_DMA
+Message-ID: <20200406121233.109889-2-mst@redhat.com>
+References: <20200406121233.109889-1-mst@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-Cc: Dave Airlie <airlied@redhat.com>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org,
- Daniel Vetter <daniel.vetter@intel.com>
+In-Reply-To: <20200406121233.109889-1-mst@redhat.com>
+X-Mailer: git-send-email 2.24.1.751.gd10ce2899c
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: "kbuild-all@lists.01.org" <kbuild-all@lists.01.org>,
+ kbuild test robot <lkp@intel.com>,
+ "christophe.lyon@st.com" <christophe.lyon@st.com>,
+ "richard.henderson@linaro.org" <richard.henderson@linaro.org>,
+ virtualization@lists.linux-foundation.org,
+ "daniel.santos@pobox.com" <daniel.santos@pobox.com>,
+ Russell King <rmk+kernel@armlinux.org.uk>, Ard Biesheuvel <ardb@kernel.org>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,221 +110,45 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0066093547095259064=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0066093547095259064==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS"
+set_dma_ops isn't available on all architectures:
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS
-Content-Type: multipart/mixed; boundary="6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>,
- DRI Development <dri-devel@lists.freedesktop.org>
-Cc: spice-devel@lists.freedesktop.org,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, Gerd Hoffmann
- <kraxel@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>,
- Dave Airlie <airlied@redhat.com>
-Message-ID: <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
-Subject: Re: [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
-References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-In-Reply-To: <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
+        make ARCH=um
+...
 
---6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+   drivers/vdpa/vdpa_sim/vdpa_sim.c: In function 'vdpasim_create':
+>> drivers/vdpa/vdpa_sim/vdpa_sim.c:324:2: error: implicit declaration of function 'set_dma_ops'; did you mean 'set_groups'?
++[-Werror=implicit-function-declaration]
+     set_dma_ops(dev, &vdpasim_dma_ops);
+     ^~~~~~~~~~~
+     set_groups
 
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+---
+ drivers/vdpa/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
-Am 03.04.20 um 15:58 schrieb Daniel Vetter:
-> Also need to remove the drm_dev_put from the remove hook.
->=20
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: Dave Airlie <airlied@redhat.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: spice-devel@lists.freedesktop.org
-> ---
->  drivers/gpu/drm/qxl/qxl_drv.c | 15 ++++++++-------
->  drivers/gpu/drm/qxl/qxl_drv.h |  3 +--
->  drivers/gpu/drm/qxl/qxl_kms.c | 12 +-----------
->  3 files changed, 10 insertions(+), 20 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_dr=
-v.c
-> index 09102e2efabc..6b4ae4c5fb76 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> @@ -81,13 +81,16 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
-i_device_id *ent)
->  		return -EINVAL; /* TODO: ENODEV ? */
->  	}
-> =20
-> -	qdev =3D kzalloc(sizeof(struct qxl_device), GFP_KERNEL);
-> -	if (!qdev)
-> +	qdev =3D devm_drm_dev_alloc(&pdev->dev, &qxl_driver,
-> +				  struct qxl_device, ddev);
-> +	if (IS_ERR(qdev)) {
-> +		pr_err("Unable to init drm dev");
->  		return -ENOMEM;
-> +	}
-
-My feeling is that it is too early to allocate. Wouldn't it be better to
-first do the pdev and conflicting-fb stuff and allocate right before
-qxl_device_init() ?
-
-Best regards
-Thomas
-
-> =20
->  	ret =3D pci_enable_device(pdev);
->  	if (ret)
-> -		goto free_dev;
-> +		return ret;
-> =20
->  	ret =3D drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, "qxl"=
-);
->  	if (ret)
-> @@ -101,7 +104,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
-i_device_id *ent)
->  		}
->  	}
-> =20
-> -	ret =3D qxl_device_init(qdev, &qxl_driver, pdev);
-> +	ret =3D qxl_device_init(qdev, pdev);
->  	if (ret)
->  		goto put_vga;
-> =20
-> @@ -128,8 +131,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
-i_device_id *ent)
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
->  disable_pci:
->  	pci_disable_device(pdev);
-> -free_dev:
-> -	kfree(qdev);
-> +
->  	return ret;
->  }
-> =20
-> @@ -155,7 +157,6 @@ qxl_pci_remove(struct pci_dev *pdev)
->  	drm_atomic_helper_shutdown(dev);
->  	if (is_vga(pdev))
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
-> -	drm_dev_put(dev);
->  }
-> =20
->  DEFINE_DRM_GEM_FOPS(qxl_fops);
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_dr=
-v.h
-> index 435126facc9b..86ac191d9205 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.h
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.h
-> @@ -276,8 +276,7 @@ struct qxl_device {
->  extern const struct drm_ioctl_desc qxl_ioctls[];
->  extern int qxl_max_ioctl;
-> =20
-> -int qxl_device_init(struct qxl_device *qdev, struct drm_driver *drv,
-> -		    struct pci_dev *pdev);
-> +int qxl_device_init(struct qxl_device *qdev, struct pci_dev *pdev);
->  void qxl_device_fini(struct qxl_device *qdev);
-> =20
->  int qxl_modeset_init(struct qxl_device *qdev);
-> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_km=
-s.c
-> index 9eed1a375f24..91a34dd835d7 100644
-> --- a/drivers/gpu/drm/qxl/qxl_kms.c
-> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
-> @@ -108,21 +108,13 @@ static void qxl_gc_work(struct work_struct *work)=
-
->  }
-> =20
->  int qxl_device_init(struct qxl_device *qdev,
-> -		    struct drm_driver *drv,
->  		    struct pci_dev *pdev)
->  {
->  	int r, sb;
-> =20
-> -	r =3D drm_dev_init(&qdev->ddev, drv, &pdev->dev);
-> -	if (r) {
-> -		pr_err("Unable to init drm dev");
-> -		goto error;
-> -	}
-> -
->  	qdev->ddev.pdev =3D pdev;
->  	pci_set_drvdata(pdev, &qdev->ddev);
->  	qdev->ddev.dev_private =3D qdev;
-> -	drmm_add_final_kfree(&qdev->ddev, qdev);
-> =20
->  	mutex_init(&qdev->gem.mutex);
->  	mutex_init(&qdev->update_area_mutex);
-> @@ -138,8 +130,7 @@ int qxl_device_init(struct qxl_device *qdev,
->  	qdev->vram_mapping =3D io_mapping_create_wc(qdev->vram_base, pci_reso=
-urce_len(pdev, 0));
->  	if (!qdev->vram_mapping) {
->  		pr_err("Unable to create vram_mapping");
-> -		r =3D -ENOMEM;
-> -		goto error;
-> +		return -ENOMEM;
->  	}
-> =20
->  	if (pci_resource_len(pdev, 4) > 0) {
-> @@ -293,7 +284,6 @@ int qxl_device_init(struct qxl_device *qdev,
->  	io_mapping_free(qdev->surface_mapping);
->  vram_mapping_free:
->  	io_mapping_free(qdev->vram_mapping);
-> -error:
->  	return r;
->  }
-> =20
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG--
-
---U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl6LHF0ACgkQaA3BHVML
-eiN5oAgAiGX1c+294XzOEnNtdftBXz6wvc9tUg7FAMoBixHQK3BrcgYD9CIZ5RkA
-EMKoRH7GkgVruL7ABjv6Pw2h/Gb3ywxUui1pNONAmqj5mk59l7ZpNxHHgtArTvV1
-+puo9VV2l7UklAoH+w8xf9obXFKSwfwyRX+bIuemq1pJGwRbIQ0/XxkTe4fK6CVu
-g8+b9arcUfykEiZXH6MUWOZwUkj2nvC/oVVdc3+sFThfbKhkAd2j+Zbfa2OOXWJ6
-Rf1no3zjvXrwawkGBd6k/WpwHBziIM5C6LHeAOR4OVckgLFI+cLjEiix7VyYcwYR
-kiWzBaGT9GfEkX90fAqhSFia/0GXQA==
-=mZNW
------END PGP SIGNATURE-----
-
---U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS--
-
---===============0066093547095259064==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
+index 08b615f2da39..d0cb0e583a5d 100644
+--- a/drivers/vdpa/Kconfig
++++ b/drivers/vdpa/Kconfig
+@@ -14,7 +14,7 @@ if VDPA_MENU
+ 
+ config VDPA_SIM
+ 	tristate "vDPA device simulator"
+-	depends on RUNTIME_TESTING_MENU
++	depends on RUNTIME_TESTING_MENU && HAS_DMA
+ 	select VDPA
+ 	select VHOST_RING
+ 	select VHOST_IOTLB
+-- 
+MST
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============0066093547095259064==--
