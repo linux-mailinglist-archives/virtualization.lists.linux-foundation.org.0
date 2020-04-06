@@ -2,41 +2,41 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6729319FFC5
-	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 23:02:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 450B519FFC7
+	for <lists.virtualization@lfdr.de>; Mon,  6 Apr 2020 23:02:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 02DBE2045F;
+	by silver.osuosl.org (Postfix) with ESMTP id 6061322829;
 	Mon,  6 Apr 2020 21:02:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dK1pcYkHHkRA; Mon,  6 Apr 2020 21:02:16 +0000 (UTC)
+	with ESMTP id YlwVJhyJ15Z0; Mon,  6 Apr 2020 21:02:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 420502041E;
+	by silver.osuosl.org (Postfix) with ESMTP id 86BA22079A;
 	Mon,  6 Apr 2020 21:02:16 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 206CBC0177;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F106C0177;
 	Mon,  6 Apr 2020 21:02:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5F11FC0177
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CF2E9C0177
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 21:02:13 +0000 (UTC)
+ Mon,  6 Apr 2020 21:02:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4DB8585C6F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C4B6F86472
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Apr 2020 21:02:13 +0000 (UTC)
+ Mon,  6 Apr 2020 21:02:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1Gi1l9WSRKsm
+ with ESMTP id TvjZOMbEBhn1
  for <virtualization@lists.linux-foundation.org>;
  Mon,  6 Apr 2020 21:02:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 6857281DD5
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 9F83C8639F
  for <virtualization@lists.linux-foundation.org>;
  Mon,  6 Apr 2020 21:02:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
@@ -44,45 +44,47 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=b+P99eoGOE59dzJri6nDdYTRF/iHp1rUM821OiEBSWI=;
- b=XmIRmsiUZ3I7KTvTmU6YIlZygfvw1JUzx7vTeNey3LWmMGJuK063rnD2YNpb8nG2LgfW1E
- MX2g9E0xGPawA0p1g7z1IhsmxUHWYxiXNh9eS9MkH7aMbm5O4FuvRysOEwS0K2N7ncr/hb
- +Z4CFQ6T/Njq1WxLIlMrqH7qgbFTNJc=
+ bh=qxsCmO2anPyq8x1F5Rc9demQ45Mib3q8zcUy7zKxbTE=;
+ b=YE8P2pG8sy5+DUjovSuJG4j73Na/skBG/5PjAqufEdCiLnXWhiZzwQLcXW+ZGsMB9WGYUZ
+ +heP7oZEOpNE6V7LZrEQBwnz3aAfnmDHof+8nd/UvtEXduybMEt/NUn4TQCuJPr6cz2/Xt
+ 5hzg0phvaCk0V2EI3ns4XVAWNOGqxvA=
 Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
  [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-71-4TcoM8dBMPesDZJn3pXApQ-1; Mon, 06 Apr 2020 17:02:07 -0400
-X-MC-Unique: 4TcoM8dBMPesDZJn3pXApQ-1
-Received: by mail-wr1-f70.google.com with SMTP id 88so540446wrq.4
+ us-mta-70-2tz2Q7PCOCyWxoGkDnq-jA-1; Mon, 06 Apr 2020 17:02:09 -0400
+X-MC-Unique: 2tz2Q7PCOCyWxoGkDnq-jA-1
+Received: by mail-wr1-f70.google.com with SMTP id j12so516386wrr.18
  for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Apr 2020 14:02:07 -0700 (PDT)
+ Mon, 06 Apr 2020 14:02:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=b+P99eoGOE59dzJri6nDdYTRF/iHp1rUM821OiEBSWI=;
- b=ErYFKKUTYAUg/UeQa9zJtfWFlZvR7NvS9Ui+aCdsBQeASTWzHFpgf93NnIuSk+RKvO
- s5DBAiAf1N38vOMLPggjwwC3UyX29N1HZZ3po7vcKkIT2/7AJrhdCyd+4Lf4UzqR5+U5
- 2aK8B3STjRVDdmiUrwZIstj53WxlxYkVI8JTOcDd8k5bnymD+8qfq6CVrZO8nYMcTzaZ
- CW/FZH4v5s5xzVXfpdbQqRAvxtZqhB1IIWE9boylWPycLwJqdrL+ROHtpQg74CDMHmgc
- lr34+0MtWaMb/pHT0C2wLEW6S3hCKTY/7smgJsevw67Tv4D79w8YVG/CLrxGgpkYsrnM
- 6PdQ==
-X-Gm-Message-State: AGi0Puah8l4ZU5/tIJadWXmtlJmI4ZUi+Mb8u95Xgovr992Ar0rfGg1+
- gL5hAS0xU3pSQbXqqnJgtyrBCNFMZXu2zj/FQubnEwh5lomwBDawQ0YR1jvIDw+miZisfLiohiM
- IvgJrWCS553gZpxUx9KoaciuUyyWW0aFMAGfiUYn0DA==
-X-Received: by 2002:a1c:3589:: with SMTP id c131mr1302287wma.116.1586206926218; 
- Mon, 06 Apr 2020 14:02:06 -0700 (PDT)
-X-Google-Smtp-Source: APiQypLupa6V8Ag++nWn1lmvVOFBGbVp+NnLiKBe5TZlJuWBjL147oyGdoSjF8DsSNg7neOpqnwMaw==
-X-Received: by 2002:a1c:3589:: with SMTP id c131mr1302258wma.116.1586206925856; 
- Mon, 06 Apr 2020 14:02:05 -0700 (PDT)
+ bh=qxsCmO2anPyq8x1F5Rc9demQ45Mib3q8zcUy7zKxbTE=;
+ b=PodM5jK1+9MGiasrXLhu+xXQdIush5YDp/qYxMiY96TeAYXFpJeVZ0kqGid1AHN1xp
+ LRlhbW9skZKg15H0cJOxggPfHg+MVvSihSlRela51QYySoWhOrGTxbrBR6+54C7vZDKS
+ jcmIn/5W/6UWGzdU3ZtL+vWfa/1zhfm4LhYd4syyDAuNHW0oU+S3HRCnX7VaQlXdRxSI
+ g7QJqm0WJ4o7wecWVg62uCNVGIBhVqF4LZb8JT+/81R2rwg9qz88TOySgTBSbxkCJq7+
+ 13IVk5vNAXgv6xAgXEQAtyovZEg6WvvYDj7FyA5EoblHi/gHHXSJaN3AP8ZQUhXBCWwX
+ Stfw==
+X-Gm-Message-State: AGi0PuYWNscJoTnWHJpXLJ+fIoj3aD5JMHWXu2z6ZOcMKby8hldrSioM
+ ETWddxydz0HaVJufaK1vkU/Fo4ZRsWZp9qbEI+GV4w/sHeqr/BJphUVlqPYV5P/Au6smqT6MaIA
+ fJZ6yNSdADfUUJyaBrJ2utS1uwsf/CRLXzJe4A3Siow==
+X-Received: by 2002:a05:600c:2a52:: with SMTP id
+ x18mr900891wme.37.1586206928356; 
+ Mon, 06 Apr 2020 14:02:08 -0700 (PDT)
+X-Google-Smtp-Source: APiQypLkdRWogVpuwz60S1SSNfj/qpunsYK8n1kb8iM3ayAfqYVbsZEQukr2xmQqXDfS9yzMWdEoSQ==
+X-Received: by 2002:a05:600c:2a52:: with SMTP id
+ x18mr900874wme.37.1586206928040; 
+ Mon, 06 Apr 2020 14:02:08 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id v9sm17395464wrv.18.2020.04.06.14.02.04
+ by smtp.gmail.com with ESMTPSA id 106sm17819538wrc.46.2020.04.06.14.02.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2020 14:02:05 -0700 (PDT)
-Date: Mon, 6 Apr 2020 17:02:03 -0400
+ Mon, 06 Apr 2020 14:02:07 -0700 (PDT)
+Date: Mon, 6 Apr 2020 17:02:06 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 06/12] vhost: force spec specified alignment on types
-Message-ID: <20200406210108.148131-7-mst@redhat.com>
+Subject: [PATCH v4 07/12] virtio: add legacy init/size APIs
+Message-ID: <20200406210108.148131-8-mst@redhat.com>
 References: <20200406210108.148131-1-mst@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20200406210108.148131-1-mst@redhat.com>
@@ -91,8 +93,7 @@ X-Mutt-Fcc: =sent
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: netdev@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,81 +110,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The ring element addresses are passed between components with different
-alignments assumptions. Thus, if guest/userspace selects a pointer and
-host then gets and dereferences it, we might need to decrease the
-compiler-selected alignment to prevent compiler on the host from
-assuming pointer is aligned.
+vring_init/vring_size (in the uapi directory) are kept
+around to solely avoid breaking old userspace builds.
+It's not actually part of the UAPI - it was kept in the UAPI
+header by mistake, and using it in kernel isn't necessary
+and prevents us from making changes safely.
+In particular, the APIs actually assume the legacy layout.
 
-This actually triggers on ARM with -mabi=apcs-gnu - which is a
-deprecated configuration, but it seems safer to handle this
-generally.
-
-I verified that the produced binary is exactly identical on x86.
+Add an internal kernel-only vring_legacy_init/vring_legacy_size.
 
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- drivers/vhost/vhost.h       |  6 +++---
- include/linux/virtio_ring.h | 24 +++++++++++++++++++++---
- 2 files changed, 24 insertions(+), 6 deletions(-)
+ include/linux/virtio_ring.h | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index f8403bd46b85..60cab4c78229 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -67,9 +67,9 @@ struct vhost_virtqueue {
- 	/* The actual ring of buffers. */
- 	struct mutex mutex;
- 	unsigned int num;
--	struct vring_desc __user *desc;
--	struct vring_avail __user *avail;
--	struct vring_used __user *used;
-+	vring_desc_t __user *desc;
-+	vring_avail_t __user *avail;
-+	vring_used_t __user *used;
- 	const struct vhost_iotlb_map *meta_iotlb[VHOST_NUM_ADDRS];
- 	struct file *kick;
- 	struct eventfd_ctx *call_ctx;
 diff --git a/include/linux/virtio_ring.h b/include/linux/virtio_ring.h
-index 11680e74761a..c3f9ca054250 100644
+index c3f9ca054250..766d70bca492 100644
 --- a/include/linux/virtio_ring.h
 +++ b/include/linux/virtio_ring.h
-@@ -60,14 +60,32 @@ static inline void virtio_store_mb(bool weak_barriers,
- struct virtio_device;
- struct virtqueue;
+@@ -140,4 +140,22 @@ void vring_del_virtqueue(struct virtqueue *vq);
+ void vring_transport_features(struct virtio_device *vdev);
  
-+/*
-+ * The ring element addresses are passed between components with different
-+ * alignments assumptions. Thus, we might need to decrease the compiler-selected
-+ * alignment, and so must use a typedef to make sure the __aligned attribute
-+ * actually takes hold:
-+ *
-+ * https://gcc.gnu.org/onlinedocs//gcc/Common-Type-Attributes.html#Common-Type-Attributes
-+ *
-+ * When used on a struct, or struct member, the aligned attribute can only
-+ * increase the alignment; in order to decrease it, the packed attribute must
-+ * be specified as well. When used as part of a typedef, the aligned attribute
-+ * can both increase and decrease alignment, and specifying the packed
-+ * attribute generates a warning.
-+ */
-+typedef struct vring_desc __aligned(VRING_DESC_ALIGN_SIZE) vring_desc_t;
-+typedef struct vring_avail __aligned(VRING_AVAIL_ALIGN_SIZE) vring_avail_t;
-+typedef struct vring_used __aligned(VRING_USED_ALIGN_SIZE) vring_used_t;
+ irqreturn_t vring_interrupt(int irq, void *_vq);
 +
- struct vring {
- 	unsigned int num;
- 
--	struct vring_desc *desc;
-+	vring_desc_t *desc;
- 
--	struct vring_avail *avail;
-+	vring_avail_t *avail;
- 
--	struct vring_used *used;
-+	vring_used_t *used;
- };
- 
- /*
++static inline void vring_legacy_init(struct vring *vr, unsigned int num, void *p,
++				     unsigned long align)
++{
++	vr->num = num;
++	vr->desc = p;
++	vr->avail = (struct vring_avail *)((char *)p + num * sizeof(struct vring_desc));
++	vr->used = (void *)(((uintptr_t)&vr->avail->ring[num] + sizeof(__virtio16)
++		+ align-1) & ~(align - 1));
++}
++
++static inline unsigned vring_legacy_size(unsigned int num, unsigned long align)
++{
++	return ((sizeof(struct vring_desc) * num + sizeof(__virtio16) * (3 + num)
++		 + align - 1) & ~(align - 1))
++		+ sizeof(__virtio16) * 3 + sizeof(struct vring_used_elem) * num;
++}
++
+ #endif /* _LINUX_VIRTIO_RING_H */
 -- 
 MST
 
