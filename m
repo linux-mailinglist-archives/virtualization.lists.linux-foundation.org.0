@@ -1,130 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D637E1A0A8F
-	for <lists.virtualization@lfdr.de>; Tue,  7 Apr 2020 11:57:18 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C6D0A1A0ABF
+	for <lists.virtualization@lfdr.de>; Tue,  7 Apr 2020 12:04:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 38FC42353A;
-	Tue,  7 Apr 2020 09:57:17 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A03CA87E6E;
+	Tue,  7 Apr 2020 10:04:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id f3uzzRDRFtLa; Tue,  7 Apr 2020 09:57:16 +0000 (UTC)
+	with ESMTP id 9yyT3No4s9QP; Tue,  7 Apr 2020 10:04:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 57B7122177;
-	Tue,  7 Apr 2020 09:57:16 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7407287627;
+	Tue,  7 Apr 2020 10:04:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3E4D8C0177;
-	Tue,  7 Apr 2020 09:57:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 55DFAC1D8D;
+	Tue,  7 Apr 2020 10:04:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8E455C0177
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5C0E1C0177
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 09:57:14 +0000 (UTC)
+ Tue,  7 Apr 2020 10:04:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 8536E869C5
+ by whitealder.osuosl.org (Postfix) with ESMTP id 4400583C00
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 09:57:14 +0000 (UTC)
+ Tue,  7 Apr 2020 10:04:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OOWTQV9tmKnN
+ with ESMTP id Sx7+5kHe9XMo
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 09:57:14 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id F3A4D8688B
+ Tue,  7 Apr 2020 10:04:22 +0000 (UTC)
+X-Greylist: delayed 00:06:15 by SQLgrey-1.7.6
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+ [209.85.160.194])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id A603287B61
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 09:57:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586253430;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=nkTK1OQb0oUaKtPXqB7Dm4fla0+lcjqwu5PMzMSoDVU=;
- b=gDTpeDAj72PxYudPC5fOnynBL1OvCiDu2ScQ2UMnw4dlu2pgaLDTmbkXRYA1x7jPYMQaFU
- f0vd3M1WRoOu/1tviAmxT4nyWGPpj6R+67phMi1u8GK+oeKNbhKQ+LZEiY4TVLxHQmVnwN
- dOQyODXHT+cMXscLxHWQGtkoePSgnuw=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-355-KWjzcjExNGCQ3jq4dYqEzw-1; Tue, 07 Apr 2020 05:57:09 -0400
-X-MC-Unique: KWjzcjExNGCQ3jq4dYqEzw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8C8701005509;
- Tue,  7 Apr 2020 09:57:06 +0000 (UTC)
-Received: from [10.36.114.167] (ovpn-114-167.ams2.redhat.com [10.36.114.167])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3B6D45E000;
- Tue,  7 Apr 2020 09:57:00 +0000 (UTC)
-Subject: Re: [GIT PULL v2] vhost: cleanups and fixes
-To: "Michael S. Tsirkin" <mst@redhat.com>,
- Linus Torvalds <torvalds@linux-foundation.org>
-References: <20200407055334-mutt-send-email-mst@kernel.org>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <00a7ce5f-8fb4-8c3e-7113-9a422682abdf@redhat.com>
-Date: Tue, 7 Apr 2020 11:56:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ Tue,  7 Apr 2020 10:04:22 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id x2so834630qtr.0
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 07 Apr 2020 03:04:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=XlRrtk04Drccp1IaTlKa1DPuRVn27tHDYLsET4EpF9I=;
+ b=wA6RVWrGZsTvyQtipGlQPkx/zUrMle6j/PotPS/Ubl+1rUlzDuQJHGGTaWn9pBGS94
+ 16eiWdiG0Uj54QLqStMqvzt0Vrq+V/aGzVTBBEKpa6GoDtAtJ3Nwfa2MD4il9MQsiZu0
+ +0YaAJkHWlROCy7YvKoMm3EGWcRaXOX3FgiFrZJ99qtqsJEnvq7c99tBL02yA0kMadQJ
+ 3gMAPBRwaQi4ggynes7NGTM0NIeFUdLAuw0OMg+zsQaJgY/v9/KSEqpLpWFaBdYbDldX
+ JLo5MsaJ9O2qScwUxYoer4R5IylAMN5UZ5C0/vp0fPMln72xoMrG/HMyoY/yznxhyxS6
+ iz/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=XlRrtk04Drccp1IaTlKa1DPuRVn27tHDYLsET4EpF9I=;
+ b=UK4HEtj8zltHfWGGiQeIMAnLF2yB6FGCLKOr0Bld4CLFsn8fIjg2k3Ufs71e+dRwPM
+ NNUgltR3THmMxcRipYDHnNbdBcVVHqffnbkBMAryyxTefT+hvpj8j6By04r2CBUmSSX2
+ aUGwtg4+WPcxpK2kFV7yk2CGTqrtQhrOzYKg/s/o620wRNp5Q2X++Hg+JWRNvTFYElaf
+ vrpVDdXzzSNfz2hZBD1e4P/isExSnzo/whbtP7hAvQZEr0UHhnqAVMAr6EmYZbSq5stq
+ CeEaP0TUDVfD0qAa1GZ+b6RTO/V0X0/nOId8VnZMTwkXyGk9B0C17cAcOJZrHyzr40Ch
+ GTmg==
+X-Gm-Message-State: AGi0PuYWJ+aO/MOvkbOOaq43EJigYMwIzVEBtlyAN2q1CtNC5FsGlIuo
+ kMKckinZOfvLNjxk62kCeIWpud6X0YLwoYcs5wV1t/yLvyk=
+X-Google-Smtp-Source: APiQypIVkup6lPiinv10OxautZSlD/0H+G8ygJP+Y1zlmhVZq44N0hs/Atb3q7hlgMorG94PI0Jdbec7sG00UJjWQWk=
+X-Received: by 2002:ac8:370c:: with SMTP id o12mr1366857qtb.380.1586253485793; 
+ Tue, 07 Apr 2020 02:58:05 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200407055334-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: tiwei.bie@intel.com, kvm@vger.kernel.org, yuri.benditovich@daynix.com,
- netdev@vger.kernel.org, rdunlap@infradead.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, tysand@google.com,
- eperezma@redhat.com, xiao.w.wang@intel.com, namit@vmware.com,
- rientjes@google.com, alexander.h.duyck@linux.intel.com, mhocko@kernel.org,
- lingshan.zhu@intel.com
+References: <00000000000091056b05a2999f1e@google.com>
+ <CACT4Y+b4RcgG_GrcpaghmqhX47zUVsAcGGd6vb6MYJT=6gf89g@mail.gmail.com>
+ <20200406080612.v5ubxvyliuso6v5h@sirius.home.kraxel.org>
+ <CAKMK7uE9uQ_YCXfDOH9zQBu_ffoz546hqRd1R_r1+L-T072Lew@mail.gmail.com>
+ <20200406131602.ggugjwkm36r4zvkr@sirius.home.kraxel.org>
+In-Reply-To: <20200406131602.ggugjwkm36r4zvkr@sirius.home.kraxel.org>
+Date: Tue, 7 Apr 2020 11:57:54 +0200
+Message-ID: <CACT4Y+aF1fNRgq_1a2NnVdy9epQvy5TzRF8VQ8OUSSkh6HAc0g@mail.gmail.com>
+Subject: Re: upstream boot error: KASAN: slab-out-of-bounds Write in
+ virtio_gpu_object_create
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: David Airlie <airlied@linux.ie>,
+ syzbot <syzbot+d3a7951ed361037407db@syzkaller.appspotmail.com>,
+ syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
+ LKML <linux-kernel@vger.kernel.org>, DRI <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
+ Daniel Vetter <daniel@ffwll.ch>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -136,62 +96,45 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Dmitry Vyukov via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Dmitry Vyukov <dvyukov@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 07.04.20 11:53, Michael S. Tsirkin wrote:
-> Changes from PULL v1:
-> 	reverted a commit that was also in Andrew Morton's tree,
-> 	to resolve a merge conflict:
-> 	this is what Stephen Rothwell was doing to resolve it
-> 	in linux-next.
-> 
-> 
-> Now that many more architectures build vhost, a couple of these (um, and
-> arm with deprecated oabi) have reported build failures with randconfig,
-> however fixes for that need a bit more discussion/testing and will be
-> merged separately.
-> 
-> Not a regression - these previously simply didn't have vhost at all.
-> Also, there's some DMA API code in the vdpa simulator is hacky - if no
-> solution surfaces soon we can always disable it before release:
-> it's not a big deal either way as it's just test code.
-> 
-> 
-> The following changes since commit 16fbf79b0f83bc752cee8589279f1ebfe57b3b6e:
-> 
->   Linux 5.6-rc7 (2020-03-22 18:31:56 -0700)
-> 
-> are available in the Git repository at:
-> 
->   https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
-> 
-> for you to fetch changes up to 835a6a649d0dd1b1f46759eb60fff2f63ed253a7:
-> 
->   virtio-balloon: Revert "virtio-balloon: Switch back to OOM handler for VIRTIO_BALLOON_F_DEFLATE_ON_OOM" (2020-04-07 05:44:57 -0400)
-> 
-> ----------------------------------------------------------------
-> virtio: fixes, vdpa
-> 
-> Some bug fixes.
-> The new vdpa subsystem with two first drivers.
-> 
-> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-> 
-> ----------------------------------------------------------------
-> David Hildenbrand (1):
->       virtio-balloon: Switch back to OOM handler for VIRTIO_BALLOON_F_DEFLATE_ON_OOM
+On Mon, Apr 6, 2020 at 3:16 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+>   Hi,
+>
+> > > > +drivers/gpu/drm/virtio/virtgpu_object.c maintainers
+> > > > Now we have both mainline and linux-next boot broken (linux-next is
+> > > > broken for the past 40 days).
+> > > > No testing of new code happens.
+> > > >
+> > > > >  virtio_gpu_object_shmem_init drivers/gpu/drm/virtio/virtgpu_object.c:151 [inline]
+> > > > >  virtio_gpu_object_create+0x9f3/0xaa0 drivers/gpu/drm/virtio/virtgpu_object.c:230
+> > >
+> > > Ah, that one.
+> > >
+> > > broken patch: f651c8b05542 ("drm/virtio: factor out the sg_table from virtio_gpu_object")
+> > > fixed by: 0666a8d7f6a4 ("drm/virtio: fix OOB in virtio_gpu_object_create")
+> > >
+> > > Both are in drm-misc-next.  I suspect the fix was added after
+> > > drm-misc-next was closed for the 5.7 merge window and thus should
+> > > have been submitted to drm-misc-next-fixes instead.
+> > >
+> > > So, what to do now?  Should I cherry-pick 0666a8d7f6a4 into
+> > > drm-misc-next-fixes?  Or should it go into drm-misc-fixes instead?
+> >
+> > Yup cherry-pick it over, with -x, to drm-misc-next-fixes.
+> > -Daniel
+>
+> Done.  So the next linux-next build should be green again.
 
-^ stale leftover in this message only I assume
-
-
--- 
-Thanks,
-
-David / dhildenb
-
+Linux-next is boot broken with 2 or 3 other bugs for a month. This
+won't fix linux-next.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
