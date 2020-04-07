@@ -1,50 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EC191A0F7C
-	for <lists.virtualization@lfdr.de>; Tue,  7 Apr 2020 16:45:14 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CF501A1162
+	for <lists.virtualization@lfdr.de>; Tue,  7 Apr 2020 18:31:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id EF37D844F1;
-	Tue,  7 Apr 2020 14:45:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2ADE587C3F;
+	Tue,  7 Apr 2020 16:30:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wK3jx-Mgx8di; Tue,  7 Apr 2020 14:45:11 +0000 (UTC)
+	with ESMTP id D7-1Y8bDXjm5; Tue,  7 Apr 2020 16:30:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 194BE877E7;
-	Tue,  7 Apr 2020 14:45:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A852E87C20;
+	Tue,  7 Apr 2020 16:30:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E2005C1D8D;
-	Tue,  7 Apr 2020 14:45:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A567C1D8D;
+	Tue,  7 Apr 2020 16:30:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CF713C0177
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C92EFC0177
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 14:45:09 +0000 (UTC)
+ Tue,  7 Apr 2020 16:30:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id BCB588783F
+ by hemlock.osuosl.org (Postfix) with ESMTP id B26F987AEE
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 14:45:09 +0000 (UTC)
+ Tue,  7 Apr 2020 16:30:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 23-w2FwsbjTV
+ with ESMTP id JXwOYP-QVdsT
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 14:45:08 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 4D73187852
+ Tue,  7 Apr 2020 16:30:55 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 3EF7787ACE
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 14:45:08 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 8583BAB64;
- Tue,  7 Apr 2020 14:45:05 +0000 (UTC)
+ Tue,  7 Apr 2020 16:30:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=nuh4nVXCUJwlPsAFN4ZcIX/xOtefRx7Y3gNridK28QY=; b=ciZFBeMvY6ceMxZGa0UjRmpv6b
+ Vx/9nAHJ7cxHdVPsGVO0PNZBmYRA2oafiriwUZf2uaLm6sd/JHTHiYn96WGCqPGsDik4kWqPeniyw
+ bdPj2+66DNoBS6v1/G5yrPYOsYOcP/bvsesb1lQ1CaETVyn/lrp3nTn0SCkBzpTmooMJ3D/tGkZ+R
+ NXpVCbx8OlXunsKpnNLxI2zsDYD8s35fOl9y5pQxPznzzFfQF6aC55FJlcxyBErnqhLDdJdomi9i8
+ iGQlKFyYr8/UGVmLCIfv4Z/U8ElXOR0AFlrBMC4KujJgBb0wM24+ct4pshpcOFedveoKb2djkQ37L
+ 0xZMV4/g==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jLr7R-00017v-Tj; Tue, 07 Apr 2020 16:30:33 +0000
+Date: Tue, 7 Apr 2020 09:30:33 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Hannes Reinecke <hare@suse.de>
 Subject: Re: [PATCH RFC v2 02/24] scsi: allocate separate queue for reserved
  commands
-To: John Garry <john.garry@huawei.com>, Christoph Hellwig <hch@infradead.org>
+Message-ID: <20200407163033.GA26568@infradead.org>
 References: <1583857550-12049-1-git-send-email-john.garry@huawei.com>
  <1583857550-12049-3-git-send-email-john.garry@huawei.com>
  <20200310183243.GA14549@infradead.org>
@@ -53,19 +65,17 @@ References: <1583857550-12049-1-git-send-email-john.garry@huawei.com>
  <b5a63725-722b-8ccd-3867-6db192a248a4@suse.de>
  <9c6ced82-b3f1-9724-b85e-d58827f1a4a4@huawei.com>
  <39bc2d82-2676-e329-5d32-8acb99b0a204@suse.de>
- <20ebe296-9e57-b3e3-21b3-63a09ce86036@huawei.com>
-From: Hannes Reinecke <hare@suse.de>
-Message-ID: <dcfba0ea-4ba5-4e4f-150d-24bd4fe11cdd@suse.de>
-Date: Tue, 7 Apr 2020 16:45:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20ebe296-9e57-b3e3-21b3-63a09ce86036@huawei.com>
-Content-Language: en-US
-Cc: axboe@kernel.dk, Hannes Reinecke <hare@suse.com>, bvanassche@acm.org,
+Content-Disposition: inline
+In-Reply-To: <39bc2d82-2676-e329-5d32-8acb99b0a204@suse.de>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: axboe@kernel.dk, linux-block@vger.kernel.org,
+ Hannes Reinecke <hare@suse.com>, bvanassche@acm.org,
  martin.petersen@oracle.com, chenxiang66@hisilicon.com, jejb@linux.ibm.com,
- esc.storagedev@microsemi.com, linux-kernel@vger.kernel.org,
- ming.lei@redhat.com, linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
+ John Garry <john.garry@huawei.com>, esc.storagedev@microsemi.com,
+ linux-kernel@vger.kernel.org, ming.lei@redhat.com,
+ Christoph Hellwig <hch@infradead.org>, linux-scsi@vger.kernel.org,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -78,61 +88,32 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gNC83LzIwIDQ6MzUgUE0sIEpvaG4gR2Fycnkgd3JvdGU6Cj4gT24gMDcvMDQvMjAyMCAxNTow
-MCwgSGFubmVzIFJlaW5lY2tlIHdyb3RlOgo+PiBPbiA0LzcvMjAgMTo1NCBQTSwgSm9obiBHYXJy
-eSB3cm90ZToKPj4+IE9uIDA2LzA0LzIwMjAgMTA6MDUsIEhhbm5lcyBSZWluZWNrZSB3cm90ZToK
-WyAuLiBdCj4+Pj4gVGhpcyB3b3VsZCBiZSBva2F5IGlmICd0aGlzX2lkJyB3b3VsZCBoYXZlIGJl
-ZW4gZGVmaW5lZCBieSB0aGUgZHJpdmVyOwo+Pj4+IHNhZGx5LCBtb3N0IGRyaXZlcnMgd2hpY2gg
-YXJlIGFmZmVjdGVkIGhlcmUgZG8gc2V0ICd0aGlzX2lkJyB0byAtMS4KPj4+PiBTbyB3ZSB3b3Vs
-ZG4ndCBoYXZlIGEgbmljZSB0YXJnZXQgSUQgdG8gYWxsb2NhdGUgdGhlIGRldmljZSBmcm9tLCBs
-ZXQKPj4+PiBhbG9uZSB0aGUgcHJvYmxlbSB0aGF0IHdlIHdvdWxkIGhhdmUgdG8gZW11bGF0ZSBh
-IGNvbXBsZXRlIHNjc2kgZGV2aWNlCj4+Pj4gd2l0aCBhbGwgcmVxdWlyZWQgbWluaW1hbCBjb21t
-YW5kIHN1cHBvcnQgZXRjLgo+Pj4+IEFuZCBJJ20gbm90IHF1aXRlIHN1cmUgaG93IHdlbGwgdGhh
-dCB3b3VsZCBwbGF5IHdpdGggdGhlIGV4aXNpbmcgU0NTSQo+Pj4+IGhvc3QgdGVtcGxhdGU7IHRo
-ZSBkZXZpY2Ugd2UnbGwgYmUgYWxsb2NhdGluZyB3b3VsZCBoYXZlIGJhc2ljYWxseQo+Pj4+IG5v
-dGhpbmcgaW4gY29tbW9uIHdpdGggdGhlICdub3JtYWwnIFNDU0kgZGV2aWNlcy4KPj4+Pgo+Pj4+
-IFdoYXQgd2UgY291bGQgZG8sIHRob3VnaCwgaXMgdG8gdHJ5IGl0IHRoZSBvdGhlciB3YXkgcm91
-bmQ6Cj4+Pj4gTGlmdCB0aGUgcmVxdWVzdCBxdWV1ZSBmcm9tIHNjc2lfZ2V0X2hvc3RfZGV2KCkg
-aW50byB0aGUgc2NzaSBob3N0Cj4+Pj4gaXRzZWxmLCBzbyB0aGF0IHNjc2lfZ2V0X2hvc3RfZGV2
-KCkgY2FuIHVzZSB0aGF0IHF1ZXVlLCBidXQgd2UgYWxzbwo+Pj4+IHdvdWxkIGJlIGFibGUgdG8g
-dXNlIGl0IHdpdGhvdXQgYSBTQ1NJIGRldmljZSBhdHRhY2hlZC4KPj4+Cj4+PiB3b3VsZG4ndCB0
-aGF0IGxpbWl0IDF4IHNjc2kgZGV2aWNlIHBlciBob3N0LCBub3QgdGhhdCBJIGtub3cgaWYgYW55
-IAo+Pj4gbW9yZSB3b3VsZCBldmVyIGJlIHJlcXVpcmVkPyBCdXQgaXQgZG9lcyBzdGlsbCBzZWVt
-IGJldHRlciB0byB1c2UgdGhlIAo+Pj4gcmVxdWVzdCBxdWV1ZSBpbiB0aGUgc2NzaSBkZXZpY2Uu
-Cj4+Pgo+PiBNeSBjb25jZXJuIGlzIHRoaXM6Cj4+Cj4+IHN0cnVjdCBzY3NpX2RldmljZSAqc2Nz
-aV9nZXRfaG9zdF9kZXYoc3RydWN0IFNjc2lfSG9zdCAqc2hvc3QpCj4+IHsKPj4gwqDCoMKgwqDC
-oFsgLi4gXQo+PiDCoMKgwqDCoMKgc3RhcmdldCA9IHNjc2lfYWxsb2NfdGFyZ2V0KCZzaG9zdC0+
-c2hvc3RfZ2VuZGV2LCAwLCAKPj4gc2hvc3QtPnRoaXNfaWQpOwo+PiDCoMKgwqDCoMKgWyAuLiBd
-Cj4+Cj4+IGFuZCB3ZSBoYXZlIHR5cGljYWxseToKPj4KPj4gZHJpdmVycy9zY3NpL2hpc2lfc2Fz
-L2hpc2lfc2FzX3YzX2h3LmM6IC50aGlzX2lkwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-ID0gLTEsCj4+Cj4+IEl0J3MgX3ZlcnlfIHVuY29tbW9uIHRvIGhhdmUgYSBuZWdhdGl2ZSBudW1i
-ZXIgYXMgdGhlIFNDU0kgdGFyZ2V0IAo+PiBkZXZpY2U7IGluIGZhY3QsIGl0IF9pc18gYW4gdW5z
-aWduZWQgaW50IGFscmVhZHkuCj4+Cj4gCj4gRldJVywgdGhlIG9ubHkgb3RoZXIgZHJpdmVyIChn
-ZHRoKSB3aGljaCBJIHNlZSB1c2VzIHRoaXMgQVBJIGhhcyB0aGlzX2lkIAo+ID0gLTEgaW4gdGhl
-IHNjc2kgaG9zdCB0ZW1wbGF0ZS4KPiAKPj4gQnV0IGFscmlnaHQsIEknbGwgZ2l2ZSBpdCBhIGdv
-OyBsZXQncyBzZWUgd2hhdCBJJ2xsIGVuZCB1cCB3aXRoLgo+IAo+IG5vdGU6IElmIHdlIHdhbnQg
-YSBmaXhlZCBzY3NpX2RldmljZSBwZXIgaG9zdCwgY2FsbGluZyAKPiBzY3NpX21xX3NldHVwX3Rh
-Z3MoKSAtPiBzY3NpX2dldF9ob3N0X2RldigpIHdpbGwgZmFpbCBhcyBzaG9zdCBzdGF0ZSBpcyAK
-PiBub3QgcnVubmluZy4gTWF5YmUgd2UgbmVlZCB0byBqdWdnbGUgc29tZSB0aGluZ3MgdGhlcmUg
-dG8gcHJvdmlkZSBhIAo+IGdlbmVyaWMgc29sdXRpb24uCj4gCkl0IG1pZ2h0IGV2ZW4gZ2V0IHdv
-cnNlLCBhcyBkdXJpbmcgZGV2aWNlIHNldHVwIHRoaW5ncyBsaWtlIAonc2xhdmVfYWxsb2MnIGV0
-YyBpcyBnZXR0aW5nIGNhbGxlZCwgd2hpY2ggaGFzIGEgZmFpciBjaGFuY2Ugb2YgZ2V0dGluZyAK
-Y29uZnVzZWQgZm9yIG5vbi1leGlzdGluZyBkZXZpY2VzLgpDZiBxbGEyeHh4OnFsYTJ4eF9zbGF2
-ZV9hbGxvYygpIGlzIGNhbGxpbmcgc3RhcmdldF90b19ycG9ydCgpLCB3aGljaCAKd2lsbCBnZXQg
-dXMgYSBuaWNlIG9vcHMgd2hlbiBhY2Nlc3NpbmcgYSB0YXJnZXQgd2hpY2ggaXMgX25vdF8gdGhl
-IGNoaWxkIApvZiBhIGZjIHJlbW90ZSBwb3J0LgpBbmQgdGhpcyBpcyB3aHkgSSdtIG5vdCB1dHRl
-cmx5IGtlZW4gb24gdGhpcyBhcHByb2FjaDsgYXVkaXRpbmcgYWxsIAp0aGVzZSBjYWxsYmFja3Mg
-aXMgX25vdF8gZnVuLgoKQ2hlZXJzLAoKSGFubmVzCi0tIApEci4gSGFubmVzIFJlaW5lY2tlICAg
-ICAgICAgICAgVGVhbWxlYWQgU3RvcmFnZSAmIE5ldHdvcmtpbmcKaGFyZUBzdXNlLmRlICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICs0OSA5MTEgNzQwNTMgNjg4ClNVU0UgU29mdHdhcmUg
-U29sdXRpb25zIEdtYkgsIE1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZwpIUkIgMzY4MDkg
-KEFHIE7DvHJuYmVyZyksIEdlc2Now6RmdHNmw7xocmVyOiBGZWxpeCBJbWVuZMO2cmZmZXIKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRp
-b24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3Jn
-Cmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1
-YWxpemF0aW9u
+On Tue, Apr 07, 2020 at 04:00:10PM +0200, Hannes Reinecke wrote:
+> My concern is this:
+> 
+> struct scsi_device *scsi_get_host_dev(struct Scsi_Host *shost)
+> {
+> 	[ .. ]
+> 	starget = scsi_alloc_target(&shost->shost_gendev, 0, shost->this_id);
+> 	[ .. ]
+> 
+> and we have typically:
+> 
+> drivers/scsi/hisi_sas/hisi_sas_v3_hw.c: .this_id                = -1,
+> 
+> It's _very_ uncommon to have a negative number as the SCSI target device; in
+> fact, it _is_ an unsigned int already.
+> 
+> But alright, I'll give it a go; let's see what I'll end up with.
+
+But this shouldn't be exposed anywhere.  And I prefer that over having
+magic requests/scsi_cmnd that do not have a valid ->device pointer.
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
