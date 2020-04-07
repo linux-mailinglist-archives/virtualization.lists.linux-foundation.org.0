@@ -1,87 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B5641A043B
-	for <lists.virtualization@lfdr.de>; Tue,  7 Apr 2020 03:16:39 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7872A1A043D
+	for <lists.virtualization@lfdr.de>; Tue,  7 Apr 2020 03:16:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CCF57878B4;
-	Tue,  7 Apr 2020 01:16:37 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 23E0385BCF;
+	Tue,  7 Apr 2020 01:16:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 69FFznCfl5w8; Tue,  7 Apr 2020 01:16:37 +0000 (UTC)
+	with ESMTP id wAwBcViWDv6s; Tue,  7 Apr 2020 01:16:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 83E7F8789E;
-	Tue,  7 Apr 2020 01:16:37 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9A5C5857D8;
+	Tue,  7 Apr 2020 01:16:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 63F76C0177;
-	Tue,  7 Apr 2020 01:16:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 90590C0177;
+	Tue,  7 Apr 2020 01:16:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9AC57C0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6D6FFC1AE2
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 01:16:35 +0000 (UTC)
+ Tue,  7 Apr 2020 01:16:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 7F8F92040C
+ by hemlock.osuosl.org (Postfix) with ESMTP id 5E12E885E4
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 01:16:35 +0000 (UTC)
+ Tue,  7 Apr 2020 01:16:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id foJy65InEpvj
+ with ESMTP id a9XVT8HZ4W65
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 01:16:35 +0000 (UTC)
+ Tue,  7 Apr 2020 01:16:37 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-1.mimecast.com [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 326B22002E
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id CF642862B2
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Apr 2020 01:16:35 +0000 (UTC)
+ Tue,  7 Apr 2020 01:16:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586222193;
+ s=mimecast20190719; t=1586222195;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=RVzro4XtEZaLbEft7JeQy81ssJHBlnUXRCePrLVPDZg=;
- b=IxnA8N2InNEgm/19vFJdUAeM3Mr5KGSVCZfFgbhgMCMoogbLALxglH13PEi/tTTm2HSfus
- PyZeENV24DOFyR3Xl/xyBtS2XZyGw7oykZ3Bz/Nw5vzoV5gkuJoS4f7XOMyf29bM5jVU5p
- 63xRcps8MODEhshnlngwx0+o/Rq+6yM=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-8-U8QsFIlsP7Ckq3HTh1ZwRg-1; Mon, 06 Apr 2020 21:16:32 -0400
-X-MC-Unique: U8QsFIlsP7Ckq3HTh1ZwRg-1
-Received: by mail-wr1-f70.google.com with SMTP id a10so879539wra.2
+ bh=FHleMq6gEYUibDa/C/J3JExco78nMtVdL74tcT52HVU=;
+ b=aZSBfZiaSx0UpBpgRp0p/ht9Fwm0PusPo5WmvDsd7fjbjMOkMIhks1C3PLXFKKOuIaLpgB
+ SgJfWUp6JjmbLDvQy6VWC+oUhyhQHxI1uk1dIIc2W5A9F/ILx41paHXjDBqXR1E0qccpA+
+ U3FYxKCo7ul0+/R50sc0e2Q3DS8z11w=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-313-9tdoen72O22HkOCuYXTprg-1; Mon, 06 Apr 2020 21:16:33 -0400
+X-MC-Unique: 9tdoen72O22HkOCuYXTprg-1
+Received: by mail-wr1-f72.google.com with SMTP id t13so874724wru.3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Apr 2020 18:16:31 -0700 (PDT)
+ Mon, 06 Apr 2020 18:16:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=RVzro4XtEZaLbEft7JeQy81ssJHBlnUXRCePrLVPDZg=;
- b=pG74oGe4XMlJHYptSM/BEB13tJSM6x/tvvQ/MlvyN/J9bEz1s7sS16Qq6CFj5uniYJ
- KUlbb3qyn5jkKKhdX+Z1Hu6W4knkPZa20Ud0mJ4uHR0IAGSWwVPRZ5rhk7FQkKIa83xs
- Os2/c295uA0Wyd3lyhL/BAXcRoPplGTCdbMJ360ZVNSWwYHi+LpP/nKWE9/eaf/8VKsC
- Cg3U5thOUnr5Yon8GFLxO/M7F3TgH0BhhHoyKA4omejGvXJ5L7/TJrXAQ1/1DliN4swf
- JXH7pygQedJ9/Dn1J50/f0pfkBiwsx3Ws4trDVCi9NDd9FCOU6MiV9y1o9USa3wBsFkK
- 8ZwQ==
-X-Gm-Message-State: AGi0PubtGR2JQeLowHOsiuqG3Xn719mP8ju6A0+9nypfZkK74W4bHO+1
- hzihGCygclk9bjb8oAf7SRmFURkQOTep8UTDsUT/ljkRjwdCkWus2880oO28Sz/a9aXS+NXFO9R
- As1XwYm4dS3itRBTVFa9wXbgNrldSLdlBiiJfAGXwOQ==
-X-Received: by 2002:adf:f3c1:: with SMTP id g1mr2187528wrp.90.1586222190936;
- Mon, 06 Apr 2020 18:16:30 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJ7P/kPvw3paHovkMWNa/u3ENAVx5JqKqcOIuiBi1V5YrTfZ/ZU9piHeuzwqlHFaAyT1Zp0HQ==
-X-Received: by 2002:adf:f3c1:: with SMTP id g1mr2187520wrp.90.1586222190813;
- Mon, 06 Apr 2020 18:16:30 -0700 (PDT)
+ bh=FHleMq6gEYUibDa/C/J3JExco78nMtVdL74tcT52HVU=;
+ b=q+3i6GxOXB+jq1/jCRFJl3wrKq++/Ej80y++5Kw2I4vHcILtxfD9TA57zx/KtHxb/+
+ iEWTFJ0rTcXwaKOO0z1RVGJou0870OsK4u+5omrCpxQFnSQWNWqtDxI1N5ZN6i8UL2Rc
+ cjVo42s40dz1dwWQ3Y5th9KI25wptzk9GT/Rd1FSeOYTMBmNQtVWWhlo4E9+V1gBwgnB
+ 7Avu3Bxld5GI1+fIw8qXrHOadqDCCX9ReoOw/mlO1khgfH6xfmQeW8Q8Xz5fnG4P4SmE
+ 9IedVnRmKdmI/A3bd9jfgjfteKqrR39CoO7JvMPAffY04RGQzjPddHcmyEk372p/7n+f
+ JP/Q==
+X-Gm-Message-State: AGi0PuZN5w5+ur6Jo460QeuJKemteTf3QB8o5T8lidj812mB3BRYp/At
+ lyz+hsMPG8l7FkgZYmsAPjufk1gNe4fl2mWkWL/Rm2BqSsasrOTLJTq7yQ5yvVVznffnQ+OhoOk
+ EBRpLy2A8Akp8V2dOCqgD1ljpgojpDiaEp7hVsoUy8Q==
+X-Received: by 2002:adf:82c5:: with SMTP id 63mr2027880wrc.312.1586222192874; 
+ Mon, 06 Apr 2020 18:16:32 -0700 (PDT)
+X-Google-Smtp-Source: APiQypI+JWtf7YPshaBQuWRec595zsX+nH2Kk4ZsLkTya0YF6KR2uoObNvntVD6J8RdRBlhJdc93fg==
+X-Received: by 2002:adf:82c5:: with SMTP id 63mr2027870wrc.312.1586222192735; 
+ Mon, 06 Apr 2020 18:16:32 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-51-222.red.bezeqint.net. [79.176.51.222])
- by smtp.gmail.com with ESMTPSA id h26sm117645wmb.19.2020.04.06.18.16.29
+ by smtp.gmail.com with ESMTPSA id t16sm29828757wra.17.2020.04.06.18.16.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2020 18:16:30 -0700 (PDT)
-Date: Mon, 6 Apr 2020 21:16:29 -0400
+ Mon, 06 Apr 2020 18:16:32 -0700 (PDT)
+Date: Mon, 6 Apr 2020 21:16:31 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v8 01/19] tools/virtio: define aligned attribute
-Message-ID: <20200407011612.478226-2-mst@redhat.com>
+Subject: [PATCH v8 02/19] tools/virtio: make asm/barrier.h self contained
+Message-ID: <20200407011612.478226-3-mst@redhat.com>
 References: <20200407011612.478226-1-mst@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20200407011612.478226-1-mst@redhat.com>
@@ -107,21 +108,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+We are using abort() so let's include stdlib.h
+
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- tools/virtio/linux/compiler.h | 1 +
+ tools/virtio/asm/barrier.h | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/tools/virtio/linux/compiler.h b/tools/virtio/linux/compiler.h
-index 903dc9c4bd11..2c51bccb97bb 100644
---- a/tools/virtio/linux/compiler.h
-+++ b/tools/virtio/linux/compiler.h
-@@ -7,4 +7,5 @@
- 
- #define READ_ONCE(var) (*((volatile typeof(var) *)(&(var))))
- 
-+#define __aligned(x) __attribute((__aligned__(x)))
- #endif
+diff --git a/tools/virtio/asm/barrier.h b/tools/virtio/asm/barrier.h
+index d0351f83aebe..04d563fc9b95 100644
+--- a/tools/virtio/asm/barrier.h
++++ b/tools/virtio/asm/barrier.h
+@@ -1,4 +1,5 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
++#include <stdlib.h>
+ #if defined(__i386__) || defined(__x86_64__)
+ #define barrier() asm volatile("" ::: "memory")
+ #define virt_mb() __sync_synchronize()
 -- 
 MST
 
