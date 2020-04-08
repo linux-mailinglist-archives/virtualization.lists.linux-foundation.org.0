@@ -1,68 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91D631A23D0
-	for <lists.virtualization@lfdr.de>; Wed,  8 Apr 2020 16:13:14 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id D53E01A242B
+	for <lists.virtualization@lfdr.de>; Wed,  8 Apr 2020 16:37:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0CE5887FEC;
-	Wed,  8 Apr 2020 14:13:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B0CA38650F;
+	Wed,  8 Apr 2020 14:37:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YyUK9o7PR8Nl; Wed,  8 Apr 2020 14:13:11 +0000 (UTC)
+	with ESMTP id suVkm7zdYksQ; Wed,  8 Apr 2020 14:37:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 261D687FF7;
-	Wed,  8 Apr 2020 14:13:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 4BBF586416;
+	Wed,  8 Apr 2020 14:37:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 07B53C0177;
-	Wed,  8 Apr 2020 14:13:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2F359C0177;
+	Wed,  8 Apr 2020 14:37:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 20197C0177
- for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 14:13:10 +0000 (UTC)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6E116C0177;
+ Wed,  8 Apr 2020 14:37:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 09A3F204C6
- for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 14:13:10 +0000 (UTC)
+ by whitealder.osuosl.org (Postfix) with ESMTP id 585EF88092;
+ Wed,  8 Apr 2020 14:37:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vW6E7urLYrsg
- for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 14:13:09 +0000 (UTC)
+ with ESMTP id eQ0IhoP6rLsW; Wed,  8 Apr 2020 14:37:12 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from Galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by silver.osuosl.org (Postfix) with ESMTPS id 248A320012
- for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 14:13:09 +0000 (UTC)
-Received: from p5de0bf0b.dip0.t-ipconnect.de ([93.224.191.11]
- helo=nanos.tec.linutronix.de)
- by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
- (Exim 4.80) (envelope-from <tglx@linutronix.de>)
- id 1jMBRr-0007Ob-HA; Wed, 08 Apr 2020 16:12:59 +0200
-Received: by nanos.tec.linutronix.de (Postfix, from userid 1000)
- id A83CE10069D; Wed,  8 Apr 2020 16:12:58 +0200 (CEST)
-From: Thomas Gleixner <tglx@linutronix.de>
-To: Ankur Arora <ankur.a.arora@oracle.com>, linux-kernel@vger.kernel.org,
- x86@kernel.org
-Subject: Re: [RFC PATCH 00/26] Runtime paravirt patching
-In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
-References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
-Date: Wed, 08 Apr 2020 16:12:58 +0200
-Message-ID: <87k12qawwl.fsf@nanos.tec.linutronix.de>
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4093B8808C;
+ Wed,  8 Apr 2020 14:37:12 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id 3E3B4387; Wed,  8 Apr 2020 16:37:09 +0200 (CEST)
+Date: Wed, 8 Apr 2020 16:37:07 +0200
+From: Joerg Roedel <joro@8bytes.org>
+To: Robin Murphy <robin.murphy@arm.com>
+Subject: Re: [RFC PATCH 17/34] iommu/arm-smmu: Store device instead of group
+ in arm_smmu_s2cr
+Message-ID: <20200408143707.GK3103@8bytes.org>
+References: <20200407183742.4344-1-joro@8bytes.org>
+ <20200407183742.4344-18-joro@8bytes.org>
+ <98c10a41-d223-e375-9742-b6471c3dc33c@arm.com>
 MIME-Version: 1.0
-X-Linutronix-Spam-Score: -1.0
-X-Linutronix-Spam-Level: -
-X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required, ALL_TRUSTED=-1,
- SHORTCIRCUIT=-0.0001
-Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
- peterz@infradead.org, hpa@zytor.com, Ankur Arora <ankur.a.arora@oracle.com>,
- virtualization@lists.linux-foundation.org, pbonzini@redhat.com,
- namit@vmware.com, mhiramat@kernel.org, jpoimboe@redhat.com,
- mihai.carabas@oracle.com, bp@alien8.de, boris.ostrovsky@oracle.com
+Content-Disposition: inline
+In-Reply-To: <98c10a41-d223-e375-9742-b6471c3dc33c@arm.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Heiko Stuebner <heiko@sntech.de>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>, linux-tegra@vger.kernel.org,
+ Thierry Reding <thierry.reding@gmail.com>, Will Deacon <will@kernel.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Jean-Philippe Brucker <jean-philippe@linaro.org>,
+ linux-samsung-soc@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>,
+ linux-rockchip@lists.infradead.org, Andy Gross <agross@kernel.org>,
+ Joerg Roedel <jroedel@suse.de>, linux-s390@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ virtualization@lists.linux-foundation.org,
+ Gerald Schaefer <gerald.schaefer@de.ibm.com>, linux-kernel@vger.kernel.org,
+ iommu@lists.linux-foundation.org, Kukjin Kim <kgene@kernel.org>,
+ David Woodhouse <dwmw2@infradead.org>, Lu Baolu <baolu.lu@linux.intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,49 +80,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ankur Arora <ankur.a.arora@oracle.com> writes:
-> A KVM host (or another hypervisor) might advertise paravirtualized
-> features and optimization hints (ex KVM_HINTS_REALTIME) which might
-> become stale over the lifetime of the guest. For instance, the
-> host might go from being undersubscribed to being oversubscribed
-> (or the other way round) and it would make sense for the guest
-> switch pv-ops based on that.
+Hi Robin,
 
-If your host changes his advertised behaviour then you want to fix the
-host setup or find a competent admin.
+thanks for looking into this.
 
-> This lockorture splat that I saw on the guest while testing this is
-> indicative of the problem:
->
->   [ 1136.461522] watchdog: BUG: soft lockup - CPU#8 stuck for 22s! [lock_torture_wr:12865]
->   [ 1136.461542] CPU: 8 PID: 12865 Comm: lock_torture_wr Tainted: G W L 5.4.0-rc7+ #77
->   [ 1136.461546] RIP: 0010:native_queued_spin_lock_slowpath+0x15/0x220
->
-> (Caused by an oversubscribed host but using mismatched native pv_lock_ops
-> on the gues.)
+On Wed, Apr 08, 2020 at 01:09:40PM +0100, Robin Murphy wrote:
+> For a hot-pluggable bus where logical devices may share Stream IDs (like
+> fsl-mc), this could happen:
+> 
+>   create device A
+>   iommu_probe_device(A)
+>     iommu_device_group(A) -> alloc group X
+>   create device B
+>   iommu_probe_device(B)
+>     iommu_device_group(A) -> lookup returns group X
+>   ...
+>   iommu_remove_device(A)
+>   delete device A
+>   create device C
+>   iommu_probe_device(C)
+>     iommu_device_group(C) -> use-after-free of A
+> 
+> Preserving the logical behaviour here would probably look *something* like
+> the mangled diff below, but I haven't thought it through 100%.
 
-And this illustrates what? The fact that you used a misconfigured setup.
+Yeah, I think you are right. How about just moving the loop which sets
+s2crs[idx].group to arm_smmu_device_group()? In that case I can drop
+this patch and leave the group pointer in place.
 
-> This series addresses the problem by doing paravirt switching at
-> runtime.
+Regards,
 
-You're not addressing the problem. Your fixing the symptom, which is
-wrong to begin with.
+	Joerg
 
-> The alternative use-case is a runtime version of apply_alternatives()
-> (not posted with this patch-set) that can be used for some safe subset
-> of X86_FEATUREs. This could be useful in conjunction with the ongoing
-> late microcode loading work that Mihai Carabas and others have been
-> working on.
-
-This has been discussed to death before and there is no safe subset as
-long as this hasn't been resolved:
-
-  https://lore.kernel.org/lkml/alpine.DEB.2.21.1909062237580.1902@nanos.tec.linutronix.de/
-
-Thanks,
-
-        tglx
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
