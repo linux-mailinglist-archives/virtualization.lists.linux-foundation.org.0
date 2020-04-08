@@ -1,62 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AD151A2318
-	for <lists.virtualization@lfdr.de>; Wed,  8 Apr 2020 15:34:06 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 91D631A23D0
+	for <lists.virtualization@lfdr.de>; Wed,  8 Apr 2020 16:13:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B71CD88170;
-	Wed,  8 Apr 2020 13:34:04 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0CE5887FEC;
+	Wed,  8 Apr 2020 14:13:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eylxaJogQyzV; Wed,  8 Apr 2020 13:33:59 +0000 (UTC)
+	with ESMTP id YyUK9o7PR8Nl; Wed,  8 Apr 2020 14:13:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 726E488154;
-	Wed,  8 Apr 2020 13:33:59 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 261D687FF7;
+	Wed,  8 Apr 2020 14:13:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 512F7C1D89;
-	Wed,  8 Apr 2020 13:33:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 07B53C0177;
+	Wed,  8 Apr 2020 14:13:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 68EC7C0177
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 20197C0177
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 13:33:58 +0000 (UTC)
+ Wed,  8 Apr 2020 14:13:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 4E13A20555
+ by silver.osuosl.org (Postfix) with ESMTP id 09A3F204C6
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 13:33:58 +0000 (UTC)
+ Wed,  8 Apr 2020 14:13:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XeMW8hD6vUq5
+ with ESMTP id vW6E7urLYrsg
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 13:33:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by silver.osuosl.org (Postfix) with ESMTPS id A38B8203A6
+ Wed,  8 Apr 2020 14:13:09 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from Galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by silver.osuosl.org (Postfix) with ESMTPS id 248A320012
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Apr 2020 13:33:56 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 2B99FAE59;
- Wed,  8 Apr 2020 13:33:53 +0000 (UTC)
+ Wed,  8 Apr 2020 14:13:09 +0000 (UTC)
+Received: from p5de0bf0b.dip0.t-ipconnect.de ([93.224.191.11]
+ helo=nanos.tec.linutronix.de)
+ by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
+ (Exim 4.80) (envelope-from <tglx@linutronix.de>)
+ id 1jMBRr-0007Ob-HA; Wed, 08 Apr 2020 16:12:59 +0200
+Received: by nanos.tec.linutronix.de (Postfix, from userid 1000)
+ id A83CE10069D; Wed,  8 Apr 2020 16:12:58 +0200 (CEST)
+From: Thomas Gleixner <tglx@linutronix.de>
+To: Ankur Arora <ankur.a.arora@oracle.com>, linux-kernel@vger.kernel.org,
+ x86@kernel.org
 Subject: Re: [RFC PATCH 00/26] Runtime paravirt patching
-To: Peter Zijlstra <peterz@infradead.org>,
- Ankur Arora <ankur.a.arora@oracle.com>
+In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
- <20200408120856.GY20713@hirez.programming.kicks-ass.net>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <bcf8206d-5a41-4e6b-1832-75ba1d6367e4@suse.com>
-Date: Wed, 8 Apr 2020 15:33:52 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+Date: Wed, 08 Apr 2020 16:12:58 +0200
+Message-ID: <87k12qawwl.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-In-Reply-To: <20200408120856.GY20713@hirez.programming.kicks-ass.net>
-Content-Language: en-US
-Cc: hpa@zytor.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
- x86@kernel.org, linux-kernel@vger.kernel.org,
+X-Linutronix-Spam-Score: -1.0
+X-Linutronix-Spam-Level: -
+X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required, ALL_TRUSTED=-1,
+ SHORTCIRCUIT=-0.0001
+Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
+ peterz@infradead.org, hpa@zytor.com, Ankur Arora <ankur.a.arora@oracle.com>,
  virtualization@lists.linux-foundation.org, pbonzini@redhat.com,
  namit@vmware.com, mhiramat@kernel.org, jpoimboe@redhat.com,
  mihai.carabas@oracle.com, bp@alien8.de, boris.ostrovsky@oracle.com
@@ -71,41 +74,54 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 08.04.20 14:08, Peter Zijlstra wrote:
-> On Tue, Apr 07, 2020 at 10:02:57PM -0700, Ankur Arora wrote:
->> Mechanism: the patching itself is done using stop_machine(). That is
->> not ideal -- text_poke_stop_machine() was replaced with INT3+emulation
->> via text_poke_bp(), but I'm using this to address two issues:
->>   1) emulation in text_poke() can only easily handle a small set
->>   of instructions and this is problematic for inlined pv-ops (and see
->>   a possible alternatives use-case below.)
->>   2) paravirt patching might have inter-dependendent ops (ex.
->>   lock.queued_lock_slowpath, lock.queued_lock_unlock are paired and
->>   need to be updated atomically.)
-> 
-> And then you hope that the spinlock state transfers.. That is that both
-> implementations agree what an unlocked spinlock looks like.
-> 
-> Suppose the native one was a ticket spinlock, where unlocked means 'head
-> == tail' while the paravirt one is a test-and-set spinlock, where
-> unlocked means 'val == 0'.
-> 
-> That just happens to not be the case now, but it was for a fair while.
+Ankur Arora <ankur.a.arora@oracle.com> writes:
+> A KVM host (or another hypervisor) might advertise paravirtualized
+> features and optimization hints (ex KVM_HINTS_REALTIME) which might
+> become stale over the lifetime of the guest. For instance, the
+> host might go from being undersubscribed to being oversubscribed
+> (or the other way round) and it would make sense for the guest
+> switch pv-ops based on that.
 
-Sure? This would mean that before spinlock-pvops are being set no lock
-is allowed to be used in the kernel, because this would block the boot
-time transition of the lock variant to use.
+If your host changes his advertised behaviour then you want to fix the
+host setup or find a competent admin.
 
-Another problem I'm seeing is that runtime pvops patching would rely on
-the fact that stop_machine() isn't guarded by a spinlock.
+> This lockorture splat that I saw on the guest while testing this is
+> indicative of the problem:
+>
+>   [ 1136.461522] watchdog: BUG: soft lockup - CPU#8 stuck for 22s! [lock_torture_wr:12865]
+>   [ 1136.461542] CPU: 8 PID: 12865 Comm: lock_torture_wr Tainted: G W L 5.4.0-rc7+ #77
+>   [ 1136.461546] RIP: 0010:native_queued_spin_lock_slowpath+0x15/0x220
+>
+> (Caused by an oversubscribed host but using mismatched native pv_lock_ops
+> on the gues.)
 
+And this illustrates what? The fact that you used a misconfigured setup.
 
-Juergen
+> This series addresses the problem by doing paravirt switching at
+> runtime.
+
+You're not addressing the problem. Your fixing the symptom, which is
+wrong to begin with.
+
+> The alternative use-case is a runtime version of apply_alternatives()
+> (not posted with this patch-set) that can be used for some safe subset
+> of X86_FEATUREs. This could be useful in conjunction with the ongoing
+> late microcode loading work that Mihai Carabas and others have been
+> working on.
+
+This has been discussed to death before and there is no safe subset as
+long as this hasn't been resolved:
+
+  https://lore.kernel.org/lkml/alpine.DEB.2.21.1909062237580.1902@nanos.tec.linutronix.de/
+
+Thanks,
+
+        tglx
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
