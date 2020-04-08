@@ -1,73 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79E0E1A2162
-	for <lists.virtualization@lfdr.de>; Wed,  8 Apr 2020 14:09:54 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E7A91A2206
+	for <lists.virtualization@lfdr.de>; Wed,  8 Apr 2020 14:28:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 205042048D;
-	Wed,  8 Apr 2020 12:09:53 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id F0CAB87BFE;
+	Wed,  8 Apr 2020 12:28:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KGgHDCmGGG+H; Wed,  8 Apr 2020 12:09:51 +0000 (UTC)
+	with ESMTP id nnZ6YLKm4ndc; Wed,  8 Apr 2020 12:28:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 841512052B;
-	Wed,  8 Apr 2020 12:09:51 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1E1A487FA4;
+	Wed,  8 Apr 2020 12:28:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6A968C1AE8;
-	Wed,  8 Apr 2020 12:09:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 06B85C0177;
+	Wed,  8 Apr 2020 12:28:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4CC42C0177;
- Wed,  8 Apr 2020 12:09:49 +0000 (UTC)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3968BC0177
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  8 Apr 2020 12:28:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3B70E86777;
- Wed,  8 Apr 2020 12:09:49 +0000 (UTC)
+ by silver.osuosl.org (Postfix) with ESMTP id 31A292052E
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  8 Apr 2020 12:28:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fa7AP9wjnWHy; Wed,  8 Apr 2020 12:09:48 +0000 (UTC)
+ with ESMTP id Rbwdc8qmxw9c
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  8 Apr 2020 12:28:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by whitealder.osuosl.org (Postfix) with ESMTP id 004018618E;
- Wed,  8 Apr 2020 12:09:47 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5703C31B;
- Wed,  8 Apr 2020 05:09:47 -0700 (PDT)
-Received: from [10.57.55.221] (unknown [10.57.55.221])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AA7BA3F73D;
- Wed,  8 Apr 2020 05:09:43 -0700 (PDT)
-Subject: Re: [RFC PATCH 17/34] iommu/arm-smmu: Store device instead of group
- in arm_smmu_s2cr
-To: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Kukjin Kim <kgene@kernel.org>,
- Krzysztof Kozlowski <krzk@kernel.org>, David Woodhouse
- <dwmw2@infradead.org>, Lu Baolu <baolu.lu@linux.intel.com>,
- Andy Gross <agross@kernel.org>, Bjorn Andersson
- <bjorn.andersson@linaro.org>, Matthias Brugger <matthias.bgg@gmail.com>,
- Rob Clark <robdclark@gmail.com>, Heiko Stuebner <heiko@sntech.de>,
- Gerald Schaefer <gerald.schaefer@de.ibm.com>,
- Thierry Reding <thierry.reding@gmail.com>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Jean-Philippe Brucker <jean-philippe@linaro.org>
-References: <20200407183742.4344-1-joro@8bytes.org>
- <20200407183742.4344-18-joro@8bytes.org>
-From: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <98c10a41-d223-e375-9742-b6471c3dc33c@arm.com>
-Date: Wed, 8 Apr 2020 13:09:40 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id 3A98520521
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  8 Apr 2020 12:28:11 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 66C7CAC44;
+ Wed,  8 Apr 2020 12:28:07 +0000 (UTC)
+Subject: Re: [RFC PATCH 00/26] Runtime paravirt patching
+To: Ankur Arora <ankur.a.arora@oracle.com>, linux-kernel@vger.kernel.org,
+ x86@kernel.org
+References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <d7f8bff3-526a-6a84-2e81-677cfbac0111@suse.com>
+Date: Wed, 8 Apr 2020 14:28:06 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200407183742.4344-18-joro@8bytes.org>
-Content-Language: en-GB
-Cc: linux-s390@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-rockchip@lists.infradead.org,
- iommu@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
- linux-mediatek@lists.infradead.org, linux-tegra@vger.kernel.org
+In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
+Content-Language: en-US
+Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org, peterz@infradead.org,
+ hpa@zytor.com, virtualization@lists.linux-foundation.org, pbonzini@redhat.com,
+ bp@alien8.de, mhiramat@kernel.org, jpoimboe@redhat.com,
+ mihai.carabas@oracle.com, namit@vmware.com, boris.ostrovsky@oracle.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,110 +74,199 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 2020-04-07 7:37 pm, Joerg Roedel wrote:
-> From: Joerg Roedel <jroedel@suse.de>
+On 08.04.20 07:02, Ankur Arora wrote:
+> A KVM host (or another hypervisor) might advertise paravirtualized
+> features and optimization hints (ex KVM_HINTS_REALTIME) which might
+> become stale over the lifetime of the guest. For instance, the
+
+Then this hint is wrong if it can't be guaranteed.
+
+> host might go from being undersubscribed to being oversubscribed
+> (or the other way round) and it would make sense for the guest
+> switch pv-ops based on that.
+
+I think using pvops for such a feature change is just wrong.
+
+What comes next? Using pvops for being able to migrate a guest from an
+Intel to an AMD machine?
+
+...
+
+> There are four main sets of patches in this series:
 > 
-> This is required to convert the arm-smmu driver to the
-> probe/release_device() interface.
+>   1. PV-ops management (patches 1-10, 20): mostly infrastructure and
+>   refactoring pieces to make paravirt patching usable at runtime. For the
+>   most part scoped under CONFIG_PARAVIRT_RUNTIME.
 > 
-> Signed-off-by: Joerg Roedel <jroedel@suse.de>
-> ---
->   drivers/iommu/arm-smmu.c | 14 +++++++++-----
->   1 file changed, 9 insertions(+), 5 deletions(-)
+>   Patches 1-7, to persist part of parainstructions in memory:
+>    "x86/paravirt: Specify subsection in PVOP macros"
+>    "x86/paravirt: Allow paravirt patching post-init"
+>    "x86/paravirt: PVRTOP macros for PARAVIRT_RUNTIME"
+>    "x86/alternatives: Refactor alternatives_smp_module*
+>    "x86/alternatives: Rename alternatives_smp*, smp_alt_module
+>    "x86/alternatives: Remove stale symbols
+>    "x86/paravirt: Persist .parainstructions.runtime"
 > 
-> diff --git a/drivers/iommu/arm-smmu.c b/drivers/iommu/arm-smmu.c
-> index a6a5796e9c41..3493501d8b2c 100644
-> --- a/drivers/iommu/arm-smmu.c
-> +++ b/drivers/iommu/arm-smmu.c
-> @@ -69,7 +69,7 @@ MODULE_PARM_DESC(disable_bypass,
->   	"Disable bypass streams such that incoming transactions from devices that are not attached to an iommu domain will report an abort back to the device and will not be allowed to pass through the SMMU.");
->   
->   struct arm_smmu_s2cr {
-> -	struct iommu_group		*group;
-> +	struct device			*dev;
->   	int				count;
->   	enum arm_smmu_s2cr_type		type;
->   	enum arm_smmu_s2cr_privcfg	privcfg;
-> @@ -1100,7 +1100,7 @@ static int arm_smmu_master_alloc_smes(struct device *dev)
->   	/* It worked! Now, poke the actual hardware */
->   	for_each_cfg_sme(cfg, fwspec, i, idx) {
->   		arm_smmu_write_sme(smmu, idx);
-> -		smmu->s2crs[idx].group = group;
-> +		smmu->s2crs[idx].dev = dev;
->   	}
->   
->   	mutex_unlock(&smmu->stream_map_mutex);
-> @@ -1495,11 +1495,15 @@ static struct iommu_group *arm_smmu_device_group(struct device *dev)
->   	int i, idx;
->   
->   	for_each_cfg_sme(cfg, fwspec, i, idx) {
-> -		if (group && smmu->s2crs[idx].group &&
-> -		    group != smmu->s2crs[idx].group)
-> +		struct iommu_group *idx_grp = NULL;
-> +
-> +		if (smmu->s2crs[idx].dev)
-> +			idx_grp = smmu->s2crs[idx].dev->iommu_group;
+>   Patches 8-10, develop the inerfaces to safely switch pv-ops:
+>    "x86/paravirt: Stash native pv-ops"
+>    "x86/paravirt: Add runtime_patch()"
+>    "x86/paravirt: Add primitives to stage pv-ops"
+> 
+>   Patch 20 enables switching of pv_lock_ops:
+>    "x86/paravirt: Enable pv-spinlocks in runtime_patch()"
+> 
+>   2. Non-emulated text poking (patches 11-19)
+> 
+>   Patches 11-13 are mostly refactoring to split __text_poke() into map,
+>   unmap and poke/memcpy phases with the poke portion being re-entrant
+>    "x86/alternatives: Remove return value of text_poke*()"
+>    "x86/alternatives: Use __get_unlocked_pte() in text_poke()"
+>    "x86/alternatives: Split __text_poke()"
+> 
+>   Patches 15, 17 add the actual poking state-machine:
+>    "x86/alternatives: Non-emulated text poking"
+>    "x86/alternatives: Add patching logic in text_poke_site()"
+> 
+>   with patches 14 and 18 containing the pieces for BP handling:
+>    "x86/alternatives: Handle native insns in text_poke_loc*()"
+>    "x86/alternatives: Handle BP in non-emulated text poking"
+> 
+>   and patch 19 provides the ability to use the state-machine above in an
+>   NMI context (fixes some potential deadlocks when handling inter-
+>   dependent operations and multiple NMIs):
+>    "x86/alternatives: NMI safe runtime patching".
+> 
+>   Patch 16 provides the interface (paravirt_runtime_patch()) to use the
+>   poking mechanism developed above and patch 21 adds a selftest:
+>    "x86/alternatives: Add paravirt patching at runtime"
+>    "x86/alternatives: Paravirt runtime selftest"
+> 
+>   3. KVM guest changes to be able to use this (patches 22-23,25-26):
+>    "kvm/paravirt: Encapsulate KVM pv switching logic"
+>    "x86/kvm: Add worker to trigger runtime patching"
+>    "x86/kvm: Guest support for dynamic hints"
+>    "x86/kvm: Add hint change notifier for KVM_HINT_REALTIME".
+> 
+>   4. KVM host changes to notify the guest of a change (patch 24):
+>    "x86/kvm: Support dynamic CPUID hints"
+> 
+> Testing:
+> With paravirt patching, the code is mostly stable on Intel and AMD
+> systems under kernbench and locktorture with paravirt toggling (with,
+> without synthetic NMIs) in the background.
+> 
+> Queued spinlock performance for locktorture is also on expected lines:
+>   [ 1533.221563] Writes:  Total: 1048759000  Max/Min: 0/0   Fail: 0
+>   # toggle PV spinlocks
+> 
+>   [ 1594.713699] Writes:  Total: 1111660545  Max/Min: 0/0   Fail: 0
+>   # PV spinlocks (in ~60 seconds) = 62,901,545
+> 
+>   # toggle native spinlocks
+>   [ 1656.117175] Writes:  Total: 1113888840  Max/Min: 0/0   Fail: 0
+>    # native spinlocks (in ~60 seconds) = 2,228,295
+> 
+> The alternatives testing is more limited with it being used to rewrite
+> mostly harmless X86_FEATUREs with load in the background.
+> 
+> Patches also at:
+> 
+> ssh://git@github.com/terminus/linux.git alternatives-rfc-upstream-v1
+> 
+> Please review.
+> 
+> Thanks
+> Ankur
+> 
+> [1] The precise change in memory footprint depends on config options
+> but the following example inlines queued_spin_unlock() (which forms
+> the bulk of the added state). The added footprint is the size of the
+> .parainstructions.runtime section:
+> 
+>   $ objdump -h vmlinux|grep .parainstructions
+>   Idx Name              		Size      VMA
+>   	LMA                File-off  Algn
+>    27 .parainstructions 		0001013c  ffffffff82895000
+>    	0000000002895000   01c95000  2**3
+>    28 .parainstructions.runtime  0000cd2c  ffffffff828a5140
+>    	00000000028a5140   01ca5140  2**3
+> 
+>    $ size vmlinux
+>    text       data       bss        dec      hex       filename
+>    13726196   12302814   14094336   40123346 2643bd2   vmlinux
+> 
+> Ankur Arora (26):
+>    x86/paravirt: Specify subsection in PVOP macros
+>    x86/paravirt: Allow paravirt patching post-init
+>    x86/paravirt: PVRTOP macros for PARAVIRT_RUNTIME
+>    x86/alternatives: Refactor alternatives_smp_module*
+>    x86/alternatives: Rename alternatives_smp*, smp_alt_module
+>    x86/alternatives: Remove stale symbols
+>    x86/paravirt: Persist .parainstructions.runtime
+>    x86/paravirt: Stash native pv-ops
+>    x86/paravirt: Add runtime_patch()
+>    x86/paravirt: Add primitives to stage pv-ops
+>    x86/alternatives: Remove return value of text_poke*()
+>    x86/alternatives: Use __get_unlocked_pte() in text_poke()
+>    x86/alternatives: Split __text_poke()
+>    x86/alternatives: Handle native insns in text_poke_loc*()
+>    x86/alternatives: Non-emulated text poking
+>    x86/alternatives: Add paravirt patching at runtime
+>    x86/alternatives: Add patching logic in text_poke_site()
+>    x86/alternatives: Handle BP in non-emulated text poking
+>    x86/alternatives: NMI safe runtime patching
+>    x86/paravirt: Enable pv-spinlocks in runtime_patch()
+>    x86/alternatives: Paravirt runtime selftest
+>    kvm/paravirt: Encapsulate KVM pv switching logic
+>    x86/kvm: Add worker to trigger runtime patching
+>    x86/kvm: Support dynamic CPUID hints
+>    x86/kvm: Guest support for dynamic hints
+>    x86/kvm: Add hint change notifier for KVM_HINT_REALTIME
+> 
+>   Documentation/virt/kvm/api.rst        |  17 +
+>   Documentation/virt/kvm/cpuid.rst      |   9 +-
+>   arch/x86/Kconfig                      |  14 +
+>   arch/x86/Kconfig.debug                |  13 +
+>   arch/x86/entry/entry_64.S             |   5 +
+>   arch/x86/include/asm/alternative.h    |  20 +-
+>   arch/x86/include/asm/kvm_host.h       |   6 +
+>   arch/x86/include/asm/kvm_para.h       |  17 +
+>   arch/x86/include/asm/paravirt.h       |  10 +-
+>   arch/x86/include/asm/paravirt_types.h | 230 ++++--
+>   arch/x86/include/asm/text-patching.h  |  18 +-
+>   arch/x86/include/uapi/asm/kvm_para.h  |   2 +
+>   arch/x86/kernel/Makefile              |   1 +
+>   arch/x86/kernel/alternative.c         | 987 +++++++++++++++++++++++---
+>   arch/x86/kernel/kvm.c                 | 191 ++++-
+>   arch/x86/kernel/module.c              |  42 +-
+>   arch/x86/kernel/paravirt.c            |  16 +-
+>   arch/x86/kernel/paravirt_patch.c      |  61 ++
+>   arch/x86/kernel/pv_selftest.c         | 264 +++++++
+>   arch/x86/kernel/pv_selftest.h         |  15 +
+>   arch/x86/kernel/setup.c               |   2 +
+>   arch/x86/kernel/vmlinux.lds.S         |  16 +
+>   arch/x86/kvm/cpuid.c                  |   3 +-
+>   arch/x86/kvm/x86.c                    |  39 +
+>   include/asm-generic/kvm_para.h        |  12 +
+>   include/asm-generic/vmlinux.lds.h     |   8 +
+>   include/linux/kvm_para.h              |   5 +
+>   include/linux/mm.h                    |  16 +-
+>   include/linux/preempt.h               |  17 +
+>   include/uapi/linux/kvm.h              |   4 +
+>   kernel/locking/lock_events.c          |   2 +-
+>   mm/memory.c                           |   9 +-
+>   32 files changed, 1850 insertions(+), 221 deletions(-)
+>   create mode 100644 arch/x86/kernel/pv_selftest.c
+>   create mode 100644 arch/x86/kernel/pv_selftest.h
+> 
 
-For a hot-pluggable bus where logical devices may share Stream IDs (like 
-fsl-mc), this could happen:
+Quite a lot of code churn and hacks for a problem which should not
+occur on a well administrated machine.
 
-   create device A
-   iommu_probe_device(A)
-     iommu_device_group(A) -> alloc group X
-   create device B
-   iommu_probe_device(B)
-     iommu_device_group(A) -> lookup returns group X
-   ...
-   iommu_remove_device(A)
-   delete device A
-   create device C
-   iommu_probe_device(C)
-     iommu_device_group(C) -> use-after-free of A
+Especially the NMI dependencies make me not wanting to Ack this series.
 
-Preserving the logical behaviour here would probably look *something* 
-like the mangled diff below, but I haven't thought it through 100%.
 
-Robin.
-
------>8-----
-diff --git a/drivers/iommu/arm-smmu.c b/drivers/iommu/arm-smmu.c
-index 16c4b87af42b..e88612ee47fe 100644
---- a/drivers/iommu/arm-smmu.c
-+++ b/drivers/iommu/arm-smmu.c
-@@ -1100,10 +1100,8 @@ static int arm_smmu_master_alloc_smes(struct 
-device *dev)
-         iommu_group_put(group);
-
-         /* It worked! Now, poke the actual hardware */
--       for_each_cfg_sme(fwspec, i, idx) {
-+       for_each_cfg_sme(fwspec, i, idx)
-                 arm_smmu_write_sme(smmu, idx);
--               smmu->s2crs[idx].group = group;
--       }
-
-         mutex_unlock(&smmu->stream_map_mutex);
-         return 0;
-@@ -1500,15 +1498,17 @@ static struct iommu_group 
-*arm_smmu_device_group(struct device *dev)
-         }
-
-         if (group)
--               return iommu_group_ref_get(group);
--
--       if (dev_is_pci(dev))
-+               iommu_group_ref_get(group);
-+       else if (dev_is_pci(dev))
-                 group = pci_device_group(dev);
-         else if (dev_is_fsl_mc(dev))
-                 group = fsl_mc_device_group(dev);
-         else
-                 group = generic_device_group(dev);
-
-+       for_each_cfg_sme(fwspec, i, idx)
-+               smmu->s2crs[idx].group = group;
-+
-         return group;
-  }
+Juergen
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
