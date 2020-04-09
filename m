@@ -1,92 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 430B01A2F16
-	for <lists.virtualization@lfdr.de>; Thu,  9 Apr 2020 08:21:22 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id D5E751A32A0
+	for <lists.virtualization@lfdr.de>; Thu,  9 Apr 2020 12:41:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id ED481877B5;
-	Thu,  9 Apr 2020 06:21:20 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5F2C4875E0;
+	Thu,  9 Apr 2020 10:41:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PR9taJP5iAeW; Thu,  9 Apr 2020 06:21:20 +0000 (UTC)
+	with ESMTP id 4V6CsuVIuMVy; Thu,  9 Apr 2020 10:41:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 7645F877E2;
-	Thu,  9 Apr 2020 06:21:20 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id F340E874D4;
+	Thu,  9 Apr 2020 10:41:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 58FEBC0177;
-	Thu,  9 Apr 2020 06:21:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D1B8CC0177;
+	Thu,  9 Apr 2020 10:41:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B5195C0177
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4A0DEC0177
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Apr 2020 06:21:18 +0000 (UTC)
+ Thu,  9 Apr 2020 10:41:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 95D072033B
+ by hemlock.osuosl.org (Postfix) with ESMTP id 35E4887A5F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Apr 2020 06:21:18 +0000 (UTC)
+ Thu,  9 Apr 2020 10:41:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xelDCcX6Mk-Z
+ with ESMTP id NdPHYDibFFT5
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Apr 2020 06:21:17 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id 663A320027
+ Thu,  9 Apr 2020 10:41:35 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.135])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 8EB6487A5A
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Apr 2020 06:21:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586413276;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5mB7SP/Y8MXrZQ6SPWB8nv21X1ADlrVhI+qwnI43BNs=;
- b=VWGHBLjRDRWzQDf9QZUSUnwnjuA2S1layI3moKIEjGlRQuC6XvUVmRtz/rO86Da+rSdd3N
- fVvuR4cTnoQcwTIfCGDWCVPMosU9c0FAM2EnRjsXHcKFTyFYQICkkePJdpsZX2ejPfis5q
- FD5WcpJ1Y/kPdFoh48xWCCn4wvydR8s=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-339-4PB6D7EUPkmm0VMYoI55sA-1; Thu, 09 Apr 2020 02:21:10 -0400
-X-MC-Unique: 4PB6D7EUPkmm0VMYoI55sA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7BA3A107B7D4;
- Thu,  9 Apr 2020 06:21:08 +0000 (UTC)
-Received: from [10.72.13.188] (ovpn-13-188.pek2.redhat.com [10.72.13.188])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4B42960C18;
- Thu,  9 Apr 2020 06:20:39 +0000 (UTC)
-Subject: Re: virtio-mmio: Delete an error message in vm_find_vqs()
-To: Markus Elfring <Markus.Elfring@web.de>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org
-References: <9e27bc4a-cfa1-7818-dc25-8ad308816b30@web.de>
- <03b19e72-0021-dc6b-77c4-ed3c4e13d526@redhat.com>
- <96031fc7-dced-95bd-fc57-a5fe890638f4@web.de>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <6c94db13-ae46-cf8e-f3c4-6f270112ad87@redhat.com>
-Date: Thu, 9 Apr 2020 14:20:38 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ Thu,  9 Apr 2020 10:41:34 +0000 (UTC)
+Received: from mail-qk1-f173.google.com ([209.85.222.173]) by
+ mrelayeu.kundenserver.de (mreue010 [212.227.15.129]) with ESMTPSA (Nemesis)
+ id 1MofPt-1iyN181mKf-00p8TI for <virtualization@lists.linux-foundation.org>;
+ Thu, 09 Apr 2020 12:41:31 +0200
+Received: by mail-qk1-f173.google.com with SMTP id 130so3411762qke.4
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 09 Apr 2020 03:41:31 -0700 (PDT)
+X-Gm-Message-State: AGi0PuYWzTGKVidwtihkZYMYGHFo5uGS8nwSUeZ2vF6l61L0Juxket6N
+ 8jaNlUN4bTkC2msk4JxoQ7soQ5L1gKHmxcIDRC4=
+X-Google-Smtp-Source: APiQypJ+MZNDx1nAeHQJUrsxI3ccDEBo8kCLAwyqI5SJ9WAba6/XBRqyHYyNfPORCxMsxCe8/yMMMt7xih71qKreb4o=
+X-Received: by 2002:a37:a52:: with SMTP id 79mr11506167qkk.3.1586428890169;
+ Thu, 09 Apr 2020 03:41:30 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <96031fc7-dced-95bd-fc57-a5fe890638f4@web.de>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: Rob Herring <robh@kernel.org>, Tang Bin <tangbin@cmss.chinamobile.com>,
- Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
- "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
- kernel-janitors@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Andrzej Hajda <a.hajda@samsung.com>,
- Andy Shevchenko <andy.shevchenko@gmail.com>, Mark Brown <broonie@kernel.org>,
- Russell King <linux@armlinux.org.uk>, Stephen Boyd <swboyd@chromium.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>
+References: <20200326140125.19794-1-jasowang@redhat.com>
+ <20200326140125.19794-10-jasowang@redhat.com>
+In-Reply-To: <20200326140125.19794-10-jasowang@redhat.com>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Thu, 9 Apr 2020 12:41:13 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a1RXUXs5oYjB=Jq5cpvG11eTnmJ+vc18_-0fzgTH6envA@mail.gmail.com>
+Message-ID: <CAK8P3a1RXUXs5oYjB=Jq5cpvG11eTnmJ+vc18_-0fzgTH6envA@mail.gmail.com>
+Subject: Re: [PATCH V9 9/9] virtio: Intel IFC VF driver for VDPA
+To: Jason Wang <jasowang@redhat.com>
+X-Provags-ID: V03:K1:j0NcWy04tI8K/jGmcxk632TuVME/ZCE8EQJgvbdmpSRglCMYw8b
+ R8eMxa49kaCpPImdTuAo4oYShsg2USD1bamVQyXXukOG4YVbU79Z2jOnh4DynSokofGZeGX
+ gH+IryAxzxJoKi+M6UhQdCVwFS3ya1OiuBve1yLrcreh+YyM9XqNnQ0Zdrr+np4QtlbNkH2
+ Hp10jbiUh0WXrHl4L9Tjg==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:szS33LkPLH4=:KOn9Xcrsk/Bxo+L8SjZstg
+ BCFT+EcwP2q/HRJOAmN30NQdPcq91C8XW7tkNANbENUGRE/TJRAnhAFzggGCoRP1U47hBtX7b
+ xpqBP9oT+2lXWYvvIrNnZtREogjEeHXjReToDotXWHNZz5dY+tem8angymNFZny/xyOMX9FXz
+ 4ZNKNyxyd65Zyx1iut5n2eqE52X+fZh5xsHiOa8ZOGgy0DrRHf96m187gUw1dczFPA/h9zvgC
+ JXO8gPnzF83Z0b+WErhkcQFt0mfe6vITCfDA+NurAdJlShzkFyqmvj+0KFPnAN1Hog7QABaS+
+ 6SGdGUHV70x256Hb+iXjF+Vnf24sAYyZErb+grYaDpDPwu8RxFozPgx3CxSNG4qySsedfcE2G
+ vRmOIAfdA0zeAY58hQKoNGrUQ4MNcGcuoafov3nkmPc3qaiZ29sgRa4qbhJIrEeOHXZiHft0K
+ hh+b+QaaIsW3lu6Lsx9hPzCR2LxgWIMVBPy+wCxCR03DKXPW6o88sUep7zmfQZIRC2oT9y9H6
+ AhDts7D5vUuUZ1J3JKulAXIvbWmRHkaot467cDXxPZ8bZug1nz8mWZFIlcCoCkv629AgldY2J
+ uyK+lLW06xGtyNVvv49AkCIybIX4wPXJW3IXpc4fk5f8bn/BsxAsI9y4AvarhmkFsgSA+sf6c
+ NKIB/AeW5F57SnDrmkH7PPDBR02hlYUVHR8XggOcR11Zjt5RYfpztvBEMNnBy+Ode4oQJPIuV
+ saeWGgaBwowxZ1VgYBCD0Fd8/tdORZZuOIKAZ4j1rhSvjZQENmwFSOwwJNN91UrgFxKMNqbgV
+ d40aDV1njXm3ZA1D1v+8GdL8OggjZOCYSDp6RF9VpXsIpTIf8Y=
+Cc: kvm list <kvm@vger.kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ mhabets@solarflare.com, virtualization@lists.linux-foundation.org,
+ rob.miller@broadcom.com, saugatm@xilinx.com, lulu@redhat.com,
+ hanand@xilinx.com, Christoph Hellwig <hch@infradead.org>, eperezma@redhat.com,
+ Jason Gunthorpe <jgg@mellanox.com>, shahafs@mellanox.com,
+ Parav Pandit <parav@mellanox.com>, vmireyno@marvell.com, gdawar@xilinx.com,
+ Jiri Pirko <jiri@mellanox.com>, xiao.w.wang@intel.com,
+ Stefan Hajnoczi <stefanha@redhat.com>, zhihong.wang@intel.com,
+ zhangweining@ruijie.com.cn, Bie Tiwei <tiwei.bie@intel.com>,
+ Networking <netdev@vger.kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,31 +100,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNC85IOS4i+WNiDI6MDIsIE1hcmt1cyBFbGZyaW5nIHdyb3RlOgo+Pj4gVGhlIGZ1
-bmN0aW9uIOKAnHBsYXRmb3JtX2dldF9pcnHigJ0gY2FuIGxvZyBhbiBlcnJvciBhbHJlYWR5Lgo+
-Pj4gVGh1cyBvbWl0IGEgcmVkdW5kYW50IG1lc3NhZ2UgZm9yIHRoZSBleGNlcHRpb24gaGFuZGxp
-bmcgaW4gdGhlCj4+PiBjYWxsaW5nIGZ1bmN0aW9uLgo+PiBJdCBsb29rcyB0byBtZSB0aGF0IG5v
-dCBhbGwgZXJyb3IgcGF0aCBvZiBwbGF0Zm9ybV9nZXRfaXJxKCkgd2VyZSBsb2dnZC4KPiBIb3cg
-ZG8geW91IHRoaW5rIGFib3V0IHRvIGNsYXJpZnkgdGhlIGhhbmRsaW5nIG9mIHRoZSBlcnJvciBj
-b2RlIOKAnC1FUFJPQkVfREVGRVLigJ0gYW55IG1vcmU/Cj4gaHR0cHM6Ly9lbGl4aXIuYm9vdGxp
-bi5jb20vbGludXgvdjUuNi4zL3NvdXJjZS9kcml2ZXJzL2Jhc2UvcGxhdGZvcm0uYyNMMjAyCgoK
-QWhhLCBpdCBsb29rcyB0byBtZSB0aGF0IEknbSBvbiB0aGUgd3JvbmcgYnJhbmNoLiBTb3JyeS4K
-Cgo+Cj4KPj4gQW5kIGdpdCBncmVwIHRvbGQgbWUgdGhlcmUncmUgb3RoZXIgdXNlcnMgb2YgcGxh
-dGZvcm1fZ2V0X2lycSgpIHRoYXQgY2hlY2sgYW5kIGxvZyBieSB0aGVtc2VsdmVzLgo+IFNvdXJj
-ZSBjb2RlIGFuYWx5c2lzIGNhbiBwb2ludCBmdXJ0aGVyIHVwZGF0ZSBjYW5kaWRhdGVzIG91dCwg
-Y2FuJ3QgaXQ/Cj4gaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9n
-aXQvdG9ydmFsZHMvbGludXguZ2l0L2NvbW1pdC9kcml2ZXJzL2Jhc2UvcGxhdGZvcm0uYz9pZD03
-NzIzZjRjNWVjZGI4ZDgzMmYwNDlmODQ4M2JlYjBkMTA4MWNlZGY2CgoKWWVzLCBpdCBjYW4uCgoK
-Pgo+IFdvdWxkIHlvdSBsaWtlIHRvIGFjaGlldmUgY29sbGF0ZXJhbCBldm9sdXRpb24/CgoKWWVz
-IGFuZCBpdCdzIHByb2JhYmx5IGJlIGJldHRlciB0byBwdXQgYWxsIHRoZSBmaXhlcyBpbiBvbmUg
-c2VyaWVzLgoKRm9yIHRoaXMgcGF0Y2guCgpBY2tlZC1ieTogSmFzb24gV2FuZyA8amFzb3dhbmdA
-cmVkaGF0LmNvbT4KClRoYW5rcwoKCj4KPiBSZWdhcmRzLAo+IE1hcmt1cwo+CgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWls
-aW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6
-Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRp
-b24=
+On Thu, Mar 26, 2020 at 3:08 PM Jason Wang <jasowang@redhat.com> wrote:
+>
+> From: Zhu Lingshan <lingshan.zhu@intel.com>
+>
+> This commit introduced two layers to drive IFC VF:
+>
+> (1) ifcvf_base layer, which handles IFC VF NIC hardware operations and
+>     configurations.
+>
+> (2) ifcvf_main layer, which complies to VDPA bus framework,
+>     implemented device operations for VDPA bus, handles device probe,
+>     bus attaching, vring operations, etc.
+>
+> Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
+> Signed-off-by: Bie Tiwei <tiwei.bie@intel.com>
+> Signed-off-by: Wang Xiao <xiao.w.wang@intel.com>
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
+
+> +
+> +#define IFCVF_QUEUE_ALIGNMENT  PAGE_SIZE
+> +#define IFCVF_QUEUE_MAX                32768
+> +static u16 ifcvf_vdpa_get_vq_align(struct vdpa_device *vdpa_dev)
+> +{
+> +       return IFCVF_QUEUE_ALIGNMENT;
+> +}
+
+This fails to build on arm64 with 64kb page size (found in linux-next):
+
+/drivers/vdpa/ifcvf/ifcvf_main.c: In function 'ifcvf_vdpa_get_vq_align':
+arch/arm64/include/asm/page-def.h:17:20: error: conversion from 'long
+unsigned int' to 'u16' {aka 'short unsigned int'} changes value from
+'65536' to '0' [-Werror=overflow]
+   17 | #define PAGE_SIZE  (_AC(1, UL) << PAGE_SHIFT)
+      |                    ^
+drivers/vdpa/ifcvf/ifcvf_base.h:37:31: note: in expansion of macro 'PAGE_SIZE'
+   37 | #define IFCVF_QUEUE_ALIGNMENT PAGE_SIZE
+      |                               ^~~~~~~~~
+drivers/vdpa/ifcvf/ifcvf_main.c:231:9: note: in expansion of macro
+'IFCVF_QUEUE_ALIGNMENT'
+  231 |  return IFCVF_QUEUE_ALIGNMENT;
+      |         ^~~~~~~~~~~~~~~~~~~~~
+
+It's probably good enough to just not allow the driver to be built in that
+configuration as it's fairly rare but unfortunately there is no simple Kconfig
+symbol for it.
+
+In a similar driver, we did
+
+config VMXNET3
+        tristate "VMware VMXNET3 ethernet driver"
+        depends on PCI && INET
+        depends on !(PAGE_SIZE_64KB || ARM64_64K_PAGES || \
+                     IA64_PAGE_SIZE_64KB || MICROBLAZE_64K_PAGES || \
+                     PARISC_PAGE_SIZE_64KB || PPC_64K_PAGES)
+
+I think we should probably make PAGE_SIZE_64KB a global symbol
+in arch/Kconfig and have it selected by the other symbols so drivers
+like yours can add a dependency for it.
+
+         Arnd
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
