@@ -1,70 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 401951A3377
-	for <lists.virtualization@lfdr.de>; Thu,  9 Apr 2020 13:46:37 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 460AA1A344F
+	for <lists.virtualization@lfdr.de>; Thu,  9 Apr 2020 14:44:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CD89D86B16;
-	Thu,  9 Apr 2020 11:46:34 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id EA7168640E;
+	Thu,  9 Apr 2020 12:44:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6P_n0tmDj7aZ; Thu,  9 Apr 2020 11:46:33 +0000 (UTC)
+	with ESMTP id UhAxYArr3xcv; Thu,  9 Apr 2020 12:44:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id ABAA186B31;
-	Thu,  9 Apr 2020 11:46:32 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A6243863DE;
+	Thu,  9 Apr 2020 12:44:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A679C0177;
-	Thu,  9 Apr 2020 11:46:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 85209C1D85;
+	Thu,  9 Apr 2020 12:44:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F178EC0177;
- Thu,  9 Apr 2020 11:46:30 +0000 (UTC)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BB93DC0177
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Apr 2020 12:44:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id ECA87879A5;
- Thu,  9 Apr 2020 11:46:30 +0000 (UTC)
+ by silver.osuosl.org (Postfix) with ESMTP id B106A231B1
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Apr 2020 12:44:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8JTNLJWgFvbC; Thu,  9 Apr 2020 11:46:29 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id C36E986101;
- Thu,  9 Apr 2020 11:46:28 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 60A51398; Thu,  9 Apr 2020 13:46:25 +0200 (CEST)
-Date: Thu, 9 Apr 2020 13:46:20 +0200
-From: Joerg Roedel <joro@8bytes.org>
-To: Marek Szyprowski <m.szyprowski@samsung.com>
-Subject: [PATCH] iommu/exynos: Get rid of 'struct exynos_iommu_owner'
- exynos_iommu_owner
-Message-ID: <20200409114620.GA16298@8bytes.org>
-References: <20200407183742.4344-1-joro@8bytes.org>
- <CGME20200407184501eucas1p25407bc96e4345df406cf6ba061ae6a82@eucas1p2.samsung.com>
- <20200407183742.4344-32-joro@8bytes.org>
- <449e7f16-e719-9617-ec92-63b82c0bc33f@samsung.com>
- <f59b0bb3-8c08-9cc9-bb1a-e69b7b226f60@samsung.com>
+ with ESMTP id HNuAu4Wpqq3j
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Apr 2020 12:44:14 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by silver.osuosl.org (Postfix) with ESMTPS id 2BB5120524
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Apr 2020 12:44:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1586436253;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=hCTyTHNIoa/f4FCOf5RUI76bLbl3BtD2rSWLrU8gW5Y=;
+ b=bZMAYl4QAGFPMpKROtpxLo8b7l2P34mC1ROPge8ll/H1nHUfZ7dhTbhygw/wO2lwrmmQBG
+ D5G1lAcvFuM2HkWdk+Vp1mB1XTjXnhtsDAqOA4CsY2mpiDr6RYMg830QfV94kGPGd+Xw+5
+ ZkN7oAN6tCSKyNMlF7xTYCuHy92DLI0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-312-zWT1uXBlOtKpx36KjtI44w-1; Thu, 09 Apr 2020 08:44:11 -0400
+X-MC-Unique: zWT1uXBlOtKpx36KjtI44w-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 41F51DB61;
+ Thu,  9 Apr 2020 12:44:08 +0000 (UTC)
+Received: from [10.72.12.130] (ovpn-12-130.pek2.redhat.com [10.72.12.130])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 07E9119756;
+ Thu,  9 Apr 2020 12:43:50 +0000 (UTC)
+Subject: Re: [PATCH V9 9/9] virtio: Intel IFC VF driver for VDPA
+To: Arnd Bergmann <arnd@arndb.de>, lingshan.zhu@intel.com
+References: <20200326140125.19794-1-jasowang@redhat.com>
+ <20200326140125.19794-10-jasowang@redhat.com>
+ <CAK8P3a1RXUXs5oYjB=Jq5cpvG11eTnmJ+vc18_-0fzgTH6envA@mail.gmail.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <ffc4c788-2319-efda-508c-275b9f7efb95@redhat.com>
+Date: Thu, 9 Apr 2020 20:43:49 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <f59b0bb3-8c08-9cc9-bb1a-e69b7b226f60@samsung.com>
-Cc: Heiko Stuebner <heiko@sntech.de>,
- Bjorn Andersson <bjorn.andersson@linaro.org>, linux-tegra@vger.kernel.org,
- Thierry Reding <thierry.reding@gmail.com>, Will Deacon <will@kernel.org>,
- Jean-Philippe Brucker <jean-philippe@linaro.org>,
- linux-samsung-soc@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>,
- linux-rockchip@lists.infradead.org, Andy Gross <agross@kernel.org>,
- Joerg Roedel <jroedel@suse.de>, linux-s390@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
- Matthias Brugger <matthias.bgg@gmail.com>,
- virtualization@lists.linux-foundation.org,
- Gerald Schaefer <gerald.schaefer@de.ibm.com>,
- David Woodhouse <dwmw2@infradead.org>, linux-kernel@vger.kernel.org,
- iommu@lists.linux-foundation.org, Kukjin Kim <kgene@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>, Lu Baolu <baolu.lu@linux.intel.com>
+In-Reply-To: <CAK8P3a1RXUXs5oYjB=Jq5cpvG11eTnmJ+vc18_-0fzgTH6envA@mail.gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: kvm list <kvm@vger.kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ mhabets@solarflare.com, virtualization@lists.linux-foundation.org,
+ rob.miller@broadcom.com, saugatm@xilinx.com, lulu@redhat.com,
+ hanand@xilinx.com, Christoph Hellwig <hch@infradead.org>, eperezma@redhat.com,
+ Jason Gunthorpe <jgg@mellanox.com>, shahafs@mellanox.com,
+ Parav Pandit <parav@mellanox.com>, vmireyno@marvell.com, gdawar@xilinx.com,
+ Jiri Pirko <jiri@mellanox.com>, xiao.w.wang@intel.com,
+ Stefan Hajnoczi <stefanha@redhat.com>, zhihong.wang@intel.com,
+ zhangweining@ruijie.com.cn, Bie Tiwei <tiwei.bie@intel.com>,
+ Networking <netdev@vger.kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ maxime.coquelin@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,357 +99,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Marek,
-
-I had some more thoughts and discussions with Robin about how to make
-this work with the Exynos driver. The result is the patch below, can you
-please test it and report back? Even better if you can fix up any
-breakage it might cause :)
-
-From 60a288509baa34df6a0bf437c977925a0a617c72 Mon Sep 17 00:00:00 2001
-From: Joerg Roedel <jroedel@suse.de>
-Date: Thu, 9 Apr 2020 13:38:18 +0200
-Subject: [PATCH] iommu/exynos: Get rid of 'struct exynos_iommu_owner'
-
-Remove 'struct exynos_iommu_owner' and replace it with a single-linked
-list of 'struct sysmmu_drvdata'. The first item in the list acts as a
-replacement for the previous exynos_iommu_owner structure. The
-iommu_device member of the first list item is reported to the IOMMU
-core code for the master device.
-
-Signed-off-by: Joerg Roedel <jroedel@suse.de>
----
- drivers/iommu/exynos-iommu.c | 155 ++++++++++++++++++++---------------
- 1 file changed, 88 insertions(+), 67 deletions(-)
-
-diff --git a/drivers/iommu/exynos-iommu.c b/drivers/iommu/exynos-iommu.c
-index 186ff5cc975c..e70eb360093f 100644
---- a/drivers/iommu/exynos-iommu.c
-+++ b/drivers/iommu/exynos-iommu.c
-@@ -225,18 +225,6 @@ static const struct sysmmu_fault_info sysmmu_v5_faults[] = {
- 	{ 20, REG_V5_FAULT_AW_VA, "AW SECURITY PROTECTION", IOMMU_FAULT_WRITE },
- };
- 
--/*
-- * This structure is attached to dev.archdata.iommu of the master device
-- * on device add, contains a list of SYSMMU controllers defined by device tree,
-- * which are bound to given master device. It is usually referenced by 'owner'
-- * pointer.
--*/
--struct exynos_iommu_owner {
--	struct list_head controllers;	/* list of sysmmu_drvdata.owner_node */
--	struct iommu_domain *domain;	/* domain this device is attached */
--	struct mutex rpm_lock;		/* for runtime pm of all sysmmus */
--};
--
- /*
-  * This structure exynos specific generalization of struct iommu_domain.
-  * It contains list of SYSMMU controllers from all master devices, which has
-@@ -271,13 +259,23 @@ struct sysmmu_drvdata {
- 	bool active;			/* current status */
- 	struct exynos_iommu_domain *domain; /* domain we belong to */
- 	struct list_head domain_node;	/* node for domain clients list */
--	struct list_head owner_node;	/* node for owner controllers list */
-+	struct sysmmu_drvdata *next;	/* Single-linked list to group SMMUs for
-+					   one master. NULL means not in any
-+					   list, ERR_PTR(-ENODEV) means end of
-+					   list */
-+	struct mutex rpm_lock;		/* for runtime pm of all sysmmus */
- 	phys_addr_t pgtable;		/* assigned page table structure */
- 	unsigned int version;		/* our version */
- 
- 	struct iommu_device iommu;	/* IOMMU core handle */
- };
- 
-+/* Helper to iterate over all SYSMMUs for a given platform device */
-+#define for_each_sysmmu(dev, drvdata)			\
-+	for (drvdata = (dev)->archdata.iommu;		\
-+	     drvdata != ERR_PTR(-ENODEV);		\
-+	     drvdata = drvdata->next)
-+
- static struct exynos_iommu_domain *to_exynos_domain(struct iommu_domain *dom)
- {
- 	return container_of(dom, struct exynos_iommu_domain, domain);
-@@ -624,6 +622,8 @@ static int exynos_sysmmu_probe(struct platform_device *pdev)
- 
- 	data->sysmmu = dev;
- 	spin_lock_init(&data->lock);
-+	data->next = NULL;
-+	mutex_init(&data->rpm_lock);
- 
- 	ret = iommu_device_sysfs_add(&data->iommu, &pdev->dev, NULL,
- 				     dev_name(data->sysmmu));
-@@ -668,17 +668,20 @@ static int __maybe_unused exynos_sysmmu_suspend(struct device *dev)
- {
- 	struct sysmmu_drvdata *data = dev_get_drvdata(dev);
- 	struct device *master = data->master;
-+	struct sysmmu_drvdata *master_data;
- 
--	if (master) {
--		struct exynos_iommu_owner *owner = master->archdata.iommu;
-+	if (!master)
-+		return 0;
- 
--		mutex_lock(&owner->rpm_lock);
--		if (data->domain) {
--			dev_dbg(data->sysmmu, "saving state\n");
--			__sysmmu_disable(data);
--		}
--		mutex_unlock(&owner->rpm_lock);
-+	master_data = master->archdata.iommu;
-+
-+	mutex_lock(&master_data->rpm_lock);
-+	if (data->domain) {
-+		dev_dbg(data->sysmmu, "saving state\n");
-+		__sysmmu_disable(data);
- 	}
-+	mutex_unlock(&master_data->rpm_lock);
-+
- 	return 0;
- }
- 
-@@ -686,17 +689,20 @@ static int __maybe_unused exynos_sysmmu_resume(struct device *dev)
- {
- 	struct sysmmu_drvdata *data = dev_get_drvdata(dev);
- 	struct device *master = data->master;
-+	struct sysmmu_drvdata *master_data;
- 
--	if (master) {
--		struct exynos_iommu_owner *owner = master->archdata.iommu;
-+	if (!master)
-+		return 0;
- 
--		mutex_lock(&owner->rpm_lock);
--		if (data->domain) {
--			dev_dbg(data->sysmmu, "restoring state\n");
--			__sysmmu_enable(data);
--		}
--		mutex_unlock(&owner->rpm_lock);
-+	master_data = master->archdata.iommu;
-+
-+	mutex_lock(&master_data->rpm_lock);
-+	if (data->domain) {
-+		dev_dbg(data->sysmmu, "restoring state\n");
-+		__sysmmu_enable(data);
- 	}
-+	mutex_unlock(&master_data->rpm_lock);
-+
- 	return 0;
- }
- 
-@@ -834,21 +840,21 @@ static void exynos_iommu_domain_free(struct iommu_domain *iommu_domain)
- 	kfree(domain);
- }
- 
--static void exynos_iommu_detach_device(struct iommu_domain *iommu_domain,
--				    struct device *dev)
-+static void __exynos_iommu_detach_device(struct exynos_iommu_domain *domain,
-+					 struct device *dev)
- {
--	struct exynos_iommu_owner *owner = dev->archdata.iommu;
--	struct exynos_iommu_domain *domain = to_exynos_domain(iommu_domain);
- 	phys_addr_t pagetable = virt_to_phys(domain->pgtable);
--	struct sysmmu_drvdata *data, *next;
-+	struct sysmmu_drvdata *dev_data, *data, *next;
- 	unsigned long flags;
- 
--	if (!has_sysmmu(dev) || owner->domain != iommu_domain)
-+	dev_data = dev->archdata.iommu;
-+
-+	if (!has_sysmmu(dev) || dev_data->domain != domain)
- 		return;
- 
--	mutex_lock(&owner->rpm_lock);
-+	mutex_lock(&dev_data->rpm_lock);
- 
--	list_for_each_entry(data, &owner->controllers, owner_node) {
-+	for_each_sysmmu(dev, data) {
- 		pm_runtime_get_noresume(data->sysmmu);
- 		if (pm_runtime_active(data->sysmmu))
- 			__sysmmu_disable(data);
-@@ -863,51 +869,59 @@ static void exynos_iommu_detach_device(struct iommu_domain *iommu_domain,
- 		list_del_init(&data->domain_node);
- 		spin_unlock(&data->lock);
- 	}
--	owner->domain = NULL;
- 	spin_unlock_irqrestore(&domain->lock, flags);
- 
--	mutex_unlock(&owner->rpm_lock);
-+	mutex_unlock(&dev_data->rpm_lock);
- 
- 	dev_dbg(dev, "%s: Detached IOMMU with pgtable %pa\n", __func__,
- 		&pagetable);
- }
- 
-+static void exynos_iommu_detach_device(struct iommu_domain *iommu_domain,
-+				       struct device *dev)
-+{
-+	struct exynos_iommu_domain *domain = to_exynos_domain(iommu_domain);
-+
-+	__exynos_iommu_detach_device(domain, dev);
-+}
-+
- static int exynos_iommu_attach_device(struct iommu_domain *iommu_domain,
- 				   struct device *dev)
- {
--	struct exynos_iommu_owner *owner = dev->archdata.iommu;
- 	struct exynos_iommu_domain *domain = to_exynos_domain(iommu_domain);
--	struct sysmmu_drvdata *data;
-+	struct sysmmu_drvdata *dev_data, *data;
- 	phys_addr_t pagetable = virt_to_phys(domain->pgtable);
- 	unsigned long flags;
- 
- 	if (!has_sysmmu(dev))
- 		return -ENODEV;
- 
--	if (owner->domain)
--		exynos_iommu_detach_device(owner->domain, dev);
-+	dev_data = dev->archdata.iommu;
- 
--	mutex_lock(&owner->rpm_lock);
-+	if (dev_data->domain)
-+		__exynos_iommu_detach_device(dev_data->domain, dev);
-+
-+	mutex_lock(&dev_data->rpm_lock);
- 
- 	spin_lock_irqsave(&domain->lock, flags);
--	list_for_each_entry(data, &owner->controllers, owner_node) {
-+	for_each_sysmmu(dev, data) {
- 		spin_lock(&data->lock);
- 		data->pgtable = pagetable;
- 		data->domain = domain;
- 		list_add_tail(&data->domain_node, &domain->clients);
- 		spin_unlock(&data->lock);
- 	}
--	owner->domain = iommu_domain;
- 	spin_unlock_irqrestore(&domain->lock, flags);
- 
--	list_for_each_entry(data, &owner->controllers, owner_node) {
-+
-+	for_each_sysmmu(dev, data) {
- 		pm_runtime_get_noresume(data->sysmmu);
- 		if (pm_runtime_active(data->sysmmu))
- 			__sysmmu_enable(data);
- 		pm_runtime_put(data->sysmmu);
- 	}
- 
--	mutex_unlock(&owner->rpm_lock);
-+	mutex_unlock(&dev_data->rpm_lock);
- 
- 	dev_dbg(dev, "%s: Attached IOMMU with pgtable %pa\n", __func__,
- 		&pagetable);
-@@ -1237,7 +1251,6 @@ static phys_addr_t exynos_iommu_iova_to_phys(struct iommu_domain *iommu_domain,
- 
- static int exynos_iommu_add_device(struct device *dev)
- {
--	struct exynos_iommu_owner *owner = dev->archdata.iommu;
- 	struct sysmmu_drvdata *data;
- 	struct iommu_group *group;
- 
-@@ -1249,7 +1262,7 @@ static int exynos_iommu_add_device(struct device *dev)
- 	if (IS_ERR(group))
- 		return PTR_ERR(group);
- 
--	list_for_each_entry(data, &owner->controllers, owner_node) {
-+	for_each_sysmmu(dev, data) {
- 		/*
- 		 * SYSMMU will be runtime activated via device link
- 		 * (dependency) to its master device, so there are no
-@@ -1261,37 +1274,39 @@ static int exynos_iommu_add_device(struct device *dev)
- 	}
- 	iommu_group_put(group);
- 
-+	data = dev->archdata.iommu;
-+	iommu_device_link(&data->iommu, dev);
-+
- 	return 0;
- }
- 
- static void exynos_iommu_remove_device(struct device *dev)
- {
--	struct exynos_iommu_owner *owner = dev->archdata.iommu;
--	struct sysmmu_drvdata *data;
-+	struct sysmmu_drvdata *data = dev->archdata.iommu;
- 
- 	if (!has_sysmmu(dev))
- 		return;
- 
--	if (owner->domain) {
-+	if (data->domain) {
- 		struct iommu_group *group = iommu_group_get(dev);
- 
- 		if (group) {
--			WARN_ON(owner->domain !=
-+			WARN_ON(&data->domain->domain !=
- 				iommu_group_default_domain(group));
--			exynos_iommu_detach_device(owner->domain, dev);
-+			__exynos_iommu_detach_device(data->domain, dev);
- 			iommu_group_put(group);
- 		}
- 	}
-+	iommu_device_unlink(&data->iommu, dev);
- 	iommu_group_remove_device(dev);
- 
--	list_for_each_entry(data, &owner->controllers, owner_node)
-+	for_each_sysmmu(dev, data)
- 		device_link_del(data->link);
- }
- 
- static int exynos_iommu_of_xlate(struct device *dev,
- 				 struct of_phandle_args *spec)
- {
--	struct exynos_iommu_owner *owner = dev->archdata.iommu;
- 	struct platform_device *sysmmu = of_find_device_by_node(spec->np);
- 	struct sysmmu_drvdata *data, *entry;
- 
-@@ -1302,22 +1317,28 @@ static int exynos_iommu_of_xlate(struct device *dev,
- 	if (!data)
- 		return -ENODEV;
- 
--	if (!owner) {
--		owner = kzalloc(sizeof(*owner), GFP_KERNEL);
--		if (!owner)
--			return -ENOMEM;
-+	data->master = dev;
- 
--		INIT_LIST_HEAD(&owner->controllers);
--		mutex_init(&owner->rpm_lock);
--		dev->archdata.iommu = owner;
-+	if (!dev->archdata.iommu) {
-+		WARN_ON(data->next != NULL);
-+
-+		/* SYSMMU list is empty - add drvdata and return */
-+		data->next = ERR_PTR(-ENODEV);
-+		dev->archdata.iommu = data;
-+
-+		return 0;
- 	}
- 
--	list_for_each_entry(entry, &owner->controllers, owner_node)
-+	/* Check if SYSMMU is already in the list */
-+	for_each_sysmmu(dev, entry)
- 		if (entry == data)
- 			return 0;
- 
--	list_add_tail(&data->owner_node, &owner->controllers);
--	data->master = dev;
-+	/* Not in the list yet */
-+	WARN_ON(data->next != NULL);
-+	entry = dev->archdata.iommu;
-+	data->next  = entry->next;
-+	entry->next = data;
- 
- 	return 0;
- }
--- 
-2.25.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNC85IOS4i+WNiDY6NDEsIEFybmQgQmVyZ21hbm4gd3JvdGU6Cj4gT24gVGh1LCBN
+YXIgMjYsIDIwMjAgYXQgMzowOCBQTSBKYXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29tPiB3
+cm90ZToKPj4gRnJvbTogWmh1IExpbmdzaGFuIDxsaW5nc2hhbi56aHVAaW50ZWwuY29tPgo+Pgo+
+PiBUaGlzIGNvbW1pdCBpbnRyb2R1Y2VkIHR3byBsYXllcnMgdG8gZHJpdmUgSUZDIFZGOgo+Pgo+
+PiAoMSkgaWZjdmZfYmFzZSBsYXllciwgd2hpY2ggaGFuZGxlcyBJRkMgVkYgTklDIGhhcmR3YXJl
+IG9wZXJhdGlvbnMgYW5kCj4+ICAgICAgY29uZmlndXJhdGlvbnMuCj4+Cj4+ICgyKSBpZmN2Zl9t
+YWluIGxheWVyLCB3aGljaCBjb21wbGllcyB0byBWRFBBIGJ1cyBmcmFtZXdvcmssCj4+ICAgICAg
+aW1wbGVtZW50ZWQgZGV2aWNlIG9wZXJhdGlvbnMgZm9yIFZEUEEgYnVzLCBoYW5kbGVzIGRldmlj
+ZSBwcm9iZSwKPj4gICAgICBidXMgYXR0YWNoaW5nLCB2cmluZyBvcGVyYXRpb25zLCBldGMuCj4+
+Cj4+IFNpZ25lZC1vZmYtYnk6IFpodSBMaW5nc2hhbiA8bGluZ3NoYW4uemh1QGludGVsLmNvbT4K
+Pj4gU2lnbmVkLW9mZi1ieTogQmllIFRpd2VpIDx0aXdlaS5iaWVAaW50ZWwuY29tPgo+PiBTaWdu
+ZWQtb2ZmLWJ5OiBXYW5nIFhpYW8gPHhpYW8udy53YW5nQGludGVsLmNvbT4KPj4gU2lnbmVkLW9m
+Zi1ieTogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4KPj4gKwo+PiArI2RlZmluZSBJ
+RkNWRl9RVUVVRV9BTElHTk1FTlQgIFBBR0VfU0laRQo+PiArI2RlZmluZSBJRkNWRl9RVUVVRV9N
+QVggICAgICAgICAgICAgICAgMzI3NjgKPj4gK3N0YXRpYyB1MTYgaWZjdmZfdmRwYV9nZXRfdnFf
+YWxpZ24oc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhX2RldikKPj4gK3sKPj4gKyAgICAgICByZXR1
+cm4gSUZDVkZfUVVFVUVfQUxJR05NRU5UOwo+PiArfQo+IFRoaXMgZmFpbHMgdG8gYnVpbGQgb24g
+YXJtNjQgd2l0aCA2NGtiIHBhZ2Ugc2l6ZSAoZm91bmQgaW4gbGludXgtbmV4dCk6Cj4KPiAvZHJp
+dmVycy92ZHBhL2lmY3ZmL2lmY3ZmX21haW4uYzogSW4gZnVuY3Rpb24gJ2lmY3ZmX3ZkcGFfZ2V0
+X3ZxX2FsaWduJzoKPiBhcmNoL2FybTY0L2luY2x1ZGUvYXNtL3BhZ2UtZGVmLmg6MTc6MjA6IGVy
+cm9yOiBjb252ZXJzaW9uIGZyb20gJ2xvbmcKPiB1bnNpZ25lZCBpbnQnIHRvICd1MTYnIHtha2Eg
+J3Nob3J0IHVuc2lnbmVkIGludCd9IGNoYW5nZXMgdmFsdWUgZnJvbQo+ICc2NTUzNicgdG8gJzAn
+IFstV2Vycm9yPW92ZXJmbG93XQo+ICAgICAxNyB8ICNkZWZpbmUgUEFHRV9TSVpFICAoX0FDKDEs
+IFVMKSA8PCBQQUdFX1NISUZUKQo+ICAgICAgICB8ICAgICAgICAgICAgICAgICAgICBeCj4gZHJp
+dmVycy92ZHBhL2lmY3ZmL2lmY3ZmX2Jhc2UuaDozNzozMTogbm90ZTogaW4gZXhwYW5zaW9uIG9m
+IG1hY3JvICdQQUdFX1NJWkUnCj4gICAgIDM3IHwgI2RlZmluZSBJRkNWRl9RVUVVRV9BTElHTk1F
+TlQgUEFHRV9TSVpFCj4gICAgICAgIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXn5+
+fn5+fn5+Cj4gZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX21haW4uYzoyMzE6OTogbm90ZTogaW4g
+ZXhwYW5zaW9uIG9mIG1hY3JvCj4gJ0lGQ1ZGX1FVRVVFX0FMSUdOTUVOVCcKPiAgICAyMzEgfCAg
+cmV0dXJuIElGQ1ZGX1FVRVVFX0FMSUdOTUVOVDsKPiAgICAgICAgfCAgICAgICAgIF5+fn5+fn5+
+fn5+fn5+fn5+fn5+fgo+Cj4gSXQncyBwcm9iYWJseSBnb29kIGVub3VnaCB0byBqdXN0IG5vdCBh
+bGxvdyB0aGUgZHJpdmVyIHRvIGJlIGJ1aWx0IGluIHRoYXQKPiBjb25maWd1cmF0aW9uIGFzIGl0
+J3MgZmFpcmx5IHJhcmUgYnV0IHVuZm9ydHVuYXRlbHkgdGhlcmUgaXMgbm8gc2ltcGxlIEtjb25m
+aWcKPiBzeW1ib2wgZm9yIGl0LgoKCk9yIEkgdGhpbmsgdGhlIDY0S0IgYWxpZ25tZW50IGlzIHBy
+b2JhYmx5IG1vcmUgdGhhbiBlbm91Z2guCgpMaW5nIFNoYW4sIGNhbiB3ZSB1c2Ugc21hbGxlciB2
+YWx1ZSBoZXJlPwoKVGhhbmtzCgoKPgo+IEluIGEgc2ltaWxhciBkcml2ZXIsIHdlIGRpZAo+Cj4g
+Y29uZmlnIFZNWE5FVDMKPiAgICAgICAgICB0cmlzdGF0ZSAiVk13YXJlIFZNWE5FVDMgZXRoZXJu
+ZXQgZHJpdmVyIgo+ICAgICAgICAgIGRlcGVuZHMgb24gUENJICYmIElORVQKPiAgICAgICAgICBk
+ZXBlbmRzIG9uICEoUEFHRV9TSVpFXzY0S0IgfHwgQVJNNjRfNjRLX1BBR0VTIHx8IFwKPiAgICAg
+ICAgICAgICAgICAgICAgICAgSUE2NF9QQUdFX1NJWkVfNjRLQiB8fCBNSUNST0JMQVpFXzY0S19Q
+QUdFUyB8fCBcCj4gICAgICAgICAgICAgICAgICAgICAgIFBBUklTQ19QQUdFX1NJWkVfNjRLQiB8
+fCBQUENfNjRLX1BBR0VTKQo+Cj4gSSB0aGluayB3ZSBzaG91bGQgcHJvYmFibHkgbWFrZSBQQUdF
+X1NJWkVfNjRLQiBhIGdsb2JhbCBzeW1ib2wKPiBpbiBhcmNoL0tjb25maWcgYW5kIGhhdmUgaXQg
+c2VsZWN0ZWQgYnkgdGhlIG90aGVyIHN5bWJvbHMgc28gZHJpdmVycwo+IGxpa2UgeW91cnMgY2Fu
+IGFkZCBhIGRlcGVuZGVuY3kgZm9yIGl0Lgo+Cj4gICAgICAgICAgIEFybmQKPgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFp
+bGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBz
+Oi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0
+aW9u
