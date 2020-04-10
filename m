@@ -1,81 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE6071A427C
-	for <lists.virtualization@lfdr.de>; Fri, 10 Apr 2020 08:21:21 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 868BF1A4324
+	for <lists.virtualization@lfdr.de>; Fri, 10 Apr 2020 09:45:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A6BEC8815E;
-	Fri, 10 Apr 2020 06:21:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DBAF3878A0;
+	Fri, 10 Apr 2020 07:45:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3rgAFASPU68m; Fri, 10 Apr 2020 06:21:18 +0000 (UTC)
+	with ESMTP id C6Cy1xNmuUKI; Fri, 10 Apr 2020 07:45:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 868B38816B;
-	Fri, 10 Apr 2020 06:21:18 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0D92F8805A;
+	Fri, 10 Apr 2020 07:45:24 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 72A6EC0177;
-	Fri, 10 Apr 2020 06:21:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DC868C0177;
+	Fri, 10 Apr 2020 07:45:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 299BFC0177
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EEC88C0177
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Apr 2020 06:21:16 +0000 (UTC)
+ Fri, 10 Apr 2020 07:45:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 134E988164
+ by silver.osuosl.org (Postfix) with ESMTP id E273B2036C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Apr 2020 06:21:16 +0000 (UTC)
+ Fri, 10 Apr 2020 07:45:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IXC4j8rnYJr0
+ with ESMTP id c4TNqaioFnc6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Apr 2020 06:21:15 +0000 (UTC)
+ Fri, 10 Apr 2020 07:45:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 266758815E
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
+ [209.85.210.68])
+ by silver.osuosl.org (Postfix) with ESMTPS id A5AED2035E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Apr 2020 06:21:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586499673;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DLUdw7D/EcbCC4PhngbwYSwRK7VO2nDFahJzRTXLZAM=;
- b=QLwoDrrIDFEpbqr0fmaiBDafuooUmYHKxtIJShoYFXUKG2RkDkc4t8AVVrW02JOYEiZ+U+
- nrAVEqtHN7cEibS9U44V0N3zMaCaFqaMr4Ci30NT2vgpizAxx+MgTGEz9bUiMlVVXKoeu0
- IcI7kI/CBG+NNitSBGahld+TxHW8SuE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-502-Wi1lpvTxPdOy0zhbrDjSmg-1; Fri, 10 Apr 2020 02:21:09 -0400
-X-MC-Unique: Wi1lpvTxPdOy0zhbrDjSmg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3C15D1005513;
- Fri, 10 Apr 2020 06:21:08 +0000 (UTC)
-Received: from [10.72.12.205] (ovpn-12-205.pek2.redhat.com [10.72.12.205])
- by smtp.corp.redhat.com (Postfix) with ESMTP id CA521272A6;
- Fri, 10 Apr 2020 06:21:03 +0000 (UTC)
-Subject: Re: [PATCH] vdpa: allow a 32 bit vq alignment
-To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
-References: <20200409202825.10115-1-mst@redhat.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <bed03b3a-ebc0-2a93-7e6b-8f884eab747b@redhat.com>
-Date: Fri, 10 Apr 2020 14:21:01 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ Fri, 10 Apr 2020 07:45:21 +0000 (UTC)
+Received: by mail-ot1-f68.google.com with SMTP id w12so235532otm.13
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 10 Apr 2020 00:45:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=c9BJA5kwXSY009wyyInjyYUXASRt/6Rey8B6iWb2SF0=;
+ b=b7hdTCEGVlqYvbnG6CuznmIwHU0QaRUf2+uHzWSaKBcnPqtqcFIhDfox3RwudgenaR
+ mCe/Zy8+vGyHHIxT8uyI08f4BFFSXnLYAV+WbJf7tSKApfPFOIkxowujHCY81Z95YAgL
+ vUJ+ih/C/xTDm6u1ZYGHP/oAKJTCMXaWOCV04sTCG79iwkyVyNJY5fH7VSEfhABvfdyL
+ mEGXhSaC2ibc27GChrxAii3eWpnENwzPIfqSMmQsmwI8j2TjyfKpfi0kw8H9S9ZTmOxE
+ UYeeuJpIg8mT+RX0ldOHskR+TV2gnp0bfKkRGspiQwdmwqq8Ff4WTKhJC22/GIepxXrk
+ 1Ugw==
+X-Gm-Message-State: AGi0PuapaMzN8+G99SE10eooDmrVfg8EAJ7ENDkX5qA5yEADKco+dtPT
+ 4lwfoWL/kIRSl2w/SqWsgWpOGsyGUCrmaCBtNCE=
+X-Google-Smtp-Source: APiQypKISMwlaDr4vBs+Tumqx8h8r7SK5oimoKVzWxc+LbQ7UeKu9R+aW/E1Uql3e3RFjK7nUu4xiGQ99QHzWy0fNR8=
+X-Received: by 2002:a05:6830:1e0e:: with SMTP id
+ s14mr3093072otr.107.1586504720818; 
+ Fri, 10 Apr 2020 00:45:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200409202825.10115-1-mst@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: "Zhu, Lingshan" <lingshan.zhu@intel.com>, Arnd Bergmann <arnd@arndb.de>,
- virtualization@lists.linux-foundation.org
+References: <20200326140125.19794-1-jasowang@redhat.com>
+ <20200326140125.19794-9-jasowang@redhat.com>
+In-Reply-To: <20200326140125.19794-9-jasowang@redhat.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Fri, 10 Apr 2020 09:45:09 +0200
+Message-ID: <CAMuHMdUis3O_mJKOb2s=_=Zs61iHus5Aq74N3-xs7kmjN+egoQ@mail.gmail.com>
+Subject: Re: [PATCH V9 8/9] vdpasim: vDPA device simulator
+To: Jason Wang <jasowang@redhat.com>
+Cc: KVM list <kvm@vger.kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Martin Habets <mhabets@solarflare.com>,
+ virtualization@lists.linux-foundation.org, rob.miller@broadcom.com,
+ saugatm@xilinx.com, lulu@redhat.com, hanand@xilinx.com,
+ Christoph Hellwig <hch@infradead.org>, eperezma@redhat.com,
+ Jason Gunthorpe <jgg@mellanox.com>, shahafs@mellanox.com, parav@mellanox.com,
+ vmireyno@marvell.com, gdawar@xilinx.com, Jiri Pirko <jiri@mellanox.com>,
+ xiao.w.wang@intel.com, stefanha@redhat.com, zhihong.wang@intel.com,
+ zhangweining@ruijie.com.cn, netdev <netdev@vger.kernel.org>,
+ Randy Dunlap <rdunlap@infradead.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ maxime.coquelin@redhat.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,50 +91,91 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Q2MgTGluZyBTaGFuLgoKT24gMjAyMC80LzEwIOS4iuWNiDQ6MjgsIE1pY2hhZWwgUy4gVHNpcmtp
-biB3cm90ZToKPiBnZXRfdnFfYWxpZ24gcmV0dXJucyB1MTYgbm93LCBidXQgdGhhdCdzIG5vdCBl
-bm91Z2ggZm9yCj4gc3lzdGVtcy9kZXZpY2VzIHdpdGggNjRLIHBhZ2VzLiBBbGwgY2FsbGVycyBh
-c3NpZ24gaXQgdG8KPiBhIHUzMiB2YXJpYWJsZSBhbnl3YXksIHNvIGxldCdzIGp1c3QgY2hhbmdl
-IHRoZSByZXR1cm4KPiB2YWx1ZSB0eXBlIHRvIHUzMi4KPgo+IENjOiAiWmh1LCBMaW5nc2hhbiIg
-PGxpbmdzaGFuLnpodUBpbnRlbC5jb20+Cj4gUmVwb3J0ZWQtYnk6IEFybmQgQmVyZ21hbm4gPGFy
-bmRAYXJuZGIuZGU+Cj4gU2lnbmVkLW9mZi1ieTogTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVk
-aGF0LmNvbT4KPiAtLS0KPiAgIGRyaXZlcnMvdmRwYS9pZmN2Zi9pZmN2Zl9tYWluLmMgIHwgMiAr
-LQo+ICAgZHJpdmVycy92ZHBhL3ZkcGFfc2ltL3ZkcGFfc2ltLmMgfCAyICstCj4gICBpbmNsdWRl
-L2xpbnV4L3ZkcGEuaCAgICAgICAgICAgICB8IDIgKy0KPiAgIDMgZmlsZXMgY2hhbmdlZCwgMyBp
-bnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmRw
-YS9pZmN2Zi9pZmN2Zl9tYWluLmMgYi9kcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfbWFpbi5jCj4g
-aW5kZXggMjhkOWU1ZGU1Njc1Li5hYmY2YTA2MWNhYjYgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92
-ZHBhL2lmY3ZmL2lmY3ZmX21haW4uYwo+ICsrKyBiL2RyaXZlcnMvdmRwYS9pZmN2Zi9pZmN2Zl9t
-YWluLmMKPiBAQCAtMjI2LDcgKzIyNiw3IEBAIHN0YXRpYyB1MzIgaWZjdmZfdmRwYV9nZXRfdmVu
-ZG9yX2lkKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRwYV9kZXYpCj4gICAJcmV0dXJuIElGQ1ZGX1NV
-QlNZU19WRU5ET1JfSUQ7Cj4gICB9Cj4gICAKPiAtc3RhdGljIHUxNiBpZmN2Zl92ZHBhX2dldF92
-cV9hbGlnbihzdHJ1Y3QgdmRwYV9kZXZpY2UgKnZkcGFfZGV2KQo+ICtzdGF0aWMgdTMyIGlmY3Zm
-X3ZkcGFfZ2V0X3ZxX2FsaWduKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRwYV9kZXYpCj4gICB7Cj4g
-ICAJcmV0dXJuIElGQ1ZGX1FVRVVFX0FMSUdOTUVOVDsKPiAgIH0KPiBkaWZmIC0tZ2l0IGEvZHJp
-dmVycy92ZHBhL3ZkcGFfc2ltL3ZkcGFfc2ltLmMgYi9kcml2ZXJzL3ZkcGEvdmRwYV9zaW0vdmRw
-YV9zaW0uYwo+IGluZGV4IDcyODYzZDAxYTEyYS4uNzk1N2QyZDQxZmM0IDEwMDY0NAo+IC0tLSBh
-L2RyaXZlcnMvdmRwYS92ZHBhX3NpbS92ZHBhX3NpbS5jCj4gKysrIGIvZHJpdmVycy92ZHBhL3Zk
-cGFfc2ltL3ZkcGFfc2ltLmMKPiBAQCAtNDM1LDcgKzQzNSw3IEBAIHN0YXRpYyB1NjQgdmRwYXNp
-bV9nZXRfdnFfc3RhdGUoc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhLCB1MTYgaWR4KQo+ICAgCXJl
-dHVybiB2cmgtPmxhc3RfYXZhaWxfaWR4Owo+ICAgfQo+ICAgCj4gLXN0YXRpYyB1MTYgdmRwYXNp
-bV9nZXRfdnFfYWxpZ24oc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhKQo+ICtzdGF0aWMgdTMyIHZk
-cGFzaW1fZ2V0X3ZxX2FsaWduKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRwYSkKPiAgIHsKPiAgIAly
-ZXR1cm4gVkRQQVNJTV9RVUVVRV9BTElHTjsKPiAgIH0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9s
-aW51eC92ZHBhLmggYi9pbmNsdWRlL2xpbnV4L3ZkcGEuaAo+IGluZGV4IDczM2FjZmI3ZWY4NC4u
-NTQ1M2FmODdhMzNlIDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvbGludXgvdmRwYS5oCj4gKysrIGIv
-aW5jbHVkZS9saW51eC92ZHBhLmgKPiBAQCAtMTY0LDcgKzE2NCw3IEBAIHN0cnVjdCB2ZHBhX2Nv
-bmZpZ19vcHMgewo+ICAgCXU2NCAoKmdldF92cV9zdGF0ZSkoc3RydWN0IHZkcGFfZGV2aWNlICp2
-ZGV2LCB1MTYgaWR4KTsKPiAgIAo+ICAgCS8qIERldmljZSBvcHMgKi8KPiAtCXUxNiAoKmdldF92
-cV9hbGlnbikoc3RydWN0IHZkcGFfZGV2aWNlICp2ZGV2KTsKPiArCXUzMiAoKmdldF92cV9hbGln
-bikoc3RydWN0IHZkcGFfZGV2aWNlICp2ZGV2KTsKPiAgIAl1NjQgKCpnZXRfZmVhdHVyZXMpKHN0
-cnVjdCB2ZHBhX2RldmljZSAqdmRldik7Cj4gICAJaW50ICgqc2V0X2ZlYXR1cmVzKShzdHJ1Y3Qg
-dmRwYV9kZXZpY2UgKnZkZXYsIHU2NCBmZWF0dXJlcyk7Cj4gICAJdm9pZCAoKnNldF9jb25maWdf
-Y2IpKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRldiwKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFs
-aXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91
-bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+Hi Jason,
+
+On Thu, Mar 26, 2020 at 3:07 PM Jason Wang <jasowang@redhat.com> wrote:
+> This patch implements a software vDPA networking device. The datapath
+> is implemented through vringh and workqueue. The device has an on-chip
+> IOMMU which translates IOVA to PA. For kernel virtio drivers, vDPA
+> simulator driver provides dma_ops. For vhost driers, set_map() methods
+> of vdpa_config_ops is implemented to accept mappings from vhost.
+>
+> Currently, vDPA device simulator will loopback TX traffic to RX. So
+> the main use case for the device is vDPA feature testing, prototyping
+> and development.
+>
+> Note, there's no management API implemented, a vDPA device will be
+> registered once the module is probed. We need to handle this in the
+> future development.
+>
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
+
+This is now commit 2c53d0f64c06f458 ("vdpasim: vDPA device simulator").
+
+> --- a/drivers/virtio/vdpa/Kconfig
+> +++ b/drivers/virtio/vdpa/Kconfig
+> @@ -5,3 +5,22 @@ config VDPA
+>           Enable this module to support vDPA device that uses a
+>           datapath which complies with virtio specifications with
+>           vendor specific control path.
+> +
+> +menuconfig VDPA_MENU
+> +       bool "VDPA drivers"
+> +       default n
+
+    *
+    * VDPA drivers
+    *
+    VDPA drivers (VDPA_MENU) [N/y/?] (NEW) ?
+
+    There is no help available for this option.
+    Symbol: VDPA_MENU [=n]
+    Type  : bool
+    Defined at drivers/vdpa/Kconfig:9
+     Prompt: VDPA drivers
+     Location:
+       -> Device Drivers
+
+I think this deserves a help text, so users know if they want to enable this
+option or not.
+
+I had a quick look, but couldn't find the meaning of "vdpa" in the whole kernel
+source tree.
+
+Thanks!
+
+> +
+> +if VDPA_MENU
+> +
+> +config VDPA_SIM
+> +       tristate "vDPA device simulator"
+> +       depends on RUNTIME_TESTING_MENU
+> +       select VDPA
+> +       select VHOST_RING
+> +       default n
+> +       help
+> +         vDPA networking device simulator which loop TX traffic back
+> +         to RX. This device is used for testing, prototyping and
+> +         development of vDPA.
+> +
+> +endif # VDPA_MENU
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+-- 
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
