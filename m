@@ -1,105 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CCD41A6873
-	for <lists.virtualization@lfdr.de>; Mon, 13 Apr 2020 17:04:24 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 350211A69FF
+	for <lists.virtualization@lfdr.de>; Mon, 13 Apr 2020 18:34:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3764583B47;
-	Mon, 13 Apr 2020 15:04:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C75FC8789C;
+	Mon, 13 Apr 2020 16:34:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eLSO5QOenJ67; Mon, 13 Apr 2020 15:04:22 +0000 (UTC)
+	with ESMTP id D+2geqqYKsme; Mon, 13 Apr 2020 16:34:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 21B3084FC0;
-	Mon, 13 Apr 2020 15:04:22 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B6DAD875D8;
+	Mon, 13 Apr 2020 16:34:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EEB7FC0172;
-	Mon, 13 Apr 2020 15:04:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7E534C0172;
+	Mon, 13 Apr 2020 16:34:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6AFDAC0172
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8A961C0172
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 15:04:20 +0000 (UTC)
+ Mon, 13 Apr 2020 16:34:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 59A3384693
+ by whitealder.osuosl.org (Postfix) with ESMTP id 72B948602E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 15:04:20 +0000 (UTC)
+ Mon, 13 Apr 2020 16:34:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qhu6Ga7hO8zK
+ with ESMTP id LqvWgGlkjObx
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 15:04:19 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 54B8B84155
+ Mon, 13 Apr 2020 16:34:30 +0000 (UTC)
+X-Greylist: delayed 00:20:51 by SQLgrey-1.7.6
+Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
+ [5.45.125.222])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 5363784ED7
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 15:04:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586790258;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Zc6+nWT++Ml3QDe/48B3vyBdhm6qK+le1jv8iA34Hag=;
- b=a2WWm/6Y20k+N+ic81vDjxROTg7DkWkI/FGzyfoo1WWKDp31KI9LXHbsECmejrrKw4hA5N
- MJGin07nr5zZlCOP5gp773+1mcg19VVQjTu3B9jxLD3DxUxWEUSdrAImvksnyxWVX8x82d
- w1J7EKoFr6ufhGoPRiC1/P/uUrJwCNQ=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-189-2NxkN4OMOS6UCyXrrpCAOQ-1; Mon, 13 Apr 2020 11:04:16 -0400
-X-MC-Unique: 2NxkN4OMOS6UCyXrrpCAOQ-1
-Received: by mail-wm1-f69.google.com with SMTP id o5so2774602wmo.6
- for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 08:04:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=17t47p62WxVqQ3k2XMIaH3GAgbSI+gMIhNKLJVLPfOE=;
- b=k4q5IzTZ2ksSdSZpgKjMrfqERzJkvEt86ipBomy6BmA81Y1cFZjfQWlbez5TtQ+1a9
- YlsDy1jjlAV3qNn1K0IKw3j4jTNnMLdU1coQ1ZcWg87Gvq3+p7rMFKPPiv+mJluixeCN
- tZ+G/df8jSMgQ2FRor7boajdNgMe6PA7Au9kL3VnEkSgIb3YrQd6lEby+rGUvN+9oTvI
- sP0ymYkZjliBO/sLE5e/tLCt1dfdiOB4FwvEmSFWkCx/irfYVHX3oqlOGYJFELmPG7Or
- 9AnJmQu3E/K9vKLEzMmQrpaTvtIe5wRzBly/wdiHKIgOoJw/W+Ne5Ftf/o9Wgir35Y36
- Juog==
-X-Gm-Message-State: AGi0PuacvR0SFQ9jJUDPxIagql5oS2DmMZ05U4z6ZnWMeu85zKqqiG6s
- 2rwkCLnLqjI2+aZ3P84Zw9KHMmTT4BU4oCNPeYpbkHi1383QfMCGOwEfTVWlTK2gNdj7KLN5w7B
- /njDGihEG67W2KCYxTj4noQafe1bFKJfDUxItMy8VyQ==
-X-Received: by 2002:adf:fa41:: with SMTP id y1mr18217358wrr.131.1586790255100; 
- Mon, 13 Apr 2020 08:04:15 -0700 (PDT)
-X-Google-Smtp-Source: APiQypLb8EpzCSSDu1/k+4HxGtBRat97HSOUEfq2h0YXRdsfzcIOhO5iu2JTbNNJB4PYUfr8gNiRUg==
-X-Received: by 2002:adf:fa41:: with SMTP id y1mr18217333wrr.131.1586790254791; 
- Mon, 13 Apr 2020 08:04:14 -0700 (PDT)
-Received: from redhat.com (bzq-79-183-51-3.red.bezeqint.net. [79.183.51.3])
- by smtp.gmail.com with ESMTPSA id o11sm14764690wme.13.2020.04.13.08.04.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2020 08:04:14 -0700 (PDT)
-Date: Mon, 13 Apr 2020 11:04:11 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Eugenio Perez Martin <eperezma@redhat.com>
-Subject: Re: [PATCH 0/8] tools/vhost: Reset virtqueue on tests
-Message-ID: <20200413110403-mutt-send-email-mst@kernel.org>
-References: <20200403165119.5030-1-eperezma@redhat.com>
- <20200413071044-mutt-send-email-mst@kernel.org>
- <CAJaqyWcOmzxfOodudSjrZa1SeYDZKiO3MFMy_w44cL_eaBhYDA@mail.gmail.com>
+ Mon, 13 Apr 2020 16:34:30 +0000 (UTC)
+Received: from bl6-205-124.dsl.telepac.pt ([82.155.205.124]
+ helo=DESKTOP-DVRB5CC) by s052d7dde.fastvps-server.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <marle@saisti.eu>) id 1jO0z9-0005OB-Fh
+ for virtualization@lists.linux-foundation.org; Mon, 13 Apr 2020 18:26:55 +0300
+From: "Maria Lemos" <marialemos72@gmail.com>
+Subject: International Conference on Tourism, Technology & Systems
+ (ICOTTS'20) | Cartagena, Colombia
+To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-In-Reply-To: <CAJaqyWcOmzxfOodudSjrZa1SeYDZKiO3MFMy_w44cL_eaBhYDA@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
- Cornelia Huck <cohuck@redhat.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Linux Next Mailing List <linux-next@vger.kernel.org>
+Date: Mon, 13 Apr 2020 16:26:55 +0100
+Message-ID: <13060938971890@gmail-com>
+X-Antivirus: AVG (VPS 200412-0, 04/12/2020), Outbound message
+X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,97 +64,1165 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Reply-To: aistic@gmail.com
+Content-Type: multipart/mixed; boundary="===============6702500903669429983=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Apr 13, 2020 at 04:50:06PM +0200, Eugenio Perez Martin wrote:
-> On Mon, Apr 13, 2020 at 1:13 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
-> > On Fri, Apr 03, 2020 at 06:51:11PM +0200, Eugenio P=C3=A9rez wrote:
-> > > This series add the tests used to validate the "vhost: Reset batched
-> > > descriptors on SET_VRING_BASE call" series, with a small change on the
-> > > reset code (delete an extra unneded reset on VHOST_SET_VRING_BASE).
-> > >
-> > > They are based on the tests sent back them, the ones that were not
-> > > included (reasons in that thread). This series changes:
-> > >
-> > > * Delete need to export the ugly function in virtio_ring, now all the
-> > > code is added in tools/virtio (except the one line fix).
-> > > * Add forgotten uses of vhost_vq_set_backend. Fix bad usage order in
-> > > vhost_test_set_backend.
-> > > * Drop random reset, not really needed.
-> > > * Minor changes updating tests code.
-> > >
-> > > This serie is meant to be applied on top of
-> > > 5de4e0b7068337cf0d4ca48a4011746410115aae in
-> > > git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git.
-> >
-> > Is this still needed?
-> =
+This is a multi-part message in MIME format
 
-> ("tools/virtio: fix virtio_test.c") indentation is actually cosmetic.
-> ("vhost: Not cleaning batched descs in VHOST_SET_VRING_BASE ioctl")
-> just avoid to clean batches descriptors for a third time (they are
-> cleaned on backend removal and addition).
-> =
+--===============6702500903669429983==
+Content-Type: multipart/alternative; charset=utf-8; boundary="rAtNU5hrmlSd6Tsf=_VgoY5Qa8PZOW6ncL"
 
-> ("vhost: Fix bad order in vhost_test_set_backend at enable") is
-> actually a fix, the test does not work properly without it. And
-> ("tools/virtio: Reset index in virtio_test --reset.") Makes the test
-> work more similar than the actual VM does in a reset.
-> =
+This is a multi-part message in MIME format
 
-> ("tools/virtio: Use __vring_new_virtqueue in virtio_test.c") and
-> ("tools/virtio: Extract virtqueue initialization in vq_reset") are
-> convenience commits to reach the previous two.
-> =
+--rAtNU5hrmlSd6Tsf=_VgoY5Qa8PZOW6ncL
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-> Lastly, ("tools/virtio: Use tools/include/list.h instead of stubs")
-> just removes stub code, I did it when I try to test vdpa code and it
-> seems to me a nice to have, but we can drop it from the patchset if
-> you don't see that way.
-> =
+ICOTTS'20 - The 2020 International Conference on Tourism, Technology & Syst=
+ems 
 
-> > The patches lack Signed-off-by and
-> > commit log descriptions, reference commit Ids without subject.
-> > See Documentation/process/submitting-patches.rst
-> >
-> =
+29 - 31 October 2020, Cartagena, Colombia
 
-> Sorry, I will try to keep an eye on that from now on. I will send a v2
-> with Signed-off-by and extended descriptions if you see it ok.
-> =
+Proceedings by Springer. Indexed by Scopus, ISI, etc.
 
-> Thanks!
+https://www.icotts.org/ <https://www.icotts.org/> 
 
-Sure, pls go ahead.
+ 
 
-> > > Eugenio P=C3=A9rez (8):
-> > >   tools/virtio: fix virtio_test.c indentation
-> > >   vhost: Not cleaning batched descs in VHOST_SET_VRING_BASE ioctl
-> > >   vhost: Replace vq->private_data access by backend accesors
-> > >   vhost: Fix bad order in vhost_test_set_backend at enable
-> > >   tools/virtio: Use __vring_new_virtqueue in virtio_test.c
-> > >   tools/virtio: Extract virtqueue initialization in vq_reset
-> > >   tools/virtio: Reset index in virtio_test --reset.
-> > >   tools/virtio: Use tools/include/list.h instead of stubs
-> > >
-> > >  drivers/vhost/test.c        |  8 ++---
-> > >  drivers/vhost/vhost.c       |  1 -
-> > >  tools/virtio/linux/kernel.h |  7 +----
-> > >  tools/virtio/linux/virtio.h |  5 ++--
-> > >  tools/virtio/virtio_test.c  | 58 +++++++++++++++++++++++++++--------=
---
-> > >  tools/virtio/vringh_test.c  |  2 ++
-> > >  6 files changed, 51 insertions(+), 30 deletions(-)
-> > >
-> > > --
-> > > 2.18.1
-> >
+SCOPE
+
+Multidisciplinary conference, transversal to all the activity sectors that =
+involve Information Technologies and systems in the Tourism area, namely: C=
+ompetitiveness of destinations based on digital technology, Hospitality, De=
+stinations Management, Business & Finance, Public Administration; Economics=
+; Management Science; Education; Health & Rehabilitation; Agriculture & Foo=
+d Technology.
+
+ 
+
+GENERAL OBJECTIVES
+
+    Promote a collaborative environment between the academic and tourism co=
+mmunity in search of improvement and attractiveness of innovation, business=
+ and investments;
+
+    Promote dialogue between the scientific community and the main national=
+ and international science and technology travel agencies;
+
+    Enabling the digital transformation of Tourism business;
+
+    Promote the integrated advancement of the different areas of science wi=
+th the aim to improve the quality of life of citizens and the society in ge=
+neral;
+
+    Encourage young science talents to publish their work in the conference=
+ areas, especially in Latin countries;
+
+    Present and debate results from different science and innovation groups=
+ in Tourism and/or Information Technologies and Systems, allowing the emerg=
+ence of new doctoral candidates.
+
+ 
+
+TOPIS
+
+* 
+    Technology in Tourism and Tourist experience
+* 
+    Generations and Technology in Tourism
+* 
+    Digital Marketing applied to Tourism and Travel
+* 
+    Mobile Technologies applied to sustainable Tourism
+* 
+    Tourism research in providing innovative solutions to social problems
+* 
+    Tourism, Wellness and Hospitality
+* 
+    Information Technologies in Tourism
+* 
+    Digital transformation of Tourism Business
+* 
+    Traveling for health/medical and wellness
+* 
+    Information Technologies in Ecotourism and Agritourism
+* 
+    Information Technologies in Food Tourism
+* 
+    Information Technologies in Education and Educational Tourism
+* 
+    eTourism and Tourism 2.0
+* 
+    Big data and Management for Travel and Tourism 
+* 
+    Geo-tagging and Tourist mobility
+* 
+    Health Tourism
+* 
+    Information Systems in Tourism and Hospitality
+* 
+    Smart Destinations
+* 
+    Resilience and Tourism
+* 
+    Dark Tourism
+* 
+    Military Tourism
+* 
+    Tourism Management
+* 
+    Tourism Planning
+* 
+    Strategic Planning in Tourism
+* 
+    Destination Marketing Planning
+* 
+    Destination Partnerships and Team-Building
+* 
+    Destination Governance and Leadership
+* 
+    Destination Product Development
+* 
+    Destination Markets
+* 
+    Accessible Tourism
+* 
+    Cultural Tourism
+* 
+    Destination Quality
+* 
+    Education and Tourism
+* 
+    Human Resources development in Tourism
+* 
+    Robotics in Tourism
+* 
+    Destination Marketing Systems
+* 
+    Computer Reservations Systems
+* 
+    Global Distribution Systems
+* 
+    Electronic Information Distribution in Tourism and Hospitality
+* 
+    Organizational Models and Information Systems
+* 
+    Information Systems and Technologies
+
+
+=E2=80=8B
+
+SUBMISSION & DECISION
+
+Submitted papers must comply with the format of Smart Innovation, Systems a=
+nd Technologies (see Instructions for Authors at Springer Website), be writ=
+ten in English, must not have been published before, not be under review fo=
+r any other conference or publication and not include any information leadi=
+ng to the authors=E2=80=99 identification. Therefore, the authors=E2=80=99 =
+names, affiliations and bibliographic references should not be included in =
+the version for evaluation by the Scientific Committee. This information sh=
+ould only be included in the camera-ready version, saved in Word or Latex f=
+ormat and also in PDF format. These files must be accompanied by the Consen=
+t to Publish form filled out, in a ZIP file, and uploaded at the conference=
+ management system.
+
+Submitted papers written in Spanish or Portuguese (until 15-page limit) mus=
+t comply with the format of RISTI - Revista Ib=C3=A9rica de Sistemas e Tecn=
+ologias de Informa=C3=A7=C3=A3o (download Spanish or Portuguese instruction=
+s/template for authors), must not have been published before, not be under =
+review for any other conference or publication and not include any informat=
+ion leading to the authors=E2=80=99 identification. Therefore, the authors=
+=E2=80=99 names, affiliations and e-mails should not be included in the ver=
+sion for evaluation by the Scientific Committee. This information should on=
+ly be included in the camera-ready version, saved in Word. These files must=
+ be uploaded at the conference management system in a ZIP file.
+
+All papers will be subjected to a =E2=80=9Cdouble-blind review=E2=80=9D by =
+at least two members of the Scientific Committee.
+
+Based on Scientific Committee evaluation, a paper can be rejected or accept=
+ed by the Conference Chairs. In the later case, it can be accepted as the t=
+ype originally submitted or as another type.
+
+The authors of accepted poster papers must also build and print a poster to=
+ be exhibited during the Conference.
+This poster must follow an A1 or A2 vertical format. The Conference can inc=
+ludes Work Sessions where these posters are presented and orally discussed,=
+ with a 7 minute limit per poster.
+
+The authors of accepted papers will have 15 minutes to present their work i=
+n a Conference Work Session; approximately 5 minutes of discussion will fol=
+low each presentation.
+
+=E2=80=8B
+
+PUBLICATION & INDEXING
+
+To ensure that a full paper, poster paper or company paper is published, at=
+ least one of the authors must be fully registered by the 25th of July 2020=
+, and the paper must comply with the suggested layout and page-limit. Addit=
+ionally, all recommended changes must be addressed by the authors before th=
+ey submit the camera-ready version.
+
+No more than one paper per registration will be published. An extra fee mus=
+t be paid for publication of additional papers, with a maximum of one addit=
+ional paper per registration. One registration permits only the participati=
+on of one author in the conference.
+
+Papers will be published in Proceedings by Springer, in Smart Innovation, S=
+ystems and Technologies series. Poster and company papers will not be publi=
+shed, just presented in the conference.
+
+Published full papers will be submitted for indexation by ISI, EI-Compendex=
+, SCOPUS and Google Scholar, among others, and will be available in the Spr=
+ingerLink Digital Library.
+
+The authors of the best selected papers will be invited to extend them for =
+publication in international journals indexed by ISI/SCI and SCOPUS, among =
+others.
+
+ 
+
+IMPORTANT DATES
+
+Paper Submission: June 15, 2020
+
+Notification of Acceptance: July 15, 2020
+
+Payment of Registration, to ensure the inclusion of an accepted paper in th=
+e proceedings: July 25, 2020
+
+Camera-ready Submission: July, 25, 2020
+
+ 
+
+Website of ICOTTS'19: https://www.icotts.org/ <https://www.icotts.org/> 
+
+E-Mail: icotts.conf@gmail.com 
+
+ 
+
+
+-- 
+This email has been checked for viruses by AVG.
+https://www.avg.com
+
+--rAtNU5hrmlSd6Tsf=_VgoY5Qa8PZOW6ncL
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html>
+  <head>
+    <title></title>
+    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
+" />
+  </head>
+  <body>
+    <div style=3D"border-top: #1f4e79 2.25pt solid; border-right: #1f4e79 2=
+=2E25pt solid; border-bottom: #1f4e79 2.25pt solid; padding-bottom: 1pt; pa=
+dding-top: 1pt; padding-left: 4pt; border-left: #1f4e79 2.25pt solid; paddi=
+ng-right: 4pt; mso-element: para-border-div; mso-border-themecolor: accent1=
+; mso-border-themeshade: 128">
+      <p style=3D"border-top: medium none; border-right: medium none; borde=
+r-bottom: medium none; padding-bottom: 0cm; text-align: center; padding-top=
+: 0cm; padding-left: 0cm; border-left: medium none; margin: 0cm 0cm 0pt; pa=
+dding-right: 0cm; mso-border-themecolor: accent1; mso-border-themeshade: 12=
+8; mso-border-alt: solid #1F4E79 2.25pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt=
+ 4.0pt" align=3D"center"><span class=3D"color16"><b style=3D"mso-bidi-font-=
+weight: normal"><span lang=3D"EN-GB" style=3D"font-size: 13pt; border-top: =
+windowtext 1pt; font-family: 'Calibri',sans-serif; border-right: windowtext=
+ 1pt; border-bottom: windowtext 1pt; color: #002060; padding-bottom: 0cm; p=
+adding-top: 0cm; padding-left: 0cm; border-left: windowtext 1pt; padding-ri=
+ght: 0cm; mso-ansi-language: EN-GB; mso-border-alt: none windowtext 0cm; ms=
+o-ascii-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bid=
+i-theme-font: minor-latin">ICOTTS'20 - The 2020 International Conference on=
+ Tourism, Technology &amp; Systems</span></b></span><b style=3D"mso-bidi-fo=
+nt-weight: normal"><span lang=3D"EN-GB" style=3D"font-size: 13pt; font-fami=
+ly: 'Calibri',sans-serif; color: #002060; mso-ansi-language: EN-GB; mso-asc=
+ii-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-the=
+me-font: minor-latin">&nbsp;</span></b></p>
+      <p style=3D"border-top: medium none; border-right: medium none; borde=
+r-bottom: medium none; padding-bottom: 0cm; text-align: center; padding-top=
+: 0cm; padding-left: 0cm; border-left: medium none; margin: 0cm 0cm 0pt; pa=
+dding-right: 0cm; mso-border-themecolor: accent1; mso-border-themeshade: 12=
+8; mso-border-alt: solid #1F4E79 2.25pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt=
+ 4.0pt" align=3D"center"><span lang=3D"EN-GB" style=3D"font-family: 'Calibr=
+i',sans-serif; color: #002060; mso-ansi-language: EN-GB; mso-ascii-theme-fo=
+nt: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: mi=
+nor-latin">29&nbsp;-&nbsp;31&nbsp;October 2020, Cartagena, Colombia</span><=
+/p>
+      <p style=3D"border-top: medium none; border-right: medium none; borde=
+r-bottom: medium none; padding-bottom: 0cm; text-align: center; padding-top=
+: 0cm; padding-left: 0cm; border-left: medium none; margin: 0cm 0cm 0pt; pa=
+dding-right: 0cm; mso-border-themecolor: accent1; mso-border-themeshade: 12=
+8; mso-border-alt: solid #1F4E79 2.25pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt=
+ 4.0pt" align=3D"center"><span lang=3D"EN-GB" style=3D"font-family: 'Calibr=
+i',sans-serif; color: #002060; mso-ansi-language: EN-GB; mso-ascii-theme-fo=
+nt: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: mi=
+nor-latin">Proceedings by Springer. Indexed&nbsp;by Scopus, ISI, etc.</span=
+></p>
+      <p style=3D"border-top: medium none; border-right: medium none; margi=
+n-top: 0cm; border-bottom: medium none; padding-bottom: 0cm; text-align: ce=
+nter; padding-top: 0cm; padding-left: 0cm; border-left: medium none; paddin=
+g-right: 0cm; mso-border-themecolor: accent1; mso-border-themeshade: 128; m=
+so-border-alt: solid #1F4E79 2.25pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0=
+pt" align=3D"center"><a href=3D"https://www.icotts.org/"><span lang=3D"EN-G=
+B" style=3D"font-size: 11pt; font-family: 'Calibri',sans-serif; mso-ansi-la=
+nguage: EN-GB; mso-ascii-theme-font: minor-latin; mso-hansi-theme-font: min=
+or-latin; mso-bidi-theme-font: minor-latin"><font color=3D"#0000ff">https:/=
+/www.icotts.org/</font></span></a><span lang=3D"EN-GB" style=3D"font-size: =
+11pt; font-family: 'Calibri',sans-serif; mso-ansi-language: EN-GB; mso-asci=
+i-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-them=
+e-font: minor-latin">&nbsp;</span></p>
+    </div>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin"><st=
+rong>SCOPE</strong></span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Mul=
+tidisciplinary conference, transversal to all the activity sectors that inv=
+olve Information Technologies and systems in the Tourism area, namely: Comp=
+etitiveness of destinations based on digital technology, Hospitality, Desti=
+nations Management, Business &amp; Finance, Public Administration; Economic=
+s; Management Science; Education; Health &amp; Rehabilitation; Agriculture =
+&amp; Food Technology.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin"><st=
+rong>GENERAL OBJECTIVES</strong></span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;&nbsp;&nbsp; Promote a collaborative environment between the academic an=
+d tourism community in search of improvement and attractiveness of innovati=
+on, business and investments;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;&nbsp;&nbsp; Promote dialogue between the scientific community and the m=
+ain national and international science and technology travel agencies;</spa=
+n></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;&nbsp;&nbsp; Enabling the digital transformation of Tourism business;</s=
+pan></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;&nbsp;&nbsp; Promote the integrated advancement of the different areas o=
+f science with the aim to improve the quality of life of citizens and the s=
+ociety in general;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;&nbsp;&nbsp; Encourage young science talents to publish their work in th=
+e conference areas, especially in Latin countries;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;&nbsp;&nbsp; Present and debate results from different science and innov=
+ation groups in Tourism and/or Information Technologies and Systems, allowi=
+ng the emergence of new doctoral candidates.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin"><st=
+rong>TOPIS</strong></span></span></p>
+    <ul>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Technology in Tourism and Tourist experience</span></=
+span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Generations and Technology in Tourism</span></span></=
+div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Digital Marketing applied to Tourism and Travel</span=
+></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Mobile Technologies applied to sustainable Tourism</s=
+pan></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Tourism research in providing innovative solutions to=
+ social problems</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Tourism, Wellness and Hospitality</span></span></div>=
+
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Information Technologies in Tourism</span></span></di=
+v>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Digital transformation of Tourism Business</span></sp=
+an></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Traveling for health/medical and wellness</span></spa=
+n></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Information Technologies in Ecotourism and Agritouris=
+m</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Information Technologies in Food Tourism</span></span=
+></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Information Technologies in Education and Educational=
+ Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; eTourism and Tourism 2.0</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Big data and Management for Travel and Tourism </span=
+></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Geo-tagging and Tourist mobility</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Health Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Information Systems in Tourism and Hospitality</span>=
+</span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Smart Destinations</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Resilience and Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Dark Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Military Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Tourism Management</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Tourism Planning</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Strategic Planning in Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Destination Marketing Planning</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Destination Partnerships and Team-Building</span></sp=
+an></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Destination Governance and Leadership</span></span></=
+div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Destination Product Development</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Destination Markets</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Accessible Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Cultural Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Destination Quality</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Education and Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Human Resources development in Tourism</span></span><=
+/div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Robotics in Tourism</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Destination Marketing Systems</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Computer Reservations Systems</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Global Distribution Systems</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Electronic Information Distribution in Tourism and Ho=
+spitality</span></span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Organizational Models and Information Systems</span><=
+/span></div>
+      </li>
+      <li>
+        <div style=3D"text-align: justify"><span class=3D"color16"><span la=
+ng=3D"EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-fam=
+ily: 'Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: win=
+dowtext 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding=
+-left: 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-langu=
+age: EN-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">&nbsp;&nbsp;&nbsp; Information Systems and Technologies</span></span></d=
+iv>
+      </li>
+    </ul>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&#8=
+203;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin"><st=
+rong>SUBMISSION &amp; DECISION</strong></span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Sub=
+mitted papers must comply with the format of Smart Innovation, Systems and =
+Technologies (see Instructions for Authors at Springer Website), be written=
+ in English, must not have been published before, not be under review for a=
+ny other conference or publication and not include any information leading =
+to the authors&rsquo; identification. Therefore, the authors&rsquo; names, =
+affiliations and bibliographic references should not be included in the ver=
+sion for evaluation by the Scientific Committee. This information should on=
+ly be included in the camera-ready version, saved in Word or Latex format a=
+nd also in PDF format. These files must be accompanied by the Consent to Pu=
+blish form filled out, in a ZIP file, and uploaded at the conference manage=
+ment system.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Sub=
+mitted papers written in Spanish or Portuguese (until 15-page limit) must c=
+omply with the format of RISTI - Revista Ib&eacute;rica de Sistemas e Tecno=
+logias de Informa&ccedil;&atilde;o (download Spanish or Portuguese instruct=
+ions/template for authors), must not have been published before, not be und=
+er review for any other conference or publication and not include any infor=
+mation leading to the authors&rsquo; identification. Therefore, the authors=
+&rsquo; names, affiliations and e-mails should not be included in the versi=
+on for evaluation by the Scientific Committee. This information should only=
+ be included in the camera-ready version, saved in Word. These files must b=
+e uploaded at the conference management system in a ZIP file.</span></span>=
+</p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">All=
+ papers will be subjected to a &ldquo;double-blind review&rdquo; by at leas=
+t two members of the Scientific Committee.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Bas=
+ed on Scientific Committee evaluation, a paper can be rejected or accepted =
+by the Conference Chairs. In the later case, it can be accepted as the type=
+ originally submitted or as another type.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">The=
+ authors of accepted poster papers must also build and print a poster to be=
+ exhibited during the Conference.<br />This poster must follow an A1 or A2 =
+vertical format. The Conference can includes Work Sessions where these post=
+ers are presented and orally discussed, with a 7 minute limit per poster.</=
+span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">The=
+ authors of accepted papers will have 15 minutes to present their work in a=
+ Conference Work Session; approximately 5 minutes of discussion will follow=
+ each presentation.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&#8=
+203;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin"><st=
+rong>PUBLICATION &amp; INDEXING</strong></span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">To =
+ensure that a full paper, poster paper or company paper is published, at le=
+ast one of the authors must be fully registered by the 25th of July 2020, a=
+nd the paper must comply with the suggested layout and page-limit. Addition=
+ally, all recommended changes must be addressed by the authors before they =
+submit the camera-ready version.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">No =
+more than one paper per registration will be published. An extra fee must b=
+e paid for publication of additional papers, with a maximum of one addition=
+al paper per registration. One registration permits only the participation =
+of one author in the conference.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Pap=
+ers will be published in Proceedings by Springer, in Smart Innovation, Syst=
+ems and Technologies series. Poster and company papers will not be publishe=
+d, just presented in the conference.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Pub=
+lished full papers will be submitted for indexation by ISI, EI-Compendex, S=
+COPUS and Google Scholar, among others, and will be available in the Spring=
+erLink Digital Library.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">The=
+ authors of the best selected papers will be invited to extend them for pub=
+lication in international journals indexed by ISI/SCI and SCOPUS, among oth=
+ers.</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nb=
+sp;</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin"><st=
+rong>IMPORTANT DATES</strong></span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Pap=
+er Submission: June 15, 2020</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Not=
+ification of Acceptance: July 15, 2020</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Pay=
+ment of Registration, to ensure the inclusion of an accepted paper in the p=
+roceedings: July 25, 2020</span></span></p>
+    <p style=3D"text-align: justify"><span class=3D"color16"><span lang=3D"=
+EN-GB" style=3D"font-size: 11pt; border-top: windowtext 1pt; font-family: '=
+Calibri',sans-serif; border-right: windowtext 1pt; border-bottom: windowtex=
+t 1pt; color: #002060; padding-bottom: 0cm; padding-top: 0cm; padding-left:=
+ 0cm; border-left: windowtext 1pt; padding-right: 0cm; mso-ansi-language: E=
+N-GB; mso-border-alt: none windowtext 0cm; mso-ascii-theme-font: minor-lati=
+n; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">Cam=
+era-ready Submission: July, 25, 2020</span></span></p>
+    <p class=3D"font8" style=3D"vertical-align: baseline; margin: 0cm 0cm 0=
+pt"><i><span lang=3D"EN-GB" style=3D"font-size: 11pt; font-family: 'Calibri=
+',sans-serif; color: #002060; mso-ansi-language: EN-GB; mso-ascii-theme-fon=
+t: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: min=
+or-latin">&nbsp;</span></i></p>
+    <p><b style=3D"mso-bidi-font-weight: normal"><span lang=3D"EN-GB" style=
+=3D"font-size: 11pt; font-family: 'Calibri',sans-serif; font-variant: small=
+-caps; color: #002060; mso-ansi-language: EN-GB; mso-ascii-theme-font: mino=
+r-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lati=
+n">Website of</span></b><strong><span lang=3D"EN-GB" style=3D"font-size: 11=
+pt; font-family: 'Calibri',sans-serif; color: #002060; mso-ansi-language: E=
+N-GB; mso-ascii-theme-font: minor-latin; mso-hansi-theme-font: minor-latin;=
+ mso-bidi-theme-font: minor-latin"> </span></strong><span class=3D"il"><b><=
+span lang=3D"EN-GB" style=3D"font-size: 11pt; font-family: 'Calibri',sans-s=
+erif; color: #002060; mso-ansi-language: EN-GB; mso-ascii-theme-font: minor=
+-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin=
+">ICOTTS</span></b></span><strong><span lang=3D"EN-GB" style=3D"font-size: =
+11pt; font-family: 'Calibri',sans-serif; color: #002060; mso-ansi-language:=
+ EN-GB; mso-ascii-theme-font: minor-latin; mso-hansi-theme-font: minor-lati=
+n; mso-bidi-theme-font: minor-latin">'</span></strong><span class=3D"il"><b=
+><span lang=3D"EN-GB" style=3D"font-size: 11pt; font-family: 'Calibri',sans=
+-serif; color: #002060; mso-ansi-language: EN-GB; mso-ascii-theme-font: min=
+or-latin; mso-hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-lat=
+in">19</span></b></span><span lang=3D"EN-GB" style=3D"font-size: 11pt; font=
+-family: 'Calibri',sans-serif; color: #002060; mso-ansi-language: EN-GB; ms=
+o-ascii-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bid=
+i-theme-font: minor-latin">: </span><a href=3D"https://www.icotts.org/"><sp=
+an lang=3D"EN-GB" style=3D"font-size: 11pt; font-family: 'Calibri',sans-ser=
+if; mso-ansi-language: EN-GB; mso-ascii-theme-font: minor-latin; mso-hansi-=
+theme-font: minor-latin; mso-bidi-theme-font: minor-latin"><font color=3D"#=
+0000ff">https://www.icotts.org/</font></span></a><span class=3D"MsoHyperlin=
+k"><span lang=3D"EN-GB" style=3D"font-size: 11pt; font-family: 'Calibri',sa=
+ns-serif; mso-ansi-language: EN-GB; mso-ascii-theme-font: minor-latin; mso-=
+hansi-theme-font: minor-latin; mso-bidi-theme-font: minor-latin">&nbsp;</sp=
+an></span></p>
+    <p><b style=3D"mso-bidi-font-weight: normal"><span style=3D"font-size: =
+11pt; font-family: 'Calibri',sans-serif; font-variant: small-caps; color: #=
+002060; mso-ascii-theme-font: minor-latin; mso-hansi-theme-font: minor-lati=
+n; mso-bidi-font-family: 'Times New Roman'">E-Mail:</span></b><u><font colo=
+r=3D"#0000ff"><span class=3D"MsoHyperlink"><span lang=3D"EN-GB" style=3D"fo=
+nt-size: 11pt; font-family: 'Calibri',sans-serif; mso-ansi-language: EN-GB;=
+ mso-ascii-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-=
+bidi-theme-font: minor-latin"> icotts.conf@gmail.com</span></span><span lan=
+g=3D"EN-GB" style=3D"font-size: 11pt; font-family: 'Calibri',sans-serif; ms=
+o-ansi-language: EN-GB; mso-ascii-theme-font: minor-latin; mso-hansi-theme-=
+font: minor-latin; mso-bidi-theme-font: minor-latin">&nbsp;</span></font></=
+u></p>
+    <p class=3D"MsoNormal" style=3D"margin: 0cm 0cm 10pt"><span lang=3D"EN-=
+GB" style=3D"mso-ansi-language: EN-GB"><font face=3D"Calibri">&nbsp;</font>=
+</span></p>
+  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br />
+<table style=3D"border-top: 1px solid #D3D4DE;">
+	<tr>
+        <td style=3D"width: 55px; padding-top: 13px;"><a href=3D"http://www=
+=2Eavg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaig=
+n=3Dsig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"http=
+s://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=
+=3D""  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></=
+a></td>
+		<td style=3D"width: 470px; padding-top: 12px; color: #41424e; font-size: =
+13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virus-=
+free. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_=
+source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
+"_blank" style=3D"color: #4453ea;">www.avg.com</a>
+		</td>
+	</tr>
+</table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" heigh=
+t=3D"1"> </a></div></body>
+</html>
+
+--rAtNU5hrmlSd6Tsf=_VgoY5Qa8PZOW6ncL--
+
+
+--===============6702500903669429983==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============6702500903669429983==--
+
