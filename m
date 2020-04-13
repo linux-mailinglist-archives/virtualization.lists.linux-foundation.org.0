@@ -1,100 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id B89731A66DF
-	for <lists.virtualization@lfdr.de>; Mon, 13 Apr 2020 15:22:39 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 66C608484F;
-	Mon, 13 Apr 2020 13:22:38 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0PsNlXuFEwVP; Mon, 13 Apr 2020 13:22:38 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7F1B58488E;
-	Mon, 13 Apr 2020 13:22:36 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 66B76C1797;
-	Mon, 13 Apr 2020 13:22:36 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 70909C1797
- for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 13:22:34 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 477BD1A66F0
+	for <lists.virtualization@lfdr.de>; Mon, 13 Apr 2020 15:27:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 59711203EB
- for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 13:22:34 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id D2C312035C;
+	Mon, 13 Apr 2020 13:27:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Y05fzDn18M8s; Mon, 13 Apr 2020 13:27:38 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 35D48203EB;
+	Mon, 13 Apr 2020 13:27:38 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2617FC0172;
+	Mon, 13 Apr 2020 13:27:38 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 49533C0172
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 13 Apr 2020 13:27:37 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 37F6485735
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 13 Apr 2020 13:27:37 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QJXMjvP0ByID
+ with ESMTP id Fq7Uo3TdGtMh
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 13:22:33 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 5AFF72000A
+ Mon, 13 Apr 2020 13:27:35 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id A4BC885727
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 13:22:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586784152;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=0PdiEszlmuGkdCTdCPanAdeTLpgTEN2jG8uLZ7FuSm8=;
- b=hDLc1NYKVNGeycguxmXSYnt67NmWEuCHfRwdSB+lhculE6vx3eN90MX/Mp8yMax7j5ox/t
- R4NL7NN1HHspEEhPnF3PC8x0syrVKMmwETDuO3dPBQ6RA9ZUNMBhXDgOlbF4I/GPNtU+rc
- 2MRJT+6ozvgqipLN5wjErDxBLJVpEJM=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-459-sSpeqJ6RPHeh3_K9X2SHoQ-1; Mon, 13 Apr 2020 09:22:30 -0400
-X-MC-Unique: sSpeqJ6RPHeh3_K9X2SHoQ-1
-Received: by mail-wr1-f71.google.com with SMTP id v14so6690380wrq.13
- for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Apr 2020 06:22:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=0PdiEszlmuGkdCTdCPanAdeTLpgTEN2jG8uLZ7FuSm8=;
- b=n17GhTD5fCjEMPMnNyHpk/6RfIzj/SaRkujdUosPk/M3Vq/CElKbNbI8RiPwqnJ0Yq
- dnscF1wrxgaHmoBMXEB1XTGUJ1S9Wymac8IWNSBP821bbXAr5q8vg4jVoVbnl1bcydMJ
- v2lAvWmwPLGt+pWPQ3dZ9kxiwDe2ZBdw9toQjnvZoXCQrTl4lIj4rOx62zx/3SC1I6Ij
- 7k0LUaDQTQd4pMYfZMIosMYDr644F1iCalSDb6SvYmRyL2ADccjMnEwbsXCqdvXPATkr
- 0gFbW3GRpUTam+aH+HgUJGhxu9OImQbQIOZ/29PfULoauD6/YCYRFv/mgpJZxFo0DrD6
- WzZg==
-X-Gm-Message-State: AGi0PuZfAKfPnRjgCxzr/bwKRi6g2Oc9EjZ2+347rxCK1CeARIPEKhNq
- tD/vtgpUxws67s0uFMZbTl1NFFsL6/x3AvHqwCd2kcPZd+n/nFuUIkTXmh0JKo6J1yA0ULyWQ8y
- 7S3RWZHNC85c9YZq6SzKbod/11PNZxUGhGj7zK6cDlQ==
-X-Received: by 2002:adf:f343:: with SMTP id e3mr10209300wrp.51.1586784149266; 
- Mon, 13 Apr 2020 06:22:29 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJEAGSwrzL3vQ67rkOtqT1/sfEwf7eMuRq2HTHdDqkOFbKnqIPy+fW8j5vivRuXTGBlXzeIlQ==
-X-Received: by 2002:adf:f343:: with SMTP id e3mr10209287wrp.51.1586784149081; 
- Mon, 13 Apr 2020 06:22:29 -0700 (PDT)
-Received: from redhat.com ([185.107.45.41])
- by smtp.gmail.com with ESMTPSA id b82sm15672990wme.25.2020.04.13.06.22.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2020 06:22:28 -0700 (PDT)
-Date: Mon, 13 Apr 2020 09:22:25 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jean-Philippe Brucker <jean-philippe@linaro.org>
-Subject: Re: [PATCH v2 1/3] iommu/virtio: Add topology description to
- virtio-iommu config space
-Message-ID: <20200413091355-mutt-send-email-mst@kernel.org>
-References: <20200228172537.377327-1-jean-philippe@linaro.org>
- <20200228172537.377327-2-jean-philippe@linaro.org>
+ Mon, 13 Apr 2020 13:27:35 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id AEBD868BEB; Mon, 13 Apr 2020 15:27:30 +0200 (CEST)
+Date: Mon, 13 Apr 2020 15:27:30 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Yan Zhao <yan.y.zhao@intel.com>
+Subject: Re: [PATCH 2/6] i915/gvt/kvm: a NULL ->mm does not mean a thread
+ is a kthread
+Message-ID: <20200413132730.GB14455@lst.de>
+References: <20200404094101.672954-1-hch@lst.de>
+ <20200404094101.672954-3-hch@lst.de>
+ <20200407030845.GA10586@joy-OptiPlex-7040>
 MIME-Version: 1.0
-In-Reply-To: <20200228172537.377327-2-jean-philippe@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: linux-pci@vger.kernel.org, virtualization@lists.linux-foundation.org,
- eric.auger@redhat.com, iommu@lists.linux-foundation.org,
- sebastien.boeuf@intel.com, jacob.jun.pan@intel.com, bhelgaas@google.com,
- robin.murphy@arm.com, joro@8bytes.org
+In-Reply-To: <20200407030845.GA10586@joy-OptiPlex-7040>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Cc: Jens Axboe <axboe@kernel.dk>, Felipe Balbi <balbi@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, intel-gvt-dev@lists.freedesktop.org,
+ Felix Kuehling <Felix.Kuehling@amd.com>, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ io-uring@vger.kernel.org, linux-mm@kvack.org,
+ Zhenyu Wang <zhenyuw@linux.intel.com>, intel-gfx@lists.freedesktop.org,
+ linux-fsdevel@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ virtualization@lists.linux-foundation.org,
+ Linus Torvalds <torvalds@linux-foundation.org>, Christoph Hellwig <hch@lst.de>,
+ Zhi Wang <zhi.a.wang@intel.com>, Al Viro <viro@zeniv.linux.org.uk>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,75 +80,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 28, 2020 at 06:25:36PM +0100, Jean-Philippe Brucker wrote:
-> diff --git a/include/uapi/linux/virtio_iommu.h b/include/uapi/linux/virtio_iommu.h
-> index 237e36a280cb..ec57d215086a 100644
-> --- a/include/uapi/linux/virtio_iommu.h
-> +++ b/include/uapi/linux/virtio_iommu.h
-> @@ -16,6 +16,7 @@
->  #define VIRTIO_IOMMU_F_BYPASS			3
->  #define VIRTIO_IOMMU_F_PROBE			4
->  #define VIRTIO_IOMMU_F_MMIO			5
-> +#define VIRTIO_IOMMU_F_TOPOLOGY			6
->  
->  struct virtio_iommu_range_64 {
->  	__le64					start;
-> @@ -27,6 +28,12 @@ struct virtio_iommu_range_32 {
->  	__le32					end;
->  };
->  
-> +struct virtio_iommu_topo_config {
-> +	__le32					offset;
+On Mon, Apr 06, 2020 at 11:08:46PM -0400, Yan Zhao wrote:
+> hi
+> we were removing this code. see
+> https://lore.kernel.org/kvm/20200313031109.7989-1-yan.y.zhao@intel.com/
 
-Any restrictions on offset? E.g. alignment?
+This didn't make 5.7-rc1.
 
-> +	__le32					num_items;
-> +	__le32					item_length;
-> +};
-> +
->  struct virtio_iommu_config {
->  	/* Supported page sizes */
->  	__le64					page_size_mask;
-> @@ -36,6 +43,25 @@ struct virtio_iommu_config {
->  	struct virtio_iommu_range_32		domain_range;
->  	/* Probe buffer size */
->  	__le32					probe_size;
-> +	struct virtio_iommu_topo_config		topo_config;
-> +};
-> +
-> +#define VIRTIO_IOMMU_TOPO_PCI_RANGE		0x1
-> +#define VIRTIO_IOMMU_TOPO_ENDPOINT		0x2
-> +
-> +struct virtio_iommu_topo_pci_range {
-> +	__le16					type;
-> +	__le16					hierarchy;
-> +	__le16					requester_start;
-> +	__le16					requester_end;
-> +	__le32					endpoint_start;
-> +};
-> +
-> +struct virtio_iommu_topo_endpoint {
-> +	__le16					type;
-> +	__le16					reserved;
-> +	__le32					endpoint;
-> +	__le64					address;
->  };
->  
->  /* Request types */
+> The implementation of vfio_dma_rw() has been in vfio next tree.
+> https://github.com/awilliam/linux-vfio/commit/8d46c0cca5f4dc0538173d62cd36b1119b5105bc
 
-As any UAPI change, this needs to be copied to virtio TC.
 
-I believe an old version of QEMU patches was published there
-but I don't think it was the latest one you tested against.
+This made 5.7-rc1, so I'll update the series to take it into account.
 
-Description should preferably be added to spec too.
+T
+> in vfio_dma_rw(),  we still use
+> bool kthread = current->mm == NULL.
+> because if current->mm != NULL and current->flags & PF_KTHREAD, instead
+> of calling use_mm(), we first check if (current->mm == mm) and allow copy_to_user() if it's true.
+> 
+> Do you think it's all right?
 
-In partucular please add comments (in this header, too)
-documenting the new fields, values and structures.
-
-> -- 
-> 2.25.0
-
+I can't think of another way for a kernel thread to have a mm indeed.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
