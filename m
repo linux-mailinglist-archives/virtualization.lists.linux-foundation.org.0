@@ -1,41 +1,41 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F62B1A7C80
-	for <lists.virtualization@lfdr.de>; Tue, 14 Apr 2020 15:16:39 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CAA0285913;
-	Tue, 14 Apr 2020 13:16:37 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cnI-j55TUWPk; Tue, 14 Apr 2020 13:16:34 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2EEAD85CFF;
-	Tue, 14 Apr 2020 13:16:02 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1BA9FC0172;
-	Tue, 14 Apr 2020 13:16:02 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8C05FC0172;
- Tue, 14 Apr 2020 13:16:00 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 184141A7C84
+	for <lists.virtualization@lfdr.de>; Tue, 14 Apr 2020 15:16:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 7A47187A12;
- Tue, 14 Apr 2020 13:16:00 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B278187B7D;
+	Tue, 14 Apr 2020 13:16:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id i7Xq92H-Ynbm; Tue, 14 Apr 2020 13:16:40 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id C723386DD6;
+	Tue, 14 Apr 2020 13:16:39 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9B39AC0172;
+	Tue, 14 Apr 2020 13:16:39 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 761ABC0172;
+ Tue, 14 Apr 2020 13:16:37 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 65FA385913;
+ Tue, 14 Apr 2020 13:16:37 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zEDZFVJurylA; Tue, 14 Apr 2020 13:15:59 +0000 (UTC)
+ with ESMTP id 7Z2gA4qwmR3Y; Tue, 14 Apr 2020 13:16:33 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 172B9879FF;
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 72D5A85CA8;
  Tue, 14 Apr 2020 13:15:59 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 362B2485; Tue, 14 Apr 2020 15:15:52 +0200 (CEST)
+ id 480DB475; Tue, 14 Apr 2020 15:15:52 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
  Robin Murphy <robin.murphy@arm.com>,
@@ -50,9 +50,9 @@ To: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
  Thierry Reding <thierry.reding@gmail.com>,
  Jonathan Hunter <jonathanh@nvidia.com>,
  Jean-Philippe Brucker <jean-philippe@linaro.org>
-Subject: [PATCH v2 04/33] iommu/vt-d: Wire up iommu_ops->def_domain_type
-Date: Tue, 14 Apr 2020 15:15:13 +0200
-Message-Id: <20200414131542.25608-5-joro@8bytes.org>
+Subject: [PATCH v2 05/33] iommu/amd: Remove dma_mask check from check_device()
+Date: Tue, 14 Apr 2020 15:15:14 +0200
+Message-Id: <20200414131542.25608-6-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200414131542.25608-1-joro@8bytes.org>
 References: <20200414131542.25608-1-joro@8bytes.org>
@@ -80,26 +80,27 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-The Intel VT-d driver already has a matching function to determine the
-default domain type for a device. Wire it up in intel_iommu_ops.
+The check was only needed for the DMA-API implementation in the AMD
+IOMMU driver, which no longer exists.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- drivers/iommu/intel-iommu.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/iommu/amd_iommu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/iommu/intel-iommu.c b/drivers/iommu/intel-iommu.c
-index ef0a5246700e..b9f905a55dda 100644
---- a/drivers/iommu/intel-iommu.c
-+++ b/drivers/iommu/intel-iommu.c
-@@ -6209,6 +6209,7 @@ const struct iommu_ops intel_iommu_ops = {
- 	.dev_enable_feat	= intel_iommu_dev_enable_feat,
- 	.dev_disable_feat	= intel_iommu_dev_disable_feat,
- 	.is_attach_deferred	= intel_iommu_is_attach_deferred,
-+	.def_domain_type	= device_def_domain_type,
- 	.pgsize_bitmap		= INTEL_IOMMU_PGSIZES,
- };
+diff --git a/drivers/iommu/amd_iommu.c b/drivers/iommu/amd_iommu.c
+index 73b4f84cf449..504f2db75eda 100644
+--- a/drivers/iommu/amd_iommu.c
++++ b/drivers/iommu/amd_iommu.c
+@@ -326,7 +326,7 @@ static bool check_device(struct device *dev)
+ {
+ 	int devid;
  
+-	if (!dev || !dev->dma_mask)
++	if (!dev)
+ 		return false;
+ 
+ 	devid = get_device_id(dev);
 -- 
 2.17.1
 
