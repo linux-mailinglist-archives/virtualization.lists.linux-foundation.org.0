@@ -1,151 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FF1F1A89D3
-	for <lists.virtualization@lfdr.de>; Tue, 14 Apr 2020 20:40:00 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F8A61A8A12
+	for <lists.virtualization@lfdr.de>; Tue, 14 Apr 2020 20:47:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D946785CD0;
-	Tue, 14 Apr 2020 18:39:58 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id C91A421546;
+	Tue, 14 Apr 2020 18:47:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yhkhDiHfpt_x; Tue, 14 Apr 2020 18:39:58 +0000 (UTC)
+	with ESMTP id 2TLDNmlxTcn2; Tue, 14 Apr 2020 18:47:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 61E6385D2B;
-	Tue, 14 Apr 2020 18:39:58 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 88DD1204D8;
+	Tue, 14 Apr 2020 18:47:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 402F2C1D8D;
-	Tue, 14 Apr 2020 18:39:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4D08FC0172;
+	Tue, 14 Apr 2020 18:47:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DF851C0172
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C4E02C0172
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Apr 2020 18:39:56 +0000 (UTC)
+ Tue, 14 Apr 2020 18:47:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id BFE1C82492
+ by whitealder.osuosl.org (Postfix) with ESMTP id B017086B0E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Apr 2020 18:39:56 +0000 (UTC)
+ Tue, 14 Apr 2020 18:47:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kPhIAF4WeAtS
+ with ESMTP id iHJt-kZv+rfs
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Apr 2020 18:39:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 0D4C881E2E
+ Tue, 14 Apr 2020 18:47:53 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+ [209.85.208.195])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 820EE8646F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Apr 2020 18:39:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586889594;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=+Cj0ZgPzOaN4hCJWMzFwXfxpwQsNMlaKJGQT+M6uQCY=;
- b=aWUmc0y/+tzZdtBThgU4BKwwXiaitzfegcaZ2lCY7WVDFIYPzNvzbXEMP5Kfpl44W69bxd
- ZHyIj5KrqVS9fcEAHUus6C0biuY63bd8j7YYnI2sXpN52/ETJzcFLKK5p1axcZVnAx3x0/
- FydoSuABKkkim2G2d9dtDILnwkdHrG8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-81-RceiZkfbMOKyDjsd_U1aAg-1; Tue, 14 Apr 2020 14:39:50 -0400
-X-MC-Unique: RceiZkfbMOKyDjsd_U1aAg-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 15AC21005509;
- Tue, 14 Apr 2020 18:39:46 +0000 (UTC)
-Received: from [10.36.113.201] (ovpn-113-201.ams2.redhat.com [10.36.113.201])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9D1C09F9AC;
- Tue, 14 Apr 2020 18:39:26 +0000 (UTC)
-Subject: Re: [PATCH v2 00/10] virtio-mem: paravirtualized memory
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20200311171422.10484-1-david@redhat.com>
- <20200329084128-mutt-send-email-mst@kernel.org>
- <b9984195-bb48-e2a6-887d-0905692a7524@redhat.com>
- <20200414122716-mutt-send-email-mst@kernel.org>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <758aa88e-7bd1-ea77-6ee3-9a015a0f8b0e@redhat.com>
-Date: Tue, 14 Apr 2020 20:39:25 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ Tue, 14 Apr 2020 18:47:53 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id z26so911120ljz.11
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 14 Apr 2020 11:47:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=OyOL12OCCuEtnIYwyab7jevzcvgkgia9hHwlqC2b/cU=;
+ b=PZAoOw3NbV+FJtp3dr1j+nlatrdGdulU5pItNLclPyjrhf7CyG6zlAVQxY50b0EpDU
+ ebHHUI0nLMYLiUaEy8qSIayJglSY+JSBhsG0RoJFCif1nbPg6XUYMtIPrzwEd6L21B6D
+ eMiaPOblgIGOqBJWeooWrfL6SvkGQAaOTSNNO6Lp9XtIHez2UrZ1ZWIaNMyXBhnjPbaL
+ lLFX2CPaZzf0IfFjObpAbweT8dY+tjxm0VLbPnMFpyGtwNx+9HjbD/0dWLjUqNnUuI1u
+ tiv9RMd+lEZFWKv+bI4SS+IkGpaqRpALLHCWMd+xjGN1t+ibMC4JzxMkPXthqEoK9N5E
+ 2Djw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=OyOL12OCCuEtnIYwyab7jevzcvgkgia9hHwlqC2b/cU=;
+ b=dMyygoVjzrHNNXUeSTvfpB+QD1j90Y3/61XcGldF1asbaYiIb2qWba7cH6FBx7wFGG
+ ltLqV0GlDSEHuXeejqEymIO7IswhgGUn6YJxUiLna0GTnTDvVD4Wq07+pMzkaQb0ywTD
+ zF+6wkFqXPrO3wcvmweZes8mMjtIgM4XFLeG90IIetmsp6xUDCdLT6lBhILEwqduIA3b
+ uZzoHxC1JMn2Xfg0Sz2KXwlErDjtSElwcyIvHqDGOLx8lcOa98vCjmfvP1Bnwa1eAomR
+ BrNHORaQYnDUkDb8CcAnYJm8fISLPAobQxtIs9YNZdBsM9m68EkO3ok1pzuWt4+NnLj/
+ NfYQ==
+X-Gm-Message-State: AGi0PuYxll3/gN2RBb6xZNS95vvDW7iQAiDqXsyTrMEpzh2DnqgL8yZh
+ xmZYOxyMUCBcQPDVJlaW9oq/xpbUoK1Mjg==
+X-Google-Smtp-Source: APiQypIU0nDoVIJ/vdOxOcyArNCl8ozzP3P/YWU0FeKyu7KGGin9pZl2KpekHTeHZOvoDagifSazJQ==
+X-Received: by 2002:a2e:a308:: with SMTP id l8mr917166lje.282.1586890070861;
+ Tue, 14 Apr 2020 11:47:50 -0700 (PDT)
+Received: from navi.cosmonova.net.ua ([95.67.24.131])
+ by smtp.gmail.com with ESMTPSA id p2sm2029433lji.40.2020.04.14.11.47.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Apr 2020 11:47:50 -0700 (PDT)
+From: andrew@daynix.com
+To: virtualization@lists.linux-foundation.org
+Subject: [PATCH v2] Fix: buffer overflow during hvc_alloc().
+Date: Tue, 14 Apr 2020 22:15:03 +0300
+Message-Id: <20200414191503.3471783-1-andrew@daynix.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-In-Reply-To: <20200414122716-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
- Robert Bradford <robert.bradford@intel.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pingfan Liu <kernelfans@gmail.com>,
- Luiz Capitulino <lcapitulino@redhat.com>, linux-mm@kvack.org,
- Alexander Potapenko <glider@google.com>,
- teawater <teawaterz@linux.alibaba.com>,
- Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Mike Rapoport <rppt@linux.ibm.com>, Wei Yang <richard.weiyang@gmail.com>,
- Anthony Yznaga <anthony.yznaga@oracle.com>, Dave Young <dyoung@redhat.com>,
- Len Brown <lenb@kernel.org>, Pavel Tatashin <pavel.tatashin@microsoft.com>,
- Pavel Tatashin <pasha.tatashin@soleen.com>,
- Anshuman Khandual <anshuman.khandual@arm.com>,
- "Dr . David Alan Gilbert" <dgilbert@redhat.com>, Qian Cai <cai@lca.pw>,
- Stefan Hajnoczi <stefanha@redhat.com>, Samuel Ortiz <samuel.ortiz@intel.com>,
- Dan Williams <dan.j.williams@intel.com>, Michal Hocko <mhocko@kernel.org>,
- Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>,
- Juergen Gross <jgross@suse.com>, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
- Sebastien Boeuf <sebastien.boeuf@intel.com>,
- Johannes Weiner <hannes@cmpxchg.org>, Igor Mammedov <imammedo@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Mel Gorman <mgorman@techsingularity.net>
+Cc: gregkh@linuxfoundation.org, linuxppc-dev@lists.ozlabs.org,
+ linux-kernel@vger.kernel.org, jslaby@suse.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -162,51 +98,125 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 14.04.20 18:28, Michael S. Tsirkin wrote:
-> On Tue, Apr 14, 2020 at 11:15:18AM +0200, David Hildenbrand wrote:
->> On 29.03.20 14:42, Michael S. Tsirkin wrote:
->>> On Wed, Mar 11, 2020 at 06:14:12PM +0100, David Hildenbrand wrote:
->>>> This series is based on latest linux-next. The patches are located at:
->>>>     https://github.com/davidhildenbrand/linux.git virtio-mem-v2
->>>>
->>>> I now have acks for all !virtio-mem changes. I'll be happy to get review
->>>> feedback, testing reports, etc. for the virtio-mem changes. If there are
->>>> no further comments, I guess this is good to go as a v1 soon.
->>>
->>> I'd like to queue it for merge after the release. If you feel it's ready
->>> please ping me after the release to help make sure it didn't get
->>> dropped.  I see there were some reports about people having trouble
->>> using this, pls keep working on this meanwhile.
->>
->> Hi Michael,
->>
->> I think this is ready to go as a first version. There are a couple of
->> future work items related to kexec/kdump:
->> - Teach kexec-tools/kexec_file_load() to not place the kexec
->>   kernel/initrd onto virtio-mem added memory.
->> - Teach kexec-tools/kdump to consider a bigger number of memory
->>   resources for dumping.
->>
->> In general, as virtio-mem adds a lot of memory resources, we might want
->> to tweak performance in that area as well. Future stuff.
->>
->> So I suggest queuing this. If you need a resend, please let me know.
->>
->> Cheers!
-> 
-> Thanks!
-> I'll queue it for merge after the release. If possible please ping me
-> after the release to help make sure it didn't get dropped.
+From: Andrew Melnychenko <andrew@daynix.com>
 
-If we could get this into 5.8, that would be great (IOW, have it in
--next for a while before the 5.8 merge window opens).
+If there is a lot(more then 16) of virtio-console devices
+or virtio_console module is reloaded
+- buffers 'vtermnos' and 'cons_ops' are overflowed.
+In older kernels it overruns spinlock which leads to kernel freezing:
+https://bugzilla.redhat.com/show_bug.cgi?id=1786239
 
-Thanks!
+To reproduce the issue, you can try simple script that
+loads/unloads module. Something like this:
+while [ 1 ]
+do
+  modprobe virtio_console
+  sleep 2
+  modprobe -r virtio_console
+  sleep 2
+done
 
+Description of problem:
+Guest get 'Call Trace' when loading module "virtio_console"
+and unloading it frequently - clearly reproduced on kernel-4.18.0:
+
+[   81.498208] ------------[ cut here ]------------
+[   81.499263] pvqspinlock: lock 0xffffffff92080020 has corrupted value 0xc0774ca0!
+[   81.501000] WARNING: CPU: 0 PID: 785 at kernel/locking/qspinlock_paravirt.h:500 __pv_queued_spin_unlock_slowpath+0xc0/0xd0
+[   81.503173] Modules linked in: virtio_console fuse xt_CHECKSUM ipt_MASQUERADE xt_conntrack ipt_REJECT nft_counter nf_nat_tftp nft_objref nf_conntrack_tftp tun bridge stp llc nft_fib_inet nft_fib_ipv4 nft_fib_ipv6 nft_fib nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_ct nf_tables_set nft_chain_nat_ipv6 nf_conntrack_ipv6 nf_defrag_ipv6 nf_nat_ipv6 nft_chain_route_ipv6 nft_chain_nat_ipv4 nf_conntrack_ipv4 nf_defrag_ipv4 nf_nat_ipv4 nf_nat nf_conntrack nft_chain_route_ipv4 ip6_tables nft_compat ip_set nf_tables nfnetlink sunrpc bochs_drm drm_vram_helper ttm drm_kms_helper syscopyarea sysfillrect sysimgblt fb_sys_fops drm i2c_piix4 pcspkr crct10dif_pclmul crc32_pclmul joydev ghash_clmulni_intel ip_tables xfs libcrc32c sd_mod sg ata_generic ata_piix virtio_net libata crc32c_intel net_failover failover serio_raw virtio_scsi dm_mirror dm_region_hash dm_log dm_mod [last unloaded: virtio_console]
+[   81.517019] CPU: 0 PID: 785 Comm: kworker/0:2 Kdump: loaded Not tainted 4.18.0-167.el8.x86_64 #1
+[   81.518639] Hardware name: Red Hat KVM, BIOS 1.12.0-5.scrmod+el8.2.0+5159+d8aa4d83 04/01/2014
+[   81.520205] Workqueue: events control_work_handler [virtio_console]
+[   81.521354] RIP: 0010:__pv_queued_spin_unlock_slowpath+0xc0/0xd0
+[   81.522450] Code: 07 00 48 63 7a 10 e8 bf 64 f5 ff 66 90 c3 8b 05 e6 cf d6 01 85 c0 74 01 c3 8b 17 48 89 fe 48 c7 c7 38 4b 29 91 e8 3a 6c fa ff <0f> 0b c3 0f 0b 90 90 90 90 90 90 90 90 90 90 90 0f 1f 44 00 00 48
+[   81.525830] RSP: 0018:ffffb51a01ffbd70 EFLAGS: 00010282
+[   81.526798] RAX: 0000000000000000 RBX: 0000000000000010 RCX: 0000000000000000
+[   81.528110] RDX: ffff9e66f1826480 RSI: ffff9e66f1816a08 RDI: ffff9e66f1816a08
+[   81.529437] RBP: ffffffff9153ff10 R08: 000000000000026c R09: 0000000000000053
+[   81.530732] R10: 0000000000000000 R11: ffffb51a01ffbc18 R12: ffff9e66cd682200
+[   81.532133] R13: ffffffff9153ff10 R14: ffff9e6685569500 R15: ffff9e66cd682000
+[   81.533442] FS:  0000000000000000(0000) GS:ffff9e66f1800000(0000) knlGS:0000000000000000
+[   81.534914] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   81.535971] CR2: 00005624c55b14d0 CR3: 00000003a023c000 CR4: 00000000003406f0
+[   81.537283] Call Trace:
+[   81.537763]  __raw_callee_save___pv_queued_spin_unlock_slowpath+0x11/0x20
+[   81.539011]  .slowpath+0x9/0xe
+[   81.539585]  hvc_alloc+0x25e/0x300
+[   81.540237]  init_port_console+0x28/0x100 [virtio_console]
+[   81.541251]  handle_control_message.constprop.27+0x1c4/0x310 [virtio_console]
+[   81.542546]  control_work_handler+0x70/0x10c [virtio_console]
+[   81.543601]  process_one_work+0x1a7/0x3b0
+[   81.544356]  worker_thread+0x30/0x390
+[   81.545025]  ? create_worker+0x1a0/0x1a0
+[   81.545749]  kthread+0x112/0x130
+[   81.546358]  ? kthread_flush_work_fn+0x10/0x10
+[   81.547183]  ret_from_fork+0x22/0x40
+[   81.547842] ---[ end trace aa97649bd16c8655 ]---
+[   83.546539] general protection fault: 0000 [#1] SMP NOPTI
+[   83.547422] CPU: 5 PID: 3225 Comm: modprobe Kdump: loaded Tainted: G        W        --------- -  - 4.18.0-167.el8.x86_64 #1
+[   83.549191] Hardware name: Red Hat KVM, BIOS 1.12.0-5.scrmod+el8.2.0+5159+d8aa4d83 04/01/2014
+[   83.550544] RIP: 0010:__pv_queued_spin_lock_slowpath+0x19a/0x2a0
+[   83.551504] Code: c4 c1 ea 12 41 be 01 00 00 00 4c 8d 6d 14 41 83 e4 03 8d 42 ff 49 c1 e4 05 48 98 49 81 c4 40 a5 02 00 4c 03 24 c5 60 48 34 91 <49> 89 2c 24 b8 00 80 00 00 eb 15 84 c0 75 0a 41 0f b6 54 24 14 84
+[   83.554449] RSP: 0018:ffffb51a0323fdb0 EFLAGS: 00010202
+[   83.555290] RAX: 000000000000301c RBX: ffffffff92080020 RCX: 0000000000000001
+[   83.556426] RDX: 000000000000301d RSI: 0000000000000000 RDI: 0000000000000000
+[   83.557556] RBP: ffff9e66f196a540 R08: 000000000000028a R09: ffff9e66d2757788
+[   83.558688] R10: 0000000000000000 R11: 0000000000000000 R12: 646e61725f770b07
+[   83.559821] R13: ffff9e66f196a554 R14: 0000000000000001 R15: 0000000000180000
+[   83.560958] FS:  00007fd5032e8740(0000) GS:ffff9e66f1940000(0000) knlGS:0000000000000000
+[   83.562233] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   83.563149] CR2: 00007fd5022b0da0 CR3: 000000038c334000 CR4: 00000000003406e0
+
+Signed-off-by: Andrew Melnychenko <andrew@daynix.com>
+---
+ drivers/tty/hvc/hvc_console.c | 23 ++++++++++++++---------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/tty/hvc/hvc_console.c b/drivers/tty/hvc/hvc_console.c
+index 27284a2dcd2b..436cc51c92c3 100644
+--- a/drivers/tty/hvc/hvc_console.c
++++ b/drivers/tty/hvc/hvc_console.c
+@@ -302,10 +302,6 @@ int hvc_instantiate(uint32_t vtermno, int index, const struct hv_ops *ops)
+ 	vtermnos[index] = vtermno;
+ 	cons_ops[index] = ops;
+ 
+-	/* reserve all indices up to and including this index */
+-	if (last_hvc < index)
+-		last_hvc = index;
+-
+ 	/* check if we need to re-register the kernel console */
+ 	hvc_check_console(index);
+ 
+@@ -960,13 +956,22 @@ struct hvc_struct *hvc_alloc(uint32_t vtermno, int data,
+ 		    cons_ops[i] == hp->ops)
+ 			break;
+ 
+-	/* no matching slot, just use a counter */
+-	if (i >= MAX_NR_HVC_CONSOLES)
+-		i = ++last_hvc;
++	if (i >= MAX_NR_HVC_CONSOLES) {
++
++		/* find 'empty' slot for console */
++		for (i = 0; i < MAX_NR_HVC_CONSOLES && vtermnos[i] != -1; i++) {
++		}
++
++		/* no matching slot, just use a counter */
++		if (i == MAX_NR_HVC_CONSOLES)
++			i = ++last_hvc + MAX_NR_HVC_CONSOLES;
++	}
+ 
+ 	hp->index = i;
+-	cons_ops[i] = ops;
+-	vtermnos[i] = vtermno;
++	if (i < MAX_NR_HVC_CONSOLES) {
++		cons_ops[i] = ops;
++		vtermnos[i] = vtermno;
++	}
+ 
+ 	list_add_tail(&(hp->next), &hvc_structs);
+ 	mutex_unlock(&hvc_structs_mutex);
 -- 
-Thanks,
-
-David / dhildenb
+2.24.1
 
 _______________________________________________
 Virtualization mailing list
