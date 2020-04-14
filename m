@@ -2,40 +2,40 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 184141A7C84
-	for <lists.virtualization@lfdr.de>; Tue, 14 Apr 2020 15:16:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F6401A7C5A
+	for <lists.virtualization@lfdr.de>; Tue, 14 Apr 2020 15:16:07 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B278187B7D;
-	Tue, 14 Apr 2020 13:16:42 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id DC83887BB1;
+	Tue, 14 Apr 2020 13:16:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id i7Xq92H-Ynbm; Tue, 14 Apr 2020 13:16:40 +0000 (UTC)
+	with ESMTP id JY7Hz1NWYOnA; Tue, 14 Apr 2020 13:16:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C723386DD6;
-	Tue, 14 Apr 2020 13:16:39 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 020D3879CC;
+	Tue, 14 Apr 2020 13:16:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9B39AC0172;
-	Tue, 14 Apr 2020 13:16:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D8EE4C1D7D;
+	Tue, 14 Apr 2020 13:16:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 761ABC0172;
- Tue, 14 Apr 2020 13:16:37 +0000 (UTC)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A96A4C0172;
+ Tue, 14 Apr 2020 13:16:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 65FA385913;
- Tue, 14 Apr 2020 13:16:37 +0000 (UTC)
+ by hemlock.osuosl.org (Postfix) with ESMTP id A537287A12;
+ Tue, 14 Apr 2020 13:16:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7Z2gA4qwmR3Y; Tue, 14 Apr 2020 13:16:33 +0000 (UTC)
+ with ESMTP id sZHO58ktaat0; Tue, 14 Apr 2020 13:16:00 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 72D5A85CA8;
+ by hemlock.osuosl.org (Postfix) with ESMTPS id E3AEF87A00;
  Tue, 14 Apr 2020 13:15:59 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 480DB475; Tue, 14 Apr 2020 15:15:52 +0200 (CEST)
+ id 6FC18495; Tue, 14 Apr 2020 15:15:52 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
  Robin Murphy <robin.murphy@arm.com>,
@@ -50,9 +50,10 @@ To: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
  Thierry Reding <thierry.reding@gmail.com>,
  Jonathan Hunter <jonathanh@nvidia.com>,
  Jean-Philippe Brucker <jean-philippe@linaro.org>
-Subject: [PATCH v2 05/33] iommu/amd: Remove dma_mask check from check_device()
-Date: Tue, 14 Apr 2020 15:15:14 +0200
-Message-Id: <20200414131542.25608-6-joro@8bytes.org>
+Subject: [PATCH v2 06/33] iommu/amd: Return -ENODEV in add_device when device
+ is not handled by IOMMU
+Date: Tue, 14 Apr 2020 15:15:15 +0200
+Message-Id: <20200414131542.25608-7-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200414131542.25608-1-joro@8bytes.org>
 References: <20200414131542.25608-1-joro@8bytes.org>
@@ -80,27 +81,32 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-The check was only needed for the DMA-API implementation in the AMD
-IOMMU driver, which no longer exists.
+When check_device() fails on the device, it is not handled by the
+IOMMU and amd_iommu_add_device() needs to return -ENODEV.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- drivers/iommu/amd_iommu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/iommu/amd_iommu.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/iommu/amd_iommu.c b/drivers/iommu/amd_iommu.c
-index 73b4f84cf449..504f2db75eda 100644
+index 504f2db75eda..3e0d27f7622e 100644
 --- a/drivers/iommu/amd_iommu.c
 +++ b/drivers/iommu/amd_iommu.c
-@@ -326,7 +326,7 @@ static bool check_device(struct device *dev)
- {
- 	int devid;
+@@ -2157,9 +2157,12 @@ static int amd_iommu_add_device(struct device *dev)
+ 	struct amd_iommu *iommu;
+ 	int ret, devid;
  
--	if (!dev || !dev->dma_mask)
-+	if (!dev)
- 		return false;
+-	if (!check_device(dev) || get_dev_data(dev))
++	if (get_dev_data(dev))
+ 		return 0;
  
++	if (!check_device(dev))
++		return -ENODEV;
++
  	devid = get_device_id(dev);
+ 	if (devid < 0)
+ 		return devid;
 -- 
 2.17.1
 
