@@ -2,85 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E5531A98F2
-	for <lists.virtualization@lfdr.de>; Wed, 15 Apr 2020 11:31:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4AC31A9AA0
+	for <lists.virtualization@lfdr.de>; Wed, 15 Apr 2020 12:34:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BA0C287E19;
-	Wed, 15 Apr 2020 09:31:30 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 202FA87A6E;
+	Wed, 15 Apr 2020 10:34:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UYswEhCCXTDD; Wed, 15 Apr 2020 09:31:29 +0000 (UTC)
+	with ESMTP id skjhflGQ+2qN; Wed, 15 Apr 2020 10:34:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D5FF387E9D;
-	Wed, 15 Apr 2020 09:31:29 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E510E87A00;
+	Wed, 15 Apr 2020 10:34:24 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B603CC0172;
-	Wed, 15 Apr 2020 09:31:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C633EC0172;
+	Wed, 15 Apr 2020 10:34:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B91B9C0172
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A5081C0172
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 09:31:28 +0000 (UTC)
+ Wed, 15 Apr 2020 10:34:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id A7940856F4
+ by whitealder.osuosl.org (Postfix) with ESMTP id 8D6E786DB2
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 09:31:28 +0000 (UTC)
+ Wed, 15 Apr 2020 10:34:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VZcMy16AvQ7s
+ with ESMTP id U-GfE2ipaK5V
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 09:31:27 +0000 (UTC)
+ Wed, 15 Apr 2020 10:34:21 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
- [209.85.167.194])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 8D0628496E
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id B628D86074
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 09:31:27 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id r25so3071470oij.4
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 02:31:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=a5/zHMMezwwrrYI3ZabrxQsaxXTxd7eR8vlxVma85zo=;
- b=iCpY7+thL/tBKGQTaIcpHN+P1saxKcP2lF/ahajQg6hijwZ4ZU67izo38FYdWbdRSu
- 6wDds+CydIhskhOYhi7z2a99C6xcnRcMgDE4DNRKQDgYwFmTqlnOZMg8jajJ7n+HRxWa
- rP2bFEEGgEmCg2Uj80Fkig7QhpoQ8Na6r8AJs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=a5/zHMMezwwrrYI3ZabrxQsaxXTxd7eR8vlxVma85zo=;
- b=WyQDfC6mSqS3+DnD7RT4MShrZqcwjq86D77R7gNoWzVvBTIAZYDAeRphPMfGe36sXw
- aQwBWr+jMTs8dPeExUdydOGcfOSqZWw/3uiEBqaqsKDUO2wo3c6d8TUnmuZGOsL3mLvf
- LQSTmMT6E0rzdU3DYFy+yYy/0FzXfi1R9Zrr64fpJ2gyq+DHQC1EzvI2d+s4QosfDTF7
- s94FXLRDN5Pn8MUPihpXrgYHYHprZ8VyRsHgE6fLnA8NVe6lfj09LKIoxUP/c+qsysVA
- DZ8qd4TkfpXyJB8PMUTaBv9DQZ+3UDr9wGEbjzECiT6TEPkeIe386Ex2kkADhdPP2gRx
- Slvg==
-X-Gm-Message-State: AGi0PubRqi5687B6hTYWLVDz5Tf+3s2DkucHNQfHc5m3yhm88qmhNfCj
- V4b/56ybBUz6phVOguN3bQIx/8bvNWU8ikSPKz3gPQ==
-X-Google-Smtp-Source: APiQypJ6B1wsukLGv31xqehfcW27hqQyRZX7b7JbedjzxjIcM9g50cPs6nPvYvjZArx2DnIUQaEi4wHxuO+TTOsZfnM=
-X-Received: by 2002:aca:b20a:: with SMTP id b10mr17158558oif.101.1586943086741; 
- Wed, 15 Apr 2020 02:31:26 -0700 (PDT)
+ Wed, 15 Apr 2020 10:34:21 +0000 (UTC)
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+ [83.86.89.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0B263206D9;
+ Wed, 15 Apr 2020 10:34:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1586946861;
+ bh=IHqqRCjhVBsUTEchewJ/pAejrwW+WhG7x9QAN25LdmE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=BhWVWiAeDOhuzU7dodyD0vEl/3+4NxYeUF+ORusBf+CHRqZhYHl26LYmEMIJg5JB6
+ STAK8u1dDScC0DYtX0Llr97ZkbDftkTdMBSsL7zzThK0L24WRl0KCcd6plNY7VnOxz
+ /fDZBUQCai7PYETmqCO1RD4hlIFzWWCqk4BuXoTA=
+Date: Wed, 15 Apr 2020 12:34:18 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: andrew@daynix.com
+Subject: Re: [PATCH v2] Fix: buffer overflow during hvc_alloc().
+Message-ID: <20200415103418.GA2645546@kroah.com>
+References: <20200414191503.3471783-1-andrew@daynix.com>
 MIME-Version: 1.0
-References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
- <20200415074034.175360-38-daniel.vetter@ffwll.ch>
- <fe4fdf57-b039-02d3-ae89-24953304c79d@suse.de>
- <CAKMK7uHKqmUDMwsZ9OufZE-ZHqUHscmgiZ_HvRyr9TbH3UcYFQ@mail.gmail.com>
- <1d8288b5-883c-fcda-0108-b1fecc5637e6@suse.de>
-In-Reply-To: <1d8288b5-883c-fcda-0108-b1fecc5637e6@suse.de>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Wed, 15 Apr 2020 11:31:15 +0200
-Message-ID: <CAKMK7uHF99NViaWiPX-hY0SsmbknXtO5OHfCuMN1mdHLYVuYcQ@mail.gmail.com>
-Subject: Re: [PATCH 37/59] drm/cirrus: Move to drm/tiny
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- DRI Development <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
- NET..." <virtualization@lists.linux-foundation.org>,
- Dave Airlie <airlied@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
+Content-Disposition: inline
+In-Reply-To: <20200414191503.3471783-1-andrew@daynix.com>
+Cc: jslaby@suse.com, linuxppc-dev@lists.ozlabs.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,160 +73,94 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gV2VkLCBBcHIgMTUsIDIwMjAgYXQgMTA6NDYgQU0gVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1t
-ZXJtYW5uQHN1c2UuZGU+IHdyb3RlOgo+Cj4KPgo+IEFtIDE1LjA0LjIwIHVtIDEwOjE5IHNjaHJp
-ZWIgRGFuaWVsIFZldHRlcjoKPiA+IE9uIFdlZCwgQXByIDE1LCAyMDIwIGF0IDEwOjAxIEFNIFRo
-b21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPiB3cm90ZToKPiA+Pgo+ID4+Cj4g
-Pj4KPiA+PiBBbSAxNS4wNC4yMCB1bSAwOTo0MCBzY2hyaWViIERhbmllbCBWZXR0ZXI6Cj4gPj4+
-IEJlY2F1c2UgaXQgaXMuIEh1Z2UgY29uZ3JhdHMgdG8gZXZlcnlvbmUgd2hvIG1hZGUgdGhpcyBr
-aW5kIG9mCj4gPj4+IHJlZmFjdG9yaW5nIGhhcHBlbiEKPiA+Pgo+ID4+IEV2ZXJ5IG90aGVyIHdl
-ZWssIEkgZmVsdCBhbiB1cmdlIHRvIHNlbmQgb3V0IHRoaXMgcGF0Y2guIFRoYW5rIHlvdSBzbwo+
-ID4+IG11Y2gsIERhbmllbCEgVGhlcmUgYXJlIG1vcmUgY2FuZGlkYXRlcyBmb3IgdGlueS8uIFRo
-ZXkgYXJlIGFsbCA8MjBrCj4gPj4gTE9DcyBhbmQgYWxsIHdlJ2QgaGF2ZSB0byBkbyBpcyB0byBt
-b3ZlIHRoZWlyIGNvZGUgaW50byBhIHNpbmdsZSBmaWxlLgo+Cj4gSSBtZWFudCA8MjBrIGZpbGUg
-c2l6ZSwgbm90IExPQ3MuCj4KPiA+PiBib2NocyBvciBhcmMgY29tZSBpbnRvIG15IG1pbmQuCj4g
-Pgo+ID4gYXJjIEkgaGF2ZSAobGF0ZXIgaW4gdGhlIHNlcmllcyksIGJvY2hzIEkgZmVlbCBsaWtl
-IGlzIG1heWJlIGEgYml0IHRvbwo+ID4gYmlnLiBJJ2QgcHV0IHRoZSBsaW1pdCBmb3IgdGlueSB3
-ZWxsIGJlbG93IDFrbG9jIGluY2x1ZGluZyB3aGl0ZXNwYWNlCj4gPiBhbmQgYWxsIHRoYXQuIGJv
-Y2hzIG1pZ2h0IGJlIGEgY2FuZGlkYXRlIG9uY2Ugd2UndmUgaGVscGVyaXplZCBhIGZldwo+ID4g
-bW9yZSB0aGluZ3MgcGVyaGFwcy4KPgo+IFRydWUuIFRoZSBsYXJnZXN0IHRpbnkgZHJpdmVyIGlz
-IHJlcGFwZXIgd2l0aCB+MS4xayBMT0NTLiBSZWFkaW5nIHRoaXMKPiBjb2RlLCBpdCBzZWVtcyBs
-aWtlIGl0IGhhcyByZWFjaGVkIGFuIHVwcGVyIGJvdW5kIG9mIHdoYXQgaXMgZmVhc2libGUuCgpZ
-ZWFoLCBhbmQgSSB0aGluayB0aGUgdHJvdWJsZSB0aGVyZSBpcyB0aGF0IGl0IGNvbnRhaW5zIGFu
-CmVwYXBlci1zcGVjaWZpYyBwYW5lbCBhYnN0cmFjdGlvbi4gSSB0aGluayB0aGF0J3MgcHVzaGlu
-ZyBpdCBvdmVyIHRoZQplZGdlLiBJIHRoaW5rIHdlJ3ZlIHRhbGtlZCBhYm91dCBzdWJjbGFzc2lu
-ZyBkcm1fcGFuZWwgd2l0aApidXMvZGV2aWNlLXNwZWNpZmljIHN0dWZmLCB0aGF0IG1pZ2h0IGJl
-IGFuIG9wdGlvbiBpZiB0aGlzIGdldHMgb3V0IG9mCmhhbmQuCgpBbHNvIEkgdGhpbmsgd2Ugc2hv
-dWxkIGJlIG11Y2ggc3RyaWN0ZXIgd2l0aCBwdXR0aW5nIGRyaXZlcnMgaW50bwp0aW55LyB0aGFu
-IG1vdmluZyB0aGVtIG91dC4gSnVzdCBzbyB3ZSBhdm9pZCBlbmRsZXNzIHBpbmctcG9uZywgZS5n
-Lgpmb3IgZHJpdmVycyB0aGF0IEkgY2FuJ3QgbWFrZSByZWFsbHkgdGlueSBJIHdvbnQgYm90aGVy
-IHdpdGggbW92aW5nCnRoZW0gdG8gdGlueS8KLURhbmllbAoKPgo+IEJlc3QgcmVnYXJkcwo+IFRo
-b21hcwo+Cj4gPgo+ID4gYnR3IEkgZHJtbV8gdmVyc2lvbiBvZiB2cmFtIGhlbHBlcnMgd291bGQg
-aGVscCBhIGJ1bmNoIG9mIHRoZXNlIGRyaXZlcnMgSSB0aGluay4KPiA+IC1EYW5pZWwKPiA+Cj4g
-Pj4KPiA+Pj4KPiA+Pj4gU2lnbmVkLW9mZi1ieTogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRl
-ckBpbnRlbC5jb20+Cj4gPj4+IENjOiBEYXZlIEFpcmxpZSA8YWlybGllZEByZWRoYXQuY29tPgo+
-ID4+PiBDYzogR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+Cj4gPj4+IENjOiB2aXJ0
-dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwo+ID4+Cj4gPj4gUmV2aWV3ZWQt
-Ynk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPgo+ID4+Cj4gPj4+IC0t
-LQo+ID4+PiAgTUFJTlRBSU5FUlMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMiAr
-LQo+ID4+PiAgZHJpdmVycy9ncHUvZHJtL0tjb25maWcgICAgICAgICAgICAgICAgICAgfCAgMiAt
-LQo+ID4+PiAgZHJpdmVycy9ncHUvZHJtL01ha2VmaWxlICAgICAgICAgICAgICAgICAgfCAgMSAt
-Cj4gPj4+ICBkcml2ZXJzL2dwdS9kcm0vY2lycnVzL0tjb25maWcgICAgICAgICAgICB8IDE5IC0t
-LS0tLS0tLS0tLS0tLS0tLS0KPiA+Pj4gIGRyaXZlcnMvZ3B1L2RybS9jaXJydXMvTWFrZWZpbGUg
-ICAgICAgICAgIHwgIDIgLS0KPiA+Pj4gIGRyaXZlcnMvZ3B1L2RybS90aW55L0tjb25maWcgICAg
-ICAgICAgICAgIHwgMTkgKysrKysrKysrKysrKysrKysrKwo+ID4+PiAgZHJpdmVycy9ncHUvZHJt
-L3RpbnkvTWFrZWZpbGUgICAgICAgICAgICAgfCAgMSArCj4gPj4+ICBkcml2ZXJzL2dwdS9kcm0v
-e2NpcnJ1cyA9PiB0aW55fS9jaXJydXMuYyB8ICAwCj4gPj4+ICA4IGZpbGVzIGNoYW5nZWQsIDIx
-IGluc2VydGlvbnMoKyksIDI1IGRlbGV0aW9ucygtKQo+ID4+PiAgZGVsZXRlIG1vZGUgMTAwNjQ0
-IGRyaXZlcnMvZ3B1L2RybS9jaXJydXMvS2NvbmZpZwo+ID4+PiAgZGVsZXRlIG1vZGUgMTAwNjQ0
-IGRyaXZlcnMvZ3B1L2RybS9jaXJydXMvTWFrZWZpbGUKPiA+Pj4gIHJlbmFtZSBkcml2ZXJzL2dw
-dS9kcm0ve2NpcnJ1cyA9PiB0aW55fS9jaXJydXMuYyAoMTAwJSkKPiA+Pj4KPiA+Pj4gZGlmZiAt
-LWdpdCBhL01BSU5UQUlORVJTIGIvTUFJTlRBSU5FUlMKPiA+Pj4gaW5kZXggN2IzMjU1ZDk2ZDFk
-Li4wYTVjZjEwNWVlMzcgMTAwNjQ0Cj4gPj4+IC0tLSBhL01BSU5UQUlORVJTCj4gPj4+ICsrKyBi
-L01BSU5UQUlORVJTCj4gPj4+IEBAIC01Mzk3LDcgKzUzOTcsNyBAQCBMOiAgICAgIHZpcnR1YWxp
-emF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCj4gPj4+ICBTOiAgIE9ic29sZXRlCj4g
-Pj4+ICBXOiAgIGh0dHBzOi8vd3d3LmtyYXhlbC5vcmcvYmxvZy8yMDE0LzEwL3FlbXUtdXNpbmct
-Y2lycnVzLWNvbnNpZGVyZWQtaGFybWZ1bC8KPiA+Pj4gIFQ6ICAgZ2l0IGdpdDovL2Fub25naXQu
-ZnJlZWRlc2t0b3Aub3JnL2RybS9kcm0tbWlzYwo+ID4+PiAtRjogICBkcml2ZXJzL2dwdS9kcm0v
-Y2lycnVzLwo+ID4+PiArRjogICBkcml2ZXJzL2dwdS9kcm0vdGlueS9jaXJydXMuYwo+ID4+Pgo+
-ID4+PiAgRFJNIERSSVZFUiBGT1IgUVhMIFZJUlRVQUwgR1BVCj4gPj4+ICBNOiAgIERhdmUgQWly
-bGllIDxhaXJsaWVkQHJlZGhhdC5jb20+Cj4gPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9k
-cm0vS2NvbmZpZyBiL2RyaXZlcnMvZ3B1L2RybS9LY29uZmlnCj4gPj4+IGluZGV4IDQzNTk0OTc4
-OTU4ZS4uNGY0ZTdmYTAwMWMxIDEwMDY0NAo+ID4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vS2Nv
-bmZpZwo+ID4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vS2NvbmZpZwo+ID4+PiBAQCAtMzEwLDgg
-KzMxMCw2IEBAIHNvdXJjZSAiZHJpdmVycy9ncHUvZHJtL2FzdC9LY29uZmlnIgo+ID4+Pgo+ID4+
-PiAgc291cmNlICJkcml2ZXJzL2dwdS9kcm0vbWdhZzIwMC9LY29uZmlnIgo+ID4+Pgo+ID4+PiAt
-c291cmNlICJkcml2ZXJzL2dwdS9kcm0vY2lycnVzL0tjb25maWciCj4gPj4+IC0KPiA+Pj4gIHNv
-dXJjZSAiZHJpdmVycy9ncHUvZHJtL2FybWFkYS9LY29uZmlnIgo+ID4+Pgo+ID4+PiAgc291cmNl
-ICJkcml2ZXJzL2dwdS9kcm0vYXRtZWwtaGxjZGMvS2NvbmZpZyIKPiA+Pj4gZGlmZiAtLWdpdCBh
-L2RyaXZlcnMvZ3B1L2RybS9NYWtlZmlsZSBiL2RyaXZlcnMvZ3B1L2RybS9NYWtlZmlsZQo+ID4+
-PiBpbmRleCBmMzRkMDhjODM0ODUuLjJjMGU1YTdlNTk1MyAxMDA2NDQKPiA+Pj4gLS0tIGEvZHJp
-dmVycy9ncHUvZHJtL01ha2VmaWxlCj4gPj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9NYWtlZmls
-ZQo+ID4+PiBAQCAtNzQsNyArNzQsNiBAQCBvYmotJChDT05GSUdfRFJNX0k5MTUpICAgICAgKz0g
-aTkxNS8KPiA+Pj4gIG9iai0kKENPTkZJR19EUk1fTUdBRzIwMCkgKz0gbWdhZzIwMC8KPiA+Pj4g
-IG9iai0kKENPTkZJR19EUk1fVjNEKSAgKz0gdjNkLwo+ID4+PiAgb2JqLSQoQ09ORklHX0RSTV9W
-QzQpICArPSB2YzQvCj4gPj4+IC1vYmotJChDT05GSUdfRFJNX0NJUlJVU19RRU1VKSArPSBjaXJy
-dXMvCj4gPj4+ICBvYmotJChDT05GSUdfRFJNX1NJUykgICArPSBzaXMvCj4gPj4+ICBvYmotJChD
-T05GSUdfRFJNX1NBVkFHRSkrPSBzYXZhZ2UvCj4gPj4+ICBvYmotJChDT05GSUdfRFJNX1ZNV0dG
-WCkrPSB2bXdnZngvCj4gPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vY2lycnVzL0tj
-b25maWcgYi9kcml2ZXJzL2dwdS9kcm0vY2lycnVzL0tjb25maWcKPiA+Pj4gZGVsZXRlZCBmaWxl
-IG1vZGUgMTAwNjQ0Cj4gPj4+IGluZGV4IGM2YmJkOTg4YjBlNS4uMDAwMDAwMDAwMDAwCj4gPj4+
-IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9jaXJydXMvS2NvbmZpZwo+ID4+PiArKysgL2Rldi9udWxs
-Cj4gPj4+IEBAIC0xLDE5ICswLDAgQEAKPiA+Pj4gLSMgU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6
-IEdQTC0yLjAtb25seQo+ID4+PiAtY29uZmlnIERSTV9DSVJSVVNfUUVNVQo+ID4+PiAtICAgICB0
-cmlzdGF0ZSAiQ2lycnVzIGRyaXZlciBmb3IgUUVNVSBlbXVsYXRlZCBkZXZpY2UiCj4gPj4+IC0g
-ICAgIGRlcGVuZHMgb24gRFJNICYmIFBDSSAmJiBNTVUKPiA+Pj4gLSAgICAgc2VsZWN0IERSTV9L
-TVNfSEVMUEVSCj4gPj4+IC0gICAgIHNlbGVjdCBEUk1fR0VNX1NITUVNX0hFTFBFUgo+ID4+PiAt
-ICAgICBoZWxwCj4gPj4+IC0gICAgICBUaGlzIGlzIGEgS01TIGRyaXZlciBmb3IgZW11bGF0ZWQg
-Y2lycnVzIGRldmljZSBpbiBxZW11Lgo+ID4+PiAtICAgICAgSXQgaXMgKk5PVCogaW50ZW5kZWQg
-Zm9yIHJlYWwgY2lycnVzIGRldmljZXMuIFRoaXMgcmVxdWlyZXMKPiA+Pj4gLSAgICAgIHRoZSBt
-b2Rlc2V0dGluZyB1c2Vyc3BhY2UgWC5vcmcgZHJpdmVyLgo+ID4+PiAtCj4gPj4+IC0gICAgICBD
-aXJydXMgaXMgb2Jzb2xldGUsIHRoZSBoYXJkd2FyZSB3YXMgZGVzaWduZWQgaW4gdGhlIDkwaWVz
-Cj4gPj4+IC0gICAgICBhbmQgY2FuJ3Qga2VlcCB1cCB3aXRoIHRvZGF5cyBuZWVkcy4gIE1vcmUg
-YmFja2dyb3VuZDoKPiA+Pj4gLSAgICAgIGh0dHBzOi8vd3d3LmtyYXhlbC5vcmcvYmxvZy8yMDE0
-LzEwL3FlbXUtdXNpbmctY2lycnVzLWNvbnNpZGVyZWQtaGFybWZ1bC8KPiA+Pj4gLQo+ID4+PiAt
-ICAgICAgQmV0dGVyIGFsdGVybmF0aXZlcyBhcmU6Cj4gPj4+IC0gICAgICAgIC0gc3RkdmdhIChE
-Uk1fQk9DSFMsIHFlbXUgLXZnYSBzdGQsIGRlZmF1bHQgaW4gcWVtdSAyLjIrKQo+ID4+PiAtICAg
-ICAgICAtIHF4bCAoRFJNX1FYTCwgcWVtdSAtdmdhIHF4bCwgd29ya3MgYmVzdCB3aXRoIHNwaWNl
-KQo+ID4+PiAtICAgICAgICAtIHZpcnRpbyAoRFJNX1ZJUlRJT19HUFUpLCBxZW11IC12Z2Egdmly
-dGlvKQo+ID4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2NpcnJ1cy9NYWtlZmlsZSBi
-L2RyaXZlcnMvZ3B1L2RybS9jaXJydXMvTWFrZWZpbGUKPiA+Pj4gZGVsZXRlZCBmaWxlIG1vZGUg
-MTAwNjQ0Cj4gPj4+IGluZGV4IDBjMWVkM2Y5OTcyNS4uMDAwMDAwMDAwMDAwCj4gPj4+IC0tLSBh
-L2RyaXZlcnMvZ3B1L2RybS9jaXJydXMvTWFrZWZpbGUKPiA+Pj4gKysrIC9kZXYvbnVsbAo+ID4+
-PiBAQCAtMSwyICswLDAgQEAKPiA+Pj4gLSMgU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0y
-LjAtb25seQo+ID4+PiAtb2JqLSQoQ09ORklHX0RSTV9DSVJSVVNfUUVNVSkgKz0gY2lycnVzLm8K
-PiA+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS90aW55L0tjb25maWcgYi9kcml2ZXJz
-L2dwdS9kcm0vdGlueS9LY29uZmlnCj4gPj4+IGluZGV4IDQxNjBlNzRlNDc1MS4uMmI2NDE0ZjBm
-YTc1IDEwMDY0NAo+ID4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vdGlueS9LY29uZmlnCj4gPj4+
-ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS90aW55L0tjb25maWcKPiA+Pj4gQEAgLTEsNSArMSwyNCBA
-QAo+ID4+PiAgIyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMC1vbmx5Cj4gPj4+Cj4g
-Pj4+ICtjb25maWcgRFJNX0NJUlJVU19RRU1VCj4gPj4+ICsgICAgIHRyaXN0YXRlICJDaXJydXMg
-ZHJpdmVyIGZvciBRRU1VIGVtdWxhdGVkIGRldmljZSIKPiA+Pj4gKyAgICAgZGVwZW5kcyBvbiBE
-Uk0gJiYgUENJICYmIE1NVQo+ID4+PiArICAgICBzZWxlY3QgRFJNX0tNU19IRUxQRVIKPiA+Pj4g
-KyAgICAgc2VsZWN0IERSTV9HRU1fU0hNRU1fSEVMUEVSCj4gPj4+ICsgICAgIGhlbHAKPiA+Pj4g
-KyAgICAgIFRoaXMgaXMgYSBLTVMgZHJpdmVyIGZvciBlbXVsYXRlZCBjaXJydXMgZGV2aWNlIGlu
-IHFlbXUuCj4gPj4+ICsgICAgICBJdCBpcyAqTk9UKiBpbnRlbmRlZCBmb3IgcmVhbCBjaXJydXMg
-ZGV2aWNlcy4gVGhpcyByZXF1aXJlcwo+ID4+PiArICAgICAgdGhlIG1vZGVzZXR0aW5nIHVzZXJz
-cGFjZSBYLm9yZyBkcml2ZXIuCj4gPj4+ICsKPiA+Pj4gKyAgICAgIENpcnJ1cyBpcyBvYnNvbGV0
-ZSwgdGhlIGhhcmR3YXJlIHdhcyBkZXNpZ25lZCBpbiB0aGUgOTBpZXMKPiA+Pj4gKyAgICAgIGFu
-ZCBjYW4ndCBrZWVwIHVwIHdpdGggdG9kYXlzIG5lZWRzLiAgTW9yZSBiYWNrZ3JvdW5kOgo+ID4+
-PiArICAgICAgaHR0cHM6Ly93d3cua3JheGVsLm9yZy9ibG9nLzIwMTQvMTAvcWVtdS11c2luZy1j
-aXJydXMtY29uc2lkZXJlZC1oYXJtZnVsLwo+ID4+PiArCj4gPj4+ICsgICAgICBCZXR0ZXIgYWx0
-ZXJuYXRpdmVzIGFyZToKPiA+Pj4gKyAgICAgICAgLSBzdGR2Z2EgKERSTV9CT0NIUywgcWVtdSAt
-dmdhIHN0ZCwgZGVmYXVsdCBpbiBxZW11IDIuMispCj4gPj4+ICsgICAgICAgIC0gcXhsIChEUk1f
-UVhMLCBxZW11IC12Z2EgcXhsLCB3b3JrcyBiZXN0IHdpdGggc3BpY2UpCj4gPj4+ICsgICAgICAg
-IC0gdmlydGlvIChEUk1fVklSVElPX0dQVSksIHFlbXUgLXZnYSB2aXJ0aW8pCj4gPj4+ICsKPiA+
-Pj4gIGNvbmZpZyBEUk1fR00xMlUzMjAKPiA+Pj4gICAgICAgdHJpc3RhdGUgIkdNMTJVMzIwIGRy
-aXZlciBmb3IgVVNCIHByb2plY3RvcnMiCj4gPj4+ICAgICAgIGRlcGVuZHMgb24gRFJNICYmIFVT
-Qgo+ID4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3RpbnkvTWFrZWZpbGUgYi9kcml2
-ZXJzL2dwdS9kcm0vdGlueS9NYWtlZmlsZQo+ID4+PiBpbmRleCBjOTZjZWVlNzE0NTMuLjZhZTRl
-OWU1YTM1ZiAxMDA2NDQKPiA+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3RpbnkvTWFrZWZpbGUK
-PiA+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3RpbnkvTWFrZWZpbGUKPiA+Pj4gQEAgLTEsNSAr
-MSw2IEBACj4gPj4+ICAjIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wLW9ubHkKPiA+
-Pj4KPiA+Pj4gK29iai0kKENPTkZJR19EUk1fQ0lSUlVTX1FFTVUpICAgICAgICAgICAgICAgICs9
-IGNpcnJ1cy5vCj4gPj4+ICBvYmotJChDT05GSUdfRFJNX0dNMTJVMzIwKSAgICAgICAgICAgKz0g
-Z20xMnUzMjAubwo+ID4+PiAgb2JqLSQoQ09ORklHX1RJTllEUk1fSFg4MzU3RCkgICAgICAgICAg
-ICAgICAgKz0gaHg4MzU3ZC5vCj4gPj4+ICBvYmotJChDT05GSUdfVElOWURSTV9JTEk5MjI1KSAg
-ICAgICAgICAgICAgICArPSBpbGk5MjI1Lm8KPiA+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1
-L2RybS9jaXJydXMvY2lycnVzLmMgYi9kcml2ZXJzL2dwdS9kcm0vdGlueS9jaXJydXMuYwo+ID4+
-PiBzaW1pbGFyaXR5IGluZGV4IDEwMCUKPiA+Pj4gcmVuYW1lIGZyb20gZHJpdmVycy9ncHUvZHJt
-L2NpcnJ1cy9jaXJydXMuYwo+ID4+PiByZW5hbWUgdG8gZHJpdmVycy9ncHUvZHJtL3RpbnkvY2ly
-cnVzLmMKPiA+Pj4KPiA+Pgo+ID4+IC0tCj4gPj4gVGhvbWFzIFppbW1lcm1hbm4KPiA+PiBHcmFw
-aGljcyBEcml2ZXIgRGV2ZWxvcGVyCj4gPj4gU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFu
-eSBHbWJICj4gPj4gTWF4ZmVsZHN0ci4gNSwgOTA0MDkgTsO8cm5iZXJnLCBHZXJtYW55Cj4gPj4g
-KEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJnKQo+ID4+IEdlc2Now6RmdHNmw7xocmVyOiBGZWxpeCBJ
-bWVuZMO2cmZmZXIKPiA+Pgo+ID4KPiA+Cj4KPiAtLQo+IFRob21hcyBaaW1tZXJtYW5uCj4gR3Jh
-cGhpY3MgRHJpdmVyIERldmVsb3Blcgo+IFNVU0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkg
-R21iSAo+IE1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQo+IChIUkIgMzY4
-MDksIEFHIE7DvHJuYmVyZykKPiBHZXNjaMOkZnRzZsO8aHJlcjogRmVsaXggSW1lbmTDtnJmZmVy
-Cj4KCgotLSAKRGFuaWVsIFZldHRlcgpTb2Z0d2FyZSBFbmdpbmVlciwgSW50ZWwgQ29ycG9yYXRp
-b24KKzQxICgwKSA3OSAzNjUgNTcgNDggLSBodHRwOi8vYmxvZy5mZndsbC5jaApfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWls
-aW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6
-Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRp
-b24=
+On Tue, Apr 14, 2020 at 10:15:03PM +0300, andrew@daynix.com wrote:
+> From: Andrew Melnychenko <andrew@daynix.com>
+> 
+> If there is a lot(more then 16) of virtio-console devices
+> or virtio_console module is reloaded
+> - buffers 'vtermnos' and 'cons_ops' are overflowed.
+> In older kernels it overruns spinlock which leads to kernel freezing:
+> https://bugzilla.redhat.com/show_bug.cgi?id=1786239
+> 
+> To reproduce the issue, you can try simple script that
+> loads/unloads module. Something like this:
+> while [ 1 ]
+> do
+>   modprobe virtio_console
+>   sleep 2
+>   modprobe -r virtio_console
+>   sleep 2
+> done
+> 
+> Description of problem:
+> Guest get 'Call Trace' when loading module "virtio_console"
+> and unloading it frequently - clearly reproduced on kernel-4.18.0:
+> 
+> [   81.498208] ------------[ cut here ]------------
+> [   81.499263] pvqspinlock: lock 0xffffffff92080020 has corrupted value 0xc0774ca0!
+> [   81.501000] WARNING: CPU: 0 PID: 785 at kernel/locking/qspinlock_paravirt.h:500 __pv_queued_spin_unlock_slowpath+0xc0/0xd0
+> [   81.503173] Modules linked in: virtio_console fuse xt_CHECKSUM ipt_MASQUERADE xt_conntrack ipt_REJECT nft_counter nf_nat_tftp nft_objref nf_conntrack_tftp tun bridge stp llc nft_fib_inet nft_fib_ipv4 nft_fib_ipv6 nft_fib nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_ct nf_tables_set nft_chain_nat_ipv6 nf_conntrack_ipv6 nf_defrag_ipv6 nf_nat_ipv6 nft_chain_route_ipv6 nft_chain_nat_ipv4 nf_conntrack_ipv4 nf_defrag_ipv4 nf_nat_ipv4 nf_nat nf_conntrack nft_chain_route_ipv4 ip6_tables nft_compat ip_set nf_tables nfnetlink sunrpc bochs_drm drm_vram_helper ttm drm_kms_helper syscopyarea sysfillrect sysimgblt fb_sys_fops drm i2c_piix4 pcspkr crct10dif_pclmul crc32_pclmul joydev ghash_clmulni_intel ip_tables xfs libcrc32c sd_mod sg ata_generic ata_piix virtio_net libata crc32c_intel net_failover failover serio_raw virtio_scsi dm_mirror dm_region_hash dm_log dm_mod [last unloaded: virtio_console]
+> [   81.517019] CPU: 0 PID: 785 Comm: kworker/0:2 Kdump: loaded Not tainted 4.18.0-167.el8.x86_64 #1
+> [   81.518639] Hardware name: Red Hat KVM, BIOS 1.12.0-5.scrmod+el8.2.0+5159+d8aa4d83 04/01/2014
+> [   81.520205] Workqueue: events control_work_handler [virtio_console]
+> [   81.521354] RIP: 0010:__pv_queued_spin_unlock_slowpath+0xc0/0xd0
+> [   81.522450] Code: 07 00 48 63 7a 10 e8 bf 64 f5 ff 66 90 c3 8b 05 e6 cf d6 01 85 c0 74 01 c3 8b 17 48 89 fe 48 c7 c7 38 4b 29 91 e8 3a 6c fa ff <0f> 0b c3 0f 0b 90 90 90 90 90 90 90 90 90 90 90 0f 1f 44 00 00 48
+> [   81.525830] RSP: 0018:ffffb51a01ffbd70 EFLAGS: 00010282
+> [   81.526798] RAX: 0000000000000000 RBX: 0000000000000010 RCX: 0000000000000000
+> [   81.528110] RDX: ffff9e66f1826480 RSI: ffff9e66f1816a08 RDI: ffff9e66f1816a08
+> [   81.529437] RBP: ffffffff9153ff10 R08: 000000000000026c R09: 0000000000000053
+> [   81.530732] R10: 0000000000000000 R11: ffffb51a01ffbc18 R12: ffff9e66cd682200
+> [   81.532133] R13: ffffffff9153ff10 R14: ffff9e6685569500 R15: ffff9e66cd682000
+> [   81.533442] FS:  0000000000000000(0000) GS:ffff9e66f1800000(0000) knlGS:0000000000000000
+> [   81.534914] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [   81.535971] CR2: 00005624c55b14d0 CR3: 00000003a023c000 CR4: 00000000003406f0
+> [   81.537283] Call Trace:
+> [   81.537763]  __raw_callee_save___pv_queued_spin_unlock_slowpath+0x11/0x20
+> [   81.539011]  .slowpath+0x9/0xe
+> [   81.539585]  hvc_alloc+0x25e/0x300
+> [   81.540237]  init_port_console+0x28/0x100 [virtio_console]
+> [   81.541251]  handle_control_message.constprop.27+0x1c4/0x310 [virtio_console]
+> [   81.542546]  control_work_handler+0x70/0x10c [virtio_console]
+> [   81.543601]  process_one_work+0x1a7/0x3b0
+> [   81.544356]  worker_thread+0x30/0x390
+> [   81.545025]  ? create_worker+0x1a0/0x1a0
+> [   81.545749]  kthread+0x112/0x130
+> [   81.546358]  ? kthread_flush_work_fn+0x10/0x10
+> [   81.547183]  ret_from_fork+0x22/0x40
+> [   81.547842] ---[ end trace aa97649bd16c8655 ]---
+> [   83.546539] general protection fault: 0000 [#1] SMP NOPTI
+> [   83.547422] CPU: 5 PID: 3225 Comm: modprobe Kdump: loaded Tainted: G        W        --------- -  - 4.18.0-167.el8.x86_64 #1
+> [   83.549191] Hardware name: Red Hat KVM, BIOS 1.12.0-5.scrmod+el8.2.0+5159+d8aa4d83 04/01/2014
+> [   83.550544] RIP: 0010:__pv_queued_spin_lock_slowpath+0x19a/0x2a0
+> [   83.551504] Code: c4 c1 ea 12 41 be 01 00 00 00 4c 8d 6d 14 41 83 e4 03 8d 42 ff 49 c1 e4 05 48 98 49 81 c4 40 a5 02 00 4c 03 24 c5 60 48 34 91 <49> 89 2c 24 b8 00 80 00 00 eb 15 84 c0 75 0a 41 0f b6 54 24 14 84
+> [   83.554449] RSP: 0018:ffffb51a0323fdb0 EFLAGS: 00010202
+> [   83.555290] RAX: 000000000000301c RBX: ffffffff92080020 RCX: 0000000000000001
+> [   83.556426] RDX: 000000000000301d RSI: 0000000000000000 RDI: 0000000000000000
+> [   83.557556] RBP: ffff9e66f196a540 R08: 000000000000028a R09: ffff9e66d2757788
+> [   83.558688] R10: 0000000000000000 R11: 0000000000000000 R12: 646e61725f770b07
+> [   83.559821] R13: ffff9e66f196a554 R14: 0000000000000001 R15: 0000000000180000
+> [   83.560958] FS:  00007fd5032e8740(0000) GS:ffff9e66f1940000(0000) knlGS:0000000000000000
+> [   83.562233] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [   83.563149] CR2: 00007fd5022b0da0 CR3: 000000038c334000 CR4: 00000000003406e0
+> 
+> Signed-off-by: Andrew Melnychenko <andrew@daynix.com>
+> ---
+>  drivers/tty/hvc/hvc_console.c | 23 ++++++++++++++---------
+>  1 file changed, 14 insertions(+), 9 deletions(-)
+
+What changed from v1?  Always  put this below the --- line.
+
+v3 please?
+
+thanks,
+
+greg k-h
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
