@@ -1,80 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD4C61A961D
-	for <lists.virtualization@lfdr.de>; Wed, 15 Apr 2020 10:20:15 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F17D1A973F
+	for <lists.virtualization@lfdr.de>; Wed, 15 Apr 2020 10:46:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 452C5204FF;
-	Wed, 15 Apr 2020 08:20:14 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6B9FE87D86;
+	Wed, 15 Apr 2020 08:46:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LKVjn78XcRgF; Wed, 15 Apr 2020 08:20:13 +0000 (UTC)
+	with ESMTP id rTI8Dx-mdxyA; Wed, 15 Apr 2020 08:46:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id EECC7204C9;
-	Wed, 15 Apr 2020 08:20:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 4B99B87C3F;
+	Wed, 15 Apr 2020 08:46:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D2C21C0172;
-	Wed, 15 Apr 2020 08:20:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2D842C0172;
+	Wed, 15 Apr 2020 08:46:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 845A9C0172
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 492B2C0172
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 08:20:11 +0000 (UTC)
+ Wed, 15 Apr 2020 08:46:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 802E485F87
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3816186E26
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 08:20:11 +0000 (UTC)
+ Wed, 15 Apr 2020 08:46:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bBEu0az_zZJS
+ with ESMTP id 8ugvoVAOuRIV
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 08:20:10 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
- [209.85.210.66])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 92D7085F83
+ Wed, 15 Apr 2020 08:46:29 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id D973C863F1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 08:20:10 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id j26so2361467ots.0
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 01:20:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=5CCkNU6Pcefqd+l6vSYZZ3ZKsI1tOHhmJvmbrhMExIc=;
- b=SggSQ5mcTmkuxU+vtyxUHVsifvD+5cvMkMBrCrjFYK44SzU3XtfV9gvWiNqswldzDA
- HdnVC1DQi3l0iUYYaoszVzPL5CqB3/A9pr1nWaoWPFsKtOSgRGLykl72YZiPLZWB5we/
- pcQiAOWMUJKB8XUGdQux9dVNwwoYi+d50E0u4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=5CCkNU6Pcefqd+l6vSYZZ3ZKsI1tOHhmJvmbrhMExIc=;
- b=bljFWuA5GVfXwCuW40CoFN80ZPqsjxo4ljlNcaJl8OfptdQU5SPIVsXVla+BrhIthl
- oey1KGH/Wgo9leIhSx8JuLMyvX9kYeQGz5AM2MYPq2uDcll+LD8+YaXj2PgBNFvfZVyD
- ykTvfrERL6/DtKmKdGAtcrY56oB1Pnp2uxzvkutMBfJ0sFKeDIQYMhlF2Yylt916SrIO
- gY/qZAH325jmsrv+NzYKdr2Fd/YNhxRtGclhwxojtmeC2bl5ofaR+8/EJTn1ANFIZexb
- NpAv8v8vKekHa86QTPUIu1euoBKDRvdzTGcykmwTzfSD847Vy5djty/BhLYglX28ngs1
- lbXw==
-X-Gm-Message-State: AGi0Pua8KkxIx/eB6iAPaVEZkjifpjBlLrQ88KJO+NVfjJ95SCala6RM
- OrBrpVkfXN6F5+CzxZR8Y7BbU3hKUBwHKWwJiCQZJA==
-X-Google-Smtp-Source: APiQypJNiu2gGQ9414/SExaPnN7nNMuwzSOIQO+fN3xDVd034B1fgVFJYyKsAz2GEb1BCff6f7k3v1Zbx5suf+SCs2Q=
-X-Received: by 2002:a9d:2056:: with SMTP id n80mr22758705ota.281.1586938809712; 
- Wed, 15 Apr 2020 01:20:09 -0700 (PDT)
-MIME-Version: 1.0
+ Wed, 15 Apr 2020 08:46:28 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 27335AC12;
+ Wed, 15 Apr 2020 08:46:26 +0000 (UTC)
+Subject: Re: [PATCH 37/59] drm/cirrus: Move to drm/tiny
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
 References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
  <20200415074034.175360-38-daniel.vetter@ffwll.ch>
  <fe4fdf57-b039-02d3-ae89-24953304c79d@suse.de>
-In-Reply-To: <fe4fdf57-b039-02d3-ae89-24953304c79d@suse.de>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Wed, 15 Apr 2020 10:19:58 +0200
-Message-ID: <CAKMK7uHKqmUDMwsZ9OufZE-ZHqUHscmgiZ_HvRyr9TbH3UcYFQ@mail.gmail.com>
-Subject: Re: [PATCH 37/59] drm/cirrus: Move to drm/tiny
-To: Thomas Zimmermann <tzimmermann@suse.de>
+ <CAKMK7uHKqmUDMwsZ9OufZE-ZHqUHscmgiZ_HvRyr9TbH3UcYFQ@mail.gmail.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <1d8288b5-883c-fcda-0108-b1fecc5637e6@suse.de>
+Date: Wed, 15 Apr 2020 10:46:22 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
+MIME-Version: 1.0
+In-Reply-To: <CAKMK7uHKqmUDMwsZ9OufZE-ZHqUHscmgiZ_HvRyr9TbH3UcYFQ@mail.gmail.com>
 Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  DRI Development <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
  NET..." <virtualization@lists.linux-foundation.org>,
@@ -90,134 +95,275 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7874296622631461113=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gV2VkLCBBcHIgMTUsIDIwMjAgYXQgMTA6MDEgQU0gVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1t
-ZXJtYW5uQHN1c2UuZGU+IHdyb3RlOgo+Cj4KPgo+IEFtIDE1LjA0LjIwIHVtIDA5OjQwIHNjaHJp
-ZWIgRGFuaWVsIFZldHRlcjoKPiA+IEJlY2F1c2UgaXQgaXMuIEh1Z2UgY29uZ3JhdHMgdG8gZXZl
-cnlvbmUgd2hvIG1hZGUgdGhpcyBraW5kIG9mCj4gPiByZWZhY3RvcmluZyBoYXBwZW4hCj4KPiBF
-dmVyeSBvdGhlciB3ZWVrLCBJIGZlbHQgYW4gdXJnZSB0byBzZW5kIG91dCB0aGlzIHBhdGNoLiBU
-aGFuayB5b3Ugc28KPiBtdWNoLCBEYW5pZWwhIFRoZXJlIGFyZSBtb3JlIGNhbmRpZGF0ZXMgZm9y
-IHRpbnkvLiBUaGV5IGFyZSBhbGwgPDIwawo+IExPQ3MgYW5kIGFsbCB3ZSdkIGhhdmUgdG8gZG8g
-aXMgdG8gbW92ZSB0aGVpciBjb2RlIGludG8gYSBzaW5nbGUgZmlsZS4KPiBib2NocyBvciBhcmMg
-Y29tZSBpbnRvIG15IG1pbmQuCgphcmMgSSBoYXZlIChsYXRlciBpbiB0aGUgc2VyaWVzKSwgYm9j
-aHMgSSBmZWVsIGxpa2UgaXMgbWF5YmUgYSBiaXQgdG9vCmJpZy4gSSdkIHB1dCB0aGUgbGltaXQg
-Zm9yIHRpbnkgd2VsbCBiZWxvdyAxa2xvYyBpbmNsdWRpbmcgd2hpdGVzcGFjZQphbmQgYWxsIHRo
-YXQuIGJvY2hzIG1pZ2h0IGJlIGEgY2FuZGlkYXRlIG9uY2Ugd2UndmUgaGVscGVyaXplZCBhIGZl
-dwptb3JlIHRoaW5ncyBwZXJoYXBzLgoKYnR3IEkgZHJtbV8gdmVyc2lvbiBvZiB2cmFtIGhlbHBl
-cnMgd291bGQgaGVscCBhIGJ1bmNoIG9mIHRoZXNlIGRyaXZlcnMgSSB0aGluay4KLURhbmllbAoK
-Pgo+ID4KPiA+IFNpZ25lZC1vZmYtYnk6IERhbmllbCBWZXR0ZXIgPGRhbmllbC52ZXR0ZXJAaW50
-ZWwuY29tPgo+ID4gQ2M6IERhdmUgQWlybGllIDxhaXJsaWVkQHJlZGhhdC5jb20+Cj4gPiBDYzog
-R2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+Cj4gPiBDYzogdmlydHVhbGl6YXRpb25A
-bGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKPgo+IFJldmlld2VkLWJ5OiBUaG9tYXMgWmltbWVy
-bWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4KPgo+ID4gLS0tCj4gPiAgTUFJTlRBSU5FUlMgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMiArLQo+ID4gIGRyaXZlcnMvZ3B1L2RybS9L
-Y29uZmlnICAgICAgICAgICAgICAgICAgIHwgIDIgLS0KPiA+ICBkcml2ZXJzL2dwdS9kcm0vTWFr
-ZWZpbGUgICAgICAgICAgICAgICAgICB8ICAxIC0KPiA+ICBkcml2ZXJzL2dwdS9kcm0vY2lycnVz
-L0tjb25maWcgICAgICAgICAgICB8IDE5IC0tLS0tLS0tLS0tLS0tLS0tLS0KPiA+ICBkcml2ZXJz
-L2dwdS9kcm0vY2lycnVzL01ha2VmaWxlICAgICAgICAgICB8ICAyIC0tCj4gPiAgZHJpdmVycy9n
-cHUvZHJtL3RpbnkvS2NvbmZpZyAgICAgICAgICAgICAgfCAxOSArKysrKysrKysrKysrKysrKysr
-Cj4gPiAgZHJpdmVycy9ncHUvZHJtL3RpbnkvTWFrZWZpbGUgICAgICAgICAgICAgfCAgMSArCj4g
-PiAgZHJpdmVycy9ncHUvZHJtL3tjaXJydXMgPT4gdGlueX0vY2lycnVzLmMgfCAgMAo+ID4gIDgg
-ZmlsZXMgY2hhbmdlZCwgMjEgaW5zZXJ0aW9ucygrKSwgMjUgZGVsZXRpb25zKC0pCj4gPiAgZGVs
-ZXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9jaXJydXMvS2NvbmZpZwo+ID4gIGRlbGV0
-ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vY2lycnVzL01ha2VmaWxlCj4gPiAgcmVuYW1l
-IGRyaXZlcnMvZ3B1L2RybS97Y2lycnVzID0+IHRpbnl9L2NpcnJ1cy5jICgxMDAlKQo+ID4KPiA+
-IGRpZmYgLS1naXQgYS9NQUlOVEFJTkVSUyBiL01BSU5UQUlORVJTCj4gPiBpbmRleCA3YjMyNTVk
-OTZkMWQuLjBhNWNmMTA1ZWUzNyAxMDA2NDQKPiA+IC0tLSBhL01BSU5UQUlORVJTCj4gPiArKysg
-Yi9NQUlOVEFJTkVSUwo+ID4gQEAgLTUzOTcsNyArNTM5Nyw3IEBAIEw6ICAgICAgdmlydHVhbGl6
-YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKPiA+ICBTOiAgIE9ic29sZXRlCj4gPiAg
-VzogICBodHRwczovL3d3dy5rcmF4ZWwub3JnL2Jsb2cvMjAxNC8xMC9xZW11LXVzaW5nLWNpcnJ1
-cy1jb25zaWRlcmVkLWhhcm1mdWwvCj4gPiAgVDogICBnaXQgZ2l0Oi8vYW5vbmdpdC5mcmVlZGVz
-a3RvcC5vcmcvZHJtL2RybS1taXNjCj4gPiAtRjogICBkcml2ZXJzL2dwdS9kcm0vY2lycnVzLwo+
-ID4gK0Y6ICAgZHJpdmVycy9ncHUvZHJtL3RpbnkvY2lycnVzLmMKPiA+Cj4gPiAgRFJNIERSSVZF
-UiBGT1IgUVhMIFZJUlRVQUwgR1BVCj4gPiAgTTogICBEYXZlIEFpcmxpZSA8YWlybGllZEByZWRo
-YXQuY29tPgo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9LY29uZmlnIGIvZHJpdmVy
-cy9ncHUvZHJtL0tjb25maWcKPiA+IGluZGV4IDQzNTk0OTc4OTU4ZS4uNGY0ZTdmYTAwMWMxIDEw
-MDY0NAo+ID4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL0tjb25maWcKPiA+ICsrKyBiL2RyaXZlcnMv
-Z3B1L2RybS9LY29uZmlnCj4gPiBAQCAtMzEwLDggKzMxMCw2IEBAIHNvdXJjZSAiZHJpdmVycy9n
-cHUvZHJtL2FzdC9LY29uZmlnIgo+ID4KPiA+ICBzb3VyY2UgImRyaXZlcnMvZ3B1L2RybS9tZ2Fn
-MjAwL0tjb25maWciCj4gPgo+ID4gLXNvdXJjZSAiZHJpdmVycy9ncHUvZHJtL2NpcnJ1cy9LY29u
-ZmlnIgo+ID4gLQo+ID4gIHNvdXJjZSAiZHJpdmVycy9ncHUvZHJtL2FybWFkYS9LY29uZmlnIgo+
-ID4KPiA+ICBzb3VyY2UgImRyaXZlcnMvZ3B1L2RybS9hdG1lbC1obGNkYy9LY29uZmlnIgo+ID4g
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9NYWtlZmlsZSBiL2RyaXZlcnMvZ3B1L2RybS9N
-YWtlZmlsZQo+ID4gaW5kZXggZjM0ZDA4YzgzNDg1Li4yYzBlNWE3ZTU5NTMgMTAwNjQ0Cj4gPiAt
-LS0gYS9kcml2ZXJzL2dwdS9kcm0vTWFrZWZpbGUKPiA+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9N
-YWtlZmlsZQo+ID4gQEAgLTc0LDcgKzc0LDYgQEAgb2JqLSQoQ09ORklHX0RSTV9JOTE1KSAgICAg
-ICs9IGk5MTUvCj4gPiAgb2JqLSQoQ09ORklHX0RSTV9NR0FHMjAwKSArPSBtZ2FnMjAwLwo+ID4g
-IG9iai0kKENPTkZJR19EUk1fVjNEKSAgKz0gdjNkLwo+ID4gIG9iai0kKENPTkZJR19EUk1fVkM0
-KSAgKz0gdmM0Lwo+ID4gLW9iai0kKENPTkZJR19EUk1fQ0lSUlVTX1FFTVUpICs9IGNpcnJ1cy8K
-PiA+ICBvYmotJChDT05GSUdfRFJNX1NJUykgICArPSBzaXMvCj4gPiAgb2JqLSQoQ09ORklHX0RS
-TV9TQVZBR0UpKz0gc2F2YWdlLwo+ID4gIG9iai0kKENPTkZJR19EUk1fVk1XR0ZYKSs9IHZtd2dm
-eC8KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vY2lycnVzL0tjb25maWcgYi9kcml2
-ZXJzL2dwdS9kcm0vY2lycnVzL0tjb25maWcKPiA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAo+
-ID4gaW5kZXggYzZiYmQ5ODhiMGU1Li4wMDAwMDAwMDAwMDAKPiA+IC0tLSBhL2RyaXZlcnMvZ3B1
-L2RybS9jaXJydXMvS2NvbmZpZwo+ID4gKysrIC9kZXYvbnVsbAo+ID4gQEAgLTEsMTkgKzAsMCBA
-QAo+ID4gLSMgU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAtb25seQo+ID4gLWNvbmZp
-ZyBEUk1fQ0lSUlVTX1FFTVUKPiA+IC0gICAgIHRyaXN0YXRlICJDaXJydXMgZHJpdmVyIGZvciBR
-RU1VIGVtdWxhdGVkIGRldmljZSIKPiA+IC0gICAgIGRlcGVuZHMgb24gRFJNICYmIFBDSSAmJiBN
-TVUKPiA+IC0gICAgIHNlbGVjdCBEUk1fS01TX0hFTFBFUgo+ID4gLSAgICAgc2VsZWN0IERSTV9H
-RU1fU0hNRU1fSEVMUEVSCj4gPiAtICAgICBoZWxwCj4gPiAtICAgICAgVGhpcyBpcyBhIEtNUyBk
-cml2ZXIgZm9yIGVtdWxhdGVkIGNpcnJ1cyBkZXZpY2UgaW4gcWVtdS4KPiA+IC0gICAgICBJdCBp
-cyAqTk9UKiBpbnRlbmRlZCBmb3IgcmVhbCBjaXJydXMgZGV2aWNlcy4gVGhpcyByZXF1aXJlcwo+
-ID4gLSAgICAgIHRoZSBtb2Rlc2V0dGluZyB1c2Vyc3BhY2UgWC5vcmcgZHJpdmVyLgo+ID4gLQo+
-ID4gLSAgICAgIENpcnJ1cyBpcyBvYnNvbGV0ZSwgdGhlIGhhcmR3YXJlIHdhcyBkZXNpZ25lZCBp
-biB0aGUgOTBpZXMKPiA+IC0gICAgICBhbmQgY2FuJ3Qga2VlcCB1cCB3aXRoIHRvZGF5cyBuZWVk
-cy4gIE1vcmUgYmFja2dyb3VuZDoKPiA+IC0gICAgICBodHRwczovL3d3dy5rcmF4ZWwub3JnL2Js
-b2cvMjAxNC8xMC9xZW11LXVzaW5nLWNpcnJ1cy1jb25zaWRlcmVkLWhhcm1mdWwvCj4gPiAtCj4g
-PiAtICAgICAgQmV0dGVyIGFsdGVybmF0aXZlcyBhcmU6Cj4gPiAtICAgICAgICAtIHN0ZHZnYSAo
-RFJNX0JPQ0hTLCBxZW11IC12Z2Egc3RkLCBkZWZhdWx0IGluIHFlbXUgMi4yKykKPiA+IC0gICAg
-ICAgIC0gcXhsIChEUk1fUVhMLCBxZW11IC12Z2EgcXhsLCB3b3JrcyBiZXN0IHdpdGggc3BpY2Up
-Cj4gPiAtICAgICAgICAtIHZpcnRpbyAoRFJNX1ZJUlRJT19HUFUpLCBxZW11IC12Z2EgdmlydGlv
-KQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9jaXJydXMvTWFrZWZpbGUgYi9kcml2
-ZXJzL2dwdS9kcm0vY2lycnVzL01ha2VmaWxlCj4gPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQK
-PiA+IGluZGV4IDBjMWVkM2Y5OTcyNS4uMDAwMDAwMDAwMDAwCj4gPiAtLS0gYS9kcml2ZXJzL2dw
-dS9kcm0vY2lycnVzL01ha2VmaWxlCj4gPiArKysgL2Rldi9udWxsCj4gPiBAQCAtMSwyICswLDAg
-QEAKPiA+IC0jIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wLW9ubHkKPiA+IC1vYmot
-JChDT05GSUdfRFJNX0NJUlJVU19RRU1VKSArPSBjaXJydXMubwo+ID4gZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvZ3B1L2RybS90aW55L0tjb25maWcgYi9kcml2ZXJzL2dwdS9kcm0vdGlueS9LY29uZmln
-Cj4gPiBpbmRleCA0MTYwZTc0ZTQ3NTEuLjJiNjQxNGYwZmE3NSAxMDA2NDQKPiA+IC0tLSBhL2Ry
-aXZlcnMvZ3B1L2RybS90aW55L0tjb25maWcKPiA+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS90aW55
-L0tjb25maWcKPiA+IEBAIC0xLDUgKzEsMjQgQEAKPiA+ICAjIFNQRFgtTGljZW5zZS1JZGVudGlm
-aWVyOiBHUEwtMi4wLW9ubHkKPiA+Cj4gPiArY29uZmlnIERSTV9DSVJSVVNfUUVNVQo+ID4gKyAg
-ICAgdHJpc3RhdGUgIkNpcnJ1cyBkcml2ZXIgZm9yIFFFTVUgZW11bGF0ZWQgZGV2aWNlIgo+ID4g
-KyAgICAgZGVwZW5kcyBvbiBEUk0gJiYgUENJICYmIE1NVQo+ID4gKyAgICAgc2VsZWN0IERSTV9L
-TVNfSEVMUEVSCj4gPiArICAgICBzZWxlY3QgRFJNX0dFTV9TSE1FTV9IRUxQRVIKPiA+ICsgICAg
-IGhlbHAKPiA+ICsgICAgICBUaGlzIGlzIGEgS01TIGRyaXZlciBmb3IgZW11bGF0ZWQgY2lycnVz
-IGRldmljZSBpbiBxZW11Lgo+ID4gKyAgICAgIEl0IGlzICpOT1QqIGludGVuZGVkIGZvciByZWFs
-IGNpcnJ1cyBkZXZpY2VzLiBUaGlzIHJlcXVpcmVzCj4gPiArICAgICAgdGhlIG1vZGVzZXR0aW5n
-IHVzZXJzcGFjZSBYLm9yZyBkcml2ZXIuCj4gPiArCj4gPiArICAgICAgQ2lycnVzIGlzIG9ic29s
-ZXRlLCB0aGUgaGFyZHdhcmUgd2FzIGRlc2lnbmVkIGluIHRoZSA5MGllcwo+ID4gKyAgICAgIGFu
-ZCBjYW4ndCBrZWVwIHVwIHdpdGggdG9kYXlzIG5lZWRzLiAgTW9yZSBiYWNrZ3JvdW5kOgo+ID4g
-KyAgICAgIGh0dHBzOi8vd3d3LmtyYXhlbC5vcmcvYmxvZy8yMDE0LzEwL3FlbXUtdXNpbmctY2ly
-cnVzLWNvbnNpZGVyZWQtaGFybWZ1bC8KPiA+ICsKPiA+ICsgICAgICBCZXR0ZXIgYWx0ZXJuYXRp
-dmVzIGFyZToKPiA+ICsgICAgICAgIC0gc3RkdmdhIChEUk1fQk9DSFMsIHFlbXUgLXZnYSBzdGQs
-IGRlZmF1bHQgaW4gcWVtdSAyLjIrKQo+ID4gKyAgICAgICAgLSBxeGwgKERSTV9RWEwsIHFlbXUg
-LXZnYSBxeGwsIHdvcmtzIGJlc3Qgd2l0aCBzcGljZSkKPiA+ICsgICAgICAgIC0gdmlydGlvIChE
-Uk1fVklSVElPX0dQVSksIHFlbXUgLXZnYSB2aXJ0aW8pCj4gPiArCj4gPiAgY29uZmlnIERSTV9H
-TTEyVTMyMAo+ID4gICAgICAgdHJpc3RhdGUgIkdNMTJVMzIwIGRyaXZlciBmb3IgVVNCIHByb2pl
-Y3RvcnMiCj4gPiAgICAgICBkZXBlbmRzIG9uIERSTSAmJiBVU0IKPiA+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL2dwdS9kcm0vdGlueS9NYWtlZmlsZSBiL2RyaXZlcnMvZ3B1L2RybS90aW55L01ha2Vm
-aWxlCj4gPiBpbmRleCBjOTZjZWVlNzE0NTMuLjZhZTRlOWU1YTM1ZiAxMDA2NDQKPiA+IC0tLSBh
-L2RyaXZlcnMvZ3B1L2RybS90aW55L01ha2VmaWxlCj4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0v
-dGlueS9NYWtlZmlsZQo+ID4gQEAgLTEsNSArMSw2IEBACj4gPiAgIyBTUERYLUxpY2Vuc2UtSWRl
-bnRpZmllcjogR1BMLTIuMC1vbmx5Cj4gPgo+ID4gK29iai0kKENPTkZJR19EUk1fQ0lSUlVTX1FF
-TVUpICAgICAgICAgICAgICAgICs9IGNpcnJ1cy5vCj4gPiAgb2JqLSQoQ09ORklHX0RSTV9HTTEy
-VTMyMCkgICAgICAgICAgICs9IGdtMTJ1MzIwLm8KPiA+ICBvYmotJChDT05GSUdfVElOWURSTV9I
-WDgzNTdEKSAgICAgICAgICAgICAgICArPSBoeDgzNTdkLm8KPiA+ICBvYmotJChDT05GSUdfVElO
-WURSTV9JTEk5MjI1KSAgICAgICAgICAgICAgICArPSBpbGk5MjI1Lm8KPiA+IGRpZmYgLS1naXQg
-YS9kcml2ZXJzL2dwdS9kcm0vY2lycnVzL2NpcnJ1cy5jIGIvZHJpdmVycy9ncHUvZHJtL3Rpbnkv
-Y2lycnVzLmMKPiA+IHNpbWlsYXJpdHkgaW5kZXggMTAwJQo+ID4gcmVuYW1lIGZyb20gZHJpdmVy
-cy9ncHUvZHJtL2NpcnJ1cy9jaXJydXMuYwo+ID4gcmVuYW1lIHRvIGRyaXZlcnMvZ3B1L2RybS90
-aW55L2NpcnJ1cy5jCj4gPgo+Cj4gLS0KPiBUaG9tYXMgWmltbWVybWFubgo+IEdyYXBoaWNzIERy
-aXZlciBEZXZlbG9wZXIKPiBTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgKPiBN
-YXhmZWxkc3RyLiA1LCA5MDQwOSBOw7xybmJlcmcsIEdlcm1hbnkKPiAoSFJCIDM2ODA5LCBBRyBO
-w7xybmJlcmcpCj4gR2VzY2jDpGZ0c2bDvGhyZXI6IEZlbGl4IEltZW5kw7ZyZmZlcgo+CgoKLS0g
-CkRhbmllbCBWZXR0ZXIKU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENvcnBvcmF0aW9uCis0MSAo
-MCkgNzkgMzY1IDU3IDQ4IC0gaHR0cDovL2Jsb2cuZmZ3bGwuY2gKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0
-ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMu
-bGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============7874296622631461113==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="nyXfRRKUSNJFSss05h7E4qmPW4psHqZj5"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--nyXfRRKUSNJFSss05h7E4qmPW4psHqZj5
+Content-Type: multipart/mixed; boundary="8FplsbkvjG1J7atIv627aY0FKM93Herzb";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>
+Message-ID: <1d8288b5-883c-fcda-0108-b1fecc5637e6@suse.de>
+Subject: Re: [PATCH 37/59] drm/cirrus: Move to drm/tiny
+References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
+ <20200415074034.175360-38-daniel.vetter@ffwll.ch>
+ <fe4fdf57-b039-02d3-ae89-24953304c79d@suse.de>
+ <CAKMK7uHKqmUDMwsZ9OufZE-ZHqUHscmgiZ_HvRyr9TbH3UcYFQ@mail.gmail.com>
+In-Reply-To: <CAKMK7uHKqmUDMwsZ9OufZE-ZHqUHscmgiZ_HvRyr9TbH3UcYFQ@mail.gmail.com>
+
+--8FplsbkvjG1J7atIv627aY0FKM93Herzb
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Am 15.04.20 um 10:19 schrieb Daniel Vetter:
+> On Wed, Apr 15, 2020 at 10:01 AM Thomas Zimmermann <tzimmermann@suse.de=
+> wrote:
+>>
+>>
+>>
+>> Am 15.04.20 um 09:40 schrieb Daniel Vetter:
+>>> Because it is. Huge congrats to everyone who made this kind of
+>>> refactoring happen!
+>>
+>> Every other week, I felt an urge to send out this patch. Thank you so
+>> much, Daniel! There are more candidates for tiny/. They are all <20k
+>> LOCs and all we'd have to do is to move their code into a single file.=
+
+
+I meant <20k file size, not LOCs.
+
+>> bochs or arc come into my mind.
+>=20
+> arc I have (later in the series), bochs I feel like is maybe a bit too
+> big. I'd put the limit for tiny well below 1kloc including whitespace
+> and all that. bochs might be a candidate once we've helperized a few
+> more things perhaps.
+
+True. The largest tiny driver is repaper with ~1.1k LOCS. Reading this
+code, it seems like it has reached an upper bound of what is feasible.
+
+Best regards
+Thomas
+
+>=20
+> btw I drmm_ version of vram helpers would help a bunch of these drivers=
+ I think.
+> -Daniel
+>=20
+>>
+>>>
+>>> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+>>> Cc: Dave Airlie <airlied@redhat.com>
+>>> Cc: Gerd Hoffmann <kraxel@redhat.com>
+>>> Cc: virtualization@lists.linux-foundation.org
+>>
+>> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+>>
+>>> ---
+>>>  MAINTAINERS                               |  2 +-
+>>>  drivers/gpu/drm/Kconfig                   |  2 --
+>>>  drivers/gpu/drm/Makefile                  |  1 -
+>>>  drivers/gpu/drm/cirrus/Kconfig            | 19 -------------------
+>>>  drivers/gpu/drm/cirrus/Makefile           |  2 --
+>>>  drivers/gpu/drm/tiny/Kconfig              | 19 +++++++++++++++++++
+>>>  drivers/gpu/drm/tiny/Makefile             |  1 +
+>>>  drivers/gpu/drm/{cirrus =3D> tiny}/cirrus.c |  0
+>>>  8 files changed, 21 insertions(+), 25 deletions(-)
+>>>  delete mode 100644 drivers/gpu/drm/cirrus/Kconfig
+>>>  delete mode 100644 drivers/gpu/drm/cirrus/Makefile
+>>>  rename drivers/gpu/drm/{cirrus =3D> tiny}/cirrus.c (100%)
+>>>
+>>> diff --git a/MAINTAINERS b/MAINTAINERS
+>>> index 7b3255d96d1d..0a5cf105ee37 100644
+>>> --- a/MAINTAINERS
+>>> +++ b/MAINTAINERS
+>>> @@ -5397,7 +5397,7 @@ L:      virtualization@lists.linux-foundation.o=
+rg
+>>>  S:   Obsolete
+>>>  W:   https://www.kraxel.org/blog/2014/10/qemu-using-cirrus-considere=
+d-harmful/
+>>>  T:   git git://anongit.freedesktop.org/drm/drm-misc
+>>> -F:   drivers/gpu/drm/cirrus/
+>>> +F:   drivers/gpu/drm/tiny/cirrus.c
+>>>
+>>>  DRM DRIVER FOR QXL VIRTUAL GPU
+>>>  M:   Dave Airlie <airlied@redhat.com>
+>>> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
+>>> index 43594978958e..4f4e7fa001c1 100644
+>>> --- a/drivers/gpu/drm/Kconfig
+>>> +++ b/drivers/gpu/drm/Kconfig
+>>> @@ -310,8 +310,6 @@ source "drivers/gpu/drm/ast/Kconfig"
+>>>
+>>>  source "drivers/gpu/drm/mgag200/Kconfig"
+>>>
+>>> -source "drivers/gpu/drm/cirrus/Kconfig"
+>>> -
+>>>  source "drivers/gpu/drm/armada/Kconfig"
+>>>
+>>>  source "drivers/gpu/drm/atmel-hlcdc/Kconfig"
+>>> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
+>>> index f34d08c83485..2c0e5a7e5953 100644
+>>> --- a/drivers/gpu/drm/Makefile
+>>> +++ b/drivers/gpu/drm/Makefile
+>>> @@ -74,7 +74,6 @@ obj-$(CONFIG_DRM_I915)      +=3D i915/
+>>>  obj-$(CONFIG_DRM_MGAG200) +=3D mgag200/
+>>>  obj-$(CONFIG_DRM_V3D)  +=3D v3d/
+>>>  obj-$(CONFIG_DRM_VC4)  +=3D vc4/
+>>> -obj-$(CONFIG_DRM_CIRRUS_QEMU) +=3D cirrus/
+>>>  obj-$(CONFIG_DRM_SIS)   +=3D sis/
+>>>  obj-$(CONFIG_DRM_SAVAGE)+=3D savage/
+>>>  obj-$(CONFIG_DRM_VMWGFX)+=3D vmwgfx/
+>>> diff --git a/drivers/gpu/drm/cirrus/Kconfig b/drivers/gpu/drm/cirrus/=
+Kconfig
+>>> deleted file mode 100644
+>>> index c6bbd988b0e5..000000000000
+>>> --- a/drivers/gpu/drm/cirrus/Kconfig
+>>> +++ /dev/null
+>>> @@ -1,19 +0,0 @@
+>>> -# SPDX-License-Identifier: GPL-2.0-only
+>>> -config DRM_CIRRUS_QEMU
+>>> -     tristate "Cirrus driver for QEMU emulated device"
+>>> -     depends on DRM && PCI && MMU
+>>> -     select DRM_KMS_HELPER
+>>> -     select DRM_GEM_SHMEM_HELPER
+>>> -     help
+>>> -      This is a KMS driver for emulated cirrus device in qemu.
+>>> -      It is *NOT* intended for real cirrus devices. This requires
+>>> -      the modesetting userspace X.org driver.
+>>> -
+>>> -      Cirrus is obsolete, the hardware was designed in the 90ies
+>>> -      and can't keep up with todays needs.  More background:
+>>> -      https://www.kraxel.org/blog/2014/10/qemu-using-cirrus-consider=
+ed-harmful/
+>>> -
+>>> -      Better alternatives are:
+>>> -        - stdvga (DRM_BOCHS, qemu -vga std, default in qemu 2.2+)
+>>> -        - qxl (DRM_QXL, qemu -vga qxl, works best with spice)
+>>> -        - virtio (DRM_VIRTIO_GPU), qemu -vga virtio)
+>>> diff --git a/drivers/gpu/drm/cirrus/Makefile b/drivers/gpu/drm/cirrus=
+/Makefile
+>>> deleted file mode 100644
+>>> index 0c1ed3f99725..000000000000
+>>> --- a/drivers/gpu/drm/cirrus/Makefile
+>>> +++ /dev/null
+>>> @@ -1,2 +0,0 @@
+>>> -# SPDX-License-Identifier: GPL-2.0-only
+>>> -obj-$(CONFIG_DRM_CIRRUS_QEMU) +=3D cirrus.o
+>>> diff --git a/drivers/gpu/drm/tiny/Kconfig b/drivers/gpu/drm/tiny/Kcon=
+fig
+>>> index 4160e74e4751..2b6414f0fa75 100644
+>>> --- a/drivers/gpu/drm/tiny/Kconfig
+>>> +++ b/drivers/gpu/drm/tiny/Kconfig
+>>> @@ -1,5 +1,24 @@
+>>>  # SPDX-License-Identifier: GPL-2.0-only
+>>>
+>>> +config DRM_CIRRUS_QEMU
+>>> +     tristate "Cirrus driver for QEMU emulated device"
+>>> +     depends on DRM && PCI && MMU
+>>> +     select DRM_KMS_HELPER
+>>> +     select DRM_GEM_SHMEM_HELPER
+>>> +     help
+>>> +      This is a KMS driver for emulated cirrus device in qemu.
+>>> +      It is *NOT* intended for real cirrus devices. This requires
+>>> +      the modesetting userspace X.org driver.
+>>> +
+>>> +      Cirrus is obsolete, the hardware was designed in the 90ies
+>>> +      and can't keep up with todays needs.  More background:
+>>> +      https://www.kraxel.org/blog/2014/10/qemu-using-cirrus-consider=
+ed-harmful/
+>>> +
+>>> +      Better alternatives are:
+>>> +        - stdvga (DRM_BOCHS, qemu -vga std, default in qemu 2.2+)
+>>> +        - qxl (DRM_QXL, qemu -vga qxl, works best with spice)
+>>> +        - virtio (DRM_VIRTIO_GPU), qemu -vga virtio)
+>>> +
+>>>  config DRM_GM12U320
+>>>       tristate "GM12U320 driver for USB projectors"
+>>>       depends on DRM && USB
+>>> diff --git a/drivers/gpu/drm/tiny/Makefile b/drivers/gpu/drm/tiny/Mak=
+efile
+>>> index c96ceee71453..6ae4e9e5a35f 100644
+>>> --- a/drivers/gpu/drm/tiny/Makefile
+>>> +++ b/drivers/gpu/drm/tiny/Makefile
+>>> @@ -1,5 +1,6 @@
+>>>  # SPDX-License-Identifier: GPL-2.0-only
+>>>
+>>> +obj-$(CONFIG_DRM_CIRRUS_QEMU)                +=3D cirrus.o
+>>>  obj-$(CONFIG_DRM_GM12U320)           +=3D gm12u320.o
+>>>  obj-$(CONFIG_TINYDRM_HX8357D)                +=3D hx8357d.o
+>>>  obj-$(CONFIG_TINYDRM_ILI9225)                +=3D ili9225.o
+>>> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/tiny/c=
+irrus.c
+>>> similarity index 100%
+>>> rename from drivers/gpu/drm/cirrus/cirrus.c
+>>> rename to drivers/gpu/drm/tiny/cirrus.c
+>>>
+>>
+>> --
+>> Thomas Zimmermann
+>> Graphics Driver Developer
+>> SUSE Software Solutions Germany GmbH
+>> Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+>> (HRB 36809, AG N=C3=BCrnberg)
+>> Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+>>
+>=20
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--8FplsbkvjG1J7atIv627aY0FKM93Herzb--
+
+--nyXfRRKUSNJFSss05h7E4qmPW4psHqZj5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl6Wyd4ACgkQaA3BHVML
+eiPa+Af8CVapqi1hBYrMT47endqvJfDWOWsM7KWfjN1LisYrMDL6Hnvm65sBIzDX
+fT2f3pKbuWP3clORnAUacZfKi1WIzgrGAwtx87Xql/DXABmQkOgzzYOYonNN9iB2
+5Bnqx+6f1s4ObhoqZjE/S2xntRM8f3GaII6jcIVVFWytoRI0+uyOFInjB52o8gGw
+5yoqNLN0Oc05Gz/Fxiwh+tqDIdYLfdv6y4iHFjMQ1UbOtc0UG1q17XXtb3RFByNW
+BTs63Hzk9jiAdD06lQdlEv/rOrNAjuuXr25u4tWZvSFVS/3gC8pZI3+8buw97Q/k
+ULIsfLHOX6EcG24upLy1XgD7q0aANw==
+=4Hvi
+-----END PGP SIGNATURE-----
+
+--nyXfRRKUSNJFSss05h7E4qmPW4psHqZj5--
+
+--===============7874296622631461113==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============7874296622631461113==--
