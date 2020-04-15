@@ -2,81 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4A311A910C
-	for <lists.virtualization@lfdr.de>; Wed, 15 Apr 2020 04:44:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED1B71A9475
+	for <lists.virtualization@lfdr.de>; Wed, 15 Apr 2020 09:41:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 79AB38435A;
-	Wed, 15 Apr 2020 02:44:17 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9EE5B86DEA;
+	Wed, 15 Apr 2020 07:41:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sMp0g4yV6ATx; Wed, 15 Apr 2020 02:44:16 +0000 (UTC)
+	with ESMTP id bo7JA-a3Kmn6; Wed, 15 Apr 2020 07:41:12 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2E858863CE;
-	Wed, 15 Apr 2020 02:44:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7BAD086E7F;
+	Wed, 15 Apr 2020 07:41:12 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1E285C0172;
-	Wed, 15 Apr 2020 02:44:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6775AC1D8D;
+	Wed, 15 Apr 2020 07:41:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 30C34C0172
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5EDC0C0172
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 02:44:14 +0000 (UTC)
+ Wed, 15 Apr 2020 07:41:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 1A47487E79
+ by whitealder.osuosl.org (Postfix) with ESMTP id 4920286E68
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 02:44:14 +0000 (UTC)
+ Wed, 15 Apr 2020 07:41:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CEvjbzkH1t6T
+ with ESMTP id jm1sPWI-C2p3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 02:44:12 +0000 (UTC)
+ Wed, 15 Apr 2020 07:41:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 689B587E6E
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+ [209.85.128.67])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id AD5D886DEA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 02:44:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586918650;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=FTv5AkLYQ+5KJ9sSK50BNsriwFY0NMNF1swhxtvNcFc=;
- b=JS/LjGe9aDi/50oN3rvU/WqguHt2shehJeBu1Qg9mwTA4peBuQDtZmHeR4btvVLv0kfcy9
- 8FDwgN/M627iKU3SVDSzp0CDp4EoCMd0MLlMIEJieEAoOmWvLxt/T9LDYjrVLVn2QCnYjk
- ImmpvQUpmXAno2yprBs6SFA9LX3F4OM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-364-4zcwoXPfPQaXvOe1_HQyAA-1; Tue, 14 Apr 2020 22:44:08 -0400
-X-MC-Unique: 4zcwoXPfPQaXvOe1_HQyAA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B0981800D53;
- Wed, 15 Apr 2020 02:44:06 +0000 (UTC)
-Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
- (ovpn-12-184.pek2.redhat.com [10.72.12.184])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 48DDF12656E;
- Wed, 15 Apr 2020 02:43:57 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: jasowang@redhat.com,
-	mst@redhat.com
-Subject: [PATCH V2] vhost: do not enable VHOST_MENU by default
-Date: Wed, 15 Apr 2020 10:43:56 +0800
-Message-Id: <20200415024356.23751-1-jasowang@redhat.com>
+ Wed, 15 Apr 2020 07:41:09 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id a201so17306802wme.1
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Apr 2020 00:41:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=0HLlWIg9UAJxxpI41jRpQhfivJQr2W7lvb9xDj4EmwI=;
+ b=AhHSMB1QeIWgrBGgQtLAse47tdzuCphq0i8V70fwGatSBHkkFrr62NwAwiVh4djkR/
+ F0IB0NsH9jruqdMunmw072FkSwKwiJcVtuDKSTmNwd9phrHLRrNHC59aMnBRt2DMITYa
+ BbjRs0DyL3KQbiSYFfs8i7e2Bp0JOdGl5iHFQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=0HLlWIg9UAJxxpI41jRpQhfivJQr2W7lvb9xDj4EmwI=;
+ b=nUpjEiWitV/eCMtXQuPYMzPyVgguv+WfDSfQW61EYj962ZWQJMaYBgUImBoboFt8X0
+ dwW79pa295atj0+Xb/t28IXjB8WEGaPP13yuGqSeJ7zgLgMkK7+bx6eL6G+9THx1T3nJ
+ HHjAyt3j5cQr0FAQnNx7pJ/pguEuXNN3aML0SKONDbEuPbL1DoclmaQaVPbXZ5Wd46Kn
+ RZ8OUGw2N5U0Kwx2PeOJb5LJpMU+Ncg2tPi+eIyy4wmc6asDTxPPdz0w2ngB8R07/9GM
+ nVsr8vnjnfGloc8ifN3d71Js8xoZbuWMZPV3ZE1cTX+W3rgn347vawKnl+7VIYQrT67M
+ bypQ==
+X-Gm-Message-State: AGi0PubzI5Xqa/9gfMIr5SbWTx7Q8qlLzkBxcPPx6fPycy5LEYnIHLWd
+ ge06J3YjO5/u3gisCsrZXpnemg==
+X-Google-Smtp-Source: APiQypLMkQJ1wV77mATlYhLjNQeOjbHQCM8yWzyRnM2gOnqfsiOY3Cou0ENngRRljztvsP4cZtodhA==
+X-Received: by 2002:a7b:c1d4:: with SMTP id a20mr3931520wmj.111.1586936468152; 
+ Wed, 15 Apr 2020 00:41:08 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id u30sm1878552wru.13.2020.04.15.00.41.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Apr 2020 00:41:07 -0700 (PDT)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: Intel Graphics Development <intel-gfx@lists.freedesktop.org>
+Subject: [PATCH 26/59] drm/qxl: Use devm_drm_dev_alloc
+Date: Wed, 15 Apr 2020 09:40:01 +0200
+Message-Id: <20200415074034.175360-27-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
+References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: linux-s390@vger.kernel.org, tsbogend@alpha.franken.de,
- benh@kernel.crashing.org, gor@linux.ibm.com, kvm@vger.kernel.org,
- linux-kernel@vger.kernel.org, heiko.carstens@de.ibm.com,
- linux-mips@vger.kernel.org, virtualization@lists.linux-foundation.org,
- borntraeger@de.ibm.com, geert@linux-m68k.org,
- Michael Ellerman <mpe@ellerman.id.au>, netdev@vger.kernel.org,
- paulus@samba.org, linuxppc-dev@lists.ozlabs.org
+Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,178 +98,131 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We try to keep the defconfig untouched after decoupling CONFIG_VHOST
-out of CONFIG_VIRTUALIZATION in commit 20c384f1ea1a
-("vhost: refine vhost and vringh kconfig") by enabling VHOST_MENU by
-default. Then the defconfigs can keep enabling CONFIG_VHOST_NET
-without the caring of CONFIG_VHOST.
+Also need to remove the drm_dev_put from the remove hook.
 
-But this will leave a "CONFIG_VHOST_MENU=y" in all defconfigs and even
-for the ones that doesn't want vhost. So it actually shifts the
-burdens to the maintainers of all other to add "CONFIG_VHOST_MENU is
-not set". So this patch tries to enable CONFIG_VHOST explicitly in
-defconfigs that enables CONFIG_VHOST_NET and CONFIG_VHOST_VSOCK.
-
-Acked-by: Christian Borntraeger <borntraeger@de.ibm.com> (s390)
-Acked-by: Michael Ellerman <mpe@ellerman.id.au> (powerpc)
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
-Cc: Paul Mackerras <paulus@samba.org>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Cc: Heiko Carstens <heiko.carstens@de.ibm.com>
-Cc: Vasily Gorbik <gor@linux.ibm.com>
-Cc: Christian Borntraeger <borntraeger@de.ibm.com>
-Reported-by: Geert Uytterhoeven <geert@linux-m68k.org>
-Signed-off-by: Jason Wang <jasowang@redhat.com>
+Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
 ---
-Change since V1:
-- depends on EVENTFD for VHOST
----
- arch/mips/configs/malta_kvm_defconfig  |  1 +
- arch/powerpc/configs/powernv_defconfig |  1 +
- arch/powerpc/configs/ppc64_defconfig   |  1 +
- arch/powerpc/configs/pseries_defconfig |  1 +
- arch/s390/configs/debug_defconfig      |  1 +
- arch/s390/configs/defconfig            |  1 +
- drivers/vhost/Kconfig                  | 26 +++++++++-----------------
- 7 files changed, 15 insertions(+), 17 deletions(-)
+ drivers/gpu/drm/qxl/qxl_drv.c | 15 ++++++++-------
+ drivers/gpu/drm/qxl/qxl_drv.h |  3 +--
+ drivers/gpu/drm/qxl/qxl_kms.c | 12 +-----------
+ 3 files changed, 10 insertions(+), 20 deletions(-)
 
-diff --git a/arch/mips/configs/malta_kvm_defconfig b/arch/mips/configs/malta_kvm_defconfig
-index 8ef612552a19..06f0c7a0ca87 100644
---- a/arch/mips/configs/malta_kvm_defconfig
-+++ b/arch/mips/configs/malta_kvm_defconfig
-@@ -18,6 +18,7 @@ CONFIG_PCI=y
- CONFIG_VIRTUALIZATION=y
- CONFIG_KVM=m
- CONFIG_KVM_MIPS_DEBUG_COP0_COUNTERS=y
-+CONFIG_VHOST=m
- CONFIG_VHOST_NET=m
- CONFIG_MODULES=y
- CONFIG_MODULE_UNLOAD=y
-diff --git a/arch/powerpc/configs/powernv_defconfig b/arch/powerpc/configs/powernv_defconfig
-index 71749377d164..404245b4594d 100644
---- a/arch/powerpc/configs/powernv_defconfig
-+++ b/arch/powerpc/configs/powernv_defconfig
-@@ -346,5 +346,6 @@ CONFIG_CRYPTO_DEV_VMX=y
- CONFIG_VIRTUALIZATION=y
- CONFIG_KVM_BOOK3S_64=m
- CONFIG_KVM_BOOK3S_64_HV=m
-+CONFIG_VHOST=m
- CONFIG_VHOST_NET=m
- CONFIG_PRINTK_TIME=y
-diff --git a/arch/powerpc/configs/ppc64_defconfig b/arch/powerpc/configs/ppc64_defconfig
-index 7e68cb222c7b..4599fc7be285 100644
---- a/arch/powerpc/configs/ppc64_defconfig
-+++ b/arch/powerpc/configs/ppc64_defconfig
-@@ -61,6 +61,7 @@ CONFIG_ELECTRA_CF=y
- CONFIG_VIRTUALIZATION=y
- CONFIG_KVM_BOOK3S_64=m
- CONFIG_KVM_BOOK3S_64_HV=m
-+CONFIG_VHOST=m
- CONFIG_VHOST_NET=m
- CONFIG_OPROFILE=m
- CONFIG_KPROBES=y
-diff --git a/arch/powerpc/configs/pseries_defconfig b/arch/powerpc/configs/pseries_defconfig
-index 6b68109e248f..4cad3901b5de 100644
---- a/arch/powerpc/configs/pseries_defconfig
-+++ b/arch/powerpc/configs/pseries_defconfig
-@@ -321,5 +321,6 @@ CONFIG_CRYPTO_DEV_VMX=y
- CONFIG_VIRTUALIZATION=y
- CONFIG_KVM_BOOK3S_64=m
- CONFIG_KVM_BOOK3S_64_HV=m
-+CONFIG_VHOST=m
- CONFIG_VHOST_NET=m
- CONFIG_PRINTK_TIME=y
-diff --git a/arch/s390/configs/debug_defconfig b/arch/s390/configs/debug_defconfig
-index 0c86ba19fa2b..6ec6e69630d1 100644
---- a/arch/s390/configs/debug_defconfig
-+++ b/arch/s390/configs/debug_defconfig
-@@ -57,6 +57,7 @@ CONFIG_PROTECTED_VIRTUALIZATION_GUEST=y
- CONFIG_CMM=m
- CONFIG_APPLDATA_BASE=y
- CONFIG_KVM=m
-+CONFIG_VHOST=m
- CONFIG_VHOST_NET=m
- CONFIG_VHOST_VSOCK=m
- CONFIG_OPROFILE=m
-diff --git a/arch/s390/configs/defconfig b/arch/s390/configs/defconfig
-index 6b27d861a9a3..d1b3bf83d687 100644
---- a/arch/s390/configs/defconfig
-+++ b/arch/s390/configs/defconfig
-@@ -57,6 +57,7 @@ CONFIG_PROTECTED_VIRTUALIZATION_GUEST=y
- CONFIG_CMM=m
- CONFIG_APPLDATA_BASE=y
- CONFIG_KVM=m
-+CONFIG_VHOST=m
- CONFIG_VHOST_NET=m
- CONFIG_VHOST_VSOCK=m
- CONFIG_OPROFILE=m
-diff --git a/drivers/vhost/Kconfig b/drivers/vhost/Kconfig
-index e79cbbdfea45..29f171a53d8a 100644
---- a/drivers/vhost/Kconfig
-+++ b/drivers/vhost/Kconfig
-@@ -12,23 +12,19 @@ config VHOST_RING
- 	  This option is selected by any driver which needs to access
- 	  the host side of a virtio ring.
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 09102e2efabc..6b4ae4c5fb76 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -81,13 +81,16 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+ 		return -EINVAL; /* TODO: ENODEV ? */
+ 	}
  
--config VHOST
--	tristate
-+menuconfig VHOST
-+	tristate "Vhost Devices"
-+	depends on EVENTFD
- 	select VHOST_IOTLB
- 	help
--	  This option is selected by any driver which needs to access
--	  the core of vhost.
-+	  Enable option to support host kernel or hardware accelerator
-+	  for virtio device.
+-	qdev = kzalloc(sizeof(struct qxl_device), GFP_KERNEL);
+-	if (!qdev)
++	qdev = devm_drm_dev_alloc(&pdev->dev, &qxl_driver,
++				  struct qxl_device, ddev);
++	if (IS_ERR(qdev)) {
++		pr_err("Unable to init drm dev");
+ 		return -ENOMEM;
++	}
  
--menuconfig VHOST_MENU
--	bool "VHOST drivers"
--	default y
+ 	ret = pci_enable_device(pdev);
+ 	if (ret)
+-		goto free_dev;
++		return ret;
+ 
+ 	ret = drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, "qxl");
+ 	if (ret)
+@@ -101,7 +104,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+ 		}
+ 	}
+ 
+-	ret = qxl_device_init(qdev, &qxl_driver, pdev);
++	ret = qxl_device_init(qdev, pdev);
+ 	if (ret)
+ 		goto put_vga;
+ 
+@@ -128,8 +131,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+ 		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+ disable_pci:
+ 	pci_disable_device(pdev);
+-free_dev:
+-	kfree(qdev);
++
+ 	return ret;
+ }
+ 
+@@ -155,7 +157,6 @@ qxl_pci_remove(struct pci_dev *pdev)
+ 	drm_atomic_helper_shutdown(dev);
+ 	if (is_vga(pdev))
+ 		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+-	drm_dev_put(dev);
+ }
+ 
+ DEFINE_DRM_GEM_FOPS(qxl_fops);
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+index 435126facc9b..86ac191d9205 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.h
++++ b/drivers/gpu/drm/qxl/qxl_drv.h
+@@ -276,8 +276,7 @@ struct qxl_device {
+ extern const struct drm_ioctl_desc qxl_ioctls[];
+ extern int qxl_max_ioctl;
+ 
+-int qxl_device_init(struct qxl_device *qdev, struct drm_driver *drv,
+-		    struct pci_dev *pdev);
++int qxl_device_init(struct qxl_device *qdev, struct pci_dev *pdev);
+ void qxl_device_fini(struct qxl_device *qdev);
+ 
+ int qxl_modeset_init(struct qxl_device *qdev);
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 9eed1a375f24..91a34dd835d7 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -108,21 +108,13 @@ static void qxl_gc_work(struct work_struct *work)
+ }
+ 
+ int qxl_device_init(struct qxl_device *qdev,
+-		    struct drm_driver *drv,
+ 		    struct pci_dev *pdev)
+ {
+ 	int r, sb;
+ 
+-	r = drm_dev_init(&qdev->ddev, drv, &pdev->dev);
+-	if (r) {
+-		pr_err("Unable to init drm dev");
+-		goto error;
+-	}
 -
--if VHOST_MENU
-+if VHOST
+ 	qdev->ddev.pdev = pdev;
+ 	pci_set_drvdata(pdev, &qdev->ddev);
+ 	qdev->ddev.dev_private = qdev;
+-	drmm_add_final_kfree(&qdev->ddev, qdev);
  
- config VHOST_NET
- 	tristate "Host kernel accelerator for virtio net"
--	depends on NET && EVENTFD && (TUN || !TUN) && (TAP || !TAP)
--	select VHOST
-+	depends on NET && (TUN || !TUN) && (TAP || !TAP)
- 	---help---
- 	  This kernel module can be loaded in host kernel to accelerate
- 	  guest networking with virtio_net. Not to be confused with virtio_net
-@@ -39,8 +35,7 @@ config VHOST_NET
+ 	mutex_init(&qdev->gem.mutex);
+ 	mutex_init(&qdev->update_area_mutex);
+@@ -138,8 +130,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	qdev->vram_mapping = io_mapping_create_wc(qdev->vram_base, pci_resource_len(pdev, 0));
+ 	if (!qdev->vram_mapping) {
+ 		pr_err("Unable to create vram_mapping");
+-		r = -ENOMEM;
+-		goto error;
++		return -ENOMEM;
+ 	}
  
- config VHOST_SCSI
- 	tristate "VHOST_SCSI TCM fabric driver"
--	depends on TARGET_CORE && EVENTFD
--	select VHOST
-+	depends on TARGET_CORE
- 	default n
- 	---help---
- 	Say M here to enable the vhost_scsi TCM fabric module
-@@ -48,8 +43,7 @@ config VHOST_SCSI
+ 	if (pci_resource_len(pdev, 4) > 0) {
+@@ -293,7 +284,6 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	io_mapping_free(qdev->surface_mapping);
+ vram_mapping_free:
+ 	io_mapping_free(qdev->vram_mapping);
+-error:
+ 	return r;
+ }
  
- config VHOST_VSOCK
- 	tristate "vhost virtio-vsock driver"
--	depends on VSOCKETS && EVENTFD
--	select VHOST
-+	depends on VSOCKETS
- 	select VIRTIO_VSOCKETS_COMMON
- 	default n
- 	---help---
-@@ -62,8 +56,6 @@ config VHOST_VSOCK
- 
- config VHOST_VDPA
- 	tristate "Vhost driver for vDPA-based backend"
--	depends on EVENTFD
--	select VHOST
- 	depends on VDPA
- 	help
- 	  This kernel module can be loaded in host kernel to accelerate
 -- 
-2.20.1
+2.25.1
 
 _______________________________________________
 Virtualization mailing list
