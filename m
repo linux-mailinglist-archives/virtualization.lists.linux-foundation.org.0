@@ -1,100 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 011641AB4E7
-	for <lists.virtualization@lfdr.de>; Thu, 16 Apr 2020 02:53:58 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 19DC0833C6;
-	Thu, 16 Apr 2020 00:53:56 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id I63PY7LkOBnn; Thu, 16 Apr 2020 00:53:55 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 71B0C82507;
-	Thu, 16 Apr 2020 00:53:55 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4FB1AC0172;
-	Thu, 16 Apr 2020 00:53:55 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7BA7DC0172
- for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 00:53:53 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id E628D1AB67E
+	for <lists.virtualization@lfdr.de>; Thu, 16 Apr 2020 06:07:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 6F4E420356
- for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 00:53:53 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 1A38221541;
+	Thu, 16 Apr 2020 04:07:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id iP2o+3JMUE3J; Thu, 16 Apr 2020 04:07:53 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 5BDB120514;
+	Thu, 16 Apr 2020 04:07:53 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 429A4C0172;
+	Thu, 16 Apr 2020 04:07:53 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 77FEEC0172
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 16 Apr 2020 04:07:52 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 620808686A
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 16 Apr 2020 04:07:52 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GbgPQwGwLlH2
+ with ESMTP id Idqc6yB9LhXG
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 00:53:52 +0000 (UTC)
+ Thu, 16 Apr 2020 04:07:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
- [209.85.208.65])
- by silver.osuosl.org (Postfix) with ESMTPS id 928E420355
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 985AA86430
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 00:53:52 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id ca21so7288388edb.7
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 17:53:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hzMDorCv1GZID9zsmGcg6OddhqYx722MVsuJ8PCoquU=;
- b=PQbQU4mx+Y47Kp0VmJmY4pdmkyIFeOBpm/PuEBSauBtddR5AErvLkCUxYdB5QBq+Bl
- hkSP5lJlqOjR6sKAAc+32Cg2e5kqRXpCMz9orUD/QAFTm2fIM2IpvXHQkVIn6FAEqQOR
- he4mBko7bQTN6Ponzq1pQyRnUmWxWkRdsyIqM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=hzMDorCv1GZID9zsmGcg6OddhqYx722MVsuJ8PCoquU=;
- b=CTB7nEHsjtErCf1x6yyUFMf8S2SwRcGSA97hOUxGJmpzYneNjIIseILPe8ATjRATxl
- 6AGXq21iMNZ+87YEW/446Un/p2aaKweD0DGqEdIUA3azH4E1ehf1aI2elHAb2sjeZfx+
- K39Ti4tqa42PIGs0rroMPasXLVfkVSB8mP/WMooz8v7K8LXDY1/955oAqZpJzTPKVSgF
- kZG5DGpkYNCMmk4JBh4jbnIBqhrAPVRMHOuA6aFn4RYjD8/r8HJ8bTk4TkhOeQgIT/Nc
- p3tFdFJT+bTd1ilAoo7X6Yfakon/cxdmCPBrZD5B9CEYLxQG5/ClwHQe6kYJyBxxG9K2
- U9Vg==
-X-Gm-Message-State: AGi0PuaVWZIfmv+M0ttlRsahbVpkNJTvgi+WbgRbE+cDuevfrB/j4f02
- 4lfXzYaGtC1R2FXAvnMk9UHdSURpziKTiw==
-X-Google-Smtp-Source: APiQypJY+JyJZok2dG+XBoKJQmf0GrahvD7wukJjpiW/cuTHlt+b/DzwLiJ214BcYHc/lp47R5nqww==
-X-Received: by 2002:a50:a1e6:: with SMTP id 93mr28884493edk.172.1586998430583; 
- Wed, 15 Apr 2020 17:53:50 -0700 (PDT)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com.
- [209.85.218.42])
- by smtp.gmail.com with ESMTPSA id l16sm2284864edv.71.2020.04.15.17.53.50
- for <virtualization@lists.linux-foundation.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Apr 2020 17:53:50 -0700 (PDT)
-Received: by mail-ej1-f42.google.com with SMTP id pg17so42778ejb.9
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Apr 2020 17:53:50 -0700 (PDT)
-X-Received: by 2002:a2e:870f:: with SMTP id m15mr4867889lji.16.1586998009252; 
- Wed, 15 Apr 2020 17:46:49 -0700 (PDT)
+ Thu, 16 Apr 2020 04:07:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1587010070;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=OTMaR92SihjV5ChuxWQeel8tadAmxm943VhVpwb3Ti0=;
+ b=NxyQqYmpAqE6rAjeeEtC3AGYqvBD1Z/7vAK+uIOzRDKXBzLXrfcu3u1llbA+hFEfNON6vq
+ 9W5cJnBcAom54uPiYrNSxsfR3a1qqYCaLdG+ifang6JT7BSQgHxTwjYG0Uzuzc+FSFtGRy
+ q+c/Mk51ck3BC5+vgObHfgB7LKTwTuA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-99-7eV2h5M0OHOPzkEfEcYyJw-1; Thu, 16 Apr 2020 00:07:44 -0400
+X-MC-Unique: 7eV2h5M0OHOPzkEfEcYyJw-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 67ACC800D5C;
+ Thu, 16 Apr 2020 04:07:13 +0000 (UTC)
+Received: from [10.72.13.240] (ovpn-13-240.pek2.redhat.com [10.72.13.240])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 480FFD7664;
+ Thu, 16 Apr 2020 04:07:07 +0000 (UTC)
+Subject: Re: linux-next: Tree for Apr 15 (vdpa)
+To: Randy Dunlap <rdunlap@infradead.org>,
+ Stephen Rothwell <sfr@canb.auug.org.au>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
+References: <20200415152240.2422e06c@canb.auug.org.au>
+ <620e1646-5899-a077-b9de-95443887364d@infradead.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <33e4922f-d2b5-f3fa-4d32-a5db5a177238@redhat.com>
+Date: Thu, 16 Apr 2020 12:07:06 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-References: <20200414123606-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20200414123606-mutt-send-email-mst@kernel.org>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Wed, 15 Apr 2020 17:46:33 -0700
-X-Gmail-Original-Message-ID: <CAHk-=wgVQcD=JJVmowEorHHQSVmSw+vG+Ddc4FATZoTp9mfUmw@mail.gmail.com>
-Message-ID: <CAHk-=wgVQcD=JJVmowEorHHQSVmSw+vG+Ddc4FATZoTp9mfUmw@mail.gmail.com>
-Subject: Re: [GIT PULL] vhost: cleanups and fixes
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: hulkci@huawei.com, matej.genci@nutanix.com, KVM list <kvm@vger.kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
- Netdev <netdev@vger.kernel.org>, yanaijie@huawei.com,
- YueHaibing <yuehaibing@huawei.com>,
+In-Reply-To: <620e1646-5899-a077-b9de-95443887364d@infradead.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Cc: virtualization@lists.linux-foundation.org,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- virtualization@lists.linux-foundation.org, ashutosh.dixit@intel.com,
- eperezma@redhat.com, Andy Shevchenko <andy.shevchenko@gmail.com>,
- eli@mellanox.com, Stephen Rothwell <sfr@canb.auug.org.au>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- Markus Elfring <elfring@users.sourceforge.net>
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,20 +91,28 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 14, 2020 at 9:36 AM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> virtio: fixes, cleanups
-
-Looking at this, about 75% of it looks like it should have come in
-during the merge window, not now.
-
-              Linus
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNC8xNiDkuIrljYgxMjoxNiwgUmFuZHkgRHVubGFwIHdyb3RlOgo+IE9uIDQvMTQv
+MjAgMTA6MjIgUE0sIFN0ZXBoZW4gUm90aHdlbGwgd3JvdGU6Cj4+IEhpIGFsbCwKPj4KPj4gQ2hh
+bmdlcyBzaW5jZSAyMDIwMDQxNDoKPj4KPiBvbiB4ODZfNjQ6Cj4KPiBFUlJPUjogbW9kcG9zdDog
+InZyaW5naF9zZXRfaW90bGIiIFtkcml2ZXJzL3ZkcGEvdmRwYV9zaW0vdmRwYV9zaW0ua29dIHVu
+ZGVmaW5lZCEKPiBFUlJPUjogbW9kcG9zdDogInZyaW5naF9pbml0X2lvdGxiIiBbZHJpdmVycy92
+ZHBhL3ZkcGFfc2ltL3ZkcGFfc2ltLmtvXSB1bmRlZmluZWQhCj4gRVJST1I6IG1vZHBvc3Q6ICJ2
+cmluZ2hfaW92X3B1c2hfaW90bGIiIFtkcml2ZXJzL3ZkcGEvdmRwYV9zaW0vdmRwYV9zaW0ua29d
+IHVuZGVmaW5lZCEKPiBFUlJPUjogbW9kcG9zdDogInZyaW5naF9pb3ZfcHVsbF9pb3RsYiIgW2Ry
+aXZlcnMvdmRwYS92ZHBhX3NpbS92ZHBhX3NpbS5rb10gdW5kZWZpbmVkIQo+IEVSUk9SOiBtb2Rw
+b3N0OiAidnJpbmdoX2NvbXBsZXRlX2lvdGxiIiBbZHJpdmVycy92ZHBhL3ZkcGFfc2ltL3ZkcGFf
+c2ltLmtvXSB1bmRlZmluZWQhCj4gRVJST1I6IG1vZHBvc3Q6ICJ2cmluZ2hfZ2V0ZGVzY19pb3Rs
+YiIgW2RyaXZlcnMvdmRwYS92ZHBhX3NpbS92ZHBhX3NpbS5rb10gdW5kZWZpbmVkIQo+Cj4KPiBG
+dWxsIHJhbmRjb25maWcgZmlsZSBpcyBhdHRhY2hlZC4KPgoKVGhlIGNvbmZpZyBoYXMKCkNPTkZJ
+R19WSE9TVF9JT1RMQj1tCkNPTkZJR19WSE9TVF9SSU5HPXkKCkJ1dCB3ZSBkb24ndCBzZWxlY3Qg
+VkhPU1RfSU9UTEIgaW4gVkhPU1RfUklORyBhZnRlciBjb21taXQgCmU2ZmFlYWExMjg0MTcoInZo
+b3N0OiBkcm9wIHZyaW5nIGRlcGVuZGVuY3kgb24gaW90bGIiKS4gV2hpY2ggc2VlbXMgd3Jvbmcu
+CgpUaGFua3MKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+ClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1m
+b3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9s
+aXN0aW5mby92aXJ0dWFsaXphdGlvbg==
