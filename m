@@ -1,102 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0181C1ACE38
-	for <lists.virtualization@lfdr.de>; Thu, 16 Apr 2020 19:02:18 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1220B1AD058
+	for <lists.virtualization@lfdr.de>; Thu, 16 Apr 2020 21:30:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 70839861EE;
-	Thu, 16 Apr 2020 17:02:16 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 8DF27204E6;
+	Thu, 16 Apr 2020 19:30:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XZ16zix1WSvh; Thu, 16 Apr 2020 17:02:16 +0000 (UTC)
+	with ESMTP id GYrkjbHeEJAb; Thu, 16 Apr 2020 19:30:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 1AA2B861F1;
-	Thu, 16 Apr 2020 17:02:16 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id C3D7620437;
+	Thu, 16 Apr 2020 19:30:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E667EC0172;
-	Thu, 16 Apr 2020 17:02:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A79B0C0172;
+	Thu, 16 Apr 2020 19:30:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3AC51C0172
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 49CD0C0172
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 17:02:14 +0000 (UTC)
+ Thu, 16 Apr 2020 19:30:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 1CBDB87591
+ by whitealder.osuosl.org (Postfix) with ESMTP id 2B70587482
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 17:02:14 +0000 (UTC)
+ Thu, 16 Apr 2020 19:30:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EmQ16xmXXbcd
+ with ESMTP id JGu0DorvjH7t
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 17:02:13 +0000 (UTC)
+ Thu, 16 Apr 2020 19:30:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
- [209.85.167.67])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 2A64D8758F
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+ [209.85.222.194])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 0674A86D72
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 17:02:13 +0000 (UTC)
-Received: by mail-lf1-f67.google.com with SMTP id r17so6159492lff.2
+ Thu, 16 Apr 2020 19:30:42 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id y3so22629194qky.8
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 10:02:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dDes2+uYwqdDpp6u8TFEa/zLM2coaSYzbk9Klu5JF50=;
- b=d4bGcI6r9EXx896lm5psS0z1tGPVAD1Aq/Ppvu5hGlzAbh+Zf/1v3KrwUBex7wJOqX
- fdBbg7Y0d06giLFwxcJ/M+yzoOCnSc92Ma3Vx8FQSeIFEJ9t0tWAkPjyb2FW9WP2SOBk
- +rtsc0ysltydTupDTjzTBovmcsnwzBPYrog24=
+ Thu, 16 Apr 2020 12:30:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:from:to:cc:date:message-id:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=bvok+DJR+w/O07clfbm1bfWWxM+sE76KMdzs4inEcRU=;
+ b=Gir5fWzgI9OwvCgz2ewfueghofsK4vmdeK0/7kmdefhmHIOQ4/xGki3sMhvHSgm9ac
+ KX5/LlHIASbYG+goKAIxuedLt4GYL42r6JuL+8+sBBY1lEIw0vvK9lYhlQYe7mo3VORC
+ k5FX+sbdHy+yzo6n8fwmb2vhMvpUCY7Itb+bRSc98UclxzahJeprnNHpDFp0vmg9loxf
+ m2KCx6HG7CgjEKXroOJ1lyOX77cKT1tNATEvNpkalH0ZjJj3MDt+8M253MTHbD4PkUWL
+ +YtCLOVLy/qfCsiZpZULZByx1yl8kp3w0nKBb/Hn4iqI8S5aIOqEWeWG4Co0ASyogADE
+ qjsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=dDes2+uYwqdDpp6u8TFEa/zLM2coaSYzbk9Klu5JF50=;
- b=U3cWIbGmgZ7pXDg3aUmdxBsdqwxXFyyQ5yvr2T2boBU8SVgv0g+0WYv9YPu+h+o4k7
- kqAejvCqurPPdM8m1bLzAc3ua1WRmC0gENhHqLICydfL51ZNseE0PybBB8tcuDnhc8ik
- 4/QO0mXsRrQQEFCYGVhs6K/g3mOaOcQTk3LWutrjsvFoiSwunOjz3KPCHyLw/hPEYY+i
- tCvnwlzwFdjIUaoPcBJkJY1W701LWCxwHgipnmhhKIwh0UjbA6lPMkFSNLoR8csuJGei
- etRC69W6DEWVtb291H67JdQOqaV1JupDQbAIxsGcFNtAUEt/xEfTDQhGuklgEPocQDHP
- n3mQ==
-X-Gm-Message-State: AGi0PuaDkciqhTBNmAb6iGk8N6BWj7DmziSPQ9ppUBYfV6igjP+0k24U
- a8PZpuUumvZzxCKn27yMHLQ5hmHKKV6wWg==
-X-Google-Smtp-Source: APiQypI8+O7E73s1+8MKW4UAjSTcEYTUlIKjeqOB9IURX5JLxy1CdFWWTRsRodH/oorI6OkhXhhhcg==
-X-Received: by 2002:ac2:528f:: with SMTP id q15mr6938398lfm.132.1587056529983; 
- Thu, 16 Apr 2020 10:02:09 -0700 (PDT)
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com.
- [209.85.208.174])
- by smtp.gmail.com with ESMTPSA id v12sm10086238ljd.85.2020.04.16.10.02.08
- for <virtualization@lists.linux-foundation.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Apr 2020 10:02:08 -0700 (PDT)
-Received: by mail-lj1-f174.google.com with SMTP id z26so8551682ljz.11
- for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 10:02:08 -0700 (PDT)
-X-Received: by 2002:a2e:7c1a:: with SMTP id x26mr6539997ljc.209.1587056528034; 
- Thu, 16 Apr 2020 10:02:08 -0700 (PDT)
+ h=x-gm-message-state:subject:from:to:cc:date:message-id:user-agent
+ :mime-version:content-transfer-encoding;
+ bh=bvok+DJR+w/O07clfbm1bfWWxM+sE76KMdzs4inEcRU=;
+ b=Gg8yh4KU/7698XpmsBK1lOHuGBXg4+7yfQbDm4vELwN1QOJVqM4U8H5tJXEn1MmEJy
+ jUnRLa8epM/jJ6C8OMz3o+cee8br8j9GBPvENi0QDZ3VoJ+CV3Woryb372QhagsEOpnJ
+ F96pp/qDKUuYGbK3OfEQmMreBoI7NPpEbr0KkAZraB+Y3uttJhN10qG3b1UXYhnsDjVP
+ Rl1UCBzBv8ZxKp6IVf+3bTDTcEFUPge/5J67PA3BlcEg/WcXEqoIyjr9qo/cCPUyH+5/
+ 24PsvdjabstbS3TuA6DEgYmYqkm7tAwHZ+Qbel7ftNHhhGccy3eDu2tT6V8W8gk2FGNs
+ qR7A==
+X-Gm-Message-State: AGi0PubiSsGrdPpFCFjYWhAjMyCRkg6/A3vGFuSFta65cbfR5sISDEgP
+ 0kWU5LVYMrodf5WujAb0UXE=
+X-Google-Smtp-Source: APiQypJVB4oJUv/6iy5BnUy7pPW5G4zPe6s9KfK71swV8SOB33/BOyXCVS6Aaa7ZY2i4kN5RJXN2CA==
+X-Received: by 2002:a37:7302:: with SMTP id o2mr31944173qkc.466.1587065440820; 
+ Thu, 16 Apr 2020 12:30:40 -0700 (PDT)
+Received: from localhost.localdomain ([2001:470:b:9c3:9e5c:8eff:fe4f:f2d0])
+ by smtp.gmail.com with ESMTPSA id b1sm15577426qkf.103.2020.04.16.12.30.38
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 16 Apr 2020 12:30:39 -0700 (PDT)
+Subject: [PATCH] virtio-balloon: Disable free page hinting/reporting if page
+ poison is disabled
+From: Alexander Duyck <alexander.duyck@gmail.com>
+To: jasowang@redhat.com, david@redhat.com, mst@redhat.com
+Date: Thu, 16 Apr 2020 12:30:38 -0700
+Message-ID: <20200416192809.8763.19308.stgit@localhost.localdomain>
+User-Agent: StGit/0.17.1-dirty
 MIME-Version: 1.0
-References: <20200414123606-mutt-send-email-mst@kernel.org>
- <CAHk-=wgVQcD=JJVmowEorHHQSVmSw+vG+Ddc4FATZoTp9mfUmw@mail.gmail.com>
- <20200416081330-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20200416081330-mutt-send-email-mst@kernel.org>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Thu, 16 Apr 2020 10:01:51 -0700
-X-Gmail-Original-Message-ID: <CAHk-=wjduPCAE-sr_XLUdExupiL0bOU5GBfpMd32cqMC-VVxeg@mail.gmail.com>
-Message-ID: <CAHk-=wjduPCAE-sr_XLUdExupiL0bOU5GBfpMd32cqMC-VVxeg@mail.gmail.com>
-Subject: Re: [GIT PULL] vhost: cleanups and fixes
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: hulkci@huawei.com, matej.genci@nutanix.com, KVM list <kvm@vger.kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
- Netdev <netdev@vger.kernel.org>, yanaijie@huawei.com,
- YueHaibing <yuehaibing@huawei.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- virtualization@lists.linux-foundation.org, ashutosh.dixit@intel.com,
- eperezma@redhat.com, Andy Shevchenko <andy.shevchenko@gmail.com>,
- eli@mellanox.com, Stephen Rothwell <sfr@canb.auug.org.au>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- Markus Elfring <elfring@users.sourceforge.net>
+Cc: virtio-dev@lists.oasis-open.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,18 +97,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Apr 16, 2020 at 5:20 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> Well it's all just fallout from
+From: Alexander Duyck <alexander.h.duyck@linux.intel.com>
 
-What? No. Half of it seems to be the moving of "struct vring" around
-to other headers and stuff.
+If we have free page hinting or page reporting enabled we should disable it
+if the pages are poisoned or initialized on free and we cannot notify the
+hypervisor.
 
-And then that is done very confusingly too, using two different
-structures both called "struct vring".
+Fixes: 5d757c8d518d ("virtio-balloon: add support for providing free page reports to host")
 
-No way can I pull that kind of craziness as a "fix".
+Signed-off-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+---
+ drivers/virtio/virtio_balloon.c |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-                Linus
+diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+index 95d9c2f0a7be..08bc86a6e468 100644
+--- a/drivers/virtio/virtio_balloon.c
++++ b/drivers/virtio/virtio_balloon.c
+@@ -1110,8 +1110,12 @@ static int virtballoon_validate(struct virtio_device *vdev)
+ 	/* Tell the host whether we care about poisoned pages. */
+ 	if (!want_init_on_free() &&
+ 	    (IS_ENABLED(CONFIG_PAGE_POISONING_NO_SANITY) ||
+-	     !page_poisoning_enabled()))
++	     !page_poisoning_enabled())) {
+ 		__virtio_clear_bit(vdev, VIRTIO_BALLOON_F_PAGE_POISON);
++	} else if (!virtio_has_feature(vdev, VIRTIO_BALLOON_F_PAGE_POISON)) {
++		__virtio_clear_bit(vdev, VIRTIO_BALLOON_F_FREE_PAGE_HINT);
++		__virtio_clear_bit(vdev, VIRTIO_BALLOON_F_REPORTING);
++	}
+ 
+ 	__virtio_clear_bit(vdev, VIRTIO_F_IOMMU_PLATFORM);
+ 	return 0;
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
