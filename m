@@ -1,105 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EDDC1AC101
-	for <lists.virtualization@lfdr.de>; Thu, 16 Apr 2020 14:21:03 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BF3B1AC144
+	for <lists.virtualization@lfdr.de>; Thu, 16 Apr 2020 14:32:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E958B87B3D;
-	Thu, 16 Apr 2020 12:21:01 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 66E5A221CC;
+	Thu, 16 Apr 2020 12:32:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id paCKBijxX8ht; Thu, 16 Apr 2020 12:21:00 +0000 (UTC)
+	with ESMTP id Cyg+o-tYo7im; Thu, 16 Apr 2020 12:32:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B34E187917;
-	Thu, 16 Apr 2020 12:21:00 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 92789221C6;
+	Thu, 16 Apr 2020 12:32:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 91E44C0172;
-	Thu, 16 Apr 2020 12:21:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78FBFC0172;
+	Thu, 16 Apr 2020 12:32:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 091C5C0172
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8D4BC0172
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 12:20:59 +0000 (UTC)
+ Thu, 16 Apr 2020 12:32:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id E4C4386018
+ by hemlock.osuosl.org (Postfix) with ESMTP id D3191859B1
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 12:20:58 +0000 (UTC)
+ Thu, 16 Apr 2020 12:32:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id eNiT8VScc6Iz
+ with ESMTP id qfq9ZZDJa7DZ
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 12:20:57 +0000 (UTC)
+ Thu, 16 Apr 2020 12:32:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [207.211.31.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id B867F8464A
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 049A2859AE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 12:20:57 +0000 (UTC)
+ Thu, 16 Apr 2020 12:32:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587039656;
+ s=mimecast20190719; t=1587040350;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=N//aUi9ilfSYZbtt9uubNhdLlMHa9VPzC/9aWc7u2N4=;
- b=SYbmxk0BO1FjmSLlFeIhhb3j24hKT5JGSTwtBWBHBCezUWVPvl4FywRRm8dKsvI98dssNK
- 4NZiW0XE4wCcBmAGrVFtXerAs6xNttlZ+uNlKRK6BSJy/4EpedxoOsf9bxTtPQGkb4YKJP
- JfU/9dvBz7DHa1q7Go+979NK9fd4N0U=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-151-4C55DljDMLe4EztS-7odaQ-1; Thu, 16 Apr 2020 08:20:52 -0400
-X-MC-Unique: 4C55DljDMLe4EztS-7odaQ-1
-Received: by mail-wr1-f72.google.com with SMTP id y1so1624387wrp.5
+ bh=0VyMwAzowexFZjgtgFRovq2sXpLz94EE6LhxQbSKU6M=;
+ b=IaBPxtqJ4C1CzKSwVa0zZdUBWZSN5kHjlwu5CadcFacKuPa/kpHceIygcH2S4ombn+o6CF
+ Q19omQ/PYVtKY5l07PfBsbuYRFneUnmKP25AtxPRgKbdJIF432KylwGayVDTu6+vg8pDXn
+ ijNRJiVt+Yd5Av8yY+c9vxq0bwXDgaU=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-147-ZbLptMWBO-OjrgjzEx95Ig-1; Thu, 16 Apr 2020 08:32:29 -0400
+X-MC-Unique: ZbLptMWBO-OjrgjzEx95Ig-1
+Received: by mail-wr1-f69.google.com with SMTP id h14so1627257wrr.12
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 05:20:49 -0700 (PDT)
+ Thu, 16 Apr 2020 05:32:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=N//aUi9ilfSYZbtt9uubNhdLlMHa9VPzC/9aWc7u2N4=;
- b=chhpnNMb3/vnsVuAmOHL34fTjiUAqeZHwvFEqoHRzSCDtFkICacJKjc0oe5Y76fSn/
- brMMdw3NTFLj33bc/kaWiialh/5/uT6Ld25OmRPKw1ItpCTf2dmwcboVLvoaHwD0bqk4
- 66yQGkBSLRVpNdZPxa3fg5tt1v6wDdipTGzJ+HG+9woqHfSMlC03RT67XJvMG8YHtoZT
- dd8z2npDv7XO/f8q9HGwecSqIpQc8KAayhfEXCugb7/wm/Cj1RhI1xCY1JO40yFWjU16
- XUmhQq7xisSEzuGxfAVKZSekyatebWcOi8wRzffhGm+AXpe0+RF3cJaLjSOrbiKGqR1S
- 1lcA==
-X-Gm-Message-State: AGi0PuZEwMb++J7yO0vJm2VwGJrEAx1NYuieEcG+CJpU8qZde1J89lUg
- zR7Mjs6Sp9CasVnbrzhibaOAgINCGFwSppYNaReNHHx1D52fG7mKYb+e5rqWbOx1tZwBVyWy10c
- pn/Dmf1g+nsQnAo0iqyX2NuVygkkitDctMrG8G26njw==
-X-Received: by 2002:a1c:a344:: with SMTP id m65mr4634842wme.20.1587039648643; 
- Thu, 16 Apr 2020 05:20:48 -0700 (PDT)
-X-Google-Smtp-Source: APiQypL7Zr1AmadDiZcqsAC7y2lchYjfJabub1W1Nve6Z9EGEGzkMDXcyVU803uWBITr/U3dkRDooA==
-X-Received: by 2002:a1c:a344:: with SMTP id m65mr4634814wme.20.1587039648429; 
- Thu, 16 Apr 2020 05:20:48 -0700 (PDT)
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=0VyMwAzowexFZjgtgFRovq2sXpLz94EE6LhxQbSKU6M=;
+ b=J5fROlbnyT9vfkm8VTELafVDOv6GkKfcGUpY/6bTbhM5Zam/4ILPBbPPRocSJMyunw
+ r686a2f3MhX7v1ToM3/r1c/SyngU8ovd1XLaPDBh35KE06s2o2EeGyr7E4nrer/CFDi5
+ ohNxP2myibiPgRIsCbEQ+pMEmeNS0zLOyy5j7a9R8HymUP2P4yCWk27Cp+q/IQN+wOc2
+ tcYcP7oig3zk45BYgNO0Ad5hSXWuBafHW1I/56eTAJy5l+HIfr48NhZO0yFF4477OPtV
+ vFdcUZCJEWPjOYaUiBPaHtp+Dp8tBFr8Zx+scjTQQr2B/fiflhvD8gjaEvajR6Z6duNg
+ GmMQ==
+X-Gm-Message-State: AGi0PuZl0WnlrGUHrqef4I+SqiLWjYfIq06Ki9jGuX8AjXyswfen8Ci0
+ HLMxAYW4qwuO5d/qgkg1bzr45/mUS18NbQ2uUUgg/2CIBNlkUL2x/t04liQIbCpTGMS+eU5UQmd
+ O8RKxMTBn9zU+KibzEjPARUMuwhor+VsZ/3TEwqaQ6w==
+X-Received: by 2002:adf:dc06:: with SMTP id t6mr30558902wri.385.1587040348033; 
+ Thu, 16 Apr 2020 05:32:28 -0700 (PDT)
+X-Google-Smtp-Source: APiQypIfoJajvWS7IEEc1sc0ClwIXFD0DzNYfYWsVh5RONPu0C09BwqAJcBPfglPDU6iaP06YIqewA==
+X-Received: by 2002:adf:dc06:: with SMTP id t6mr30558886wri.385.1587040347864; 
+ Thu, 16 Apr 2020 05:32:27 -0700 (PDT)
 Received: from redhat.com (bzq-79-183-51-3.red.bezeqint.net. [79.183.51.3])
- by smtp.gmail.com with ESMTPSA id a67sm3645719wmc.30.2020.04.16.05.20.46
+ by smtp.gmail.com with ESMTPSA id p10sm26656903wrm.6.2020.04.16.05.32.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2020 05:20:47 -0700 (PDT)
-Date: Thu, 16 Apr 2020 08:20:44 -0400
+ Thu, 16 Apr 2020 05:32:27 -0700 (PDT)
+Date: Thu, 16 Apr 2020 08:32:24 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: Re: [GIT PULL] vhost: cleanups and fixes
-Message-ID: <20200416081330-mutt-send-email-mst@kernel.org>
-References: <20200414123606-mutt-send-email-mst@kernel.org>
- <CAHk-=wgVQcD=JJVmowEorHHQSVmSw+vG+Ddc4FATZoTp9mfUmw@mail.gmail.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: linux-next: Tree for Apr 15 (vdpa)
+Message-ID: <20200416082248-mutt-send-email-mst@kernel.org>
+References: <20200415152240.2422e06c@canb.auug.org.au>
+ <620e1646-5899-a077-b9de-95443887364d@infradead.org>
+ <33e4922f-d2b5-f3fa-4d32-a5db5a177238@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAHk-=wgVQcD=JJVmowEorHHQSVmSw+vG+Ddc4FATZoTp9mfUmw@mail.gmail.com>
+In-Reply-To: <33e4922f-d2b5-f3fa-4d32-a5db5a177238@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: hulkci@huawei.com, matej.genci@nutanix.com, KVM list <kvm@vger.kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
- Netdev <netdev@vger.kernel.org>, yanaijie@huawei.com,
- YueHaibing <yuehaibing@huawei.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- virtualization@lists.linux-foundation.org, ashutosh.dixit@intel.com,
- eperezma@redhat.com, Andy Shevchenko <andy.shevchenko@gmail.com>,
- eli@mellanox.com, Stephen Rothwell <sfr@canb.auug.org.au>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- Markus Elfring <elfring@users.sourceforge.net>
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>,
+ Randy Dunlap <rdunlap@infradead.org>,
+ virtualization@lists.linux-foundation.org,
+ Linux Next Mailing List <linux-next@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,41 +109,39 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Apr 15, 2020 at 05:46:33PM -0700, Linus Torvalds wrote:
-> On Tue, Apr 14, 2020 at 9:36 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
-> > virtio: fixes, cleanups
-> 
-> Looking at this, about 75% of it looks like it should have come in
-> during the merge window, not now.
-> 
->               Linus
-
-Well it's all just fallout from
-
-	commit 61b89f23f854f458b8e23719978df58260f051ed
-	Author: Michael S. Tsirkin <mst@redhat.com>
-	Date:   Mon Apr 6 08:42:55 2020 -0400
-
-	    vhost: force spec specified alignment on types
-
-which I didn't know we need until things landed upstream and
-people started testing with weird configs.
-
-That forced changes to a header file and the rest followed.
-
-We could just ignore -mabi=apcs-gnu build being broken for this release -
-is that preferable? Pls let me know.
-
--- 
-MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gVGh1LCBBcHIgMTYsIDIwMjAgYXQgMTI6MDc6MDZQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiAKPiBPbiAyMDIwLzQvMTYg5LiK5Y2IMTI6MTYsIFJhbmR5IER1bmxhcCB3cm90ZToKPiA+
+IE9uIDQvMTQvMjAgMTA6MjIgUE0sIFN0ZXBoZW4gUm90aHdlbGwgd3JvdGU6Cj4gPiA+IEhpIGFs
+bCwKPiA+ID4gCj4gPiA+IENoYW5nZXMgc2luY2UgMjAyMDA0MTQ6Cj4gPiA+IAo+ID4gb24geDg2
+XzY0Ogo+ID4gCj4gPiBFUlJPUjogbW9kcG9zdDogInZyaW5naF9zZXRfaW90bGIiIFtkcml2ZXJz
+L3ZkcGEvdmRwYV9zaW0vdmRwYV9zaW0ua29dIHVuZGVmaW5lZCEKPiA+IEVSUk9SOiBtb2Rwb3N0
+OiAidnJpbmdoX2luaXRfaW90bGIiIFtkcml2ZXJzL3ZkcGEvdmRwYV9zaW0vdmRwYV9zaW0ua29d
+IHVuZGVmaW5lZCEKPiA+IEVSUk9SOiBtb2Rwb3N0OiAidnJpbmdoX2lvdl9wdXNoX2lvdGxiIiBb
+ZHJpdmVycy92ZHBhL3ZkcGFfc2ltL3ZkcGFfc2ltLmtvXSB1bmRlZmluZWQhCj4gPiBFUlJPUjog
+bW9kcG9zdDogInZyaW5naF9pb3ZfcHVsbF9pb3RsYiIgW2RyaXZlcnMvdmRwYS92ZHBhX3NpbS92
+ZHBhX3NpbS5rb10gdW5kZWZpbmVkIQo+ID4gRVJST1I6IG1vZHBvc3Q6ICJ2cmluZ2hfY29tcGxl
+dGVfaW90bGIiIFtkcml2ZXJzL3ZkcGEvdmRwYV9zaW0vdmRwYV9zaW0ua29dIHVuZGVmaW5lZCEK
+PiA+IEVSUk9SOiBtb2Rwb3N0OiAidnJpbmdoX2dldGRlc2NfaW90bGIiIFtkcml2ZXJzL3ZkcGEv
+dmRwYV9zaW0vdmRwYV9zaW0ua29dIHVuZGVmaW5lZCEKPiA+IAo+ID4gCj4gPiBGdWxsIHJhbmRj
+b25maWcgZmlsZSBpcyBhdHRhY2hlZC4KPiA+IAo+IAo+IFRoZSBjb25maWcgaGFzCj4gCj4gQ09O
+RklHX1ZIT1NUX0lPVExCPW0KPiBDT05GSUdfVkhPU1RfUklORz15Cj4gCj4gQnV0IHdlIGRvbid0
+IHNlbGVjdCBWSE9TVF9JT1RMQiBpbiBWSE9TVF9SSU5HIGFmdGVyIGNvbW1pdAo+IGU2ZmFlYWEx
+Mjg0MTcoInZob3N0OiBkcm9wIHZyaW5nIGRlcGVuZGVuY3kgb24gaW90bGIiKS4gV2hpY2ggc2Vl
+bXMgd3JvbmcuCj4gCj4gVGhhbmtzCgpXZWxsIHNlbGVjdGluZyBJT1RMQiBmcm9tIHJpbmcgYnJl
+YWtzIGNvbmZpZ3Mgd2hpY2ggZG9uJ3QgbmVlZCBJT1RMQi4KCkxlZ2FsIGNvbmZpZ3VyYXRpb25z
+IGFyZToKCkNPTkZJR19WSE9TVF9JT1RMQj15CkNPTkZJR19WSE9TVF9SSU5HPW4KCkNPTkZJR19W
+SE9TVF9JT1RMQj1tCkNPTkZJR19WSE9TVF9SSU5HPW4KCkNPTkZJR19WSE9TVF9JT1RMQj1uCkNP
+TkZJR19WSE9TVF9SSU5HPW4KCkNPTkZJR19WSE9TVF9JT1RMQj15CkNPTkZJR19WSE9TVF9SSU5H
+PXkKCkNPTkZJR19WSE9TVF9JT1RMQj1uCkNPTkZJR19WSE9TVF9SSU5HPXkKCkNPTkZJR19WSE9T
+VF9JT1RMQj1uCkNPTkZJR19WSE9TVF9SSU5HPW0KCkNPTkZJR19WSE9TVF9JT1RMQj15CkNPTkZJ
+R19WSE9TVF9SSU5HPW0KCkNPTkZJR19WSE9TVF9JT1RMQj1tCkNPTkZJR19WSE9TVF9SSU5HPW0K
+CgpTbyBWSE9TVF9SSU5HPXkgYW5kIFZIT1NUX0lPVExCPW0gaXMgdGhlIG9ubHkgaWxsZWdhbCBv
+bmUuCgoKLS0gCk1TVAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
+bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
