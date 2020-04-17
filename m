@@ -1,83 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C7C91AD379
-	for <lists.virtualization@lfdr.de>; Fri, 17 Apr 2020 01:53:01 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D2E21AD4BF
+	for <lists.virtualization@lfdr.de>; Fri, 17 Apr 2020 05:14:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C7BB420526;
-	Thu, 16 Apr 2020 23:52:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id DEB0085F74;
+	Fri, 17 Apr 2020 03:14:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kMnqooxj+R6f; Thu, 16 Apr 2020 23:52:59 +0000 (UTC)
+	with ESMTP id T3G9SJ1BLjn9; Fri, 17 Apr 2020 03:14:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id ED27D20425;
-	Thu, 16 Apr 2020 23:52:58 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CAE8886103;
+	Fri, 17 Apr 2020 03:14:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CA741C1D88;
-	Thu, 16 Apr 2020 23:52:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A5529C0172;
+	Fri, 17 Apr 2020 03:14:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 150C2C0172
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 06C9BC0172
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 23:52:57 +0000 (UTC)
+ Fri, 17 Apr 2020 03:14:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 04CED20526
+ by hemlock.osuosl.org (Postfix) with ESMTP id E579F8786C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 23:52:57 +0000 (UTC)
+ Fri, 17 Apr 2020 03:14:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WtkCTlomjw6k
+ with ESMTP id NKC-t1rOlDPq
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 23:52:54 +0000 (UTC)
+ Fri, 17 Apr 2020 03:14:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-il1-f196.google.com (mail-il1-f196.google.com
- [209.85.166.196])
- by silver.osuosl.org (Postfix) with ESMTPS id 27C0B20425
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A639987541
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 23:52:54 +0000 (UTC)
-Received: by mail-il1-f196.google.com with SMTP id t10so401669ilg.9
- for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Apr 2020 16:52:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nt8xfqR64UrmXiwp5NR+nTreG2PqVtfy4dHeLkjhcpE=;
- b=VeNj9oRPYH3SFxtQLV7byl4YU1VnfR++Iy6t+91wAOhbTwYWz+P4B2Ns9MNhSWzLnn
- mm4LEMmxR4/KE3/cJINY1u6QA7pAhbmHEQWxlf8AljsV52LbMu3olNpv10VoSlHWTAD4
- ak+QwHwFFhQCPHFVkw7tg9YTbqu8+oIYX/KLjIA9sehGTZcBKzR0Uoj4MphpsSSdxTK5
- H8oO9n1joLeRTj/wgLrzZ7Rv/eZk6dQXHaXnP/wmZDN5rFMLxYrzg9uXg1gLUdwbr5t2
- mSMAdH8zxSp9RYNFuU2PSQVDHR0F1SxByTjdKNUHkVMHs23b9lKqF+ozJy1ZjgRQARZK
- evzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=nt8xfqR64UrmXiwp5NR+nTreG2PqVtfy4dHeLkjhcpE=;
- b=mclZPLqvqnlGOpA2s9EptH2I55VYKW6VFNB0im3VTqPTXYVHqMMD2pq91k1Pbyo0aU
- NTK6vdgZb2EVZYb2fIZfK3kNOCby2/82mgiEVY12OrgH+SiGEjQlGYhG9pCVYkvhRPs6
- ZUIoLWtu800KkAeEwnDFU5HyEmImchPys5Wr6bymwy+c+B4zSCWC9XilCCNxtby9o7wN
- WV7+6AiaF++XZKZfIoWnCSPV1wsN+nPd4z9oMz7UKOlkZggilN67SxzGY837SDMuiehf
- Zvn4tV46zD3Xcux/gyV+jTn0dNb88zpXCFHHnmf7YqUK4k2eLT3bvwxXfKEmCMiGZ/ce
- bFFw==
-X-Gm-Message-State: AGi0PuatcQRnO9upYmm4Te4O2qHm6L8rC51yq1CC3CsdXKFzM+pe2m7S
- mOMmue6Uoqa5FftCyyxx3pm/lQQwQUoIuKGHXvU=
-X-Google-Smtp-Source: APiQypLlQL6E01xxcXAgg2+zj3xzbg7JHckudvEdBUyLrUuBILAZ20HmAL+sC5iR/KMAwwj5+qUluduay2nrPNXZqio=
-X-Received: by 2002:a92:584b:: with SMTP id m72mr338579ilb.95.1587081173324;
- Thu, 16 Apr 2020 16:52:53 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200416192809.8763.19308.stgit@localhost.localdomain>
- <20200416180845-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20200416180845-mutt-send-email-mst@kernel.org>
-From: Alexander Duyck <alexander.duyck@gmail.com>
-Date: Thu, 16 Apr 2020 16:52:42 -0700
-Message-ID: <CAKgT0UfWHHyCekU+dReNfhAa6u6FNbm7Ff5wmyN58d1VymmAMA@mail.gmail.com>
-Subject: Re: [virtio-dev] Re: [PATCH] virtio-balloon: Disable free page
- hinting/reporting if page poison is disabled
+ Fri, 17 Apr 2020 03:14:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1587093151;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9kod4sBVNZl13j111ZtiqdMeSXjTm/Tfeat7xy/R1z0=;
+ b=UmkpulOEhPVyx1Nhm0K6LXPQr5R/7TvL960h1wlck/vdXIXgiokkHbrNSs5mvkpk+1LUhp
+ 9zSQKUjShkBE/FmNn/mg5pEHsdgoaa7+1O0qamfIA2KhxhE4v7q4UJcPPy3Iw0mG1IraWa
+ tjcvTRemqXlhdCAnQiPHxf3Yd4UR2m4=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1587093279;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9kod4sBVNZl13j111ZtiqdMeSXjTm/Tfeat7xy/R1z0=;
+ b=VueVeQ1rQRWiz8Ri8duDvkx1JFJCJQxx+LLn+IoBCQQbvthalyPF15PPkyMS2wMSx4P2IK
+ MsVAYD9TxfPei/JtS1Fja82/okN7Rlck3BeA+LwR8sZziMHYxwkx5pX2yA+hJ5VJDJodfb
+ ka7RMiN/6sPAzqrVqlpPI5vzdgxJjrU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-92-IdiGn_JcMJi4EAOTBKuGeg-1; Thu, 16 Apr 2020 23:12:26 -0400
+X-MC-Unique: IdiGn_JcMJi4EAOTBKuGeg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1D22E8017F3;
+ Fri, 17 Apr 2020 03:12:24 +0000 (UTC)
+Received: from [10.72.13.254] (ovpn-13-254.pek2.redhat.com [10.72.13.254])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F061027BD7;
+ Fri, 17 Apr 2020 03:12:15 +0000 (UTC)
+Subject: Re: [PATCH V2] vhost: do not enable VHOST_MENU by default
 To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: virtio-dev@lists.oasis-open.org, virtualization@lists.linux-foundation.org
+References: <20200415024356.23751-1-jasowang@redhat.com>
+ <20200416185426-mutt-send-email-mst@kernel.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <b7e2deb7-cb64-b625-aeb4-760c7b28c0c8@redhat.com>
+Date: Fri, 17 Apr 2020 11:12:14 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+MIME-Version: 1.0
+In-Reply-To: <20200416185426-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: linux-s390@vger.kernel.org, tsbogend@alpha.franken.de,
+ benh@kernel.crashing.org, gor@linux.ibm.com, kvm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, heiko.carstens@de.ibm.com,
+ linux-mips@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ borntraeger@de.ibm.com, geert@linux-m68k.org,
+ Michael Ellerman <mpe@ellerman.id.au>, netdev@vger.kernel.org,
+ paulus@samba.org, linuxppc-dev@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,58 +103,44 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Apr 16, 2020 at 3:13 PM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> On Thu, Apr 16, 2020 at 12:30:38PM -0700, Alexander Duyck wrote:
-> > From: Alexander Duyck <alexander.h.duyck@linux.intel.com>
-> >
-> > If we have free page hinting or page reporting enabled we should disable it
-> > if the pages are poisoned or initialized on free and we cannot notify the
-> > hypervisor.
-> >
-> > Fixes: 5d757c8d518d ("virtio-balloon: add support for providing free page reports to host")
-> >
-> > Signed-off-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
->
->
-> Why not put this logic in the hypervisor?
-
-I did that too. This is to cover the case where somebody is running
-the code prior to my QEMU changes where the page poison feature wasn't
-being enabled.
-
-> We don't know what hypervisor uses the hints for.
-
-I agree, but at the same time the way the feature was originally coded
-it was only checked if the FREE_PAGE_HINT feature was enabled. The
-assumption there is that if we have page poison data and want to use
-hints we need to report it. In my mind if we ever want to switch over
-to the page reporting style setup for page hinting in the future we
-will need to have it behave in a sane manner. So disabling it if we
-have a poison value we need to report, but have no mechanism to report
-it makes sense to me.
-
-The actual likelihood of us encountering this case should be pretty
-low anyway since it is not that common to have page poisoning or
-init_on_free enabled.
-
-> Yes you can not just drop them but you can maybe do
-> other things such as MADV_SOFT_OFFLINE.
->
-> Finally, VIRTIO_BALLOON_F_FREE_PAGE_HINT does nothing
-> at all unless guest gets the command from hypervisor,
-> so there isn't even any overhead.
-
-The problem is we cannot communicate the full situation to the
-hypervisor without the page poison feature being present. As such I
-would worry about that backfiring on us due to the hypervisor acting
-on incomplete data.
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNC8xNyDkuIrljYg2OjU1LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4gT24g
+V2VkLCBBcHIgMTUsIDIwMjAgYXQgMTA6NDM6NTZBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToK
+Pj4gV2UgdHJ5IHRvIGtlZXAgdGhlIGRlZmNvbmZpZyB1bnRvdWNoZWQgYWZ0ZXIgZGVjb3VwbGlu
+ZyBDT05GSUdfVkhPU1QKPj4gb3V0IG9mIENPTkZJR19WSVJUVUFMSVpBVElPTiBpbiBjb21taXQg
+MjBjMzg0ZjFlYTFhCj4+ICgidmhvc3Q6IHJlZmluZSB2aG9zdCBhbmQgdnJpbmdoIGtjb25maWci
+KSBieSBlbmFibGluZyBWSE9TVF9NRU5VIGJ5Cj4+IGRlZmF1bHQuIFRoZW4gdGhlIGRlZmNvbmZp
+Z3MgY2FuIGtlZXAgZW5hYmxpbmcgQ09ORklHX1ZIT1NUX05FVAo+PiB3aXRob3V0IHRoZSBjYXJp
+bmcgb2YgQ09ORklHX1ZIT1NULgo+Pgo+PiBCdXQgdGhpcyB3aWxsIGxlYXZlIGEgIkNPTkZJR19W
+SE9TVF9NRU5VPXkiIGluIGFsbCBkZWZjb25maWdzIGFuZCBldmVuCj4+IGZvciB0aGUgb25lcyB0
+aGF0IGRvZXNuJ3Qgd2FudCB2aG9zdC4gU28gaXQgYWN0dWFsbHkgc2hpZnRzIHRoZQo+PiBidXJk
+ZW5zIHRvIHRoZSBtYWludGFpbmVycyBvZiBhbGwgb3RoZXIgdG8gYWRkICJDT05GSUdfVkhPU1Rf
+TUVOVSBpcwo+PiBub3Qgc2V0Ii4gU28gdGhpcyBwYXRjaCB0cmllcyB0byBlbmFibGUgQ09ORklH
+X1ZIT1NUIGV4cGxpY2l0bHkgaW4KPj4gZGVmY29uZmlncyB0aGF0IGVuYWJsZXMgQ09ORklHX1ZI
+T1NUX05FVCBhbmQgQ09ORklHX1ZIT1NUX1ZTT0NLLgo+Pgo+PiBBY2tlZC1ieTogQ2hyaXN0aWFu
+IEJvcm50cmFlZ2VyPGJvcm50cmFlZ2VyQGRlLmlibS5jb20+ICAoczM5MCkKPj4gQWNrZWQtYnk6
+IE1pY2hhZWwgRWxsZXJtYW48bXBlQGVsbGVybWFuLmlkLmF1PiAgKHBvd2VycGMpCj4+IENjOiBU
+aG9tYXMgQm9nZW5kb2VyZmVyPHRzYm9nZW5kQGFscGhhLmZyYW5rZW4uZGU+Cj4+IENjOiBCZW5q
+YW1pbiBIZXJyZW5zY2htaWR0PGJlbmhAa2VybmVsLmNyYXNoaW5nLm9yZz4KPj4gQ2M6IFBhdWwg
+TWFja2VycmFzPHBhdWx1c0BzYW1iYS5vcmc+Cj4+IENjOiBNaWNoYWVsIEVsbGVybWFuPG1wZUBl
+bGxlcm1hbi5pZC5hdT4KPj4gQ2M6IEhlaWtvIENhcnN0ZW5zPGhlaWtvLmNhcnN0ZW5zQGRlLmli
+bS5jb20+Cj4+IENjOiBWYXNpbHkgR29yYmlrPGdvckBsaW51eC5pYm0uY29tPgo+PiBDYzogQ2hy
+aXN0aWFuIEJvcm50cmFlZ2VyPGJvcm50cmFlZ2VyQGRlLmlibS5jb20+Cj4+IFJlcG9ydGVkLWJ5
+OiBHZWVydCBVeXR0ZXJob2V2ZW48Z2VlcnRAbGludXgtbTY4ay5vcmc+Cj4+IFNpZ25lZC1vZmYt
+Ynk6IEphc29uIFdhbmc8amFzb3dhbmdAcmVkaGF0LmNvbT4KPiBJIHJlYmFzZWQgdGhpcyBvbiB0
+b3Agb2YgT0FCSSBmaXggc2luY2UgdGhhdAo+IHNlZW1zIG1vcmUgb3JnZW50IHRvIGZpeC4KPiBQ
+dXNoZWQgdG8gbXkgdmhvc3QgYnJhbmNoIHBscyB0YWtlIGEgbG9vayBhbmQKPiBpZiBwb3NzaWJs
+ZSB0ZXN0Lgo+IFRoYW5rcyEKCgpJIHRlc3QgdGhpcyBwYXRjaCBieSBnZW5lcmF0aW5nIHRoZSBk
+ZWZjb25maWdzIHRoYXQgd2FudHMgdmhvc3RfbmV0IG9yIAp2aG9zdF92c29jay4gQWxsIGxvb2tz
+IGZpbmUuCgpCdXQgaGF2aW5nIENPTkZJR19WSE9TVF9EUE49eSBtYXkgZW5kIHVwIHdpdGggdGhl
+IHNpbWlsYXIgc2l0dWF0aW9uIHRoYXQgCnRoaXMgcGF0Y2ggd2FudCB0byBhZGRyZXNzLgoKTWF5
+YmUgd2UgY2FuIGxldCBDT05GSUdfVkhPU1QgZGVwZW5kcyBvbiAhQVJNIHx8IEFFQUJJIHRoZW4g
+YWRkIGFub3RoZXIgCm1lbnVjb25maWcgZm9yIFZIT1NUX1JJTkcgYW5kIGRvIHNvbWV0aGluZyBz
+aW1pbGFyPwoKVGhhbmtzCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3Rz
+LmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
