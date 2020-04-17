@@ -1,94 +1,108 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 551AF1AD819
-	for <lists.virtualization@lfdr.de>; Fri, 17 Apr 2020 09:59:55 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0757F20427;
-	Fri, 17 Apr 2020 07:59:54 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VbIEN8a3G6VU; Fri, 17 Apr 2020 07:59:52 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 7B1872262F;
-	Fri, 17 Apr 2020 07:59:52 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5A671C0172;
-	Fri, 17 Apr 2020 07:59:52 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 76D3CC0172
- for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Apr 2020 07:59:50 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65E251AD884
+	for <lists.virtualization@lfdr.de>; Fri, 17 Apr 2020 10:29:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 6678A87659
- for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Apr 2020 07:59:50 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C6F12834E6;
+	Fri, 17 Apr 2020 08:28:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4SM5sft1NLgV; Fri, 17 Apr 2020 08:28:58 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9031F83138;
+	Fri, 17 Apr 2020 08:28:58 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 605F8C0172;
+	Fri, 17 Apr 2020 08:28:58 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 27968C0172
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 17 Apr 2020 08:28:57 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 115C38453D
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 17 Apr 2020 08:28:57 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GnlftL-sHBC9
+ with ESMTP id 4IWwrLcwZa-D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Apr 2020 07:59:49 +0000 (UTC)
+ Fri, 17 Apr 2020 08:28:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 0599A8764F
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1D3F784536
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Apr 2020 07:59:48 +0000 (UTC)
+ Fri, 17 Apr 2020 08:28:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587110387;
+ s=mimecast20190719; t=1587112134;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=pttTsXfJsO5qd96fUX4GjjyN7BeuHWmaGEZtAEZg4sw=;
- b=J8Hw9dixONztY7+Tpsyrf+Zi72I4LVRfSEFHivVdPTY5VGASeKZ4cC2QjYA6nChmp9sMMj
- fAPTDpYWn/94FOr/M2+Z4Fk4EOPMjJzYX11w5NYk24MYlrSMblxRtsHKET7zjApp7s0mUi
- 7/uJDWUb/4iVLsZgJAn1mKFkSeakORE=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-8-K6uaXkROPnSWsQnAx6r1aw-1; Fri, 17 Apr 2020 03:59:39 -0400
-X-MC-Unique: K6uaXkROPnSWsQnAx6r1aw-1
-Received: by mail-wr1-f71.google.com with SMTP id o10so598265wrj.7
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Oasdo/n58yfP5QePlXQxCoOhZ1IeYWDPi9VJ2pRbqoY=;
+ b=DptQs9ET/TJKWLNt5Qc7WBQlOUXGxM+uR4c1DrRhLW+v3B8E6nhwhvN6Utf2vijvfv7fnU
+ w210teKsdI1nz3obg2WVraoDRyShbioWrCCTfx4lFCy3sebLO4pscg4lrmmMJvYwumnHBA
+ aLgb/ZJZeZvAAxxH86usKBo1NrDu1r0=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-99-xQcjkeeQMBSss3qlUmd-CQ-1; Fri, 17 Apr 2020 04:28:51 -0400
+X-MC-Unique: xQcjkeeQMBSss3qlUmd-CQ-1
+Received: by mail-wr1-f69.google.com with SMTP id q10so630331wrv.10
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Apr 2020 00:59:39 -0700 (PDT)
+ Fri, 17 Apr 2020 01:28:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=pttTsXfJsO5qd96fUX4GjjyN7BeuHWmaGEZtAEZg4sw=;
- b=MkKqwJ1hEWPTLcrmJTNNW5R+uUX6eZFWB0dNs1YuaVC5Tyr8JXOWoTDjS6OmFRN/Gg
- vKUrKWwvRNUTl89a1/qkPJ9DhHQIhfKczHdB3xlCBE6kKNk94Gs91hIzRMe879DX7nxE
- +jBVjEm5TRlrQaLPFseTUx7ZY1W7j7JWktHfbLLCyLDgvaOUN1aNokrI2VqE1g3KO2UN
- m2U5COg+0a+KNZ0+y3VVjRLmTNqgqc07VZ98kKhRafZpE+gHANSbkyeJhjCS57Rzx7bg
- wpi4UBufUAZtoEKgCphhyRz8H9wYpfVWNLxgcZ8AIioq0AKkfLyXApjv6wLd5+epNY/R
- x5hw==
-X-Gm-Message-State: AGi0PuZvpJBxDr/r56pZpYKIpagBZb5EPUYHGvDJYwPKvWelBonARaNV
- 0rww6+mDOHOARPhrougA8Gp2jLSOQwiEM3ToT3BbO3k84ib0GnPxewfVLnBdX4YVsQ5TeiZCYHO
- oLV+nIfhCqQzl5h/piuWEIlWKOevWsxMFhfxYvDV5SA==
-X-Received: by 2002:a1c:9d84:: with SMTP id g126mr1898735wme.184.1587110378073; 
- Fri, 17 Apr 2020 00:59:38 -0700 (PDT)
-X-Google-Smtp-Source: APiQypL7JfXhE5vFVj1kJeWaNlkc8YDs13yjfj3N/sFo8oSVy/wgjrWfOFrSOQ9Dg05aWCm/T5Fq4A==
-X-Received: by 2002:a1c:9d84:: with SMTP id g126mr1898718wme.184.1587110377796; 
- Fri, 17 Apr 2020 00:59:37 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=mJ8xriwhJnwxVRszo7sZYDjt+bqPl2dFP/ChGE8P0zA=;
+ b=ChxMTNTT/xvjUU8S6x8nAZZX8uC4yLcu4PhEEAtx6D8bKsnnADbpyQpBc9DY7Kahx1
+ QZp2C3erQVw2bmSm3gOCxgwdhFJmE19kl7D3C46MMfawWryQWIENJvD52RZSLVIxYall
+ 4q5OS5ywUSwRJdibMj6wgArGeBSWu69R4Y4X2tE4CRA8BfiHTanu81pUVOj5PlmnMsKD
+ aPBOx3lE7L7P48OzwfzmN7EtAzX54E86Sw8eYTjCFVaDumPYScWfKEVOLFgE9oFcVANF
+ mNrY+KIIn92SBo/HvktrI/ASoGP5SVCsBqBoofvmW/9Mi2627pF777RsmZysUkBRkxVs
+ Fe7g==
+X-Gm-Message-State: AGi0Pua71bmke8CGKrxcIuBFjw+FMSEG5gnrC0QXHdmaA9pZFWMn7FPM
+ nMKt+qqyp4m+c8XiZLQVmlAlAoLU2XQS41NyF03gfSS2mp/38bDv8cl7wHGDElIIt2mz4ylE5Yz
+ RJP3djk3vYDvkuLamsYTLYhWSkANcGgl3uZytW79C0g==
+X-Received: by 2002:a05:600c:2c04:: with SMTP id
+ q4mr2078498wmg.7.1587112130080; 
+ Fri, 17 Apr 2020 01:28:50 -0700 (PDT)
+X-Google-Smtp-Source: APiQypJ2Sn7FUvpE07r59sGuE5XHGLLO0BakznVfq9gjnT4uADElM12aSKCTNB609s6nmfxAJ2jCoQ==
+X-Received: by 2002:a05:600c:2c04:: with SMTP id
+ q4mr2078477wmg.7.1587112129750; 
+ Fri, 17 Apr 2020 01:28:49 -0700 (PDT)
 Received: from redhat.com (bzq-79-183-51-3.red.bezeqint.net. [79.183.51.3])
- by smtp.gmail.com with ESMTPSA id o28sm16416939wra.84.2020.04.17.00.59.35
+ by smtp.gmail.com with ESMTPSA id u7sm7319215wmg.41.2020.04.17.01.28.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Apr 2020 00:59:37 -0700 (PDT)
-Date: Fri, 17 Apr 2020 03:59:34 -0400
+ Fri, 17 Apr 2020 01:28:49 -0700 (PDT)
+Date: Fri, 17 Apr 2020 04:28:46 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v9] virtio: force spec specified alignment on types
-Message-ID: <20200417075551.12291-1-mst@redhat.com>
+To: Eugenio Perez Martin <eperezma@redhat.com>
+Subject: Re: [PATCH v2 7/8] tools/virtio: Reset index in virtio_test --reset.
+Message-ID: <20200417042551-mutt-send-email-mst@kernel.org>
+References: <20200416075643.27330-1-eperezma@redhat.com>
+ <20200416075643.27330-8-eperezma@redhat.com>
+ <20200416183324-mutt-send-email-mst@kernel.org>
+ <CAJaqyWcBTnXvkzaqfSOWODK=+jddeVpee-4ZuqfWc+zj0UsZLA@mail.gmail.com>
 MIME-Version: 1.0
-X-Mailer: git-send-email 2.24.1.751.gd10ce2899c
-X-Mutt-Fcc: =sent
+In-Reply-To: <CAJaqyWcBTnXvkzaqfSOWODK=+jddeVpee-4ZuqfWc+zj0UsZLA@mail.gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: netdev@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>, kvm list <kvm@vger.kernel.org>,
+ Cornelia Huck <cohuck@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,121 +114,155 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The ring element addresses are passed between components with different
-alignments assumptions. Thus, if guest/userspace selects a pointer and
-host then gets and dereferences it, we might need to decrease the
-compiler-selected alignment to prevent compiler on the host from
-assuming pointer is aligned.
+On Fri, Apr 17, 2020 at 09:04:04AM +0200, Eugenio Perez Martin wrote:
+> On Fri, Apr 17, 2020 at 12:34 AM Michael S. Tsirkin <mst@redhat.com> wrot=
+e:
+> >
+> > On Thu, Apr 16, 2020 at 09:56:42AM +0200, Eugenio P=C3=A9rez wrote:
+> > > This way behavior for vhost is more like a VM.
+> > >
+> > > Signed-off-by: Eugenio P=C3=A9rez <eperezma@redhat.com>
+> >
+> > I dropped --reset from 5.7 since Linus felt it's unappropriate.
+> > I guess I should squash this in with --reset?
+> >
+> =
 
-This actually triggers on ARM with -mabi=apcs-gnu - which is a
-deprecated configuration, but it seems safer to handle this
-generally.
+> Yes please.
+> =
 
-Note that userspace that allocates the memory is actually OK and does
-not need to be fixed, but userspace that gets it from guest or another
-process does need to be fixed. The later doesn't generally talk to the
-kernel so while it might be buggy it's not talking to the kernel in the
-buggy way - it's just using the header in the buggy way - so fixing
-header and asking userspace to recompile is the best we can do.
+> If you prefer I can do it using the base you want, so all commits
+> messages are right.
+> =
 
-I verified that the produced kernel binary on x86 is exactly identical
-before and after the change.
+> Thanks!
 
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
+OK so I dropped new tests from vhost for now, pls rebased on
+top of that.
 
-I am still not sure this is even needed. Does compiler make
-optimizations based on ABI alignment assumptions?
+Thanks!
 
-
-Changes from v8:
-	- better commit log
-	- go back to vring in UAPI
-
- drivers/vhost/vhost.h            |  6 ++---
- include/uapi/linux/virtio_ring.h | 38 +++++++++++++++++++++++---------
- 2 files changed, 31 insertions(+), 13 deletions(-)
-
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index f8403bd46b85..60cab4c78229 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -67,9 +67,9 @@ struct vhost_virtqueue {
- 	/* The actual ring of buffers. */
- 	struct mutex mutex;
- 	unsigned int num;
--	struct vring_desc __user *desc;
--	struct vring_avail __user *avail;
--	struct vring_used __user *used;
-+	vring_desc_t __user *desc;
-+	vring_avail_t __user *avail;
-+	vring_used_t __user *used;
- 	const struct vhost_iotlb_map *meta_iotlb[VHOST_NUM_ADDRS];
- 	struct file *kick;
- 	struct eventfd_ctx *call_ctx;
-diff --git a/include/uapi/linux/virtio_ring.h b/include/uapi/linux/virtio_ring.h
-index 9223c3a5c46a..177227f0d9cd 100644
---- a/include/uapi/linux/virtio_ring.h
-+++ b/include/uapi/linux/virtio_ring.h
-@@ -118,16 +118,6 @@ struct vring_used {
- 	struct vring_used_elem ring[];
- };
- 
--struct vring {
--	unsigned int num;
--
--	struct vring_desc *desc;
--
--	struct vring_avail *avail;
--
--	struct vring_used *used;
--};
--
- /* Alignment requirements for vring elements.
-  * When using pre-virtio 1.0 layout, these fall out naturally.
-  */
-@@ -135,6 +125,34 @@ struct vring {
- #define VRING_USED_ALIGN_SIZE 4
- #define VRING_DESC_ALIGN_SIZE 16
- 
-+/*
-+ * The ring element addresses are passed between components with different
-+ * alignments assumptions. Thus, we might need to decrease the compiler-selected
-+ * alignment, and so must use a typedef to make sure the __aligned attribute
-+ * actually takes hold:
-+ *
-+ * https://gcc.gnu.org/onlinedocs//gcc/Common-Type-Attributes.html#Common-Type-Attributes
-+ *
-+ * When used on a struct, or struct member, the aligned attribute can only
-+ * increase the alignment; in order to decrease it, the packed attribute must
-+ * be specified as well. When used as part of a typedef, the aligned attribute
-+ * can both increase and decrease alignment, and specifying the packed
-+ * attribute generates a warning.
-+ */
-+typedef struct vring_desc __aligned(VRING_DESC_ALIGN_SIZE) vring_desc_t;
-+typedef struct vring_avail __aligned(VRING_AVAIL_ALIGN_SIZE) vring_avail_t;
-+typedef struct vring_used __aligned(VRING_USED_ALIGN_SIZE) vring_used_t;
-+
-+struct vring {
-+	unsigned int num;
-+
-+	vring_desc_t *desc;
-+
-+	vring_avail_t *avail;
-+
-+	vring_used_t *used;
-+};
-+
- #ifndef VIRTIO_RING_NO_LEGACY
- 
- /* The standard layout for the ring is a continuous chunk of memory which looks
--- 
-MST
+> > > ---
+> > >  tools/virtio/virtio_test.c | 33 ++++++++++++++++++++++++++-------
+> > >  1 file changed, 26 insertions(+), 7 deletions(-)
+> > >
+> > > diff --git a/tools/virtio/virtio_test.c b/tools/virtio/virtio_test.c
+> > > index 18d5347003eb..dca64d36a882 100644
+> > > --- a/tools/virtio/virtio_test.c
+> > > +++ b/tools/virtio/virtio_test.c
+> > > @@ -20,7 +20,6 @@
+> > >  #include "../../drivers/vhost/test.h"
+> > >
+> > >  #define RANDOM_BATCH -1
+> > > -#define RANDOM_RESET -1
+> > >
+> > >  /* Unused */
+> > >  void *__kmalloc_fake, *__kfree_ignore_start, *__kfree_ignore_end;
+> > > @@ -49,6 +48,7 @@ struct vdev_info {
+> > >
+> > >  static const struct vhost_vring_file no_backend =3D { .fd =3D -1 },
+> > >                                    backend =3D { .fd =3D 1 };
+> > > +static const struct vhost_vring_state null_state =3D {};
+> > >
+> > >  bool vq_notify(struct virtqueue *vq)
+> > >  {
+> > > @@ -174,14 +174,19 @@ static void run_test(struct vdev_info *dev, str=
+uct vq_info *vq,
+> > >       unsigned len;
+> > >       long long spurious =3D 0;
+> > >       const bool random_batch =3D batch =3D=3D RANDOM_BATCH;
+> > > +
+> > >       r =3D ioctl(dev->control, VHOST_TEST_RUN, &test);
+> > >       assert(r >=3D 0);
+> > > +     if (!reset_n) {
+> > > +             next_reset =3D INT_MAX;
+> > > +     }
+> > > +
+> > >       for (;;) {
+> > >               virtqueue_disable_cb(vq->vq);
+> > >               completed_before =3D completed;
+> > >               started_before =3D started;
+> > >               do {
+> > > -                     const bool reset =3D reset_n && completed > nex=
+t_reset;
+> > > +                     const bool reset =3D completed > next_reset;
+> > >                       if (random_batch)
+> > >                               batch =3D (random() % vq->vring.num) + =
+1;
+> > >
+> > > @@ -224,10 +229,24 @@ static void run_test(struct vdev_info *dev, str=
+uct vq_info *vq,
+> > >                       }
+> > >
+> > >                       if (reset) {
+> > > +                             struct vhost_vring_state s =3D { .index=
+ =3D 0 };
+> > > +
+> > > +                             vq_reset(vq, vq->vring.num, &dev->vdev);
+> > > +
+> > > +                             r =3D ioctl(dev->control, VHOST_GET_VRI=
+NG_BASE,
+> > > +                                       &s);
+> > > +                             assert(!r);
+> > > +
+> > > +                             s.num =3D 0;
+> > > +                             r =3D ioctl(dev->control, VHOST_SET_VRI=
+NG_BASE,
+> > > +                                       &null_state);
+> > > +                             assert(!r);
+> > > +
+> > >                               r =3D ioctl(dev->control, VHOST_TEST_SE=
+T_BACKEND,
+> > >                                         &backend);
+> > >                               assert(!r);
+> > >
+> > > +                             started =3D completed;
+> > >                               while (completed > next_reset)
+> > >                                       next_reset +=3D completed;
+> > >                       }
+> > > @@ -249,7 +268,9 @@ static void run_test(struct vdev_info *dev, struc=
+t vq_info *vq,
+> > >       test =3D 0;
+> > >       r =3D ioctl(dev->control, VHOST_TEST_RUN, &test);
+> > >       assert(r >=3D 0);
+> > > -     fprintf(stderr, "spurious wakeups: 0x%llx\n", spurious);
+> > > +     fprintf(stderr,
+> > > +             "spurious wakeups: 0x%llx started=3D0x%lx completed=3D0=
+x%lx\n",
+> > > +             spurious, started, completed);
+> > >  }
+> > >
+> > >  const char optstring[] =3D "h";
+> > > @@ -312,7 +333,7 @@ static void help(void)
+> > >               " [--no-virtio-1]"
+> > >               " [--delayed-interrupt]"
+> > >               " [--batch=3Drandom/N]"
+> > > -             " [--reset=3Drandom/N]"
+> > > +             " [--reset=3DN]"
+> > >               "\n");
+> > >  }
+> > >
+> > > @@ -360,11 +381,9 @@ int main(int argc, char **argv)
+> > >               case 'r':
+> > >                       if (!optarg) {
+> > >                               reset =3D 1;
+> > > -                     } else if (0 =3D=3D strcmp(optarg, "random")) {
+> > > -                             reset =3D RANDOM_RESET;
+> > >                       } else {
+> > >                               reset =3D strtol(optarg, NULL, 10);
+> > > -                             assert(reset >=3D 0);
+> > > +                             assert(reset > 0);
+> > >                               assert(reset < (long)INT_MAX + 1);
+> > >                       }
+> > >                       break;
+> > > --
+> > > 2.18.1
+> >
 
 _______________________________________________
 Virtualization mailing list
