@@ -1,73 +1,70 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22AEC1AEDE0
-	for <lists.virtualization@lfdr.de>; Sat, 18 Apr 2020 16:10:45 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFD4D1AEEF6
+	for <lists.virtualization@lfdr.de>; Sat, 18 Apr 2020 16:41:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C7858203F6;
-	Sat, 18 Apr 2020 14:10:43 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5748E877FA;
+	Sat, 18 Apr 2020 14:41:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sOLaxk+N8vrW; Sat, 18 Apr 2020 14:10:43 +0000 (UTC)
+	with ESMTP id sIcu5OEYnAwH; Sat, 18 Apr 2020 14:41:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 214DD20400;
-	Sat, 18 Apr 2020 14:10:43 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9B5BB8773E;
+	Sat, 18 Apr 2020 14:41:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 06F96C0172;
-	Sat, 18 Apr 2020 14:10:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8682EC0172;
+	Sat, 18 Apr 2020 14:41:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 66DB4C0172
- for <virtualization@lists.linux-foundation.org>;
- Sat, 18 Apr 2020 14:10:42 +0000 (UTC)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5DECCC0172;
+ Sat, 18 Apr 2020 14:41:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 5536987FCF
- for <virtualization@lists.linux-foundation.org>;
- Sat, 18 Apr 2020 14:10:42 +0000 (UTC)
+ by whitealder.osuosl.org (Postfix) with ESMTP id 5A462876FB;
+ Sat, 18 Apr 2020 14:41:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Y+vqA3lgrbTa
- for <virtualization@lists.linux-foundation.org>;
- Sat, 18 Apr 2020 14:10:41 +0000 (UTC)
+ with ESMTP id VB5jtA2ximfb; Sat, 18 Apr 2020 14:41:41 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id ECF47878A0
- for <virtualization@lists.linux-foundation.org>;
- Sat, 18 Apr 2020 14:10:41 +0000 (UTC)
+ by whitealder.osuosl.org (Postfix) with ESMTPS id AD72486E2A;
+ Sat, 18 Apr 2020 14:41:41 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F0C9921BE5;
- Sat, 18 Apr 2020 14:10:40 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9F2EB21D79;
+ Sat, 18 Apr 2020 14:41:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1587219041;
- bh=dyQ/jAoog3/afvIT8/E4Yzhzrzavmt+MBeOOR32Pl3A=;
+ s=default; t=1587220901;
+ bh=QSO+MTYLOIEKsq08PJYUz+Ls1m/XYejmU5s/QbqlFiI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=PdlplNxOP9vZTZ0bpCVxuo6LmNdOGMmAbRyRJXnoe8kFz07qnvooMjHBurzJBINH5
- eUBbRnfn0aW3sjt9899ETWCKEloTkzSs2XwR+AyVTEsR0mzGi+44dJIVAW/dy+ajEc
- vaX7iKnAJmjPFBYvGVp3BcfAr403+fweJe6T3liI=
+ b=WUaBi7Ded/wH/YxNrTWD6C3Grc5x57b3A93N0TgeT88oIir8kO4HriK6+wPQPzNfb
+ xvjp68kfyfisEI6LKsjozaeGQRBb1UQRaNVWS9Iv5xOAoU83MC+YE13labZFK19rfo
+ ILUceAw+G01MC39UvrBvHHFtUPHKJb/ftAvRiV5o=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.5 74/75] virtio-blk: improve virtqueue error to
- BLK_STS
-Date: Sat, 18 Apr 2020 10:09:09 -0400
-Message-Id: <20200418140910.8280-74-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 42/78] iommu/virtio: Fix freeing of incomplete
+ domains
+Date: Sat, 18 Apr 2020 10:40:11 -0400
+Message-Id: <20200418144047.9013-42-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200418140910.8280-1-sashal@kernel.org>
-References: <20200418140910.8280-1-sashal@kernel.org>
+In-Reply-To: <20200418144047.9013-1-sashal@kernel.org>
+References: <20200418144047.9013-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>, linux-block@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org, Halil Pasic <pasic@linux.ibm.com>,
- Stefan Hajnoczi <stefanha@redhat.com>
+Cc: Sasha Levin <sashal@kernel.org>,
+ Jean-Philippe Brucker <jean-philippe@linaro.org>,
+ Joerg Roedel <jroedel@suse.de>, virtualization@lists.linux-foundation.org,
+ Eric Auger <eric.auger@redhat.com>, iommu@lists.linux-foundation.org,
+ Robin Murphy <robin.murphy@arm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,45 +81,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Halil Pasic <pasic@linux.ibm.com>
+From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 
-[ Upstream commit 3d973b2e9a625996ee997c7303cd793b9d197c65 ]
+[ Upstream commit 7062af3ed2ba451029e3733d9f677c68f5ea9e77 ]
 
-Let's change the mapping between virtqueue_add errors to BLK_STS
-statuses, so that -ENOSPC, which indicates virtqueue full is still
-mapped to BLK_STS_DEV_RESOURCE, but -ENOMEM which indicates non-device
-specific resource outage is mapped to BLK_STS_RESOURCE.
+Calling viommu_domain_free() on a domain that hasn't been finalised (not
+attached to any device, for example) can currently cause an Oops,
+because we attempt to call ida_free() on ID 0, which may either be
+unallocated or used by another domain.
 
-Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
-Link: https://lore.kernel.org/r/20200213123728.61216-3-pasic@linux.ibm.com
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+Only initialise the vdomain->viommu pointer, which denotes a finalised
+domain, at the end of a successful viommu_domain_finalise().
+
+Fixes: edcd69ab9a32 ("iommu: Add virtio-iommu driver")
+Reported-by: Eric Auger <eric.auger@redhat.com>
+Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
+Reviewed-by: Robin Murphy <robin.murphy@arm.com>
+Link: https://lore.kernel.org/r/20200326093558.2641019-3-jean-philippe@linaro.org
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/block/virtio_blk.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ drivers/iommu/virtio-iommu.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index c2ed3e9128e3a..a55383b139df9 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -345,9 +345,14 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
- 		if (err == -ENOSPC)
- 			blk_mq_stop_hw_queue(hctx);
- 		spin_unlock_irqrestore(&vblk->vqs[qid].lock, flags);
--		if (err == -ENOMEM || err == -ENOSPC)
-+		switch (err) {
-+		case -ENOSPC:
- 			return BLK_STS_DEV_RESOURCE;
--		return BLK_STS_IOERR;
-+		case -ENOMEM:
-+			return BLK_STS_RESOURCE;
-+		default:
-+			return BLK_STS_IOERR;
-+		}
- 	}
+diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
+index 3ea9d76829995..6c340a4f4fd28 100644
+--- a/drivers/iommu/virtio-iommu.c
++++ b/drivers/iommu/virtio-iommu.c
+@@ -614,18 +614,20 @@ static int viommu_domain_finalise(struct viommu_dev *viommu,
+ 	int ret;
+ 	struct viommu_domain *vdomain = to_viommu_domain(domain);
  
- 	if (bd->last && virtqueue_kick_prepare(vblk->vqs[qid].vq))
+-	vdomain->viommu		= viommu;
+-	vdomain->map_flags	= viommu->map_flags;
++	ret = ida_alloc_range(&viommu->domain_ids, viommu->first_domain,
++			      viommu->last_domain, GFP_KERNEL);
++	if (ret < 0)
++		return ret;
++
++	vdomain->id		= (unsigned int)ret;
+ 
+ 	domain->pgsize_bitmap	= viommu->pgsize_bitmap;
+ 	domain->geometry	= viommu->geometry;
+ 
+-	ret = ida_alloc_range(&viommu->domain_ids, viommu->first_domain,
+-			      viommu->last_domain, GFP_KERNEL);
+-	if (ret >= 0)
+-		vdomain->id = (unsigned int)ret;
++	vdomain->map_flags	= viommu->map_flags;
++	vdomain->viommu		= viommu;
+ 
+-	return ret > 0 ? 0 : ret;
++	return 0;
+ }
+ 
+ static void viommu_domain_free(struct iommu_domain *domain)
 -- 
 2.20.1
 
