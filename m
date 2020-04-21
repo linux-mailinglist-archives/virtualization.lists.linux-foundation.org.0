@@ -1,85 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id F004A1B21E4
-	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 10:43:13 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E4EE1B229F
+	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 11:25:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 4D35B221A9;
-	Tue, 21 Apr 2020 08:43:12 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 282C9883B6;
+	Tue, 21 Apr 2020 09:25:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zpT8Hxfidr8s; Tue, 21 Apr 2020 08:43:11 +0000 (UTC)
+	with ESMTP id LAJ6-WXBgLaq; Tue, 21 Apr 2020 09:25:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 7E62222859;
-	Tue, 21 Apr 2020 08:43:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id AEC48883A4;
+	Tue, 21 Apr 2020 09:25:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B903C0175;
-	Tue, 21 Apr 2020 08:43:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9A330C1DC9;
+	Tue, 21 Apr 2020 09:25:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 23744C0175
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1659FC0175
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 08:43:10 +0000 (UTC)
+ Tue, 21 Apr 2020 09:25:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 0E2368644F
+ by silver.osuosl.org (Postfix) with ESMTP id 127892210F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 08:43:10 +0000 (UTC)
+ Tue, 21 Apr 2020 09:25:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id z-ndktxoRJ1a
+ with ESMTP id V0DfbEKQUIGR
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 08:43:09 +0000 (UTC)
+ Tue, 21 Apr 2020 09:25:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 6EEC285BD3
+ [205.139.110.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id 41F9D20379
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 08:43:09 +0000 (UTC)
+ Tue, 21 Apr 2020 09:25:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587458588;
+ s=mimecast20190719; t=1587461138;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=9iDz7iWPK0i9U6uK8B+Kq/VOxGdFwzyl3Psdz4sCMdw=;
- b=a4DvaxSgObrQLeudG3vniZ9F/+GbrmPNqrSZQ3zqIy+y6bbWx1t4EwzsPmM2NhNZKwQwca
- 1TMp/oY9HW/lOZTWhLe8xn0HCzVg4MPbCRfo5GpV2TTLGmHuTz/SlEWvgINwcd8VzpFry+
- Wcv+LjvBZkipW6nKkzAcMoOmnNbOKIc=
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=s6kZIJazKnfeWw9rqRwxCTiV7lo+E1jRmgFL7mG8v1w=;
+ b=hFrB+g2XxsiiTZHIEyg6eIYtANPAkk2JGYl/AdD3UQHgMIZ291xXRXyb+pxetQOqJC4qiZ
+ D40wI9wkp0Qu5eU+FKb57JqUBV6EaE1t+oQQkCwgiBHri+8xhmgjvRqUV1Tq4Ufq8kpSo9
+ OkWe5PGUzz5rWQAXxi7S6yRR4tu/BCU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-267-2FtRnLJzNz2bXqouSQxh6Q-1; Tue, 21 Apr 2020 04:43:04 -0400
-X-MC-Unique: 2FtRnLJzNz2bXqouSQxh6Q-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-252-pZMfjWLMOayjYnBl4uIC7Q-1; Tue, 21 Apr 2020 05:25:36 -0400
+X-MC-Unique: pZMfjWLMOayjYnBl4uIC7Q-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9DD0F190B2A0;
- Tue, 21 Apr 2020 08:43:02 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-113-193.ams2.redhat.com
- [10.36.113.193])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D5A351001B30;
- Tue, 21 Apr 2020 08:43:01 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id AB34016E16; Tue, 21 Apr 2020 10:43:00 +0200 (CEST)
-Date: Tue, 21 Apr 2020 10:43:00 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Caicai <caizhaopeng@uniontech.com>
-Subject: Re: [PATCH 1/1] drm/qxl: add mutex_lock/mutex_unlock to ensure the
- order in which resources are released.
-Message-ID: <20200421084300.zggroiptwbrblzqy@sirius.home.kraxel.org>
-References: <20200418063917.26278-1-caizhaopeng@uniontech.com>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CFCE48017F3;
+ Tue, 21 Apr 2020 09:25:34 +0000 (UTC)
+Received: from steredhat.redhat.com (ovpn-114-101.ams2.redhat.com
+ [10.36.114.101])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A499A60C87;
+ Tue, 21 Apr 2020 09:25:28 +0000 (UTC)
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: davem@davemloft.net
+Subject: [PATCH net] vsock/virtio: postpone packet delivery to monitoring
+ devices
+Date: Tue, 21 Apr 2020 11:25:27 +0200
+Message-Id: <20200421092527.41651-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200418063917.26278-1-caizhaopeng@uniontech.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Zhangshuang <zhangshuang@uniontech.com>,
- Zhangyueqian <zhangyueqian@uniontech.com>, Dave Airlie <airlied@redhat.com>,
- Zhangshiwen <zhangshiwen@uniontech.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Cc: Gerard Garcia <ggarcia@deic.uab.cat>, kvm@vger.kernel.org,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Stefan Hajnoczi <stefanha@redhat.com>, Jakub Kicinski <kuba@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,42 +90,50 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sat, Apr 18, 2020 at 02:39:17PM +0800, Caicai wrote:
-> When a qxl resource is released, the list that needs to be released is
-> fetched from the linked list ring and cleared. When you empty the list,
-> instead of trying to determine whether the ttm buffer object for each
-> qxl in the list is locked, you release the qxl object and remove the
-> element from the list until the list is empty. It was found that the
-> linked list was cleared first, and that the lock on the corresponding
-> ttm Bo for the QXL had not been released, so that the new qxl could not
-> be locked when it used the TTM.
+We delivering packets to monitoring devices, before to check if
+the virtqueue has enough space.
 
-So the dma_resv_reserve_shared() call in qxl_release_validate_bo() is
-unbalanced?  Because the dma_resv_unlock() call in
-qxl_release_fence_buffer_objects() never happens due to
-qxl_release_free_list() clearing the list beforehand?  Is that correct?
+If the virtqueue is full, the transmitting packet is queued up
+and it will be sent in the next iteration. This causes the same
+packet to be delivered multiple times to monitoring devices.
 
-The only way I see for this to happen is that the guest is preempted
-between qxl_push_{cursor,command}_ring_release() and
-qxl_release_fence_buffer_objects() calls.  The host can complete the qxl
-command then, signal the guest, and the IRQ handler calls
-qxl_release_free_list() before qxl_release_fence_buffer_objects() runs.
+This patch fixes this issue, postponing the packet delivery
+to monitoring devices, only when it is properly queued in the
+virqueue.
 
-Looking through the code I think it should be safe to simply swap the
-qxl_release_fence_buffer_objects() +
-qxl_push_{cursor,command}_ring_release() calls to close that race
-window.  Can you try that and see if it fixes the bug for you?
+Fixes: 82dfb540aeb2 ("VSOCK: Add virtio vsock vsockmon hooks")
+Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+---
+ net/vmw_vsock/virtio_transport.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
->  		if (flush)
-> -			flush_work(&qdev->gc_work);
-> +			//can't flush work, it may lead to deadlock
-> +			usleep_range(500, 1000);
-> +
-
-The commit message doesn't explain this chunk.
-
-take care,
-  Gerd
+diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
+index dfbaf6bd8b1c..d8db837a96fe 100644
+--- a/net/vmw_vsock/virtio_transport.c
++++ b/net/vmw_vsock/virtio_transport.c
+@@ -115,8 +115,6 @@ virtio_transport_send_pkt_work(struct work_struct *work)
+ 		list_del_init(&pkt->list);
+ 		spin_unlock_bh(&vsock->send_pkt_list_lock);
+ 
+-		virtio_transport_deliver_tap_pkt(pkt);
+-
+ 		reply = pkt->reply;
+ 
+ 		sg_init_one(&hdr, &pkt->hdr, sizeof(pkt->hdr));
+@@ -137,6 +135,11 @@ virtio_transport_send_pkt_work(struct work_struct *work)
+ 			break;
+ 		}
+ 
++		/* Deliver to monitoring devices all correctly transmitted
++		 * packets.
++		 */
++		virtio_transport_deliver_tap_pkt(pkt);
++
+ 		if (reply) {
+ 			struct virtqueue *rx_vq = vsock->vqs[VSOCK_VQ_RX];
+ 			int val;
+-- 
+2.25.3
 
 _______________________________________________
 Virtualization mailing list
