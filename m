@@ -1,102 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2ADA61B2C52
-	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 18:17:41 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C967B1B2E41
+	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 19:24:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D4C2486B92;
-	Tue, 21 Apr 2020 16:17:39 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 689E48697D;
+	Tue, 21 Apr 2020 17:24:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fOnOJPWOg7Lm; Tue, 21 Apr 2020 16:17:38 +0000 (UTC)
+	with ESMTP id lFBdPElJFfI5; Tue, 21 Apr 2020 17:24:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CFA4C86B96;
-	Tue, 21 Apr 2020 16:17:38 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3A57E87120;
+	Tue, 21 Apr 2020 17:24:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AB912C1797;
-	Tue, 21 Apr 2020 16:17:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C703C0175;
+	Tue, 21 Apr 2020 17:24:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 03015C1797
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9F8DEC0175
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 16:17:37 +0000 (UTC)
+ Tue, 21 Apr 2020 17:24:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id E64DD88503
+ by hemlock.osuosl.org (Postfix) with ESMTP id 898BC87E07
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 16:17:36 +0000 (UTC)
+ Tue, 21 Apr 2020 17:24:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QIh-l8DpUmQe
+ with ESMTP id PMyMW4w7GHOp
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 16:17:36 +0000 (UTC)
+ Tue, 21 Apr 2020 17:24:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 5352288508
+Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com
+ [209.85.216.66])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 1603687D33
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 16:17:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587485852;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=6AGRVLAb8VV2GGBt9FCUOJrCOZqz3yE3pnkPMqPpaZ4=;
- b=fLaw4mDFAiAUyt3HFsE9oUivBaoPBLz8vYuBl+PmmSagFLVEAqoHwnl6pq0D7hd5Z2VwC6
- k+3ZpIPdCpt3XJNxBWGgmThqT8hlPzGFfNlyFyLIIq+8sNEEPpq9grqrBRBIGdm3DaZRtd
- K99BwHoBHnJW3DSyFKc3FigvNbr3o7U=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-2-Eav3HXNuPuabnJ9aNo_ffg-1; Tue, 21 Apr 2020 12:17:31 -0400
-X-MC-Unique: Eav3HXNuPuabnJ9aNo_ffg-1
-Received: by mail-wm1-f69.google.com with SMTP id q5so1691734wmc.9
+ Tue, 21 Apr 2020 17:24:32 +0000 (UTC)
+Received: by mail-pj1-f66.google.com with SMTP id t9so1630095pjw.0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 09:17:30 -0700 (PDT)
+ Tue, 21 Apr 2020 10:24:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=L2/tuyyrk+FrC+TVWKAO9Jkv7cmo4/vzdDOJ54GNqZ0=;
+ b=IWpewJSykrsnWxN4K46c7BXyiKGU5U5+mh07wYceXa0O/DjBweXi+37HQV6tvxior8
+ HDFIvxDRQZvnytbETu4ORlFbuLNAvRUZK06E6ocYW7wZu3MO0ot/BhZfVywbZG5Q50QL
+ uhYIs5AGh2Ws5lc7HIcAFax5orO6IPLEuQ4MUp3tO8d9xZqSM/jnmzB2XmrdyBBMlzBA
+ Nc+q2c2kebrbl7Q0mknsP2gTP5mwFdo5px3V0KHY+UtIh9rPfDAMM4hb/JVZj9ZdEujZ
+ 35nYpMtceYIjgLbKPL5kiaQ0fbIdc4SA15dZZhg0NguR4NdcLqUIeGKiT7WOdc3yeyJx
+ 14NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=6AGRVLAb8VV2GGBt9FCUOJrCOZqz3yE3pnkPMqPpaZ4=;
- b=NEB+zBy+lKUwgFQue9U2nmxnFJk/8MkkRvqxMKSVtTPmBiGy16R7JqGVnUq23XK5ZR
- L5bivnBA38qICDhEzOdA2GiaBXXWMMMzgznYiniJSuJSw5v4iwm0+VotWKk/0/bQuOn5
- Mr4Pt8ccEEe0Arbl1+WvMRT1IxlVBVUA6if9ypSDc9J/7v4XLQchbBThg7Pw90Xrbhii
- OEMe8a2zrpGNJN1Qj2dehqU16sVEhI0pQ0092l2O6k2DhdnPNWUYQQGUH3hWIF401+6V
- slzpaCQb0ut0ZlFy0pdpazq7+VA1HcwCxgnEhJT/5PJv4NoeRqfaZBKTfEbI/C0xnX3A
- 0WJQ==
-X-Gm-Message-State: AGi0PuZK0MztmN37WcqSK4lH5seGrYHi9oZK//1KnuLoW3RAEUz552Nd
- h+TSJkSMNFMMdKNaL75qW3nvj5UHWtar9b5rEXhnHO/KdX7Waps62MGOg77xYGDjKQzIObDTlsy
- w46EZlUz96uN68RGaERR9UJpv2KXLbgG2MLWKLUy07Q==
-X-Received: by 2002:adf:db41:: with SMTP id f1mr23709655wrj.13.1587485849056; 
- Tue, 21 Apr 2020 09:17:29 -0700 (PDT)
-X-Google-Smtp-Source: APiQypINqkJ2dm7HlXLMWrMoVJcXlSBgzF2ec7b2hdUNDNYkmeWZUjNIFZKliARHFyJyRzZXDY7ReQ==
-X-Received: by 2002:adf:db41:: with SMTP id f1mr23709639wrj.13.1587485848793; 
- Tue, 21 Apr 2020 09:17:28 -0700 (PDT)
-Received: from steredhat (host108-207-dynamic.49-79-r.retail.telecomitalia.it.
- [79.49.207.108])
- by smtp.gmail.com with ESMTPSA id h2sm4500324wro.9.2020.04.21.09.17.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2020 09:17:27 -0700 (PDT)
-Date: Tue, 21 Apr 2020 18:17:24 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Stefan Hajnoczi <stefanha@gmail.com>
-Subject: Re: [PATCH net] vsock/virtio: postpone packet delivery to monitoring
- devices
-Message-ID: <20200421161724.c3pnecltfz4jajww@steredhat>
-References: <20200421092527.41651-1-sgarzare@redhat.com>
- <20200421154246.GA47385@stefanha-x1.localdomain>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=L2/tuyyrk+FrC+TVWKAO9Jkv7cmo4/vzdDOJ54GNqZ0=;
+ b=gohh62xD42Z6qxdGk7VAhKHlNoay8054KsDPLxVvX4Di3udEiZb8w/1SavgHnkhrfd
+ EX+wWBu/bEeSau5oIYcyc6pMM4NWtOmTvJBONT7g9Zg7hUCE7mioI7bKRDwgQHhCXS0R
+ /+8rg4QEEItRLumRywWRcNpOff9LTQXZQ3QMPw7fpQQaBjAAe1DETDYbAtKGqa3bL2P1
+ KaT+2BH+2t2Cy6iWs+FDE+YgCJsXokqU/xGbXa7b3KtYxHcOAt/O50KdllyY2H1OeDNw
+ /l+AEWZxVImigOLoe81eFFBFLTg5TkwiBuRQRivfKIHv2ojesACYIoO61VfjW2DLr/zj
+ vCDQ==
+X-Gm-Message-State: AGi0PuZbXieHhw3TsKug2BM8bBi9oQHm+wdML3Kw9HYZlSeTCs7bKhpT
+ Y8IVbY3sIrFOVpZd2Mc81bPoKgSZxzT9R94SqTs=
+X-Google-Smtp-Source: APiQypLrw+ulWURfZADaQwTNudM24Gky3/1zWkBus2GpUzJiXP5056wZocjopPa5wu8+IgkOOwrer2mXCfEh+NM3RgA=
+X-Received: by 2002:a17:90a:2401:: with SMTP id h1mr7010141pje.1.1587489871604; 
+ Tue, 21 Apr 2020 10:24:31 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200421154246.GA47385@stefanha-x1.localdomain>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Gerard Garcia <ggarcia@deic.uab.cat>, kvm@vger.kernel.org,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Stefan Hajnoczi <stefanha@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- davem@davemloft.net
+References: <20200421164543.16605-1-zhengdejin5@gmail.com>
+In-Reply-To: <20200421164543.16605-1-zhengdejin5@gmail.com>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Tue, 21 Apr 2020 20:24:24 +0300
+Message-ID: <CAHp75Ve4JwkM+=WHHF73jwNwRS39E-xPDrcn77zCUTpVkj8buA@mail.gmail.com>
+Subject: Re: [PATCH v1] drm/bochs: fix an issue of ioremap() leak
+To: Dejin Zheng <zhengdejin5@gmail.com>
+Cc: David Airlie <airlied@linux.ie>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Daniel Vetter <daniel@ffwll.ch>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,67 +95,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 21, 2020 at 04:42:46PM +0100, Stefan Hajnoczi wrote:
-> On Tue, Apr 21, 2020 at 11:25:27AM +0200, Stefano Garzarella wrote:
-> > We delivering packets to monitoring devices, before to check if
-> > the virtqueue has enough space.
-> 
-> "We [are] delivering packets" and "before to check" -> "before
-> checking".  Perhaps it can be rewritten as:
-> 
->   Packets are delivered to monitoring devices before checking if the
->   virtqueue has enough space.
-> 
+On Tue, Apr 21, 2020 at 7:45 PM Dejin Zheng <zhengdejin5@gmail.com> wrote:
+>
+> It forgot to call bochs_hw_fini() to release related resources when
+> bochs_pci_probe() fail. eg: io virtual address get by ioremap().
 
-Yeah, it is better :-)
+Good start, although I think the best is to switch this driver to use
+pcim_*() functions and drop tons of legacy code.
 
-> > 
-> > If the virtqueue is full, the transmitting packet is queued up
-> > and it will be sent in the next iteration. This causes the same
-> > packet to be delivered multiple times to monitoring devices.
-> > 
-> > This patch fixes this issue, postponing the packet delivery
-> > to monitoring devices, only when it is properly queued in the
-> 
-> s/,//
-> 
-> > virqueue.
-> 
-> s/virqueue/virtqueue/
-> 
+> Fixes: 81da8c3b8d3df6 ("drm/bochs: add drm_driver.release callback.")
+> CC: Andy Shevchenko <andy.shevchenko@gmail.com>
+> Signed-off-by: Dejin Zheng <zhengdejin5@gmail.com>
+> ---
+>  drivers/gpu/drm/bochs/bochs_drv.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/gpu/drm/bochs/bochs_drv.c b/drivers/gpu/drm/bochs/bochs_drv.c
+> index addb0568c1af..210a60135c8a 100644
+> --- a/drivers/gpu/drm/bochs/bochs_drv.c
+> +++ b/drivers/gpu/drm/bochs/bochs_drv.c
+> @@ -138,6 +138,7 @@ static int bochs_pci_probe(struct pci_dev *pdev,
+>         return ret;
+>
+>  err_unload:
+> +       bochs_hw_fini(dev);
+>         bochs_unload(dev);
+>  err_free_dev:
+>         drm_dev_put(dev);
+> --
+> 2.25.0
+>
 
-Thanks, I'll fix in the v2!
 
-> > @@ -137,6 +135,11 @@ virtio_transport_send_pkt_work(struct work_struct *work)
-> >  			break;
-> >  		}
-> >  
-> > +		/* Deliver to monitoring devices all correctly transmitted
-> > +		 * packets.
-> > +		 */
-> > +		virtio_transport_deliver_tap_pkt(pkt);
-> > +
-> 
-> The device may see the tx packet and therefore receive a reply to it
-> before we can call virtio_transport_deliver_tap_pkt().  Does this mean
-> that replies can now appear in the packet capture before the transmitted
-> packet?
-
-hmm, you are right!
-
-And the same thing can already happen in vhost-vsock where we call
-virtio_transport_deliver_tap_pkt() after the vhost_add_used(), right?
-
-The vhost-vsock case can be fixed in a simple way, but here do you think
-we should serialize them? (e.g. mutex, spinlock)
-
-In this case I'm worried about performance.
-
-Or is there some virtqueue API to check availability?
-
-Thanks,
-Stefano
-
+-- 
+With Best Regards,
+Andy Shevchenko
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
