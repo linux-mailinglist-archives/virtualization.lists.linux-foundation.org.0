@@ -1,73 +1,70 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A9381B2AA8
-	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 17:06:50 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 331DF1B2AFD
+	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 17:18:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C6CFC859BD;
-	Tue, 21 Apr 2020 15:06:48 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D35EF85CB4;
+	Tue, 21 Apr 2020 15:18:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UqO35rOx9oIE; Tue, 21 Apr 2020 15:06:46 +0000 (UTC)
+	with ESMTP id IA7AmLzH1e9z; Tue, 21 Apr 2020 15:18:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2B16586D51;
-	Tue, 21 Apr 2020 15:06:46 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 232A785567;
+	Tue, 21 Apr 2020 15:18:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 01733C0175;
-	Tue, 21 Apr 2020 15:06:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E1A9EC0175;
+	Tue, 21 Apr 2020 15:18:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1FC88C0175
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9D802C0175
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 15:06:44 +0000 (UTC)
+ Tue, 21 Apr 2020 15:18:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8B54F815D8
+ by silver.osuosl.org (Postfix) with ESMTP id 293E822122
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 15:06:42 +0000 (UTC)
+ Tue, 21 Apr 2020 15:18:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id P1ku6-04O-XE
+ with ESMTP id 8D9aUABGmYTF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 15:06:42 +0000 (UTC)
+ Tue, 21 Apr 2020 15:18:54 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
- [209.85.166.67])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 133DF87B48
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id A2D7E204F9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 15:06:09 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id b12so15304114ion.8
- for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 08:06:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ngQd1MzS2IzTiDZrfwPTLiQWzl7ehSahib/hiidJdPU=;
- b=ZQk7sfmL05FfDpuMc/V/KjCW5+IqX/AZvVJZyBwIqGybHhjCy1NtYbK+8l7kHsguYU
- 5cy+QE97uY7HM7ShrLLFDMk2qYongKf6QfhdYutwAqdXLj3NLAhWX6mQFKGwhkaWVYhw
- 3Jl6N3Z7DW8mmZ9/FRn881qXevst/cpH1Vw5QLpQOmo6aKV81uXdWRKweaDtW/eBmaxH
- rkfCpcjRkYXWHmJfvNoJvMxoYzelVWc5/V1qSx8yOnDiWh9BAct96yu8bk4M1gIXmA/K
- gdlQGlZRDobtMDnmC1NxxSRLKbHMuQ/lyvkTnt4OJtxrbOI5tokF+2VgUGT+JircN8d8
- 453Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ngQd1MzS2IzTiDZrfwPTLiQWzl7ehSahib/hiidJdPU=;
- b=N920t5bOfmlbKg55nCf6zyVZR2Rl6l2xrOmk1KawAk45XxkbFsdaxORdohCoYPi/Fs
- rwTVYhMjHcLeejXA0oD/wBrZdNIF6Ys5VResvA5LsMW1EU4G5/yVRxX33uXKUFXRHTql
- lqE2GvHFWUr7pgTESAHwWgQ8i4CqrkywanUQsE8HLfjKFblZOT1pBCiAGgHbZcnVqAh6
- z45zsG9+tXjGHYahs7rGANtNWlOzcgQ02MvpNo5vZkeTRA0AIxXK3N9fxJkNaoFrAO/S
- cgc8VR4h3RuZiZ16JygkT9EGG9rQoTZ0X3z0hLmfWSjnQpNqxJNcz4luiipZ5+hMBLRd
- SQaQ==
-X-Gm-Message-State: AGi0PuaIPpElY/bKA6cFRNy8S1g00uSHAhWfmpHf3BdoUQDoaUrAinmJ
- EIgHRjWxUi46R1b9LTRtNOYvkwHvg8I/aQo8h5o=
-X-Google-Smtp-Source: APiQypL8jlkVHi9MG4Yj2XlIGaWyrCJ+cG970KsFpXxRKdcBOIiTwTZ0vvgPDWwQVliK4a9FnaSwcybFyhi9w1vG1Vc=
-X-Received: by 2002:a6b:1545:: with SMTP id 66mr21258510iov.187.1587481568080; 
- Tue, 21 Apr 2020 08:06:08 -0700 (PDT)
-MIME-Version: 1.0
+ Tue, 21 Apr 2020 15:18:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1587482332;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=YSqKccF78sC/GfadBp8DQ0eIwYwCl+P1N0Qos2Ac2a4=;
+ b=T7usyP9ZjOquwq8wBX975Uah9JFiOLhbtkA34H9j8f0iUYZ6rrGIy0ths47rEg0QrD1jfz
+ mfveiY1Ntdx387MAeIk7aovt4PvmRb0AXwZlMA/nCYhYiAgC5TqVO2EAn/EiRUahgqOC2D
+ DF6yRK/ueCr5EZS33aSjMKUGUcWbEf8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-183-RU6zVlHYNuOZtCh3j8ru3A-1; Tue, 21 Apr 2020 11:18:50 -0400
+X-MC-Unique: RU6zVlHYNuOZtCh3j8ru3A-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 90AC31005509;
+ Tue, 21 Apr 2020 15:18:49 +0000 (UTC)
+Received: from [10.36.113.245] (ovpn-113-245.ams2.redhat.com [10.36.113.245])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9BD4F19C70;
+ Tue, 21 Apr 2020 15:18:45 +0000 (UTC)
+Subject: Re: [virtio-dev] Re: [PATCH] virtio-balloon: Disable free page
+ hinting/reporting if page poison is disabled
+To: Alexander Duyck <alexander.duyck@gmail.com>
 References: <20200416192809.8763.19308.stgit@localhost.localdomain>
  <20200416180845-mutt-send-email-mst@kernel.org>
  <CAKgT0UfWHHyCekU+dReNfhAa6u6FNbm7Ff5wmyN58d1VymmAMA@mail.gmail.com>
@@ -83,13 +80,62 @@ References: <20200416192809.8763.19308.stgit@localhost.localdomain>
  <93ccb738-4480-4c31-69c9-5fc349e2a278@redhat.com>
  <CAKgT0UddMDRvztirfikyhtHX7Jx+GJZoA5uEcGMhpY9Aw2N5dA@mail.gmail.com>
  <238a99b6-d127-c626-19fa-77824bd72d13@redhat.com>
-In-Reply-To: <238a99b6-d127-c626-19fa-77824bd72d13@redhat.com>
-From: Alexander Duyck <alexander.duyck@gmail.com>
-Date: Tue, 21 Apr 2020 08:05:55 -0700
-Message-ID: <CAKgT0Ucn-bKqaL0ML4fcm2W7-tGAkJJt2ExYXnBuP4yp2J-uZQ@mail.gmail.com>
-Subject: Re: [virtio-dev] Re: [PATCH] virtio-balloon: Disable free page
- hinting/reporting if page poison is disabled
-To: David Hildenbrand <david@redhat.com>
+ <CAKgT0Ucn-bKqaL0ML4fcm2W7-tGAkJJt2ExYXnBuP4yp2J-uZQ@mail.gmail.com>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <cfcd4c7e-7737-21e3-dd31-d291f486d1b1@redhat.com>
+Date: Tue, 21 Apr 2020 17:18:44 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
+MIME-Version: 1.0
+In-Reply-To: <CAKgT0Ucn-bKqaL0ML4fcm2W7-tGAkJJt2ExYXnBuP4yp2J-uZQ@mail.gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Cc: virtio-dev@lists.oasis-open.org, virtualization@lists.linux-foundation.org,
  "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -108,147 +154,85 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 21, 2020 at 12:29 AM David Hildenbrand <david@redhat.com> wrote:
->
->  >>> 2. Can we assume that the guest will always rewrite the page after the
-> >>> deflate in the case of init_on_free or poison?
-> >>
-> >> Depends on what we think is the right way to do - IOW if we think "some
-> >> other content" as mentioned above is a BUG or not.
-> >
-> > So I wouldn't consider it a but as the zero page probably doesn't
-> > apply. We are basically just indicating we don't care about the
-> > contents, we aren't giving it a value. At least that is how I see it
-> > working based on how it was implemented.
-> >
-> >>> 3. Can we assume that free page hinting will always function as a
-> >>> balloon setup, so no moving it over to a page reporting type setup?
-> >>
-> >> I think we have to define the valid semantics. That implies what would
-> >> be valid to do with it. Unfortunately, we have to reverse-engineer here.
-> >
-> > So at this point a "hinted" page is a page that can essentially
-> > transition to uninitialized while it is sitting in the balloon. I
-> > suspect that is how we are going to have to treat it since that is the
-> > behavior that it has right now.
->
-> At least it's not what Michael initially thought should be done - IIRC.
->
-> "We need to remember that the whole HINT thing is not a mandate for host
-> to corrupt memory. It's just some info about page use guest gives host.
-> If host corrupts memory it's broken ...").
->
-> So the question remains: Does QEMU have a BUG or do we actually allow to
-> corrupt guest memory.
->
-> That leaves us with either
->
-> 1. "Pages hinted via VIRTIO_BALLOON_F_FREE_PAGE_HINT might get replaced
-> by zero page. However, as soon as the page is written by the guest (even
-> before the hinting request was processed by the host), the modified page
-> will stay - whereby the unwritten parts might either be from the old, or
-> from the zero page." - a QEMU BUG.
+>>
+>> That leaves us with either
+>>
+>> 1. "Pages hinted via VIRTIO_BALLOON_F_FREE_PAGE_HINT might get replaced
+>> by zero page. However, as soon as the page is written by the guest (even
+>> before the hinting request was processed by the host), the modified page
+>> will stay - whereby the unwritten parts might either be from the old, or
+>> from the zero page." - a QEMU BUG.
+> 
+> How is this a bug? This is the behavior you would see with the current
+> balloon driver. When you put a page into a balloon it has the option
+> to either madvise it away, defer it, or just skip it because he
+> balloon is disabled. Is the "zero page" a typo? If it was
+> uninitialized data that would be a bug, but I don't see how a zero
+> page or the old data would be a bug.
 
-How is this a bug? This is the behavior you would see with the current
-balloon driver. When you put a page into a balloon it has the option
-to either madvise it away, defer it, or just skip it because he
-balloon is disabled. Is the "zero page" a typo? If it was
-uninitialized data that would be a bug, but I don't see how a zero
-page or the old data would be a bug.
+Sorry, I meant if this was the original design idea of hinting, then we
+would have a QEMU BUG as of now, as we might get get uninitialized data.
+Makes sense?
 
-The caveat for the hinting is that if the page is modified from the
-point it is placed on the ring the dirty flag will be enforced for it
-and will not be skipped as it will be captured in the next bitmap
-sync.
+[...]
 
-> 2. "Pages hinted via VIRTIO_BALLOON_F_FREE_PAGE_HINT are considered
-> unused and will contain an undefined/uninitialized content once hinted.
-> As soon as the page is written by the guest (even before the hinting
-> request was processed by the host), the modified page will stay. The
-> guest should reinitialized the full page in case it cares about the
-> actual content (e.g., page poisoning)."
->
->
-> I tend to favor 2 - although it basically leaves no room for future
-> improvement regarding skipping re-initialization in the guest after
-> migration.
+> 
+>>>
+>>>> The current QEMU implementation would be to simply migrate all hinted
+>>>> pages. In the future we could optimize. Not sure if it's worth the trouble.
+>>>
+>>> So the trick for me is how best to go about sorting this all out.
+>>> There are two ways I see of doing it.
+>>>
+>>> The first approach would be to just assume that hinting should be
+>>> disassociated from poisoning. If I go that route that would more
+>>> closely match up with what happened in QEMU. The downside is that it
+>>> locks in the unmodified/uninitialized behavior and would require pages
+>>> to be rewritten when they come out of the balloon. However this is the
+>>> behavior we have now so it would only require specification
+>>> documentation changes.
+>>
+>> Right now, for simplicity, I prefer this and define
+>> VIRTIO_BALLOON_F_PAGE_POISON only for explicit deflation (balloon
+>> deflation via the deflate queue) and implicit deflation
+>> (VIRTIO_BALLOON_F_REPORTING).
+> 
+> I don't recall us talking about the explicit deflation case before.
 
-I agree. The main advantage would be that we get to keep all of the
-existing functionality and wouldn't have to shut things down for
-poison being enabled. However we are limited in that any future design
-won't be able to skip over having to have the guest re-poison the
-pages.
+The interesting part is that drivers/virtio/virtio_balloon.c mentions:
 
-However making changes to behave more like 1 would break existing use
-cases since right now page poisoning can be enabled and the guest can
-make it work. If we refactored QEMU to make 1 work then we would lose
-that.
+"Let the hypervisor know that we are expecting a specific value to be
+written back in balloon pages.".
 
-> >>>
-> >>> If we assume the above 3 items then there isn't any point in worrying
-> >>> about poison when it comes to free page hinting. It doesn't make sense
-> >>> to since they essentially negate it. As such I could go through this
-> >>> patch and the QEMU patches and clean up any associations since the to
-> >>> are not really tied together in any way.
-> >>
-> >> The big question is, if we want to support VIRTIO_BALLOON_F_PAGE_POISON
-> >> with free page hinting. e.g.,:
-> >>
-> >> "Pages hinted via VIRTIO_BALLOON_F_FREE_PAGE_HINT might get replaced by
-> >> a page full of X. However, as soon as the page is written by the guest
-> >> (even before the hinting request was processed by the host), the
-> >> modified page will stay - whereby the unwritten parts might either be
-> >> from the old, or from a page filled with X. Without
-> >> VIRTIO_BALLOON_F_PAGE_POISON, X is zero, otherwise it is poison_val."
->
-> [...]
->
-> >
-> > With the VIRTIO_BALLOON_F_PAGE_POISON we could make it so that when
-> > the page comes out of the balloon it is either unmodified or it is
-> > poison_val. Without the VIRTIO_BALLOON_F_PAGE_POISON feature present
-> > you cannot make that guarantee and are stuck with the page being
-> > treated as either unmodified or uninitialized memory.
->
-> While it would be possible, I doubt it will be easy to implement, and I
-> still wonder if we should really care about optimizing an undocumented
-> feature that takes three people to figure out the semantics.
+But I just realized that you introduced this comment, not the original
+VIRTIO_BALLOON_F_PAGE_POISON commit.
 
-Agreed. That is why I am thinking I will just disassociate
-F_PAGE_POISON from the page hinting entirely since QEMU never had the
-two implemented together.
+Should this have been "in reported pages when implicitly deflating them
+by reusing them." or sth. like that?
 
-> >
-> >> The current QEMU implementation would be to simply migrate all hinted
-> >> pages. In the future we could optimize. Not sure if it's worth the trouble.
-> >
-> > So the trick for me is how best to go about sorting this all out.
-> > There are two ways I see of doing it.
-> >
-> > The first approach would be to just assume that hinting should be
-> > disassociated from poisoning. If I go that route that would more
-> > closely match up with what happened in QEMU. The downside is that it
-> > locks in the unmodified/uninitialized behavior and would require pages
-> > to be rewritten when they come out of the balloon. However this is the
-> > behavior we have now so it would only require specification
-> > documentation changes.
->
-> Right now, for simplicity, I prefer this and define
-> VIRTIO_BALLOON_F_PAGE_POISON only for explicit deflation (balloon
-> deflation via the deflate queue) and implicit deflation
-> (VIRTIO_BALLOON_F_REPORTING).
+> What is the expectation there? I assume we are saying either
+> poison_val or unmodified? If so I would think the inflate case makes
+> much more sense as that is where the madvise is called that will
+> discard the data. If so it would be pretty easy to just add a check
+> for the poison value to the same spot we check
+> qemu_balloon_is_inhibited.
 
-I don't recall us talking about the explicit deflation case before.
-What is the expectation there? I assume we are saying either
-poison_val or unmodified? If so I would think the inflate case makes
-much more sense as that is where the madvise is called that will
-discard the data. If so it would be pretty easy to just add a check
-for the poison value to the same spot we check
-qemu_balloon_is_inhibited.
+Okay, we have basically no idea what was the intention of
+VIRTIO_BALLOON_F_PAGE_POISON with basic deflation/inflation as well. So
+I think we can define what suits us.
 
-> Let's see if Michael has another opinion.
+On the deflate path, we could always simply fill with poison_val. But
+there are nasty corner cases (esp. no VIRTIO_BALLOON_F_MUST_TELL_HOST).
 
-Agreed.
+What would be your suggestion? Also don't care about
+VIRTIO_BALLOON_F_PAGE_POISON on ordinary inflation/deflation? At this
+point, I think this makes sense.
+
+-- 
+Thanks,
+
+David / dhildenb
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
