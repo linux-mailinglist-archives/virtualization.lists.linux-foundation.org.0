@@ -1,99 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9B7A1B27A2
-	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 15:25:29 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A9381B2AA8
+	for <lists.virtualization@lfdr.de>; Tue, 21 Apr 2020 17:06:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 94992228EB;
-	Tue, 21 Apr 2020 13:25:28 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C6CFC859BD;
+	Tue, 21 Apr 2020 15:06:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mnfZv54H5Tuy; Tue, 21 Apr 2020 13:25:27 +0000 (UTC)
+	with ESMTP id UqO35rOx9oIE; Tue, 21 Apr 2020 15:06:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 36C4422B20;
-	Tue, 21 Apr 2020 13:25:27 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2B16586D51;
+	Tue, 21 Apr 2020 15:06:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 16692C0175;
-	Tue, 21 Apr 2020 13:25:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 01733C0175;
+	Tue, 21 Apr 2020 15:06:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4989EC0175
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1FC88C0175
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 13:25:26 +0000 (UTC)
+ Tue, 21 Apr 2020 15:06:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 43B5B87C65
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8B54F815D8
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 13:25:26 +0000 (UTC)
+ Tue, 21 Apr 2020 15:06:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UdodZ1NEzvWr
+ with ESMTP id P1ku6-04O-XE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 13:25:24 +0000 (UTC)
+ Tue, 21 Apr 2020 15:06:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id BDD2787C5A
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+ [209.85.166.67])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 133DF87B48
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 13:25:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587475523;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=MfN8aMzomRQQ96ayp+DSeaZXFE3YOenFrf2e10oUVkg=;
- b=Qb1hVMpP0BySlzR4N/qoLprJrfn/DAiwlZMXdCimbTWf4Vx3fy8sZHZBg3xKQ/oROyW3KX
- HJhFo1TMvEFfVCzpfqUERNM1J3dyM08qVBs48XMzKBkgCEH10VL3pxXFDNrnuHpCZPv1yE
- aNMoD8/agAGXS6gk/5MoFDrv0iabPAA=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-174--5saklJOOfyGGPUIsAFZbQ-1; Tue, 21 Apr 2020 09:25:19 -0400
-X-MC-Unique: -5saklJOOfyGGPUIsAFZbQ-1
-Received: by mail-wr1-f71.google.com with SMTP id 11so7507771wrc.3
+ Tue, 21 Apr 2020 15:06:09 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id b12so15304114ion.8
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Apr 2020 06:25:19 -0700 (PDT)
+ Tue, 21 Apr 2020 08:06:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ngQd1MzS2IzTiDZrfwPTLiQWzl7ehSahib/hiidJdPU=;
+ b=ZQk7sfmL05FfDpuMc/V/KjCW5+IqX/AZvVJZyBwIqGybHhjCy1NtYbK+8l7kHsguYU
+ 5cy+QE97uY7HM7ShrLLFDMk2qYongKf6QfhdYutwAqdXLj3NLAhWX6mQFKGwhkaWVYhw
+ 3Jl6N3Z7DW8mmZ9/FRn881qXevst/cpH1Vw5QLpQOmo6aKV81uXdWRKweaDtW/eBmaxH
+ rkfCpcjRkYXWHmJfvNoJvMxoYzelVWc5/V1qSx8yOnDiWh9BAct96yu8bk4M1gIXmA/K
+ gdlQGlZRDobtMDnmC1NxxSRLKbHMuQ/lyvkTnt4OJtxrbOI5tokF+2VgUGT+JircN8d8
+ 453Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=MfN8aMzomRQQ96ayp+DSeaZXFE3YOenFrf2e10oUVkg=;
- b=sha1d9XFxRkZ+kSiclA4c+PH9OXLRrUoF/Re6K0nwf8ECoJ57jEn/9YfFH9kBR3Q2R
- 7ka8uqFdzs2bRSodAM7fzDw82ASpya0rARki6D1+ffSErUMUiGzGXUKc4+EUl5E5A/jw
- YXmMUhDeryfdZuPKra9FGHUcque7bqmd9AJELK5dJKxrBrUNpCbV1g4x9Hrg5pAW/egi
- n6vJGVWE+AMt0Dwdb3gWgHubZ3sDOil4RSzfAiXwwLP/I+saHSrPpkch8oA4OIh2J8fD
- gY/JT+0Iz2Ix2qrKZFRfcAy1XkCHflAzK73lp2bONfNlwck9wBnud9FvGvb48LunD+1j
- M0Bw==
-X-Gm-Message-State: AGi0PuYeL7/ZQ5AKb4FMV6cCQiAHqKKXmhUrk8kth680jv649KLw/BPh
- eUFxeYfi/cQKG24+VjfAxWwRDw6CaM6ga/JmJmxo4CbdtuxykuPl9Ses/bAIf4OdpEsw7QpVhF/
- 4+kpbMekJtHBd/kuY2tYFXi9SMMVy9MDRn785s2hb+w==
-X-Received: by 2002:a1c:9cc6:: with SMTP id f189mr4761656wme.75.1587475518694; 
- Tue, 21 Apr 2020 06:25:18 -0700 (PDT)
-X-Google-Smtp-Source: APiQypISelS/YDn7C9T0crq8LJwZEGYjKFkHeDDSrMLyRZ+XVsh/Mvt4HCagYv9aKS72C1scyjQs7g==
-X-Received: by 2002:a1c:9cc6:: with SMTP id f189mr4761633wme.75.1587475518362; 
- Tue, 21 Apr 2020 06:25:18 -0700 (PDT)
-Received: from redhat.com (bzq-79-183-51-3.red.bezeqint.net. [79.183.51.3])
- by smtp.gmail.com with ESMTPSA id 5sm3306952wmg.34.2020.04.21.06.25.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2020 06:25:17 -0700 (PDT)
-Date: Tue, 21 Apr 2020 09:25:15 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v3] virtio: force spec specified alignment on types
-Message-ID: <20200421092418-mutt-send-email-mst@kernel.org>
-References: <20200420204448.377168-1-mst@redhat.com>
- <a4939aeb-ed9d-a6af-1c70-c6c2513e86e2@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ngQd1MzS2IzTiDZrfwPTLiQWzl7ehSahib/hiidJdPU=;
+ b=N920t5bOfmlbKg55nCf6zyVZR2Rl6l2xrOmk1KawAk45XxkbFsdaxORdohCoYPi/Fs
+ rwTVYhMjHcLeejXA0oD/wBrZdNIF6Ys5VResvA5LsMW1EU4G5/yVRxX33uXKUFXRHTql
+ lqE2GvHFWUr7pgTESAHwWgQ8i4CqrkywanUQsE8HLfjKFblZOT1pBCiAGgHbZcnVqAh6
+ z45zsG9+tXjGHYahs7rGANtNWlOzcgQ02MvpNo5vZkeTRA0AIxXK3N9fxJkNaoFrAO/S
+ cgc8VR4h3RuZiZ16JygkT9EGG9rQoTZ0X3z0hLmfWSjnQpNqxJNcz4luiipZ5+hMBLRd
+ SQaQ==
+X-Gm-Message-State: AGi0PuaIPpElY/bKA6cFRNy8S1g00uSHAhWfmpHf3BdoUQDoaUrAinmJ
+ EIgHRjWxUi46R1b9LTRtNOYvkwHvg8I/aQo8h5o=
+X-Google-Smtp-Source: APiQypL8jlkVHi9MG4Yj2XlIGaWyrCJ+cG970KsFpXxRKdcBOIiTwTZ0vvgPDWwQVliK4a9FnaSwcybFyhi9w1vG1Vc=
+X-Received: by 2002:a6b:1545:: with SMTP id 66mr21258510iov.187.1587481568080; 
+ Tue, 21 Apr 2020 08:06:08 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <a4939aeb-ed9d-a6af-1c70-c6c2513e86e2@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+References: <20200416192809.8763.19308.stgit@localhost.localdomain>
+ <20200416180845-mutt-send-email-mst@kernel.org>
+ <CAKgT0UfWHHyCekU+dReNfhAa6u6FNbm7Ff5wmyN58d1VymmAMA@mail.gmail.com>
+ <20200417021335-mutt-send-email-mst@kernel.org>
+ <08d2c4e2-8c0f-7d3c-89f1-0e6c6a2756c8@redhat.com>
+ <20200417044641-mutt-send-email-mst@kernel.org>
+ <0f867029-aef4-72b9-356f-ec25c265db1b@redhat.com>
+ <20200417051223-mutt-send-email-mst@kernel.org>
+ <3447361c-4d07-1785-c59b-8c98ddaebd92@redhat.com>
+ <20200417055217-mutt-send-email-mst@kernel.org>
+ <1823d9be-d175-6cb5-0c7d-8a68d959a0d5@redhat.com>
+ <CAKgT0UdV5+yknti+W4jDLmo9CH+BeS82pm9vDcy47nV8pkEwcw@mail.gmail.com>
+ <93ccb738-4480-4c31-69c9-5fc349e2a278@redhat.com>
+ <CAKgT0UddMDRvztirfikyhtHX7Jx+GJZoA5uEcGMhpY9Aw2N5dA@mail.gmail.com>
+ <238a99b6-d127-c626-19fa-77824bd72d13@redhat.com>
+In-Reply-To: <238a99b6-d127-c626-19fa-77824bd72d13@redhat.com>
+From: Alexander Duyck <alexander.duyck@gmail.com>
+Date: Tue, 21 Apr 2020 08:05:55 -0700
+Message-ID: <CAKgT0Ucn-bKqaL0ML4fcm2W7-tGAkJJt2ExYXnBuP4yp2J-uZQ@mail.gmail.com>
+Subject: Re: [virtio-dev] Re: [PATCH] virtio-balloon: Disable free page
+ hinting/reporting if page poison is disabled
+To: David Hildenbrand <david@redhat.com>
+Cc: virtio-dev@lists.oasis-open.org, virtualization@lists.linux-foundation.org,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,146 +103,153 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVHVlLCBBcHIgMjEsIDIwMjAgYXQgMTA6Mzk6MTlBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIwLzQvMjEg5LiK5Y2INDo0NiwgTWljaGFlbCBTLiBUc2lya2luIHdyb3Rl
-Ogo+ID4gVGhlIHJpbmcgZWxlbWVudCBhZGRyZXNzZXMgYXJlIHBhc3NlZCBiZXR3ZWVuIGNvbXBv
-bmVudHMgd2l0aCBkaWZmZXJlbnQKPiA+IGFsaWdubWVudHMgYXNzdW1wdGlvbnMuIFRodXMsIGlm
-IGd1ZXN0L3VzZXJzcGFjZSBzZWxlY3RzIGEgcG9pbnRlciBhbmQKPiA+IGhvc3QgdGhlbiBnZXRz
-IGFuZCBkZXJlZmVyZW5jZXMgaXQsIHdlIG1pZ2h0IG5lZWQgdG8gZGVjcmVhc2UgdGhlCj4gPiBj
-b21waWxlci1zZWxlY3RlZCBhbGlnbm1lbnQgdG8gcHJldmVudCBjb21waWxlciBvbiB0aGUgaG9z
-dCBmcm9tCj4gPiBhc3N1bWluZyBwb2ludGVyIGlzIGFsaWduZWQuCj4gPiAKPiA+IFRoaXMgYWN0
-dWFsbHkgdHJpZ2dlcnMgb24gQVJNIHdpdGggLW1hYmk9YXBjcy1nbnUgLSB3aGljaCBpcyBhCj4g
-PiBkZXByZWNhdGVkIGNvbmZpZ3VyYXRpb24sIGJ1dCBpdCBzZWVtcyBzYWZlciB0byBoYW5kbGUg
-dGhpcwo+ID4gZ2VuZXJhbGx5Lgo+ID4gCj4gPiBOb3RlIHRoYXQgdXNlcnNwYWNlIHRoYXQgYWxs
-b2NhdGVzIHRoZSBtZW1vcnkgaXMgYWN0dWFsbHkgT0sgYW5kIGRvZXMKPiA+IG5vdCBuZWVkIHRv
-IGJlIGZpeGVkLCBidXQgdXNlcnNwYWNlIHRoYXQgZ2V0cyBpdCBmcm9tIGd1ZXN0IG9yIGFub3Ro
-ZXIKPiA+IHByb2Nlc3MgZG9lcyBuZWVkIHRvIGJlIGZpeGVkLiBUaGUgbGF0ZXIgZG9lc24ndCBn
-ZW5lcmFsbHkgdGFsayB0byB0aGUKPiA+IGtlcm5lbCBzbyB3aGlsZSBpdCBtaWdodCBiZSBidWdn
-eSBpdCdzIG5vdCB0YWxraW5nIHRvIHRoZSBrZXJuZWwgaW4gdGhlCj4gPiBidWdneSB3YXkgLSBp
-dCdzIGp1c3QgdXNpbmcgdGhlIGhlYWRlciBpbiB0aGUgYnVnZ3kgd2F5IC0gc28gZml4aW5nCj4g
-PiBoZWFkZXIgYW5kIGFza2luZyB1c2Vyc3BhY2UgdG8gcmVjb21waWxlIGlzIHRoZSBiZXN0IHdl
-IGNhbiBkby4KPiA+IAo+ID4gSSB2ZXJpZmllZCB0aGF0IHRoZSBwcm9kdWNlZCBrZXJuZWwgYmlu
-YXJ5IG9uIHg4NiBpcyBleGFjdGx5IGlkZW50aWNhbAo+ID4gYmVmb3JlIGFuZCBhZnRlciB0aGUg
-Y2hhbmdlLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEBy
-ZWRoYXQuY29tPgo+ID4gLS0tCj4gPiAKPiA+IGNoYW5nZXMgZnJvbSB2MjoKPiA+IAlhZGQgdnJp
-bmdfdXNlZF9lbGVtX3QgdG8gZW5zdXJlIGFsaWdubWVudCBmb3Igc3Vic3RydWN0dXJlcwo+ID4g
-Y2hhbmdlcyBmcm9tIHYxOgo+ID4gCXN3aWN0aCBhbGwgX191c2VyIHRvIHRoZSBuZXcgdHlwZWRl
-ZnMKPiA+IAo+ID4gICBkcml2ZXJzL3Zob3N0L3Zob3N0LmMgICAgICAgICAgICB8ICA4ICsrKy0t
-LQo+ID4gICBkcml2ZXJzL3Zob3N0L3Zob3N0LmggICAgICAgICAgICB8ICA2ICsrLS0tCj4gPiAg
-IGRyaXZlcnMvdmhvc3QvdnJpbmdoLmMgICAgICAgICAgIHwgIDYgKystLS0KPiA+ICAgaW5jbHVk
-ZS9saW51eC92cmluZ2guaCAgICAgICAgICAgfCAgNiArKy0tLQo+ID4gICBpbmNsdWRlL3VhcGkv
-bGludXgvdmlydGlvX3JpbmcuaCB8IDQzICsrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0t
-Cj4gPiAgIDUgZmlsZXMgY2hhbmdlZCwgNDUgaW5zZXJ0aW9ucygrKSwgMjQgZGVsZXRpb25zKC0p
-Cj4gPiAKPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmMgYi9kcml2ZXJzL3Zo
-b3N0L3Zob3N0LmMKPiA+IGluZGV4IGQ0NTBlMTZjNWMyNS4uYmM3N2IwZjQ2NWZkIDEwMDY0NAo+
-ID4gLS0tIGEvZHJpdmVycy92aG9zdC92aG9zdC5jCj4gPiArKysgYi9kcml2ZXJzL3Zob3N0L3Zo
-b3N0LmMKPiA+IEBAIC0xMjQ0LDkgKzEyNDQsOSBAQCBzdGF0aWMgaW50IHZob3N0X2lvdGxiX21p
-c3Moc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAqdnEsIHU2NCBpb3ZhLCBpbnQgYWNjZXNzKQo+ID4g
-ICB9Cj4gPiAgIHN0YXRpYyBib29sIHZxX2FjY2Vzc19vayhzdHJ1Y3Qgdmhvc3RfdmlydHF1ZXVl
-ICp2cSwgdW5zaWduZWQgaW50IG51bSwKPiA+IC0JCQkgc3RydWN0IHZyaW5nX2Rlc2MgX191c2Vy
-ICpkZXNjLAo+ID4gLQkJCSBzdHJ1Y3QgdnJpbmdfYXZhaWwgX191c2VyICphdmFpbCwKPiA+IC0J
-CQkgc3RydWN0IHZyaW5nX3VzZWQgX191c2VyICp1c2VkKQo+ID4gKwkJCSB2cmluZ19kZXNjX3Qg
-X191c2VyICpkZXNjLAo+ID4gKwkJCSB2cmluZ19hdmFpbF90IF9fdXNlciAqYXZhaWwsCj4gPiAr
-CQkJIHZyaW5nX3VzZWRfdCBfX3VzZXIgKnVzZWQpCj4gPiAgIHsKPiA+ICAgCXJldHVybiBhY2Nl
-c3Nfb2soZGVzYywgdmhvc3RfZ2V0X2Rlc2Nfc2l6ZSh2cSwgbnVtKSkgJiYKPiA+IEBAIC0yMzAx
-LDcgKzIzMDEsNyBAQCBzdGF0aWMgaW50IF9fdmhvc3RfYWRkX3VzZWRfbihzdHJ1Y3Qgdmhvc3Rf
-dmlydHF1ZXVlICp2cSwKPiA+ICAgCQkJICAgIHN0cnVjdCB2cmluZ191c2VkX2VsZW0gKmhlYWRz
-LAo+ID4gICAJCQkgICAgdW5zaWduZWQgY291bnQpCj4gPiAgIHsKPiA+IC0Jc3RydWN0IHZyaW5n
-X3VzZWRfZWxlbSBfX3VzZXIgKnVzZWQ7Cj4gPiArCXZyaW5nX3VzZWRfZWxlbV90IF9fdXNlciAq
-dXNlZDsKPiA+ICAgCXUxNiBvbGQsIG5ldzsKPiA+ICAgCWludCBzdGFydDsKPiA+IGRpZmYgLS1n
-aXQgYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmggYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiA+IGlu
-ZGV4IGY4NDAzYmQ0NmI4NS4uNjBjYWI0Yzc4MjI5IDEwMDY0NAo+ID4gLS0tIGEvZHJpdmVycy92
-aG9zdC92aG9zdC5oCj4gPiArKysgYi9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiA+IEBAIC02Nyw5
-ICs2Nyw5IEBAIHN0cnVjdCB2aG9zdF92aXJ0cXVldWUgewo+ID4gICAJLyogVGhlIGFjdHVhbCBy
-aW5nIG9mIGJ1ZmZlcnMuICovCj4gPiAgIAlzdHJ1Y3QgbXV0ZXggbXV0ZXg7Cj4gPiAgIAl1bnNp
-Z25lZCBpbnQgbnVtOwo+ID4gLQlzdHJ1Y3QgdnJpbmdfZGVzYyBfX3VzZXIgKmRlc2M7Cj4gPiAt
-CXN0cnVjdCB2cmluZ19hdmFpbCBfX3VzZXIgKmF2YWlsOwo+ID4gLQlzdHJ1Y3QgdnJpbmdfdXNl
-ZCBfX3VzZXIgKnVzZWQ7Cj4gPiArCXZyaW5nX2Rlc2NfdCBfX3VzZXIgKmRlc2M7Cj4gPiArCXZy
-aW5nX2F2YWlsX3QgX191c2VyICphdmFpbDsKPiA+ICsJdnJpbmdfdXNlZF90IF9fdXNlciAqdXNl
-ZDsKPiA+ICAgCWNvbnN0IHN0cnVjdCB2aG9zdF9pb3RsYl9tYXAgKm1ldGFfaW90bGJbVkhPU1Rf
-TlVNX0FERFJTXTsKPiA+ICAgCXN0cnVjdCBmaWxlICpraWNrOwo+ID4gICAJc3RydWN0IGV2ZW50
-ZmRfY3R4ICpjYWxsX2N0eDsKPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L3ZyaW5naC5j
-IGIvZHJpdmVycy92aG9zdC92cmluZ2guYwo+ID4gaW5kZXggYmE4ZTBkNmNmZDk3Li5lMDU5YTlh
-NDdjZGYgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL3Zob3N0L3ZyaW5naC5jCj4gPiArKysgYi9k
-cml2ZXJzL3Zob3N0L3ZyaW5naC5jCj4gPiBAQCAtNjIwLDkgKzYyMCw5IEBAIHN0YXRpYyBpbmxp
-bmUgaW50IHhmZXJfdG9fdXNlcihjb25zdCBzdHJ1Y3QgdnJpbmdoICp2cmgsCj4gPiAgICAqLwo+
-ID4gICBpbnQgdnJpbmdoX2luaXRfdXNlcihzdHJ1Y3QgdnJpbmdoICp2cmgsIHU2NCBmZWF0dXJl
-cywKPiA+ICAgCQkgICAgIHVuc2lnbmVkIGludCBudW0sIGJvb2wgd2Vha19iYXJyaWVycywKPiA+
-IC0JCSAgICAgc3RydWN0IHZyaW5nX2Rlc2MgX191c2VyICpkZXNjLAo+ID4gLQkJICAgICBzdHJ1
-Y3QgdnJpbmdfYXZhaWwgX191c2VyICphdmFpbCwKPiA+IC0JCSAgICAgc3RydWN0IHZyaW5nX3Vz
-ZWQgX191c2VyICp1c2VkKQo+ID4gKwkJICAgICB2cmluZ19kZXNjX3QgX191c2VyICpkZXNjLAo+
-ID4gKwkJICAgICB2cmluZ19hdmFpbF90IF9fdXNlciAqYXZhaWwsCj4gPiArCQkgICAgIHZyaW5n
-X3VzZWRfdCBfX3VzZXIgKnVzZWQpCj4gPiAgIHsKPiA+ICAgCS8qIFNhbmUgcG93ZXIgb2YgMiBw
-bGVhc2UhICovCj4gPiAgIAlpZiAoIW51bSB8fCBudW0gPiAweGZmZmYgfHwgKG51bSAmIChudW0g
-LSAxKSkpIHsKPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3ZyaW5naC5oIGIvaW5jbHVk
-ZS9saW51eC92cmluZ2guaAo+ID4gaW5kZXggOWUyNzYzZDdjMTU5Li41OWJkNTBmOTkyOTEgMTAw
-NjQ0Cj4gPiAtLS0gYS9pbmNsdWRlL2xpbnV4L3ZyaW5naC5oCj4gPiArKysgYi9pbmNsdWRlL2xp
-bnV4L3ZyaW5naC5oCj4gPiBAQCAtMTA1LDkgKzEwNSw5IEBAIHN0cnVjdCB2cmluZ2hfa2lvdiB7
-Cj4gPiAgIC8qIEhlbHBlcnMgZm9yIHVzZXJzcGFjZSB2cmluZ3MuICovCj4gPiAgIGludCB2cmlu
-Z2hfaW5pdF91c2VyKHN0cnVjdCB2cmluZ2ggKnZyaCwgdTY0IGZlYXR1cmVzLAo+ID4gICAJCSAg
-ICAgdW5zaWduZWQgaW50IG51bSwgYm9vbCB3ZWFrX2JhcnJpZXJzLAo+ID4gLQkJICAgICBzdHJ1
-Y3QgdnJpbmdfZGVzYyBfX3VzZXIgKmRlc2MsCj4gPiAtCQkgICAgIHN0cnVjdCB2cmluZ19hdmFp
-bCBfX3VzZXIgKmF2YWlsLAo+ID4gLQkJICAgICBzdHJ1Y3QgdnJpbmdfdXNlZCBfX3VzZXIgKnVz
-ZWQpOwo+ID4gKwkJICAgICB2cmluZ19kZXNjX3QgX191c2VyICpkZXNjLAo+ID4gKwkJICAgICB2
-cmluZ19hdmFpbF90IF9fdXNlciAqYXZhaWwsCj4gPiArCQkgICAgIHZyaW5nX3VzZWRfdCBfX3Vz
-ZXIgKnVzZWQpOwo+ID4gICBzdGF0aWMgaW5saW5lIHZvaWQgdnJpbmdoX2lvdl9pbml0KHN0cnVj
-dCB2cmluZ2hfaW92ICppb3YsCj4gPiAgIAkJCQkgICBzdHJ1Y3QgaW92ZWMgKmlvdmVjLCB1bnNp
-Z25lZCBudW0pCj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb19yaW5n
-LmggYi9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX3JpbmcuaAo+ID4gaW5kZXggOTIyM2MzYTVj
-NDZhLi5iMmMyMGY3OTQ0NzIgMTAwNjQ0Cj4gPiAtLS0gYS9pbmNsdWRlL3VhcGkvbGludXgvdmly
-dGlvX3JpbmcuaAo+ID4gKysrIGIvaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb19yaW5nLmgKPiA+
-IEBAIC04Niw2ICs4NiwxMyBAQAo+ID4gICAgKiBhdCB0aGUgZW5kIG9mIHRoZSB1c2VkIHJpbmcu
-IEd1ZXN0IHNob3VsZCBpZ25vcmUgdGhlIHVzZWQtPmZsYWdzIGZpZWxkLiAqLwo+ID4gICAjZGVm
-aW5lIFZJUlRJT19SSU5HX0ZfRVZFTlRfSURYCQkyOQo+ID4gKy8qIEFsaWdubWVudCByZXF1aXJl
-bWVudHMgZm9yIHZyaW5nIGVsZW1lbnRzLgo+ID4gKyAqIFdoZW4gdXNpbmcgcHJlLXZpcnRpbyAx
-LjAgbGF5b3V0LCB0aGVzZSBmYWxsIG91dCBuYXR1cmFsbHkuCj4gPiArICovCj4gPiArI2RlZmlu
-ZSBWUklOR19BVkFJTF9BTElHTl9TSVpFIDIKPiA+ICsjZGVmaW5lIFZSSU5HX1VTRURfQUxJR05f
-U0laRSA0Cj4gPiArI2RlZmluZSBWUklOR19ERVNDX0FMSUdOX1NJWkUgMTYKPiA+ICsKPiA+ICAg
-LyogVmlydGlvIHJpbmcgZGVzY3JpcHRvcnM6IDE2IGJ5dGVzLiAgVGhlc2UgY2FuIGNoYWluIHRv
-Z2V0aGVyIHZpYSAibmV4dCIuICovCj4gPiAgIHN0cnVjdCB2cmluZ19kZXNjIHsKPiA+ICAgCS8q
-IEFkZHJlc3MgKGd1ZXN0LXBoeXNpY2FsKS4gKi8KPiA+IEBAIC0xMTIsMjkgKzExOSw0MyBAQCBz
-dHJ1Y3QgdnJpbmdfdXNlZF9lbGVtIHsKPiA+ICAgCV9fdmlydGlvMzIgbGVuOwo+ID4gICB9Owo+
-ID4gK3R5cGVkZWYgc3RydWN0IHZyaW5nX3VzZWRfZWxlbSBfX2FsaWduZWQoVlJJTkdfVVNFRF9B
-TElHTl9TSVpFKQo+ID4gKwl2cmluZ191c2VkX2VsZW1fdDsKPiA+ICsKPiA+ICAgc3RydWN0IHZy
-aW5nX3VzZWQgewo+ID4gICAJX192aXJ0aW8xNiBmbGFnczsKPiA+ICAgCV9fdmlydGlvMTYgaWR4
-Owo+ID4gLQlzdHJ1Y3QgdnJpbmdfdXNlZF9lbGVtIHJpbmdbXTsKPiA+ICsJdnJpbmdfdXNlZF9l
-bGVtX3QgcmluZ1tdOwo+ID4gICB9Owo+ID4gKy8qCj4gPiArICogVGhlIHJpbmcgZWxlbWVudCBh
-ZGRyZXNzZXMgYXJlIHBhc3NlZCBiZXR3ZWVuIGNvbXBvbmVudHMgd2l0aCBkaWZmZXJlbnQKPiA+
-ICsgKiBhbGlnbm1lbnRzIGFzc3VtcHRpb25zLiBUaHVzLCB3ZSBtaWdodCBuZWVkIHRvIGRlY3Jl
-YXNlIHRoZSBjb21waWxlci1zZWxlY3RlZAo+ID4gKyAqIGFsaWdubWVudCwgYW5kIHNvIG11c3Qg
-dXNlIGEgdHlwZWRlZiB0byBtYWtlIHN1cmUgdGhlIF9fYWxpZ25lZCBhdHRyaWJ1dGUKPiA+ICsg
-KiBhY3R1YWxseSB0YWtlcyBob2xkOgo+ID4gKyAqCj4gPiArICogaHR0cHM6Ly9nY2MuZ251Lm9y
-Zy9vbmxpbmVkb2NzLy9nY2MvQ29tbW9uLVR5cGUtQXR0cmlidXRlcy5odG1sI0NvbW1vbi1UeXBl
-LUF0dHJpYnV0ZXMKPiA+ICsgKgo+ID4gKyAqIFdoZW4gdXNlZCBvbiBhIHN0cnVjdCwgb3Igc3Ry
-dWN0IG1lbWJlciwgdGhlIGFsaWduZWQgYXR0cmlidXRlIGNhbiBvbmx5Cj4gPiArICogaW5jcmVh
-c2UgdGhlIGFsaWdubWVudDsgaW4gb3JkZXIgdG8gZGVjcmVhc2UgaXQsIHRoZSBwYWNrZWQgYXR0
-cmlidXRlIG11c3QKPiA+ICsgKiBiZSBzcGVjaWZpZWQgYXMgd2VsbC4gV2hlbiB1c2VkIGFzIHBh
-cnQgb2YgYSB0eXBlZGVmLCB0aGUgYWxpZ25lZCBhdHRyaWJ1dGUKPiA+ICsgKiBjYW4gYm90aCBp
-bmNyZWFzZSBhbmQgZGVjcmVhc2UgYWxpZ25tZW50LCBhbmQgc3BlY2lmeWluZyB0aGUgcGFja2Vk
-Cj4gPiArICogYXR0cmlidXRlIGdlbmVyYXRlcyBhIHdhcm5pbmcuCj4gPiArICovCj4gPiArdHlw
-ZWRlZiBzdHJ1Y3QgdnJpbmdfZGVzYyBfX2FsaWduZWQoVlJJTkdfREVTQ19BTElHTl9TSVpFKSB2
-cmluZ19kZXNjX3Q7Cj4gPiArdHlwZWRlZiBzdHJ1Y3QgdnJpbmdfYXZhaWwgX19hbGlnbmVkKFZS
-SU5HX0FWQUlMX0FMSUdOX1NJWkUpIHZyaW5nX2F2YWlsX3Q7Cj4gPiArdHlwZWRlZiBzdHJ1Y3Qg
-dnJpbmdfdXNlZCBfX2FsaWduZWQoVlJJTkdfVVNFRF9BTElHTl9TSVpFKSB2cmluZ191c2VkX3Q7
-Cj4gCj4gCj4gSSB3b25kZXIgd2hldGhlciB3ZSBjYW4gc2ltcGx5IHVzZSBfX2F0dHJpYnV0ZV9f
-KHBhY2tlZCkgaW5zdGVhZD8KPiAKPiBUaGFua3MKClBhY2tlZCBpcyAxIGJ5dGUgYWxpZ25tZW50
-LiBBcyBzdWNoIGdlbmVyYXRlcyB2ZXJ5IGJhZCBjb2RlIGZvcgphY2Nlc3Nlcy4KCgo+IAo+ID4g
-Kwo+ID4gICBzdHJ1Y3QgdnJpbmcgewo+ID4gICAJdW5zaWduZWQgaW50IG51bTsKPiA+IC0Jc3Ry
-dWN0IHZyaW5nX2Rlc2MgKmRlc2M7Cj4gPiArCXZyaW5nX2Rlc2NfdCAqZGVzYzsKPiA+IC0Jc3Ry
-dWN0IHZyaW5nX2F2YWlsICphdmFpbDsKPiA+ICsJdnJpbmdfYXZhaWxfdCAqYXZhaWw7Cj4gPiAt
-CXN0cnVjdCB2cmluZ191c2VkICp1c2VkOwo+ID4gKwl2cmluZ191c2VkX3QgKnVzZWQ7Cj4gPiAg
-IH07Cj4gPiAtLyogQWxpZ25tZW50IHJlcXVpcmVtZW50cyBmb3IgdnJpbmcgZWxlbWVudHMuCj4g
-PiAtICogV2hlbiB1c2luZyBwcmUtdmlydGlvIDEuMCBsYXlvdXQsIHRoZXNlIGZhbGwgb3V0IG5h
-dHVyYWxseS4KPiA+IC0gKi8KPiA+IC0jZGVmaW5lIFZSSU5HX0FWQUlMX0FMSUdOX1NJWkUgMgo+
-ID4gLSNkZWZpbmUgVlJJTkdfVVNFRF9BTElHTl9TSVpFIDQKPiA+IC0jZGVmaW5lIFZSSU5HX0RF
-U0NfQUxJR05fU0laRSAxNgo+ID4gLQo+ID4gICAjaWZuZGVmIFZJUlRJT19SSU5HX05PX0xFR0FD
-WQo+ID4gICAvKiBUaGUgc3RhbmRhcmQgbGF5b3V0IGZvciB0aGUgcmluZyBpcyBhIGNvbnRpbnVv
-dXMgY2h1bmsgb2YgbWVtb3J5IHdoaWNoIGxvb2tzCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVh
-bGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZv
-dW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Tue, Apr 21, 2020 at 12:29 AM David Hildenbrand <david@redhat.com> wrote:
+>
+>  >>> 2. Can we assume that the guest will always rewrite the page after the
+> >>> deflate in the case of init_on_free or poison?
+> >>
+> >> Depends on what we think is the right way to do - IOW if we think "some
+> >> other content" as mentioned above is a BUG or not.
+> >
+> > So I wouldn't consider it a but as the zero page probably doesn't
+> > apply. We are basically just indicating we don't care about the
+> > contents, we aren't giving it a value. At least that is how I see it
+> > working based on how it was implemented.
+> >
+> >>> 3. Can we assume that free page hinting will always function as a
+> >>> balloon setup, so no moving it over to a page reporting type setup?
+> >>
+> >> I think we have to define the valid semantics. That implies what would
+> >> be valid to do with it. Unfortunately, we have to reverse-engineer here.
+> >
+> > So at this point a "hinted" page is a page that can essentially
+> > transition to uninitialized while it is sitting in the balloon. I
+> > suspect that is how we are going to have to treat it since that is the
+> > behavior that it has right now.
+>
+> At least it's not what Michael initially thought should be done - IIRC.
+>
+> "We need to remember that the whole HINT thing is not a mandate for host
+> to corrupt memory. It's just some info about page use guest gives host.
+> If host corrupts memory it's broken ...").
+>
+> So the question remains: Does QEMU have a BUG or do we actually allow to
+> corrupt guest memory.
+>
+> That leaves us with either
+>
+> 1. "Pages hinted via VIRTIO_BALLOON_F_FREE_PAGE_HINT might get replaced
+> by zero page. However, as soon as the page is written by the guest (even
+> before the hinting request was processed by the host), the modified page
+> will stay - whereby the unwritten parts might either be from the old, or
+> from the zero page." - a QEMU BUG.
+
+How is this a bug? This is the behavior you would see with the current
+balloon driver. When you put a page into a balloon it has the option
+to either madvise it away, defer it, or just skip it because he
+balloon is disabled. Is the "zero page" a typo? If it was
+uninitialized data that would be a bug, but I don't see how a zero
+page or the old data would be a bug.
+
+The caveat for the hinting is that if the page is modified from the
+point it is placed on the ring the dirty flag will be enforced for it
+and will not be skipped as it will be captured in the next bitmap
+sync.
+
+> 2. "Pages hinted via VIRTIO_BALLOON_F_FREE_PAGE_HINT are considered
+> unused and will contain an undefined/uninitialized content once hinted.
+> As soon as the page is written by the guest (even before the hinting
+> request was processed by the host), the modified page will stay. The
+> guest should reinitialized the full page in case it cares about the
+> actual content (e.g., page poisoning)."
+>
+>
+> I tend to favor 2 - although it basically leaves no room for future
+> improvement regarding skipping re-initialization in the guest after
+> migration.
+
+I agree. The main advantage would be that we get to keep all of the
+existing functionality and wouldn't have to shut things down for
+poison being enabled. However we are limited in that any future design
+won't be able to skip over having to have the guest re-poison the
+pages.
+
+However making changes to behave more like 1 would break existing use
+cases since right now page poisoning can be enabled and the guest can
+make it work. If we refactored QEMU to make 1 work then we would lose
+that.
+
+> >>>
+> >>> If we assume the above 3 items then there isn't any point in worrying
+> >>> about poison when it comes to free page hinting. It doesn't make sense
+> >>> to since they essentially negate it. As such I could go through this
+> >>> patch and the QEMU patches and clean up any associations since the to
+> >>> are not really tied together in any way.
+> >>
+> >> The big question is, if we want to support VIRTIO_BALLOON_F_PAGE_POISON
+> >> with free page hinting. e.g.,:
+> >>
+> >> "Pages hinted via VIRTIO_BALLOON_F_FREE_PAGE_HINT might get replaced by
+> >> a page full of X. However, as soon as the page is written by the guest
+> >> (even before the hinting request was processed by the host), the
+> >> modified page will stay - whereby the unwritten parts might either be
+> >> from the old, or from a page filled with X. Without
+> >> VIRTIO_BALLOON_F_PAGE_POISON, X is zero, otherwise it is poison_val."
+>
+> [...]
+>
+> >
+> > With the VIRTIO_BALLOON_F_PAGE_POISON we could make it so that when
+> > the page comes out of the balloon it is either unmodified or it is
+> > poison_val. Without the VIRTIO_BALLOON_F_PAGE_POISON feature present
+> > you cannot make that guarantee and are stuck with the page being
+> > treated as either unmodified or uninitialized memory.
+>
+> While it would be possible, I doubt it will be easy to implement, and I
+> still wonder if we should really care about optimizing an undocumented
+> feature that takes three people to figure out the semantics.
+
+Agreed. That is why I am thinking I will just disassociate
+F_PAGE_POISON from the page hinting entirely since QEMU never had the
+two implemented together.
+
+> >
+> >> The current QEMU implementation would be to simply migrate all hinted
+> >> pages. In the future we could optimize. Not sure if it's worth the trouble.
+> >
+> > So the trick for me is how best to go about sorting this all out.
+> > There are two ways I see of doing it.
+> >
+> > The first approach would be to just assume that hinting should be
+> > disassociated from poisoning. If I go that route that would more
+> > closely match up with what happened in QEMU. The downside is that it
+> > locks in the unmodified/uninitialized behavior and would require pages
+> > to be rewritten when they come out of the balloon. However this is the
+> > behavior we have now so it would only require specification
+> > documentation changes.
+>
+> Right now, for simplicity, I prefer this and define
+> VIRTIO_BALLOON_F_PAGE_POISON only for explicit deflation (balloon
+> deflation via the deflate queue) and implicit deflation
+> (VIRTIO_BALLOON_F_REPORTING).
+
+I don't recall us talking about the explicit deflation case before.
+What is the expectation there? I assume we are saying either
+poison_val or unmodified? If so I would think the inflate case makes
+much more sense as that is where the madvise is called that will
+discard the data. If so it would be pretty easy to just add a check
+for the poison value to the same spot we check
+qemu_balloon_is_inhibited.
+
+> Let's see if Michael has another opinion.
+
+Agreed.
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
