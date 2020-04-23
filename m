@@ -1,98 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 466611B5BC4
-	for <lists.virtualization@lfdr.de>; Thu, 23 Apr 2020 14:51:40 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E31EB1B5D69
+	for <lists.virtualization@lfdr.de>; Thu, 23 Apr 2020 16:13:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D072E88571;
-	Thu, 23 Apr 2020 12:51:38 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8FB60875DC;
+	Thu, 23 Apr 2020 14:13:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8QEJ+OWE0RNz; Thu, 23 Apr 2020 12:51:38 +0000 (UTC)
+	with ESMTP id f49jggjaPjuo; Thu, 23 Apr 2020 14:13:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4EA89882A4;
-	Thu, 23 Apr 2020 12:51:38 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0B526875DB;
+	Thu, 23 Apr 2020 14:13:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2FA23C0175;
-	Thu, 23 Apr 2020 12:51:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DD0E4C0175;
+	Thu, 23 Apr 2020 14:13:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 10B26C0175
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 449A3C0175
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 12:51:37 +0000 (UTC)
+ Thu, 23 Apr 2020 14:13:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id D0A532324B
+ by silver.osuosl.org (Postfix) with ESMTP id 3230022767
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 12:51:36 +0000 (UTC)
+ Thu, 23 Apr 2020 14:13:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5V9z-aa7ousN
+ with ESMTP id 2pbmclLAtduq
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 12:51:36 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id C5E5B2042D
+ Thu, 23 Apr 2020 14:13:39 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by silver.osuosl.org (Postfix) with ESMTPS id 774042026D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 12:51:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587646294;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oFynhrdn2AeeDCMTi/GbcSIhzhXYtqVnBO1H8k4rM8s=;
- b=D+Epvj1L+i6jM65ar/hlC8//2grbrreW75dDV5UX2VoAUcFe1Pwq8sA8gMYDTobmTFcGaJ
- jELLS3w/84SOQV9tL/3QpdgKLRqqOnW98GHzufPWyfS3vu1N/kI79SsuU56uoTA842nzEZ
- 4C8AHpX7XCImxzPHGd/xCYy2ZvikMkE=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-261-Wy977rXnOzee8N5xokZrAQ-1; Thu, 23 Apr 2020 08:51:23 -0400
-X-MC-Unique: Wy977rXnOzee8N5xokZrAQ-1
-Received: by mail-wr1-f69.google.com with SMTP id s11so2805523wru.6
- for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 05:51:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=oFynhrdn2AeeDCMTi/GbcSIhzhXYtqVnBO1H8k4rM8s=;
- b=UjW2HMb9dFG5BiFfPdxQlBQvqElgwgZQ9AH6sSOE++EfaziKoXrN2VLeoeCILjcn9B
- G5lpNQsxm1SgHROFn4ttNMg5eGf/gDwfeBACbBOfPXcaN3Gc1GqYZXPYOHOuVJcK0EdP
- 39Rfp5nt6j1ITvaATKwrF6mw7kBj+xgmD8c9PJp3shC6Elx/uoJJ8eD3V28GJ9jtsPtT
- vUxS2z9FgXLJN9ptuE0NR6N3c7/wtnhNAj6VKOLf5kqScNJ/GQUe2cevMH0lFziFNq/j
- MMXSFgRWAHf33tuPgYfOSLdGFIuMDBQujzlw4ok0C39sIaeruqpq1u8ISP9g1gI8rBEi
- FPSA==
-X-Gm-Message-State: AGi0PuY9KuZXqajr6dc90zNIga3HcuHDkg/a9ggZd/AlrlIZEv9lM0Db
- igim6jidapdmfwgqtQ9xQoN68VZgty+aeum9nkDPVbh7l+1LKsmGdLBFPTT6jZJGrNbSXfNT8Cd
- +68darFPLVMP9M/nrjfhCN8kS8EWsewugbeIdLgXHaA==
-X-Received: by 2002:adf:f34f:: with SMTP id e15mr4890722wrp.275.1587646282060; 
- Thu, 23 Apr 2020 05:51:22 -0700 (PDT)
-X-Google-Smtp-Source: APiQypI/kzDW73KAZYZbxhnpJuArcvjawCoIOFrcjvuGR9Ia4oEPXtyQVUt1e61nouVHczLBSQLGAg==
-X-Received: by 2002:adf:f34f:: with SMTP id e15mr4890704wrp.275.1587646281858; 
- Thu, 23 Apr 2020 05:51:21 -0700 (PDT)
-Received: from redhat.com (bzq-109-65-97-189.red.bezeqint.net. [109.65.97.189])
- by smtp.gmail.com with ESMTPSA id l4sm3745135wrv.60.2020.04.23.05.51.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2020 05:51:21 -0700 (PDT)
-Date: Thu, 23 Apr 2020 08:51:19 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
+ Thu, 23 Apr 2020 14:13:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=F6RH6jVuqtLpOUJiHYNSU4twCT8kCbptB6JR+OvixTE=; b=swS5ZZWPVv2ZNdoDtEloS7FPCQ
+ 9VkH59EYRVFIGHIQ09n/4DelunQqbADmE9Evrr/bW9PmjLiilFLbtcfkK7SlwD1TNafToBkXgOj05
+ IRTrRzfdX1SfmG7lnggi89FfUNGkWhiBdYTuBTi0rYtmeXBHsS6zpMdgCi+qzCXZjNNv9n4pXcR/8
+ l4vlwVRO7bAa2EKKMjjzCQPliiKoZivwbxj//NA3ToOeg8WNIqwi9m0E0pyv7peSyw5kM0s3Pz9nn
+ pzCP9kKWcCGw/lOQsT4dl49x6yAAwbnlgvfdIlBaA1CcWthIuB0nNxkXspepp69INe8Yrv3AaR68K
+ wsmwjKVA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jRcbi-0002wR-FU; Thu, 23 Apr 2020 14:13:38 +0000
+Date: Thu, 23 Apr 2020 07:13:38 -0700
+From: Christoph Hellwig <hch@infradead.org>
 To: Stefan Hajnoczi <stefanha@redhat.com>
 Subject: Re: [PATCH] virtio-blk: handle block_device_operations callbacks
  after hot unplug
-Message-ID: <20200423084914-mutt-send-email-mst@kernel.org>
+Message-ID: <20200423141338.GA29646@infradead.org>
 References: <20200423123717.139141-1-stefanha@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200423123717.139141-1-stefanha@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Jens Axboe <axboe@kernel.dk>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
- Lance Digby <ldigby@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+In-Reply-To: <20200423123717.139141-1-stefanha@redhat.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: Jens Axboe <axboe@kernel.dk>, "Michael S. Tsirkin" <mst@redhat.com>,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-block@vger.kernel.org, Lance Digby <ldigby@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -140,35 +114,9 @@ On Thu, Apr 23, 2020 at 01:37:17PM +0100, Stefan Hajnoczi wrote:
 > +	/* Driver instance has been removed */
 > +	if (!vblk)
 > +		return -ENOTTY;
-> +
->  	/* see if the host passed in geometry config */
->  	if (virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_GEOMETRY)) {
->  		virtio_cread(vblk->vdev, struct virtio_blk_config,
 
-Just so I understand, what serializes this access?
-See below for what looks like a race condition ...
-
-> @@ -835,6 +839,7 @@ static void virtblk_remove(struct virtio_device *vdev)
->  	vdev->config->reset(vdev);
->  
->  	refc = kref_read(&disk_to_dev(vblk->disk)->kobj.kref);
-
-So what if private_data is tested at this time ...
-
-> +	vblk->disk->private_data = NULL;
->  	put_disk(vblk->disk);
->  	vdev->config->del_vqs(vdev);
->  	kfree(vblk->vqs);
-
-... and then used at this time?
-
-What prevents this?
-
-
-> -- 
-> 2.25.1
-> 
-
+If this ever hits you have a nasty race condition and this is not
+going to fix it, as it could be removed just after this check as well.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
