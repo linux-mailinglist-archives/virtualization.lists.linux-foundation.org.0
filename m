@@ -1,71 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 440651B69DC
-	for <lists.virtualization@lfdr.de>; Fri, 24 Apr 2020 01:32:26 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id EC65E86E75;
-	Thu, 23 Apr 2020 23:32:24 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6MCjNl3fuiXn; Thu, 23 Apr 2020 23:32:23 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E8AC086E5C;
-	Thu, 23 Apr 2020 23:32:23 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B22E4C0175;
-	Thu, 23 Apr 2020 23:32:23 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 54B36C0175
- for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 23:32:21 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21F471B6FEE
+	for <lists.virtualization@lfdr.de>; Fri, 24 Apr 2020 10:42:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 4FDA287FED
- for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 23:32:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7E1858810C;
+	Fri, 24 Apr 2020 08:42:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id naD9NcIVzBxc; Fri, 24 Apr 2020 08:42:08 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id CCADD86822;
+	Fri, 24 Apr 2020 08:42:08 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B0D70C0175;
+	Fri, 24 Apr 2020 08:42:08 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D2D2BC0175
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Apr 2020 08:42:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C1FF986F2B
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Apr 2020 08:42:06 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ejmK7fnGcayp
+ with ESMTP id bkaawK8TsOCh
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 23:32:20 +0000 (UTC)
-X-Greylist: delayed 00:25:34 by SQLgrey-1.7.6
-Received: from shadbolt.e.decadent.org.uk (shadbolt.e.decadent.org.uk
- [88.96.1.126])
- by whitealder.osuosl.org (Postfix) with ESMTPS id EB8CF87FE8
+ Fri, 24 Apr 2020 08:42:06 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 03B3986F22
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Apr 2020 23:32:19 +0000 (UTC)
-Received: from [192.168.4.242] (helo=deadeye)
- by shadbolt.decadent.org.uk with esmtps
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <ben@decadent.org.uk>)
- id 1jRkvP-0004fj-PI; Fri, 24 Apr 2020 00:06:31 +0100
-Received: from ben by deadeye with local (Exim 4.93)
- (envelope-from <ben@decadent.org.uk>)
- id 1jRkvO-00E6mV-As; Fri, 24 Apr 2020 00:06:30 +0100
-Content-Disposition: inline
+ Fri, 24 Apr 2020 08:42:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1587717724;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=eRBkH5/Xmo1XGOKZTIj29qxMagsUMmu9LlrB6+bvzhA=;
+ b=EW70wBtr1F6SmUMHajB+MYX1jdUm3XualGWMRnZ6XPeYqa1/aHrF2333ns9kJ9X4VCA7Lc
+ EW/iZq4hjF/oKFyL2aSp9+dcqieufvTKwdCmJZ2Ewts8vHWmnPNwairkJ55xxF5YJ8Og5K
+ 7INLAC5wTiA1+Gv6VvPg7ePSYA4jpm4=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-228-To9Pj-CFNvWnNlFhqN7Vtg-1; Fri, 24 Apr 2020 04:42:02 -0400
+X-MC-Unique: To9Pj-CFNvWnNlFhqN7Vtg-1
+Received: by mail-wm1-f72.google.com with SMTP id 14so3885615wmo.9
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Apr 2020 01:42:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=eRBkH5/Xmo1XGOKZTIj29qxMagsUMmu9LlrB6+bvzhA=;
+ b=q1Lekq0cTwA7K1JYU43G19HBvjdutUMbW1/RUr1HSlpq4zBp0oZXAhuWTedb1oofud
+ u62Ed1DVMGEAREEER4JMNNvZsNUptRvpPLEzK8jZTdtFv5TH7lPvnRBfgkeTTQXd7y8j
+ LY5emx4Ou6pp5TL4cI36hPPCTpe3PT3iZDa5PKEi0A53vXWEcmmj7dz2NCie+J4Ik/xY
+ FB5JCu8nSQrgx9G7Ink1482eTtWSlIN9Qnx8KCIw+2KssYM0yKiwYZwUNHhJpCVV+QVF
+ tRdO/SfUHnt5FErfnNHKf4LMMVf9PIHQxMStTsTHA56msmoHxVOlwofsUKIupjcXdBU2
+ eaMw==
+X-Gm-Message-State: AGi0PubE4nbk5jUH2cBwYnZNrMlaiwmr9opWqZlivq0RjHo91wElMCkM
+ 6UYxbDeC+jDt2DHcigPmFi+RY7r2QXsyPWhnpoPrVuFU5HmGx+BKAmtQEiCZ3d45jxV9CKY4WkG
+ fIhFqGqEa2VKbz60fm/EJ9MuG9bpgMEUuEH+8OOto4Q==
+X-Received: by 2002:a7b:cd04:: with SMTP id f4mr8507229wmj.3.1587717721285;
+ Fri, 24 Apr 2020 01:42:01 -0700 (PDT)
+X-Google-Smtp-Source: APiQypKxuCqGvW3NHNyEw4+X3HPjqbYB2EyJcTmS/3W+wWEll8LclKWavyc7mGG0iFRlqlH/YaX6NQ==
+X-Received: by 2002:a7b:cd04:: with SMTP id f4mr8507206wmj.3.1587717721017;
+ Fri, 24 Apr 2020 01:42:01 -0700 (PDT)
+Received: from steredhat (host108-207-dynamic.49-79-r.retail.telecomitalia.it.
+ [79.49.207.108])
+ by smtp.gmail.com with ESMTPSA id s12sm1831955wmc.7.2020.04.24.01.41.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Apr 2020 01:42:00 -0700 (PDT)
+Date: Fri, 24 Apr 2020 10:41:58 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Subject: Re: [PATCH] virtio-blk: handle block_device_operations callbacks
+ after hot unplug
+Message-ID: <20200424084158.uayekt5c3lus4532@steredhat>
+References: <20200423123717.139141-1-stefanha@redhat.com>
 MIME-Version: 1.0
-From: Ben Hutchings <ben@decadent.org.uk>
-To: linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Date: Fri, 24 Apr 2020 00:05:20 +0100
-Message-ID: <lsq.1587683028.561359725@decadent.org.uk>
-X-Mailer: LinuxStableQueue (scripts by bwh)
-X-Patchwork-Hint: ignore
-Subject: [PATCH 3.16 093/245] virtio-balloon: fix managed page counts when
- migrating pages between zones
-In-Reply-To: <lsq.1587683027.831233700@decadent.org.uk>
-X-SA-Exim-Connect-IP: 192.168.4.242
-X-SA-Exim-Mail-From: ben@decadent.org.uk
-X-SA-Exim-Scanned: No (on shadbolt.decadent.org.uk);
- SAEximRunCond expanded to false
-Cc: Yumei Huang <yuhuang@redhat.com>, Denis Kirjanov <kda@linux-powerpc.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org, Igor Mammedov <imammedo@redhat.com>,
- akpm@linux-foundation.org, Jiang Liu <liuj97@gmail.com>
+In-Reply-To: <20200423123717.139141-1-stefanha@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Jens Axboe <axboe@kernel.dk>, "Michael S. Tsirkin" <mst@redhat.com>,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-block@vger.kernel.org, Lance Digby <ldigby@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,160 +111,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-3.16.83-rc1 review patch.  If anyone has any objections, please let me know.
+On Thu, Apr 23, 2020 at 01:37:17PM +0100, Stefan Hajnoczi wrote:
+> A virtio_blk block device can still be referenced after hot unplug by
+> userspace processes that hold the file descriptor.  In this case
+> virtblk_getgeo() can be invoked after virtblk_remove() was called.  For
+> example, a program that has /dev/vdb open can call ioctl(HDIO_GETGEO)
+> after hot unplug.
+> 
+> Fix this by clearing vblk->disk->private_data and checking that the
+> virtio_blk driver instance is still around in virtblk_getgeo().
+> 
+> Note that the virtblk_getgeo() function itself is guaranteed to remain
+> in memory after hot unplug because the virtio_blk module refcount is
+> still held while a block device reference exists.
+> 
+> Originally-by: Lance Digby <ldigby@redhat.com>
+> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> ---
+>  drivers/block/virtio_blk.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+> index 93468b7c6701..b50cdf37a6f7 100644
+> --- a/drivers/block/virtio_blk.c
+> +++ b/drivers/block/virtio_blk.c
+> @@ -300,6 +300,10 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
+>  {
+>  	struct virtio_blk *vblk = bd->bd_disk->private_data;
+>  
+> +	/* Driver instance has been removed */
+> +	if (!vblk)
+> +		return -ENOTTY;
+> +
+>  	/* see if the host passed in geometry config */
+>  	if (virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_GEOMETRY)) {
+>  		virtio_cread(vblk->vdev, struct virtio_blk_config,
+> @@ -835,6 +839,7 @@ static void virtblk_remove(struct virtio_device *vdev)
+>  	vdev->config->reset(vdev);
+>  
+>  	refc = kref_read(&disk_to_dev(vblk->disk)->kobj.kref);
+> +	vblk->disk->private_data = NULL;
+>  	put_disk(vblk->disk);
+>  	vdev->config->del_vqs(vdev);
+>  	kfree(vblk->vqs);
 
-------------------
+As pointed out, can be a race. We had a very similar issue in
+virtio-vsock, and we solved using RCU to assign and get the pointer [1],
+maybe the same solution can work here.
 
-From: David Hildenbrand <david@redhat.com>
+Cheers,
+Stefano
 
-commit 63341ab03706e11a31e3dd8ccc0fbc9beaf723f0 upstream.
-
-In case we have to migrate a ballon page to a newpage of another zone, the
-managed page count of both zones is wrong. Paired with memory offlining
-(which will adjust the managed page count), we can trigger kernel crashes
-and all kinds of different symptoms.
-
-One way to reproduce:
-1. Start a QEMU guest with 4GB, no NUMA
-2. Hotplug a 1GB DIMM and online the memory to ZONE_NORMAL
-3. Inflate the balloon to 1GB
-4. Unplug the DIMM (be quick, otherwise unmovable data ends up on it)
-5. Observe /proc/zoneinfo
-  Node 0, zone   Normal
-    pages free     16810
-          min      24848885473806
-          low      18471592959183339
-          high     36918337032892872
-          spanned  262144
-          present  262144
-          managed  18446744073709533486
-6. Do anything that requires some memory (e.g., inflate the balloon some
-more). The OOM goes crazy and the system crashes
-  [  238.324946] Out of memory: Killed process 537 (login) total-vm:27584kB, anon-rss:860kB, file-rss:0kB, shmem-rss:00
-  [  238.338585] systemd invoked oom-killer: gfp_mask=0x100cca(GFP_HIGHUSER_MOVABLE), order=0, oom_score_adj=0
-  [  238.339420] CPU: 0 PID: 1 Comm: systemd Tainted: G      D W         5.4.0-next-20191204+ #75
-  [  238.340139] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.12.0-59-gc9ba5276e321-prebuilt.qemu4
-  [  238.341121] Call Trace:
-  [  238.341337]  dump_stack+0x8f/0xd0
-  [  238.341630]  dump_header+0x61/0x5ea
-  [  238.341942]  oom_kill_process.cold+0xb/0x10
-  [  238.342299]  out_of_memory+0x24d/0x5a0
-  [  238.342625]  __alloc_pages_slowpath+0xd12/0x1020
-  [  238.343024]  __alloc_pages_nodemask+0x391/0x410
-  [  238.343407]  pagecache_get_page+0xc3/0x3a0
-  [  238.343757]  filemap_fault+0x804/0xc30
-  [  238.344083]  ? ext4_filemap_fault+0x28/0x42
-  [  238.344444]  ext4_filemap_fault+0x30/0x42
-  [  238.344789]  __do_fault+0x37/0x1a0
-  [  238.345087]  __handle_mm_fault+0x104d/0x1ab0
-  [  238.345450]  handle_mm_fault+0x169/0x360
-  [  238.345790]  do_user_addr_fault+0x20d/0x490
-  [  238.346154]  do_page_fault+0x31/0x210
-  [  238.346468]  async_page_fault+0x43/0x50
-  [  238.346797] RIP: 0033:0x7f47eba4197e
-  [  238.347110] Code: Bad RIP value.
-  [  238.347387] RSP: 002b:00007ffd7c0c1890 EFLAGS: 00010293
-  [  238.347834] RAX: 0000000000000002 RBX: 000055d196a20a20 RCX: 00007f47eba4197e
-  [  238.348437] RDX: 0000000000000033 RSI: 00007ffd7c0c18c0 RDI: 0000000000000004
-  [  238.349047] RBP: 00007ffd7c0c1c20 R08: 0000000000000000 R09: 0000000000000033
-  [  238.349660] R10: 00000000ffffffff R11: 0000000000000293 R12: 0000000000000001
-  [  238.350261] R13: ffffffffffffffff R14: 0000000000000000 R15: 00007ffd7c0c18c0
-  [  238.350878] Mem-Info:
-  [  238.351085] active_anon:3121 inactive_anon:51 isolated_anon:0
-  [  238.351085]  active_file:12 inactive_file:7 isolated_file:0
-  [  238.351085]  unevictable:0 dirty:0 writeback:0 unstable:0
-  [  238.351085]  slab_reclaimable:5565 slab_unreclaimable:10170
-  [  238.351085]  mapped:3 shmem:111 pagetables:155 bounce:0
-  [  238.351085]  free:720717 free_pcp:2 free_cma:0
-  [  238.353757] Node 0 active_anon:12484kB inactive_anon:204kB active_file:48kB inactive_file:28kB unevictable:0kB iss
-  [  238.355979] Node 0 DMA free:11556kB min:36kB low:48kB high:60kB reserved_highatomic:0KB active_anon:152kB inactivB
-  [  238.358345] lowmem_reserve[]: 0 2955 2884 2884 2884
-  [  238.358761] Node 0 DMA32 free:2677864kB min:7004kB low:10028kB high:13052kB reserved_highatomic:0KB active_anon:0B
-  [  238.361202] lowmem_reserve[]: 0 0 72057594037927865 72057594037927865 72057594037927865
-  [  238.361888] Node 0 Normal free:193448kB min:99395541895224kB low:73886371836733356kB high:147673348131571488kB reB
-  [  238.364765] lowmem_reserve[]: 0 0 0 0 0
-  [  238.365101] Node 0 DMA: 7*4kB (U) 5*8kB (UE) 6*16kB (UME) 2*32kB (UM) 1*64kB (U) 2*128kB (UE) 3*256kB (UME) 2*512B
-  [  238.366379] Node 0 DMA32: 0*4kB 1*8kB (U) 2*16kB (UM) 2*32kB (UM) 2*64kB (UM) 1*128kB (U) 1*256kB (U) 1*512kB (U)B
-  [  238.367654] Node 0 Normal: 1985*4kB (UME) 1321*8kB (UME) 844*16kB (UME) 524*32kB (UME) 300*64kB (UME) 138*128kB (B
-  [  238.369184] Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB
-  [  238.369915] 130 total pagecache pages
-  [  238.370241] 0 pages in swap cache
-  [  238.370533] Swap cache stats: add 0, delete 0, find 0/0
-  [  238.370981] Free swap  = 0kB
-  [  238.371239] Total swap = 0kB
-  [  238.371488] 1048445 pages RAM
-  [  238.371756] 0 pages HighMem/MovableOnly
-  [  238.372090] 306992 pages reserved
-  [  238.372376] 0 pages cma reserved
-  [  238.372661] 0 pages hwpoisoned
-
-In another instance (older kernel), I was able to observe this
-(negative page count :/):
-  [  180.896971] Offlined Pages 32768
-  [  182.667462] Offlined Pages 32768
-  [  184.408117] Offlined Pages 32768
-  [  186.026321] Offlined Pages 32768
-  [  187.684861] Offlined Pages 32768
-  [  189.227013] Offlined Pages 32768
-  [  190.830303] Offlined Pages 32768
-  [  190.833071] Built 1 zonelists, mobility grouping on.  Total pages: -36920272750453009
-
-In another instance (older kernel), I was no longer able to start any
-process:
-  [root@vm ~]# [  214.348068] Offlined Pages 32768
-  [  215.973009] Offlined Pages 32768
-  cat /proc/meminfo
-  -bash: fork: Cannot allocate memory
-  [root@vm ~]# cat /proc/meminfo
-  -bash: fork: Cannot allocate memory
-
-Fix it by properly adjusting the managed page count when migrating if
-the zone changed. The managed page count of the zones now looks after
-unplug of the DIMM (and after deflating the balloon) just like before
-inflating the balloon (and plugging+onlining the DIMM).
-
-We'll temporarily modify the totalram page count. If this ever becomes a
-problem, we can fine tune by providing helpers that don't touch
-the totalram pages (e.g., adjust_zone_managed_page_count()).
-
-Please note that fixing up the managed page count is only necessary when
-we adjusted the managed page count when inflating - only if we
-don't have VIRTIO_BALLOON_F_DEFLATE_ON_OOM. With that feature, the
-managed page count is not touched when inflating/deflating.
-
-Reported-by: Yumei Huang <yuhuang@redhat.com>
-Fixes: 3dcc0571cd64 ("mm: correctly update zone->managed_pages")
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Jiang Liu <liuj97@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Igor Mammedov <imammedo@redhat.com>
-Cc: virtualization@lists.linux-foundation.org
-Signed-off-by: David Hildenbrand <david@redhat.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-[bwh: Backported to 3.16: Deflate-on-OOM is not supported at all so don't
- check that flag]
-Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
----
---- a/drivers/virtio/virtio_balloon.c
-+++ b/drivers/virtio/virtio_balloon.c
-@@ -403,6 +403,16 @@ static int virtballoon_migratepage(struc
- 
- 	get_page(newpage); /* balloon reference */
- 
-+	/*
-+	  * When we migrate a page to a different zone and adjusted the
-+	  * managed page count when inflating, we have to fixup the count of
-+	  * both involved zones.
-+	  */
-+	if (page_zone(page) != page_zone(newpage)) {
-+		adjust_managed_page_count(page, 1);
-+		adjust_managed_page_count(newpage, -1);
-+	}
-+
- 	/* balloon's page migration 1st step  -- inflate "newpage" */
- 	spin_lock_irqsave(&vb_dev_info->pages_lock, flags);
- 	balloon_page_insert(newpage, mapping, &vb_dev_info->pages);
+[1] 0deab087b16a vsock/virtio: use RCU to avoid use-after-free on the_virtio_vsock
 
 _______________________________________________
 Virtualization mailing list
