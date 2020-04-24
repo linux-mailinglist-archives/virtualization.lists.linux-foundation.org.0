@@ -1,86 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4938F1B7B82
-	for <lists.virtualization@lfdr.de>; Fri, 24 Apr 2020 18:24:21 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E0481B7BBD
+	for <lists.virtualization@lfdr.de>; Fri, 24 Apr 2020 18:38:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E9ADA86519;
-	Fri, 24 Apr 2020 16:24:19 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 706E92048D;
+	Fri, 24 Apr 2020 16:38:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id duWS38ypKHza; Fri, 24 Apr 2020 16:24:18 +0000 (UTC)
+	with ESMTP id TL6sQcdmlZQj; Fri, 24 Apr 2020 16:38:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E35C2864B3;
-	Fri, 24 Apr 2020 16:24:18 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A36302047D;
+	Fri, 24 Apr 2020 16:38:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B57C6C0175;
-	Fri, 24 Apr 2020 16:24:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 95594C0175;
+	Fri, 24 Apr 2020 16:38:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 04183C0175
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5F2B5C0175
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Apr 2020 16:24:18 +0000 (UTC)
+ Fri, 24 Apr 2020 16:38:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id E7E738648E
+ by whitealder.osuosl.org (Postfix) with ESMTP id 487938756D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Apr 2020 16:24:17 +0000 (UTC)
+ Fri, 24 Apr 2020 16:38:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fQC+UeznS1xu
+ with ESMTP id Tx-0msd6QdD3
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Apr 2020 16:24:17 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
- [209.85.219.67])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 207C186443
+ Fri, 24 Apr 2020 16:38:02 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 9A732856F4
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Apr 2020 16:24:17 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id fb4so4943837qvb.7
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Apr 2020 09:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:from:to:cc:date:message-id:user-agent:mime-version
- :content-transfer-encoding;
- bh=5xiOMT/BYFio8gk7L4mxEGHbH/1D/dauxLv6g8kuV3o=;
- b=KGcGAicOxX0bZsg6vkphIwdL/IRw61ccLA2HSnDTmtRbyDtWeTvfhQBQT6LGtbgB7P
- hdtCwy37xAlSwbY3ywI0hSBCQNGjUHgSdaOUjhchyj0K44GZuqXN8T+zi/boDAI7ki56
- D9vjhuirzBpTlfL1F+Htos1gr/HPWQiZ6Mi7lPy4n2MeaKCw5LvBws0DowzmYiwBroye
- TCq0B2Ynw2i2GewjUPkk73geXhmbTU1aC17EgZi7b9ugki1z3gbqOS7QWjK+iCETf6qI
- 3Gd+6OAsjKS60s1s/iM0M5qaNUVTYzIpTk/2KBDyuc8hLwK7pHrhkYzybte0woP7rwN7
- qOGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:from:to:cc:date:message-id:user-agent
- :mime-version:content-transfer-encoding;
- bh=5xiOMT/BYFio8gk7L4mxEGHbH/1D/dauxLv6g8kuV3o=;
- b=F4weGnGEgOMG4zAjAW8tY8QhqIsOTMMY76dAy6idg/qhBbp7PEtP9BD7smn40TZvxw
- w66EqIY3RhU+A+HON+EbvaC8DGCdbNRLiPapqp3XN8/2ZcbR6TG+cycUHQ7Ik1NeKGj6
- 5XXZya48k3Ks3EXCLL6bH0toAeaHVklerinolIFOtNzqlAJlo9Yp0dj6uQJ8KRv9wffj
- +UMBZrCGD67TnDqwvipHxxkDYjbUehCbkgkBjwHO7tsushvrN7YzEVGmE7yj+WxMhue7
- kZsKC9tLW9j93UGuxsGltYNMZ+T61g8wxwbVnFFCA47/w99BbiOpm7vSl7MeFlZa0bl+
- zPXQ==
-X-Gm-Message-State: AGi0PuZ2Ntnx1FWUZRog+L6Zzpz/OM6YhxqwLiEDvuha144oC48yvB9/
- oyozlyDLNW3H3+ueTq9S8F4=
-X-Google-Smtp-Source: APiQypIh/qtFO9lHWxvK1GzrWvygfsKblupUc7qxqc+2rye/fphuJi7smb2fg30q9muf2uX+4fTF4g==
-X-Received: by 2002:a0c:8444:: with SMTP id l62mr10267172qva.239.1587745455951; 
- Fri, 24 Apr 2020 09:24:15 -0700 (PDT)
-Received: from localhost.localdomain ([2001:470:b:9c3:9e5c:8eff:fe4f:f2d0])
- by smtp.gmail.com with ESMTPSA id z18sm4328496qtz.77.2020.04.24.09.24.14
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 24 Apr 2020 09:24:15 -0700 (PDT)
-Subject: [PATCH v2] virtio-balloon: Disable free page reporting if page
- poison reporting is not enabled
-From: Alexander Duyck <alexander.duyck@gmail.com>
-To: jasowang@redhat.com, mst@redhat.com, david@redhat.com
-Date: Fri, 24 Apr 2020 09:24:14 -0700
-Message-ID: <20200424162103.6681.436.stgit@localhost.localdomain>
-User-Agent: StGit/0.17.1-dirty
+ Fri, 24 Apr 2020 16:38:01 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk3.altibox.net (Postfix) with ESMTPS id 4061820031;
+ Fri, 24 Apr 2020 18:37:58 +0200 (CEST)
+Date: Fri, 24 Apr 2020 18:37:57 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Subject: Re: [PATCH 37/59] drm/cirrus: Move to drm/tiny
+Message-ID: <20200424163756.GB3822@ravnborg.org>
+References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
+ <20200415074034.175360-38-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-Cc: virtio-dev@lists.oasis-open.org, virtualization@lists.linux-foundation.org
+Content-Disposition: inline
+In-Reply-To: <20200415074034.175360-38-daniel.vetter@ffwll.ch>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=ULXz4hXy c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=kj9zAlcOel0A:10 a=QyXUC8HyAAAA:8 a=20KFwNOVAAAA:8 a=Z4Rwk6OoAAAA:8
+ a=7gkXJVJtAAAA:8 a=RYJPnzK0AAAA:8 a=e5mUnYsNAAAA:8 a=aR16PxjQAAAA:8
+ a=SbjN3GQ1GeqvrpwrGE8A:9 a=CjuIK1q_8ugA:10 a=HkZW87K1Qel5hWWM3VKY:22
+ a=E9Po1WZjFZOl8hwRPBS3:22 a=71IlbOU7e524H-Equz-4:22
+ a=Vxmtnl_E_bksehYqCbjh:22 a=zbFvvTOBjyH4ze5LlUjX:22
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Dave Airlie <airlied@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,52 +82,151 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Alexander Duyck <alexander.h.duyck@linux.intel.com>
-
-We should disable free page reporting if page poisoning is enabled in the
-kernel but we cannot report it via the balloon interface. This way we can
-avoid the possibility of corrupting guest memory. Normally the page poison
-reporting feature should always be present when free page reporting is
-enabled on the hypervisor, however this allows us to correctly handle a
-case of the virtio-balloon device being possibly misconfigured.
-
-Fixes: 5d757c8d518d ("virtio-balloon: add support for providing free page reports to host")
-Signed-off-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
----
-
-Changes since v1:
-Originally this patch also modified free page hinting, that has been removed.
-Updated patch title and description.
-Added a comment explaining reasoning for disabling free page reporting.
-
- drivers/virtio/virtio_balloon.c |    9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
-index 51086a5afdd4..1f157d2f4952 100644
---- a/drivers/virtio/virtio_balloon.c
-+++ b/drivers/virtio/virtio_balloon.c
-@@ -1107,11 +1107,18 @@ static int virtballoon_restore(struct virtio_device *vdev)
- 
- static int virtballoon_validate(struct virtio_device *vdev)
- {
--	/* Tell the host whether we care about poisoned pages. */
-+	/*
-+	 * Inform the hypervisor that our pages are poisoned or
-+	 * initialized. If we cannot do that then we should disable
-+	 * page reporting as it could potentially change the contents
-+	 * of our free pages.
-+	 */
- 	if (!want_init_on_free() &&
- 	    (IS_ENABLED(CONFIG_PAGE_POISONING_NO_SANITY) ||
- 	     !page_poisoning_enabled()))
- 		__virtio_clear_bit(vdev, VIRTIO_BALLOON_F_PAGE_POISON);
-+	else if (!virtio_has_feature(vdev, VIRTIO_BALLOON_F_PAGE_POISON))
-+		__virtio_clear_bit(vdev, VIRTIO_BALLOON_F_REPORTING);
- 
- 	__virtio_clear_bit(vdev, VIRTIO_F_IOMMU_PLATFORM);
- 	return 0;
-
+On Wed, Apr 15, 2020 at 09:40:12AM +0200, Daniel Vetter wrote:
+> Because it is. Huge congrats to everyone who made this kind of
+> refactoring happen!
+> 
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
+Acked-by: Sam Ravnborg <sam@ravnborg.org>
+> ---
+>  MAINTAINERS                               |  2 +-
+>  drivers/gpu/drm/Kconfig                   |  2 --
+>  drivers/gpu/drm/Makefile                  |  1 -
+>  drivers/gpu/drm/cirrus/Kconfig            | 19 -------------------
+>  drivers/gpu/drm/cirrus/Makefile           |  2 --
+>  drivers/gpu/drm/tiny/Kconfig              | 19 +++++++++++++++++++
+>  drivers/gpu/drm/tiny/Makefile             |  1 +
+>  drivers/gpu/drm/{cirrus => tiny}/cirrus.c |  0
+>  8 files changed, 21 insertions(+), 25 deletions(-)
+>  delete mode 100644 drivers/gpu/drm/cirrus/Kconfig
+>  delete mode 100644 drivers/gpu/drm/cirrus/Makefile
+>  rename drivers/gpu/drm/{cirrus => tiny}/cirrus.c (100%)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 7b3255d96d1d..0a5cf105ee37 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -5397,7 +5397,7 @@ L:	virtualization@lists.linux-foundation.org
+>  S:	Obsolete
+>  W:	https://www.kraxel.org/blog/2014/10/qemu-using-cirrus-considered-harmful/
+>  T:	git git://anongit.freedesktop.org/drm/drm-misc
+> -F:	drivers/gpu/drm/cirrus/
+> +F:	drivers/gpu/drm/tiny/cirrus.c
+>  
+>  DRM DRIVER FOR QXL VIRTUAL GPU
+>  M:	Dave Airlie <airlied@redhat.com>
+> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
+> index 43594978958e..4f4e7fa001c1 100644
+> --- a/drivers/gpu/drm/Kconfig
+> +++ b/drivers/gpu/drm/Kconfig
+> @@ -310,8 +310,6 @@ source "drivers/gpu/drm/ast/Kconfig"
+>  
+>  source "drivers/gpu/drm/mgag200/Kconfig"
+>  
+> -source "drivers/gpu/drm/cirrus/Kconfig"
+> -
+>  source "drivers/gpu/drm/armada/Kconfig"
+>  
+>  source "drivers/gpu/drm/atmel-hlcdc/Kconfig"
+> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
+> index f34d08c83485..2c0e5a7e5953 100644
+> --- a/drivers/gpu/drm/Makefile
+> +++ b/drivers/gpu/drm/Makefile
+> @@ -74,7 +74,6 @@ obj-$(CONFIG_DRM_I915)	+= i915/
+>  obj-$(CONFIG_DRM_MGAG200) += mgag200/
+>  obj-$(CONFIG_DRM_V3D)  += v3d/
+>  obj-$(CONFIG_DRM_VC4)  += vc4/
+> -obj-$(CONFIG_DRM_CIRRUS_QEMU) += cirrus/
+>  obj-$(CONFIG_DRM_SIS)   += sis/
+>  obj-$(CONFIG_DRM_SAVAGE)+= savage/
+>  obj-$(CONFIG_DRM_VMWGFX)+= vmwgfx/
+> diff --git a/drivers/gpu/drm/cirrus/Kconfig b/drivers/gpu/drm/cirrus/Kconfig
+> deleted file mode 100644
+> index c6bbd988b0e5..000000000000
+> --- a/drivers/gpu/drm/cirrus/Kconfig
+> +++ /dev/null
+> @@ -1,19 +0,0 @@
+> -# SPDX-License-Identifier: GPL-2.0-only
+> -config DRM_CIRRUS_QEMU
+> -	tristate "Cirrus driver for QEMU emulated device"
+> -	depends on DRM && PCI && MMU
+> -	select DRM_KMS_HELPER
+> -	select DRM_GEM_SHMEM_HELPER
+> -	help
+> -	 This is a KMS driver for emulated cirrus device in qemu.
+> -	 It is *NOT* intended for real cirrus devices. This requires
+> -	 the modesetting userspace X.org driver.
+> -
+> -	 Cirrus is obsolete, the hardware was designed in the 90ies
+> -	 and can't keep up with todays needs.  More background:
+> -	 https://www.kraxel.org/blog/2014/10/qemu-using-cirrus-considered-harmful/
+> -
+> -	 Better alternatives are:
+> -	   - stdvga (DRM_BOCHS, qemu -vga std, default in qemu 2.2+)
+> -	   - qxl (DRM_QXL, qemu -vga qxl, works best with spice)
+> -	   - virtio (DRM_VIRTIO_GPU), qemu -vga virtio)
+> diff --git a/drivers/gpu/drm/cirrus/Makefile b/drivers/gpu/drm/cirrus/Makefile
+> deleted file mode 100644
+> index 0c1ed3f99725..000000000000
+> --- a/drivers/gpu/drm/cirrus/Makefile
+> +++ /dev/null
+> @@ -1,2 +0,0 @@
+> -# SPDX-License-Identifier: GPL-2.0-only
+> -obj-$(CONFIG_DRM_CIRRUS_QEMU) += cirrus.o
+> diff --git a/drivers/gpu/drm/tiny/Kconfig b/drivers/gpu/drm/tiny/Kconfig
+> index 4160e74e4751..2b6414f0fa75 100644
+> --- a/drivers/gpu/drm/tiny/Kconfig
+> +++ b/drivers/gpu/drm/tiny/Kconfig
+> @@ -1,5 +1,24 @@
+>  # SPDX-License-Identifier: GPL-2.0-only
+>  
+> +config DRM_CIRRUS_QEMU
+> +	tristate "Cirrus driver for QEMU emulated device"
+> +	depends on DRM && PCI && MMU
+> +	select DRM_KMS_HELPER
+> +	select DRM_GEM_SHMEM_HELPER
+> +	help
+> +	 This is a KMS driver for emulated cirrus device in qemu.
+> +	 It is *NOT* intended for real cirrus devices. This requires
+> +	 the modesetting userspace X.org driver.
+> +
+> +	 Cirrus is obsolete, the hardware was designed in the 90ies
+> +	 and can't keep up with todays needs.  More background:
+> +	 https://www.kraxel.org/blog/2014/10/qemu-using-cirrus-considered-harmful/
+> +
+> +	 Better alternatives are:
+> +	   - stdvga (DRM_BOCHS, qemu -vga std, default in qemu 2.2+)
+> +	   - qxl (DRM_QXL, qemu -vga qxl, works best with spice)
+> +	   - virtio (DRM_VIRTIO_GPU), qemu -vga virtio)
+> +
+>  config DRM_GM12U320
+>  	tristate "GM12U320 driver for USB projectors"
+>  	depends on DRM && USB
+> diff --git a/drivers/gpu/drm/tiny/Makefile b/drivers/gpu/drm/tiny/Makefile
+> index c96ceee71453..6ae4e9e5a35f 100644
+> --- a/drivers/gpu/drm/tiny/Makefile
+> +++ b/drivers/gpu/drm/tiny/Makefile
+> @@ -1,5 +1,6 @@
+>  # SPDX-License-Identifier: GPL-2.0-only
+>  
+> +obj-$(CONFIG_DRM_CIRRUS_QEMU)		+= cirrus.o
+>  obj-$(CONFIG_DRM_GM12U320)		+= gm12u320.o
+>  obj-$(CONFIG_TINYDRM_HX8357D)		+= hx8357d.o
+>  obj-$(CONFIG_TINYDRM_ILI9225)		+= ili9225.o
+> diff --git a/drivers/gpu/drm/cirrus/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
+> similarity index 100%
+> rename from drivers/gpu/drm/cirrus/cirrus.c
+> rename to drivers/gpu/drm/tiny/cirrus.c
+> -- 
+> 2.25.1
+> 
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
