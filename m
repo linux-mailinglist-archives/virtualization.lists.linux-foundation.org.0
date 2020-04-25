@@ -1,71 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57CEF1B88D9
-	for <lists.virtualization@lfdr.de>; Sat, 25 Apr 2020 21:21:17 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 24B6D1B8946
+	for <lists.virtualization@lfdr.de>; Sat, 25 Apr 2020 22:12:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4382885D3F;
-	Sat, 25 Apr 2020 19:11:14 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 95DB7204AA;
+	Sat, 25 Apr 2020 20:12:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id B84gfBRFBRKt; Sat, 25 Apr 2020 19:11:13 +0000 (UTC)
+	with ESMTP id cYw914YKXChb; Sat, 25 Apr 2020 20:12:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2D90184DF6;
-	Sat, 25 Apr 2020 19:11:13 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id C582720519;
+	Sat, 25 Apr 2020 20:12:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 09EECC1D93;
-	Sat, 25 Apr 2020 19:11:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8EF66C0175;
+	Sat, 25 Apr 2020 20:12:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 94D48C0175
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8A37EC0175
  for <virtualization@lists.linux-foundation.org>;
- Sat, 25 Apr 2020 19:11:11 +0000 (UTC)
+ Sat, 25 Apr 2020 20:12:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 7DEE884DF6
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 85C1B85D48
  for <virtualization@lists.linux-foundation.org>;
- Sat, 25 Apr 2020 19:11:11 +0000 (UTC)
+ Sat, 25 Apr 2020 20:12:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AszAZ-YqvDbt
+ with ESMTP id 1exbMZL3Qfbw
  for <virtualization@lists.linux-foundation.org>;
- Sat, 25 Apr 2020 19:11:09 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4AD7E85D37
+ Sat, 25 Apr 2020 20:12:44 +0000 (UTC)
+X-Greylist: delayed 00:17:32 by SQLgrey-1.7.6
+Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
+ [209.85.210.65])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 8815185D37
  for <virtualization@lists.linux-foundation.org>;
- Sat, 25 Apr 2020 19:11:09 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id ED5AD433; Sat, 25 Apr 2020 21:10:35 +0200 (CEST)
-Date: Sat, 25 Apr 2020 21:10:32 +0200
-From: Joerg Roedel <joro@8bytes.org>
-To: Andy Lutomirski <luto@kernel.org>
+ Sat, 25 Apr 2020 20:12:44 +0000 (UTC)
+Received: by mail-ot1-f65.google.com with SMTP id c3so19022786otp.8
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 25 Apr 2020 13:12:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amacapital-net.20150623.gappssmtp.com; s=20150623;
+ h=content-transfer-encoding:from:mime-version:subject:date:message-id
+ :references:cc:in-reply-to:to;
+ bh=su/TZCdqsGvDX9O/dILShocQiIYHImvs41WopVEj3dw=;
+ b=HSXwK1S0RYPgtPSMNgcEjmafSf61If+0xsLS+GSFa2PueznsCEQ0seads/QyC49eam
+ ChF2VREKs79Xr2/x1ZXz/hxctXZzXzSm+dKeuSZ95p5d0d9wlWufoRlNviyr31NcTuPi
+ ds/VTJnblzlXan6xNWu5FVl05hOJTzbCmH7FnIrRgzN9MwKqO7iu7VFWv8xkBoY6GpDl
+ Jznip7aJE891SixfzCyH9GiFuwWvLoOukW3NU363SZ3X+hewceNu0/cauA9MStDr+tgz
+ ndotP6Bq4jE6rI35SQCmWMndOsi1yWHYH0/LiDg6y8dKccC3HNc4Yb/re7xLVArFp9Cf
+ 9afg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:content-transfer-encoding:from:mime-version
+ :subject:date:message-id:references:cc:in-reply-to:to;
+ bh=su/TZCdqsGvDX9O/dILShocQiIYHImvs41WopVEj3dw=;
+ b=ft/ZnFm8ANpv6DsSfWKIqSnlysFHbCqvu/orCSvMZyLbbzlPIDWJRqwfNW7xSK96cX
+ vqceseiSgZ97im1BYZIS4TIT775miphzGG3giJ2cph49iHKOh/Yf1A0EBn8FL/NtSzDt
+ sK9INA8m84dVEfG7nx1Od6gYBbii+8wVN1ucY4S8tS1X5/+KCTAASd+jk55nWTZFK/Ky
+ palrR3hXamVQ/k0jbyPppYqvZTzPL9aKkbAYWgoQQb2vgo0jjxVnRI4tLyUtPB3gjmaR
+ 9L3g9CYWa2rXpGwwNjkFZ7Qmn+M3rvNgrAtBOibsZ55PkRqKpEbLg5stC+yta32Dc4u3
+ 8YOQ==
+X-Gm-Message-State: AGi0PuYoI/pcH404hgHQPP3CPQKRRVzzQeT8D7xwknSrkf9HkjAYCZFe
+ s1Vw/2Hli7mdNdnIf0vHf0k4+ETwQAE=
+X-Google-Smtp-Source: APiQypKEMhdWCQosOVFNGGvelzt3tcfdxzwTQ4wUUFKoxDVH8RdkAuEGYoNGN00zKueIqusTJ5+Cmg==
+X-Received: by 2002:a17:90a:d984:: with SMTP id
+ d4mr14044440pjv.59.1587844054298; 
+ Sat, 25 Apr 2020 12:47:34 -0700 (PDT)
+Received: from ?IPv6:2601:646:c200:1ef2:d16f:990f:8780:729d?
+ ([2601:646:c200:1ef2:d16f:990f:8780:729d])
+ by smtp.gmail.com with ESMTPSA id b2sm7567961pgg.77.2020.04.25.12.47.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 25 Apr 2020 12:47:33 -0700 (PDT)
+From: Andy Lutomirski <luto@amacapital.net>
+Mime-Version: 1.0 (1.0)
 Subject: Re: [PATCH] Allow RDTSC and RDTSCP from userspace
-Message-ID: <20200425191032.GK21900@8bytes.org>
-References: <20200319091407.1481-56-joro@8bytes.org>
- <20200424210316.848878-1-mstunes@vmware.com>
- <2c49061d-eb84-032e-8dcb-dd36a891ce90@intel.com>
- <ead88d04-1756-1190-2b37-b24f86422595@amd.com>
- <4d2ac222-a896-a60e-9b3c-b35aa7e81a97@intel.com>
- <20200425124909.GO30814@suse.de>
- <CALCETrWCiMkA37yf972h+fqsz1_dbfye8AbrkJxDPJzC+1PBEw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CALCETrWCiMkA37yf972h+fqsz1_dbfye8AbrkJxDPJzC+1PBEw@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+Date: Sat, 25 Apr 2020 12:47:31 -0700
+Message-Id: <910AE5B4-4522-4133-99F7-64850181FBF9@amacapital.net>
+References: <20200425191032.GK21900@8bytes.org>
+In-Reply-To: <20200425191032.GK21900@8bytes.org>
+To: Joerg Roedel <joro@8bytes.org>
+X-Mailer: iPhone Mail (17E262)
+Cc: Juergen Gross <JGross@suse.com>, Tom Lendacky <Thomas.Lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>, Joerg Roedel <jroedel@suse.de>,
  Mike Stunes <mstunes@vmware.com>, Kees Cook <keescook@chromium.org>,
  kvm list <kvm@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>, LKML <linux-kernel@vger.kernel.org>,
  Sean Christopherson <sean.j.christopherson@intel.com>,
  Linux Virtualization <virtualization@lists.linux-foundation.org>,
- Dave Hansen <dave.hansen@intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
- Dan Williams <dan.j.williams@intel.com>, Jiri Slaby <jslaby@suse.cz>,
- X86 ML <x86@kernel.org>
+ Dave Hansen <dave.hansen@intel.com>, Andy Lutomirski <luto@kernel.org>,
+ "H. Peter Anvin" <hpa@zytor.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>, X86 ML <x86@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,38 +105,36 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sat, Apr 25, 2020 at 11:15:35AM -0700, Andy Lutomirski wrote:
-> shift_ist is gross.  What's it for?  If it's not needed, I'd rather
-> not use it, and I eventually want to get rid of it for #DB as well.
-
-The #VC handler needs to be able to nest, there is no way around that
-for various reasons, the two most important ones are:
-
-	1. The #VC -> NMI -> #VC case. #VCs can happen in the NMI
-	   handler, for example (but not exclusivly) for RDPMC.
-
-	2. In case of an error the #VC handler needs to print out error
-	   information by calling one of the printk wrappers. Those will
-	   end up doing IO to some console/serial port/whatever which
-	   will also cause #VC exceptions to emulate the access to the
-	   output devices.
-
-Using shift_ist is perfect for that, the only problem is the race
-condition with the NMI handler, as shift_ist does not work well with
-exceptions that can also trigger within the NMI handler. But I have
-taken care of that for #VC.
-
-
-Regards,
-
-	Joerg
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Cgo+IE9uIEFwciAyNSwgMjAyMCwgYXQgMTI6MTAgUE0sIEpvZXJnIFJvZWRlbCA8am9yb0A4Ynl0
+ZXMub3JnPiB3cm90ZToKPiAKPiDvu79PbiBTYXQsIEFwciAyNSwgMjAyMCBhdCAxMToxNTozNUFN
+IC0wNzAwLCBBbmR5IEx1dG9taXJza2kgd3JvdGU6Cj4+IHNoaWZ0X2lzdCBpcyBncm9zcy4gIFdo
+YXQncyBpdCBmb3I/ICBJZiBpdCdzIG5vdCBuZWVkZWQsIEknZCByYXRoZXIKPj4gbm90IHVzZSBp
+dCwgYW5kIEkgZXZlbnR1YWxseSB3YW50IHRvIGdldCByaWQgb2YgaXQgZm9yICNEQiBhcyB3ZWxs
+Lgo+IAo+IFRoZSAjVkMgaGFuZGxlciBuZWVkcyB0byBiZSBhYmxlIHRvIG5lc3QsIHRoZXJlIGlz
+IG5vIHdheSBhcm91bmQgdGhhdAo+IGZvciB2YXJpb3VzIHJlYXNvbnMsIHRoZSB0d28gbW9zdCBp
+bXBvcnRhbnQgb25lcyBhcmU6Cj4gCj4gICAgMS4gVGhlICNWQyAtPiBOTUkgLT4gI1ZDIGNhc2Uu
+ICNWQ3MgY2FuIGhhcHBlbiBpbiB0aGUgTk1JCj4gICAgICAgaGFuZGxlciwgZm9yIGV4YW1wbGUg
+KGJ1dCBub3QgZXhjbHVzaXZseSkgZm9yIFJEUE1DLgo+IAo+ICAgIDIuIEluIGNhc2Ugb2YgYW4g
+ZXJyb3IgdGhlICNWQyBoYW5kbGVyIG5lZWRzIHRvIHByaW50IG91dCBlcnJvcgo+ICAgICAgIGlu
+Zm9ybWF0aW9uIGJ5IGNhbGxpbmcgb25lIG9mIHRoZSBwcmludGsgd3JhcHBlcnMuIFRob3NlIHdp
+bGwKPiAgICAgICBlbmQgdXAgZG9pbmcgSU8gdG8gc29tZSBjb25zb2xlL3NlcmlhbCBwb3J0L3do
+YXRldmVyIHdoaWNoCj4gICAgICAgd2lsbCBhbHNvIGNhdXNlICNWQyBleGNlcHRpb25zIHRvIGVt
+dWxhdGUgdGhlIGFjY2VzcyB0byB0aGUKPiAgICAgICBvdXRwdXQgZGV2aWNlcy4KPiAKPiBVc2lu
+ZyBzaGlmdF9pc3QgaXMgcGVyZmVjdCBmb3IgdGhhdCwgdGhlIG9ubHkgcHJvYmxlbSBpcyB0aGUg
+cmFjZQo+IGNvbmRpdGlvbiB3aXRoIHRoZSBOTUkgaGFuZGxlciwgYXMgc2hpZnRfaXN0IGRvZXMg
+bm90IHdvcmsgd2VsbCB3aXRoCj4gZXhjZXB0aW9ucyB0aGF0IGNhbiBhbHNvIHRyaWdnZXIgd2l0
+aGluIHRoZSBOTUkgaGFuZGxlci4gQnV0IEkgaGF2ZQo+IHRha2VuIGNhcmUgb2YgdGhhdCBmb3Ig
+I1ZDLgo+IAoKSSBhc3N1bWUgdGhlIHJhY2UgeW91IG1lYW4gaXM6CgojVkMKSW1tZWRpYXRlIE5N
+SSBiZWZvcmUgSVNUIGdldHMgc2hpZnRlZAojVkMKCkthYm9vbS4KCkhvdyBhcmUgeW91IGRlYWxp
+bmcgd2l0aCB0aGlzPyAgVWx0aW1hdGVseSwgSSB0aGluayB0aGF0IE5NSSB3aWxsIG5lZWQgdG8g
+dHVybiBvZmYgSVNUIGJlZm9yZSBlbmdhZ2luZyBpbiBhbnkgZnVubnkgYnVzaW5lc3MuIExldCBt
+ZSBwb25kZXIgdGhpcyBhIGJpdC4KCj4gCj4gUmVnYXJkcywKPiAKPiAgICBKb2VyZwo+IApfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlv
+biBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcK
+aHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVh
+bGl6YXRpb24=
