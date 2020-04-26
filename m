@@ -1,74 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id E25601B8C90
-	for <lists.virtualization@lfdr.de>; Sun, 26 Apr 2020 07:48:32 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA45E1B8D17
+	for <lists.virtualization@lfdr.de>; Sun, 26 Apr 2020 08:59:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1386085BCA;
-	Sun, 26 Apr 2020 05:32:10 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 3BE9687B0F;
+	Sun, 26 Apr 2020 06:59:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ymEHTZCfWWyO; Sun, 26 Apr 2020 05:32:08 +0000 (UTC)
+	with ESMTP id 78g1LeID7mRA; Sun, 26 Apr 2020 06:59:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3E31A86505;
-	Sun, 26 Apr 2020 05:32:08 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 66E9087AFF;
+	Sun, 26 Apr 2020 06:59:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 118D2C0172;
-	Sun, 26 Apr 2020 05:32:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4143DC0172;
+	Sun, 26 Apr 2020 06:59:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 56F28C0172
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 537F5C0172
  for <virtualization@lists.linux-foundation.org>;
- Sun, 26 Apr 2020 05:32:06 +0000 (UTC)
+ Sun, 26 Apr 2020 06:59:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 4D3998577A
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3A33685514
  for <virtualization@lists.linux-foundation.org>;
- Sun, 26 Apr 2020 05:32:06 +0000 (UTC)
+ Sun, 26 Apr 2020 06:59:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CQSdXf1Enc_w
+ with ESMTP id AD36YWUG6c8k
  for <virtualization@lists.linux-foundation.org>;
- Sun, 26 Apr 2020 05:32:05 +0000 (UTC)
+ Sun, 26 Apr 2020 06:59:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4CCAA85778
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id D8C6F85329
  for <virtualization@lists.linux-foundation.org>;
- Sun, 26 Apr 2020 05:32:05 +0000 (UTC)
-IronPort-SDR: Y8pAc+y5tZnnm11txBQm2VyLokgohODqf/Y02rN9mIfSIIhnun5K9zI2rjOdRB05r6aSMjzSJc
- GxwIJz0RBKaQ==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Apr 2020 22:32:04 -0700
-IronPort-SDR: PHnvYfEYyG9lLO8j7qqyxvxptBJE5WqzDgMTLwgsV71FhSkJYok8OnX3XHiPWsbsd/y1TsXDfe
- ZmsEM/ZwalfQ==
-X-IronPort-AV: E=Sophos;i="5.73,318,1583222400"; 
- d="scan'208,217";a="457912185"
-Received: from lingshan-mobl5.ccr.corp.intel.com (HELO [10.249.174.216])
- ([10.249.174.216])
- by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Apr 2020 22:32:01 -0700
-Subject: Re: [PATCH 2/2] vdpa: implement config interrupt in IFCVF
-To: Jason Wang <jasowang@redhat.com>, Zhu Lingshan <lingshan.zhu@intel.com>,
- mst@redhat.com, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org
-References: <1587722659-1300-1-git-send-email-lingshan.zhu@intel.com>
- <1587722659-1300-3-git-send-email-lingshan.zhu@intel.com>
- <bb909a20-3f14-427d-ee40-129a1844486b@redhat.com>
-From: Zhu Lingshan <lingshan.zhu@linux.intel.com>
-Message-ID: <de47fa9a-9ce4-05b0-fb92-da0255aad56c@linux.intel.com>
-Date: Sun, 26 Apr 2020 13:32:01 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Sun, 26 Apr 2020 06:58:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1587884338;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nzpyfv1Z6VEBidKjguuGbAmxFY96l0LyJXnhGt0vsLM=;
+ b=bkrY++XlhKnOfQLgDBekNggdb1zb5Bieg373QMOU0/O6m931tN/y4i/Yn+oGP6lNK0aEfY
+ nzFJYojJkX0S9kiP/ALZNJQCUUtoFSaUP6LEt+lUf50++D2SwyiUO7mmYJLwqXcwyB4885
+ kUD2WvG1FgDDKeKbSKwzlEFWgH8LdDY=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-496-aJ0xuxzYOcqNo5y_I5t1WQ-1; Sun, 26 Apr 2020 02:58:53 -0400
+X-MC-Unique: aJ0xuxzYOcqNo5y_I5t1WQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 89CE91005510;
+ Sun, 26 Apr 2020 06:58:51 +0000 (UTC)
+Received: from [10.72.13.103] (ovpn-13-103.pek2.redhat.com [10.72.13.103])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 506925D9CD;
+ Sun, 26 Apr 2020 06:58:44 +0000 (UTC)
+Subject: Re: [PATCH V2 1/2] vdpa: Support config interrupt in vhost_vdpa
+To: Zhu Lingshan <lingshan.zhu@intel.com>, mst@redhat.com,
+ kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <1587881384-2133-1-git-send-email-lingshan.zhu@intel.com>
+ <1587881384-2133-2-git-send-email-lingshan.zhu@intel.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <055fb826-895d-881b-719c-228d0cc9a7bf@redhat.com>
+Date: Sun, 26 Apr 2020 14:58:43 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <bb909a20-3f14-427d-ee40-129a1844486b@redhat.com>
+In-Reply-To: <1587881384-2133-2-git-send-email-lingshan.zhu@intel.com>
 Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Cc: lulu@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -81,378 +89,89 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6519809511090633527=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is a multi-part message in MIME format.
---===============6519809511090633527==
-Content-Type: multipart/alternative;
- boundary="------------90CF6495DE8CED2B4E58E175"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------90CF6495DE8CED2B4E58E175
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-
-On 4/26/2020 11:25 AM, Jason Wang wrote:
->
-> On 2020/4/24 下午6:04, Zhu Lingshan wrote:
->> This commit implements config interrupt support
->> in IFC VF
->>
->> Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
->> ---
->>   drivers/vdpa/ifcvf/ifcvf_base.c |  3 +++
->>   drivers/vdpa/ifcvf/ifcvf_base.h |  2 ++
->>   drivers/vdpa/ifcvf/ifcvf_main.c | 22 +++++++++++++++++++++-
->>   3 files changed, 26 insertions(+), 1 deletion(-)
->>
->> diff --git a/drivers/vdpa/ifcvf/ifcvf_base.c 
->> b/drivers/vdpa/ifcvf/ifcvf_base.c
->> index b61b06e..c825d99 100644
->> --- a/drivers/vdpa/ifcvf/ifcvf_base.c
->> +++ b/drivers/vdpa/ifcvf/ifcvf_base.c
->> @@ -185,6 +185,9 @@ void ifcvf_set_status(struct ifcvf_hw *hw, u8 
->> status)
->>     void ifcvf_reset(struct ifcvf_hw *hw)
->>   {
->> +    hw->config_cb.callback = NULL;
->> +    hw->config_cb.private = NULL;
->> +
->>       ifcvf_set_status(hw, 0);
->>       /* flush set_status, make sure VF is stopped, reset */
->>       ifcvf_get_status(hw);
->> diff --git a/drivers/vdpa/ifcvf/ifcvf_base.h 
->> b/drivers/vdpa/ifcvf/ifcvf_base.h
->> index e803070..76928b0 100644
->> --- a/drivers/vdpa/ifcvf/ifcvf_base.h
->> +++ b/drivers/vdpa/ifcvf/ifcvf_base.h
->> @@ -81,6 +81,8 @@ struct ifcvf_hw {
->>       void __iomem *net_cfg;
->>       struct vring_info vring[IFCVF_MAX_QUEUE_PAIRS * 2];
->>       void __iomem * const *base;
->> +    char config_msix_name[256];
->> +    struct vdpa_callback config_cb;
->>   };
->>     struct ifcvf_adapter {
->> diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c 
->> b/drivers/vdpa/ifcvf/ifcvf_main.c
->> index 8d54dc5..f7baeca 100644
->> --- a/drivers/vdpa/ifcvf/ifcvf_main.c
->> +++ b/drivers/vdpa/ifcvf/ifcvf_main.c
->> @@ -18,6 +18,16 @@
->>   #define DRIVER_AUTHOR   "Intel Corporation"
->>   #define IFCVF_DRIVER_NAME       "ifcvf"
->>   +static irqreturn_t ifcvf_config_changed(int irq, void *arg)
->> +{
->> +    struct ifcvf_hw *vf = arg;
->> +
->> +    if (vf->config_cb.callback)
->> +        return vf->config_cb.callback(vf->config_cb.private);
->> +
->> +    return IRQ_HANDLED;
->
->
-> So it looks to me the current support of VIRTIO_NET_F_STATUS is broken 
-> without this patch.
->
-> We probably need to patch to disable it.
->
-> Thanks
-
-Hi Jason, We don't have VIRTIO_NET_F_STATUS in driver feature bits for 
-now, you just reminded me I should add it along with this series. 
-Thanks, BR Zhu Lingshan
-
->
->
->> +}
->> +
->>   static irqreturn_t ifcvf_intr_handler(int irq, void *arg)
->>   {
->>       struct vring_info *vring = arg;
->> @@ -256,7 +266,10 @@ static void ifcvf_vdpa_set_config(struct 
->> vdpa_device *vdpa_dev,
->>   static void ifcvf_vdpa_set_config_cb(struct vdpa_device *vdpa_dev,
->>                        struct vdpa_callback *cb)
->>   {
->> -    /* We don't support config interrupt */
->> +    struct ifcvf_hw *vf = vdpa_to_vf(vdpa_dev);
->> +
->> +    vf->config_cb.callback = cb->callback;
->> +    vf->config_cb.private = cb->private;
->>   }
->>     /*
->> @@ -292,6 +305,13 @@ static int ifcvf_request_irq(struct 
->> ifcvf_adapter *adapter)
->>       struct ifcvf_hw *vf = &adapter->vf;
->>       int vector, i, ret, irq;
->>   +    snprintf(vf->config_msix_name, 256, "ifcvf[%s]-config\n",
->> +        pci_name(pdev));
->> +    vector = 0;
->> +    irq = pci_irq_vector(pdev, vector);
->> +    ret = devm_request_irq(&pdev->dev, irq,
->> +                   ifcvf_config_changed, 0,
->> +                   vf->config_msix_name, vf);
->>         for (i = 0; i < IFCVF_MAX_QUEUE_PAIRS * 2; i++) {
->>           snprintf(vf->vring[i].msix_name, 256, "ifcvf[%s]-%d\n",
->
-> _______________________________________________
-> Virtualization mailing list
-> Virtualization@lists.linux-foundation.org
-> https://lists.linuxfoundation.org/mailman/listinfo/virtualization
-
---------------90CF6495DE8CED2B4E58E175
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><tt><br>
-      </tt></p>
-    <div class="moz-cite-prefix"><tt>On 4/26/2020 11:25 AM, Jason Wang
-        wrote:</tt><tt><br>
-      </tt></div>
-    <blockquote type="cite"
-      cite="mid:bb909a20-3f14-427d-ee40-129a1844486b@redhat.com">
-      <tt><br>
-      </tt><tt>On 2020/4/24 下午6:04, Zhu Lingshan wrote:
-      </tt><tt><br>
-      </tt>
-      <blockquote type="cite"><tt>This commit implements config
-          interrupt support
-        </tt><tt><br>
-        </tt><tt>in IFC VF
-        </tt><tt><br>
-        </tt>
-        <tt><br>
-        </tt><tt>Signed-off-by: Zhu Lingshan
-          <a class="moz-txt-link-rfc2396E" href="mailto:lingshan.zhu@intel.com">&lt;lingshan.zhu@intel.com&gt;</a>
-        </tt><tt><br>
-        </tt><tt>---
-        </tt><tt><br>
-        </tt><tt>  drivers/vdpa/ifcvf/ifcvf_base.c |  3 +++
-        </tt><tt><br>
-        </tt><tt>  drivers/vdpa/ifcvf/ifcvf_base.h |  2 ++
-        </tt><tt><br>
-        </tt><tt>  drivers/vdpa/ifcvf/ifcvf_main.c | 22
-          +++++++++++++++++++++-
-        </tt><tt><br>
-        </tt><tt>  3 files changed, 26 insertions(+), 1 deletion(-)
-        </tt><tt><br>
-        </tt>
-        <tt><br>
-        </tt><tt>diff --git a/drivers/vdpa/ifcvf/ifcvf_base.c
-          b/drivers/vdpa/ifcvf/ifcvf_base.c
-        </tt><tt><br>
-        </tt><tt>index b61b06e..c825d99 100644
-        </tt><tt><br>
-        </tt><tt>--- a/drivers/vdpa/ifcvf/ifcvf_base.c
-        </tt><tt><br>
-        </tt><tt>+++ b/drivers/vdpa/ifcvf/ifcvf_base.c
-        </tt><tt><br>
-        </tt><tt>@@ -185,6 +185,9 @@ void ifcvf_set_status(struct
-          ifcvf_hw *hw, u8 status)
-        </tt><tt><br>
-        </tt><tt>    void ifcvf_reset(struct ifcvf_hw *hw)
-        </tt><tt><br>
-        </tt><tt>  {
-        </tt><tt><br>
-        </tt><tt>+    hw-&gt;config_cb.callback = NULL;
-        </tt><tt><br>
-        </tt><tt>+    hw-&gt;config_cb.private = NULL;
-        </tt><tt><br>
-        </tt><tt>+
-        </tt><tt><br>
-        </tt><tt>      ifcvf_set_status(hw, 0);
-        </tt><tt><br>
-        </tt><tt>      /* flush set_status, make sure VF is stopped,
-          reset */
-        </tt><tt><br>
-        </tt><tt>      ifcvf_get_status(hw);
-        </tt><tt><br>
-        </tt><tt>diff --git a/drivers/vdpa/ifcvf/ifcvf_base.h
-          b/drivers/vdpa/ifcvf/ifcvf_base.h
-        </tt><tt><br>
-        </tt><tt>index e803070..76928b0 100644
-        </tt><tt><br>
-        </tt><tt>--- a/drivers/vdpa/ifcvf/ifcvf_base.h
-        </tt><tt><br>
-        </tt><tt>+++ b/drivers/vdpa/ifcvf/ifcvf_base.h
-        </tt><tt><br>
-        </tt><tt>@@ -81,6 +81,8 @@ struct ifcvf_hw {
-        </tt><tt><br>
-        </tt><tt>      void __iomem *net_cfg;
-        </tt><tt><br>
-        </tt><tt>      struct vring_info vring[IFCVF_MAX_QUEUE_PAIRS *
-          2];
-        </tt><tt><br>
-        </tt><tt>      void __iomem * const *base;
-        </tt><tt><br>
-        </tt><tt>+    char config_msix_name[256];
-        </tt><tt><br>
-        </tt><tt>+    struct vdpa_callback config_cb;
-        </tt><tt><br>
-        </tt><tt>  };
-        </tt><tt><br>
-        </tt><tt>    struct ifcvf_adapter {
-        </tt><tt><br>
-        </tt><tt>diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c
-          b/drivers/vdpa/ifcvf/ifcvf_main.c
-        </tt><tt><br>
-        </tt><tt>index 8d54dc5..f7baeca 100644
-        </tt><tt><br>
-        </tt><tt>--- a/drivers/vdpa/ifcvf/ifcvf_main.c
-        </tt><tt><br>
-        </tt><tt>+++ b/drivers/vdpa/ifcvf/ifcvf_main.c
-        </tt><tt><br>
-        </tt><tt>@@ -18,6 +18,16 @@
-        </tt><tt><br>
-        </tt><tt>  #define DRIVER_AUTHOR   "Intel Corporation"
-        </tt><tt><br>
-        </tt><tt>  #define IFCVF_DRIVER_NAME       "ifcvf"
-        </tt><tt><br>
-        </tt><tt>  +static irqreturn_t ifcvf_config_changed(int irq,
-          void *arg)
-        </tt><tt><br>
-        </tt><tt>+{
-        </tt><tt><br>
-        </tt><tt>+    struct ifcvf_hw *vf = arg;
-        </tt><tt><br>
-        </tt><tt>+
-        </tt><tt><br>
-        </tt><tt>+    if (vf-&gt;config_cb.callback)
-        </tt><tt><br>
-        </tt><tt>+        return
-          vf-&gt;config_cb.callback(vf-&gt;config_cb.private);
-        </tt><tt><br>
-        </tt><tt>+
-        </tt><tt><br>
-        </tt><tt>+    return IRQ_HANDLED;
-        </tt><tt><br>
-        </tt></blockquote>
-      <tt><br>
-      </tt>
-      <tt><br>
-      </tt><tt>So it looks to me the current support of
-        VIRTIO_NET_F_STATUS is broken without this patch.
-      </tt><tt><br>
-      </tt>
-      <tt><br>
-      </tt><tt>We probably need to patch to disable it.
-      </tt><tt><br>
-      </tt>
-      <tt><br>
-      </tt><tt>Thanks
-      </tt><tt><br>
-      </tt></blockquote>
-    <pre><tt>Hi Jason,
-
-We don't have </tt><span style="font-size: 11pt;">VIRTIO_NET_F_STATUS in driver feature bits for now, you just
-reminded me I should add it along with this series.
-
-Thanks,
-BR
-Zhu Lingshan</span></pre>
-    <blockquote type="cite"
-      cite="mid:bb909a20-3f14-427d-ee40-129a1844486b@redhat.com">
-      <tt><br>
-      </tt>
-      <tt><br>
-      </tt>
-      <blockquote type="cite"><tt>+}
-        </tt><tt><br>
-        </tt><tt>+
-        </tt><tt><br>
-        </tt><tt>  static irqreturn_t ifcvf_intr_handler(int irq, void
-          *arg)
-        </tt><tt><br>
-        </tt><tt>  {
-        </tt><tt><br>
-        </tt><tt>      struct vring_info *vring = arg;
-        </tt><tt><br>
-        </tt><tt>@@ -256,7 +266,10 @@ static void
-          ifcvf_vdpa_set_config(struct vdpa_device *vdpa_dev,
-        </tt><tt><br>
-        </tt><tt>  static void ifcvf_vdpa_set_config_cb(struct
-          vdpa_device *vdpa_dev,
-        </tt><tt><br>
-        </tt><tt>                       struct vdpa_callback *cb)
-        </tt><tt><br>
-        </tt><tt>  {
-        </tt><tt><br>
-        </tt><tt>-    /* We don't support config interrupt */
-        </tt><tt><br>
-        </tt><tt>+    struct ifcvf_hw *vf = vdpa_to_vf(vdpa_dev);
-        </tt><tt><br>
-        </tt><tt>+
-        </tt><tt><br>
-        </tt><tt>+    vf-&gt;config_cb.callback = cb-&gt;callback;
-        </tt><tt><br>
-        </tt><tt>+    vf-&gt;config_cb.private = cb-&gt;private;
-        </tt><tt><br>
-        </tt><tt>  }
-        </tt><tt><br>
-        </tt><tt>    /*
-        </tt><tt><br>
-        </tt><tt>@@ -292,6 +305,13 @@ static int
-          ifcvf_request_irq(struct ifcvf_adapter *adapter)
-        </tt><tt><br>
-        </tt><tt>      struct ifcvf_hw *vf = &amp;adapter-&gt;vf;
-        </tt><tt><br>
-        </tt><tt>      int vector, i, ret, irq;
-        </tt><tt><br>
-        </tt><tt>  +    snprintf(vf-&gt;config_msix_name, 256,
-          "ifcvf[%s]-config\n",
-        </tt><tt><br>
-        </tt><tt>+        pci_name(pdev));
-        </tt><tt><br>
-        </tt><tt>+    vector = 0;
-        </tt><tt><br>
-        </tt><tt>+    irq = pci_irq_vector(pdev, vector);
-        </tt><tt><br>
-        </tt><tt>+    ret = devm_request_irq(&amp;pdev-&gt;dev, irq,
-        </tt><tt><br>
-        </tt><tt>+                   ifcvf_config_changed, 0,
-        </tt><tt><br>
-        </tt><tt>+                   vf-&gt;config_msix_name, vf);
-        </tt><tt><br>
-        </tt><tt>        for (i = 0; i &lt; IFCVF_MAX_QUEUE_PAIRS * 2;
-          i++) {
-        </tt><tt><br>
-        </tt><tt>          snprintf(vf-&gt;vring[i].msix_name, 256,
-          "ifcvf[%s]-%d\n",
-        </tt><tt><br>
-        </tt></blockquote>
-      <tt><br>
-      </tt><tt>_______________________________________________
-      </tt><tt><br>
-      </tt><tt>Virtualization mailing list
-      </tt><tt><br>
-      </tt><tt><a class="moz-txt-link-abbreviated" href="mailto:Virtualization@lists.linux-foundation.org">Virtualization@lists.linux-foundation.org</a>
-      </tt><tt><br>
-      </tt><tt><a class="moz-txt-link-freetext" href="https://lists.linuxfoundation.org/mailman/listinfo/virtualization">https://lists.linuxfoundation.org/mailman/listinfo/virtualization</a></tt><tt><br>
-      </tt>
-    </blockquote>
-  </body>
-</html>
-
---------------90CF6495DE8CED2B4E58E175--
-
---===============6519809511090633527==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6519809511090633527==--
+Ck9uIDIwMjAvNC8yNiDkuIvljYgyOjA5LCBaaHUgTGluZ3NoYW4gd3JvdGU6Cj4gVGhpcyBjb21t
+aXQgaW1wbGVtZW50cyBjb25maWcgaW50ZXJydXB0IHN1cHBvcnQgaW4KPiB2aG9zdF92ZHBhIGxh
+eWVyLgo+Cj4gU2lnbmVkLW9mZi1ieTogWmh1IExpbmdzaGFuIDxsaW5nc2hhbi56aHVAaW50ZWwu
+Y29tPgo+IC0tLQo+ICAgZHJpdmVycy92aG9zdC92ZHBhLmMgICAgICAgfCA0NyArKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gICBkcml2ZXJzL3Zob3N0L3Zo
+b3N0LmMgICAgICB8ICAyICstCj4gICBkcml2ZXJzL3Zob3N0L3Zob3N0LmggICAgICB8ICAyICsr
+Cj4gICBpbmNsdWRlL3VhcGkvbGludXgvdmhvc3QuaCB8ICAyICsrCj4gICA0IGZpbGVzIGNoYW5n
+ZWQsIDUyIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2
+ZXJzL3Zob3N0L3ZkcGEuYyBiL2RyaXZlcnMvdmhvc3QvdmRwYS5jCj4gaW5kZXggNDIxZjAyYS4u
+Yjk0ZTM0OSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3Zob3N0L3ZkcGEuYwo+ICsrKyBiL2RyaXZl
+cnMvdmhvc3QvdmRwYS5jCj4gQEAgLTIxLDYgKzIxLDcgQEAKPiAgICNpbmNsdWRlIDxsaW51eC9u
+b3NwZWMuaD4KPiAgICNpbmNsdWRlIDxsaW51eC92aG9zdC5oPgo+ICAgI2luY2x1ZGUgPGxpbnV4
+L3ZpcnRpb19uZXQuaD4KPiArI2luY2x1ZGUgPGxpbnV4L2tlcm5lbC5oPgo+ICAgCj4gICAjaW5j
+bHVkZSAidmhvc3QuaCIKPiAgIAo+IEBAIC03MCw2ICs3MSw3IEBAIHN0cnVjdCB2aG9zdF92ZHBh
+IHsKPiAgIAlpbnQgbnZxczsKPiAgIAlpbnQgdmlydGlvX2lkOwo+ICAgCWludCBtaW5vcjsKPiAr
+CXN0cnVjdCBldmVudGZkX2N0eCAqY29uZmlnX2N0eDsKPiAgIH07Cj4gICAKPiAgIHN0YXRpYyBE
+RUZJTkVfSURBKHZob3N0X3ZkcGFfaWRhKTsKPiBAQCAtMTAxLDYgKzEwMywxNyBAQCBzdGF0aWMg
+aXJxcmV0dXJuX3Qgdmhvc3RfdmRwYV92aXJ0cXVldWVfY2Iodm9pZCAqcHJpdmF0ZSkKPiAgIAly
+ZXR1cm4gSVJRX0hBTkRMRUQ7Cj4gICB9Cj4gICAKPiArc3RhdGljIGlycXJldHVybl90IHZob3N0
+X3ZkcGFfY29uZmlnX2NiKHZvaWQgKnByaXZhdGUpCj4gK3sKPiArCXN0cnVjdCB2aG9zdF92ZHBh
+ICp2ID0gcHJpdmF0ZTsKPiArCXN0cnVjdCBldmVudGZkX2N0eCAqY29uZmlnX2N0eCA9IHYtPmNv
+bmZpZ19jdHg7Cj4gKwo+ICsJaWYgKGNvbmZpZ19jdHgpCj4gKwkJZXZlbnRmZF9zaWduYWwoY29u
+ZmlnX2N0eCwgMSk7Cj4gKwo+ICsJcmV0dXJuIElSUV9IQU5ETEVEOwo+ICt9Cj4gKwo+ICAgc3Rh
+dGljIHZvaWQgdmhvc3RfdmRwYV9yZXNldChzdHJ1Y3Qgdmhvc3RfdmRwYSAqdikKPiAgIHsKPiAg
+IAlzdHJ1Y3QgdmRwYV9kZXZpY2UgKnZkcGEgPSB2LT52ZHBhOwo+IEBAIC0yODgsNiArMzAxLDM2
+IEBAIHN0YXRpYyBsb25nIHZob3N0X3ZkcGFfZ2V0X3ZyaW5nX251bShzdHJ1Y3Qgdmhvc3RfdmRw
+YSAqdiwgdTE2IF9fdXNlciAqYXJncCkKPiAgIAlyZXR1cm4gMDsKPiAgIH0KPiAgIAo+ICtzdGF0
+aWMgdm9pZCB2aG9zdF92ZHBhX2NvbmZpZ19wdXQoc3RydWN0IHZob3N0X3ZkcGEgKnYpCj4gK3sK
+PiArCWlmICh2LT5jb25maWdfY3R4KQo+ICsJCWV2ZW50ZmRfY3R4X3B1dCh2LT5jb25maWdfY3R4
+KTsKPiArfQo+ICsKPiArc3RhdGljIGxvbmcgdmhvc3RfdmRwYV9zZXRfY29uZmlnX2NhbGwoc3Ry
+dWN0IHZob3N0X3ZkcGEgKnYsIHUzMiBfX3VzZXIgKmFyZ3ApCj4gK3sKPiArCXN0cnVjdCB2ZHBh
+X2NhbGxiYWNrIGNiOwo+ICsJdTMyIGZkOwo+ICsJc3RydWN0IGV2ZW50ZmRfY3R4ICpjdHg7Cj4g
+Kwo+ICsJY2IuY2FsbGJhY2sgPSB2aG9zdF92ZHBhX2NvbmZpZ19jYjsKPiArCWNiLnByaXZhdGUg
+PSB2LT52ZHBhOwo+ICsJaWYgKGNvcHlfZnJvbV91c2VyKCZmZCwgYXJncCwgc2l6ZW9mKGZkKSkp
+Cj4gKwkJcmV0dXJuICAtRUZBVUxUOwo+ICsKPiArCWN0eCA9IGZkID09IFZIT1NUX0ZJTEVfVU5C
+SU5EID8gTlVMTCA6IGV2ZW50ZmRfY3R4X2ZkZ2V0KGZkKTsKPiArCXN3YXAoY3R4LCB2LT5jb25m
+aWdfY3R4KTsKPiArCj4gKwlpZiAoIUlTX0VSUl9PUl9OVUxMKGN0eCkpCj4gKwkJZXZlbnRmZF9j
+dHhfcHV0KGN0eCk7Cj4gKwo+ICsJaWYgKElTX0VSUih2LT5jb25maWdfY3R4KSkKPiArCQlyZXR1
+cm4gUFRSX0VSUih2LT5jb25maWdfY3R4KTsKPiArCj4gKwl2LT52ZHBhLT5jb25maWctPnNldF9j
+b25maWdfY2Iodi0+dmRwYSwgJmNiKTsKPiArCj4gKwlyZXR1cm4gMDsKPiArfQo+ICAgc3RhdGlj
+IGxvbmcgdmhvc3RfdmRwYV92cmluZ19pb2N0bChzdHJ1Y3Qgdmhvc3RfdmRwYSAqdiwgdW5zaWdu
+ZWQgaW50IGNtZCwKPiAgIAkJCQkgICB2b2lkIF9fdXNlciAqYXJncCkKPiAgIHsKPiBAQCAtMzk4
+LDYgKzQ0MSw5IEBAIHN0YXRpYyBsb25nIHZob3N0X3ZkcGFfdW5sb2NrZWRfaW9jdGwoc3RydWN0
+IGZpbGUgKmZpbGVwLAo+ICAgCWNhc2UgVkhPU1RfU0VUX0xPR19GRDoKPiAgIAkJciA9IC1FTk9J
+T0NUTENNRDsKPiAgIAkJYnJlYWs7Cj4gKwljYXNlIFZIT1NUX1ZEUEFfU0VUX0NPTkZJR19DQUxM
+Ogo+ICsJCXIgPSB2aG9zdF92ZHBhX3NldF9jb25maWdfY2FsbCh2LCBhcmdwKTsKPiArCQlicmVh
+azsKPiAgIAlkZWZhdWx0Ogo+ICAgCQlyID0gdmhvc3RfZGV2X2lvY3RsKCZ2LT52ZGV2LCBjbWQs
+IGFyZ3ApOwo+ICAgCQlpZiAociA9PSAtRU5PSU9DVExDTUQpCj4gQEAgLTczNCw2ICs3ODAsNyBA
+QCBzdGF0aWMgaW50IHZob3N0X3ZkcGFfcmVsZWFzZShzdHJ1Y3QgaW5vZGUgKmlub2RlLCBzdHJ1
+Y3QgZmlsZSAqZmlsZXApCj4gICAJdmhvc3RfZGV2X3N0b3AoJnYtPnZkZXYpOwo+ICAgCXZob3N0
+X3ZkcGFfaW90bGJfZnJlZSh2KTsKPiAgIAl2aG9zdF92ZHBhX2ZyZWVfZG9tYWluKHYpOwo+ICsJ
+dmhvc3RfdmRwYV9jb25maWdfcHV0KHYpOwo+ICAgCXZob3N0X2Rldl9jbGVhbnVwKCZ2LT52ZGV2
+KTsKPiAgIAlrZnJlZSh2LT52ZGV2LnZxcyk7Cj4gICAJbXV0ZXhfdW5sb2NrKCZkLT5tdXRleCk7
+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmhvc3Qvdmhvc3QuYyBiL2RyaXZlcnMvdmhvc3Qvdmhv
+c3QuYwo+IGluZGV4IGQ0NTBlMTYuLmU4ZjViMjAgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92aG9z
+dC92aG9zdC5jCj4gKysrIGIvZHJpdmVycy92aG9zdC92aG9zdC5jCj4gQEAgLTE1OTAsNyArMTU5
+MCw3IEBAIGxvbmcgdmhvc3RfdnJpbmdfaW9jdGwoc3RydWN0IHZob3N0X2RldiAqZCwgdW5zaWdu
+ZWQgaW50IGlvY3RsLCB2b2lkIF9fdXNlciAqYXJnCj4gICAJCQlyID0gLUVGQVVMVDsKPiAgIAkJ
+CWJyZWFrOwo+ICAgCQl9Cj4gLQkJY3R4ID0gZi5mZCA9PSAtMSA/IE5VTEwgOiBldmVudGZkX2N0
+eF9mZGdldChmLmZkKTsKPiArCQljdHggPSBmLmZkID09IFZIT1NUX0ZJTEVfVU5CSU5EID8gTlVM
+TCA6IGV2ZW50ZmRfY3R4X2ZkZ2V0KGYuZmQpOwo+ICAgCQlpZiAoSVNfRVJSKGN0eCkpIHsKPiAg
+IAkJCXIgPSBQVFJfRVJSKGN0eCk7Cj4gICAJCQlicmVhazsKPiBkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy92aG9zdC92aG9zdC5oIGIvZHJpdmVycy92aG9zdC92aG9zdC5oCj4gaW5kZXggMTgxMzgyMS4u
+ODY2MzEzOSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiArKysgYi9kcml2
+ZXJzL3Zob3N0L3Zob3N0LmgKPiBAQCAtMTgsNiArMTgsOCBAQAo+ICAgdHlwZWRlZiB2b2lkICgq
+dmhvc3Rfd29ya19mbl90KShzdHJ1Y3Qgdmhvc3Rfd29yayAqd29yayk7Cj4gICAKPiAgICNkZWZp
+bmUgVkhPU1RfV09SS19RVUVVRUQgMQo+ICsjZGVmaW5lIFZIT1NUX0ZJTEVfVU5CSU5EIC0xCgoK
+SSB0aGluayBpdCdzIGJldHRlciB0byBkb2N1bWVudCB0aGlzIGluIHVhcGkuCgoKPiArCj4gICBz
+dHJ1Y3Qgdmhvc3Rfd29yayB7Cj4gICAJc3RydWN0IGxsaXN0X25vZGUJICBub2RlOwo+ICAgCXZo
+b3N0X3dvcmtfZm5fdAkJICBmbjsKPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS91YXBpL2xpbnV4L3Zo
+b3N0LmggYi9pbmNsdWRlL3VhcGkvbGludXgvdmhvc3QuaAo+IGluZGV4IDlmZTcyZTQuLjM0NWFj
+YjMgMTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS91YXBpL2xpbnV4L3Zob3N0LmgKPiArKysgYi9pbmNs
+dWRlL3VhcGkvbGludXgvdmhvc3QuaAo+IEBAIC0xNDAsNCArMTQwLDYgQEAKPiAgIC8qIEdldCB0
+aGUgbWF4IHJpbmcgc2l6ZS4gKi8KPiAgICNkZWZpbmUgVkhPU1RfVkRQQV9HRVRfVlJJTkdfTlVN
+CV9JT1IoVkhPU1RfVklSVElPLCAweDc2LCBfX3UxNikKPiAgIAo+ICsvKiBTZXQgZXZlbnQgZmQg
+Zm9yIGNvbmZpZyBpbnRlcnJ1cHQqLwo+ICsjZGVmaW5lIFZIT1NUX1ZEUEFfU0VUX0NPTkZJR19D
+QUxMCV9JT1coVkhPU1RfVklSVElPLCAweDc3LCB1MzIpCj4gICAjZW5kaWYKCgpTaG91bGQgYmUg
+ImludCIgaW5zdGVhZCBvZiAidTMyIi4KClRoYW5rcwoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1
+YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhm
+b3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
