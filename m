@@ -2,100 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE4971BA673
-	for <lists.virtualization@lfdr.de>; Mon, 27 Apr 2020 16:32:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A97261BA71D
+	for <lists.virtualization@lfdr.de>; Mon, 27 Apr 2020 16:58:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6BE9D873DE;
-	Mon, 27 Apr 2020 14:32:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 4887187648;
+	Mon, 27 Apr 2020 14:58:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tSbuFutK+Co9; Mon, 27 Apr 2020 14:32:10 +0000 (UTC)
+	with ESMTP id vAmcxc+jtwDU; Mon, 27 Apr 2020 14:58:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6F8DB87D5E;
-	Mon, 27 Apr 2020 14:32:10 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 95036875BE;
+	Mon, 27 Apr 2020 14:58:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3D9FFC0172;
-	Mon, 27 Apr 2020 14:32:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F0ABC1D87;
+	Mon, 27 Apr 2020 14:58:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 47997C0172
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 26B6BC0172
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 14:32:08 +0000 (UTC)
+ Mon, 27 Apr 2020 14:58:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 265B22039E
+ by whitealder.osuosl.org (Postfix) with ESMTP id 1459084949
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 14:32:08 +0000 (UTC)
+ Mon, 27 Apr 2020 14:58:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id BKgiE145RN2j
+ with ESMTP id WBnIx52mYvIK
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 14:32:06 +0000 (UTC)
+ Mon, 27 Apr 2020 14:58:43 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 0AA902152A
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
+ [209.85.166.194])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 373A58493F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 14:32:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587997924;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=cf6Cs2PEOytlk0F2uGTl55ZSvGzk8/G/7WE1a3ciQp0=;
- b=KOJ43tuDVGH9tAoeN0I91LUHVjv2fbNsmnOIXp0wdr/GKNQU6OMhr/d9aTw3WLAhetbCS/
- HO8peWM9EvLRJSwt4zXbCBHDM18cZVFnJ/K70ETv1iHnMFN3chJHKfsRzc7KtqaLqGQqUD
- ciL2kzgHdx+pn2e3fLO79BzRuvAHLe4=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-128-za7ZvJ42NAGil3vuXU8pgA-1; Mon, 27 Apr 2020 10:32:02 -0400
-X-MC-Unique: za7ZvJ42NAGil3vuXU8pgA-1
-Received: by mail-wm1-f71.google.com with SMTP id s12so6964529wmj.6
+ Mon, 27 Apr 2020 14:58:43 +0000 (UTC)
+Received: by mail-il1-f194.google.com with SMTP id c16so16950863ilr.3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 07:32:02 -0700 (PDT)
+ Mon, 27 Apr 2020 07:58:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Zw1NwZkLibygSi1O/JJ/qB2qYr9WoY9HbvGVHwxj2Vs=;
+ b=eI30t7cb1WcTQm/uIzaYCxTaWjnLcJ3y/KBSmuzvo0xII5UsFfLLTaNBUY88UufpAy
+ ETNXr/7n/hz9kUsLN0aPHm6p19IB3cdzTYyGZIW6tsVgAyGUP5emolwsqU8Qgg22++8i
+ svuCqK97tBBtM3KMhMIG2w58N6XkyFEvVeaFDrQqpQDTvBAXcXNtseIAKPQwiEnXsDD9
+ mWh+zCcvdMcgkpf8qddk41MmlZanF7cfDGOFdMTpuFyuF+0MGlT6YgwQYUJmL1WlZ2PS
+ GXiA63knm8ayNEp22W6Dyi9Ud8JBQ13xXOWjyRjyMFAppek1eIWzVpqwheRcpTrQfF8v
+ ORVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=cf6Cs2PEOytlk0F2uGTl55ZSvGzk8/G/7WE1a3ciQp0=;
- b=S/ps9pTKRhWuaRUZdjrk3fQtUxpdTKVwpyUNDIUoP2ih0fi5dti6ZQ1N2DLONjumhp
- SpFsQ3UpR97fZ342MkNh5DgFZkMfrZEvBFpvZaHKo6NyCHffijwxeQYiQGxJZdUaOk8U
- 7pnHU9ZtxN6Wb3BwxQ+WsJMAGWji/CWggchBFHEclV0GoskTP3GuoLu3UsbU8YgAk6vz
- aNQuJ+jMEBCmLuJQP+p18jPvhOlTy2QVUPKhz+Nju0J7OLzEEnwg4CpX8B5LuZt01uSu
- u9ylPorRdk5fUiriAtCprdOUT9Mb/G4JfjpLBcg/GSMIHbR4RoN6pIf617PvH8j/9xrw
- EAjw==
-X-Gm-Message-State: AGi0PubROTHCknQcSBTXYS3/6XDcOM07fcDL8j4Ikh0KmsANt1iVvN2M
- 4eYNRo0QzORvEewgLOtel1+QIMCkMQjQEU/2qp1+pFbkGeD8vg+mewEIkpynTdbqOYp7vgfJKZ8
- SBEfXsQyOkSeDc/DV18iWeykGa7NJVkjgj0C8ni9t7w==
-X-Received: by 2002:a1c:4b12:: with SMTP id y18mr27319013wma.149.1587997921468; 
- Mon, 27 Apr 2020 07:32:01 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJ3yRKpFpNCFurBKYh3n2YOBs/ZiNJj3mnUr/OngVCgapTti55XiOSO9MN16q48Z0I2RmPu4A==
-X-Received: by 2002:a1c:4b12:: with SMTP id y18mr27318989wma.149.1587997921191; 
- Mon, 27 Apr 2020 07:32:01 -0700 (PDT)
-Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
- by smtp.gmail.com with ESMTPSA id
- r18sm18328241wrj.70.2020.04.27.07.31.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2020 07:32:00 -0700 (PDT)
-Date: Mon, 27 Apr 2020 10:31:57 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-Subject: Re: [PATCH net-next 0/3] vsock: support network namespace
-Message-ID: <20200427102828-mutt-send-email-mst@kernel.org>
-References: <20200116172428.311437-1-sgarzare@redhat.com>
- <20200427142518.uwssa6dtasrp3bfc@steredhat>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Zw1NwZkLibygSi1O/JJ/qB2qYr9WoY9HbvGVHwxj2Vs=;
+ b=YLZimK15ylaZMRUGv9MIABNvPF+p77iqez6R1Tnn/4mtEn4nkqT+ccUXEsNz9ewfcX
+ EKuCnq6ACmh3Duph/22lgCVErQmLrpRlXab5V5DJvVVl+hR9l8n8EWV3NYqZL27u4/DX
+ rY3bqtaujDePAt6wPFQMvDXvURNydm54r+SyIe4/aiRFb/BmnCzrb1KlXCQBH+uJWVPi
+ ddFImuR7mZguZx+VjKSQtktAaYaU7int2e4x/fDcQcnZ3zqEgH+ktI5OcD2st9Lt/ujj
+ kVcenD37freAsnuQO7ucjsEHbAJFsAgSOPI2QSLIXvNyhRqq/vQ0sebX/KvAYnIxjI3i
+ vElA==
+X-Gm-Message-State: AGi0PualCzRYH0E429JBwpVcu/KnMfghp2K9SNd4O8y9ONkWW4D7WYeD
+ XHGl8XYzleBGEjnagVIeqXod42AIPzVvX6UDqM4=
+X-Google-Smtp-Source: APiQypJ3L/HGag8fzdlfjqNqKuUkniv4NyBLhlN8HKromrK3DCR1KffIEnzYAqeWo9zcid8KgVtrNXseifWCaCXOiYA=
+X-Received: by 2002:a92:5f46:: with SMTP id t67mr20501739ilb.64.1587999522292; 
+ Mon, 27 Apr 2020 07:58:42 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200427142518.uwssa6dtasrp3bfc@steredhat>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: linux-hyperv@vger.kernel.org, kvm@vger.kernel.org, netdev@vger.kernel.org,
- Dexuan Cui <decui@microsoft.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Stefan Hajnoczi <stefanha@redhat.com>, davem@davemloft.net,
- Jorgen Hansen <jhansen@vmware.com>
+References: <20200424162103.6681.436.stgit@localhost.localdomain>
+ <31bc73ea-5d33-a79d-5f30-dc91b85f9b63@redhat.com>
+In-Reply-To: <31bc73ea-5d33-a79d-5f30-dc91b85f9b63@redhat.com>
+From: Alexander Duyck <alexander.duyck@gmail.com>
+Date: Mon, 27 Apr 2020 07:58:31 -0700
+Message-ID: <CAKgT0UfhH3pyOqaTcO3yyEE94NsFkgZvVzNDNsyyVqNDgHzGdQ@mail.gmail.com>
+Subject: Re: [PATCH v2] virtio-balloon: Disable free page reporting if page
+ poison reporting is not enabled
+To: David Hildenbrand <david@redhat.com>
+Cc: virtio-dev@lists.oasis-open.org, virtualization@lists.linux-foundation.org,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,146 +95,89 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Apr 27, 2020 at 04:25:18PM +0200, Stefano Garzarella wrote:
-> Hi David, Michael, Stefan,
-> I'm restarting to work on this topic since Kata guys are interested to
-> have that, especially on the guest side.
-> 
-> While working on the v2 I had few doubts, and I'd like to have your
-> suggestions:
-> 
->  1. netns assigned to the device inside the guest
-> 
->    Currently I assigned this device to 'init_net'. Maybe it is better
->    if we allow the user to decide which netns assign to the device
->    or to disable this new feature to have the same behavior as before
->    (host reachable from any netns).
->    I think we can handle this in the vsock core and not in the single
->    transports.
-> 
->    The simplest way that I found, is to add a new
->    IOCTL_VM_SOCKETS_ASSIGN_G2H_NETNS to /dev/vsock to enable the feature
->    and assign the device to the same netns of the process that do the
->    ioctl(), but I'm not sure it is clean enough.
-> 
->    Maybe it is better to add new rtnetlink messages, but I'm not sure if
->    it is feasible since we don't have a netdev device.
-> 
->    What do you suggest?
+On Mon, Apr 27, 2020 at 1:08 AM David Hildenbrand <david@redhat.com> wrote:
+>
+> On 24.04.20 18:24, Alexander Duyck wrote:
+> > From: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+> >
+> > We should disable free page reporting if page poisoning is enabled in the
+> > kernel but we cannot report it via the balloon interface. This way we can
+> > avoid the possibility of corrupting guest memory. Normally the page poison
+> > reporting feature should always be present when free page reporting is
+> > enabled on the hypervisor, however this allows us to correctly handle a
+> > case of the virtio-balloon device being possibly misconfigured.
+> >
+> > Fixes: 5d757c8d518d ("virtio-balloon: add support for providing free page reports to host")
+> > Signed-off-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+> > ---
+> >
+> > Changes since v1:
+> > Originally this patch also modified free page hinting, that has been removed.
+> > Updated patch title and description.
+> > Added a comment explaining reasoning for disabling free page reporting.
+> >
+> >  drivers/virtio/virtio_balloon.c |    9 ++++++++-
+> >  1 file changed, 8 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+> > index 51086a5afdd4..1f157d2f4952 100644
+> > --- a/drivers/virtio/virtio_balloon.c
+> > +++ b/drivers/virtio/virtio_balloon.c
+> > @@ -1107,11 +1107,18 @@ static int virtballoon_restore(struct virtio_device *vdev)
+> >
+> >  static int virtballoon_validate(struct virtio_device *vdev)
+> >  {
+> > -     /* Tell the host whether we care about poisoned pages. */
+> > +     /*
+> > +      * Inform the hypervisor that our pages are poisoned or
+> > +      * initialized. If we cannot do that then we should disable
+> > +      * page reporting as it could potentially change the contents
+> > +      * of our free pages.
+> > +      */
+> >       if (!want_init_on_free() &&
+> >           (IS_ENABLED(CONFIG_PAGE_POISONING_NO_SANITY) ||
+> >            !page_poisoning_enabled()))
+> >               __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_PAGE_POISON);
+> > +     else if (!virtio_has_feature(vdev, VIRTIO_BALLOON_F_PAGE_POISON))
+> > +             __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_REPORTING);
+> >
+> >       __virtio_clear_bit(vdev, VIRTIO_F_IOMMU_PLATFORM);
+> >       return 0;
+> >
+>
+> Did you see my feedback on v1?
+>
+> https://www.spinics.net/lists/linux-virtualization/msg42783.html
+>
+> In case of want_init_on_free(), we don't really need VIRTIO_BALLOON_F_PAGE_POISON.
 
-Maybe /dev/vsock-netns here too, like in the host?
+I believe we do. We had discussions earlier in which Michael had
+mentioned that the guest should not assume implementation details of
+the host/hypervisor.
 
+The PAGE_POISON feature is being used to indicate that we expect the
+page to contain a certain value when it is returned to us. With the
+current implementation in QEMU if that value is zero we can work with
+it because that is the effect that MADV_DONTNEED has. However if there
+were some other effect being used by QEMU we would want to know that
+the guest is expecting us to write a 0 page. So I believe it makes
+sense to inform the hypervisor that we are doing something that
+expects us to fill the page with zeros in the case of
+want_init_on_free rather than not providing that information to QEMU.
+This way, if in the future we decide to change the implementation in
+some way that might effect the value contained in the pages, we might
+have the flexibility to identify the want_init_on_free case so we can
+work around it.
 
-> 
->  2. netns assigned in the host
-> 
->     As Michael suggested, I added a new /dev/vhost-vsock-netns to allow
->     userspace application to use this new feature, leaving to
->     /dev/vhost-vsock the previous behavior (guest reachable from any
->     netns).
-> 
->     I like this approach, but I had these doubts:
-> 
->     - I need to allocate a new minor for that device (e.g.
->       VHOST_VSOCK_NETNS_MINOR) or is there an alternative way that I can
->       use?
+In reality it isn't too different from informing QEMU that we are
+performing poison with a value of 0 anyway which if I recall is what
+led me to adding the want_init_on_free check as they are all lumped
+together in free_pages_prezeroed():
+https://elixir.bootlin.com/linux/v5.7-rc3/source/mm/page_alloc.c#L2134
 
-Not that I see. I agree it's a bit annoying. I'll think about it a bit.
+Thanks.
 
->     - It is vhost-vsock specific, should we provide something handled in
->       the vsock core, maybe centralizing the CID allocation and adding a
->       new IOCTL or rtnetlink message like for the guest side?
->       (maybe it could be a second step, and for now we can continue with
->       the new device)
-> 
-> 
-> Thanks for the help,
-> Stefano
-> 
-> 
-> On Thu, Jan 16, 2020 at 06:24:25PM +0100, Stefano Garzarella wrote:
-> > RFC -> v1:
-> >  * added 'netns' module param to vsock.ko to enable the
-> >    network namespace support (disabled by default)
-> >  * added 'vsock_net_eq()' to check the "net" assigned to a socket
-> >    only when 'netns' support is enabled
-> > 
-> > RFC: https://patchwork.ozlabs.org/cover/1202235/
-> > 
-> > Now that we have multi-transport upstream, I started to take a look to
-> > support network namespace in vsock.
-> > 
-> > As we partially discussed in the multi-transport proposal [1], it could
-> > be nice to support network namespace in vsock to reach the following
-> > goals:
-> > - isolate host applications from guest applications using the same ports
-> >   with CID_ANY
-> > - assign the same CID of VMs running in different network namespaces
-> > - partition VMs between VMMs or at finer granularity
-> > 
-> > This new feature is disabled by default, because it changes vsock's
-> > behavior with network namespaces and could break existing applications.
-> > It can be enabled with the new 'netns' module parameter of vsock.ko.
-> > 
-> > This implementation provides the following behavior:
-> > - packets received from the host (received by G2H transports) are
-> >   assigned to the default netns (init_net)
-> > - packets received from the guest (received by H2G - vhost-vsock) are
-> >   assigned to the netns of the process that opens /dev/vhost-vsock
-> >   (usually the VMM, qemu in my tests, opens the /dev/vhost-vsock)
-> >     - for vmci I need some suggestions, because I don't know how to do
-> >       and test the same in the vmci driver, for now vmci uses the
-> >       init_net
-> > - loopback packets are exchanged only in the same netns
-> > 
-> > I tested the series in this way:
-> > l0_host$ qemu-system-x86_64 -m 4G -M accel=kvm -smp 4 \
-> >             -drive file=/tmp/vsockvm0.img,if=virtio --nographic \
-> >             -device vhost-vsock-pci,guest-cid=3
-> > 
-> > l1_vm$ echo 1 > /sys/module/vsock/parameters/netns
-> > 
-> > l1_vm$ ip netns add ns1
-> > l1_vm$ ip netns add ns2
-> >  # same CID on different netns
-> > l1_vm$ ip netns exec ns1 qemu-system-x86_64 -m 1G -M accel=kvm -smp 2 \
-> >             -drive file=/tmp/vsockvm1.img,if=virtio --nographic \
-> >             -device vhost-vsock-pci,guest-cid=4
-> > l1_vm$ ip netns exec ns2 qemu-system-x86_64 -m 1G -M accel=kvm -smp 2 \
-> >             -drive file=/tmp/vsockvm2.img,if=virtio --nographic \
-> >             -device vhost-vsock-pci,guest-cid=4
-> > 
-> >  # all iperf3 listen on CID_ANY and port 5201, but in different netns
-> > l1_vm$ ./iperf3 --vsock -s # connection from l0 or guests started
-> >                            # on default netns (init_net)
-> > l1_vm$ ip netns exec ns1 ./iperf3 --vsock -s
-> > l1_vm$ ip netns exec ns1 ./iperf3 --vsock -s
-> > 
-> > l0_host$ ./iperf3 --vsock -c 3
-> > l2_vm1$ ./iperf3 --vsock -c 2
-> > l2_vm2$ ./iperf3 --vsock -c 2
-> > 
-> > [1] https://www.spinics.net/lists/netdev/msg575792.html
-> > 
-> > Stefano Garzarella (3):
-> >   vsock: add network namespace support
-> >   vsock/virtio_transport_common: handle netns of received packets
-> >   vhost/vsock: use netns of process that opens the vhost-vsock device
-> > 
-> >  drivers/vhost/vsock.c                   | 29 ++++++++++++-----
-> >  include/linux/virtio_vsock.h            |  2 ++
-> >  include/net/af_vsock.h                  |  7 +++--
-> >  net/vmw_vsock/af_vsock.c                | 41 +++++++++++++++++++------
-> >  net/vmw_vsock/hyperv_transport.c        |  5 +--
-> >  net/vmw_vsock/virtio_transport.c        |  2 ++
-> >  net/vmw_vsock/virtio_transport_common.c | 12 ++++++--
-> >  net/vmw_vsock/vmci_transport.c          |  5 +--
-> >  8 files changed, 78 insertions(+), 25 deletions(-)
-> > 
-> > -- 
-> > 2.24.1
-> > 
-
+- Alex
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
