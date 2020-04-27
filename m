@@ -1,82 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AF3F1B957A
-	for <lists.virtualization@lfdr.de>; Mon, 27 Apr 2020 05:31:23 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82DD81B97AC
+	for <lists.virtualization@lfdr.de>; Mon, 27 Apr 2020 08:45:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id D14D220517;
-	Mon, 27 Apr 2020 03:31:21 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 18345879A3;
+	Mon, 27 Apr 2020 06:45:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id A4U-KNS1mApW; Mon, 27 Apr 2020 03:31:19 +0000 (UTC)
+	with ESMTP id GFY9oBDDWTT0; Mon, 27 Apr 2020 06:45:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 3F20A2048E;
-	Mon, 27 Apr 2020 03:31:19 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 41E6487941;
+	Mon, 27 Apr 2020 06:45:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2D31DC1D87;
-	Mon, 27 Apr 2020 03:31:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2283CC0172;
+	Mon, 27 Apr 2020 06:45:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D7FFCC0172
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F0A14C0172
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 03:31:17 +0000 (UTC)
+ Mon, 27 Apr 2020 06:45:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id C067F8448B
+ by fraxinus.osuosl.org (Postfix) with ESMTP id E021084A92
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 03:31:17 +0000 (UTC)
+ Mon, 27 Apr 2020 06:45:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ryrc-dVtXgu3
+ with ESMTP id BMFtklO0LrOO
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 03:31:17 +0000 (UTC)
+ Mon, 27 Apr 2020 06:45:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2CA4783F31
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
+ [209.85.210.66])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 9F17584F2E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 03:31:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1587958275;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0WoA+56dUoJ/42TBfEa8gnCTKtqRiC7Gj8GgqmhVbnk=;
- b=Dz8JzZTVTOo9q8Ox1Vo90CQ5LtyLYbTaQKLE78KvPL0/5pTAFP+4KpEEyxB24HDTFCtA6e
- Wkixeo0/rPqg5eiXFsMW6dM5E9FIn0JgfDAkXy9JEoXIO/XWauaYtNHzWWP/5c26/Dwlqj
- XFI/FrgPIe9kUCz8nyF4Nj5bjvi60uo=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-228-mbCEEtQlNV2GbyXyosO0mw-1; Sun, 26 Apr 2020 23:31:14 -0400
-X-MC-Unique: mbCEEtQlNV2GbyXyosO0mw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 072B918FE863;
- Mon, 27 Apr 2020 03:31:13 +0000 (UTC)
-Received: from [10.72.12.205] (ovpn-12-205.pek2.redhat.com [10.72.12.205])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 57E371001281;
- Mon, 27 Apr 2020 03:31:07 +0000 (UTC)
-Subject: Re: [PATCH V4 0/3] vdpa: Support config interrupt in vhost_vdpa
-To: Zhu Lingshan <lingshan.zhu@intel.com>, mst@redhat.com,
- kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-References: <1587901406-27400-1-git-send-email-lingshan.zhu@intel.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <ff2471ae-254e-7697-72b7-6601a561c3d9@redhat.com>
-Date: Mon, 27 Apr 2020 11:31:05 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ Mon, 27 Apr 2020 06:45:34 +0000 (UTC)
+Received: by mail-ot1-f66.google.com with SMTP id 72so24442966otu.1
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 26 Apr 2020 23:45:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=A20QEuwcQ3bPQDVPM4YhHWYF19sEEIWz0tIXZgQQNBA=;
+ b=BalkiBons2UE9EnQQvEmseyhIVWLB/sob5bQPMy+GUt8Z2piYezrWIejXVxxx4Q/dH
+ Q4xxaENXi7koecIHMNxbooAQy+WjXmrFaGe5/d9H+c48dVCrmhlWKGyyZBI5cVu1J39X
+ 9XT7bFRfpjuo1PXIy7vthX06oAgeubhr088+eHtmKlI+N9MOzqtBtokmimyv0uV5Ue6a
+ rFLIsiy13CyFmcKg9b2JCgnzmRTaD0m+RZvGM7D+d6qLm5k77p8uENcI2rLt1jTybPhY
+ NY4Uj6XTrUyAGoZCs7U3EvkiII1Z6xaeGPBqzbYvqTd1uy9AwGIwOtdgiAZNJJbgd78e
+ c+iw==
+X-Gm-Message-State: AGi0PuZ7BuQP6PDH9N8uy6S16Zgu3+c92SaWiFDjn9+/6FAqIsByhztD
+ 1gAdPDG34nNqLzP6wVmj2mZ+jI5KHLV19z9nAPk=
+X-Google-Smtp-Source: APiQypKnNMH9rOhofcKlK7I9omQSdQmvVEfckYI5Sp58zjUJsZuaoc+VBXSc57/r+A1q4uEpYjSTT0Irt0S0re1bJoY=
+X-Received: by 2002:a9d:564:: with SMTP id 91mr17254715otw.250.1587969933846; 
+ Sun, 26 Apr 2020 23:45:33 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1587901406-27400-1-git-send-email-lingshan.zhu@intel.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: lulu@redhat.com
+References: <20200420143229.245488-1-mst@redhat.com>
+In-Reply-To: <20200420143229.245488-1-mst@redhat.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Mon, 27 Apr 2020 08:45:22 +0200
+Message-ID: <CAMuHMdWaG5EUsbTOMPkj4i50D40T0TLRvB6g-Y8Dj4C0v7KTqQ@mail.gmail.com>
+Subject: Re: [PATCH v4] vhost: disable for OABI
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Richard Earnshaw <Richard.Earnshaw@arm.com>, KVM list <kvm@vger.kernel.org>,
+ Arnd Bergmann <arnd@arndb.de>, "David S. Miller" <davem@davemloft.net>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Sudeep Dutt <sudeep.dutt@intel.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Ashutosh Dixit <ashutosh.dixit@intel.com>,
+ Christoph Hellwig <hch@infradead.org>, netdev <netdev@vger.kernel.org>,
+ virtualization@lists.linux-foundation.org, Ard Biesheuvel <ardb@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,31 +85,71 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNC8yNiDkuIvljYg3OjQzLCBaaHUgTGluZ3NoYW4gd3JvdGU6Cj4gVGhpcyBzZXJp
-ZXMgaW5jbHVkZXMgdHdvIHBhdGNoZXMsIG9uZSBpbnRyb2R1Y2VkCj4gY29uZmlnIGludGVycnVw
-dCBzdXBwb3J0IGluIFZEUEEgY29yZSwgdGhlIG90aGVyCj4gb25lIGltcGxlbWVudGVkIGNvbmZp
-ZyBpbnRlcnJ1cHQgaW4gSUZDVkYuCj4KPiBjaGFuZ2VzIGZyb20gVjM6Cj4gbW92ZSBjaGFuZ2Vz
-IGluIGRyaXZlci92aG9zdC92aG9zdC5jIHRvIGEKPiBzZXBhcmF0ZWQgcGF0Y2guCj4KPiBjaGFu
-Z2VzIGZyb20gVjI6Cj4gbW92ZSBWSE9TVF9GSUxFX1VOQklORCB0byB0aGUgdWFwaSBoZWFkZXIu
-Cj4KPiBjaGFuZ2VzIGZyb20gVjE6Cj4gdmRwYTogbW9yZSBlZmZpY2llbnQgY29kZSB0byBoYW5k
-bGUgZXZlbnRmZCB1bmJpbmQuCj4gaWZjdmY6IGFkZCBWSVJUSU9fTkVUX0ZfU1RBVFVTIGZlYXR1
-cmUgYml0LgoKCjUuOCBtYXRlcmlhbCBJIHRoaW5rLgoKQWNrZWQtYnk6IEphc29uIFdhbmcgPGph
-c293YW5nQHJlZGhhdC5jb20+CgoKPgo+IFpodSBMaW5nc2hhbiAoMyk6Cj4gICAgdmRwYTogU3Vw
-cG9ydCBjb25maWcgaW50ZXJydXB0IGluIHZob3N0X3ZkcGEKPiAgICB2aG9zdDogcmVwbGFjZSAt
-MSB3aXRoICBWSE9TVF9GSUxFX1VOQklORCBpbiBpb3RjbHMKPiAgICB2ZHBhOiBpbXBsZW1lbnQg
-Y29uZmlnIGludGVycnVwdCBpbiBJRkNWRgo+Cj4gICBkcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZf
-YmFzZS5jIHwgIDMgKysrCj4gICBkcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfYmFzZS5oIHwgIDMg
-KysrCj4gICBkcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfbWFpbi5jIHwgMjIgKysrKysrKysrKysr
-KysrKysrLQo+ICAgZHJpdmVycy92aG9zdC92ZHBhLmMgICAgICAgICAgICB8IDQ3ICsrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gICBkcml2ZXJzL3Zob3N0L3Zob3N0
-LmMgICAgICAgICAgIHwgIDggKysrLS0tLQo+ICAgaW5jbHVkZS91YXBpL2xpbnV4L3Zob3N0Lmgg
-ICAgICB8ICA0ICsrKysKPiAgIDYgZmlsZXMgY2hhbmdlZCwgODIgaW5zZXJ0aW9ucygrKSwgNSBk
-ZWxldGlvbnMoLSkKPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
-bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+Hi Michael,
+
+Thanks for your patch!
+
+On Mon, Apr 20, 2020 at 5:13 PM Michael S. Tsirkin <mst@redhat.com> wrote:
+> vhost is currently broken on the some ARM configs.
+>
+> The reason is that the ring element addresses are passed between
+> components with different alignments assumptions. Thus, if
+> guest selects a pointer and host then gets and dereferences
+> it, then alignment assumed by the host's compiler might be
+> greater than the actual alignment of the pointer.
+> compiler on the host from assuming pointer is aligned.
+>
+> This actually triggers on ARM with -mabi=apcs-gnu - which is a
+> deprecated configuration. With this OABI, compiler assumes that
+> all structures are 4 byte aligned - which is stronger than
+> virtio guarantees for available and used rings, which are
+> merely 2 bytes. Thus a guest without -mabi=apcs-gnu running
+> on top of host with -mabi=apcs-gnu will be broken.
+>
+> The correct fix is to force alignment of structures - however
+> that is an intrusive fix that's best deferred until the next release.
+>
+> We didn't previously support such ancient systems at all - this surfaced
+> after vdpa support prompted removing dependency of vhost on
+> VIRTULIZATION. So for now, let's just add something along the lines of
+>
+>         depends on !ARM || AEABI
+>
+> to the virtio Kconfig declaration, and add a comment that it has to do
+> with struct member alignment.
+>
+> Note: we can't make VHOST and VHOST_RING themselves have
+> a dependency since these are selected. Add a new symbol for that.
+
+Adding the dependencies to VHOST and VHOST_RING themselves is indeed not
+sufficient.  But IMHO you should still add VHOST_DPN dependencies t
+ these two symbols, so any driver selecting them without fulfilling the
+VHOST_DPN dependency will trigger a Kconfig warning.  Else the
+issue will be ignored silently.
+
+> We should be able to drop this dependency down the road.
+>
+> Fixes: 20c384f1ea1a0bc7 ("vhost: refine vhost and vringh kconfig")
+> Suggested-by: Ard Biesheuvel <ardb@kernel.org>
+> Suggested-by: Richard Earnshaw <Richard.Earnshaw@arm.com>
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+-- 
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
