@@ -1,87 +1,121 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6603B1BAB6F
-	for <lists.virtualization@lfdr.de>; Mon, 27 Apr 2020 19:37:59 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E4891BAC60
+	for <lists.virtualization@lfdr.de>; Mon, 27 Apr 2020 20:22:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 1CECE85FFC;
-	Mon, 27 Apr 2020 17:37:58 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A110186812;
+	Mon, 27 Apr 2020 18:22:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LMJ370mGPzeJ; Mon, 27 Apr 2020 17:37:57 +0000 (UTC)
+	with ESMTP id e0kxqVluYPFX; Mon, 27 Apr 2020 18:22:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4315F85C95;
-	Mon, 27 Apr 2020 17:37:57 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 92D33847E6;
+	Mon, 27 Apr 2020 18:22:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 21579C003B;
-	Mon, 27 Apr 2020 17:37:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 648F4C003B;
+	Mon, 27 Apr 2020 18:22:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6DC0FC003B
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C3217C003B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 17:37:55 +0000 (UTC)
+ Mon, 27 Apr 2020 18:22:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 5D1412042C
+ by fraxinus.osuosl.org (Postfix) with ESMTP id AA7F185F0B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 17:37:55 +0000 (UTC)
+ Mon, 27 Apr 2020 18:22:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RGicfuxYmvLA
+ with ESMTP id FhdyQpmeKYiK
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 17:37:54 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by silver.osuosl.org (Postfix) with ESMTPS id 9B2D62033D
+ Mon, 27 Apr 2020 18:22:20 +0000 (UTC)
+X-Greylist: delayed 00:07:07 by SQLgrey-1.7.6
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id DB81F85533
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 17:37:54 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
- [209.85.221.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2F0A720775
- for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 17:37:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588009074;
- bh=CRnrGSfeXKE04SYiSfLjK47OzoOEUP1L82XDJvKWoR4=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=nu+Pwm8C7ZzEGBJLMJ9VwcO6z51c/SaWNuYsdGhtItHu3A+6FYmc/eXSNmTVAb2uK
- tneA1fuX8ZfPP79F3RSubUzWXXK8kKasgds0aHFbkTeJbXUGK2foYTtQ/f6xlDFlN3
- djowQs6+Y1171rpUGBcqSzTO520lNKT2mJFacNgE=
-Received: by mail-wr1-f42.google.com with SMTP id k1so21580967wrx.4
- for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Apr 2020 10:37:54 -0700 (PDT)
-X-Gm-Message-State: AGi0PuYizOe5RfPoSq1Q1sAm4k5xee5DFv1G+FnFz4BUDvUm88BOXAWC
- xTuLRCzbKSwPBMPFjQbU/tZzEwqsi066mVNcmCAO5w==
-X-Google-Smtp-Source: APiQypK2liBn30m34/Dp/fYtTgQDcIlhKU2o3YS7OuvYuy5s6viTinmEVCuKGI6u9wjEWkrN2rR1dZgH24YAvZ+2RGI=
-X-Received: by 2002:adf:f648:: with SMTP id x8mr27923047wrp.257.1588009072661; 
- Mon, 27 Apr 2020 10:37:52 -0700 (PDT)
-MIME-Version: 1.0
+ Mon, 27 Apr 2020 18:22:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1588011739;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=KBBurnKwQk0mJMwfeqD0uyO9fh4p+KVZdnBjFEeHlv4=;
+ b=gjh83eutQUs2DzVFTP/AQf7iBlZ48ZGMiCj7O1sWAwBqHrWa2QVNd6Qk
+ 5sh1jF2wNtza93BggVs4tDCEQF4Z10ZQGox866cAM1OJcP+f2yUf4sBPF
+ KbGApLRD6XBbEW30ZdNHhhGUlID3T28pC+B7xDph5lq3JD7dqTaM5yCfU k=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=andrew.cooper3@citrix.com;
+ spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ andrew.cooper3@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="andrew.cooper3@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
+ Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="Andrew.Cooper3@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: ELrzJwrXWLafnbRhhOpo9sUmi2ptJ2dbSjQcB604T4YpDGeUhU1Zj28fONXyGGCdtv0J2MzLme
+ XdKmX8FYTey36XrM/OsB2JaDUUC99LUtGFxpHQvrJIgJJR9qtSTItmghnWelKsCmEv4Es0/loA
+ 7nD6hg1DAWb6O67JNQn9pDkGbYOW6P1mCIEA7IhM8rR37q2YS/ikdhotFDI33VW5CLeFwRmvlX
+ VgHNdN4Igthunl6nAHb98NDXTO7YJJbRh5jj5abE4kLhAEiCXMk9j5b/g9dQiXF8CDbK52pYgh
+ Kw8=
+X-SBRS: 2.7
+X-MesageID: 16722682
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,325,1583211600"; d="scan'208";a="16722682"
+Subject: Re: Should SEV-ES #VC use IST? (Re: [PATCH] Allow RDTSC and RDTSCP
+ from userspace)
+To: Andy Lutomirski <luto@kernel.org>
 References: <20200425191032.GK21900@8bytes.org>
  <910AE5B4-4522-4133-99F7-64850181FBF9@amacapital.net>
  <20200425202316.GL21900@8bytes.org>
  <CALCETrW2Y6UFC=zvGbXEYqpsDyBh0DSEM4NQ+L=_pp4aOd6Fuw@mail.gmail.com>
-In-Reply-To: <CALCETrW2Y6UFC=zvGbXEYqpsDyBh0DSEM4NQ+L=_pp4aOd6Fuw@mail.gmail.com>
-From: Andy Lutomirski <luto@kernel.org>
-Date: Mon, 27 Apr 2020 10:37:41 -0700
-X-Gmail-Original-Message-ID: <CALCETrXGr+o1_bKbnre8cVY14c_76m8pEf3iB_i7h+zfgE5_jA@mail.gmail.com>
-Message-ID: <CALCETrXGr+o1_bKbnre8cVY14c_76m8pEf3iB_i7h+zfgE5_jA@mail.gmail.com>
-Subject: Should SEV-ES #VC use IST? (Re: [PATCH] Allow RDTSC and RDTSCP from
- userspace)
-To: Andy Lutomirski <luto@kernel.org>
+ <CALCETrXGr+o1_bKbnre8cVY14c_76m8pEf3iB_i7h+zfgE5_jA@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <57aa7412-b9e1-3331-ba30-bb6daaa28ff3@citrix.com>
+Date: Mon, 27 Apr 2020 19:15:05 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
+MIME-Version: 1.0
+In-Reply-To: <CALCETrXGr+o1_bKbnre8cVY14c_76m8pEf3iB_i7h+zfgE5_jA@mail.gmail.com>
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 Cc: Juergen Gross <JGross@suse.com>, Tom Lendacky <Thomas.Lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>, Joerg Roedel <jroedel@suse.de>,
  Mike Stunes <mstunes@vmware.com>, Kees Cook <keescook@chromium.org>,
  kvm list <kvm@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Joerg Roedel <joro@8bytes.org>,
- Dave Hansen <dave.hansen@linux.intel.com>, LKML <linux-kernel@vger.kernel.org>,
+ Joerg Roedel <joro@8bytes.org>, Dave Hansen <dave.hansen@linux.intel.com>,
+ LKML <linux-kernel@vger.kernel.org>,
  Sean Christopherson <sean.j.christopherson@intel.com>,
- Linux Virtualization <virtualization@lists.linux-foundation.org>,
- Dave Hansen <dave.hansen@intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Linux Virtualization <virtualization@lists.linux-foundation.org>, Dave
+ Hansen <dave.hansen@intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
  Dan Williams <dan.j.williams@intel.com>, Jiri Slaby <jslaby@suse.cz>,
  X86 ML <x86@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -95,67 +129,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sat, Apr 25, 2020 at 3:10 PM Andy Lutomirski <luto@kernel.org> wrote:
->
-> On Sat, Apr 25, 2020 at 1:23 PM Joerg Roedel <joro@8bytes.org> wrote:
-> >
-> > On Sat, Apr 25, 2020 at 12:47:31PM -0700, Andy Lutomirski wrote:
-> > > I assume the race you mean is:
-> > >
-> > > #VC
-> > > Immediate NMI before IST gets shifted
-> > > #VC
-> > >
-> > > Kaboom.
-> > >
-> > > How are you dealing with this?  Ultimately, I think that NMI will need
-> > > to turn off IST before engaging in any funny business. Let me ponder
-> > > this a bit.
-> >
-> > Right, I dealt with that by unconditionally shifting/unshifting the #VC IST entry
-> > in do_nmi() (thanks to Davin Kaplan for the idea). It might cause
-> > one of the IST stacks to be unused during nesting, but that is fine. The
-> > stack memory for #VC is only allocated when SEV-ES is active (in an
-> > SEV-ES VM).
->
-> Blech.  It probably works, but still, yuck.  It's a bit sad that we
-> seem to be growing more and more poorly designed happens-anywhere
-> exception types at an alarming rate.  We seem to have #NM, #MC, #VC,
-> #HV, and #DB.  This doesn't really scale.
-
-I have a somewhat serious question: should we use IST for #VC at all?
-As I understand it, Rome and Naples make it mandatory for hypervisors
-to intercept #DB, which means that, due to the MOV SS mess, it's sort
-of mandatory to use IST for #VC.  But Milan fixes the #DB issue, so,
-if we're running under a sufficiently sensible hypervisor, we don't
-need IST for #VC.
-
-So I think we have two choices:
-
-1. Use IST for #VC and deal with all the mess that entails.
-
-2. Say that we SEV-ES client support on Rome and Naples is for
-development only and do a quick boot-time check for whether #DB is
-intercepted.  (Just set TF and see what vector we get.)  If #DB is
-intercepted, print a very loud warning and refuse to boot unless some
-special sev_es.insecure_development_mode or similar option is set.
-
-#2 results in simpler and more robust entry code.  #1 is more secure.
-
-So my question is: will anyone actually use SEV-ES in production on
-Rome or Naples?  As I understand it, it's not really ready for prime
-time on those chips.  And do we care if the combination of a malicious
-hypervisor and malicious guest userspace on Milan can compromise the
-guest kernel?  I don't think SEV-ES is really mean to resist a
-concerted effort by the hypervisor to compromise the guest.
-
---Andy
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gMjcvMDQvMjAyMCAxODozNywgQW5keSBMdXRvbWlyc2tpIHdyb3RlOgo+IE9uIFNhdCwgQXBy
+IDI1LCAyMDIwIGF0IDM6MTAgUE0gQW5keSBMdXRvbWlyc2tpIDxsdXRvQGtlcm5lbC5vcmc+IHdy
+b3RlOgo+PiBPbiBTYXQsIEFwciAyNSwgMjAyMCBhdCAxOjIzIFBNIEpvZXJnIFJvZWRlbCA8am9y
+b0A4Ynl0ZXMub3JnPiB3cm90ZToKPj4+IE9uIFNhdCwgQXByIDI1LCAyMDIwIGF0IDEyOjQ3OjMx
+UE0gLTA3MDAsIEFuZHkgTHV0b21pcnNraSB3cm90ZToKPj4+PiBJIGFzc3VtZSB0aGUgcmFjZSB5
+b3UgbWVhbiBpczoKPj4+Pgo+Pj4+ICNWQwo+Pj4+IEltbWVkaWF0ZSBOTUkgYmVmb3JlIElTVCBn
+ZXRzIHNoaWZ0ZWQKPj4+PiAjVkMKPj4+Pgo+Pj4+IEthYm9vbS4KPj4+Pgo+Pj4+IEhvdyBhcmUg
+eW91IGRlYWxpbmcgd2l0aCB0aGlzPyAgVWx0aW1hdGVseSwgSSB0aGluayB0aGF0IE5NSSB3aWxs
+IG5lZWQKPj4+PiB0byB0dXJuIG9mZiBJU1QgYmVmb3JlIGVuZ2FnaW5nIGluIGFueSBmdW5ueSBi
+dXNpbmVzcy4gTGV0IG1lIHBvbmRlcgo+Pj4+IHRoaXMgYSBiaXQuCj4+PiBSaWdodCwgSSBkZWFs
+dCB3aXRoIHRoYXQgYnkgdW5jb25kaXRpb25hbGx5IHNoaWZ0aW5nL3Vuc2hpZnRpbmcgdGhlICNW
+QyBJU1QgZW50cnkKPj4+IGluIGRvX25taSgpICh0aGFua3MgdG8gRGF2aW4gS2FwbGFuIGZvciB0
+aGUgaWRlYSkuIEl0IG1pZ2h0IGNhdXNlCj4+PiBvbmUgb2YgdGhlIElTVCBzdGFja3MgdG8gYmUg
+dW51c2VkIGR1cmluZyBuZXN0aW5nLCBidXQgdGhhdCBpcyBmaW5lLiBUaGUKPj4+IHN0YWNrIG1l
+bW9yeSBmb3IgI1ZDIGlzIG9ubHkgYWxsb2NhdGVkIHdoZW4gU0VWLUVTIGlzIGFjdGl2ZSAoaW4g
+YW4KPj4+IFNFVi1FUyBWTSkuCj4+IEJsZWNoLiAgSXQgcHJvYmFibHkgd29ya3MsIGJ1dCBzdGls
+bCwgeXVjay4gIEl0J3MgYSBiaXQgc2FkIHRoYXQgd2UKPj4gc2VlbSB0byBiZSBncm93aW5nIG1v
+cmUgYW5kIG1vcmUgcG9vcmx5IGRlc2lnbmVkIGhhcHBlbnMtYW55d2hlcmUKPj4gZXhjZXB0aW9u
+IHR5cGVzIGF0IGFuIGFsYXJtaW5nIHJhdGUuICBXZSBzZWVtIHRvIGhhdmUgI05NLCAjTUMsICNW
+QywKPj4gI0hWLCBhbmQgI0RCLiAgVGhpcyBkb2Vzbid0IHJlYWxseSBzY2FsZS4KPiBJIGhhdmUg
+YSBzb21ld2hhdCBzZXJpb3VzIHF1ZXN0aW9uOiBzaG91bGQgd2UgdXNlIElTVCBmb3IgI1ZDIGF0
+IGFsbD8KPiBBcyBJIHVuZGVyc3RhbmQgaXQsIFJvbWUgYW5kIE5hcGxlcyBtYWtlIGl0IG1hbmRh
+dG9yeSBmb3IgaHlwZXJ2aXNvcnMKPiB0byBpbnRlcmNlcHQgI0RCLCB3aGljaCBtZWFucyB0aGF0
+LCBkdWUgdG8gdGhlIE1PViBTUyBtZXNzLCBpdCdzIHNvcnQKPiBvZiBtYW5kYXRvcnkgdG8gdXNl
+IElTVCBmb3IgI1ZDLiAgQnV0IE1pbGFuIGZpeGVzIHRoZSAjREIgaXNzdWUsIHNvLAo+IGlmIHdl
+J3JlIHJ1bm5pbmcgdW5kZXIgYSBzdWZmaWNpZW50bHkgc2Vuc2libGUgaHlwZXJ2aXNvciwgd2Ug
+ZG9uJ3QKPiBuZWVkIElTVCBmb3IgI1ZDLgo+Cj4gU28gSSB0aGluayB3ZSBoYXZlIHR3byBjaG9p
+Y2VzOgo+Cj4gMS4gVXNlIElTVCBmb3IgI1ZDIGFuZCBkZWFsIHdpdGggYWxsIHRoZSBtZXNzIHRo
+YXQgZW50YWlscy4KPgo+IDIuIFNheSB0aGF0IHdlIFNFVi1FUyBjbGllbnQgc3VwcG9ydCBvbiBS
+b21lIGFuZCBOYXBsZXMgaXMgZm9yCj4gZGV2ZWxvcG1lbnQgb25seSBhbmQgZG8gYSBxdWljayBi
+b290LXRpbWUgY2hlY2sgZm9yIHdoZXRoZXIgI0RCIGlzCj4gaW50ZXJjZXB0ZWQuICAoSnVzdCBz
+ZXQgVEYgYW5kIHNlZSB3aGF0IHZlY3RvciB3ZSBnZXQuKSAgSWYgI0RCIGlzCj4gaW50ZXJjZXB0
+ZWQsIHByaW50IGEgdmVyeSBsb3VkIHdhcm5pbmcgYW5kIHJlZnVzZSB0byBib290IHVubGVzcyBz
+b21lCj4gc3BlY2lhbCBzZXZfZXMuaW5zZWN1cmVfZGV2ZWxvcG1lbnRfbW9kZSBvciBzaW1pbGFy
+IG9wdGlvbiBpcyBzZXQuCj4KPiAjMiByZXN1bHRzIGluIHNpbXBsZXIgYW5kIG1vcmUgcm9idXN0
+IGVudHJ5IGNvZGUuICAjMSBpcyBtb3JlIHNlY3VyZS4KPgo+IFNvIG15IHF1ZXN0aW9uIGlzOiB3
+aWxsIGFueW9uZSBhY3R1YWxseSB1c2UgU0VWLUVTIGluIHByb2R1Y3Rpb24gb24KPiBSb21lIG9y
+IE5hcGxlcz8gIEFzIEkgdW5kZXJzdGFuZCBpdCwgaXQncyBub3QgcmVhbGx5IHJlYWR5IGZvciBw
+cmltZQo+IHRpbWUgb24gdGhvc2UgY2hpcHMuICBBbmQgZG8gd2UgY2FyZSBpZiB0aGUgY29tYmlu
+YXRpb24gb2YgYSBtYWxpY2lvdXMKPiBoeXBlcnZpc29yIGFuZCBtYWxpY2lvdXMgZ3Vlc3QgdXNl
+cnNwYWNlIG9uIE1pbGFuIGNhbiBjb21wcm9taXNlIHRoZQo+IGd1ZXN0IGtlcm5lbD8gIEkgZG9u
+J3QgdGhpbmsgU0VWLUVTIGlzIHJlYWxseSBtZWFuIHRvIHJlc2lzdCBhCj4gY29uY2VydGVkIGVm
+Zm9ydCBieSB0aGUgaHlwZXJ2aXNvciB0byBjb21wcm9taXNlIHRoZSBndWVzdC4KCk1vcmUgc3Bl
+Y2lmaWNhbGx5LCBpdCBpcyBtYW5kYXRvcnkgZm9yIGh5cGVydmlzb3JzIHRvIGludGVyY2VwdCAj
+REIgdG8KZGVmZW5kIGFnYWluc3QgQ1ZFLTIwMTUtODEwNCwgdW5sZXNzIHRoZXkncmUgd2lsbGlu
+ZyB0byB0cnVzdCB0aGUgZ3Vlc3QKbm90IHRvIHRpY2tsZSB0aGF0IGNvcm5lciBjYXNlLgoKVGhp
+cyBpcyBiZWxpZXZlZCBmaXhlZCB3aXRoIFNFVi1TTlAgdG8gYWxsb3cgdGhlIGVuY3J5cHRlZCBn
+dWVzdCB0byB1c2UKZGVidWdnaW5nIGZ1bmN0aW9uYWxpdHkgd2l0aG91dCBwb3NpbmcgYSBEb1Mg
+cmlzayB0byB0aGUgaG9zdC7CoCBJbiB0aGlzCmNhc2UsIHRoZSBoeXBlcnZpc29yIGlzIGV4cGVj
+dGVkIG5vdCB0byBpbnRlcmNlcHQgI0RCLgoKSWYgI0RCIGlzIGludGVyY2VwdGVkLCBhbmQgI1ZD
+IGRvZXNuJ3QgdXNlIElTVCwgbWFsaWNpb3VzIHVzZXJzcGFjZSBjYW4KY2F1c2UgcHJvYmxlbXMg
+d2l0aCBhIG1vdnNzLWRlbGF5ZWQgYnJlYWtwb2ludCBvdmVyIFNZU0NBTEwuCgpUaGUgcXVlc3Rp
+b24gYmFzaWNhbGx5IHdoZXRoZXIgaXQgaXMgd29ydGggZ29pbmcgdG8gdGhlIGVmZm9ydCBvZiBt
+YWtpbmcKI1ZDIElTVCBhbmQgYWxsIHRoZSBwcm9ibGVtcyB0aGF0IGVudGFpbHMsIHRvIGNvdmVy
+IG9uZSBjb3JuZXIgY2FzZSBpbgplYXJsaWVyIGhhcmR3YXJlLgoKVWx0aW1hdGVseSwgdGhpcyBk
+ZXBlbmRzIG9uIHdoZXRoZXIgYW55b25lIHBsYW5zIHRvIHB1dCBTRVYtRVMgaW50bwpwcm9kdWN0
+aW9uIG9uIHByZSBTRVYtU05QIGhhcmR3YXJlLCBhbmQgaWYgZGV2ZWxvcGVycyB1c2luZyBwcmUt
+U0VWLVNOUApoYXJkd2FyZSBhcmUgaGFwcHkgd2l0aCAiZG9uJ3QgcnVuIG1hbGljaW91cyB1c2Vy
+c3BhY2UiIG9yICJkb24ndCBydW4KbWFsaWNpb3VzIGtlcm5lbHMgYW5kIHNraXAgdGhlICNEQiBp
+bnRlcmNlcHQiIGFzIGEgZmFpciB0cmFkZW9mZiB0bwphdm9pZCB0aGUgI1ZDIElTVCBmdW4uCgp+
+QW5kcmV3Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZp
+cnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3Vu
+ZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0
+aW5mby92aXJ0dWFsaXphdGlvbg==
