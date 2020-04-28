@@ -1,50 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1C6C1BC2A4
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:18:14 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 8050A87722;
-	Tue, 28 Apr 2020 15:18:13 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SJPtxPfB9lqb; Tue, 28 Apr 2020 15:18:07 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D16E087601;
-	Tue, 28 Apr 2020 15:17:59 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C5439C0172;
-	Tue, 28 Apr 2020 15:17:59 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C1FD6C0889
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:55 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC0731BC37C
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:26:48 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id BE026863C5
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6765F84EA3;
+	Tue, 28 Apr 2020 15:26:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KI1py1nC8ILy
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zuDM4Ga8pp39; Tue, 28 Apr 2020 15:26:44 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C4B5585DCF;
+	Tue, 28 Apr 2020 15:26:44 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ADD4FC0172;
+	Tue, 28 Apr 2020 15:26:44 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 69F75C088A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:55 +0000 (UTC)
+ Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 51BAB88287
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id OZU-NQu98H4t
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Apr 2020 15:26:39 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2F6D885D55
+ by hemlock.osuosl.org (Postfix) with ESMTPS id BA3F188192
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:55 +0000 (UTC)
+ Tue, 28 Apr 2020 15:26:39 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id DEFFDCB4; Tue, 28 Apr 2020 17:17:43 +0200 (CEST)
+ id 1B48DCC0; Tue, 28 Apr 2020 17:17:44 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 10/75] x86/insn: Add insn_rep_prefix() helper
-Date: Tue, 28 Apr 2020 17:16:20 +0200
-Message-Id: <20200428151725.31091-11-joro@8bytes.org>
+Subject: [PATCH v3 11/75] x86/boot/compressed/64: Disable red-zone usage
+Date: Tue, 28 Apr 2020 17:16:21 +0200
+Message-Id: <20200428151725.31091-12-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
@@ -78,61 +78,54 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Add a function to check whether an instruction has a REP prefix.
+The x86-64 ABI defines a red-zone on the stack:
+
+  The 128-byte area beyond the location pointed to by %rsp is considered
+  to be reserved and shall not be modified by signal or interrupt
+  handlers. Therefore, functions may use this area for temporary data
+  that is not needed across function calls. In particular, leaf
+  functions may use this area for their entire stack frame, rather than
+  adjusting the stack pointer in the prologue and epilogue. This area is
+  known as the red zone.
+
+This is not compatible with exception handling, because the IRET frame
+written by the hardware at the stack pointer and the functions to handle
+the exception will overwrite the temporary variables of the interrupted
+function, causing undefined behavior. So disable red-zones for the
+pre-decompression boot code.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/insn-eval.h |  1 +
- arch/x86/lib/insn-eval.c         | 24 ++++++++++++++++++++++++
- 2 files changed, 25 insertions(+)
+ arch/x86/boot/Makefile            | 2 +-
+ arch/x86/boot/compressed/Makefile | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/include/asm/insn-eval.h b/arch/x86/include/asm/insn-eval.h
-index 1e343010129e..a63b29466032 100644
---- a/arch/x86/include/asm/insn-eval.h
-+++ b/arch/x86/include/asm/insn-eval.h
-@@ -15,6 +15,7 @@
- #define INSN_CODE_SEG_OPND_SZ(params) (params & 0xf)
- #define INSN_CODE_SEG_PARAMS(oper_sz, addr_sz) (oper_sz | (addr_sz << 4))
+diff --git a/arch/x86/boot/Makefile b/arch/x86/boot/Makefile
+index e17be90ab312..93f1320fc7bf 100644
+--- a/arch/x86/boot/Makefile
++++ b/arch/x86/boot/Makefile
+@@ -65,7 +65,7 @@ clean-files += cpustr.h
  
-+bool insn_has_rep_prefix(struct insn *insn);
- void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs);
- int insn_get_modrm_rm_off(struct insn *insn, struct pt_regs *regs);
- int insn_get_modrm_reg_off(struct insn *insn, struct pt_regs *regs);
-diff --git a/arch/x86/lib/insn-eval.c b/arch/x86/lib/insn-eval.c
-index 371da15f1343..18e33dff6aae 100644
---- a/arch/x86/lib/insn-eval.c
-+++ b/arch/x86/lib/insn-eval.c
-@@ -53,6 +53,30 @@ static bool is_string_insn(struct insn *insn)
- 	}
- }
+ # ---------------------------------------------------------------------------
  
-+/**
-+ * insn_has_rep_prefix() - Determine if instruction has a REP prefix
-+ * @insn:	Instruction containing the prefix to inspect
-+ *
-+ * Returns:
-+ *
-+ * true if the instruction has a REP prefix, false if not.
-+ */
-+bool insn_has_rep_prefix(struct insn *insn)
-+{
-+	int i;
-+
-+	insn_get_prefixes(insn);
-+
-+	for (i = 0; i < insn->prefixes.nbytes; i++) {
-+		insn_byte_t p = insn->prefixes.bytes[i];
-+
-+		if (p == 0xf2 || p == 0xf3)
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- /**
-  * get_seg_reg_override_idx() - obtain segment register override index
-  * @insn:	Valid instruction with segment override prefixes
+-KBUILD_CFLAGS	:= $(REALMODE_CFLAGS) -D_SETUP
++KBUILD_CFLAGS	:= $(REALMODE_CFLAGS) -D_SETUP -mno-red-zone
+ KBUILD_AFLAGS	:= $(KBUILD_CFLAGS) -D__ASSEMBLY__
+ KBUILD_CFLAGS	+= $(call cc-option,-fmacro-prefix-map=$(srctree)/=)
+ KBUILD_CFLAGS	+= -fno-asynchronous-unwind-tables
+diff --git a/arch/x86/boot/compressed/Makefile b/arch/x86/boot/compressed/Makefile
+index 5f7c262bcc99..085d5f083f50 100644
+--- a/arch/x86/boot/compressed/Makefile
++++ b/arch/x86/boot/compressed/Makefile
+@@ -30,7 +30,7 @@ KBUILD_CFLAGS := -m$(BITS) -O2
+ KBUILD_CFLAGS += -fno-strict-aliasing $(call cc-option, -fPIE, -fPIC)
+ KBUILD_CFLAGS += -DDISABLE_BRANCH_PROFILING
+ cflags-$(CONFIG_X86_32) := -march=i386
+-cflags-$(CONFIG_X86_64) := -mcmodel=small
++cflags-$(CONFIG_X86_64) := -mcmodel=small -mno-red-zone
+ KBUILD_CFLAGS += $(cflags-y)
+ KBUILD_CFLAGS += -mno-mmx -mno-sse
+ KBUILD_CFLAGS += $(call cc-option,-ffreestanding)
 -- 
 2.17.1
 
