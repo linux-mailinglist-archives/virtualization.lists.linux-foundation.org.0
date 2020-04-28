@@ -1,51 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AE8E1BC37E
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:26:50 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A5A041BC29F
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:18:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 96F668831B;
-	Tue, 28 Apr 2020 15:26:48 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id DF72B86448;
+	Tue, 28 Apr 2020 15:18:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JvfUEQFevLNv; Tue, 28 Apr 2020 15:26:47 +0000 (UTC)
+	with ESMTP id uu8Slop9Pyrb; Tue, 28 Apr 2020 15:18:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B4226882F2;
-	Tue, 28 Apr 2020 15:26:45 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B09F6864AD;
+	Tue, 28 Apr 2020 15:18:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A102BC0863;
-	Tue, 28 Apr 2020 15:26:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A8571C0172;
+	Tue, 28 Apr 2020 15:18:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CCF9BC088A
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 660CBC0172
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id C3787874F7
+ by hemlock.osuosl.org (Postfix) with ESMTP id 53A66882A4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8kyT-FC7QjIF
+ with ESMTP id 1QJFAP5-zXYd
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:04 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id B980F875EA
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 9BE7F8829A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:39 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:04 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 1DEA3F10; Tue, 28 Apr 2020 17:17:48 +0200 (CEST)
+ id 4CC2FF11; Tue, 28 Apr 2020 17:17:48 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 32/75] x86/head/64: Reload GDT after switch to virtual
- addresses
-Date: Tue, 28 Apr 2020 17:16:42 +0200
-Message-Id: <20200428151725.31091-33-joro@8bytes.org>
+Subject: [PATCH v3 33/75] x86/head/64: Load segment registers earlier
+Date: Tue, 28 Apr 2020 17:16:43 +0200
+Message-Id: <20200428151725.31091-34-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
@@ -79,32 +78,85 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Reload the GDT after switching to virtual addresses to make sure it will
-not go away when the lower mappings are removed. This will also reload
-the GDT for booting APs, which will need a working GDT too to handle #VC
-exceptions.
+Make sure segments are properly set up before setting up an IDT and
+doing anything that might cause a #VC exception. This is later needed
+for early exception handling.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/head_64.S | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/x86/kernel/head_64.S | 52 +++++++++++++++++++--------------------
+ 1 file changed, 26 insertions(+), 26 deletions(-)
 
 diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index 11a28c1fb51f..20a9df062088 100644
+index 20a9df062088..b5ff38bb32f2 100644
 --- a/arch/x86/kernel/head_64.S
 +++ b/arch/x86/kernel/head_64.S
-@@ -163,6 +163,11 @@ SYM_CODE_START(secondary_startup_64)
- 1:
- 	UNWIND_HINT_EMPTY
+@@ -168,6 +168,32 @@ SYM_CODE_START(secondary_startup_64)
+ 	movq	%rax, boot_gdt_base(%rip)
+ 	lgdt	boot_gdt_descr(%rip)
  
-+	/* Setup boot GDT descriptor and load boot GDT */
-+	leaq	boot_gdt(%rip), %rax
-+	movq	%rax, boot_gdt_base(%rip)
-+	lgdt	boot_gdt_descr(%rip)
++	/* set up data segments */
++	xorl %eax,%eax
++	movl %eax,%ds
++	movl %eax,%ss
++	movl %eax,%es
++
++	/*
++	 * We don't really need to load %fs or %gs, but load them anyway
++	 * to kill any stale realmode selectors.  This allows execution
++	 * under VT hardware.
++	 */
++	movl %eax,%fs
++	movl %eax,%gs
++
++	/* Set up %gs.
++	 *
++	 * The base of %gs always points to fixed_percpu_data. If the
++	 * stack protector canary is enabled, it is located at %gs:40.
++	 * Note that, on SMP, the boot cpu uses init data section until
++	 * the per cpu areas are set up.
++	 */
++	movl	$MSR_GS_BASE,%ecx
++	movl	initial_gs(%rip),%eax
++	movl	initial_gs+4(%rip),%edx
++	wrmsr
 +
  	/* Check if nx is implemented */
  	movl	$0x80000001, %eax
  	cpuid
+@@ -203,32 +229,6 @@ SYM_CODE_START(secondary_startup_64)
+ 	 */
+ 	lgdt	early_gdt_descr(%rip)
+ 
+-	/* set up data segments */
+-	xorl %eax,%eax
+-	movl %eax,%ds
+-	movl %eax,%ss
+-	movl %eax,%es
+-
+-	/*
+-	 * We don't really need to load %fs or %gs, but load them anyway
+-	 * to kill any stale realmode selectors.  This allows execution
+-	 * under VT hardware.
+-	 */
+-	movl %eax,%fs
+-	movl %eax,%gs
+-
+-	/* Set up %gs.
+-	 *
+-	 * The base of %gs always points to fixed_percpu_data. If the
+-	 * stack protector canary is enabled, it is located at %gs:40.
+-	 * Note that, on SMP, the boot cpu uses init data section until
+-	 * the per cpu areas are set up.
+-	 */
+-	movl	$MSR_GS_BASE,%ecx
+-	movl	initial_gs(%rip),%eax
+-	movl	initial_gs+4(%rip),%edx
+-	wrmsr
+-
+ 	/* rsi is pointer to real mode structure with interesting info.
+ 	   pass it to C */
+ 	movq	%rsi, %rdi
 -- 
 2.17.1
 
