@@ -1,64 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A93E1BC38B
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:27:02 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D2BD51BC364
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:25:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 314F3875A1;
-	Tue, 28 Apr 2020 15:27:01 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 790EB8488E;
+	Tue, 28 Apr 2020 15:25:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XGuJMfoNVbdJ; Tue, 28 Apr 2020 15:27:00 +0000 (UTC)
+	with ESMTP id hAKcH1VMYJOs; Tue, 28 Apr 2020 15:25:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B89048760D;
-	Tue, 28 Apr 2020 15:26:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6B83885258;
+	Tue, 28 Apr 2020 15:25:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B06BBC0889;
-	Tue, 28 Apr 2020 15:26:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4FA14C0172;
+	Tue, 28 Apr 2020 15:25:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2365FC0888
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 813A0C0172
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:46 +0000 (UTC)
+ Tue, 28 Apr 2020 15:25:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 1404E228DB
+ by whitealder.osuosl.org (Postfix) with ESMTP id 6E2248748E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:46 +0000 (UTC)
+ Tue, 28 Apr 2020 15:25:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UuifYEoPzDs3
+ with ESMTP id 3UuQdeY3jHaz
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:42 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id D484720400
+ Tue, 28 Apr 2020 15:25:17 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 77184813F0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:41 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id C5CCEF54; Tue, 28 Apr 2020 17:17:56 +0200 (CEST)
-From: Joerg Roedel <joro@8bytes.org>
-To: x86@kernel.org
-Subject: [PATCH v3 75/75] x86/efi: Add GHCB mappings when SEV-ES is active
-Date: Tue, 28 Apr 2020 17:17:25 +0200
-Message-Id: <20200428151725.31091-76-joro@8bytes.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
-References: <20200428151725.31091-1-joro@8bytes.org>
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>, Joerg Roedel <jroedel@suse.de>,
- Mike Stunes <mstunes@vmware.com>, Kees Cook <keescook@chromium.org>,
- kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- Cfir Cohen <cfir@google.com>, Joerg Roedel <joro@8bytes.org>,
- Dave Hansen <dave.hansen@linux.intel.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+ Tue, 28 Apr 2020 15:25:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1588087515;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=5MtNMEGePoQeOLLhuNO9qh1Kt/0hKDl+pM06audhEQE=;
+ b=jSH3c+R5HOxeqSuNiWNRGXZe1X4/Rj/jRc4+X9VLSND6ZrhpnTQ1BaUrQN5RYQMPY6X9TS
+ N1CCQ0SQO7IWvHjEGZV60+jQ1Y5ncrBl55HCdmnLg8t/My7YmEeE/ciqqrgrcvAg5C1RMc
+ 9dx6natw9IK8Wf/z5HW6hIslCBzda9Q=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-186-ZWFA1L1jOVqUrOv6mfBasA-1; Tue, 28 Apr 2020 11:25:13 -0400
+X-MC-Unique: ZWFA1L1jOVqUrOv6mfBasA-1
+Received: by mail-wr1-f71.google.com with SMTP id p16so12453888wro.16
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Apr 2020 08:25:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=5MtNMEGePoQeOLLhuNO9qh1Kt/0hKDl+pM06audhEQE=;
+ b=D1+swZmnS3U7+js8TlkHMs6ltPOeEBzeKOUtuj+84834w+MO7gQJ3rOWpp5a6d9v/w
+ Qvm26lCRVlxVArMwe5/1X2Ph82fvIV7Vw21jtjp3QPmZPSIMI5sDe8KzXizQzC0phKxB
+ XGJdxFpNy1yEfA6oV1tfaJPS4y3mklGoBSvnY8OrsnM2NZ2QiIct0gTMAaZ21XKzMWE8
+ DEAzg5xo0VHFcwncG9j+6YrISIek5TdrMMTGF4/tN+5ItBQ1CW4BvilGsfo+YiCXlPg+
+ qGg51H9viO5jysmJiBk6eDUJ3rZzAg5rpiQbwaZY+cxe6ATUwmXbF5UCP+MGruPkTP6a
+ 5DOQ==
+X-Gm-Message-State: AGi0PuaKIaVMpupvr4B/YZ+iY5X18FEdNNj/xOk029SCux+6Ni+GaqQZ
+ t/Bb+wuJSqV7qxnun04Mzme6idBZ9bwVWZiPwZrVTsr7UZKwbN4gbQILzPCHzdFrNluz33d92bm
+ 5WehYGzpA2v2ZHyaZplds8wY1fxXX7eM/k5j3jBcglw==
+X-Received: by 2002:a1c:66d5:: with SMTP id a204mr5197825wmc.69.1588087512166; 
+ Tue, 28 Apr 2020 08:25:12 -0700 (PDT)
+X-Google-Smtp-Source: APiQypIJdX3FBeU0e1jJbzapSQEZb33vOn2eVbDhxsWqrn0qFTot27aYfiyyqxJOctswjaoqI4z3Xg==
+X-Received: by 2002:a1c:66d5:: with SMTP id a204mr5197790wmc.69.1588087511757; 
+ Tue, 28 Apr 2020 08:25:11 -0700 (PDT)
+Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
+ by smtp.gmail.com with ESMTPSA id
+ a205sm3990772wmh.29.2020.04.28.08.25.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Apr 2020 08:25:10 -0700 (PDT)
+Date: Tue, 28 Apr 2020 11:25:07 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Subject: Re: [PATCH v2] virtio-blk: handle block_device_operations callbacks
+ after hot unplug
+Message-ID: <20200428110515-mutt-send-email-mst@kernel.org>
+References: <20200428143009.107645-1-stefanha@redhat.com>
+MIME-Version: 1.0
+In-Reply-To: <20200428143009.107645-1-stefanha@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@infradead.org>,
+ cohuck@redhat.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
+ Lance Digby <ldigby@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,130 +106,252 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+On Tue, Apr 28, 2020 at 03:30:09PM +0100, Stefan Hajnoczi wrote:
+> A userspace process holding a file descriptor to a virtio_blk device can
+> still invoke block_device_operations after hot unplug.  For example, a
+> program that has /dev/vdb open can call ioctl(HDIO_GETGEO) after hot
+> unplug to invoke virtblk_getgeo().
 
-Calling down to EFI runtime services can result in the firmware performing
-VMGEXIT calls. The firmware is likely to use the GHCB of the OS (e.g., for
-setting EFI variables), so each GHCB in the system needs to be identity
-mapped in the EFI page tables, as unencrypted, to avoid page faults.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: Moved GHCB mapping loop to sev-es.c ]
-Signed-off-by: Joerg Roedel <jroedel@suse.de>
----
- arch/x86/boot/compressed/sev-es.c |  1 +
- arch/x86/include/asm/sev-es.h     |  5 +++++
- arch/x86/kernel/sev-es.c          | 25 +++++++++++++++++++++++++
- arch/x86/platform/efi/efi_64.c    | 10 ++++++++++
- 4 files changed, 41 insertions(+)
+which causes what? a use after free?
 
-diff --git a/arch/x86/boot/compressed/sev-es.c b/arch/x86/boot/compressed/sev-es.c
-index 12a5d918d837..30b2cebf5fed 100644
---- a/arch/x86/boot/compressed/sev-es.c
-+++ b/arch/x86/boot/compressed/sev-es.c
-@@ -12,6 +12,7 @@
-  */
- #include "misc.h"
- 
-+#include <asm/pgtable_types.h>
- #include <asm/sev-es.h>
- #include <asm/trap_defs.h>
- #include <asm/msr-index.h>
-diff --git a/arch/x86/include/asm/sev-es.h b/arch/x86/include/asm/sev-es.h
-index a242d16727f1..ce9a197bf958 100644
---- a/arch/x86/include/asm/sev-es.h
-+++ b/arch/x86/include/asm/sev-es.h
-@@ -87,6 +87,7 @@ void sev_es_nmi_enter(void);
- void sev_es_nmi_exit(void);
- int sev_es_setup_ap_jump_table(struct real_mode_header *rmh);
- void sev_es_nmi_complete(void);
-+int __init sev_es_efi_map_ghcbs(pgd_t *pgd);
- #else /* CONFIG_AMD_MEM_ENCRYPT */
- static inline const char *vc_stack_name(enum stack_type type)
- {
-@@ -97,6 +98,10 @@ static inline int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
- 	return 0;
- }
- static inline void sev_es_nmi_complete(void) { }
-+static inline int sev_es_efi_map_ghcbs(pgd_t *pgd)
-+{
-+	return 0;
-+}
- #endif /* CONFIG_AMD_MEM_ENCRYPT*/
- 
- #endif
-diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index eef6e2196ef4..3b62714723b5 100644
---- a/arch/x86/kernel/sev-es.c
-+++ b/arch/x86/kernel/sev-es.c
-@@ -422,6 +422,31 @@ int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
- 	return 0;
- }
- 
-+int __init sev_es_efi_map_ghcbs(pgd_t *pgd)
-+{
-+	struct sev_es_runtime_data *data;
-+	unsigned long address, pflags;
-+	int cpu;
-+	u64 pfn;
-+
-+	if (!sev_es_active())
-+		return 0;
-+
-+	pflags = _PAGE_NX | _PAGE_RW;
-+
-+	for_each_possible_cpu(cpu) {
-+		data = per_cpu(runtime_data, cpu);
-+
-+		address = __pa(&data->ghcb_page);
-+		pfn = address >> PAGE_SHIFT;
-+
-+		if (kernel_map_pages_in_pgd(pgd, pfn, address, 1, pflags))
-+			return 1;
-+	}
-+
-+	return 0;
-+}
-+
- static enum es_result vc_handle_msr(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
-diff --git a/arch/x86/platform/efi/efi_64.c b/arch/x86/platform/efi/efi_64.c
-index c5e393f8bb3f..004a18853dd3 100644
---- a/arch/x86/platform/efi/efi_64.c
-+++ b/arch/x86/platform/efi/efi_64.c
-@@ -48,6 +48,7 @@
- #include <asm/realmode.h>
- #include <asm/time.h>
- #include <asm/pgalloc.h>
-+#include <asm/sev-es.h>
- 
- /*
-  * We allocate runtime services regions top-down, starting from -4G, i.e.
-@@ -239,6 +240,15 @@ int __init efi_setup_page_tables(unsigned long pa_memmap, unsigned num_pages)
- 		return 1;
- 	}
- 
-+	/*
-+	 * When SEV-ES is active, the GHCB as set by the kernel will be used
-+	 * by firmware. Create a 1:1 unencrypted mapping for each GHCB.
-+	 */
-+	if (sev_es_efi_map_ghcbs(pgd)) {
-+		pr_err("Failed to create 1:1 mapping for the GHCBs!\n");
-+		return 1;
-+	}
-+
- 	/*
- 	 * When making calls to the firmware everything needs to be 1:1
- 	 * mapped and addressable with 32-bit pointers. Map the kernel
--- 
-2.17.1
+> 
+> Introduce a reference count in struct virtio_blk so that its lifetime
+> covers both virtio_driver probe/remove and block_device_operations
+> open/release users.  This ensures that block_device_operations functions
+> like virtblk_getgeo() can safely access struct virtio_blk.
+> 
+> Add remove_mutex to prevent block_device_operations functions from
+> accessing vblk->vdev during virtblk_remove() and let the safely check
+
+let the -> let them?
+
+> for !vblk->vdev after virtblk_remove() returns.
+> 
+> Switching to a reference count also solves the vd_index_ida leak where
+> vda, vdb, vdc, etc indices were lost when the device was hot unplugged
+> while the block device was still open.
+
+Can you move this statement up so we list both issues (use after free
+and leak) upfront, then discuss the fix?
+
+> 
+> Reported-by: Lance Digby <ldigby@redhat.com>
+> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> ---
+> If someone has a simpler solution please let me know.  I looked at
+> various approaches including reusing device_lock(&vblk->vdev.dev) but
+> they were more complex and extending the lifetime of virtio_device after
+> remove() has been called seems questionable.
+> ---
+>  drivers/block/virtio_blk.c | 85 ++++++++++++++++++++++++++++++++++----
+>  1 file changed, 77 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+> index 93468b7c6701..3dd53b445cc1 100644
+> --- a/drivers/block/virtio_blk.c
+> +++ b/drivers/block/virtio_blk.c
+> @@ -44,6 +44,13 @@ struct virtio_blk {
+>  	/* Process context for config space updates */
+>  	struct work_struct config_work;
+>  
+> +	/*
+> +	 * Tracks references from block_device_operations open/release and
+> +	 * virtio_driver probe/remove so this object can be freed once no
+> +	 * longer in use.
+> +	 */
+> +	refcount_t refs;
+> +
+>  	/* What host tells us, plus 2 for header & tailer. */
+>  	unsigned int sg_elems;
+>  
+> @@ -53,6 +60,9 @@ struct virtio_blk {
+>  	/* num of vqs */
+>  	int num_vqs;
+>  	struct virtio_blk_vq *vqs;
+> +
+> +	/* Provides mutual exclusion with virtblk_remove(). */
+
+This is not the best way to document access rules.
+Which fields does this protect, exactly?
+I think it's just vdev. Right?
+Pls add to the comment.
+
+> +	struct mutex remove_mutex;
+>  };
+>  
+>  struct virtblk_req {
+> @@ -295,10 +305,54 @@ static int virtblk_get_id(struct gendisk *disk, char *id_str)
+>  	return err;
+>  }
+>  
+> +static void virtblk_get(struct virtio_blk *vblk)
+> +{
+> +	refcount_inc(&vblk->refs);
+> +}
+> +
+> +static void virtblk_put(struct virtio_blk *vblk)
+> +{
+> +	if (refcount_dec_and_test(&vblk->refs)) {
+> +		ida_simple_remove(&vd_index_ida, vblk->index);
+> +		mutex_destroy(&vblk->remove_mutex);
+> +		kfree(vblk);
+> +	}
+> +}
+> +
+> +static int virtblk_open(struct block_device *bd, fmode_t mode)
+> +{
+> +	struct virtio_blk *vblk = bd->bd_disk->private_data;
+> +	int ret = -ENXIO;
+
+
+It's more common to do
+
+	int ret = 0;
+
+and on error:
+	ret = -ENXIO;
+
+
+let's do this.
+
+
+> +
+> +	mutex_lock(&vblk->remove_mutex);
+> +
+> +	if (vblk->vdev) {
+> +		virtblk_get(vblk);
+> +		ret = 0;
+> +	}
+
+I prefer
+	else
+		ret = -ENXIO
+
+here.
+
+
+> +
+> +	mutex_unlock(&vblk->remove_mutex);
+> +	return ret;
+> +}
+> +
+> +static void virtblk_release(struct gendisk *disk, fmode_t mode)
+> +{
+> +	struct virtio_blk *vblk = disk->private_data;
+> +
+> +	virtblk_put(vblk);
+> +}
+> +
+>  /* We provide getgeo only to please some old bootloader/partitioning tools */
+>  static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
+>  {
+>  	struct virtio_blk *vblk = bd->bd_disk->private_data;
+> +	int ret = -ENXIO;
+
+It's more common to do
+
+	int ret = 0;
+
+and on error:
+	ret = -ENXIO;
+
+
+let's do this.
+
+> +
+> +	mutex_lock(&vblk->remove_mutex);
+> +
+> +	if (!vblk->vdev) {
+> +		goto out;
+> +	}
+
+
+single lines are not supposed to use {}.
+if you add ret = -ENXIO here then it won't be a single line anymore
+though.
+
+>  
+>  	/* see if the host passed in geometry config */
+>  	if (virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_GEOMETRY)) {
+> @@ -314,11 +368,17 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
+>  		geo->sectors = 1 << 5;
+>  		geo->cylinders = get_capacity(bd->bd_disk) >> 11;
+>  	}
+> -	return 0;
+> +
+> +	ret = 0;
+> +out:
+> +	mutex_unlock(&vblk->remove_mutex);
+> +	return ret;
+>  }
+>  
+>  static const struct block_device_operations virtblk_fops = {
+>  	.owner  = THIS_MODULE,
+> +	.open = virtblk_open,
+> +	.release = virtblk_release,
+>  	.getgeo = virtblk_getgeo,
+>  };
+>  
+> @@ -655,6 +715,10 @@ static int virtblk_probe(struct virtio_device *vdev)
+>  		goto out_free_index;
+>  	}
+>  
+> +	/* This reference is dropped in virtblk_remove(). */
+> +	refcount_set(&vblk->refs, 1);
+> +	mutex_init(&vblk->remove_mutex);
+> +
+>  	vblk->vdev = vdev;
+>  	vblk->sg_elems = sg_elems;
+>  
+> @@ -820,8 +884,12 @@ static int virtblk_probe(struct virtio_device *vdev)
+>  static void virtblk_remove(struct virtio_device *vdev)
+>  {
+>  	struct virtio_blk *vblk = vdev->priv;
+> -	int index = vblk->index;
+> -	int refc;
+> +
+> +	/*
+> +	 * Virtqueue processing is stopped safely here but mutual exclusion is
+> +	 * needed for block_device_operations.
+> +	 */
+> +	mutex_lock(&vblk->remove_mutex);
+>  
+>  	/* Make sure no work handler is accessing the device. */
+>  	flush_work(&vblk->config_work);
+> @@ -834,15 +902,16 @@ static void virtblk_remove(struct virtio_device *vdev)
+>  	/* Stop all the virtqueues. */
+>  	vdev->config->reset(vdev);
+>  
+> -	refc = kref_read(&disk_to_dev(vblk->disk)->kobj.kref);
+> +	/* Virtqueue are stopped, nothing can use vblk->vdev anymore. */
+
+Virtqueues?
+
+> +	vblk->vdev = NULL;
+> +
+>  	put_disk(vblk->disk);
+>  	vdev->config->del_vqs(vdev);
+>  	kfree(vblk->vqs);
+> -	kfree(vblk);
+>  
+> -	/* Only free device id if we don't have any users */
+> -	if (refc == 1)
+> -		ida_simple_remove(&vd_index_ida, index);
+> +	mutex_unlock(&vblk->remove_mutex);
+> +
+> +	virtblk_put(vblk);
+>  }
+>  
+>  #ifdef CONFIG_PM_SLEEP
+> -- 
+> 2.25.3
+> 
 
 _______________________________________________
 Virtualization mailing list
