@@ -1,50 +1,50 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58F421BC37D
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:26:49 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CE111BC397
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:27:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 12FA0864D0;
-	Tue, 28 Apr 2020 15:26:48 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E5FDE8828C;
+	Tue, 28 Apr 2020 15:27:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YFAW7rnPer5R; Tue, 28 Apr 2020 15:26:47 +0000 (UTC)
+	with ESMTP id 09eAlW68KKrb; Tue, 28 Apr 2020 15:27:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 8C7EA863BB;
-	Tue, 28 Apr 2020 15:26:47 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 55E7688296;
+	Tue, 28 Apr 2020 15:27:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7441EC088B;
-	Tue, 28 Apr 2020 15:26:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4CDA9C0172;
+	Tue, 28 Apr 2020 15:27:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DBA63C0863
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EBBEFC0172
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:41 +0000 (UTC)
+ Tue, 28 Apr 2020 15:27:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id C194887619
+ by silver.osuosl.org (Postfix) with ESMTP id C609A22889
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:41 +0000 (UTC)
+ Tue, 28 Apr 2020 15:27:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kd6JwFSX20Bj
+ with ESMTP id BCuJL5E6JcaK
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:41 +0000 (UTC)
+ Tue, 28 Apr 2020 15:27:30 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 13C5B87613
+ by silver.osuosl.org (Postfix) with ESMTPS id 25A15228E3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
+ Tue, 28 Apr 2020 15:27:06 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 58FF8F3C; Tue, 28 Apr 2020 17:17:53 +0200 (CEST)
+ id 9BF26F3E; Tue, 28 Apr 2020 17:17:53 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 58/75] x86/sev-es: Handle INVD Events
-Date: Tue, 28 Apr 2020 17:17:08 +0200
-Message-Id: <20200428151725.31091-59-joro@8bytes.org>
+Subject: [PATCH v3 59/75] x86/sev-es: Handle MONITOR/MONITORX Events
+Date: Tue, 28 Apr 2020 17:17:09 +0200
+Message-Id: <20200428151725.31091-60-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
@@ -78,31 +78,53 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Implement a handler for #VC exceptions caused by INVD instructions.
-Since Linux should never use INVD, just mark it as unsupported.
+Implement a handler for #VC exceptions caused by MONITOR and MONITORX
+instructions.
 
 Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
 [ jroedel@suse.de: Adapt to #VC handling infrastructure ]
 Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/x86/kernel/sev-es.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index eb158781238b..601554e6360f 100644
+index 601554e6360f..1a961714cd1b 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -844,6 +844,10 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
- 	case SVM_EXIT_RDPMC:
- 		result = vc_handle_rdpmc(ghcb, ctxt);
+@@ -824,6 +824,22 @@ static enum es_result vc_handle_rdpmc(struct ghcb *ghcb, struct es_em_ctxt *ctxt
+ 	return ES_OK;
+ }
+ 
++static enum es_result vc_handle_monitor(struct ghcb *ghcb,
++					struct es_em_ctxt *ctxt)
++{
++	phys_addr_t monitor_pa;
++	pgd_t *pgd;
++
++	pgd = __va(read_cr3_pa());
++	monitor_pa = vc_slow_virt_to_phys(ghcb, ctxt->regs->ax);
++
++	ghcb_set_rax(ghcb, monitor_pa);
++	ghcb_set_rcx(ghcb, ctxt->regs->cx);
++	ghcb_set_rdx(ghcb, ctxt->regs->dx);
++
++	return sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_MONITOR, 0, 0);
++}
++
+ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 					 struct ghcb *ghcb,
+ 					 unsigned long exit_code)
+@@ -860,6 +876,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 	case SVM_EXIT_WBINVD:
+ 		result = vc_handle_wbinvd(ghcb, ctxt);
  		break;
-+	case SVM_EXIT_INVD:
-+		pr_err_ratelimited("#VC exception for INVD??? Seriously???\n");
-+		result = ES_UNSUPPORTED;
++	case SVM_EXIT_MONITOR:
++		result = vc_handle_monitor(ghcb, ctxt);
 +		break;
- 	case SVM_EXIT_CPUID:
- 		result = vc_handle_cpuid(ghcb, ctxt);
+ 	case SVM_EXIT_NPF:
+ 		result = vc_handle_mmio(ghcb, ctxt);
  		break;
 -- 
 2.17.1
