@@ -2,101 +2,100 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B28451BC46D
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 18:03:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D52661BC4EF
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 18:18:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 22EE08539F;
-	Tue, 28 Apr 2020 16:03:30 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 657A586C0E;
+	Tue, 28 Apr 2020 16:18:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MLrGTSjisClC; Tue, 28 Apr 2020 16:03:26 +0000 (UTC)
+	with ESMTP id RN0iL9VP13an; Tue, 28 Apr 2020 16:18:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 012BA85A1D;
-	Tue, 28 Apr 2020 16:03:26 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E3F6686DC1;
+	Tue, 28 Apr 2020 16:18:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D7140C0172;
-	Tue, 28 Apr 2020 16:03:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CFD7AC0864;
+	Tue, 28 Apr 2020 16:18:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 44D3DC0172
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 97744C0864
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 16:03:24 +0000 (UTC)
+ Tue, 28 Apr 2020 16:18:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 41813845DB
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 873828542A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 16:03:24 +0000 (UTC)
+ Tue, 28 Apr 2020 16:18:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id L-hxM4z-TE3u
+ with ESMTP id 8ZjKxDjBrwug
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 16:03:22 +0000 (UTC)
+ Tue, 28 Apr 2020 16:18:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8A7958448B
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6E67A84542
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 16:03:21 +0000 (UTC)
+ Tue, 28 Apr 2020 16:18:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588089800;
+ s=mimecast20190719; t=1588090687;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=hBJi8zIGk8WOyhlWyio6gaGrcbzBQ/4UwNnQCnZWksU=;
- b=HSYs+E+rfXXOR+drQaCHDo96y6Z7wi3ie7UGSGNw0Jn8ivuNrTQe+LLkiEo4ncnSdmYLkU
- TB90T11XN2Sm8bmJoTS8wJAzcLlEth87Gb4O33ZL6JQa6hgD7uvpDcp1FYLuszMatbBltM
- 5BX6B9wETEDcgafjFkgcEO1UHwPpzWQ=
+ bh=WrTkpt0zQjIGoVsJ+cH+Nc4pSRf/M9dJE/GUuAEad3Y=;
+ b=cU8sMDSIz8g7kjAyFuSLzNlOTCuxZXxRlWVNJUasOsl91lARqGppHHv4xezfaakhI2DZqE
+ RxJBw0a81wBhcHcVUan2JxvSFEsa6665IMo1f9siC2SKMjfFyeo3I2wgXeEZ7V7T3f6zzl
+ CQqwGpCkhP/75pH9mH1//zIOZyb2ZC8=
 Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
  [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-292-lMLzWJOTPaSwhetb-rKFmw-1; Tue, 28 Apr 2020 12:03:18 -0400
-X-MC-Unique: lMLzWJOTPaSwhetb-rKFmw-1
-Received: by mail-wm1-f72.google.com with SMTP id b203so1049897wmd.6
+ us-mta-436-i9hCISDLMqG-a_ihKnK6Ow-1; Tue, 28 Apr 2020 12:18:02 -0400
+X-MC-Unique: i9hCISDLMqG-a_ihKnK6Ow-1
+Received: by mail-wm1-f72.google.com with SMTP id l21so1305457wmh.2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 09:03:18 -0700 (PDT)
+ Tue, 28 Apr 2020 09:18:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=hBJi8zIGk8WOyhlWyio6gaGrcbzBQ/4UwNnQCnZWksU=;
- b=K3wRjUgizHiAhY17prQOsCr+QsLdwAIerpqfByUHuvFKG0Q1QBZuLndioj64xzE/bS
- WX0TMcVlrWgHGs/DYP6tuFz80YjHSMLvCQZ/8zqud8P/ZWnW5DgrLWDjm/GxW/Xn/wXB
- MEd4nG0FifQj1hfDr30cFSDPASLAM5RffwT9VmPvp0iiP2OgBkssfhaHTBlFzHqWxy5/
- +f73GULlaVEVz77QEmQLR5MtEvKSMaoxSa716QPlOpv1nHk3SqwIaBYslj+OmdjKmGGd
- xAJEBth/YGroMghbxQVWIjVbAhNWarzz1wH9L6bGYwD3jkJzuaulfNvO+A8JDffkoC/J
- vLAw==
-X-Gm-Message-State: AGi0PuaLWsPenwR3a+XJw+IA33RsLx+/6JdcRZA0JxiR7t5Xdip9HpoF
- cvHX/7mYrnAZEzmnwQimQdqG3UTQaE9PxVoCiQ9G7YOj3rBT80CHsKxx2j7MhPOgZ2LtoioYdB1
- OGcw47wMNiSAPFjUsnU6A5eY5ajyxA3w46ymJTJBG3g==
-X-Received: by 2002:adf:9441:: with SMTP id 59mr33346452wrq.211.1588089796853; 
- Tue, 28 Apr 2020 09:03:16 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJNhjJambiiyG5T3FZZ1d5lIJD6EM5AUWopnTqnTUlnP3xrL7KImVBSqMiGIyDR01pmOUe3Cw==
-X-Received: by 2002:adf:9441:: with SMTP id 59mr33346389wrq.211.1588089796232; 
- Tue, 28 Apr 2020 09:03:16 -0700 (PDT)
+ bh=WrTkpt0zQjIGoVsJ+cH+Nc4pSRf/M9dJE/GUuAEad3Y=;
+ b=mIhCJjaFAf9O1FLvLbvHorV+avUfinrwy/gsM/TEYXszcGdZVtGNZaPQU5Jx4CCI/N
+ 5nDc8Heue7IAPzWnzqdOrpJTsmxc4xVZ4xjJ8z2oBcg2Jv7N/m8fPjZw1E6+RJFQNYRe
+ 5cz7+MrZkBhH14QIE9Z3KY1zS9YFqp8oNyhpTZrGSG1s1Fj28WKOxKkt0u2HcuR4VB+e
+ 3jJhvSmcpcvP3L3sMkyuIVq1uCiWdUhZziWQge1YHy+CeeWy5zKMgmvG0NcJUfNg8QPj
+ oqfVHPxp3aBiNxo53YjJFdF6u9ae0VJOyrULGH2qfvpXhpCOqABiva2aAxqE3goenM7o
+ At0Q==
+X-Gm-Message-State: AGi0PuYfD5nLZloWn2kQt089qPKSQmAFaqw1pcLUrTe0EVpDDJD/NEs6
+ Yf4WuzGc5SlN3Nbqmx4uRMwTPGTYQHgO+38S0G3sh3n9zxLnV3hwCjDMCfnu7xLFLSpstYFMN03
+ AoKI36vccBxGESOEMgQPuRUwPcHfraZ27hhrM8Kg/zg==
+X-Received: by 2002:adf:9441:: with SMTP id 59mr33416035wrq.211.1588090681445; 
+ Tue, 28 Apr 2020 09:18:01 -0700 (PDT)
+X-Google-Smtp-Source: APiQypIYoDCVusGqXtqrxbuMJvf1/RoAUchaevs0E3usDHiJ5r5Npmen3zHgzU45luq3zqE5unsUSA==
+X-Received: by 2002:adf:9441:: with SMTP id 59mr33416017wrq.211.1588090681194; 
+ Tue, 28 Apr 2020 09:18:01 -0700 (PDT)
 Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
  by smtp.gmail.com with ESMTPSA id
- l4sm26559989wrv.60.2020.04.28.09.03.14
+ n7sm3878146wmd.11.2020.04.28.09.17.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2020 09:03:15 -0700 (PDT)
-Date: Tue, 28 Apr 2020 12:03:13 -0400
+ Tue, 28 Apr 2020 09:18:00 -0700 (PDT)
+Date: Tue, 28 Apr 2020 12:17:57 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [PATCH v2] virtio-blk: handle block_device_operations callbacks
- after hot unplug
-Message-ID: <20200428120244-mutt-send-email-mst@kernel.org>
-References: <20200428143009.107645-1-stefanha@redhat.com>
- <20200428110515-mutt-send-email-mst@kernel.org>
- <20200428155715.GA109767@stefanha-x1.localdomain>
+To: Srivatsa Vaddagiri <vatsa@codeaurora.org>
+Subject: Re: [PATCH 5/5] virtio: Add bounce DMA ops
+Message-ID: <20200428121232-mutt-send-email-mst@kernel.org>
+References: <1588073958-1793-1-git-send-email-vatsa@codeaurora.org>
+ <1588073958-1793-6-git-send-email-vatsa@codeaurora.org>
 MIME-Version: 1.0
-In-Reply-To: <20200428155715.GA109767@stefanha-x1.localdomain>
+In-Reply-To: <1588073958-1793-6-git-send-email-vatsa@codeaurora.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@infradead.org>,
- cohuck@redhat.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
- Lance Digby <ldigby@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+Cc: tsoni@codeaurora.org, virtio-dev@lists.oasis-open.org,
+ konrad.wilk@oracle.com, jan.kiszka@siemens.com, christoffer.dall@arm.com,
+ virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
+ stefano.stabellini@xilinx.com, will@kernel.org, linux-kernel@vger.kernel.org,
+ pratikp@codeaurora.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,259 +112,266 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 28, 2020 at 04:57:15PM +0100, Stefan Hajnoczi wrote:
-> On Tue, Apr 28, 2020 at 11:25:07AM -0400, Michael S. Tsirkin wrote:
-> > On Tue, Apr 28, 2020 at 03:30:09PM +0100, Stefan Hajnoczi wrote:
-> > > A userspace process holding a file descriptor to a virtio_blk device can
-> > > still invoke block_device_operations after hot unplug.  For example, a
-> > > program that has /dev/vdb open can call ioctl(HDIO_GETGEO) after hot
-> > > unplug to invoke virtblk_getgeo().
-> > 
-> > 
-> > which causes what? a use after free?
+On Tue, Apr 28, 2020 at 05:09:18PM +0530, Srivatsa Vaddagiri wrote:
+> For better security, its desirable that a guest VM's memory is
+> not accessible to any entity that executes outside the context of
+> guest VM. In case of virtio, backend drivers execute outside the
+> context of guest VM and in general will need access to complete
+> guest VM memory.  One option to restrict the access provided to
+> backend driver is to make use of a bounce buffer. The bounce
+> buffer is accessible to both backend and frontend drivers. All IO
+> buffers that are in private space of guest VM are bounced to be
+> accessible to backend.
 > 
-> Yes, use after free.  I will include the kernel panic in the next
-> revision.
+> This patch proposes a new memory pool to be used for this bounce
+> purpose, rather than the default swiotlb memory pool. That will
+> avoid any conflicts that may arise in situations where a VM needs
+> to use swiotlb pool for driving any pass-through devices (in
+> which case swiotlb memory needs not be shared with another VM) as
+> well as virtio devices (which will require swiotlb memory to be
+> shared with backend VM). As a possible extension to this patch,
+> we can provide an option for virtio to make use of default
+> swiotlb memory pool itself, where no such conflicts may exist in
+> a given deployment.
 > 
-> virtio_check_driver_offered_feature() accesses vdev->dev.driver, which
-> doesn't work after virtblk_remove() has freed vdev :).
-> 
-> > > 
-> > > Introduce a reference count in struct virtio_blk so that its lifetime
-> > > covers both virtio_driver probe/remove and block_device_operations
-> > > open/release users.  This ensures that block_device_operations functions
-> > > like virtblk_getgeo() can safely access struct virtio_blk.
-> > > 
-> > > Add remove_mutex to prevent block_device_operations functions from
-> > > accessing vblk->vdev during virtblk_remove() and let the safely check
-> > 
-> > let the -> let them?
-> 
-> Thanks, will fix.
-> 
-> > 
-> > > for !vblk->vdev after virtblk_remove() returns.
-> > > 
-> > > Switching to a reference count also solves the vd_index_ida leak where
-> > > vda, vdb, vdc, etc indices were lost when the device was hot unplugged
-> > > while the block device was still open.
-> > 
-> > Can you move this statement up so we list both issues (use after free
-> > and leak) upfront, then discuss the fix?
-> 
-> Thanks, will fix.
+> Signed-off-by: Srivatsa Vaddagiri <vatsa@codeaurora.org>
 
-Maybe add Fixes: if there's a specific commit that added geo support.
 
-> > 
-> > > 
-> > > Reported-by: Lance Digby <ldigby@redhat.com>
-> > > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> > > ---
-> > > If someone has a simpler solution please let me know.  I looked at
-> > > various approaches including reusing device_lock(&vblk->vdev.dev) but
-> > > they were more complex and extending the lifetime of virtio_device after
-> > > remove() has been called seems questionable.
-> > > ---
-> > >  drivers/block/virtio_blk.c | 85 ++++++++++++++++++++++++++++++++++----
-> > >  1 file changed, 77 insertions(+), 8 deletions(-)
-> > > 
-> > > diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-> > > index 93468b7c6701..3dd53b445cc1 100644
-> > > --- a/drivers/block/virtio_blk.c
-> > > +++ b/drivers/block/virtio_blk.c
-> > > @@ -44,6 +44,13 @@ struct virtio_blk {
-> > >  	/* Process context for config space updates */
-> > >  	struct work_struct config_work;
-> > >  
-> > > +	/*
-> > > +	 * Tracks references from block_device_operations open/release and
-> > > +	 * virtio_driver probe/remove so this object can be freed once no
-> > > +	 * longer in use.
-> > > +	 */
-> > > +	refcount_t refs;
-> > > +
-> > >  	/* What host tells us, plus 2 for header & tailer. */
-> > >  	unsigned int sg_elems;
-> > >  
-> > > @@ -53,6 +60,9 @@ struct virtio_blk {
-> > >  	/* num of vqs */
-> > >  	int num_vqs;
-> > >  	struct virtio_blk_vq *vqs;
-> > > +
-> > > +	/* Provides mutual exclusion with virtblk_remove(). */
-> > 
-> > This is not the best way to document access rules.
-> > Which fields does this protect, exactly?
-> > I think it's just vdev. Right?
-> > Pls add to the comment.
-> 
-> Yes, vblk->vdev cannot be dereferenced after virtblk_remove() is
-> entered.
-> 
-> I'll document this mutex as protecting vdev.
-> 
-> > 
-> > > +	struct mutex remove_mutex;
-> > >  };
-> > >  
-> > >  struct virtblk_req {
-> > > @@ -295,10 +305,54 @@ static int virtblk_get_id(struct gendisk *disk, char *id_str)
-> > >  	return err;
-> > >  }
-> > >  
-> > > +static void virtblk_get(struct virtio_blk *vblk)
-> > > +{
-> > > +	refcount_inc(&vblk->refs);
-> > > +}
-> > > +
-> > > +static void virtblk_put(struct virtio_blk *vblk)
-> > > +{
-> > > +	if (refcount_dec_and_test(&vblk->refs)) {
-> > > +		ida_simple_remove(&vd_index_ida, vblk->index);
-> > > +		mutex_destroy(&vblk->remove_mutex);
-> > > +		kfree(vblk);
-> > > +	}
-> > > +}
-> > > +
-> > > +static int virtblk_open(struct block_device *bd, fmode_t mode)
-> > > +{
-> > > +	struct virtio_blk *vblk = bd->bd_disk->private_data;
-> > > +	int ret = -ENXIO;
-> > 
-> > 
-> > It's more common to do
-> > 
-> > 	int ret = 0;
-> > 
-> > and on error:
-> > 	ret = -ENXIO;
-> > 
-> > 
-> > let's do this.
-> 
-> Will fix.
-> 
-> > > +
-> > > +	mutex_lock(&vblk->remove_mutex);
-> > > +
-> > > +	if (vblk->vdev) {
-> > > +		virtblk_get(vblk);
-> > > +		ret = 0;
-> > > +	}
-> > 
-> > I prefer
-> > 	else
-> > 		ret = -ENXIO
-> > 
-> > here.
-> 
-> Got it.
-> 
-> > > +
-> > > +	mutex_unlock(&vblk->remove_mutex);
-> > > +	return ret;
-> > > +}
-> > > +
-> > > +static void virtblk_release(struct gendisk *disk, fmode_t mode)
-> > > +{
-> > > +	struct virtio_blk *vblk = disk->private_data;
-> > > +
-> > > +	virtblk_put(vblk);
-> > > +}
-> > > +
-> > >  /* We provide getgeo only to please some old bootloader/partitioning tools */
-> > >  static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
-> > >  {
-> > >  	struct virtio_blk *vblk = bd->bd_disk->private_data;
-> > > +	int ret = -ENXIO;
-> > 
-> > It's more common to do
-> > 
-> > 	int ret = 0;
-> > 
-> > and on error:
-> > 	ret = -ENXIO;
-> > 
-> > 
-> > let's do this.
-> 
-> Will fix.
-> 
-> > 
-> > > +
-> > > +	mutex_lock(&vblk->remove_mutex);
-> > > +
-> > > +	if (!vblk->vdev) {
-> > > +		goto out;
-> > > +	}
-> > 
-> > 
-> > single lines are not supposed to use {}.
-> > if you add ret = -ENXIO here then it won't be a single line anymore
-> > though.
-> 
-> Oops, a QEMU coding style habit :).
-> 
-> > >  
-> > >  	/* see if the host passed in geometry config */
-> > >  	if (virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_GEOMETRY)) {
-> > > @@ -314,11 +368,17 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
-> > >  		geo->sectors = 1 << 5;
-> > >  		geo->cylinders = get_capacity(bd->bd_disk) >> 11;
-> > >  	}
-> > > -	return 0;
-> > > +
-> > > +	ret = 0;
-> > > +out:
-> > > +	mutex_unlock(&vblk->remove_mutex);
-> > > +	return ret;
-> > >  }
-> > >  
-> > >  static const struct block_device_operations virtblk_fops = {
-> > >  	.owner  = THIS_MODULE,
-> > > +	.open = virtblk_open,
-> > > +	.release = virtblk_release,
-> > >  	.getgeo = virtblk_getgeo,
-> > >  };
-> > >  
-> > > @@ -655,6 +715,10 @@ static int virtblk_probe(struct virtio_device *vdev)
-> > >  		goto out_free_index;
-> > >  	}
-> > >  
-> > > +	/* This reference is dropped in virtblk_remove(). */
-> > > +	refcount_set(&vblk->refs, 1);
-> > > +	mutex_init(&vblk->remove_mutex);
-> > > +
-> > >  	vblk->vdev = vdev;
-> > >  	vblk->sg_elems = sg_elems;
-> > >  
-> > > @@ -820,8 +884,12 @@ static int virtblk_probe(struct virtio_device *vdev)
-> > >  static void virtblk_remove(struct virtio_device *vdev)
-> > >  {
-> > >  	struct virtio_blk *vblk = vdev->priv;
-> > > -	int index = vblk->index;
-> > > -	int refc;
-> > > +
-> > > +	/*
-> > > +	 * Virtqueue processing is stopped safely here but mutual exclusion is
-> > > +	 * needed for block_device_operations.
-> > > +	 */
-> > > +	mutex_lock(&vblk->remove_mutex);
-> > >  
-> > >  	/* Make sure no work handler is accessing the device. */
-> > >  	flush_work(&vblk->config_work);
-> > > @@ -834,15 +902,16 @@ static void virtblk_remove(struct virtio_device *vdev)
-> > >  	/* Stop all the virtqueues. */
-> > >  	vdev->config->reset(vdev);
-> > >  
-> > > -	refc = kref_read(&disk_to_dev(vblk->disk)->kobj.kref);
-> > > +	/* Virtqueue are stopped, nothing can use vblk->vdev anymore. */
-> > 
-> > Virtqueues?
-> 
-> Thanks, will fix.
+Okay, but how is all this virtio specific?  For example, why not allow
+separate swiotlbs for any type of device?
+For example, this might make sense if a given device is from a
+different, less trusted vendor.
+All this can then maybe be hidden behind the DMA API.
 
+
+
+> ---
+>  drivers/virtio/Makefile        |   2 +-
+>  drivers/virtio/virtio.c        |   2 +
+>  drivers/virtio/virtio_bounce.c | 150 +++++++++++++++++++++++++++++++++++++++++
+>  include/linux/virtio.h         |   4 ++
+>  4 files changed, 157 insertions(+), 1 deletion(-)
+>  create mode 100644 drivers/virtio/virtio_bounce.c
+> 
+> diff --git a/drivers/virtio/Makefile b/drivers/virtio/Makefile
+> index 29a1386e..3fd3515 100644
+> --- a/drivers/virtio/Makefile
+> +++ b/drivers/virtio/Makefile
+> @@ -1,5 +1,5 @@
+>  # SPDX-License-Identifier: GPL-2.0
+> -obj-$(CONFIG_VIRTIO) += virtio.o virtio_ring.o
+> +obj-$(CONFIG_VIRTIO) += virtio.o virtio_ring.o virtio_bounce.o
+>  obj-$(CONFIG_VIRTIO_MMIO) += virtio_mmio.o
+>  obj-$(CONFIG_VIRTIO_PCI) += virtio_pci.o
+>  virtio_pci-y := virtio_pci_modern.o virtio_pci_common.o
+> diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
+> index a977e32..bc2f779 100644
+> --- a/drivers/virtio/virtio.c
+> +++ b/drivers/virtio/virtio.c
+> @@ -329,6 +329,7 @@ int register_virtio_device(struct virtio_device *dev)
+>  
+>  	dev->index = err;
+>  	dev_set_name(&dev->dev, "virtio%u", dev->index);
+> +	virtio_bounce_set_dma_ops(dev);
+>  
+>  	spin_lock_init(&dev->config_lock);
+>  	dev->config_enabled = false;
+> @@ -431,6 +432,7 @@ EXPORT_SYMBOL_GPL(virtio_device_restore);
+>  
+>  static int virtio_init(void)
+>  {
+> +	virtio_map_bounce_buffer();
+>  	if (bus_register(&virtio_bus) != 0)
+>  		panic("virtio bus registration failed");
+>  	return 0;
+> diff --git a/drivers/virtio/virtio_bounce.c b/drivers/virtio/virtio_bounce.c
+> new file mode 100644
+> index 0000000..3de8e0e
+> --- /dev/null
+> +++ b/drivers/virtio/virtio_bounce.c
+> @@ -0,0 +1,150 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Virtio DMA ops to bounce buffers
+> + *
+> + *  Copyright (c) 2020, The Linux Foundation. All rights reserved.
+> + *
+> + * This module allows bouncing of IO buffers to a region which will be
+> + * accessible to backend drivers.
+> + */
+> +
+> +#include <linux/virtio.h>
+> +#include <linux/io.h>
+> +#include <linux/swiotlb.h>
+> +#include <linux/dma-mapping.h>
+> +#include <linux/of_reserved_mem.h>
+> +#include <linux/of.h>
+> +#include <linux/of_fdt.h>
+> +
+> +static phys_addr_t bounce_buf_paddr;
+> +static void *bounce_buf_vaddr;
+> +static size_t bounce_buf_size;
+> +struct swiotlb_pool *virtio_pool;
+> +
+> +#define VIRTIO_MAX_BOUNCE_SIZE	(16*4096)
+> +
+> +static void *virtio_alloc_coherent(struct device *dev, size_t size,
+> +		dma_addr_t *dma_handle, gfp_t gfp_flags, unsigned long attrs)
+> +{
+> +	phys_addr_t addr;
+> +
+> +	if (!virtio_pool)
+> +		return NULL;
+> +
+> +	addr = swiotlb_alloc(virtio_pool, size, bounce_buf_paddr, ULONG_MAX);
+> +	if (addr == DMA_MAPPING_ERROR)
+> +		return NULL;
+> +
+> +	*dma_handle = (addr - bounce_buf_paddr);
+> +
+> +	return bounce_buf_vaddr + (addr - bounce_buf_paddr);
+> +}
+> +
+> +static void virtio_free_coherent(struct device *dev, size_t size, void *vaddr,
+> +		dma_addr_t dma_handle, unsigned long attrs)
+> +{
+> +	phys_addr_t addr = (dma_handle + bounce_buf_paddr);
+> +
+> +	swiotlb_free(virtio_pool, addr, size);
+> +}
+> +
+> +static dma_addr_t virtio_map_page(struct device *dev, struct page *page,
+> +		unsigned long offset, size_t size,
+> +		enum dma_data_direction dir, unsigned long attrs)
+> +{
+> +	void *ptr = page_address(page) + offset;
+> +	phys_addr_t paddr = virt_to_phys(ptr);
+> +	dma_addr_t handle;
+> +
+> +	if (!virtio_pool)
+> +		return DMA_MAPPING_ERROR;
+> +
+> +	handle = _swiotlb_tbl_map_single(virtio_pool, dev, bounce_buf_paddr,
+> +					 paddr, size, size, dir, attrs);
+> +	if (handle == (phys_addr_t)DMA_MAPPING_ERROR)
+> +		return DMA_MAPPING_ERROR;
+> +
+> +	return handle - bounce_buf_paddr;
+> +}
+> +
+> +static void virtio_unmap_page(struct device *dev, dma_addr_t dev_addr,
+> +		size_t size, enum dma_data_direction dir, unsigned long attrs)
+> +{
+> +	phys_addr_t addr = dev_addr + bounce_buf_paddr;
+> +
+> +	_swiotlb_tbl_unmap_single(virtio_pool, dev, addr, size,
+> +					size, dir, attrs);
+> +}
+> +
+> +size_t virtio_max_mapping_size(struct device *dev)
+> +{
+> +	return VIRTIO_MAX_BOUNCE_SIZE;
+> +}
+> +
+> +static const struct dma_map_ops virtio_dma_ops = {
+> +	.alloc			= virtio_alloc_coherent,
+> +	.free			= virtio_free_coherent,
+> +	.map_page		= virtio_map_page,
+> +	.unmap_page		= virtio_unmap_page,
+> +	.max_mapping_size	= virtio_max_mapping_size,
+> +};
+> +
+> +void virtio_bounce_set_dma_ops(struct virtio_device *vdev)
+> +{
+> +	if (!bounce_buf_paddr)
+> +		return;
+> +
+> +	set_dma_ops(vdev->dev.parent, &virtio_dma_ops);
+
+
+I don't think DMA API maintainers will be happy with new users
+of set_dma_ops.
+
+> +}
+> +
+> +int virtio_map_bounce_buffer(void)
+> +{
+> +	int ret;
+> +
+> +	if (!bounce_buf_paddr)
+> +		return 0;
+> +
+> +	/*
+> +	 * Map region as 'cacheable' memory. This will reduce access latency for
+> +	 * backend.
+> +	 */
+> +	bounce_buf_vaddr = memremap(bounce_buf_paddr,
+> +				bounce_buf_size, MEMREMAP_WB);
+> +	if (!bounce_buf_vaddr)
+> +		return -ENOMEM;
+> +
+> +	memset(bounce_buf_vaddr, 0, bounce_buf_size);
+> +	virtio_pool = swiotlb_register_pool("virtio_swiotlb", bounce_buf_paddr,
+> +				bounce_buf_vaddr, bounce_buf_size);
+> +	if (IS_ERR(virtio_pool)) {
+> +		ret = PTR_ERR(virtio_pool);
+> +		virtio_pool = NULL;
+> +		memunmap(bounce_buf_vaddr);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +int virtio_register_bounce_buffer(phys_addr_t base, size_t size)
+> +{
+> +	if (bounce_buf_paddr || !base || size < PAGE_SIZE)
+> +		return -EINVAL;
+> +
+> +	bounce_buf_paddr = base;
+> +	bounce_buf_size = size;
+> +
+> +	return 0;
+> +}
+> +
+> +static int __init virtio_bounce_setup(struct reserved_mem *rmem)
+> +{
+> +	unsigned long node = rmem->fdt_node;
+> +
+> +	if (!of_get_flat_dt_prop(node, "no-map", NULL))
+> +		return -EINVAL;
+> +
+> +	return virtio_register_bounce_buffer(rmem->base, rmem->size);
+> +}
+> +
+> +RESERVEDMEM_OF_DECLARE(virtio, "virtio_bounce_pool", virtio_bounce_setup);
+> diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+> index a493eac..c4970c5 100644
+> --- a/include/linux/virtio.h
+> +++ b/include/linux/virtio.h
+> @@ -134,12 +134,16 @@ void virtio_config_changed(struct virtio_device *dev);
+>  void virtio_config_disable(struct virtio_device *dev);
+>  void virtio_config_enable(struct virtio_device *dev);
+>  int virtio_finalize_features(struct virtio_device *dev);
+> +int virtio_register_bounce_buffer(phys_addr_t base, size_t size);
+> +
+>  #ifdef CONFIG_PM_SLEEP
+>  int virtio_device_freeze(struct virtio_device *dev);
+>  int virtio_device_restore(struct virtio_device *dev);
+>  #endif
+>  
+>  size_t virtio_max_dma_size(struct virtio_device *vdev);
+> +extern int virtio_map_bounce_buffer(void);
+> +extern void virtio_bounce_set_dma_ops(struct virtio_device *dev);
+>  
+>  #define virtio_device_for_each_vq(vdev, vq) \
+>  	list_for_each_entry(vq, &vdev->vqs, list)
+> -- 
+> 2.7.4
+> 
+> -- 
+> QUALCOMM INDIA, on behalf of Qualcomm Innovation Center, Inc. is a member
+> of Code Aurora Forum, hosted by The Linux Foundation
 
 _______________________________________________
 Virtualization mailing list
