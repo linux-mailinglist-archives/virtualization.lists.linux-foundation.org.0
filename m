@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 845521BC2CB
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:18:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E5BF1BC2C0
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:18:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2CC7487593;
-	Tue, 28 Apr 2020 15:18:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A0F36875CB;
+	Tue, 28 Apr 2020 15:18:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4VDC57mSX4hz; Tue, 28 Apr 2020 15:18:44 +0000 (UTC)
+	with ESMTP id 7eL8iRCsTJw5; Tue, 28 Apr 2020 15:18:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id DE95F875D7;
-	Tue, 28 Apr 2020 15:18:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 789D287744;
+	Tue, 28 Apr 2020 15:18:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D3728C088B;
-	Tue, 28 Apr 2020 15:18:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 53C06C0888;
+	Tue, 28 Apr 2020 15:18:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BAF18C0172
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 078B4C0172
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:18:18 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8C8C5875FD
+ by fraxinus.osuosl.org (Postfix) with ESMTP id EE9A3864CD
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:18:18 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id x1si0fSpRyg1
+ with ESMTP id Aa0HLjjBmQSj
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:18:16 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:03 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 47730875A2
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id D2F1386427
  for <virtualization@lists.linux-foundation.org>;
  Tue, 28 Apr 2020 15:18:02 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id F2925F06; Tue, 28 Apr 2020 17:17:46 +0200 (CEST)
+ id 2FBC8F07; Tue, 28 Apr 2020 17:17:47 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 26/75] x86/fpu: Move xgetbv()/xsetbv() into separate header
-Date: Tue, 28 Apr 2020 17:16:36 +0200
-Message-Id: <20200428151725.31091-27-joro@8bytes.org>
+Subject: [PATCH v3 27/75] x86/sev-es: Add CPUID handling to #VC handler
+Date: Tue, 28 Apr 2020 17:16:37 +0200
+Message-Id: <20200428151725.31091-28-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
@@ -76,106 +76,85 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Joerg Roedel <jroedel@suse.de>
+From: Tom Lendacky <thomas.lendacky@amd.com>
 
-The xgetbv() function is needed in pre-decompression boot code, but
-asm/fpu/internal.h can't be included there directly. Doing so opens
-the door to include-hell due to various include-magic in
-boot/compressed/misc.h.
+Handle #VC exceptions caused by CPUID instructions. These happen in
+early boot code when the KASLR code checks for RDTSC.
 
-Avoid that by moving xgetbv()/xsetbv() to a separate header file and
-include this instead.
-
+Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
+[ jroedel@suse.de: Adapt to #VC handling framework ]
+Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/fpu/internal.h | 29 +-------------------------
- arch/x86/include/asm/fpu/xcr.h      | 32 +++++++++++++++++++++++++++++
- 2 files changed, 33 insertions(+), 28 deletions(-)
- create mode 100644 arch/x86/include/asm/fpu/xcr.h
+ arch/x86/boot/compressed/sev-es.c |  4 ++++
+ arch/x86/kernel/sev-es-shared.c   | 35 +++++++++++++++++++++++++++++++
+ 2 files changed, 39 insertions(+)
 
-diff --git a/arch/x86/include/asm/fpu/internal.h b/arch/x86/include/asm/fpu/internal.h
-index 44c48e34d799..795fc049988e 100644
---- a/arch/x86/include/asm/fpu/internal.h
-+++ b/arch/x86/include/asm/fpu/internal.h
-@@ -19,6 +19,7 @@
- #include <asm/user.h>
- #include <asm/fpu/api.h>
- #include <asm/fpu/xstate.h>
+diff --git a/arch/x86/boot/compressed/sev-es.c b/arch/x86/boot/compressed/sev-es.c
+index 17765e471e28..05ba1dcdd103 100644
+--- a/arch/x86/boot/compressed/sev-es.c
++++ b/arch/x86/boot/compressed/sev-es.c
+@@ -15,6 +15,7 @@
+ #include <asm/sev-es.h>
+ #include <asm/trap_defs.h>
+ #include <asm/msr-index.h>
 +#include <asm/fpu/xcr.h>
- #include <asm/cpufeature.h>
- #include <asm/trace/fpu.h>
+ #include <asm/ptrace.h>
+ #include <asm/svm.h>
  
-@@ -614,32 +615,4 @@ static inline void switch_fpu_finish(struct fpu *new_fpu)
- 	}
- 	__write_pkru(pkru_val);
+@@ -182,6 +183,9 @@ void do_boot_stage2_vc(struct pt_regs *regs, unsigned long exit_code)
+ 	case SVM_EXIT_IOIO:
+ 		result = vc_handle_ioio(boot_ghcb, &ctxt);
+ 		break;
++	case SVM_EXIT_CPUID:
++		result = vc_handle_cpuid(boot_ghcb, &ctxt);
++		break;
+ 	default:
+ 		result = ES_UNSUPPORTED;
+ 		break;
+diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
+index 5d4d0e2b7777..3d645662ff10 100644
+--- a/arch/x86/kernel/sev-es-shared.c
++++ b/arch/x86/kernel/sev-es-shared.c
+@@ -419,3 +419,38 @@ static enum es_result vc_handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
+ 
+ 	return ret;
  }
--
--/*
-- * MXCSR and XCR definitions:
-- */
--
--extern unsigned int mxcsr_feature_mask;
--
--#define XCR_XFEATURE_ENABLED_MASK	0x00000000
--
--static inline u64 xgetbv(u32 index)
--{
--	u32 eax, edx;
--
--	asm volatile(".byte 0x0f,0x01,0xd0" /* xgetbv */
--		     : "=a" (eax), "=d" (edx)
--		     : "c" (index));
--	return eax + ((u64)edx << 32);
--}
--
--static inline void xsetbv(u32 index, u64 value)
--{
--	u32 eax = value;
--	u32 edx = value >> 32;
--
--	asm volatile(".byte 0x0f,0x01,0xd1" /* xsetbv */
--		     : : "a" (eax), "d" (edx), "c" (index));
--}
--
- #endif /* _ASM_X86_FPU_INTERNAL_H */
-diff --git a/arch/x86/include/asm/fpu/xcr.h b/arch/x86/include/asm/fpu/xcr.h
-new file mode 100644
-index 000000000000..91ee45712737
---- /dev/null
-+++ b/arch/x86/include/asm/fpu/xcr.h
-@@ -0,0 +1,32 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _ASM_X86_FPU_XCR_H
-+#define _ASM_X86_FPU_XCR_H
 +
-+/*
-+ * MXCSR and XCR definitions:
-+ */
-+
-+extern unsigned int mxcsr_feature_mask;
-+
-+#define XCR_XFEATURE_ENABLED_MASK	0x00000000
-+
-+static inline u64 xgetbv(u32 index)
++static enum es_result vc_handle_cpuid(struct ghcb *ghcb,
++				      struct es_em_ctxt *ctxt)
 +{
-+	u32 eax, edx;
++	struct pt_regs *regs = ctxt->regs;
++	u32 cr4 = native_read_cr4();
++	enum es_result ret;
 +
-+	asm volatile(".byte 0x0f,0x01,0xd0" /* xgetbv */
-+		     : "=a" (eax), "=d" (edx)
-+		     : "c" (index));
-+	return eax + ((u64)edx << 32);
++	ghcb_set_rax(ghcb, regs->ax);
++	ghcb_set_rcx(ghcb, regs->cx);
++
++	if (cr4 & X86_CR4_OSXSAVE)
++		/* Safe to read xcr0 */
++		ghcb_set_xcr0(ghcb, xgetbv(XCR_XFEATURE_ENABLED_MASK));
++	else
++		/* xgetbv will cause #GP - use reset value for xcr0 */
++		ghcb_set_xcr0(ghcb, 1);
++
++	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_CPUID, 0, 0);
++	if (ret != ES_OK)
++		return ret;
++
++	if (!(ghcb_is_valid_rax(ghcb) &&
++	      ghcb_is_valid_rbx(ghcb) &&
++	      ghcb_is_valid_rcx(ghcb) &&
++	      ghcb_is_valid_rdx(ghcb)))
++		return ES_VMM_ERROR;
++
++	regs->ax = ghcb->save.rax;
++	regs->bx = ghcb->save.rbx;
++	regs->cx = ghcb->save.rcx;
++	regs->dx = ghcb->save.rdx;
++
++	return ES_OK;
 +}
-+
-+static inline void xsetbv(u32 index, u64 value)
-+{
-+	u32 eax = value;
-+	u32 edx = value >> 32;
-+
-+	asm volatile(".byte 0x0f,0x01,0xd1" /* xsetbv */
-+		     : : "a" (eax), "d" (edx), "c" (index));
-+}
-+
-+#endif /* _ASM_X86_FPU_XCR_H */
 -- 
 2.17.1
 
