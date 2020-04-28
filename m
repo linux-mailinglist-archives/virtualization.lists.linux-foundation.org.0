@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4196F1BC394
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:27:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ED101BC384
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:26:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E37B022BCC;
-	Tue, 28 Apr 2020 15:27:17 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 2DE1422882;
+	Tue, 28 Apr 2020 15:26:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9WQMaLMZVJzw; Tue, 28 Apr 2020 15:27:15 +0000 (UTC)
+	with ESMTP id ejYCToZqpdWt; Tue, 28 Apr 2020 15:26:45 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id E740322E20;
-	Tue, 28 Apr 2020 15:26:49 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 41ECF228A0;
+	Tue, 28 Apr 2020 15:26:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D7C11C0863;
-	Tue, 28 Apr 2020 15:26:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3A413C0172;
+	Tue, 28 Apr 2020 15:26:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9D8CEC0863
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B07D3C0889
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:43 +0000 (UTC)
+ Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8AB8C87639
+ by hemlock.osuosl.org (Postfix) with ESMTP id A2B5A880D9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:43 +0000 (UTC)
+ Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FdlG15gvFcpj
+ with ESMTP id oF06GxldVj9s
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:43 +0000 (UTC)
+ Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 6B1588757D
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 203F888277
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:41 +0000 (UTC)
+ Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 36AD3F3D; Tue, 28 Apr 2020 17:17:54 +0200 (CEST)
+ id 6BC3EF42; Tue, 28 Apr 2020 17:17:54 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 62/75] x86/sev-es: Handle #AC Events
-Date: Tue, 28 Apr 2020 17:17:12 +0200
-Message-Id: <20200428151725.31091-63-joro@8bytes.org>
+Subject: [PATCH v3 63/75] x86/sev-es: Handle #DB Events
+Date: Tue, 28 Apr 2020 17:17:13 +0200
+Message-Id: <20200428151725.31091-64-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
@@ -78,10 +78,8 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Implement a handler for #VC exceptions caused by #AC exceptions. The #AC
-exception is just forwarded to do_alignment_check() and not pushed down
-to the hypervisor, as requested by the SEV-ES GHCB Standardization
-Specification.
+Handle #VC exceptions caused by #DB exceptions in the guest. Do not
+forward them to the hypervisor and handle them with do_debug() instead.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
@@ -89,22 +87,22 @@ Signed-off-by: Joerg Roedel <jroedel@suse.de>
  1 file changed, 19 insertions(+)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index f807a2adcbe3..050a15da9ae5 100644
+index 050a15da9ae5..03095bc7b563 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -869,6 +869,19 @@ static enum es_result vc_handle_vmmcall(struct ghcb *ghcb,
- 	return ES_OK;
+@@ -882,6 +882,19 @@ static enum es_result vc_handle_trap_ac(struct ghcb *ghcb,
+ 	return ES_EXCEPTION;
  }
  
-+static enum es_result vc_handle_trap_ac(struct ghcb *ghcb,
++static enum es_result vc_handle_trap_db(struct ghcb *ghcb,
 +					struct es_em_ctxt *ctxt)
 +{
 +	/*
-+	 * Calling do_alignment_check() directly does not work, because it
-+	 * enables IRQs and the GHCB is active. Forward the exception and call
-+	 * it later from vc_forward_exception().
++	 * Calling do_debug() directly does not work, because it might enable
++	 * IRQs and the GHCB is active. Forward the exception and call it later
++	 * from vc_forward_exception().
 +	 */
-+	ctxt->fi.vector = X86_TRAP_AC;
++	ctxt->fi.vector = X86_TRAP_DB;
 +	ctxt->fi.error_code = 0;
 +	return ES_EXCEPTION;
 +}
@@ -112,22 +110,22 @@ index f807a2adcbe3..050a15da9ae5 100644
  static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
  					 struct ghcb *ghcb,
  					 unsigned long exit_code)
-@@ -882,6 +895,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+@@ -895,6 +908,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
  	case SVM_EXIT_WRITE_DR7:
  		result = vc_handle_dr7_write(ghcb, ctxt);
  		break;
-+	case SVM_EXIT_EXCP_BASE + X86_TRAP_AC:
-+		result = vc_handle_trap_ac(ghcb, ctxt);
++	case SVM_EXIT_EXCP_BASE + X86_TRAP_DB:
++		result = vc_handle_trap_db(ghcb, ctxt);
 +		break;
- 	case SVM_EXIT_RDTSC:
- 	case SVM_EXIT_RDTSCP:
- 		result = vc_handle_rdtsc(ghcb, ctxt, exit_code);
-@@ -941,6 +957,9 @@ static void vc_forward_exception(struct es_em_ctxt *ctxt)
- 	case X86_TRAP_UD:
- 		do_invalid_op(ctxt->regs, 0);
+ 	case SVM_EXIT_EXCP_BASE + X86_TRAP_AC:
+ 		result = vc_handle_trap_ac(ghcb, ctxt);
  		break;
-+	case X86_TRAP_AC:
-+		do_alignment_check(ctxt->regs, error_code);
+@@ -960,6 +976,9 @@ static void vc_forward_exception(struct es_em_ctxt *ctxt)
+ 	case X86_TRAP_AC:
+ 		do_alignment_check(ctxt->regs, error_code);
+ 		break;
++	case X86_TRAP_DB:
++		do_debug(ctxt->regs, error_code);
 +		break;
  	default:
  		pr_emerg("Unsupported exception in #VC instruction emulation - can't continue\n");
