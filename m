@@ -1,93 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 993681BC770
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 20:04:49 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E5151875CB;
-	Tue, 28 Apr 2020 18:04:47 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id g+RxJ7lYSCtu; Tue, 28 Apr 2020 18:04:46 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9994087590;
-	Tue, 28 Apr 2020 18:04:46 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7328BC0172;
-	Tue, 28 Apr 2020 18:04:46 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 13829C0172
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 18:04:44 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D9C11BCD97
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 22:41:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id EF4F8862FC
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 18:04:43 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 803DD81A1A;
+	Tue, 28 Apr 2020 20:41:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id I3jYEIxDQSsl; Tue, 28 Apr 2020 20:41:14 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D031B867C6;
+	Tue, 28 Apr 2020 20:41:14 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B6FA5C0172;
+	Tue, 28 Apr 2020 20:41:14 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2D8E8C0172
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Apr 2020 20:41:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 294F8875A7
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Apr 2020 20:41:13 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id y06R-Xnd7EPh
+ with ESMTP id rIzQeuP5Uo8C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 18:04:42 +0000 (UTC)
+ Tue, 28 Apr 2020 20:41:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4C77E8547D
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7E3368753F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 18:04:42 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id b11so25758673wrs.6
+ Tue, 28 Apr 2020 20:41:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1588106471;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=4eENH6tB0EGZ/BA2dzhb17ThkK45wZijHpRT5Rx0P7Q=;
+ b=XGrwQTpu8pFriydV1NgZDH0yBZpe9wwndwTZClFps71bZnTf7NG9BkbtrFytEmF/aBJbOv
+ pAIStCYapt0TkY8Ye4VlR86LXPitdO4QNZNCJ3c38LWX9osQQux3XiVEEOGDd9AEW4Jt3L
+ xXZBp9/KC+kC3d8njgpvXgrbOoAKix8=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-66-7DHqntUOOXiFs9zabf3Ccw-1; Tue, 28 Apr 2020 16:41:09 -0400
+X-MC-Unique: 7DHqntUOOXiFs9zabf3Ccw-1
+Received: by mail-wm1-f71.google.com with SMTP id h6so26032wmi.7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 11:04:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=jUphhxDb4Rg2BkT6KiwROpgoyZctnFopLh4ce52idEA=;
- b=OjJH7+tHuPrfGseS4GC9QdI6SvWTDsYdlP+CN6VmyxuH1p15vM5V8EJGljA669jafX
- 0it5KxZnWFc0nXX/+msIcaBzNOIi6+65LkAQ9H6vXnyJhQ7YzaAEnRn0DyDtd8GbrmQs
- tW70f75SNFWftKVX5SArTaBX3mSLu5v5oTKRU=
+ Tue, 28 Apr 2020 13:41:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=jUphhxDb4Rg2BkT6KiwROpgoyZctnFopLh4ce52idEA=;
- b=IVCoEXzWHMy+OiixwEGd7PUYicr+x2qfDliY1UfmzEaWEz9aZAHs1vvAJo11XAG4Yf
- qD+KlFwZwnieIyeVElHr2xC2r0zXbrYIbKEsIbfne0dYdjhppRUGIEQ2a5ti+zgA8/dY
- 1eaW6+NXqUpgOzZ7+xsew7axSpumgh/2AKiWRrZtdWUCfK4lF+kJr55CMANA4aNlfJBR
- ybIWy7qCQLvAcm/eYJNbXMCMF/hnxK9Mj+9BH/loMzKZ84TrXgRcuTQmQZnkJkevxHkp
- BMTUIZNCknSE7KUYwEcmu7atdYrYHxPPmTDRP4NHQjpXlLLEKylw64SLZj6ur5CPyVr3
- Ym0g==
-X-Gm-Message-State: AGi0PuYh+m/XVxVsMiWbjNnMMUI6vu21QkpvaFJ/a9KgNMtg7snue8fc
- YvuRupJy0PEUqbVTQBZvAyC+7A==
-X-Google-Smtp-Source: APiQypLLfh7zYf6x+cb/I4EtikP3kdsgClHMq4YOpw9qcCb5Abv01n4gncvbWJ1Av2QLtrxgJ23f7A==
-X-Received: by 2002:adf:e450:: with SMTP id t16mr37060920wrm.301.1588097080548; 
- Tue, 28 Apr 2020 11:04:40 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id t17sm25630901wro.2.2020.04.28.11.04.38
+ bh=4eENH6tB0EGZ/BA2dzhb17ThkK45wZijHpRT5Rx0P7Q=;
+ b=rgM627IkBZdhFmGlj2U/EuQ5foQp1NO8/CbGKCRW7gqjyQxAc3hMAM1I5iogGTCzxj
+ ABSMK9hsnf6SAR2WJHhEtWlyiN8HYFZU0x4i+/QKPFIEN65/2CcZgnOfWipx041NR3Ig
+ FaMKLcFfR3Wet6lElbcqRYhnw8D+vR41qyIPnL+nMq1PXVMccH/LuCOQ0ejSIBxjQzOA
+ 35+ejykwbUJjR3QI2e2XtaaGPVhUitXUmiFn2Yv9y75vsFMbiyHv5b6BAiM6Zizx0IzX
+ PWqN1aSseEGNtGqa8H0vf9tEPezysYyIt/Ir1WVFZBVKN9TvrqQFIYNeWxFs/8b4tTvp
+ U3vA==
+X-Gm-Message-State: AGi0PuYZI/bNs+kpHQi8BM2UHMmjlDEjvzcfntaq73KUXJR6Ds+wuVui
+ O92iam4fxbGnnhO4JLgNh6kD+BG81kYwbvQ04S1sLWkZGFa8nRu95QA38k0lnVHMMS5AcUBw0en
+ 1GkYCpmosm9e5K7w2UJt8w2zhcO/6schujqfFk8ECmA==
+X-Received: by 2002:adf:a3d5:: with SMTP id m21mr35941312wrb.54.1588106468428; 
+ Tue, 28 Apr 2020 13:41:08 -0700 (PDT)
+X-Google-Smtp-Source: APiQypJ29J3wRFwAKcd5VfgZy6d80BpVLKwPqj7y7vEzsoMHleANkL6oMYbQYlmbWERgm90rIizbxg==
+X-Received: by 2002:adf:a3d5:: with SMTP id m21mr35941287wrb.54.1588106468180; 
+ Tue, 28 Apr 2020 13:41:08 -0700 (PDT)
+Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
+ by smtp.gmail.com with ESMTPSA id
+ 33sm27359373wrp.5.2020.04.28.13.41.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2020 11:04:39 -0700 (PDT)
-Date: Tue, 28 Apr 2020 20:04:37 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Sam Ravnborg <sam@ravnborg.org>
-Subject: Re: [PATCH 26/59] drm/qxl: Use devm_drm_dev_alloc
-Message-ID: <20200428180437.GZ3456981@phenom.ffwll.local>
-References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
- <20200415074034.175360-27-daniel.vetter@ffwll.ch>
- <20200424150911.GB20856@ravnborg.org>
- <20200428140011.GK3456981@phenom.ffwll.local>
- <20200428170026.GA27234@ravnborg.org>
+ Tue, 28 Apr 2020 13:41:07 -0700 (PDT)
+Date: Tue, 28 Apr 2020 16:41:04 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Srivatsa Vaddagiri <vatsa@codeaurora.org>
+Subject: Re: [PATCH 5/5] virtio: Add bounce DMA ops
+Message-ID: <20200428163448-mutt-send-email-mst@kernel.org>
+References: <1588073958-1793-1-git-send-email-vatsa@codeaurora.org>
+ <1588073958-1793-6-git-send-email-vatsa@codeaurora.org>
+ <20200428121232-mutt-send-email-mst@kernel.org>
+ <20200428174952.GA5097@quicinc.com>
 MIME-Version: 1.0
+In-Reply-To: <20200428174952.GA5097@quicinc.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20200428170026.GA27234@ravnborg.org>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
-Cc: Dave Airlie <airlied@redhat.com>, Daniel Vetter <daniel.vetter@ffwll.ch>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, Daniel Vetter <daniel@ffwll.ch>,
- Daniel Vetter <daniel.vetter@intel.com>, spice-devel@lists.freedesktop.org
+Cc: tsoni@codeaurora.org, virtio-dev@lists.oasis-open.org,
+ konrad.wilk@oracle.com, jan.kiszka@siemens.com, christoffer.dall@arm.com,
+ virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
+ stefano.stabellini@xilinx.com, will@kernel.org, linux-kernel@vger.kernel.org,
+ pratikp@codeaurora.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,180 +114,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 28, 2020 at 07:00:26PM +0200, Sam Ravnborg wrote:
-> On Tue, Apr 28, 2020 at 04:00:11PM +0200, Daniel Vetter wrote:
-> > On Fri, Apr 24, 2020 at 05:09:11PM +0200, Sam Ravnborg wrote:
-> > > Hi Daniel
-> > > 
-> > > On Wed, Apr 15, 2020 at 09:40:01AM +0200, Daniel Vetter wrote:
-> > > > Also need to remove the drm_dev_put from the remove hook.
-> > > > 
-> > > > Acked-by: Gerd Hoffmann <kraxel@redhat.com>
-> > > > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> > > > Cc: Dave Airlie <airlied@redhat.com>
-> > > > Cc: Gerd Hoffmann <kraxel@redhat.com>
-> > > > Cc: virtualization@lists.linux-foundation.org
-> > > > Cc: spice-devel@lists.freedesktop.org
-> > > > ---
-> > > >  drivers/gpu/drm/qxl/qxl_drv.c | 15 ++++++++-------
-> > > >  drivers/gpu/drm/qxl/qxl_drv.h |  3 +--
-> > > >  drivers/gpu/drm/qxl/qxl_kms.c | 12 +-----------
-> > > >  3 files changed, 10 insertions(+), 20 deletions(-)
-> > > > 
-> > > > diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-> > > > index 09102e2efabc..6b4ae4c5fb76 100644
-> > > > --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> > > > +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> > > > @@ -81,13 +81,16 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
-> > > >  		return -EINVAL; /* TODO: ENODEV ? */
-> > > >  	}
-> > > >  
-> > > > -	qdev = kzalloc(sizeof(struct qxl_device), GFP_KERNEL);
-> > > > -	if (!qdev)
-> > > > +	qdev = devm_drm_dev_alloc(&pdev->dev, &qxl_driver,
-> > > > +				  struct qxl_device, ddev);
-> > > > +	if (IS_ERR(qdev)) {
-> > > > +		pr_err("Unable to init drm dev");
-> > > >  		return -ENOMEM;
-> > > > +	}
-> > > 
-> > > The other patches do not add any error message when devm_drm_dev_alloc()
-> > > fails and driver core will log that driver init failed.
-> > > 
-> > > So the pr_err() above should be dropped.
-> > > I know it comes from qxl_device_init() but that does not make it a good
-> > > idea.
-> > 
-> > Hm I know we're inconsistent here, but some drivers have error logging on
-> > all branches, some dont. I'm just trying to go with the prevailing style.
-> > 
-> > > With this fixed:
-> > 
-> > Insisting on this or ok as-is?
-> OK as-is.
-
-Ok, merged the two qxl patches too, plus a lot of the driver conversions.
-
-Thanks a lot to everyone who commented, reviewed and tested thus far.
--Daniel
-
+On Tue, Apr 28, 2020 at 11:19:52PM +0530, Srivatsa Vaddagiri wrote:
+> * Michael S. Tsirkin <mst@redhat.com> [2020-04-28 12:17:57]:
 > 
-> 	Sam
+> > Okay, but how is all this virtio specific?  For example, why not allow
+> > separate swiotlbs for any type of device?
+> > For example, this might make sense if a given device is from a
+> > different, less trusted vendor.
 > 
-> > -Daniel
-> > 
-> > > Acked-by: Sam Ravnborg <sam@ravnborg.org>
-> > > 
-> > > >  
-> > > >  	ret = pci_enable_device(pdev);
-> > > >  	if (ret)
-> > > > -		goto free_dev;
-> > > > +		return ret;
-> > > >  
-> > > >  	ret = drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, "qxl");
-> > > >  	if (ret)
-> > > > @@ -101,7 +104,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
-> > > >  		}
-> > > >  	}
-> > > >  
-> > > > -	ret = qxl_device_init(qdev, &qxl_driver, pdev);
-> > > > +	ret = qxl_device_init(qdev, pdev);
-> > > >  	if (ret)
-> > > >  		goto put_vga;
-> > > >  
-> > > > @@ -128,8 +131,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
-> > > >  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
-> > > >  disable_pci:
-> > > >  	pci_disable_device(pdev);
-> > > > -free_dev:
-> > > > -	kfree(qdev);
-> > > > +
-> > > >  	return ret;
-> > > >  }
-> > > >  
-> > > > @@ -155,7 +157,6 @@ qxl_pci_remove(struct pci_dev *pdev)
-> > > >  	drm_atomic_helper_shutdown(dev);
-> > > >  	if (is_vga(pdev))
-> > > >  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
-> > > > -	drm_dev_put(dev);
-> > > >  }
-> > > >  
-> > > >  DEFINE_DRM_GEM_FOPS(qxl_fops);
-> > > > diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-> > > > index 435126facc9b..86ac191d9205 100644
-> > > > --- a/drivers/gpu/drm/qxl/qxl_drv.h
-> > > > +++ b/drivers/gpu/drm/qxl/qxl_drv.h
-> > > > @@ -276,8 +276,7 @@ struct qxl_device {
-> > > >  extern const struct drm_ioctl_desc qxl_ioctls[];
-> > > >  extern int qxl_max_ioctl;
-> > > >  
-> > > > -int qxl_device_init(struct qxl_device *qdev, struct drm_driver *drv,
-> > > > -		    struct pci_dev *pdev);
-> > > > +int qxl_device_init(struct qxl_device *qdev, struct pci_dev *pdev);
-> > > >  void qxl_device_fini(struct qxl_device *qdev);
-> > > >  
-> > > >  int qxl_modeset_init(struct qxl_device *qdev);
-> > > > diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
-> > > > index 9eed1a375f24..91a34dd835d7 100644
-> > > > --- a/drivers/gpu/drm/qxl/qxl_kms.c
-> > > > +++ b/drivers/gpu/drm/qxl/qxl_kms.c
-> > > > @@ -108,21 +108,13 @@ static void qxl_gc_work(struct work_struct *work)
-> > > >  }
-> > > >  
-> > > >  int qxl_device_init(struct qxl_device *qdev,
-> > > > -		    struct drm_driver *drv,
-> > > >  		    struct pci_dev *pdev)
-> > > >  {
-> > > >  	int r, sb;
-> > > >  
-> > > > -	r = drm_dev_init(&qdev->ddev, drv, &pdev->dev);
-> > > > -	if (r) {
-> > > > -		pr_err("Unable to init drm dev");
-> > > > -		goto error;
-> > > > -	}
-> > > > -
-> > > >  	qdev->ddev.pdev = pdev;
-> > > >  	pci_set_drvdata(pdev, &qdev->ddev);
-> > > >  	qdev->ddev.dev_private = qdev;
-> > > > -	drmm_add_final_kfree(&qdev->ddev, qdev);
-> > > >  
-> > > >  	mutex_init(&qdev->gem.mutex);
-> > > >  	mutex_init(&qdev->update_area_mutex);
-> > > > @@ -138,8 +130,7 @@ int qxl_device_init(struct qxl_device *qdev,
-> > > >  	qdev->vram_mapping = io_mapping_create_wc(qdev->vram_base, pci_resource_len(pdev, 0));
-> > > >  	if (!qdev->vram_mapping) {
-> > > >  		pr_err("Unable to create vram_mapping");
-> > > > -		r = -ENOMEM;
-> > > > -		goto error;
-> > > > +		return -ENOMEM;
-> > > >  	}
-> > > >  
-> > > >  	if (pci_resource_len(pdev, 4) > 0) {
-> > > > @@ -293,7 +284,6 @@ int qxl_device_init(struct qxl_device *qdev,
-> > > >  	io_mapping_free(qdev->surface_mapping);
-> > > >  vram_mapping_free:
-> > > >  	io_mapping_free(qdev->vram_mapping);
-> > > > -error:
-> > > >  	return r;
-> > > >  }
-> > > >  
-> > > > -- 
-> > > > 2.25.1
-> > > > 
-> > > > _______________________________________________
-> > > > dri-devel mailing list
-> > > > dri-devel@lists.freedesktop.org
-> > > > https://lists.freedesktop.org/mailman/listinfo/dri-devel
-> > 
-> > -- 
-> > Daniel Vetter
-> > Software Engineer, Intel Corporation
-> > http://blog.ffwll.ch
+> Is swiotlb commonly used for multiple devices that may be on different trust
+> boundaries (and not behind a hardware iommu)?
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Even a hardware iommu does not imply a 100% security from malicious
+hardware. First lots of people use iommu=pt for performance reasons.
+Second even without pt, unmaps are often batched, and sub-page buffers
+might be used for DMA, so we are not 100% protected at all times.
+
+
+> If so, then yes it sounds like a
+> good application of multiple swiotlb pools.
+> 
+> > All this can then maybe be hidden behind the DMA API.
+> 
+> Won't we still need some changes to virtio to make use of its own pool (to
+> bounce buffers)? Something similar to its own DMA ops proposed in this patch?
+
+If you are doing this for all devices, you need to either find a way
+to do this without chaning DMA ops, or by doing some automatic change
+to all drivers.
+
+
+> > > +void virtio_bounce_set_dma_ops(struct virtio_device *vdev)
+> > > +{
+> > > +	if (!bounce_buf_paddr)
+> > > +		return;
+> > > +
+> > > +	set_dma_ops(vdev->dev.parent, &virtio_dma_ops);
+> > 
+> > 
+> > I don't think DMA API maintainers will be happy with new users
+> > of set_dma_ops.
+> 
+> Is there an alternate API that is more preffered?
+
+all this is supposed to be part of DMA API itself. new drivers aren't
+supposed to have custom DMA ops.
+
+> -- 
+> QUALCOMM INDIA, on behalf of Qualcomm Innovation Center, Inc. is a member
+> of Code Aurora Forum, hosted by The Linux Foundation
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
