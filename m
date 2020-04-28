@@ -1,79 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8292E1BC145
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 16:30:29 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A0C261BC28F
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:17:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 3709E22731;
-	Tue, 28 Apr 2020 14:30:27 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 56184863DB;
+	Tue, 28 Apr 2020 15:17:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tx6u8SJ11uhV; Tue, 28 Apr 2020 14:30:25 +0000 (UTC)
+	with ESMTP id fjMvXqIAwCHZ; Tue, 28 Apr 2020 15:17:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id B56282277A;
-	Tue, 28 Apr 2020 14:30:25 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3627985F7E;
+	Tue, 28 Apr 2020 15:17:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 96EC3C0172;
-	Tue, 28 Apr 2020 14:30:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C7CAC0863;
+	Tue, 28 Apr 2020 15:17:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 61AE4C0172
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5BFBDC0888
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 14:30:24 +0000 (UTC)
+ Tue, 28 Apr 2020 15:17:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 5D00F87469
+ by silver.osuosl.org (Postfix) with ESMTP id 456D322850
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 14:30:24 +0000 (UTC)
+ Tue, 28 Apr 2020 15:17:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZDxulrQ165tS
+ with ESMTP id km7IPw4VCmhM
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 14:30:22 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 222368745D
+ Tue, 28 Apr 2020 15:17:47 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by silver.osuosl.org (Postfix) with ESMTPS id 3FC0322803
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 14:30:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588084220;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=LJYJOxQhIE1fE/bXXB2iJgsNhh+MEvSLEyy2mGQqHm4=;
- b=IYzh5KIYzjqKcO90s0hJ3ODb8ylnzYGiop+X6MqmuagioX/HB5myXRWMm4HgcG5G4dfEq+
- 74qexznDIZZCRLd8x3ABZp4FDy6+1ifAGO+PfwYWZDipiUJG/Nyyg7qfaRsPH9jNi9MGig
- TzcKfdCmRk/Zw0rZYphUr3hyoW5chhA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-493-YWug8AwhN2qI8cWogNqfqg-1; Tue, 28 Apr 2020 10:30:17 -0400
-X-MC-Unique: YWug8AwhN2qI8cWogNqfqg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 277D81005510;
- Tue, 28 Apr 2020 14:30:16 +0000 (UTC)
-Received: from localhost (ovpn-115-22.ams2.redhat.com [10.36.115.22])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 319AB60CD3;
- Tue, 28 Apr 2020 14:30:09 +0000 (UTC)
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v2] virtio-blk: handle block_device_operations callbacks after
- hot unplug
-Date: Tue, 28 Apr 2020 15:30:09 +0100
-Message-Id: <20200428143009.107645-1-stefanha@redhat.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@infradead.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, cohuck@redhat.com,
- linux-kernel@vger.kernel.org, Lance Digby <ldigby@redhat.com>,
- linux-block@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
+ Tue, 28 Apr 2020 15:17:47 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id 3C9966A7; Tue, 28 Apr 2020 17:17:42 +0200 (CEST)
+From: Joerg Roedel <joro@8bytes.org>
+To: x86@kernel.org
+Subject: [PATCH v3 00/75] x86: SEV-ES Guest Support
+Date: Tue, 28 Apr 2020 17:16:10 +0200
+Message-Id: <20200428151725.31091-1-joro@8bytes.org>
+X-Mailer: git-send-email 2.17.1
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>, Joerg Roedel <jroedel@suse.de>,
+ Mike Stunes <mstunes@vmware.com>, Kees Cook <keescook@chromium.org>,
+ kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Cfir Cohen <cfir@google.com>, Joerg Roedel <joro@8bytes.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,192 +68,292 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-A userspace process holding a file descriptor to a virtio_blk device can
-still invoke block_device_operations after hot unplug.  For example, a
-program that has /dev/vdb open can call ioctl(HDIO_GETGEO) after hot
-unplug to invoke virtblk_getgeo().
+Hi,
 
-Introduce a reference count in struct virtio_blk so that its lifetime
-covers both virtio_driver probe/remove and block_device_operations
-open/release users.  This ensures that block_device_operations functions
-like virtblk_getgeo() can safely access struct virtio_blk.
+here is the next version of changes to enable Linux to run as an SEV-ES
+guest. The code was rebased to v5.7-rc3 and got a fair number of changes
+since the last version.
 
-Add remove_mutex to prevent block_device_operations functions from
-accessing vblk->vdev during virtblk_remove() and let the safely check
-for !vblk->vdev after virtblk_remove() returns.
+What is SEV-ES
+==============
 
-Switching to a reference count also solves the vd_index_ida leak where
-vda, vdb, vdc, etc indices were lost when the device was hot unplugged
-while the block device was still open.
+SEV-ES is an acronym for 'Secure Encrypted Virtualization - Encrypted
+State' and means a hardware feature of AMD processors which hides the
+register state of VCPUs to the hypervisor by encrypting it. The
+hypervisor can't read or make changes to the guests register state.
 
-Reported-by: Lance Digby <ldigby@redhat.com>
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
-If someone has a simpler solution please let me know.  I looked at
-various approaches including reusing device_lock(&vblk->vdev.dev) but
-they were more complex and extending the lifetime of virtio_device after
-remove() has been called seems questionable.
----
- drivers/block/virtio_blk.c | 85 ++++++++++++++++++++++++++++++++++----
- 1 file changed, 77 insertions(+), 8 deletions(-)
+Most intercepts set by the hypervisor do not cause a #VMEXIT of the
+guest anymore, but turn into a VMM Communication Exception (#VC
+exception, vector 29) inside the guest. The error-code of this exception
+is the intercept exit-code that caused the exception.  The guest handles
+the #VC exception by communicating with the hypervisor through a shared
+data structure, the 'Guest-Hypervisor-Communication-Block'.
 
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 93468b7c6701..3dd53b445cc1 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -44,6 +44,13 @@ struct virtio_blk {
- 	/* Process context for config space updates */
- 	struct work_struct config_work;
- 
-+	/*
-+	 * Tracks references from block_device_operations open/release and
-+	 * virtio_driver probe/remove so this object can be freed once no
-+	 * longer in use.
-+	 */
-+	refcount_t refs;
-+
- 	/* What host tells us, plus 2 for header & tailer. */
- 	unsigned int sg_elems;
- 
-@@ -53,6 +60,9 @@ struct virtio_blk {
- 	/* num of vqs */
- 	int num_vqs;
- 	struct virtio_blk_vq *vqs;
-+
-+	/* Provides mutual exclusion with virtblk_remove(). */
-+	struct mutex remove_mutex;
- };
- 
- struct virtblk_req {
-@@ -295,10 +305,54 @@ static int virtblk_get_id(struct gendisk *disk, char *id_str)
- 	return err;
- }
- 
-+static void virtblk_get(struct virtio_blk *vblk)
-+{
-+	refcount_inc(&vblk->refs);
-+}
-+
-+static void virtblk_put(struct virtio_blk *vblk)
-+{
-+	if (refcount_dec_and_test(&vblk->refs)) {
-+		ida_simple_remove(&vd_index_ida, vblk->index);
-+		mutex_destroy(&vblk->remove_mutex);
-+		kfree(vblk);
-+	}
-+}
-+
-+static int virtblk_open(struct block_device *bd, fmode_t mode)
-+{
-+	struct virtio_blk *vblk = bd->bd_disk->private_data;
-+	int ret = -ENXIO;
-+
-+	mutex_lock(&vblk->remove_mutex);
-+
-+	if (vblk->vdev) {
-+		virtblk_get(vblk);
-+		ret = 0;
-+	}
-+
-+	mutex_unlock(&vblk->remove_mutex);
-+	return ret;
-+}
-+
-+static void virtblk_release(struct gendisk *disk, fmode_t mode)
-+{
-+	struct virtio_blk *vblk = disk->private_data;
-+
-+	virtblk_put(vblk);
-+}
-+
- /* We provide getgeo only to please some old bootloader/partitioning tools */
- static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
- {
- 	struct virtio_blk *vblk = bd->bd_disk->private_data;
-+	int ret = -ENXIO;
-+
-+	mutex_lock(&vblk->remove_mutex);
-+
-+	if (!vblk->vdev) {
-+		goto out;
-+	}
- 
- 	/* see if the host passed in geometry config */
- 	if (virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_GEOMETRY)) {
-@@ -314,11 +368,17 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
- 		geo->sectors = 1 << 5;
- 		geo->cylinders = get_capacity(bd->bd_disk) >> 11;
- 	}
--	return 0;
-+
-+	ret = 0;
-+out:
-+	mutex_unlock(&vblk->remove_mutex);
-+	return ret;
- }
- 
- static const struct block_device_operations virtblk_fops = {
- 	.owner  = THIS_MODULE,
-+	.open = virtblk_open,
-+	.release = virtblk_release,
- 	.getgeo = virtblk_getgeo,
- };
- 
-@@ -655,6 +715,10 @@ static int virtblk_probe(struct virtio_device *vdev)
- 		goto out_free_index;
- 	}
- 
-+	/* This reference is dropped in virtblk_remove(). */
-+	refcount_set(&vblk->refs, 1);
-+	mutex_init(&vblk->remove_mutex);
-+
- 	vblk->vdev = vdev;
- 	vblk->sg_elems = sg_elems;
- 
-@@ -820,8 +884,12 @@ static int virtblk_probe(struct virtio_device *vdev)
- static void virtblk_remove(struct virtio_device *vdev)
- {
- 	struct virtio_blk *vblk = vdev->priv;
--	int index = vblk->index;
--	int refc;
-+
-+	/*
-+	 * Virtqueue processing is stopped safely here but mutual exclusion is
-+	 * needed for block_device_operations.
-+	 */
-+	mutex_lock(&vblk->remove_mutex);
- 
- 	/* Make sure no work handler is accessing the device. */
- 	flush_work(&vblk->config_work);
-@@ -834,15 +902,16 @@ static void virtblk_remove(struct virtio_device *vdev)
- 	/* Stop all the virtqueues. */
- 	vdev->config->reset(vdev);
- 
--	refc = kref_read(&disk_to_dev(vblk->disk)->kobj.kref);
-+	/* Virtqueue are stopped, nothing can use vblk->vdev anymore. */
-+	vblk->vdev = NULL;
-+
- 	put_disk(vblk->disk);
- 	vdev->config->del_vqs(vdev);
- 	kfree(vblk->vqs);
--	kfree(vblk);
- 
--	/* Only free device id if we don't have any users */
--	if (refc == 1)
--		ida_simple_remove(&vd_index_ida, index);
-+	mutex_unlock(&vblk->remove_mutex);
-+
-+	virtblk_put(vblk);
- }
- 
- #ifdef CONFIG_PM_SLEEP
+With SEV-ES an untrusted hypervisor can no longer steal secrets from a
+guest via inspecting guest memory or guest register contents. A
+malicious hypervisor can still interfere with guest operations, but the
+SEV-ES client code does its best to detect such situations and crash the
+VM if it happens. 
+
+More information about the implementation details can be found in the
+cover letter of the initial post of these patches:
+
+	https://lore.kernel.org/lkml/20200211135256.24617-1-joro@8bytes.org/
+
+Current State of the Patches
+============================
+
+The patches posted here are considered feature complete and survived a
+good amount of functional testing:
+
+	1) Booting an SEV-ES guest VM to the graphical desktop.
+
+	2) Running a 16-vcpu SEV-ES VM with 'perf top' and the x86
+	   selftests shipped with the kernel source in a loop in
+	   parallel for 18 hours showed no issues.
+
+	3) Various compile testing has been done, including
+	   allno/allmod/allyes/defconfig for x86-64 and i386.
+
+	4) Compiled every single commit (single .config only) to check
+	   if they build and do not introduce new warnings.
+
+	5) Boot-tested the changes on various machines, including
+	   bare-metal on an AMD (with and without mem_encrypt=on) and
+	   Intel machine.
+
+A git-tree with these patches applied can be found here:
+
+	https://git.kernel.org/pub/scm/linux/kernel/git/joro/linux.git/log/?h=sev-es-client-v5.7-rc3
+
+Changes to the previous version
+===============================
+
+Here is an incomplete list of changes to the previous version of this
+patch-set. There have been so many small changes that I havn't kept
+track of all, but the most important ones are listed:
+
+
+	- Rebased to v5.7-rc3
+
+	- Changes the #VC exception handler to use an IST stack. This
+	  includes a couple of additional patches to set up and map the
+	  IST stack, to make dumpstack aware of them and to fix a race
+	  with the NMI handler when shifting the #VC handlers IST entry.
+
+	- The NMI_Complete message to the hypervisor the re-open the NMI
+	  window is now sent at the very beginning of do_nmi().
+
+	- The GHCB used in the pre-decompression code is now re-mapped
+	  encrypted and flushed from the cache before jumping to the
+	  decompressed kernel image. This is needed to make sure the
+	  running kernel can safely re-use the page. Actually the page
+	  is also unmapped after being re-encrypted to catch any
+	  use-after-remap.
+
+	- Added CPUID caching.
+
+	- Mapped the GHCBs to the EFI page-tables as the UEFI BIOS
+	  expects to be able to re-use the OS GHCBs.
+
+	- RDTSC and RDTSCP are now also handled in the pre-decompression
+	  boot code. These instructions are used by KASLR and some
+	  hypervisors might intercept them.
+
+	- Re-implemented nested GHCB handling by keeping a backup GHCB
+	  around. This supports one level of GHCB nesting, which is
+	  sufficient for now.
+
+	- Moved all SEV-ES related per-cpu data into
+	  'struct sev_es_runtime_data'. This struct is allocated and
+	  initialized at boot per cpu.
+
+	- Correctly set the protocol and ghcb_usage information when
+	  talking to the hypervisor.
+
+The previous version of the patch-set can be found here:
+
+	https://lore.kernel.org/lkml/20200319091407.1481-1-joro@8bytes.org/
+
+Please review.
+
+
+Thanks,
+
+	Joerg
+
+Borislav Petkov (1):
+  KVM: SVM: Use __packed shorthand
+
+Doug Covelli (1):
+  x86/vmware: Add VMware specific handling for VMMCALL under SEV-ES
+
+Joerg Roedel (53):
+  KVM: SVM: Add GHCB Accessor functions
+  x86/traps: Move some definitions to <asm/trap_defs.h>
+  x86/insn: Make inat-tables.c suitable for pre-decompression code
+  x86/umip: Factor out instruction fetch
+  x86/umip: Factor out instruction decoding
+  x86/insn: Add insn_get_modrm_reg_off()
+  x86/insn: Add insn_rep_prefix() helper
+  x86/boot/compressed/64: Disable red-zone usage
+  x86/boot/compressed/64: Switch to __KERNEL_CS after GDT is loaded
+  x86/boot/compressed/64: Add IDT Infrastructure
+  x86/boot/compressed/64: Rename kaslr_64.c to ident_map_64.c
+  x86/boot/compressed/64: Add page-fault handler
+  x86/boot/compressed/64: Always switch to own page-table
+  x86/boot/compressed/64: Don't pre-map memory in KASLR code
+  x86/boot/compressed/64: Change add_identity_map() to take start and
+    end
+  x86/boot/compressed/64: Add stage1 #VC handler
+  x86/boot/compressed/64: Call set_sev_encryption_mask earlier
+  x86/boot/compressed/64: Check return value of
+    kernel_ident_mapping_init()
+  x86/boot/compressed/64: Add set_page_en/decrypted() helpers
+  x86/boot/compressed/64: Setup GHCB Based VC Exception handler
+  x86/boot/compressed/64: Unmap GHCB page before booting the kernel
+  x86/fpu: Move xgetbv()/xsetbv() into separate header
+  x86/idt: Move IDT to data segment
+  x86/idt: Split idt_data setup out of set_intr_gate()
+  x86/idt: Move two function from k/idt.c to i/a/desc.h
+  x86/head/64: Install boot GDT
+  x86/head/64: Reload GDT after switch to virtual addresses
+  x86/head/64: Load segment registers earlier
+  x86/head/64: Switch to initial stack earlier
+  x86/head/64: Build k/head64.c with -fno-stack-protector
+  x86/head/64: Load IDT earlier
+  x86/head/64: Move early exception dispatch to C code
+  x86/sev-es: Add SEV-ES Feature Detection
+  x86/sev-es: Print SEV-ES info into kernel log
+  x86/sev-es: Compile early handler code into kernel image
+  x86/sev-es: Setup early #VC handler
+  x86/sev-es: Setup GHCB based boot #VC handler
+  x86/sev-es: Allocate and Map IST stacks for #VC handler
+  x86/dumpstack/64: Handle #VC exception stacks
+  x86/sev-es: Shift #VC IST Stack in nmi_enter()/nmi_exit()
+  x86/sev-es: Wire up existing #VC exit-code handlers
+  x86/sev-es: Handle instruction fetches from user-space
+  x86/sev-es: Do not crash on #VC exceptions from user-space
+  x86/sev-es: Handle MMIO String Instructions
+  x86/sev-es: Handle #AC Events
+  x86/sev-es: Handle #DB Events
+  x86/paravirt: Allow hypervisor specific VMMCALL handling under SEV-ES
+  x86/realmode: Add SEV-ES specific trampoline entry point
+  x86/head/64: Setup TSS early for secondary CPUs
+  x86/head/64: Don't call verify_cpu() on starting APs
+  x86/head/64: Rename start_cpu0
+  x86/sev-es: Support CPU offline/online
+  x86/sev-es: Handle NMI State
+
+Mike Stunes (1):
+  x86/sev-es: Cache CPUID results for improved performance
+
+Tom Lendacky (19):
+  KVM: SVM: Add GHCB definitions
+  x86/cpufeatures: Add SEV-ES CPU feature
+  x86/sev-es: Add support for handling IOIO exceptions
+  x86/sev-es: Add CPUID handling to #VC handler
+  x86/sev-es: Setup per-cpu GHCBs for the runtime handler
+  x86/sev-es: Add Runtime #VC Exception Handler
+  x86/sev-es: Handle MMIO events
+  x86/sev-es: Handle MSR events
+  x86/sev-es: Handle DR7 read/write events
+  x86/sev-es: Handle WBINVD Events
+  x86/sev-es: Handle RDTSC(P) Events
+  x86/sev-es: Handle RDPMC Events
+  x86/sev-es: Handle INVD Events
+  x86/sev-es: Handle MONITOR/MONITORX Events
+  x86/sev-es: Handle MWAIT/MWAITX Events
+  x86/sev-es: Handle VMMCALL Events
+  x86/kvm: Add KVM specific VMMCALL handling under SEV-ES
+  x86/realmode: Setup AP jump table
+  x86/efi: Add GHCB mappings when SEV-ES is active
+
+ arch/x86/Kconfig                           |    1 +
+ arch/x86/boot/Makefile                     |    2 +-
+ arch/x86/boot/compressed/Makefile          |    9 +-
+ arch/x86/boot/compressed/head_64.S         |   40 +-
+ arch/x86/boot/compressed/ident_map_64.c    |  339 +++++
+ arch/x86/boot/compressed/idt_64.c          |   53 +
+ arch/x86/boot/compressed/idt_handlers_64.S |   76 ++
+ arch/x86/boot/compressed/kaslr.c           |   36 +-
+ arch/x86/boot/compressed/kaslr_64.c        |  153 ---
+ arch/x86/boot/compressed/misc.c            |    7 +
+ arch/x86/boot/compressed/misc.h            |   45 +-
+ arch/x86/boot/compressed/sev-es.c          |  210 +++
+ arch/x86/entry/entry_64.S                  |    4 +
+ arch/x86/include/asm/cpu.h                 |    2 +-
+ arch/x86/include/asm/cpu_entry_area.h      |   62 +
+ arch/x86/include/asm/cpufeatures.h         |    1 +
+ arch/x86/include/asm/desc.h                |   30 +
+ arch/x86/include/asm/desc_defs.h           |   10 +
+ arch/x86/include/asm/fpu/internal.h        |   29 +-
+ arch/x86/include/asm/fpu/xcr.h             |   32 +
+ arch/x86/include/asm/hardirq.h             |   14 +
+ arch/x86/include/asm/insn-eval.h           |    6 +
+ arch/x86/include/asm/mem_encrypt.h         |    5 +
+ arch/x86/include/asm/msr-index.h           |    3 +
+ arch/x86/include/asm/page_64_types.h       |    1 +
+ arch/x86/include/asm/pgtable.h             |    2 +-
+ arch/x86/include/asm/processor.h           |    1 +
+ arch/x86/include/asm/realmode.h            |    4 +
+ arch/x86/include/asm/segment.h             |    2 +-
+ arch/x86/include/asm/setup.h               |    1 -
+ arch/x86/include/asm/sev-es.h              |  107 ++
+ arch/x86/include/asm/stacktrace.h          |    4 +
+ arch/x86/include/asm/svm.h                 |  115 +-
+ arch/x86/include/asm/trap_defs.h           |   50 +
+ arch/x86/include/asm/traps.h               |   51 +-
+ arch/x86/include/asm/x86_init.h            |   16 +-
+ arch/x86/include/uapi/asm/svm.h            |   11 +
+ arch/x86/kernel/Makefile                   |    5 +
+ arch/x86/kernel/asm-offsets_64.c           |    1 +
+ arch/x86/kernel/cpu/amd.c                  |    3 +-
+ arch/x86/kernel/cpu/common.c               |    1 +
+ arch/x86/kernel/cpu/scattered.c            |    1 +
+ arch/x86/kernel/cpu/vmware.c               |   50 +-
+ arch/x86/kernel/dumpstack_64.c             |   47 +
+ arch/x86/kernel/head64.c                   |   70 +-
+ arch/x86/kernel/head_32.S                  |    4 +-
+ arch/x86/kernel/head_64.S                  |  176 ++-
+ arch/x86/kernel/idt.c                      |   52 +-
+ arch/x86/kernel/kvm.c                      |   35 +-
+ arch/x86/kernel/nmi.c                      |    8 +
+ arch/x86/kernel/sev-es-shared.c            |  479 +++++++
+ arch/x86/kernel/sev-es.c                   | 1428 ++++++++++++++++++++
+ arch/x86/kernel/smpboot.c                  |    4 +-
+ arch/x86/kernel/traps.c                    |    3 +
+ arch/x86/kernel/umip.c                     |   49 +-
+ arch/x86/lib/insn-eval.c                   |  130 ++
+ arch/x86/mm/extable.c                      |    1 +
+ arch/x86/mm/mem_encrypt.c                  |   39 +-
+ arch/x86/mm/mem_encrypt_identity.c         |    3 +
+ arch/x86/platform/efi/efi_64.c             |   10 +
+ arch/x86/realmode/init.c                   |   12 +
+ arch/x86/realmode/rm/header.S              |    3 +
+ arch/x86/realmode/rm/trampoline_64.S       |   20 +
+ arch/x86/tools/gen-insn-attr-x86.awk       |   50 +-
+ tools/arch/x86/tools/gen-insn-attr-x86.awk |   50 +-
+ 65 files changed, 3842 insertions(+), 426 deletions(-)
+ create mode 100644 arch/x86/boot/compressed/ident_map_64.c
+ create mode 100644 arch/x86/boot/compressed/idt_64.c
+ create mode 100644 arch/x86/boot/compressed/idt_handlers_64.S
+ delete mode 100644 arch/x86/boot/compressed/kaslr_64.c
+ create mode 100644 arch/x86/boot/compressed/sev-es.c
+ create mode 100644 arch/x86/include/asm/fpu/xcr.h
+ create mode 100644 arch/x86/include/asm/sev-es.h
+ create mode 100644 arch/x86/include/asm/trap_defs.h
+ create mode 100644 arch/x86/kernel/sev-es-shared.c
+ create mode 100644 arch/x86/kernel/sev-es.c
+
 -- 
-2.25.3
+2.17.1
 
 _______________________________________________
 Virtualization mailing list
