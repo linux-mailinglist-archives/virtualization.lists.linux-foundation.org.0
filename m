@@ -1,50 +1,51 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 795D61BC2A7
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:18:19 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95BF71BC2AC
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:18:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 289AD8761E;
-	Tue, 28 Apr 2020 15:18:18 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 33FAB882BB;
+	Tue, 28 Apr 2020 15:18:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id riSuKati-+4u; Tue, 28 Apr 2020 15:18:13 +0000 (UTC)
+	with ESMTP id yLg9EvXwfqdW; Tue, 28 Apr 2020 15:18:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E20AA87626;
-	Tue, 28 Apr 2020 15:18:01 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id F3FAF882D8;
+	Tue, 28 Apr 2020 15:18:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C7D02C0863;
-	Tue, 28 Apr 2020 15:18:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A5674C0172;
+	Tue, 28 Apr 2020 15:18:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5015EC0888
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DC128C0172
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:59 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 4940322851
+ by whitealder.osuosl.org (Postfix) with ESMTP id D0E39875D4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:59 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RgQgsdt0WDOe
+ with ESMTP id kQ5GRW+i82mZ
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:58 +0000 (UTC)
+ Tue, 28 Apr 2020 15:18:04 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 5EECD22854
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 0A970875DA
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:17:58 +0000 (UTC)
+ Tue, 28 Apr 2020 15:17:59 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id E238FE96; Tue, 28 Apr 2020 17:17:44 +0200 (CEST)
+ id 12BEAE9A; Tue, 28 Apr 2020 17:17:45 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 15/75] x86/boot/compressed/64: Add page-fault handler
-Date: Tue, 28 Apr 2020 17:16:25 +0200
-Message-Id: <20200428151725.31091-16-joro@8bytes.org>
+Subject: [PATCH v3 16/75] x86/boot/compressed/64: Always switch to own
+ page-table
+Date: Tue, 28 Apr 2020 17:16:26 +0200
+Message-Id: <20200428151725.31091-17-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
@@ -78,118 +79,138 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Install a page-fault handler to add an identity mapping to addresses
-not yet mapped. Also do some checking whether the error code is sane.
+When booted through startup_64 the kernel keeps running on the EFI
+page-table until the KASLR code sets up its own page-table. Without
+KASLR the pre-decompression boot code never switches off the EFI
+page-table. Change that by unconditionally switching to a kernel
+controlled page-table after relocation.
 
-This makes non SEV-ES machines use the exception handling
-infrastructure in the pre-decompressions boot code too, making it less
-likely to break in the future.
+This makes sure we can make changes to the mapping when necessary, for
+example map pages unencrypted in SEV and SEV-ES guests.
+
+Also remove the debug_putstr() calls in initialize_identity_maps()
+because the function now runs before console_init() is called.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/boot/compressed/ident_map_64.c    | 33 ++++++++++++++++++++++
- arch/x86/boot/compressed/idt_64.c          |  2 ++
- arch/x86/boot/compressed/idt_handlers_64.S |  2 ++
- arch/x86/boot/compressed/misc.h            |  6 ++++
- 4 files changed, 43 insertions(+)
+ arch/x86/boot/compressed/head_64.S      |  3 +-
+ arch/x86/boot/compressed/ident_map_64.c | 51 +++++++++++++++----------
+ arch/x86/boot/compressed/kaslr.c        |  3 --
+ 3 files changed, 32 insertions(+), 25 deletions(-)
 
+diff --git a/arch/x86/boot/compressed/head_64.S b/arch/x86/boot/compressed/head_64.S
+index 089b9e676498..af571127c9ba 100644
+--- a/arch/x86/boot/compressed/head_64.S
++++ b/arch/x86/boot/compressed/head_64.S
+@@ -534,10 +534,11 @@ SYM_FUNC_START_LOCAL_NOALIGN(.Lrelocated)
+ 	rep	stosq
+ 
+ /*
+- * Load stage2 IDT
++ * Load stage2 IDT and switch to our own page-table
+  */
+ 	pushq	%rsi
+ 	call	load_stage2_idt
++	call	initialize_identity_maps
+ 	popq	%rsi
+ 
+ /*
 diff --git a/arch/x86/boot/compressed/ident_map_64.c b/arch/x86/boot/compressed/ident_map_64.c
-index 3a2115582920..33bdf923cbab 100644
+index 33bdf923cbab..aa55e7b5cade 100644
 --- a/arch/x86/boot/compressed/ident_map_64.c
 +++ b/arch/x86/boot/compressed/ident_map_64.c
-@@ -19,11 +19,13 @@
- /* No PAGE_TABLE_ISOLATION support needed either: */
- #undef CONFIG_PAGE_TABLE_ISOLATION
+@@ -88,9 +88,31 @@ phys_addr_t physical_mask = (1ULL << __PHYSICAL_MASK_SHIFT) - 1;
+  */
+ static struct x86_mapping_info mapping_info;
  
-+#include "error.h"
- #include "misc.h"
- 
- /* These actually do the work of building the kernel identity maps. */
- #include <asm/init.h>
- #include <asm/pgtable.h>
-+#include <asm/trap_defs.h>
- /* Use the static base for this part of the boot process */
- #undef __PAGE_OFFSET
- #define __PAGE_OFFSET __PAGE_OFFSET_BASE
-@@ -163,3 +165,34 @@ void finalize_identity_maps(void)
- {
- 	write_cr3(top_level_pgt);
- }
-+
-+void do_boot_page_fault(struct pt_regs *regs, unsigned long error_code)
++/*
++ * Adds the specified range to what will become the new identity mappings.
++ * Once all ranges have been added, the new mapping is activated by calling
++ * finalize_identity_maps() below.
++ */
++void add_identity_map(unsigned long start, unsigned long size)
 +{
-+	unsigned long address = native_read_cr2();
++	unsigned long end = start + size;
 +
-+	/*
-+	 * Check for unexpected error codes. Unexpected are:
-+	 *	- Faults on present pages
-+	 *	- User faults
-+	 *	- Reserved bits set
-+	 */
-+	if (error_code & (X86_PF_PROT | X86_PF_USER | X86_PF_RSVD)) {
-+		/* Print some information for debugging */
-+		error_putstr("Unexpected page-fault:");
-+		error_putstr("\nError Code: ");
-+		error_puthex(error_code);
-+		error_putstr("\nCR2: 0x");
-+		error_puthex(address);
-+		error_putstr("\nRIP relative to _head: 0x");
-+		error_puthex(regs->ip - (unsigned long)_head);
-+		error_putstr("\n");
++	/* Align boundary to 2M. */
++	start = round_down(start, PMD_SIZE);
++	end = round_up(end, PMD_SIZE);
++	if (start >= end)
++		return;
 +
-+		error("Stopping.\n");
-+	}
-+
-+	/*
-+	 * Error code is sane - now identity map the 2M region around
-+	 * the faulting address.
-+	 */
-+	add_identity_map(address & PMD_MASK, PMD_SIZE);
++	/* Build the mapping. */
++	kernel_ident_mapping_init(&mapping_info, (pgd_t *)top_level_pgt,
++				  start, end);
 +}
-diff --git a/arch/x86/boot/compressed/idt_64.c b/arch/x86/boot/compressed/idt_64.c
-index 46ecea671b90..99cc78062684 100644
---- a/arch/x86/boot/compressed/idt_64.c
-+++ b/arch/x86/boot/compressed/idt_64.c
-@@ -39,5 +39,7 @@ void load_stage2_idt(void)
++
+ /* Locates and clears a region for a new top level page table. */
+ void initialize_identity_maps(void)
  {
- 	boot_idt_desc.address = (unsigned long)boot_idt;
- 
-+	set_idt_entry(X86_TRAP_PF, boot_page_fault);
++	unsigned long start, size;
 +
- 	load_boot_idt(&boot_idt_desc);
+ 	/* If running as an SEV guest, the encryption mask is required. */
+ 	set_sev_encryption_mask();
+ 
+@@ -123,37 +145,24 @@ void initialize_identity_maps(void)
+ 	 */
+ 	top_level_pgt = read_cr3_pa();
+ 	if (p4d_offset((pgd_t *)top_level_pgt, 0) == (p4d_t *)_pgtable) {
+-		debug_putstr("booted via startup_32()\n");
+ 		pgt_data.pgt_buf = _pgtable + BOOT_INIT_PGT_SIZE;
+ 		pgt_data.pgt_buf_size = BOOT_PGT_SIZE - BOOT_INIT_PGT_SIZE;
+ 		memset(pgt_data.pgt_buf, 0, pgt_data.pgt_buf_size);
+ 	} else {
+-		debug_putstr("booted via startup_64()\n");
+ 		pgt_data.pgt_buf = _pgtable;
+ 		pgt_data.pgt_buf_size = BOOT_PGT_SIZE;
+ 		memset(pgt_data.pgt_buf, 0, pgt_data.pgt_buf_size);
+ 		top_level_pgt = (unsigned long)alloc_pgt_page(&pgt_data);
+ 	}
+-}
+ 
+-/*
+- * Adds the specified range to what will become the new identity mappings.
+- * Once all ranges have been added, the new mapping is activated by calling
+- * finalize_identity_maps() below.
+- */
+-void add_identity_map(unsigned long start, unsigned long size)
+-{
+-	unsigned long end = start + size;
+-
+-	/* Align boundary to 2M. */
+-	start = round_down(start, PMD_SIZE);
+-	end = round_up(end, PMD_SIZE);
+-	if (start >= end)
+-		return;
+-
+-	/* Build the mapping. */
+-	kernel_ident_mapping_init(&mapping_info, (pgd_t *)top_level_pgt,
+-				  start, end);
++	/*
++	 * New page-table is set up - map the kernel image and load it
++	 * into cr3.
++	 */
++	start = (unsigned long)_head;
++	size  = _end - _head;
++	add_identity_map(start, size);
++	write_cr3(top_level_pgt);
  }
-diff --git a/arch/x86/boot/compressed/idt_handlers_64.S b/arch/x86/boot/compressed/idt_handlers_64.S
-index f86ea872d860..eda50cbdafa0 100644
---- a/arch/x86/boot/compressed/idt_handlers_64.S
-+++ b/arch/x86/boot/compressed/idt_handlers_64.S
-@@ -67,3 +67,5 @@ SYM_FUNC_END(\name)
  
- 	.text
- 	.code64
-+
-+EXCEPTION_HANDLER	boot_page_fault do_boot_page_fault error_code=1
-diff --git a/arch/x86/boot/compressed/misc.h b/arch/x86/boot/compressed/misc.h
-index 3a030a878d53..345c90fbc500 100644
---- a/arch/x86/boot/compressed/misc.h
-+++ b/arch/x86/boot/compressed/misc.h
-@@ -37,6 +37,9 @@
- #define memptr unsigned
- #endif
+ /*
+diff --git a/arch/x86/boot/compressed/kaslr.c b/arch/x86/boot/compressed/kaslr.c
+index 7c61a8c5b9cf..856dc1c9bb0d 100644
+--- a/arch/x86/boot/compressed/kaslr.c
++++ b/arch/x86/boot/compressed/kaslr.c
+@@ -903,9 +903,6 @@ void choose_random_location(unsigned long input,
  
-+/* boot/compressed/vmlinux start and end markers */
-+extern char _head[], _end[];
-+
- /* misc.c */
- extern memptr free_mem_ptr;
- extern memptr free_mem_end_ptr;
-@@ -146,4 +149,7 @@ extern pteval_t __default_kernel_pte_mask;
- extern gate_desc boot_idt[BOOT_IDT_ENTRIES];
- extern struct desc_ptr boot_idt_desc;
+ 	boot_params->hdr.loadflags |= KASLR_FLAG;
  
-+/* IDT Entry Points */
-+void boot_page_fault(void);
-+
- #endif /* BOOT_COMPRESSED_MISC_H */
+-	/* Prepare to add new identity pagetables on demand. */
+-	initialize_identity_maps();
+-
+ 	/* Record the various known unsafe memory ranges. */
+ 	mem_avoid_init(input, input_size, *output);
+ 
 -- 
 2.17.1
 
