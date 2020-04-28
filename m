@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 328A01BC38C
-	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:27:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 259E11BC395
+	for <lists.virtualization@lfdr.de>; Tue, 28 Apr 2020 17:27:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 710D9228CA;
-	Tue, 28 Apr 2020 15:27:00 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id AC75A2287D;
+	Tue, 28 Apr 2020 15:27:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zO6Pd-5Yd-Hm; Tue, 28 Apr 2020 15:26:55 +0000 (UTC)
+	with ESMTP id DKQw4SylRh8H; Tue, 28 Apr 2020 15:27:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id BFC5F2286C;
-	Tue, 28 Apr 2020 15:26:46 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7E56622EC1;
+	Tue, 28 Apr 2020 15:26:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A3642C0172;
-	Tue, 28 Apr 2020 15:26:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 53C96C0172;
+	Tue, 28 Apr 2020 15:26:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 50158C0172
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AD015C0888
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:41 +0000 (UTC)
+ Tue, 28 Apr 2020 15:26:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 37B6988287
+ by whitealder.osuosl.org (Postfix) with ESMTP id 9B6AB87527
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Apr 2020 15:26:43 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8-dMtZeHVmvm
  for <virtualization@lists.linux-foundation.org>;
  Tue, 28 Apr 2020 15:26:41 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Zdd1PhBYxUw9
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 87FB488192
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 2EE8687614
  for <virtualization@lists.linux-foundation.org>;
  Tue, 28 Apr 2020 15:26:40 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 0A386F4C; Tue, 28 Apr 2020 17:17:55 +0200 (CEST)
+ id 3F236F4E; Tue, 28 Apr 2020 17:17:56 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 71/75] x86/head/64: Don't call verify_cpu() on starting APs
-Date: Tue, 28 Apr 2020 17:17:21 +0200
-Message-Id: <20200428151725.31091-72-joro@8bytes.org>
+Subject: [PATCH v3 72/75] x86/head/64: Rename start_cpu0
+Date: Tue, 28 Apr 2020 17:17:22 +0200
+Message-Id: <20200428151725.31091-73-joro@8bytes.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428151725.31091-1-joro@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
@@ -78,57 +78,94 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-The APs are not ready to handle exceptions when verify_cpu() is called
-in secondary_startup_64.
+For SEV-ES this entry point will be used for restarting APs after they
+have been offlined. Remove the '0' from the name to reflect that.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/realmode.h | 1 +
- arch/x86/kernel/head_64.S       | 1 +
- arch/x86/realmode/init.c        | 6 ++++++
- 3 files changed, 8 insertions(+)
+ arch/x86/include/asm/cpu.h | 2 +-
+ arch/x86/kernel/head_32.S  | 4 ++--
+ arch/x86/kernel/head_64.S  | 6 +++---
+ arch/x86/kernel/smpboot.c  | 4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/arch/x86/include/asm/realmode.h b/arch/x86/include/asm/realmode.h
-index 6590394af309..5c97807c38a4 100644
---- a/arch/x86/include/asm/realmode.h
-+++ b/arch/x86/include/asm/realmode.h
-@@ -69,6 +69,7 @@ extern unsigned char startup_32_smp[];
- extern unsigned char boot_gdt[];
- #else
- extern unsigned char secondary_startup_64[];
-+extern unsigned char secondary_startup_64_no_verify[];
+diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
+index dd17c2da1af5..427ae362bbdd 100644
+--- a/arch/x86/include/asm/cpu.h
++++ b/arch/x86/include/asm/cpu.h
+@@ -29,7 +29,7 @@ struct x86_cpu {
+ #ifdef CONFIG_HOTPLUG_CPU
+ extern int arch_register_cpu(int num);
+ extern void arch_unregister_cpu(int);
+-extern void start_cpu0(void);
++extern void start_cpu(void);
+ #ifdef CONFIG_DEBUG_HOTPLUG_CPU0
+ extern int _debug_hotplug_cpu(int cpu, int action);
+ #endif
+diff --git a/arch/x86/kernel/head_32.S b/arch/x86/kernel/head_32.S
+index f66a6b90f954..aad62c677486 100644
+--- a/arch/x86/kernel/head_32.S
++++ b/arch/x86/kernel/head_32.S
+@@ -174,12 +174,12 @@ SYM_CODE_END(startup_32)
+  * up already except stack. We just set up stack here. Then call
+  * start_secondary().
+  */
+-SYM_FUNC_START(start_cpu0)
++SYM_FUNC_START(start_cpu)
+ 	movl initial_stack, %ecx
+ 	movl %ecx, %esp
+ 	call *(initial_code)
+ 1:	jmp 1b
+-SYM_FUNC_END(start_cpu0)
++SYM_FUNC_END(start_cpu)
  #endif
  
- static inline size_t real_mode_size_needed(void)
+ /*
 diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index 7f2d5e14db73..72b8f0834de1 100644
+index 72b8f0834de1..4502f5d3b9b1 100644
 --- a/arch/x86/kernel/head_64.S
 +++ b/arch/x86/kernel/head_64.S
-@@ -150,6 +150,7 @@ SYM_CODE_START(secondary_startup_64)
- 	/* Sanitize CPU configuration */
- 	call verify_cpu
+@@ -302,15 +302,15 @@ SYM_CODE_END(secondary_startup_64)
  
-+SYM_INNER_LABEL(secondary_startup_64_no_verify, SYM_L_GLOBAL)
- 	/*
- 	 * Retrieve the modifier (SME encryption mask if SME is active) to be
- 	 * added to the initial pgdir entry that will be programmed into CR3.
-diff --git a/arch/x86/realmode/init.c b/arch/x86/realmode/init.c
-index 1c5cbfd102d5..030c38268069 100644
---- a/arch/x86/realmode/init.c
-+++ b/arch/x86/realmode/init.c
-@@ -109,6 +109,12 @@ static void __init setup_real_mode(void)
- 		trampoline_header->flags |= TH_FLAGS_SME_ACTIVE;
+ #ifdef CONFIG_HOTPLUG_CPU
+ /*
+- * Boot CPU0 entry point. It's called from play_dead(). Everything has been set
++ * CPU entry point. It's called from play_dead(). Everything has been set
+  * up already except stack. We just set up stack here. Then call
+  * start_secondary() via .Ljump_to_C_code.
+  */
+-SYM_CODE_START(start_cpu0)
++SYM_CODE_START(start_cpu)
+ 	UNWIND_HINT_EMPTY
+ 	movq	initial_stack(%rip), %rsp
+ 	jmp	.Ljump_to_C_code
+-SYM_CODE_END(start_cpu0)
++SYM_CODE_END(start_cpu)
+ #endif
  
- 	if (sev_es_active()) {
-+		/*
-+		 * Skip the call to verify_cpu() in secondary_startup_64 as it
-+		 * will cause #VC exceptions when the AP can't handle them yet.
-+		 */
-+		trampoline_header->start = (u64) secondary_startup_64_no_verify;
-+
- 		if (sev_es_setup_ap_jump_table(real_mode_header))
- 			panic("Failed to update SEV-ES AP Jump Table");
+ 	/* Both SMP bootup and ACPI suspend change these variables */
+diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
+index 8c89e4d9ad28..f57685d81bb6 100644
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -1721,7 +1721,7 @@ static inline void mwait_play_dead(void)
+ 		 * If NMI wants to wake up CPU0, start CPU0.
+ 		 */
+ 		if (wakeup_cpu0())
+-			start_cpu0();
++			start_cpu();
  	}
+ }
+ 
+@@ -1736,7 +1736,7 @@ void hlt_play_dead(void)
+ 		 * If NMI wants to wake up CPU0, start CPU0.
+ 		 */
+ 		if (wakeup_cpu0())
+-			start_cpu0();
++			start_cpu();
+ 	}
+ }
+ 
 -- 
 2.17.1
 
