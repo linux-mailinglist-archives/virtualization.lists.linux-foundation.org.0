@@ -2,97 +2,97 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9BF61BE2D2
-	for <lists.virtualization@lfdr.de>; Wed, 29 Apr 2020 17:34:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D41A1BE357
+	for <lists.virtualization@lfdr.de>; Wed, 29 Apr 2020 18:08:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4F57686AC9;
-	Wed, 29 Apr 2020 15:34:06 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E511980EB9;
+	Wed, 29 Apr 2020 16:08:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 69IAeU6jq5yG; Wed, 29 Apr 2020 15:34:04 +0000 (UTC)
+	with ESMTP id BViRyU3cUgDN; Wed, 29 Apr 2020 16:08:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 764E585413;
-	Wed, 29 Apr 2020 15:34:04 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id DA58286A6F;
+	Wed, 29 Apr 2020 16:08:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5AEE6C0172;
-	Wed, 29 Apr 2020 15:34:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AD533C0172;
+	Wed, 29 Apr 2020 16:08:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C4AB6C0172
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4AFEBC0172
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 15:34:02 +0000 (UTC)
+ Wed, 29 Apr 2020 16:08:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id AD13D85361
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3860984973
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 15:34:02 +0000 (UTC)
+ Wed, 29 Apr 2020 16:08:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Og3YGQhrE6Si
+ with ESMTP id 1I77cwEYl8qn
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 15:34:00 +0000 (UTC)
+ Wed, 29 Apr 2020 16:08:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id A09F184B60
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 82AC3847BE
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 15:34:00 +0000 (UTC)
+ Wed, 29 Apr 2020 16:08:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588174439;
+ s=mimecast20190719; t=1588176513;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=KKID24VeS04+SIozIuc8RuLZZFKJ5rduUKOoVcekO0A=;
- b=DTfHQiWKRtAyE2lEbFaH9KNJI8+pp0mk3IxAYfEd4GBccOey0ttX3dmGPX8qovLK4F6thr
- WInLciA3zAPOq0PVyoiRsS4wSkuw1uy1r+EMOhupevSmJRJ3vXhWFPr6y6/UbXAymtzI+m
- O7Koyy2uRhx4BSrpunK6FkRn+Ryng9U=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-281-WyoI0qSiPEO3Izhquaiuqw-1; Wed, 29 Apr 2020 11:33:57 -0400
-X-MC-Unique: WyoI0qSiPEO3Izhquaiuqw-1
-Received: by mail-wm1-f72.google.com with SMTP id t62so1384395wma.0
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 08:33:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=KKID24VeS04+SIozIuc8RuLZZFKJ5rduUKOoVcekO0A=;
- b=Ch7Z4pJmU4OC0VH290LqQg3MNSbdP3lgjESRYP6xQFBD+vQbuKelNgrmpqSwbhETFF
- 8F5hSZRof1AE9rYrIPvVuO5a5FNH0Uw5/thmliDodcqpXeMfjG38c9jFrmvWZ7/vTxBF
- WBI5ZJNtVT7R40FyFQ/4rdMLo+EF6UpM/V0SlsdKsGiyme2UOjwN7lFILdfdrmyyR+h3
- zEMozEvZxz/nmg4zR4uDVLy0RB3M4pgMYsvo/l2W28mDDmjLnyvLu3bwHWymLK2lNxId
- oyFNrc0qohrHmPjt0Om6uqoXY3vLF1Ifushr+h9cg0vvKu/++tUolgX0EoGtL9d+eMzl
- W3JQ==
-X-Gm-Message-State: AGi0PuZSka2gWwlvYruncCisPlNx6gX6Mbx501zCzb+TNKP2XKx1KKyB
- 0CseNo/aoxltEvJF6B4+2ccWm4X/5qPjtTX16xNEEP4sbFmWM2vlaFlhRhYdrwMzqCCVIJZBoIg
- AUo2N6miz8ajU0AHCUzfHYoQMZZRMaqIIlVgGetuy8A==
-X-Received: by 2002:adf:fecd:: with SMTP id q13mr42286153wrs.12.1588174435306; 
- Wed, 29 Apr 2020 08:33:55 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJv7rM5XZdPpYa0XbuMbltzbpsnlCYEladdinC4riKF/z7q+xHJZ0Lq2AB1h1HtNI76PDhJ5w==
-X-Received: by 2002:adf:fecd:: with SMTP id q13mr42286134wrs.12.1588174435068; 
- Wed, 29 Apr 2020 08:33:55 -0700 (PDT)
-Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
- by smtp.gmail.com with ESMTPSA id
- u7sm8832675wmg.41.2020.04.29.08.33.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2020 08:33:54 -0700 (PDT)
-Date: Wed, 29 Apr 2020 11:33:51 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Arnd Bergmann <arnd@arndb.de>
-Subject: Re: [PATCH] vhost: fix default for vhost_iotlb
-Message-ID: <20200429113232-mutt-send-email-mst@kernel.org>
-References: <20200429142317.1847441-1-arnd@arndb.de>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=RqcnavPFirGVOTXHhjY5q5DM9FLFgis6bxz7RvWdVJE=;
+ b=QZPrrd8zNNebgZXnzhIAYA2aP84wbXzXTC4SfYYO6rv5ju2/aeWwsXYRoUwkzVKNDRurdJ
+ YxExOEc0hr+rJQkkFgPUr+ph31cSB3GXU2c+/TgswYJtJaAdE4hLZ9KBhaCdgY7s0ei/vk
+ ZW/gaMqEpwiuaxXcYVMdRLbEU5DvYnE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-480-F36vCcGRMVu93iH7TXheIg-1; Wed, 29 Apr 2020 12:08:26 -0400
+X-MC-Unique: F36vCcGRMVu93iH7TXheIg-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E4E0C1895A28;
+ Wed, 29 Apr 2020 16:08:21 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-114-55.ams2.redhat.com [10.36.114.55])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BAF7C605FB;
+ Wed, 29 Apr 2020 16:08:07 +0000 (UTC)
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v1 0/3] mm/memory_hotplug: Make virtio-mem play nicely with
+ kexec-tools
+Date: Wed, 29 Apr 2020 18:08:00 +0200
+Message-Id: <20200429160803.109056-1-david@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200429142317.1847441-1-arnd@arndb.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Tiwei Bie <tiwei.bie@intel.com>, kvm@vger.kernel.org,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Cc: linux-hyperv@vger.kernel.org, Michal Hocko <mhocko@suse.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Heiko Carstens <heiko.carstens@de.ibm.com>, Pingfan Liu <kernelfans@gmail.com>,
+ virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ Paul Mackerras <paulus@samba.org>, Dan Williams <dan.j.williams@intel.com>,
+ virtio-dev@lists.oasis-open.org, Wei Liu <wei.liu@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Dave Jiang <dave.jiang@intel.com>,
+ Baoquan He <bhe@redhat.com>, linux-nvdimm@lists.01.org,
+ Michael Ellerman <mpe@ellerman.id.au>, linux-acpi@vger.kernel.org,
+ Wei Yang <richard.weiyang@gmail.com>, xen-devel@lists.xenproject.org,
+ Len Brown <lenb@kernel.org>, Nathan Lynch <nathanl@linux.ibm.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>, Vasily Gorbik <gor@linux.ibm.com>,
+ linux-s390@vger.kernel.org, Haiyang Zhang <haiyangz@microsoft.com>,
+ Leonardo Bras <leobras.c@gmail.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Michal Hocko <mhocko@kernel.org>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, Thomas Gleixner <tglx@linutronix.de>,
+ Eric Biederman <ebiederm@xmission.com>,
+ Vishal Verma <vishal.l.verma@intel.com>,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,52 +109,77 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Apr 29, 2020 at 04:23:04PM +0200, Arnd Bergmann wrote:
-> During randconfig build testing, I ran into a configuration that has
-> CONFIG_VHOST=m, CONFIG_VHOST_IOTLB=m and CONFIG_VHOST_RING=y, which
-> makes the iotlb implementation left out from vhost_ring, and in turn
-> leads to a link failure of the vdpa_sim module:
-> 
-> ERROR: modpost: "vringh_set_iotlb" [drivers/vdpa/vdpa_sim/vdpa_sim.ko] undefined!
-> ERROR: modpost: "vringh_init_iotlb" [drivers/vdpa/vdpa_sim/vdpa_sim.ko] undefined!
-> ERROR: modpost: "vringh_iov_push_iotlb" [drivers/vdpa/vdpa_sim/vdpa_sim.ko] undefined!
-> ERROR: modpost: "vringh_iov_pull_iotlb" [drivers/vdpa/vdpa_sim/vdpa_sim.ko] undefined!
-> ERROR: modpost: "vringh_complete_iotlb" [drivers/vdpa/vdpa_sim/vdpa_sim.ko] undefined!
-> ERROR: modpost: "vringh_getdesc_iotlb" [drivers/vdpa/vdpa_sim/vdpa_sim.ko] undefined!
-> 
-> Work around it by setting the default for VHOST_IOTLB to avoid this
-> configuration.
-> 
-> Fixes: e6faeaa12841 ("vhost: drop vring dependency on iotlb")
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-> ---
-> I fixed this a while ago locally but never got around to sending the
-> fix. If the problem has been addressed differently in the meantime,
-> please ignore this one.
+This series is based on [1]:
+	[PATCH v2 00/10] virtio-mem: paravirtualized memory
+That will hopefull get picked up soon, rebased to -next.
+
+The following patches were reverted from -next [2]:
+	[PATCH 0/3] kexec/memory_hotplug: Prevent removal and accidental use
+As discussed in that thread, they should be reverted from -next already.
+
+In theory, if people agree, we could take the first two patches via the
+-mm tree now and the last (virtio-mem) patch via MST's tree once picking up
+virtio-mem. No strong feelings.
 
 
-So I ended up not sending e6faeaa12841 upstream because of this problem.
-But hey, that's a nice idea!
-I'll queue something like this for the next release.
+Memory added by virtio-mem is special and might contain logical holes,
+especially after memory unplug, but also when adding memory in
+sub-section size. While memory in these holes can usually be read, that
+memory should not be touched. virtio-mem managed device memory is never
+exposed via any firmware memmap (esp., e820). The device driver will
+request to plug memory from the hypervisor and add it to Linux.
 
-> ---
->  drivers/vhost/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/vhost/Kconfig b/drivers/vhost/Kconfig
-> index 2c75d164b827..ee5f85761024 100644
-> --- a/drivers/vhost/Kconfig
-> +++ b/drivers/vhost/Kconfig
-> @@ -1,6 +1,7 @@
->  # SPDX-License-Identifier: GPL-2.0-only
->  config VHOST_IOTLB
->  	tristate
-> +	default y if VHOST=m && VHOST_RING=y
->  	help
->  	  Generic IOTLB implementation for vhost and vringh.
->  	  This option is selected by any driver which needs to support
-> -- 
-> 2.26.0
+On a cold start, all memory is unplugged, and the guest driver will first
+request to plug memory from the hypervisor, to then add it to Linux. After
+a reboot, all memory will get unplugged (except in rare, special cases). In
+case the device driver comes up and detects that some memory is still
+plugged after a reboot, it will manually request to unplug all memory from
+the hypervisor first - to then request to plug memory from the hypervisor
+and add to Linux. This is essentially a defragmentation step, where all
+logical holes are removed.
+
+As the device driver is responsible for detecting, adding and managing that
+memory, also kexec should treat it like that. It is special. We need a way
+to teach kexec-tools to not add that memory to the fixed-up firmware
+memmap, to not place kexec images onto this memory, but still allow kdump
+to dump it. Add a flag to tell memory hotplug code to
+not create /sys/firmware/memmap entries and to indicate it via
+"System RAM (driver managed)" in /proc/iomem.
+
+Before this series, kexec_file_load() already did the right thing (for
+virtio-mem) by not adding that memory to the fixed-up firmware memmap and
+letting the device driver handle it. With this series, also kexec_load() -
+which relies on user space to provide a fixed up firmware memmap - does
+the right thing with virtio-mem memory.
+
+When the virtio-mem device driver(s) come up, they will request to unplug
+all memory from the hypervisor first (esp. defragment), to then request to
+plug consecutive memory ranges from the hypervisor, and add them to Linux
+- just like on a reboot where we still have memory plugged.
+
+[1] https://lore.kernel.org/r/20200311171422.10484-1-david@redhat.com/
+[2] https://lore.kernel.org/r/20200326180730.4754-1-james.morse@arm.com
+
+David Hildenbrand (3):
+  mm/memory_hotplug: Prepare passing flags to add_memory() and friends
+  mm/memory_hotplug: Introduce MHP_DRIVER_MANAGED
+  virtio-mem: Add memory with MHP_DRIVER_MANAGED
+
+ arch/powerpc/platforms/powernv/memtrace.c     |  2 +-
+ .../platforms/pseries/hotplug-memory.c        |  2 +-
+ drivers/acpi/acpi_memhotplug.c                |  2 +-
+ drivers/base/memory.c                         |  2 +-
+ drivers/dax/kmem.c                            |  2 +-
+ drivers/hv/hv_balloon.c                       |  2 +-
+ drivers/s390/char/sclp_cmd.c                  |  2 +-
+ drivers/virtio/virtio_mem.c                   |  3 +-
+ drivers/xen/balloon.c                         |  2 +-
+ include/linux/memory_hotplug.h                | 15 +++++++--
+ mm/memory_hotplug.c                           | 31 +++++++++++++------
+ 11 files changed, 44 insertions(+), 21 deletions(-)
+
+-- 
+2.25.3
 
 _______________________________________________
 Virtualization mailing list
