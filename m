@@ -1,109 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 226751BD8CB
-	for <lists.virtualization@lfdr.de>; Wed, 29 Apr 2020 11:52:19 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A7CC48695E;
-	Wed, 29 Apr 2020 09:52:17 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UMyT9LqjWROs; Wed, 29 Apr 2020 09:52:16 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 93FEC86933;
-	Wed, 29 Apr 2020 09:52:16 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6217AC0172;
-	Wed, 29 Apr 2020 09:52:16 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CDB36C0172
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 09:52:14 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D4431BD8DE
+	for <lists.virtualization@lfdr.de>; Wed, 29 Apr 2020 11:57:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id BD41120406
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 09:52:14 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7CDE722FD5;
+	Wed, 29 Apr 2020 09:57:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HZ69s9HPKloS; Wed, 29 Apr 2020 09:57:10 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 99CEA2302C;
+	Wed, 29 Apr 2020 09:57:08 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6A9FAC0172;
+	Wed, 29 Apr 2020 09:57:08 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 964F0C0172
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 29 Apr 2020 09:57:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 67DBB88180
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 29 Apr 2020 09:57:06 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9JKrVZXMwken
+ with ESMTP id taAlffBEHVMK
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 09:52:14 +0000 (UTC)
+ Wed, 29 Apr 2020 09:57:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id F094E22E89
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 30BBC81AD1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 09:52:13 +0000 (UTC)
+ Wed, 29 Apr 2020 09:57:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588153932;
+ s=mimecast20190719; t=1588154223;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7IZWphU6PtHquCqE0i6um38oK8paShAt54dfHnz8KmQ=;
- b=CsO97eGEro2k/1INTTfYCmqXYsEZCa94o+Uc9h222lwfBC2Qp9/eY2eRzR4EPG0SNO4Kh9
- oF/CCAbvdItLITpSscG5xrVmYYWhZTHVzcBp4YHreXkbBLDgqCaEh0AUpjgLwpsZnH++Tj
- pyoUGCesv002+pJ+R9jnE26+3AGKFqY=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-155-cnD3riVoOUGgFF3pU6qKFQ-1; Wed, 29 Apr 2020 05:52:11 -0400
-X-MC-Unique: cnD3riVoOUGgFF3pU6qKFQ-1
-Received: by mail-wm1-f70.google.com with SMTP id h22so992103wml.1
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Apr 2020 02:52:10 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=7IZWphU6PtHquCqE0i6um38oK8paShAt54dfHnz8KmQ=;
- b=PrjhSK1ga6vCyzB0Xd7TnEg7fdNgmFbkf8faFm7L2SPSmSv0b9VXmlFRZ+k2mxYq5b
- +ZDvHB9x3qqt0QQxSrmMJMr6vnwNhLyt26kXTJRkdFdGWhBdzetW1h9CoPGtInjPk5YI
- x4mcIJpFY/5Z1wM6eQhctjviBCsGSjXDUkVek6u4dSP89IM0t6kKhRmg6qTqz5Zgk7Z7
- KHK01UjSx/BjEsqN+4plA6JJE4w0+97kOxIDIZNvYpfpyweHDjDCDe1sbaajdmk3Y8U/
- AW5R6Bk+c3V+kRVTq5kJleZlJNwG0/oafJ/ZZnjP7tCdPZGq0aDwkvd20Z9NqwvaEtBN
- ORlw==
-X-Gm-Message-State: AGi0PuYEjWsbLwThoYAydZISSxCuS7+XWVngpxcfBs8zR1EbkdHAsvnD
- qd0NJ9xEkt3i11UH8ZedMFwqLRn5XalgstGvzjKL19MDEfz5Rlt0+XnAdOTR5d5oTBns5pNQNjg
- Xyc2rv8i9urrjOUEo0O0f9BzhUo466wiw1+YWn9TTaw==
-X-Received: by 2002:a5d:6851:: with SMTP id o17mr37134248wrw.267.1588153929730; 
- Wed, 29 Apr 2020 02:52:09 -0700 (PDT)
-X-Google-Smtp-Source: APiQypKRdM34lQ/3OGcwItQoxnplrvwZwErBKY2jH3AvTLAgP599BhH8xTgBBhPvAXTcnaVguo7aJg==
-X-Received: by 2002:a5d:6851:: with SMTP id o17mr37134206wrw.267.1588153929489; 
- Wed, 29 Apr 2020 02:52:09 -0700 (PDT)
-Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
- by smtp.gmail.com with ESMTPSA id
- s24sm7232898wmj.28.2020.04.29.02.52.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2020 02:52:08 -0700 (PDT)
-Date: Wed, 29 Apr 2020 05:52:05 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Srivatsa Vaddagiri <vatsa@codeaurora.org>
-Subject: Re: [PATCH 5/5] virtio: Add bounce DMA ops
-Message-ID: <20200429055125-mutt-send-email-mst@kernel.org>
-References: <1588073958-1793-1-git-send-email-vatsa@codeaurora.org>
- <1588073958-1793-6-git-send-email-vatsa@codeaurora.org>
- <20200428121232-mutt-send-email-mst@kernel.org>
- <20200428174952.GA5097@quicinc.com>
- <20200428163448-mutt-send-email-mst@kernel.org>
- <275eba4b-dd35-aa95-b2e3-9c5cbf7c6d71@linux.intel.com>
- <20200429004531-mutt-send-email-mst@kernel.org>
- <b676430c-65b3-096e-ca48-ceebf10f4b28@linux.intel.com>
- <20200429023842-mutt-send-email-mst@kernel.org>
- <20200429094410.GD5097@quicinc.com>
+ bh=R2AKHlh6SiVDuPjrCtmpcayjgfOKgmfzlgzuptbydd0=;
+ b=OvQyR8Lw4UwzLSPACllDBM6ZvTTNzNFNo0RK4xiAzTtNxRRxkHduIucjyKzfuto8PTvoH8
+ qYNro/pdFiNFivsqyoc3lDo2T4Gatu02Diieo0txZdlMfGXgTiknkzhG3sVkKeyh2fPGzb
+ EgUa2CfC4ip4v7gQL124vktHm1bXNMY=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-203-rIia7EAdOsmJBNbOFlwYEA-1; Wed, 29 Apr 2020 05:56:58 -0400
+X-MC-Unique: rIia7EAdOsmJBNbOFlwYEA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D033880B714;
+ Wed, 29 Apr 2020 09:56:57 +0000 (UTC)
+Received: from [10.72.13.2] (ovpn-13-2.pek2.redhat.com [10.72.13.2])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3AC5260C84;
+ Wed, 29 Apr 2020 09:56:49 +0000 (UTC)
+Subject: Re: [PATCH 0/1] Add uvirtio for testing
+To: Lepton Wu <ytht.net@gmail.com>, virtualization@lists.linux-foundation.org
+References: <20200428204729.64569-1-ytht.net@gmail.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <b01454e9-bca8-cf32-7cfa-ebe25032e040@redhat.com>
+Date: Wed, 29 Apr 2020 17:56:47 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200429094410.GD5097@quicinc.com>
+In-Reply-To: <20200428204729.64569-1-ytht.net@gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: tsoni@codeaurora.org, virtio-dev@lists.oasis-open.org, will@kernel.org,
- konrad.wilk@oracle.com, jan.kiszka@siemens.com, christoffer.dall@arm.com,
- pratikp@codeaurora.org, virtualization@lists.linux-foundation.org,
- iommu@lists.linux-foundation.org, stefano.stabellini@xilinx.com,
- linux-kernel@vger.kernel.org, Lu Baolu <baolu.lu@linux.intel.com>
+Cc: mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -115,34 +88,46 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Apr 29, 2020 at 03:14:10PM +0530, Srivatsa Vaddagiri wrote:
-> * Michael S. Tsirkin <mst@redhat.com> [2020-04-29 02:50:41]:
-> 
-> > So it seems that with modern Linux, all one needs
-> > to do on x86 is mark the device as untrusted.
-> > It's already possible to do this with ACPI and with OF - would that be
-> > sufficient for achieving what this patchset is trying to do?
-> 
-> In my case, its not sufficient to just mark virtio device untrusted and thus
-> activate the use of swiotlb. All of the secondary VM memory, including those
-> allocate by swiotlb driver, is private to it.
-
-So why not make the bounce buffer memory shared then?
-
-> An additional piece of memory is
-> available to secondary VM which is shared between VMs and which is where I need
-> swiotlb driver to do its work.
-> 
-> -- 
-> QUALCOMM INDIA, on behalf of Qualcomm Innovation Center, Inc. is a member
-> of Code Aurora Forum, hosted by The Linux Foundation
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNC8yOSDkuIrljYg0OjQ3LCBMZXB0b24gV3Ugd3JvdGU6Cj4gVGhpcyBpcyBhIHdh
+eSB0byBjcmVhdGUgdmlydGlvIGJhc2VkIGRldmljZXMgZnJvbSB1c2VyIHNwYWNlLiBUaGlzIGlz
+IHRoZQo+IGJhY2tncm91bmQgZm9yIHRoaXMgcGF0Y2g6Cj4KPiBXZSBoYXZlIHNvbWUgaW1hZ2Vz
+IHdvcmtzIGZpbmUgdW5kZXIgcWVtdSwgd2UnZCBsaWtlIHRvIGFsc28gcnVuIHRoZSBzYW1lIGlt
+YWdlCj4gb24gR29vZ2xlIENsb3VkLiBDdXJyZW50bHkgR29vZ2xlIENsb3VkIGRvZXNuJ3Qgc3Vw
+cG9ydCB2aXJ0aW8tdmdhLiBJIGhhZCBhCj4gcGF0Y2ggdG8gY3JlYXRlIGEgdmlydGlvLXZnYSBm
+cm9tIGtlcm5lbCBkaXJlY3RseToKPiBodHRwczovL3d3dy5zcGluaWNzLm5ldC9saXN0cy9kcmkt
+ZGV2ZWwvbXNnMjQ4NTczLmh0bWwKPgo+IFRoZW4gSSBnb3QgZmVlZGJhY2sgZnJvbSBHZXJkIHRo
+YXQgbWF5YmUgaXQncyBiZXR0ZXIgdG8gY2hhbmdlIHRoYXQgdG8gc29tZXRoaW5nCj4gbGlrZSB1
+dmlydGlvLiBTaW5jZSBJIHJlYWxseSBkb24ndCBoYXZlIG90aGVyIHVzZSBjYXNlcyBmb3Igbm93
+LCBJIGp1c3QgaW1wbGVtZW50ZWQgdGhlIG1pbmltYWwgc3R1ZmYgd2hpY2ggd29yayBmb3IgbXkg
+dXNlIGNhc2UuCgoKSW50ZXJlc3RpbmcsIHNldmVyYWwgcXVlc3Rpb25zOgoKMSkgQXJlIHlvdSBh
+d2FyZSBvZiB2aXJ0aW8gdmhvc3QtdXNlciBkcml2ZXIgZG9uZSBieSBVTSBndXlzPyAKKGFyY2gv
+dW0vZHJpdmVycy92aXJ0aW9fdW1sLmMpIFRoZSBtZW1vcnkgcGFydCBpcyB0cmlja3kgYnV0IG92
+ZXJhbGwgCmJvdGggb2YgeW91IGhhdmUgc2ltaWxhciB0YXJnZXQuCjIpIFBhdGNoIDEgc2FpZCBp
+dCdzIHVzZXJzcGFjZSB2aXJ0aW8gZHJpdmVyLCB3aGljaCBJIHRoaW5rIGl0IGlzIAphY3R1YWxs
+eSAidXNlcnNwYWNlIHZpcnRpbyBkZXZpY2UiCjMpIE5lZWQgdG8gYmUgdmVyYm9zZSBvbiBob3cg
+dGhlIHZyaW5nIHByb2Nlc3Npbmcgd29yayBpbiB0aGUgY29tbWl0IGxvZyAKb2YgcGF0Y2ggMQo0
+KSBJJ20gY3VyaW91cyB3aGljaCB0ZXN0aW5nIHlvdSB3YW50IHRvIGFjY29tcGxpc2ggdGhyb3Vn
+aCB0aGlzIG5ldyAKdHJhbnNwb3J0LCBJIGd1ZXNzIHlvdSB3YW50IHRvIHRlc3QgYSBzcGVjaWZp
+YyB2aXJ0aW8gZHJpdmVyPwo1KSBZb3UgbWVudGlvbmVkIHRoYXQgeW91IG1heSB3YW50IHRvIGRl
+dmVsb3AgY29tbXVuaWNhdGlvbiBiZXR3ZWVuIAprZXJuZWwgYW5kIHVzZXJzcGFjZSwgYW55IG1v
+cmUgZGV0YWlscyBvbiB0aGF0PwoKVGhhbmtzCgoKPgo+IExlcHRvbiBXdSAoMSk6Cj4gICAgdmly
+dGlvOiBBZGQgdXZpcnRpbyBkcml2ZXIKPgo+ICAgZHJpdmVycy92aXJ0aW8vS2NvbmZpZyAgICAg
+ICAgfCAgIDggKwo+ICAgZHJpdmVycy92aXJ0aW8vTWFrZWZpbGUgICAgICAgfCAgIDEgKwo+ICAg
+ZHJpdmVycy92aXJ0aW8vdXZpcnRpby5jICAgICAgfCA0MDUgKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKwo+ICAgaW5jbHVkZS9saW51eC91dmlydGlvLmggICAgICAgfCAgIDggKwo+
+ICAgaW5jbHVkZS91YXBpL2xpbnV4L3V2aXJ0aW8uaCAgfCAgNjkgKysrKysrCj4gICBzYW1wbGVz
+L3V2aXJ0aW8vTWFrZWZpbGUgICAgICB8ICAgOSArCj4gICBzYW1wbGVzL3V2aXJ0aW8vdXZpcnRp
+by12Z2EuYyB8ICA2MyArKysrKysKPiAgIDcgZmlsZXMgY2hhbmdlZCwgNTYzIGluc2VydGlvbnMo
+KykKPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL3ZpcnRpby91dmlydGlvLmMKPiAgIGNy
+ZWF0ZSBtb2RlIDEwMDY0NCBpbmNsdWRlL2xpbnV4L3V2aXJ0aW8uaAo+ICAgY3JlYXRlIG1vZGUg
+MTAwNjQ0IGluY2x1ZGUvdWFwaS9saW51eC91dmlydGlvLmgKPiAgIGNyZWF0ZSBtb2RlIDEwMDY0
+NCBzYW1wbGVzL3V2aXJ0aW8vTWFrZWZpbGUKPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBzYW1wbGVz
+L3V2aXJ0aW8vdXZpcnRpby12Z2EuYwo+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRp
+b25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRp
+b24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
