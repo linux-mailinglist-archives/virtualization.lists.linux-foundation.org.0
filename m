@@ -2,98 +2,99 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB4531BF2B6
-	for <lists.virtualization@lfdr.de>; Thu, 30 Apr 2020 10:26:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3FC11BF2E6
+	for <lists.virtualization@lfdr.de>; Thu, 30 Apr 2020 10:34:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 558CF87916;
-	Thu, 30 Apr 2020 08:26:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 95BB387E1F;
+	Thu, 30 Apr 2020 08:34:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EFc6Z+vSUDb7; Thu, 30 Apr 2020 08:26:21 +0000 (UTC)
+	with ESMTP id oZBqmnYacBwb; Thu, 30 Apr 2020 08:34:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1C01F87AEF;
-	Thu, 30 Apr 2020 08:26:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id CDB0987E1D;
+	Thu, 30 Apr 2020 08:34:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E8F7DC016F;
-	Thu, 30 Apr 2020 08:26:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9485CC016F;
+	Thu, 30 Apr 2020 08:34:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 08938C016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 70258C016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 30 Apr 2020 08:26:19 +0000 (UTC)
+ Thu, 30 Apr 2020 08:34:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 0242588648
+ by whitealder.osuosl.org (Postfix) with ESMTP id 59DCD86940
  for <virtualization@lists.linux-foundation.org>;
- Thu, 30 Apr 2020 08:26:19 +0000 (UTC)
+ Thu, 30 Apr 2020 08:34:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id t-wk9QgaCZNq
+ with ESMTP id SghVAURLjlp5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 30 Apr 2020 08:26:18 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 4DF3288615
+ Thu, 30 Apr 2020 08:34:13 +0000 (UTC)
+X-Greylist: delayed 00:22:05 by SQLgrey-1.7.6
+Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com
+ [209.85.218.67])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id B266987CAE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 30 Apr 2020 08:26:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588235176;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=YGyRDtb4bigS4OJJzosmGsfyXf9UuewqBG5sz68PxEc=;
- b=XD4+LjTR67qMiJunq9cF1ctpi5eWEO1IxZjj904vBOR9NTSrzkz9rnVY4l5fm684p4FtUe
- lo53d4oVFvaL+3rFdvIGx3E4/7bbuuJeG8iU7Yn2me8kn+6RINWv4K/X4DI7B1+T0vVJfD
- YYthciY3/DHq5OJ51ihV+R7xOUp7HpA=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-362-4bLQtLGNMs6uKw7esT0Vmg-1; Thu, 30 Apr 2020 04:26:14 -0400
-X-MC-Unique: 4bLQtLGNMs6uKw7esT0Vmg-1
-Received: by mail-wm1-f70.google.com with SMTP id f128so492048wmf.8
+ Thu, 30 Apr 2020 08:34:12 +0000 (UTC)
+Received: by mail-ej1-f67.google.com with SMTP id s3so3992579eji.6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 30 Apr 2020 01:26:14 -0700 (PDT)
+ Thu, 30 Apr 2020 01:34:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=intel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=87dIcS/jrU3IxflLIkdtnvU4qll0iHvEZNuLGZ4o7wI=;
+ b=C7NzSwQeQ8r7hb6zu0mE43nN5BVsWOZy21t9s86oMspwPoqNG+2r9QwYXMI253bkO+
+ f2NXbqJEZlVUDXw2jKOJXTdMksOMSeCU/1+d1/KW3kPK6bDnIkjaV85ydvslVx7+7VaK
+ H/Wy8s3jtrbog9dFPbt+U8g4F9a/kPxAFzoHfDtTpSCDud/nTiDKxbIHNOx4gDT1cWli
+ scShmtfTOkTf1D6LztaDjOZAMAIUOcl9E1Ehg4s+icpPrmffJn6TfhOtMJuuVZZemCWo
+ u5q8IaOdIkls7C87+V/X7frCMtH72XB/et/faVXvhnFad5uP3/TQ8BbSLNTCllAusarT
+ BwFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=YGyRDtb4bigS4OJJzosmGsfyXf9UuewqBG5sz68PxEc=;
- b=QRlnBdqrnaIpeZLbkIsEEk/fNKGs0eldpcD/DoGu6OlFniksFV6qZY6zeKXk6h73l5
- bgK1jNNwmDKiRdKOJ6QjlusiLctfSxdJGuHSORoXgSktcmu9PlSkg8IREe5ww7XgetAd
- GlJb8N3/Bq5QlFXcxAwZjmakkpv7N93aUbdQlfeNB92S69JfOlHtyjWzhgZBtHbrjDLY
- xnd5B5mpdIqlVWMKWEt+63wR6uZPeGb7fhuMrHluOZsW8bf55HvVy7gp4Z3O2M7YK+Rp
- uxsgTmVl+P2qAnlhR//b559HS3GTBcCtepL5RwJiB3dVxk2O/Ou2ZvyKZmF83Kp6nlP+
- pWzQ==
-X-Gm-Message-State: AGi0PuYc24iiNJFDjwBSOHegLjjMzMDOl8jBFvPIhrQAHHm29LT/CwGS
- DEuI9+iwXcXtjvjQExoVeQgtmlXumtUnLsezjhsloMHIvoepF0FXDlt9mw3fzIGHQVNzOaS7UNn
- YYfsrrW8359ZAUoZQ7XICIiwKPdnMC7Sqj80OP77e7g==
-X-Received: by 2002:adf:f781:: with SMTP id q1mr2361214wrp.323.1588235172030; 
- Thu, 30 Apr 2020 01:26:12 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJoi4cvRWNuIpuOzpMBz+IGc+hNuGVeAAtdk4bhTz0tRoJTi6UyA0vRsxW70RBXtjBsbtVC5Q==
-X-Received: by 2002:adf:f781:: with SMTP id q1mr2361196wrp.323.1588235171773; 
- Thu, 30 Apr 2020 01:26:11 -0700 (PDT)
-Received: from steredhat (host108-207-dynamic.49-79-r.retail.telecomitalia.it.
- [79.49.207.108])
- by smtp.gmail.com with ESMTPSA id z8sm2874873wrr.40.2020.04.30.01.26.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2020 01:26:11 -0700 (PDT)
-Date: Thu, 30 Apr 2020 10:26:08 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jia He <justin.he@arm.com>
-Subject: Re: [PATCH] vhost: vsock: don't send pkt when vq is not started
-Message-ID: <20200430082608.wbtqgglmtnd7e5ci@steredhat>
-References: <20200430021314.6425-1-justin.he@arm.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=87dIcS/jrU3IxflLIkdtnvU4qll0iHvEZNuLGZ4o7wI=;
+ b=NqfAvFG0jehikosUjHj8+x3WJ6tyZSDV0unxDzmAijyh0Nm6TWxE3S1G6DPCHT/Rny
+ 5ZCseo9uIpOkmPGxproZ0UeDtVu4r+SJkxPpMIH5ooxhYks+9yqR6ux6zuxNIXFR5Fvy
+ 2zvPZJfHlpJr/+3OYc/6QmWTvwaocjSgPz712JS6ttwK3vdDvBgAAyJE9+q9a1p8KmnP
+ kRlIe3DKrs83PzXRue3S8jHAkRhGbDtPL9o+LKyTIIRb+8tW2Edkvk+DcW/vdbaEpTqw
+ JDyuVhGbC/bWsoeuSfp1M0ivDdyj8W3OuQu4Jo1Qw0QE3zU+WJD7NiuFlD6gg1lILQem
+ rWfA==
+X-Gm-Message-State: AGi0PuZ3tguG9jG1aZxB4Cd5fuECyw480WZnUa+tqurZfZ8D4acWdNVg
+ cd8kwUVXqohumB81XoKpJ16fZje9nlFsprygKQ3UNg==
+X-Google-Smtp-Source: APiQypLBVztlIIHfr3wCtEt+MVa/TaJHl/O1nuNqStB0TwAKkS6wTTbCgFJlPXMDG8iI601GTPaB481cRsH+FNdImHY=
+X-Received: by 2002:a17:906:7750:: with SMTP id
+ o16mr1715515ejn.12.1588235651152; 
+ Thu, 30 Apr 2020 01:34:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200430021314.6425-1-justin.he@arm.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Kaly.Xin@arm.com,
- Stefan Hajnoczi <stefanha@redhat.com>
+References: <20200429160803.109056-1-david@redhat.com>
+ <20200429160803.109056-3-david@redhat.com>
+ <a7305cd8-8b2f-1d8f-7654-ecf777c46df6@redhat.com>
+ <CAPcyv4i04+QLxiOyz04_eef2DFetEFKBUmi2A4xxw9abQD8hNQ@mail.gmail.com>
+ <e32522cd-31bb-e129-47a6-9ec13b570506@redhat.com>
+In-Reply-To: <e32522cd-31bb-e129-47a6-9ec13b570506@redhat.com>
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Thu, 30 Apr 2020 01:34:00 -0700
+Message-ID: <CAPcyv4gjRE23BHsBAnaVWAPUHWdenxYMUwDBnDF7UmoejmmbNQ@mail.gmail.com>
+Subject: Re: [PATCH v1 2/3] mm/memory_hotplug: Introduce MHP_DRIVER_MANAGED
+To: David Hildenbrand <david@redhat.com>
+Cc: virtio-dev@lists.oasis-open.org, linux-hyperv@vger.kernel.org,
+ Michal Hocko <mhocko@suse.com>, Pavel Tatashin <pasha.tatashin@soleen.com>,
+ Baoquan He <bhe@redhat.com>, Linux MM <linux-mm@kvack.org>,
+ Wei Yang <richard.weiyang@gmail.com>, linux-s390 <linux-s390@vger.kernel.org>,
+ linux-nvdimm <linux-nvdimm@lists.01.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ virtualization@lists.linux-foundation.org,
+ Linux ACPI <linux-acpi@vger.kernel.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>, Eric Biederman <ebiederm@xmission.com>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Michal Hocko <mhocko@kernel.org>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,116 +111,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Jia,
-thanks for the patch, some comments below:
+On Thu, Apr 30, 2020 at 1:21 AM David Hildenbrand <david@redhat.com> wrote:
+> >> Just because we decided to use some DAX memory in the current kernel as
+> >> system ram, doesn't mean we should make that decision for the kexec
+> >> kernel (e.g., using it as initial memory, placing kexec binaries onto
+> >> it, etc.). This is also not what we would observe during a real reboot.
+> >
+> > Agree.
+> >
+> >> I can see that the "System RAM" resource will show up as child resource
+> >> under the device e.g., in /proc/iomem.
+> >>
+> >> However, entries in /sys/firmware/memmap/ are created as "System RAM".
+> >
+> > True. Do you think this rename should just be limited to what type
+> > /sys/firmware/memmap/ emits? I have the concern, but no proof
+>
+> We could split this patch into
+>
+> MHP_NO_FIRMWARE_MEMMAP (create firmware memmap entries)
+>
+> and
+>
+> MHP_DRIVER_MANAGED (name of the resource)
+>
+> See below, the latter might not be needed.
+>
+> > currently, that there are /proc/iomem walkers that explicitly look for
+> > "System RAM", but might be thrown off by "System RAM (driver
+> > managed)". I was not aware of /sys/firmware/memmap until about 5
+> > minutes ago.
+>
+> The only two users of /proc/iomem I am aware of are kexec-tools and some
+> s390x tools.
+>
+> kexec-tools on x86-64 uses /sys/firmware/memmap to craft the initial
+> memmap, but uses /proc/iomem to
+> a) Find places for kexec images
+> b) Detect memory regions to dump via kdump
+>
+> I am not yet sure if we really need the "System RAM (driver managed)"
+> part. If we can teach kexec-tools to
+> a) Don't place kexec images on "System RAM" that has a parent resource
+> (most likely requires kexec-tools changes)
+> b) Consider for kdump "System RAM" that has a parent resource
+> we might be able to avoid renaming that. (I assume that's already done)
+>
+> E.g., regarding virtio-mem (patch #3) I am currently also looking into
+> creating a parent resource instead, like dax/kmem to avoid the rename:
+>
+> :/# cat /proc/iomem
+> 00000000-00000fff : Reserved
+> [...]
+> 100000000-13fffffff : System RAM
+> 140000000-33fffffff : virtio0
+>   140000000-147ffffff : System RAM
+>   148000000-14fffffff : System RAM
+>   150000000-157ffffff : System RAM
+> 340000000-303fffffff : virtio1
+>   340000000-347ffffff : System RAM
+> 3280000000-32ffffffff : PCI Bus 0000:00
 
-On Thu, Apr 30, 2020 at 10:13:14AM +0800, Jia He wrote:
-> Ning Bo reported an abnormal 2-second gap when booting Kata container [1].
-> The unconditional timeout is caused by VSOCK_DEFAULT_CONNECT_TIMEOUT of
-> connect at client side. The vhost vsock client tries to connect an
-> initlizing virtio vsock server.
-> 
-> The abnormal flow looks like:
-> host-userspace           vhost vsock                       guest vsock
-> ==============           ===========                       ============
-> connect()     -------->  vhost_transport_send_pkt_work()   initializing
->    |                     vq->private_data==NULL
->    |                     will not be queued
->    V
-> schedule_timeout(2s)
->                          vhost_vsock_start()  <---------   device ready
->                          set vq->private_data
-> 
-> wait for 2s and failed
-> 
-> connect() again          vq->private_data!=NULL          recv connecting pkt
-> 
-> 1. host userspace sends a connect pkt, at that time, guest vsock is under
-> initializing, hence the vhost_vsock_start has not been called. So
-> vq->private_data==NULL, and the pkt is not been queued to send to guest.
-> 2. then it sleeps for 2s
-> 3. after guest vsock finishes initializing, vq->private_data is set.
-> 4. When host userspace wakes up after 2s, send connecting pkt again,
-> everything is fine.
-> 
-> This fixes it by checking vq->private_data in vhost_transport_send_pkt,
-> and return at once if !vq->private_data. This makes user connect()
-> be returned with ECONNREFUSED.
-> 
-> After this patch, kata-runtime (with vsock enabled) boottime reduces from
-> 3s to 1s on ThunderX2 arm64 server.
-> 
-> [1] https://github.com/kata-containers/runtime/issues/1917
-> 
-> Reported-by: Ning Bo <n.b@live.com>
-> Signed-off-by: Jia He <justin.he@arm.com>
-> ---
->  drivers/vhost/vsock.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
-> index e36aaf9ba7bd..67474334dd88 100644
-> --- a/drivers/vhost/vsock.c
-> +++ b/drivers/vhost/vsock.c
-> @@ -241,6 +241,7 @@ vhost_transport_send_pkt(struct virtio_vsock_pkt *pkt)
->  {
->  	struct vhost_vsock *vsock;
->  	int len = pkt->len;
-> +	struct vhost_virtqueue *vq;
->  
->  	rcu_read_lock();
->  
-> @@ -252,6 +253,13 @@ vhost_transport_send_pkt(struct virtio_vsock_pkt *pkt)
->  		return -ENODEV;
->  	}
->  
-> +	vq = &vsock->vqs[VSOCK_VQ_RX];
-> +	if (!vq->private_data) {
-
-I think is better to use vhost_vq_get_backend():
-
-	if (!vhost_vq_get_backend(&vsock->vqs[VSOCK_VQ_RX])) {
-		...
-
-This function should be called with 'vq->mutex' acquired as explained in
-the comment, but here we can avoid that, because we are not using the vq,
-so it is safe, because in vhost_transport_do_send_pkt() we check it again.
-
-Please add a comment explaining that.
-
-
-As an alternative to this patch, should we kick the send worker when the
-device is ready?
-
-IIUC we reach the timeout because the send worker (that runs
-vhost_transport_do_send_pkt()) exits immediately since 'vq->private_data'
-is NULL, and no one will requeue it.
-
-Let's do it when we know the device is ready:
-
-diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
-index e36aaf9ba7bd..295b5867944f 100644
---- a/drivers/vhost/vsock.c
-+++ b/drivers/vhost/vsock.c
-@@ -543,6 +543,11 @@ static int vhost_vsock_start(struct vhost_vsock *vsock)
-                mutex_unlock(&vq->mutex);
-        }
- 
-+       /* Some packets may have been queued before the device was started,
-+        * let's kick the send worker to send them.
-+        */
-+       vhost_work_queue(&vsock->dev, &vsock->send_pkt_work);
-+
-        mutex_unlock(&vsock->dev.mutex);
-        return 0;
-
-I didn't test it, can you try if it fixes the issue?
-
-I'm not sure which is better...
-
-Thanks,
-Stefano
-
+Looks good to me if it flies with kexec-tools.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
