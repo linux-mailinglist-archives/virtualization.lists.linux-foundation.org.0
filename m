@@ -1,86 +1,140 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2A6C1C0B6B
-	for <lists.virtualization@lfdr.de>; Fri,  1 May 2020 02:59:23 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id CBBC81C1065
+	for <lists.virtualization@lfdr.de>; Fri,  1 May 2020 11:34:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4644E882B3;
-	Fri,  1 May 2020 00:59:22 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E83C98B04F;
+	Fri,  1 May 2020 09:34:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id igxB7V-bBrTW; Fri,  1 May 2020 00:59:21 +0000 (UTC)
+	with ESMTP id 2z+xTr93kULQ; Fri,  1 May 2020 09:34:39 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A39B6882BB;
-	Fri,  1 May 2020 00:59:21 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 587E88B049;
+	Fri,  1 May 2020 09:34:39 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 89D0FC016F;
-	Fri,  1 May 2020 00:59:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 001E3C016F;
+	Fri,  1 May 2020 09:34:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 24D07C016F
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6C147C016F
  for <virtualization@lists.linux-foundation.org>;
- Fri,  1 May 2020 00:59:20 +0000 (UTC)
+ Fri,  1 May 2020 09:34:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 13204882B3
+ by hemlock.osuosl.org (Postfix) with ESMTP id 4FFD08B04F
  for <virtualization@lists.linux-foundation.org>;
- Fri,  1 May 2020 00:59:20 +0000 (UTC)
+ Fri,  1 May 2020 09:34:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xsOquAbkH8sU
+ with ESMTP id 5s6OfwjPqlu7
  for <virtualization@lists.linux-foundation.org>;
- Fri,  1 May 2020 00:59:19 +0000 (UTC)
+ Fri,  1 May 2020 09:34:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
- [209.85.208.196])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 16B9288293
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 02AB88B049
  for <virtualization@lists.linux-foundation.org>;
- Fri,  1 May 2020 00:59:19 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id g4so1365089ljl.2
- for <virtualization@lists.linux-foundation.org>;
- Thu, 30 Apr 2020 17:59:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=a+S7oL7QtB7K5iAdk2XkCCMfKsTFMb8A5w0sQgUiYH4=;
- b=fx5NfI2UAwxAnXvHkLW7MrPDKWrr4E4/bxgGBVWBEGad2Xsnp57cjfub9gOPjYKrPH
- e4t5BOI6/yYfFjkL9mT2cPaO4UCBAwIEd5RoJxCGvk5EA9/Oxqf8ItlzmXv5h7+LWpRp
- y4UeN4gBnHr0bcFZMKR/hf3PJGD9q4PcrOpa20LSH1vksuL3Jlg1notz+/FxPjxiDhp5
- 3p2+Mv8SHhH24kIZysfHAS8JTBH6uT83LhP7nv66M24Vy2GWGcXQ/8U+SqdRxzbDBSO1
- Osuz5j4auzHfS2oHg3Isn0dAu9ZIbBd7ftmvoBXZc/cR6OkXoAMAxHBqiWqmKk9PRUsK
- y1dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=a+S7oL7QtB7K5iAdk2XkCCMfKsTFMb8A5w0sQgUiYH4=;
- b=ByP/x7eRuz2nobUY8bRf7D9J1XV2tr/IvX46igKscX9KxSCrU0jqVbpdsN5OjMNJsh
- 4Y9hiti+qg35sotThJgb0z9jr+QuMp/pMY4rtrTwoRUbBDeKV1847qYuaAdX+RynxKLJ
- Xa+jzThyhxiHi86tbWmuYc03huTbQmezFW7JyZSgmM/ruMewDwQgGwZTrUjUVvLvgODf
- OJTpR9OaoCNO5kFBIaTEu/S7PIBh7TiJ72sJulfhIzcD4i1MlXbhQ9UHB1WZBuwVBXbc
- 8hZDqayCuFgAJoDEJgtQreDYyQVCajaA50+e0M2PZrFBiX2lUa15PSVSMY9Pz79SV1sR
- jQhQ==
-X-Gm-Message-State: AGi0PuYDqsnLnypS8KxDbnFCXZlrSWgYW88m8E3PbstoxqDHyOkvQzni
- jjxlDG9jmgLEsSHT1tyYHqJBMGuSHpnXQrmEwA8=
-X-Google-Smtp-Source: APiQypIXup8wLrpQuJ15rPeA3tr18vQb8135DQXhC4YrLTM7CyiP9jQ6fdT4lzU7oD3PEaZ4kPMoluM9mvrDHISpcr8=
-X-Received: by 2002:a05:651c:1058:: with SMTP id
- x24mr973255ljm.39.1588294757012; 
- Thu, 30 Apr 2020 17:59:17 -0700 (PDT)
+ Fri,  1 May 2020 09:34:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1588325674;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=HtdiKEBYnl+F4fKOxJyusZbV9rQDJIfKH4dG2/G+1qg=;
+ b=G39pgAsApUSY2mb+TysxdNLxmaI5zDbRE6QJ8KT/vF9SovXsWlUeX0ZPLGltnUqxaBv0cu
+ eOsyCcj9/cRaYJC7S+6k3jAyF1SOL6EUHqg0cE/FqRnmWROwrm00hiaB1/LhZqJXPK2qm0
+ c6KReuXtph8g1gn4X+uDW1XRQiC03ew=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-319-YZZnaj37OHisW4YVqlgBvA-1; Fri, 01 May 2020 05:34:32 -0400
+X-MC-Unique: YZZnaj37OHisW4YVqlgBvA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 12CF21054F8B;
+ Fri,  1 May 2020 09:34:30 +0000 (UTC)
+Received: from [10.36.112.251] (ovpn-112-251.ams2.redhat.com [10.36.112.251])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 86CCB6A954;
+ Fri,  1 May 2020 09:34:23 +0000 (UTC)
+Subject: Re: [PATCH v2 2/3] mm/memory_hotplug: Introduce MHP_NO_FIRMWARE_MEMMAP
+To: Andrew Morton <akpm@linux-foundation.org>
+References: <20200430102908.10107-1-david@redhat.com>
+ <20200430102908.10107-3-david@redhat.com>
+ <87pnbp2dcz.fsf@x220.int.ebiederm.org>
+ <1b49c3be-6e2f-57cb-96f7-f66a8f8a9380@redhat.com>
+ <871ro52ary.fsf@x220.int.ebiederm.org>
+ <373a6898-4020-4af1-5b3d-f827d705dd77@redhat.com>
+ <875zdg26hp.fsf@x220.int.ebiederm.org>
+ <b28c9e02-8cf2-33ae-646b-fe50a185738e@redhat.com>
+ <20200430152403.e0d6da5eb1cad06411ac6d46@linux-foundation.org>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
+ dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
+ QZLQMzNE74ap+GDK0wnacPQFpcG1AE9RMq3aeErY5tujekBS32jfC/7AnH7I0v1v1TbbK3Gp
+ XNeiN4QroO+5qaSr0ID2sz5jtBLRb15RMre27E1ImpaIv2Jw8NJgW0k/D1RyKCwaTsgRdwuK
+ Kx/Y91XuSBdz0uOyU/S8kM1+ag0wvsGlpBVxRR/xw/E8M7TEwuCZQArqqTCmkG6HGcXFT0V9
+ PXFNNgV5jXMQRwU0O/ztJIQqsE5LsUomE//bLwzj9IVsaQpKDqW6TAPjcdBDPLHvriq7kGjt
+ WhVhdl0qEYB8lkBEU7V2Yb+SYhmhpDrti9Fq1EsmhiHSkxJcGREoMK/63r9WLZYI3+4W2rAc
+ UucZa4OT27U5ZISjNg3Ev0rxU5UH2/pT4wJCfxwocmqaRr6UYmrtZmND89X0KigoFD/XSeVv
+ jwBRNjPAubK9/k5NoRrYqztM9W6sJqrH8+UWZ1Idd/DdmogJh0gNC0+N42Za9yBRURfIdKSb
+ B3JfpUqcWwE7vUaYrHG1nw54pLUoPG6sAA7Mehl3nd4pZUALHwARAQABtCREYXZpZCBIaWxk
+ ZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT6JAlgEEwEIAEICGwMFCQlmAYAGCwkIBwMCBhUI
+ AgkKCwQWAgMBAh4BAheAFiEEG9nKrXNcTDpGDfzKTd4Q9wD/g1oFAl3pImkCGQEACgkQTd4Q
+ 9wD/g1o+VA//SFvIHUAvul05u6wKv/pIR6aICPdpF9EIgEU448g+7FfDgQwcEny1pbEzAmiw
+ zAXIQ9H0NZh96lcq+yDLtONnXk/bEYWHHUA014A1wqcYNRY8RvY1+eVHb0uu0KYQoXkzvu+s
+ Dncuguk470XPnscL27hs8PgOP6QjG4jt75K2LfZ0eAqTOUCZTJxA8A7E9+XTYuU0hs7QVrWJ
+ jQdFxQbRMrYz7uP8KmTK9/Cnvqehgl4EzyRaZppshruKMeyheBgvgJd5On1wWq4ZUV5PFM4x
+ II3QbD3EJfWbaJMR55jI9dMFa+vK7MFz3rhWOkEx/QR959lfdRSTXdxs8V3zDvChcmRVGN8U
+ Vo93d1YNtWnA9w6oCW1dnDZ4kgQZZSBIjp6iHcA08apzh7DPi08jL7M9UQByeYGr8KuR4i6e
+ RZI6xhlZerUScVzn35ONwOC91VdYiQgjemiVLq1WDDZ3B7DIzUZ4RQTOaIWdtXBWb8zWakt/
+ ztGhsx0e39Gvt3391O1PgcA7ilhvqrBPemJrlb9xSPPRbaNAW39P8ws/UJnzSJqnHMVxbRZC
+ Am4add/SM+OCP0w3xYss1jy9T+XdZa0lhUvJfLy7tNcjVG/sxkBXOaSC24MFPuwnoC9WvCVQ
+ ZBxouph3kqc4Dt5X1EeXVLeba+466P1fe1rC8MbcwDkoUo65Ag0EVcufkQEQAOfX3n0g0fZz
+ Bgm/S2zF/kxQKCEKP8ID+Vz8sy2GpDvveBq4H2Y34XWsT1zLJdvqPI4af4ZSMxuerWjXbVWb
+ T6d4odQIG0fKx4F8NccDqbgHeZRNajXeeJ3R7gAzvWvQNLz4piHrO/B4tf8svmRBL0ZB5P5A
+ 2uhdwLU3NZuK22zpNn4is87BPWF8HhY0L5fafgDMOqnf4guJVJPYNPhUFzXUbPqOKOkL8ojk
+ CXxkOFHAbjstSK5Ca3fKquY3rdX3DNo+EL7FvAiw1mUtS+5GeYE+RMnDCsVFm/C7kY8c2d0G
+ NWkB9pJM5+mnIoFNxy7YBcldYATVeOHoY4LyaUWNnAvFYWp08dHWfZo9WCiJMuTfgtH9tc75
+ 7QanMVdPt6fDK8UUXIBLQ2TWr/sQKE9xtFuEmoQGlE1l6bGaDnnMLcYu+Asp3kDT0w4zYGsx
+ 5r6XQVRH4+5N6eHZiaeYtFOujp5n+pjBaQK7wUUjDilPQ5QMzIuCL4YjVoylWiBNknvQWBXS
+ lQCWmavOT9sttGQXdPCC5ynI+1ymZC1ORZKANLnRAb0NH/UCzcsstw2TAkFnMEbo9Zu9w7Kv
+ AxBQXWeXhJI9XQssfrf4Gusdqx8nPEpfOqCtbbwJMATbHyqLt7/oz/5deGuwxgb65pWIzufa
+ N7eop7uh+6bezi+rugUI+w6DABEBAAGJAiUEGAECAA8FAlXLn5ECGwwFCQlmAYAACgkQTd4Q
+ 9wD/g1qA6w/+M+ggFv+JdVsz5+ZIc6MSyGUozASX+bmIuPeIecc9UsFRatc91LuJCKMkD9Uv
+ GOcWSeFpLrSGRQ1Z7EMzFVU//qVs6uzhsNk0RYMyS0B6oloW3FpyQ+zOVylFWQCzoyyf227y
+ GW8HnXunJSC+4PtlL2AY4yZjAVAPLK2l6mhgClVXTQ/S7cBoTQKP+jvVJOoYkpnFxWE9pn4t
+ H5QIFk7Ip8TKr5k3fXVWk4lnUi9MTF/5L/mWqdyIO1s7cjharQCstfWCzWrVeVctpVoDfJWp
+ 4LwTuQ5yEM2KcPeElLg5fR7WB2zH97oI6/Ko2DlovmfQqXh9xWozQt0iGy5tWzh6I0JrlcxJ
+ ileZWLccC4XKD1037Hy2FLAjzfoWgwBLA6ULu0exOOdIa58H4PsXtkFPrUF980EEibUp0zFz
+ GotRVekFAceUaRvAj7dh76cToeZkfsjAvBVb4COXuhgX6N4pofgNkW2AtgYu1nUsPAo+NftU
+ CxrhjHtLn4QEBpkbErnXQyMjHpIatlYGutVMS91XTQXYydCh5crMPs7hYVsvnmGHIaB9ZMfB
+ njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
+ FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
+Organization: Red Hat GmbH
+Message-ID: <5c908ec3-9495-531e-9291-cbab24f292d6@redhat.com>
+Date: Fri, 1 May 2020 11:34:22 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-References: <20200428204729.64569-1-ytht.net@gmail.com>
- <b01454e9-bca8-cf32-7cfa-ebe25032e040@redhat.com>
- <20200429115836.u5vqt3s6l4wcejjd@sirius.home.kraxel.org>
- <CALqoU4wHbkqVx2WiF4ieZ1Bg6DE5OWzzUGrQbe8EYsO8ruq3Xg@mail.gmail.com>
- <20200430075141.kjldxjhylwo347bf@sirius.home.kraxel.org>
-In-Reply-To: <20200430075141.kjldxjhylwo347bf@sirius.home.kraxel.org>
-From: lepton <ytht.net@gmail.com>
-Date: Thu, 30 Apr 2020 17:59:05 -0700
-Message-ID: <CALqoU4wfqPcOkdiWBTC4j=_U2q6gUFn5JkZsgPXr0MM4s6ZqLQ@mail.gmail.com>
-Subject: Re: [PATCH 0/1] Add uvirtio for testing
-To: Gerd Hoffmann <kraxel@redhat.com>
-Cc: mst@redhat.com, virtualization@lists.linux-foundation.org
+In-Reply-To: <20200430152403.e0d6da5eb1cad06411ac6d46@linux-foundation.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: virtio-dev@lists.oasis-open.org, linux-hyperv@vger.kernel.org,
+ Michal Hocko <mhocko@suse.com>, Baoquan He <bhe@redhat.com>,
+ linux-acpi@vger.kernel.org, Wei Yang <richard.weiyang@gmail.com>,
+ linux-s390@vger.kernel.org, linux-nvdimm@lists.01.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-mm@kvack.org, "Michael S . Tsirkin" <mst@redhat.com>,
+ "Eric W. Biederman" <ebiederm@xmission.com>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>, xen-devel@lists.xenproject.org,
+ Michal Hocko <mhocko@kernel.org>, linuxppc-dev@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,33 +151,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Apr 30, 2020 at 12:51 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
-> On Wed, Apr 29, 2020 at 08:59:18PM -0700, lepton wrote:
-> > On Wed, Apr 29, 2020 at 4:58 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
-> > >
-> > > > 3) Need to be verbose on how the vring processing work in the commit log of
-> > > > patch 1
-> > >
-> > > Ecven better a file documenting the interface somewhere in
-> > > Documentation/
-> > I put a uvirtio-vga.c under samples/uvirtio and hope this can serve
-> > the purpose of the document since currently that's the only tested use
-> > case.
->
-> Sample code is good, but *commented* sample code would be better.
->
-> > Maybe have a document later if this really get more use cases?
->
-> Well, having good documentation right from the start would help getting
-> more use cases ;)
-Now I add document in V3.
+On 01.05.20 00:24, Andrew Morton wrote:
+> On Thu, 30 Apr 2020 20:43:39 +0200 David Hildenbrand <david@redhat.com> wrote:
+> 
+>>>
+>>> Why does the firmware map support hotplug entries?
+>>
+>> I assume:
+>>
+>> The firmware memmap was added primarily for x86-64 kexec (and still, is
+>> mostly used on x86-64 only IIRC). There, we had ACPI hotplug. When DIMMs
+>> get hotplugged on real HW, they get added to e820. Same applies to
+>> memory added via HyperV balloon (unless memory is unplugged via
+>> ballooning and you reboot ... the the e820 is changed as well). I assume
+>> we wanted to be able to reflect that, to make kexec look like a real reboot.
+>>
+>> This worked for a while. Then came dax/kmem. Now comes virtio-mem.
+>>
+>>
+>> But I assume only Andrew can enlighten us.
+>>
+>> @Andrew, any guidance here? Should we really add all memory to the
+>> firmware memmap, even if this contradicts with the existing
+>> documentation? (especially, if the actual firmware memmap will *not*
+>> contain that memory after a reboot)
+> 
+> For some reason that patch is misattributed - it was authored by
+> Shaohui Zheng <shaohui.zheng@intel.com>, who hasn't been heard from in
+> a decade.  I looked through the email discussion from that time and I'm
+> not seeing anything useful.  But I wasn't able to locate Dave Hansen's
+> review comments.
 
-Thanks. Regards
->
-> take care,
->   Gerd
->
+Okay, thanks for checking. I think the documentation from 2008 is pretty
+clear what has to be done here. I will add some of these details to the
+patch description.
+
+Also, now that I know that esp. kexec-tools already don't consider
+dax/kmem memory properly (memory will not get dumped via kdump) and
+won't really suffer from a name change in /proc/iomem, I will go back to
+the MHP_DRIVER_MANAGED approach and
+1. Don't create firmware memmap entries
+2. Name the resource "System RAM (driver managed)"
+3. Flag the resource via something like IORESOURCE_MEM_DRIVER_MANAGED.
+
+This way, kernel users and user space can figure out that this memory
+has different semantics and handle it accordingly - I think that was
+what Eric was asking for.
+
+Of course, open for suggestions.
+
+-- 
+Thanks,
+
+David / dhildenb
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
