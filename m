@@ -1,69 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0912B1C371A
-	for <lists.virtualization@lfdr.de>; Mon,  4 May 2020 12:41:44 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EFEE1C3748
+	for <lists.virtualization@lfdr.de>; Mon,  4 May 2020 12:54:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 8EBD487C10;
-	Mon,  4 May 2020 10:41:42 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6F72E8766D;
+	Mon,  4 May 2020 10:54:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 85sTZsq5OQYC; Mon,  4 May 2020 10:41:40 +0000 (UTC)
+	with ESMTP id UFJpQyRA983G; Mon,  4 May 2020 10:54:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E34F587B2E;
-	Mon,  4 May 2020 10:41:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 058228767F;
+	Mon,  4 May 2020 10:54:53 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B7A67C0175;
-	Mon,  4 May 2020 10:41:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CA01EC0175;
+	Mon,  4 May 2020 10:54:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AC883C0175
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 32AB0C0175
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 10:41:38 +0000 (UTC)
+ Mon,  4 May 2020 10:54:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 9DD1E2048B
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 2ED878766D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 10:41:38 +0000 (UTC)
+ Mon,  4 May 2020 10:54:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pPerIJNFjK9G
+ with ESMTP id sbGXrKHOZeYv
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 10:41:37 +0000 (UTC)
+ Mon,  4 May 2020 10:54:50 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by silver.osuosl.org (Postfix) with ESMTPS id 234B620485
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id A28B18766B
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 10:41:37 +0000 (UTC)
+ Mon,  4 May 2020 10:54:50 +0000 (UTC)
 Received: from zn.tnic (p200300EC2F08AF00A9258889345EFBFA.dip0.t-ipconnect.de
  [IPv6:2003:ec:2f08:af00:a925:8889:345e:fbfa])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id DC0E51EC011B;
- Mon,  4 May 2020 12:41:33 +0200 (CEST)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 186691EC01B7;
+ Mon,  4 May 2020 12:54:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1588588894;
+ t=1588589689;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=iRUNm3gcqi81lpr43dwmxdWf16YWxyP1UxTVlnpFzUU=;
- b=kuIp+12Q+Ly/02XXR6hpYKN7OouGtkNo7biM9HOEmVEhTzPn6oWp7JLSYxLEcLL7THnsuI
- uOJ/KMNOHqrpBJLxGMZrz6Dnr3mvcCxOKjbb+pFhKh3I/1xOg9r8213Q4Y8B7Cn3h6pD+d
- lUiNekNhlKGzhQzLbDWp8+pUbFsCGjw=
-Date: Mon, 4 May 2020 12:41:29 +0200
+ bh=w0w3Aijj1ra8KuzYyt1lCImYJX1LTveNb8GK18SLIV8=;
+ b=rqNi/B7JopqCWzjGwcJ5p0oW/TBH05ZbVhoihYn39t8uzH1svqnE+WbsRjmueARw0snG9X
+ g8MoCy2QqIO3W8ZY1BmYKAHZBQHonH+4BnHd+hGZBog4Jj0/Eb2jL6peqM/RZWpBF5P28q
+ bc0obY45bX1B8fyESNsvitlXbp6EVts=
+Date: Mon, 4 May 2020 12:54:45 +0200
 From: Borislav Petkov <bp@alien8.de>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 12/75] x86/boot/compressed/64: Switch to __KERNEL_CS
- after GDT is loaded
-Message-ID: <20200504104129.GD15046@zn.tnic>
+Subject: Re: [PATCH v3 13/75] x86/boot/compressed/64: Add IDT Infrastructure
+Message-ID: <20200504105445.GE15046@zn.tnic>
 References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-13-joro@8bytes.org>
+ <20200428151725.31091-14-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200428151725.31091-13-joro@8bytes.org>
+In-Reply-To: <20200428151725.31091-14-joro@8bytes.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -92,48 +91,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 28, 2020 at 05:16:22PM +0200, Joerg Roedel wrote:
-> From: Joerg Roedel <jroedel@suse.de>
-> 
-> When the pre-decompression code loads its first GDT in startup_64, it is
-> still running on the CS value of the previous GDT. In the case of SEV-ES
-> this is the EFI GDT.
-> 
-> To make exception handling work (especially IRET) the CPU needs to
-> switch to a CS value in the current GDT, so jump to __KERNEL_CS after
-> the first GDT is loaded.
-> 
-> Signed-off-by: Joerg Roedel <jroedel@suse.de>
-> ---
->  arch/x86/boot/compressed/head_64.S | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/arch/x86/boot/compressed/head_64.S b/arch/x86/boot/compressed/head_64.S
-> index 4f7e6b84be07..6b11060c3a0f 100644
-> --- a/arch/x86/boot/compressed/head_64.S
-> +++ b/arch/x86/boot/compressed/head_64.S
-> @@ -393,6 +393,14 @@ SYM_CODE_START(startup_64)
->  	addq	%rax, 2(%rax)
->  	lgdt	(%rax)
->  
-> +	/* Reload CS so IRET returns to a CS actually in the GDT */
-> +	pushq	$__KERNEL_CS
-> +	leaq	.Lon_kernel_cs(%rip), %rax
-> +	pushq	%rax
-> +	lretq
+On Tue, Apr 28, 2020 at 05:16:23PM +0200, Joerg Roedel wrote:
+> diff --git a/arch/x86/boot/compressed/idt_handlers_64.S b/arch/x86/boot/compressed/idt_handlers_64.S
+> new file mode 100644
+> index 000000000000..f86ea872d860
+> --- /dev/null
+> +++ b/arch/x86/boot/compressed/idt_handlers_64.S
+> @@ -0,0 +1,69 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Early IDT handler entry points
+> + *
+> + * Copyright (C) 2019 SUSE
+> + *
+> + * Author: Joerg Roedel <jroedel@suse.de>
+> + */
 > +
-> +.Lon_kernel_cs:
+> +#include <asm/segment.h>
 > +
->  	/*
->  	 * paging_prepare() sets up the trampoline and checks if we need to
->  	 * enable 5-level paging.
-> -- 
+> +#include "../../entry/calling.h"
 
-So I'm thinking I should take this one even now on the grounds that
-it sanitizes CS to something known-good than what was there before and
-who knows what set it and loaded the kernel...?
+Leftover from something? Commenting it out doesn't break the build here.
 
-And that is a good thing in itself.
+If needed, then we need to lift stuff in a separate header and share it
+or so. I want to include as less as possible crap from kernel proper and
+eventually untangle arch/x86/boot/ because include/linux/ definitions
+are a real pain.
+
+Thx.
 
 -- 
 Regards/Gruss,
