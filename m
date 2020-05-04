@@ -1,68 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A29B1C34CC
-	for <lists.virtualization@lfdr.de>; Mon,  4 May 2020 10:47:06 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0912B1C371A
+	for <lists.virtualization@lfdr.de>; Mon,  4 May 2020 12:41:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D4FB987692;
-	Mon,  4 May 2020 08:47:04 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8EBD487C10;
+	Mon,  4 May 2020 10:41:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7bSi8sNJLwiK; Mon,  4 May 2020 08:47:02 +0000 (UTC)
+	with ESMTP id 85sTZsq5OQYC; Mon,  4 May 2020 10:41:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id AD7BD87628;
-	Mon,  4 May 2020 08:47:02 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E34F587B2E;
+	Mon,  4 May 2020 10:41:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8D1E5C0175;
-	Mon,  4 May 2020 08:47:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B7A67C0175;
+	Mon,  4 May 2020 10:41:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2AB63C0175
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AC883C0175
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 08:47:00 +0000 (UTC)
+ Mon,  4 May 2020 10:41:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 1368687628
+ by silver.osuosl.org (Postfix) with ESMTP id 9DD1E2048B
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 08:47:00 +0000 (UTC)
+ Mon,  4 May 2020 10:41:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id L3WaCACvcN4p
+ with ESMTP id pPerIJNFjK9G
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 08:46:58 +0000 (UTC)
+ Mon,  4 May 2020 10:41:37 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id BF22E86FEC
+ by silver.osuosl.org (Postfix) with ESMTPS id 234B620485
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 May 2020 08:46:58 +0000 (UTC)
-Received: from zn.tnic (p200300EC2F08AF00CCEA7D8403A9A735.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f08:af00:ccea:7d84:3a9:a735])
+ Mon,  4 May 2020 10:41:37 +0000 (UTC)
+Received: from zn.tnic (p200300EC2F08AF00A9258889345EFBFA.dip0.t-ipconnect.de
+ [IPv6:2003:ec:2f08:af00:a925:8889:345e:fbfa])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 686B11EC02EE;
- Mon,  4 May 2020 10:46:55 +0200 (CEST)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id DC0E51EC011B;
+ Mon,  4 May 2020 12:41:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1588582015;
+ t=1588588894;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=pHvKEwruh17Jw9K+Etb8co9PWCGobmfUm7W8svxiY+g=;
- b=Mxnq5+iESIoNo365G6tHE/gSZMc38TxWJ4X8reE28/N0RytVxFYTBetKxNxhrOGn07Uq9e
- VR+X+ZXYLaGeLeYXSQTMHmUCjj9smkz85AGqaYm00twWirEqcpvAXAaei580Ap8u7eTRJe
- 0RSVb995YGYQx446RG6LFGff4NWaVT4=
-Date: Mon, 4 May 2020 10:46:51 +0200
+ bh=iRUNm3gcqi81lpr43dwmxdWf16YWxyP1UxTVlnpFzUU=;
+ b=kuIp+12Q+Ly/02XXR6hpYKN7OouGtkNo7biM9HOEmVEhTzPn6oWp7JLSYxLEcLL7THnsuI
+ uOJ/KMNOHqrpBJLxGMZrz6Dnr3mvcCxOKjbb+pFhKh3I/1xOg9r8213Q4Y8B7Cn3h6pD+d
+ lUiNekNhlKGzhQzLbDWp8+pUbFsCGjw=
+Date: Mon, 4 May 2020 12:41:29 +0200
 From: Borislav Petkov <bp@alien8.de>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 10/75] x86/insn: Add insn_rep_prefix() helper
-Message-ID: <20200504084651.GC15046@zn.tnic>
+Subject: Re: [PATCH v3 12/75] x86/boot/compressed/64: Switch to __KERNEL_CS
+ after GDT is loaded
+Message-ID: <20200504104129.GD15046@zn.tnic>
 References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-11-joro@8bytes.org>
+ <20200428151725.31091-13-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200428151725.31091-11-joro@8bytes.org>
+In-Reply-To: <20200428151725.31091-13-joro@8bytes.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -91,11 +92,48 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 28, 2020 at 05:16:20PM +0200, Joerg Roedel wrote:
+On Tue, Apr 28, 2020 at 05:16:22PM +0200, Joerg Roedel wrote:
+> From: Joerg Roedel <jroedel@suse.de>
+> 
+> When the pre-decompression code loads its first GDT in startup_64, it is
+> still running on the CS value of the previous GDT. In the case of SEV-ES
+> this is the EFI GDT.
+> 
+> To make exception handling work (especially IRET) the CPU needs to
+> switch to a CS value in the current GDT, so jump to __KERNEL_CS after
+> the first GDT is loaded.
+> 
+> Signed-off-by: Joerg Roedel <jroedel@suse.de>
+> ---
+>  arch/x86/boot/compressed/head_64.S | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+> 
+> diff --git a/arch/x86/boot/compressed/head_64.S b/arch/x86/boot/compressed/head_64.S
+> index 4f7e6b84be07..6b11060c3a0f 100644
+> --- a/arch/x86/boot/compressed/head_64.S
+> +++ b/arch/x86/boot/compressed/head_64.S
+> @@ -393,6 +393,14 @@ SYM_CODE_START(startup_64)
+>  	addq	%rax, 2(%rax)
+>  	lgdt	(%rax)
+>  
+> +	/* Reload CS so IRET returns to a CS actually in the GDT */
+> +	pushq	$__KERNEL_CS
+> +	leaq	.Lon_kernel_cs(%rip), %rax
+> +	pushq	%rax
+> +	lretq
+> +
+> +.Lon_kernel_cs:
+> +
+>  	/*
+>  	 * paging_prepare() sets up the trampoline and checks if we need to
+>  	 * enable 5-level paging.
+> -- 
 
-> Subject: Re: [PATCH v3 10/75] x86/insn: Add insn_rep_prefix() helper
+So I'm thinking I should take this one even now on the grounds that
+it sanitizes CS to something known-good than what was there before and
+who knows what set it and loaded the kernel...?
 
-s/insn_rep_prefix/insn_has_rep_prefix/
+And that is a good thing in itself.
 
 -- 
 Regards/Gruss,
