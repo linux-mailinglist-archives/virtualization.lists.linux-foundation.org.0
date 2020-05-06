@@ -1,103 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38B921C6DB4
-	for <lists.virtualization@lfdr.de>; Wed,  6 May 2020 11:54:59 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A2F4B1C6FBD
+	for <lists.virtualization@lfdr.de>; Wed,  6 May 2020 13:57:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D6FC287857;
-	Wed,  6 May 2020 09:54:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4A31E24F0C;
+	Wed,  6 May 2020 11:57:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YytiQ3es2H6a; Wed,  6 May 2020 09:54:57 +0000 (UTC)
+	with ESMTP id fOpyrZwHXLNx; Wed,  6 May 2020 11:57:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id ED3D387855;
-	Wed,  6 May 2020 09:54:56 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 12542204EB;
+	Wed,  6 May 2020 11:57:29 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9C4DC0859;
-	Wed,  6 May 2020 09:54:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E52D2C088F;
+	Wed,  6 May 2020 11:57:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 42ADDC0859
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 02ED1C0859
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 09:54:55 +0000 (UTC)
+ Wed,  6 May 2020 11:57:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 2F44188592
+ by fraxinus.osuosl.org (Postfix) with ESMTP id E536F85FD4
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 09:54:55 +0000 (UTC)
+ Wed,  6 May 2020 11:57:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id sH5Uu1RGDrAz
+ with ESMTP id d8hKB1nD4aOG
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 09:54:54 +0000 (UTC)
+ Wed,  6 May 2020 11:57:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id E5C7C8858D
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 7080485FAD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 09:54:53 +0000 (UTC)
+ Wed,  6 May 2020 11:57:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588758892;
+ s=mimecast20190719; t=1588766244;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=IQgpC6M6Fr0QXYCApTnYcfdrhwDOylYbkH9y+/KvXfc=;
- b=hmbXPHaj7wcMFWHWhLB+KyzYOJ3kYIra2QN6R7vzel9ao4Jb9DjGLwKBctklHGViF46tRu
- ogsW7rM0r9JtpjXQbu4xikgRiPr3vbWMvVgiL3dtEluRbYwuqjrsP2Wv8+hBTMsju3fF+r
- uGjV5GiG7YYSlxezm4JItFopsjPenmM=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-30--xbvzsjyPCeweTJoRVBFJw-1; Wed, 06 May 2020 05:54:51 -0400
-X-MC-Unique: -xbvzsjyPCeweTJoRVBFJw-1
-Received: by mail-wm1-f69.google.com with SMTP id w2so939895wmc.3
+ bh=7sOis2/3Mg9JApCu6b61p44e2yvITngtwxXPAS7QTXw=;
+ b=eOECMT1O55ojYyvkPnG/ApCaIY+6d6aU69hHPbqssAJEGjHzqfrB9w5s2la7vRRJSKGeWd
+ lWlSvhQKFOm4t2UtClIkrOl4T02IF/L/PrYZlXSnMTQvYBzC6k6+Y2QMPdSs7YCCG4oSjF
+ a44Csh0b+wGOjl8oKIsVh3U0OP7/7Nw=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-282-xTHS1AurPIORIDcH6UsY2A-1; Wed, 06 May 2020 07:57:15 -0400
+X-MC-Unique: xTHS1AurPIORIDcH6UsY2A-1
+Received: by mail-wr1-f70.google.com with SMTP id z5so1173460wrt.17
  for <virtualization@lists.linux-foundation.org>;
- Wed, 06 May 2020 02:54:50 -0700 (PDT)
+ Wed, 06 May 2020 04:57:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=IQgpC6M6Fr0QXYCApTnYcfdrhwDOylYbkH9y+/KvXfc=;
- b=G0XWliO8t3z6gkkegj6aN9tx/3JBNbtId7UU9+MO4ngtp2p5o36m540llw89O9BOmH
- GnDfxjfBPBUGA5JnyxVMo0oE75WV8CUPsy+M9CpoK1DDV8LeuLuV+MMOW/h7K6EsMCZ3
- pSi2E8e8tg3+V1yAr+wSKaDRvK9o0X3f+VqPnHZMB7VUdfqd24OlCLAmU/pK6mftx0Fg
- uRrVLS+jtQpzwhmiFfjo43Dk60J/GXJSwnKa5LlyArF1ECUVjIUR6z/+aEe22zlxwbdK
- D2Z9Tb+bCnm/3Rg9Nc/Y8dy0/rzsKEK4Vhm/jarQf0XNkviHKFfR24cKjzxLoVDLhBjM
- jl8A==
-X-Gm-Message-State: AGi0PuYGDnlFZBwT9SpmFSh7j3nbEL7NtnfbQDB6NQR99z48mcdCJIb3
- 5W1/dmDYqbnKHLpoahha7LhBQYRIbhWJihL7i057CCk9Lp8rOPcGA9OevBW0Q7ZTPRmhICClH4z
- 9wRYrHAeSuGPLpMOuRI+u8z5suyINrnuZXf1pxeGHGg==
-X-Received: by 2002:a1c:2383:: with SMTP id j125mr3560322wmj.6.1588758889754; 
- Wed, 06 May 2020 02:54:49 -0700 (PDT)
-X-Google-Smtp-Source: APiQypKtmLaaSMrbt2AgLvxUJBNSQPFDRBWOY4wRUCKhGIWK+KiuCn92js4GGRYIiEgbL9ZdbdY9GA==
-X-Received: by 2002:a1c:2383:: with SMTP id j125mr3560305wmj.6.1588758889563; 
- Wed, 06 May 2020 02:54:49 -0700 (PDT)
+ :mime-version:content-disposition:in-reply-to;
+ bh=7sOis2/3Mg9JApCu6b61p44e2yvITngtwxXPAS7QTXw=;
+ b=hGshqokNqy6wBhTlvA2GP/wBW75DsI14jezFEfqVShgk2E49LvKdQ9x2mUvJjM4zj4
+ IVKb6KdM8hSxR2f033o4YwTVo63iTv8fYPsCapzQQJEO3woi4omer0PJF7iiiiK+EB3D
+ r3TleuE6y5DVn+liey+gxmdc30xQ9LTsVokz3SkaBkKLfo1usku0FeUMJJ2SqKf56ID9
+ Ori28m5ytgq4Graaen/N7FYSFn5adHn1FGbN9FaOxlj1GfrQx68fBvTPYipE1iceU5BR
+ iiR4pKcH29FGV5V3wVA5RlxQM6HdY7cBWlaoVMXJDZnFOEyQr0+bsBGX91wOW9xHWgCu
+ 32IA==
+X-Gm-Message-State: AGi0PubNCXo63dZVV8H/Dj1DH1yKv/MeiMMaQnIAG1NAZqKLqAhUxb+X
+ cvDS+PzHEgUCoP5xQXFl4PqOOcwer0m4hhOq4P+IU8B9UECKxy70LpvzTI+IpIhd9NpNL4hEVmf
+ vBYH1yTS/5yd/12BYSvVuuXee9+JecTTAk9QIly7/Qg==
+X-Received: by 2002:adf:8162:: with SMTP id 89mr8736335wrm.387.1588766233798; 
+ Wed, 06 May 2020 04:57:13 -0700 (PDT)
+X-Google-Smtp-Source: APiQypKH40QoEgrQmuxv8rKi91gxvjeAgTSB72BOZzkNW3MxEIsk2JLG9yyMv1mIo8Hc/alFqaSzSg==
+X-Received: by 2002:adf:8162:: with SMTP id 89mr8736315wrm.387.1588766233499; 
+ Wed, 06 May 2020 04:57:13 -0700 (PDT)
 Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
  by smtp.gmail.com with ESMTPSA id
- r3sm1922605wrx.72.2020.05.06.02.54.48
+ w4sm2398660wro.28.2020.05.06.04.57.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2020 02:54:49 -0700 (PDT)
-Date: Wed, 6 May 2020 05:54:46 -0400
+ Wed, 06 May 2020 04:57:12 -0700 (PDT)
+Date: Wed, 6 May 2020 07:57:10 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH net-next 1/2] virtio-net: don't reserve space for vnet
- header for XDP
-Message-ID: <20200506055436-mutt-send-email-mst@kernel.org>
-References: <20200506061633.16327-1-jasowang@redhat.com>
- <20200506033834-mutt-send-email-mst@kernel.org>
- <7a169b06-b6b9-eac1-f03a-39dd1cfcce57@redhat.com>
+To: Jesper Dangaard Brouer <brouer@redhat.com>
+Subject: Re: performance bug in virtio net xdp
+Message-ID: <20200506075226-mutt-send-email-mst@kernel.org>
+References: <20200506035704-mutt-send-email-mst@kernel.org>
+ <20200506103757.4bc78b3a@carbon>
 MIME-Version: 1.0
-In-Reply-To: <7a169b06-b6b9-eac1-f03a-39dd1cfcce57@redhat.com>
+In-Reply-To: <20200506103757.4bc78b3a@carbon>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: netdev@vger.kernel.org, bpf@vger.kernel.org,
- Jesper Dangaard Brouer <brouer@redhat.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Eugenio Perez Martin <eperezma@redhat.com>, bpf@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,54 +105,68 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gV2VkLCBNYXkgMDYsIDIwMjAgYXQgMDQ6MTk6NDBQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIwLzUvNiDkuIvljYgzOjUzLCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6
-Cj4gPiBPbiBXZWQsIE1heSAwNiwgMjAyMCBhdCAwMjoxNjozMlBNICswODAwLCBKYXNvbiBXYW5n
-IHdyb3RlOgo+ID4gPiBXZSB0cmllZCB0byByZXNlcnZlIHNwYWNlIGZvciB2bmV0IGhlYWRlciBi
-ZWZvcmUKPiA+ID4geGRwLmRhdGFfaGFyZF9zdGFydC4gQnV0IHRoaXMgaXMgdXNlbGVzcyBzaW5j
-ZSB0aGUgcGFja2V0IGNvdWxkIGJlCj4gPiA+IG1vZGlmaWVkIGJ5IFhEUCB3aGljaCBtYXkgaW52
-YWxpZGF0ZSB0aGUgaW5mb3JtYXRpb24gc3RvcmVkIGluIHRoZQo+ID4gPiBoZWFkZXIgYW5kIHRo
-ZXJlJ3Mgbm8gd2F5IGZvciBYRFAgdG8ga25vdyB0aGUgZXhpc3RlbmNlIG9mIHRoZSB2bmV0Cj4g
-PiA+IGhlYWRlciBjdXJyZW50bHkuCj4gPiBXaGF0IGRvIHlvdSBtZWFuPyBEb2Vzbid0IFhEUF9Q
-QVNTIHVzZSB0aGUgaGVhZGVyIGluIHRoZSBidWZmZXI/Cj4gCj4gCj4gV2UgZG9uJ3QsIHNlZSA0
-MzZjOTQ1M2ExYWMwICgidmlydGlvLW5ldDoga2VlcCB2bmV0IGhlYWRlciB6ZXJvZWQgYWZ0ZXIK
-PiBwcm9jZXNzaW5nIFhEUCIpCj4gCj4gSWYgdGhlcmUncyBvdGhlciBwbGFjZSwgaXQgc2hvdWxk
-IGJlIGEgYnVnLgo+IAo+IAo+ID4gCj4gPiA+IFNvIGxldCdzIGp1c3Qgbm90IHJlc2VydmUgc3Bh
-Y2UgZm9yIHZuZXQgaGVhZGVyIGluIHRoaXMgY2FzZS4KPiA+IEluIGFueSBjYXNlLCB3ZSBjYW4g
-ZmluZCBvdXQgWERQIGRvZXMgaGVhZCBhZGp1c3RtZW50cwo+ID4gaWYgd2UgbmVlZCB0by4KPiAK
-PiAKPiBCdXQgWERQIHByb2dyYW0gY2FuIG1vZGlmeSB0aGUgcGFja2V0cyB3aXRob3V0IGFkanVz
-dGluZyBoZWFkZXJzLgo+IAo+IFRoYW5rcwoKVGhlbiB3aGF0J3MgdGhlIHByb2JsZW0/Cgo+IAo+
-ID4gCj4gPiAKPiA+ID4gQ2M6IEplc3BlciBEYW5nYWFyZCBCcm91ZXIgPGJyb3VlckByZWRoYXQu
-Y29tPgo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBKYXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29t
-Pgo+ID4gPiAtLS0KPiA+ID4gICBkcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMgfCA2ICsrKy0tLQo+
-ID4gPiAgIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCj4g
-PiA+IAo+ID4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvdmlydGlvX25ldC5jIGIvZHJpdmVy
-cy9uZXQvdmlydGlvX25ldC5jCj4gPiA+IGluZGV4IDExZjcyMjQ2MDUxMy4uOThkZDc1YjY2NWE1
-IDEwMDY0NAo+ID4gPiAtLS0gYS9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMKPiA+ID4gKysrIGIv
-ZHJpdmVycy9uZXQvdmlydGlvX25ldC5jCj4gPiA+IEBAIC02ODQsOCArNjg0LDggQEAgc3RhdGlj
-IHN0cnVjdCBza19idWZmICpyZWNlaXZlX3NtYWxsKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYsCj4g
-PiA+ICAgCQkJcGFnZSA9IHhkcF9wYWdlOwo+ID4gPiAgIAkJfQo+ID4gPiAtCQl4ZHAuZGF0YV9o
-YXJkX3N0YXJ0ID0gYnVmICsgVklSVE5FVF9SWF9QQUQgKyB2aS0+aGRyX2xlbjsKPiA+ID4gLQkJ
-eGRwLmRhdGEgPSB4ZHAuZGF0YV9oYXJkX3N0YXJ0ICsgeGRwX2hlYWRyb29tOwo+ID4gPiArCQl4
-ZHAuZGF0YV9oYXJkX3N0YXJ0ID0gYnVmICsgVklSVE5FVF9SWF9QQUQ7Cj4gPiA+ICsJCXhkcC5k
-YXRhID0geGRwLmRhdGFfaGFyZF9zdGFydCArIHhkcF9oZWFkcm9vbSArIHZpLT5oZHJfbGVuOwo+
-ID4gPiAgIAkJeGRwLmRhdGFfZW5kID0geGRwLmRhdGEgKyBsZW47Cj4gPiA+ICAgCQl4ZHAuZGF0
-YV9tZXRhID0geGRwLmRhdGE7Cj4gPiA+ICAgCQl4ZHAucnhxID0gJnJxLT54ZHBfcnhxOwo+ID4g
-PiBAQCAtODQ1LDcgKzg0NSw3IEBAIHN0YXRpYyBzdHJ1Y3Qgc2tfYnVmZiAqcmVjZWl2ZV9tZXJn
-ZWFibGUoc3RydWN0IG5ldF9kZXZpY2UgKmRldiwKPiA+ID4gICAJCSAqIHRoZSBkZXNjcmlwdG9y
-IG9uIGlmIHdlIGdldCBhbiBYRFBfVFggcmV0dXJuIGNvZGUuCj4gPiA+ICAgCQkgKi8KPiA+ID4g
-ICAJCWRhdGEgPSBwYWdlX2FkZHJlc3MoeGRwX3BhZ2UpICsgb2Zmc2V0Owo+ID4gPiAtCQl4ZHAu
-ZGF0YV9oYXJkX3N0YXJ0ID0gZGF0YSAtIFZJUlRJT19YRFBfSEVBRFJPT00gKyB2aS0+aGRyX2xl
-bjsKPiA+ID4gKwkJeGRwLmRhdGFfaGFyZF9zdGFydCA9IGRhdGEgLSBWSVJUSU9fWERQX0hFQURS
-T09NOwo+ID4gPiAgIAkJeGRwLmRhdGEgPSBkYXRhICsgdmktPmhkcl9sZW47Cj4gPiA+ICAgCQl4
-ZHAuZGF0YV9lbmQgPSB4ZHAuZGF0YSArIChsZW4gLSB2aS0+aGRyX2xlbik7Cj4gPiA+ICAgCQl4
-ZHAuZGF0YV9tZXRhID0geGRwLmRhdGE7Cj4gPiA+IC0tIAo+ID4gPiAyLjIwLjEKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1h
-aWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRw
-czovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXph
-dGlvbg==
+On Wed, May 06, 2020 at 10:37:57AM +0200, Jesper Dangaard Brouer wrote:
+> On Wed, 6 May 2020 04:08:27 -0400
+> "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> 
+> > So for mergeable bufs, we use ewma machinery to guess the correct buffer
+> > size. If we don't guess correctly, XDP has to do aggressive copies.
+> > 
+> > Problem is, xdp paths do not update the ewma at all, except
+> > sometimes with XDP_PASS. So whatever we happen to have
+> > before we attach XDP, will mostly stay around.
+> > 
+> > The fix is probably to update ewma unconditionally.
+> 
+> I personally find the code hard to follow, and (I admit) that it took
+> me some time to understand this code path (so I might still be wrong).
+> 
+> In patch[1] I tried to explain (my understanding):
+> 
+>   In receive_mergeable() the frame size is more dynamic. There are two
+>   basic cases: (1) buffer size is based on a exponentially weighted
+>   moving average (see DECLARE_EWMA) of packet length. Or (2) in case
+>   virtnet_get_headroom() have any headroom then buffer size is
+>   PAGE_SIZE. The ctx pointer is this time used for encoding two values;
+>   the buffer len "truesize" and headroom. In case (1) if the rx buffer
+>   size is underestimated, the packet will have been split over more
+>   buffers (num_buf info in virtio_net_hdr_mrg_rxbuf placed in top of
+>   buffer area). If that happens the XDP path does a xdp_linearize_page
+>   operation.
+> 
+> 
+> The EWMA code is not used when headroom is defined, which e.g. gets
+> enabled when running XDP.
+> 
+> 
+> [1] https://lore.kernel.org/netdev/158824572816.2172139.1358700000273697123.stgit@firesoul/
+
+You are right.
+So I guess the problem is just inconsistency?
+
+When XDP program returns XDP_PASS, and it all fits in one page,
+then we trigger
+	        ewma_pkt_len_add(&rq->mrg_avg_pkt_len, head_skb->len);
+
+if it does not trigger XDP_PASS, or does not fit in one page,
+then we don't.
+
+Given XDP does not use ewma for sizing, let's not update the average
+either.
+
+
+> -- 
+> Best regards,
+>   Jesper Dangaard Brouer
+>   MSc.CS, Principal Kernel Engineer at Red Hat
+>   LinkedIn: http://www.linkedin.com/in/brouer
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
