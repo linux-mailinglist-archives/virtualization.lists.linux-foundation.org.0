@@ -1,103 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 401581C6FFD
-	for <lists.virtualization@lfdr.de>; Wed,  6 May 2020 14:09:01 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D41A18851B;
-	Wed,  6 May 2020 12:08:59 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kYJufhIuC-X7; Wed,  6 May 2020 12:08:59 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id EEA5088517;
-	Wed,  6 May 2020 12:08:58 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AF258C088B;
-	Wed,  6 May 2020 12:08:58 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ADC29C0859
- for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 12:08:57 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 450A21C7B40
+	for <lists.virtualization@lfdr.de>; Wed,  6 May 2020 22:29:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 7E80124F56
- for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 12:08:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 5B77825F5B;
+	Wed,  6 May 2020 20:29:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1mdA3eIImH4I
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id lkRXtlYDKBKr; Wed,  6 May 2020 20:29:00 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 2C01E25C57;
+	Wed,  6 May 2020 20:29:00 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 19030C0859;
+	Wed,  6 May 2020 20:29:00 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D860AC0859
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 12:08:56 +0000 (UTC)
+ Wed,  6 May 2020 20:28:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id C978489335
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  6 May 2020 20:28:58 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id KsupS0t4ezYm
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  6 May 2020 20:28:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
  [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id 1F828203EC
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 0D009892B5
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 May 2020 12:08:56 +0000 (UTC)
+ Wed,  6 May 2020 20:28:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588766934;
+ s=mimecast20190719; t=1588796933;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hAmivG5aDvvl7e+GYdcGOegOdLibFaOeKZvY0VQjVvw=;
- b=Plbwo/PE2+V4u6YvfBr1uAWPQoOVp/i7AUUJYYmDt0zGGJR/7kVy7fYyo51ZH1gwt6RINM
- b9uMqjIpz35Ll6Z3VqSFpbYK1YVh2VrfMVDsTwS7EdYQLptV8nfRe856ViWAxOs66iESCb
- 5wJ549L9/cs56FSDsmvhJr8l6ipJQFU=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-53-qq79DbeZPTGm0evnI3YDxA-1; Wed, 06 May 2020 08:08:52 -0400
-X-MC-Unique: qq79DbeZPTGm0evnI3YDxA-1
-Received: by mail-wr1-f69.google.com with SMTP id f15so1217080wrj.2
+ bh=Cu+S4C27UOFa3OfMh+dHOhDVzuXz2x4jIHvsepSqLnk=;
+ b=KdfUx82HVaHJAs+y2oE4beBawHiwjCaGisvs2tb8MmYS1SJa7Qx5N+/W8Hbn+5k8eqll1U
+ WVDbYu910ENK1y0mCnIN88/5lNykb6Tzjs3ftrAgPUrx8sp/rs3EJ1c1l82pCpBS3C6B7z
+ D1kmj/f8XJ4AeJk4CawsGJMY7UPJ1sA=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-299-V0Z0QiqROQS4hkOz1nGErg-1; Wed, 06 May 2020 16:28:52 -0400
+X-MC-Unique: V0Z0QiqROQS4hkOz1nGErg-1
+Received: by mail-wm1-f69.google.com with SMTP id w2so1867551wmc.3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 06 May 2020 05:08:52 -0700 (PDT)
+ Wed, 06 May 2020 13:28:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=hAmivG5aDvvl7e+GYdcGOegOdLibFaOeKZvY0VQjVvw=;
- b=o79Uh9wgkMTKnOl197EwNK8VlsCWHaERqlGymFsV1dkWH55QRMhlcrTfWG1vVZBR+d
- G8u1L8cGtbBcMpFyCUf9Ib68qcI3q2/G991Eqzn6BLEkTcIZadpF6B7nzE6DYBUKJTZo
- XWctPgREfsOGQN86W/vOb6W2nPvXunlt4CeTyShGczhOrzxGZf8VjcXyYaW3CCNZa+En
- U23S+HiP1FxpoZqpSafO34V/eF4bQrCyCNWA4QfIabrt3tty6+U4SrIH+h0CI8f495T2
- KCKnvGeb/OAI4MOmFCH92xPGSQX/6AbYken/Pi5fskheT1FS/Dtil9sRglDcvD7+Hmak
- l4SQ==
-X-Gm-Message-State: AGi0PuY0L2m+cu7ODudZh7COzrfBy9N8PoQVuUF16Gy19h8Hzh+1r0nV
- A6zXB/913hlMJP7JCKxvCtoL2Mfkgz6bNmKG6mCqNbSp4S+MXHjpt2VRys/7ihGmTFsRpElJ25+
- rQ6zBcGgq9iEnQpi4U2al+R0fJZMtaCJr5nxXFnWyOQ==
-X-Received: by 2002:a1c:f416:: with SMTP id z22mr4203999wma.32.1588766931870; 
- Wed, 06 May 2020 05:08:51 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJBsIQXXLBh7+polD0/FRHAo1jIr0FLeGcQ49ZR50oVFkk3bBSfh+noTe2EUmUQ7wGzC4gACg==
-X-Received: by 2002:a1c:f416:: with SMTP id z22mr4203979wma.32.1588766931683; 
- Wed, 06 May 2020 05:08:51 -0700 (PDT)
+ :mime-version:content-disposition:in-reply-to;
+ bh=Cu+S4C27UOFa3OfMh+dHOhDVzuXz2x4jIHvsepSqLnk=;
+ b=iyK46ZZ9Pkj8BQs32NM4p9T6Vd++NeQHQUCDCd3LQ8D7OECcgVgrSoyc2p112aElmC
+ qSmfTTh7XN9LD7EiIB2+ZrOGPPm1LEWSXCPC1QQQiXVmCq2VrYIgENr9azTTs3FzENUa
+ hDoobb4WLZ7TwPcBQU5Cwrdqr5BiPz+5sneVl0/+3BY20Yz7XI/AWfx+nEq1pHogmdCE
+ ihX9Klpkl+eKw+RVRS0gV/FJ59TBneOwtEfz2oBWGRS4b9T6KpnIu9B2F/wfB9MeNU13
+ qh6nodxEhRKJHelsgA+PE/to9+nVd6b2kC/saiIz9cfXPjS9Ynx7VBEjOsOaFy1lQMUG
+ 9f3Q==
+X-Gm-Message-State: AGi0PubOTBhc8caotZ3+E04yccJ/cNmbU0puE5LeCVQBp2PPe7TclEHI
+ z1N1Fa+1DZ8IULesRzFdHDnUZg15Lfi9c8M4grADdSWhlMy8tYcJ7eq7ET7IF1D7X1q20hZ5CV/
+ j5ZPGbfjIUZ1zalGlHvk2UTi84H0Utl5NorAiF7Kk4A==
+X-Received: by 2002:adf:e449:: with SMTP id t9mr11428844wrm.108.1588796931026; 
+ Wed, 06 May 2020 13:28:51 -0700 (PDT)
+X-Google-Smtp-Source: APiQypJYl+rPKkzHvCZgpgimxYFgM4/uAdMXx173aAgzcr8cA+F2M7DbC5yVSSYFy58Q5bTl4e+qyg==
+X-Received: by 2002:adf:e449:: with SMTP id t9mr11428829wrm.108.1588796930811; 
+ Wed, 06 May 2020 13:28:50 -0700 (PDT)
 Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
  by smtp.gmail.com with ESMTPSA id
- s17sm2634468wmc.48.2020.05.06.05.08.50
+ q4sm4632965wrx.9.2020.05.06.13.28.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2020 05:08:51 -0700 (PDT)
-Date: Wed, 6 May 2020 08:08:48 -0400
+ Wed, 06 May 2020 13:28:50 -0700 (PDT)
+Date: Wed, 6 May 2020 16:28:48 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH net-next 2/2] virtio-net: fix the XDP truesize
- calculation for mergeable buffers
-Message-ID: <20200506075807-mutt-send-email-mst@kernel.org>
-References: <20200506061633.16327-1-jasowang@redhat.com>
- <20200506061633.16327-2-jasowang@redhat.com>
- <20200506033259-mutt-send-email-mst@kernel.org>
- <789fc6e6-9667-a609-c777-a9b1fed72f41@redhat.com>
+To: David Hildenbrand <david@redhat.com>
+Subject: Re: [vhost:vhost 8/22] drivers/virtio/virtio_mem.c:1375:20: error:
+ implicit declaration of function 'kzalloc'; did you mean 'vzalloc'?
+Message-ID: <20200506162751-mutt-send-email-mst@kernel.org>
+References: <202005052221.83QerHmG%lkp@intel.com>
+ <7dea2810-85cf-0892-20a8-bba3e3a2c133@redhat.com>
+ <20200505114433-mutt-send-email-mst@kernel.org>
+ <3eaebd8d-750a-d046-15f5-706fb00a196e@redhat.com>
+ <20200505121732-mutt-send-email-mst@kernel.org>
+ <e607a850-ba5c-6033-93fc-144639b125b8@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <789fc6e6-9667-a609-c777-a9b1fed72f41@redhat.com>
+In-Reply-To: <e607a850-ba5c-6033-93fc-144639b125b8@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: netdev@vger.kernel.org, bpf@vger.kernel.org,
- Jesper Dangaard Brouer <brouer@redhat.com>, linux-kernel@vger.kernel.org,
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>, kbuild-all@lists.01.org,
+ kbuild test robot <lkp@intel.com>, kvm@vger.kernel.org, netdev@vger.kernel.org,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -110,36 +110,78 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gV2VkLCBNYXkgMDYsIDIwMjAgYXQgMDQ6MjE6MTVQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIwLzUvNiDkuIvljYgzOjM3LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6
-Cj4gPiBPbiBXZWQsIE1heSAwNiwgMjAyMCBhdCAwMjoxNjozM1BNICswODAwLCBKYXNvbiBXYW5n
-IHdyb3RlOgo+ID4gPiBXZSBzaG91bGQgbm90IGV4Y2x1ZGUgaGVhZHJvb20gYW5kIHRhaWxyb29t
-IHdoZW4gWERQIGlzIHNldC4gU28gdGhpcwo+ID4gPiBwYXRjaCBmaXhlcyB0aGlzIGJ5IGluaXRp
-YWxpemluZyB0aGUgdHJ1ZXNpemUgZnJvbSBQQUdFX1NJWkUgd2hlbiBYRFAKPiA+ID4gaXMgc2V0
-Lgo+ID4gPiAKPiA+ID4gQ2M6IEplc3BlciBEYW5nYWFyZCBCcm91ZXI8YnJvdWVyQHJlZGhhdC5j
-b20+Cj4gPiA+IFNpZ25lZC1vZmYtYnk6IEphc29uIFdhbmc8amFzb3dhbmdAcmVkaGF0LmNvbT4K
-PiA+IFNlZW1zIHRvbyBhZ2dyZXNzaXZlLCB3ZSBkbyBub3QgdXNlIHVwIHRoZSB3aG9sZSBwYWdl
-IGZvciB0aGUgc2l6ZS4KPiA+IAo+ID4gCj4gPiAKPiAKPiBGb3IgWERQIHllcywgd2UgZG86Cj4g
-Cj4gc3RhdGljIHVuc2lnbmVkIGludCBnZXRfbWVyZ2VhYmxlX2J1Zl9sZW4oc3RydWN0IHJlY2Vp
-dmVfcXVldWUgKnJxLAo+IMKgwqDCoCDCoMKgwqAgwqDCoMKgIMKgwqDCoCDCoMKgwqAgwqAgc3Ry
-dWN0IGV3bWFfcGt0X2xlbiAqYXZnX3BrdF9sZW4sCj4gwqDCoMKgIMKgwqDCoCDCoMKgwqAgwqDC
-oMKgIMKgwqDCoCDCoCB1bnNpZ25lZCBpbnQgcm9vbSkKPiB7Cj4gwqDCoMKgIGNvbnN0IHNpemVf
-dCBoZHJfbGVuID0gc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fbmV0X2hkcl9tcmdfcnhidWYpOwo+IMKg
-wqDCoCB1bnNpZ25lZCBpbnQgbGVuOwo+IAo+IMKgwqDCoCBpZiAocm9vbSkKPiDCoMKgwqAgwqDC
-oMKgIHJldHVybiBQQUdFX1NJWkUgLSByb29tOwo+IAo+IC4uLgo+IAo+IFRoYW5rcwoKSG1tLiBC
-dXQgdGhhdCdzIG9ubHkgZm9yIG5ldyBidWZmZXJzLiBCdWZmZXJzIHRoYXQgd2VyZSBvdXRzdGFu
-ZGluZwpiZWZvcmUgeGRwIHdhcyBhdHRhY2hlZCBkb24ndCB1c2UgdGhlIHdob2xlIHBhZ2UsIGRv
-IHRoZXk/CgoKCgpBbHNvLCB3aXRoIFRDUCBzbWFsbHF1ZXVlcyBibG9ja2luZyB0aGUgcXVldWUg
-bGlrZSB0aGF0IG1pZ2h0IGJlIGEgcHJvYmxlbS4KQ291bGQgeW91IHRyeSBhbmQgY2hlY2sgcGVy
-Zm9ybWFuY2UgaW1wYWN0IG9mIHRoaXM/CkkgbG9va2VkIGF0IHdoYXQgb3RoZXIgZHJpdmVycyBk
-byBhbmQgSSBzZWUgdGhleSB0ZW5kIHRvIGNvcHkgdGhlIHNrYgppbiBYRFBfUEFTUyBjYXNlLiBB
-VE0gd2UgZG9uJ3Qgbm9ybWFsbHkgLSBidXQgc2hvdWxkIHdlPwoKLS0gCk1TVAoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFp
-bGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBz
-Oi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0
-aW9u
+On Tue, May 05, 2020 at 06:22:51PM +0200, David Hildenbrand wrote:
+> On 05.05.20 18:20, Michael S. Tsirkin wrote:
+> > On Tue, May 05, 2020 at 05:46:44PM +0200, David Hildenbrand wrote:
+> >> On 05.05.20 17:44, Michael S. Tsirkin wrote:
+> >>> On Tue, May 05, 2020 at 04:50:13PM +0200, David Hildenbrand wrote:
+> >>>> On 05.05.20 16:15, kbuild test robot wrote:
+> >>>>> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git vhost
+> >>>>> head:   da1742791d8c0c0a8e5471f181549c4726a5c5f9
+> >>>>> commit: 7527631e900d464ed2d533f799cb0da2b29cc6f0 [8/22] virtio-mem: Paravirtualized memory hotplug
+> >>>>> config: x86_64-randconfig-b002-20200505 (attached as .config)
+> >>>>> compiler: gcc-7 (Ubuntu 7.5.0-6ubuntu2) 7.5.0
+> >>>>> reproduce:
+> >>>>>         git checkout 7527631e900d464ed2d533f799cb0da2b29cc6f0
+> >>>>>         # save the attached .config to linux build tree
+> >>>>>         make ARCH=x86_64 
+> >>>>>
+> >>>>> If you fix the issue, kindly add following tag as appropriate
+> >>>>> Reported-by: kbuild test robot <lkp@intel.com>
+> >>>>>
+> >>>>> All error/warnings (new ones prefixed by >>):
+> >>>>>
+> >>>>>    drivers/virtio/virtio_mem.c: In function 'virtio_mem_probe':
+> >>>>>>> drivers/virtio/virtio_mem.c:1375:20: error: implicit declaration of function 'kzalloc'; did you mean 'vzalloc'? [-Werror=implicit-function-declaration]
+> >>>>>      vdev->priv = vm = kzalloc(sizeof(*vm), GFP_KERNEL);
+> >>>>>                        ^~~~~~~
+> >>>>>                        vzalloc
+> >>>>>>> drivers/virtio/virtio_mem.c:1375:18: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+> >>>>>      vdev->priv = vm = kzalloc(sizeof(*vm), GFP_KERNEL);
+> >>>>>                      ^
+> >>>>>>> drivers/virtio/virtio_mem.c:1419:2: error: implicit declaration of function 'kfree'; did you mean 'vfree'? [-Werror=implicit-function-declaration]
+> >>>>>      kfree(vm);
+> >>>>>      ^~~~~
+> >>>>>      vfree
+> >>>>>    cc1: some warnings being treated as errors
+> >>>>>
+> >>>>> vim +1375 drivers/virtio/virtio_mem.c
+> >>>>
+> >>>> Guess we simply need
+> >>>>
+> >>>>  #include <linux/slab.h>
+> >>>>
+> >>>> to make it work for that config.
+> >>>
+> >>>
+> >>> OK I added that in the 1st commit that introduced virtio-mem.
+> >>
+> >> Thanks. I have some addon-patches ready, what's the best way to continue
+> >> with these?
+> > 
+> > If these are bugfixes, just respin the series (including this fix).
+> 
+> There are two really minor bugfixes for corner-case error handling and
+> one simplification. I can squash them and resend, makes things easier.
+
+OK try to do it ASAP, we don't want to repeat the drama we had with vdpa.
+
+> The other stuff I have are extensions, I will send as add-on.
+> 
+> Thanks!
+> 
+> 
+> -- 
+> Thanks,
+> 
+> David / dhildenb
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
