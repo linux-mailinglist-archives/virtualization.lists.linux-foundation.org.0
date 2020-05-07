@@ -2,95 +2,96 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DC7A1C885A
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 13:34:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3AC71C8861
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 13:34:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 32CBB893CE;
-	Thu,  7 May 2020 11:34:06 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6202C89430;
+	Thu,  7 May 2020 11:34:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GvFOeWPObQ9e; Thu,  7 May 2020 11:34:05 +0000 (UTC)
+	with ESMTP id OJhqr60uj4my; Thu,  7 May 2020 11:34:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 877E68945E;
-	Thu,  7 May 2020 11:34:05 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D561189389;
+	Thu,  7 May 2020 11:34:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 608A4C07FF;
-	Thu,  7 May 2020 11:34:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BDB20C07FF;
+	Thu,  7 May 2020 11:34:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 250D8C0865
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6F5A7C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:34:03 +0000 (UTC)
+ Thu,  7 May 2020 11:34:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 1D15189389
+ by hemlock.osuosl.org (Postfix) with ESMTP id 59A8D89389
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:34:03 +0000 (UTC)
+ Thu,  7 May 2020 11:34:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Wwjnel66NhcJ
+ with ESMTP id 8AAb3XpOGHm1
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:34:02 +0000 (UTC)
+ Thu,  7 May 2020 11:34:54 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 35F478934C
+ [205.139.110.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id B02018934C
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:34:02 +0000 (UTC)
+ Thu,  7 May 2020 11:34:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588851241;
+ s=mimecast20190719; t=1588851293;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=XwlnVfeL8zwiME3AXkx3OodZgfIVpDR8QDqNxlTyOzM=;
- b=Cp2JzWNXZC2wBfp5Ya6QW9ETP7PwBJzIO+DZNw+6albMmyYTidvRMZhhfk0b8Yn12X2zwo
- e52YrjT/Odl7Vhn1yKXI7zVpc0RbG8h/KeLsoeDUcrKf9B4Ai4sT+BCzQKtPbgMgpx0Qzl
- ciDShhaQzCPZdctGcbY7fOt+Zx/AcVk=
+ bh=eqvOBlgVIEs8Gtl6xmPaDqDCYhUqYo/jU6Ly/l67Miw=;
+ b=b9sh/ViF78+Ie46oAG+ViNrAHkq3LfepixJ868NikyxEJx9prhfy5G/jL61eqAmY8lHOnS
+ zWUmG/eWAgKOpoR6p/gCJkXuVRpew/J9P0uokIO+yEy5FYfXxWuF1b2cEtv5ZsbmqULaaE
+ bIvkFLcK8Q1Z8dpaBJGllST9SuLTvas=
 Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
  [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-477-NlATQHz4OWm4c0vkBjZamw-1; Thu, 07 May 2020 07:33:57 -0400
-X-MC-Unique: NlATQHz4OWm4c0vkBjZamw-1
-Received: by mail-wm1-f69.google.com with SMTP id d134so3923182wmd.0
+ us-mta-462-VNoA9-v6P-yaq9S6ebSpnw-1; Thu, 07 May 2020 07:34:52 -0400
+X-MC-Unique: VNoA9-v6P-yaq9S6ebSpnw-1
+Received: by mail-wm1-f69.google.com with SMTP id a206so176113wmh.6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 07 May 2020 04:33:57 -0700 (PDT)
+ Thu, 07 May 2020 04:34:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=XwlnVfeL8zwiME3AXkx3OodZgfIVpDR8QDqNxlTyOzM=;
- b=csdpthrh2Oncv56s8+g2fq6loB9im1VfSvHqJQZ6G1ALM9ycjHxLwF4wag1nx9qNwc
- H0o6m1D7vCd+MDoheFEHnNqlKohZcAfAaqxEzYV+xyOrAA3j7agwjxVQ6fMzGEB6xzDq
- BHYy60jdEVsUXQ/rGBvSdoKyKvxhS8wxfZ85oM6xS9Wppk7atNseicPcjLVDVVqGNAb2
- k2XYLQVhtzz8xEPTIdWXjWW/VWhxpCQBSXFH3x0DCd2JntADfIdqYdUiFaE6xCteparA
- /1ho+j8yJo55goEeQmoNt2q9KIX/quxJbjARvmYu1Uxc54sGIIAEb1sfx/8w66bac7ae
- FNCw==
-X-Gm-Message-State: AGi0PuYiRWzsomasjkul7oaaFe/aHqtjKTgpH9UeNljgEEHB1Ka0fnn8
- cJqyzMkiFyrk+YM6k+XRK7EBg0roFeBIM3tKKR22e4RYRjiRYYfuWjUMkRTufrhOBTiq5i69Qza
- 2TvOHZzADkiF3qvKO8hkPtCCl79A0zRHVyLS7Oy68dA==
-X-Received: by 2002:a1c:f20c:: with SMTP id s12mr10636340wmc.83.1588851236206; 
- Thu, 07 May 2020 04:33:56 -0700 (PDT)
-X-Google-Smtp-Source: APiQypKGIkZb1OCioKL4MfDtVCIXay4HVUxjU1z1uE6butvfdGNej6NGsQ5cSCDAt+neZC4D4zgsoQ==
-X-Received: by 2002:a1c:f20c:: with SMTP id s12mr10636305wmc.83.1588851235952; 
- Thu, 07 May 2020 04:33:55 -0700 (PDT)
+ bh=eqvOBlgVIEs8Gtl6xmPaDqDCYhUqYo/jU6Ly/l67Miw=;
+ b=D/dfD/rGNGgGqFHWDqtW/zDpqOmcHppz6pHiW7QfIE3wsormApjaCb6NuN/w1jAMvc
+ gZ+lIm3zfE3RwtUDfI1eNnmDMn2Ggoclqhm2x1oRZEp7vz1W2ynea/0KYn5eZHhmti0v
+ kERtWD85l5G3Q4eb//PO1Cw9LVThcyg/+rGi9HFIAlIw2imv/6O/5FWJoHT+KFCwSiYu
+ +X8lzpV3WYonzBasDQGi+UxSBezIvwaFeNBBmOzDBQEhZfDjo8fQLZqOXVRzcS/kLQ5d
+ C4OoWzX222xLhd4x1NRLME6uWmEHt3JXPtARXkfYujTClqh0gF45w8opr3Ht3fKqPDNm
+ 54nA==
+X-Gm-Message-State: AGi0Pubn9gcWOcqMhI3iHaHIugmRXl53IXrF/KmfQHQLG+kjvJyyL0w8
+ y4luAVm8f69NES81Q1REoh+/xE+Bh3YpAD0NUYM1B6QSpsEkIunJn79gFWyS41Wv8bVKaGJApCC
+ XROuFYnrLqaPLNzmcw9Hvr2qQQdVa4pswVn4RUR4k5w==
+X-Received: by 2002:a1c:e910:: with SMTP id q16mr396234wmc.158.1588851290756; 
+ Thu, 07 May 2020 04:34:50 -0700 (PDT)
+X-Google-Smtp-Source: APiQypIEJon7vaENbs1OmaRUfHXUhggPEYtcAd12YfpgMWFk8LZpYJx8EDfrRw7rVSkow6cjB/BCLg==
+X-Received: by 2002:a1c:e910:: with SMTP id q16mr396213wmc.158.1588851290530; 
+ Thu, 07 May 2020 04:34:50 -0700 (PDT)
 Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
  by smtp.gmail.com with ESMTPSA id
- t4sm2834162wmf.33.2020.05.07.04.33.53
+ k4sm3182951wmf.41.2020.05.07.04.34.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 May 2020 04:33:55 -0700 (PDT)
-Date: Thu, 7 May 2020 07:33:51 -0400
+ Thu, 07 May 2020 04:34:49 -0700 (PDT)
+Date: Thu, 7 May 2020 07:34:45 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: David Hildenbrand <david@redhat.com>
 Subject: Re: [PATCH v3 07/15] mm/memory_hotplug: Introduce
  offline_and_remove_memory()
-Message-ID: <20200507073302-mutt-send-email-mst@kernel.org>
+Message-ID: <20200507073408-mutt-send-email-mst@kernel.org>
 References: <20200507103119.11219-1-david@redhat.com>
  <20200507103119.11219-8-david@redhat.com>
  <20200507064558-mutt-send-email-mst@kernel.org>
  <a915653f-232e-aa13-68f7-f988704fa84c@redhat.com>
+ <441bfb92-ecfa-f54e-3661-b219ea166e55@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <a915653f-232e-aa13-68f7-f988704fa84c@redhat.com>
+In-Reply-To: <441bfb92-ecfa-f54e-3661-b219ea166e55@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -118,69 +119,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, May 07, 2020 at 01:24:38PM +0200, David Hildenbrand wrote:
-> On 07.05.20 12:46, Michael S. Tsirkin wrote:
-> > On Thu, May 07, 2020 at 12:31:11PM +0200, David Hildenbrand wrote:
-> >> virtio-mem wants to offline and remove a memory block once it unplugged
-> >> all subblocks (e.g., using alloc_contig_range()). Let's provide
-> >> an interface to do that from a driver. virtio-mem already supports to
-> >> offline partially unplugged memory blocks. Offlining a fully unplugged
-> >> memory block will not require to migrate any pages. All unplugged
-> >> subblocks are PageOffline() and have a reference count of 0 - so
-> >> offlining code will simply skip them.
+On Thu, May 07, 2020 at 01:33:23PM +0200, David Hildenbrand wrote:
+> >> I get:
 > >>
-> >> All we need is an interface to offline and remove the memory from kernel
-> >> module context, where we don't have access to the memory block devices
-> >> (esp. find_memory_block() and device_offline()) and the device hotplug
-> >> lock.
+> >> error: sha1 information is lacking or useless (mm/memory_hotplug.c).
+> >> error: could not build fake ancestor
 > >>
-> >> To keep things simple, allow to only work on a single memory block.
-> >>
-> >> Acked-by: Michal Hocko <mhocko@suse.com>
-> >> Tested-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-> >> Cc: Andrew Morton <akpm@linux-foundation.org>
-> >> Cc: David Hildenbrand <david@redhat.com>
-> >> Cc: Oscar Salvador <osalvador@suse.com>
-> >> Cc: Michal Hocko <mhocko@suse.com>
-> >> Cc: Pavel Tatashin <pasha.tatashin@soleen.com>
-> >> Cc: Wei Yang <richard.weiyang@gmail.com>
-> >> Cc: Dan Williams <dan.j.williams@intel.com>
-> >> Cc: Qian Cai <cai@lca.pw>
-> >> Signed-off-by: David Hildenbrand <david@redhat.com>
+> >> which version is this against? Pls post patches on top of some tag
+> >> in Linus' tree if possible.
 > > 
+> > As the cover states, latest linux-next. To be precise
 > > 
-> > didn't you lose Andrew Morton's ack here?
-> 
-> Yeah, thanks for noticing.
-> 
+> > commit 6b43f715b6379433e8eb30aa9bcc99bd6a585f77 (tag: next-20200507,
+> > next/master)
+> > Author: Stephen Rothwell <sfr@canb.auug.org.au>
+> > Date:   Thu May 7 18:11:31 2020 +1000
 > > 
-> >> ---
-> >>  include/linux/memory_hotplug.h |  1 +
-> >>  mm/memory_hotplug.c            | 37 ++++++++++++++++++++++++++++++++++
-> >>  2 files changed, 38 insertions(+)
+> >     Add linux-next specific files for 20200507
 > > 
-> > I get:
-> > 
-> > error: sha1 information is lacking or useless (mm/memory_hotplug.c).
-> > error: could not build fake ancestor
-> > 
-> > which version is this against? Pls post patches on top of some tag
-> > in Linus' tree if possible.
 > 
-> As the cover states, latest linux-next. To be precise
+> The patches seem to apply cleanly on top of
 > 
-> commit 6b43f715b6379433e8eb30aa9bcc99bd6a585f77 (tag: next-20200507,
-> next/master)
-> Author: Stephen Rothwell <sfr@canb.auug.org.au>
-> Date:   Thu May 7 18:11:31 2020 +1000
+> commit a811c1fa0a02c062555b54651065899437bacdbe (linus/master)
+> Merge: b9388959ba50 16f8036086a9
+> Author: Linus Torvalds <torvalds@linux-foundation.org>
+> Date:   Wed May 6 20:53:22 2020 -0700
 > 
->     Add linux-next specific files for 20200507
-> 
+>     Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
 
-Don't base on linux-next please. Generally base on the tree you are
-targeting, or Linus' tree.
+Because you have the relevant hashes in your git tree not pruned yet.
+Do a new clone and they won't apply.
 
-
+> 
+> I can resend based on that, after giving it a short test.
+> 
 > -- 
 > Thanks,
 > 
