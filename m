@@ -2,81 +2,71 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5EB81C8D5A
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:03:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5524D1C8E64
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:28:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 71D388957C;
-	Thu,  7 May 2020 14:03:57 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 02388894EC;
+	Thu,  7 May 2020 14:28:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CFmZx-5HLdQR; Thu,  7 May 2020 14:03:56 +0000 (UTC)
+	with ESMTP id 0ab3p9fAVlJw; Thu,  7 May 2020 14:28:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 920E8895B4;
-	Thu,  7 May 2020 14:03:56 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C771A894D9;
+	Thu,  7 May 2020 14:28:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 76F09C07FF;
-	Thu,  7 May 2020 14:03:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9DB30C07FF;
+	Thu,  7 May 2020 14:28:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8C036C07FF
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5DAAAC07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:03:55 +0000 (UTC)
+ Thu,  7 May 2020 14:28:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 6FEFE26426
+ by silver.osuosl.org (Postfix) with ESMTP id 4470226545
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:03:55 +0000 (UTC)
+ Thu,  7 May 2020 14:28:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Y8wQyAIub-wV
+ with ESMTP id SZV4Auq7D6-S
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:03:53 +0000 (UTC)
+ Thu,  7 May 2020 14:28:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by silver.osuosl.org (Postfix) with ESMTPS id AA088263F9
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by silver.osuosl.org (Postfix) with ESMTPS id C045720515
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:03:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588860231;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tQSI93WDnJ16nEtoeWpgKm4iRZohoBJubdiofU1fO/E=;
- b=iELLDIcTRGoPE6e9TuTzBJ6GRrcFZQ5nxB8aZopNof2wOxHvfEAVVDt7AjwNR+MBotmJTJ
- ITJc58jBVsDdzHDm83dXpw3PyNC+zp373GDKdgU0/3fFaPC2VEiY17CRqWF4DOqolvlixs
- EZkdjLwPaJes+lb8SVny3VGCuqVOZ8U=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-12-qfwtH60tNo6ptdwVBH69jQ-1; Thu, 07 May 2020 10:03:45 -0400
-X-MC-Unique: qfwtH60tNo6ptdwVBH69jQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ Thu,  7 May 2020 14:28:16 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 81E171895950;
- Thu,  7 May 2020 14:03:43 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-113-245.ams2.redhat.com [10.36.113.245])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7EEFE60CCC;
- Thu,  7 May 2020 14:03:41 +0000 (UTC)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 15/15] virtio-mem: Try to unplug the complete online memory
- block first
-Date: Thu,  7 May 2020 16:01:39 +0200
-Message-Id: <20200507140139.17083-16-david@redhat.com>
-In-Reply-To: <20200507140139.17083-1-david@redhat.com>
-References: <20200507140139.17083-1-david@redhat.com>
+ by mail.kernel.org (Postfix) with ESMTPSA id AE2F120870;
+ Thu,  7 May 2020 14:28:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1588861696;
+ bh=Uegwi40m6VKoo3qYz46wXwuY83tyEhWX7RHlaRpzbXs=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=CYeYcgTQ0Ywxl4zeeXpRWLUXS/cuzDs8oE341xgiHkmSwuU6KjjJunsdP/Iva5X1U
+ 4KVXKpp2ILdGiDIrDwJNE9NlcS9Xq6GmXV8Gf4OXkYmqVL9HptT3O/s2d2vylhgBIk
+ fLo1bNqo7rdyvzNRGokXdUxjcd8t3Vrf10d94dTU=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.6 39/50] drm/qxl: lost qxl_bo_kunmap_atomic_page in
+ qxl_image_init_helper()
+Date: Thu,  7 May 2020 10:27:15 -0400
+Message-Id: <20200507142726.25751-39-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200507142726.25751-1-sashal@kernel.org>
+References: <20200507142726.25751-1-sashal@kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- virtualization@lists.linux-foundation.org
+X-stable: review
+X-Patchwork-Hint: Ignore
+Cc: Sasha Levin <sashal@kernel.org>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org,
+ Vasily Averin <vvs@virtuozzo.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,141 +83,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Right now, we always try to unplug single subblocks when processing an
-online memory block. Let's try to unplug the complete online memory block
-first, in case it is fully plugged and the unplug request is large
-enough. Fallback to single subblocks in case the memory block cannot get
-unplugged as a whole.
+From: Vasily Averin <vvs@virtuozzo.com>
 
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
+[ Upstream commit 5b5703dbafae74adfbe298a56a81694172caf5e6 ]
+
+v2: removed TODO reminder
+
+Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/a4e0ae09-a73c-1c62-04ef-3f990d41bea9@virtuozzo.com
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/virtio/virtio_mem.c | 88 ++++++++++++++++++++++++-------------
- 1 file changed, 57 insertions(+), 31 deletions(-)
+ drivers/gpu/drm/qxl/qxl_image.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index abd93b778a26..9e523db3bee1 100644
---- a/drivers/virtio/virtio_mem.c
-+++ b/drivers/virtio/virtio_mem.c
-@@ -1307,6 +1307,46 @@ static int virtio_mem_mb_unplug_any_sb_offline(struct virtio_mem *vm,
- 	return 0;
- }
- 
-+/*
-+ * Unplug the given plugged subblocks of an online memory block.
-+ *
-+ * Will modify the state of the memory block.
-+ */
-+static int virtio_mem_mb_unplug_sb_online(struct virtio_mem *vm,
-+					  unsigned long mb_id, int sb_id,
-+					  int count)
-+{
-+	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size) * count;
-+	unsigned long start_pfn;
-+	int rc;
-+
-+	start_pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
-+			     sb_id * vm->subblock_size);
-+	rc = alloc_contig_range(start_pfn, start_pfn + nr_pages,
-+				MIGRATE_MOVABLE, GFP_KERNEL);
-+	if (rc == -ENOMEM)
-+		/* whoops, out of memory */
-+		return rc;
-+	if (rc)
-+		return -EBUSY;
-+
-+	/* Mark it as fake-offline before unplugging it */
-+	virtio_mem_set_fake_offline(start_pfn, nr_pages, true);
-+	adjust_managed_page_count(pfn_to_page(start_pfn), -nr_pages);
-+
-+	/* Try to unplug the allocated memory */
-+	rc = virtio_mem_mb_unplug_sb(vm, mb_id, sb_id, count);
-+	if (rc) {
-+		/* Return the memory to the buddy. */
-+		virtio_mem_fake_online(start_pfn, nr_pages);
-+		return rc;
-+	}
-+
-+	virtio_mem_mb_set_state(vm, mb_id,
-+				VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL);
-+	return 0;
-+}
-+
- /*
-  * Unplug the desired number of plugged subblocks of an online memory block.
-  * Will skip subblock that are busy.
-@@ -1321,16 +1361,21 @@ static int virtio_mem_mb_unplug_any_sb_online(struct virtio_mem *vm,
- 					      unsigned long mb_id,
- 					      uint64_t *nb_sb)
- {
--	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size);
--	unsigned long start_pfn;
- 	int rc, sb_id;
- 
--	/*
--	 * TODO: To increase the performance we want to try bigger, consecutive
--	 * subblocks first before falling back to single subblocks. Also,
--	 * we should sense via something like is_mem_section_removable()
--	 * first if it makes sense to go ahead any try to allocate.
--	 */
-+	/* If possible, try to unplug the complete block in one shot. */
-+	if (*nb_sb >= vm->nb_sb_per_mb &&
-+	    virtio_mem_mb_test_sb_plugged(vm, mb_id, 0, vm->nb_sb_per_mb)) {
-+		rc = virtio_mem_mb_unplug_sb_online(vm, mb_id, 0,
-+						    vm->nb_sb_per_mb);
-+		if (!rc) {
-+			*nb_sb -= vm->nb_sb_per_mb;
-+			goto unplugged;
-+		} else if (rc != -EBUSY)
-+			return rc;
-+	}
-+
-+	/* Fallback to single subblocks. */
- 	for (sb_id = vm->nb_sb_per_mb - 1; sb_id >= 0 && *nb_sb; sb_id--) {
- 		/* Find the next candidate subblock */
- 		while (sb_id >= 0 &&
-@@ -1339,34 +1384,15 @@ static int virtio_mem_mb_unplug_any_sb_online(struct virtio_mem *vm,
- 		if (sb_id < 0)
- 			break;
- 
--		start_pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
--				     sb_id * vm->subblock_size);
--		rc = alloc_contig_range(start_pfn, start_pfn + nr_pages,
--					MIGRATE_MOVABLE, GFP_KERNEL);
--		if (rc == -ENOMEM)
--			/* whoops, out of memory */
--			return rc;
--		if (rc)
--			/* memory busy, we can't unplug this chunk */
-+		rc = virtio_mem_mb_unplug_sb_online(vm, mb_id, sb_id, 1);
-+		if (rc == -EBUSY)
- 			continue;
--
--		/* Mark it as fake-offline before unplugging it */
--		virtio_mem_set_fake_offline(start_pfn, nr_pages, true);
--		adjust_managed_page_count(pfn_to_page(start_pfn), -nr_pages);
--
--		/* Try to unplug the allocated memory */
--		rc = virtio_mem_mb_unplug_sb(vm, mb_id, sb_id, 1);
--		if (rc) {
--			/* Return the memory to the buddy. */
--			virtio_mem_fake_online(start_pfn, nr_pages);
-+		else if (rc)
- 			return rc;
--		}
--
--		virtio_mem_mb_set_state(vm, mb_id,
--					VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL);
- 		*nb_sb -= 1;
+diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
+index 43688ecdd8a04..60ab7151b84dc 100644
+--- a/drivers/gpu/drm/qxl/qxl_image.c
++++ b/drivers/gpu/drm/qxl/qxl_image.c
+@@ -212,7 +212,8 @@ qxl_image_init_helper(struct qxl_device *qdev,
+ 		break;
+ 	default:
+ 		DRM_ERROR("unsupported image bit depth\n");
+-		return -EINVAL; /* TODO: cleanup */
++		qxl_bo_kunmap_atomic_page(qdev, image_bo, ptr);
++		return -EINVAL;
  	}
- 
-+unplugged:
- 	/*
- 	 * Once all subblocks of a memory block were unplugged, offline and
- 	 * remove it. This will usually not fail, as no memory is in use
+ 	image->u.bitmap.flags = QXL_BITMAP_TOP_DOWN;
+ 	image->u.bitmap.x = width;
 -- 
-2.25.3
+2.20.1
 
 _______________________________________________
 Virtualization mailing list
