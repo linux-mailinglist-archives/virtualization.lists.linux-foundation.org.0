@@ -1,82 +1,105 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F6681C86D0
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 12:33:45 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id AB6C0873EB;
-	Thu,  7 May 2020 10:33:43 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Py5ZopQKLHq0; Thu,  7 May 2020 10:33:43 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 21DF3873F3;
-	Thu,  7 May 2020 10:33:43 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 07B43C0890;
-	Thu,  7 May 2020 10:33:43 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DE131C07FF
- for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 10:33:41 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23DE41C8730
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 12:47:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C8E0F8935A
- for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 10:33:41 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D22DD87D41;
+	Thu,  7 May 2020 10:46:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vnwkxZndPL94; Thu,  7 May 2020 10:46:58 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1A34487BEE;
+	Thu,  7 May 2020 10:46:58 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E0B70C07FF;
+	Thu,  7 May 2020 10:46:57 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 77C9DC07FF
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  7 May 2020 10:46:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 57B8726287
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  7 May 2020 10:46:56 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ot2+Rp9nGM0Q
+ with ESMTP id 4nNtnrKsiPkJ
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 10:33:41 +0000 (UTC)
+ Thu,  7 May 2020 10:46:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id EEE1589371
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id 505C624E36
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 10:33:40 +0000 (UTC)
+ Thu,  7 May 2020 10:46:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588847619;
+ s=mimecast20190719; t=1588848414;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=ETQ6uKGHMQumDeMEnt+lmo6qtl8Y1L8zkXdal0m3TTw=;
- b=ajp1jMPk/3UfCwjNCzwOQ8fHU/O2SK75gyTp/i4xPq5t0JjJdt2vVW2+kB9aRoVSqrU43U
- Kc/c0mMTs51zk0rh1HkqT2464eDO5Ssmdq4kUgdZFoZ6UEwyZrX03UVcpu6qlxxzteRXLu
- QyQrgEccMlV2XPkGzx4b/z7w6Junutg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-346-zu1RLbGwPVy20Z2PfAoPog-1; Thu, 07 May 2020 06:33:35 -0400
-X-MC-Unique: zu1RLbGwPVy20Z2PfAoPog-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7B53F19200C1;
- Thu,  7 May 2020 10:33:34 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-113-245.ams2.redhat.com [10.36.113.245])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7BF5D5D9C5;
- Thu,  7 May 2020 10:33:32 +0000 (UTC)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 15/15] virtio-mem: Try to unplug the complete online memory
- block first
-Date: Thu,  7 May 2020 12:31:19 +0200
-Message-Id: <20200507103119.11219-16-david@redhat.com>
-In-Reply-To: <20200507103119.11219-1-david@redhat.com>
+ bh=jwFSP1qKPzAiDWVK6ecZi/lZRSGtCCdB3pW0dxf0VHw=;
+ b=D0pXP0IUIMyXohYPb51/MwOqKX3cwc8P3CtBT1BmWOlAcovCp183l3rbTn1Px4Btyw5R//
+ gNbfNHE5PRtqKcHOKz3qDV2dfoh6wXYpAbT2gtuddFNAXOUazg5TNJzXN041miT2NcPORQ
+ dtQTNv7YqmwPF3o9p+o4GAb5jQ97E2Y=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-279-cVE8bENQO3CTMsCrxTpDGA-1; Thu, 07 May 2020 06:46:52 -0400
+X-MC-Unique: cVE8bENQO3CTMsCrxTpDGA-1
+Received: by mail-wm1-f69.google.com with SMTP id o26so2423353wmh.1
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 07 May 2020 03:46:52 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=jwFSP1qKPzAiDWVK6ecZi/lZRSGtCCdB3pW0dxf0VHw=;
+ b=lDNAFoEYGA4l52zt7/HmUbkOcl22yzEkpu1cApu8iERw3hHPJqXr0Rhk9CHO6LK5SK
+ TOvVP1OtKCoC10ArN/4duPE2kpHo/sM2dn17pcfguuQdaagg2w4goXd60FEg5uWoGSkK
+ 1Tc2oFsDf1WSxPR6CL5w4d8P32WswfhZKs5utD6fhcEm7oD0lo4S5jzyEleTd+mdp3oM
+ 6DoP5PdM6WJ1zhnbFFbRI3yXTJcAwPV/YR8ULo18NJQ6MBqX2WdclsnWmjDkrVXqSR5m
+ fHrCKiCJdg4ga+7AyYv/bclrSNT68qwrL6tc1zZKnOaCrXM8L43oy5nhBbX43y/IwDvf
+ 1Ikg==
+X-Gm-Message-State: AGi0PubIaTbGW/atOLYYw7EWuKGTgRILzaigZf8GvJNqrYyKf0HHRHw2
+ LJ/2NvtYIm2TC9JHdUdADjO67F4zmdxxLI4KkGZpEUAcowFy7Qsl5JDIiwGHUkBo9sRnt6/aNtf
+ Zjn5QksBWoDf5bg59PDFAkzBkXTMP4V4sklCR5JPA9w==
+X-Received: by 2002:a1c:4b16:: with SMTP id y22mr9704519wma.170.1588848411507; 
+ Thu, 07 May 2020 03:46:51 -0700 (PDT)
+X-Google-Smtp-Source: APiQypJwkpcsvMDTihRmO/58UI/oBdWetzX3zNTW+RN5tQqtGOSRJ/Ox4DqJrFYHImjL7fq9CHlvYA==
+X-Received: by 2002:a1c:4b16:: with SMTP id y22mr9704494wma.170.1588848411214; 
+ Thu, 07 May 2020 03:46:51 -0700 (PDT)
+Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
+ by smtp.gmail.com with ESMTPSA id
+ v11sm7638062wrv.53.2020.05.07.03.46.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 May 2020 03:46:50 -0700 (PDT)
+Date: Thu, 7 May 2020 06:46:46 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH v3 07/15] mm/memory_hotplug: Introduce
+ offline_and_remove_memory()
+Message-ID: <20200507064558-mutt-send-email-mst@kernel.org>
 References: <20200507103119.11219-1-david@redhat.com>
+ <20200507103119.11219-8-david@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <20200507103119.11219-8-david@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Oscar Salvador <osalvador@suse.com>, virtio-dev@lists.oasis-open.org,
+ Michal Hocko <mhocko@suse.com>, Pavel Tatashin <pasha.tatashin@soleen.com>,
+ kvm@vger.kernel.org, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ linux-kernel@vger.kernel.org, Michal Hocko <mhocko@kernel.org>,
+ linux-mm@kvack.org, Wei Yang <richard.weiyang@gmail.com>,
+ Qian Cai <cai@lca.pw>, Andrew Morton <akpm@linux-foundation.org>,
+ virtualization@lists.linux-foundation.org,
+ Dan Williams <dan.j.williams@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,141 +116,111 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Right now, we always try to unplug single subblocks when processing an
-online memory block. Let's try to unplug the complete online memory block
-first, in case it is fully plugged and the unplug request is large
-enough. Fallback to single subblocks in case the memory block cannot get
-unplugged as a whole.
+On Thu, May 07, 2020 at 12:31:11PM +0200, David Hildenbrand wrote:
+> virtio-mem wants to offline and remove a memory block once it unplugged
+> all subblocks (e.g., using alloc_contig_range()). Let's provide
+> an interface to do that from a driver. virtio-mem already supports to
+> offline partially unplugged memory blocks. Offlining a fully unplugged
+> memory block will not require to migrate any pages. All unplugged
+> subblocks are PageOffline() and have a reference count of 0 - so
+> offlining code will simply skip them.
+> 
+> All we need is an interface to offline and remove the memory from kernel
+> module context, where we don't have access to the memory block devices
+> (esp. find_memory_block() and device_offline()) and the device hotplug
+> lock.
+> 
+> To keep things simple, allow to only work on a single memory block.
+> 
+> Acked-by: Michal Hocko <mhocko@suse.com>
+> Tested-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: David Hildenbrand <david@redhat.com>
+> Cc: Oscar Salvador <osalvador@suse.com>
+> Cc: Michal Hocko <mhocko@suse.com>
+> Cc: Pavel Tatashin <pasha.tatashin@soleen.com>
+> Cc: Wei Yang <richard.weiyang@gmail.com>
+> Cc: Dan Williams <dan.j.williams@intel.com>
+> Cc: Qian Cai <cai@lca.pw>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
 
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- drivers/virtio/virtio_mem.c | 88 ++++++++++++++++++++++++-------------
- 1 file changed, 57 insertions(+), 31 deletions(-)
 
-diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index abd93b778a26..9e523db3bee1 100644
---- a/drivers/virtio/virtio_mem.c
-+++ b/drivers/virtio/virtio_mem.c
-@@ -1307,6 +1307,46 @@ static int virtio_mem_mb_unplug_any_sb_offline(struct virtio_mem *vm,
- 	return 0;
- }
- 
-+/*
-+ * Unplug the given plugged subblocks of an online memory block.
-+ *
-+ * Will modify the state of the memory block.
-+ */
-+static int virtio_mem_mb_unplug_sb_online(struct virtio_mem *vm,
-+					  unsigned long mb_id, int sb_id,
-+					  int count)
-+{
-+	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size) * count;
-+	unsigned long start_pfn;
-+	int rc;
-+
-+	start_pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
-+			     sb_id * vm->subblock_size);
-+	rc = alloc_contig_range(start_pfn, start_pfn + nr_pages,
-+				MIGRATE_MOVABLE, GFP_KERNEL);
-+	if (rc == -ENOMEM)
-+		/* whoops, out of memory */
-+		return rc;
-+	if (rc)
-+		return -EBUSY;
-+
-+	/* Mark it as fake-offline before unplugging it */
-+	virtio_mem_set_fake_offline(start_pfn, nr_pages, true);
-+	adjust_managed_page_count(pfn_to_page(start_pfn), -nr_pages);
-+
-+	/* Try to unplug the allocated memory */
-+	rc = virtio_mem_mb_unplug_sb(vm, mb_id, sb_id, count);
-+	if (rc) {
-+		/* Return the memory to the buddy. */
-+		virtio_mem_fake_online(start_pfn, nr_pages);
-+		return rc;
-+	}
-+
-+	virtio_mem_mb_set_state(vm, mb_id,
-+				VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL);
-+	return 0;
-+}
-+
- /*
-  * Unplug the desired number of plugged subblocks of an online memory block.
-  * Will skip subblock that are busy.
-@@ -1321,16 +1361,21 @@ static int virtio_mem_mb_unplug_any_sb_online(struct virtio_mem *vm,
- 					      unsigned long mb_id,
- 					      uint64_t *nb_sb)
- {
--	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size);
--	unsigned long start_pfn;
- 	int rc, sb_id;
- 
--	/*
--	 * TODO: To increase the performance we want to try bigger, consecutive
--	 * subblocks first before falling back to single subblocks. Also,
--	 * we should sense via something like is_mem_section_removable()
--	 * first if it makes sense to go ahead any try to allocate.
--	 */
-+	/* If possible, try to unplug the complete block in one shot. */
-+	if (*nb_sb >= vm->nb_sb_per_mb &&
-+	    virtio_mem_mb_test_sb_plugged(vm, mb_id, 0, vm->nb_sb_per_mb)) {
-+		rc = virtio_mem_mb_unplug_sb_online(vm, mb_id, 0,
-+						    vm->nb_sb_per_mb);
-+		if (!rc) {
-+			*nb_sb -= vm->nb_sb_per_mb;
-+			goto unplugged;
-+		} else if (rc != -EBUSY)
-+			return rc;
-+	}
-+
-+	/* Fallback to single subblocks. */
- 	for (sb_id = vm->nb_sb_per_mb - 1; sb_id >= 0 && *nb_sb; sb_id--) {
- 		/* Find the next candidate subblock */
- 		while (sb_id >= 0 &&
-@@ -1339,34 +1384,15 @@ static int virtio_mem_mb_unplug_any_sb_online(struct virtio_mem *vm,
- 		if (sb_id < 0)
- 			break;
- 
--		start_pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
--				     sb_id * vm->subblock_size);
--		rc = alloc_contig_range(start_pfn, start_pfn + nr_pages,
--					MIGRATE_MOVABLE, GFP_KERNEL);
--		if (rc == -ENOMEM)
--			/* whoops, out of memory */
--			return rc;
--		if (rc)
--			/* memory busy, we can't unplug this chunk */
-+		rc = virtio_mem_mb_unplug_sb_online(vm, mb_id, sb_id, 1);
-+		if (rc == -EBUSY)
- 			continue;
--
--		/* Mark it as fake-offline before unplugging it */
--		virtio_mem_set_fake_offline(start_pfn, nr_pages, true);
--		adjust_managed_page_count(pfn_to_page(start_pfn), -nr_pages);
--
--		/* Try to unplug the allocated memory */
--		rc = virtio_mem_mb_unplug_sb(vm, mb_id, sb_id, 1);
--		if (rc) {
--			/* Return the memory to the buddy. */
--			virtio_mem_fake_online(start_pfn, nr_pages);
-+		else if (rc)
- 			return rc;
--		}
--
--		virtio_mem_mb_set_state(vm, mb_id,
--					VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL);
- 		*nb_sb -= 1;
- 	}
- 
-+unplugged:
- 	/*
- 	 * Once all subblocks of a memory block were unplugged, offline and
- 	 * remove it. This will usually not fail, as no memory is in use
--- 
-2.25.3
+didn't you lose Andrew Morton's ack here?
+
+> ---
+>  include/linux/memory_hotplug.h |  1 +
+>  mm/memory_hotplug.c            | 37 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 38 insertions(+)
+
+I get:
+
+error: sha1 information is lacking or useless (mm/memory_hotplug.c).
+error: could not build fake ancestor
+
+which version is this against? Pls post patches on top of some tag
+in Linus' tree if possible.
+
+
+> diff --git a/include/linux/memory_hotplug.h b/include/linux/memory_hotplug.h
+> index 7dca9cd6076b..d641828e5596 100644
+> --- a/include/linux/memory_hotplug.h
+> +++ b/include/linux/memory_hotplug.h
+> @@ -318,6 +318,7 @@ extern void try_offline_node(int nid);
+>  extern int offline_pages(unsigned long start_pfn, unsigned long nr_pages);
+>  extern int remove_memory(int nid, u64 start, u64 size);
+>  extern void __remove_memory(int nid, u64 start, u64 size);
+> +extern int offline_and_remove_memory(int nid, u64 start, u64 size);
+>  
+>  #else
+>  static inline void try_offline_node(int nid) {}
+> diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+> index 936bfe208a6e..bf1941f02a60 100644
+> --- a/mm/memory_hotplug.c
+> +++ b/mm/memory_hotplug.c
+> @@ -1748,4 +1748,41 @@ int remove_memory(int nid, u64 start, u64 size)
+>  	return rc;
+>  }
+>  EXPORT_SYMBOL_GPL(remove_memory);
+> +
+> +/*
+> + * Try to offline and remove a memory block. Might take a long time to
+> + * finish in case memory is still in use. Primarily useful for memory devices
+> + * that logically unplugged all memory (so it's no longer in use) and want to
+> + * offline + remove the memory block.
+> + */
+> +int offline_and_remove_memory(int nid, u64 start, u64 size)
+> +{
+> +	struct memory_block *mem;
+> +	int rc = -EINVAL;
+> +
+> +	if (!IS_ALIGNED(start, memory_block_size_bytes()) ||
+> +	    size != memory_block_size_bytes())
+> +		return rc;
+> +
+> +	lock_device_hotplug();
+> +	mem = find_memory_block(__pfn_to_section(PFN_DOWN(start)));
+> +	if (mem)
+> +		rc = device_offline(&mem->dev);
+> +	/* Ignore if the device is already offline. */
+> +	if (rc > 0)
+> +		rc = 0;
+> +
+> +	/*
+> +	 * In case we succeeded to offline the memory block, remove it.
+> +	 * This cannot fail as it cannot get onlined in the meantime.
+> +	 */
+> +	if (!rc) {
+> +		rc = try_remove_memory(nid, start, size);
+> +		WARN_ON_ONCE(rc);
+> +	}
+> +	unlock_device_hotplug();
+> +
+> +	return rc;
+> +}
+> +EXPORT_SYMBOL_GPL(offline_and_remove_memory);
+>  #endif /* CONFIG_MEMORY_HOTREMOVE */
+> -- 
+> 2.25.3
 
 _______________________________________________
 Virtualization mailing list
