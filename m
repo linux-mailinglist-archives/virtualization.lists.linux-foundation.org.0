@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28CDF1C8E71
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:29:13 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B4FFF1C8EA7
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:29:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A977287425;
-	Thu,  7 May 2020 14:29:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 66BE1895B3;
+	Thu,  7 May 2020 14:29:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id o0cl5goNUFu6; Thu,  7 May 2020 14:29:11 +0000 (UTC)
+	with ESMTP id fnaoywWdy5r2; Thu,  7 May 2020 14:29:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4C50C8740C;
-	Thu,  7 May 2020 14:29:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 03B618954F;
+	Thu,  7 May 2020 14:29:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2BD09C088B;
-	Thu,  7 May 2020 14:29:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DFACFC07FF;
+	Thu,  7 May 2020 14:29:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A3F85C07FF
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 85ED3C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:29:09 +0000 (UTC)
+ Thu,  7 May 2020 14:29:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 9F1C287595
+ by hemlock.osuosl.org (Postfix) with ESMTP id 81D76894D9
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:29:09 +0000 (UTC)
+ Thu,  7 May 2020 14:29:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hW74uxYb5Ypw
+ with ESMTP id glwURF5YLnki
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:29:09 +0000 (UTC)
+ Thu,  7 May 2020 14:29:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 1508A875CB
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 1EA1189356
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:29:09 +0000 (UTC)
+ Thu,  7 May 2020 14:29:38 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E848920838;
- Thu,  7 May 2020 14:29:07 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1D3F220838;
+ Thu,  7 May 2020 14:29:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588861748;
- bh=Uegwi40m6VKoo3qYz46wXwuY83tyEhWX7RHlaRpzbXs=;
+ s=default; t=1588861778;
+ bh=hrN4jo85YX8bUHMiL0SJw51uMtj6bE77uz+J0atkXvc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=OACktzHlMl9IoUSic6994XO9xMqlfAYHj9mUAMtlg81sGBJ/gKmfkriFU0NpsqIjl
- H8HbuQr6IZThUFNirJGcsiEmeFleXpc0NQSkNf2H+KuCFqA45dwxMMeICf93X005Ya
- bINZWsvJYeo8T+miY+zSay4Dk0O7WLLHjA2V4otw=
+ b=slr2g7Cagc1liVqlVFosb/vpwckkCxlsPBwCMhj9/PikACaCpmV/XlQwEQS/o4M+Q
+ kp+bFy/a2U5zyaVJLqshujpj3I4FJ2YqeM1DFadhtFJKH8cAsTiHq2AVLvSEzCZIjV
+ hTYftuPjZh1vYyg/LOpZf08jobCl+xEWs8E6jM1M=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.4 30/35] drm/qxl: lost qxl_bo_kunmap_atomic_page in
+Subject: [PATCH AUTOSEL 4.19 17/20] drm/qxl: lost qxl_bo_kunmap_atomic_page in
  qxl_image_init_helper()
-Date: Thu,  7 May 2020 10:28:24 -0400
-Message-Id: <20200507142830.26239-30-sashal@kernel.org>
+Date: Thu,  7 May 2020 10:29:13 -0400
+Message-Id: <20200507142917.26612-17-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200507142830.26239-1-sashal@kernel.org>
-References: <20200507142830.26239-1-sashal@kernel.org>
+In-Reply-To: <20200507142917.26612-1-sashal@kernel.org>
+References: <20200507142917.26612-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -98,10 +98,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
-index 43688ecdd8a04..60ab7151b84dc 100644
+index 7fbcc35e8ad35..c89c10055641e 100644
 --- a/drivers/gpu/drm/qxl/qxl_image.c
 +++ b/drivers/gpu/drm/qxl/qxl_image.c
-@@ -212,7 +212,8 @@ qxl_image_init_helper(struct qxl_device *qdev,
+@@ -210,7 +210,8 @@ qxl_image_init_helper(struct qxl_device *qdev,
  		break;
  	default:
  		DRM_ERROR("unsupported image bit depth\n");
