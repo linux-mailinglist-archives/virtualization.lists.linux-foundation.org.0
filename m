@@ -2,70 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29EEF1C87F8
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 13:23:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 779621C8809
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 13:25:02 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D6AB6873FD;
-	Thu,  7 May 2020 11:23:50 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2D2D8862EC;
+	Thu,  7 May 2020 11:25:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nFS6Wzl-Qv0o; Thu,  7 May 2020 11:23:50 +0000 (UTC)
+	with ESMTP id XuUNsefT5-SN; Thu,  7 May 2020 11:25:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 6CF1D8706E;
-	Thu,  7 May 2020 11:23:50 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7B88987268;
+	Thu,  7 May 2020 11:25:00 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 53C31C07FF;
-	Thu,  7 May 2020 11:23:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5F9D2C07FF;
+	Thu,  7 May 2020 11:25:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AA56BC07FF
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B9984C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:23:48 +0000 (UTC)
+ Thu,  7 May 2020 11:24:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id A5BA089395
+ by silver.osuosl.org (Postfix) with ESMTP id 994ED26316
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:23:48 +0000 (UTC)
+ Thu,  7 May 2020 11:24:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HYys9fgTbxn3
+ with ESMTP id 1Uji0nmDvbHf
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:23:48 +0000 (UTC)
+ Thu,  7 May 2020 11:24:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 1C18589390
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id 5E8571FC94
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:23:48 +0000 (UTC)
+ Thu,  7 May 2020 11:24:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588850626;
+ s=mimecast20190719; t=1588850697;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=Raakwta3xCmSG7c0aMesurx8AiJNS2TjgTw55hnwHhQ=;
- b=S0Vyt5I/Ic9bnM7+fTwjq2BhT+PJa6nU83WDRA1OfgzZec9vQ12HsJfOOgV2KADyVtOahq
- m1IFztQj8ztoVzO8k+XFh4BB3nM8lxJfO12DZMqm5xnVjyvlzcPi27fnJcLeSdifsDS0/W
- 4zFpJ9WsTQ4KluNNgbAPujRi/ivKFrc=
+ bh=BAFRcT5+H2Bnu3yV9VV0Ah0g4zEN4D3QnRh+Wv7aZKQ=;
+ b=ZwcPIZ+VtU4m1pHhTnWgsZNX8Che4uA6SVbwbMxDWXndyoi2E/I+/7HrZo40IWoGpof2W/
+ WFj9Pa/O7ilAAEokPMpNOSQTdDOvYJUnu1xTb4zGA1Ncnj3I8V96RLBV6H+ydAOs/RtDnB
+ 2uyDMd+lSs168L5UkhkiknoSLWQH8C0=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-380-C4ap9lL9OfSdlP8lwo6WKg-1; Thu, 07 May 2020 07:23:42 -0400
-X-MC-Unique: C4ap9lL9OfSdlP8lwo6WKg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-237--l2bUu0wMJimPess7AIcUA-1; Thu, 07 May 2020 07:24:55 -0400
+X-MC-Unique: -l2bUu0wMJimPess7AIcUA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9A6A018FE863;
- Thu,  7 May 2020 11:23:38 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DAB40101AFAD;
+ Thu,  7 May 2020 11:24:41 +0000 (UTC)
 Received: from [10.36.113.245] (ovpn-113-245.ams2.redhat.com [10.36.113.245])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 75AA25D9DA;
- Thu,  7 May 2020 11:23:20 +0000 (UTC)
-Subject: Re: [PATCH v3 00/15] virtio-mem: paravirtualized memory
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 012401C950;
+ Thu,  7 May 2020 11:24:38 +0000 (UTC)
+Subject: Re: [PATCH v3 07/15] mm/memory_hotplug: Introduce
+ offline_and_remove_memory()
 To: "Michael S. Tsirkin" <mst@redhat.com>
 References: <20200507103119.11219-1-david@redhat.com>
- <20200507064834-mutt-send-email-mst@kernel.org>
+ <20200507103119.11219-8-david@redhat.com>
+ <20200507064558-mutt-send-email-mst@kernel.org>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -111,39 +113,22 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <07b4f967-c589-fb00-61f4-38ba83be906d@redhat.com>
-Date: Thu, 7 May 2020 13:23:19 +0200
+Message-ID: <a915653f-232e-aa13-68f7-f988704fa84c@redhat.com>
+Date: Thu, 7 May 2020 13:24:38 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200507064834-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20200507064558-mutt-send-email-mst@kernel.org>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: Oscar Salvador <osalvador@suse.com>, Michal Hocko <mhocko@suse.com>,
- Robert Bradford <robert.bradford@intel.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, Pingfan Liu <kernelfans@gmail.com>,
- Luiz Capitulino <lcapitulino@redhat.com>, linux-mm@kvack.org,
- Alexander Potapenko <glider@google.com>,
- teawater <teawaterz@linux.alibaba.com>,
- Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Mike Rapoport <rppt@linux.ibm.com>, Wei Yang <richard.weiyang@gmail.com>,
- Anthony Yznaga <anthony.yznaga@oracle.com>, Dave Young <dyoung@redhat.com>,
- Len Brown <lenb@kernel.org>, Pavel Tatashin <pavel.tatashin@microsoft.com>,
- Pavel Tatashin <pasha.tatashin@soleen.com>,
- Anshuman Khandual <anshuman.khandual@arm.com>,
- "Dr . David Alan Gilbert" <dgilbert@redhat.com>, Qian Cai <cai@lca.pw>,
- Stefan Hajnoczi <stefanha@redhat.com>, Samuel Ortiz <samuel.ortiz@intel.com>,
- Dan Williams <dan.j.williams@intel.com>, Michal Hocko <mhocko@kernel.org>,
- Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>,
- Juergen Gross <jgross@suse.com>, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
- Sebastien Boeuf <sebastien.boeuf@intel.com>,
- Johannes Weiner <hannes@cmpxchg.org>, Igor Mammedov <imammedo@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Mel Gorman <mgorman@techsingularity.net>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: Oscar Salvador <osalvador@suse.com>, virtio-dev@lists.oasis-open.org,
+ Michal Hocko <mhocko@suse.com>, Pavel Tatashin <pasha.tatashin@soleen.com>,
+ kvm@vger.kernel.org, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ linux-kernel@vger.kernel.org, Michal Hocko <mhocko@kernel.org>,
+ linux-mm@kvack.org, Wei Yang <richard.weiyang@gmail.com>,
+ Qian Cai <cai@lca.pw>, Andrew Morton <akpm@linux-foundation.org>,
+ virtualization@lists.linux-foundation.org,
+ Dan Williams <dan.j.williams@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -160,20 +145,62 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 07.05.20 12:48, Michael S. Tsirkin wrote:
-> On Thu, May 07, 2020 at 12:31:04PM +0200, David Hildenbrand wrote:
->> This series is based on latest linux-next. The patches are located at:
->>     https://github.com/davidhildenbrand/linux.git virtio-mem-v3
+On 07.05.20 12:46, Michael S. Tsirkin wrote:
+> On Thu, May 07, 2020 at 12:31:11PM +0200, David Hildenbrand wrote:
+>> virtio-mem wants to offline and remove a memory block once it unplugged
+>> all subblocks (e.g., using alloc_contig_range()). Let's provide
+>> an interface to do that from a driver. virtio-mem already supports to
+>> offline partially unplugged memory blocks. Offlining a fully unplugged
+>> memory block will not require to migrate any pages. All unplugged
+>> subblocks are PageOffline() and have a reference count of 0 - so
+>> offlining code will simply skip them.
 >>
->> Patch #1 - #10 where contained in v2 and only contain minor modifications
->> (mostly smaller fixes). The remaining patches are new and contain smaller
->> optimizations.
+>> All we need is an interface to offline and remove the memory from kernel
+>> module context, where we don't have access to the memory block devices
+>> (esp. find_memory_block() and device_offline()) and the device hotplug
+>> lock.
+>>
+>> To keep things simple, allow to only work on a single memory block.
+>>
+>> Acked-by: Michal Hocko <mhocko@suse.com>
+>> Tested-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+>> Cc: Andrew Morton <akpm@linux-foundation.org>
+>> Cc: David Hildenbrand <david@redhat.com>
+>> Cc: Oscar Salvador <osalvador@suse.com>
+>> Cc: Michal Hocko <mhocko@suse.com>
+>> Cc: Pavel Tatashin <pasha.tatashin@soleen.com>
+>> Cc: Wei Yang <richard.weiyang@gmail.com>
+>> Cc: Dan Williams <dan.j.williams@intel.com>
+>> Cc: Qian Cai <cai@lca.pw>
+>> Signed-off-by: David Hildenbrand <david@redhat.com>
 > 
 > 
-> Looks like you lost some acks, in particular I'd like to preserve
-> Andrew Morton's ack.
+> didn't you lose Andrew Morton's ack here?
 
-Yeah, seems like I only picked up Pankaj's acks. I can resend.
+Yeah, thanks for noticing.
+
+> 
+>> ---
+>>  include/linux/memory_hotplug.h |  1 +
+>>  mm/memory_hotplug.c            | 37 ++++++++++++++++++++++++++++++++++
+>>  2 files changed, 38 insertions(+)
+> 
+> I get:
+> 
+> error: sha1 information is lacking or useless (mm/memory_hotplug.c).
+> error: could not build fake ancestor
+> 
+> which version is this against? Pls post patches on top of some tag
+> in Linus' tree if possible.
+
+As the cover states, latest linux-next. To be precise
+
+commit 6b43f715b6379433e8eb30aa9bcc99bd6a585f77 (tag: next-20200507,
+next/master)
+Author: Stephen Rothwell <sfr@canb.auug.org.au>
+Date:   Thu May 7 18:11:31 2020 +1000
+
+    Add linux-next specific files for 20200507
 
 
 -- 
