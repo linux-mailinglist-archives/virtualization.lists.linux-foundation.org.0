@@ -2,71 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6E921C8EE6
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:30:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E6471C92C3
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:58:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 7A345885D6;
-	Thu,  7 May 2020 14:30:29 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A75AA8862F;
+	Thu,  7 May 2020 14:58:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7p2nAw0sfuy7; Thu,  7 May 2020 14:30:29 +0000 (UTC)
+	with ESMTP id xiy1YlxzSlIE; Thu,  7 May 2020 14:58:13 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4E750885C6;
-	Thu,  7 May 2020 14:30:29 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 81068886DC;
+	Thu,  7 May 2020 14:58:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 35779C07FF;
-	Thu,  7 May 2020 14:30:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5F37EC0859;
+	Thu,  7 May 2020 14:58:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5CC26C07FF
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3DFCCC07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:30:28 +0000 (UTC)
+ Thu,  7 May 2020 14:58:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 503D1263F5
+ by silver.osuosl.org (Postfix) with ESMTP id 0C0A026428
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:30:28 +0000 (UTC)
+ Thu,  7 May 2020 14:58:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mVfPBHMZg7D9
+ with ESMTP id XrK0jwZzQc-R
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:30:28 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by silver.osuosl.org (Postfix) with ESMTPS id 34DD62639E
+ Thu,  7 May 2020 14:58:08 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from shards.monkeyblade.net (shards.monkeyblade.net [23.128.96.9])
+ by silver.osuosl.org (Postfix) with ESMTPS id 5C22A204E6
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:30:28 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 30BBD2083B;
- Thu,  7 May 2020 14:30:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588861828;
- bh=hrN4jo85YX8bUHMiL0SJw51uMtj6bE77uz+J0atkXvc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=H5shdAG02r5I9NsJpnMagvC1iO6hMX9o5elM+G1pxKJQPZt/8bWKt4S8O12bPB10Z
- HUNjsoMwopFbhrOBZiqPTq68LaMXdFI8hFMa5VpW9cPfN0l2Sq/lUKnEHeBqamjRfM
- tIgigNAkORa6a//NQYognA7eJFUpB79YKbJlrzx0=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.4 8/9] drm/qxl: lost qxl_bo_kunmap_atomic_page in
- qxl_image_init_helper()
-Date: Thu,  7 May 2020 10:30:17 -0400
-Message-Id: <20200507143018.27195-8-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200507143018.27195-1-sashal@kernel.org>
-References: <20200507143018.27195-1-sashal@kernel.org>
-MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org,
- Vasily Averin <vvs@virtuozzo.com>
+ Thu,  7 May 2020 14:58:08 +0000 (UTC)
+Received: from localhost (unknown [IPv6:2601:601:9f00:477::d71])
+ (using TLSv1 with cipher AES256-SHA (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: davem-davemloft)
+ by shards.monkeyblade.net (Postfix) with ESMTPSA id 14AF415C7D92E;
+ Thu,  7 May 2020 07:58:07 -0700 (PDT)
+Date: Thu, 07 May 2020 07:58:04 -0700 (PDT)
+Message-Id: <20200507.075804.1424387208635118.davem@davemloft.net>
+To: mst@redhat.com
+Subject: Re: [PATCH v2] virtio_net: fix lockdep warning on 32 bit
+From: David Miller <davem@davemloft.net>
+In-Reply-To: <20200507072525.355222-1-mst@redhat.com>
+References: <20200507072525.355222-1-mst@redhat.com>
+X-Mailer: Mew version 6.8 on Emacs 26.3
+Mime-Version: 1.0
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
+ (shards.monkeyblade.net [149.20.54.216]);
+ Thu, 07 May 2020 07:58:07 -0700 (PDT)
+Cc: eric.dumazet@gmail.com, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ tglx@linutronix.de
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,37 +75,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Vasily Averin <vvs@virtuozzo.com>
+From: "Michael S. Tsirkin" <mst@redhat.com>
+Date: Thu, 7 May 2020 03:25:56 -0400
 
-[ Upstream commit 5b5703dbafae74adfbe298a56a81694172caf5e6 ]
+> When we fill up a receive VQ, try_fill_recv currently tries to count
+> kicks using a 64 bit stats counter. Turns out, on a 32 bit kernel that
+> uses a seqcount. sequence counts are "lock" constructs where you need to
+> make sure that writers are serialized.
+> 
+> In turn, this means that we mustn't run two try_fill_recv concurrently.
+> Which of course we don't. We do run try_fill_recv sometimes from a
+> softirq napi context, and sometimes from a fully preemptible context,
+> but the later always runs with napi disabled.
+> 
+> However, when it comes to the seqcount, lockdep is trying to enforce the
+> rule that the same lock isn't accessed from preemptible and softirq
+> context - it doesn't know about napi being enabled/disabled. This causes
+> a false-positive warning:
+> 
+> WARNING: inconsistent lock state
+> ...
+> inconsistent {SOFTIRQ-ON-W} -> {IN-SOFTIRQ-W} usage.
+> 
+> As a work around, shut down the warning by switching
+> to u64_stats_update_begin_irqsave - that works by disabling
+> interrupts on 32 bit only, is a NOP on 64 bit.
+> 
+> Reported-by: Thomas Gleixner <tglx@linutronix.de>
+> Suggested-by: Eric Dumazet <eric.dumazet@gmail.com>
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 
-v2: removed TODO reminder
-
-Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
-Link: http://patchwork.freedesktop.org/patch/msgid/a4e0ae09-a73c-1c62-04ef-3f990d41bea9@virtuozzo.com
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/qxl/qxl_image.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
-index 7fbcc35e8ad35..c89c10055641e 100644
---- a/drivers/gpu/drm/qxl/qxl_image.c
-+++ b/drivers/gpu/drm/qxl/qxl_image.c
-@@ -210,7 +210,8 @@ qxl_image_init_helper(struct qxl_device *qdev,
- 		break;
- 	default:
- 		DRM_ERROR("unsupported image bit depth\n");
--		return -EINVAL; /* TODO: cleanup */
-+		qxl_bo_kunmap_atomic_page(qdev, image_bo, ptr);
-+		return -EINVAL;
- 	}
- 	image->u.bitmap.flags = QXL_BITMAP_TOP_DOWN;
- 	image->u.bitmap.x = width;
--- 
-2.20.1
-
+Applied and queued up for -stable, thanks Michael.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
