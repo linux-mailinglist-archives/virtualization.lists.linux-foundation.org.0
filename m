@@ -1,106 +1,135 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B787C1C8851
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 13:33:02 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61AA91C8859
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 13:34:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3AC7688453;
-	Thu,  7 May 2020 11:33:00 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id F2BFA8934C;
+	Thu,  7 May 2020 11:34:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PfVc+QF7UfWH; Thu,  7 May 2020 11:32:59 +0000 (UTC)
+	with ESMTP id JfjoiaWb1wD5; Thu,  7 May 2020 11:34:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B770C884FF;
-	Thu,  7 May 2020 11:32:57 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 55F06893CE;
+	Thu,  7 May 2020 11:34:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 947A3C0865;
-	Thu,  7 May 2020 11:32:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1BB87C07FF;
+	Thu,  7 May 2020 11:34:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 80258C07FF
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 293ACC07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:32:56 +0000 (UTC)
+ Thu,  7 May 2020 11:34:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 7A05D20763
+ by whitealder.osuosl.org (Postfix) with ESMTP id 1329B836A5
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:32:56 +0000 (UTC)
+ Thu,  7 May 2020 11:34:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HpR5WA-XyvpS
+ with ESMTP id iN4+ZP7-xcqk
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:32:54 +0000 (UTC)
+ Thu,  7 May 2020 11:34:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 9CF9D203F8
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6612388453
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 11:32:54 +0000 (UTC)
+ Thu,  7 May 2020 11:34:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588851173;
+ s=mimecast20190719; t=1588851239;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=zKLGgGO4EC8bZEq/1EyPdX/1tzanL3uq/PXrZRZ5pUs=;
- b=M4sEetfASNdYEQoUg/wfJqB1vXeLgZEBF4zQFUf1T5WjcEzFiJT89/DBGXpjK3QgLNALwq
- h788FU2dmrdTRLytRXq+xbkeDQKKfM6cFuF+XqUqDYA964G/guQ7BVpRUu6kjZGBf8jaV0
- OQ2Q8SFXWDdZrgKKeUDRNTlAb0Cfv3E=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-374-B_8rwGQpMdCWjJMQ7Q3h1g-1; Thu, 07 May 2020 07:32:49 -0400
-X-MC-Unique: B_8rwGQpMdCWjJMQ7Q3h1g-1
-Received: by mail-wm1-f71.google.com with SMTP id n17so2369713wmi.3
- for <virtualization@lists.linux-foundation.org>;
- Thu, 07 May 2020 04:32:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=zKLGgGO4EC8bZEq/1EyPdX/1tzanL3uq/PXrZRZ5pUs=;
- b=idnFE9U2C6O2V1SQvOp9bbHBKufzXbRpLTav86rhK3UM7ddELftHtDM9SG/kw6bX/W
- E2L1/3BxNRgoSAAL52ZPMsboyk30aNa2T2EyDPxt74t2LDuTXe6ZXttn/CZpoH7BiY1B
- 4qrGXkT+bJhV6xC+1sM8orfjlgUBxEnvGeLIp+H1KuZ4LENJk5rLnBbH1IfYDndAY1cm
- QwLiOic2gZ5Xjf5mIfmq17nfRqKs8Dml04XXOwX6TgxoMt4WiKMjrqP3jNy7H0KYfmPv
- lGlsTzjev0h5XfEF0VcRCe8qBXxDhtDHcp5cw9iac2RbcYVK1EwP3Kf0WiA2hc+WpRrp
- Mf2g==
-X-Gm-Message-State: AGi0PuZWRNMEHaPjS5y4HQT+7rJZzKjlATwFvSOC+ppXZScCODuIBADc
- NJQZCeW74NsrsQtPKBdf2nYCawYHe0AG0ux1N9gKRMQM5kam1L/6NmudZYljPbjfW7+IiIFf79d
- E+kJK6uZKNubG7qJkPMoArog92/BQ30ebOyE09Gedpw==
-X-Received: by 2002:a7b:c3d2:: with SMTP id t18mr1636654wmj.100.1588851168105; 
- Thu, 07 May 2020 04:32:48 -0700 (PDT)
-X-Google-Smtp-Source: APiQypKMkK4Y96wvTf/c8NvxL5kFBl0MGlrC6lL6F0vzq4zAXwQPVzNdt6CSv6HKmQS/jT5SdzM0nA==
-X-Received: by 2002:a7b:c3d2:: with SMTP id t18mr1636629wmj.100.1588851167852; 
- Thu, 07 May 2020 04:32:47 -0700 (PDT)
-Received: from redhat.com (bzq-109-66-7-121.red.bezeqint.net. [109.66.7.121])
- by smtp.gmail.com with ESMTPSA id
- p8sm7547138wre.11.2020.05.07.04.32.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 May 2020 04:32:47 -0700 (PDT)
-Date: Thu, 7 May 2020 07:32:44 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Bharat Bhushan <bbhushan2@marvell.com>
-Subject: Re: [EXT] Re: [PATCH v5] iommu/virtio: Use page size bitmap
- supported by endpoint
-Message-ID: <20200507072619-mutt-send-email-mst@kernel.org>
-References: <20200505093004.1935-1-bbhushan2@marvell.com>
- <20200505200659-mutt-send-email-mst@kernel.org>
- <MWHPR1801MB19669FA26D44E1C31DF89BDBE3A50@MWHPR1801MB1966.namprd18.prod.outlook.com>
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=8VIb55B0D3pkc+IA+1unlokfvrjPci9Ef1J7Es7C5zo=;
+ b=irnlu7e+QmIaFReCXI5Twp1lwA1d0HBH316gU1SipU4tOnMZu82019Rs3vgWHL2GT7gA0m
+ zawmBGIctqUmvttWPvgjUovuv8jGh5mgsO5hFgEKuAThV8m4/+2KASN+/VYCbV0ibsrmk+
+ it++84Sd/1BgSZoPgOqLLGbQMDRZ3G8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-200-6BmYjKPcOPOuPh2aT8yQUA-1; Thu, 07 May 2020 07:33:56 -0400
+X-MC-Unique: 6BmYjKPcOPOuPh2aT8yQUA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2C4D5107B7F9;
+ Thu,  7 May 2020 11:33:52 +0000 (UTC)
+Received: from [10.36.113.245] (ovpn-113-245.ams2.redhat.com [10.36.113.245])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4E36B1C933;
+ Thu,  7 May 2020 11:33:24 +0000 (UTC)
+Subject: Re: [PATCH v3 07/15] mm/memory_hotplug: Introduce
+ offline_and_remove_memory()
+From: David Hildenbrand <david@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20200507103119.11219-1-david@redhat.com>
+ <20200507103119.11219-8-david@redhat.com>
+ <20200507064558-mutt-send-email-mst@kernel.org>
+ <a915653f-232e-aa13-68f7-f988704fa84c@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <441bfb92-ecfa-f54e-3661-b219ea166e55@redhat.com>
+Date: Thu, 7 May 2020 13:33:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <MWHPR1801MB19669FA26D44E1C31DF89BDBE3A50@MWHPR1801MB1966.namprd18.prod.outlook.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: "jean-philippe@linaro.org" <jean-philippe@linaro.org>,
- "joro@8bytes.org" <joro@8bytes.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "eric.auger@redhat.com" <eric.auger@redhat.com>,
- "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
- "eric.auger.pro@gmail.com" <eric.auger.pro@gmail.com>
+In-Reply-To: <a915653f-232e-aa13-68f7-f988704fa84c@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: Oscar Salvador <osalvador@suse.com>, virtio-dev@lists.oasis-open.org,
+ Michal Hocko <mhocko@suse.com>, Pavel Tatashin <pasha.tatashin@soleen.com>,
+ kvm@vger.kernel.org, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ linux-kernel@vger.kernel.org, Michal Hocko <mhocko@kernel.org>,
+ linux-mm@kvack.org, Wei Yang <richard.weiyang@gmail.com>,
+ Qian Cai <cai@lca.pw>, Andrew Morton <akpm@linux-foundation.org>,
+ virtualization@lists.linux-foundation.org,
+ Dan Williams <dan.j.williams@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,267 +146,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, May 07, 2020 at 11:24:29AM +0000, Bharat Bhushan wrote:
+>> I get:
+>>
+>> error: sha1 information is lacking or useless (mm/memory_hotplug.c).
+>> error: could not build fake ancestor
+>>
+>> which version is this against? Pls post patches on top of some tag
+>> in Linus' tree if possible.
 > 
+> As the cover states, latest linux-next. To be precise
 > 
-> > -----Original Message-----
-> > From: Michael S. Tsirkin <mst@redhat.com>
-> > Sent: Wednesday, May 6, 2020 5:53 AM
-> > To: Bharat Bhushan <bbhushan2@marvell.com>
-> > Cc: jean-philippe@linaro.org; joro@8bytes.org; jasowang@redhat.com;
-> > virtualization@lists.linux-foundation.org; iommu@lists.linux-foundation.org;
-> > linux-kernel@vger.kernel.org; eric.auger.pro@gmail.com; eric.auger@redhat.com
-> > Subject: [EXT] Re: [PATCH v5] iommu/virtio: Use page size bitmap supported by
-> > endpoint
-> > 
-> > External Email
-> > 
-> > ----------------------------------------------------------------------
-> > On Tue, May 05, 2020 at 03:00:04PM +0530, Bharat Bhushan wrote:
-> > > Different endpoint can support different page size, probe endpoint if
-> > > it supports specific page size otherwise use global page sizes.
-> > >
-> > > Signed-off-by: Bharat Bhushan <bbhushan2@marvell.com>
-> > > ---
-> > > v4->v5:
-> > >  - Rebase to Linux v5.7-rc4
-> > >
-> > > v3->v4:
-> > >  - Fix whitespace error
-> > >
-> > > v2->v3:
-> > >  - Fixed error return for incompatible endpoint
-> > >  - __u64 changed to __le64 in header file
-> > >
-> > >  drivers/iommu/virtio-iommu.c      | 48 ++++++++++++++++++++++++++++---
-> > >  include/uapi/linux/virtio_iommu.h |  7 +++++
-> > >  2 files changed, 51 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/drivers/iommu/virtio-iommu.c
-> > > b/drivers/iommu/virtio-iommu.c index d5cac4f46ca5..9513d2ab819e 100644
-> > > --- a/drivers/iommu/virtio-iommu.c
-> > > +++ b/drivers/iommu/virtio-iommu.c
-> > > @@ -78,6 +78,7 @@ struct viommu_endpoint {
-> > >  	struct viommu_dev		*viommu;
-> > >  	struct viommu_domain		*vdomain;
-> > >  	struct list_head		resv_regions;
-> > > +	u64				pgsize_bitmap;
-> > >  };
-> > >
-> > >  struct viommu_request {
-> > > @@ -415,6 +416,19 @@ static int viommu_replay_mappings(struct
-> > viommu_domain *vdomain)
-> > >  	return ret;
-> > >  }
-> > >
-> > > +static int viommu_set_pgsize_bitmap(struct viommu_endpoint *vdev,
-> > > +				    struct virtio_iommu_probe_pgsize_mask *mask,
-> > > +				    size_t len)
-> > > +{
-> > > +	u64 pgsize_bitmap = le64_to_cpu(mask->pgsize_bitmap);
-> > > +
-> > > +	if (len < sizeof(*mask))
-> > 
-> > This is too late to validate length, you have dereferenced it already.
-> > do it before the read pls.
+> commit 6b43f715b6379433e8eb30aa9bcc99bd6a585f77 (tag: next-20200507,
+> next/master)
+> Author: Stephen Rothwell <sfr@canb.auug.org.au>
+> Date:   Thu May 7 18:11:31 2020 +1000
 > 
-> Yes, Will change here and other places as well
+>     Add linux-next specific files for 20200507
 > 
-> > 
-> > > +		return -EINVAL;
-> > 
-> > OK but note that guest will then just proceed to ignore the property. Is that really
-> > OK? Wouldn't host want to know?
-> 
-> 
-> Guest need to be in sync with device, so yes seems like guest need to tell device which page-size-mask it is using.
-> 
-> Corresponding spec change patch (https://www.mail-archive.com/virtio-dev@lists.oasis-open.org/msg06214.html)
-> 
-> Would like Jean/Eric to comment here as well.
-> 
-> > 
-> > 
-> > > +
-> > > +	vdev->pgsize_bitmap = pgsize_bitmap;
-> > 
-> > what if bitmap is 0? Is that a valid size? I see a bunch of BUG_ON with that value ...
-> 
-> As per spec proposed device is supposed to set at-least one bit.
-> Will add a bug_on her.
 
-Or better fail probe ...
+The patches seem to apply cleanly on top of
 
-> Should we add bug_on or switch to global config page-size mask if this is zero (notify device which page-size-mask it is using).
+commit a811c1fa0a02c062555b54651065899437bacdbe (linus/master)
+Merge: b9388959ba50 16f8036086a9
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Wed May 6 20:53:22 2020 -0700
 
-It's a spec violation, I wouldn't try to use the device.
-
-> > 
-> > I also see a bunch of code like e.g. this:
-> > 
-> >         pg_size = 1UL << __ffs(pgsize_bitmap);
-> > 
-> > which probably won't DTRT on a 32 bit guest if the bitmap has bits set in the high
-> > word.
-> > 
-> 
-> My thought is that in that case viommu_domain_finalise() will fail, do not proceed.
-
-That's undefined behaviour in C. You need to make sure this condition
-is never reached. And spec does not make this illegal at all
-so it looks like we actually need to handle this gracefully.
+    Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
 
 
-> > 
-> > 
-> > > +	return 0;
-> > > +}
-> > > +
-> > >  static int viommu_add_resv_mem(struct viommu_endpoint *vdev,
-> > >  			       struct virtio_iommu_probe_resv_mem *mem,
-> > >  			       size_t len)
-> > > @@ -499,6 +513,9 @@ static int viommu_probe_endpoint(struct viommu_dev
-> > *viommu, struct device *dev)
-> > >  		case VIRTIO_IOMMU_PROBE_T_RESV_MEM:
-> > >  			ret = viommu_add_resv_mem(vdev, (void *)prop, len);
-> > >  			break;
-> > > +		case VIRTIO_IOMMU_PROBE_T_PAGE_SIZE_MASK:
-> > > +			ret = viommu_set_pgsize_bitmap(vdev, (void *)prop, len);
-> > > +			break;
-> > >  		default:
-> > >  			dev_err(dev, "unknown viommu prop 0x%x\n", type);
-> > >  		}
-> > > @@ -630,7 +647,7 @@ static int viommu_domain_finalise(struct
-> > > viommu_endpoint *vdev,
-> > >
-> > >  	vdomain->id		= (unsigned int)ret;
-> > >
-> > > -	domain->pgsize_bitmap	= viommu->pgsize_bitmap;
-> > > +	domain->pgsize_bitmap	= vdev->pgsize_bitmap;
-> > >  	domain->geometry	= viommu->geometry;
-> > >
-> > >  	vdomain->map_flags	= viommu->map_flags;
-> > > @@ -654,6 +671,29 @@ static void viommu_domain_free(struct iommu_domain
-> > *domain)
-> > >  	kfree(vdomain);
-> > >  }
-> > >
-> > > +/*
-> > > + * Check whether the endpoint's capabilities are compatible with
-> > > +other
-> > > + * endpoints in the domain. Report any inconsistency.
-> > > + */
-> > > +static bool viommu_endpoint_is_compatible(struct viommu_endpoint *vdev,
-> > > +					  struct viommu_domain *vdomain) {
-> > > +	struct device *dev = vdev->dev;
-> > > +
-> > > +	if (vdomain->viommu != vdev->viommu) {
-> > > +		dev_err(dev, "cannot attach to foreign vIOMMU\n");
-> > > +		return false;
-> > > +	}
-> > > +
-> > > +	if (vdomain->domain.pgsize_bitmap != vdev->pgsize_bitmap) {
-> > > +		dev_err(dev, "incompatible domain bitmap 0x%lx != 0x%llx\n",
-> > > +			vdomain->domain.pgsize_bitmap, vdev->pgsize_bitmap);
-> > > +		return false;
-> > > +	}
-> > 
-> > I'm confused by this. So let's assume host supports pages sizes of 4k, 2M, 1G. It
-> > signals this in the properties. Nice.
-> > Now domain supports 4k, 2M and that's all. Why is that a problem?
-> > Just don't use 1G ...
-> 
-> Is not it too to change the existing domain properties, for devices already attached to domain? New devices must match to domain page-size.
+I can resend based on that, after giving it a short test.
 
-Again if IOMMU supports more page sizes than domain uses, why is
-that a problem? Just don't utilize the bits domain does not use.
+-- 
+Thanks,
 
-
-> > 
-> > 
-> > > +
-> > > +	return true;
-> > > +}
-> > > +
-> > >  static int viommu_attach_dev(struct iommu_domain *domain, struct
-> > > device *dev)  {
-> > >  	int i;
-> > > @@ -670,9 +710,8 @@ static int viommu_attach_dev(struct iommu_domain
-> > *domain, struct device *dev)
-> > >  		 * owns it.
-> > >  		 */
-> > >  		ret = viommu_domain_finalise(vdev, domain);
-> > > -	} else if (vdomain->viommu != vdev->viommu) {
-> > > -		dev_err(dev, "cannot attach to foreign vIOMMU\n");
-> > > -		ret = -EXDEV;
-> > > +	} else if (!viommu_endpoint_is_compatible(vdev, vdomain)) {
-> > > +		ret = -EINVAL;
-> > >  	}
-> > >  	mutex_unlock(&vdomain->mutex);
-> > >
-> > > @@ -886,6 +925,7 @@ static int viommu_add_device(struct device *dev)
-> > >
-> > >  	vdev->dev = dev;
-> > >  	vdev->viommu = viommu;
-> > > +	vdev->pgsize_bitmap = viommu->pgsize_bitmap;
-> > >  	INIT_LIST_HEAD(&vdev->resv_regions);
-> > >  	dev_iommu_priv_set(dev, vdev);
-> > >
-> > > diff --git a/include/uapi/linux/virtio_iommu.h
-> > > b/include/uapi/linux/virtio_iommu.h
-> > > index 48e3c29223b5..2cced7accc99 100644
-> > > --- a/include/uapi/linux/virtio_iommu.h
-> > > +++ b/include/uapi/linux/virtio_iommu.h
-> > 
-> > As any virtio UAPI change, you need to copy virtio TC at some point before this is
-> > merged ...
-> 
-> Jean already send patch for same
-> https://www.mail-archive.com/virtio-dev@lists.oasis-open.org/msg06214.html
-> 
-> Do we need to do anything additional?
-
-
-Yes, that is spec patch. you need to see the UAPI patch to virtio-dev.
-
-> > 
-> > > @@ -111,6 +111,7 @@ struct virtio_iommu_req_unmap {
-> > >
-> > >  #define VIRTIO_IOMMU_PROBE_T_NONE		0
-> > >  #define VIRTIO_IOMMU_PROBE_T_RESV_MEM		1
-> > > +#define VIRTIO_IOMMU_PROBE_T_PAGE_SIZE_MASK	2
-> > >
-> > >  #define VIRTIO_IOMMU_PROBE_T_MASK		0xfff
-> > >
-> > 
-> > Does host need to know that guest will ignore the page size mask?
-> > Maybe we need a feature bit.
-> > 
-> > > @@ -119,6 +120,12 @@ struct virtio_iommu_probe_property {
-> > >  	__le16					length;
-> > >  };
-> > >
-> > > +struct virtio_iommu_probe_pgsize_mask {
-> > > +	struct virtio_iommu_probe_property	head;
-> > > +	__u8					reserved[4];
-> > > +	__le64					pgsize_bitmap;
-> > > +};
-> > > +
-> > 
-> > This is UAPI. Document the format of pgsize_bitmap please.
-> 
-> Ok,
-> 
-> Thanks
-> -Bharat
-> 
-> > 
-> > 
-> > >  #define VIRTIO_IOMMU_RESV_MEM_T_RESERVED	0
-> > >  #define VIRTIO_IOMMU_RESV_MEM_T_MSI		1
-> > >
-> > > --
-> > > 2.17.1
+David / dhildenb
 
 _______________________________________________
 Virtualization mailing list
