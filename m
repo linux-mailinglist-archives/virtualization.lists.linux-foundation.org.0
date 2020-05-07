@@ -1,42 +1,42 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C78CE1C8D50
-	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:03:53 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61FD21C8D4A
+	for <lists.virtualization@lfdr.de>; Thu,  7 May 2020 16:03:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 300AF87488;
-	Thu,  7 May 2020 14:03:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 14FD489390;
+	Thu,  7 May 2020 14:03:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Q0MnNafJXxdI; Thu,  7 May 2020 14:03:51 +0000 (UTC)
+	with ESMTP id sl9CPQxa2rVi; Thu,  7 May 2020 14:03:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id B536D87479;
-	Thu,  7 May 2020 14:03:50 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 49C2389397;
+	Thu,  7 May 2020 14:03:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 88948C07FF;
-	Thu,  7 May 2020 14:03:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3972FC07FF;
+	Thu,  7 May 2020 14:03:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6F120C07FF
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3B008C07FF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:03:47 +0000 (UTC)
+ Thu,  7 May 2020 14:03:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 5942E885B4
+ by whitealder.osuosl.org (Postfix) with ESMTP id 29EAE885D6
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:03:47 +0000 (UTC)
+ Thu,  7 May 2020 14:03:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KbLFc9IWjqMh
+ with ESMTP id rhKrcLZNv0e4
  for <virtualization@lists.linux-foundation.org>;
- Thu,  7 May 2020 14:03:43 +0000 (UTC)
+ Thu,  7 May 2020 14:03:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
  [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 408D78856F
+ by whitealder.osuosl.org (Postfix) with ESMTPS id CF8DD8854D
  for <virtualization@lists.linux-foundation.org>;
  Thu,  7 May 2020 14:03:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
@@ -45,29 +45,29 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6V2gf0PUPPm7OaaYKcNrW48UHq1Rnm4/NYm4dg9LwpA=;
- b=PyfNjwMjW0VKsawuWwMi6YDFgnEvkuN7pG4seiwwnKleUN/v7nsYp1OT/Sna01Y1UQFv/K
- v+HX7bD+FsgnnntaY/xXVRsaL/QyNfwt9Q7HbF7YM0cx8ztWEqIeT13JRbHgYUQ3Kd6eSr
- rr0frCJ03WIl8eDY/sR7itJoJK4Fplw=
+ bh=vdxcxGx7SFVn0D0LAwJ67gF+eYTXzdSapCaeVtSsCtE=;
+ b=MT9qYzHeEf6I5S6UdRUyrl+uoshslXHKt9TErsCdL5JQWWshrLopxQczmWIyaCv5NiAgoB
+ 9oD9etbevujFQeBpj8edzmO9R1swLAE64JL+y1ZbnF3YhpQn7jzMsDnltoJcGk333ft98k
+ sFftt4M+vUFU8lh8B5nqKWKvD2NNhFk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-34-qIHWr591MXiJlBlN5gcBKg-1; Thu, 07 May 2020 10:03:35 -0400
-X-MC-Unique: qIHWr591MXiJlBlN5gcBKg-1
+ us-mta-386-lxBhMOqPN9WKvoonpKCTZQ-1; Thu, 07 May 2020 10:03:38 -0400
+X-MC-Unique: lxBhMOqPN9WKvoonpKCTZQ-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
  [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 35E8D80B724;
- Thu,  7 May 2020 14:03:34 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 80EC9107ACCD;
+ Thu,  7 May 2020 14:03:36 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-113-245.ams2.redhat.com [10.36.113.245])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BF27360BEC;
- Thu,  7 May 2020 14:03:26 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7E53F60BEC;
+ Thu,  7 May 2020 14:03:34 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 11/15] virtio-mem: Add parent resource for all added
- "System RAM"
-Date: Thu,  7 May 2020 16:01:35 +0200
-Message-Id: <20200507140139.17083-12-david@redhat.com>
+Subject: [PATCH v4 12/15] virtio-mem: Drop manual check for already present
+ memory
+Date: Thu,  7 May 2020 16:01:36 +0200
+Message-Id: <20200507140139.17083-13-david@redhat.com>
 In-Reply-To: <20200507140139.17083-1-david@redhat.com>
 References: <20200507140139.17083-1-david@redhat.com>
 MIME-Version: 1.0
@@ -93,128 +93,106 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's add a parent resource, named after the virtio device (inspired by
-drivers/dax/kmem.c). This allows user space to identify which memory
-belongs to which virtio-mem device.
+Registering our parent resource will fail if any memory is still present
+(e.g., because somebody unloaded the driver and tries to reload it). No
+need for the manual check.
 
-With this change and two virtio-mem devices:
-	:/# cat /proc/iomem
-	00000000-00000fff : Reserved
-	00001000-0009fbff : System RAM
-	[...]
-	140000000-333ffffff : virtio0
-	  140000000-147ffffff : System RAM
-	  148000000-14fffffff : System RAM
-	  150000000-157ffffff : System RAM
-	[...]
-	334000000-3033ffffff : virtio1
-	  338000000-33fffffff : System RAM
-	  340000000-347ffffff : System RAM
-	  348000000-34fffffff : System RAM
-	[...]
+Move our "unplug all" handling to after registering the resource.
 
 Cc: "Michael S. Tsirkin" <mst@redhat.com>
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 52 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 51 insertions(+), 1 deletion(-)
+ drivers/virtio/virtio_mem.c | 55 ++++++++-----------------------------
+ 1 file changed, 12 insertions(+), 43 deletions(-)
 
 diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index eb4c16d634e0..80cdb9e6b3c4 100644
+index 80cdb9e6b3c4..8dd57b61b09b 100644
 --- a/drivers/virtio/virtio_mem.c
 +++ b/drivers/virtio/virtio_mem.c
-@@ -99,6 +99,9 @@ struct virtio_mem {
- 	/* Id of the next memory bock to prepare when needed. */
- 	unsigned long next_mb_id;
- 
-+	/* The parent resource for all memory added via this device. */
-+	struct resource *parent_resource;
-+
- 	/* Summary of all memory block states. */
- 	unsigned long nb_mb_state[VIRTIO_MEM_MB_STATE_COUNT];
- #define VIRTIO_MEM_NB_OFFLINE_THRESHOLD		10
-@@ -1741,6 +1744,44 @@ static int virtio_mem_init(struct virtio_mem *vm)
+@@ -1616,23 +1616,6 @@ static int virtio_mem_init_vq(struct virtio_mem *vm)
  	return 0;
  }
  
-+static int virtio_mem_create_resource(struct virtio_mem *vm)
-+{
-+	/*
-+	 * When force-unloading the driver and removing the device, we
-+	 * could have a garbage pointer. Duplicate the string.
-+	 */
-+	const char *name = kstrdup(dev_name(&vm->vdev->dev), GFP_KERNEL);
-+
-+	if (!name)
-+		return -ENOMEM;
-+
-+	vm->parent_resource = __request_mem_region(vm->addr, vm->region_size,
-+						   name, IORESOURCE_SYSTEM_RAM);
-+	if (!vm->parent_resource) {
-+		kfree(name);
-+		dev_warn(&vm->vdev->dev, "could not reserve device region\n");
-+		return -EBUSY;
-+	}
-+
-+	/* The memory is not actually busy - make add_memory() work. */
-+	vm->parent_resource->flags &= ~IORESOURCE_BUSY;
-+	return 0;
-+}
-+
-+static void virtio_mem_delete_resource(struct virtio_mem *vm)
-+{
-+	const char *name;
-+
-+	if (!vm->parent_resource)
-+		return;
-+
-+	name = vm->parent_resource->name;
-+	release_resource(vm->parent_resource);
-+	kfree(vm->parent_resource);
-+	kfree(name);
-+	vm->parent_resource = NULL;
-+}
-+
- static int virtio_mem_probe(struct virtio_device *vdev)
+-/*
+- * Test if any memory in the range is present in Linux.
+- */
+-static bool virtio_mem_any_memory_present(unsigned long start,
+-					  unsigned long size)
+-{
+-	const unsigned long start_pfn = PFN_DOWN(start);
+-	const unsigned long end_pfn = PFN_UP(start + size);
+-	unsigned long pfn;
+-
+-	for (pfn = start_pfn; pfn != end_pfn; pfn++)
+-		if (present_section_nr(pfn_to_section_nr(pfn)))
+-			return true;
+-
+-	return false;
+-}
+-
+ static int virtio_mem_init(struct virtio_mem *vm)
  {
- 	struct virtio_mem *vm;
-@@ -1770,11 +1811,16 @@ static int virtio_mem_probe(struct virtio_device *vdev)
+ 	const uint64_t phys_limit = 1UL << MAX_PHYSMEM_BITS;
+@@ -1664,32 +1647,6 @@ static int virtio_mem_init(struct virtio_mem *vm)
+ 	virtio_cread(vm->vdev, struct virtio_mem_config, region_size,
+ 		     &vm->region_size);
+ 
+-	/*
+-	 * If we still have memory plugged, we might have to unplug all
+-	 * memory first. However, if somebody simply unloaded the driver
+-	 * we would have to reinitialize the old state - something we don't
+-	 * support yet. Detect if we have any memory in the area present.
+-	 */
+-	if (vm->plugged_size) {
+-		uint64_t usable_region_size;
+-
+-		virtio_cread(vm->vdev, struct virtio_mem_config,
+-			     usable_region_size, &usable_region_size);
+-
+-		if (virtio_mem_any_memory_present(vm->addr,
+-						  usable_region_size)) {
+-			dev_err(&vm->vdev->dev,
+-				"reloading the driver is not supported\n");
+-			return -EINVAL;
+-		}
+-		/*
+-		 * Note: it might happen that the device is busy and
+-		 * unplugging all memory might take some time.
+-		 */
+-		dev_info(&vm->vdev->dev, "unplugging all memory required\n");
+-		vm->unplug_all_required = 1;
+-	}
+-
+ 	/*
+ 	 * We always hotplug memory in memory block granularity. This way,
+ 	 * we have to wait for exactly one memory block to online.
+@@ -1760,6 +1717,8 @@ static int virtio_mem_create_resource(struct virtio_mem *vm)
+ 	if (!vm->parent_resource) {
+ 		kfree(name);
+ 		dev_warn(&vm->vdev->dev, "could not reserve device region\n");
++		dev_info(&vm->vdev->dev,
++			 "reloading the driver is not supported\n");
+ 		return -EBUSY;
+ 	}
+ 
+@@ -1816,6 +1775,16 @@ static int virtio_mem_probe(struct virtio_device *vdev)
  	if (rc)
  		goto out_del_vq;
  
-+	/* create the parent resource for all memory */
-+	rc = virtio_mem_create_resource(vm);
-+	if (rc)
-+		goto out_del_vq;
++	/*
++	 * If we still have memory plugged, we have to unplug all memory first.
++	 * Registering our parent resource makes sure that this memory isn't
++	 * actually in use (e.g., trying to reload the driver).
++	 */
++	if (vm->plugged_size) {
++		vm->unplug_all_required = 1;
++		dev_info(&vm->vdev->dev, "unplugging all memory is required\n");
++	}
 +
  	/* register callbacks */
  	vm->memory_notifier.notifier_call = virtio_mem_memory_notifier_cb;
  	rc = register_memory_notifier(&vm->memory_notifier);
- 	if (rc)
--		goto out_del_vq;
-+		goto out_del_resource;
- 	rc = register_virtio_mem_device(vm);
- 	if (rc)
- 		goto out_unreg_mem;
-@@ -1788,6 +1834,8 @@ static int virtio_mem_probe(struct virtio_device *vdev)
- 	return 0;
- out_unreg_mem:
- 	unregister_memory_notifier(&vm->memory_notifier);
-+out_del_resource:
-+	virtio_mem_delete_resource(vm);
- out_del_vq:
- 	vdev->config->del_vqs(vdev);
- out_free_vm:
-@@ -1848,6 +1896,8 @@ static void virtio_mem_remove(struct virtio_device *vdev)
- 	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL] ||
- 	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE_MOVABLE])
- 		dev_warn(&vdev->dev, "device still has system memory added\n");
-+	else
-+		virtio_mem_delete_resource(vm);
- 
- 	/* remove all tracking data - no locking needed */
- 	vfree(vm->mb_state);
 -- 
 2.25.3
 
