@@ -1,80 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D7651CBF99
-	for <lists.virtualization@lfdr.de>; Sat,  9 May 2020 11:06:04 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id A350B1CD583
+	for <lists.virtualization@lfdr.de>; Mon, 11 May 2020 11:41:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 243FA87CE5;
-	Sat,  9 May 2020 09:06:03 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 431A4887E2;
+	Mon, 11 May 2020 09:27:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id e5tgclwjYPZZ; Sat,  9 May 2020 09:06:01 +0000 (UTC)
+	with ESMTP id KBIVzFsdVEnV; Mon, 11 May 2020 09:27:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0612087CD4;
-	Sat,  9 May 2020 09:06:01 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6EDF588792;
+	Mon, 11 May 2020 09:27:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CDE64C07FF;
-	Sat,  9 May 2020 09:06:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4C328C016F;
+	Mon, 11 May 2020 09:27:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A6B1BC07FF
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 37FA6C016F
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 May 2020 09:05:58 +0000 (UTC)
+ Mon, 11 May 2020 09:27:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 9EB4F87A1A
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 2676586375
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 May 2020 09:05:58 +0000 (UTC)
+ Mon, 11 May 2020 09:27:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rlOrawhfv7fr
+ with ESMTP id UACASvZgWn7z
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 May 2020 09:05:56 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 38C4887CB0
+ Mon, 11 May 2020 09:27:06 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1C7818636D
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 May 2020 09:05:56 +0000 (UTC)
-Received: from zn.tnic (p200300EC2F1C0C00DCC140091142DC90.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f1c:c00:dcc1:4009:1142:dc90])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id C21211EC015C;
- Sat,  9 May 2020 11:05:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1589015153;
+ Mon, 11 May 2020 09:27:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1589189224;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=iVC3CBm/wWZ2U9FGwvz+Ni8/0OmKU8wtGPsbrqlTREk=;
- b=McXNxHNK1dqr+8GXBdVgfEZhpk9vMQVtdJPIZ9QQRoOJU8AwKydzyPbMIb0LsrhBQX+esW
- ZGcGl0hlwjdYy7WA5fEaXo5Sjj6snHiiFYPUSp7eNNdth7Ip5AjeiLwirmT7cAhMEYHSlH
- 8eOiOsncVLM6rfM+1eUYl/VeJqiNGqI=
-Date: Sat, 9 May 2020 11:05:48 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 19/75] x86/boot/compressed/64: Add stage1 #VC handler
-Message-ID: <20200509090548.GA5893@zn.tnic>
-References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-20-joro@8bytes.org>
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=13BAfE/1sRi/J98yTfEpMD1AFwnvSYNGHAmPHqQf/Xs=;
+ b=hn1m1S0DFf2AhB3Yu7qDumoUGh1ea+UU+pq4Xch89ti9q0iY4PwcSGFir8i93zffzBR6ot
+ 0Ovm74Ciywrc3SYL+WHF2R6/GrJmMaMO4R1wz/+FGQgADHMu1Ozz00lW2VH96/K8H97t2R
+ iXHP89eUN5DUtsuLOMdB6WWi5Nvw/3g=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-422-054MV0GAOBWYzkGne0pEFA-1; Mon, 11 May 2020 05:27:01 -0400
+X-MC-Unique: 054MV0GAOBWYzkGne0pEFA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C06AA18CA274;
+ Mon, 11 May 2020 09:26:59 +0000 (UTC)
+Received: from [10.72.12.137] (ovpn-12-137.pek2.redhat.com [10.72.12.137])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2670C165F6;
+ Mon, 11 May 2020 09:26:50 +0000 (UTC)
+Subject: Re: [PATCH] ifcvf: move IRQ request/free to status change handlers
+To: Zhu Lingshan <lingshan.zhu@intel.com>, mst@redhat.com,
+ kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <1589181563-38400-1-git-send-email-lingshan.zhu@intel.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <22d9dcdb-e790-0a68-ba41-b9530b2bf9fd@redhat.com>
+Date: Mon, 11 May 2020 17:26:49 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200428151725.31091-20-joro@8bytes.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
- x86@kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+In-Reply-To: <1589181563-38400-1-git-send-email-lingshan.zhu@intel.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: lulu@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,120 +88,119 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 28, 2020 at 05:16:29PM +0200, Joerg Roedel wrote:
-> From: Joerg Roedel <jroedel@suse.de>
-> 
-> Add the first handler for #VC exceptions. At stage 1 there is no GHCB
-> yet becaue we might still be on the EFI page table and thus can't map
-
-     "... because the kernel might still be running on the EFI page table... "
-
-> memory unencrypted.
-> 
-> The stage 1 handler is limited to the MSR based protocol to talk to
-> the hypervisor and can only support CPUID exit-codes, but that is
-> enough to get to stage 2.
-> 
-> Signed-off-by: Joerg Roedel <jroedel@suse.de>
-> ---
->  arch/x86/boot/compressed/Makefile          |  1 +
->  arch/x86/boot/compressed/idt_64.c          |  4 ++
->  arch/x86/boot/compressed/idt_handlers_64.S |  4 ++
->  arch/x86/boot/compressed/misc.h            |  1 +
->  arch/x86/boot/compressed/sev-es.c          | 45 +++++++++++++++
->  arch/x86/include/asm/msr-index.h           |  1 +
->  arch/x86/include/asm/sev-es.h              | 37 ++++++++++++
->  arch/x86/include/asm/trap_defs.h           |  1 +
->  arch/x86/kernel/sev-es-shared.c            | 65 ++++++++++++++++++++++
->  9 files changed, 159 insertions(+)
->  create mode 100644 arch/x86/boot/compressed/sev-es.c
->  create mode 100644 arch/x86/include/asm/sev-es.h
->  create mode 100644 arch/x86/kernel/sev-es-shared.c
-> 
-> diff --git a/arch/x86/boot/compressed/Makefile b/arch/x86/boot/compressed/Makefile
-> index c6909d10a6b9..a7847a1ef63a 100644
-> --- a/arch/x86/boot/compressed/Makefile
-> +++ b/arch/x86/boot/compressed/Makefile
-> @@ -85,6 +85,7 @@ ifdef CONFIG_X86_64
->  	vmlinux-objs-y += $(obj)/idt_64.o $(obj)/idt_handlers_64.o
->  	vmlinux-objs-y += $(obj)/mem_encrypt.o
->  	vmlinux-objs-y += $(obj)/pgtable_64.o
-> +	vmlinux-objs-$(CONFIG_AMD_MEM_ENCRYPT) += $(obj)/sev-es.o
->  endif
->  
->  vmlinux-objs-$(CONFIG_ACPI) += $(obj)/acpi.o
-> diff --git a/arch/x86/boot/compressed/idt_64.c b/arch/x86/boot/compressed/idt_64.c
-> index 99cc78062684..f8295d68b3e1 100644
-> --- a/arch/x86/boot/compressed/idt_64.c
-> +++ b/arch/x86/boot/compressed/idt_64.c
-> @@ -31,6 +31,10 @@ void load_stage1_idt(void)
->  {
->  	boot_idt_desc.address = (unsigned long)boot_idt;
->  
-> +#ifdef CONFIG_AMD_MEM_ENCRYPT
-> +	set_idt_entry(X86_TRAP_VC, boot_stage1_vc);
-> +#endif
-
-	if (IS_ENABLED(CONFIG_AMD_MEM_ENCRYPT))
-
-seems to work too and drops the ifdeffery ugliness.
-
-...
-
-> +void __init do_vc_no_ghcb(struct pt_regs *regs, unsigned long exit_code)
-> +{
-> +	unsigned int fn = lower_bits(regs->ax, 32);
-> +	unsigned long val;
-> +
-> +	/* Only CPUID is supported via MSR protocol */
-> +	if (exit_code != SVM_EXIT_CPUID)
-> +		goto fail;
-> +
-> +	sev_es_wr_ghcb_msr(GHCB_CPUID_REQ(fn, GHCB_CPUID_REQ_EAX));
-> +	VMGEXIT();
-> +	val = sev_es_rd_ghcb_msr();
-> +	if (GHCB_SEV_GHCB_RESP_CODE(val) != GHCB_SEV_CPUID_RESP)
-> +		goto fail;
-> +	regs->ax = val >> 32;
-> +
-> +	sev_es_wr_ghcb_msr(GHCB_CPUID_REQ(fn, GHCB_CPUID_REQ_EBX));
-> +	VMGEXIT();
-> +	val = sev_es_rd_ghcb_msr();
-> +	if (GHCB_SEV_GHCB_RESP_CODE(val) != GHCB_SEV_CPUID_RESP)
-> +		goto fail;
-> +	regs->bx = val >> 32;
-> +
-> +	sev_es_wr_ghcb_msr(GHCB_CPUID_REQ(fn, GHCB_CPUID_REQ_ECX));
-> +	VMGEXIT();
-> +	val = sev_es_rd_ghcb_msr();
-> +	if (GHCB_SEV_GHCB_RESP_CODE(val) != GHCB_SEV_CPUID_RESP)
-> +		goto fail;
-> +	regs->cx = val >> 32;
-> +
-> +	sev_es_wr_ghcb_msr(GHCB_CPUID_REQ(fn, GHCB_CPUID_REQ_EDX));
-> +	VMGEXIT();
-> +	val = sev_es_rd_ghcb_msr();
-> +	if (GHCB_SEV_GHCB_RESP_CODE(val) != GHCB_SEV_CPUID_RESP)
-> +		goto fail;
-> +	regs->dx = val >> 32;
-
-This could use a comment:
-
-	/* Skip over the CPUID two-byte opcode */
-
-or so.
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNS8xMSDkuIvljYgzOjE5LCBaaHUgTGluZ3NoYW4gd3JvdGU6Cj4gVGhpcyBjb21t
+aXQgbW92ZSBJUlEgcmVxdWVzdCBhbmQgZnJlZSBvcGVyYXRpb25zIGZyb20gcHJvYmUoKQo+IHRv
+IFZJUlRJTyBzdGF0dXMgY2hhbmdlIGhhbmRsZXIgdG8gY29tcGx5IHdpdGggVklSVElPIHNwZWMu
+Cj4KPiBWSVJUSU8gc3BlYyAxLjEsIHNlY3Rpb24gMi4xLjIgRGV2aWNlIFJlcXVpcmVtZW50czog
+RGV2aWNlIFN0YXR1cyBGaWVsZAo+IFRoZSBkZXZpY2UgTVVTVCBOT1QgY29uc3VtZSBidWZmZXJz
+IG9yIHNlbmQgYW55IHVzZWQgYnVmZmVyCj4gbm90aWZpY2F0aW9ucyB0byB0aGUgZHJpdmVyIGJl
+Zm9yZSBEUklWRVJfT0suCgoKTXkgcHJldmlvdXMgZXhwbGFuYXRpb24gbWlnaHQgYmUgd3Jvbmcg
+aGVyZS4gSXQgZGVwZW5kcyBvbiBob3cgeW91IAppbXBsZW1lbnQgeW91ciBoYXJkd2FyZSwgaWYg
+eW91IGhhcmR3YXJlIGd1YXJhbnRlZSB0aGF0IG5vIGludGVycnVwdCAKd2lsbCBiZSB0cmlnZ2Vy
+ZWQgYmVmb3JlIERSSVZFUl9PSywgdGhlbiBpdCdzIGZpbmUuCgpBbmQgdGhlIG1haW4gZ29hbCBm
+b3IgdGhpcyBwYXRjaCBpcyB0byBhbGxvY2F0ZSB0aGUgaW50ZXJydXB0IG9uIGRlbWFuZC4KCgo+
+Cj4gU2lnbmVkLW9mZi1ieTogWmh1IExpbmdzaGFuIDxsaW5nc2hhbi56aHVAaW50ZWwuY29tPgo+
+IC0tLQo+ICAgZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX21haW4uYyB8IDExOSArKysrKysrKysr
+KysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tCj4gICAxIGZpbGUgY2hhbmdlZCwgNzMgaW5z
+ZXJ0aW9ucygrKSwgNDYgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92ZHBh
+L2lmY3ZmL2lmY3ZmX21haW4uYyBiL2RyaXZlcnMvdmRwYS9pZmN2Zi9pZmN2Zl9tYWluLmMKPiBp
+bmRleCBhYmY2YTA2MS4uNGQ1OGJmMiAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3ZkcGEvaWZjdmYv
+aWZjdmZfbWFpbi5jCj4gKysrIGIvZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX21haW4uYwo+IEBA
+IC0yOCw2ICsyOCw2MCBAQCBzdGF0aWMgaXJxcmV0dXJuX3QgaWZjdmZfaW50cl9oYW5kbGVyKGlu
+dCBpcnEsIHZvaWQgKmFyZykKPiAgIAlyZXR1cm4gSVJRX0hBTkRMRUQ7Cj4gICB9Cj4gICAKPiAr
+c3RhdGljIHZvaWQgaWZjdmZfZnJlZV9pcnFfdmVjdG9ycyh2b2lkICpkYXRhKQo+ICt7Cj4gKwlw
+Y2lfZnJlZV9pcnFfdmVjdG9ycyhkYXRhKTsKPiArfQo+ICsKPiArc3RhdGljIHZvaWQgaWZjdmZf
+ZnJlZV9pcnEoc3RydWN0IGlmY3ZmX2FkYXB0ZXIgKmFkYXB0ZXIsIGludCBxdWV1ZXMpCj4gK3sK
+PiArCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gYWRhcHRlci0+cGRldjsKPiArCXN0cnVjdCBpZmN2
+Zl9odyAqdmYgPSAmYWRhcHRlci0+dmY7Cj4gKwlpbnQgaTsKPiArCj4gKwo+ICsJZm9yIChpID0g
+MDsgaSA8IHF1ZXVlczsgaSsrKQo+ICsJCWRldm1fZnJlZV9pcnEoJnBkZXYtPmRldiwgdmYtPnZy
+aW5nW2ldLmlycSwgJnZmLT52cmluZ1tpXSk7Cj4gKwo+ICsJaWZjdmZfZnJlZV9pcnFfdmVjdG9y
+cyhwZGV2KTsKPiArfQo+ICsKPiArc3RhdGljIGludCBpZmN2Zl9yZXF1ZXN0X2lycShzdHJ1Y3Qg
+aWZjdmZfYWRhcHRlciAqYWRhcHRlcikKPiArewo+ICsJc3RydWN0IHBjaV9kZXYgKnBkZXYgPSBh
+ZGFwdGVyLT5wZGV2Owo+ICsJc3RydWN0IGlmY3ZmX2h3ICp2ZiA9ICZhZGFwdGVyLT52ZjsKPiAr
+CWludCB2ZWN0b3IsIGksIHJldCwgaXJxOwo+ICsKPiArCXJldCA9IHBjaV9hbGxvY19pcnFfdmVj
+dG9ycyhwZGV2LCBJRkNWRl9NQVhfSU5UUiwKPiArCQkJCSAgICBJRkNWRl9NQVhfSU5UUiwgUENJ
+X0lSUV9NU0lYKTsKPiArCWlmIChyZXQgPCAwKSB7Cj4gKwkJSUZDVkZfRVJSKHBkZXYsICJGYWls
+ZWQgdG8gYWxsb2MgSVJRIHZlY3RvcnNcbiIpOwo+ICsJCXJldHVybiByZXQ7Cj4gKwl9Cj4gKwo+
+ICsJZm9yIChpID0gMDsgaSA8IElGQ1ZGX01BWF9RVUVVRV9QQUlSUyAqIDI7IGkrKykgewo+ICsJ
+CXNucHJpbnRmKHZmLT52cmluZ1tpXS5tc2l4X25hbWUsIDI1NiwgImlmY3ZmWyVzXS0lZFxuIiwK
+PiArCQkJIHBjaV9uYW1lKHBkZXYpLCBpKTsKPiArCQl2ZWN0b3IgPSBpICsgSUZDVkZfTVNJX1FV
+RVVFX09GRjsKPiArCQlpcnEgPSBwY2lfaXJxX3ZlY3RvcihwZGV2LCB2ZWN0b3IpOwo+ICsJCXJl
+dCA9IGRldm1fcmVxdWVzdF9pcnEoJnBkZXYtPmRldiwgaXJxLAo+ICsJCQkJICAgICAgIGlmY3Zm
+X2ludHJfaGFuZGxlciwgMCwKPiArCQkJCSAgICAgICB2Zi0+dnJpbmdbaV0ubXNpeF9uYW1lLAo+
+ICsJCQkJICAgICAgICZ2Zi0+dnJpbmdbaV0pOwo+ICsJCWlmIChyZXQpIHsKPiArCQkJSUZDVkZf
+RVJSKHBkZXYsCj4gKwkJCQkgICJGYWlsZWQgdG8gcmVxdWVzdCBpcnEgZm9yIHZxICVkXG4iLCBp
+KTsKPiArCQkJaWZjdmZfZnJlZV9pcnEoYWRhcHRlciwgaSk7CgoKSSdtIG5vdCBzdXJlIHRoaXMg
+dW53aW5kIGlzIGNvcnJlY3QuIEl0IGxvb2tzIGxpa2Ugd2Ugc2hvdWxkIGxvb3AgYW5kIApjYWxs
+IGRldm1fZnJlZV9pcnEoKSBmb3IgdmlydHF1ZXVlIFswLCBpKTsKCgoKPiArCj4gKwkJCXJldHVy
+biByZXQ7Cj4gKwkJfQo+ICsKPiArCQl2Zi0+dnJpbmdbaV0uaXJxID0gaXJxOwo+ICsJfQo+ICsK
+PiArCXJldHVybiAwOwo+ICt9Cj4gKwo+ICAgc3RhdGljIGludCBpZmN2Zl9zdGFydF9kYXRhcGF0
+aCh2b2lkICpwcml2YXRlKQo+ICAgewo+ICAgCXN0cnVjdCBpZmN2Zl9odyAqdmYgPSBpZmN2Zl9w
+cml2YXRlX3RvX3ZmKHByaXZhdGUpOwo+IEBAIC0xMTgsOSArMTcyLDEyIEBAIHN0YXRpYyB2b2lk
+IGlmY3ZmX3ZkcGFfc2V0X3N0YXR1cyhzdHJ1Y3QgdmRwYV9kZXZpY2UgKnZkcGFfZGV2LCB1OCBz
+dGF0dXMpCj4gICB7Cj4gICAJc3RydWN0IGlmY3ZmX2FkYXB0ZXIgKmFkYXB0ZXI7Cj4gICAJc3Ry
+dWN0IGlmY3ZmX2h3ICp2ZjsKPiArCXU4IHN0YXR1c19vbGQ7Cj4gKwlpbnQgcmV0Owo+ICAgCj4g
+ICAJdmYgID0gdmRwYV90b192Zih2ZHBhX2Rldik7Cj4gICAJYWRhcHRlciA9IGRldl9nZXRfZHJ2
+ZGF0YSh2ZHBhX2Rldi0+ZGV2LnBhcmVudCk7Cj4gKwlzdGF0dXNfb2xkID0gaWZjdmZfZ2V0X3N0
+YXR1cyh2Zik7Cj4gICAKPiAgIAlpZiAoc3RhdHVzID09IDApIHsKPiAgIAkJaWZjdmZfc3RvcF9k
+YXRhcGF0aChhZGFwdGVyKTsKPiBAQCAtMTI4LDcgKzE4NSwyMiBAQCBzdGF0aWMgdm9pZCBpZmN2
+Zl92ZHBhX3NldF9zdGF0dXMoc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhX2RldiwgdTggc3RhdHVz
+KQo+ICAgCQlyZXR1cm47Cj4gICAJfQo+ICAgCj4gLQlpZiAoc3RhdHVzICYgVklSVElPX0NPTkZJ
+R19TX0RSSVZFUl9PSykgewo+ICsJaWYgKChzdGF0dXNfb2xkICYgVklSVElPX0NPTkZJR19TX0RS
+SVZFUl9PSykgJiYKPiArCSAgICAhKHN0YXR1cyAmIFZJUlRJT19DT05GSUdfU19EUklWRVJfT0sp
+KSB7Cj4gKwkJaWZjdmZfc3RvcF9kYXRhcGF0aChhZGFwdGVyKTsKPiArCQlpZmN2Zl9mcmVlX2ly
+cShhZGFwdGVyLCBJRkNWRl9NQVhfUVVFVUVfUEFJUlMgKiAyKTsKPiArCX0KPiArCj4gKwlpZiAo
+KHN0YXR1cyAmIFZJUlRJT19DT05GSUdfU19EUklWRVJfT0spICYmCj4gKwkgICAgIShzdGF0dXNf
+b2xkICYgVklSVElPX0NPTkZJR19TX0RSSVZFUl9PSykpIHsKPiArCQlyZXQgPSBpZmN2Zl9yZXF1
+ZXN0X2lycShhZGFwdGVyKTsKPiArCQlpZiAocmV0KSB7Cj4gKwkJCXN0YXR1cyA9IGlmY3ZmX2dl
+dF9zdGF0dXModmYpOwo+ICsJCQlzdGF0dXMgfD0gVklSVElPX0NPTkZJR19TX0ZBSUxFRDsKPiAr
+CQkJaWZjdmZfc2V0X3N0YXR1cyh2Ziwgc3RhdHVzKTsKPiArCQkJcmV0dXJuOwo+ICsJCX0KPiAr
+CgoKSGF2ZSBhIGhhcmQgdGhvdWdoIG9uIHRoZSBsb2dpYyBoZXJlLgoKVGhpcyBkZXBlbmRzIG9u
+IHRoZSBzdGF0dXMgc2V0dGluZyBmcm9tIGd1ZXN0IG9yIHVzZXJzcGFjZS4gV2hpY2ggbWVhbnMg
+Cml0IGNhbiBub3QgZGVhbCB3aXRoIGUuZyB3aGVuIHFlbXUgb3IgdXNlcnNwYWNlIGlzIGNyYXNo
+ZWQ/IERvIHdlIG5lZWQgCnRvIGNhcmUgdGhpcyBvciBpdCdzIGEgb3ZlciBlbmdpbmVlcmluZz8K
+ClRoYW5rcwoKCj4gICAJCWlmIChpZmN2Zl9zdGFydF9kYXRhcGF0aChhZGFwdGVyKSA8IDApCj4g
+ICAJCQlJRkNWRl9FUlIoYWRhcHRlci0+cGRldiwKPiAgIAkJCQkgICJGYWlsZWQgdG8gc2V0IGlm
+Y3ZmIHZkcGEgIHN0YXR1cyAldVxuIiwKPiBAQCAtMjg0LDM4ICszNTYsNiBAQCBzdGF0aWMgdm9p
+ZCBpZmN2Zl92ZHBhX3NldF9jb25maWdfY2Ioc3RydWN0IHZkcGFfZGV2aWNlICp2ZHBhX2RldiwK
+PiAgIAkuc2V0X2NvbmZpZ19jYiAgPSBpZmN2Zl92ZHBhX3NldF9jb25maWdfY2IsCj4gICB9Owo+
+ICAgCj4gLXN0YXRpYyBpbnQgaWZjdmZfcmVxdWVzdF9pcnEoc3RydWN0IGlmY3ZmX2FkYXB0ZXIg
+KmFkYXB0ZXIpCj4gLXsKPiAtCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gYWRhcHRlci0+cGRldjsK
+PiAtCXN0cnVjdCBpZmN2Zl9odyAqdmYgPSAmYWRhcHRlci0+dmY7Cj4gLQlpbnQgdmVjdG9yLCBp
+LCByZXQsIGlycTsKPiAtCj4gLQo+IC0JZm9yIChpID0gMDsgaSA8IElGQ1ZGX01BWF9RVUVVRV9Q
+QUlSUyAqIDI7IGkrKykgewo+IC0JCXNucHJpbnRmKHZmLT52cmluZ1tpXS5tc2l4X25hbWUsIDI1
+NiwgImlmY3ZmWyVzXS0lZFxuIiwKPiAtCQkJIHBjaV9uYW1lKHBkZXYpLCBpKTsKPiAtCQl2ZWN0
+b3IgPSBpICsgSUZDVkZfTVNJX1FVRVVFX09GRjsKPiAtCQlpcnEgPSBwY2lfaXJxX3ZlY3Rvcihw
+ZGV2LCB2ZWN0b3IpOwo+IC0JCXJldCA9IGRldm1fcmVxdWVzdF9pcnEoJnBkZXYtPmRldiwgaXJx
+LAo+IC0JCQkJICAgICAgIGlmY3ZmX2ludHJfaGFuZGxlciwgMCwKPiAtCQkJCSAgICAgICB2Zi0+
+dnJpbmdbaV0ubXNpeF9uYW1lLAo+IC0JCQkJICAgICAgICZ2Zi0+dnJpbmdbaV0pOwo+IC0JCWlm
+IChyZXQpIHsKPiAtCQkJSUZDVkZfRVJSKHBkZXYsCj4gLQkJCQkgICJGYWlsZWQgdG8gcmVxdWVz
+dCBpcnEgZm9yIHZxICVkXG4iLCBpKTsKPiAtCQkJcmV0dXJuIHJldDsKPiAtCQl9Cj4gLQkJdmYt
+PnZyaW5nW2ldLmlycSA9IGlycTsKPiAtCX0KPiAtCj4gLQlyZXR1cm4gMDsKPiAtfQo+IC0KPiAt
+c3RhdGljIHZvaWQgaWZjdmZfZnJlZV9pcnFfdmVjdG9ycyh2b2lkICpkYXRhKQo+IC17Cj4gLQlw
+Y2lfZnJlZV9pcnFfdmVjdG9ycyhkYXRhKTsKPiAtfQo+IC0KPiAgIHN0YXRpYyBpbnQgaWZjdmZf
+cHJvYmUoc3RydWN0IHBjaV9kZXYgKnBkZXYsIGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkICpp
+ZCkKPiAgIHsKPiAgIAlzdHJ1Y3QgZGV2aWNlICpkZXYgPSAmcGRldi0+ZGV2Owo+IEBAIC0zNDks
+MTMgKzM4OSw2IEBAIHN0YXRpYyBpbnQgaWZjdmZfcHJvYmUoc3RydWN0IHBjaV9kZXYgKnBkZXYs
+IGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkICppZCkKPiAgIAkJcmV0dXJuIHJldDsKPiAgIAl9
+Cj4gICAKPiAtCXJldCA9IHBjaV9hbGxvY19pcnFfdmVjdG9ycyhwZGV2LCBJRkNWRl9NQVhfSU5U
+UiwKPiAtCQkJCSAgICBJRkNWRl9NQVhfSU5UUiwgUENJX0lSUV9NU0lYKTsKPiAtCWlmIChyZXQg
+PCAwKSB7Cj4gLQkJSUZDVkZfRVJSKHBkZXYsICJGYWlsZWQgdG8gYWxsb2MgaXJxIHZlY3RvcnNc
+biIpOwo+IC0JCXJldHVybiByZXQ7Cj4gLQl9Cj4gLQo+ICAgCXJldCA9IGRldm1fYWRkX2FjdGlv
+bl9vcl9yZXNldChkZXYsIGlmY3ZmX2ZyZWVfaXJxX3ZlY3RvcnMsIHBkZXYpOwo+ICAgCWlmIChy
+ZXQpIHsKPiAgIAkJSUZDVkZfRVJSKHBkZXYsCj4gQEAgLTM3OSwxMiArNDEyLDYgQEAgc3RhdGlj
+IGludCBpZmN2Zl9wcm9iZShzdHJ1Y3QgcGNpX2RldiAqcGRldiwgY29uc3Qgc3RydWN0IHBjaV9k
+ZXZpY2VfaWQgKmlkKQo+ICAgCWFkYXB0ZXItPnBkZXYgPSBwZGV2Owo+ICAgCWFkYXB0ZXItPnZk
+cGEuZG1hX2RldiA9ICZwZGV2LT5kZXY7Cj4gICAKPiAtCXJldCA9IGlmY3ZmX3JlcXVlc3RfaXJx
+KGFkYXB0ZXIpOwo+IC0JaWYgKHJldCkgewo+IC0JCUlGQ1ZGX0VSUihwZGV2LCAiRmFpbGVkIHRv
+IHJlcXVlc3QgTVNJLVggaXJxXG4iKTsKPiAtCQlnb3RvIGVycjsKPiAtCX0KPiAtCj4gICAJcmV0
+ID0gaWZjdmZfaW5pdF9odyh2ZiwgcGRldik7Cj4gICAJaWYgKHJldCkgewo+ICAgCQlJRkNWRl9F
+UlIocGRldiwgIkZhaWxlZCB0byBpbml0IElGQ1ZGIGh3XG4iKTsKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlz
+dApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3Rz
+LmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
