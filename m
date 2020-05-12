@@ -1,85 +1,98 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6774E1CEC88
-	for <lists.virtualization@lfdr.de>; Tue, 12 May 2020 07:51:45 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 68A721CF7F2
+	for <lists.virtualization@lfdr.de>; Tue, 12 May 2020 16:54:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 164FB88550;
-	Tue, 12 May 2020 05:51:44 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id D15A426319;
+	Tue, 12 May 2020 14:54:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id H6conapebJbY; Tue, 12 May 2020 05:51:42 +0000 (UTC)
+	with ESMTP id DZm8t4hblgOC; Tue, 12 May 2020 14:54:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 309F18844B;
-	Tue, 12 May 2020 05:51:42 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 26F0A262E0;
+	Tue, 12 May 2020 14:54:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1028FC016F;
-	Tue, 12 May 2020 05:51:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B683C016F;
+	Tue, 12 May 2020 14:54:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 76024C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DF4CDC016F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 May 2020 05:51:40 +0000 (UTC)
+ Tue, 12 May 2020 14:54:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 5DE8D88415
+ by fraxinus.osuosl.org (Postfix) with ESMTP id DB86584E1A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 May 2020 05:51:40 +0000 (UTC)
+ Tue, 12 May 2020 14:54:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1mIiGSxlOYW4
+ with ESMTP id a-AmTx3DT01O
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 May 2020 05:51:38 +0000 (UTC)
+ Tue, 12 May 2020 14:54:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 4E5BD8840C
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1DE7284CF4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 May 2020 05:51:38 +0000 (UTC)
+ Tue, 12 May 2020 14:54:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589262697;
+ s=mimecast20190719; t=1589295242;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=x/cVjxQ0JMstZElAHAVEHp9fs0uKy63dNO0knF8a+TY=;
- b=TrVwEgKs5S8NLd7ItNWnjxua50X4CKXHUpuBGA2hd74GDXRO4FTZtDoStpEwV+bAZdRFBc
- LdXKnHm0eSr2VAfP5Q6vZ0qoaP5wt+nm/3yNC8WP9t/QsIcvynzFoPet0kEQCgOGNKyzAD
- qh9KJTiew+Xp4vKptpj8e7DDLU2ag8k=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-34-zRaLtNK4OEuDBvfkmqU5wg-1; Tue, 12 May 2020 01:51:34 -0400
-X-MC-Unique: zRaLtNK4OEuDBvfkmqU5wg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 62D808005B7;
- Tue, 12 May 2020 05:51:33 +0000 (UTC)
-Received: from [10.72.13.96] (ovpn-13-96.pek2.redhat.com [10.72.13.96])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2838738F;
- Tue, 12 May 2020 05:51:26 +0000 (UTC)
-Subject: Re: [PATCH] ifcvf: move IRQ request/free to status change handlers
-From: Jason Wang <jasowang@redhat.com>
-To: "Zhu, Lingshan" <lingshan.zhu@intel.com>, mst@redhat.com,
- kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-References: <1589181563-38400-1-git-send-email-lingshan.zhu@intel.com>
- <22d9dcdb-e790-0a68-ba41-b9530b2bf9fd@redhat.com>
- <0f822630-14ad-e0cd-4171-6213c30f0799@intel.com>
- <24d5875e-6f44-ce43-74f0-e641e02f8f42@redhat.com>
-Message-ID: <47713210-e9d9-d185-6e2e-433e2c436de9@redhat.com>
-Date: Tue, 12 May 2020 13:51:25 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ bh=YZOs/bxxTbikpapKhWDX3v8GWxjINqQOFJaU3KA5ktI=;
+ b=FDOhFiBkaGnfCd5a6YQuC+eKq29L6ejIDulwOKPjXqJH5BHFBE276iJvBktGbfNoLZJkKB
+ 5HHkARwp+1XGK7hOQjvkDXWbLxhR135YnxIscJTQhj9VrBVdvSduUg+DUXYvHnAwd4Vw4m
+ efjgtxK+6CmLvkDw0+5hA0fzzg8LHQo=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-109-nj1D7IasPgSifJnfmUmQ8Q-1; Tue, 12 May 2020 10:53:44 -0400
+X-MC-Unique: nj1D7IasPgSifJnfmUmQ8Q-1
+Received: by mail-wm1-f70.google.com with SMTP id a206so3839193wmh.6
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 12 May 2020 07:53:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=YZOs/bxxTbikpapKhWDX3v8GWxjINqQOFJaU3KA5ktI=;
+ b=UJ7vHcNvlQXNY9x43eMvM74IRukFmOKe67vYM69YVkp9TyOMfeUBzF8EFEKSIorOrR
+ gbbAoTgGa9M3lhgpeGRgP5SrRwLLkoDJi8UUwO8ElFPkbINRtstsxjEUBLHSIiV8FKqU
+ wi1DuAP2HzFt0Q4ydMP5uFqTX9IUy1OMDsfL5fQgVamfz7s0b85gxIEW86ePrM52MYLd
+ qYMtBs6tQwEWAeUaKN1BjJbOHqgHcCvPly4E4Ts1RlMAAjkHUmi66PWCTA8/N6cdAqHJ
+ HGo3Fqk6UtRrB7B2rnMOq/tJuAGcq2XrOxRtYKj2AGXLDy7p06bEKh/ukD4qSLd8AaWx
+ erPw==
+X-Gm-Message-State: AGi0PuZdU6O1Ti5wSWg1blvDbA/kQ9F1rpOUkAfRaTA5cUstISTmNnsY
+ zA+wL7tGfu5YdEvMpkNmsdO0GLkPrVI/C4ZQ18vWbRugNlDHOMiJB5DoCrKoMOIt1CR470F7k3q
+ rntEKUnZVvYhr2j8rwKWxdFF1M2XdkCrcaPliEaObJw==
+X-Received: by 2002:adf:e4cf:: with SMTP id v15mr24982838wrm.43.1589295223008; 
+ Tue, 12 May 2020 07:53:43 -0700 (PDT)
+X-Google-Smtp-Source: APiQypIw5On7DBpVmIndpyIiLyjKFPEMnKTaMXAz7znewwU/ycqbbRTJxLZoZDsaR40tXDplD0nbCA==
+X-Received: by 2002:adf:e4cf:: with SMTP id v15mr24982818wrm.43.1589295222757; 
+ Tue, 12 May 2020 07:53:42 -0700 (PDT)
+Received: from redhat.com (bzq-79-179-68-225.red.bezeqint.net. [79.179.68.225])
+ by smtp.gmail.com with ESMTPSA id v131sm4782950wmb.27.2020.05.12.07.53.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 May 2020 07:53:42 -0700 (PDT)
+Date: Tue, 12 May 2020 10:53:39 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Bharat Bhushan <bbhushan2@marvell.com>
+Subject: Re: [PATCH v5] iommu/virtio: Use page size bitmap supported by
+ endpoint
+Message-ID: <20200512105149-mutt-send-email-mst@kernel.org>
+References: <20200505093004.1935-1-bbhushan2@marvell.com>
 MIME-Version: 1.0
-In-Reply-To: <24d5875e-6f44-ce43-74f0-e641e02f8f42@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: lulu@redhat.com
+In-Reply-To: <20200505093004.1935-1-bbhushan2@marvell.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: jean-philippe@linaro.org, joro@8bytes.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, eric.auger@redhat.com,
+ iommu@lists.linux-foundation.org, eric.auger.pro@gmail.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,73 +104,167 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNS8xMiDkuIrljYgxMTozOCwgSmFzb24gV2FuZyB3cm90ZToKPj4+Pgo+Pj4+IMKg
-IHN0YXRpYyBpbnQgaWZjdmZfc3RhcnRfZGF0YXBhdGgodm9pZCAqcHJpdmF0ZSkKPj4+PiDCoCB7
-Cj4+Pj4gwqDCoMKgwqDCoCBzdHJ1Y3QgaWZjdmZfaHcgKnZmID0gaWZjdmZfcHJpdmF0ZV90b192
-Zihwcml2YXRlKTsKPj4+PiBAQCAtMTE4LDkgKzE3MiwxMiBAQCBzdGF0aWMgdm9pZCBpZmN2Zl92
-ZHBhX3NldF9zdGF0dXMoc3RydWN0IAo+Pj4+IHZkcGFfZGV2aWNlICp2ZHBhX2RldiwgdTggc3Rh
-dHVzKQo+Pj4+IMKgIHsKPj4+PiDCoMKgwqDCoMKgIHN0cnVjdCBpZmN2Zl9hZGFwdGVyICphZGFw
-dGVyOwo+Pj4+IMKgwqDCoMKgwqAgc3RydWN0IGlmY3ZmX2h3ICp2ZjsKPj4+PiArwqDCoMKgIHU4
-IHN0YXR1c19vbGQ7Cj4+Pj4gK8KgwqDCoCBpbnQgcmV0Owo+Pj4+IMKgIMKgwqDCoMKgwqAgdmbC
-oCA9IHZkcGFfdG9fdmYodmRwYV9kZXYpOwo+Pj4+IMKgwqDCoMKgwqAgYWRhcHRlciA9IGRldl9n
-ZXRfZHJ2ZGF0YSh2ZHBhX2Rldi0+ZGV2LnBhcmVudCk7Cj4+Pj4gK8KgwqDCoCBzdGF0dXNfb2xk
-ID0gaWZjdmZfZ2V0X3N0YXR1cyh2Zik7Cj4+Pj4gwqAgwqDCoMKgwqDCoCBpZiAoc3RhdHVzID09
-IDApIHsKPj4+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaWZjdmZfc3RvcF9kYXRhcGF0aChhZGFwdGVy
-KTsKPj4+PiBAQCAtMTI4LDcgKzE4NSwyMiBAQCBzdGF0aWMgdm9pZCBpZmN2Zl92ZHBhX3NldF9z
-dGF0dXMoc3RydWN0IAo+Pj4+IHZkcGFfZGV2aWNlICp2ZHBhX2RldiwgdTggc3RhdHVzKQo+Pj4+
-IMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm47Cj4+Pj4gwqDCoMKgwqDCoCB9Cj4+Pj4gwqAgLcKg
-wqDCoCBpZiAoc3RhdHVzICYgVklSVElPX0NPTkZJR19TX0RSSVZFUl9PSykgewo+Pj4+ICvCoMKg
-wqAgaWYgKChzdGF0dXNfb2xkICYgVklSVElPX0NPTkZJR19TX0RSSVZFUl9PSykgJiYKPj4+PiAr
-wqDCoMKgwqDCoMKgwqAgIShzdGF0dXMgJiBWSVJUSU9fQ09ORklHX1NfRFJJVkVSX09LKSkgewo+
-Pj4+ICvCoMKgwqDCoMKgwqDCoCBpZmN2Zl9zdG9wX2RhdGFwYXRoKGFkYXB0ZXIpOwo+Pj4+ICvC
-oMKgwqDCoMKgwqDCoCBpZmN2Zl9mcmVlX2lycShhZGFwdGVyLCBJRkNWRl9NQVhfUVVFVUVfUEFJ
-UlMgKiAyKTsKPj4+PiArwqDCoMKgIH0KPj4+PiArCj4+Pj4gK8KgwqDCoCBpZiAoKHN0YXR1cyAm
-IFZJUlRJT19DT05GSUdfU19EUklWRVJfT0spICYmCj4+Pj4gK8KgwqDCoMKgwqDCoMKgICEoc3Rh
-dHVzX29sZCAmIFZJUlRJT19DT05GSUdfU19EUklWRVJfT0spKSB7Cj4+Pj4gK8KgwqDCoMKgwqDC
-oMKgIHJldCA9IGlmY3ZmX3JlcXVlc3RfaXJxKGFkYXB0ZXIpOwo+Pj4+ICvCoMKgwqDCoMKgwqDC
-oCBpZiAocmV0KSB7Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RhdHVzID0gaWZjdmZf
-Z2V0X3N0YXR1cyh2Zik7Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RhdHVzIHw9IFZJ
-UlRJT19DT05GSUdfU19GQUlMRUQ7Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWZjdmZf
-c2V0X3N0YXR1cyh2Ziwgc3RhdHVzKTsKPj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1
-cm47Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgIH0KPj4+PiArCj4+Pgo+Pj4KPj4+IEhhdmUgYSBoYXJk
-IHRob3VnaCBvbiB0aGUgbG9naWMgaGVyZS4KPj4+Cj4+PiBUaGlzIGRlcGVuZHMgb24gdGhlIHN0
-YXR1cyBzZXR0aW5nIGZyb20gZ3Vlc3Qgb3IgdXNlcnNwYWNlLiBXaGljaCAKPj4+IG1lYW5zIGl0
-IGNhbiBub3QgZGVhbCB3aXRoIGUuZyB3aGVuIHFlbXUgb3IgdXNlcnNwYWNlIGlzIGNyYXNoZWQ/
-IERvIAo+Pj4gd2UgbmVlZCB0byBjYXJlIHRoaXMgb3IgaXQncyBhIG92ZXIgZW5naW5lZXJpbmc/
-Cj4+Pgo+Pj4gVGhhbmtzCj4+IElmIHFlbXUgY3Jhc2gsIEkgZ3Vlc3MgdXNlcnMgbWF5IHJlLXJ1
-biBxbWV1IC8gcmUtaW5pdGlhbGl6ZSB0aGUgCj4+IGRldmljZSwgYWNjb3JkaW5nIHRvIHRoZSBz
-cGVjLCB0aGVyZSBzaG91bGQgYmUgYSByZXNldCByb3V0aW5lLgo+PiBUaGlzIGNvZGUgcGllY2Ug
-aGFuZGxlcyBzdGF0dXMgY2hhbmdlIG9uIERSSVZFUl9PSyBmbGlwcGluZy4gSSBhbSBub3QgCj4+
-IHN1cmUgSSBnZXQgeW91ciBwb2ludCwgbWluZCB0byBnaXZlIG1vcmUgaGludHM/Cj4KPgo+IFRo
-ZSBwcm9ibGVtIGlzIGlmIHdlIGRvbid0IGxhdW5jaCBuZXcgcWVtdSBpbnN0YW5jZSwgdGhlIGlu
-dGVycnVwdCAKPiB3aWxsIGJlIHN0aWxsIHRoZXJlPwoKCk9rLCB3ZSByZXNldCBvbiB2aG9zdF92
-ZHBhX3JlbGVhc2UoKSBzbyB0aGUgZm9sbG93aW5nIGlzIHN1c3BpY2lvdXM6CgpXaXRoIHRoZSBw
-YXRjaCwgd2UgZG86CgpzdGF0aWMgdm9pZCBpZmN2Zl92ZHBhX3NldF9zdGF0dXMoc3RydWN0IHZk
-cGFfZGV2aWNlICp2ZHBhX2RldiwgdTggc3RhdHVzKQp7CiDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3Qg
-aWZjdmZfYWRhcHRlciAqYWRhcHRlcjsKIMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBpZmN2Zl9odyAq
-dmY7CiDCoMKgwqDCoMKgwqDCoCB1OCBzdGF0dXNfb2xkOwogwqDCoMKgwqDCoMKgwqAgaW50IHJl
-dDsKCiDCoMKgwqDCoMKgwqDCoCB2ZsKgID0gdmRwYV90b192Zih2ZHBhX2Rldik7CiDCoMKgwqDC
-oMKgwqDCoCBhZGFwdGVyID0gZGV2X2dldF9kcnZkYXRhKHZkcGFfZGV2LT5kZXYucGFyZW50KTsK
-IMKgwqDCoMKgwqDCoMKgIHN0YXR1c19vbGQgPSBpZmN2Zl9nZXRfc3RhdHVzKHZmKTsKCiDCoMKg
-wqDCoMKgwqDCoCBpZiAoc3RhdHVzID09IDApIHsKIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCBpZmN2Zl9zdG9wX2RhdGFwYXRoKGFkYXB0ZXIpOwogwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIGlmY3ZmX3Jlc2V0X3ZyaW5nKGFkYXB0ZXIpOwogwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIHJldHVybjsKIMKgwqDCoMKgwqDCoMKgIH0KCiDCoMKgwqDCoMKgwqDCoCBp
-ZiAoKHN0YXR1c19vbGQgJiBWSVJUSU9fQ09ORklHX1NfRFJJVkVSX09LKSAmJgogwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCAhKHN0YXR1cyAmIFZJUlRJT19DT05GSUdfU19EUklWRVJfT0spKSB7CiDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWZjdmZfc3RvcF9kYXRhcGF0aChhZGFwdGVy
-KTsKIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZmN2Zl9mcmVlX2lycShhZGFwdGVy
-LCBJRkNWRl9NQVhfUVVFVUVfUEFJUlMgKiAyKTsKIMKgwqDCoMKgwqDCoMKgIH0KCi4uLgoKU28g
-dGhlIGhhbmRsaW5nIG9mIHN0YXR1cyA9PSAwIGxvb2tzIHdyb25nLgoKVGhlIE9LIC0+ICFPSyBj
-aGVjayBzaG91bGQgYWxyZWFkeSBjb3ZlciB0aGUgZGF0YXBhdGggc3RvcHBpbmcgYW5kIGlycSAK
-c3R1ZmZzLgoKV2Ugb25seSBuZWVkIHRvIGRlYWwgd2l0aCB2cmluZyByZXNldCBhbmQgb25seSBu
-ZWVkIHRvIGRvIGl0IGFmdGVyIHdlIApzdG9wIHRoZSBkYXRhcGF0aC9pcnEgc3R1ZmZzLgoKVGhh
-bmtzCgoKCj4KPiBUaGFua3MgCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlz
-dHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3Jn
-L21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Tue, May 05, 2020 at 03:00:04PM +0530, Bharat Bhushan wrote:
+> Different endpoint can support different page size, probe
+> endpoint if it supports specific page size otherwise use
+> global page sizes.
+> 
+> Signed-off-by: Bharat Bhushan <bbhushan2@marvell.com>
+> ---
+> v4->v5:
+>  - Rebase to Linux v5.7-rc4
+> 
+> v3->v4:
+>  - Fix whitespace error
+> 
+> v2->v3:
+>  - Fixed error return for incompatible endpoint
+>  - __u64 changed to __le64 in header file
+> 
+>  drivers/iommu/virtio-iommu.c      | 48 ++++++++++++++++++++++++++++---
+>  include/uapi/linux/virtio_iommu.h |  7 +++++
+>  2 files changed, 51 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
+> index d5cac4f46ca5..9513d2ab819e 100644
+> --- a/drivers/iommu/virtio-iommu.c
+> +++ b/drivers/iommu/virtio-iommu.c
+> @@ -78,6 +78,7 @@ struct viommu_endpoint {
+>  	struct viommu_dev		*viommu;
+>  	struct viommu_domain		*vdomain;
+>  	struct list_head		resv_regions;
+> +	u64				pgsize_bitmap;
+>  };
+>  
+>  struct viommu_request {
+> @@ -415,6 +416,19 @@ static int viommu_replay_mappings(struct viommu_domain *vdomain)
+>  	return ret;
+>  }
+>  
+> +static int viommu_set_pgsize_bitmap(struct viommu_endpoint *vdev,
+> +				    struct virtio_iommu_probe_pgsize_mask *mask,
+> +				    size_t len)
+> +{
+> +	u64 pgsize_bitmap = le64_to_cpu(mask->pgsize_bitmap);
+> +
+> +	if (len < sizeof(*mask))
+> +		return -EINVAL;
+> +
+> +	vdev->pgsize_bitmap = pgsize_bitmap;
+> +	return 0;
+> +}
+> +
+>  static int viommu_add_resv_mem(struct viommu_endpoint *vdev,
+>  			       struct virtio_iommu_probe_resv_mem *mem,
+>  			       size_t len)
+> @@ -499,6 +513,9 @@ static int viommu_probe_endpoint(struct viommu_dev *viommu, struct device *dev)
+>  		case VIRTIO_IOMMU_PROBE_T_RESV_MEM:
+>  			ret = viommu_add_resv_mem(vdev, (void *)prop, len);
+>  			break;
+> +		case VIRTIO_IOMMU_PROBE_T_PAGE_SIZE_MASK:
+> +			ret = viommu_set_pgsize_bitmap(vdev, (void *)prop, len);
+> +			break;
+>  		default:
+>  			dev_err(dev, "unknown viommu prop 0x%x\n", type);
+>  		}
+
+So given this is necessary early in boot, how about we
+add this in the config space? And maybe ACPI too ...
+
+
+> @@ -630,7 +647,7 @@ static int viommu_domain_finalise(struct viommu_endpoint *vdev,
+>  
+>  	vdomain->id		= (unsigned int)ret;
+>  
+> -	domain->pgsize_bitmap	= viommu->pgsize_bitmap;
+> +	domain->pgsize_bitmap	= vdev->pgsize_bitmap;
+>  	domain->geometry	= viommu->geometry;
+>  
+>  	vdomain->map_flags	= viommu->map_flags;
+> @@ -654,6 +671,29 @@ static void viommu_domain_free(struct iommu_domain *domain)
+>  	kfree(vdomain);
+>  }
+>  
+> +/*
+> + * Check whether the endpoint's capabilities are compatible with other
+> + * endpoints in the domain. Report any inconsistency.
+> + */
+> +static bool viommu_endpoint_is_compatible(struct viommu_endpoint *vdev,
+> +					  struct viommu_domain *vdomain)
+> +{
+> +	struct device *dev = vdev->dev;
+> +
+> +	if (vdomain->viommu != vdev->viommu) {
+> +		dev_err(dev, "cannot attach to foreign vIOMMU\n");
+> +		return false;
+> +	}
+> +
+> +	if (vdomain->domain.pgsize_bitmap != vdev->pgsize_bitmap) {
+> +		dev_err(dev, "incompatible domain bitmap 0x%lx != 0x%llx\n",
+> +			vdomain->domain.pgsize_bitmap, vdev->pgsize_bitmap);
+> +		return false;
+> +	}
+> +
+> +	return true;
+> +}
+> +
+>  static int viommu_attach_dev(struct iommu_domain *domain, struct device *dev)
+>  {
+>  	int i;
+> @@ -670,9 +710,8 @@ static int viommu_attach_dev(struct iommu_domain *domain, struct device *dev)
+>  		 * owns it.
+>  		 */
+>  		ret = viommu_domain_finalise(vdev, domain);
+> -	} else if (vdomain->viommu != vdev->viommu) {
+> -		dev_err(dev, "cannot attach to foreign vIOMMU\n");
+> -		ret = -EXDEV;
+> +	} else if (!viommu_endpoint_is_compatible(vdev, vdomain)) {
+> +		ret = -EINVAL;
+>  	}
+>  	mutex_unlock(&vdomain->mutex);
+>  
+> @@ -886,6 +925,7 @@ static int viommu_add_device(struct device *dev)
+>  
+>  	vdev->dev = dev;
+>  	vdev->viommu = viommu;
+> +	vdev->pgsize_bitmap = viommu->pgsize_bitmap;
+>  	INIT_LIST_HEAD(&vdev->resv_regions);
+>  	dev_iommu_priv_set(dev, vdev);
+>  
+> diff --git a/include/uapi/linux/virtio_iommu.h b/include/uapi/linux/virtio_iommu.h
+> index 48e3c29223b5..2cced7accc99 100644
+> --- a/include/uapi/linux/virtio_iommu.h
+> +++ b/include/uapi/linux/virtio_iommu.h
+> @@ -111,6 +111,7 @@ struct virtio_iommu_req_unmap {
+>  
+>  #define VIRTIO_IOMMU_PROBE_T_NONE		0
+>  #define VIRTIO_IOMMU_PROBE_T_RESV_MEM		1
+> +#define VIRTIO_IOMMU_PROBE_T_PAGE_SIZE_MASK	2
+>  
+>  #define VIRTIO_IOMMU_PROBE_T_MASK		0xfff
+>  
+> @@ -119,6 +120,12 @@ struct virtio_iommu_probe_property {
+>  	__le16					length;
+>  };
+>  
+> +struct virtio_iommu_probe_pgsize_mask {
+> +	struct virtio_iommu_probe_property	head;
+> +	__u8					reserved[4];
+> +	__le64					pgsize_bitmap;
+> +};
+> +
+>  #define VIRTIO_IOMMU_RESV_MEM_T_RESERVED	0
+>  #define VIRTIO_IOMMU_RESV_MEM_T_MSI		1
+>  
+> -- 
+> 2.17.1
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
