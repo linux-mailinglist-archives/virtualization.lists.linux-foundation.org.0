@@ -1,130 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B53D1D1B3B
-	for <lists.virtualization@lfdr.de>; Wed, 13 May 2020 18:37:32 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 710121D1CAA
+	for <lists.virtualization@lfdr.de>; Wed, 13 May 2020 19:55:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A9DE684E24;
-	Wed, 13 May 2020 16:37:30 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 8C341221CC;
+	Wed, 13 May 2020 17:55:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yMmQoCF6FL2c; Wed, 13 May 2020 16:37:29 +0000 (UTC)
+	with ESMTP id TALxui8vWfUG; Wed, 13 May 2020 17:55:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 808FA86DAF;
-	Wed, 13 May 2020 16:37:29 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 022BC221B7;
+	Wed, 13 May 2020 17:55:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 60DE2C016F;
-	Wed, 13 May 2020 16:37:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CD341C016F;
+	Wed, 13 May 2020 17:55:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3E8C8C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 81ED2C016F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 16:37:27 +0000 (UTC)
+ Wed, 13 May 2020 17:55:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3875288305
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 7AC9F85B09
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 16:37:27 +0000 (UTC)
+ Wed, 13 May 2020 17:55:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Mog2mq2JeXTM
+ with ESMTP id h0AHe2osKgrW
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 16:37:25 +0000 (UTC)
+ Wed, 13 May 2020 17:55:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 985E688291
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6FEE885B04
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 16:37:25 +0000 (UTC)
+ Wed, 13 May 2020 17:55:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589387843;
+ s=mimecast20190719; t=1589392548;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=I8lzKK8Jo0TQLW03XcH79VW77ealySF8rgICQY7WKtg=;
- b=EOllfu/Ljv7UmQLbp0EovJ+neAgB74fvi816pHFNTNc2pgSPQYVZafgQQw1AOAicWdOi+W
- Igyahx2oX8E0LVZqT3cjTbFr13eqEral3CBakj7WtTwTcY6Z/G5RblSukxxpIUTU599tXZ
- DEGpiAm7yoQE+vY+Hg/eh5WQ8w9KL2s=
+ in-reply-to:in-reply-to:references:references;
+ bh=z74hyvbu6yXN5JbsG7DtOgXprTXDA7QgAH7P8GaOHEs=;
+ b=fG+nAlkEdcOPQkSbpDf+aoSToZzkqddUhMuTHs6RXG3slBNQp6ymIbwOYOj9BnuEPo8GQL
+ XKbFhQ/Cl6Cq8ZkPrH+e2d44KDELmD64Cu0j+xeIVbrKOxHI3F34fJaQj/IP107lVhL6ek
+ iqWvJEx0/B5mgS8BFyXnFtSrA68f19Q=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-388-q4pa4wchPsSYxCQOKRQGEA-1; Wed, 13 May 2020 12:37:18 -0400
-X-MC-Unique: q4pa4wchPsSYxCQOKRQGEA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-318-M7y_pPAXPHWV9GooMmb8QQ-1; Wed, 13 May 2020 13:55:43 -0400
+X-MC-Unique: M7y_pPAXPHWV9GooMmb8QQ-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E2FCB835B5A;
- Wed, 13 May 2020 16:37:16 +0000 (UTC)
-Received: from [10.36.114.88] (ovpn-114-88.ams2.redhat.com [10.36.114.88])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BD29D605FC;
- Wed, 13 May 2020 16:37:10 +0000 (UTC)
-Subject: Re: [RFC v3 for QEMU] virtio-balloon: Add option cont-pages to set
- VIRTIO_BALLOON_VQ_INFLATE_CONT
-To: Hui Zhu <teawater@gmail.com>, mst@redhat.com, jasowang@redhat.com,
- akpm@linux-foundation.org, xdeguillard@vmware.com, namit@vmware.com,
- gregkh@linuxfoundation.org, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, qemu-devel@nongnu.org,
- virtio-dev@lists.oasis-open.org
-References: <1589276501-16026-1-git-send-email-teawater@gmail.com>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
-Organization: Red Hat GmbH
-Message-ID: <0e7c29be-dd2c-dd95-6f2e-a009c530ffb1@redhat.com>
-Date: Wed, 13 May 2020 18:37:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5AE9C80183C;
+ Wed, 13 May 2020 17:55:42 +0000 (UTC)
+Received: from w520.home (ovpn-113-111.phx2.redhat.com [10.3.113.111])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8EC5961F50;
+ Wed, 13 May 2020 17:55:41 +0000 (UTC)
+Date: Wed, 13 May 2020 11:55:40 -0600
+From: Alex Williamson <alex.williamson@redhat.com>
+To: "Derrick, Jonathan" <jonathan.derrick@intel.com>
+Subject: Re: [PATCH for QEMU v2] hw/vfio: Add VMD Passthrough Quirk
+Message-ID: <20200513115540.59a2f57d@w520.home>
+In-Reply-To: <91c6795937035d6ad72cb78c7997ba8168f643c5.camel@intel.com>
+References: <20200511190129.9313-1-jonathan.derrick@intel.com>
+ <20200511190129.9313-2-jonathan.derrick@intel.com>
+ <20200511165927.27b41d65@w520.home>
+ <91c6795937035d6ad72cb78c7997ba8168f643c5.camel@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1589276501-16026-1-git-send-email-teawater@gmail.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: wei.guo.simon@linux.alibaba.com, qixuan.wu@linux.alibaba.com,
- Hui Zhu <teawaterz@linux.alibaba.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: "lorenzo.pieralisi@arm.com" <lorenzo.pieralisi@arm.com>,
+ "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "andrzej.jakowski@linux.intel.com" <andrzej.jakowski@linux.intel.com>,
+ "helgaas@kernel.org" <helgaas@kernel.org>, "hch@lst.de" <hch@lst.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -141,262 +97,346 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 12.05.20 11:41, Hui Zhu wrote:
+On Wed, 13 May 2020 00:35:47 +0000
+"Derrick, Jonathan" <jonathan.derrick@intel.com> wrote:
 
-This description needs an overhaul, it's hard to parse.
-
-> If the guest kernel has many fragmentation pages, use virtio_balloon
-> will split THP of QEMU when it calls MADV_DONTNEED madvise to release
-> the balloon pages.
-
-This is very unclear and confusing. You will *always* split THPs when
-inflating 4k pages and there are THPs around. This is completely
-independent of any fragmentation in the guest. The thing you are trying
-to achieve here is trying to *minimize* the number of split THPs in the
-hypervisor *after* the balloon was completely inflated.
-
-> Set option cont-pages to on will open flags VIRTIO_BALLOON_VQ_INFLATE_CONT
-> and set default continuous pages order to THP order.
-
-... and what you implement here is very x86 specific, hard-coding the
-"9" as THP order.
-
-"Set option cont-pages to on" -> 'Once the feature is enabled via
-"cont-pages=on"'
-"open flags" -> "unlock VIRTIO_BALLOON_VQ_INFLATE_CONT".
-
-
-> Then It will get continuous pages PFN that its order is current_pages_order
-> from VQ ivq use use madvise MADV_DONTNEED release the page.
-
-I fail to parse this sentence. I assume something like
-
-"current_pages_order is set by the guest and configures the size of the
-pages communicated via the inflate/deflate queue by the guest. It
-defaults to 0, which corresponds to the legacy handling without
-VIRTIO_BALLOON_VQ_INFLATE_CONT - 4k pages."
-
-Why is "max_pages_order" necessary *at all*? You never check against that.
-
-I have to say, I really dislike that interface. I would much rather
-prefer new inflate/deflate queues that eat variable sizes (not orders!)
-- similar to the free page reporting interface - and skip things like
-the pbp. Not sure if this interface is really what MST asked for.
-
-> This will handle the THP split issue.
+> Hi Alex,
 > 
-> Signed-off-by: Hui Zhu <teawaterz@linux.alibaba.com>
-> ---
->  hw/virtio/virtio-balloon.c                      | 77 +++++++++++++++++--------
->  include/hw/virtio/virtio-balloon.h              |  2 +
->  include/standard-headers/linux/virtio_balloon.h |  5 ++
->  3 files changed, 60 insertions(+), 24 deletions(-)
+> I'm probably not getting the translation technical details correct.
 > 
-> diff --git a/hw/virtio/virtio-balloon.c b/hw/virtio/virtio-balloon.c
-> index a4729f7..84d47d3 100644
-> --- a/hw/virtio/virtio-balloon.c
-> +++ b/hw/virtio/virtio-balloon.c
-> @@ -34,6 +34,7 @@
->  #include "hw/virtio/virtio-access.h"
->  
->  #define BALLOON_PAGE_SIZE  (1 << VIRTIO_BALLOON_PFN_SHIFT)
-> +#define CONT_PAGES_ORDER   9
->  
->  typedef struct PartiallyBalloonedPage {
->      ram_addr_t base_gpa;
-> @@ -72,6 +73,8 @@ static void balloon_inflate_page(VirtIOBalloon *balloon,
->      RAMBlock *rb;
->      size_t rb_page_size;
->      int subpages;
-> +    size_t inflate_size = BALLOON_PAGE_SIZE << balloon->current_pages_order;
-> +    int pages_num;
-
-reverse christmas tree please. squash same types into a single line if
-possible.
-
->  
->      /* XXX is there a better way to get to the RAMBlock than via a
->       * host address? */
-> @@ -81,7 +84,7 @@ static void balloon_inflate_page(VirtIOBalloon *balloon,
->      if (rb_page_size == BALLOON_PAGE_SIZE) {
->          /* Easy case */
->  
-> -        ram_block_discard_range(rb, rb_offset, rb_page_size);
-> +        ram_block_discard_range(rb, rb_offset, inflate_size);
->          /* We ignore errors from ram_block_discard_range(), because it
->           * has already reported them, and failing to discard a balloon
->           * page is not fatal */
-> @@ -99,32 +102,38 @@ static void balloon_inflate_page(VirtIOBalloon *balloon,
->  
->      rb_aligned_offset = QEMU_ALIGN_DOWN(rb_offset, rb_page_size);
->      subpages = rb_page_size / BALLOON_PAGE_SIZE;
-> -    base_gpa = memory_region_get_ram_addr(mr) + mr_offset -
-> -               (rb_offset - rb_aligned_offset);
->  
-> -    if (pbp->bitmap && !virtio_balloon_pbp_matches(pbp, base_gpa)) {
-> -        /* We've partially ballooned part of a host page, but now
-> -         * we're trying to balloon part of a different one.  Too hard,
-> -         * give up on the old partial page */
-> -        virtio_balloon_pbp_free(pbp);
-> -    }
-> +    for (pages_num = inflate_size / BALLOON_PAGE_SIZE;
-> +         pages_num > 0; pages_num--) {
-> +        base_gpa = memory_region_get_ram_addr(mr) + mr_offset -
-> +                   (rb_offset - rb_aligned_offset);
->  
-> -    if (!pbp->bitmap) {
-> -        virtio_balloon_pbp_alloc(pbp, base_gpa, subpages);
-> -    }
-> +        if (pbp->bitmap && !virtio_balloon_pbp_matches(pbp, base_gpa)) {
-> +            /* We've partially ballooned part of a host page, but now
-> +            * we're trying to balloon part of a different one.  Too hard,
-> +            * give up on the old partial page */
-> +            virtio_balloon_pbp_free(pbp);
-> +        }
->  
-> -    set_bit((rb_offset - rb_aligned_offset) / BALLOON_PAGE_SIZE,
-> -            pbp->bitmap);
-> +        if (!pbp->bitmap) {
-> +            virtio_balloon_pbp_alloc(pbp, base_gpa, subpages);
-> +        }
->  
-> -    if (bitmap_full(pbp->bitmap, subpages)) {
-> -        /* We've accumulated a full host page, we can actually discard
-> -         * it now */
-> +        set_bit((rb_offset - rb_aligned_offset) / BALLOON_PAGE_SIZE,
-> +                pbp->bitmap);
->  
-> -        ram_block_discard_range(rb, rb_aligned_offset, rb_page_size);
-> -        /* We ignore errors from ram_block_discard_range(), because it
-> -         * has already reported them, and failing to discard a balloon
-> -         * page is not fatal */
-> -        virtio_balloon_pbp_free(pbp);
-> +        if (bitmap_full(pbp->bitmap, subpages)) {
-> +            /* We've accumulated a full host page, we can actually discard
-> +            * it now */
-> +
-> +            ram_block_discard_range(rb, rb_aligned_offset, rb_page_size);
-> +            /* We ignore errors from ram_block_discard_range(), because it
-> +            * has already reported them, and failing to discard a balloon
-> +            * page is not fatal */
-> +            virtio_balloon_pbp_free(pbp);
-> +        }
-> +
-> +        mr_offset += BALLOON_PAGE_SIZE;
->      }
->  }
->  
-> @@ -345,7 +354,7 @@ static void virtio_balloon_handle_output(VirtIODevice *vdev, VirtQueue *vq)
->              offset += 4;
->  
->              section = memory_region_find(get_system_memory(), pa,
-> -                                         BALLOON_PAGE_SIZE);
-> +                                BALLOON_PAGE_SIZE << s->current_pages_order);
->              if (!section.mr) {
->                  trace_virtio_balloon_bad_addr(pa);
->                  continue;
-> @@ -618,9 +627,12 @@ static size_t virtio_balloon_config_size(VirtIOBalloon *s)
->      if (s->qemu_4_0_config_size) {
->          return sizeof(struct virtio_balloon_config);
->      }
-> -    if (virtio_has_feature(features, VIRTIO_BALLOON_F_PAGE_POISON)) {
-> +    if (virtio_has_feature(s->host_features, VIRTIO_BALLOON_F_CONT_PAGES)) {
->          return sizeof(struct virtio_balloon_config);
->      }
-> +    if (virtio_has_feature(features, VIRTIO_BALLOON_F_PAGE_POISON)) {
-> +        return offsetof(struct virtio_balloon_config, current_pages_order);
-> +    }
->      if (virtio_has_feature(features, VIRTIO_BALLOON_F_FREE_PAGE_HINT)) {
->          return offsetof(struct virtio_balloon_config, poison_val);
->      }
-> @@ -646,6 +658,11 @@ static void virtio_balloon_get_config(VirtIODevice *vdev, uint8_t *config_data)
->                         cpu_to_le32(VIRTIO_BALLOON_CMD_ID_DONE);
->      }
->  
-> +    if (virtio_has_feature(dev->host_features, VIRTIO_BALLOON_F_CONT_PAGES)) {
-> +        config.max_pages_order = cpu_to_le32(CONT_PAGES_ORDER);
-> +        config.current_pages_order = cpu_to_le32(dev->current_pages_order);
-> +    }
-> +
->      trace_virtio_balloon_get_config(config.num_pages, config.actual);
->      memcpy(config_data, &config, virtio_balloon_config_size(dev));
->  }
-> @@ -693,6 +710,9 @@ static void virtio_balloon_set_config(VirtIODevice *vdev,
->  
->      memcpy(&config, config_data, virtio_balloon_config_size(dev));
->      dev->actual = le32_to_cpu(config.actual);
-> +    if (virtio_has_feature(dev->host_features, VIRTIO_BALLOON_F_CONT_PAGES)) {
-> +        dev->current_pages_order = le32_to_cpu(config.current_pages_order);
-> +    }
->      if (dev->actual != oldactual) {
->          qapi_event_send_balloon_change(vm_ram_size -
->                          ((ram_addr_t) dev->actual << VIRTIO_BALLOON_PFN_SHIFT));
-> @@ -816,6 +836,13 @@ static void virtio_balloon_device_realize(DeviceState *dev, Error **errp)
->              virtio_error(vdev, "iothread is missing");
->          }
->      }
-> +
-> +    if (virtio_has_feature(s->host_features, VIRTIO_BALLOON_F_CONT_PAGES)) {
-> +        s->current_pages_order = CONT_PAGES_ORDER;
-> +    } else {
-> +        s->current_pages_order = 0;
-> +    }
-> +
->      reset_stats(s);
->  }
->  
-> @@ -916,6 +943,8 @@ static Property virtio_balloon_properties[] = {
->                      VIRTIO_BALLOON_F_DEFLATE_ON_OOM, false),
->      DEFINE_PROP_BIT("free-page-hint", VirtIOBalloon, host_features,
->                      VIRTIO_BALLOON_F_FREE_PAGE_HINT, false),
-> +    DEFINE_PROP_BIT("cont-pages", VirtIOBalloon, host_features,
-> +                    VIRTIO_BALLOON_F_CONT_PAGES, false),
->      /* QEMU 4.0 accidentally changed the config size even when free-page-hint
->       * is disabled, resulting in QEMU 3.1 migration incompatibility.  This
->       * property retains this quirk for QEMU 4.1 machine types.
-> diff --git a/include/hw/virtio/virtio-balloon.h b/include/hw/virtio/virtio-balloon.h
-> index d1c968d..e0dce0d 100644
-> --- a/include/hw/virtio/virtio-balloon.h
-> +++ b/include/hw/virtio/virtio-balloon.h
-> @@ -70,6 +70,8 @@ typedef struct VirtIOBalloon {
->      uint32_t host_features;
->  
->      bool qemu_4_0_config_size;
-> +
-> +    uint32_t current_pages_order;
->  } VirtIOBalloon;
->  
->  #endif
-> diff --git a/include/standard-headers/linux/virtio_balloon.h b/include/standard-headers/linux/virtio_balloon.h
-> index 9375ca2..b5386ce 100644
-> --- a/include/standard-headers/linux/virtio_balloon.h
-> +++ b/include/standard-headers/linux/virtio_balloon.h
-> @@ -36,6 +36,7 @@
->  #define VIRTIO_BALLOON_F_DEFLATE_ON_OOM	2 /* Deflate balloon on OOM */
->  #define VIRTIO_BALLOON_F_FREE_PAGE_HINT	3 /* VQ to report free pages */
->  #define VIRTIO_BALLOON_F_PAGE_POISON	4 /* Guest is using page poisoning */
-> +#define VIRTIO_BALLOON_F_CONT_PAGES	6 /* VQ to report continuous pages */
->  
->  /* Size of a PFN in the balloon interface. */
->  #define VIRTIO_BALLOON_PFN_SHIFT 12
-> @@ -51,6 +52,10 @@ struct virtio_balloon_config {
->  	uint32_t free_page_report_cmd_id;
->  	/* Stores PAGE_POISON if page poisoning is in use */
->  	uint32_t poison_val;
-> +	/* Max pages order if VIRTIO_BALLOON_F_CONT_PAGES is set */
-> +	uint32_t max_pages_order;
-> +	/* Current pages order if VIRTIO_BALLOON_F_CONT_PAGES is set */
-> +	uint32_t current_pages_order;
->  };
->  
->  #define VIRTIO_BALLOON_S_SWAP_IN  0   /* Amount of memory swapped in */
+> On Mon, 2020-05-11 at 16:59 -0600, Alex Williamson wrote:
+> > On Mon, 11 May 2020 15:01:27 -0400
+> > Jon Derrick <jonathan.derrick@intel.com> wrote:
+> >   
+> > > The VMD endpoint provides a real PCIe domain to the guest, including  
+> > 
+> > Please define VMD.  I'm sure this is obvious to many, but I've had to
+> > do some research.  The best TL;DR summary I've found is Keith's
+> > original commit 185a383ada2e adding the controller to Linux.  If there's
+> > something better, please let me know.  
+> That's the correct commit, but I'll try to summarize the important bits
+> for v3.
 > 
+> >   
+> > > bridges and endpoints. Because the VMD domain is enumerated by the guest
+> > > kernel, the guest kernel will assign Guest Physical Addresses to the
+> > > downstream endpoint BARs and bridge windows.
+> > > 
+> > > When the guest kernel performs MMIO to VMD sub-devices, IOMMU will
+> > > translate from the guest address space to the physical address space.
+> > > Because the bridges have been programmed with guest addresses, the
+> > > bridges will reject the transaction containing physical addresses.  
+> > 
+> > I'm lost, what IOMMU is involved in CPU access to MMIO space?  My guess
+> > is that since all MMIO of this domain is mapped behind the host
+> > endpoint BARs 2 & 4 that QEMU simply accesses it via mapping of those
+> > BARs into the VM, so it's the MMU, not the IOMMU performing those GPA
+> > to HPA translations.  But then presumably the bridges within the domain
+> > are scrambled because their apertures are programmed with ranges that
+> > don't map into the VMD endpoint BARs.  Is that remotely correct?  Some
+> > /proc/iomem output and/or lspci listing from the host to see how this
+> > works would be useful.  
+> Correct. So MMU not IOMMU.
+> 
+> In the guest kernel, the bridges and devices in the VMD domain are
+> programmed with the addresses provided in the VMD endpoint's BAR2&4
+> (MEMBAR1&2). Because these BARs are populated with guest addresses, MMU
+> translates to host physical and the bridge window rejects MMIO not in
+> its [GPA] range.
+> 
+> As an example:
+> Host:
+>   94000000-97ffffff : 0000:17:05.5
+>     94000000-97ffffff : VMD MEMBAR1
+>       94000000-943fffff : PCI Bus 10000:01
+>         94000000-9400ffff : 10000:01:00.0
+>         94010000-94013fff : 10000:01:00.0
+>           94010000-94013fff : nvme
+>       94400000-947fffff : PCI Bus 10000:01
+>       94800000-94bfffff : PCI Bus 10000:02
+>         94800000-9480ffff : 10000:02:00.0
+>         94810000-94813fff : 10000:02:00.0
+>           94810000-94813fff : nvme
+>       94c00000-94ffffff : PCI Bus 10000:02
+> 
+> 
+> MEMBAR 2 is similarly assigned
+> 
+> >   
+> > > VMD device 28C0 natively assists passthrough by providing the Host
+> > > Physical Address in shadow registers accessible to the guest for bridge
+> > > window assignment. The shadow registers are valid if bit 1 is set in VMD
+> > > VMLOCK config register 0x70. Future VMDs will also support this feature.
+> > > Existing VMDs have config register 0x70 reserved, and will return 0 on
+> > > reads.  
+> > 
+> > So these shadow registers are simply exposing the host BAR2 & BAR4
+> > addresses into the guest, so the quirk is dependent on reading those
+> > values from the device before anyone has written to them and the BAR
+> > emulation in the kernel kicks in (not a problem, just an observation).  
+> It's not expected that there will be anything writing that resource and
+> those registers are read-only.
+> The first 0x2000 of MEMBAR2 (BAR4) contain msix tables, and mappings to
+> subordinate buses are on 1MB aligned.
+> 
+> 
+> > Does the VMD controller code then use these bases addresses to program
+> > the bridges/endpoint within the domain?  What does the same /proc/iomem
+> > or lspci look like inside the guest then?  It seems like we'd see the
+> > VMD endpoint with GPA BARs, but the devices within the domain using
+> > HPAs.  If that's remotely true, and we're not forcing an identity
+> > mapping of this HPA range into the GPA, does the vmd controller driver
+> > impose a TRA function on these MMIO addresses in the guest?  
+> 
+> This is the guest with the guest addresses:
+>   f8000000-fbffffff : 0000:00:07.0
+>     f8000000-fbffffff : VMD MEMBAR1
+>   
+>     f8000000-f83fffff : PCI Bus 10000:01
+>         f8000000-f800ffff :
+> 10000:01:00.0
+>         f8010000-f8013fff : 10000:01:00.0
+>           f801000
+> 0-f8013fff : nvme
+>       f8400000-f87fffff : PCI Bus 10000:01
+>       f88000
+> 00-f8bfffff : PCI Bus 10000:02
+>         f8800000-f880ffff : 10000:02:00.0
+>         f8810000-f8813fff : 10000:02:00.0
+>           f8810000-f8813fff :
+> nvme
+>       f8c00000-f8ffffff : PCI Bus 10000:02
+> 
+> 
+> The VMD guest driver does the translation on the supplied address using
+> pci_add_resource_offset prior to creating the root bus and enumerating
+> the domain:
+> 
+> 	offset[0] = vmd->dev->resource[VMD_MEMBAR1].start -
+> 			readq(membar2 + MB2_SHADOW_OFFSET);
+> 	offset[1] = vmd->dev->resource[VMD_MEMBAR2].start -
+> 			readq(membar2 + MB2_SHADOW_OFFSET + 8);
+> ...
+> 	pci_add_resource(&resources, &vmd->resources[0]);
+> 	pci_add_resource_offset(&resources, &vmd->resources[1], offset[0]);
+> 	pci_add_resource_offset(&resources, &vmd->resources[2], offset[1]);
+> 
+> 	vmd->bus = pci_create_root_bus(&vmd->dev->dev, vmd->busn_start,
+> 				       &vmd_ops, sd, &resources);
+> 
+> 
+> The offset becomes the CPU-to-bridge translation function for
+> programming the guest's VMD domain with bus addresses.
+> 
+> 
+> In the patched guest's lspci, for the bridge you see:
+> # lspci -v -s 10000:00:02.0
+> 10000:00:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C
+> 	...
+> 	Memory behind bridge: 94000000-943fffff
+> 
+> 
+> But the kernel doesn't export the offset BAR for the endpoint:
+> # lspci -v -s 10000:02:00.0
+> 10000:02:00.0 Non-Volatile memory controller: Intel Corporation NVMe Datacenter SSD
+> 	...
+> 	Memory at f8810000 (64-bit, non-prefetchable) [size=16K]
+> 	[virtual] Expansion ROM at f8800000 [disabled] [size=64K]
+> 
+> The endpoint is still programmed with the offset:
+> # setpci -s 10000:02:00.0 10.l
+> 94810004
+> 
+> 
+> > 
+> > Sorry if I'm way off, I'm piecing things together from scant
+> > information here.  Please Cc me on future vfio related patches.  Thanks,
+> > 
+> > Alex
+> >   
+> No problem
 
+Thanks for the confirmation.  The approach seems ok, but a subtle
+side-effect of MemoryRegion quirks is that we're going to trap the
+entire PAGE_SIZE range overlapping the quirk out to QEMU on guest
+access.  The two registers at 0x2000 might be reserved for this
+purpose, but is there anything else that could be performance sensitive
+anywhere in that page?  If so, it might be less transparent, but more
+efficient to invent a new quirk making use of config space (ex. adding
+an emulated vendor capability somewhere known to be unused on the
+device).  Thanks,
 
--- 
-Thanks,
+Alex
 
-David / dhildenb
+> > > In order to support existing VMDs, this quirk emulates the VMLOCK and
+> > > HPA shadow registers for all VMD device ids which don't natively assist
+> > > with passthrough. The Linux VMD driver is updated to allow existing VMD
+> > > devices to query VMLOCK for passthrough support.
+> > > 
+> > > Signed-off-by: Jon Derrick <jonathan.derrick@intel.com>
+> > > ---
+> > >  hw/vfio/pci-quirks.c | 103 +++++++++++++++++++++++++++++++++++++++++++
+> > >  hw/vfio/pci.c        |   7 +++
+> > >  hw/vfio/pci.h        |   2 +
+> > >  hw/vfio/trace-events |   3 ++
+> > >  4 files changed, 115 insertions(+)
+> > > 
+> > > diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
+> > > index 2d348f8237..4060a6a95d 100644
+> > > --- a/hw/vfio/pci-quirks.c
+> > > +++ b/hw/vfio/pci-quirks.c
+> > > @@ -1709,3 +1709,106 @@ free_exit:
+> > >  
+> > >      return ret;
+> > >  }
+> > > +
+> > > +/*
+> > > + * The VMD endpoint provides a real PCIe domain to the guest and the guest
+> > > + * kernel performs enumeration of the VMD sub-device domain. Guest transactions
+> > > + * to VMD sub-devices go through IOMMU translation from guest addresses to
+> > > + * physical addresses. When MMIO goes to an endpoint after being translated to
+> > > + * physical addresses, the bridge rejects the transaction because the window
+> > > + * has been programmed with guest addresses.
+> > > + *
+> > > + * VMD can use the Host Physical Address in order to correctly program the
+> > > + * bridge windows in its PCIe domain. VMD device 28C0 has HPA shadow registers
+> > > + * located at offset 0x2000 in MEMBAR2 (BAR 4). The shadow registers are valid
+> > > + * if bit 1 is set in the VMD VMLOCK config register 0x70. VMD devices without
+> > > + * this native assistance can have these registers safely emulated as these
+> > > + * registers are reserved.
+> > > + */
+> > > +typedef struct VFIOVMDQuirk {
+> > > +    VFIOPCIDevice *vdev;
+> > > +    uint64_t membar_phys[2];
+> > > +} VFIOVMDQuirk;
+> > > +
+> > > +static uint64_t vfio_vmd_quirk_read(void *opaque, hwaddr addr, unsigned size)
+> > > +{
+> > > +    VFIOVMDQuirk *data = opaque;
+> > > +    uint64_t val = 0;
+> > > +
+> > > +    memcpy(&val, (void *)data->membar_phys + addr, size);
+> > > +    return val;
+> > > +}
+> > > +
+> > > +static const MemoryRegionOps vfio_vmd_quirk = {
+> > > +    .read = vfio_vmd_quirk_read,
+> > > +    .endianness = DEVICE_LITTLE_ENDIAN,
+> > > +};
+> > > +
+> > > +#define VMD_VMLOCK  0x70
+> > > +#define VMD_SHADOW  0x2000
+> > > +#define VMD_MEMBAR2 4
+> > > +
+> > > +static int vfio_vmd_emulate_shadow_registers(VFIOPCIDevice *vdev)
+> > > +{
+> > > +    VFIOQuirk *quirk;
+> > > +    VFIOVMDQuirk *data;
+> > > +    PCIDevice *pdev = &vdev->pdev;
+> > > +    int ret;
+> > > +
+> > > +    data = g_malloc0(sizeof(*data));
+> > > +    ret = pread(vdev->vbasedev.fd, data->membar_phys, 16,
+> > > +                vdev->config_offset + PCI_BASE_ADDRESS_2);
+> > > +    if (ret != 16) {
+> > > +        error_report("VMD %s cannot read MEMBARs (%d)",
+> > > +                     vdev->vbasedev.name, ret);
+> > > +        g_free(data);
+> > > +        return -EFAULT;
+> > > +    }
+> > > +
+> > > +    quirk = vfio_quirk_alloc(1);
+> > > +    quirk->data = data;
+> > > +    data->vdev = vdev;
+> > > +
+> > > +    /* Emulate Shadow Registers */
+> > > +    memory_region_init_io(quirk->mem, OBJECT(vdev), &vfio_vmd_quirk, data,
+> > > +                          "vfio-vmd-quirk", sizeof(data->membar_phys));
+> > > +    memory_region_add_subregion_overlap(vdev->bars[VMD_MEMBAR2].region.mem,
+> > > +                                        VMD_SHADOW, quirk->mem, 1);
+> > > +    memory_region_set_readonly(quirk->mem, true);
+> > > +    memory_region_set_enabled(quirk->mem, true);
+> > > +
+> > > +    QLIST_INSERT_HEAD(&vdev->bars[VMD_MEMBAR2].quirks, quirk, next);
+> > > +
+> > > +    trace_vfio_pci_vmd_quirk_shadow_regs(vdev->vbasedev.name,
+> > > +                                         data->membar_phys[0],
+> > > +                                         data->membar_phys[1]);
+> > > +
+> > > +    /* Advertise Shadow Register support */
+> > > +    pci_byte_test_and_set_mask(pdev->config + VMD_VMLOCK, 0x2);
+> > > +    pci_set_byte(pdev->wmask + VMD_VMLOCK, 0);
+> > > +    pci_set_byte(vdev->emulated_config_bits + VMD_VMLOCK, 0x2);
+> > > +
+> > > +    trace_vfio_pci_vmd_quirk_vmlock(vdev->vbasedev.name,
+> > > +                                    pci_get_byte(pdev->config + VMD_VMLOCK));
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +int vfio_pci_vmd_init(VFIOPCIDevice *vdev)
+> > > +{
+> > > +    int ret = 0;
+> > > +
+> > > +    switch (vdev->device_id) {
+> > > +    case 0x28C0: /* Native passthrough support */
+> > > +        break;
+> > > +    /* Emulates Native passthrough support */
+> > > +    case 0x201D:
+> > > +    case 0x467F:
+> > > +    case 0x4C3D:
+> > > +    case 0x9A0B:
+> > > +        ret = vfio_vmd_emulate_shadow_registers(vdev);
+> > > +        break;
+> > > +    }
+> > > +
+> > > +    return ret;
+> > > +}
+> > > diff --git a/hw/vfio/pci.c b/hw/vfio/pci.c
+> > > index 5e75a95129..85425a1a6f 100644
+> > > --- a/hw/vfio/pci.c
+> > > +++ b/hw/vfio/pci.c
+> > > @@ -3024,6 +3024,13 @@ static void vfio_realize(PCIDevice *pdev, Error **errp)
+> > >          }
+> > >      }
+> > >  
+> > > +    if (vdev->vendor_id == PCI_VENDOR_ID_INTEL) {
+> > > +        ret = vfio_pci_vmd_init(vdev);
+> > > +        if (ret) {
+> > > +            error_report("Failed to setup VMD");
+> > > +        }
+> > > +    }
+> > > +
+> > >      vfio_register_err_notifier(vdev);
+> > >      vfio_register_req_notifier(vdev);
+> > >      vfio_setup_resetfn_quirk(vdev);
+> > > diff --git a/hw/vfio/pci.h b/hw/vfio/pci.h
+> > > index 0da7a20a7e..e8632d806b 100644
+> > > --- a/hw/vfio/pci.h
+> > > +++ b/hw/vfio/pci.h
+> > > @@ -217,6 +217,8 @@ int vfio_pci_igd_opregion_init(VFIOPCIDevice *vdev,
+> > >  int vfio_pci_nvidia_v100_ram_init(VFIOPCIDevice *vdev, Error **errp);
+> > >  int vfio_pci_nvlink2_init(VFIOPCIDevice *vdev, Error **errp);
+> > >  
+> > > +int vfio_pci_vmd_init(VFIOPCIDevice *vdev);
+> > > +
+> > >  void vfio_display_reset(VFIOPCIDevice *vdev);
+> > >  int vfio_display_probe(VFIOPCIDevice *vdev, Error **errp);
+> > >  void vfio_display_finalize(VFIOPCIDevice *vdev);
+> > > diff --git a/hw/vfio/trace-events b/hw/vfio/trace-events
+> > > index b1ef55a33f..ed64e477db 100644
+> > > --- a/hw/vfio/trace-events
+> > > +++ b/hw/vfio/trace-events
+> > > @@ -90,6 +90,9 @@ vfio_pci_nvidia_gpu_setup_quirk(const char *name, uint64_t tgt, uint64_t size) "
+> > >  vfio_pci_nvlink2_setup_quirk_ssatgt(const char *name, uint64_t tgt, uint64_t size) "%s tgt=0x%"PRIx64" size=0x%"PRIx64
+> > >  vfio_pci_nvlink2_setup_quirk_lnkspd(const char *name, uint32_t link_speed) "%s link_speed=0x%x"
+> > >  
+> > > +vfio_pci_vmd_quirk_shadow_regs(const char *name, uint64_t mb1, uint64_t mb2) "%s membar1_phys=0x%"PRIx64" membar2_phys=0x%"PRIx64
+> > > +vfio_pci_vmd_quirk_vmlock(const char *name, uint8_t vmlock) "%s vmlock=0x%x"
+> > > +
+> > >  # common.c
+> > >  vfio_region_write(const char *name, int index, uint64_t addr, uint64_t data, unsigned size) " (%s:region%d+0x%"PRIx64", 0x%"PRIx64 ", %d)"
+> > >  vfio_region_read(char *name, int index, uint64_t addr, unsigned size, uint64_t data) " (%s:region%d+0x%"PRIx64", %d) = 0x%"PRIx64  
 
 _______________________________________________
 Virtualization mailing list
