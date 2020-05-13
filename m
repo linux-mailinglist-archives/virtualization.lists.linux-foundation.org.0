@@ -1,82 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D9D81D11B7
-	for <lists.virtualization@lfdr.de>; Wed, 13 May 2020 13:46:43 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C9D2187AB5;
-	Wed, 13 May 2020 11:46:41 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vA93y6SJFtRy; Wed, 13 May 2020 11:46:41 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5065987A77;
-	Wed, 13 May 2020 11:46:41 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 39B7BC016F;
-	Wed, 13 May 2020 11:46:41 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9339EC016F
- for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 11:46:39 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 486B01D19BC
+	for <lists.virtualization@lfdr.de>; Wed, 13 May 2020 17:45:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 78CB38686D
- for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 11:46:39 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D363C882FB;
+	Wed, 13 May 2020 15:45:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id oycYbEG-DR2U; Wed, 13 May 2020 15:45:16 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 16B06882C7;
+	Wed, 13 May 2020 15:45:16 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D2FE4C016F;
+	Wed, 13 May 2020 15:45:15 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C3B80C016F
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 13 May 2020 15:45:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 9866120243
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 13 May 2020 15:45:13 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pJp2IWKYjoDQ
+ with ESMTP id DRkDeIimEsNZ
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 11:46:39 +0000 (UTC)
+ Wed, 13 May 2020 15:45:12 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by whitealder.osuosl.org (Postfix) with ESMTPS id DBD1286777
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+ [209.85.167.194])
+ by silver.osuosl.org (Postfix) with ESMTPS id 35AAA20111
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 11:46:38 +0000 (UTC)
-Received: from zn.tnic (p200300EC2F0AC300A0B029A08DBD019D.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f0a:c300:a0b0:29a0:8dbd:19d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 473AC1EC0330;
- Wed, 13 May 2020 13:46:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1589370397;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=euj2zi24Uj3leIrpx0insV4176ao8ao6nc3wRKwDosc=;
- b=ArE0U+8MeibbTsaC8/2kOx7cnQiO9Cv2Cp0QzXJfoHMCFkiSp0a15+38EqiJNMgzw11Xn0
- y+D7M3OHFL/8Jbj9aVmU6vvmkxeCEOXoViqE54KJI3pHn8sctpNby9E8L//MUXeh/7MgyI
- PmlIWGJtrSTKzuvUhODOpsyRRMUzaRc=
-Date: Wed, 13 May 2020 13:46:33 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 24/75] x86/boot/compressed/64: Unmap GHCB page before
- booting the kernel
-Message-ID: <20200513114633.GE4025@zn.tnic>
-References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-25-joro@8bytes.org>
- <20200513111340.GD4025@zn.tnic> <20200513113011.GG18353@8bytes.org>
+ Wed, 13 May 2020 15:45:12 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id i13so21807772oie.9
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 13 May 2020 08:45:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Mei1LatTmGdj+EOMqNvHhmuC380OhE62eU0mPCj4HIU=;
+ b=TIT8H80mk+o//K+Djr3m9ymdXjqeJJh7T1O0QGR3OB+cw9gH6v6k/2XsLqv7s+oaGI
+ UWDF28wRCnpwGYavm+XRQfy+8o2ez7RJBPSI+LHD5tVHIt5p1Sr7uwpr2rlisGEov6IA
+ 64dCFZ8mHEj3yDnfE1IkxFdtbSA94SYqY5inY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Mei1LatTmGdj+EOMqNvHhmuC380OhE62eU0mPCj4HIU=;
+ b=bm0sofKlAMhs/SWJgjtiKLAj978u4iZfYTLeTC0HuK3ttvbo9AJrsAYKra7yq/lYwF
+ 3OUIpqgJ8PwrejTmihKJ2F5CkaJ1Gu1R7PiEE42+TliTM/bt+gKqVUxINEnyqVQaXbif
+ LKmyHJ3tM4n4m4NG9oKQUDo3AmA/D70sx44JRLEINgepj/jC/IXXeUV954Fn0bYy+Hxs
+ 9E4mHTIwhVmA27tSURbGrv7b+bZOJiu2D/WTorllGuMkLNu0ILbyqCTQz0AXYeIWVzT4
+ rt1TVTMCSH9Ah6lD014UEq3GliOHMFFO5uYHovyGLz8HMgFQ0pA1jNFE2HYHhvK/Aoxx
+ u4Fg==
+X-Gm-Message-State: AGi0PubDWoBcK8tzDc0SMZgKfiUDT9FlEZ56JlPEMJ5jMnF+rMRRddOq
+ HuJf9gWPAHdiTvNP1P2K3ua+mbyP40HxmFM90VzExA==
+X-Google-Smtp-Source: APiQypI5v/GPcuUPKMBM3NTNqytmPwdux2KcE1khhFrjveIV/zK1dS2UemFwYRgCFispMAUfUJhE2vXjRmumZEBkQZg=
+X-Received: by 2002:aca:3b41:: with SMTP id i62mr9169611oia.101.1589384711122; 
+ Wed, 13 May 2020 08:45:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200513113011.GG18353@8bytes.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
- x86@kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+References: <20200311112004.47138-1-stevensd@chromium.org>
+ <20200311112004.47138-2-stevensd@chromium.org>
+In-Reply-To: <20200311112004.47138-2-stevensd@chromium.org>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Wed, 13 May 2020 17:45:00 +0200
+Message-ID: <CAKMK7uHFgiHLe9oiFBr-VR-6rU9-hLTpBTEVNh0ezyj54u70jw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] dma-buf: add support for virtio exported objects
+To: David Stevens <stevensd@chromium.org>, Tomasz Figa <tfiga@chromium.org>
+Cc: virtio-dev@lists.oasis-open.org,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Maxime Ripard <mripard@kernel.org>, "open list:VIRTIO CORE,
+ NET..." <virtualization@lists.linux-foundation.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,24 +100,105 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, May 13, 2020 at 01:30:11PM +0200, Joerg Roedel wrote:
-> Yeah, I had this this way in v2, but changed it upon you request[1] :)
+On Wed, Mar 11, 2020 at 12:20 PM David Stevens <stevensd@chromium.org> wrote:
+>
+> This change adds a new dma-buf operation that allows dma-bufs to be used
+> by virtio drivers to share exported objects. The new operation allows
+> the importing driver to query the exporting driver for the UUID which
+> identifies the underlying exported object.
+>
+> Signed-off-by: David Stevens <stevensd@chromium.org>
 
-Yeah, I was wondering why this isn't a separate function - you like them
-so much. :-P
+Adding Tomasz Figa, I've discussed this with him at elce last year I
+think. Just to make sure.
 
-> [1] https://lore.kernel.org/lkml/20200402114941.GA9352@zn.tnic/
+Bunch of things:
+- obviously we need the users of this in a few drivers, can't really
+review anything stand-alone
+- adding very specific ops to the generic interface is rather awkward,
+eventually everyone wants that and we end up in a mess. I think the
+best solution here would be if we create a struct virtio_dma_buf which
+subclasses dma-buf, add a (hopefully safe) runtime upcasting
+functions, and then a virtio_dma_buf_get_uuid() function. Just storing
+the uuid should be doable (assuming this doesn't change during the
+lifetime of the buffer), so no need for a callback.
+- for the runtime upcasting the usual approach is to check the ->ops
+pointer. Which means that would need to be the same for all virtio
+dma_bufs, which might get a bit awkward. But I'd really prefer we not
+add allocator specific stuff like this to dma-buf.
+-Daniel
 
-But that one didn't have the ghcb_fault check. Maybe it was being added
-later... :)
+> ---
+>  drivers/dma-buf/dma-buf.c | 12 ++++++++++++
+>  include/linux/dma-buf.h   | 18 ++++++++++++++++++
+>  2 files changed, 30 insertions(+)
+>
+> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> index d4097856c86b..fa5210ba6aaa 100644
+> --- a/drivers/dma-buf/dma-buf.c
+> +++ b/drivers/dma-buf/dma-buf.c
+> @@ -1158,6 +1158,18 @@ void dma_buf_vunmap(struct dma_buf *dmabuf, void *vaddr)
+>  }
+>  EXPORT_SYMBOL_GPL(dma_buf_vunmap);
+>
+> +int dma_buf_get_uuid(struct dma_buf *dmabuf, uuid_t *uuid)
+> +{
+> +       if (WARN_ON(!dmabuf) || !uuid)
+> +               return -EINVAL;
+> +
+> +       if (!dmabuf->ops->get_uuid)
+> +               return -ENODEV;
+> +
+> +       return dmabuf->ops->get_uuid(dmabuf, uuid);
+> +}
+> +EXPORT_SYMBOL_GPL(dma_buf_get_uuid);
+> +
+>  #ifdef CONFIG_DEBUG_FS
+>  static int dma_buf_debug_show(struct seq_file *s, void *unused)
+>  {
+> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+> index abf5459a5b9d..00758523597d 100644
+> --- a/include/linux/dma-buf.h
+> +++ b/include/linux/dma-buf.h
+> @@ -251,6 +251,21 @@ struct dma_buf_ops {
+>
+>         void *(*vmap)(struct dma_buf *);
+>         void (*vunmap)(struct dma_buf *, void *vaddr);
+> +
+> +       /**
+> +        * @get_uuid
+> +        *
+> +        * This is called by dma_buf_get_uuid to get the UUID which identifies
+> +        * the buffer to virtio devices.
+> +        *
+> +        * This callback is optional.
+> +        *
+> +        * Returns:
+> +        *
+> +        * 0 on success or a negative error code on failure. On success uuid
+> +        * will be populated with the buffer's UUID.
+> +        */
+> +       int (*get_uuid)(struct dma_buf *dmabuf, uuid_t *uuid);
+>  };
+>
+>  /**
+> @@ -444,4 +459,7 @@ int dma_buf_mmap(struct dma_buf *, struct vm_area_struct *,
+>                  unsigned long);
+>  void *dma_buf_vmap(struct dma_buf *);
+>  void dma_buf_vunmap(struct dma_buf *, void *vaddr);
+> +
+> +int dma_buf_get_uuid(struct dma_buf *dmabuf, uuid_t *uuid);
+> +
+>  #endif /* __DMA_BUF_H__ */
+> --
+> 2.25.1.481.gfbce0eb801-goog
+>
 
-Thx.
 
 -- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+Daniel Vetter
+Software Engineer, Intel Corporation
++41 (0) 79 365 57 48 - http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
