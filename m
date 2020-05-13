@@ -1,96 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19D4A1D101C
-	for <lists.virtualization@lfdr.de>; Wed, 13 May 2020 12:45:56 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 9779885F92;
-	Wed, 13 May 2020 10:45:54 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5g2KOJfq0nPZ; Wed, 13 May 2020 10:45:53 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2E29386AB5;
-	Wed, 13 May 2020 10:45:53 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 04E4BC016F;
-	Wed, 13 May 2020 10:45:53 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0D6B8C016F
- for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 10:45:51 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0B701D10D4
+	for <lists.virtualization@lfdr.de>; Wed, 13 May 2020 13:13:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 0509C21543
- for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 10:45:51 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 69F2421080;
+	Wed, 13 May 2020 11:13:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id fnJ1MF7hKJgl; Wed, 13 May 2020 11:13:50 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 68A782155F;
+	Wed, 13 May 2020 11:13:50 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4365BC016F;
+	Wed, 13 May 2020 11:13:50 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 27025C016F
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 13 May 2020 11:13:48 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 0F3F984FDD
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 13 May 2020 11:13:48 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gzoCFuN6rioR
+ with ESMTP id o1-4Uea6Sgel
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 10:45:49 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
- [209.85.128.67])
- by silver.osuosl.org (Postfix) with ESMTPS id 1286D207A9
+ Wed, 13 May 2020 11:13:46 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id A246F84F33
  for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 10:45:49 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id u16so27907770wmc.5
- for <virtualization@lists.linux-foundation.org>;
- Wed, 13 May 2020 03:45:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=SmNmuU5Aep/IGe3eSTrjS6oLXRSTGYhw6IFWVs9Iuqc=;
- b=UC/3PHBoun3v1rx7wxmHxa5RFjjGfNLNpaCn6pfowgebDNYC32O8cp+YJHnvOEQaLk
- Nz+CjUwKVJxOPjAc+Am8F0hqrPMDiwM2aoGX5r90B7BN76cDKPh6nr/YlAAyxleAFf96
- NlJANIMYq5DpzZ6aRKewyuez8+MQkdZd9DSO/gtHi1WlvxunYaH+dufi8aFhaGuP+ph9
- zIeuSIUI2UQyBg6TbiMKe6swjsAYzSJuHyWPZUsJLZuCjKUsD55B1251N8tC3tLD40aj
- agDxckNYt6eUv6ydoTJ+56CrQqMMdERHKWIgm0l69OYmgLIINQMDX3EQTlKycym24/V8
- XC8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=SmNmuU5Aep/IGe3eSTrjS6oLXRSTGYhw6IFWVs9Iuqc=;
- b=oEPNFLxv2kpquzh1G2OHa35rmAHUxO2gLoZ89CkroYUFhB6OAC2aMDhqGzy1RciY4F
- ENm9WKgkauuqVf02ZxUIhWuOaULu7PHqo3r3FwKC3Agln7kW2ycopC11dtF5AbuOJKin
- 4+1vAYq2qPgWkT0gozbQI0kDW3FIYTtSTBEtG4hNFMFgVxP1eaP/IVvKTTKRQfPSHvOU
- bpPdLEAbzHQqlSTxVc+ldllhVgZxw9aAC5sKxl9BVB8ZnKDPQfl9m3206TZXm03Iw4lh
- nq2BHiKL5mqIPnkLDsFC2a7x1FI2N7CyD/x6Ldyqv0yGRQDQNR+Qsw3nzjgmhTCbF3UT
- g33w==
-X-Gm-Message-State: AGi0PuZNFggoq/H5XP1QzFmDpNGYGekhIz275R/MUaVT2WMXatcsfC0I
- yWIUALdVzVNmyitZ+zksjvJGGA==
-X-Google-Smtp-Source: APiQypJmft0/u1tO86sQKhZsj1C97uNs/XnCzX9fNiwnwt1E0uNsNm62LaV0mFWoR6TcsuBFsKHelA==
-X-Received: by 2002:a1c:3c42:: with SMTP id j63mr39555553wma.118.1589366747407; 
- Wed, 13 May 2020 03:45:47 -0700 (PDT)
-Received: from myrica ([2001:171b:226e:c200:c43b:ef78:d083:b355])
- by smtp.gmail.com with ESMTPSA id g135sm17966353wme.22.2020.05.13.03.45.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 May 2020 03:45:46 -0700 (PDT)
-Date: Wed, 13 May 2020 12:45:37 +0200
-From: Jean-Philippe Brucker <jean-philippe@linaro.org>
-To: Bharat Bhushan <bbhushan2@marvell.com>
-Subject: Re: [EXT] Re: [PATCH v5] iommu/virtio: Use page size bitmap
- supported by endpoint
-Message-ID: <20200513104537.GB214296@myrica>
-References: <20200505093004.1935-1-bbhushan2@marvell.com>
- <20200505200659-mutt-send-email-mst@kernel.org>
- <MWHPR1801MB1966A23A0298654CA6965FB9E3BF0@MWHPR1801MB1966.namprd18.prod.outlook.com>
+ Wed, 13 May 2020 11:13:46 +0000 (UTC)
+Received: from zn.tnic (p200300ec2f0ac30080c108a4f2a14d75.dip0.t-ipconnect.de
+ [IPv6:2003:ec:2f0a:c300:80c1:8a4:f2a1:4d75])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 5F1231EC0330;
+ Wed, 13 May 2020 13:13:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+ t=1589368423;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+ bh=5DShX4VU/NjBWaapSRN6k1YnbaJnNyw9V9LW9QgRqyo=;
+ b=aMIw5BMzlTRYeeZXGKDnswten8IxM5kB72e5LQNSHKB8n9TKQgxYCiOaukgz4TjDNwHYqd
+ VB77nQc8kaI/me57e0ilGdxFrJg73P5Yv8efy35fj+KJLA815R2nxO+FoBLDGs6L1E4zlC
+ f7It7iW/cILUxz3zZgJ3EpqUE3V8VSQ=
+Date: Wed, 13 May 2020 13:13:40 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Joerg Roedel <joro@8bytes.org>
+Subject: Re: [PATCH v3 24/75] x86/boot/compressed/64: Unmap GHCB page before
+ booting the kernel
+Message-ID: <20200513111340.GD4025@zn.tnic>
+References: <20200428151725.31091-1-joro@8bytes.org>
+ <20200428151725.31091-25-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <MWHPR1801MB1966A23A0298654CA6965FB9E3BF0@MWHPR1801MB1966.namprd18.prod.outlook.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, "joro@8bytes.org" <joro@8bytes.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "eric.auger@redhat.com" <eric.auger@redhat.com>,
- "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
- "eric.auger.pro@gmail.com" <eric.auger.pro@gmail.com>
+In-Reply-To: <20200428151725.31091-25-joro@8bytes.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
+ Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,50 +92,90 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, May 13, 2020 at 09:15:22AM +0000, Bharat Bhushan wrote:
-> Hi Jean,
-> 
-> > -----Original Message-----
-> > From: Michael S. Tsirkin <mst@redhat.com>
-> > Sent: Wednesday, May 6, 2020 5:53 AM
-> > To: Bharat Bhushan <bbhushan2@marvell.com>
-> > Cc: jean-philippe@linaro.org; joro@8bytes.org; jasowang@redhat.com;
-> > virtualization@lists.linux-foundation.org; iommu@lists.linux-foundation.org;
-> > linux-kernel@vger.kernel.org; eric.auger.pro@gmail.com; eric.auger@redhat.com
-> > Subject: [EXT] Re: [PATCH v5] iommu/virtio: Use page size bitmap supported by
-> > endpoint
-[...]
-> > > +struct virtio_iommu_probe_pgsize_mask {
-> > > +	struct virtio_iommu_probe_property	head;
-> > > +	__u8					reserved[4];
-> > > +	__le64					pgsize_bitmap;
-> > > +};
-> > > +
-> > 
-> > This is UAPI. Document the format of pgsize_bitmap please.
-> 
-> I do not see uapi documentation in "Documentation" folder of other data struct in this file, am I missing something?
+On Tue, Apr 28, 2020 at 05:16:34PM +0200, Joerg Roedel wrote:
+> @@ -302,9 +313,13 @@ void do_boot_page_fault(struct pt_regs *regs, unsigned long error_code)
+>  	 *	- User faults
+>  	 *	- Reserved bits set
+>  	 */
+> -	if (error_code & (X86_PF_PROT | X86_PF_USER | X86_PF_RSVD)) {
+> +	if (ghcb_fault ||
+> +	    error_code & (X86_PF_PROT | X86_PF_USER | X86_PF_RSVD)) {
+>  		/* Print some information for debugging */
+> -		error_putstr("Unexpected page-fault:");
+> +		if (ghcb_fault)
+> +			error_putstr("Page-fault on GHCB page:");
+> +		else
+> +			error_putstr("Unexpected page-fault:");
 
-I'm not the one requesting this change, but I'm guessing you should add a
-comment in this header, above pgsize_bitmap (which should actually be
-called page_size_mask to follow the spec). I guess I'd add:
+You could carve out the info dumping into a separate function to
+unclutter this if-statement (diff ontop):
 
-/* Same format as virtio_iommu_config::page_size_mask */
+diff --git a/arch/x86/boot/compressed/ident_map_64.c b/arch/x86/boot/compressed/ident_map_64.c
+index d3771d455249..c1979fc0f853 100644
+--- a/arch/x86/boot/compressed/ident_map_64.c
++++ b/arch/x86/boot/compressed/ident_map_64.c
+@@ -296,6 +296,22 @@ int set_page_non_present(unsigned long address)
+ 	return set_clr_page_flags(&mapping_info, address, 0, _PAGE_PRESENT);
+ }
+ 
++static void do_pf_error(const char *msg, unsigned long error_code,
++			unsigned long address, unsigned long ip)
++{
++	error_putstr(msg);
++
++	error_putstr("\nError Code: ");
++	error_puthex(error_code);
++	error_putstr("\nCR2: 0x");
++	error_puthex(address);
++	error_putstr("\nRIP relative to _head: 0x");
++	error_puthex(ip - (unsigned long)_head);
++	error_putstr("\n");
++
++	error("Stopping.\n");
++}
++
+ void do_boot_page_fault(struct pt_regs *regs, unsigned long error_code)
+ {
+ 	unsigned long address = native_read_cr2();
+@@ -309,27 +325,15 @@ void do_boot_page_fault(struct pt_regs *regs, unsigned long error_code)
+ 
+ 	/*
+ 	 * Check for unexpected error codes. Unexpected are:
++	 *	- Faults on the GHCB page due to unexpected #VCs
+ 	 *	- Faults on present pages
+ 	 *	- User faults
+ 	 *	- Reserved bits set
+ 	 */
+-	if (ghcb_fault ||
+-	    error_code & (X86_PF_PROT | X86_PF_USER | X86_PF_RSVD)) {
+-		/* Print some information for debugging */
+-		if (ghcb_fault)
+-			error_putstr("Page-fault on GHCB page:");
+-		else
+-			error_putstr("Unexpected page-fault:");
+-		error_putstr("\nError Code: ");
+-		error_puthex(error_code);
+-		error_putstr("\nCR2: 0x");
+-		error_puthex(address);
+-		error_putstr("\nRIP relative to _head: 0x");
+-		error_puthex(regs->ip - (unsigned long)_head);
+-		error_putstr("\n");
+-
+-		error("Stopping.\n");
+-	}
++	if (ghcb_fault)
++		do_pf_error("Page-fault on GHCB page:", error_code, address, regs->ip);
++	else if (error_code & (X86_PF_PROT | X86_PF_USER | X86_PF_RSVD))
++		do_pf_error("Unexpected page-fault:", error_code, address, regs->ip);
+ 
+ 	/*
+ 	 * Error code is sane - now identity map the 2M region around
 
-for this field, and then maybe change the comment of virtio_iommu_config,
-currently "/* Supported page sizes */", to something more precise such as:
+-- 
+Regards/Gruss,
+    Boris.
 
-/*
- * Bitmap of supported page sizes. The least significant bit indicates the
- * smallest granularity and the other bits are hints indicating optimal
- * block sizes.
- */
-
-But I don't know how much should be spelled out here, since those details
-are available in the spec.
-
-Thanks,
-Jean
+https://people.kernel.org/tglx/notes-about-netiquette
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
