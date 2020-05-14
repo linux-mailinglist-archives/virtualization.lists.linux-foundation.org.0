@@ -1,80 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61D471D2FB3
-	for <lists.virtualization@lfdr.de>; Thu, 14 May 2020 14:29:03 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1471289695;
-	Thu, 14 May 2020 12:29:02 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XxI3O4G6pDVB; Thu, 14 May 2020 12:29:01 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5AD758968E;
-	Thu, 14 May 2020 12:29:01 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 36EC5C016F;
-	Thu, 14 May 2020 12:29:01 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0D5CDC016F
- for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 12:28:59 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id C14711D2FB8
+	for <lists.virtualization@lfdr.de>; Thu, 14 May 2020 14:30:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id E612322BA3
- for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 12:28:58 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4DC5922D44;
+	Thu, 14 May 2020 12:30:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id p+ZnVVzUOhh3; Thu, 14 May 2020 12:30:14 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 6B81722E3F;
+	Thu, 14 May 2020 12:30:14 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 60CF0C016F;
+	Thu, 14 May 2020 12:30:14 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0C4AFC016F
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 14 May 2020 12:30:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id EFC7087A50
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 14 May 2020 12:30:12 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MbxYb10tKG+n
+ with ESMTP id UNmgBEl4G9eZ
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 12:28:57 +0000 (UTC)
+ Thu, 14 May 2020 12:30:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by silver.osuosl.org (Postfix) with ESMTPS id A9936226B7
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+ [209.85.221.65])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 4210887A62
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 12:28:56 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id y3so3844588wrt.1
+ Thu, 14 May 2020 12:30:12 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id e16so3810797wra.7
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 05:28:56 -0700 (PDT)
+ Thu, 14 May 2020 05:30:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:mail-followup-to:references
  :mime-version:content-disposition:in-reply-to;
- bh=MhSXdQmfGHknlE+HXPCeR7P0ZV8ATRBftwFVeEaaAyc=;
- b=Y7Vf7sChBCU2rfY8xBEExV0I7QnH8MFNWEbOMktjW3Gqlslx3DnyxK4la9SJtQSxKI
- qA++/9v8+v5pkkRVDBpP4CdBvWBlirOOedPFWd8Aq1yzrLg/tcnPNWRJcRikJ/+OFVkM
- VlrAr49vd56PtJvX3vY9cjGnsRty23kLF2Xlo=
+ bh=J2ZtatzqD3OE8VdsdW4HBUMkQqixlxQVBQrLMq5CUUY=;
+ b=cna/1t9SJDeWhOllSyrFsbKx0FpSu+qU5vcjm9dCmgeETaVbC4scdE9YaQZa7xAhkr
+ jHrdBmIyDJ83s6hG2UqR5xnjB9KlJDeexh3TNwXFT20K9xALDBUx8a5xF63UB4ckWqdz
+ rmeI0Urauv7XBVMJ/YekgTPyJ+K5u+QxcAMms=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id
  :mail-followup-to:references:mime-version:content-disposition
  :in-reply-to;
- bh=MhSXdQmfGHknlE+HXPCeR7P0ZV8ATRBftwFVeEaaAyc=;
- b=mkxGGby+4KoPS0HfPvBPTJHbvNCDa17H81eFc8Xx3MS2jtZc1+iJmYlliHFlnS0LAo
- Af/gOGOLoLY9l9OPdy42/A1tCa9tnQogdpjhvsN25CkF6d0Dg87csvngWaolWgtgo474
- bG2N7DqgDv/Y/sru3pekIMNrEBWKQKm9Br1nD0jC72JVk9Z0x4XFgasWT+GWw3qWjZgJ
- Rs7jaeEbV8v4Z5B+Jn3FxmHpBHvaxutGoLKeO8UdU8TtJdvN3UZq4MhO25UiJnkK8oSs
- /JtcWrCfqWoUH2qNf2643fKhkTy6i2NDUtSWlWaIsHHvlLLMeqRvrkR/MDeXqqwT2vd3
- HqDw==
-X-Gm-Message-State: AOAM532sdQ4Xc/jUTDOEEp8ML7zCphThRYwDoaCYTdIVqik2EK5BzDfO
- GgmiBjL/aEP4TVWfi1Rab49vRw==
-X-Google-Smtp-Source: ABdhPJyi0dv4TvrSEI6BLeM7V23XeYGER8KAK6n/kWqLKYuPlyYwM4QLzJwBgLkyP3bhqCn4hd3iBw==
-X-Received: by 2002:adf:f38b:: with SMTP id m11mr5136675wro.65.1589459334793; 
- Thu, 14 May 2020 05:28:54 -0700 (PDT)
+ bh=J2ZtatzqD3OE8VdsdW4HBUMkQqixlxQVBQrLMq5CUUY=;
+ b=Y6ajlaK2MuMvzJ148v1jhrK0WRMv4fabFbRS1sTt1fBU4LkWShkjD6sPGmE/ufnfwB
+ ddIOTA+1ZAHHbCCXn9/ymBR1t4aHwIzyrx3j/sXXK9/uyT1TD8lAktNceZFRk1P5YLFB
+ 7Lh6O+rcgc77TRCpMVmfAkaISZmDHTn1z4zs/omak/9CspuPbgviIw78/59tZuGmt9y0
+ C9fi1VQ6OuEL/2fepomtoXlusf8aXx4gtBriT4UVUYrsO5jSKtimodj3d1tAmYQ2TlvZ
+ /ZFWQlKtM5LxYOO2cILl0y/io4HNfTgmAEEjIHflr6N+PavBEOsHNj5oRldAybHpkmLA
+ 8PLw==
+X-Gm-Message-State: AOAM532DCFR+Q5ZsvShgLUk1WWXw7tTegM/Du5znsBj4iSOv4bRYwzsm
+ gk8Nw4sWTJMFMi2MeYBEEi/DWw==
+X-Google-Smtp-Source: ABdhPJxzzUZ9N249No4GSzh95gQlAWDkP3vcLToZAWmJAuT2AF/3WaSYIEjZHpBOhUMq5YlyAgExqA==
+X-Received: by 2002:a5d:6283:: with SMTP id k3mr5203956wru.62.1589459410673;
+ Thu, 14 May 2020 05:30:10 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id b2sm4451847wrm.30.2020.05.14.05.28.53
+ by smtp.gmail.com with ESMTPSA id p7sm4269731wmg.38.2020.05.14.05.30.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 May 2020 05:28:53 -0700 (PDT)
-Date: Thu, 14 May 2020 14:28:51 +0200
+ Thu, 14 May 2020 05:30:09 -0700 (PDT)
+Date: Thu, 14 May 2020 14:30:07 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: David Stevens <stevensd@chromium.org>
 Subject: Re: [PATCH v3 1/4] dma-buf: add support for virtio exported objects
-Message-ID: <20200514122851.GO206103@phenom.ffwll.local>
+Message-ID: <20200514123007.GP206103@phenom.ffwll.local>
 Mail-Followup-To: David Stevens <stevensd@chromium.org>,
  Tomasz Figa <tfiga@chromium.org>, Gerd Hoffmann <kraxel@redhat.com>,
  David Airlie <airlied@linux.ie>,
@@ -93,10 +93,10 @@ Mail-Followup-To: David Stevens <stevensd@chromium.org>,
 References: <20200311112004.47138-1-stevensd@chromium.org>
  <20200311112004.47138-2-stevensd@chromium.org>
  <CAKMK7uHFgiHLe9oiFBr-VR-6rU9-hLTpBTEVNh0ezyj54u70jw@mail.gmail.com>
- <CAD=HUj6d9gdZegTGad6thKdHv5b+qOZnkCv5VcWo9AcHifR9uA@mail.gmail.com>
+ <CAD=HUj6k-y1=64zY8ZFOQBZ7WSUWiQfvkiTpXXt10JB_CGqk1A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAD=HUj6d9gdZegTGad6thKdHv5b+qOZnkCv5VcWo9AcHifR9uA@mail.gmail.com>
+In-Reply-To: <CAD=HUj6k-y1=64zY8ZFOQBZ7WSUWiQfvkiTpXXt10JB_CGqk1A@mail.gmail.com>
 X-Operating-System: Linux phenom 5.6.0-1-amd64 
 Cc: dri-devel <dri-devel@lists.freedesktop.org>,
  virtio-dev@lists.oasis-open.org, Thomas Zimmermann <tzimmermann@suse.de>,
@@ -125,40 +125,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, May 14, 2020 at 11:08:52AM +0900, David Stevens wrote:
-> On Thu, May 14, 2020 at 12:45 AM Daniel Vetter <daniel@ffwll.ch> wrote:
-> > On Wed, Mar 11, 2020 at 12:20 PM David Stevens <stevensd@chromium.org> wrote:
-> > >
-> > > This change adds a new dma-buf operation that allows dma-bufs to be used
-> > > by virtio drivers to share exported objects. The new operation allows
-> > > the importing driver to query the exporting driver for the UUID which
-> > > identifies the underlying exported object.
-> > >
-> > > Signed-off-by: David Stevens <stevensd@chromium.org>
-> >
-> > Adding Tomasz Figa, I've discussed this with him at elce last year I
-> > think. Just to make sure.
-> >
-> > Bunch of things:
-> > - obviously we need the users of this in a few drivers, can't really
-> > review anything stand-alone
+On Thu, May 14, 2020 at 05:19:40PM +0900, David Stevens wrote:
+> Sorry for the duplicate reply, didn't notice this until now.
 > 
-> Here is a link to the usage of this feature by the currently under
-> development virtio-video driver:
-> https://markmail.org/thread/j4xlqaaim266qpks
-> 
-> > - adding very specific ops to the generic interface is rather awkward,
-> > eventually everyone wants that and we end up in a mess. I think the
-> > best solution here would be if we create a struct virtio_dma_buf which
-> > subclasses dma-buf, add a (hopefully safe) runtime upcasting
-> > functions, and then a virtio_dma_buf_get_uuid() function. Just storing
+> > Just storing
 > > the uuid should be doable (assuming this doesn't change during the
 > > lifetime of the buffer), so no need for a callback.
 > 
-> So you would prefer a solution similar to the original version of this
-> patchset? https://markmail.org/message/z7if4u56q5fmaok4
+> Directly storing the uuid doesn't work that well because of
+> synchronization issues. The uuid needs to be shared between multiple
+> virtio devices with independent command streams, so to prevent races
+> between importing and exporting, the exporting driver can't share the
+> uuid with other drivers until it knows that the device has finished
+> registering the uuid. That requires a round trip to and then back from
+> the device. Using a callback allows the latency from that round trip
+> registration to be hidden.
 
-yup.
+Uh, that means you actually do something and there's locking involved.
+Makes stuff more complicated, invariant attributes are a lot easier
+generally. Registering that uuid just always doesn't work, and blocking
+when you're exporting?
 -Daniel
 -- 
 Daniel Vetter
