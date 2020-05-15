@@ -1,83 +1,116 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 540241D4AA0
-	for <lists.virtualization@lfdr.de>; Fri, 15 May 2020 12:14:35 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B9DB1D4FDC
+	for <lists.virtualization@lfdr.de>; Fri, 15 May 2020 16:03:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id F080320461;
-	Fri, 15 May 2020 10:14:33 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A779488DC2;
+	Fri, 15 May 2020 14:03:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kdCiNr+ImeSt; Fri, 15 May 2020 10:14:29 +0000 (UTC)
+	with ESMTP id ABS5BxPzxbf9; Fri, 15 May 2020 14:03:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id CCCA8267D6;
-	Fri, 15 May 2020 10:14:28 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id CC2EC88E4B;
+	Fri, 15 May 2020 14:03:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A8355C0178;
-	Fri, 15 May 2020 10:14:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9C4CCC016F;
+	Fri, 15 May 2020 14:03:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AFFC1C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 71C78C016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 15 May 2020 10:14:26 +0000 (UTC)
+ Fri, 15 May 2020 14:03:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id AC7A987B99
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 608BA87DD6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 15 May 2020 10:14:26 +0000 (UTC)
+ Fri, 15 May 2020 14:03:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OTihyRjNg4hL
+ with ESMTP id uNUBQjIz0WKq
  for <virtualization@lists.linux-foundation.org>;
- Fri, 15 May 2020 10:14:26 +0000 (UTC)
+ Fri, 15 May 2020 14:03:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 1AE3C87B83
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+ [209.85.128.68])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id CBE6A87DCB
  for <virtualization@lists.linux-foundation.org>;
- Fri, 15 May 2020 10:14:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589537665;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lUc3PuOX813Luq3FUqNVTnGhB/o6E0eeOYPacW9Z1Gk=;
- b=Etbk/Aq/HDlE8LdSj/DGBgE0ypMARfAV9zNCAiCPvt3RZ0WtJN0sKz+iV0zaIZ2YSOALYa
- sweKMYLiSugGvhrIQHlrnIjEIBu5Va0khCAdOfhua92/sRO430mStfu04ADPtmdAZlDhVo
- eea14aUxpAdNGr+BzZPZdmVUBEis1x0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-142-t0_WzsGWPv2-7atizBRpXg-1; Fri, 15 May 2020 06:14:23 -0400
-X-MC-Unique: t0_WzsGWPv2-7atizBRpXg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 55031835B44;
- Fri, 15 May 2020 10:14:21 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-114-77.ams2.redhat.com [10.36.114.77])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BA02360FB9;
- Fri, 15 May 2020 10:14:12 +0000 (UTC)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 16/15] virtio-mem: Don't rely on implicit compiler padding
- for requests
-Date: Fri, 15 May 2020 12:14:02 +0200
-Message-Id: <20200515101402.16597-1-david@redhat.com>
-In-Reply-To: <20200507140139.17083-1-david@redhat.com>
-References: <20200507140139.17083-1-david@redhat.com>
+ Fri, 15 May 2020 14:03:11 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id u188so2807129wmu.1
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 15 May 2020 07:03:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=hfKkBsIEgs0vkAeFdo392aLMF7GnommANe2U1KeK9uI=;
+ b=b5d+I2ChU9zk48jsjVya/j0veq8tA45Z1eTGEqW25PFGpflpOB0ANQJMsC27YLELuK
+ XicoRGOzRMF/LBcAPpJOO34Vk5ZNPtNo0SYXz1CceDLR+75jgKMSr5Gq2Y4tegRs0IP+
+ Ups2PzNHV/VnPwJpVSpa0NFTYgmvPlT+Oi4U0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=hfKkBsIEgs0vkAeFdo392aLMF7GnommANe2U1KeK9uI=;
+ b=k874e/t08CrnowXFSRfCArBPEgMG8aijZk11h95PC7bzFxTapfnWX3Mj9nqS5SXkOC
+ 1zM8nIrOdbr30ktZsOLVh5EgsnrFHQmo/wF5KNUCZsjxdmLPwzYFSUjVYmR9Ftbw7SsN
+ hPJDFNedP2n46Qgq1yQsF3nl2qwbxR8i+gu8KQuP3rD7/+a2xnQ0Eks0wcDSJtmuAP72
+ H//pCTugRHKys2e1VzfpSqExnffMWHaOW7zOri3JQMv+6N7+E0t0yaZI8qYX+tJo9SQN
+ XUfGHgLb6Vl5yWd7e77TaTc4ejZwebyTyXU9/nV8gjM0PAHgiz2Wr1JzXqhzpmBTpJcn
+ F6Og==
+X-Gm-Message-State: AOAM530740lmwpV5uTGYqgRKh6IFI9DCrDEY46k++4wDcMaNf5eS0SXl
+ 9yfb5rSRLa7HOPEQ3FhRreNa2w==
+X-Google-Smtp-Source: ABdhPJzmhNqsxAdCi4n1OFQV3XDuSejh1CuLln2gJgFMW5yg1LElG7wBgKDi+Hw5Qcxt2Ktc6DQ43w==
+X-Received: by 2002:a1c:dc05:: with SMTP id t5mr4402679wmg.112.1589551389616; 
+ Fri, 15 May 2020 07:03:09 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id x16sm3814048wrq.23.2020.05.15.07.03.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 May 2020 07:03:08 -0700 (PDT)
+Date: Fri, 15 May 2020 16:03:06 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: David Stevens <stevensd@chromium.org>
+Subject: Re: [PATCH v3 1/4] dma-buf: add support for virtio exported objects
+Message-ID: <20200515140306.GF206103@phenom.ffwll.local>
+Mail-Followup-To: David Stevens <stevensd@chromium.org>,
+ Tomasz Figa <tfiga@chromium.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ David Airlie <airlied@linux.ie>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Jason Wang <jasowang@redhat.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ virtio-dev@lists.oasis-open.org
+References: <20200311112004.47138-1-stevensd@chromium.org>
+ <20200311112004.47138-2-stevensd@chromium.org>
+ <CAKMK7uHFgiHLe9oiFBr-VR-6rU9-hLTpBTEVNh0ezyj54u70jw@mail.gmail.com>
+ <CAD=HUj6k-y1=64zY8ZFOQBZ7WSUWiQfvkiTpXXt10JB_CGqk1A@mail.gmail.com>
+ <20200514123007.GP206103@phenom.ffwll.local>
+ <CAD=HUj7452eFfn9i=JWm54Mke3Lew-7AWYeoKZLAjCSg7eLO6A@mail.gmail.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, teawater <teawaterz@linux.alibaba.com>,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- virtualization@lists.linux-foundation.org
+Content-Disposition: inline
+In-Reply-To: <CAD=HUj7452eFfn9i=JWm54Mke3Lew-7AWYeoKZLAjCSg7eLO6A@mail.gmail.com>
+X-Operating-System: Linux phenom 5.6.0-1-amd64 
+Cc: virtio-dev@lists.oasis-open.org,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Maxime Ripard <mripard@kernel.org>, Tomasz Figa <tfiga@chromium.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:VIRTIO CORE, NET..." <virtualization@lists.linux-foundation.org>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,65 +127,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The compiler will add padding after the last member, make that explicit.
-The size of a request is always 24 bytes. The size of a response always
-10 bytes. Add compile-time checks.
+On Fri, May 15, 2020 at 02:07:06PM +0900, David Stevens wrote:
+> On Thu, May 14, 2020 at 9:30 PM Daniel Vetter <daniel@ffwll.ch> wrote:
+> > On Thu, May 14, 2020 at 05:19:40PM +0900, David Stevens wrote:
+> > > Sorry for the duplicate reply, didn't notice this until now.
+> > >
+> > > > Just storing
+> > > > the uuid should be doable (assuming this doesn't change during the
+> > > > lifetime of the buffer), so no need for a callback.
+> > >
+> > > Directly storing the uuid doesn't work that well because of
+> > > synchronization issues. The uuid needs to be shared between multiple
+> > > virtio devices with independent command streams, so to prevent races
+> > > between importing and exporting, the exporting driver can't share the
+> > > uuid with other drivers until it knows that the device has finished
+> > > registering the uuid. That requires a round trip to and then back from
+> > > the device. Using a callback allows the latency from that round trip
+> > > registration to be hidden.
+> >
+> > Uh, that means you actually do something and there's locking involved.
+> > Makes stuff more complicated, invariant attributes are a lot easier
+> > generally. Registering that uuid just always doesn't work, and blocking
+> > when you're exporting?
+> 
+> Registering the id at creation and blocking in gem export is feasible,
+> but it doesn't work well for systems with a centralized buffer
+> allocator that doesn't support batch allocations (e.g. gralloc). In
+> such a system, the round trip latency would almost certainly be
+> included in the buffer allocation time. At least on the system I'm
+> working on, I suspect that would add 10s of milliseconds of startup
+> latency to video pipelines (although I haven't benchmarked the
+> difference). Doing the blocking as late as possible means most or all
+> of the latency can be hidden behind other pipeline setup work.
+> 
+> In terms of complexity, I think the synchronization would be basically
+> the same in either approach, just in different locations. All it would
+> do is alleviate the need for a callback to fetch the UUID.
 
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-Cc: teawater <teawaterz@linux.alibaba.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
+Hm ok. I guess if we go with the older patch, where this all is a lot more
+just code in virtio, doing an extra function to allocate the uuid sounds
+fine. Then synchronization is entirely up to the virtio subsystem and not
+a dma-buf problem (and hence not mine). You can use dma_resv_lock or so,
+but no need to. But with callbacks potentially going both ways things
+always get a bit interesting wrt locking - this is what makes peer2peer
+dma-buf so painful right now. Hence I'd like to avoid that if needed, at
+least at the dma-buf level. virtio code I don't mind what you do there :-)
 
-Something I noticed while working on the spec (which proves that writing a
-virtio-spec makes sense :) ).
-
----
- drivers/virtio/virtio_mem.c     | 3 +++
- include/uapi/linux/virtio_mem.h | 3 +++
- 2 files changed, 6 insertions(+)
-
-diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index 9e523db3bee1..f658fe9149be 100644
---- a/drivers/virtio/virtio_mem.c
-+++ b/drivers/virtio/virtio_mem.c
-@@ -1770,6 +1770,9 @@ static int virtio_mem_probe(struct virtio_device *vdev)
- 	struct virtio_mem *vm;
- 	int rc = -EINVAL;
- 
-+	BUILD_BUG_ON(sizeof(struct virtio_mem_req) != 24);
-+	BUILD_BUG_ON(sizeof(struct virtio_mem_resp) != 10);
-+
- 	vdev->priv = vm = kzalloc(sizeof(*vm), GFP_KERNEL);
- 	if (!vm)
- 		return -ENOMEM;
-diff --git a/include/uapi/linux/virtio_mem.h b/include/uapi/linux/virtio_mem.h
-index e0a9dc7397c3..a455c488a995 100644
---- a/include/uapi/linux/virtio_mem.h
-+++ b/include/uapi/linux/virtio_mem.h
-@@ -103,16 +103,19 @@
- struct virtio_mem_req_plug {
- 	__virtio64 addr;
- 	__virtio16 nb_blocks;
-+	__virtio16 padding[3];
- };
- 
- struct virtio_mem_req_unplug {
- 	__virtio64 addr;
- 	__virtio16 nb_blocks;
-+	__virtio16 padding[3];
- };
- 
- struct virtio_mem_req_state {
- 	__virtio64 addr;
- 	__virtio16 nb_blocks;
-+	__virtio16 padding[3];
- };
- 
- struct virtio_mem_req {
+Cheers, Daniel
 -- 
-2.25.4
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
