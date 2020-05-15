@@ -1,72 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E06F91D3A4D
-	for <lists.virtualization@lfdr.de>; Thu, 14 May 2020 20:55:51 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 985241D43D9
+	for <lists.virtualization@lfdr.de>; Fri, 15 May 2020 05:02:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 5CDD5204CB;
-	Thu, 14 May 2020 18:55:50 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1BF5E8975D;
+	Fri, 15 May 2020 03:02:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id A2WVb05xWElq; Thu, 14 May 2020 18:55:45 +0000 (UTC)
+	with ESMTP id 0vgryK+0wBi8; Fri, 15 May 2020 03:02:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 01A3C221FF;
-	Thu, 14 May 2020 18:55:45 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 06D6989767;
+	Fri, 15 May 2020 03:02:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DAE01C016F;
-	Thu, 14 May 2020 18:55:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C2A83C016F;
+	Fri, 15 May 2020 03:02:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DF672C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6801AC016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 18:55:42 +0000 (UTC)
+ Fri, 15 May 2020 03:02:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id DB7708873B
+ by hemlock.osuosl.org (Postfix) with ESMTP id 5BE8889753
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 18:55:42 +0000 (UTC)
+ Fri, 15 May 2020 03:02:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 17pHqXuRQ+Dh
+ with ESMTP id 94YXNVRlMN+1
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 18:55:38 +0000 (UTC)
+ Fri, 15 May 2020 03:02:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id A15C488524
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A0D578974B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 May 2020 18:55:38 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ Fri, 15 May 2020 03:02:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1589511730;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZJ02bOsTsAvIFUawcVMs6WTwU2Gy+CcgbmbjJ63LKRA=;
+ b=BQbXjgIUvLoXMcyw7y2NX+0NsQlOzSsH1qwNBEoQ7Xzs9CLyk1x62pFcHs26B5JfXiza12
+ xusMYjLisahxAjJgrRofcRsmEIjQrN4fBqH2iynlezrxIRT5AWOUMkHYRYIuKO6XHEB0mz
+ rjlDSwMv15PFOO3gqFmutQdYTTIqAak=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-474-hIHUJaHiN5WsAxTGh3F8Zw-1; Thu, 14 May 2020 23:02:08 -0400
+X-MC-Unique: hIHUJaHiN5WsAxTGh3F8Zw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 78E402074A;
- Thu, 14 May 2020 18:55:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589482538;
- bh=RyauCsxiWR6yHzEGhM4ClHB52t/cCsIR3Yac2foI/cg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ObAZE+iKiu9Ais/PoDfHNIKHaIWGNuLEm9OeyWa4S7cohY8Z9fyiNa/6rUkLp/dvO
- 0VvjXa9PbvLc4nYPcrh92w7DazDCbz9kuLMOFzXvC0Y6mk9pCEm1qoI7z1JuJnyBE0
- AUOHTjBtbWR6bSHVvbMAF4Zon4KjACWsAGtlKw8k=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.14 31/39] virtio-blk: handle block_device_operations
- callbacks after hot unplug
-Date: Thu, 14 May 2020 14:54:48 -0400
-Message-Id: <20200514185456.21060-31-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200514185456.21060-1-sashal@kernel.org>
-References: <20200514185456.21060-1-sashal@kernel.org>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9BC5380058A;
+ Fri, 15 May 2020 03:02:07 +0000 (UTC)
+Received: from [10.72.13.11] (ovpn-13-11.pek2.redhat.com [10.72.13.11])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 027181C92D;
+ Fri, 15 May 2020 03:02:01 +0000 (UTC)
+Subject: Re: [PATCH] vdpa_sim: do not reset IOTLB during device reset
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20200514072549.29694-1-jasowang@redhat.com>
+ <20200514053233-mutt-send-email-mst@kernel.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <c0353f0c-e60e-3fcd-6452-38eefca18a03@redhat.com>
+Date: Fri, 15 May 2020 11:02:00 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>, "Michael S . Tsirkin" <mst@redhat.com>,
- Lance Digby <ldigby@redhat.com>, virtualization@lists.linux-foundation.org,
- linux-block@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>
+In-Reply-To: <20200514053233-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,224 +87,48 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Stefan Hajnoczi <stefanha@redhat.com>
-
-[ Upstream commit 90b5feb8c4bebc76c27fcaf3e1a0e5ca2d319e9e ]
-
-A userspace process holding a file descriptor to a virtio_blk device can
-still invoke block_device_operations after hot unplug.  This leads to a
-use-after-free accessing vblk->vdev in virtblk_getgeo() when
-ioctl(HDIO_GETGEO) is invoked:
-
-  BUG: unable to handle kernel NULL pointer dereference at 0000000000000090
-  IP: [<ffffffffc00e5450>] virtio_check_driver_offered_feature+0x10/0x90 [virtio]
-  PGD 800000003a92f067 PUD 3a930067 PMD 0
-  Oops: 0000 [#1] SMP
-  CPU: 0 PID: 1310 Comm: hdio-getgeo Tainted: G           OE  ------------   3.10.0-1062.el7.x86_64 #1
-  Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.13.0-0-gf21b5a4aeb02-prebuilt.qemu.org 04/01/2014
-  task: ffff9be5fbfb8000 ti: ffff9be5fa890000 task.ti: ffff9be5fa890000
-  RIP: 0010:[<ffffffffc00e5450>]  [<ffffffffc00e5450>] virtio_check_driver_offered_feature+0x10/0x90 [virtio]
-  RSP: 0018:ffff9be5fa893dc8  EFLAGS: 00010246
-  RAX: ffff9be5fc3f3400 RBX: ffff9be5fa893e30 RCX: 0000000000000000
-  RDX: 0000000000000000 RSI: 0000000000000004 RDI: ffff9be5fbc10b40
-  RBP: ffff9be5fa893dc8 R08: 0000000000000301 R09: 0000000000000301
-  R10: 0000000000000000 R11: 0000000000000000 R12: ffff9be5fdc24680
-  R13: ffff9be5fbc10b40 R14: ffff9be5fbc10480 R15: 0000000000000000
-  FS:  00007f1bfb968740(0000) GS:ffff9be5ffc00000(0000) knlGS:0000000000000000
-  CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-  CR2: 0000000000000090 CR3: 000000003a894000 CR4: 0000000000360ff0
-  DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-  DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-  Call Trace:
-   [<ffffffffc016ac37>] virtblk_getgeo+0x47/0x110 [virtio_blk]
-   [<ffffffff8d3f200d>] ? handle_mm_fault+0x39d/0x9b0
-   [<ffffffff8d561265>] blkdev_ioctl+0x1f5/0xa20
-   [<ffffffff8d488771>] block_ioctl+0x41/0x50
-   [<ffffffff8d45d9e0>] do_vfs_ioctl+0x3a0/0x5a0
-   [<ffffffff8d45dc81>] SyS_ioctl+0xa1/0xc0
-
-A related problem is that virtblk_remove() leaks the vd_index_ida index
-when something still holds a reference to vblk->disk during hot unplug.
-This causes virtio-blk device names to be lost (vda, vdb, etc).
-
-Fix these issues by protecting vblk->vdev with a mutex and reference
-counting vblk so the vd_index_ida index can be removed in all cases.
-
-Fixes: 48e4043d4529 ("virtio: add virtio disk geometry feature")
-Reported-by: Lance Digby <ldigby@redhat.com>
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-Link: https://lore.kernel.org/r/20200430140442.171016-1-stefanha@redhat.com
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/block/virtio_blk.c | 86 ++++++++++++++++++++++++++++++++++----
- 1 file changed, 78 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 19d226ff15ef8..0e18eed62c575 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -31,6 +31,15 @@ struct virtio_blk_vq {
- } ____cacheline_aligned_in_smp;
- 
- struct virtio_blk {
-+	/*
-+	 * This mutex must be held by anything that may run after
-+	 * virtblk_remove() sets vblk->vdev to NULL.
-+	 *
-+	 * blk-mq, virtqueue processing, and sysfs attribute code paths are
-+	 * shut down before vblk->vdev is set to NULL and therefore do not need
-+	 * to hold this mutex.
-+	 */
-+	struct mutex vdev_mutex;
- 	struct virtio_device *vdev;
- 
- 	/* The disk structure for the kernel. */
-@@ -42,6 +51,13 @@ struct virtio_blk {
- 	/* Process context for config space updates */
- 	struct work_struct config_work;
- 
-+	/*
-+	 * Tracks references from block_device_operations open/release and
-+	 * virtio_driver probe/remove so this object can be freed once no
-+	 * longer in use.
-+	 */
-+	refcount_t refs;
-+
- 	/* What host tells us, plus 2 for header & tailer. */
- 	unsigned int sg_elems;
- 
-@@ -315,10 +331,55 @@ static int virtblk_get_id(struct gendisk *disk, char *id_str)
- 	return err;
- }
- 
-+static void virtblk_get(struct virtio_blk *vblk)
-+{
-+	refcount_inc(&vblk->refs);
-+}
-+
-+static void virtblk_put(struct virtio_blk *vblk)
-+{
-+	if (refcount_dec_and_test(&vblk->refs)) {
-+		ida_simple_remove(&vd_index_ida, vblk->index);
-+		mutex_destroy(&vblk->vdev_mutex);
-+		kfree(vblk);
-+	}
-+}
-+
-+static int virtblk_open(struct block_device *bd, fmode_t mode)
-+{
-+	struct virtio_blk *vblk = bd->bd_disk->private_data;
-+	int ret = 0;
-+
-+	mutex_lock(&vblk->vdev_mutex);
-+
-+	if (vblk->vdev)
-+		virtblk_get(vblk);
-+	else
-+		ret = -ENXIO;
-+
-+	mutex_unlock(&vblk->vdev_mutex);
-+	return ret;
-+}
-+
-+static void virtblk_release(struct gendisk *disk, fmode_t mode)
-+{
-+	struct virtio_blk *vblk = disk->private_data;
-+
-+	virtblk_put(vblk);
-+}
-+
- /* We provide getgeo only to please some old bootloader/partitioning tools */
- static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
- {
- 	struct virtio_blk *vblk = bd->bd_disk->private_data;
-+	int ret = 0;
-+
-+	mutex_lock(&vblk->vdev_mutex);
-+
-+	if (!vblk->vdev) {
-+		ret = -ENXIO;
-+		goto out;
-+	}
- 
- 	/* see if the host passed in geometry config */
- 	if (virtio_has_feature(vblk->vdev, VIRTIO_BLK_F_GEOMETRY)) {
-@@ -334,12 +395,16 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
- 		geo->sectors = 1 << 5;
- 		geo->cylinders = get_capacity(bd->bd_disk) >> 11;
- 	}
--	return 0;
-+out:
-+	mutex_unlock(&vblk->vdev_mutex);
-+	return ret;
- }
- 
- static const struct block_device_operations virtblk_fops = {
- 	.ioctl  = virtblk_ioctl,
- 	.owner  = THIS_MODULE,
-+	.open = virtblk_open,
-+	.release = virtblk_release,
- 	.getgeo = virtblk_getgeo,
- };
- 
-@@ -659,6 +724,10 @@ static int virtblk_probe(struct virtio_device *vdev)
- 		goto out_free_index;
- 	}
- 
-+	/* This reference is dropped in virtblk_remove(). */
-+	refcount_set(&vblk->refs, 1);
-+	mutex_init(&vblk->vdev_mutex);
-+
- 	vblk->vdev = vdev;
- 	vblk->sg_elems = sg_elems;
- 
-@@ -821,8 +890,6 @@ static int virtblk_probe(struct virtio_device *vdev)
- static void virtblk_remove(struct virtio_device *vdev)
- {
- 	struct virtio_blk *vblk = vdev->priv;
--	int index = vblk->index;
--	int refc;
- 
- 	/* Make sure no work handler is accessing the device. */
- 	flush_work(&vblk->config_work);
-@@ -832,18 +899,21 @@ static void virtblk_remove(struct virtio_device *vdev)
- 
- 	blk_mq_free_tag_set(&vblk->tag_set);
- 
-+	mutex_lock(&vblk->vdev_mutex);
-+
- 	/* Stop all the virtqueues. */
- 	vdev->config->reset(vdev);
- 
--	refc = kref_read(&disk_to_dev(vblk->disk)->kobj.kref);
-+	/* Virtqueues are stopped, nothing can use vblk->vdev anymore. */
-+	vblk->vdev = NULL;
-+
- 	put_disk(vblk->disk);
- 	vdev->config->del_vqs(vdev);
- 	kfree(vblk->vqs);
--	kfree(vblk);
- 
--	/* Only free device id if we don't have any users */
--	if (refc == 1)
--		ida_simple_remove(&vd_index_ida, index);
-+	mutex_unlock(&vblk->vdev_mutex);
-+
-+	virtblk_put(vblk);
- }
- 
- #ifdef CONFIG_PM_SLEEP
--- 
-2.20.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNS8xNCDkuIvljYg1OjM1LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4gT24g
+VGh1LCBNYXkgMTQsIDIwMjAgYXQgMDM6MjU6NDlQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToK
+Pj4gV2UgcmVzZXQgSU9UTEIgZHVyaW5nIGRldmljZSByZXNldCB0aGlzIGJyZWFrcyB0aGUgYXNz
+dW1wdGlvbiB0aGF0IHRoZQo+PiBtYXBwaW5nIG5lZWRzIHRvIGJlIGNvbnRyb2xsZWQgdmlhIHZE
+UEEgRE1BIG9wcyBleHBsaWNpdGx5IGluIGEKPj4gaW5jcmVtZW50YWwgd2F5LiBTbyB0aGUgbmV0
+d29ya2luZyB3aWxsIGJlIGJyb2tlbiBhZnRlciBlLmcgYSBndWVzdAo+PiByZXNldC4KPj4KPj4g
+Rml4IHRoaXMgYnkgbm90IHJlc2V0dGluZyB0aGUgSU9UTEIgZHVyaW5nIGRldmljZSByZXNldC4K
+Pj4KPj4gU2lnbmVkLW9mZi1ieTogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4KPgo+
+IFRoYXQncyBhIGJpdCB3ZWlyZCwgYW5kIGNhbiBiZSBhIHNlY3VyaXR5IHJpc2sgaWYgc3RhdGUK
+PiBsZWFrcyBiZXR3ZWVuIHNlY3VyaXR5IGRvbWFpbnMgdGhyb3VnaCB0aGlzLgoKCkknbSBub3Qg
+c3VyZSBJIGdldCB0aGlzLiBOb3RlIHRoYXQ6CgoxKSBGb3IgZGV2aWNlcyB0aGF0IGRlcGVuZCBv
+biBwbGF0Zm9ybSBJT01NVSwgdGhlIG1hcHBpbmdzIGFyZSB2YWxpZCAKYWNyb3NzIGRldmljZSBy
+ZXNldAoyKSB2aG9zdF92ZHBhIHdpbGwgcmVzZXQgSU9UTEIgZHVyaW5nIHJlbGVhc2UsIHNvIEkg
+dGhpbmsgdGhlcmUncyBubyAKc2VjdXJpdHkgbGVhayBpbiB0aGlzIGNhc2UKCklmIHdlIHJlc2V0
+IElPVExCIGR1cmluZyBkZXZpY2UgcmVzZXQsIHRoZXJlIHdpbGwgYmUgYW4gaW5jb25zaXN0ZW5j
+eSAKYmV0d2VlbiBvbi1jaGlwIElPTU1VIGRldmljZXMgYW5kIHBsYXRmb3JtIElPTU1VIGRldmlj
+ZXMuIFdlIGNhbiBmaXggCnRoaXMgaW5jb25zaXN0ZW5jeSBpbiBhbm90aGVyIHdheSwgZS5nIHVu
+bWFwIGR1cmluZyB2aG9zdF92ZHBhX3Jlc2V0LiAKVGhpcyBtZWFucyB1c2Vyc3BhY2UgbmVlZCB0
+byByZXBsYXkgdGhlIG1hcHBpbmcgYmVmb3JlIERSSVZFUl9PSywgd2hpY2ggCnNlZW1zIGEgYnVy
+ZGVuIHRvIHVzZXJzcGFjZS4KCgo+IEFuZCB0aGVyZSdzIDAgY2hhbmNlIGFueSBoYXJkd2FyZSBp
+bXBsZW1lbnRhdGlvbiBjYW4KPiBrZWVwIHRoZSB0cmFuc2xhdGlvbnMgYXJvdW5kIGFjcm9zcyBy
+ZXNldHMgLSB0aGVyZQo+IGlzIHNpbXBseSBub3doZXJlIHRvIGtlZXAgdGhlbS4KCgpJdCBkZXBl
+bmRzIG9uIHRoZSBoYXJkd2FyZSBpbXBsZW1lbnRhdGlvbiwgZS5nIHRoZSBJT01NVSBkb2VzIG5v
+dCBiZWxvbmcgCnRvIFZGIGJ1dCBQRi4KClRoYW5rcwoKCj4KPiBJTUhPIHdlIG5lZWQgYSBkaWZm
+ZXJlbnQgd2F5IHRvIG1ha2UgdGhpcyB3b3JrLCBzaW11bGF0b3IKPiBuZWVkcyB0byBsb29rIGxp
+a2UgYSBoYXJkd2FyZSBkZXZpY2UgYXMgbXVjaCBhcyBwb3NzaWJsZS4KPgo+Cj4+IC0tLQo+PiAg
+IGRyaXZlcnMvdmRwYS92ZHBhX3NpbS92ZHBhX3NpbS5jIHwgMiAtLQo+PiAgIDEgZmlsZSBjaGFu
+Z2VkLCAyIGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92ZHBhL3ZkcGFf
+c2ltL3ZkcGFfc2ltLmMgYi9kcml2ZXJzL3ZkcGEvdmRwYV9zaW0vdmRwYV9zaW0uYwo+PiBpbmRl
+eCA3OTU3ZDJkNDFmYzQuLmNjNTUyNTc0M2EyNSAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy92ZHBh
+L3ZkcGFfc2ltL3ZkcGFfc2ltLmMKPj4gKysrIGIvZHJpdmVycy92ZHBhL3ZkcGFfc2ltL3ZkcGFf
+c2ltLmMKPj4gQEAgLTExOSw4ICsxMTksNiBAQCBzdGF0aWMgdm9pZCB2ZHBhc2ltX3Jlc2V0KHN0
+cnVjdCB2ZHBhc2ltICp2ZHBhc2ltKQo+PiAgIAlmb3IgKGkgPSAwOyBpIDwgVkRQQVNJTV9WUV9O
+VU07IGkrKykKPj4gICAJCXZkcGFzaW1fdnFfcmVzZXQoJnZkcGFzaW0tPnZxc1tpXSk7Cj4+ICAg
+Cj4+IC0Jdmhvc3RfaW90bGJfcmVzZXQodmRwYXNpbS0+aW9tbXUpOwo+PiAtCj4+ICAgCXZkcGFz
+aW0tPmZlYXR1cmVzID0gMDsKPj4gICAJdmRwYXNpbS0+c3RhdHVzID0gMDsKPj4gICAJKyt2ZHBh
+c2ltLT5nZW5lcmF0aW9uOwo+PiAtLSAKPj4gMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmly
+dHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51
+eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
