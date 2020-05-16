@@ -1,81 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30F231D5F7D
-	for <lists.virtualization@lfdr.de>; Sat, 16 May 2020 09:57:28 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id B526E1D6040
+	for <lists.virtualization@lfdr.de>; Sat, 16 May 2020 12:11:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4E29E88FF9;
-	Sat, 16 May 2020 07:57:26 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id EEDFF86FA2;
+	Sat, 16 May 2020 10:11:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Bl5YL8vqwXyX; Sat, 16 May 2020 07:57:25 +0000 (UTC)
+	with ESMTP id 8xvkmLAw6WBV; Sat, 16 May 2020 10:11:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2076988EB4;
-	Sat, 16 May 2020 07:57:25 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9D0308700B;
+	Sat, 16 May 2020 10:11:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E237CC016F;
-	Sat, 16 May 2020 07:57:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 72882C016F;
+	Sat, 16 May 2020 10:11:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3ED00C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DF6D0C016F
  for <virtualization@lists.linux-foundation.org>;
- Sat, 16 May 2020 07:57:23 +0000 (UTC)
+ Sat, 16 May 2020 10:11:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 31B6A889CC
+ by fraxinus.osuosl.org (Postfix) with ESMTP id CDD1886FA2
  for <virtualization@lists.linux-foundation.org>;
- Sat, 16 May 2020 07:57:23 +0000 (UTC)
+ Sat, 16 May 2020 10:11:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id e1sfaQ8Uz7jA
+ with ESMTP id fR2vqc_uf127
  for <virtualization@lists.linux-foundation.org>;
- Sat, 16 May 2020 07:57:21 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7021A88877
+ Sat, 16 May 2020 10:11:12 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 4A3D886F33
  for <virtualization@lists.linux-foundation.org>;
- Sat, 16 May 2020 07:57:21 +0000 (UTC)
-Received: from zn.tnic (p200300ec2f1da500d98797498fd40989.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f1d:a500:d987:9749:8fd4:989])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id F0E061EC01AD;
- Sat, 16 May 2020 09:57:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1589615838;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=24RneTj9R2ZSlUZur+Pk+5FsiNHOtsrzJY4lZuujwmM=;
- b=PQd0i30ZxgXtw2HalvJJRnuottkKhoaIb3Vuk2WK3BZsDTMllJ9mG4IQbzL1Q8kU6XZvlY
- O2BEqIiYhdkHHc/MZbbJDmGlNILUc7qYb7kwxsWgNq4q2Efl6ZTZNOWHoU36Lj/FyyL518
- S9GBafEc+mNCN9NmKVzDlxjtWBYr8Wc=
-Date: Sat, 16 May 2020 09:57:14 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 25/75] x86/sev-es: Add support for handling IOIO
- exceptions
-Message-ID: <20200516075714.GC25771@zn.tnic>
-References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-26-joro@8bytes.org>
+ Sat, 16 May 2020 10:11:12 +0000 (UTC)
+IronPort-SDR: fDLXzCMEE/FAWo2nzfD0PethREvWnbV5U0hTaWuIE7xgClyYzMuGpHNz3gGhs3Zt6pr0vpMji0
+ nVx1vkw6zkrw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 May 2020 03:11:11 -0700
+IronPort-SDR: 03dWaqsXdpDzWN7Oa9pHZFvzEXoel2BZjYmTkqM5J2N8WtgYMyReHi5yTPeYZmgzllhSVKj+Tp
+ UUy0h0BGJzRA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,398,1583222400"; d="scan'208";a="281484323"
+Received: from gliakhov-mobl2.ger.corp.intel.com (HELO
+ ubuntu.ger.corp.intel.com) ([10.249.40.45])
+ by orsmga002.jf.intel.com with ESMTP; 16 May 2020 03:11:10 -0700
+From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
+To: kvm@vger.kernel.org
+Subject: [PATCH 0/6] Add a vhost RPMsg API
+Date: Sat, 16 May 2020 12:11:03 +0200
+Message-Id: <20200516101109.2624-1-guennadi.liakhovetski@linux.intel.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200428151725.31091-26-joro@8bytes.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
- x86@kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+Cc: Liam Girdwood <liam.r.girdwood@linux.intel.com>,
+ sound-open-firmware@alsa-project.org, linux-remoteproc@vger.kernel.org,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,36 +79,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Just a reminder so that this doesn't get lost:
+Linux supports RPMsg over VirtIO for "remote processor" /AMP use
+cases. It can however also be used for virtualisation scenarios,
+e.g. when using KVM to run Linux on both the host and the guests.
+This patch set adds a wrapper API to facilitate writing vhost
+drivers for such RPMsg-based solutions. The first use case is an
+audio DSP virtualisation project, currently under development, ready
+for review and submission, available at
+https://github.com/thesofproject/linux/pull/1501/commits
+A further patch for the ADSP vhost RPMsg driver will be sent
+separately for review only since it cannot be merged without audio
+patches being upstreamed first.
 
-On Tue, Apr 28, 2020 at 05:16:35PM +0200, Joerg Roedel wrote:
-> +	if (exit_info_1 & IOIO_TYPE_STR) {
-> +		int df = (regs->flags & X86_EFLAGS_DF) ? -1 : 1;
+Thanks
+Guennadi
 
-...
+Guennadi Liakhovetski (6):
+  vhost: convert VHOST_VSOCK_SET_RUNNING to a generic ioctl
+  vhost: (cosmetic) remove a superfluous variable initialisation
+  rpmsg: move common structures and defines to headers
+  rpmsg: update documentation
+  vhost: add an rpmsg API
+  rpmsg: add a device ID to also bind to the ADSP device
 
-> +
-> +		if (!(exit_info_1 & IOIO_TYPE_IN)) {
-> +			ret = vc_insn_string_read(ctxt,
-> +					       (void *)(es_base + regs->si),
-> +					       ghcb->shared_buffer, io_bytes,
-> +					       exit_info_2, df);
-							   ^^^^
-
-> +
-> +		/* Everything went well, write back results */
-> +		if (exit_info_1 & IOIO_TYPE_IN) {
-> +			ret = vc_insn_string_write(ctxt,
-> +						(void *)(es_base + regs->di),
-> +						ghcb->shared_buffer, io_bytes,
-> +						exit_info_2, df);
-							    ^^^^
+ Documentation/rpmsg.txt          |   2 +-
+ drivers/rpmsg/virtio_rpmsg_bus.c |  79 +--------
+ drivers/vhost/Kconfig            |   8 +
+ drivers/vhost/Makefile           |   3 +
+ drivers/vhost/rpmsg.c            | 372 +++++++++++++++++++++++++++++++++++++++
+ drivers/vhost/vhost.c            |   2 +-
+ drivers/vhost/vhost_rpmsg.h      |  74 ++++++++
+ include/linux/virtio_rpmsg.h     |  81 +++++++++
+ include/uapi/linux/rpmsg.h       |   3 +
+ include/uapi/linux/vhost.h       |   4 +-
+ 10 files changed, 549 insertions(+), 79 deletions(-)
+ create mode 100644 drivers/vhost/rpmsg.c
+ create mode 100644 drivers/vhost/vhost_rpmsg.h
+ create mode 100644 include/linux/virtio_rpmsg.h
 
 -- 
-Regards/Gruss,
-    Boris.
+1.9.3
 
-https://people.kernel.org/tglx/notes-about-netiquette
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
