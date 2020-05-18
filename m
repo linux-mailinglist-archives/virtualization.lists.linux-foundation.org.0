@@ -2,80 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FFF71D6F4F
-	for <lists.virtualization@lfdr.de>; Mon, 18 May 2020 05:27:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2473F1D7239
+	for <lists.virtualization@lfdr.de>; Mon, 18 May 2020 09:49:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E78DE883E4;
-	Mon, 18 May 2020 03:27:51 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2D975884A7;
+	Mon, 18 May 2020 07:49:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3u7VlFoh1yBx; Mon, 18 May 2020 03:27:51 +0000 (UTC)
+	with ESMTP id Q-hrNTn5ObHT; Mon, 18 May 2020 07:49:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 07100883DA;
-	Mon, 18 May 2020 03:27:51 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 31B8C88462;
+	Mon, 18 May 2020 07:49:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DA9BAC07FF;
-	Mon, 18 May 2020 03:27:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0F3E8C07FF;
+	Mon, 18 May 2020 07:49:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 846F1C07FF
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4899EC07FF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 03:27:49 +0000 (UTC)
+ Mon, 18 May 2020 07:49:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 678D120349
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 37C95869AB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 03:27:49 +0000 (UTC)
+ Mon, 18 May 2020 07:49:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DRp8AGyG7zO0
+ with ESMTP id YY0CdeYG0zVi
  for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 03:27:48 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 5008820009
+ Mon, 18 May 2020 07:49:34 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6D0888699B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 03:27:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589772466;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=XWq69cxc6uMliMSLmzS+y2EN4gmCm0BpLb7U6ruoHg0=;
- b=CdDKS8HTH6L6NKbyOBHKBaJ8sHW5bkX2hpddAmkVwp/02k4l1dKMQIRFiHyXjAKtq8Yg82
- kN59+1sez7du8a+HsKJPJWucS1KN/MVxOU/iStEePnWE8Vf+YXuRjBm9Gf67F5sA12P84K
- J751ihtAAj8aSqmrzCQCU8OriqXdRQ0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-470-bZgQyu2AMO-a8DtVqHT04g-1; Sun, 17 May 2020 23:27:44 -0400
-X-MC-Unique: bZgQyu2AMO-a8DtVqHT04g-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ Mon, 18 May 2020 07:49:34 +0000 (UTC)
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+ [83.86.89.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9D42A8015D2;
- Mon, 18 May 2020 03:27:43 +0000 (UTC)
-Received: from [10.72.13.232] (ovpn-13-232.pek2.redhat.com [10.72.13.232])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DE12E10013D9;
- Mon, 18 May 2020 03:27:38 +0000 (UTC)
-Subject: Re: [PATCH] vhost: missing __user tags
-To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
-References: <20200515153347.1092235-1-mst@redhat.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <f6d7e432-0951-8c3f-829e-78466fd39446@redhat.com>
-Date: Mon, 18 May 2020 11:27:37 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ by mail.kernel.org (Postfix) with ESMTPSA id BA1B120825;
+ Mon, 18 May 2020 07:49:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1589788174;
+ bh=llFhUjdStD3n4Gh/ZphczSomZFgVEAqpTzetCDaM+zA=;
+ h=Subject:To:Cc:From:Date:From;
+ b=wU54fkNWp8LHLgEzn+kFamrMP/Lgiy5nlD8Xm7u8UC5eW9cgVWFdiFC70UHoA33wW
+ r2IZfxHbupNZcSMMwMs8fBSxGqI257JGly6cAocZb+Kp5goFNkMXOGX8YH/oeo5XFP
+ p+CxJTo0n4LTVaS80fYE5CkqyeAup/x/6Z30UNjs=
+Subject: Patch "x86/paravirt: Remove the unused irq_enable_sysexit pv op" has
+ been added to the 4.4-stable tree
+To: akpm@linux-foundation.org, boris.ostrovsky@oracle.com, bp@alien8.de,
+ bp@suse.de, brgerst@gmail.com, david.vrabel@citrix.com, dvlasenk@redhat.com,
+ gregkh@linuxfoundation.org, hpa@zytor.com, konrad.wilk@oracle.com,
+ luto@amacapital.net, luto@kernel.org, mingo@kernel.org, peterz@infradead.org,
+ tglx@linutronix.de, torvalds@linux-foundation.org,
+ virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org
+From: <gregkh@linuxfoundation.org>
+Date: Mon, 18 May 2020 09:49:24 +0200
+Message-ID: <1589788164224171@kroah.com>
 MIME-Version: 1.0
-In-Reply-To: <20200515153347.1092235-1-mst@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: netdev@vger.kernel.org, kbuild test robot <lkp@intel.com>,
- kvm@vger.kernel.org, virtualization@lists.linux-foundation.org
+X-stable: commit
+X-Patchwork-Hint: ignore 
+Cc: stable-commits@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,37 +77,256 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNS8xNSDkuIvljYgxMTozMywgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+IHNw
-YXJzZSB3YXJucyBhYm91dCBjb252ZXJ0aW5nIHZvaWQgKiB0byB2b2lkIF9fdXNlciAqLiBUaGlz
-IGlzIG5vdCBuZXcKPiBidXQgb25seSBnb3Qgbm90aWNlZCBub3cgdGhhdCB2aG9zdCBpcyBidWls
-dCBvbiBtb3JlIHN5c3RlbXMuCj4gVGhpcyBpcyBqdXN0IGEgcXVlc3Rpb24gb2YgX191c2VyIHRh
-Z3MgbWlzc2luZyBpbiBhIGNvdXBsZSBvZiBwbGFjZXMsCj4gc28gZml4IGl0IHVwLgo+Cj4gRml4
-ZXM6IGY4ODk0OTEzODA1OCAoInZob3N0OiBpbnRyb2R1Y2UgTygxKSB2cSBtZXRhZGF0YSBjYWNo
-ZSIpCj4gUmVwb3J0ZWQtYnk6IGtidWlsZCB0ZXN0IHJvYm90IDxsa3BAaW50ZWwuY29tPgo+IFNp
-Z25lZC1vZmYtYnk6IE1pY2hhZWwgUy4gVHNpcmtpbiA8bXN0QHJlZGhhdC5jb20+Cj4gLS0tCj4g
-ICBkcml2ZXJzL3Zob3N0L3Zob3N0LmMgfCA0ICsrLS0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGlu
-c2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aG9z
-dC92aG9zdC5jIGIvZHJpdmVycy92aG9zdC92aG9zdC5jCj4gaW5kZXggZDQ1MGUxNmM1YzI1Li4y
-MWE1OWI1OThlZDggMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92aG9zdC92aG9zdC5jCj4gKysrIGIv
-ZHJpdmVycy92aG9zdC92aG9zdC5jCj4gQEAgLTczMCw3ICs3MzAsNyBAQCBzdGF0aWMgaW5saW5l
-IHZvaWQgX191c2VyICp2aG9zdF92cV9tZXRhX2ZldGNoKHN0cnVjdCB2aG9zdF92aXJ0cXVldWUg
-KnZxLAo+ICAgCWlmICghbWFwKQo+ICAgCQlyZXR1cm4gTlVMTDsKPiAgIAo+IC0JcmV0dXJuICh2
-b2lkICopKHVpbnRwdHJfdCkobWFwLT5hZGRyICsgYWRkciAtIG1hcC0+c3RhcnQpOwo+ICsJcmV0
-dXJuICh2b2lkIF9fdXNlciAqKSh1aW50cHRyX3QpKG1hcC0+YWRkciArIGFkZHIgLSBtYXAtPnN0
-YXJ0KTsKPiAgIH0KPiAgIAo+ICAgLyogQ2FuIHdlIHN3aXRjaCB0byB0aGlzIG1lbW9yeSB0YWJs
-ZT8gKi8KPiBAQCAtODY5LDcgKzg2OSw3IEBAIHN0YXRpYyB2b2lkIF9fdXNlciAqX192aG9zdF9n
-ZXRfdXNlcl9zbG93KHN0cnVjdCB2aG9zdF92aXJ0cXVldWUgKnZxLAo+ICAgICogbm90IGhhcHBl
-biBpbiB0aGlzIGNhc2UuCj4gICAgKi8KPiAgIHN0YXRpYyBpbmxpbmUgdm9pZCBfX3VzZXIgKl9f
-dmhvc3RfZ2V0X3VzZXIoc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAqdnEsCj4gLQkJCQkJICAgIHZv
-aWQgKmFkZHIsIHVuc2lnbmVkIGludCBzaXplLAo+ICsJCQkJCSAgICB2b2lkIF9fdXNlciAqYWRk
-ciwgdW5zaWduZWQgaW50IHNpemUsCj4gICAJCQkJCSAgICBpbnQgdHlwZSkKPiAgIHsKPiAgIAl2
-b2lkIF9fdXNlciAqdWFkZHIgPSB2aG9zdF92cV9tZXRhX2ZldGNoKHZxLAoKCkFja2VkLWJ5OiBK
-YXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29tPgoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0
-dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4
-Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+
+This is a note to let you know that I've just added the patch titled
+
+    x86/paravirt: Remove the unused irq_enable_sysexit pv op
+
+to the 4.4-stable tree which can be found at:
+    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
+
+The filename of the patch is:
+     x86-paravirt-remove-the-unused-irq_enable_sysexit-pv-op.patch
+and it can be found in the queue-4.4 subdirectory.
+
+If you, or anyone else, feels it should not be added to the stable tree,
+please let <stable@vger.kernel.org> know about it.
+
+
+From 88c15ec90ff16880efab92b519436ee17b198477 Mon Sep 17 00:00:00 2001
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Date: Thu, 19 Nov 2015 16:55:46 -0500
+Subject: x86/paravirt: Remove the unused irq_enable_sysexit pv op
+
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+
+commit 88c15ec90ff16880efab92b519436ee17b198477 upstream.
+
+As result of commit "x86/xen: Avoid fast syscall path for Xen PV
+guests", the irq_enable_sysexit pv op is not called by Xen PV guests
+anymore and since they were the only ones who used it we can
+safely remove it.
+
+Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Reviewed-by: Borislav Petkov <bp@suse.de>
+Acked-by: Andy Lutomirski <luto@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Andy Lutomirski <luto@amacapital.net>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: Brian Gerst <brgerst@gmail.com>
+Cc: Denys Vlasenko <dvlasenk@redhat.com>
+Cc: H. Peter Anvin <hpa@zytor.com>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: david.vrabel@citrix.com
+Cc: konrad.wilk@oracle.com
+Cc: virtualization@lists.linux-foundation.org
+Cc: xen-devel@lists.xenproject.org
+Link: http://lkml.kernel.org/r/1447970147-1733-3-git-send-email-boris.ostrovsky@oracle.com
+Signed-off-by: Ingo Molnar <mingo@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/entry/entry_32.S             |    8 ++------
+ arch/x86/include/asm/paravirt.h       |    7 -------
+ arch/x86/include/asm/paravirt_types.h |    9 ---------
+ arch/x86/kernel/asm-offsets.c         |    3 ---
+ arch/x86/kernel/paravirt.c            |    7 -------
+ arch/x86/kernel/paravirt_patch_32.c   |    2 --
+ arch/x86/kernel/paravirt_patch_64.c   |    1 -
+ arch/x86/xen/enlighten.c              |    3 ---
+ arch/x86/xen/xen-asm_32.S             |   14 --------------
+ arch/x86/xen/xen-ops.h                |    3 ---
+ 10 files changed, 2 insertions(+), 55 deletions(-)
+
+--- a/arch/x86/entry/entry_32.S
++++ b/arch/x86/entry/entry_32.S
+@@ -331,7 +331,8 @@ sysenter_past_esp:
+ 	 * Return back to the vDSO, which will pop ecx and edx.
+ 	 * Don't bother with DS and ES (they already contain __USER_DS).
+ 	 */
+-	ENABLE_INTERRUPTS_SYSEXIT
++	sti
++	sysexit
+ 
+ .pushsection .fixup, "ax"
+ 2:	movl	$0, PT_FS(%esp)
+@@ -554,11 +555,6 @@ ENTRY(native_iret)
+ 	iret
+ 	_ASM_EXTABLE(native_iret, iret_exc)
+ END(native_iret)
+-
+-ENTRY(native_irq_enable_sysexit)
+-	sti
+-	sysexit
+-END(native_irq_enable_sysexit)
+ #endif
+ 
+ ENTRY(overflow)
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -938,13 +938,6 @@ extern void default_banner(void);
+ 	push %ecx; push %edx;				\
+ 	call PARA_INDIRECT(pv_cpu_ops+PV_CPU_read_cr0);	\
+ 	pop %edx; pop %ecx
+-
+-#define ENABLE_INTERRUPTS_SYSEXIT					\
+-	PARA_SITE(PARA_PATCH(pv_cpu_ops, PV_CPU_irq_enable_sysexit),	\
+-		  CLBR_NONE,						\
+-		  jmp PARA_INDIRECT(pv_cpu_ops+PV_CPU_irq_enable_sysexit))
+-
+-
+ #else	/* !CONFIG_X86_32 */
+ 
+ /*
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -162,15 +162,6 @@ struct pv_cpu_ops {
+ 
+ 	u64 (*read_pmc)(int counter);
+ 
+-#ifdef CONFIG_X86_32
+-	/*
+-	 * Atomically enable interrupts and return to userspace.  This
+-	 * is only used in 32-bit kernels.  64-bit kernels use
+-	 * usergs_sysret32 instead.
+-	 */
+-	void (*irq_enable_sysexit)(void);
+-#endif
+-
+ 	/*
+ 	 * Switch to usermode gs and return to 64-bit usermode using
+ 	 * sysret.  Only used in 64-bit kernels to return to 64-bit
+--- a/arch/x86/kernel/asm-offsets.c
++++ b/arch/x86/kernel/asm-offsets.c
+@@ -65,9 +65,6 @@ void common(void) {
+ 	OFFSET(PV_IRQ_irq_disable, pv_irq_ops, irq_disable);
+ 	OFFSET(PV_IRQ_irq_enable, pv_irq_ops, irq_enable);
+ 	OFFSET(PV_CPU_iret, pv_cpu_ops, iret);
+-#ifdef CONFIG_X86_32
+-	OFFSET(PV_CPU_irq_enable_sysexit, pv_cpu_ops, irq_enable_sysexit);
+-#endif
+ 	OFFSET(PV_CPU_read_cr0, pv_cpu_ops, read_cr0);
+ 	OFFSET(PV_MMU_read_cr2, pv_mmu_ops, read_cr2);
+ #endif
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -168,9 +168,6 @@ unsigned paravirt_patch_default(u8 type,
+ 		ret = paravirt_patch_ident_64(insnbuf, len);
+ 
+ 	else if (type == PARAVIRT_PATCH(pv_cpu_ops.iret) ||
+-#ifdef CONFIG_X86_32
+-		 type == PARAVIRT_PATCH(pv_cpu_ops.irq_enable_sysexit) ||
+-#endif
+ 		 type == PARAVIRT_PATCH(pv_cpu_ops.usergs_sysret32) ||
+ 		 type == PARAVIRT_PATCH(pv_cpu_ops.usergs_sysret64))
+ 		/* If operation requires a jmp, then jmp */
+@@ -226,7 +223,6 @@ static u64 native_steal_clock(int cpu)
+ 
+ /* These are in entry.S */
+ extern void native_iret(void);
+-extern void native_irq_enable_sysexit(void);
+ extern void native_usergs_sysret32(void);
+ extern void native_usergs_sysret64(void);
+ 
+@@ -385,9 +381,6 @@ __visible struct pv_cpu_ops pv_cpu_ops =
+ 
+ 	.load_sp0 = native_load_sp0,
+ 
+-#if defined(CONFIG_X86_32)
+-	.irq_enable_sysexit = native_irq_enable_sysexit,
+-#endif
+ #ifdef CONFIG_X86_64
+ #ifdef CONFIG_IA32_EMULATION
+ 	.usergs_sysret32 = native_usergs_sysret32,
+--- a/arch/x86/kernel/paravirt_patch_32.c
++++ b/arch/x86/kernel/paravirt_patch_32.c
+@@ -5,7 +5,6 @@ DEF_NATIVE(pv_irq_ops, irq_enable, "sti"
+ DEF_NATIVE(pv_irq_ops, restore_fl, "push %eax; popf");
+ DEF_NATIVE(pv_irq_ops, save_fl, "pushf; pop %eax");
+ DEF_NATIVE(pv_cpu_ops, iret, "iret");
+-DEF_NATIVE(pv_cpu_ops, irq_enable_sysexit, "sti; sysexit");
+ DEF_NATIVE(pv_mmu_ops, read_cr2, "mov %cr2, %eax");
+ DEF_NATIVE(pv_mmu_ops, write_cr3, "mov %eax, %cr3");
+ DEF_NATIVE(pv_mmu_ops, read_cr3, "mov %cr3, %eax");
+@@ -46,7 +45,6 @@ unsigned native_patch(u8 type, u16 clobb
+ 		PATCH_SITE(pv_irq_ops, restore_fl);
+ 		PATCH_SITE(pv_irq_ops, save_fl);
+ 		PATCH_SITE(pv_cpu_ops, iret);
+-		PATCH_SITE(pv_cpu_ops, irq_enable_sysexit);
+ 		PATCH_SITE(pv_mmu_ops, read_cr2);
+ 		PATCH_SITE(pv_mmu_ops, read_cr3);
+ 		PATCH_SITE(pv_mmu_ops, write_cr3);
+--- a/arch/x86/kernel/paravirt_patch_64.c
++++ b/arch/x86/kernel/paravirt_patch_64.c
+@@ -12,7 +12,6 @@ DEF_NATIVE(pv_mmu_ops, write_cr3, "movq
+ DEF_NATIVE(pv_cpu_ops, clts, "clts");
+ DEF_NATIVE(pv_cpu_ops, wbinvd, "wbinvd");
+ 
+-DEF_NATIVE(pv_cpu_ops, irq_enable_sysexit, "swapgs; sti; sysexit");
+ DEF_NATIVE(pv_cpu_ops, usergs_sysret64, "swapgs; sysretq");
+ DEF_NATIVE(pv_cpu_ops, usergs_sysret32, "swapgs; sysretl");
+ DEF_NATIVE(pv_cpu_ops, swapgs, "swapgs");
+--- a/arch/x86/xen/enlighten.c
++++ b/arch/x86/xen/enlighten.c
+@@ -1240,10 +1240,7 @@ static const struct pv_cpu_ops xen_cpu_o
+ 
+ 	.iret = xen_iret,
+ #ifdef CONFIG_X86_64
+-	.usergs_sysret32 = xen_sysret32,
+ 	.usergs_sysret64 = xen_sysret64,
+-#else
+-	.irq_enable_sysexit = xen_sysexit,
+ #endif
+ 
+ 	.load_tr_desc = paravirt_nop,
+--- a/arch/x86/xen/xen-asm_32.S
++++ b/arch/x86/xen/xen-asm_32.S
+@@ -35,20 +35,6 @@ check_events:
+ 	ret
+ 
+ /*
+- * We can't use sysexit directly, because we're not running in ring0.
+- * But we can easily fake it up using iret.  Assuming xen_sysexit is
+- * jumped to with a standard stack frame, we can just strip it back to
+- * a standard iret frame and use iret.
+- */
+-ENTRY(xen_sysexit)
+-	movl PT_EAX(%esp), %eax			/* Shouldn't be necessary? */
+-	orl $X86_EFLAGS_IF, PT_EFLAGS(%esp)
+-	lea PT_EIP(%esp), %esp
+-
+-	jmp xen_iret
+-ENDPROC(xen_sysexit)
+-
+-/*
+  * This is run where a normal iret would be run, with the same stack setup:
+  *	8: eflags
+  *	4: cs
+--- a/arch/x86/xen/xen-ops.h
++++ b/arch/x86/xen/xen-ops.h
+@@ -139,9 +139,6 @@ DECL_ASM(void, xen_restore_fl_direct, un
+ 
+ /* These are not functions, and cannot be called normally */
+ __visible void xen_iret(void);
+-#ifdef CONFIG_X86_32
+-__visible void xen_sysexit(void);
+-#endif
+ __visible void xen_sysret32(void);
+ __visible void xen_sysret64(void);
+ __visible void xen_adjust_exception_frame(void);
+
+
+Patches currently in stable-queue which might be from boris.ostrovsky@oracle.com are
+
+queue-4.4/x86-paravirt-remove-the-unused-irq_enable_sysexit-pv-op.patch
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
