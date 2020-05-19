@@ -1,78 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7D731D809B
-	for <lists.virtualization@lfdr.de>; Mon, 18 May 2020 19:40:56 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 9345F88794;
-	Mon, 18 May 2020 17:40:54 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id u2i1z0pYLttN; Mon, 18 May 2020 17:40:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E43308878A;
-	Mon, 18 May 2020 17:40:51 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CF0B7C0894;
-	Mon, 18 May 2020 17:40:51 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 86E65C07FF
- for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 17:40:49 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 608BF1D8F99
+	for <lists.virtualization@lfdr.de>; Tue, 19 May 2020 07:53:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 6D8EB875B7
- for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 17:40:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A23E787886;
+	Tue, 19 May 2020 05:52:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NAW9yeowjDKF; Tue, 19 May 2020 05:52:57 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id E52B1877B4;
+	Tue, 19 May 2020 05:52:57 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D32E5C07FF;
+	Tue, 19 May 2020 05:52:57 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B9E71C07FF
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 19 May 2020 05:52:55 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id A0EB685EBE
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 19 May 2020 05:52:55 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CI5-13BOL3uX
+ with ESMTP id QhPxoS3gBNSE
  for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 17:40:47 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id E0F278704C
+ Tue, 19 May 2020 05:52:54 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6AF0E85EB8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 18 May 2020 17:40:47 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ Tue, 19 May 2020 05:52:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1589867573;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=F8sf/V9iwhvJqIQR3nLkO+0EgUVeCfEhuWkJ9NRPG2w=;
+ b=bwEorBm9EQw79eMp4qBihqEGeUvvnUi3QvH9qmcAs/TH/a+clVR0CzusFxs/EP93EHhd9M
+ sn3AHkwVJ1lGKYRlZR9/i5p6oMge5iaHzmRvJmAhDz2w4I/wXu3CWmobEzS+9qSGD8xWsh
+ hFAoAcsSZgcJP/h8A2k1iWJ3/2Ifylk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-390-nxLGNieMMVafcALNrIp15Q-1; Tue, 19 May 2020 01:52:51 -0400
+X-MC-Unique: nxLGNieMMVafcALNrIp15Q-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 339EC20849;
- Mon, 18 May 2020 17:40:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589823647;
- bh=IczQH/TtXU98bDp5k7ZWYNUFzCIb147wj2CPbCzb4QQ=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Z385pTEQQSacawaL/uSVRTzNfOc0G2+xynwZg7FsekDAvr2Sc+YZRguAfVL4hqpjr
- UUoTS0oTi+UoQBF6kYFSLIO3dkr+/f9jGwISAGrzWD4xBTInvNGwV/McbM0nG/SUZ5
- AKoizO8pHE0Ow8OcLYkPw9u0Szx/CIyF989NwhGY=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH 4.4 67/86] x86/paravirt: Remove the unused irq_enable_sysexit
- pv op
-Date: Mon, 18 May 2020 19:36:38 +0200
-Message-Id: <20200518173503.889676448@linuxfoundation.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200518173450.254571947@linuxfoundation.org>
-References: <20200518173450.254571947@linuxfoundation.org>
-User-Agent: quilt/0.66
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 083CB1005510;
+ Tue, 19 May 2020 05:52:45 +0000 (UTC)
+Received: from [10.72.13.247] (ovpn-13-247.pek2.redhat.com [10.72.13.247])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 804DD2BFCC;
+ Tue, 19 May 2020 05:52:39 +0000 (UTC)
+Subject: Re: [PATCH V2] ifcvf: move IRQ request/free to status change handlers
+To: Cindy Lu <lulu@redhat.com>
+References: <1589270444-3669-1-git-send-email-lingshan.zhu@intel.com>
+ <8aca85c3-3bf6-a1ec-7009-cd9a635647d7@redhat.com>
+ <5bbe0c21-8638-45e4-04e8-02ad0df44b38@intel.com>
+ <572ed6af-7a04-730e-c803-a41868091e88@redhat.com>
+ <CACLfguXXPArd9UWX-HpfqNvgpWS=Nyt6SJ4kUkjjpVsVvVe9oA@mail.gmail.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <c927fcff-de09-d623-e119-4611ab65ff04@redhat.com>
+Date: Tue, 19 May 2020 13:52:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Cc: Ingo Molnar <mingo@kernel.org>, Denys Vlasenko <dvlasenk@redhat.com>,
- Thomas Gleixner <tglx@linutronix.de>, konrad.wilk@oracle.com,
- Peter Zijlstra <peterz@infradead.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "H. Peter Anvin" <hpa@zytor.com>, virtualization@lists.linux-foundation.org,
- stable@vger.kernel.org, Andy Lutomirski <luto@amacapital.net>,
- Borislav Petkov <bp@alien8.de>, david.vrabel@citrix.com,
- Andy Lutomirski <luto@kernel.org>, Brian Gerst <brgerst@gmail.com>,
- xen-devel@lists.xenproject.org, Andrew Morton <akpm@linux-foundation.org>,
- Borislav Petkov <bp@suse.de>, Linus Torvalds <torvalds@linux-foundation.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
+In-Reply-To: <CACLfguXXPArd9UWX-HpfqNvgpWS=Nyt6SJ4kUkjjpVsVvVe9oA@mail.gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Cc: kvm@vger.kernel.org, Michael Tsirkin <mst@redhat.com>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, "Zhu,
+ Lingshan" <lingshan.zhu@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,232 +93,42 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-
-commit 88c15ec90ff16880efab92b519436ee17b198477 upstream.
-
-As result of commit "x86/xen: Avoid fast syscall path for Xen PV
-guests", the irq_enable_sysexit pv op is not called by Xen PV guests
-anymore and since they were the only ones who used it we can
-safely remove it.
-
-Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Reviewed-by: Borislav Petkov <bp@suse.de>
-Acked-by: Andy Lutomirski <luto@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Andy Lutomirski <luto@amacapital.net>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Brian Gerst <brgerst@gmail.com>
-Cc: Denys Vlasenko <dvlasenk@redhat.com>
-Cc: H. Peter Anvin <hpa@zytor.com>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: david.vrabel@citrix.com
-Cc: konrad.wilk@oracle.com
-Cc: virtualization@lists.linux-foundation.org
-Cc: xen-devel@lists.xenproject.org
-Link: http://lkml.kernel.org/r/1447970147-1733-3-git-send-email-boris.ostrovsky@oracle.com
-Signed-off-by: Ingo Molnar <mingo@kernel.org>
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-
----
- arch/x86/entry/entry_32.S             |    8 ++------
- arch/x86/include/asm/paravirt.h       |    7 -------
- arch/x86/include/asm/paravirt_types.h |    9 ---------
- arch/x86/kernel/asm-offsets.c         |    3 ---
- arch/x86/kernel/paravirt.c            |    7 -------
- arch/x86/kernel/paravirt_patch_32.c   |    2 --
- arch/x86/kernel/paravirt_patch_64.c   |    1 -
- arch/x86/xen/enlighten.c              |    3 ---
- arch/x86/xen/xen-asm_32.S             |   14 --------------
- arch/x86/xen/xen-ops.h                |    3 ---
- 10 files changed, 2 insertions(+), 55 deletions(-)
-
---- a/arch/x86/entry/entry_32.S
-+++ b/arch/x86/entry/entry_32.S
-@@ -331,7 +331,8 @@ sysenter_past_esp:
- 	 * Return back to the vDSO, which will pop ecx and edx.
- 	 * Don't bother with DS and ES (they already contain __USER_DS).
- 	 */
--	ENABLE_INTERRUPTS_SYSEXIT
-+	sti
-+	sysexit
- 
- .pushsection .fixup, "ax"
- 2:	movl	$0, PT_FS(%esp)
-@@ -554,11 +555,6 @@ ENTRY(native_iret)
- 	iret
- 	_ASM_EXTABLE(native_iret, iret_exc)
- END(native_iret)
--
--ENTRY(native_irq_enable_sysexit)
--	sti
--	sysexit
--END(native_irq_enable_sysexit)
- #endif
- 
- ENTRY(overflow)
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -938,13 +938,6 @@ extern void default_banner(void);
- 	push %ecx; push %edx;				\
- 	call PARA_INDIRECT(pv_cpu_ops+PV_CPU_read_cr0);	\
- 	pop %edx; pop %ecx
--
--#define ENABLE_INTERRUPTS_SYSEXIT					\
--	PARA_SITE(PARA_PATCH(pv_cpu_ops, PV_CPU_irq_enable_sysexit),	\
--		  CLBR_NONE,						\
--		  jmp PARA_INDIRECT(pv_cpu_ops+PV_CPU_irq_enable_sysexit))
--
--
- #else	/* !CONFIG_X86_32 */
- 
- /*
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -162,15 +162,6 @@ struct pv_cpu_ops {
- 
- 	u64 (*read_pmc)(int counter);
- 
--#ifdef CONFIG_X86_32
--	/*
--	 * Atomically enable interrupts and return to userspace.  This
--	 * is only used in 32-bit kernels.  64-bit kernels use
--	 * usergs_sysret32 instead.
--	 */
--	void (*irq_enable_sysexit)(void);
--#endif
--
- 	/*
- 	 * Switch to usermode gs and return to 64-bit usermode using
- 	 * sysret.  Only used in 64-bit kernels to return to 64-bit
---- a/arch/x86/kernel/asm-offsets.c
-+++ b/arch/x86/kernel/asm-offsets.c
-@@ -65,9 +65,6 @@ void common(void) {
- 	OFFSET(PV_IRQ_irq_disable, pv_irq_ops, irq_disable);
- 	OFFSET(PV_IRQ_irq_enable, pv_irq_ops, irq_enable);
- 	OFFSET(PV_CPU_iret, pv_cpu_ops, iret);
--#ifdef CONFIG_X86_32
--	OFFSET(PV_CPU_irq_enable_sysexit, pv_cpu_ops, irq_enable_sysexit);
--#endif
- 	OFFSET(PV_CPU_read_cr0, pv_cpu_ops, read_cr0);
- 	OFFSET(PV_MMU_read_cr2, pv_mmu_ops, read_cr2);
- #endif
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -168,9 +168,6 @@ unsigned paravirt_patch_default(u8 type,
- 		ret = paravirt_patch_ident_64(insnbuf, len);
- 
- 	else if (type == PARAVIRT_PATCH(pv_cpu_ops.iret) ||
--#ifdef CONFIG_X86_32
--		 type == PARAVIRT_PATCH(pv_cpu_ops.irq_enable_sysexit) ||
--#endif
- 		 type == PARAVIRT_PATCH(pv_cpu_ops.usergs_sysret32) ||
- 		 type == PARAVIRT_PATCH(pv_cpu_ops.usergs_sysret64))
- 		/* If operation requires a jmp, then jmp */
-@@ -226,7 +223,6 @@ static u64 native_steal_clock(int cpu)
- 
- /* These are in entry.S */
- extern void native_iret(void);
--extern void native_irq_enable_sysexit(void);
- extern void native_usergs_sysret32(void);
- extern void native_usergs_sysret64(void);
- 
-@@ -385,9 +381,6 @@ __visible struct pv_cpu_ops pv_cpu_ops =
- 
- 	.load_sp0 = native_load_sp0,
- 
--#if defined(CONFIG_X86_32)
--	.irq_enable_sysexit = native_irq_enable_sysexit,
--#endif
- #ifdef CONFIG_X86_64
- #ifdef CONFIG_IA32_EMULATION
- 	.usergs_sysret32 = native_usergs_sysret32,
---- a/arch/x86/kernel/paravirt_patch_32.c
-+++ b/arch/x86/kernel/paravirt_patch_32.c
-@@ -5,7 +5,6 @@ DEF_NATIVE(pv_irq_ops, irq_enable, "sti"
- DEF_NATIVE(pv_irq_ops, restore_fl, "push %eax; popf");
- DEF_NATIVE(pv_irq_ops, save_fl, "pushf; pop %eax");
- DEF_NATIVE(pv_cpu_ops, iret, "iret");
--DEF_NATIVE(pv_cpu_ops, irq_enable_sysexit, "sti; sysexit");
- DEF_NATIVE(pv_mmu_ops, read_cr2, "mov %cr2, %eax");
- DEF_NATIVE(pv_mmu_ops, write_cr3, "mov %eax, %cr3");
- DEF_NATIVE(pv_mmu_ops, read_cr3, "mov %cr3, %eax");
-@@ -46,7 +45,6 @@ unsigned native_patch(u8 type, u16 clobb
- 		PATCH_SITE(pv_irq_ops, restore_fl);
- 		PATCH_SITE(pv_irq_ops, save_fl);
- 		PATCH_SITE(pv_cpu_ops, iret);
--		PATCH_SITE(pv_cpu_ops, irq_enable_sysexit);
- 		PATCH_SITE(pv_mmu_ops, read_cr2);
- 		PATCH_SITE(pv_mmu_ops, read_cr3);
- 		PATCH_SITE(pv_mmu_ops, write_cr3);
---- a/arch/x86/kernel/paravirt_patch_64.c
-+++ b/arch/x86/kernel/paravirt_patch_64.c
-@@ -12,7 +12,6 @@ DEF_NATIVE(pv_mmu_ops, write_cr3, "movq
- DEF_NATIVE(pv_cpu_ops, clts, "clts");
- DEF_NATIVE(pv_cpu_ops, wbinvd, "wbinvd");
- 
--DEF_NATIVE(pv_cpu_ops, irq_enable_sysexit, "swapgs; sti; sysexit");
- DEF_NATIVE(pv_cpu_ops, usergs_sysret64, "swapgs; sysretq");
- DEF_NATIVE(pv_cpu_ops, usergs_sysret32, "swapgs; sysretl");
- DEF_NATIVE(pv_cpu_ops, swapgs, "swapgs");
---- a/arch/x86/xen/enlighten.c
-+++ b/arch/x86/xen/enlighten.c
-@@ -1240,10 +1240,7 @@ static const struct pv_cpu_ops xen_cpu_o
- 
- 	.iret = xen_iret,
- #ifdef CONFIG_X86_64
--	.usergs_sysret32 = xen_sysret32,
- 	.usergs_sysret64 = xen_sysret64,
--#else
--	.irq_enable_sysexit = xen_sysexit,
- #endif
- 
- 	.load_tr_desc = paravirt_nop,
---- a/arch/x86/xen/xen-asm_32.S
-+++ b/arch/x86/xen/xen-asm_32.S
-@@ -35,20 +35,6 @@ check_events:
- 	ret
- 
- /*
-- * We can't use sysexit directly, because we're not running in ring0.
-- * But we can easily fake it up using iret.  Assuming xen_sysexit is
-- * jumped to with a standard stack frame, we can just strip it back to
-- * a standard iret frame and use iret.
-- */
--ENTRY(xen_sysexit)
--	movl PT_EAX(%esp), %eax			/* Shouldn't be necessary? */
--	orl $X86_EFLAGS_IF, PT_EFLAGS(%esp)
--	lea PT_EIP(%esp), %esp
--
--	jmp xen_iret
--ENDPROC(xen_sysexit)
--
--/*
-  * This is run where a normal iret would be run, with the same stack setup:
-  *	8: eflags
-  *	4: cs
---- a/arch/x86/xen/xen-ops.h
-+++ b/arch/x86/xen/xen-ops.h
-@@ -139,9 +139,6 @@ DECL_ASM(void, xen_restore_fl_direct, un
- 
- /* These are not functions, and cannot be called normally */
- __visible void xen_iret(void);
--#ifdef CONFIG_X86_32
--__visible void xen_sysexit(void);
--#endif
- __visible void xen_sysret32(void);
- __visible void xen_sysret64(void);
- __visible void xen_adjust_exception_frame(void);
-
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNS8xOSDkuIrljYg5OjUxLCBDaW5keSBMdSB3cm90ZToKPiBIaSAsSmFzb24KPiBJ
+dCB3b3JrcyBvayBpbiB0aGUgbGF0ZXN0IHZlcnNpb24gb2YgcWVtdSB2ZHBhIGNvZGUgLCBTbyBJ
+IHRoaW5rIHRoZQo+IHBhdGNoIGlzIG9rLgo+IFRoYW5rcwo+IENpbmR5CgoKVGhhbmtzIGZvciB0
+aGUgdGVzdGluZywgKGJ0dywgd2UnZCBiZXR0ZXIgbm90IGRvIHRvcCBwb3N0aW5nIHdoZW4gCmRp
+c2N1c3MgaW4gdGhlIGNvbW11bml0eSkuCgpTbywKCkFja2VkLWJ5OiBKYXNvbiBXYW5nIDxqYXNv
+d2FuZ0ByZWRoYXQuY29tPgoKCgo+IE9uIFdlZCwgTWF5IDEzLCAyMDIwIGF0IDM6MTggUE0gSmFz
+b24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4gd3JvdGU6Cj4+Cj4+IE9uIDIwMjAvNS8xMyDk
+uIvljYgxMjo0MiwgWmh1LCBMaW5nc2hhbiB3cm90ZToKPj4+Cj4+PiBPbiA1LzEzLzIwMjAgMTI6
+MTIgUE0sIEphc29uIFdhbmcgd3JvdGU6Cj4+Pj4gT24gMjAyMC81LzEyIOS4i+WNiDQ6MDAsIFpo
+dSBMaW5nc2hhbiB3cm90ZToKPj4+Pj4gVGhpcyBjb21taXQgbW92ZSBJUlEgcmVxdWVzdCBhbmQg
+ZnJlZSBvcGVyYXRpb25zIGZyb20gcHJvYmUoKQo+Pj4+PiB0byBWSVJUSU8gc3RhdHVzIGNoYW5n
+ZSBoYW5kbGVyIHRvIGNvbXBseSB3aXRoIFZJUlRJTyBzcGVjLgo+Pj4+Pgo+Pj4+PiBWSVJUSU8g
+c3BlYyAxLjEsIHNlY3Rpb24gMi4xLjIgRGV2aWNlIFJlcXVpcmVtZW50czogRGV2aWNlIFN0YXR1
+cyBGaWVsZAo+Pj4+PiBUaGUgZGV2aWNlIE1VU1QgTk9UIGNvbnN1bWUgYnVmZmVycyBvciBzZW5k
+IGFueSB1c2VkIGJ1ZmZlcgo+Pj4+PiBub3RpZmljYXRpb25zIHRvIHRoZSBkcml2ZXIgYmVmb3Jl
+IERSSVZFUl9PSy4KPj4+Pgo+Pj4+IFRoaXMgY29tbWVudCBuZWVkcyB0byBiZSBjaGVja2VkIGFz
+IEkgc2FpZCBwcmV2aW91c2x5LiBJdCdzIG9ubHkKPj4+PiBuZWVkZWQgaWYgd2UncmUgc3VyZSBp
+ZmN2ZiBjYW4gZ2VuZXJhdGUgaW50ZXJydXB0IGJlZm9yZSBEUklWRVJfT0suCj4+Pj4KPj4+Pgo+
+Pj4+PiBTaWduZWQtb2ZmLWJ5OiBaaHUgTGluZ3NoYW4gPGxpbmdzaGFuLnpodUBpbnRlbC5jb20+
+Cj4+Pj4+IC0tLQo+Pj4+PiBjaGFuZ2VzIGZyb20gVjE6Cj4+Pj4+IHJlbW92ZSBpZmN2Zl9zdG9w
+X2RhdGFwYXRoKCkgaW4gc3RhdHVzID09IDAgaGFuZGxlciwgd2UgZG9uJ3QgbmVlZAo+Pj4+PiB0
+byBkbyB0aGlzCj4+Pj4+IHR3aWNlOyBoYW5kbGUgc3RhdHVzID09IDAgYWZ0ZXIgRFJJVkVSX09L
+IC0+ICFEUklWRVJfT0sgaGFuZGxlcgo+Pj4+PiAoSmFzb24gV2FuZykKPj4+Pgo+Pj4+IFBhdGNo
+IGxvb2tzIGdvb2QgdG8gbWUsIGJ1dCB3aXRoIHRoaXMgcGF0Y2ggcGluZyBjYW5ub3Qgd29yayBv
+biBteQo+Pj4+IG1hY2hpbmUuIChJdCB3b3JrcyB3aXRob3V0IHRoaXMgcGF0Y2gpLgo+Pj4+Cj4+
+Pj4gVGhhbmtzCj4+PiBUaGlzIGlzIHN0cmFuZ2UsIGl0IHdvcmtzIG9uIG15IG1hY2hpbmVzLCBs
+ZXQncyBoYXZlIGEgY2hlY2sgb2ZmbGluZS4KPj4+Cj4+PiBUaGFua3MsCj4+PiBCUgo+Pj4gWmh1
+IExpbmdzaGFuCj4+Cj4+IEkgZ2l2ZSBpdCBhIHRyeSB3aXRoIHZpcml0by12cGRhIGFuZCBhIHRp
+bnkgdXNlcnNwYWNlLiBFaXRoZXIgd29ya3MuCj4+Cj4+IFNvIGl0IGNvdWxkIGJlIGFuIGlzc3Vl
+IG9mIHFlbXUgY29kZXMuCj4+Cj4+IExldCdzIHdhaXQgZm9yIENpbmR5IHRvIHRlc3QgaWYgaXQg
+cmVhbGx5IHdvcmtzLgo+Pgo+PiBUaGFua3MKPj4KPj4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0
+dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4
+Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
