@@ -2,67 +2,67 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48D211DA9BF
-	for <lists.virtualization@lfdr.de>; Wed, 20 May 2020 07:16:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B9F21DAA8A
+	for <lists.virtualization@lfdr.de>; Wed, 20 May 2020 08:21:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id F05D385FA4;
-	Wed, 20 May 2020 05:16:46 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C65DA86352;
+	Wed, 20 May 2020 06:20:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4v5kTF-cgzfK; Wed, 20 May 2020 05:16:46 +0000 (UTC)
+	with ESMTP id xMU7HUDBXSFR; Wed, 20 May 2020 06:20:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5D42986099;
-	Wed, 20 May 2020 05:16:46 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BE4D686341;
+	Wed, 20 May 2020 06:20:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3500DC0176;
-	Wed, 20 May 2020 05:16:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 937B9C0176;
+	Wed, 20 May 2020 06:20:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 84179C0176
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DF81AC0176
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 05:16:44 +0000 (UTC)
+ Wed, 20 May 2020 06:20:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 6C13F85FA4
+ by fraxinus.osuosl.org (Postfix) with ESMTP id CD1F186352
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 05:16:44 +0000 (UTC)
+ Wed, 20 May 2020 06:20:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QYGLW4ne3iOU
+ with ESMTP id okc2OI_Uzc9A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 05:16:43 +0000 (UTC)
+ Wed, 20 May 2020 06:20:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 96E2185E06
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 09DDA86341
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 05:16:43 +0000 (UTC)
-IronPort-SDR: YWVvCwP2fjfJgn3sX7UZZmj3hiqLgWyeSVz46m90+LnbTPij7Cp+GMZorMm6PrI9PQ9/WQ6Yu5
- rHo2JqY5t84g==
+ Wed, 20 May 2020 06:20:56 +0000 (UTC)
+IronPort-SDR: GWXEUkLx1xAKNPtGTpJ2AlrNQArAuuGbJJPSNOpHxDjek/ug3z3cFoplLmKWGVA1F8rspoBoZw
+ BEv4BpHdcyCQ==
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 May 2020 22:16:37 -0700
-IronPort-SDR: edQYPoNFAVTUiUGEt675lz/q2cfDj+zYnay8YXQ4q7zlMWS5A+zq/iR4sR2xgE4wfSA3o1J6oO
- sK7Epnexw6kA==
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 May 2020 23:20:56 -0700
+IronPort-SDR: x2Fdt2xSOHw7YfPmhCxnMFRGeCK3edMifCh80yTjNtpGNXLXkte9VzyvKxcs266zgc0cA436t1
+ U8J5oTH25sTw==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,412,1583222400"; d="scan'208";a="264557977"
+X-IronPort-AV: E=Sophos;i="5.73,413,1583222400"; d="scan'208";a="373977914"
 Received: from sjchrist-coffee.jf.intel.com (HELO linux.intel.com)
  ([10.54.74.152])
- by orsmga003.jf.intel.com with ESMTP; 19 May 2020 22:16:37 -0700
-Date: Tue, 19 May 2020 22:16:37 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 19 May 2020 23:20:55 -0700
+Date: Tue, 19 May 2020 23:20:55 -0700
 From: Sean Christopherson <sean.j.christopherson@intel.com>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 64/75] x86/sev-es: Cache CPUID results for improved
- performance
-Message-ID: <20200520051637.GA16599@linux.intel.com>
+Subject: Re: [PATCH v3 25/75] x86/sev-es: Add support for handling IOIO
+ exceptions
+Message-ID: <20200520062055.GA17090@linux.intel.com>
 References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-65-joro@8bytes.org>
+ <20200428151725.31091-26-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200428151725.31091-65-joro@8bytes.org>
+In-Reply-To: <20200428151725.31091-26-joro@8bytes.org>
 User-Agent: Mutt/1.5.24 (2015-08-30)
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
@@ -91,122 +91,143 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 28, 2020 at 05:17:14PM +0200, Joerg Roedel wrote:
-> From: Mike Stunes <mstunes@vmware.com>
+On Tue, Apr 28, 2020 at 05:16:35PM +0200, Joerg Roedel wrote:
+> From: Tom Lendacky <thomas.lendacky@amd.com>
 > 
-> To avoid a future VMEXIT for a subsequent CPUID function, cache the
-> results returned by CPUID into an xarray.
+> Add support for decoding and handling #VC exceptions for IOIO events.
 > 
->  [tl: coding standard changes, register zero extension]
-> 
-> Signed-off-by: Mike Stunes <mstunes@vmware.com>
 > Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-> [ jroedel@suse.de: - Wrapped cache handling into vc_handle_cpuid_cached()
->                    - Used lower_32_bits() where applicable
-> 		   - Moved cache_index out of struct es_em_ctxt ]
+> [ jroedel@suse.de: Adapted code to #VC handling framework ]
 > Co-developed-by: Joerg Roedel <jroedel@suse.de>
 > Signed-off-by: Joerg Roedel <jroedel@suse.de>
 > ---
+>  arch/x86/boot/compressed/sev-es.c |  32 +++++
+>  arch/x86/kernel/sev-es-shared.c   | 202 ++++++++++++++++++++++++++++++
+>  2 files changed, 234 insertions(+)
+> 
+> diff --git a/arch/x86/boot/compressed/sev-es.c b/arch/x86/boot/compressed/sev-es.c
+> index 1241697dd156..17765e471e28 100644
+> --- a/arch/x86/boot/compressed/sev-es.c
+> +++ b/arch/x86/boot/compressed/sev-es.c
+> @@ -23,6 +23,35 @@
 
 ...
 
-> +struct sev_es_cpuid_cache_entry {
-> +	unsigned long eax;
-> +	unsigned long ebx;
-> +	unsigned long ecx;
-> +	unsigned long edx;
-
-Why are these unsigned longs?  CPUID returns 32-bit values, this wastes 16
-bytes per entry.
-
-> +};
-> +
-> +static struct xarray sev_es_cpuid_cache;
-> +static bool __ro_after_init sev_es_cpuid_cache_initialized;
-> +
->  /* For early boot hypervisor communication in SEV-ES enabled guests */
->  static struct ghcb boot_ghcb_page __bss_decrypted __aligned(PAGE_SIZE);
->  
-> @@ -463,6 +474,9 @@ void __init sev_es_init_vc_handling(void)
->  		sev_es_setup_vc_stack(cpu);
->  	}
->  
-> +	xa_init_flags(&sev_es_cpuid_cache, XA_FLAGS_LOCK_IRQ);
-> +	sev_es_cpuid_cache_initialized = true;
-> +
->  	init_vc_stack_names();
->  }
->  
-> @@ -744,6 +758,91 @@ static enum es_result vc_handle_mmio(struct ghcb *ghcb,
->  	return ret;
->  }
->  
-> +static unsigned long sev_es_get_cpuid_cache_index(struct es_em_ctxt *ctxt)
+> +static enum es_result vc_handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
 > +{
-> +	unsigned long hi, lo;
+> +	struct pt_regs *regs = ctxt->regs;
+> +	u64 exit_info_1, exit_info_2;
+> +	enum es_result ret;
 > +
-> +	/* Don't attempt to cache until the xarray is initialized */
-> +	if (!sev_es_cpuid_cache_initialized)
-> +		return ULONG_MAX;
+> +	ret = vc_ioio_exitinfo(ctxt, &exit_info_1);
+> +	if (ret != ES_OK)
+> +		return ret;
 > +
-> +	lo = lower_32_bits(ctxt->regs->ax);
+> +	if (exit_info_1 & IOIO_TYPE_STR) {
+> +		int df = (regs->flags & X86_EFLAGS_DF) ? -1 : 1;
+> +		unsigned int io_bytes, exit_bytes;
+> +		unsigned int ghcb_count, op_count;
+> +		unsigned long es_base;
+> +		u64 sw_scratch;
 > +
-> +	/*
-> +	 * CPUID 0x0000000d requires both RCX and XCR0, so it can't be
-> +	 * cached.
-> +	 */
-> +	if (lo == 0x0000000d)
-> +		return ULONG_MAX;
-> +
-> +	/*
-> +	 * Some callers of CPUID don't always set RCX to zero for CPUID
-> +	 * functions that don't require RCX, which can result in excessive
-> +	 * cached values, so RCX needs to be manually zeroed for use as part
-> +	 * of the cache index. Future CPUID values may need RCX, but since
-> +	 * they can't be known, they must not be cached.
-> +	 */
-> +	if (lo > 0x80000020)
-> +		return ULONG_MAX;
-> +
-> +	switch (lo) {
-> +	case 0x00000007:
+> +		/*
+> +		 * For the string variants with rep prefix the amount of in/out
+> +		 * operations per #VC exception is limited so that the kernel
+> +		 * has a chance to take interrupts an re-schedule while the
+> +		 * instruction is emulated.
 
-OSPKE may or may not be cached correctly depending on when
-sev_es_cpuid_cache_initialized is set.
+Doesn't this also suppress single-step #DBs?
 
-> +	case 0x0000000b:
-> +	case 0x0000000f:
-> +	case 0x00000010:
-> +	case 0x8000001d:
-> +	case 0x80000020:
-> +		hi = ctxt->regs->cx << 32;
-> +		break;
-> +	default:
-> +		hi = 0;
+> +		 */
+> +		io_bytes   = (exit_info_1 >> 4) & 0x7;
+> +		ghcb_count = sizeof(ghcb->shared_buffer) / io_bytes;
+> +
+> +		op_count    = (exit_info_1 & IOIO_REP) ? regs->cx : 1;
+> +		exit_info_2 = min(op_count, ghcb_count);
+> +		exit_bytes  = exit_info_2 * io_bytes;
+> +
+> +		es_base = insn_get_seg_base(ctxt->regs, INAT_SEG_REG_ES);
+> +
+> +		if (!(exit_info_1 & IOIO_TYPE_IN)) {
+> +			ret = vc_insn_string_read(ctxt,
+> +					       (void *)(es_base + regs->si),
+
+SEV(-ES) is 64-bit only, why bother with the es_base charade?
+
+> +					       ghcb->shared_buffer, io_bytes,
+> +					       exit_info_2, df);
+
+df handling is busted, it's aways non-zero.  Same goes for the SI/DI
+adjustments below.
+
+> +			if (ret)
+> +				return ret;
+> +		}
+> +
+> +		sw_scratch = __pa(ghcb) + offsetof(struct ghcb, shared_buffer);
+> +		ghcb_set_sw_scratch(ghcb, sw_scratch);
+> +		ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_IOIO,
+> +				   exit_info_1, exit_info_2);
+> +		if (ret != ES_OK)
+> +			return ret;
+
+Batching the memory accesses and I/O accesses separately is technically
+wrong, e.g. a #DB on a memory access will result in bogus data being shown
+in the debugger.  In practice it seems unlikely to matter, but I'm curious
+as to why string I/O is supported in the first place.  I didn't think there
+was that much string I/O in the kernel?
+
+> +
+> +		/* Everything went well, write back results */
+> +		if (exit_info_1 & IOIO_TYPE_IN) {
+> +			ret = vc_insn_string_write(ctxt,
+> +						(void *)(es_base + regs->di),
+> +						ghcb->shared_buffer, io_bytes,
+> +						exit_info_2, df);
+> +			if (ret)
+> +				return ret;
+> +
+> +			if (df)
+> +				regs->di -= exit_bytes;
+> +			else
+> +				regs->di += exit_bytes;
+> +		} else {
+> +			if (df)
+> +				regs->si -= exit_bytes;
+> +			else
+> +				regs->si += exit_bytes;
+> +		}
+> +
+> +		if (exit_info_1 & IOIO_REP)
+> +			regs->cx -= exit_info_2;
+> +
+> +		ret = regs->cx ? ES_RETRY : ES_OK;
+> +
+> +	} else {
+> +		int bits = (exit_info_1 & 0x70) >> 1;
+> +		u64 rax = 0;
+> +
+> +		if (!(exit_info_1 & IOIO_TYPE_IN))
+> +			rax = lower_bits(regs->ax, bits);
+> +
+> +		ghcb_set_rax(ghcb, rax);
+> +
+> +		ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_IOIO, exit_info_1, 0);
+> +		if (ret != ES_OK)
+> +			return ret;
+> +
+> +		if (exit_info_1 & IOIO_TYPE_IN) {
+> +			if (!ghcb_is_valid_rax(ghcb))
+> +				return ES_VMM_ERROR;
+> +			regs->ax = lower_bits(ghcb->save.rax, bits);
+> +		}
 > +	}
 > +
-> +	return hi | lo;
-
-This needs to be way more restrictive on what is cached.  Unless I've
-overlooked something, this lets userspace trigger arbitrary, unaccounted
-kernel memory allocations.  E.g.
-
-	for (i = 0; i <= 0x80000020; i++) {
-		for (j = 0; j <= 0xffffffff; j++) {
-			cpuid(i, j);
-			if (i != 7 || i != 0xb || i != 0xf || i != 0x10 ||
-			    i != 0x8000001d || i != 0x80000020)
-				break;
-		}
-	}
-
-The whole cache on-demand approach seems like overkill.  The number of CPUID
-leaves that are invoked after boot with any regularity can probably be counted
-on one hand.   IIRC glibc invokes CPUID to gather TLB/cache info, XCR0-based
-features, and one or two other leafs.  A statically sized global array that's
-arbitrarily index a la x86_capability would be just as simple and more
-performant.  It would also allow fancier things like emulating CPUID 0xD in
-the guest if you want to go down that road.
+> +	return ret;
+> +}
+> -- 
+> 2.17.1
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
