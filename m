@@ -1,80 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BD711DBDEB
-	for <lists.virtualization@lfdr.de>; Wed, 20 May 2020 21:22:45 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id AEA2A1DD5B0
+	for <lists.virtualization@lfdr.de>; Thu, 21 May 2020 20:08:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 220BF870B5;
-	Wed, 20 May 2020 19:22:44 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id E8C81203E8;
+	Thu, 21 May 2020 18:08:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id U8xdTNPwdgDM; Wed, 20 May 2020 19:22:43 +0000 (UTC)
+	with ESMTP id dFX8tFyFXIEV; Thu, 21 May 2020 18:08:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 9E2D3870B6;
-	Wed, 20 May 2020 19:22:43 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A479920418;
+	Thu, 21 May 2020 18:08:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7CAB6C0176;
-	Wed, 20 May 2020 19:22:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 77DF5C0176;
+	Thu, 21 May 2020 18:08:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5014DC0176
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DDD03C0176
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 19:22:41 +0000 (UTC)
+ Thu, 21 May 2020 18:08:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 37C8E870B6
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C5D8F87376
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 19:22:41 +0000 (UTC)
+ Thu, 21 May 2020 18:08:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ycxBdssXJbOt
+ with ESMTP id jZbyLRT_bvaA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 19:22:39 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id A084E870B5
+ Thu, 21 May 2020 18:08:46 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 20C2E87375
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 May 2020 19:22:39 +0000 (UTC)
-Received: from zn.tnic (p200300ec2f0bab0028d24a65f02999fe.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f0b:ab00:28d2:4a65:f029:99fe])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 729681EC0350;
- Wed, 20 May 2020 21:22:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1590002556;
+ Thu, 21 May 2020 18:08:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1590084524;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=YoNcQo6x1W8TxzWUCk2SRnUEN6+ujdV8K1zMMMM7K9w=;
- b=QnDgj2c7erKXF3m48N2kXaCZYdPDB5MWID4LlHGbzp/0OLMhpPWVLM4Ckuu+4FzqSymM2b
- Tn1sEI7aI7cqIuJQ5hI/AOTJELuDaDwk+EATRLjvONMnutf0FLFVVYGLQ8g9ONbAl0jE49
- jCzdAiOusfz1gfqvMpn9h0w2u4PG2Po=
-Date: Wed, 20 May 2020 21:22:30 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 42/75] x86/sev-es: Setup GHCB based boot #VC handler
-Message-ID: <20200520192230.GK1457@zn.tnic>
-References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-43-joro@8bytes.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=CSwVUGMdm1SF/JKvVgrgcJwpikT7dcnsVODRPnenSIQ=;
+ b=AwaSGcsE7chVA8hMIziG7fqggYULAnw5C+/8wc4ozWIMOrCSmlOQxM8hW3fBzoNxHtUQFk
+ HgT1+YRKn3ZJFgAhhwzW1tvN0kIYNc9n4gMYwas2wYFNHjlBLWuiWdumx9p1kdkT43jeg2
+ 1ZuAHCDko7riyCWMjUB0L/kef77eRJI=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-62-_mDPuHxRNbyAwiR99NEpPw-1; Thu, 21 May 2020 14:08:40 -0400
+X-MC-Unique: _mDPuHxRNbyAwiR99NEpPw-1
+Received: by mail-wr1-f70.google.com with SMTP id p13so3249755wrt.1
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 21 May 2020 11:08:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition;
+ bh=CSwVUGMdm1SF/JKvVgrgcJwpikT7dcnsVODRPnenSIQ=;
+ b=mLgVaHinpzf/jr1lgTKj9LVdqDX/J8VHCfRbAQn8oxOxW631jqJNcieTurZxEpevn4
+ RqIH3tYe95pJBqZuO3XZIXFBEWuW0Z7JUeyCMhyaPoMMCAuP3V1+0aIb1Im1m41EhAyh
+ gqdrEFlCLXUBjeuCaOE9DQj6JIhngmle4U1yTWKDw0XObNsNuNVsq9ki9YpxYO0qAyRh
+ knQyorJpteyNzoouu0Q8e/YvgCP8lcnrsul97voIp4LxIQUbmo2r3veekYXa3l8PMRf+
+ 5CSgYT8rHwdsU5wbb5XRiL7iP5hMpijTaQOJGvP7lUd86av5gNmqlh7GkXBSWQI2gdic
+ hvkQ==
+X-Gm-Message-State: AOAM533B1+4Fbyv66HVdjsPINXmR0M9MgnTLBiGInuSadHHO8N+sZKsx
+ Qte2zbHWTPn0OZFAkFO2d9R/JQKtm4L0Ra80uHUg0WDwPfvmq7+PyvEK53tcsSL756P0ggn3XDD
+ +cZolU5MgcqEYE3Stx5rc5BVbHSHQ03jN20dJFh1HwQ==
+X-Received: by 2002:a5d:6087:: with SMTP id w7mr10437014wrt.158.1590084518725; 
+ Thu, 21 May 2020 11:08:38 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxZ9o08gBH7tx0yYBsN8onaJW/OLPfFqqFDCwm2ORoSsfevxSpfrqifuC4Sj9PcOKKkhR/Jqg==
+X-Received: by 2002:a5d:6087:: with SMTP id w7mr10436991wrt.158.1590084518323; 
+ Thu, 21 May 2020 11:08:38 -0700 (PDT)
+Received: from redhat.com (bzq-109-64-41-91.red.bezeqint.net. [109.64.41.91])
+ by smtp.gmail.com with ESMTPSA id
+ j1sm7269700wrm.40.2020.05.21.11.08.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 May 2020 11:08:37 -0700 (PDT)
+Date: Thu, 21 May 2020 14:08:35 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: [GIT PULL] vhost/vdpa: minor fixes
+Message-ID: <20200521140835-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20200428151725.31091-43-joro@8bytes.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
- x86@kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+Cc: lkp@intel.com, kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+ yuehaibing@huawei.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,120 +107,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Apr 28, 2020 at 05:16:52PM +0200, Joerg Roedel wrote:
-> diff --git a/arch/x86/include/asm/sev-es.h b/arch/x86/include/asm/sev-es.h
-> index b2cbcd40b52e..e1ed963a57ec 100644
-> --- a/arch/x86/include/asm/sev-es.h
-> +++ b/arch/x86/include/asm/sev-es.h
-> @@ -74,5 +74,6 @@ static inline u64 lower_bits(u64 val, unsigned int bits)
->  }
->  
->  extern void vc_no_ghcb(void);
-> +extern bool vc_boot_ghcb(struct pt_regs *regs);
+The following changes since commit 0b841030625cde5f784dd62aec72d6a766faae70:
 
-Those function names need verbs:
+  vhost: vsock: kick send_pkt worker once device is started (2020-05-02 10:28:21 -0400)
 
-	handle_vc_no_ghcb
-	handle_vc_boot_ghcb
+are available in the Git repository at:
 
-> @@ -161,3 +176,104 @@ static enum es_result vc_read_mem(struct es_em_ctxt *ctxt,
->  
->  /* Include code shared with pre-decompression boot stage */
->  #include "sev-es-shared.c"
-> +
-> +/*
-> + * This function runs on the first #VC exception after the kernel
-> + * switched to virtual addresses.
-> + */
-> +static bool __init sev_es_setup_ghcb(void)
+  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
 
-There's already another sev_es_setup_ghcb() in compressed/. All those
-functions with the same name are just confusion waiting to happen. Let's
-prepend the ones in compressed/ with "early_" or so, so that their names
-are at least different even if they're in two different files with the
-same name.
+for you to fetch changes up to 1b0be99f1a426d9f17ced95c4118c6641a2ff13d:
 
-This way you know at least which function is used in which boot stages.
+  vhost: missing __user tags (2020-05-15 11:36:31 -0400)
 
-> +{
-> +	/* First make sure the hypervisor talks a supported protocol. */
-> +	if (!sev_es_negotiate_protocol())
-> +		return false;
+----------------------------------------------------------------
+virtio: build warning fixes
 
-<---- newline here.
+Fix a couple of build warnings.
 
-> +	/*
-> +	 * Clear the boot_ghcb. The first exception comes in before the bss
-> +	 * section is cleared.
-> +	 */
-> +	memset(&boot_ghcb_page, 0, PAGE_SIZE);
-> +
-> +	/* Alright - Make the boot-ghcb public */
-> +	boot_ghcb = &boot_ghcb_page;
-> +
-> +	return true;
-> +}
-> +
-> +static void __init vc_early_vc_forward_exception(struct es_em_ctxt *ctxt)
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 
-That second "vc" looks redundant.
+----------------------------------------------------------------
+Michael S. Tsirkin (1):
+      vhost: missing __user tags
 
-> +{
-> +	int trapnr = ctxt->fi.vector;
-> +
-> +	if (trapnr == X86_TRAP_PF)
-> +		native_write_cr2(ctxt->fi.cr2);
-> +
-> +	ctxt->regs->orig_ax = ctxt->fi.error_code;
-> +	do_early_exception(ctxt->regs, trapnr);
-> +}
-> +
-> +static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
-> +					 struct ghcb *ghcb,
-> +					 unsigned long exit_code)
-> +{
-> +	enum es_result result;
-> +
-> +	switch (exit_code) {
-> +	default:
-> +		/*
-> +		 * Unexpected #VC exception
-> +		 */
-> +		result = ES_UNSUPPORTED;
-> +	}
-> +
-> +	return result;
-> +}
-> +
-> +bool __init vc_boot_ghcb(struct pt_regs *regs)
-> +{
-> +	unsigned long exit_code = regs->orig_ax;
-> +	struct es_em_ctxt ctxt;
-> +	enum es_result result;
-> +
-> +	/* Do initial setup or terminate the guest */
-> +	if (unlikely(boot_ghcb == NULL && !sev_es_setup_ghcb()))
-> +		sev_es_terminate(GHCB_SEV_ES_REASON_GENERAL_REQUEST);
-> +
-> +	vc_ghcb_invalidate(boot_ghcb);
+YueHaibing (1):
+      vdpasim: remove unused variable 'ret'
 
-Newline here...
+ drivers/vdpa/vdpa_sim/vdpa_sim.c | 15 +++++++--------
+ drivers/vhost/vhost.c            |  4 ++--
+ 2 files changed, 9 insertions(+), 10 deletions(-)
 
-> +	result = vc_init_em_ctxt(&ctxt, regs, exit_code);
-> +
-
-... remove that one here.
-
-> +	if (result == ES_OK)
-> +		result = vc_handle_exitcode(&ctxt, boot_ghcb, exit_code);
-
-...
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
