@@ -1,69 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97B4D1DE37D
-	for <lists.virtualization@lfdr.de>; Fri, 22 May 2020 11:49:19 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 721F31DE7A1
+	for <lists.virtualization@lfdr.de>; Fri, 22 May 2020 15:06:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 40DFB894D5;
-	Fri, 22 May 2020 09:49:18 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 02780204E2;
+	Fri, 22 May 2020 13:06:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vSIK-rnMLtSw; Fri, 22 May 2020 09:49:17 +0000 (UTC)
+	with ESMTP id rcyCiDOXhnQ4; Fri, 22 May 2020 13:06:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1F0B8894D1;
-	Fri, 22 May 2020 09:49:17 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4764220000;
+	Fri, 22 May 2020 13:06:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id ED141C0176;
-	Fri, 22 May 2020 09:49:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0FDFAC0176;
+	Fri, 22 May 2020 13:06:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E814FC0176
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CB980C0176
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 May 2020 09:49:14 +0000 (UTC)
+ Fri, 22 May 2020 13:06:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id DDAF48789F
+ by whitealder.osuosl.org (Postfix) with ESMTP id B3D0D88A9D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 May 2020 09:49:14 +0000 (UTC)
+ Fri, 22 May 2020 13:06:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ESxQcgVya5QS
+ with ESMTP id hMuslKx0ouR1
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 May 2020 09:49:14 +0000 (UTC)
+ Fri, 22 May 2020 13:06:52 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 22A088789E
+ by whitealder.osuosl.org (Postfix) with ESMTPS id BBBF488AA0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 May 2020 09:49:14 +0000 (UTC)
-Received: from zn.tnic (p200300ec2f0d490039ac3da161697ee8.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f0d:4900:39ac:3da1:6169:7ee8])
+ Fri, 22 May 2020 13:06:51 +0000 (UTC)
+Received: from zn.tnic (p200300ec2f0d4900a503efeda57d2ecc.dip0.t-ipconnect.de
+ [IPv6:2003:ec:2f0d:4900:a503:efed:a57d:2ecc])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 4835B1EC02B3;
- Fri, 22 May 2020 11:49:11 +0200 (CEST)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 2897F1EC02DD;
+ Fri, 22 May 2020 15:06:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1590140951;
+ t=1590152808;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=YorJd/UW8za62EgPzsjhTpQQFYtsUWpCAha43MJPlmY=;
- b=OQ8IdOxfgaN59mWcAQ2EW+kyXp9W7iNleMbU9QRcSczAwRB4AoYt9bsh9oiD+jA1E5C4d7
- qcDbGLG84wTar1XjR7laE98dvyeQ+ot7gGFjwmOumjn076xMDKLuBSpcKtbWTMdVmrD8G3
- A3yC791s6qaS+v1C64KCSVJ4ZYb5nNE=
-Date: Fri, 22 May 2020 11:49:04 +0200
+ bh=f1OkI+Vzd1wskJk7/8gnkbFS2SZjRjcQWBV0MrHyvlg=;
+ b=bJ2ETP+3jHY1hqbeNezyvTjFa461+jPOrZry8F9S8xH16sZfFsvcFIHR4ksBQqYeiw+S2+
+ QwhfpseLeEH4DgPNmZaOuxK5/qhQKZmV5EWN7wNcKxZf54FA6/HkFcfoZwM5iM2FqzJBsF
+ Haik+YqW5g+WJyUteTXbhb/9XVBguPo=
+Date: Fri, 22 May 2020 15:06:41 +0200
 From: Borislav Petkov <bp@alien8.de>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 44/75] x86/sev-es: Allocate and Map IST stacks for #VC
- handler
-Message-ID: <20200522094904.GB28750@zn.tnic>
+Subject: Re: [PATCH v3 45/75] x86/dumpstack/64: Handle #VC exception stacks
+Message-ID: <20200522130641.GE28750@zn.tnic>
 References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-45-joro@8bytes.org>
+ <20200428151725.31091-46-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200428151725.31091-45-joro@8bytes.org>
+In-Reply-To: <20200428151725.31091-46-joro@8bytes.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
@@ -91,118 +90,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Dropping thellstrom@vmware.com from Cc from now on because of some
-microsloth mail rule not delivering my mails.
+On Tue, Apr 28, 2020 at 05:16:55PM +0200, Joerg Roedel wrote:
+> diff --git a/arch/x86/include/asm/stacktrace.h b/arch/x86/include/asm/stacktrace.h
+> index 14db05086bbf..2f3534ef4b5f 100644
+> --- a/arch/x86/include/asm/stacktrace.h
+> +++ b/arch/x86/include/asm/stacktrace.h
+> @@ -21,6 +21,10 @@ enum stack_type {
+>  	STACK_TYPE_ENTRY,
+>  	STACK_TYPE_EXCEPTION,
+>  	STACK_TYPE_EXCEPTION_LAST = STACK_TYPE_EXCEPTION + N_EXCEPTION_STACKS-1,
+> +#ifdef CONFIG_X86_64
 
-On Tue, Apr 28, 2020 at 05:16:54PM +0200, Joerg Roedel wrote:
-> From: Joerg Roedel <jroedel@suse.de>
-> 
-> Allocate and map enough stacks for the #VC handler to support sufficient
-> levels of nesting and the NMI-in-#VC scenario.
-> 
-> Also setup the IST entrys for the #VC handler on all CPUs because #VC
+CONFIG_AMD_MEM_ENCRYPT
 
-		"entries"
-
-> needs to work before cpu_init() has set up the per-cpu TSS.
-
-Add a sentence to the commit message pointing to that "VC Handler IST
-Stacks" comment in the code explaining the justification for the need
-for IST stacks and the nesting.
-
-> 
-> Signed-off-by: Joerg Roedel <jroedel@suse.de>
-> ---
->  arch/x86/include/asm/cpu_entry_area.h | 61 +++++++++++++++++++++++++++
->  arch/x86/include/asm/page_64_types.h  |  1 +
->  arch/x86/kernel/cpu/common.c          |  1 +
->  arch/x86/kernel/sev-es.c              | 40 ++++++++++++++++++
->  4 files changed, 103 insertions(+)
-> 
-> diff --git a/arch/x86/include/asm/cpu_entry_area.h b/arch/x86/include/asm/cpu_entry_area.h
-> index 02c0078d3787..85aac6c63653 100644
-> --- a/arch/x86/include/asm/cpu_entry_area.h
-> +++ b/arch/x86/include/asm/cpu_entry_area.h
-> @@ -64,6 +64,61 @@ enum exception_stack_ordering {
->  #define CEA_ESTACK_PAGES					\
->  	(sizeof(struct cea_exception_stacks) / PAGE_SIZE)
+> +	STACK_TYPE_VC,
+> +	STACK_TYPE_VC_LAST = STACK_TYPE_VC + N_VC_STACKS - 1,
+> +#endif
+>  };
 >  
-> +/*
-> + * VC Handler IST Stacks
-> + *
-> + * The IST stacks for the #VC handler are only allocated when SEV-ES is active,
-> + * so they are not part of 'struct exception_stacks'.
-> + *
-> + * The VC handler uses shift_ist so that #VC can be nested. Nesting happens for
-> + * example when the #VC handler has to call printk in the case of and error or
-
-								     "an"
-
-> + * when emulating 'movs' instructions.
-> + *
-> + * NMIs are another special case which can cause nesting of #VC handlers. The
-> + * do_nmi() code path can cause #VC, e.g. for RDPMC. An NMI can also hit in
-> + * the time window when the #VC handler is raised but before it has shifted its
-> + * IST entry. To make sure any #VC raised from the NMI code path uses a new
-> + * stack, the NMI handler unconditionally shifts the #VC handlers IST entry.
-> + * This can cause one IST stack for #VC to be omitted.
-> + *
-> + * To support sufficient levels of nesting for the #VC handler, make the number
-> + * of nesting levels configurable. It is currently set to 5 to support this
-> + * scenario:
-> + *
-> + * #VC - IST stack 4, IST entry already shifted to 3
-> + *
-> + *     -> NMI - shifts #VC IST entry to 2
-> + *
-> + *     -> #VC(RDPMC) - shifts #VC IST to 1, something goes wrong, print
-> + *                     an error message
-> + *
-> + *     -> #VC(printk) - shifts #VC IST entry to 0, output driver
-> + *                      uses 'movs'
-> + *
-> + *     -> #VC(movs) - shifts IST to unmapped stack, further #VCs will
-> + *                    cause #DF
-> + *
-> + */
-> +#define N_VC_STACKS		5
-> +
-> +#define VC_STACK_MEMBERS(guardsize, holesize)			\
-> +	char	hole[holesize];					\
-> +	struct {						\
-> +		char guard[guardsize];				\
-> +		char stack[EXCEPTION_STKSZ];			\
-> +	} stacks[N_VC_STACKS];					\
-> +	char top_guard[guardsize];				\
-> +
-> +/* Physical storage */
-> +struct vmm_exception_stacks {
-> +	VC_STACK_MEMBERS(0, 0)
-> +};
-> +
-> +/* Mapping in cpu_entry_area */
-> +struct cea_vmm_exception_stacks {
-> +	VC_STACK_MEMBERS(PAGE_SIZE, EXCEPTION_STKSZ)
-> +};
-
-All those things should be under an CONFIG_AMD_MEM_ENCRYPT ifdeffery.
-
-> +
->  #endif
+>  struct stack_info {
+> diff --git a/arch/x86/kernel/dumpstack_64.c b/arch/x86/kernel/dumpstack_64.c
+> index 87b97897a881..2468963c1424 100644
+> --- a/arch/x86/kernel/dumpstack_64.c
+> +++ b/arch/x86/kernel/dumpstack_64.c
+> @@ -18,6 +18,7 @@
 >  
->  #ifdef CONFIG_X86_32
-> @@ -110,6 +165,12 @@ struct cpu_entry_area {
->  	 * Exception stacks used for IST entries with guard pages.
->  	 */
->  	struct cea_exception_stacks estacks;
-> +
-> +	/*
-> +	 * IST Exception stacks for VC handler - Only allocated and mapped when
-> +	 * SEV-ES is active.
-> +	 */
-> +	struct cea_vmm_exception_stacks vc_stacks;
+>  #include <asm/cpu_entry_area.h>
+>  #include <asm/stacktrace.h>
+> +#include <asm/sev-es.h>
+>  
+>  static const char * const exception_stack_names[] = {
+>  		[ ESTACK_DF	]	= "#DF",
+> @@ -47,6 +48,9 @@ const char *stack_type_name(enum stack_type type)
+>  	if (type >= STACK_TYPE_EXCEPTION && type <= STACK_TYPE_EXCEPTION_LAST)
+>  		return exception_stack_names[type - STACK_TYPE_EXCEPTION];
+>  
+> +	if (type >= STACK_TYPE_VC && type <= STACK_TYPE_VC_LAST)
 
-Ditto.
+That test can be inside vc_stack_name() so that it gets optimized away
+for !CONFIG_AMD_MEM_ENCRYPT and there's no need for ifdeffery.
 
 -- 
 Regards/Gruss,
