@@ -1,63 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E43E1E10DF
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id E78211E10E0
 	for <lists.virtualization@lfdr.de>; Mon, 25 May 2020 16:45:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3C98486819;
+	by hemlock.osuosl.org (Postfix) with ESMTP id A066E87C76;
 	Mon, 25 May 2020 14:45:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tlxWnKMRkjaF; Mon, 25 May 2020 14:45:06 +0000 (UTC)
+	with ESMTP id w7f-vBs6876j; Mon, 25 May 2020 14:45:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A4E0886A14;
-	Mon, 25 May 2020 14:45:06 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D27FD87E97;
+	Mon, 25 May 2020 14:45:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 70CA5C016F;
-	Mon, 25 May 2020 14:45:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B5FF6C016F;
+	Mon, 25 May 2020 14:45:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B3977C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 19BADC016F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 May 2020 14:45:04 +0000 (UTC)
+ Mon, 25 May 2020 14:45:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 9DD6E21F5A
+ by silver.osuosl.org (Postfix) with ESMTP id 090542052B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 May 2020 14:45:04 +0000 (UTC)
+ Mon, 25 May 2020 14:45:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CIz5ukBOWiWy
+ with ESMTP id 0EggyN1MAHbt
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 May 2020 14:45:03 +0000 (UTC)
+ Mon, 25 May 2020 14:45:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by silver.osuosl.org (Postfix) with ESMTPS id 699712052B
+ by silver.osuosl.org (Postfix) with ESMTPS id 72C2E203BE
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 May 2020 14:45:03 +0000 (UTC)
-IronPort-SDR: xCnzHkhSOBoJ1UBD+LSu6bkiu2DsfOTCQgTkkXiQ3KP/woopkZoa8XNRsjqRPj+1HUk3uqJopk
- vxhXXWLwU7rg==
+ Mon, 25 May 2020 14:45:05 +0000 (UTC)
+IronPort-SDR: OJbKQvf1jHNusSSbHytDuR2rexs++NpMq0G9HwzNdkOI54qCdaP7LiqzDfl7cj5QuKIgsuG+I7
+ 029XwGIxztdA==
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 May 2020 07:45:02 -0700
-IronPort-SDR: yV9Ov9Gz0kuWU9Db5dVuhIzcw6jQcENaX56MOivfEnDBMq2FTcuyEcc8IgmIL0CDheHN5rBXhg
- 666GxjYJsifQ==
+ 25 May 2020 07:45:05 -0700
+IronPort-SDR: ZARH7TqTOXBIcr+UZK902lPAlXXpqow1iZGtYTLq/gULvQT3CpFEc0h4G1Cl9XllPA056+uEUx
+ UDdP3ZSLQoXA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,433,1583222400"; d="scan'208";a="266165815"
+X-IronPort-AV: E=Sophos;i="5.73,433,1583222400"; d="scan'208";a="266165828"
 Received: from gliakhov-mobl2.ger.corp.intel.com (HELO
  ubuntu.ger.corp.intel.com) ([10.249.41.109])
- by orsmga003.jf.intel.com with ESMTP; 25 May 2020 07:44:59 -0700
+ by orsmga003.jf.intel.com with ESMTP; 25 May 2020 07:45:02 -0700
 From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
 To: kvm@vger.kernel.org
-Subject: [PATCH v2 0/5] Add a vhost RPMsg API
-Date: Mon, 25 May 2020 16:44:53 +0200
-Message-Id: <20200525144458.8413-1-guennadi.liakhovetski@linux.intel.com>
+Subject: [PATCH v2 1/5] vhost: convert VHOST_VSOCK_SET_RUNNING to a generic
+ ioctl
+Date: Mon, 25 May 2020 16:44:54 +0200
+Message-Id: <20200525144458.8413-2-guennadi.liakhovetski@linux.intel.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200525144458.8413-1-guennadi.liakhovetski@linux.intel.com>
+References: <20200525144458.8413-1-guennadi.liakhovetski@linux.intel.com>
 MIME-Version: 1.0
 Cc: Ohad Ben-Cohen <ohad@wizery.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  linux-remoteproc@vger.kernel.org,
@@ -82,49 +85,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-v2:
-- remove "default n" from Kconfig
-- drop patch #6 - it depends on a different patch, that is currently 
-  an RFC
-- update patch #5 with a correct vhost_dev_init() prototype
+VHOST_VSOCK_SET_RUNNING is used by the vhost vsock driver to perform
+crucial VirtQueue initialisation, like assigning .private fields and
+calling vhost_vq_init_access(), and clean up. However, this ioctl is
+actually extremely useful for any vhost driver, that doesn't have a
+side channel to inform it of a status change, e.g. upon a guest
+reboot. This patch makes that ioctl generic, while preserving its
+numeric value and also keeping the original alias.
 
-Linux supports RPMsg over VirtIO for "remote processor" /AMP use
-cases. It can however also be used for virtualisation scenarios,
-e.g. when using KVM to run Linux on both the host and the guests.
-This patch set adds a wrapper API to facilitate writing vhost
-drivers for such RPMsg-based solutions. The first use case is an
-audio DSP virtualisation project, currently under development, ready
-for review and submission, available at
-https://github.com/thesofproject/linux/pull/1501/commits
-A further patch for the ADSP vhost RPMsg driver will be sent
-separately for review only since it cannot be merged without audio
-patches being upstreamed first.
+Signed-off-by: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
+---
+ include/uapi/linux/vhost.h | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Thanks
-Guennadi
-
-Guennadi Liakhovetski (5):
-  vhost: convert VHOST_VSOCK_SET_RUNNING to a generic ioctl
-  vhost: (cosmetic) remove a superfluous variable initialisation
-  rpmsg: move common structures and defines to headers
-  rpmsg: update documentation
-  vhost: add an rpmsg API
-
- Documentation/rpmsg.txt          |   2 +-
- drivers/rpmsg/virtio_rpmsg_bus.c |  78 +-------
- drivers/vhost/Kconfig            |   7 +
- drivers/vhost/Makefile           |   3 +
- drivers/vhost/rpmsg.c            | 372 +++++++++++++++++++++++++++++++++++++++
- drivers/vhost/vhost.c            |   2 +-
- drivers/vhost/vhost_rpmsg.h      |  74 ++++++++
- include/linux/virtio_rpmsg.h     |  81 +++++++++
- include/uapi/linux/rpmsg.h       |   3 +
- include/uapi/linux/vhost.h       |   4 +-
- 10 files changed, 547 insertions(+), 79 deletions(-)
- create mode 100644 drivers/vhost/rpmsg.c
- create mode 100644 drivers/vhost/vhost_rpmsg.h
- create mode 100644 include/linux/virtio_rpmsg.h
-
+diff --git a/include/uapi/linux/vhost.h b/include/uapi/linux/vhost.h
+index 9fe72e4..b54af9d 100644
+--- a/include/uapi/linux/vhost.h
++++ b/include/uapi/linux/vhost.h
+@@ -93,6 +93,8 @@
+ #define VHOST_SET_BACKEND_FEATURES _IOW(VHOST_VIRTIO, 0x25, __u64)
+ #define VHOST_GET_BACKEND_FEATURES _IOR(VHOST_VIRTIO, 0x26, __u64)
+ 
++#define VHOST_SET_RUNNING _IOW(VHOST_VIRTIO, 0x61, int)
++
+ /* VHOST_NET specific defines */
+ 
+ /* Attach virtio net ring to a raw socket, or tap device.
+@@ -114,7 +116,7 @@
+ /* VHOST_VSOCK specific defines */
+ 
+ #define VHOST_VSOCK_SET_GUEST_CID	_IOW(VHOST_VIRTIO, 0x60, __u64)
+-#define VHOST_VSOCK_SET_RUNNING		_IOW(VHOST_VIRTIO, 0x61, int)
++#define VHOST_VSOCK_SET_RUNNING		VHOST_SET_RUNNING
+ 
+ /* VHOST_VDPA specific defines */
+ 
 -- 
 1.9.3
 
