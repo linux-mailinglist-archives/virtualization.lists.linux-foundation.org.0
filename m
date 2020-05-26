@@ -1,69 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 416111E23B4
-	for <lists.virtualization@lfdr.de>; Tue, 26 May 2020 16:11:42 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE0C31E23B5
+	for <lists.virtualization@lfdr.de>; Tue, 26 May 2020 16:11:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 815BB87744;
-	Tue, 26 May 2020 14:11:40 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 88C258203A;
+	Tue, 26 May 2020 14:11:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 X-Amavis-Alert: BAD HEADER SECTION, Header field occurs more than once: "To"
 	occurs 3 times
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OBLTDz2CWNpJ; Tue, 26 May 2020 14:11:39 +0000 (UTC)
+	with ESMTP id I8TyG5LT83Om; Tue, 26 May 2020 14:11:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id BBCC987748;
-	Tue, 26 May 2020 14:11:39 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 0118D82B51;
+	Tue, 26 May 2020 14:11:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 924DAC016F;
-	Tue, 26 May 2020 14:11:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D0BDDC016F;
+	Tue, 26 May 2020 14:11:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 85AB9C016F
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4D306C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 May 2020 14:11:38 +0000 (UTC)
+ Tue, 26 May 2020 14:11:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 6E6A088471
+ by silver.osuosl.org (Postfix) with ESMTP id 33D1623143
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 May 2020 14:11:38 +0000 (UTC)
+ Tue, 26 May 2020 14:11:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 X-Amavis-Alert: BAD HEADER SECTION, Header field occurs more than once: "To"
  occurs 3 times
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WkaYf-u5hfPG
+ with ESMTP id bCZGvFcI064N
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 May 2020 14:11:37 +0000 (UTC)
+ Tue, 26 May 2020 14:11:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id CF01C8836C
+ by silver.osuosl.org (Postfix) with ESMTPS id 0348C20425
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 May 2020 14:11:37 +0000 (UTC)
+ Tue, 26 May 2020 14:11:38 +0000 (UTC)
 Received: from localhost (unknown [137.135.114.1])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6CD55207CB;
- Tue, 26 May 2020 14:11:37 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8410D207FB;
+ Tue, 26 May 2020 14:11:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1590502297;
- bh=hUhxPDQEnB3ocs2Pc0Otn9EbQkR7u6VZynngvzWLlQo=;
- h=Date:From:To:To:To:CC:Cc:Cc:Cc:Cc:Cc:Cc:Cc:Cc:Cc:Subject:
+ s=default; t=1590502298;
+ bh=wd1kdzjNu2wke/pcpNOmaZrZexqoLHk+Rig7xPRoVZo=;
+ h=Date:From:To:To:To:CC:Cc:Cc:Cc:Cc:Cc:Cc:Cc:Cc:Cc:Cc:Subject:
  In-Reply-To:From;
- b=aoP4NGgL2sf7xzhONd9/L/eW4ICnImWF8csowjAu2bcSQWSpZ3mlyk4jOg65n1IW8
- fk5dXliSYcoKb2jOY6coNXCwwou3w5u2b1BvsJ8ASI7vY7iI9e3vz+FQDHn8hduHGM
- 6YLDxg/17GudyJysTQkisEzns2RUx5gOjnpiJdpY=
-Date: Tue, 26 May 2020 14:11:36 +0000
+ b=YAKDE/UROeEY6tF0J82oTKAi9+ResN3VFsHitMCrHGSSwnPlw0YT48tOSBHzs+MJz
+ RmGEuGBmSLGlVocUWguShRPvFxFhGAIlnTVFxeKmGMBaV2hxMPmWL1kePFMh5uu0CE
+ 1VAnvnxcqxlqCaRMfL5KiRS7h/NQH2h0cQbofzoc=
+Date: Tue, 26 May 2020 14:11:37 +0000
 From: Sasha Levin <sashal@kernel.org>
 To: Sasha Levin <sashal@kernel.org>
 To: "Longpeng(Mike)" <longpeng2@huawei.com>
 To: <linux-crypto@vger.kernel.org>
-Subject: Re: [PATCH v2 1/2] crypto: virtio: Fix src/dst scatterlist
- calculation in __virtio_crypto_skcipher_do_req()
-In-Reply-To: <20200526031956.1897-2-longpeng2@huawei.com>
-Message-Id: <20200526141137.6CD55207CB@mail.kernel.org>
+Subject: Re: [PATCH v2 2/2] crypto: virtio: Fix use-after-free in
+ virtio_crypto_skcipher_finalize_req()
+In-Reply-To: <20200526031956.1897-3-longpeng2@huawei.com>
+Message-Id: <20200526141138.8410D207FB@mail.kernel.org>
 Cc: Herbert Xu <herbert@gondor.apana.org.au>,
  "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
  stable@vger.kernel.org, virtualization@lists.linux-foundation.org,
@@ -88,7 +88,7 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 <20200123101000.GB24255@Red>
-References: <20200526031956.1897-2-longpeng2@huawei.com>
+References: <20200526031956.1897-3-longpeng2@huawei.com>
 <20200123101000.GB24255@Red>
 
 Hi
