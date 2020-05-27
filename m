@@ -1,75 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DF551E38C1
-	for <lists.virtualization@lfdr.de>; Wed, 27 May 2020 08:05:46 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD1CF1E3D6B
+	for <lists.virtualization@lfdr.de>; Wed, 27 May 2020 11:17:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D76F787CED;
-	Wed, 27 May 2020 06:05:44 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3556086BC4;
+	Wed, 27 May 2020 09:17:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oHS+sNahBYkl; Wed, 27 May 2020 06:05:44 +0000 (UTC)
+	with ESMTP id 1GMuk4V8i-3S; Wed, 27 May 2020 09:17:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 51CDE87D39;
-	Wed, 27 May 2020 06:05:44 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CC5CF86BE1;
+	Wed, 27 May 2020 09:17:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 34BAEC016F;
-	Wed, 27 May 2020 06:05:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A5A0BC016F;
+	Wed, 27 May 2020 09:17:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 56C24C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DA182C016F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 May 2020 06:05:43 +0000 (UTC)
+ Wed, 27 May 2020 09:17:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 382AC885CA
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C8DD086BC9
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 May 2020 06:05:43 +0000 (UTC)
+ Wed, 27 May 2020 09:17:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WCQW+5nV1HAt
+ with ESMTP id kd0QiifriAJU
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 May 2020 06:05:42 +0000 (UTC)
+ Wed, 27 May 2020 09:17:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 61C15885C3
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 5424886BC4
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 May 2020 06:05:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590559541;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=46MptjPeMcvTvDVV/gp+2I8yZMG2EXUhGIjdvHlnNPM=;
- b=DtN3o3vIB3MX/0aCY3CN9M/nTKRHxr09/k4+3vbi5fXIUbEH7//uwEi7kNm195vexEEAsZ
- 7RpCdyi4YLQvHBM6O9p65ETUp3o8SLuAtBjAgWYxlsx1aGHuQ/vEN7P5c4XbiJuVd36Nze
- H3Dk0k7fXVEOe9KICCA4kZ2lQebGYsg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-183-V0kmZE77Pp2N0HvYWNAEFw-1; Wed, 27 May 2020 02:05:38 -0400
-X-MC-Unique: V0kmZE77Pp2N0HvYWNAEFw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EE252107ACCA;
- Wed, 27 May 2020 06:05:37 +0000 (UTC)
-Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
- (ovpn-13-244.pek2.redhat.com [10.72.13.244])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C835F84648;
- Wed, 27 May 2020 06:05:30 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: mst@redhat.com, jasowang@redhat.com,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] vdpa: fix typos in the comments for __vdpa_alloc_device()
-Date: Wed, 27 May 2020 14:05:28 +0800
-Message-Id: <20200527060528.9100-1-jasowang@redhat.com>
+ Wed, 27 May 2020 09:17:47 +0000 (UTC)
+IronPort-SDR: y6m9lMHPZiHE2fvCGjexuMfE9K9evtg9rKWGGzmmNW/MQc/mcB0ZXXxwXSVUb7TG85R9P66yPE
+ o8/h3UK+IuBw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 May 2020 02:17:46 -0700
+IronPort-SDR: 40oXLoq2PILk5e50dpXaB6hUneU0F+HlXUvD3DxEWqiiKhfzcf7eE1X1PvDXbUadDuvii9iRTR
+ PYV49oHaa5nA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,440,1583222400"; d="scan'208";a="414138598"
+Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
+ by orsmga004.jf.intel.com with ESMTP; 27 May 2020 02:17:44 -0700
+Received: from kbuild by lkp-server01 with local (Exim 4.89)
+ (envelope-from <lkp@intel.com>)
+ id 1jdsBz-000Bjv-75; Wed, 27 May 2020 17:17:43 +0800
+Date: Wed, 27 May 2020 17:16:46 +0800
+From: kbuild test robot <lkp@intel.com>
+To: Zhu Lingshan <lingshan.zhu@intel.com>, mst@redhat.com,
+ kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org, jasowang@redhat.com
+Subject: [RFC PATCH] vdpa: vhost_vdpa_poll_stop() can be static
+Message-ID: <20200527091646.GA80910@369e1fe990b8>
+References: <1590471145-4436-1-git-send-email-lingshan.zhu@intel.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Content-Disposition: inline
+In-Reply-To: <1590471145-4436-1-git-send-email-lingshan.zhu@intel.com>
+X-Patchwork-Hint: ignore
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Zhu Lingshan <lingshan.zhu@intel.com>, kbuild-all@lists.01.org,
+ lulu@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,29 +85,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Fix two typos in the comments for __vdpa_alloc_device().
 
-Signed-off-by: Jason Wang <jasowang@redhat.com>
+Signed-off-by: kbuild test robot <lkp@intel.com>
 ---
- drivers/vdpa/vdpa.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ vdpa.c |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index ff6562f602e0..de211ef3738c 100644
---- a/drivers/vdpa/vdpa.c
-+++ b/drivers/vdpa/vdpa.c
-@@ -63,7 +63,7 @@ static void vdpa_release_dev(struct device *d)
-  * @config: the bus operations that is supported by this device
-  * @size: size of the parent structure that contains private data
-  *
-- * Drvier should use vdap_alloc_device() wrapper macro instead of
-+ * Driver should use vdpa_alloc_device() wrapper macro instead of
-  * using this directly.
-  *
-  * Returns an error when parent/config/dma_dev is not set or fail to get
--- 
-2.20.1
-
+diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
+index d3a2acafedecd4..5037ce7f48cd42 100644
+--- a/drivers/vhost/vdpa.c
++++ b/drivers/vhost/vdpa.c
+@@ -287,12 +287,12 @@ static long vhost_vdpa_get_vring_num(struct vhost_vdpa *v, u16 __user *argp)
+ 
+ 	return 0;
+ }
+-void vhost_vdpa_poll_stop(struct vhost_virtqueue *vq)
++static void vhost_vdpa_poll_stop(struct vhost_virtqueue *vq)
+ {
+ 	vhost_poll_stop(&vq->poll);
+ }
+ 
+-int vhost_vdpa_poll_start(struct vhost_virtqueue *vq)
++static int vhost_vdpa_poll_start(struct vhost_virtqueue *vq)
+ {
+ 	struct vhost_poll *poll = &vq->poll;
+ 	struct file *file = vq->kick;
+@@ -747,7 +747,7 @@ static int vhost_vdpa_poll_worker(wait_queue_entry_t *wait, unsigned int mode,
+ 	return 0;
+ }
+ 
+-void vhost_vdpa_poll_init(struct vhost_dev *dev)
++static void vhost_vdpa_poll_init(struct vhost_dev *dev)
+ {
+ 	struct vhost_virtqueue *vq;
+ 	struct vhost_poll *poll;
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
