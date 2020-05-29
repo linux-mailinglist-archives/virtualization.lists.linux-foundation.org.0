@@ -1,99 +1,124 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 583A01E7FC5
-	for <lists.virtualization@lfdr.de>; Fri, 29 May 2020 16:10:49 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B91FF1E8384
+	for <lists.virtualization@lfdr.de>; Fri, 29 May 2020 18:21:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 08A5788426;
-	Fri, 29 May 2020 14:10:48 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E5FF789402;
+	Fri, 29 May 2020 16:21:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id v7+4muQEY-SR; Fri, 29 May 2020 14:10:47 +0000 (UTC)
+	with ESMTP id IJxXvSZx75dF; Fri, 29 May 2020 16:21:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 58A0088406;
-	Fri, 29 May 2020 14:10:47 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 5D61C893FE;
+	Fri, 29 May 2020 16:21:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3A374C016F;
-	Fri, 29 May 2020 14:10:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3F07CC016F;
+	Fri, 29 May 2020 16:21:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2ACAEC016F
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C60AFC016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 14:10:45 +0000 (UTC)
+ Fri, 29 May 2020 16:21:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 964922000F
+ by hemlock.osuosl.org (Postfix) with ESMTP id B404F893FB
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 14:10:44 +0000 (UTC)
+ Fri, 29 May 2020 16:21:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nxaZa0X2wC-z
+ with ESMTP id mh+oKa5A9ved
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 14:10:43 +0000 (UTC)
+ Fri, 29 May 2020 16:21:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 1F7611FF59
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2045.outbound.protection.outlook.com [40.107.243.45])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id B8B47893F9
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 14:10:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590761441;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=TErd239L9m87GMKq1OnfAdElyOZMwB2hfVFAiSe/inE=;
- b=MYB1hTtlWi2MUOt9skQLTS0gURR+b3Ap/+9y3iL4wpdvlb2rr5WupjOo/3GCT+6GFoYoP8
- bkmV+EVheqR1m5+Yhro01nH1YmQVNhn/HVUH/hUtntHrEmjha631K5gHd/INYepwl2GYxe
- BZOLRewg1R1OXnIC7ObzhLB4w1o1OwQ=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-358-RAdwCNjGM6G36GSkrLrX5g-1; Fri, 29 May 2020 10:10:39 -0400
-X-MC-Unique: RAdwCNjGM6G36GSkrLrX5g-1
-Received: by mail-wm1-f72.google.com with SMTP id t145so743516wmt.2
- for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 07:10:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=TErd239L9m87GMKq1OnfAdElyOZMwB2hfVFAiSe/inE=;
- b=W3QXcXq/F6dthu2cI/sCQM/iplp1xVQJdCd+8o07lCuJUQrq6K4ldMz1nmoZ6QRWs3
- LVTtt0j1PM6eKGl78VCpZfw468stIKvZicuC1CAsTmDVJUCWihxHQeFBRzwO1x8WtrxX
- wac1fvnRYTJTiqLbvpYFwsA+8m7VrcgFgcFpcxHsC2k7Agf/jJraWBI6Oh6jDTSskH+y
- dNbrt3tIUbND2cpdyAjtfIgD581yfdsgoI+s5VnhCmGDZQTubSSkEUNuZzjgZnYbBPrF
- gIIswJLKwKz66um/VaTikoaeJVthROrPzwBURMg0fgMo91wu4/b2KimZWGPPdKI0iyZg
- eqlA==
-X-Gm-Message-State: AOAM531godCnEs4r8vBe10d17NRsN6iW+UrgDs9CrJQqolpOf3/3QIXt
- 1RcklYQ3IThrJSFvxmhFai2PLf2U29SofgCwMTW0srBovS2JxwTpqoIlFdhZcwGj2UpNIcTdiKD
- N+NnfE+mAo4TZyXcEiQ/IQRTocC8iBPZxR63W4dyutQ==
-X-Received: by 2002:adf:9c84:: with SMTP id d4mr8354237wre.327.1590761437218; 
- Fri, 29 May 2020 07:10:37 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyU77CJCETVAQ/MakEhpXlB82Ntk+mmoh9WlUWbgSUeZEVhUvd9NyaJdmipxrh62Yze6wV5Xg==
-X-Received: by 2002:adf:9c84:: with SMTP id d4mr8354212wre.327.1590761436822; 
- Fri, 29 May 2020 07:10:36 -0700 (PDT)
-Received: from steredhat ([79.49.207.108])
- by smtp.gmail.com with ESMTPSA id u7sm10292389wrm.23.2020.05.29.07.10.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2020 07:10:36 -0700 (PDT)
-Date: Fri, 29 May 2020 16:10:33 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jia He <justin.he@arm.com>
-Subject: Re: [PATCH] virtio_vsock: Fix race condition in
- virtio_transport_recv_pkt
-Message-ID: <20200529141033.iqtmu3giph6dekuj@steredhat>
-References: <20200529133123.195610-1-justin.he@arm.com>
+ Fri, 29 May 2020 16:21:33 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Lz/RZspbvw8OfhMWtUvWnXXuPfFnQOvHZhKohkNyl7vBmRe2QbhCpLyj7Lb+KAGHKJq2FVrhixTJaVxW4EW+E+2P8FbTFm7SlDJ3jMEuGnYcB9xwgXkZelLkHdSO1abkF8VW7qUHf3P3/9EnnHa2ad/dM8DKOEVWl5lODFNGqs7sH9UhiyiPAswgYyLn0RdehkGmQJSIJjWnra+qs6okRRiKWAKFjl0iWa3uQRDowtCBT0KsnKqVRXBi7b4IvyOr1b8KVW+FSPIiXeLo8UFdxP1aDsm7LvxQ72gx4vGi85J0bQFdi0oyZm/gKV5Hx1xpdPdCN/PLEyi0QwOuMnYp6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LAKm20iE9r4lBDB29MQHEGYibDsEI9ORJo5U4iEEe3Y=;
+ b=B45Xe+ES1eCAcwY9UB248nx1LwjHpPfgVRV15WFwcVX4cPGDh2d000AVz7yl6Fje/bg+Eb5CVJhmwi6AoCIut7qCFFGw84seferNyIPleckhMw71Dqo7Xh+IYIkqpHMhjp+NUmdPxZWLgILMDoccscntYD6NfYQR/WF1fcrJSO1Z03B0EGIOFM4Kc2YDxiKCevPnrqzf3qIVD00pzyJ+Ogh73Oep1ToU+ATHg8eHvY8FMTIh/rUS29A4cC2OcIenLBS0BtuVFBRaQloOjvLcrOkcfLRaDsOAryJskvlKvGt09RnLnqlazA8lpM6kIpzjD11Vafm+eVo+j8cliajXFw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LAKm20iE9r4lBDB29MQHEGYibDsEI9ORJo5U4iEEe3Y=;
+ b=wViqDrxjV0WPJy6ovJXxXJaXgrHb8w+TYgnxyfiOfw9xcU91lcM7SfMA3kGRyXUu4HwNx+UqK0KUwp3eQs4fq+os/46DWuwCizOLMURz8QWjxT9jh1lGQRR1c9e6uZPElxZDK8+3JBEJg+0lmH9YI7+24y/r8hJMqquLODmC2eE=
+Authentication-Results: lists.linux-foundation.org; dkim=none (message not
+ signed) header.d=none;lists.linux-foundation.org; dmarc=none action=none
+ header.from=amd.com;
+Received: from DM5PR12MB1355.namprd12.prod.outlook.com (2603:10b6:3:6e::7) by
+ DM5PR12MB2488.namprd12.prod.outlook.com (2603:10b6:4:b5::15) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3045.19; Fri, 29 May 2020 16:21:31 +0000
+Received: from DM5PR12MB1355.namprd12.prod.outlook.com
+ ([fe80::4ce1:9947:9681:c8b1]) by DM5PR12MB1355.namprd12.prod.outlook.com
+ ([fe80::4ce1:9947:9681:c8b1%10]) with mapi id 15.20.3021.030; Fri, 29 May
+ 2020 16:21:31 +0000
+Subject: Re: [PATCH v3 69/75] x86/realmode: Setup AP jump table
+To: Borislav Petkov <bp@alien8.de>, Joerg Roedel <joro@8bytes.org>
+References: <20200428151725.31091-1-joro@8bytes.org>
+ <20200428151725.31091-70-joro@8bytes.org> <20200529090222.GA9011@zn.tnic>
+From: Tom Lendacky <thomas.lendacky@amd.com>
+Message-ID: <0b39f7af-f006-9563-9dbb-347f68cf492e@amd.com>
+Date: Fri, 29 May 2020 11:21:27 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
+In-Reply-To: <20200529090222.GA9011@zn.tnic>
+Content-Language: en-US
+X-ClientProxiedBy: SN2PR01CA0047.prod.exchangelabs.com (2603:10b6:800::15) To
+ DM5PR12MB1355.namprd12.prod.outlook.com (2603:10b6:3:6e::7)
 MIME-Version: 1.0
-In-Reply-To: <20200529133123.195610-1-justin.he@arm.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Kaly Xin <Kaly.Xin@arm.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from office-linux.texastahm.com (67.79.209.213) by
+ SN2PR01CA0047.prod.exchangelabs.com (2603:10b6:800::15) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3045.17 via Frontend Transport; Fri, 29 May 2020 16:21:29 +0000
+X-Originating-IP: [67.79.209.213]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 14e1fa45-b69e-4447-d0ed-08d803ec58a6
+X-MS-TrafficTypeDiagnostic: DM5PR12MB2488:
+X-Microsoft-Antispam-PRVS: <DM5PR12MB2488B27EA016986929D7B357EC8F0@DM5PR12MB2488.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1002;
+X-Forefront-PRVS: 04180B6720
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 9uS4DiPgYXVxLdZRBWaWhDcg99mK+WNI2KwfJF2WmDGn9hbgsxtSq6xLX7ZRXkE2oThsb7GYvNOVoqmogeCb9zRj2EvbljXx5fMP/gKcahv3UqK08U2UnzFhj5YbZ1KdmBMLABigKhHvut4l08sqf/XbYvxu42JnCIVLyPB9f2wjvaKWVzWevpYPIUwQ49J/6OhbuT49RPY5f3E5Md+9P12jmi+mZ3jz7SE4Z4r7xNvePOEyM/33BZjdZBe1hNH4BARdNcAheVd7T2hyHEyonM0f0gzuwGE6ppSFVzG4NfZrPQWIA4lhznP+RIZZzYb7dIwGF8GsdEbjSQlEwWiA44U3aGk37FCO/xCznOdwu+wz0zirT2nPbNHbjS7OswHU
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM5PR12MB1355.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(39860400002)(396003)(136003)(366004)(376002)(346002)(4326008)(53546011)(6506007)(52116002)(86362001)(8936002)(110136005)(956004)(7416002)(54906003)(478600001)(2616005)(2906002)(316002)(8676002)(6486002)(36756003)(6512007)(26005)(31696002)(83380400001)(5660300002)(66946007)(66476007)(31686004)(66556008)(186003)(16526019)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: YBb6c5xlgEidgXptBaoAhtZqmRWeNvYldvoYAG1L3SLB0Qy3b2jYml2pI4t+7rGkM/F5bnosBLJOW0QD3cQJMhvEFfU1bwY54arrhctGkLr3kQAigpXhyd/6X1GRVYJmXh5Sj+zovlzE+rR0+/6kmqAJNsPRGZ1pHGPrz9jxDnbOYl4g+7W39D5WWgJMyR2JSLlhrGg10LoYw3lmEIp56ccjaj/LyImYaUmDhqVjoSzz/eYEjU1KgSQN2Xed0rj+cjTQ73h95kVeJ479BxIgMOBwSCPb9sj+EXkVuqVwivf34Y6KsZyR2KNjyTbDfgKieKZw5LcTLvUdLsR+jjNfjregq370Q5047AB7n/O1n2AHdeeUfWnqDzJqkk5Kf7RBvcvNPDbnwNULBcp1Vq13G+90Gkl89FoPsBk4z0f1lGnoPcEAeGHg+ZDWEYpcGayQkyH0aMdFYIuOzwudlk9GGGj65Ca62+E1SfMp7tt6IKQ=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14e1fa45-b69e-4447-d0ed-08d803ec58a6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 May 2020 16:21:31.0756 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wh+bkmbuE1LNX1iCRDoZHDVf52SL//mNy4T7pQ5yRxjMF1PPXGAdf9WQiOeuhoMoVCJgnrFLFa3s2kbCvAQBqA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR12MB2488
+Cc: Juergen Gross <jgross@suse.com>, Dave Hansen <dave.hansen@linux.intel.com>,
+ Mike Stunes <mstunes@vmware.com>, Kees Cook <keescook@chromium.org>,
+ kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Cfir Cohen <cfir@google.com>, x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,117 +130,92 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Jia,
-thanks for the patch! I have some comments.
 
-On Fri, May 29, 2020 at 09:31:23PM +0800, Jia He wrote:
-> When client tries to connect(SOCK_STREAM) the server in the guest with NONBLOCK
-> mode, there will be a panic on a ThunderX2 (armv8a server):
-> [  463.718844][ T5040] Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
-> [  463.718848][ T5040] Mem abort info:
-> [  463.718849][ T5040]   ESR = 0x96000044
-> [  463.718852][ T5040]   EC = 0x25: DABT (current EL), IL = 32 bits
-> [  463.718853][ T5040]   SET = 0, FnV = 0
-> [  463.718854][ T5040]   EA = 0, S1PTW = 0
-> [  463.718855][ T5040] Data abort info:
-> [  463.718856][ T5040]   ISV = 0, ISS = 0x00000044
-> [  463.718857][ T5040]   CM = 0, WnR = 1
-> [  463.718859][ T5040] user pgtable: 4k pages, 48-bit VAs, pgdp=0000008f6f6e9000
-> [  463.718861][ T5040] [0000000000000000] pgd=0000000000000000
-> [  463.718866][ T5040] Internal error: Oops: 96000044 [#1] SMP
-> [...]
-> [  463.718977][ T5040] CPU: 213 PID: 5040 Comm: vhost-5032 Tainted: G           O      5.7.0-rc7+ #139
-> [  463.718980][ T5040] Hardware name: GIGABYTE R281-T91-00/MT91-FS1-00, BIOS F06 09/25/2018
-> [  463.718982][ T5040] pstate: 60400009 (nZCv daif +PAN -UAO)
-> [  463.718995][ T5040] pc : virtio_transport_recv_pkt+0x4c8/0xd40 [vmw_vsock_virtio_transport_common]
-> [  463.718999][ T5040] lr : virtio_transport_recv_pkt+0x1fc/0xd40 [vmw_vsock_virtio_transport_common]
-> [  463.719000][ T5040] sp : ffff80002dbe3c40
-> [...]
-> [  463.719025][ T5040] Call trace:
-> [  463.719030][ T5040]  virtio_transport_recv_pkt+0x4c8/0xd40 [vmw_vsock_virtio_transport_common]
-> [  463.719034][ T5040]  vhost_vsock_handle_tx_kick+0x360/0x408 [vhost_vsock]
-> [  463.719041][ T5040]  vhost_worker+0x100/0x1a0 [vhost]
-> [  463.719048][ T5040]  kthread+0x128/0x130
-> [  463.719052][ T5040]  ret_from_fork+0x10/0x18
+
+On 5/29/20 4:02 AM, Borislav Petkov wrote:
+> On Tue, Apr 28, 2020 at 05:17:19PM +0200, Joerg Roedel wrote:
+>> From: Tom Lendacky <thomas.lendacky@amd.com>
+>>
+>> Setup the AP jump table to point to the SEV-ES trampoline code so that
+>> the APs can boot.
 > 
-> The race condition as follows:
-> Task1                            Task2
-> =====                            =====
-> __sock_release                   virtio_transport_recv_pkt
->   __vsock_release                  vsock_find_bound_socket (found)
->     lock_sock_nested
->     vsock_remove_sock
->     sock_orphan
->       sk_set_socket(sk, NULL)
->     ...
->     release_sock
->                                 lock_sock
->                                    virtio_transport_recv_connecting
->                                      sk->sk_socket->state (panic)
+> Tom, in his laconic way, doesn't want to explain to us why is this even
+> needed...
 > 
-> This fixes it by checking vsk again whether it is in bound/connected table.
-> 
-> Signed-off-by: Jia He <justin.he@arm.com>
-> Cc: stable@vger.kernel.org
-> ---
->  net/vmw_vsock/virtio_transport_common.c | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
-> index 69efc891885f..0dbd6a45f0ed 100644
-> --- a/net/vmw_vsock/virtio_transport_common.c
-> +++ b/net/vmw_vsock/virtio_transport_common.c
-> @@ -1132,6 +1132,17 @@ void virtio_transport_recv_pkt(struct virtio_transport *t,
->  
->  	lock_sock(sk);
->  
-> +	/* Check it again if vsk is removed by vsock_remove_sock */
-> +	spin_lock_bh(&vsock_table_lock);
-> +	if (!__vsock_in_bound_table(vsk) && !__vsock_in_connected_table(vsk)) {
-> +		spin_unlock_bh(&vsock_table_lock);
-> +		(void)virtio_transport_reset_no_sock(t, pkt);
-> +		release_sock(sk);
-> +		sock_put(sk);
-> +		goto free_pkt;
-> +	}
-> +	spin_unlock_bh(&vsock_table_lock);
-> +
+> :)
 
-As an a simpler alternative, can we check the sk_shutdown or the socket
-state without check again both bound and connected tables?
+Looks like some of the detail was lost during the patch shuffling. 
+Originally (on GitHub) this was the text:
 
-This is a data path, so we should take it faster.
+  As part of the GHCB specification, the booting of APs under SEV-ES
+  requires an AP jump table when transitioning from one layer of code to
+  another (e.g. when going from UEFI to the OS). As a result, each layer
+  that parks an AP must provide the physical address of an AP jump table
+  to the next layer using the GHCB MSR.
 
-I mean something like this:
+  Upon booting of the kernel, read the GHCB MSR and save the address of
+  the AP jump table. Under SEV-ES, APs are started using the INIT-SIPI-SIPI
+  sequence. Before issuing the first SIPI request for an AP, the start eip
+  is programmed into the AP jump table. Upon issuing the SIPI request, the
+  AP will awaken and jump to the start eip address programmed into the AP
+  jump table.
 
-	if (sk->sk_shutdown == SHUTDOWN_MASK) {
-		...
-	}
-
-or
-
-	if (sock_flag(sk, SOCK_DEAD)) {
-		...
-	}
-
-I prefer the first option, but I think also the second option should
-work.
+It needs to change "GHCB MSR" to "VMGEXIT MSR protocol", but should cover 
+what you're looking for.
 
 Thanks,
-Stefano
+Tom
 
->  	/* Update CID in case it has changed after a transport reset event */
->  	vsk->local_addr.svm_cid = dst.svm_cid;
->  
-> -- 
-> 2.17.1
 > 
-
+> /me reads the code
+> 
+> /me reads the GHCB spec
+> 
+> aha, it gets it from the HV. And it can be set by the guest too...
+> 
+> So how about expanding that commit message as to why this is done, why
+> needed, etc?
+> 
+> Thx.
+> 
+>> diff --git a/arch/x86/realmode/init.c b/arch/x86/realmode/init.c
+>> index 262f83cad355..1c5cbfd102d5 100644
+>> --- a/arch/x86/realmode/init.c
+>> +++ b/arch/x86/realmode/init.c
+>> @@ -9,6 +9,7 @@
+>>   #include <asm/realmode.h>
+>>   #include <asm/tlbflush.h>
+>>   #include <asm/crash.h>
+>> +#include <asm/sev-es.h>
+>>   
+>>   struct real_mode_header *real_mode_header;
+>>   u32 *trampoline_cr4_features;
+>> @@ -107,6 +108,11 @@ static void __init setup_real_mode(void)
+>>   	if (sme_active())
+>>   		trampoline_header->flags |= TH_FLAGS_SME_ACTIVE;
+>>   
+>> +	if (sev_es_active()) {
+>> +		if (sev_es_setup_ap_jump_table(real_mode_header))
+>> +			panic("Failed to update SEV-ES AP Jump Table");
+>> +	}
+>> +
+> 
+> So this function gets slowly sprinkled with
+> 
+> 	if (sev-something)
+> 		bla
+> 
+> Please wrap at least those last two into a
+> 
+> 	sev_setup_real_mode()
+> 
+> or so.
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
