@@ -1,89 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 398841E8C40
-	for <lists.virtualization@lfdr.de>; Sat, 30 May 2020 01:43:22 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F9201E94C9
+	for <lists.virtualization@lfdr.de>; Sun, 31 May 2020 02:44:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E5A9C261B4;
-	Fri, 29 May 2020 23:43:20 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 19D4987733;
+	Sun, 31 May 2020 00:44:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id arG0uR1fWY-R; Fri, 29 May 2020 23:43:19 +0000 (UTC)
+	with ESMTP id Sn8pqAsRjOIZ; Sun, 31 May 2020 00:44:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 7362F261F8;
-	Fri, 29 May 2020 23:43:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5359E8773A;
+	Sun, 31 May 2020 00:44:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 57741C07FF;
-	Fri, 29 May 2020 23:43:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 33728C016F;
+	Sun, 31 May 2020 00:44:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0BF88C016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5D560C016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 23:43:18 +0000 (UTC)
+ Sun, 31 May 2020 00:44:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id AA67F89434
+ by whitealder.osuosl.org (Postfix) with ESMTP id 43C0287733
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 23:43:17 +0000 (UTC)
+ Sun, 31 May 2020 00:44:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qZRItbhqN5oL
+ with ESMTP id 0hLhZv2mulFm
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 23:43:12 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7A848893EE
+ Sun, 31 May 2020 00:44:49 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from shards.monkeyblade.net (shards.monkeyblade.net [23.128.96.9])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 79C1D876C4
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 May 2020 23:43:12 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5ed19db30001>; Fri, 29 May 2020 16:41:39 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Fri, 29 May 2020 16:43:11 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Fri, 29 May 2020 16:43:11 -0700
-Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 29 May
- 2020 23:43:11 +0000
-Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
- Transport; Fri, 29 May 2020 23:43:11 +0000
-Received: from sandstorm.nvidia.com (Not Verified[10.2.87.173]) by
- hqnvemgw03.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5ed19e0f0002>; Fri, 29 May 2020 16:43:11 -0700
-From: John Hubbard <jhubbard@nvidia.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH 2/2] vhost: convert get_user_pages() --> pin_user_pages()
-Date: Fri, 29 May 2020 16:43:09 -0700
-Message-ID: <20200529234309.484480-3-jhubbard@nvidia.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200529234309.484480-1-jhubbard@nvidia.com>
-References: <20200529234309.484480-1-jhubbard@nvidia.com>
-MIME-Version: 1.0
-X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1590795699; bh=w393fB7aMdfV2Mn/9DhXAANTn2k/9wVRvrXDZ4wAcPA=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:X-NVConfidentiality:
- Content-Transfer-Encoding:Content-Type;
- b=AIidyHaKCFf7Kb9AMouG61nHIQlapNE9AiLsib0QpCDzLvsTwwBRUeW/4GekCvb7F
- smypOSFVsFd+3nRh66RM2eztwXbwv34HZFIIxCxH6UUi9Vfk+SuxiFXQ65SN4/Oyec
- t0wmLYAFAUh8q/OQuepY8cNQQSVBaoRKNXM+2ZyKvm/br5zGAy7GAmhlyThqdzI8F4
- gGIm7rRrqWBXbXJDWLRUKD+2zTb2K76ePxs13DoVdpK+OGjEjrJpmQMXEgxYczFvxI
- h/SDh/NadxwC+Ci7m6OF9cb0f6gLx/1Rhdpx54yYTuyHd+F9BjdY3kDrKXOQg2JVnE
- /C86UeF1NcgJA==
-Cc: Jan Kara <jack@suse.cz>, linux-doc@vger.kernel.org, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
- Jonathan Corbet <corbet@lwn.net>, Dave Chinner <david@fromorbit.com>,
- LKML <linux-kernel@vger.kernel.org>, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- Souptick Joarder <jrdr.linux@gmail.com>, John Hubbard <jhubbard@nvidia.com>,
- linux-fsdevel@vger.kernel.org, Vlastimil Babka <vbabka@suse.cz>
+ Sun, 31 May 2020 00:44:49 +0000 (UTC)
+Received: from localhost (unknown [IPv6:2601:601:9f00:477::3d5])
+ (using TLSv1 with cipher AES256-SHA (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: davem-davemloft)
+ by shards.monkeyblade.net (Postfix) with ESMTPSA id 663AC128DA313;
+ Sat, 30 May 2020 17:44:46 -0700 (PDT)
+Date: Sat, 30 May 2020 17:44:45 -0700 (PDT)
+Message-Id: <20200530.174445.526346281814829960.davem@davemloft.net>
+To: justin.he@arm.com
+Subject: Re: [PATCH v3] virtio_vsock: Fix race condition in
+ virtio_transport_recv_pkt
+From: David Miller <davem@davemloft.net>
+In-Reply-To: <20200530013828.59668-1-justin.he@arm.com>
+References: <20200530013828.59668-1-justin.he@arm.com>
+X-Mailer: Mew version 6.8 on Emacs 26.3
+Mime-Version: 1.0
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
+ (shards.monkeyblade.net [149.20.54.216]);
+ Sat, 30 May 2020 17:44:47 -0700 (PDT)
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Kaly.Xin@arm.com, stefanha@redhat.com, kuba@kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,55 +76,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This code was using get_user_pages*(), in approximately a "Case 5"
-scenario (accessing the data within a page), using the categorization
-from [1]. That means that it's time to convert the get_user_pages*() +
-put_page() calls to pin_user_pages*() + unpin_user_pages() calls.
+From: Jia He <justin.he@arm.com>
+Date: Sat, 30 May 2020 09:38:28 +0800
 
-There is some helpful background in [2]: basically, this is a small
-part of fixing a long-standing disconnect between pinning pages, and
-file systems' use of those pages.
+> When client on the host tries to connect(SOCK_STREAM, O_NONBLOCK) to the
+> server on the guest, there will be a panic on a ThunderX2 (armv8a server):
+ ...
+> The race condition is as follows:
+> Task1                                Task2
+> =====                                =====
+> __sock_release                       virtio_transport_recv_pkt
+>   __vsock_release                      vsock_find_bound_socket (found sk)
+>     lock_sock_nested
+>     vsock_remove_sock
+>     sock_orphan
+>       sk_set_socket(sk, NULL)
+>     sk->sk_shutdown = SHUTDOWN_MASK
+>     ...
+>     release_sock
+>                                     lock_sock
+>                                        virtio_transport_recv_connecting
+>                                          sk->sk_socket->state (panic!)
+> 
+> The root cause is that vsock_find_bound_socket can't hold the lock_sock,
+> so there is a small race window between vsock_find_bound_socket() and
+> lock_sock(). If __vsock_release() is running in another task,
+> sk->sk_socket will be set to NULL inadvertently.
+> 
+> This fixes it by checking sk->sk_shutdown(suggested by Stefano) after
+> lock_sock since sk->sk_shutdown is set to SHUTDOWN_MASK under the
+> protection of lock_sock_nested.
+> 
+> Signed-off-by: Jia He <justin.he@arm.com>
+> Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 
-[1] Documentation/core-api/pin_user_pages.rst
-
-[2] "Explicit pinning of user-space pages":
-    https://lwn.net/Articles/807108/
-
-Cc: Michael S. Tsirkin <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: kvm@vger.kernel.org
-Cc: virtualization@lists.linux-foundation.org
-Cc: netdev@vger.kernel.org
-Signed-off-by: John Hubbard <jhubbard@nvidia.com>
----
- drivers/vhost/vhost.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index 21a59b598ed8..596132a96cd5 100644
---- a/drivers/vhost/vhost.c
-+++ b/drivers/vhost/vhost.c
-@@ -1762,15 +1762,14 @@ static int set_bit_to_user(int nr, void __user *addr)
- 	int bit = nr + (log % PAGE_SIZE) * 8;
- 	int r;
- 
--	r = get_user_pages_fast(log, 1, FOLL_WRITE, &page);
-+	r = pin_user_pages_fast(log, 1, FOLL_WRITE, &page);
- 	if (r < 0)
- 		return r;
- 	BUG_ON(r != 1);
- 	base = kmap_atomic(page);
- 	set_bit(bit, base);
- 	kunmap_atomic(base);
--	set_page_dirty_lock(page);
--	put_page(page);
-+	unpin_user_pages_dirty_lock(&page, 1, true);
- 	return 0;
- }
- 
--- 
-2.26.2
-
+Applied and queued up for -stable, thank you.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
