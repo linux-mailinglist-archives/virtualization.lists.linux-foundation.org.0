@@ -1,59 +1,59 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1F751EA29F
-	for <lists.virtualization@lfdr.de>; Mon,  1 Jun 2020 13:30:09 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id B82AC1EA2BB
+	for <lists.virtualization@lfdr.de>; Mon,  1 Jun 2020 13:34:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 64A1187BFE;
-	Mon,  1 Jun 2020 11:30:08 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 627291FF59;
+	Mon,  1 Jun 2020 11:34:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id T8Oi58ArfG9S; Mon,  1 Jun 2020 11:30:06 +0000 (UTC)
+	with ESMTP id V5qYF4jdcVUE; Mon,  1 Jun 2020 11:34:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A84FD87BC8;
-	Mon,  1 Jun 2020 11:30:06 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 2E1E320035;
+	Mon,  1 Jun 2020 11:34:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 890A3C0176;
-	Mon,  1 Jun 2020 11:30:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 042E8C0176;
+	Mon,  1 Jun 2020 11:34:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E6CE1C0176
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 94899C0176
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Jun 2020 11:30:05 +0000 (UTC)
+ Mon,  1 Jun 2020 11:34:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id D4E8E85513
+ by whitealder.osuosl.org (Postfix) with ESMTP id 809D786DD6
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Jun 2020 11:30:05 +0000 (UTC)
+ Mon,  1 Jun 2020 11:34:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id aZkTLuXg6V1C
+ with ESMTP id ihQH1TC-gS4s
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Jun 2020 11:30:03 +0000 (UTC)
+ Mon,  1 Jun 2020 11:34:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id C180285507
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 8FA7A866F0
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Jun 2020 11:30:03 +0000 (UTC)
+ Mon,  1 Jun 2020 11:34:26 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id ED343AC7D;
- Mon,  1 Jun 2020 11:30:02 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 54BD1AECB;
+ Mon,  1 Jun 2020 11:34:26 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
- id 43BC21E0948; Mon,  1 Jun 2020 13:30:00 +0200 (CEST)
-Date: Mon, 1 Jun 2020 13:30:00 +0200
+ id 1217B1E0948; Mon,  1 Jun 2020 13:34:24 +0200 (CEST)
+Date: Mon, 1 Jun 2020 13:34:24 +0200
 From: Jan Kara <jack@suse.cz>
 To: John Hubbard <jhubbard@nvidia.com>
-Subject: Re: [PATCH 2/2] vhost: convert get_user_pages() --> pin_user_pages()
-Message-ID: <20200601113000.GE3960@quack2.suse.cz>
-References: <20200529234309.484480-1-jhubbard@nvidia.com>
- <20200529234309.484480-3-jhubbard@nvidia.com>
+Subject: Re: [PATCH v2 1/2] docs: mm/gup: pin_user_pages.rst: add a "case 5"
+Message-ID: <20200601113424.GF3960@quack2.suse.cz>
+References: <20200601052633.853874-1-jhubbard@nvidia.com>
+ <20200601052633.853874-2-jhubbard@nvidia.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200529234309.484480-3-jhubbard@nvidia.com>
+In-Reply-To: <20200601052633.853874-2-jhubbard@nvidia.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: Jan Kara <jack@suse.cz>, linux-doc@vger.kernel.org, kvm@vger.kernel.org,
  "Michael S . Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
@@ -73,31 +73,30 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri 29-05-20 16:43:09, John Hubbard wrote:
-> This code was using get_user_pages*(), in approximately a "Case 5"
-> scenario (accessing the data within a page), using the categorization
-> from [1]. That means that it's time to convert the get_user_pages*() +
-> put_page() calls to pin_user_pages*() + unpin_user_pages() calls.
-> 
-> There is some helpful background in [2]: basically, this is a small
-> part of fixing a long-standing disconnect between pinning pages, and
-> file systems' use of those pages.
-> 
-> [1] Documentation/core-api/pin_user_pages.rst
-> 
-> [2] "Explicit pinning of user-space pages":
->     https://lwn.net/Articles/807108/
-> 
-> Cc: Michael S. Tsirkin <mst@redhat.com>
-> Cc: Jason Wang <jasowang@redhat.com>
-> Cc: kvm@vger.kernel.org
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: netdev@vger.kernel.org
+On Sun 31-05-20 22:26:32, John Hubbard wrote:
+> There are four cases listed in pin_user_pages.rst. These are
+> intended to help developers figure out whether to use
+> get_user_pages*(), or pin_user_pages*(). However, the four cases
+> do not cover all the situations. For example, drivers/vhost/vhost.c
+> has a "pin, write to page, set page dirty, unpin" case.
+> =
+
+> Add a fifth case, to help explain that there is a general pattern
+> that requires pin_user_pages*() API calls.
+> =
+
+> Cc: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Jan Kara <jack@suse.cz>
+> Cc: J=E9r=F4me Glisse <jglisse@redhat.com>
+> Cc: Dave Chinner <david@fromorbit.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
+> Cc: linux-fsdevel@vger.kernel.org
 > Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 
 Looks good to me. You can add:
@@ -107,35 +106,57 @@ Reviewed-by: Jan Kara <jack@suse.cz>
 								Honza
 
 > ---
->  drivers/vhost/vhost.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-> index 21a59b598ed8..596132a96cd5 100644
-> --- a/drivers/vhost/vhost.c
-> +++ b/drivers/vhost/vhost.c
-> @@ -1762,15 +1762,14 @@ static int set_bit_to_user(int nr, void __user *addr)
->  	int bit = nr + (log % PAGE_SIZE) * 8;
->  	int r;
->  
-> -	r = get_user_pages_fast(log, 1, FOLL_WRITE, &page);
-> +	r = pin_user_pages_fast(log, 1, FOLL_WRITE, &page);
->  	if (r < 0)
->  		return r;
->  	BUG_ON(r != 1);
->  	base = kmap_atomic(page);
->  	set_bit(bit, base);
->  	kunmap_atomic(base);
-> -	set_page_dirty_lock(page);
-> -	put_page(page);
-> +	unpin_user_pages_dirty_lock(&page, 1, true);
->  	return 0;
->  }
->  
-> -- 
+>  Documentation/core-api/pin_user_pages.rst | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+> =
+
+> diff --git a/Documentation/core-api/pin_user_pages.rst b/Documentation/co=
+re-api/pin_user_pages.rst
+> index 4675b04e8829..6068266dd303 100644
+> --- a/Documentation/core-api/pin_user_pages.rst
+> +++ b/Documentation/core-api/pin_user_pages.rst
+> @@ -171,6 +171,24 @@ If only struct page data (as opposed to the actual m=
+emory contents that a page
+>  is tracking) is affected, then normal GUP calls are sufficient, and neit=
+her flag
+>  needs to be set.
+>  =
+
+> +CASE 5: Pinning in order to write to the data within the page
+> +-------------------------------------------------------------
+> +Even though neither DMA nor Direct IO is involved, just a simple case of=
+ "pin,
+> +write to a page's data, unpin" can cause a problem. Case 5 may be consid=
+ered a
+> +superset of Case 1, plus Case 2, plus anything that invokes that pattern=
+. In
+> +other words, if the code is neither Case 1 nor Case 2, it may still requ=
+ire
+> +FOLL_PIN, for patterns like this:
+> +
+> +Correct (uses FOLL_PIN calls):
+> +    pin_user_pages()
+> +    write to the data within the pages
+> +    unpin_user_pages()
+> +
+> +INCORRECT (uses FOLL_GET calls):
+> +    get_user_pages()
+> +    write to the data within the pages
+> +    put_page()
+> +
+>  page_maybe_dma_pinned(): the whole point of pinning
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+>  =
+
+> -- =
+
 > 2.26.2
-> 
--- 
+> =
+
+-- =
+
 Jan Kara <jack@suse.com>
 SUSE Labs, CR
 _______________________________________________
