@@ -1,71 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8C4A1EBE10
-	for <lists.virtualization@lfdr.de>; Tue,  2 Jun 2020 16:23:24 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F9EA1EBF46
+	for <lists.virtualization@lfdr.de>; Tue,  2 Jun 2020 17:46:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0E94F226EA;
-	Tue,  2 Jun 2020 14:23:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B83B187884;
+	Tue,  2 Jun 2020 15:46:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9sYJz1+8DM99; Tue,  2 Jun 2020 14:23:21 +0000 (UTC)
+	with ESMTP id DPSGN9pSM-qx; Tue,  2 Jun 2020 15:46:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id BD5FF226D3;
-	Tue,  2 Jun 2020 14:23:21 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 73FB7879F0;
+	Tue,  2 Jun 2020 15:46:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F7C0C0865;
-	Tue,  2 Jun 2020 14:23:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4F807C016E;
+	Tue,  2 Jun 2020 15:46:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 596BFC016E;
- Tue,  2 Jun 2020 14:23:20 +0000 (UTC)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4BD15C016E
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  2 Jun 2020 15:46:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 47B3F2051D;
- Tue,  2 Jun 2020 14:23:20 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 39D9C85F77
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  2 Jun 2020 15:46:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5vmfmV+bWJcX; Tue,  2 Jun 2020 14:23:18 +0000 (UTC)
+ with ESMTP id Fp_8-l05ARo9
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  2 Jun 2020 15:46:20 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 4F1EC204F9;
- Tue,  2 Jun 2020 14:23:17 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 6498A2A6; Tue,  2 Jun 2020 16:23:14 +0200 (CEST)
-Date: Tue, 2 Jun 2020 16:23:12 +0200
-From: Joerg Roedel <joro@8bytes.org>
-To: Lu Baolu <baolu.lu@linux.intel.com>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Kukjin Kim <kgene@kernel.org>,
- Krzysztof Kozlowski <krzk@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>, Andy Gross <agross@kernel.org>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Rob Clark <robdclark@gmail.com>, Heiko Stuebner <heiko@sntech.de>,
- Gerald Schaefer <gerald.schaefer@de.ibm.com>,
- Thierry Reding <thierry.reding@gmail.com>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Jean-Philippe Brucker <jean-philippe@linaro.org>,
- linux-s390@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- linux-rockchip@lists.infradead.org, iommu@lists.linux-foundation.org,
- linux-mediatek@lists.infradead.org, linux-tegra@vger.kernel.org
-Subject: Re: [PATCH v2 00/33] iommu: Move iommu_group setup to IOMMU core code
-Message-ID: <20200602142312.GJ14598@8bytes.org>
-References: <20200414131542.25608-1-joro@8bytes.org>
- <20200529221623.qc6twmpzryh7nkvb@cantor>
- <20200601104240.7f5xhz7gooqhaq4n@cantor>
- <47711845-98ee-95b8-aa95-423a36ed9741@linux.intel.com>
- <20200602000236.j4m3jvluzdhjngdc@cantor>
+Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id DFFB685C5C
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  2 Jun 2020 15:46:19 +0000 (UTC)
+Received: from zn.tnic (p200300ec2f0bbb004c909b752ca088bd.dip0.t-ipconnect.de
+ [IPv6:2003:ec:2f0b:bb00:4c90:9b75:2ca0:88bd])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 303AB1EC02AD;
+ Tue,  2 Jun 2020 17:46:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+ t=1591112776;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+ bh=aqTOey7lAwfFOOz0eCqZ1k0RUPC1agJXCDXNB7/wiy0=;
+ b=IanehJAf2DVbBOdtt56W8cK/KgxhHEC6KyZdpOQTRY40yZZQTanJL347jcXvB8KRRfjWKT
+ NXAdY3KM27iCMQ9b0+UuFgpLlEVSkPMbjz8+bRo6Q3/x/QCEUd3sRyGaeqNpePiAGmL3SY
+ cpwTYnKqZ6NdOJLRlQwcDmFA7VCfZwU=
+Date: Tue, 2 Jun 2020 17:46:11 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Joerg Roedel <joro@8bytes.org>
+Subject: Re: [PATCH v3 70/75] x86/head/64: Setup TSS early for secondary CPUs
+Message-ID: <20200602154611.GC11634@zn.tnic>
+References: <20200428151725.31091-1-joro@8bytes.org>
+ <20200428151725.31091-71-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200602000236.j4m3jvluzdhjngdc@cantor>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20200428151725.31091-71-joro@8bytes.org>
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
+ Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,38 +90,24 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Jerry,
-
-On Mon, Jun 01, 2020 at 05:02:36PM -0700, Jerry Snitselaar wrote:
+On Tue, Apr 28, 2020 at 05:17:20PM +0200, Joerg Roedel wrote:
+> From: Joerg Roedel <jroedel@suse.de>
 > 
-> Yeah, that will solve the panic.
->
+> The #VC exception will trigger very early in head_64.S, when the first
+> CPUID instruction is executed. When secondary CPUs boot, they already
+> load the real system IDT, which has the #VC handler configured to be
+> using an IST stack. IST stacks require a TSS to be loaded, to set up the
+> TSS early for bringing up the secondary CPUs. Use the RW version of
+> early, until cpu_init() switches to the RO mapping.
 
-If you still see the kdump faults, can you please try with the attached
-diff? I was not able to reproduce them in my setup.
+I think you wanna say "Use the read-write version of the per-CPU TSS struct
+early." here.
 
-Regards,
+-- 
+Regards/Gruss,
+    Boris.
 
-	Joerg
-
-diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index b5ea203f6c68..5a6d509f72b6 100644
---- a/drivers/iommu/iommu.c
-+++ b/drivers/iommu/iommu.c
-@@ -1680,8 +1680,12 @@ static void probe_alloc_default_domain(struct bus_type *bus,
- static int iommu_group_do_dma_attach(struct device *dev, void *data)
- {
- 	struct iommu_domain *domain = data;
-+	int ret = 0;
- 
--	return __iommu_attach_device(domain, dev);
-+	if (!iommu_is_attach_deferred(group->domain, dev))
-+		ret = __iommu_attach_device(group->domain, dev);
-+
-+	return ret;
- }
- 
- static int __iommu_group_dma_attach(struct iommu_group *group)
+https://people.kernel.org/tglx/notes-about-netiquette
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
