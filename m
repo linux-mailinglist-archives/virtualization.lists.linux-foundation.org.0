@@ -2,98 +2,101 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A43931EB4C4
-	for <lists.virtualization@lfdr.de>; Tue,  2 Jun 2020 06:57:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3CD71EB4D8
+	for <lists.virtualization@lfdr.de>; Tue,  2 Jun 2020 07:02:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D47C885DF6;
-	Tue,  2 Jun 2020 04:57:21 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A550285D94;
+	Tue,  2 Jun 2020 05:02:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XWW6yJ9YhFFL; Tue,  2 Jun 2020 04:57:21 +0000 (UTC)
+	with ESMTP id xp3c-8vcV6O7; Tue,  2 Jun 2020 05:02:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 538D985EC4;
-	Tue,  2 Jun 2020 04:57:21 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4701B85EB4;
+	Tue,  2 Jun 2020 05:02:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2EA76C0176;
-	Tue,  2 Jun 2020 04:57:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1F306C0176;
+	Tue,  2 Jun 2020 05:02:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5E7B6C0176
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5C151C0176
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Jun 2020 04:57:19 +0000 (UTC)
+ Tue,  2 Jun 2020 05:02:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 44BF2203FE
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 56B1B85EB4
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Jun 2020 04:57:19 +0000 (UTC)
+ Tue,  2 Jun 2020 05:02:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ND61pT42AYmf
+ with ESMTP id Z1z4CyjE8UjL
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Jun 2020 04:57:18 +0000 (UTC)
+ Tue,  2 Jun 2020 05:02:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id C1564203F7
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id D1CE885D94
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Jun 2020 04:57:17 +0000 (UTC)
+ Tue,  2 Jun 2020 05:02:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591073836;
+ s=mimecast20190719; t=1591074128;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=gchTFiwviKMDwZXWqMwug6HrHP15DUCH03zQ9j5rpHE=;
- b=fvCRdFLfZAVb4cEjARqPVm25/CyiCI3ZbQmSgw1WpEYSvo+wB9PoIoPbJr2n+gvme1fmTw
- Q3w8/BuG0oEzU5z2Hpcfg20b2PvlcEAwibE9ruPsQ4jtJ2mz7WCbYNL762qnksXq+3bRmR
- NEPgz5vXPKoKjepWhB8Jh8UoJO9o8BI=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-225-_evoWoHQM9WcRsSw46QtIw-1; Tue, 02 Jun 2020 00:57:00 -0400
-X-MC-Unique: _evoWoHQM9WcRsSw46QtIw-1
-Received: by mail-wr1-f70.google.com with SMTP id w4so872684wrl.13
+ bh=unNhbaKpoHgJDBrC7Eb3u/ZNlGD55wlBW/mLz0bPcnk=;
+ b=Jl0OWvei2I2/20rFmmvH5/WTo3p4W7Ci1LtJSJ9nuDjhlZXPjWOUYOBQXfPZnj+fRrTLf4
+ bucKAOoFgJlfeZB4XIT8+5/rm3Nbw0ZtJyG8iZVsaChChrbCM9jcTlOiaqNp9Fi7IT95xV
+ kg1A9PlRk0h/JuxKkfX1OnQthEXmy3s=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-427-vlSKEjuwNoery0WNvbz67Q-1; Tue, 02 Jun 2020 01:02:02 -0400
+X-MC-Unique: vlSKEjuwNoery0WNvbz67Q-1
+Received: by mail-wr1-f72.google.com with SMTP id l1so876985wrc.8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 01 Jun 2020 21:57:00 -0700 (PDT)
+ Mon, 01 Jun 2020 22:02:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=gchTFiwviKMDwZXWqMwug6HrHP15DUCH03zQ9j5rpHE=;
- b=KkLQtGzrq8HWDtW6faLVUPE8FtKmSj1Hqr17EPmHyXsr9IZrawlxsWRVJq4xoBpOjA
- SN4Ycb8sRrUldj6z/TI9suMM4Su4jInFeuAZVs+35SnS3P7wOA9HntTFz7MNVFzeLHcr
- 8m7gFfHx5tIVzJTGZYXGC8mi+uGwWRSj6JK8EOPhCvCKtHcp+hm4hPcWkTUefWAAPTjr
- R5MOebfwy0GScnCx93lpz/WzOKgROSU71VaoPc+U8TfA/bThwZC60RtF/DWbhrzHAvyQ
- 3RD264+JGn/7yjMj1fSTOXfZFCWhNci5WYlaKGZVmF0Z6zvDi8o6IzTIEl6Z54sh8eGC
- R63A==
-X-Gm-Message-State: AOAM530UjFQPn5EQ4tCocAdnC5kUDn8jzCk/dK6txFkyhl+kNZFJel3B
- /vMnwkdslhwYqTH0bDNBpb1k0It3laB6/WIqMU7dG57+N5ck1f85ccPSWkI3fR3rK8buWIHhx6n
- LB0bjT8nEdTMOi8QxKSL9i7+YO9oPWDUxTq9ShRrnLQ==
-X-Received: by 2002:a1c:ed0e:: with SMTP id l14mr2320508wmh.8.1591073818233;
- Mon, 01 Jun 2020 21:56:58 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwezYypzZbKEY1d6YwmBv/8PZj3UfnzO1aXl2q6kGlCaJNGq8F3H+NRcEoRO1KXyF9lWjuqqA==
-X-Received: by 2002:a1c:ed0e:: with SMTP id l14mr2320484wmh.8.1591073818026;
- Mon, 01 Jun 2020 21:56:58 -0700 (PDT)
+ bh=unNhbaKpoHgJDBrC7Eb3u/ZNlGD55wlBW/mLz0bPcnk=;
+ b=MFJ0FfYBIQP3HPkcKIsyiyF6KxQ0EeChfqke/ONHOasM9oy4q+fbs0obHJia4VhR0U
+ X2jFbjqxIppQiimSmwotT6Z/ohK9AaNxdfcRKNIPgTxxdFOFnSrJcDJXVpmWOpC6UPub
+ mqbMWid3Wq5IUifiA+rQ6bKWbN4uImanxWM2wzQkLsEh9vRbxyKifll+q6olANZkEBdX
+ 3s/kZUqmg2jhAEjTbIBB8ssTwOLbEfi1h75Z5chzRBx8sgfdL6ULvXTnVGk69d6JYBDy
+ TYaSuJL5AcO466+amIbE0X1whkKU0BS8o5rokoWr7bjaKb5Lpz3+PjBhVu8Q7AnWHAgX
+ 29qw==
+X-Gm-Message-State: AOAM5316RNu69P/k/1DL4HYjJszZaK+ftgTyc3wlExwXtwAhOuNQGbKO
+ BSo97EvuA8JNloD4oYe9NG+ZM8J2CG0BInbQ4FSOoQDXf4S7v2BcWUvanNOM5PGLCzbfkiTWsHt
+ Zhutce4LG1LVMPB8UhOzO7gGz14l71CBweN2O97uajA==
+X-Received: by 2002:adf:9b9e:: with SMTP id d30mr25308459wrc.345.1591074121705; 
+ Mon, 01 Jun 2020 22:02:01 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw3nr1AXCn3Z5SMmVoLwH2lrM47voNMRhlWpVupnJ+5ZSE/pBwVxy8G2I2bBBJ+b49EcSyp0Q==
+X-Received: by 2002:adf:9b9e:: with SMTP id d30mr25308453wrc.345.1591074121511; 
+ Mon, 01 Jun 2020 22:02:01 -0700 (PDT)
 Received: from redhat.com (bzq-109-64-41-91.red.bezeqint.net. [109.64.41.91])
  by smtp.gmail.com with ESMTPSA id
- x205sm1900586wmx.21.2020.06.01.21.56.56
+ w3sm1759935wmg.44.2020.06.01.22.01.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jun 2020 21:56:57 -0700 (PDT)
-Date: Tue, 2 Jun 2020 00:56:54 -0400
+ Mon, 01 Jun 2020 22:02:00 -0700 (PDT)
+Date: Tue, 2 Jun 2020 01:01:58 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: kbuild test robot <lkp@intel.com>
-Subject: Re: [PATCH 4/6] vhost_vdpa: support doorbell mapping via mmap
-Message-ID: <20200602005007-mutt-send-email-mst@kernel.org>
-References: <20200529080303.15449-5-jasowang@redhat.com>
- <202006020308.kLXTHt4n%lkp@intel.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH 1/6] vhost: allow device that does not depend on vhost
+ worker
+Message-ID: <20200602005904-mutt-send-email-mst@kernel.org>
+References: <20200529080303.15449-1-jasowang@redhat.com>
+ <20200529080303.15449-2-jasowang@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <202006020308.kLXTHt4n%lkp@intel.com>
+In-Reply-To: <20200529080303.15449-2-jasowang@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: kbuild-all@lists.01.org, lulu@redhat.com, kvm@vger.kernel.org,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: shahafs@mellanox.com, lulu@redhat.com, kvm@vger.kernel.org,
+ saugatm@xilinx.com, netdev@vger.kernel.org, mhabets@solarflare.com,
+ vmireyno@marvell.com, linux-kernel@vger.kernel.org, gdawar@xilinx.com,
  virtualization@lists.linux-foundation.org, eperezma@redhat.com,
+ hanand@xilinx.com, zhangweining@ruijie.com.cn, eli@mellanox.com,
  lingshan.zhu@intel.com, rob.miller@broadcom.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -111,72 +114,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jun 02, 2020 at 03:22:49AM +0800, kbuild test robot wrote:
-> Hi Jason,
-> 
-> I love your patch! Yet something to improve:
-> 
-> [auto build test ERROR on vhost/linux-next]
-> [also build test ERROR on linus/master v5.7 next-20200529]
-> [if your patch is applied to the wrong git tree, please drop us a note to help
-> improve the system. BTW, we also suggest to use '--base' option to specify the
-> base tree in git format-patch, please see https://stackoverflow.com/a/37406982]
-> 
-> url:    https://github.com/0day-ci/linux/commits/Jason-Wang/vDPA-doorbell-mapping/20200531-070834
-> base:   https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git linux-next
-> config: m68k-randconfig-r011-20200601 (attached as .config)
-> compiler: m68k-linux-gcc (GCC) 9.3.0
-> reproduce (this is a W=1 build):
->         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
->         chmod +x ~/bin/make.cross
->         # save the attached .config to linux build tree
->         COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-9.3.0 make.cross ARCH=m68k 
-> 
-> If you fix the issue, kindly add following tag as appropriate
-> Reported-by: kbuild test robot <lkp@intel.com>
-> 
-> All errors (new ones prefixed by >>, old ones prefixed by <<):
-> 
-> drivers/vhost/vdpa.c: In function 'vhost_vdpa_fault':
-> >> drivers/vhost/vdpa.c:754:22: error: implicit declaration of function 'pgprot_noncached' [-Werror=implicit-function-declaration]
-> 754 |  vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
-> |                      ^~~~~~~~~~~~~~~~
-> >> drivers/vhost/vdpa.c:754:22: error: incompatible types when assigning to type 'pgprot_t' {aka 'struct <anonymous>'} from type 'int'
-> cc1: some warnings being treated as errors
-> 
-> vim +/pgprot_noncached +754 drivers/vhost/vdpa.c
-> 
->    742	
->    743	static vm_fault_t vhost_vdpa_fault(struct vm_fault *vmf)
->    744	{
->    745		struct vhost_vdpa *v = vmf->vma->vm_file->private_data;
->    746		struct vdpa_device *vdpa = v->vdpa;
->    747		const struct vdpa_config_ops *ops = vdpa->config;
->    748		struct vdpa_notification_area notify;
->    749		struct vm_area_struct *vma = vmf->vma;
->    750		u16 index = vma->vm_pgoff;
->    751	
->    752		notify = ops->get_vq_notification(vdpa, index);
->    753	
->  > 754		vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
->    755		if (remap_pfn_range(vma, vmf->address & PAGE_MASK,
->    756				    notify.addr >> PAGE_SHIFT, PAGE_SIZE,
->    757				    vma->vm_page_prot))
->    758			return VM_FAULT_SIGBUS;
->    759	
->    760		return VM_FAULT_NOPAGE;
->    761	}
->    762	
+On Fri, May 29, 2020 at 04:02:58PM +0800, Jason Wang wrote:
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index d450e16c5c25..70105e045768 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -166,11 +166,16 @@ static int vhost_poll_wakeup(wait_queue_entry_t *wait, unsigned mode, int sync,
+>  			     void *key)
+>  {
+>  	struct vhost_poll *poll = container_of(wait, struct vhost_poll, wait);
+> +	struct vhost_work *work = &poll->work;
+>  
+>  	if (!(key_to_poll(key) & poll->mask))
+>  		return 0;
+>  
+> -	vhost_poll_queue(poll);
+> +	if (!poll->dev->use_worker)
+> +		work->fn(work);
+> +	else
+> +		vhost_poll_queue(poll);
+> +
+>  	return 0;
+>  }
+>
 
-Yes well, all this remapping clearly has no chance to work
-on systems without CONFIG_MMU.
+So a wakeup function wakes up eventfd directly.
 
+What if user supplies e.g. the same eventfd as ioeventfd?
 
+Won't this cause infinite loops?
 
-> ---
-> 0-DAY CI Kernel Test Service, Intel Corporation
-> https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
-
+-- 
+MST
 
 _______________________________________________
 Virtualization mailing list
