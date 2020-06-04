@@ -1,57 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45E721EE3B6
-	for <lists.virtualization@lfdr.de>; Thu,  4 Jun 2020 13:54:24 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC93E1EE42B
+	for <lists.virtualization@lfdr.de>; Thu,  4 Jun 2020 14:07:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E60852276C;
-	Thu,  4 Jun 2020 11:54:22 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 40B2388872;
+	Thu,  4 Jun 2020 12:07:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rHOaKucLSAM1; Thu,  4 Jun 2020 11:54:20 +0000 (UTC)
+	with ESMTP id Fw15SvnWR4lQ; Thu,  4 Jun 2020 12:07:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id EC9D6221B7;
-	Thu,  4 Jun 2020 11:54:19 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 9919A8887E;
+	Thu,  4 Jun 2020 12:07:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B8BE6C016E;
-	Thu,  4 Jun 2020 11:54:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 72A1AC016E;
+	Thu,  4 Jun 2020 12:07:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5F8BCC016E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E55B2C016E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 11:54:18 +0000 (UTC)
+ Thu,  4 Jun 2020 12:07:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 4846384EAD
+ by hemlock.osuosl.org (Postfix) with ESMTP id CD28B88872
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 11:54:18 +0000 (UTC)
+ Thu,  4 Jun 2020 12:07:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ijPmNwlPYPUC
+ with ESMTP id YkmcwxpIvInp
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 11:54:17 +0000 (UTC)
+ Thu,  4 Jun 2020 12:07:54 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 4253F85F8D
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 35DF9878A4
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 11:54:17 +0000 (UTC)
+ Thu,  4 Jun 2020 12:07:54 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 744CC26F; Thu,  4 Jun 2020 13:54:14 +0200 (CEST)
-Date: Thu, 4 Jun 2020 13:54:13 +0200
+ id F3ED126F; Thu,  4 Jun 2020 14:07:50 +0200 (CEST)
+Date: Thu, 4 Jun 2020 14:07:49 +0200
 From: Joerg Roedel <joro@8bytes.org>
 To: Borislav Petkov <bp@alien8.de>
-Subject: Re: [PATCH v3 40/75] x86/sev-es: Compile early handler code into
- kernel image
-Message-ID: <20200604115413.GB30945@8bytes.org>
+Subject: Re: [PATCH v3 42/75] x86/sev-es: Setup GHCB based boot #VC handler
+Message-ID: <20200604120749.GC30945@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-41-joro@8bytes.org>
- <20200520091415.GC1457@zn.tnic>
+ <20200428151725.31091-43-joro@8bytes.org>
+ <20200520192230.GK1457@zn.tnic>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200520091415.GC1457@zn.tnic>
+In-Reply-To: <20200520192230.GK1457@zn.tnic>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
@@ -79,31 +78,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, May 20, 2020 at 11:14:15AM +0200, Borislav Petkov wrote:
-> On Tue, Apr 28, 2020 at 05:16:50PM +0200, Joerg Roedel wrote:
-> > +static inline u64 sev_es_rd_ghcb_msr(void)
-> > +{
-> > +	return native_read_msr(MSR_AMD64_SEV_ES_GHCB);
-> > +}
-> > +
-> > +static inline void sev_es_wr_ghcb_msr(u64 val)
-> > +{
-> > +	u32 low, high;
-> > +
-> > +	low  = (u32)(val);
-> > +	high = (u32)(val >> 32);
-> > +
-> > +	native_write_msr(MSR_AMD64_SEV_ES_GHCB, low, high);
-> > +}
+On Wed, May 20, 2020 at 09:22:30PM +0200, Borislav Petkov wrote:
+> On Tue, Apr 28, 2020 at 05:16:52PM +0200, Joerg Roedel wrote:
+> > diff --git a/arch/x86/include/asm/sev-es.h b/arch/x86/include/asm/sev-es.h
+> > index b2cbcd40b52e..e1ed963a57ec 100644
+> > --- a/arch/x86/include/asm/sev-es.h
+> > +++ b/arch/x86/include/asm/sev-es.h
+> > @@ -74,5 +74,6 @@ static inline u64 lower_bits(u64 val, unsigned int bits)
+> >  }
+> >  
+> >  extern void vc_no_ghcb(void);
+> > +extern bool vc_boot_ghcb(struct pt_regs *regs);
 > 
-> Instead of duplicating those two, you can lift the ones in the
-> compressed image into sev-es.h and use them here. I don't care one bit
-> about the MSR tracepoints in native_*_msr().
+> Those function names need verbs:
+> 
+> 	handle_vc_no_ghcb
+> 	handle_vc_boot_ghcb
 
-It is not only the trace-point, this would also eliminate exception
-handling in case the MSR access triggers a #GP. The "Unhandled MSR
-read/write" messages would turn into a "General Protection Fault"
-message.
+This are IDT entry points and the names above follow the convention for
+them, like e.g. 'page_fault', 'nmi' or 'general_protection'. Should I
+still add the verbs or just add a comment explaining what those symbols
+are?
+
+> There's already another sev_es_setup_ghcb() in compressed/. All those
+> functions with the same name are just confusion waiting to happen. Let's
+> prepend the ones in compressed/ with "early_" or so, so that their names
+> are at least different even if they're in two different files with the
+> same name.
+> 
+> This way you know at least which function is used in which boot stages.
+
+Okay, will see what can be changed. Some functions are part of the
+interface for sev-es-shared.c and need to have the same names, but
+sev_es_setup_ghcb() can be named differently.
+
+> > +static void __init vc_early_vc_forward_exception(struct es_em_ctxt *ctxt)
+> 
+> That second "vc" looks redundant.
+
+Heh, search and replace artifact :) Fixed now.
 
 
 	Joerg
