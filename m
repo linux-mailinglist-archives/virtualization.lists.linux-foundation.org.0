@@ -1,70 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 251581EE78E
-	for <lists.virtualization@lfdr.de>; Thu,  4 Jun 2020 17:20:08 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 864071EE7C3
+	for <lists.virtualization@lfdr.de>; Thu,  4 Jun 2020 17:30:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 9992786FC3;
-	Thu,  4 Jun 2020 15:20:06 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 26A8288216;
+	Thu,  4 Jun 2020 15:30:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sT1n6bVuBbsZ; Thu,  4 Jun 2020 15:20:06 +0000 (UTC)
+	with ESMTP id 14ZukP8Zkb9W; Thu,  4 Jun 2020 15:30:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3A9A886F50;
-	Thu,  4 Jun 2020 15:20:06 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E7CBA88226;
+	Thu,  4 Jun 2020 15:30:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 27377C016E;
-	Thu,  4 Jun 2020 15:20:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C64ABC016E;
+	Thu,  4 Jun 2020 15:30:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8D5F3C016E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F1F9FC016E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 15:20:04 +0000 (UTC)
+ Thu,  4 Jun 2020 15:30:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 87A5B86F6A
+ by silver.osuosl.org (Postfix) with ESMTP id C87B224AF5
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 15:20:04 +0000 (UTC)
+ Thu,  4 Jun 2020 15:30:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wgTGg5Tv7a61
+ with ESMTP id 3hcJQu0o-O4q
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 15:20:03 +0000 (UTC)
+ Thu,  4 Jun 2020 15:30:35 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5F2EF86F50
+ by silver.osuosl.org (Postfix) with ESMTPS id DA2B3248F6
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 15:20:03 +0000 (UTC)
+ Thu,  4 Jun 2020 15:30:34 +0000 (UTC)
 Received: from zn.tnic (p200300ec2f112d0035262982e5edc845.dip0.t-ipconnect.de
  [IPv6:2003:ec:2f11:2d00:3526:2982:e5ed:c845])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 6CEA41EC0118;
- Thu,  4 Jun 2020 17:19:59 +0200 (CEST)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 3817D1EC0118;
+ Thu,  4 Jun 2020 17:30:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1591283999;
+ t=1591284633;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=v9mztibqlfJ/JLIFyImy9Q9qLirhr2kGLDWk5NuYc4Q=;
- b=GOHk7ZNT2JDKJZmzMCdd5ncsxdBtJ1WHI3JpBPGUDAkVXAd85NgVuWzqUzOfQmaZdUu940
- a7IhnG5aPPNkpl1OkaM3bTFrDqJDi9bC3qCWYfBupJVuZh/oWYxRKXYVZ/z8vWsDn0Y9ax
- RIzQH1SGrPjgRb2qcSl81uulBZZChEA=
-Date: Thu, 4 Jun 2020 17:19:53 +0200
+ bh=dgOFdDW+wev1gcsAysq51nTpw31Zuln3/0Xnz7fwqtE=;
+ b=lY1y2A+1RzmtxBuefUaVNKu/Y1Wj+Nvw4Y9pBw79JG/+MQBzPlnZkr2uFIyLIkrGlRb4iB
+ eZMF4rQHg/FKxFGQd6yAn+xN5lvToN5VcyMpqXNH3MT4NvtumJjwozsbFNTSnB9ZJhLOnC
+ 47J+naxjkG0RfuLl25dliKfHi+8JGD8=
+Date: Thu, 4 Jun 2020 17:30:27 +0200
 From: Borislav Petkov <bp@alien8.de>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v3 40/75] x86/sev-es: Compile early handler code into
- kernel image
-Message-ID: <20200604151945.GB2246@zn.tnic>
+Subject: Re: [PATCH v3 42/75] x86/sev-es: Setup GHCB based boot #VC handler
+Message-ID: <20200604153021.GC2246@zn.tnic>
 References: <20200428151725.31091-1-joro@8bytes.org>
- <20200428151725.31091-41-joro@8bytes.org>
- <20200520091415.GC1457@zn.tnic> <20200604115413.GB30945@8bytes.org>
+ <20200428151725.31091-43-joro@8bytes.org>
+ <20200520192230.GK1457@zn.tnic> <20200604120749.GC30945@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200604115413.GB30945@8bytes.org>
+In-Reply-To: <20200604120749.GC30945@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
  Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
@@ -91,18 +90,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jun 04, 2020 at 01:54:13PM +0200, Joerg Roedel wrote:
-> It is not only the trace-point, this would also eliminate exception
-> handling in case the MSR access triggers a #GP. The "Unhandled MSR
-> read/write" messages would turn into a "General Protection Fault"
-> message.
+On Thu, Jun 04, 2020 at 02:07:49PM +0200, Joerg Roedel wrote:
+> This are IDT entry points and the names above follow the convention for
+> them, like e.g. 'page_fault', 'nmi' or 'general_protection'. Should I
+> still add the verbs or just add a comment explaining what those symbols
+> are?
 
-But the early ones can trigger a #GP too. And there we can't handle
-those #GPs.
+Hmmkay, I see vc_no_ghcb doing
 
-Why would the late ones need exception handling all of a sudden? And
-for the GHCB MSR, of all MSRs which the SEV-ES guest has used so far to
-bootstrap?!
+call    do_vc_no_ghcb
+
+and that's setup in early_idt_setup().
+
+vc_boot_ghcb(), OTOH, is called by do_early_exception() only so that one
+could be called handle_vc_boot_ghcb(), no? I.e., I don't see it being an
+IDT entry point.
 
 -- 
 Regards/Gruss,
