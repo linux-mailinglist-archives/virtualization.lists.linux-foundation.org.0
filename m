@@ -1,102 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49E681EED7A
-	for <lists.virtualization@lfdr.de>; Thu,  4 Jun 2020 23:47:20 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A4F7786E3E;
-	Thu,  4 Jun 2020 21:47:18 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zBpDwoVlxJwG; Thu,  4 Jun 2020 21:47:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 22FEC86F14;
-	Thu,  4 Jun 2020 21:47:18 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id ED695C0881;
-	Thu,  4 Jun 2020 21:47:17 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 29019C016E
- for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 21:47:16 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2950E1EF00E
+	for <lists.virtualization@lfdr.de>; Fri,  5 Jun 2020 05:40:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 13CB787475
- for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 21:47:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7C70987745;
+	Fri,  5 Jun 2020 03:40:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9cm4JU8n42rH; Fri,  5 Jun 2020 03:40:32 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id CA77187749;
+	Fri,  5 Jun 2020 03:40:32 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A3EC7C016E;
+	Fri,  5 Jun 2020 03:40:32 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D7693C016E
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  5 Jun 2020 03:40:30 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id CC79285D4C
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  5 Jun 2020 03:40:30 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WtTVXzvdTAES
+ with ESMTP id 9MvhodypKiQL
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 21:47:15 +0000 (UTC)
+ Fri,  5 Jun 2020 03:40:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 476F786A0C
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id B012785D3D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Jun 2020 21:47:15 +0000 (UTC)
-Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 054L2h04055403; Thu, 4 Jun 2020 17:47:14 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0b-001b2d01.pphosted.com with ESMTP id 31ek4swnpt-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 04 Jun 2020 17:46:48 -0400
-Received: from m0098414.ppops.net (m0098414.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 054LkirM164843;
- Thu, 4 Jun 2020 17:46:44 -0400
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.98])
- by mx0b-001b2d01.pphosted.com with ESMTP id 31ek4swncr-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 04 Jun 2020 17:46:44 -0400
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
- by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 054LUcLu030223;
- Thu, 4 Jun 2020 21:44:31 GMT
-Received: from b06cxnps4076.portsmouth.uk.ibm.com
- (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
- by ppma03ams.nl.ibm.com with ESMTP id 31bf482suq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 04 Jun 2020 21:44:31 +0000
-Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
- by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 054LiTen51511446
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 4 Jun 2020 21:44:29 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 6A23242042;
- Thu,  4 Jun 2020 21:44:29 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 21BE74203F;
- Thu,  4 Jun 2020 21:44:29 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.145.48.217])
- by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Thu,  4 Jun 2020 21:44:29 +0000 (GMT)
-Date: Thu, 4 Jun 2020 23:44:21 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [PATCH] s390/virtio: remove unused pm callbacks
-Message-ID: <20200604234421.4ada966b.pasic@linux.ibm.com>
-In-Reply-To: <20200526093629.257649-1-cohuck@redhat.com>
-References: <20200526093629.257649-1-cohuck@redhat.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+ Fri,  5 Jun 2020 03:40:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1591328428;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=W+XRm7Fs7zNlH2EKv4SYh8NMSzGAObCRW7/zCrf8kTM=;
+ b=BCjq1z7jSjMubIuP8OVFJiZydGUG/4SxUCo8lT48BGPP9UXgE6UEDNslnKbg0ILuHdf9Lw
+ X0jTo+CnXcpUGXBUu3mrzCK7OasCSqtX06uRs+/zjZX2FeF5FiMr0Z992QPSehtLBP29qi
+ rMwEOQn5hrZbg22ua5LZ6CXZp7kHw88=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-257-WjnfLQgyPAadytx9KbfT2Q-1; Thu, 04 Jun 2020 23:40:24 -0400
+X-MC-Unique: WjnfLQgyPAadytx9KbfT2Q-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AD756100960F;
+ Fri,  5 Jun 2020 03:40:23 +0000 (UTC)
+Received: from [10.72.12.233] (ovpn-12-233.pek2.redhat.com [10.72.12.233])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D3AE45C290;
+ Fri,  5 Jun 2020 03:40:18 +0000 (UTC)
+Subject: Re: [PATCH RFC 03/13] vhost: batching fetches
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20200602130543.578420-1-mst@redhat.com>
+ <20200602130543.578420-4-mst@redhat.com>
+ <3323daa2-19ed-02de-0ff7-ab150f949fff@redhat.com>
+ <20200604045830-mutt-send-email-mst@kernel.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <6c2e6cc7-27c5-445b-f252-0356ff8a83f3@redhat.com>
+Date: Fri, 5 Jun 2020 11:40:17 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
- definitions=2020-06-04_13:2020-06-04,
- 2020-06-04 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 mlxscore=0
- phishscore=0 suspectscore=0 spamscore=0 cotscore=-2147483648 clxscore=1011
- bulkscore=0 mlxlogscore=999 impostorscore=0 lowpriorityscore=0
- priorityscore=1501 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2004280000 definitions=main-2006040150
-Cc: linux-s390@vger.kernel.org, kvm@vger.kernel.org,
+In-Reply-To: <20200604045830-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Cc: =?UTF-8?Q?Eugenio_P=c3=a9rez?= <eperezma@redhat.com>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -109,72 +91,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, 26 May 2020 11:36:29 +0200
-Cornelia Huck <cohuck@redhat.com> wrote:
-
-> Support for hibernation on s390 has been recently been removed with
-> commit 394216275c7d ("s390: remove broken hibernate / power management
-> support"), no need to keep unused code around.
-> 
-> Signed-off-by: Cornelia Huck <cohuck@redhat.com>
-
-Reviewed-by: Halil Pasic <pasic@linux.ibm.com>
-
-> ---
->  drivers/s390/virtio/virtio_ccw.c | 26 --------------------------
->  1 file changed, 26 deletions(-)
-> 
-> diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
-> index 957889a42d2e..5730572b52cd 100644
-> --- a/drivers/s390/virtio/virtio_ccw.c
-> +++ b/drivers/s390/virtio/virtio_ccw.c
-> @@ -1372,27 +1372,6 @@ static struct ccw_device_id virtio_ids[] = {
->  	{},
->  };
->  
-> -#ifdef CONFIG_PM_SLEEP
-> -static int virtio_ccw_freeze(struct ccw_device *cdev)
-> -{
-> -	struct virtio_ccw_device *vcdev = dev_get_drvdata(&cdev->dev);
-> -
-> -	return virtio_device_freeze(&vcdev->vdev);
-> -}
-> -
-> -static int virtio_ccw_restore(struct ccw_device *cdev)
-> -{
-> -	struct virtio_ccw_device *vcdev = dev_get_drvdata(&cdev->dev);
-> -	int ret;
-> -
-> -	ret = virtio_ccw_set_transport_rev(vcdev);
-> -	if (ret)
-> -		return ret;
-> -
-> -	return virtio_device_restore(&vcdev->vdev);
-> -}
-> -#endif
-> -
->  static struct ccw_driver virtio_ccw_driver = {
->  	.driver = {
->  		.owner = THIS_MODULE,
-> @@ -1405,11 +1384,6 @@ static struct ccw_driver virtio_ccw_driver = {
->  	.set_online = virtio_ccw_online,
->  	.notify = virtio_ccw_cio_notify,
->  	.int_class = IRQIO_VIR,
-> -#ifdef CONFIG_PM_SLEEP
-> -	.freeze = virtio_ccw_freeze,
-> -	.thaw = virtio_ccw_restore,
-> -	.restore = virtio_ccw_restore,
-> -#endif
->  };
->  
->  static int __init pure_hex(char **cp, unsigned int *val, int min_digit,
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNi80IOS4i+WNiDQ6NTksIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToKPiBPbiBX
+ZWQsIEp1biAwMywgMjAyMCBhdCAwMzoyNzozOVBNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+
+PiBPbiAyMDIwLzYvMiDkuIvljYg5OjA2LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4+PiBX
+aXRoIHRoaXMgcGF0Y2ggYXBwbGllZCwgbmV3IGFuZCBvbGQgY29kZSBwZXJmb3JtIGlkZW50aWNh
+bGx5Lgo+Pj4KPj4+IExvdHMgb2YgZXh0cmEgb3B0aW1pemF0aW9ucyBhcmUgbm93IHBvc3NpYmxl
+LCBlLmcuCj4+PiB3ZSBjYW4gZmV0Y2ggbXVsdGlwbGUgaGVhZHMgd2l0aCBjb3B5X2Zyb20vdG9f
+dXNlciBub3cuCj4+PiBXZSBjYW4gZ2V0IHJpZCBvZiBtYWludGFpbmluZyB0aGUgbG9nIGFycmF5
+LiAgRXRjIGV0Yy4KPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBNaWNoYWVsIFMuIFRzaXJraW48bXN0
+QHJlZGhhdC5jb20+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBFdWdlbmlvIFDDqXJlejxlcGVyZXptYUBy
+ZWRoYXQuY29tPgo+Pj4gTGluazpodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjAwNDAxMTgz
+MTE4LjgzMzQtNC1lcGVyZXptYUByZWRoYXQuY29tCj4+PiBTaWduZWQtb2ZmLWJ5OiBNaWNoYWVs
+IFMuIFRzaXJraW48bXN0QHJlZGhhdC5jb20+Cj4+PiAtLS0KPj4+ICAgIGRyaXZlcnMvdmhvc3Qv
+dGVzdC5jICB8ICAyICstCj4+PiAgICBkcml2ZXJzL3Zob3N0L3Zob3N0LmMgfCA0NyArKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tCj4+PiAgICBkcml2ZXJzL3Zob3N0
+L3Zob3N0LmggfCAgNSArKysrLQo+Pj4gICAgMyBmaWxlcyBjaGFuZ2VkLCA0NyBpbnNlcnRpb25z
+KCspLCA3IGRlbGV0aW9ucygtKQo+Pj4KPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L3Rl
+c3QuYyBiL2RyaXZlcnMvdmhvc3QvdGVzdC5jCj4+PiBpbmRleCA5YTNhMDkwMDVlMDMuLjAyODA2
+ZDZmODRlZiAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvdmhvc3QvdGVzdC5jCj4+PiArKysgYi9k
+cml2ZXJzL3Zob3N0L3Rlc3QuYwo+Pj4gQEAgLTExOSw3ICsxMTksNyBAQCBzdGF0aWMgaW50IHZo
+b3N0X3Rlc3Rfb3BlbihzdHJ1Y3QgaW5vZGUgKmlub2RlLCBzdHJ1Y3QgZmlsZSAqZikKPj4+ICAg
+IAlkZXYgPSAmbi0+ZGV2Owo+Pj4gICAgCXZxc1tWSE9TVF9URVNUX1ZRXSA9ICZuLT52cXNbVkhP
+U1RfVEVTVF9WUV07Cj4+PiAgICAJbi0+dnFzW1ZIT1NUX1RFU1RfVlFdLmhhbmRsZV9raWNrID0g
+aGFuZGxlX3ZxX2tpY2s7Cj4+PiAtCXZob3N0X2Rldl9pbml0KGRldiwgdnFzLCBWSE9TVF9URVNU
+X1ZRX01BWCwgVUlPX01BWElPViwKPj4+ICsJdmhvc3RfZGV2X2luaXQoZGV2LCB2cXMsIFZIT1NU
+X1RFU1RfVlFfTUFYLCBVSU9fTUFYSU9WICsgNjQsCj4+PiAgICAJCSAgICAgICBWSE9TVF9URVNU
+X1BLVF9XRUlHSFQsIFZIT1NUX1RFU1RfV0VJR0hULCBOVUxMKTsKPj4+ICAgIAlmLT5wcml2YXRl
+X2RhdGEgPSBuOwo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmhvc3Qvdmhvc3QuYyBiL2RyaXZl
+cnMvdmhvc3Qvdmhvc3QuYwo+Pj4gaW5kZXggOGY5YTA3MjgyNjI1Li5hY2EyYTViMGQwNzggMTAw
+NjQ0Cj4+PiAtLS0gYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmMKPj4+ICsrKyBiL2RyaXZlcnMvdmhv
+c3Qvdmhvc3QuYwo+Pj4gQEAgLTI5OSw2ICsyOTksNyBAQCBzdGF0aWMgdm9pZCB2aG9zdF92cV9y
+ZXNldChzdHJ1Y3Qgdmhvc3RfZGV2ICpkZXYsCj4+PiAgICB7Cj4+PiAgICAJdnEtPm51bSA9IDE7
+Cj4+PiAgICAJdnEtPm5kZXNjcyA9IDA7Cj4+PiArCXZxLT5maXJzdF9kZXNjID0gMDsKPj4+ICAg
+IAl2cS0+ZGVzYyA9IE5VTEw7Cj4+PiAgICAJdnEtPmF2YWlsID0gTlVMTDsKPj4+ICAgIAl2cS0+
+dXNlZCA9IE5VTEw7Cj4+PiBAQCAtMzY3LDYgKzM2OCwxMSBAQCBzdGF0aWMgaW50IHZob3N0X3dv
+cmtlcih2b2lkICpkYXRhKQo+Pj4gICAgCXJldHVybiAwOwo+Pj4gICAgfQo+Pj4gK3N0YXRpYyBp
+bnQgdmhvc3RfdnFfbnVtX2JhdGNoX2Rlc2NzKHN0cnVjdCB2aG9zdF92aXJ0cXVldWUgKnZxKQo+
+Pj4gK3sKPj4+ICsJcmV0dXJuIHZxLT5tYXhfZGVzY3MgLSBVSU9fTUFYSU9WOwo+Pj4gK30KPj4g
+MSBkZXNjcmlwdG9yIGRvZXMgbm90IG1lYW4gMSBpb3YsIGUuZyB1c2Vyc3BhY2UgbWF5IHBhc3Mg
+c2V2ZXJhbCAxIGJ5dGUKPj4gbGVuZ3RoIG1lbW9yeSByZWdpb25zIGZvciB1cyB0byB0cmFuc2xh
+dGUuCj4+Cj4gWWVzIGJ1dCBJIGRvbid0IHNlZSB0aGUgcmVsZXZhbmNlLiBUaGlzIHRlbGxzIHVz
+IGhvdyBtYW55IGRlc2NyaXB0b3JzIHRvCj4gYmF0Y2gsIG5vdCBob3cgbWFueSBJT1ZzLgoKClll
+cywgYnV0IHF1ZXN0aW9ucyBhcmU6CgotIHRoaXMgaW50cm9kdWNlIGFub3RoZXIgb2JzdGFjbGUg
+dG8gc3VwcG9ydCBtb3JlIHRoYW4gMUsgcXVldWUgc2l6ZQotIGlmIHdlIHN1cHBvcnQgMUsgcXVl
+dWUgc2l6ZSwgZG9lcyBpdCBtZWFuIHdlIG5lZWQgdG8gY2FjaGUgMUsgCmRlc2NyaXB0b3JzLCB3
+aGljaCBzZWVtcyBhIGxhcmdlIHN0cmVzcyBvbiB0aGUgY2FjaGUKClRoYW5rcwoKCj4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9u
+IG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpo
+dHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFs
+aXphdGlvbg==
