@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D02E01EF742
-	for <lists.virtualization@lfdr.de>; Fri,  5 Jun 2020 14:25:30 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id D9AC41EF74C
+	for <lists.virtualization@lfdr.de>; Fri,  5 Jun 2020 14:25:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id ADC2625488;
-	Fri,  5 Jun 2020 12:25:28 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 84E19883A6;
+	Fri,  5 Jun 2020 12:25:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EGhIDQRDNENU; Fri,  5 Jun 2020 12:25:27 +0000 (UTC)
+	with ESMTP id Cvn-ZOrc9IiH; Fri,  5 Jun 2020 12:25:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 09C6D25492;
-	Fri,  5 Jun 2020 12:25:27 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5B28488398;
+	Fri,  5 Jun 2020 12:25:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EBF5CC016E;
-	Fri,  5 Jun 2020 12:25:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3262DC016E;
+	Fri,  5 Jun 2020 12:25:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 04C07C016E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9F238C016E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Jun 2020 12:25:26 +0000 (UTC)
+ Fri,  5 Jun 2020 12:25:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E730A84545
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8B6EE88C0A
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Jun 2020 12:25:25 +0000 (UTC)
+ Fri,  5 Jun 2020 12:25:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hcprhP-TvgTA
+ with ESMTP id 1w3Jmpo9BzKH
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Jun 2020 12:25:25 +0000 (UTC)
+ Fri,  5 Jun 2020 12:25:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5FDAB84542
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 17EA788C0D
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Jun 2020 12:25:25 +0000 (UTC)
+ Fri,  5 Jun 2020 12:25:47 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 69EBE2077D;
- Fri,  5 Jun 2020 12:25:24 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 30A2720835;
+ Fri,  5 Jun 2020 12:25:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591359925;
+ s=default; t=1591359946;
  bh=j9fuMJzFwntpV3mYqfu+qUswix+dSaLC/uawv7kL3uY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=t3Azq8Jo9C/JPbBs4xGYriy6l/T34Toyf95nAVvk4KBdTtMx4EQn7yjJQ+gGpBj21
- 5VtE2sj2eh15vWmsnrJN6DqoEs28mfBGktmTd7iGjDE5w7bWJpz67egwRZNu4Att3B
- d/NVvvjrdcRBtqOVm/tLW0X/EJ0chqdNHKDuzwsQ=
+ b=o/7cDnZ0P2pWgE151b6Rr4op8o57vFbpNz8wt8Ms6EgcHzzGBaINy9bw7lzxRAnEA
+ tvmCln3RKQqIEHSdg/FFwAbT1smJj8F7/2csD9hddIDb+eooG6QrTQsInEi02OUCK9
+ hQs5VHinJZGEJkbMybpr3pZSNVUjrHzDsoLtSg84=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.6 06/17] net: check untrusted gso_size at kernel
+Subject: [PATCH AUTOSEL 5.4 05/14] net: check untrusted gso_size at kernel
  entry
-Date: Fri,  5 Jun 2020 08:25:05 -0400
-Message-Id: <20200605122517.2882338-6-sashal@kernel.org>
+Date: Fri,  5 Jun 2020 08:25:31 -0400
+Message-Id: <20200605122540.2882539-5-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200605122517.2882338-1-sashal@kernel.org>
-References: <20200605122517.2882338-1-sashal@kernel.org>
+In-Reply-To: <20200605122540.2882539-1-sashal@kernel.org>
+References: <20200605122540.2882539-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
