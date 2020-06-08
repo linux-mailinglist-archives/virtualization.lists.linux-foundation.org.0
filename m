@@ -1,112 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 148271F15EE
-	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 11:55:12 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0A331F15F1
+	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 11:57:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4C8BA879A7;
-	Mon,  8 Jun 2020 09:55:10 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 91750858F5;
+	Mon,  8 Jun 2020 09:57:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sGfTWILZhmF6; Mon,  8 Jun 2020 09:55:09 +0000 (UTC)
+	with ESMTP id OYodBLz44SYO; Mon,  8 Jun 2020 09:57:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D131587EB0;
-	Mon,  8 Jun 2020 09:55:09 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3003485E25;
+	Mon,  8 Jun 2020 09:57:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B1691C016F;
-	Mon,  8 Jun 2020 09:55:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 24568C016F;
+	Mon,  8 Jun 2020 09:57:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 06861C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8F371C016F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 09:55:08 +0000 (UTC)
+ Mon,  8 Jun 2020 09:57:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id E937E8778F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 7746E85E25
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 09:55:07 +0000 (UTC)
+ Mon,  8 Jun 2020 09:57:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IPy0iEdVWjM7
+ with ESMTP id Jsk7o1Rna_Fv
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 09:55:07 +0000 (UTC)
+ Mon,  8 Jun 2020 09:57:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 601AA87447
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+ [209.85.221.66])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 96AE4858F5
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 09:55:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591610106;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zwRQYwEhlzI9fhHIuV2ZDsHSs0DHTOaRaWRbv3sTP+c=;
- b=d/12E/PTZZOS/m71x9FcAvx0JclAsrIKYJnZ3jHZtixotEEjN547/6UBhSSmi41G0KUuPB
- pqZqIjVfdUC7xacohLVbGSNhF9IjRUTWyr5NnKCVoACZ6rqu96iLbqaQpntQFBXeKK0npj
- wXTsg66DIgitT1UHYMUPnFhY9jeC4gI=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-468-VglqavcaOgONhBEaiMI0Xg-1; Mon, 08 Jun 2020 05:55:04 -0400
-X-MC-Unique: VglqavcaOgONhBEaiMI0Xg-1
-Received: by mail-wm1-f72.google.com with SMTP id h6so3747191wmb.7
+ Mon,  8 Jun 2020 09:57:16 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id l10so16660914wrr.10
  for <virtualization@lists.linux-foundation.org>;
- Mon, 08 Jun 2020 02:55:04 -0700 (PDT)
+ Mon, 08 Jun 2020 02:57:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=irlh/DAmGezzFSz/ZBwka7zqE6vVCqBDs6ozHXOIxqY=;
+ b=EngZ9vYwjWfjJRgmP5bX1bo/qHbsxx85LLqxWUmO8c7u3d+JbZn5DNJCLIZ+i84LnX
+ H3diKX8V9KBpQOv8CPJ8GRwqJf93FpaocP5msBC+L+erbYF55mdnYYpMN17bvAdj389D
+ Yd0mrpJkTb8eRXVqqFa8GZbqY5m4h0ZNW7SpZz6Yj0OU2ol93aoVsIa73q1xzXpJU+cv
+ +7nLuX/sRwV4BMPDPLLdF5mMZZouXn64XQy9RANABnhLwaAFAW6gY5p70M9lnil07N/G
+ E1eZ0d3g5aAMPySs8MpXyZ798UDZVAo603is4axZif/QLMA3Kexo9en9GYOUBSJL6Rz5
+ 7rsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=zwRQYwEhlzI9fhHIuV2ZDsHSs0DHTOaRaWRbv3sTP+c=;
- b=hpFVK7s+k1dTLrVnNEwr+fCl5V9TmeJmxGCcdPUAzdOnNDHcVEY1+YLOTzmnskvDm3
- iGVrWJ1HhWrhDg86u/rkbfe/UM8U25JwdrDw+wF90cMmt+aZP8ElmG3gyFxH9u8EKeL0
- VK314ZWZ3ZlAG5Ov+RvY0nw+4g6GFC39kdYczJjuN4fqZUat8NyDSLeeXQa7rHIEChkz
- yLlwdio2IVTIoPmS5Erc8VkUClUb6tiRrEOmHZ3OGNRLHkAF9UPr+NN1YVky5E3tB+oZ
- mlElzMl6+FHEvHAZkZC0ZMBZI2Kju2kZcD+W4k+CTppAGnuMjzbV+1woHTbT0qYpwKRE
- M33w==
-X-Gm-Message-State: AOAM53237ZXZCceq6xVIAIFJgA6LCinkYlP9CnrMX/i+ckwViwz4IS4b
- cUSNluQ6kyqyFaXgeoSyIZy1wq0lRXbp3IRDdE7SD7WzWuin9NvMYF1gjTlg/SP4tokv011SOII
- nprWIrBFFZQSifMZHVFPWinNWEZkz0eQby6yNi6yzDw==
-X-Received: by 2002:a7b:cf06:: with SMTP id l6mr15633409wmg.63.1591610103134; 
- Mon, 08 Jun 2020 02:55:03 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyikeAcTqFLpMRWXI7wepdD3aO0/ujjV4fOTEz+k46ZIFoeVHzdsv1BhrAhul2cvz6zw90caQ==
-X-Received: by 2002:a7b:cf06:: with SMTP id l6mr15633384wmg.63.1591610102957; 
- Mon, 08 Jun 2020 02:55:02 -0700 (PDT)
-Received: from redhat.com (bzq-109-64-41-91.red.bezeqint.net. [109.64.41.91])
- by smtp.gmail.com with ESMTPSA id
- o15sm23160537wrv.48.2020.06.08.02.55.00
+ :mime-version:content-disposition:in-reply-to;
+ bh=irlh/DAmGezzFSz/ZBwka7zqE6vVCqBDs6ozHXOIxqY=;
+ b=bjp9t8TCXLnzEfbgiqUSg5zlnHjKeWYJSI434cI1cPyDu2q/InbsJ5W1BRPSf1RHJh
+ v/hq2mbwDwS7gVDi36BN8HUurzqYlyscbnALQPTgz1AI4GIq0qDpTMmPtIAE7cfFMhpt
+ 0XyGmDh3yqdRdJ9lNxl/QZW/XngJgV+738sQsCpQLYERt9+SsMneeEFYyYuv0+kzxAl7
+ Zi7KShLv3h/zRz/WmtsSePYjs1m4czbUnhI0QGGkw93q09SPE8n5AfIVcUiaQrNBXqkh
+ KENQslSiUqKCW2FomaQUCdGrl5LrDm72G1WfMEzColXulbnPpLsRvUhLR+s3tWXxmwl/
+ 4uUg==
+X-Gm-Message-State: AOAM530XrhLL1tUeTxiX7d8F9u5UKx/1neHuEmXjlA0TFk8Wg2Vglzbq
+ 2J4/uiDOUPWnS1m/XuerSSk=
+X-Google-Smtp-Source: ABdhPJwM5am6ET01ZHpQxOXqWgs/YmeMFbTYTcVvDiGZDZOutBBcV+gGDbCKng83YgT4N3gVfVuOLw==
+X-Received: by 2002:adf:d852:: with SMTP id k18mr22928605wrl.177.1591610234965; 
+ Mon, 08 Jun 2020 02:57:14 -0700 (PDT)
+Received: from localhost ([51.15.41.238])
+ by smtp.gmail.com with ESMTPSA id c70sm11547618wme.32.2020.06.08.02.57.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 02:55:02 -0700 (PDT)
-Date: Mon, 8 Jun 2020 05:54:59 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 5/6] vdpa: introduce virtio pci driver
-Message-ID: <20200608055331-mutt-send-email-mst@kernel.org>
-References: <5dbb0386-beeb-5bf4-d12e-fb5427486bb8@redhat.com>
- <6b1d1ef3-d65e-08c2-5b65-32969bb5ecbc@redhat.com>
- <20200607095012-mutt-send-email-mst@kernel.org>
- <9b1abd2b-232c-aa0f-d8bb-03e65fd47de2@redhat.com>
- <20200608021438-mutt-send-email-mst@kernel.org>
- <a1b1b7fb-b097-17b7-2e3a-0da07d2e48ae@redhat.com>
- <20200608052041-mutt-send-email-mst@kernel.org>
- <9d2571b6-0b95-53b3-6989-b4d801eeb623@redhat.com>
- <20200608054453-mutt-send-email-mst@kernel.org>
- <bc27064c-2309-acf3-ccd8-6182bfa2a4cd@redhat.com>
+ Mon, 08 Jun 2020 02:57:14 -0700 (PDT)
+Date: Mon, 8 Jun 2020 10:57:12 +0100
+From: Stefan Hajnoczi <stefanha@gmail.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH RFC v5 11/13] vhost/scsi: switch to buf APIs
+Message-ID: <20200608095712.GD83191@stefanha-x1.localdomain>
+References: <20200607141057.704085-1-mst@redhat.com>
+ <20200607141057.704085-12-mst@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <bc27064c-2309-acf3-ccd8-6182bfa2a4cd@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: shahafs@mellanox.com, lulu@redhat.com, kvm@vger.kernel.org,
- saugatm@xilinx.com, netdev@vger.kernel.org, mhabets@solarflare.com,
- vmireyno@marvell.com, linux-kernel@vger.kernel.org, gdawar@xilinx.com,
+In-Reply-To: <20200607141057.704085-12-mst@redhat.com>
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org, eperezma@redhat.com,
- hanand@xilinx.com, zhangweining@ruijie.com.cn, eli@mellanox.com,
- lingshan.zhu@intel.com, rob.miller@broadcom.com
+ Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -118,28 +95,59 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7937025780558049637=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gTW9uLCBKdW4gMDgsIDIwMjAgYXQgMDU6NDY6NTJQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIwLzYvOCDkuIvljYg1OjQ1LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6
-Cj4gPiBPbiBNb24sIEp1biAwOCwgMjAyMCBhdCAwNTo0Mzo1OFBNICswODAwLCBKYXNvbiBXYW5n
-IHdyb3RlOgo+ID4gPiA+ID4gTG9va2luZyBhdAo+ID4gPiA+ID4gcGNpX21hdGNoX29uZV9kZXZp
-Y2UoKSBpdCBjaGVja3MgYm90aCBzdWJ2ZW5kb3IgYW5kIHN1YmRldmljZSB0aGVyZS4KPiA+ID4g
-PiA+IAo+ID4gPiA+ID4gVGhhbmtzCj4gPiA+ID4gQnV0IElJVUMgdGhlcmUgaXMgbm8gZ3VhcmFu
-dGVlIHRoYXQgZHJpdmVyIHdpdGggYSBzcGVjaWZpYyBzdWJ2ZW5kb3IKPiA+ID4gPiBtYXRjaGVz
-IGluIHByZXNlbmNlIG9mIGEgZ2VuZXJpYyBvbmUuCj4gPiA+ID4gU28gZWl0aGVyIElGQyBvciB2
-aXJ0aW8gcGNpIGNhbiB3aW4sIHdoaWNoZXZlciBiaW5kcyBmaXJzdC4KPiA+ID4gCj4gPiA+IEkn
-bSBub3Qgc3VyZSBJIGdldCB0aGVyZS4gQnV0IEkgdHJ5IG1hbnVhbGx5IGJpbmQgSUZDVkYgdG8g
-cWVtdSdzCj4gPiA+IHZpcnRpby1uZXQtcGNpLCBhbmQgaXQgZmFpbHMuCj4gPiA+IAo+ID4gPiBU
-aGFua3MKPiA+IFJpZ2h0IGJ1dCB0aGUgcmV2ZXJzZSBjYW4gaGFwcGVuOiB2aXJ0aW8tbmV0IGNh
-biBiaW5kIHRvIElGQ1ZGIGZpcnN0Lgo+IAo+IAo+IFRoYXQncyBraW5kIG9mIGV4cGVjdGVkLiBU
-aGUgUEYgaXMgZXhwZWN0ZWQgdG8gYmUgYm91bmQgdG8gdmlydGlvLXBjaSB0bwo+IGNyZWF0ZSBW
-RiB2aWEgc3lzZnMuCj4gCj4gVGhhbmtzCj4gCj4gCj4gCgpPbmNlIFZGcyBhcmUgY3JlYXRlZCwg
-ZG9uJ3Qgd2Ugd2FudCBJRkNWRiB0byBiaW5kIHJhdGhlciB0aGFuCnZpcnRpby1wY2k/CgotLSAK
-TVNUCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0
-dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRh
-dGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGlu
-Zm8vdmlydHVhbGl6YXRpb24=
+
+--===============7937025780558049637==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="3Gf/FFewwPeBMqCJ"
+Content-Disposition: inline
+
+
+--3Gf/FFewwPeBMqCJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Jun 07, 2020 at 10:11:46AM -0400, Michael S. Tsirkin wrote:
+> Switch to buf APIs. Doing this exposes a spec violation in vhost scsi:
+> all used bufs are marked with length 0.
+> Fix that is left for another day.
+>=20
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> ---
+>  drivers/vhost/scsi.c | 73 ++++++++++++++++++++++++++------------------
+>  1 file changed, 44 insertions(+), 29 deletions(-)
+
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+
+--3Gf/FFewwPeBMqCJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl7eC3gACgkQnKSrs4Gr
+c8jC3Af+LPXirMBmRcs7FQbxFSgLfLDjpnub+fLUo+dN0CH5ElfkoqGW6HJ8d7er
+qlDKL+3ZPm1i0cRsqnN+xg6qZ2UKbC83RHrZ1z12NzkrluuFD4knW3/gjyyQPXvw
+N8QQvguhNCO6DJ5yj8njHLuaAi44jkigVA5kFA5e8EFjsGHSQhoamQH23M/89rey
+FOot5VmlwGfXtL216ALh6oIoLPuVvrQlQA6iVZGxXP4hgv+z7mJXzLmfJ7l2UnkB
+OrdaqlvJcy4ZpKXZtVl5kfLbvRMuuv6a1OeLKW/FU2pJKxa5gn8WGdek5o5XrmpP
+Uf/M6MvauUK5c9F369S2pWsEv+mqag==
+=6nV4
+-----END PGP SIGNATURE-----
+
+--3Gf/FFewwPeBMqCJ--
+
+--===============7937025780558049637==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============7937025780558049637==--
