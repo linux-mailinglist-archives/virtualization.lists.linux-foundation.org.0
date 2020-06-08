@@ -1,77 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 384171F1E0E
-	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 19:02:42 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 344801F1E26
+	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 19:09:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BF7598817F;
-	Mon,  8 Jun 2020 17:02:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C2BEF862AC;
+	Mon,  8 Jun 2020 17:08:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id y6Yk6vPN996G; Mon,  8 Jun 2020 17:02:39 +0000 (UTC)
+	with ESMTP id B_ALOLUCIX4l; Mon,  8 Jun 2020 17:08:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 68108881B7;
-	Mon,  8 Jun 2020 17:02:39 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 494EA862AB;
+	Mon,  8 Jun 2020 17:08:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3D8B4C016F;
-	Mon,  8 Jun 2020 17:02:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1B67FC016F;
+	Mon,  8 Jun 2020 17:08:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7D3A4C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EA870C016F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 17:02:37 +0000 (UTC)
+ Mon,  8 Jun 2020 17:08:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 749A286216
+ by fraxinus.osuosl.org (Postfix) with ESMTP id D3125862A9
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 17:02:37 +0000 (UTC)
+ Mon,  8 Jun 2020 17:08:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gBn4INQjkPSx
+ with ESMTP id F6Gp-CP02n99
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 17:02:35 +0000 (UTC)
+ Mon,  8 Jun 2020 17:08:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 36D1E86205
+Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 08E1985478
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 17:02:35 +0000 (UTC)
-IronPort-SDR: S5RZcc9gvyp8tmB11zyboMhyFSR+jDUBJkFYXejbRY3WEH4xcg9DSk/lJDslVoFdl7OaUI1HUP
- y3W3XsmJLbEg==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jun 2020 10:02:32 -0700
-IronPort-SDR: p4KFNaWueYHUWVFFaEvmfRaE7L2L3X79MfyU23nJE5C9UKdgy8vS9D3H67NaNJHIg/fzsweu60
- 3FRFbfslAMJg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,487,1583222400"; d="scan'208";a="472767150"
-Received: from gliakhov-mobl2.ger.corp.intel.com (HELO ubuntu)
- ([10.249.46.212])
- by fmsmga005.fm.intel.com with ESMTP; 08 Jun 2020 10:02:29 -0700
-Date: Mon, 8 Jun 2020 19:02:27 +0200
-From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-To: Mathieu Poirier <mathieu.poirier@linaro.org>
-Subject: Re: [RFC 12/12] rpmsg: add a device ID to also bind to the ADSP device
-Message-ID: <20200608170227.GG10562@ubuntu>
-References: <20200529073722.8184-1-guennadi.liakhovetski@linux.intel.com>
- <20200529073722.8184-13-guennadi.liakhovetski@linux.intel.com>
- <20200604200156.GB26734@xps15> <20200605064659.GC32302@ubuntu>
- <20200608161757.GA32518@xps15>
+ Mon,  8 Jun 2020 17:08:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1591636135;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=sI72Ms6GymnWW5IgfsQfm5B7QZQFkpb/EFt5z5NFsqI=;
+ b=ILrdMXY7VyUV77Xbdh+HTzXB0Fkgsn+bKnVpuKJuAdR5BvVRg/LDvVlq2dAZ7zxap6aqfg
+ zdy9lKsA7oYyJ09Hc7/44HsGaowUUidL3XWPdXby3NIQUh4b5yPN+9snrRoUitvKmKGZXV
+ Uc+N6jvw8/2YGAtghYQzw0+uB0pZ7c8=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-10-dHpTRnM3OmquFmbLkqDBVw-1; Mon, 08 Jun 2020 13:08:54 -0400
+X-MC-Unique: dHpTRnM3OmquFmbLkqDBVw-1
+Received: by mail-wr1-f69.google.com with SMTP id t5so7400893wro.20
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 08 Jun 2020 10:08:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=sI72Ms6GymnWW5IgfsQfm5B7QZQFkpb/EFt5z5NFsqI=;
+ b=Rh752fu37t4U3DI899Z67UP40QBgl0WJkxp4vRocDx4+12NwgAnWrU2k1pzRq+F6FA
+ UWcuNGAvATkjHRM+5gPw8Y9GwuuFpYuVx2Tmhi/qjbPHYqV7SBHWFHt+9e3TU2hooNy2
+ 0YpqLJqawbmMScISB3p3i7fYtak4Oc3Sb8wgyCWSbxlDMwLrAOklN45NjyANNqHJi5EN
+ pdLF+1Ftibtka60iFHBgqYyT3u7Es3Ka9wnWKd6rYrclCxaq10g6rz277zy2qyV/TMMK
+ oOHsS04FGa1c9YmXpOWpdWTc49YqfKrJb/gzX19v1A1O9VxohcwnbghnazCy7efFRBVV
+ IkIQ==
+X-Gm-Message-State: AOAM533J2Jr2Dyw/jm3S6W/7U7RPbfc6YVZ59kQxLse2YvkVLMCMgUgz
+ JdcIMC7MKqmNHlbmXSA6EhnBhQPbx3jFVG/2UoPhSIAx5gyElXz3VPJo4wta9PIuJn+lzLWH9Gj
+ UskkIaB0ROS5BOwnXD73r4vQE5MZQ0zdxmB7O24yU7g==
+X-Received: by 2002:a1c:3b43:: with SMTP id i64mr339438wma.112.1591636132899; 
+ Mon, 08 Jun 2020 10:08:52 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw4dUf9x3rgVZHJRvrEuMPKhxm/lCre/+sG86XOaArTyYsFZli8wP4z+s74imLE54MU9CeoNw==
+X-Received: by 2002:a1c:3b43:: with SMTP id i64mr339413wma.112.1591636132598; 
+ Mon, 08 Jun 2020 10:08:52 -0700 (PDT)
+Received: from steredhat ([79.49.207.108])
+ by smtp.gmail.com with ESMTPSA id l2sm342741wru.58.2020.06.08.10.08.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2020 10:08:51 -0700 (PDT)
+Date: Mon, 8 Jun 2020 19:08:49 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH RFC v6 10/11] vhost/vsock: switch to the buf API
+Message-ID: <20200608170849.udaxzmfzmhbonoi7@steredhat>
+References: <20200608125238.728563-1-mst@redhat.com>
+ <20200608125238.728563-11-mst@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <20200608125238.728563-11-mst@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20200608161757.GA32518@xps15>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Ohad Ben-Cohen <ohad@wizery.com>, kvm@vger.kernel.org,
- "Michael S. Tsirkin" <mst@redhat.com>, linux-remoteproc@vger.kernel.org,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Liam Girdwood <liam.r.girdwood@linux.intel.com>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- sound-open-firmware@alsa-project.org
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, eperezma@redhat.com,
+ Stefan Hajnoczi <stefanha@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,87 +108,112 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Mathieu,
-
-On Mon, Jun 08, 2020 at 10:17:57AM -0600, Mathieu Poirier wrote:
-> On Fri, Jun 05, 2020 at 08:46:59AM +0200, Guennadi Liakhovetski wrote:
-> > Hi Mathieu,
-> > 
-> > On Thu, Jun 04, 2020 at 02:01:56PM -0600, Mathieu Poirier wrote:
-> > > On Fri, May 29, 2020 at 09:37:22AM +0200, Guennadi Liakhovetski wrote:
-> > > > The ADSP device uses the RPMsg API to connect vhost and VirtIO SOF
-> > > > Audio DSP drivers on KVM host and guest.
-> > > > 
-> > > > Signed-off-by: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-> > > > ---
-> > > >  drivers/rpmsg/virtio_rpmsg_bus.c | 1 +
-> > > >  1 file changed, 1 insertion(+)
-> > > > 
-> > > > diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
-> > > > index f3bd050..ebe3f19 100644
-> > > > --- a/drivers/rpmsg/virtio_rpmsg_bus.c
-> > > > +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
-> > > > @@ -949,6 +949,7 @@ static void rpmsg_remove(struct virtio_device *vdev)
-> > > >  
-> > > >  static struct virtio_device_id id_table[] = {
-> > > >  	{ VIRTIO_ID_RPMSG, VIRTIO_DEV_ANY_ID },
-> > > > +	{ VIRTIO_ID_ADSP, VIRTIO_DEV_ANY_ID },
-> > > 
-> > > I am fine with this patch but won't add an RB because of the (many) checkpatch
-> > > errors.  Based on the comment I made on the previous set seeing those was
-> > > unexpected.
-> > 
-> > Are you using "--strict?" Sorry, I don't see any checkpatch errors, only warnings. 
+On Mon, Jun 08, 2020 at 08:53:13AM -0400, Michael S. Tsirkin wrote:
+> A straight-forward conversion.
 > 
-> No, plane checkpatch on the rproc-next branch.
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> ---
+>  drivers/vhost/vsock.c | 30 ++++++++++++++++++------------
+>  1 file changed, 18 insertions(+), 12 deletions(-)
+
+I ran the vsock tests again with this new series and everything seems
+to go well:
+
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+Tested-by: Stefano Garzarella <sgarzare@redhat.com>
+
+Thanks,
+Stefano
+
 > 
-> > Most of them are "over 80 characters" which as we now know is no more an issue,
-> 
-> There is a thread discussing the matter but I have not seen a clear resolution
-> yet.
-
-I think the resolution is pretty clear as defined by Linus, but maybe it has changed 
-again since I last checked.
-
-> > I just haven't updated my tree yet. Most others are really minor IMHO. Maybe one
-> 
-> Minor or not, if checkpatch complains then it is important enough to address.  I
-> am willing to overlook the lines over 80 characters but everything else needs to
-> be dealt with.
-
-Sure, checkpatch should be run before each patch submission and whatever it reports 
-should be considered. As Documentation/process/submitting-patches.rst clearly 
-states:
-
-"Check your patches with the patch style checker prior to submission
-(scripts/checkpatch.pl).  Note, though, that the style checker should be
-viewed as a guide, not as a replacement for human judgment.  If your code
-looks better with a violation then its probably best left alone."
-
-So, yes, I checked all what checkepatch reported and used my judgement to decide 
-which recommendations to take and which to ignore.
-
-Thanks
-Guennadi
-
-> Thanks,
-> Mathieu
+> diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
+> index a483cec31d5c..61c6d3dd2ae3 100644
+> --- a/drivers/vhost/vsock.c
+> +++ b/drivers/vhost/vsock.c
+> @@ -103,7 +103,8 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
+>  		unsigned out, in;
+>  		size_t nbytes;
+>  		size_t iov_len, payload_len;
+> -		int head;
+> +		struct vhost_buf buf;
+> +		int ret;
 >  
-> > of them I actually would want to fix - using "help" instead of "---help---" in 
-> > Kconfig. What errors are you seeing in your checks?
-> > 
-> > Thanks
-> > Guennadi
-> > 
-> > > Thanks,
-> > > Mathieu
-> > > 
-> > > >  	{ 0 },
-> > > >  };
-> > > >  
-> > > > -- 
-> > > > 1.9.3
-> > > > 
+>  		spin_lock_bh(&vsock->send_pkt_list_lock);
+>  		if (list_empty(&vsock->send_pkt_list)) {
+> @@ -117,16 +118,17 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
+>  		list_del_init(&pkt->list);
+>  		spin_unlock_bh(&vsock->send_pkt_list_lock);
+>  
+> -		head = vhost_get_vq_desc(vq, vq->iov, ARRAY_SIZE(vq->iov),
+> -					 &out, &in, NULL, NULL);
+> -		if (head < 0) {
+> +		ret = vhost_get_avail_buf(vq, &buf,
+> +					  vq->iov, ARRAY_SIZE(vq->iov),
+> +					  &out, &in, NULL, NULL);
+> +		if (ret < 0) {
+>  			spin_lock_bh(&vsock->send_pkt_list_lock);
+>  			list_add(&pkt->list, &vsock->send_pkt_list);
+>  			spin_unlock_bh(&vsock->send_pkt_list_lock);
+>  			break;
+>  		}
+>  
+> -		if (head == vq->num) {
+> +		if (!ret) {
+>  			spin_lock_bh(&vsock->send_pkt_list_lock);
+>  			list_add(&pkt->list, &vsock->send_pkt_list);
+>  			spin_unlock_bh(&vsock->send_pkt_list_lock);
+> @@ -186,7 +188,8 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
+>  		 */
+>  		virtio_transport_deliver_tap_pkt(pkt);
+>  
+> -		vhost_add_used(vq, head, sizeof(pkt->hdr) + payload_len);
+> +		buf.in_len = sizeof(pkt->hdr) + payload_len;
+> +		vhost_put_used_buf(vq, &buf);
+>  		added = true;
+>  
+>  		pkt->off += payload_len;
+> @@ -440,7 +443,8 @@ static void vhost_vsock_handle_tx_kick(struct vhost_work *work)
+>  	struct vhost_vsock *vsock = container_of(vq->dev, struct vhost_vsock,
+>  						 dev);
+>  	struct virtio_vsock_pkt *pkt;
+> -	int head, pkts = 0, total_len = 0;
+> +	int ret, pkts = 0, total_len = 0;
+> +	struct vhost_buf buf;
+>  	unsigned int out, in;
+>  	bool added = false;
+>  
+> @@ -461,12 +465,13 @@ static void vhost_vsock_handle_tx_kick(struct vhost_work *work)
+>  			goto no_more_replies;
+>  		}
+>  
+> -		head = vhost_get_vq_desc(vq, vq->iov, ARRAY_SIZE(vq->iov),
+> -					 &out, &in, NULL, NULL);
+> -		if (head < 0)
+> +		ret = vhost_get_avail_buf(vq, &buf,
+> +					  vq->iov, ARRAY_SIZE(vq->iov),
+> +					  &out, &in, NULL, NULL);
+> +		if (ret < 0)
+>  			break;
+>  
+> -		if (head == vq->num) {
+> +		if (!ret) {
+>  			if (unlikely(vhost_enable_notify(&vsock->dev, vq))) {
+>  				vhost_disable_notify(&vsock->dev, vq);
+>  				continue;
+> @@ -494,7 +499,8 @@ static void vhost_vsock_handle_tx_kick(struct vhost_work *work)
+>  			virtio_transport_free_pkt(pkt);
+>  
+>  		len += sizeof(pkt->hdr);
+> -		vhost_add_used(vq, head, len);
+> +		buf.in_len = len;
+> +		vhost_put_used_buf(vq, &buf);
+>  		total_len += len;
+>  		added = true;
+>  	} while(likely(!vhost_exceeds_weight(vq, ++pkts, total_len)));
+> -- 
+> MST
+> 
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
