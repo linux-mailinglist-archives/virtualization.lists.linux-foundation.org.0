@@ -2,108 +2,124 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC95C1F12DE
-	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 08:32:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D54501F1302
+	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 08:44:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A100A85C2E;
-	Mon,  8 Jun 2020 06:32:54 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8C28885BFB;
+	Mon,  8 Jun 2020 06:44:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id R12vLS9OtqST; Mon,  8 Jun 2020 06:32:54 +0000 (UTC)
+	with ESMTP id hu-nXagi_xaA; Mon,  8 Jun 2020 06:44:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3A40885BFB;
-	Mon,  8 Jun 2020 06:32:54 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B450D85BD1;
+	Mon,  8 Jun 2020 06:44:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D8F1FC016F;
-	Mon,  8 Jun 2020 06:32:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A782C016F;
+	Mon,  8 Jun 2020 06:44:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A01C8C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4079BC016F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 06:32:51 +0000 (UTC)
+ Mon,  8 Jun 2020 06:44:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 9B1C186651
+ by whitealder.osuosl.org (Postfix) with ESMTP id 2F9A186849
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 06:32:51 +0000 (UTC)
+ Mon,  8 Jun 2020 06:44:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dflTVajSYCPg
+ with ESMTP id ge0YJSOKch34
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 06:32:51 +0000 (UTC)
+ Mon,  8 Jun 2020 06:44:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id CE7E08663C
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 7CF1C86840
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 06:32:50 +0000 (UTC)
+ Mon,  8 Jun 2020 06:44:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591597969;
+ s=mimecast20190719; t=1591598678;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uHa43udsYNKZo7N6VKsAJNE6lMJI4Ma06bbThMjTBZc=;
- b=E+znX66PqYlcKhzCZFErXyHapDYqr5vEZUDPRxGmkfHUA8OcBTRvH+GFH1sQLFfUFljnWq
- 9M/QsOcfb+Vu8INbzRQlWLKdD3TNJp1MlAAfhuPJUqraLe1Bpoa0EIOm8XSjC/ZyzzLyxa
- W9oBZN05HHdgqRNrS7NbytwMMFbBlF8=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-90-x64DCkEkOrOfIzQbs8noDw-1; Mon, 08 Jun 2020 02:32:47 -0400
-X-MC-Unique: x64DCkEkOrOfIzQbs8noDw-1
-Received: by mail-wr1-f71.google.com with SMTP id c14so6696927wrw.11
- for <virtualization@lists.linux-foundation.org>;
- Sun, 07 Jun 2020 23:32:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=uHa43udsYNKZo7N6VKsAJNE6lMJI4Ma06bbThMjTBZc=;
- b=F7sAH5bljiqu8sW2SzBIl4DSFybqS0fnM4vzukQN0yVGlYO5L4NwZLFWn+8PgO0aKy
- ZygtZXgUlpR/54FfqOpoN8I9m1f86OONq/8S8YNYne/6FzgtKXt2dX+s2TWWKELHHbDc
- lVEt+jnqId2OID+WinQf/yb9n/KdnZg79nbCvzms8jFLKbXhDRO7RBULWERVLhPwrfV5
- VyM1Dm/7NR7sSp2Bdv+SA6ymPZ1No+jRFeExTkx49sSromUm473jvXIOjWbwFbySRlll
- ZTR3mywF1KuNMo3fHq7LXTfSXBPrtl30a8YHBvOwENsesGgJE+HwYvLBWglBbN96WKq7
- AxWA==
-X-Gm-Message-State: AOAM533JUSqKLM5lr/LWEpzAv//McyTfcgX/ddICpVfrqsb8ktFLpOwF
- crCNLD0YVlYU+6XHyFpvzJQ3qH4NpUfDfC2TYeHeIGn9BRXXiNp9Lq/L5ed/tUvLW93Vp7yjnqG
- 45j+I6jnIFzy+eqp88nngKhe1JICd+smISMdJ0rSlPw==
-X-Received: by 2002:adf:f4c6:: with SMTP id h6mr22588494wrp.398.1591597966538; 
- Sun, 07 Jun 2020 23:32:46 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwHTpMMuo2IYOqOej95ECMKiyl7nT0Q76q7fFs8v5zZkhDNtkqrniK0oE26ia6RYqO77tX8Xg==
-X-Received: by 2002:adf:f4c6:: with SMTP id h6mr22588471wrp.398.1591597966374; 
- Sun, 07 Jun 2020 23:32:46 -0700 (PDT)
-Received: from redhat.com (bzq-109-64-41-91.red.bezeqint.net. [109.64.41.91])
- by smtp.gmail.com with ESMTPSA id
- c16sm22492989wrx.4.2020.06.07.23.32.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jun 2020 23:32:45 -0700 (PDT)
-Date: Mon, 8 Jun 2020 02:32:42 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 5/6] vdpa: introduce virtio pci driver
-Message-ID: <20200608021438-mutt-send-email-mst@kernel.org>
-References: <20200529080303.15449-1-jasowang@redhat.com>
- <20200529080303.15449-6-jasowang@redhat.com>
- <20200602010332-mutt-send-email-mst@kernel.org>
- <5dbb0386-beeb-5bf4-d12e-fb5427486bb8@redhat.com>
- <6b1d1ef3-d65e-08c2-5b65-32969bb5ecbc@redhat.com>
- <20200607095012-mutt-send-email-mst@kernel.org>
- <9b1abd2b-232c-aa0f-d8bb-03e65fd47de2@redhat.com>
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=E2tZV/5UzNyePvnrk/Ly4S8y7bQMF+L8MsnYaYHn1KQ=;
+ b=RVcZO7Rw0rcC69pFPBQHtJlZs2F4kzjI0lysCYkZ9sefP2HLWxQXKBvrD46YgJwCUaUIXn
+ Q+2NnLC7S1SwTdSmcL+6KbqGbpkStFjzb5lnfJK9a+bxZGd01BceWed/4JopBk8RASJSE3
+ NTSdJ81lzalTYoTFY8t+ewQYiSIwo20=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-58-N4wmD7QUNeOAQPDTGuZR-w-1; Mon, 08 Jun 2020 02:44:36 -0400
+X-MC-Unique: N4wmD7QUNeOAQPDTGuZR-w-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0D4711007270;
+ Mon,  8 Jun 2020 06:44:35 +0000 (UTC)
+Received: from [10.36.113.136] (ovpn-113-136.ams2.redhat.com [10.36.113.136])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F2F8F648DB;
+ Mon,  8 Jun 2020 06:44:30 +0000 (UTC)
+Subject: Re: [PATCH] virtio-mem: drop unnecessary initialization
+To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
+References: <20200608054517.708167-1-mst@redhat.com>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+Organization: Red Hat GmbH
+Message-ID: <f3535274-296d-62b0-106a-29c52a554815@redhat.com>
+Date: Mon, 8 Jun 2020 08:44:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <9b1abd2b-232c-aa0f-d8bb-03e65fd47de2@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: shahafs@mellanox.com, lulu@redhat.com, kvm@vger.kernel.org,
- saugatm@xilinx.com, netdev@vger.kernel.org, mhabets@solarflare.com,
- vmireyno@marvell.com, linux-kernel@vger.kernel.org, gdawar@xilinx.com,
- virtualization@lists.linux-foundation.org, eperezma@redhat.com,
- hanand@xilinx.com, zhangweining@ruijie.com.cn, eli@mellanox.com,
- lingshan.zhu@intel.com, rob.miller@broadcom.com
+In-Reply-To: <20200608054517.708167-1-mst@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ kernel test robot <lkp@intel.com>, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -115,41 +131,44 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gTW9uLCBKdW4gMDgsIDIwMjAgYXQgMTE6MzI6MzFBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIwLzYvNyDkuIvljYg5OjUxLCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6
-Cj4gPiBPbiBGcmksIEp1biAwNSwgMjAyMCBhdCAwNDo1NDoxN1BNICswODAwLCBKYXNvbiBXYW5n
-IHdyb3RlOgo+ID4gPiBPbiAyMDIwLzYvMiDkuIvljYgzOjA4LCBKYXNvbiBXYW5nIHdyb3RlOgo+
-ID4gPiA+ID4gPiArc3RhdGljIGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkIHZwX3ZkcGFfaWRf
-dGFibGVbXSA9IHsKPiA+ID4gPiA+ID4gK8KgwqDCoCB7IFBDSV9ERVZJQ0UoUENJX1ZFTkRPUl9J
-RF9SRURIQVRfUVVNUkFORVQsIFBDSV9BTllfSUQpIH0sCj4gPiA+ID4gPiA+ICvCoMKgwqAgeyAw
-IH0KPiA+ID4gPiA+ID4gK307Cj4gPiA+ID4gPiBUaGlzIGxvb2tzIGxpa2UgaXQnbGwgY3JlYXRl
-IGEgbWVzcyB3aXRoIGVpdGhlciB2aXJ0aW8gcGNpCj4gPiA+ID4gPiBvciB2ZHBhIGJlaW5nIGxv
-YWRlZCBhdCByYW5kb20uIE1heWJlIGp1c3QgZG9uJ3Qgc3BlY2lmeQo+ID4gPiA+ID4gYW55IElE
-cyBmb3Igbm93LiBEb3duIHRoZSByb2FkIHdlIGNvdWxkIGdldCBhCj4gPiA+ID4gPiBkaXN0aW5j
-dCB2ZW5kb3IgSUQgb3IgYSByYW5nZSBvZiBkZXZpY2UgSURzIGZvciB0aGlzLgo+ID4gPiA+IAo+
-ID4gPiA+IFJpZ2h0LCB3aWxsIGRvLgo+ID4gPiA+IAo+ID4gPiA+IFRoYW5rcwo+ID4gPiAKPiA+
-ID4gUmV0aGluayBhYm91dCB0aGlzLiBJZiB3ZSBkb24ndCBzcGVjaWZ5IGFueSBJRCwgdGhlIGJp
-bmRpbmcgd29uJ3Qgd29yay4KPiA+IFdlIGNhbiBiaW5kIG1hbnVhbGx5LiBJdCdzIG5vdCByZWFs
-bHkgZm9yIHByb2R1Y3Rpb24gYW55d2F5LCBzbwo+ID4gbm90IGEgYmlnIGRlYWwgaW1oby4KPiAK
-PiAKPiBJIHRoaW5rIHlvdSBtZWFuIGRvaW5nIGl0IHZpYSAibmV3X2lkIiwgcmlnaHQuCgpJIHJl
-YWxseSBtZWFudCBkcml2ZXJfb3ZlcnJpZGUuIFRoaXMgaXMgd2hhdCBwZW9wbGUgaGF2ZSBiZWVu
-IHVzaW5nCndpdGggcGNpLXN0dWIgZm9yIHllYXJzIG5vdy4KCj4gCj4gPiAKPiA+ID4gSG93IGFi
-b3V0IHVzaW5nIGEgZGVkaWNhdGVkIHN1YnN5c3RlbSB2ZW5kb3IgaWQgZm9yIHRoaXM/Cj4gPiA+
-IAo+ID4gPiBUaGFua3MKPiA+IElmIHZpcnRpbyB2ZW5kb3IgaWQgaXMgdXNlZCB0aGVuIHN0YW5k
-YXJkIGRyaXZlciBpcyBleHBlY3RlZAo+ID4gdG8gYmluZCwgcmlnaHQ/IE1heWJlIHVzZSBhIGRl
-ZGljYXRlZCB2ZW5kb3IgaWQ/Cj4gCj4gCj4gSSBtZWFudCBzb21ldGhpbmcgbGlrZToKPiAKPiBz
-dGF0aWMgY29uc3Qgc3RydWN0IHBjaV9kZXZpY2VfaWQgdnBfdmRwYV9pZF90YWJsZVtdID0gewo+
-IMKgwqDCoCB7IFBDSV9ERVZJQ0VfU1VCKFBDSV9WRU5ET1JfSURfUkVESEFUX1FVTVJBTkVULCBQ
-Q0lfQU5ZX0lELAo+IFZQX1RFU1RfVkVORE9SX0lELCBWUF9URVNUX0RFVklDRV9JRCkgfSwKPiDC
-oMKgwqAgeyAwIH0KPiB9Owo+IAo+IFRoYW5rcwo+IAoKVGhlbiByZWd1bGFyIHZpcnRpbyB3aWxs
-IHN0aWxsIGJpbmQgdG8gaXQuIEl0IGhhcwoKZHJpdmVycy92aXJ0aW8vdmlydGlvX3BjaV9jb21t
-b24uYzogICAgIHsgUENJX0RFVklDRShQQ0lfVkVORE9SX0lEX1JFREhBVF9RVU1SQU5FVCwgUENJ
-X0FOWV9JRCkgfSwKCgotLSAKTVNUCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25A
-bGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24u
-b3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On 08.06.20 07:45, Michael S. Tsirkin wrote:
+> rc is initialized to -ENIVAL but that's never used. Drop it.
+> 
+> Fixes: 5f1f79bbc9e2 ("virtio-mem: Paravirtualized memory hotplug")
+> Reported-by: kernel test robot <lkp@intel.com>
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> ---
+>  drivers/virtio/virtio_mem.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
+> index f658fe9149be..2f357142ea5e 100644
+> --- a/drivers/virtio/virtio_mem.c
+> +++ b/drivers/virtio/virtio_mem.c
+> @@ -1768,7 +1768,7 @@ static void virtio_mem_delete_resource(struct virtio_mem *vm)
+>  static int virtio_mem_probe(struct virtio_device *vdev)
+>  {
+>  	struct virtio_mem *vm;
+> -	int rc = -EINVAL;
+> +	int rc;
+>  
+>  	BUILD_BUG_ON(sizeof(struct virtio_mem_req) != 24);
+>  	BUILD_BUG_ON(sizeof(struct virtio_mem_resp) != 10);
+> 
+
+Acked-by: David Hildenbrand <david@redhat.com>
+
+-- 
+Thanks,
+
+David / dhildenb
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
