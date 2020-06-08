@@ -1,71 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14D871F10F1
-	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 03:00:11 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id C02091F11BA
+	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 05:32:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C354186776;
-	Mon,  8 Jun 2020 01:00:09 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id D5319204AD;
+	Mon,  8 Jun 2020 03:32:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id P8ToS+sWoe5s; Mon,  8 Jun 2020 01:00:09 +0000 (UTC)
+	with ESMTP id lD-rMOSAfCLe; Mon,  8 Jun 2020 03:32:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 13DBA8676A;
-	Mon,  8 Jun 2020 01:00:09 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id DA92F2047E;
+	Mon,  8 Jun 2020 03:32:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C7746C016F;
-	Mon,  8 Jun 2020 01:00:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 963A4C016F;
+	Mon,  8 Jun 2020 03:32:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 02F26C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D4293C016F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 01:00:06 +0000 (UTC)
+ Mon,  8 Jun 2020 03:32:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id DEA5785582
+ by fraxinus.osuosl.org (Postfix) with ESMTP id BAD4D8511F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 01:00:06 +0000 (UTC)
+ Mon,  8 Jun 2020 03:32:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ob9efzFQEThf
+ with ESMTP id gkFzIgWv7_Fm
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 01:00:05 +0000 (UTC)
+ Mon,  8 Jun 2020 03:32:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 9A69685540
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id B096E85092
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 01:00:05 +0000 (UTC)
-IronPort-SDR: Y8g+12VTbXs8fzYtKl9dFJMzkBztgU4qRDXI9ODqSLh9ekKpesgmZd2SqNMyZQEAazu+qjctuS
- VeROG30FWTcQ==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Jun 2020 18:00:04 -0700
-IronPort-SDR: lZJIu1OKRS/KiiMmZ6aWz7XPPJdY0Qe8Nx+DhkQxhqH7x7lXR8iZxq7PKGhlZSPgDmaRax/7mZ
- zW8ildmMMw8g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,486,1583222400"; d="scan'208";a="349014593"
-Received: from lkp-server01.sh.intel.com (HELO 3b764b36c89c) ([10.239.97.150])
- by orsmga001.jf.intel.com with ESMTP; 07 Jun 2020 18:00:01 -0700
-Received: from kbuild by 3b764b36c89c with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1ji68v-0000WX-8W; Mon, 08 Jun 2020 01:00:01 +0000
-Date: Mon, 8 Jun 2020 08:59:29 +0800
-From: kernel test robot <lkp@intel.com>
-To: David Hildenbrand <david@redhat.com>
-Subject: [vhost:vhost 18/52] drivers/virtio/virtio_mem.c:1391:5: warning:
- Variable 'rc' is reassigned a value before the old one has been used.
-Message-ID: <202006080825.MWCyEzr3%lkp@intel.com>
+ Mon,  8 Jun 2020 03:32:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1591587171;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QTHYGJT484CysjTvnzyVCM1DqyJ9Sy2/Nw9/zbDo/eE=;
+ b=a7QmUOMuysUVdak9lsmJeGzrtQIWtTqOJyiOVzhN1TognrWAuPIBqWZr4/9HGQBpTh1poQ
+ XFoUPUQvC6jOkstaO8cx24isPtmi6FBrlrZ8onFb8xoWFHCWw3XtAXhJXlknvwv6YgRF5W
+ BMzccmV8IDPseEcckS9OXLEmPN9TIQA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-62-gw20i6ilPV-_ApCgzBqQgw-1; Sun, 07 Jun 2020 23:32:49 -0400
+X-MC-Unique: gw20i6ilPV-_ApCgzBqQgw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 23B8E100CCC0;
+ Mon,  8 Jun 2020 03:32:47 +0000 (UTC)
+Received: from [10.72.13.71] (ovpn-13-71.pek2.redhat.com [10.72.13.71])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C8F111A933;
+ Mon,  8 Jun 2020 03:32:37 +0000 (UTC)
+Subject: Re: [PATCH 5/6] vdpa: introduce virtio pci driver
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20200529080303.15449-1-jasowang@redhat.com>
+ <20200529080303.15449-6-jasowang@redhat.com>
+ <20200602010332-mutt-send-email-mst@kernel.org>
+ <5dbb0386-beeb-5bf4-d12e-fb5427486bb8@redhat.com>
+ <6b1d1ef3-d65e-08c2-5b65-32969bb5ecbc@redhat.com>
+ <20200607095012-mutt-send-email-mst@kernel.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <9b1abd2b-232c-aa0f-d8bb-03e65fd47de2@redhat.com>
+Date: Mon, 8 Jun 2020 11:32:31 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>, kbuild-all@lists.01.org,
- kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, virtualization@lists.linux-foundation.org
+In-Reply-To: <20200607095012-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: shahafs@mellanox.com, lulu@redhat.com, kvm@vger.kernel.org,
+ saugatm@xilinx.com, netdev@vger.kernel.org, mhabets@solarflare.com,
+ vmireyno@marvell.com, linux-kernel@vger.kernel.org, gdawar@xilinx.com,
+ virtualization@lists.linux-foundation.org, eperezma@redhat.com,
+ hanand@xilinx.com, zhangweining@ruijie.com.cn, eli@mellanox.com,
+ lingshan.zhu@intel.com, rob.miller@broadcom.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,101 +96,33 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git vhost
-head:   f3861bc96a7e130943e1975e571ae62c0319b064
-commit: 5f1f79bbc9e26fa9412fa9522f957bb8f030c442 [18/52] virtio-mem: Paravirtualized memory hotplug
-compiler: gcc-9 (Debian 9.3.0-13) 9.3.0
-
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
-
-
-cppcheck warnings: (new ones prefixed by >>)
-
->> drivers/virtio/virtio_mem.c:1391:5: warning: Variable 'rc' is reassigned a value before the old one has been used. [redundantAssignment]
-    rc = virtio_mem_init_vq(vm);
-       ^
-   drivers/virtio/virtio_mem.c:1375:0: note: Variable 'rc' is reassigned a value before the old one has been used.
-    int rc = -EINVAL;
-   ^
-   drivers/virtio/virtio_mem.c:1391:5: note: Variable 'rc' is reassigned a value before the old one has been used.
-    rc = virtio_mem_init_vq(vm);
-       ^
->> drivers/virtio/virtio_mem.c:801:22: warning: int result is assigned to long variable. If the variable is long to avoid loss of information, then you have loss of information. [truncLongCastAssignment]
-    const uint64_t size = count * vm->subblock_size;
-                        ^
-   drivers/virtio/virtio_mem.c:822:22: warning: int result is assigned to long variable. If the variable is long to avoid loss of information, then you have loss of information. [truncLongCastAssignment]
-    const uint64_t size = count * vm->subblock_size;
-                        ^
-
-vim +/rc +1391 drivers/virtio/virtio_mem.c
-
-  1371	
-  1372	static int virtio_mem_probe(struct virtio_device *vdev)
-  1373	{
-  1374		struct virtio_mem *vm;
-  1375		int rc = -EINVAL;
-  1376	
-  1377		vdev->priv = vm = kzalloc(sizeof(*vm), GFP_KERNEL);
-  1378		if (!vm)
-  1379			return -ENOMEM;
-  1380	
-  1381		init_waitqueue_head(&vm->host_resp);
-  1382		vm->vdev = vdev;
-  1383		INIT_WORK(&vm->wq, virtio_mem_run_wq);
-  1384		mutex_init(&vm->hotplug_mutex);
-  1385		INIT_LIST_HEAD(&vm->next);
-  1386		spin_lock_init(&vm->removal_lock);
-  1387		hrtimer_init(&vm->retry_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
-  1388		vm->retry_timer.function = virtio_mem_timer_expired;
-  1389	
-  1390		/* register the virtqueue */
-> 1391		rc = virtio_mem_init_vq(vm);
-  1392		if (rc)
-  1393			goto out_free_vm;
-  1394	
-  1395		/* initialize the device by querying the config */
-  1396		rc = virtio_mem_init(vm);
-  1397		if (rc)
-  1398			goto out_del_vq;
-  1399	
-  1400		/* register callbacks */
-  1401		vm->memory_notifier.notifier_call = virtio_mem_memory_notifier_cb;
-  1402		rc = register_memory_notifier(&vm->memory_notifier);
-  1403		if (rc)
-  1404			goto out_del_vq;
-  1405		rc = register_virtio_mem_device(vm);
-  1406		if (rc)
-  1407			goto out_unreg_mem;
-  1408	
-  1409		virtio_device_ready(vdev);
-  1410	
-  1411		/* trigger a config update to start processing the requested_size */
-  1412		atomic_set(&vm->config_changed, 1);
-  1413		queue_work(system_freezable_wq, &vm->wq);
-  1414	
-  1415		return 0;
-  1416	out_unreg_mem:
-  1417		unregister_memory_notifier(&vm->memory_notifier);
-  1418	out_del_vq:
-  1419		vdev->config->del_vqs(vdev);
-  1420	out_free_vm:
-  1421		kfree(vm);
-  1422		vdev->priv = NULL;
-  1423	
-  1424		return rc;
-  1425	}
-  1426	
-
----
-0-DAY CI Kernel Test Service, Intel Corporation
-https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNi83IOS4i+WNiDk6NTEsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90ZToKPiBPbiBG
+cmksIEp1biAwNSwgMjAyMCBhdCAwNDo1NDoxN1BNICswODAwLCBKYXNvbiBXYW5nIHdyb3RlOgo+
+PiBPbiAyMDIwLzYvMiDkuIvljYgzOjA4LCBKYXNvbiBXYW5nIHdyb3RlOgo+Pj4+PiArc3RhdGlj
+IGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkIHZwX3ZkcGFfaWRfdGFibGVbXSA9IHsKPj4+Pj4g
+K8KgwqDCoCB7IFBDSV9ERVZJQ0UoUENJX1ZFTkRPUl9JRF9SRURIQVRfUVVNUkFORVQsIFBDSV9B
+TllfSUQpIH0sCj4+Pj4+ICvCoMKgwqAgeyAwIH0KPj4+Pj4gK307Cj4+Pj4gVGhpcyBsb29rcyBs
+aWtlIGl0J2xsIGNyZWF0ZSBhIG1lc3Mgd2l0aCBlaXRoZXIgdmlydGlvIHBjaQo+Pj4+IG9yIHZk
+cGEgYmVpbmcgbG9hZGVkIGF0IHJhbmRvbS4gTWF5YmUganVzdCBkb24ndCBzcGVjaWZ5Cj4+Pj4g
+YW55IElEcyBmb3Igbm93LiBEb3duIHRoZSByb2FkIHdlIGNvdWxkIGdldCBhCj4+Pj4gZGlzdGlu
+Y3QgdmVuZG9yIElEIG9yIGEgcmFuZ2Ugb2YgZGV2aWNlIElEcyBmb3IgdGhpcy4KPj4+Cj4+PiBS
+aWdodCwgd2lsbCBkby4KPj4+Cj4+PiBUaGFua3MKPj4KPj4gUmV0aGluayBhYm91dCB0aGlzLiBJ
+ZiB3ZSBkb24ndCBzcGVjaWZ5IGFueSBJRCwgdGhlIGJpbmRpbmcgd29uJ3Qgd29yay4KPiBXZSBj
+YW4gYmluZCBtYW51YWxseS4gSXQncyBub3QgcmVhbGx5IGZvciBwcm9kdWN0aW9uIGFueXdheSwg
+c28KPiBub3QgYSBiaWcgZGVhbCBpbWhvLgoKCkkgdGhpbmsgeW91IG1lYW4gZG9pbmcgaXQgdmlh
+ICJuZXdfaWQiLCByaWdodC4KCgo+Cj4+IEhvdyBhYm91dCB1c2luZyBhIGRlZGljYXRlZCBzdWJz
+eXN0ZW0gdmVuZG9yIGlkIGZvciB0aGlzPwo+Pgo+PiBUaGFua3MKPiBJZiB2aXJ0aW8gdmVuZG9y
+IGlkIGlzIHVzZWQgdGhlbiBzdGFuZGFyZCBkcml2ZXIgaXMgZXhwZWN0ZWQKPiB0byBiaW5kLCBy
+aWdodD8gTWF5YmUgdXNlIGEgZGVkaWNhdGVkIHZlbmRvciBpZD8KCgpJIG1lYW50IHNvbWV0aGlu
+ZyBsaWtlOgoKc3RhdGljIGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkIHZwX3ZkcGFfaWRfdGFi
+bGVbXSA9IHsKIMKgwqDCoCB7IFBDSV9ERVZJQ0VfU1VCKFBDSV9WRU5ET1JfSURfUkVESEFUX1FV
+TVJBTkVULCBQQ0lfQU5ZX0lELCAKVlBfVEVTVF9WRU5ET1JfSUQsIFZQX1RFU1RfREVWSUNFX0lE
+KSB9LAogwqDCoMKgIHsgMCB9Cn07CgpUaGFua3MKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVh
+bGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZv
+dW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
