@@ -1,100 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F5071F1D39
-	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 18:26:21 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E4E2D86970;
-	Mon,  8 Jun 2020 16:26:19 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1sNb2Ar6+uRY; Mon,  8 Jun 2020 16:26:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 87CAF86CD7;
-	Mon,  8 Jun 2020 16:26:18 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5C2C9C016F;
-	Mon,  8 Jun 2020 16:26:18 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 44129C016F
- for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 16:26:17 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 384171F1E0E
+	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 19:02:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 3FD7C87EA0
- for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 16:26:17 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id BF7598817F;
+	Mon,  8 Jun 2020 17:02:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id y6Yk6vPN996G; Mon,  8 Jun 2020 17:02:39 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 68108881B7;
+	Mon,  8 Jun 2020 17:02:39 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3D8B4C016F;
+	Mon,  8 Jun 2020 17:02:39 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7D3A4C016F
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  8 Jun 2020 17:02:37 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 749A286216
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  8 Jun 2020 17:02:37 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vqePsey2yCON
+ with ESMTP id gBn4INQjkPSx
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 16:26:16 +0000 (UTC)
+ Mon,  8 Jun 2020 17:02:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 3C09F87D98
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 36D1E86205
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 16:26:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591633574;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=PfesJHBEui5hetw3RxW9+nGTdupwdIhkqQYIwcx4mZo=;
- b=Jk1cwy+QA7WBbsrg7tkJkNAAQ3EL7kkAY17+JidtW0iGNrQ4DxEoq94DCT/pXRF5e9qyZ5
- ArWa2k0nW5pP7+7r+JzGdl9z+F2pP1A5hlxSweBoljlhLjmI/8HDKwMK0JHqEVQPCOWTuJ
- UoPBNlc+QCVcaaVFZ/1yjR/tuu0O+0Q=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-87-QPIGdfx8MPyWLqF4G9bu3Q-1; Mon, 08 Jun 2020 12:26:12 -0400
-X-MC-Unique: QPIGdfx8MPyWLqF4G9bu3Q-1
-Received: by mail-wr1-f72.google.com with SMTP id e1so7394755wrm.3
- for <virtualization@lists.linux-foundation.org>;
- Mon, 08 Jun 2020 09:26:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=PfesJHBEui5hetw3RxW9+nGTdupwdIhkqQYIwcx4mZo=;
- b=JXVhi6Dph4Iwc3tEpacd+BBv/l4QjkTFD399sWLSpNOrxciU1udhKVF/GtD6Di3JWZ
- 4wj8Eul6mcHg8349mOa7ybSprT4PuucXbBGhvbo1LW+mWlfIwr7daMUgMSzRBHY0QhXX
- USKu7Zw5qDUPiGzKgkHNyTxiC9LuiTneb8hjt3C7xBZiaV5TKAx4L4l1UzztoWqqrAkB
- ACS68gUWJJMJKnRyyQf4DNRX3nSMruJuKvjLxDcMYrB4OTkO5Dk1//kp2b3VS2qagY6M
- SKGhLrh4Sxh9kLU7IORtlqingHQy2eI9QRiLL4DAqpcd0GhOqZBscB6WYcpDUkOSkBL3
- eCBw==
-X-Gm-Message-State: AOAM531CY3e8XB3QgkXpGrUJMRoDp82rXAz//3i6BWGrvs6owkliLaiR
- vY7hDzUX+5gyG0O65++bVRmHjpqcsYw3nAOYInQAQsX51/CQJN5iiF+7YNOGTW6nIWzi70Mwy7Q
- QwqvkvQlFTTUHtEMir4eWY27tdxWzVSqYvgg8sO+/Fw==
-X-Received: by 2002:a1c:3c08:: with SMTP id j8mr151287wma.158.1591633571882;
- Mon, 08 Jun 2020 09:26:11 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzMODrjwl3uJvjfo1A6dRDqHo2iDzOMSyj2EtMN5BDt+YBK8zUVruK6nz7/OV+XRdPj9GQbLA==
-X-Received: by 2002:a1c:3c08:: with SMTP id j8mr151258wma.158.1591633571606;
- Mon, 08 Jun 2020 09:26:11 -0700 (PDT)
-Received: from steredhat ([79.49.207.108])
- by smtp.gmail.com with ESMTPSA id k21sm270313wrd.24.2020.06.08.09.26.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:26:10 -0700 (PDT)
-Date: Mon, 8 Jun 2020 18:26:08 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH RFC v5 12/13] vhost/vsock: switch to the buf API
-Message-ID: <20200608162608.gk2fpebujpvmkzpc@steredhat>
-References: <20200607141057.704085-1-mst@redhat.com>
- <20200607141057.704085-13-mst@redhat.com>
- <20200608101746.xnxtwwygolsk7yol@steredhat>
- <20200608092953-mutt-send-email-mst@kernel.org>
+ Mon,  8 Jun 2020 17:02:35 +0000 (UTC)
+IronPort-SDR: S5RZcc9gvyp8tmB11zyboMhyFSR+jDUBJkFYXejbRY3WEH4xcg9DSk/lJDslVoFdl7OaUI1HUP
+ y3W3XsmJLbEg==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Jun 2020 10:02:32 -0700
+IronPort-SDR: p4KFNaWueYHUWVFFaEvmfRaE7L2L3X79MfyU23nJE5C9UKdgy8vS9D3H67NaNJHIg/fzsweu60
+ 3FRFbfslAMJg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,487,1583222400"; d="scan'208";a="472767150"
+Received: from gliakhov-mobl2.ger.corp.intel.com (HELO ubuntu)
+ ([10.249.46.212])
+ by fmsmga005.fm.intel.com with ESMTP; 08 Jun 2020 10:02:29 -0700
+Date: Mon, 8 Jun 2020 19:02:27 +0200
+From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
+To: Mathieu Poirier <mathieu.poirier@linaro.org>
+Subject: Re: [RFC 12/12] rpmsg: add a device ID to also bind to the ADSP device
+Message-ID: <20200608170227.GG10562@ubuntu>
+References: <20200529073722.8184-1-guennadi.liakhovetski@linux.intel.com>
+ <20200529073722.8184-13-guennadi.liakhovetski@linux.intel.com>
+ <20200604200156.GB26734@xps15> <20200605064659.GC32302@ubuntu>
+ <20200608161757.GA32518@xps15>
 MIME-Version: 1.0
-In-Reply-To: <20200608092953-mutt-send-email-mst@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, eperezma@redhat.com,
- Stefan Hajnoczi <stefanha@redhat.com>
+In-Reply-To: <20200608161757.GA32518@xps15>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Ohad Ben-Cohen <ohad@wizery.com>, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, linux-remoteproc@vger.kernel.org,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+ virtualization@lists.linux-foundation.org,
+ Liam Girdwood <liam.r.girdwood@linux.intel.com>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>,
+ sound-open-firmware@alsa-project.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,126 +88,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jun 08, 2020 at 09:30:38AM -0400, Michael S. Tsirkin wrote:
-> On Mon, Jun 08, 2020 at 12:17:46PM +0200, Stefano Garzarella wrote:
-> > On Sun, Jun 07, 2020 at 10:11:49AM -0400, Michael S. Tsirkin wrote:
-> > > A straight-forward conversion.
+Hi Mathieu,
+
+On Mon, Jun 08, 2020 at 10:17:57AM -0600, Mathieu Poirier wrote:
+> On Fri, Jun 05, 2020 at 08:46:59AM +0200, Guennadi Liakhovetski wrote:
+> > Hi Mathieu,
+> > 
+> > On Thu, Jun 04, 2020 at 02:01:56PM -0600, Mathieu Poirier wrote:
+> > > On Fri, May 29, 2020 at 09:37:22AM +0200, Guennadi Liakhovetski wrote:
+> > > > The ADSP device uses the RPMsg API to connect vhost and VirtIO SOF
+> > > > Audio DSP drivers on KVM host and guest.
+> > > > 
+> > > > Signed-off-by: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
+> > > > ---
+> > > >  drivers/rpmsg/virtio_rpmsg_bus.c | 1 +
+> > > >  1 file changed, 1 insertion(+)
+> > > > 
+> > > > diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
+> > > > index f3bd050..ebe3f19 100644
+> > > > --- a/drivers/rpmsg/virtio_rpmsg_bus.c
+> > > > +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
+> > > > @@ -949,6 +949,7 @@ static void rpmsg_remove(struct virtio_device *vdev)
+> > > >  
+> > > >  static struct virtio_device_id id_table[] = {
+> > > >  	{ VIRTIO_ID_RPMSG, VIRTIO_DEV_ANY_ID },
+> > > > +	{ VIRTIO_ID_ADSP, VIRTIO_DEV_ANY_ID },
 > > > 
-> > > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-> > > ---
-> > >  drivers/vhost/vsock.c | 30 ++++++++++++++++++------------
-> > >  1 file changed, 18 insertions(+), 12 deletions(-)
+> > > I am fine with this patch but won't add an RB because of the (many) checkpatch
+> > > errors.  Based on the comment I made on the previous set seeing those was
+> > > unexpected.
 > > 
-> > The changes for vsock part LGTM:
-> > 
-> > Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
-> > 
-> > 
-> > I also did some tests with vhost-vsock (tools/testing/vsock/vsock_test
-> > and iperf-vsock), so for vsock:
-> > 
-> > Tested-by: Stefano Garzarella <sgarzare@redhat.com>
-> > 
-> > Thanks,
-> > Stefano
+> > Are you using "--strict?" Sorry, I don't see any checkpatch errors, only warnings. 
 > 
-> Re-testing v6 would be very much appreciated.
-
-Sure, I'm building v6 now and I'll send you a feedback :-)
-
-Stefano
-
+> No, plane checkpatch on the rproc-next branch.
 > 
+> > Most of them are "over 80 characters" which as we now know is no more an issue,
+> 
+> There is a thread discussing the matter but I have not seen a clear resolution
+> yet.
+
+I think the resolution is pretty clear as defined by Linus, but maybe it has changed 
+again since I last checked.
+
+> > I just haven't updated my tree yet. Most others are really minor IMHO. Maybe one
+> 
+> Minor or not, if checkpatch complains then it is important enough to address.  I
+> am willing to overlook the lines over 80 characters but everything else needs to
+> be dealt with.
+
+Sure, checkpatch should be run before each patch submission and whatever it reports 
+should be considered. As Documentation/process/submitting-patches.rst clearly 
+states:
+
+"Check your patches with the patch style checker prior to submission
+(scripts/checkpatch.pl).  Note, though, that the style checker should be
+viewed as a guide, not as a replacement for human judgment.  If your code
+looks better with a violation then its probably best left alone."
+
+So, yes, I checked all what checkepatch reported and used my judgement to decide 
+which recommendations to take and which to ignore.
+
+Thanks
+Guennadi
+
+> Thanks,
+> Mathieu
+>  
+> > of them I actually would want to fix - using "help" instead of "---help---" in 
+> > Kconfig. What errors are you seeing in your checks?
+> > 
+> > Thanks
+> > Guennadi
+> > 
+> > > Thanks,
+> > > Mathieu
 > > > 
-> > > diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
-> > > index a483cec31d5c..61c6d3dd2ae3 100644
-> > > --- a/drivers/vhost/vsock.c
-> > > +++ b/drivers/vhost/vsock.c
-> > > @@ -103,7 +103,8 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
-> > >  		unsigned out, in;
-> > >  		size_t nbytes;
-> > >  		size_t iov_len, payload_len;
-> > > -		int head;
-> > > +		struct vhost_buf buf;
-> > > +		int ret;
-> > >  
-> > >  		spin_lock_bh(&vsock->send_pkt_list_lock);
-> > >  		if (list_empty(&vsock->send_pkt_list)) {
-> > > @@ -117,16 +118,17 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
-> > >  		list_del_init(&pkt->list);
-> > >  		spin_unlock_bh(&vsock->send_pkt_list_lock);
-> > >  
-> > > -		head = vhost_get_vq_desc(vq, vq->iov, ARRAY_SIZE(vq->iov),
-> > > -					 &out, &in, NULL, NULL);
-> > > -		if (head < 0) {
-> > > +		ret = vhost_get_avail_buf(vq, &buf,
-> > > +					  vq->iov, ARRAY_SIZE(vq->iov),
-> > > +					  &out, &in, NULL, NULL);
-> > > +		if (ret < 0) {
-> > >  			spin_lock_bh(&vsock->send_pkt_list_lock);
-> > >  			list_add(&pkt->list, &vsock->send_pkt_list);
-> > >  			spin_unlock_bh(&vsock->send_pkt_list_lock);
-> > >  			break;
-> > >  		}
-> > >  
-> > > -		if (head == vq->num) {
-> > > +		if (!ret) {
-> > >  			spin_lock_bh(&vsock->send_pkt_list_lock);
-> > >  			list_add(&pkt->list, &vsock->send_pkt_list);
-> > >  			spin_unlock_bh(&vsock->send_pkt_list_lock);
-> > > @@ -186,7 +188,8 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
-> > >  		 */
-> > >  		virtio_transport_deliver_tap_pkt(pkt);
-> > >  
-> > > -		vhost_add_used(vq, head, sizeof(pkt->hdr) + payload_len);
-> > > +		buf.in_len = sizeof(pkt->hdr) + payload_len;
-> > > +		vhost_put_used_buf(vq, &buf);
-> > >  		added = true;
-> > >  
-> > >  		pkt->off += payload_len;
-> > > @@ -440,7 +443,8 @@ static void vhost_vsock_handle_tx_kick(struct vhost_work *work)
-> > >  	struct vhost_vsock *vsock = container_of(vq->dev, struct vhost_vsock,
-> > >  						 dev);
-> > >  	struct virtio_vsock_pkt *pkt;
-> > > -	int head, pkts = 0, total_len = 0;
-> > > +	int ret, pkts = 0, total_len = 0;
-> > > +	struct vhost_buf buf;
-> > >  	unsigned int out, in;
-> > >  	bool added = false;
-> > >  
-> > > @@ -461,12 +465,13 @@ static void vhost_vsock_handle_tx_kick(struct vhost_work *work)
-> > >  			goto no_more_replies;
-> > >  		}
-> > >  
-> > > -		head = vhost_get_vq_desc(vq, vq->iov, ARRAY_SIZE(vq->iov),
-> > > -					 &out, &in, NULL, NULL);
-> > > -		if (head < 0)
-> > > +		ret = vhost_get_avail_buf(vq, &buf,
-> > > +					  vq->iov, ARRAY_SIZE(vq->iov),
-> > > +					  &out, &in, NULL, NULL);
-> > > +		if (ret < 0)
-> > >  			break;
-> > >  
-> > > -		if (head == vq->num) {
-> > > +		if (!ret) {
-> > >  			if (unlikely(vhost_enable_notify(&vsock->dev, vq))) {
-> > >  				vhost_disable_notify(&vsock->dev, vq);
-> > >  				continue;
-> > > @@ -494,7 +499,8 @@ static void vhost_vsock_handle_tx_kick(struct vhost_work *work)
-> > >  			virtio_transport_free_pkt(pkt);
-> > >  
-> > >  		len += sizeof(pkt->hdr);
-> > > -		vhost_add_used(vq, head, len);
-> > > +		buf.in_len = len;
-> > > +		vhost_put_used_buf(vq, &buf);
-> > >  		total_len += len;
-> > >  		added = true;
-> > >  	} while(likely(!vhost_exceeds_weight(vq, ++pkts, total_len)));
-> > > -- 
-> > > MST
-> > > 
-> 
-
+> > > >  	{ 0 },
+> > > >  };
+> > > >  
+> > > > -- 
+> > > > 1.9.3
+> > > > 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
