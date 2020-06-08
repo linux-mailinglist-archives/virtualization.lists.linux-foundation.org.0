@@ -1,76 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31CD61F2148
-	for <lists.virtualization@lfdr.de>; Mon,  8 Jun 2020 23:09:15 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7275B1F2332
+	for <lists.virtualization@lfdr.de>; Tue,  9 Jun 2020 01:14:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 9063B20483;
-	Mon,  8 Jun 2020 21:09:13 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2F59887B39;
+	Mon,  8 Jun 2020 23:14:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id djqKXWFe0Un7; Mon,  8 Jun 2020 21:09:10 +0000 (UTC)
+	with ESMTP id FZD181ZwVdeZ; Mon,  8 Jun 2020 23:14:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 5EF9420C92;
-	Mon,  8 Jun 2020 21:09:10 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C2C5187B21;
+	Mon,  8 Jun 2020 23:14:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2D623C016F;
-	Mon,  8 Jun 2020 21:09:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A80F6C016F;
+	Mon,  8 Jun 2020 23:14:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EA68EC016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 46B4EC016F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 21:09:08 +0000 (UTC)
+ Mon,  8 Jun 2020 23:14:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id D892520483
+ by silver.osuosl.org (Postfix) with ESMTP id 2F55C2221C
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 21:09:08 +0000 (UTC)
+ Mon,  8 Jun 2020 23:14:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Y2+PIsv5s20g
+ with ESMTP id 0wO67gXW4VyH
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 21:09:08 +0000 (UTC)
+ Mon,  8 Jun 2020 23:14:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by silver.osuosl.org (Postfix) with ESMTPS id C078220415
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by silver.osuosl.org (Postfix) with ESMTPS id 6AF4E221F0
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Jun 2020 21:09:07 +0000 (UTC)
-IronPort-SDR: Yn9SDMkhUoMHq7BO68DxbZYdpIfD0//4a9GBlIqJNbSaH233t9OW+OaVn6lKhCJO47S99+aZ6V
- KsY18AmKniyA==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jun 2020 14:09:06 -0700
-IronPort-SDR: frmd7NyexTaQPNjw1Wq1AJSAV6dMLQE7KIOqLtiiSTgWfM1QMpgYdkgCZm7nHZaMI3r22Vvpob
- O5elf8Oxn2/A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,489,1583222400"; d="scan'208";a="288603314"
-Received: from sjchrist-coffee.jf.intel.com (HELO linux.intel.com)
- ([10.54.74.152])
- by orsmga002.jf.intel.com with ESMTP; 08 Jun 2020 14:09:06 -0700
-Date: Mon, 8 Jun 2020 14:09:06 -0700
-From: Sean Christopherson <sean.j.christopherson@intel.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH] virtio_net: Unregister and re-register xdp_rxq across
- freeze/restore
-Message-ID: <20200608210906.GG8223@linux.intel.com>
-References: <20200605214624.21430-1-sean.j.christopherson@intel.com>
- <20200607091542-mutt-send-email-mst@kernel.org>
+ Mon,  8 Jun 2020 23:14:25 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6CB1B20C09;
+ Mon,  8 Jun 2020 23:14:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1591658065;
+ bh=KIVtMWsZYjSeXPcrFP3pyIwtXZ4XUtv5qHuAvVcJRs8=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=VQ462wQb5I53Aca1fy2iy4ObG5pEKhHfXZGMQk8j43fTHUKSOPunlTddC5kOp6cAP
+ lDzEit+uKumjpnWuHPmiBI9OrwxH+o8/nAHi8JGMjkz4puUia6I8VR8GBUfI/QtUTv
+ +hxM+rS3y9UO1s0RqExcy6AK3lVndv5ql9MYC20Y=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.6 111/606] vhost/vsock: fix packet delivery order to
+ monitoring devices
+Date: Mon,  8 Jun 2020 19:03:56 -0400
+Message-Id: <20200608231211.3363633-111-sashal@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200608231211.3363633-1-sashal@kernel.org>
+References: <20200608231211.3363633-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200607091542-mutt-send-email-mst@kernel.org>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
- John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
- virtualization@lists.linux-foundation.org,
- Jesper Dangaard Brouer <brouer@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- bpf@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
- linux-kernel@vger.kernel.org
+X-stable: review
+X-Patchwork-Hint: Ignore
+Cc: Sasha Levin <sashal@kernel.org>, kvm@vger.kernel.org,
+ netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ "David S . Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,93 +83,48 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sun, Jun 07, 2020 at 09:23:03AM -0400, Michael S. Tsirkin wrote:
-> On Fri, Jun 05, 2020 at 02:46:24PM -0700, Sean Christopherson wrote:
-> > @@ -1480,17 +1495,10 @@ static int virtnet_open(struct net_device *dev)
-> >  			if (!try_fill_recv(vi, &vi->rq[i], GFP_KERNEL))
-> >  				schedule_delayed_work(&vi->refill, 0);
-> >  
-> > -		err = xdp_rxq_info_reg(&vi->rq[i].xdp_rxq, dev, i);
-> > +		err = virtnet_reg_xdp(&vi->rq[i].xdp_rxq, dev, i);
-> >  		if (err < 0)
-> >  			return err;
-> >  
-> > -		err = xdp_rxq_info_reg_mem_model(&vi->rq[i].xdp_rxq,
-> > -						 MEM_TYPE_PAGE_SHARED, NULL);
-> > -		if (err < 0) {
-> > -			xdp_rxq_info_unreg(&vi->rq[i].xdp_rxq);
-> > -			return err;
-> > -		}
-> > -
-> >  		virtnet_napi_enable(vi->rq[i].vq, &vi->rq[i].napi);
-> >  		virtnet_napi_tx_enable(vi, vi->sq[i].vq, &vi->sq[i].napi);
-> >  	}
-> > @@ -2306,6 +2314,7 @@ static void virtnet_freeze_down(struct virtio_device *vdev)
-> >  
-> >  	if (netif_running(vi->dev)) {
-> >  		for (i = 0; i < vi->max_queue_pairs; i++) {
-> > +			xdp_rxq_info_unreg(&vi->rq[i].xdp_rxq);
-> >  			napi_disable(&vi->rq[i].napi);
-> >  			virtnet_napi_tx_disable(&vi->sq[i].napi);
-> 
-> I suspect the right thing to do is to first disable all NAPI,
-> then play with XDP. Generally cleanup in the reverse order
-> of init is a good idea.
+From: Stefano Garzarella <sgarzare@redhat.com>
 
-Hmm, I was simply following virtnet_close().  Actually, the entire loop
-could be factored out into a separate helper.  Perhaps do that as part of
-the fix, and then invert the ordering in a separate patch?
+[ Upstream commit 107bc0766b9feb5113074c753735a3f115c2141f ]
 
-> >  		}
-> > @@ -2313,6 +2322,8 @@ static void virtnet_freeze_down(struct virtio_device *vdev)
-> >  }
-> >  
-> >  static int init_vqs(struct virtnet_info *vi);
-> > +static void virtnet_del_vqs(struct virtnet_info *vi);
-> > +static void free_receive_page_frags(struct virtnet_info *vi);
-> 
-> I'd really rather we reordered code so forward decls are not necessary.
+We want to deliver packets to monitoring devices before it is
+put in the virtqueue, to avoid that replies can appear in the
+packet capture before the transmitted packet.
 
-Yeah, no argument from me.  Would you prefer the reordering in a separate
-patch on top, e.g. to simplify potential backporting?
+Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/vhost/vsock.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-> >  static int virtnet_restore_up(struct virtio_device *vdev)
-> >  {
-> > @@ -2331,6 +2342,10 @@ static int virtnet_restore_up(struct virtio_device *vdev)
-> >  				schedule_delayed_work(&vi->refill, 0);
-> >  
-> >  		for (i = 0; i < vi->max_queue_pairs; i++) {
-> > +			err = virtnet_reg_xdp(&vi->rq[i].xdp_rxq, vi->dev, i);
-> > +			if (err)
-> > +				goto free_vqs;
-> > +
-> >  			virtnet_napi_enable(vi->rq[i].vq, &vi->rq[i].napi);
-> >  			virtnet_napi_tx_enable(vi, vi->sq[i].vq,
-> >  					       &vi->sq[i].napi);
-> > @@ -2340,6 +2355,12 @@ static int virtnet_restore_up(struct virtio_device *vdev)
-> >  	netif_tx_lock_bh(vi->dev);
-> >  	netif_device_attach(vi->dev);
-> >  	netif_tx_unlock_bh(vi->dev);
-> > +	return 0;
-> > +
-> > +free_vqs:
-> > +	cancel_delayed_work_sync(&vi->refill);
-> > +	free_receive_page_frags(vi);
-> > +	virtnet_del_vqs(vi);
-> 
-> 
-> I am not sure this is safe to do after device-ready.
-> 
-> Can reg xdp happen before device ready?
+diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
+index bb3f63386b47..53294c2f8cff 100644
+--- a/drivers/vhost/vsock.c
++++ b/drivers/vhost/vsock.c
+@@ -181,14 +181,14 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
+ 			break;
+ 		}
+ 
+-		vhost_add_used(vq, head, sizeof(pkt->hdr) + payload_len);
+-		added = true;
+-
+-		/* Deliver to monitoring devices all correctly transmitted
+-		 * packets.
++		/* Deliver to monitoring devices all packets that we
++		 * will transmit.
+ 		 */
+ 		virtio_transport_deliver_tap_pkt(pkt);
+ 
++		vhost_add_used(vq, head, sizeof(pkt->hdr) + payload_len);
++		added = true;
++
+ 		pkt->off += payload_len;
+ 		total_len += payload_len;
+ 
+-- 
+2.25.1
 
-From a code perspective, I don't see anything that will explode, but I have
-no idea if that's correct/sane behavior.
-
-FWIW, the xdp error handling in virtnet_open() also looks bizarre to me,
-e.g. bails in the middle of a loop without doing any cleanup.  I assume
-virtnet_close() wouldn't called if open failed?  But I can't determine
-whether or not that holds true based on code inspection, there are too many
-call sites that lead to open and close.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
