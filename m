@@ -2,81 +2,100 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D34F1F33B2
-	for <lists.virtualization@lfdr.de>; Tue,  9 Jun 2020 07:56:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20CFE1F374C
+	for <lists.virtualization@lfdr.de>; Tue,  9 Jun 2020 11:53:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 58D938722F;
-	Tue,  9 Jun 2020 05:56:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CB14C86DDB;
+	Tue,  9 Jun 2020 09:53:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RoutpYyOwCsu; Tue,  9 Jun 2020 05:56:48 +0000 (UTC)
+	with ESMTP id rsTmWhzTUDgW; Tue,  9 Jun 2020 09:53:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CD7AD869E4;
-	Tue,  9 Jun 2020 05:56:48 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 5A5D186E40;
+	Tue,  9 Jun 2020 09:53:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BBB27C016F;
-	Tue,  9 Jun 2020 05:56:48 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 41257C016F;
+	Tue,  9 Jun 2020 09:53:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4EEF4C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1702EC016F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 05:56:47 +0000 (UTC)
+ Tue,  9 Jun 2020 09:53:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 3DB4C8698F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 04CCB86E40
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 05:56:47 +0000 (UTC)
+ Tue,  9 Jun 2020 09:53:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id aLuHmw8MTQYz
+ with ESMTP id qr-M_U5iyMgf
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 05:56:46 +0000 (UTC)
+ Tue,  9 Jun 2020 09:53:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 735A8868C8
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 9A71986DDB
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 05:56:46 +0000 (UTC)
+ Tue,  9 Jun 2020 09:53:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591682205;
+ s=mimecast20190719; t=1591696389;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=VMPdQG03WTh1A9nxuWQDwAq/IcZQ1gIyc3Bod/f+MHs=;
- b=DvK+cQ70zbI+QrLVbe61JTrKG80RYZFAaHCWV16vdkt/rORHrpoPoPA+KkOCc/d3/O09TH
- tw4YCKGZEwGhjhe7iFWzF/FzYPgVz29qeAexusaasoZDS8MGdVAzjoBxF55jUYdON6ZCv1
- Je4uUiKFofsNG8mwMVaxC8NRu/ORvKE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-335-L_KUJZZbOdmRFowIgXr-4A-1; Tue, 09 Jun 2020 01:56:41 -0400
-X-MC-Unique: L_KUJZZbOdmRFowIgXr-4A-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B720819200C0;
- Tue,  9 Jun 2020 05:56:39 +0000 (UTC)
-Received: from [10.72.12.252] (ovpn-12-252.pek2.redhat.com [10.72.12.252])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C4C9C60BF3;
- Tue,  9 Jun 2020 05:56:31 +0000 (UTC)
-Subject: Re: [PATCH] vhost/test: fix up after API change
-From: Jason Wang <jasowang@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
-References: <20200608124254.727184-1-mst@redhat.com>
- <e747a953-3135-fef9-b098-fca11755d6e4@redhat.com>
-Message-ID: <8ca24e37-d319-fbf7-0114-ddf7eb110781@redhat.com>
-Date: Tue, 9 Jun 2020 13:56:26 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ bh=oMvGLtRSljs2Zi0kyxH/VTEK52jN8HKOE/cbjLGX1jw=;
+ b=aBjhOjczUO39UzGvq8Ze7ZUbWq5WxTXhDZgBNsA4TpLC30SM1JwTJdCRXJzEIgEdded1i2
+ GnBSTJxQ1uFAWE5Ld9mkflQGXAsGI2Z4mvwvGjR66/abrl69AiR4yJ4U5K55pNZ7sXWnPy
+ iX5SvrfAyQ9nuQSrx1YckAqpkhlshYY=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-185-inQMdQYzOIK_VnBDEF5dSA-1; Tue, 09 Jun 2020 05:53:03 -0400
+X-MC-Unique: inQMdQYzOIK_VnBDEF5dSA-1
+Received: by mail-wr1-f70.google.com with SMTP id l18so8445849wrm.0
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 09 Jun 2020 02:53:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=oMvGLtRSljs2Zi0kyxH/VTEK52jN8HKOE/cbjLGX1jw=;
+ b=NqVrz06H5JPAIqtUc/8Dvbw9hb95LR82VrCK+bddSTPHI7K3rXNHzwSQ6aQiKu1ki4
+ fAGRslOU1C5UnOPKCO12RhsEIoXhGV+oM2sxuZG5HKEYqQc4NH/UPx9kBxbK08syLLe1
+ g8/LPT4qgVwXT5tL7p2Jtgxl40CNw4+QOZhahryZvDrb7pL1BjLlOvacmlIPbA4HHwQ2
+ GYmea3C15Ykm/d1P2IwUX5vYFMv+H424BI7vNoE0cO5i/VdAqbgRs9JWBn2pBFRre4fm
+ /UeI8Y0wFExeiWWZPRGHaq1NsjiTUuVEF6/wxphfiBCrVLfmQZWHOMrUlZtSJHn06VMh
+ geyw==
+X-Gm-Message-State: AOAM532DiHToE6lwe1+jBIRuzUI/bfu/F8N/ZHX2CmJbC7KTxz+Dda9n
+ 5FmSC9IZZFR2Upi2ZhUiX52UjAw9Qw3LxegFQmzVRL+66ETSc5xsCmI8+ibKMTrcqbF4w6sAUb5
+ BqOcNzdXVVhfXtrfhNrAOsFluB1lW9smDAK1kIjwvqg==
+X-Received: by 2002:a5d:6b8c:: with SMTP id n12mr3491101wrx.61.1591696382277; 
+ Tue, 09 Jun 2020 02:53:02 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxTG/Rft+RF7BlhKs9JeSNR5jpou7mamttZASGBrZIBust8+KQxMGXJalHNlqYd1izJlcOHBg==
+X-Received: by 2002:a5d:6b8c:: with SMTP id n12mr3491075wrx.61.1591696382101; 
+ Tue, 09 Jun 2020 02:53:02 -0700 (PDT)
+Received: from redhat.com (bzq-79-181-55-232.red.bezeqint.net. [79.181.55.232])
+ by smtp.gmail.com with ESMTPSA id 67sm2834452wrk.49.2020.06.09.02.52.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jun 2020 02:53:01 -0700 (PDT)
+Date: Tue, 9 Jun 2020 05:52:58 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: David Stevens <stevensd@chromium.org>
+Subject: Re: [PATCH v5 0/3] Support virtio cross-device resources
+Message-ID: <20200609055021-mutt-send-email-mst@kernel.org>
+References: <20200609012518.198908-1-stevensd@chromium.org>
 MIME-Version: 1.0
-In-Reply-To: <e747a953-3135-fef9-b098-fca11755d6e4@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: netdev@vger.kernel.org, Zhu Lingshan <lingshan.zhu@intel.com>,
- kvm@vger.kernel.org, virtualization@lists.linux-foundation.org
+In-Reply-To: <20200609012518.198908-1-stevensd@chromium.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: dri-devel@lists.freedesktop.org, virtio-dev@lists.oasis-open.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ linux-kernel@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
+ virtualization@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org,
+ Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>,
+ linux-media@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,35 +107,64 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNi85IOS4i+WNiDE6NTMsIEphc29uIFdhbmcgd3JvdGU6Cj4KPiBPbiAyMDIwLzYv
-OCDkuIvljYg4OjQyLCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4+IFBhc3MgYSBmbGFnIHRv
-IHJlcXVlc3Qga2VybmVsIHRocmVhZCB1c2UuCj4+Cj4+IEZpeGVzOiAwMWZjYjFjYmM4OGUgKCJ2
-aG9zdDogYWxsb3cgZGV2aWNlIHRoYXQgZG9lcyBub3QgZGVwZW5kIG9uIAo+PiB2aG9zdCB3b3Jr
-ZXIiKQo+PiBTaWduZWQtb2ZmLWJ5OiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29t
-Pgo+PiAtLS0KPj4gwqAgZHJpdmVycy92aG9zdC90ZXN0LmMgfCAyICstCj4+IMKgIDEgZmlsZSBj
-aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEv
-ZHJpdmVycy92aG9zdC90ZXN0LmMgYi9kcml2ZXJzL3Zob3N0L3Rlc3QuYwo+PiBpbmRleCBmNTVj
-YjU4NGI4NGEuLjEyMzA0ZWI4ZGExNSAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy92aG9zdC90ZXN0
-LmMKPj4gKysrIGIvZHJpdmVycy92aG9zdC90ZXN0LmMKPj4gQEAgLTEyMiw3ICsxMjIsNyBAQCBz
-dGF0aWMgaW50IHZob3N0X3Rlc3Rfb3BlbihzdHJ1Y3QgaW5vZGUgKmlub2RlLCAKPj4gc3RydWN0
-IGZpbGUgKmYpCj4+IMKgwqDCoMKgwqAgdnFzW1ZIT1NUX1RFU1RfVlFdID0gJm4tPnZxc1tWSE9T
-VF9URVNUX1ZRXTsKPj4gwqDCoMKgwqDCoCBuLT52cXNbVkhPU1RfVEVTVF9WUV0uaGFuZGxlX2tp
-Y2sgPSBoYW5kbGVfdnFfa2ljazsKPj4gwqDCoMKgwqDCoCB2aG9zdF9kZXZfaW5pdChkZXYsIHZx
-cywgVkhPU1RfVEVTVF9WUV9NQVgsIFVJT19NQVhJT1YgKyA2NCwKPj4gLcKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgVkhPU1RfVEVTVF9QS1RfV0VJR0hULCBWSE9TVF9URVNUX1dFSUdIVCwg
-TlVMTCk7Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFZIT1NUX1RFU1RfUEtUX1dF
-SUdIVCwgVkhPU1RfVEVTVF9XRUlHSFQsIHRydWUsIE5VTEwpOwo+PiDCoCDCoMKgwqDCoMKgIGYt
-PnByaXZhdGVfZGF0YSA9IG47Cj4KPgo+IEFja2VkLWJ5OiBKYXNvbiBXYW5nIDxqYXNvd2FuZ0By
-ZWRoYXQuY29tPgo+Cj4gSnVzdCB0byBjb25maXJtLCBoYXZlIHlvdSBxdWV1ZWQgdGhlIGRvb3Ji
-ZWxsIG1hcHBpbmcgcGF0Y2hlcyBhbHJlYWR5PyAKPiBPciB5b3UgZXhwZWN0IEkgc3F1YXNoIHRo
-aXMgaW50byB2MiBvZiBkb29yYmVsbCBtYXBwaW5nIHNlcmllcz8KCgpPaywgSSBzYXcgdGhlIHBh
-dGNoZXMgaW4geW91ciBsaW51eC1uZXh0IGJyYW5jaC4KClRoYW5rcwoKCj4KPiBUaGFua3MKPgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6
-YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24u
-b3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3Zp
-cnR1YWxpemF0aW9u
+On Tue, Jun 09, 2020 at 10:25:15AM +0900, David Stevens wrote:
+> This patchset implements the current proposal for virtio cross-device
+> resource sharing [1]. It will be used to import virtio resources into
+> the virtio-video driver currently under discussion [2]. The patch
+> under consideration to add support in the virtio-video driver is [3].
+> It uses the APIs from v3 of this series, but the changes to update it
+> are relatively minor.
+> 
+> This patchset adds a new flavor of dma-bufs that supports querying the
+> underlying virtio object UUID, as well as adding support for exporting
+> resources from virtgpu.
+
+Gerd, David, if possible, please test this in configuration with
+virtual VTD enabled but with iommu_platform=off
+to make sure we didn't break this config.
+
+
+Besides that, for virtio parts:
+
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
+
+
+> [1] https://markmail.org/thread/2ypjt5cfeu3m6lxu
+> [2] https://markmail.org/thread/p5d3k566srtdtute
+> [3] https://markmail.org/thread/j4xlqaaim266qpks
+> 
+> v4 -> v5 changes:
+>  - Remove virtio_dma_buf_export_info.
+> 
+> David Stevens (3):
+>   virtio: add dma-buf support for exported objects
+>   virtio-gpu: add VIRTIO_GPU_F_RESOURCE_UUID feature
+>   drm/virtio: Support virtgpu exported resources
+> 
+>  drivers/gpu/drm/virtio/virtgpu_drv.c   |  3 +
+>  drivers/gpu/drm/virtio/virtgpu_drv.h   | 20 ++++++
+>  drivers/gpu/drm/virtio/virtgpu_kms.c   |  4 ++
+>  drivers/gpu/drm/virtio/virtgpu_prime.c | 96 +++++++++++++++++++++++++-
+>  drivers/gpu/drm/virtio/virtgpu_vq.c    | 55 +++++++++++++++
+>  drivers/virtio/Makefile                |  2 +-
+>  drivers/virtio/virtio.c                |  6 ++
+>  drivers/virtio/virtio_dma_buf.c        | 82 ++++++++++++++++++++++
+>  include/linux/virtio.h                 |  1 +
+>  include/linux/virtio_dma_buf.h         | 37 ++++++++++
+>  include/uapi/linux/virtio_gpu.h        | 19 +++++
+>  11 files changed, 321 insertions(+), 4 deletions(-)
+>  create mode 100644 drivers/virtio/virtio_dma_buf.c
+>  create mode 100644 include/linux/virtio_dma_buf.h
+> 
+> -- 
+> 2.27.0.278.ge193c7cf3a9-goog
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
