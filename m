@@ -2,69 +2,71 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68ED61F37FB
-	for <lists.virtualization@lfdr.de>; Tue,  9 Jun 2020 12:23:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D32761F3D82
+	for <lists.virtualization@lfdr.de>; Tue,  9 Jun 2020 16:04:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C75CD87BAE;
-	Tue,  9 Jun 2020 10:23:29 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8AA488679A;
+	Tue,  9 Jun 2020 14:04:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TM37jzpvxZBT; Tue,  9 Jun 2020 10:23:29 +0000 (UTC)
+	with ESMTP id satrBbL7Dhq0; Tue,  9 Jun 2020 14:04:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4BF4287758;
-	Tue,  9 Jun 2020 10:23:29 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D8F9F86460;
+	Tue,  9 Jun 2020 14:04:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 19778C016F;
-	Tue,  9 Jun 2020 10:23:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B1825C016F;
+	Tue,  9 Jun 2020 14:04:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8562EC016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 65D46C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 10:23:27 +0000 (UTC)
+ Tue,  9 Jun 2020 14:04:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 6D23A87758
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 549CF86F1B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 10:23:27 +0000 (UTC)
+ Tue,  9 Jun 2020 14:04:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id w-Kgb53c0pqB
+ with ESMTP id GwfnhjQow0eK
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 10:23:26 +0000 (UTC)
+ Tue,  9 Jun 2020 14:04:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id AEB788774F
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 65AA286F0F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Jun 2020 10:23:26 +0000 (UTC)
+ Tue,  9 Jun 2020 14:04:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591698205;
+ s=mimecast20190719; t=1591711454;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=gfMNYwLx5N6zaEsK3dGHOQSxpMDlp05cCXAIGAvVa3o=;
- b=g63E3uEVCB0OSp3CeMXVshIi1a1l5g1hD8fQWMV3fuPFQnIgOjjE5SC3iA638Jycfp6Qkm
- SEsuC0rP9IZF/2ScEWfy79DfJnm6Bo8S+IFnAJMEyalpE3XPUIgeY4A0HGXDbPs5CthUTK
- N2BOzYUO+3H2cMUll5Mjx0w3vWez1L8=
+ bh=QvNGhStwpM7bfoMrhq5oK1GBZajW8+BDcvsZzexAAzo=;
+ b=QqIehjmSiNkFQU0fd+iruTWlM64f7L0zxLJiBKcTRiZhaqT9tfI0+Cveg1F5QK1ppa+7ys
+ so3PYkHeHW6sOF8ZtkhgQmTQf9fIQLT5AK+xGLsgLZSZuxUr7O0qQYJYq1CiDApiPjnefJ
+ lTz7axoyULBo8xsHJE0OnumQtY0NvO8=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-112-hpWuwiSnOzGn3_kXSQQYIg-1; Tue, 09 Jun 2020 06:23:23 -0400
-X-MC-Unique: hpWuwiSnOzGn3_kXSQQYIg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-426-wkMtwVw2PeuGumr7gU02hQ-1; Tue, 09 Jun 2020 10:04:10 -0400
+X-MC-Unique: wkMtwVw2PeuGumr7gU02hQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 116A9835B40;
- Tue,  9 Jun 2020 10:23:22 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5E55C18A8220;
+ Tue,  9 Jun 2020 14:04:06 +0000 (UTC)
 Received: from [10.36.114.103] (ovpn-114-103.ams2.redhat.com [10.36.114.103])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3B28E768C1;
- Tue,  9 Jun 2020 10:23:18 +0000 (UTC)
-Subject: Re: [PATCH] virtio_mem: fix printk format
-To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
-References: <20200609095453.865827-1-mst@redhat.com>
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7EACF5D9EF;
+ Tue,  9 Jun 2020 14:04:00 +0000 (UTC)
+Subject: Re: [PATCH 15/17] mm: Fix trivial spelling
+To: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Kieran Bingham <kieran.bingham@ideasonboard.com>
+References: <20200609124610.3445662-1-kieran.bingham+renesas@ideasonboard.com>
+ <20200609124610.3445662-16-kieran.bingham+renesas@ideasonboard.com>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -110,15 +112,20 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  njnuI31KBiLUks+paRkHQlFcgS2N3gkRBzH7xSZ+t7Re3jvXdXEzKBbQ+dC3lpJB0wPnyMcX
  FOTT3aZT7IgePkt5iC/BKBk3hqKteTnJFeVIT7EC+a6YUFg=
 Organization: Red Hat GmbH
-Message-ID: <0fd18b65-c818-016b-be53-6be6ce1817ad@redhat.com>
-Date: Tue, 9 Jun 2020 12:23:17 +0200
+Message-ID: <9a0220f5-d5b0-be62-3d5d-4ec5680ad822@redhat.com>
+Date: Tue, 9 Jun 2020 16:03:59 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200609095453.865827-1-mst@redhat.com>
+In-Reply-To: <20200609124610.3445662-16-kieran.bingham+renesas@ideasonboard.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: virtualization@lists.linux-foundation.org
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Cc: Jiri Kosina <trivial@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:VIRTIO CORE AND NET DRIVERS"
+ <virtualization@lists.linux-foundation.org>, linux-renesas-soc@vger.kernel.org,
+ "open list:MEMORY MANAGEMENT" <linux-mm@kvack.org>,
+ Andrew Morton <akpm@linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -135,31 +142,46 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 09.06.20 11:54, Michael S. Tsirkin wrote:
-> Fixes: 676fa9ba893e ("virtio_mem: convert device block size into 64bit")
-> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-> ---
->  drivers/virtio/virtio_mem.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-> index 7b1bece8a331..50c689f25045 100644
-> --- a/drivers/virtio/virtio_mem.c
-> +++ b/drivers/virtio/virtio_mem.c
-> @@ -1717,8 +1717,8 @@ static int virtio_mem_init(struct virtio_mem *vm)
->  		 (unsigned long long)vm->device_block_size);
->  	dev_info(&vm->vdev->dev, "memory block size: 0x%lx",
->  		 memory_block_size_bytes());
-> -	dev_info(&vm->vdev->dev, "subblock size: 0x%x",
-> -		 vm->subblock_size);
-> +	dev_info(&vm->vdev->dev, "subblock size: 0x%llx",
-> +		 (unsigned long long)vm->subblock_size);
->  	if (vm->nid != NUMA_NO_NODE)
->  		dev_info(&vm->vdev->dev, "nid: %d", vm->nid);
->  
+On 09.06.20 14:46, Kieran Bingham wrote:
+> The word 'descriptor' is misspelled throughout the tree.
 > 
 
-Acked-by: David Hildenbrand <david@redhat.com>
+"mm/balloon_compaction:" is a better subject prefix
+
+Reviewed-by: David Hildenbrand <david@redhat.com>
+
+> Fix it up accordingly:
+>     decriptors -> descriptors
+> 
+> Signed-off-by: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+> ---
+>  virtio-mem-v3.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
+> index 26de020aae7b..907fefde2572 100644
+> --- a/mm/balloon_compaction.c
+> +++ b/mm/balloon_compaction.c
+> @@ -58,7 +58,7 @@ EXPORT_SYMBOL_GPL(balloon_page_list_enqueue);
+>  /**
+>   * balloon_page_list_dequeue() - removes pages from balloon's page list and
+>   *				 returns a list of the pages.
+> - * @b_dev_info: balloon device decriptor where we will grab a page from.
+> + * @b_dev_info: balloon device descriptor where we will grab a page from.
+>   * @pages: pointer to the list of pages that would be returned to the caller.
+>   * @n_req_pages: number of requested pages.
+>   *
+> @@ -157,7 +157,7 @@ EXPORT_SYMBOL_GPL(balloon_page_enqueue);
+>  /*
+>   * balloon_page_dequeue - removes a page from balloon's page list and returns
+>   *			  its address to allow the driver to release the page.
+> - * @b_dev_info: balloon device decriptor where we will grab a page from.
+> + * @b_dev_info: balloon device descriptor where we will grab a page from.
+>   *
+>   * Driver must call this function to properly dequeue a previously enqueued page
+>   * before definitively releasing it back to the guest system.
+> 
+
 
 -- 
 Thanks,
