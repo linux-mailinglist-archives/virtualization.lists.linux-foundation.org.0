@@ -1,98 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D81361F5767
-	for <lists.virtualization@lfdr.de>; Wed, 10 Jun 2020 17:13:50 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A3DC1F57C9
+	for <lists.virtualization@lfdr.de>; Wed, 10 Jun 2020 17:27:15 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 863EF859E3;
-	Wed, 10 Jun 2020 15:13:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id BDFCB88259;
+	Wed, 10 Jun 2020 15:27:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Zmhq3lxtExKJ; Wed, 10 Jun 2020 15:13:49 +0000 (UTC)
+	with ESMTP id zFgQ1dLdLv1D; Wed, 10 Jun 2020 15:27:12 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 527A0891C1;
-	Wed, 10 Jun 2020 15:13:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 417AE88246;
+	Wed, 10 Jun 2020 15:27:12 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1DDADC016F;
-	Wed, 10 Jun 2020 15:13:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C597C016F;
+	Wed, 10 Jun 2020 15:27:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E2EFDC016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E7008C016F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 15:13:47 +0000 (UTC)
+ Wed, 10 Jun 2020 15:27:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id DAF3488DDA
+ by hemlock.osuosl.org (Postfix) with ESMTP id D527388C15
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 15:13:47 +0000 (UTC)
+ Wed, 10 Jun 2020 15:27:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4LfEhjQn8FWU
+ with ESMTP id 7EsLmMzKt5Z1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 15:13:47 +0000 (UTC)
+ Wed, 10 Jun 2020 15:27:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 453FC859E3
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id BC6618886F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 15:13:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591802026;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=YfhNq/fazdZ8Eyi5klTe6PYJfVDAk96bmheZ7cnvsnc=;
- b=IWieV6ylmRF+tcqW0QyayQzt9JXCHKDwNZfWK19M+T8gPdkrNj+QS04g7SMVFSzbkgNIxm
- ++yaiBpy7yrjauW+GqWiCyyvjFYSid5nz6grOgabHIs8OR3YnOfIV9D8aDY82kRsTQQjJ4
- /vNc1sp2FeDXbL3bo+L7kbllGBmNmI0=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-313-rh0tnLqJNri0f2Z0ghDkVg-1; Wed, 10 Jun 2020 11:13:44 -0400
-X-MC-Unique: rh0tnLqJNri0f2Z0ghDkVg-1
-Received: by mail-wr1-f69.google.com with SMTP id s17so1211709wrt.7
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 08:13:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=YfhNq/fazdZ8Eyi5klTe6PYJfVDAk96bmheZ7cnvsnc=;
- b=Q+rb9aPbZD1wzS1d518rt17P/U5zgSQxjMRlByl80FRKzIbBAJBeTnoI+/9Cc/Ea1M
- jVYowoes/Ci5/cQryvz6TgVcsm7MURc69xoXr8a4N5KDCELU84v5vZ0Cun4+tXcTd+0A
- 3RI7tXU2GG18ATmPo5dV26/45DF2kIQlmKpLTwQKd1IeCY0Js3Jg5K6OokboduV6ov/8
- aQrlT2UgPRRDcqbClyUNqB+0MMEOPz3dQZZiR/taan0F6Fb+RtBoRWnbVS5nQouRE1xR
- Ot4hgpTwLbyVi3Sx5rKcPymAGI4nOqe1h8UVLa+JcXosqBZNdY9LAkpwWFx4pz0lW/5+
- S0PA==
-X-Gm-Message-State: AOAM533MfJoET82s+mK1f7UIQbH4Zy+vanGqhFeeU0YhnOkqObxCFlSN
- XGHrJzp80RmKkW69HKRL0wIT1uX73Zc2hPfe4nlq/hOF5yzyGwuSrm68NjZazfm5UC6DwLkXO0y
- pEGARyaHt72sTAvAwdiu6oj17442iisdIG6yEvImKLA==
-X-Received: by 2002:a1c:c3d7:: with SMTP id t206mr3730153wmf.69.1591802020718; 
- Wed, 10 Jun 2020 08:13:40 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJww1vH7zy+FsH/SZuuGBRzDcjEXQict36Ept0NkVt1LYqloJMLuBhZhh8r1NCU9jdQ8aYiDHA==
-X-Received: by 2002:a1c:c3d7:: with SMTP id t206mr3730071wmf.69.1591802019527; 
- Wed, 10 Jun 2020 08:13:39 -0700 (PDT)
-Received: from redhat.com ([212.92.121.57])
- by smtp.gmail.com with ESMTPSA id m24sm51095wmi.14.2020.06.10.08.13.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2020 08:13:38 -0700 (PDT)
-Date: Wed, 10 Jun 2020 11:13:36 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Eugenio Perez Martin <eperezma@redhat.com>
-Subject: Re: [PATCH RFC v7 03/14] vhost: use batched get_vq_desc version
-Message-ID: <20200610111147-mutt-send-email-mst@kernel.org>
-References: <20200610113515.1497099-1-mst@redhat.com>
- <20200610113515.1497099-4-mst@redhat.com>
- <CAJaqyWdGKh5gSTndGuVPyJSgt3jfjfW4xNCrJ2tQ9f+mD8=sMQ@mail.gmail.com>
+ Wed, 10 Jun 2020 15:27:09 +0000 (UTC)
+Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 05AF2gsf099987; Wed, 10 Jun 2020 11:27:08 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 31k02b592u-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 10 Jun 2020 11:27:08 -0400
+Received: from m0098410.ppops.net (m0098410.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 05AFNV0K053784;
+ Wed, 10 Jun 2020 11:27:08 -0400
+Received: from ppma01fra.de.ibm.com (46.49.7a9f.ip4.static.sl-reverse.com
+ [159.122.73.70])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 31k02b591n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 10 Jun 2020 11:27:07 -0400
+Received: from pps.filterd (ppma01fra.de.ibm.com [127.0.0.1])
+ by ppma01fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05AFLhcv021634;
+ Wed, 10 Jun 2020 15:27:05 GMT
+Received: from b06cxnps4076.portsmouth.uk.ibm.com
+ (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
+ by ppma01fra.de.ibm.com with ESMTP id 31g2s7u905-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 10 Jun 2020 15:27:05 +0000
+Received: from d06av21.portsmouth.uk.ibm.com (d06av21.portsmouth.uk.ibm.com
+ [9.149.105.232])
+ by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 05AFR2pk44171334
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 10 Jun 2020 15:27:02 GMT
+Received: from d06av21.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 8BC6152050;
+ Wed, 10 Jun 2020 15:27:02 +0000 (GMT)
+Received: from oc3016276355.ibm.com (unknown [9.145.158.19])
+ by d06av21.portsmouth.uk.ibm.com (Postfix) with ESMTP id 1A9C15204E;
+ Wed, 10 Jun 2020 15:27:02 +0000 (GMT)
+Subject: Re: [PATCH] s390: protvirt: virtio: Refuse device without IOMMU
+To: Cornelia Huck <cohuck@redhat.com>
+References: <1591794711-5915-1-git-send-email-pmorel@linux.ibm.com>
+ <20200610152431.358fded7.cohuck@redhat.com>
+ <54b28498-a6a7-4be2-9d2c-aef46c7fc642@linux.ibm.com>
+ <20200610165305.1a34c548.cohuck@redhat.com>
+From: Pierre Morel <pmorel@linux.ibm.com>
+Message-ID: <8b15139d-cd38-0861-1510-9a53530a4637@linux.ibm.com>
+Date: Wed, 10 Jun 2020 17:27:01 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAJaqyWdGKh5gSTndGuVPyJSgt3jfjfW4xNCrJ2tQ9f+mD8=sMQ@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- kvm list <kvm@vger.kernel.org>, virtualization@lists.linux-foundation.org
+In-Reply-To: <20200610165305.1a34c548.cohuck@redhat.com>
+Content-Language: en-US
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
+ definitions=2020-06-10_08:2020-06-10,
+ 2020-06-10 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxscore=0 malwarescore=0
+ spamscore=0 adultscore=0 priorityscore=1501 impostorscore=0 clxscore=1015
+ lowpriorityscore=0 mlxlogscore=999 suspectscore=2 bulkscore=0
+ cotscore=-2147483648 phishscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2004280000 definitions=main-2006100115
+Cc: linux-s390@vger.kernel.org, frankja@linux.ibm.com, kvm@vger.kernel.org,
+ mst@redhat.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
+ borntraeger@de.ibm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,46 +113,83 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jun 10, 2020 at 02:37:50PM +0200, Eugenio Perez Martin wrote:
-> > +/* This function returns a value > 0 if a descriptor was found, or 0 if none were found.
-> > + * A negative code is returned on error. */
-> > +static int fetch_descs(struct vhost_virtqueue *vq)
-> > +{
-> > +       int ret;
-> > +
-> > +       if (unlikely(vq->first_desc >= vq->ndescs)) {
-> > +               vq->first_desc = 0;
-> > +               vq->ndescs = 0;
-> > +       }
-> > +
-> > +       if (vq->ndescs)
-> > +               return 1;
-> > +
-> > +       for (ret = 1;
-> > +            ret > 0 && vq->ndescs <= vhost_vq_num_batch_descs(vq);
-> > +            ret = fetch_buf(vq))
-> > +               ;
-> 
-> (Expanding comment in V6):
-> 
-> We get an infinite loop this way:
-> * vq->ndescs == 0, so we call fetch_buf() here
-> * fetch_buf gets less than vhost_vq_num_batch_descs(vq); descriptors. ret = 1
-> * This loop calls again fetch_buf, but vq->ndescs > 0 (and avail_vq ==
-> last_avail_vq), so it just return 1
 
-That's what
-	 [PATCH RFC v7 08/14] fixup! vhost: use batched get_vq_desc version
-is supposed to fix.
+
+On 2020-06-10 16:53, Cornelia Huck wrote:
+> On Wed, 10 Jun 2020 16:37:55 +0200
+> Pierre Morel <pmorel@linux.ibm.com> wrote:
+> 
+>> On 2020-06-10 15:24, Cornelia Huck wrote:
+>>> On Wed, 10 Jun 2020 15:11:51 +0200
+>>> Pierre Morel <pmorel@linux.ibm.com> wrote:
+>>>    
+>>>> Protected Virtualisation protects the memory of the guest and
+>>>> do not allow a the host to access all of its memory.
+>>>>
+>>>> Let's refuse a VIRTIO device which does not use IOMMU
+>>>> protected access.
+>>>>
+>>>> Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
+>>>> ---
+>>>>    drivers/s390/virtio/virtio_ccw.c | 5 +++++
+>>>>    1 file changed, 5 insertions(+)
+>>>>
+>>>> diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
+>>>> index 5730572b52cd..06ffbc96587a 100644
+>>>> --- a/drivers/s390/virtio/virtio_ccw.c
+>>>> +++ b/drivers/s390/virtio/virtio_ccw.c
+>>>> @@ -986,6 +986,11 @@ static void virtio_ccw_set_status(struct virtio_device *vdev, u8 status)
+>>>>    	if (!ccw)
+>>>>    		return;
+>>>>    
+>>>> +	/* Protected Virtualisation guest needs IOMMU */
+>>>> +	if (is_prot_virt_guest() &&
+>>>> +	    !__virtio_test_bit(vdev, VIRTIO_F_IOMMU_PLATFORM))
+>>>> +			status &= ~VIRTIO_CONFIG_S_FEATURES_OK;
+>>>> +
+>>>
+>>> set_status seems like an odd place to look at features; shouldn't that
+>>> rather be done in finalize_features?
+>>
+>> Right, looks better to me too.
+>> What about:
+>>
+>>
+>>
+>> diff --git a/drivers/s390/virtio/virtio_ccw.c
+>> b/drivers/s390/virtio/virtio_ccw.c
+>> index 06ffbc96587a..227676297ea0 100644
+>> --- a/drivers/s390/virtio/virtio_ccw.c
+>> +++ b/drivers/s390/virtio/virtio_ccw.c
+>> @@ -833,6 +833,11 @@ static int virtio_ccw_finalize_features(struct
+>> virtio_device *vdev)
+>>                   ret = -ENOMEM;
+>>                   goto out_free;
+>>           }
+>> +
+>> +       if (is_prot_virt_guest() &&
+>> +           !__virtio_test_bit(vdev, VIRTIO_F_IOMMU_PLATFORM))
+> 
+> Add a comment, and (maybe) a message?
+> 
+> Otherwise, I think this is fine, as it should fail the probe, which is
+> what we want.
+
+yes right a message is needed.
+and I extend a little the comment I had before.
+thanks
+
+Regards,
+Pierre
 
 -- 
-MST
-
+Pierre Morel
+IBM Lab Boeblingen
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
