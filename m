@@ -1,96 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFA1D1F5148
-	for <lists.virtualization@lfdr.de>; Wed, 10 Jun 2020 11:39:46 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E858B1F5155
+	for <lists.virtualization@lfdr.de>; Wed, 10 Jun 2020 11:43:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5C01C888E2;
-	Wed, 10 Jun 2020 09:39:45 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 91B78880D0;
+	Wed, 10 Jun 2020 09:43:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id z-HnLqwSKiSg; Wed, 10 Jun 2020 09:39:44 +0000 (UTC)
+	with ESMTP id J+z-DoAld+c0; Wed, 10 Jun 2020 09:43:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D8488885CD;
-	Wed, 10 Jun 2020 09:39:44 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9F52A880B3;
+	Wed, 10 Jun 2020 09:43:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BD364C016F;
-	Wed, 10 Jun 2020 09:39:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 72681C088C;
+	Wed, 10 Jun 2020 09:43:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0B2F8C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E019AC016F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 09:39:43 +0000 (UTC)
+ Wed, 10 Jun 2020 09:43:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id EE687885CD
+ by fraxinus.osuosl.org (Postfix) with ESMTP id CEB958715A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 09:39:42 +0000 (UTC)
+ Wed, 10 Jun 2020 09:43:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id g+zpwegBXisA
+ with ESMTP id Xja9Ank51EqQ
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 09:39:42 +0000 (UTC)
+ Wed, 10 Jun 2020 09:43:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
  [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 6015488355
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id F306D8714A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 09:39:42 +0000 (UTC)
+ Wed, 10 Jun 2020 09:43:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591781981;
+ s=mimecast20190719; t=1591782226;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=0H9JvbVSTDy5EkcBxAYDLVdpZdU6drMIY4wiOG5g/Cg=;
- b=LgiZoQ7hpFwiFWah2o9PgSn0JevR3usDy5lrzkxVlB19C6JdmrOlkwVSfNasly0s21KdXN
- amguAYByArB1UQZPDUG+iOSvVsT3eJwVPpiB9YhsJFvM59zm9QlR1RKq6D+76veH9Z2+YM
- co9vAqol/9yoSdQ00zVju5giMu5E/O0=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-25-AWrGIztkPIem_xUdUnLK7A-1; Wed, 10 Jun 2020 05:39:39 -0400
-X-MC-Unique: AWrGIztkPIem_xUdUnLK7A-1
-Received: by mail-wr1-f72.google.com with SMTP id p9so840442wrx.10
+ bh=wMM5YSAnxtME2rVDR52gs/CCU183tmqWa7IkhS0ZU6A=;
+ b=Nkz2zbhJFwzpNQFQN5RDy4rhatIhe1y7ateQ+nc8M0FWDulJqgwCzoIcHkn+XvRFUjU2ae
+ Sx8Gvm8dXf/ZOLFwtrMnOJ7U6BGvGqTIpZchW3cV2QoJMmFY2KCJ6wok/0mm9/jnupXM/Q
+ ajCVK+WkxW8/Hw5vFaonhF6rLRob5i0=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-239-UyPYK_sNO8SfChXSRlgK8A-1; Wed, 10 Jun 2020 05:43:45 -0400
+X-MC-Unique: UyPYK_sNO8SfChXSRlgK8A-1
+Received: by mail-wr1-f69.google.com with SMTP id s7so838760wrm.16
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Jun 2020 02:39:39 -0700 (PDT)
+ Wed, 10 Jun 2020 02:43:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=0H9JvbVSTDy5EkcBxAYDLVdpZdU6drMIY4wiOG5g/Cg=;
- b=nCHMNL1ldZ2o50syICpKOXdLZOGoU9/Zfk/Qbmk7VSrlKsvAZpivU1e8TfPa3rh3NO
- D6peYv8rasOEwF2MiB+Q5lJ+0867FAcuXQKQGWYrBLTJGFC703HTskjNEKOVdY1EOVUw
- DYQ4m9WALYjjow+4eocInwnwnr4Ax8g7IfRAPhclpUBpGEJKy8/Kf0v038ojLp6BgBy1
- Qjsf5ckE6XlRmoDmrmWyn5sPi2LBiG0BvNZEaQTZq9kkJqou98azQSXUsISLk7SiK64A
- 2iai8lfp59BWNVbYfjG07VZyvLIYpIB1tFx9E5kOMt07T2fwJOx/h9B5Wk4NWhT3XX4A
- zuwg==
-X-Gm-Message-State: AOAM531s0dS2Znr+nkWdUYG+FmkjU7Zm60rBb5Y4DDnQOYcuSR5lnEo5
- JH7Wy8eN+m7ZRpga7NneJ1HpQRkbaJvS8VszCA/eegcsO7kaDMz1tCt5wIrTY+f3o5dSJD59Ph3
- rOh0raYumujChWHH4LTbI6krm0ZLAgguX9LlT/lzmsA==
-X-Received: by 2002:adf:f2c2:: with SMTP id d2mr2548442wrp.424.1591781978384; 
- Wed, 10 Jun 2020 02:39:38 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxymu+fkfSsDo8znawTJ6c4VcvlNi7tdHuvNBBytAhcUZ0W/2OrQ3nbVPMH2Y9nzbPs1nQa3w==
-X-Received: by 2002:adf:f2c2:: with SMTP id d2mr2548422wrp.424.1591781978220; 
- Wed, 10 Jun 2020 02:39:38 -0700 (PDT)
-Received: from redhat.com ([212.92.121.57])
- by smtp.gmail.com with ESMTPSA id c70sm5964690wme.32.2020.06.10.02.39.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2020 02:39:37 -0700 (PDT)
-Date: Wed, 10 Jun 2020 05:39:35 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
+ h=x-gm-message-state:content-transfer-encoding:from:mime-version
+ :subject:date:message-id:references:cc:in-reply-to:to;
+ bh=cqenDkPII+w3N9PhboDRPWmnWtl237duUuxheBtHmo8=;
+ b=gN+t2/1q1xhTNtb3eBqR2cGmF81r2q/HccfP/EMXxkHkKz8Muwog8ylT5BBoweltHf
+ BahuNpT6JHHKrOQy4IK87ERjnjuq1hU8s6E3QToLGTg2Rq4tzKbO2q1V6EckHNXZgtcd
+ 0wq94ZaRWSF4y2my5/zbxKeZsMShJ1NSYg3tYU3tZEqPUueh6FwZUREFpdUBZYiHDtVo
+ N9yfQ2Dlvkx6BdkeppYsnzZT5PE+eirS6leWo7oSK3TBLxc/Y2ANAyzMHzglroA9UVdO
+ xXjZbGkU31eDrG2CatOJ5yvO3ywXNCe8WFaDEt9kW0JUiDie1iDr502sQez1a1FXbkyb
+ saQA==
+X-Gm-Message-State: AOAM533HJpC5SKc2JZpb9Key3hsNvjS+UXHxDepT4me5FXvj6tinMvvc
+ mjrj4RE2u6+QQHdsD8yffkBKdxe4BuL+n7bKWTY5KrktGA5760a6aOqZf8DQ3f9yHkSd7NlWVoc
+ 0TvTOxW+mNT0tG6inMkO9OQhcwLqThOtHpoui30yCtA==
+X-Received: by 2002:adf:ecc2:: with SMTP id s2mr2948662wro.60.1591782224277;
+ Wed, 10 Jun 2020 02:43:44 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzVmcr+jf7/ZMdNhZWn5hNRs0ZgnnoTFCWKF9letJebZyLdzd6sY5umcaFiaoilisOKVzp02w==
+X-Received: by 2002:adf:ecc2:: with SMTP id s2mr2948642wro.60.1591782224092;
+ Wed, 10 Jun 2020 02:43:44 -0700 (PDT)
+Received: from [192.168.3.122] (p4ff23dec.dip0.t-ipconnect.de. [79.242.61.236])
+ by smtp.gmail.com with ESMTPSA id r5sm7527242wrq.0.2020.06.10.02.43.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Jun 2020 02:43:42 -0700 (PDT)
+From: David Hildenbrand <david@redhat.com>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [PATCH] virtio-mem: silence a static checker warning
+Date: Wed, 10 Jun 2020 11:43:42 +0200
+Message-Id: <56B2561B-33AC-40AB-9991-97EC72F9613F@redhat.com>
+References: <20200610085911.GC5439@mwanda>
+In-Reply-To: <20200610085911.GC5439@mwanda>
 To: Dan Carpenter <dan.carpenter@oracle.com>
-Subject: Re: [PATCH] vhost_vdpa: Fix potential underflow in vhost_vdpa_mmap()
-Message-ID: <20200610053926-mutt-send-email-mst@kernel.org>
-References: <20200610085852.GB5439@mwanda>
-MIME-Version: 1.0
-In-Reply-To: <20200610085852.GB5439@mwanda>
+X-Mailer: iPhone Mail (17E262)
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: kernel-janitors@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,42 +103,30 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jun 10, 2020 at 11:58:52AM +0300, Dan Carpenter wrote:
-> The "vma->vm_pgoff" variable is an unsigned long so if it's larger than
-> INT_MAX then "index" can be negative leading to an underflow.  Fix this
-> by changing the type of "index" to "unsigned long".
-> 
-> Fixes: ddd89d0a059d ("vhost_vdpa: support doorbell mapping via mmap")
-> Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
-
-Applied, thanks!
-
-> ---
->  drivers/vhost/vdpa.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-> index 7580e34f76c10..a54b60d6623f0 100644
-> --- a/drivers/vhost/vdpa.c
-> +++ b/drivers/vhost/vdpa.c
-> @@ -818,7 +818,7 @@ static int vhost_vdpa_mmap(struct file *file, struct vm_area_struct *vma)
->  	struct vdpa_device *vdpa = v->vdpa;
->  	const struct vdpa_config_ops *ops = vdpa->config;
->  	struct vdpa_notification_area notify;
-> -	int index = vma->vm_pgoff;
-> +	unsigned long index = vma->vm_pgoff;
->  
->  	if (vma->vm_end - vma->vm_start != PAGE_SIZE)
->  		return -EINVAL;
-> -- 
-> 2.26.2
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Cgo+IEFtIDEwLjA2LjIwMjAgdW0gMTA6NTkgc2NocmllYiBEYW4gQ2FycGVudGVyIDxkYW4uY2Fy
+cGVudGVyQG9yYWNsZS5jb20+Ogo+IAo+IO+7v1NtYXRjaCBjb21wbGFpbnMgdGhhdCAicmMiIGNh
+biBiZSB1bmluaXRpYWxpemVkIGlmIHdlIGhpdCB0aGUgImJyZWFrOyIKPiBzdGF0ZW1lbnQgb24g
+dGhlIGZpcnN0IGl0ZXJhdGlvbiB0aHJvdWdoIHRoZSBsb29wLiAgSSBzdXNwZWN0IHRoYXQgdGhp
+cwo+IGNhbid0IGhhcHBlbiBpbiByZWFsIGxpZmUsIGJ1dCByZXR1cm5pbmcgYSB6ZXJvIGxpdGVy
+YWwgaXMgY2xlYW5lciBhbmQKPiBzaWxlbmNlIHRoZSBzdGF0aWMgY2hlY2tlciB3YXJuaW5nLgo+
+IAoKUmlnaHQsIGl04oCYcyBpbXBvc3NpYmxlIGluIHJlYWwgbGlmZS4gVGhhbmtzIQoKQWNrZWQt
+Ynk6IERhdmlkIEhpbGRlbmJyYW5kIDxkYXZpZEByZWRoYXQuY29tPgoKPiBTaWduZWQtb2ZmLWJ5
+OiBEYW4gQ2FycGVudGVyIDxkYW4uY2FycGVudGVyQG9yYWNsZS5jb20+Cj4gLS0tCj4gZHJpdmVy
+cy92aXJ0aW8vdmlydGlvX21lbS5jIHwgMiArLQo+IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
+bigrKSwgMSBkZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpcnRpby92aXJ0
+aW9fbWVtLmMgYi9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fbWVtLmMKPiBpbmRleCBmNjU4ZmU5MTQ5
+YmViLi44OTNlZjE4MDYwYTAyIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19t
+ZW0uYwo+ICsrKyBiL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19tZW0uYwo+IEBAIC0xMTkyLDcgKzEx
+OTIsNyBAQCBzdGF0aWMgaW50IHZpcnRpb19tZW1fbWJfcGx1Z19hbnlfc2Ioc3RydWN0IHZpcnRp
+b19tZW0gKnZtLCB1bnNpZ25lZCBsb25nIG1iX2lkLAo+ICAgICAgICAgICAgICAgICAgICAgICAg
+VklSVElPX01FTV9NQl9TVEFURV9PRkZMSU5FKTsKPiAgICB9Cj4gCj4gLSAgICByZXR1cm4gcmM7
+Cj4gKyAgICByZXR1cm4gMDsKPiB9Cj4gCj4gLyoKPiAtLSAKPiAyLjI2LjIKPiAKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1h
+aWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRw
+czovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXph
+dGlvbg==
