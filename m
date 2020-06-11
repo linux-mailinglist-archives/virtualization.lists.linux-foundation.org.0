@@ -1,99 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BCE71F66F0
-	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 13:41:24 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E9A9D88725;
-	Thu, 11 Jun 2020 11:41:22 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id P1kwr8v8FtGM; Thu, 11 Jun 2020 11:41:22 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 39B968872B;
-	Thu, 11 Jun 2020 11:41:22 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1571AC016F;
-	Thu, 11 Jun 2020 11:41:22 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4E27AC0865
- for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:41:21 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F9C01F6721
+	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 13:48:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 48D8284AE1
- for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:41:21 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4A13487A24;
+	Thu, 11 Jun 2020 11:48:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 86AkoengnkA3; Thu, 11 Jun 2020 11:48:40 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B316287A21;
+	Thu, 11 Jun 2020 11:48:40 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 86762C016F;
+	Thu, 11 Jun 2020 11:48:40 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0E4F3C016F
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 11 Jun 2020 11:48:39 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id EFA5C2044A
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 11 Jun 2020 11:48:38 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id aBkPi1bRZKfO
+ with ESMTP id DmLCZ62WpYsz
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:41:20 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id B267E879D7
+ Thu, 11 Jun 2020 11:48:37 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by silver.osuosl.org (Postfix) with ESMTPS id 7990020409
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:41:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591875679;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=N+hOhqTQBMwp4AmRlzbOHmDQ8McxlMKMKGqAqlXUfCE=;
- b=CdoDIF+KrNGLpI3MM+KrTsH4w1jjysPL1hgIWrKYkGgqYg0rpc1AfrGoClBWNlU/vza56w
- WgX0J7vgrUeneyOa3oPrYMdY73p1ftRX0ytn/uVwemitHjywqpci6ERPXGeVESL7f8tXi/
- dFBQcG8pIRrFkeJvV3T9cNF0Cl9RAM4=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-381-4SHBrpkUN9OC73i_fe797Q-1; Thu, 11 Jun 2020 07:41:18 -0400
-X-MC-Unique: 4SHBrpkUN9OC73i_fe797Q-1
-Received: by mail-wr1-f71.google.com with SMTP id m14so2456368wrj.12
- for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 04:41:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=N+hOhqTQBMwp4AmRlzbOHmDQ8McxlMKMKGqAqlXUfCE=;
- b=GvUxf3AaGy/Mg9t2KC3joE2tSmlWhl+TeNt0q0LTZhHnmvjLtqym8GmWsQxunqTpoJ
- UOT891zEBEPkZE2xHJyLYImkXJekuu+PxtfXefJgKL2ow9FqheAS+t13Hjemypa5hR4F
- qSlhCcfjBnhRqjCAE8SsKp/tWLEgY0X3eK+vDXJxFsL7aXNAJJxbgvgyctUwmD2aj0JC
- Wl9FDuObtr+9tt2mHOu6i66aFuyBXDHDZIrBWtSxEj1hkqf7/2H1UgzjOobAPoNWOPSD
- QxygedWBborIthCYKu7MGySPPE+oltLOx2bJnq1OnJRl2amEPvNERXQYHtqWgZVB4Cgr
- YmLQ==
-X-Gm-Message-State: AOAM531MVowqjz4CenekCZ8DAdLfgFDlGmVNXo9/ypfeS2dsA829sUzk
- rQdfMECTCerrLqSU3vIXKy5N8C7y19f8py0cvaq2lFvmEvDcnrqhQYOiLlLIHBWGxS7Bt48AWxF
- 4ikBylIeLEtooZfQS/Ndm4OhLwzbdfisVFOQeBxKXOg==
-X-Received: by 2002:a7b:c40e:: with SMTP id k14mr8259487wmi.59.1591875676952; 
- Thu, 11 Jun 2020 04:41:16 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwkpzm1AHXvvYbOTpCzrh8Us+16Cfza99czVInZxHNWwmzLaKoW7HIE1UmlxalWp27taecVCA==
-X-Received: by 2002:a7b:c40e:: with SMTP id k14mr8259469wmi.59.1591875676754; 
- Thu, 11 Jun 2020 04:41:16 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-55-232.red.bezeqint.net. [79.181.55.232])
- by smtp.gmail.com with ESMTPSA id g3sm5069764wrb.46.2020.06.11.04.41.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2020 04:41:16 -0700 (PDT)
-Date: Thu, 11 Jun 2020 07:41:13 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: David Hildenbrand <david@redhat.com>
-Subject: Re: [PATCH v1] virtio-mem: add memory via add_memory_driver_managed()
-Message-ID: <20200611073943-mutt-send-email-mst@kernel.org>
-References: <20200611071744-mutt-send-email-mst@kernel.org>
- <613382D2-5F4D-4A32-AC8E-E1D03240036F@redhat.com>
+ Thu, 11 Jun 2020 11:48:37 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id DAE2B869; Thu, 11 Jun 2020 13:48:33 +0200 (CEST)
+Date: Thu, 11 Jun 2020 13:48:31 +0200
+From: Joerg Roedel <joro@8bytes.org>
+To: Borislav Petkov <bp@alien8.de>
+Subject: Re: [PATCH v3 47/75] x86/sev-es: Add Runtime #VC Exception Handler
+Message-ID: <20200611114831.GA11924@8bytes.org>
+References: <20200428151725.31091-1-joro@8bytes.org>
+ <20200428151725.31091-48-joro@8bytes.org>
+ <20200523075924.GB27431@zn.tnic>
 MIME-Version: 1.0
-In-Reply-To: <613382D2-5F4D-4A32-AC8E-E1D03240036F@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- teawater <teawaterz@linux.alibaba.com>
+In-Reply-To: <20200523075924.GB27431@zn.tnic>
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
+ Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,89 +78,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jun 11, 2020 at 01:33:04PM +0200, David Hildenbrand wrote:
+On Sat, May 23, 2020 at 09:59:24AM +0200, Borislav Petkov wrote:
+> On Tue, Apr 28, 2020 at 05:16:57PM +0200, Joerg Roedel wrote:
+> > +	/*
+> > +	 * Mark the per-cpu GHCBs as in-use to detect nested #VC exceptions.
+> > +	 * There is no need for it to be atomic, because nothing is written to
+> > +	 * the GHCB between the read and the write of ghcb_active. So it is safe
+> > +	 * to use it when a nested #VC exception happens before the write.
+> > +	 */
 > 
+> Looks liks that is that text... support for nested #VC exceptions.
+> I'm sure this has come up already but why do we even want to support
+> nested #VCs? IOW, can we do without them first or are they absolutely
+> necessary?
 > 
->     Am 11.06.2020 um 13:18 schrieb Michael S. Tsirkin <mst@redhat.com>:
-> 
-> 
->     On Thu, Jun 11, 2020 at 01:00:24PM +0200, David Hildenbrand wrote:
-> 
->                 I'd like to have this patch in 5.8, with the initial merge of
->                 virtio-mem
-> 
->                 if possible (so the user space representation of virtio-mem
->                 added memory
-> 
->                 resources won't change anymore).
-> 
->            
-> 
->             So my plan is to rebase on top of -rc1 and merge this for rc2 then.
-> 
->             I don't like rebase on top of tip as the results are sometimes kind
->             of
-> 
->             random.
-> 
->        
-> 
->         Right, I just wanted to get this out early so we can discuss how to
->         proceed.
-> 
->        
-> 
->             And let's add a Fixes: tag as well, this way people will remember
->             to
-> 
->             pick this.
-> 
->             Makes sense?
-> 
->        
-> 
->         Yes, it's somehow a fix (for kexec). So
-> 
->        
-> 
->         Fixes: 5f1f79bbc9e26 ("virtio-mem: Paravirtualized memory hotplug")
-> 
->        
-> 
->         I can respin after -rc1 with the commit id fixed as noted by Pankaj.
-> 
->         Just let me know what you prefer.
-> 
->        
-> 
->         Thanks!
-> 
->    
->     Some once this commit is in Linus' tree, please ping me.
-> 
-> 
-> It already is as mentioned, only the id was wrong.
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=
-> 7b7b27214bba1966772f9213cd2d8e5d67f8487f
+> I'm guessing VC exceptions inside the VC handler but what are the
+> sensible use cases?
 
-OK I pushed this into next based on tip. Let's see what happens.
+The most important use-case is #VC->NMI->#VC. When an NMI hits while the
+#VC handler uses the GHCB and the NMI handler causes another #VC, then
+the contents of the GHCB needs to be backed up, so that it doesn't
+destroy the GHCB contents of the first #VC handling path.
 
 
-> 
->    
-> 
->         --
-> 
->         Thanks,
-> 
->        
-> 
->         David / dhildenb
-> 
->    
-> 
+Regards,
 
+	Joerg
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
