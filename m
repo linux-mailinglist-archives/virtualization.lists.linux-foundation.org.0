@@ -2,49 +2,49 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F9C01F6721
-	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 13:48:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70E281F673A
+	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 13:54:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4A13487A24;
-	Thu, 11 Jun 2020 11:48:41 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 27B0F87A2F;
+	Thu, 11 Jun 2020 11:54:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 86AkoengnkA3; Thu, 11 Jun 2020 11:48:40 +0000 (UTC)
+	with ESMTP id aq9ren9ONmOV; Thu, 11 Jun 2020 11:54:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id B316287A21;
-	Thu, 11 Jun 2020 11:48:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D021D87A37;
+	Thu, 11 Jun 2020 11:54:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 86762C016F;
-	Thu, 11 Jun 2020 11:48:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 96B8BC016F;
+	Thu, 11 Jun 2020 11:54:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0E4F3C016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 943EFC016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:48:39 +0000 (UTC)
+ Thu, 11 Jun 2020 11:54:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id EFA5C2044A
+ by whitealder.osuosl.org (Postfix) with ESMTP id 7AC7188744
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:48:38 +0000 (UTC)
+ Thu, 11 Jun 2020 11:54:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DmLCZ62WpYsz
+ with ESMTP id aTp4skViNbsb
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:48:37 +0000 (UTC)
+ Thu, 11 Jun 2020 11:54:03 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 7990020409
+ by whitealder.osuosl.org (Postfix) with ESMTPS id E5F6788736
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:48:37 +0000 (UTC)
+ Thu, 11 Jun 2020 11:54:02 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id DAE2B869; Thu, 11 Jun 2020 13:48:33 +0200 (CEST)
-Date: Thu, 11 Jun 2020 13:48:31 +0200
+ id 335B5869; Thu, 11 Jun 2020 13:54:00 +0200 (CEST)
+Date: Thu, 11 Jun 2020 13:53:58 +0200
 From: Joerg Roedel <joro@8bytes.org>
 To: Borislav Petkov <bp@alien8.de>
 Subject: Re: [PATCH v3 47/75] x86/sev-es: Add Runtime #VC Exception Handler
-Message-ID: <20200611114831.GA11924@8bytes.org>
+Message-ID: <20200611115358.GB11924@8bytes.org>
 References: <20200428151725.31091-1-joro@8bytes.org>
  <20200428151725.31091-48-joro@8bytes.org>
  <20200523075924.GB27431@zn.tnic>
@@ -80,28 +80,13 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On Sat, May 23, 2020 at 09:59:24AM +0200, Borislav Petkov wrote:
 > On Tue, Apr 28, 2020 at 05:16:57PM +0200, Joerg Roedel wrote:
-> > +	/*
-> > +	 * Mark the per-cpu GHCBs as in-use to detect nested #VC exceptions.
-> > +	 * There is no need for it to be atomic, because nothing is written to
-> > +	 * the GHCB between the read and the write of ghcb_active. So it is safe
-> > +	 * to use it when a nested #VC exception happens before the write.
-> > +	 */
+> > +	struct ghcb backup_ghcb;
 > 
-> Looks liks that is that text... support for nested #VC exceptions.
-> I'm sure this has come up already but why do we even want to support
-> nested #VCs? IOW, can we do without them first or are they absolutely
-> necessary?
-> 
-> I'm guessing VC exceptions inside the VC handler but what are the
-> sensible use cases?
+> I could use some text explaining what those backups are for?
 
-The most important use-case is #VC->NMI->#VC. When an NMI hits while the
-#VC handler uses the GHCB and the NMI handler causes another #VC, then
-the contents of the GHCB needs to be backed up, so that it doesn't
-destroy the GHCB contents of the first #VC handling path.
+I added another comment above that line to better explain why it is
+needed.
 
-
-Regards,
 
 	Joerg
 _______________________________________________
