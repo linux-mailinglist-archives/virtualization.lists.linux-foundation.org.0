@@ -1,99 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CBBE1F66A5
-	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 13:30:27 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2472287629;
-	Thu, 11 Jun 2020 11:30:26 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id k-FmTpOeII8Z; Thu, 11 Jun 2020 11:30:25 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 88F07876F3;
-	Thu, 11 Jun 2020 11:30:25 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 496D9C016F;
-	Thu, 11 Jun 2020 11:30:25 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6395FC016F
- for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:30:24 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23D4A1F66B5
+	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 13:33:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 5B5F2895C1
- for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:30:24 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id CBA06895BA;
+	Thu, 11 Jun 2020 11:33:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id tzNCQl3TzlAS; Thu, 11 Jun 2020 11:33:14 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id F24FE895C1;
+	Thu, 11 Jun 2020 11:33:13 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D3123C0894;
+	Thu, 11 Jun 2020 11:33:13 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9A36FC016F
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 11 Jun 2020 11:33:12 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 809D5204E9
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 11 Jun 2020 11:33:12 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id T3u71zj-9oi7
+ with ESMTP id Zu5RyHqNzdfX
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:30:23 +0000 (UTC)
+ Thu, 11 Jun 2020 11:33:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 06E28895BA
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by silver.osuosl.org (Postfix) with ESMTPS id 17CE220409
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 11:30:22 +0000 (UTC)
+ Thu, 11 Jun 2020 11:33:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591875021;
+ s=mimecast20190719; t=1591875189;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=9/jl7PRjuNx/C+pUMDHawKvKRMB5jFyju67YAOMh5Vw=;
- b=K7vMxZEreFMxTGl9sC1Xvi09Zg/bq+oJvjcv5mvk4M3nsPR2DQVrqAISV5Fpjod4nfY0fZ
- +M9cK2m17IX8fm1ru8e+tNogakwn3rFAn+V3TFl/Nw055WLbdq8sADW6tcxDM5CqA6TOcT
- UelvBpknphft7BB6GVbKlrzIG+if/5s=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-10-w470WcYAPcGq4h9H4g0Wag-1; Thu, 11 Jun 2020 07:30:19 -0400
-X-MC-Unique: w470WcYAPcGq4h9H4g0Wag-1
-Received: by mail-wr1-f70.google.com with SMTP id p9so2453811wrx.10
+ bh=WfJS7MFBfhpSfT92H5Xzf5630oX/SV35fbP14C0fT/M=;
+ b=eQPYi7fuZSEy4J9ANd+g4vQiqWUNMaZaCrpnLoMmAlSI4BIORO2Kdi1U+U7Gk9WCgMBwdc
+ HcZ9m6QuBkEhiPW3aBDVwzKWJ1GX1JKJ7q8OBZYxqB9pgo1Ch0gROOFfYifwp/1U3Xqe+6
+ ejktCJakH1YYoizqNukbrvZvXsFCE44=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-475-40aBnn6EPfGihlme-dYfFw-1; Thu, 11 Jun 2020 07:33:07 -0400
+X-MC-Unique: 40aBnn6EPfGihlme-dYfFw-1
+Received: by mail-wr1-f69.google.com with SMTP id s7so2448726wrm.16
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 04:30:19 -0700 (PDT)
+ Thu, 11 Jun 2020 04:33:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=9/jl7PRjuNx/C+pUMDHawKvKRMB5jFyju67YAOMh5Vw=;
- b=hdHaPz/buJsyOTJ0LsODA1NmFKxHtWM6da1jKW+7zIkYzbBWMCCzAYMo2Cxv4W4yuK
- N3GvOPgyPjhzBADcbkVlonviR5Iqxbh4Jx/uz2zrN2ughILF55bRwE6FW8lFOXqmo0Xx
- WIO7oZbc16zHpMH2uSnYI/vDLLNWJJg78vEOLbdXSjEj1JN5yK8PEUVEOvonvlr+T2T3
- LYEL84r6jH2j0Uurrii5EDwMiGzN55I5xrpsfITmPhJjUy8V2I2CXEfFsFZheXl9RbBk
- u3lMdJZS7oV+Dkdxb2zHH4H+cnDkV8ChhTsZgVtoCVaKK95m2VNPhO1BgzzZxQzqtL9b
- i5Hg==
-X-Gm-Message-State: AOAM53351H3tFW0a4jss8VM08CIsLxsjITNLH57HOdkBlY8pan4pCQG6
- QlFVEGr31Yt377SGkVDEzCYPhaX6/f8VDA7tB9zWVwuxyuWcG7G4ELOBKMtPSoRl7vVCNxnXFD+
- 5G6O4eB0WLJZ7Db1pQwdk3YOwOSGJgms+MdyYC55zhg==
-X-Received: by 2002:a1c:3b8b:: with SMTP id i133mr7709145wma.111.1591875017439; 
- Thu, 11 Jun 2020 04:30:17 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzzJ6v/QkioaQycgPSzfq+keXBu76wlWx/mu62TPOFBjqUGGd1L5f5cXkoDx4uk2vFtzgVdWQ==
-X-Received: by 2002:a1c:3b8b:: with SMTP id i133mr7709124wma.111.1591875017186; 
- Thu, 11 Jun 2020 04:30:17 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-55-232.red.bezeqint.net. [79.181.55.232])
- by smtp.gmail.com with ESMTPSA id b81sm4055054wmc.5.2020.06.11.04.30.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2020 04:30:16 -0700 (PDT)
-Date: Thu, 11 Jun 2020 07:30:14 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Eugenio Perez Martin <eperezma@redhat.com>
-Subject: Re: [PATCH RFC v7 03/14] vhost: use batched get_vq_desc version
-Message-ID: <20200611072702-mutt-send-email-mst@kernel.org>
-References: <20200610113515.1497099-1-mst@redhat.com>
- <20200610113515.1497099-4-mst@redhat.com>
- <CAJaqyWdGKh5gSTndGuVPyJSgt3jfjfW4xNCrJ2tQ9f+mD8=sMQ@mail.gmail.com>
- <20200610111147-mutt-send-email-mst@kernel.org>
- <CAJaqyWe6d19hFAbpqaQqOPuQQmBQyevyF4sTVkaXKhD729XDkw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAJaqyWe6d19hFAbpqaQqOPuQQmBQyevyF4sTVkaXKhD729XDkw@mail.gmail.com>
+ h=x-gm-message-state:content-transfer-encoding:from:mime-version
+ :subject:date:message-id:references:cc:in-reply-to:to;
+ bh=2dIQ6RqotB/k3O/m27HZrFUYODkeA8BdBJOrJFzbkOQ=;
+ b=shs3A1O54H2KPv3jJi6uf08tqi1FOUnHHYIsLeuidG8K8SUjE5lzCdB1i665UMVhNR
+ t7LOWmYMwTytJ+HKqZRgqHzz4v9SH7yDHUCmj6/hT3qbYGmwdbZ8BxYAbYi95BJ1WVGE
+ UW7s9hMJD2Xev8YO5UTFVfx9kJuK5bWUC3HDeuIsI0wL6cMAYu+KrHwsYU4VBCh1uBaX
+ vXlIpGO1ufhPTgImAlgwT4Z8XpaYk8EiiOClru2CRI0qjwhbTHXneuPJIe5PUHBCD0ST
+ JdzIFq5KcumvLP3d7Z2XTlnImLnxbESz1Vx1sM1WX5UcUhM6RMC8CDeWsGqD8+7uSdu0
+ OslA==
+X-Gm-Message-State: AOAM532MMTaU4sUgOxCIusY9/WXDENHgePZ68CdoQ9DMklG9YOkuifNx
+ fPHtx6uFGpEH455KhUWq0J0tVFJKVgAN0Rb3QGNAzgPIA48TXKTuQCFVbgpONKPTeJLY5kmbVIc
+ sxcXXi0aAqxSlnS+MK9HOnhURNGJW/aQvyciy6K/PkQ==
+X-Received: by 2002:a1c:3987:: with SMTP id g129mr7761449wma.139.1591875186244; 
+ Thu, 11 Jun 2020 04:33:06 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzITmqYJue/6h7gE6EEmJk49t3YKpLGBtczqqyWVB6G8GeCFtE8WXdsatoDXXqRHe8AN7iMpA==
+X-Received: by 2002:a1c:3987:: with SMTP id g129mr7761420wma.139.1591875185963; 
+ Thu, 11 Jun 2020 04:33:05 -0700 (PDT)
+Received: from ?IPv6:2a01:598:b907:8575:cdbd:bd6:4dce:9256?
+ ([2a01:598:b907:8575:cdbd:bd6:4dce:9256])
+ by smtp.gmail.com with ESMTPSA id w1sm3728533wmi.13.2020.06.11.04.33.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Jun 2020 04:33:05 -0700 (PDT)
+From: David Hildenbrand <david@redhat.com>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [PATCH v1] virtio-mem: add memory via add_memory_driver_managed()
+Date: Thu, 11 Jun 2020 13:33:04 +0200
+Message-Id: <613382D2-5F4D-4A32-AC8E-E1D03240036F@redhat.com>
+References: <20200611071744-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20200611071744-mutt-send-email-mst@kernel.org>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+X-Mailer: iPhone Mail (17E262)
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- kvm list <kvm@vger.kernel.org>, virtualization@lists.linux-foundation.org
+Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ teawater <teawaterz@linux.alibaba.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,118 +105,131 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6904027750206013096=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jun 10, 2020 at 06:18:32PM +0200, Eugenio Perez Martin wrote:
-> On Wed, Jun 10, 2020 at 5:13 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
-> > On Wed, Jun 10, 2020 at 02:37:50PM +0200, Eugenio Perez Martin wrote:
-> > > > +/* This function returns a value > 0 if a descriptor was found, or 0 if none were found.
-> > > > + * A negative code is returned on error. */
-> > > > +static int fetch_descs(struct vhost_virtqueue *vq)
-> > > > +{
-> > > > +       int ret;
-> > > > +
-> > > > +       if (unlikely(vq->first_desc >= vq->ndescs)) {
-> > > > +               vq->first_desc = 0;
-> > > > +               vq->ndescs = 0;
-> > > > +       }
-> > > > +
-> > > > +       if (vq->ndescs)
-> > > > +               return 1;
-> > > > +
-> > > > +       for (ret = 1;
-> > > > +            ret > 0 && vq->ndescs <= vhost_vq_num_batch_descs(vq);
-> > > > +            ret = fetch_buf(vq))
-> > > > +               ;
-> > >
-> > > (Expanding comment in V6):
-> > >
-> > > We get an infinite loop this way:
-> > > * vq->ndescs == 0, so we call fetch_buf() here
-> > > * fetch_buf gets less than vhost_vq_num_batch_descs(vq); descriptors. ret = 1
-> > > * This loop calls again fetch_buf, but vq->ndescs > 0 (and avail_vq ==
-> > > last_avail_vq), so it just return 1
-> >
-> > That's what
-> >          [PATCH RFC v7 08/14] fixup! vhost: use batched get_vq_desc version
-> > is supposed to fix.
-> >
-> 
-> Sorry, I forgot to include that fixup.
-> 
-> With it I don't see CPU stalls, but with that version latency has
-> increased a lot and I see packet lost:
-> + ping -c 5 10.200.0.1
-> PING 10.200.0.1 (10.200.0.1) 56(84) bytes of data.
-> >From 10.200.0.2 icmp_seq=1 Destination Host Unreachable
-> >From 10.200.0.2 icmp_seq=2 Destination Host Unreachable
-> >From 10.200.0.2 icmp_seq=3 Destination Host Unreachable
-> 64 bytes from 10.200.0.1: icmp_seq=5 ttl=64 time=6848 ms
-> 
-> --- 10.200.0.1 ping statistics ---
-> 5 packets transmitted, 1 received, +3 errors, 80% packet loss, time 76ms
-> rtt min/avg/max/mdev = 6848.316/6848.316/6848.316/0.000 ms, pipe 4
-> --
-> 
-> I cannot even use netperf.
+--===============6904027750206013096==
+Content-Type: multipart/alternative; boundary=Apple-Mail-3BDDA998-C2BD-49D8-8575-72FA81B00AAD
 
-OK so that's the bug to try to find and fix I think.
+--Apple-Mail-3BDDA998-C2BD-49D8-8575-72FA81B00AAD
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
 
-> If I modify with my proposed version:
-> + ping -c 5 10.200.0.1
-> PING 10.200.0.1 (10.200.0.1) 56(84) bytes of data.
-> 64 bytes from 10.200.0.1: icmp_seq=1 ttl=64 time=7.07 ms
-> 64 bytes from 10.200.0.1: icmp_seq=2 ttl=64 time=0.358 ms
-> 64 bytes from 10.200.0.1: icmp_seq=3 ttl=64 time=5.35 ms
-> 64 bytes from 10.200.0.1: icmp_seq=4 ttl=64 time=2.27 ms
-> 64 bytes from 10.200.0.1: icmp_seq=5 ttl=64 time=0.426 ms
+
+> Am 11.06.2020 um 13:18 schrieb Michael S. Tsirkin <mst@redhat.com>:
+>=20
+> =EF=BB=BFOn Thu, Jun 11, 2020 at 01:00:24PM +0200, David Hildenbrand wrot=
+e:
+>>>> I'd like to have this patch in 5.8, with the initial merge of virtio-m=
+em
+>>>> if possible (so the user space representation of virtio-mem added memo=
+ry
+>>>> resources won't change anymore).
+>>>=20
+>>> So my plan is to rebase on top of -rc1 and merge this for rc2 then.
+>>> I don't like rebase on top of tip as the results are sometimes kind of
+>>> random.
+>>=20
+>> Right, I just wanted to get this out early so we can discuss how to proc=
+eed.
+>>=20
+>>> And let's add a Fixes: tag as well, this way people will remember to
+>>> pick this.
+>>> Makes sense?
+>>=20
+>> Yes, it's somehow a fix (for kexec). So
+>>=20
+>> Fixes: 5f1f79bbc9e26 ("virtio-mem: Paravirtualized memory hotplug")
+>>=20
+>> I can respin after -rc1 with the commit id fixed as noted by Pankaj.
+>> Just let me know what you prefer.
+>>=20
+>> Thanks!
+>=20
+> Some once this commit is in Linus' tree, please ping me.
+
+It already is as mentioned, only the id was wrong.
+
+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/=
+?id=3D7b7b27214bba1966772f9213cd2d8e5d67f8487f
+
+>=20
+>> --=20
+>> Thanks,
+>>=20
+>> David / dhildenb
+>=20
+
+--Apple-Mail-3BDDA998-C2BD-49D8-8575-72FA81B00AAD
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=
+=3Dutf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><br></div><div dir=3D"=
+ltr"><br><blockquote type=3D"cite">Am 11.06.2020 um 13:18 schrieb Michael S=
+. Tsirkin &lt;mst@redhat.com&gt;:<br><br></blockquote></div><blockquote typ=
+e=3D"cite"><div dir=3D"ltr">=EF=BB=BF<span>On Thu, Jun 11, 2020 at 01:00:24=
+PM +0200, David Hildenbrand wrote:</span><br><blockquote type=3D"cite"><blo=
+ckquote type=3D"cite"><blockquote type=3D"cite"><span>I'd like to have this=
+ patch in 5.8, with the initial merge of virtio-mem</span><br></blockquote>=
+</blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cit=
+e"><blockquote type=3D"cite"><span>if possible (so the user space represent=
+ation of virtio-mem added memory</span><br></blockquote></blockquote></bloc=
+kquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=
+=3D"cite"><span>resources won't change anymore).</span><br></blockquote></b=
+lockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite">=
+<span></span><br></blockquote></blockquote><blockquote type=3D"cite"><block=
+quote type=3D"cite"><span>So my plan is to rebase on top of -rc1 and merge =
+this for rc2 then.</span><br></blockquote></blockquote><blockquote type=3D"=
+cite"><blockquote type=3D"cite"><span>I don't like rebase on top of tip as =
+the results are sometimes kind of</span><br></blockquote></blockquote><bloc=
+kquote type=3D"cite"><blockquote type=3D"cite"><span>random.</span><br></bl=
+ockquote></blockquote><blockquote type=3D"cite"><span></span><br></blockquo=
+te><blockquote type=3D"cite"><span>Right, I just wanted to get this out ear=
+ly so we can discuss how to proceed.</span><br></blockquote><blockquote typ=
+e=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><blockqu=
+ote type=3D"cite"><span>And let's add a Fixes: tag as well, this way people=
+ will remember to</span><br></blockquote></blockquote><blockquote type=3D"c=
+ite"><blockquote type=3D"cite"><span>pick this.</span><br></blockquote></bl=
+ockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><span>Makes se=
+nse?</span><br></blockquote></blockquote><blockquote type=3D"cite"><span></=
+span><br></blockquote><blockquote type=3D"cite"><span>Yes, it's somehow a f=
+ix (for kexec). So</span><br></blockquote><blockquote type=3D"cite"><span><=
+/span><br></blockquote><blockquote type=3D"cite"><span>Fixes: 5f1f79bbc9e26=
+ ("virtio-mem: Paravirtualized memory hotplug")</span><br></blockquote><blo=
+ckquote type=3D"cite"><span></span><br></blockquote><blockquote type=3D"cit=
+e"><span>I can respin after -rc1 with the commit id fixed as noted by Panka=
+j.</span><br></blockquote><blockquote type=3D"cite"><span>Just let me know =
+what you prefer.</span><br></blockquote><blockquote type=3D"cite"><span></s=
+pan><br></blockquote><blockquote type=3D"cite"><span>Thanks!</span><br></bl=
+ockquote><span></span><br><span>Some once this commit is in Linus' tree, pl=
+ease ping me.</span><br></div></blockquote><div><br></div><div>It already i=
+s as mentioned, only the id was wrong.</div><div><br></div><div><a href=3D"=
+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/=
+?id=3D7b7b27214bba1966772f9213cd2d8e5d67f8487f">https://git.kernel.org/pub/=
+scm/linux/kernel/git/next/linux-next.git/commit/?id=3D7b7b27214bba1966772f9=
+213cd2d8e5d67f8487f</a></div><br><blockquote type=3D"cite"><div dir=3D"ltr"=
+><span></span><br><blockquote type=3D"cite"><span>-- </span><br></blockquot=
+e><blockquote type=3D"cite"><span>Thanks,</span><br></blockquote><blockquot=
+e type=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><sp=
+an>David / dhildenb</span><br></blockquote><span></span><br></div></blockqu=
+ote></body></html>
+--Apple-Mail-3BDDA998-C2BD-49D8-8575-72FA81B00AAD--
 
 
-Not sure which version this is.
-
-> [root@localhost ~]# netperf -H 10.200.0.1 -p 12865 -l 10 -t TCP_STREAM
-> MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to
-> 10.200.0.1 () port 0 AF_INET
-> Recv   Send    Send
-> Socket Socket  Message  Elapsed
-> Size   Size    Size     Time     Throughput
-> bytes  bytes   bytes    secs.    10^6bits/sec
-> 
-> 131072  16384  16384    10.01    4742.36
-> [root@localhost ~]# netperf -H 10.200.0.1 -p 12865 -l 10 -t UDP_STREAM
-> MIGRATED UDP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to
-> 10.200.0.1 () port 0 AF_INET
-> Socket  Message  Elapsed      Messages
-> Size    Size     Time         Okay Errors   Throughput
-> bytes   bytes    secs            #      #   10^6bits/sec
-> 
-> 212992   65507   10.00        9214      0     482.83
-> 212992           10.00        9214            482.83
-> 
-> I will compare with the non-batch version for reference, but the
-> difference between the two is noticeable. Maybe it's worth finding a
-> good value for the if() inside fetch_buf?
-> 
-> Thanks!
-> 
-
-I don't think it's performance, I think it's a bug somewhere,
-e.g. maybe we corrupt a packet, or stall the queue, or
-something like this.
-
-Let's do this, I will squash the fixups and post v8 so you can bisect
-and then debug cleanly.
-
-> > --
-> > MST
-> >
+--===============6904027750206013096==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============6904027750206013096==--
+
