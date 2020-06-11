@@ -1,102 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69BD71F6443
-	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 11:06:52 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id C73EC1F64D1
+	for <lists.virtualization@lfdr.de>; Thu, 11 Jun 2020 11:35:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 1E24C879F4;
-	Thu, 11 Jun 2020 09:06:51 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4AC582042C;
+	Thu, 11 Jun 2020 09:35:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lPju8J4zpJDt; Thu, 11 Jun 2020 09:06:50 +0000 (UTC)
+	with ESMTP id 9h2CK6U8lfYA; Thu, 11 Jun 2020 09:35:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 60170879E9;
-	Thu, 11 Jun 2020 09:06:50 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4DA94267C1;
+	Thu, 11 Jun 2020 09:35:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2D587C016F;
-	Thu, 11 Jun 2020 09:06:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 399B0C016F;
+	Thu, 11 Jun 2020 09:35:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7C9C2C016F
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 247E0C016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 09:06:48 +0000 (UTC)
+ Thu, 11 Jun 2020 09:35:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 732EB886C1
+ by silver.osuosl.org (Postfix) with ESMTP id 0C0262048B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 09:06:48 +0000 (UTC)
+ Thu, 11 Jun 2020 09:35:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oD-cOmH8ekTH
+ with ESMTP id YCFSYKzeYhCF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 09:06:46 +0000 (UTC)
+ Thu, 11 Jun 2020 09:35:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 504FD886BD
+ by silver.osuosl.org (Postfix) with ESMTPS id A8A872042C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 09:06:46 +0000 (UTC)
+ Thu, 11 Jun 2020 09:35:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591866405;
+ s=mimecast20190719; t=1591868137;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EMC0E2B827Ia2DQRzxKsWY/OK5Bg//cvAlofONDhk2Q=;
- b=CDXgEr+EKvV5ntUXOSA2QcNFsr/CHHfGNpy2UioYOT4kYXXA7Fb/YRwlB5NtGGRbZ0am2X
- rOItVzsG2E2ekTGJylt8N+J/4iO6U+HiMOlaZIZ0V7qHKKh4+CR0QpS+WyiZXv14CQu8Gt
- jlyIYphj03AwPrCiwGVkeCPUuGWjYjI=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-364-kOnMVWydMg64bBV2SoKhWg-1; Thu, 11 Jun 2020 05:06:43 -0400
-X-MC-Unique: kOnMVWydMg64bBV2SoKhWg-1
-Received: by mail-wm1-f70.google.com with SMTP id y15so884997wmi.0
- for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Jun 2020 02:06:43 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=EMC0E2B827Ia2DQRzxKsWY/OK5Bg//cvAlofONDhk2Q=;
- b=cCuAjnsLct4Y9QnfG/4UN12++6QFvNeocqVRrLOw6fo95iVLyyWmIs7Y8ubPTBU7xG
- IU0SJoiiqUlF/bryXKzYewV4Eei9q+phTYsF+6paDxy1ayn2IBahiXygmq4YaCMbf6RF
- rTGv16Q4X/hIeNsUURWk9EqQ9QTDMYbZ224RJxjUWQrK9OiCwKB3Tstrb6T1daV7JtuN
- q8maJtarcRRzOBfaxrlBA63nLn19PytNXdLiJ2BdCWCDwxLribrIC+xtsts0A1qVxtNi
- g0KXqxg8oAH5G9st3BJfePyZkt2LwoOGwE2Uky3+mavorJ+ajY0SYk7BMAbSKBPhPpHc
- iltw==
-X-Gm-Message-State: AOAM530GV8AHjO++Cq0VdQrOopRT8EnG7cj5DQvwjlFmpXb9NMQvVfbo
- pev3n5pOjYbQ2dRS1PEeWbIK02zilU2whPhdpY4PrIwwylNkLfSJiOyWw3Jn98b2YH4a+ZxuqUY
- dB3QbVapLhFiXq3+EsaNrkWliVcMwr87DlE/VxX05ZQ==
-X-Received: by 2002:adf:dccc:: with SMTP id x12mr8242095wrm.72.1591866401977; 
- Thu, 11 Jun 2020 02:06:41 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwjS282NzyfgjaTUCOeu+TiuTHkZ19eiBXmK6U3BwQgdXs1XxcOHzbjcay7nTvobbz5n62KJQ==
-X-Received: by 2002:adf:dccc:: with SMTP id x12mr8242068wrm.72.1591866401733; 
- Thu, 11 Jun 2020 02:06:41 -0700 (PDT)
-Received: from redhat.com (bzq-79-181-55-232.red.bezeqint.net. [79.181.55.232])
- by smtp.gmail.com with ESMTPSA id y80sm3152548wmc.34.2020.06.11.02.06.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2020 02:06:40 -0700 (PDT)
-Date: Thu, 11 Jun 2020 05:06:38 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH RFC v6 02/11] vhost: use batched get_vq_desc version
-Message-ID: <20200611050416-mutt-send-email-mst@kernel.org>
-References: <20200608125238.728563-1-mst@redhat.com>
- <20200608125238.728563-3-mst@redhat.com>
- <81904cc5-b662-028d-3b4a-bdfdbd2deb8c@redhat.com>
- <20200610070259-mutt-send-email-mst@kernel.org>
- <76b14132-407a-48bf-c4d5-9d0b2c700bb0@redhat.com>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=skekyVLdwFwBTm754pc77fwSJmldMeXVb8k3yiao8Zo=;
+ b=CiYkZgksT71QAo9GQc/TM2XXvtrXM5TycKVm3BzS9JHAF2ZibGak5Fr0oL6MAyf1e1HDMM
+ CheY6/Cqqu13PESHqjQIiJrAl3gnT/qroz5sBQHdKdK0gUCkPpeI+e5N2O5ryRgkuk9Oam
+ c8oGE03bL2w2c+7fQl+N7mEVJzXdbGI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-46-79N41bhHNyOSrHDxFwNDUg-1; Thu, 11 Jun 2020 05:35:35 -0400
+X-MC-Unique: 79N41bhHNyOSrHDxFwNDUg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 17C5E1883605;
+ Thu, 11 Jun 2020 09:35:34 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-114-160.ams2.redhat.com [10.36.114.160])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B303110013C1;
+ Thu, 11 Jun 2020 09:35:25 +0000 (UTC)
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v1] virtio-mem: add memory via add_memory_driver_managed()
+Date: Thu, 11 Jun 2020 11:35:18 +0200
+Message-Id: <20200611093518.5737-1-david@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <76b14132-407a-48bf-c4d5-9d0b2c700bb0@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: netdev@vger.kernel.org, eperezma@redhat.com, linux-kernel@vger.kernel.org,
- kvm@vger.kernel.org, virtualization@lists.linux-foundation.org
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Cc: virtio-dev@lists.oasis-open.org, kvm@vger.kernel.org,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ teawater <teawaterz@linux.alibaba.com>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,40 +84,124 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVGh1LCBKdW4gMTEsIDIwMjAgYXQgMTE6MDI6NTdBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIwLzYvMTAg5LiL5Y2INzowNSwgTWljaGFlbCBTLiBUc2lya2luIHdyb3Rl
-Ogo+ID4gPiA+ICtFWFBPUlRfU1lNQk9MX0dQTCh2aG9zdF9nZXRfdnFfZGVzYyk7Cj4gPiA+ID4g
-ICAgLyogUmV2ZXJzZSB0aGUgZWZmZWN0IG9mIHZob3N0X2dldF92cV9kZXNjLiBVc2VmdWwgZm9y
-IGVycm9yIGhhbmRsaW5nLiAqLwo+ID4gPiA+ICAgIHZvaWQgdmhvc3RfZGlzY2FyZF92cV9kZXNj
-KHN0cnVjdCB2aG9zdF92aXJ0cXVldWUgKnZxLCBpbnQgbikKPiA+ID4gPiAgICB7Cj4gPiA+ID4g
-Kwl1bmZldGNoX2Rlc2NzKHZxKTsKPiA+ID4gPiAgICAJdnEtPmxhc3RfYXZhaWxfaWR4IC09IG47
-Cj4gPiA+IFNvIHVuZmV0Y2hfZGVzY3MoKSBoYXMgZGVjcmVhc2VkIGxhc3RfYXZhaWxfaWR4Lgo+
-ID4gPiBDYW4gd2UgZml4IHRoaXMgYnkgbGV0dGluZyB1bmZldGNoX2Rlc2NzKCkgcmV0dXJuIHRo
-ZSBudW1iZXIgYW5kIHRoZW4gd2UgY2FuCj4gPiA+IGRvOgo+ID4gPiAKPiA+ID4gaW50IGQgPSB1
-bmZldGNoX2Rlc2NzKHZxKTsKPiA+ID4gdnEtPmxhc3RfYXZhaWxfaWR4IC09IChuID4gZCkgPyBu
-IC0gZDogMDsKPiA+ID4gCj4gPiA+IFRoYW5rcwo+ID4gVGhhdCdzIGludGVudGlvbmFsIEkgdGhp
-bmsgLSB3ZSBuZWVkIGJvdGguCj4gCj4gCj4gWWVzLCBidXQ6Cj4gCj4gCj4gPiAKPiA+IFVuZmV0
-Y2hfZGVzY3MgZHJvcHMgdGhlIGRlc2NyaXB0b3JzIGluIHRoZSBjYWNoZSB0aGF0IHdlcmUKPiA+
-ICpub3QgcmV0dXJuZWQgdG8gY2FsbGVyKiAgdGhyb3VnaCBnZXRfdnFfZGVzYy4KPiA+IAo+ID4g
-dmhvc3RfZGlzY2FyZF92cV9kZXNjIGRyb3BzIHRoZSBvbmVzIHRoYXQgd2VyZSByZXR1cm5lZCB0
-aHJvdWdoIGdldF92cV9kZXNjLgo+ID4gCj4gPiBEaWQgSSBtaXNzIGFueXRoaW5nPwo+IAo+IFdl
-IGNvdWxkIGNvdW50IHNvbWUgZGVzY3JpcHRvcnMgdHdpY2UsIGNvbnNpZGVyIHRoZSBjYXNlIGUu
-ZyB3ZSBvbmx5IGNhY2hlCj4gb24gZGVzY3JpcHRvcjoKPiAKPiBmZXRjaF9kZXNjcygpCj4gwqDC
-oMKgIGZldGNoX2J1ZigpCj4gwqDCoMKgIMKgwqDCoCBsYXN0X2F2YWlsX2lkeCsrOwo+IAo+IFRo
-ZW4gd2Ugd2FudCBkbyBkaXNjYXJkIGl0Ogo+IHZob3N0X2Rpc2NhcmRfYXZhaWxfYnVmKDEpCj4g
-wqDCoMKgIHVuZmV0Y2hfZGVzY3MoKQo+IMKgwqDCoCDCoMKgwqAgbGFzdF9hdmFpbF9pZHgtLTsK
-PiDCoMKgwqAgbGFzdF9hdmFpbF9pZHggLT0gMTsKPiAKPiBUaGFua3MKCgpJIGRvbid0IHRoaW5r
-IHRoYXQgaGFwcGVucy4gdmhvc3RfZGlzY2FyZF9hdmFpbF9idWYoMSkgaXMgb25seSBjYWxsZWQK
-YWZ0ZXIgZ2V0IHZob3N0X2dldF9hdmFpbF9idWYuIHZob3N0X2dldF9hdmFpbF9idWYgaW5jcmVt
-ZW50cwpmaXJzdF9kZXNjLiAgdW5mZXRjaF9kZXNjcyBvbmx5IGNvdW50cyBmcm9tIGZpcnN0X2Rl
-c2MgdG8gbmRlc2NzLgoKSWYgSSdtIHdyb25nLCBjb3VsZCB5b3Ugc2hvdyB2YWx1ZXMgb2YgZmly
-c3RfZGVzYyBhbmQgbmRlc2NzIGluIHRoaXMKc2NlbmFyaW8/CgotLSAKTVNUCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWls
-aW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6
-Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRp
-b24=
+Virtio-mem managed memory is always detected and added by the virtio-mem
+driver, never using something like the firmware-provided memory map.
+This is the case after an ordinary system reboot, and has to be guaranteed
+after kexec. Especially, virtio-mem added memory resources can contain
+inaccessible parts ("unblocked memory blocks"), blindly forwarding them
+to a kexec kernel is dangerous, as unplugged memory will get accessed
+(esp. written).
+
+Let's use the new way of adding special driver-managed memory introduced
+in commit 75ac4c58bc0d ("mm/memory_hotplug: introduce
+add_memory_driver_managed()").
+
+This will result in no entries in /sys/firmware/memmap ("raw firmware-
+provided memory map"), the memory resource will be flagged
+IORESOURCE_MEM_DRIVER_MANAGED (esp., kexec_file_load() will not place
+kexec images on this memory), and it is exposed as "System RAM
+(virtio_mem)" in /proc/iomem, so esp. kexec-tools can properly handle it.
+
+Example /proc/iomem before this change:
+  [...]
+  140000000-333ffffff : virtio0
+    140000000-147ffffff : System RAM
+  334000000-533ffffff : virtio1
+    338000000-33fffffff : System RAM
+    340000000-347ffffff : System RAM
+    348000000-34fffffff : System RAM
+  [...]
+
+Example /proc/iomem after this change:
+  [...]
+  140000000-333ffffff : virtio0
+    140000000-147ffffff : System RAM (virtio_mem)
+  334000000-533ffffff : virtio1
+    338000000-33fffffff : System RAM (virtio_mem)
+    340000000-347ffffff : System RAM (virtio_mem)
+    348000000-34fffffff : System RAM (virtio_mem)
+  [...]
+
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+Cc: teawater <teawaterz@linux.alibaba.com>
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+
+Based on latest Linus' tree (and not a tag) because
+- virtio-mem has just been merged via the vhost tree
+- add_memory_driver_managed() has been merged a week ago via the -mm tree
+
+I'd like to have this patch in 5.8, with the initial merge of virtio-mem
+if possible (so the user space representation of virtio-mem added memory
+resources won't change anymore).
+
+---
+ drivers/virtio/virtio_mem.c | 25 ++++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
+index 50c689f250450..d2eab3558a9e1 100644
+--- a/drivers/virtio/virtio_mem.c
++++ b/drivers/virtio/virtio_mem.c
+@@ -101,6 +101,11 @@ struct virtio_mem {
+ 
+ 	/* The parent resource for all memory added via this device. */
+ 	struct resource *parent_resource;
++	/*
++	 * Copy of "System RAM (virtio_mem)" to be used for
++	 * add_memory_driver_managed().
++	 */
++	const char *resource_name;
+ 
+ 	/* Summary of all memory block states. */
+ 	unsigned long nb_mb_state[VIRTIO_MEM_MB_STATE_COUNT];
+@@ -414,8 +419,20 @@ static int virtio_mem_mb_add(struct virtio_mem *vm, unsigned long mb_id)
+ 	if (nid == NUMA_NO_NODE)
+ 		nid = memory_add_physaddr_to_nid(addr);
+ 
++	/*
++	 * When force-unloading the driver and we still have memory added to
++	 * Linux, the resource name has to stay.
++	 */
++	if (!vm->resource_name) {
++		vm->resource_name = kstrdup_const("System RAM (virtio_mem)",
++						  GFP_KERNEL);
++		if (!vm->resource_name)
++			return -ENOMEM;
++	}
++
+ 	dev_dbg(&vm->vdev->dev, "adding memory block: %lu\n", mb_id);
+-	return add_memory(nid, addr, memory_block_size_bytes());
++	return add_memory_driver_managed(nid, addr, memory_block_size_bytes(),
++					 vm->resource_name);
+ }
+ 
+ /*
+@@ -1890,10 +1907,12 @@ static void virtio_mem_remove(struct virtio_device *vdev)
+ 	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_OFFLINE_PARTIAL] ||
+ 	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE] ||
+ 	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL] ||
+-	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE_MOVABLE])
++	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE_MOVABLE]) {
+ 		dev_warn(&vdev->dev, "device still has system memory added\n");
+-	else
++	} else {
+ 		virtio_mem_delete_resource(vm);
++		kfree_const(vm->resource_name);
++	}
+ 
+ 	/* remove all tracking data - no locking needed */
+ 	vfree(vm->mb_state);
+-- 
+2.26.2
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
