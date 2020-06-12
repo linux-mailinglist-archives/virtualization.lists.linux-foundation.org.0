@@ -2,96 +2,106 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE7941F79CA
-	for <lists.virtualization@lfdr.de>; Fri, 12 Jun 2020 16:27:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 674B11F7A85
+	for <lists.virtualization@lfdr.de>; Fri, 12 Jun 2020 17:15:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 40F4D897A3;
-	Fri, 12 Jun 2020 14:27:27 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 0E6A389778;
+	Fri, 12 Jun 2020 15:15:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vIyNIigYBLIb; Fri, 12 Jun 2020 14:27:26 +0000 (UTC)
+	with ESMTP id 1syfaPrglWzU; Fri, 12 Jun 2020 15:15:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BF9E5897A7;
-	Fri, 12 Jun 2020 14:27:26 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C009789819;
+	Fri, 12 Jun 2020 15:15:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 98955C016F;
-	Fri, 12 Jun 2020 14:27:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 80F07C016F;
+	Fri, 12 Jun 2020 15:15:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B7B7FC016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C1DB0C016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Jun 2020 14:27:25 +0000 (UTC)
+ Fri, 12 Jun 2020 15:15:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id A720C87E05
+ by fraxinus.osuosl.org (Postfix) with ESMTP id B0FAA872D3
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Jun 2020 14:27:25 +0000 (UTC)
+ Fri, 12 Jun 2020 15:15:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ewjrselk22Jn
+ with ESMTP id wDT6EN_9A0uE
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Jun 2020 14:27:24 +0000 (UTC)
+ Fri, 12 Jun 2020 15:15:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 44CE587E04
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6DCA5872C7
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Jun 2020 14:27:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591972042;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=6+olewpNOq4Mhtigyte1j6a5drL4wqqmBJ3lT4ECK4c=;
- b=Ofrd+4sK8KO+yMEZPMgQlyt0ayuXAXHWHYwooj9hiNoHXbI0QQkniSLkoaax0RGPtszzvZ
- wPpNPVUZN9KSW6+hMsEUSFkC1HvBYsd7yo252dAfikhfgzf/nxkPoppNPf+vhry27iwzvV
- gmOsqe8CmhuDWOaMGxNEKCjPQUcTGag=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-461-SECunhGFOaaXWABSkb5BzQ-1; Fri, 12 Jun 2020 10:27:18 -0400
-X-MC-Unique: SECunhGFOaaXWABSkb5BzQ-1
-Received: by mail-wm1-f72.google.com with SMTP id y15so2010924wmi.0
- for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Jun 2020 07:27:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=6+olewpNOq4Mhtigyte1j6a5drL4wqqmBJ3lT4ECK4c=;
- b=TIZa3a2m5hipIqK+a1lNB7eZMzSmjuxIMQenDgZQYixSIlVCwCICpvfSIB/prm9dR3
- 7KxKx/B3uc7D/EC0bRPwkq8eC4TKeIDdl1UysLsS21lsHXnq21yCSXgqkDL/JDFrY8ti
- YdK6MRHBcYh9ir/T3jkTn5JHKoEFwD1LUZGA6qlkJP2sJRK6BMRsGqbAe1w5ltHYjUpJ
- jlPT1OmuJ/XGZLtwuYEiQYUGJ0cg4UJHtJLhlgfz0pAe3AfyFPGLzJjSIwT97FouAamq
- 6/gg6PzJgB3W9SaJkyw73Sc3coUSauYRpyD8tNAGXbRiDHEORdsvgwJimqB8b1sUaTsk
- uCdg==
-X-Gm-Message-State: AOAM532uPfWfehBT6OZ3nmHUQE5iWJnmW0AQjvF5VNgNuNqbXNHy+yzj
- 5UrFs0hkaVc9afVpHx4KIe0G6sEuPmPBWDE/kxSJ0yJgH8UvESgoN9CDBwfUJoKGqwUOjm829nh
- 2wZhvvnBvv9PT8uv/aST4wah+fWe8UpBbIDTAw1JiMw==
-X-Received: by 2002:a5d:4c45:: with SMTP id n5mr15422407wrt.341.1591972037874; 
- Fri, 12 Jun 2020 07:27:17 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw0rXM6T8tsdAIVG7Puy2koE7wNaJ6yQ2Cnd9iEfviiNtynmFOaRLpvuGD2gfkKEGv2EVuLpQ==
-X-Received: by 2002:a5d:4c45:: with SMTP id n5mr15422380wrt.341.1591972037717; 
- Fri, 12 Jun 2020 07:27:17 -0700 (PDT)
-Received: from redhat.com (bzq-79-178-18-124.red.bezeqint.net. [79.178.18.124])
- by smtp.gmail.com with ESMTPSA id t189sm9043363wma.4.2020.06.12.07.27.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2020 07:27:17 -0700 (PDT)
-Date: Fri, 12 Jun 2020 10:27:14 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Wang Qing <wangqing@vivo.com>
-Subject: Re: [PATCH] drivers\block: Use kobj_to_dev() API
-Message-ID: <20200612102651-mutt-send-email-mst@kernel.org>
-References: <1591945856-14749-1-git-send-email-wangqing@vivo.com>
+ Fri, 12 Jun 2020 15:15:24 +0000 (UTC)
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 05CEWLWc135855; Fri, 12 Jun 2020 11:15:23 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 31m8u1xgt2-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 12 Jun 2020 11:15:22 -0400
+Received: from m0098420.ppops.net (m0098420.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 05CF0uMW088858;
+ Fri, 12 Jun 2020 11:15:21 -0400
+Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.98])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 31m8u1xgn2-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 12 Jun 2020 11:15:20 -0400
+Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
+ by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05CF5pb0008300;
+ Fri, 12 Jun 2020 15:15:10 GMT
+Received: from b06avi18878370.portsmouth.uk.ibm.com
+ (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
+ by ppma03ams.nl.ibm.com with ESMTP id 31g2s83h9f-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 12 Jun 2020 15:15:10 +0000
+Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com
+ [9.149.105.60])
+ by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
+ id 05CFF7g142926352
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 12 Jun 2020 15:15:07 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 84E0C42045;
+ Fri, 12 Jun 2020 15:15:07 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 4A0B042049;
+ Fri, 12 Jun 2020 15:15:07 +0000 (GMT)
+Received: from oc3016276355.ibm.com (unknown [9.145.76.70])
+ by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Fri, 12 Jun 2020 15:15:07 +0000 (GMT)
+Subject: Re: [PATCH] s390: protvirt: virtio: Refuse device without IOMMU
+To: Mauricio Tavares <raubvogel@gmail.com>
+References: <1591794711-5915-1-git-send-email-pmorel@linux.ibm.com>
+ <CAHEKYV6edAHyrW-VQtW5ufZkqpXbfd1sU9N4BqOktezdffHTsg@mail.gmail.com>
+From: Pierre Morel <pmorel@linux.ibm.com>
+Message-ID: <56545c29-c906-0020-6727-0e35c21741f5@linux.ibm.com>
+Date: Fri, 12 Jun 2020 17:15:07 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <1591945856-14749-1-git-send-email-wangqing@vivo.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Jens Axboe <axboe@kernel.dk>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+In-Reply-To: <CAHEKYV6edAHyrW-VQtW5ufZkqpXbfd1sU9N4BqOktezdffHTsg@mail.gmail.com>
+Content-Language: en-US
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
+ definitions=2020-06-11_23:2020-06-11,
+ 2020-06-11 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxscore=0 impostorscore=0
+ lowpriorityscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
+ mlxlogscore=999 spamscore=0 cotscore=-2147483648 phishscore=0
+ suspectscore=0 adultscore=0 malwarescore=0 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.12.0-2004280000
+ definitions=main-2006110174
+Cc: linux-s390@vger.kernel.org, linux-kernel@vger.kernel.org,
+ kvm@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,40 +113,68 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jun 12, 2020 at 03:10:56PM +0800, Wang Qing wrote:
-> Use kobj_to_dev() API instead of container_of().
+
+
+On 2020-06-12 15:45, Mauricio Tavares wrote:
+> On Wed, Jun 10, 2020 at 12:32 PM Pierre Morel <pmorel@linux.ibm.com> wrote:
+>>
+>> Protected Virtualisation protects the memory of the guest and
+>> do not allow a the host to access all of its memory.
+>>
+>> Let's refuse a VIRTIO device which does not use IOMMU
+>> protected access.
+>>
+>        Stupid questions:
+
+not stupid at all. :)
+
 > 
-> Signed-off-by: Wang Qing <wangqing@vivo.com>
-> ---
->  drivers/block/virtio_blk.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  mode change 100644 => 100755 drivers/block/virtio_blk.c
+> 1. Do all CPU families we care about (which are?) support IOMMU? Ex:
+> would it recognize an ARM thingie with SMMU? [1]
 
+In Message-ID: <6356ba7f-afab-75e1-05ff-4a22b88c610e@linux.ibm.com>
+(as answer to Jason) I modified the patch and propose to take care of 
+this problem by using force_dma_unencrypted() inside virtio core instead 
+of a S390 specific test.
 
-Subject should probably use "/". Besides that - trivial tree?
+If we use force_dma_unencrypted(dev) to check if we must refuse a device 
+without the VIRTIO_F_IOMMU_PLATFORM feature, we are safe:
+only architectures defining CONFIG_ARCH_HAS_FORCE_DMA_UNENCRYPTED will 
+have to define force_dma_unencrypted(dev), and they can choose what to 
+do by checking the architecture functionalities and/or the device.
+
+> 2. Would it make sense to have some kind of
+> yes-I-know-the-consequences-but-I-need-to-have-a-virtio-device-without-iommu-in-this-guest
+> flag?
+
+Yes, two ways:
+
+Never refuse a device without VIRTIO_F_IOMMU_PLATFORM, by not defining 
+CONFIG_ARCH_HAS_FORCE_DMA_UNENCRYPTED or by always return 0 in 
+force_dma_unencrypted()
+
+have force_dma_unencrypted() selectively answer by checking the device 
+and/or architecture state.
 
 > 
-> diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-> index 9d21bf0..c808405
-> --- a/drivers/block/virtio_blk.c
-> +++ b/drivers/block/virtio_blk.c
-> @@ -630,7 +630,7 @@ static struct attribute *virtblk_attrs[] = {
->  static umode_t virtblk_attrs_are_visible(struct kobject *kobj,
->  		struct attribute *a, int n)
->  {
-> -	struct device *dev = container_of(kobj, struct device, kobj);
-> +	struct device *dev = kobj_to_dev(kobj);
->  	struct gendisk *disk = dev_to_disk(dev);
->  	struct virtio_blk *vblk = disk->private_data;
->  	struct virtio_device *vdev = vblk->vdev;
-> -- 
-> 2.7.4
+...snip...
+>>
+> 
+> [1] https://developer.arm.com/architectures/system-architectures/system-components/system-mmu-support
+> 
 
+Regards,
+Pierre
+
+
+-- 
+Pierre Morel
+IBM Lab Boeblingen
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
