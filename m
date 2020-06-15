@@ -1,68 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 414A41FA18A
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jun 2020 22:32:05 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 015711FA489
+	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 01:41:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E033C86CAF;
-	Mon, 15 Jun 2020 20:32:03 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A9346882FC;
+	Mon, 15 Jun 2020 23:41:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id c8dOrDJl2LtK; Mon, 15 Jun 2020 20:32:03 +0000 (UTC)
+	with ESMTP id cklUJRMTUk4O; Mon, 15 Jun 2020 23:41:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5180F86CB7;
-	Mon, 15 Jun 2020 20:32:03 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1BDD1882EC;
+	Mon, 15 Jun 2020 23:41:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 238CEC016E;
-	Mon, 15 Jun 2020 20:32:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E8386C016E;
+	Mon, 15 Jun 2020 23:41:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 08781C016E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2E662C016E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:32:02 +0000 (UTC)
+ Mon, 15 Jun 2020 23:41:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E4DC886CAF
+ by silver.osuosl.org (Postfix) with ESMTP id 058FE233A6
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:32:01 +0000 (UTC)
+ Mon, 15 Jun 2020 23:41:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9O-WAUPXxMHF
+ with ESMTP id TGtYN43yJgnt
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:32:01 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+ Mon, 15 Jun 2020 23:41:17 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4C4AD86CA0
+ by silver.osuosl.org (Postfix) with ESMTPS id 7F27D23265
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:32:01 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
+ Mon, 15 Jun 2020 23:41:17 +0000 (UTC)
+Received: from localhost (fw-tnat.cambridge.arm.com [217.140.96.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8999B20663;
- Mon, 15 Jun 2020 20:32:00 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9B32D20714;
+ Mon, 15 Jun 2020 23:41:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592253121;
- bh=cfd4DVNPuY/Bqr/rIY9FRSn2nAgsPv7avGkr45XURZo=;
- h=Subject:To:Cc:From:Date:From;
- b=HDoFEH4bf5ej91guuClM8YOiSZa1Tdm7pARw470uH/wyuqODsczgldRj3WkmVsrZi
- ynXojuaBx8zGqZ40HeNlGCJKQDVOfNgSen0d9/HJEKNLh889RRbFwfAO3pG1sgZ/1g
- VjDdVg+HKJ6F7w/mEDsmDKL9BOyc6kPFmZUnHYDc=
-Subject: Patch "crypto: virtio: Fix dest length calculation in
- __virtio_crypto_skcipher_do_req()" has been added to the 5.6-stable tree
-To: arei.gonglei@huawei.com, davem@davemloft.net, gregkh@linuxfoundation.org,
- herbert@gondor.apana.org.au, jasowang@redhat.com, longpeng2@huawei.com,
- mst@redhat.com, virtualization@lists.linux-foundation.org
-From: <gregkh@linuxfoundation.org>
-Date: Mon, 15 Jun 2020 22:31:43 +0200
-Message-ID: <159225310314259@kroah.com>
-MIME-Version: 1.0
-X-stable: commit
-X-Patchwork-Hint: ignore 
-Cc: stable-commits@vger.kernel.org
+ s=default; t=1592264477;
+ bh=4B3zxx0t4t/cAMnTcb1CgWAE+WyO6z4UCRqXbi4xzFg=;
+ h=Date:From:To:Cc:In-Reply-To:References:Subject:From;
+ b=AxBMUE88327gyD7AWPGhve+Wh8ybmWBfw1Vr5OWesrVIVG7NxKRQswpbnAXtofFbO
+ sLu3+N4jgXfA/ewD0/dj0zcDJeqxyFwsdjQymufuXtNvL6JVXHeVeKRAOTHmv+8yXX
+ grzN41FYi/g6IrCDmey/eZzzF6h2ijQ5jvrYbNpA=
+Date: Tue, 16 Jun 2020 00:41:15 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Kieran Bingham <kieran.bingham@ideasonboard.com>
+In-Reply-To: <20200609124610.3445662-1-kieran.bingham+renesas@ideasonboard.com>
+References: <20200609124610.3445662-1-kieran.bingham+renesas@ideasonboard.com>
+Subject: Re: [PATCH 00/17] spelling.txt: /decriptors/descriptors/
+Message-Id: <159226447507.27673.16785893373246037922.b4-ty@kernel.org>
+Cc: linux-usb@vger.kernel.org, linux-scsi@vger.kernel.org, linux-mm@kvack.org,
+ linux-rdma@vger.kernel.org, netdev@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ ath10k@lists.infradead.org, virtualization@lists.linux-foundation.org,
+ linux-renesas-soc@vger.kernel.org, linux-gpio@vger.kernel.org,
+ linux-mtd@lists.infradead.org, dri-devel@lists.freedesktop.org,
+ linux-input@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,85 +77,51 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On Tue, 9 Jun 2020 13:45:53 +0100, Kieran Bingham wrote:
+> I wouldn't normally go through spelling fixes, but I caught sight of
+> this typo twice, and then foolishly grepped the tree for it, and saw how
+> pervasive it was.
+> 
+> so here I am ... fixing a typo globally... but with an addition in
+> scripts/spelling.txt so it shouldn't re-appear ;-)
+> 
+> [...]
 
-This is a note to let you know that I've just added the patch titled
+Applied to
 
-    crypto: virtio: Fix dest length calculation in __virtio_crypto_skcipher_do_req()
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-next
 
-to the 5.6-stable tree which can be found at:
-    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
+Thanks!
 
-The filename of the patch is:
-     crypto-virtio-fix-dest-length-calculation-in-__virtio_crypto_skcipher_do_req.patch
-and it can be found in the queue-5.6 subdirectory.
+[1/2] regulator: Fix trivial spelling
+      commit: d3f3723387f97118c337689fc73e4199fb4331ce
+[2/2] regulator: gpio: Fix trivial spelling
+      commit: 1f0b740004f09d2f1b716fd6c2fdca81004ded05
 
-If you, or anyone else, feels it should not be added to the stable tree,
-please let <stable@vger.kernel.org> know about it.
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
-From d90ca42012db2863a9a30b564a2ace6016594bda Mon Sep 17 00:00:00 2001
-From: "Longpeng(Mike)" <longpeng2@huawei.com>
-Date: Tue, 2 Jun 2020 15:05:01 +0800
-Subject: crypto: virtio: Fix dest length calculation in __virtio_crypto_skcipher_do_req()
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-From: Longpeng(Mike) <longpeng2@huawei.com>
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
-commit d90ca42012db2863a9a30b564a2ace6016594bda upstream.
-
-The src/dst length is not aligned with AES_BLOCK_SIZE(which is 16) in some
-testcases in tcrypto.ko.
-
-For example, the src/dst length of one of cts(cbc(aes))'s testcase is 17, the
-crypto_virtio driver will set @src_data_len=16 but @dst_data_len=17 in this
-case and get a wrong at then end.
-
-  SRC: pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp (17 bytes)
-  EXP: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc pp (17 bytes)
-  DST: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 00 (pollute the last bytes)
-  (pp: plaintext  cc:ciphertext)
-
-Fix this issue by limit the length of dest buffer.
-
-Fixes: dbaf0624ffa5 ("crypto: add virtio-crypto driver")
-Cc: Gonglei <arei.gonglei@huawei.com>
-Cc: Herbert Xu <herbert@gondor.apana.org.au>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: virtualization@lists.linux-foundation.org
-Cc: linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-Signed-off-by: Longpeng(Mike) <longpeng2@huawei.com>
-Link: https://lore.kernel.org/r/20200602070501.2023-4-longpeng2@huawei.com
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-
----
- drivers/crypto/virtio/virtio_crypto_algs.c |    1 +
- 1 file changed, 1 insertion(+)
-
---- a/drivers/crypto/virtio/virtio_crypto_algs.c
-+++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -402,6 +402,7 @@ __virtio_crypto_skcipher_do_req(struct v
- 		goto free;
- 	}
- 
-+	dst_len = min_t(unsigned int, req->cryptlen, dst_len);
- 	pr_debug("virtio_crypto: src_len: %u, dst_len: %llu\n",
- 			req->cryptlen, dst_len);
- 
-
-
-Patches currently in stable-queue which might be from longpeng2@huawei.com are
-
-queue-5.6/crypto-virtio-fix-src-dst-scatterlist-calculation-in-__virtio_crypto_skcipher_do_req.patch
-queue-5.6/crypto-virtio-fix-dest-length-calculation-in-__virtio_crypto_skcipher_do_req.patch
-queue-5.6/crypto-virtio-fix-use-after-free-in-virtio_crypto_skcipher_finalize_req.patch
+Thanks,
+Mark
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
