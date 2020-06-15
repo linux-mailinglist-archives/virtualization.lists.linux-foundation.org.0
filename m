@@ -1,105 +1,118 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C3CD1F96B6
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jun 2020 14:39:38 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CE4A61F9F14
+	for <lists.virtualization@lfdr.de>; Mon, 15 Jun 2020 20:09:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 053D588A98;
-	Mon, 15 Jun 2020 12:39:37 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 60AD685FA0;
+	Mon, 15 Jun 2020 18:09:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zOx8tfP53YiP; Mon, 15 Jun 2020 12:39:36 +0000 (UTC)
+	with ESMTP id Hfq66V8ayddO; Mon, 15 Jun 2020 18:08:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6D8FD88ACF;
-	Mon, 15 Jun 2020 12:39:36 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D98CE86D9A;
+	Mon, 15 Jun 2020 18:08:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 550E9C016E;
-	Mon, 15 Jun 2020 12:39:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AC314C016E;
+	Mon, 15 Jun 2020 18:08:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 74A4AC016E
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 56563C016E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 12:39:34 +0000 (UTC)
+ Mon, 15 Jun 2020 18:08:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 713CF88915
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4BE9286D9A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 12:39:34 +0000 (UTC)
+ Mon, 15 Jun 2020 18:08:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vlixDqY6Gh+W
- for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 12:39:33 +0000 (UTC)
+ with ESMTP id ARrk3PaO24DZ; Mon, 15 Jun 2020 18:08:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by hemlock.osuosl.org (Postfix) with ESMTPS id BB4F388A18
- for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 12:39:33 +0000 (UTC)
-Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 05FBVRG0024033; Mon, 15 Jun 2020 08:39:32 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0b-001b2d01.pphosted.com with ESMTP id 31mx4p2mr6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jun 2020 08:39:32 -0400
-Received: from m0098419.ppops.net (m0098419.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 05FCCg4K177670;
- Mon, 15 Jun 2020 08:39:32 -0400
-Received: from ppma02fra.de.ibm.com (47.49.7a9f.ip4.static.sl-reverse.com
- [159.122.73.71])
- by mx0b-001b2d01.pphosted.com with ESMTP id 31mx4p2mqb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jun 2020 08:39:31 -0400
-Received: from pps.filterd (ppma02fra.de.ibm.com [127.0.0.1])
- by ppma02fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05FCLkmd000950;
- Mon, 15 Jun 2020 12:39:30 GMT
-Received: from b06cxnps4075.portsmouth.uk.ibm.com
- (d06relay12.portsmouth.uk.ibm.com [9.149.109.197])
- by ppma02fra.de.ibm.com with ESMTP id 31mpe89esy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jun 2020 12:39:29 +0000
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com
- (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
- by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 05FCdRj463701102
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 15 Jun 2020 12:39:27 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 27CC3A405F;
- Mon, 15 Jun 2020 12:39:27 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 959D3A4054;
- Mon, 15 Jun 2020 12:39:26 +0000 (GMT)
-Received: from oc3016276355.ibm.com (unknown [9.145.1.141])
- by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Mon, 15 Jun 2020 12:39:26 +0000 (GMT)
-From: Pierre Morel <pmorel@linux.ibm.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 1/1] s390: virtio: let arch accept devices without IOMMU
- feature
-Date: Mon, 15 Jun 2020 14:39:24 +0200
-Message-Id: <1592224764-1258-2-git-send-email-pmorel@linux.ibm.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1592224764-1258-1-git-send-email-pmorel@linux.ibm.com>
-References: <1592224764-1258-1-git-send-email-pmorel@linux.ibm.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
- definitions=2020-06-15_01:2020-06-15,
- 2020-06-15 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0
- priorityscore=1501 mlxlogscore=906 suspectscore=1 impostorscore=0
- adultscore=0 lowpriorityscore=0 mlxscore=0 bulkscore=0
- cotscore=-2147483648 spamscore=0 phishscore=0 clxscore=1015
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 8C34785FA0;
+ Mon, 15 Jun 2020 18:08:57 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05FI7hca026496;
+ Mon, 15 Jun 2020 18:08:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2020-01-29;
+ bh=EdV85x/l0ZQB7qs/RGol05XelTO/TGwy+i5Nwcf8gRM=;
+ b=ksIm2T40o14OrDnPOVl41oLfXflESyB3DKHmSrY07W8hiE/Z7QLC5o1aUTaHPRbSwzbu
+ 9c0NwLH9cAIIrEop8mGTFh8G1XGbz9PddITo/iGjFqouwLRZRmyMPkuv312Tprpn0qqE
+ vsgCBz56dXPpSbVxKCQXClzuApbPztWVszZo40Z9/pDvMf5EwgQrvvf51uoX9UnrZp3o
+ w/4xkBk0XXZDlc2YcrCzTOExgRGYIv3Y4giKzpy8SzyD0DJs8FkiFKoy2usbln1dH7C7
+ /e2gagyqK7O847BIeVNSzHbKNPgl/68telPWwh1LacJqZVCnTiRrQlKn7a2GbDXIJ48j 0Q== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2130.oracle.com with ESMTP id 31p6s22cke-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 15 Jun 2020 18:08:31 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05FHwvkZ051587;
+ Mon, 15 Jun 2020 18:08:30 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3020.oracle.com with ESMTP id 31p6de1e1n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 15 Jun 2020 18:08:30 +0000
+Received: from abhmp0002.oracle.com (abhmp0002.oracle.com [141.146.116.8])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 05FI8G7g031730;
+ Mon, 15 Jun 2020 18:08:17 GMT
+Received: from kadam (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Mon, 15 Jun 2020 11:08:15 -0700
+Date: Mon, 15 Jun 2020 21:07:53 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: Waiman Long <longman@redhat.com>
+Subject: Re: [PATCH 1/2] mm, treewide: Rename kzfree() to kfree_sensitive()
+Message-ID: <20200615180753.GJ4151@kadam>
+References: <20200413211550.8307-1-longman@redhat.com>
+ <20200413211550.8307-2-longman@redhat.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200413211550.8307-2-longman@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9653
+ signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=2
+ adultscore=0 bulkscore=0
+ phishscore=0 malwarescore=0 spamscore=0 mlxlogscore=930 mlxscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2004280000
- definitions=main-2006150093
-Cc: linux-s390@vger.kernel.org, frankja@linux.ibm.com, kvm@vger.kernel.org,
- mst@redhat.com, cohuck@redhat.com, virtualization@lists.linux-foundation.org,
- pasic@linux.ibm.com, borntraeger@de.ibm.com
+ definitions=main-2006150134
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9653
+ signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ lowpriorityscore=0 impostorscore=0
+ clxscore=1011 mlxscore=0 mlxlogscore=944 priorityscore=1501 phishscore=0
+ malwarescore=0 suspectscore=2 spamscore=0 cotscore=-2147483648 bulkscore=0
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2004280000 definitions=main-2006150135
+Cc: linux-cifs@vger.kernel.org, linux-wireless@vger.kernel.org,
+ Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
+ virtualization@lists.linux-foundation.org, David Howells <dhowells@redhat.com>,
+ linux-mm@kvack.org, linux-sctp@vger.kernel.org, target-devel@vger.kernel.org,
+ kasan-dev@googlegroups.com, cocci@systeme.lip6.fr, devel@driverdev.osuosl.org,
+ linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org, x86@kernel.org,
+ James Morris <jmorris@namei.org>, Matthew Wilcox <willy@infradead.org>,
+ linux-stm32@st-md-mailman.stormreply.com, intel-wired-lan@lists.osuosl.org,
+ David Rientjes <rientjes@google.com>, "Serge E. Hallyn" <serge@hallyn.com>,
+ linux-pm@vger.kernel.org, ecryptfs@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-fscrypt@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, linux-amlogic@lists.infradead.org,
+ linux-btrfs@vger.kernel.org, linux-integrity@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ linux-bluetooth@vger.kernel.org, linux-security-module@vger.kernel.org,
+ keyrings@vger.kernel.org, tipc-discussion@lists.sourceforge.net,
+ linux-crypto@vger.kernel.org, netdev@vger.kernel.org,
+ Joe Perches <joe@perches.com>, Andrew Morton <akpm@linux-foundation.org>,
+ linux-wpan@vger.kernel.org, wireguard@lists.zx2c4.com,
+ linux-ppp@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,91 +124,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-An architecture protecting the guest memory against unauthorized host
-access may want to enforce VIRTIO I/O device protection through the
-use of VIRTIO_F_IOMMU_PLATFORM.
+On Mon, Apr 13, 2020 at 05:15:49PM -0400, Waiman Long wrote:
+> diff --git a/mm/slab_common.c b/mm/slab_common.c
+> index 23c7500eea7d..c08bc7eb20bd 100644
+> --- a/mm/slab_common.c
+> +++ b/mm/slab_common.c
+> @@ -1707,17 +1707,17 @@ void *krealloc(const void *p, size_t new_size, gfp_t flags)
+>  EXPORT_SYMBOL(krealloc);
+>  
+>  /**
+> - * kzfree - like kfree but zero memory
+> + * kfree_sensitive - Clear sensitive information in memory before freeing
+>   * @p: object to free memory of
+>   *
+>   * The memory of the object @p points to is zeroed before freed.
+> - * If @p is %NULL, kzfree() does nothing.
+> + * If @p is %NULL, kfree_sensitive() does nothing.
+>   *
+>   * Note: this function zeroes the whole allocated buffer which can be a good
+>   * deal bigger than the requested buffer size passed to kmalloc(). So be
+>   * careful when using this function in performance sensitive code.
+>   */
+> -void kzfree(const void *p)
+> +void kfree_sensitive(const void *p)
+>  {
+>  	size_t ks;
+>  	void *mem = (void *)p;
+> @@ -1725,10 +1725,10 @@ void kzfree(const void *p)
+>  	if (unlikely(ZERO_OR_NULL_PTR(mem)))
+>  		return;
+>  	ks = ksize(mem);
+> -	memset(mem, 0, ks);
+> +	memzero_explicit(mem, ks);
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+This is an unrelated bug fix.  It really needs to be pulled into a
+separate patch by itself and back ported to stable kernels.
 
-Let's give a chance to the architecture to accept or not devices
-without VIRTIO_F_IOMMU_PLATFORM.
+>  	kfree(mem);
+>  }
+> -EXPORT_SYMBOL(kzfree);
+> +EXPORT_SYMBOL(kfree_sensitive);
+>  
+>  /**
+>   * ksize - get the actual amount of memory allocated for a given object
 
-Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
----
- arch/s390/mm/init.c     | 6 ++++++
- drivers/virtio/virtio.c | 9 +++++++++
- include/linux/virtio.h  | 2 ++
- 3 files changed, 17 insertions(+)
-
-diff --git a/arch/s390/mm/init.c b/arch/s390/mm/init.c
-index 87b2d024e75a..3f04ad09650f 100644
---- a/arch/s390/mm/init.c
-+++ b/arch/s390/mm/init.c
-@@ -46,6 +46,7 @@
- #include <asm/kasan.h>
- #include <asm/dma-mapping.h>
- #include <asm/uv.h>
-+#include <linux/virtio.h>
- 
- pgd_t swapper_pg_dir[PTRS_PER_PGD] __section(.bss..swapper_pg_dir);
- 
-@@ -162,6 +163,11 @@ bool force_dma_unencrypted(struct device *dev)
- 	return is_prot_virt_guest();
- }
- 
-+int arch_needs_iommu_platform(struct virtio_device *dev) 
-+{
-+	return is_prot_virt_guest();
-+}
-+
- /* protected virtualization */
- static void pv_init(void)
- {
-diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
-index a977e32a88f2..30091089bee8 100644
---- a/drivers/virtio/virtio.c
-+++ b/drivers/virtio/virtio.c
-@@ -167,6 +167,11 @@ void virtio_add_status(struct virtio_device *dev, unsigned int status)
- }
- EXPORT_SYMBOL_GPL(virtio_add_status);
- 
-+int __weak arch_needs_iommu_platform(struct virtio_device *dev)
-+{
-+	return 0;
-+}
-+
- int virtio_finalize_features(struct virtio_device *dev)
- {
- 	int ret = dev->config->finalize_features(dev);
-@@ -179,6 +184,10 @@ int virtio_finalize_features(struct virtio_device *dev)
- 	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1))
- 		return 0;
- 
-+	if (arch_needs_iommu_platform(dev) &&
-+		!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM))
-+		return -EIO;
-+
- 	virtio_add_status(dev, VIRTIO_CONFIG_S_FEATURES_OK);
- 	status = dev->config->get_status(dev);
- 	if (!(status & VIRTIO_CONFIG_S_FEATURES_OK)) {
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index a493eac08393..2c46b310c38c 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -195,4 +195,6 @@ void unregister_virtio_driver(struct virtio_driver *drv);
- #define module_virtio_driver(__virtio_driver) \
- 	module_driver(__virtio_driver, register_virtio_driver, \
- 			unregister_virtio_driver)
-+
-+int arch_needs_iommu_platform(struct virtio_device *dev);
- #endif /* _LINUX_VIRTIO_H */
--- 
-2.25.1
-
+regards,
+dan carpenter
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
