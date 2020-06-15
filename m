@@ -1,65 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D08701FA175
-	for <lists.virtualization@lfdr.de>; Mon, 15 Jun 2020 22:28:24 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5B9C486D5D;
-	Mon, 15 Jun 2020 20:28:23 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TPz9pw-ndFzd; Mon, 15 Jun 2020 20:28:22 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A576686D61;
-	Mon, 15 Jun 2020 20:28:22 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8C742C016E;
-	Mon, 15 Jun 2020 20:28:22 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D365CC016E
- for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:28:21 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD1AC1FA18D
+	for <lists.virtualization@lfdr.de>; Mon, 15 Jun 2020 22:32:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id C2A1C89043
- for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:28:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6139289076;
+	Mon, 15 Jun 2020 20:32:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id tjXnIA+UsopA
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UYwZGwruS8vT; Mon, 15 Jun 2020 20:32:11 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id BCA9888FAF;
+	Mon, 15 Jun 2020 20:32:11 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A6400C0888;
+	Mon, 15 Jun 2020 20:32:11 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C88D1C016E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:28:21 +0000 (UTC)
+ Mon, 15 Jun 2020 20:32:09 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 8474B231E9
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 15 Jun 2020 20:32:09 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id eCQMLWJ0zmEr
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 15 Jun 2020 20:32:07 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 1D6A189041
+ by silver.osuosl.org (Postfix) with ESMTPS id F03C824DFD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Jun 2020 20:28:21 +0000 (UTC)
+ Mon, 15 Jun 2020 20:32:06 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 64A3020714;
- Mon, 15 Jun 2020 20:28:20 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 16525207E8;
+ Mon, 15 Jun 2020 20:32:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592252901;
- bh=l8JCfRQxeofToZojTFyDL95eoUKf/7vK8092dfPrcBE=;
+ s=default; t=1592253126;
+ bh=f/IQlrEX9KfkfriY3MJz84EeSBgxqyhc7TNY8X3ju30=;
  h=Subject:To:Cc:From:Date:From;
- b=Zx4SnSn9gF1In3Nq5MNxE256AWWjHM/2cE0HE6vkKBTZ9NtR2ioDUWshPhatN2oz7
- 9RN45dci3K/RtTf1xRQtZMH1GMMPG7+1rIbjqthgwT1yakvdqz1p+TFzNPQLjWBff4
- qbsQMcf9w9f7oFtUKEtDRAwxsS8dlD65el1c10Yk=
+ b=AGddXtQ788GHqyAKZkp26CxWNcsO/1ojifH6UjxyZ00e6wJSHVYLRXUDZ9eTq885J
+ Gynq1W7TnKPyXb1FOu7jow9eiKG/TaBSq+uYUTPcG0DibLonn8vMSQShGKnwMdXm0K
+ 5tf9tU7Hc7+EouMxnrsewadua/orHHl1nJOvThdc=
 Subject: Patch "crypto: virtio: Fix use-after-free in
- virtio_crypto_skcipher_finalize_req()" has been added to the 5.7-stable tree
+ virtio_crypto_skcipher_finalize_req()" has been added to the 5.6-stable tree
 To: arei.gonglei@huawei.com, clabbe@baylibre.com, davem@davemloft.net,
  gregkh@linuxfoundation.org, herbert@gondor.apana.org.au, jasowang@redhat.com,
  longpeng2@huawei.com, mst@redhat.com,
  virtualization@lists.linux-foundation.org
 From: <gregkh@linuxfoundation.org>
-Date: Mon, 15 Jun 2020 22:27:56 +0200
-Message-ID: <15922528768535@kroah.com>
+Date: Mon, 15 Jun 2020 22:31:43 +0200
+Message-ID: <159225310312350@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
@@ -85,12 +85,12 @@ This is a note to let you know that I've just added the patch titled
 
     crypto: virtio: Fix use-after-free in virtio_crypto_skcipher_finalize_req()
 
-to the 5.7-stable tree which can be found at:
+to the 5.6-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      crypto-virtio-fix-use-after-free-in-virtio_crypto_skcipher_finalize_req.patch
-and it can be found in the queue-5.7 subdirectory.
+and it can be found in the queue-5.6 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -171,9 +171,9 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from longpeng2@huawei.com are
 
-queue-5.7/crypto-virtio-fix-src-dst-scatterlist-calculation-in-__virtio_crypto_skcipher_do_req.patch
-queue-5.7/crypto-virtio-fix-dest-length-calculation-in-__virtio_crypto_skcipher_do_req.patch
-queue-5.7/crypto-virtio-fix-use-after-free-in-virtio_crypto_skcipher_finalize_req.patch
+queue-5.6/crypto-virtio-fix-src-dst-scatterlist-calculation-in-__virtio_crypto_skcipher_do_req.patch
+queue-5.6/crypto-virtio-fix-dest-length-calculation-in-__virtio_crypto_skcipher_do_req.patch
+queue-5.6/crypto-virtio-fix-use-after-free-in-virtio_crypto_skcipher_finalize_req.patch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
