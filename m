@@ -1,90 +1,118 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A3DA1FB281
-	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 15:51:14 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D742F1FB448
+	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 16:27:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 63E6C876BF;
-	Tue, 16 Jun 2020 13:51:12 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 75F6420365;
+	Tue, 16 Jun 2020 14:27:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FVEHccmrIF6C; Tue, 16 Jun 2020 13:51:11 +0000 (UTC)
+	with ESMTP id yxNRxWC3re7o; Tue, 16 Jun 2020 14:27:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E085986AB0;
-	Tue, 16 Jun 2020 13:51:11 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7BA4423120;
+	Tue, 16 Jun 2020 14:27:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BDDFBC016E;
-	Tue, 16 Jun 2020 13:51:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4BFC2C016E;
+	Tue, 16 Jun 2020 14:27:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6B65CC016E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5343DC016E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 13:51:10 +0000 (UTC)
+ Tue, 16 Jun 2020 14:27:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 58AB986AB0
+ by hemlock.osuosl.org (Postfix) with ESMTP id 4129588C48
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 13:51:10 +0000 (UTC)
+ Tue, 16 Jun 2020 14:27:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RvRZlDiZt8PD
+ with ESMTP id swU7o-xnAq9s
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 13:51:09 +0000 (UTC)
+ Tue, 16 Jun 2020 14:27:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id EB6B186A8F
+Received: from userp2120.oracle.com (userp2120.oracle.com [156.151.31.85])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 07BCB88BCD
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 13:51:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592315467;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bW70KetN1S9pgLmduemj3sE+2f4ymbV6PKsDI2lVIow=;
- b=ggy+2no4Nq5EXE73HuxAbqUBsd6iypALPkq1JMDt4q9a0sfvL7UbvoQ/Ep4Ii1B1XVyOp7
- vU++5k4dPvVHS7hUCtgMUH6AnhNUICo3SMEL7Gyph2sOzQs/Oo7IML08qiO1QTfvFtJ0ga
- aWJnYbw38FBHokj0UNiJwc+o/8fa3nI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-400-WNGUn7ENPFa3byWrPY6RhQ-1; Tue, 16 Jun 2020 09:51:04 -0400
-X-MC-Unique: WNGUn7ENPFa3byWrPY6RhQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6239118C35BB;
- Tue, 16 Jun 2020 13:51:02 +0000 (UTC)
-Received: from gondolin (ovpn-112-222.ams2.redhat.com [10.36.112.222])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A5EB679303;
- Tue, 16 Jun 2020 13:50:53 +0000 (UTC)
-Date: Tue, 16 Jun 2020 15:50:51 +0200
-From: Cornelia Huck <cohuck@redhat.com>
-To: Pierre Morel <pmorel@linux.ibm.com>
-Subject: Re: [PATCH v2 1/1] s390: virtio: let arch accept devices without
- IOMMU feature
-Message-ID: <20200616155051.5b842895.cohuck@redhat.com>
-In-Reply-To: <e130c5e7-40e5-40a8-eac3-c2d17c90ee7b@linux.ibm.com>
-References: <1592224764-1258-1-git-send-email-pmorel@linux.ibm.com>
- <1592224764-1258-2-git-send-email-pmorel@linux.ibm.com>
- <20200616115202.0285aa08.pasic@linux.ibm.com>
- <ef235cc9-9d4b-1247-c01a-9dd1c63f437c@linux.ibm.com>
- <20200616135726.04fa8314.pasic@linux.ibm.com>
- <20200616141744.61b3a139.cohuck@redhat.com>
- <e130c5e7-40e5-40a8-eac3-c2d17c90ee7b@linux.ibm.com>
-Organization: Red Hat GmbH
+ Tue, 16 Jun 2020 14:27:25 +0000 (UTC)
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05GELOZQ057447;
+ Tue, 16 Jun 2020 14:26:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2020-01-29;
+ bh=UepsmQC/DlQFZ6+UxfaNjoC9RmBOSxOKZ2W1AkmRQd8=;
+ b=WvEeJyFmKL8HM4eLekulNPcOb25Sw7YajmFzrepd+1TsQe+PNe2o6it9fFwXghV3FsHv
+ QdrFGubdjTeCc6kAWKTDSEoqMv3it70YtNHwfwRr3qSfXcxJVIBcqm6X7SGsetYqkHWx
+ H7ruRtQFUVaMSNzeIOu+jnB9ul0qpA74I5CLeOsjFOWmZFGD+qOJ1lRDn7UN2JHhoajF
+ f/9ecfn6gkdb7upj+cJi6IY4VZZEPZcXh9vvLg7+i5e+33eQa6zJ2K1MWUsjTMUYhONT
+ ZCDycK9k04JLa7cAHqpl868otcTeoTLOGNWMgNDyB7bEprwRuViNVIe1IhKb+72uVtQ1 Lw== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by userp2120.oracle.com with ESMTP id 31p6e5y3y1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 16 Jun 2020 14:26:56 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05GEODoW027404;
+ Tue, 16 Jun 2020 14:26:56 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by userp3030.oracle.com with ESMTP id 31p6s7kbhq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 16 Jun 2020 14:26:56 +0000
+Received: from abhmp0017.oracle.com (abhmp0017.oracle.com [141.146.116.23])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 05GEQfNL026862;
+ Tue, 16 Jun 2020 14:26:42 GMT
+Received: from kadam (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Tue, 16 Jun 2020 07:26:41 -0700
+Date: Tue, 16 Jun 2020 17:26:24 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: Waiman Long <longman@redhat.com>
+Subject: Re: [PATCH v4 2/3] mm, treewide: Rename kzfree() to kfree_sensitive()
+Message-ID: <20200616142624.GO4282@kadam>
+References: <20200616015718.7812-1-longman@redhat.com>
+ <20200616015718.7812-3-longman@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
- frankja@linux.ibm.com, kvm@vger.kernel.org, mst@redhat.com,
- Heiko Carstens <heiko.carstens@de.ibm.com>, Ram Pai <linuxram@us.ibm.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Halil Pasic <pasic@linux.ibm.com>, borntraeger@de.ibm.com,
- thomas.lendacky@amd.com, David Gibson <david@gibson.dropbear.id.au>
+Content-Disposition: inline
+In-Reply-To: <20200616015718.7812-3-longman@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9653
+ signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
+ suspectscore=0
+ mlxlogscore=886 adultscore=0 phishscore=0 bulkscore=0 spamscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2004280000 definitions=main-2006160106
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9653
+ signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 adultscore=0
+ mlxscore=0 phishscore=0 mlxlogscore=893 lowpriorityscore=0 clxscore=1011
+ suspectscore=0 spamscore=0 bulkscore=0 malwarescore=0 impostorscore=0
+ cotscore=-2147483648 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2004280000 definitions=main-2006160106
+Cc: "Jason A . Donenfeld" <Jason@zx2c4.com>, Michal Hocko <mhocko@suse.com>,
+ linux-btrfs@vger.kernel.org, Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
+ David Sterba <dsterba@suse.cz>, David Howells <dhowells@redhat.com>,
+ linux-mm@kvack.org, linux-sctp@vger.kernel.org, keyrings@vger.kernel.org,
+ kasan-dev@googlegroups.com, linux-stm32@st-md-mailman.stormreply.com,
+ devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
+ linux-scsi@vger.kernel.org, James Morris <jmorris@namei.org>,
+ Matthew Wilcox <willy@infradead.org>, linux-wpan@vger.kernel.org,
+ David Rientjes <rientjes@google.com>, "Serge E. Hallyn" <serge@hallyn.com>,
+ linux-pm@vger.kernel.org, ecryptfs@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ linux-amlogic@lists.infradead.org, virtualization@lists.linux-foundation.org,
+ linux-integrity@vger.kernel.org, linux-nfs@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>, linux-wireless@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+ linux-security-module@vger.kernel.org, target-devel@vger.kernel.org,
+ tipc-discussion@lists.sourceforge.net, linux-crypto@vger.kernel.org,
+ Johannes Weiner <hannes@cmpxchg.org>, Joe Perches <joe@perches.com>,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ netdev@vger.kernel.org, wireguard@lists.zx2c4.com, linux-ppp@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,49 +129,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, 16 Jun 2020 15:41:20 +0200
-Pierre Morel <pmorel@linux.ibm.com> wrote:
+Last time you sent this we couldn't decide which tree it should go
+through.  Either the crypto tree or through Andrew seems like the right
+thing to me.
 
-> On 2020-06-16 14:17, Cornelia Huck wrote:
-> > On Tue, 16 Jun 2020 13:57:26 +0200
-> > Halil Pasic <pasic@linux.ibm.com> wrote:
-> >   
-> >> On Tue, 16 Jun 2020 12:52:50 +0200
-> >> Pierre Morel <pmorel@linux.ibm.com> wrote:
-> >>  
-> >>>>>    int virtio_finalize_features(struct virtio_device *dev)
-> >>>>>    {
-> >>>>>    	int ret = dev->config->finalize_features(dev);
-> >>>>> @@ -179,6 +184,10 @@ int virtio_finalize_features(struct virtio_device *dev)
-> >>>>>    	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1))
-> >>>>>    		return 0;
-> >>>>>    
-> >>>>> +	if (arch_needs_iommu_platform(dev) &&
-> >>>>> +		!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM))
-> >>>>> +		return -EIO;
-> >>>>> +  
-> >>>>
-> >>>> Why EIO?  
-> >>>
-> >>> Because I/O can not occur correctly?
-> >>> I am open to suggestions.  
-> >>
-> >> We use -ENODEV if feature when the device rejects the features we
-> >> tried to negotiate (see virtio_finalize_features()) and -EINVAL when
-> >> the F_VERSION_1 and the virtio-ccw revision ain't coherent (in
-> >> virtio_ccw_finalize_features()). Any of those seems more fitting
-> >> that EIO to me. BTW does the error code itself matter in any way,
-> >> or is it just OK vs some error?  
-> > 
-> > If I haven't lost my way, we end up in the driver core probe failure
-> > handling; we probably should do -ENODEV if we just want probing to fail
-> > and -EINVAL or -EIO if we want the code to moan.
-> >   
-> 
-> what about returning -ENODEV and add a dedicated warning here?
-> 
+Also the other issue is that it risks breaking things if people add
+new kzfree() instances while we are doing the transition.  Could you
+just add a "#define kzfree kfree_sensitive" so that things continue to
+compile and we can remove it in the next kernel release?
 
-Sounds good at least to me.
+regards,
+dan carpenter
 
 _______________________________________________
 Virtualization mailing list
