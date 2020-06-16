@@ -1,68 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A69461FB6AF
-	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 17:39:39 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id E4E1B1FB822
+	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 17:53:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5672B87894;
-	Tue, 16 Jun 2020 15:39:38 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7C6272042B;
+	Tue, 16 Jun 2020 15:53:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jIsMVBzrh3jE; Tue, 16 Jun 2020 15:39:37 +0000 (UTC)
+	with ESMTP id udjDBQHzIkYC; Tue, 16 Jun 2020 15:53:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CF57187898;
-	Tue, 16 Jun 2020 15:39:37 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 2C52A263F9;
+	Tue, 16 Jun 2020 15:53:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AC017C016E;
-	Tue, 16 Jun 2020 15:39:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 04F42C016E;
+	Tue, 16 Jun 2020 15:53:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C42A7C016E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 100E6C016E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:39:35 +0000 (UTC)
+ Tue, 16 Jun 2020 15:53:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id B077D87887
+ by silver.osuosl.org (Postfix) with ESMTP id F1520263D9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:39:35 +0000 (UTC)
+ Tue, 16 Jun 2020 15:53:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4xcjehctQxKA
+ with ESMTP id J7oBbht7hdXg
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:39:35 +0000 (UTC)
+ Tue, 16 Jun 2020 15:53:38 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3743D8786E
+ by silver.osuosl.org (Postfix) with ESMTPS id 4B1A82042B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:39:35 +0000 (UTC)
+ Tue, 16 Jun 2020 15:53:38 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7067121475;
- Tue, 16 Jun 2020 15:39:34 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 77D55208D5;
+ Tue, 16 Jun 2020 15:53:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592321975;
- bh=jSVq4XjuXDGQJpWFMzGPMKgI5zzIl92O9dnJRH6zhiI=;
+ s=default; t=1592322818;
+ bh=Q9VzjPAFTOrJwsOtNxPwztfgd+T3mqZj6+9goc1O0fw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=J/EtV/xiXpGtnM+tkqm9hGlIzAyunW6mkdJXVe3S9VgRxcFzIG/r4oTB68flBHTw6
- m4NmOpUW/sCd9FzQIcZ4ice1KcpCmLi7Wrpw0rJoiyjo9TUT4gTyMHPJ4qA/Y/kPy8
- OHfIs68u2uzZVH4zkYw/jb8VZ5Nvc3zczwPXRXQw=
+ b=aAPlqmXVxvIAw44IKmzBAMz1+1/UUd5PHHN+fMKN7zn+7p2vwlyhyX4EJ4sMxXJHn
+ 0uW6IEnDRf4qRfdL94AIHN9rHbN2PvKyTPWAY/f8E/wzOWijZmO5J79GOqaKmTFCMa
+ 46sZ5fIELkclJyfwda3x0yY4KZDprYlpvJbHTpeY=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.4 088/134] crypto: virtio: Fix dest length calculation in
+Subject: [PATCH 5.6 098/161] crypto: virtio: Fix dest length calculation in
  __virtio_crypto_skcipher_do_req()
-Date: Tue, 16 Jun 2020 17:34:32 +0200
-Message-Id: <20200616153104.996692528@linuxfoundation.org>
+Date: Tue, 16 Jun 2020 17:34:48 +0200
+Message-Id: <20200616153111.045388591@linuxfoundation.org>
 X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20200616153100.633279950@linuxfoundation.org>
-References: <20200616153100.633279950@linuxfoundation.org>
+In-Reply-To: <20200616153106.402291280@linuxfoundation.org>
+References: <20200616153106.402291280@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
-Cc: Sasha Levin <sashal@kernel.org>, Herbert Xu <herbert@gondor.apana.org.au>,
+Cc: Herbert Xu <herbert@gondor.apana.org.au>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
  virtualization@lists.linux-foundation.org,
@@ -86,7 +86,7 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Longpeng(Mike) <longpeng2@huawei.com>
 
-[ Upstream commit d90ca42012db2863a9a30b564a2ace6016594bda ]
+commit d90ca42012db2863a9a30b564a2ace6016594bda upstream.
 
 The src/dst length is not aligned with AES_BLOCK_SIZE(which is 16) in some
 testcases in tcrypto.ko.
@@ -114,26 +114,22 @@ Cc: stable@vger.kernel.org
 Signed-off-by: Longpeng(Mike) <longpeng2@huawei.com>
 Link: https://lore.kernel.org/r/20200602070501.2023-4-longpeng2@huawei.com
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
 ---
- drivers/crypto/virtio/virtio_crypto_algs.c | 1 +
+ drivers/crypto/virtio/virtio_crypto_algs.c |    1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/crypto/virtio/virtio_crypto_algs.c b/drivers/crypto/virtio/virtio_crypto_algs.c
-index 3b37d0150814..ac420b201dd8 100644
 --- a/drivers/crypto/virtio/virtio_crypto_algs.c
 +++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -410,6 +410,7 @@ __virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
+@@ -402,6 +402,7 @@ __virtio_crypto_skcipher_do_req(struct v
  		goto free;
  	}
  
-+	dst_len = min_t(unsigned int, req->nbytes, dst_len);
++	dst_len = min_t(unsigned int, req->cryptlen, dst_len);
  	pr_debug("virtio_crypto: src_len: %u, dst_len: %llu\n",
- 			req->nbytes, dst_len);
+ 			req->cryptlen, dst_len);
  
--- 
-2.25.1
-
 
 
 _______________________________________________
