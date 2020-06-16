@@ -1,106 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F3F81FAEA6
-	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 12:53:10 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AB4B1FAFAA
+	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 13:58:07 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 127A425C8A;
-	Tue, 16 Jun 2020 10:53:09 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6A961890E6;
+	Tue, 16 Jun 2020 11:58:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tobCdODdbuvg; Tue, 16 Jun 2020 10:53:07 +0000 (UTC)
+	with ESMTP id ntwmHdMM82bb; Tue, 16 Jun 2020 11:58:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 2CB99259C9;
-	Tue, 16 Jun 2020 10:53:07 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id AEAEA885D6;
+	Tue, 16 Jun 2020 11:58:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 13904C016E;
-	Tue, 16 Jun 2020 10:53:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7D110C0895;
+	Tue, 16 Jun 2020 11:58:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 161E2C016E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5527FC016E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 10:53:06 +0000 (UTC)
+ Tue, 16 Jun 2020 11:58:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id F25D2261E4
+ by hemlock.osuosl.org (Postfix) with ESMTP id 49A7588585
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 10:53:05 +0000 (UTC)
+ Tue, 16 Jun 2020 11:58:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Y3du7UJbAL7l
+ with ESMTP id WsbX4JOzzph7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 10:53:03 +0000 (UTC)
+ Tue, 16 Jun 2020 11:58:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by silver.osuosl.org (Postfix) with ESMTPS id 6A2FE259C9
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 97FF08817D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 10:53:03 +0000 (UTC)
-Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
+ Tue, 16 Jun 2020 11:58:02 +0000 (UTC)
+Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 05GAVD7s012471; Tue, 16 Jun 2020 06:52:57 -0400
+ 05GBVkN5176896; Tue, 16 Jun 2020 07:57:56 -0400
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 31pjnayuk7-1
+ by mx0a-001b2d01.pphosted.com with ESMTP id 31pc7qdxth-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 Jun 2020 06:52:57 -0400
-Received: from m0098421.ppops.net (m0098421.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 05GAVRfu013411;
- Tue, 16 Jun 2020 06:52:56 -0400
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.98])
- by mx0a-001b2d01.pphosted.com with ESMTP id 31pjnayujb-1
+ Tue, 16 Jun 2020 07:57:56 -0400
+Received: from m0098409.ppops.net (m0098409.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 05GBlCB6032338;
+ Tue, 16 Jun 2020 07:57:56 -0400
+Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.99])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 31pc7qdxsc-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 Jun 2020 06:52:56 -0400
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
- by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05GAk93I029967;
- Tue, 16 Jun 2020 10:52:55 GMT
+ Tue, 16 Jun 2020 07:57:55 -0400
+Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
+ by ppma04ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05GBtjk4016289;
+ Tue, 16 Jun 2020 11:57:53 GMT
 Received: from b06cxnps4075.portsmouth.uk.ibm.com
  (d06relay12.portsmouth.uk.ibm.com [9.149.109.197])
- by ppma03ams.nl.ibm.com with ESMTP id 31mpe856fq-1
+ by ppma04ams.nl.ibm.com with ESMTP id 31mpe7w980-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 Jun 2020 10:52:54 +0000
+ Tue, 16 Jun 2020 11:57:53 +0000
 Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
  [9.149.105.58])
  by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 05GAqps163897766
+ 05GBvoDl60555284
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 16 Jun 2020 10:52:51 GMT
+ Tue, 16 Jun 2020 11:57:50 GMT
 Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id AC36B4C040;
- Tue, 16 Jun 2020 10:52:51 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id A55BC4C046;
+ Tue, 16 Jun 2020 11:57:50 +0000 (GMT)
 Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 022204C04A;
- Tue, 16 Jun 2020 10:52:51 +0000 (GMT)
-Received: from oc3016276355.ibm.com (unknown [9.145.26.88])
+ by IMSVA (Postfix) with ESMTP id EC4D14C040;
+ Tue, 16 Jun 2020 11:57:49 +0000 (GMT)
+Received: from oc2783563651 (unknown [9.145.56.227])
  by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue, 16 Jun 2020 10:52:50 +0000 (GMT)
+ Tue, 16 Jun 2020 11:57:49 +0000 (GMT)
+Date: Tue, 16 Jun 2020 13:57:26 +0200
+From: Halil Pasic <pasic@linux.ibm.com>
+To: Pierre Morel <pmorel@linux.ibm.com>
 Subject: Re: [PATCH v2 1/1] s390: virtio: let arch accept devices without
  IOMMU feature
-To: Halil Pasic <pasic@linux.ibm.com>
+Message-ID: <20200616135726.04fa8314.pasic@linux.ibm.com>
+In-Reply-To: <ef235cc9-9d4b-1247-c01a-9dd1c63f437c@linux.ibm.com>
 References: <1592224764-1258-1-git-send-email-pmorel@linux.ibm.com>
  <1592224764-1258-2-git-send-email-pmorel@linux.ibm.com>
  <20200616115202.0285aa08.pasic@linux.ibm.com>
-From: Pierre Morel <pmorel@linux.ibm.com>
-Message-ID: <ef235cc9-9d4b-1247-c01a-9dd1c63f437c@linux.ibm.com>
-Date: Tue, 16 Jun 2020 12:52:50 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ <ef235cc9-9d4b-1247-c01a-9dd1c63f437c@linux.ibm.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <20200616115202.0285aa08.pasic@linux.ibm.com>
-Content-Language: en-US
 X-TM-AS-GCONF: 00
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
  definitions=2020-06-16_04:2020-06-15,
  2020-06-16 signatures=0
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0
- priorityscore=1501 cotscore=-2147483648 malwarescore=0 clxscore=1011
- suspectscore=0 lowpriorityscore=0 spamscore=0 mlxlogscore=999 mlxscore=0
- impostorscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2004280000 definitions=main-2006160075
+ lowpriorityscore=0
+ bulkscore=0 impostorscore=0 suspectscore=0 priorityscore=1501
+ malwarescore=0 mlxlogscore=999 adultscore=0 spamscore=0 mlxscore=0
+ clxscore=1015 cotscore=-2147483648 phishscore=0 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.12.0-2004280000
+ definitions=main-2006160084
 Cc: Vasily Gorbik <gor@linux.ibm.com>, linux-s390@vger.kernel.org,
  frankja@linux.ibm.com, kvm@vger.kernel.org, mst@redhat.com,
  Heiko Carstens <heiko.carstens@de.ibm.com>, cohuck@redhat.com,
@@ -118,140 +119,40 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On Tue, 16 Jun 2020 12:52:50 +0200
+Pierre Morel <pmorel@linux.ibm.com> wrote:
 
-
-On 2020-06-16 11:52, Halil Pasic wrote:
-> On Mon, 15 Jun 2020 14:39:24 +0200
-> Pierre Morel <pmorel@linux.ibm.com> wrote:
+> >>   int virtio_finalize_features(struct virtio_device *dev)
+> >>   {
+> >>   	int ret = dev->config->finalize_features(dev);
+> >> @@ -179,6 +184,10 @@ int virtio_finalize_features(struct virtio_device *dev)
+> >>   	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1))
+> >>   		return 0;
+> >>   
+> >> +	if (arch_needs_iommu_platform(dev) &&
+> >> +		!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM))
+> >> +		return -EIO;
+> >> +  
+> > 
+> > Why EIO?  
 > 
-> I find the subject (commit short) sub optimal. The 'arch' is already
-> accepting devices 'without IOMMU feature'. What you are introducing is
-> the ability to reject.
-> 
->> An architecture protecting the guest memory against unauthorized host
->> access may want to enforce VIRTIO I/O device protection through the
->> use of VIRTIO_F_IOMMU_PLATFORM.
->>
->> Let's give a chance to the architecture to accept or not devices
->> without VIRTIO_F_IOMMU_PLATFORM.
->>
-> 
-> I don't particularly like the commit message. In general, I believe
-> using access_platform instead of iommu_platform would really benefit us.
+> Because I/O can not occur correctly?
+> I am open to suggestions.
 
-IOMMU_PLATFORM is used overall in Linux, and I did not find any 
-occurrence for ACCESS_PLATFORM.
+We use -ENODEV if feature when the device rejects the features we
+tried to negotiate (see virtio_finalize_features()) and -EINVAL when
+the F_VERSION_1 and the virtio-ccw revision ain't coherent (in
+virtio_ccw_finalize_features()). Any of those seems more fitting
+that EIO to me. BTW does the error code itself matter in any way,
+or is it just OK vs some error?
 
-
-> 
->> Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
->> ---
->>   arch/s390/mm/init.c     | 6 ++++++
->>   drivers/virtio/virtio.c | 9 +++++++++
->>   include/linux/virtio.h  | 2 ++
->>   3 files changed, 17 insertions(+)
->>
->> diff --git a/arch/s390/mm/init.c b/arch/s390/mm/init.c
->> index 87b2d024e75a..3f04ad09650f 100644
->> --- a/arch/s390/mm/init.c
->> +++ b/arch/s390/mm/init.c
->> @@ -46,6 +46,7 @@
->>   #include <asm/kasan.h>
->>   #include <asm/dma-mapping.h>
->>   #include <asm/uv.h>
->> +#include <linux/virtio.h>
-> 
-> arch/s390/mm/init.c including virtio.h looks a bit strange to me, but
-> if Heiko and Vasily don't mind, neither do I.
-
-Do we have a better place to install the hook?
-I though that since it is related to memory management and that, since 
-force_dma_unencrypted already is there, it would be a good place.
-
-However, kvm-s390 is another candidate.
-
-> 
->>   
->>   pgd_t swapper_pg_dir[PTRS_PER_PGD] __section(.bss..swapper_pg_dir);
->>   
->> @@ -162,6 +163,11 @@ bool force_dma_unencrypted(struct device *dev)
->>   	return is_prot_virt_guest();
->>   }
->>   
->> +int arch_needs_iommu_platform(struct virtio_device *dev)
-> 
-> Maybe prefixing the name with virtio_ would help provide the
-> proper context.
-
-The virtio_dev makes it obvious and from the virtio side it should be 
-obvious that the arch is responsible for this.
-
-However if nobody has something against I change it.
-
-> 
->> +{
->> +	return is_prot_virt_guest();
->> +}
->> +
->>   /* protected virtualization */
->>   static void pv_init(void)
->>   {
->> diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
->> index a977e32a88f2..30091089bee8 100644
->> --- a/drivers/virtio/virtio.c
->> +++ b/drivers/virtio/virtio.c
->> @@ -167,6 +167,11 @@ void virtio_add_status(struct virtio_device *dev, unsigned int status)
->>   }
->>   EXPORT_SYMBOL_GPL(virtio_add_status);
->>   
->> +int __weak arch_needs_iommu_platform(struct virtio_device *dev)
->> +{
->> +	return 0;
->> +}
->> +
-> 
-> Adding some people that could be interested in overriding this as well
-> to the cc list.
-
-Thanks,
-
-> 
->>   int virtio_finalize_features(struct virtio_device *dev)
->>   {
->>   	int ret = dev->config->finalize_features(dev);
->> @@ -179,6 +184,10 @@ int virtio_finalize_features(struct virtio_device *dev)
->>   	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1))
->>   		return 0;
->>   
->> +	if (arch_needs_iommu_platform(dev) &&
->> +		!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM))
->> +		return -EIO;
->> +
-> 
-> Why EIO?
-
-Because I/O can not occur correctly?
-I am open to suggestions.
-
-> 
-> Overall, I think it is a good idea to have something that is going to
-> protect us from this scenario.
-> 
-
-It would clearly be a good thing that trusted hypervizors like QEMU 
-forbid this scenario however should we let the door open?
-
-Thanks,
-Pierre
-
--- 
-Pierre Morel
-IBM Lab Boeblingen
+Regards,
+Halil
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
