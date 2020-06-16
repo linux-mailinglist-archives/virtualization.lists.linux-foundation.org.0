@@ -1,62 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AAD71FB748
-	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 17:47:02 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B4101FB750
+	for <lists.virtualization@lfdr.de>; Tue, 16 Jun 2020 17:47:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E21B587855;
-	Tue, 16 Jun 2020 15:47:00 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 26D88894B0;
+	Tue, 16 Jun 2020 15:47:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dCwCoj-UU_YQ; Tue, 16 Jun 2020 15:47:00 +0000 (UTC)
+	with ESMTP id uVn79YDYzO5z; Tue, 16 Jun 2020 15:47:02 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7436687861;
-	Tue, 16 Jun 2020 15:47:00 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 93BE7894A9;
+	Tue, 16 Jun 2020 15:47:02 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 46120C0888;
-	Tue, 16 Jun 2020 15:47:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 77A36C0892;
+	Tue, 16 Jun 2020 15:47:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6DB20C016E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 275ADC016E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:46:58 +0000 (UTC)
+ Tue, 16 Jun 2020 15:47:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 66A9387855
+ by whitealder.osuosl.org (Postfix) with ESMTP id 1523D86D91
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:46:58 +0000 (UTC)
+ Tue, 16 Jun 2020 15:47:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Tmh-u6WPHlCd
+ with ESMTP id CtpR8ibhe99v
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:46:57 +0000 (UTC)
+ Tue, 16 Jun 2020 15:47:00 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id D8E8187795
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6E82A884A1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Jun 2020 15:46:57 +0000 (UTC)
+ Tue, 16 Jun 2020 15:47:00 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 082962071A;
- Tue, 16 Jun 2020 15:46:56 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id A9846214DB;
+ Tue, 16 Jun 2020 15:46:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592322417;
- bh=Q9VzjPAFTOrJwsOtNxPwztfgd+T3mqZj6+9goc1O0fw=;
+ s=default; t=1592322420;
+ bh=Cy0Pcw1eJIo5XdE8jhQZwIHhrSWVtsnsbrsGEpRIzio=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JBiI7Ffrm/dUHTxH+aMYdBqZ2hQlJ9xt6958wbS5eg3S5R//wLwGYCP183+rDXavY
- Hn61p0ZpVMEDQykD8WqUDIdoN6kRxu/TD+65cOMTa+xKNXmv2mT23zhMJp5sXArMX2
- 8iFcGEI7dx0/WyELE+QA2E0bJnC+zYZZ9HoEyx4E=
+ b=EiEPnp7yHmPZeu5VSUCD9zXGpssBw6zGIxklCS4HCcd7+4Ht6bJ1+LNKG8gb5IF5x
+ scRfcI/d2gnKrjb0ZVtsvTH2ysSFaxWFLHWZBEtthL2CQhjfC2lo6sNimXTQJoLB6C
+ ng7blha3TkALEW9mc3LKk83dLtWtVGims1JGf7Ig=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.7 093/163] crypto: virtio: Fix dest length calculation in
- __virtio_crypto_skcipher_do_req()
-Date: Tue, 16 Jun 2020 17:34:27 +0200
-Message-Id: <20200616153111.289538103@linuxfoundation.org>
+Subject: [PATCH 5.7 094/163] crypto: virtio: Fix use-after-free in
+ virtio_crypto_skcipher_finalize_req()
+Date: Tue, 16 Jun 2020 17:34:28 +0200
+Message-Id: <20200616153111.334565319@linuxfoundation.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200616153106.849127260@linuxfoundation.org>
 References: <20200616153106.849127260@linuxfoundation.org>
@@ -66,6 +66,7 @@ Cc: Herbert Xu <herbert@gondor.apana.org.au>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
  virtualization@lists.linux-foundation.org,
+ LABBE Corentin <clabbe@baylibre.com>,
  "Longpeng\(Mike\)" <longpeng2@huawei.com>,
  "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -86,23 +87,35 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Longpeng(Mike) <longpeng2@huawei.com>
 
-commit d90ca42012db2863a9a30b564a2ace6016594bda upstream.
+commit 8c855f0720ff006d75d0a2512c7f6c4f60ff60ee upstream.
 
-The src/dst length is not aligned with AES_BLOCK_SIZE(which is 16) in some
-testcases in tcrypto.ko.
+The system'll crash when the users insmod crypto/tcrypto.ko with mode=155
+( testing "authenc(hmac(sha1),cbc(aes))" ). It's caused by reuse the memory
+of request structure.
 
-For example, the src/dst length of one of cts(cbc(aes))'s testcase is 17, the
-crypto_virtio driver will set @src_data_len=16 but @dst_data_len=17 in this
-case and get a wrong at then end.
+In crypto_authenc_init_tfm(), the reqsize is set to:
+  [PART 1] sizeof(authenc_request_ctx) +
+  [PART 2] ictx->reqoff +
+  [PART 3] MAX(ahash part, skcipher part)
+and the 'PART 3' is used by both ahash and skcipher in turn.
 
-  SRC: pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp (17 bytes)
-  EXP: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc pp (17 bytes)
-  DST: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 00 (pollute the last bytes)
-  (pp: plaintext  cc:ciphertext)
+When the virtio_crypto driver finish skcipher req, it'll call ->complete
+callback(in crypto_finalize_skcipher_request) and then free its
+resources whose pointers are recorded in 'skcipher parts'.
 
-Fix this issue by limit the length of dest buffer.
+However, the ->complete is 'crypto_authenc_encrypt_done' in this case,
+it will use the 'ahash part' of the request and change its content,
+so virtio_crypto driver will get the wrong pointer after ->complete
+finish and mistakenly free some other's memory. So the system will crash
+when these memory will be used again.
+
+The resources which need to be cleaned up are not used any more. But the
+pointers of these resources may be changed in the function
+"crypto_finalize_skcipher_request". Thus release specific resources before
+calling this function.
 
 Fixes: dbaf0624ffa5 ("crypto: add virtio-crypto driver")
+Reported-by: LABBE Corentin <clabbe@baylibre.com>
 Cc: Gonglei <arei.gonglei@huawei.com>
 Cc: Herbert Xu <herbert@gondor.apana.org.au>
 Cc: "Michael S. Tsirkin" <mst@redhat.com>
@@ -111,25 +124,33 @@ Cc: "David S. Miller" <davem@davemloft.net>
 Cc: virtualization@lists.linux-foundation.org
 Cc: linux-kernel@vger.kernel.org
 Cc: stable@vger.kernel.org
+Link: https://lore.kernel.org/r/20200123101000.GB24255@Red
+Acked-by: Gonglei <arei.gonglei@huawei.com>
 Signed-off-by: Longpeng(Mike) <longpeng2@huawei.com>
-Link: https://lore.kernel.org/r/20200602070501.2023-4-longpeng2@huawei.com
+Link: https://lore.kernel.org/r/20200602070501.2023-3-longpeng2@huawei.com
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 ---
- drivers/crypto/virtio/virtio_crypto_algs.c |    1 +
- 1 file changed, 1 insertion(+)
+ drivers/crypto/virtio/virtio_crypto_algs.c |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 --- a/drivers/crypto/virtio/virtio_crypto_algs.c
 +++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -402,6 +402,7 @@ __virtio_crypto_skcipher_do_req(struct v
- 		goto free;
- 	}
+@@ -578,10 +578,11 @@ static void virtio_crypto_skcipher_final
+ 		scatterwalk_map_and_copy(req->iv, req->dst,
+ 					 req->cryptlen - AES_BLOCK_SIZE,
+ 					 AES_BLOCK_SIZE, 0);
+-	crypto_finalize_skcipher_request(vc_sym_req->base.dataq->engine,
+-					   req, err);
+ 	kzfree(vc_sym_req->iv);
+ 	virtcrypto_clear_request(&vc_sym_req->base);
++
++	crypto_finalize_skcipher_request(vc_sym_req->base.dataq->engine,
++					   req, err);
+ }
  
-+	dst_len = min_t(unsigned int, req->cryptlen, dst_len);
- 	pr_debug("virtio_crypto: src_len: %u, dst_len: %llu\n",
- 			req->cryptlen, dst_len);
- 
+ static struct virtio_crypto_algo virtio_crypto_algs[] = { {
 
 
 _______________________________________________
