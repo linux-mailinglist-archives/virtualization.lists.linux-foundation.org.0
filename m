@@ -1,76 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33F1F1FCB3C
-	for <lists.virtualization@lfdr.de>; Wed, 17 Jun 2020 12:48:15 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A4AF1FCBC6
+	for <lists.virtualization@lfdr.de>; Wed, 17 Jun 2020 13:08:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C32E1884FD;
-	Wed, 17 Jun 2020 10:48:13 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3C76F20554;
+	Wed, 17 Jun 2020 11:08:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gSPjlmnCfOnG; Wed, 17 Jun 2020 10:48:13 +0000 (UTC)
+	with ESMTP id MJrha1CvAiE1; Wed, 17 Jun 2020 11:08:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2ADEB88515;
-	Wed, 17 Jun 2020 10:48:13 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A23D420407;
+	Wed, 17 Jun 2020 11:08:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 074AFC016E;
-	Wed, 17 Jun 2020 10:48:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 690F6C016E;
+	Wed, 17 Jun 2020 11:08:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8AA20C016E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8E9DAC016E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 10:48:11 +0000 (UTC)
+ Wed, 17 Jun 2020 11:08:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 82E9C88553
+ by hemlock.osuosl.org (Postfix) with ESMTP id 6F9C289380
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 10:48:11 +0000 (UTC)
+ Wed, 17 Jun 2020 11:08:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Su3Axt9VkPdH
+ with ESMTP id 85Oi7A9JoP+H
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 10:48:10 +0000 (UTC)
+ Wed, 17 Jun 2020 11:08:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id BD39F88517
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id E4C6089374
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 10:48:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592390889;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=rL7vM9X5R7rzCkf4aWP47i5M17Wpex2MeAc4fEf3LAk=;
- b=abUfTcNoO47gXlT3I4YRJmGySvKNZnfH3cflo4QIpn7uAykmSvZLdV6jkYR06Wj0gZvTHG
- m5DEFAssk2CaE++a+vZBtCLt0GLPQzz9FCEi0kcoP3LCD/YWzELZou5z6rsR/8wi68ZMne
- r9GFzRjgaooEeUUGnWHCl3z3+KQVURU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-364-trWxPL4hMDG7xdUqBz0QUA-1; Wed, 17 Jun 2020 06:48:06 -0400
-X-MC-Unique: trWxPL4hMDG7xdUqBz0QUA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3694680B71D;
- Wed, 17 Jun 2020 10:48:05 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-112-122.ams2.redhat.com [10.36.112.122])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B85065D9D3;
- Wed, 17 Jun 2020 10:47:57 +0000 (UTC)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v1] MAINTAINERS: add URL for virtio-mem
-Date: Wed, 17 Jun 2020 12:47:56 +0200
-Message-Id: <20200617104756.6312-1-david@redhat.com>
+ Wed, 17 Jun 2020 11:08:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=6UMFO2TmbdpnJT0c5EXP2Aydp2MaQ5RYJc+GA8ZrxVg=; b=uEnXH1vpZaG2U8FFM/pYkfHc5Y
+ SeAjiiS0wb4uxVIyAse/Mlkd6U3qaJ4r4kEh9T7lE+/o5L5t1dNjJ28G/NIqVe0DWG/fV4/lQHo1o
+ QDwGZP0qomelniIocS0ybLZQjvlRxX/INLpmjUp5+LL4fh2HQo9F6qYCqhyg1imU2AHxFgkQk0jvm
+ 8nOqGDFYb7CZcfryOG0jsO4VWYAKfvslQU5aBRvXZEAb7odmsPQzoqooHS6qL3UZV2AdZFQmkWhak
+ uKTLzMfmXR1ZbqokaLQoFEtbowD5zP+hhe/qVdQ+y0/QB4rOvsOqTW0JOhm+R3UUkEQZTtPszFNR9
+ vDBLz4ZQ==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jlVvY-0007BQ-88; Wed, 17 Jun 2020 11:08:20 +0000
+Date: Wed, 17 Jun 2020 04:08:20 -0700
+From: Matthew Wilcox <willy@infradead.org>
+To: Michal Hocko <mhocko@kernel.org>
+Subject: Re: [PATCH v4 0/3] mm, treewide: Rename kzfree() to kfree_sensitive()
+Message-ID: <20200617110820.GG8681@bombadil.infradead.org>
+References: <20200616015718.7812-1-longman@redhat.com>
+ <fe3b9a437be4aeab3bac68f04193cb6daaa5bee4.camel@perches.com>
+ <20200616230130.GJ27795@twin.jikos.cz>
+ <20200617003711.GD8681@bombadil.infradead.org>
+ <20200617071212.GJ9499@dhcp22.suse.cz>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org
+Content-Disposition: inline
+In-Reply-To: <20200617071212.GJ9499@dhcp22.suse.cz>
+Cc: "Jason A . Donenfeld" <Jason@zx2c4.com>, linux-btrfs@vger.kernel.org,
+ Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>, dsterba@suse.cz,
+ David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
+ linux-sctp@vger.kernel.org, keyrings@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com, devel@driverdev.osuosl.org,
+ linux-cifs@vger.kernel.org, linux-scsi@vger.kernel.org,
+ James Morris <jmorris@namei.org>, kasan-dev@googlegroups.com,
+ linux-wpan@vger.kernel.org, David Rientjes <rientjes@google.com>,
+ Waiman Long <longman@redhat.com>, Dan Carpenter <dan.carpenter@oracle.com>,
+ "Serge E. Hallyn" <serge@hallyn.com>, linux-pm@vger.kernel.org,
+ ecryptfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, linux-amlogic@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, linux-integrity@vger.kernel.org,
+ linux-nfs@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-bluetooth@vger.kernel.org, linux-security-module@vger.kernel.org,
+ target-devel@vger.kernel.org, tipc-discussion@lists.sourceforge.net,
+ linux-crypto@vger.kernel.org, Johannes Weiner <hannes@cmpxchg.org>,
+ Joe Perches <joe@perches.com>, Andrew Morton <akpm@linux-foundation.org>,
+ linuxppc-dev@lists.ozlabs.org, netdev@vger.kernel.org,
+ wireguard@lists.zx2c4.com, linux-ppp@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,31 +101,22 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's add the status/info page, which is still under construction, however,
-already contains valuable documentation/information.
+On Wed, Jun 17, 2020 at 09:12:12AM +0200, Michal Hocko wrote:
+> On Tue 16-06-20 17:37:11, Matthew Wilcox wrote:
+> > Not just performance critical, but correctness critical.  Since kvfree()
+> > may allocate from the vmalloc allocator, I really think that kvfree()
+> > should assert that it's !in_atomic().  Otherwise we can get into trouble
+> > if we end up calling vfree() and have to take the mutex.
+> 
+> FWIW __vfree already checks for atomic context and put the work into a
+> deferred context. So this should be safe. It should be used as a last
+> resort, though.
 
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 301330e02bca7..3470c5bfbdc7b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -18234,6 +18234,7 @@ VIRTIO MEM DRIVER
- M:	David Hildenbrand <david@redhat.com>
- L:	virtualization@lists.linux-foundation.org
- S:	Maintained
-+W:	https://virtio-mem.gitlab.io/
- F:	drivers/virtio/virtio_mem.c
- F:	include/uapi/linux/virtio_mem.h
- 
--- 
-2.26.2
-
+Actually, it only checks for in_interrupt().  If you call vfree() under
+a spinlock, you're in trouble.  in_atomic() only knows if we hold a
+spinlock for CONFIG_PREEMPT, so it's not safe to check for in_atomic()
+in __vfree().  So we need the warning in order that preempt people can
+tell those without that there is a bug here.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
