@@ -1,73 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 046801FC4A1
-	for <lists.virtualization@lfdr.de>; Wed, 17 Jun 2020 05:30:08 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 7BEA7895F1;
-	Wed, 17 Jun 2020 03:30:06 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lvc+kbpCUQuc; Wed, 17 Jun 2020 03:30:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C6FBC87F07;
-	Wed, 17 Jun 2020 03:30:05 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 940B3C016E;
-	Wed, 17 Jun 2020 03:30:05 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5E18DC016E
- for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 03:30:04 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65A7A1FC4A4
+	for <lists.virtualization@lfdr.de>; Wed, 17 Jun 2020 05:30:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 53620894C7
- for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 03:30:04 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 80468897C1;
+	Wed, 17 Jun 2020 03:30:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id x0t0iNdGxtux
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Zlh67H2AZaxK; Wed, 17 Jun 2020 03:30:14 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id EC16C8979D;
+	Wed, 17 Jun 2020 03:30:13 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C5493C016E;
+	Wed, 17 Jun 2020 03:30:13 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7A610C016E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 03:30:03 +0000 (UTC)
+ Wed, 17 Jun 2020 03:30:12 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 688AA21526
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 17 Jun 2020 03:30:12 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id sfh5BIrduWK8
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 17 Jun 2020 03:30:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id B47E589491
+ [207.211.31.120])
+ by silver.osuosl.org (Postfix) with ESMTPS id DD2DD20411
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 03:30:03 +0000 (UTC)
+ Wed, 17 Jun 2020 03:30:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592364602;
+ s=mimecast20190719; t=1592364609;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=S6LxcsbNQFyva+euo/WtpLxOTX7LsaRMorCNc/7+mDo=;
- b=eay+ArZzKzfbEFpK5mIRA4XyqTmh72QFvoYljBz2JXQ0Z+GB+lrI4Df28GT9Dec9pWTUPc
- Vz5Cwt0hEQnzgYbLSaFTVeD9+zxN3RK4D9cdBUaT29sLFwkO43cLEtIsKj61m88pB3cWgg
- p0ycjEw+bu7Sy5aMroWR+6yzZJKc4Zs=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+Sic98tC9DpKLyGrIPnwXpZncoS8fVEZtxk95CX9DgA=;
+ b=gGUzj02psx0GNgnmRP4b5BFOGmPwmYwuSa+iTP0JDkJs0mPN3Xm9RtLzg+n0P+dpupPzQu
+ 90CczatAobzh1behxXgjm/UU/AZfNRsJboY7YPTZQhONzkTO2sPfmGxI1Ta9shfcEXyCBQ
+ tiDd0gnnx6SGeH1nwswGtW7+FC/wPjY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-196-cqAyHXRJOgucOdsOqjKJ9Q-1; Tue, 16 Jun 2020 23:29:59 -0400
-X-MC-Unique: cqAyHXRJOgucOdsOqjKJ9Q-1
+ us-mta-57-px80pxgRNBWByBK4tTPWhQ-1; Tue, 16 Jun 2020 23:30:06 -0400
+X-MC-Unique: px80pxgRNBWByBK4tTPWhQ-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
  [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 19DED10059B9;
- Wed, 17 Jun 2020 03:29:58 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 305C610059C4;
+ Wed, 17 Jun 2020 03:30:04 +0000 (UTC)
 Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
  (ovpn-13-217.pek2.redhat.com [10.72.13.217])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 400985C1BD;
- Wed, 17 Jun 2020 03:29:49 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id ACE345C1BD;
+ Wed, 17 Jun 2020 03:29:58 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com, jasowang@redhat.com,
  virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 0/4] vDPA: API for reporting IOVA range
-Date: Wed, 17 Jun 2020 11:29:43 +0800
-Message-Id: <20200617032947.6371-1-jasowang@redhat.com>
+Subject: [PATCH 1/4] vdpa: introduce config op to get valid iova range
+Date: Wed, 17 Jun 2020 11:29:44 +0800
+Message-Id: <20200617032947.6371-2-jasowang@redhat.com>
+In-Reply-To: <20200617032947.6371-1-jasowang@redhat.com>
+References: <20200617032947.6371-1-jasowang@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Cc: shahafs@mellanox.com, lulu@redhat.com, saugatm@xilinx.com,
@@ -90,37 +93,53 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi All:
+This patch introduce a config op to get valid iova range from the vDPA
+device.
 
-This series introduces API for reporing IOVA range. This is a must for
-userspace to work correclty:
+Signed-off-by: Jason Wang <jasowang@redhat.com>
+---
+ include/linux/vdpa.h | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-- for the process that uses vhost-vDPA directly to properly allocate
-  IOVA
-- for VM(qemu), when vIOMMU is not enabled, fail early if GPA is out
-  of range
-- for VM(qemu), when vIOMMU is enabled, determine a valid guest
-  address width
-
-Please review.
-
-Thanks
-
-Jason Wang (4):
-  vdpa: introduce config op to get valid iova range
-  vdpa_sim: implement get_iova_range bus operation
-  vdpa: get_iova_range() is mandatory for device specific DMA
-    translation
-  vhost: vdpa: report iova range
-
- drivers/vdpa/vdpa.c              |  4 ++++
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 11 +++++++++++
- drivers/vhost/vdpa.c             | 27 +++++++++++++++++++++++++++
- include/linux/vdpa.h             | 14 ++++++++++++++
- include/uapi/linux/vhost.h       |  4 ++++
- include/uapi/linux/vhost_types.h |  5 +++++
- 6 files changed, 65 insertions(+)
-
+diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
+index 239db794357c..b7633ed2500c 100644
+--- a/include/linux/vdpa.h
++++ b/include/linux/vdpa.h
+@@ -41,6 +41,16 @@ struct vdpa_device {
+ 	unsigned int index;
+ };
+ 
++/**
++ * vDPA IOVA range - the IOVA range support by the device
++ * @start: start of the IOVA range
++ * @end: end of the IOVA range
++ */
++struct vdpa_iova_range {
++	u64 start;
++	u64 end;
++};
++
+ /**
+  * vDPA_config_ops - operations for configuring a vDPA device.
+  * Note: vDPA device drivers are required to implement all of the
+@@ -134,6 +144,9 @@ struct vdpa_device {
+  * @get_generation:		Get device config generation (optional)
+  *				@vdev: vdpa device
+  *				Returns u32: device generation
++ * @get_iova_range:		Get supported iova range (on-chip IOMMU)
++ *				@vdev: vdpa device
++ *				Returns the iova range supported by the device
+  * @set_map:			Set device memory mapping (optional)
+  *				Needed for device that using device
+  *				specific DMA translation (on-chip IOMMU)
+@@ -195,6 +208,7 @@ struct vdpa_config_ops {
+ 	void (*set_config)(struct vdpa_device *vdev, unsigned int offset,
+ 			   const void *buf, unsigned int len);
+ 	u32 (*get_generation)(struct vdpa_device *vdev);
++	struct vdpa_iova_range (*get_iova_range)(struct vdpa_device *vdev);
+ 
+ 	/* DMA ops */
+ 	int (*set_map)(struct vdpa_device *vdev, struct vhost_iotlb *iotlb);
 -- 
 2.20.1
 
