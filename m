@@ -1,111 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8631B1FCCF0
-	for <lists.virtualization@lfdr.de>; Wed, 17 Jun 2020 14:00:20 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 1B77C22C44;
-	Wed, 17 Jun 2020 12:00:19 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ezrMUpDFzN-b; Wed, 17 Jun 2020 12:00:15 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 4F74725CE1;
-	Wed, 17 Jun 2020 12:00:10 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 33B5CC07FF;
-	Wed, 17 Jun 2020 12:00:10 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A797BC016E
- for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 12:00:08 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD8B51FCD40
+	for <lists.virtualization@lfdr.de>; Wed, 17 Jun 2020 14:23:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8EB99888AE
- for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 12:00:08 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B298F888F8;
+	Wed, 17 Jun 2020 12:23:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EUZ1VVVuon99; Wed, 17 Jun 2020 12:23:41 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id D3B76888D5;
+	Wed, 17 Jun 2020 12:23:41 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A14D8C0863;
+	Wed, 17 Jun 2020 12:23:41 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 518B6C016E
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 17 Jun 2020 12:23:37 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 3F76989361
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 17 Jun 2020 12:23:37 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4-a3pRVcY-Yi
+ with ESMTP id 0VOmsWgQE7bu
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 12:00:06 +0000 (UTC)
+ Wed, 17 Jun 2020 12:23:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 78621884D5
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id D2E27892A9
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Jun 2020 12:00:06 +0000 (UTC)
-Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 05HBViMW107449; Wed, 17 Jun 2020 08:00:00 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 31q6j9m327-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 17 Jun 2020 08:00:00 -0400
-Received: from m0098417.ppops.net (m0098417.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 05HBVntA107921;
- Wed, 17 Jun 2020 08:00:00 -0400
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.98])
- by mx0a-001b2d01.pphosted.com with ESMTP id 31q6j9m31g-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 17 Jun 2020 08:00:00 -0400
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
- by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05HBuLVX025239;
- Wed, 17 Jun 2020 11:59:58 GMT
-Received: from b06cxnps3074.portsmouth.uk.ibm.com
- (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
- by ppma03ams.nl.ibm.com with ESMTP id 31q6bs9091-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 17 Jun 2020 11:59:58 +0000
-Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
- [9.149.105.61])
- by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 05HBxtxY9175400
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 17 Jun 2020 11:59:55 GMT
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 8D7D111C04C;
- Wed, 17 Jun 2020 11:59:55 +0000 (GMT)
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A9AE011C052;
- Wed, 17 Jun 2020 11:59:54 +0000 (GMT)
-Received: from oc3016276355.ibm.com (unknown [9.145.186.32])
- by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Wed, 17 Jun 2020 11:59:54 +0000 (GMT)
-Subject: Re: [PATCH v3 1/1] s390: virtio: let arch accept devices without
- IOMMU feature
-To: Heiko Carstens <heiko.carstens@de.ibm.com>
-References: <1592390637-17441-1-git-send-email-pmorel@linux.ibm.com>
- <1592390637-17441-2-git-send-email-pmorel@linux.ibm.com>
- <20200617112222.GF4479@osiris>
-From: Pierre Morel <pmorel@linux.ibm.com>
-Message-ID: <d85aa0cf-c158-a263-aeb2-c5817687275e@linux.ibm.com>
-Date: Wed, 17 Jun 2020 13:59:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ Wed, 17 Jun 2020 12:23:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=kuxQjzZYMs0tFNd2RWRJXl84IRXkLYtgdsZsfAqzUYg=; b=IQBU2NQmYfbU9KEVYJFVsVFYt3
+ +7GWl3H6cqgUcZ3+um4sERSLuBbzrv7jNZkdM2ZwoSGps038Nt8YY6ApW7PCwZCMfBc10Gz0GDyzO
+ FLEfO9i0HAYVGksHFDKWFRCvjngG1ecDhElpGpw4HbCuIF3Vgh8+lquymjHTFre2rQkZtiIdou22y
+ K/Aznp4o73iZczN2ksz99zOnq95b5QaAhubthCZzggr2DMMUwYzN2WxAT6vZxmfMDafnFj+QcCY/1
+ +vXnWv1CMw2nHqOvDrXxSQKys1aoXcvwws0qgcZ/d+QvYDKvCoK1AjvkCvq5Nft1Yp25qyw3Vw/EI
+ 56Yd0PTA==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jlX69-0005Xm-3Z; Wed, 17 Jun 2020 12:23:21 +0000
+Date: Wed, 17 Jun 2020 05:23:21 -0700
+From: Matthew Wilcox <willy@infradead.org>
+To: Michal Hocko <mhocko@kernel.org>
+Subject: Re: [PATCH v4 0/3] mm, treewide: Rename kzfree() to kfree_sensitive()
+Message-ID: <20200617122321.GJ8681@bombadil.infradead.org>
+References: <20200616015718.7812-1-longman@redhat.com>
+ <fe3b9a437be4aeab3bac68f04193cb6daaa5bee4.camel@perches.com>
+ <20200616230130.GJ27795@twin.jikos.cz>
+ <20200617003711.GD8681@bombadil.infradead.org>
+ <20200617071212.GJ9499@dhcp22.suse.cz>
+ <20200617110820.GG8681@bombadil.infradead.org>
+ <20200617113157.GM9499@dhcp22.suse.cz>
 MIME-Version: 1.0
-In-Reply-To: <20200617112222.GF4479@osiris>
-Content-Language: en-US
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
- definitions=2020-06-17_03:2020-06-17,
- 2020-06-17 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- impostorscore=0 adultscore=0 spamscore=0 clxscore=1015 suspectscore=0
- mlxlogscore=812 lowpriorityscore=0 bulkscore=0 malwarescore=0 mlxscore=0
- phishscore=0 cotscore=-2147483648 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2004280000 definitions=main-2006170087
-Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
- kvm@vger.kernel.org, mst@redhat.com, cohuck@redhat.com, linuxram@us.ibm.com,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- pasic@linux.ibm.com, borntraeger@de.ibm.com, thomas.lendacky@amd.com,
- david@gibson.dropbear.id.au
+Content-Disposition: inline
+In-Reply-To: <20200617113157.GM9499@dhcp22.suse.cz>
+Cc: "Jason A . Donenfeld" <Jason@zx2c4.com>, linux-btrfs@vger.kernel.org,
+ Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>, dsterba@suse.cz,
+ David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
+ linux-sctp@vger.kernel.org, keyrings@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com, devel@driverdev.osuosl.org,
+ linux-cifs@vger.kernel.org, linux-scsi@vger.kernel.org,
+ James Morris <jmorris@namei.org>, kasan-dev@googlegroups.com,
+ linux-wpan@vger.kernel.org, David Rientjes <rientjes@google.com>,
+ Waiman Long <longman@redhat.com>, Dan Carpenter <dan.carpenter@oracle.com>,
+ "Serge E. Hallyn" <serge@hallyn.com>, linux-pm@vger.kernel.org,
+ ecryptfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, linux-amlogic@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, linux-integrity@vger.kernel.org,
+ linux-nfs@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-bluetooth@vger.kernel.org, linux-security-module@vger.kernel.org,
+ target-devel@vger.kernel.org, tipc-discussion@lists.sourceforge.net,
+ linux-crypto@vger.kernel.org, Johannes Weiner <hannes@cmpxchg.org>,
+ Joe Perches <joe@perches.com>, Andrew Morton <akpm@linux-foundation.org>,
+ linuxppc-dev@lists.ozlabs.org, netdev@vger.kernel.org,
+ wireguard@lists.zx2c4.com, linux-ppp@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,71 +98,25 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-
-
-On 2020-06-17 13:22, Heiko Carstens wrote:
-> On Wed, Jun 17, 2020 at 12:43:57PM +0200, Pierre Morel wrote:
->> An architecture protecting the guest memory against unauthorized host
->> access may want to enforce VIRTIO I/O device protection through the
->> use of VIRTIO_F_IOMMU_PLATFORM.
->>
->> Let's give a chance to the architecture to accept or not devices
->> without VIRTIO_F_IOMMU_PLATFORM.
->>
->> Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
->> Acked-by: Jason Wang <jasowang@redhat.com>
->> Acked-by: Christian Borntraeger <borntraeger@de.ibm.com>
->> ---
->>   arch/s390/mm/init.c     |  6 ++++++
->>   drivers/virtio/virtio.c | 22 ++++++++++++++++++++++
->>   include/linux/virtio.h  |  2 ++
->>   3 files changed, 30 insertions(+)
->>
->> diff --git a/arch/s390/mm/init.c b/arch/s390/mm/init.c
->> index 6dc7c3b60ef6..215070c03226 100644
->> --- a/arch/s390/mm/init.c
->> +++ b/arch/s390/mm/init.c
->> @@ -45,6 +45,7 @@
->>   #include <asm/kasan.h>
->>   #include <asm/dma-mapping.h>
->>   #include <asm/uv.h>
->> +#include <linux/virtio.h>
->>
->>   pgd_t swapper_pg_dir[PTRS_PER_PGD] __section(.bss..swapper_pg_dir);
->>
->> @@ -161,6 +162,11 @@ bool force_dma_unencrypted(struct device *dev)
->>   	return is_prot_virt_guest();
->>   }
->>
->> +int arch_needs_virtio_iommu_platform(struct virtio_device *dev)
->> +{
->> +	return is_prot_virt_guest();
->> +}
->> +
->>   /* protected virtualization */
->>   static void pv_init(void)
+On Wed, Jun 17, 2020 at 01:31:57PM +0200, Michal Hocko wrote:
+> On Wed 17-06-20 04:08:20, Matthew Wilcox wrote:
+> > If you call vfree() under
+> > a spinlock, you're in trouble.  in_atomic() only knows if we hold a
+> > spinlock for CONFIG_PREEMPT, so it's not safe to check for in_atomic()
+> > in __vfree().  So we need the warning in order that preempt people can
+> > tell those without that there is a bug here.
 > 
-> Can we please stop dumping random code to arch/s390/mm/init.c?
-> 
-> All the protected virtualization functions should go into a separate
-> file (e.g. mem_encrypt.c like on x86), some of which could also be in
-> header files.
-> 
-> Please consider this a comment for the future.. just go ahead with
-> this patch as-is.
-> 
+> ... Unless I am missing something in_interrupt depends on preempt_count() as
+> well so neither of the two is reliable without PREEMPT_COUNT configured.
 
-OK, thanks Heiko,
-Pierre
-
--- 
-Pierre Morel
-IBM Lab Boeblingen
+preempt_count() always tracks whether we're in interrupt context,
+regardless of CONFIG_PREEMPT.  The difference is that CONFIG_PREEMPT
+will track spinlock acquisitions as well.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
