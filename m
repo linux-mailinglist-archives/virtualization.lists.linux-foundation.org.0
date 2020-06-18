@@ -2,85 +2,79 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDA681FF46C
-	for <lists.virtualization@lfdr.de>; Thu, 18 Jun 2020 16:14:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCE361FFCDD
+	for <lists.virtualization@lfdr.de>; Thu, 18 Jun 2020 22:44:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 3E7318953F;
-	Thu, 18 Jun 2020 14:14:22 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 679408980F;
+	Thu, 18 Jun 2020 20:44:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uuV1x11C1m2o; Thu, 18 Jun 2020 14:14:21 +0000 (UTC)
+	with ESMTP id s8-Nl3fUOXCb; Thu, 18 Jun 2020 20:44:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B282489576;
-	Thu, 18 Jun 2020 14:14:21 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 07E928980D;
+	Thu, 18 Jun 2020 20:44:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 82CDBC016E;
-	Thu, 18 Jun 2020 14:14:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DCD6DC016E;
+	Thu, 18 Jun 2020 20:44:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E97E5C016E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0373AC016E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 14:14:19 +0000 (UTC)
+ Thu, 18 Jun 2020 20:44:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id D710E8953F
+ by whitealder.osuosl.org (Postfix) with ESMTP id DACB488927
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 14:14:19 +0000 (UTC)
+ Thu, 18 Jun 2020 20:44:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JlCaq0HEeuCn
+ with ESMTP id Ef9gtnbJyQJX
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 14:14:19 +0000 (UTC)
+ Thu, 18 Jun 2020 20:44:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by hemlock.osuosl.org (Postfix) with ESMTPS id EC4BC8947B
+Received: from mail-io1-f52.google.com (mail-io1-f52.google.com
+ [209.85.166.52])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 651968891A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 14:14:18 +0000 (UTC)
-IronPort-SDR: EDY7CRZs2JpJyHhIjb30CuZ8v7V/McPIFuUHywS2Q5RWs3echTliiQYtihqNhHzxpqZ1UnKnpP
- HP3wM6eAkUcQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9655"; a="207822842"
-X-IronPort-AV: E=Sophos;i="5.73,526,1583222400"; d="scan'208";a="207822842"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Jun 2020 07:14:18 -0700
-IronPort-SDR: 0itBy+xKAWbv8XVSzGrTX5a00QgANjZmuLmz4Kd9PS8ZFk8J8KQqQXg3VyR0B1cefAsJZ3FOOt
- 28jlxIVBXIqw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,526,1583222400"; d="scan'208";a="477253979"
-Received: from gliakhov-mobl2.ger.corp.intel.com (HELO ubuntu)
- ([10.252.48.152])
- by fmsmga005.fm.intel.com with ESMTP; 18 Jun 2020 07:14:15 -0700
-Date: Thu, 18 Jun 2020 16:14:12 +0200
-From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-To: Vincent Whitchurch <vincent.whitchurch@axis.com>
-Subject: Re: [PATCH v3 5/5] vhost: add an RPMsg API
-Message-ID: <20200618141412.GD4189@ubuntu>
-References: <20200527180541.5570-1-guennadi.liakhovetski@linux.intel.com>
- <20200527180541.5570-6-guennadi.liakhovetski@linux.intel.com>
- <20200617191741.whnp7iteb36cjnia@axis.com>
- <20200618090341.GA4189@ubuntu>
- <20200618093324.tu7oldr332ndfgev@axis.com>
- <20200618103940.GB4189@ubuntu>
- <20200618135241.362iuggde3jslx3p@axis.com>
+ Thu, 18 Jun 2020 20:44:39 +0000 (UTC)
+Received: by mail-io1-f52.google.com with SMTP id y5so8714000iob.12
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 18 Jun 2020 13:44:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=D6zAGzZWuZa0oFGEmpTbPsGabz2PHS5ZFP1yihEV4W0=;
+ b=gfBjoJbGQBkPQ8DZBKnWdy2L2LApK2hcz0RXH0Edd+Rq+b+by5Z+gvUsveCqLLapmT
+ N8rCt19Fey1u4VE7UJ9w26l3eCsxNMEpfUZ8uPnfZ+UZs9XzN4XGmzbYjCnjib0wHBtn
+ cOS63n+NZhtbmPjMdzkwex/mIqj3WGkLALtgWVan1WC6FFeil0f77RFFkzHzFnn/0nFX
+ QTJc6rKAs+5x1ifYdmxWxfd+Q3OA7EaeGtLBUZRXy/wHGZV0/LIlSgNPmO7pyYk3L8Ps
+ 0Yaunh6s1M0JExyWA5EmJTNiNlwdi+y8Bka1WTWajaavKSJQrvGGhAOVZMtUbPcLoA80
+ wY2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=D6zAGzZWuZa0oFGEmpTbPsGabz2PHS5ZFP1yihEV4W0=;
+ b=Zd6oFYVzyp1q693qqGyK4tOxuOSu2mVpNQlfqMV4fRSqVj4s+lI/b+bxPVFeFZVxkC
+ VKg8t1ZKiZK2OGD91kWoZ5djMs8F2Q7Y4QAFI/ckDXGgCD6YB262eopCy7jTVjDRy30Y
+ 3LCFkkoyMBRfFvYkB3vSDw0hyujJ2m3JXF0JRHnJZwcbeAxFO6F/6tOVmDIji6l4nLLz
+ Ojfc8dtvHaZua9GBTYThGxUQUPUaXK6Sil9vXsjT926sqOuE0ZuSNQZDpoRU7F5nbs6M
+ mDUiow23Y7TULPduwMaxMRuGmxooqDc5Fcwqk5MN2hyWM3P/Wwb/B7HQgOu8rGFf0nUZ
+ 7+Ww==
+X-Gm-Message-State: AOAM530/R7tUcy2QSbLJuJMG6xjE28vV7Ju+J5OCkMVLkzYfGd72B/WI
+ 4LLzCwuFjiY2hSLRdpCRr7tBXhAp8nFu0riwgIHWC5aC
+X-Google-Smtp-Source: ABdhPJzJXZsid9+V0oSm0oCzleR1spK3NZ922mRNe7ltwO4UkAhgn4WDVOLFuPpAwxUJONYmAqnyGVxlmuqy01GMIKk=
+X-Received: by 2002:a6b:6705:: with SMTP id b5mr580614ioc.29.1592513078363;
+ Thu, 18 Jun 2020 13:44:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200618135241.362iuggde3jslx3p@axis.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Ohad Ben-Cohen <ohad@wizery.com>,
- Mathieu Poirier <mathieu.poirier@linaro.org>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- "linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- Liam Girdwood <liam.r.girdwood@linux.intel.com>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- "sound-open-firmware@alsa-project.org" <sound-open-firmware@alsa-project.org>
+From: VHPC 20 <vhpc.dist@gmail.com>
+Date: Thu, 18 Jun 2020 22:44:27 +0200
+Message-ID: <CAF05tLNSXT+9JDSQaXaaYJYWT0CymoTq1adBV3hj7QhnBXHxWg@mail.gmail.com>
+Subject: VHPC Zoom 25th of June Call for Participation: 15th Workshop on
+ Virtualization in High-Performance Cloud Computing
+To: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,55 +86,22 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jun 18, 2020 at 03:52:42PM +0200, Vincent Whitchurch wrote:
-> On Thu, Jun 18, 2020 at 12:39:40PM +0200, Guennadi Liakhovetski wrote:
-> > On Thu, Jun 18, 2020 at 11:33:24AM +0200, Vincent Whitchurch wrote:
-> > > By the "normal rpmsg API" I mean register_rpmsg_driver(), rpmsg_send(),
-> > > etc.  That API is not tied to virtio in any way and there are other
-> > > non-virtio backends for this API in the tree.  So it seems quite natural
-> > > to implement a vhost backend for this API so that both sides of the link
-> > > can use the same API but different backends, instead of forcing them to
-> > > use of different APIs.
-> > 
-> > Ok, I see what you mean now. But I'm not sure this is useful or desired. I'm 
-> > not an expert in KVM / VirtIO, I've only been working in the area for less 
-> > than a year, so, I might well be wrong.
-> > 
-> > You're proposing to use the rpmsg API in vhost drivers. As far as I 
-> > understand so far that API was only designated for the Linux side (in case of 
-> > AMPs) which corresponds to VM guests in virtualisation case. So, I'm not sure 
-> > we want to use the same API for the hosts? This can be done as you have 
-> > illustrated, but is it desirable? The vhost API is far enough from the VirtIO 
-> > driver API, so I'm not sure why we want the same API for rpmsg?
-> 
-> Note that "the Linux side" is ambiguous for AMP since both sides can be
-> Linux, as they happen to be in my case.  I'm running virtio/rpmsg
-> between two physical processors (of different architectures), both
-> running Linux.
-
-Ok, interesting, I didn't know such configurations were used too. I understood 
-the Linux rpmsg implementation in the way, that it's assumed, that the "host" 
-has to boot the "device" by sending an ELF formatted executable image to it, is 
-that optional? You aren't sending a complete Linux image to the device side, 
-are you?
-
-> virtio has distinct driver and device roles so the completely different
-> APIs on each side are understandable.  But I don't see that distinction
-> in the rpmsg API which is why it seems like a good idea to me to make it
-> work from both sides of the link and allow the reuse of drivers like
-> rpmsg-char, instead of imposing virtio's distinction on rpmsg.
-
-Understand. In principle I'm open to this idea, but before I implement it it 
-would be good to know what maintainers think?
-
-Thanks
-Guennadi
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+V2UgY29yZGlhbGx5IGludml0ZSB5b3UgdG8gcGFydGljaXBhdGUgb25saW5lIGluIHRoZQoxNXRo
+IFdvcmtzaG9wIG9uIFZpcnR1YWxpemF0aW9uIGluIEhpZ2jCrS1QZXJmb3JtYW5jZSBDbG91ZCBD
+b21wdXRpbmcgIChWSFBDICcyMCkKCktleW5vdGU6IFJlZEhhdCBvbiBQb2RtYW4gKGEgRG9ja2Vy
+IGFsdGVybmF0aXZlKSBmb3IgSFBDClRhbGtzIGluY2x1ZGU6IEdvb2dsZSBvbiBBdXRvcGlsb3Qg
+KEdvb2dsZSBpbnRlcm5hbGx5IHVzZWQgYXV0b3NjYWxlcikKClRoaXMgeWVhcidzIGZvY3VzIGlz
+IG9uOgpPcmNoZXN0cmF0aW9uIChLdWJlcm5ldGVzKQpSZXNvdXJjZSBlZmZpY2llbmN5IHZpYSBh
+dXRvLXNjYWxpbmcgKEF1dG9waWxvdCAvIEdvb2dsZSkKQ29udGFpbmVycyBmb3IgSFBDIChQb2Rt
+YW4pCkxpZ2h0d2VpZ2h0IFZpcnR1YWxpemF0aW9uIC8gVW5pa2VybmVscwoKVGhlIFdvcmtzaG9w
+IGlzIGJlaW5nIGhlbGQgb25saW5lIHZpYSBab29tLiBQYXJ0aWNpcGF0aW9uIGlzIGZyZWUgd2l0
+aApyZWdpc3RyYXRpb24gYXQKaHR0cHM6Ly91czAyd2ViLnpvb20udXMvd2ViaW5hci9yZWdpc3Rl
+ci9XTl92QzVwd21nYlE2eXBKRWZ5UThuSElnCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXph
+dGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRh
+dGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
