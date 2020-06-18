@@ -1,82 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAE8B1FEB30
-	for <lists.virtualization@lfdr.de>; Thu, 18 Jun 2020 07:58:19 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E4D641FEE46
+	for <lists.virtualization@lfdr.de>; Thu, 18 Jun 2020 11:03:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 8630F20134;
-	Thu, 18 Jun 2020 05:58:18 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7C27587FED;
+	Thu, 18 Jun 2020 09:03:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id I4lG9gaf78P7; Thu, 18 Jun 2020 05:58:17 +0000 (UTC)
+	with ESMTP id DbFB9NIwuIiZ; Thu, 18 Jun 2020 09:03:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 4F8782036C;
-	Thu, 18 Jun 2020 05:58:17 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C9CD187C8A;
+	Thu, 18 Jun 2020 09:03:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1E353C016E;
-	Thu, 18 Jun 2020 05:58:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9231EC016E;
+	Thu, 18 Jun 2020 09:03:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6B6F9C016E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7CC44C016E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 05:58:15 +0000 (UTC)
+ Thu, 18 Jun 2020 09:03:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 5605C20363
+ by whitealder.osuosl.org (Postfix) with ESMTP id 74C7B87FED
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 05:58:15 +0000 (UTC)
+ Thu, 18 Jun 2020 09:03:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bsiTsoz2jDqh
+ with ESMTP id SJcqcOztcPJA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 05:58:14 +0000 (UTC)
+ Thu, 18 Jun 2020 09:03:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id 4B0052038A
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 21AAD87C8A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 05:58:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592459892;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ANjSp1CGZSsGz6Jj2Dxzgjt9bQwE2jGuP+C3WvRPMLM=;
- b=Fj6w7VsMc59MDUPU25ttlQmH2YlukYnEptnLpiPnZIcHO++fSqaTKB1YjaSZTdy0OEYo9o
- dq23E+McKG8tRlKgugc1vzKyFKe8kyRIiOiyRHv7x9pFqithseUJqGKRcvv0JxEHDsDoOX
- izRk+4O1dsTu2QcVst0bHufAXSLoehk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-435-0C2VkjGMNAGvyv09pK32Kg-1; Thu, 18 Jun 2020 01:58:10 -0400
-X-MC-Unique: 0C2VkjGMNAGvyv09pK32Kg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6C712107ACCD;
- Thu, 18 Jun 2020 05:58:08 +0000 (UTC)
-Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
- (ovpn-13-219.pek2.redhat.com [10.72.13.219])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E96815C1D6;
- Thu, 18 Jun 2020 05:58:02 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: mst@redhat.com, jasowang@redhat.com,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH RFC 5/5] vdpasim: support batch updating
-Date: Thu, 18 Jun 2020 13:56:26 +0800
-Message-Id: <20200618055626.25660-6-jasowang@redhat.com>
-In-Reply-To: <20200618055626.25660-1-jasowang@redhat.com>
-References: <20200618055626.25660-1-jasowang@redhat.com>
+ Thu, 18 Jun 2020 09:03:49 +0000 (UTC)
+IronPort-SDR: CvcB9O/fhhR7RTmq5v8FxD1UbhJII336aJYa3rCh9lsWWiUdkgA32pnhJSIIYg64GM/jVFSAzg
+ z+di5va+l9bQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9655"; a="203985593"
+X-IronPort-AV: E=Sophos;i="5.73,526,1583222400"; d="scan'208";a="203985593"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Jun 2020 02:03:48 -0700
+IronPort-SDR: /6kHDHX7wY1CRf0e6PPCtYuooZMheWGl/tF42hkNHlSAubcrMt9WbD6cJYqo6V6SVrDIB93lxX
+ COgb867Ow9Cw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,526,1583222400"; d="scan'208";a="261966815"
+Received: from gliakhov-mobl2.ger.corp.intel.com (HELO ubuntu)
+ ([10.252.48.152])
+ by fmsmga007.fm.intel.com with ESMTP; 18 Jun 2020 02:03:44 -0700
+Date: Thu, 18 Jun 2020 11:03:42 +0200
+From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
+To: Vincent Whitchurch <vincent.whitchurch@axis.com>
+Subject: Re: [PATCH v3 5/5] vhost: add an RPMsg API
+Message-ID: <20200618090341.GA4189@ubuntu>
+References: <20200527180541.5570-1-guennadi.liakhovetski@linux.intel.com>
+ <20200527180541.5570-6-guennadi.liakhovetski@linux.intel.com>
+ <20200617191741.whnp7iteb36cjnia@axis.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: shahafs@mellanox.com, lulu@redhat.com, saugatm@xilinx.com,
- mhabets@solarflare.com, vmireyno@marvell.com, gdawar@xilinx.com,
- eperezma@redhat.com, hanand@xilinx.com, zhangweining@ruijie.com.cn,
- eli@mellanox.com, lingshan.zhu@intel.com, rob.miller@broadcom.com
+Content-Disposition: inline
+In-Reply-To: <20200617191741.whnp7iteb36cjnia@axis.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Ohad Ben-Cohen <ohad@wizery.com>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, linux-remoteproc@vger.kernel.org,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+ virtualization@lists.linux-foundation.org,
+ Liam Girdwood <liam.r.girdwood@linux.intel.com>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>,
+ sound-open-firmware@alsa-project.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,98 +90,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The vDPA simulator support both set_map() and dma_map()/dma_unmap()
-operations. But vhost-vdpa can only use one of them. So this patch
-introduce a module parameter (batch_mapping) that let vpda_sim to
-support only one of those dma operations. The batched mapping via
-set_map() is enabled by default.
+Hi Vincent,
 
-Signed-off-by: Jason Wang <jasowang@redhat.com>
----
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 40 +++++++++++++++++++++++++++++---
- 1 file changed, 37 insertions(+), 3 deletions(-)
+On Wed, Jun 17, 2020 at 09:17:42PM +0200, Vincent Whitchurch wrote:
+> On Wed, May 27, 2020 at 08:05:41PM +0200, Guennadi Liakhovetski wrote:
+> > Linux supports running the RPMsg protocol over the VirtIO transport
+> > protocol, but currently there is only support for VirtIO clients and
+> > no support for a VirtIO server. This patch adds a vhost-based RPMsg
+> > server implementation.
+> 
+> This looks really useful, but why is it implemented as an API and not as
+> a real vhost driver which implements an rpmsg bus?  If you implement it
+> as a vhost driver which implements rpmsg_device_ops and
+> rpmsg_endpoint_ops, then wouldn't you be able to implement your
+> vhost-sof driver using the normal rpmsg APIs?
 
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index c7334cc65bb2..a7a0962ed8a8 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -33,6 +33,10 @@
- #define DRV_DESC     "vDPA Device Simulator"
- #define DRV_LICENSE  "GPL v2"
- 
-+static int batch_mapping = 1;
-+module_param(batch_mapping, int, 0444);
-+MODULE_PARM_DESC(batch_mapping, "Batched mapping 1 -Enable; 0 - Disable");
-+
- struct vdpasim_virtqueue {
- 	struct vringh vring;
- 	struct vringh_kiov iov;
-@@ -303,16 +307,22 @@ static const struct dma_map_ops vdpasim_dma_ops = {
- };
- 
- static const struct vdpa_config_ops vdpasim_net_config_ops;
-+static const struct vdpa_config_ops vdpasim_net_batch_config_ops;
- 
- static struct vdpasim *vdpasim_create(void)
- {
-+	const struct vdpa_config_ops *ops;
- 	struct virtio_net_config *config;
- 	struct vdpasim *vdpasim;
- 	struct device *dev;
- 	int ret = -ENOMEM;
- 
--	vdpasim = vdpa_alloc_device(struct vdpasim, vdpa, NULL,
--				    &vdpasim_net_config_ops);
-+	if (batch_mapping)
-+		ops = &vdpasim_net_batch_config_ops;
-+	else
-+		ops = &vdpasim_net_config_ops;
-+
-+	vdpasim = vdpa_alloc_device(struct vdpasim, vdpa, NULL, ops);
- 	if (!vdpasim)
- 		goto err_alloc;
- 
-@@ -597,12 +607,36 @@ static const struct vdpa_config_ops vdpasim_net_config_ops = {
- 	.get_config             = vdpasim_get_config,
- 	.set_config             = vdpasim_set_config,
- 	.get_generation         = vdpasim_get_generation,
--	.set_map                = vdpasim_set_map,
- 	.dma_map                = vdpasim_dma_map,
- 	.dma_unmap              = vdpasim_dma_unmap,
- 	.free                   = vdpasim_free,
- };
- 
-+static const struct vdpa_config_ops vdpasim_net_batch_config_ops = {
-+	.set_vq_address         = vdpasim_set_vq_address,
-+	.set_vq_num             = vdpasim_set_vq_num,
-+	.kick_vq                = vdpasim_kick_vq,
-+	.set_vq_cb              = vdpasim_set_vq_cb,
-+	.set_vq_ready           = vdpasim_set_vq_ready,
-+	.get_vq_ready           = vdpasim_get_vq_ready,
-+	.set_vq_state           = vdpasim_set_vq_state,
-+	.get_vq_state           = vdpasim_get_vq_state,
-+	.get_vq_align           = vdpasim_get_vq_align,
-+	.get_features           = vdpasim_get_features,
-+	.set_features           = vdpasim_set_features,
-+	.set_config_cb          = vdpasim_set_config_cb,
-+	.get_vq_num_max         = vdpasim_get_vq_num_max,
-+	.get_device_id          = vdpasim_get_device_id,
-+	.get_vendor_id          = vdpasim_get_vendor_id,
-+	.get_status             = vdpasim_get_status,
-+	.set_status             = vdpasim_set_status,
-+	.get_config             = vdpasim_get_config,
-+	.set_config             = vdpasim_set_config,
-+	.get_generation         = vdpasim_get_generation,
-+	.set_map                = vdpasim_set_map,
-+	.free                   = vdpasim_free,
-+};
-+
- static int __init vdpasim_dev_init(void)
- {
- 	vdpasim_dev = vdpasim_create();
--- 
-2.20.1
+Sorry, not sure what you mean by the "normal rpmsg API?" Do you mean the 
+VirtIO RPMsg API? But that's the opposite side of the link - that's the 
+guest side in the VM case and the Linux side in the remoteproc case. What 
+this API is adding is a vhost RPMsg API. The kernel vhost framework 
+itself is essentially a library of functions. Kernel vhost drivers simply 
+create a misc device and use the vhost functions for some common 
+functionality. This RPMsg vhost API stays in the same concept and provides 
+further functions for RPMsg specific vhost operation.
 
+> I tried quickly hooking up this code to such a vhost driver and I was
+> able to communicate between host and guest systems with both
+> rpmsg-client-sample and rpmsg-char which almost no modifications to
+> those drivers.
+
+You mean you used this patch to create RPMsg vhost drivers? Without 
+creating a vhost RPMsg bus? Nice, glad to hear that!
+
+Thanks
+Guennadi
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
