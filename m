@@ -1,74 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7053E1FDB05
-	for <lists.virtualization@lfdr.de>; Thu, 18 Jun 2020 03:09:52 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 347F31FDB24
+	for <lists.virtualization@lfdr.de>; Thu, 18 Jun 2020 03:11:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 934C3203BE;
-	Thu, 18 Jun 2020 01:09:50 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id CF9578874A;
+	Thu, 18 Jun 2020 01:11:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UtUp6v1I4ajC; Thu, 18 Jun 2020 01:09:49 +0000 (UTC)
+	with ESMTP id DO0KmyGc1VCB; Thu, 18 Jun 2020 01:11:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id A2E072041F;
-	Thu, 18 Jun 2020 01:09:49 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 0949A887AF;
+	Thu, 18 Jun 2020 01:11:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 75469C016E;
-	Thu, 18 Jun 2020 01:09:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D9E25C016E;
+	Thu, 18 Jun 2020 01:11:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EFDC5C016E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7DCD5C016E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 01:09:47 +0000 (UTC)
+ Thu, 18 Jun 2020 01:11:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id D739786C11
+ by hemlock.osuosl.org (Postfix) with ESMTP id 6BB578874A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 01:09:47 +0000 (UTC)
+ Thu, 18 Jun 2020 01:11:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QEbScQwUM7dv
+ with ESMTP id 4rOQclFwMf8x
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 01:09:47 +0000 (UTC)
+ Thu, 18 Jun 2020 01:11:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 71FC086BA3
+ by hemlock.osuosl.org (Postfix) with ESMTPS id C19EE88734
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Jun 2020 01:09:47 +0000 (UTC)
+ Thu, 18 Jun 2020 01:11:00 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DE29221D7A;
- Thu, 18 Jun 2020 01:09:45 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id BE08220FC3;
+ Thu, 18 Jun 2020 01:10:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592442587;
- bh=FDpuhwIPKqTLeXCeJvNbdgB/8fO5E50d3SbB8nIMSsU=;
+ s=default; t=1592442660;
+ bh=Gpq89Boeo82rKY6nSce6Tq9xPIIuuioaUyKxagZCfCw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=eO5HBc6fiVpzaUtjPohBuoEnGn7jVV04d1lkYbAWN6I4OsVRpv+68G9P9/I4LeOHL
- kXs3bdjYP5D7lxnfzJgFjmiI/50Azvw5GN6soU7phWkJOFOL8tv/Z4PWRKn1LmC/pl
- XLtIazZHqDTv6lLkj0lYdNFB6Nu0EtG6UQOCOVF4=
+ b=VXAvoKx6APS+Pjpj7WDsUGqUn4gHHWHJJvgbIREY9fqOcUYbS+RFwny6zxeIaUnBM
+ eCcF/xW54silTA+r/e156g5JwiPkZ0J5yMWGJOSJc29ZXY5rNcdRcibmzrDUELhyIA
+ t1Tkae2XtPcFFaXBfaZGmf+yVACF/4Wct2Q4ePh4=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.7 077/388] scsi: vhost: Notify TCM about the maximum
- sg entries supported per command
-Date: Wed, 17 Jun 2020 21:02:54 -0400
-Message-Id: <20200618010805.600873-77-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.7 131/388] virtiofs: schedule blocking async replies
+ in separate worker
+Date: Wed, 17 Jun 2020 21:03:48 -0400
+Message-Id: <20200618010805.600873-131-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200618010805.600873-1-sashal@kernel.org>
 References: <20200618010805.600873-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>, kvm@vger.kernel.org,
- "Martin K . Petersen" <martin.petersen@oracle.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Mike Christie <mchristi@redhat.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+Cc: Sasha Levin <sashal@kernel.org>, Miklos Szeredi <mszeredi@redhat.com>,
+ linux-fsdevel@vger.kernel.org, Vivek Goyal <vgoyal@redhat.com>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,44 +83,203 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Sudhakar Panneerselvam <sudhakar.panneerselvam@oracle.com>
+From: Vivek Goyal <vgoyal@redhat.com>
 
-[ Upstream commit 5ae6a6a915033bfee79e76e0c374d4f927909edc ]
+[ Upstream commit bb737bbe48bea9854455cb61ea1dc06e92ce586c ]
 
-vhost-scsi pre-allocates the maximum sg entries per command and if a
-command requires more than VHOST_SCSI_PREALLOC_SGLS entries, then that
-command is failed by it. This patch lets vhost communicate the max sg limit
-when it registers vhost_scsi_ops with TCM. With this change, TCM would
-report the max sg entries through "Block Limits" VPD page which will be
-typically queried by the SCSI initiator during device discovery. By knowing
-this limit, the initiator could ensure the maximum transfer length is less
-than or equal to what is reported by vhost-scsi.
+In virtiofs (unlike in regular fuse) processing of async replies is
+serialized.  This can result in a deadlock in rare corner cases when
+there's a circular dependency between the completion of two or more async
+replies.
 
-Link: https://lore.kernel.org/r/1590166317-953-1-git-send-email-sudhakar.panneerselvam@oracle.com
-Cc: Michael S. Tsirkin <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Stefan Hajnoczi <stefanha@redhat.com>
-Reviewed-by: Mike Christie <mchristi@redhat.com>
-Signed-off-by: Sudhakar Panneerselvam <sudhakar.panneerselvam@oracle.com>
-Signed-off-by: Martin K. Petersen <martin.petersen@oracle.com>
+Such a deadlock can be reproduced with xfstests:generic/503 if TEST_DIR ==
+SCRATCH_MNT (which is a misconfiguration):
+
+ - Process A is waiting for page lock in worker thread context and blocked
+   (virtio_fs_requests_done_work()).
+ - Process B is holding page lock and waiting for pending writes to
+   finish (fuse_wait_on_page_writeback()).
+ - Write requests are waiting in virtqueue and can't complete because
+   worker thread is blocked on page lock (process A).
+
+Fix this by creating a unique work_struct for each async reply that can
+block (O_DIRECT read).
+
+Fixes: a62a8ef9d97d ("virtio-fs: add virtiofs filesystem")
+Signed-off-by: Vivek Goyal <vgoyal@redhat.com>
+Signed-off-by: Miklos Szeredi <mszeredi@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/vhost/scsi.c | 1 +
- 1 file changed, 1 insertion(+)
+ fs/fuse/file.c      |   1 +
+ fs/fuse/fuse_i.h    |   1 +
+ fs/fuse/virtio_fs.c | 106 +++++++++++++++++++++++++++++---------------
+ 3 files changed, 73 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/vhost/scsi.c b/drivers/vhost/scsi.c
-index c39952243fd3..8b104f76f324 100644
---- a/drivers/vhost/scsi.c
-+++ b/drivers/vhost/scsi.c
-@@ -2280,6 +2280,7 @@ static struct configfs_attribute *vhost_scsi_wwn_attrs[] = {
- static const struct target_core_fabric_ops vhost_scsi_ops = {
- 	.module				= THIS_MODULE,
- 	.fabric_name			= "vhost",
-+	.max_data_sg_nents		= VHOST_SCSI_PREALLOC_SGLS,
- 	.tpg_get_wwn			= vhost_scsi_get_fabric_wwn,
- 	.tpg_get_tag			= vhost_scsi_get_tpgt,
- 	.tpg_check_demo_mode		= vhost_scsi_check_true,
+diff --git a/fs/fuse/file.c b/fs/fuse/file.c
+index 9d67b830fb7a..d400b71b98d5 100644
+--- a/fs/fuse/file.c
++++ b/fs/fuse/file.c
+@@ -712,6 +712,7 @@ static ssize_t fuse_async_req_send(struct fuse_conn *fc,
+ 	spin_unlock(&io->lock);
+ 
+ 	ia->ap.args.end = fuse_aio_complete_req;
++	ia->ap.args.may_block = io->should_dirty;
+ 	err = fuse_simple_background(fc, &ia->ap.args, GFP_KERNEL);
+ 	if (err)
+ 		fuse_aio_complete_req(fc, &ia->ap.args, err);
+diff --git a/fs/fuse/fuse_i.h b/fs/fuse/fuse_i.h
+index ca344bf71404..d7cde216fc87 100644
+--- a/fs/fuse/fuse_i.h
++++ b/fs/fuse/fuse_i.h
+@@ -249,6 +249,7 @@ struct fuse_args {
+ 	bool out_argvar:1;
+ 	bool page_zeroing:1;
+ 	bool page_replace:1;
++	bool may_block:1;
+ 	struct fuse_in_arg in_args[3];
+ 	struct fuse_arg out_args[2];
+ 	void (*end)(struct fuse_conn *fc, struct fuse_args *args, int error);
+diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
+index bade74768903..0c6ef5d3c6ab 100644
+--- a/fs/fuse/virtio_fs.c
++++ b/fs/fuse/virtio_fs.c
+@@ -60,6 +60,12 @@ struct virtio_fs_forget {
+ 	struct virtio_fs_forget_req req;
+ };
+ 
++struct virtio_fs_req_work {
++	struct fuse_req *req;
++	struct virtio_fs_vq *fsvq;
++	struct work_struct done_work;
++};
++
+ static int virtio_fs_enqueue_req(struct virtio_fs_vq *fsvq,
+ 				 struct fuse_req *req, bool in_flight);
+ 
+@@ -485,19 +491,67 @@ static void copy_args_from_argbuf(struct fuse_args *args, struct fuse_req *req)
+ }
+ 
+ /* Work function for request completion */
++static void virtio_fs_request_complete(struct fuse_req *req,
++				       struct virtio_fs_vq *fsvq)
++{
++	struct fuse_pqueue *fpq = &fsvq->fud->pq;
++	struct fuse_conn *fc = fsvq->fud->fc;
++	struct fuse_args *args;
++	struct fuse_args_pages *ap;
++	unsigned int len, i, thislen;
++	struct page *page;
++
++	/*
++	 * TODO verify that server properly follows FUSE protocol
++	 * (oh.uniq, oh.len)
++	 */
++	args = req->args;
++	copy_args_from_argbuf(args, req);
++
++	if (args->out_pages && args->page_zeroing) {
++		len = args->out_args[args->out_numargs - 1].size;
++		ap = container_of(args, typeof(*ap), args);
++		for (i = 0; i < ap->num_pages; i++) {
++			thislen = ap->descs[i].length;
++			if (len < thislen) {
++				WARN_ON(ap->descs[i].offset);
++				page = ap->pages[i];
++				zero_user_segment(page, len, thislen);
++				len = 0;
++			} else {
++				len -= thislen;
++			}
++		}
++	}
++
++	spin_lock(&fpq->lock);
++	clear_bit(FR_SENT, &req->flags);
++	spin_unlock(&fpq->lock);
++
++	fuse_request_end(fc, req);
++	spin_lock(&fsvq->lock);
++	dec_in_flight_req(fsvq);
++	spin_unlock(&fsvq->lock);
++}
++
++static void virtio_fs_complete_req_work(struct work_struct *work)
++{
++	struct virtio_fs_req_work *w =
++		container_of(work, typeof(*w), done_work);
++
++	virtio_fs_request_complete(w->req, w->fsvq);
++	kfree(w);
++}
++
+ static void virtio_fs_requests_done_work(struct work_struct *work)
+ {
+ 	struct virtio_fs_vq *fsvq = container_of(work, struct virtio_fs_vq,
+ 						 done_work);
+ 	struct fuse_pqueue *fpq = &fsvq->fud->pq;
+-	struct fuse_conn *fc = fsvq->fud->fc;
+ 	struct virtqueue *vq = fsvq->vq;
+ 	struct fuse_req *req;
+-	struct fuse_args_pages *ap;
+ 	struct fuse_req *next;
+-	struct fuse_args *args;
+-	unsigned int len, i, thislen;
+-	struct page *page;
++	unsigned int len;
+ 	LIST_HEAD(reqs);
+ 
+ 	/* Collect completed requests off the virtqueue */
+@@ -515,38 +569,20 @@ static void virtio_fs_requests_done_work(struct work_struct *work)
+ 
+ 	/* End requests */
+ 	list_for_each_entry_safe(req, next, &reqs, list) {
+-		/*
+-		 * TODO verify that server properly follows FUSE protocol
+-		 * (oh.uniq, oh.len)
+-		 */
+-		args = req->args;
+-		copy_args_from_argbuf(args, req);
+-
+-		if (args->out_pages && args->page_zeroing) {
+-			len = args->out_args[args->out_numargs - 1].size;
+-			ap = container_of(args, typeof(*ap), args);
+-			for (i = 0; i < ap->num_pages; i++) {
+-				thislen = ap->descs[i].length;
+-				if (len < thislen) {
+-					WARN_ON(ap->descs[i].offset);
+-					page = ap->pages[i];
+-					zero_user_segment(page, len, thislen);
+-					len = 0;
+-				} else {
+-					len -= thislen;
+-				}
+-			}
+-		}
+-
+-		spin_lock(&fpq->lock);
+-		clear_bit(FR_SENT, &req->flags);
+ 		list_del_init(&req->list);
+-		spin_unlock(&fpq->lock);
+ 
+-		fuse_request_end(fc, req);
+-		spin_lock(&fsvq->lock);
+-		dec_in_flight_req(fsvq);
+-		spin_unlock(&fsvq->lock);
++		/* blocking async request completes in a worker context */
++		if (req->args->may_block) {
++			struct virtio_fs_req_work *w;
++
++			w = kzalloc(sizeof(*w), GFP_NOFS | __GFP_NOFAIL);
++			INIT_WORK(&w->done_work, virtio_fs_complete_req_work);
++			w->fsvq = fsvq;
++			w->req = req;
++			schedule_work(&w->done_work);
++		} else {
++			virtio_fs_request_complete(req, fsvq);
++		}
+ 	}
+ }
+ 
 -- 
 2.25.1
 
