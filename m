@@ -1,73 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5ADE200C41
-	for <lists.virtualization@lfdr.de>; Fri, 19 Jun 2020 16:47:06 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F1FD2032E8
+	for <lists.virtualization@lfdr.de>; Mon, 22 Jun 2020 11:07:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 75EDE899A6;
-	Fri, 19 Jun 2020 14:47:05 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id AD36B86C6D;
+	Mon, 22 Jun 2020 09:07:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lFqX2MnMhLqH; Fri, 19 Jun 2020 14:47:04 +0000 (UTC)
+	with ESMTP id yFoReBnY80Ic; Mon, 22 Jun 2020 09:07:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E52818996C;
-	Fri, 19 Jun 2020 14:47:04 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2C90286C25;
+	Mon, 22 Jun 2020 09:07:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BD657C016E;
-	Fri, 19 Jun 2020 14:47:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 079B4C016F;
+	Mon, 22 Jun 2020 09:07:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A434BC016E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A4CBCC016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Jun 2020 14:47:02 +0000 (UTC)
+ Mon, 22 Jun 2020 09:07:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 87C9388CB4
+ by hemlock.osuosl.org (Postfix) with ESMTP id A007388934
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Jun 2020 14:47:02 +0000 (UTC)
+ Mon, 22 Jun 2020 09:07:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id l5uDAuC2wOVj
+ with ESMTP id OlWxtu78DMLt
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Jun 2020 14:47:01 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id D2F1C88CB3
+ Mon, 22 Jun 2020 09:07:46 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id F15278888A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Jun 2020 14:47:01 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ Mon, 22 Jun 2020 09:07:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1592816864;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uYoQXSzwclqSNX+q/yIlo00opb3YPsUI2zyXrlleGws=;
+ b=a+2gipN97RSZA8vu7wpp0FwPoezaSoHIiI31gimWp4zYOUvrXIXS5RvEVNHyoKkvaeHR/T
+ 6t//Hyq2MzjMYkoOJkBNJP7dN+6IADbWosFHFcrOzKGbIT+mahs3GfF3BJZF6QDwn+wgQZ
+ wopFP/FHmg03cXlNdTULcW6y2564tZc=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-51-SQJRxOhlMqa4Bpmmejm1fA-1; Mon, 22 Jun 2020 05:07:41 -0400
+X-MC-Unique: SQJRxOhlMqa4Bpmmejm1fA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E8CEB2168B;
- Fri, 19 Jun 2020 14:47:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592578021;
- bh=cjtOOLNEuALwIBJrGKv7Ssx2HLiGt3mZGPIrD7T4nGM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=syDTnFNlGD0NXwZKJUcOmPD60gsCADyYZsdxlsBMwGt2thn11Bsa69HzGcUCxiEyc
- TTNp7YswS9riKxB3mNqrjqOQGwi/nQXuTH1Rma+ao5AjxWDWkDIGqTzoUdzmgJeRtL
- UZscOaE8aDcKjl3As2DiqNTTZ0K5U+4JHbyxoQNc=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH 4.14 051/190] crypto: virtio: Fix dest length calculation in
- __virtio_crypto_skcipher_do_req()
-Date: Fri, 19 Jun 2020 16:31:36 +0200
-Message-Id: <20200619141636.134555490@linuxfoundation.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20200619141633.446429600@linuxfoundation.org>
-References: <20200619141633.446429600@linuxfoundation.org>
-User-Agent: quilt/0.66
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 294EE801503;
+ Mon, 22 Jun 2020 09:07:40 +0000 (UTC)
+Received: from [10.72.13.194] (ovpn-13-194.pek2.redhat.com [10.72.13.194])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E1D2071664;
+ Mon, 22 Jun 2020 09:07:34 +0000 (UTC)
+Subject: Re: [PATCH RFC v8 02/11] vhost: use batched get_vq_desc version
+To: Eugenio Perez Martin <eperezma@redhat.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+References: <20200611113404.17810-1-mst@redhat.com>
+ <20200611113404.17810-3-mst@redhat.com>
+ <20200611152257.GA1798@char.us.oracle.com>
+ <CAJaqyWdwXMX0JGhmz6soH2ZLNdaH6HEdpBM8ozZzX9WUu8jGoQ@mail.gmail.com>
+ <CAJaqyWdwgy0fmReOgLfL4dAv-E+5k_7z3d9M+vHqt0aO2SmOFg@mail.gmail.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <b6347dad-89e8-61f6-6394-65c301f91dd7@redhat.com>
+Date: Mon, 22 Jun 2020 17:07:33 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Cc: Sasha Levin <sashal@kernel.org>, Herbert Xu <herbert@gondor.apana.org.au>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- "Longpeng\(Mike\)" <longpeng2@huawei.com>,
- "David S. Miller" <davem@davemloft.net>
+In-Reply-To: <CAJaqyWdwgy0fmReOgLfL4dAv-E+5k_7z3d9M+vHqt0aO2SmOFg@mail.gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, kvm list <kvm@vger.kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,64 +93,41 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Longpeng(Mike) <longpeng2@huawei.com>
-
-[ Upstream commit d90ca42012db2863a9a30b564a2ace6016594bda ]
-
-The src/dst length is not aligned with AES_BLOCK_SIZE(which is 16) in some
-testcases in tcrypto.ko.
-
-For example, the src/dst length of one of cts(cbc(aes))'s testcase is 17, the
-crypto_virtio driver will set @src_data_len=16 but @dst_data_len=17 in this
-case and get a wrong at then end.
-
-  SRC: pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp pp (17 bytes)
-  EXP: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc pp (17 bytes)
-  DST: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 00 (pollute the last bytes)
-  (pp: plaintext  cc:ciphertext)
-
-Fix this issue by limit the length of dest buffer.
-
-Fixes: dbaf0624ffa5 ("crypto: add virtio-crypto driver")
-Cc: Gonglei <arei.gonglei@huawei.com>
-Cc: Herbert Xu <herbert@gondor.apana.org.au>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: virtualization@lists.linux-foundation.org
-Cc: linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-Signed-off-by: Longpeng(Mike) <longpeng2@huawei.com>
-Link: https://lore.kernel.org/r/20200602070501.2023-4-longpeng2@huawei.com
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/crypto/virtio/virtio_crypto_algs.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/crypto/virtio/virtio_crypto_algs.c b/drivers/crypto/virtio/virtio_crypto_algs.c
-index fee78ec46bae..e6b889ce395e 100644
---- a/drivers/crypto/virtio/virtio_crypto_algs.c
-+++ b/drivers/crypto/virtio/virtio_crypto_algs.c
-@@ -411,6 +411,7 @@ __virtio_crypto_ablkcipher_do_req(struct virtio_crypto_sym_request *vc_sym_req,
- 		goto free;
- 	}
- 
-+	dst_len = min_t(unsigned int, req->nbytes, dst_len);
- 	pr_debug("virtio_crypto: src_len: %u, dst_len: %llu\n",
- 			req->nbytes, dst_len);
- 
--- 
-2.25.1
-
-
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNi8yMCDkuIrljYgyOjA3LCBFdWdlbmlvIFBlcmV6IE1hcnRpbiB3cm90ZToKPiBP
+biBNb24sIEp1biAxNSwgMjAyMCBhdCAyOjI4IFBNIEV1Z2VuaW8gUGVyZXogTWFydGluCj4gPGVw
+ZXJlem1hQHJlZGhhdC5jb20+IHdyb3RlOgo+PiBPbiBUaHUsIEp1biAxMSwgMjAyMCBhdCA1OjIy
+IFBNIEtvbnJhZCBSemVzenV0ZWsgV2lsawo+PiA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4gd3Jv
+dGU6Cj4+PiBPbiBUaHUsIEp1biAxMSwgMjAyMCBhdCAwNzozNDoxOUFNIC0wNDAwLCBNaWNoYWVs
+IFMuIFRzaXJraW4gd3JvdGU6Cj4+Pj4gQXMgdGVzdGluZyBzaG93cyBubyBwZXJmb3JtYW5jZSBj
+aGFuZ2UsIHN3aXRjaCB0byB0aGF0IG5vdy4KPj4+IFdoYXQga2luZCBvZiB0ZXN0aW5nPyAxMDBH
+aUI/IExvdyBsYXRlbmN5Pwo+Pj4KPj4gSGkgS29ucmFkLgo+Pgo+PiBJIHRlc3RlZCB0aGlzIHZl
+cnNpb24gb2YgdGhlIHBhdGNoOgo+PiBodHRwczovL2xrbWwub3JnL2xrbWwvMjAxOS8xMC8xMy80
+Mgo+Pgo+PiBJdCB3YXMgdGVzdGVkIGZvciB0aHJvdWdocHV0IHdpdGggRFBESydzIHRlc3RwbWQg
+KGFzIGRlc2NyaWJlZCBpbgo+PiBodHRwOi8vZG9jLmRwZGsub3JnL2d1aWRlcy9ob3d0by92aXJ0
+aW9fdXNlcl9hc19leGNlcHRpb25hbF9wYXRoLmh0bWwpCj4+IGFuZCBrZXJuZWwgcGt0Z2VuLiBO
+byBsYXRlbmN5IHRlc3RzIHdlcmUgcGVyZm9ybWVkIGJ5IG1lLiBNYXliZSBpdCBpcwo+PiBpbnRl
+cmVzdGluZyB0byBwZXJmb3JtIGEgbGF0ZW5jeSB0ZXN0IG9yIGp1c3QgYSBkaWZmZXJlbnQgc2V0
+IG9mIHRlc3RzCj4+IG92ZXIgYSByZWNlbnQgdmVyc2lvbi4KPj4KPj4gVGhhbmtzIQo+IEkgaGF2
+ZSByZXBlYXRlZCB0aGUgdGVzdHMgd2l0aCB2OSwgYW5kIHJlc3VsdHMgYXJlIGEgbGl0dGxlIGJp
+dCBkaWZmZXJlbnQ6Cj4gKiBJZiBJIHRlc3Qgb3BlbmluZyBpdCB3aXRoIHRlc3RwbWQsIEkgc2Vl
+IG5vIGNoYW5nZSBiZXR3ZWVuIHZlcnNpb25zCj4gKiBJZiBJIGZvcndhcmQgcGFja2V0cyBiZXR3
+ZWVuIHR3byB2aG9zdC1uZXQgaW50ZXJmYWNlcyBpbiB0aGUgZ3Vlc3QKPiB1c2luZyBhIGxpbnV4
+IGJyaWRnZSBpbiB0aGUgaG9zdDoKPiAgICAtIG5ldHBlcmYgVURQX1NUUkVBTSBzaG93cyBhIHBl
+cmZvcm1hbmNlIGluY3JlYXNlIG9mIDEuOCwgYWxtb3N0Cj4gZG91YmxpbmcgcGVyZm9ybWFuY2Uu
+IFRoaXMgZ2V0cyBsb3dlciBhcyBmcmFtZSBzaXplIGluY3JlYXNlLgo+ICAgIC0gcmVzdHMgb2Yg
+dGhlIHRlc3QgZ29lcyBub3RpY2VhYmx5IHdvcnNlOiBVRFBfUlIgZ29lcyBmcm9tIH42MzQ3Cj4g
+dHJhbnNhY3Rpb25zL3NlYyB0byA1ODMwCj4gICAgLSBUQ1BfU1RSRUFNIGdvZXMgZnJvbSB+MTAu
+NyBnYnBzIHRvIH43R2JwcwoKCldoaWNoIGRpcmVjdGlvbiBkaWQgeW91IG1lYW4gaGVyZT8gR3Vl
+c3QgVFggb3IgUlg/CgoKPiAgICAtIFRDUF9SUiBmcm9tIDYyMjMuNjQgdHJhbnNhY3Rpb25zL3Nl
+YyB0byA1NzM5LjQ0CgoKUGVyZiBkaWZmIG1pZ2h0IGhlbHAuIEkgdGhpbmsgd2UgY2FuIHN0YXJ0
+IGZyb20gdGhlIFJSIHJlc3VsdCB3aGljaCAKc2hvdWxkIGJlIGVhc2llci4gTWF5YmUgeW91IGNh
+biB0ZXN0IGl0IGZvciBlYWNoIHBhdGNoIHRoZW4geW91IG1heSBzZWUgCndoaWNoIHBhdGNoIGlz
+IHRoZSBzb3VyY2Ugb2YgdGhlIHJlZ3Jlc3Npb24uCgpUaGFua3MKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlz
+dApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3Rz
+LmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
