@@ -1,99 +1,101 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CD68203BB6
-	for <lists.virtualization@lfdr.de>; Mon, 22 Jun 2020 18:00:19 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E12A203B9D
+	for <lists.virtualization@lfdr.de>; Mon, 22 Jun 2020 17:55:31 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id BF89E8808F;
-	Mon, 22 Jun 2020 16:00:17 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0AFB5872FC;
+	Mon, 22 Jun 2020 15:55:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aSiYe0+bUdcz; Mon, 22 Jun 2020 16:00:17 +0000 (UTC)
+	with ESMTP id 9oJSOcmPrSMG; Mon, 22 Jun 2020 15:55:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3BE3D88859;
-	Mon, 22 Jun 2020 16:00:17 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8EDC087287;
+	Mon, 22 Jun 2020 15:55:29 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 01FE9C0891;
-	Mon, 22 Jun 2020 16:00:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 59102C016F;
+	Mon, 22 Jun 2020 15:55:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 777C9C016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 54C53C016F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:00:15 +0000 (UTC)
+ Mon, 22 Jun 2020 15:55:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 72D5089496
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3C092886B0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:00:15 +0000 (UTC)
+ Mon, 22 Jun 2020 15:55:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zM9YaOxxMhiH
+ with ESMTP id 7Qy1fX738Xka
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:00:15 +0000 (UTC)
-X-Greylist: delayed 00:30:04 by SQLgrey-1.7.6
-Received: from sonic314-19.consmr.mail.gq1.yahoo.com
- (sonic314-19.consmr.mail.gq1.yahoo.com [98.137.69.82])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 10B1E8942F
+ Mon, 22 Jun 2020 15:55:26 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 49F07886A9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:00:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.ca; s=s2048;
- t=1592841613; bh=ZrqH4CkkktGM5U4f9eYdkRlGgwNo9TU/U6UyKhhS7Nk=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From:Subject;
- b=uHKwPwmF2RduWQ+bhOkqeEscIisjsLrd7hGpHYDqHIo3Cc3/mhYGuX8bJxC1GvAGSH0SMuCPP+445aAssC1trA5Qy9UEwbsjfHlamAUtxOnDBysQxEc2A5egZtb4CHReUGqmTyWkW0QrZuz9ilNjRIh6HkVqKB2lJbrgnJg3nX29nV29+sOUkEkfqmBa4gTfDba80bqUODVSYAS7fD+w7/urGa1ocmSQNBPCN5Y/DknsIKjV91H/W9nvID/bGaU8GHcD/ir9cUT1r8kGrZBeNIAx/elv/vl9fxv6dwaYuPzjGN0EFDeIg+NlDjm+oPRM2ostsmBaycZZQcDYLqa3Ww==
-X-YMail-OSG: Cr3SZHIVM1nhNBz0ZZsYMs_M_FiwKACLBt6kQJYR4K4mF8rlKRnT_f7fT.t2sCC
- DipgYeUhA4EqFw.SkQWXpFDSR9OEwLAwPhxJrNDrZntjEiUyBxrucSuQHm_QF14U8f.b2eKVT72N
- qLFP7qiHUNKXQ4SYEPcuZ_q_hvbnxXiCXViFhbZeefE03ucrFdRs4EM21.p1dmjv5xm1mLoCeWIN
- jkgvvhLmjrY8f5pm5D.I7cSGPM0XP4TaGG6w.i1Rm9gkDs8YL.9moWBhj1cX2qg6nJLn_YP9zuaP
- 0j4YBbovs_HxALABkTP.KUcbU5likQB6ekjU..0CB5QQqi81Q0Hy7bFSr7FHxVMM12ot7uWaEinI
- JzMYBL7BgegWMHyrDLq0BukuCBzZhQ7HtVDiFAb6SLzynuhFE2s0oduA4_8TuEHwugSN8ABWWMon
- VPs76OFaHB4AiH8rlzDNUDvCs7hdVL4wp9PFB6nn9gIroi814lkRYshQ4SiMu8.x1LxzVQKuj_1K
- AuI6G4xS5qHgGm9tql95oMLMkoCQ_OChr1GN3vdf3AkF.9X9Wc6QF3ClqlTETxkAJr74XyNRNefG
- KKhCUU2Mb6kqNBNzFDJhl1nBfl4J3BT0UE0D3HzQ.zUoHGifRb9ATfXlzwDHyItKsky9dMsmfqtp
- i6TMZweDPyfDW5BjQ.MZTGyShESLRfuuUEljOv8zB54h_Fy7RVp.TsJfycEpERk0eoEc8YtNTOHf
- CcMXxFXSBJJWfuCSoiKgkmgJ.tWI9GYciX5ptLM5SO5ucVKruIh5YWFPlCwnk7h.bBmMVMK6JbYY
- FIzEK18BG84ne8qJn5HcUc4YGExVQ_0VdZ68jSrZOOgnALE7w0Yh7P.5FEyFgcDv5CQRtTlDa9XV
- 332GOILLb4zJJheQ0JFSPElT9FH3CBrDs5LCQxJomwN4y7xwltOYhRMK83otrU_Fj_y_eHeotXp5
- XEoZNPauow06YAJ6iF5IF8YixALM0Q7iN05wMbk0d_uc0b55OOLVDb3x3VUYpis0YS82.POsP32I
- ulBQXux3NQlclxawhgWzTJz.jykMGFqABOqUbZETOIhVNH9HkQalW_F5SQXc82W2mLThpOJ_x082
- G.nYAFFP6Iozy3gvrmlA27ubLrteMzz7DLQIULn80k0_6JJr84FSeEkkQDHO2PSnfc8bmvPlGVvp
- 18BXWE0ViDKr5zEztaQIMuEjnaJYCCDIS0FBU4hrX67yVYFDBT0y6ZYXCS4tbw1UClE62qzLiBIP
- UN3eLZ.VIszJNb86Rf9A8WrGMP2tM7.UAiknCB.VtjckyXwujOVTk01wBBbAFbL0YYDxIOdYmGmw
- oInI7KsCeCE6pCvJGjT60utyj2RwD2L_Yt9unDDKpSoj3x.XhDmB.
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic314.consmr.mail.gq1.yahoo.com with HTTP; Mon, 22 Jun 2020 16:00:13 +0000
-Received: by smtp418.mail.gq1.yahoo.com (VZM Hermes SMTP Server) with ESMTPA
- ID 402ae077068331dedde2e55d9ced12f3; 
- Mon, 22 Jun 2020 15:30:08 +0000 (UTC)
-Date: Mon, 22 Jun 2020 11:30:04 -0400
-Subject: Re: AMD IOMMU + SME + amdgpu regression
-To: Joerg Roedel <jroedel@suse.de>
-References: <1591915710.rakbpzst8h.none.ref@localhost>
- <1591915710.rakbpzst8h.none@localhost> <20200622100257.GD31822@suse.de>
-In-Reply-To: <20200622100257.GD31822@suse.de>
+ Mon, 22 Jun 2020 15:55:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1592841325;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=5/TWvdWyq1xUujhnrnIglEliiwBVOZjUqDPRZt1W7a0=;
+ b=DGcQB0DVqouImlxbCglGL7oSSLsPTgELcBF40oROx71U7LaxAIqRoWQFfp+/mbbmeBAaux
+ GKCvNxjtz/5puyb9jwCVCZni+dtSUa7FxFyMRXLqTcFpJLxAHVtFGdGddI/VJWSrRQjATU
+ hERL0Dh8KXKf7CFWAgPjW2lPevjN36M=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-406-iSH_p1goOaWxxNKkpZTdvA-1; Mon, 22 Jun 2020 11:55:10 -0400
+X-MC-Unique: iSH_p1goOaWxxNKkpZTdvA-1
+Received: by mail-wm1-f69.google.com with SMTP id u15so33281wmm.5
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 22 Jun 2020 08:55:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=5/TWvdWyq1xUujhnrnIglEliiwBVOZjUqDPRZt1W7a0=;
+ b=PotL8EDQiyACHhchT0/TnQemPn5BuORuO2YWKJyBuaZp21Sn31N6V4Bq2zfNLIHjDa
+ /XuG1FQvbyEnsHF0s/mVeZR/Az/r95EMh5/aUNrXDbBj8akepUy577n+rl8I3eqPcxCS
+ gBu8I8X6oD9TVJW3QzaAw/L1L2CZ4x6pj9RMVIfndBm1w4SM8i+aBguZQtM1q7uR6IZh
+ MwnF3vTdKUn+zYWmGbMPKU2mnornvA+PWMNh3ucwhauZqtFQvAIv+rRGYKYcnR5xPSc0
+ JJ0Ac5j+5tge+acvSvkKY6rKblR6U+IptSDJEv50IrfANNjva51Ypj9Vjv3MAz8XZ12v
+ trlg==
+X-Gm-Message-State: AOAM531Z3PpLABPoxanXSU93esKh8xST3sE8pSEeULFB50KuxfdiuzC/
+ UGONwXDNK/dB7REXoUzHqEQhtZAfh0Un+qmPI/X/SNAt70gW/jlBsC/5ZmzjsiJNbpFqnwjiejN
+ k5Eo05cxox1COnp2NA0TkBRcO31CsOnrllbWuhqYsjQ==
+X-Received: by 2002:adf:81c8:: with SMTP id 66mr15414793wra.348.1592841308601; 
+ Mon, 22 Jun 2020 08:55:08 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzDqUXaq8ZLWjDVbqp55FyjxeMofHg+9iAPblS6Tpzqu1HcZ9tDlKdMVd5PLYKsZyiUVy0W0Q==
+X-Received: by 2002:adf:81c8:: with SMTP id 66mr15414773wra.348.1592841308364; 
+ Mon, 22 Jun 2020 08:55:08 -0700 (PDT)
+Received: from redhat.com (bzq-79-178-18-124.red.bezeqint.net. [79.178.18.124])
+ by smtp.gmail.com with ESMTPSA id d201sm5593758wmd.34.2020.06.22.08.55.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jun 2020 08:55:07 -0700 (PDT)
+Date: Mon, 22 Jun 2020 11:55:04 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Eugenio Perez Martin <eperezma@redhat.com>
+Subject: Re: [PATCH RFC v8 02/11] vhost: use batched get_vq_desc version
+Message-ID: <20200622114622-mutt-send-email-mst@kernel.org>
+References: <20200611113404.17810-1-mst@redhat.com>
+ <20200611113404.17810-3-mst@redhat.com>
+ <20200611152257.GA1798@char.us.oracle.com>
+ <CAJaqyWdwXMX0JGhmz6soH2ZLNdaH6HEdpBM8ozZzX9WUu8jGoQ@mail.gmail.com>
+ <CAJaqyWdwgy0fmReOgLfL4dAv-E+5k_7z3d9M+vHqt0aO2SmOFg@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <1592839701.mxvvths2x9.none@localhost>
-X-Mailer: WebService/1.1.16138 hermes_yahoo Apache-HttpAsyncClient/4.1.4
- (Java/11.0.7)
-Cc: Heiko Stuebner <heiko@sntech.de>,
- Bjorn Andersson <bjorn.andersson@linaro.org>, linux-tegra@vger.kernel.org,
- Thierry Reding <thierry.reding@gmail.com>, Daniel Drake <drake@endlessm.com>,
- Will Deacon <will@kernel.org>, Christoph Hellwig <hch@lst.de>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Jean-Philippe Brucker <jean-philippe@linaro.org>,
- linux-samsung-soc@vger.kernel.org, Joerg Roedel <joro@8bytes.org>,
- Krzysztof Kozlowski <krzk@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>,
- linux-rockchip@lists.infradead.org, Andy Gross <agross@kernel.org>,
- Gerald Schaefer <gerald.schaefer@de.ibm.com>,
- David Rientjes <rientjes@google.com>, linux-s390@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
- Matthias Brugger <matthias.bgg@gmail.com>,
- virtualization@lists.linux-foundation.org, jonathan.derrick@intel.com,
- Robin Murphy <robin.murphy@arm.com>, linux-kernel@vger.kernel.org,
- Rob Clark <robdclark@gmail.com>, Kukjin Kim <kgene@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>, Lu Baolu <baolu.lu@linux.intel.com>
+In-Reply-To: <CAJaqyWdwgy0fmReOgLfL4dAv-E+5k_7z3d9M+vHqt0aO2SmOFg@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: kvm list <kvm@vger.kernel.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,32 +107,63 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: "Alex Xu \(Hello71\) via Virtualization"
- <virtualization@lists.linux-foundation.org>
-Reply-To: "Alex Xu \(Hello71\)" <alex_y_xu@yahoo.ca>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Excerpts from Joerg Roedel's message of June 22, 2020 6:02 am:
-> Hi Alex,
+On Fri, Jun 19, 2020 at 08:07:57PM +0200, Eugenio Perez Martin wrote:
+> On Mon, Jun 15, 2020 at 2:28 PM Eugenio Perez Martin
+> <eperezma@redhat.com> wrote:
+> >
+> > On Thu, Jun 11, 2020 at 5:22 PM Konrad Rzeszutek Wilk
+> > <konrad.wilk@oracle.com> wrote:
+> > >
+> > > On Thu, Jun 11, 2020 at 07:34:19AM -0400, Michael S. Tsirkin wrote:
+> > > > As testing shows no performance change, switch to that now.
+> > >
+> > > What kind of testing? 100GiB? Low latency?
+> > >
+> >
+> > Hi Konrad.
+> >
+> > I tested this version of the patch:
+> > https://lkml.org/lkml/2019/10/13/42
+> >
+> > It was tested for throughput with DPDK's testpmd (as described in
+> > http://doc.dpdk.org/guides/howto/virtio_user_as_exceptional_path.html)
+> > and kernel pktgen. No latency tests were performed by me. Maybe it is
+> > interesting to perform a latency test or just a different set of tests
+> > over a recent version.
+> >
+> > Thanks!
 > 
-> On Thu, Jun 11, 2020 at 07:05:21PM -0400, Alex Xu (Hello71) wrote:
->> I am using an ASRock B450 Pro4 with Ryzen 1600 and ASUS RX 480. I don't 
->> understand this code at all, but let me know what I can do to 
->> troubleshoot.
-> 
-> Does it boot without SME enabled?
-> 
-> 
-> Regards,
-> 
-> 	Joerg
-> 
+> I have repeated the tests with v9, and results are a little bit different:
+> * If I test opening it with testpmd, I see no change between versions
 
-Yes, it works with SME off with dbed452a078 ("dma-pool: decouple 
-DMA_REMAP from DMA_COHERENT_POOL") applied.
+
+OK that is testpmd on guest, right? And vhost-net on the host?
+
+> * If I forward packets between two vhost-net interfaces in the guest
+> using a linux bridge in the host:
+
+And here I guess you mean virtio-net in the guest kernel?
+
+>   - netperf UDP_STREAM shows a performance increase of 1.8, almost
+> doubling performance. This gets lower as frame size increase.
+>   - rests of the test goes noticeably worse: UDP_RR goes from ~6347
+> transactions/sec to 5830
+
+OK so it seems plausible that we still have a bug where an interrupt
+is delayed. That is the main difference between pmd and virtio.
+Let's try disabling event index, and see what happens - that's
+the trickiest part of interrupts.
+
+
+
+>   - TCP_STREAM goes from ~10.7 gbps to ~7Gbps
+>   - TCP_RR from 6223.64 transactions/sec to 5739.44
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
