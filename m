@@ -1,105 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67BB7203C90
-	for <lists.virtualization@lfdr.de>; Mon, 22 Jun 2020 18:29:43 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6525520477B
+	for <lists.virtualization@lfdr.de>; Tue, 23 Jun 2020 04:51:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 178448874A;
-	Mon, 22 Jun 2020 16:29:42 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A05DC88BF6;
+	Tue, 23 Jun 2020 02:51:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bJZMGut+uvqa; Mon, 22 Jun 2020 16:29:41 +0000 (UTC)
+	with ESMTP id 6aC4dO3wRvuc; Tue, 23 Jun 2020 02:51:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 06E64892AB;
-	Mon, 22 Jun 2020 16:29:41 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 19ACE88C1A;
+	Tue, 23 Jun 2020 02:51:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D2E44C016F;
-	Mon, 22 Jun 2020 16:29:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EE8C5C016F;
+	Tue, 23 Jun 2020 02:51:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AF487C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CF285C016F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:29:39 +0000 (UTC)
+ Tue, 23 Jun 2020 02:51:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id A35A987252
+ by fraxinus.osuosl.org (Postfix) with ESMTP id BC39087483
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:29:39 +0000 (UTC)
+ Tue, 23 Jun 2020 02:51:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JnoCpq3aGe_1
+ with ESMTP id U1-1dTHyhxPp
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:29:38 +0000 (UTC)
+ Tue, 23 Jun 2020 02:51:45 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
  [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 6671D8723F
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 7B1E987465
  for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 16:29:38 +0000 (UTC)
+ Tue, 23 Jun 2020 02:51:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592843377;
+ s=mimecast20190719; t=1592880704;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=FzLtoFQh/vN8wW8Srx1684Gpm2Q4p3etHyJcn3zpZ2o=;
- b=b1icpGRDlat9MMUtdOfCI9KIwjMdefSQjpiMrVDsFJ7Sf1+Uk3SuD4xq44z9xc7BhcPcTe
- r8ZFD2EsNuUf00jUJ5c+9Yc8QSxIk7olHIUul4E4MDUaCFRWeUBjQCmQEDl6olSx5GMYif
- X6CzhxL1dfZ7XTc2rCzJl1v16sVYAG0=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-27-RnmWjYkWPzCVKbzDs7LhSw-1; Mon, 22 Jun 2020 12:29:32 -0400
-X-MC-Unique: RnmWjYkWPzCVKbzDs7LhSw-1
-Received: by mail-wr1-f71.google.com with SMTP id i14so187530wru.17
- for <virtualization@lists.linux-foundation.org>;
- Mon, 22 Jun 2020 09:29:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=FzLtoFQh/vN8wW8Srx1684Gpm2Q4p3etHyJcn3zpZ2o=;
- b=D0zsLzZXuWZo/pXquxJRTfVGrJ7/L60KMqhT6bmsjKPY1scIUeUWN2L2lKPktvrUFV
- scaVaOWd4dAjHjAB959/BsldVtFaW0niHoBrGTL7o4XQ/ke55kLTGEgneuurRqzCPz4z
- bh0rtQAP0OW+DlshH7y1CoGvF0spSPMPobG6LdYnENe084ljItovc4Qup6LSlRn7WLXp
- AdpleFY5WJsM87Lh1dxf0oAccuYPJY7TkUTe5KIpeUmz0Za6mkHO3c3Fg1XwKVSTXfXg
- 9uLLSHKgPslmycCham4gA8VGHqu72Yf0tqW2NzL2kTrE6hcshs9U4a+Em+GPFC0H5Q0i
- KhWw==
-X-Gm-Message-State: AOAM531lAe9P+96JU2dLxiD9dyohO8grlkY7kYaZNl66i3wbSpSRyabm
- tMMSuoPoNaVOsnPD0J9nBSAxZW2UxSabMkKf3Q0jEzLYE/AYcNqBhVQwgqxch1wz1ACXMzAZz4F
- eytx9up2mMEHlXjWvfVEl450bWG4ghN0lqovcBOLGwg==
-X-Received: by 2002:a5d:470a:: with SMTP id y10mr7567524wrq.405.1592843371379; 
- Mon, 22 Jun 2020 09:29:31 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzTk56uu9uLED/XFyQTjpJIlBSf9Yjq+4mD8Dsvqij6CkK9q6rGvTmvotw6Je15SfiT50Mhig==
-X-Received: by 2002:a5d:470a:: with SMTP id y10mr7567504wrq.405.1592843371111; 
- Mon, 22 Jun 2020 09:29:31 -0700 (PDT)
-Received: from redhat.com (bzq-79-178-18-124.red.bezeqint.net. [79.178.18.124])
- by smtp.gmail.com with ESMTPSA id x205sm98811wmx.21.2020.06.22.09.29.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jun 2020 09:29:30 -0700 (PDT)
-Date: Mon, 22 Jun 2020 12:29:28 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Eugenio Perez Martin <eperezma@redhat.com>
+ bh=wItOOFxGoX9Yxy2T8076N6nMJmnVQApKKEzZUpOJV/A=;
+ b=g50VRCngZWLMIwYaxoUw1cF0OQuExnuv3lL6lSuUUSSy0E8oFxCTUQGZkH9e6YB/1xb4Gf
+ OqxpHJmMA5DW0bR9ch03KsZagwI6I24YDRT1nFJaWlAgGknWQ5IZM4gswF6P31SIXq6vL/
+ RWtsE1j3VpeQQC2uv1UtsDKSknWDhGk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-451-IKRKNpSxMJyEL-9nTh0cCA-1; Mon, 22 Jun 2020 22:51:42 -0400
+X-MC-Unique: IKRKNpSxMJyEL-9nTh0cCA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2315EBFC1;
+ Tue, 23 Jun 2020 02:51:41 +0000 (UTC)
+Received: from [10.72.12.144] (ovpn-12-144.pek2.redhat.com [10.72.12.144])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D2B9819D71;
+ Tue, 23 Jun 2020 02:51:35 +0000 (UTC)
 Subject: Re: [PATCH RFC v8 02/11] vhost: use batched get_vq_desc version
-Message-ID: <20200622122546-mutt-send-email-mst@kernel.org>
+To: "Michael S. Tsirkin" <mst@redhat.com>
 References: <20200611113404.17810-1-mst@redhat.com>
  <20200611113404.17810-3-mst@redhat.com>
- <20200611152257.GA1798@char.us.oracle.com>
- <CAJaqyWdwXMX0JGhmz6soH2ZLNdaH6HEdpBM8ozZzX9WUu8jGoQ@mail.gmail.com>
- <CAJaqyWdwgy0fmReOgLfL4dAv-E+5k_7z3d9M+vHqt0aO2SmOFg@mail.gmail.com>
- <20200622114622-mutt-send-email-mst@kernel.org>
- <CAJaqyWfrf94Gc-DMaXO+f=xC8eD3DVCD9i+x1dOm5W2vUwOcGQ@mail.gmail.com>
+ <0332b0cf-cf00-9216-042c-e870efa33626@redhat.com>
+ <20200622115946-mutt-send-email-mst@kernel.org>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <c56cc86d-a420-79ca-8420-e99db91980fa@redhat.com>
+Date: Tue, 23 Jun 2020 10:51:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAJaqyWfrf94Gc-DMaXO+f=xC8eD3DVCD9i+x1dOm5W2vUwOcGQ@mail.gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: kvm list <kvm@vger.kernel.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+In-Reply-To: <20200622115946-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: netdev@vger.kernel.org, eperezma@redhat.com, linux-kernel@vger.kernel.org,
+ kvm@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,102 +90,26 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jun 22, 2020 at 06:11:21PM +0200, Eugenio Perez Martin wrote:
-> On Mon, Jun 22, 2020 at 5:55 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
-> > On Fri, Jun 19, 2020 at 08:07:57PM +0200, Eugenio Perez Martin wrote:
-> > > On Mon, Jun 15, 2020 at 2:28 PM Eugenio Perez Martin
-> > > <eperezma@redhat.com> wrote:
-> > > >
-> > > > On Thu, Jun 11, 2020 at 5:22 PM Konrad Rzeszutek Wilk
-> > > > <konrad.wilk@oracle.com> wrote:
-> > > > >
-> > > > > On Thu, Jun 11, 2020 at 07:34:19AM -0400, Michael S. Tsirkin wrote:
-> > > > > > As testing shows no performance change, switch to that now.
-> > > > >
-> > > > > What kind of testing? 100GiB? Low latency?
-> > > > >
-> > > >
-> > > > Hi Konrad.
-> > > >
-> > > > I tested this version of the patch:
-> > > > https://lkml.org/lkml/2019/10/13/42
-> > > >
-> > > > It was tested for throughput with DPDK's testpmd (as described in
-> > > > http://doc.dpdk.org/guides/howto/virtio_user_as_exceptional_path.html)
-> > > > and kernel pktgen. No latency tests were performed by me. Maybe it is
-> > > > interesting to perform a latency test or just a different set of tests
-> > > > over a recent version.
-> > > >
-> > > > Thanks!
-> > >
-> > > I have repeated the tests with v9, and results are a little bit different:
-> > > * If I test opening it with testpmd, I see no change between versions
-> >
-> >
-> > OK that is testpmd on guest, right? And vhost-net on the host?
-> >
-> 
-> Hi Michael.
-> 
-> No, sorry, as described in
-> http://doc.dpdk.org/guides/howto/virtio_user_as_exceptional_path.html.
-> But I could add to test it in the guest too.
-> 
-> These kinds of raw packets "bursts" do not show performance
-> differences, but I could test deeper if you think it would be worth
-> it.
-
-Oh ok, so this is without guest, with virtio-user.
-It might be worth checking dpdk within guest too just
-as another data point.
-
-> > > * If I forward packets between two vhost-net interfaces in the guest
-> > > using a linux bridge in the host:
-> >
-> > And here I guess you mean virtio-net in the guest kernel?
-> 
-> Yes, sorry: Two virtio-net interfaces connected with a linux bridge in
-> the host. More precisely:
-> * Adding one of the interfaces to another namespace, assigning it an
-> IP, and starting netserver there.
-> * Assign another IP in the range manually to the other virtual net
-> interface, and start the desired test there.
-> 
-> If you think it would be better to perform then differently please let me know.
-
-
-Not sure why you bother with namespaces since you said you are
-using L2 bridging. I guess it's unimportant.
-
-> >
-> > >   - netperf UDP_STREAM shows a performance increase of 1.8, almost
-> > > doubling performance. This gets lower as frame size increase.
-> > >   - rests of the test goes noticeably worse: UDP_RR goes from ~6347
-> > > transactions/sec to 5830
-> >
-> > OK so it seems plausible that we still have a bug where an interrupt
-> > is delayed. That is the main difference between pmd and virtio.
-> > Let's try disabling event index, and see what happens - that's
-> > the trickiest part of interrupts.
-> >
-> 
-> Got it, will get back with the results.
-> 
-> Thank you very much!
-> 
-> >
-> >
-> > >   - TCP_STREAM goes from ~10.7 gbps to ~7Gbps
-> > >   - TCP_RR from 6223.64 transactions/sec to 5739.44
-> >
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNi8yMyDkuIrljYgxMjowMCwgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+IE9u
+IFdlZCwgSnVuIDE3LCAyMDIwIGF0IDExOjE5OjI2QU0gKzA4MDAsIEphc29uIFdhbmcgd3JvdGU6
+Cj4+IE9uIDIwMjAvNi8xMSDkuIvljYg3OjM0LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4+
+PiAgICBzdGF0aWMgdm9pZCB2aG9zdF92cV9mcmVlX2lvdmVjcyhzdHJ1Y3Qgdmhvc3RfdmlydHF1
+ZXVlICp2cSkKPj4+ICAgIHsKPj4+ICAgIAlrZnJlZSh2cS0+ZGVzY3MpOwo+Pj4gQEAgLTM5NCw2
+ICs0MDAsOSBAQCBzdGF0aWMgbG9uZyB2aG9zdF9kZXZfYWxsb2NfaW92ZWNzKHN0cnVjdCB2aG9z
+dF9kZXYgKmRldikKPj4+ICAgIAlmb3IgKGkgPSAwOyBpIDwgZGV2LT5udnFzOyArK2kpIHsKPj4+
+ICAgIAkJdnEgPSBkZXYtPnZxc1tpXTsKPj4+ICAgIAkJdnEtPm1heF9kZXNjcyA9IGRldi0+aW92
+X2xpbWl0Owo+Pj4gKwkJaWYgKHZob3N0X3ZxX251bV9iYXRjaF9kZXNjcyh2cSkgPCAwKSB7Cj4+
+PiArCQkJcmV0dXJuIC1FSU5WQUw7Cj4+PiArCQl9Cj4+IFRoaXMgY2hlY2sgYnJlYWtzIHZkcGEg
+d2hpY2ggc2V0IGlvdl9saW1pdCB0byB6ZXJvLiBDb25zaWRlciBpb3ZfbGltaXQgaXMKPj4gbWVh
+bmluZ2xlc3MgdG8gdkRQQSwgSSB3b25kZXIgd2UgY2FuIHNraXAgdGhlIHRlc3Qgd2hlbiBkZXZp
+Y2UgZG9lc24ndCB1c2UKPj4gd29ya2VyLgo+Pgo+PiBUaGFua3MKPiBJdCBkb2Vzbid0IG5lZWQg
+aW92ZWNzIGF0IGFsbCwgcmlnaHQ/Cj4KPiAtLSBNU1QKCgpZZXMsIHNvIHdlIG1heSBjaG9vc2Ug
+dG8gYnlwYXNzIHRoZSBpb3ZlY3MgYXMgd2VsbC4KClRoYW5rcwoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0
+ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMu
+bGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
