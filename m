@@ -1,54 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44080205621
-	for <lists.virtualization@lfdr.de>; Tue, 23 Jun 2020 17:39:06 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F0D6205626
+	for <lists.virtualization@lfdr.de>; Tue, 23 Jun 2020 17:39:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E4C72896E6;
-	Tue, 23 Jun 2020 15:39:04 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2835F86E64;
+	Tue, 23 Jun 2020 15:39:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iDEJ01NVQ5nF; Tue, 23 Jun 2020 15:39:03 +0000 (UTC)
+	with ESMTP id zWF4OscO2PJi; Tue, 23 Jun 2020 15:39:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 48FE589564;
-	Tue, 23 Jun 2020 15:39:03 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BCF3C86F6A;
+	Tue, 23 Jun 2020 15:39:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B269C0893;
-	Tue, 23 Jun 2020 15:39:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A9A91C016F;
+	Tue, 23 Jun 2020 15:39:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 01F49C0890
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 076A2C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Jun 2020 15:38:59 +0000 (UTC)
+ Tue, 23 Jun 2020 15:39:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id DAD4586E7E
+ by fraxinus.osuosl.org (Postfix) with ESMTP id EA1A486E7E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Jun 2020 15:38:59 +0000 (UTC)
+ Tue, 23 Jun 2020 15:39:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ajPWD0xabO0T
+ with ESMTP id ssrwLjemhawe
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Jun 2020 15:38:59 +0000 (UTC)
+ Tue, 23 Jun 2020 15:39:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id E140A86E64
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 695A686E64
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Jun 2020 15:38:58 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0A2E6AF3D;
- Tue, 23 Jun 2020 15:38:57 +0000 (UTC)
-Date: Tue, 23 Jun 2020 17:38:55 +0200
-From: Joerg Roedel <jroedel@suse.de>
-To: Peter Zijlstra <peterz@infradead.org>
+ Tue, 23 Jun 2020 15:39:32 +0000 (UTC)
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: eiqxVBWKC88b1iIh5nTj/f7V8Jh2ethNUebZFkujWdRGxn9kUdey47KybRdBPzpPU3UaTmRUbu
+ hhEzIKGB0mKgn/ZmC+NiJ8ZJHLfOksnJ/vSslBnIPYj9seYdLRSUz7dZQO5BZc0yl6bA4IjueI
+ bn/dF7MfxrIDT5AJWZamzmm2rM+4+z+TgKWNEpAvbpz8sL4gjqSGcJ87E0t/npmOhY35o2I+VS
+ bM3rkhL4sTcknZFOm6T2ilmQIhGnWQVAsmrT/yXfdhHaHKXse6ioUbmCYLyCKwuA42B/Hhy1WM
+ Epo=
+X-SBRS: 2.7
+X-MesageID: 21039380
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,271,1589256000"; d="scan'208";a="21039380"
 Subject: Re: Should SEV-ES #VC use IST? (Re: [PATCH] Allow RDTSC and RDTSCP
  from userspace)
-Message-ID: <20200623153855.GM14101@suse.de>
-References: <20200623110706.GB4817@hirez.programming.kicks-ass.net>
+To: Peter Zijlstra <peterz@infradead.org>, Joerg Roedel <jroedel@suse.de>
+References: <20200428075512.GP30814@suse.de>
+ <20200623110706.GB4817@hirez.programming.kicks-ass.net>
  <20200623113007.GH31822@suse.de>
  <20200623114818.GD4817@hirez.programming.kicks-ass.net>
  <20200623120433.GB14101@suse.de>
@@ -58,19 +66,24 @@ References: <20200623110706.GB4817@hirez.programming.kicks-ass.net>
  <20200623145344.GA117543@hirez.programming.kicks-ass.net>
  <20200623145914.GF14101@suse.de>
  <20200623152326.GL4817@hirez.programming.kicks-ass.net>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <56af2f70-a1c6-aa64-006e-23f2f3880887@citrix.com>
+Date: Tue, 23 Jun 2020 16:39:26 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Disposition: inline
 In-Reply-To: <20200623152326.GL4817@hirez.programming.kicks-ass.net>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 Cc: Juergen Gross <JGross@suse.com>, Tom Lendacky <Thomas.Lendacky@amd.com>,
  Thomas Hellstrom <thellstrom@vmware.com>, X86 ML <x86@kernel.org>,
  Mike Stunes <mstunes@vmware.com>, Kees Cook <keescook@chromium.org>,
- kvm list <kvm@vger.kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Joerg Roedel <joro@8bytes.org>, Dave Hansen <dave.hansen@linux.intel.com>,
- LKML <linux-kernel@vger.kernel.org>,
+ kvm list <kvm@vger.kernel.org>, Joerg Roedel <joro@8bytes.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, LKML <linux-kernel@vger.kernel.org>,
  Sean Christopherson <sean.j.christopherson@intel.com>,
- Linux Virtualization <virtualization@lists.linux-foundation.org>,
- Dave Hansen <dave.hansen@intel.com>, Andy Lutomirski <luto@kernel.org>,
+ Linux Virtualization <virtualization@lists.linux-foundation.org>, Dave
+ Hansen <dave.hansen@intel.com>, Andy Lutomirski <luto@kernel.org>,
  "H. Peter Anvin" <hpa@zytor.com>, Dan Williams <dan.j.williams@intel.com>,
  Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -89,48 +102,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jun 23, 2020 at 05:23:26PM +0200, Peter Zijlstra wrote:
+On 23/06/2020 16:23, Peter Zijlstra wrote:
 > On Tue, Jun 23, 2020 at 04:59:14PM +0200, Joerg Roedel wrote:
-> > On Tue, Jun 23, 2020 at 04:53:44PM +0200, Peter Zijlstra wrote:
-> > > +noinstr void idtentry_validate_ist(struct pt_regs *regs)
-> > > +{
-> > > +	if ((regs->sp & ~(EXCEPTION_STKSZ-1)) ==
-> > > +	    (_RET_IP_ & ~(EXCEPTION_STKSZ-1)))
-> > > +		die("IST stack recursion", regs, 0);
-> > > +}
-> > 
-> > Yes, this is a start, it doesn't cover the case where the NMI stack is
-> > in-between, so I think you need to walk down regs->sp too.
-> 
+>> On Tue, Jun 23, 2020 at 04:53:44PM +0200, Peter Zijlstra wrote:
+>>> +noinstr void idtentry_validate_ist(struct pt_regs *regs)
+>>> +{
+>>> +	if ((regs->sp & ~(EXCEPTION_STKSZ-1)) ==
+>>> +	    (_RET_IP_ & ~(EXCEPTION_STKSZ-1)))
+>>> +		die("IST stack recursion", regs, 0);
+>>> +}
+>> Yes, this is a start, it doesn't cover the case where the NMI stack is
+>> in-between, so I think you need to walk down regs->sp too.
 > That shouldn't be possible with the current code, I think.
 
-Not with the current code, but possibly with SNP #VC exceptions:
+NMI; #MC; Anything which IRET but isn't fatal - #DB, or #BP from
+patching, #GP from *_safe(), etc; NMI
 
-      ->  First #VC
-	  -> NMI before VC handler switched off its IST stack
-	     (now on NMI IST stack)
-	      -> Second SNP #VC exception before the NMI handler did the
-		 #VC stack check (because HV messed around with some pages
-		 touched there).
+Sure its a corner case, but did you hear that IST is evil?
 
-In the second #VC you use the same IST stack as in the first #VC, but
-the the NMI-stack in-between.
+~Andrew
 
-> Reliability of that depends on the unwinder, I wouldn't want the guess
-> uwinder to OOPS me by accident.
-
-It doesn't use the full unwinder, it just assumes that there is a
-pt_regs struct at the top of every kernel stack and walks through them
-until SP points to a user-space stack.
-
-As long as the assumption that there is a pt_regs struct on top of every
-stack holds, this should be safe. The assumption might be wrong when an
-exception happens during SYSCALL/SYSENTER entry, when the return frame
-is not written by hardware.
-
-
-	Joerg
-
+P.S. did you also hear that with Rowhammer, userspace has a nonzero
+quantity of control over generating #MC, depending on how ECC is
+configured on the platform.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
