@@ -2,94 +2,101 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9ADA20970E
-	for <lists.virtualization@lfdr.de>; Thu, 25 Jun 2020 01:21:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C35020970F
+	for <lists.virtualization@lfdr.de>; Thu, 25 Jun 2020 01:21:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 94D6F88386;
-	Wed, 24 Jun 2020 23:21:30 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id CA3B18838C;
+	Wed, 24 Jun 2020 23:21:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 80QmRZnjDb2P; Wed, 24 Jun 2020 23:21:29 +0000 (UTC)
+	with ESMTP id i2iaVd1VvUPz; Wed, 24 Jun 2020 23:21:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 768F18838E;
-	Wed, 24 Jun 2020 23:21:29 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 9958F88396;
+	Wed, 24 Jun 2020 23:21:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 56FA5C0894;
-	Wed, 24 Jun 2020 23:21:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8B07CC016F;
+	Wed, 24 Jun 2020 23:21:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 56300C016F
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 34AA8C016F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Jun 2020 23:21:27 +0000 (UTC)
+ Wed, 24 Jun 2020 23:21:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 49C9488388
+ by silver.osuosl.org (Postfix) with ESMTP id 19ACC203AF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Jun 2020 23:21:27 +0000 (UTC)
+ Wed, 24 Jun 2020 23:21:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Rlf+F9Zr7moR
+ with ESMTP id KIRgDNaX4wc8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Jun 2020 23:21:26 +0000 (UTC)
+ Wed, 24 Jun 2020 23:21:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
  [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id E0D5788386
+ by silver.osuosl.org (Postfix) with ESMTPS id 570FA203C4
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Jun 2020 23:21:25 +0000 (UTC)
+ Wed, 24 Jun 2020 23:21:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593040884;
+ s=mimecast20190719; t=1593040888;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=HVbEuEGkVIuG5NhNxqmnGS+9NKLEk9a8dY03A8fYLyw=;
- b=QvE8GkRTfZMdmrdAMrMgjbXA7gP2YqsHB2zgWjYszi3jk2e1q4dlTH/xrRqhq8yboekufG
- 8ltY3FX8SohPn234Qm7C5UcqZbeezri1spg/SeXPxw+18Iz7hZOtpEWIuCrT+eu1abaUkw
- /592iYkL+rezMxBWu0f2iN8lKYqfhI4=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-470-2adT8XUcOeaN1eSm7zFz5w-1; Wed, 24 Jun 2020 19:21:22 -0400
-X-MC-Unique: 2adT8XUcOeaN1eSm7zFz5w-1
-Received: by mail-wm1-f71.google.com with SMTP id v6so2615337wmg.1
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=1qVm+qFHpBcFnajiwKWBoYJyF5SCnRnSLqkqB/nC2LI=;
+ b=dSMW5Eyf5DgUVz9UslaYA/As1CyXRP01cacRziVR4vpH988XjjtvYMrCyTOxt6FMQetpop
+ HJ6XR6P1XX8j2a75CACYmOKT2ReDd027ruXl6krSl1+u6TRocTKMBkAdZs1xggxZziE8+S
+ RYYlk9wKkTVV5+KCextTO57a89e5JSU=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-464-pkd98vKuPo-SCory-DU1Lw-1; Wed, 24 Jun 2020 19:21:26 -0400
+X-MC-Unique: pkd98vKuPo-SCory-DU1Lw-1
+Received: by mail-wr1-f72.google.com with SMTP id m14so4740517wrj.12
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Jun 2020 16:21:22 -0700 (PDT)
+ Wed, 24 Jun 2020 16:21:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=HVbEuEGkVIuG5NhNxqmnGS+9NKLEk9a8dY03A8fYLyw=;
- b=N1/trrnguNBZgjIn9PorEtmOATG1TRK2ncdQyt5YedNxHcwMCosdemMZi4ky+vbJiQ
- YV15F6nwA6ztt59xrDASFS8Cg7ZP1dePO5XUOfENmY06R9pinJrBMIx1VIiuOxN9YNoH
- gVIgUwO8iUemMwM7UNUV6gcG1bKqi2NE09MGmu/6xu2UcZDWRYZv64ayTZPN5GKe50Dd
- cj/UADLIc1SPtYp/kNwBa/vzBnhxyKQCbU2Q4utjJwyOQxj08gAcFPfqE/II1H9v3iVv
- mJuARRch0cpcQBACJYvutblWTr7HnNHWqukSfYypXqJhNgvg7xCHTECPj6yt2b0n2ITE
- o8Cg==
-X-Gm-Message-State: AOAM533kJ+r088Q8a5gFiOviKMvlABRbYy57x1kJnreLs+er7jXqA6ux
- 18dyHj7zkXrh4D2xt/xTyCGGQsSDT5Tj/CsrrtpLhwTiwdck36BZxNd43uMogby/4t5RSVJ6y+Y
- yL+vVzxxHGP5VsojTpz2CKp5cedlwxc2w8GrJLrdgvQ==
-X-Received: by 2002:a1c:f203:: with SMTP id s3mr167747wmc.126.1593040881218;
- Wed, 24 Jun 2020 16:21:21 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyM0cktsDl5CrWaaOPv+1nYAYm4w3v8Sv0284TWIxv5uQ05SVVcH6miZb9gN0YuAb6dFYTBHA==
-X-Received: by 2002:a1c:f203:: with SMTP id s3mr167730wmc.126.1593040881042;
- Wed, 24 Jun 2020 16:21:21 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=1qVm+qFHpBcFnajiwKWBoYJyF5SCnRnSLqkqB/nC2LI=;
+ b=hY+N01DEzhk/NQ3lksTl0cXKaiM2XEXjIgTlLt3XMdkZp2VAjfBkyLprxICKa+3H13
+ HAH6ZhJ6z4CdswWty5PQlR4ynYedpYXcv7ZOr1Q8HnuQPI5xG8oJnqH7i0uTrvEEoVDy
+ b/glDGVmam2nBlzdqJr7GbfBxu3u2xdMOAT13DnMsJmrkOy3ZmgkzXrZ8qMnWvuPYmCc
+ RYnDnTyU9105cHTkv7qnCMlxu6wvXmxCFhDU6NSqU1I2Oo29eMRURTAzS7Gh7fQ4yEMW
+ yZ/egUm7oIuD40OKGaYtu5Fu9ncYhJcOMpItFXHtok5Hv0aWp0TRHhaxrZBk4im7OuzB
+ 62LA==
+X-Gm-Message-State: AOAM5310tRUVkwa6eKJ0LcyQKJn4Pnf4v4Et4tMDLi+2eppKyKCViqyF
+ LtSvES9QY8CO5DEDDa6qOdalQOrV90KkKej1Bw889rwfEP1qiacyAwnZ22P+lSFw8r+f/nM64cQ
+ 09awLUucUAVU+pFSRuZeFhBiPNZEmPgS6S/qQ44wZFw==
+X-Received: by 2002:adf:9205:: with SMTP id 5mr31880030wrj.232.1593040884076; 
+ Wed, 24 Jun 2020 16:21:24 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxqFyNRbJvNmvq82fhlM5himBZXXkAKRBOYQGCEH/gPc8s0pO7SeqL9CkzgxhVJ/ckX6aHU5w==
+X-Received: by 2002:adf:9205:: with SMTP id 5mr31880025wrj.232.1593040883843; 
+ Wed, 24 Jun 2020 16:21:23 -0700 (PDT)
 Received: from redhat.com (bzq-79-182-31-92.red.bezeqint.net. [79.182.31.92])
  by smtp.gmail.com with ESMTPSA id
- c25sm9717109wml.46.2020.06.24.16.21.19
+ c206sm10725877wmf.36.2020.06.24.16.21.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jun 2020 16:21:20 -0700 (PDT)
-Date: Wed, 24 Jun 2020 19:21:18 -0400
+ Wed, 24 Jun 2020 16:21:23 -0700 (PDT)
+Date: Wed, 24 Jun 2020 19:21:21 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 0/2] virtio: modernize DMA quirks
-Message-ID: <20200624232035.704217-1-mst@redhat.com>
+Subject: [PATCH v2 1/2] virtio: VIRTIO_F_IOMMU_PLATFORM ->
+ VIRTIO_F_ACCESS_PLATFORM
+Message-ID: <20200624232035.704217-2-mst@redhat.com>
+References: <20200624232035.704217-1-mst@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <20200624232035.704217-1-mst@redhat.com>
 X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
 X-Mutt-Fcc: =sent
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org, Richard Weinberger <richard@nod.at>,
+ Jeff Dike <jdike@addtoit.com>, linux-um@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, netdev@vger.kernel.org,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,30 +113,183 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use generic names for the quirks to make it clear it is not just about
-the IOMMU, it's about DMA access in general.
+Rename the bit to match latest virtio spec.
+Add a compat macro to avoid breaking existing userspace.
 
-changes from v1:
-	added patch 2
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+---
+ arch/um/drivers/virtio_uml.c       |  2 +-
+ drivers/vdpa/ifcvf/ifcvf_base.h    |  2 +-
+ drivers/vdpa/vdpa_sim/vdpa_sim.c   |  4 ++--
+ drivers/vhost/net.c                |  4 ++--
+ drivers/vhost/vdpa.c               |  2 +-
+ drivers/virtio/virtio_balloon.c    |  2 +-
+ drivers/virtio/virtio_ring.c       |  2 +-
+ include/linux/virtio_config.h      |  2 +-
+ include/uapi/linux/virtio_config.h | 10 +++++++---
+ tools/virtio/linux/virtio_config.h |  2 +-
+ 10 files changed, 18 insertions(+), 14 deletions(-)
 
-Michael S. Tsirkin (2):
-  virtio: VIRTIO_F_IOMMU_PLATFORM -> VIRTIO_F_ACCESS_PLATFORM
-  virtio: virtio_has_iommu_quirk -> virtio_has_dma_quirk
-
- arch/um/drivers/virtio_uml.c            |  2 +-
- drivers/gpu/drm/virtio/virtgpu_object.c |  2 +-
- drivers/gpu/drm/virtio/virtgpu_vq.c     |  4 ++--
- drivers/vdpa/ifcvf/ifcvf_base.h         |  2 +-
- drivers/vdpa/vdpa_sim/vdpa_sim.c        |  4 ++--
- drivers/vhost/net.c                     |  4 ++--
- drivers/vhost/vdpa.c                    |  2 +-
- drivers/virtio/virtio_balloon.c         |  2 +-
- drivers/virtio/virtio_ring.c            |  4 ++--
- include/linux/virtio_config.h           |  6 +++---
- include/uapi/linux/virtio_config.h      | 10 +++++++---
- tools/virtio/linux/virtio_config.h      |  6 +++---
- 12 files changed, 26 insertions(+), 22 deletions(-)
-
+diff --git a/arch/um/drivers/virtio_uml.c b/arch/um/drivers/virtio_uml.c
+index 351aee52aca6..a6c4bb6c2c01 100644
+--- a/arch/um/drivers/virtio_uml.c
++++ b/arch/um/drivers/virtio_uml.c
+@@ -385,7 +385,7 @@ static irqreturn_t vu_req_interrupt(int irq, void *data)
+ 		}
+ 		break;
+ 	case VHOST_USER_SLAVE_IOTLB_MSG:
+-		/* not supported - VIRTIO_F_IOMMU_PLATFORM */
++		/* not supported - VIRTIO_F_ACCESS_PLATFORM */
+ 	case VHOST_USER_SLAVE_VRING_HOST_NOTIFIER_MSG:
+ 		/* not supported - VHOST_USER_PROTOCOL_F_HOST_NOTIFIER */
+ 	default:
+diff --git a/drivers/vdpa/ifcvf/ifcvf_base.h b/drivers/vdpa/ifcvf/ifcvf_base.h
+index f4554412e607..24af422b5a3e 100644
+--- a/drivers/vdpa/ifcvf/ifcvf_base.h
++++ b/drivers/vdpa/ifcvf/ifcvf_base.h
+@@ -29,7 +29,7 @@
+ 		 (1ULL << VIRTIO_F_VERSION_1)			| \
+ 		 (1ULL << VIRTIO_NET_F_STATUS)			| \
+ 		 (1ULL << VIRTIO_F_ORDER_PLATFORM)		| \
+-		 (1ULL << VIRTIO_F_IOMMU_PLATFORM)		| \
++		 (1ULL << VIRTIO_F_ACCESS_PLATFORM)		| \
+ 		 (1ULL << VIRTIO_NET_F_MRG_RXBUF))
+ 
+ /* Only one queue pair for now. */
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+index c7334cc65bb2..a9bc5e0fb353 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+@@ -55,7 +55,7 @@ struct vdpasim_virtqueue {
+ 
+ static u64 vdpasim_features = (1ULL << VIRTIO_F_ANY_LAYOUT) |
+ 			      (1ULL << VIRTIO_F_VERSION_1)  |
+-			      (1ULL << VIRTIO_F_IOMMU_PLATFORM);
++			      (1ULL << VIRTIO_F_ACCESS_PLATFORM);
+ 
+ /* State of each vdpasim device */
+ struct vdpasim {
+@@ -450,7 +450,7 @@ static int vdpasim_set_features(struct vdpa_device *vdpa, u64 features)
+ 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
+ 
+ 	/* DMA mapping must be done by driver */
+-	if (!(features & (1ULL << VIRTIO_F_IOMMU_PLATFORM)))
++	if (!(features & (1ULL << VIRTIO_F_ACCESS_PLATFORM)))
+ 		return -EINVAL;
+ 
+ 	vdpasim->features = features & vdpasim_features;
+diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
+index e992decfec53..8e0921d3805d 100644
+--- a/drivers/vhost/net.c
++++ b/drivers/vhost/net.c
+@@ -73,7 +73,7 @@ enum {
+ 	VHOST_NET_FEATURES = VHOST_FEATURES |
+ 			 (1ULL << VHOST_NET_F_VIRTIO_NET_HDR) |
+ 			 (1ULL << VIRTIO_NET_F_MRG_RXBUF) |
+-			 (1ULL << VIRTIO_F_IOMMU_PLATFORM)
++			 (1ULL << VIRTIO_F_ACCESS_PLATFORM)
+ };
+ 
+ enum {
+@@ -1653,7 +1653,7 @@ static int vhost_net_set_features(struct vhost_net *n, u64 features)
+ 	    !vhost_log_access_ok(&n->dev))
+ 		goto out_unlock;
+ 
+-	if ((features & (1ULL << VIRTIO_F_IOMMU_PLATFORM))) {
++	if ((features & (1ULL << VIRTIO_F_ACCESS_PLATFORM))) {
+ 		if (vhost_init_device_iotlb(&n->dev, true))
+ 			goto out_unlock;
+ 	}
+diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
+index a54b60d6623f..18869a35d408 100644
+--- a/drivers/vhost/vdpa.c
++++ b/drivers/vhost/vdpa.c
+@@ -31,7 +31,7 @@ enum {
+ 		(1ULL << VIRTIO_F_NOTIFY_ON_EMPTY) |
+ 		(1ULL << VIRTIO_F_ANY_LAYOUT) |
+ 		(1ULL << VIRTIO_F_VERSION_1) |
+-		(1ULL << VIRTIO_F_IOMMU_PLATFORM) |
++		(1ULL << VIRTIO_F_ACCESS_PLATFORM) |
+ 		(1ULL << VIRTIO_F_RING_PACKED) |
+ 		(1ULL << VIRTIO_F_ORDER_PLATFORM) |
+ 		(1ULL << VIRTIO_RING_F_INDIRECT_DESC) |
+diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+index 1f157d2f4952..fc7301406540 100644
+--- a/drivers/virtio/virtio_balloon.c
++++ b/drivers/virtio/virtio_balloon.c
+@@ -1120,7 +1120,7 @@ static int virtballoon_validate(struct virtio_device *vdev)
+ 	else if (!virtio_has_feature(vdev, VIRTIO_BALLOON_F_PAGE_POISON))
+ 		__virtio_clear_bit(vdev, VIRTIO_BALLOON_F_REPORTING);
+ 
+-	__virtio_clear_bit(vdev, VIRTIO_F_IOMMU_PLATFORM);
++	__virtio_clear_bit(vdev, VIRTIO_F_ACCESS_PLATFORM);
+ 	return 0;
+ }
+ 
+diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+index 58b96baa8d48..a1a5c2a91426 100644
+--- a/drivers/virtio/virtio_ring.c
++++ b/drivers/virtio/virtio_ring.c
+@@ -2225,7 +2225,7 @@ void vring_transport_features(struct virtio_device *vdev)
+ 			break;
+ 		case VIRTIO_F_VERSION_1:
+ 			break;
+-		case VIRTIO_F_IOMMU_PLATFORM:
++		case VIRTIO_F_ACCESS_PLATFORM:
+ 			break;
+ 		case VIRTIO_F_RING_PACKED:
+ 			break;
+diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
+index bb4cc4910750..f2cc2a0df174 100644
+--- a/include/linux/virtio_config.h
++++ b/include/linux/virtio_config.h
+@@ -171,7 +171,7 @@ static inline bool virtio_has_iommu_quirk(const struct virtio_device *vdev)
+ 	 * Note the reverse polarity of the quirk feature (compared to most
+ 	 * other features), this is for compatibility with legacy systems.
+ 	 */
+-	return !virtio_has_feature(vdev, VIRTIO_F_IOMMU_PLATFORM);
++	return !virtio_has_feature(vdev, VIRTIO_F_ACCESS_PLATFORM);
+ }
+ 
+ static inline
+diff --git a/include/uapi/linux/virtio_config.h b/include/uapi/linux/virtio_config.h
+index ff8e7dc9d4dd..b5eda06f0d57 100644
+--- a/include/uapi/linux/virtio_config.h
++++ b/include/uapi/linux/virtio_config.h
+@@ -67,13 +67,17 @@
+ #define VIRTIO_F_VERSION_1		32
+ 
+ /*
+- * If clear - device has the IOMMU bypass quirk feature.
+- * If set - use platform tools to detect the IOMMU.
++ * If clear - device has the platform DMA (e.g. IOMMU) bypass quirk feature.
++ * If set - use platform DMA tools to access the memory.
+  *
+  * Note the reverse polarity (compared to most other features),
+  * this is for compatibility with legacy systems.
+  */
+-#define VIRTIO_F_IOMMU_PLATFORM		33
++#define VIRTIO_F_ACCESS_PLATFORM	33
++#ifndef __KERNEL__
++/* Legacy name for VIRTIO_F_ACCESS_PLATFORM (for compatibility with old userspace) */
++#define VIRTIO_F_IOMMU_PLATFORM		VIRTIO_F_ACCESS_PLATFORM
++#endif /* __KERNEL__ */
+ 
+ /* This feature indicates support for the packed virtqueue layout. */
+ #define VIRTIO_F_RING_PACKED		34
+diff --git a/tools/virtio/linux/virtio_config.h b/tools/virtio/linux/virtio_config.h
+index dbf14c1e2188..f99ae42668e0 100644
+--- a/tools/virtio/linux/virtio_config.h
++++ b/tools/virtio/linux/virtio_config.h
+@@ -51,7 +51,7 @@ static inline bool virtio_has_iommu_quirk(const struct virtio_device *vdev)
+ 	 * Note the reverse polarity of the quirk feature (compared to most
+ 	 * other features), this is for compatibility with legacy systems.
+ 	 */
+-	return !virtio_has_feature(vdev, VIRTIO_F_IOMMU_PLATFORM);
++	return !virtio_has_feature(vdev, VIRTIO_F_ACCESS_PLATFORM);
+ }
+ 
+ static inline bool virtio_is_little_endian(struct virtio_device *vdev)
 -- 
 MST
 
