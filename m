@@ -1,78 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC6BD20A06B
-	for <lists.virtualization@lfdr.de>; Thu, 25 Jun 2020 15:58:17 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 86ACE20A410
+	for <lists.virtualization@lfdr.de>; Thu, 25 Jun 2020 19:31:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 88E8A23115;
-	Thu, 25 Jun 2020 13:58:16 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 33AF986A4A;
+	Thu, 25 Jun 2020 17:31:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JzExT7ZINre6; Thu, 25 Jun 2020 13:58:15 +0000 (UTC)
+	with ESMTP id SCQMEmOvFV7J; Thu, 25 Jun 2020 17:31:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 702C22326C;
-	Thu, 25 Jun 2020 13:58:15 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 5D98886A5D;
+	Thu, 25 Jun 2020 17:31:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 52B51C016F;
-	Thu, 25 Jun 2020 13:58:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3F9DDC016F;
+	Thu, 25 Jun 2020 17:31:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 102FDC016F
- for <virtualization@lists.linux-foundation.org>;
- Thu, 25 Jun 2020 13:58:14 +0000 (UTC)
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7D58FC016F;
+ Thu, 25 Jun 2020 17:31:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id DD0E7861D7
- for <virtualization@lists.linux-foundation.org>;
- Thu, 25 Jun 2020 13:58:13 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 6C39C86A4A;
+ Thu, 25 Jun 2020 17:31:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id v75FH_OC1U1I
- for <virtualization@lists.linux-foundation.org>;
- Thu, 25 Jun 2020 13:58:13 +0000 (UTC)
+ with ESMTP id 1PX-zVkpmX9c; Thu, 25 Jun 2020 17:31:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3795A84E49
- for <virtualization@lists.linux-foundation.org>;
- Thu, 25 Jun 2020 13:58:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593093492;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HP9THfq0e57aimyJmnA5TRP+h5ylmLpPTeTOZs2TrL8=;
- b=TGA8QPs1CLc/mZaLSCExffKxwkck00FCcBzwTxgWfdbIHMbPs1JjUBcxPDW7yGLeUXLNU6
- 5nyM0aTgl6hro70k9ZWq7NFbCsYxpuUPH1dTDuag6EbUg7lX/gWWTQAolpnotin37Chrad
- zGaNrRq3hcVAarw3jpngMJVcVzJRFx4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-159-qAq2OK1TOByuX1mhSoJ6uQ-1; Thu, 25 Jun 2020 09:58:10 -0400
-X-MC-Unique: qAq2OK1TOByuX1mhSoJ6uQ-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4EBC7464;
- Thu, 25 Jun 2020 13:58:09 +0000 (UTC)
-Received: from localhost (ovpn-115-49.ams2.redhat.com [10.36.115.49])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D98C860C1D;
- Thu, 25 Jun 2020 13:58:08 +0000 (UTC)
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: kvm@vger.kernel.org
-Subject: [RFC 3/3] virtio-blk: use NUMA-aware memory allocation in probe
-Date: Thu, 25 Jun 2020 14:57:52 +0100
-Message-Id: <20200625135752.227293-4-stefanha@redhat.com>
-In-Reply-To: <20200625135752.227293-1-stefanha@redhat.com>
-References: <20200625135752.227293-1-stefanha@redhat.com>
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id C2F4A86A14;
+ Thu, 25 Jun 2020 17:31:28 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0FEDB20789;
+ Thu, 25 Jun 2020 17:31:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1593106288;
+ bh=WhqBDPdOBNk4Nn0nlm/U/FBDprV3efhSWtdS+mTEZhI=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=KNaQ/3jj9TpuSnPt+fOmTGLlW7zN97Hc5nMeEhGWFn3RY4Vu5yOi/rL1784qarDyK
+ p9hWwTE8sLerEFX9rM+jYpsgztP56cS6phku8LqLBrkd8JcN8KNPpoVQD+Ru6HllCU
+ KTeOrcYXJqrOnQ00srcPg/hv/0Q/e8ghv8knwqvk=
+Date: Thu, 25 Jun 2020 10:31:27 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
+In-Reply-To: <20200624181026-mutt-send-email-mst@kernel.org>
+Message-ID: <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
+References: <20200624091732.23944-1-peng.fan@nxp.com>
+ <20200624050355-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241047010.8121@sstabellini-ThinkPad-T480s>
+ <20200624163940-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
+ <20200624181026-mutt-send-email-mst@kernel.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org
+Cc: jgross@suse.com, Peng Fan <peng.fan@nxp.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, konrad.wilk@oracle.com,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
+ linux-imx@nxp.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,69 +83,121 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Allocate frequently-accessed data structures from the NUMA node
-associated with this device to avoid slow cross-NUMA node memory
-accesses.
+On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
+> On Wed, Jun 24, 2020 at 02:53:54PM -0700, Stefano Stabellini wrote:
+> > On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
+> > > On Wed, Jun 24, 2020 at 10:59:47AM -0700, Stefano Stabellini wrote:
+> > > > On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
+> > > > > On Wed, Jun 24, 2020 at 05:17:32PM +0800, Peng Fan wrote:
+> > > > > > Export xen_swiotlb for all platforms using xen swiotlb
+> > > > > > 
+> > > > > > Use xen_swiotlb to determine when vring should use dma APIs to map the
+> > > > > > ring: when xen_swiotlb is enabled the dma API is required. When it is
+> > > > > > disabled, it is not required.
+> > > > > > 
+> > > > > > Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> > > > > 
+> > > > > Isn't there some way to use VIRTIO_F_IOMMU_PLATFORM for this?
+> > > > > Xen was there first, but everyone else is using that now.
+> > > > 
+> > > > Unfortunately it is complicated and it is not related to
+> > > > VIRTIO_F_IOMMU_PLATFORM :-(
+> > > > 
+> > > > 
+> > > > The Xen subsystem in Linux uses dma_ops via swiotlb_xen to translate
+> > > > foreign mappings (memory coming from other VMs) to physical addresses.
+> > > > On x86, it also uses dma_ops to translate Linux's idea of a physical
+> > > > address into a real physical address (this is unneeded on ARM.)
+> > > > 
+> > > > 
+> > > > So regardless of VIRTIO_F_IOMMU_PLATFORM, dma_ops should be used on Xen/x86
+> > > > always and on Xen/ARM if Linux is Dom0 (because it has foreign
+> > > > mappings.) That is why we have the if (xen_domain) return true; in
+> > > > vring_use_dma_api.
+> > > 
+> > > VIRTIO_F_IOMMU_PLATFORM makes guest always use DMA ops.
+> > > 
+> > > Xen hack predates VIRTIO_F_IOMMU_PLATFORM so it *also*
+> > > forces DMA ops even if VIRTIO_F_IOMMU_PLATFORM is clear.
+> > >
+> > > Unfortunately as a result Xen never got around to
+> > > properly setting VIRTIO_F_IOMMU_PLATFORM.
+> > 
+> > I don't think VIRTIO_F_IOMMU_PLATFORM would be correct for this because
+> > the usage of swiotlb_xen is not a property of virtio,
+> 
+> 
+> Basically any device without VIRTIO_F_ACCESS_PLATFORM
+> (that is it's name in latest virtio spec, VIRTIO_F_IOMMU_PLATFORM is
+> what linux calls it) is declared as "special, don't follow normal rules
+> for access".
+> 
+> So yes swiotlb_xen is not a property of virtio, but what *is* a property
+> of virtio is that it's not special, just a regular device from DMA POV.
 
-Only the following memory allocations are made NUMA-aware:
+I am trying to understand what you meant but I think I am missing
+something.
 
-1. Called during probe. If called in the data path then hopefully we're
-   executing on a CPU in the same NUMA node as the device. If the CPU is
-   not in the right NUMA node then it's unclear whether forcing memory
-   allocations to use the device's NUMA node will increase or decrease
-   performance.
+Are you saying that modern virtio should always have
+VIRTIO_F_ACCESS_PLATFORM, hence use normal dma_ops as any other devices?
 
-2. Memory will be frequently accessed from the data path. There is no
-   need to worry about data that is not accessed from
-   performance-critical code paths.
+If that is the case, how is it possible that virtio breaks on ARM using
+the default dma_ops? The breakage is not Xen related (except that Xen
+turns dma_ops on). The original message from Peng was:
 
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
- drivers/block/virtio_blk.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+  vring_map_one_sg -> vring_use_dma_api
+                   -> dma_map_page
+  		       -> __swiotlb_map_page
+  		                ->swiotlb_map_page
+  				->__dma_map_area(phys_to_virt(dma_to_phys(dev, dev_addr)), size, dir);
+  However we are using per device dma area for rpmsg, phys_to_virt
+  could not return a correct virtual address for virtual address in
+  vmalloc area. Then kernel panic.
 
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 9d21bf0f155e..40845e9ad3b1 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -482,6 +482,7 @@ static int init_vq(struct virtio_blk *vblk)
- 	unsigned short num_vqs;
- 	struct virtio_device *vdev = vblk->vdev;
- 	struct irq_affinity desc = { 0, };
-+	int node = dev_to_node(&vdev->dev);
+I must be missing something. Maybe it is because it has to do with RPMesg?
  
- 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_MQ,
- 				   struct virtio_blk_config, num_queues,
-@@ -491,7 +492,8 @@ static int init_vq(struct virtio_blk *vblk)
- 
- 	num_vqs = min_t(unsigned int, nr_cpu_ids, num_vqs);
- 
--	vblk->vqs = kmalloc_array(num_vqs, sizeof(*vblk->vqs), GFP_KERNEL);
-+	vblk->vqs = kmalloc_array_node(num_vqs, sizeof(*vblk->vqs),
-+				       GFP_KERNEL, node);
- 	if (!vblk->vqs)
- 		return -ENOMEM;
- 
-@@ -683,6 +685,7 @@ module_param_named(queue_depth, virtblk_queue_depth, uint, 0444);
- 
- static int virtblk_probe(struct virtio_device *vdev)
- {
-+	int node = dev_to_node(&vdev->dev);
- 	struct virtio_blk *vblk;
- 	struct request_queue *q;
- 	int err, index;
-@@ -714,7 +717,7 @@ static int virtblk_probe(struct virtio_device *vdev)
- 
- 	/* We need an extra sg elements at head and tail. */
- 	sg_elems += 2;
--	vdev->priv = vblk = kmalloc(sizeof(*vblk), GFP_KERNEL);
-+	vdev->priv = vblk = kmalloc_node(sizeof(*vblk), GFP_KERNEL, node);
- 	if (!vblk) {
- 		err = -ENOMEM;
- 		goto out_free_index;
--- 
-2.26.2
 
+> > > > You might have noticed that I missed one possible case above: Xen/ARM
+> > > > DomU :-)
+> > > > 
+> > > > Xen/ARM domUs don't need swiotlb_xen, it is not even initialized. So if
+> > > > (xen_domain) return true; would give the wrong answer in that case.
+> > > > Linux would end up calling the "normal" dma_ops, not swiotlb-xen, and
+> > > > the "normal" dma_ops fail.
+> > > > 
+> > > > 
+> > > > The solution I suggested was to make the check in vring_use_dma_api more
+> > > > flexible by returning true if the swiotlb_xen is supposed to be used,
+> > > > not in general for all Xen domains, because that is what the check was
+> > > > really meant to do.
+> > > 
+> > > Why not fix DMA ops so they DTRT (nop) on Xen/ARM DomU? What is wrong with that?
+> > 
+> > swiotlb-xen is not used on Xen/ARM DomU, the default dma_ops are the
+> > ones that are used. So you are saying, why don't we fix the default
+> > dma_ops to work with virtio?
+> > 
+> > It is bad that the default dma_ops crash with virtio, so yes I think it
+> > would be good to fix that. However, even if we fixed that, the if
+> > (xen_domain()) check in vring_use_dma_api is still a problem.
+> 
+> Why is it a problem? It just makes virtio use DMA API.
+> If that in turn works, problem solved.
+
+You are correct in the sense that it would work. However I do think it
+is wrong for vring_use_dma_api to enable dma_ops/swiotlb-xen for Xen/ARM
+DomUs that don't need it. There are many different types of Xen guests,
+Xen x86 is drastically different from Xen ARM, it seems wrong to treat
+them the same way.
+
+
+
+Anyway, re-reading the last messages of the original thread [1], it
+looks like Peng had a clear idea on how to fix the general issue. Peng,
+what happened with that?
+
+
+[1] https://lore.kernel.org/patchwork/patch/1033801/#1222404
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
