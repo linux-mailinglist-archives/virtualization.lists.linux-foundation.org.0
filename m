@@ -2,105 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADF8120B497
-	for <lists.virtualization@lfdr.de>; Fri, 26 Jun 2020 17:32:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBBA220C670
+	for <lists.virtualization@lfdr.de>; Sun, 28 Jun 2020 08:21:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7DDF085EC2;
-	Fri, 26 Jun 2020 15:32:56 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3978F86B43;
+	Sun, 28 Jun 2020 06:21:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XzT8IwHdDKA1; Fri, 26 Jun 2020 15:32:55 +0000 (UTC)
+	with ESMTP id UfmsYvXPKJgW; Sun, 28 Jun 2020 06:21:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D233186DCD;
-	Fri, 26 Jun 2020 15:32:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7179486B51;
+	Sun, 28 Jun 2020 06:21:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9ACEBC088C;
-	Fri, 26 Jun 2020 15:32:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4B63FC016E;
+	Sun, 28 Jun 2020 06:21:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1F345C088C
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DFA76C016E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Jun 2020 15:32:54 +0000 (UTC)
+ Sun, 28 Jun 2020 06:21:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id F05FF87D6E
+ by silver.osuosl.org (Postfix) with ESMTP id C0D9920456
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Jun 2020 15:32:53 +0000 (UTC)
+ Sun, 28 Jun 2020 06:21:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ep3k2-2MN5Sj
+ with ESMTP id ZnxvkbPCT4jA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Jun 2020 15:32:53 +0000 (UTC)
+ Sun, 28 Jun 2020 06:21:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 0ACC684B89
+ by silver.osuosl.org (Postfix) with ESMTPS id 4A45620417
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Jun 2020 15:32:52 +0000 (UTC)
+ Sun, 28 Jun 2020 06:21:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593185571;
+ s=mimecast20190719; t=1593325269;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=RTWe4soL1srkDL8PEEfq928W6GWa5t1pS8aCmfU8LHE=;
- b=V27lST256CIa5i8oGei+ecIL1Um9tYgN4NIkoy/CIw3U/UfV7aif+xMT/PhbHukGJa35dN
- Uwainqe2aNNnB+2EK7QIPzdx4G3kO2sfpvq9wY1hR9fseFHBT+/fZdNAtyDzVBbOweLWly
- fea7pbQti+unTeRLJCdtmInn535VGe0=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-506-HKqRcVnsMOqk9uPxoPKwTA-1; Fri, 26 Jun 2020 11:32:47 -0400
-X-MC-Unique: HKqRcVnsMOqk9uPxoPKwTA-1
-Received: by mail-wm1-f72.google.com with SMTP id v6so9456766wmg.1
- for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Jun 2020 08:32:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=RTWe4soL1srkDL8PEEfq928W6GWa5t1pS8aCmfU8LHE=;
- b=KEbIL5kImLA0VYkjYM5zTOqGma7YqZw1sL7pUXfeiZx0eu918x5BmdACkwc+lvI708
- wonNVSZ0hltbM15GPrbg96DScMV+gz39/LOgRbhtqlqztun60A1Vj8/7jOG7fEGX4BpB
- kRF/eT84X+O7+ej04So+EQrLqncE2sbVPCzSvSGSbZS4/OsCbzPY6/W3inRG/10v2GE0
- XLB1x6cc95bHPWHdWlwwlJ5FbrceFrXTnnWEXLDRYfPpLLQgUSmgyX0vNbzjs0Z16/Y8
- aAGhGq6e5qjCL0wMY5BE6D4+fMkNJlQqIRtP3hXshRBOGzlJipV81yi+WO++jOvVT5Q5
- U9FQ==
-X-Gm-Message-State: AOAM5317qVaxDgWZjKfv1SxDfb3D5wH/RyCkEwgTDzhzoVhb1SUaA6Ut
- BNeL1KI/ehPlKwYPUXNo9insP1JFiLSHrcl7/TJlzXUNzxPgMjDYwfzPhZrEWxCYneqsklKlLpj
- GEu9Fmk75rkOvqv8ULFoQk626kduRLMcn4b727SjLPA==
-X-Received: by 2002:a5d:55cb:: with SMTP id i11mr4167960wrw.28.1593185566631; 
- Fri, 26 Jun 2020 08:32:46 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzKcm6jtqvubhG72TQoDWqW1duiFh/JDhCCKL54qZ+AftyQ9QDCAEubqgx6Fkb+6w/6lcA4Aw==
-X-Received: by 2002:a5d:55cb:: with SMTP id i11mr4167932wrw.28.1593185566346; 
- Fri, 26 Jun 2020 08:32:46 -0700 (PDT)
-Received: from redhat.com (bzq-79-182-31-92.red.bezeqint.net. [79.182.31.92])
- by smtp.gmail.com with ESMTPSA id
- 65sm18427582wma.48.2020.06.26.08.32.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2020 08:32:45 -0700 (PDT)
-Date: Fri, 26 Jun 2020 11:32:41 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
-Message-ID: <20200626110629-mutt-send-email-mst@kernel.org>
-References: <20200624091732.23944-1-peng.fan@nxp.com>
- <20200624050355-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006241047010.8121@sstabellini-ThinkPad-T480s>
- <20200624163940-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
- <20200624181026-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
+ bh=qXEDHyjjxb2rXqbcuhJROWnkr8If4Nsba+ifr6k/PsA=;
+ b=XmlALT1lUNNcx4DWDccNjDleakdBt9WVe4sUxF+kxXwWcpibospAV3If+Qbgw2poEgdeve
+ w/bkrSHg+242/lcivYI4wzUysnkarqyO2uZCpOzUR9PIi7j5FRSzxMvyaS1spx/zdB3IeV
+ vnm+gGqd2glOyv1dA4+rHbIZq55+7IU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-14-inwYdt1qNTuKEJE-ZQKttw-1; Sun, 28 Jun 2020 02:21:04 -0400
+X-MC-Unique: inwYdt1qNTuKEJE-ZQKttw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 10F4880183C;
+ Sun, 28 Jun 2020 06:21:03 +0000 (UTC)
+Received: from [10.72.13.164] (ovpn-13-164.pek2.redhat.com [10.72.13.164])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 029C35D9DD;
+ Sun, 28 Jun 2020 06:20:47 +0000 (UTC)
+Subject: Re: [PATCH] virtio: VIRTIO_F_IOMMU_PLATFORM ->
+ VIRTIO_F_ACCESS_PLATFORM
+To: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org
+References: <20200624222540.584772-1-mst@redhat.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <98668518-8641-38f9-6f38-af1a2a75b9d8@redhat.com>
+Date: Sun, 28 Jun 2020 14:20:40 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: jgross@suse.com, Peng Fan <peng.fan@nxp.com>, konrad.wilk@oracle.com,
- x86@kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, iommu@lists.linux-foundation.org,
- linux-imx@nxp.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
- linux-arm-kernel@lists.infradead.org
+In-Reply-To: <20200624222540.584772-1-mst@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Cc: kvm@vger.kernel.org, Richard Weinberger <richard@nod.at>,
+ Jeff Dike <jdike@addtoit.com>, linux-um@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, netdev@vger.kernel.org,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,144 +90,143 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jun 25, 2020 at 10:31:27AM -0700, Stefano Stabellini wrote:
-> On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
-> > On Wed, Jun 24, 2020 at 02:53:54PM -0700, Stefano Stabellini wrote:
-> > > On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
-> > > > On Wed, Jun 24, 2020 at 10:59:47AM -0700, Stefano Stabellini wrote:
-> > > > > On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
-> > > > > > On Wed, Jun 24, 2020 at 05:17:32PM +0800, Peng Fan wrote:
-> > > > > > > Export xen_swiotlb for all platforms using xen swiotlb
-> > > > > > > 
-> > > > > > > Use xen_swiotlb to determine when vring should use dma APIs to map the
-> > > > > > > ring: when xen_swiotlb is enabled the dma API is required. When it is
-> > > > > > > disabled, it is not required.
-> > > > > > > 
-> > > > > > > Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> > > > > > 
-> > > > > > Isn't there some way to use VIRTIO_F_IOMMU_PLATFORM for this?
-> > > > > > Xen was there first, but everyone else is using that now.
-> > > > > 
-> > > > > Unfortunately it is complicated and it is not related to
-> > > > > VIRTIO_F_IOMMU_PLATFORM :-(
-> > > > > 
-> > > > > 
-> > > > > The Xen subsystem in Linux uses dma_ops via swiotlb_xen to translate
-> > > > > foreign mappings (memory coming from other VMs) to physical addresses.
-> > > > > On x86, it also uses dma_ops to translate Linux's idea of a physical
-> > > > > address into a real physical address (this is unneeded on ARM.)
-> > > > > 
-> > > > > 
-> > > > > So regardless of VIRTIO_F_IOMMU_PLATFORM, dma_ops should be used on Xen/x86
-> > > > > always and on Xen/ARM if Linux is Dom0 (because it has foreign
-> > > > > mappings.) That is why we have the if (xen_domain) return true; in
-> > > > > vring_use_dma_api.
-> > > > 
-> > > > VIRTIO_F_IOMMU_PLATFORM makes guest always use DMA ops.
-> > > > 
-> > > > Xen hack predates VIRTIO_F_IOMMU_PLATFORM so it *also*
-> > > > forces DMA ops even if VIRTIO_F_IOMMU_PLATFORM is clear.
-> > > >
-> > > > Unfortunately as a result Xen never got around to
-> > > > properly setting VIRTIO_F_IOMMU_PLATFORM.
-> > > 
-> > > I don't think VIRTIO_F_IOMMU_PLATFORM would be correct for this because
-> > > the usage of swiotlb_xen is not a property of virtio,
-> > 
-> > 
-> > Basically any device without VIRTIO_F_ACCESS_PLATFORM
-> > (that is it's name in latest virtio spec, VIRTIO_F_IOMMU_PLATFORM is
-> > what linux calls it) is declared as "special, don't follow normal rules
-> > for access".
-> > 
-> > So yes swiotlb_xen is not a property of virtio, but what *is* a property
-> > of virtio is that it's not special, just a regular device from DMA POV.
-> 
-> I am trying to understand what you meant but I think I am missing
-> something.
-> 
-> Are you saying that modern virtio should always have
-> VIRTIO_F_ACCESS_PLATFORM, hence use normal dma_ops as any other devices?
-
-I am saying it's a safe default. Clear VIRTIO_F_ACCESS_PLATFORM if you
-have some special needs e.g. you are very sure it's ok to bypass DMA
-ops, or you need to support a legacy guest (produced in the window
-between virtio 1 support in 2014 and support for
-VIRTIO_F_ACCESS_PLATFORM in 2016).
-
-
-> If that is the case, how is it possible that virtio breaks on ARM using
-> the default dma_ops? The breakage is not Xen related (except that Xen
-> turns dma_ops on). The original message from Peng was:
-> 
->   vring_map_one_sg -> vring_use_dma_api
->                    -> dma_map_page
->   		       -> __swiotlb_map_page
->   		                ->swiotlb_map_page
->   				->__dma_map_area(phys_to_virt(dma_to_phys(dev, dev_addr)), size, dir);
->   However we are using per device dma area for rpmsg, phys_to_virt
->   could not return a correct virtual address for virtual address in
->   vmalloc area. Then kernel panic.
-> 
-> I must be missing something. Maybe it is because it has to do with RPMesg?
-
-I think it's an RPMesg bug, yes.
-
-> 
-> > > > > You might have noticed that I missed one possible case above: Xen/ARM
-> > > > > DomU :-)
-> > > > > 
-> > > > > Xen/ARM domUs don't need swiotlb_xen, it is not even initialized. So if
-> > > > > (xen_domain) return true; would give the wrong answer in that case.
-> > > > > Linux would end up calling the "normal" dma_ops, not swiotlb-xen, and
-> > > > > the "normal" dma_ops fail.
-> > > > > 
-> > > > > 
-> > > > > The solution I suggested was to make the check in vring_use_dma_api more
-> > > > > flexible by returning true if the swiotlb_xen is supposed to be used,
-> > > > > not in general for all Xen domains, because that is what the check was
-> > > > > really meant to do.
-> > > > 
-> > > > Why not fix DMA ops so they DTRT (nop) on Xen/ARM DomU? What is wrong with that?
-> > > 
-> > > swiotlb-xen is not used on Xen/ARM DomU, the default dma_ops are the
-> > > ones that are used. So you are saying, why don't we fix the default
-> > > dma_ops to work with virtio?
-> > > 
-> > > It is bad that the default dma_ops crash with virtio, so yes I think it
-> > > would be good to fix that. However, even if we fixed that, the if
-> > > (xen_domain()) check in vring_use_dma_api is still a problem.
-> > 
-> > Why is it a problem? It just makes virtio use DMA API.
-> > If that in turn works, problem solved.
-> 
-> You are correct in the sense that it would work. However I do think it
-> is wrong for vring_use_dma_api to enable dma_ops/swiotlb-xen for Xen/ARM
-> DomUs that don't need it. There are many different types of Xen guests,
-> Xen x86 is drastically different from Xen ARM, it seems wrong to treat
-> them the same way.
-
-I could imagine some future Xen hosts setting a flag somewhere in the
-platform capability saying "no xen specific flag, rely on
-"VIRTIO_F_ACCESS_PLATFORM". Then you set that accordingly in QEMU.
-How about that?
-
-
-> 
-> 
-> Anyway, re-reading the last messages of the original thread [1], it
-> looks like Peng had a clear idea on how to fix the general issue. Peng,
-> what happened with that?
-> 
-> 
-> [1] https://lore.kernel.org/patchwork/patch/1033801/#1222404
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvNi8yNSDkuIrljYg2OjI1LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4gUmVu
+YW1lIHRoZSBiaXQgdG8gbWF0Y2ggbGF0ZXN0IHZpcnRpbyBzcGVjLgo+IEFkZCBhIGNvbXBhdCBt
+YWNybyB0byBhdm9pZCBicmVha2luZyBleGlzdGluZyB1c2Vyc3BhY2UuCj4KPiBTaWduZWQtb2Zm
+LWJ5OiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29tPgo+IC0tLQo+ICAgYXJjaC91
+bS9kcml2ZXJzL3ZpcnRpb191bWwuYyAgICAgICB8ICAyICstCj4gICBkcml2ZXJzL3ZkcGEvaWZj
+dmYvaWZjdmZfYmFzZS5oICAgIHwgIDIgKy0KPiAgIGRyaXZlcnMvdmRwYS92ZHBhX3NpbS92ZHBh
+X3NpbS5jICAgfCAgNCArKy0tCj4gICBkcml2ZXJzL3Zob3N0L25ldC5jICAgICAgICAgICAgICAg
+IHwgIDQgKystLQo+ICAgZHJpdmVycy92aG9zdC92ZHBhLmMgICAgICAgICAgICAgICB8ICAyICst
+Cj4gICBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fYmFsbG9vbi5jICAgIHwgIDIgKy0KPiAgIGRyaXZl
+cnMvdmlydGlvL3ZpcnRpb19yaW5nLmMgICAgICAgfCAgMiArLQo+ICAgaW5jbHVkZS9saW51eC92
+aXJ0aW9fY29uZmlnLmggICAgICB8ICAyICstCj4gICBpbmNsdWRlL3VhcGkvbGludXgvdmlydGlv
+X2NvbmZpZy5oIHwgMTAgKysrKysrKy0tLQo+ICAgdG9vbHMvdmlydGlvL2xpbnV4L3ZpcnRpb19j
+b25maWcuaCB8ICAyICstCj4gICAxMCBmaWxlcyBjaGFuZ2VkLCAxOCBpbnNlcnRpb25zKCspLCAx
+NCBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9hcmNoL3VtL2RyaXZlcnMvdmlydGlvX3Vt
+bC5jIGIvYXJjaC91bS9kcml2ZXJzL3ZpcnRpb191bWwuYwo+IGluZGV4IDM1MWFlZTUyYWNhNi4u
+YTZjNGJiNmMyYzAxIDEwMDY0NAo+IC0tLSBhL2FyY2gvdW0vZHJpdmVycy92aXJ0aW9fdW1sLmMK
+PiArKysgYi9hcmNoL3VtL2RyaXZlcnMvdmlydGlvX3VtbC5jCj4gQEAgLTM4NSw3ICszODUsNyBA
+QCBzdGF0aWMgaXJxcmV0dXJuX3QgdnVfcmVxX2ludGVycnVwdChpbnQgaXJxLCB2b2lkICpkYXRh
+KQo+ICAgCQl9Cj4gICAJCWJyZWFrOwo+ICAgCWNhc2UgVkhPU1RfVVNFUl9TTEFWRV9JT1RMQl9N
+U0c6Cj4gLQkJLyogbm90IHN1cHBvcnRlZCAtIFZJUlRJT19GX0lPTU1VX1BMQVRGT1JNICovCj4g
+KwkJLyogbm90IHN1cHBvcnRlZCAtIFZJUlRJT19GX0FDQ0VTU19QTEFURk9STSAqLwo+ICAgCWNh
+c2UgVkhPU1RfVVNFUl9TTEFWRV9WUklOR19IT1NUX05PVElGSUVSX01TRzoKPiAgIAkJLyogbm90
+IHN1cHBvcnRlZCAtIFZIT1NUX1VTRVJfUFJPVE9DT0xfRl9IT1NUX05PVElGSUVSICovCj4gICAJ
+ZGVmYXVsdDoKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX2Jhc2UuaCBi
+L2RyaXZlcnMvdmRwYS9pZmN2Zi9pZmN2Zl9iYXNlLmgKPiBpbmRleCBmNDU1NDQxMmU2MDcuLjI0
+YWY0MjJiNWEzZSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfYmFzZS5o
+Cj4gKysrIGIvZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX2Jhc2UuaAo+IEBAIC0yOSw3ICsyOSw3
+IEBACj4gICAJCSAoMVVMTCA8PCBWSVJUSU9fRl9WRVJTSU9OXzEpCQkJfCBcCj4gICAJCSAoMVVM
+TCA8PCBWSVJUSU9fTkVUX0ZfU1RBVFVTKQkJCXwgXAo+ICAgCQkgKDFVTEwgPDwgVklSVElPX0Zf
+T1JERVJfUExBVEZPUk0pCQl8IFwKPiAtCQkgKDFVTEwgPDwgVklSVElPX0ZfSU9NTVVfUExBVEZP
+Uk0pCQl8IFwKPiArCQkgKDFVTEwgPDwgVklSVElPX0ZfQUNDRVNTX1BMQVRGT1JNKQkJfCBcCj4g
+ICAJCSAoMVVMTCA8PCBWSVJUSU9fTkVUX0ZfTVJHX1JYQlVGKSkKPiAgIAo+ICAgLyogT25seSBv
+bmUgcXVldWUgcGFpciBmb3Igbm93LiAqLwo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZkcGEvdmRw
+YV9zaW0vdmRwYV9zaW0uYyBiL2RyaXZlcnMvdmRwYS92ZHBhX3NpbS92ZHBhX3NpbS5jCj4gaW5k
+ZXggYzczMzRjYzY1YmIyLi5hOWJjNWUwZmIzNTMgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92ZHBh
+L3ZkcGFfc2ltL3ZkcGFfc2ltLmMKPiArKysgYi9kcml2ZXJzL3ZkcGEvdmRwYV9zaW0vdmRwYV9z
+aW0uYwo+IEBAIC01NSw3ICs1NSw3IEBAIHN0cnVjdCB2ZHBhc2ltX3ZpcnRxdWV1ZSB7Cj4gICAK
+PiAgIHN0YXRpYyB1NjQgdmRwYXNpbV9mZWF0dXJlcyA9ICgxVUxMIDw8IFZJUlRJT19GX0FOWV9M
+QVlPVVQpIHwKPiAgIAkJCSAgICAgICgxVUxMIDw8IFZJUlRJT19GX1ZFUlNJT05fMSkgIHwKPiAt
+CQkJICAgICAgKDFVTEwgPDwgVklSVElPX0ZfSU9NTVVfUExBVEZPUk0pOwo+ICsJCQkgICAgICAo
+MVVMTCA8PCBWSVJUSU9fRl9BQ0NFU1NfUExBVEZPUk0pOwo+ICAgCj4gICAvKiBTdGF0ZSBvZiBl
+YWNoIHZkcGFzaW0gZGV2aWNlICovCj4gICBzdHJ1Y3QgdmRwYXNpbSB7Cj4gQEAgLTQ1MCw3ICs0
+NTAsNyBAQCBzdGF0aWMgaW50IHZkcGFzaW1fc2V0X2ZlYXR1cmVzKHN0cnVjdCB2ZHBhX2Rldmlj
+ZSAqdmRwYSwgdTY0IGZlYXR1cmVzKQo+ICAgCXN0cnVjdCB2ZHBhc2ltICp2ZHBhc2ltID0gdmRw
+YV90b19zaW0odmRwYSk7Cj4gICAKPiAgIAkvKiBETUEgbWFwcGluZyBtdXN0IGJlIGRvbmUgYnkg
+ZHJpdmVyICovCj4gLQlpZiAoIShmZWF0dXJlcyAmICgxVUxMIDw8IFZJUlRJT19GX0lPTU1VX1BM
+QVRGT1JNKSkpCj4gKwlpZiAoIShmZWF0dXJlcyAmICgxVUxMIDw8IFZJUlRJT19GX0FDQ0VTU19Q
+TEFURk9STSkpKQo+ICAgCQlyZXR1cm4gLUVJTlZBTDsKPiAgIAo+ICAgCXZkcGFzaW0tPmZlYXR1
+cmVzID0gZmVhdHVyZXMgJiB2ZHBhc2ltX2ZlYXR1cmVzOwo+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L3Zob3N0L25ldC5jIGIvZHJpdmVycy92aG9zdC9uZXQuYwo+IGluZGV4IGU5OTJkZWNmZWM1My4u
+OGUwOTIxZDM4MDVkIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvdmhvc3QvbmV0LmMKPiArKysgYi9k
+cml2ZXJzL3Zob3N0L25ldC5jCj4gQEAgLTczLDcgKzczLDcgQEAgZW51bSB7Cj4gICAJVkhPU1Rf
+TkVUX0ZFQVRVUkVTID0gVkhPU1RfRkVBVFVSRVMgfAo+ICAgCQkJICgxVUxMIDw8IFZIT1NUX05F
+VF9GX1ZJUlRJT19ORVRfSERSKSB8Cj4gICAJCQkgKDFVTEwgPDwgVklSVElPX05FVF9GX01SR19S
+WEJVRikgfAo+IC0JCQkgKDFVTEwgPDwgVklSVElPX0ZfSU9NTVVfUExBVEZPUk0pCj4gKwkJCSAo
+MVVMTCA8PCBWSVJUSU9fRl9BQ0NFU1NfUExBVEZPUk0pCj4gICB9Owo+ICAgCj4gICBlbnVtIHsK
+PiBAQCAtMTY1Myw3ICsxNjUzLDcgQEAgc3RhdGljIGludCB2aG9zdF9uZXRfc2V0X2ZlYXR1cmVz
+KHN0cnVjdCB2aG9zdF9uZXQgKm4sIHU2NCBmZWF0dXJlcykKPiAgIAkgICAgIXZob3N0X2xvZ19h
+Y2Nlc3Nfb2soJm4tPmRldikpCj4gICAJCWdvdG8gb3V0X3VubG9jazsKPiAgIAo+IC0JaWYgKChm
+ZWF0dXJlcyAmICgxVUxMIDw8IFZJUlRJT19GX0lPTU1VX1BMQVRGT1JNKSkpIHsKPiArCWlmICgo
+ZmVhdHVyZXMgJiAoMVVMTCA8PCBWSVJUSU9fRl9BQ0NFU1NfUExBVEZPUk0pKSkgewo+ICAgCQlp
+ZiAodmhvc3RfaW5pdF9kZXZpY2VfaW90bGIoJm4tPmRldiwgdHJ1ZSkpCj4gICAJCQlnb3RvIG91
+dF91bmxvY2s7Cj4gICAJfQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L3ZkcGEuYyBiL2Ry
+aXZlcnMvdmhvc3QvdmRwYS5jCj4gaW5kZXggYTU0YjYwZDY2MjNmLi4xODg2OWEzNWQ0MDggMTAw
+NjQ0Cj4gLS0tIGEvZHJpdmVycy92aG9zdC92ZHBhLmMKPiArKysgYi9kcml2ZXJzL3Zob3N0L3Zk
+cGEuYwo+IEBAIC0zMSw3ICszMSw3IEBAIGVudW0gewo+ICAgCQkoMVVMTCA8PCBWSVJUSU9fRl9O
+T1RJRllfT05fRU1QVFkpIHwKPiAgIAkJKDFVTEwgPDwgVklSVElPX0ZfQU5ZX0xBWU9VVCkgfAo+
+ICAgCQkoMVVMTCA8PCBWSVJUSU9fRl9WRVJTSU9OXzEpIHwKPiAtCQkoMVVMTCA8PCBWSVJUSU9f
+Rl9JT01NVV9QTEFURk9STSkgfAo+ICsJCSgxVUxMIDw8IFZJUlRJT19GX0FDQ0VTU19QTEFURk9S
+TSkgfAo+ICAgCQkoMVVMTCA8PCBWSVJUSU9fRl9SSU5HX1BBQ0tFRCkgfAo+ICAgCQkoMVVMTCA8
+PCBWSVJUSU9fRl9PUkRFUl9QTEFURk9STSkgfAo+ICAgCQkoMVVMTCA8PCBWSVJUSU9fUklOR19G
+X0lORElSRUNUX0RFU0MpIHwKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aXJ0aW8vdmlydGlvX2Jh
+bGxvb24uYyBiL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19iYWxsb29uLmMKPiBpbmRleCAxZjE1N2Qy
+ZjQ5NTIuLmZjNzMwMTQwNjU0MCAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9f
+YmFsbG9vbi5jCj4gKysrIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX2JhbGxvb24uYwo+IEBAIC0x
+MTIwLDcgKzExMjAsNyBAQCBzdGF0aWMgaW50IHZpcnRiYWxsb29uX3ZhbGlkYXRlKHN0cnVjdCB2
+aXJ0aW9fZGV2aWNlICp2ZGV2KQo+ICAgCWVsc2UgaWYgKCF2aXJ0aW9faGFzX2ZlYXR1cmUodmRl
+diwgVklSVElPX0JBTExPT05fRl9QQUdFX1BPSVNPTikpCj4gICAJCV9fdmlydGlvX2NsZWFyX2Jp
+dCh2ZGV2LCBWSVJUSU9fQkFMTE9PTl9GX1JFUE9SVElORyk7Cj4gICAKPiAtCV9fdmlydGlvX2Ns
+ZWFyX2JpdCh2ZGV2LCBWSVJUSU9fRl9JT01NVV9QTEFURk9STSk7Cj4gKwlfX3ZpcnRpb19jbGVh
+cl9iaXQodmRldiwgVklSVElPX0ZfQUNDRVNTX1BMQVRGT1JNKTsKPiAgIAlyZXR1cm4gMDsKPiAg
+IH0KPiAgIAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jIGIvZHJp
+dmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYwo+IGluZGV4IDU4Yjk2YmFhOGQ0OC4uYTFhNWMyYTkx
+NDI2IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19yaW5nLmMKPiArKysgYi9k
+cml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jCj4gQEAgLTIyMjUsNyArMjIyNSw3IEBAIHZvaWQg
+dnJpbmdfdHJhbnNwb3J0X2ZlYXR1cmVzKHN0cnVjdCB2aXJ0aW9fZGV2aWNlICp2ZGV2KQo+ICAg
+CQkJYnJlYWs7Cj4gICAJCWNhc2UgVklSVElPX0ZfVkVSU0lPTl8xOgo+ICAgCQkJYnJlYWs7Cj4g
+LQkJY2FzZSBWSVJUSU9fRl9JT01NVV9QTEFURk9STToKPiArCQljYXNlIFZJUlRJT19GX0FDQ0VT
+U19QTEFURk9STToKPiAgIAkJCWJyZWFrOwo+ICAgCQljYXNlIFZJUlRJT19GX1JJTkdfUEFDS0VE
+Ogo+ICAgCQkJYnJlYWs7Cj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvdmlydGlvX2NvbmZp
+Zy5oIGIvaW5jbHVkZS9saW51eC92aXJ0aW9fY29uZmlnLmgKPiBpbmRleCBiYjRjYzQ5MTA3NTAu
+LmYyY2MyYTBkZjE3NCAxMDA2NDQKPiAtLS0gYS9pbmNsdWRlL2xpbnV4L3ZpcnRpb19jb25maWcu
+aAo+ICsrKyBiL2luY2x1ZGUvbGludXgvdmlydGlvX2NvbmZpZy5oCj4gQEAgLTE3MSw3ICsxNzEs
+NyBAQCBzdGF0aWMgaW5saW5lIGJvb2wgdmlydGlvX2hhc19pb21tdV9xdWlyayhjb25zdCBzdHJ1
+Y3QgdmlydGlvX2RldmljZSAqdmRldikKPiAgIAkgKiBOb3RlIHRoZSByZXZlcnNlIHBvbGFyaXR5
+IG9mIHRoZSBxdWlyayBmZWF0dXJlIChjb21wYXJlZCB0byBtb3N0Cj4gICAJICogb3RoZXIgZmVh
+dHVyZXMpLCB0aGlzIGlzIGZvciBjb21wYXRpYmlsaXR5IHdpdGggbGVnYWN5IHN5c3RlbXMuCj4g
+ICAJICovCj4gLQlyZXR1cm4gIXZpcnRpb19oYXNfZmVhdHVyZSh2ZGV2LCBWSVJUSU9fRl9JT01N
+VV9QTEFURk9STSk7Cj4gKwlyZXR1cm4gIXZpcnRpb19oYXNfZmVhdHVyZSh2ZGV2LCBWSVJUSU9f
+Rl9BQ0NFU1NfUExBVEZPUk0pOwo+ICAgfQo+ICAgCj4gICBzdGF0aWMgaW5saW5lCj4gZGlmZiAt
+LWdpdCBhL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fY29uZmlnLmggYi9pbmNsdWRlL3VhcGkv
+bGludXgvdmlydGlvX2NvbmZpZy5oCj4gaW5kZXggZmY4ZTdkYzlkNGRkLi5iNWVkYTA2ZjBkNTcg
+MTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb19jb25maWcuaAo+ICsrKyBi
+L2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fY29uZmlnLmgKPiBAQCAtNjcsMTMgKzY3LDE3IEBA
+Cj4gICAjZGVmaW5lIFZJUlRJT19GX1ZFUlNJT05fMQkJMzIKPiAgIAo+ICAgLyoKPiAtICogSWYg
+Y2xlYXIgLSBkZXZpY2UgaGFzIHRoZSBJT01NVSBieXBhc3MgcXVpcmsgZmVhdHVyZS4KPiAtICog
+SWYgc2V0IC0gdXNlIHBsYXRmb3JtIHRvb2xzIHRvIGRldGVjdCB0aGUgSU9NTVUuCj4gKyAqIElm
+IGNsZWFyIC0gZGV2aWNlIGhhcyB0aGUgcGxhdGZvcm0gRE1BIChlLmcuIElPTU1VKSBieXBhc3Mg
+cXVpcmsgZmVhdHVyZS4KPiArICogSWYgc2V0IC0gdXNlIHBsYXRmb3JtIERNQSB0b29scyB0byBh
+Y2Nlc3MgdGhlIG1lbW9yeS4KPiAgICAqCj4gICAgKiBOb3RlIHRoZSByZXZlcnNlIHBvbGFyaXR5
+IChjb21wYXJlZCB0byBtb3N0IG90aGVyIGZlYXR1cmVzKSwKPiAgICAqIHRoaXMgaXMgZm9yIGNv
+bXBhdGliaWxpdHkgd2l0aCBsZWdhY3kgc3lzdGVtcy4KPiAgICAqLwo+IC0jZGVmaW5lIFZJUlRJ
+T19GX0lPTU1VX1BMQVRGT1JNCQkzMwo+ICsjZGVmaW5lIFZJUlRJT19GX0FDQ0VTU19QTEFURk9S
+TQkzMwo+ICsjaWZuZGVmIF9fS0VSTkVMX18KPiArLyogTGVnYWN5IG5hbWUgZm9yIFZJUlRJT19G
+X0FDQ0VTU19QTEFURk9STSAoZm9yIGNvbXBhdGliaWxpdHkgd2l0aCBvbGQgdXNlcnNwYWNlKSAq
+Lwo+ICsjZGVmaW5lIFZJUlRJT19GX0lPTU1VX1BMQVRGT1JNCQlWSVJUSU9fRl9BQ0NFU1NfUExB
+VEZPUk0KPiArI2VuZGlmIC8qIF9fS0VSTkVMX18gKi8KPiAgIAo+ICAgLyogVGhpcyBmZWF0dXJl
+IGluZGljYXRlcyBzdXBwb3J0IGZvciB0aGUgcGFja2VkIHZpcnRxdWV1ZSBsYXlvdXQuICovCj4g
+ICAjZGVmaW5lIFZJUlRJT19GX1JJTkdfUEFDS0VECQkzNAo+IGRpZmYgLS1naXQgYS90b29scy92
+aXJ0aW8vbGludXgvdmlydGlvX2NvbmZpZy5oIGIvdG9vbHMvdmlydGlvL2xpbnV4L3ZpcnRpb19j
+b25maWcuaAo+IGluZGV4IGRiZjE0YzFlMjE4OC4uZjk5YWU0MjY2OGUwIDEwMDY0NAo+IC0tLSBh
+L3Rvb2xzL3ZpcnRpby9saW51eC92aXJ0aW9fY29uZmlnLmgKPiArKysgYi90b29scy92aXJ0aW8v
+bGludXgvdmlydGlvX2NvbmZpZy5oCj4gQEAgLTUxLDcgKzUxLDcgQEAgc3RhdGljIGlubGluZSBi
+b29sIHZpcnRpb19oYXNfaW9tbXVfcXVpcmsoY29uc3Qgc3RydWN0IHZpcnRpb19kZXZpY2UgKnZk
+ZXYpCj4gICAJICogTm90ZSB0aGUgcmV2ZXJzZSBwb2xhcml0eSBvZiB0aGUgcXVpcmsgZmVhdHVy
+ZSAoY29tcGFyZWQgdG8gbW9zdAo+ICAgCSAqIG90aGVyIGZlYXR1cmVzKSwgdGhpcyBpcyBmb3Ig
+Y29tcGF0aWJpbGl0eSB3aXRoIGxlZ2FjeSBzeXN0ZW1zLgo+ICAgCSAqLwo+IC0JcmV0dXJuICF2
+aXJ0aW9faGFzX2ZlYXR1cmUodmRldiwgVklSVElPX0ZfSU9NTVVfUExBVEZPUk0pOwo+ICsJcmV0
+dXJuICF2aXJ0aW9faGFzX2ZlYXR1cmUodmRldiwgVklSVElPX0ZfQUNDRVNTX1BMQVRGT1JNKTsK
+PiAgIH0KPiAgIAo+ICAgc3RhdGljIGlubGluZSBib29sIHZpcnRpb19pc19saXR0bGVfZW5kaWFu
+KHN0cnVjdCB2aXJ0aW9fZGV2aWNlICp2ZGV2KQoKCkFja2VkLWJ5OiBKYXNvbiBXYW5nIDxqYXNv
+d2FuZ0ByZWRoYXQuY29tPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0
+cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcv
+bWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
