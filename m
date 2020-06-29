@@ -1,101 +1,125 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 959B320C759
-	for <lists.virtualization@lfdr.de>; Sun, 28 Jun 2020 11:59:21 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id F3C1E20481;
-	Sun, 28 Jun 2020 09:59:19 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VfZmJu17Blnw; Sun, 28 Jun 2020 09:59:17 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 240182041B;
-	Sun, 28 Jun 2020 09:59:17 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EE7C6C016E;
-	Sun, 28 Jun 2020 09:59:16 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6AC71C016E
- for <virtualization@lists.linux-foundation.org>;
- Sun, 28 Jun 2020 09:59:15 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id C973A20CC0F
+	for <lists.virtualization@lfdr.de>; Mon, 29 Jun 2020 05:15:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 5281085C28
- for <virtualization@lists.linux-foundation.org>;
- Sun, 28 Jun 2020 09:59:15 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8427D88684;
+	Mon, 29 Jun 2020 03:15:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5R61OHjsSQzT; Mon, 29 Jun 2020 03:15:23 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 145DA8868D;
+	Mon, 29 Jun 2020 03:15:22 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E52AEC0865;
+	Mon, 29 Jun 2020 03:15:21 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6DA68C016E;
+ Mon, 29 Jun 2020 03:15:19 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 5C18D86F97;
+ Mon, 29 Jun 2020 03:15:19 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id t6Pd1a-wJbYX
- for <virtualization@lists.linux-foundation.org>;
- Sun, 28 Jun 2020 09:59:14 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 2476585BF7
- for <virtualization@lists.linux-foundation.org>;
- Sun, 28 Jun 2020 09:59:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593338352;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=VmSihHJRj6X8vfWMwTG8/icIb3ExyfDOJEc1XTXVyYA=;
- b=jHCc6DpOagpjF9Cv8WR0+3enIRAruR6KZ1VjQ9ieqEvMjgFEgZb9LwJ6JBH9AGkif40hHQ
- ol46PW0x+SHyiVLx7n1xYdKYfrkYxscDXjfcG9JAh7vSTYqKUUWY0SzR9sPGQI4DPaAvEQ
- gUC3jWHygR8C8sR/6b/d96i7ZDAm7UA=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-502-XQeYgwWIPnabgrX1nbH7KQ-1; Sun, 28 Jun 2020 05:58:28 -0400
-X-MC-Unique: XQeYgwWIPnabgrX1nbH7KQ-1
-Received: by mail-wr1-f71.google.com with SMTP id o25so14494036wro.16
- for <virtualization@lists.linux-foundation.org>;
- Sun, 28 Jun 2020 02:58:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=VmSihHJRj6X8vfWMwTG8/icIb3ExyfDOJEc1XTXVyYA=;
- b=A2lYCXjs7wafSDzzZQRQvuwIoPVahjLWV1beWgu4E5A21q76RIRmN0uFmgayVUZO8q
- 6fRW7ya+Dg0gTPMYRFWfC52pCT+Yr+JIO7tj2LzsDwjDwW/4CpVYZ6aWaQchpIbkgTz2
- NYj/I7bEoRvqW24Bhh9UtxJ9DvMoX3vCGAEHusEDPvEu55tDddKokcknyZWN17VOKBwb
- K/+PJEnNS0dbY6RzQw96QvbAucS0t/aD3/Ko1TsWiLjkLt0SP1O6pMo+ctTPrJOdEbV5
- nbnQBcoFRwsDWgi2uPf17B2TMgHw0CBO4693Gdzkbcfbdm99T8ARNH1/2OWdjK/0D4vd
- XBYw==
-X-Gm-Message-State: AOAM532yar/jML5jR+c87M3vLOTe1pqLG3Zvl/63XkrnG/ijS4o629QT
- LZRTWRTdAWzzMFpiJShnRhypx7anRnC3+Rwc2aEfH7kvzrG70SKKtTvZHbnSCF7RywbFhlIIAmb
- rCa03cXMyafyGp01YkAbsaMvnVtpBKnQiX/KVQRHhZg==
-X-Received: by 2002:adf:ecce:: with SMTP id s14mr12293776wro.154.1593338306924; 
- Sun, 28 Jun 2020 02:58:26 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJy9zm7MNbBULJ/q06u6nf6JrJYcvmC9jXJrOUZHqizqHorPmWVxe68u5oIzlPaBHTjmt4L6Kw==
-X-Received: by 2002:adf:ecce:: with SMTP id s14mr12293754wro.154.1593338306643; 
- Sun, 28 Jun 2020 02:58:26 -0700 (PDT)
-Received: from redhat.com (bzq-79-182-31-92.red.bezeqint.net. [79.182.31.92])
- by smtp.gmail.com with ESMTPSA id
- f2sm23259420wmj.39.2020.06.28.02.58.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Jun 2020 02:58:25 -0700 (PDT)
-Date: Sun, 28 Jun 2020 05:58:22 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH RFC 4/5] vhost-vdpa: support IOTLB batching hints
-Message-ID: <20200628054940-mutt-send-email-mst@kernel.org>
-References: <20200618055626.25660-1-jasowang@redhat.com>
- <20200618055626.25660-5-jasowang@redhat.com>
+ with ESMTP id y5Ukd6ctQoQz; Mon, 29 Jun 2020 03:15:18 +0000 (UTC)
+X-Greylist: delayed 00:15:04 by SQLgrey-1.7.6
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-eopbgr80050.outbound.protection.outlook.com [40.107.8.50])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6D5CF86F74;
+ Mon, 29 Jun 2020 03:15:17 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=aL8wxT8ULA7WFH5G8xcDuoZtllx95ZG8Oou7/uyLlz7QcdOC7lbr7W7V1ZP73APB3dvcmO6hnkfAUeJGPJbyY76CYHHkmyNMaREEdofUgQeQHhP+Us1mkLiOOSwpMHfjPfDi87TWoop0lZCa5ArAhGDevbh/tYjL1QNj/4HuthNinoNXoEh4DIeaoOc6ihKT5vWdroiB5S7Fjd5rupkSv9e8xR2Sts3c4zgpfClvxTjm9ky0hbveLMNoa0+6apM4C3JUZS14nj7vmuVBxxR2YsPDbWwDIuw/bHjMRZ+xGoGaU1+Ot+csSyXlo/wcB0PWAZZbEOBs3n3Gtfe30hu8Kg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cEkYM3WrGoh9CXGo+3w9YCuBPjOjwUC6rQ5FN+BYd+Q=;
+ b=aqKrKDEyOEfrZou1eB6GvbcYHaUFHQBdaRnV8JcR08eIOh4h82jzISYZ1zAsor5P7TzitKfWzZrpZz3P7buieHZM+HnsLJF4oqYm3jkT1hg7F7VpI6dtA9IS1UmLtQHs4JGeaXtfHYItRDM7LzIzMF4i1Vd2brIfGqCdg//K+V7L8eBCyQWycbIarWouMR95rNdDd2mHojsToSsUSovB4YVCtJReqW0Xa03umPbNcVbwpQRwMfghG7ck4+2m9agBVcYx5zzl9d82FB3GK6C+VggygChY6DC2NK49/Zo0f6U2Zb5WapPiLGIT2U2s15cUYqb+CFNFTygvOp7uokgtWg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cEkYM3WrGoh9CXGo+3w9YCuBPjOjwUC6rQ5FN+BYd+Q=;
+ b=qmk4pcuEisqTd4+4+dH8ia2k/C7g9J8/LFQncpSN9+AZLiY4QhGQRjB7jSW9SfDx4QOJDHH4V9Ag7Q+1Di5BK6YnWPt9PSDUiq1GY4bYLa9SksOItQAdNHUwpHnV4Y2Pdsw/5cLz2900b4ef4bDRTmRseKO2dMm/udvcOt+dCU0=
+Received: from DB6PR0402MB2760.eurprd04.prod.outlook.com (2603:10a6:4:a1::14)
+ by DB6PR0402MB2933.eurprd04.prod.outlook.com (2603:10a6:4:9c::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.26; Mon, 29 Jun
+ 2020 03:00:08 +0000
+Received: from DB6PR0402MB2760.eurprd04.prod.outlook.com
+ ([fe80::2d36:b569:17c:7701]) by DB6PR0402MB2760.eurprd04.prod.outlook.com
+ ([fe80::2d36:b569:17c:7701%4]) with mapi id 15.20.3131.026; Mon, 29 Jun 2020
+ 03:00:08 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Stefano Stabellini <sstabellini@kernel.org>, "Michael S. Tsirkin"
+ <mst@redhat.com>
+Subject: RE: [PATCH] xen: introduce xen_vring_use_dma
+Thread-Topic: [PATCH] xen: introduce xen_vring_use_dma
+Thread-Index: AQHWSgTusARd8c8cRkWwDit233DtZajneYoAgACU6oCAAC7QAIAAEpoAgAAGSwCAAUK2gIAFVRgQ
+Date: Mon, 29 Jun 2020 03:00:08 +0000
+Message-ID: <DB6PR0402MB2760B02A5EA92A24D5703344886E0@DB6PR0402MB2760.eurprd04.prod.outlook.com>
+References: <20200624091732.23944-1-peng.fan@nxp.com>
+ <20200624050355-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241047010.8121@sstabellini-ThinkPad-T480s>
+ <20200624163940-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
+ <20200624181026-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: kernel.org; dkim=none (message not signed)
+ header.d=none;kernel.org; dmarc=none action=none header.from=nxp.com;
+x-originating-ip: [119.31.174.71]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 13ba3640-e9ad-4e19-0273-08d81bd88847
+x-ms-traffictypediagnostic: DB6PR0402MB2933:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <DB6PR0402MB29339084D7549C71A0F58503886E0@DB6PR0402MB2933.eurprd04.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-forefront-prvs: 044968D9E1
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: q15QAvPQSN0Timky4oDpoQS5EjdrqXyUR1t7gIHO5/lII+2gdPQVQdSXSXhZlqnIolxDskOU3zxxiut6WJYFzfMoEOWmyXxCCkrmkJUDu4RPemXo/DT+xmilbdL2bDtr1mK4zk0D+ZBfixO0e+3oi3FEGBWy6wIJdve3no6VbjcKt3xeaNgMSMcObV3TcVbe34A9rMQTAwW13OGg+pSU3bcOhcaP618ZDtTdibEE/WKv1LdNtyKkrxUQUHUIsQfbq/lap48+BOfN27XzbUlcDnoJtTg0OROcVqPHqy+KtiYaAlSAN578MUzdINBTKV/2DX/+wnQyYNL/yAU/SX7fAV1ESIK6Jd+4o+cK8hCyWeLJDGotGeePClJRbt7UXruSXxt+pRzoLXiKAhVsVNm+qw==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB6PR0402MB2760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(396003)(376002)(346002)(136003)(366004)(39860400002)(316002)(76116006)(966005)(52536014)(66476007)(54906003)(66946007)(6506007)(66446008)(64756008)(66556008)(7416002)(4326008)(186003)(26005)(7696005)(2906002)(33656002)(86362001)(110136005)(45080400002)(8676002)(83080400001)(8936002)(71200400001)(83380400001)(9686003)(478600001)(44832011)(55016002)(5660300002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: rIh4hpyZRlq1oXv0Jp5uXtz/ZBRmR5fCy7P/DPCVKSUc/ZUSfpco3e197h5zPE5YrX0mUvrKaBvhrFyzRq+9kYsTkXIrfhrFiaxdUUMTeNk1AxnwEzDWrTwrDVUsqYfeb39VGV2HX6MlChnzz1Sfssl23UkXqLY4EpkUHniCtEbQqB+PbqHtC0h3po7KQdmlp8juiiCFoWhyEjahToeZhOejGxGZaMbO3PjO7gkzxgj2Vuv77kLSNTKpk8qtWRSdhboted7dHYzWMtS8oQEnkQM9QJn6kKvKlXDsVyn3kzuPDJnY/wQoNuT7r9jgj2GdeH6z+JZTztjeIrjiupnElYwagCedNMcPOXx2mTRYyv+coPNroPMnopkCFQwRGSIYdYz6BuuHHzVrl03FUD2loYS1doMczk0yWXrj+QCtwHItMAxJFbBQcPHSIS0IiLZDLGkEPYO8W9aGAfCSigmp+B+Ts5tbl3mtHZFDIytzrMb6UyVZ+IpG9Pt+WLI5COp6
 MIME-Version: 1.0
-In-Reply-To: <20200618055626.25660-5-jasowang@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: shahafs@mellanox.com, lulu@redhat.com, saugatm@xilinx.com,
- mhabets@solarflare.com, vmireyno@marvell.com, linux-kernel@vger.kernel.org,
- gdawar@xilinx.com, virtualization@lists.linux-foundation.org,
- eperezma@redhat.com, hanand@xilinx.com, zhangweining@ruijie.com.cn,
- eli@mellanox.com, lingshan.zhu@intel.com, rob.miller@broadcom.com
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB6PR0402MB2760.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13ba3640-e9ad-4e19-0273-08d81bd88847
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jun 2020 03:00:08.4686 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: WFb8Yle0owm/sFCkI7lJMnCMp8RzUFPNAIHnY7sAQRRBmHrab9Fa7cCfi1CtCu1BSYp+Oj2wBJAQ58CduENUEA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0402MB2933
+Cc: "jgross@suse.com" <jgross@suse.com>,
+ "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>,
+ "x86@kernel.org" <x86@kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
+ dl-linux-imx <linux-imx@nxp.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>,
+ "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,178 +136,147 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jun 18, 2020 at 01:56:25PM +0800, Jason Wang wrote:
-> This patches extend the vhost IOTLB API to accept batch updating hints
-> form userspace. When userspace wants update the device IOTLB in a
-> batch, it may do:
+> Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
 > 
-> 1) Write vhost_iotlb_msg with VHOST_IOTLB_BATCH_BEGIN flag
-> 2) Perform a batch of IOTLB updating via VHOST_IOTLB_UPDATE/INVALIDATE
-> 3) Write vhost_iotlb_msg with VHOST_IOTLB_BATCH_END flag
+> On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
+> > On Wed, Jun 24, 2020 at 02:53:54PM -0700, Stefano Stabellini wrote:
+> > > On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
+> > > > On Wed, Jun 24, 2020 at 10:59:47AM -0700, Stefano Stabellini wrote:
+> > > > > On Wed, 24 Jun 2020, Michael S. Tsirkin wrote:
+> > > > > > On Wed, Jun 24, 2020 at 05:17:32PM +0800, Peng Fan wrote:
+> > > > > > > Export xen_swiotlb for all platforms using xen swiotlb
+> > > > > > >
+> > > > > > > Use xen_swiotlb to determine when vring should use dma APIs
+> > > > > > > to map the
+> > > > > > > ring: when xen_swiotlb is enabled the dma API is required.
+> > > > > > > When it is disabled, it is not required.
+> > > > > > >
+> > > > > > > Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> > > > > >
+> > > > > > Isn't there some way to use VIRTIO_F_IOMMU_PLATFORM for this?
+> > > > > > Xen was there first, but everyone else is using that now.
+> > > > >
+> > > > > Unfortunately it is complicated and it is not related to
+> > > > > VIRTIO_F_IOMMU_PLATFORM :-(
+> > > > >
+> > > > >
+> > > > > The Xen subsystem in Linux uses dma_ops via swiotlb_xen to
+> > > > > translate foreign mappings (memory coming from other VMs) to
+> physical addresses.
+> > > > > On x86, it also uses dma_ops to translate Linux's idea of a
+> > > > > physical address into a real physical address (this is unneeded
+> > > > > on ARM.)
+> > > > >
+> > > > >
+> > > > > So regardless of VIRTIO_F_IOMMU_PLATFORM, dma_ops should be
+> used
+> > > > > on Xen/x86 always and on Xen/ARM if Linux is Dom0 (because it
+> > > > > has foreign
+> > > > > mappings.) That is why we have the if (xen_domain) return true;
+> > > > > in vring_use_dma_api.
+> > > >
+> > > > VIRTIO_F_IOMMU_PLATFORM makes guest always use DMA ops.
+> > > >
+> > > > Xen hack predates VIRTIO_F_IOMMU_PLATFORM so it *also* forces
+> DMA
+> > > > ops even if VIRTIO_F_IOMMU_PLATFORM is clear.
+> > > >
+> > > > Unfortunately as a result Xen never got around to properly setting
+> > > > VIRTIO_F_IOMMU_PLATFORM.
+> > >
+> > > I don't think VIRTIO_F_IOMMU_PLATFORM would be correct for this
+> > > because the usage of swiotlb_xen is not a property of virtio,
+> >
+> >
+> > Basically any device without VIRTIO_F_ACCESS_PLATFORM (that is it's
+> > name in latest virtio spec, VIRTIO_F_IOMMU_PLATFORM is what linux
+> > calls it) is declared as "special, don't follow normal rules for
+> > access".
+> >
+> > So yes swiotlb_xen is not a property of virtio, but what *is* a
+> > property of virtio is that it's not special, just a regular device from DMA POV.
+> 
+> I am trying to understand what you meant but I think I am missing something.
+> 
+> Are you saying that modern virtio should always have
+> VIRTIO_F_ACCESS_PLATFORM, hence use normal dma_ops as any other
+> devices?
+> 
+> If that is the case, how is it possible that virtio breaks on ARM using the
+> default dma_ops? The breakage is not Xen related (except that Xen turns
+> dma_ops on). The original message from Peng was:
+> 
+>   vring_map_one_sg -> vring_use_dma_api
+>                    -> dma_map_page
+>   		       -> __swiotlb_map_page
+>   		                ->swiotlb_map_page
+>   				->__dma_map_area(phys_to_virt(dma_to_phys(dev,
+> dev_addr)), size, dir);
+>   However we are using per device dma area for rpmsg, phys_to_virt
+>   could not return a correct virtual address for virtual address in
+>   vmalloc area. Then kernel panic.
+> 
+> I must be missing something. Maybe it is because it has to do with RPMesg?
 
-As long as we are extending the interface,
-is there some way we could cut down the number of system calls needed
-here?
+I am not going to fix the rpmsg issue with this patch. It is when ARM DomU
+Android os communicate with secure world trusty os using virtio, the
+vring_use_dma_api will return true for xen domu, but I no need it return
+true and fall into swiotlb.
 
+Thanks,
+Peng.
 
 > 
-> Vhost-vdpa may decide to batch the IOMMU/IOTLB updating in step 3 when
-> vDPA device support set_map() ops. This is useful for the vDPA device
-> that want to know all the mappings to tweak their own DMA translation
-> logic.
 > 
-> For vDPA device that doesn't require set_map(), no behavior changes.
+> > > > > You might have noticed that I missed one possible case above:
+> > > > > Xen/ARM DomU :-)
+> > > > >
+> > > > > Xen/ARM domUs don't need swiotlb_xen, it is not even
+> > > > > initialized. So if
+> > > > > (xen_domain) return true; would give the wrong answer in that case.
+> > > > > Linux would end up calling the "normal" dma_ops, not
+> > > > > swiotlb-xen, and the "normal" dma_ops fail.
+> > > > >
+> > > > >
+> > > > > The solution I suggested was to make the check in
+> > > > > vring_use_dma_api more flexible by returning true if the
+> > > > > swiotlb_xen is supposed to be used, not in general for all Xen
+> > > > > domains, because that is what the check was really meant to do.
+> > > >
+> > > > Why not fix DMA ops so they DTRT (nop) on Xen/ARM DomU? What is
+> wrong with that?
+> > >
+> > > swiotlb-xen is not used on Xen/ARM DomU, the default dma_ops are the
+> > > ones that are used. So you are saying, why don't we fix the default
+> > > dma_ops to work with virtio?
+> > >
+> > > It is bad that the default dma_ops crash with virtio, so yes I think
+> > > it would be good to fix that. However, even if we fixed that, the if
+> > > (xen_domain()) check in vring_use_dma_api is still a problem.
+> >
+> > Why is it a problem? It just makes virtio use DMA API.
+> > If that in turn works, problem solved.
 > 
-> This capability is advertised via VHOST_BACKEND_F_IOTLB_BATCH capability.
+> You are correct in the sense that it would work. However I do think it is wrong
+> for vring_use_dma_api to enable dma_ops/swiotlb-xen for Xen/ARM DomUs
+> that don't need it. There are many different types of Xen guests, Xen x86 is
+> drastically different from Xen ARM, it seems wrong to treat them the same
+> way.
 > 
-> Signed-off-by: Jason Wang <jasowang@redhat.com>
-> ---
->  drivers/vhost/vdpa.c             | 30 +++++++++++++++++++++++-------
->  include/uapi/linux/vhost.h       |  2 ++
->  include/uapi/linux/vhost_types.h |  7 +++++++
->  3 files changed, 32 insertions(+), 7 deletions(-)
 > 
-> diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-> index 453057421f80..8f624bbafee7 100644
-> --- a/drivers/vhost/vdpa.c
-> +++ b/drivers/vhost/vdpa.c
-> @@ -56,7 +56,9 @@ enum {
->  };
->  
->  enum {
-> -	VHOST_VDPA_BACKEND_FEATURES = (1ULL << VHOST_BACKEND_F_IOTLB_MSG_V2)
-> +	VHOST_VDPA_BACKEND_FEATURES =
-> +	(1ULL << VHOST_BACKEND_F_IOTLB_MSG_V2) |
-> +	(1ULL << VHOST_BACKEND_F_IOTLB_BATCH),
->  };
->  
->  /* Currently, only network backend w/o multiqueue is supported. */
-> @@ -77,6 +79,7 @@ struct vhost_vdpa {
->  	int virtio_id;
->  	int minor;
->  	struct eventfd_ctx *config_ctx;
-> +	int in_batch;
->  };
->  
->  static DEFINE_IDA(vhost_vdpa_ida);
-> @@ -125,6 +128,7 @@ static void vhost_vdpa_reset(struct vhost_vdpa *v)
->  	const struct vdpa_config_ops *ops = vdpa->config;
->  
->  	ops->set_status(vdpa, 0);
-> +	v->in_batch = 0;
->  }
->  
->  static long vhost_vdpa_get_device_id(struct vhost_vdpa *v, u8 __user *argp)
-> @@ -540,9 +544,10 @@ static int vhost_vdpa_map(struct vhost_vdpa *v,
->  
->  	if (ops->dma_map)
->  		r = ops->dma_map(vdpa, iova, size, pa, perm);
-> -	else if (ops->set_map)
-> -		r = ops->set_map(vdpa, dev->iotlb);
-> -	else
-> +	else if (ops->set_map) {
-> +		if (!v->in_batch)
-> +			r = ops->set_map(vdpa, dev->iotlb);
-> +	} else
->  		r = iommu_map(v->domain, iova, pa, size,
->  			      perm_to_iommu_flags(perm));
->  
-> @@ -559,9 +564,10 @@ static void vhost_vdpa_unmap(struct vhost_vdpa *v, u64 iova, u64 size)
->  
->  	if (ops->dma_map)
->  		ops->dma_unmap(vdpa, iova, size);
-> -	else if (ops->set_map)
-> -		ops->set_map(vdpa, dev->iotlb);
-> -	else
-> +	else if (ops->set_map) {
-> +		if (!v->in_batch)
-> +			ops->set_map(vdpa, dev->iotlb);
-> +	} else
->  		iommu_unmap(v->domain, iova, size);
->  }
->  
-> @@ -655,6 +661,8 @@ static int vhost_vdpa_process_iotlb_msg(struct vhost_dev *dev,
->  					struct vhost_iotlb_msg *msg)
->  {
->  	struct vhost_vdpa *v = container_of(dev, struct vhost_vdpa, vdev);
-> +	struct vdpa_device *vdpa = v->vdpa;
-> +	const struct vdpa_config_ops *ops = vdpa->config;
->  	int r = 0;
->  
->  	r = vhost_dev_check_owner(dev);
-> @@ -668,6 +676,14 @@ static int vhost_vdpa_process_iotlb_msg(struct vhost_dev *dev,
->  	case VHOST_IOTLB_INVALIDATE:
->  		vhost_vdpa_unmap(v, msg->iova, msg->size);
->  		break;
-> +	case VHOST_IOTLB_BATCH_BEGIN:
-> +		v->in_batch = true;
-> +		break;
-> +	case VHOST_IOTLB_BATCH_END:
-> +		if (v->in_batch && ops->set_map)
-> +			ops->set_map(vdpa, dev->iotlb);
-> +		v->in_batch = false;
-> +		break;
->  	default:
->  		r = -EINVAL;
->  		break;
-> diff --git a/include/uapi/linux/vhost.h b/include/uapi/linux/vhost.h
-> index 0c2349612e77..565da96f55d5 100644
-> --- a/include/uapi/linux/vhost.h
-> +++ b/include/uapi/linux/vhost.h
-> @@ -91,6 +91,8 @@
->  
->  /* Use message type V2 */
->  #define VHOST_BACKEND_F_IOTLB_MSG_V2 0x1
-> +/* IOTLB can accpet batching hints */
-
-typo
-
-> +#define VHOST_BACKEND_F_IOTLB_BATCH  0x2
->  
->  #define VHOST_SET_BACKEND_FEATURES _IOW(VHOST_VIRTIO, 0x25, __u64)
->  #define VHOST_GET_BACKEND_FEATURES _IOR(VHOST_VIRTIO, 0x26, __u64)
-> diff --git a/include/uapi/linux/vhost_types.h b/include/uapi/linux/vhost_types.h
-> index 669457ce5c48..5c12faffdde9 100644
-> --- a/include/uapi/linux/vhost_types.h
-> +++ b/include/uapi/linux/vhost_types.h
-> @@ -60,6 +60,13 @@ struct vhost_iotlb_msg {
->  #define VHOST_IOTLB_UPDATE         2
->  #define VHOST_IOTLB_INVALIDATE     3
->  #define VHOST_IOTLB_ACCESS_FAIL    4
-> +/* VHOST_IOTLB_BATCH_BEGIN is a hint that userspace will update
-> + * several mappings afterwards. VHOST_IOTLB_BATCH_END is a hint that
-> + * userspace had finished the mapping updating.
-
-
-Well not just hints - in fact updates do not take place
-until _END.
-
-How about:
-
-/* VHOST_IOTLB_BATCH_BEGIN and VHOST_IOTLB_BATCH_END allow modifying
- * multiple mappings in one go: beginning with
- * VHOST_IOTLB_BATCH_BEGIN, followed by any number of
-   VHOST_IOTLB_UPDATE messages, and ending with VHOST_IOTLB_BATCH_END.
- */
-
-
-> When those two flags
-> + * were set, kernel will ignore the rest fileds of the IOTLB message.
-
-how about:
-
-when one of these two values is used as the message type, the
-rest of the fields in the message are ignored.
-
-> + */
-> +#define VHOST_IOTLB_BATCH_BEGIN    5
-> +#define VHOST_IOTLB_BATCH_END      6
->  	__u8 type;
->  };
->  
-> -- 
-> 2.20.1
-
+> 
+> Anyway, re-reading the last messages of the original thread [1], it looks like
+> Peng had a clear idea on how to fix the general issue. Peng, what happened
+> with that?
+> 
+> 
+> [1]
+> https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.ke
+> rnel.org%2Fpatchwork%2Fpatch%2F1033801%2F%231222404&amp;data=02
+> %7C01%7Cpeng.fan%40nxp.com%7C27edb29c11da49a2249008d8192d98cc
+> %7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C0%7C637287030912707
+> 092&amp;sdata=MsF%2FLmBmJ1V%2BoOQ%2FmdhEJ3PFzH55DaSNvorRUU
+> QvBvQ%3D&amp;reserved=0
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
