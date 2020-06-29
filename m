@@ -1,88 +1,113 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 580EC20CD8E
-	for <lists.virtualization@lfdr.de>; Mon, 29 Jun 2020 11:26:55 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 415ED20CEB7
+	for <lists.virtualization@lfdr.de>; Mon, 29 Jun 2020 15:14:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id F0DF525D76;
-	Mon, 29 Jun 2020 09:26:53 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id EBB3389369;
+	Mon, 29 Jun 2020 13:14:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GqwROe2jDT9l; Mon, 29 Jun 2020 09:26:52 +0000 (UTC)
+	with ESMTP id bTNaQkJlqYRp; Mon, 29 Jun 2020 13:14:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id B447025D66;
-	Mon, 29 Jun 2020 09:26:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8530389395;
+	Mon, 29 Jun 2020 13:14:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 91C26C016E;
-	Mon, 29 Jun 2020 09:26:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 59856C08A0;
+	Mon, 29 Jun 2020 13:14:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A98FDC016E
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9718DC016E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Jun 2020 09:26:51 +0000 (UTC)
+ Mon, 29 Jun 2020 13:14:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id A523B88832
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8632589394
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Jun 2020 09:26:51 +0000 (UTC)
+ Mon, 29 Jun 2020 13:14:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id S0YpLW6+t9dd
+ with ESMTP id KIlwLbbuW1Os
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Jun 2020 09:26:50 +0000 (UTC)
+ Mon, 29 Jun 2020 13:14:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
- [209.85.221.65])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 93C8988834
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id F265E89369
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Jun 2020 09:26:50 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id z15so4521851wrl.8
- for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Jun 2020 02:26:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=2ag+08nSeSr6EqkiGuHLlAELsHQApzSuYKPqMWgc+aA=;
- b=sGVxejwGSDuSw2Q1kO4cvm5jx1DmxMYSYraHX6cHuB0RJNXu+AVUG/392jEMAZWFiN
- rqLodF1hAY1isTwa7TGAF8sPw782rX09KHEpMQdnR+ZGr7IbQN05/7Q1GhPT2X10V5bz
- Xbm+tPkA2azeZ55pSjdePfxWMcem9WNDIjN/Iv309PoMB9CapVAIiTG4zzQlT+ygA+kP
- Myn5f74stAiNV+OrA0CvqIucteZ8PjjPq3oq2c6GQZiJT75JdNsfRrbLRkZBsmjVtvs+
- 9MgsGDOI2yj9taw/BsNjwj2dixG2tsffTsOwt6S3vPEdQt/6Altn4pm/WlhI1TM/pIf5
- EKkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=2ag+08nSeSr6EqkiGuHLlAELsHQApzSuYKPqMWgc+aA=;
- b=d4c7h3trqdjchw7IFBdurV3wHfBkC+sEP7Utmr8GbSB2tlpoZlhiiSrFtcMK/5ae3j
- +si9cdF7gDQHmtuOr8+eZdVJCuF2GkkAZq1fbCTh1jpOvnCdwo4dByygMJUb4LneF/Df
- 4B4lwmTMKx+kmHjvmeK+7Zpitt4QO1tRc3kL8+srQ9fA6u7b31SGyfvApKEccmAqKK2t
- vdO3+KcOmK2WChoNJd+HSj3MO8tgkPRXX7f1hr6tAbeVu4ogvc+lJdpjLlUyP3uLl+sj
- eQgjp1eAxR+FevX+y1F480ZhrBP+HqINUvLIf0c61ChBT/kUxD+NqqB3P0IAz/vj07Ds
- mLdA==
-X-Gm-Message-State: AOAM530XquQecIxpg5knFcbjOGGeiZuo8VC5qcOw4K4bhQ06MYg2VjD5
- Q0L5zItIFh8x5HpTGZtmZFA=
-X-Google-Smtp-Source: ABdhPJw2AMURrJPby179MwG4mhz9UG670amev/bcvGRiECK4d8FyEybeGQpKxfxKTP0KVngy0h617A==
-X-Received: by 2002:a5d:4603:: with SMTP id t3mr17395732wrq.38.1593422809180; 
- Mon, 29 Jun 2020 02:26:49 -0700 (PDT)
-Received: from localhost ([51.15.41.238])
- by smtp.gmail.com with ESMTPSA id l18sm19774398wrm.52.2020.06.29.02.26.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2020 02:26:48 -0700 (PDT)
-Date: Mon, 29 Jun 2020 10:26:46 +0100
-From: Stefan Hajnoczi <stefanha@gmail.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [RFC 0/3] virtio: NUMA-aware memory allocation
-Message-ID: <20200629092646.GC31392@stefanha-x1.localdomain>
-References: <20200625135752.227293-1-stefanha@redhat.com>
- <9cd725b5-4954-efd9-4d1b-3a448a436472@redhat.com>
+ Mon, 29 Jun 2020 13:14:29 +0000 (UTC)
+Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 05TDDoaj110929; Mon, 29 Jun 2020 09:14:22 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 31ycg2j394-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 29 Jun 2020 09:14:22 -0400
+Received: from m0098419.ppops.net (m0098419.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 05TD5mQt066402;
+ Mon, 29 Jun 2020 09:14:21 -0400
+Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.98])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 31ycg2j386-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 29 Jun 2020 09:14:21 -0400
+Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
+ by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05TDB5tJ007572;
+ Mon, 29 Jun 2020 13:14:19 GMT
+Received: from b06avi18626390.portsmouth.uk.ibm.com
+ (b06avi18626390.portsmouth.uk.ibm.com [9.149.26.192])
+ by ppma03ams.nl.ibm.com with ESMTP id 31wwr8ac50-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 29 Jun 2020 13:14:19 +0000
+Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
+ [9.149.105.61])
+ by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
+ id 05TDCvaS59965942
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 29 Jun 2020 13:12:57 GMT
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id DC98A11C04C;
+ Mon, 29 Jun 2020 13:14:16 +0000 (GMT)
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 11FC011C058;
+ Mon, 29 Jun 2020 13:14:05 +0000 (GMT)
+Received: from oc3016276355.ibm.com (unknown [9.145.28.234])
+ by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Mon, 29 Jun 2020 13:14:04 +0000 (GMT)
+Subject: Re: [PATCH v3 1/1] s390: virtio: let arch accept devices without
+ IOMMU feature
+To: Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>
+References: <1592390637-17441-1-git-send-email-pmorel@linux.ibm.com>
+ <1592390637-17441-2-git-send-email-pmorel@linux.ibm.com>
+ <20200618002956.5f179de4.pasic@linux.ibm.com>
+ <20200619112051.74babdb1.cohuck@redhat.com>
+From: Pierre Morel <pmorel@linux.ibm.com>
+Message-ID: <7fe6e9ab-fd5a-3f92-1f3a-f9e6805d3730@linux.ibm.com>
+Date: Mon, 29 Jun 2020 15:14:04 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <9cd725b5-4954-efd9-4d1b-3a448a436472@redhat.com>
-Cc: virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
- Stefan Hajnoczi <stefanha@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>
+In-Reply-To: <20200619112051.74babdb1.cohuck@redhat.com>
+Content-Language: en-US
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
+ definitions=2020-06-29_11:2020-06-29,
+ 2020-06-29 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxscore=0 bulkscore=0
+ mlxlogscore=999 priorityscore=1501 suspectscore=0 clxscore=1015
+ adultscore=0 malwarescore=0 cotscore=-2147483648 spamscore=0
+ impostorscore=0 lowpriorityscore=0 phishscore=0 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.12.0-2004280000
+ definitions=main-2006290089
+Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
+ kvm@vger.kernel.org, mst@redhat.com, heiko.carstens@de.ibm.com,
+ linuxram@us.ibm.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, borntraeger@de.ibm.com,
+ thomas.lendacky@amd.com, david@gibson.dropbear.id.au
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,107 +119,85 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3542228649958609992=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 
---===============3542228649958609992==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="m51xatjYGsM+13rf"
-Content-Disposition: inline
+
+On 2020-06-19 11:20, Cornelia Huck wrote:
+> On Thu, 18 Jun 2020 00:29:56 +0200
+> Halil Pasic <pasic@linux.ibm.com> wrote:
+> 
+>> On Wed, 17 Jun 2020 12:43:57 +0200
+>> Pierre Morel <pmorel@linux.ibm.com> wrote:
+...
+>>
+>> But since this can be rewritten any time, let's go with the option
+>> people already agree with, instead of more discussion.
+> 
+> Yes, there's nothing wrong with the patch as-is.
+> 
+> Acked-by: Cornelia Huck <cohuck@redhat.com>
+
+Thanks,
 
 
---m51xatjYGsM+13rf
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> 
+> Which tree should this go through? Virtio? s390? >
+>>
+>> Just another question. Do we want this backported? Do we need cc stable?
+> 
+> It does change behaviour of virtio-ccw devices; but then, it only
+> fences off configurations that would not have worked anyway.
+> Distributions should probably pick this; but I do not consider it
+> strictly a "fix" (more a mitigation for broken configurations), so I'm
+> not sure whether stable applies.
+> 
+>> [..]
+>>
+>>
+>>>   int virtio_finalize_features(struct virtio_device *dev)
+>>>   {
+>>>   	int ret = dev->config->finalize_features(dev);
+>>> @@ -179,6 +194,13 @@ int virtio_finalize_features(struct virtio_device *dev)
+>>>   	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1))
+>>>   		return 0;
+>>>   
+>>> +	if (arch_needs_virtio_iommu_platform(dev) &&
+>>> +		!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM)) {
+>>> +		dev_warn(&dev->dev,
+>>> +			 "virtio: device must provide VIRTIO_F_IOMMU_PLATFORM\n");
+>>
+>> I'm not sure, divulging the current Linux name of this feature bit is a
+>> good idea, but if everybody else is fine with this, I don't care that
+> 
+> Not sure if that feature name will ever change, as it is exported in
+> headers. At most, we might want to add the new ACCESS_PLATFORM define
+> and keep the old one, but that would still mean some churn.
+> 
+>> much. An alternative would be:
+>> "virtio: device falsely claims to have full access to the memory,
+>> aborting the device"
+> 
+> "virtio: device does not work with limited memory access" ?
+> 
+> But no issue with keeping the current message.
+> 
 
-On Sun, Jun 28, 2020 at 02:34:37PM +0800, Jason Wang wrote:
->=20
-> On 2020/6/25 =E4=B8=8B=E5=8D=889:57, Stefan Hajnoczi wrote:
-> > These patches are not ready to be merged because I was unable to measur=
-e a
-> > performance improvement. I'm publishing them so they are archived in ca=
-se
-> > someone picks up this work again in the future.
-> >=20
-> > The goal of these patches is to allocate virtqueues and driver state fr=
-om the
-> > device's NUMA node for optimal memory access latency. Only guests with =
-a vNUMA
-> > topology and virtio devices spread across vNUMA nodes benefit from this=
-=2E  In
-> > other cases the memory placement is fine and we don't need to take NUMA=
- into
-> > account inside the guest.
-> >=20
-> > These patches could be extended to virtio_net.ko and other devices in t=
-he
-> > future. I only tested virtio_blk.ko.
-> >=20
-> > The benchmark configuration was designed to trigger worst-case NUMA pla=
-cement:
-> >   * Physical NVMe storage controller on host NUMA node 0
-> >   * IOThread pinned to host NUMA node 0
-> >   * virtio-blk-pci device in vNUMA node 1
-> >   * vCPU 0 on host NUMA node 1 and vCPU 1 on host NUMA node 0
-> >   * vCPU 0 in vNUMA node 0 and vCPU 1 in vNUMA node 1
-> >=20
-> > The intent is to have .probe() code run on vCPU 0 in vNUMA node 0 (host=
- NUMA
-> > node 1) so that memory is in the wrong NUMA node for the virtio-blk-pci=
- devic=3D
-> > e.
-> > Applying these patches fixes memory placement so that virtqueues and dr=
-iver
-> > state is allocated in vNUMA node 1 where the virtio-blk-pci device is l=
-ocated.
-> >=20
-> > The fio 4KB randread benchmark results do not show a significant improv=
-ement:
-> >=20
-> > Name                  IOPS   Error
-> > virtio-blk        42373.79 =3DC2=3DB1 0.54%
-> > virtio-blk-numa   42517.07 =3DC2=3DB1 0.79%
->=20
->=20
-> I remember I did something similar in vhost by using page_to_nid() for
-> descriptor ring. And I get little improvement as shown here.
->=20
-> Michael reminds that it was probably because all data were cached. So I
-> doubt if the test lacks sufficient stress on the cache ...
+If it is OK, I would like to specify that the arch is responsible to 
+accept or not the device.
+The reason why the device is not accepted without IOMMU_PLATFORM is arch 
+specific.
 
-Yes, that sounds likely. If there's no real-world performance
-improvement then I'm happy to leave these patches unmerged.
+Regards,
+Pierre
 
-Stefan
-
---m51xatjYGsM+13rf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl75s9YACgkQnKSrs4Gr
-c8jAlQgAkxcrX8BwizJMukF4LIVrZHVVDcZjCvl+WEazZ8s6RpSCMj1yeg1wyplH
-lt34UesBkGMWTyRQPfQTC16lAQy9hn1nPLhrqyFPk9oiQUEK9Kzf5j7I3JnLVNnI
-jBGARfiyb0nKnhfqx0y/ixeAOLDNf9d2swoEc4lnqCo584dlMliJLIC/2jE7AvwF
-M6xsrjW6JNxLuV4shp0CaWVgsPd/6OR8PMPy9XatWVPgyF9fpPn6pZJsb6B8d+gL
-8lCvNa0+Deq/ruy67yyzenpuqvyMmA11HeQocFFqIvaEdCHA6QCGil0fmXVb0Ile
-4X2GnES1wsHbGId3ofPrpM4rjxm7Rw==
-=IwcF
------END PGP SIGNATURE-----
-
---m51xatjYGsM+13rf--
-
---===============3542228649958609992==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+-- 
+Pierre Morel
+IBM Lab Boeblingen
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============3542228649958609992==--
