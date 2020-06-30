@@ -2,60 +2,61 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8E9220FABA
-	for <lists.virtualization@lfdr.de>; Tue, 30 Jun 2020 19:38:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4752120FABB
+	for <lists.virtualization@lfdr.de>; Tue, 30 Jun 2020 19:38:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 8B7E588684;
-	Tue, 30 Jun 2020 17:38:08 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E87C988573;
+	Tue, 30 Jun 2020 17:38:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MG+NH08S5cAd; Tue, 30 Jun 2020 17:38:08 +0000 (UTC)
+	with ESMTP id bzuQunB0LtMa; Tue, 30 Jun 2020 17:38:12 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1E79B88573;
-	Tue, 30 Jun 2020 17:38:08 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 62D50884D9;
+	Tue, 30 Jun 2020 17:38:12 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F2A16C016E;
-	Tue, 30 Jun 2020 17:38:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B233C016E;
+	Tue, 30 Jun 2020 17:38:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8C7F9C016E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DB5EAC016E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 17:38:07 +0000 (UTC)
+ Tue, 30 Jun 2020 17:38:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8739C884D9
+ by whitealder.osuosl.org (Postfix) with ESMTP id C55AB87E81
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 17:38:07 +0000 (UTC)
+ Tue, 30 Jun 2020 17:38:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 51PcZG8tk5Il
+ with ESMTP id bDPIFqpyLFZH
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 17:38:05 +0000 (UTC)
+ Tue, 30 Jun 2020 17:38:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id C539888573
+ by whitealder.osuosl.org (Postfix) with ESMTPS id C8E4087E9D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 17:38:05 +0000 (UTC)
+ Tue, 30 Jun 2020 17:38:09 +0000 (UTC)
 Received: from localhost.localdomain (236.31.169.217.in-addr.arpa
  [217.169.31.236])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 15CD02081A;
- Tue, 30 Jun 2020 17:38:01 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 15E0320775;
+ Tue, 30 Jun 2020 17:38:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1593538685;
- bh=KoohMc4oy1OYchUtZSZ/5o8eYoZ+TwF900MK61ip/x8=;
+ s=default; t=1593538689;
+ bh=E1Ph3cAM0mY7L1JWC8UA/II6dSTm9kJ1ebZbi07WtBg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bOU7umLf3Z1uBZ24e0ZbXikzdqMjGZ7XV3SbHT8TKFMcTTlt1d/f4ORiTl8UzYR7/
- Fw2LCdkMA9w64wei4ys3rJl+HTcDwEFvhhy2IKgPAM8i1Aas9vi9XI8zbU6rrM41su
- yU4JiYBlrHL6Q/tg55fyLpDeVp0PzdtvfIoUktIk=
+ b=vj/KrWTnlk4XAguMyTOraTs+gMe5ReW5aFYgFgpnOE2GOjJg7HPA/8nPH2EwqmY6b
+ aMvCLHU4CBn9eq91Y7dJej2UXQ3Nmd5KJbrCl7n+OdzQY1BYWXlUW3M/WnTtNipoJQ
+ 1fvmhXcC5jTnuR4yg2PceePJsdSFxM0NHWXDmk/8=
 From: Will Deacon <will@kernel.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 05/18] asm/rwonce: Remove smp_read_barrier_depends() invocation
-Date: Tue, 30 Jun 2020 18:37:21 +0100
-Message-Id: <20200630173734.14057-6-will@kernel.org>
+Subject: [PATCH 06/18] vhost: Remove redundant use of read_barrier_depends()
+ barrier
+Date: Tue, 30 Jun 2020 18:37:22 +0100
+Message-Id: <20200630173734.14057-7-will@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200630173734.14057-1-will@kernel.org>
 References: <20200630173734.14057-1-will@kernel.org>
@@ -88,62 +89,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Alpha overrides __READ_ONCE() directly, so there's no need to use
-smp_read_barrier_depends() in the core code. This also means that
-__READ_ONCE() can be relied upon to provide dependency ordering.
+Since commit 76ebbe78f739 ("locking/barriers: Add implicit
+smp_read_barrier_depends() to READ_ONCE()"), there is no need to use
+smp_read_barrier_depends() outside of the Alpha architecture code.
 
+Unfortunately, there is precisely _one_ user in the vhost code, and
+there isn't an obvious READ_ONCE() access making the barrier
+redundant. However, on closer inspection (thanks, Jason), it appears
+that vring synchronisation between the producer and consumer occurs via
+the 'avail_idx' field, which is followed up by an rmb() in
+vhost_get_vq_desc(), making the read_barrier_depends() redundant on
+Alpha.
+
+Jason says:
+
+  | I'm also confused about the barrier here, basically in driver side
+  | we did:
+  |
+  | 1) allocate pages
+  | 2) store pages in indirect->addr
+  | 3) smp_wmb()
+  | 4) increase the avail idx (somehow a tail pointer of vring)
+  |
+  | in vhost we did:
+  |
+  | 1) read avail idx
+  | 2) smp_rmb()
+  | 3) read indirect->addr
+  | 4) read from indirect->addr
+  |
+  | It looks to me even the data dependency barrier is not necessary
+  | since we have rmb() which is sufficient for us to the correct
+  | indirect->addr and driver are not expected to do any writing to
+  | indirect->addr after avail idx is increased
+
+Remove the redundant barrier invocation.
+
+Suggested-by: Jason Wang <jasowang@redhat.com>
 Acked-by: Paul E. McKenney <paulmck@kernel.org>
 Signed-off-by: Will Deacon <will@kernel.org>
 ---
- include/asm-generic/rwonce.h | 19 ++++---------------
- 1 file changed, 4 insertions(+), 15 deletions(-)
+ drivers/vhost/vhost.c | 5 -----
+ 1 file changed, 5 deletions(-)
 
-diff --git a/include/asm-generic/rwonce.h b/include/asm-generic/rwonce.h
-index f9dfa88fc04d..cc810f1f18ca 100644
---- a/include/asm-generic/rwonce.h
-+++ b/include/asm-generic/rwonce.h
-@@ -30,24 +30,16 @@
- 
- /*
-  * Use __READ_ONCE() instead of READ_ONCE() if you do not require any
-- * atomicity or dependency ordering guarantees. Note that this may result
-- * in tears!
-+ * atomicity. Note that this may result in tears!
-  */
- #ifndef __READ_ONCE
- #define __READ_ONCE(x)	(*(const volatile __unqual_scalar_typeof(x) *)&(x))
- #endif
- 
--#define __READ_ONCE_SCALAR(x)						\
--({									\
--	__unqual_scalar_typeof(x) __x = __READ_ONCE(x);			\
--	smp_read_barrier_depends();					\
--	(typeof(x))__x;							\
--})
+diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+index d7b8df3edffc..74d135ee7e26 100644
+--- a/drivers/vhost/vhost.c
++++ b/drivers/vhost/vhost.c
+@@ -2092,11 +2092,6 @@ static int get_indirect(struct vhost_virtqueue *vq,
+ 		return ret;
+ 	}
+ 	iov_iter_init(&from, READ, vq->indirect, ret, len);
 -
- #define READ_ONCE(x)							\
- ({									\
- 	compiletime_assert_rwonce_type(x);				\
--	__READ_ONCE_SCALAR(x);						\
-+	__READ_ONCE(x);							\
- })
- 
- #define __WRITE_ONCE(x, val)						\
-@@ -74,12 +66,9 @@ unsigned long __read_once_word_nocheck(const void *addr)
-  */
- #define READ_ONCE_NOCHECK(x)						\
- ({									\
--	unsigned long __x;						\
--	compiletime_assert(sizeof(x) == sizeof(__x),			\
-+	compiletime_assert(sizeof(x) == sizeof(unsigned long),		\
- 		"Unsupported access size for READ_ONCE_NOCHECK().");	\
--	__x = __read_once_word_nocheck(&(x));				\
--	smp_read_barrier_depends();					\
--	(typeof(x))__x;							\
-+	(typeof(x))__read_once_word_nocheck(&(x));			\
- })
- 
- static __no_kasan_or_inline
+-	/* We will use the result as an address to read from, so most
+-	 * architectures only need a compiler barrier here. */
+-	read_barrier_depends();
+-
+ 	count = len / sizeof desc;
+ 	/* Buffers are chained via a 16 bit next field, so
+ 	 * we can have at most 2^16 of these. */
 -- 
 2.27.0.212.ge8ba1cc988-goog
 
