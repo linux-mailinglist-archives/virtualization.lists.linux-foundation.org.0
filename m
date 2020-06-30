@@ -1,84 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 802BB20FC80
-	for <lists.virtualization@lfdr.de>; Tue, 30 Jun 2020 21:11:58 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id E266720FCBC
+	for <lists.virtualization@lfdr.de>; Tue, 30 Jun 2020 21:25:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 38AC58830D;
-	Tue, 30 Jun 2020 19:11:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3EB94228D1;
+	Tue, 30 Jun 2020 19:25:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id touAHEddqLeh; Tue, 30 Jun 2020 19:11:56 +0000 (UTC)
+	with ESMTP id QGxbZkFCOg9c; Tue, 30 Jun 2020 19:25:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B1CC688311;
-	Tue, 30 Jun 2020 19:11:56 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 8EC09228A7;
+	Tue, 30 Jun 2020 19:25:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 889B5C016E;
-	Tue, 30 Jun 2020 19:11:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 68494C016E;
+	Tue, 30 Jun 2020 19:25:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8D245C016E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DDCA2C016E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:11:55 +0000 (UTC)
+ Tue, 30 Jun 2020 19:25:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 7B84B8830D
+ by hemlock.osuosl.org (Postfix) with ESMTP id C445A8868D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:11:55 +0000 (UTC)
+ Tue, 30 Jun 2020 19:25:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fbHFjO7jRJGc
+ with ESMTP id XSmjJar9S7sm
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:11:53 +0000 (UTC)
+ Tue, 30 Jun 2020 19:25:24 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.135])
- by hemlock.osuosl.org (Postfix) with ESMTPS id CD4C4882B2
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 157EE88600
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:11:52 +0000 (UTC)
+ Tue, 30 Jun 2020 19:25:23 +0000 (UTC)
 Received: from mail-qv1-f41.google.com ([209.85.219.41]) by
- mrelayeu.kundenserver.de (mreue010 [212.227.15.129]) with ESMTPSA (Nemesis)
- id 1MYNaE-1jL7OJ35MY-00VT1F for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 21:11:49 +0200
-Received: by mail-qv1-f41.google.com with SMTP id dm12so9788446qvb.9
+ mrelayeu.kundenserver.de (mreue011 [212.227.15.129]) with ESMTPSA (Nemesis)
+ id 1MIdNt-1jdzwT429V-00EaeW for <virtualization@lists.linux-foundation.org>;
+ Tue, 30 Jun 2020 21:25:21 +0200
+Received: by mail-qv1-f41.google.com with SMTP id e3so3505864qvo.10
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 12:11:49 -0700 (PDT)
-X-Gm-Message-State: AOAM533+5QnQCuFdI9V4e2dHyilEtNi/0kxwtAZrsj7+d0qR/YcJ96PH
- XQGGNZdykmjxQ1IqOCXkDUnb4OQTFPzsG9Zqj5w=
-X-Google-Smtp-Source: ABdhPJy8Dn8rL1I0U5RYNNkDb6apYhSxF/cek48EVCvK4tcGtsr9BI41NIYfCMTIzNjQg3sijIRh8LwqEplBMOYW8s8=
-X-Received: by 2002:a05:6214:846:: with SMTP id
- dg6mr20327019qvb.210.1593544308407; 
- Tue, 30 Jun 2020 12:11:48 -0700 (PDT)
+ Tue, 30 Jun 2020 12:25:20 -0700 (PDT)
+X-Gm-Message-State: AOAM531aMQQBbQMCH9Z3wOa1c3gKh260OfAXlHJTYbnvl0zib+HKaWra
+ maqFD3eo1BxIzT/SAYXJrupYrkzmMZnVtCq80vE=
+X-Google-Smtp-Source: ABdhPJx+lRE51JRL6fCvRnoLPfTGDuD4BIZlGSJkoIdVSw7mHYOQQlzJvl0jgp7ZS50oAcVKQOmUzXKXW4PZLLmEroY=
+X-Received: by 2002:a0c:ba0e:: with SMTP id w14mr21638836qvf.222.1593545119567; 
+ Tue, 30 Jun 2020 12:25:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200630173734.14057-1-will@kernel.org>
- <20200630173734.14057-3-will@kernel.org>
-In-Reply-To: <20200630173734.14057-3-will@kernel.org>
+ <20200630173734.14057-19-will@kernel.org>
+In-Reply-To: <20200630173734.14057-19-will@kernel.org>
 From: Arnd Bergmann <arnd@arndb.de>
-Date: Tue, 30 Jun 2020 21:11:32 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a136e2k-iGoJ4X51mnj0f0KSLJKOw6b=s4F2QHHeyAMEQ@mail.gmail.com>
-Message-ID: <CAK8P3a136e2k-iGoJ4X51mnj0f0KSLJKOw6b=s4F2QHHeyAMEQ@mail.gmail.com>
-Subject: Re: [PATCH 02/18] compiler.h: Split {READ, WRITE}_ONCE definitions out
- into rwonce.h
+Date: Tue, 30 Jun 2020 21:25:03 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a2zB4z121reuy6BCqQ3-1mDBAkUkRRXeDuvSFtSr3ha2g@mail.gmail.com>
+Message-ID: <CAK8P3a2zB4z121reuy6BCqQ3-1mDBAkUkRRXeDuvSFtSr3ha2g@mail.gmail.com>
+Subject: Re: [PATCH 18/18] arm64: lto: Strengthen READ_ONCE() to acquire when
+ CLANG_LTO=y
 To: Will Deacon <will@kernel.org>
-X-Provags-ID: V03:K1:CUIbbfICcL5Btznld94914yuQ8x8Bym0/+tgJRbANuXN+hEgtWt
- frG85e9q3zY/pp5pSLnjmcG89kB9SRLGJSKQUMCmEIe556pxLPkJj1J/gbiYKodRMnDAWgp
- 0WgzpJAI278IgMKSauLh8cDhWFTjwmN1nVygB6Zvu8JibjUfBDHj+vL4HNIfdN97TZSVyNv
- KHuZFfQH0qM935swyemIw==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:FPVSr9GbCR0=:bd/XXbeQo3yHRHHMuTWbKN
- 3OQffkNx0su4tbQwep4EOoRdw6sw7Tc+4RcdzCA+1Ce1esMOZWdIttPmyx2B3FxIwZQYqtTC1
- 9jGlXexem9cEgy65DSKE+M4r0wsU4o7Gna4Qd7OZg8/bCtWc94B4v7aEcyVfbIAC0BdoytqEJ
- EIlTCiWnnjsDIP+i8OFnKVtbL0Pa8XCDWSmffYrsIz25loVYy5vw6GwaF5fFewq/Nxq+lRzEd
- 9WMI94/L+4bPD8SfGTwUgL0qj1hRu0DiD8SuqN1PP1jbu1m8U/lSuEgjfw4saiZ81CNF4YrO5
- AZMNX8AyUwI1Q5nvECXYD8ZNie40mVbxcbV79q1L6xb/iWB+IjlTzExHSemuADRcvPI+4cf+R
- Vij9VxLum5peeNZtft0/e2fBeY6UM/GghK4Hw16BSZYCuigeTjnog0/keZKQ4dHFr0mJZE7FX
- 1l3Qmvk8JxnYssgUeb15UIMTmTVI7OBSZ02G6SI3McwTeNz67/TSYrweeN2I8OrYJDTAFTdtG
- w69xBRN6lb+JluV+CH9PqS8h/W/FxSymJEF6an6gj2pXHZ7PNi1T7cJzx/VcZlBXwoqXeKk/6
- Xi4g16uDI9ZzWLhfOZJX5orzwd2R8zzJ7fOhPJQsgDKn41hFTJSfAtiEWMm47lVF9CAhy2sKM
- qBrNRdCjKke8b+cNyrtRmYa5egrAqWx0LZoyOg/iBX9sAt1pDBXzfj5Y57prjVz7H5IWw9WrQ
- OeKLd2O+kQlNxQQN0mUOH6OSs2+1jLKCXcewUjvRV238deIrgdVzzNT0Zr79hjj96JX881ClD
- 4WgH2AQrCbLHJEFH0UrCQ7PxFv0TJ765AHy1SXfer2mQfZZYTw=
+X-Provags-ID: V03:K1:9EnBVfWeAz8cUrX3dB2qQB+V6W9w39r1xqOv9MUzDW/miBH8tY3
+ eeHVjtlOvR7lLlr9/X2HJdYa9iM0hDa8TrhMaLiWFlynKlCoblMRJsSx/7LFSns1kag73iU
+ UjCAYekGbr4U0/o6U4L92n/le9b+WOX3SFSi3SAwbp3ReZ9yCFwnUuWiWaPFNy997S955v5
+ i1hkkW3rMbv+AXA+uudyg==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:7TFBBmM/PB8=:YmmT/Tn9GtfH4Xg1eI3xFj
+ N4XkXxiU8B0KAFQ7vBoDgx7LWauD4dL5FWearkD+gQGmcl0UNhGrZj9RpzZVihGW7kjI0Zpqa
+ hPg+YzA/mLwIoa9SDED/JqhSbV2AtgixKqK5N4ujOKlYMV9C/l5ZJcb3Bw5Xt2PL+ir01BTh0
+ JoQ5dgWrKyKydefp1nr3CZw+gV3LkYoEm6Eb+0XlAy36lo2kiLIISzUsNPxoIWtkQeYMeCuBW
+ I86UkaKGOLY9a+p0/cWP/RepGe38s67komP2oiDTQfoU2sM/UgrC1aCUyZdFF83W3ZmutPvIn
+ qhk8ez1O25kx5fUVt5zIcoh9e1SYLcQTLhmXzQkGjb7uHYVCxh/MRPoJE5seVnbLEQybangSd
+ +Nh2VFcWdwCKNL8/JKoZs2SdfnChJ6eFwAK0E+TWH+y0FmIEbusqSxCroca4jU4aZ6qAuFJeR
+ GS6wXY13I00+AtFimAycBr7YVVrETOPwmcEHNoa4TI3YHDKuZ35/XTJkPNt977DRgC4+9+xcK
+ f/XZE3ut0bvmAw/muhNgzAsr9r8JF3TBlGGPTXwwLUHYv6Ak6coqac+sD+jwfa+SJ2ctMwuSK
+ sg9SwYhDXJyDUgiMDuqjkDTzrLlqsiziMgPeC4DZB4V67rNApAbjKO+/lqOljhrg+dWexI4rl
+ 4pcs4TSYhL5tGyP2XXxtaZflV9IB2UtU3N+a5b3O27H7o6BO2aqsg+XTNQRtuZkr3afUZ8vCt
+ iaOSFX3mfIxGSN3ulLi6y96RpVurTvswZlA0HHS9AI2Cm20mwtxhQJbHq5wg02OAcwPI56vQc
+ blpNEa35NzBBAJGtKwlvH2O0gUrRbW1pxzUKsrgmxlsjDT1rVg=
 Cc: Mark Rutland <mark.rutland@arm.com>, Marco Elver <elver@google.com>,
  Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
  "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
@@ -110,26 +109,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jun 30, 2020 at 7:37 PM Will Deacon <will@kernel.org> wrote:
->
-> In preparation for allowing architectures to define their own
-> implementation of the READ_ONCE() macro, move the generic
-> {READ,WRITE}_ONCE() definitions out of the unwieldy 'linux/compiler.h'
-> file and into a new 'rwonce.h' header under 'asm-generic'.
->
-> Acked-by: Paul E. McKenney <paulmck@kernel.org>
-> Signed-off-by: Will Deacon <will@kernel.org>
-> ---
->  include/asm-generic/Kbuild   |  1 +
->  include/asm-generic/rwonce.h | 91 ++++++++++++++++++++++++++++++++++++
->  include/linux/compiler.h     | 83 +-------------------------------
+On Tue, Jun 30, 2020 at 7:39 PM Will Deacon <will@kernel.org> wrote:
+> +#define __READ_ONCE(x)                                                 \
+> +({                                                                     \
+> +       int atomic = 1;                                                 \
+> +       union { __unqual_scalar_typeof(x) __val; char __c[1]; } __u;    \
+> +       typeof(&(x)) __x = &(x);                                        \
+> +       switch (sizeof(x)) {                                            \
+...
+> +       atomic ? (typeof(x))__u.__val : (*(volatile typeof(x) *)__x);   \
+> +})
 
-Very nice, this has the added benefit of allowing us to stop including
-asm/barrier.h once linux/compiler.h gets changed to not include
-asm/rwonce.h.
+This expands (x) nine times (five in __unqual_scala_typeof()), which can
+lead to significant code bloat after preprocessing if something passes a
+compound expression into READ_ONCE().
+The compiler works it out eventually, but we've seen an actual slowdown
+in compile speed from this recently, especially on clang.
 
-The asm/barrier.h header has a circular dependency, pulling in
-linux/compiler.h itself.
+I think if you move the
+
+        typeof(&(x)) __x = &(x);
+
+line first, all other instances can use typeof(*__x) instead of typeof(x)
+and avoid this problem. Once we make gcc-4.9 the minimum version,
+this could be further improved to
+
+       __auto_type __x = &(x);
 
        Arnd
 _______________________________________________
