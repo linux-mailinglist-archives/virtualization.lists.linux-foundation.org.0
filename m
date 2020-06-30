@@ -1,98 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E266720FCBC
-	for <lists.virtualization@lfdr.de>; Tue, 30 Jun 2020 21:25:33 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1ABC420FD8A
+	for <lists.virtualization@lfdr.de>; Tue, 30 Jun 2020 22:21:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 3EB94228D1;
-	Tue, 30 Jun 2020 19:25:31 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8163387A47;
+	Tue, 30 Jun 2020 20:21:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QGxbZkFCOg9c; Tue, 30 Jun 2020 19:25:28 +0000 (UTC)
+	with ESMTP id Ow6tAUijeeKx; Tue, 30 Jun 2020 20:21:23 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8EC09228A7;
-	Tue, 30 Jun 2020 19:25:28 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C930E87967;
+	Tue, 30 Jun 2020 20:21:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 68494C016E;
-	Tue, 30 Jun 2020 19:25:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AC68DC016E;
+	Tue, 30 Jun 2020 20:21:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DDCA2C016E
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9598DC016E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:25:25 +0000 (UTC)
+ Tue, 30 Jun 2020 20:21:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C445A8868D
+ by silver.osuosl.org (Postfix) with ESMTP id 73CC32052B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:25:25 +0000 (UTC)
+ Tue, 30 Jun 2020 20:21:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XSmjJar9S7sm
+ with ESMTP id EAyzoj-hASp4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:25:24 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 157EE88600
+ Tue, 30 Jun 2020 20:21:20 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
+ by silver.osuosl.org (Postfix) with ESMTPS id 62FBC20348
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 19:25:23 +0000 (UTC)
-Received: from mail-qv1-f41.google.com ([209.85.219.41]) by
- mrelayeu.kundenserver.de (mreue011 [212.227.15.129]) with ESMTPSA (Nemesis)
- id 1MIdNt-1jdzwT429V-00EaeW for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 21:25:21 +0200
-Received: by mail-qv1-f41.google.com with SMTP id e3so3505864qvo.10
- for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Jun 2020 12:25:20 -0700 (PDT)
-X-Gm-Message-State: AOAM531aMQQBbQMCH9Z3wOa1c3gKh260OfAXlHJTYbnvl0zib+HKaWra
- maqFD3eo1BxIzT/SAYXJrupYrkzmMZnVtCq80vE=
-X-Google-Smtp-Source: ABdhPJx+lRE51JRL6fCvRnoLPfTGDuD4BIZlGSJkoIdVSw7mHYOQQlzJvl0jgp7ZS50oAcVKQOmUzXKXW4PZLLmEroY=
-X-Received: by 2002:a0c:ba0e:: with SMTP id w14mr21638836qvf.222.1593545119567; 
- Tue, 30 Jun 2020 12:25:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200630173734.14057-1-will@kernel.org>
- <20200630173734.14057-19-will@kernel.org>
-In-Reply-To: <20200630173734.14057-19-will@kernel.org>
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Tue, 30 Jun 2020 21:25:03 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a2zB4z121reuy6BCqQ3-1mDBAkUkRRXeDuvSFtSr3ha2g@mail.gmail.com>
-Message-ID: <CAK8P3a2zB4z121reuy6BCqQ3-1mDBAkUkRRXeDuvSFtSr3ha2g@mail.gmail.com>
+ Tue, 30 Jun 2020 20:21:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=pAld+PmSm3uQ9OLHyA9LsKDVn58a/UVYkn4lwoGnumM=; b=eAS27j4l5VKQ8En/OF9eH/i5RP
+ +zf93Ed62vvzDVNpm3OQPePdECVVSJpOKoPHPo0qto2p1L5df+7KSwptQDd/nIrdnpM5pzrhFjqJW
+ Gay6KM35iiIdnoVMtvL/4zFrkRmS8yLmL8kAueTKNarZQya4QhxBswEHfzITY6U2oKozvVDs84Yl7
+ 8YFxk3ukDS3ImbkleuGENzLAnxsGWZJK4RrZ92k+myKvwxG+jTKqc4UERDxZlwKgkAJCQy/4cc2Xk
+ 2MFT8Aygu1X6cIf9AXIRkGnOEsa+DHSPoHT2y4I+azRP5RQAjvGtlG/6aByC0gvgXiSJN2XicZtSl
+ 46R2yNXA==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1jqMkd-0000sY-D6; Tue, 30 Jun 2020 20:21:07 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A75C130015A;
+ Tue, 30 Jun 2020 22:20:59 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 850D8203A69CB; Tue, 30 Jun 2020 22:20:59 +0200 (CEST)
+Date: Tue, 30 Jun 2020 22:20:59 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Marco Elver <elver@google.com>
 Subject: Re: [PATCH 18/18] arm64: lto: Strengthen READ_ONCE() to acquire when
  CLANG_LTO=y
-To: Will Deacon <will@kernel.org>
-X-Provags-ID: V03:K1:9EnBVfWeAz8cUrX3dB2qQB+V6W9w39r1xqOv9MUzDW/miBH8tY3
- eeHVjtlOvR7lLlr9/X2HJdYa9iM0hDa8TrhMaLiWFlynKlCoblMRJsSx/7LFSns1kag73iU
- UjCAYekGbr4U0/o6U4L92n/le9b+WOX3SFSi3SAwbp3ReZ9yCFwnUuWiWaPFNy997S955v5
- i1hkkW3rMbv+AXA+uudyg==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:7TFBBmM/PB8=:YmmT/Tn9GtfH4Xg1eI3xFj
- N4XkXxiU8B0KAFQ7vBoDgx7LWauD4dL5FWearkD+gQGmcl0UNhGrZj9RpzZVihGW7kjI0Zpqa
- hPg+YzA/mLwIoa9SDED/JqhSbV2AtgixKqK5N4ujOKlYMV9C/l5ZJcb3Bw5Xt2PL+ir01BTh0
- JoQ5dgWrKyKydefp1nr3CZw+gV3LkYoEm6Eb+0XlAy36lo2kiLIISzUsNPxoIWtkQeYMeCuBW
- I86UkaKGOLY9a+p0/cWP/RepGe38s67komP2oiDTQfoU2sM/UgrC1aCUyZdFF83W3ZmutPvIn
- qhk8ez1O25kx5fUVt5zIcoh9e1SYLcQTLhmXzQkGjb7uHYVCxh/MRPoJE5seVnbLEQybangSd
- +Nh2VFcWdwCKNL8/JKoZs2SdfnChJ6eFwAK0E+TWH+y0FmIEbusqSxCroca4jU4aZ6qAuFJeR
- GS6wXY13I00+AtFimAycBr7YVVrETOPwmcEHNoa4TI3YHDKuZ35/XTJkPNt977DRgC4+9+xcK
- f/XZE3ut0bvmAw/muhNgzAsr9r8JF3TBlGGPTXwwLUHYv6Ak6coqac+sD+jwfa+SJ2ctMwuSK
- sg9SwYhDXJyDUgiMDuqjkDTzrLlqsiziMgPeC4DZB4V67rNApAbjKO+/lqOljhrg+dWexI4rl
- 4pcs4TSYhL5tGyP2XXxtaZflV9IB2UtU3N+a5b3O27H7o6BO2aqsg+XTNQRtuZkr3afUZ8vCt
- iaOSFX3mfIxGSN3ulLi6y96RpVurTvswZlA0HHS9AI2Cm20mwtxhQJbHq5wg02OAcwPI56vQc
- blpNEa35NzBBAJGtKwlvH2O0gUrRbW1pxzUKsrgmxlsjDT1rVg=
-Cc: Mark Rutland <mark.rutland@arm.com>, Marco Elver <elver@google.com>,
+Message-ID: <20200630202059.GE4817@hirez.programming.kicks-ass.net>
+References: <20200630173734.14057-1-will@kernel.org>
+ <20200630173734.14057-19-will@kernel.org>
+ <CANpmjNPOO=AVsVJMdL8sq03jwHsDR_1_FfWccwaLKEBRn1RFtA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CANpmjNPOO=AVsVJMdL8sq03jwHsDR_1_FfWccwaLKEBRn1RFtA@mail.gmail.com>
+Cc: Mark Rutland <mark.rutland@arm.com>,
+ Android Kernel Team <kernel-team@android.com>,
  Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
  Catalin Marinas <catalin.marinas@arm.com>,
  Nick Desaulniers <ndesaulniers@google.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Josh Triplett <josh@joshtriplett.org>,
+ LKML <linux-kernel@vger.kernel.org>, Josh Triplett <josh@joshtriplett.org>,
  Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Sami Tolvanen <samitolvanen@google.com>, alpha <linux-alpha@vger.kernel.org>,
- Alan Stern <stern@rowland.harvard.edu>, Matt Turner <mattst88@gmail.com>,
- virtualization@lists.linux-foundation.org,
- Android Kernel Team <kernel-team@android.com>,
- Boqun Feng <boqun.feng@gmail.com>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
- Richard Henderson <rth@twiddle.net>
+ linux-arm-kernel@lists.infradead.org, Sami Tolvanen <samitolvanen@google.com>,
+ linux-alpha@vger.kernel.org, Alan Stern <stern@rowland.harvard.edu>,
+ Matt Turner <mattst88@gmail.com>, virtualization@lists.linux-foundation.org,
+ Will Deacon <will@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
+ Arnd Bergmann <arnd@arndb.de>, Richard Henderson <rth@twiddle.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,34 +101,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jun 30, 2020 at 7:39 PM Will Deacon <will@kernel.org> wrote:
-> +#define __READ_ONCE(x)                                                 \
-> +({                                                                     \
-> +       int atomic = 1;                                                 \
-> +       union { __unqual_scalar_typeof(x) __val; char __c[1]; } __u;    \
-> +       typeof(&(x)) __x = &(x);                                        \
-> +       switch (sizeof(x)) {                                            \
-...
-> +       atomic ? (typeof(x))__u.__val : (*(volatile typeof(x) *)__x);   \
-> +})
+On Tue, Jun 30, 2020 at 09:47:30PM +0200, Marco Elver wrote:
+> I do wonder, though, if there is some way to make the compiler do
+> something better for us. Clearly, implementing real
+> memory_order_consume hasn't worked out until today. But maybe the
+> compiler could promote dependent loads to acquires if it recognizes it
+> lost dependencies during optimizations. Just thinking out loud, it
+> probably still has some weird corner case that will break. ;-)
 
-This expands (x) nine times (five in __unqual_scala_typeof()), which can
-lead to significant code bloat after preprocessing if something passes a
-compound expression into READ_ONCE().
-The compiler works it out eventually, but we've seen an actual slowdown
-in compile speed from this recently, especially on clang.
-
-I think if you move the
-
-        typeof(&(x)) __x = &(x);
-
-line first, all other instances can use typeof(*__x) instead of typeof(x)
-and avoid this problem. Once we make gcc-4.9 the minimum version,
-this could be further improved to
-
-       __auto_type __x = &(x);
-
-       Arnd
+I'd be very hesitant to let the compiler upgrade the ordering for us,
+specifically because we're not using C11 crud and are using a lot of
+inline asm.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
