@@ -1,76 +1,59 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF7BA210C5A
-	for <lists.virtualization@lfdr.de>; Wed,  1 Jul 2020 15:35:22 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 744D7210C6B
+	for <lists.virtualization@lfdr.de>; Wed,  1 Jul 2020 15:42:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C2B9789463;
-	Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A44408A728;
+	Wed,  1 Jul 2020 13:42:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id enSVa51tZ8Pp; Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
+	with ESMTP id R863mpvMCKc5; Wed,  1 Jul 2020 13:42:02 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 56A6289432;
-	Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 73E988A71F;
+	Wed,  1 Jul 2020 13:42:02 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 41A9DC0890;
-	Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 611FFC0733;
+	Wed,  1 Jul 2020 13:42:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 36260C0733;
- Wed,  1 Jul 2020 13:35:17 +0000 (UTC)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C9516C0733
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Jul 2020 13:42:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 247C126604;
- Wed,  1 Jul 2020 13:35:17 +0000 (UTC)
+ by whitealder.osuosl.org (Postfix) with ESMTP id B56D18BD34
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Jul 2020 13:42:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id D9zOffZ2jDkg; Wed,  1 Jul 2020 13:35:15 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
- by silver.osuosl.org (Postfix) with ESMTPS id D9EDA26509;
- Wed,  1 Jul 2020 13:35:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=6o0bqYA9UibQkqr/MmLZIfw1Phn9yQ8zQ1ln3u9Cm/E=; b=hlKDnjFXs/Y5WjrWNNgSQ+2Cvd
- RvsmfMbhXkV1KC+OK+5x7CGESEtA1Qk4HZeAu6Yaz/UH9zEAUbNa9FVjAhV4Duiv/yAyXRv3/1ni3
- CSmwa08RJtybgECUGXsj6t5Ikz9WU8jXnEjZhSsiO4Cce5bMLn+ryrsvUEQAfHt3Y/kj2M4b29Xj0
- 2lORXLltD3a0Za4R4fVC/+lv0bptUhSUEHkFmEDfSV3phIa7QD/g3Q2Zle+t27uSL2Zcfg1ARrlES
- xPbJ0Leq9BQuYJ3vQmrkn81G/oqYWCgAUIa51MwnCk73e/oMjUpHEK7/k+Ajj3vJC3XBgczD+ReMg
- 1fAQgQbQ==;
-Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat
- Linux)) id 1jqct6-0006Qi-2K; Wed, 01 Jul 2020 13:34:56 +0000
-Date: Wed, 1 Jul 2020 14:34:56 +0100
-From: Christoph Hellwig <hch@infradead.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
-Message-ID: <20200701133456.GA23888@infradead.org>
-References: <20200624091732.23944-1-peng.fan@nxp.com>
- <20200624050355-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006241047010.8121@sstabellini-ThinkPad-T480s>
- <20200624163940-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
- <20200624181026-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
- <20200626110629-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006291621300.8121@sstabellini-ThinkPad-T480s>
+ with ESMTP id kSTLag9GHs-h
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Jul 2020 13:41:59 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from youngberry.canonical.com (youngberry.canonical.com
+ [91.189.89.112])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id B70AF8BAF6
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  1 Jul 2020 13:41:59 +0000 (UTC)
+Received: from 1.general.cking.uk.vpn ([10.172.193.212] helo=localhost)
+ by youngberry.canonical.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+ (envelope-from <colin.king@canonical.com>)
+ id 1jqczr-0001VJ-AY; Wed, 01 Jul 2020 13:41:55 +0000
+From: Colin King <colin.king@canonical.com>
+To: David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org
+Subject: [PATCH] drm/virtgpu: remove redundant assignments to width and height
+Date: Wed,  1 Jul 2020 14:41:54 +0100
+Message-Id: <20200701134154.549112-1-colin.king@canonical.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <alpine.DEB.2.21.2006291621300.8121@sstabellini-ThinkPad-T480s>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Cc: jgross@suse.com, Peng Fan <peng.fan@nxp.com>, x86@kernel.org,
- konrad.wilk@oracle.com, "Michael S. Tsirkin" <mst@redhat.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- iommu@lists.linux-foundation.org, linux-imx@nxp.com,
- xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
- linux-arm-kernel@lists.infradead.org
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,44 +70,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jun 29, 2020 at 04:46:09PM -0700, Stefano Stabellini wrote:
-> > I could imagine some future Xen hosts setting a flag somewhere in the
-> > platform capability saying "no xen specific flag, rely on
-> > "VIRTIO_F_ACCESS_PLATFORM". Then you set that accordingly in QEMU.
-> > How about that?
-> 
-> Yes, that would be fine and there is no problem implementing something
-> like that when we get virtio support in Xen. Today there are still no
-> virtio interfaces provided by Xen to ARM guests (no virtio-block/net,
-> etc.)
-> 
-> In fact, in both cases we are discussing virtio is *not* provided by
-> Xen; it is a firmware interface to something entirely different:
-> 
-> 1) virtio is used to talk to a remote AMP processor (RPMesg)
-> 2) virtio is used to talk to a secure-world firmware/OS (Trusty)
->
-> VIRTIO_F_ACCESS_PLATFORM is not set by Xen in these cases but by RPMesg
-> and by Trusty respectively. I don't know if Trusty should or should not
-> set VIRTIO_F_ACCESS_PLATFORM, but I think Linux should still work
-> without issues.
-> 
+From: Colin Ian King <colin.king@canonical.com>
 
-Any virtio implementation that is not in control of the memory map
-(aka not the hypervisor) absolutely must set VIRTIO_F_ACCESS_PLATFORM,
-else it is completely broken.
+Variables width and height are being assigned values that are never
+read. The assignments are redundant and can be removed.
 
-> The xen_domain() check in Linux makes it so that vring_use_dma_api
-> returns the opposite value on native Linux compared to Linux as Xen/ARM
-> DomU by "accident". By "accident" because there is no architectural
-> reason why Linux Xen/ARM DomU should behave differently compared to
-> native Linux in this regard.
-> 
-> I hope that now it is clearer why I think the if (xen_domain()) check
-> needs to be improved anyway, even if we fix generic dma_ops with virtio
-> interfaces missing VIRTIO_F_ACCESS_PLATFORM.
+Addresses-Coverity: ("Unused value")
+Signed-off-by: Colin Ian King <colin.king@canonical.com>
+---
+ drivers/gpu/drm/virtio/virtgpu_display.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-IMHO that Xen quirk should never have been added in this form..
+diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
+index f3ce49c5a34c..bf80d8c23da7 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_display.c
++++ b/drivers/gpu/drm/virtio/virtgpu_display.c
+@@ -165,8 +165,6 @@ static int virtio_gpu_conn_get_modes(struct drm_connector *connector)
+ 	count = drm_add_modes_noedid(connector, XRES_MAX, YRES_MAX);
+ 
+ 	if (width == 0 || height == 0) {
+-		width = XRES_DEF;
+-		height = YRES_DEF;
+ 		drm_set_preferred_mode(connector, XRES_DEF, YRES_DEF);
+ 	} else {
+ 		DRM_DEBUG("add mode: %dx%d\n", width, height);
+-- 
+2.27.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
