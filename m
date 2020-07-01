@@ -1,92 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AED6210B20
-	for <lists.virtualization@lfdr.de>; Wed,  1 Jul 2020 14:40:10 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF7BA210C5A
+	for <lists.virtualization@lfdr.de>; Wed,  1 Jul 2020 15:35:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B6F618AA2C;
-	Wed,  1 Jul 2020 12:40:08 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C2B9789463;
+	Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0zG3wYkodvAD; Wed,  1 Jul 2020 12:40:07 +0000 (UTC)
+	with ESMTP id enSVa51tZ8Pp; Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E4E678AA5D;
-	Wed,  1 Jul 2020 12:40:07 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 56A6289432;
+	Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9BB6CC0733;
-	Wed,  1 Jul 2020 12:40:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 41A9DC0890;
+	Wed,  1 Jul 2020 13:35:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2244BC0733
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 12:40:06 +0000 (UTC)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 36260C0733;
+ Wed,  1 Jul 2020 13:35:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 183738BF75
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 12:40:06 +0000 (UTC)
+ by silver.osuosl.org (Postfix) with ESMTP id 247C126604;
+ Wed,  1 Jul 2020 13:35:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Fmm4YleowyLQ
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 12:40:04 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 8C14F8BEAA
- for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 12:40:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593607203;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rDoDyGkJGsZ638vn9DjgrnMCysPvmzBivywkj+/t4v4=;
- b=NOI5oWIs60tvJmHl22PvmDU0PJfFQobyz922Br6SQUgTReWxedQuiprj60BlYQGTVuWz4D
- r/SC+/dlpaHrRU+WXNDHKbQdolC79rvNY5sY34WY3++yxGMexnfC4lmfEPDa533OngFe4t
- zAkhblAhLmwzsEdEmYoAzUgr2FLk9/E=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-318-gXijiZa0PLK1hcSaUWwlYw-1; Wed, 01 Jul 2020 08:39:59 -0400
-X-MC-Unique: gXijiZa0PLK1hcSaUWwlYw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D272C800D5C;
- Wed,  1 Jul 2020 12:39:57 +0000 (UTC)
-Received: from [10.72.13.177] (ovpn-13-177.pek2.redhat.com [10.72.13.177])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7E62B7169B;
- Wed,  1 Jul 2020 12:39:52 +0000 (UTC)
-Subject: Re: [PATCH RFC v8 02/11] vhost: use batched get_vq_desc version
-To: Eugenio Perez Martin <eperezma@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>
-References: <20200611113404.17810-1-mst@redhat.com>
- <20200611113404.17810-3-mst@redhat.com>
- <20200611152257.GA1798@char.us.oracle.com>
- <CAJaqyWdwXMX0JGhmz6soH2ZLNdaH6HEdpBM8ozZzX9WUu8jGoQ@mail.gmail.com>
- <CAJaqyWdwgy0fmReOgLfL4dAv-E+5k_7z3d9M+vHqt0aO2SmOFg@mail.gmail.com>
- <20200622114622-mutt-send-email-mst@kernel.org>
- <CAJaqyWfrf94Gc-DMaXO+f=xC8eD3DVCD9i+x1dOm5W2vUwOcGQ@mail.gmail.com>
- <20200622122546-mutt-send-email-mst@kernel.org>
- <CAJaqyWfbouY4kEXkc6sYsbdCAEk0UNsS5xjqEdHTD7bcTn40Ow@mail.gmail.com>
- <CAJaqyWefMHPguj8ZGCuccTn0uyKxF9ZTEi2ASLtDSjGNb1Vwsg@mail.gmail.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <419cc689-adae-7ba4-fe22-577b3986688c@redhat.com>
-Date: Wed, 1 Jul 2020 20:39:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ with ESMTP id D9zOffZ2jDkg; Wed,  1 Jul 2020 13:35:15 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+ by silver.osuosl.org (Postfix) with ESMTPS id D9EDA26509;
+ Wed,  1 Jul 2020 13:35:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=6o0bqYA9UibQkqr/MmLZIfw1Phn9yQ8zQ1ln3u9Cm/E=; b=hlKDnjFXs/Y5WjrWNNgSQ+2Cvd
+ RvsmfMbhXkV1KC+OK+5x7CGESEtA1Qk4HZeAu6Yaz/UH9zEAUbNa9FVjAhV4Duiv/yAyXRv3/1ni3
+ CSmwa08RJtybgECUGXsj6t5Ikz9WU8jXnEjZhSsiO4Cce5bMLn+ryrsvUEQAfHt3Y/kj2M4b29Xj0
+ 2lORXLltD3a0Za4R4fVC/+lv0bptUhSUEHkFmEDfSV3phIa7QD/g3Q2Zle+t27uSL2Zcfg1ARrlES
+ xPbJ0Leq9BQuYJ3vQmrkn81G/oqYWCgAUIa51MwnCk73e/oMjUpHEK7/k+Ajj3vJC3XBgczD+ReMg
+ 1fAQgQbQ==;
+Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat
+ Linux)) id 1jqct6-0006Qi-2K; Wed, 01 Jul 2020 13:34:56 +0000
+Date: Wed, 1 Jul 2020 14:34:56 +0100
+From: Christoph Hellwig <hch@infradead.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
+Message-ID: <20200701133456.GA23888@infradead.org>
+References: <20200624091732.23944-1-peng.fan@nxp.com>
+ <20200624050355-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241047010.8121@sstabellini-ThinkPad-T480s>
+ <20200624163940-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
+ <20200624181026-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
+ <20200626110629-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006291621300.8121@sstabellini-ThinkPad-T480s>
 MIME-Version: 1.0
-In-Reply-To: <CAJaqyWefMHPguj8ZGCuccTn0uyKxF9ZTEi2ASLtDSjGNb1Vwsg@mail.gmail.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org, kvm list <kvm@vger.kernel.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.21.2006291621300.8121@sstabellini-ThinkPad-T480s>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Cc: jgross@suse.com, Peng Fan <peng.fan@nxp.com>, x86@kernel.org,
+ konrad.wilk@oracle.com, "Michael S. Tsirkin" <mst@redhat.com>,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ iommu@lists.linux-foundation.org, linux-imx@nxp.com,
+ xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,134 +82,50 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNy8xIOS4i+WNiDY6NDMsIEV1Z2VuaW8gUGVyZXogTWFydGluIHdyb3RlOgo+IE9u
-IFR1ZSwgSnVuIDIzLCAyMDIwIGF0IDY6MTUgUE0gRXVnZW5pbyBQZXJleiBNYXJ0aW4KPiA8ZXBl
-cmV6bWFAcmVkaGF0LmNvbT4gd3JvdGU6Cj4+IE9uIE1vbiwgSnVuIDIyLCAyMDIwIGF0IDY6Mjkg
-UE0gTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNvbT4gd3JvdGU6Cj4+PiBPbiBNb24s
-IEp1biAyMiwgMjAyMCBhdCAwNjoxMToyMVBNICswMjAwLCBFdWdlbmlvIFBlcmV6IE1hcnRpbiB3
-cm90ZToKPj4+PiBPbiBNb24sIEp1biAyMiwgMjAyMCBhdCA1OjU1IFBNIE1pY2hhZWwgUy4gVHNp
-cmtpbiA8bXN0QHJlZGhhdC5jb20+IHdyb3RlOgo+Pj4+PiBPbiBGcmksIEp1biAxOSwgMjAyMCBh
-dCAwODowNzo1N1BNICswMjAwLCBFdWdlbmlvIFBlcmV6IE1hcnRpbiB3cm90ZToKPj4+Pj4+IE9u
-IE1vbiwgSnVuIDE1LCAyMDIwIGF0IDI6MjggUE0gRXVnZW5pbyBQZXJleiBNYXJ0aW4KPj4+Pj4+
-IDxlcGVyZXptYUByZWRoYXQuY29tPiB3cm90ZToKPj4+Pj4+PiBPbiBUaHUsIEp1biAxMSwgMjAy
-MCBhdCA1OjIyIFBNIEtvbnJhZCBSemVzenV0ZWsgV2lsawo+Pj4+Pj4+IDxrb25yYWQud2lsa0Bv
-cmFjbGUuY29tPiB3cm90ZToKPj4+Pj4+Pj4gT24gVGh1LCBKdW4gMTEsIDIwMjAgYXQgMDc6MzQ6
-MTlBTSAtMDQwMCwgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+Pj4+Pj4+Pj4gQXMgdGVzdGlu
-ZyBzaG93cyBubyBwZXJmb3JtYW5jZSBjaGFuZ2UsIHN3aXRjaCB0byB0aGF0IG5vdy4KPj4+Pj4+
-Pj4gV2hhdCBraW5kIG9mIHRlc3Rpbmc/IDEwMEdpQj8gTG93IGxhdGVuY3k/Cj4+Pj4+Pj4+Cj4+
-Pj4+Pj4gSGkgS29ucmFkLgo+Pj4+Pj4+Cj4+Pj4+Pj4gSSB0ZXN0ZWQgdGhpcyB2ZXJzaW9uIG9m
-IHRoZSBwYXRjaDoKPj4+Pj4+PiBodHRwczovL2xrbWwub3JnL2xrbWwvMjAxOS8xMC8xMy80Mgo+
-Pj4+Pj4+Cj4+Pj4+Pj4gSXQgd2FzIHRlc3RlZCBmb3IgdGhyb3VnaHB1dCB3aXRoIERQREsncyB0
-ZXN0cG1kIChhcyBkZXNjcmliZWQgaW4KPj4+Pj4+PiBodHRwOi8vZG9jLmRwZGsub3JnL2d1aWRl
-cy9ob3d0by92aXJ0aW9fdXNlcl9hc19leGNlcHRpb25hbF9wYXRoLmh0bWwpCj4+Pj4+Pj4gYW5k
-IGtlcm5lbCBwa3RnZW4uIE5vIGxhdGVuY3kgdGVzdHMgd2VyZSBwZXJmb3JtZWQgYnkgbWUuIE1h
-eWJlIGl0IGlzCj4+Pj4+Pj4gaW50ZXJlc3RpbmcgdG8gcGVyZm9ybSBhIGxhdGVuY3kgdGVzdCBv
-ciBqdXN0IGEgZGlmZmVyZW50IHNldCBvZiB0ZXN0cwo+Pj4+Pj4+IG92ZXIgYSByZWNlbnQgdmVy
-c2lvbi4KPj4+Pj4+Pgo+Pj4+Pj4+IFRoYW5rcyEKPj4+Pj4+IEkgaGF2ZSByZXBlYXRlZCB0aGUg
-dGVzdHMgd2l0aCB2OSwgYW5kIHJlc3VsdHMgYXJlIGEgbGl0dGxlIGJpdCBkaWZmZXJlbnQ6Cj4+
-Pj4+PiAqIElmIEkgdGVzdCBvcGVuaW5nIGl0IHdpdGggdGVzdHBtZCwgSSBzZWUgbm8gY2hhbmdl
-IGJldHdlZW4gdmVyc2lvbnMKPj4+Pj4KPj4+Pj4gT0sgdGhhdCBpcyB0ZXN0cG1kIG9uIGd1ZXN0
-LCByaWdodD8gQW5kIHZob3N0LW5ldCBvbiB0aGUgaG9zdD8KPj4+Pj4KPj4+PiBIaSBNaWNoYWVs
-Lgo+Pj4+Cj4+Pj4gTm8sIHNvcnJ5LCBhcyBkZXNjcmliZWQgaW4KPj4+PiBodHRwOi8vZG9jLmRw
-ZGsub3JnL2d1aWRlcy9ob3d0by92aXJ0aW9fdXNlcl9hc19leGNlcHRpb25hbF9wYXRoLmh0bWwu
-Cj4+Pj4gQnV0IEkgY291bGQgYWRkIHRvIHRlc3QgaXQgaW4gdGhlIGd1ZXN0IHRvby4KPj4+Pgo+
-Pj4+IFRoZXNlIGtpbmRzIG9mIHJhdyBwYWNrZXRzICJidXJzdHMiIGRvIG5vdCBzaG93IHBlcmZv
-cm1hbmNlCj4+Pj4gZGlmZmVyZW5jZXMsIGJ1dCBJIGNvdWxkIHRlc3QgZGVlcGVyIGlmIHlvdSB0
-aGluayBpdCB3b3VsZCBiZSB3b3J0aAo+Pj4+IGl0Lgo+Pj4gT2ggb2ssIHNvIHRoaXMgaXMgd2l0
-aG91dCBndWVzdCwgd2l0aCB2aXJ0aW8tdXNlci4KPj4+IEl0IG1pZ2h0IGJlIHdvcnRoIGNoZWNr
-aW5nIGRwZGsgd2l0aGluIGd1ZXN0IHRvbyBqdXN0Cj4+PiBhcyBhbm90aGVyIGRhdGEgcG9pbnQu
-Cj4+Pgo+PiBPaywgSSB3aWxsIGRvIGl0IQo+Pgo+Pj4+Pj4gKiBJZiBJIGZvcndhcmQgcGFja2V0
-cyBiZXR3ZWVuIHR3byB2aG9zdC1uZXQgaW50ZXJmYWNlcyBpbiB0aGUgZ3Vlc3QKPj4+Pj4+IHVz
-aW5nIGEgbGludXggYnJpZGdlIGluIHRoZSBob3N0Ogo+Pj4+PiBBbmQgaGVyZSBJIGd1ZXNzIHlv
-dSBtZWFuIHZpcnRpby1uZXQgaW4gdGhlIGd1ZXN0IGtlcm5lbD8KPj4+PiBZZXMsIHNvcnJ5OiBU
-d28gdmlydGlvLW5ldCBpbnRlcmZhY2VzIGNvbm5lY3RlZCB3aXRoIGEgbGludXggYnJpZGdlIGlu
-Cj4+Pj4gdGhlIGhvc3QuIE1vcmUgcHJlY2lzZWx5Ogo+Pj4+ICogQWRkaW5nIG9uZSBvZiB0aGUg
-aW50ZXJmYWNlcyB0byBhbm90aGVyIG5hbWVzcGFjZSwgYXNzaWduaW5nIGl0IGFuCj4+Pj4gSVAs
-IGFuZCBzdGFydGluZyBuZXRzZXJ2ZXIgdGhlcmUuCj4+Pj4gKiBBc3NpZ24gYW5vdGhlciBJUCBp
-biB0aGUgcmFuZ2UgbWFudWFsbHkgdG8gdGhlIG90aGVyIHZpcnR1YWwgbmV0Cj4+Pj4gaW50ZXJm
-YWNlLCBhbmQgc3RhcnQgdGhlIGRlc2lyZWQgdGVzdCB0aGVyZS4KPj4+Pgo+Pj4+IElmIHlvdSB0
-aGluayBpdCB3b3VsZCBiZSBiZXR0ZXIgdG8gcGVyZm9ybSB0aGVuIGRpZmZlcmVudGx5IHBsZWFz
-ZSBsZXQgbWUga25vdy4KPj4+Cj4+PiBOb3Qgc3VyZSB3aHkgeW91IGJvdGhlciB3aXRoIG5hbWVz
-cGFjZXMgc2luY2UgeW91IHNhaWQgeW91IGFyZQo+Pj4gdXNpbmcgTDIgYnJpZGdpbmcuIEkgZ3Vl
-c3MgaXQncyB1bmltcG9ydGFudC4KPj4+Cj4+IFNvcnJ5LCBJIHRoaW5rIEkgc2hvdWxkIGhhdmUg
-cHJvdmlkZWQgbW9yZSBjb250ZXh0IGFib3V0IHRoYXQuCj4+Cj4+IFRoZSBvbmx5IHJlYXNvbiB0
-byB1c2UgbmFtZXNwYWNlcyBpcyB0byBmb3JjZSB0aGUgdHJhZmZpYyBvZiB0aGVzZQo+PiBuZXRw
-ZXJmIHRlc3RzIHRvIGdvIHRocm91Z2ggdGhlIGV4dGVybmFsIGJyaWRnZS4gVG8gdGVzdCBuZXRw
-ZXJmCj4+IGRpZmZlcmVudCBwb3NzaWJpbGl0aWVzIHRoYW4gdGhlIHRlc3RwbWQgKG9yIHBrdGdl
-biBvciBvdGhlcnMgImJsYXN0Cj4+IG9mIGZyYW1lcyB1bmNvbmRpdGlvbmFsbHkiIHRlc3RzKS4K
-Pj4KPj4gVGhpcyB3YXksIEkgbWFrZSBzdXJlIHRoYXQgaXMgdGhlIHNhbWUgdmVyc2lvbiBvZiBl
-dmVyeXRoaW5nIGluIHRoZQo+PiBndWVzdCwgYW5kIGlzIGEgbGl0dGxlIGJpdCBlYXNpZXIgdG8g
-bWFuYWdlIGNwdSBhZmZpbml0eSwgc3RhcnQgYW5kCj4+IHN0b3AgdGVzdGluZy4uLgo+Pgo+PiBJ
-IGNvdWxkIHVzZSBhIGRpZmZlcmVudCBWTSBmb3Igc2VuZGluZyBhbmQgcmVjZWl2aW5nLCBidXQg
-SSBmaW5kIHRoaXMKPj4gd2F5IGEgZmFzdGVyIG9uZSBhbmQgaXQgc2hvdWxkIG5vdCBpbnRyb2R1
-Y2UgYSBsb3Qgb2Ygbm9pc2UuIEkgY2FuCj4+IHRlc3Qgd2l0aCB0d28gVk0gaWYgeW91IHRoaW5r
-IHRoYXQgdGhpcyB1c2Ugb2YgbmV0d29yayBuYW1lc3BhY2UKPj4gaW50cm9kdWNlcyB0b28gbXVj
-aCBub2lzZS4KPj4KPj4gVGhhbmtzIQo+Pgo+Pj4+Pj4gICAgLSBuZXRwZXJmIFVEUF9TVFJFQU0g
-c2hvd3MgYSBwZXJmb3JtYW5jZSBpbmNyZWFzZSBvZiAxLjgsIGFsbW9zdAo+Pj4+Pj4gZG91Ymxp
-bmcgcGVyZm9ybWFuY2UuIFRoaXMgZ2V0cyBsb3dlciBhcyBmcmFtZSBzaXplIGluY3JlYXNlLgo+
-IFJlZ2FyZGluZyBVRFBfU1RSRUFNOgo+ICogd2l0aCBldmVudF9pZHg9b246IFRoZSBwZXJmb3Jt
-YW5jZSBkaWZmZXJlbmNlIGlzIHJlZHVjZWQgYSBsb3QgaWYKPiBhcHBsaWVkIGFmZmluaXR5IHBy
-b3Blcmx5IChtYW51YWxseSBhc3NpZ25pbmcgQ1BVIG9uIGhvc3QvZ3Vlc3QgYW5kCj4gc2V0dGlu
-ZyBJUlFzIG9uIGd1ZXN0KSwgbWFraW5nIHRoZW0gcGVyZm9ybSBlcXVhbGx5IHdpdGggYW5kIHdp
-dGhvdXQKPiB0aGUgcGF0Y2ggYWdhaW4uIE1heWJlIHRoZSBiYXRjaGluZyBtYWtlcyB0aGUgc2No
-ZWR1bGVyIHBlcmZvcm0KPiBiZXR0ZXIuCgoKTm90ZSB0aGF0IGZvciBVRFBfU1RSRUFNLCB0aGUg
-cmVzdWx0IGlzIHByZXR0eSB0cmljayB0byBiZSBhbmFseXplZC4gRS5nIApzZXR0aW5nIGEgc25k
-YnVmIGZvciBUQVAgbWF5IGhlbHAgZm9yIHRoZSBwZXJmb3JtYW5jZSAocmVkdWNlIHRoZSBkcm9w
-KS4KCgo+Cj4+Pj4+PiAgICAtIHJlc3RzIG9mIHRoZSB0ZXN0IGdvZXMgbm90aWNlYWJseSB3b3Jz
-ZTogVURQX1JSIGdvZXMgZnJvbSB+NjM0Nwo+Pj4+Pj4gdHJhbnNhY3Rpb25zL3NlYyB0byA1ODMw
-Cj4gKiBSZWdhcmRpbmcgVURQX1JSLCBUQ1BfU1RSRUFNLCBhbmQgVENQX1JSLCBwcm9wZXIgQ1BV
-IHBpbm5pbmcgbWFrZXMKPiB0aGVtIHBlcmZvcm0gc2ltaWxhcmx5IGFnYWluLCBvbmx5IGEgdmVy
-eSBzbWFsbCBwZXJmb3JtYW5jZSBkcm9wCj4gb2JzZXJ2ZWQuIEl0IGNvdWxkIGJlIGp1c3Qgbm9p
-c2UuCj4gKiogQWxsIG9mIHRoZW0gcGVyZm9ybSBiZXR0ZXIgdGhhbiB2YW5pbGxhIGlmIGV2ZW50
-X2lkeD1vZmYsIG5vdCBzdXJlCj4gd2h5LiBJIGNhbiB0cnkgdG8gcmVwZWF0IHRoZW0gaWYgeW91
-IHN1c3BlY3QgdGhhdCBjYW4gYmUgYSB0ZXN0Cj4gZmFpbHVyZS4KPgo+ICogV2l0aCB0ZXN0cG1k
-IGFuZCBldmVudF9pZHg9b2ZmLCBpZiBJIHNlbmQgZnJvbSB0aGUgVk0gdG8gaG9zdCwgSSBzZWUK
-PiBhIHBlcmZvcm1hbmNlIGluY3JlbWVudCBlc3BlY2lhbGx5IGluIHNtYWxsIHBhY2tldHMuIFRo
-ZSBidWYgYXBpIGFsc28KPiBpbmNyZWFzZXMgcGVyZm9ybWFuY2UgY29tcGFyZWQgd2l0aCBvbmx5
-IGJhdGNoaW5nOiBTZW5kaW5nIHRoZSBtaW5pbXVtCj4gcGFja2V0IHNpemUgaW4gdGVzdHBtZCBt
-YWtlcyBwcHMgZ28gZnJvbSAzNTZrcHBzIHRvIDQ3MyBrcHBzLgoKCldoYXQncyB5b3VyIHNldHVw
-IGZvciB0aGlzLiBUaGUgbnVtYmVyIGxvb2tzIHJhdGhlciBsb3cuIEknZCBleHBlY3RlZCAKMS0y
-IE1wcHMgYXQgbGVhc3QuCgoKPiBTZW5kaW5nCj4gMTAyNCBsZW5ndGggVURQLVBEVSBtYWtlcyBp
-dCBnbyBmcm9tIDU3MGtwcHMgdG8gNjQga3Bwcy4KPgo+IFNvbWV0aGluZyBzdHJhbmdlIEkgb2Jz
-ZXJ2ZSBpbiB0aGVzZSB0ZXN0czogSSBnZXQgbW9yZSBwcHMgdGhlIGJpZ2dlcgo+IHRoZSB0cmFu
-c21pdHRlZCBidWZmZXIgc2l6ZSBpcy4gTm90IHN1cmUgd2h5Lgo+Cj4gKiogU2VuZGluZyBmcm9t
-IHRoZSBob3N0IHRvIHRoZSBWTSBkb2VzIG5vdCBtYWtlIGEgYmlnIGNoYW5nZSB3aXRoIHRoZQo+
-IHBhdGNoZXMgaW4gc21hbGwgcGFja2V0cyBzY2VuYXJpbyAobWluaW11bSwgNjQgYnl0ZXMsIGFi
-b3V0IDY0NQo+IHdpdGhvdXQgdGhlIHBhdGNoLCB+NjI1IHdpdGggYmF0Y2ggYW5kIGJhdGNoK2J1
-ZiBhcGkpLiBJZiB0aGUgcGFja2V0cwo+IGFyZSBiaWdnZXIsIEkgY2FuIHNlZSBhIHBlcmZvcm1h
-bmNlIGluY3JlYXNlOiB3aXRoIDI1NiBiaXRzLAoKCkkgdGhpbmsgeW91IG1lYW50IGJ5dGVzPwoK
-Cj4gICBpdCBnb2VzCj4gZnJvbSA1OTBrcHBzIHRvIGFib3V0IDYwMGtwcHMsIGFuZCBpbiBjYXNl
-IG9mIDE1MDAgYnl0ZXMgcGF5bG9hZCBpdAo+IGdldHMgZnJvbSAzNDhrcHBzIHRvIDUyOGtwcHMs
-IHNvIGl0IGlzIGNsZWFybHkgYW4gaW1wcm92ZW1lbnQuCj4KPiAqIHdpdGggdGVzdHBtZCBhbmQg
-ZXZlbnRfaWR4PW9uLCBiYXRjaGluZytidWYgYXBpIHBlcmZvcm0gc2ltaWxhcmx5IGluCj4gYm90
-aCBkaXJlY3Rpb25zLgo+Cj4gQWxsIG9mIHRlc3RwbWQgdGVzdHMgd2VyZSBwZXJmb3JtZWQgd2l0
-aCBubyBsaW51eCBicmlkZ2UsIGp1c3QgYQo+IGhvc3QncyB0YXAgaW50ZXJmYWNlICg8aW50ZXJm
-YWNlIHR5cGU9J2V0aGVybmV0Jz4gaW4geG1sKSwKCgpXaGF0IERQREsgZHJpdmVyIGRpZCB5b3Ug
-dXNlIGluIHRoZSB0ZXN0IChBRl9QQUNLRVQ/KS4KCgo+IHdpdGggYQo+IHRlc3RwbWQgdHhvbmx5
-IGFuZCBhbm90aGVyIGluIHJ4b25seSBmb3J3YXJkIG1vZGUsIGFuZCB1c2luZyB0aGUKPiByZWNl
-aXZpbmcgc2lkZSBwYWNrZXRzL2J5dGVzIGRhdGEuIEd1ZXN0J3MgcnBzLCB4cHMgYW5kIGludGVy
-cnVwdHMsCj4gYW5kIGhvc3QncyB2aG9zdCB0aHJlYWRzIGFmZmluaXR5IHdlcmUgYWxzbyB0dW5l
-ZCBpbiBlYWNoIHRlc3QgdG8KPiBzY2hlZHVsZSBib3RoIHRlc3RwbWQgYW5kIHZob3N0IGluIGRp
-ZmZlcmVudCBwcm9jZXNzb3JzLgoKCk15IGZlZWxpbmcgaXMgdGhhdCBpZiB3ZSBzdGFydCBmcm9t
-IHNpbXBsZSBzZXR1cCwgaXQgd291bGQgYmUgbW9yZSAKZWFzaWVyIGFzIGEgc3RhcnQuIEUuZyBz
-dGFydCB3aXRob3V0IGFuIFZNLgoKMSkgVFg6IHRlc3RwbWQodHhvbmx5KSAtPiB2aXJ0aW8tdXNl
-ciAtPiB2aG9zdF9uZXQgLT4gWERQX0RST1Agb24gVEFQCjIpIFJYOiBwa2dldG4gLT4gVEFQIC0+
-IHZob3N0X25ldCAtPiB0ZXN0cG1kKHJ4b25seSkKClRoYW5rcwoKCj4KPiBJIHdpbGwgc2VuZCB0
-aGUgdjEwIFJGQyB3aXRoIHRoZSBzbWFsbCBjaGFuZ2VzIHJlcXVlc3RlZCBieSBTdGVmYW4gYW5k
-IEphc29uLgo+Cj4gVGhhbmtzIQo+Cj4KPgo+Cj4KPgo+Cj4+Pj4+IE9LIHNvIGl0IHNlZW1zIHBs
-YXVzaWJsZSB0aGF0IHdlIHN0aWxsIGhhdmUgYSBidWcgd2hlcmUgYW4gaW50ZXJydXB0Cj4+Pj4+
-IGlzIGRlbGF5ZWQuIFRoYXQgaXMgdGhlIG1haW4gZGlmZmVyZW5jZSBiZXR3ZWVuIHBtZCBhbmQg
-dmlydGlvLgo+Pj4+PiBMZXQncyB0cnkgZGlzYWJsaW5nIGV2ZW50IGluZGV4LCBhbmQgc2VlIHdo
-YXQgaGFwcGVucyAtIHRoYXQncwo+Pj4+PiB0aGUgdHJpY2tpZXN0IHBhcnQgb2YgaW50ZXJydXB0
-cy4KPj4+Pj4KPj4+PiBHb3QgaXQsIHdpbGwgZ2V0IGJhY2sgd2l0aCB0aGUgcmVzdWx0cy4KPj4+
-Pgo+Pj4+IFRoYW5rIHlvdSB2ZXJ5IG11Y2ghCj4+Pj4KPj4+Pj4KPj4+Pj4+ICAgIC0gVENQX1NU
-UkVBTSBnb2VzIGZyb20gfjEwLjcgZ2JwcyB0byB+N0dicHMKPj4+Pj4+ICAgIC0gVENQX1JSIGZy
-b20gNjIyMy42NCB0cmFuc2FjdGlvbnMvc2VjIHRvIDU3MzkuNDQKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlz
-dApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3Rz
-LmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Mon, Jun 29, 2020 at 04:46:09PM -0700, Stefano Stabellini wrote:
+> > I could imagine some future Xen hosts setting a flag somewhere in the
+> > platform capability saying "no xen specific flag, rely on
+> > "VIRTIO_F_ACCESS_PLATFORM". Then you set that accordingly in QEMU.
+> > How about that?
+> 
+> Yes, that would be fine and there is no problem implementing something
+> like that when we get virtio support in Xen. Today there are still no
+> virtio interfaces provided by Xen to ARM guests (no virtio-block/net,
+> etc.)
+> 
+> In fact, in both cases we are discussing virtio is *not* provided by
+> Xen; it is a firmware interface to something entirely different:
+> 
+> 1) virtio is used to talk to a remote AMP processor (RPMesg)
+> 2) virtio is used to talk to a secure-world firmware/OS (Trusty)
+>
+> VIRTIO_F_ACCESS_PLATFORM is not set by Xen in these cases but by RPMesg
+> and by Trusty respectively. I don't know if Trusty should or should not
+> set VIRTIO_F_ACCESS_PLATFORM, but I think Linux should still work
+> without issues.
+> 
+
+Any virtio implementation that is not in control of the memory map
+(aka not the hypervisor) absolutely must set VIRTIO_F_ACCESS_PLATFORM,
+else it is completely broken.
+
+> The xen_domain() check in Linux makes it so that vring_use_dma_api
+> returns the opposite value on native Linux compared to Linux as Xen/ARM
+> DomU by "accident". By "accident" because there is no architectural
+> reason why Linux Xen/ARM DomU should behave differently compared to
+> native Linux in this regard.
+> 
+> I hope that now it is clearer why I think the if (xen_domain()) check
+> needs to be improved anyway, even if we fix generic dma_ops with virtio
+> interfaces missing VIRTIO_F_ACCESS_PLATFORM.
+
+IMHO that Xen quirk should never have been added in this form..
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
