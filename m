@@ -2,107 +2,102 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE1FC210A23
-	for <lists.virtualization@lfdr.de>; Wed,  1 Jul 2020 13:12:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DA9B210A56
+	for <lists.virtualization@lfdr.de>; Wed,  1 Jul 2020 13:33:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A247688350;
-	Wed,  1 Jul 2020 11:12:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 780188AA5A;
+	Wed,  1 Jul 2020 11:33:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JM7wgdQm9X4Y; Wed,  1 Jul 2020 11:12:10 +0000 (UTC)
+	with ESMTP id 0gT7a7fJ6uxR; Wed,  1 Jul 2020 11:33:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id AC03E8AA9B;
-	Wed,  1 Jul 2020 11:12:10 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 5AE508AA8C;
+	Wed,  1 Jul 2020 11:33:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 876B8C0733;
-	Wed,  1 Jul 2020 11:12:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 39D88C0733;
+	Wed,  1 Jul 2020 11:33:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 28317C0733
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 11B8EC0733
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 11:12:09 +0000 (UTC)
+ Wed,  1 Jul 2020 11:33:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 2382E8AA8F
+ by silver.osuosl.org (Postfix) with ESMTP id 0B43A2E10C
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 11:12:09 +0000 (UTC)
+ Wed,  1 Jul 2020 11:33:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RwiNazFc7dDA
+ with ESMTP id 8GRU0qmZjPwN
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 11:12:08 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id E211688350
+ Wed,  1 Jul 2020 11:33:49 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.75])
+ by silver.osuosl.org (Postfix) with ESMTPS id D29732E009
  for <virtualization@lists.linux-foundation.org>;
- Wed,  1 Jul 2020 11:12:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593601926;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Yexujkd7auN9ITgPnwA4kXggvTeorMC1CWNzXOrWnvM=;
- b=DOZXDYyKogROTC7ZGQvd+PtNdN342mLgKbkR3zUAyxtnIW4gKJUQOhRrdH9xe0uUjc216n
- 2OOp5mZ8xuHTzVXTNO9Xs8IyOsmT13B7L053uzY7Zqi24ayQTIexpbAMD/H1DMbs1V6j1w
- eJdldXoWaQsF11f13neOaZ5IkK9sIGg=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-9-tiRnfj9nOg6K16R5WBsgWA-1; Wed, 01 Jul 2020 07:12:03 -0400
-X-MC-Unique: tiRnfj9nOg6K16R5WBsgWA-1
-Received: by mail-wr1-f70.google.com with SMTP id i12so19982537wrx.11
+ Wed,  1 Jul 2020 11:33:48 +0000 (UTC)
+Received: from mail-qk1-f175.google.com ([209.85.222.175]) by
+ mrelayeu.kundenserver.de (mreue106 [212.227.15.145]) with ESMTPSA (Nemesis)
+ id 1M4Ja3-1jqs6y2SEz-000KSs for <virtualization@lists.linux-foundation.org>;
+ Wed, 01 Jul 2020 13:33:45 +0200
+Received: by mail-qk1-f175.google.com with SMTP id b4so21749931qkn.11
  for <virtualization@lists.linux-foundation.org>;
- Wed, 01 Jul 2020 04:12:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=Yexujkd7auN9ITgPnwA4kXggvTeorMC1CWNzXOrWnvM=;
- b=FKMbAiXyh4+lS1OEe7U7XX2Zx5R3Xa7bbdJU+HeJA3+eDLG9v40dNJ0P6/7U9TiuYq
- gWqUYRrsMKrVb17xnG+zvAsaoZrtYSoX1iM8yQSjRetpjJNSi2RVcEPB4/L/2rYGtDWt
- TFrnicOu17oq23A5RT9g+1juog6BNKGp+pL4zPTTs3C6KgcZy28TiMJZZuoZwOrbIfbw
- bJuHiCeqQkaz8rh7REnw5dgsX8zCSugpm9YP8LVM7bUDlWG1cqq6hhZaiwHCDMGbvgaX
- R6WbuvizWDjGxjy0y2vJ0NECjV42TMn9AmPTWgeMpt/zBqDCrvBgtkNrjqfbl+qPGb9i
- DigQ==
-X-Gm-Message-State: AOAM531zvD+bp3ycVYIpuTwUeoGed0b3vZRSDzKG1crL5nUz03bABSAA
- QpygkucncwgtKDYkGHqg3oVGsULrrDwex36K0w/MI3LIk1b0LOjiz37BGgyzhPgvZOFXL4rMU9S
- /3oOOah5jsF/gsj1UTAQ4ZhgL+pjNoX7txTmaV1pctw==
-X-Received: by 2002:a1c:398b:: with SMTP id g133mr25236178wma.76.1593601922427; 
- Wed, 01 Jul 2020 04:12:02 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxQMUaayG0vDg3RNtuezDlgxdvof9uLCFzLvN6HKEyQRgj3zoZo7nehIzUAAPphqwvJnljolw==
-X-Received: by 2002:a1c:398b:: with SMTP id g133mr25236149wma.76.1593601922091; 
- Wed, 01 Jul 2020 04:12:02 -0700 (PDT)
-Received: from redhat.com (bzq-79-182-31-92.red.bezeqint.net. [79.182.31.92])
- by smtp.gmail.com with ESMTPSA id
- 140sm1930942wmb.15.2020.07.01.04.11.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2020 04:12:01 -0700 (PDT)
-Date: Wed, 1 Jul 2020 07:11:57 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Eugenio Perez Martin <eperezma@redhat.com>
-Subject: Re: [PATCH RFC v8 02/11] vhost: use batched get_vq_desc version
-Message-ID: <20200701071041-mutt-send-email-mst@kernel.org>
-References: <20200611113404.17810-1-mst@redhat.com>
- <20200611113404.17810-3-mst@redhat.com>
- <20200611152257.GA1798@char.us.oracle.com>
- <CAJaqyWdwXMX0JGhmz6soH2ZLNdaH6HEdpBM8ozZzX9WUu8jGoQ@mail.gmail.com>
- <CAJaqyWdwgy0fmReOgLfL4dAv-E+5k_7z3d9M+vHqt0aO2SmOFg@mail.gmail.com>
- <20200622114622-mutt-send-email-mst@kernel.org>
- <CAJaqyWfrf94Gc-DMaXO+f=xC8eD3DVCD9i+x1dOm5W2vUwOcGQ@mail.gmail.com>
- <20200622122546-mutt-send-email-mst@kernel.org>
- <CAJaqyWfbouY4kEXkc6sYsbdCAEk0UNsS5xjqEdHTD7bcTn40Ow@mail.gmail.com>
- <CAJaqyWefMHPguj8ZGCuccTn0uyKxF9ZTEi2ASLtDSjGNb1Vwsg@mail.gmail.com>
+ Wed, 01 Jul 2020 04:33:45 -0700 (PDT)
+X-Gm-Message-State: AOAM532+nGbDXr8IkjhClFW+mHYma2HEAOBI1xUX3ZLM0WXnjL2WCa9n
+ RHq5wJEil41n1yxmoPD/e21XnfCn4RKfKv22XyE=
+X-Google-Smtp-Source: ABdhPJzUyheLKExWmWPJJq8cfmtDNQPYUV5VmAxlZw/B9iC/fX9pH44hi8zZXNkJzktUY7GsGZCLQHu7TodbT+JJTF8=
+X-Received: by 2002:a37:9dd6:: with SMTP id
+ g205mr25563365qke.352.1593603224183; 
+ Wed, 01 Jul 2020 04:33:44 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAJaqyWefMHPguj8ZGCuccTn0uyKxF9ZTEi2ASLtDSjGNb1Vwsg@mail.gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: kvm list <kvm@vger.kernel.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+References: <20200630173734.14057-1-will@kernel.org>
+ <20200630173734.14057-3-will@kernel.org>
+ <CAK8P3a136e2k-iGoJ4X51mnj0f0KSLJKOw6b=s4F2QHHeyAMEQ@mail.gmail.com>
+ <20200701101603.GB14959@willie-the-truck>
+In-Reply-To: <20200701101603.GB14959@willie-the-truck>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Wed, 1 Jul 2020 13:33:28 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a0cfjU-EOVJoMrUcjVDXLOk1Trv4DWcz_bME5Aj3=JPvQ@mail.gmail.com>
+Message-ID: <CAK8P3a0cfjU-EOVJoMrUcjVDXLOk1Trv4DWcz_bME5Aj3=JPvQ@mail.gmail.com>
+Subject: Re: [PATCH 02/18] compiler.h: Split {READ, WRITE}_ONCE definitions out
+ into rwonce.h
+To: Will Deacon <will@kernel.org>
+X-Provags-ID: V03:K1:0RJetzpMJrj2NfCVGrJ12vjIThzN3+AdqKbUC/5oYdSQz+1vE9n
+ Lhszk+f10NQf0UxUKP0XG3DCzdESMjxVgtnjrAeLINXuTP1wtGks5nLvBp+yUJRPAd624aw
+ lWVp54RqQcjaIJkHldAh0lY7FuQ/MWHnYrAbChSMqjJtZtGSN8cLShOaUiXNr+5sej8sXhd
+ Cq1NtaFZa0TGTVCB6X2mw==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:AwYjrrsBtjM=:Zsf4QKLGioc65RmEfqdT4e
+ Ln3f3PJcdUbescA+mp29p1B8ys1LLQt9iAol0Ktbl0HFt3Qp/ZGx5usqNXQiCY2QE1h2eF+Tc
+ 6s4sOCmG/X7CzbjYG82kENFGrDGSjEpAP2XQdMcKyWjvSavWYojEgSvlZGITRP7W1V3xfOf/v
+ KITTJX2zwalgMXA4YjMTCfJ0ulEMiAMv9nqPgoGszGJlUiJR8cSj5Y0ZmY2QYf/7HNERAVGqS
+ 2O9Lqx0VrMOooyEWFzV7jKG30bqeJwilnC458w5lU9fS60vOPp+GfunY92DiWYB2B3wOZO0Uq
+ grWmpgOga452AILUj3lHOw32IQjd2C2wP+XG193gaIfaEMQXaON7EqqFohLqMbOPw+j55kla7
+ qEq5DBV8a3R/o3vRwFsV4jfLr6pDN/lRO0FL36JtyrdQhL8vA/lF+ADvg9jlcQDdj9wJQeLwC
+ ozsRZcKJw3IYZnPNbCXDBpqXE2MFqSvw82LGUtM7lsBY6iL4gvjWySo+77EgcyT8TYGxBVM6Y
+ yCF6u8SymRbYDPoizLYzBO3BvQmo1/4akoDkybUAVozTUzeq8JK8GFxNpQZYoZmAB5fon7Izl
+ QaiIgBABtKuk+6+j4UpSGltzNykfC05P4DbDisOOPdx4PnId1N6ksUxVdpK1nhD9/Q2mONerJ
+ v1qIfQxpwf0NO/HjRsleEJHBHU0a8Nq1ojN0EPE/bDRNakTWrJEDuC0pZzm8KR1rzPlO7juS5
+ bPEvye5y9G99iVcwSY1YtUtG4PpzNHF8Q36PxjzaH3SmXlsTNbAb/wiR6CKomHTdUMsi1y6Vy
+ gybEn6Q4yKA81t3EZfwSID85IEmSoP6zkSI367Ejctlh7c3i4C1ppcEqG2Ma9HDJcxCAf8wz7
+ 4vCUliSEitB8B8ZNosfBg1sRw4eK0MLECM4Kljin3cerklFRB9k4mV3zoYU9HWxUdga1M04k7
+ NYjy/mnijfl5MUqNvbIBb0YD1xPtsHJw+MebnxzqedhQUoVok04Jt
+Cc: Mark Rutland <mark.rutland@arm.com>, Marco Elver <elver@google.com>,
+ Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Nick Desaulniers <ndesaulniers@google.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Josh Triplett <josh@joshtriplett.org>,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Sami Tolvanen <samitolvanen@google.com>, alpha <linux-alpha@vger.kernel.org>,
+ Alan Stern <stern@rowland.harvard.edu>, Matt Turner <mattst88@gmail.com>,
+ virtualization@lists.linux-foundation.org,
+ Android Kernel Team <kernel-team@android.com>,
+ Boqun Feng <boqun.feng@gmail.com>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Richard Henderson <rth@twiddle.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -119,182 +114,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jul 01, 2020 at 12:43:09PM +0200, Eugenio Perez Martin wrote:
-> On Tue, Jun 23, 2020 at 6:15 PM Eugenio Perez Martin
-> <eperezma@redhat.com> wrote:
-> >
-> > On Mon, Jun 22, 2020 at 6:29 PM Michael S. Tsirkin <mst@redhat.com> wrote:
+On Wed, Jul 1, 2020 at 12:16 PM Will Deacon <will@kernel.org> wrote:
+> On Tue, Jun 30, 2020 at 09:11:32PM +0200, Arnd Bergmann wrote:
+> > On Tue, Jun 30, 2020 at 7:37 PM Will Deacon <will@kernel.org> wrote:
 > > >
-> > > On Mon, Jun 22, 2020 at 06:11:21PM +0200, Eugenio Perez Martin wrote:
-> > > > On Mon, Jun 22, 2020 at 5:55 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> > > > >
-> > > > > On Fri, Jun 19, 2020 at 08:07:57PM +0200, Eugenio Perez Martin wrote:
-> > > > > > On Mon, Jun 15, 2020 at 2:28 PM Eugenio Perez Martin
-> > > > > > <eperezma@redhat.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Jun 11, 2020 at 5:22 PM Konrad Rzeszutek Wilk
-> > > > > > > <konrad.wilk@oracle.com> wrote:
-> > > > > > > >
-> > > > > > > > On Thu, Jun 11, 2020 at 07:34:19AM -0400, Michael S. Tsirkin wrote:
-> > > > > > > > > As testing shows no performance change, switch to that now.
-> > > > > > > >
-> > > > > > > > What kind of testing? 100GiB? Low latency?
-> > > > > > > >
-> > > > > > >
-> > > > > > > Hi Konrad.
-> > > > > > >
-> > > > > > > I tested this version of the patch:
-> > > > > > > https://lkml.org/lkml/2019/10/13/42
-> > > > > > >
-> > > > > > > It was tested for throughput with DPDK's testpmd (as described in
-> > > > > > > http://doc.dpdk.org/guides/howto/virtio_user_as_exceptional_path.html)
-> > > > > > > and kernel pktgen. No latency tests were performed by me. Maybe it is
-> > > > > > > interesting to perform a latency test or just a different set of tests
-> > > > > > > over a recent version.
-> > > > > > >
-> > > > > > > Thanks!
-> > > > > >
-> > > > > > I have repeated the tests with v9, and results are a little bit different:
-> > > > > > * If I test opening it with testpmd, I see no change between versions
-> > > > >
-> > > > >
-> > > > > OK that is testpmd on guest, right? And vhost-net on the host?
-> > > > >
-> > > >
-> > > > Hi Michael.
-> > > >
-> > > > No, sorry, as described in
-> > > > http://doc.dpdk.org/guides/howto/virtio_user_as_exceptional_path.html.
-> > > > But I could add to test it in the guest too.
-> > > >
-> > > > These kinds of raw packets "bursts" do not show performance
-> > > > differences, but I could test deeper if you think it would be worth
-> > > > it.
+> > > In preparation for allowing architectures to define their own
+> > > implementation of the READ_ONCE() macro, move the generic
+> > > {READ,WRITE}_ONCE() definitions out of the unwieldy 'linux/compiler.h'
+> > > file and into a new 'rwonce.h' header under 'asm-generic'.
 > > >
-> > > Oh ok, so this is without guest, with virtio-user.
-> > > It might be worth checking dpdk within guest too just
-> > > as another data point.
-> > >
+> > > Acked-by: Paul E. McKenney <paulmck@kernel.org>
+> > > Signed-off-by: Will Deacon <will@kernel.org>
+> > > ---
+> > >  include/asm-generic/Kbuild   |  1 +
+> > >  include/asm-generic/rwonce.h | 91 ++++++++++++++++++++++++++++++++++++
+> > >  include/linux/compiler.h     | 83 +-------------------------------
 > >
-> > Ok, I will do it!
-> >
-> > > > > > * If I forward packets between two vhost-net interfaces in the guest
-> > > > > > using a linux bridge in the host:
-> > > > >
-> > > > > And here I guess you mean virtio-net in the guest kernel?
-> > > >
-> > > > Yes, sorry: Two virtio-net interfaces connected with a linux bridge in
-> > > > the host. More precisely:
-> > > > * Adding one of the interfaces to another namespace, assigning it an
-> > > > IP, and starting netserver there.
-> > > > * Assign another IP in the range manually to the other virtual net
-> > > > interface, and start the desired test there.
-> > > >
-> > > > If you think it would be better to perform then differently please let me know.
-> > >
-> > >
-> > > Not sure why you bother with namespaces since you said you are
-> > > using L2 bridging. I guess it's unimportant.
-> > >
-> >
-> > Sorry, I think I should have provided more context about that.
-> >
-> > The only reason to use namespaces is to force the traffic of these
-> > netperf tests to go through the external bridge. To test netperf
-> > different possibilities than the testpmd (or pktgen or others "blast
-> > of frames unconditionally" tests).
-> >
-> > This way, I make sure that is the same version of everything in the
-> > guest, and is a little bit easier to manage cpu affinity, start and
-> > stop testing...
-> >
-> > I could use a different VM for sending and receiving, but I find this
-> > way a faster one and it should not introduce a lot of noise. I can
-> > test with two VM if you think that this use of network namespace
-> > introduces too much noise.
-> >
-> > Thanks!
-> >
-> > > > >
-> > > > > >   - netperf UDP_STREAM shows a performance increase of 1.8, almost
-> > > > > > doubling performance. This gets lower as frame size increase.
-> 
-> Regarding UDP_STREAM:
-> * with event_idx=on: The performance difference is reduced a lot if
-> applied affinity properly (manually assigning CPU on host/guest and
-> setting IRQs on guest), making them perform equally with and without
-> the patch again. Maybe the batching makes the scheduler perform
-> better.
-> 
-> > > > > >   - rests of the test goes noticeably worse: UDP_RR goes from ~6347
-> > > > > > transactions/sec to 5830
-> 
-> * Regarding UDP_RR, TCP_STREAM, and TCP_RR, proper CPU pinning makes
-> them perform similarly again, only a very small performance drop
-> observed. It could be just noise.
-> ** All of them perform better than vanilla if event_idx=off, not sure
-> why. I can try to repeat them if you suspect that can be a test
-> failure.
-> 
-> * With testpmd and event_idx=off, if I send from the VM to host, I see
-> a performance increment especially in small packets. The buf api also
-> increases performance compared with only batching: Sending the minimum
-> packet size in testpmd makes pps go from 356kpps to 473 kpps. Sending
-> 1024 length UDP-PDU makes it go from 570kpps to 64 kpps.
-> 
-> Something strange I observe in these tests: I get more pps the bigger
-> the transmitted buffer size is. Not sure why.
-> 
-> ** Sending from the host to the VM does not make a big change with the
-> patches in small packets scenario (minimum, 64 bytes, about 645
-> without the patch, ~625 with batch and batch+buf api). If the packets
-> are bigger, I can see a performance increase: with 256 bits, it goes
-> from 590kpps to about 600kpps, and in case of 1500 bytes payload it
-> gets from 348kpps to 528kpps, so it is clearly an improvement.
-> 
-> * with testpmd and event_idx=on, batching+buf api perform similarly in
-> both directions.
-> 
-> All of testpmd tests were performed with no linux bridge, just a
-> host's tap interface (<interface type='ethernet'> in xml), with a
-> testpmd txonly and another in rxonly forward mode, and using the
-> receiving side packets/bytes data. Guest's rps, xps and interrupts,
-> and host's vhost threads affinity were also tuned in each test to
-> schedule both testpmd and vhost in different processors.
-> 
-> I will send the v10 RFC with the small changes requested by Stefan and Jason.
-> 
-> Thanks!
-> 
+> > Very nice, this has the added benefit of allowing us to stop including
+> > asm/barrier.h once linux/compiler.h gets changed to not include
+> > asm/rwonce.h.
+>
+> Yeah, with this series linux/compiler.h _does_ include asm/rwonce.h because
+> otherwise there are many callers to fix up, but that could be addressed
+> subsequently, I suppose.
 
-OK so there's a chance you are seeing effects of an aggressive power
-management. which tuned profile are you using? It might be helpful
-to disable PM/frequency scaling.
+Right, I didn't mean you should change that right away. I actually
+have a work-in-progress patch series that removes a ton of
+indirect header inclusions to improve build speed, and a script to
+add the explicit includes into .c files where needed.
 
+> > The asm/barrier.h header has a circular dependency, pulling in
+> > linux/compiler.h itself.
+>
+> Hmm. Once smp_read_barrier_depends() disappears, I could actually remove
+> the include of <asm/barrier.h> from asm-generic/rwonce.h. It would have to
+> remain for arch/alpha/, however, since we need the barrier definitions to
+> implement READ_ONCE(). I can probably also replace the include of
+> <linux/compiler.h> in asm-generic/barrier.h with <asm/rwonce.h> too (so it's
+> still circular, but at least a lot simpler).
+>
+> I'll have a play...
 
-> 
-> 
-> 
-> 
-> 
-> > > > >
-> > > > > OK so it seems plausible that we still have a bug where an interrupt
-> > > > > is delayed. That is the main difference between pmd and virtio.
-> > > > > Let's try disabling event index, and see what happens - that's
-> > > > > the trickiest part of interrupts.
-> > > > >
-> > > >
-> > > > Got it, will get back with the results.
-> > > >
-> > > > Thank you very much!
-> > > >
-> > > > >
-> > > > >
-> > > > > >   - TCP_STREAM goes from ~10.7 gbps to ~7Gbps
-> > > > > >   - TCP_RR from 6223.64 transactions/sec to 5739.44
-> > > > >
-> > >
+I think this would require the same kind of fixup for anything that depends on
+asm/barrier.h being included implicitly at the moment.
 
+      Arnd
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
