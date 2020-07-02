@@ -1,84 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 395B1211A86
-	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 05:06:28 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C89E58A6F6;
-	Thu,  2 Jul 2020 03:06:26 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WE-RE2Ajy1+l; Thu,  2 Jul 2020 03:06:26 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 3AE768A6B2;
-	Thu,  2 Jul 2020 03:06:26 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0F628C0733;
-	Thu,  2 Jul 2020 03:06:26 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 96A7FC0733
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 03:06:24 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69258211C9A
+	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 09:23:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8B8A98B4FC
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 03:06:24 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D0C5A8A578;
+	Thu,  2 Jul 2020 07:23:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HfDtiSj4RRSK; Thu,  2 Jul 2020 07:23:12 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 395728A563;
+	Thu,  2 Jul 2020 07:23:12 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 00B65C0733;
+	Thu,  2 Jul 2020 07:23:12 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5E44DC0733
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Jul 2020 07:23:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 41ED2253CA
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Jul 2020 07:23:10 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qkQ9CcLucba4
+ with ESMTP id n3DCAowXjneX
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 03:06:23 +0000 (UTC)
+ Thu,  2 Jul 2020 07:23:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 40E4A8B4F7
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by silver.osuosl.org (Postfix) with ESMTPS id 084B4252A8
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 03:06:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593659182;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qeIaIEJc94t9oaVvAhehA4A3clx6kWGL/yNP4QpP1wc=;
- b=e6JWw5rTE1iqJxysdXQgh1+9v+ajdpcwipbOkloWe0GWGUSm+S1ZAzBHXeFXuBAPxGBa8L
- 88uHp7dSEQZ9ENShOoBQX0ioQXflqCiEYwXL9+2NZQUlVN16srAH2dL5/4mprjoCHZVr9d
- SKVcuWi6lLP42hGRPBJD4T38lWBx+60=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-506-5_ARSzpKPziJDyNbg8kvtA-1; Wed, 01 Jul 2020 23:06:18 -0400
-X-MC-Unique: 5_ARSzpKPziJDyNbg8kvtA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B8C5B800D5C;
- Thu,  2 Jul 2020 03:06:17 +0000 (UTC)
-Received: from [10.72.13.248] (ovpn-13-248.pek2.redhat.com [10.72.13.248])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B237079233;
- Thu,  2 Jul 2020 03:06:12 +0000 (UTC)
-Subject: Re: [PATCH 2/2] virtio-mmio: Reject invalid IRQ 0 command line
- argument
-To: Bjorn Helgaas <helgaas@kernel.org>, linux-kernel@vger.kernel.org
-References: <20200701221040.3667868-1-helgaas@kernel.org>
- <20200701221040.3667868-3-helgaas@kernel.org>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <032d0424-4876-6322-76d2-d733db28addb@redhat.com>
-Date: Thu, 2 Jul 2020 11:06:11 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ Thu,  2 Jul 2020 07:23:09 +0000 (UTC)
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3B3D42073E;
+ Thu,  2 Jul 2020 07:23:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1593674588;
+ bh=Re61RwD/CyQqWBiQskwnaPfGr1o4kLsu1CWsfLls+hM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=kuS2Mmhm+7c/+nST2Wi4JbOT82ZSobqK5KFCdbVqQXwCGLZBy7/LpmgMb7Pq85t1G
+ a6m6BrCh5id96wu1KUG0opwCahVKpnhDfkXuSg9AMslVdZ1XMgtrIMFp1PT5EHGsL9
+ n0XlU4lEskbMa3Pt2IwRkzphNfPJu+6WmVYkG9DQ=
+Date: Thu, 2 Jul 2020 08:23:02 +0100
+From: Will Deacon <will@kernel.org>
+To: Dave P Martin <dave.martin@arm.com>
+Subject: Re: [PATCH 18/18] arm64: lto: Strengthen READ_ONCE() to acquire when
+ CLANG_LTO=y
+Message-ID: <20200702072301.GA15963@willie-the-truck>
+References: <20200630173734.14057-1-will@kernel.org>
+ <20200630173734.14057-19-will@kernel.org>
+ <20200701170722.4rte5ssnmrn2uqzg@bakewell.cambridge.arm.com>
 MIME-Version: 1.0
-In-Reply-To: <20200701221040.3667868-3-helgaas@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
- virtualization@lists.linux-foundation.org,
- "Michael S . Tsirkin" <mst@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20200701170722.4rte5ssnmrn2uqzg@bakewell.cambridge.arm.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Mark Rutland <mark.rutland@arm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ virtualization@lists.linux-foundation.org, Arnd Bergmann <arnd@arndb.de>,
+ Alan Stern <stern@rowland.harvard.edu>,
+ Sami Tolvanen <samitolvanen@google.com>, Matt Turner <mattst88@gmail.com>,
+ kernel-team@android.com, Marco Elver <elver@google.com>,
+ Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Josh Triplett <josh@joshtriplett.org>,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ linux-arm-kernel@lists.infradead.org, Richard Henderson <rth@twiddle.net>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+ linux-alpha@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,41 +87,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNy8yIOS4iuWNiDY6MTAsIEJqb3JuIEhlbGdhYXMgd3JvdGU6Cj4gRnJvbTogQmpv
-cm4gSGVsZ2FhcyA8YmhlbGdhYXNAZ29vZ2xlLmNvbT4KPgo+IFRoZSAidmlydGlvX21taW8uZGV2
-aWNlPSIgY29tbWFuZCBsaW5lIGFyZ3VtZW50IGFsbG93cyBhIHVzZXIgdG8gc3BlY2lmeQo+IHRo
-ZSBzaXplLCBhZGRyZXNzLCBhbmQgSVJRIG9mIGEgdmlydGlvIGRldmljZS4gIFByZXZpb3VzbHkg
-dGhlIG9ubHkKPiByZXF1aXJlbWVudCBmb3IgdGhlIElSUSB3YXMgdGhhdCBpdCBiZSBhbiB1bnNp
-Z25lZCBpbnRlZ2VyLgo+Cj4gWmVybyBpcyBhbiB1bnNpZ25lZCBpbnRlZ2VyIGJ1dCBhbiBpbnZh
-bGlkIElSUSBudW1iZXIsIGFuZCBhZnRlcgo+IGE4NWE2Yzg2YzI1YmUgKCJkcml2ZXIgY29yZTog
-cGxhdGZvcm06IENsYXJpZnkgdGhhdCBJUlEgMCBpcyBpbnZhbGlkIiksCj4gYXR0ZW1wdHMgdG8g
-dXNlIElSUSAwIGNhdXNlIHdhcm5pbmdzLgo+Cj4gSWYgdGhlIHVzZXIgc3BlY2lmaWVzIElSUSAw
-LCByZXR1cm4gZmFpbHVyZSBpbnN0ZWFkIG9mIHJlZ2lzdGVyaW5nIGEgZGV2aWNlCj4gd2l0aCBJ
-UlEgMC4KPgo+IEZpeGVzOiBhODVhNmM4NmMyNWJlICgiZHJpdmVyIGNvcmU6IHBsYXRmb3JtOiBD
-bGFyaWZ5IHRoYXQgSVJRIDAgaXMgaW52YWxpZCIpCj4gU2lnbmVkLW9mZi1ieTogQmpvcm4gSGVs
-Z2FhcyA8YmhlbGdhYXNAZ29vZ2xlLmNvbT4KPiBDYzogTWljaGFlbCBTLiBUc2lya2luIDxtc3RA
-cmVkaGF0LmNvbT4KPiBDYzogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4KPiBDYzog
-dmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKPiAtLS0KPiAgIGRyaXZl
-cnMvdmlydGlvL3ZpcnRpb19tbWlvLmMgfCA0ICsrLS0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGlu
-c2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aXJ0
-aW8vdmlydGlvX21taW8uYyBiL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19tbWlvLmMKPiBpbmRleCA5
-ZDE2YWFmZmNhOWQuLjYyN2FjMDQ4NzQ5NCAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3ZpcnRpby92
-aXJ0aW9fbW1pby5jCj4gKysrIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX21taW8uYwo+IEBAIC02
-NDEsMTEgKzY0MSwxMSBAQCBzdGF0aWMgaW50IHZtX2NtZGxpbmVfc2V0KGNvbnN0IGNoYXIgKmRl
-dmljZSwKPiAgIAkJCSZ2bV9jbWRsaW5lX2lkLCAmY29uc3VtZWQpOwo+ICAgCj4gICAJLyoKPiAt
-CSAqIHNzY2FuZigpIG11c3QgcHJvY2Vzc2VzIGF0IGxlYXN0IDIgY2h1bmtzOyBhbHNvIHRoZXJl
-Cj4gKwkgKiBzc2NhbmYoKSBtdXN0IHByb2Nlc3MgYXQgbGVhc3QgMiBjaHVua3M7IGFsc28gdGhl
-cmUKPiAgIAkgKiBtdXN0IGJlIG5vIGV4dHJhIGNoYXJhY3RlcnMgYWZ0ZXIgdGhlIGxhc3QgY2h1
-bmssIHNvCj4gICAJICogc3RyW2NvbnN1bWVkXSBtdXN0IGJlICdcMCcKPiAgIAkgKi8KPiAtCWlm
-IChwcm9jZXNzZWQgPCAyIHx8IHN0cltjb25zdW1lZF0pCj4gKwlpZiAocHJvY2Vzc2VkIDwgMiB8
-fCBzdHJbY29uc3VtZWRdIHx8IGlycSA9PSAwKQo+ICAgCQlyZXR1cm4gLUVJTlZBTDsKPiAgIAo+
-ICAgCXJlc291cmNlc1swXS5mbGFncyA9IElPUkVTT1VSQ0VfTUVNOwoKCkFja2VkLWJ5OiBKYXNv
-biBXYW5nIDxqYXNvd2FuZ0ByZWRoYXQuY29tPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFs
-aXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91
-bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Wed, Jul 01, 2020 at 06:07:25PM +0100, Dave P Martin wrote:
+> On Tue, Jun 30, 2020 at 06:37:34PM +0100, Will Deacon wrote:
+> > When building with LTO, there is an increased risk of the compiler
+> > converting an address dependency headed by a READ_ONCE() invocation
+> > into a control dependency and consequently allowing for harmful
+> > reordering by the CPU.
+> > 
+> > Ensure that such transformations are harmless by overriding the generic
+> > READ_ONCE() definition with one that provides acquire semantics when
+> > building with LTO.
+> > 
+> > Signed-off-by: Will Deacon <will@kernel.org>
+> > ---
+> >  arch/arm64/include/asm/rwonce.h   | 63 +++++++++++++++++++++++++++++++
+> >  arch/arm64/kernel/vdso/Makefile   |  2 +-
+> >  arch/arm64/kernel/vdso32/Makefile |  2 +-
+> >  3 files changed, 65 insertions(+), 2 deletions(-)
+> >  create mode 100644 arch/arm64/include/asm/rwonce.h
+> > 
+> > diff --git a/arch/arm64/include/asm/rwonce.h b/arch/arm64/include/asm/rwonce.h
+> > new file mode 100644
+> > index 000000000000..515e360b01a1
+> > --- /dev/null
+> > +++ b/arch/arm64/include/asm/rwonce.h
+> > @@ -0,0 +1,63 @@
+> > +/* SPDX-License-Identifier: GPL-2.0 */
+> > +/*
+> > + * Copyright (C) 2020 Google LLC.
+> > + */
+> > +#ifndef __ASM_RWONCE_H
+> > +#define __ASM_RWONCE_H
+> > +
+> > +#ifdef CONFIG_CLANG_LTO
+> 
+> Don't we have a generic option for LTO that's not specific to Clang.
+
+/me looks at the LTO series some more
+
+Oh yeah, there's CONFIG_LTO which is selected by CONFIG_LTO_CLANG, which is
+the non-typoed version of the above. I can switch this to CONFIG_LTO.
+
+> Also, can you illustrate code that can only be unsafe with Clang LTO?
+
+I don't have a concrete example, but it's an ongoing concern over on the LTO
+thread [1], so I cooked this to show one way we could deal with it. The main
+concern is that the whole-program optimisations enabled by LTO may allow the
+compiler to enumerate possible values for a pointer at link time and replace
+an address dependency between two loads with a control dependency instead,
+defeating the dependency ordering within the CPU.
+
+We likely won't realise if/when this goes wrong, other than impossible to
+debug, subtle breakage that crops up seemingly randomly. Ideally, we'd be
+able to detect this sort of thing happening at build time, and perhaps
+even prevent it with compiler options or annotations, but none of that is
+close to being available and I'm keen to progress the LTO patches in the
+meantime because they are a requirement for CFI.
+
+Will
+
+[1] https://lore.kernel.org/r/20200624203200.78870-1-samitolvanen@google.com
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
