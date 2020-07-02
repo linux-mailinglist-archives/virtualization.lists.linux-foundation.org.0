@@ -2,79 +2,94 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5735A211EC3
-	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 10:28:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62DB5211F56
+	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 10:58:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 540FA8AD86;
-	Thu,  2 Jul 2020 08:28:47 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1A68A8A8B2;
+	Thu,  2 Jul 2020 08:58:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jKXhd5Bwrv+P; Thu,  2 Jul 2020 08:28:46 +0000 (UTC)
+	with ESMTP id AJEgO2ekAJud; Thu,  2 Jul 2020 08:58:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DA4788ACE5;
-	Thu,  2 Jul 2020 08:28:46 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E38E98A8F5;
+	Thu,  2 Jul 2020 08:58:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B70A1C0733;
-	Thu,  2 Jul 2020 08:28:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ABCCDC0733;
+	Thu,  2 Jul 2020 08:58:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7C8EAC0733
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EDF16C0733
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 08:28:45 +0000 (UTC)
+ Thu,  2 Jul 2020 08:58:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 666ED26938
+ by silver.osuosl.org (Postfix) with ESMTP id CFAC32530B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 08:28:45 +0000 (UTC)
+ Thu,  2 Jul 2020 08:58:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DllTALAAWnNp
+ with ESMTP id Xsa8dsSY6rOs
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 08:28:44 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
- by silver.osuosl.org (Postfix) with ESMTPS id 2FFB6268A7
+ Thu,  2 Jul 2020 08:58:35 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.10])
+ by silver.osuosl.org (Postfix) with ESMTPS id A0D6425379
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 08:28:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=1j2DrlcbUugnfL/BNKwgbBGwdXe1p5YiDNDgH1lziiA=; b=Gw3bFkBiw7lSr8XB4zKQSY2gM3
- tJk/ji3zgpfflj/zaSGFhyr7KMwLj+Oe+0Sm+KHfgrWViOHfPxx7b/QpCRZnd7QyWyLqPOjt5u4M+
- VT2c7Tj/WbWZ13AD1/9R0UzoNtp4d+F1m8batuj5Xl7qdQTZYJNIcpd7a6z0ADN51FPDOud+x2inb
- vaWHcRWO38JcCO7v+Lm2XkFcXbg2GQMLv/ahw7WmAbTz34o8N8P/o1BFnXY9TMJge7Bqawg2gEdUW
- veyOYqGH2bZGaUNyWTxK59SurZc9DII4ezuMOTRrJmJ1ycOYDis9O0xqtG1x7WpxmweqV5UnoKy94
- H7QDMhfg==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jquaH-0000Gw-TV; Thu, 02 Jul 2020 08:28:42 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 1CDA230015A;
- Thu,  2 Jul 2020 10:28:40 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id 0AA3620CC68A2; Thu,  2 Jul 2020 10:28:40 +0200 (CEST)
-Date: Thu, 2 Jul 2020 10:28:40 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Nicholas Piggin <npiggin@gmail.com>
-Subject: Re: [PATCH 2/8] powerpc/pseries: use smp_rmb() in H_CONFER spin yield
-Message-ID: <20200702082840.GC4781@hirez.programming.kicks-ass.net>
-References: <20200702074839.1057733-1-npiggin@gmail.com>
- <20200702074839.1057733-3-npiggin@gmail.com>
+ Thu,  2 Jul 2020 08:58:34 +0000 (UTC)
+Received: from mail-qt1-f169.google.com ([209.85.160.169]) by
+ mrelayeu.kundenserver.de (mreue107 [212.227.15.145]) with ESMTPSA (Nemesis)
+ id 1N1gac-1ip1ot3sk4-01213E for <virtualization@lists.linux-foundation.org>;
+ Thu, 02 Jul 2020 10:58:32 +0200
+Received: by mail-qt1-f169.google.com with SMTP id e12so20614476qtr.9
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 02 Jul 2020 01:58:31 -0700 (PDT)
+X-Gm-Message-State: AOAM533lxECGT5swBb+PojGVPUrNP2BfWhoyq9xnQykvK9HvnHuBk4Sa
+ YXppkqm798Vl3WtgJTmXxDgrJW1Jhq9G3W6cWBc=
+X-Google-Smtp-Source: ABdhPJwmVhcWIjW9naHQ+EtJIo8qem6eHT7ix06ZnfalWEEgAsXZpi1xlLnmHrPnhvrb+Fee92Gc5bSzX/y8gl2q00Y=
+X-Received: by 2002:ac8:33d7:: with SMTP id d23mr30244902qtb.204.1593680310449; 
+ Thu, 02 Jul 2020 01:58:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200702074839.1057733-3-npiggin@gmail.com>
-Cc: linux-arch@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- Boqun Feng <boqun.feng@gmail.com>, linux-kernel@vger.kernel.org,
- kvm-ppc@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Ingo Molnar <mingo@redhat.com>, Waiman Long <longman@redhat.com>,
- Anton Blanchard <anton@ozlabs.org>, Will Deacon <will@kernel.org>
+References: <20200701200950.30314-1-rikard.falkeborn@gmail.com>
+In-Reply-To: <20200701200950.30314-1-rikard.falkeborn@gmail.com>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Thu, 2 Jul 2020 10:58:14 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a0iVY54EMWYDLdn3QoqmO0CkZMJk-P2G19epm8FCTX8bg@mail.gmail.com>
+Message-ID: <CAK8P3a0iVY54EMWYDLdn3QoqmO0CkZMJk-P2G19epm8FCTX8bg@mail.gmail.com>
+Subject: Re: [PATCH 0/5] drivers/char: Constify static variables
+To: Rikard Falkeborn <rikard.falkeborn@gmail.com>
+X-Provags-ID: V03:K1:oSZPUYuv5BnSGDE7XXz3NQ9Xa2vnHxw7ZxaDaukP2Fi4xgeIgKH
+ YSkpnWzBHzxi0vP8Qh3UA49UVqaj7d7eG0l2DsjhNVNQYUJnsZley1X9ZvbetzFcgOgEZ8h
+ oTJII/NWNi4gZzNvddvDRyvRMpeCPJH0jNmqTyPX3WZEQs+fK9ytArrn7TITEUEd/lVHjqz
+ skZpS9zzH05EtqXOdM6fw==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:GS/L6Vws/tw=:KfFldzC+iQqOuJXHu19Zf/
+ t27b0luJPMU6JuTwoXWFZZN45Y1T8pEWf+W+rEALWyu0jg74c76Wyiu9srFabNvdL+jrIHJVI
+ 0+d+R1oxrYNTqiJwCRAc7zBjLPhRNz2lPNGWF/VVtlAz6Gp73hUXF1b3+rsBUGYAzga0bomM5
+ go0alynYn8bcV8IVXKRXfHwYnYtlFWs9jyZowqC801TnbhrZXsI9OEIYzLkCJJ5zWZBTIbu2z
+ vPSp5N+t9SO7WiTbkdpdtz422mccRI+m4whqNBXcQtr1rXznFvKZWECsaQar9O5Cq41eQoMlB
+ eb2esTSe15PEuiO/Rh6PDiohrO+BCXqcs49O4sP3D2QaATk+AfkKslwT5QXYmAcjtd/6uAXIN
+ qvOJG+Jo6mTFewqh3u2jfL/OLWq/KP6nEZralcyXOIStZfxzwkYO6VE2TT6tZFavIfon+24K6
+ rhvtzSse/I/cFN4p32Pahl31213JApEHXstb6zUtc9jwstN7cJISqVgUExu0HbmvtQNAogbBB
+ R8igVn+Av8+/NFk6TkaSAbStTf9Fxv6mrtl0zjSWq5LqaXTWYGqkUr3kCSQ7nU+dx1YNS5SRV
+ MTjZnpvxlmqGga6ZRf20p7tcCWGEiGwXjISne41R3KlKAKZbJoWCZTfPhcH17PQwLxu4b0jaF
+ vWb2DRuea4pNWz7Na1Ayr6zhGLWWGyeNjLQf/nNJj2ROVN8d1BWbTlmTYnnZ1j+YlfNmevTlq
+ YlrA09vYaiGz7P3Eqlzy+3flQRZHMuqu4tqR+sJvq6Rdjtm1O08iBdLsDjHoT5eK9s0kKM75+
+ UrM7I6jlrPTCNBmrfz/wBbNJf/2NgybIPq84oW5DbALxfN4ZYk=
+Cc: Corey Minyard <minyard@acm.org>, Florian Fainelli <f.fainelli@gmail.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ Scott Branden <sbranden@broadcom.com>, Amit Shah <amit@kernel.org>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Ray Jui <rjui@broadcom.com>, virtualization@lists.linux-foundation.org,
+ bcm-kernel-feedback-list <bcm-kernel-feedback-list@broadcom.com>,
+ "open list:HARDWARE RANDOM NUMBER GENERATOR CORE"
+ <linux-crypto@vger.kernel.org>, Matt Mackall <mpm@selenic.com>,
+ openipmi-developer@lists.sourceforge.net,
+ Nicolas Saenz Julienne <nsaenzjulienne@suse.de>,
+ "moderated list:BROADCOM BCM2835 ARM ARCHITECTURE"
+ <linux-rpi-kernel@lists.infradead.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,14 +106,25 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jul 02, 2020 at 05:48:33PM +1000, Nicholas Piggin wrote:
-> There is no need for rmb(), this allows faster lwsync here.
+On Wed, Jul 1, 2020 at 11:48 PM Rikard Falkeborn
+<rikard.falkeborn@gmail.com> wrote:
+>
+> Constify some static variables (mostly structs) that are not modified.
+>
+> Rikard Falkeborn (5):
+>   hwrng: bcm2835 - Constify bcm2835_rng_devtype[]
+>   hwrng: nomadik - Constify nmk_rng_ids[]
+>   hwrng: virtio - Constify id_table[]
+>   ipmi: watchdog: Constify ident
+>   virtio_console: Constify some static variables
 
-Since you determined this; I'm thinking you actually understand the
-ordering here. How about recording this understanding in a comment?
+I just realized it was a series rather than a single patch I received. They
+all look correct, so
 
-Also, should the lock->slock load not use READ_ONCE() ?
+Acked-by: Arnd Bergmann <arnd@arndb.de>
 
+but if you do more of those, I would suggest not including the 'size'
+output for the small variables as that is not the main point here.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
