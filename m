@@ -1,88 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15BB421216F
-	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 12:36:38 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id A837921217F
+	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 12:47:15 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A943189072;
-	Thu,  2 Jul 2020 10:36:36 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 336EA8A79B;
+	Thu,  2 Jul 2020 10:47:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QH3Hv7aBwDxz; Thu,  2 Jul 2020 10:36:36 +0000 (UTC)
+	with ESMTP id tB2UbVcO3MKG; Thu,  2 Jul 2020 10:47:13 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4C0A68909F;
-	Thu,  2 Jul 2020 10:36:36 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B1CA88A7A3;
+	Thu,  2 Jul 2020 10:47:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 33FB4C0733;
-	Thu,  2 Jul 2020 10:36:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 812BFC0733;
+	Thu,  2 Jul 2020 10:47:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ADBEDC0733
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CCA2FC0733
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 10:36:34 +0000 (UTC)
+ Thu,  2 Jul 2020 10:47:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id AA4FC89057
+ by whitealder.osuosl.org (Postfix) with ESMTP id BB6278A1F7
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 10:36:34 +0000 (UTC)
+ Thu,  2 Jul 2020 10:47:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SmHrjqmJ7UDt
+ with ESMTP id oadVo6P3IqJA
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 10:36:34 +0000 (UTC)
+ Thu,  2 Jul 2020 10:47:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
- [209.85.210.196])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2AF0A878E7
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+ [209.85.214.193])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 101678A1F0
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 10:36:34 +0000 (UTC)
-Received: by mail-pf1-f196.google.com with SMTP id x72so2937659pfc.6
+ Thu,  2 Jul 2020 10:47:12 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id o1so4593113plk.1
  for <virtualization@lists.linux-foundation.org>;
- Thu, 02 Jul 2020 03:36:34 -0700 (PDT)
+ Thu, 02 Jul 2020 03:47:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=date:from:subject:to:cc:references:in-reply-to:mime-version
  :message-id:content-transfer-encoding;
- bh=zjqH5OyJ0uNgtW+k6QC+tgZu9cOQCPtDoHSfO1sMDg4=;
- b=gKLSXxs5Xi0ffOI4xaSGtq2l4qx855x5dafTHDq9WcXO7TQYplArFpssod2qR5iroc
- Z//J/E+Jxf2dWCBbYKBHXFVD+w+CXtshhKTHJdbD/O3iC89Fj08aafiZCVEJF2cOTrNE
- 4O5RqYQhri/vkSqkCRh9y8WiBO96ojL+4z4rqkLZXntWV5WAPiQZgcI1l0fnRFTFW50B
- rnTXdlfNOfTTwQ8ZKKGlQmHh4n8MfQVtn/MOtzbdTacVyDrkzZeO+Bdvyer8wuGkuL/S
- WC2gdd9tZnGshLR1E2a6JkZgt2oEw8jXurog9U4CI9OV0MLCeiLynDz8keltOuHYW5qY
- QHew==
+ bh=7/yp0REosLZos2NH5xismEOcBs6RT4AyW+naEiQaKEQ=;
+ b=Tsn7QxuQps6f4KsopBLK/6r7NKPpGUWGpS+e+NrpdDPq41xQyUqMOo+gmEQkN1qI4S
+ BHxGxUV5vcdLTX0ajvZOT5Jamg+NLxMN6Yb/BLiPv7A2HCYxQWyzcDfVKcDpDuSeZI2h
+ 3Q8YwMmLZnrNPs0yIu+sGh20AEHX9gWyfYaMvgUHoffumVOJhg0CiYR38X8RrHCWNf5j
+ Md84bVtpBpyovyhHrUoxL6XPgBDUAjA5btaePBVMEdpYH3Nhk118jOknAg9Mx4Y7MhEK
+ r/vtbGGjHtUkWLzw78JG/7MLM9d7Vw8hGja8DWr9kQ3IsewCaBztynFRMMH/QNdHLtke
+ fVtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:subject:to:cc:references:in-reply-to
  :mime-version:message-id:content-transfer-encoding;
- bh=zjqH5OyJ0uNgtW+k6QC+tgZu9cOQCPtDoHSfO1sMDg4=;
- b=NiDBbYS7ZzSOa50bejT/5YhMpRAC1Oljd9W0J33qdK7sKNyIjSOc/4nLibtdoCx/Va
- 4Bzghn+oIVEJQl+kjn3L5qcsaaV6/WywysheK2UwhMJJRWlhLoj931Zgx29JO45IqeKW
- 1S638ZTSuRSmNqQ4DAJoe91Yd0NAy8iWkhwqfB3ukWtGRM5nXHG/XOt/DdPntU/GxqH8
- h9tOLIbA0nPXjLjKjiBdJ4Xfo+AhmeC0F11ZmXqH9+3Kdd8SOZaWLVvCEv6ez/9aykFo
- nAmdqfHg23S3EQI68jN6f/HyX/R319xks+nYZtZlGYlbHbP/h4vjv/LNQzcwtji9MKv3
- R8LQ==
-X-Gm-Message-State: AOAM532UBDklKOve0ebA+ZhoPUQsmAe4iAJJKBi9ptPcQtP3/u2d9kvn
- RsKf467zfp5kbeDuJ/E7jOY=
-X-Google-Smtp-Source: ABdhPJzDNFrzM9gHS1aXVkfvYMpILRrQRmwBPh5wcimghMwI/lqsx8PhEr//gfgskebXTyEDOTJ33g==
-X-Received: by 2002:a63:8f18:: with SMTP id n24mr23072639pgd.432.1593686193761; 
- Thu, 02 Jul 2020 03:36:33 -0700 (PDT)
+ bh=7/yp0REosLZos2NH5xismEOcBs6RT4AyW+naEiQaKEQ=;
+ b=i1G2YJVlSL7XTZXItE2Mue6we/8f6I3V9y9QCa6rHPu03TrWjiEaLEJs+3wq1R6bHy
+ 3yykClPgBSXUaQfYAWWmf2bNoDTnwvZVdhuWm3viGCJvYtueeQ9qAMQ1Pm0D9r9+UzGn
+ +7tyBt7EoJA4tlRzX7CT8bEeidOdHYDrzqiju3Z5y1EEoFgQwPtEUFVsMBQTFDnHo1Zf
+ sg3nckAJUSxUmwJXz1wtSOrS+Nqp2s5c0KcigvW907nBhXnbGZXNm5hPCh6wJI+hGgyX
+ N+mojiV69/tfgXfwVuDWdW+LRTSFS4y+doEX5NpGJ1i6vMVkVfBSbSf7CndlULQiZVT/
+ 1pSg==
+X-Gm-Message-State: AOAM533fy8r/sPTPADJ3tmbFYZO52UnIyd/NH24yLNrMGwGsLSYLzEeQ
+ z2pHSqqYT7zddf3JSrb6uds=
+X-Google-Smtp-Source: ABdhPJwoIU+iCSn5Sb/43jebiYHxhFfNdVq9eoVNXNmFOsjzyeH63SOj20Ofhe6NtxmyHaem2+gpVQ==
+X-Received: by 2002:a17:90a:a60a:: with SMTP id
+ c10mr4463276pjq.117.1593686831628; 
+ Thu, 02 Jul 2020 03:47:11 -0700 (PDT)
 Received: from localhost (61-68-186-125.tpgi.com.au. [61.68.186.125])
- by smtp.gmail.com with ESMTPSA id i128sm8838706pfe.74.2020.07.02.03.36.32
+ by smtp.gmail.com with ESMTPSA id y19sm8213367pfc.135.2020.07.02.03.47.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2020 03:36:33 -0700 (PDT)
-Date: Thu, 02 Jul 2020 20:36:27 +1000
+ Thu, 02 Jul 2020 03:47:11 -0700 (PDT)
+Date: Thu, 02 Jul 2020 20:47:05 +1000
 From: Nicholas Piggin <npiggin@gmail.com>
-Subject: Re: [PATCH 2/8] powerpc/pseries: use smp_rmb() in H_CONFER spin yield
-To: Peter Zijlstra <peterz@infradead.org>
+Subject: Re: [PATCH 5/8] powerpc/64s: implement queued spinlocks and rwlocks
+To: Will Deacon <will@kernel.org>
 References: <20200702074839.1057733-1-npiggin@gmail.com>
- <20200702074839.1057733-3-npiggin@gmail.com>
- <20200702082840.GC4781@hirez.programming.kicks-ass.net>
-In-Reply-To: <20200702082840.GC4781@hirez.programming.kicks-ass.net>
+ <20200702074839.1057733-6-npiggin@gmail.com>
+ <20200702080219.GB16113@willie-the-truck>
+ <1593685459.r2tfxtfdp6.astroid@bobo.none>
+ <20200702103506.GA16418@willie-the-truck>
+In-Reply-To: <20200702103506.GA16418@willie-the-truck>
 MIME-Version: 1.0
-Message-Id: <1593685552.uh4kepm08t.astroid@bobo.none>
-Cc: linux-arch@vger.kernel.org, Will Deacon <will@kernel.org>,
+Message-Id: <1593686722.w9psaqk7yp.astroid@bobo.none>
+Cc: linux-arch@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
  Boqun Feng <boqun.feng@gmail.com>, linux-kernel@vger.kernel.org,
  kvm-ppc@vger.kernel.org, virtualization@lists.linux-foundation.org,
  Ingo Molnar <mingo@redhat.com>, Waiman Long <longman@redhat.com>,
@@ -103,24 +106,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Excerpts from Peter Zijlstra's message of July 2, 2020 6:28 pm:
-> On Thu, Jul 02, 2020 at 05:48:33PM +1000, Nicholas Piggin wrote:
->> There is no need for rmb(), this allows faster lwsync here.
+Excerpts from Will Deacon's message of July 2, 2020 8:35 pm:
+> On Thu, Jul 02, 2020 at 08:25:43PM +1000, Nicholas Piggin wrote:
+>> Excerpts from Will Deacon's message of July 2, 2020 6:02 pm:
+>> > On Thu, Jul 02, 2020 at 05:48:36PM +1000, Nicholas Piggin wrote:
+>> >> diff --git a/arch/powerpc/include/asm/qspinlock.h b/arch/powerpc/include/asm/qspinlock.h
+>> >> new file mode 100644
+>> >> index 000000000000..f84da77b6bb7
+>> >> --- /dev/null
+>> >> +++ b/arch/powerpc/include/asm/qspinlock.h
+>> >> @@ -0,0 +1,20 @@
+>> >> +/* SPDX-License-Identifier: GPL-2.0 */
+>> >> +#ifndef _ASM_POWERPC_QSPINLOCK_H
+>> >> +#define _ASM_POWERPC_QSPINLOCK_H
+>> >> +
+>> >> +#include <asm-generic/qspinlock_types.h>
+>> >> +
+>> >> +#define _Q_PENDING_LOOPS	(1 << 9) /* not tuned */
+>> >> +
+>> >> +#define smp_mb__after_spinlock()   smp_mb()
+>> >> +
+>> >> +static __always_inline int queued_spin_is_locked(struct qspinlock *lock)
+>> >> +{
+>> >> +	smp_mb();
+>> >> +	return atomic_read(&lock->val);
+>> >> +}
+>> > 
+>> > Why do you need the smp_mb() here?
+>> 
+>> A long and sad tale that ends here 51d7d5205d338
+>> 
+>> Should probably at least refer to that commit from here, since this one 
+>> is not going to git blame back there. I'll add something.
 > 
-> Since you determined this; I'm thinking you actually understand the
-> ordering here. How about recording this understanding in a comment?
+> Is this still an issue, though?
 > 
-> Also, should the lock->slock load not use READ_ONCE() ?
+> See 38b850a73034 (where we added a similar barrier on arm64) and then
+> c6f5d02b6a0f (where we removed it).
+> 
 
-Yeah, good point. Maybe I'll drop it from this series, doesn't really 
-belong I just saw the cleanup and didn't want to forget it.
+Oh nice, I didn't know that went away. Thanks for the heads up.
 
-We we just ordering the two loads in this function, and !SMP isn't a 
-concern (i.e., no issues of !SMP guest on SMP HV), but yeah fixing
-the lack of comment is warranted, thanks.
+I'm going to say I'm too scared to remove it while changing the
+spinlock algorithm, but I'll open an issue and we should look at 
+removing it.
 
 Thanks,
 Nick
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
