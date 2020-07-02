@@ -1,83 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D78FF21271F
-	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 16:55:45 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D5F7821284E
+	for <lists.virtualization@lfdr.de>; Thu,  2 Jul 2020 17:45:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 7F30A886A5;
-	Thu,  2 Jul 2020 14:55:44 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7527988E94;
+	Thu,  2 Jul 2020 15:45:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GLfR0hP9zEMW; Thu,  2 Jul 2020 14:55:43 +0000 (UTC)
+	with ESMTP id X7sxaTJyO1dR; Thu,  2 Jul 2020 15:45:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 6F5778949D;
-	Thu,  2 Jul 2020 14:55:43 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8F60188E95;
+	Thu,  2 Jul 2020 15:45:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 54A36C0733;
-	Thu,  2 Jul 2020 14:55:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 64C9CC0733;
+	Thu,  2 Jul 2020 15:45:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 81C5BC0733
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3FC60C0733
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 14:55:42 +0000 (UTC)
+ Thu,  2 Jul 2020 15:45:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 7D28988F61
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 2F18C88E95
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 14:55:42 +0000 (UTC)
+ Thu,  2 Jul 2020 15:45:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qaFBjkhpyhXy
+ with ESMTP id cLHz98p_Q8v6
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 14:55:41 +0000 (UTC)
+ Thu,  2 Jul 2020 15:45:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id EB81F88F56
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 719E088E94
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Jul 2020 14:55:41 +0000 (UTC)
-Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1105F2075D;
- Thu,  2 Jul 2020 14:55:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1593701741;
- bh=nbXe6nJCNrMku6QIpQkPDTVx3nVSr/HZ3tO6LrfZY8Q=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PcEiNPxuhlEyLh2HMXcrpBV1EC5XLsFjtMKSlRSdePnrAVWjczQYEysgptdOEIbNb
- QjfUU6jDXo4nj7OwF7ffPzJvSQ1L4KMCNuYjhVu7foez1h5841jqZdO+/Wfss7iN0Y
- tyFLYFMHbSNeYbjpimnr2GDt6pYflThH5++ITr0w=
-Date: Thu, 2 Jul 2020 15:55:33 +0100
-From: Will Deacon <will@kernel.org>
-To: Joel Fernandes <joelaf@google.com>
-Subject: Re: [PATCH 04/18] alpha: Override READ_ONCE() with barriered
- implementation
-Message-ID: <20200702145532.GB16999@willie-the-truck>
-References: <20200630173734.14057-1-will@kernel.org>
- <20200630173734.14057-5-will@kernel.org>
- <CAJWu+oqs-d0oDswB2Owyh-4Zo4WXAqKhKU0L=1HEwEfQbc1izw@mail.gmail.com>
+ Thu,  2 Jul 2020 15:45:27 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 33EEAAEB1;
+ Thu,  2 Jul 2020 15:45:25 +0000 (UTC)
+Subject: Re: [PATCH v2 0/4] Remove 32-bit Xen PV guest support
+To: Brian Gerst <brgerst@gmail.com>
+References: <20200701110650.16172-1-jgross@suse.com>
+ <CAMzpN2hvK2T7Qje51MPjMyTggxT7_=EFnt7gAmJEa1Zq+t3LtA@mail.gmail.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <e277e875-c159-4281-e9b7-08c91882d1fb@suse.com>
+Date: Thu, 2 Jul 2020 17:45:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAJWu+oqs-d0oDswB2Owyh-4Zo4WXAqKhKU0L=1HEwEfQbc1izw@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Mark Rutland <mark.rutland@arm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- virtualization@lists.linux-foundation.org,
- "Joel Fernandes \(Google\)" <joel@joelfernandes.org>,
- Arnd Bergmann <arnd@arndb.de>, Alan Stern <stern@rowland.harvard.edu>,
- Sami Tolvanen <samitolvanen@google.com>, Matt Turner <mattst88@gmail.com>,
- "Cc: Android Kernel" <kernel-team@android.com>, Marco Elver <elver@google.com>,
- Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
- Boqun Feng <boqun.feng@gmail.com>, Josh Triplett <josh@joshtriplett.org>,
- Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- "moderated list:ARM64 PORT \(AARCH64 ARCHITECTURE\)"
- <linux-arm-kernel@lists.infradead.org>, Richard Henderson <rth@twiddle.net>,
- Nick Desaulniers <ndesaulniers@google.com>,
- LKML <linux-kernel@vger.kernel.org>, linux-alpha@vger.kernel.org
+In-Reply-To: <CAMzpN2hvK2T7Qje51MPjMyTggxT7_=EFnt7gAmJEa1Zq+t3LtA@mail.gmail.com>
+Content-Language: en-US
+Cc: Stefano Stabellini <sstabellini@kernel.org>, "VMware,
+ Inc." <pv-drivers@vmware.com>, the arch/x86 maintainers <x86@kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Virtualization <virtualization@lists.linux-foundation.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,96 +74,36 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Joel,
-
-On Thu, Jul 02, 2020 at 10:43:55AM -0400, Joel Fernandes wrote:
-> On Tue, Jun 30, 2020 at 1:38 PM Will Deacon <will@kernel.org> wrote:
-> > diff --git a/arch/alpha/include/asm/barrier.h b/arch/alpha/include/asm/barrier.h
-> > index 92ec486a4f9e..2ecd068d91d1 100644
-> > --- a/arch/alpha/include/asm/barrier.h
-> > +++ b/arch/alpha/include/asm/barrier.h
-> > - * For example, the following code would force ordering (the initial
-> > - * value of "a" is zero, "b" is one, and "p" is "&a"):
-> > - *
-> > - * <programlisting>
-> > - *     CPU 0                           CPU 1
-> > - *
-> > - *     b = 2;
-> > - *     memory_barrier();
-> > - *     p = &b;                         q = p;
-> > - *                                     read_barrier_depends();
-> > - *                                     d = *q;
-> > - * </programlisting>
-> > - *
-> > - * because the read of "*q" depends on the read of "p" and these
-> > - * two reads are separated by a read_barrier_depends().  However,
-> > - * the following code, with the same initial values for "a" and "b":
-> > - *
+On 02.07.20 16:48, Brian Gerst wrote:
+> On Wed, Jul 1, 2020 at 7:07 AM Juergen Gross <jgross@suse.com> wrote:
+>>
+>> The long term plan has been to replace Xen PV guests by PVH. The first
+>> victim of that plan are now 32-bit PV guests, as those are used only
+>> rather seldom these days. Xen on x86 requires 64-bit support and with
+>> Grub2 now supporting PVH officially since version 2.04 there is no
+>> need to keep 32-bit PV guest support alive in the Linux kernel.
+>> Additionally Meltdown mitigation is not available in the kernel running
+>> as 32-bit PV guest, so dropping this mode makes sense from security
+>> point of view, too.
 > 
-> Would it be Ok to keep this example in the kernel sources? I think it
-> serves as good documentation and highlights the issue in the Alpha
-> architecture well.
+> One thing that you missed is removing VDSO_NOTE_NONEGSEG_BIT from
+> vdso32/note.S.  With that removed there is no difference from the
+> 64-bit version.
 
-I'd _really_ like to remove it, as I think it only serves to confuse people
-on a topic that is confusing enough already. Paul's perfbook [1] already has
-plenty of information about this, so I don't think we need to repeat that
-here. I could add a citation, perhaps?
+Oh, this means we can probably remove arch/x86/xen/vdso.h completely.
 
-> > - * <programlisting>
-> > - *     CPU 0                           CPU 1
-> > - *
-> > - *     a = 2;
-> > - *     memory_barrier();
-> > - *     b = 3;                          y = b;
-> > - *                                     read_barrier_depends();
-> > - *                                     x = a;
-> > - * </programlisting>
-> > - *
-> > - * does not enforce ordering, since there is no data dependency between
-> > - * the read of "a" and the read of "b".  Therefore, on some CPUs, such
-> > - * as Alpha, "y" could be set to 3 and "x" to 0.  Use rmb()
-> > - * in cases like this where there are no data dependencies.
-> > - */
-> > -#define read_barrier_depends() __asm__ __volatile__("mb": : :"memory")
-> > +#define __smp_load_acquire(p)                                          \
-> > +({                                                                     \
-> > +       __unqual_scalar_typeof(*p) ___p1 =                              \
-> > +               (*(volatile typeof(___p1) *)(p));                       \
-> > +       compiletime_assert_atomic_type(*p);                             \
-> > +       ___p1;                                                          \
-> > +})
 > 
-> I had the same question as Mark about the need for a memory barrier
-> here, otherwise alpha will again break right? Looking forward to the
-> future fix you mentioned.
+> Otherwise this series looks good to me.
 
-Yeah, sorry about that. It went missing somehow during the rebase, it seems.
+Thanks,
 
-> BTW,  do you know any architecture where speculative execution of
-> address-dependent loads can cause similar misorderings? That would be
-> pretty insane though. In Alpha's case it is not speculation but rather
-> the split local cache design as the docs mention.   The reason I ask
-> is it is pretty amusing that control-dependent loads do have such
-> misordering issues due to speculative branch execution and I wondered
-> what other games the CPUs are playing. FWIW I ran into [1] which talks
-> about analogy between memory dependence and control dependence.
 
-I think you're asking about value prediction, and the implications it would
-have on address-dependent loads where the address can itself be predicted.
-I'm not aware of an CPUs where that is observable architecturally.
-
-arm64 has some load instructions that do not honour address dependencies,
-but I believe that's mainly to enable alternative cache designs for things
-like non-temporal and large vector loads.
-
-Will
-
-[1] https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html
+Juergen
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
