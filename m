@@ -1,86 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D745213B00
-	for <lists.virtualization@lfdr.de>; Fri,  3 Jul 2020 15:29:57 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id D94B2204C0;
-	Fri,  3 Jul 2020 13:29:55 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XW2mZfhjSEno; Fri,  3 Jul 2020 13:29:54 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8086C2045C;
-	Fri,  3 Jul 2020 13:29:54 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 53335C0733;
-	Fri,  3 Jul 2020 13:29:54 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7C834C0733
- for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Jul 2020 13:29:52 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E929214198
+	for <lists.virtualization@lfdr.de>; Sat,  4 Jul 2020 00:35:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 68D138957C
- for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Jul 2020 13:29:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 25F4F897E4;
+	Fri,  3 Jul 2020 22:35:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ngk-dT3KT-SJ; Fri,  3 Jul 2020 22:35:05 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 19F63897E1;
+	Fri,  3 Jul 2020 22:35:05 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EC753C0888;
+	Fri,  3 Jul 2020 22:35:04 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F199BC0733
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  3 Jul 2020 22:35:02 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id B747520476
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  3 Jul 2020 22:35:02 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id J+Jx+nx-4j-p
+ with ESMTP id 2YepEAyzXGpG
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Jul 2020 13:29:52 +0000 (UTC)
+ Fri,  3 Jul 2020 22:35:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
- [209.85.208.196])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 3C48588CCE
+Received: from jabberwock.ucw.cz (jabberwock.ucw.cz [46.255.230.98])
+ by silver.osuosl.org (Postfix) with ESMTPS id 5D63320474
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Jul 2020 13:29:51 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id f5so21103369ljj.10
- for <virtualization@lists.linux-foundation.org>;
- Fri, 03 Jul 2020 06:29:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=X6zEQxvzQothZO05B4Wll0a1I7lNr/ukJgbFHD247Sw=;
- b=Q+uRhAVOIHXP3l5DGk1/AYscHvETYA8Ymm5mRBlR/XZ2o2UW9mnCLU7VESU4lL2OEy
- eZ7C26WENmNIB+gotFApffDk/Lm7wJJqW5WXxjtTJj6ZiS4cgcRVF/lud+lYD1VwE1xf
- cpzjiyELopP+C254O+Z8QVDXT6TXntwWbSEvwdpuLJb4iJGFg0nif+DbsqwcsfIyngvR
- cwwjXDlL0psFU3T01tJoAkowFEsXFjdqFGfsuc6+LYN6r4gQLlzEBZ55aY5+vXoDAqAM
- Cowz37opXoR4SPkIBRF8f/Wk2fYINKRcK4N7PEfRIqRnbLoh53R1SadZbb95BsxIbR06
- 8FKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=X6zEQxvzQothZO05B4Wll0a1I7lNr/ukJgbFHD247Sw=;
- b=uGPAyrsgz67wIx5Bcq5vGKfxhBHHe/T+1B78TbzvzJxOctwTAvZBZHj+s8Dkr4ugmD
- aLBG0cpUl0r6TLWRHCkcjVCm15UVwQd2/5siD52C9urSGnq4Ozffy3LownG4chuQIabI
- zw/IXwtpHISQioIdEqZsMaudZIjae37r8Syt39YVUmuDvXvuU/aMahNMojrUEiSIqZkk
- bG8n0o/okNWW3eyJFqAmanzWEnqugqu+6d0UB3B+zz1GCrOqVji53KaCZW+LHj8ag0sI
- fMGd4fuLM1qKVnJahnh69q6YwuIHGJmyx+wjNZOLMear1N4FIONnXrZurXoSxdfeZkIs
- YBZg==
-X-Gm-Message-State: AOAM5303XvAiajTAyrnDsXyfIPNLt8VYSxeEYQ3IoSaa5jgWZonAwp8m
- 9scP92oJ/xEpX8z2a1f46BAZaO3SbgJpici7ZIeUqQ==
-X-Google-Smtp-Source: ABdhPJyEDqX5CTF1WB5GWdO0bVAwepG+Vq+Mz8st/b4+OZW1Wmil9vt0PgmzZxcYnwapEuHceWJOgE/vqRlZbxTSVp8=
-X-Received: by 2002:a2e:9dcc:: with SMTP id x12mr3182797ljj.415.1593782989137; 
- Fri, 03 Jul 2020 06:29:49 -0700 (PDT)
-MIME-Version: 1.0
+ Fri,  3 Jul 2020 22:34:59 +0000 (UTC)
+Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
+ id 2FA551C0BD2; Sat,  4 Jul 2020 00:34:54 +0200 (CEST)
+Date: Sat, 4 Jul 2020 00:34:53 +0200
+From: Pavel Machek <pavel@ucw.cz>
+To: Jann Horn <jannh@google.com>
+Subject: Re: [RFC]: mm,power: introduce MADV_WIPEONSUSPEND
+Message-ID: <20200703223453.GA25072@amd>
 References: <B7793B7A-3660-4769-9B9A-FFCF250728BB@amazon.com>
  <20200703113026.GT18446@dhcp22.suse.cz>
-In-Reply-To: <20200703113026.GT18446@dhcp22.suse.cz>
-Date: Fri, 3 Jul 2020 15:29:22 +0200
-Message-ID: <CAG48ez2O2z4L=n57Omwy6s1sWQkdTkPKiikhbfdVhiyd_TGRRw@mail.gmail.com>
-Subject: Re: [RFC]: mm,power: introduce MADV_WIPEONSUSPEND
-To: Michal Hocko <mhocko@kernel.org>
+ <CAG48ez2O2z4L=n57Omwy6s1sWQkdTkPKiikhbfdVhiyd_TGRRw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAG48ez2O2z4L=n57Omwy6s1sWQkdTkPKiikhbfdVhiyd_TGRRw@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: "Weiss, Radu" <raduweis@amazon.com>,
  "virtualization@lists.linux-foundation.org"
  <virtualization@lists.linux-foundation.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, "pavel@ucw.cz" <pavel@ucw.cz>,
- "mingo@kernel.org" <mingo@kernel.org>, "Brooker, Marc" <mbrooker@amazon.com>,
- "Singh, Balbir" <sblbir@amazon.com>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "mingo@kernel.org" <mingo@kernel.org>, Michal Hocko <mhocko@kernel.org>,
+ "Brooker, Marc" <mbrooker@amazon.com>, "Singh, Balbir" <sblbir@amazon.com>,
  "len.brown@intel.com" <len.brown@intel.com>,
  "bonzini@gnu.org" <bonzini@gnu.org>, "Graf \(AWS\),
  Alexander" <graf@amazon.de>, "keescook@chromium.org" <keescook@chromium.org>,
@@ -104,30 +80,75 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Jann Horn via Virtualization <virtualization@lists.linux-foundation.org>
-Reply-To: Jann Horn <jannh@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============2776688396572436139=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jul 3, 2020 at 1:30 PM Michal Hocko <mhocko@kernel.org> wrote:
-> On Fri 03-07-20 10:34:09, Catangiu, Adrian Costin wrote:
-> > This patch adds logic to the kernel power code to zero out contents of
-> > all MADV_WIPEONSUSPEND VMAs present in the system during its transition
-> > to any suspend state equal or greater/deeper than Suspend-to-memory,
-> > known as S3.
->
-> How does the application learn that its memory got wiped? S2disk is an
-> async operation and it can happen at any time during the task execution.
-> So how does the application work to prevent from corrupted state - e.g.
-> when suspended between two memory loads?
 
-You can do it seqlock-style, kind of - you reserve the first byte of
-the page or so as a "is this page initialized" marker, and after every
-read from the page, you do a compiler barrier and check whether that
-byte has been cleared.
+--===============2776688396572436139==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="TB36FDmn/VVEgNH/"
+Content-Disposition: inline
+
+
+--TB36FDmn/VVEgNH/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri 2020-07-03 15:29:22, Jann Horn wrote:
+> On Fri, Jul 3, 2020 at 1:30 PM Michal Hocko <mhocko@kernel.org> wrote:
+> > On Fri 03-07-20 10:34:09, Catangiu, Adrian Costin wrote:
+> > > This patch adds logic to the kernel power code to zero out contents of
+> > > all MADV_WIPEONSUSPEND VMAs present in the system during its transiti=
+on
+> > > to any suspend state equal or greater/deeper than Suspend-to-memory,
+> > > known as S3.
+> >
+> > How does the application learn that its memory got wiped? S2disk is an
+> > async operation and it can happen at any time during the task execution.
+> > So how does the application work to prevent from corrupted state - e.g.
+> > when suspended between two memory loads?
+>=20
+> You can do it seqlock-style, kind of - you reserve the first byte of
+> the page or so as a "is this page initialized" marker, and after every
+> read from the page, you do a compiler barrier and check whether that
+> byte has been
+
+That would also need smp cpu barriers, and guarantee that first byte
+is always ... cleared first, and matching barriers in kernel space,
+too, no?
+
+Best regards,
+									Pavel
+
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
+
+--TB36FDmn/VVEgNH/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAl7/so0ACgkQMOfwapXb+vKdqwCdHbxhUjXRK2lyMx90kTRewpgH
+sy8An1fvpOxBo4ol1ZYLjYYj+LThkGbw
+=Ci2L
+-----END PGP SIGNATURE-----
+
+--TB36FDmn/VVEgNH/--
+
+--===============2776688396572436139==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============2776688396572436139==--
