@@ -2,82 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E53B82151C3
-	for <lists.virtualization@lfdr.de>; Mon,  6 Jul 2020 06:36:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 938822151C4
+	for <lists.virtualization@lfdr.de>; Mon,  6 Jul 2020 06:36:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 8A7C9203CE;
-	Mon,  6 Jul 2020 04:36:27 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3839D203D5;
+	Mon,  6 Jul 2020 04:36:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gBZtk9pQLkKj; Mon,  6 Jul 2020 04:36:26 +0000 (UTC)
+	with ESMTP id lbODb30uVJQR; Mon,  6 Jul 2020 04:36:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 182F3203D5;
-	Mon,  6 Jul 2020 04:36:26 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 65D42203E2;
+	Mon,  6 Jul 2020 04:36:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0EAB6C016F;
-	Mon,  6 Jul 2020 04:36:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 43B21C016F;
+	Mon,  6 Jul 2020 04:36:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4A881C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2F59BC016F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jul 2020 04:36:24 +0000 (UTC)
+ Mon,  6 Jul 2020 04:36:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 39A6E868A9
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 2B9A986F23
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jul 2020 04:36:24 +0000 (UTC)
+ Mon,  6 Jul 2020 04:36:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5X4XIC2NQeJt
+ with ESMTP id 8OUY_4zqHLJJ
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jul 2020 04:36:23 +0000 (UTC)
+ Mon,  6 Jul 2020 04:36:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
- [209.85.128.67])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 1313D868BB
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+ [209.85.128.68])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6860086EA1
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jul 2020 04:36:23 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id l2so38928984wmf.0
+ Mon,  6 Jul 2020 04:36:28 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id l17so37806468wmj.0
  for <virtualization@lists.linux-foundation.org>;
- Sun, 05 Jul 2020 21:36:22 -0700 (PDT)
+ Sun, 05 Jul 2020 21:36:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=eFtOhPa6UPKbbzo3u5/AEsgh8vOwpk1J+kW2CjfhlPc=;
- b=GZVWqJqDnvPt0m/ywH4ec2mSr4AXEvnGlkCVGnG20TxuxQwdpvE31up4OGSkls1qOo
- IgtnVwOwJutJvf2GXZkxhpEakr8p+lbnKX/OhqN4/MFx7YxGxBfHzz0SjvYqo3ob1WCa
- nYd6LBHhfUKz2SqDrVLe+9beX6dXmigINLPitUlNSnOPbSsm2Gk7uZ1AY/2J3OFpoOdU
- a7/WFOUGawfnF3GMH3e3Ggj56N0Aq8MyTb15rK9OsVX6cYgR/TLJpi9RKYN/MPNukom6
- 7Yy5/FI+3E3oTHE2VkYAdM9O7fRZjySbLmG4loRlVi2QLUTfiNM5t7bfvkTxPoqY9O5S
- aOnQ==
+ bh=cAuLxDL8CkBp1tpBnhqClilHhcD0O782TDI+bdg1kNU=;
+ b=XOdg5H2E4lNGYFhYc0/rxP9u8/fuTv6VeFja8Noz+koduO9ASBPQiUJIZhJUoe3FZ1
+ 5j6pJEMPoDcUJa4a693ePzR0S0bWCuP+okHF201wWOQJPeFXc19q1Wjad8zvFortsca4
+ BAU2cWVym6HmdO3WF6QoeaegeTIDsaaabWgHbqVLzx2BEzkwec86jclgPu2E2A4yUupb
+ d2wbC887pQ79Xz0sn+vujqemnZPZJNUPEuhO9Ih5S3OuA12J314AIXAeIrWLtZfjUxBp
+ DPfOl5ls1Z513+Q9hqkmMlLQbBDtAUtP8bHoauVyDliR6Voin8q9hhSW7niY5xE76rE4
+ BlLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=eFtOhPa6UPKbbzo3u5/AEsgh8vOwpk1J+kW2CjfhlPc=;
- b=VtGSsGKXg6AaKJ00z+YCgJD9/JY/WU7FvOTC1q8NZLBeDf2wkhvKAtpRaJfgU561ds
- LJjwDyX3wR/Pl7ChPOwNeqC6lYjq+9+jTjFQqDXYF/htg1FwnhJBFGR9pZ5EeZOCD1jR
- c7cve42MWgFxOruTUuTO8pUIp+qCWs6L1SO0mT4OZEKz6h8DV3aOcFjLyxL2cdrkrfGg
- o8lWXfLl/EZ99TkJH9mJUSVSGVX5O1y/QU/Js5bTo+NdRVKduV2OIpJgV5YMrBczI2/g
- QFsXoBy4dZ8zqcUh//QnfoN7cH+7zOe+dIKcuz5AO2pkUKEZgis3H9/U1LA1Mvio4MVN
- /GkA==
-X-Gm-Message-State: AOAM530iHigumPgb94V2tHL5Q8cTiDXRoXc9y3RzRb4EUBGsGzd+y1Hx
- h/Pyih43S5LoFMb1qzIYH7Y=
-X-Google-Smtp-Source: ABdhPJxeZ0m8MAEwenuHNIIMBNLfG2x8/jkCtcATFVbQAnJEi6JvrVWN82YAkx52xf9gORD1ssU3aw==
-X-Received: by 2002:a1c:9e4c:: with SMTP id h73mr40259343wme.177.1594010181430; 
- Sun, 05 Jul 2020 21:36:21 -0700 (PDT)
+ bh=cAuLxDL8CkBp1tpBnhqClilHhcD0O782TDI+bdg1kNU=;
+ b=gdu7gIxVbOl+1a5RWcZXCWA4LtdWFzj599pqz53gyuK/NNF3oZkQ/EdB0q33DqMS2f
+ C6+PmdvDVWZDJMKO6PKrBPrp7x9n1/ypasFJeN+LAXLgZE0qt5LDlLjpiOrm/c/R4be3
+ nJ1srC3sJtj9lww6ODq2JTfCQ9/D8KCwrm5oEWE2IeSfbssUnKGDUY5QuhT+fYrHL5+T
+ KLYPW350VhreWM2VHkgqBw24dcvoojtu9CY5ae9FPzjeWT78BudbkxiD8wMpOmG9y/dS
+ Eu5ZSf02Ht+NqIM7mQmPkO6SqgIgG1Xh1a41Qf9JpIxFlUSCWjZl7QVdQmweGV5UUxlb
+ kPZw==
+X-Gm-Message-State: AOAM5302wMQibtD9X2dGPkOmrgmXO7i2R3cq1v37Klv5JSirWCoQl4bt
+ sxI/0nsO8EMg397HgVXcqvM=
+X-Google-Smtp-Source: ABdhPJw3xwCHjl66IDwjNwnrVaS+sYKKRxEjT29tJBVhRnVy0iHX8mmwPpg7n6zCTYEyHFzW18ALwQ==
+X-Received: by 2002:a7b:c44d:: with SMTP id l13mr49403893wmi.66.1594010186996; 
+ Sun, 05 Jul 2020 21:36:26 -0700 (PDT)
 Received: from bobo.ibm.com (61-68-186-125.tpgi.com.au. [61.68.186.125])
- by smtp.gmail.com with ESMTPSA id r10sm22202309wrm.17.2020.07.05.21.36.16
+ by smtp.gmail.com with ESMTPSA id r10sm22202309wrm.17.2020.07.05.21.36.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2020 21:36:21 -0700 (PDT)
+ Sun, 05 Jul 2020 21:36:26 -0700 (PDT)
 From: Nicholas Piggin <npiggin@gmail.com>
 To: linuxppc-dev@lists.ozlabs.org
-Subject: [PATCH v3 5/6] powerpc/pseries: implement paravirt qspinlocks for
- SPLPAR
-Date: Mon,  6 Jul 2020 14:35:39 +1000
-Message-Id: <20200706043540.1563616-6-npiggin@gmail.com>
+Subject: [PATCH v3 6/6] powerpc/qspinlock: optimised atomic_try_cmpxchg_lock
+ that adds the lock hint
+Date: Mon,  6 Jul 2020 14:35:40 +1000
+Message-Id: <20200706043540.1563616-7-npiggin@gmail.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200706043540.1563616-1-npiggin@gmail.com>
 References: <20200706043540.1563616-1-npiggin@gmail.com>
@@ -104,226 +104,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+This brings the behaviour of the uncontended fast path back to
+roughly equivalent to simple spinlocks -- a single atomic op with
+lock hint.
+
 Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
 ---
- arch/powerpc/include/asm/paravirt.h           | 28 ++++++++
- arch/powerpc/include/asm/qspinlock.h          | 66 +++++++++++++++++++
- arch/powerpc/include/asm/qspinlock_paravirt.h |  7 ++
- arch/powerpc/platforms/pseries/Kconfig        |  5 ++
- arch/powerpc/platforms/pseries/setup.c        |  6 +-
- include/asm-generic/qspinlock.h               |  2 +
- 6 files changed, 113 insertions(+), 1 deletion(-)
- create mode 100644 arch/powerpc/include/asm/qspinlock_paravirt.h
+ arch/powerpc/include/asm/atomic.h    | 28 ++++++++++++++++++++++++++++
+ arch/powerpc/include/asm/qspinlock.h |  2 +-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
 
-diff --git a/arch/powerpc/include/asm/paravirt.h b/arch/powerpc/include/asm/paravirt.h
-index 7a8546660a63..f2d51f929cf5 100644
---- a/arch/powerpc/include/asm/paravirt.h
-+++ b/arch/powerpc/include/asm/paravirt.h
-@@ -29,6 +29,16 @@ static inline void yield_to_preempted(int cpu, u32 yield_count)
- {
- 	plpar_hcall_norets(H_CONFER, get_hard_smp_processor_id(cpu), yield_count);
- }
-+
-+static inline void prod_cpu(int cpu)
-+{
-+	plpar_hcall_norets(H_PROD, get_hard_smp_processor_id(cpu));
-+}
-+
-+static inline void yield_to_any(void)
-+{
-+	plpar_hcall_norets(H_CONFER, -1, 0);
-+}
- #else
- static inline bool is_shared_processor(void)
- {
-@@ -45,6 +55,19 @@ static inline void yield_to_preempted(int cpu, u32 yield_count)
- {
- 	___bad_yield_to_preempted(); /* This would be a bug */
- }
-+
-+extern void ___bad_yield_to_any(void);
-+static inline void yield_to_any(void)
-+{
-+	___bad_yield_to_any(); /* This would be a bug */
-+}
-+
-+extern void ___bad_prod_cpu(void);
-+static inline void prod_cpu(int cpu)
-+{
-+	___bad_prod_cpu(); /* This would be a bug */
-+}
-+
- #endif
+diff --git a/arch/powerpc/include/asm/atomic.h b/arch/powerpc/include/asm/atomic.h
+index 498785ffc25f..f6a3d145ffb7 100644
+--- a/arch/powerpc/include/asm/atomic.h
++++ b/arch/powerpc/include/asm/atomic.h
+@@ -193,6 +193,34 @@ static __inline__ int atomic_dec_return_relaxed(atomic_t *v)
+ #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
+ #define atomic_xchg_relaxed(v, new) xchg_relaxed(&((v)->counter), (new))
  
- #define vcpu_is_preempted vcpu_is_preempted
-@@ -57,5 +80,10 @@ static inline bool vcpu_is_preempted(int cpu)
- 	return false;
- }
- 
-+static inline bool pv_is_native_spin_unlock(void)
++/*
++ * Don't want to override the generic atomic_try_cmpxchg_acquire, because
++ * we add a lock hint to the lwarx, which may not be wanted for the
++ * _acquire case (and is not used by the other _acquire variants so it
++ * would be a surprise).
++ */
++static __always_inline bool
++atomic_try_cmpxchg_lock(atomic_t *v, int *old, int new)
 +{
-+     return !is_shared_processor();
++	int r, o = *old;
++
++	__asm__ __volatile__ (
++"1:\t"	PPC_LWARX(%0,0,%2,1) "	# atomic_try_cmpxchg_acquire	\n"
++"	cmpw	0,%0,%3							\n"
++"	bne-	2f							\n"
++"	stwcx.	%4,0,%2							\n"
++"	bne-	1b							\n"
++"\t"	PPC_ACQUIRE_BARRIER "						\n"
++"2:									\n"
++	: "=&r" (r), "+m" (v->counter)
++	: "r" (&v->counter), "r" (o), "r" (new)
++	: "cr0", "memory");
++
++	if (unlikely(r != o))
++		*old = r;
++	return likely(r == o);
 +}
 +
- #endif /* __KERNEL__ */
- #endif /* __ASM_PARAVIRT_H */
+ /**
+  * atomic_fetch_add_unless - add unless the number is a given value
+  * @v: pointer of type atomic_t
 diff --git a/arch/powerpc/include/asm/qspinlock.h b/arch/powerpc/include/asm/qspinlock.h
-index c49e33e24edd..f5066f00a08c 100644
+index f5066f00a08c..b752d34517b3 100644
 --- a/arch/powerpc/include/asm/qspinlock.h
 +++ b/arch/powerpc/include/asm/qspinlock.h
-@@ -3,9 +3,47 @@
- #define _ASM_POWERPC_QSPINLOCK_H
+@@ -37,7 +37,7 @@ static __always_inline void queued_spin_lock(struct qspinlock *lock)
+ {
+ 	u32 val = 0;
  
- #include <asm-generic/qspinlock_types.h>
-+#include <asm/paravirt.h>
- 
- #define _Q_PENDING_LOOPS	(1 << 9) /* not tuned */
- 
-+#ifdef CONFIG_PARAVIRT_SPINLOCKS
-+extern void native_queued_spin_lock_slowpath(struct qspinlock *lock, u32 val);
-+extern void __pv_queued_spin_lock_slowpath(struct qspinlock *lock, u32 val);
-+extern void __pv_queued_spin_unlock(struct qspinlock *lock);
-+
-+static __always_inline void queued_spin_lock_slowpath(struct qspinlock *lock, u32 val)
-+{
-+	if (!is_shared_processor())
-+		native_queued_spin_lock_slowpath(lock, val);
-+	else
-+		__pv_queued_spin_lock_slowpath(lock, val);
-+}
-+
-+#define queued_spin_unlock queued_spin_unlock
-+static inline void queued_spin_unlock(struct qspinlock *lock)
-+{
-+	if (!is_shared_processor())
-+		smp_store_release(&lock->locked, 0);
-+	else
-+		__pv_queued_spin_unlock(lock);
-+}
-+
-+#else
-+extern void queued_spin_lock_slowpath(struct qspinlock *lock, u32 val);
-+#endif
-+
-+static __always_inline void queued_spin_lock(struct qspinlock *lock)
-+{
-+	u32 val = 0;
-+
-+	if (likely(atomic_try_cmpxchg_acquire(&lock->val, &val, _Q_LOCKED_VAL)))
-+		return;
-+
-+	queued_spin_lock_slowpath(lock, val);
-+}
-+#define queued_spin_lock queued_spin_lock
-+
- #define smp_mb__after_spinlock()   smp_mb()
- 
- static __always_inline int queued_spin_is_locked(struct qspinlock *lock)
-@@ -20,6 +58,34 @@ static __always_inline int queued_spin_is_locked(struct qspinlock *lock)
- }
- #define queued_spin_is_locked queued_spin_is_locked
- 
-+#ifdef CONFIG_PARAVIRT_SPINLOCKS
-+#define SPIN_THRESHOLD (1<<15) /* not tuned */
-+
-+static __always_inline void pv_wait(u8 *ptr, u8 val)
-+{
-+	if (*ptr != val)
-+		return;
-+	yield_to_any();
-+	/*
-+	 * We could pass in a CPU here if waiting in the queue and yield to
-+	 * the previous CPU in the queue.
-+	 */
-+}
-+
-+static __always_inline void pv_kick(int cpu)
-+{
-+	prod_cpu(cpu);
-+}
-+
-+extern void __pv_init_lock_hash(void);
-+
-+static inline void pv_spinlocks_init(void)
-+{
-+	__pv_init_lock_hash();
-+}
-+
-+#endif
-+
- #include <asm-generic/qspinlock.h>
- 
- #endif /* _ASM_POWERPC_QSPINLOCK_H */
-diff --git a/arch/powerpc/include/asm/qspinlock_paravirt.h b/arch/powerpc/include/asm/qspinlock_paravirt.h
-new file mode 100644
-index 000000000000..750d1b5e0202
---- /dev/null
-+++ b/arch/powerpc/include/asm/qspinlock_paravirt.h
-@@ -0,0 +1,7 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+#ifndef __ASM_QSPINLOCK_PARAVIRT_H
-+#define __ASM_QSPINLOCK_PARAVIRT_H
-+
-+EXPORT_SYMBOL(__pv_queued_spin_unlock);
-+
-+#endif /* __ASM_QSPINLOCK_PARAVIRT_H */
-diff --git a/arch/powerpc/platforms/pseries/Kconfig b/arch/powerpc/platforms/pseries/Kconfig
-index 24c18362e5ea..756e727b383f 100644
---- a/arch/powerpc/platforms/pseries/Kconfig
-+++ b/arch/powerpc/platforms/pseries/Kconfig
-@@ -25,9 +25,14 @@ config PPC_PSERIES
- 	select SWIOTLB
- 	default y
- 
-+config PARAVIRT_SPINLOCKS
-+	bool
-+	default n
-+
- config PPC_SPLPAR
- 	depends on PPC_PSERIES
- 	bool "Support for shared-processor logical partitions"
-+	select PARAVIRT_SPINLOCKS if PPC_QUEUED_SPINLOCKS
- 	help
- 	  Enabling this option will make the kernel run more efficiently
- 	  on logically-partitioned pSeries systems which use shared
-diff --git a/arch/powerpc/platforms/pseries/setup.c b/arch/powerpc/platforms/pseries/setup.c
-index 2db8469e475f..747a203d9453 100644
---- a/arch/powerpc/platforms/pseries/setup.c
-+++ b/arch/powerpc/platforms/pseries/setup.c
-@@ -771,8 +771,12 @@ static void __init pSeries_setup_arch(void)
- 	if (firmware_has_feature(FW_FEATURE_LPAR)) {
- 		vpa_init(boot_cpuid);
- 
--		if (lppaca_shared_proc(get_lppaca()))
-+		if (lppaca_shared_proc(get_lppaca())) {
- 			static_branch_enable(&shared_processor);
-+#ifdef CONFIG_PARAVIRT_SPINLOCKS
-+			pv_spinlocks_init();
-+#endif
-+		}
- 
- 		ppc_md.power_save = pseries_lpar_idle;
- 		ppc_md.enable_pmcs = pseries_lpar_enable_pmcs;
-diff --git a/include/asm-generic/qspinlock.h b/include/asm-generic/qspinlock.h
-index fb0a814d4395..38ca14e79a86 100644
---- a/include/asm-generic/qspinlock.h
-+++ b/include/asm-generic/qspinlock.h
-@@ -69,6 +69,7 @@ static __always_inline int queued_spin_trylock(struct qspinlock *lock)
- 
- extern void queued_spin_lock_slowpath(struct qspinlock *lock, u32 val);
- 
-+#ifndef queued_spin_lock
- /**
-  * queued_spin_lock - acquire a queued spinlock
-  * @lock: Pointer to queued spinlock structure
-@@ -82,6 +83,7 @@ static __always_inline void queued_spin_lock(struct qspinlock *lock)
+-	if (likely(atomic_try_cmpxchg_acquire(&lock->val, &val, _Q_LOCKED_VAL)))
++	if (likely(atomic_try_cmpxchg_lock(&lock->val, &val, _Q_LOCKED_VAL)))
+ 		return;
  
  	queued_spin_lock_slowpath(lock, val);
- }
-+#endif
- 
- #ifndef queued_spin_unlock
- /**
 -- 
 2.23.0
 
