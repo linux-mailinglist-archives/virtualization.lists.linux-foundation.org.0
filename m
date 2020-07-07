@@ -1,87 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E91F216881
-	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 10:45:05 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CCA6B216880
+	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 10:45:03 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id AA67A25D72;
-	Tue,  7 Jul 2020 08:45:03 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wVFL-o49kG8Q; Tue,  7 Jul 2020 08:45:02 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 188082600E;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 50EB086EFF;
 	Tue,  7 Jul 2020 08:45:02 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id FFTnjylk2y-9; Tue,  7 Jul 2020 08:45:01 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C641086F02;
+	Tue,  7 Jul 2020 08:45:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E7919C016F;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8B186C016F;
 	Tue,  7 Jul 2020 08:45:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 81295C016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 58C53C016F
  for <virtualization@lists.linux-foundation.org>;
  Tue,  7 Jul 2020 08:44:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 6BDBB251BB
+ by whitealder.osuosl.org (Postfix) with ESMTP id 5261488F13
  for <virtualization@lists.linux-foundation.org>;
  Tue,  7 Jul 2020 08:44:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VfL31D8PkxCO
+ with ESMTP id WqOBTs80d4Dx
  for <virtualization@lists.linux-foundation.org>;
  Tue,  7 Jul 2020 08:44:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
  [148.163.156.1])
- by silver.osuosl.org (Postfix) with ESMTPS id 90CFE24C03
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 917C488F0B
  for <virtualization@lists.linux-foundation.org>;
  Tue,  7 Jul 2020 08:44:58 +0000 (UTC)
 Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0678YDQB105510; Tue, 7 Jul 2020 04:44:52 -0400
+ 0678YD1h105513; Tue, 7 Jul 2020 04:44:54 -0400
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 32482kn0p1-1
+ by mx0a-001b2d01.pphosted.com with ESMTP id 32482kn0pn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 07 Jul 2020 04:44:51 -0400
+ Tue, 07 Jul 2020 04:44:54 -0400
 Received: from m0098399.ppops.net (m0098399.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0678a9qW112042;
- Tue, 7 Jul 2020 04:44:49 -0400
-Received: from ppma04fra.de.ibm.com (6a.4a.5195.ip4.static.sl-reverse.com
- [149.81.74.106])
- by mx0a-001b2d01.pphosted.com with ESMTP id 32482kn0jr-1
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0678YMRP106482;
+ Tue, 7 Jul 2020 04:44:51 -0400
+Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.99])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 32482kn0k9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 07 Jul 2020 04:44:49 -0400
-Received: from pps.filterd (ppma04fra.de.ibm.com [127.0.0.1])
- by ppma04fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 0678g2GC016988;
- Tue, 7 Jul 2020 08:44:43 GMT
-Received: from b06cxnps4075.portsmouth.uk.ibm.com
- (d06relay12.portsmouth.uk.ibm.com [9.149.109.197])
- by ppma04fra.de.ibm.com with ESMTP id 322hd7smhe-1
+ Tue, 07 Jul 2020 04:44:50 -0400
+Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
+ by ppma04ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 0678eADI020543;
+ Tue, 7 Jul 2020 08:44:44 GMT
+Received: from b06cxnps4076.portsmouth.uk.ibm.com
+ (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
+ by ppma04ams.nl.ibm.com with ESMTP id 322hd7u6xj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 07 Jul 2020 08:44:43 +0000
+ Tue, 07 Jul 2020 08:44:44 +0000
 Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
  [9.149.105.59])
- by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 0678ienT47579346
+ by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 0678ifnv56033414
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 7 Jul 2020 08:44:40 GMT
+ Tue, 7 Jul 2020 08:44:41 GMT
 Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 5D69AA4069;
+ by IMSVA (Postfix) with ESMTP id 4D84CA4055;
+ Tue,  7 Jul 2020 08:44:41 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6E693A4040;
  Tue,  7 Jul 2020 08:44:40 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 7C3B1A4057;
- Tue,  7 Jul 2020 08:44:39 +0000 (GMT)
 Received: from oc3016276355.ibm.com (unknown [9.145.29.12])
  by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue,  7 Jul 2020 08:44:39 +0000 (GMT)
+ Tue,  7 Jul 2020 08:44:40 +0000 (GMT)
 From: Pierre Morel <pmorel@linux.ibm.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 1/2] virtio: let arch validate VIRTIO features
-Date: Tue,  7 Jul 2020 10:44:36 +0200
-Message-Id: <1594111477-15401-2-git-send-email-pmorel@linux.ibm.com>
+Subject: [PATCH v4 2/2] s390: virtio: PV needs VIRTIO I/O device protection
+Date: Tue,  7 Jul 2020 10:44:37 +0200
+Message-Id: <1594111477-15401-3-git-send-email-pmorel@linux.ibm.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1594111477-15401-1-git-send-email-pmorel@linux.ibm.com>
 References: <1594111477-15401-1-git-send-email-pmorel@linux.ibm.com>
@@ -117,62 +117,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-An architecture may need to validate the VIRTIO devices features
-based on architecture specificities.
+S390, protecting the guest memory against unauthorized host access
+needs to enforce VIRTIO I/O device protection through the use of
+VIRTIO_F_VERSION_1 and VIRTIO_F_IOMMU_PLATFORM.
 
 Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
 ---
- drivers/virtio/virtio.c       | 19 +++++++++++++++++++
- include/linux/virtio_config.h |  1 +
- 2 files changed, 20 insertions(+)
+ arch/s390/kernel/uv.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
-index a977e32a88f2..3179a8aa76f5 100644
---- a/drivers/virtio/virtio.c
-+++ b/drivers/virtio/virtio.c
-@@ -167,6 +167,21 @@ void virtio_add_status(struct virtio_device *dev, unsigned int status)
+diff --git a/arch/s390/kernel/uv.c b/arch/s390/kernel/uv.c
+index c296e5c8dbf9..106330f6eda1 100644
+--- a/arch/s390/kernel/uv.c
++++ b/arch/s390/kernel/uv.c
+@@ -14,6 +14,7 @@
+ #include <linux/memblock.h>
+ #include <linux/pagemap.h>
+ #include <linux/swap.h>
++#include <linux/virtio_config.h>
+ #include <asm/facility.h>
+ #include <asm/sections.h>
+ #include <asm/uv.h>
+@@ -413,3 +414,27 @@ static int __init uv_info_init(void)
  }
- EXPORT_SYMBOL_GPL(virtio_add_status);
- 
+ device_initcall(uv_info_init);
+ #endif
++
 +/*
-+ * arch_needs_virtio_iommu_platform - provide arch specific hook when finalizing
-+ *				      features for VIRTIO device dev
++ * arch_validate_virtio_iommu_platform
 + * @dev: the VIRTIO device being added
 + *
-+ * Permits the platform to provide architecture specific functionality when
-+ * devices features are finalized. This is the default implementation.
-+ * Architecture implementations can override this.
++ * Return value: returns -ENODEV if any features of the
++ *               device breaks the protected virtualization
++ *               0 otherwise.
 + */
-+
-+int __weak arch_validate_virtio_features(struct virtio_device *dev)
++int arch_validate_virtio_features(struct virtio_device *dev)
 +{
++	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1)) {
++		dev_warn(&dev->dev, "device must provide VIRTIO_F_VERSION_1\n");
++		return is_prot_virt_guest() ? -ENODEV : 0;
++	}
++
++	if (!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM)) {
++		dev_warn(&dev->dev,
++			 "device must provide VIRTIO_F_IOMMU_PLATFORM\n");
++		return is_prot_virt_guest() ? -ENODEV : 0;
++	}
++
 +	return 0;
 +}
-+
- int virtio_finalize_features(struct virtio_device *dev)
- {
- 	int ret = dev->config->finalize_features(dev);
-@@ -176,6 +191,10 @@ int virtio_finalize_features(struct virtio_device *dev)
- 	if (ret)
- 		return ret;
- 
-+	ret = arch_validate_virtio_features(dev);
-+	if (ret)
-+		return ret;
-+
- 	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1))
- 		return 0;
- 
-diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
-index bb4cc4910750..3f4117adf311 100644
---- a/include/linux/virtio_config.h
-+++ b/include/linux/virtio_config.h
-@@ -459,4 +459,5 @@ static inline void virtio_cwrite64(struct virtio_device *vdev,
- 		_r;							\
- 	})
- 
-+int arch_validate_virtio_features(struct virtio_device *dev);
- #endif /* _LINUX_VIRTIO_CONFIG_H */
 -- 
 2.25.1
 
