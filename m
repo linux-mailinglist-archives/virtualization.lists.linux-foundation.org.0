@@ -1,88 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBD3E2168AC
-	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 10:58:56 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C8A302168D9
+	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 11:14:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 86BE28994B;
-	Tue,  7 Jul 2020 08:58:55 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8146787C49;
+	Tue,  7 Jul 2020 09:14:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 89tGVRMAZ-0P; Tue,  7 Jul 2020 08:58:53 +0000 (UTC)
+	with ESMTP id aDhJhtf7B5bo; Tue,  7 Jul 2020 09:14:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 8F56C89942;
-	Tue,  7 Jul 2020 08:58:53 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A688B87C37;
+	Tue,  7 Jul 2020 09:14:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 65897C016F;
-	Tue,  7 Jul 2020 08:58:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 92CABC08A5;
+	Tue,  7 Jul 2020 09:14:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3B3FCC016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B2570C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:58:52 +0000 (UTC)
+ Tue,  7 Jul 2020 09:14:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 30C5988F4B
+ by whitealder.osuosl.org (Postfix) with ESMTP id AE4DF87C37
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:58:52 +0000 (UTC)
+ Tue,  7 Jul 2020 09:14:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Af+gfOfhp9Jq
+ with ESMTP id KSu-sct96XRC
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:58:51 +0000 (UTC)
+ Tue,  7 Jul 2020 09:14:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 3A8B6878B0
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id AD1E785C10
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:58:51 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id b6so44277652wrs.11
+ Tue,  7 Jul 2020 09:14:55 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id q5so44322876wru.6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 07 Jul 2020 01:58:51 -0700 (PDT)
+ Tue, 07 Jul 2020 02:14:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=p2KKakvKcIBMPs7A15wXqiGUJod4izHac2NRC29BoeY=;
- b=qpm790kEyTwYs/BnuVbWbOehXNgTUI9ngXHQ9Gr9Xc2OmLhb8UM6Zi4iYgn8oKcOWs
- DUXvXMeUGQEKAtAGSr6JO68bgsYsWJqyp4Yzj3TC60oYCCO2VzQgPef/vtzpXbs1TugQ
- fHCLLnugJJpBGLp5AuAMqJtG1ycycsbW4KlcoFeP1OcbW2KL4ggy7bmH+yLk2aXTfiH5
- PfCA8861ZS9qEPp1FOgFFIg/UKi2BPKQLSKAZkNGbWkT7LVbMKJXKSl+A3j05QRz0/YJ
- NOOCAHi4nVmubhDu09GjspniM4pS1AmQez9j2VZ5iA8XZPc3PRssItNvf0gqp8G88sf8
- JU4w==
-X-Gm-Message-State: AOAM532TF//BEFwm5ya4BF7FNCQKxfsLIy+z+97J1T74QL1lmuUHiZuG
- NkBz3k3pkUgfer/p0M39noI=
-X-Google-Smtp-Source: ABdhPJwh9XUbUNDBRq8RVH5mZ3inft6fVxiv+AyB+oFzHzHwbX6vqWzzuu2czS9FjeuVL6nNGIn0OA==
-X-Received: by 2002:adf:81c8:: with SMTP id 66mr52819103wra.348.1594112329520; 
- Tue, 07 Jul 2020 01:58:49 -0700 (PDT)
+ bh=d1fV6kPM36TD326Nzxg7Z+ipDhi5SrBR72LA2cwak+8=;
+ b=betEumm87jH194yeV+hxv1sh768AQDh0chjEf9MCoke/bTT2PrV1VPZrbrqXGBA57p
+ ZCWr1qO6PHS6iQITwLo87HfX56U7+Ezq9X5+dV7YadWqYS5imv994HBcYNDti9QmSYMC
+ As32X+ELG58gGu8S0x8PGKtaFtki1DBHX6CFctkKLVAl1XxsM5a2Ibkg6d+T/EBHMU1V
+ y2MI67pyUPsKs/X33FDE8DmT9a8WHr+TtHvv/RyfNuoLyiTpK5YFUbrM3lhsBFDhsnkZ
+ S/IikoEqGolGQe1h5gBhM5Zaw4zBDPLjTPydqzfEknFFIAbioCCAfszOVTu8yr/PXXsv
+ fQSw==
+X-Gm-Message-State: AOAM530tGCJzry5KHWW0lFk8yU6GyDJKzatIrtTr+AFZccf2yDHoXnky
+ pYsASSmAhKFCmo1x4JVOCs4=
+X-Google-Smtp-Source: ABdhPJzFu/LXDAQqw0UoyFr80RTenCH282ojT9C7p2oH1LQMP7cch/sujIzsdADrs5lAs/XWoztr4g==
+X-Received: by 2002:a5d:4d0b:: with SMTP id z11mr23258665wrt.24.1594113294131; 
+ Tue, 07 Jul 2020 02:14:54 -0700 (PDT)
 Received: from localhost (ip-37-188-179-51.eurotel.cz. [37.188.179.51])
- by smtp.gmail.com with ESMTPSA id v5sm192665wmh.12.2020.07.07.01.58.48
+ by smtp.gmail.com with ESMTPSA id w13sm111649wrr.67.2020.07.07.02.14.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2020 01:58:48 -0700 (PDT)
-Date: Tue, 7 Jul 2020 10:58:47 +0200
+ Tue, 07 Jul 2020 02:14:53 -0700 (PDT)
+Date: Tue, 7 Jul 2020 11:14:51 +0200
 From: Michal Hocko <mhocko@kernel.org>
-To: Pavel Machek <pavel@ucw.cz>
+To: Alexander Graf <graf@amazon.com>
 Subject: Re: [RFC]: mm,power: introduce MADV_WIPEONSUSPEND
-Message-ID: <20200707085847.GA5913@dhcp22.suse.cz>
+Message-ID: <20200707091451.GB5913@dhcp22.suse.cz>
 References: <B7793B7A-3660-4769-9B9A-FFCF250728BB@amazon.com>
- <20200703113026.GT18446@dhcp22.suse.cz>
- <CAG48ez2O2z4L=n57Omwy6s1sWQkdTkPKiikhbfdVhiyd_TGRRw@mail.gmail.com>
- <20200707073823.GA3820@dhcp22.suse.cz> <20200707080726.GA32357@amd>
+ <20200703224411.GC25072@amd>
+ <CAG48ez0oWQd42a-H-Dzw1Wq7HgB5PpFRGCZeYxP8ohxaoZHmvQ@mail.gmail.com>
+ <20200704114820.GA16083@amd>
+ <57ab4fb3-3f82-d34f-ad74-2214b45a4dd9@amazon.com>
+ <CAG48ez1tAAD+x6n07uCisXpqVpDUPX7xBWiKFkS3u2azHqd41A@mail.gmail.com>
+ <20200707074425.GC3820@dhcp22.suse.cz>
+ <efa55313-ce8a-bac9-15df-167f93c672b3@amazon.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200707080726.GA32357@amd>
+In-Reply-To: <efa55313-ce8a-bac9-15df-167f93c672b3@amazon.com>
 Cc: "Weiss, Radu" <raduweis@amazon.com>,
  "virtualization@lists.linux-foundation.org"
  <virtualization@lists.linux-foundation.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Pavel Machek <pavel@ucw.cz>,
  "mingo@kernel.org" <mingo@kernel.org>, Jann Horn <jannh@google.com>, "Brooker,
  Marc" <mbrooker@amazon.com>, "Singh, Balbir" <sblbir@amazon.com>,
  "len.brown@intel.com" <len.brown@intel.com>,
- "bonzini@gnu.org" <bonzini@gnu.org>, "Graf \(AWS\),
- Alexander" <graf@amazon.de>, "keescook@chromium.org" <keescook@chromium.org>,
+ "bonzini@gnu.org" <bonzini@gnu.org>,
+ "keescook@chromium.org" <keescook@chromium.org>,
  "linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>, "Catangiu,
  Adrian Costin" <acatan@amazon.com>, "MacCarthaigh, Colm" <colmmacc@amazon.com>,
  "fweimer@redhat.com" <fweimer@redhat.com>,
@@ -108,49 +112,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue 07-07-20 10:07:26, Pavel Machek wrote:
-> Hi!
-> 
-> > > > > This patch adds logic to the kernel power code to zero out contents of
-> > > > > all MADV_WIPEONSUSPEND VMAs present in the system during its transition
-> > > > > to any suspend state equal or greater/deeper than Suspend-to-memory,
-> > > > > known as S3.
-> > > >
-> > > > How does the application learn that its memory got wiped? S2disk is an
-> > > > async operation and it can happen at any time during the task execution.
-> > > > So how does the application work to prevent from corrupted state - e.g.
-> > > > when suspended between two memory loads?
+On Tue 07-07-20 10:01:23, Alexander Graf wrote:
+> On 07.07.20 09:44, Michal Hocko wrote:
+> > On Mon 06-07-20 14:52:07, Jann Horn wrote:
+> > > On Mon, Jul 6, 2020 at 2:27 PM Alexander Graf <graf@amazon.com> wrote:
+> > > > Unless we create a vsyscall that returns both the PID as well as the
+> > > > epoch and thus handles fork *and* suspend. I need to think about this a
+> > > > bit more :).
 > > > 
-> > > You can do it seqlock-style, kind of - you reserve the first byte of
-> > > the page or so as a "is this page initialized" marker, and after every
-> > > read from the page, you do a compiler barrier and check whether that
-> > > byte has been cleared.
+> > > You can't reliably detect forking by checking the PID if it is
+> > > possible for multiple forks to be chained before the reuse check runs:
+> > > 
+> > >   - pid 1000 remembers its PID
+> > >   - pid 1000 forks, creating child pid 1001
+> > >   - pid 1000 exits and is waited on by init
+> > >   - the pid allocator wraps around
+> > >   - pid 1001 forks, creating child pid 1000
+> > >   - child with pid 1000 tries to check for forking, determines that its
+> > > PID is 1000, and concludes that it is still the original process
 > > 
-> > This is certainly possible yet wery awkwar interface to use IMHO.
-> > MADV_EXTERNALY_VOLATILE would express the actual semantic much better.
-> > I might not still understand the expected usecase but if the target
-> > application has to be changed anyway then why not simply use a
-> > transparent and proper signaling mechanism like poll on a fd. That
+> > I must be really missing something here because I really fail to see why
+> > there has to be something new even invented. Sure, checking for pid is
+> > certainly a suboptimal solution because pids are terrible tokens to work
+> > with. We do have a concept of file descriptors which a much better and
+> > supports signaling. There is a clear source of the signal IIUC
+> > (migration) and there are consumers to act upon that (e.g. crypto
+> > backends). So what does really prevent to use a standard signal delivery
+> > over fd for this usecase?
 > 
-> The goal is to have cryprographically-safe get_random_number() with 0
-> syscalls.
-> 
-> You'd need to do:
-> 
->    if (!poll(did_i_migrate)) {
->          use_prng_seed();
-> 	 if (poll(did_i_migrate)) {
-> 	       /* oops_they_migrated_me_in_middle_of_computation,
->  	          lets_redo_it() */
->  		  goto retry:
-> 	 }
->    }
-> 
-> Which means two syscalls..
+> I wasn't part of the discussions on why things like WIPEONFORK were invented
+> instead of just using signalling mechanisms, but the main reason I can think
+> of are libraries.
 
-Is this a real problem though? Do we have any actual numbers? E.g. how
-often does the migration happen so that 2 syscalls would be visible in
-actual workloads?
+Well, I would argue that WIPEONFORK is conceptually different. It is
+one time initialization mechanism with a very clear life time semantic.
+So any programming model is really as easy as, the initial state is
+always 0 for a new task without any surprises later on because you own
+the memory (essentially an extension to initialized .data section on
+exec to any new task).
+
+Compare that to a completely async nature of this interface. Any read
+would essentially have to be properly synchronized with the external
+event otherwise the state could have been corrupted. Such a consistency
+model is really cumbersome to work with.
+
+> As a library, you are under no control of the main loop usually, which means
+> you just don't have a way to poll for an fd. As a library author, I would
+> usually try to avoid very hard to create such a dependency, because it makes
+> it really hard to glue pieces together.
+> 
+> The same applies to signals btw, which would also be a possible way to
+> propagate such events.
+
+Just to clarify I didn't really mean posix signals here. Those would be
+quite clumsy indeed. But I can imagine that a library registers to a
+system wide means to get a notification. There are many examples for
+that, including a lot of usage inside libraries. All different *bus
+interfaces.
+
 -- 
 Michal Hocko
 SUSE Labs
