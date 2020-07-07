@@ -1,75 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50C3D216802
-	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 10:07:38 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 81C1C216882
+	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 10:45:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id B5278207B0;
-	Tue,  7 Jul 2020 08:07:36 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3CF3A88F1F;
+	Tue,  7 Jul 2020 08:45:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QbrE1yCT1OgC; Tue,  7 Jul 2020 08:07:35 +0000 (UTC)
+	with ESMTP id fmxChsliZmq5; Tue,  7 Jul 2020 08:45:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 7A63620026;
-	Tue,  7 Jul 2020 08:07:35 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6AAE888F19;
+	Tue,  7 Jul 2020 08:45:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 61DA1C016F;
-	Tue,  7 Jul 2020 08:07:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4BCFBC08A2;
+	Tue,  7 Jul 2020 08:45:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E15CDC016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 95A45C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:07:33 +0000 (UTC)
+ Tue,  7 Jul 2020 08:45:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id D079D853E5
+ by whitealder.osuosl.org (Postfix) with ESMTP id 80BF088F36
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:07:33 +0000 (UTC)
+ Tue,  7 Jul 2020 08:45:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nlvG4wrrw-t7
+ with ESMTP id rAxc3lbcZAlL
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:07:31 +0000 (UTC)
+ Tue,  7 Jul 2020 08:45:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from jabberwock.ucw.cz (jabberwock.ucw.cz [46.255.230.98])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id EE24A853D3
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 368AF88F1F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 08:07:30 +0000 (UTC)
-Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
- id 2E0741C0C0E; Tue,  7 Jul 2020 10:07:27 +0200 (CEST)
-Date: Tue, 7 Jul 2020 10:07:26 +0200
-From: Pavel Machek <pavel@ucw.cz>
-To: Michal Hocko <mhocko@kernel.org>
-Subject: Re: [RFC]: mm,power: introduce MADV_WIPEONSUSPEND
-Message-ID: <20200707080726.GA32357@amd>
-References: <B7793B7A-3660-4769-9B9A-FFCF250728BB@amazon.com>
- <20200703113026.GT18446@dhcp22.suse.cz>
- <CAG48ez2O2z4L=n57Omwy6s1sWQkdTkPKiikhbfdVhiyd_TGRRw@mail.gmail.com>
- <20200707073823.GA3820@dhcp22.suse.cz>
-MIME-Version: 1.0
-In-Reply-To: <20200707073823.GA3820@dhcp22.suse.cz>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: "Weiss, Radu" <raduweis@amazon.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- "mingo@kernel.org" <mingo@kernel.org>, Jann Horn <jannh@google.com>, "Brooker,
- Marc" <mbrooker@amazon.com>, "Singh, Balbir" <sblbir@amazon.com>,
- "len.brown@intel.com" <len.brown@intel.com>,
- "bonzini@gnu.org" <bonzini@gnu.org>, "Graf \(AWS\),
- Alexander" <graf@amazon.de>, "keescook@chromium.org" <keescook@chromium.org>,
- "linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>, "Catangiu,
- Adrian Costin" <acatan@amazon.com>, "MacCarthaigh, Colm" <colmmacc@amazon.com>,
- "fweimer@redhat.com" <fweimer@redhat.com>,
- "wad@chromium.org" <wad@chromium.org>,
- "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>, "Manwaring,
- Derek" <derekmn@amazon.com>, "rjw@rjwysocki.net" <rjw@rjwysocki.net>,
- "luto@amacapital.net" <luto@amacapital.net>, "Sandu,
- Andrei" <sandreim@amazon.com>,
- "akpm@linux-foundation.org" <akpm@linux-foundation.org>
+ Tue,  7 Jul 2020 08:45:04 +0000 (UTC)
+Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 0678Ve6c104150; Tue, 7 Jul 2020 04:45:00 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 324bpmpx67-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 07 Jul 2020 04:44:57 -0400
+Received: from m0098410.ppops.net (m0098410.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0678XoAT110196;
+ Tue, 7 Jul 2020 04:44:50 -0400
+Received: from ppma05fra.de.ibm.com (6c.4a.5195.ip4.static.sl-reverse.com
+ [149.81.74.108])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 324bpmpx25-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 07 Jul 2020 04:44:49 -0400
+Received: from pps.filterd (ppma05fra.de.ibm.com [127.0.0.1])
+ by ppma05fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 0678iVx4002463;
+ Tue, 7 Jul 2020 08:44:42 GMT
+Received: from b06cxnps3074.portsmouth.uk.ibm.com
+ (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
+ by ppma05fra.de.ibm.com with ESMTP id 322hd81mdk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 07 Jul 2020 08:44:42 +0000
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
+ [9.149.105.59])
+ by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 0678idwq49741930
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 7 Jul 2020 08:44:39 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6511BA404D;
+ Tue,  7 Jul 2020 08:44:39 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 87860A4057;
+ Tue,  7 Jul 2020 08:44:38 +0000 (GMT)
+Received: from oc3016276355.ibm.com (unknown [9.145.29.12])
+ by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Tue,  7 Jul 2020 08:44:38 +0000 (GMT)
+From: Pierre Morel <pmorel@linux.ibm.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v4 0/2] s390: virtio: let arch validate VIRTIO features
+Date: Tue,  7 Jul 2020 10:44:35 +0200
+Message-Id: <1594111477-15401-1-git-send-email-pmorel@linux.ibm.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-07-07_05:2020-07-07,
+ 2020-07-07 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxlogscore=999 adultscore=0
+ suspectscore=1 bulkscore=0 clxscore=1015 cotscore=-2147483648 spamscore=0
+ priorityscore=1501 malwarescore=0 mlxscore=0 impostorscore=0 phishscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2004280000 definitions=main-2007070062
+Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
+ kvm@vger.kernel.org, mst@redhat.com, heiko.carstens@de.ibm.com,
+ cohuck@redhat.com, linuxram@us.ibm.com,
+ virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
+ borntraeger@de.ibm.com, thomas.lendacky@amd.com, david@gibson.dropbear.id.au
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,96 +109,94 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5806992596565330361=="
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Hi all,
 
---===============5806992596565330361==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LQksG6bCIzRHxTLp"
-Content-Disposition: inline
+I changed the patch subject to reflect the content, becoming more
+general.
 
+1) I removed the ack from Christian and Jason even far as
+   I understand they gave it for the functionality more than for the
+   implementation.
+   @Jason, @Christian, please can I get back your acked-by with these changes?
 
---LQksG6bCIzRHxTLp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+2) previous patch had another name:
+   [PATCH v3 0/1] s390: virtio: let arch choose to accept devices without IOMMU feature
+   id: Message-Id: <1592390637-17441-2-git-send-email-pmorel@linux.ibm.com>
 
-Hi!
+3) The new version generalize the validation of the features by the
+   architecture, making it not IOMMU_PLATFORM specific anymore inside
+   virtio.c
 
-> > > > This patch adds logic to the kernel power code to zero out contents=
- of
-> > > > all MADV_WIPEONSUSPEND VMAs present in the system during its transi=
-tion
-> > > > to any suspend state equal or greater/deeper than Suspend-to-memory,
-> > > > known as S3.
-> > >
-> > > How does the application learn that its memory got wiped? S2disk is an
-> > > async operation and it can happen at any time during the task executi=
-on.
-> > > So how does the application work to prevent from corrupted state - e.=
-g.
-> > > when suspended between two memory loads?
-> >=20
-> > You can do it seqlock-style, kind of - you reserve the first byte of
-> > the page or so as a "is this page initialized" marker, and after every
-> > read from the page, you do a compiler barrier and check whether that
-> > byte has been cleared.
->=20
-> This is certainly possible yet wery awkwar interface to use IMHO.
-> MADV_EXTERNALY_VOLATILE would express the actual semantic much better.
-> I might not still understand the expected usecase but if the target
-> application has to be changed anyway then why not simply use a
-> transparent and proper signaling mechanism like poll on a fd. That
+   The architecture specific code for s390 is now testing the virtio
+   features.
 
-The goal is to have cryprographically-safe get_random_number() with 0
-syscalls.
+4) Since I reworked the patch I also moved the arch specific code
+   from arch/s390/mm/init.c to arch/s390/kernel/to uv.c
 
-You'd need to do:
+5) Finaly, I splitted the patch into generic virtio and arch
+   specific code.
 
-   if (!poll(did_i_migrate)) {
-         use_prng_seed();
-	 if (poll(did_i_migrate)) {
-	       /* oops_they_migrated_me_in_middle_of_computation,
- 	          lets_redo_it() */
- 		  goto retry:
-	 }
-   }
+Regards,
+Pierre
 
-Which means two syscalls..
+Pierre Morel (2):
+  virtio: let arch validate VIRTIO features
+  s390: virtio: PV needs VIRTIO I/O device protection
 
-Best regards,
+ arch/s390/kernel/uv.c         | 25 +++++++++++++++++++++++++
+ drivers/virtio/virtio.c       | 19 +++++++++++++++++++
+ include/linux/virtio_config.h |  1 +
+ 3 files changed, 45 insertions(+)
 
+-- 
+2.25.1
 
-									Pavel
---=20
-(english) http://www.livejournal.com/~pavelmachek
-(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
-g.html
+Changelog
 
---LQksG6bCIzRHxTLp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+to v4:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
+- separate virtio and arch code
+  (Pierre)
 
-iEYEARECAAYFAl8ELT4ACgkQMOfwapXb+vLyMACgqbe6zmXiEEz8DaabrD2NC2vV
-5xgAn3dKno+G4UTAHEY2WCnK1mXkOj/5
-=rQsH
------END PGP SIGNATURE-----
+- moved code from arch/s390/mm/init.c to arch/s390/kernel/uv.c
+  (Heiko)
 
---LQksG6bCIzRHxTLp--
+- moved validation inside the arch code
+  (Connie)
 
---===============5806992596565330361==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+- moved the call to arch validation before VIRTIO_F_1 test
+  (Michael)
+
+to v3:
+
+- add warning
+  (Connie, Christian)
+
+- add comment
+  (Connie)
+
+- change hook name
+  (Halil, Connie)
+
+to v2:
+
+- put the test in virtio_finalize_features()
+  (Connie)
+
+- put the test inside VIRTIO core
+  (Jason)
+
+- pass a virtio device as parameter
+  (Halil)
+
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============5806992596565330361==--
