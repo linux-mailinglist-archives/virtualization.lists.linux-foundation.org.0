@@ -1,111 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5BA4216B4F
-	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 13:19:47 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 88A2B217412
+	for <lists.virtualization@lfdr.de>; Tue,  7 Jul 2020 18:38:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 847EB86B59;
-	Tue,  7 Jul 2020 11:19:46 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id F23A889B28;
+	Tue,  7 Jul 2020 16:38:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id S4fHhLnYF7DA; Tue,  7 Jul 2020 11:19:44 +0000 (UTC)
+	with ESMTP id wEtAvfZtIpzq; Tue,  7 Jul 2020 16:38:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D328586B70;
-	Tue,  7 Jul 2020 11:19:44 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D235989B26;
+	Tue,  7 Jul 2020 16:38:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AC7C3C07FF;
-	Tue,  7 Jul 2020 11:19:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AB57EC016F;
+	Tue,  7 Jul 2020 16:38:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 39CBAC016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C5C97C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 11:19:43 +0000 (UTC)
+ Tue,  7 Jul 2020 16:38:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 27EAF86B63
+ by whitealder.osuosl.org (Postfix) with ESMTP id BA199890F8
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 11:19:43 +0000 (UTC)
+ Tue,  7 Jul 2020 16:38:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id W2GHoIKy9o4Q
+ with ESMTP id LpLsiKEqEMzm
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 11:19:42 +0000 (UTC)
+ Tue,  7 Jul 2020 16:38:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id F269886B59
+Received: from jabberwock.ucw.cz (jabberwock.ucw.cz [46.255.230.98])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 2DCE2890E1
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Jul 2020 11:19:41 +0000 (UTC)
-Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 067B3uPW159667; Tue, 7 Jul 2020 07:19:38 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 324pvda5e1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 07 Jul 2020 07:19:38 -0400
-Received: from m0098409.ppops.net (m0098409.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 067B4AOk160984;
- Tue, 7 Jul 2020 07:19:37 -0400
-Received: from ppma03fra.de.ibm.com (6b.4a.5195.ip4.static.sl-reverse.com
- [149.81.74.107])
- by mx0a-001b2d01.pphosted.com with ESMTP id 324pvda5cv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 07 Jul 2020 07:19:37 -0400
-Received: from pps.filterd (ppma03fra.de.ibm.com [127.0.0.1])
- by ppma03fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 067B0Kbq022100;
- Tue, 7 Jul 2020 11:19:35 GMT
-Received: from b06cxnps3074.portsmouth.uk.ibm.com
- (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
- by ppma03fra.de.ibm.com with ESMTP id 322hd7spx0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 07 Jul 2020 11:19:35 +0000
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com
- (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
- by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 067BJWIx10682768
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 7 Jul 2020 11:19:32 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 93105A4062;
- Tue,  7 Jul 2020 11:19:32 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id B9378A4064;
- Tue,  7 Jul 2020 11:19:31 +0000 (GMT)
-Received: from oc3016276355.ibm.com (unknown [9.145.29.12])
- by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue,  7 Jul 2020 11:19:31 +0000 (GMT)
-Subject: Re: [PATCH v4 2/2] s390: virtio: PV needs VIRTIO I/O device protection
-To: "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>
-References: <1594111477-15401-1-git-send-email-pmorel@linux.ibm.com>
- <1594111477-15401-3-git-send-email-pmorel@linux.ibm.com>
- <20200707114633.68122a00.cohuck@redhat.com>
- <20200707060838-mutt-send-email-mst@kernel.org>
-From: Pierre Morel <pmorel@linux.ibm.com>
-Message-ID: <64057bea-2239-1374-b371-abd7256a32bf@linux.ibm.com>
-Date: Tue, 7 Jul 2020 13:19:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ Tue,  7 Jul 2020 16:38:04 +0000 (UTC)
+Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
+ id 70C791C0C0A; Tue,  7 Jul 2020 18:37:58 +0200 (CEST)
+Date: Tue, 7 Jul 2020 18:37:58 +0200
+From: Pavel Machek <pavel@ucw.cz>
+To: Michal Hocko <mhocko@kernel.org>
+Subject: Re: [RFC]: mm,power: introduce MADV_WIPEONSUSPEND
+Message-ID: <20200707163758.GA1947@amd>
+References: <B7793B7A-3660-4769-9B9A-FFCF250728BB@amazon.com>
+ <20200703113026.GT18446@dhcp22.suse.cz>
+ <CAG48ez2O2z4L=n57Omwy6s1sWQkdTkPKiikhbfdVhiyd_TGRRw@mail.gmail.com>
+ <20200707073823.GA3820@dhcp22.suse.cz> <20200707080726.GA32357@amd>
+ <20200707085847.GA5913@dhcp22.suse.cz>
 MIME-Version: 1.0
-In-Reply-To: <20200707060838-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-07-07_07:2020-07-07,
- 2020-07-07 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0
- priorityscore=1501 spamscore=0 clxscore=1015 malwarescore=0 bulkscore=0
- phishscore=0 cotscore=-2147483648 impostorscore=0 mlxlogscore=906
- mlxscore=0 lowpriorityscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2004280000 definitions=main-2007070085
-Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
- kvm@vger.kernel.org, thomas.lendacky@amd.com, heiko.carstens@de.ibm.com,
- linuxram@us.ibm.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
- borntraeger@de.ibm.com, david@gibson.dropbear.id.au
+In-Reply-To: <20200707085847.GA5913@dhcp22.suse.cz>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: "Weiss, Radu" <raduweis@amazon.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "mingo@kernel.org" <mingo@kernel.org>, Jann Horn <jannh@google.com>, "Brooker,
+ Marc" <mbrooker@amazon.com>, "Singh, Balbir" <sblbir@amazon.com>,
+ "len.brown@intel.com" <len.brown@intel.com>,
+ "bonzini@gnu.org" <bonzini@gnu.org>, "Graf \(AWS\),
+ Alexander" <graf@amazon.de>, "keescook@chromium.org" <keescook@chromium.org>,
+ "linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>, "Catangiu,
+ Adrian Costin" <acatan@amazon.com>, "MacCarthaigh, Colm" <colmmacc@amazon.com>,
+ "fweimer@redhat.com" <fweimer@redhat.com>,
+ "wad@chromium.org" <wad@chromium.org>,
+ "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>, "Manwaring,
+ Derek" <derekmn@amazon.com>, "rjw@rjwysocki.net" <rjw@rjwysocki.net>,
+ "luto@amacapital.net" <luto@amacapital.net>, "Sandu,
+ Andrei" <sandreim@amazon.com>,
+ "akpm@linux-foundation.org" <akpm@linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,41 +82,88 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============4515907939263274143=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 
+--===============4515907939263274143==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="cWoXeonUoKmBZSoM"
+Content-Disposition: inline
 
-On 2020-07-07 13:14, Michael S. Tsirkin wrote:
-> On Tue, Jul 07, 2020 at 11:46:33AM +0200, Cornelia Huck wrote:
->> On Tue,  7 Jul 2020 10:44:37 +0200
->> Pierre Morel <pmorel@linux.ibm.com> wrote:
->>
->>> S390, protecting the guest memory against unauthorized host access
->>> needs to enforce VIRTIO I/O device protection through the use of
->>> VIRTIO_F_VERSION_1 and VIRTIO_F_IOMMU_PLATFORM.
->>
->> Hm... what about:
->>
->> "If protected virtualization is active on s390, the virtio queues are
->> not accessible to the host, unless VIRTIO_F_IOMMU_PLATFORM has been
->> negotiated. Use the new arch_validate_virtio_features() interface to
->> enforce this."
-> 
-> s/enforce this/fail probe if that's not the case, preventing a host error on access attempt/
-> 
 
-yes, more complete, thanks.
+--cWoXeonUoKmBZSoM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-regards,
-Pierre
+Hi!
 
--- 
-Pierre Morel
-IBM Lab Boeblingen
+> > > > You can do it seqlock-style, kind of - you reserve the first byte of
+> > > > the page or so as a "is this page initialized" marker, and after ev=
+ery
+> > > > read from the page, you do a compiler barrier and check whether that
+> > > > byte has been cleared.
+> > >=20
+> > > This is certainly possible yet wery awkwar interface to use IMHO.
+> > > MADV_EXTERNALY_VOLATILE would express the actual semantic much better.
+> > > I might not still understand the expected usecase but if the target
+> > > application has to be changed anyway then why not simply use a
+> > > transparent and proper signaling mechanism like poll on a fd. That
+> >=20
+> > The goal is to have cryprographically-safe get_random_number() with 0
+> > syscalls.
+> >=20
+> > You'd need to do:
+> >=20
+> >    if (!poll(did_i_migrate)) {
+> >          use_prng_seed();
+> > 	 if (poll(did_i_migrate)) {
+> > 	       /* oops_they_migrated_me_in_middle_of_computation,
+> >  	          lets_redo_it() */
+> >  		  goto retry:
+> > 	 }
+> >    }
+> >=20
+> > Which means two syscalls..
+>=20
+> Is this a real problem though? Do we have any actual numbers? E.g. how
+> often does the migration happen so that 2 syscalls would be visible in
+> actual workloads?
+
+Please go through the thread and try to understand it.
+
+You'd need syscalls per get_randomness(), not per migration.
+
+									Pavel
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
+
+--cWoXeonUoKmBZSoM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAl8EpOUACgkQMOfwapXb+vIrGQCfa8t3eRPUQJN4sgdBPhRqIXIN
+Md0AoL/VSUKG0fqXzutn3A1vlMnmAH5A
+=B3/F
+-----END PGP SIGNATURE-----
+
+--cWoXeonUoKmBZSoM--
+
+--===============4515907939263274143==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============4515907939263274143==--
