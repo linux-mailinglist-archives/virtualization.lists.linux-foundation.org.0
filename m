@@ -1,94 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77A57217EED
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jul 2020 07:11:04 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4263921828C
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jul 2020 10:33:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0B80D88959;
-	Wed,  8 Jul 2020 05:11:03 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E066789510;
+	Wed,  8 Jul 2020 08:33:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gG+DdBXV6X67; Wed,  8 Jul 2020 05:11:02 +0000 (UTC)
+	with ESMTP id fWa4BdrOvnPd; Wed,  8 Jul 2020 08:33:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 25DB6878DD;
-	Wed,  8 Jul 2020 05:11:02 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 3C83788942;
+	Wed,  8 Jul 2020 08:33:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0820AC016F;
-	Wed,  8 Jul 2020 05:11:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1788BC016F;
+	Wed,  8 Jul 2020 08:33:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F007BC016F
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5B6C6C016F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jul 2020 05:10:59 +0000 (UTC)
+ Wed,  8 Jul 2020 08:33:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id D604A876E3
+ by silver.osuosl.org (Postfix) with ESMTP id 5125424F76
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jul 2020 05:10:59 +0000 (UTC)
+ Wed,  8 Jul 2020 08:33:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 25tB5jwlPYfv
+ with ESMTP id M25aJtPWaJ4M
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jul 2020 05:10:58 +0000 (UTC)
+ Wed,  8 Jul 2020 08:33:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com
- [209.85.216.66])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 88DA7876D4
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+ by silver.osuosl.org (Postfix) with ESMTPS id 370E925506
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jul 2020 05:10:58 +0000 (UTC)
-Received: by mail-pj1-f66.google.com with SMTP id l6so667585pjq.1
- for <virtualization@lists.linux-foundation.org>;
- Tue, 07 Jul 2020 22:10:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:subject:to:cc:references:in-reply-to:mime-version
- :message-id:content-transfer-encoding;
- bh=NBE822KLqldc4RgjTMLNTL7g5oeVKxCy90pB/bhnbqA=;
- b=M8TEn2dPCMOvBZET4JnaMDMy0lYBY2dVPXjJw8C+E1TwnoBBTuk66pgPu2fJqXKVx1
- B5vvUPxm8LxCIC+/4HpDyj9eQK+FH+k8I9aySXAuKaiX/IyWQBl6c9oSucY0pJSrHdhk
- kmKB9L6ekk6XeywFS7Hoy/JAxeOTezXXqTtHJtI9+cpy4/BmerCtU+RNLW1bt+52PMrU
- Pk0YR8Vd5fowCPr/XR1VDl6eRw8K/yg3l2NMayfyGThwcRjmydMPd/jZW4d43k68o1N9
- VVe106DV3DoJXbOl4exlvOx0GiUCrvhWLD74gWkyw6keF+43d7HBt78+En6/6Yio7WIE
- LqLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:subject:to:cc:references:in-reply-to
- :mime-version:message-id:content-transfer-encoding;
- bh=NBE822KLqldc4RgjTMLNTL7g5oeVKxCy90pB/bhnbqA=;
- b=Hi1Ay2eUhvna8M7K3pOMfKySeNtqlcjLRDtHQz7Yn2sLL7zAkPhqpo5Divaq8VO4rH
- mPqSayFCPGUYXGcIpzSO9mmHHcniaq3vQ3z5xA3DDS+B3gNJXMiWx8FsBjNnKJzjxqK5
- YI0gfNuoOylF0rH229QJzvHXUg2i6zhfaLjt0+BfupJ3n5RcHAW1hjMEJP0pjMUCv4+I
- XeJlI68I3U9y28VFJeHfPEQidQdYqBrH9Cz39JqxevV7IfAMEti+uN4/SACbqSu1zvpa
- WHj8wV9I84r2MH+YNBtUGFkg09HkaG8ilWtWbFSziKyKmrdoa2JUGzvyX2T3jLx3Yszs
- m3FQ==
-X-Gm-Message-State: AOAM532qt09KusbhljpQENF0ZFKuy7KLpgk2B6npUMmIqyWUrqn9jGUF
- d1s5XhB8c0Dc+O2R8wqOo5A=
-X-Google-Smtp-Source: ABdhPJy7irHmoUu0ynDnJY978dkucESYFNMabuBQ/Z2GkOluE+v9BuscHayaBiw3xLfuRm15lUcw4A==
-X-Received: by 2002:a17:902:b114:: with SMTP id
- q20mr23771251plr.266.1594185058097; 
- Tue, 07 Jul 2020 22:10:58 -0700 (PDT)
-Received: from localhost (61-68-186-125.tpgi.com.au. [61.68.186.125])
- by smtp.gmail.com with ESMTPSA id m20sm25080630pfk.52.2020.07.07.22.10.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2020 22:10:57 -0700 (PDT)
-Date: Wed, 08 Jul 2020 15:10:52 +1000
-From: Nicholas Piggin <npiggin@gmail.com>
+ Wed,  8 Jul 2020 08:33:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=ZJNpnEdpSwAOlQcxfZwII1itlZxmBIrNUFOl9UFQI0s=; b=Ya9qiXHHrdyTWGPp032YRnzFIH
+ 6MPYm0BEoMc8ncfqqgb17R+Q1Yuv0iN4WdS/fxjtUiznK3bLbXquZDs7sSVGogtzLN++DsaGuBaJ+
+ qxeWf0cuxdCtPe/HsGMvplOVk4llp07clkobZcvBYbO9+adWvLV/Hbov12TR7dC+IhsmIB0z9Yw2T
+ h9JG4XlquyLth3icw8mMkkAJA+hfeaw90jRoPMbh7DqJSBErC0cwQQ0pwFWtmhCEul0BDB0WstS46
+ RzcRgZc2lOT/SzvFOdYKUM8hfD52L0Dsui/qWIIQ1E2spaJ5v3/tsywLBG9gTevjRjwSFW6I+TOuB
+ k1AQxs/A==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1jt5VF-0007ob-RZ; Wed, 08 Jul 2020 08:32:32 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id DF5B6300739;
+ Wed,  8 Jul 2020 10:32:10 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id BB50D2BDFCA5B; Wed,  8 Jul 2020 10:32:10 +0200 (CEST)
+Date: Wed, 8 Jul 2020 10:32:10 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Waiman Long <longman@redhat.com>
 Subject: Re: [PATCH v3 0/6] powerpc: queued spinlocks and rwlocks
-To: linuxppc-dev@lists.ozlabs.org, Waiman Long <longman@redhat.com>
+Message-ID: <20200708083210.GD597537@hirez.programming.kicks-ass.net>
 References: <20200706043540.1563616-1-npiggin@gmail.com>
  <24f75d2c-60cd-2766-4aab-1a3b1c80646e@redhat.com>
  <1594101082.hfq9x5yact.astroid@bobo.none>
  <de3ead58-7f81-8ebd-754d-244f6be24af4@redhat.com>
-In-Reply-To: <de3ead58-7f81-8ebd-754d-244f6be24af4@redhat.com>
 MIME-Version: 1.0
-Message-Id: <1594184204.ncuq7vstsz.astroid@bobo.none>
-Cc: linux-arch@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+Content-Disposition: inline
+In-Reply-To: <de3ead58-7f81-8ebd-754d-244f6be24af4@redhat.com>
+Cc: linux-arch@vger.kernel.org, Will Deacon <will@kernel.org>,
  Boqun Feng <boqun.feng@gmail.com>, linux-kernel@vger.kernel.org,
  kvm-ppc@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Ingo Molnar <mingo@redhat.com>, Anton Blanchard <anton@ozlabs.org>,
- Will Deacon <will@kernel.org>
+ Ingo Molnar <mingo@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Anton Blanchard <anton@ozlabs.org>, linuxppc-dev@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,62 +93,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Excerpts from Waiman Long's message of July 8, 2020 1:33 pm:
-> On 7/7/20 1:57 AM, Nicholas Piggin wrote:
->> Yes, powerpc could certainly get more performance out of the slow
->> paths, and then there are a few parameters to tune.
->>
->> We don't have a good alternate patching for function calls yet, but
->> that would be something to do for native vs pv.
->>
->> And then there seem to be one or two tunable parameters we could
->> experiment with.
->>
->> The paravirt locks may need a bit more tuning. Some simple testing
->> under KVM shows we might be a bit slower in some cases. Whether this
->> is fairness or something else I'm not sure. The current simple pv
->> spinlock code can do a directed yield to the lock holder CPU, whereas
->> the pv qspl here just does a general yield. I think we might actually
->> be able to change that to also support directed yield. Though I'm
->> not sure if this is actually the cause of the slowdown yet.
+On Tue, Jul 07, 2020 at 11:33:45PM -0400, Waiman Long wrote:
+> From 5d7941a498935fb225b2c7a3108cbf590114c3db Mon Sep 17 00:00:00 2001
+> From: Waiman Long <longman@redhat.com>
+> Date: Tue, 7 Jul 2020 22:29:16 -0400
+> Subject: [PATCH 2/9] locking/pvqspinlock: Introduce
+>  CONFIG_PARAVIRT_QSPINLOCKS_LITE
 > 
-> Regarding the paravirt lock, I have taken a further look into the 
-> current PPC spinlock code. There is an equivalent of pv_wait() but no 
-> pv_kick(). Maybe PPC doesn't really need that.
-
-So powerpc has two types of wait, either undirected "all processors" or 
-directed to a specific processor which has been preempted by the 
-hypervisor.
-
-The simple spinlock code does a directed wait, because it knows the CPU 
-which is holding the lock. In this case, there is a sequence that is 
-used to ensure we don't wait if the condition has become true, and the
-target CPU does not need to kick the waiter it will happen automatically
-(see splpar_spin_yield). This is preferable because we only wait as 
-needed and don't require the kick operation.
-
-The pv spinlock code I did uses the undirected wait, because we don't
-know the CPU number which we are waiting on. This is undesirable because 
-it's higher overhead and the wait is not so accurate.
-
-I think perhaps we could change things so we wait on the correct CPU 
-when queued, which might be good enough (we could also put the lock
-owner CPU in the spinlock word, if we add another format).
-
-> Attached are two 
-> additional qspinlock patches that adds a CONFIG_PARAVIRT_QSPINLOCKS_LITE 
-> option to not require pv_kick(). There is also a fixup patch to be 
-> applied after your patchset.
+> Add a new PARAVIRT_QSPINLOCKS_LITE config option that allows
+> architectures to use the PV qspinlock code without the need to use or
+> implement a pv_kick() function, thus eliminating the atomic unlock
+> overhead. The non-atomic queued_spin_unlock() can be used instead.
+> The pv_wait() function will still be needed, but it can be a dummy
+> function.
 > 
-> I don't have access to a PPC LPAR with shared processor at the moment, 
-> so I can't test the performance of the paravirt code. Would you mind 
-> adding my patches and do some performance test on your end to see if it 
-> gives better result?
+> With that option set, the hybrid PV queued/unfair locking code should
+> still be able to make it performant enough in a paravirtualized
 
-Great, I'll do some tests. Any suggestions for what to try?
+How is this supposed to work? If there is no kick, you have no control
+over who wakes up and fairness goes out the window entirely.
 
-Thanks,
-Nick
+You don't even begin to explain...
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
