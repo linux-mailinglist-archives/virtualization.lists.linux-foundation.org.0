@@ -1,112 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3911321A300
-	for <lists.virtualization@lfdr.de>; Thu,  9 Jul 2020 17:08:16 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 940DA21A39A
+	for <lists.virtualization@lfdr.de>; Thu,  9 Jul 2020 17:24:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C62BD234BB;
-	Thu,  9 Jul 2020 15:08:14 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1D6FB89A48;
+	Thu,  9 Jul 2020 15:24:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cP7OFIGG1cwp; Thu,  9 Jul 2020 15:08:13 +0000 (UTC)
+	with ESMTP id cZwjkd7Mka8n; Thu,  9 Jul 2020 15:24:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8D8482001A;
-	Thu,  9 Jul 2020 15:08:13 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7078889A4F;
+	Thu,  9 Jul 2020 15:24:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5BFBCC016F;
-	Thu,  9 Jul 2020 15:08:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 540D9C016F;
+	Thu,  9 Jul 2020 15:24:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5ED94C016F
- for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 15:08:12 +0000 (UTC)
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 64BDEC016F;
+ Thu,  9 Jul 2020 15:24:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id C445C234BB
- for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 15:07:22 +0000 (UTC)
+ by silver.osuosl.org (Postfix) with ESMTP id 4BF592701D;
+ Thu,  9 Jul 2020 15:24:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OpPNb6gMbwrP
- for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 15:07:21 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by silver.osuosl.org (Postfix) with ESMTPS id B49E32333F
- for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 15:07:21 +0000 (UTC)
-Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 069F3WmU001750; Thu, 9 Jul 2020 11:07:15 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0b-001b2d01.pphosted.com with ESMTP id 325r2cm6kb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 09 Jul 2020 11:07:14 -0400
-Received: from m0098414.ppops.net (m0098414.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 069F3thV004462;
- Thu, 9 Jul 2020 11:07:13 -0400
-Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.99])
- by mx0b-001b2d01.pphosted.com with ESMTP id 325r2cm6j6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 09 Jul 2020 11:07:13 -0400
-Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
- by ppma04ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 069F17MF021314;
- Thu, 9 Jul 2020 15:07:11 GMT
-Received: from b06avi18878370.portsmouth.uk.ibm.com
- (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
- by ppma04ams.nl.ibm.com with ESMTP id 325u410ntv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 09 Jul 2020 15:07:11 +0000
-Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
- [9.149.105.58])
- by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 069F78sO65208640
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 9 Jul 2020 15:07:08 GMT
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id C36DB4C063;
- Thu,  9 Jul 2020 15:07:08 +0000 (GMT)
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 060C34C044;
- Thu,  9 Jul 2020 15:07:08 +0000 (GMT)
-Received: from oc2783563651 (unknown [9.145.152.61])
- by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Thu,  9 Jul 2020 15:07:07 +0000 (GMT)
-Date: Thu, 9 Jul 2020 17:06:15 +0200
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Pierre Morel <pmorel@linux.ibm.com>
-Subject: Re: [PATCH v5 2/2] s390: virtio: PV needs VIRTIO I/O device protection
-Message-ID: <20200709170615.468236da.pasic@linux.ibm.com>
-In-Reply-To: <c9be019f-236e-5e44-64b6-0875cd40ab11@linux.ibm.com>
-References: <1594283959-13742-1-git-send-email-pmorel@linux.ibm.com>
- <1594283959-13742-3-git-send-email-pmorel@linux.ibm.com>
- <20200709105733.6d68fa53.cohuck@redhat.com>
- <270d8674-0f73-0a38-a2a7-fbc1caa44301@linux.ibm.com>
- <20200709164700.09a83069.pasic@linux.ibm.com>
- <c9be019f-236e-5e44-64b6-0875cd40ab11@linux.ibm.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
+ with ESMTP id 7NbgpWRjjBmC; Thu,  9 Jul 2020 15:24:53 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by silver.osuosl.org (Postfix) with ESMTPS id A39CB2587B;
+ Thu,  9 Jul 2020 15:24:53 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id A19B95D1; Thu,  9 Jul 2020 17:24:51 +0200 (CEST)
+Date: Thu, 9 Jul 2020 17:24:50 +0200
+From: Joerg Roedel <joro@8bytes.org>
+To: Qian Cai <cai@lca.pw>
+Subject: Re: [PATCH v3 00/34] iommu: Move iommu_group setup to IOMMU core code
+Message-ID: <20200709152450.GC27672@8bytes.org>
+References: <20200429133712.31431-1-joro@8bytes.org>
+ <20200701004020.GA6221@lca.pw> <20200704001709.GA1502@lca.pw>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-07-09_08:2020-07-09,
- 2020-07-09 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 bulkscore=0
- priorityscore=1501 impostorscore=0 spamscore=0 phishscore=0 adultscore=0
- lowpriorityscore=0 malwarescore=0 clxscore=1015 mlxlogscore=999
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2007090112
-Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
- kvm@vger.kernel.org, mst@redhat.com, heiko.carstens@de.ibm.com,
- Cornelia Huck <cohuck@redhat.com>, linuxram@us.ibm.com,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- borntraeger@de.ibm.com, thomas.lendacky@amd.com, david@gibson.dropbear.id.au
+Content-Disposition: inline
+In-Reply-To: <20200704001709.GA1502@lca.pw>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Heiko Stuebner <heiko@sntech.de>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>, linux-tegra@vger.kernel.org,
+ Thierry Reding <thierry.reding@gmail.com>, Daniel Drake <drake@endlessm.com>,
+ Will Deacon <will@kernel.org>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Jean-Philippe Brucker <jean-philippe@linaro.org>,
+ linux-samsung-soc@vger.kernel.org, iommu@lists.linux-foundation.org,
+ Krzysztof Kozlowski <krzk@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>,
+ linux-rockchip@lists.infradead.org, Andy Gross <agross@kernel.org>,
+ jonathan.derrick@intel.com, linux-s390@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ virtualization@lists.linux-foundation.org,
+ Gerald Schaefer <gerald.schaefer@de.ibm.com>,
+ David Woodhouse <dwmw2@infradead.org>, linux-kernel@vger.kernel.org,
+ Rob Clark <robdclark@gmail.com>, Kukjin Kim <kgene@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>, Lu Baolu <baolu.lu@linux.intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -123,65 +79,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, 9 Jul 2020 16:51:04 +0200
-Pierre Morel <pmorel@linux.ibm.com> wrote:
+On Fri, Jul 03, 2020 at 08:17:09PM -0400, Qian Cai wrote:
+> FYI, I have just sent a patch to fix this,
+> 
+> https://lore.kernel.org/linux-iommu/20200704001003.2303-1-cai@lca.pw/
 
-> 
-> 
-> On 2020-07-09 16:47, Halil Pasic wrote:
-> > On Thu, 9 Jul 2020 12:51:58 +0200
-> > Pierre Morel <pmorel@linux.ibm.com> wrote:
-> > 
-> >>>> +int arch_validate_virtio_features(struct virtio_device *dev)
-> >>>> +{
-> >>>> +	if (!is_prot_virt_guest())
-> >>>> +		return 0;
-> >>>> +
-> >>>> +	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1)) {
-> >>>> +		dev_warn(&dev->dev, "device must provide VIRTIO_F_VERSION_1\n");
-> >>>
-> >>> I'd probably use "legacy virtio not supported with protected
-> >>> virtualization".
-> >>>    
-> >>>> +		return -ENODEV;
-> >>>> +	}
-> >>>> +
-> >>>> +	if (!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM)) {
-> >>>> +		dev_warn(&dev->dev,
-> >>>> +			 "device must provide VIRTIO_F_IOMMU_PLATFORM\n");
-> >>>
-> >>> "support for limited memory access required for protected
-> >>> virtualization"
-> >>>
-> >>> ?
-> >>>
-> >>> Mentioning the feature flag is shorter in both cases, though.
-> >>
-> >> And I think easier to look for in case of debugging purpose.
-> >> I change it if there is more demands.
-> > 
-> > Not all our end users are kernel and/or qemu developers. I find the
-> > messages from v4 less technical, more informative, and way better.
-> > 
-> > Regards,
-> > Halil
-> > 
-> 
-> Can you please tell me the messages you are speaking of, because for me 
-> the warning's messages are exactly the same in v4 and v5!?
-> 
-> I checked many times, but may be I still missed something.
-> 
+Just queued that fix, thanks. Please don't send patches to my suse
+email address, use only the 8bytes.org one.
 
-Sorry, my bad. My brain is over-generating. The messages where discussed
-at v3 and Connie made a very similar proposal to the one above which I
-seconded (for reference look at Message-ID:
-<833c71f2-0057-896a-5e21-2c6263834402@linux.ibm.com>). I was under the
-impression that it got implemented in v4, but it was not. That's why I
-ended up talking bs.
+Thanks,
 
-Regards,
-Halil
+	Joerg
 
 _______________________________________________
 Virtualization mailing list
