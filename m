@@ -1,61 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4212A21A0E2
-	for <lists.virtualization@lfdr.de>; Thu,  9 Jul 2020 15:29:58 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 344FF21A1C0
+	for <lists.virtualization@lfdr.de>; Thu,  9 Jul 2020 16:05:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id F264C8742D;
-	Thu,  9 Jul 2020 13:29:56 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C0C6989941;
+	Thu,  9 Jul 2020 14:05:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9fTTRMsaOvaV; Thu,  9 Jul 2020 13:29:53 +0000 (UTC)
+	with ESMTP id GXVUaRYZk2G8; Thu,  9 Jul 2020 14:05:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 43B468747A;
-	Thu,  9 Jul 2020 13:29:53 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 27B608993E;
+	Thu,  9 Jul 2020 14:05:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 201D5C016F;
-	Thu,  9 Jul 2020 13:29:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F38DCC016F;
+	Thu,  9 Jul 2020 14:05:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C7949C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2F910C016F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 13:29:50 +0000 (UTC)
+ Thu,  9 Jul 2020 14:05:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C3D128933C
+ by hemlock.osuosl.org (Postfix) with ESMTP id 0DC9289941
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 13:29:50 +0000 (UTC)
+ Thu,  9 Jul 2020 14:05:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AMPXJhoSPbJf
+ with ESMTP id 6ThwANRWFBTU
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 13:29:50 +0000 (UTC)
+ Thu,  9 Jul 2020 14:05:38 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from fornost.hmeau.com (helcar.hmeau.com [216.24.177.18])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 36F2D87CC4
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 75BAD8993E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 13:29:50 +0000 (UTC)
-Received: from gwarestrin.arnor.me.apana.org.au ([192.168.0.7])
- by fornost.hmeau.com with smtp (Exim 4.92 #5 (Debian))
- id 1jtW4q-0003yn-VD; Thu, 09 Jul 2020 22:55:02 +1000
-Received: by gwarestrin.arnor.me.apana.org.au (sSMTP sendmail emulation);
- Thu, 09 Jul 2020 22:55:00 +1000
-Date: Thu, 9 Jul 2020 22:55:00 +1000
-From: Herbert Xu <herbert@gondor.apana.org.au>
-To: Rikard Falkeborn <rikard.falkeborn@gmail.com>
-Subject: Re: [PATCH] crypto: virtio - constify features[] and id_table[]
-Message-ID: <20200709125500.GE31057@gondor.apana.org.au>
-References: <20200701202936.44156-1-rikard.falkeborn@gmail.com>
+ Thu,  9 Jul 2020 14:05:38 +0000 (UTC)
+Received: from ravnborg.org (unknown [188.228.123.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk4.altibox.net (Postfix) with ESMTPS id E9788804B9;
+ Thu,  9 Jul 2020 16:05:32 +0200 (CEST)
+Date: Thu, 9 Jul 2020 16:05:31 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Subject: Re: [PATCH 2/2] drm/virtio: Remove open-coded commit-tail function
+Message-ID: <20200709140531.GA220817@ravnborg.org>
+References: <20200707201229.472834-4-daniel.vetter@ffwll.ch>
+ <20200709123339.547390-1-daniel.vetter@ffwll.ch>
+ <20200709123339.547390-2-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200701202936.44156-1-rikard.falkeborn@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: mst@redhat.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-crypto@vger.kernel.org,
- davem@davemloft.net
+In-Reply-To: <20200709123339.547390-2-daniel.vetter@ffwll.ch>
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=aP3eV41m c=1 sm=1 tr=0
+ a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
+ a=kj9zAlcOel0A:10 a=QyXUC8HyAAAA:8 a=20KFwNOVAAAA:8 a=Z4Rwk6OoAAAA:8
+ a=7gkXJVJtAAAA:8 a=e5mUnYsNAAAA:8 a=7qquH0MEfeve11GKqesA:9
+ a=CjuIK1q_8ugA:10 a=HkZW87K1Qel5hWWM3VKY:22 a=E9Po1WZjFZOl8hwRPBS3:22
+ a=Vxmtnl_E_bksehYqCbjh:22
+Cc: linux-rdma@vger.kernel.org,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel.vetter@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,28 +82,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jul 01, 2020 at 10:29:36PM +0200, Rikard Falkeborn wrote:
-> features[] and id_table[] are not modified and can be made const to
-> allow the compiler to put them in read-only memory.
+On Thu, Jul 09, 2020 at 02:33:39PM +0200, Daniel Vetter wrote:
+> Exactly matches the one in the helpers.
 > 
-> Before:
->    text    data     bss     dec     hex filename
->   11534    2056     160   13750    35b6 drivers/crypto/virtio/virtio_crypto_core.o
+> This avoids me having to roll out dma-fence critical section
+> annotations to this copy.
 > 
-> After:
->    text    data     bss     dec     hex filename
->   11630    1992     128   13750    35b6 drivers/crypto/virtio/virtio_crypto_core.o
-> 
-> Signed-off-by: Rikard Falkeborn <rikard.falkeborn@gmail.com>
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
 > ---
->  drivers/crypto/virtio/virtio_crypto_core.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/virtio/virtgpu_display.c | 20 --------------------
+>  1 file changed, 20 deletions(-)
+Very nice catch:
+Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
 
-Patch applied.  Thanks.
--- 
-Email: Herbert Xu <herbert@gondor.apana.org.au>
-Home Page: http://gondor.apana.org.au/~herbert/
-PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
+> index f3ce49c5a34c..af55b334be2f 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_display.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_display.c
+> @@ -314,25 +314,6 @@ virtio_gpu_user_framebuffer_create(struct drm_device *dev,
+>  	return &virtio_gpu_fb->base;
+>  }
+>  
+> -static void vgdev_atomic_commit_tail(struct drm_atomic_state *state)
+> -{
+> -	struct drm_device *dev = state->dev;
+> -
+> -	drm_atomic_helper_commit_modeset_disables(dev, state);
+> -	drm_atomic_helper_commit_modeset_enables(dev, state);
+> -	drm_atomic_helper_commit_planes(dev, state, 0);
+> -
+> -	drm_atomic_helper_fake_vblank(state);
+> -	drm_atomic_helper_commit_hw_done(state);
+> -
+> -	drm_atomic_helper_wait_for_vblanks(dev, state);
+> -	drm_atomic_helper_cleanup_planes(dev, state);
+> -}
+> -
+> -static const struct drm_mode_config_helper_funcs virtio_mode_config_helpers = {
+> -	.atomic_commit_tail = vgdev_atomic_commit_tail,
+> -};
+> -
+>  static const struct drm_mode_config_funcs virtio_gpu_mode_funcs = {
+>  	.fb_create = virtio_gpu_user_framebuffer_create,
+>  	.atomic_check = drm_atomic_helper_check,
+> @@ -346,7 +327,6 @@ void virtio_gpu_modeset_init(struct virtio_gpu_device *vgdev)
+>  	drm_mode_config_init(vgdev->ddev);
+>  	vgdev->ddev->mode_config.quirk_addfb_prefer_host_byte_order = true;
+>  	vgdev->ddev->mode_config.funcs = &virtio_gpu_mode_funcs;
+> -	vgdev->ddev->mode_config.helper_private = &virtio_mode_config_helpers;
+>  
+>  	/* modes will be validated against the framebuffer size */
+>  	vgdev->ddev->mode_config.min_width = XRES_MIN;
+> -- 
+> 2.27.0
+> 
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
