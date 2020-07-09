@@ -1,83 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A2D7219AD3
-	for <lists.virtualization@lfdr.de>; Thu,  9 Jul 2020 10:31:27 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 68916219B0C
+	for <lists.virtualization@lfdr.de>; Thu,  9 Jul 2020 10:39:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id F31B1265F6;
-	Thu,  9 Jul 2020 08:31:24 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 17FA488506;
+	Thu,  9 Jul 2020 08:39:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id w6xup8ldAxOd; Thu,  9 Jul 2020 08:31:22 +0000 (UTC)
+	with ESMTP id r2t2G4W0QOvT; Thu,  9 Jul 2020 08:39:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id ABD6924C93;
-	Thu,  9 Jul 2020 08:31:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7252588504;
+	Thu,  9 Jul 2020 08:39:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A053C016F;
-	Thu,  9 Jul 2020 08:31:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 543A1C016F;
+	Thu,  9 Jul 2020 08:39:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 53F1CC016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 85DE8C016F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 08:31:20 +0000 (UTC)
+ Thu,  9 Jul 2020 08:39:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4916689598
+ by hemlock.osuosl.org (Postfix) with ESMTP id 75103895FA
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 08:31:20 +0000 (UTC)
+ Thu,  9 Jul 2020 08:39:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 58hbtOBqUtP4
+ with ESMTP id Sgy9MhYMjRhc
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 08:31:19 +0000 (UTC)
+ Thu,  9 Jul 2020 08:39:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 3D97B89563
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 4C8FC895F9
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Jul 2020 08:31:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=2u6IXv0WvuYmLy64Ol8ToLNhgDQTw8a7diWyD8qQt08=; b=F0s0r0RGrn5TfKzoVnYXlTKpg+
- KGNajxhzv6v7lQl2vblqcIsoUZOfS0vFJigwA3e9/RP28IYSY/w/fMOqFWMDqdBjISV03OsTlM8hu
- LZqsSCgVytkRYh5ISkCcBLr4Le1Nh2Ql7PK1dzZdVgSQAlgUSnSTvqEkqAHfaeJXFaWg+DTGddS1c
- 4rKztouBM+OG3AGJvLZScssnBagjrXd+I0tpCAUr7QuU+cpcf+lja0j1YbFdUWenzhQa1pfrdaTlJ
- sGnWvmh+F87Ou5hBRP3Mbqxb15xqCM+gQyE5R0kCel3LAyVegAqk0RpHYPBIsqc2Un1Oji38WRzKa
- ybx7cLnw==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jtRxb-00026c-Cs; Thu, 09 Jul 2020 08:31:15 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id BD0133013E5;
- Thu,  9 Jul 2020 10:31:13 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id A7C6C29E916A5; Thu,  9 Jul 2020 10:31:13 +0200 (CEST)
-Date: Thu, 9 Jul 2020 10:31:13 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Waiman Long <longman@redhat.com>
-Subject: Re: [PATCH v3 0/6] powerpc: queued spinlocks and rwlocks
-Message-ID: <20200709083113.GI597537@hirez.programming.kicks-ass.net>
-References: <20200706043540.1563616-1-npiggin@gmail.com>
- <24f75d2c-60cd-2766-4aab-1a3b1c80646e@redhat.com>
- <1594101082.hfq9x5yact.astroid@bobo.none>
- <20200708084106.GE597537@hirez.programming.kicks-ass.net>
- <a9834278-25bf-90e9-10f2-cd10e5407ff6@redhat.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <a9834278-25bf-90e9-10f2-cd10e5407ff6@redhat.com>
-Cc: linux-arch@vger.kernel.org, Will Deacon <will@kernel.org>,
- Boqun Feng <boqun.feng@gmail.com>, linux-kernel@vger.kernel.org,
- kvm-ppc@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Ingo Molnar <mingo@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Anton Blanchard <anton@ozlabs.org>, linuxppc-dev@lists.ozlabs.org
+ Thu,  9 Jul 2020 08:39:49 +0000 (UTC)
+Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 0698ab4u111432; Thu, 9 Jul 2020 04:39:44 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 325r2caevj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 09 Jul 2020 04:39:44 -0400
+Received: from m0098414.ppops.net (m0098414.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0698akDJ112286;
+ Thu, 9 Jul 2020 04:39:43 -0400
+Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.98])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 325r2caerd-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 09 Jul 2020 04:39:42 -0400
+Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
+ by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 0698a3Dt031648;
+ Thu, 9 Jul 2020 08:39:24 GMT
+Received: from b06avi18878370.portsmouth.uk.ibm.com
+ (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
+ by ppma03ams.nl.ibm.com with ESMTP id 325k1vgm6b-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 09 Jul 2020 08:39:24 +0000
+Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
+ by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
+ id 0698dLdR56164776
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 9 Jul 2020 08:39:21 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 8869D42056;
+ Thu,  9 Jul 2020 08:39:21 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id A6F5642061;
+ Thu,  9 Jul 2020 08:39:20 +0000 (GMT)
+Received: from oc3016276355.ibm.com (unknown [9.145.34.67])
+ by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Thu,  9 Jul 2020 08:39:20 +0000 (GMT)
+From: Pierre Morel <pmorel@linux.ibm.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v5 0/2] s390: virtio: let arch validate VIRTIO features
+Date: Thu,  9 Jul 2020 10:39:17 +0200
+Message-Id: <1594283959-13742-1-git-send-email-pmorel@linux.ibm.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-07-09_04:2020-07-08,
+ 2020-07-09 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxscore=0 bulkscore=0
+ priorityscore=1501 impostorscore=0 spamscore=0 phishscore=0 adultscore=0
+ lowpriorityscore=0 malwarescore=0 clxscore=1015 mlxlogscore=975
+ suspectscore=1 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2007090064
+Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
+ kvm@vger.kernel.org, mst@redhat.com, heiko.carstens@de.ibm.com,
+ cohuck@redhat.com, linuxram@us.ibm.com,
+ virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
+ borntraeger@de.ibm.com, thomas.lendacky@amd.com, david@gibson.dropbear.id.au
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,41 +108,95 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jul 08, 2020 at 07:54:34PM -0400, Waiman Long wrote:
-> On 7/8/20 4:41 AM, Peter Zijlstra wrote:
-> > On Tue, Jul 07, 2020 at 03:57:06PM +1000, Nicholas Piggin wrote:
-> > > Yes, powerpc could certainly get more performance out of the slow
-> > > paths, and then there are a few parameters to tune.
-> > Can you clarify? The slow path is already in use on ARM64 which is weak,
-> > so I doubt there's superfluous serialization present. And Will spend a
-> > fair amount of time on making that thing guarantee forward progressm, so
-> > there just isn't too much room to play.
-> > 
-> > > We don't have a good alternate patching for function calls yet, but
-> > > that would be something to do for native vs pv.
-> > Going by your jump_label implementation, support for static_call should
-> > be fairly straight forward too, no?
-> > 
-> >    https://lkml.kernel.org/r/20200624153024.794671356@infradead.org
-> > 
-> Speaking of static_call, I am also looking forward to it. Do you have an
-> idea when that will be merged?
+Hi all,
 
-0day had one crash on the last round, I think Steve send a fix for that
-last night and I'll go look at it.
+The goal of the series is to give a chance to the architecture
+to validate VIRTIO device features.
 
-That said, the last posting got 0 feedback, so either everybody is
-really happy with it, or not interested. So let us know in the thread,
-with some review feedback.
+in this respin:
 
-Once I get through enough of the inbox to actually find the fix and test
-it, I'll also update the thread, and maybe threaten to merge it if
-everybody stays silent :-)
+1) I kept removed the ack from Jason as I reworked the patch
+   @Jason, the nature and goal of the patch did not really changed
+           please can I get back your acked-by with these changes?
+
+2) I suppressed the unnecessary verbosity of the architecture
+   specific patch
+
+3) put back the arch specific code inside arch/s390/mm/init.c
+   after offline discussion with Christian.
+
+Regards,
+Pierre
+
+Pierre Morel (2):
+  virtio: let arch validate VIRTIO features
+  s390: virtio: PV needs VIRTIO I/O device protection
+
+ arch/s390/mm/init.c           | 27 +++++++++++++++++++++++++++
+ drivers/virtio/virtio.c       | 19 +++++++++++++++++++
+ include/linux/virtio_config.h |  1 +
+ 3 files changed, 47 insertions(+)
+
+-- 
+2.25.1
+
+Changelog
+
+to v5:
+
+- return directly from S390 arch_validate_virtio_features()
+  when the guest is not protected.
+  (Connie)
+
+- Somme rewording
+  (Connie, Michael)
+
+- moved back code from arch/s390/ ...kernel/uv.c to ...mm/init.c
+  (Christian)
+
+to v4:
+
+- separate virtio and arch code
+  (Pierre)
+
+- moved code from arch/s390/mm/init.c to arch/s390/kernel/uv.c
+  (as interpreted from Heiko's comment)
+
+- moved validation inside the arch code
+  (Connie)
+
+- moved the call to arch validation before VIRTIO_F_1 test
+  (Michael)
+
+to v3:
+
+- add warning
+  (Connie, Christian)
+
+- add comment
+  (Connie)
+
+- change hook name
+  (Halil, Connie)
+
+to v2:
+
+- put the test in virtio_finalize_features()
+  (Connie)
+
+- put the test inside VIRTIO core
+  (Jason)
+
+- pass a virtio device as parameter
+  (Halil)
+
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
