@@ -1,83 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96BA621BA81
-	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 18:13:58 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4ECF021BB5D
+	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 18:52:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 49CE989CC9;
-	Fri, 10 Jul 2020 16:13:57 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0D5D787D18;
+	Fri, 10 Jul 2020 16:52:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id epnEHV6tgli3; Fri, 10 Jul 2020 16:13:56 +0000 (UTC)
+	with ESMTP id 0-Yah-Zu3a1k; Fri, 10 Jul 2020 16:52:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B74BB89CC3;
-	Fri, 10 Jul 2020 16:13:56 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4D099883C2;
+	Fri, 10 Jul 2020 16:52:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9EAB0C016F;
-	Fri, 10 Jul 2020 16:13:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2FB73C016F;
+	Fri, 10 Jul 2020 16:52:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7FFF6C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0FB1BC077B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:13:55 +0000 (UTC)
+ Fri, 10 Jul 2020 16:52:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 7BDEA89341
+ by hemlock.osuosl.org (Postfix) with ESMTP id BD1A0885BA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:13:55 +0000 (UTC)
+ Fri, 10 Jul 2020 16:52:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9+QPz5g8VWw9
+ with ESMTP id 9FGx1h6I0VPx
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:13:53 +0000 (UTC)
+ Fri, 10 Jul 2020 16:52:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
- [209.85.166.67])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 74E3889CC3
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 76ED98855F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:13:53 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id v6so6603923iob.4
- for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 09:13:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WOhf446wJmxhSKkuBEXjNKDj0Wuq9FxTK5pl2IxYUo0=;
- b=sJa06UKM1+tO3r4eAbDLBv9bXXClhzFRxkegCiDxEJbmtUDvZCW1uUBnLLBTTyh/zE
- Rl4lVOU7+/193Vtc2nkutgU1WNoQNrWRQ1BLALf9HGy9QVIz35TE8CCK7kXeo9MPDKDT
- cneX9FInNfpziwB1+LUUnQLf3xcRcg5c4SJLy0ry0FkHQ4eGPGAk4LsWP9+3NygdQ16E
- wLOF36w3+SB6lGY5/3A4szmcBXDkxDj0roU0fLgByOM7hXUM9cQWdVVsRBgViNGwj84E
- Mzgx8Yj9J+nEtAmDmuXcNr9UvGHp3yecuKNDfCyfyJpT4j4QItLMjNx6dnZgsetZEl9i
- mKRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WOhf446wJmxhSKkuBEXjNKDj0Wuq9FxTK5pl2IxYUo0=;
- b=iE9geOGdBYL67ouR1RskBvNnUZ4X5YEmtfYhbqZmERARUnZhyEecRB2QISo2b95E+t
- kLPlDpN/7m/wH5bgEixSIhU4R5Lc81wSgPHRGIbB+Q0UaWefk17tJo4ITxqfFLwh+yrm
- FkZTDTDtMZtw1fpl911QN+xfzHO/eSa2eVwbsYHYTjGxzNKUtl55q8rXkzbfo5BYBYf9
- MDo6vfL/0dnWVPNprU+iLcI+3kSyNT5GpUXQfYycKgLQVxhgaPWqdE5P106Z1zfUzbQ9
- CAZtN0TEROHCUzmaWwedXJMwvimcWRVc1gh7zn0tIEGigFb2XMPhxpu1kKWbSxFzlyJB
- 9dXg==
-X-Gm-Message-State: AOAM533nHvclTd4G9RgZ+hJMux/oKg1FTSBVKzjVrMn/jjTUXX53xmNJ
- 1N06hzS0EvLJ5Hpo12KxOedyxO2hSPLsaYOHwN1Q4z85c70=
-X-Google-Smtp-Source: ABdhPJzxzpeui/g+zr/T9LgsOLWJ4FhpwovVifV20h0MRkNFwN7pWOffL2KkOwb/4uyQusMd/fNH2vaqb4pS7pGVbgw=
-X-Received: by 2002:a05:6638:771:: with SMTP id
- y17mr40786162jad.96.1594397632555; 
- Fri, 10 Jul 2020 09:13:52 -0700 (PDT)
+ Fri, 10 Jul 2020 16:52:11 +0000 (UTC)
+Received: from localhost.localdomain (236.31.169.217.in-addr.arpa
+ [217.169.31.236])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7C5FB206F4;
+ Fri, 10 Jul 2020 16:52:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1594399931;
+ bh=KcvQZrHB38KDnUP8nxJc19jdFdt8oGFue3inzmz/Efc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=gpIwsoJ/xXbQSIbhAwidVUNkopiZBRtRJr6jm8fYtOsJO0sGFBU4VrzLmpjt8J0+h
+ bM3ZPwoxoAqbROw+x/9XrPnXHGuUR8yujViPTR/a4kKu7ko3AQlaCr7An51UhICwox
+ /CYhjCD7gHFg3nRhEECbjLxD55E4l8YFtDGAk0TY=
+From: Will Deacon <will@kernel.org>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH 00/18] Allow architectures to override __READ_ONCE()
+Date: Fri, 10 Jul 2020 17:51:44 +0100
+Message-Id: <20200710165203.31284-1-will@kernel.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20200710113046.421366-1-mst@redhat.com>
-In-Reply-To: <20200710113046.421366-1-mst@redhat.com>
-From: Alexander Duyck <alexander.duyck@gmail.com>
-Date: Fri, 10 Jul 2020 09:13:41 -0700
-Message-ID: <CAKgT0UeZN+mOWNhgiT0btZTyki3TPoj7pbqA+__GkCxoifPqeg@mail.gmail.com>
-Subject: Re: [PATCH] virtio_balloon: clear modern features under legacy
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: virtualization@lists.linux-foundation.org,
- LKML <linux-kernel@vger.kernel.org>, stable@vger.kernel.org
+Cc: Joel Fernandes <joelaf@google.com>, Mark Rutland <mark.rutland@arm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ virtualization@lists.linux-foundation.org, Will Deacon <will@kernel.org>,
+ Arnd Bergmann <arnd@arndb.de>, Alan Stern <stern@rowland.harvard.edu>,
+ Sami Tolvanen <samitolvanen@google.com>, Matt Turner <mattst88@gmail.com>,
+ kernel-team@android.com, Marco Elver <elver@google.com>,
+ Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ linux-arm-kernel@lists.infradead.org, Richard Henderson <rth@twiddle.net>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-alpha@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,60 +85,137 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jul 10, 2020 at 4:31 AM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> Page reporting features were never supported by legacy hypervisors.
-> Supporting them poses a problem: should we use native endian-ness (like
-> current code assumes)? Or little endian-ness like the virtio spec says?
-> Rather than try to figure out, and since results of
-> incorrect endian-ness are dire, let's just block this configuration.
->
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Hi all,
 
-So I am not sure about the patch description. In the case of page
-poison and free page reporting I don't think we are defining anything
-that doesn't already have a definition of how to use in legacy.
-Specifically the virtio_balloon_config is already defined as having
-all fields as little endian in legacy mode, and there is a definition
-for all of the fields in a virtqueue and how they behave in legacy
-mode.
+This is version three of the patches I previously posted here:
 
-As far as I can see the only item that may be an issue is the command
-ID being supplied via the virtqueue for free page hinting, which
-appears to be in native endian-ness. Otherwise it would have fallen
-into the same category since it is making use of virtio_balloon_config
-and a virtqueue for supplying the page location and length.
+  v1: https://lore.kernel.org/lkml/20191108170120.22331-1-will@kernel.org/
+  v2: https://lore.kernel.org/r/20200630173734.14057-1-will@kernel.org
 
-> ---
->  drivers/virtio/virtio_balloon.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
->
-> diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
-> index 5d4b891bf84f..b9bc03345157 100644
-> --- a/drivers/virtio/virtio_balloon.c
-> +++ b/drivers/virtio/virtio_balloon.c
-> @@ -1107,6 +1107,15 @@ static int virtballoon_restore(struct virtio_device *vdev)
->
->  static int virtballoon_validate(struct virtio_device *vdev)
->  {
-> +       /*
-> +        * Legacy devices never specified how modern features should behave.
-> +        * E.g. which endian-ness to use? Better not to assume anything.
-> +        */
-> +       if (!virtio_has_feature(vdev, VIRTIO_F_VERSION_1)) {
-> +               __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_FREE_PAGE_HINT);
-> +               __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_PAGE_POISON);
-> +               __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_REPORTING);
-> +       }
->         /*
->          * Inform the hypervisor that our pages are poisoned or
->          * initialized. If we cannot do that then we should disable
+Changes since v2 include:
 
-The patch content itself I am fine with since odds are nobody would
-expect to use these features with a legacy device.
+  * Actually add the barrier in READ_ONCE() for Alpha!
+  * Implement Alpha's smp_load_acquire() using __READ_ONCE(), rather than
+    the other way around.
+  * Further untangling of header files
+  * Use CONFIG_LTO instead of CONFIG_CLANG_LTO
 
-Acked-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+I have booted this on arm64, and build-tested as follows:
+
+  - arm64	allnoconfig, defconfig (also bisected) and allmodconfig
+  - arm32	allnoconfig, defconfig and allmodconfig
+  - x86_64	allnoconfig, defconfig and allmodcofig
+  - alpha	defconfig, defconfig+CONFIG_SMP=y
+  - riscv64	defconfig
+  - powerpc64	defconfig
+  - s390	defconfig
+  - sparc32	defconfig, defconfig+CONFIG_SMP=y
+  - sparc64	defconfig
+
+Cheers,
+
+Will
+
+Cc: Joel Fernandes <joelaf@google.com>
+Cc: Sami Tolvanen <samitolvanen@google.com>
+Cc: Nick Desaulniers <ndesaulniers@google.com>
+Cc: Kees Cook <keescook@chromium.org>
+Cc: Marco Elver <elver@google.com>
+Cc: "Paul E. McKenney" <paulmck@kernel.org>
+Cc: Matt Turner <mattst88@gmail.com>
+Cc: Ivan Kokshaysky <ink@jurassic.park.msu.ru>
+Cc: Richard Henderson <rth@twiddle.net>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Alan Stern <stern@rowland.harvard.edu>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: Boqun Feng <boqun.feng@gmail.com>
+Cc: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: linux-arm-kernel@lists.infradead.org>
+Cc: linux-alpha@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org
+Cc: kernel-team@android.com
+
+--->8
+
+SeongJae Park (1):
+  Documentation/barriers/kokr: Remove references to
+    [smp_]read_barrier_depends()
+
+Will Deacon (18):
+  tools: bpf: Use local copy of headers including uapi/linux/filter.h
+  compiler.h: Split {READ,WRITE}_ONCE definitions out into rwonce.h
+  asm/rwonce: Allow __READ_ONCE to be overridden by the architecture
+  alpha: Override READ_ONCE() with barriered implementation
+  asm/rwonce: Remove smp_read_barrier_depends() invocation
+  asm/rwonce: Don't pull <asm/barrier.h> into 'asm-generic/rwonce.h'
+  vhost: Remove redundant use of read_barrier_depends() barrier
+  alpha: Replace smp_read_barrier_depends() usage with smp_[r]mb()
+  locking/barriers: Remove definitions for [smp_]read_barrier_depends()
+  Documentation/barriers: Remove references to
+    [smp_]read_barrier_depends()
+  tools/memory-model: Remove smp_read_barrier_depends() from informal
+    doc
+  include/linux: Remove smp_read_barrier_depends() from comments
+  checkpatch: Remove checks relating to [smp_]read_barrier_depends()
+  arm64: Reduce the number of header files pulled into vmlinux.lds.S
+  arm64: alternatives: Split up alternative.h
+  arm64: cpufeatures: Add capability for LDAPR instruction
+  arm64: alternatives: Remove READ_ONCE() usage during patch operation
+  arm64: lto: Strengthen READ_ONCE() to acquire when CONFIG_LTO=y
+
+ .../RCU/Design/Requirements/Requirements.rst  |   2 +-
+ Documentation/memory-barriers.txt             | 156 +---------
+ .../translations/ko_KR/memory-barriers.txt    | 146 +--------
+ arch/alpha/include/asm/atomic.h               |  16 +-
+ arch/alpha/include/asm/barrier.h              |  59 +---
+ arch/alpha/include/asm/pgtable.h              |  10 +-
+ arch/alpha/include/asm/rwonce.h               |  35 +++
+ arch/arm/include/asm/vdso/gettimeofday.h      |   1 +
+ arch/arm64/Kconfig                            |   3 +
+ arch/arm64/include/asm/alternative-macros.h   | 276 ++++++++++++++++++
+ arch/arm64/include/asm/alternative.h          | 267 +----------------
+ arch/arm64/include/asm/cpucaps.h              |   3 +-
+ arch/arm64/include/asm/insn.h                 |   3 +-
+ arch/arm64/include/asm/kernel-pgtable.h       |   2 +-
+ arch/arm64/include/asm/memory.h               |  11 +-
+ arch/arm64/include/asm/rwonce.h               |  63 ++++
+ arch/arm64/include/asm/uaccess.h              |   1 +
+ .../include/asm/vdso/compat_gettimeofday.h    |   1 +
+ arch/arm64/include/asm/vdso/gettimeofday.h    |   1 +
+ arch/arm64/kernel/alternative.c               |   7 +-
+ arch/arm64/kernel/cpufeature.c                |  10 +
+ arch/arm64/kernel/entry.S                     |   1 +
+ arch/arm64/kernel/vdso/Makefile               |   2 +-
+ arch/arm64/kernel/vdso32/Makefile             |   2 +-
+ arch/arm64/kernel/vmlinux.lds.S               |   1 -
+ arch/arm64/kvm/hyp-init.S                     |   1 +
+ arch/riscv/include/asm/vdso/gettimeofday.h    |   1 +
+ drivers/vhost/vhost.c                         |   5 -
+ include/asm-generic/Kbuild                    |   1 +
+ include/asm-generic/barrier.h                 |  19 +-
+ include/asm-generic/rwonce.h                  |  80 +++++
+ include/linux/compiler.h                      |  83 +-----
+ include/linux/nospec.h                        |   2 +
+ include/linux/percpu-refcount.h               |   2 +-
+ include/linux/ptr_ring.h                      |   2 +-
+ mm/memory.c                                   |   2 +-
+ scripts/checkpatch.pl                         |   9 +-
+ tools/bpf/Makefile                            |   3 +-
+ tools/include/uapi/linux/filter.h             |  90 ++++++
+ .../Documentation/explanation.txt             |  26 +-
+ 40 files changed, 636 insertions(+), 769 deletions(-)
+ create mode 100644 arch/alpha/include/asm/rwonce.h
+ create mode 100644 arch/arm64/include/asm/alternative-macros.h
+ create mode 100644 arch/arm64/include/asm/rwonce.h
+ create mode 100644 include/asm-generic/rwonce.h
+ create mode 100644 tools/include/uapi/linux/filter.h
+
+-- 
+2.27.0.383.g050319c2ae-goog
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
