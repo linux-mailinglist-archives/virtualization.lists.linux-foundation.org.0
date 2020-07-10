@@ -1,62 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0811C21BB7D
-	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 18:53:25 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D523821BB82
+	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 18:53:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id AF87088A10;
-	Fri, 10 Jul 2020 16:53:23 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 5BF3D2E5DE;
+	Fri, 10 Jul 2020 16:53:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JBE6Q9bQBaFI; Fri, 10 Jul 2020 16:53:23 +0000 (UTC)
+	with ESMTP id 2wsB7iB-v8Si; Fri, 10 Jul 2020 16:53:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 42B1288A0A;
-	Fri, 10 Jul 2020 16:53:23 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A26232E634;
+	Fri, 10 Jul 2020 16:53:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 39F1EC016F;
-	Fri, 10 Jul 2020 16:53:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7AF71C016F;
+	Fri, 10 Jul 2020 16:53:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 057D3C016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CF875C016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:22 +0000 (UTC)
+ Fri, 10 Jul 2020 16:53:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id E245A89D71
+ by hemlock.osuosl.org (Postfix) with ESMTP id C9AAB89D6F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:21 +0000 (UTC)
+ Fri, 10 Jul 2020 16:53:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id aFXlOvfkiHbn
+ with ESMTP id qKhhf-c9CMAq
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:21 +0000 (UTC)
+ Fri, 10 Jul 2020 16:53:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 6667989D70
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6963389D6D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:21 +0000 (UTC)
+ Fri, 10 Jul 2020 16:53:25 +0000 (UTC)
 Received: from localhost.localdomain (236.31.169.217.in-addr.arpa
  [217.169.31.236])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BB2C3207FC;
- Fri, 10 Jul 2020 16:53:17 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B55622088E;
+ Fri, 10 Jul 2020 16:53:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594400001;
- bh=lo++HzUCZcseWsXH6aNMxRmLUla8AP614+SoLXNY6Nc=;
+ s=default; t=1594400005;
+ bh=LR8dBleig5bp1XLGziGnSImBpDxiwU3kSRcm9I/nbOI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=wioky7G8nkNSjl2XQPmCqPE30UjsKdtrUCYgBhZqv84ZHXwYiugY8ZG8QyMrsMQzY
- +QjjU2xVz0g31dIymppay2CiAY3xSeRAJXC65ganmjb+jvhs2b987FE+FklCdfEr9c
- 5cVxcHTYzzEi76gibYJHqwiwNzBGnJ/Y6VIP3b6c=
+ b=TiqVi3ir8fjNZOxbgWpGPrF1iE/wAQqdbY2lOQuoY21U42vnZ03EAsV2JRq3eYsTB
+ FGLrHDgj5xB6q+W9XaKm2XN0AfSkS0zhzkU2lsgnYLrx70umIx3DnzN/rGkrx4x+22
+ Nkvm6NAwhxlYK0CXjYqlEvkIwWe9GnPlv2jA5PO0=
 From: Will Deacon <will@kernel.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 17/19] arm64: cpufeatures: Add capability for LDAPR
- instruction
-Date: Fri, 10 Jul 2020 17:52:01 +0100
-Message-Id: <20200710165203.31284-18-will@kernel.org>
+Subject: [PATCH v3 18/19] arm64: alternatives: Remove READ_ONCE() usage during
+ patch operation
+Date: Fri, 10 Jul 2020 17:52:02 +0100
+Message-Id: <20200710165203.31284-19-will@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200710165203.31284-1-will@kernel.org>
 References: <20200710165203.31284-1-will@kernel.org>
@@ -88,72 +88,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Armv8.3 introduced the LDAPR instruction, which provides weaker memory
-ordering semantics than LDARi (RCpc vs RCsc). Generally, we provide an
-RCsc implementation when implementing the Linux memory model, but LDAPR
-can be used as a useful alternative to dependency ordering, particularly
-when the compiler is capable of breaking the dependencies.
-
-Since LDAPR is not available on all CPUs, add a cpufeature to detect it at
-runtime and allow the instruction to be used with alternative code
-patching.
+In preparation for patching the internals of READ_ONCE() itself, replace
+its usage on the alternatives patching patch with a volatile variable
+instead.
 
 Signed-off-by: Will Deacon <will@kernel.org>
 ---
- arch/arm64/Kconfig               |  3 +++
- arch/arm64/include/asm/cpucaps.h |  3 ++-
- arch/arm64/kernel/cpufeature.c   | 10 ++++++++++
- 3 files changed, 15 insertions(+), 1 deletion(-)
+ arch/arm64/kernel/alternative.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 66dc41fd49f2..e1073210e70b 100644
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -1409,6 +1409,9 @@ config ARM64_PAN
- 	 The feature is detected at runtime, and will remain as a 'nop'
- 	 instruction if the cpu does not implement the feature.
+diff --git a/arch/arm64/kernel/alternative.c b/arch/arm64/kernel/alternative.c
+index d1757ef1b1e7..87bca8d44084 100644
+--- a/arch/arm64/kernel/alternative.c
++++ b/arch/arm64/kernel/alternative.c
+@@ -21,7 +21,8 @@
+ #define ALT_ORIG_PTR(a)		__ALT_PTR(a, orig_offset)
+ #define ALT_REPL_PTR(a)		__ALT_PTR(a, alt_offset)
  
-+config AS_HAS_LDAPR
-+	def_bool $(as-instr,.arch_extension rcpc)
-+
- config ARM64_LSE_ATOMICS
- 	bool
- 	default ARM64_USE_LSE_ATOMICS
-diff --git a/arch/arm64/include/asm/cpucaps.h b/arch/arm64/include/asm/cpucaps.h
-index d7b3bb0cb180..3ff0103d4dfd 100644
---- a/arch/arm64/include/asm/cpucaps.h
-+++ b/arch/arm64/include/asm/cpucaps.h
-@@ -62,7 +62,8 @@
- #define ARM64_HAS_GENERIC_AUTH			52
- #define ARM64_HAS_32BIT_EL1			53
- #define ARM64_BTI				54
-+#define ARM64_HAS_LDAPR				55
+-static int all_alternatives_applied;
++/* Volatile, as we may be patching the guts of READ_ONCE() */
++static volatile int all_alternatives_applied;
  
--#define ARM64_NCAPS				55
-+#define ARM64_NCAPS				56
+ static DECLARE_BITMAP(applied_alternatives, ARM64_NCAPS);
  
- #endif /* __ASM_CPUCAPS_H */
-diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
-index 9fae0efc80c1..498bd9a7f1bc 100644
---- a/arch/arm64/kernel/cpufeature.c
-+++ b/arch/arm64/kernel/cpufeature.c
-@@ -2058,6 +2058,16 @@ static const struct arm64_cpu_capabilities arm64_features[] = {
- 		.sign = FTR_UNSIGNED,
- 	},
- #endif
-+	{
-+		.desc = "RCpc load-acquire (LDAPR)",
-+		.capability = ARM64_HAS_LDAPR,
-+		.type = ARM64_CPUCAP_SYSTEM_FEATURE,
-+		.sys_reg = SYS_ID_AA64ISAR1_EL1,
-+		.sign = FTR_UNSIGNED,
-+		.field_pos = ID_AA64ISAR1_LRCPC_SHIFT,
-+		.matches = has_cpuid_feature,
-+		.min_field_value = 1,
-+	},
- 	{},
- };
+@@ -217,7 +218,7 @@ static int __apply_alternatives_multi_stop(void *unused)
  
+ 	/* We always have a CPU 0 at this point (__init) */
+ 	if (smp_processor_id()) {
+-		while (!READ_ONCE(all_alternatives_applied))
++		while (!all_alternatives_applied)
+ 			cpu_relax();
+ 		isb();
+ 	} else {
+@@ -229,7 +230,7 @@ static int __apply_alternatives_multi_stop(void *unused)
+ 		BUG_ON(all_alternatives_applied);
+ 		__apply_alternatives(&region, false, remaining_capabilities);
+ 		/* Barriers provided by the cache flushing */
+-		WRITE_ONCE(all_alternatives_applied, 1);
++		all_alternatives_applied = 1;
+ 	}
+ 
+ 	return 0;
 -- 
 2.27.0.383.g050319c2ae-goog
 
