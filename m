@@ -1,77 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C54C421BB81
-	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 18:53:33 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CCF321BBF9
+	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 19:13:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 819D788A22;
-	Fri, 10 Jul 2020 16:53:32 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id EF7868973F;
+	Fri, 10 Jul 2020 17:13:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4qvnxf1IzMTx; Fri, 10 Jul 2020 16:53:31 +0000 (UTC)
+	with ESMTP id m7tTBS3usQa1; Fri, 10 Jul 2020 17:13:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E131588A25;
-	Fri, 10 Jul 2020 16:53:31 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 53D2389A67;
+	Fri, 10 Jul 2020 17:13:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BF160C016F;
-	Fri, 10 Jul 2020 16:53:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 32592C016F;
+	Fri, 10 Jul 2020 17:13:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5CC64C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 68B63C016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:30 +0000 (UTC)
+ Fri, 10 Jul 2020 17:13:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 3A9FC2044E
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 63F93889EC
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:30 +0000 (UTC)
+ Fri, 10 Jul 2020 17:13:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Zt2pLM5VodoQ
+ with ESMTP id qMX3mz3RU4hk
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:29 +0000 (UTC)
+ Fri, 10 Jul 2020 17:13:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by silver.osuosl.org (Postfix) with ESMTPS id 65D4C2E6B3
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+ [209.85.167.194])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id A63E587B04
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 16:53:29 +0000 (UTC)
-Received: from localhost.localdomain (236.31.169.217.in-addr.arpa
- [217.169.31.236])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B83FD20870;
- Fri, 10 Jul 2020 16:53:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594400009;
- bh=whhs7oG4eHwGU4eTV3G4HHpSTjSYq15t2QvyL7KoLOs=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=RJVGcKh/R1hwa/3n0Lq+mqdvEmG0AHuCSSUcXFmNcyOVuLckQGiOAeoG18ntgAIKM
- WmwfJTW++NgmCHIA0mRueiz/gUwGYbIBvUtW0VRWUoaU1fiwJaV8kF4CYord+yvYLM
- 7jd8EIzwRW6LPQbt5GXxC6xX39zMMchRx1itqKRY=
-From: Will Deacon <will@kernel.org>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 19/19] arm64: lto: Strengthen READ_ONCE() to acquire when
- CONFIG_LTO=y
-Date: Fri, 10 Jul 2020 17:52:03 +0100
-Message-Id: <20200710165203.31284-20-will@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200710165203.31284-1-will@kernel.org>
-References: <20200710165203.31284-1-will@kernel.org>
+ Fri, 10 Jul 2020 17:13:35 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id j11so5348943oiw.12
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 10 Jul 2020 10:13:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=hUUzdCZO7cOEjM8UPSu4KBBKoTC+8Tu1Me77yU74KLk=;
+ b=UZTVAEzHrsDgJP78s0HloMVAuOUv3FwX+DkXiwaS0QhCqsLNWEjmofaPfN4D13+xg+
+ BXiB46hVqKuzlU7JoyckRiIHwh8eGyd8gGxEi9O1BwL+1P/cRbqBwVU3NWsmo3jSL4l9
+ sK2C6Hhp6l7SFYFGpy9L6KyQhlcX5x0cBHA3os+6EbKa6iuTXdVzIjwVL4gp0efhbmKq
+ 3q4cS8CGyGDDCIUSAV4fAFNjDW+GCUveiPds2A4egvjqPn80FdFfufNw0eG/H0hGL++P
+ aVvXZMeqKdhDD7WWZzYD19p+Cqs1MhDi+umLiVd5HPTI/xU3ULgd5VV28V7wtZ5UHeRv
+ 5k8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=hUUzdCZO7cOEjM8UPSu4KBBKoTC+8Tu1Me77yU74KLk=;
+ b=p7NzyAqHJVyicwWq/5huNlZeGx6DFNPo/6ebEMeh5llWUqSuuX1HHe8jF6q3KfQbhO
+ SGsgrYj9oZ7ZKuk4bbcWXHU0fV+GbALlM3GlmlKCQdMT4A9hhS8uxrfm0tV9LxQoZXUu
+ SB5t7ef2ieu1Mpp6qjB0d3tXQOYFz/7A+V12HQZI1OZtoOaBCCUAcYWEFHqsQm2T5/G6
+ 5hfRo4zLiQ22RgGUv05AADOQOelz2LwGrd2uqj/3nl5dLPpe7msGMrFoHSSx3tuk0agj
+ mkWcZMmikOF9g4cO4sE6tp2fH21koiIfWN/B5rj33Bd9io+uW/RABfCTSMmgzdteYb4Z
+ kSvQ==
+X-Gm-Message-State: AOAM53190QuU0Oag0H/OlJgGn3yonWRZ7zJK0/4uwyZFnOR1F/TI7MwB
+ FZtBf3UgksOStAG5pRfCrPbiZeBlCGrrqZtmEChuKOK5
+X-Google-Smtp-Source: ABdhPJwRQBEK6dyNFlDfbU4Yt4nNc6ZeNycLC+s5xlWnA3CaJIsX3y9fd/e3NodN8pbHV0qttAg1iJmTBh6hiUMsM6Q=
+X-Received: by 2002:a17:90a:21ef:: with SMTP id
+ q102mr6946097pjc.101.1594400784244; 
+ Fri, 10 Jul 2020 10:06:24 -0700 (PDT)
 MIME-Version: 1.0
+References: <20200710165203.31284-1-will@kernel.org>
+ <20200710165203.31284-7-will@kernel.org>
+In-Reply-To: <20200710165203.31284-7-will@kernel.org>
+Date: Fri, 10 Jul 2020 10:06:12 -0700
+Message-ID: <CAKwvOd=HJye0iHr=9=7EMytO8ycFNJEsHHe1m64uT8s0jOQw0Q@mail.gmail.com>
+Subject: Re: [PATCH v3 06/19] asm/rwonce: Don't pull <asm/barrier.h> into
+ 'asm-generic/rwonce.h'
+To: Will Deacon <will@kernel.org>
 Cc: Joel Fernandes <joelaf@google.com>, Mark Rutland <mark.rutland@arm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- virtualization@lists.linux-foundation.org, Will Deacon <will@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, Alan Stern <stern@rowland.harvard.edu>,
- Sami Tolvanen <samitolvanen@google.com>, Matt Turner <mattst88@gmail.com>,
- kernel-team@android.com, Marco Elver <elver@google.com>,
- Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
- Boqun Feng <boqun.feng@gmail.com>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- linux-arm-kernel@lists.infradead.org, Richard Henderson <rth@twiddle.net>,
- Nick Desaulniers <ndesaulniers@google.com>, linux-alpha@vger.kernel.org
+ Marco Elver <elver@google.com>, Kees Cook <keescook@chromium.org>,
+ "Paul E. McKenney" <paulmck@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>, LKML <linux-kernel@vger.kernel.org>,
+ virtualization@lists.linux-foundation.org,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Sami Tolvanen <samitolvanen@google.com>, linux-alpha@vger.kernel.org,
+ Alan Stern <stern@rowland.harvard.edu>, Matt Turner <mattst88@gmail.com>,
+ kernel-team <kernel-team@android.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Arnd Bergmann <arnd@arndb.de>, Richard Henderson <rth@twiddle.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,126 +100,118 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Nick Desaulniers via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Nick Desaulniers <ndesaulniers@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When building with LTO, there is an increased risk of the compiler
-converting an address dependency headed by a READ_ONCE() invocation
-into a control dependency and consequently allowing for harmful
-reordering by the CPU.
+On Fri, Jul 10, 2020 at 9:52 AM Will Deacon <will@kernel.org> wrote:
+>
+> Now that 'smp_read_barrier_depends()' has gone the way of the Norwegian
+> Blue, drop the inclusion of <asm/barrier.h> in 'asm-generic/rwonce.h'.
+>
+> This requires fixups to some architecture vdso headers which were
+> previously relying on 'asm/barrier.h' coming in via 'linux/compiler.h'.
+>
+> Signed-off-by: Will Deacon <will@kernel.org>
+> ---
+>  arch/arm/include/asm/vdso/gettimeofday.h          | 1 +
+>  arch/arm64/include/asm/vdso/compat_gettimeofday.h | 1 +
+>  arch/arm64/include/asm/vdso/gettimeofday.h        | 1 +
+>  arch/riscv/include/asm/vdso/gettimeofday.h        | 1 +
+>  include/asm-generic/rwonce.h                      | 2 --
+>  include/linux/nospec.h                            | 2 ++
+>  6 files changed, 6 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/include/asm/vdso/gettimeofday.h b/arch/arm/include/asm/vdso/gettimeofday.h
+> index 36dc18553ed8..1b207cf07697 100644
+> --- a/arch/arm/include/asm/vdso/gettimeofday.h
+> +++ b/arch/arm/include/asm/vdso/gettimeofday.h
+> @@ -7,6 +7,7 @@
+>
+>  #ifndef __ASSEMBLY__
+>
+> +#include <asm/barrier.h>
+>  #include <asm/errno.h>
+>  #include <asm/unistd.h>
+>  #include <asm/vdso/cp15.h>
+> diff --git a/arch/arm64/include/asm/vdso/compat_gettimeofday.h b/arch/arm64/include/asm/vdso/compat_gettimeofday.h
+> index b6907ae78e53..bcf7649999a4 100644
+> --- a/arch/arm64/include/asm/vdso/compat_gettimeofday.h
+> +++ b/arch/arm64/include/asm/vdso/compat_gettimeofday.h
+> @@ -7,6 +7,7 @@
+>
+>  #ifndef __ASSEMBLY__
+>
+> +#include <asm/barrier.h>
+>  #include <asm/unistd.h>
+>  #include <asm/errno.h>
+>
+> diff --git a/arch/arm64/include/asm/vdso/gettimeofday.h b/arch/arm64/include/asm/vdso/gettimeofday.h
+> index afba6ba332f8..127fa63893e2 100644
+> --- a/arch/arm64/include/asm/vdso/gettimeofday.h
+> +++ b/arch/arm64/include/asm/vdso/gettimeofday.h
+> @@ -7,6 +7,7 @@
+>
+>  #ifndef __ASSEMBLY__
+>
+> +#include <asm/barrier.h>
+>  #include <asm/unistd.h>
+>
+>  #define VDSO_HAS_CLOCK_GETRES          1
+> diff --git a/arch/riscv/include/asm/vdso/gettimeofday.h b/arch/riscv/include/asm/vdso/gettimeofday.h
+> index c8e818688ec1..3099362d9f26 100644
+> --- a/arch/riscv/include/asm/vdso/gettimeofday.h
+> +++ b/arch/riscv/include/asm/vdso/gettimeofday.h
+> @@ -4,6 +4,7 @@
+>
+>  #ifndef __ASSEMBLY__
+>
+> +#include <asm/barrier.h>
+>  #include <asm/unistd.h>
+>  #include <asm/csr.h>
+>  #include <uapi/linux/time.h>
+> diff --git a/include/asm-generic/rwonce.h b/include/asm-generic/rwonce.h
+> index cc810f1f18ca..cd0302746fb4 100644
+> --- a/include/asm-generic/rwonce.h
+> +++ b/include/asm-generic/rwonce.h
+> @@ -26,8 +26,6 @@
+>  #include <linux/kasan-checks.h>
+>  #include <linux/kcsan-checks.h>
+>
+> -#include <asm/barrier.h>
+> -
+>  /*
+>   * Use __READ_ONCE() instead of READ_ONCE() if you do not require any
+>   * atomicity. Note that this may result in tears!
+> diff --git a/include/linux/nospec.h b/include/linux/nospec.h
+> index 0c5ef54fd416..c1e79f72cd89 100644
+> --- a/include/linux/nospec.h
+> +++ b/include/linux/nospec.h
+> @@ -5,6 +5,8 @@
+>
+>  #ifndef _LINUX_NOSPEC_H
+>  #define _LINUX_NOSPEC_H
+> +
+> +#include <linux/compiler.h>
 
-Ensure that such transformations are harmless by overriding the generic
-READ_ONCE() definition with one that provides acquire semantics when
-building with LTO.
+The other hunks LGTM, but this one is a little more curious to me. Can
+you walk me through this addition?
 
-Signed-off-by: Will Deacon <will@kernel.org>
----
- arch/arm64/include/asm/rwonce.h   | 63 +++++++++++++++++++++++++++++++
- arch/arm64/kernel/vdso/Makefile   |  2 +-
- arch/arm64/kernel/vdso32/Makefile |  2 +-
- 3 files changed, 65 insertions(+), 2 deletions(-)
- create mode 100644 arch/arm64/include/asm/rwonce.h
+>  #include <asm/barrier.h>
+>
+>  struct task_struct;
+> --
+> 2.27.0.383.g050319c2ae-goog
+>
 
-diff --git a/arch/arm64/include/asm/rwonce.h b/arch/arm64/include/asm/rwonce.h
-new file mode 100644
-index 000000000000..d78eb4cb795b
---- /dev/null
-+++ b/arch/arm64/include/asm/rwonce.h
-@@ -0,0 +1,63 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2020 Google LLC.
-+ */
-+#ifndef __ASM_RWONCE_H
-+#define __ASM_RWONCE_H
-+
-+#ifdef CONFIG_LTO
-+
-+#include <linux/compiler_types.h>
-+#include <asm/alternative-macros.h>
-+
-+#ifndef BUILD_VDSO
-+
-+#ifdef CONFIG_AS_HAS_LDAPR
-+#define __LOAD_RCPC(sfx, regs...)					\
-+	ALTERNATIVE(							\
-+		"ldar"	#sfx "\t" #regs,				\
-+		".arch_extension rcpc\n"				\
-+		"ldapr"	#sfx "\t" #regs,				\
-+	ARM64_HAS_LDAPR)
-+#else
-+#define __LOAD_RCPC(sfx, regs...)	"ldar" #sfx "\t" #regs
-+#endif /* CONFIG_AS_HAS_LDAPR */
-+
-+#define __READ_ONCE(x)							\
-+({									\
-+	typeof(&(x)) __x = &(x);					\
-+	int atomic = 1;							\
-+	union { __unqual_scalar_typeof(*__x) __val; char __c[1]; } __u;	\
-+	switch (sizeof(x)) {						\
-+	case 1:								\
-+		asm volatile(__LOAD_RCPC(b, %w0, %1)			\
-+			: "=r" (*(__u8 *)__u.__c)			\
-+			: "Q" (*__x) : "memory");			\
-+		break;							\
-+	case 2:								\
-+		asm volatile(__LOAD_RCPC(h, %w0, %1)			\
-+			: "=r" (*(__u16 *)__u.__c)			\
-+			: "Q" (*__x) : "memory");			\
-+		break;							\
-+	case 4:								\
-+		asm volatile(__LOAD_RCPC(, %w0, %1)			\
-+			: "=r" (*(__u32 *)__u.__c)			\
-+			: "Q" (*__x) : "memory");			\
-+		break;							\
-+	case 8:								\
-+		asm volatile(__LOAD_RCPC(, %0, %1)			\
-+			: "=r" (*(__u64 *)__u.__c)			\
-+			: "Q" (*__x) : "memory");			\
-+		break;							\
-+	default:							\
-+		atomic = 0;						\
-+	}								\
-+	atomic ? (typeof(*__x))__u.__val : (*(volatile typeof(__x))__x);\
-+})
-+
-+#endif	/* !BUILD_VDSO */
-+#endif	/* CONFIG_LTO */
-+
-+#include <asm-generic/rwonce.h>
-+
-+#endif	/* __ASM_RWONCE_H */
-diff --git a/arch/arm64/kernel/vdso/Makefile b/arch/arm64/kernel/vdso/Makefile
-index 45d5cfe46429..60df97f2e7de 100644
---- a/arch/arm64/kernel/vdso/Makefile
-+++ b/arch/arm64/kernel/vdso/Makefile
-@@ -28,7 +28,7 @@ ldflags-y := -shared -nostdlib -soname=linux-vdso.so.1 --hash-style=sysv	\
- 	     $(btildflags-y) -T
- 
- ccflags-y := -fno-common -fno-builtin -fno-stack-protector -ffixed-x18
--ccflags-y += -DDISABLE_BRANCH_PROFILING
-+ccflags-y += -DDISABLE_BRANCH_PROFILING -DBUILD_VDSO
- 
- CFLAGS_REMOVE_vgettimeofday.o = $(CC_FLAGS_FTRACE) -Os $(CC_FLAGS_SCS) $(GCC_PLUGINS_CFLAGS)
- KBUILD_CFLAGS			+= $(DISABLE_LTO)
-diff --git a/arch/arm64/kernel/vdso32/Makefile b/arch/arm64/kernel/vdso32/Makefile
-index d88148bef6b0..4fdf3754a058 100644
---- a/arch/arm64/kernel/vdso32/Makefile
-+++ b/arch/arm64/kernel/vdso32/Makefile
-@@ -43,7 +43,7 @@ cc32-as-instr = $(call try-run,\
- # As a result we set our own flags here.
- 
- # KBUILD_CPPFLAGS and NOSTDINC_FLAGS from top-level Makefile
--VDSO_CPPFLAGS := -D__KERNEL__ -nostdinc -isystem $(shell $(CC_COMPAT) -print-file-name=include)
-+VDSO_CPPFLAGS := -DBUILD_VDSO -D__KERNEL__ -nostdinc -isystem $(shell $(CC_COMPAT) -print-file-name=include)
- VDSO_CPPFLAGS += $(LINUXINCLUDE)
- 
- # Common C and assembly flags
+
 -- 
-2.27.0.383.g050319c2ae-goog
-
+Thanks,
+~Nick Desaulniers
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
