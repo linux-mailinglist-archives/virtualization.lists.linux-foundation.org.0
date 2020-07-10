@@ -1,98 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89B6521B34B
-	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 12:41:18 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8100921B362
+	for <lists.virtualization@lfdr.de>; Fri, 10 Jul 2020 12:48:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id EC2638980A;
-	Fri, 10 Jul 2020 10:41:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0DCDD88C4C;
+	Fri, 10 Jul 2020 10:48:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ss2OamIrVDLC; Fri, 10 Jul 2020 10:41:16 +0000 (UTC)
+	with ESMTP id ozrJgTJWAwX6; Fri, 10 Jul 2020 10:48:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 77ADC89868;
-	Fri, 10 Jul 2020 10:41:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6388E895FC;
+	Fri, 10 Jul 2020 10:48:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 33E27C016F;
-	Fri, 10 Jul 2020 10:41:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 47498C08A9;
+	Fri, 10 Jul 2020 10:48:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 695AFC016F
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2C32CC016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 10:41:14 +0000 (UTC)
+ Fri, 10 Jul 2020 10:48:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 58048204D9
+ by hemlock.osuosl.org (Postfix) with ESMTP id 27A428980D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 10:41:14 +0000 (UTC)
+ Fri, 10 Jul 2020 10:48:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0rkXjNwKCIzL
+ with ESMTP id W1iI4VfTuMbi
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 10:41:12 +0000 (UTC)
+ Fri, 10 Jul 2020 10:48:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id E3379203E7
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6344E89671
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 10:41:11 +0000 (UTC)
+ Fri, 10 Jul 2020 10:48:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594377670;
+ s=mimecast20190719; t=1594378126;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=M5UoexhzgRrAQFFaSl1hdl1q9CRBScTX0FXbMUBveCI=;
- b=eRwoJcK6hdDc+hOaGICmQTPpdO5r/iZPx8k1zzTfIO78GoVH04C6vslUOll+gA5gGK2xME
- 5IHf+4RI7henkk0J4/VGvRL6TczTFaIBQpjhlJ2dJO0UL9xiIiSxKqn1QMff09BghQ/ETV
- 4Zr2fCgcHCJbqFUcPgYzVRS0QNAaesM=
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=iyQ7Mdq+cHsZNfXMcFEBHnbLg0y1+f956n6Psm19Z3A=;
+ b=borQPyJgomHRKpuo3XQLjFIVt4xuaYRaIVYqtLKPkfe7NONbMM9SzMYOCZQjLMgYrssXju
+ lPtYio4iYSgxeS24jjdi++aby6qajKbSxZX8XPdMoOEX0wxCBIOYiyW+xDIPjNXLtYF2n+
+ DgcUvqIuVqrpuazn18+eWvF3QOBrL/8=
 Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
  [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-499-PAr-37LYOpSTMaMQxaimbw-1; Fri, 10 Jul 2020 06:41:08 -0400
-X-MC-Unique: PAr-37LYOpSTMaMQxaimbw-1
-Received: by mail-wr1-f71.google.com with SMTP id f5so5589915wrv.22
+ us-mta-176-_GsHB5X2Mf-Sd4Q-eJfB_w-1; Fri, 10 Jul 2020 06:48:44 -0400
+X-MC-Unique: _GsHB5X2Mf-Sd4Q-eJfB_w-1
+Received: by mail-wr1-f71.google.com with SMTP id j5so5671613wro.6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Jul 2020 03:41:08 -0700 (PDT)
+ Fri, 10 Jul 2020 03:48:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=M5UoexhzgRrAQFFaSl1hdl1q9CRBScTX0FXbMUBveCI=;
- b=eUfO3+M7lCSgUID3pIA5rBmTFVVQU+uzY36/oYh7qB0//np9nGZjyxmF8kUHqtfsb9
- uXznNCgAs0PpLywIsWmF+J4YD09AJ4Ux3yjDvuLrqTqcBfhqjSUSmJQw23WNzrwL/bON
- UL0fhrDjUggzScRG9r6JDEHzP/H3HkFzqCEjrLCdtpYtqa1spCEpaz0E7c2iryqZO2rC
- U97CeJijfvqAxmjchjyZto62tzBjc/bmLoMn6EbIweO1z/gZlPUK92J6xmw7Ki+5IGV2
- FR9e7aW4SAL0Kb5SGBTdqT1kyBtJRVuDHP3zBZeLIiy9uBYid8wo+dEqW+a+b0YzWonG
- 9Jeg==
-X-Gm-Message-State: AOAM532xCA1KDUun8915c4i6gDu36wFFCu8+9sv67AoCMwH1wwiz5GkA
- XEQOGluN0NcmvaYv1FUTHdDx9bxSSTreqEuHW2B8WxryfTTOFlnNfm6Rh01y3lXnsi7dGVqIJmo
- 2DmPE5/q4lWMSI4rT7/cuAvk4z2G89tFyXRMt8yuMBQ==
-X-Received: by 2002:a05:6000:100c:: with SMTP id
- a12mr73370693wrx.81.1594377667547; 
- Fri, 10 Jul 2020 03:41:07 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJy60ZO1zYTbHETQQGS7sTCxEg96DLLGgaiDRsvrtRzD6t2/yqpDL9PBSe+Ke7VB4naljKUhBQ==
-X-Received: by 2002:a05:6000:100c:: with SMTP id
- a12mr73370675wrx.81.1594377667270; 
- Fri, 10 Jul 2020 03:41:07 -0700 (PDT)
-Received: from steredhat ([5.171.236.20])
- by smtp.gmail.com with ESMTPSA id u1sm11353994wrb.78.2020.07.10.03.41.06
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition;
+ bh=iyQ7Mdq+cHsZNfXMcFEBHnbLg0y1+f956n6Psm19Z3A=;
+ b=YJ1EuzM8ISPOnIfZemtrsA2Tah5jMOmO7BiJAzuYZPJtCsEOmhBReFXcjY427h2GGM
+ 1HllJQy0PjW4xyyz+Q0TkNHIOJDl+GVqEOUgHf78k/KLg8K8fErr/qFDhGHe2uU5jF7R
+ IPzpG5VCzC/kJ8W6jvzJavDRosVjH2ItL+xG8T49FbaML+hcgS7T0siWTGMkkjPgKLzD
+ 83XKxfbvJhrGu1oqRtiKmNupGNi2r+sVN+k3CGmvJclyX4sN7eak4jVzKF1GfyjOAOpu
+ 08rfkXkPRYCoOLSXC96H0+HbteGA7s6/7xQpa/0XzmVDnTCJYqnKp7L7DAPE2OemaBCM
+ xOsQ==
+X-Gm-Message-State: AOAM531K7YW0o2JjaYD84g8RzdE2qcarOyuBbCXicfPkKUnzR1hRslma
+ dJ+SdYCshav51fHkk+wmhtJc04/YZzTT0ctWQezcOCz9iLm4Vnu8qGSRsOhHV5fiSIl3grZE1+A
+ aOl5if4sLzfzOXx6kklTVz4viSTO0PrAKCTKRrePwqQ==
+X-Received: by 2002:a1c:7306:: with SMTP id d6mr4281124wmb.113.1594378123167; 
+ Fri, 10 Jul 2020 03:48:43 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwnW96UmADFr3lBKu+J51FwC7hW91yxrY9fm+6R2FmCNMnZCpNPJGpddYdjDEzeRnojHSJuXQ==
+X-Received: by 2002:a1c:7306:: with SMTP id d6mr4281109wmb.113.1594378123028; 
+ Fri, 10 Jul 2020 03:48:43 -0700 (PDT)
+Received: from redhat.com (bzq-79-182-31-92.red.bezeqint.net. [79.182.31.92])
+ by smtp.gmail.com with ESMTPSA id
+ w13sm9528434wrr.67.2020.07.10.03.48.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:41:06 -0700 (PDT)
-Date: Fri, 10 Jul 2020 12:41:03 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: sparse warnings in net/vmw_vsock/virtio_transport.c
-Message-ID: <20200710104103.qp47ml6rgsr4l6t7@steredhat>
-References: <20200710062421-mutt-send-email-mst@kernel.org>
+ Fri, 10 Jul 2020 03:48:42 -0700 (PDT)
+Date: Fri, 10 Jul 2020 06:48:40 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH] virtio_balloon: fix sparse warning
+Message-ID: <20200710104837.405966-1-mst@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200710062421-mutt-send-email-mst@kernel.org>
+X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
+X-Mutt-Fcc: =sent
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: netdev@vger.kernel.org, stefanha@redhat.com,
- virtualization@lists.linux-foundation.org
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,39 +106,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jul 10, 2020 at 06:24:51AM -0400, Michael S. Tsirkin wrote:
-> RCU trickery:
-> 
-> net/vmw_vsock/virtio_transport.c:73:17: error: incompatible types in comparison expression (different address spaces):
-> net/vmw_vsock/virtio_transport.c:73:17:    struct virtio_vsock [noderef] __rcu *
-> net/vmw_vsock/virtio_transport.c:73:17:    struct virtio_vsock *
-> net/vmw_vsock/virtio_transport.c:171:17: error: incompatible types in comparison expression (different address spaces):
-> net/vmw_vsock/virtio_transport.c:171:17:    struct virtio_vsock [noderef] __rcu *
-> net/vmw_vsock/virtio_transport.c:171:17:    struct virtio_vsock *
-> net/vmw_vsock/virtio_transport.c:207:17: error: incompatible types in comparison expression (different address spaces):
-> net/vmw_vsock/virtio_transport.c:207:17:    struct virtio_vsock [noderef] __rcu *
-> net/vmw_vsock/virtio_transport.c:207:17:    struct virtio_vsock *
-> net/vmw_vsock/virtio_transport.c:561:13: error: incompatible types in comparison expression (different address spaces):
-> net/vmw_vsock/virtio_transport.c:561:13:    struct virtio_vsock [noderef] __rcu *
-> net/vmw_vsock/virtio_transport.c:561:13:    struct virtio_vsock *
-> net/vmw_vsock/virtio_transport.c:612:9: error: incompatible types in comparison expression (different address spaces):
-> net/vmw_vsock/virtio_transport.c:612:9:    struct virtio_vsock [noderef] __rcu *
-> net/vmw_vsock/virtio_transport.c:612:9:    struct virtio_vsock *
-> net/vmw_vsock/virtio_transport.c:631:9: error: incompatible types in comparison expression (different address spaces):
-> net/vmw_vsock/virtio_transport.c:631:9:    struct virtio_vsock [noderef] __rcu *
-> net/vmw_vsock/virtio_transport.c:631:9:    struct virtio_vsock *
->   CC [M]  net/vmw_vsock/virtio_transport.o
-> 
-> can you take a look at fixing this pls?
+balloon uses virtio32_to_cpu instead of cpu_to_virtio32
+to convert a native endian number to virtio.
+No practical difference but makes sparse warn.
+Fix it up.
 
-Thanks for reporting!
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+---
+ drivers/virtio/virtio_balloon.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-We should annotate 'the_virtio_vsock' with __rcu.
-
-I'll send a patch to fix these warnings.
-
-Thanks,
-Stefano
+diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+index fc7301406540..5d4b891bf84f 100644
+--- a/drivers/virtio/virtio_balloon.c
++++ b/drivers/virtio/virtio_balloon.c
+@@ -596,7 +596,7 @@ static int send_cmd_id_start(struct virtio_balloon *vb)
+ 	while (virtqueue_get_buf(vq, &unused))
+ 		;
+ 
+-	vb->cmd_id_active = virtio32_to_cpu(vb->vdev,
++	vb->cmd_id_active = cpu_to_virtio32(vb->vdev,
+ 					virtio_balloon_cmd_id_received(vb));
+ 	sg_init_one(&sg, &vb->cmd_id_active, sizeof(vb->cmd_id_active));
+ 	err = virtqueue_add_outbuf(vq, &sg, 1, &vb->cmd_id_active, GFP_KERNEL);
+-- 
+MST
 
 _______________________________________________
 Virtualization mailing list
