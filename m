@@ -2,99 +2,109 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAB4B21D4C5
-	for <lists.virtualization@lfdr.de>; Mon, 13 Jul 2020 13:23:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AED2C21D4E9
+	for <lists.virtualization@lfdr.de>; Mon, 13 Jul 2020 13:27:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5C4658965F;
-	Mon, 13 Jul 2020 11:23:30 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 61D9289677;
+	Mon, 13 Jul 2020 11:27:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nIn2r24ck6h5; Mon, 13 Jul 2020 11:23:29 +0000 (UTC)
+	with ESMTP id 4GQVGT9dOtxe; Mon, 13 Jul 2020 11:27:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4627A89641;
-	Mon, 13 Jul 2020 11:23:29 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id DCD1F89675;
+	Mon, 13 Jul 2020 11:27:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 13624C0733;
-	Mon, 13 Jul 2020 11:23:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A8ED0C0733;
+	Mon, 13 Jul 2020 11:27:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A9CF5C0733
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EE622C0733
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jul 2020 11:23:27 +0000 (UTC)
+ Mon, 13 Jul 2020 11:27:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 91836250E3
+ by silver.osuosl.org (Postfix) with ESMTP id 2BA0725014
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jul 2020 11:23:27 +0000 (UTC)
+ Mon, 13 Jul 2020 11:27:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Py2Fl+Cjfhwu
+ with ESMTP id EUq+YHKwvHtV
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jul 2020 11:23:26 +0000 (UTC)
+ Mon, 13 Jul 2020 11:27:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [207.211.31.120])
- by silver.osuosl.org (Postfix) with ESMTPS id 5D740250D0
+ by silver.osuosl.org (Postfix) with ESMTPS id F34E1250D0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jul 2020 11:23:26 +0000 (UTC)
+ Mon, 13 Jul 2020 11:27:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594639405;
+ s=mimecast20190719; t=1594639628;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=Cp13jJuIIl8muXNVHzNvpxZz6DmTE1jSSxstK7LrSuw=;
- b=I3YD8cpEE4+NDUiKJZs0nC847r4KvTlXO5w+cYdNCz+RB7DA8nBMVFq5U5oA0C2vP7ilN4
- 1k00JdZlNvegDiGid8fBmAQMLoZK41kC7W6zXQUD9re9jvSDfRqRqyWc7uPdFwTuy+YGPS
- v5nOrzgpFjA04oerRdCrjUnVpQjj1rA=
+ bh=NndF9MqDcvO4KNH3w4Ig8XfoceRFDUTb0+wABisiArU=;
+ b=AzQaZedYXb50wc+fr8+dIZPUsiObXXshtwDAVFF7w/piG5hLZEMaazX5UEV+fK6zbSpKCC
+ HyxS9wb1Ox4ZMHB+3hmPLPD2TBLWNE6fn6EBTTE1I+Zts+O85LeUCyTYZabCX2oa4XgIKP
+ P2Ej5qGUJa6xF5KTyMgP1ad1gmcAyps=
 Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
  [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-353-7qa2u-ueP72eOQlDFCoYKg-1; Mon, 13 Jul 2020 07:23:23 -0400
-X-MC-Unique: 7qa2u-ueP72eOQlDFCoYKg-1
-Received: by mail-wr1-f72.google.com with SMTP id 89so17376741wrr.15
+ us-mta-91--l7NtClUMaaxXcBk2Y0EoQ-1; Mon, 13 Jul 2020 07:27:07 -0400
+X-MC-Unique: -l7NtClUMaaxXcBk2Y0EoQ-1
+Received: by mail-wr1-f72.google.com with SMTP id d11so17434126wrw.12
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Jul 2020 04:23:23 -0700 (PDT)
+ Mon, 13 Jul 2020 04:27:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=Cp13jJuIIl8muXNVHzNvpxZz6DmTE1jSSxstK7LrSuw=;
- b=jidTy37x3eBjA9Q1tMZ4QXQbj31dl5smU9OGsSOp+yp0k9PQCus4pNWZQafv8vpltu
- G22e5kmMHQf44H3cL0Fxu57J2HxacjcvFBMW1swGsTSl2kLTSuFYUsy8hlYt4jPUeU9n
- IYBpeX++KYrOo7R997ltPCA1PBNgTVay9Qy8BQ1gpnPMRMQFYH+9MjGuT90+Ky06HY/h
- VyU/QvEhuvXISxTXyrLGLZuVTKnizd/Cy8Tr4Ex5ssp7z1gTUs6FohYwUl8xQMvrIxWW
- BmIziwMdTaZ7qznjFYgyWi6JthZv/C2JbxqQvpkfd/HYx6WgGyZkgde+CtIb8EtFnMDt
- j8uQ==
-X-Gm-Message-State: AOAM531can5bBnUrm/B4WC82yP0i0WSS88NKC8W1zQYLug7toDkqK1TO
- ev9ZbJ7dVnOWjJmKJI/15ITU+GHg/EbMyYHIvFs8dBXbtEPiP4F5QNs7qF8cynNsWLjINCUAiXk
- jBZVAoxuaUCrs+4LFV90uISkHK/qKqxYOjp86gmCz1A==
-X-Received: by 2002:adf:84e2:: with SMTP id 89mr82610819wrg.139.1594639402329; 
- Mon, 13 Jul 2020 04:23:22 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxzoCrHCmvHA+9tYCCZvkKCKZhV/F4YlMxW4KU+tbDXUAXf+8nTnhjTJ8IHP6HmlwcPSxo1PQ==
-X-Received: by 2002:adf:84e2:: with SMTP id 89mr82610801wrg.139.1594639402164; 
- Mon, 13 Jul 2020 04:23:22 -0700 (PDT)
+ bh=NndF9MqDcvO4KNH3w4Ig8XfoceRFDUTb0+wABisiArU=;
+ b=jkHCSAkPXIuECV+XFk577u1qurc+JWZ5MTY+gj8FnDAVcSGJwm73KxHmzjg0KYR5AS
+ VFnYlyLHo7nkKzUdHKhFrWbsrwLwvG8XEobEycz4CnkvoepvVhi745z/abCS1ggDrWOz
+ wt2uaL3b+XI4U5F1C470fE9hOQCNDj6wH98YSP73UcmcaXe6PmWkjdFImmM6kIk0Ve6u
+ DKMjX3M1ZOSzzoijzVZhUso4Bp23HE2ob14ZIhIy+myrgZG9FpRR/PuCCeKKGmejMIBc
+ kkIhttY/BasdHpHJbJyeRVaIuhHNe8RKmm5BQpE7aKIlVHOgHIvbiWeZD6hhUCaIkqBP
+ BHTg==
+X-Gm-Message-State: AOAM533/7nH3R+hyY2EoEMRhn6Og4e2R9Kgui7+rJfydyEVZ+v/RyaSw
+ bgNUTt4Ej9iFPfp8PLMMLBNY83XzDyT7yVAJv/7bbX8Zxn5H23cF7WkvN1FFPc/UndRKTEk0iNG
+ kSHF0Wo1NXMkqHXlqCNvc5boiC6PP1UmfYV3mOEYlGw==
+X-Received: by 2002:adf:e40e:: with SMTP id g14mr85945102wrm.271.1594639626487; 
+ Mon, 13 Jul 2020 04:27:06 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzoQoJFGLmA7IKeh1vfhF4LpR1itbcrQH3486CQtGPbzU10VTecZ0k8Yt5A6ZRHstGlY191xQ==
+X-Received: by 2002:adf:e40e:: with SMTP id g14mr85945083wrm.271.1594639626252; 
+ Mon, 13 Jul 2020 04:27:06 -0700 (PDT)
 Received: from redhat.com (bzq-79-180-10-140.red.bezeqint.net. [79.180.10.140])
- by smtp.gmail.com with ESMTPSA id m16sm25473869wro.0.2020.07.13.04.23.20
+ by smtp.gmail.com with ESMTPSA id z132sm23730810wmb.21.2020.07.13.04.27.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2020 04:23:21 -0700 (PDT)
-Date: Mon, 13 Jul 2020 07:23:13 -0400
+ Mon, 13 Jul 2020 04:27:05 -0700 (PDT)
+Date: Mon, 13 Jul 2020 07:27:01 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Lee Jones <lee.jones@linaro.org>
-Subject: Re: [PATCH v2 12/24] scsi: virtio_scsi: Demote seemingly
- unintentional kerneldoc header
-Message-ID: <20200713071453-mutt-send-email-mst@kernel.org>
-References: <20200713080001.128044-1-lee.jones@linaro.org>
- <20200713080001.128044-13-lee.jones@linaro.org>
+To: Will Deacon <will@kernel.org>
+Subject: Re: [PATCH v3 07/19] vhost: Remove redundant use of
+ read_barrier_depends() barrier
+Message-ID: <20200713072618-mutt-send-email-mst@kernel.org>
+References: <20200710165203.31284-1-will@kernel.org>
+ <20200710165203.31284-8-will@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20200713080001.128044-13-lee.jones@linaro.org>
+In-Reply-To: <20200710165203.31284-8-will@kernel.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: linux-scsi@vger.kernel.org, martin.petersen@oracle.com,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- jejb@linux.ibm.com
+Cc: Joel Fernandes <joelaf@google.com>, Mark Rutland <mark.rutland@arm.com>,
+ Marco Elver <elver@google.com>, Kees Cook <keescook@chromium.org>,
+ "Paul E. McKenney" <paulmck@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ linux-arm-kernel@lists.infradead.org, Sami Tolvanen <samitolvanen@google.com>,
+ linux-alpha@vger.kernel.org, Alan Stern <stern@rowland.harvard.edu>,
+ Matt Turner <mattst88@gmail.com>, kernel-team@android.com,
+ Boqun Feng <boqun.feng@gmail.com>, Arnd Bergmann <arnd@arndb.de>,
+ Richard Henderson <rth@twiddle.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,45 +121,76 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jul 13, 2020 at 08:59:49AM +0100, Lee Jones wrote:
-> This is the only use of kerneldoc in the sourcefile and no
-> descriptions are provided.
+On Fri, Jul 10, 2020 at 05:51:51PM +0100, Will Deacon wrote:
+> Since commit 76ebbe78f739 ("locking/barriers: Add implicit
+> smp_read_barrier_depends() to READ_ONCE()"), there is no need to use
+> smp_read_barrier_depends() outside of the Alpha architecture code.
 > 
-> Fixes the following W=1 kernel build warning(s):
+> Unfortunately, there is precisely _one_ user in the vhost code, and
+> there isn't an obvious READ_ONCE() access making the barrier
+> redundant. However, on closer inspection (thanks, Jason), it appears
+> that vring synchronisation between the producer and consumer occurs via
+> the 'avail_idx' field, which is followed up by an rmb() in
+> vhost_get_vq_desc(), making the read_barrier_depends() redundant on
+> Alpha.
 > 
->  drivers/scsi/virtio_scsi.c:109: warning: Function parameter or member 'vscsi' not described in 'virtscsi_complete_cmd'
->  drivers/scsi/virtio_scsi.c:109: warning: Function parameter or member 'buf' not described in 'virtscsi_complete_cmd'
+> Jason says:
 > 
-> Cc: "Michael S. Tsirkin" <mst@redhat.com>
-> Cc: Jason Wang <jasowang@redhat.com>
-> Cc: Stefan Hajnoczi <stefanha@redhat.com>
-> Cc: virtualization@lists.linux-foundation.org
-> Signed-off-by: Lee Jones <lee.jones@linaro.org>
-> Acked-by: Paolo Bonzini <pbonzini@redhat.com>
+>   | I'm also confused about the barrier here, basically in driver side
+>   | we did:
+>   |
+>   | 1) allocate pages
+>   | 2) store pages in indirect->addr
+>   | 3) smp_wmb()
+>   | 4) increase the avail idx (somehow a tail pointer of vring)
+>   |
+>   | in vhost we did:
+>   |
+>   | 1) read avail idx
+>   | 2) smp_rmb()
+>   | 3) read indirect->addr
+>   | 4) read from indirect->addr
+>   |
+>   | It looks to me even the data dependency barrier is not necessary
+>   | since we have rmb() which is sufficient for us to the correct
+>   | indirect->addr and driver are not expected to do any writing to
+>   | indirect->addr after avail idx is increased
+> 
+> Remove the redundant barrier invocation.
+> 
+> Suggested-by: Jason Wang <jasowang@redhat.com>
+> Acked-by: Paul E. McKenney <paulmck@kernel.org>
+> Signed-off-by: Will Deacon <will@kernel.org>
+
+
+I agree
 
 Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
-Pls merge with the rest of the patches (which tree is this for?)
+Pls merge with the rest of the patchset.
 
 > ---
->  drivers/scsi/virtio_scsi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/vhost/vhost.c | 5 -----
+>  1 file changed, 5 deletions(-)
 > 
-> diff --git a/drivers/scsi/virtio_scsi.c b/drivers/scsi/virtio_scsi.c
-> index 0e0910c5b9424..56875467e4984 100644
-> --- a/drivers/scsi/virtio_scsi.c
-> +++ b/drivers/scsi/virtio_scsi.c
-> @@ -100,7 +100,7 @@ static void virtscsi_compute_resid(struct scsi_cmnd *sc, u32 resid)
->  		scsi_set_resid(sc, resid);
->  }
->  
-> -/**
-> +/*
->   * virtscsi_complete_cmd - finish a scsi_cmd and invoke scsi_done
->   *
->   * Called with vq_lock held.
+> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+> index d7b8df3edffc..74d135ee7e26 100644
+> --- a/drivers/vhost/vhost.c
+> +++ b/drivers/vhost/vhost.c
+> @@ -2092,11 +2092,6 @@ static int get_indirect(struct vhost_virtqueue *vq,
+>  		return ret;
+>  	}
+>  	iov_iter_init(&from, READ, vq->indirect, ret, len);
+> -
+> -	/* We will use the result as an address to read from, so most
+> -	 * architectures only need a compiler barrier here. */
+> -	read_barrier_depends();
+> -
+>  	count = len / sizeof desc;
+>  	/* Buffers are chained via a 16 bit next field, so
+>  	 * we can have at most 2^16 of these. */
 > -- 
-> 2.25.1
+> 2.27.0.383.g050319c2ae-goog
 
 _______________________________________________
 Virtualization mailing list
