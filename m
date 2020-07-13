@@ -1,99 +1,130 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9557F21CB81
-	for <lists.virtualization@lfdr.de>; Sun, 12 Jul 2020 23:06:42 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B65E21CD2B
+	for <lists.virtualization@lfdr.de>; Mon, 13 Jul 2020 04:26:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4EBF488F86;
-	Sun, 12 Jul 2020 21:06:41 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8D92987244;
+	Mon, 13 Jul 2020 02:26:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pY9EZgqPEL2t; Sun, 12 Jul 2020 21:06:40 +0000 (UTC)
+	with ESMTP id v6W-HTeMws3L; Mon, 13 Jul 2020 02:26:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BD99E8995F;
-	Sun, 12 Jul 2020 21:06:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 1585387249;
+	Mon, 13 Jul 2020 02:26:53 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 91697C0733;
-	Sun, 12 Jul 2020 21:06:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F1D68C0733;
+	Mon, 13 Jul 2020 02:26:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B45F6C0733
- for <virtualization@lists.linux-foundation.org>;
- Sun, 12 Jul 2020 21:06:37 +0000 (UTC)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 37534C0733;
+ Mon, 13 Jul 2020 02:26:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 9DD01886B5
- for <virtualization@lists.linux-foundation.org>;
- Sun, 12 Jul 2020 21:06:37 +0000 (UTC)
+ by silver.osuosl.org (Postfix) with ESMTP id 1FC872049D;
+ Mon, 13 Jul 2020 02:26:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pa+SClYMYVeY
- for <virtualization@lists.linux-foundation.org>;
- Sun, 12 Jul 2020 21:06:36 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 820BC88660
- for <virtualization@lists.linux-foundation.org>;
- Sun, 12 Jul 2020 21:06:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594587995;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=L5r9lMKl+VedPwyqojqtAlh/T45L5HzUK3cN3lNd2wo=;
- b=DgqytdePWo/BIOZyGtga3yj5iFiyjwURCSgbAKBmi7xElSbpvnPpHEtzEUe2FjEVloBSU/
- HX08hOYxufsDwMgR9YGDmk1OwfHl+V/Css75jOz+ppFYBkk+cbWuUFPgl1bhZzFxtPjuOK
- /INFoezYsTE+eCffJ2sy88MSijsDb4s=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-277-niYUkWNAPkiMJKcVI4UwNQ-1; Sun, 12 Jul 2020 17:06:33 -0400
-X-MC-Unique: niYUkWNAPkiMJKcVI4UwNQ-1
-Received: by mail-wr1-f72.google.com with SMTP id v3so15026970wrq.10
- for <virtualization@lists.linux-foundation.org>;
- Sun, 12 Jul 2020 14:06:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=L5r9lMKl+VedPwyqojqtAlh/T45L5HzUK3cN3lNd2wo=;
- b=ml2qvTqcuUjS3R/5IFPQnW1inK8JTsFxNczsASv1UV8akUu+fBmIQjU7I+4TM9f8uF
- xUyJPp6r5/AXRutwOkIlNSvMZHW8itlw4bv/zu4d63oW6WeZlo/baKP9pTi5l/b6qcAA
- hMgKScDa4/7LS7qYGDzfBCfbpICnVa4903FzJUxHbDm4G2I9Rby0RzoRYsc+wcoFpHKQ
- 5wei9wllQ53ae/mV0WTNY/5u7m4JN6argTdheAW9oc/vdzIjEgdJ+Xgfr3DzMfLuMS3i
- Wq0q6tUN0ppUOkBz9jIvfbMbj4xrx57TTE0V9GK2UArWVDb348qWCf1QhYyb63Uu904x
- iP6Q==
-X-Gm-Message-State: AOAM530Unky9qRSBOaLovryoGrWdwl6Jtpq+5CNsZUe9U/Iwa21NA3Qg
- KG4VUFJJIfpGnl5EiNs/qZeUoMJPcGqd0KEC6zG2scK07CkqNpK6uf2C+LismyN5VJQYit+qt5e
- 9vjJJ/EVvRiT9MsOc3KuJIJft2c5j1+8JYEir2naJwg==
-X-Received: by 2002:a5d:62d1:: with SMTP id o17mr74654335wrv.162.1594587992467; 
- Sun, 12 Jul 2020 14:06:32 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxN9eeLixYJUNonj+ARv9bC7NvUuWCjy8yRp5ZiT/Iu14VpgMjjIlrxVEOv3G+xr1uFy1JA2w==
-X-Received: by 2002:a5d:62d1:: with SMTP id o17mr74654324wrv.162.1594587992226; 
- Sun, 12 Jul 2020 14:06:32 -0700 (PDT)
-Received: from redhat.com (bzq-79-182-31-92.red.bezeqint.net. [79.182.31.92])
- by smtp.gmail.com with ESMTPSA id
- w17sm20955259wra.42.2020.07.12.14.06.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Jul 2020 14:06:31 -0700 (PDT)
-Date: Sun, 12 Jul 2020 17:06:27 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Zhu Lingshan <lingshan.zhu@intel.com>
-Subject: Re: [PATCH 2/7] kvm/vfio: detect assigned device via irqbypass manager
-Message-ID: <20200712170518-mutt-send-email-mst@kernel.org>
-References: <1594565366-3195-1-git-send-email-lingshan.zhu@intel.com>
- <1594565366-3195-2-git-send-email-lingshan.zhu@intel.com>
+ with ESMTP id d9gJTFpA1X7G; Mon, 13 Jul 2020 02:26:49 +0000 (UTC)
+X-Greylist: delayed 00:17:06 by SQLgrey-1.7.6
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr140089.outbound.protection.outlook.com [40.107.14.89])
+ by silver.osuosl.org (Postfix) with ESMTPS id 330D520341;
+ Mon, 13 Jul 2020 02:26:49 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LruRMIOJFrkQOpMYDRd1yBY/0DXM3V6+A1bEDdoxc9RmaRwS9HBRvq5Hoo8xHILQZW5LkamzP69XibMXDNBMw8uz5gAEJZCjk5XcroVB/x0vmXZxf0EdxhDZ+SnC4ga775AoPClrV2YFkPP2nX5x0yQdBA0CQ6qEGFNLiupejdNV+bD+2V/QSs0TVAGo419en+wm72yiZaZTnoWJW5dnfrABUesjhRfwqEmX7KqUr0B+AJ42xNCigcv42m3enWoyH3jYGja6s4+Uxwu+yYH47lKX8iqZVTAzGAR5C7N2Vc6Ez5uwcmuiWJgt3NdYuaqCN3Hfhy0C+p2ZmR5yRSiLyA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0GABxCLbPG/InTruHWRpo4qulx4rYnvByLeP8nYru0E=;
+ b=YjkUykQ71iQuSBu4BfIcWg+2KGefoG+bOWCDyA7KR2I5eb3EzcO4TnGTidRM51/GAwwcFHzOhVDLN0P7GSpzxCrbrG5ZUdGpwZ2ACv1y8Ckvp1pIl/sAa0MQVk3zZRT8y9Q0qn8tcjCU8cm+ZOwW/N3TgPeWiiUMUZ3EKH07PmrLdu0xF5h8D3e5oYhrwpBejTMB/TdejTxbDV+dtLxN7l1NoIsKDzgLs6N/WxGevp5Cg2slHo5qMqkjcjBhXYdJhSNAD7vdQ2qyY2k6nzTlfPrqQ/rc379jBqoSjd72nhoCFmOeiZzBlwYHG+DgSZB3lVBaQb2zXQOlwKcMBfQ6yA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0GABxCLbPG/InTruHWRpo4qulx4rYnvByLeP8nYru0E=;
+ b=heSq42g8WHT6NiBV2e/XNCtUZpyt80CMWW/KlzGxuWhXKHsOY5GLi5GhgTP2lifKD5lRveY7y65FuZcKKfacA5WFDt+MQOBE9BmSPh58C0EN4mN65PPF51KMh9fOZtD9JyrEYy/jC2TwsFdW1roXU1na/IPUOsPO9cUNhvalgE0=
+Received: from DB6PR0402MB2760.eurprd04.prod.outlook.com (2603:10a6:4:a1::14)
+ by DB6PR0402MB2934.eurprd04.prod.outlook.com (2603:10a6:4:9b::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.23; Mon, 13 Jul
+ 2020 01:53:47 +0000
+Received: from DB6PR0402MB2760.eurprd04.prod.outlook.com
+ ([fe80::2d36:b569:17c:7701]) by DB6PR0402MB2760.eurprd04.prod.outlook.com
+ ([fe80::2d36:b569:17c:7701%4]) with mapi id 15.20.3174.025; Mon, 13 Jul 2020
+ 01:53:46 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Stefano Stabellini <sstabellini@kernel.org>, "Michael S. Tsirkin"
+ <mst@redhat.com>
+Subject: RE: [PATCH] xen: introduce xen_vring_use_dma
+Thread-Topic: [PATCH] xen: introduce xen_vring_use_dma
+Thread-Index: AQHWSgTusARd8c8cRkWwDit233DtZajneYoAgACU6oCAAC7QAIAAEpoAgAAGSwCAAUK2gIABcSaAgAVA3oCAAnnkAIAAQwqAgAA/4wCADeHhAIADsWjQ
+Date: Mon, 13 Jul 2020 01:53:46 +0000
+Message-ID: <DB6PR0402MB2760A98A427AA48FA325635288600@DB6PR0402MB2760.eurprd04.prod.outlook.com>
+References: <20200624050355-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241047010.8121@sstabellini-ThinkPad-T480s>
+ <20200624163940-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
+ <20200624181026-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
+ <20200626110629-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006291621300.8121@sstabellini-ThinkPad-T480s>
+ <20200701133456.GA23888@infradead.org>
+ <alpine.DEB.2.21.2007011020320.8121@sstabellini-ThinkPad-T480s>
+ <20200701172219-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2007101019340.4124@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.2007101019340.4124@sstabellini-ThinkPad-T480s>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: kernel.org; dkim=none (message not signed)
+ header.d=none;kernel.org; dmarc=none action=none header.from=nxp.com;
+x-originating-ip: [92.121.68.129]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 99a7de08-78dc-4b39-c1f7-08d826cf94d4
+x-ms-traffictypediagnostic: DB6PR0402MB2934:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <DB6PR0402MB293480B64104501E330E226088600@DB6PR0402MB2934.eurprd04.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: HNjTjTjWrIzXfE6ltpWdBR2DeplyC5i9JvzDPZQia160JH+4EpFBFzUBzaTYh+uNrM/VAFmAV3PbNhBJHmw4II1QBugVpSYd+ZkN3p/kF1yaQTw4pm/RfS3uD0WGoDkSTdS79kgwDookFi9BKKxCd10mfxdveukGFFsjh/BIVkUj48h+STYHB61GG8gkXTt6ITZV0OnndJ8ZhM6eTVmusVfqT4VGMIOba0QJ7G5tYI+xecyBwKWGL5LPqc2bRxVYTRFcQlD97nLK37PDGgCUsc7osct3GMyYTmmMbUfTR9BNamWstINU8Hh7Y9Zp4MCrITQOw3eHM8GlxxprJogzeQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB6PR0402MB2760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(366004)(346002)(39860400002)(376002)(136003)(396003)(66476007)(66556008)(64756008)(66446008)(66946007)(76116006)(2906002)(86362001)(478600001)(8936002)(8676002)(4326008)(83380400001)(71200400001)(26005)(7696005)(33656002)(44832011)(9686003)(55016002)(110136005)(7416002)(6506007)(316002)(54906003)(186003)(5660300002)(52536014);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: Iun8yMXMvh1uJny1TTawzz+RrjDW6kn8ygbIzjr3Mw6Ca8T8w5/hMDadUD5xBFjCFBsj4QPIiReVKRta2T+kh2YkRdvG58bGxrewzphSpr8HT6vhsCU/1QmupGEgZaPVUseO/ppaC+y0yTT/POW9E40JnMMr0/uKZrcYxKazMrOMAZ5quH6xrF2sj8N35RRCDqhDLSO7PVwhVKOtExLwKPDhV3juJVIk4L/5+OAIO7iJ7QreF5xC50QYFLi4bgA8BVNNt2Zqu/LbiiW+hmOWV5wVog8ablQmmxHgJkE0xIk3grgQ7hQoDvcj7g5k+s0oaD80LLjXhzmt3qHbTr4j9jD6/shsyW94xYVPdTW/caw5dVIQXvMhI5QcGOe78Yf5tKAlBryF38etGJEkPrvsO8ReuhJj6/l9q4SeAjyMwFrrWlJ5zkv4Z6OHWS60F8GC4mGuHGqOxZeHW8OwvsxL9Uw/dBc3P99uO6gTD+BH168=
 MIME-Version: 1.0
-In-Reply-To: <1594565366-3195-2-git-send-email-lingshan.zhu@intel.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: wanpengli@tencent.com, kvm@vger.kernel.org, netdev@vger.kernel.org,
- sean.j.christopherson@intel.com, virtualization@lists.linux-foundation.org,
- pbonzini@redhat.com, "./0000-cover-letter.patch"@redhat.com
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB6PR0402MB2760.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99a7de08-78dc-4b39-c1f7-08d826cf94d4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jul 2020 01:53:46.8602 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: nhMchUJ1LWLK4MCDdWLbSri36Ld+/UF1kdGDfCfQG+NsyzpEL7vFL5ZnooxMhdUBejFSfT+ZNO67zUrafCM7YA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0402MB2934
+Cc: "jgross@suse.com" <jgross@suse.com>,
+ "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>,
+ "x86@kernel.org" <x86@kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ Christoph Hellwig <hch@infradead.org>,
+ "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
+ dl-linux-imx <linux-imx@nxp.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>,
+ "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,75 +141,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sun, Jul 12, 2020 at 10:49:21PM +0800, Zhu Lingshan wrote:
-> We used to detect assigned device via VFIO manipulated device
-> conters. This is less flexible consider VFIO is not the only
-> interface for assigned device. vDPA devices has dedicated
-> backed hardware as well. So this patch tries to detect
-> the assigned device via irqbypass manager.
+> Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
 > 
-> We will increase/decrease the assigned device counter in kvm/x86.
-> Both vDPA and VFIO would go through this code path.
+> Sorry for the late reply -- a couple of conferences kept me busy.
 > 
-> This code path only affect x86 for now.
 > 
-> Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
+> On Wed, 1 Jul 2020, Michael S. Tsirkin wrote:
+> > On Wed, Jul 01, 2020 at 10:34:53AM -0700, Stefano Stabellini wrote:
+> > > Would you be in favor of a more flexible check along the lines of
+> > > the one proposed in the patch that started this thread:
+> > >
+> > >     if (xen_vring_use_dma())
+> > >             return true;
+> > >
+> > >
+> > > xen_vring_use_dma would be implemented so that it returns true when
+> > > xen_swiotlb is required and false otherwise.
+> >
+> > Just to stress - with a patch like this virtio can *still* use DMA API
+> > if PLATFORM_ACCESS is set. So if DMA API is broken on some platforms
+> > as you seem to be saying, you guys should fix it before doing
+> > something like this..
+> 
+> Yes, DMA API is broken with some interfaces (specifically: rpmesg and trusty),
+> but for them PLATFORM_ACCESS is never set. That is why the errors weren't
+> reported before. Xen special case aside, there is no problem under normal
+> circumstances.
+> 
+> 
+> If you are OK with this patch (after a little bit of clean-up), Peng, are you OK
+> with sending an update or do you want me to?
 
+If you could help, that would be great. You have more expertise in knowing
+the whole picture.
 
-I think it's best to leave VFIO alone. Add appropriate APIs for VDPA,
-worry about converting existing users later.
-
-> ---
->  arch/x86/kvm/x86.c | 10 ++++++++--
->  virt/kvm/vfio.c    |  2 --
->  2 files changed, 8 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-> index 00c88c2..20c07d3 100644
-> --- a/arch/x86/kvm/x86.c
-> +++ b/arch/x86/kvm/x86.c
-> @@ -10624,11 +10624,17 @@ int kvm_arch_irq_bypass_add_producer(struct irq_bypass_consumer *cons,
->  {
->  	struct kvm_kernel_irqfd *irqfd =
->  		container_of(cons, struct kvm_kernel_irqfd, consumer);
-> +	int ret;
->  
->  	irqfd->producer = prod;
-> +	kvm_arch_start_assignment(irqfd->kvm);
-> +	ret = kvm_x86_ops.update_pi_irte(irqfd->kvm,
-> +					 prod->irq, irqfd->gsi, 1);
-> +
-> +	if (ret)
-> +		kvm_arch_end_assignment(irqfd->kvm);
->  
-> -	return kvm_x86_ops.update_pi_irte(irqfd->kvm,
-> -					   prod->irq, irqfd->gsi, 1);
-> +	return ret;
->  }
->  
->  void kvm_arch_irq_bypass_del_producer(struct irq_bypass_consumer *cons,
-> diff --git a/virt/kvm/vfio.c b/virt/kvm/vfio.c
-> index 8fcbc50..111da52 100644
-> --- a/virt/kvm/vfio.c
-> +++ b/virt/kvm/vfio.c
-> @@ -226,7 +226,6 @@ static int kvm_vfio_set_group(struct kvm_device *dev, long attr, u64 arg)
->  		list_add_tail(&kvg->node, &kv->group_list);
->  		kvg->vfio_group = vfio_group;
->  
-> -		kvm_arch_start_assignment(dev->kvm);
->  
->  		mutex_unlock(&kv->lock);
->  
-> @@ -254,7 +253,6 @@ static int kvm_vfio_set_group(struct kvm_device *dev, long attr, u64 arg)
->  				continue;
->  
->  			list_del(&kvg->node);
-> -			kvm_arch_end_assignment(dev->kvm);
->  #ifdef CONFIG_SPAPR_TCE_IOMMU
->  			kvm_spapr_tce_release_vfio_group(dev->kvm,
->  							 kvg->vfio_group);
-> -- 
-> 1.8.3.1
+Thanks,
+Peng.
 
 _______________________________________________
 Virtualization mailing list
