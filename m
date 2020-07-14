@@ -2,53 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4177521F01F
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:10:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A4D321F023
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:10:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id AC809885AE;
-	Tue, 14 Jul 2020 12:10:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 09C0588655;
+	Tue, 14 Jul 2020 12:10:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rvvdcf0-Cwkx; Tue, 14 Jul 2020 12:10:45 +0000 (UTC)
+	with ESMTP id ObR4GPu9NTPd; Tue, 14 Jul 2020 12:10:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2A325885C6;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 40097885C9;
 	Tue, 14 Jul 2020 12:10:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E8624C0733;
-	Tue, 14 Jul 2020 12:10:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 32C64C0888;
+	Tue, 14 Jul 2020 12:10:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 172FDC0733
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2A92CC0888
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Jul 2020 12:10:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 04D868A053
+ by whitealder.osuosl.org (Postfix) with ESMTP id 0D8228A104
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Jul 2020 12:10:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5yL1LAvwQb6R
+ with ESMTP id hcnVGY4fekY1
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Jul 2020 12:10:39 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 60F5F8A04F
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 5DC7A89FF9
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Jul 2020 12:10:39 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 6620B2F9;
+ by theia.8bytes.org (Postfix) with ESMTPSA id DB40A346;
  Tue, 14 Jul 2020 14:10:35 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v4 04/75] x86/cpufeatures: Add SEV-ES CPU feature
-Date: Tue, 14 Jul 2020 14:08:06 +0200
-Message-Id: <20200714120917.11253-5-joro@8bytes.org>
+Subject: [PATCH v4 05/75] x86/traps: Move pf error codes to <asm/trap_pf.h>
+Date: Tue, 14 Jul 2020 14:08:07 +0200
+Message-Id: <20200714120917.11253-6-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200714120917.11253-1-joro@8bytes.org>
 References: <20200714120917.11253-1-joro@8bytes.org>
@@ -82,65 +82,84 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Joerg Roedel <jroedel@suse.de>
 
-Add CPU feature detection for Secure Encrypted Virtualization with
-Encrypted State. This feature enhances SEV by also encrypting the
-guest register state, making it in-accessible to the hypervisor.
+Move the definition of the x86 page-fault error code bits to the new
+header file asm/trap_pf.h. This makes it easier to include them into
+pre-decompression boot code. No functional changes.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/cpufeatures.h | 1 +
- arch/x86/kernel/cpu/amd.c          | 3 ++-
- arch/x86/kernel/cpu/scattered.c    | 1 +
- 3 files changed, 4 insertions(+), 1 deletion(-)
+ arch/x86/include/asm/trap_pf.h | 24 ++++++++++++++++++++++++
+ arch/x86/include/asm/traps.h   | 19 +------------------
+ 2 files changed, 25 insertions(+), 18 deletions(-)
+ create mode 100644 arch/x86/include/asm/trap_pf.h
 
-diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
-index 02dabc9e77b0..069a774f6d57 100644
---- a/arch/x86/include/asm/cpufeatures.h
-+++ b/arch/x86/include/asm/cpufeatures.h
-@@ -234,6 +234,7 @@
- #define X86_FEATURE_EPT_AD		( 8*32+17) /* Intel Extended Page Table access-dirty bit */
- #define X86_FEATURE_VMCALL		( 8*32+18) /* "" Hypervisor supports the VMCALL instruction */
- #define X86_FEATURE_VMW_VMMCALL		( 8*32+19) /* "" VMware prefers VMMCALL hypercall instruction */
-+#define X86_FEATURE_SEV_ES		( 8*32+20) /* AMD Secure Encrypted Virtualization - Encrypted State */
+diff --git a/arch/x86/include/asm/trap_pf.h b/arch/x86/include/asm/trap_pf.h
+new file mode 100644
+index 000000000000..305bc1214aef
+--- /dev/null
++++ b/arch/x86/include/asm/trap_pf.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _ASM_X86_TRAP_PF_H
++#define _ASM_X86_TRAP_PF_H
++
++/*
++ * Page fault error code bits:
++ *
++ *   bit 0 ==	 0: no page found	1: protection fault
++ *   bit 1 ==	 0: read access		1: write access
++ *   bit 2 ==	 0: kernel-mode access	1: user-mode access
++ *   bit 3 ==				1: use of reserved bit detected
++ *   bit 4 ==				1: fault was an instruction fetch
++ *   bit 5 ==				1: protection keys block access
++ */
++enum x86_pf_error_code {
++	X86_PF_PROT	=		1 << 0,
++	X86_PF_WRITE	=		1 << 1,
++	X86_PF_USER	=		1 << 2,
++	X86_PF_RSVD	=		1 << 3,
++	X86_PF_INSTR	=		1 << 4,
++	X86_PF_PK	=		1 << 5,
++};
++
++#endif /* _ASM_X86_TRAP_PF_H */
+diff --git a/arch/x86/include/asm/traps.h b/arch/x86/include/asm/traps.h
+index 714b1a30e7b0..6a308355ea29 100644
+--- a/arch/x86/include/asm/traps.h
++++ b/arch/x86/include/asm/traps.h
+@@ -8,6 +8,7 @@
+ #include <asm/debugreg.h>
+ #include <asm/idtentry.h>
+ #include <asm/siginfo.h>			/* TRAP_TRACE, ... */
++#include <asm/trap_pf.h>
  
- /* Intel-defined CPU features, CPUID level 0x00000007:0 (EBX), word 9 */
- #define X86_FEATURE_FSGSBASE		( 9*32+ 0) /* RDFSBASE, WRFSBASE, RDGSBASE, WRGSBASE instructions*/
-diff --git a/arch/x86/kernel/cpu/amd.c b/arch/x86/kernel/cpu/amd.c
-index d4806eac9325..7eaca090e2e8 100644
---- a/arch/x86/kernel/cpu/amd.c
-+++ b/arch/x86/kernel/cpu/amd.c
-@@ -613,7 +613,7 @@ static void early_detect_mem_encrypt(struct cpuinfo_x86 *c)
- 	 *	      If BIOS has not enabled SME then don't advertise the
- 	 *	      SME feature (set in scattered.c).
- 	 *   For SEV: If BIOS has not enabled SEV then don't advertise the
--	 *            SEV feature (set in scattered.c).
-+	 *            SEV and SEV_ES feature (set in scattered.c).
- 	 *
- 	 *   In all cases, since support for SME and SEV requires long mode,
- 	 *   don't advertise the feature under CONFIG_X86_32.
-@@ -644,6 +644,7 @@ static void early_detect_mem_encrypt(struct cpuinfo_x86 *c)
- 		setup_clear_cpu_cap(X86_FEATURE_SME);
- clear_sev:
- 		setup_clear_cpu_cap(X86_FEATURE_SEV);
-+		setup_clear_cpu_cap(X86_FEATURE_SEV_ES);
- 	}
- }
+ #ifdef CONFIG_X86_64
+ asmlinkage __visible notrace struct pt_regs *sync_regs(struct pt_regs *eregs);
+@@ -41,22 +42,4 @@ void __noreturn handle_stack_overflow(const char *message,
+ 				      unsigned long fault_address);
+ #endif
  
-diff --git a/arch/x86/kernel/cpu/scattered.c b/arch/x86/kernel/cpu/scattered.c
-index 62b137c3c97a..30f354989cf1 100644
---- a/arch/x86/kernel/cpu/scattered.c
-+++ b/arch/x86/kernel/cpu/scattered.c
-@@ -41,6 +41,7 @@ static const struct cpuid_bit cpuid_bits[] = {
- 	{ X86_FEATURE_MBA,		CPUID_EBX,  6, 0x80000008, 0 },
- 	{ X86_FEATURE_SME,		CPUID_EAX,  0, 0x8000001f, 0 },
- 	{ X86_FEATURE_SEV,		CPUID_EAX,  1, 0x8000001f, 0 },
-+	{ X86_FEATURE_SEV_ES,		CPUID_EAX,  3, 0x8000001f, 0 },
- 	{ 0, 0, 0, 0, 0 }
- };
- 
+-/*
+- * Page fault error code bits:
+- *
+- *   bit 0 ==	 0: no page found	1: protection fault
+- *   bit 1 ==	 0: read access		1: write access
+- *   bit 2 ==	 0: kernel-mode access	1: user-mode access
+- *   bit 3 ==				1: use of reserved bit detected
+- *   bit 4 ==				1: fault was an instruction fetch
+- *   bit 5 ==				1: protection keys block access
+- */
+-enum x86_pf_error_code {
+-	X86_PF_PROT	=		1 << 0,
+-	X86_PF_WRITE	=		1 << 1,
+-	X86_PF_USER	=		1 << 2,
+-	X86_PF_RSVD	=		1 << 3,
+-	X86_PF_INSTR	=		1 << 4,
+-	X86_PF_PK	=		1 << 5,
+-};
+ #endif /* _ASM_X86_TRAPS_H */
 -- 
 2.27.0
 
