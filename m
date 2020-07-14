@@ -1,92 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7165B21EC6E
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 11:13:46 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A11721EF6F
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 13:38:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E7C412150A;
-	Tue, 14 Jul 2020 09:13:44 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 224F68A5DE;
+	Tue, 14 Jul 2020 11:38:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KnTqinFETMr8; Tue, 14 Jul 2020 09:13:43 +0000 (UTC)
+	with ESMTP id KRqlsAeyAA1R; Tue, 14 Jul 2020 11:38:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id AF57D204CB;
-	Tue, 14 Jul 2020 09:13:43 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A71D88A1FF;
+	Tue, 14 Jul 2020 11:38:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 79BE7C0733;
-	Tue, 14 Jul 2020 09:13:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 95390C0733;
+	Tue, 14 Jul 2020 11:38:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 941ACC0733
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 677F0C0733
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 09:13:41 +0000 (UTC)
+ Tue, 14 Jul 2020 11:38:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 82A498824B
+ by whitealder.osuosl.org (Postfix) with ESMTP id 633DE8A1FF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 09:13:41 +0000 (UTC)
+ Tue, 14 Jul 2020 11:38:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0fAxpwmZN-ej
+ with ESMTP id QyMcRF96pULj
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 09:13:40 +0000 (UTC)
+ Tue, 14 Jul 2020 11:38:37 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
- [209.85.128.66])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 245C68824A
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 8EFA388B53
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 09:13:40 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id j18so3927821wmi.3
- for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 02:13:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=9Pqx/9lkzvh5WKoy2o32ZODIaPfaEwhPcr7+MvK0JLI=;
- b=WEmPKl4FjBTIn0aomMPp7w+X8d/FEsVAv++fuq3P9xc3r87+Pqey830PDSApGhlALv
- 7pwdzfizssuQlmE0yFquCuMLj9J4YWorVDXrJLwWIXNmGzHq24ahi9Gr8H3A+rRDG5Ne
- mmUJngtpcM3oUVJzKcRnppID1QBoPuw4mPCCk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=9Pqx/9lkzvh5WKoy2o32ZODIaPfaEwhPcr7+MvK0JLI=;
- b=LEtXZ42QtkqjS893UvqN3zRwAkbLvqDMn345dQbo8DI1mymbVw8Mpx+9qQ3T3UHWth
- BA3c1HY03FxgJBd5ZK26sHVxRdVAn24gvYKnlnFzXgf5hXTxcbN3Hratk5OjBWODeBDm
- pX9QBwS1fbzBwb/ZCgSHi5MFa9+jo/52kEaPdl8Uf+Mi/HEmQM2EmCVtYc+p88azLe4z
- GftTXkJTeXayjLGROI8dHOyuYeB6WsztvL7Y4yVsBvpXQFj19uQc+tDsrJDrTYwt7oXU
- XNBRmZh72EVn0pRGepulXqx1Eg+Yi/BV6Z1Y8zitnlmOOpQCyKfpD8fjvsqF3P36uM7a
- aNfg==
-X-Gm-Message-State: AOAM532xY5v3McRwBMZG0wpc3GQ6IX/s6chDSJ2s5SCs5R7yyHRpSfiR
- 1hk/JI6LiYwtuyNaib+8MersTg==
-X-Google-Smtp-Source: ABdhPJy4wnELZR5Eh4ZFB+kjIYJnpY/MZyMZokn6shny1yfqigdUl2UIpBotGyCtfwXIA//k/H/hGw==
-X-Received: by 2002:a1c:28a:: with SMTP id 132mr3246206wmc.109.1594718018463; 
- Tue, 14 Jul 2020 02:13:38 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id y7sm27516915wrt.11.2020.07.14.02.13.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2020 02:13:37 -0700 (PDT)
-Date: Tue, 14 Jul 2020 11:13:35 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Sam Ravnborg <sam@ravnborg.org>
-Subject: Re: [PATCH 2/2] drm/virtio: Remove open-coded commit-tail function
-Message-ID: <20200714091335.GY3278063@phenom.ffwll.local>
-References: <20200707201229.472834-4-daniel.vetter@ffwll.ch>
- <20200709123339.547390-1-daniel.vetter@ffwll.ch>
- <20200709123339.547390-2-daniel.vetter@ffwll.ch>
- <20200709140531.GA220817@ravnborg.org>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200709140531.GA220817@ravnborg.org>
-X-Operating-System: Linux phenom 5.6.0-1-amd64 
-Cc: linux-rdma@vger.kernel.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel.vetter@intel.com>
+ Tue, 14 Jul 2020 11:38:37 +0000 (UTC)
+Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 06EBWLP1183543; Tue, 14 Jul 2020 07:38:31 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 327tna7s76-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Jul 2020 07:38:31 -0400
+Received: from m0098414.ppops.net (m0098414.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 06EBWSkd185266;
+ Tue, 14 Jul 2020 07:38:31 -0400
+Received: from ppma02fra.de.ibm.com (47.49.7a9f.ip4.static.sl-reverse.com
+ [159.122.73.71])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 327tna7s6h-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Jul 2020 07:38:31 -0400
+Received: from pps.filterd (ppma02fra.de.ibm.com [127.0.0.1])
+ by ppma02fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 06EBPXDf029774;
+ Tue, 14 Jul 2020 11:38:29 GMT
+Received: from b06cxnps3074.portsmouth.uk.ibm.com
+ (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
+ by ppma02fra.de.ibm.com with ESMTP id 327527ub3d-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Jul 2020 11:38:29 +0000
+Received: from d06av24.portsmouth.uk.ibm.com (d06av24.portsmouth.uk.ibm.com
+ [9.149.105.60])
+ by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 06EBcQiW4456718
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 14 Jul 2020 11:38:26 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 3838F42041;
+ Tue, 14 Jul 2020 11:38:26 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 9F20842042;
+ Tue, 14 Jul 2020 11:38:17 +0000 (GMT)
+Received: from oc3016276355.ibm.com (unknown [9.145.162.148])
+ by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Tue, 14 Jul 2020 11:38:13 +0000 (GMT)
+From: Pierre Morel <pmorel@linux.ibm.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v6 0/2] s390: virtio: let arch validate VIRTIO features
+Date: Tue, 14 Jul 2020 13:38:00 +0200
+Message-Id: <1594726682-12076-1-git-send-email-pmorel@linux.ibm.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-07-14_02:2020-07-14,
+ 2020-07-14 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0
+ priorityscore=1501 adultscore=0 bulkscore=0 spamscore=0 phishscore=0
+ impostorscore=0 suspectscore=1 lowpriorityscore=0 clxscore=1015 mlxscore=0
+ mlxlogscore=947 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2007140085
+Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
+ kvm@vger.kernel.org, mst@redhat.com, cohuck@redhat.com, linuxram@us.ibm.com,
+ virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
+ borntraeger@de.ibm.com, thomas.lendacky@amd.com, hca@linux.ibm.com,
+ david@gibson.dropbear.id.au
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,81 +109,97 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jul 09, 2020 at 04:05:31PM +0200, Sam Ravnborg wrote:
-> On Thu, Jul 09, 2020 at 02:33:39PM +0200, Daniel Vetter wrote:
-> > Exactly matches the one in the helpers.
-> > 
-> > This avoids me having to roll out dma-fence critical section
-> > annotations to this copy.
-> > 
-> > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> > Cc: David Airlie <airlied@linux.ie>
-> > Cc: Gerd Hoffmann <kraxel@redhat.com>
-> > Cc: virtualization@lists.linux-foundation.org
-> > ---
-> >  drivers/gpu/drm/virtio/virtgpu_display.c | 20 --------------------
-> >  1 file changed, 20 deletions(-)
-> Very nice catch:
-> Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
+Hi all,
 
-Patch applied, thanks for reviewing.
+The goal of the series is to give a chance to the architecture
+to validate VIRTIO device features.
 
-> > 
-> > diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
-> > index f3ce49c5a34c..af55b334be2f 100644
-> > --- a/drivers/gpu/drm/virtio/virtgpu_display.c
-> > +++ b/drivers/gpu/drm/virtio/virtgpu_display.c
-> > @@ -314,25 +314,6 @@ virtio_gpu_user_framebuffer_create(struct drm_device *dev,
-> >  	return &virtio_gpu_fb->base;
-> >  }
-> >  
-> > -static void vgdev_atomic_commit_tail(struct drm_atomic_state *state)
-> > -{
-> > -	struct drm_device *dev = state->dev;
-> > -
-> > -	drm_atomic_helper_commit_modeset_disables(dev, state);
-> > -	drm_atomic_helper_commit_modeset_enables(dev, state);
-> > -	drm_atomic_helper_commit_planes(dev, state, 0);
-> > -
-> > -	drm_atomic_helper_fake_vblank(state);
-> > -	drm_atomic_helper_commit_hw_done(state);
-> > -
-> > -	drm_atomic_helper_wait_for_vblanks(dev, state);
-> > -	drm_atomic_helper_cleanup_planes(dev, state);
-> > -}
-> > -
-> > -static const struct drm_mode_config_helper_funcs virtio_mode_config_helpers = {
-> > -	.atomic_commit_tail = vgdev_atomic_commit_tail,
-> > -};
-> > -
-> >  static const struct drm_mode_config_funcs virtio_gpu_mode_funcs = {
-> >  	.fb_create = virtio_gpu_user_framebuffer_create,
-> >  	.atomic_check = drm_atomic_helper_check,
-> > @@ -346,7 +327,6 @@ void virtio_gpu_modeset_init(struct virtio_gpu_device *vgdev)
-> >  	drm_mode_config_init(vgdev->ddev);
-> >  	vgdev->ddev->mode_config.quirk_addfb_prefer_host_byte_order = true;
-> >  	vgdev->ddev->mode_config.funcs = &virtio_gpu_mode_funcs;
-> > -	vgdev->ddev->mode_config.helper_private = &virtio_mode_config_helpers;
-> >  
-> >  	/* modes will be validated against the framebuffer size */
-> >  	vgdev->ddev->mode_config.min_width = XRES_MIN;
-> > -- 
-> > 2.27.0
-> > 
-> > _______________________________________________
-> > dri-devel mailing list
-> > dri-devel@lists.freedesktop.org
-> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+in this respin:
+
+1) I kept removed the ack from Jason as I reworked the patch
+   @Jason, the nature and goal of the patch did not really changed
+           please can I get back your acked-by with these changes?
+
+2) Rewording for warning messages
+
+Regards,
+Pierre
+
+
+Pierre Morel (2):
+  virtio: let arch validate VIRTIO features
+  s390: virtio: PV needs VIRTIO I/O device protection
+
+ arch/s390/mm/init.c           | 28 ++++++++++++++++++++++++++++
+ drivers/virtio/virtio.c       | 19 +++++++++++++++++++
+ include/linux/virtio_config.h |  1 +
+ 3 files changed, 48 insertions(+)
 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.25.1
+
+Changelog
+
+to v6:
+
+- rewording warning messages
+  (Connie, Halil)
+
+to v5:
+
+- return directly from S390 arch_validate_virtio_features()
+  when the guest is not protected.
+  (Connie)
+
+- Somme rewording
+  (Connie, Michael)
+
+- moved back code from arch/s390/ ...kernel/uv.c to ...mm/init.c
+  (Christian)
+
+to v4:
+
+- separate virtio and arch code
+  (Pierre)
+
+- moved code from arch/s390/mm/init.c to arch/s390/kernel/uv.c
+  (as interpreted from Heiko's comment)
+
+- moved validation inside the arch code
+  (Connie)
+
+- moved the call to arch validation before VIRTIO_F_1 test
+  (Michael)
+
+to v3:
+
+- add warning
+  (Connie, Christian)
+
+- add comment
+  (Connie)
+
+- change hook name
+  (Halil, Connie)
+
+to v2:
+
+- put the test in virtio_finalize_features()
+  (Connie)
+
+- put the test inside VIRTIO core
+  (Jason)
+
+- pass a virtio device as parameter
+  (Halil)
+
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
