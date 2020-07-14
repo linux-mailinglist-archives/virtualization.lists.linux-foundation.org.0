@@ -1,110 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2C4821EFC4
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 13:53:07 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E2FF21EFD8
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 13:56:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6F8B289C9D;
-	Tue, 14 Jul 2020 11:53:06 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E492D89F88;
+	Tue, 14 Jul 2020 11:56:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iFYAsQb2YfGF; Tue, 14 Jul 2020 11:53:05 +0000 (UTC)
+	with ESMTP id bufkqQNUZv-7; Tue, 14 Jul 2020 11:56:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E150F89E72;
-	Tue, 14 Jul 2020 11:53:05 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7544F88D43;
+	Tue, 14 Jul 2020 11:56:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B7DE3C0733;
-	Tue, 14 Jul 2020 11:53:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 694FFC0733;
+	Tue, 14 Jul 2020 11:56:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E9B9EC0733
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F1139C0733
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 11:53:03 +0000 (UTC)
+ Tue, 14 Jul 2020 11:56:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id CFCFD89C9D
+ by whitealder.osuosl.org (Postfix) with ESMTP id DFDFB88D43
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 11:53:03 +0000 (UTC)
+ Tue, 14 Jul 2020 11:56:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 512pm-dGpt1n
+ with ESMTP id c0Irg+QHznQx
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 11:53:03 +0000 (UTC)
+ Tue, 14 Jul 2020 11:56:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 53FA689824
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id EDDFC88A99
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 11:53:03 +0000 (UTC)
-Received: from pps.filterd (m0098394.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06EBWN0P191321; Tue, 14 Jul 2020 07:52:57 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3292umq9eh-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Jul 2020 07:52:57 -0400
-Received: from m0098394.ppops.net (m0098394.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 06EBhatk046262;
- Tue, 14 Jul 2020 07:52:57 -0400
-Received: from ppma04fra.de.ibm.com (6a.4a.5195.ip4.static.sl-reverse.com
- [149.81.74.106])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3292umq9dc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Jul 2020 07:52:57 -0400
-Received: from pps.filterd (ppma04fra.de.ibm.com [127.0.0.1])
- by ppma04fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 06EBoPBW013635;
- Tue, 14 Jul 2020 11:52:54 GMT
-Received: from b06cxnps4076.portsmouth.uk.ibm.com
- (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
- by ppma04fra.de.ibm.com with ESMTP id 327527hnjy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Jul 2020 11:52:54 +0000
-Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
- [9.149.105.58])
- by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 06EBqpoH59965652
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 14 Jul 2020 11:52:51 GMT
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id BE1134C04A;
- Tue, 14 Jul 2020 11:52:51 +0000 (GMT)
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 64DCB4C050;
- Tue, 14 Jul 2020 11:52:50 +0000 (GMT)
-Received: from oc3016276355.ibm.com (unknown [9.145.162.148])
- by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue, 14 Jul 2020 11:52:50 +0000 (GMT)
+ Tue, 14 Jul 2020 11:56:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1594727770;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ykcZBNksAR9Za8nLz+KVj+UU2/4kb9H0fHJr+dQVzzs=;
+ b=cePRBJXKGmH10MtMaZRS2DNW/WxuBHQPYfsWEkptt3quCqojZmjcBsoV2KuF4LIJb40jC7
+ oMgnW59Qxja0Luz3CsEH2v8wlf8N2kpm4duNTJ9FuQFxYEctKF0k0dz8u9k44NBdt4AUsN
+ BZGsIQOWBPvq/Mo1De3JRPLvdEmSiiA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-407-Odd-OnzdOimKF9ZZRcmQPA-1; Tue, 14 Jul 2020 07:56:06 -0400
+X-MC-Unique: Odd-OnzdOimKF9ZZRcmQPA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7A5E08014D7;
+ Tue, 14 Jul 2020 11:56:04 +0000 (UTC)
+Received: from gondolin (ovpn-112-240.ams2.redhat.com [10.36.112.240])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 717F260CD0;
+ Tue, 14 Jul 2020 11:55:58 +0000 (UTC)
+Date: Tue, 14 Jul 2020 13:55:55 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Pierre Morel <pmorel@linux.ibm.com>
 Subject: Re: [PATCH v6 2/2] s390: virtio: PV needs VIRTIO I/O device protection
-To: Christian Borntraeger <borntraeger@de.ibm.com>,
- linux-kernel@vger.kernel.org
+Message-ID: <20200714135555.2148fb83.cohuck@redhat.com>
+In-Reply-To: <1594726682-12076-3-git-send-email-pmorel@linux.ibm.com>
 References: <1594726682-12076-1-git-send-email-pmorel@linux.ibm.com>
  <1594726682-12076-3-git-send-email-pmorel@linux.ibm.com>
- <f72b0978-9c66-bccc-948c-bea7df989372@de.ibm.com>
-From: Pierre Morel <pmorel@linux.ibm.com>
-Message-ID: <7a1da5c1-3448-9e22-e741-ea8985fba0cc@linux.ibm.com>
-Date: Tue, 14 Jul 2020 13:52:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+Organization: Red Hat GmbH
 MIME-Version: 1.0
-In-Reply-To: <f72b0978-9c66-bccc-948c-bea7df989372@de.ibm.com>
-Content-Language: en-US
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-07-14_02:2020-07-14,
- 2020-07-14 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- clxscore=1015 priorityscore=1501 phishscore=0 adultscore=0 malwarescore=0
- mlxlogscore=999 bulkscore=0 suspectscore=0 impostorscore=0 mlxscore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2007140085
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
- kvm@vger.kernel.org, mst@redhat.com, cohuck@redhat.com, linuxram@us.ibm.com,
- virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
- thomas.lendacky@amd.com, hca@linux.ibm.com, david@gibson.dropbear.id.au
+ kvm@vger.kernel.org, mst@redhat.com, linuxram@us.ibm.com,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ pasic@linux.ibm.com, borntraeger@de.ibm.com, thomas.lendacky@amd.com,
+ hca@linux.ibm.com, david@gibson.dropbear.id.au
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -116,39 +89,56 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On Tue, 14 Jul 2020 13:38:02 +0200
+Pierre Morel <pmorel@linux.ibm.com> wrote:
 
+> If protected virtualization is active on s390, the virtio queues are
+> not accessible to the host, unless VIRTIO_F_IOMMU_PLATFORM has been
+> negotiated. Use the new arch_validate_virtio_features() interface to
+> fail probe if that's not the case, preventing a host error on access
+> attempt.
+> 
+> Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
+> Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+> Acked-by: Halil Pasic <pasic@linux.ibm.com>
+> ---
+>  arch/s390/mm/init.c | 28 ++++++++++++++++++++++++++++
+>  1 file changed, 28 insertions(+)
 
-On 2020-07-14 13:42, Christian Borntraeger wrote:
-> 
-> On 14.07.20 13:38, Pierre Morel wrote:
->> If protected virtualization is active on s390, the virtio queues are
->> not accessible to the host, unless VIRTIO_F_IOMMU_PLATFORM has been
->> negotiated. Use the new arch_validate_virtio_features() interface to
->> fail probe if that's not the case, preventing a host error on access
->> attempt.
->>
->> Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
->> Reviewed-by: Cornelia Huck <cohuck@redhat.com>
->> Acked-by: Halil Pasic <pasic@linux.ibm.com>
-> 
-> We will probably move this (and other related code) into a new file,
-> but we can do that later.
-> As for now:
-> 
-> Acked-by: Christian Borntraeger <borntraeger@de.ibm.com>
-> 
+(...)
 
-Thanks,
-Pierre
+> +int arch_validate_virtio_features(struct virtio_device *dev)
+> +{
+> +	if (!is_prot_virt_guest())
+> +		return 0;
+> +
+> +	if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1)) {
+> +		dev_warn(&dev->dev,
+> +			 "legacy virtio not supported with protected virtualizatio\n");
 
--- 
-Pierre Morel
-IBM Lab Boeblingen
+typo: s/virtualizatio/virtualization/
+
+> +		return -ENODEV;
+> +	}
+> +
+> +	if (!virtio_has_feature(dev, VIRTIO_F_IOMMU_PLATFORM)) {
+> +		dev_warn(&dev->dev,
+> +			 "support for limited memory access required for protected virtualization\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  /* protected virtualization */
+>  static void pv_init(void)
+>  {
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
