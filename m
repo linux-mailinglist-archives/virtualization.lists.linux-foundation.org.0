@@ -2,53 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9695121F101
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:18:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7272021F10B
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:18:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 009E98A4F9;
-	Tue, 14 Jul 2020 12:18:47 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id DFB1A8A4D5;
+	Tue, 14 Jul 2020 12:18:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id y7DbtjC22yx8; Tue, 14 Jul 2020 12:18:44 +0000 (UTC)
+	with ESMTP id IPXEbwQD3u8X; Tue, 14 Jul 2020 12:18:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 8B4488A474;
-	Tue, 14 Jul 2020 12:18:43 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6612E8A4F0;
+	Tue, 14 Jul 2020 12:18:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 82B37C0733;
-	Tue, 14 Jul 2020 12:18:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 593B3C0733;
+	Tue, 14 Jul 2020 12:18:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 68978C08A0
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 325FDC08A9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:18:38 +0000 (UTC)
+ Tue, 14 Jul 2020 12:18:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 396978A43E
+ by whitealder.osuosl.org (Postfix) with ESMTP id 199768A696
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:18:38 +0000 (UTC)
+ Tue, 14 Jul 2020 12:18:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0UaUhqFSU7yP
+ with ESMTP id m7btJubcRT5y
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:18:36 +0000 (UTC)
+ Tue, 14 Jul 2020 12:18:35 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 9EB628A420
+ by whitealder.osuosl.org (Postfix) with ESMTPS id EA3778A262
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:18:36 +0000 (UTC)
+ Tue, 14 Jul 2020 12:18:33 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 33239FD7;
+ by theia.8bytes.org (Postfix) with ESMTPSA id BBDEEFD9;
  Tue, 14 Jul 2020 14:11:06 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v4 60/75] x86/sev-es: Handle MWAIT/MWAITX Events
-Date: Tue, 14 Jul 2020 14:09:02 +0200
-Message-Id: <20200714120917.11253-61-joro@8bytes.org>
+Subject: [PATCH v4 61/75] x86/sev-es: Handle VMMCALL Events
+Date: Tue, 14 Jul 2020 14:09:03 +0200
+Message-Id: <20200714120917.11253-62-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200714120917.11253-1-joro@8bytes.org>
 References: <20200714120917.11253-1-joro@8bytes.org>
@@ -84,44 +84,58 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Implement a handler for #VC exceptions caused by MWAIT and MWAITX
-instructions.
+Implement a handler for #VC exceptions caused by VMMCALL instructions.
+This patch is only a starting point, VMMCALL emulation under SEV-ES
+needs further hypervisor-specific changes to provide additional state.
 
 Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
 [ jroedel@suse.de: Adapt to #VC handling infrastructure ]
 Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/x86/kernel/sev-es.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index c0977bdc400e..541f8994eb21 100644
+index 541f8994eb21..013dcdfeb613 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -888,6 +888,13 @@ static enum es_result vc_handle_monitor(struct ghcb *ghcb,
+@@ -895,6 +895,26 @@ static enum es_result vc_handle_mwait(struct ghcb *ghcb,
  	return ES_OK;
  }
  
-+static enum es_result vc_handle_mwait(struct ghcb *ghcb,
-+				      struct es_em_ctxt *ctxt)
++static enum es_result vc_handle_vmmcall(struct ghcb *ghcb,
++					struct es_em_ctxt *ctxt)
 +{
-+	/* Treat the same as MONITOR/MONITORX */
++	enum es_result ret;
++
++	ghcb_set_rax(ghcb, ctxt->regs->ax);
++	ghcb_set_cpl(ghcb, user_mode(ctxt->regs) ? 3 : 0);
++
++	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_VMMCALL, 0, 0);
++	if (ret != ES_OK)
++		return ret;
++
++	if (!ghcb_is_valid_rax(ghcb))
++		return ES_VMM_ERROR;
++
++	ctxt->regs->ax = ghcb->save.rax;
++
 +	return ES_OK;
 +}
 +
  static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
  					 struct ghcb *ghcb,
  					 unsigned long exit_code)
-@@ -927,6 +934,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
- 	case SVM_EXIT_MONITOR:
- 		result = vc_handle_monitor(ghcb, ctxt);
+@@ -928,6 +948,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 	case SVM_EXIT_MSR:
+ 		result = vc_handle_msr(ghcb, ctxt);
  		break;
-+	case SVM_EXIT_MWAIT:
-+		result = vc_handle_mwait(ghcb, ctxt);
++	case SVM_EXIT_VMMCALL:
++		result = vc_handle_vmmcall(ghcb, ctxt);
 +		break;
- 	case SVM_EXIT_NPF:
- 		result = vc_handle_mmio(ghcb, ctxt);
+ 	case SVM_EXIT_WBINVD:
+ 		result = vc_handle_wbinvd(ghcb, ctxt);
  		break;
 -- 
 2.27.0
