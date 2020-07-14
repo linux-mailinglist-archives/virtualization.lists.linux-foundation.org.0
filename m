@@ -1,101 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EFA121EBB3
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 10:45:34 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 06B8C21EC0E
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 11:03:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 137998A962;
-	Tue, 14 Jul 2020 08:45:33 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B0E72891C2;
+	Tue, 14 Jul 2020 09:03:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UbfI2UnoTgFd; Tue, 14 Jul 2020 08:45:31 +0000 (UTC)
+	with ESMTP id lngtLdMQBWCE; Tue, 14 Jul 2020 09:03:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CAD6B8A97D;
-	Tue, 14 Jul 2020 08:45:31 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2992A891C5;
+	Tue, 14 Jul 2020 09:03:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BB448C0733;
-	Tue, 14 Jul 2020 08:45:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E40B3C0733;
+	Tue, 14 Jul 2020 09:03:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D6DB1C0733
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C54F7C0733
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 08:45:29 +0000 (UTC)
+ Tue, 14 Jul 2020 09:03:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id BDFB58A96A
+ by fraxinus.osuosl.org (Postfix) with ESMTP id B3209891C5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 08:45:29 +0000 (UTC)
+ Tue, 14 Jul 2020 09:03:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hAyHOZhMkkuZ
+ with ESMTP id 7tTchzuRKt_U
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 08:45:29 +0000 (UTC)
+ Tue, 14 Jul 2020 09:03:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id CA1E88A962
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id ED8AC891C2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 08:45:28 +0000 (UTC)
+ Tue, 14 Jul 2020 09:03:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594716327;
+ s=mimecast20190719; t=1594717411;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=n8A2G5vizF7CgtfiIlPSYJUsYEYYmtXCXf3/59UQTo8=;
- b=EaMLpP3bjE55uQfKI5jvkpGfWVJ6z6dA/5weLfgcykjAbLSkBdXj0J5zjIcts7KWfzUYnc
- s1ffbm/reOkdbXo8iA/SWJyKOuYRZo30zp6cD1aWrEYgsrQ4seqcAVuA9s/NYX8Qr55zz3
- itltdjbWXYi3Q+A7h7mVGPw0vUIlOU8=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-119-4Fj22_ZkN7Cdk_h_iTlz3g-1; Tue, 14 Jul 2020 04:45:26 -0400
-X-MC-Unique: 4Fj22_ZkN7Cdk_h_iTlz3g-1
-Received: by mail-wm1-f71.google.com with SMTP id g6so2925501wmk.4
+ bh=DfzrpnDksjrV/E9eLW/uyC+yehYtUw0XCcZEGedYMzg=;
+ b=anqTNRxnbNjw7sCY5XrGLqpLDGOHoeQIyDaRmmo52MfWxXmGTZCUN9ZGkRf5lYSXFe9vqk
+ sHvh/hF5ziDpLgzzxTNKGd8sb338EWIIPkqHvZyVuN/4+kMPtg3w/T/a2sqrmOTKbl6fuO
+ NSQhsPOr46MRTvhsIDyHfxidJiap2fA=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-282-e5GGZdZEPGy8rd9OA0rRcQ-1; Tue, 14 Jul 2020 05:03:29 -0400
+X-MC-Unique: e5GGZdZEPGy8rd9OA0rRcQ-1
+Received: by mail-wm1-f72.google.com with SMTP id v6so2988726wmg.1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 01:45:25 -0700 (PDT)
+ Tue, 14 Jul 2020 02:03:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=n8A2G5vizF7CgtfiIlPSYJUsYEYYmtXCXf3/59UQTo8=;
- b=oEyyx+J83c2B7W4z3qrYedWu749czwCs5rdOh2LFc0lj7/sgLNCXPd33y74o1okoBO
- LebQ/u3IgV9JTGCsNQPaon8hWwZ8u5olo1DT2/eRnNJvYZwfUl4eo8W0kp3+dgObmy0O
- C6Cz2NWuCj84lwGlyc6qpdWdSYzVWQvp6mPnKNrD6JG5PYyQaygp6KHWPV3W/PI3Y3IA
- sEFfJ/Oa0Sd4ZkOcA00y/Q/OvuWbkx1K4ufa4a6MM3ly/eNoEPFCgAoDS1hkPrSMdJ62
- 06TNDCJ6J6yw8qgRua6t4qb+Cacue1hzeOICjC/hYzfDn75INi0PExL15t0U5qqQcsrs
- flOw==
-X-Gm-Message-State: AOAM531MwyZvl71dfjfyqvS5yoYLNQdXDl2m8fMSpASuORfGqJhyFwpN
- A8pguVMzGrEy723obmFs3cLOIzyFkE7mb0Z+tAaZPD3GA3/LXBLfLXw3t0zZqNTstlOObZFaBz0
- P0AF+9Ziqr2iqzN/PhdasXgO3scdcc216g9mtddgDZA==
-X-Received: by 2002:a5d:55c9:: with SMTP id i9mr3810343wrw.404.1594716324857; 
- Tue, 14 Jul 2020 01:45:24 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw+aHKVdbP2Oys421PgxREy4EGx+JNbt1AzTEV/jQbfdeekPWnshfuJL9hywzi3Xa6CYgcomw==
-X-Received: by 2002:a5d:55c9:: with SMTP id i9mr3810320wrw.404.1594716324605; 
- Tue, 14 Jul 2020 01:45:24 -0700 (PDT)
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=DfzrpnDksjrV/E9eLW/uyC+yehYtUw0XCcZEGedYMzg=;
+ b=p4CNP5j5RhYqWdnyJFPtQzx69QnyJoE61zDdtFbRpE4HoL5gmL+n1sLEN/VwhuyxVU
+ k6xUZD2Hv7BTFdqOOKknfLPSGnmvDSttFIp+dy2qkKikeHkMbQEgvgFoB09i4vdrwNvB
+ 2xMfs4o8NvO8z/iu/2r/Nvh5On3swFqn0mgrzYpwcqPTerr4y+6EU/GJMeIXoSLiUcu3
+ LpXV5CGV9FGOVJ695xpO8Aix8Gmq7WtTlb1mznkEaQ+jD1iNlnHT/a/zknq25E9EIWqS
+ G6asXSlvsJdA1SmDxQrs0fYtT3PaIZd5iJK2UeV52Po8Oiu1y85FQLr/4Z3JT2zCqt54
+ 9z4Q==
+X-Gm-Message-State: AOAM531PMmloEodxIR6HgDufJhJxjPJkaS2rw1RhNpa9GtnX4cSi2SEe
+ jAjkzsBldeH5ln84ddMoyu46yBBarymvyxeS6A2URrNYVbxFERMNV++iCoELo9BOWC0gut3KPQu
+ tXheAN3ZI4ZPaBmOwUEXY7Ms9UBJZGLB527xe13lSiQ==
+X-Received: by 2002:a7b:c92e:: with SMTP id h14mr3197921wml.36.1594717408731; 
+ Tue, 14 Jul 2020 02:03:28 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxXFKbRHAyh+9vVQvN7eLfJsIxJJAssbByyfjo+ePDaaH3nSHiQ776m2H8PMkGHjwfKUW7mHg==
+X-Received: by 2002:a7b:c92e:: with SMTP id h14mr3197913wml.36.1594717408523; 
+ Tue, 14 Jul 2020 02:03:28 -0700 (PDT)
 Received: from redhat.com (bzq-79-180-10-140.red.bezeqint.net. [79.180.10.140])
- by smtp.gmail.com with ESMTPSA id z10sm28691186wrm.21.2020.07.14.01.45.22
+ by smtp.gmail.com with ESMTPSA id y77sm3755145wmd.36.2020.07.14.02.03.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2020 01:45:23 -0700 (PDT)
-Date: Tue, 14 Jul 2020 04:45:21 -0400
+ Tue, 14 Jul 2020 02:03:27 -0700 (PDT)
+Date: Tue, 14 Jul 2020 05:03:22 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alexander Duyck <alexander.duyck@gmail.com>
-Subject: Re: [PATCH] virtio_balloon: clear modern features under legacy
-Message-ID: <20200714044017-mutt-send-email-mst@kernel.org>
-References: <20200710113046.421366-1-mst@redhat.com>
- <CAKgT0UeZN+mOWNhgiT0btZTyki3TPoj7pbqA+__GkCxoifPqeg@mail.gmail.com>
- <20200712105926-mutt-send-email-mst@kernel.org>
- <CAKgT0UdY1xpEH1Hg4HWJEkGwH5s64sm1y4O_XmHe8P_f=tDhpg@mail.gmail.com>
+To: "Zhu, Lingshan" <lingshan.zhu@intel.com>
+Subject: Re: [PATCH 2/7] kvm/vfio: detect assigned device via irqbypass manager
+Message-ID: <20200714050301-mutt-send-email-mst@kernel.org>
+References: <1594565366-3195-1-git-send-email-lingshan.zhu@intel.com>
+ <1594565366-3195-2-git-send-email-lingshan.zhu@intel.com>
+ <20200712170518-mutt-send-email-mst@kernel.org>
+ <bcb03e95-d8b9-6e19-5b0e-0119d3f43d6d@redhat.com>
+ <20200713065222-mutt-send-email-mst@kernel.org>
+ <aca899f7-ec2e-2b55-df78-44eacb923c00@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <CAKgT0UdY1xpEH1Hg4HWJEkGwH5s64sm1y4O_XmHe8P_f=tDhpg@mail.gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+In-Reply-To: <aca899f7-ec2e-2b55-df78-44eacb923c00@intel.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org,
- LKML <linux-kernel@vger.kernel.org>, stable@vger.kernel.org
+Cc: wanpengli@tencent.com, kvm@vger.kernel.org, netdev@vger.kernel.org,
+ sean.j.christopherson@intel.com, virtualization@lists.linux-foundation.org,
+ pbonzini@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,175 +110,89 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jul 13, 2020 at 08:10:14AM -0700, Alexander Duyck wrote:
-> On Sun, Jul 12, 2020 at 8:10 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
-> > On Fri, Jul 10, 2020 at 09:13:41AM -0700, Alexander Duyck wrote:
-> > > On Fri, Jul 10, 2020 at 4:31 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> > > >
-> > > > Page reporting features were never supported by legacy hypervisors.
-> > > > Supporting them poses a problem: should we use native endian-ness (like
-> > > > current code assumes)? Or little endian-ness like the virtio spec says?
-> > > > Rather than try to figure out, and since results of
-> > > > incorrect endian-ness are dire, let's just block this configuration.
-> > > >
-> > > > Cc: stable@vger.kernel.org
-> > > > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-> > >
-> > > So I am not sure about the patch description. In the case of page
-> > > poison and free page reporting I don't think we are defining anything
-> > > that doesn't already have a definition of how to use in legacy.
-> > > Specifically the virtio_balloon_config is already defined as having
-> > > all fields as little endian in legacy mode, and there is a definition
-> > > for all of the fields in a virtqueue and how they behave in legacy
-> > > mode.
-> > >
-> > > As far as I can see the only item that may be an issue is the command
-> > > ID being supplied via the virtqueue for free page hinting, which
-> > > appears to be in native endian-ness. Otherwise it would have fallen
-> > > into the same category since it is making use of virtio_balloon_config
-> > > and a virtqueue for supplying the page location and length.
-> >
-> >
-> >
-> > So as you point out correctly balloon spec says all fields are little
-> > endian.  Fair enough.
-> > Problem is when virtio 1 is not negotiated, then this is not what the
-> > driver assumes for any except a handlful of fields.
-> >
-> > But yes it mostly works out.
-> >
-> > For example:
-> >
-> >
-> > static void update_balloon_size(struct virtio_balloon *vb)
-> > {
-> >         u32 actual = vb->num_pages;
-> >
-> >         /* Legacy balloon config space is LE, unlike all other devices. */
-> >         if (!virtio_has_feature(vb->vdev, VIRTIO_F_VERSION_1))
-> >                 actual = (__force u32)cpu_to_le32(actual);
-> >
-> >         virtio_cwrite(vb->vdev, struct virtio_balloon_config, actual,
-> >                       &actual);
-> > }
-> >
-> >
-> > this is LE even without VIRTIO_F_VERSION_1, so matches spec.
-> >
-> >                 /* Start with poison val of 0 representing general init */
-> >                 __u32 poison_val = 0;
-> >
-> >                 /*
-> >                  * Let the hypervisor know that we are expecting a
-> >                  * specific value to be written back in balloon pages.
-> >                  */
-> >                 if (!want_init_on_free())
-> >                         memset(&poison_val, PAGE_POISON, sizeof(poison_val));
-> >
-> >                 virtio_cwrite(vb->vdev, struct virtio_balloon_config,
-> >                               poison_val, &poison_val);
-> >
-> >
-> > actually this writes a native endian-ness value. All bytes happen to be
-> > the same though, and host only cares about 0 or non 0 ATM.
-> 
-> So we are safe assuming it is a repeating value, but for correctness
-> maybe we should make certain to cast this as a le32 value. I can
-> submit a patch to do that.
-
-Thanks! But not yet - I am poking at the endian-ness things right now!
-
-> > As you say correctly the command id is actually assumed native endian:
-> >
-> >
-> > static u32 virtio_balloon_cmd_id_received(struct virtio_balloon *vb)
-> > {
-> >         if (test_and_clear_bit(VIRTIO_BALLOON_CONFIG_READ_CMD_ID,
-> >                                &vb->config_read_bitmap))
-> >                 virtio_cread(vb->vdev, struct virtio_balloon_config,
-> >                              free_page_hint_cmd_id,
-> >                              &vb->cmd_id_received_cache);
-> >
-> >         return vb->cmd_id_received_cache;
-> > }
-> >
-> >
-> > So guest assumes native, host assumes LE.
-> 
-> This wasn't even the one I was talking about, but now that you point
-> it out this is definately bug. The command ID I was talking about was
-> the one being passed via the descriptor ring. That one I believe is
-> native on both sides.
-
-Well qemu swaps it for modern devices:
-
-        virtio_tswap32s(vdev, &id);
-
-guest swaps it too:
-        vb->cmd_id_active = cpu_to_virtio32(vb->vdev,
-                                        virtio_balloon_cmd_id_received(vb));
-        sg_init_one(&sg, &vb->cmd_id_active, sizeof(vb->cmd_id_active));
-        err = virtqueue_add_outbuf(vq, &sg, 1, &vb->cmd_id_active, GFP_KERNEL);
-
-So it's native for legacy.
-
-
-
-> >
-> >
-> >
-> > > > ---
-> > > >  drivers/virtio/virtio_balloon.c | 9 +++++++++
-> > > >  1 file changed, 9 insertions(+)
-> > > >
-> > > > diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
-> > > > index 5d4b891bf84f..b9bc03345157 100644
-> > > > --- a/drivers/virtio/virtio_balloon.c
-> > > > +++ b/drivers/virtio/virtio_balloon.c
-> > > > @@ -1107,6 +1107,15 @@ static int virtballoon_restore(struct virtio_device *vdev)
-> > > >
-> > > >  static int virtballoon_validate(struct virtio_device *vdev)
-> > > >  {
-> > > > +       /*
-> > > > +        * Legacy devices never specified how modern features should behave.
-> > > > +        * E.g. which endian-ness to use? Better not to assume anything.
-> > > > +        */
-> > > > +       if (!virtio_has_feature(vdev, VIRTIO_F_VERSION_1)) {
-> > > > +               __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_FREE_PAGE_HINT);
-> > > > +               __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_PAGE_POISON);
-> > > > +               __virtio_clear_bit(vdev, VIRTIO_BALLOON_F_REPORTING);
-> > > > +       }
-> > > >         /*
-> > > >          * Inform the hypervisor that our pages are poisoned or
-> > > >          * initialized. If we cannot do that then we should disable
-> > >
-> > > The patch content itself I am fine with since odds are nobody would
-> > > expect to use these features with a legacy device.
-> > >
-> > > Acked-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
-> >
-> > Hmm so now you pointed out it's just cmd id, maybe I should just fix it
-> > instead? what do you say?
-> 
-> So the config issues are bugs, but I don't think you saw the one I was
-> talking about. In the function send_cmd_id_start the cmd_id_active
-> value which is initialized as a virtio32 is added as a sg entry and
-> then sent as an outbuf to the device. I'm assuming virtio32 is a host
-> native byte ordering.
-
-IIUC it isn't :) virtio32 is guest native if device is legacy, and LE if
-device is modern.
-
--- 
-MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gVHVlLCBKdWwgMTQsIDIwMjAgYXQgMDg6NTI6NDNBTSArMDgwMCwgWmh1LCBMaW5nc2hhbiB3
+cm90ZToKPiAKPiBPbiA3LzEzLzIwMjAgNjo1MiBQTSwgTWljaGFlbCBTLiBUc2lya2luIHdyb3Rl
+Ogo+IAo+ICAgICBPbiBNb24sIEp1bCAxMywgMjAyMCBhdCAwNDoxMzozNVBNICswODAwLCBKYXNv
+biBXYW5nIHdyb3RlOgo+IAo+ICAgICAgICAgT24gMjAyMC83LzEzIOS4iuWNiDU6MDYsIE1pY2hh
+ZWwgUy4gVHNpcmtpbiB3cm90ZToKPiAKPiAgICAgICAgICAgICBPbiBTdW4sIEp1bCAxMiwgMjAy
+MCBhdCAxMDo0OToyMVBNICswODAwLCBaaHUgTGluZ3NoYW4gd3JvdGU6Cj4gCj4gICAgICAgICAg
+ICAgICAgIFdlIHVzZWQgdG8gZGV0ZWN0IGFzc2lnbmVkIGRldmljZSB2aWEgVkZJTyBtYW5pcHVs
+YXRlZCBkZXZpY2UKPiAgICAgICAgICAgICAgICAgY29udGVycy4gVGhpcyBpcyBsZXNzIGZsZXhp
+YmxlIGNvbnNpZGVyIFZGSU8gaXMgbm90IHRoZSBvbmx5Cj4gICAgICAgICAgICAgICAgIGludGVy
+ZmFjZSBmb3IgYXNzaWduZWQgZGV2aWNlLiB2RFBBIGRldmljZXMgaGFzIGRlZGljYXRlZAo+ICAg
+ICAgICAgICAgICAgICBiYWNrZWQgaGFyZHdhcmUgYXMgd2VsbC4gU28gdGhpcyBwYXRjaCB0cmll
+cyB0byBkZXRlY3QKPiAgICAgICAgICAgICAgICAgdGhlIGFzc2lnbmVkIGRldmljZSB2aWEgaXJx
+YnlwYXNzIG1hbmFnZXIuCj4gCj4gICAgICAgICAgICAgICAgIFdlIHdpbGwgaW5jcmVhc2UvZGVj
+cmVhc2UgdGhlIGFzc2lnbmVkIGRldmljZSBjb3VudGVyIGluIGt2bS94ODYuCj4gICAgICAgICAg
+ICAgICAgIEJvdGggdkRQQSBhbmQgVkZJTyB3b3VsZCBnbyB0aHJvdWdoIHRoaXMgY29kZSBwYXRo
+Lgo+IAo+ICAgICAgICAgICAgICAgICBUaGlzIGNvZGUgcGF0aCBvbmx5IGFmZmVjdCB4ODYgZm9y
+IG5vdy4KPiAKPiAgICAgICAgICAgICAgICAgU2lnbmVkLW9mZi1ieTogWmh1IExpbmdzaGFuIDxs
+aW5nc2hhbi56aHVAaW50ZWwuY29tPgo+IAo+ICAgICAgICAgICAgIEkgdGhpbmsgaXQncyBiZXN0
+IHRvIGxlYXZlIFZGSU8gYWxvbmUuIEFkZCBhcHByb3ByaWF0ZSBBUElzIGZvciBWRFBBLAo+ICAg
+ICAgICAgICAgIHdvcnJ5IGFib3V0IGNvbnZlcnRpbmcgZXhpc3RpbmcgdXNlcnMgbGF0ZXIuCj4g
+Cj4gCj4gCj4gICAgICAgICBKdXN0IHRvIG1ha2Ugc3VyZSBJIHVuZGVyc3RhbmQsIGRpZCB5b3Ug
+bWVhbjoKPiAKPiAgICAgICAgIDEpIGludHJvZHVjZSBhbm90aGVyIGJyaWRnZSBmb3IgdkRQQQo+
+IAo+ICAgICAgICAgb3IKPiAKPiAgICAgICAgIDIpIG9ubHkgZGV0ZWN0IHZEUEEgdmlhIGJ5cGFz
+cyBtYW5hZ2VyPyAod2UgY2FuIGxlYXZlIFZGSU8gY29kZSBhcyBpcywgdGhlbgo+ICAgICAgICAg
+dGhlIGFzc2lnbmVkIGRldmljZSBjb3VudGVyIG1heSBpbmNyZWFzZS9kZWNyZWFzZSB0d2ljZSBp
+ZiBWRklPIHVzZSBpcnEKPiAgICAgICAgIGJ5cGFzcyBtYW5hZ2VyIHdoaWNoIHNob3VsZCBiZSBu
+byBoYXJtKS4KPiAKPiAgICAgICAgIFRoYW5rcwo+IAo+ICAgICAyIGlzIHByb2JhYmx5IGVhc2ll
+ciB0byBqdXN0aWZ5LiAxIHdvdWxkIGRlcGVuZCBvbiB0aGUgc3BlY2lmaWMgYnJpZGdlCj4gICAg
+IHByb3Bvc2VkLgo+IAo+IFRoYW5rcyBNaWNoYWVsLCBzbyB3ZSBzaG91bGQganVzdCBkcm9wIGNo
+YW5nZXMgaW4gdmZpbywganVzdCBpbmNyZWFzZSAvIGRlY3JlYXNlCj4gdGhlIGNvdW50ZXIgaW4g
+aXJxIGJ5cGFzcyBtYW5hZ2VyLiByaWdodD8KPiAKPiBUaGFua3MKCkkgZG9uJ3Qgc2VlIGFueSBp
+c3N1ZSB3aXRoIHRoYXQuCgo+IAo+IAo+ICAgICAgICAgICAgICAgICAtLS0KPiAgICAgICAgICAg
+ICAgICAgICBhcmNoL3g4Ni9rdm0veDg2LmMgfCAxMCArKysrKysrKy0tCj4gICAgICAgICAgICAg
+ICAgICAgdmlydC9rdm0vdmZpby5jICAgIHwgIDIgLS0KPiAgICAgICAgICAgICAgICAgICAyIGZp
+bGVzIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKPiAKPiAgICAgICAg
+ICAgICAgICAgZGlmZiAtLWdpdCBhL2FyY2gveDg2L2t2bS94ODYuYyBiL2FyY2gveDg2L2t2bS94
+ODYuYwo+ICAgICAgICAgICAgICAgICBpbmRleCAwMGM4OGMyLi4yMGMwN2QzIDEwMDY0NAo+ICAg
+ICAgICAgICAgICAgICAtLS0gYS9hcmNoL3g4Ni9rdm0veDg2LmMKPiAgICAgICAgICAgICAgICAg
+KysrIGIvYXJjaC94ODYva3ZtL3g4Ni5jCj4gICAgICAgICAgICAgICAgIEBAIC0xMDYyNCwxMSAr
+MTA2MjQsMTcgQEAgaW50IGt2bV9hcmNoX2lycV9ieXBhc3NfYWRkX3Byb2R1Y2VyKHN0cnVjdCBp
+cnFfYnlwYXNzX2NvbnN1bWVyICpjb25zLAo+ICAgICAgICAgICAgICAgICAgIHsKPiAgICAgICAg
+ICAgICAgICAgICAgICAgICBzdHJ1Y3Qga3ZtX2tlcm5lbF9pcnFmZCAqaXJxZmQgPQo+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udGFpbmVyX29mKGNvbnMsIHN0cnVjdCBrdm1f
+a2VybmVsX2lycWZkLCBjb25zdW1lcik7Cj4gICAgICAgICAgICAgICAgICsgICAgICAgaW50IHJl
+dDsKPiAgICAgICAgICAgICAgICAgICAgICAgICBpcnFmZC0+cHJvZHVjZXIgPSBwcm9kOwo+ICAg
+ICAgICAgICAgICAgICArICAgICAgIGt2bV9hcmNoX3N0YXJ0X2Fzc2lnbm1lbnQoaXJxZmQtPmt2
+bSk7Cj4gICAgICAgICAgICAgICAgICsgICAgICAgcmV0ID0ga3ZtX3g4Nl9vcHMudXBkYXRlX3Bp
+X2lydGUoaXJxZmQtPmt2bSwKPiAgICAgICAgICAgICAgICAgKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwcm9kLT5pcnEsIGlycWZkLT5nc2ksIDEpOwo+ICAgICAgICAg
+ICAgICAgICArCj4gICAgICAgICAgICAgICAgICsgICAgICAgaWYgKHJldCkKPiAgICAgICAgICAg
+ICAgICAgKyAgICAgICAgICAgICAgIGt2bV9hcmNoX2VuZF9hc3NpZ25tZW50KGlycWZkLT5rdm0p
+Owo+ICAgICAgICAgICAgICAgICAtICAgICAgIHJldHVybiBrdm1feDg2X29wcy51cGRhdGVfcGlf
+aXJ0ZShpcnFmZC0+a3ZtLAo+ICAgICAgICAgICAgICAgICAtICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcHJvZC0+aXJxLCBpcnFmZC0+Z3NpLCAxKTsKPiAgICAgICAg
+ICAgICAgICAgKyAgICAgICByZXR1cm4gcmV0Owo+ICAgICAgICAgICAgICAgICAgIH0KPiAgICAg
+ICAgICAgICAgICAgICB2b2lkIGt2bV9hcmNoX2lycV9ieXBhc3NfZGVsX3Byb2R1Y2VyKHN0cnVj
+dCBpcnFfYnlwYXNzX2NvbnN1bWVyICpjb25zLAo+ICAgICAgICAgICAgICAgICBkaWZmIC0tZ2l0
+IGEvdmlydC9rdm0vdmZpby5jIGIvdmlydC9rdm0vdmZpby5jCj4gICAgICAgICAgICAgICAgIGlu
+ZGV4IDhmY2JjNTAuLjExMWRhNTIgMTAwNjQ0Cj4gICAgICAgICAgICAgICAgIC0tLSBhL3ZpcnQv
+a3ZtL3ZmaW8uYwo+ICAgICAgICAgICAgICAgICArKysgYi92aXJ0L2t2bS92ZmlvLmMKPiAgICAg
+ICAgICAgICAgICAgQEAgLTIyNiw3ICsyMjYsNiBAQCBzdGF0aWMgaW50IGt2bV92ZmlvX3NldF9n
+cm91cChzdHJ1Y3Qga3ZtX2RldmljZSAqZGV2LCBsb25nIGF0dHIsIHU2NCBhcmcpCj4gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBsaXN0X2FkZF90YWlsKCZrdmctPm5vZGUsICZrdi0+
+Z3JvdXBfbGlzdCk7Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBrdmctPnZmaW9f
+Z3JvdXAgPSB2ZmlvX2dyb3VwOwo+ICAgICAgICAgICAgICAgICAtICAgICAgICAgICAgICAga3Zt
+X2FyY2hfc3RhcnRfYXNzaWdubWVudChkZXYtPmt2bSk7Cj4gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBtdXRleF91bmxvY2soJmt2LT5sb2NrKTsKPiAgICAgICAgICAgICAgICAgQEAg
+LTI1NCw3ICsyNTMsNiBAQCBzdGF0aWMgaW50IGt2bV92ZmlvX3NldF9ncm91cChzdHJ1Y3Qga3Zt
+X2RldmljZSAqZGV2LCBsb25nIGF0dHIsIHU2NCBhcmcpCj4gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udGludWU7Cj4gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGxpc3RfZGVsKCZrdmctPm5vZGUpOwo+ICAgICAgICAgICAg
+ICAgICAtICAgICAgICAgICAgICAgICAgICAgICBrdm1fYXJjaF9lbmRfYXNzaWdubWVudChkZXYt
+Pmt2bSk7Cj4gICAgICAgICAgICAgICAgICAgI2lmZGVmIENPTkZJR19TUEFQUl9UQ0VfSU9NTVUK
+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAga3ZtX3NwYXByX3RjZV9y
+ZWxlYXNlX3ZmaW9fZ3JvdXAoZGV2LT5rdm0sCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGt2Zy0+dmZpb19n
+cm91cCk7Cj4gICAgICAgICAgICAgICAgIC0tCj4gICAgICAgICAgICAgICAgIDEuOC4zLjEKPiAK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxp
+emF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9u
+Lm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92
+aXJ0dWFsaXphdGlvbg==
