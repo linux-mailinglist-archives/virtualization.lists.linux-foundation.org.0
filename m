@@ -2,54 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FA1121F037
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:11:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78DB521F020
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:10:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id AD92D8A5EF;
-	Tue, 14 Jul 2020 12:10:58 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 2C8E58A63D;
+	Tue, 14 Jul 2020 12:10:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iZ5Nt7vXdwHE; Tue, 14 Jul 2020 12:10:53 +0000 (UTC)
+	with ESMTP id xq5gPiC7BxdA; Tue, 14 Jul 2020 12:10:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 78A1A8A608;
-	Tue, 14 Jul 2020 12:10:47 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 559BE8A226;
+	Tue, 14 Jul 2020 12:10:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5D7A8C0733;
-	Tue, 14 Jul 2020 12:10:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 25ACCC0733;
+	Tue, 14 Jul 2020 12:10:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F1381C0733
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9EF40C08A0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:10:43 +0000 (UTC)
+ Tue, 14 Jul 2020 12:10:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id DAAEC88558
+ by hemlock.osuosl.org (Postfix) with ESMTP id 9B12C8A04F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:10:43 +0000 (UTC)
+ Tue, 14 Jul 2020 12:10:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bolKUF_cmS-n
+ with ESMTP id Il4tjsr6+Dcz
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Jul 2020 12:10:40 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8A7AD86AF2
+ by hemlock.osuosl.org (Postfix) with ESMTPS id C34488A047
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Jul 2020 12:10:40 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 64F7036B;
+ by theia.8bytes.org (Postfix) with ESMTPSA id DBD6B477;
  Tue, 14 Jul 2020 14:10:36 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v4 06/75] x86/insn: Make inat-tables.c suitable for
- pre-decompression code
-Date: Tue, 14 Jul 2020 14:08:08 +0200
-Message-Id: <20200714120917.11253-7-joro@8bytes.org>
+Subject: [PATCH v4 07/75] x86/umip: Factor out instruction fetch
+Date: Tue, 14 Jul 2020 14:08:09 +0200
+Message-Id: <20200714120917.11253-8-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200714120917.11253-1-joro@8bytes.org>
 References: <20200714120917.11253-1-joro@8bytes.org>
@@ -85,155 +84,125 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-The inat-tables.c file has some arrays in it that contain pointers to
-other arrays. These pointers need to be relocated when the kernel
-image is moved to a different location.
+Factor out the code to fetch the instruction from user-space to a helper
+function.
 
-The pre-decompression boot-code has no support for applying ELF
-relocations, so initialize these arrays at runtime in the
-pre-decompression code to make sure all pointers are correctly
-initialized.
+No functional changes.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/tools/gen-insn-attr-x86.awk       | 50 +++++++++++++++++++++-
- tools/arch/x86/tools/gen-insn-attr-x86.awk | 50 +++++++++++++++++++++-
- 2 files changed, 98 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/insn-eval.h |  2 ++
+ arch/x86/kernel/umip.c           | 26 +++++-----------------
+ arch/x86/lib/insn-eval.c         | 38 ++++++++++++++++++++++++++++++++
+ 3 files changed, 46 insertions(+), 20 deletions(-)
 
-diff --git a/arch/x86/tools/gen-insn-attr-x86.awk b/arch/x86/tools/gen-insn-attr-x86.awk
-index a42015b305f4..af38469afd14 100644
---- a/arch/x86/tools/gen-insn-attr-x86.awk
-+++ b/arch/x86/tools/gen-insn-attr-x86.awk
-@@ -362,6 +362,9 @@ function convert_operands(count,opnd,       i,j,imm,mod)
- END {
- 	if (awkchecked != "")
- 		exit 1
-+
-+	print "#ifndef __BOOT_COMPRESSED\n"
-+
- 	# print escape opcode map's array
- 	print "/* Escape opcode map array */"
- 	print "const insn_attr_t * const inat_escape_tables[INAT_ESC_MAX + 1]" \
-@@ -388,6 +391,51 @@ END {
- 		for (j = 0; j < max_lprefix; j++)
- 			if (atable[i,j])
- 				print "	["i"]["j"] = "atable[i,j]","
--	print "};"
-+	print "};\n"
-+
-+	print "#else /* !__BOOT_COMPRESSED */\n"
-+
-+	print "/* Escape opcode map array */"
-+	print "static const insn_attr_t *inat_escape_tables[INAT_ESC_MAX + 1]" \
-+	      "[INAT_LSTPFX_MAX + 1];"
-+	print ""
-+
-+	print "/* Group opcode map array */"
-+	print "static const insn_attr_t *inat_group_tables[INAT_GRP_MAX + 1]"\
-+	      "[INAT_LSTPFX_MAX + 1];"
-+	print ""
-+
-+	print "/* AVX opcode map array */"
-+	print "static const insn_attr_t *inat_avx_tables[X86_VEX_M_MAX + 1]"\
-+	      "[INAT_LSTPFX_MAX + 1];"
-+	print ""
-+
-+	print "static void inat_init_tables(void)"
-+	print "{"
-+
-+	# print escape opcode map's array
-+	print "\t/* Print Escape opcode map array */"
-+	for (i = 0; i < geid; i++)
-+		for (j = 0; j < max_lprefix; j++)
-+			if (etable[i,j])
-+				print "\tinat_escape_tables["i"]["j"] = "etable[i,j]";"
-+	print ""
-+
-+	# print group opcode map's array
-+	print "\t/* Print Group opcode map array */"
-+	for (i = 0; i < ggid; i++)
-+		for (j = 0; j < max_lprefix; j++)
-+			if (gtable[i,j])
-+				print "\tinat_group_tables["i"]["j"] = "gtable[i,j]";"
-+	print ""
-+	# print AVX opcode map's array
-+	print "\t/* Print AVX opcode map array */"
-+	for (i = 0; i < gaid; i++)
-+		for (j = 0; j < max_lprefix; j++)
-+			if (atable[i,j])
-+				print "\tinat_avx_tables["i"]["j"] = "atable[i,j]";"
-+
-+	print "}"
-+	print "#endif"
- }
+diff --git a/arch/x86/include/asm/insn-eval.h b/arch/x86/include/asm/insn-eval.h
+index 2b6ccf2c49f1..b8b9ef1bbd06 100644
+--- a/arch/x86/include/asm/insn-eval.h
++++ b/arch/x86/include/asm/insn-eval.h
+@@ -19,5 +19,7 @@ void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs);
+ int insn_get_modrm_rm_off(struct insn *insn, struct pt_regs *regs);
+ unsigned long insn_get_seg_base(struct pt_regs *regs, int seg_reg_idx);
+ int insn_get_code_seg_params(struct pt_regs *regs);
++int insn_fetch_from_user(struct pt_regs *regs,
++			 unsigned char buf[MAX_INSN_SIZE]);
  
-diff --git a/tools/arch/x86/tools/gen-insn-attr-x86.awk b/tools/arch/x86/tools/gen-insn-attr-x86.awk
-index a42015b305f4..af38469afd14 100644
---- a/tools/arch/x86/tools/gen-insn-attr-x86.awk
-+++ b/tools/arch/x86/tools/gen-insn-attr-x86.awk
-@@ -362,6 +362,9 @@ function convert_operands(count,opnd,       i,j,imm,mod)
- END {
- 	if (awkchecked != "")
- 		exit 1
-+
-+	print "#ifndef __BOOT_COMPRESSED\n"
-+
- 	# print escape opcode map's array
- 	print "/* Escape opcode map array */"
- 	print "const insn_attr_t * const inat_escape_tables[INAT_ESC_MAX + 1]" \
-@@ -388,6 +391,51 @@ END {
- 		for (j = 0; j < max_lprefix; j++)
- 			if (atable[i,j])
- 				print "	["i"]["j"] = "atable[i,j]","
--	print "};"
-+	print "};\n"
-+
-+	print "#else /* !__BOOT_COMPRESSED */\n"
-+
-+	print "/* Escape opcode map array */"
-+	print "static const insn_attr_t *inat_escape_tables[INAT_ESC_MAX + 1]" \
-+	      "[INAT_LSTPFX_MAX + 1];"
-+	print ""
-+
-+	print "/* Group opcode map array */"
-+	print "static const insn_attr_t *inat_group_tables[INAT_GRP_MAX + 1]"\
-+	      "[INAT_LSTPFX_MAX + 1];"
-+	print ""
-+
-+	print "/* AVX opcode map array */"
-+	print "static const insn_attr_t *inat_avx_tables[X86_VEX_M_MAX + 1]"\
-+	      "[INAT_LSTPFX_MAX + 1];"
-+	print ""
-+
-+	print "static void inat_init_tables(void)"
-+	print "{"
-+
-+	# print escape opcode map's array
-+	print "\t/* Print Escape opcode map array */"
-+	for (i = 0; i < geid; i++)
-+		for (j = 0; j < max_lprefix; j++)
-+			if (etable[i,j])
-+				print "\tinat_escape_tables["i"]["j"] = "etable[i,j]";"
-+	print ""
-+
-+	# print group opcode map's array
-+	print "\t/* Print Group opcode map array */"
-+	for (i = 0; i < ggid; i++)
-+		for (j = 0; j < max_lprefix; j++)
-+			if (gtable[i,j])
-+				print "\tinat_group_tables["i"]["j"] = "gtable[i,j]";"
-+	print ""
-+	# print AVX opcode map's array
-+	print "\t/* Print AVX opcode map array */"
-+	for (i = 0; i < gaid; i++)
-+		for (j = 0; j < max_lprefix; j++)
-+			if (atable[i,j])
-+				print "\tinat_avx_tables["i"]["j"] = "atable[i,j]";"
-+
-+	print "}"
-+	print "#endif"
- }
+ #endif /* _ASM_X86_INSN_EVAL_H */
+diff --git a/arch/x86/kernel/umip.c b/arch/x86/kernel/umip.c
+index 8d5cbe1bbb3b..c9e5345da793 100644
+--- a/arch/x86/kernel/umip.c
++++ b/arch/x86/kernel/umip.c
+@@ -317,11 +317,11 @@ static void force_sig_info_umip_fault(void __user *addr, struct pt_regs *regs)
+  */
+ bool fixup_umip_exception(struct pt_regs *regs)
+ {
+-	int not_copied, nr_copied, reg_offset, dummy_data_size, umip_inst;
+-	unsigned long seg_base = 0, *reg_addr;
++	int nr_copied, reg_offset, dummy_data_size, umip_inst;
+ 	/* 10 bytes is the maximum size of the result of UMIP instructions */
+ 	unsigned char dummy_data[10] = { 0 };
+ 	unsigned char buf[MAX_INSN_SIZE];
++	unsigned long *reg_addr;
+ 	void __user *uaddr;
+ 	struct insn insn;
+ 	int seg_defs;
+@@ -329,26 +329,12 @@ bool fixup_umip_exception(struct pt_regs *regs)
+ 	if (!regs)
+ 		return false;
  
+-	/*
+-	 * If not in user-space long mode, a custom code segment could be in
+-	 * use. This is true in protected mode (if the process defined a local
+-	 * descriptor table), or virtual-8086 mode. In most of the cases
+-	 * seg_base will be zero as in USER_CS.
+-	 */
+-	if (!user_64bit_mode(regs))
+-		seg_base = insn_get_seg_base(regs, INAT_SEG_REG_CS);
+-
+-	if (seg_base == -1L)
+-		return false;
+-
+-	not_copied = copy_from_user(buf, (void __user *)(seg_base + regs->ip),
+-				    sizeof(buf));
+-	nr_copied = sizeof(buf) - not_copied;
++	nr_copied = insn_fetch_from_user(regs, buf);
+ 
+ 	/*
+-	 * The copy_from_user above could have failed if user code is protected
+-	 * by a memory protection key. Give up on emulation in such a case.
+-	 * Should we issue a page fault?
++	 * The insn_fetch_from_user above could have failed if user code
++	 * is protected by a memory protection key. Give up on emulation
++	 * in such a case.  Should we issue a page fault?
+ 	 */
+ 	if (!nr_copied)
+ 		return false;
+diff --git a/arch/x86/lib/insn-eval.c b/arch/x86/lib/insn-eval.c
+index 31600d851fd8..0c4f7ebc261b 100644
+--- a/arch/x86/lib/insn-eval.c
++++ b/arch/x86/lib/insn-eval.c
+@@ -1369,3 +1369,41 @@ void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs)
+ 		return (void __user *)-1L;
+ 	}
+ }
++
++/**
++ * insn_fetch_from_user() - Copy instruction bytes from user-space memory
++ * @regs:	Structure with register values as seen when entering kernel mode
++ * @buf:	Array to store the fetched instruction
++ *
++ * Gets the linear address of the instruction and copies the instruction bytes
++ * to the buf.
++ *
++ * Returns:
++ *
++ * Number of instruction bytes copied.
++ *
++ * 0 if nothing was copied.
++ */
++int insn_fetch_from_user(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
++{
++	unsigned long seg_base = 0;
++	int not_copied;
++
++	/*
++	 * If not in user-space long mode, a custom code segment could be in
++	 * use. This is true in protected mode (if the process defined a local
++	 * descriptor table), or virtual-8086 mode. In most of the cases
++	 * seg_base will be zero as in USER_CS.
++	 */
++	if (!user_64bit_mode(regs)) {
++		seg_base = insn_get_seg_base(regs, INAT_SEG_REG_CS);
++		if (seg_base == -1L)
++			return 0;
++	}
++
++
++	not_copied = copy_from_user(buf, (void __user *)(seg_base + regs->ip),
++				    MAX_INSN_SIZE);
++
++	return MAX_INSN_SIZE - not_copied;
++}
 -- 
 2.27.0
 
