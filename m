@@ -1,54 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78B5821F03E
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:11:06 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id CFA3621F031
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jul 2020 14:10:57 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2DF5D88716;
-	Tue, 14 Jul 2020 12:11:05 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 855378A333;
+	Tue, 14 Jul 2020 12:10:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Vwiu6Xzgemnh; Tue, 14 Jul 2020 12:11:01 +0000 (UTC)
+	with ESMTP id 8x99DA+BMBSG; Tue, 14 Jul 2020 12:10:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 82B8A885FE;
-	Tue, 14 Jul 2020 12:11:01 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C7F468A32A;
+	Tue, 14 Jul 2020 12:10:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7A96FC0733;
-	Tue, 14 Jul 2020 12:11:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9FEAAC0733;
+	Tue, 14 Jul 2020 12:10:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9268CC1798
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 081E5C0733
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:11:00 +0000 (UTC)
+ Tue, 14 Jul 2020 12:10:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8EB1F8A64E
+ by hemlock.osuosl.org (Postfix) with ESMTP id E91078A1B2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:11:00 +0000 (UTC)
+ Tue, 14 Jul 2020 12:10:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MTZmD33YwXtq
+ with ESMTP id BmaUxFAfD1ap
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 12:10:57 +0000 (UTC)
+ Tue, 14 Jul 2020 12:10:52 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 57B4A8A104
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 5DA9B8A226
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Jul 2020 12:10:52 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 9CA87B2D;
- Tue, 14 Jul 2020 14:10:47 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 233E6B70;
+ Tue, 14 Jul 2020 14:10:48 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v4 27/75] x86/idt: Move IDT to data segment
-Date: Tue, 14 Jul 2020 14:08:29 +0200
-Message-Id: <20200714120917.11253-28-joro@8bytes.org>
+Subject: [PATCH v4 28/75] x86/idt: Split idt_data setup out of set_intr_gate()
+Date: Tue, 14 Jul 2020 14:08:30 +0200
+Message-Id: <20200714120917.11253-29-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200714120917.11253-1-joro@8bytes.org>
 References: <20200714120917.11253-1-joro@8bytes.org>
@@ -84,28 +84,55 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-With SEV-ES, exception handling is needed very early, even before the
-kernel has cleared the bss segment. In order to prevent clearing the
-currently used IDT, move the IDT to the data segment.
+The code to setup idt_data is needed for early exception handling, but
+set_intr_gate() can't be used that early because it has pv-ops in its
+code path, which don't work that early.
+
+Split out the idt_data initialization part from set_intr_gate() so
+that it can be used separatly.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/idt.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/kernel/idt.c | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
 
 diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
-index 0db21206f2f3..b920f2352df5 100644
+index b920f2352df5..367eb6a593dd 100644
 --- a/arch/x86/kernel/idt.c
 +++ b/arch/x86/kernel/idt.c
-@@ -158,7 +158,7 @@ static const __initconst struct idt_data apic_idts[] = {
- };
+@@ -205,18 +205,24 @@ idt_setup_from_table(gate_desc *idt, const struct idt_data *t, int size, bool sy
+ 	}
+ }
  
- /* Must be page-aligned because the real IDT is used in the cpu entry area */
--static gate_desc idt_table[IDT_ENTRIES] __page_aligned_bss;
-+static gate_desc idt_table[IDT_ENTRIES] __page_aligned_data;
++static void init_idt_data(struct idt_data *data, unsigned int n,
++			  const void *addr)
++{
++	BUG_ON(n > 0xFF);
++
++	memset(data, 0, sizeof(*data));
++	data->vector	= n;
++	data->addr	= addr;
++	data->segment	= __KERNEL_CS;
++	data->bits.type	= GATE_INTERRUPT;
++	data->bits.p	= 1;
++}
++
+ static __init void set_intr_gate(unsigned int n, const void *addr)
+ {
+ 	struct idt_data data;
  
- struct desc_ptr idt_descr __ro_after_init = {
- 	.size		= IDT_TABLE_SIZE - 1,
+-	BUG_ON(n > 0xFF);
+-
+-	memset(&data, 0, sizeof(data));
+-	data.vector	= n;
+-	data.addr	= addr;
+-	data.segment	= __KERNEL_CS;
+-	data.bits.type	= GATE_INTERRUPT;
+-	data.bits.p	= 1;
++	init_idt_data(&data, n, addr);
+ 
+ 	idt_setup_from_table(idt_table, &data, 1, false);
+ }
 -- 
 2.27.0
 
