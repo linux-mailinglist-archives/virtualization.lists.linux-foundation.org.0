@@ -1,99 +1,98 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55242220F6C
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 16:35:02 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07D862210D0
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 17:26:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 769578AE5E;
-	Wed, 15 Jul 2020 14:35:00 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id AEA6C8B59F;
+	Wed, 15 Jul 2020 15:26:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7O0Ei1Ms-DDb; Wed, 15 Jul 2020 14:34:59 +0000 (UTC)
+	with ESMTP id E780+3QYf4md; Wed, 15 Jul 2020 15:26:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DB9848AE61;
-	Wed, 15 Jul 2020 14:34:59 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1FB428B590;
+	Wed, 15 Jul 2020 15:26:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B5AFFC0733;
-	Wed, 15 Jul 2020 14:34:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F18BAC0733;
+	Wed, 15 Jul 2020 15:26:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2AC98C0733
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8652AC0733
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 14:34:58 +0000 (UTC)
+ Wed, 15 Jul 2020 15:26:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 122A489682
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 82CA989705
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 14:34:58 +0000 (UTC)
+ Wed, 15 Jul 2020 15:26:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id luT8UnPSltvj
+ with ESMTP id OoTLTnNyGdeP
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 14:34:56 +0000 (UTC)
+ Wed, 15 Jul 2020 15:26:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id C917B8967F
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+ [209.85.216.68])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id E7218896FA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 14:34:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594823694;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=gDUnF1gX4Wln5UGQpyw0DsCZrmXKbH1BJblX2g4HkKY=;
- b=f4y0MJ3byWsV/c4dAXaj0GExpxt5+5duSytOqyGeKX81CrDbxYHEgsCJKlhVLIiY5repuM
- tyPsJieTetq38kzbJphGXoiQU/TOUJLab9kMaCkFuvePxux1RDhT5Jnjwp64ck1emlaNeZ
- plbHhPoIRGMOaayDZxYSAG/FqKXS/Io=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-391-8HcFOxFtNvSFr_VjGbgaaA-1; Wed, 15 Jul 2020 10:34:52 -0400
-X-MC-Unique: 8HcFOxFtNvSFr_VjGbgaaA-1
-Received: by mail-wr1-f69.google.com with SMTP id a18so1465446wrm.14
+ Wed, 15 Jul 2020 15:26:16 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id ls15so3232491pjb.1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 07:34:52 -0700 (PDT)
+ Wed, 15 Jul 2020 08:26:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=OVseGDlS5NduALoUhVbQMz2ayVd7lsCazvkJdrEWQVA=;
+ b=kYphxsBDglzPvHIBCffGnlCguQJ5Jq0VYcOblzLx7EXfk29Rvu/bG7pBwbBpNwzFXG
+ +lD2Fb60wFmiV61BCGzq/Gs9UPJEvIkYkAw7CfcZN9nq8hf6m5XYh4qRJi90dSIrkeil
+ VQFSgKQ9JBDSo0SH2E//vgbDwR4wEPOwmojY8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=gDUnF1gX4Wln5UGQpyw0DsCZrmXKbH1BJblX2g4HkKY=;
- b=KMEj3Kn2sMW5ZrMrmQZMlLLOxYLvXDY4Berp8NWMcTWeyEXMSm1qUZzHWVS9YoWVGr
- wk47mFf0i+uNPjcBbxEw0gJoXuozUY2iLrmFYVaqC2iM3w1SA8b4WP+9leROz/qyLkzQ
- t3HwgME+MfY6suYgPrFiWsmOuXxX4mIa+zwsJFd5btBev/JYrpPA9PzbnPySPXz6Y4hG
- xfTMFtifppwnDYvuSGV2owuL5rL37tqNoxM3F23EY4aMXT6QAJrJ5w5QuuGmnHZp1S0J
- tN6Q319AdS3VJWiWShBhTCsTTGjPOfIWn14uRF1PNWjWA68WK3UgvVuW9sE1rvsDFWS6
- Y+nQ==
-X-Gm-Message-State: AOAM533wAGz8TyRohdCGmlE0Kxgt4ZQx5L3qhNO9+oBt2g8priJ7uegD
- ml2t3JDC1DY69iv8nPWT/OrAy8Y4fEZGBjXFEYv6224UdH68/mHetaB49G5PAt5wOyvD8iU00oo
- LCZR0jg/gTV477BaGr+Y92Hq1UeF97bJ1av8iKzo+gw==
-X-Received: by 2002:a5d:6987:: with SMTP id g7mr11513363wru.79.1594823691728; 
- Wed, 15 Jul 2020 07:34:51 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzoUwaGmSvRQhzNykS+/dS1cmb21BRdb+HUz8NopOX7oAtNCENF0Kaaj4WsT5RV7bERzyNJsQ==
-X-Received: by 2002:a5d:6987:: with SMTP id g7mr11513341wru.79.1594823691514; 
- Wed, 15 Jul 2020 07:34:51 -0700 (PDT)
-Received: from steredhat ([5.180.207.22])
- by smtp.gmail.com with ESMTPSA id e8sm3600980wrp.26.2020.07.15.07.34.49
+ bh=OVseGDlS5NduALoUhVbQMz2ayVd7lsCazvkJdrEWQVA=;
+ b=bFDH6EIu1dWFDc3Otkbtn0nshVhbozh39uvJq7g7JOIWxRIicQiRGl6As3S41WreDY
+ ZKe8ky+6zB3yfGZwRzklJAO1paEkZTXUla3cp/mVez551NvayxD7hMT8lm1CQQ1nDbTQ
+ fBSFrveyZXhtj+vkCcLFXhBsHkjmZYx3mtbSWxBFiHT1t+kc6YkYzFaMYEj/9kUO15+L
+ 56ag1qTl2bMU+4HC+1sUsJuIr0HFPLa+9F0YtyXs/EK+bFL7IT0mOxCUZsCKyTp7l+em
+ 5b/mjHuLJgQ7Wgu5H0xBqYhvM7iTWvFgxlkcf6QWiHOPReyVwyhAezIKcmRFweGi08N1
+ MDew==
+X-Gm-Message-State: AOAM530OeuxX9gG6IqL4uAIJIG4uLnVr1VK3CpnVx4MTr83B3ot5QCIm
+ MGLbQ/omb5zcrOrKHUPSQGrG6Q==
+X-Google-Smtp-Source: ABdhPJztkAQ9Aa2pbyAHIkXtH9WpSQcQHYyGPARbbSQPgrfyf6qes0+MO+jyCy83QwcUYG4c4hENOg==
+X-Received: by 2002:a17:90a:e987:: with SMTP id v7mr185305pjy.56.1594826776564; 
+ Wed, 15 Jul 2020 08:26:16 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id j17sm2463861pgn.87.2020.07.15.08.26.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jul 2020 07:34:50 -0700 (PDT)
-Date: Wed, 15 Jul 2020 16:34:46 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>, davem@davemloft.net
-Subject: Re: [PATCH] vsock/virtio: annotate 'the_virtio_vsock' RCU pointer
-Message-ID: <20200715143446.kfl3zb4vwkk4ic4r@steredhat>
-References: <20200710121243.120096-1-sgarzare@redhat.com>
- <20200713065423-mutt-send-email-mst@kernel.org>
+ Wed, 15 Jul 2020 08:26:15 -0700 (PDT)
+Date: Wed, 15 Jul 2020 08:26:14 -0700
+From: Kees Cook <keescook@chromium.org>
+To: Joerg Roedel <jroedel@suse.de>
+Subject: Re: [PATCH v4 70/75] x86/head/64: Don't call verify_cpu() on
+ starting APs
+Message-ID: <202007150815.A81E879@keescook>
+References: <20200714120917.11253-1-joro@8bytes.org>
+ <20200714120917.11253-71-joro@8bytes.org>
+ <202007141837.2B93BBD78@keescook> <20200715092638.GJ16200@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20200713065423-mutt-send-email-mst@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+In-Reply-To: <20200715092638.GJ16200@suse.de>
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
+ kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Cfir Cohen <cfir@google.com>, Joerg Roedel <joro@8bytes.org>, x86@kernel.org,
+ linux-kernel@vger.kernel.org,
+ Sean Christopherson <sean.j.christopherson@intel.com>,
  virtualization@lists.linux-foundation.org,
- Stefan Hajnoczi <stefanha@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- davem@davemloft.net
+ Martin Radev <martin.b.radev@gmail.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,50 +109,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jul 13, 2020 at 06:54:43AM -0400, Michael S. Tsirkin wrote:
-> On Fri, Jul 10, 2020 at 02:12:43PM +0200, Stefano Garzarella wrote:
-> > Commit 0deab087b16a ("vsock/virtio: use RCU to avoid use-after-free
-> > on the_virtio_vsock") starts to use RCU to protect 'the_virtio_vsock'
-> > pointer, but we forgot to annotate it.
-> > 
-> > This patch adds the annotation to fix the following sparse errors:
-> > 
-> >     net/vmw_vsock/virtio_transport.c:73:17: error: incompatible types in comparison expression (different address spaces):
-> >     net/vmw_vsock/virtio_transport.c:73:17:    struct virtio_vsock [noderef] __rcu *
-> >     net/vmw_vsock/virtio_transport.c:73:17:    struct virtio_vsock *
-> >     net/vmw_vsock/virtio_transport.c:171:17: error: incompatible types in comparison expression (different address spaces):
-> >     net/vmw_vsock/virtio_transport.c:171:17:    struct virtio_vsock [noderef] __rcu *
-> >     net/vmw_vsock/virtio_transport.c:171:17:    struct virtio_vsock *
-> >     net/vmw_vsock/virtio_transport.c:207:17: error: incompatible types in comparison expression (different address spaces):
-> >     net/vmw_vsock/virtio_transport.c:207:17:    struct virtio_vsock [noderef] __rcu *
-> >     net/vmw_vsock/virtio_transport.c:207:17:    struct virtio_vsock *
-> >     net/vmw_vsock/virtio_transport.c:561:13: error: incompatible types in comparison expression (different address spaces):
-> >     net/vmw_vsock/virtio_transport.c:561:13:    struct virtio_vsock [noderef] __rcu *
-> >     net/vmw_vsock/virtio_transport.c:561:13:    struct virtio_vsock *
-> >     net/vmw_vsock/virtio_transport.c:612:9: error: incompatible types in comparison expression (different address spaces):
-> >     net/vmw_vsock/virtio_transport.c:612:9:    struct virtio_vsock [noderef] __rcu *
-> >     net/vmw_vsock/virtio_transport.c:612:9:    struct virtio_vsock *
-> >     net/vmw_vsock/virtio_transport.c:631:9: error: incompatible types in comparison expression (different address spaces):
-> >     net/vmw_vsock/virtio_transport.c:631:9:    struct virtio_vsock [noderef] __rcu *
-> >     net/vmw_vsock/virtio_transport.c:631:9:    struct virtio_vsock *
-> > 
-> > Fixes: 0deab087b16a ("vsock/virtio: use RCU to avoid use-after-free on the_virtio_vsock")
-> > Reported-by: Michael S. Tsirkin <mst@redhat.com>
-> > Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+On Wed, Jul 15, 2020 at 11:26:38AM +0200, Joerg Roedel wrote:
+> Hi Kees,
 > 
+> thanks for your reviews!
 > 
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
+> On Tue, Jul 14, 2020 at 06:40:30PM -0700, Kees Cook wrote:
+> > Eek, no. MSR_IA32_MISC_ENABLE_XD_DISABLE needs to be cleared very early
+> > during CPU startup; this can't just be skipped.
 > 
-> who's merging this? Dave?
+> That MSR is Intel-only, right? The boot-path installed here is only used
+> for SEV-ES guests, running on AMD systems, so this MSR is not even
+> accessed during boot on those VMs.
 
-I think so, but I forgot the 'net' tag :-(
+Oh, hrm, yes, that's true. If other x86 maintainers are comfortable with
+this, then okay. My sense is that changing the early CPU startup paths
+will cause trouble down the line.
 
-I'll wait to see if Dave will queue this, otherwise I'll resend with
-the 'net' tag.
+> The alternative is to set up exception handling prior to calling
+> verify_cpu, including segments, stack and IDT. Given that verify_cpu()
+> does not add much value to SEV-ES guests, I'd like to avoid adding this
+> complexity.
 
-Thanks,
-Stefano
+So, going back to the requirements here ... what things in verify_cpu()
+can cause exceptions? AFAICT, cpuid is safely handled (i.e. it is
+detected and only run in a way to avoid exceptions and the MSR
+reads/writes are similarly bound by CPU family/id range checks). I must
+be missing something. :)
 
+> 
+> > Also, is UNWIND_HINT_EMPTY needed for the new target?
+> 
+> Yes, I think it is, will add it in the next version.
+> 
+> Regards,
+> 
+> 	Joerg
+
+-- 
+Kees Cook
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
