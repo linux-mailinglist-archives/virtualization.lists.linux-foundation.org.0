@@ -2,102 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92CEE22091B
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 11:47:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B65E522091E
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 11:47:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4502C8918A;
-	Wed, 15 Jul 2020 09:47:10 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7162D870F8;
+	Wed, 15 Jul 2020 09:47:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kjkD0ehCNRRN; Wed, 15 Jul 2020 09:47:09 +0000 (UTC)
+	with ESMTP id 9dKsQABKfndV; Wed, 15 Jul 2020 09:47:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 9FDD589186;
-	Wed, 15 Jul 2020 09:47:09 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E34CA87145;
+	Wed, 15 Jul 2020 09:47:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7D041C0733;
-	Wed, 15 Jul 2020 09:47:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B7139C0733;
+	Wed, 15 Jul 2020 09:47:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A5581C0733
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 81E2DC0733
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:47:08 +0000 (UTC)
+ Wed, 15 Jul 2020 09:47:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 917338AFCA
+ by hemlock.osuosl.org (Postfix) with ESMTP id 7092C894EA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:47:08 +0000 (UTC)
+ Wed, 15 Jul 2020 09:47:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vmSgftPQKhU7
+ with ESMTP id pDu-RzfdpdPh
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:47:07 +0000 (UTC)
+ Wed, 15 Jul 2020 09:47:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A53FE8AD9E
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id ACBAA893A3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:47:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594806426;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fgFwB4sgqMo4IjWK8xGAhUdyzExkJ8Foocx1qbcXFec=;
- b=cELMly7a7cu/U3++mhRx3DvvxB8801E/9dv+HuXSSa8JWwFJ524sGgtRrJECXwElPwMHLD
- Xu0uCOv/gYMEJ3W9rTY6aAkxPsmv7pgqHDugdcVhwgp9j5wFwb745eVoINRjYM0VoOGu8b
- KvWPyELcMtPYj9HK3uutmSk858bEhsM=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-181-ffxIYHwbPKqApkar21RZAg-1; Wed, 15 Jul 2020 05:47:05 -0400
-X-MC-Unique: ffxIYHwbPKqApkar21RZAg-1
-Received: by mail-wm1-f72.google.com with SMTP id y204so510863wmd.2
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 02:47:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=fgFwB4sgqMo4IjWK8xGAhUdyzExkJ8Foocx1qbcXFec=;
- b=JuMxP9qgBZabdkbaqJP2ZQgURe60Ko3yi8bAgzM/bbgyYOTuHg61O+Yy/gOVbJftEy
- 0qKs5ZGdixipF62EBM61UM1h3t4ZXpalU9jhzhqvuntbYkj9GRazYMNc+nJUjFbzYEBA
- hbgF8YsqzrKFPrfrLte99Qp/CaqBoxvw49GNH0ZAkx1VGzXvhZGzn/S0TBzJIJNkEZhJ
- sVSfoYZ8Wu6lUrvNE+0YhgzC8lOMrWaOIF3F2Vgh1YMxUlLVywVUpCoo4b3faB3+C8hJ
- tMIsXIXv8TSg1NeLBvz1kaeHu6D61By2Cma7idDTdUC0SarmruPll9RjaNxFwtEfgbKu
- VsSQ==
-X-Gm-Message-State: AOAM531WDeeaj6m/dUZqpeLWwiuJ8IPtwBKLgCn2tB0A2HSuZIkzFjfT
- 9kJAG5JVGF0911JIWbobSy5LyH+xGIUgpXrVGmcJLDOnWq3xgXgvO3lPIRicz8tGqXpEImyljrq
- aK5lfyYez/oIrrKn3zyplrrsCT235OtCd7Sj9WIvjeg==
-X-Received: by 2002:a5d:4bc4:: with SMTP id l4mr9855658wrt.97.1594806423950;
- Wed, 15 Jul 2020 02:47:03 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwHDUVU4AP3hlp5Siz7vKq3EW4crKSR0xnUKkeLjfUiJpc4ShpyJMTGyZWh8XxJyKnOOZ6fMA==
-X-Received: by 2002:a5d:4bc4:: with SMTP id l4mr9855634wrt.97.1594806423671;
- Wed, 15 Jul 2020 02:47:03 -0700 (PDT)
-Received: from redhat.com (bzq-79-180-10-140.red.bezeqint.net. [79.180.10.140])
- by smtp.gmail.com with ESMTPSA id j75sm2897436wrj.22.2020.07.15.02.47.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jul 2020 02:47:02 -0700 (PDT)
-Date: Wed, 15 Jul 2020 05:46:59 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alexander Duyck <alexander.duyck@gmail.com>
-Subject: Re: [PATCH] virtio_balloon: clear modern features under legacy
-Message-ID: <20200715053808-mutt-send-email-mst@kernel.org>
-References: <20200710113046.421366-1-mst@redhat.com>
- <CAKgT0UeZN+mOWNhgiT0btZTyki3TPoj7pbqA+__GkCxoifPqeg@mail.gmail.com>
- <20200712105926-mutt-send-email-mst@kernel.org>
- <CAKgT0UdY1xpEH1Hg4HWJEkGwH5s64sm1y4O_XmHe8P_f=tDhpg@mail.gmail.com>
- <20200714044017-mutt-send-email-mst@kernel.org>
- <CAKgT0Ud_AFpB-=uCB_3qY8pFvG9Kj7OFSmFG76LZC9K91oUG2w@mail.gmail.com>
+ Wed, 15 Jul 2020 09:47:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=0elNuqYxcCo1hxsLEEQkxpnR+7H9VliZhBonNrxGt2Y=; b=rGy15IwTdosyqZKG9Fqu61aw8r
+ EcZqWOQPfINy492XWxED50S8KJjaSk2xP068ox4WapjrUXn0tcqK85EqV4MyFmONN72dm0x4BFmsL
+ obY7r6FuMNdeixQGVaOA8lsOHVH1WSfrgP8wMRvXhlrxAMk5wmMbJN72IlywZHIO8SLxOlVd8T5Xm
+ t3qjIJHlibrn7hbOfDk1StAlw/Hgd83oGiTYkjBSF4Tkv34kCsYkgjos0J5jqaOKXuyirk4YKpgy1
+ /IcvszPzckLNg5+AsNpyaCsU/coExmg8PiDbzLwsndF6ajo69ZfzGRko1WQojQClj99DuhyNBasrz
+ t+oPuxPw==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1jve0G-00033K-3p; Wed, 15 Jul 2020 09:47:04 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id B9F563028C8;
+ Wed, 15 Jul 2020 11:47:02 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id A202F20D27C63; Wed, 15 Jul 2020 11:47:02 +0200 (CEST)
+Date: Wed, 15 Jul 2020 11:47:02 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Joerg Roedel <joro@8bytes.org>
+Subject: Re: [PATCH v4 45/75] x86/sev-es: Adjust #VC IST Stack on entering
+ NMI handler
+Message-ID: <20200715094702.GF10769@hirez.programming.kicks-ass.net>
+References: <20200714120917.11253-1-joro@8bytes.org>
+ <20200714120917.11253-46-joro@8bytes.org>
 MIME-Version: 1.0
-In-Reply-To: <CAKgT0Ud_AFpB-=uCB_3qY8pFvG9Kj7OFSmFG76LZC9K91oUG2w@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org,
- LKML <linux-kernel@vger.kernel.org>, stable@vger.kernel.org
+In-Reply-To: <20200714120917.11253-46-joro@8bytes.org>
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
+ Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
+ Cfir Cohen <cfir@google.com>, x86@kernel.org, linux-kernel@vger.kernel.org,
+ Sean Christopherson <sean.j.christopherson@intel.com>,
+ virtualization@lists.linux-foundation.org,
+ Martin Radev <martin.b.radev@gmail.com>, Joerg Roedel <jroedel@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,110 +93,132 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVHVlLCBKdWwgMTQsIDIwMjAgYXQgMTA6MzE6NTZBTSAtMDcwMCwgQWxleGFuZGVyIER1eWNr
-IHdyb3RlOgo+IE9uIFR1ZSwgSnVsIDE0LCAyMDIwIGF0IDE6NDUgQU0gTWljaGFlbCBTLiBUc2ly
-a2luIDxtc3RAcmVkaGF0LmNvbT4gd3JvdGU6Cj4gPgo+ID4gT24gTW9uLCBKdWwgMTMsIDIwMjAg
-YXQgMDg6MTA6MTRBTSAtMDcwMCwgQWxleGFuZGVyIER1eWNrIHdyb3RlOgo+ID4gPiBPbiBTdW4s
-IEp1bCAxMiwgMjAyMCBhdCA4OjEwIEFNIE1pY2hhZWwgUy4gVHNpcmtpbiA8bXN0QHJlZGhhdC5j
-b20+IHdyb3RlOgo+ID4gPiA+Cj4gPiA+ID4gT24gRnJpLCBKdWwgMTAsIDIwMjAgYXQgMDk6MTM6
-NDFBTSAtMDcwMCwgQWxleGFuZGVyIER1eWNrIHdyb3RlOgo+ID4gPiA+ID4gT24gRnJpLCBKdWwg
-MTAsIDIwMjAgYXQgNDozMSBBTSBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29tPiB3
-cm90ZToKPiA+ID4gPiA+ID4KPiAKPiA8c25pcD4KPiAKPiA+ID4gPiBBcyB5b3Ugc2F5IGNvcnJl
-Y3RseSB0aGUgY29tbWFuZCBpZCBpcyBhY3R1YWxseSBhc3N1bWVkIG5hdGl2ZSBlbmRpYW46Cj4g
-PiA+ID4KPiA+ID4gPgo+ID4gPiA+IHN0YXRpYyB1MzIgdmlydGlvX2JhbGxvb25fY21kX2lkX3Jl
-Y2VpdmVkKHN0cnVjdCB2aXJ0aW9fYmFsbG9vbiAqdmIpCj4gPiA+ID4gewo+ID4gPiA+ICAgICAg
-ICAgaWYgKHRlc3RfYW5kX2NsZWFyX2JpdChWSVJUSU9fQkFMTE9PTl9DT05GSUdfUkVBRF9DTURf
-SUQsCj4gPiA+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2Yi0+Y29uZmlnX3Jl
-YWRfYml0bWFwKSkKPiA+ID4gPiAgICAgICAgICAgICAgICAgdmlydGlvX2NyZWFkKHZiLT52ZGV2
-LCBzdHJ1Y3QgdmlydGlvX2JhbGxvb25fY29uZmlnLAo+ID4gPiA+ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZnJlZV9wYWdlX2hpbnRfY21kX2lkLAo+ID4gPiA+ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgJnZiLT5jbWRfaWRfcmVjZWl2ZWRfY2FjaGUpOwo+ID4gPiA+Cj4gPiA+
-ID4gICAgICAgICByZXR1cm4gdmItPmNtZF9pZF9yZWNlaXZlZF9jYWNoZTsKPiA+ID4gPiB9Cj4g
-PiA+ID4KPiA+ID4gPgo+ID4gPiA+IFNvIGd1ZXN0IGFzc3VtZXMgbmF0aXZlLCBob3N0IGFzc3Vt
-ZXMgTEUuCj4gPiA+Cj4gPiA+IFRoaXMgd2Fzbid0IGV2ZW4gdGhlIG9uZSBJIHdhcyB0YWxraW5n
-IGFib3V0LCBidXQgbm93IHRoYXQgeW91IHBvaW50Cj4gPiA+IGl0IG91dCB0aGlzIGlzIGRlZmlu
-YXRlbHkgYnVnLiBUaGUgY29tbWFuZCBJRCBJIHdhcyB0YWxraW5nIGFib3V0IHdhcwo+ID4gPiB0
-aGUgb25lIGJlaW5nIHBhc3NlZCB2aWEgdGhlIGRlc2NyaXB0b3IgcmluZy4gVGhhdCBvbmUgSSBi
-ZWxpZXZlIGlzCj4gPiA+IG5hdGl2ZSBvbiBib3RoIHNpZGVzLgo+ID4KPiA+IFdlbGwgcWVtdSBz
-d2FwcyBpdCBmb3IgbW9kZXJuIGRldmljZXM6Cj4gPgo+ID4gICAgICAgICB2aXJ0aW9fdHN3YXAz
-MnModmRldiwgJmlkKTsKPiA+Cj4gPiBndWVzdCBzd2FwcyBpdCB0b286Cj4gPiAgICAgICAgIHZi
-LT5jbWRfaWRfYWN0aXZlID0gY3B1X3RvX3ZpcnRpbzMyKHZiLT52ZGV2LAo+ID4gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZpcnRpb19iYWxsb29uX2NtZF9pZF9yZWNl
-aXZlZCh2YikpOwo+ID4gICAgICAgICBzZ19pbml0X29uZSgmc2csICZ2Yi0+Y21kX2lkX2FjdGl2
-ZSwgc2l6ZW9mKHZiLT5jbWRfaWRfYWN0aXZlKSk7Cj4gPiAgICAgICAgIGVyciA9IHZpcnRxdWV1
-ZV9hZGRfb3V0YnVmKHZxLCAmc2csIDEsICZ2Yi0+Y21kX2lkX2FjdGl2ZSwgR0ZQX0tFUk5FTCk7
-Cj4gPgo+ID4gU28gaXQncyBuYXRpdmUgZm9yIGxlZ2FjeS4KPiAKPiBPa2F5LCB0aGF0IG1ha2Vz
-IHNlbnNlLiBJIGp1c3Qgd2Fzbid0IGZhbWlsaWFyIHdpdGggdGhlIHZpcnRpbzMyIHR5cGUuCj4g
-Cj4gSSBndWVzcyB0aGF0IGp1c3QgbWVhbnMgd2UgbmVlZCB0byBmaXggdGhlIG9yaWdpbmFsIGlz
-c3VlIHlvdSBmb3VuZAo+IHdoZXJlIHRoZSBndWVzdCB3YXMgYXNzdW1pbmcgbmF0aXZlIGZvciB0
-aGUgY29tbWFuZCBJRCBpbiB0aGUgY29uZmlnLgo+IERvIHlvdSBwbGFuIHRvIHBhdGNoIHRoYXQg
-b3Igc2hvdWxkIEk/CgpJJ2xsIGRvIGl0LgoKCj4gPiA+ID4KPiA+ID4gPgo+ID4gPiA+Cj4gPiA+
-ID4gPiA+IC0tLQo+ID4gPiA+ID4gPiAgZHJpdmVycy92aXJ0aW8vdmlydGlvX2JhbGxvb24uYyB8
-IDkgKysrKysrKysrCj4gPiA+ID4gPiA+ICAxIGZpbGUgY2hhbmdlZCwgOSBpbnNlcnRpb25zKCsp
-Cj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpcnRpby92aXJ0
-aW9fYmFsbG9vbi5jIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX2JhbGxvb24uYwo+ID4gPiA+ID4g
-PiBpbmRleCA1ZDRiODkxYmY4NGYuLmI5YmMwMzM0NTE1NyAxMDA2NDQKPiA+ID4gPiA+ID4gLS0t
-IGEvZHJpdmVycy92aXJ0aW8vdmlydGlvX2JhbGxvb24uYwo+ID4gPiA+ID4gPiArKysgYi9kcml2
-ZXJzL3ZpcnRpby92aXJ0aW9fYmFsbG9vbi5jCj4gPiA+ID4gPiA+IEBAIC0xMTA3LDYgKzExMDcs
-MTUgQEAgc3RhdGljIGludCB2aXJ0YmFsbG9vbl9yZXN0b3JlKHN0cnVjdCB2aXJ0aW9fZGV2aWNl
-ICp2ZGV2KQo+ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiAgc3RhdGljIGludCB2aXJ0YmFsbG9vbl92
-YWxpZGF0ZShzdHJ1Y3QgdmlydGlvX2RldmljZSAqdmRldikKPiA+ID4gPiA+ID4gIHsKPiA+ID4g
-PiA+ID4gKyAgICAgICAvKgo+ID4gPiA+ID4gPiArICAgICAgICAqIExlZ2FjeSBkZXZpY2VzIG5l
-dmVyIHNwZWNpZmllZCBob3cgbW9kZXJuIGZlYXR1cmVzIHNob3VsZCBiZWhhdmUuCj4gPiA+ID4g
-PiA+ICsgICAgICAgICogRS5nLiB3aGljaCBlbmRpYW4tbmVzcyB0byB1c2U/IEJldHRlciBub3Qg
-dG8gYXNzdW1lIGFueXRoaW5nLgo+ID4gPiA+ID4gPiArICAgICAgICAqLwo+ID4gPiA+ID4gPiAr
-ICAgICAgIGlmICghdmlydGlvX2hhc19mZWF0dXJlKHZkZXYsIFZJUlRJT19GX1ZFUlNJT05fMSkp
-IHsKPiA+ID4gPiA+ID4gKyAgICAgICAgICAgICAgIF9fdmlydGlvX2NsZWFyX2JpdCh2ZGV2LCBW
-SVJUSU9fQkFMTE9PTl9GX0ZSRUVfUEFHRV9ISU5UKTsKPiA+ID4gPiA+ID4gKyAgICAgICAgICAg
-ICAgIF9fdmlydGlvX2NsZWFyX2JpdCh2ZGV2LCBWSVJUSU9fQkFMTE9PTl9GX1BBR0VfUE9JU09O
-KTsKPiA+ID4gPiA+ID4gKyAgICAgICAgICAgICAgIF9fdmlydGlvX2NsZWFyX2JpdCh2ZGV2LCBW
-SVJUSU9fQkFMTE9PTl9GX1JFUE9SVElORyk7Cj4gPiA+ID4gPiA+ICsgICAgICAgfQo+ID4gPiA+
-ID4gPiAgICAgICAgIC8qCj4gPiA+ID4gPiA+ICAgICAgICAgICogSW5mb3JtIHRoZSBoeXBlcnZp
-c29yIHRoYXQgb3VyIHBhZ2VzIGFyZSBwb2lzb25lZCBvcgo+ID4gPiA+ID4gPiAgICAgICAgICAq
-IGluaXRpYWxpemVkLiBJZiB3ZSBjYW5ub3QgZG8gdGhhdCB0aGVuIHdlIHNob3VsZCBkaXNhYmxl
-Cj4gPiA+ID4gPgo+ID4gPiA+ID4gVGhlIHBhdGNoIGNvbnRlbnQgaXRzZWxmIEkgYW0gZmluZSB3
-aXRoIHNpbmNlIG9kZHMgYXJlIG5vYm9keSB3b3VsZAo+ID4gPiA+ID4gZXhwZWN0IHRvIHVzZSB0
-aGVzZSBmZWF0dXJlcyB3aXRoIGEgbGVnYWN5IGRldmljZS4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBB
-Y2tlZC1ieTogQWxleGFuZGVyIER1eWNrIDxhbGV4YW5kZXIuaC5kdXlja0BsaW51eC5pbnRlbC5j
-b20+Cj4gPiA+ID4KPiA+ID4gPiBIbW0gc28gbm93IHlvdSBwb2ludGVkIG91dCBpdCdzIGp1c3Qg
-Y21kIGlkLCBtYXliZSBJIHNob3VsZCBqdXN0IGZpeCBpdAo+ID4gPiA+IGluc3RlYWQ/IHdoYXQg
-ZG8geW91IHNheT8KPiA+ID4KPiA+ID4gU28gdGhlIGNvbmZpZyBpc3N1ZXMgYXJlIGJ1Z3MsIGJ1
-dCBJIGRvbid0IHRoaW5rIHlvdSBzYXcgdGhlIG9uZSBJIHdhcwo+ID4gPiB0YWxraW5nIGFib3V0
-LiBJbiB0aGUgZnVuY3Rpb24gc2VuZF9jbWRfaWRfc3RhcnQgdGhlIGNtZF9pZF9hY3RpdmUKPiA+
-ID4gdmFsdWUgd2hpY2ggaXMgaW5pdGlhbGl6ZWQgYXMgYSB2aXJ0aW8zMiBpcyBhZGRlZCBhcyBh
-IHNnIGVudHJ5IGFuZAo+ID4gPiB0aGVuIHNlbnQgYXMgYW4gb3V0YnVmIHRvIHRoZSBkZXZpY2Uu
-IEknbSBhc3N1bWluZyB2aXJ0aW8zMiBpcyBhIGhvc3QKPiA+ID4gbmF0aXZlIGJ5dGUgb3JkZXJp
-bmcuCj4gPgo+ID4gSUlVQyBpdCBpc24ndCA6KSB2aXJ0aW8zMiBpcyBndWVzdCBuYXRpdmUgaWYg
-ZGV2aWNlIGlzIGxlZ2FjeSwgYW5kIExFIGlmCj4gPiBkZXZpY2UgaXMgbW9kZXJuLgo+IAo+IE9r
-YXkuIFNvIEkgc2hvdWxkIHByb2JhYmx5IGRvY3VtZW50IHRoYXQgZm9yIHRoZSBzcGVjIEkgaGF2
-ZSBiZWVuCj4gd29ya2luZyBvbi4gSXQgbG9va3MgbGlrZSB0aGVyZSBpcyBhbiBleGFtcGxlIG9m
-IHNpbWlsYXIgZG9jdW1lbnRhdGlvbgo+IGZvciB0aGUgbWVtb3J5IHN0YXRpc3RpY3Mgc28gaXQg
-c2hvdWxkIGJlIHByZXR0eSBzdHJhaWdodCBmb3J3YXJkLgo+IAo+IFRoYW5rcy4KPiAKPiAtIEFs
-ZXgKCiJndWVzdCBuYXRpdmUgaWYgZGV2aWNlIGlzIGxlZ2FjeSwgYW5kIExFIGlmIGRldmljZSBp
-cyBtb2Rlcm4iCmlzIGEgc3RhbmRhcmQgdmlydGlvIHRoaW5nLiBCYWxsb29uIGhhcyBzcGVjaWFs
-IGxhbmd1YWdlIHNheWluZwppdHMgY29uZmlnIHNwYWNlIGlzIGFsd2F5cyBMRS4KCgoyLjQuMwoK
-TGVnYWN5IEludGVyZmFjZTogQSBOb3RlIG9uIERldmljZSBDb25maWd1cmF0aW9uIFNwYWNlIGVu
-ZGlhbi1uZXNzCk5vdGUgdGhhdCBmb3IgbGVnYWN5IGludGVyZmFjZXMsIGRldmljZSBjb25maWd1
-cmF0aW9uIHNwYWNlIGlzIGdlbmVyYWxseSB0aGUgZ3Vlc3TigJlzIG5hdGl2ZSBlbmRpYW4sIHJh
-dGhlciB0aGFuClBDSeKAmXMgbGl0dGxlLWVuZGlhbi4gVGhlIGNvcnJlY3QgZW5kaWFuLW5lc3Mg
-aXMgZG9jdW1lbnRlZCBmb3IgZWFjaCBkZXZpY2UuCgoKVGhpcyBsYW5ndWFnZSBjb3VsZCB1c2Ug
-c29tZSB0d2Vha2luZzogZS5nLiAiUENJIiBoZXJlIHJlZmVycyB0byB0aGUgdGltZSB3aGVuClBD
-SSB3YXMgdGhlIG9ubHkgdHJhbnNwb3J0LiBBbmQgbW9zdCBkZXZpY2VzIGRvbid0IGRvY3VtZW50
-IGVuZGlhbm5lc3MKc28ganVzdCByZWx5IG9uIHN0YW5kYXJkIG9uZS4KCgpTaW1pbGFybHk6Cgoy
-LjYuMwoKTGVnYWN5IEludGVyZmFjZXM6IEEgTm90ZSBvbiBWaXJ0cXVldWUgRW5kaWFubmVzcwoK
-Tm90ZSB0aGF0IHdoZW4gdXNpbmcgdGhlIGxlZ2FjeSBpbnRlcmZhY2UsIHRyYW5zaXRpb25hbCBk
-ZXZpY2VzIGFuZCBkcml2ZXJzIE1VU1QgdXNlIHRoZSBuYXRpdmUgZW5kaWFuIG9mCnRoZSBndWVz
-dCBhcyB0aGUgZW5kaWFuIG9mIGZpZWxkcyBhbmQgaW4gdGhlIHZpcnRxdWV1ZS4gVGhpcyBpcyBv
-cHBvc2VkIHRvIGxpdHRsZS1lbmRpYW4gZm9yIG5vbi1sZWdhY3kgaW50ZXJmYWNlCmFzIHNwZWNp
-ZmllZCBieSB0aGlzIHN0YW5kYXJkLiBJdCBpcyBhc3N1bWVkIHRoYXQgdGhlIGhvc3QgaXMgYWxy
-ZWFkeSBhd2FyZSBvZiB0aGUgZ3Vlc3QgZW5kaWFuLgoKCkNvdWxkIHVzZSBzb21lIGxvdmUgdG9v
-LCBlLmcuIGhvc3QgLT4gZGV2aWNlLCBndWVzdCAtPiBkcml2ZXIuCgoKCi0tIApNU1QKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9u
-IG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpo
-dHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFs
-aXphdGlvbg==
+On Tue, Jul 14, 2020 at 02:08:47PM +0200, Joerg Roedel wrote:
+
+> @@ -489,6 +490,9 @@ DEFINE_IDTENTRY_RAW(exc_nmi)
+>  	this_cpu_write(nmi_cr2, read_cr2());
+>  nmi_restart:
+>  
+> +	/* Needs to happen before DR7 is accessed */
+> +	sev_es_ist_enter(regs);
+> +
+>  	this_cpu_write(nmi_dr7, local_db_save());
+>  
+>  	nmi_enter();
+> @@ -502,6 +506,8 @@ DEFINE_IDTENTRY_RAW(exc_nmi)
+>  
+>  	local_db_restore(this_cpu_read(nmi_dr7));
+>  
+> +	sev_es_ist_exit();
+> +
+>  	if (unlikely(this_cpu_read(nmi_cr2) != read_cr2()))
+>  		write_cr2(this_cpu_read(nmi_cr2));
+>  	if (this_cpu_dec_return(nmi_state))
+
+I really hate all this #VC stuff :-(
+
+So the above will make the NMI do 4 unconditional extra CALL+RET, a LOAD
+(which will potentially miss) and a compare and branch.
+
+How's that a win for normal people? Can we please turn all these
+sev_es_*() hooks into something like:
+
+DECLARE_STATIC_KEY_FALSE(sev_es_enabled_key);
+
+static __always_inline void sev_es_foo()
+{
+	if (static_branch_unlikely(&sev_es_enabled_key))
+		__sev_es_foo();
+}
+
+So that normal people will only see an extra NOP?
+
+> diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
+> index d415368f16ec..2a7cc72db1d5 100644
+> --- a/arch/x86/kernel/sev-es.c
+> +++ b/arch/x86/kernel/sev-es.c
+> @@ -78,6 +78,67 @@ static void __init sev_es_setup_vc_stacks(int cpu)
+>  	tss->x86_tss.ist[IST_INDEX_VC] = CEA_ESTACK_TOP(&cea->estacks, VC);
+>  }
+>  
+> +static bool on_vc_stack(unsigned long sp)
+
+noinstr or __always_inline
+
+> +{
+> +	return ((sp >= __this_cpu_ist_bot_va(VC)) && (sp < __this_cpu_ist_top_va(VC)));
+> +}
+> +
+> +/*
+> + * This function handles the case when an NMI or an NMI-like exception
+> + * like #DB is raised in the #VC exception handler entry code. In this
+
+I've yet to find you handle the NMI-like cases..
+
+> + * case the IST entry for VC must be adjusted, so that any subsequent VC
+> + * exception will not overwrite the stack contents of the interrupted VC
+> + * handler.
+> + *
+> + * The IST entry is adjusted unconditionally so that it can be also be
+> + * unconditionally back-adjusted in sev_es_nmi_exit(). Otherwise a
+> + * nested nmi_exit() call (#VC->NMI->#DB) may back-adjust the IST entry
+> + * too early.
+
+Is this comment accurate, I cannot find the patch touching
+nmi_enter/exit()?
+
+> + */
+> +void noinstr sev_es_ist_enter(struct pt_regs *regs)
+> +{
+> +	unsigned long old_ist, new_ist;
+> +	unsigned long *p;
+> +
+> +	if (!sev_es_active())
+> +		return;
+> +
+> +	/* Read old IST entry */
+> +	old_ist = __this_cpu_read(cpu_tss_rw.x86_tss.ist[IST_INDEX_VC]);
+> +
+> +	/* Make room on the IST stack */
+> +	if (on_vc_stack(regs->sp))
+> +		new_ist = ALIGN_DOWN(regs->sp, 8) - sizeof(old_ist);
+> +	else
+> +		new_ist = old_ist - sizeof(old_ist);
+> +
+> +	/* Store old IST entry */
+> +	p       = (unsigned long *)new_ist;
+> +	*p      = old_ist;
+> +
+> +	/* Set new IST entry */
+> +	this_cpu_write(cpu_tss_rw.x86_tss.ist[IST_INDEX_VC], new_ist);
+> +}
+> +
+> +void noinstr sev_es_ist_exit(void)
+> +{
+> +	unsigned long ist;
+> +	unsigned long *p;
+> +
+> +	if (!sev_es_active())
+> +		return;
+> +
+> +	/* Read IST entry */
+> +	ist = __this_cpu_read(cpu_tss_rw.x86_tss.ist[IST_INDEX_VC]);
+> +
+> +	if (WARN_ON(ist == __this_cpu_ist_top_va(VC)))
+> +		return;
+> +
+> +	/* Read back old IST entry and write it to the TSS */
+> +	p = (unsigned long *)ist;
+> +	this_cpu_write(cpu_tss_rw.x86_tss.ist[IST_INDEX_VC], *p);
+> +}
+
+That's pretty disguisting :-(
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
