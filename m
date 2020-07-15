@@ -1,85 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD7D42201B9
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 03:23:21 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 84E2E2201C0
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 03:23:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 5BC9120486;
-	Wed, 15 Jul 2020 01:23:20 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 338E189807;
+	Wed, 15 Jul 2020 01:23:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wssydgNVgCqv; Wed, 15 Jul 2020 01:23:18 +0000 (UTC)
+	with ESMTP id Z4MIeBqrDoTl; Wed, 15 Jul 2020 01:23:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 3AFDF2041F;
-	Wed, 15 Jul 2020 01:23:18 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B31ED8A192;
+	Wed, 15 Jul 2020 01:23:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1D588C0733;
-	Wed, 15 Jul 2020 01:23:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9ADEBC0733;
+	Wed, 15 Jul 2020 01:23:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0ABC4C0733
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0D42AC0733
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:23:17 +0000 (UTC)
+ Wed, 15 Jul 2020 01:23:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 071E989D93
+ by fraxinus.osuosl.org (Postfix) with ESMTP id F062088261
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:23:17 +0000 (UTC)
+ Wed, 15 Jul 2020 01:23:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EpnNzAqWqQrA
+ with ESMTP id W71vXyzFws1L
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:23:16 +0000 (UTC)
+ Wed, 15 Jul 2020 01:23:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
- [209.85.215.195])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 7AE4489D24
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+ [209.85.215.196])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 7A5F987FB9
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:23:16 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id g67so863352pgc.8
+ Wed, 15 Jul 2020 01:23:49 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id p3so877863pgh.3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 18:23:16 -0700 (PDT)
+ Tue, 14 Jul 2020 18:23:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=NT375/NWnBuLf4KzmogX9uCvmnJa241H/PijGYCo0Rk=;
- b=bimL89L0BNwd4ir3o2j2V/AyCZ2jVBpqFkU8fi/kDsbmwoDWfcozJeb3xUXgm++f9+
- 1U8Y1/W2AS591JgD3TETxDCp/+qzMH2RffI2AGu37PYQLqP9cI6PXEVdUuxRX36GauNw
- dKzr1hUEyzapgzl8H0hVFH+9sUvWDXwzCjRLA=
+ bh=AtJMt5D7K9C8ql3zYlKfD8mfXyjKfGo9YIHofl3GNr8=;
+ b=i6mXzKcIDfBhhNQRvvLg/C5UGIuMlqAh1ph4H7eqkHJDr7PuMbMBuSDLs83TP38yNB
+ bTsbdAYiN8TVCvUTf3i2k44uwugHJxge/2LYPfWuuLuZ5XRPEeLUIzXPA7TaZAK1f0EG
+ p+aeuoS5JQmDj4VQ5zoywN6JsJUFdTahr99K8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=NT375/NWnBuLf4KzmogX9uCvmnJa241H/PijGYCo0Rk=;
- b=jk4S+TM6AFjCnP2U1fyDuXBNGzi+OlmMR0PXihbTy0p+FrgQSr7pj4EMVkg3g+yGAJ
- agRuKhGsIWW77eRfd+y6x1oUI65K39Q/M0YdzBMfjUEzcR2j8UplOCDpFiV/P0kYoAVy
- P6j3WiWVyLYozv+K+XVIRIoTYUGo9Cj/bGLfO7KJ0w+MAaUjCaLHYTYeL8p+tChmLtBH
- yM6C0GPisH9Oc1CxmdftrD0546rmH8qUbuCuDOVXhwEstVOk2mf/19PHACL7eGcgZM19
- ZLpDfU5Ib1WCN/tohV3LXaqnHRIrAGPMKPoZM0pyQIA+f19OgRaqYWl9cW1mDsFRmjOs
- nJDw==
-X-Gm-Message-State: AOAM531M1ckOQiaKHaJBpWxxsIB2Gr5YZuBWezmfM8jloyiX0I+y54H2
- BBztE61JzkIiN9tggvKDVWzMzw==
-X-Google-Smtp-Source: ABdhPJzfbFkAdUV1tVZNSCYI/nTLerjov6WaHg2IDFRE3YJozMZNUHsxrGh7aJib+qaIcupcJ1NajA==
-X-Received: by 2002:a63:405:: with SMTP id 5mr5473617pge.449.1594776196084;
- Tue, 14 Jul 2020 18:23:16 -0700 (PDT)
+ bh=AtJMt5D7K9C8ql3zYlKfD8mfXyjKfGo9YIHofl3GNr8=;
+ b=Y98fjiK/9xBoa4aTqxJ1/4/Mp9IPBcGWdSjtvkELGkQctjLkX5apMo+u7B+FlEXmZ4
+ jeNMrqXJ0/QURqIuAIQLSd/4L7vsBmkg32OO3xJHKS04ZBHGGMxSm7UdKjuAeT1RWmEp
+ U7WPNAMbW0f00UvD3eecrxmvyZrvXO/+M3IsTB/BYnpK9UFEVZoOnwHFmiiWowUAOfF7
+ gEZC0P9GatwWe8ODJGbJz+prJwxKfpC24On7bAxE2gXmjga/YCNJhbl2dHlP/HWdU3Zp
+ 9wAGAlV6ZWOoFxvxgts3RwmavJYZjjleFV4WOO/nFj90akbZMWqUBet34nvZXm/K9cTk
+ DQvQ==
+X-Gm-Message-State: AOAM532gcanNbHcn0bq7vbngkAj5XJnP0LzfI6bfFynYKOnQ9zoyiAT1
+ jb6fEcFbHXh45ayVb5p4TvkjPg==
+X-Google-Smtp-Source: ABdhPJyIl+WxpdHetqRs0iY1NDJGKOEkmNO3iE3VMFuHcXkxfBCWMMImxc6uFhuMgMteLTrgR+OaPg==
+X-Received: by 2002:a05:6a00:2bc:: with SMTP id
+ q28mr6683696pfs.250.1594776229062; 
+ Tue, 14 Jul 2020 18:23:49 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id d4sm306378pgf.9.2020.07.14.18.23.14
+ by smtp.gmail.com with ESMTPSA id m3sm325734pfk.171.2020.07.14.18.23.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2020 18:23:15 -0700 (PDT)
-Date: Tue, 14 Jul 2020 18:23:14 -0700
+ Tue, 14 Jul 2020 18:23:48 -0700 (PDT)
+Date: Tue, 14 Jul 2020 18:23:47 -0700
 From: Kees Cook <keescook@chromium.org>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v4 13/75] x86/boot/compressed/64: Rename kaslr_64.c to
- ident_map_64.c
-Message-ID: <202007141823.65F31DE0@keescook>
+Subject: Re: [PATCH v4 15/75] x86/boot/compressed/64: Always switch to own
+ page-table
+Message-ID: <202007141823.326D9DC102@keescook>
 References: <20200714120917.11253-1-joro@8bytes.org>
- <20200714120917.11253-14-joro@8bytes.org>
+ <20200714120917.11253-16-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200714120917.11253-14-joro@8bytes.org>
+In-Reply-To: <20200714120917.11253-16-joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
  kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
@@ -107,11 +108,20 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jul 14, 2020 at 02:08:15PM +0200, Joerg Roedel wrote:
+On Tue, Jul 14, 2020 at 02:08:17PM +0200, Joerg Roedel wrote:
 > From: Joerg Roedel <jroedel@suse.de>
 > 
-> The file contains only code related to identity mapped page-tables.
-> Rename the file and compile it always in.
+> When booted through startup_64 the kernel keeps running on the EFI
+> page-table until the KASLR code sets up its own page-table. Without
+> KASLR the pre-decompression boot code never switches off the EFI
+> page-table. Change that by unconditionally switching to a kernel
+> controlled page-table after relocation.
+> 
+> This makes sure we can make changes to the mapping when necessary, for
+> example map pages unencrypted in SEV and SEV-ES guests.
+> 
+> Also remove the debug_putstr() calls in initialize_identity_maps()
+> because the function now runs before console_init() is called.
 > 
 > Signed-off-by: Joerg Roedel <jroedel@suse.de>
 
