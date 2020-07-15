@@ -1,78 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99F3A221328
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 19:06:08 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 381A7221573
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 21:49:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 7019325067;
-	Wed, 15 Jul 2020 17:06:06 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DBB3188C69;
+	Wed, 15 Jul 2020 19:49:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yJBKZhZbQh0N; Wed, 15 Jul 2020 17:06:03 +0000 (UTC)
+	with ESMTP id avbMjDV2jUVB; Wed, 15 Jul 2020 19:49:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id A479B204C3;
-	Wed, 15 Jul 2020 17:06:03 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4B51288C59;
+	Wed, 15 Jul 2020 19:49:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 88BDEC08A5;
-	Wed, 15 Jul 2020 17:06:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2B178C0733;
+	Wed, 15 Jul 2020 19:49:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5E763C0733;
- Wed, 15 Jul 2020 17:06:02 +0000 (UTC)
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1BAD8C0733
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Jul 2020 19:49:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 4C9098891B;
- Wed, 15 Jul 2020 17:06:02 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 0DFAE89D23
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Jul 2020 19:49:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7VxAeuq8vaYs; Wed, 15 Jul 2020 17:06:01 +0000 (UTC)
+ with ESMTP id o8shKQeQsj-g
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Jul 2020 19:49:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id BAAD18890F;
- Wed, 15 Jul 2020 17:06:01 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0D53F2065E;
- Wed, 15 Jul 2020 17:06:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594832761;
- bh=MVQs60eyaseKttygMi5Okmio5UqpxovjpBaGYM2KopU=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=CBPLDZ0a2kofL5+ir7rsYDlbbpzpSFpGzRjY5GXtgxKoOkAVo9rx/IXw2nZaAg6FP
- 0PGoTpRFSOeEWLcCxLE4J3D3xFoVDU+sXxptoew5BleNGM0IN0YcxXbu+SlhudGRTe
- VCtmQZUU53N6u7CQ+nguMHVqQdrr4STCBfllpVWM=
-Date: Wed, 15 Jul 2020 10:06:00 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
-In-Reply-To: <20200711144334-mutt-send-email-mst@kernel.org>
-Message-ID: <alpine.DEB.2.21.2007151001140.4124@sstabellini-ThinkPad-T480s>
-References: <20200624163940-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
- <20200624181026-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
- <20200626110629-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2006291621300.8121@sstabellini-ThinkPad-T480s>
- <20200701133456.GA23888@infradead.org>
- <alpine.DEB.2.21.2007011020320.8121@sstabellini-ThinkPad-T480s>
- <20200701172219-mutt-send-email-mst@kernel.org>
- <alpine.DEB.2.21.2007101019340.4124@sstabellini-ThinkPad-T480s>
- <20200711144334-mutt-send-email-mst@kernel.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+ [209.85.216.68])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 79AC589D21
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Jul 2020 19:49:25 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id gc9so3593856pjb.2
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Jul 2020 12:49:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=yppoieqawtommMNv7F4xEsaylvTK3ZvGj7dcQjgO2TY=;
+ b=j2qfngMt1we3l0IhZifI4twKJ3j3kBQ/HIpn7YZ5j2qvGCpY3D4CxXVvbwFlxonJnk
+ 6FWAS/JQzC3Vr2RY57kmgM9BiR+ZrBL3UMBVX0Dg1AEdjzFvwUMCdolO9hvbOeEsYa6u
+ jBGIyYHDqd0rQYUMQHt3Rxit3HX4mUF8GqeNY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=yppoieqawtommMNv7F4xEsaylvTK3ZvGj7dcQjgO2TY=;
+ b=Lq1RjTZHJ+THsDGWCA7qE9wT402x3oG5/ja9izcQRMELVG8JtKXyeAfHomwlgTNhpu
+ RXsTunV3sBtJakqmgXY6SgGamQo8EMsRwiNNedRcDU84O7+jFAOgWKAvA9UScYDoB8vC
+ 7xmbLErtPMZ+be+fwGxOrQhmgtnynCneI7riPfQ1sxWj3ZgGyCnp1cSPOWzN+NpJyXln
+ dM/lQih0kBNgRyQCDIPV1SHSyO/NQ7CneYYSU1e49KCyFmh8p5NC4oXMiDdpP/2+kO8Z
+ 82ptnW3TCkF/hhce00Re5k9OBHshqGmNYadHHkZjEsaJQCX/UXPjc/Ke8RhSM2WPm18n
+ 3htA==
+X-Gm-Message-State: AOAM5320LojTLq/N9Ymb4+7oaDUAlvdZwWhLdYP2mEaF9pYe3AbZGzeM
+ b01p6D6Dp0mJqsK8XH5nlWaW8Q==
+X-Google-Smtp-Source: ABdhPJxvA58SlKkMWKAljrVfZntLrDAODkXc0OEIDnErZntti/oMHX7TUTMJUyPo0nAVuQc7dj8q2g==
+X-Received: by 2002:a17:902:8c91:: with SMTP id
+ t17mr825746plo.235.1594842565095; 
+ Wed, 15 Jul 2020 12:49:25 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id g7sm2685716pfh.210.2020.07.15.12.49.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Jul 2020 12:49:24 -0700 (PDT)
+Date: Wed, 15 Jul 2020 12:49:23 -0700
+From: Kees Cook <keescook@chromium.org>
+To: Joerg Roedel <jroedel@suse.de>
+Subject: Re: [PATCH v4 70/75] x86/head/64: Don't call verify_cpu() on
+ starting APs
+Message-ID: <202007151244.315DCBAE@keescook>
+References: <20200714120917.11253-1-joro@8bytes.org>
+ <20200714120917.11253-71-joro@8bytes.org>
+ <202007141837.2B93BBD78@keescook> <20200715092638.GJ16200@suse.de>
+ <202007150815.A81E879@keescook> <20200715154856.GA24822@suse.de>
 MIME-Version: 1.0
-Cc: jgross@suse.com, Peng Fan <peng.fan@nxp.com>,
- Stefano Stabellini <sstabellini@kernel.org>, konrad.wilk@oracle.com,
- x86@kernel.org, linux-kernel@vger.kernel.org,
+Content-Disposition: inline
+In-Reply-To: <20200715154856.GA24822@suse.de>
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
+ kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Cfir Cohen <cfir@google.com>, Joerg Roedel <joro@8bytes.org>, x86@kernel.org,
+ linux-kernel@vger.kernel.org,
+ Sean Christopherson <sean.j.christopherson@intel.com>,
  virtualization@lists.linux-foundation.org,
- Christoph Hellwig <hch@infradead.org>, iommu@lists.linux-foundation.org,
- linux-imx@nxp.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
- linux-arm-kernel@lists.infradead.org
+ Martin Radev <martin.b.radev@gmail.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,44 +111,22 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sat, 11 Jul 2020, Michael S. Tsirkin wrote:
-> On Fri, Jul 10, 2020 at 10:23:22AM -0700, Stefano Stabellini wrote:
-> > Sorry for the late reply -- a couple of conferences kept me busy.
-> > 
-> > 
-> > On Wed, 1 Jul 2020, Michael S. Tsirkin wrote:
-> > > On Wed, Jul 01, 2020 at 10:34:53AM -0700, Stefano Stabellini wrote:
-> > > > Would you be in favor of a more flexible check along the lines of the
-> > > > one proposed in the patch that started this thread:
-> > > > 
-> > > >     if (xen_vring_use_dma())
-> > > >             return true;
-> > > > 
-> > > > 
-> > > > xen_vring_use_dma would be implemented so that it returns true when
-> > > > xen_swiotlb is required and false otherwise.
-> > > 
-> > > Just to stress - with a patch like this virtio can *still* use DMA API
-> > > if PLATFORM_ACCESS is set. So if DMA API is broken on some platforms
-> > > as you seem to be saying, you guys should fix it before doing something
-> > > like this..
-> > 
-> > Yes, DMA API is broken with some interfaces (specifically: rpmesg and
-> > trusty), but for them PLATFORM_ACCESS is never set. That is why the
-> > errors weren't reported before. Xen special case aside, there is no
-> > problem under normal circumstances.
-> 
-> So why not fix DMA API? Then this patch is not needed.
+On Wed, Jul 15, 2020 at 05:48:56PM +0200, Joerg Roedel wrote:
+> It is actually the CPUID instructions that cause #VC exceptions. The
+> MSRs that are accessed on AMD processors are not intercepted in the
+> hypervisors this code has been tested on, so these will not cause #VC
+> exceptions.
 
-It looks like the conversation is going in circles :-)
+Aaah. I see. Thanks for the details there. So ... can you add a bunch
+more comments about why/when the new entry path is being used? I really
+don't want to accidentally discover some unrelated refactoring down
+the road (in months, years, unrelated to SEV, etc) starts to also skip
+verify_cpu() on Intel systems. There had been a lot of BIOSes that set
+this MSR to disable NX, and I don't want to repeat that pain: Linux must
+never start an Intel CPU with that MSR set. :P
 
-I tried to explain the reason why, even if we fixed the DMA API to work
-with rpmesg and trusty, we still need this patch with the following
-email:  https://marc.info/?l=linux-kernel&m=159347446709625&w=2
-
-
-At that time it looked like you agreed that we needed to improve this
-check?  (https://marc.info/?l=linux-kernel&m=159363662418250&w=2)
+-- 
+Kees Cook
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
