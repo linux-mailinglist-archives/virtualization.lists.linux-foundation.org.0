@@ -1,83 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF59E220E62
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 15:44:18 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D26EA220E93
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 15:58:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 32D1F8ADF9;
-	Wed, 15 Jul 2020 13:44:17 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 77DC520460;
+	Wed, 15 Jul 2020 13:58:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id prDL9dvium4A; Wed, 15 Jul 2020 13:44:16 +0000 (UTC)
+	with ESMTP id uEPr7dgPui6g; Wed, 15 Jul 2020 13:58:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A45588AE41;
-	Wed, 15 Jul 2020 13:44:16 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3F0DC226CF;
+	Wed, 15 Jul 2020 13:58:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 725C5C0733;
-	Wed, 15 Jul 2020 13:44:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2A310C0733;
+	Wed, 15 Jul 2020 13:58:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EFB7FC0733
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8DB9BC0733
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 13:44:14 +0000 (UTC)
+ Wed, 15 Jul 2020 13:58:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id DF27081C8D
+ by hemlock.osuosl.org (Postfix) with ESMTP id 801128ADAE
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 13:44:14 +0000 (UTC)
+ Wed, 15 Jul 2020 13:58:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VknKs2-9RVom
+ with ESMTP id wy3T4jG1+RQr
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 13:44:14 +0000 (UTC)
+ Wed, 15 Jul 2020 13:58:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 016CF8077F
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 8AF8A8ADAD
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 13:44:13 +0000 (UTC)
+ Wed, 15 Jul 2020 13:58:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594820652;
+ s=mimecast20190719; t=1594821494;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=V8KfLaWJHj6Y1OsyGGHKMqQxSStqbhxCI0TTzkwPyUk=;
- b=IKYY/7bBfNoZ74aVCgrf42Cef6KxzkLM9KKKy/niEAiOgq1z5TgvFDaX10l3SW4gc6jqre
- Mn3g3yeYWJRWfvdyXK0IX7t0ILBhu0iQVLKLGVR4k+2bPzshvur0dkAyTZxxAVjtM9HvMB
- F4LMvaAuhFoItzS8JQdRHRwCPeXxaCo=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-276-BIX9PabbOfakh4mznntczw-1; Wed, 15 Jul 2020 09:44:10 -0400
-X-MC-Unique: BIX9PabbOfakh4mznntczw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 64B41800EB6;
- Wed, 15 Jul 2020 13:44:09 +0000 (UTC)
-Received: from [10.72.13.230] (ovpn-13-230.pek2.redhat.com [10.72.13.230])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5698372E53;
- Wed, 15 Jul 2020 13:43:57 +0000 (UTC)
-Subject: Re: [PATCH 0/7] *** IRQ offloading for vDPA ***
-To: Zhu Lingshan <lingshan.zhu@intel.com>, mst@redhat.com,
- alex.williamson@redhat.com, pbonzini@redhat.com,
- sean.j.christopherson@intel.com, wanpengli@tencent.com
-References: <1594565524-3394-1-git-send-email-lingshan.zhu@intel.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <70244d80-08a4-da91-3226-7bfd2019467e@redhat.com>
-Date: Wed, 15 Jul 2020 21:43:56 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=lNYAB5WtdpHZtbrXZUY3IMkmV+ZQSuZpS3mId26/pIw=;
+ b=hsSRX7deygPFlhMM3/yvqUAXnoWU9xkuSD7yXYpV0xpvErcqlmqdIqvehkRyIX4MnmJIF6
+ wLLgw1aB73wd8cAmkudi+0r9wMN/jOEfZ5NYhu7Xk99eQoxhIchqU5obgOhgcYuKAU/zcJ
+ 98JJns2p6hVrubdZLdbKblPGaxItpFA=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-493-q1G-upctO22Nnc7Gf4u0xQ-1; Wed, 15 Jul 2020 09:58:12 -0400
+X-MC-Unique: q1G-upctO22Nnc7Gf4u0xQ-1
+Received: by mail-wr1-f71.google.com with SMTP id b8so1418252wro.19
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Jul 2020 06:58:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition;
+ bh=lNYAB5WtdpHZtbrXZUY3IMkmV+ZQSuZpS3mId26/pIw=;
+ b=ZslVC6/BYHjgy4SiJUqAmhudJFT5sLsN+qmOIh0i26OQH2/5eOuJ4N3v/0aty4OcJR
+ ZUAsqBvWcKAn/VCafUHEt8h37Vo1rLVxvs2PtHBNbxVpkCVvqJ0gKhnFWbHSJ8n6A5ne
+ BFeumNWB5iJfcI+B5GMrcGLYL0SAzmxTE9saHIVGDOshz1W3x1vN5YcAWzfTSAzlRzfi
+ O1881wiI4arWdcbGrt9ROfh2SY7LapDsGorOSfOw/041hrnHRjlCC4DycmFnDbr2mbus
+ 0lsrblHPs2kBvhVyShZg+qvVzEyhq22F6S+fy4UEVYyMt6tpXwTNCm+JQ+7Pl9GLF54L
+ fvEA==
+X-Gm-Message-State: AOAM5336SIpZw6d26HCc4D8WB7Es/mgFIddDgHz49T4tLEaIvaon+RUM
+ HVSzuoRFselZcaasqVfJqbElRjSozL5dlogOCNU5P/RT5geYqhKu1tCv5eRF+bEmvC47CiXkZLw
+ tOz2w/sADLmCNxJXUFd2W6w24FY1gfyOHHku5SNVXmQ==
+X-Received: by 2002:adf:b608:: with SMTP id f8mr12310156wre.363.1594821491433; 
+ Wed, 15 Jul 2020 06:58:11 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyENFqiva68rgsrhrT1+9cBPKB/7ZYwnr1uTs81wgO+SSDgSYBiKi/nQWV/DVHlvr0G2ndfSA==
+X-Received: by 2002:adf:b608:: with SMTP id f8mr12310142wre.363.1594821491254; 
+ Wed, 15 Jul 2020 06:58:11 -0700 (PDT)
+Received: from redhat.com (bzq-79-180-10-140.red.bezeqint.net. [79.180.10.140])
+ by smtp.gmail.com with ESMTPSA id a15sm3956429wrh.54.2020.07.15.06.58.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Jul 2020 06:58:10 -0700 (PDT)
+Date: Wed, 15 Jul 2020 09:58:08 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH RFC don't apply] vdpa_sim: endian-ness for config space
+Message-ID: <20200715135540.22832-1-mst@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <1594565524-3394-1-git-send-email-lingshan.zhu@intel.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: netdev@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,49 +100,77 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNy8xMiDkuIvljYgxMDo1MiwgWmh1IExpbmdzaGFuIHdyb3RlOgo+IEhpIEFsbCwK
-Pgo+IFRoaXMgc2VyaWVzIGludGVuZHMgdG8gaW1wbGVtZW50IElSUSBvZmZsb2FkaW5nIGZvcgo+
-IHZob3N0X3ZkcGEuCj4KPiBCeSB0aGUgZmVhdCBvZiBpcnEgZm9yd2FyZGluZyBmYWNpbGl0aWVz
-IGxpa2UgcG9zdGVkCj4gaW50ZXJydXB0IG9uIFg4NiwgaXJxIGJ5cGFzcyBjYW4gIGhlbHAgZGVs
-aXZlcgo+IGludGVycnVwdHMgdG8gdkNQVSBkaXJlY3RseS4KPgo+IHZEUEEgZGV2aWNlcyBoYXZl
-IGRlZGljYXRlZCBoYXJkd2FyZSBiYWNrZW5kcyBsaWtlIFZGSU8KPiBwYXNzLXRocm91Z2hlZCBk
-ZXZpY2VzLiBTbyBpdCB3b3VsZCBiZSBwb3NzaWJsZSB0byBzZXR1cAo+IGlycSBvZmZsb2FkaW5n
-KGlycSBieXBhc3MpIGZvciB2RFBBIGRldmljZXMgYW5kIGdhaW4KPiBwZXJmb3JtYW5jZSBpbXBy
-b3ZlbWVudHMuCj4KPiBJbiBteSB0ZXN0aW5nLCB3aXRoIHRoaXMgZmVhdHVyZSwgd2UgY2FuIHNh
-dmUgMC4xbXMKPiBpbiBhIHBpbmcgYmV0d2VlbiB0d28gVkZzIG9uIGF2ZXJhZ2UuCgoKSGkgTGlu
-Z3NoYW46CgpEdXJpbmcgdGhlIHZpcnRpby1uZXR3b3JraW5nIG1lZXRpbmcsIE1pY2hhZWwgc3Bv
-dHMgdHdvIHBvc3NpYmxlIGlzc3VlczoKCjEpIGRvIHdlIG5lZWQgYW4gbmV3IHVBUEkgdG8gc3Rv
-cCB0aGUgaXJxIG9mZmxvYWRpbmc/CjIpIGNhbiBpbnRlcnJ1cHQgbG9zdCBkdXJpbmcgdGhlIGV2
-ZW50ZmQgY3R4PwoKRm9yIDEpIEkgdGhpbmsgd2UgcHJvYmFibHkgbm90LCB3ZSBjYW4gYWxsb2Nh
-dGUgYW4gaW5kZXBlbmRlbnQgZXZlbnRmZCAKd2hpY2ggZG9lcyBub3QgbWFwIHRvIE1TSVguIFNv
-IHRoZSBjb25zdW1lciBjYW4ndCBtYXRjaCB0aGUgcHJvZHVjZXIgYW5kIAp3ZSBmYWxsYmFjayB0
-byBldmVudGZkIGJhc2VkIGlycS4KRm9yIDIpIGl0IGxvb2tzIHRvIG1lIGd1ZXN0IHNob3VsZCBk
-ZWFsIHdpdGggdGhlIGlycSBzeW5jaHJvbml6YXRpb24gCndoZW4gbWFzayBvciB1bm1hc2sgTVNJ
-WCB2ZWN0b3JzLgoKV2hhdCdzIHlvdXIgdGhvdWdodD8KClRoYW5rcwoKCj4KPgo+IFpodSBMaW5n
-c2hhbiAoNyk6Cj4gICAgdmhvc3Q6IGludHJvZHVjZSB2aG9zdF9jYWxsX2N0eAo+ICAgIGt2bS92
-ZmlvOiBkZXRlY3QgYXNzaWduZWQgZGV2aWNlIHZpYSBpcnFieXBhc3MgbWFuYWdlcgo+ICAgIHZo
-b3N0X3ZkcGE6IGltcGxlbWVudCBJUlEgb2ZmbG9hZGluZyBmdW5jdGlvbnMgaW4gdmhvc3RfdmRw
-YQo+ICAgIHZEUEE6IGltcGxlbWVudCBJUlEgb2ZmbG9hZGluZyBoZWxwZXJzIGluIHZEUEEgY29y
-ZQo+ICAgIHZpcnRpb192ZHBhOiBpbml0IElSUSBvZmZsb2FkaW5nIGZ1bmN0aW9uIHBvaW50ZXJz
-IHRvIE5VTEwuCj4gICAgaWZjdmY6IHJlcGxhY2UgaXJxX3JlcXVlc3QvZnJlZSB3aXRoIGhlbHBl
-cnMgaW4gdkRQQSBjb3JlLgo+ICAgIGlycWJ5cGFzczogZG8gbm90IHN0YXJ0IGNvbnN1bWVyIG9y
-IHByb2R1Y2VyIHdoZW4gZmFpbGVkIHRvIGNvbm5lY3QKPgo+ICAgYXJjaC94ODYva3ZtL3g4Ni5j
-ICAgICAgICAgICAgICB8IDEwICsrKystLQo+ICAgZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX21h
-aW4uYyB8IDExICsrKy0tLQo+ICAgZHJpdmVycy92ZHBhL3ZkcGEuYyAgICAgICAgICAgICB8IDQ2
-ICsrKysrKysrKysrKysrKysrKysrKysrKysKPiAgIGRyaXZlcnMvdmhvc3QvS2NvbmZpZyAgICAg
-ICAgICAgfCAgMSArCj4gICBkcml2ZXJzL3Zob3N0L3ZkcGEuYyAgICAgICAgICAgIHwgNzUgKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0KPiAgIGRyaXZlcnMvdmhvc3Qv
-dmhvc3QuYyAgICAgICAgICAgfCAyMiArKysrKysrKy0tLS0KPiAgIGRyaXZlcnMvdmhvc3Qvdmhv
-c3QuaCAgICAgICAgICAgfCAgOSArKysrLQo+ICAgZHJpdmVycy92aXJ0aW8vdmlydGlvX3ZkcGEu
-YyAgICB8ICAyICsrCj4gICBpbmNsdWRlL2xpbnV4L3ZkcGEuaCAgICAgICAgICAgIHwgMTEgKysr
-KysrCj4gICB2aXJ0L2t2bS92ZmlvLmMgICAgICAgICAgICAgICAgIHwgIDIgLS0KPiAgIHZpcnQv
-bGliL2lycWJ5cGFzcy5jICAgICAgICAgICAgfCAxNiArKysrKy0tLS0KPiAgIDExIGZpbGVzIGNo
-YW5nZWQsIDE4MSBpbnNlcnRpb25zKCspLCAyNCBkZWxldGlvbnMoLSkKPgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGlu
-ZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8v
-bGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+VDPA sim stores config space as native endian, but that
+is wrong: modern guests expect LE.
+I coded up the following to fix it up, but it is wrong too:
+vdpasim_create is called before guest features are known.
+
+So what should we do? New ioctl to specify the interface used?
+More ideas?
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+
+---
+ drivers/vdpa/vdpa_sim/vdpa_sim.c | 22 ++++++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+index a9bc5e0fb353..cc754ae0ec15 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+@@ -24,6 +24,7 @@
+ #include <linux/etherdevice.h>
+ #include <linux/vringh.h>
+ #include <linux/vdpa.h>
++#include <linux/virtio_byteorder.h>
+ #include <linux/vhost_iotlb.h>
+ #include <uapi/linux/virtio_config.h>
+ #include <uapi/linux/virtio_net.h>
+@@ -72,6 +73,23 @@ struct vdpasim {
+ 	u64 features;
+ };
+ 
++/* TODO: cross-endian support */
++static inline bool vdpasim_is_little_endian(struct vdpasim *vdpasim)
++{
++	return virtio_legacy_is_little_endian() ||
++		(vdpasim->features & (1ULL << VIRTIO_F_VERSION_1));
++}
++
++static inline u16 vdpasim16_to_cpu(struct vdpasim *vdpasim, __virtio16 val)
++{
++	return __virtio16_to_cpu(vdpasim_is_little_endian(vdpasim), val);
++}
++
++static inline __virtio16 cpu_to_vdpasim16(struct vdpasim *vdpasim, u16 val)
++{
++	return __cpu_to_virtio16(vdpasim_is_little_endian(vdpasim), val);
++}
++
+ static struct vdpasim *vdpasim_dev;
+ 
+ static struct vdpasim *vdpa_to_sim(struct vdpa_device *vdpa)
+@@ -332,8 +350,8 @@ static struct vdpasim *vdpasim_create(void)
+ 		goto err_iommu;
+ 
+ 	config = &vdpasim->config;
+-	config->mtu = 1500;
+-	config->status = VIRTIO_NET_S_LINK_UP;
++	config->mtu = cpu_to_vdpasim16(vdpasim, 1500);
++	config->status = cpu_to_vdpasim16(vdpasim, VIRTIO_NET_S_LINK_UP);
+ 	eth_random_addr(config->mac);
+ 
+ 	vringh_set_iotlb(&vdpasim->vqs[0].vring, vdpasim->iommu);
+-- 
+MST
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
