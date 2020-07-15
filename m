@@ -1,72 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC68422126E
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 18:34:55 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99F3A221328
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 19:06:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1B2FA8876A;
-	Wed, 15 Jul 2020 16:34:54 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7019325067;
+	Wed, 15 Jul 2020 17:06:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id i25IQQFvWO9H; Wed, 15 Jul 2020 16:34:53 +0000 (UTC)
+	with ESMTP id yJBKZhZbQh0N; Wed, 15 Jul 2020 17:06:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 002BC88783;
-	Wed, 15 Jul 2020 16:34:52 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A479B204C3;
+	Wed, 15 Jul 2020 17:06:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CBDC6C0733;
-	Wed, 15 Jul 2020 16:34:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 88BDEC08A5;
+	Wed, 15 Jul 2020 17:06:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 747B0C0733
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 16:34:51 +0000 (UTC)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5E763C0733;
+ Wed, 15 Jul 2020 17:06:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 6ED6E8876A
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 16:34:51 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4C9098891B;
+ Wed, 15 Jul 2020 17:06:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lk63WxG2M1zi
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 16:34:50 +0000 (UTC)
+ with ESMTP id 7VxAeuq8vaYs; Wed, 15 Jul 2020 17:06:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by hemlock.osuosl.org (Postfix) with ESMTPS id B7586883E1
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 16:34:50 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 89EA3AF83;
- Wed, 15 Jul 2020 16:34:52 +0000 (UTC)
-Date: Wed, 15 Jul 2020 18:34:47 +0200
-From: Joerg Roedel <jroedel@suse.de>
-To: Kees Cook <keescook@chromium.org>
-Subject: Re: [PATCH v4 34/75] x86/head/64: Build k/head64.c with
- -fno-stack-protector
-Message-ID: <20200715163446.GB24822@suse.de>
-References: <20200714120917.11253-1-joro@8bytes.org>
- <20200714120917.11253-35-joro@8bytes.org>
- <202007141831.F3165F22@keescook>
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id BAAD18890F;
+ Wed, 15 Jul 2020 17:06:01 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0D53F2065E;
+ Wed, 15 Jul 2020 17:06:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1594832761;
+ bh=MVQs60eyaseKttygMi5Okmio5UqpxovjpBaGYM2KopU=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=CBPLDZ0a2kofL5+ir7rsYDlbbpzpSFpGzRjY5GXtgxKoOkAVo9rx/IXw2nZaAg6FP
+ 0PGoTpRFSOeEWLcCxLE4J3D3xFoVDU+sXxptoew5BleNGM0IN0YcxXbu+SlhudGRTe
+ VCtmQZUU53N6u7CQ+nguMHVqQdrr4STCBfllpVWM=
+Date: Wed, 15 Jul 2020 10:06:00 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH] xen: introduce xen_vring_use_dma
+In-Reply-To: <20200711144334-mutt-send-email-mst@kernel.org>
+Message-ID: <alpine.DEB.2.21.2007151001140.4124@sstabellini-ThinkPad-T480s>
+References: <20200624163940-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006241351430.8121@sstabellini-ThinkPad-T480s>
+ <20200624181026-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006251014230.8121@sstabellini-ThinkPad-T480s>
+ <20200626110629-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2006291621300.8121@sstabellini-ThinkPad-T480s>
+ <20200701133456.GA23888@infradead.org>
+ <alpine.DEB.2.21.2007011020320.8121@sstabellini-ThinkPad-T480s>
+ <20200701172219-mutt-send-email-mst@kernel.org>
+ <alpine.DEB.2.21.2007101019340.4124@sstabellini-ThinkPad-T480s>
+ <20200711144334-mutt-send-email-mst@kernel.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <202007141831.F3165F22@keescook>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- Cfir Cohen <cfir@google.com>, Joerg Roedel <joro@8bytes.org>, x86@kernel.org,
- linux-kernel@vger.kernel.org,
- Sean Christopherson <sean.j.christopherson@intel.com>,
+Cc: jgross@suse.com, Peng Fan <peng.fan@nxp.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, konrad.wilk@oracle.com,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org,
- Martin Radev <martin.b.radev@gmail.com>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+ Christoph Hellwig <hch@infradead.org>, iommu@lists.linux-foundation.org,
+ linux-imx@nxp.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,37 +89,44 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jul 14, 2020 at 06:34:24PM -0700, Kees Cook wrote:
-> On Tue, Jul 14, 2020 at 02:08:36PM +0200, Joerg Roedel wrote:
-> > +# make sure head64.c is built without stack protector
-> > +nostackp := $(call cc-option, -fno-stack-protector)
-> > +CFLAGS_head64.o		:= $(nostackp)
+On Sat, 11 Jul 2020, Michael S. Tsirkin wrote:
+> On Fri, Jul 10, 2020 at 10:23:22AM -0700, Stefano Stabellini wrote:
+> > Sorry for the late reply -- a couple of conferences kept me busy.
+> > 
+> > 
+> > On Wed, 1 Jul 2020, Michael S. Tsirkin wrote:
+> > > On Wed, Jul 01, 2020 at 10:34:53AM -0700, Stefano Stabellini wrote:
+> > > > Would you be in favor of a more flexible check along the lines of the
+> > > > one proposed in the patch that started this thread:
+> > > > 
+> > > >     if (xen_vring_use_dma())
+> > > >             return true;
+> > > > 
+> > > > 
+> > > > xen_vring_use_dma would be implemented so that it returns true when
+> > > > xen_swiotlb is required and false otherwise.
+> > > 
+> > > Just to stress - with a patch like this virtio can *still* use DMA API
+> > > if PLATFORM_ACCESS is set. So if DMA API is broken on some platforms
+> > > as you seem to be saying, you guys should fix it before doing something
+> > > like this..
+> > 
+> > Yes, DMA API is broken with some interfaces (specifically: rpmesg and
+> > trusty), but for them PLATFORM_ACCESS is never set. That is why the
+> > errors weren't reported before. Xen special case aside, there is no
+> > problem under normal circumstances.
 > 
-> Recent refactoring[1] for stack protector suggests this should just
-> unconditionally be:
-> 
-> CFLAGS_head64.o			+= -fno-stack-protector
-> 
-> But otherwise, yeah, this should be fine here -- it's all early init
-> stuff.
-> 
-> Reviewed-by: Kees Cook <keescook@chromium.org>
+> So why not fix DMA API? Then this patch is not needed.
 
-Thanks, I am not sure this patch will be needed in the next version, as
-I am currently rebasing to tip/master, which also made idt_descr static
-in kernel/idt.c.
+It looks like the conversation is going in circles :-)
 
-So with that I think I have to move the early IDT init functions to
-kernel/idt.c too and setup %gs earlier in head_64.S to make
-stack-protector happy.
+I tried to explain the reason why, even if we fixed the DMA API to work
+with rpmesg and trusty, we still need this patch with the following
+email:  https://marc.info/?l=linux-kernel&m=159347446709625&w=2
 
-The %gs setup actually needs to happen two times, one time when the
-kernel still runs identity mapped and then again when it switched to
-virtual addresses.
 
-Regards,
-
-	Joerg
+At that time it looked like you agreed that we needed to improve this
+check?  (https://marc.info/?l=linux-kernel&m=159363662418250&w=2)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
