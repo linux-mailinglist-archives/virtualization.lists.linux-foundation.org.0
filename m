@@ -2,88 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96EAF22093B
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 11:51:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13D9B22094E
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 11:55:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 500258AB7A;
-	Wed, 15 Jul 2020 09:51:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C2E558AB90;
+	Wed, 15 Jul 2020 09:55:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hKI4Oe2JDNFd; Wed, 15 Jul 2020 09:51:51 +0000 (UTC)
+	with ESMTP id 1wFNIKRSpfI4; Wed, 15 Jul 2020 09:55:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D3DAE8AB77;
-	Wed, 15 Jul 2020 09:51:51 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 54DB88AB8A;
+	Wed, 15 Jul 2020 09:55:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B327CC0733;
-	Wed, 15 Jul 2020 09:51:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2585FC0733;
+	Wed, 15 Jul 2020 09:55:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EE11CC0733
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8F509C0733
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:51:50 +0000 (UTC)
+ Wed, 15 Jul 2020 09:55:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id E1FBE221B2
+ by hemlock.osuosl.org (Postfix) with ESMTP id 7EABE8AB88
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:51:50 +0000 (UTC)
+ Wed, 15 Jul 2020 09:55:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qlIeaw9bQfmH
+ with ESMTP id DunCUerydC2K
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:51:49 +0000 (UTC)
+ Wed, 15 Jul 2020 09:55:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
- by silver.osuosl.org (Postfix) with ESMTPS id D4835220D6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id EC1B58AB87
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 09:51:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=B3ZNXMdtzOl2XokoISBREh8d9nxYCRmNefNrJYQQBSo=; b=oOXeAQidbZzyeFE7UCspW3f0W4
- m/ZqHaKOVyZU8GAiIVD/XTz1oC1UtT6Uct1DxIuhk+QPUKXVLxCvDYtgYxRRYvVs6QmHhBp0iexPP
- aQW5P9xuX40hne6bOHhDOckCvOT1dHZnfrmtOu8jvk8GL0CHPWwoOpDHJy7QMjliPOex2KX6XaFfb
- FQt8+A49iiYfOkZNp3ScqoSUXajHVGSPqZwYtOPnECivFAM2uMjf/iDKcQbzKM8/MMP2sDK7RaKpw
- n2LYSmhZGN7Pq8tS0xmFttoaQaO8EXQ1k+K9IOf8wshHtE36RNC6oYGijMMSpXyDHLq5NKaH5fAgq
- 29Nm+15w==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jve4i-0000jr-Gx; Wed, 15 Jul 2020 09:51:40 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id B344B3028C8;
- Wed, 15 Jul 2020 11:51:36 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id 9CC92203A5F41; Wed, 15 Jul 2020 11:51:36 +0200 (CEST)
-Date: Wed, 15 Jul 2020 11:51:36 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Joerg Roedel <jroedel@suse.de>
-Subject: Re: [PATCH v4 63/75] x86/sev-es: Handle #DB Events
-Message-ID: <20200715095136.GG10769@hirez.programming.kicks-ass.net>
-References: <20200714120917.11253-1-joro@8bytes.org>
- <20200714120917.11253-64-joro@8bytes.org>
- <20200715084752.GD10769@hirez.programming.kicks-ass.net>
- <20200715091337.GI16200@suse.de>
+ Wed, 15 Jul 2020 09:55:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1594806934;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=bgMe+PJv6EbNNW+M57oHn+BOmr98gpSCFa9M9x7OmkA=;
+ b=E5LQHSL2vUj/AqIoxOtlP/PXfPdkNABlIbwClFEKCnAchbPsNXJ/F+/XCJ3/aJeYvjaXqU
+ hDD2l4b8sbiCysfpPG7mpUcJlhVGVxtNFbAZmaraUYTFX4k9JSB2jsP9TJmzoF5UqJgTv8
+ Us5BHBiH+ZKzBnLFzrvqz4RpG5EYXFI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-453-bKF6v7lJM_29bnIZfmmQqg-1; Wed, 15 Jul 2020 05:55:30 -0400
+X-MC-Unique: bKF6v7lJM_29bnIZfmmQqg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E05911083E83;
+ Wed, 15 Jul 2020 09:55:28 +0000 (UTC)
+Received: from starship.f32vm (unknown [10.35.206.178])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C98EB710A0;
+ Wed, 15 Jul 2020 09:55:19 +0000 (UTC)
+From: Maxim Levitsky <mlevitsk@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH] virtio-blk: check host supplied logical block size
+Date: Wed, 15 Jul 2020 12:55:18 +0300
+Message-Id: <20200715095518.3724-1-mlevitsk@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200715091337.GI16200@suse.de>
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Cfir Cohen <cfir@google.com>, Joerg Roedel <joro@8bytes.org>, x86@kernel.org,
- linux-kernel@vger.kernel.org,
- Sean Christopherson <sean.j.christopherson@intel.com>,
- virtualization@lists.linux-foundation.org,
- Martin Radev <martin.b.radev@gmail.com>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: Jens Axboe <axboe@kernel.dk>, "Michael S. Tsirkin" <mst@redhat.com>,
+ "open list:VIRTIO CORE AND NET DRIVERS"
+ <virtualization@lists.linux-foundation.org>,
+ "open list:BLOCK LAYER" <linux-block@vger.kernel.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Maxim Levitsky <mlevitsk@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,39 +90,70 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jul 15, 2020 at 11:13:37AM +0200, Joerg Roedel wrote:
-> On Wed, Jul 15, 2020 at 10:47:52AM +0200, Peter Zijlstra wrote:
-> > On Tue, Jul 14, 2020 at 02:09:05PM +0200, Joerg Roedel wrote:
-> > 
-> > > @@ -1028,6 +1036,16 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
-> > >  	struct ghcb *ghcb;
-> > >  
-> > >  	lockdep_assert_irqs_disabled();
-> > > +
-> > > +	/*
-> > > +	 * #DB is special and needs to be handled outside of the intrumentation_begin()/end().
-> > > +	 * Otherwise the #VC handler could be raised recursivly.
-> > > +	 */
-> > > +	if (error_code == SVM_EXIT_EXCP_BASE + X86_TRAP_DB) {
-> > > +		vc_handle_trap_db(regs);
-> > > +		return;
-> > > +	}
-> > > +
-> > >  	instrumentation_begin();
-> > 
-> > Wait what?! That makes no sense what so ever.
-> 
-> Then my understanding of intrumentation_begin/end() is wrong, I thought
-> that the kernel will forbid setting breakpoints before
-> instrumentation_begin(), which is necessary here because a break-point
-> in the #VC handler might cause recursive #VC-exceptions when #DB is
-> intercepted.
-> Maybe you can elaborate on why this makes no sense?
+Linux kernel only supports logical block sizes which are power of two,
+at least 512 bytes and no more that PAGE_SIZE.
 
-Kernel avoids breakpoints in any noinstr text, irrespective of
-instrumentation_begin().
+Check this instead of crashing later on.
 
-instrumentation_begin() merely allows one to call !noinstr functions.
+Note that there is no need to check physical block size since it is
+only a hint, and virtio-blk already only supports power of two values.
+
+Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=1664619
+
+Signed-off-by: Maxim Levitsky <mlevitsk@redhat.com>
+---
+ drivers/block/virtio_blk.c | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index 980df853ee497..36dda31cc4e96 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -681,6 +681,12 @@ static const struct blk_mq_ops virtio_mq_ops = {
+ static unsigned int virtblk_queue_depth;
+ module_param_named(queue_depth, virtblk_queue_depth, uint, 0444);
+ 
++
++static bool virtblk_valid_block_size(unsigned int blksize)
++{
++	return blksize >= 512 && blksize <= PAGE_SIZE && is_power_of_2(blksize);
++}
++
+ static int virtblk_probe(struct virtio_device *vdev)
+ {
+ 	struct virtio_blk *vblk;
+@@ -809,9 +815,16 @@ static int virtblk_probe(struct virtio_device *vdev)
+ 	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_BLK_SIZE,
+ 				   struct virtio_blk_config, blk_size,
+ 				   &blk_size);
+-	if (!err)
++	if (!err) {
++		if (!virtblk_valid_block_size(blk_size)) {
++			dev_err(&vdev->dev,
++				"%s failure: unsupported logical block size %d\n",
++				__func__, blk_size);
++			err = -EINVAL;
++			goto out_cleanup_queue;
++		}
+ 		blk_queue_logical_block_size(q, blk_size);
+-	else
++	} else
+ 		blk_size = queue_logical_block_size(q);
+ 
+ 	/* Use topology information if available */
+@@ -872,6 +885,9 @@ static int virtblk_probe(struct virtio_device *vdev)
+ 	device_add_disk(&vdev->dev, vblk->disk, virtblk_attr_groups);
+ 	return 0;
+ 
++out_cleanup_queue:
++	blk_cleanup_queue(vblk->disk->queue);
++	vblk->disk->queue = NULL;
+ out_free_tags:
+ 	blk_mq_free_tag_set(&vblk->tag_set);
+ out_put_disk:
+-- 
+2.26.2
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
