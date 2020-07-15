@@ -1,85 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34C852201C1
-	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 03:24:14 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AB382201C2
+	for <lists.virtualization@lfdr.de>; Wed, 15 Jul 2020 03:24:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E12EC88294;
-	Wed, 15 Jul 2020 01:24:12 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DFDCE87813;
+	Wed, 15 Jul 2020 01:24:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0crGIpf3-lan; Wed, 15 Jul 2020 01:24:12 +0000 (UTC)
+	with ESMTP id Lld0N4yEbe+D; Wed, 15 Jul 2020 01:24:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0471388261;
-	Wed, 15 Jul 2020 01:24:12 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 41FBF87D1A;
+	Wed, 15 Jul 2020 01:24:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DFCEFC0733;
-	Wed, 15 Jul 2020 01:24:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2BB15C0733;
+	Wed, 15 Jul 2020 01:24:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 47877C0733
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7AD53C0733
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:24:10 +0000 (UTC)
+ Wed, 15 Jul 2020 01:24:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 422BE88261
+ by silver.osuosl.org (Postfix) with ESMTP id 5A03A204EF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:24:10 +0000 (UTC)
+ Wed, 15 Jul 2020 01:24:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MmIVgn-mhMPg
+ with ESMTP id jGLk3stxtBPh
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:24:09 +0000 (UTC)
+ Wed, 15 Jul 2020 01:24:22 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
- [209.85.214.195])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 322CB87FB9
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+ [209.85.215.193])
+ by silver.osuosl.org (Postfix) with ESMTPS id 66B2F204E1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Jul 2020 01:24:09 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id d1so701697plr.8
+ Wed, 15 Jul 2020 01:24:22 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id s189so859361pgc.13
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jul 2020 18:24:09 -0700 (PDT)
+ Tue, 14 Jul 2020 18:24:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=rBR5AjI82R5bYhOng71+5jFKvQ0oN6P/Kk11F4Z3+zk=;
- b=n+kU5hvp8QX2eErdqh0W7QLokIV7OjxOGug3362dtYmAU15jXA2quaw1LOjlA2OxHr
- grTkzjMkDFKiGgnsiQ1p2YDXLg3DuC9x59mWeMy98rbQ5Kngg7FI+StxG6d9e+/dJMkM
- ujFENwTUf9nN1xF3xXq+X+clzZw1jOue0CTl4=
+ bh=disvEr8QTdkdT/FiP6nWZpfKiZAj+1GxhY8j6L4+VsQ=;
+ b=QlGUunqmMzd7BXyHpekbCEW2V6nSjcB7yoyoPGH4TzD3d5B8mTW/71ZE2cJL8mK51k
+ 71ARRXSzT77AumtXxSrdaGYuwgbX2UQGZA8vfQJjrakWMO6AYGjVROqvp8NejS2m9Z2A
+ 7IYT8IbO38FLfB1a/Y4tOBuCZnK/Z5sSj09mI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=rBR5AjI82R5bYhOng71+5jFKvQ0oN6P/Kk11F4Z3+zk=;
- b=ofNpsKn4WCnVi/B0sHpffoyFGp/fvBZWqigb+HQeYyvVON7zO7CYONBNdxMseVINsN
- X7MYzzwaBoL02VBRmkLivBjvoW3SCehBgBBuK+SzFEzApPNawjcfvUGPoT43QVZhBL5P
- MYVHUr3CCNQZplY5OyU+Z7/ierCAEN3viNS1x26vwbbXmaL4zuZZqgezX3Vs2msfNDrR
- pySKoqUk25KEEU0SKKg3y2zz4sa7e3mZ5UWwaJD9NDTOTlgl/0rzGekPmDDuEDLJbzbc
- RYKDqQ/K+HbyCGY5g+SOqXEwc7QxFvc6UCoD8m5X+zy0b37VtttmUavj0o15BQruylHb
- uSPg==
-X-Gm-Message-State: AOAM531PwAgqDPW8e4fWHWulnZPV7XVyWrwK4KplYjCKM0RGy7rmW6gb
- OwIIXTDYkeJZBIyh4RZ1fX0HCg==
-X-Google-Smtp-Source: ABdhPJw6NKyQlM4kooKTBPKRrF+2YxBrMmlRUoDFIuOrU0Oa7HnOhiNFeW3EcDZ1pSOeMms4CpZIuw==
-X-Received: by 2002:a17:90b:243:: with SMTP id
- fz3mr7470339pjb.17.1594776248812; 
- Tue, 14 Jul 2020 18:24:08 -0700 (PDT)
+ bh=disvEr8QTdkdT/FiP6nWZpfKiZAj+1GxhY8j6L4+VsQ=;
+ b=ToQQKK3aM1xkVlTVzlK8G3HnUTFlx1Ul2FZltrCJrxn5PXA82P1UOtAzETq3LyYovF
+ ZPDg9LTt76/E9OP589fETtZjuuzHDoQwrscvaE7CDeKatIhK1zfNJ79b3I1DpeuNKu+n
+ CA9ULbkj0z+rV69fDkDa0x6G9hnT/N1tf5Af8Z32L/MKDKW4Po7ZLXNNmjGZIAQ5O2I7
+ 88zIPciw9aaBWVX3/8kFOFaUBUpHQ7IItfQhuphNONJiQxUxKIxg+lSRIMNeKP/gTI37
+ EqZ/i5FBhfKATDcyRJAnht+rSiawu++q+2P8YGJu3zQ/IDdGz0nFlH5kYEHjJ+EiFyrT
+ aJVw==
+X-Gm-Message-State: AOAM531bq3Hn+FU+/9puD2X8QnkiKvZwAzyjuddDDZ8Y3vaiAP92t2+E
+ Kbp5p6NVeK/aQmVVGXhMglXbeQ==
+X-Google-Smtp-Source: ABdhPJweUW+32ofnpX4MJsObP6q2/5f9TZOLrNQ+l84Tm/hPhwj19hU1a21zbXROqArF2N1b8PwEGw==
+X-Received: by 2002:a05:6a00:15c8:: with SMTP id
+ o8mr6820199pfu.286.1594776261955; 
+ Tue, 14 Jul 2020 18:24:21 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id j13sm263522pjz.8.2020.07.14.18.24.07
+ by smtp.gmail.com with ESMTPSA id y19sm335301pfc.135.2020.07.14.18.24.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2020 18:24:07 -0700 (PDT)
-Date: Tue, 14 Jul 2020 18:24:07 -0700
+ Tue, 14 Jul 2020 18:24:21 -0700 (PDT)
+Date: Tue, 14 Jul 2020 18:24:20 -0700
 From: Kees Cook <keescook@chromium.org>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v4 14/75] x86/boot/compressed/64: Add page-fault handler
-Message-ID: <202007141824.C00ADEDC0E@keescook>
+Subject: Re: [PATCH v4 16/75] x86/boot/compressed/64: Don't pre-map memory in
+ KASLR code
+Message-ID: <202007141824.6D5B3BE7@keescook>
 References: <20200714120917.11253-1-joro@8bytes.org>
- <20200714120917.11253-15-joro@8bytes.org>
+ <20200714120917.11253-17-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200714120917.11253-15-joro@8bytes.org>
+In-Reply-To: <20200714120917.11253-17-joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
  kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
@@ -107,15 +108,12 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jul 14, 2020 at 02:08:16PM +0200, Joerg Roedel wrote:
+On Tue, Jul 14, 2020 at 02:08:18PM +0200, Joerg Roedel wrote:
 > From: Joerg Roedel <jroedel@suse.de>
 > 
-> Install a page-fault handler to add an identity mapping to addresses
-> not yet mapped. Also do some checking whether the error code is sane.
-> 
-> This makes non SEV-ES machines use the exception handling
-> infrastructure in the pre-decompressions boot code too, making it less
-> likely to break in the future.
+> With the page-fault handler in place the identity mapping can be built
+> on-demand. So remove the code which manually creates the mappings and
+> unexport/remove the functions used for it.
 > 
 > Signed-off-by: Joerg Roedel <jroedel@suse.de>
 
