@@ -2,80 +2,56 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E3E62242E9
-	for <lists.virtualization@lfdr.de>; Fri, 17 Jul 2020 20:08:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74E152252A9
+	for <lists.virtualization@lfdr.de>; Sun, 19 Jul 2020 18:00:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B1FD987F49;
-	Fri, 17 Jul 2020 18:08:33 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1FCB786651;
+	Sun, 19 Jul 2020 16:00:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LPImfnXkwKRC; Fri, 17 Jul 2020 18:08:32 +0000 (UTC)
+	with ESMTP id 2mpXGGj6EtCO; Sun, 19 Jul 2020 16:00:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 924F187F40;
-	Fri, 17 Jul 2020 18:08:32 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9037786717;
+	Sun, 19 Jul 2020 16:00:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 69CE6C0733;
-	Fri, 17 Jul 2020 18:08:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78F99C016F;
+	Sun, 19 Jul 2020 16:00:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 532F6C0733
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8BC3C016F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Jul 2020 18:08:30 +0000 (UTC)
+ Sun, 19 Jul 2020 16:00:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 48E23860AE
+ by hemlock.osuosl.org (Postfix) with ESMTP id D1DA287ACE
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Jul 2020 18:08:30 +0000 (UTC)
+ Sun, 19 Jul 2020 16:00:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qmYw6ieysOW0
+ with ESMTP id jYV0XFeDY1HQ
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Jul 2020 18:08:29 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id A28FD8609D
+ Sun, 19 Jul 2020 16:00:28 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
+ [5.45.125.222])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 9DC60878A8
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Jul 2020 18:08:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595009308;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=WPhFSCTfpcpWkz9CIuqaJPhW6IIR42pEKKIJvtsM+sg=;
- b=OyN1wNuDZnL6Fe8ymhiJn/36NXXaDpM6o4VxYzr+jU+qZO3asetYnS6Bm5XPjwAg7OBvjM
- eo1sXNs55Lbe7vT/jkiebQLRjz6xxMhvvvJRzcKjmiRS6L6LLQHQ+4qer9JtEUttc27LEb
- ALk9nzOIWDAApMw56BHtgVwX+E6nSw4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-128-k1gwiikpOm2kITgryY5lnA-1; Fri, 17 Jul 2020 14:08:26 -0400
-X-MC-Unique: k1gwiikpOm2kITgryY5lnA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 81B8780183C;
- Fri, 17 Jul 2020 18:08:25 +0000 (UTC)
-Received: from x1.home (ovpn-112-71.phx2.redhat.com [10.3.112.71])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0026779D1D;
- Fri, 17 Jul 2020 18:08:21 +0000 (UTC)
-Date: Fri, 17 Jul 2020 12:08:21 -0600
-From: Alex Williamson <alex.williamson@redhat.com>
-To: Zhu Lingshan <lingshan.zhu@intel.com>
-Subject: Re: [PATCH V2 2/6] kvm: detect assigned device via irqbypass manager
-Message-ID: <20200717120821.3c2a56db@x1.home>
-In-Reply-To: <1594898629-18790-3-git-send-email-lingshan.zhu@intel.com>
-References: <1594898629-18790-1-git-send-email-lingshan.zhu@intel.com>
- <1594898629-18790-3-git-send-email-lingshan.zhu@intel.com>
-Organization: Red Hat
+ Sun, 19 Jul 2020 16:00:28 +0000 (UTC)
+Received: from b612.uc.pt ([193.137.201.233] helo=LAPTOP-EPOV2LRR)
+ by s052d7dde.fastvps-server.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <marle@saisti.eu>) id 1jxAoH-0002dN-3z
+ for virtualization@lists.linux-foundation.org; Sun, 19 Jul 2020 18:01:01 +0300
+From: "Lemos" <marialemos72@gmail.com>
+Subject: Call for Workshops Proposals - WorldCIST'21, Terceira Island, Azores
+To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Cc: wanpengli@tencent.com, kvm@vger.kernel.org, mst@redhat.com,
- netdev@vger.kernel.org, sean.j.christopherson@intel.com,
- virtualization@lists.linux-foundation.org, pbonzini@redhat.com
+Date: Sun, 19 Jul 2020 16:01:00 +0100
+Message-ID: <13800312181765@gmail-com>
+X-Antivirus: AVG (VPS 200719-0, 19/07/2020), Outbound message
+X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,65 +63,197 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: worldcist@gmail.com
+Content-Type: multipart/mixed; boundary="===============1033171263448341983=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, 16 Jul 2020 19:23:45 +0800
-Zhu Lingshan <lingshan.zhu@intel.com> wrote:
+This is a multi-part message in MIME format
 
-> vDPA devices has dedicated backed hardware like
-> passthrough-ed devices. Then it is possible to setup irq
-> offloading to vCPU for vDPA devices. Thus this patch tries to
-> manipulated assigned device counters via irqbypass manager.
-> 
-> We will increase/decrease the assigned device counter in kvm/x86.
-> Both vDPA and VFIO would go through this code path.
-> 
-> This code path only affect x86 for now.
-> 
-> Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
-> Suggested-by: Jason Wang <jasowang@redhat.com>
-> ---
->  arch/x86/kvm/x86.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-> index 00c88c2..20c07d3 100644
-> --- a/arch/x86/kvm/x86.c
-> +++ b/arch/x86/kvm/x86.c
-> @@ -10624,11 +10624,17 @@ int kvm_arch_irq_bypass_add_producer(struct irq_bypass_consumer *cons,
->  {
->  	struct kvm_kernel_irqfd *irqfd =
->  		container_of(cons, struct kvm_kernel_irqfd, consumer);
-> +	int ret;
->  
->  	irqfd->producer = prod;
-> +	kvm_arch_start_assignment(irqfd->kvm);
-> +	ret = kvm_x86_ops.update_pi_irte(irqfd->kvm,
-> +					 prod->irq, irqfd->gsi, 1);
-> +
-> +	if (ret)
-> +		kvm_arch_end_assignment(irqfd->kvm);
->  
-> -	return kvm_x86_ops.update_pi_irte(irqfd->kvm,
-> -					   prod->irq, irqfd->gsi, 1);
-> +	return ret;
->  }
->  
->  void kvm_arch_irq_bypass_del_producer(struct irq_bypass_consumer *cons,
+--===============1033171263448341983==
+Content-Type: multipart/alternative; charset=utf-8; boundary="orSNbHuWqCJc=_Jq8mHDu9TL7cSXn0WsTE"
+
+This is a multi-part message in MIME format
+
+--orSNbHuWqCJc=_Jq8mHDu9TL7cSXn0WsTE
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
 
-Why isn't there a matching end-assignment in the del_producer path?  It
-seems this only goes one-way, what happens when a device is
-hot-unplugged from the VM or the device interrupt configuration changes.
-This will still break vfio if it's not guaranteed to be symmetric.
-Thanks,
 
-Alex
+-- 
+This email has been checked for viruses by AVG.
+https://www.avg.com
+
+--orSNbHuWqCJc=_Jq8mHDu9TL7cSXn0WsTE
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html>
+  <head>
+    <title></title>
+    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
+" />
+  </head>
+  <body>
+    <div dir=3D"ltr">* Proceedings published by Springer, in a book of the =
+AISC series</div>
+    <div dir=3D"ltr">* Indexed in Scopus, WoS, DBLP, Ei-Compendex, etc</div=
+>
+    <div dir=3D"ltr">* Conference with a Google Scholar H5-Index =3D 19</di=
+v>
+    <div dir=3D"ltr">* A CORE Ranking conference</div>
+    <div dir=3D"ltr">* Extended versions of best articles published in JCR/=
+SCI journals</div>
+    <div dir=3D"ltr">&nbsp;</div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr">------------------------------ &nbsp;-----------------=
+------------
+      <wbr>&nbsp;</wbr>- &nbsp;-----------------------------
+      <wbr>&nbsp;</wbr>-- 
+    </div>
+    <p>Call for Workshops Proposals</p>
+    <p><span class=3D"il">WorldCIST</span>'21&nbsp;- 9th <span class=3D"il"=
+>World</span> Conference on Information Systems and Technologies<br />30-31=
+ March to 1-2 April 2021 | Terceira Island, Azores, Portugal<br /><a href=
+=3D"http://www.worldcist.org/" target=3D"_blank" data-saferedirecturl=3D"ht=
+tps://www.google.com/url?q=3Dhttp://www.worldcist.org/&source=3Dgmail&ust=
+=3D1595244885522000&usg=3DAFQjCNFXmEEcY0g07fwEj5ypcaZ1kzw-jA">http://www.<s=
+pan class=3D"il">worldcist</span>.org/</a></p>
+    <div dir=3D"ltr">------------------------------ &nbsp;-----------------=
+------------
+      <wbr>&nbsp;</wbr>- &nbsp;-----------------------------
+      <wbr>&nbsp;</wbr>----------- 
+    </div>
+    <div dir=3D"ltr"><br />
+      <p>The Information Systems and Technologies research and industrial c=
+ommunity is invited to submit proposals for the organization of Workshops a=
+t <span class=3D"il">WorldCist</span>'21 - 9th <span class=3D"il">World</sp=
+an> Conference on Information Systems and Technologies, to be held at Terce=
+ira Island, Azores, Portugal, 30-31 March to 1-2 April 2021. <span class=3D=
+"il">WorldCist</span> is a global forum for researchers and practitioners t=
+o present and discuss the most recent innovations, trends, results, experie=
+nces and concerns in the several perspectives of Information Systems and Te=
+chnologies. <br /><br /><br /><strong>WORKSHOP FORMAT</strong><br /><br />W=
+orkshops should focus on a specific scientific subject on the scope of <spa=
+n class=3D"il">WorldCist</span>'21 but not directly included on the main co=
+nference areas. Each workshop will be coordinated by an Organizing Committe=
+e composed of, at least, two researchers in the field, preferably from diff=
+erent institutions and different countries. The organizers should create an=
+ international Program Committee for the Workshop, with recognized research=
+ers within the specific Workshop scientific area. Each workshop should have=
+ at least ten submissions and five accepted papers in order to be conducted=
+ at <span class=3D"il">WorldCist</span>'21.<br /><br />The selection of Wor=
+kshops will be performed by <span class=3D"il">WorldCist</span>'21 Conferen=
+ce/Workshop Chairs. Each Workshop will have 1 article offered for 10 articl=
+es with paid registration, 2 articles offered for 20 articles with paid reg=
+istration, and 3 articles offered for 40 articles with paid registration.</=
+p>
+      <p>Workshops full and short papers will be published in the conferenc=
+e main proceedings in specific Workshop chapters published by Springer in a=
+ book of the AISC series. Proceedings will be submitted for indexation by I=
+SI, SCOPUS, DBLP, EI-Compendex among several other scientific databases. Ex=
+tended versions of best selected papers will be published in journals index=
+ed by ISI/SCI, SCOPUS and DBLP. Detailed and up-to-date information may be =
+found at <span class=3D"il">WorldCist</span>'21 website: <a href=3D"http://=
+worldcist.org/" target=3D"_blank" data-saferedirecturl=3D"https://www.googl=
+e.com/url?q=3Dhttp://worldcist.org/&source=3Dgmail&ust=3D1595244885522000&u=
+sg=3DAFQjCNHEcqDwJFgleRUvuOnARJHBAZ8W5w">http://<span class=3D"il">worldcis=
+t</span>.org/</a></p>
+      <p><br /><strong>WORKSHOP ORGANIZATION</strong><br /><br />The Organi=
+zing Committee of each Workshop will be responsible for:<br /><br />- Produ=
+cing and distributing the Workshop Call for Papers (CFP);<br />- Coordinati=
+ng the review and selection process for the papers submitted to the Worksho=
+p, as Workshop chairs (on the paper submission system to be installed);<br =
+/>- Delivering the final versions of the papers accepted for the Workshop i=
+n accordance with the guidelines and deadlines defined by <span class=3D"il=
+">WorldCist</span>'21 organizers;<br />- Coordinating and chairing the Work=
+shop sessions at the conference.<br /><br /><span class=3D"il">WorldCist</s=
+pan>'21 organizers reserve the right to cancel any Workshop if deadlines ar=
+e missed or if the number of registered attendees is too low to support the=
+ costs associated with the Workshop.<br /><br /><br /><strong>PROPOSAL CONT=
+ENT</strong><br /><br />Workshop proposals should contain the following inf=
+ormation:<br /><br />- Workshop title;<br />- Brief description of the spec=
+ific scientific scope of the Workshop;<br />- List of topics of interest (m=
+ax 15 topics);<br />- Reasons the Workshop should be held within <span clas=
+s=3D"il">WorldCist</span>&rsquo;21;<br />- Name, postal address, phone and =
+email of all the members of the Workshop Organizing Committee;<br />- Preli=
+minary proposal for the Workshop Program Committee (Names and affiliations)=
+=2E<br /><br />Proposals should be submitted at <a href=3D"https://easychai=
+r.org/conferences/?conf=3Dworldcistworkshops2021" target=3D"_blank" data-sa=
+feredirecturl=3D"https://www.google.com/url?q=3Dhttps://easychair.org/confe=
+rences/?conf%3Dworldcistworkshops2021&source=3Dgmail&ust=3D1595244885522000=
+&usg=3DAFQjCNH8VNOe_lquP65XGg592S1jvFwfEQ">https://easychair.org/
+          <wbr>&nbsp;</wbr>conferences/?conf=3D
+          <wbr>&nbsp;</wbr>worldcistworkshops2021</a> in PDF (in English), =
+by August 23, 2020.<br /><br /><br /><strong>IMPORTANT DATES</strong><br />=
+<br />- Deadline for Workshop proposals: August 23, 2020<br />- Notificatio=
+n of Workshop acceptance: September 4, 2020<br />- Workshop Final Informati=
+on and Program Committee: September 25, 2020<br />- Deadline for paper subm=
+ission: November 30, 2020<br />- Notification of paper acceptance: December=
+ 23, 2020<br />- Deadline for final versions and conference registration: J=
+anuary 2, 2021<br />- Conference dates: 30-31 March to 1-2 April 2021<br />=
+
+      </p>
+    </div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr">&nbsp;</div>
+    <div dir=3D"ltr">Website of <span class=3D"il">WorldCIST</span>'21: <a =
+href=3D"http://www.worldcist.org/" target=3D"_blank" data-saferedirecturl=
+=3D"https://www.google.com/url?q=3Dhttp://www.worldcist.org/&source=3Dgmail=
+&ust=3D1595244885522000&usg=3DAFQjCNFXmEEcY0g07fwEj5ypcaZ1kzw-jA">http://ww=
+w.<span class=3D"il">worldcist</span>.org/</a>&nbsp;</div>
+    <div dir=3D"ltr">&nbsp;</div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr"><span class=3D"il">WorldCIST</span>'21 Team<br /><a hr=
+ef=3D"http://www.worldcist.org/" target=3D"_blank" data-saferedirecturl=3D"=
+https://www.google.com/url?q=3Dhttp://www.worldcist.org/&source=3Dgmail&ust=
+=3D1595244885522000&usg=3DAFQjCNFXmEEcY0g07fwEj5ypcaZ1kzw-jA">http://www.<s=
+pan class=3D"il">worldcist</span>.org/</a></div>
+    <p>&nbsp;</p>
+    <p>--------------</p>
+    <div>
+      <p>PS: If you do not wish to receive more notices from&nbsp;<span cla=
+ss=3D"il">WorldCIST</span> (<a href=3D"http://www.worldcist.org/" target=3D=
+"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttp://www.=
+worldcist.org/&source=3Dgmail&ust=3D1595244885522000&usg=3DAFQjCNFXmEEcY0g0=
+7fwEj5ypcaZ1kzw-jA">http://www.<span class=3D"il">worldcist</span>.org/</a>=
+) just reply this message with the word REMOVE in the subject line</p>
+    </div>
+  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br />
+<table style=3D"border-top: 1px solid #D3D4DE;">
+	<tr>
+        <td style=3D"width: 55px; padding-top: 13px;"><a href=3D"http://www=
+=2Eavg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaig=
+n=3Dsig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"http=
+s://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=
+=3D""  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></=
+a></td>
+		<td style=3D"width: 470px; padding-top: 12px; color: #41424e; font-size: =
+13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virus-=
+free. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_=
+source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
+"_blank" style=3D"color: #4453ea;">www.avg.com</a>
+		</td>
+	</tr>
+</table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" heigh=
+t=3D"1"> </a></div></body>
+</html>
+
+--orSNbHuWqCJc=_Jq8mHDu9TL7cSXn0WsTE--
+
+
+--===============1033171263448341983==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============1033171263448341983==--
+
