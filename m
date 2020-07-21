@@ -2,71 +2,71 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A51F5227DCA
-	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 12:54:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF580227DCE
+	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 12:54:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 4B11E24BDF;
-	Tue, 21 Jul 2020 10:54:47 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 83FF0252B7;
+	Tue, 21 Jul 2020 10:54:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id laDV5PtLM9ZN; Tue, 21 Jul 2020 10:54:46 +0000 (UTC)
+	with ESMTP id cg9grPQH-oee; Tue, 21 Jul 2020 10:54:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 84CAE2548F;
-	Tue, 21 Jul 2020 10:54:46 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id B88A524C93;
+	Tue, 21 Jul 2020 10:54:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 649FAC016F;
-	Tue, 21 Jul 2020 10:54:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 984AEC016F;
+	Tue, 21 Jul 2020 10:54:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 26FADC016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0DA74C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 10:54:45 +0000 (UTC)
+ Tue, 21 Jul 2020 10:54:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 15EF888D11
+ by whitealder.osuosl.org (Postfix) with ESMTP id EA0EB88D22
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 10:54:45 +0000 (UTC)
+ Tue, 21 Jul 2020 10:54:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Wp43D2Z4dRc3
+ with ESMTP id aT37viALuffs
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 10:54:44 +0000 (UTC)
+ Tue, 21 Jul 2020 10:54:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
  [205.139.110.61])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 68C4A88336
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 2302688336
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 10:54:44 +0000 (UTC)
+ Tue, 21 Jul 2020 10:54:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595328883;
+ s=mimecast20190719; t=1595328894;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=oFWGludvELnToYPGkXRL/IpOnO2KtH2SYm6kXUDscgk=;
- b=BeijAkequ4xau4p+muuCm2Lr4JF3AhwSUDTcMyXjL1YJHWzPqXIjryDFzOeE8S0XXwO+UR
- Lh6WHDHdTNsIwyhWTViqmWBQWTPk11zr1IFEkhCQelKRkuAhgkpNvv0pixMgdu/K78ttY1
- 9GPoIr5fkZdkkMm3O8i5ZslrBLKMmGI=
+ bh=OLxjLMGXS3SH/S9EEpwVFL+AHIP2haLrD1L8osl1n6I=;
+ b=J5G9hWPVM+7NWZLH+9/kEzxgCtmZ4e+JKVpSAL3+vSsDMV1aC70S9FdExRYkUa39VwAPTL
+ Z6UmC+egDMalL/AFoSB/0eDB5HMK8lW5QODL48dJbmA5cXz7br+x4f5C7SRU77eTJwRnN0
+ UGOkr8sb51G7L2m1WT8z0pZWl5cucZs=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-370-PjdjcO50NH2_x-dheKbKbA-1; Tue, 21 Jul 2020 06:54:39 -0400
-X-MC-Unique: PjdjcO50NH2_x-dheKbKbA-1
+ us-mta-166-lJIac-1vO-2kar10RzFp_A-1; Tue, 21 Jul 2020 06:54:52 -0400
+X-MC-Unique: lJIac-1vO-2kar10RzFp_A-1
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A06CF193F562;
- Tue, 21 Jul 2020 10:54:36 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B5ED9107ACCA;
+ Tue, 21 Jul 2020 10:54:49 +0000 (UTC)
 Received: from localhost.localdomain (unknown [10.35.206.163])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D88637621A;
- Tue, 21 Jul 2020 10:54:26 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0DFB276215;
+ Tue, 21 Jul 2020 10:54:36 +0000 (UTC)
 From: Maxim Levitsky <mlevitsk@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 05/10] block: null: use blk_is_valid_logical_block_size
-Date: Tue, 21 Jul 2020 13:52:34 +0300
-Message-Id: <20200721105239.8270-6-mlevitsk@redhat.com>
+Subject: [PATCH 06/10] block: ms_block: use blk_is_valid_logical_block_size
+Date: Tue, 21 Jul 2020 13:52:35 +0300
+Message-Id: <20200721105239.8270-7-mlevitsk@redhat.com>
 In-Reply-To: <20200721105239.8270-1-mlevitsk@redhat.com>
 References: <20200721105239.8270-1-mlevitsk@redhat.com>
 MIME-Version: 1.0
@@ -107,39 +107,24 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This slightly changes the behavier of the driver,
-when given invalid block size (non power of two, or below 512 bytes),
-but shoudn't matter.
-
 Signed-off-by: Maxim Levitsky <mlevitsk@redhat.com>
 ---
- drivers/block/null_blk_main.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/memstick/core/ms_block.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/block/null_blk_main.c b/drivers/block/null_blk_main.c
-index 87b31f9ca362e..e4df4b903b90b 100644
---- a/drivers/block/null_blk_main.c
-+++ b/drivers/block/null_blk_main.c
-@@ -1684,8 +1684,8 @@ static int null_init_tag_set(struct nullb *nullb, struct blk_mq_tag_set *set)
+diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
+index d9ee8e3dc72da..e4df03e10fb46 100644
+--- a/drivers/memstick/core/ms_block.c
++++ b/drivers/memstick/core/ms_block.c
+@@ -1727,7 +1727,7 @@ static int msb_init_card(struct memstick_dev *card)
+ 	msb->pages_in_block = boot_block->attr.block_size * 2;
+ 	msb->block_size = msb->page_size * msb->pages_in_block;
  
- static int null_validate_conf(struct nullb_device *dev)
- {
--	dev->blocksize = round_down(dev->blocksize, 512);
--	dev->blocksize = clamp_t(unsigned int, dev->blocksize, 512, 4096);
-+	if (!blk_is_valid_logical_block_size(dev->blocksize))
-+		return -ENODEV;
- 
- 	if (dev->queue_mode == NULL_Q_MQ && dev->use_per_node_hctx) {
- 		if (dev->submit_queues != nr_online_nodes)
-@@ -1865,7 +1865,7 @@ static int __init null_init(void)
- 	struct nullb *nullb;
- 	struct nullb_device *dev;
- 
--	if (g_bs > PAGE_SIZE) {
-+	if (!blk_is_valid_logical_block_size(g_bs)) {
- 		pr_warn("invalid block size\n");
- 		pr_warn("defaults block size to %lu\n", PAGE_SIZE);
- 		g_bs = PAGE_SIZE;
+-	if (msb->page_size > PAGE_SIZE) {
++	if (!(blk_is_valid_logical_block_size(msb->page_size))) {
+ 		/* this isn't supported by linux at all, anyway*/
+ 		dbg("device page %d size isn't supported", msb->page_size);
+ 		return -EINVAL;
 -- 
 2.26.2
 
