@@ -1,95 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FCB0227EA6
-	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 13:20:25 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id D40A1228022
+	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 14:42:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B49E489458;
-	Tue, 21 Jul 2020 11:20:23 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 85A8688717;
+	Tue, 21 Jul 2020 12:42:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nmWlq6NyiGHR; Tue, 21 Jul 2020 11:20:22 +0000 (UTC)
+	with ESMTP id t0Grv+xxnW4y; Tue, 21 Jul 2020 12:42:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id EABE489451;
-	Tue, 21 Jul 2020 11:20:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id F14B18870E;
+	Tue, 21 Jul 2020 12:42:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B9136C08A6;
-	Tue, 21 Jul 2020 11:20:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C9740C016F;
+	Tue, 21 Jul 2020 12:42:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6EAF7C016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 58BDCC016F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 11:20:20 +0000 (UTC)
+ Tue, 21 Jul 2020 12:42:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 6513A89212
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 3DCB986DC9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 11:20:20 +0000 (UTC)
+ Tue, 21 Jul 2020 12:42:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gNVAnSyTGg0T
+ with ESMTP id azEhJ_cBfie5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 11:20:19 +0000 (UTC)
+ Tue, 21 Jul 2020 12:42:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
- [209.85.221.66])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 05ED189445
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 5143586BB1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 11:20:19 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id s10so20759582wrw.12
- for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 04:20:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:subject:to:cc:references:in-reply-to:mime-version
- :message-id:content-transfer-encoding;
- bh=cgE7yCvC2TsM3N9RxN0ivNvrTATSLMzpTj/dTB9AGDk=;
- b=mu8Irwtky5HM+EiEeEeJR5ujsfvK+4dRAQRaaVcc7HsqkvVK5OdZ66y3jHwGTwX8Cu
- zczEMY4FPKkfMJPyqoq/zEQTDqVrWHiKq35CWL+NseYxjRUXqM17lsfcA3S2fUbacz4F
- paoMeJ2RbHu5MMFCr9bSA1dbKVqhP5CQFlBIRXxKK2DBfodI5dmWrdix02VwYwBLvq7Y
- TftEIFzy6Oqpsf3KxqPjswQGUu4zx2fkccY9iW9azevcnJDENK3yYmxXnT8KmtHnkU+O
- QAlb9uxvjbo6Lx3o/O/kQVN+N4n65xMKivLjHruWEFxL5BOP2ogapw3UZF/MG5dgU8Tv
- 2Uxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:subject:to:cc:references:in-reply-to
- :mime-version:message-id:content-transfer-encoding;
- bh=cgE7yCvC2TsM3N9RxN0ivNvrTATSLMzpTj/dTB9AGDk=;
- b=GCpBXCrSzql7IVNDbLOWysju4zHDkEXJLEA6Zh1tIyYPL5mEbr5D/QtlXP2qcFYoBt
- /oQCdFBCL5j6yOmLCxqeZdb5UUZQccgcg9xswFlMW+0kFC0RuAhqd/YbD7PRVxbXc5oE
- NxYt93N3CLm/E+QBxqFDOxNv1uicJvWrfL4vYc5RpazWYH0okkRzOGnsJ8GT9LVPRha2
- aMLeLToSPK3PmXaXcm0vLiGMEcWJw+MizJBgomaerWjJEC5FSthYIDtJr3AL0H99qrDY
- +O0rJlWumNOpgBxRQe2Hp8bkkuQROTuPmeq76x1VgVRl8dePT8QabK/w/diH1rW3ubxy
- FS0g==
-X-Gm-Message-State: AOAM5322Y7LNhhoi7TiP0qjilVKN6IeNtMIchbD8xpUnE/Q1BcOvKIol
- K/HGLJqK7Dm3KthXpp6MyTU=
-X-Google-Smtp-Source: ABdhPJwmCaJOo8AdzQqS2eChCE+7XLE3Au1lXisG7/a/kYL/4vC9x9VNW5OotawEVy00sIUB49kphA==
-X-Received: by 2002:adf:de12:: with SMTP id b18mr28232045wrm.390.1595330417294; 
- Tue, 21 Jul 2020 04:20:17 -0700 (PDT)
-Received: from localhost (110-174-173-27.tpgi.com.au. [110.174.173.27])
- by smtp.gmail.com with ESMTPSA id c188sm3106579wma.22.2020.07.21.04.20.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Jul 2020 04:20:16 -0700 (PDT)
-Date: Tue, 21 Jul 2020 21:20:09 +1000
-From: Nicholas Piggin <npiggin@gmail.com>
-Subject: Re: [PATCH v3 0/6] powerpc: queued spinlocks and rwlocks
-To: Waiman Long <longman@redhat.com>, Peter Zijlstra <peterz@infradead.org>
-References: <20200706043540.1563616-1-npiggin@gmail.com>
- <24f75d2c-60cd-2766-4aab-1a3b1c80646e@redhat.com>
- <1594101082.hfq9x5yact.astroid@bobo.none>
- <20200708084106.GE597537@hirez.programming.kicks-ass.net>
- <a9834278-25bf-90e9-10f2-cd10e5407ff6@redhat.com>
- <20200709083113.GI597537@hirez.programming.kicks-ass.net>
-In-Reply-To: <20200709083113.GI597537@hirez.programming.kicks-ass.net>
+ Tue, 21 Jul 2020 12:42:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1595335342;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=sxEWR5e+zFYMBJOOuaa+SYdRZddlN9HI1DKBH6wob58=;
+ b=ZRTvmXSz7Rh+hPT0fQAvmYiDjwXPM+ti/tOaKzGp6FVMRz3Q8Lekog1wEFY1v5wTpHRbCU
+ 2OMkIf4g9pOflXTvHshxcY2cM+IbyRmobhCZagQiDqJWzOWJNgtME82sR1DHPhavU4NLrb
+ 10M9jw4Q3LVcUFTB0Ugkeu9TBwUgooI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-263--3BfRSnxPBiIkZC8r_aHkQ-1; Tue, 21 Jul 2020 08:42:20 -0400
+X-MC-Unique: -3BfRSnxPBiIkZC8r_aHkQ-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 35D7780047E;
+ Tue, 21 Jul 2020 12:42:16 +0000 (UTC)
+Received: from starship (unknown [10.35.206.163])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A1F9870105;
+ Tue, 21 Jul 2020 12:42:08 +0000 (UTC)
+Message-ID: <435f1c04b58bd2298be3166b7bab458640927118.camel@redhat.com>
+Subject: Re: [PATCH 05/10] block: null: use blk_is_valid_logical_block_size
+From: Maxim Levitsky <mlevitsk@redhat.com>
+To: Damien Le Moal <Damien.LeMoal@wdc.com>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>
+Date: Tue, 21 Jul 2020 15:42:07 +0300
+In-Reply-To: <CY4PR04MB3751882A6BDF7C073D6ECF88E7780@CY4PR04MB3751.namprd04.prod.outlook.com>
+References: <20200721105239.8270-1-mlevitsk@redhat.com>
+ <20200721105239.8270-6-mlevitsk@redhat.com>
+ <CY4PR04MB3751882A6BDF7C073D6ECF88E7780@CY4PR04MB3751.namprd04.prod.outlook.com>
+User-Agent: Evolution 3.36.3 (3.36.3-1.fc32) 
 MIME-Version: 1.0
-Message-Id: <1595329799.y24rka8cv4.astroid@bobo.none>
-Cc: linux-arch@vger.kernel.org, Will Deacon <will@kernel.org>,
- Boqun Feng <boqun.feng@gmail.com>, linux-kernel@vger.kernel.org,
- kvm-ppc@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Ingo Molnar <mingo@redhat.com>, Anton Blanchard <anton@ozlabs.org>,
- linuxppc-dev@lists.ozlabs.org
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, "open list:NVM EXPRESS
+ DRIVER" <linux-nvme@lists.infradead.org>,
+ "open list:VIRTIO CORE AND NET DRIVERS"
+ <virtualization@lists.linux-foundation.org>, Hou Tao <houtao1@huawei.com>,
+ Christoph Hellwig <hch@lst.de>, Maxim Levitsky <maximlevitsky@gmail.com>,
+ "open list:SCSI CDROM DRIVER" <linux-scsi@vger.kernel.org>,
+ Satya Tangirala <satyat@google.com>, Ajay Joshi <Ajay.Joshi@wdc.com>,
+ Alex Dubov <oakad@yahoo.com>, "James E.J. Bottomley" <jejb@linux.ibm.com>,
+ Josef Bacik <josef@toxicpanda.com>, Ming Lei <ming.lei@redhat.com>,
+ "open list:BLOCK LAYER" <linux-block@vger.kernel.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Colin Ian King <colin.king@canonical.com>, Keith Busch <kbusch@kernel.org>,
+ "open list:NETWORK BLOCK
+ DEVICE \(NBD\)" <nbd@other.debian.org>, Bart Van Assche <bvanassche@acm.org>,
+ Sagi Grimberg <sagi@grimberg.me>, Jens Axboe <axboe@kernel.dk>,
+ Jens Axboe <axboe@fb.com>, "Martin K. Petersen" <martin.petersen@oracle.com>,
+ "open list:SONY
+ MEMORYSTICK SUBSYSTEM" <linux-mmc@vger.kernel.org>, Tejun Heo <tj@kernel.org>,
+ Paolo Bonzini <pbonzini@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,51 +110,74 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Excerpts from Peter Zijlstra's message of July 9, 2020 6:31 pm:
-> On Wed, Jul 08, 2020 at 07:54:34PM -0400, Waiman Long wrote:
->> On 7/8/20 4:41 AM, Peter Zijlstra wrote:
->> > On Tue, Jul 07, 2020 at 03:57:06PM +1000, Nicholas Piggin wrote:
->> > > Yes, powerpc could certainly get more performance out of the slow
->> > > paths, and then there are a few parameters to tune.
->> > Can you clarify? The slow path is already in use on ARM64 which is weak,
->> > so I doubt there's superfluous serialization present. And Will spend a
->> > fair amount of time on making that thing guarantee forward progressm, so
->> > there just isn't too much room to play.
->> > 
->> > > We don't have a good alternate patching for function calls yet, but
->> > > that would be something to do for native vs pv.
->> > Going by your jump_label implementation, support for static_call should
->> > be fairly straight forward too, no?
->> > 
->> >    https://lkml.kernel.org/r/20200624153024.794671356@infradead.org
->> > 
->> Speaking of static_call, I am also looking forward to it. Do you have an
->> idea when that will be merged?
+On Tue, 2020-07-21 at 11:15 +0000, Damien Le Moal wrote:
+> On 2020/07/21 19:54, Maxim Levitsky wrote:
+> > This slightly changes the behavier of the driver,
 > 
-> 0day had one crash on the last round, I think Steve send a fix for that
-> last night and I'll go look at it.
+> s/behavier/behavior
+Thanks. This is one of the typos I make very consistently.
+
 > 
-> That said, the last posting got 0 feedback, so either everybody is
-> really happy with it, or not interested. So let us know in the thread,
-> with some review feedback.
+> > when given invalid block size (non power of two, or below 512 bytes),
+> > but shoudn't matter.
+> > 
+> > Signed-off-by: Maxim Levitsky <mlevitsk@redhat.com>
+> > ---
+> >  drivers/block/null_blk_main.c | 6 +++---
+> >  1 file changed, 3 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/drivers/block/null_blk_main.c b/drivers/block/null_blk_main.c
+> > index 87b31f9ca362e..e4df4b903b90b 100644
+> > --- a/drivers/block/null_blk_main.c
+> > +++ b/drivers/block/null_blk_main.c
+> > @@ -1684,8 +1684,8 @@ static int null_init_tag_set(struct nullb *nullb, struct blk_mq_tag_set *set)
+> >  
+> >  static int null_validate_conf(struct nullb_device *dev)
+> >  {
+> > -	dev->blocksize = round_down(dev->blocksize, 512);
+> > -	dev->blocksize = clamp_t(unsigned int, dev->blocksize, 512, 4096);
+> > +	if (!blk_is_valid_logical_block_size(dev->blocksize))
+> > +		return -ENODEV;
+> >  
+> >  	if (dev->queue_mode == NULL_Q_MQ && dev->use_per_node_hctx) {
+> >  		if (dev->submit_queues != nr_online_nodes)
+> > @@ -1865,7 +1865,7 @@ static int __init null_init(void)
+> >  	struct nullb *nullb;
+> >  	struct nullb_device *dev;
+> >  
+> > -	if (g_bs > PAGE_SIZE) {
+> > +	if (!blk_is_valid_logical_block_size(g_bs)) {
+> >  		pr_warn("invalid block size\n");
+> >  		pr_warn("defaults block size to %lu\n", PAGE_SIZE);
+> >  		g_bs = PAGE_SIZE;
 > 
-> Once I get through enough of the inbox to actually find the fix and test
-> it, I'll also update the thread, and maybe threaten to merge it if
-> everybody stays silent :-)
+> Not sure if this change is OK. Shouldn't the if here be kept as is and
+> blk_is_valid_logical_block_size() called after it to check values lower than 4K ?
 
-I'd like to use it in powerpc. We have code now for example that patches 
-a branch immediately at the top of memcpy which branches to a different 
-version of the function. pv queued spinlock selection obviously, and
-there's a bunch of platform ops struct things that get filled in at boot 
-time, etc.
+The thing is that this driver supports two ways of creating the block devices.
+On module load it creates by default a single block device and it uses g_bs
+as its block size, but then it also has configfs based interface that allows
+to create more block devices.
 
-So +1 here if you can get them through. I'm not 100% sure we can do
-it with existing toolchain and no ugly hacks, but there's no way to
-structure things that can get around that AFAIKS. We'd eventually
-use it though, I'd say.
+The default is taken also from g_bs but then user can change it (
+via those NULLB_DEVICE_ATTR wrappers)
+I changed the behavior slightly, that now if user supplies bad value,
+it will be rejected instead of finding closest valid value.
 
-Thanks,
-Nick
+In addition to that there is very small bug that didn't bother to fix in
+this series (but I will in next one). The bug is that when null_validate_conf
+fails, it return value is overriden with -ENOMEM, which gives the user a wrong
+error message.
+
+Thanks for the review!
+
+Best regards,
+	Maxim Levitsky
+
+> 
+> 
+
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
