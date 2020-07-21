@@ -1,83 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4E3822785A
-	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 07:52:11 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 50E5B24BEA;
-	Tue, 21 Jul 2020 05:52:10 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vt7adLA-6v3k; Tue, 21 Jul 2020 05:52:09 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id C44DB24BE6;
-	Tue, 21 Jul 2020 05:52:09 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A0D83C016F;
-	Tue, 21 Jul 2020 05:52:09 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EB9DCC016F
- for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 05:52:07 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04A55227A7F
+	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 10:19:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id E445088B0B
- for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 05:52:07 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 956E1889AF;
+	Tue, 21 Jul 2020 08:19:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CshO-OrGip4A; Tue, 21 Jul 2020 08:19:15 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id C9D60889AC;
+	Tue, 21 Jul 2020 08:19:15 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A7F28C016F;
+	Tue, 21 Jul 2020 08:19:15 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A436BC016F
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 21 Jul 2020 08:19:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 9ABEF86EBB
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 21 Jul 2020 08:19:13 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7x1nUI370sOk
+ with ESMTP id cV69v2YFQf9Z
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 05:52:07 +0000 (UTC)
+ Tue, 21 Jul 2020 08:19:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id BF15788B1F
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id CA27F86EB5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 05:52:05 +0000 (UTC)
+ Tue, 21 Jul 2020 08:19:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595310724;
+ s=mimecast20190719; t=1595319551;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=aLjkj/NtDRd3xkfHAYuSB+hneYUy009qM+qF11a/0w8=;
- b=CUUfkrqevHLtn5YJBMPCZaYKdGDM6U2Vy/ByEcDArD6G9nK5sGPJf5/ohCXfqEVUWpmJvB
- sFcvdUt08E3/ZKxzD0eTSupMo91loNpOsr+xD0FDltOheCbIgSkdes5JkPmPUnHfolMppJ
- 7ORA+SELD43PhpYsLdtsTYlGhCpVxZA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-316-OuMNqS5uP7OfxFt7hiEfjA-1; Tue, 21 Jul 2020 01:52:02 -0400
-X-MC-Unique: OuMNqS5uP7OfxFt7hiEfjA-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 445A118C63C2;
- Tue, 21 Jul 2020 05:52:01 +0000 (UTC)
-Received: from [10.72.12.202] (ovpn-12-202.pek2.redhat.com [10.72.12.202])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 07D1619C66;
- Tue, 21 Jul 2020 05:51:55 +0000 (UTC)
-Subject: Re: [PATCH V2 vhost next 10/10] vdpa/mlx5: Add VDPA driver for
- supported mlx5 devices
-To: Eli Cohen <eli@mellanox.com>, mst@redhat.com,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-References: <20200720071416.32112-1-eli@mellanox.com>
- <20200720071416.32112-11-eli@mellanox.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <73209efd-f513-fec2-e4f7-51e71f08c9fe@redhat.com>
-Date: Tue, 21 Jul 2020 13:51:54 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ bh=xkmaD14CWjK3N3gJunf7XsZs5bmLEiFw/ANQQtol7cc=;
+ b=fiHvxlf8GbbFqpYs0MJOxG/EzzdP1i7dJh8iqDX7dU0/24Sj3FLVJbw2znymHy6m/Pemei
+ 4I1JrXy8iVt1TB1UEPvMtW8QpCuIOTQM+5cUmsoze9jlQfaNmvM8wPSZJetNEx0Gi2Ku6L
+ SB44HOoamguevQyJfPkqHaVsodrJTLA=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-312-mVdPdTY8PJeFJaQZwsllzQ-1; Tue, 21 Jul 2020 04:18:57 -0400
+X-MC-Unique: mVdPdTY8PJeFJaQZwsllzQ-1
+Received: by mail-wm1-f71.google.com with SMTP id u68so711905wmu.3
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 21 Jul 2020 01:18:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=xkmaD14CWjK3N3gJunf7XsZs5bmLEiFw/ANQQtol7cc=;
+ b=e16ygg22aJU1hnH9dlC1UAsKmyZxaoj4nkQDUDEfVxY4xFeGjozxsW2ljDTkqgFCGL
+ q6TAvt0WW0PLvXzuHEkUjt+gBjmg27KLMqC/cg9H+FiXUyt+mxsiCyD/36xc4AbmV4f0
+ aUIZF6ePmQwwOs0z0vzj9JfznmeuzI5qhq90UV4S32JHq29OEr42ftYUs+Pb5mfN5cfW
+ LYpHxQ+wAk7Qa7HAljEWI2yjSv30jmHpDka9IY1Gmr9tyecx3eE8ZGiBSn6iK4fjRtjV
+ Lwxw62pIKHmEkTqdpJu7ETDRIV2B34TpxtSFvcaOLtTkqpVzsJiF8o3d1RNwM7a4wBjL
+ Rgug==
+X-Gm-Message-State: AOAM530In8+6O02JL2eNNo73xDYcN6B3OQK6Iz9htD/oeY4/FPOg2fNo
+ +098nWPWNmxb+TETxsLUKz5h8wisy063kEs4VoJkb7jDJ4MIm2cZquwWUO4DKR9oWtymfCwG7QR
+ cjfU4Sta+LZWN1Xi1SHQTAdxui4TMSVWqSPnjbuZ2yw==
+X-Received: by 2002:a7b:c8c8:: with SMTP id f8mr3064961wml.142.1595319536581; 
+ Tue, 21 Jul 2020 01:18:56 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzu53zATBiX8oH83PTvYrZiOs3LjcaWchQEItZ2BS8OgcP26ZDsNqGDj/whi2FZO5AjbvS6KA==
+X-Received: by 2002:a7b:c8c8:: with SMTP id f8mr3064931wml.142.1595319536353; 
+ Tue, 21 Jul 2020 01:18:56 -0700 (PDT)
+Received: from redhat.com (bzq-79-182-82-99.red.bezeqint.net. [79.182.82.99])
+ by smtp.gmail.com with ESMTPSA id
+ k14sm35429226wrn.76.2020.07.21.01.18.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jul 2020 01:18:55 -0700 (PDT)
+Date: Tue, 21 Jul 2020 04:18:51 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Shile Zhang <shile.zhang@linux.alibaba.com>
+Subject: Re: [PATCH v2] virtio_ring: use alloc_pages_node for NUMA-aware
+ allocation
+Message-ID: <20200721041550-mutt-send-email-mst@kernel.org>
+References: <20200721070013.62894-1-shile.zhang@linux.alibaba.com>
 MIME-Version: 1.0
-In-Reply-To: <20200720071416.32112-11-eli@mellanox.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: shahafs@mellanox.com, parav@mellanox.com, saeedm@mellanox.com
+In-Reply-To: <20200721070013.62894-1-shile.zhang@linux.alibaba.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: kernel test robot <lkp@intel.com>, linux-pci@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ bhelgaas@google.com, Jiang Liu <liuj97@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,31 +105,67 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvNy8yMCDkuIvljYgzOjE0LCBFbGkgQ29oZW4gd3JvdGU6Cj4gQWRkIGEgZnJvbnQg
-ZW5kIFZEUEEgZHJpdmVyIHRoYXQgcmVnaXN0ZXJzIGluIHRoZSBWRFBBIGJ1cyBhbmQgcHJvdmlk
-ZXMKPiBuZXR3b3JraW5nIHRvIGEgZ3Vlc3QuIFRoZSBWRFBBIGRyaXZlciBjcmVhdGVzIHRoZSBu
-ZWNlc3NhcnkgcmVzb3VyY2VzCj4gb24gdGhlIFZGIGl0IGlzIGRyaXZpbmcgc3VjaCB0aGF0IGRh
-dGEgcGF0aCB3aWxsIGJlIG9mZmxvYWRlZC4KPgo+IE5vdGlmaWNhdGlvbnMgYXJlIGJlaW5nIGNv
-bW11bmljYXRlZCB0aHJvdWdoIHRoZSBkcml2ZXIuCj4KPiBDdXJyZW50bHksIG9ubHkgVkZzIGFy
-ZSBzdXBwb3J0ZWQuIEluIHN1YnNlcXVlbnQgcGF0Y2hlcyB3ZSB3aWxsIGhhdmUKPiBkZXZsaW5r
-IHN1cHBvcnQgdG8gY29udHJvbCB3aGljaCBWRiBpcyB1c2VkIGZvciBWRFBBIGFuZCB3aGljaCBm
-dW5jdGlvbgo+IGlzIHVzZWQgZm9yIHJlZ3VsYXIgbmV0d29ya2luZy4KPgo+IFJldmlld2VkLWJ5
-OiBQYXJhdiBQYW5kaXQ8cGFyYXZAbWVsbGFub3guY29tPgo+IFNpZ25lZC1vZmYtYnk6IEVsaSBD
-b2hlbjxlbGlAbWVsbGFub3guY29tPgo+IC0tLQo+IENoYW5nZXMgZnJvbSBWMDoKPiAxLiBGaXgg
-aW5jbHVkZSBwYXRoIHVzYWdlCj4gMi4gRml4IHVzZSBhZnRlciBmcmVlIGluIHFwX2NyZWF0ZSgp
-Cj4gMy4gQ29uc2lzdGVudGx5IHVzZSBtdnEtPmluaXRpYWxpemVkIHRvIGNoZWNrIGlmIGEgdnEg
-d2FzIGluaXRpYWxpemVkLgo+IDQuIFJlbW92ZSB1bnVzZWQgbG9jYWwgdmFyaWFibGUuCj4gNS4g
-RGVmZXIgbW9kaWZ5aWcgdnEgdG8gcmVhZHkgdG8gZHJpdmVyIG9rCj4gNi4gc3VzcGVuZCBoYXJk
-d2FyZSB2cSBpbiBzZXRfdnFfcmVhZHkoMCkKPiA3LiBSZW1vdmUgcmVzZXJ2YXRpb24gZm9yIGNv
-bnRyb2wgVlEgc2luY2UgaXQgbXVsdGkgcXVldWUgaXMgbm90IHN1cHBvcnRlZCBpbiB0aGlzIHZl
-cnNpb24KPiA4LiBBdm9pZCBjYWxsIHB1dF9kZXZpY2UoKSBzaW5jZSB0aGlzIGlzIG5vdCBhIHBj
-aSBkZXZpY2UgZHJpdmVyLgoKCkxvb2tzIGdvb2QgdG8gbWUuCgpBY2tlZC1ieTogSmFzb24gV2Fu
-ZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRp
-b25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRp
-b24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Tue, Jul 21, 2020 at 03:00:13PM +0800, Shile Zhang wrote:
+> Use alloc_pages_node() allocate memory for vring queue with proper
+> NUMA affinity.
+> 
+> Reported-by: kernel test robot <lkp@intel.com>
+> Suggested-by: Jiang Liu <liuj97@gmail.com>
+> Signed-off-by: Shile Zhang <shile.zhang@linux.alibaba.com>
+
+Do you observe any performance gains from this patch?
+
+I also wonder why isn't the probe code run on the correct numa node?
+That would fix a wide class of issues like this without need to tweak
+drivers.
+
+Bjorn, what do you think? Was this considered?
+
+> ---
+> Changelog
+> v1 -> v2:
+> - fixed compile warning reported by LKP.
+> ---
+>  drivers/virtio/virtio_ring.c | 10 ++++++----
+>  1 file changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+> index 58b96baa8d48..d38fd6872c8c 100644
+> --- a/drivers/virtio/virtio_ring.c
+> +++ b/drivers/virtio/virtio_ring.c
+> @@ -276,9 +276,11 @@ static void *vring_alloc_queue(struct virtio_device *vdev, size_t size,
+>  		return dma_alloc_coherent(vdev->dev.parent, size,
+>  					  dma_handle, flag);
+>  	} else {
+> -		void *queue = alloc_pages_exact(PAGE_ALIGN(size), flag);
+> -
+> -		if (queue) {
+> +		void *queue = NULL;
+> +		struct page *page = alloc_pages_node(dev_to_node(vdev->dev.parent),
+> +						     flag, get_order(size));
+> +		if (page) {
+> +			queue = page_address(page);
+>  			phys_addr_t phys_addr = virt_to_phys(queue);
+>  			*dma_handle = (dma_addr_t)phys_addr;
+>  
+> @@ -308,7 +310,7 @@ static void vring_free_queue(struct virtio_device *vdev, size_t size,
+>  	if (vring_use_dma_api(vdev))
+>  		dma_free_coherent(vdev->dev.parent, size, queue, dma_handle);
+>  	else
+> -		free_pages_exact(queue, PAGE_ALIGN(size));
+> +		free_pages((unsigned long)queue, get_order(size));
+>  }
+>  
+>  /*
+> -- 
+> 2.24.0.rc2
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
