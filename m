@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 613F4228355
-	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 17:14:45 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 8C2CB204B2;
-	Tue, 21 Jul 2020 15:14:43 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Yxm8FEOudDBx; Tue, 21 Jul 2020 15:13:40 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id B886A20532;
-	Tue, 21 Jul 2020 15:13:40 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 982D4C088E;
-	Tue, 21 Jul 2020 15:13:40 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 54426C08A2
- for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 15:13:39 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE19522835C
+	for <lists.virtualization@lfdr.de>; Tue, 21 Jul 2020 17:14:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 3E93385FA4
- for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 15:13:38 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8F43E85FAE;
+	Tue, 21 Jul 2020 15:14:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id X1bzrjkWCa2n
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9pwAw5AzFu0p; Tue, 21 Jul 2020 15:14:50 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2304E86088;
+	Tue, 21 Jul 2020 15:14:50 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B510C088E;
+	Tue, 21 Jul 2020 15:14:50 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CB489C016F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 15:13:19 +0000 (UTC)
+ Tue, 21 Jul 2020 15:14:48 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id B9CA422056
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 21 Jul 2020 15:14:48 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id o+mVxe-YdiZ5
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 21 Jul 2020 15:14:46 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id B079785FAE
+ by silver.osuosl.org (Postfix) with ESMTPS id B12A32274B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Jul 2020 15:13:19 +0000 (UTC)
+ Tue, 21 Jul 2020 15:14:40 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 1B92268AFE; Tue, 21 Jul 2020 17:13:14 +0200 (CEST)
-Date: Tue, 21 Jul 2020 17:13:13 +0200
+ id 9AD7268B05; Tue, 21 Jul 2020 17:14:37 +0200 (CEST)
+Date: Tue, 21 Jul 2020 17:14:37 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Maxim Levitsky <mlevitsk@redhat.com>
-Subject: Re: [PATCH 01/10] block: introduce blk_is_valid_logical_block_size
-Message-ID: <20200721151313.GA10620@lst.de>
+Subject: Re: [PATCH 02/10] block: virtio-blk: check logical block size
+Message-ID: <20200721151437.GB10620@lst.de>
 References: <20200721105239.8270-1-mlevitsk@redhat.com>
- <20200721105239.8270-2-mlevitsk@redhat.com>
+ <20200721105239.8270-3-mlevitsk@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200721105239.8270-2-mlevitsk@redhat.com>
+In-Reply-To: <20200721105239.8270-3-mlevitsk@redhat.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 Cc: "Michael S. Tsirkin" <mst@redhat.com>,
  "open list:NVM EXPRESS DRIVER" <linux-nvme@lists.infradead.org>,
@@ -87,30 +87,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-> +/**
-> + * blk_check_logical_block_size - check if logical block size is supported
-> + * by the kernel
-> + * @size:  the logical block size, in bytes
-> + *
-> + * Description:
-> + *   This function checks if the block layers supports given block size
-> + **/
-> +bool blk_is_valid_logical_block_size(unsigned int size)
-> +{
-> +	return size >= SECTOR_SIZE && size <= PAGE_SIZE && !is_power_of_2(size);
+On Tue, Jul 21, 2020 at 01:52:31PM +0300, Maxim Levitsky wrote:
+> Linux kernel only supports logical block sizes which are power of two,
+> at least 512 bytes and no more that PAGE_SIZE.
+> 
+> Check this instead of crashing later on.
+> 
+> Note that there is no need to check physical block size since it is
+> only a hint, and virtio-blk already only supports power of two values.
+> 
+> Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=1664619
+> 
+> Signed-off-by: Maxim Levitsky <mlevitsk@redhat.com>
+> ---
+>  drivers/block/virtio_blk.c | 15 +++++++++++++--
+>  1 file changed, 13 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+> index 980df853ee497..b5ee87cba00ed 100644
+> --- a/drivers/block/virtio_blk.c
+> +++ b/drivers/block/virtio_blk.c
+> @@ -809,10 +809,18 @@ static int virtblk_probe(struct virtio_device *vdev)
+>  	err = virtio_cread_feature(vdev, VIRTIO_BLK_F_BLK_SIZE,
+>  				   struct virtio_blk_config, blk_size,
+>  				   &blk_size);
+> -	if (!err)
+> +	if (!err) {
+> +		if (!blk_is_valid_logical_block_size(blk_size)) {
+> +			dev_err(&vdev->dev,
+> +				"%s failure: invalid logical block size %d\n",
+> +				__func__, blk_size);
+> +			err = -EINVAL;
+> +			goto out_cleanup_queue;
+> +		}
+>  		blk_queue_logical_block_size(q, blk_size);
 
-Shouldn't this be a ... && is_power_of_2(size)?
-
->  	if (q->limits.io_min < q->limits.physical_block_size)
->  		q->limits.io_min = q->limits.physical_block_size;
-> +
->  }
-
-This adds a pointless empty line.
-
-> +extern bool blk_is_valid_logical_block_size(unsigned int size);
-
-No need for externs on function declarations.
+Hmm, I wonder if we should simply add the check and warning to
+blk_queue_logical_block_size and add an error in that case.  Then
+drivers only have to check the error return, which might add a lot
+less boiler plate code.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
