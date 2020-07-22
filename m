@@ -1,75 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1868B229593
-	for <lists.virtualization@lfdr.de>; Wed, 22 Jul 2020 11:59:28 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E6B02297A9
+	for <lists.virtualization@lfdr.de>; Wed, 22 Jul 2020 13:46:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 8BCD820456;
-	Wed, 22 Jul 2020 09:59:26 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id AFF5A88343;
+	Wed, 22 Jul 2020 11:46:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id o3Y+vs+SLcfS; Wed, 22 Jul 2020 09:59:24 +0000 (UTC)
+	with ESMTP id uPj7EvAu-lWe; Wed, 22 Jul 2020 11:46:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id A54C820415;
-	Wed, 22 Jul 2020 09:59:24 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 29AC9882D3;
+	Wed, 22 Jul 2020 11:46:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 739B4C004C;
-	Wed, 22 Jul 2020 09:59:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 11F4FC004C;
+	Wed, 22 Jul 2020 11:46:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1C69AC004C
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 68C13C004C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 09:59:23 +0000 (UTC)
+ Wed, 22 Jul 2020 11:46:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 15FC087099
+ by whitealder.osuosl.org (Postfix) with ESMTP id 5CA048813D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 09:59:23 +0000 (UTC)
+ Wed, 22 Jul 2020 11:46:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id I5nMiAeTtwPd
+ with ESMTP id PtZ3n2OBDR7U
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 09:59:22 +0000 (UTC)
+ Wed, 22 Jul 2020 11:46:45 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by whitealder.osuosl.org (Postfix) with ESMTPS id DF27186D81
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id D20148813C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 09:59:21 +0000 (UTC)
-IronPort-SDR: OEBeWqRcSynz7UpO0iWKdZ8ROpsgj+MWfHYdpDPtmTc/HCU8b82NHfebwtXgzYjjal+A3iuiAS
- XExE/GOIXKtg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9689"; a="149466410"
-X-IronPort-AV: E=Sophos;i="5.75,381,1589266800"; d="scan'208";a="149466410"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jul 2020 02:59:21 -0700
-IronPort-SDR: 4rgd7NWyIMYTIJ0nyTRxlzoRvzwtY+iWeNWktN/88xwFE7GWLTBMPsX7B8dSA26XUBf1IBZpKa
- 82qyqPEBdwcw==
-X-IronPort-AV: E=Sophos;i="5.75,381,1589266800"; d="scan'208";a="462401351"
-Received: from lingshan-mobl5.ccr.corp.intel.com (HELO [10.255.30.77])
- ([10.255.30.77])
- by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jul 2020 02:59:17 -0700
-Subject: Re: [PATCH V3 1/6] vhost: introduce vhost_vring_call
-To: Zhu Lingshan <lingshan.zhu@live.com>, jasowang@redhat.com,
- alex.williamson@redhat.com, mst@redhat.com, pbonzini@redhat.com,
- sean.j.christopherson@intel.com, wanpengli@tencent.com
-References: <20200722094910.218014-1-lingshan.zhu@live.com>
- <20200722094910.218014-2-lingshan.zhu@live.com>
-From: Zhu Lingshan <lingshan.zhu@linux.intel.com>
-Message-ID: <c6f9a273-fe0d-30b5-7c18-0152d4919e8f@linux.intel.com>
-Date: Wed, 22 Jul 2020 17:59:04 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.1
+ Wed, 22 Jul 2020 11:46:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1595418403;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=VA50D44PwP36EMatm3r8jkryzFI+xci/xyxPDoYxEHw=;
+ b=CDca0dIawbO/q/8JOMnNOsHXDDSsCa6K74P5unPd8U/NHnt48jntlIpUw8py/kvWDYNXJL
+ OsumW9kDsD9pLm2ngElLLMMkKVtcKZ1n+O6jGC4v4MH9f7wrnFZSFq4N5XWDtDWvbOJzGP
+ 0Qih+B6mekM1gLUryQr7xhQqqaGTbCY=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-308-FI-U9F54OYO3lCfUYDpIaQ-1; Wed, 22 Jul 2020 07:46:42 -0400
+X-MC-Unique: FI-U9F54OYO3lCfUYDpIaQ-1
+Received: by mail-wm1-f69.google.com with SMTP id 65so946906wmd.8
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 22 Jul 2020 04:46:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=VA50D44PwP36EMatm3r8jkryzFI+xci/xyxPDoYxEHw=;
+ b=XpP1L92tAS8uJWQ+Ozd3n/FvOQCz58BT0GxJ/CnSGvmNMMBSA9HWGVq8RBNld6Rq+n
+ w3FM9TPdjyNSO69yzzC60+7vyzgzCa83p2wq0WeDKlXdKO4+MTc7P788nfXXyEa1nISU
+ ur2GBFkYGu3MF+rcAqSbORRA03JyCa98ObdpoUpY+zjdLo2vJz93zUfWKGt7CsLiatXo
+ /fwZ4V/gJ3TQbvXw2Dx0/3h7mGFqmPi5YmrlMH9+7VXbSHiJm2o0lpT3B5lsRh8cH/Ap
+ Y6+/7lwMCudTBq+IwVhGVcooY0rdIkhVVpjF8Nerk35uL52W9VwUQxyhqtGTkBXwRL7o
+ gZ5Q==
+X-Gm-Message-State: AOAM531KxrrGjjXTnAwOOKSWKnYwmT8fb/Hv4UZ/Ckughs2hCAydsThe
+ 1Ua/eW7zvrBSlqWum9IEp5FVDYq4xUVtNxFE4fEVuPkSodoRGHLPiTH0dHIqbHjDfU+EctfcJoe
+ AHEfGPFHDmtQ4DXUGYUjgdAYbdPoL9WAITxwu6/KnOQ==
+X-Received: by 2002:a5d:65d2:: with SMTP id e18mr14890861wrw.70.1595418400763; 
+ Wed, 22 Jul 2020 04:46:40 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwT9fHDPnqPq43vdSPvjeRis+cuUR2jlT9N/471iNd7v56L0Upt0p7rdaoBly9Dp9gOrJm4TA==
+X-Received: by 2002:a5d:65d2:: with SMTP id e18mr14890841wrw.70.1595418400524; 
+ Wed, 22 Jul 2020 04:46:40 -0700 (PDT)
+Received: from redhat.com ([192.117.173.58])
+ by smtp.gmail.com with ESMTPSA id 5sm6787929wmk.9.2020.07.22.04.46.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jul 2020 04:46:39 -0700 (PDT)
+Date: Wed, 22 Jul 2020 07:46:36 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Subject: Re: [PATCH 2/2] virtio-mmio: Reject invalid IRQ 0 command line
+ argument
+Message-ID: <20200722074630-mutt-send-email-mst@kernel.org>
+References: <20200701221040.3667868-1-helgaas@kernel.org>
+ <20200701221040.3667868-3-helgaas@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20200722094910.218014-2-lingshan.zhu@live.com>
-Content-Language: en-US
-Cc: netdev@vger.kernel.org, Zhu Lingshan <lingshan.zhu@intel.com>,
- lszhu <lszhu@localhost.localdomain>, kvm@vger.kernel.org,
+In-Reply-To: <20200701221040.3667868-3-helgaas@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Bjorn Helgaas <bhelgaas@google.com>, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -82,153 +104,58 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Please ignore this patchset incorrect metadata, will resend soon. Thanks!
+On Wed, Jul 01, 2020 at 05:10:40PM -0500, Bjorn Helgaas wrote:
+> From: Bjorn Helgaas <bhelgaas@google.com>
+> 
+> The "virtio_mmio.device=" command line argument allows a user to specify
+> the size, address, and IRQ of a virtio device.  Previously the only
+> requirement for the IRQ was that it be an unsigned integer.
+> 
+> Zero is an unsigned integer but an invalid IRQ number, and after
+> a85a6c86c25be ("driver core: platform: Clarify that IRQ 0 is invalid"),
+> attempts to use IRQ 0 cause warnings.
+> 
+> If the user specifies IRQ 0, return failure instead of registering a device
+> with IRQ 0.
+> 
+> Fixes: a85a6c86c25be ("driver core: platform: Clarify that IRQ 0 is invalid")
+> Signed-off-by: Bjorn Helgaas <bhelgaas@google.com>
+> Cc: Michael S. Tsirkin <mst@redhat.com>
+> Cc: Jason Wang <jasowang@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
 
-On 7/22/2020 5:49 PM, Zhu Lingshan wrote:
-> From: Zhu Lingshan <lingshan.zhu@intel.com>
->
-> This commit introduces struct vhost_vring_call which replaced
-> raw struct eventfd_ctx *call_ctx in struct vhost_virtqueue.
-> Besides eventfd_ctx, it contains a spin lock and an
-> irq_bypass_producer in its structure.
->
-> Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
-> Signed-off-by: lszhu <lszhu@localhost.localdomain>
-> Signed-off-by: Zhu Lingshan <lingshan.zhu@live.com>
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
+
 > ---
->   drivers/vhost/vdpa.c  |  4 ++--
->   drivers/vhost/vhost.c | 22 ++++++++++++++++------
->   drivers/vhost/vhost.h |  9 ++++++++-
->   3 files changed, 26 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-> index a54b60d6623f..df3cf386b0cd 100644
-> --- a/drivers/vhost/vdpa.c
-> +++ b/drivers/vhost/vdpa.c
-> @@ -96,7 +96,7 @@ static void handle_vq_kick(struct vhost_work *work)
->   static irqreturn_t vhost_vdpa_virtqueue_cb(void *private)
->   {
->   	struct vhost_virtqueue *vq = private;
-> -	struct eventfd_ctx *call_ctx = vq->call_ctx;
-> +	struct eventfd_ctx *call_ctx = vq->call_ctx.ctx;
->   
->   	if (call_ctx)
->   		eventfd_signal(call_ctx, 1);
-> @@ -382,7 +382,7 @@ static long vhost_vdpa_vring_ioctl(struct vhost_vdpa *v, unsigned int cmd,
->   		break;
->   
->   	case VHOST_SET_VRING_CALL:
-> -		if (vq->call_ctx) {
-> +		if (vq->call_ctx.ctx) {
->   			cb.callback = vhost_vdpa_virtqueue_cb;
->   			cb.private = vq;
->   		} else {
-> diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-> index d7b8df3edffc..9f1a845a9302 100644
-> --- a/drivers/vhost/vhost.c
-> +++ b/drivers/vhost/vhost.c
-> @@ -298,6 +298,13 @@ static void vhost_vq_meta_reset(struct vhost_dev *d)
->   		__vhost_vq_meta_reset(d->vqs[i]);
->   }
->   
-> +static void vhost_vring_call_reset(struct vhost_vring_call *call_ctx)
-> +{
-> +	call_ctx->ctx = NULL;
-> +	memset(&call_ctx->producer, 0x0, sizeof(struct irq_bypass_producer));
-> +	spin_lock_init(&call_ctx->ctx_lock);
-> +}
-> +
->   static void vhost_vq_reset(struct vhost_dev *dev,
->   			   struct vhost_virtqueue *vq)
->   {
-> @@ -319,13 +326,13 @@ static void vhost_vq_reset(struct vhost_dev *dev,
->   	vq->log_base = NULL;
->   	vq->error_ctx = NULL;
->   	vq->kick = NULL;
-> -	vq->call_ctx = NULL;
->   	vq->log_ctx = NULL;
->   	vhost_reset_is_le(vq);
->   	vhost_disable_cross_endian(vq);
->   	vq->busyloop_timeout = 0;
->   	vq->umem = NULL;
->   	vq->iotlb = NULL;
-> +	vhost_vring_call_reset(&vq->call_ctx);
->   	__vhost_vq_meta_reset(vq);
->   }
->   
-> @@ -685,8 +692,8 @@ void vhost_dev_cleanup(struct vhost_dev *dev)
->   			eventfd_ctx_put(dev->vqs[i]->error_ctx);
->   		if (dev->vqs[i]->kick)
->   			fput(dev->vqs[i]->kick);
-> -		if (dev->vqs[i]->call_ctx)
-> -			eventfd_ctx_put(dev->vqs[i]->call_ctx);
-> +		if (dev->vqs[i]->call_ctx.ctx)
-> +			eventfd_ctx_put(dev->vqs[i]->call_ctx.ctx);
->   		vhost_vq_reset(dev, dev->vqs[i]);
->   	}
->   	vhost_dev_free_iovecs(dev);
-> @@ -1629,7 +1636,10 @@ long vhost_vring_ioctl(struct vhost_dev *d, unsigned int ioctl, void __user *arg
->   			r = PTR_ERR(ctx);
->   			break;
->   		}
-> -		swap(ctx, vq->call_ctx);
-> +
-> +		spin_lock(&vq->call_ctx.ctx_lock);
-> +		swap(ctx, vq->call_ctx.ctx);
-> +		spin_unlock(&vq->call_ctx.ctx_lock);
->   		break;
->   	case VHOST_SET_VRING_ERR:
->   		if (copy_from_user(&f, argp, sizeof f)) {
-> @@ -2440,8 +2450,8 @@ static bool vhost_notify(struct vhost_dev *dev, struct vhost_virtqueue *vq)
->   void vhost_signal(struct vhost_dev *dev, struct vhost_virtqueue *vq)
->   {
->   	/* Signal the Guest tell them we used something up. */
-> -	if (vq->call_ctx && vhost_notify(dev, vq))
-> -		eventfd_signal(vq->call_ctx, 1);
-> +	if (vq->call_ctx.ctx && vhost_notify(dev, vq))
-> +		eventfd_signal(vq->call_ctx.ctx, 1);
->   }
->   EXPORT_SYMBOL_GPL(vhost_signal);
->   
-> diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-> index c8e96a095d3b..38eb1aa3b68d 100644
-> --- a/drivers/vhost/vhost.h
-> +++ b/drivers/vhost/vhost.h
-> @@ -13,6 +13,7 @@
->   #include <linux/virtio_ring.h>
->   #include <linux/atomic.h>
->   #include <linux/vhost_iotlb.h>
-> +#include <linux/irqbypass.h>
->   
->   struct vhost_work;
->   typedef void (*vhost_work_fn_t)(struct vhost_work *work);
-> @@ -60,6 +61,12 @@ enum vhost_uaddr_type {
->   	VHOST_NUM_ADDRS = 3,
->   };
->   
-> +struct vhost_vring_call {
-> +	struct eventfd_ctx *ctx;
-> +	struct irq_bypass_producer producer;
-> +	spinlock_t ctx_lock;
-> +};
-> +
->   /* The virtqueue structure describes a queue attached to a device. */
->   struct vhost_virtqueue {
->   	struct vhost_dev *dev;
-> @@ -72,7 +79,7 @@ struct vhost_virtqueue {
->   	vring_used_t __user *used;
->   	const struct vhost_iotlb_map *meta_iotlb[VHOST_NUM_ADDRS];
->   	struct file *kick;
-> -	struct eventfd_ctx *call_ctx;
-> +	struct vhost_vring_call call_ctx;
->   	struct eventfd_ctx *error_ctx;
->   	struct eventfd_ctx *log_ctx;
->   
+>  drivers/virtio/virtio_mmio.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+> index 9d16aaffca9d..627ac0487494 100644
+> --- a/drivers/virtio/virtio_mmio.c
+> +++ b/drivers/virtio/virtio_mmio.c
+> @@ -641,11 +641,11 @@ static int vm_cmdline_set(const char *device,
+>  			&vm_cmdline_id, &consumed);
+>  
+>  	/*
+> -	 * sscanf() must processes at least 2 chunks; also there
+> +	 * sscanf() must process at least 2 chunks; also there
+>  	 * must be no extra characters after the last chunk, so
+>  	 * str[consumed] must be '\0'
+>  	 */
+> -	if (processed < 2 || str[consumed])
+> +	if (processed < 2 || str[consumed] || irq == 0)
+>  		return -EINVAL;
+>  
+>  	resources[0].flags = IORESOURCE_MEM;
+> -- 
+> 2.25.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
