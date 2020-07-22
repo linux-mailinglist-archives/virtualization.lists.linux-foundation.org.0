@@ -2,77 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4575F229B0B
-	for <lists.virtualization@lfdr.de>; Wed, 22 Jul 2020 17:09:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6B59229C73
+	for <lists.virtualization@lfdr.de>; Wed, 22 Jul 2020 18:01:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id ECC018539A;
-	Wed, 22 Jul 2020 15:09:48 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id F0A2B86CDD;
+	Wed, 22 Jul 2020 16:01:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6LqX2dqMr7Mx; Wed, 22 Jul 2020 15:09:47 +0000 (UTC)
+	with ESMTP id 5B0yFxmnR-uq; Wed, 22 Jul 2020 16:01:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D5CE086A32;
-	Wed, 22 Jul 2020 15:09:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D250886B85;
+	Wed, 22 Jul 2020 16:01:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C573BC004C;
-	Wed, 22 Jul 2020 15:09:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C7D99C004C;
+	Wed, 22 Jul 2020 16:01:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D578BC004C
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6AFA1C004C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 15:09:45 +0000 (UTC)
+ Wed, 22 Jul 2020 16:01:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id C3527869F5
+ by hemlock.osuosl.org (Postfix) with ESMTP id 5DD0E87B2B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 15:09:45 +0000 (UTC)
+ Wed, 22 Jul 2020 16:01:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lV79R1NMk1tc
+ with ESMTP id v8quMunYLgQk
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 15:09:44 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 7A35B8539A
+ Wed, 22 Jul 2020 16:01:33 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx01.bbu.dsd.mx.bitdefender.com
+ (mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 65568879C3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 15:09:44 +0000 (UTC)
-IronPort-SDR: n6AY+1NSLSTT84oJM92FE2wYbEfCygJnxRZ+f2MkrHTCd3IEbPBLo7nUiCnufv/GDRIvHwQvlC
- qVif2FZa9dHg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9690"; a="129912094"
-X-IronPort-AV: E=Sophos;i="5.75,383,1589266800"; d="scan'208";a="129912094"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jul 2020 08:09:43 -0700
-IronPort-SDR: QstIaZ9Fuk8wxOdNJbtkU3EPIYrBDOplKOpkmKvvMKsqLiSfq0eHCWKELI94F4HMl9oBCO4ka0
- QJ3ntCK9bKBQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.75,383,1589266800"; d="scan'208";a="432407346"
-Received: from gliakhov-mobl2.ger.corp.intel.com (HELO
- ubuntu.ger.corp.intel.com) ([10.252.58.190])
- by orsmga004.jf.intel.com with ESMTP; 22 Jul 2020 08:09:40 -0700
-From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
+ Wed, 22 Jul 2020 16:01:33 +0000 (UTC)
+Received: from smtp.bitdefender.com (smtp01.buh.bitdefender.com [10.17.80.75])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
+ D913A3016E60; Wed, 22 Jul 2020 19:01:31 +0300 (EEST)
+Received: from localhost.localdomain (unknown [91.199.104.6])
+ by smtp.bitdefender.com (Postfix) with ESMTPSA id CC0553072784;
+ Wed, 22 Jul 2020 19:01:31 +0300 (EEST)
+From: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>
 To: kvm@vger.kernel.org
-Subject: [PATCH v4 4/4] vhost: add an RPMsg API
-Date: Wed, 22 Jul 2020 17:09:27 +0200
-Message-Id: <20200722150927.15587-5-guennadi.liakhovetski@linux.intel.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200722150927.15587-1-guennadi.liakhovetski@linux.intel.com>
-References: <20200722150927.15587-1-guennadi.liakhovetski@linux.intel.com>
+Subject: [RFC PATCH v1 00/34] VM introspection - EPT Views and Virtualization
+ Exceptions
+Date: Wed, 22 Jul 2020 19:00:47 +0300
+Message-Id: <20200722160121.9601-1-alazar@bitdefender.com>
 MIME-Version: 1.0
-Cc: Ohad Ben-Cohen <ohad@wizery.com>,
- Mathieu Poirier <mathieu.poirier@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Vincent Whitchurch <vincent.whitchurch@axis.com>,
- linux-remoteproc@vger.kernel.org,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Liam Girdwood <liam.r.girdwood@linux.intel.com>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- sound-open-firmware@alsa-project.org
+Cc: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Sean Christopherson <sean.j.christopherson@intel.com>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,523 +67,100 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Linux supports running the RPMsg protocol over the VirtIO transport
-protocol, but currently there is only support for VirtIO clients and
-no support for a VirtIO server. This patch adds a vhost-based RPMsg
-server implementation.
-
-Signed-off-by: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
----
- drivers/vhost/Kconfig       |   7 +
- drivers/vhost/Makefile      |   3 +
- drivers/vhost/rpmsg.c       | 375 ++++++++++++++++++++++++++++++++++++
- drivers/vhost/vhost_rpmsg.h |  74 +++++++
- 4 files changed, 459 insertions(+)
- create mode 100644 drivers/vhost/rpmsg.c
- create mode 100644 drivers/vhost/vhost_rpmsg.h
-
-diff --git a/drivers/vhost/Kconfig b/drivers/vhost/Kconfig
-index d3688c6afb87..602421bf1d03 100644
---- a/drivers/vhost/Kconfig
-+++ b/drivers/vhost/Kconfig
-@@ -38,6 +38,13 @@ config VHOST_NET
- 	  To compile this driver as a module, choose M here: the module will
- 	  be called vhost_net.
- 
-+config VHOST_RPMSG
-+	tristate
-+	depends on VHOST
-+	help
-+	  Vhost RPMsg API allows vhost drivers to communicate with VirtIO
-+	  drivers, using the RPMsg over VirtIO protocol.
-+
- config VHOST_SCSI
- 	tristate "VHOST_SCSI TCM fabric driver"
- 	depends on TARGET_CORE && EVENTFD
-diff --git a/drivers/vhost/Makefile b/drivers/vhost/Makefile
-index f3e1897cce85..9cf459d59f97 100644
---- a/drivers/vhost/Makefile
-+++ b/drivers/vhost/Makefile
-@@ -2,6 +2,9 @@
- obj-$(CONFIG_VHOST_NET) += vhost_net.o
- vhost_net-y := net.o
- 
-+obj-$(CONFIG_VHOST_RPMSG) += vhost_rpmsg.o
-+vhost_rpmsg-y := rpmsg.o
-+
- obj-$(CONFIG_VHOST_SCSI) += vhost_scsi.o
- vhost_scsi-y := scsi.o
- 
-diff --git a/drivers/vhost/rpmsg.c b/drivers/vhost/rpmsg.c
-new file mode 100644
-index 000000000000..d7ab48414224
---- /dev/null
-+++ b/drivers/vhost/rpmsg.c
-@@ -0,0 +1,375 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright(c) 2020 Intel Corporation. All rights reserved.
-+ *
-+ * Author: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-+ *
-+ * Vhost RPMsg VirtIO interface. It provides a set of functions to match the
-+ * guest side RPMsg VirtIO API, provided by drivers/rpmsg/virtio_rpmsg_bus.c
-+ * These functions handle creation of 2 virtual queues, handling of endpoint
-+ * addresses, sending a name-space announcement to the guest as well as any
-+ * user messages. This API can be used by any vhost driver to handle RPMsg
-+ * specific processing.
-+ * Specific vhost drivers, using this API will use their own VirtIO device
-+ * IDs, that should then also be added to the ID table in virtio_rpmsg_bus.c
-+ */
-+
-+#include <linux/compat.h>
-+#include <linux/file.h>
-+#include <linux/miscdevice.h>
-+#include <linux/module.h>
-+#include <linux/mutex.h>
-+#include <linux/vhost.h>
-+#include <linux/virtio_rpmsg.h>
-+#include <uapi/linux/rpmsg.h>
-+
-+#include "vhost.h"
-+#include "vhost_rpmsg.h"
-+
-+/*
-+ * All virtio-rpmsg virtual queue kicks always come with just one buffer -
-+ * either input or output
-+ */
-+static int vhost_rpmsg_get_single(struct vhost_virtqueue *vq)
-+{
-+	struct vhost_rpmsg *vr = container_of(vq->dev, struct vhost_rpmsg, dev);
-+	unsigned int out, in;
-+	int head = vhost_get_vq_desc(vq, vq->iov, ARRAY_SIZE(vq->iov), &out, &in,
-+				     NULL, NULL);
-+	if (head < 0) {
-+		vq_err(vq, "%s(): error %d getting buffer\n",
-+		       __func__, head);
-+		return head;
-+	}
-+
-+	/* Nothing new? */
-+	if (head == vq->num)
-+		return head;
-+
-+	if (vq == &vr->vq[VIRTIO_RPMSG_RESPONSE] && (out || in != 1)) {
-+		vq_err(vq,
-+		       "%s(): invalid %d input and %d output in response queue\n",
-+		       __func__, in, out);
-+		goto return_buf;
-+	}
-+
-+	if (vq == &vr->vq[VIRTIO_RPMSG_REQUEST] && (in || out != 1)) {
-+		vq_err(vq,
-+		       "%s(): invalid %d input and %d output in request queue\n",
-+		       __func__, in, out);
-+		goto return_buf;
-+	}
-+
-+	return head;
-+
-+return_buf:
-+	/*
-+	 * FIXME: might need to return the buffer using vhost_add_used()
-+	 * or vhost_discard_vq_desc(). vhost_discard_vq_desc() is
-+	 * described as "being useful for error handling," but it makes
-+	 * the thus discarded buffers "unseen," so next time we look we
-+	 * retrieve them again?
-+	 */
-+	return -EINVAL;
-+}
-+
-+static const struct vhost_rpmsg_ept *vhost_rpmsg_ept_find(struct vhost_rpmsg *vr, int addr)
-+{
-+	unsigned int i;
-+
-+	for (i = 0; i < vr->n_epts; i++)
-+		if (vr->ept[i].addr == addr)
-+			return vr->ept + i;
-+
-+	return NULL;
-+}
-+
-+/*
-+ * if len < 0, then for reading a request, the complete virtual queue buffer
-+ * size is prepared, for sending a response, the length in the iterator is used
-+ */
-+int vhost_rpmsg_start_lock(struct vhost_rpmsg *vr, struct vhost_rpmsg_iter *iter,
-+			   unsigned int qid, ssize_t len)
-+	__acquires(vq->mutex)
-+{
-+	struct vhost_virtqueue *vq = vr->vq + qid;
-+	size_t tmp;
-+
-+	if (qid >= VIRTIO_RPMSG_NUM_OF_VQS)
-+		return -EINVAL;
-+
-+	iter->vq = vq;
-+
-+	mutex_lock(&vq->mutex);
-+	vhost_disable_notify(&vr->dev, vq);
-+
-+	iter->head = vhost_rpmsg_get_single(vq);
-+	if (iter->head == vq->num)
-+		iter->head = -EAGAIN;
-+
-+	if (iter->head < 0)
-+		goto unlock;
-+
-+	tmp = vq->iov[0].iov_len;
-+	if (tmp < sizeof(iter->rhdr)) {
-+		vq_err(vq, "%s(): size %zu too small\n", __func__, tmp);
-+		iter->head = -ENOBUFS;
-+		goto return_buf;
-+	}
-+
-+	switch (qid) {
-+	case VIRTIO_RPMSG_REQUEST:
-+		if (len < 0) {
-+			len = tmp - sizeof(iter->rhdr);
-+		} else if (tmp < sizeof(iter->rhdr) + len) {
-+			iter->head = -ENOBUFS;
-+			goto return_buf;
-+		}
-+
-+		/* len is now the size of the payload */
-+		iov_iter_init(&iter->iov_iter, WRITE,
-+			      vq->iov, 1, sizeof(iter->rhdr) + len);
-+
-+		/* Read the RPMSG header with endpoint addresses */
-+		tmp = copy_from_iter(&iter->rhdr, sizeof(iter->rhdr), &iter->iov_iter);
-+		if (tmp != sizeof(iter->rhdr)) {
-+			vq_err(vq, "%s(): got %zu instead of %zu\n", __func__,
-+			       tmp, sizeof(iter->rhdr));
-+			iter->head = -EIO;
-+			goto return_buf;
-+		}
-+
-+		iter->ept = vhost_rpmsg_ept_find(vr, vhost32_to_cpu(vq, iter->rhdr.dst));
-+		if (!iter->ept) {
-+			vq_err(vq, "%s(): no endpoint with address %d\n",
-+			       __func__, vhost32_to_cpu(vq, iter->rhdr.dst));
-+			iter->head = -ENOENT;
-+			goto return_buf;
-+		}
-+
-+		/* Let the endpoint read the payload */
-+		if (iter->ept->read) {
-+			ssize_t ret = iter->ept->read(vr, iter);
-+
-+			if (ret < 0) {
-+				iter->head = ret;
-+				goto return_buf;
-+			}
-+
-+			iter->rhdr.len = cpu_to_vhost16(vq, ret);
-+		} else {
-+			iter->rhdr.len = 0;
-+		}
-+
-+		/* Prepare for the response phase */
-+		iter->rhdr.dst = iter->rhdr.src;
-+		iter->rhdr.src = cpu_to_vhost32(vq, iter->ept->addr);
-+
-+		break;
-+	case VIRTIO_RPMSG_RESPONSE:
-+		if (!iter->ept && iter->rhdr.dst != cpu_to_vhost32(vq, RPMSG_NS_ADDR)) {
-+			/*
-+			 * Usually the iterator is configured when processing a
-+			 * message on the request queue, but it's also possible
-+			 * to send a message on the response queue without a
-+			 * preceding request, in that case the iterator must
-+			 * contain source and destination addresses.
-+			 */
-+			iter->ept = vhost_rpmsg_ept_find(vr, vhost32_to_cpu(vq, iter->rhdr.src));
-+			if (!iter->ept) {
-+				iter->head = -ENOENT;
-+				goto return_buf;
-+			}
-+		}
-+
-+		if (len < 0) {
-+			len = tmp - sizeof(iter->rhdr);
-+		} else if (tmp < sizeof(iter->rhdr) + len) {
-+			iter->head = -ENOBUFS;
-+			goto return_buf;
-+		} else {
-+			iter->rhdr.len = cpu_to_vhost16(vq, len);
-+		}
-+
-+		/* len is now the size of the payload */
-+		iov_iter_init(&iter->iov_iter, READ, vq->iov, 1, sizeof(iter->rhdr) + len);
-+
-+		/* Write the RPMSG header with endpoint addresses */
-+		tmp = copy_to_iter(&iter->rhdr, sizeof(iter->rhdr), &iter->iov_iter);
-+		if (tmp != sizeof(iter->rhdr)) {
-+			iter->head = -EIO;
-+			goto return_buf;
-+		}
-+
-+		/* Let the endpoint write the payload */
-+		if (iter->ept && iter->ept->write) {
-+			ssize_t ret = iter->ept->write(vr, iter);
-+
-+			if (ret < 0) {
-+				iter->head = ret;
-+				goto return_buf;
-+			}
-+		}
-+
-+		break;
-+	}
-+
-+	return 0;
-+
-+return_buf:
-+	/*
-+	 * FIXME: vhost_discard_vq_desc() or vhost_add_used(), see comment in
-+	 * vhost_rpmsg_get_single()
-+	 */
-+unlock:
-+	vhost_enable_notify(&vr->dev, vq);
-+	mutex_unlock(&vq->mutex);
-+
-+	return iter->head;
-+}
-+EXPORT_SYMBOL_GPL(vhost_rpmsg_start_lock);
-+
-+size_t vhost_rpmsg_copy(struct vhost_rpmsg *vr, struct vhost_rpmsg_iter *iter,
-+			void *data, size_t size)
-+{
-+	/*
-+	 * We could check for excess data, but copy_{to,from}_iter() don't do
-+	 * that either
-+	 */
-+	if (iter->vq == vr->vq + VIRTIO_RPMSG_RESPONSE)
-+		return copy_to_iter(data, size, &iter->iov_iter);
-+
-+	return copy_from_iter(data, size, &iter->iov_iter);
-+}
-+EXPORT_SYMBOL_GPL(vhost_rpmsg_copy);
-+
-+int vhost_rpmsg_finish_unlock(struct vhost_rpmsg *vr,
-+			      struct vhost_rpmsg_iter *iter)
-+	__releases(vq->mutex)
-+{
-+	if (iter->head >= 0)
-+		vhost_add_used_and_signal(iter->vq->dev, iter->vq, iter->head,
-+					  vhost16_to_cpu(iter->vq, iter->rhdr.len) +
-+					  sizeof(iter->rhdr));
-+
-+	vhost_enable_notify(&vr->dev, iter->vq);
-+	mutex_unlock(&iter->vq->mutex);
-+
-+	return iter->head;
-+}
-+EXPORT_SYMBOL_GPL(vhost_rpmsg_finish_unlock);
-+
-+/*
-+ * Return false to terminate the external loop only if we fail to obtain either
-+ * a request or a response buffer
-+ */
-+static bool handle_rpmsg_req_single(struct vhost_rpmsg *vr,
-+				    struct vhost_virtqueue *vq)
-+{
-+	struct vhost_rpmsg_iter iter;
-+	int ret = vhost_rpmsg_start_lock(vr, &iter, VIRTIO_RPMSG_REQUEST, -EINVAL);
-+	if (!ret)
-+		ret = vhost_rpmsg_finish_unlock(vr, &iter);
-+	if (ret < 0) {
-+		if (ret != -EAGAIN)
-+			vq_err(vq, "%s(): RPMSG processing failed %d\n",
-+			       __func__, ret);
-+		return false;
-+	}
-+
-+	if (!iter.ept->write)
-+		return true;
-+
-+	ret = vhost_rpmsg_start_lock(vr, &iter, VIRTIO_RPMSG_RESPONSE, -EINVAL);
-+	if (!ret)
-+		ret = vhost_rpmsg_finish_unlock(vr, &iter);
-+	if (ret < 0) {
-+		vq_err(vq, "%s(): RPMSG finalising failed %d\n", __func__, ret);
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+static void handle_rpmsg_req_kick(struct vhost_work *work)
-+{
-+	struct vhost_virtqueue *vq = container_of(work, struct vhost_virtqueue,
-+						  poll.work);
-+	struct vhost_rpmsg *vr = container_of(vq->dev, struct vhost_rpmsg, dev);
-+
-+	while (handle_rpmsg_req_single(vr, vq))
-+		;
-+}
-+
-+/*
-+ * initialise two virtqueues with an array of endpoints,
-+ * request and response callbacks
-+ */
-+void vhost_rpmsg_init(struct vhost_rpmsg *vr, const struct vhost_rpmsg_ept *ept,
-+		      unsigned int n_epts)
-+{
-+	unsigned int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(vr->vq); i++)
-+		vr->vq_p[i] = &vr->vq[i];
-+
-+	/* vq[0]: host -> guest, vq[1]: host <- guest */
-+	vr->vq[VIRTIO_RPMSG_REQUEST].handle_kick = handle_rpmsg_req_kick;
-+	vr->vq[VIRTIO_RPMSG_RESPONSE].handle_kick = NULL;
-+
-+	vr->ept = ept;
-+	vr->n_epts = n_epts;
-+
-+	vhost_dev_init(&vr->dev, vr->vq_p, VIRTIO_RPMSG_NUM_OF_VQS,
-+		       UIO_MAXIOV, 0, 0, true, NULL);
-+}
-+EXPORT_SYMBOL_GPL(vhost_rpmsg_init);
-+
-+void vhost_rpmsg_destroy(struct vhost_rpmsg *vr)
-+{
-+	if (vhost_dev_has_owner(&vr->dev))
-+		vhost_poll_flush(&vr->vq[VIRTIO_RPMSG_REQUEST].poll);
-+
-+	vhost_dev_cleanup(&vr->dev);
-+}
-+EXPORT_SYMBOL_GPL(vhost_rpmsg_destroy);
-+
-+/* send namespace */
-+int vhost_rpmsg_ns_announce(struct vhost_rpmsg *vr, const char *name, unsigned int src)
-+{
-+	struct vhost_virtqueue *vq = &vr->vq[VIRTIO_RPMSG_RESPONSE];
-+	struct vhost_rpmsg_iter iter = {
-+		.rhdr = {
-+			.src = 0,
-+			.dst = cpu_to_vhost32(vq, RPMSG_NS_ADDR),
-+			.flags = cpu_to_vhost16(vq, RPMSG_NS_CREATE), /* rpmsg_recv_single() */
-+		},
-+	};
-+	struct rpmsg_ns_msg ns = {
-+		.addr = cpu_to_vhost32(vq, src),
-+		.flags = cpu_to_vhost32(vq, RPMSG_NS_CREATE), /* for rpmsg_ns_cb() */
-+	};
-+	int ret = vhost_rpmsg_start_lock(vr, &iter, VIRTIO_RPMSG_RESPONSE, sizeof(ns));
-+
-+	if (ret < 0)
-+		return ret;
-+
-+	strlcpy(ns.name, name, sizeof(ns.name));
-+
-+	ret = vhost_rpmsg_copy(vr, &iter, &ns, sizeof(ns));
-+	if (ret != sizeof(ns))
-+		vq_err(iter.vq, "%s(): added %d instead of %zu bytes\n",
-+		       __func__, ret, sizeof(ns));
-+
-+	ret = vhost_rpmsg_finish_unlock(vr, &iter);
-+	if (ret < 0)
-+		vq_err(iter.vq, "%s(): namespace announcement failed: %d\n",
-+		       __func__, ret);
-+
-+	return ret;
-+}
-+EXPORT_SYMBOL_GPL(vhost_rpmsg_ns_announce);
-+
-+MODULE_LICENSE("GPL v2");
-+MODULE_AUTHOR("Intel, Inc.");
-+MODULE_DESCRIPTION("Vhost RPMsg API");
-diff --git a/drivers/vhost/vhost_rpmsg.h b/drivers/vhost/vhost_rpmsg.h
-new file mode 100644
-index 000000000000..30072cecb8a0
---- /dev/null
-+++ b/drivers/vhost/vhost_rpmsg.h
-@@ -0,0 +1,74 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright(c) 2020 Intel Corporation. All rights reserved.
-+ *
-+ * Author: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-+ */
-+
-+#ifndef VHOST_RPMSG_H
-+#define VHOST_RPMSG_H
-+
-+#include <linux/uio.h>
-+#include <linux/virtio_rpmsg.h>
-+
-+#include "vhost.h"
-+
-+/* RPMsg uses two VirtQueues: one for each direction */
-+enum {
-+	VIRTIO_RPMSG_RESPONSE,	/* RPMsg response (host->guest) buffers */
-+	VIRTIO_RPMSG_REQUEST,	/* RPMsg request (guest->host) buffers */
-+	/* Keep last */
-+	VIRTIO_RPMSG_NUM_OF_VQS,
-+};
-+
-+struct vhost_rpmsg_ept;
-+
-+struct vhost_rpmsg_iter {
-+	struct iov_iter iov_iter;
-+	struct rpmsg_hdr rhdr;
-+	struct vhost_virtqueue *vq;
-+	const struct vhost_rpmsg_ept *ept;
-+	int head;
-+	void *priv;
-+};
-+
-+struct vhost_rpmsg {
-+	struct vhost_dev dev;
-+	struct vhost_virtqueue vq[VIRTIO_RPMSG_NUM_OF_VQS];
-+	struct vhost_virtqueue *vq_p[VIRTIO_RPMSG_NUM_OF_VQS];
-+	const struct vhost_rpmsg_ept *ept;
-+	unsigned int n_epts;
-+};
-+
-+struct vhost_rpmsg_ept {
-+	ssize_t (*read)(struct vhost_rpmsg *, struct vhost_rpmsg_iter *);
-+	ssize_t (*write)(struct vhost_rpmsg *, struct vhost_rpmsg_iter *);
-+	int addr;
-+};
-+
-+static inline size_t vhost_rpmsg_iter_len(const struct vhost_rpmsg_iter *iter)
-+{
-+	return iter->rhdr.len;
-+}
-+
-+#define VHOST_RPMSG_ITER(_vq, _src, _dst) {			\
-+	.rhdr = {						\
-+			.src = cpu_to_vhost32(_vq, _src),	\
-+			.dst = cpu_to_vhost32(_vq, _dst),	\
-+		},						\
-+	}
-+
-+void vhost_rpmsg_init(struct vhost_rpmsg *vr, const struct vhost_rpmsg_ept *ept,
-+		      unsigned int n_epts);
-+void vhost_rpmsg_destroy(struct vhost_rpmsg *vr);
-+int vhost_rpmsg_ns_announce(struct vhost_rpmsg *vr, const char *name,
-+			    unsigned int src);
-+int vhost_rpmsg_start_lock(struct vhost_rpmsg *vr,
-+			   struct vhost_rpmsg_iter *iter,
-+			   unsigned int qid, ssize_t len);
-+size_t vhost_rpmsg_copy(struct vhost_rpmsg *vr, struct vhost_rpmsg_iter *iter,
-+			void *data, size_t size);
-+int vhost_rpmsg_finish_unlock(struct vhost_rpmsg *vr,
-+			      struct vhost_rpmsg_iter *iter);
-+
-+#endif
--- 
-2.27.0
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+VGhpcyBwYXRjaCBzZXJpZXMgaXMgYmFzZWQgb24gdGhlIFZNIGludHJvc3BlY3Rpb24gcGF0Y2hl
+cwooaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcva3ZtLzIwMjAwNzIxMjEwOTIyLjc2NDYtMS1hbGF6
+YXJAYml0ZGVmZW5kZXIuY29tLyksCmV4dGVuZGluZyB0aGUgaW50cm9zcGVjdGlvbiBBUEkgd2l0
+aCBFUFQgVmlld3MgYW5kIFZpcnR1YWxpemF0aW9uCkV4Y2VwdGlvbnMgKCNWRSkgc3VwcG9ydC4K
+ClRoZSBwdXJwb3NlIG9mIHRoaXMgc2VyaWVzIGlzIHRvIGdldCBhbiBpbml0aWFsIGZlZWRiYWNr
+IGFuZCB0byBzZWUgaWYKd2UgYXJlIG9uIHRoZSByaWdodCB0cmFjaywgZXNwZWNpYWxseSBiZWNh
+dXNlIHRoZSBjaGFuZ2VzIG1hZGUgdG8gYWRkCnRoZSBFUFQgdmlld3MgYXJlIG5vdCBzbWFsbCAo
+ZXZlbiBpZiB0aGV5IGFkZCBzdXBwb3J0IG9ubHkgZm9yIGRpZmZlcmVudAphY2Nlc3MgcmlnaHRz
+IGZvciBub3csIG5vdCBmb3IgZGlmZmVyZW50IGNvbnRlbnQpLgoKT25lIHVzZSBjYXNlIGZvciB0
+aGVzZSBleHRlbnNpb25zIGlzIHRvIHJ1biBhIGd1ZXN0IGFnZW50LCBpc29sYXRlZCBpbgphbm90
+aGVyIEVQVCB2aWV3IGFuZCB1c2luZyBWaXJ0dWFsaXphdGlvbiBFeGNlcHRpb25zICgjVkUpLCB0
+byByZWR1Y2UKdGhlIG51bWJlciBvZiBWTS1FeGl0cyBjYXVzZWQgYnkgRVBUIHZpb2xhdGlvbnMu
+CgpBbm90aGVyIGNhc2UgZm9yIEVQVCB2aWV3cyBpcyB0byBzaW5nbGUtc3RlcCBvbmUgdkNQVSBv
+biBhIGRpZmZlcmVudCB2aWV3Cih3aXRoIG1vcmUgcmVsYXhlZCBwYWdlIGFjY2VzcyByZXN0cmlj
+dGlvbnMpIHdoaWxlIGFsbCB0aGUgb3RoZXJzIHJ1bgpvbiBhIG1haW4vcmVzdHJpY3RlZCB2aWV3
+LgoKUGF0Y2hlcyAxLTExIG1ha2UgcHJlcGFyYXRvcnkgY2hhbmdlcyBmb3IgRVBUIHZpZXdzLgoK
+UGF0Y2hlcyAxMi0xOSBleHRlbmQgdGhlIFZNIGludHJvc3BlY3Rpb24gQVBJIHdpdGggRVBULXZp
+ZXdzIHJlbGF0ZWQKY29tbWFuZHMgYW5kIGRhdGEuIFRoZSBHZXQvU2V0L0NvbnRyb2wgRVBUIHZp
+ZXcgY29tbWFuZHMgYXJlIGFkZGVkLAp0aGUgS1ZNSV9WTV9TRVRfUEFHRV9BQ0NFU1MgY29tbWFu
+ZCBhbmQgdGhlIHZDUFUgaW50cm9zcGVjdGlvbiBldmVudHMKYXJlIGV4dGVuZGVkIHdpdGggdGhl
+IEVQVCB2aWV3LgoKUGF0Y2hlcyAyMC0zMCBtYWtlIHByZXBhcmF0b3J5IGNoYW5nZXMgZm9yICNW
+RS4KClBhdGNoZXMgMzEtMzQgZXh0ZW5kIHRoZSBWTSBpbnRyb3NwZWN0aW9uIEFQSSB3aXRoICNW
+RSByZWxhdGVkIGNvbW1hbmRzLgoKQWRhbGJlcnQgTGF6xINyICgyKToKICBLVk06IHg4NjogbW11
+OiByZWluZGVudCB0byBhdm9pZCBsaW5lcyBsb25nZXIgdGhhbiA4MCBjaGFycwogIEtWTTogaW50
+cm9zcGVjdGlvbjogbWFzayBvdXQgbm9uLXJ3eCBmbGFncyB3aGVuIHJlYWRpbmcvd3JpdGluZwog
+ICAgZnJvbS90byB0aGUgaW50ZXJuYWwgZGF0YWJhc2UKCk1hcmlhbiBSb3Rhcml1ICg1KToKICBL
+Vk06IHg4NjogZXhwb3J0IC5nZXRfdm1mdW5jX3N0YXR1cygpCiAgS1ZNOiB4ODY6IGV4cG9ydCAu
+Z2V0X2VwdHBfc3dpdGNoaW5nX3N0YXR1cygpCiAgS1ZNOiB4ODY6IG1tdTogYWRkIHN1cHBvcnQg
+Zm9yIEVQVCBzd2l0Y2hpbmcKICBLVk06IHg4NjogYWRkIC5zZXRfZXB0X3ZpZXcoKQogIEtWTTog
+eDg2OiB2bXg6IGFkZCBzdXBwb3J0IGZvciB2aXJ0dWFsaXphdGlvbiBleGNlcHRpb25zCgpTZWFu
+IENocmlzdG9waGVyc29uICgyKToKICBLVk06IFZNWDogRGVmaW5lIEVQVCBzdXBwcmVzcyAjVkUg
+Yml0IChiaXQgNjMgaW4gRVBUIGxlYWYgZW50cmllcykKICBLVk06IFZNWDogU3VwcHJlc3MgRVBU
+IHZpb2xhdGlvbiAjVkUgYnkgZGVmYXVsdCAod2hlbiBlbmFibGVkKQoKyJh0ZWZhbiDImGljbGVy
+dSAoMjUpOgogIEtWTTogeDg2OiBhZGQga3ZtX2dldF9lcHRfdmlldygpCiAgS1ZNOiB4ODY6IG1t
+dTogYWRkIEVQVCB2aWV3IHBhcmFtZXRlciB0byBrdm1fbW11X2dldF9wYWdlKCkKICBLVk06IHg4
+NjogbW11OiBpbmNyZWFzZSBtbXVfbWVtb3J5X2NhY2hlIHNpemUKICBLVk06IHg4NjogYWRkIC5j
+b250cm9sX2VwdF92aWV3KCkKICBLVk06IHg4NjogcGFnZSB0cmFjazogYWxsb3cgcGFnZSB0cmFj
+a2luZyBmb3IgZGlmZmVyZW50IEVQVCB2aWV3cwogIEtWTTogeDg2OiBtbXU6IGFsbG93IHphcHBp
+bmcgc2hhZG93IHBhZ2VzIGZvciBzcGVjaWZpYyBFUFQgdmlld3MKICBLVk06IGludHJvc3BlY3Rp
+b246IGV4dGVuZCBzdHJ1Y3Qga3ZtaV9mZWF0dXJlcyB3aXRoIHRoZSBFUFQgdmlld3MKICAgIHN0
+YXR1cyBzdXBwb3J0CiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9WQ1BVX0dFVF9FUFRf
+VklFVwogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkICd2aWV3JyBmaWVsZCB0byBzdHJ1Y3Qga3Zt
+aV9ldmVudF9hcmNoCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9WQ1BVX1NFVF9FUFRf
+VklFVwogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTUlfVkNQVV9DT05UUk9MX0VQVF9WSUVX
+CiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBleHRlbmQgdGhlIGFjY2VzcyByaWdodHMgZGF0YWJhc2Ug
+d2l0aCBFUFQgdmlldwogICAgaW5mbwogIEtWTTogaW50cm9zcGVjdGlvbjogZXh0ZW5kIEtWTUlf
+Vk1fU0VUX1BBR0VfQUNDRVNTIHdpdGggRVBUIHZpZXcgaW5mbwogIEtWTTogaW50cm9zcGVjdGlv
+bjogY2xlYW4gbm9uLWRlZmF1bHQgRVBUcyBvbiB1bmhvb2sKICBLVk06IHg4NjogbW11OiBmaXg6
+IHVwZGF0ZSBwcmVzZW50X21hc2sgaW4gc3B0ZV9yZWFkX3Byb3RlY3QoKQogIEtWTTogdm14OiB0
+cmlnZ2VyIHZtLWV4aXRzIGZvciBtbWlvIHNwdGVzIGJ5IGRlZmF1bHQgd2hlbiAjVkUgaXMKICAg
+IGVuYWJsZWQKICBLVk06IHg4Njogc3ZtOiBzZXQgLmNsZWFyX3BhZ2UoKQogIEtWTTogeDg2OiBh
+ZGQgLnNldF92ZV9pbmZvKCkKICBLVk06IHg4NjogYWRkIC5kaXNhYmxlX3ZlKCkKICBLVk06IHg4
+NjogcGFnZV90cmFjazogYWRkIHN1cHBvcnQgZm9yIHN1cHByZXNzICNWRSBiaXQKICBLVk06IHZt
+eDogbWFrZSB1c2Ugb2YgRVBUUF9JTkRFWCBpbiB2bXhfaGFuZGxlX2V4aXQoKQogIEtWTTogdm14
+OiBtYWtlIHVzZSBvZiBFUFRQX0lOREVYIGluIHZteF9zZXRfZXB0X3ZpZXcoKQogIEtWTTogaW50
+cm9zcGVjdGlvbjogYWRkICNWRSBob3N0IGNhcGFiaWxpdHkgY2hlY2tlcgogIEtWTTogaW50cm9z
+cGVjdGlvbjogYWRkIEtWTUlfVkNQVV9TRVRfVkVfSU5GTy9LVk1JX1ZDUFVfRElTQUJMRV9WRQog
+IEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTUlfVk1fU0VUX1BBR0VfU1ZFCgogRG9jdW1lbnRh
+dGlvbi92aXJ0L2t2bS9rdm1pLnJzdCAgICAgICAgICAgICAgIHwgMjI3ICsrKysrKysrKysrLQog
+YXJjaC94ODYvaW5jbHVkZS9hc20va3ZtX2hvc3QuaCAgICAgICAgICAgICAgIHwgIDI3ICstCiBh
+cmNoL3g4Ni9pbmNsdWRlL2FzbS9rdm1fcGFnZV90cmFjay5oICAgICAgICAgfCAgIDUgKy0KIGFy
+Y2gveDg2L2luY2x1ZGUvYXNtL2t2bWlfaG9zdC5oICAgICAgICAgICAgICB8ICAgMSArCiBhcmNo
+L3g4Ni9pbmNsdWRlL2FzbS92bXguaCAgICAgICAgICAgICAgICAgICAgfCAgIDUgKwogYXJjaC94
+ODYvaW5jbHVkZS91YXBpL2FzbS9rdm1pLmggICAgICAgICAgICAgIHwgIDQ0ICsrLQogYXJjaC94
+ODYva3ZtL01ha2VmaWxlICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAyICstCiBhcmNoL3g4
+Ni9rdm0va3ZtaS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgODMgKysrKy0KIGFyY2gv
+eDg2L2t2bS9tbXUuaCAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxMiArLQogYXJjaC94
+ODYva3ZtL21tdS9tbXUuYyAgICAgICAgICAgICAgICAgICAgICAgIHwgMTkxICsrKysrKystLS0K
+IGFyY2gveDg2L2t2bS9tbXUvcGFnZV90cmFjay5jICAgICAgICAgICAgICAgICB8ICA2MyArKy0t
+CiBhcmNoL3g4Ni9rdm0vbW11L3BhZ2luZ190bXBsLmggICAgICAgICAgICAgICAgfCAgIDYgKy0K
+IGFyY2gveDg2L2t2bS9zdm0vc3ZtLmMgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArCiBh
+cmNoL3g4Ni9rdm0vdm14L2NhcGFiaWxpdGllcy5oICAgICAgICAgICAgICAgfCAgMTMgKwogYXJj
+aC94ODYva3ZtL3ZteC9jbGVhcl9wYWdlLlMgICAgICAgICAgICAgICAgIHwgIDE3ICsKIGFyY2gv
+eDg2L2t2bS92bXgvdm14LmMgICAgICAgICAgICAgICAgICAgICAgICB8IDI5MSArKysrKysrKysr
+KysrKy0KIGFyY2gveDg2L2t2bS92bXgvdm14LmggICAgICAgICAgICAgICAgICAgICAgICB8ICAx
+OCArCiBhcmNoL3g4Ni9rdm0veDg2LmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjAg
+Ky0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d2dC9rdm1ndC5jICAgICAgICAgICAgICB8ICAgOCAr
+LQogaW5jbHVkZS9saW51eC9rdm1pX2hvc3QuaCAgICAgICAgICAgICAgICAgICAgIHwgICAyICst
+CiBpbmNsdWRlL3VhcGkvbGludXgva3ZtaS5oICAgICAgICAgICAgICAgICAgICAgfCAgMTIgKy0K
+IC4uLi90ZXN0aW5nL3NlbGZ0ZXN0cy9rdm0veDg2XzY0L2t2bWlfdGVzdC5jICB8IDMzNSArKysr
+KysrKysrKysrKysrKy0KIHZpcnQva3ZtL2ludHJvc3BlY3Rpb24va3ZtaS5jICAgICAgICAgICAg
+ICAgICB8IDE3NSArKysrKystLS0KIHZpcnQva3ZtL2ludHJvc3BlY3Rpb24va3ZtaV9pbnQuaCAg
+ICAgICAgICAgICB8ICAxNyArLQogdmlydC9rdm0vaW50cm9zcGVjdGlvbi9rdm1pX21zZy5jICAg
+ICAgICAgICAgIHwgMTA2ICsrKysrKwogMjUgZmlsZXMgY2hhbmdlZCwgMTUxMiBpbnNlcnRpb25z
+KCspLCAxNjkgZGVsZXRpb25zKC0pCiBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC94ODYva3ZtL3Zt
+eC9jbGVhcl9wYWdlLlMKCgpiYXNlLWNvbW1pdDogZDlkYTlmNTg0MmUwNjk3NTY0ZjBmM2U1ODZk
+ODU4ZjI2MjZlOGY5MgpCYXNlZC1vbjogPDIwMjAwNzIxMjEwOTIyLjc2NDYtMS1hbGF6YXJAYml0
+ZGVmZW5kZXIuY29tPgpDQzogU2VhbiBDaHJpc3RvcGhlcnNvbiA8c2Vhbi5qLmNocmlzdG9waGVy
+c29uQGludGVsLmNvbT4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
+bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
