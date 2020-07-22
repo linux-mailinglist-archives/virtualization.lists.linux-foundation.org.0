@@ -1,52 +1,52 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF4D82292A1
-	for <lists.virtualization@lfdr.de>; Wed, 22 Jul 2020 09:55:57 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD6542292F1
+	for <lists.virtualization@lfdr.de>; Wed, 22 Jul 2020 10:05:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2AFF886A32;
-	Wed, 22 Jul 2020 07:55:56 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 03F0E87DAF;
+	Wed, 22 Jul 2020 08:05:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id g1jjtezfjw5X; Wed, 22 Jul 2020 07:55:55 +0000 (UTC)
+	with ESMTP id 6YZSByiM3lUR; Wed, 22 Jul 2020 08:05:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3229A86A56;
-	Wed, 22 Jul 2020 07:55:55 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D31D5882F8;
+	Wed, 22 Jul 2020 08:05:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0C225C004C;
-	Wed, 22 Jul 2020 07:55:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F65FC004C;
+	Wed, 22 Jul 2020 08:05:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AFD79C004C
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EE45CC004C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 07:55:52 +0000 (UTC)
+ Wed, 22 Jul 2020 08:05:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id A1EE1883C9
+ by hemlock.osuosl.org (Postfix) with ESMTP id D947B8805D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 07:55:52 +0000 (UTC)
+ Wed, 22 Jul 2020 08:05:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NWKb6OR0zo64
+ with ESMTP id It4pAkBMjbSg
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 07:55:51 +0000 (UTC)
+ Wed, 22 Jul 2020 08:05:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by hemlock.osuosl.org (Postfix) with ESMTPS id B75A3883A1
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 3677387DAF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Jul 2020 07:55:51 +0000 (UTC)
+ Wed, 22 Jul 2020 08:05:35 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8D778AEDA;
- Wed, 22 Jul 2020 07:55:56 +0000 (UTC)
-Date: Wed, 22 Jul 2020 09:55:46 +0200
+ by mx2.suse.de (Postfix) with ESMTP id 0EB4CAFE8;
+ Wed, 22 Jul 2020 08:05:41 +0000 (UTC)
+Date: Wed, 22 Jul 2020 10:05:30 +0200
 From: Joerg Roedel <jroedel@suse.de>
 To: Mike Stunes <mstunes@vmware.com>
 Subject: Re: [PATCH v4 51/75] x86/sev-es: Handle MMIO events
-Message-ID: <20200722075546.GG6132@suse.de>
+Message-ID: <20200722080530.GH6132@suse.de>
 References: <20200714120917.11253-1-joro@8bytes.org>
  <20200714120917.11253-52-joro@8bytes.org>
  <40D5C698-1ED2-4CCE-9C1D-07620A021A6A@vmware.com>
@@ -79,39 +79,35 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-SGkgTWlrZSwKCk9uIFR1ZSwgSnVsIDIxLCAyMDIwIGF0IDA5OjAxOjQ0UE0gKzAwMDAsIE1pa2Ug
-U3R1bmVzIHdyb3RlOgo+IEnigJltIHJ1bm5pbmcgaW50byBhbiBNTUlPLXJlbGF0ZWQgYnVnIHdo
-ZW4gSSB0cnkgdGVzdGluZyB0aGlzIG9uIG91ciBoeXBlcnZpc29yLgo+IAo+IER1cmluZyBib290
-LCBwcm9iZV9yb21zIChhcmNoL3g4Ni9rZXJuZWwvcHJvYmVfcm9tcy5jKSB1c2VzCj4gcm9tY2hl
-Y2tzdW0gb3ZlciB0aGUgdmlkZW8gUk9NIGFuZCBleHRlbnNpb24gUk9NIHJlZ2lvbnMuIEluIG15
-IHRlc3QKPiBWTSwgdGhlIHZpZGVvIFJPTSByb21jaGVja3N1bSBzdGFydHMgYXQgdmlydHVhbCBh
-ZGRyZXNzCj4gMHhmZmZmODg4MDAwMGMwMDAwIGFuZCBoYXMgbGVuZ3RoIDY1NTM2LiBCdXQsIGF0
-IGFkZHJlc3MKPiAweGZmZmY4ODgwMDAwYzQwMDAsIHdlIHN3aXRjaCBmcm9tIGJlaW5nIHZpZGVv
-LVJPTS1iYWNrZWQgdG8gYmVpbmcKPiB1bmJhY2tlZCBieSBhbnl0aGluZy4KPiAKPiBXaXRoIFNF
-Vi1FUyBlbmFibGVkLCBvdXIgcGxhdGZvcm0gaGFuZGxlcyByZWFkcyBhbmQgd3JpdGVzIHRvIHVu
-YmFja2VkCj4gbWVtb3J5IGJ5IHRyZWF0aW5nIHRoZW0gYXMgTU1JTy4gU28sIHRoZSByZWFkIGZy
-b20gMHhmZmZmODg4MDAwMGM0MDAwCj4gY2F1c2VzIGEgI1ZDLCB3aGljaCBpcyBoYW5kbGVkIGJ5
-IGRvX2Vhcmx5X2V4Y2VwdGlvbi4KPiAKPiBJbiBoYW5kbGluZyB0aGUgI1ZDLCB2Y19zbG93X3Zp
-cnRfdG9fcGh5cyBmYWlscyBmb3IgdGhhdCBhZGRyZXNzLiBNeQo+IHVuZGVyc3RhbmRpbmcgaXMg
-dGhhdCB0aGUgI1ZDIGhhbmRsZXIgc2hvdWxkIHRoZW4gYWRkIGFuIGVudHJ5IHRvIHRoZQo+IHBh
-Z2UgdGFibGVzIGFuZCByZXRyeSB0aGUgZmF1bHRpbmcgYWNjZXNzLiBTb21laG93LCB0aGF0IGlz
-buKAmXQKPiBoYXBwZW5pbmcuIEZyb20gdGhlIGh5cGVydmlzb3Igc2lkZSwgaXQgbG9va3MgbGlr
-ZSB0aGUgZ3Vlc3QgaXMKPiBsb29waW5nIHNvbWVob3cuIChJIHRoaW5rIHRoZSBWQ1BVIGlzIG1v
-c3RseSB1bmhhbHRlZCBhbmQgbWFraW5nCj4gcHJvZ3Jlc3MsIGJ1dCB0aGUgZ3Vlc3QgbmV2ZXIg
-Z2V0cyBwYXN0IHRoYXQgcm9tY2hlY2tzdW0uKSBUaGUgZ3Vlc3QKPiBuZXZlciBhY3R1YWxseSBt
-YWtlcyBhbiBNTUlPIHZtZ2V4aXQgZm9yIHRoYXQgYWRkcmVzcy4KClRoYXQgc291bmRzIGxpa2Ug
-eW91ciBndWVzdCBpcyBpbiBhIHBhZ2UtZmF1bHQgbG9vcCwgYnV0IEkgY2FuJ3QgeWV0CmV4cGxh
-aW4gd2h5LiBDYW4geW91IHBsZWFzZSBmaW5kIG91dCB0aGUgaW5zdHJ1Y3Rpb24gd2hpY2ggaXMg
-Y2F1c2luZwp0aGUgI1ZDIGV4Y2VwdGlvbj8KCklmIGEgcGFnZS1mYXVsdCBoYXBwZW5zIGR1cmlu
-ZyAjVkMgZW11bGF0aW9uIGl0IGlzIGZvcndhcmVkIHRvIHRoZQpwYWdlLWZhdWx0IGhhbmRsZXIs
-IHNvIHRoaXMgc2hvdWxkIHdvcmsuIEJ1dCBzb21laG93IHRoaXMgaXNuJ3QKaGFwcGVuaW5nIG9y
-IHRoZSBwYWdlLWZhdWx0IGhhbmRsZXIgY2FuJ3QgbWFwIHRoZSBmYXVsdGluZyBhZGRyZXNzLgoK
-ClJlZ2FyZHMsCgoJSm9lcmcKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3Rz
-LmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+Hmm, I have a theory ...
+
+On Tue, Jul 21, 2020 at 09:01:44PM +0000, Mike Stunes wrote:
+> If I remove the call to probe_roms from setup_arch, or remove the calls to romchecksum from probe_roms, this kernel boots normally.
+> 
+> Please let me know of other tests I should run or data that I can collect. Thanks!
+
+... can you please try the attached diff?
+
+diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
+index 251d0aabc55a..e1fea7a38019 100644
+--- a/arch/x86/kernel/sev-es.c
++++ b/arch/x86/kernel/sev-es.c
+@@ -389,7 +389,8 @@ static bool vc_slow_virt_to_phys(struct ghcb *ghcb, struct es_em_ctxt *ctxt,
+ 	pgd_t *pgd;
+ 	pte_t *pte;
+ 
+-	pgd = pgd_offset(current->active_mm, va);
++	pgd = __va(read_cr3_pa());
++	pgd = &pgd[pgd_index(va)];
+ 	pte = lookup_address_in_pgd(pgd, va, &level);
+ 	if (!pte) {
+ 		ctxt->fi.vector     = X86_TRAP_PF;
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
