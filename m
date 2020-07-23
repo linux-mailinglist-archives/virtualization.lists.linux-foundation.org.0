@@ -1,85 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1901622B5B9
-	for <lists.virtualization@lfdr.de>; Thu, 23 Jul 2020 20:32:52 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9125B22B608
+	for <lists.virtualization@lfdr.de>; Thu, 23 Jul 2020 20:48:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C048486EB3;
-	Thu, 23 Jul 2020 18:32:50 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 2462F2041A;
+	Thu, 23 Jul 2020 18:48:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0ZAAQeykG1EA; Thu, 23 Jul 2020 18:32:50 +0000 (UTC)
+	with ESMTP id hdH3N908KhsP; Thu, 23 Jul 2020 18:48:13 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 58A2486EA8;
-	Thu, 23 Jul 2020 18:32:50 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 44B2A21538;
+	Thu, 23 Jul 2020 18:48:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2F087C004C;
-	Thu, 23 Jul 2020 18:32:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0DF12C004C;
+	Thu, 23 Jul 2020 18:48:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A3384C004C
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9E783C004C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 18:32:48 +0000 (UTC)
+ Thu, 23 Jul 2020 18:48:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 91AE7888C3
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8B5C1888CE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 18:32:48 +0000 (UTC)
+ Thu, 23 Jul 2020 18:48:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2EI+agqG9Y3z
+ with ESMTP id kch9rb+dZ1Go
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 18:32:46 +0000 (UTC)
+ Thu, 23 Jul 2020 18:48:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 8544F888BD
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A0CBA888E2
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 18:32:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595529165;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sKozQ0KnMZ6/jFMcku3oZ38jLyvLbmaFhh4u3SNBWFc=;
- b=NwHy445dwDhWgN0bPLgyIj+OopsP/JsSnlx1eFsJ85xais64554m5Vn1lsPqgF5lXVIX+w
- TjtmbHE7/x0Du9iYjn2F0GsAndVnD8yqN8s2CvovvNwkEdOfh2PidzyBfrPYk3f4CzAu3d
- Sjckw28IO76Jrbv4HprKJS9wCJttDb8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-147-a7YRzGORP6i5sZOBhCiJ6Q-1; Thu, 23 Jul 2020 14:32:40 -0400
-X-MC-Unique: a7YRzGORP6i5sZOBhCiJ6Q-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A8A501005510;
- Thu, 23 Jul 2020 18:32:38 +0000 (UTC)
-Received: from llong.remote.csb (ovpn-119-128.rdu2.redhat.com [10.10.119.128])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 209FA19D7E;
- Thu, 23 Jul 2020 18:32:37 +0000 (UTC)
-Subject: Re: [PATCH v3 5/6] powerpc/pseries: implement paravirt qspinlocks for
- SPLPAR
-To: Peter Zijlstra <peterz@infradead.org>
+ Thu, 23 Jul 2020 18:48:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=1f7jSo8LA10wBMQErGxZHBOUpBnSmikLw3twngiB9do=; b=F/slu0yrPHxiFr2ZrGc9sNP3ns
+ LfcamOV4YCSjJmAGql8AMoxgRpgB7ejoGOoyBLRe1+NSiLXfp9s6mu47IldFSbQMbbcbjzbuf5u9O
+ 833qpQHg1wNCif0Lkq4328/WTptDw86N2VO7KfNGktPrwAGmjr8DSQjE1+eFSW1K8SBisHKNbRDV7
+ cmLO0EzWU8yk6Qi6ew5Fj8GFbqy5DhWcjYesQlU6LImS6PD+RqUFfZR8xNf4Vgk5d/STeIWcbrgB3
+ HEhT+oCJJ9EhcXF59Ajf1oGcNx4KwTMd9LXGPsPEGnP5wOjXWz5J0tqHK64RSquaQFlBJPTpvUZQp
+ TcS/d44Q==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1jygG9-0004Wx-0f; Thu, 23 Jul 2020 18:48:01 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 28C213013E5;
+ Thu, 23 Jul 2020 20:47:59 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id C4A532010461D; Thu, 23 Jul 2020 20:47:59 +0200 (CEST)
+Date: Thu, 23 Jul 2020 20:47:59 +0200
+From: peterz@infradead.org
+To: Waiman Long <longman@redhat.com>
+Subject: Re: [PATCH v3 5/6] powerpc/pseries: implement paravirt qspinlocks
+ for SPLPAR
+Message-ID: <20200723184759.GS119549@hirez.programming.kicks-ass.net>
 References: <20200706043540.1563616-1-npiggin@gmail.com>
  <20200706043540.1563616-6-npiggin@gmail.com>
  <874kqhvu1v.fsf@mpe.ellerman.id.au>
  <8265d782-4e50-a9b2-a908-0cb588ffa09c@redhat.com>
  <20200723140011.GR5523@worktop.programming.kicks-ass.net>
-From: Waiman Long <longman@redhat.com>
-Organization: Red Hat
-Message-ID: <845de183-56f5-2958-3159-faa131d46401@redhat.com>
-Date: Thu, 23 Jul 2020 14:32:36 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ <845de183-56f5-2958-3159-faa131d46401@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200723140011.GR5523@worktop.programming.kicks-ass.net>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Content-Disposition: inline
+In-Reply-To: <845de183-56f5-2958-3159-faa131d46401@redhat.com>
 Cc: linux-arch@vger.kernel.org, Michael Ellerman <mpe@ellerman.id.au>,
  Boqun Feng <boqun.feng@gmail.com>, virtualization@lists.linux-foundation.org,
  linuxppc-dev@lists.ozlabs.org, Nicholas Piggin <npiggin@gmail.com>,
@@ -97,35 +92,21 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 7/23/20 10:00 AM, Peter Zijlstra wrote:
-> On Thu, Jul 09, 2020 at 12:06:13PM -0400, Waiman Long wrote:
->> We don't really need to do a pv_spinlocks_init() if pv_kick() isn't
->> supported.
-> Waiman, if you cannot explain how not having kick is a sane thing, what
-> are you saying here?
->
-The current PPC paravirt spinlock code doesn't do any cpu kick. It does 
-an equivalence of pv_wait by yielding the cpu to the lock holder only. 
-The pv_spinlocks_init() is for setting up the hash table for doing 
-pv_kick. If we don't need to do pv_kick, we don't need the hash table.
+On Thu, Jul 23, 2020 at 02:32:36PM -0400, Waiman Long wrote:
+> BTW, do you have any comment on my v2 lock holder cpu info qspinlock patch?
+> I will have to update the patch to fix the reported 0-day test problem, but
+> I want to collect other feedback before sending out v3.
 
-I am not saying that pv_kick is not needed for the PPC environment. I 
-was just trying to adapt the pvqspinlock code to such an environment 
-first. Further investigation on how to implement some kind of pv_kick 
-will be something that we may want to do as a follow on.
+I want to say I hate it all, it adds instructions to a path we spend an
+aweful lot of time optimizing without really getting anything back for
+it.
 
-BTW, do you have any comment on my v2 lock holder cpu info qspinlock 
-patch? I will have to update the patch to fix the reported 0-day test 
-problem, but I want to collect other feedback before sending out v3.
-
-Cheers,
-Longman
-
+Will, how do you feel about it?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
