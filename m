@@ -1,54 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2317322C9DA
-	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 18:04:38 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id BF79687CE1;
-	Fri, 24 Jul 2020 16:04:36 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BV1AM1QrRMnk; Fri, 24 Jul 2020 16:04:34 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 27EFC886E3;
-	Fri, 24 Jul 2020 16:04:28 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C349C004C;
-	Fri, 24 Jul 2020 16:04:28 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B6A45C004C
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:04:26 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFB0B22C9D5
+	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 18:04:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 90FF823B88
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:04:26 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4FDEB2379C;
+	Fri, 24 Jul 2020 16:04:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id f1FowaUBlyy8; Fri, 24 Jul 2020 16:04:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id E476523B28;
+	Fri, 24 Jul 2020 16:04:27 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 77140C004D;
+	Fri, 24 Jul 2020 16:04:27 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D6B3EC004C
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Jul 2020 16:04:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 77B5C88A71
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Jul 2020 16:04:25 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OL0-hyDCYvFj
+ with ESMTP id hpfQ2vFEubi0
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Jul 2020 16:04:24 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 46C2C23B28
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 300B888B6D
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Jul 2020 16:04:22 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id A30B1F91;
- Fri, 24 Jul 2020 18:04:10 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 34A17FB4;
+ Fri, 24 Jul 2020 18:04:11 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v5 27/75] x86/idt: Move IDT to data segment
-Date: Fri, 24 Jul 2020 18:02:48 +0200
-Message-Id: <20200724160336.5435-28-joro@8bytes.org>
+Subject: [PATCH v5 28/75] x86/idt: Split idt_data setup out of set_intr_gate()
+Date: Fri, 24 Jul 2020 18:02:49 +0200
+Message-Id: <20200724160336.5435-29-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200724160336.5435-1-joro@8bytes.org>
 References: <20200724160336.5435-1-joro@8bytes.org>
@@ -84,29 +84,56 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-With SEV-ES, exception handling is needed very early, even before the
-kernel has cleared the bss segment. In order to prevent clearing the
-currently used IDT, move the IDT to the data segment.
+The code to setup idt_data is needed for early exception handling, but
+set_intr_gate() can't be used that early because it has pv-ops in its
+code path, which don't work that early.
+
+Split out the idt_data initialization part from set_intr_gate() so
+that it can be used separatly.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 Reviewed-by: Kees Cook <keescook@chromium.org>
 ---
- arch/x86/kernel/idt.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/kernel/idt.c | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
 
 diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
-index 7ecf9babf0cb..34fcc58b81b5 100644
+index 34fcc58b81b5..c19773174221 100644
 --- a/arch/x86/kernel/idt.c
 +++ b/arch/x86/kernel/idt.c
-@@ -158,7 +158,7 @@ static const __initconst struct idt_data apic_idts[] = {
- };
+@@ -205,18 +205,24 @@ idt_setup_from_table(gate_desc *idt, const struct idt_data *t, int size, bool sy
+ 	}
+ }
  
- /* Must be page-aligned because the real IDT is used in the cpu entry area */
--static gate_desc idt_table[IDT_ENTRIES] __page_aligned_bss;
-+static gate_desc idt_table[IDT_ENTRIES] __page_aligned_data;
++static void init_idt_data(struct idt_data *data, unsigned int n,
++			  const void *addr)
++{
++	BUG_ON(n > 0xFF);
++
++	memset(data, 0, sizeof(*data));
++	data->vector	= n;
++	data->addr	= addr;
++	data->segment	= __KERNEL_CS;
++	data->bits.type	= GATE_INTERRUPT;
++	data->bits.p	= 1;
++}
++
+ static __init void set_intr_gate(unsigned int n, const void *addr)
+ {
+ 	struct idt_data data;
  
- static struct desc_ptr idt_descr __ro_after_init = {
- 	.size		= IDT_TABLE_SIZE - 1,
+-	BUG_ON(n > 0xFF);
+-
+-	memset(&data, 0, sizeof(data));
+-	data.vector	= n;
+-	data.addr	= addr;
+-	data.segment	= __KERNEL_CS;
+-	data.bits.type	= GATE_INTERRUPT;
+-	data.bits.p	= 1;
++	init_idt_data(&data, n, addr);
+ 
+ 	idt_setup_from_table(idt_table, &data, 1, false);
+ }
 -- 
 2.27.0
 
