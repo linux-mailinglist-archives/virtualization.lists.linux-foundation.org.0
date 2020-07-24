@@ -2,53 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F5FA22C9C9
+	by mail.lfdr.de (Postfix) with ESMTPS id E4CB422C9CD
 	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 18:04:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id CEE2988B33;
-	Fri, 24 Jul 2020 16:04:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 3ED6F88B38;
+	Fri, 24 Jul 2020 16:04:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id H0fpFhjglI9j; Fri, 24 Jul 2020 16:04:23 +0000 (UTC)
+	with ESMTP id 1SMO+qJFhtKM; Fri, 24 Jul 2020 16:04:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 7331288B4B;
+	by hemlock.osuosl.org (Postfix) with ESMTP id B505488B5F;
 	Fri, 24 Jul 2020 16:04:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 563A0C004C;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9AEFAC004C;
 	Fri, 24 Jul 2020 16:04:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EEA77C08A2
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9BFA5C004C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:04:16 +0000 (UTC)
+ Fri, 24 Jul 2020 16:04:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id BA00923B9B
+ by silver.osuosl.org (Postfix) with ESMTP id 6768723509
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:04:16 +0000 (UTC)
+ Fri, 24 Jul 2020 16:04:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FU99Ypc8I-bU
+ with ESMTP id tBBxg1oWPcyw
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Jul 2020 16:04:06 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 90C6E23B31
+ by silver.osuosl.org (Postfix) with ESMTPS id 9B8F923B44
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Jul 2020 16:04:05 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 0F5D3C07;
+ by theia.8bytes.org (Postfix) with ESMTPSA id 96CEBC0D;
  Fri, 24 Jul 2020 18:04:01 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v5 09/75] x86/insn: Add insn_get_modrm_reg_off()
-Date: Fri, 24 Jul 2020 18:02:30 +0200
-Message-Id: <20200724160336.5435-10-joro@8bytes.org>
+Subject: [PATCH v5 10/75] x86/insn: Add insn_has_rep_prefix() helper
+Date: Fri, 24 Jul 2020 18:02:31 +0200
+Message-Id: <20200724160336.5435-11-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200724160336.5435-1-joro@8bytes.org>
 References: <20200724160336.5435-1-joro@8bytes.org>
@@ -84,76 +84,62 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Add a function to the instruction decoder which returns the pt_regs
-offset of the register specified in the reg field of the modrm byte.
+Add a function to check whether an instruction has a REP prefix.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
-Acked-by: Masami Hiramatsu <mhiramat@kernel.org>
+Reviewed-by: Masami Hiramatsu <mhiramat@kernel.org>
 ---
  arch/x86/include/asm/insn-eval.h |  1 +
- arch/x86/lib/insn-eval.c         | 23 +++++++++++++++++++++++
- 2 files changed, 24 insertions(+)
+ arch/x86/lib/insn-eval.c         | 24 ++++++++++++++++++++++++
+ 2 files changed, 25 insertions(+)
 
 diff --git a/arch/x86/include/asm/insn-eval.h b/arch/x86/include/asm/insn-eval.h
-index 392b4fe377f9..f748f57f1491 100644
+index f748f57f1491..a0f839aa144d 100644
 --- a/arch/x86/include/asm/insn-eval.h
 +++ b/arch/x86/include/asm/insn-eval.h
-@@ -17,6 +17,7 @@
+@@ -15,6 +15,7 @@
+ #define INSN_CODE_SEG_OPND_SZ(params) (params & 0xf)
+ #define INSN_CODE_SEG_PARAMS(oper_sz, addr_sz) (oper_sz | (addr_sz << 4))
  
++bool insn_has_rep_prefix(struct insn *insn);
  void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs);
  int insn_get_modrm_rm_off(struct insn *insn, struct pt_regs *regs);
-+int insn_get_modrm_reg_off(struct insn *insn, struct pt_regs *regs);
- unsigned long insn_get_seg_base(struct pt_regs *regs, int seg_reg_idx);
- int insn_get_code_seg_params(struct pt_regs *regs);
- int insn_fetch_from_user(struct pt_regs *regs,
+ int insn_get_modrm_reg_off(struct insn *insn, struct pt_regs *regs);
 diff --git a/arch/x86/lib/insn-eval.c b/arch/x86/lib/insn-eval.c
-index f52046f90dd3..a8ac5c5e94f0 100644
+index a8ac5c5e94f0..8ed9d645259c 100644
 --- a/arch/x86/lib/insn-eval.c
 +++ b/arch/x86/lib/insn-eval.c
-@@ -20,6 +20,7 @@
- 
- enum reg_type {
- 	REG_TYPE_RM = 0,
-+	REG_TYPE_REG,
- 	REG_TYPE_INDEX,
- 	REG_TYPE_BASE,
- };
-@@ -441,6 +442,13 @@ static int get_reg_offset(struct insn *insn, struct pt_regs *regs,
- 			regno += 8;
- 		break;
- 
-+	case REG_TYPE_REG:
-+		regno = X86_MODRM_REG(insn->modrm.value);
-+
-+		if (X86_REX_R(insn->rex_prefix.value))
-+			regno += 8;
-+		break;
-+
- 	case REG_TYPE_INDEX:
- 		regno = X86_SIB_INDEX(insn->sib.value);
- 		if (X86_REX_X(insn->rex_prefix.value))
-@@ -809,6 +817,21 @@ int insn_get_modrm_rm_off(struct insn *insn, struct pt_regs *regs)
- 	return get_reg_offset(insn, regs, REG_TYPE_RM);
+@@ -53,6 +53,30 @@ static bool is_string_insn(struct insn *insn)
+ 	}
  }
  
 +/**
-+ * insn_get_modrm_reg_off() - Obtain register in reg part of the ModRM byte
-+ * @insn:	Instruction containing the ModRM byte
-+ * @regs:	Register values as seen when entering kernel mode
++ * insn_has_rep_prefix() - Determine if instruction has a REP prefix
++ * @insn:	Instruction containing the prefix to inspect
 + *
 + * Returns:
 + *
-+ * The register indicated by the reg part of the ModRM byte. The
-+ * register is obtained as an offset from the base of pt_regs.
++ * true if the instruction has a REP prefix, false if not.
 + */
-+int insn_get_modrm_reg_off(struct insn *insn, struct pt_regs *regs)
++bool insn_has_rep_prefix(struct insn *insn)
 +{
-+	return get_reg_offset(insn, regs, REG_TYPE_REG);
++	int i;
++
++	insn_get_prefixes(insn);
++
++	for (i = 0; i < insn->prefixes.nbytes; i++) {
++		insn_byte_t p = insn->prefixes.bytes[i];
++
++		if (p == 0xf2 || p == 0xf3)
++			return true;
++	}
++
++	return false;
 +}
 +
  /**
-  * get_seg_base_limit() - obtain base address and limit of a segment
-  * @insn:	Instruction. Must be valid.
+  * get_seg_reg_override_idx() - obtain segment register override index
+  * @insn:	Valid instruction with segment override prefixes
 -- 
 2.27.0
 
