@@ -2,53 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id F420E22CABF
-	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 18:15:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DD8D22CAC2
+	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 18:15:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A68C987D31;
-	Fri, 24 Jul 2020 16:15:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 45C2487D31;
+	Fri, 24 Jul 2020 16:15:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id F11NfM74jR6e; Fri, 24 Jul 2020 16:15:14 +0000 (UTC)
+	with ESMTP id 1WH3C79QZ-D2; Fri, 24 Jul 2020 16:15:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B9CF98798E;
-	Fri, 24 Jul 2020 16:14:41 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 0F9428899D;
+	Fri, 24 Jul 2020 16:14:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9A01DC004E;
-	Fri, 24 Jul 2020 16:14:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F1AE6C004C;
+	Fri, 24 Jul 2020 16:14:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 757EBC004C
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 194B5C004C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:14:34 +0000 (UTC)
+ Fri, 24 Jul 2020 16:14:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 621F287C55
+ by silver.osuosl.org (Postfix) with ESMTP id 131D9240DF
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:14:34 +0000 (UTC)
+ Fri, 24 Jul 2020 16:14:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zqSHjrw67woN
+ with ESMTP id BRBiJB2OBecl
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:14:32 +0000 (UTC)
+ Fri, 24 Jul 2020 16:14:33 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 2818C883C0
+ by silver.osuosl.org (Postfix) with ESMTPS id 6A5C923E8D
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Jul 2020 16:14:32 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 55146FCE;
+ by theia.8bytes.org (Postfix) with ESMTPSA id D1420FCF;
  Fri, 24 Jul 2020 18:04:29 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v5 54/75] x86/sev-es: Handle DR7 read/write events
-Date: Fri, 24 Jul 2020 18:03:15 +0200
-Message-Id: <20200724160336.5435-55-joro@8bytes.org>
+Subject: [PATCH v5 55/75] x86/sev-es: Handle WBINVD Events
+Date: Fri, 24 Jul 2020 18:03:16 +0200
+Message-Id: <20200724160336.5435-56-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200724160336.5435-1-joro@8bytes.org>
 References: <20200724160336.5435-1-joro@8bytes.org>
@@ -84,146 +84,42 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Add code to handle #VC exceptions on DR7 register reads and writes.
-This is needed early because show_regs() reads DR7 to print it out.
-
-Under SEV-ES there is currently no support for saving/restoring the
-DRx registers, but software expects to be able to write to the DR7
-register. For now, cache the value written to DR7 and return it on
-read attempts, but do not touch the real hardware DR7.
+Implement a handler for #VC exceptions caused by WBINVD instructions.
 
 Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: - Adapt to #VC handling framework
-                   - Support early usage ]
+[ jroedel@suse.de: Adapt to #VC handling framework ]
 Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 85 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 85 insertions(+)
+ arch/x86/kernel/sev-es.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 379f9ad63ce8..1a7bfcb37602 100644
+index 1a7bfcb37602..2e83bbc330c9 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -28,6 +28,8 @@
- #include <asm/traps.h>
- #include <asm/svm.h>
- 
-+#define DR7_RESET_VALUE        0x400
-+
- /* For early boot hypervisor communication in SEV-ES enabled guests */
- static struct ghcb boot_ghcb_page __bss_decrypted __aligned(PAGE_SIZE);
- 
-@@ -75,6 +77,13 @@ struct sev_es_runtime_data {
- 	 */
- 	bool ghcb_active;
- 	bool backup_ghcb_active;
-+
-+	/*
-+	 * Cached DR7 value - write it on DR7 writes and return it on reads.
-+	 * That value will never make it to the real hardware DR7 as debugging
-+	 * is currently unsupported in SEV-ES guests.
-+	 */
-+	unsigned long dr7;
- };
- 
- struct ghcb_state {
-@@ -521,6 +530,21 @@ static long *vc_insn_get_reg(struct es_em_ctxt *ctxt)
- 	return reg_array + offset;
+@@ -847,6 +847,12 @@ static enum es_result vc_handle_dr7_read(struct ghcb *ghcb,
+ 	return ES_OK;
  }
  
-+static long *vc_insn_get_rm(struct es_em_ctxt *ctxt)
++static enum es_result vc_handle_wbinvd(struct ghcb *ghcb,
++				       struct es_em_ctxt *ctxt)
 +{
-+	long *reg_array;
-+	int offset;
-+
-+	reg_array = (long *)ctxt->regs;
-+	offset    = insn_get_modrm_rm_off(&ctxt->insn, ctxt->regs);
-+
-+	if (offset < 0)
-+		return NULL;
-+
-+	offset /= sizeof(long);
-+
-+	return reg_array + offset;
-+}
- static enum es_result vc_do_mmio(struct ghcb *ghcb, struct es_em_ctxt *ctxt,
- 				 unsigned int bytes, bool read)
- {
-@@ -768,6 +792,61 @@ static enum es_result vc_handle_mmio(struct ghcb *ghcb,
- 	return ret;
- }
- 
-+static enum es_result vc_handle_dr7_write(struct ghcb *ghcb,
-+					  struct es_em_ctxt *ctxt)
-+{
-+	struct sev_es_runtime_data *data = this_cpu_read(runtime_data);
-+	long val, *reg = vc_insn_get_rm(ctxt);
-+	enum es_result ret;
-+
-+	if (!reg)
-+		return ES_DECODE_FAILED;
-+
-+	val = *reg;
-+
-+	/* Upper 32 bits must be written as zeroes */
-+	if (val >> 32) {
-+		ctxt->fi.vector = X86_TRAP_GP;
-+		ctxt->fi.error_code = 0;
-+		return ES_EXCEPTION;
-+	}
-+
-+	/* Clear out other reserved bits and set bit 10 */
-+	val = (val & 0xffff23ffL) | BIT(10);
-+
-+	/* Early non-zero writes to DR7 are not supported */
-+	if (!data && (val & ~DR7_RESET_VALUE))
-+		return ES_UNSUPPORTED;
-+
-+	/* Using a value of 0 for ExitInfo1 means RAX holds the value */
-+	ghcb_set_rax(ghcb, val);
-+	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_WRITE_DR7, 0, 0);
-+	if (ret != ES_OK)
-+		return ret;
-+
-+	if (data)
-+		data->dr7 = val;
-+
-+	return ES_OK;
-+}
-+
-+static enum es_result vc_handle_dr7_read(struct ghcb *ghcb,
-+					 struct es_em_ctxt *ctxt)
-+{
-+	struct sev_es_runtime_data *data = this_cpu_read(runtime_data);
-+	long *reg = vc_insn_get_rm(ctxt);
-+
-+	if (!reg)
-+		return ES_DECODE_FAILED;
-+
-+	if (data)
-+		*reg = data->dr7;
-+	else
-+		*reg = DR7_RESET_VALUE;
-+
-+	return ES_OK;
++	return sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_WBINVD, 0, 0);
 +}
 +
  static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
  					 struct ghcb *ghcb,
  					 unsigned long exit_code)
-@@ -775,6 +854,12 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
- 	enum es_result result;
- 
- 	switch (exit_code) {
-+	case SVM_EXIT_READ_DR7:
-+		result = vc_handle_dr7_read(ghcb, ctxt);
+@@ -869,6 +875,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 	case SVM_EXIT_MSR:
+ 		result = vc_handle_msr(ghcb, ctxt);
+ 		break;
++	case SVM_EXIT_WBINVD:
++		result = vc_handle_wbinvd(ghcb, ctxt);
 +		break;
-+	case SVM_EXIT_WRITE_DR7:
-+		result = vc_handle_dr7_write(ghcb, ctxt);
-+		break;
- 	case SVM_EXIT_CPUID:
- 		result = vc_handle_cpuid(ghcb, ctxt);
+ 	case SVM_EXIT_NPF:
+ 		result = vc_handle_mmio(ghcb, ctxt);
  		break;
 -- 
 2.27.0
