@@ -1,70 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1472F22B90D
-	for <lists.virtualization@lfdr.de>; Thu, 23 Jul 2020 23:58:57 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BAED22C087
+	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 10:17:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id A4E6A203BB;
-	Thu, 23 Jul 2020 21:58:55 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 76E2687E3F;
+	Fri, 24 Jul 2020 08:16:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1k8nRmEpbp1c; Thu, 23 Jul 2020 21:58:53 +0000 (UTC)
+	with ESMTP id vuP1-Kb4mj3c; Fri, 24 Jul 2020 08:16:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 0D5A2203AC;
-	Thu, 23 Jul 2020 21:58:53 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 01F2687D96;
+	Fri, 24 Jul 2020 08:16:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E0415C016F;
-	Thu, 23 Jul 2020 21:58:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D4571C004C;
+	Fri, 24 Jul 2020 08:16:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 88FF0C004C
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 28F38C004C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 21:58:51 +0000 (UTC)
+ Fri, 24 Jul 2020 08:16:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 7BEC1882ED
+ by hemlock.osuosl.org (Postfix) with ESMTP id 1CE3B87D65
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 21:58:51 +0000 (UTC)
+ Fri, 24 Jul 2020 08:16:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MVNkpYd8URcb
+ with ESMTP id qcQ0aw7RnHFv
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 21:58:50 +0000 (UTC)
+ Fri, 24 Jul 2020 08:16:53 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id B7AF2882D3
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 92BE987B41
  for <virtualization@lists.linux-foundation.org>;
- Thu, 23 Jul 2020 21:58:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595541529;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=T3T05BblW5qcrnE9EzvsH5COWPH3G8n5S+3dyvDj4j8=;
- b=DNGUDB1022OhCiArFegFcIu5gWzTk2BzAtckcW7nXv0ZIOMJuQFo2dRrXLbmINFAPkAm43
- 7wodhkS7sCtU6bZK9P8JYNmo5iLWZdBPY7jqPA3CNNnEEeuoZVuwPaUqs4K1MaSLTNA5PO
- 2H5nKJokbHL2xnZJIxb+3uYcKzuob2A=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-309-1wwkHWrOOpOP_vwI3YSGQw-1; Thu, 23 Jul 2020 17:58:47 -0400
-X-MC-Unique: 1wwkHWrOOpOP_vwI3YSGQw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6195D80183C;
- Thu, 23 Jul 2020 21:58:45 +0000 (UTC)
-Received: from llong.remote.csb (ovpn-119-128.rdu2.redhat.com [10.10.119.128])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D6E245C1D3;
- Thu, 23 Jul 2020 21:58:43 +0000 (UTC)
-Subject: Re: [PATCH v3 5/6] powerpc/pseries: implement paravirt qspinlocks for
- SPLPAR
+ Fri, 24 Jul 2020 08:16:53 +0000 (UTC)
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 776FE2074A;
+ Fri, 24 Jul 2020 08:16:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1595578613;
+ bh=MtSSJVr7CkQ6qYnldFXBBhVSH/FImYJYfT41DnqnyfQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RwKzdNIM0IbM4QhStWrpabxkbmQfmemxolOJQbQ35i0L7IjfMB2mLxbxDs3yf9OMG
+ t5gjDHgkaIcsKKrEcDnxZ3E6OOSzQ0tacBMUiHRqwCuYIXYMIMsfdvbx+wenpuiypB
+ b+V/llaOX/7WR8IKO4GbceZdbj7sGKlc3q02Gn3Q=
+Date: Fri, 24 Jul 2020 09:16:48 +0100
+From: Will Deacon <will@kernel.org>
 To: peterz@infradead.org
+Subject: Re: [PATCH v3 5/6] powerpc/pseries: implement paravirt qspinlocks
+ for SPLPAR
+Message-ID: <20200724081647.GA16642@willie-the-truck>
 References: <20200706043540.1563616-1-npiggin@gmail.com>
  <20200706043540.1563616-6-npiggin@gmail.com>
  <874kqhvu1v.fsf@mpe.ellerman.id.au>
@@ -72,24 +63,16 @@ References: <20200706043540.1563616-1-npiggin@gmail.com>
  <20200723140011.GR5523@worktop.programming.kicks-ass.net>
  <845de183-56f5-2958-3159-faa131d46401@redhat.com>
  <20200723184759.GS119549@hirez.programming.kicks-ass.net>
- <6d6279ad-7432-63c1-14c3-18c4cff30bf8@redhat.com>
- <20200723195855.GU119549@hirez.programming.kicks-ass.net>
-From: Waiman Long <longman@redhat.com>
-Organization: Red Hat
-Message-ID: <4fbe47a5-dbc9-427a-5b21-b31b37bc751a@redhat.com>
-Date: Thu, 23 Jul 2020 17:58:43 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200723195855.GU119549@hirez.programming.kicks-ass.net>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Content-Disposition: inline
+In-Reply-To: <20200723184759.GS119549@hirez.programming.kicks-ass.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: linux-arch@vger.kernel.org, Michael Ellerman <mpe@ellerman.id.au>,
- Boqun Feng <boqun.feng@gmail.com>, virtualization@lists.linux-foundation.org,
- linuxppc-dev@lists.ozlabs.org, Nicholas Piggin <npiggin@gmail.com>,
- linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>,
- kvm-ppc@vger.kernel.org, Anton Blanchard <anton@ozlabs.org>,
- Will Deacon <will@kernel.org>
+ Boqun Feng <boqun.feng@gmail.com>, linux-kernel@vger.kernel.org,
+ Nicholas Piggin <npiggin@gmail.com>, virtualization@lists.linux-foundation.org,
+ Ingo Molnar <mingo@redhat.com>, kvm-ppc@vger.kernel.org,
+ Waiman Long <longman@redhat.com>, Anton Blanchard <anton@ozlabs.org>,
+ linuxppc-dev@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,63 +84,31 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 7/23/20 3:58 PM, peterz@infradead.org wrote:
-> On Thu, Jul 23, 2020 at 03:04:13PM -0400, Waiman Long wrote:
->> On 7/23/20 2:47 PM, peterz@infradead.org wrote:
->>> On Thu, Jul 23, 2020 at 02:32:36PM -0400, Waiman Long wrote:
->>>> BTW, do you have any comment on my v2 lock holder cpu info qspinlock patch?
->>>> I will have to update the patch to fix the reported 0-day test problem, but
->>>> I want to collect other feedback before sending out v3.
->>> I want to say I hate it all, it adds instructions to a path we spend an
->>> aweful lot of time optimizing without really getting anything back for
->>> it.
->> It does add some extra instruction that may slow it down slightly, but I
->> don't agree that it gives nothing back. The cpu lock holder information can
->> be useful in analyzing crash dumps and in some debugging situation. I think
->> it can be useful in RHEL for this readon. How about an x86 config option to
->> allow distros to decide if they want to have it enabled? I will make sure
->> that it will have no performance degradation if the option is not enabled.
-> Config knobs suck too; they create a maintenance burden (we get to make
-> sure all the permutations works/build/etc..) and effectively nobody uses
-> them, since world+dog uses what distros pick.
->
-> Anyway, instead of adding a second per-cpu variable, can you see how
-> horrible something like this is:
->
-> unsigned char adds(unsigned char var, unsigned char val)
-> {
-> 	unsigned short sat = 0xff, tmp = var;
->
-> 	asm ("addb	%[val], %b[var];"
-> 	     "cmovc	%[sat], %[var];"
-> 	     : [var] "+r" (tmp)
-> 	     : [val] "ir" (val), [sat] "r" (sat)
-> 	     );
->
-> 	return tmp;
-> }
->
-> Another thing to try is, instead of threading that lockval throughout
-> the thing, simply:
->
-> #define _Q_LOCKED_VAL	this_cpu_read_stable(cpu_sat)
->
-> or combined with the above
->
-> #define _Q_LOCKED_VAL	adds(this_cpu_read_stable(cpu_number), 2)
->
-> and see if the compiler really makes a mess of things.
->
-Thanks for the suggestion. I will try that out.
+On Thu, Jul 23, 2020 at 08:47:59PM +0200, peterz@infradead.org wrote:
+> On Thu, Jul 23, 2020 at 02:32:36PM -0400, Waiman Long wrote:
+> > BTW, do you have any comment on my v2 lock holder cpu info qspinlock patch?
+> > I will have to update the patch to fix the reported 0-day test problem, but
+> > I want to collect other feedback before sending out v3.
+> 
+> I want to say I hate it all, it adds instructions to a path we spend an
+> aweful lot of time optimizing without really getting anything back for
+> it.
+> 
+> Will, how do you feel about it?
 
-Cheers,
-Longman
+I can see it potentially being useful for debugging, but I hate the
+limitation to 256 CPUs. Even arm64 is hitting that now.
 
+Also, you're talking ~1% gains here. I think our collective time would
+be better spent off reviewing the CNA series and trying to make it more
+deterministic.
+
+Will
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
