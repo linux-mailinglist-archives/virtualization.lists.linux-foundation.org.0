@@ -2,93 +2,91 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65A4E22CCA9
-	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 19:56:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A56922CCAD
+	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 19:56:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0CE7388A2F;
-	Fri, 24 Jul 2020 17:55:59 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E8B9088A2F;
+	Fri, 24 Jul 2020 17:56:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id e2qFZBa+Ot0Q; Fri, 24 Jul 2020 17:55:56 +0000 (UTC)
+	with ESMTP id wLOJdKGxk2wS; Fri, 24 Jul 2020 17:56:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 5E11688A28;
-	Fri, 24 Jul 2020 17:55:56 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8D31B88A28;
+	Fri, 24 Jul 2020 17:56:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 435DAC004C;
-	Fri, 24 Jul 2020 17:55:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7A76EC004C;
+	Fri, 24 Jul 2020 17:56:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7465EC004C
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9A2E0C004C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 17:55:55 +0000 (UTC)
+ Fri, 24 Jul 2020 17:56:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 63BD68727B
+ by silver.osuosl.org (Postfix) with ESMTP id 7FDE5232BD
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 17:55:55 +0000 (UTC)
+ Fri, 24 Jul 2020 17:56:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gCFNtlcgVOwH
+ with ESMTP id HjvfXlGuTw6K
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 17:55:54 +0000 (UTC)
+ Fri, 24 Jul 2020 17:56:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
  [209.85.214.193])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id E8F2C87252
+ by silver.osuosl.org (Postfix) with ESMTPS id A929B204A9
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 17:55:54 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id l6so4896882plt.7
+ Fri, 24 Jul 2020 17:56:06 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id o1so4914159plk.1
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 10:55:54 -0700 (PDT)
+ Fri, 24 Jul 2020 10:56:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=QrjebX+2MVOIfEwIWOQEBEmYNWrE9lHIByJGfCaahp0=;
- b=hpYudzwzACcZEpNTXqhIf8svOe4F5gdhGn3v/8i/VFeHAJKdvEe7O8ZFIQ/2xPOfM5
- eUZZk0JqNgrmR8+mnIW+v60vhGaERWbXIJj0woZtDy5keFrTIVcMoqzC0Bq/uE4CvYE3
- +ouQm9QjiTT6IYzRowgORlrhQ4w5uXgmCxi4Q=
+ bh=LPBr9y0mSQ0vEFDVd2yPcrY3mpjPcnCTz8oQxhRntWI=;
+ b=eZoWliuezeOxys0b9UQOnD/o0lGyFr5fKeejVdFUARBWrlFx+qV4PZjxeb6W0f1v0q
+ spduBP91FEopvvNX5ho4hKvodAgkrttgRK3rPTVXtOlImPSiICCvOps9A0ZVwkXhHHhW
+ 2aUmPdKVudVlnVPtPFeLyvUVR6CmhAVkjvfog=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=QrjebX+2MVOIfEwIWOQEBEmYNWrE9lHIByJGfCaahp0=;
- b=VTQvWXXejQCjnRzWT8IG55E64FYP2aWPiyaQ2jZdBOeHbHuJSutodvcGIHvrlbAv1B
- OkI46xFr5W1UC5ya9ME/JoR+oKX3vIgumB2crq7nAhgEVBDAea/Rtshq2OEScQtdEilw
- q4wHgZ6dOeusFv8j8URg64tjsAB8p4X6QrnDcIRoxLWWEJtKdGmNj0FH1ROHvyJW/AmC
- J4TVnliQ67wyp0PFCd9x/hbtj6bNcbhWYUcmkv5k2sN9EnJqgWm41h7b3tfPVEVcEoW4
- wIpynWazdzZxSVXUSeSPbUUo5XU4inKa+HsEXT4mvs/JY1S+fP74t6Gf3vOhazVPv5MQ
- YhoA==
-X-Gm-Message-State: AOAM530tjrr2CaxLMRL1G3Yb+oUFtXleVF7H8gFhKPkQCHyk8FxZcUor
- ycJ0+I4SGHGYvnEbL9T2PU5kiA==
-X-Google-Smtp-Source: ABdhPJw33GS/18bzdmYBhAOo0OUTefZ+sCJH0t7Z7U3EzxF0uRV20RMB2IXpc67zADTPhpGVqdwIsQ==
-X-Received: by 2002:a17:902:e901:: with SMTP id
- k1mr9615159pld.130.1595613354599; 
- Fri, 24 Jul 2020 10:55:54 -0700 (PDT)
+ bh=LPBr9y0mSQ0vEFDVd2yPcrY3mpjPcnCTz8oQxhRntWI=;
+ b=j8ZRt24oT1jLrOtVlWx2gqXAIJ9nGaWAS7tZzziRl24R6HU3RRJ+PercGS4zFysvUH
+ 4/mvsI7Qhq4V4EPiNyepjkgXplD1QlQZVeF7rHWkZQ0LjDWMehAwExwNP07QNa0e0EKL
+ 4ZrDpAHnDcffRC1AX1VrA7Rf4BmZ0uFuW/FbGWngTa2LIhKoAYB88jOvOh31vEFfg2A+
+ aW24xiQox+LA+JIqqeIvDX/q3iJnUPMYjfrcfTdlFDamRvBkyiwUXrvhgFgRRhLpLr9f
+ M9wmDDAwrZMb0sMYXI0SjgKa2oBMxy6XQQkRIKERQt7q6wRU5MXtREGUGZgXLmpfirPq
+ FfmA==
+X-Gm-Message-State: AOAM533dAuOxqIP/vQ8VbW8MZxoTPETI3T7SWAW7Qzxq0fCxe2gVm2Yd
+ 8G2Kjb7Wm9sFuWjq9wYGBJ2XTQ==
+X-Google-Smtp-Source: ABdhPJyDax/qJPR4ZLz3NJokDK6V9QQCwKq9zwdj3ZJ38OEFknglmOqbh2MmPwVgkyNP/voUnR7jUA==
+X-Received: by 2002:a17:90a:22ab:: with SMTP id
+ s40mr6997041pjc.117.1595613366344; 
+ Fri, 24 Jul 2020 10:56:06 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id t1sm6805590pgq.66.2020.07.24.10.55.53
+ by smtp.gmail.com with ESMTPSA id f207sm7271770pfa.107.2020.07.24.10.56.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jul 2020 10:55:53 -0700 (PDT)
-Date: Fri, 24 Jul 2020 10:55:52 -0700
+ Fri, 24 Jul 2020 10:56:05 -0700 (PDT)
+Date: Fri, 24 Jul 2020 10:56:04 -0700
 From: Kees Cook <keescook@chromium.org>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v5 75/75] x86/sev-es: Check required CPU features for
- SEV-ES
-Message-ID: <202007241055.655EFCB4@keescook>
+Subject: Re: [PATCH v5 71/75] x86/head/64: Rename start_cpu0
+Message-ID: <202007241056.091E681@keescook>
 References: <20200724160336.5435-1-joro@8bytes.org>
- <20200724160336.5435-76-joro@8bytes.org>
+ <20200724160336.5435-72-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200724160336.5435-76-joro@8bytes.org>
-Cc: Martin Radev <martin.b.radev@gmail.com>,
- Tom Lendacky <thomas.lendacky@amd.com>,
+In-Reply-To: <20200724160336.5435-72-joro@8bytes.org>
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- Juergen Gross <jgross@suse.com>, kvm@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
- x86@kernel.org, linux-kernel@vger.kernel.org,
+ kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Cfir Cohen <cfir@google.com>, x86@kernel.org, linux-kernel@vger.kernel.org,
  Sean Christopherson <sean.j.christopherson@intel.com>,
- virtualization@lists.linux-foundation.org, Joerg Roedel <jroedel@suse.de>,
+ virtualization@lists.linux-foundation.org,
+ Martin Radev <martin.b.radev@gmail.com>, Joerg Roedel <jroedel@suse.de>,
  Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
  hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
  David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
@@ -109,16 +107,13 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jul 24, 2020 at 06:03:36PM +0200, Joerg Roedel wrote:
-> From: Martin Radev <martin.b.radev@gmail.com>
+On Fri, Jul 24, 2020 at 06:03:32PM +0200, Joerg Roedel wrote:
+> From: Joerg Roedel <jroedel@suse.de>
 > 
-> Make sure the machine supports RDRAND, otherwise there is no trusted
-> source of of randomness in the system.
+> For SEV-ES this entry point will be used for restarting APs after they
+> have been offlined. Remove the '0' from the name to reflect that.
 > 
-> To also check this in the pre-decompression stage, make has_cpuflag
-> not depend on CONFIG_RANDOMIZE_BASE anymore.
-> 
-> Signed-off-by: Martin Radev <martin.b.radev@gmail.com>
+> Signed-off-by: Joerg Roedel <jroedel@suse.de>
 
 Reviewed-by: Kees Cook <keescook@chromium.org>
 
