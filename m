@@ -1,54 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF6AF22CAA2
-	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 18:14:34 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 5E39A2413D;
-	Fri, 24 Jul 2020 16:14:33 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id THtjUjsvBufX; Fri, 24 Jul 2020 16:14:30 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id C357523BC0;
-	Fri, 24 Jul 2020 16:14:30 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 98784C004C;
-	Fri, 24 Jul 2020 16:14:30 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 50C3EC004C
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:14:29 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id C874F22CAAB
+	for <lists.virtualization@lfdr.de>; Fri, 24 Jul 2020 18:14:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3F0A687C50
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:14:29 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7738788743;
+	Fri, 24 Jul 2020 16:14:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id cjhfWRxGWtrs
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NC0WXd22tIAE; Fri, 24 Jul 2020 16:14:42 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 841308671F;
+	Fri, 24 Jul 2020 16:14:36 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6E81AC004E;
+	Fri, 24 Jul 2020 16:14:36 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 763E7C004E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:14:28 +0000 (UTC)
+ Fri, 24 Jul 2020 16:14:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 619FD88B39
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Jul 2020 16:14:31 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id wRuKsA5flcJn
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Jul 2020 16:14:30 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 9A47B8798E
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6802A88B52
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jul 2020 16:14:28 +0000 (UTC)
+ Fri, 24 Jul 2020 16:14:30 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006776.dip0.t-ipconnect.de
  [91.0.103.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 994FFFC6;
- Fri, 24 Jul 2020 18:04:26 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 22576FCB;
+ Fri, 24 Jul 2020 18:04:27 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v5 49/75] x86/sev-es: Wire up existing #VC exit-code handlers
-Date: Fri, 24 Jul 2020 18:03:10 +0200
-Message-Id: <20200724160336.5435-50-joro@8bytes.org>
+Subject: [PATCH v5 50/75] x86/sev-es: Handle instruction fetches from
+ user-space
+Date: Fri, 24 Jul 2020 18:03:11 +0200
+Message-Id: <20200724160336.5435-51-joro@8bytes.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200724160336.5435-1-joro@8bytes.org>
 References: <20200724160336.5435-1-joro@8bytes.org>
@@ -84,57 +85,59 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Re-use the handlers for CPUID and IOIO caused #VC exceptions in the
-early boot handler.
+When a #VC exception is triggered by user-space the instruction decoder
+needs to read the instruction bytes from user addresses.  Enhance
+vc_decode_insn() to safely fetch kernel and user instructions.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es-shared.c | 7 +++----
- arch/x86/kernel/sev-es.c        | 6 ++++++
- 2 files changed, 9 insertions(+), 4 deletions(-)
+ arch/x86/kernel/sev-es.c | 31 ++++++++++++++++++++++---------
+ 1 file changed, 22 insertions(+), 9 deletions(-)
 
-diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
-index 4153b1b1048f..59884926fae5 100644
---- a/arch/x86/kernel/sev-es-shared.c
-+++ b/arch/x86/kernel/sev-es-shared.c
-@@ -325,8 +325,7 @@ static enum es_result vc_ioio_exitinfo(struct es_em_ctxt *ctxt, u64 *exitinfo)
- 	return ES_OK;
- }
- 
--static enum es_result __maybe_unused
--vc_handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
-+static enum es_result vc_handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
- 	u64 exit_info_1, exit_info_2;
-@@ -434,8 +433,8 @@ vc_handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- 	return ret;
- }
- 
--static enum es_result __maybe_unused vc_handle_cpuid(struct ghcb *ghcb,
--						     struct es_em_ctxt *ctxt)
-+static enum es_result vc_handle_cpuid(struct ghcb *ghcb,
-+				      struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
- 	u32 cr4 = native_read_cr4();
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index be4b00d18923..81d94f78d2d4 100644
+index 81d94f78d2d4..1493e8cf14f2 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -443,6 +443,12 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
- 	enum es_result result;
+@@ -237,17 +237,30 @@ static enum es_result vc_decode_insn(struct es_em_ctxt *ctxt)
+ 	enum es_result ret;
+ 	int res;
  
- 	switch (exit_code) {
-+	case SVM_EXIT_CPUID:
-+		result = vc_handle_cpuid(ghcb, ctxt);
-+		break;
-+	case SVM_EXIT_IOIO:
-+		result = vc_handle_ioio(ghcb, ctxt);
-+		break;
- 	default:
- 		/*
- 		 * Unexpected #VC exception
+-	res = vc_fetch_insn_kernel(ctxt, buffer);
+-	if (unlikely(res == -EFAULT)) {
+-		ctxt->fi.vector     = X86_TRAP_PF;
+-		ctxt->fi.error_code = 0;
+-		ctxt->fi.cr2        = ctxt->regs->ip;
+-		return ES_EXCEPTION;
++	if (user_mode(ctxt->regs)) {
++		res = insn_fetch_from_user(ctxt->regs, buffer);
++		if (!res) {
++			ctxt->fi.vector     = X86_TRAP_PF;
++			ctxt->fi.error_code = X86_PF_INSTR | X86_PF_USER;
++			ctxt->fi.cr2        = ctxt->regs->ip;
++			return ES_EXCEPTION;
++		}
++
++		if (!insn_decode(&ctxt->insn, ctxt->regs, buffer, res))
++			return ES_DECODE_FAILED;
++	} else {
++		res = vc_fetch_insn_kernel(ctxt, buffer);
++		if (res) {
++			ctxt->fi.vector     = X86_TRAP_PF;
++			ctxt->fi.error_code = X86_PF_INSTR;
++			ctxt->fi.cr2        = ctxt->regs->ip;
++			return ES_EXCEPTION;
++		}
++
++		insn_init(&ctxt->insn, buffer, MAX_INSN_SIZE - res, 1);
++		insn_get_length(&ctxt->insn);
+ 	}
+ 
+-	insn_init(&ctxt->insn, buffer, MAX_INSN_SIZE - res, 1);
+-	insn_get_length(&ctxt->insn);
+-
+ 	ret = ctxt->insn.immediate.got ? ES_OK : ES_DECODE_FAILED;
+ 
+ 	return ret;
 -- 
 2.27.0
 
