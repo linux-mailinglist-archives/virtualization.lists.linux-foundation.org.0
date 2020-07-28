@@ -1,97 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60E54230E4B
-	for <lists.virtualization@lfdr.de>; Tue, 28 Jul 2020 17:45:21 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C792B231416
+	for <lists.virtualization@lfdr.de>; Tue, 28 Jul 2020 22:40:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 331C6885FD;
-	Tue, 28 Jul 2020 15:45:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6501388215;
+	Tue, 28 Jul 2020 20:40:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LzNRr5CfvCeU; Tue, 28 Jul 2020 15:45:18 +0000 (UTC)
+	with ESMTP id kkwNAKdv-YR6; Tue, 28 Jul 2020 20:40:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B79BE8853F;
-	Tue, 28 Jul 2020 15:45:18 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B223688218;
+	Tue, 28 Jul 2020 20:40:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 94E83C004D;
-	Tue, 28 Jul 2020 15:45:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 89F62C004D;
+	Tue, 28 Jul 2020 20:40:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0799EC004D
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 566D4C004D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Jul 2020 15:45:17 +0000 (UTC)
+ Tue, 28 Jul 2020 20:40:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E4699860C0
+ by whitealder.osuosl.org (Postfix) with ESMTP id 4565888218
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Jul 2020 15:45:16 +0000 (UTC)
+ Tue, 28 Jul 2020 20:40:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zzGsuiy-WlxE
+ with ESMTP id eJR6zBy90Sr6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Jul 2020 15:45:16 +0000 (UTC)
+ Tue, 28 Jul 2020 20:40:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5D04385E07
+Received: from jabberwock.ucw.cz (jabberwock.ucw.cz [46.255.230.98])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 84C5888215
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Jul 2020 15:45:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595951115;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=0umpA98IwRGx6/MPdjALwMgb7oXwSSsk+mQbCZoe0MU=;
- b=Zb7dLXEG246+7a73lQncj1tyYogFozbk9BRhbuHaEVenNU/3Y40hIGc3M74yY5mDdDp+fx
- lwUoiKLnC3UGgXr+JfAUyJVn8/wzmMs2JIbmglDA6GguZ/V3lF9zWQnrWjTwCu8n+lV9wc
- jQp+xJF1hrGjTBfYsaKI/Xo/7POQM9g=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-460-nZeArAQfM2eHGtGOwT-JDA-1; Tue, 28 Jul 2020 11:45:10 -0400
-X-MC-Unique: nZeArAQfM2eHGtGOwT-JDA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C96A2106B246;
- Tue, 28 Jul 2020 15:44:42 +0000 (UTC)
-Received: from localhost (ovpn-115-19.ams2.redhat.com [10.36.115.19])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2BFD6712E8;
- Tue, 28 Jul 2020 15:44:41 +0000 (UTC)
-Date: Tue, 28 Jul 2020 16:44:40 +0100
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Maxim Levitsky <mlevitsk@redhat.com>
-Subject: Re: [PATCH 02/10] block: virtio-blk: check logical block size
-Message-ID: <20200728154440.GD21660@stefanha-x1.localdomain>
-References: <20200721105239.8270-1-mlevitsk@redhat.com>
- <20200721105239.8270-3-mlevitsk@redhat.com>
+ Tue, 28 Jul 2020 20:40:36 +0000 (UTC)
+Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
+ id 074701C0BD8; Tue, 28 Jul 2020 22:40:31 +0200 (CEST)
+Date: Tue, 28 Jul 2020 22:40:30 +0200
+From: Pavel Machek <pavel@ucw.cz>
+To: Will Deacon <will@kernel.org>
+Subject: Re: [PATCH v3 19/19] arm64: lto: Strengthen READ_ONCE() to acquire
+ when CONFIG_LTO=y
+Message-ID: <20200728204029.GB1012@bug>
+References: <20200710165203.31284-1-will@kernel.org>
+ <20200710165203.31284-20-will@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20200721105239.8270-3-mlevitsk@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
- "open list:NVM EXPRESS DRIVER" <linux-nvme@lists.infradead.org>,
- "open list:VIRTIO CORE AND NET DRIVERS"
- <virtualization@lists.linux-foundation.org>, Hou Tao <houtao1@huawei.com>,
- Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>,
- "open list:SCSI CDROM DRIVER" <linux-scsi@vger.kernel.org>,
- Satya Tangirala <satyat@google.com>, Ajay Joshi <ajay.joshi@wdc.com>,
- Alex Dubov <oakad@yahoo.com>, "James E.J. Bottomley" <jejb@linux.ibm.com>,
- Josef Bacik <josef@toxicpanda.com>, Ming Lei <ming.lei@redhat.com>,
- "open list:BLOCK LAYER" <linux-block@vger.kernel.org>,
- Colin Ian King <colin.king@canonical.com>, Keith Busch <kbusch@kernel.org>,
- "open list:NETWORK BLOCK DEVICE \(NBD\)" <nbd@other.debian.org>,
- Bart Van Assche <bvanassche@acm.org>, Maxim Levitsky <maximlevitsky@gmail.com>,
- Jens Axboe <axboe@kernel.dk>, Jens Axboe <axboe@fb.com>,
- Damien Le Moal <damien.lemoal@wdc.com>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- "open list:SONY MEMORYSTICK SUBSYSTEM" <linux-mmc@vger.kernel.org>,
- linux-kernel@vger.kernel.org, Tejun Heo <tj@kernel.org>,
- Paolo Bonzini <pbonzini@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20200710165203.31284-20-will@kernel.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Joel Fernandes <joelaf@google.com>, Mark Rutland <mark.rutland@arm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ virtualization@lists.linux-foundation.org, Arnd Bergmann <arnd@arndb.de>,
+ Alan Stern <stern@rowland.harvard.edu>,
+ Sami Tolvanen <samitolvanen@google.com>, Matt Turner <mattst88@gmail.com>,
+ kernel-team@android.com, Marco Elver <elver@google.com>,
+ Kees Cook <keescook@chromium.org>, "Paul E. McKenney" <paulmck@kernel.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ linux-arm-kernel@lists.infradead.org, Richard Henderson <rth@twiddle.net>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+ linux-alpha@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,65 +75,117 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2218166910643650453=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============2218166910643650453==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="IMjqdzrDRly81ofr"
-Content-Disposition: inline
+On Fri 2020-07-10 17:52:03, Will Deacon wrote:
+> When building with LTO, there is an increased risk of the compiler
+> converting an address dependency headed by a READ_ONCE() invocation
+> into a control dependency and consequently allowing for harmful
+> reordering by the CPU.
+> 
+> Ensure that such transformations are harmless by overriding the generic
+> READ_ONCE() definition with one that provides acquire semantics when
+> building with LTO.
 
---IMjqdzrDRly81ofr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Traditionally, READ_ONCE had only effects on compiler optimalizations, not on
+special semantics of the load instruction.
 
-On Tue, Jul 21, 2020 at 01:52:31PM +0300, Maxim Levitsky wrote:
-> Linux kernel only supports logical block sizes which are power of two,
-> at least 512 bytes and no more that PAGE_SIZE.
->=20
-> Check this instead of crashing later on.
->=20
-> Note that there is no need to check physical block size since it is
-> only a hint, and virtio-blk already only supports power of two values.
->=20
-> Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=3D1664619
->=20
-> Signed-off-by: Maxim Levitsky <mlevitsk@redhat.com>
-> ---
->  drivers/block/virtio_blk.c | 15 +++++++++++++--
->  1 file changed, 13 insertions(+), 2 deletions(-)
+Do you have example how LTO optimalizations break the code?
 
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+Should some documentation be added? Because I believe users will need to understand
+what is going on there. 
 
---IMjqdzrDRly81ofr
-Content-Type: application/pgp-signature; name="signature.asc"
+It is not LTO-only problem and it is not arm64-only problem, right?
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl8gR+gACgkQnKSrs4Gr
-c8jH9gf9EntnBlm/IA+XQjmYVE6AzhflC6xpD5M+QOMtx8Gej8rEDnfv7e+8O5qL
-wr7XyrYfjofwgT61Li9+QV7z8mw4hKwMUGpqUDULEHY/X6u0yegtZJiBgwAViSHw
-shlmEyXroq4nlwvLOveuIj85c/56JUHpAIAUh0zhj9ZYvhyoaf6mWs5C6jz6Pp1z
-wVqPpFhPNq1slTBQM9usXil/ToMZvt5FlHhFeF2KaKruugDnF5NeYg4bvOYZohNp
-1zFxVPsHL2QKJQ5mhGBNoyvu4Z3XxgT093CydyLsxOoS+fgPV9l0p5hsl53VELL0
-wORoNRxEjSgis0Ixkvc7AK42GUfpow==
-=aToL
------END PGP SIGNATURE-----
-
---IMjqdzrDRly81ofr--
+Best regards,
+									Pavel
 
 
---===============2218166910643650453==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> +#ifdef CONFIG_AS_HAS_LDAPR
+> +#define __LOAD_RCPC(sfx, regs...)					\
+> +	ALTERNATIVE(							\
+> +		"ldar"	#sfx "\t" #regs,				\
+> +		".arch_extension rcpc\n"				\
+> +		"ldapr"	#sfx "\t" #regs,				\
+> +	ARM64_HAS_LDAPR)
+> +#else
+> +#define __LOAD_RCPC(sfx, regs...)	"ldar" #sfx "\t" #regs
+> +#endif /* CONFIG_AS_HAS_LDAPR */
+> +
+> +#define __READ_ONCE(x)							\
+> +({									\
+> +	typeof(&(x)) __x = &(x);					\
+> +	int atomic = 1;							\
+> +	union { __unqual_scalar_typeof(*__x) __val; char __c[1]; } __u;	\
+> +	switch (sizeof(x)) {						\
+> +	case 1:								\
+> +		asm volatile(__LOAD_RCPC(b, %w0, %1)			\
+> +			: "=r" (*(__u8 *)__u.__c)			\
+> +			: "Q" (*__x) : "memory");			\
+> +		break;							\
+> +	case 2:								\
+> +		asm volatile(__LOAD_RCPC(h, %w0, %1)			\
+> +			: "=r" (*(__u16 *)__u.__c)			\
+> +			: "Q" (*__x) : "memory");			\
+> +		break;							\
+> +	case 4:								\
+> +		asm volatile(__LOAD_RCPC(, %w0, %1)			\
+> +			: "=r" (*(__u32 *)__u.__c)			\
+> +			: "Q" (*__x) : "memory");			\
+> +		break;							\
+> +	case 8:								\
+> +		asm volatile(__LOAD_RCPC(, %0, %1)			\
+> +			: "=r" (*(__u64 *)__u.__c)			\
+> +			: "Q" (*__x) : "memory");			\
+> +		break;							\
+> +	default:							\
+> +		atomic = 0;						\
+> +	}								\
+> +	atomic ? (typeof(*__x))__u.__val : (*(volatile typeof(__x))__x);\
+> +})
+> +
+> +#endif	/* !BUILD_VDSO */
+> +#endif	/* CONFIG_LTO */
+> +
+> +#include <asm-generic/rwonce.h>
+> +
+> +#endif	/* __ASM_RWONCE_H */
+> diff --git a/arch/arm64/kernel/vdso/Makefile b/arch/arm64/kernel/vdso/Makefile
+> index 45d5cfe46429..60df97f2e7de 100644
+> --- a/arch/arm64/kernel/vdso/Makefile
+> +++ b/arch/arm64/kernel/vdso/Makefile
+> @@ -28,7 +28,7 @@ ldflags-y := -shared -nostdlib -soname=linux-vdso.so.1 --hash-style=sysv	\
+>  	     $(btildflags-y) -T
+>  
+>  ccflags-y := -fno-common -fno-builtin -fno-stack-protector -ffixed-x18
+> -ccflags-y += -DDISABLE_BRANCH_PROFILING
+> +ccflags-y += -DDISABLE_BRANCH_PROFILING -DBUILD_VDSO
+>  
+>  CFLAGS_REMOVE_vgettimeofday.o = $(CC_FLAGS_FTRACE) -Os $(CC_FLAGS_SCS) $(GCC_PLUGINS_CFLAGS)
+>  KBUILD_CFLAGS			+= $(DISABLE_LTO)
+> diff --git a/arch/arm64/kernel/vdso32/Makefile b/arch/arm64/kernel/vdso32/Makefile
+> index d88148bef6b0..4fdf3754a058 100644
+> --- a/arch/arm64/kernel/vdso32/Makefile
+> +++ b/arch/arm64/kernel/vdso32/Makefile
+> @@ -43,7 +43,7 @@ cc32-as-instr = $(call try-run,\
+>  # As a result we set our own flags here.
+>  
+>  # KBUILD_CPPFLAGS and NOSTDINC_FLAGS from top-level Makefile
+> -VDSO_CPPFLAGS := -D__KERNEL__ -nostdinc -isystem $(shell $(CC_COMPAT) -print-file-name=include)
+> +VDSO_CPPFLAGS := -DBUILD_VDSO -D__KERNEL__ -nostdinc -isystem $(shell $(CC_COMPAT) -print-file-name=include)
+>  VDSO_CPPFLAGS += $(LINUXINCLUDE)
+>  
+>  # Common C and assembly flags
+> -- 
+> 2.27.0.383.g050319c2ae-goog
 
+-- 
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blog.html
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============2218166910643650453==--
-
