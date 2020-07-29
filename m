@@ -1,101 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D35E92324CC
-	for <lists.virtualization@lfdr.de>; Wed, 29 Jul 2020 20:41:45 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4F7C232598
+	for <lists.virtualization@lfdr.de>; Wed, 29 Jul 2020 21:48:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 78D0A84836;
-	Wed, 29 Jul 2020 18:41:44 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3963C2352E;
+	Wed, 29 Jul 2020 19:48:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vyoZMW_hASc0; Wed, 29 Jul 2020 18:41:43 +0000 (UTC)
+	with ESMTP id CaMR+8eW-MK5; Wed, 29 Jul 2020 19:48:23 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 9A14D847A7;
-	Wed, 29 Jul 2020 18:41:43 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 246CC20022;
+	Wed, 29 Jul 2020 19:48:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B4ACC004D;
-	Wed, 29 Jul 2020 18:41:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 01DE3C004D;
+	Wed, 29 Jul 2020 19:48:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1DA0EC004D
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 94B14C004D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jul 2020 18:41:42 +0000 (UTC)
+ Wed, 29 Jul 2020 19:48:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 19E268677E
+ by hemlock.osuosl.org (Postfix) with ESMTP id 87F9A87E45
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jul 2020 18:41:42 +0000 (UTC)
+ Wed, 29 Jul 2020 19:48:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5h+LxavVmdJ1
+ with ESMTP id gPIeKwDSMZ5J
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jul 2020 18:41:40 +0000 (UTC)
+ Wed, 29 Jul 2020 19:48:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by whitealder.osuosl.org (Postfix) with ESMTPS id CDAEE867DF
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id EBD1B87E41
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jul 2020 18:41:39 +0000 (UTC)
+ Wed, 29 Jul 2020 19:48:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596048098;
+ s=mimecast20190719; t=1596052099;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TG0mMl+qERD/p/lH0bBKbEKr9d96L0uZ7lfwhkdYZqA=;
- b=KR9JPPMalS+NrTCHv0L7YpRCDe8thzUfMKv5JtR1yWWw+FI3wTqp7yl2AuEQKWAyuaTyGe
- EB/qZU1yQKeBaHI7XYsW5uT1axGanapjf4RPoQdxbblEwmlTTboOVHnxROuN5zrhmQkT7/
- jM3R56oZhASXGGmYPq+B4oknrDA5d70=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-311-6vkF5VIPOJSJlrVnOcezqQ-1; Wed, 29 Jul 2020 14:41:36 -0400
-X-MC-Unique: 6vkF5VIPOJSJlrVnOcezqQ-1
-Received: by mail-ej1-f71.google.com with SMTP id y10so8889681ejd.1
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jul 2020 11:41:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:content-transfer-encoding:from:mime-version
- :subject:date:message-id:references:cc:in-reply-to:to;
- bh=TG0mMl+qERD/p/lH0bBKbEKr9d96L0uZ7lfwhkdYZqA=;
- b=g6xpnYl3WP5C51Y3yWnz7xSa7mYtslJCn2oPEysmpW7UoRlvg9zV0zN4tvDfYpiHC7
- 11R10AT8MHOElBCqh8S28+dEmMItfZOT5VUjM3hZ022JOy3Sp0i19z8OOiOTWv2tKOoo
- G+TG27XIoO9zBmrVHcaWCaNytpfsrwOILBtaO1B3SWN7Cf+3uH8B9kQTxzwFDtRlvxbp
- fS/IU+cgbjcb5M2V1TN7VZN9EpfDJtM1K1GUhilu0VEsu2ovO3PqkJvV3bErYcS6Rm4l
- REC3sAKlnQn/5d50Rnef+tp9v/R8s2T/I1W/xDz4Kv3yn/w74XpFjX21FQGXA42RS75R
- NaAg==
-X-Gm-Message-State: AOAM533k/GdYVtc+651pO52yi7iXvW5rUULp+i+P54SHcj12ggmQmNza
- mK/w4sb9CSWXb5itcrzwLOk91B0cbkLh28ajxqnSr1jMIsL3KMcTYmS+BbPfDPSefFRt6i8z8JX
- +fkG3VVoNgYZ6UJ46wvSbdADfKxPMIcYy8kmqV/47nQ==
-X-Received: by 2002:a17:906:57da:: with SMTP id
- u26mr32850944ejr.157.1596048095905; 
- Wed, 29 Jul 2020 11:41:35 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyqBeHBARqfws6XTYi+Qge5cssgBVDY+eGXTA2/OoOf8zdNHETw9pWTyLkfcSfSO7LFjj/Y7A==
-X-Received: by 2002:a17:906:57da:: with SMTP id
- u26mr32850934ejr.157.1596048095726; 
- Wed, 29 Jul 2020 11:41:35 -0700 (PDT)
-Received: from [192.168.3.122] (p5b0c648d.dip0.t-ipconnect.de. [91.12.100.141])
- by smtp.gmail.com with ESMTPSA id k22sm2675294edo.24.2020.07.29.11.41.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2020 11:41:35 -0700 (PDT)
-From: David Hildenbrand <david@redhat.com>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [PATCH v1 2/6] mm/page_isolation: don't dump_page(NULL) in
- set_migratetype_isolate()
-Date: Wed, 29 Jul 2020 20:41:34 +0200
-Message-Id: <8EDC210B-0A0F-4FAC-B008-303CE2D65A26@redhat.com>
-References: <79240e7f-de16-aee6-fbf6-07e7f184a924@oracle.com>
-In-Reply-To: <79240e7f-de16-aee6-fbf6-07e7f184a924@oracle.com>
-To: Mike Kravetz <mike.kravetz@oracle.com>
-X-Mailer: iPhone Mail (17F80)
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: Michal Hocko <mhocko@suse.com>, "Michael S.Tsirkin" <mst@redhat.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, Andrew Morton <akpm@linux-foundation.org>
+ content-transfer-encoding:content-transfer-encoding;
+ bh=g6E6oxh17gWdFsve5u7k1i5BDdfNHe2sq9hYCnsEY64=;
+ b=RB1P3hODBMxArlrk2KVA9jDpHyvB4/9P75FqWU/Y86a/yvlZ2oylbOhfq9JM+8+WxHHAWi
+ iVhmTmpDu9fDS/k/N5pKuJPpSU8Z2IVzTGa7XmpdwwiezQSRfId3/yitCY3WsYYkma62SV
+ lgzgwP4vZjFZYiXteW6Olvu6IUw2s8g=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-72-DnRjCcLqMwCpki9ZXGyb-g-1; Wed, 29 Jul 2020 15:48:17 -0400
+X-MC-Unique: DnRjCcLqMwCpki9ZXGyb-g-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 14FC58015F4;
+ Wed, 29 Jul 2020 19:48:16 +0000 (UTC)
+Received: from localhost.localdomain (unknown [10.35.206.108])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8858A5C5B7;
+ Wed, 29 Jul 2020 19:48:07 +0000 (UTC)
+From: Maxim Levitsky <mlevitsk@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH 0/1] virtio-scsi: fix missing unplug events when all LUNs are
+ unplugged at the same time
+Date: Wed, 29 Jul 2020 22:48:05 +0300
+Message-Id: <20200729194806.4933-1-mlevitsk@redhat.com>
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Cc: "open list:SCSI SUBSYSTEM" <linux-scsi@vger.kernel.org>,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ "James E.J. Bottomley" <jejb@linux.ibm.com>,
+ "open list:VIRTIO BLOCK AND SCSI DRIVERS"
+ <virtualization@lists.linux-foundation.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Maxim Levitsky <mlevitsk@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,25 +88,36 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Cgo+IEFtIDI5LjA3LjIwMjAgdW0gMjA6MzYgc2NocmllYiBNaWtlIEtyYXZldHogPG1pa2Uua3Jh
-dmV0ekBvcmFjbGUuY29tPjoKPiAKPiDvu79PbiA3LzI5LzIwIDExOjA4IEFNLCBEYXZpZCBIaWxk
-ZW5icmFuZCB3cm90ZToKPj4gSSBoYXZlIG5vIGNsdWUgd2hhdCB5b3UgbWVhbiB3aXRoICJyZWlu
-dHJvZHVjaW5nIHRoaXMgYWJhbmRvbmluZyBvZgo+PiBwYWdlYmxvY2tzIi4gQWxsIHRoaXMgcGF0
-Y2ggaXMgY2hhbmdpbmcgaXMgbm90IGRvaW5nIHRoZSBkdW1wX3BhZ2UoKSAtCj4+IG9yIGFtIEkg
-bWlzc2luZyBzb21ldGhpbmcgaW1wb3J0YW50Pwo+IAo+IE15IGFwb2xvZ2llcyEhIQo+IAoKTm8g
-d29ycmllcywgdGhhbmtzIGZvciByZXZpZXdpbmchIQoKPiBJIGdvdCBjb25mdXNlZCB3aGVuIEkg
-c2F3ICdSZXR1cm4gLUVCVVNZJyByZW1vdmVkIGZyb20gdGhlIGNvbW1lbnQgYW5kCj4gYXNzdW1l
-ZCB0aGUgY29kZSB3b3VsZCBub3QgcmV0dXJuIGFuIGVycm9yIGNvZGUuICBUaGUgY29kZSBub3cg
-bW9yZQo+IGV4cGxpY2l0bHkgZG9lcyByZXR1cm4gLUVCVVNZLiAgTXkgY29uY2VybiB3YXMgd2hl
-biBJIGluY29ycmVjdGx5IHRob3VnaHQKPiB5b3Ugd2VyZSByZW1vdmluZyB0aGUgZXJyb3IgcmV0
-dXJuIGNvZGUuICBTb3JyeSBmb3IgdGhlIG5vaXNlLgo+IAo+IEFja2VkLWJ5OiBNaWtlIEtyYXZl
-dHogPG1pa2Uua3JhdmV0ekBvcmFjbGUuY29tPgo+IC0tIAo+IE1pa2UgS3JhdmV0ego+IAoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRp
-b24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3Jn
-Cmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1
-YWxpemF0aW9u
+virtio-scsi currently has limit of 8 outstanding notifications so when more that
+8 LUNs are unplugged, some are missed.
+
+Commit 5ff843721467 ("scsi: virtio_scsi: unplug LUNs when events missed")
+Fixed this by checking the 'event overflow' bit and manually scanned the bus
+to see which LUNs are still there.
+
+However there is a corner case when all LUNs are unplugged.
+In this case (which is not fully scsi confirmant IMHO), all scsi
+commands to such device respond with INVALID TARGET.
+
+This patch proposes to detect this and remove the LUN in this case
+as well.
+
+Maxim Levitsky (1):
+  scsi: virtio-scsi: handle correctly case when all LUNs were unplugged
+
+ drivers/scsi/virtio_scsi.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+-- 
+2.26.2
+
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
