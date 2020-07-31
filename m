@@ -1,83 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17C5723423E
-	for <lists.virtualization@lfdr.de>; Fri, 31 Jul 2020 11:19:04 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 27FAC234240
+	for <lists.virtualization@lfdr.de>; Fri, 31 Jul 2020 11:19:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BF61088710;
-	Fri, 31 Jul 2020 09:19:02 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D814986813;
+	Fri, 31 Jul 2020 09:19:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hXF1B64fjDRS; Fri, 31 Jul 2020 09:19:02 +0000 (UTC)
+	with ESMTP id FCHBmw8rH7m5; Fri, 31 Jul 2020 09:19:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1BD5888724;
-	Fri, 31 Jul 2020 09:19:02 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 90F3586879;
+	Fri, 31 Jul 2020 09:19:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E562FC004D;
-	Fri, 31 Jul 2020 09:19:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6E42CC0050;
+	Fri, 31 Jul 2020 09:19:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BCDD1C004D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C3549C004D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Jul 2020 09:18:59 +0000 (UTC)
+ Fri, 31 Jul 2020 09:19:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 780A420430
+ by silver.osuosl.org (Postfix) with ESMTP id A922020435
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Jul 2020 09:18:59 +0000 (UTC)
+ Fri, 31 Jul 2020 09:19:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Y3rc8r7sFhSM
+ with ESMTP id BYJswpayETqt
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Jul 2020 09:18:58 +0000 (UTC)
+ Fri, 31 Jul 2020 09:19:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
  [207.211.31.81])
- by silver.osuosl.org (Postfix) with ESMTPS id 4943420428
+ by silver.osuosl.org (Postfix) with ESMTPS id A5C7E20430
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Jul 2020 09:18:57 +0000 (UTC)
+ Fri, 31 Jul 2020 09:19:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596187136;
+ s=mimecast20190719; t=1596187142;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Nm9hdEOPm77EQVaUlUcV47hpK3bGj715U/FFPYWuGso=;
- b=KEk1hQfNN105CisRmMyBfqAw58xWBeHoQ6PUvGJ1NEsj9E3M5n2gbR1iSbOKAWHtNFs/x3
- HEp5xUWhX4RjDBzjC23QRqXr52UW2UFh1gMYC+CEA9aR86t2Xl+jVmBNjg6jW+cglFk+Sg
- NxF9ra4bA3+UogtA3atWoU7NGFjjrpk=
+ bh=GX38+opkWxBZfD2far/R2rRkc2X2qlfoUgt4pP5SXDg=;
+ b=gwyJn3jU7N/REiKzRAhgTbpkjsF3/nUITttfsKZRuHB1p23+rMMRAwX0ywfGW4cRJyE5x9
+ AobB+bvssCqavcJHHZaS6yRmHlBo7MzkztYsCI4ZKmtE8AddPcP19Y7FpfEnil8oK66xtL
+ Wmn+xyRPyWX32GAtaulDphrYkhHmomY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-423-eybjEKR1P9C14MolFOWKEA-1; Fri, 31 Jul 2020 05:18:51 -0400
-X-MC-Unique: eybjEKR1P9C14MolFOWKEA-1
+ us-mta-301-Z7A2oVdiNTiak_-Gh5Vfug-1; Fri, 31 Jul 2020 05:18:58 -0400
+X-MC-Unique: Z7A2oVdiNTiak_-Gh5Vfug-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0D2E6101C8A7;
- Fri, 31 Jul 2020 09:18:50 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4358480382D;
+ Fri, 31 Jul 2020 09:18:55 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-113-22.ams2.redhat.com [10.36.113.22])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 564781A835;
- Fri, 31 Jul 2020 09:18:47 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5D0681A835;
+ Fri, 31 Jul 2020 09:18:50 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH RFCv1 1/5] kernel/resource: make
- release_mem_region_adjustable() never fail
-Date: Fri, 31 Jul 2020 11:18:34 +0200
-Message-Id: <20200731091838.7490-2-david@redhat.com>
+Subject: [PATCH RFCv1 2/5] kernel/resource: merge_child_mem_resources() to
+ merge memory resources after adding succeeded
+Date: Fri, 31 Jul 2020 11:18:35 +0200
+Message-Id: <20200731091838.7490-3-david@redhat.com>
 In-Reply-To: <20200731091838.7490-1-david@redhat.com>
 References: <20200731091838.7490-1-david@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: Jason Gunthorpe <jgg@ziepe.ca>, linux-hyperv@vger.kernel.org,
- Michal Hocko <mhocko@suse.com>, Kees Cook <keescook@chromium.org>,
- Ard Biesheuvel <ardb@kernel.org>, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, Wei Yang <richardw.yang@linux.intel.com>,
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Jason Gunthorpe <jgg@ziepe.ca>, linux-hyperv@vger.kernel.org,
+ Michal Hocko <mhocko@suse.com>, Stephen Hemminger <sthemmin@microsoft.com>,
+ Kees Cook <keescook@chromium.org>, Ard Biesheuvel <ardb@kernel.org>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ virtualization@lists.linux-foundation.org, Juergen Gross <jgross@suse.com>,
+ linux-mm@kvack.org, Stefano Stabellini <sstabellini@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, Julien Grall <julien@xen.org>,
  xen-devel@lists.xenproject.org, Andrew Morton <akpm@linux-foundation.org>,
- Dan Williams <dan.j.williams@intel.com>
+ Dan Williams <dan.j.williams@intel.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,197 +94,93 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's make sure splitting a resource on memory hotunplug will never fail.
-This will become more relevant once we merge selected system ram
-resources - then, we'll trigger that case more often un memory unplug.
-
-In general, this function is already unlikely to fail. When we remove
-memory, we free up quite a lot of metadata (memmap, page tables, memory
-block device, etc.).
-
-All other error cases inside release_mem_region_adjustable() seem to be
-sanity checks if the function would be abused in different context -
-let's add WARN_ON_ONCE().
-
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Michal Hocko <mhocko@suse.com>
-Cc: Dan Williams <dan.j.williams@intel.com>
-Cc: Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Ard Biesheuvel <ardb@kernel.org>
-Cc: Wei Yang <richardw.yang@linux.intel.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- include/linux/ioport.h |  4 ++--
- kernel/resource.c      | 49 ++++++++++++++++++++++++------------------
- mm/memory_hotplug.c    | 22 +------------------
- 3 files changed, 31 insertions(+), 44 deletions(-)
-
-diff --git a/include/linux/ioport.h b/include/linux/ioport.h
-index 6c2b06fe8beb7..52a91f5fa1a36 100644
---- a/include/linux/ioport.h
-+++ b/include/linux/ioport.h
-@@ -248,8 +248,8 @@ extern struct resource * __request_region(struct resource *,
- extern void __release_region(struct resource *, resource_size_t,
- 				resource_size_t);
- #ifdef CONFIG_MEMORY_HOTREMOVE
--extern int release_mem_region_adjustable(struct resource *, resource_size_t,
--				resource_size_t);
-+extern void release_mem_region_adjustable(struct resource *, resource_size_t,
-+					  resource_size_t);
- #endif
- 
- /* Wrappers for managed devices */
-diff --git a/kernel/resource.c b/kernel/resource.c
-index 841737bbda9e5..249c6b54014de 100644
---- a/kernel/resource.c
-+++ b/kernel/resource.c
-@@ -1255,21 +1255,28 @@ EXPORT_SYMBOL(__release_region);
-  *   assumes that all children remain in the lower address entry for
-  *   simplicity.  Enhance this logic when necessary.
-  */
--int release_mem_region_adjustable(struct resource *parent,
--				  resource_size_t start, resource_size_t size)
-+void release_mem_region_adjustable(struct resource *parent,
-+				   resource_size_t start, resource_size_t size)
- {
-+	struct resource *new_res = NULL;
-+	bool alloc_nofail = false;
- 	struct resource **p;
- 	struct resource *res;
--	struct resource *new_res;
- 	resource_size_t end;
--	int ret = -EINVAL;
- 
- 	end = start + size - 1;
--	if ((start < parent->start) || (end > parent->end))
--		return ret;
-+	if (WARN_ON_ONCE((start < parent->start) || (end > parent->end)))
-+		return;
- 
--	/* The alloc_resource() result gets checked later */
--	new_res = alloc_resource(GFP_KERNEL);
-+	/*
-+	 * We free up quite a lot of memory on memory hotunplug (esp. memap),
-+	 * just before releasing the region. This is highly unlikely to
-+	 * fail - let's play save and make it never fail as the caller cannot
-+	 * perform any error handling (e.g., trying to re-add memory will fail
-+	 * similarly).
-+	 */
-+retry:
-+	new_res = alloc_resource(GFP_KERNEL | alloc_nofail ? __GFP_NOFAIL : 0);
- 
- 	p = &parent->child;
- 	write_lock(&resource_lock);
-@@ -1295,7 +1302,6 @@ int release_mem_region_adjustable(struct resource *parent,
- 		 * so if we are dealing with them, let us just back off here.
- 		 */
- 		if (!(res->flags & IORESOURCE_SYSRAM)) {
--			ret = 0;
- 			break;
- 		}
- 
-@@ -1312,20 +1318,23 @@ int release_mem_region_adjustable(struct resource *parent,
- 			/* free the whole entry */
- 			*p = res->sibling;
- 			free_resource(res);
--			ret = 0;
- 		} else if (res->start == start && res->end != end) {
- 			/* adjust the start */
--			ret = __adjust_resource(res, end + 1,
--						res->end - end);
-+			WARN_ON_ONCE(__adjust_resource(res, end + 1,
-+						       res->end - end));
- 		} else if (res->start != start && res->end == end) {
- 			/* adjust the end */
--			ret = __adjust_resource(res, res->start,
--						start - res->start);
-+			WARN_ON_ONCE(__adjust_resource(res, res->start,
-+						       start - res->start));
- 		} else {
--			/* split into two entries */
-+			/* split into two entries - we need a new resource */
- 			if (!new_res) {
--				ret = -ENOMEM;
--				break;
-+				new_res = alloc_resource(GFP_ATOMIC);
-+				if (!new_res) {
-+					alloc_nofail = true;
-+					write_unlock(&resource_lock);
-+					goto retry;
-+				}
- 			}
- 			new_res->name = res->name;
- 			new_res->start = end + 1;
-@@ -1336,9 +1345,8 @@ int release_mem_region_adjustable(struct resource *parent,
- 			new_res->sibling = res->sibling;
- 			new_res->child = NULL;
- 
--			ret = __adjust_resource(res, res->start,
--						start - res->start);
--			if (ret)
-+			if (WARN_ON_ONCE(__adjust_resource(res, res->start,
-+							   start - res->start)))
- 				break;
- 			res->sibling = new_res;
- 			new_res = NULL;
-@@ -1349,7 +1357,6 @@ int release_mem_region_adjustable(struct resource *parent,
- 
- 	write_unlock(&resource_lock);
- 	free_resource(new_res);
--	return ret;
- }
- #endif	/* CONFIG_MEMORY_HOTREMOVE */
- 
-diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
-index da374cd3d45b3..258656b819dbe 100644
---- a/mm/memory_hotplug.c
-+++ b/mm/memory_hotplug.c
-@@ -1709,26 +1709,6 @@ void try_offline_node(int nid)
- }
- EXPORT_SYMBOL(try_offline_node);
- 
--static void __release_memory_resource(resource_size_t start,
--				      resource_size_t size)
--{
--	int ret;
--
--	/*
--	 * When removing memory in the same granularity as it was added,
--	 * this function never fails. It might only fail if resources
--	 * have to be adjusted or split. We'll ignore the error, as
--	 * removing of memory cannot fail.
--	 */
--	ret = release_mem_region_adjustable(&iomem_resource, start, size);
--	if (ret) {
--		resource_size_t endres = start + size - 1;
--
--		pr_warn("Unable to release resource <%pa-%pa> (%d)\n",
--			&start, &endres, ret);
--	}
--}
--
- static int __ref try_remove_memory(int nid, u64 start, u64 size)
- {
- 	int rc = 0;
-@@ -1762,7 +1742,7 @@ static int __ref try_remove_memory(int nid, u64 start, u64 size)
- 		memblock_remove(start, size);
- 	}
- 
--	__release_memory_resource(start, size);
-+	release_mem_region_adjustable(&iomem_resource, start, size);
- 
- 	try_offline_node(nid);
- 
--- 
-2.26.2
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+U29tZSBhZGRfbWVtb3J5KigpIHVzZXJzIGFkZCBtZW1vcnkgaW4gc21hbGwsIGNvbnRpZ3VvdXMg
+bWVtb3J5IGJsb2Nrcy4KRXhhbXBsZXMgaW5jbHVkZSB2aXJ0aW8tbWVtLCBoeXBlci12IGJhbGxv
+b24sIGFuZCB0aGUgWEVOIGJhbGxvb24uCgpUaGlzIGNhbiBxdWlja2x5IHJlc3VsdCBpbiBhIGxv
+dCBvZiBtZW1vcnkgcmVzb3VyY2VzLCB3aGVyZWJ5IHRoZSBhY3R1YWwKcmVzb3VyY2UgYm91bmRh
+cmllcyBhcmUgbm90IG9mIGludGVyZXN0IChlLmcuLCBpdCBtaWdodCBiZSByZWxldmFudCBmb3IK
+RElNTXMsIGV4cG9zZWQgdmlhIC9wcm9jL2lvbWVtIHRvIHVzZXIgc3BhY2UpLiBXZSByZWFsbHkg
+d2FudCB0byBtZXJnZQphZGRlZCByZXNvdXJjZXMgaW4gdGhpcyBzY2VuYXJpbyB3aGVyZSBwb3Nz
+aWJsZS4KCkxldCdzIHByb3ZpZGUgYW4gaW50ZXJmYWNlIHRvIHRyaWdnZXIgbWVyZ2luZyBvZiBh
+cHBsaWNhYmxlIGNoaWxkCnJlc291cmNlcy4gSXQgd2lsbCBiZSwgZm9yIGV4YW1wbGUsIHVzZWQg
+YnkgdmlydGlvLW1lbSB0byB0cmlnZ2VyCm1lcmdpbmcgb2YgbWVtb3J5IHJlc291cmNlcyBpdCBh
+ZGRlZCAodmlhIGFkZF9tZW1vcnlfZHJpdmVyKCkKbWFuYWdlZCkgdG8gaXRzIHJlc291cmNlIGNv
+bnRhaW5lci4KCk5vdGU6IFdlIHJlYWxseSB3YW50IHRvIG1lcmdlIGFmdGVyIHRoZSB3aG9sZSBv
+cGVyYXRpb24gc3VjY2VlZGVkLCBub3QKZGlyZWN0bHkgd2hlbiBhZGRpbmcgYSByZXNvdXJjZSB0
+byB0aGUgcmVzb3VyY2UgdHJlZSAoaXQgd291bGQgYnJlYWsKYWRkX21lbW9yeV9yZXNvdXJjZSgp
+IGFuZCByZXF1aXJlIHNwbGl0dGluZyByZXNvdXJjZXMgYWdhaW4gd2hlbiB0aGUKb3BlcmF0aW9u
+IGZhaWxlZCAtIGUuZy4sIGR1ZSB0byAtRU5PTUVNKS4KCkNjOiBBbmRyZXcgTW9ydG9uIDxha3Bt
+QGxpbnV4LWZvdW5kYXRpb24ub3JnPgpDYzogTWljaGFsIEhvY2tvIDxtaG9ja29Ac3VzZS5jb20+
+CkNjOiBEYW4gV2lsbGlhbXMgPGRhbi5qLndpbGxpYW1zQGludGVsLmNvbT4KQ2M6IEphc29uIEd1
+bnRob3JwZSA8amdnQHppZXBlLmNhPgpDYzogS2VlcyBDb29rIDxrZWVzY29va0BjaHJvbWl1bS5v
+cmc+CkNjOiBBcmQgQmllc2hldXZlbCA8YXJkYkBrZXJuZWwub3JnPgpDYzogVGhvbWFzIEdsZWl4
+bmVyIDx0Z2x4QGxpbnV0cm9uaXguZGU+CkNjOiAiSy4gWS4gU3Jpbml2YXNhbiIgPGt5c0BtaWNy
+b3NvZnQuY29tPgpDYzogSGFpeWFuZyBaaGFuZyA8aGFpeWFuZ3pAbWljcm9zb2Z0LmNvbT4KQ2M6
+IFN0ZXBoZW4gSGVtbWluZ2VyIDxzdGhlbW1pbkBtaWNyb3NvZnQuY29tPgpDYzogV2VpIExpdSA8
+d2VpLmxpdUBrZXJuZWwub3JnPgpDYzogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lA
+b3JhY2xlLmNvbT4KQ2M6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KQ2M6IFN0ZWZh
+bm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KQ2M6IFJvZ2VyIFBhdSBNb25u
+w6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgpDYzogSnVsaWVuIEdyYWxsIDxqdWxpZW5AeGVuLm9y
+Zz4KU2lnbmVkLW9mZi1ieTogRGF2aWQgSGlsZGVuYnJhbmQgPGRhdmlkQHJlZGhhdC5jb20+Ci0t
+LQogaW5jbHVkZS9saW51eC9pb3BvcnQuaCB8ICAzICsrKwoga2VybmVsL3Jlc291cmNlLmMgICAg
+ICB8IDU2ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwogMiBmaWxl
+cyBjaGFuZ2VkLCA1OSBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9p
+b3BvcnQuaCBiL2luY2x1ZGUvbGludXgvaW9wb3J0LmgKaW5kZXggNTJhOTFmNWZhMWEzNi4uNzQz
+Yjg3ZmUyMjA1YiAxMDA2NDQKLS0tIGEvaW5jbHVkZS9saW51eC9pb3BvcnQuaAorKysgYi9pbmNs
+dWRlL2xpbnV4L2lvcG9ydC5oCkBAIC0yNTEsNiArMjUxLDkgQEAgZXh0ZXJuIHZvaWQgX19yZWxl
+YXNlX3JlZ2lvbihzdHJ1Y3QgcmVzb3VyY2UgKiwgcmVzb3VyY2Vfc2l6ZV90LAogZXh0ZXJuIHZv
+aWQgcmVsZWFzZV9tZW1fcmVnaW9uX2FkanVzdGFibGUoc3RydWN0IHJlc291cmNlICosIHJlc291
+cmNlX3NpemVfdCwKIAkJCQkJICByZXNvdXJjZV9zaXplX3QpOwogI2VuZGlmCisjaWZkZWYgQ09O
+RklHX01FTU9SWV9IT1RQTFVHCitleHRlcm4gdm9pZCBtZXJnZV9jaGlsZF9tZW1fcmVzb3VyY2Vz
+KHN0cnVjdCByZXNvdXJjZSAqcmVzLCBjb25zdCBjaGFyICpuYW1lKTsKKyNlbmRpZgogCiAvKiBX
+cmFwcGVycyBmb3IgbWFuYWdlZCBkZXZpY2VzICovCiBzdHJ1Y3QgZGV2aWNlOwpkaWZmIC0tZ2l0
+IGEva2VybmVsL3Jlc291cmNlLmMgYi9rZXJuZWwvcmVzb3VyY2UuYwppbmRleCAyNDljNmI1NDAx
+NGRlLi4wMWVjYzViNzk1NmY1IDEwMDY0NAotLS0gYS9rZXJuZWwvcmVzb3VyY2UuYworKysgYi9r
+ZXJuZWwvcmVzb3VyY2UuYwpAQCAtMTM2MCw2ICsxMzYwLDYyIEBAIHZvaWQgcmVsZWFzZV9tZW1f
+cmVnaW9uX2FkanVzdGFibGUoc3RydWN0IHJlc291cmNlICpwYXJlbnQsCiB9CiAjZW5kaWYJLyog
+Q09ORklHX01FTU9SWV9IT1RSRU1PVkUgKi8KIAorI2lmZGVmIENPTkZJR19NRU1PUllfSE9UUExV
+Rworc3RhdGljIGJvb2wgbWVtX3Jlc291cmNlc19tZXJnZWFibGUoc3RydWN0IHJlc291cmNlICpy
+MSwgc3RydWN0IHJlc291cmNlICpyMikKK3sKKwlyZXR1cm4gcjEtPmVuZCArIDEgPT0gcjItPnN0
+YXJ0ICYmCisJICAgICAgIHIxLT5uYW1lID09IHIyLT5uYW1lICYmCisJICAgICAgIHIxLT5mbGFn
+cyA9PSByMi0+ZmxhZ3MgJiYKKwkgICAgICAgKHIxLT5mbGFncyAmIElPUkVTT1VSQ0VfTUVNKSAm
+JgorCSAgICAgICByMS0+ZGVzYyA9PSByMi0+ZGVzYyAmJgorCSAgICAgICAhcjEtPmNoaWxkICYm
+ICFyMi0+Y2hpbGQ7Cit9CisKKy8qCisgKiBtZXJnZV9jaGlsZF9tZW1fcmVzb3VyY2VzIC0gdHJ5
+IHRvIG1lcmdlIGNvbnRpZ3VvdXMgY2hpbGQgSU9SRVNPVVJDRV9NRU0KKyAqICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICByZXNvdXJjZXMgd2l0aCB0aGUgZ2l2ZW4gbmFtZSB0aGF0IG1hdGNo
+IGFsbAorICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIG90aGVyIHByb3BlcnRpZXMKKyAq
+IEBwYXJlbnQ6IHBhcmVudCByZXNvdXJjZSBkZXNjcmlwdG9yCisgKiBAbmFtZTogbmFtZSBvZiB0
+aGUgY2hpbGQgcmVzb3VyY2VzIHRvIGNvbnNpZGVyIGZvciBtZXJnaW5nCisgKgorICogVGhpcyBp
+bnRlcmZhY2UgaXMgaW50ZW5kZWQgZm9yIG1lbW9yeSBob3RwbHVnLCB3aGVyZWJ5IGxvdHMgb2Yg
+Y29uc2VjdXRpdmUKKyAqIG1lbW9yeSByZXNvdXJjZXMgYXJlIGFkZGVkIChlLmcuLCB2aWEgYWRk
+X21lbW9yeSooKSkgYnkgYSBkcml2ZXIsIGFuZCB0aGUKKyAqIGFjdHVhbCByZXNvdXJjZSBib3Vu
+ZGFyaWVzIGFyZSBub3Qgb2YgaW50ZXJlc3QgKGUuZy4sIGl0IG1pZ2h0IGJlCisgKiByZWxldmFu
+dCBmb3IgRElNTXMpLiBPbmx5IGltbWVkaWF0ZSBjaGlsZCByZXNvdXJjZXMgYXJlIGNvbnNpZGVy
+ZWQuIEFsbAorICogYXBwbGljYWJsZSBjaGlsZCByZXNvdXJjZXMgbXVzdCBiZSBpbW11dGFibGUg
+ZHVyaW5nIHRoZSByZXF1ZXN0LgorICoKKyAqIE5vdGU6CisgKiAtIFRoZSBjYWxsZXIgaGFzIHRv
+IG1ha2Ugc3VyZSB0aGF0IG5vIHBvaW50ZXJzIHRvIHJlc291cmNlcyB0aGF0IG1pZ2h0CisgKiAg
+IGdldCBtZXJnZWQgYXJlIGhlbGQgYW55bW9yZS4gQ2FsbGVycyBzaG91bGQgb25seSB0cmlnZ2Vy
+IG1lcmdpbmcgb2YgY2hpbGQKKyAqICAgcmVzb3VyY2VzIHdoZW4gdGhleSBhcmUgdGhlIG9ubHkg
+b25lIGFkZGluZyBzdWNoIHJlc291cmNlcyB0byB0aGUgcGFyZW50LgorICogICBFLmcuLCBpZiB0
+d28gbWVjaGFuaXNtcyBjb3VsZCBhZGQgIlN5c3RlbSBSQU0iIGltbWVkaWF0ZWx5IGJlbG93IHRo
+ZQorICogICBzYW1lIHBhcmVudCwgdGhpcyBmdW5jdGlvbiBpcyBub3Qgc2FmZSB0byB1c2UuCisg
+KiAtIHJlbGVhc2VfbWVtX3JlZ2lvbl9hZGp1c3RhYmxlKCkgd2lsbCBzcGxpdCBvbiBkZW1hbmQg
+b24gbWVtb3J5IGhvdHVucGx1ZworICovCit2b2lkIG1lcmdlX2NoaWxkX21lbV9yZXNvdXJjZXMo
+c3RydWN0IHJlc291cmNlICpwYXJlbnQsIGNvbnN0IGNoYXIgKm5hbWUpCit7CisJc3RydWN0IHJl
+c291cmNlICpjdXIsICpuZXh0OworCisJd3JpdGVfbG9jaygmcmVzb3VyY2VfbG9jayk7CisKKwlj
+dXIgPSBwYXJlbnQtPmNoaWxkOworCXdoaWxlIChjdXIgJiYgY3VyLT5zaWJsaW5nKSB7CisJCW5l
+eHQgPSBjdXItPnNpYmxpbmc7CisJCWlmICghc3RyY21wKGN1ci0+bmFtZSwgbmFtZSkgJiYKKwkJ
+ICAgIG1lbV9yZXNvdXJjZXNfbWVyZ2VhYmxlKGN1ciwgbmV4dCkpIHsKKwkJCWN1ci0+ZW5kID0g
+bmV4dC0+ZW5kOworCQkJY3VyLT5zaWJsaW5nID0gbmV4dC0+c2libGluZzsKKwkJCWZyZWVfcmVz
+b3VyY2UobmV4dCk7CisJCQluZXh0ID0gY3VyLT5zaWJsaW5nOworCQl9CisJCWN1ciA9IG5leHQ7
+CisJfQorCisJd3JpdGVfdW5sb2NrKCZyZXNvdXJjZV9sb2NrKTsKK30KK0VYUE9SVF9TWU1CT0wo
+bWVyZ2VfY2hpbGRfbWVtX3Jlc291cmNlcyk7CisjZW5kaWYJLyogQ09ORklHX01FTU9SWV9IT1RQ
+TFVHICovCisKIC8qCiAgKiBNYW5hZ2VkIHJlZ2lvbiByZXNvdXJjZQogICovCi0tIAoyLjI2LjIK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxp
+emF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9u
+Lm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92
+aXJ0dWFsaXphdGlvbg==
