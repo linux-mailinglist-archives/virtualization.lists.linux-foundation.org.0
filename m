@@ -2,88 +2,88 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C33FF23AEA2
-	for <lists.virtualization@lfdr.de>; Mon,  3 Aug 2020 23:00:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0D0923AEA3
+	for <lists.virtualization@lfdr.de>; Mon,  3 Aug 2020 23:00:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 7D9DA87B25;
-	Mon,  3 Aug 2020 21:00:25 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 64EFD87B8E;
+	Mon,  3 Aug 2020 21:00:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dvanrymXDfEx; Mon,  3 Aug 2020 21:00:25 +0000 (UTC)
+	with ESMTP id v+A7S-jCjRSd; Mon,  3 Aug 2020 21:00:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 0D16C87B08;
-	Mon,  3 Aug 2020 21:00:25 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 74A9F87B2E;
+	Mon,  3 Aug 2020 21:00:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EA788C004C;
-	Mon,  3 Aug 2020 21:00:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 659B1C004C;
+	Mon,  3 Aug 2020 21:00:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8F153C004C
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8FC1BC004C
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:23 +0000 (UTC)
+ Mon,  3 Aug 2020 21:00:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 7F0288657C
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8A69B8782A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:23 +0000 (UTC)
+ Mon,  3 Aug 2020 21:00:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Cu1OuRTi1Mvw
+ with ESMTP id 5hnPlCof8k52
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:23 +0000 (UTC)
+ Mon,  3 Aug 2020 21:00:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id E13F2864B8
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id C502387B1D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:22 +0000 (UTC)
+ Mon,  3 Aug 2020 21:00:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596488421;
+ s=mimecast20190719; t=1596488434;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=Z+ItaiktMWQThwK9MNBEGmvl3xKPTH4X3U+c0Slx6t4=;
- b=ElgYwo0Z8Qa2gHDPwFEOaSPfgtMgoR/M7T8UGKDsrPw1X6JX2A4PzPdIjsRmFGwqi6MT7i
- YfzO5Wo35eP2knBAX0+C5zc+aZTg1Dp4EZtPIQconJ7ihmqCQsq62L8POBe7Nmjawrqqhz
- e+z4JcX+Dc4utuoWF62Ds0pdr+6cMaU=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-385-hr5HPQi8OKCX9EWnH6mIpw-1; Mon, 03 Aug 2020 17:00:20 -0400
-X-MC-Unique: hr5HPQi8OKCX9EWnH6mIpw-1
-Received: by mail-qv1-f72.google.com with SMTP id h6so5134714qvz.14
+ bh=ODrF61uLCJ0gIB7JT0cfv8eeFBRRS/LYcIT029nxjh4=;
+ b=aR3ekFadASD98V5LKh5h/blKKgc+jMGrXL+A9CplggrvG7RDnqwZoUrRmzyzTQHSnFcFEo
+ NcA7RAN/8yT7jbQIUfifXV0trWooTWVTNKqE/oBY1GreleXteryDiytldN8V5gwCTUDKiy
+ dcgR/Bi9yXNkciF2v9HfZa/S4ZVy0Ic=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-235-NNpajcmbNC-wzKKetN3NPA-1; Mon, 03 Aug 2020 17:00:33 -0400
+X-MC-Unique: NNpajcmbNC-wzKKetN3NPA-1
+Received: by mail-qt1-f199.google.com with SMTP id s29so7889278qtc.12
  for <virtualization@lists.linux-foundation.org>;
- Mon, 03 Aug 2020 14:00:20 -0700 (PDT)
+ Mon, 03 Aug 2020 14:00:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=Z+ItaiktMWQThwK9MNBEGmvl3xKPTH4X3U+c0Slx6t4=;
- b=ANEXJBwN41ohljuqhB3MGsIXrWksi+/Ynxgwes7DEgVmlC35euO+mH9PkNBm7Pdulm
- ilA9PtCl9UhYs/WYnIMRIrfWiJsG8umC9KMj0YJ3El3tmqlLvUPUZU0ehah5Vrkh7qOQ
- UtCGFe43xqd6z1BwRPq9rHQOAuK0M8WMK91UsCfMiDRiav8qU0a66SZ/SihoH3HoWa16
- 7ROJ/jZnGBrVMlGDszT6KSP735ghRxtqo639UXgHudQXxOnlGKW7cxKWVukmXto+DmYM
- RxpFGQdJUpxNxJiyaC5VoJJ2cVtHGgF15bknvW5Txh8AQaFNShk58er6OXY1Y8M8dCeK
- 32sA==
-X-Gm-Message-State: AOAM530NgwJVhx+g0TriiqdZFP3tNJkXYCaY9jUVgM1RV7y+gHoZpUe5
- bEKDJX04apPBaZ1XFUq3di9q5hvCNCD49OMpfV2VLy6KrFbEISP89NBAZKi5uP6CeSW70n/5iDU
- wZ90Hm6KLNhfH5Y+fucYOecSsufNCysnuu5OroJ4bbg==
-X-Received: by 2002:ac8:67c9:: with SMTP id r9mr18651350qtp.301.1596488419951; 
- Mon, 03 Aug 2020 14:00:19 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzloXbOQAlj4ro+4XgmgIovn+tYHtggGdaX11HDzJFycK9jYjTdhtwEjKQPzQhIBulzPwzfyg==
-X-Received: by 2002:ac8:67c9:: with SMTP id r9mr18651337qtp.301.1596488419750; 
- Mon, 03 Aug 2020 14:00:19 -0700 (PDT)
+ bh=ODrF61uLCJ0gIB7JT0cfv8eeFBRRS/LYcIT029nxjh4=;
+ b=bOtyr5SLnEm0BOr5d5QFfosDiL0WCXtPagFvP6Hnez3Kqtm6R4mObny6Uji6Y9yiNx
+ mUkvqfkU1ZABGUQo0X8RjkLoy4iCyEUXtL9sUOrbR2f0kn+VDT56AJ9gz25dj9v6Fg0r
+ HvSVQGOX7A+BvJDGArV53zO5Z34RpgMwrpK8b1njPak/W+NGaruwNOxoFqLqGf2RVbkh
+ fwmjmdAbzbxWllCYB11bawhmmiYBk//6DJwU/t+4TPXxlRTc9s83o9OjXxFUdDuLB4N1
+ pocA9GqViKeNMvBM4vW9305sLFEfq+RLPoZar80lEngcL7OMtsON4oUNWEBR51ExGlQc
+ wY+A==
+X-Gm-Message-State: AOAM5312C5Ec6fF+vSxqe8+to6jjeIR2adhhRNMLYkRDz7ffSySO1fjS
+ 2Y8OZAAFHtr2AbTS3QkZ5A0IDFWktKeXnTUtitiq//bd2BAVOjrvjz+TikLsc6DqS1cIj9j7dcc
+ D66HTRXyOOgVoV1ZXFwRjtg5wfU3rq4QELQ2mAMhPWw==
+X-Received: by 2002:a0c:b5d8:: with SMTP id o24mr18759016qvf.214.1596488432569; 
+ Mon, 03 Aug 2020 14:00:32 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyLRWdf8ygGa/NpADkbJ17E7df0IfOnu3DKcU/hniVMLmpo6IhteUtIrQUdJ2HEhZNy2nSgbw==
+X-Received: by 2002:a0c:b5d8:: with SMTP id o24mr18758984qvf.214.1596488432309; 
+ Mon, 03 Aug 2020 14:00:32 -0700 (PDT)
 Received: from redhat.com (bzq-79-177-102-128.red.bezeqint.net.
  [79.177.102.128])
- by smtp.gmail.com with ESMTPSA id i19sm19928319qkk.68.2020.08.03.14.00.18
+ by smtp.gmail.com with ESMTPSA id k24sm23288433qtb.26.2020.08.03.14.00.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Aug 2020 14:00:19 -0700 (PDT)
-Date: Mon, 3 Aug 2020 17:00:16 -0400
+ Mon, 03 Aug 2020 14:00:31 -0700 (PDT)
+Date: Mon, 3 Aug 2020 17:00:29 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 21/24] virtio_vdpa: legacy features handling
-Message-ID: <20200803205814.540410-22-mst@redhat.com>
+Subject: [PATCH v2 24/24] virtio_config: rewrite using _Generic
+Message-ID: <20200803205814.540410-25-mst@redhat.com>
 References: <20200803205814.540410-1-mst@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20200803205814.540410-1-mst@redhat.com>
@@ -109,55 +109,207 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We normally expect vdpa to use the modern interface.
-However for consistency, let's use same APIs as vhost
-for legacy guests.
+Min compiler version has been raised, so that's ok now.
 
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- drivers/virtio/virtio_vdpa.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ include/linux/virtio_config.h | 163 ++++++++++++++++------------------
+ 1 file changed, 77 insertions(+), 86 deletions(-)
 
-diff --git a/drivers/virtio/virtio_vdpa.c b/drivers/virtio/virtio_vdpa.c
-index c30eb55030be..4a9ddb44b2a7 100644
---- a/drivers/virtio/virtio_vdpa.c
-+++ b/drivers/virtio/virtio_vdpa.c
-@@ -57,9 +57,8 @@ static void virtio_vdpa_get(struct virtio_device *vdev, unsigned offset,
- 			    void *buf, unsigned len)
- {
- 	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
--	const struct vdpa_config_ops *ops = vdpa->config;
- 
--	ops->get_config(vdpa, offset, buf, len);
-+	vdpa_get_config(vdpa, offset, buf, len);
+diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
+index 5c3b02245ecd..21c7098595ad 100644
+--- a/include/linux/virtio_config.h
++++ b/include/linux/virtio_config.h
+@@ -288,112 +288,103 @@ static inline __virtio64 cpu_to_virtio64(struct virtio_device *vdev, u64 val)
+ 	return __cpu_to_virtio64(virtio_is_little_endian(vdev), val);
  }
  
- static void virtio_vdpa_set(struct virtio_device *vdev, unsigned offset,
-@@ -101,9 +100,8 @@ static void virtio_vdpa_set_status(struct virtio_device *vdev, u8 status)
- static void virtio_vdpa_reset(struct virtio_device *vdev)
- {
- 	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
--	const struct vdpa_config_ops *ops = vdpa->config;
+-/*
+- * Only the checker differentiates between __virtioXX and __uXX types. But we
+- * try to share as much code as we can with the regular GCC build.
+- */
+-#if !defined(CONFIG_CC_IS_GCC) && !defined(__CHECKER__)
++#define virtio_to_cpu(vdev, x) \
++	_Generic((x), \
++		__u8: (x), \
++		__virtio16: virtio16_to_cpu((vdev), (x)), \
++		__virtio32: virtio32_to_cpu((vdev), (x)), \
++		__virtio64: virtio64_to_cpu((vdev), (x)), \
++		/*
++		 * Why define a default? checker can distinguish between
++		 * e.g. __u16, __le16 and __virtio16, but GCC can't so
++		 * attempts to define variants for both look like a duplicate
++		 * variant to it.
++		 */ \
++		default: _Generic((x), \
++				 __u8: (x), \
++				 __le16: virtio16_to_cpu((vdev), (__force __virtio16)(x)), \
++				 __le32: virtio32_to_cpu((vdev), (__force __virtio32)(x)), \
++				 __le64: virtio64_to_cpu((vdev), (__force __virtio64)(x)), \
++				 default: _Generic((x), \
++						  __u8: (x), \
++						  __u16: virtio16_to_cpu((vdev), (__force __virtio16)(x)), \
++						  __u32: virtio32_to_cpu((vdev), (__force __virtio32)(x)), \
++						  __u64: virtio64_to_cpu((vdev), (__force __virtio64)(x)) \
++						  ) \
++				 ) \
++		)
  
--	return ops->set_status(vdpa, 0);
-+	vdpa_reset(vdpa);
- }
+-/* Not a checker - we can keep things simple */
+-#define __virtio_native_typeof(x) typeof(x)
+-
+-#else
+-
+-/*
+- * We build this out of a couple of helper macros in a vain attempt to
+- * help you keep your lunch down while reading it.
+- */
+-#define __virtio_pick_value(x, type, then, otherwise)			\
+-	__builtin_choose_expr(__same_type(x, type), then, otherwise)
+-
+-#define __virtio_pick_type(x, type, then, otherwise)			\
+-	__virtio_pick_value(x, type, (then)0, otherwise)
+-
+-#define __virtio_pick_endian(x, x16, x32, x64, otherwise)			\
+-	__virtio_pick_type(x, x16, __u16,					\
+-		__virtio_pick_type(x, x32, __u32,				\
+-			__virtio_pick_type(x, x64, __u64,			\
+-				otherwise)))
+-
+-#define __virtio_native_typeof(x) typeof(					\
+-	__virtio_pick_type(x, __u8, __u8,					\
+-		__virtio_pick_endian(x, __virtio16, __virtio32, __virtio64,	\
+-			__virtio_pick_endian(x, __le16, __le32, __le64,		\
+-				/* No other type allowed */			\
+-				(void)0))))
+-
+-#endif
++#define cpu_to_virtio(vdev, x, m) \
++	_Generic((m), \
++		__u8: (x), \
++		__virtio16: cpu_to_virtio16((vdev), (x)), \
++		__virtio32: cpu_to_virtio32((vdev), (x)), \
++		__virtio64: cpu_to_virtio64((vdev), (x)), \
++		/*
++		 * Why define a default? checker can distinguish between
++		 * e.g. __u16, __le16 and __virtio16, but GCC can't so
++		 * attempts to define variants for both look like a duplicate
++		 * variant to it.
++		 */ \
++		default: _Generic((m), \
++				 __u8: (x), \
++				 __le16: (__force __le16)cpu_to_virtio16((vdev), (x)), \
++				 __le32: (__force __le32)cpu_to_virtio32((vdev), (x)), \
++				 __le64: (__force __le64)cpu_to_virtio64((vdev), (x)), \
++				 default: _Generic((m), \
++						  __u8: (x), \
++						  __u16: (__force __u16)cpu_to_virtio16((vdev), (x)), \
++						  __u32: (__force __u32)cpu_to_virtio32((vdev), (x)), \
++						  __u64: (__force __u64)cpu_to_virtio64((vdev), (x)) \
++						  ) \
++				 ) \
++		)
  
- static bool virtio_vdpa_notify(struct virtqueue *vq)
-@@ -294,12 +292,11 @@ static u64 virtio_vdpa_get_features(struct virtio_device *vdev)
- static int virtio_vdpa_finalize_features(struct virtio_device *vdev)
- {
- 	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
--	const struct vdpa_config_ops *ops = vdpa->config;
+ #define __virtio_native_type(structname, member) \
+-	__virtio_native_typeof(((structname*)0)->member)
+-
+-#define __virtio_typecheck(structname, member, val) \
+-		/* Must match the member's type, and be integer */ \
+-		typecheck(__virtio_native_type(structname, member), (val))
+-
++	typeof(virtio_to_cpu(NULL, ((structname*)0)->member))
  
- 	/* Give virtio_ring a chance to accept features. */
- 	vring_transport_features(vdev);
+ /* Config space accessors. */
+ #define virtio_cread(vdev, structname, member, ptr)			\
+ 	do {								\
+-		might_sleep();						\
+-		/* Must match the member's type, and be integer */	\
+-		if (!__virtio_typecheck(structname, member, *(ptr)))	\
+-			(*ptr) = 1;					\
++		typeof(((structname*)0)->member) virtio_cread_v;	\
+ 									\
+-		switch (sizeof(*ptr)) {					\
++		might_sleep();						\
++		/* Sanity check: must match the member's type */	\
++		/*typecheck(typeof(virtio_to_cpu((vdev), virtio_cread_v)), *(ptr)); */\
++									\
++		switch (sizeof(virtio_cread_v)) {			\
+ 		case 1:							\
+-			*(ptr) = virtio_cread8(vdev,			\
+-					       offsetof(structname, member)); \
+-			break;						\
+ 		case 2:							\
+-			*(ptr) = virtio_cread16(vdev,			\
+-						offsetof(structname, member)); \
+-			break;						\
+ 		case 4:							\
+-			*(ptr) = virtio_cread32(vdev,			\
+-						offsetof(structname, member)); \
+-			break;						\
+-		case 8:							\
+-			*(ptr) = virtio_cread64(vdev,			\
+-						offsetof(structname, member)); \
++			vdev->config->get((vdev), 			\
++					  offsetof(structname, member), \
++					  &virtio_cread_v,		\
++					  sizeof(virtio_cread_v));	\
+ 			break;						\
+ 		default:						\
+-			BUG();						\
++			__virtio_cread_many((vdev), 			\
++					  offsetof(structname, member), \
++					  &virtio_cread_v,		\
++					  1,				\
++					  sizeof(virtio_cread_v));	\
++			break;						\
+ 		}							\
++		*(ptr) = virtio_to_cpu(vdev, virtio_cread_v);		\
+ 	} while(0)
  
--	return ops->set_features(vdpa, vdev->features);
-+	return vdpa_set_features(vdpa, vdev->features);
- }
+ /* Config space accessors. */
+ #define virtio_cwrite(vdev, structname, member, ptr)			\
+ 	do {								\
+-		might_sleep();						\
+-		/* Must match the member's type, and be integer */	\
+-		if (!__virtio_typecheck(structname, member, *(ptr)))	\
+-			BUG_ON((*ptr) == 1);				\
++		typeof(((structname*)0)->member) virtio_cwrite_v =	\
++			cpu_to_virtio(vdev, *(ptr), ((structname*)0)->member); \
+ 									\
+-		switch (sizeof(*ptr)) {					\
+-		case 1:							\
+-			virtio_cwrite8(vdev,				\
+-				       offsetof(structname, member),	\
+-				       *(ptr));				\
+-			break;						\
+-		case 2:							\
+-			virtio_cwrite16(vdev,				\
+-					offsetof(structname, member),	\
+-					*(ptr));			\
+-			break;						\
+-		case 4:							\
+-			virtio_cwrite32(vdev,				\
+-					offsetof(structname, member),	\
+-					*(ptr));			\
+-			break;						\
+-		case 8:							\
+-			virtio_cwrite64(vdev,				\
+-					offsetof(structname, member),	\
+-					*(ptr));			\
+-			break;						\
+-		default:						\
+-			BUG();						\
+-		}							\
++		might_sleep();						\
++		/* Sanity check: must match the member's type */	\
++		typecheck(typeof(virtio_to_cpu((vdev), virtio_cwrite_v)), *(ptr)); \
++									\
++		vdev->config->set((vdev), offsetof(structname, member),	\
++				  &virtio_cwrite_v,			\
++				  sizeof(virtio_cwrite_v));		\
+ 	} while(0)
  
- static const char *virtio_vdpa_bus_name(struct virtio_device *vdev)
+ /* Read @count fields, @bytes each. */
 -- 
 MST
 
