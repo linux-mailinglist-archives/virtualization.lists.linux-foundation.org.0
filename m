@@ -1,98 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDBC723AEA6
-	for <lists.virtualization@lfdr.de>; Mon,  3 Aug 2020 23:00:57 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 3F0332094D;
-	Mon,  3 Aug 2020 21:00:53 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 97MAo6ai7Dmc; Mon,  3 Aug 2020 21:00:45 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 52AF621514;
-	Mon,  3 Aug 2020 21:00:34 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 38CD3C004C;
-	Mon,  3 Aug 2020 21:00:34 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 46640C004C
- for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:32 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85F0E23AF9B
+	for <lists.virtualization@lfdr.de>; Mon,  3 Aug 2020 23:24:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3596E85E12
- for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:32 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 39902866CA;
+	Mon,  3 Aug 2020 21:24:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vkTLACfplfxL; Mon,  3 Aug 2020 21:24:03 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8BAE78666C;
+	Mon,  3 Aug 2020 21:24:03 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6C5F3C004C;
+	Mon,  3 Aug 2020 21:24:03 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BBBF5C0051
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  3 Aug 2020 21:24:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id AA75687B47
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  3 Aug 2020 21:24:01 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2cS52XFGm+P2
+ with ESMTP id CGGLfaOS95Si
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:31 +0000 (UTC)
+ Mon,  3 Aug 2020 21:24:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 9311485A90
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 0D14187B1D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 Aug 2020 21:00:31 +0000 (UTC)
+ Mon,  3 Aug 2020 21:24:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596488430;
+ s=mimecast20190719; t=1596489839;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kSRe7wmYN+c40TNuZd0aK8LNMOsV+g9hMYDNFujk/tc=;
- b=IGd8DcSYa9RHW5IYgjVaeplNJUjbVV/lIii0MnkbIUVBRp7bwyz6gdQCX3RdvIzgMlHm0A
- czJmZTYtGsr5z8iIM+tNdAWn1XTHjMHVDIv5SGuHq7f8ECb9+JNAbFgTS+IiqJOxrgWlTb
- pkge2bKZ0w2KDqZVcTOTSRfMANa1Ot0=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-317-rzqAQ9OJOTeuJ9Gle3FEyg-1; Mon, 03 Aug 2020 17:00:29 -0400
-X-MC-Unique: rzqAQ9OJOTeuJ9Gle3FEyg-1
-Received: by mail-qk1-f199.google.com with SMTP id q18so23805418qkq.11
+ bh=jo615WZTpEY0jWsSBDhMKfTO9X12e9eG3FwUUEQGPi4=;
+ b=ZAF7taDWfS4xTpQJqACz1rOo9Bxa07smt76PegYz+VrlqjalIZghhWV4or/znwTrztebvk
+ KKbhXApLS8yU5LivWUfQBZbRTKCwbTyXVL0bHzJaHLwX/6AwO6ouip4A2TjWz5WycGrzm7
+ DJnIVPYpOKjBkNpnvlXjJwXWF6qS29E=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-475-XZyNMxsdNBKT7K3bAX5mYQ-1; Mon, 03 Aug 2020 17:23:58 -0400
+X-MC-Unique: XZyNMxsdNBKT7K3bAX5mYQ-1
+Received: by mail-ed1-f71.google.com with SMTP id b23so11206880edj.14
  for <virtualization@lists.linux-foundation.org>;
- Mon, 03 Aug 2020 14:00:28 -0700 (PDT)
+ Mon, 03 Aug 2020 14:23:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=kSRe7wmYN+c40TNuZd0aK8LNMOsV+g9hMYDNFujk/tc=;
- b=bHCVmUwVdwt/B4258xc/E2cHdKOuM/yQIf2tU2Ccuj5ZfTAilqip8Bxpc5iWJB0C9p
- x33xJLTP6XhcO70Y2A1Mh6v2Fy/FAWuzlZGypr4wJgCLp9O/b2QO/sKaHDQ4cTT1PtAQ
- z0z/nYRp6eF2TY9rQf8kZ4zmAR0cYhNSZysToMvCUOlhW1uQdDoMrfr6ULJBOurtvZ3j
- JjDDOfsprbej7zkHi/u15XsZj9BC2mQTpkL6hyK+E4zy/5WHTdtXB7pkuXKq8eUvJPpA
- W3HgeWtq+Ld3d9nRc8tibtxR3Oy3aGTtEvWqYOJXqON43uGR3u5XLkznuJ97E5E/K0Np
- gn4g==
-X-Gm-Message-State: AOAM5334z0t+XQSSUueRl8LauZBvmHukf2WNawL/KFhSnLH/EK/5cKqb
- ZbsvKu1BCo8zdI2tBEEIjopIAa7cTjlQPSj27rQmqi3oGpYiD+wkLMi50GsvAwxPxHkyGyipRHI
- JTKVDDiHVNmeRWxbDdejhn4+cX7a8YH06j5+YKZYwxw==
-X-Received: by 2002:aed:3203:: with SMTP id y3mr18662628qtd.376.1596488428499; 
- Mon, 03 Aug 2020 14:00:28 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyytSR2o8DqbLBPnR7jLzUuJzz/9lygAGjqsOnx/cmHBbbEeMQdbF76xlz6+tLx56E25N+M/Q==
-X-Received: by 2002:aed:3203:: with SMTP id y3mr18662607qtd.376.1596488428289; 
- Mon, 03 Aug 2020 14:00:28 -0700 (PDT)
-Received: from redhat.com (bzq-79-177-102-128.red.bezeqint.net.
- [79.177.102.128])
- by smtp.gmail.com with ESMTPSA id o37sm24591606qte.9.2020.08.03.14.00.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Aug 2020 14:00:27 -0700 (PDT)
-Date: Mon, 3 Aug 2020 17:00:24 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 23/24] virtio_config: cread/write cleanup
-Message-ID: <20200803205814.540410-24-mst@redhat.com>
-References: <20200803205814.540410-1-mst@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <20200803205814.540410-1-mst@redhat.com>
-X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
-X-Mutt-Fcc: =sent
+ h=x-gm-message-state:content-transfer-encoding:from:mime-version
+ :subject:date:message-id:references:cc:in-reply-to:to;
+ bh=dXYb/lLcqMNHaL94ouMomDU8DMTLeQCp1rZbDZouExs=;
+ b=BDwTDV7G0ZK0qZUPx3hGjqt0+b4Kav1AQjeQ0weh/J4cqg4v7910irlF7hq6lxlMEc
+ 7Yp+6nGvNJBWuI4FM0kt4H3AIKASDIki958h7EN1K62sy+PyFprgVqBoFuO2RCpy+S8E
+ aADQAYWgm2DM7Cia04nCC+U1oBlWn2Dffpb7vW69nRGXuhX2ciW7FnBM4xOkY/g8/JMC
+ fAj8AjJ8qtyhFoAZVlmMnsD54WrxB0C+Glf9tCLKHNCJhtP2QRmIpK+gXlca/8fiexMX
+ BS3WN0Bt6LhKvD413BsjUYAR1Rd6pEpEfdo5jSa5l7ahkBffi6oQXKZGJ8bQS0031xVb
+ p9bA==
+X-Gm-Message-State: AOAM531tGA1TxdwAktGjiHuQNxaQc2qllo4xTGz/fZmHlENGZP4pCyiZ
+ alDeqQDfzDHMOV0IMoU2zFujDbHJuqV+emg2gjt8oI4hYxEzIi0GLoUPN7uW8cO+7n3rDZm+C2N
+ d/FfRK6ZZ5zaOX8etg+mDNjhdtHUBUQ23xvBYoSu5XA==
+X-Received: by 2002:a50:d655:: with SMTP id c21mr17128422edj.49.1596489836977; 
+ Mon, 03 Aug 2020 14:23:56 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJy9I1gjkEaXGh8qVzCjl0anLUZO0DuGenZt4s5ea0cJEoQXiT5U/ffATDFfC1PlsKqrxI5U+Q==
+X-Received: by 2002:a50:d655:: with SMTP id c21mr17128405edj.49.1596489836766; 
+ Mon, 03 Aug 2020 14:23:56 -0700 (PDT)
+Received: from [192.168.3.122] (p5b0c6449.dip0.t-ipconnect.de. [91.12.100.73])
+ by smtp.gmail.com with ESMTPSA id
+ s15sm16948785ejb.16.2020.08.03.14.23.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Aug 2020 14:23:56 -0700 (PDT)
+From: David Hildenbrand <david@redhat.com>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [PATCH v2 13/24] virtio_mem: correct tags for config space fields
+Date: Mon, 3 Aug 2020 23:23:55 +0200
+Message-Id: <CB3AAE22-6BCA-448E-B499-AA4554755518@redhat.com>
+References: <20200803205814.540410-14-mst@redhat.com>
+In-Reply-To: <20200803205814.540410-14-mst@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+X-Mailer: iPhone Mail (17F80)
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,99 +103,46 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use vars of the correct type instead of casting.
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- include/linux/virtio_config.h | 31 +++++++++++++++++++------------
- 1 file changed, 19 insertions(+), 12 deletions(-)
-
-diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
-index c68f58f3bf34..5c3b02245ecd 100644
---- a/include/linux/virtio_config.h
-+++ b/include/linux/virtio_config.h
-@@ -444,53 +444,60 @@ static inline void virtio_cwrite8(struct virtio_device *vdev,
- static inline u16 virtio_cread16(struct virtio_device *vdev,
- 				 unsigned int offset)
- {
--	u16 ret;
-+	__virtio16 ret;
- 
- 	might_sleep();
- 	vdev->config->get(vdev, offset, &ret, sizeof(ret));
--	return virtio16_to_cpu(vdev, (__force __virtio16)ret);
-+	return virtio16_to_cpu(vdev, ret);
- }
- 
- static inline void virtio_cwrite16(struct virtio_device *vdev,
- 				   unsigned int offset, u16 val)
- {
-+	__virtio16 v;
-+
- 	might_sleep();
--	val = (__force u16)cpu_to_virtio16(vdev, val);
--	vdev->config->set(vdev, offset, &val, sizeof(val));
-+	v = cpu_to_virtio16(vdev, val);
-+	vdev->config->set(vdev, offset, &v, sizeof(v));
- }
- 
- static inline u32 virtio_cread32(struct virtio_device *vdev,
- 				 unsigned int offset)
- {
--	u32 ret;
-+	__virtio32 ret;
- 
- 	might_sleep();
- 	vdev->config->get(vdev, offset, &ret, sizeof(ret));
--	return virtio32_to_cpu(vdev, (__force __virtio32)ret);
-+	return virtio32_to_cpu(vdev, ret);
- }
- 
- static inline void virtio_cwrite32(struct virtio_device *vdev,
- 				   unsigned int offset, u32 val)
- {
-+	__virtio32 v;
-+
- 	might_sleep();
--	val = (__force u32)cpu_to_virtio32(vdev, val);
--	vdev->config->set(vdev, offset, &val, sizeof(val));
-+	v = cpu_to_virtio32(vdev, val);
-+	vdev->config->set(vdev, offset, &v, sizeof(v));
- }
- 
- static inline u64 virtio_cread64(struct virtio_device *vdev,
- 				 unsigned int offset)
- {
--	u64 ret;
-+	__virtio64 ret;
-+
- 	__virtio_cread_many(vdev, offset, &ret, 1, sizeof(ret));
--	return virtio64_to_cpu(vdev, (__force __virtio64)ret);
-+	return virtio64_to_cpu(vdev, ret);
- }
- 
- static inline void virtio_cwrite64(struct virtio_device *vdev,
- 				   unsigned int offset, u64 val)
- {
-+	__virtio64 v;
-+
- 	might_sleep();
--	val = (__force u64)cpu_to_virtio64(vdev, val);
--	vdev->config->set(vdev, offset, &val, sizeof(val));
-+	v = cpu_to_virtio64(vdev, val);
-+	vdev->config->set(vdev, offset, &v, sizeof(v));
- }
- 
- /* Conditional config space accessors. */
--- 
-MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Cgo+IEFtIDAzLjA4LjIwMjAgdW0gMjI6NTkgc2NocmllYiBNaWNoYWVsIFMuIFRzaXJraW4gPG1z
+dEByZWRoYXQuY29tPjoKPiAKPiDvu79TaW5jZSB0aGlzIGlzIGEgbW9kZXJuLW9ubHkgZGV2aWNl
+LAo+IHRhZyBjb25maWcgc3BhY2UgZmllbGRzIGFzIGhhdmluZyBsaXR0bGUgZW5kaWFuLW5lc3Mu
+Cj4gCj4gVE9ETzogY2hlY2sgb3RoZXIgdXNlcyBvZiBfX3ZpcnRpb1hYIHR5cGVzIGluIHRoaXMg
+aGVhZGVyLAo+IHNob3VsZCBwcm9iYWJseSBiZSBfX2xlWFguCgpEb2VzbuKAmHQgbWF0dGVyIGlu
+IHByYWN0aWNlIElJUkMsIGxpa2UgdGhpcyBjaGFuZ2UuIEJ1dCB3ZSBjb3VsZCBkbyBpdCAodGhl
+IHNwZWMgZG9jdW1lbnRzIGV2ZXJ5dGhpbmcgYXMgX19sZSkgaW4gY2FzZSBpdCBtYWtlcyB0aGlu
+Z3MgY2xlYXJlci4KCkFja2VkLWJ5OiBEYXZpZCBIaWxkZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNv
+bT4KCj4gCj4gU2lnbmVkLW9mZi1ieTogTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNv
+bT4KPiAtLS0KPiBpbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX21lbS5oIHwgMTQgKysrKysrKy0t
+LS0tLS0KPiAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCA3IGRlbGV0aW9ucygtKQo+
+IAo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX21lbS5oIGIvaW5jbHVk
+ZS91YXBpL2xpbnV4L3ZpcnRpb19tZW0uaAo+IGluZGV4IGE5ZmZlMDQxODQzYy4uNzBlMDFjNjg3
+ZDVlIDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fbWVtLmgKPiArKysg
+Yi9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX21lbS5oCj4gQEAgLTE4NSwyNyArMTg1LDI3IEBA
+IHN0cnVjdCB2aXJ0aW9fbWVtX3Jlc3Agewo+IAo+IHN0cnVjdCB2aXJ0aW9fbWVtX2NvbmZpZyB7
+Cj4gICAgLyogQmxvY2sgc2l6ZSBhbmQgYWxpZ25tZW50LiBDYW5ub3QgY2hhbmdlLiAqLwo+IC0g
+ICAgX191NjQgYmxvY2tfc2l6ZTsKPiArICAgIF9fbGU2NCBibG9ja19zaXplOwo+ICAgIC8qIFZh
+bGlkIHdpdGggVklSVElPX01FTV9GX0FDUElfUFhNLiBDYW5ub3QgY2hhbmdlLiAqLwo+IC0gICAg
+X191MTYgbm9kZV9pZDsKPiArICAgIF9fbGUxNiBub2RlX2lkOwo+ICAgIF9fdTggcGFkZGluZ1s2
+XTsKPiAgICAvKiBTdGFydCBhZGRyZXNzIG9mIHRoZSBtZW1vcnkgcmVnaW9uLiBDYW5ub3QgY2hh
+bmdlLiAqLwo+IC0gICAgX191NjQgYWRkcjsKPiArICAgIF9fbGU2NCBhZGRyOwo+ICAgIC8qIFJl
+Z2lvbiBzaXplIChtYXhpbXVtKS4gQ2Fubm90IGNoYW5nZS4gKi8KPiAtICAgIF9fdTY0IHJlZ2lv
+bl9zaXplOwo+ICsgICAgX19sZTY0IHJlZ2lvbl9zaXplOwo+ICAgIC8qCj4gICAgICogQ3VycmVu
+dGx5IHVzYWJsZSByZWdpb24gc2l6ZS4gQ2FuIGdyb3cgdXAgdG8gcmVnaW9uX3NpemUuIENhbgo+
+ICAgICAqIHNocmluayBkdWUgdG8gVklSVElPX01FTV9SRVFfVU5QTFVHX0FMTCAoaW4gd2hpY2gg
+Y2FzZSBubyBjb25maWcKPiAgICAgKiB1cGRhdGUgd2lsbCBiZSBzZW50KS4KPiAgICAgKi8KPiAt
+ICAgIF9fdTY0IHVzYWJsZV9yZWdpb25fc2l6ZTsKPiArICAgIF9fbGU2NCB1c2FibGVfcmVnaW9u
+X3NpemU7Cj4gICAgLyoKPiAgICAgKiBDdXJyZW50bHkgdXNlZCBzaXplLiBDaGFuZ2VzIGR1ZSB0
+byBwbHVnL3VucGx1ZyByZXF1ZXN0cywgYnV0IG5vCj4gICAgICogY29uZmlnIHVwZGF0ZXMgd2ls
+bCBiZSBzZW50Lgo+ICAgICAqLwo+IC0gICAgX191NjQgcGx1Z2dlZF9zaXplOwo+ICsgICAgX19s
+ZTY0IHBsdWdnZWRfc2l6ZTsKPiAgICAvKiBSZXF1ZXN0ZWQgc2l6ZS4gTmV3IHBsdWcgcmVxdWVz
+dHMgY2Fubm90IGV4Y2VlZCBpdC4gQ2FuIGNoYW5nZS4gKi8KPiAtICAgIF9fdTY0IHJlcXVlc3Rl
+ZF9zaXplOwo+ICsgICAgX19sZTY0IHJlcXVlc3RlZF9zaXplOwo+IH07Cj4gCj4gI2VuZGlmIC8q
+IF9MSU5VWF9WSVJUSU9fTUVNX0ggKi8KPiAtLSAKPiBNU1QKPiAKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlz
+dApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3Rz
+LmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
