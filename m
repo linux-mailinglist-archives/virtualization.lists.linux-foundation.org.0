@@ -1,72 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4459A23B588
-	for <lists.virtualization@lfdr.de>; Tue,  4 Aug 2020 09:24:37 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D47A423B589
+	for <lists.virtualization@lfdr.de>; Tue,  4 Aug 2020 09:24:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4E18D86DDC;
-	Tue,  4 Aug 2020 07:24:35 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 635B422170;
+	Tue,  4 Aug 2020 07:24:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TcPx6YAEWWpb; Tue,  4 Aug 2020 07:24:34 +0000 (UTC)
+	with ESMTP id 5-C24pbvGNY9; Tue,  4 Aug 2020 07:24:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CB87C86E88;
-	Tue,  4 Aug 2020 07:24:33 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 47AFC22179;
+	Tue,  4 Aug 2020 07:24:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AB654C0050;
-	Tue,  4 Aug 2020 07:24:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 29DE9C004C;
+	Tue,  4 Aug 2020 07:24:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BCFC5C004C
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EE526C004C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 07:24:31 +0000 (UTC)
+ Tue,  4 Aug 2020 07:24:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id ACE7685F3E
+ by whitealder.osuosl.org (Postfix) with ESMTP id DC36986B68
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 07:24:31 +0000 (UTC)
+ Tue,  4 Aug 2020 07:24:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id J5nckehuOHke
+ with ESMTP id pgksR74szwed
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 07:24:31 +0000 (UTC)
+ Tue,  4 Aug 2020 07:24:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 1088B85BD0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 898E186777
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 07:24:30 +0000 (UTC)
+ Tue,  4 Aug 2020 07:24:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596525870;
+ s=mimecast20190719; t=1596525872;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=94kv3iM7voNuc/GuCMOJeaJASAgCqOV3S0igLlKUpuI=;
- b=XjERthes5LJ5fNy24jJ7isPbHSNGxuIjqLrFvMTPAcpInuZbXPb2Suzhx1VlL50J5duksx
- ltM+f2jHiCwiLvaEGsC2WbgfdQBYwE4vDTP4P+fQU7YEa30/bs+22q1mp7cELniL8FXoXZ
- xfJGAtkF4Vk4dWB6KtBLq+c8ZSrn/fo=
+ bh=Lt1g0htUa/bc8OboHGsnEp9sr/LuEltQUA5QpsfHh1k=;
+ b=EfWPZI0lQtxajkAA+WIaNw6/CzBVcsFmUgCdx2xTI7/wXMUYYrEj0g8zT78f2CPgpysNuq
+ JM1FrM8SruFTcsqutr7TwgekSXd1VrdsVvjf6ay/84m5aVSlvC5MH8gimJPBcPTGnz+UAx
+ dy3QKVKX9E01gORXGNuuSszBqRO7w9A=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-213-L0jonywVOf-ICj5W3rU_kA-1; Tue, 04 Aug 2020 03:24:28 -0400
-X-MC-Unique: L0jonywVOf-ICj5W3rU_kA-1
+ us-mta-488--bsXYjLqO0qVPCbYYyYWJA-1; Tue, 04 Aug 2020 03:24:30 -0400
+X-MC-Unique: -bsXYjLqO0qVPCbYYyYWJA-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A62818064DD;
- Tue,  4 Aug 2020 07:24:26 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EED8D79ED5;
+ Tue,  4 Aug 2020 07:24:28 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-113-95.ams2.redhat.com [10.36.113.95])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A87215DA74;
- Tue,  4 Aug 2020 07:24:24 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F30575DA74;
+ Tue,  4 Aug 2020 07:24:26 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 2/6] mm/page_alloc: tweak comments in has_unmovable_pages()
-Date: Tue,  4 Aug 2020 09:24:04 +0200
-Message-Id: <20200804072408.5481-3-david@redhat.com>
+Subject: [PATCH v3 3/6] mm/page_isolation: drop WARN_ON_ONCE() in
+ set_migratetype_isolate()
+Date: Tue,  4 Aug 2020 09:24:05 +0200
+Message-Id: <20200804072408.5481-4-david@redhat.com>
 In-Reply-To: <20200804072408.5481-1-david@redhat.com>
 References: <20200804072408.5481-1-david@redhat.com>
 MIME-Version: 1.0
@@ -92,9 +93,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's move the split comment regarding bootmem allocations and memory
-holes, especially in the context of ZONE_MOVABLE, to the PageReserved()
-check.
+Inside has_unmovable_pages(), we have a comment describing how unmovable
+data could end up in ZONE_MOVABLE - via "movable_core". Also, besides
+checking if the first page in the pageblock is reserved, we don't
+perform any further checks in case of ZONE_MOVABLE.
+
+In case of memory offlining, we set REPORT_FAILURE, properly
+dump_page() the page and handle the error gracefully.
+alloc_contig_pages() users currently never allocate from ZONE_MOVABLE.
+E.g., hugetlb uses alloc_contig_pages() for the allocation of gigantic
+pages only, which will never end up on the MOVABLE zone
+(see htlb_alloc_mask()).
 
 Reviewed-by: Baoquan He <bhe@redhat.com>
 Cc: Andrew Morton <akpm@linux-foundation.org>
@@ -104,56 +113,35 @@ Cc: Mike Kravetz <mike.kravetz@oracle.com>
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- mm/page_alloc.c | 22 ++++++----------------
- 1 file changed, 6 insertions(+), 16 deletions(-)
+ mm/page_isolation.c | 15 ++++++---------
+ 1 file changed, 6 insertions(+), 9 deletions(-)
 
-diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index e028b87ce2942..042ba09d70c5d 100644
---- a/mm/page_alloc.c
-+++ b/mm/page_alloc.c
-@@ -8207,14 +8207,6 @@ struct page *has_unmovable_pages(struct zone *zone, struct page *page,
- 	unsigned long iter = 0;
- 	unsigned long pfn = page_to_pfn(page);
- 
--	/*
--	 * TODO we could make this much more efficient by not checking every
--	 * page in the range if we know all of them are in MOVABLE_ZONE and
--	 * that the movable zone guarantees that pages are migratable but
--	 * the later is not the case right now unfortunatelly. E.g. movablecore
--	 * can still lead to having bootmem allocations in zone_movable.
--	 */
+diff --git a/mm/page_isolation.c b/mm/page_isolation.c
+index 7d7d263ce7f4b..d099aac479601 100644
+--- a/mm/page_isolation.c
++++ b/mm/page_isolation.c
+@@ -57,15 +57,12 @@ static int set_migratetype_isolate(struct page *page, int migratetype, int isol_
+ 	spin_unlock_irqrestore(&zone->lock, flags);
+ 	if (!ret) {
+ 		drain_all_pages(zone);
+-	} else {
+-		WARN_ON_ONCE(zone_idx(zone) == ZONE_MOVABLE);
 -
- 	if (is_migrate_cma_page(page)) {
- 		/*
- 		 * CMA allocations (alloc_contig_range) really need to mark
-@@ -8233,6 +8225,12 @@ struct page *has_unmovable_pages(struct zone *zone, struct page *page,
- 
- 		page = pfn_to_page(pfn + iter);
- 
+-		if ((isol_flags & REPORT_FAILURE) && unmovable)
+-			/*
+-			 * printk() with zone->lock held will likely trigger a
+-			 * lockdep splat, so defer it here.
+-			 */
+-			dump_page(unmovable, "unmovable page");
++	} else if ((isol_flags & REPORT_FAILURE) && unmovable) {
 +		/*
-+		 * Both, bootmem allocations and memory holes are marked
-+		 * PG_reserved and are unmovable. We can even have unmovable
-+		 * allocations inside ZONE_MOVABLE, for example when
-+		 * specifying "movablecore".
++		 * printk() with zone->lock held will likely trigger a
++		 * lockdep splat, so defer it here.
 +		 */
- 		if (PageReserved(page))
- 			return page;
- 
-@@ -8306,14 +8304,6 @@ struct page *has_unmovable_pages(struct zone *zone, struct page *page,
- 		 * it.  But now, memory offline itself doesn't call
- 		 * shrink_node_slabs() and it still to be fixed.
- 		 */
--		/*
--		 * If the page is not RAM, page_count()should be 0.
--		 * we don't need more check. This is an _used_ not-movable page.
--		 *
--		 * The problematic thing here is PG_reserved pages. PG_reserved
--		 * is set to both of a memory hole page and a _used_ kernel
--		 * page at boot.
--		 */
- 		return page;
++		dump_page(unmovable, "unmovable page");
  	}
- 	return NULL;
+ 
+ 	return ret;
 -- 
 2.26.2
 
