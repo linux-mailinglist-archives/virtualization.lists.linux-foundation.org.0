@@ -1,73 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 878F123C032
-	for <lists.virtualization@lfdr.de>; Tue,  4 Aug 2020 21:42:05 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 06F7E23C033
+	for <lists.virtualization@lfdr.de>; Tue,  4 Aug 2020 21:42:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 449A8861A7;
-	Tue,  4 Aug 2020 19:42:04 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 86A1F8800F;
+	Tue,  4 Aug 2020 19:42:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id y0fv3+zVpE2j; Tue,  4 Aug 2020 19:42:03 +0000 (UTC)
+	with ESMTP id g8roqhDLbjDo; Tue,  4 Aug 2020 19:42:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id AC05D86234;
-	Tue,  4 Aug 2020 19:42:03 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 041DD87FFF;
+	Tue,  4 Aug 2020 19:42:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F8B8C004C;
-	Tue,  4 Aug 2020 19:42:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D8CF9C004C;
+	Tue,  4 Aug 2020 19:42:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 889F9C0050
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 79780C004C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 19:42:02 +0000 (UTC)
+ Tue,  4 Aug 2020 19:42:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 776AA20798
+ by hemlock.osuosl.org (Postfix) with ESMTP id 68D8F87FE9
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 19:42:02 +0000 (UTC)
+ Tue,  4 Aug 2020 19:42:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wHYXxMGYFGGr
+ with ESMTP id d8jewQWS3jEs
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 19:42:01 +0000 (UTC)
+ Tue,  4 Aug 2020 19:42:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
  [205.139.110.61])
- by silver.osuosl.org (Postfix) with ESMTPS id 21DA52002C
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 9B9F387F9F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 19:42:01 +0000 (UTC)
+ Tue,  4 Aug 2020 19:42:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596570120;
+ s=mimecast20190719; t=1596570124;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dyDrSr/R3IYIedmMJp2EbzPQ1RIZu9oQIJgsVrWfxkI=;
- b=HmvIsjv+in567DKqdxvnyHXqMKSfgF50vPzelMQxzgUjcvv6D6w/5QzJl1bNDtikDG52ko
- leuamC8TnPlamTlpHnVixhiujETl0wXnY8FzC3Qr0oe/tJLdiMb6ROkwAU9KqvMhrPrFN1
- cbgNxAmD1k3eOPFhT53K3SqW9QpgEqY=
+ bh=94kv3iM7voNuc/GuCMOJeaJASAgCqOV3S0igLlKUpuI=;
+ b=SkBjoQEWvDm8ofeRCeGvvwq0sLQbAc13zcLQWP7oYm6YhpyqLC0CBOKr5D++HmG6u1q3sE
+ 8ARAxRrQSuxEYJu/sg7+fBfAExQr0pjSgxKm51VbBQJr3Wpn9edsR5r83idX7cHHOZyN3M
+ c1LGnpU7cQj5nLjQSLAPmwd8f7vJw+I=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-98-9Z2g_H3fPSev2zFAXNtB6A-1; Tue, 04 Aug 2020 15:41:58 -0400
-X-MC-Unique: 9Z2g_H3fPSev2zFAXNtB6A-1
+ us-mta-58-VlR3S6k3NKaBmdM_PavKFA-1; Tue, 04 Aug 2020 15:42:00 -0400
+X-MC-Unique: VlR3S6k3NKaBmdM_PavKFA-1
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EBE488015F3;
- Tue,  4 Aug 2020 19:41:56 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 49D8858;
+ Tue,  4 Aug 2020 19:41:59 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-113-95.ams2.redhat.com [10.36.113.95])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BCF3672E4F;
- Tue,  4 Aug 2020 19:41:54 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 455BD72E4F;
+ Tue,  4 Aug 2020 19:41:57 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 1/6] mm/page_isolation: don't dump_page(NULL) in
- set_migratetype_isolate()
-Date: Tue,  4 Aug 2020 21:41:37 +0200
-Message-Id: <20200804194142.28279-2-david@redhat.com>
+Subject: [PATCH v4 2/6] mm/page_alloc: tweak comments in has_unmovable_pages()
+Date: Tue,  4 Aug 2020 21:41:38 +0200
+Message-Id: <20200804194142.28279-3-david@redhat.com>
 In-Reply-To: <20200804194142.28279-1-david@redhat.com>
 References: <20200804194142.28279-1-david@redhat.com>
 MIME-Version: 1.0
@@ -75,7 +74,7 @@ X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Michal Hocko <mhocko@suse.com>,
  Baoquan He <bhe@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
  virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- Qian Cai <cai@lca.pw>, Andrew Morton <akpm@linux-foundation.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
  Mike Kravetz <mike.kravetz@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -93,54 +92,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Right now, if we have two isolations racing, we might trigger the
-WARN_ON_ONCE() and to dump_page(NULL), dereferencing NULL. Let's just
-return directly.
-
-In the future, we might want to report -EAGAIN to the caller instead, as
-this could indicate a temporary isolation failure only.
+Let's move the split comment regarding bootmem allocations and memory
+holes, especially in the context of ZONE_MOVABLE, to the PageReserved()
+check.
 
 Reviewed-by: Baoquan He <bhe@redhat.com>
-Reviewed-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-Acked-by: Mike Kravetz <mike.kravetz@oracle.com>
-Fixes: 4a55c0474a92 ("mm/hotplug: silence a lockdep splat with printk()")
 Cc: Andrew Morton <akpm@linux-foundation.org>
 Cc: Michal Hocko <mhocko@suse.com>
 Cc: Michael S. Tsirkin <mst@redhat.com>
-Cc: Qian Cai <cai@lca.pw>
+Cc: Mike Kravetz <mike.kravetz@oracle.com>
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- mm/page_isolation.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ mm/page_alloc.c | 22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
 
-diff --git a/mm/page_isolation.c b/mm/page_isolation.c
-index f6d07c5f0d34d..7d7d263ce7f4b 100644
---- a/mm/page_isolation.c
-+++ b/mm/page_isolation.c
-@@ -29,10 +29,12 @@ static int set_migratetype_isolate(struct page *page, int migratetype, int isol_
- 	/*
- 	 * We assume the caller intended to SET migrate type to isolate.
- 	 * If it is already set, then someone else must have raced and
--	 * set it before us.  Return -EBUSY
-+	 * set it before us.
- 	 */
--	if (is_migrate_isolate_page(page))
--		goto out;
-+	if (is_migrate_isolate_page(page)) {
-+		spin_unlock_irqrestore(&zone->lock, flags);
-+		return -EBUSY;
-+	}
+diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+index e028b87ce2942..042ba09d70c5d 100644
+--- a/mm/page_alloc.c
++++ b/mm/page_alloc.c
+@@ -8207,14 +8207,6 @@ struct page *has_unmovable_pages(struct zone *zone, struct page *page,
+ 	unsigned long iter = 0;
+ 	unsigned long pfn = page_to_pfn(page);
  
- 	/*
- 	 * FIXME: Now, memory hotplug doesn't call shrink_slab() by itself.
-@@ -52,7 +54,6 @@ static int set_migratetype_isolate(struct page *page, int migratetype, int isol_
- 		ret = 0;
+-	/*
+-	 * TODO we could make this much more efficient by not checking every
+-	 * page in the range if we know all of them are in MOVABLE_ZONE and
+-	 * that the movable zone guarantees that pages are migratable but
+-	 * the later is not the case right now unfortunatelly. E.g. movablecore
+-	 * can still lead to having bootmem allocations in zone_movable.
+-	 */
+-
+ 	if (is_migrate_cma_page(page)) {
+ 		/*
+ 		 * CMA allocations (alloc_contig_range) really need to mark
+@@ -8233,6 +8225,12 @@ struct page *has_unmovable_pages(struct zone *zone, struct page *page,
+ 
+ 		page = pfn_to_page(pfn + iter);
+ 
++		/*
++		 * Both, bootmem allocations and memory holes are marked
++		 * PG_reserved and are unmovable. We can even have unmovable
++		 * allocations inside ZONE_MOVABLE, for example when
++		 * specifying "movablecore".
++		 */
+ 		if (PageReserved(page))
+ 			return page;
+ 
+@@ -8306,14 +8304,6 @@ struct page *has_unmovable_pages(struct zone *zone, struct page *page,
+ 		 * it.  But now, memory offline itself doesn't call
+ 		 * shrink_node_slabs() and it still to be fixed.
+ 		 */
+-		/*
+-		 * If the page is not RAM, page_count()should be 0.
+-		 * we don't need more check. This is an _used_ not-movable page.
+-		 *
+-		 * The problematic thing here is PG_reserved pages. PG_reserved
+-		 * is set to both of a memory hole page and a _used_ kernel
+-		 * page at boot.
+-		 */
+ 		return page;
  	}
- 
--out:
- 	spin_unlock_irqrestore(&zone->lock, flags);
- 	if (!ret) {
- 		drain_all_pages(zone);
+ 	return NULL;
 -- 
 2.26.2
 
