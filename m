@@ -1,78 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03EF923BBDC
-	for <lists.virtualization@lfdr.de>; Tue,  4 Aug 2020 16:17:11 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 7CA7A86B47;
-	Tue,  4 Aug 2020 14:17:09 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nfpXutC2p2-m; Tue,  4 Aug 2020 14:17:08 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D6E2086BAD;
-	Tue,  4 Aug 2020 14:17:08 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BCE99C004C;
-	Tue,  4 Aug 2020 14:17:08 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CEB21C004C
- for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 14:17:06 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48F4E23BBE3
+	for <lists.virtualization@lfdr.de>; Tue,  4 Aug 2020 16:18:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id B7D4D87E7D
- for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 14:17:06 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D8CD887E90;
+	Tue,  4 Aug 2020 14:18:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xI-SCwlTNy3O
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VLa-XAxGThJr; Tue,  4 Aug 2020 14:18:42 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6E64F87E7D;
+	Tue,  4 Aug 2020 14:18:42 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 64B9CC004C;
+	Tue,  4 Aug 2020 14:18:42 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5108AC004C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 14:17:06 +0000 (UTC)
+ Tue,  4 Aug 2020 14:18:41 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 47E2420554
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  4 Aug 2020 14:18:41 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id O-f-cqyMHL7t
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  4 Aug 2020 14:18:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
  [205.139.110.61])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 375D487E75
+ by silver.osuosl.org (Postfix) with ESMTPS id 92EBC204FB
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 Aug 2020 14:17:06 +0000 (UTC)
+ Tue,  4 Aug 2020 14:18:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596550624;
+ s=mimecast20190719; t=1596550719;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=0MPZ1iQ3JPjBlNMrYPSGQLxY1mun+60bwK9qZEBjRfg=;
- b=Vm0KY24sth8J0Zup+1fchzq58pLVsTdUlC5LPSLeTy9CtiL45sRwIPyeSAb02+Mn8+Tm+y
- i0/EgGAGv9T/gRE64CoM8vTZzXnCQvnd1qSY8y+bWJgGa+ax+TiV5jRoMAZPL7RBKiNtNv
- lylkD1FToQ9BiQ72rWXKwemeUs26JFA=
+ bh=Sw61jMeCuZdbDRLwviwnpjt8KTeY+4WKos8mwU2Av5s=;
+ b=SWHwzMcLSQ2Px2UBvVo4czCULO3oMR9sQHlvMX6czmFISC1YbLlpVxMiaLdUdll4tb+j1e
+ 1kPQNDIliE32hsaKGzPUsvS6t6n8QetY/NhfQAhdpdnaHTsOeTdlS+unqf5g9eI9zdMXr9
+ Mc7Vm9f6EusHJ7sCStLvcglreato1+c=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-506-c2MZmszDOQSEpbXrxO_oYA-1; Tue, 04 Aug 2020 10:17:03 -0400
-X-MC-Unique: c2MZmszDOQSEpbXrxO_oYA-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ us-mta-294-gCRcc1HPMnaBWNWm9ylx3g-1; Tue, 04 Aug 2020 10:18:35 -0400
+X-MC-Unique: gCRcc1HPMnaBWNWm9ylx3g-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1E6688B1086;
- Tue,  4 Aug 2020 14:17:02 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7E5A719057C9;
+ Tue,  4 Aug 2020 14:18:33 +0000 (UTC)
 Received: from gondolin (ovpn-112-169.ams2.redhat.com [10.36.112.169])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3E4EE5C6DD;
- Tue,  4 Aug 2020 14:16:55 +0000 (UTC)
-Date: Tue, 4 Aug 2020 16:16:53 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 326667F5CC;
+ Tue,  4 Aug 2020 14:18:29 +0000 (UTC)
+Date: Tue, 4 Aug 2020 16:18:27 +0200
 From: Cornelia Huck <cohuck@redhat.com>
 To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH v2 01/24] virtio_balloon: fix sparse warning
-Message-ID: <20200804161653.32076296.cohuck@redhat.com>
-In-Reply-To: <20200803205814.540410-2-mst@redhat.com>
+Subject: Re: [PATCH v2 02/24] virtio_ring: sparse warning fixup
+Message-ID: <20200804161827.5e1851a6.cohuck@redhat.com>
+In-Reply-To: <20200803205814.540410-3-mst@redhat.com>
 References: <20200803205814.540410-1-mst@redhat.com>
- <20200803205814.540410-2-mst@redhat.com>
+ <20200803205814.540410-3-mst@redhat.com>
 Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -90,20 +90,20 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, 3 Aug 2020 16:58:38 -0400
+On Mon, 3 Aug 2020 16:58:42 -0400
 "Michael S. Tsirkin" <mst@redhat.com> wrote:
 
-> balloon uses virtio32_to_cpu instead of cpu_to_virtio32
-> to convert a native endian number to virtio.
-> No practical difference but makes sparse warn.
-> Fix it up.
+> virtio_store_mb was built with split ring in mind so it accepts
+> __virtio16 arguments. Packed ring uses __le16 values, so sparse
+> complains.  It's just a store with some barriers so let's convert it to
+> a macro, we don't loose too much type safety by doing that.
 > 
 > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 > ---
->  drivers/virtio/virtio_balloon.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  include/linux/virtio_ring.h | 19 +++++++++----------
+>  1 file changed, 9 insertions(+), 10 deletions(-)
 
-Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+Acked-by: Cornelia Huck <cohuck@redhat.com>
 
 _______________________________________________
 Virtualization mailing list
