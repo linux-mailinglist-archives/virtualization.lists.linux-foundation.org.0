@@ -1,112 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBAA423DB19
-	for <lists.virtualization@lfdr.de>; Thu,  6 Aug 2020 16:23:18 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FBE023DB6F
+	for <lists.virtualization@lfdr.de>; Thu,  6 Aug 2020 17:48:02 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 09CF8881E2;
-	Thu,  6 Aug 2020 14:23:17 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 73C6E86F7E;
+	Thu,  6 Aug 2020 15:48:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Fv7reNHAYN-n; Thu,  6 Aug 2020 14:23:15 +0000 (UTC)
+	with ESMTP id 1YbAXGU1Mord; Thu,  6 Aug 2020 15:47:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id AAB9B882BB;
-	Thu,  6 Aug 2020 14:23:14 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3B57986F77;
+	Thu,  6 Aug 2020 15:47:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F94FC004C;
-	Thu,  6 Aug 2020 14:23:14 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F29B2C004C;
+	Thu,  6 Aug 2020 15:47:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4395EC004C
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 57917C004C
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:23:13 +0000 (UTC)
+ Thu,  6 Aug 2020 15:47:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 30DDC88152
+ by hemlock.osuosl.org (Postfix) with ESMTP id 4CB718855E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:23:13 +0000 (UTC)
+ Thu,  6 Aug 2020 15:47:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1sTfaycQ1bUn
+ with ESMTP id pyHS+b1JSw2g
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:23:12 +0000 (UTC)
+ Thu,  6 Aug 2020 15:47:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 7CB3087E3E
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6C38388557
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:23:12 +0000 (UTC)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 076E296Q092894; Thu, 6 Aug 2020 10:23:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references; s=pp1;
- bh=cK+IFbwDsM2m9d21mk++qrDlBgGZFvrkkmzPVkYIzkw=;
- b=Wy/DxXqmIU1/ZqRoHZPqLu9oj7ath30Pv4e1FvQ7vq46Ful0fvenpSQOtpq0EmuF7yqi
- lXH6qTHYc2W4pkoa2gm56Eb0kse8bu7mNntp3WKrKsnk8yILFR4LvmBRKgfoWc2NRK8+
- iD+vzfe4NuI2f+VDseLvdF7i1/njOKnOjE4WU2tZpJ5YNElm5ItAAmqdidGABGuO7xqR
- Td632cBQQ5WLo7ceohtcYfRcu/HvGe8qSBiJW/AeT+umrvjkCO0BTpjRd5Eewudh88Kw
- pAeYb2wxa/w9KxTe/Fy7K0GB0lA3cmUkmrg5BMWSliJX77Rac9FcabcnNJKiWzlWqbDI eQ== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 32qu0w8xkc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Aug 2020 10:23:12 -0400
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 076E38m9098055;
- Thu, 6 Aug 2020 10:23:11 -0400
-Received: from ppma02fra.de.ibm.com (47.49.7a9f.ip4.static.sl-reverse.com
- [159.122.73.71])
- by mx0a-001b2d01.pphosted.com with ESMTP id 32qu0w8xjb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Aug 2020 10:23:11 -0400
-Received: from pps.filterd (ppma02fra.de.ibm.com [127.0.0.1])
- by ppma02fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 076EGXgN027832;
- Thu, 6 Aug 2020 14:23:08 GMT
-Received: from b06cxnps3074.portsmouth.uk.ibm.com
- (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
- by ppma02fra.de.ibm.com with ESMTP id 32n018bda0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Aug 2020 14:23:08 +0000
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
- [9.149.105.62])
- by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 076EN59J27721984
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 6 Aug 2020 14:23:05 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 7AEA6AE053;
- Thu,  6 Aug 2020 14:23:05 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id E8AE7AE04D;
- Thu,  6 Aug 2020 14:23:04 +0000 (GMT)
-Received: from oc3016276355.ibm.com (unknown [9.145.149.70])
- by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Thu,  6 Aug 2020 14:23:04 +0000 (GMT)
-From: Pierre Morel <pmorel@linux.ibm.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v1 1/1] s390: virtio-ccw: PV needs VIRTIO I/O device protection
-Date: Thu,  6 Aug 2020 16:23:02 +0200
-Message-Id: <1596723782-12798-2-git-send-email-pmorel@linux.ibm.com>
-X-Mailer: git-send-email 1.8.3.1
+ Thu,  6 Aug 2020 15:47:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1596728876;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=S8ASlZG4PjPJBhAfnFIIFM3UUn4KVlmkZfG7k5GeMeY=;
+ b=OYMZTGs1buQVvG5YCT32IVjpASCoFaOVY08OcxIt0mZGzEHzf4ns8JzbHZL6b+wZrp4kzD
+ /o+75mAdVDoTo16ZRGRxwQEyI2Edq30GKV+P5YnpKvxI2dOTD5fs+lmEzShX1yr3yWf6nX
+ WyU5mMuGXigPFTnjQuKGCcLVNtUb9wg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-404-1Bx-Afw6NCqOOHK1jEdsug-1; Thu, 06 Aug 2020 11:47:53 -0400
+X-MC-Unique: 1Bx-Afw6NCqOOHK1jEdsug-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 41A2F1800D42;
+ Thu,  6 Aug 2020 15:47:52 +0000 (UTC)
+Received: from gondolin (ovpn-113-2.ams2.redhat.com [10.36.113.2])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4497D65C82;
+ Thu,  6 Aug 2020 15:47:47 +0000 (UTC)
+Date: Thu, 6 Aug 2020 17:47:44 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Pierre Morel <pmorel@linux.ibm.com>
+Subject: Re: [PATCH v1 0/1] s390: virtio-ccw: PV needs VIRTIO I/O device
+ protection
+Message-ID: <20200806174744.595b9c8c.cohuck@redhat.com>
 In-Reply-To: <1596723782-12798-1-git-send-email-pmorel@linux.ibm.com>
 References: <1596723782-12798-1-git-send-email-pmorel@linux.ibm.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-08-06_09:2020-08-06,
- 2020-08-06 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 malwarescore=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 suspectscore=3
- phishscore=0 mlxscore=0 bulkscore=0 priorityscore=1501 spamscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2008060096
+Organization: Red Hat GmbH
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Cc: linux-s390@vger.kernel.org, frankja@linux.ibm.com, kvm@vger.kernel.org,
- mst@redhat.com, cohuck@redhat.com, virtualization@lists.linux-foundation.org,
- pasic@linux.ibm.com, borntraeger@de.ibm.com
+ mst@redhat.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
+ borntraeger@de.ibm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -118,68 +88,57 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-If protected virtualization is active on s390, the virtio queues are
-not accessible to the host, unless VIRTIO_F_IOMMU_PLATFORM has been
-negotiated. Use ccw_transport_features() to fail feature negociation
-and consequently probe if that's not the case, preventing a host
-error on access attempt.
+On Thu,  6 Aug 2020 16:23:01 +0200
+Pierre Morel <pmorel@linux.ibm.com> wrote:
 
-Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
----
- drivers/s390/virtio/virtio_ccw.c | 24 +++++++++++++++++++-----
- 1 file changed, 19 insertions(+), 5 deletions(-)
+> Hi all,
+> 
+> In another series I proposed to add an architecture specific
+> callback to fail feature negociation on architecture need.
+> 
+> In VIRTIO, we already have an entry to reject the features on the
+> transport basis.
+> 
+> Transport is not architecture so I send a separate series in which
+> we fail the feature negociation inside virtio_ccw_finalize_features,
+> the virtio_config_ops.finalize_features for S390 CCW transport,
+> when the device do not propose the VIRTIO_F_IOMMU_PLATFORM.
+> 
+> This solves the problem of crashing QEMU when this one is not using
+> a CCW device with iommu_platform=on in S390.
 
-diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
-index 5730572b52cd..cc8d8064c6c4 100644
---- a/drivers/s390/virtio/virtio_ccw.c
-+++ b/drivers/s390/virtio/virtio_ccw.c
-@@ -803,11 +803,23 @@ static u64 virtio_ccw_get_features(struct virtio_device *vdev)
- 	return rc;
- }
- 
--static void ccw_transport_features(struct virtio_device *vdev)
-+static int ccw_transport_features(struct virtio_device *vdev)
- {
--	/*
--	 * Currently nothing to do here.
--	 */
-+	if (!is_prot_virt_guest())
-+		return 0;
-+
-+	if (!virtio_has_feature(vdev, VIRTIO_F_VERSION_1)) {
-+		dev_warn(&vdev->dev,
-+			 "device must provide VIRTIO_F_VERSION_1\n");
-+		return -ENODEV;
-+	}
-+
-+	if (!virtio_has_feature(vdev, VIRTIO_F_IOMMU_PLATFORM)) {
-+		dev_warn(&vdev->dev,
-+			 "device must provide VIRTIO_F_IOMMU_PLATFORM\n");
-+		return -ENODEV;
-+	}
-+	return 0;
- }
- 
- static int virtio_ccw_finalize_features(struct virtio_device *vdev)
-@@ -837,7 +849,9 @@ static int virtio_ccw_finalize_features(struct virtio_device *vdev)
- 	vring_transport_features(vdev);
- 
- 	/* Give virtio_ccw a chance to accept features. */
--	ccw_transport_features(vdev);
-+	ret = ccw_transport_features(vdev);
-+	if (ret)
-+		goto out_free;
- 
- 	features->index = 0;
- 	features->features = cpu_to_le32((u32)vdev->features);
--- 
-2.25.1
+This does work, and I'm tempted to queue this patch, but I'm wondering
+whether we need to give up on a cross-architecture solution already
+(especially keeping in mind that ccw is the only transport that is
+really architecture-specific).
+
+I know that we've gone through a few rounds already, and I'm not sure
+whether we've been there already, but:
+
+Could virtio_finalize_features() call an optional
+arch_has_restricted_memory_access() function and do the enforcing of
+IOMMU_PLATFORM? That would catch all transports, and things should work
+once an architecture opts in. That direction also shouldn't be a
+problem if virtio is a module.
+
+> 
+> Regards,
+> Pierre
+> 
+> Regards,
+> Pierre
+> 
+> Pierre Morel (1):
+>   s390: virtio-ccw: PV needs VIRTIO I/O device protection
+> 
+>  drivers/s390/virtio/virtio_ccw.c | 24 +++++++++++++++++++-----
+>  1 file changed, 19 insertions(+), 5 deletions(-)
+> 
 
 _______________________________________________
 Virtualization mailing list
