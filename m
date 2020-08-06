@@ -1,91 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4AF023D9F8
-	for <lists.virtualization@lfdr.de>; Thu,  6 Aug 2020 13:32:59 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 68BFC23DA4D
+	for <lists.virtualization@lfdr.de>; Thu,  6 Aug 2020 14:29:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 671B486DCD;
-	Thu,  6 Aug 2020 11:32:58 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id C8A5320526;
+	Thu,  6 Aug 2020 12:29:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lsgvfzkIG2Oo; Thu,  6 Aug 2020 11:32:55 +0000 (UTC)
+	with ESMTP id I0jtT3l0xub3; Thu,  6 Aug 2020 12:29:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id BC14D86DCC;
-	Thu,  6 Aug 2020 11:32:55 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 997F120521;
+	Thu,  6 Aug 2020 12:29:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 83B45C07FF;
-	Thu,  6 Aug 2020 11:32:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 53731C004C;
+	Thu,  6 Aug 2020 12:29:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 12411C004C
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0E4C9C004C
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 11:32:54 +0000 (UTC)
+ Thu,  6 Aug 2020 12:29:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id F33B688270
+ by fraxinus.osuosl.org (Postfix) with ESMTP id E94B286E5E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 11:32:53 +0000 (UTC)
+ Thu,  6 Aug 2020 12:29:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Zspz68LaYQpi
+ with ESMTP id VEdcgewK8TMB
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 11:32:52 +0000 (UTC)
+ Thu,  6 Aug 2020 12:29:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 4A8BA88267
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 480F586DF4
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 11:32:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=HOHNK/Wwh4r+dLOwnbPsU+//UraXJR2JWx5StwnIbMY=; b=0sTLMzAiW/vkKYsNYbSBHPq85f
- 7mIVV3rtllIgLSoMUwHAx9bADSCyheIH3Vr9XuIsGYReUNEAeMFktXRBu1XGBWeKZkxtRReusdh5U
- JP2iR2+gZwXB7UvdMSRaKIlxmNQzO4osCTSBUOsGVvHgXjH/oys9VGYosHPXvwyai9EngYMt+4WJ1
- Lqj0FhWGWo/eSn4zUPc+aABDW5olIlv2gNInI59OVWK28yozeQFOlUGnqVEd3qFbE+rc462ZjgGNA
- mtKAu9/0zoXyyrb+scimVCT3nXnZz/RDf8/lv9RxevxiT/NPDVfZn41zArdgtRIFA3o4G3bZXHiyU
- YgEHUOZw==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1k3e8V-0006OU-91; Thu, 06 Aug 2020 11:32:39 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 33BE7300446;
- Thu,  6 Aug 2020 13:32:36 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id 0DD6F2B61F1E7; Thu,  6 Aug 2020 13:32:36 +0200 (CEST)
-Date: Thu, 6 Aug 2020 13:32:36 +0200
-From: peterz@infradead.org
-To: Marco Elver <elver@google.com>
-Subject: Re: [PATCH] x86/paravirt: Add missing noinstr to arch_local*() helpers
-Message-ID: <20200806113236.GZ2674@hirez.programming.kicks-ass.net>
-References: <0000000000007d3b2d05ac1c303e@google.com>
- <20200805132629.GA87338@elver.google.com>
- <20200805134232.GR2674@hirez.programming.kicks-ass.net>
- <20200805135940.GA156343@elver.google.com>
- <20200805141237.GS2674@hirez.programming.kicks-ass.net>
- <20200805141709.GD35926@hirez.programming.kicks-ass.net>
- <CANpmjNN6FWZ+MsAn3Pj+WEez97diHzqF8hjONtHG15C2gSpSgw@mail.gmail.com>
- <CANpmjNNy3XKQqgrjGPPKKvXhAoF=mae7dk8hmoS4k4oNnnB=KA@mail.gmail.com>
- <20200806074723.GA2364872@elver.google.com>
+ Thu,  6 Aug 2020 12:29:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1596716972;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Nr31koH93+WFCQ1SShZUdSdGjjcRGiTN1IIFjT+aQyE=;
+ b=S2mrWlXDNmbWszY7zjVboaUHonVwr8HMkiUrjdvE/4wYmFGA9+OsGl/lag6emVI69dSNTG
+ JvzJfr5yMwlNWqIsD8YOdrka1ftB5HN4q1om8kWclIFNqil+JJJQFTI23mP+efd4m2cLjS
+ Ybs/sPz0F6Uf7tFweSgD7NaRGCvGtjA=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-279-J73vYnAoPkWCzknreeKiqQ-1; Thu, 06 Aug 2020 08:29:29 -0400
+X-MC-Unique: J73vYnAoPkWCzknreeKiqQ-1
+Received: by mail-wr1-f72.google.com with SMTP id j2so12123160wrr.14
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 06 Aug 2020 05:29:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Nr31koH93+WFCQ1SShZUdSdGjjcRGiTN1IIFjT+aQyE=;
+ b=D8fae95rfettNpgEBx35u/rAYHR0Aiu4JIwaaA3uv74Igxs/sUbopgG5sSSjv9I9Mi
+ 7Jz/V41QtP17XWHDCXhKdwYRgXml3ou2N2OQ3y399W4skorCHJfPef6YdBfbsm/FMoPb
+ gEFMYJ9hsFUXFML+4Xa39OBxGWM2o/9V86K0k7YVuvwhTVF5FaAI2rgYwHbZyYsLNNPu
+ s7j2C8Dx7iWysWoekLo/bzpEttSXzk+t/0XUpIXhT4VC7K2HA/yLuhqtN4HjBKv4fZNH
+ Vn6jnL7ag2+GjBjS4PUk0CKdZyS0RRVaIE0wGoqL/6TDld+sI1KVZKn0SEkzznY6tCn9
+ zdzQ==
+X-Gm-Message-State: AOAM532HuwtIDlXH0QykEjPfWFyFyFy52CU8QndTiJ7JdcYnF29DaV3u
+ GU140+C/oNAetXyrWoROd5ugRRQEIA+LR7rm2AEAjydaIWCR3SDjJppqAlT4rRrrSN0bR0WVFrD
+ +Hyq2SGBzsTZuk95+jtBejpDunxh1lI1hRWQwEYSujw==
+X-Received: by 2002:adf:ef44:: with SMTP id c4mr7084613wrp.84.1596716968174;
+ Thu, 06 Aug 2020 05:29:28 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzJ4+AA6iquJ/sckIZtxP+kOJp4F9JmrvFvoL/Ez3y4VOCxeSwNfgBeYWoNlFlzVDFCbQoFrw==
+X-Received: by 2002:adf:ef44:: with SMTP id c4mr7084593wrp.84.1596716967976;
+ Thu, 06 Aug 2020 05:29:27 -0700 (PDT)
+Received: from redhat.com ([192.117.173.58])
+ by smtp.gmail.com with ESMTPSA id z8sm6159274wmf.42.2020.08.06.05.29.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Aug 2020 05:29:26 -0700 (PDT)
+Date: Thu, 6 Aug 2020 08:29:22 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Eli Cohen <eli@mellanox.com>
+Subject: Re: [PATCH 1/4] vdpa: introduce config op to get valid iova range
+Message-ID: <20200806082727-mutt-send-email-mst@kernel.org>
+References: <20200617032947.6371-1-jasowang@redhat.com>
+ <20200617032947.6371-2-jasowang@redhat.com>
+ <20200805085035-mutt-send-email-mst@kernel.org>
+ <20200806120354.GA171218@mtl-vdi-166.wap.labs.mlnx>
 MIME-Version: 1.0
+In-Reply-To: <20200806120354.GA171218@mtl-vdi-166.wap.labs.mlnx>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20200806074723.GA2364872@elver.google.com>
-Cc: jgross@suse.com, fenghua.yu@intel.com, yu-cheng.yu@intel.com, "Luck,
- Tony" <tony.luck@intel.com>, Dave Hansen <dave.hansen@linux.intel.com>,
- syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
- LKML <linux-kernel@vger.kernel.org>, kasan-dev <kasan-dev@googlegroups.com>,
- virtualization@lists.linux-foundation.org, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>,
- Thomas Gleixner <tglx@linutronix.de>,
- syzbot <syzbot+8db9e1ecde74e590a657@syzkaller.appspotmail.com>,
- the arch/x86 maintainers <x86@kernel.org>
+Cc: shahafs@mellanox.com, lulu@redhat.com, saugatm@xilinx.com,
+ vmireyno@marvell.com, linux-kernel@vger.kernel.org, gdawar@xilinx.com,
+ virtualization@lists.linux-foundation.org, eperezma@redhat.com,
+ hanand@xilinx.com, zhangweining@ruijie.com.cn, lingshan.zhu@intel.com,
+ mhabets@solarflare.com, rob.miller@broadcom.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,192 +115,78 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Aug 06, 2020 at 09:47:23AM +0200, Marco Elver wrote:
-> Testing my hypothesis that raw then nested non-raw
-> local_irq_save/restore() breaks IRQ state tracking -- see the reproducer
-> below. This is at least 1 case I can think of that we're bound to hit.
+On Thu, Aug 06, 2020 at 03:03:55PM +0300, Eli Cohen wrote:
+> On Wed, Aug 05, 2020 at 08:51:56AM -0400, Michael S. Tsirkin wrote:
+> > On Wed, Jun 17, 2020 at 11:29:44AM +0800, Jason Wang wrote:
+> > > This patch introduce a config op to get valid iova range from the vDPA
+> > > device.
+> > > 
+> > > Signed-off-by: Jason Wang <jasowang@redhat.com>
+> > > ---
+> > >  include/linux/vdpa.h | 14 ++++++++++++++
+> > >  1 file changed, 14 insertions(+)
+> > > 
+> > > diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
+> > > index 239db794357c..b7633ed2500c 100644
+> > > --- a/include/linux/vdpa.h
+> > > +++ b/include/linux/vdpa.h
+> > > @@ -41,6 +41,16 @@ struct vdpa_device {
+> > >  	unsigned int index;
+> > >  };
+> > >  
+> > > +/**
+> > > + * vDPA IOVA range - the IOVA range support by the device
+> > > + * @start: start of the IOVA range
+> > > + * @end: end of the IOVA range
+> > > + */
+> > > +struct vdpa_iova_range {
+> > > +	u64 start;
+> > > +	u64 end;
+> > > +};
+> > > +
+> > 
+> > 
+> > This is ambiguous. Is end in the range or just behind it?
+> > How about first/last?
+> 
+> It is customary in the kernel to use start-end where end corresponds to
+> the byte following the last in the range. See struct vm_area_struct
+> vm_start and vm_end fields
 
-Aaargh!
+Exactly my point:
 
-> diff --git a/init/main.c b/init/main.c
-> index 15bd0efff3df..0873319dcff4 100644
-> --- a/init/main.c
-> +++ b/init/main.c
-> @@ -1041,6 +1041,22 @@ asmlinkage __visible void __init start_kernel(void)
->  	sfi_init_late();
->  	kcsan_init();
->  
-> +	/* DEBUG CODE */
-> +	lockdep_assert_irqs_enabled(); /* Pass. */
-> +	{
-> +		unsigned long flags1;
-> +		raw_local_irq_save(flags1);
+include/linux/mm_types.h:       unsigned long vm_end;           /* The first byte after our end address
 
-This disables IRQs but doesn't trace..
+in this case Jason wants it to be the last byte, not one behind.
 
-> +		{
-> +			unsigned long flags2;
-> +			lockdep_assert_irqs_enabled(); /* Pass - expectedly blind. */
 
-Indeed, we didn't trace the above disable, so software state is still
-on.
-
-> +			local_irq_save(flags2);
-
-So here we save IRQ state, and unconditionally disable IRQs and trace
-them disabled.
-
-> +			lockdep_assert_irqs_disabled(); /* Pass. */
-> +			local_irq_restore(flags2);
-
-But here, we restore IRQ state to 'disabled' and explicitly trace it
-disabled *again* (which is a bit daft, but whatever).
-
-> +		}
-> +		raw_local_irq_restore(flags1);
-
-This then restores the IRQ state to enable, but no tracing.
-
-> +	}
-> +	lockdep_assert_irqs_enabled(); /* FAIL! */
-
-And we're out of sync... :/
-
-/me goes ponder things...
-
-How's something like this then?
-
----
- include/linux/sched.h |  3 ---
- kernel/kcsan/core.c   | 62 ++++++++++++++++++++++++++++++++++++---------------
- 2 files changed, 44 insertions(+), 21 deletions(-)
-
-diff --git a/include/linux/sched.h b/include/linux/sched.h
-index 06ec60462af0..2f5aef57e687 100644
---- a/include/linux/sched.h
-+++ b/include/linux/sched.h
-@@ -1193,9 +1193,6 @@ struct task_struct {
- 
- #ifdef CONFIG_KCSAN
- 	struct kcsan_ctx		kcsan_ctx;
--#ifdef CONFIG_TRACE_IRQFLAGS
--	struct irqtrace_events		kcsan_save_irqtrace;
--#endif
- #endif
- 
- #ifdef CONFIG_FUNCTION_GRAPH_TRACER
-diff --git a/kernel/kcsan/core.c b/kernel/kcsan/core.c
-index 9147ff6a12e5..9c4436bf0561 100644
---- a/kernel/kcsan/core.c
-+++ b/kernel/kcsan/core.c
-@@ -291,17 +291,50 @@ static inline unsigned int get_delay(void)
- 				0);
- }
- 
--void kcsan_save_irqtrace(struct task_struct *task)
-+/*
-+ * KCSAN hooks are everywhere, which means they're NMI like for interrupt
-+ * tracing. In order to present a 'normal' as possible context to the code
-+ * called by KCSAN when reporting errors we need to update the irq-tracing
-+ * state.
-+ *
-+ * Save and restore the IRQ state trace touched by KCSAN, since KCSAN's
-+ * runtime is entered for every memory access, and potentially useful
-+ * information is lost if dirtied by KCSAN.
-+ */
-+
-+struct kcsan_irq_state {
-+	unsigned long		flags;
-+#ifdef CONFIG_TRACE_IRQFLAGS
-+	int			hardirqs;
-+	struct irqtrace_events	irqtrace;
-+#endif
-+};
-+
-+void kcsan_save_irqtrace(struct kcsan_irq_state *irq_state)
- {
- #ifdef CONFIG_TRACE_IRQFLAGS
--	task->kcsan_save_irqtrace = task->irqtrace;
-+	irq_state->irqtrace = task->irqtrace;
-+	irq_state->hardirq = lockdep_hardirqs_enabled();
- #endif
-+	if (!kcsan_interrupt_watcher) {
-+		raw_local_irq_save(irq_state->flags);
-+		lockdep_hardirqs_off(CALLER_ADDR0);
-+	}
- }
- 
--void kcsan_restore_irqtrace(struct task_struct *task)
-+void kcsan_restore_irqtrace(struct kcsan_irq_state *irq_state)
- {
-+	if (!kcsan_interrupt_watcher) {
-+#ifdef CONFIG_TRACE_IRQFLAGS
-+		if (irq_state->hardirqs) {
-+			lockdep_hardirqs_on_prepare(CALLER_ADDR0);
-+			lockdep_hardirqs_on(CALLER_ADDR0);
-+		}
-+#endif
-+		raw_local_irq_restore(irq_state->flags);
-+	}
- #ifdef CONFIG_TRACE_IRQFLAGS
--	task->irqtrace = task->kcsan_save_irqtrace;
-+	task->irqtrace = irq_state->irqtrace;
- #endif
- }
- 
-@@ -350,11 +383,13 @@ static noinline void kcsan_found_watchpoint(const volatile void *ptr,
- 	flags = user_access_save();
- 
- 	if (consumed) {
--		kcsan_save_irqtrace(current);
-+		struct kcsan_irq_state irqstate;
-+
-+		kcsan_save_irqtrace(&irqstate);
- 		kcsan_report(ptr, size, type, KCSAN_VALUE_CHANGE_MAYBE,
- 			     KCSAN_REPORT_CONSUMED_WATCHPOINT,
- 			     watchpoint - watchpoints);
--		kcsan_restore_irqtrace(current);
-+		kcsan_restore_irqtrace(&irqstate);
- 	} else {
- 		/*
- 		 * The other thread may not print any diagnostics, as it has
-@@ -387,7 +422,7 @@ kcsan_setup_watchpoint(const volatile void *ptr, size_t size, int type)
- 	unsigned long access_mask;
- 	enum kcsan_value_change value_change = KCSAN_VALUE_CHANGE_MAYBE;
- 	unsigned long ua_flags = user_access_save();
--	unsigned long irq_flags = 0;
-+	struct kcsan_irq_state irqstate;
- 
- 	/*
- 	 * Always reset kcsan_skip counter in slow-path to avoid underflow; see
-@@ -412,14 +447,7 @@ kcsan_setup_watchpoint(const volatile void *ptr, size_t size, int type)
- 		goto out;
- 	}
- 
--	/*
--	 * Save and restore the IRQ state trace touched by KCSAN, since KCSAN's
--	 * runtime is entered for every memory access, and potentially useful
--	 * information is lost if dirtied by KCSAN.
--	 */
--	kcsan_save_irqtrace(current);
--	if (!kcsan_interrupt_watcher)
--		local_irq_save(irq_flags);
-+	kcsan_save_irqtrace(&irqstate);
- 
- 	watchpoint = insert_watchpoint((unsigned long)ptr, size, is_write);
- 	if (watchpoint == NULL) {
-@@ -559,9 +587,7 @@ kcsan_setup_watchpoint(const volatile void *ptr, size_t size, int type)
- 	remove_watchpoint(watchpoint);
- 	kcsan_counter_dec(KCSAN_COUNTER_USED_WATCHPOINTS);
- out_unlock:
--	if (!kcsan_interrupt_watcher)
--		local_irq_restore(irq_flags);
--	kcsan_restore_irqtrace(current);
-+	kcsan_restore_irqtrace(&irqstate);
- out:
- 	user_access_restore(ua_flags);
- }
-
+> > 
+> > 
+> > 
+> > >  /**
+> > >   * vDPA_config_ops - operations for configuring a vDPA device.
+> > >   * Note: vDPA device drivers are required to implement all of the
+> > > @@ -134,6 +144,9 @@ struct vdpa_device {
+> > >   * @get_generation:		Get device config generation (optional)
+> > >   *				@vdev: vdpa device
+> > >   *				Returns u32: device generation
+> > > + * @get_iova_range:		Get supported iova range (on-chip IOMMU)
+> > > + *				@vdev: vdpa device
+> > > + *				Returns the iova range supported by the device
+> > >   * @set_map:			Set device memory mapping (optional)
+> > >   *				Needed for device that using device
+> > >   *				specific DMA translation (on-chip IOMMU)
+> > > @@ -195,6 +208,7 @@ struct vdpa_config_ops {
+> > >  	void (*set_config)(struct vdpa_device *vdev, unsigned int offset,
+> > >  			   const void *buf, unsigned int len);
+> > >  	u32 (*get_generation)(struct vdpa_device *vdev);
+> > > +	struct vdpa_iova_range (*get_iova_range)(struct vdpa_device *vdev);
+> > >  
+> > >  	/* DMA ops */
+> > >  	int (*set_map)(struct vdpa_device *vdev, struct vhost_iotlb *iotlb);
+> > > -- 
+> > > 2.20.1
+> > 
 
 _______________________________________________
 Virtualization mailing list
