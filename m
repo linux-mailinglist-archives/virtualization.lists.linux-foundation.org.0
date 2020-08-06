@@ -1,123 +1,109 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAB1823DB16
-	for <lists.virtualization@lfdr.de>; Thu,  6 Aug 2020 16:19:44 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id AEF8D23DB18
+	for <lists.virtualization@lfdr.de>; Thu,  6 Aug 2020 16:23:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6D4CF88528;
-	Thu,  6 Aug 2020 14:19:43 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 20F3788211;
+	Thu,  6 Aug 2020 14:23:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Onfw-whEr5+k; Thu,  6 Aug 2020 14:19:43 +0000 (UTC)
+	with ESMTP id OUQd7js5z4NY; Thu,  6 Aug 2020 14:23:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 0126E88522;
-	Thu,  6 Aug 2020 14:19:43 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 83C9988152;
+	Thu,  6 Aug 2020 14:23:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DB2F2C004C;
-	Thu,  6 Aug 2020 14:19:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 68648C004C;
+	Thu,  6 Aug 2020 14:23:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E6192C004C
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BD413C004C
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:19:41 +0000 (UTC)
+ Thu,  6 Aug 2020 14:23:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id D465486E7A
+ by hemlock.osuosl.org (Postfix) with ESMTP id A574D8850E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:19:41 +0000 (UTC)
+ Thu,  6 Aug 2020 14:23:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CslcW2hPE2t5
+ with ESMTP id 40L9V4H36CCQ
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:19:39 +0000 (UTC)
+ Thu,  6 Aug 2020 14:23:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
  [148.163.156.1])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2E72186CE5
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 2701588505
  for <virtualization@lists.linux-foundation.org>;
- Thu,  6 Aug 2020 14:19:39 +0000 (UTC)
-Received: from pps.filterd (m0187473.ppops.net [127.0.0.1])
+ Thu,  6 Aug 2020 14:23:11 +0000 (UTC)
+Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 076E1ehi162143; Thu, 6 Aug 2020 10:19:33 -0400
+ 076E4BLq037516; Thu, 6 Aug 2020 10:23:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=subject : from : to : cc
- : references : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=cSxQ8SGvCMLjMUkDt4NrKElp1fxGGbRAH4O/nOssxSI=;
- b=XxI//zNfUBcX3pIEyKFwC1wjdJ+TNO5rWewCpPu9PTOS9Dk/nwZNVdQuELBNYByMbDz7
- 7MYvQ6WvVu0mQFyqfrC++jh3oS6HymKaz7pDFWfX3VdJj4fz3VlGX52WLEmVSeCiPeGr
- 1HZiO6IVbDQ/St5UjGNmYvlHFSYVWucn91vZjzYadephhmTeGI3pc7MtYy+B/rttCgqN
- Rmy2d8PhgbVNUrGmwc3Gd1FHp0pcuWdL+YhltgrYarbG5EXgo3f6C8QKCs+W/wMEQzQQ
- NTyUfAOAcRntfkweiDmJrn4iV0GmVmgGISq+gBHvCY+O8RWloIYoXdhrH2wPV6zpDXV0 4w== 
+ h=from : to : cc : subject : date : message-id; s=pp1;
+ bh=kmhmWCdm048zOKwXHN42FLNuOm7WrXWJMfUPgkm2BNs=;
+ b=XogXsXMRXlfm/JAY1LPooBLT63IRYCp8ojV2ctAf3lkvx5Vw9iebfbHieezthAQNC8c0
+ /b1g87Yz1d4zB3k1WmuW66G9PU53U8W4EKMQAt7AIgCI/psb/OtVEE/vgSFef0buG0Z7
+ JYYwr4i98hQQjP4LOaXvML4fgtZAkymKXVkOEnyDvVVF2gFiGNfUIeZK/XEjsOlO4vj2
+ JabFvOzanHZCzsGRQ9PzVHJrSjmUeuJaEAN0xISsn+fffwArKOrYc5vb2gWSAF6EBLid
+ tAJK30i6TKzf/UYtYNXDr7tiutyamSPYWlkM7VKb4hqRKBliSIvFSDVr+n1qfByVXcpS JA== 
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 32rg3ndurt-1
+ by mx0a-001b2d01.pphosted.com with ESMTP id 32rgnf5y0j-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Aug 2020 10:19:31 -0400
-Received: from m0187473.ppops.net (m0187473.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 076E1c3m162114;
- Thu, 6 Aug 2020 10:19:30 -0400
-Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.102])
- by mx0a-001b2d01.pphosted.com with ESMTP id 32rg3nduqn-1
+ Thu, 06 Aug 2020 10:23:10 -0400
+Received: from m0098399.ppops.net (m0098399.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 076E4iXH040969;
+ Thu, 6 Aug 2020 10:23:10 -0400
+Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.98])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 32rgnf5xyj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Aug 2020 10:19:30 -0400
-Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
- by ppma06ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 076EH99O001140;
- Thu, 6 Aug 2020 14:19:28 GMT
-Received: from b06cxnps3075.portsmouth.uk.ibm.com
- (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
- by ppma06ams.nl.ibm.com with ESMTP id 32mynh5j4g-1
+ Thu, 06 Aug 2020 10:23:10 -0400
+Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
+ by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 076EF6Jl029907;
+ Thu, 6 Aug 2020 14:23:07 GMT
+Received: from b06cxnps4074.portsmouth.uk.ibm.com
+ (d06relay11.portsmouth.uk.ibm.com [9.149.109.196])
+ by ppma03ams.nl.ibm.com with ESMTP id 32n0185j5x-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Aug 2020 14:19:28 +0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
- [9.149.105.59])
- by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 076EJPfV26607874
+ Thu, 06 Aug 2020 14:23:07 +0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+ [9.149.105.62])
+ by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 076EN48J16253204
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 6 Aug 2020 14:19:25 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id E5660A4053;
- Thu,  6 Aug 2020 14:19:24 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2FE89A4051;
- Thu,  6 Aug 2020 14:19:24 +0000 (GMT)
+ Thu, 6 Aug 2020 14:23:05 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id CAB55AE059;
+ Thu,  6 Aug 2020 14:23:04 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 541CFAE04D;
+ Thu,  6 Aug 2020 14:23:04 +0000 (GMT)
 Received: from oc3016276355.ibm.com (unknown [9.145.149.70])
- by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Thu,  6 Aug 2020 14:19:24 +0000 (GMT)
-Subject: Re: [PATCH v7 2/2] s390: virtio: PV needs VIRTIO I/O device protection
+ by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Thu,  6 Aug 2020 14:23:04 +0000 (GMT)
 From: Pierre Morel <pmorel@linux.ibm.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>
-References: <1594801869-13365-1-git-send-email-pmorel@linux.ibm.com>
- <1594801869-13365-3-git-send-email-pmorel@linux.ibm.com>
- <20200715054807-mutt-send-email-mst@kernel.org>
- <bc5e09ad-faaf-8b38-83e0-5f4a4b1daeb0@redhat.com>
- <20200715074917-mutt-send-email-mst@kernel.org>
- <e41d039c-5fe2-b9db-093b-c0dddcc2ad4f@linux.ibm.com>
-Message-ID: <ef819e0e-85c3-0b14-4f8e-0d2a6c452355@linux.ibm.com>
-Date: Thu, 6 Aug 2020 16:19:23 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <e41d039c-5fe2-b9db-093b-c0dddcc2ad4f@linux.ibm.com>
-Content-Language: en-US
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v1 0/1] s390: virtio-ccw: PV needs VIRTIO I/O device protection
+Date: Thu,  6 Aug 2020 16:23:01 +0200
+Message-Id: <1596723782-12798-1-git-send-email-pmorel@linux.ibm.com>
+X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-08-06_09:2020-08-06,
  2020-08-06 signatures=0
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 suspectscore=0
- bulkscore=0 priorityscore=1501 clxscore=1015 lowpriorityscore=0
- mlxlogscore=999 malwarescore=0 adultscore=0 mlxscore=0 spamscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2008060096
-Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
- kvm@vger.kernel.org, thomas.lendacky@amd.com, hca@linux.ibm.com,
- cohuck@redhat.com, linuxram@us.ibm.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
- borntraeger@de.ibm.com, david@gibson.dropbear.id.au
+ spamscore=0
+ priorityscore=1501 mlxlogscore=999 malwarescore=0 adultscore=0 mlxscore=0
+ phishscore=0 suspectscore=1 clxscore=1015 impostorscore=0 bulkscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2008060099
+Cc: linux-s390@vger.kernel.org, frankja@linux.ibm.com, kvm@vger.kernel.org,
+ mst@redhat.com, cohuck@redhat.com, virtualization@lists.linux-foundation.org,
+ pasic@linux.ibm.com, borntraeger@de.ibm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -129,48 +115,43 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Hi all,
 
+In another series I proposed to add an architecture specific
+callback to fail feature negociation on architecture need.
 
-On 2020-07-30 13:31, Pierre Morel wrote:
-...snip...
->>>> What bothers me here is that arch code depends on virtio now.
->>>> It works even with a modular virtio when functions are inline,
->>>> but it seems fragile: e.g. it breaks virtio as an out of tree module,
->>>> since layout of struct virtio_device can change.
->>>
->>>
->>> The code was only called from virtio.c so it should be fine.
->>>
->>> And my understanding is that we don't need to care about the kABI issue
->>> during upstream development?
->>>
->>> Thanks
->>
->> No, but so far it has been convenient at least for me, for development,
->> to just be able to unload all of virtio and load a different version.
->>
->>
->>>
->>>>
->>>> I'm not sure what to do with this yet, will try to think about it
->>>> over the weekend. Thanks!
+In VIRTIO, we already have an entry to reject the features on the
+transport basis.
 
-After reflection, I am not sure that this problem must be treated on the 
-architecture level or inside the VIRTIO transport.
-Consequently, I will propose another patch series based on CCW transport.
-This also should be more convenient for core development.
+Transport is not architecture so I send a separate series in which
+we fail the feature negociation inside virtio_ccw_finalize_features,
+the virtio_config_ops.finalize_features for S390 CCW transport,
+when the device do not propose the VIRTIO_F_IOMMU_PLATFORM.
+
+This solves the problem of crashing QEMU when this one is not using
+a CCW device with iommu_platform=on in S390.
 
 Regards,
 Pierre
 
+Regards,
+Pierre
+
+Pierre Morel (1):
+  s390: virtio-ccw: PV needs VIRTIO I/O device protection
+
+ drivers/s390/virtio/virtio_ccw.c | 24 +++++++++++++++++++-----
+ 1 file changed, 19 insertions(+), 5 deletions(-)
+
 -- 
-Pierre Morel
-IBM Lab Boeblingen
+2.25.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
