@@ -2,71 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FB0623E71C
-	for <lists.virtualization@lfdr.de>; Fri,  7 Aug 2020 07:52:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6C3E23E92E
+	for <lists.virtualization@lfdr.de>; Fri,  7 Aug 2020 10:38:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E9FF425397;
-	Fri,  7 Aug 2020 05:52:32 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 402EB2544B;
+	Fri,  7 Aug 2020 08:38:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EGyMRIgqWrdF; Fri,  7 Aug 2020 05:52:30 +0000 (UTC)
+	with ESMTP id 8HEFfmPD61Wt; Fri,  7 Aug 2020 08:38:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id C336E25281;
-	Fri,  7 Aug 2020 05:52:30 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4537A2155F;
+	Fri,  7 Aug 2020 08:38:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B2D3AC088E;
-	Fri,  7 Aug 2020 05:52:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 12313C004C;
+	Fri,  7 Aug 2020 08:38:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4697BC004C
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CC2AFC004C
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Aug 2020 05:52:29 +0000 (UTC)
+ Fri,  7 Aug 2020 08:38:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 2CA28871CF
+ by silver.osuosl.org (Postfix) with ESMTP id 7DA4F2155F
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Aug 2020 05:52:29 +0000 (UTC)
+ Fri,  7 Aug 2020 08:38:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1-MdidIoekWi
+ with ESMTP id BdnUagfEyL0P
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Aug 2020 05:52:27 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8687C871C7
+ Fri,  7 Aug 2020 08:38:33 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id 2791620477
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Aug 2020 05:52:27 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B438120866;
- Fri,  7 Aug 2020 05:52:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1596779547;
- bh=VrTc5pr7hXkvJgVB3uN/B80HBQFTxP5+kpw5LS5EzAg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UFNPuzPGH9tHUnlaF2r5NMb+vdjJwWbNUP64KapCaARfWmoTWnCqkiXj/3IQoYjiQ
- ZyEL5J/FuZr/i59mk/feuDtu5nfUo9pZYTd1rWHykE8rgHlGclkNGK1PMqJZKxZH5F
- 7exPTDGS7SGZieec/4LE40wqiwlrmr7MZauHh2ek=
-Date: Fri, 7 Aug 2020 07:52:41 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: =?utf-8?B?5L2V6ZGr?= <hexin.op@bytedance.com>
-Subject: Re: [PATCH v3] drm/virtio: fix missing dma_fence_put() in
- virtio_gpu_execbuffer_ioctl()
-Message-ID: <20200807055241.GA3025028@kroah.com>
-References: <20200721101647.42653-1-hexin.op@bytedance.com>
- <CACKzwj=obkJPmMb1cGKDwBdgkxa92kpPTP9c2SzFWbbzcD6Luw@mail.gmail.com>
+ Fri,  7 Aug 2020 08:38:33 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 058FFAAC7;
+ Fri,  7 Aug 2020 08:38:49 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org, x86@kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+Subject: [PATCH v3 0/7] Remove 32-bit Xen PV guest support
+Date: Fri,  7 Aug 2020 10:38:19 +0200
+Message-Id: <20200807083826.16794-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACKzwj=obkJPmMb1cGKDwBdgkxa92kpPTP9c2SzFWbbzcD6Luw@mail.gmail.com>
-Cc: airlied@linux.ie, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Daniel Vetter <daniel@ffwll.ch>, Muchun Song <songmuchun@bytedance.com>,
- Qi Liu <liuqi.16@bytedance.com>, Sumit Semwal <sumit.semwal@linaro.org>,
- linux-media@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, "VMware,
+ Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
+ "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,54 +67,80 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gRnJpLCBBdWcgMDcsIDIwMjAgYXQgMTE6MDA6MTFBTSArMDgwMCwg5L2V6ZGrIHdyb3RlOgo+
-IFhpbiBIZSA8aGV4aW4ub3BAYnl0ZWRhbmNlLmNvbT4g5LqOMjAyMOW5tDfmnIgyMeaXpeWRqOS6
-jCDkuIvljYg2OjE35YaZ6YGT77yaCj4gPgo+ID4gRnJvbTogUWkgTGl1IDxsaXVxaS4xNkBieXRl
-ZGFuY2UuY29tPgo+ID4KPiA+IFdlIHNob3VsZCBwdXQgdGhlIHJlZmVyZW5jZSBjb3VudCBvZiB0
-aGUgZmVuY2UgYWZ0ZXIgY2FsbGluZwo+ID4gdmlydGlvX2dwdV9jbWRfc3VibWl0KCkuIFNvIGFk
-ZCB0aGUgbWlzc2luZyBkbWFfZmVuY2VfcHV0KCkuCj4gPgo+ID4gRml4ZXM6IDJjZDdiNmYwOGJj
-NCAoImRybS92aXJ0aW86IGFkZCBpbi9vdXQgZmVuY2Ugc3VwcG9ydCBmb3IgZXhwbGljaXQgc3lu
-Y2hyb25pemF0aW9uIikKPiA+IENvLWRldmVsb3BlZC1ieTogWGluIEhlIDxoZXhpbi5vcEBieXRl
-ZGFuY2UuY29tPgo+ID4gU2lnbmVkLW9mZi1ieTogWGluIEhlIDxoZXhpbi5vcEBieXRlZGFuY2Uu
-Y29tPgo+ID4gU2lnbmVkLW9mZi1ieTogUWkgTGl1IDxsaXVxaS4xNkBieXRlZGFuY2UuY29tPgo+
-ID4gUmV2aWV3ZWQtYnk6IE11Y2h1biBTb25nIDxzb25nbXVjaHVuQGJ5dGVkYW5jZS5jb20+Cj4g
-PiAtLS0KPiA+Cj4gPiBjaGFuZ2Vsb2cgaW4gdjM6Cj4gPiAxKSBDaGFuZ2UgdGhlIHN1YmplY3Qg
-ZnJvbSAiZHJtL3ZpcnRpbzogZml4ZWQgbWVtb3J5IGxlYWsgaW4gdmlydGlvX2dwdV9leGVjYnVm
-ZmVyX2lvY3RsKCkiIHRvCj4gPiAgICAiZHJtL3ZpcnRpbzogZml4IG1pc3NpbmcgZG1hX2ZlbmNl
-X3B1dCgpIGluIHZpcnRpb19ncHVfZXhlY2J1ZmZlcl9pb2N0bCgpIgo+ID4gMikgUmV3b3JrIHRo
-ZSBjb21taXQgbG9nCj4gPgo+ID4gY2hhbmdlbG9nIGluIHYyOgo+ID4gMSkgQWRkIGEgY2hhbmdl
-IGRlc2NyaXB0aW9uCj4gPgo+ID4gIGRyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV9pb2N0
-bC5jIHwgMSArCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspCj4gPgo+ID4gZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV9pb2N0bC5jIGIvZHJpdmVy
-cy9ncHUvZHJtL3ZpcnRpby92aXJ0Z3B1X2lvY3RsLmMKPiA+IGluZGV4IDVkZjcyMjA3MmJhMC4u
-MTljNWJjMDFlYjc5IDEwMDY0NAo+ID4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3ZpcnRpby92aXJ0
-Z3B1X2lvY3RsLmMKPiA+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV9pb2N0
-bC5jCj4gPiBAQCAtMTc5LDYgKzE3OSw3IEBAIHN0YXRpYyBpbnQgdmlydGlvX2dwdV9leGVjYnVm
-ZmVyX2lvY3RsKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQgKmRhdGEsCj4gPgo+ID4gICAg
-ICAgICB2aXJ0aW9fZ3B1X2NtZF9zdWJtaXQodmdkZXYsIGJ1ZiwgZXhidWYtPnNpemUsCj4gPiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2ZnByaXYtPmN0eF9pZCwgYnVmbGlzdCwgb3V0
-X2ZlbmNlKTsKPiA+ICsgICAgICAgZG1hX2ZlbmNlX3B1dCgmb3V0X2ZlbmNlLT5mKTsKPiA+ICAg
-ICAgICAgdmlydGlvX2dwdV9ub3RpZnkodmdkZXYpOwo+ID4gICAgICAgICByZXR1cm4gMDsKPiA+
-Cj4gPiAtLQo+ID4gMi4yMS4xIChBcHBsZSBHaXQtMTIyLjMpCj4gPgo+IAo+IGNjIEdyZWcKCldo
-eT8KCiQgLi9zY3JpcHRzL2dldF9tYWludGFpbmVyLnBsIC0tZmlsZSBkcml2ZXJzL2dwdS9kcm0v
-dmlydGlvL3ZpcnRncHVfaW9jdGwuYwpEYXZpZCBBaXJsaWUgPGFpcmxpZWRAbGludXguaWU+ICht
-YWludGFpbmVyOlZJUlRJTyBHUFUgRFJJVkVSKQpHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0
-LmNvbT4gKG1haW50YWluZXI6VklSVElPIEdQVSBEUklWRVIpCkRhbmllbCBWZXR0ZXIgPGRhbmll
-bEBmZndsbC5jaD4gKG1haW50YWluZXI6RFJNIERSSVZFUlMpClN1bWl0IFNlbXdhbCA8c3VtaXQu
-c2Vtd2FsQGxpbmFyby5vcmc+IChtYWludGFpbmVyOkRNQSBCVUZGRVIgU0hBUklORyBGUkFNRVdP
-UkspCiJDaHJpc3RpYW4gS8O2bmlnIiA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPiAobWFpbnRh
-aW5lcjpETUEgQlVGRkVSIFNIQVJJTkcgRlJBTUVXT1JLKQpkcmktZGV2ZWxAbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnIChvcGVuIGxpc3Q6VklSVElPIEdQVSBEUklWRVIpCnZpcnR1YWxpemF0aW9uQGxp
-c3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnIChvcGVuIGxpc3Q6VklSVElPIEdQVSBEUklWRVIpCmxp
-bnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmcgKG9wZW4gbGlzdCkKbGludXgtbWVkaWFAdmdlci5r
-ZXJuZWwub3JnIChvcGVuIGxpc3Q6RE1BIEJVRkZFUiBTSEFSSU5HIEZSQU1FV09SSykKbGluYXJv
-LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnIChtb2RlcmF0ZWQgbGlzdDpETUEgQlVGRkVSIFNIQVJJ
-TkcgRlJBTUVXT1JLKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
-bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+The long term plan has been to replace Xen PV guests by PVH. The first
+victim of that plan are now 32-bit PV guests, as those are used only
+rather seldom these days. Xen on x86 requires 64-bit support and with
+Grub2 now supporting PVH officially since version 2.04 there is no
+need to keep 32-bit PV guest support alive in the Linux kernel.
+Additionally Meltdown mitigation is not available in the kernel running
+as 32-bit PV guest, so dropping this mode makes sense from security
+point of view, too.
+
+Changes in V3:
+- addressed comments to V2
+- split patch 1 into 2 patches
+- new patches 3 and 7
+
+Changes in V2:
+- rebase to 5.8 kernel
+- addressed comments to V1
+- new patches 3 and 4
+
+Juergen Gross (7):
+  x86/xen: remove 32-bit Xen PV guest support
+  x86/xen: eliminate xen-asm_64.S
+  x86/xen: drop tests for highmem in pv code
+  x86/paravirt: remove 32-bit support from PARAVIRT_XXL
+  x86/paravirt: cleanup paravirt macros
+  x86/paravirt: use CONFIG_PARAVIRT_XXL instead of CONFIG_PARAVIRT
+  x86/entry/32: revert "Fix XEN_PV build dependency"
+
+ arch/x86/entry/entry_32.S                   | 109 +----
+ arch/x86/entry/entry_64.S                   |   4 +-
+ arch/x86/entry/vdso/vdso32/note.S           |  30 --
+ arch/x86/entry/vdso/vdso32/vclock_gettime.c |   1 +
+ arch/x86/include/asm/fixmap.h               |   2 +-
+ arch/x86/include/asm/idtentry.h             |   4 +-
+ arch/x86/include/asm/paravirt.h             | 107 +----
+ arch/x86/include/asm/paravirt_types.h       |  21 -
+ arch/x86/include/asm/pgtable-3level_types.h |   5 -
+ arch/x86/include/asm/proto.h                |   2 +-
+ arch/x86/include/asm/required-features.h    |   2 +-
+ arch/x86/include/asm/segment.h              |   6 +-
+ arch/x86/kernel/cpu/common.c                |   8 -
+ arch/x86/kernel/head_32.S                   |  31 --
+ arch/x86/kernel/kprobes/core.c              |   1 -
+ arch/x86/kernel/kprobes/opt.c               |   1 -
+ arch/x86/kernel/paravirt.c                  |  18 -
+ arch/x86/kernel/paravirt_patch.c            |  17 -
+ arch/x86/xen/Kconfig                        |   3 +-
+ arch/x86/xen/Makefile                       |   3 +-
+ arch/x86/xen/apic.c                         |  17 -
+ arch/x86/xen/enlighten_pv.c                 |  78 +---
+ arch/x86/xen/mmu_pv.c                       | 488 ++++----------------
+ arch/x86/xen/p2m.c                          |   6 +-
+ arch/x86/xen/setup.c                        |  36 +-
+ arch/x86/xen/smp_pv.c                       |  18 -
+ arch/x86/xen/vdso.h                         |   6 -
+ arch/x86/xen/xen-asm.S                      | 193 +++++++-
+ arch/x86/xen/xen-asm_32.S                   | 185 --------
+ arch/x86/xen/xen-asm_64.S                   | 192 --------
+ arch/x86/xen/xen-head.S                     |   6 -
+ drivers/xen/Kconfig                         |   4 +-
+ 32 files changed, 305 insertions(+), 1299 deletions(-)
+ delete mode 100644 arch/x86/xen/vdso.h
+ delete mode 100644 arch/x86/xen/xen-asm_32.S
+ delete mode 100644 arch/x86/xen/xen-asm_64.S
+
+-- 
+2.26.2
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
