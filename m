@@ -1,107 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2AB4245902
-	for <lists.virtualization@lfdr.de>; Sun, 16 Aug 2020 20:47:36 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4552B2461D1
+	for <lists.virtualization@lfdr.de>; Mon, 17 Aug 2020 11:03:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 5FF8387C9A;
-	Sun, 16 Aug 2020 18:47:35 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BDE4A84F2A;
+	Mon, 17 Aug 2020 09:03:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HmpLaaGAiBWR; Sun, 16 Aug 2020 18:47:33 +0000 (UTC)
+	with ESMTP id 7r0PSBgan9op; Mon, 17 Aug 2020 09:03:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id AFC0F87C9F;
-	Sun, 16 Aug 2020 18:47:33 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 49D3684EC1;
+	Mon, 17 Aug 2020 09:03:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8BA17C0051;
-	Sun, 16 Aug 2020 18:47:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 19470C0051;
+	Mon, 17 Aug 2020 09:03:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D3FC4C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D1514C0051
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Aug 2020 18:47:31 +0000 (UTC)
+ Mon, 17 Aug 2020 09:03:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id B03802048F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id CC76784EC1
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Aug 2020 18:47:31 +0000 (UTC)
+ Mon, 17 Aug 2020 09:03:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pnvlbuxwSHRQ
+ with ESMTP id yLfvu2R0VT5t
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Aug 2020 18:47:28 +0000 (UTC)
+ Mon, 17 Aug 2020 09:03:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from userp2120.oracle.com (userp2120.oracle.com [156.151.31.85])
- by silver.osuosl.org (Postfix) with ESMTPS id 93702203D6
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 59DDA84E24
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Aug 2020 18:47:28 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 07GIktKk178315;
- Sun, 16 Aug 2020 18:46:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2020-01-29;
- bh=OSP019LLVSm4qpZ+oDQNzfUsCIMZ8bDvPVUwwCDMZfM=;
- b=TWFbkiST0Z1+gWj5CsncZjF5rK1MZ01QWTYACP9BmaAAObpaM8AFJ9E2kmSUx3Bvzct9
- xvjxqEJhjGGnh0b/WW+aenG52iyL1xOuKSo6dpKz61wOTHX6xtgyHajUneui4PnaxN3A
- 276po80cZjnBpUsEusu0z2xEUMvE+TF7E1FGo+DG2yoasVLOkoSQg7lB8BVRZvC/C7Le
- M9iJ7caIQgsPwBjtJ3AOpKS3s1wPS57X79bePg/VRhl/PrSqLiM5+pTVw/uigxsmDwPq
- kpKISdoiv6JELqtg0xrz2oDFiBy6sX6yINjZZC8nO4OxvTsBXQNUEjiYPRvjJUyEmyjy Ww== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by userp2120.oracle.com with ESMTP id 32x8bmudnj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 16 Aug 2020 18:46:55 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 07GIi850106094;
- Sun, 16 Aug 2020 18:44:54 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3030.oracle.com with ESMTP id 32xs9k04r9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sun, 16 Aug 2020 18:44:54 +0000
-Received: from abhmp0007.oracle.com (abhmp0007.oracle.com [141.146.116.13])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 07GIirET009374;
- Sun, 16 Aug 2020 18:44:53 GMT
-Received: from [10.74.109.130] (/10.74.109.130)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Sun, 16 Aug 2020 11:44:53 -0700
-Subject: Re: [PATCH v4 5/6] x86/paravirt: remove set_pte_at pv-op
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
- x86@kernel.org, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org
-References: <20200815100641.26362-1-jgross@suse.com>
- <20200815100641.26362-6-jgross@suse.com>
-From: boris.ostrovsky@oracle.com
-Organization: Oracle Corporation
-Message-ID: <b564a292-a3d6-90fb-0796-cd695ff4ec67@oracle.com>
-Date: Sun, 16 Aug 2020 14:44:49 -0400
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.10.0
+ Mon, 17 Aug 2020 09:03:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597655027;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=iWLBVVWGQzp5rvaiSkpRpGi21EkmGXSL34WymXzDWrA=;
+ b=RKlhmmrzi6sNxownCya4PqcGSifcOhd5NwmENyVyZ+BaBqKBsGdmceYJyzBr97bTOdnv9q
+ btblH0OmcZcnVZuPXtxz36LgoOa9TkGrhJOErYriyhDwimMhMNu08aIwRcralT9cBRk8Xm
+ 1B6Lwqhzt/F4zJOW1IwlbiorY1kTkgk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-548-XOr0Q0g5Pm2_V_1gskoIRA-1; Mon, 17 Aug 2020 05:03:45 -0400
+X-MC-Unique: XOr0Q0g5Pm2_V_1gskoIRA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D3A50801ADB;
+ Mon, 17 Aug 2020 09:03:43 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-112-195.ams2.redhat.com
+ [10.36.112.195])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 746637A1C0;
+ Mon, 17 Aug 2020 09:03:43 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id AB9611753B; Mon, 17 Aug 2020 11:03:42 +0200 (CEST)
+Date: Mon, 17 Aug 2020 11:03:42 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org, 1882851@bugs.launchpad.net,
+ David Airlie <airlied@linux.ie>, Chia-I Wu <olvaffe@gmail.com>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] drm/virtio: fix unblank
+Message-ID: <20200817090342.bemmtkvz4seayp2i@sirius.home.kraxel.org>
+References: <20200807105429.24208-1-kraxel@redhat.com>
+ <20200807130956.GE2352366@phenom.ffwll.local>
 MIME-Version: 1.0
-In-Reply-To: <20200815100641.26362-6-jgross@suse.com>
-Content-Language: en-US
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9715
- signatures=668679
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- adultscore=0 spamscore=0
- mlxscore=0 mlxlogscore=999 suspectscore=0 malwarescore=0 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2008160154
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9715
- signatures=668679
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- lowpriorityscore=0
- impostorscore=0 suspectscore=0 adultscore=0 spamscore=0 malwarescore=0
- mlxlogscore=999 priorityscore=1501 bulkscore=0 clxscore=1011 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2008160155
-Cc: Stefano Stabellini <sstabellini@kernel.org>, "VMware,
- Inc." <pv-drivers@vmware.com>, Steven Rostedt <rostedt@goodmis.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>
+Content-Disposition: inline
+In-Reply-To: <20200807130956.GE2352366@phenom.ffwll.local>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -118,17 +94,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+  Hi,
 
-On 8/15/20 6:06 AM, Juergen Gross wrote:
-> On x86 set_pte_at() is now always falling back to set_pte(). So instead
-> of having this fallback after the paravirt maze just drop the
-> set_pte_at paravirt operation and let set_pte_at() use the set_pte()
-> function directly.
->
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> > --- a/drivers/gpu/drm/virtio/virtgpu_display.c
+> > +++ b/drivers/gpu/drm/virtio/virtgpu_display.c
+> > @@ -100,6 +100,7 @@ static void virtio_gpu_crtc_atomic_enable(struct drm_crtc *crtc,
+> >  	struct virtio_gpu_output *output = drm_crtc_to_virtio_gpu_output(crtc);
+> >  
+> >  	output->enabled = true;
+> > +	output->need_update = true;
 
+> > --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
+> > +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+> > @@ -163,7 +163,8 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
+> >  	    plane->state->src_w != old_state->src_w ||
+> >  	    plane->state->src_h != old_state->src_h ||
+> >  	    plane->state->src_x != old_state->src_x ||
+> > -	    plane->state->src_y != old_state->src_y) {
+> > +	    plane->state->src_y != old_state->src_y ||
+> > +	    output->need_update) {
+> 
+> Uh instead of hand-rolling what's essentially a drm_crtc_needs_modeset
+> check, why not use that one? atomic helpers try to keep the usual suspects
+> for state transitions already handy, to avoid every driver rolling their
+> own. Or do I miss something here?
 
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Well, the virtio-gpu virtual hardware can't do plane updates and crtc
+updates independant from each other.  So the crtc callbacks handle
+disable only (we don't need a fb for that) and leave the enable to the
+plane update.
+
+I suspect calling drm_atomic_crtc_needs_modeset() in plane update isn't
+going to fly ...
+
+take care,
+  Gerd
 
 _______________________________________________
 Virtualization mailing list
