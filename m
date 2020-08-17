@@ -2,91 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB68A246530
-	for <lists.virtualization@lfdr.de>; Mon, 17 Aug 2020 13:12:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 591992477EC
+	for <lists.virtualization@lfdr.de>; Mon, 17 Aug 2020 22:05:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 722D687E94;
-	Mon, 17 Aug 2020 11:12:50 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id BE92D87525;
+	Mon, 17 Aug 2020 20:05:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vkNdrZ8jsXmJ; Mon, 17 Aug 2020 11:12:50 +0000 (UTC)
+	with ESMTP id ztElRQBr4Y60; Mon, 17 Aug 2020 20:05:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 0B1D887D73;
-	Mon, 17 Aug 2020 11:12:50 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2CE7D87590;
+	Mon, 17 Aug 2020 20:05:31 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EB35AC0051;
-	Mon, 17 Aug 2020 11:12:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0524FC07FF;
+	Mon, 17 Aug 2020 20:05:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A198AC0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 418D7C07FF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Aug 2020 11:12:48 +0000 (UTC)
+ Mon, 17 Aug 2020 20:05:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 9058787E8E
+ by hemlock.osuosl.org (Postfix) with ESMTP id 3576B87590
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Aug 2020 11:12:48 +0000 (UTC)
+ Mon, 17 Aug 2020 20:05:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id jwzYanw+C3OO
+ with ESMTP id 0o15fh8OIwJA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Aug 2020 11:12:47 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7E38987D73
+ Mon, 17 Aug 2020 20:05:27 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A11AD87525
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Aug 2020 11:12:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597662766;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ojqM6VDGywhYof5vQ0rOPdeZdR7vkZBO7fWbPCxSWII=;
- b=hx0ZAwV4IFOKqDWxw1eHkIK3xpRVRXBKhQMtLyXHWesIO3+dg+cuxmzfughVkoBHsCmZug
- 4r3AZBy7BmHWDX3T0OTU8UV6lKf4/cedR2qm9HGzl03Abw8ZCSVUQXyJbNhqamwr6kYUK5
- 4Pwppw6zB2DnRsMtOWSbcnr7QfaEdUg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-420-AxrCrgTLPfKBA1qS5-fhAQ-1; Mon, 17 Aug 2020 07:12:44 -0400
-X-MC-Unique: AxrCrgTLPfKBA1qS5-fhAQ-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ Mon, 17 Aug 2020 20:05:27 +0000 (UTC)
+Received: from ravnborg.org (unknown [188.228.123.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 184321DDE5;
- Mon, 17 Aug 2020 11:12:42 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-195.ams2.redhat.com
- [10.36.112.195])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 91FD01002393;
- Mon, 17 Aug 2020 11:12:35 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 6A0F29D8F; Mon, 17 Aug 2020 13:12:34 +0200 (CEST)
-Date: Mon, 17 Aug 2020 13:12:34 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: David Stevens <stevensd@chromium.org>
-Subject: Re: [virtio-dev] Re: [PATCH v5 0/3] Support virtio cross-device
- resources
-Message-ID: <20200817111234.i7pqtnnk2ciw4rqb@sirius.home.kraxel.org>
-References: <20200609012518.198908-1-stevensd@chromium.org>
- <20200609055021-mutt-send-email-mst@kernel.org>
- <CAD=HUj7wJfoKj_K44Cs9eEmh=OQHZ1+qz7ZHxoscHjYgOMXvZQ@mail.gmail.com>
- <20200817105008.mi3ukh6kxgi37gjs@sirius.home.kraxel.org>
+ by asavdk4.altibox.net (Postfix) with ESMTPS id F098D804AF;
+ Mon, 17 Aug 2020 22:05:22 +0200 (CEST)
+Date: Mon, 17 Aug 2020 22:05:21 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Sean Paul <sean@poorly.run>
+Subject: Re: [PATCH] drm/qxl: Fix build errors
+Message-ID: <20200817200521.GA1551172@ravnborg.org>
+References: <20200817195846.14076-1-sean@poorly.run>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200817105008.mi3ukh6kxgi37gjs@sirius.home.kraxel.org>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: virtio-dev@lists.oasis-open.org, Thomas Zimmermann <tzimmermann@suse.de>,
- "Michael S. Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- open list <linux-kernel@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>
+In-Reply-To: <20200817195846.14076-1-sean@poorly.run>
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=aP3eV41m c=1 sm=1 tr=0
+ a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
+ a=kj9zAlcOel0A:10 a=cm27Pg_UAAAA:8 a=7gkXJVJtAAAA:8 a=pGLkceISAAAA:8
+ a=20KFwNOVAAAA:8 a=Z4Rwk6OoAAAA:8 a=e5mUnYsNAAAA:8 a=Fn0XzTm-E8DT0MMFozsA:9
+ a=N3S3ulj5AKuxvIIe:21 a=7IyYmjEE0Ti2w03Z:21 a=CjuIK1q_8ugA:10
+ a=-RoEEKskQ1sA:10 a=xmb-EsYY8bH0VWELuYED:22 a=E9Po1WZjFZOl8hwRPBS3:22
+ a=HkZW87K1Qel5hWWM3VKY:22 a=Vxmtnl_E_bksehYqCbjh:22
+Cc: David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, Sean Paul <seanpaul@chromium.org>,
+ Dave Airlie <airlied@redhat.com>, spice-devel@lists.freedesktop.org,
+ Sidong Yang <realwakka@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,23 +80,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Aug 17, 2020 at 12:50:08PM +0200, Gerd Hoffmann wrote:
-> On Tue, Jun 23, 2020 at 10:31:28AM +0900, David Stevens wrote:
-> > Unless there are any remaining objections to these patches, what are
-> > the next steps towards getting these merged? Sorry, I'm not familiar
-> > with the workflow for contributing patches to Linux.
+Hi Sean.
+
+On Mon, Aug 17, 2020 at 03:58:38PM -0400, Sean Paul wrote:
+> From: Sean Paul <seanpaul@chromium.org>
 > 
-> Sorry, just have been busy and not paying as much attention to drm
-> patches as usual.  Playing catch-up now.  Queued for drm-misc-next,
-> unless something goes wrong in my testing the patches should land
-> in linux-next soon and be merged upstream in the next merge window.
+> Introduced in the patch below, the END macro was missing 'dev' and BEGIN
+> macro needs drm_drv_uses_atomic_modeset() from drm_drv.h
+> 
+> Fixes: bbaac1354cc9 ("drm/qxl: Replace deprecated function in qxl_display")
+We should not use Fixes for local fixes like this, as we do not want the
+robots to pick this commit.
+With the Fixes: dropped (maybe just reference the commit in the
+changelog):
+Acked-by: Sam Ravnborg <sam@ravnborg.org>
 
-Oh, spoke too soon.  scripts/checkpatch.pl has a bunch of codestyle
-warnings.  Can you fix them and resend?
 
-thanks,
-  Gerd
-
+> Cc: Sidong Yang <realwakka@gmail.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
+> Signed-off-by: Sean Paul <seanpaul@chromium.org>
+> ---
+>  drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+> index fa79688013b7..5b4fd6952b53 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -28,6 +28,7 @@
+>  
+>  #include <drm/drm_atomic.h>
+>  #include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_drv.h>
+>  #include <drm/drm_gem_framebuffer_helper.h>
+>  #include <drm/drm_plane_helper.h>
+>  #include <drm/drm_probe_helper.h>
+> @@ -186,7 +187,7 @@ void qxl_display_read_client_monitors_config(struct qxl_device *qdev)
+>  
+>  	DRM_MODESET_LOCK_ALL_BEGIN(dev, ctx, DRM_MODESET_ACQUIRE_INTERRUPTIBLE, ret);
+>  	qxl_update_offset_props(qdev);
+> -	DRM_MODESET_LOCK_ALL_END(ctx, ret);
+> +	DRM_MODESET_LOCK_ALL_END(dev, ctx, ret);
+>  	if (!drm_helper_hpd_irq_event(dev)) {
+>  		/* notify that the monitor configuration changed, to
+>  		   adjust at the arbitrary resolution */
+> @@ -431,7 +432,7 @@ static int qxl_framebuffer_surface_dirty(struct drm_framebuffer *fb,
+>  			  clips, num_clips, inc, 0);
+>  
+>  out_lock_end:
+> -	DRM_MODESET_LOCK_ALL_END(ctx, ret);
+> +	DRM_MODESET_LOCK_ALL_END(fb->dev, ctx, ret);
+>  
+>  	return 0;
+>  }
+> -- 
+> Sean Paul, Software Engineer, Google / Chromium OS
+> 
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
