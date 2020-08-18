@@ -2,105 +2,79 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 301FD247E42
-	for <lists.virtualization@lfdr.de>; Tue, 18 Aug 2020 08:09:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A81F247F59
+	for <lists.virtualization@lfdr.de>; Tue, 18 Aug 2020 09:25:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C4F7987524;
-	Tue, 18 Aug 2020 06:09:54 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id B889087568;
+	Tue, 18 Aug 2020 07:25:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dxM03q6wPNu1; Tue, 18 Aug 2020 06:09:54 +0000 (UTC)
+	with ESMTP id TB5r-bNisURY; Tue, 18 Aug 2020 07:25:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 3313A87635;
-	Tue, 18 Aug 2020 06:09:54 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 23B928749A;
+	Tue, 18 Aug 2020 07:25:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 14737C0051;
-	Tue, 18 Aug 2020 06:09:54 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E4E84C0051;
+	Tue, 18 Aug 2020 07:25:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 25C55C0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5D967C088B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 06:09:52 +0000 (UTC)
+ Tue, 18 Aug 2020 07:25:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 2124E85187
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 49E4A85190
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 06:09:52 +0000 (UTC)
+ Tue, 18 Aug 2020 07:25:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vJxxi_vzJCY1
+ with ESMTP id l_SPrXyGQxWD
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 06:09:51 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
- [209.85.167.195])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id EAC1985184
+ Tue, 18 Aug 2020 07:25:23 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 48DAC85184
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 06:09:50 +0000 (UTC)
-Received: by mail-oi1-f195.google.com with SMTP id k4so16998204oik.2
- for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Aug 2020 23:09:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tcd-ie.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=a6SU4e7qioZa1MSGn21iWR1ma/iTKUTYpUuysCGcy14=;
- b=hxpRljSMtWhlvVTpffp4qhvMX1mdxLX6f0iMxptJuN7hUOC5AHsbLalFs+KtKDLB/V
- YL6y4BRukmSd0p99UL6RuVK4dHIwnPQgujw5EkR0OwSLbuHb6cHKrRpJ9I9XehRsNagY
- rxVhoRNaj3NwPAkQz+yOOdny8t4nvLbSgWrNevsCNIQB2QmDSOJnPiGn8C2yAhJBBcU6
- SA3gEspw8HLI8LBXCjAdHDMxYTIUo9jpwo1cNNTJfUxHkX/I3V3In9OZhaglBBrdlzyT
- s8Fv+oSbk5r/Z+poak4UteeUno8QRtJmD4t+F9iexuoY0lyXqxIis3Td5/onXebHC4tY
- tBtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=a6SU4e7qioZa1MSGn21iWR1ma/iTKUTYpUuysCGcy14=;
- b=rDPRbFPuMTJ1rS8U7Yri46fWaZFmrhBP8TWMoESU13NergzmKo7AIIeHJyctxw6x1j
- jreBCweYRFcpp7+dnM+GF9BgzPTivOiaz2nryEVwkViwMQlkFcRTBKlm+T3ROLyyGBj4
- ivGqEcNCO0AS3jUk+XOkOH7BifXRp9GWr2GkyR7+XKAaNNOE8zzIk5qEi3JBYj5DjP4s
- HSWa9jKTGV3drQEXUBJ5MbSmDUBbQj/qELbAw9UCFPxVztsHrHCx2Lbd/v83Ggej9taR
- YZzk2k1yxKG0Kc6aCyouX8GJuJEZklGFFmzEoHV6VsqUbIbsMhp+jV1hKCRAGIP96y95
- W6bA==
-X-Gm-Message-State: AOAM533JJdy8HlKcelHbv2cl6a+YSLYGAJKV7XvZGay8/vSiodZwT9PG
- uNlN8IaUmn9v5oFqqQyEuDi9Pve/kkvcd8YBLK4=
-X-Google-Smtp-Source: ABdhPJwIgdAjrz0QhHxtqrEjKsSeJiVX/sPlDBbqWWmVnl1cgdOijSjJUBJdGuOHZxzXZMmQ6vRK4Q==
-X-Received: by 2002:a17:90a:1682:: with SMTP id
- o2mr16209039pja.227.1597730665925; 
- Mon, 17 Aug 2020 23:04:25 -0700 (PDT)
-Received: from tom-ThinkPad-X1-Carbon-5th.teksavvy.com ([69.172.145.184])
- by smtp.googlemail.com with ESMTPSA id v10sm7102985pjy.3.2020.08.17.23.04.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2020 23:04:25 -0700 (PDT)
-From: Tom Murphy <murphyt7@tcd.ie>
-To: iommu@lists.linux-foundation.org
-Subject: [PATCH V2 2/2] Handle init_iova_flush_queue failure in dma-iommu path
-Date: Tue, 18 Aug 2020 07:04:14 +0100
-Message-Id: <20200818060415.19522-2-murphyt7@tcd.ie>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200818060415.19522-1-murphyt7@tcd.ie>
-References: <20200818060415.19522-1-murphyt7@tcd.ie>
-MIME-Version: 1.0
-Cc: Heiko Stuebner <heiko@sntech.de>, Matthew Rosato <mjrosato@linux.ibm.com>,
- Bjorn Andersson <bjorn.andersson@linaro.org>, linux-tegra@vger.kernel.org,
- Thierry Reding <thierry.reding@gmail.com>, Will Deacon <will@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Jean-Philippe Brucker <jean-philippe@linaro.org>,
- linux-samsung-soc@vger.kernel.org, kvm@vger.kernel.org,
- Joerg Roedel <joro@8bytes.org>, Krzysztof Kozlowski <krzk@kernel.org>,
- Jonathan Hunter <jonathanh@nvidia.com>, linux-rockchip@lists.infradead.org,
- Chen-Yu Tsai <wens@csie.org>, Andy Gross <agross@kernel.org>,
- Gerald Schaefer <gerald.schaefer@linux.ibm.com>, linux-s390@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
- linux-mediatek@lists.infradead.org, Matthias Brugger <matthias.bgg@gmail.com>,
- virtualization@lists.linux-foundation.org,
- linux-arm-kernel@lists.infradead.org, David Woodhouse <dwmw2@infradead.org>,
- Cornelia Huck <cohuck@redhat.com>, linux-kernel@vger.kernel.org,
- Tom Murphy <murphyt7@tcd.ie>, Rob Clark <robdclark@gmail.com>,
- Kukjin Kim <kgene@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
- Lu Baolu <baolu.lu@linux.intel.com>
+ Tue, 18 Aug 2020 07:25:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597735521;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:in-reply-to:in-reply-to:references:references;
+ bh=92Ca05uy8jh6nULr3MA2yPy/bEf6QwrjQ+ISqlFQbww=;
+ b=X1MqwaV5TaAaqgoiDeJ4/TP7L9upwtUinKmxc5gA4P0FfHwzOMaPqVmWK+CTK4Yn369vh+
+ bzo1jzp6fmm7vE4EXHkgqeH0rCBf1+rHNCQ9a07pHkD3/A+6kG8Pb/LUTHayXWcGmH4JCQ
+ zsnJjHH4A55Tlp7IOg2j/F+3cNHwPzk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-377-Ga7orqJ2PjuSAubauhmWMQ-1; Tue, 18 Aug 2020 03:25:17 -0400
+X-MC-Unique: Ga7orqJ2PjuSAubauhmWMQ-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6B0BD1DDFD;
+ Tue, 18 Aug 2020 07:25:16 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-112-195.ams2.redhat.com
+ [10.36.112.195])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0BC8E10098A7;
+ Tue, 18 Aug 2020 07:25:12 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 2FAAB9D59; Tue, 18 Aug 2020 09:25:12 +0200 (CEST)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH 1/2] drm/virtio: fix unblank
+Date: Tue, 18 Aug 2020 09:25:10 +0200
+Message-Id: <20200818072511.6745-2-kraxel@redhat.com>
+In-Reply-To: <20200818072511.6745-1-kraxel@redhat.com>
+References: <20200818072511.6745-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Chia-I Wu <olvaffe@gmail.com>,
+ 1882851@bugs.launchpad.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,40 +86,79 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-init_iova_flush_queue can fail if we run out of memory. Fall back to no
-flush queue if it fails.
+When going through a disable/enable cycle without changing the
+framebuffer the optimization added by commit 3954ff10e06e ("drm/virtio:
+skip set_scanout if framebuffer didn't change") causes the screen stay
+blank.  Add a bool to force an update to fix that.
 
-Signed-off-by: Tom Murphy <murphyt7@tcd.ie>
+v2: use drm_atomic_crtc_needs_modeset() (Daniel).
+
+Cc: 1882851@bugs.launchpad.net
+Fixes: 3954ff10e06e ("drm/virtio: skip set_scanout if framebuffer didn't change")
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/iommu/dma-iommu.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/virtio/virtgpu_drv.h     |  1 +
+ drivers/gpu/drm/virtio/virtgpu_display.c | 11 +++++++++++
+ drivers/gpu/drm/virtio/virtgpu_plane.c   |  4 +++-
+ 3 files changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
-index 7433f74d921a..5445e2be08b5 100644
---- a/drivers/iommu/dma-iommu.c
-+++ b/drivers/iommu/dma-iommu.c
-@@ -356,9 +356,11 @@ static int iommu_dma_init_domain(struct iommu_domain *domain, dma_addr_t base,
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+index 9ff9f4ac0522..4ab1b0ba2925 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.h
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+@@ -138,6 +138,7 @@ struct virtio_gpu_output {
+ 	int cur_x;
+ 	int cur_y;
+ 	bool enabled;
++	bool needs_modeset;
+ };
+ #define drm_crtc_to_virtio_gpu_output(x) \
+ 	container_of(x, struct virtio_gpu_output, crtc)
+diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
+index 2c2742b8d657..6c26b41f4e0d 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_display.c
++++ b/drivers/gpu/drm/virtio/virtgpu_display.c
+@@ -123,6 +123,17 @@ static int virtio_gpu_crtc_atomic_check(struct drm_crtc *crtc,
+ static void virtio_gpu_crtc_atomic_flush(struct drm_crtc *crtc,
+ 					 struct drm_crtc_state *old_state)
+ {
++	struct virtio_gpu_output *output = drm_crtc_to_virtio_gpu_output(crtc);
++
++	/*
++	 * virtio-gpu can't do modeset and plane update operations
++	 * independant from each other.  So the actual modeset happens
++	 * in the plane update callback, and here we just check
++	 * whenever we must force the modeset.
++	 */
++	if (drm_atomic_crtc_needs_modeset(crtc->state)) {
++		output->needs_modeset = true;
++	}
+ }
  
- 	if (!cookie->fq_domain && !iommu_domain_get_attr(domain,
- 			DOMAIN_ATTR_DMA_USE_FLUSH_QUEUE, &attr) && attr) {
--		cookie->fq_domain = domain;
--		init_iova_flush_queue(iovad, iommu_dma_flush_iotlb_all,
--				iommu_dma_entry_dtor);
-+		if (init_iova_flush_queue(iovad, iommu_dma_flush_iotlb_all,
-+				iommu_dma_entry_dtor))
-+			pr_warn("iova flush queue initialization failed\n");
-+		else
-+			cookie->fq_domain = domain;
- 	}
- 
- 	if (!dev)
+ static const struct drm_crtc_helper_funcs virtio_gpu_crtc_helper_funcs = {
+diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+index 52d24179bcec..65757409d9ed 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_plane.c
++++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+@@ -163,7 +163,9 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
+ 	    plane->state->src_w != old_state->src_w ||
+ 	    plane->state->src_h != old_state->src_h ||
+ 	    plane->state->src_x != old_state->src_x ||
+-	    plane->state->src_y != old_state->src_y) {
++	    plane->state->src_y != old_state->src_y ||
++	    output->needs_modeset) {
++		output->needs_modeset = false;
+ 		DRM_DEBUG("handle 0x%x, crtc %dx%d+%d+%d, src %dx%d+%d+%d\n",
+ 			  bo->hw_res_handle,
+ 			  plane->state->crtc_w, plane->state->crtc_h,
 -- 
-2.20.1
+2.18.4
 
 _______________________________________________
 Virtualization mailing list
