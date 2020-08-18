@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFC3424841A
-	for <lists.virtualization@lfdr.de>; Tue, 18 Aug 2020 13:46:24 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0EB9248427
+	for <lists.virtualization@lfdr.de>; Tue, 18 Aug 2020 13:50:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3DB608543A;
-	Tue, 18 Aug 2020 11:46:23 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 66CF2860A8;
+	Tue, 18 Aug 2020 11:50:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aa5QE0zqHJJg; Tue, 18 Aug 2020 11:46:22 +0000 (UTC)
+	with ESMTP id 14obT3dUYaKv; Tue, 18 Aug 2020 11:50:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 3EEC28560C;
-	Tue, 18 Aug 2020 11:46:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id ED109860A2;
+	Tue, 18 Aug 2020 11:50:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 16B4CC0051;
-	Tue, 18 Aug 2020 11:46:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CDE80C0051;
+	Tue, 18 Aug 2020 11:50:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 932DBC0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B4FA4C0051
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 11:46:20 +0000 (UTC)
+ Tue, 18 Aug 2020 11:50:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 7B2A185485
+ by hemlock.osuosl.org (Postfix) with ESMTP id 9E29E8733F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 11:46:20 +0000 (UTC)
+ Tue, 18 Aug 2020 11:50:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id POEbBxo7kEtM
+ with ESMTP id ejpgK7JrbkNq
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 11:46:17 +0000 (UTC)
+ Tue, 18 Aug 2020 11:50:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from huawei.com (szxga05-in.huawei.com [45.249.212.191])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 8C7AE8543A
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A87B88715D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Aug 2020 11:46:17 +0000 (UTC)
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 1C364DDE40549F011D29;
- Tue, 18 Aug 2020 19:46:12 +0800 (CST)
-Received: from localhost (10.174.179.108) by DGGEMS404-HUB.china.huawei.com
- (10.3.19.204) with Microsoft SMTP Server id 14.3.487.0; Tue, 18 Aug 2020
- 19:46:04 +0800
+ Tue, 18 Aug 2020 11:50:05 +0000 (UTC)
+Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 1E2F44D42F6938B08976;
+ Tue, 18 Aug 2020 19:50:02 +0800 (CST)
+Received: from localhost (10.174.179.108) by DGGEMS401-HUB.china.huawei.com
+ (10.3.19.201) with Microsoft SMTP Server id 14.3.487.0; Tue, 18 Aug 2020
+ 19:49:51 +0800
 From: YueHaibing <yuehaibing@huawei.com>
-To: <mst@redhat.com>, <jasowang@redhat.com>, <eli@mellanox.com>,
- <colin.king@canonical.com>
-Subject: [PATCH -next] vdpa/mlx5: Remove duplicate include
-Date: Tue, 18 Aug 2020 19:46:01 +0800
-Message-ID: <20200818114601.21656-1-yuehaibing@huawei.com>
+To: <mst@redhat.com>, <jasowang@redhat.com>, <tiwei.bie@intel.com>
+Subject: [PATCH -next] vdpa: Remove duplicate include
+Date: Tue, 18 Aug 2020 19:49:06 +0800
+Message-ID: <20200818114906.58304-1-yuehaibing@huawei.com>
 X-Mailer: git-send-email 2.10.2.windows.1
 MIME-Version: 1.0
 X-Originating-IP: [10.174.179.108]
 X-CFilter-Loop: Reflected
-Cc: YueHaibing <yuehaibing@huawei.com>, linux-kernel@vger.kernel.org,
+Cc: netdev@vger.kernel.org, YueHaibing <yuehaibing@huawei.com>,
+ linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -76,21 +76,21 @@ Remove duplicate include file
 
 Signed-off-by: YueHaibing <yuehaibing@huawei.com>
 ---
- drivers/vdpa/mlx5/net/mlx5_vnet.c | 1 -
+ drivers/vhost/vdpa.c | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-index 9df69d5efe8c..12fb83dc1de9 100644
---- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
-+++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-@@ -8,7 +8,6 @@
- #include <linux/mlx5/device.h>
- #include <linux/mlx5/vport.h>
- #include <linux/mlx5/fs.h>
--#include <linux/mlx5/device.h>
- #include "mlx5_vnet.h"
- #include "mlx5_vdpa_ifc.h"
- #include "mlx5_vdpa.h"
+diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
+index 3fab94f88894..95e2b8307a2a 100644
+--- a/drivers/vhost/vdpa.c
++++ b/drivers/vhost/vdpa.c
+@@ -22,7 +22,6 @@
+ #include <linux/nospec.h>
+ #include <linux/vhost.h>
+ #include <linux/virtio_net.h>
+-#include <linux/kernel.h>
+ 
+ #include "vhost.h"
+ 
 -- 
 2.17.1
 
