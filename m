@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4160324AA91
-	for <lists.virtualization@lfdr.de>; Thu, 20 Aug 2020 02:02:57 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E637B24AA95
+	for <lists.virtualization@lfdr.de>; Thu, 20 Aug 2020 02:03:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E2EFC8820B;
-	Thu, 20 Aug 2020 00:02:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8E71D85F81;
+	Thu, 20 Aug 2020 00:03:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id u40PquvhK0+M; Thu, 20 Aug 2020 00:02:55 +0000 (UTC)
+	with ESMTP id gSBS1Q25PabA; Thu, 20 Aug 2020 00:03:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B8AC98824B;
-	Thu, 20 Aug 2020 00:02:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3D2548357C;
+	Thu, 20 Aug 2020 00:03:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 77B1CC0051;
-	Thu, 20 Aug 2020 00:02:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 26DBCC0051;
+	Thu, 20 Aug 2020 00:03:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D002CC0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D0E9CC0051
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Aug 2020 00:02:53 +0000 (UTC)
+ Thu, 20 Aug 2020 00:03:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id BC9EE88256
+ by whitealder.osuosl.org (Postfix) with ESMTP id C6E7F87F59
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Aug 2020 00:02:53 +0000 (UTC)
+ Thu, 20 Aug 2020 00:03:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CmTtI+Q3cKUM
+ with ESMTP id B9UNocnsunjh
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Aug 2020 00:02:53 +0000 (UTC)
+ Thu, 20 Aug 2020 00:03:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 5117A8820B
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6873087F34
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Aug 2020 00:02:53 +0000 (UTC)
+ Thu, 20 Aug 2020 00:03:21 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3134A21741;
- Thu, 20 Aug 2020 00:02:52 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7C4B4208E4;
+ Thu, 20 Aug 2020 00:03:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597881773;
- bh=iXmAtY7BG2mwDIC/wHHpkcNbC6q/kDidRTK1GVKOgL8=;
+ s=default; t=1597881801;
+ bh=fcu9tkV638RyO4qXm29ePKUITiCHaZxHndRULWlEA/o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=QayRX6YgQBKiVZlmXRpI7rhoc3rgfkCEaRt5nggW5EQPRNQE5V/APGlEiNAgz0VOT
- XrrIWlBRJwP7AzHXUKsPaybT/V7ddpQt06lBGFPE2l8n5ipiNIv5HZB7Tt3I1CmTjT
- rZZy5XpppDKkSKnPobGaiNePBR/yuwlg7DR8B2zc=
+ b=QUvWTJVzqCiADdPaQUQqYl6NG99ikyIJUIksseoSCj1D8Vm7PzT1AH+z3DaaqrNrg
+ 864Plq6VYJNLhKwX+EhBdzfvRmnJbElR5BXg6qk23/QOVAZsXp+VKPxSuxlpqOgZ3t
+ zRrCzVTxNPog4rs3/2x64lLh0dktHNfcK9FGMdiA=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.4 17/22] virtio_ring: Avoid loop when vq is broken
+Subject: [PATCH AUTOSEL 4.19 14/18] virtio_ring: Avoid loop when vq is broken
  in virtqueue_poll
-Date: Wed, 19 Aug 2020 20:02:24 -0400
-Message-Id: <20200820000229.215333-17-sashal@kernel.org>
+Date: Wed, 19 Aug 2020 20:02:57 -0400
+Message-Id: <20200820000302.215560-14-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200820000229.215333-1-sashal@kernel.org>
-References: <20200820000229.215333-1-sashal@kernel.org>
+In-Reply-To: <20200820000302.215560-1-sashal@kernel.org>
+References: <20200820000302.215560-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -115,10 +115,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 58b96baa8d488..4f7c73e6052f6 100644
+index 6228b48d1e127..df7980aef927a 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -1960,6 +1960,9 @@ bool virtqueue_poll(struct virtqueue *_vq, unsigned last_used_idx)
+@@ -828,6 +828,9 @@ bool virtqueue_poll(struct virtqueue *_vq, unsigned last_used_idx)
  {
  	struct vring_virtqueue *vq = to_vvq(_vq);
  
@@ -126,8 +126,8 @@ index 58b96baa8d488..4f7c73e6052f6 100644
 +		return false;
 +
  	virtio_mb(vq->weak_barriers);
- 	return vq->packed_ring ? virtqueue_poll_packed(_vq, last_used_idx) :
- 				 virtqueue_poll_split(_vq, last_used_idx);
+ 	return (u16)last_used_idx != virtio16_to_cpu(_vq->vdev, vq->vring.used->idx);
+ }
 -- 
 2.25.1
 
