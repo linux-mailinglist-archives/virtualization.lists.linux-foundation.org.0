@@ -2,84 +2,84 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16A9624D5EE
-	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 15:16:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3068624D5F3
+	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 15:16:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 31B4588543;
-	Fri, 21 Aug 2020 13:16:15 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D46C188520;
+	Fri, 21 Aug 2020 13:16:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cgQyVA024YRm; Fri, 21 Aug 2020 13:16:15 +0000 (UTC)
+	with ESMTP id XjJ9fAl2In6q; Fri, 21 Aug 2020 13:16:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A99C2883D7;
-	Fri, 21 Aug 2020 13:16:14 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6416088363;
+	Fri, 21 Aug 2020 13:16:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 80BDBC0889;
-	Fri, 21 Aug 2020 13:16:14 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 47C09C0051;
+	Fri, 21 Aug 2020 13:16:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E7710C089E
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 90C5AC0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:12 +0000 (UTC)
+ Fri, 21 Aug 2020 13:16:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id D4A0587D65
+ by whitealder.osuosl.org (Postfix) with ESMTP id 7FA9D8867E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:12 +0000 (UTC)
+ Fri, 21 Aug 2020 13:16:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NWHkHzETJbIQ
+ with ESMTP id pjRuTVymf7r9
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:12 +0000 (UTC)
+ Fri, 21 Aug 2020 13:16:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
- [209.85.208.65])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 1AA7F87CB8
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+ [209.85.208.66])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 3EA1188615
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:12 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id l23so1369467edv.11
+ Fri, 21 Aug 2020 13:16:13 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id l23so1369520edv.11
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 06:16:12 -0700 (PDT)
+ Fri, 21 Aug 2020 06:16:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=AnnlDaJISLBh3tlC6QY64TitbeK2bzvjOXLypqqoQOw=;
- b=Evc7JHiQsscTCCzRJuF4RGxVPF/TfJEQoNFtq/F7l4VJCPfkB8ZnzeHE1jSsjrZ5r7
- 5C5idkHzraOBGbOnKZ34LNp9EprEIaOlttQSmNnVriYiMTyEn0rEcuYChBq7/TbDjIa9
- h9y8+WSyeAHbE/U5TdEhnhnBK3VaWQsOiKiNRvRwvjKBbSoZrDHgc/ZU3yHnRDYGsqwM
- dcz4chm8cEyq8yr22YRPHjEUeukQaL7QYjLiVubrUsFr+Z3R6l5PdO1A8jIMu+4qOmwq
- DC8C2F+j/g3CwmANZ24gMXCH2L7IB0mQp2b8fBSq4UKvRyEOgAylfTesVJgJHr38GfK+
- JKGQ==
+ bh=mFxcuowFu0Jv3evIc1dad6n3ZhAX6nITskxpnaVl5+I=;
+ b=F7qrOUgTT3E74XyC9jWEuKSCWozpJkqtVAUNfrVyQYb7KuFQaRifAbrV29U+QTgdO7
+ svaPN2mULjuJmM9GzglZwFzOSgvsCjum3Skmnma0ZxZOa0TjXvzHG00pItNlS0o+yHHb
+ DHKfdTgv1Vsra0RFLIHnHM3PWZPg1i4t79wJcD/ye7C4kl6emXJwM47EZ2fqK9NjHU8Z
+ 7l+LTNCupWNFida4Mq7tKvQSx5gdmvST6bW+kSiDnNAhy1j/RRW6vu0KYRZKH8ouJXsm
+ 8/+XKVKeZNzd+4C8Jbsu4oNNebPMyjg8aTlotZFno4GFpdtboKUIpaIYzxudSgt9xQLD
+ ZQhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=AnnlDaJISLBh3tlC6QY64TitbeK2bzvjOXLypqqoQOw=;
- b=MPr1QuIMfuc2//th/lYz9nwTx3qgtPoFplOONGvdd2Ftd67Y04wTcH9E79NerldnZC
- gyAZU3ww0P2qlDCI8eUjDpgLtouOGgCXP5Pum59/y+EQNEoE8a20pAGubHKcQy9+BD/T
- iLyiem7CxmdbaauuxVw7L0fQfL6Qi3BEoMEh8sBMn5huJG2+0Qpoe9DVGuw6zZWgV9sQ
- mgE+7kZwWaSJovh4SyCaCfzYjvA8opxESjPTdDjEr6z3nEJxP8hlbf5TRnatxmomQFIR
- AO2QyI8oX4pZfkVpzjOmqBAkxuMraHqbmPIEYtcQXDxu4vS+E/3Qs3N26KlZtPmjIGzg
- hpJg==
-X-Gm-Message-State: AOAM530GBiPF39xIRN6wSxoxE/UFaFWy/pF3qZVfiS7wxXYyAL1nrnHl
- FmyKhBpJJqCtWddRN06yh7mjVA==
-X-Google-Smtp-Source: ABdhPJxLTyEDp1sdq7LgF1huRP9DNgLTxWOLZlImVJP3z0/PYSRni9H4ifVAEYm5/PMqx1CpjBujwg==
-X-Received: by 2002:aa7:c353:: with SMTP id j19mr2827173edr.128.1598015770571; 
- Fri, 21 Aug 2020 06:16:10 -0700 (PDT)
+ bh=mFxcuowFu0Jv3evIc1dad6n3ZhAX6nITskxpnaVl5+I=;
+ b=WkctFnGU1AgzQlzVyqrVmkbFHj8cOxgEVBiQqfCY/FBPCBoF6xzDzncR5RGlF7R/jW
+ LzY4NWFR+IsFrQ6or2gSG3tGlTvUot1P7y371Mn2EHaekraw8KF3mhXPK5gdP2CZiOzH
+ Suht0r7nMt3FnOm25zY1ThUYqghNPJRpRpq4JR/JXVQkr+a3JknmL6PsW860deQ7m7/E
+ EfQDQhPmvnlmSgbr6KxCw7mgRi5FTvmj4qwa4qc+hi+AEu65pmuZs6sFujNd05G6yD1V
+ pRnQr9/PrwFpXP+wlBjv65zTpM0kmMC15fmWKGdtw1Fav9FdRDoonyU7XHRep1ORazM3
+ qgHQ==
+X-Gm-Message-State: AOAM530T3dZgCLuL2KpMJT1x8eKtEMyt+Ij9p2sYfQcl3h9NO0lwfitE
+ 5q+ifYp05kH9GzH8ixzyhnmDJA==
+X-Google-Smtp-Source: ABdhPJxSuluZjkQxfsXp9THILY+NXbkzKwWS5DVjT4ygD1u7SdXIMGmAG5nqsAUF8rJME9RMD8pSxg==
+X-Received: by 2002:a50:a2e6:: with SMTP id 93mr2650226edm.147.1598015771724; 
+ Fri, 21 Aug 2020 06:16:11 -0700 (PDT)
 Received: from localhost.localdomain
  ([2001:1715:4e26:a7e0:116c:c27a:3e7f:5eaf])
- by smtp.gmail.com with ESMTPSA id v4sm1299748eje.39.2020.08.21.06.16.09
+ by smtp.gmail.com with ESMTPSA id v4sm1299748eje.39.2020.08.21.06.16.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2020 06:16:10 -0700 (PDT)
+ Fri, 21 Aug 2020 06:16:11 -0700 (PDT)
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: iommu@lists.linux-foundation.org,
  virtualization@lists.linux-foundation.org, virtio-dev@lists.oasis-open.org,
  linux-pci@vger.kernel.org
-Subject: [PATCH v3 3/6] PCI: Add DMA configuration for virtual platforms
-Date: Fri, 21 Aug 2020 15:15:37 +0200
-Message-Id: <20200821131540.2801801-4-jean-philippe@linaro.org>
+Subject: [PATCH v3 4/6] iommu/virtio: Add topology definitions
+Date: Fri, 21 Aug 2020 15:15:38 +0200
+Message-Id: <20200821131540.2801801-5-jean-philippe@linaro.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200821131540.2801801-1-jean-philippe@linaro.org>
 References: <20200821131540.2801801-1-jean-philippe@linaro.org>
@@ -103,52 +103,85 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hardware platforms usually describe the IOMMU topology using either
-device-tree pointers or vendor-specific ACPI tables.  For virtual
-platforms that don't provide a device-tree, the virtio-iommu device
-contains a description of the endpoints it manages.  That information
-allows us to probe endpoints after the IOMMU is probed (possibly as late
-as userspace modprobe), provided it is discovered early enough.
+Add struct definitions for describing endpoints managed by the
+virtio-iommu. When VIRTIO_IOMMU_F_TOPOLOGY is offered, an array of
+virtio_iommu_topo_* structures in config space describes the endpoints,
+identified either by their PCI BDF or their physical MMIO address.
 
-Add a hook to pci_dma_configure(), which returns -EPROBE_DEFER if the
-endpoint is managed by a vIOMMU that will be loaded later, or 0 in any
-other case to avoid disturbing the normal DMA configuration methods.
-When CONFIG_VIRTIO_IOMMU_TOPOLOGY_HELPERS isn't selected, the call to
-virt_dma_configure() is compiled out.
-
-As long as the information is consistent, platforms can provide both a
-device-tree and a built-in topology, and the IOMMU infrastructure is
-able to deal with multiple DMA configuration methods.
-
-Acked-by: Bjorn Helgaas <bhelgaas@google.com>
 Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
 ---
- drivers/pci/pci-driver.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ include/uapi/linux/virtio_iommu.h | 44 +++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
-index 449466f71040..dbe9d33606b0 100644
---- a/drivers/pci/pci-driver.c
-+++ b/drivers/pci/pci-driver.c
-@@ -19,6 +19,7 @@
- #include <linux/kexec.h>
- #include <linux/of_device.h>
- #include <linux/acpi.h>
-+#include <linux/virt_iommu.h>
- #include "pci.h"
- #include "pcie/portdrv.h"
+diff --git a/include/uapi/linux/virtio_iommu.h b/include/uapi/linux/virtio_iommu.h
+index 237e36a280cb..70cba30644d5 100644
+--- a/include/uapi/linux/virtio_iommu.h
++++ b/include/uapi/linux/virtio_iommu.h
+@@ -16,6 +16,7 @@
+ #define VIRTIO_IOMMU_F_BYPASS			3
+ #define VIRTIO_IOMMU_F_PROBE			4
+ #define VIRTIO_IOMMU_F_MMIO			5
++#define VIRTIO_IOMMU_F_TOPOLOGY			6
  
-@@ -1605,6 +1606,10 @@ static int pci_dma_configure(struct device *dev)
- 	struct device *bridge;
- 	int ret = 0;
+ struct virtio_iommu_range_64 {
+ 	__le64					start;
+@@ -27,6 +28,17 @@ struct virtio_iommu_range_32 {
+ 	__le32					end;
+ };
  
-+	ret = virt_dma_configure(dev);
-+	if (ret)
-+		return ret;
++struct virtio_iommu_topo_config {
++	/* Number of topology description structures */
++	__le16					count;
++	/*
++	 * Offset to the first topology description structure
++	 * (virtio_iommu_topo_*) from the start of the virtio_iommu config
++	 * space. Aligned on 8 bytes.
++	 */
++	__le16					offset;
++};
 +
- 	bridge = pci_get_host_bridge_device(to_pci_dev(dev));
+ struct virtio_iommu_config {
+ 	/* Supported page sizes */
+ 	__le64					page_size_mask;
+@@ -36,6 +48,38 @@ struct virtio_iommu_config {
+ 	struct virtio_iommu_range_32		domain_range;
+ 	/* Probe buffer size */
+ 	__le32					probe_size;
++	struct virtio_iommu_topo_config		topo_config;
++};
++
++#define VIRTIO_IOMMU_TOPO_PCI_RANGE		0x1
++#define VIRTIO_IOMMU_TOPO_MMIO			0x2
++
++struct virtio_iommu_topo_pci_range {
++	/* VIRTIO_IOMMU_TOPO_PCI_RANGE */
++	__u8					type;
++	__u8					reserved;
++	/* Length of this structure */
++	__le16					length;
++	/* First endpoint ID in the range */
++	__le32					endpoint_start;
++	/* PCI domain number */
++	__le16					segment;
++	/* PCI Bus:Device.Function range */
++	__le16					bdf_start;
++	__le16					bdf_end;
++	__le16					padding;
++};
++
++struct virtio_iommu_topo_mmio {
++	/* VIRTIO_IOMMU_TOPO_MMIO */
++	__u8					type;
++	__u8					reserved;
++	/* Length of this structure */
++	__le16					length;
++	/* Endpoint ID */
++	__le32					endpoint;
++	/* Address of the first MMIO region */
++	__le64					address;
+ };
  
- 	if (IS_ENABLED(CONFIG_OF) && bridge->parent &&
+ /* Request types */
 -- 
 2.28.0
 
