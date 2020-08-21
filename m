@@ -1,121 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37C4C24D5CF
-	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 15:08:54 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B45024D5F0
+	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 15:16:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E1A7786224;
-	Fri, 21 Aug 2020 13:08:52 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 5AB8420482;
+	Fri, 21 Aug 2020 13:16:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zBRVzlPbVbC5; Fri, 21 Aug 2020 13:08:52 +0000 (UTC)
+	with ESMTP id N9cUOawxbcmf; Fri, 21 Aug 2020 13:16:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7728F86250;
-	Fri, 21 Aug 2020 13:08:52 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 980EC204E5;
+	Fri, 21 Aug 2020 13:16:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 450D8C0051;
-	Fri, 21 Aug 2020 13:08:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 752EAC0051;
+	Fri, 21 Aug 2020 13:16:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 174F4C0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1BAEEC0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:08:51 +0000 (UTC)
+ Fri, 21 Aug 2020 13:16:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 064FA88605
+ by hemlock.osuosl.org (Postfix) with ESMTP id 097DB88360
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:08:51 +0000 (UTC)
+ Fri, 21 Aug 2020 13:16:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id aAOH-aXyNy59
+ with ESMTP id yXxEz--02Tpk
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:08:48 +0000 (UTC)
+ Fri, 21 Aug 2020 13:16:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by whitealder.osuosl.org (Postfix) with ESMTPS id DF31A885E4
+Received: from mail-ej1-f65.google.com (mail-ej1-f65.google.com
+ [209.85.218.65])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id E890D87CB8
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:08:48 +0000 (UTC)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 07LD3lYP105348; Fri, 21 Aug 2020 09:08:44 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=XHpFRlBvLhzPbNUy/WcR7Iba8tVUXqJsA+kYx9ImcwQ=;
- b=EMRP2UcRsr3sZwUzXHOWWexcYGjU2w0YVHsaQkP68KAgzlTSDrRFQB5khT8JiiaQIrAS
- pEQwHETzP1EQvf2nmoNReYSShT4NJEjjD00afwBF7hv9e9SQ+NFxBT50uH0NZUnfD6E6
- 5N0m8RJGkhESMM5KwK0nMsJlLJk8lSWCNC6/GhhCShzJlWIu4R8FdjIeHAYYSGx/GXRs
- KICBhHfeSx6Z1CklvxIMMbpCNo/yPbQD7yz6bGrWv8IWFPaV3xXYNGQYqQu64rlIbW4j
- EHMJqEL5sD3gC5RpSjTjpAt9BAQ3XJi95JcG5TToHEiyEbNwMbMGdb+IqKfOMtbBenZB sg== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3328e9ay0d-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 21 Aug 2020 09:08:44 -0400
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 07LD40OG106366;
- Fri, 21 Aug 2020 09:08:43 -0400
-Received: from ppma03fra.de.ibm.com (6b.4a.5195.ip4.static.sl-reverse.com
- [149.81.74.107])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3328e9axxh-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 21 Aug 2020 09:08:43 -0400
-Received: from pps.filterd (ppma03fra.de.ibm.com [127.0.0.1])
- by ppma03fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 07LD4U0d020685;
- Fri, 21 Aug 2020 13:08:41 GMT
-Received: from b06avi18878370.portsmouth.uk.ibm.com
- (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
- by ppma03fra.de.ibm.com with ESMTP id 3304c92pmj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 21 Aug 2020 13:08:40 +0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
- [9.149.105.59])
- by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 07LD8bGS61604294
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 21 Aug 2020 13:08:37 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A7057A405D;
- Fri, 21 Aug 2020 13:08:37 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 0BFC6A4055;
- Fri, 21 Aug 2020 13:08:37 +0000 (GMT)
-Received: from oc3016276355.ibm.com (unknown [9.145.168.20])
- by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Fri, 21 Aug 2020 13:08:36 +0000 (GMT)
-Subject: Re: [PATCH v9 1/2] virtio: let arch advertise guest's memory access
- restrictions
-To: Cornelia Huck <cohuck@redhat.com>
-References: <1597854198-2871-1-git-send-email-pmorel@linux.ibm.com>
- <1597854198-2871-2-git-send-email-pmorel@linux.ibm.com>
- <20200821135906.1c6bede3.cohuck@redhat.com>
-From: Pierre Morel <pmorel@linux.ibm.com>
-Message-ID: <91c83bba-9a75-4ed4-b682-fcdce26edd54@linux.ibm.com>
-Date: Fri, 21 Aug 2020 15:08:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Fri, 21 Aug 2020 13:16:08 +0000 (UTC)
+Received: by mail-ej1-f65.google.com with SMTP id o23so2257216ejr.1
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 21 Aug 2020 06:16:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Y/asOEQ7I5lK9SCfOrPxX9Ij7ThPhJXGbgb9Vg60QdU=;
+ b=EYBouRuvx7C7M1g4+Ts8UzFEMdS8ULDwuOJEs1eOkgISO70lUT/4Bvu/b1h1GvERCl
+ rKI7LPJD38AhqdjZ/lSpOArHlbNCvqLuAHOWkeu+OWoua5ljvoIl8M1kqX/r2VxoBq//
+ SOrSe/51+7gXMFValJMarQpshl2SpMbFVAkyEvvD59ixQdldOvOWlq7nETtEXla4XPyN
+ AOPoYkrkNhg9tMEXekpD3atg/nxtUf5yS1cQz2fuBJq10wwAV6IE3DZy7UnG8q5Z3oJ/
+ 3TWv1ugObjE4oa7EDAXgTv8M7m8QyMKkjXIbXeNK8e3KaTGVDHRHUbJcfn9TlVH9F4AV
+ YDEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Y/asOEQ7I5lK9SCfOrPxX9Ij7ThPhJXGbgb9Vg60QdU=;
+ b=WzxoRIqWE6ZrU1wuLdKWOECdwYfrh+wZ7FMM90Pe0JzhBaPeKSEKbqXPEqMRxM2A+w
+ kqp9AGloQzGUXYETLEoyDPWhnF/PN/X0a56VDwA61KjFIrqtG2IBn841b7/TBKJEIIpI
+ s460G1Fiw0eXKHylusjlwcKRCeEeZBEF+4tUWttctFKYWUhWnKOwMOvgsRss6wSBpryN
+ L6piY5i+oR0PP+YSpDMhie7OUX+ww7y0oxJuvFkoLhEFFbAvD9GvlJmO1js3MsBcBDIf
+ oQB2x9t0LiCyrgh7C/AFPoFCBeFrK/eMAHKceJZkuKbpTJQNbS2IKU6geUWTmoBWyHEs
+ zVsQ==
+X-Gm-Message-State: AOAM530vUmitegxNMDNIZT1XSyhCxEVoY+IhWAFVCl5Ukrbl6HVVUj6K
+ J3f58tRGCr5KOY8yjKca/9S+oQ==
+X-Google-Smtp-Source: ABdhPJwOy/5jkRbdPAXN7lLeuSinZ0dNBsa/xxJXp4vx3NLHlrjucaVJpRbbUOOksUhqw9JvR5D63A==
+X-Received: by 2002:a17:906:dbd2:: with SMTP id
+ yc18mr2371358ejb.394.1598015767083; 
+ Fri, 21 Aug 2020 06:16:07 -0700 (PDT)
+Received: from localhost.localdomain
+ ([2001:1715:4e26:a7e0:116c:c27a:3e7f:5eaf])
+ by smtp.gmail.com with ESMTPSA id v4sm1299748eje.39.2020.08.21.06.16.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Aug 2020 06:16:06 -0700 (PDT)
+From: Jean-Philippe Brucker <jean-philippe@linaro.org>
+To: iommu@lists.linux-foundation.org,
+ virtualization@lists.linux-foundation.org, virtio-dev@lists.oasis-open.org,
+ linux-pci@vger.kernel.org
+Subject: [PATCH v3 0/6] Add virtio-iommu built-in topology
+Date: Fri, 21 Aug 2020 15:15:34 +0200
+Message-Id: <20200821131540.2801801-1-jean-philippe@linaro.org>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-In-Reply-To: <20200821135906.1c6bede3.cohuck@redhat.com>
-Content-Language: en-US
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-08-21_08:2020-08-21,
- 2020-08-21 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxlogscore=999 spamscore=0
- malwarescore=0 mlxscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0
- priorityscore=1501 impostorscore=0 phishscore=0 clxscore=1015 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2008210120
-Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
- kvm@vger.kernel.org, mst@redhat.com, linuxram@us.ibm.com,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- pasic@linux.ibm.com, borntraeger@de.ibm.com, thomas.lendacky@amd.com,
- hca@linux.ibm.com, david@gibson.dropbear.id.au
+Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>, lorenzo.pieralisi@arm.com,
+ mst@redhat.com, joro@8bytes.org, eric.auger@redhat.com,
+ sebastien.boeuf@intel.com, bhelgaas@google.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -127,95 +97,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Add a topology description to the virtio-iommu driver and enable x86
+platforms.
 
+Since [v2] we have made some progress on adding ACPI support for
+virtio-iommu, which is the preferred boot method on x86. It will be a
+new vendor-agnostic table describing para-virtual topologies in a
+minimal format. However some platforms don't use either ACPI or DT for
+booting (for example microvm), and will need the alternative topology
+description method proposed here. In addition, since the process to get
+a new ACPI table will take a long time, this provides a boot method even
+to ACPI-based platforms, if only temporarily for testing and
+development.
 
-On 2020-08-21 13:59, Cornelia Huck wrote:
-> On Wed, 19 Aug 2020 18:23:17 +0200
-> Pierre Morel <pmorel@linux.ibm.com> wrote:
-> 
->> An architecture may restrict host access to guest memory.
-> 
-> "e.g. IBM s390 Secure Execution or AMD SEV"
-> 
-> Just to make clearer what you are referring to?
+v3:
+* Add patch 1 that moves virtio-iommu to a subfolder.
+* Split the rest:
+  * Patch 2 adds topology-helper.c, which will be shared with the ACPI
+    support.
+  * Patch 4 adds definitions.
+  * Patch 5 adds parser in topology.c.
+* Address other comments.
 
-yes, thanks
+Linux and QEMU patches available at:
+https://jpbrucker.net/git/linux virtio-iommu/devel
+https://jpbrucker.net/git/qemu virtio-iommu/devel
 
-> 
->>
->> Provide a new Kconfig entry the architecture can select,
->> CONFIG_ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS, when it provides
->> the arch_has_restricted_virtio_memory_access callback to advertise
-> 
-> s/advertise/advertise to/
+[spec] https://lists.oasis-open.org/archives/virtio-dev/202008/msg00067.html
+[v2] https://lore.kernel.org/linux-iommu/20200228172537.377327-1-jean-philippe@linaro.org/
+[v1] https://lore.kernel.org/linux-iommu/20200214160413.1475396-1-jean-philippe@linaro.org/
+[rfc] https://lore.kernel.org/linux-iommu/20191122105000.800410-1-jean-philippe@linaro.org/
 
-OK
+Jean-Philippe Brucker (6):
+  iommu/virtio: Move to drivers/iommu/virtio/
+  iommu/virtio: Add topology helpers
+  PCI: Add DMA configuration for virtual platforms
+  iommu/virtio: Add topology definitions
+  iommu/virtio: Support topology description in config space
+  iommu/virtio: Enable x86 support
 
-> 
->> VIRTIO common code when the architecture restricts memory access
->> from the host.
-> 
-> "The common code can then fail the probe for any device where
-> VIRTIO_F_IOMMU_PLATFORM is required, but not set."
-> 
-> ?
-
-Yes, better thanks
-
-> 
->>
->> Signed-off-by: Pierre Morel <pmorel@linux.ibm.com>
->> ---
->>   drivers/virtio/Kconfig        |  6 ++++++
->>   drivers/virtio/virtio.c       | 15 +++++++++++++++
->>   include/linux/virtio_config.h |  9 +++++++++
->>   3 files changed, 30 insertions(+)
->>
->> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
->> index 5809e5f5b157..509f3b4d8ba1 100644
->> --- a/drivers/virtio/Kconfig
->> +++ b/drivers/virtio/Kconfig
->> @@ -6,6 +6,12 @@ config VIRTIO
->>   	  bus, such as CONFIG_VIRTIO_PCI, CONFIG_VIRTIO_MMIO, CONFIG_RPMSG
->>   	  or CONFIG_S390_GUEST.
->>   
->> +config ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS
->> +	bool
->> +	help
->> +	  This option is selected by any architecture enforcing
->> +	  VIRTIO_F_IOMMU_PLATFORM
-> 
-> "This option is selected if the architecture may need to enforce
-> VIRTIO_F_IOMMU_PLATFORM."
-> 
-> ?
-
-yes, better thanks
-
-> 
->> +
->>   menuconfig VIRTIO_MENU
->>   	bool "Virtio drivers"
->>   	default y
-> 
-> (...)
-> 
-> Reviewed-by: Cornelia Huck <cohuck@redhat.com>
-> 
-
-I will make the rewordings.
-
-Thanks,
-Pierre
+ drivers/iommu/Kconfig                     |  18 +-
+ drivers/iommu/Makefile                    |   3 +-
+ drivers/iommu/virtio/Makefile             |   4 +
+ drivers/iommu/virtio/topology-helpers.h   |  50 +++++
+ include/linux/virt_iommu.h                |  15 ++
+ include/uapi/linux/virtio_iommu.h         |  44 ++++
+ drivers/iommu/virtio/topology-helpers.c   | 196 ++++++++++++++++
+ drivers/iommu/virtio/topology.c           | 259 ++++++++++++++++++++++
+ drivers/iommu/{ => virtio}/virtio-iommu.c |   4 +
+ drivers/pci/pci-driver.c                  |   5 +
+ MAINTAINERS                               |   3 +-
+ 11 files changed, 597 insertions(+), 4 deletions(-)
+ create mode 100644 drivers/iommu/virtio/Makefile
+ create mode 100644 drivers/iommu/virtio/topology-helpers.h
+ create mode 100644 include/linux/virt_iommu.h
+ create mode 100644 drivers/iommu/virtio/topology-helpers.c
+ create mode 100644 drivers/iommu/virtio/topology.c
+ rename drivers/iommu/{ => virtio}/virtio-iommu.c (99%)
 
 -- 
-Pierre Morel
-IBM Lab Boeblingen
+2.28.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
