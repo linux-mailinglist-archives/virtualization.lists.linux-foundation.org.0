@@ -1,93 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 769A824D5F4
-	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 15:16:19 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D0D9424D795
+	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 16:45:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 26E8D885C8;
-	Fri, 21 Aug 2020 13:16:18 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 55BDC2041F;
+	Fri, 21 Aug 2020 14:45:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wioexugVyzKp; Fri, 21 Aug 2020 13:16:17 +0000 (UTC)
+	with ESMTP id FoYtYqPigTG1; Fri, 21 Aug 2020 14:45:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 99144883D7;
-	Fri, 21 Aug 2020 13:16:17 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 055422040E;
+	Fri, 21 Aug 2020 14:45:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7D6F7C0051;
-	Fri, 21 Aug 2020 13:16:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D7C76C0051;
+	Fri, 21 Aug 2020 14:45:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5E5DFC0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 36834C0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:16 +0000 (UTC)
+ Fri, 21 Aug 2020 14:45:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 5A31F864AB
+ by hemlock.osuosl.org (Postfix) with ESMTP id 321D387FBF
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:16 +0000 (UTC)
+ Fri, 21 Aug 2020 14:45:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wkKZWBHwweMS
+ with ESMTP id 09i5y5FqudSp
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:15 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ej1-f65.google.com (mail-ej1-f65.google.com
- [209.85.218.65])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id A723D85C11
+ Fri, 21 Aug 2020 14:45:05 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
+ [209.85.166.193])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 657228830F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 13:16:15 +0000 (UTC)
-Received: by mail-ej1-f65.google.com with SMTP id kq25so2255292ejb.3
+ Fri, 21 Aug 2020 14:45:05 +0000 (UTC)
+Received: by mail-il1-f193.google.com with SMTP id v2so1601826ilq.4
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 06:16:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=ZnnZtMxmP4b7OMlDsIV6bQJbOj4fdGL8aaL1hhmjLLA=;
- b=pY2YbYHS5mikDdweoT7I0A6q9uT3ometn8FGbkCmiALLLRBZ7T5CUUIzOPSzePumsr
- 5nVU/Of+D1O09VPiw+V19VBWqEeiR+ed6F2FuDNqj5OXZVpR1r7CKaXoH8BU2TGA//Mk
- REi4qfELDk/LPFv51pecAc0wLz0sjnbltg48c2UZ6oEGqEddU0eeHvEiktKMfM8CrXAR
- 24BjGg9QPwJCXtKW16GNd3wBjTWgXDlouU7YYfmHXPSVH2UUgSKlFi6UCokoDcksLjeF
- CK67SeJGYmClge7RphPcpwaKaSeXvKeSAqpLlgFvQ5ACoV5W0wlnksDr2TVEpp4Owz1b
- j69Q==
+ Fri, 21 Aug 2020 07:45:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=C90nSWF13UnmUXT/t6zouheV3b/caGvmm+rEBKqVpdg=;
+ b=WZPAanfw3FhXa7h3fxpfrymu1+iAfN7jYZZcDC1ZwufOlcLwlqqC5JQ2Jdaa7axmC/
+ AuKMmUn6G9SHn8uiHiSKtQMcKmXt4qJnS6XfrG5tH/F6ZqV3GjPWYDc8S9VMsqwuj4fV
+ 6+e5S2jm62HjwvxTNFR+qtMpHYZegRDCQMV3NIelDb+CZcphTnuK8QJcZnufxa59Xgzw
+ 6LY26EQ0sduFkqL66yNRVSu0VnzkIRq8w0QDD/s+udlfz3bK6/yqg7LAN3a8nAsf0Nuw
+ +g0YGzid/aIb0K/qP+EjYkCkDGRtudkM4AUj2vRZDEX+cRQXswzarbNLHhDu+3bRbWns
+ eC4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=ZnnZtMxmP4b7OMlDsIV6bQJbOj4fdGL8aaL1hhmjLLA=;
- b=Vatzp1mWG71RdXEh54y+4CTr/iJLq8jEYpyLcJaPi1MvlNCmwPX191ulpLvo44IRh7
- Uf9q69+pYN30wXsB8w1ONSi2bnbbDzLZuU/Jpk7DgBWfZQhDvF2bj2z9bC2xu6fnCTGS
- SVU/jsLFBU61VX/VrBaGe96EArbvKQ1ri/cr3414IulAyjDpCNR9xDLR+wjvIChxp8Cj
- 2rvEmHiHkWR1gTl38ZJ9/GPo1UkImjVhlyhW5FGenyPodyPfxpNJA9tq5f3G/4Boqvmv
- xVY9/ZpC0arr8sUCzGs98P/WlzSFOzqc0XtlVNFtvBovCA5K+LVqQusFJ988yWo5MB1H
- e/jA==
-X-Gm-Message-State: AOAM531s4uenSEBUuPfueJXLv+aDH+vvRSk5v7FvXXrTIGMEGHKWALSD
- ZZPNPJ3a8C0TeJbdwEcvsl6g3Q==
-X-Google-Smtp-Source: ABdhPJzPzKZv0XqkxFhftdpeIsh87fWGpOtYot+rgSUcL/9LlvBX6pXEuFdZEBC/z0H9ehxzTOYJaw==
-X-Received: by 2002:a17:906:e17:: with SMTP id
- l23mr2725404eji.13.1598015774044; 
- Fri, 21 Aug 2020 06:16:14 -0700 (PDT)
-Received: from localhost.localdomain
- ([2001:1715:4e26:a7e0:116c:c27a:3e7f:5eaf])
- by smtp.gmail.com with ESMTPSA id v4sm1299748eje.39.2020.08.21.06.16.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Aug 2020 06:16:13 -0700 (PDT)
-From: Jean-Philippe Brucker <jean-philippe@linaro.org>
-To: iommu@lists.linux-foundation.org,
- virtualization@lists.linux-foundation.org, virtio-dev@lists.oasis-open.org,
- linux-pci@vger.kernel.org
-Subject: [PATCH v3 6/6] iommu/virtio: Enable x86 support
-Date: Fri, 21 Aug 2020 15:15:40 +0200
-Message-Id: <20200821131540.2801801-7-jean-philippe@linaro.org>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200821131540.2801801-1-jean-philippe@linaro.org>
-References: <20200821131540.2801801-1-jean-philippe@linaro.org>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=C90nSWF13UnmUXT/t6zouheV3b/caGvmm+rEBKqVpdg=;
+ b=lTLEakeeJYkjrD1gk6mCutrcn+Nv/T97UX4LFE8p+CMTj6fsSDLlxdRUllSwhXsFJV
+ lzYqbZMF1m5xqR9soAZppsfny3qkl/EggRBSNiavMzB9BwX/tSLfPDO3bLAhX5GBd3Ar
+ 9Q1VwBazq8wtxgeFafT4xvtv36TEb/jMWoL7151nt2cc1Oz5LfYfwvg2HNPYE0bFETS7
+ lkzq4jYwQ5Ju1toL1Kt3dk+PSn/zH3AIDzapn2mfE1k8aw6IjGA6iJaISiZcRA4E69Ie
+ sB61lqK3PX8ugYKoytlHSr9ZKuSy5+FUzMZW34C3jHZgiUx54+aAZGRMPBXt1j7A/SGb
+ IGvA==
+X-Gm-Message-State: AOAM530SfuK4vuMBLmGkx3A+EFTEo4S/hNGCG1NbTKVBJIPSlarNopSv
+ 7YxqHD6XvfyFJwOFVEQ38SUc2g==
+X-Google-Smtp-Source: ABdhPJzv5Uro5gqLH9Madfn+I7njnS1pYD1IAyxJA8wxLh1cPMqD/A08/j+1u985vO8tNXtdISywww==
+X-Received: by 2002:a05:6e02:d44:: with SMTP id
+ h4mr2812734ilj.296.1598021104562; 
+ Fri, 21 Aug 2020 07:45:04 -0700 (PDT)
+Received: from [192.168.1.58] ([65.144.74.34])
+ by smtp.gmail.com with ESMTPSA id u89sm1313919ili.87.2020.08.21.07.45.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 21 Aug 2020 07:45:04 -0700 (PDT)
+Subject: Re: [PATCH] virtio-blk: Use kobj_to_dev() instead of container_of()
+To: Tian Tao <tiantao6@hisilicon.com>, mst@redhat.com, jasowang@redhat.com,
+ pbonzini@redhat.com, stefanha@redhat.com,
+ virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org
+References: <1597972755-60633-1-git-send-email-tiantao6@hisilicon.com>
+From: Jens Axboe <axboe@kernel.dk>
+Message-ID: <0d6b9b5b-cf44-6d77-8d3c-7a9f6063d457@kernel.dk>
+Date: Fri, 21 Aug 2020 08:45:03 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>, lorenzo.pieralisi@arm.com,
- mst@redhat.com, joro@8bytes.org, eric.auger@redhat.com,
- sebastien.boeuf@intel.com, bhelgaas@google.com
+In-Reply-To: <1597972755-60633-1-git-send-email-tiantao6@hisilicon.com>
+Content-Language: en-US
+Cc: linuxarm@huawei.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,36 +105,13 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-With the built-in topology description in place, x86 platforms can now
-use the virtio-iommu.
+On 8/20/20 7:19 PM, Tian Tao wrote:
+> Use kobj_to_dev() instead of container_of()
 
-Architectures that use the generic iommu_dma_ops should normally select
-CONFIG_IOMMU_DMA themselves (from arch/*/Kconfig). Since not all x86
-drivers have been converted yet, it's currently up to the IOMMU Kconfig
-to select it.
+Applied, thanks.
 
-Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
----
- drivers/iommu/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
-index 98d28fdbc19a..d7cf158745eb 100644
---- a/drivers/iommu/Kconfig
-+++ b/drivers/iommu/Kconfig
-@@ -383,8 +383,9 @@ config HYPERV_IOMMU
- config VIRTIO_IOMMU
- 	tristate "Virtio IOMMU driver"
- 	depends on VIRTIO
--	depends on ARM64
-+	depends on (ARM64 || X86)
- 	select IOMMU_API
-+	select IOMMU_DMA if X86
- 	select INTERVAL_TREE
- 	help
- 	  Para-virtualised IOMMU driver with virtio.
 -- 
-2.28.0
+Jens Axboe
 
 _______________________________________________
 Virtualization mailing list
