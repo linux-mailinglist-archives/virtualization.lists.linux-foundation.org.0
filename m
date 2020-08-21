@@ -1,89 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97F7324CE5F
-	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 09:02:02 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93B4D24D03E
+	for <lists.virtualization@lfdr.de>; Fri, 21 Aug 2020 10:02:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 851A386C93;
-	Fri, 21 Aug 2020 07:02:00 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4F05188633;
+	Fri, 21 Aug 2020 08:02:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id C_l8BhNIAr6Z; Fri, 21 Aug 2020 07:01:59 +0000 (UTC)
+	with ESMTP id U+Wda3k05L0j; Fri, 21 Aug 2020 08:02:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A02CD86C8D;
-	Fri, 21 Aug 2020 07:01:59 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id BB9C088637;
+	Fri, 21 Aug 2020 08:02:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 821FFC0051;
-	Fri, 21 Aug 2020 07:01:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9A0BBC0051;
+	Fri, 21 Aug 2020 08:02:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E7643C0051
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 51CE9C0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 07:01:57 +0000 (UTC)
+ Fri, 21 Aug 2020 08:02:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id CFAD487B41
+ by silver.osuosl.org (Postfix) with ESMTP id 17F5B203C8
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 07:01:57 +0000 (UTC)
+ Fri, 21 Aug 2020 08:02:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id I5bJmrL4IKpA
+ with ESMTP id Ktm0KJGJBQe9
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 07:01:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 869618791E
+ Fri, 21 Aug 2020 08:02:39 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from fornost.hmeau.com (helcar.hmeau.com [216.24.177.18])
+ by silver.osuosl.org (Postfix) with ESMTPS id 6A3592313B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Aug 2020 07:01:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597993315;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=yIGSYjFFLTVb50eqymJwc16CIZ3D03wNNhMqT2v4fFo=;
- b=dJzbMLf6JSbI03dJs5zPtqRKpaYnFnnn0M4/n6yA8MIgj4GLCSpO3rK+5kFmzSVioRXwvD
- rsbQ9cpCf7OFI1aV9Q1Rc1fXFnZQKw7uSL6nGuci7j6YF2wjgKeqvZUO4Vv66VUTWLkG2w
- MtpLw5Ngo6ZE11mYk1atQPNobHSF/EU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-364-bmWLZW8UPxSpNitocniUOw-1; Fri, 21 Aug 2020 03:01:45 -0400
-X-MC-Unique: bmWLZW8UPxSpNitocniUOw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B14FD1084C91;
- Fri, 21 Aug 2020 07:01:43 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-195.ams2.redhat.com
- [10.36.112.195])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 489C95DA7E;
- Fri, 21 Aug 2020 07:01:42 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 36D4E241; Fri, 21 Aug 2020 09:01:42 +0200 (CEST)
-Date: Fri, 21 Aug 2020 09:01:42 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Jiri Slaby <jirislaby@kernel.org>
-Subject: Re: [PATCH 2/2] drm/virtio: Remove open-coded commit-tail function
-Message-ID: <20200821070142.iwobpibai6aavpl6@sirius.home.kraxel.org>
-References: <20200707201229.472834-4-daniel.vetter@ffwll.ch>
- <20200709123339.547390-1-daniel.vetter@ffwll.ch>
- <20200709123339.547390-2-daniel.vetter@ffwll.ch>
- <5cb80369-75a5-fc83-4683-3a6fc2814104@kernel.org>
- <20200819132408.jnqjhdgd4jbnarhh@sirius.home.kraxel.org>
- <8a80b434-c8ed-daa3-753b-dd2ec89b9067@kernel.org>
+ Fri, 21 Aug 2020 08:01:33 +0000 (UTC)
+Received: from gwarestrin.arnor.me.apana.org.au ([192.168.0.7])
+ by fornost.hmeau.com with smtp (Exim 4.92 #5 (Debian))
+ id 1k91zF-00049M-O4; Fri, 21 Aug 2020 18:01:22 +1000
+Received: by gwarestrin.arnor.me.apana.org.au (sSMTP sendmail emulation);
+ Fri, 21 Aug 2020 18:01:21 +1000
+Date: Fri, 21 Aug 2020 18:01:21 +1000
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Eric Biggers <ebiggers@kernel.org>
+Subject: Re: [PATCH] crypto: virtio - don't use 'default m'
+Message-ID: <20200821080121.GA25399@gondor.apana.org.au>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <8a80b434-c8ed-daa3-753b-dd2ec89b9067@kernel.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: linux-rdma@vger.kernel.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel.vetter@intel.com>
+In-Reply-To: <20200812192053.1769235-1-ebiggers@kernel.org>
+X-Newsgroups: apana.lists.os.linux.cryptoapi,
+ apana.lists.os.linux.virtualization
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: mst@redhat.com, rammuthiah@google.com,
+ virtualization@lists.linux-foundation.org, linux-crypto@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,25 +72,25 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Aug 20, 2020 at 08:32:51AM +0200, Jiri Slaby wrote:
-> On 19. 08. 20, 15:24, Gerd Hoffmann wrote:
-> > On Wed, Aug 19, 2020 at 02:43:28PM +0200, Jiri Slaby wrote:
-> >> On 09. 07. 20, 14:33, Daniel Vetter wrote:
-> >>> Exactly matches the one in the helpers.
-> >>
-> >> It's not that exact. The order of modeset_enables and planes is
-> >> different. And this causes a regression -- no fb in qemu.
-> > 
-> > Does https://patchwork.freedesktop.org/patch/385980/ help?
+Eric Biggers <ebiggers@kernel.org> wrote:
+> From: Ram Muthiah <rammuthiah@google.com>
 > 
-> Yes, it does.
+> Drivers shouldn't be enabled by default unless there is a very good
+> reason to do so.  There doesn't seem to be any such reason for the
+> virtio crypto driver, so change it to the default of 'n'.
+> 
+> Signed-off-by: Ram Muthiah <rammuthiah@google.com>
+> [EB: adjusted commit message]
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+> drivers/crypto/virtio/Kconfig | 1 -
+> 1 file changed, 1 deletion(-)
 
-Any chance you can send a tested-by & acked-by for the series so I can
-get it merged?
-
-thanks,
-  Gerd
-
+Patch applied.  Thanks.
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
