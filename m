@@ -1,54 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDAB324F6F2
-	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 11:07:14 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A87E624F6F6
+	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 11:07:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 3412020530;
-	Mon, 24 Aug 2020 09:07:13 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 5C79A860F0;
+	Mon, 24 Aug 2020 09:07:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nIoMD61KvxWm; Mon, 24 Aug 2020 09:07:01 +0000 (UTC)
+	with ESMTP id 2gH0wHCs1Gos; Mon, 24 Aug 2020 09:07:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id B683920531;
-	Mon, 24 Aug 2020 09:06:54 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A8FB1860C0;
+	Mon, 24 Aug 2020 09:07:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9E117C016F;
-	Mon, 24 Aug 2020 09:06:54 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 83F80C0051;
+	Mon, 24 Aug 2020 09:07:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 39B34C0895
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EF7C4C0895
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:06:51 +0000 (UTC)
+ Mon, 24 Aug 2020 09:07:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 1C3E0878DD
+ by silver.osuosl.org (Postfix) with ESMTP id D61DA2274B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:06:51 +0000 (UTC)
+ Mon, 24 Aug 2020 09:07:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3-DpQOAQmVzK
+ with ESMTP id HjE+6izldQOD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:06:50 +0000 (UTC)
+ Mon, 24 Aug 2020 09:06:55 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id F2D5A878D6
+ by silver.osuosl.org (Postfix) with ESMTPS id 156F42050E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:06:49 +0000 (UTC)
+ Mon, 24 Aug 2020 09:06:51 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2bb8d.dip0.t-ipconnect.de
  [79.242.187.141])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 248CC12E7;
+ by theia.8bytes.org (Postfix) with ESMTPSA id B8674168A;
  Mon, 24 Aug 2020 10:56:30 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v6 72/76] x86/head/64: Rename start_cpu0
-Date: Mon, 24 Aug 2020 10:55:07 +0200
-Message-Id: <20200824085511.7553-73-joro@8bytes.org>
+Subject: [PATCH v6 73/76] x86/sev-es: Support CPU offline/online
+Date: Mon, 24 Aug 2020 10:55:08 +0200
+Message-Id: <20200824085511.7553-74-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200824085511.7553-1-joro@8bytes.org>
 References: <20200824085511.7553-1-joro@8bytes.org>
@@ -84,96 +84,119 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-For SEV-ES this entry point will be used for restarting APs after they
-have been offlined. Remove the '0' from the name to reflect that.
+Add a play_dead handler when running under SEV-ES. This is needed
+because the hypervisor can't deliver an SIPI request to restart the AP.
+Instead the kernel has to issue a VMGEXIT to halt the VCPU until the
+hypervisor wakes it up again.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
-Reviewed-by: Kees Cook <keescook@chromium.org>
-Link: https://lore.kernel.org/r/20200724160336.5435-72-joro@8bytes.org
+Link: https://lore.kernel.org/r/20200724160336.5435-73-joro@8bytes.org
 ---
- arch/x86/include/asm/cpu.h | 2 +-
- arch/x86/kernel/head_32.S  | 4 ++--
- arch/x86/kernel/head_64.S  | 6 +++---
- arch/x86/kernel/smpboot.c  | 4 ++--
- 4 files changed, 8 insertions(+), 8 deletions(-)
+ arch/x86/include/uapi/asm/svm.h |  1 +
+ arch/x86/kernel/sev-es.c        | 64 +++++++++++++++++++++++++++++++++
+ 2 files changed, 65 insertions(+)
 
-diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
-index da78ccbd493b..1536b607971f 100644
---- a/arch/x86/include/asm/cpu.h
-+++ b/arch/x86/include/asm/cpu.h
-@@ -29,7 +29,7 @@ struct x86_cpu {
- #ifdef CONFIG_HOTPLUG_CPU
- extern int arch_register_cpu(int num);
- extern void arch_unregister_cpu(int);
--extern void start_cpu0(void);
-+extern void start_cpu(void);
- #ifdef CONFIG_DEBUG_HOTPLUG_CPU0
- extern int _debug_hotplug_cpu(int cpu, int action);
- #endif
-diff --git a/arch/x86/kernel/head_32.S b/arch/x86/kernel/head_32.S
-index 7ed84c282233..f63e1b7f4141 100644
---- a/arch/x86/kernel/head_32.S
-+++ b/arch/x86/kernel/head_32.S
-@@ -143,12 +143,12 @@ SYM_CODE_END(startup_32)
-  * up already except stack. We just set up stack here. Then call
-  * start_secondary().
-  */
--SYM_FUNC_START(start_cpu0)
-+SYM_FUNC_START(start_cpu)
- 	movl initial_stack, %ecx
- 	movl %ecx, %esp
- 	call *(initial_code)
- 1:	jmp 1b
--SYM_FUNC_END(start_cpu0)
-+SYM_FUNC_END(start_cpu)
- #endif
+diff --git a/arch/x86/include/uapi/asm/svm.h b/arch/x86/include/uapi/asm/svm.h
+index a19ce9681ec2..20a05839dd9a 100644
+--- a/arch/x86/include/uapi/asm/svm.h
++++ b/arch/x86/include/uapi/asm/svm.h
+@@ -84,6 +84,7 @@
+ /* SEV-ES software-defined VMGEXIT events */
+ #define SVM_VMGEXIT_MMIO_READ			0x80000001
+ #define SVM_VMGEXIT_MMIO_WRITE			0x80000002
++#define SVM_VMGEXIT_AP_HLT_LOOP			0x80000004
+ #define SVM_VMGEXIT_AP_JUMP_TABLE		0x80000005
+ #define		SVM_VMGEXIT_SET_AP_JUMP_TABLE			0
+ #define		SVM_VMGEXIT_GET_AP_JUMP_TABLE			1
+diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
+index 09a45ccd6c1d..597ebb73411f 100644
+--- a/arch/x86/kernel/sev-es.c
++++ b/arch/x86/kernel/sev-es.c
+@@ -29,6 +29,8 @@
+ #include <asm/processor.h>
+ #include <asm/traps.h>
+ #include <asm/svm.h>
++#include <asm/smp.h>
++#include <asm/cpu.h>
  
- /*
-diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index a708107688a2..352311c5d8d1 100644
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -309,15 +309,15 @@ SYM_CODE_END(secondary_startup_64)
+ #define DR7_RESET_VALUE        0x400
  
- #ifdef CONFIG_HOTPLUG_CPU
- /*
-- * Boot CPU0 entry point. It's called from play_dead(). Everything has been set
-+ * CPU entry point. It's called from play_dead(). Everything has been set
-  * up already except stack. We just set up stack here. Then call
-  * start_secondary() via .Ljump_to_C_code.
-  */
--SYM_CODE_START(start_cpu0)
-+SYM_CODE_START(start_cpu)
- 	UNWIND_HINT_EMPTY
- 	movq	initial_stack(%rip), %rsp
- 	jmp	.Ljump_to_C_code
--SYM_CODE_END(start_cpu0)
-+SYM_CODE_END(start_cpu)
- #endif
- 
- 	/* Both SMP bootup and ACPI suspend change these variables */
-diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
-index fb55d28332e2..c6311c55b84c 100644
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -1726,7 +1726,7 @@ static inline void mwait_play_dead(void)
- 		 * If NMI wants to wake up CPU0, start CPU0.
- 		 */
- 		if (wakeup_cpu0())
--			start_cpu0();
-+			start_cpu();
- 	}
+@@ -522,6 +524,66 @@ static bool __init sev_es_setup_ghcb(void)
+ 	return true;
  }
  
-@@ -1741,7 +1741,7 @@ void hlt_play_dead(void)
- 		 * If NMI wants to wake up CPU0, start CPU0.
- 		 */
- 		if (wakeup_cpu0())
--			start_cpu0();
-+			start_cpu();
++#ifdef CONFIG_HOTPLUG_CPU
++static void sev_es_ap_hlt_loop(void)
++{
++	struct ghcb_state state;
++	struct ghcb *ghcb;
++
++	ghcb = sev_es_get_ghcb(&state);
++
++	while (true) {
++		vc_ghcb_invalidate(ghcb);
++		ghcb_set_sw_exit_code(ghcb, SVM_VMGEXIT_AP_HLT_LOOP);
++		ghcb_set_sw_exit_info_1(ghcb, 0);
++		ghcb_set_sw_exit_info_2(ghcb, 0);
++
++		sev_es_wr_ghcb_msr(__pa(ghcb));
++		VMGEXIT();
++
++		/* Wakeup signal? */
++		if (ghcb_sw_exit_info_2_is_valid(ghcb) &&
++		    ghcb->save.sw_exit_info_2)
++			break;
++	}
++
++	sev_es_put_ghcb(&state);
++}
++
++/*
++ * Play_dead handler when running under SEV-ES. This is needed because
++ * the hypervisor can't deliver an SIPI request to restart the AP.
++ * Instead the kernel has to issue a VMGEXIT to halt the VCPU until the
++ * hypervisor wakes it up again.
++ */
++static void sev_es_play_dead(void)
++{
++	play_dead_common();
++
++	/* IRQs now disabled */
++
++	sev_es_ap_hlt_loop();
++
++	/*
++	 * If we get here, the VCPU was woken up again. Jump to CPU
++	 * startup code to get it back online.
++	 */
++
++	start_cpu();
++}
++#else  /* CONFIG_HOTPLUG_CPU */
++#define sev_es_play_dead	native_play_dead
++#endif /* CONFIG_HOTPLUG_CPU */
++
++#ifdef CONFIG_SMP
++static void __init sev_es_setup_play_dead(void)
++{
++	smp_ops.play_dead = sev_es_play_dead;
++}
++#else
++static inline void sev_es_setup_play_dead(void) { }
++#endif
++
+ static void __init sev_es_alloc_runtime_data(int cpu)
+ {
+ 	struct sev_es_runtime_data *data;
+@@ -569,6 +631,8 @@ void __init sev_es_init_vc_handling(void)
+ 		sev_es_init_ghcb(cpu);
+ 		sev_es_setup_vc_stacks(cpu);
  	}
++
++	sev_es_setup_play_dead();
  }
  
+ static void __init vc_early_forward_exception(struct es_em_ctxt *ctxt)
 -- 
 2.28.0
 
