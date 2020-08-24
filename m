@@ -1,54 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E9B124F627
-	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 10:56:50 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D22F24F61A
+	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 10:56:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id D63DB2050B;
-	Mon, 24 Aug 2020 08:56:48 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id ADDCB878AE;
+	Mon, 24 Aug 2020 08:56:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KkDdwUcuo8Pv; Mon, 24 Aug 2020 08:56:38 +0000 (UTC)
+	with ESMTP id dZepVti9BYXT; Mon, 24 Aug 2020 08:56:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id A70642052E;
-	Mon, 24 Aug 2020 08:56:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 23C158795E;
+	Mon, 24 Aug 2020 08:56:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 85676C089E;
-	Mon, 24 Aug 2020 08:56:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F0261C0051;
+	Mon, 24 Aug 2020 08:56:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6E324C0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 81A7FC0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 08:56:16 +0000 (UTC)
+ Mon, 24 Aug 2020 08:56:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 54A8885F7E
+ by hemlock.osuosl.org (Postfix) with ESMTP id 710BE88171
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 08:56:16 +0000 (UTC)
+ Mon, 24 Aug 2020 08:56:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id j7w5hWFD3pZ5
+ with ESMTP id IGvT5iLWtfua
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 08:56:14 +0000 (UTC)
+ Mon, 24 Aug 2020 08:56:13 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5231285F79
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 5CF2288334
  for <virtualization@lists.linux-foundation.org>;
  Mon, 24 Aug 2020 08:56:13 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2bb8d.dip0.t-ipconnect.de
  [79.242.187.141])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id C58B2F5C;
- Mon, 24 Aug 2020 10:56:05 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 55EA5F69;
+ Mon, 24 Aug 2020 10:56:06 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v6 34/76] x86/head/64: Switch to initial stack earlier
-Date: Mon, 24 Aug 2020 10:54:29 +0200
-Message-Id: <20200824085511.7553-35-joro@8bytes.org>
+Subject: [PATCH v6 35/76] x86/head/64: Make fixup_pointer() static inline
+Date: Mon, 24 Aug 2020 10:54:30 +0200
+Message-Id: <20200824085511.7553-36-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200824085511.7553-1-joro@8bytes.org>
 References: <20200824085511.7553-1-joro@8bytes.org>
@@ -84,48 +84,54 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Make sure there is a stack once the kernel runs from virual addresses.
-At this stage any secondary CPU which boots will have lost its stack
-because the kernel switched to a new page-table which does not map the
-real-mode stack anymore.
-
-This is needed for handling early #VC exceptions caused by instructions
-like CPUID.
+Also move it to a header file so that it can be used in the idt code
+to setup the early IDT.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 Reviewed-by: Kees Cook <keescook@chromium.org>
-Link: https://lore.kernel.org/r/20200724160336.5435-34-joro@8bytes.org
+Link: https://lore.kernel.org/r/20200724160336.5435-35-joro@8bytes.org
 ---
- arch/x86/kernel/head_64.S | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ arch/x86/include/asm/setup.h | 10 ++++++++++
+ arch/x86/kernel/head64.c     |  5 -----
+ 2 files changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index 057c7bd3eeb6..a5e1939d1dc9 100644
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -200,6 +200,12 @@ SYM_CODE_START(secondary_startup_64)
- 	movl	initial_gs+4(%rip),%edx
- 	wrmsr
+diff --git a/arch/x86/include/asm/setup.h b/arch/x86/include/asm/setup.h
+index 5c2fd05bd52c..8aa6ba0427b0 100644
+--- a/arch/x86/include/asm/setup.h
++++ b/arch/x86/include/asm/setup.h
+@@ -74,6 +74,16 @@ static inline void x86_ce4100_early_setup(void) { }
+ extern struct boot_params boot_params;
+ extern char _text[];
  
-+	/*
-+	 * Setup a boot time stack - Any secondary CPU will have lost its stack
-+	 * by now because the cr3-switch above unmaps the real-mode stack
-+	 */
-+	movq initial_stack(%rip), %rsp
++/*
++ * This function is used in C code that runs while the kernel still runs on
++ * identity mapped addresses to get the correct address of kernel pointers in
++ * the identity mapping.
++ */
++static __always_inline void *fixup_pointer(void *ptr, unsigned long physaddr)
++{
++	return ptr - (void *)_text + (void *)physaddr;
++}
 +
- 	/* Check if nx is implemented */
- 	movl	$0x80000001, %eax
- 	cpuid
-@@ -220,9 +226,6 @@ SYM_CODE_START(secondary_startup_64)
- 	/* Make changes effective */
- 	movq	%rax, %cr0
+ static inline bool kaslr_enabled(void)
+ {
+ 	return IS_ENABLED(CONFIG_RANDOMIZE_MEMORY) &&
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index b0ab5627900b..8703292a35e9 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -82,11 +82,6 @@ static struct desc_ptr startup_gdt_descr = {
  
--	/* Setup a boot time stack */
--	movq initial_stack(%rip), %rsp
+ #define __head	__section(.head.text)
+ 
+-static void __head *fixup_pointer(void *ptr, unsigned long physaddr)
+-{
+-	return ptr - (void *)_text + (void *)physaddr;
+-}
 -
- 	/* zero EFLAGS after setting rsp */
- 	pushq $0
- 	popfq
+ static unsigned long __head *fixup_long(void *ptr, unsigned long physaddr)
+ {
+ 	return fixup_pointer(ptr, physaddr);
 -- 
 2.28.0
 
