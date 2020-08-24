@@ -2,53 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A82C24F61C
-	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 10:56:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0600524F611
+	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 10:56:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E87AB85DC1;
-	Mon, 24 Aug 2020 08:56:26 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A608085EBF;
+	Mon, 24 Aug 2020 08:56:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id b0i7c3QL6zNM; Mon, 24 Aug 2020 08:56:25 +0000 (UTC)
+	with ESMTP id FSNPZB737Vt8; Mon, 24 Aug 2020 08:56:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 176EE85E09;
-	Mon, 24 Aug 2020 08:56:25 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2C50C85FA7;
+	Mon, 24 Aug 2020 08:56:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B078C0051;
-	Mon, 24 Aug 2020 08:56:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 24E7EC0051;
+	Mon, 24 Aug 2020 08:56:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E6C14C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3C176C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 08:56:23 +0000 (UTC)
+ Mon, 24 Aug 2020 08:56:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id C7CD5204E8
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 2BABD85F59
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 08:56:23 +0000 (UTC)
+ Mon, 24 Aug 2020 08:56:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QLMmdeuvSVPl
+ with ESMTP id 9ZSKqBbek5BB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 08:56:14 +0000 (UTC)
+ Mon, 24 Aug 2020 08:56:06 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 0E70A20514
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 7AD8A85F45
  for <virtualization@lists.linux-foundation.org>;
  Mon, 24 Aug 2020 08:56:05 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2bb8d.dip0.t-ipconnect.de
  [79.242.187.141])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id ABCE1E50;
- Mon, 24 Aug 2020 10:56:00 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 36D06E67;
+ Mon, 24 Aug 2020 10:56:01 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v6 27/76] x86/sev-es: Add CPUID handling to #VC handler
-Date: Mon, 24 Aug 2020 10:54:22 +0200
-Message-Id: <20200824085511.7553-28-joro@8bytes.org>
+Subject: [PATCH v6 28/76] x86/idt: Move IDT to data segment
+Date: Mon, 24 Aug 2020 10:54:23 +0200
+Message-Id: <20200824085511.7553-29-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200824085511.7553-1-joro@8bytes.org>
 References: <20200824085511.7553-1-joro@8bytes.org>
@@ -82,86 +82,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Joerg Roedel <jroedel@suse.de>
 
-Handle #VC exceptions caused by CPUID instructions. These happen in
-early boot code when the KASLR code checks for RDTSC.
+With SEV-ES, exception handling is needed very early, even before the
+kernel has cleared the bss segment. In order to prevent clearing the
+currently used IDT, move the IDT to the data segment.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: Adapt to #VC handling framework ]
-Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
-Link: https://lore.kernel.org/r/20200724160336.5435-27-joro@8bytes.org
+Reviewed-by: Kees Cook <keescook@chromium.org>
+Link: https://lore.kernel.org/r/20200724160336.5435-28-joro@8bytes.org
 ---
- arch/x86/boot/compressed/sev-es.c |  4 ++++
- arch/x86/kernel/sev-es-shared.c   | 35 +++++++++++++++++++++++++++++++
- 2 files changed, 39 insertions(+)
+ arch/x86/kernel/idt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/boot/compressed/sev-es.c b/arch/x86/boot/compressed/sev-es.c
-index 4f2fc7a85c2f..851d7af29d79 100644
---- a/arch/x86/boot/compressed/sev-es.c
-+++ b/arch/x86/boot/compressed/sev-es.c
-@@ -16,6 +16,7 @@
- #include <asm/trapnr.h>
- #include <asm/trap_pf.h>
- #include <asm/msr-index.h>
-+#include <asm/fpu/xcr.h>
- #include <asm/ptrace.h>
- #include <asm/svm.h>
+diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
+index 7ecf9babf0cb..34fcc58b81b5 100644
+--- a/arch/x86/kernel/idt.c
++++ b/arch/x86/kernel/idt.c
+@@ -158,7 +158,7 @@ static const __initconst struct idt_data apic_idts[] = {
+ };
  
-@@ -183,6 +184,9 @@ void do_boot_stage2_vc(struct pt_regs *regs, unsigned long exit_code)
- 	case SVM_EXIT_IOIO:
- 		result = vc_handle_ioio(boot_ghcb, &ctxt);
- 		break;
-+	case SVM_EXIT_CPUID:
-+		result = vc_handle_cpuid(boot_ghcb, &ctxt);
-+		break;
- 	default:
- 		result = ES_UNSUPPORTED;
- 		break;
-diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
-index bae7cf28455b..a6b41910b8ab 100644
---- a/arch/x86/kernel/sev-es-shared.c
-+++ b/arch/x86/kernel/sev-es-shared.c
-@@ -432,3 +432,38 @@ static enum es_result vc_handle_ioio(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
+ /* Must be page-aligned because the real IDT is used in the cpu entry area */
+-static gate_desc idt_table[IDT_ENTRIES] __page_aligned_bss;
++static gate_desc idt_table[IDT_ENTRIES] __page_aligned_data;
  
- 	return ret;
- }
-+
-+static enum es_result vc_handle_cpuid(struct ghcb *ghcb,
-+				      struct es_em_ctxt *ctxt)
-+{
-+	struct pt_regs *regs = ctxt->regs;
-+	u32 cr4 = native_read_cr4();
-+	enum es_result ret;
-+
-+	ghcb_set_rax(ghcb, regs->ax);
-+	ghcb_set_rcx(ghcb, regs->cx);
-+
-+	if (cr4 & X86_CR4_OSXSAVE)
-+		/* Safe to read xcr0 */
-+		ghcb_set_xcr0(ghcb, xgetbv(XCR_XFEATURE_ENABLED_MASK));
-+	else
-+		/* xgetbv will cause #GP - use reset value for xcr0 */
-+		ghcb_set_xcr0(ghcb, 1);
-+
-+	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_CPUID, 0, 0);
-+	if (ret != ES_OK)
-+		return ret;
-+
-+	if (!(ghcb_rax_is_valid(ghcb) &&
-+	      ghcb_rbx_is_valid(ghcb) &&
-+	      ghcb_rcx_is_valid(ghcb) &&
-+	      ghcb_rdx_is_valid(ghcb)))
-+		return ES_VMM_ERROR;
-+
-+	regs->ax = ghcb->save.rax;
-+	regs->bx = ghcb->save.rbx;
-+	regs->cx = ghcb->save.rcx;
-+	regs->dx = ghcb->save.rdx;
-+
-+	return ES_OK;
-+}
+ static struct desc_ptr idt_descr __ro_after_init = {
+ 	.size		= IDT_TABLE_SIZE - 1,
 -- 
 2.28.0
 
