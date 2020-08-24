@@ -2,108 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C94924F0A3
-	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 02:04:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 729A124F5FB
+	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 10:56:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D4B2F85B78;
-	Mon, 24 Aug 2020 00:04:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 21E6585F61;
+	Mon, 24 Aug 2020 08:56:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bxL-t87GMK_5; Mon, 24 Aug 2020 00:04:55 +0000 (UTC)
+	with ESMTP id I38snK7imghj; Mon, 24 Aug 2020 08:55:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 37CAC85C1D;
-	Mon, 24 Aug 2020 00:04:55 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BD96085E09;
+	Mon, 24 Aug 2020 08:55:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 16D5FC0891;
-	Mon, 24 Aug 2020 00:04:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A4AE5C089E;
+	Mon, 24 Aug 2020 08:55:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4B44AC0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 03149C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 00:04:54 +0000 (UTC)
+ Mon, 24 Aug 2020 08:55:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 47E4685B81
+ by whitealder.osuosl.org (Postfix) with ESMTP id F235D8777F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 00:04:54 +0000 (UTC)
+ Mon, 24 Aug 2020 08:55:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iBCHqPqdbVoE
+ with ESMTP id aX8pYQAtWbxo
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 00:04:49 +0000 (UTC)
+ Mon, 24 Aug 2020 08:55:50 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
- [209.85.166.194])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4582785B78
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 2683587747
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 00:04:48 +0000 (UTC)
-Received: by mail-il1-f194.google.com with SMTP id j9so5790274ilc.11
- for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Aug 2020 17:04:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tcd-ie.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=2qvzvkep7ZlQHNyjrGsuXQAp+x7s+RjdNiOv81NxtoQ=;
- b=ph3cmZeijsQTsHnHnrr9eCGgxMPexaLwCGnu3F9Od9T7oE9SJ1xriseSecoaLR+A31
- cxdttU99z8vHmtpSvs9wLGOOgPOY6GzwuKuovZh4UMjplaxKJu/wyAtKKGV99cTnuUCc
- b9jW667DJd78gpOSqL093TQrnCvZ9zpW4sDgc9e3s4gqdpHbIh0cqwIbSVLaQrTLqDAX
- thER0vKrZAtqkOJvYQeGZuITMeh4kPZ6AWC1kOvIEmnWvuxZr35lD2OOnlXMpkqB5GBo
- XlqFU7D/ggoXmysuTUVEiDWk1jvnBEMzHRuwpliqu/K2HYrSEPvB6WXxqYArt4mYifKa
- QdMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=2qvzvkep7ZlQHNyjrGsuXQAp+x7s+RjdNiOv81NxtoQ=;
- b=K03+lR5o8RQhw4l9o42fFqkBp70HPCLni6AleMwGrFuqTX2PhBgfmez3cx17TuHwlg
- 3xzHIUUL/sq6RREqTnlFLHbh3riwE34TFPph9WeunVNMzB2z/+dPJ5sWwXgSQPakMGnR
- 6XHhnulECkG6WIv9W9t5Eo0A2YeLRt9lt+a17j4TlMQ/nfWd9LcTiK7EZL4akS9EsKje
- FIkd1YS0c4OYwKPa2/HQ60KZ/37JP+WwROnw6LcE2GboqDMe5Iq9NjuDx87F8VKXRT64
- nQwhenHggUMjP8lKeY/u0Au52lI8uhYPvZkA5U/gjB6V+bkwlVVJ+446vN60Tp5JWVP8
- pcNg==
-X-Gm-Message-State: AOAM530RAQDXnJ7Cnj0KyIREPYB17Pcp3DULdr08Wf2j67xtAbFGTDI8
- Qq10YnXaPxtFIcMySui+vVMLkYofyXotaYMBZtRryA==
-X-Google-Smtp-Source: ABdhPJx+Rb9Dh5afCkPV93ubbfa83YINwHuyBNL6aGGIC9gNFt/GVdQQ5DqMV2LQPpqLPd5cGrS+QMzugsAJ9rHE3h4=
-X-Received: by 2002:a92:4f:: with SMTP id 76mr2640989ila.11.1598227486317;
- Sun, 23 Aug 2020 17:04:46 -0700 (PDT)
+ Mon, 24 Aug 2020 08:55:49 +0000 (UTC)
+Received: from cap.home.8bytes.org (p4ff2bb8d.dip0.t-ipconnect.de
+ [79.242.187.141])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 2A0AA2DA;
+ Mon, 24 Aug 2020 10:55:46 +0200 (CEST)
+From: Joerg Roedel <joro@8bytes.org>
+To: x86@kernel.org
+Subject: [PATCH v6 00/76] x86: SEV-ES Guest Support
+Date: Mon, 24 Aug 2020 10:53:55 +0200
+Message-Id: <20200824085511.7553-1-joro@8bytes.org>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-References: <20191221150402.13868-1-murphyt7@tcd.ie>
- <465815ae-9292-f37a-59b9-03949cb68460@deltatee.com>
- <20200529124523.GA11817@infradead.org>
- <CGME20200529190523eucas1p2c086133e707257c0cdc002f502d4f51d@eucas1p2.samsung.com>
- <33137cfb-603c-86e8-1091-f36117ecfaf3@deltatee.com>
- <ef2150d5-7b6a-df25-c10d-e43316fe7812@samsung.com>
- <b9140772-0370-a858-578c-af503a06d8e9@deltatee.com>
-In-Reply-To: <b9140772-0370-a858-578c-af503a06d8e9@deltatee.com>
-From: Tom Murphy <murphyt7@tcd.ie>
-Date: Mon, 24 Aug 2020 01:04:35 +0100
-Message-ID: <CALQxJuutRaeX89k2o4ffTKYRMizmMu0XbRnzpFuSSrkQR02jKg@mail.gmail.com>
-Subject: Re: [PATCH 0/8] Convert the intel iommu driver to the dma-iommu api
-To: Logan Gunthorpe <logang@deltatee.com>
-Cc: kvm@vger.kernel.org, David Airlie <airlied@linux.ie>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Bjorn Andersson <bjorn.andersson@linaro.org>,
- linux-tegra@vger.kernel.org, Julien Grall <julien.grall@arm.com>,
- Thierry Reding <thierry.reding@gmail.com>, Will Deacon <will@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Jean-Philippe Brucker <jean-philippe@linaro.org>,
- linux-samsung-soc@vger.kernel.org, Marc Zyngier <maz@kernel.org>,
- Krzysztof Kozlowski <krzk@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>,
- Christoph Hellwig <hch@infradead.org>, linux-rockchip@lists.infradead.org,
- Andy Gross <agross@kernel.org>, linux-arm-kernel@lists.infradead.org,
- linux-s390@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>,
- linux-mediatek@lists.infradead.org, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Thomas Gleixner <tglx@linutronix.de>,
+Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Joerg Roedel <jroedel@suse.de>, Mike Stunes <mstunes@vmware.com>,
+ Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
+ Joerg Roedel <joro@8bytes.org>, Dave Hansen <dave.hansen@linux.intel.com>,
+ linux-kernel@vger.kernel.org,
+ Sean Christopherson <sean.j.christopherson@intel.com>,
  virtualization@lists.linux-foundation.org,
- Gerald Schaefer <gerald.schaefer@de.ibm.com>,
- David Woodhouse <dwmw2@infradead.org>, Cornelia Huck <cohuck@redhat.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- iommu@lists.linux-foundation.org, Kukjin Kim <kgene@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>
+ Martin Radev <martin.b.radev@gmail.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
+ David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,68 +80,205 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Logan/All,
+From: Joerg Roedel <jroedel@suse.de>
 
-I have added a check for the sg_dma_len == 0 :
-"""
- } __sgt_iter(struct scatterlist *sgl, bool dma) {
-        struct sgt_iter s = { .sgp = sgl };
+Hi,
 
-+       if (sgl && sg_dma_len(sgl) == 0)
-+           s.sgp = NULL;
+here is the new version of the SEV-ES client enabling patch-set. It is
+based on the latest tip/master branch and contains the necessary
+changes. In particular those ar:
 
-        if (s.sgp) {
-            .....
-"""
-at location [1].
-but it doens't fix the problem.
+	- Enabling CR4.FSGSBASE early on supported processors so that
+	  early #VC exceptions on APs can be handled.
 
-You're right though, this change does need to be made, this code
-doesn't handle pages of sg_dma_len(sg) == 0 correctly
-So my guess is that we have more bugs in other parts of the i915
-driver (or there is a problem with my "sg_dma_len == 0" fix above).
-I have been trying to spot where else the code might be buggy but I
-haven't had any luck so far.
+	- Add another patch (patch 1) to fix a KVM frame-size build
+	  warning on 32bit.
 
-I'm doing a microconfernce (at LPC 2020) this wednesdays [1] on this
-if you're interested in attending.
-I'm hoping I can chat about it with a few people and find how can
-reproduce and fix this issues. I don't have any more time I can give
-to this unfortunately and it would be a shame for the work to go to
-waste.
+The previous versions can be found as a linked-list starting here:
 
-[0] https://github.com/torvalds/linux/blob/d012a7190fc1fd72ed48911e77ca97ba4521bccd/drivers/gpu/drm/i915/i915_scatterlist.h#L28
-[1] https://linuxplumbersconf.org/event/7/contributions/846/
+	https://lore.kernel.org/lkml/20200724160336.5435-1-joro@8bytes.org/
 
-On Fri, 29 May 2020 at 22:21, Logan Gunthorpe <logang@deltatee.com> wrote:
->
->
->
-> On 2020-05-29 3:11 p.m., Marek Szyprowski wrote:
-> > Patches are pending:
-> > https://lore.kernel.org/linux-iommu/20200513132114.6046-1-m.szyprowski@samsung.com/T/
->
-> Cool, nice! Though, I still don't think that fixes the issue in
-> i915_scatterlist.h given it still ignores sg_dma_len() and strictly
-> relies on sg_next()/sg_is_last() to stop iterating -- and I suspect this
-> is the bug that got in Tom's way.
->
-> >> However, as Robin pointed out, there are other ugly tricks like stopping
-> >> iterating through the SGL when sg_dma_len() is zero. For example, the
-> >> AMD driver appears to use drm_prime_sg_to_page_addr_arrays() which does
-> >> this trick and thus likely isn't buggy (otherwise, I'd expect someone to
-> >> have complained by now seeing AMD has already switched to IOMMU-DMA.
-> >
-> > I'm not sure that this is a trick. Stopping at zero sg_dma_len() was
-> > somewhere documented.
->
-> Well whatever you want to call it, it is ugly to have some drivers doing
-> one thing with the returned value and others assuming there's an extra
-> zero at the end. It just causes confusion for people reading/copying the
-> code. It would be better if they are all consistent. However, I concede
-> stopping at zero should not be broken, presently.
->
-> Logan
+There you also find more detailed information about SEV-ES in general
+and its implications.
+
+Please review.
+
+Thanks,
+
+	Joerg
+
+Borislav Petkov (1):
+  KVM: SVM: Use __packed shorthand
+
+Doug Covelli (1):
+  x86/vmware: Add VMware specific handling for VMMCALL under SEV-ES
+
+Joerg Roedel (54):
+  KVM: SVM: nested: Don't allocate VMCB structures on stack
+  KVM: SVM: Add GHCB Accessor functions
+  x86/traps: Move pf error codes to <asm/trap_pf.h>
+  x86/insn: Make inat-tables.c suitable for pre-decompression code
+  x86/umip: Factor out instruction fetch
+  x86/umip: Factor out instruction decoding
+  x86/insn: Add insn_get_modrm_reg_off()
+  x86/insn: Add insn_has_rep_prefix() helper
+  x86/boot/compressed/64: Disable red-zone usage
+  x86/boot/compressed/64: Add IDT Infrastructure
+  x86/boot/compressed/64: Rename kaslr_64.c to ident_map_64.c
+  x86/boot/compressed/64: Add page-fault handler
+  x86/boot/compressed/64: Always switch to own page-table
+  x86/boot/compressed/64: Don't pre-map memory in KASLR code
+  x86/boot/compressed/64: Change add_identity_map() to take start and
+    end
+  x86/boot/compressed/64: Add stage1 #VC handler
+  x86/boot/compressed/64: Call set_sev_encryption_mask earlier
+  x86/boot/compressed/64: Check return value of
+    kernel_ident_mapping_init()
+  x86/boot/compressed/64: Add set_page_en/decrypted() helpers
+  x86/boot/compressed/64: Setup GHCB Based VC Exception handler
+  x86/boot/compressed/64: Unmap GHCB page before booting the kernel
+  x86/fpu: Move xgetbv()/xsetbv() into separate header
+  x86/idt: Move IDT to data segment
+  x86/idt: Split idt_data setup out of set_intr_gate()
+  x86/head/64: Install startup GDT
+  x86/head/64: Setup MSR_GS_BASE before calling into C code
+  x86/head/64: Load GDT after switch to virtual addresses
+  x86/head/64: Load segment registers earlier
+  x86/head/64: Switch to initial stack earlier
+  x86/head/64: Make fixup_pointer() static inline
+  x86/head/64: Load IDT earlier
+  x86/head/64: Move early exception dispatch to C code
+  x86/head/64: Set CR4.FSGSBASE early
+  x86/sev-es: Add SEV-ES Feature Detection
+  x86/sev-es: Print SEV-ES info into kernel log
+  x86/sev-es: Compile early handler code into kernel image
+  x86/sev-es: Setup early #VC handler
+  x86/sev-es: Setup GHCB based boot #VC handler
+  x86/sev-es: Allocate and Map IST stack for #VC handler
+  x86/sev-es: Adjust #VC IST Stack on entering NMI handler
+  x86/dumpstack/64: Add noinstr version of get_stack_info()
+  x86/entry/64: Add entry code for #VC handler
+  x86/sev-es: Wire up existing #VC exit-code handlers
+  x86/sev-es: Handle instruction fetches from user-space
+  x86/sev-es: Handle MMIO String Instructions
+  x86/sev-es: Handle #AC Events
+  x86/sev-es: Handle #DB Events
+  x86/paravirt: Allow hypervisor specific VMMCALL handling under SEV-ES
+  x86/realmode: Add SEV-ES specific trampoline entry point
+  x86/smpboot: Setup TSS for starting AP
+  x86/head/64: Don't call verify_cpu() on starting APs
+  x86/head/64: Rename start_cpu0
+  x86/sev-es: Support CPU offline/online
+  x86/sev-es: Handle NMI State
+
+Martin Radev (1):
+  x86/sev-es: Check required CPU features for SEV-ES
+
+Tom Lendacky (19):
+  KVM: SVM: Add GHCB definitions
+  x86/cpufeatures: Add SEV-ES CPU feature
+  x86/sev-es: Add support for handling IOIO exceptions
+  x86/sev-es: Add CPUID handling to #VC handler
+  x86/sev-es: Setup per-cpu GHCBs for the runtime handler
+  x86/sev-es: Add Runtime #VC Exception Handler
+  x86/sev-es: Handle MMIO events
+  x86/sev-es: Handle MSR events
+  x86/sev-es: Handle DR7 read/write events
+  x86/sev-es: Handle WBINVD Events
+  x86/sev-es: Handle RDTSC(P) Events
+  x86/sev-es: Handle RDPMC Events
+  x86/sev-es: Handle INVD Events
+  x86/sev-es: Handle MONITOR/MONITORX Events
+  x86/sev-es: Handle MWAIT/MWAITX Events
+  x86/sev-es: Handle VMMCALL Events
+  x86/kvm: Add KVM specific VMMCALL handling under SEV-ES
+  x86/realmode: Setup AP jump table
+  x86/efi: Add GHCB mappings when SEV-ES is active
+
+ arch/x86/Kconfig                           |    1 +
+ arch/x86/boot/compressed/Makefile          |    9 +-
+ arch/x86/boot/compressed/cpuflags.c        |    4 -
+ arch/x86/boot/compressed/head_64.S         |   32 +-
+ arch/x86/boot/compressed/ident_map_64.c    |  349 +++++
+ arch/x86/boot/compressed/idt_64.c          |   54 +
+ arch/x86/boot/compressed/idt_handlers_64.S |   77 ++
+ arch/x86/boot/compressed/kaslr.c           |   36 +-
+ arch/x86/boot/compressed/kaslr_64.c        |  153 ---
+ arch/x86/boot/compressed/misc.c            |    7 +
+ arch/x86/boot/compressed/misc.h            |   50 +-
+ arch/x86/boot/compressed/sev-es.c          |  214 +++
+ arch/x86/entry/entry_64.S                  |   78 ++
+ arch/x86/include/asm/cpu.h                 |    2 +-
+ arch/x86/include/asm/cpu_entry_area.h      |   33 +-
+ arch/x86/include/asm/cpufeatures.h         |    1 +
+ arch/x86/include/asm/desc_defs.h           |    3 +
+ arch/x86/include/asm/fpu/internal.h        |   30 +-
+ arch/x86/include/asm/fpu/xcr.h             |   34 +
+ arch/x86/include/asm/idtentry.h            |   50 +
+ arch/x86/include/asm/insn-eval.h           |    6 +
+ arch/x86/include/asm/mem_encrypt.h         |    5 +
+ arch/x86/include/asm/msr-index.h           |    3 +
+ arch/x86/include/asm/page_64_types.h       |    1 +
+ arch/x86/include/asm/pgtable.h             |    2 +-
+ arch/x86/include/asm/processor.h           |    7 +
+ arch/x86/include/asm/proto.h               |    1 +
+ arch/x86/include/asm/realmode.h            |    4 +
+ arch/x86/include/asm/segment.h             |    2 +-
+ arch/x86/include/asm/setup.h               |   20 +-
+ arch/x86/include/asm/sev-es.h              |  113 ++
+ arch/x86/include/asm/stacktrace.h          |    2 +
+ arch/x86/include/asm/svm.h                 |  100 +-
+ arch/x86/include/asm/trap_pf.h             |   24 +
+ arch/x86/include/asm/trapnr.h              |    1 +
+ arch/x86/include/asm/traps.h               |   20 +-
+ arch/x86/include/asm/x86_init.h            |   16 +-
+ arch/x86/include/uapi/asm/svm.h            |   11 +
+ arch/x86/kernel/Makefile                   |    1 +
+ arch/x86/kernel/cpu/amd.c                  |    3 +-
+ arch/x86/kernel/cpu/common.c               |   37 +-
+ arch/x86/kernel/cpu/scattered.c            |    1 +
+ arch/x86/kernel/cpu/vmware.c               |   50 +-
+ arch/x86/kernel/dumpstack.c                |    7 +-
+ arch/x86/kernel/dumpstack_64.c             |   47 +-
+ arch/x86/kernel/head64.c                   |   85 +-
+ arch/x86/kernel/head_32.S                  |    4 +-
+ arch/x86/kernel/head_64.S                  |  159 ++-
+ arch/x86/kernel/idt.c                      |   94 +-
+ arch/x86/kernel/kvm.c                      |   35 +-
+ arch/x86/kernel/nmi.c                      |   12 +
+ arch/x86/kernel/sev-es-shared.c            |  507 +++++++
+ arch/x86/kernel/sev-es.c                   | 1404 ++++++++++++++++++++
+ arch/x86/kernel/smpboot.c                  |   10 +-
+ arch/x86/kernel/traps.c                    |   56 +
+ arch/x86/kernel/umip.c                     |   49 +-
+ arch/x86/kvm/svm/nested.c                  |   47 +-
+ arch/x86/kvm/svm/svm.c                     |    2 +
+ arch/x86/lib/insn-eval.c                   |  130 ++
+ arch/x86/mm/cpu_entry_area.c               |    3 +-
+ arch/x86/mm/extable.c                      |    1 +
+ arch/x86/mm/mem_encrypt.c                  |   38 +-
+ arch/x86/mm/mem_encrypt_identity.c         |    3 +
+ arch/x86/platform/efi/efi_64.c             |   10 +
+ arch/x86/realmode/init.c                   |   24 +-
+ arch/x86/realmode/rm/header.S              |    3 +
+ arch/x86/realmode/rm/trampoline_64.S       |   20 +
+ arch/x86/tools/gen-insn-attr-x86.awk       |   50 +-
+ tools/arch/x86/tools/gen-insn-attr-x86.awk |   50 +-
+ 69 files changed, 4041 insertions(+), 456 deletions(-)
+ create mode 100644 arch/x86/boot/compressed/ident_map_64.c
+ create mode 100644 arch/x86/boot/compressed/idt_64.c
+ create mode 100644 arch/x86/boot/compressed/idt_handlers_64.S
+ delete mode 100644 arch/x86/boot/compressed/kaslr_64.c
+ create mode 100644 arch/x86/boot/compressed/sev-es.c
+ create mode 100644 arch/x86/include/asm/fpu/xcr.h
+ create mode 100644 arch/x86/include/asm/sev-es.h
+ create mode 100644 arch/x86/include/asm/trap_pf.h
+ create mode 100644 arch/x86/kernel/sev-es-shared.c
+ create mode 100644 arch/x86/kernel/sev-es.c
+
+-- 
+2.28.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
