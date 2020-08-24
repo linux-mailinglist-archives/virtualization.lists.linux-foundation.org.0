@@ -1,66 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF3352502A4
-	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 18:35:21 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 5837720485;
-	Mon, 24 Aug 2020 16:35:20 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id V6XsT64bvGz3; Mon, 24 Aug 2020 16:35:17 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 0377A20489;
-	Mon, 24 Aug 2020 16:35:16 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D9C6FC0051;
-	Mon, 24 Aug 2020 16:35:16 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 83059C0051
- for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 16:35:15 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14ABF2502CD
+	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 18:36:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 71DEB86DA3
- for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 16:35:15 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8B95687A11;
+	Mon, 24 Aug 2020 16:36:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id V1EuVNkSx5Bv
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HSWef4AVVy0x; Mon, 24 Aug 2020 16:36:43 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 0B9E2878AC;
+	Mon, 24 Aug 2020 16:36:43 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 000AFC0051;
+	Mon, 24 Aug 2020 16:36:42 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2F077C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 16:35:12 +0000 (UTC)
+ Mon, 24 Aug 2020 16:36:42 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 2900B876E4
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 24 Aug 2020 16:36:42 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id il20FgGsr12F
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 24 Aug 2020 16:36:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id B77818693C
+ by whitealder.osuosl.org (Postfix) with ESMTPS id A3D5F86FD1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 16:35:12 +0000 (UTC)
+ Mon, 24 Aug 2020 16:36:41 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id AA47F22BEB;
- Mon, 24 Aug 2020 16:35:11 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 9DBC522DA9;
+ Mon, 24 Aug 2020 16:36:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598286912;
- bh=rNtO65T5X977LmrSthX8B1rxzgNWxxn9MfHEe6m/FhI=;
+ s=default; t=1598287001;
+ bh=yM0adv38uo+NQx7so3B98b2SMvGI1C8RiqcPnmX6+rI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=2WF0ywoaZMs0gwX6dLNjAABM5N+RZdTPEBwR62NzOtegolM6G3Gx4qkZ7RDeyEWd/
- GI1L9mdHU3svAl5WlC6uQt9E6qX1oImc6XELu0phkrhS7Yim9uc/ZhGGSnn6w1NoKA
- VjaQND6nMBM+JhBBKLcOyIKbkpySHzvFXKOzRRSM=
+ b=EXUzDAG5QriYH/XVwMMT+nWzkvQnbQPyYVFFJ/KDRNYvpHF22vlxWkj+SCtRmNIva
+ KT8DFW33xKGI8b5cGM0JUr1CSXnN504MNXB0Y0II82gBAnzoOYqB6zVtj93GJvvHOz
+ zwxdoJ/yhBckxozHJy7lMMvxu0E4JbguPI3uw6R0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.8 06/63] drm/virtio: fix memory leak in
+Subject: [PATCH AUTOSEL 5.7 05/54] drm/virtio: fix memory leak in
  virtio_gpu_cleanup_object()
-Date: Mon, 24 Aug 2020 12:34:06 -0400
-Message-Id: <20200824163504.605538-6-sashal@kernel.org>
+Date: Mon, 24 Aug 2020 12:35:44 -0400
+Message-Id: <20200824163634.606093-5-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200824163504.605538-1-sashal@kernel.org>
-References: <20200824163504.605538-1-sashal@kernel.org>
+In-Reply-To: <20200824163634.606093-1-sashal@kernel.org>
+References: <20200824163634.606093-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -100,7 +100,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+)
 
 diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
-index 6ccbd01cd888c..703b5cd517519 100644
+index d9039bb7c5e37..1e65c5ac573b1 100644
 --- a/drivers/gpu/drm/virtio/virtgpu_object.c
 +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
 @@ -79,6 +79,7 @@ void virtio_gpu_cleanup_object(struct virtio_gpu_object *bo)
