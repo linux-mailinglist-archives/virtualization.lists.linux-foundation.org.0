@@ -1,71 +1,70 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6545C24F713
-	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 11:08:04 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC70D24F6E7
+	for <lists.virtualization@lfdr.de>; Mon, 24 Aug 2020 11:07:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E7DA12050A;
-	Mon, 24 Aug 2020 09:08:02 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6517E87988;
+	Mon, 24 Aug 2020 09:07:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UwT54Tg7g68o; Mon, 24 Aug 2020 09:07:48 +0000 (UTC)
+	with ESMTP id Xt-fgdPAfv-W; Mon, 24 Aug 2020 09:07:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 8ABE02273B;
-	Mon, 24 Aug 2020 09:07:07 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 2D09A87A68;
+	Mon, 24 Aug 2020 09:06:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5C5C7C0051;
-	Mon, 24 Aug 2020 09:07:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B109C016F;
+	Mon, 24 Aug 2020 09:06:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5D7B4C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C1073C089F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:07:03 +0000 (UTC)
+ Mon, 24 Aug 2020 09:06:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 46849204F8
+ by whitealder.osuosl.org (Postfix) with ESMTP id ABC15878E1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:07:03 +0000 (UTC)
+ Mon, 24 Aug 2020 09:06:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VHLpO6U3eFL9
+ with ESMTP id kKe1a2ftEd0L
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:06:54 +0000 (UTC)
+ Mon, 24 Aug 2020 09:06:48 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 141032050A
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 31920878DD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Aug 2020 09:06:51 +0000 (UTC)
+ Mon, 24 Aug 2020 09:06:48 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2bb8d.dip0.t-ipconnect.de
  [79.242.187.141])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id E9D8B1823;
- Mon, 24 Aug 2020 10:56:31 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 7614E7D9;
+ Mon, 24 Aug 2020 10:56:32 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v6 75/76] x86/efi: Add GHCB mappings when SEV-ES is active
-Date: Mon, 24 Aug 2020 10:55:10 +0200
-Message-Id: <20200824085511.7553-76-joro@8bytes.org>
+Subject: [PATCH v6 76/76] x86/sev-es: Check required CPU features for SEV-ES
+Date: Mon, 24 Aug 2020 10:55:11 +0200
+Message-Id: <20200824085511.7553-77-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200824085511.7553-1-joro@8bytes.org>
 References: <20200824085511.7553-1-joro@8bytes.org>
 MIME-Version: 1.0
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Joerg Roedel <jroedel@suse.de>, Mike Stunes <mstunes@vmware.com>,
- Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
- Joerg Roedel <joro@8bytes.org>, Dave Hansen <dave.hansen@linux.intel.com>,
- linux-kernel@vger.kernel.org,
+Cc: Martin Radev <martin.b.radev@gmail.com>,
+ Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
+ Mike Stunes <mstunes@vmware.com>, Kees Cook <keescook@chromium.org>,
+ kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Cfir Cohen <cfir@google.com>, Joerg Roedel <joro@8bytes.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Juergen Gross <jgross@suse.com>,
  Sean Christopherson <sean.j.christopherson@intel.com>,
- virtualization@lists.linux-foundation.org,
- Martin Radev <martin.b.radev@gmail.com>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+ linux-kernel@vger.kernel.org, Masami Hiramatsu <mhiramat@kernel.org>,
+ Andy Lutomirski <luto@kernel.org>, hpa@zytor.com,
+ Erdem Aktas <erdemaktas@google.com>, David Rientjes <rientjes@google.com>,
+ Dan Williams <dan.j.williams@intel.com>,
+ virtualization@lists.linux-foundation.org, Jiri Slaby <jslaby@suse.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,123 +81,120 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Martin Radev <martin.b.radev@gmail.com>
 
-Calling down to EFI runtime services can result in the firmware performing
-VMGEXIT calls. The firmware is likely to use the GHCB of the OS (e.g., for
-setting EFI variables), so each GHCB in the system needs to be identity
-mapped in the EFI page tables, as unencrypted, to avoid page faults.
+Make sure the machine supports RDRAND, otherwise there is no trusted
+source of of randomness in the system.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
-[ jroedel@suse.de: Moved GHCB mapping loop to sev-es.c ]
+To also check this in the pre-decompression stage, make has_cpuflag
+not depend on CONFIG_RANDOMIZE_BASE anymore.
+
+Signed-off-by: Martin Radev <martin.b.radev@gmail.com>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
-Link: https://lore.kernel.org/r/20200724160336.5435-75-joro@8bytes.org
+Reviewed-by: Kees Cook <keescook@chromium.org>
+Link: https://lore.kernel.org/r/20200724160336.5435-76-joro@8bytes.org
 ---
- arch/x86/boot/compressed/sev-es.c |  1 +
- arch/x86/include/asm/sev-es.h     |  2 ++
- arch/x86/kernel/sev-es.c          | 30 ++++++++++++++++++++++++++++++
- arch/x86/platform/efi/efi_64.c    | 10 ++++++++++
- 4 files changed, 43 insertions(+)
+ arch/x86/boot/compressed/cpuflags.c |  4 ----
+ arch/x86/boot/compressed/misc.h     |  5 +++--
+ arch/x86/boot/compressed/sev-es.c   |  3 +++
+ arch/x86/kernel/sev-es-shared.c     | 15 +++++++++++++++
+ arch/x86/kernel/sev-es.c            |  3 +++
+ 5 files changed, 24 insertions(+), 6 deletions(-)
 
+diff --git a/arch/x86/boot/compressed/cpuflags.c b/arch/x86/boot/compressed/cpuflags.c
+index 6448a8196d32..0cc1323896d1 100644
+--- a/arch/x86/boot/compressed/cpuflags.c
++++ b/arch/x86/boot/compressed/cpuflags.c
+@@ -1,6 +1,4 @@
+ // SPDX-License-Identifier: GPL-2.0
+-#ifdef CONFIG_RANDOMIZE_BASE
+-
+ #include "../cpuflags.c"
+ 
+ bool has_cpuflag(int flag)
+@@ -9,5 +7,3 @@ bool has_cpuflag(int flag)
+ 
+ 	return test_bit(flag, cpu.flags);
+ }
+-
+-#endif
+diff --git a/arch/x86/boot/compressed/misc.h b/arch/x86/boot/compressed/misc.h
+index c0e0ffeee50a..6d31f1b4c4d1 100644
+--- a/arch/x86/boot/compressed/misc.h
++++ b/arch/x86/boot/compressed/misc.h
+@@ -85,8 +85,6 @@ void choose_random_location(unsigned long input,
+ 			    unsigned long *output,
+ 			    unsigned long output_size,
+ 			    unsigned long *virt_addr);
+-/* cpuflags.c */
+-bool has_cpuflag(int flag);
+ #else
+ static inline void choose_random_location(unsigned long input,
+ 					  unsigned long input_size,
+@@ -97,6 +95,9 @@ static inline void choose_random_location(unsigned long input,
+ }
+ #endif
+ 
++/* cpuflags.c */
++bool has_cpuflag(int flag);
++
+ #ifdef CONFIG_X86_64
+ extern int set_page_decrypted(unsigned long address);
+ extern int set_page_encrypted(unsigned long address);
 diff --git a/arch/x86/boot/compressed/sev-es.c b/arch/x86/boot/compressed/sev-es.c
-index 1ce144e0ddc3..b522c18c0588 100644
+index b522c18c0588..eb1a8b5cc753 100644
 --- a/arch/x86/boot/compressed/sev-es.c
 +++ b/arch/x86/boot/compressed/sev-es.c
-@@ -12,6 +12,7 @@
-  */
- #include "misc.h"
+@@ -145,6 +145,9 @@ void sev_es_shutdown_ghcb(void)
+ 	if (!boot_ghcb)
+ 		return;
  
-+#include <asm/pgtable_types.h>
- #include <asm/sev-es.h>
- #include <asm/trapnr.h>
- #include <asm/trap_pf.h>
-diff --git a/arch/x86/include/asm/sev-es.h b/arch/x86/include/asm/sev-es.h
-index 21fdee11ac83..f22c4531624c 100644
---- a/arch/x86/include/asm/sev-es.h
-+++ b/arch/x86/include/asm/sev-es.h
-@@ -101,11 +101,13 @@ static __always_inline void sev_es_nmi_complete(void)
- 	if (static_branch_unlikely(&sev_es_enable_key))
- 		__sev_es_nmi_complete();
- }
-+extern int __init sev_es_efi_map_ghcbs(pgd_t *pgd);
- #else
- static inline void sev_es_ist_enter(struct pt_regs *regs) { }
- static inline void sev_es_ist_exit(void) { }
- static inline int sev_es_setup_ap_jump_table(struct real_mode_header *rmh) { return 0; }
- static inline void sev_es_nmi_complete(void) { }
-+static inline int sev_es_efi_map_ghcbs(pgd_t *pgd) { return 0; }
- #endif
- 
- #endif
-diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 7202d2f5deb8..2d73f5abe04b 100644
---- a/arch/x86/kernel/sev-es.c
-+++ b/arch/x86/kernel/sev-es.c
-@@ -495,6 +495,36 @@ int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
- 	return 0;
- }
- 
-+/*
-+ * This is needed by the OVMF UEFI firmware which will use whatever it finds in
-+ * the GHCB MSR as its GHCB to talk to the hypervisor. So make sure the per-cpu
-+ * runtime GHCBs used by the kernel are also mapped in the EFI page-table.
-+ */
-+int __init sev_es_efi_map_ghcbs(pgd_t *pgd)
-+{
-+	struct sev_es_runtime_data *data;
-+	unsigned long address, pflags;
-+	int cpu;
-+	u64 pfn;
-+
-+	if (!sev_es_active())
-+		return 0;
-+
-+	pflags = _PAGE_NX | _PAGE_RW;
-+
-+	for_each_possible_cpu(cpu) {
-+		data = per_cpu(runtime_data, cpu);
-+
-+		address = __pa(&data->ghcb_page);
-+		pfn = address >> PAGE_SHIFT;
-+
-+		if (kernel_map_pages_in_pgd(pgd, pfn, address, 1, pflags))
-+			return 1;
-+	}
-+
-+	return 0;
-+}
-+
- static enum es_result vc_handle_msr(struct ghcb *ghcb, struct es_em_ctxt *ctxt)
- {
- 	struct pt_regs *regs = ctxt->regs;
-diff --git a/arch/x86/platform/efi/efi_64.c b/arch/x86/platform/efi/efi_64.c
-index 6af4da1149ba..8f5759df7776 100644
---- a/arch/x86/platform/efi/efi_64.c
-+++ b/arch/x86/platform/efi/efi_64.c
-@@ -47,6 +47,7 @@
- #include <asm/realmode.h>
- #include <asm/time.h>
- #include <asm/pgalloc.h>
-+#include <asm/sev-es.h>
- 
- /*
-  * We allocate runtime services regions top-down, starting from -4G, i.e.
-@@ -229,6 +230,15 @@ int __init efi_setup_page_tables(unsigned long pa_memmap, unsigned num_pages)
- 		return 1;
- 	}
- 
-+	/*
-+	 * When SEV-ES is active, the GHCB as set by the kernel will be used
-+	 * by firmware. Create a 1:1 unencrypted mapping for each GHCB.
-+	 */
-+	if (sev_es_efi_map_ghcbs(pgd)) {
-+		pr_err("Failed to create 1:1 mapping for the GHCBs!\n");
-+		return 1;
-+	}
++	if (!sev_es_check_cpu_features())
++		error("SEV-ES CPU Features missing.");
 +
  	/*
- 	 * When making calls to the firmware everything needs to be 1:1
- 	 * mapped and addressable with 32-bit pointers. Map the kernel
+ 	 * GHCB Page must be flushed from the cache and mapped encrypted again.
+ 	 * Otherwise the running kernel will see strange cache effects when
+diff --git a/arch/x86/kernel/sev-es-shared.c b/arch/x86/kernel/sev-es-shared.c
+index 92d77b725ccb..ce86d2c9ca7b 100644
+--- a/arch/x86/kernel/sev-es-shared.c
++++ b/arch/x86/kernel/sev-es-shared.c
+@@ -9,6 +9,21 @@
+  * and is included directly into both code-bases.
+  */
+ 
++#ifndef __BOOT_COMPRESSED
++#define error(v)	pr_err(v)
++#define has_cpuflag(f)	boot_cpu_has(f)
++#endif
++
++static bool __init sev_es_check_cpu_features(void)
++{
++	if (!has_cpuflag(X86_FEATURE_RDRAND)) {
++		error("RDRAND instruction not supported - no trusted source of randomness available\n");
++		return false;
++	}
++
++	return true;
++}
++
+ static void sev_es_terminate(unsigned int reason)
+ {
+ 	u64 val = GHCB_SEV_TERMINATE;
+diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
+index 2d73f5abe04b..6eadd678d1c6 100644
+--- a/arch/x86/kernel/sev-es.c
++++ b/arch/x86/kernel/sev-es.c
+@@ -670,6 +670,9 @@ void __init sev_es_init_vc_handling(void)
+ 	if (!sev_es_active())
+ 		return;
+ 
++	if (!sev_es_check_cpu_features())
++		panic("SEV-ES CPU Features missing");
++
+ 	/* Enable SEV-ES special handling */
+ 	static_branch_enable(&sev_es_enable_key);
+ 
 -- 
 2.28.0
 
