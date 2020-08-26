@@ -2,109 +2,101 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3056251A36
-	for <lists.virtualization@lfdr.de>; Tue, 25 Aug 2020 15:53:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA7CD252C45
+	for <lists.virtualization@lfdr.de>; Wed, 26 Aug 2020 13:12:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 962998659E;
-	Tue, 25 Aug 2020 13:53:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 5A42886807;
+	Wed, 26 Aug 2020 11:12:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WNgdjS68TtKz; Tue, 25 Aug 2020 13:53:39 +0000 (UTC)
+	with ESMTP id 3I_WdfeG5pVm; Wed, 26 Aug 2020 11:12:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C31C2863DC;
-	Tue, 25 Aug 2020 13:53:39 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id EAF9D85751;
+	Wed, 26 Aug 2020 11:12:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A988DC0051;
-	Tue, 25 Aug 2020 13:53:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B09A1C0051;
+	Wed, 26 Aug 2020 11:12:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D83F9C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E084DC0051
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Aug 2020 13:53:37 +0000 (UTC)
+ Wed, 26 Aug 2020 11:12:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id C0FDF87DAC
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C986585751
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Aug 2020 13:53:37 +0000 (UTC)
+ Wed, 26 Aug 2020 11:12:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3Gm4zHh-BiXN
+ with ESMTP id V8szCH8mxT8s
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Aug 2020 13:53:36 +0000 (UTC)
+ Wed, 26 Aug 2020 11:12:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 6ED1287C94
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id E88308560E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Aug 2020 13:53:36 +0000 (UTC)
+ Wed, 26 Aug 2020 11:12:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598363614;
+ s=mimecast20190719; t=1598440333;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=138cvp+YSMgYfNEN+hQF14KPIqzw0MKaD5TwzikQyNY=;
- b=CINDpSHtkLR0/6CJRVRg0cSY8mU1pWmHJ1E6ll7ygG3fQUSxPv7FNnomDsliwkbOtwutI4
- kMXrBxF/g06ILaV0MO8rsO3N2sQ/tKOST1VXXn6MfjwPrrLhoPaNa7LKjV1IrvOGgZK2kF
- 8Jv9G1AWzCGS81WCUQaODhu880pC4VI=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-443-BJQ03f86NbCd4zaeI_m07A-1; Tue, 25 Aug 2020 09:53:31 -0400
-X-MC-Unique: BJQ03f86NbCd4zaeI_m07A-1
-Received: by mail-qk1-f200.google.com with SMTP id y187so4132528qka.10
+ bh=lR+U00Oaa72ALhBmgywIm4H6+XPgRieMfQDwiYXJfM0=;
+ b=UU4Lq2ZzmqXCeX5AIxPtAcaoejY3a7a9fxeMbFjLCVkzPmwD/jnyIoLi43YfjEKY+BHYnY
+ hLVWHyN1fhu34oi1sXuejKeVr/AGQlBim/qRpmcvkcziBQ/y4wvDu4I6EeUlCgmgpov8/B
+ Q5sabOQg4ofS9HJMuBf6lSRJhBadY9Y=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-503-vyKuG4HzPPijLcIkDbyQmg-1; Wed, 26 Aug 2020 07:12:12 -0400
+X-MC-Unique: vyKuG4HzPPijLcIkDbyQmg-1
+Received: by mail-wr1-f72.google.com with SMTP id 89so398318wrr.15
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Aug 2020 06:53:31 -0700 (PDT)
+ Wed, 26 Aug 2020 04:12:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=138cvp+YSMgYfNEN+hQF14KPIqzw0MKaD5TwzikQyNY=;
- b=BTfnv8xPWiQ4I8uCIBpbnZ7rBkVLiVGlsKXMJn9vbASrehkbZ5DWmFaPapJXEuIsQc
- WGLkWcYDkSjYFNoC9unAERg+9OBjnM+NzZobp82vfg+hdGXmfkuYo4j0tzakguzLFdZ+
- zkWLo97S4Rh2a6jgv1no8Aojlejxx1EUhWBtrSMdWjc7Xf9NX28UPYzTEqNZVOsuGrhc
- vji3Ee2H2t+t+qzY9lQxOXJ38tm3t+kUbIEEtu2eiK+5rVatMBdgDsAkjBbPgzVdDLBU
- uYcj45nFSA5M03LUnR6C9hCW5vLrPWO6qmawhsvnfts76GqEb7IX95Zjh+SY9/TVBpAH
- rVqg==
-X-Gm-Message-State: AOAM5320yeq59TfI5Hy9wlPEBN7yxqqA0p1+mY9hGo2DuFHEbZ/E0Blx
- Frr3vN92iTQT9r9H+JEXBnCoJ7nykwSjYXbGvFsSSM/PzVMycRtHJHbyz9E+BrjmhWBaiMDIOu6
- W5kMAUsR8zYvtPlGkFPGlTWZ3UBYsf0WZil4v/zGYtw==
-X-Received: by 2002:ac8:564f:: with SMTP id 15mr9428446qtt.54.1598363610799;
- Tue, 25 Aug 2020 06:53:30 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyPrT+ZhqGX/WxO3DdmtRmLzR6D+VgulQzBW64lie1cdwBxPXFdHdxWQdatgY6vKjfkuFcqew==
-X-Received: by 2002:ac8:564f:: with SMTP id 15mr9428417qtt.54.1598363610497;
- Tue, 25 Aug 2020 06:53:30 -0700 (PDT)
-Received: from redhat.com (bzq-109-64-136-54.red.bezeqint.net. [109.64.136.54])
- by smtp.gmail.com with ESMTPSA id v24sm1877951qtb.13.2020.08.25.06.53.26
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=lR+U00Oaa72ALhBmgywIm4H6+XPgRieMfQDwiYXJfM0=;
+ b=qfQZ0Gi9WvQOhjJjZIwu0gTL4qg64Am1lzO7pqEJgKkeIkR6G7ClYcOHW0GHe+o7zz
+ 1xjm189nUvx0/WEXHg09Czb6OFCww8+ngoC4xO/Q7GPOYUuc1WBmeuDpvX78ZIBReA6C
+ kIDKLzB49YQhw4+Ew4OhKGtUkV8YqWc10XWia/pZBvdXoeKPw/xNloqdwfxHvEGG5Xgk
+ b2ayqgkUk3TumMSQdefABTSL9RcgjWa7v+fXrUR2pPeVJArZITGh5ggNUWesPOoZuOrB
+ 1kF0+IzzEZjuSUIGpCYFG2Cyk7lBCosU9FZA5WaPXqUiUvcmxKT8WSknvKDIdcG4FWqz
+ owAA==
+X-Gm-Message-State: AOAM533/QqpaZGpghGIFRL2B2Ajto4LS5oXngRwpotKOoU4l2V5kxgIh
+ 3muDA8sA8t+N5487XgIX1ii1/QYBT5Ko7nUoWybSMCCU/7KPMvVP6gXQ7Tpd5LyW7XP5vTcq2SU
+ gfujKNibBaiB8nzqDLnsuagVk/f4qRer1aEoDVKPFQg==
+X-Received: by 2002:adf:fa8f:: with SMTP id h15mr11854989wrr.365.1598440330948; 
+ Wed, 26 Aug 2020 04:12:10 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJx0rObmmQMjGOaXLjfOhZSPZT6w5SFheSV59yGDYZ9gFY089eygMzryPx1d3YNhKUDJ9uAvUg==
+X-Received: by 2002:adf:fa8f:: with SMTP id h15mr11854967wrr.365.1598440330699; 
+ Wed, 26 Aug 2020 04:12:10 -0700 (PDT)
+Received: from redhat.com (bzq-109-67-46-169.red.bezeqint.net. [109.67.46.169])
+ by smtp.gmail.com with ESMTPSA id 128sm4844463wmz.43.2020.08.26.04.12.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2020 06:53:29 -0700 (PDT)
-Date: Tue, 25 Aug 2020 09:53:24 -0400
+ Wed, 26 Aug 2020 04:12:09 -0700 (PDT)
+Date: Wed, 26 Aug 2020 07:12:06 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-Subject: Re: [PATCH v4 4/4] vhost: add an RPMsg API
-Message-ID: <20200825095148-mutt-send-email-mst@kernel.org>
-References: <20200722150927.15587-1-guennadi.liakhovetski@linux.intel.com>
- <20200722150927.15587-5-guennadi.liakhovetski@linux.intel.com>
- <20200804102132-mutt-send-email-mst@kernel.org>
- <20200804151916.GC19025@ubuntu>
- <20200810094013-mutt-send-email-mst@kernel.org>
- <20200812123243.GA10218@ubuntu> <20200825134109.GA9822@ubuntu>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH 1/2] vdpa: ifcvf: return err when fail to request config
+ irq
+Message-ID: <20200826071200-mutt-send-email-mst@kernel.org>
+References: <20200723091254.20617-1-jasowang@redhat.com>
+ <87ec5f62-4d99-e7b4-00dc-28664f8eb111@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200825134109.GA9822@ubuntu>
+In-Reply-To: <87ec5f62-4d99-e7b4-00dc-28664f8eb111@redhat.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0.002
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Ohad Ben-Cohen <ohad@wizery.com>,
- Mathieu Poirier <mathieu.poirier@linaro.org>, kvm@vger.kernel.org,
- Vincent Whitchurch <vincent.whitchurch@axis.com>,
- linux-remoteproc@vger.kernel.org,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Liam Girdwood <liam.r.girdwood@linux.intel.com>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- sound-open-firmware@alsa-project.org
+Cc: Zhu Lingshan <lingshan.zhu@intel.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -116,76 +108,32 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Aug 25, 2020 at 03:41:10PM +0200, Guennadi Liakhovetski wrote:
-> Hi Michael,
-> 
-> ...back from holidays and still unsure what your preferred solution 
-> for the message layout would be:
-> 
-> On Wed, Aug 12, 2020 at 02:32:43PM +0200, Guennadi Liakhovetski wrote:
-> > Hi Michael,
-> > 
-> > Thanks for a review.
-> > 
-> > On Mon, Aug 10, 2020 at 09:44:15AM -0400, Michael S. Tsirkin wrote:
-> > > On Tue, Aug 04, 2020 at 05:19:17PM +0200, Guennadi Liakhovetski wrote:
-> 
-> [snip]
-> 
-> > > > > > +static int vhost_rpmsg_get_single(struct vhost_virtqueue *vq)
-> > > > > > +{
-> > > > > > +	struct vhost_rpmsg *vr = container_of(vq->dev, struct vhost_rpmsg, dev);
-> > > > > > +	unsigned int out, in;
-> > > > > > +	int head = vhost_get_vq_desc(vq, vq->iov, ARRAY_SIZE(vq->iov), &out, &in,
-> > > > > > +				     NULL, NULL);
-> > > > > > +	if (head < 0) {
-> > > > > > +		vq_err(vq, "%s(): error %d getting buffer\n",
-> > > > > > +		       __func__, head);
-> > > > > > +		return head;
-> > > > > > +	}
-> > > > > > +
-> > > > > > +	/* Nothing new? */
-> > > > > > +	if (head == vq->num)
-> > > > > > +		return head;
-> > > > > > +
-> > > > > > +	if (vq == &vr->vq[VIRTIO_RPMSG_RESPONSE] && (out || in != 1)) {
-> > > > > 
-> > > > > This in != 1 looks like a dependency on a specific message layout.
-> > > > > virtio spec says to avoid these. Using iov iters it's not too hard to do
-> > > > > ...
-> > > > 
-> > > > This is an RPMsg VirtIO implementation, and it has to match the virtio_rpmsg_bus.c 
-> > > > driver, and that one has specific VirtIO queue and message usage patterns.
-> > > 
-> > > That could be fine for legacy virtio, but now you are claiming support
-> > > for virtio 1, so need to fix these assumptions in the device.
-> > 
-> > I can just deop these checks without changing anything else, that still would work. 
-> > I could also make this work with "any" layout - either ignoring any left-over 
-> > buffers or maybe even getting them one by one. But I wouldn't even be able to test 
-> > those modes without modifying / breaking the current virtio-rpmsg driver. What's 
-> > the preferred solution?
-> 
-> Could you elaborate a bit please?
-> 
-> Thanks
-> Guennadi
-
-I'd prefer it that we make it work with any layout.
-For testing, there was a hack for virtio ring which
-split up descriptors at a random boundary.
-I'll try to locate it and post, sounds like something
-we might want upstream for debugging.
-
--- 
-MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gRnJpLCBBdWcgMDcsIDIwMjAgYXQgMTE6NTI6MDlBTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiAKPiBPbiAyMDIwLzcvMjMg5LiL5Y2INToxMiwgSmFzb24gV2FuZyB3cm90ZToKPiA+IFdl
+IGlnbm9yZSB0aGUgZXJyIG9mIHJlcXVlc3RpbmcgY29uZmlnIGludGVycnVwdCwgZml4IHRoaXMu
+Cj4gPiAKPiA+IEZpeGVzOiBlNzk5MWYzNzZhNGQgKCJpZmN2ZjogaW1wbGVtZW50IGNvbmZpZyBp
+bnRlcnJ1cHQgaW4gSUZDVkYiKQo+ID4gQ2M6IFpodSBMaW5nc2hhbiA8bGluZ3NoYW4uemh1QGlu
+dGVsLmNvbT4KPiA+IFNpZ25lZC1vZmYtYnk6IEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5j
+b20+Cj4gPiAtLS0KPiA+ICAgZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX21haW4uYyB8IDQgKysr
+Kwo+ID4gICAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCj4gPiAKPiA+IGRpZmYgLS1n
+aXQgYS9kcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfbWFpbi5jIGIvZHJpdmVycy92ZHBhL2lmY3Zm
+L2lmY3ZmX21haW4uYwo+ID4gaW5kZXggZjVhNjBjMTRiOTc5Li5hZTcxMTA5NTVhNDQgMTAwNjQ0
+Cj4gPiAtLS0gYS9kcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfbWFpbi5jCj4gPiArKysgYi9kcml2
+ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfbWFpbi5jCj4gPiBAQCAtNzYsNiArNzYsMTAgQEAgc3RhdGlj
+IGludCBpZmN2Zl9yZXF1ZXN0X2lycShzdHJ1Y3QgaWZjdmZfYWRhcHRlciAqYWRhcHRlcikKPiA+
+ICAgCXJldCA9IGRldm1fcmVxdWVzdF9pcnEoJnBkZXYtPmRldiwgaXJxLAo+ID4gICAJCQkgICAg
+ICAgaWZjdmZfY29uZmlnX2NoYW5nZWQsIDAsCj4gPiAgIAkJCSAgICAgICB2Zi0+Y29uZmlnX21z
+aXhfbmFtZSwgdmYpOwo+ID4gKwlpZiAocmV0KSB7Cj4gPiArCQlJRkNWRl9FUlIocGRldiwgIkZh
+aWxlZCB0byByZXF1ZXN0IGNvbmZpZyBpcnFcbiIpOwo+ID4gKwkJcmV0dXJuIHJldDsKPiA+ICsJ
+fQo+ID4gICAJZm9yIChpID0gMDsgaSA8IElGQ1ZGX01BWF9RVUVVRV9QQUlSUyAqIDI7IGkrKykg
+ewo+ID4gICAJCXNucHJpbnRmKHZmLT52cmluZ1tpXS5tc2l4X25hbWUsIDI1NiwgImlmY3ZmWyVz
+XS0lZFxuIiwKPiAKPiAKPiBIaSBNaWNoYWVsOgo+IAo+IEFueSBjb21tZW50cyBvbiB0aGlzIHNl
+cmllcz8KPiAKPiBUaGFua3MKPiAKCkFwcGxpZWQsIHRoYW5rcyEKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlz
+dApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3Rz
+LmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
