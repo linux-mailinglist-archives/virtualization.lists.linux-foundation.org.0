@@ -1,69 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55D34255D93
-	for <lists.virtualization@lfdr.de>; Fri, 28 Aug 2020 17:16:26 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 26B7025604D
+	for <lists.virtualization@lfdr.de>; Fri, 28 Aug 2020 20:14:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 08F3D86F85;
-	Fri, 28 Aug 2020 15:16:25 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 9771A203A6;
+	Fri, 28 Aug 2020 18:13:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Sh-6q7W6NwiL; Fri, 28 Aug 2020 15:16:24 +0000 (UTC)
+	with ESMTP id txXh44j1CBy2; Fri, 28 Aug 2020 18:13:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 9541D85E5E;
-	Fri, 28 Aug 2020 15:16:24 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id A313A203EF;
+	Fri, 28 Aug 2020 18:13:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6C639C0051;
-	Fri, 28 Aug 2020 15:16:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 866E1C0891;
+	Fri, 28 Aug 2020 18:13:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 27953C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A18D9C0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 15:16:23 +0000 (UTC)
+ Fri, 28 Aug 2020 18:13:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 1A5B181F19
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 073D58501D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 15:16:23 +0000 (UTC)
+ Fri, 28 Aug 2020 18:13:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6czvFV507rXJ
+ with ESMTP id cfogMLxgbgKI
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 15:16:21 +0000 (UTC)
+ Fri, 28 Aug 2020 18:13:53 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by hemlock.osuosl.org (Postfix) with ESMTPS id F0ED881B97
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 3FD9C844E0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 15:16:20 +0000 (UTC)
-Received: from zn.tnic (p200300ec2f0ba600cd7838aec083f6d5.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f0b:a600:cd78:38ae:c083:f6d5])
+ Fri, 28 Aug 2020 18:13:53 +0000 (UTC)
+Received: from zn.tnic (p200300ec2f0ba60078cbaf9a215c2e9d.dip0.t-ipconnect.de
+ [IPv6:2003:ec:2f0b:a600:78cb:af9a:215c:2e9d])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 944A81EC02B9;
- Fri, 28 Aug 2020 17:16:17 +0200 (CEST)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id EFDBB1EC03E3;
+ Fri, 28 Aug 2020 20:13:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1598627777;
+ t=1598638430;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=meDwPOYTdd66T0vfwRFtMe688dT0+BMttG7+4yclsTQ=;
- b=XUALlOcx2zHv1DJKkc6oXIOLCMHUY1mZHaAjbPaB7YVQdNjsJLwQgJzU5K5CRagOMDH3hl
- 3FsyQfYAAmB+9nG4T0bEp6DVzI9Oil9Dc+/F/hkJ+LzDJBEn2ptVVXoBtmZaaZC+AEjoFJ
- eGyvtTUPt0etAek6KaT7XY8gDWITvIk=
-Date: Fri, 28 Aug 2020 17:16:20 +0200
+ bh=/jYI5IHuv43D+ZADrXsFhwBXIJnV8i1FIyxJtyua/Yg=;
+ b=KXRzfulyqoFzRZ+dj+HluE21PJnj0cjQ69UGDcWcPA264jRdoC9l65vRds3AZNoIGQLiw/
+ etQ7GAfkKPIWNnJokkDlepYsvcxMPquvY19el5NfnOAs2br3nC3Vjryk/KQaFohIqhnVUW
+ NNFAZll3B7FQ4406XApoT0w5nSGLFcY=
+Date: Fri, 28 Aug 2020 20:13:46 +0200
 From: Borislav Petkov <bp@alien8.de>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v6 29/76] x86/idt: Split idt_data setup out of
- set_intr_gate()
-Message-ID: <20200828151620.GA19342@zn.tnic>
+Subject: Re: [PATCH v6 31/76] x86/head/64: Setup MSR_GS_BASE before calling
+ into C code
+Message-ID: <20200828181346.GB19342@zn.tnic>
 References: <20200824085511.7553-1-joro@8bytes.org>
- <20200824085511.7553-30-joro@8bytes.org>
+ <20200824085511.7553-32-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200824085511.7553-30-joro@8bytes.org>
+In-Reply-To: <20200824085511.7553-32-joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  x86@kernel.org, Mike Stunes <mstunes@vmware.com>,
  Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
@@ -92,17 +92,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Aug 24, 2020 at 10:54:24AM +0200, Joerg Roedel wrote:
-> From: Joerg Roedel <jroedel@suse.de>
-> 
-> The code to setup idt_data is needed for early exception handling, but
-> set_intr_gate() can't be used that early because it has pv-ops in its
-> code path, which don't work that early.
-> 
-> Split out the idt_data initialization part from set_intr_gate() so
-> that it can be used separatly.
+On Mon, Aug 24, 2020 at 10:54:26AM +0200, Joerg Roedel wrote:
+> diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+> index 2b2e91627221..800053219054 100644
+> --- a/arch/x86/kernel/head_64.S
+> +++ b/arch/x86/kernel/head_64.S
+> @@ -78,6 +78,14 @@ SYM_CODE_START_NOALIGN(startup_64)
+>  	call	startup_64_setup_env
+>  	popq	%rsi
+>  
+> +	/*
+> +	 * Setup %gs here already to make stack-protector work - it needs to be
+> +	 * setup again after the switch to kernel addresses. The address read
+> +	 * from initial_gs is a kernel address, so it needs to be adjusted first
+> +	 * for the identity mapping.
+> +	 */
+> +	movl	$MSR_GS_BASE,%ecx
 
-"separately"
+I'm confused: is this missing those three lines:
+
+        movl    initial_gs(%rip),%eax
+        movl    initial_gs+4(%rip),%edx
+        wrmsr
+
+as it is done in secondary_startup_64 ?
+
+Or why would you otherwise put 0xc0000101 in %ecx and not do anything
+with it...
 
 -- 
 Regards/Gruss,
