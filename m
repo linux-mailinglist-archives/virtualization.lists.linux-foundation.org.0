@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 973142559D9
-	for <lists.virtualization@lfdr.de>; Fri, 28 Aug 2020 14:12:37 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9C3C255A3B
+	for <lists.virtualization@lfdr.de>; Fri, 28 Aug 2020 14:33:15 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 48C7E86E5C;
-	Fri, 28 Aug 2020 12:12:36 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 50DAE88165;
+	Fri, 28 Aug 2020 12:33:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mwDSrAJltOXh; Fri, 28 Aug 2020 12:12:35 +0000 (UTC)
+	with ESMTP id A+mzD7OX2ubK; Fri, 28 Aug 2020 12:33:13 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D5D1286E35;
-	Fri, 28 Aug 2020 12:12:35 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 205A58818E;
+	Fri, 28 Aug 2020 12:33:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AC531C0893;
-	Fri, 28 Aug 2020 12:12:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 03E71C0051;
+	Fri, 28 Aug 2020 12:33:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 812F9C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D58A4C0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 12:12:33 +0000 (UTC)
+ Fri, 28 Aug 2020 12:33:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 70720885E3
+ by whitealder.osuosl.org (Postfix) with ESMTP id B9DF18815D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 12:12:33 +0000 (UTC)
+ Fri, 28 Aug 2020 12:33:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oNRdPbPj-vh7
+ with ESMTP id Wdy9mtNoNEB0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 12:12:32 +0000 (UTC)
+ Fri, 28 Aug 2020 12:33:10 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 3CB0C885B5
+ by whitealder.osuosl.org (Postfix) with ESMTPS id CC5BD88165
  for <virtualization@lists.linux-foundation.org>;
- Fri, 28 Aug 2020 12:12:32 +0000 (UTC)
+ Fri, 28 Aug 2020 12:33:09 +0000 (UTC)
 Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 45AC82E1; Fri, 28 Aug 2020 14:12:29 +0200 (CEST)
-Date: Fri, 28 Aug 2020 14:12:26 +0200
+ id 1F45E2E1; Fri, 28 Aug 2020 14:33:07 +0200 (CEST)
+Date: Fri, 28 Aug 2020 14:33:04 +0200
 From: Joerg Roedel <joro@8bytes.org>
 To: Arvind Sankar <nivedita@alum.mit.edu>
-Subject: Re: [PATCH v6 13/76] x86/boot/compressed/64: Add IDT Infrastructure
-Message-ID: <20200828121226.GC13881@8bytes.org>
+Subject: Re: [PATCH v6 27/76] x86/sev-es: Add CPUID handling to #VC handler
+Message-ID: <20200828123304.GD13881@8bytes.org>
 References: <20200824085511.7553-1-joro@8bytes.org>
- <20200824085511.7553-14-joro@8bytes.org>
- <20200827152657.GA669574@rani.riverdale.lan>
+ <20200824085511.7553-28-joro@8bytes.org>
+ <20200827224810.GA986963@rani.riverdale.lan>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200827152657.GA669574@rani.riverdale.lan>
+In-Reply-To: <20200827224810.GA986963@rani.riverdale.lan>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
  Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
@@ -74,37 +74,48 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-SGkgQXJ2aW5kLAoKT24gVGh1LCBBdWcgMjcsIDIwMjAgYXQgMTE6MjY6NTdBTSAtMDQwMCwgQXJ2
-aW5kIFNhbmthciB3cm90ZToKPiBPbiBNb24sIEF1ZyAyNCwgMjAyMCBhdCAxMDo1NDowOEFNICsw
-MjAwLCBKb2VyZyBSb2VkZWwgd3JvdGU6Cj4gPiArCXB1c2hxCSVyc2kKPiA+ICsJY2FsbAlsb2Fk
-X3N0YWdlMV9pZHQKPiA+ICsJcG9wcQklcnNpCj4gPiArCj4gCj4gRG8gd2UgbmVlZCB0aGUgZnVu
-Y3Rpb25zIGxhdGVyIGluIHRoZSBzZXJpZXMgb3IgY291bGQgdGhpcyBqdXN0IHVzZSBsaWR0Cj4g
-ZGlyZWN0bHk/CgpUaGUgZnVuY3Rpb24gYWxzbyBzZXRzIHVwIHRoZSBhY3R1YWwgSURUIGVudHJp
-ZXMgaW4gdGhlIHRhYmxlIGJlZm9yZQpkb2luZyB0aGUgbGlkdCwgc28gdGhpcyBuZWVkcyB0byBi
-ZSBhIGNhbGwgdG8gYSBDIGZ1bmN0aW9uLiBTZXR0aW5nIHVwCklEVCBlbnRyaWVzIGluIGFzc2Vt
-Ymx5IGRvZXMgbm90IHJlc3VsdCBpbiByZWFkYWJsZSBjb2RlLgoKPiBJcyB0aGVyZSBhbnkgcmlz
-ayBvZiBleGNlcHRpb25zIGdldHRpbmcgdHJpZ2dlcmVkIGR1cmluZyB0aGUgbW92ZSBvZiB0aGUK
-PiBjb21wcmVzc2VkIGtlcm5lbCwgYmVmb3JlIHRoZSBzdGFnZTIgcmVsb2FkPwoKTm8sIHRoYXQg
-d291bGQgYmUgYSBidWcgaW4gZWl0aGVyIHRoZSBVRUZJIEJJT1Mgb3IgaW4gdGhlIGJvb3QgY29k
-ZS4KV2hlbiB0aGUga2VybmVsIGltYWdlIGlzIG1vdmVkIHRvIHRoZSBlbmQgb2YgdGhlIGRlY29t
-cHJlc3Npb24gYnVmZmVyIGl0CnN0aWxsIHJ1bnMgb24gdGhlIEVGSSBwYWdlLXRhYmxlLgoKV2l0
-aCB0aGUgY2hhbmdlcyBpbiB0aGlzIHBhdGNoLXNldCB0aGVyZSB3aWxsIGJlIHBhZ2UtZmF1bHRz
-IHdoZW4gdGhlCmtlcm5lbCBpcyBhY3R1YWxseSBkZWNvbXByZXNzZWQuIEJ1dCB0aGF0IGhhcHBl
-bnMgYWZ0ZXIgdGhlIHN0YWdlMi1pZHQKaXMgbG9hZGVkLgoKPiA+ICtTWU1fREFUQV9TVEFSVChi
-b290X2lkdF9kZXNjKQo+ID4gKwkud29yZAlib290X2lkdF9lbmQgLSBib290X2lkdAo+IAo+IEkg
-dGhpbmsgdGhpcyBzaG91bGQgYmUgYm9vdF9pZHRfZW5kIC0gYm9vdF9pZHQgLSAxLCByaWdodD8K
-PiAgIFRoZSBsaW1pdCB2YWx1ZSBpcyBleHByZXNzZWQgaW4gYnl0ZXMgYW5kIGlzIGFkZGVkIHRv
-IHRoZSBiYXNlIGFkZHJlc3MKPiAgIHRvIGdldCB0aGUgYWRkcmVzcyBvZiB0aGUgbGFzdCB2YWxp
-ZCBieXRlLiBBIGxpbWl0IHZhbHVlIG9mIDAgcmVzdWx0cwo+ICAgaW4gZXhhY3RseSAxIHZhbGlk
-IGJ5dGUuIEJlY2F1c2UgSURUIGVudHJpZXMgYXJlIGFsd2F5cyBlaWdodCBieXRlcwo+ICAgbG9u
-ZywgdGhlIGxpbWl0IHNob3VsZCBhbHdheXMgYmUgb25lIGxlc3MgdGhhbiBhbiBpbnRlZ3JhbCBt
-dWx0aXBsZSBvZgo+ICAgZWlnaHQgKHRoYXQgaXMsIDhOIOKAkyAxKS4KCllvdSBhcmUgcmlnaHQs
-IEkgd2lsbCBmaXggdGhhdCwgdGhhbmtzLgoKUmVnYXJkcywKCglKb2VyZwpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5n
-IGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9s
-aXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Thu, Aug 27, 2020 at 06:48:10PM -0400, Arvind Sankar wrote:
+> On Mon, Aug 24, 2020 at 10:54:22AM +0200, Joerg Roedel wrote:
+> > From: Tom Lendacky <thomas.lendacky@amd.com>
+> > 
+> > Handle #VC exceptions caused by CPUID instructions. These happen in
+> > early boot code when the KASLR code checks for RDTSC.
+> > 
+> > Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
+> > [ jroedel@suse.de: Adapt to #VC handling framework ]
+> > Co-developed-by: Joerg Roedel <jroedel@suse.de>
+> > Signed-off-by: Joerg Roedel <jroedel@suse.de>
+> > Link: https://lore.kernel.org/r/20200724160336.5435-27-joro@8bytes.org
+> > ---
+> > +
+> > +static enum es_result vc_handle_cpuid(struct ghcb *ghcb,
+> > +				      struct es_em_ctxt *ctxt)
+> > +{
+> > +	struct pt_regs *regs = ctxt->regs;
+> > +	u32 cr4 = native_read_cr4();
+> > +	enum es_result ret;
+> > +
+> > +	ghcb_set_rax(ghcb, regs->ax);
+> > +	ghcb_set_rcx(ghcb, regs->cx);
+> > +
+> > +	if (cr4 & X86_CR4_OSXSAVE)
+> 
+> Will this ever happen? trampoline_32bit_src will clear CR4 except for
+> PAE and possibly LA57, no?
+
+This same code is later re-used in the runtime handler and there the
+check is needed :)
+
+Regards,
+
+	Joerg
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
