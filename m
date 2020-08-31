@@ -2,67 +2,67 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C8FB257F46
-	for <lists.virtualization@lfdr.de>; Mon, 31 Aug 2020 19:09:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 438D1257F8E
+	for <lists.virtualization@lfdr.de>; Mon, 31 Aug 2020 19:25:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CEB9285EAF;
-	Mon, 31 Aug 2020 17:09:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E99CF85F33;
+	Mon, 31 Aug 2020 17:25:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id I-Di7k5uQqmh; Mon, 31 Aug 2020 17:09:47 +0000 (UTC)
+	with ESMTP id s9C5sMhsvJ4z; Mon, 31 Aug 2020 17:25:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4971385D54;
-	Mon, 31 Aug 2020 17:09:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 54C69848BE;
+	Mon, 31 Aug 2020 17:25:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 197E6C0051;
-	Mon, 31 Aug 2020 17:09:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 300C7C0051;
+	Mon, 31 Aug 2020 17:25:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3421EC0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 12032C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 17:09:45 +0000 (UTC)
+ Mon, 31 Aug 2020 17:25:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 22B8586FE4
+ by whitealder.osuosl.org (Postfix) with ESMTP id 009C7853E3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 17:09:45 +0000 (UTC)
+ Mon, 31 Aug 2020 17:25:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TSG-JMNeeq5j
+ with ESMTP id M9IuJndm6nJ7
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 17:09:44 +0000 (UTC)
+ Mon, 31 Aug 2020 17:25:24 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by hemlock.osuosl.org (Postfix) with ESMTPS id E86D186F7A
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6468B8507B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 17:09:43 +0000 (UTC)
+ Mon, 31 Aug 2020 17:25:24 +0000 (UTC)
 Received: from zn.tnic (p200300ec2f085000329c23fffea6a903.dip0.t-ipconnect.de
  [IPv6:2003:ec:2f08:5000:329c:23ff:fea6:a903])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 143D61EC0428;
- Mon, 31 Aug 2020 19:09:41 +0200 (CEST)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id B10141EC0428;
+ Mon, 31 Aug 2020 19:25:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1598893781;
+ t=1598894722;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=aMZ5RZS0u1emzQ3FTdi1Dugu3WlGF9pi+6qmkEnK8Rw=;
- b=ni5Nt2PkyGASdLM+wB6eGSOKHks/SlKYXYL7PxLqWA9CEjov0CKErJ+94GqUsJTGbjV6hL
- HQi66OT4bPcjktuYjPQtvsS5QzgszPY4oKoQCYQlOr+cxDUXkCYmTT/Scd30nURTokc54z
- QfGRFJpmgV69Er15hYQJbH7ppI/yx9A=
-Date: Mon, 31 Aug 2020 19:09:37 +0200
+ bh=55N3m19xFX+WeTO1FbLrZJGhHueve9LBb3xbHqo4WZc=;
+ b=KKOc6D3lpnJoODJ4KbKeLr28wdnjbr7+fuvuUwJFH3E1UBaA9FaDiFbEBYxtFN6cvGCm+R
+ FuSByUuFImwEoa9FnyY60HLjv3klMPCT+V7r1V+IretyrkuZfTUATjBpn2jIqUjwG4iJmH
+ ebRA+zcZsrYhOplPjtq9nsOHjKNQP5k=
+Date: Mon, 31 Aug 2020 19:25:19 +0200
 From: Borislav Petkov <bp@alien8.de>
 To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v6 69/76] x86/realmode: Setup AP jump table
-Message-ID: <20200831170937.GK27517@zn.tnic>
+Subject: Re: [PATCH v6 70/76] x86/smpboot: Setup TSS for starting AP
+Message-ID: <20200831172519.GL27517@zn.tnic>
 References: <20200824085511.7553-1-joro@8bytes.org>
- <20200824085511.7553-70-joro@8bytes.org>
+ <20200824085511.7553-71-joro@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200824085511.7553-70-joro@8bytes.org>
+In-Reply-To: <20200824085511.7553-71-joro@8bytes.org>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
  Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
@@ -91,112 +91,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Aug 24, 2020 at 10:55:04AM +0200, Joerg Roedel wrote:
-> diff --git a/arch/x86/include/uapi/asm/svm.h b/arch/x86/include/uapi/asm/svm.h
-> index 8f36ae021a7f..a19ce9681ec2 100644
-> --- a/arch/x86/include/uapi/asm/svm.h
-> +++ b/arch/x86/include/uapi/asm/svm.h
-> @@ -84,6 +84,9 @@
->  /* SEV-ES software-defined VMGEXIT events */
->  #define SVM_VMGEXIT_MMIO_READ			0x80000001
->  #define SVM_VMGEXIT_MMIO_WRITE			0x80000002
-> +#define SVM_VMGEXIT_AP_JUMP_TABLE		0x80000005
-> +#define		SVM_VMGEXIT_SET_AP_JUMP_TABLE			0
-> +#define		SVM_VMGEXIT_GET_AP_JUMP_TABLE			1
-	  ^^^^^^^^^^^^
-
-One tab too many here.
-
->  #define SVM_VMGEXIT_UNSUPPORTED_EVENT		0x8000ffff
->  
->  #define SVM_EXIT_ERR           -1
-> diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-> index 28fe95ecd508..09a45ccd6c1d 100644
-> --- a/arch/x86/kernel/sev-es.c
-> +++ b/arch/x86/kernel/sev-es.c
-> @@ -21,6 +21,8 @@
->  #include <linux/mm.h>
->  
->  #include <asm/cpu_entry_area.h>
-> +#include <asm/stacktrace.h>
-> +#include <asm/realmode.h>
->  #include <asm/sev-es.h>
->  #include <asm/insn-eval.h>
->  #include <asm/fpu/internal.h>
-> @@ -219,6 +221,9 @@ static __always_inline void sev_es_put_ghcb(struct ghcb_state *state)
->  	}
+On Mon, Aug 24, 2020 at 10:55:05AM +0200, Joerg Roedel wrote:
+> @@ -1814,27 +1814,26 @@ static inline void ucode_cpu_init(int cpu)
+>  		load_ucode_ap();
 >  }
 >  
-> +/* Needed in vc_early_vc_forward_exception */
-
-vc_early_forward_exception()
-
-> +void do_early_exception(struct pt_regs *regs, int trapnr);
-> +
->  static inline u64 sev_es_rd_ghcb_msr(void)
+> -static inline void tss_setup_ist(struct tss_struct *tss)
+> +static inline void tss_setup_ist(struct tss_struct *tss,
+> +				 struct cpu_entry_area *cea)
 >  {
->  	return native_read_msr(MSR_AMD64_SEV_ES_GHCB);
-> @@ -407,6 +412,69 @@ static bool vc_slow_virt_to_phys(struct ghcb *ghcb, struct es_em_ctxt *ctxt,
->  /* Include code shared with pre-decompression boot stage */
->  #include "sev-es-shared.c"
->  
-> +static u64 sev_es_get_jump_table_addr(void)
+>  	/* Set up the per-CPU TSS IST stacks */
+> -	tss->x86_tss.ist[IST_INDEX_DF] = __this_cpu_ist_top_va(DF);
+> -	tss->x86_tss.ist[IST_INDEX_NMI] = __this_cpu_ist_top_va(NMI);
+> -	tss->x86_tss.ist[IST_INDEX_DB] = __this_cpu_ist_top_va(DB);
+> -	tss->x86_tss.ist[IST_INDEX_MCE] = __this_cpu_ist_top_va(MCE);
+> +	tss->x86_tss.ist[IST_INDEX_DF]  = CEA_ESTACK_TOP(&cea->estacks, DF);
+> +	tss->x86_tss.ist[IST_INDEX_NMI] = CEA_ESTACK_TOP(&cea->estacks, NMI);
+> +	tss->x86_tss.ist[IST_INDEX_DB]  = CEA_ESTACK_TOP(&cea->estacks, DB);
+> +	tss->x86_tss.ist[IST_INDEX_MCE] = CEA_ESTACK_TOP(&cea->estacks, MCE);
 
-Static and used here only once - you can drop the previx "sev_es".
+#ifdef CONFIG_AMD_MEM_ENCRYPT
 
-> +{
-> +	struct ghcb_state state;
-> +	unsigned long flags;
-> +	struct ghcb *ghcb;
-> +	u64 ret;
-> +
-> +	local_irq_save(flags);
-> +
-> +	ghcb = sev_es_get_ghcb(&state);
-> +
-> +	vc_ghcb_invalidate(ghcb);
-> +	ghcb_set_sw_exit_code(ghcb, SVM_VMGEXIT_AP_JUMP_TABLE);
-> +	ghcb_set_sw_exit_info_1(ghcb, SVM_VMGEXIT_GET_AP_JUMP_TABLE);
-> +	ghcb_set_sw_exit_info_2(ghcb, 0);
-> +
-> +	sev_es_wr_ghcb_msr(__pa(ghcb));
-> +	VMGEXIT();
-> +
-> +	if (!ghcb_sw_exit_info_1_is_valid(ghcb) ||
-> +	    !ghcb_sw_exit_info_2_is_valid(ghcb))
-> +		ret = 0;
-> +
-> +	ret = ghcb->save.sw_exit_info_2;
-> +
-> +	sev_es_put_ghcb(&state);
-> +
-> +	local_irq_restore(flags);
-> +
-> +	return ret;
-> +}
-> +
-> +int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
-> +{
-> +	u16 startup_cs, startup_ip;
-> +	phys_addr_t jump_table_pa;
-> +	u64 jump_table_addr;
-> +	u16 __iomem *jump_table;
-> +
-> +	jump_table_addr = sev_es_get_jump_table_addr();
-> +
-> +	/* Check if AP Jump Table is non-zero and page-aligned */
-> +	if (!jump_table_addr || jump_table_addr & ~PAGE_MASK)
-> +		return 0;
+>  	/* Only mapped when SEV-ES is active */
+> -	tss->x86_tss.ist[IST_INDEX_VC] = __this_cpu_ist_top_va(VC);
+> +	tss->x86_tss.ist[IST_INDEX_VC]	= CEA_ESTACK_TOP(&cea->estacks, VC);
 
-I think you need to return !0 here so that the panic() below fires with
-a modified message:
-
-	panic("Failed to get/update SEV-ES AP Jump Table");
-
-or are we gonna boot an UP guest still?
-
-If not panic, at least a warning that at least some APs didn't come
-up...
+#endif
 
 -- 
 Regards/Gruss,
