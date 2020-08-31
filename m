@@ -1,68 +1,111 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 922E42575E9
-	for <lists.virtualization@lfdr.de>; Mon, 31 Aug 2020 10:58:22 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 55350257612
+	for <lists.virtualization@lfdr.de>; Mon, 31 Aug 2020 11:10:07 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 459BE85045;
-	Mon, 31 Aug 2020 08:58:21 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 1682E85A7D;
+	Mon, 31 Aug 2020 09:10:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yOhb6k7LdhGg; Mon, 31 Aug 2020 08:58:19 +0000 (UTC)
+	with ESMTP id TvrMpVBRFxZB; Mon, 31 Aug 2020 09:10:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D8CAB86174;
-	Mon, 31 Aug 2020 08:58:19 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 97A2B8544C;
+	Mon, 31 Aug 2020 09:10:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BC640C0051;
-	Mon, 31 Aug 2020 08:58:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 588A2C0051;
+	Mon, 31 Aug 2020 09:10:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 28638C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3CEEEC0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 08:58:18 +0000 (UTC)
+ Mon, 31 Aug 2020 09:10:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 120DF87648
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 21F7085495
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 08:58:18 +0000 (UTC)
+ Mon, 31 Aug 2020 09:10:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EmYcSq5wmHqi
+ with ESMTP id k65ZzNUdwrDe
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 08:58:16 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 577ED87532
+ Mon, 31 Aug 2020 09:10:02 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 5B5D9852D5
  for <virtualization@lists.linux-foundation.org>;
- Mon, 31 Aug 2020 08:58:16 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 4F673310; Mon, 31 Aug 2020 10:58:13 +0200 (CEST)
-Date: Mon, 31 Aug 2020 10:58:10 +0200
-From: Joerg Roedel <joro@8bytes.org>
-To: Borislav Petkov <bp@alien8.de>
-Subject: Re: [PATCH v6 38/76] x86/head/64: Set CR4.FSGSBASE early
-Message-ID: <20200831085810.GA13507@8bytes.org>
-References: <20200824085511.7553-1-joro@8bytes.org>
- <20200824085511.7553-39-joro@8bytes.org>
- <20200829155525.GB29091@zn.tnic>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200829155525.GB29091@zn.tnic>
-Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
- Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Cfir Cohen <cfir@google.com>,
- x86@kernel.org, linux-kernel@vger.kernel.org,
- Sean Christopherson <sean.j.christopherson@intel.com>,
- virtualization@lists.linux-foundation.org,
- Martin Radev <martin.b.radev@gmail.com>, Joerg Roedel <jroedel@suse.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- hpa@zytor.com, Erdem Aktas <erdemaktas@google.com>,
- David Rientjes <rientjes@google.com>, Dan Williams <dan.j.williams@intel.com>,
- Jiri Slaby <jslaby@suse.cz>
+ Mon, 31 Aug 2020 09:10:02 +0000 (UTC)
+Received: from pps.filterd (m0127361.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 07V91wx3132558; Mon, 31 Aug 2020 05:09:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=from : to : cc : subject : date : message-id; s=pp1;
+ bh=LAaTEag7rfqT6w9lcK2QWR89UbUVGYDylsa7lF6cjIw=;
+ b=UZWmdfeQoqE0x29aj2NVKcoTg1HZsmPFyABaLWS0BSdsXmf2DPiM92qUF/DVUDsFY1ht
+ 36BYzw2PGlwJ541c7GpHQKNy+uyfqCXOQ3t8VAjwGgPQUjc3mOnCbqBLaFtUR1ADgZEd
+ RuF3pM2L2qUgIcCR3PktDwm3xuYFqF4bDZ119CBL42qaPTELKZK13T/Ri6bYx6Bpbrla
+ feQ898e8ROMXbSNfMm1TiPZN5wH7HpLnZR2K1y1mgbZYcFii7NeyM9K+X0ayB6ixGu5u
+ C42zUin0fpZb69J/nsdxmwuOAK8KHoFU7WpsRlLWZ10qK848+GXYhPAHL9wDoQzSkwOM sQ== 
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 338x2dgcxp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 31 Aug 2020 05:09:56 -0400
+Received: from m0127361.ppops.net (m0127361.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 07V92Nv4133765;
+ Mon, 31 Aug 2020 05:09:55 -0400
+Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.99])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 338x2dgcw4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 31 Aug 2020 05:09:55 -0400
+Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
+ by ppma04ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 07V8TlVg007596;
+ Mon, 31 Aug 2020 09:09:51 GMT
+Received: from b06cxnps3074.portsmouth.uk.ibm.com
+ (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
+ by ppma04ams.nl.ibm.com with ESMTP id 337en81yac-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 31 Aug 2020 09:09:51 +0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+ [9.149.105.62])
+ by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 07V99mDt29032762
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 31 Aug 2020 09:09:48 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 24C4EAE051;
+ Mon, 31 Aug 2020 09:09:48 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6D51DAE045;
+ Mon, 31 Aug 2020 09:09:47 +0000 (GMT)
+Received: from oc3016276355.ibm.com (unknown [9.145.40.55])
+ by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Mon, 31 Aug 2020 09:09:47 +0000 (GMT)
+From: Pierre Morel <pmorel@linux.ibm.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v10 0/2] s390: virtio: let arch validate VIRTIO features
+Date: Mon, 31 Aug 2020 11:09:44 +0200
+Message-Id: <1598864986-13875-1-git-send-email-pmorel@linux.ibm.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-08-31_01:2020-08-28,
+ 2020-08-31 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015
+ suspectscore=1 bulkscore=0 spamscore=0 adultscore=0 priorityscore=1501
+ lowpriorityscore=0 mlxlogscore=999 mlxscore=0 phishscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
+ definitions=main-2008310051
+Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
+ kvm@vger.kernel.org, mst@redhat.com, cohuck@redhat.com, linuxram@us.ibm.com,
+ virtualization@lists.linux-foundation.org, pasic@linux.ibm.com,
+ borntraeger@de.ibm.com, thomas.lendacky@amd.com, hca@linux.ibm.com,
+ david@gibson.dropbear.id.au
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,62 +117,120 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sat, Aug 29, 2020 at 05:55:25PM +0200, Borislav Petkov wrote:
-> On Mon, Aug 24, 2020 at 10:54:33AM +0200, Joerg Roedel wrote:
-> > From: Joerg Roedel <jroedel@suse.de>
-> > 
-> > Early exception handling will use rd/wrgsbase in paranoid_entry/exit.
-> > Enable the feature to avoid #UD exceptions on boot APs.
-> > 
-> > Signed-off-by: Joerg Roedel <jroedel@suse.de>
-> > Link: https://lore.kernel.org/r/20200724160336.5435-38-joro@8bytes.org
-> > ---
-> >  arch/x86/kernel/head_64.S | 7 +++++++
-> >  1 file changed, 7 insertions(+)
-> > 
-> > diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-> > index 08412f308de3..4622940134a5 100644
-> > --- a/arch/x86/kernel/head_64.S
-> > +++ b/arch/x86/kernel/head_64.S
-> > @@ -153,6 +153,13 @@ SYM_CODE_START(secondary_startup_64)
-> >  	orl	$X86_CR4_LA57, %ecx
-> >  1:
-> >  #endif
-> > +
-> > +	ALTERNATIVE "jmp .Lstartup_write_cr4", "", X86_FEATURE_FSGSBASE
-> > +
-> > +	/* Early exception handling uses FSGSBASE on APs */
-> > +	orl	$X86_CR4_FSGSBASE, %ecx
-> 
-> How is this supposed to work?
-> 
-> Alternatives haven't run that early yet and that piece of code looks
-> like this:
-> 
-> ffffffff81000067:       eb 06                   jmp    ffffffff8100006f <secondary_startup_64+0x1f>
-> ffffffff81000069:       81 c9 00 00 01 00       or     $0x10000,%ecx
-> ffffffff8100006f:       0f 22 e1                mov    %rcx,%cr4
-> 
-> so we'll never set X86_CR4_FSGSBASE during early boot.
+Hi all,
 
-This is not needed on the boot CPU, but only on secondary CPUs. When
-those are brought up the alternatives have been patches already. The
-commit message should probably be more clear about that, I will fix
-that.
+The goal of the series is to give a chance to the architecture
+to validate VIRTIO device features.
 
-The CR4 bit also can't be set unconditionally here on the boot CPU,
-because at that point the kernel does not know whether the CPU has
-support for the fsgsbase instructions.
+The tests are back to virtio_finalize_features.
 
+No more argument for the architecture callback which only reports
+if the architecture needs guest memory access restrictions for
+VIRTIO.
+
+
+I renamed the callback to arch_has_restricted_virtio_memory_access,
+and the config option to ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS.
 
 Regards,
+Pierre
 
-	Joerg
+Pierre Morel (2):
+  virtio: let arch advertise guest's memory access restrictions
+  s390: virtio: PV needs VIRTIO I/O device protection
+
+ arch/s390/Kconfig             |  1 +
+ arch/s390/mm/init.c           | 10 ++++++++++
+ drivers/virtio/Kconfig        |  6 ++++++
+ drivers/virtio/virtio.c       | 15 +++++++++++++++
+ include/linux/virtio_config.h |  9 +++++++++
+ 5 files changed, 41 insertions(+)
+
+-- 
+2.25.1
+
+Changelog
+
+to v10:
+- removed virtio_config.h unnecessary include
+- wording
+  (Connie)
+
+to v9:
+
+- move virtio tests back to virtio_finalize_features
+  (Connie)
+
+- remove virtio device argument
+
+to v8:
+
+- refactoring by using an optional callback
+  (Connie)
+
+to v7:
+
+- typo in warning message
+  (Connie)
+to v6:
+
+- rewording warning messages
+  (Connie, Halil)
+
+to v5:
+
+- return directly from S390 arch_validate_virtio_features()
+  when the guest is not protected.
+  (Connie)
+
+- Somme rewording
+  (Connie, Michael)
+
+- moved back code from arch/s390/ ...kernel/uv.c to ...mm/init.c
+  (Christian)
+
+to v4:
+
+- separate virtio and arch code
+  (Pierre)
+
+- moved code from arch/s390/mm/init.c to arch/s390/kernel/uv.c
+  (as interpreted from Heiko's comment)
+
+- moved validation inside the arch code
+  (Connie)
+
+- moved the call to arch validation before VIRTIO_F_1 test
+  (Michael)
+
+to v3:
+
+- add warning
+  (Connie, Christian)
+
+- add comment
+  (Connie)
+
+- change hook name
+  (Halil, Connie)
+
+to v2:
+
+- put the test in virtio_finalize_features()
+  (Connie)
+
+- put the test inside VIRTIO core
+  (Jason)
+
+- pass a virtio device as parameter
+  (Halil)
+
 
 _______________________________________________
 Virtualization mailing list
