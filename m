@@ -2,69 +2,55 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAE28258F3A
-	for <lists.virtualization@lfdr.de>; Tue,  1 Sep 2020 15:35:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 209DA258F99
+	for <lists.virtualization@lfdr.de>; Tue,  1 Sep 2020 15:55:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 39B188638E;
-	Tue,  1 Sep 2020 13:35:48 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CE63886243;
+	Tue,  1 Sep 2020 13:55:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id b2wAaPM2PXWE; Tue,  1 Sep 2020 13:35:47 +0000 (UTC)
+	with ESMTP id BeZMRW9CMrIl; Tue,  1 Sep 2020 13:55:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 834E786366;
-	Tue,  1 Sep 2020 13:35:47 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 60FAB8605E;
+	Tue,  1 Sep 2020 13:55:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F58DC0051;
-	Tue,  1 Sep 2020 13:35:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4361AC0051;
+	Tue,  1 Sep 2020 13:55:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8C02CC0051
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DD58CC0051
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Sep 2020 13:35:44 +0000 (UTC)
+ Tue,  1 Sep 2020 13:55:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 7789B86329
+ by silver.osuosl.org (Postfix) with ESMTP id D56E9204CF
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Sep 2020 13:35:44 +0000 (UTC)
+ Tue,  1 Sep 2020 13:55:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gLB8fjcm_kpx
+ with ESMTP id PEPM5U+oLXGM
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Sep 2020 13:35:42 +0000 (UTC)
+ Tue,  1 Sep 2020 13:55:49 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 56ADE86364
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by silver.osuosl.org (Postfix) with ESMTPS id 00DBF204B2
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Sep 2020 13:35:42 +0000 (UTC)
-Received: from zn.tnic (p200300ec2f111c007491deb0958a174e.dip0.t-ipconnect.de
- [IPv6:2003:ec:2f11:1c00:7491:deb0:958a:174e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id CD2391EC03D5;
- Tue,  1 Sep 2020 15:35:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
- t=1598967339;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
- bh=flNT8BlYGvKFOKB98jgOsAoNUeim9IL+4My/SG6ASRY=;
- b=P5pGN0SxhVWwZrCLfFDHydxcPdvplMeVoLbAWeQzzF3a49dKG8Q2LYwt1HVrZpmskmlQlA
- iUYMKEoVyiJh8mmD3eQi8VYbZZl6iTFcFu8KcQDiqNUqHEdsmO7Z1jKBDYNFcnkBHlXNd4
- SrKeWgGeC7gLZKfe1hOR7fSU3kc0rUA=
-Date: Tue, 1 Sep 2020 15:35:34 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: Joerg Roedel <joro@8bytes.org>
-Subject: Re: [PATCH v6 42/76] x86/sev-es: Setup early #VC handler
-Message-ID: <20200901133534.GB8392@zn.tnic>
+ Tue,  1 Sep 2020 13:55:48 +0000 (UTC)
+Received: by theia.8bytes.org (Postfix, from userid 1000)
+ id 9D02D391; Tue,  1 Sep 2020 15:55:46 +0200 (CEST)
+Date: Tue, 1 Sep 2020 15:55:45 +0200
+From: Joerg Roedel <joro@8bytes.org>
+To: Borislav Petkov <bp@alien8.de>
+Subject: Re: [PATCH v6 69/76] x86/realmode: Setup AP jump table
+Message-ID: <20200901135545.GE22385@8bytes.org>
 References: <20200824085511.7553-1-joro@8bytes.org>
- <20200824085511.7553-43-joro@8bytes.org>
- <20200831094541.GD27517@zn.tnic>
- <20200901125922.GC22385@8bytes.org>
+ <20200824085511.7553-70-joro@8bytes.org>
+ <20200831170937.GK27517@zn.tnic>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200901125922.GC22385@8bytes.org>
+In-Reply-To: <20200831170937.GK27517@zn.tnic>
 Cc: Juergen Gross <jgross@suse.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, Mike Stunes <mstunes@vmware.com>,
  Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org,
@@ -93,18 +79,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Sep 01, 2020 at 02:59:22PM +0200, Joerg Roedel wrote:
-> True, but having a separate function might be handy when support for #VE
-> and #HV is developed. Those might also need to setup their early
-> handlers here, no?
+On Mon, Aug 31, 2020 at 07:09:37PM +0200, Borislav Petkov wrote:
+> On Mon, Aug 24, 2020 at 10:55:04AM +0200, Joerg Roedel wrote:
+> > +	/* Check if AP Jump Table is non-zero and page-aligned */
+> > +	if (!jump_table_addr || jump_table_addr & ~PAGE_MASK)
+> > +		return 0;
+> 
+> I think you need to return !0 here so that the panic() below fires with
+> a modified message:
+> 
+> 	panic("Failed to get/update SEV-ES AP Jump Table");
+> 
+> or are we gonna boot an UP guest still?
 
-Ok.
+Right, this needs a !0 return value. This code runs once on the boot CPU
+before the kernel starts the secondary CPUs, so a panic() is the right
+thing to do if this fails.
 
--- 
-Regards/Gruss,
-    Boris.
+Regards,
 
-https://people.kernel.org/tglx/notes-about-netiquette
+	Joerg
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
