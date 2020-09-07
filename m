@@ -1,54 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A719D25FB2A
-	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:17:17 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id D64EA25FB2B
+	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:17:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5DE8B85F8E;
-	Mon,  7 Sep 2020 13:17:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7FFC08676F;
+	Mon,  7 Sep 2020 13:17:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kpwNcoovZkib; Mon,  7 Sep 2020 13:17:11 +0000 (UTC)
+	with ESMTP id fXUc773KuzRW; Mon,  7 Sep 2020 13:17:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A36EE85F90;
-	Mon,  7 Sep 2020 13:17:11 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 64CBC867FA;
+	Mon,  7 Sep 2020 13:17:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9328AC0859;
-	Mon,  7 Sep 2020 13:17:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4F636C0051;
+	Mon,  7 Sep 2020 13:17:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A86DDC0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A358BC0859
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:10 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id A52E685FAD
+ by hemlock.osuosl.org (Postfix) with ESMTP id 8F45C87175
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:10 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3RWLBrL3LVwG
+ with ESMTP id RRI4GiINulSu
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:04 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:05 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id DF20386053
+ by hemlock.osuosl.org (Postfix) with ESMTPS id ECE8087170
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:03 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:04 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549add56.dip0.t-ipconnect.de
  [84.154.221.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 9056AFFC;
- Mon,  7 Sep 2020 15:17:00 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 2118C1004;
+ Mon,  7 Sep 2020 15:17:01 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v7 36/72] x86/sev-es: Add SEV-ES Feature Detection
-Date: Mon,  7 Sep 2020 15:15:37 +0200
-Message-Id: <20200907131613.12703-37-joro@8bytes.org>
+Subject: [PATCH v7 37/72] x86/sev-es: Print SEV-ES info into kernel log
+Date: Mon,  7 Sep 2020 15:15:38 +0200
+Message-Id: <20200907131613.12703-38-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200907131613.12703-1-joro@8bytes.org>
 References: <20200907131613.12703-1-joro@8bytes.org>
@@ -84,102 +84,63 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Add the sev_es_active function for checking whether SEV-ES is enabled.
-Also cache the value of MSR_AMD64_SEV at boot to speed up the feature
-checking in the running code.
+Refactor the message printed to the kernel log which indicates whether
+SEV or SME is active to print a list of enabled encryption features.
+This will scale better in the future when more memory encryption
+features might be added. Also add SEV-ES to the list of features.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 Reviewed-by: Kees Cook <keescook@chromium.org>
 ---
- arch/x86/include/asm/mem_encrypt.h | 3 +++
- arch/x86/include/asm/msr-index.h   | 2 ++
- arch/x86/mm/mem_encrypt.c          | 9 ++++++++-
- arch/x86/mm/mem_encrypt_identity.c | 3 +++
- 4 files changed, 16 insertions(+), 1 deletion(-)
+ arch/x86/mm/mem_encrypt.c | 29 ++++++++++++++++++++++++++---
+ 1 file changed, 26 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/include/asm/mem_encrypt.h b/arch/x86/include/asm/mem_encrypt.h
-index 5049f6c22683..4e72b73a9cb5 100644
---- a/arch/x86/include/asm/mem_encrypt.h
-+++ b/arch/x86/include/asm/mem_encrypt.h
-@@ -19,6 +19,7 @@
- #ifdef CONFIG_AMD_MEM_ENCRYPT
- 
- extern u64 sme_me_mask;
-+extern u64 sev_status;
- extern bool sev_enabled;
- 
- void sme_encrypt_execute(unsigned long encrypted_kernel_vaddr,
-@@ -50,6 +51,7 @@ void __init mem_encrypt_init(void);
- 
- bool sme_active(void);
- bool sev_active(void);
-+bool sev_es_active(void);
- 
- #define __bss_decrypted __attribute__((__section__(".bss..decrypted")))
- 
-@@ -72,6 +74,7 @@ static inline void __init sme_enable(struct boot_params *bp) { }
- 
- static inline bool sme_active(void) { return false; }
- static inline bool sev_active(void) { return false; }
-+static inline bool sev_es_active(void) { return false; }
- 
- static inline int __init
- early_set_memory_decrypted(unsigned long vaddr, unsigned long size) { return 0; }
-diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-index.h
-index cd6d651ff730..95871defba91 100644
---- a/arch/x86/include/asm/msr-index.h
-+++ b/arch/x86/include/asm/msr-index.h
-@@ -469,7 +469,9 @@
- #define MSR_AMD64_SEV_ES_GHCB		0xc0010130
- #define MSR_AMD64_SEV			0xc0010131
- #define MSR_AMD64_SEV_ENABLED_BIT	0
-+#define MSR_AMD64_SEV_ES_ENABLED_BIT	1
- #define MSR_AMD64_SEV_ENABLED		BIT_ULL(MSR_AMD64_SEV_ENABLED_BIT)
-+#define MSR_AMD64_SEV_ES_ENABLED	BIT_ULL(MSR_AMD64_SEV_ES_ENABLED_BIT)
- 
- #define MSR_AMD64_VIRT_SPEC_CTRL	0xc001011f
- 
 diff --git a/arch/x86/mm/mem_encrypt.c b/arch/x86/mm/mem_encrypt.c
-index 9f1177edc2e7..d0d4ebcec1be 100644
+index d0d4ebcec1be..d6b8f4c1d3fa 100644
 --- a/arch/x86/mm/mem_encrypt.c
 +++ b/arch/x86/mm/mem_encrypt.c
-@@ -38,6 +38,7 @@
-  * section is later cleared.
-  */
- u64 sme_me_mask __section(.data) = 0;
-+u64 sev_status __section(.data) = 0;
- EXPORT_SYMBOL(sme_me_mask);
- DEFINE_STATIC_KEY_FALSE(sev_enable_key);
- EXPORT_SYMBOL_GPL(sev_enable_key);
-@@ -347,7 +348,13 @@ bool sme_active(void)
- 
- bool sev_active(void)
- {
--	return sme_me_mask && sev_enabled;
-+	return !!(sev_status & MSR_AMD64_SEV_ENABLED);
-+}
-+
-+/* Needs to be called from non-instrumentable code */
-+bool noinstr sev_es_active(void)
-+{
-+	return sev_status & MSR_AMD64_SEV_ES_ENABLED;
+@@ -407,6 +407,31 @@ void __init mem_encrypt_free_decrypted_mem(void)
+ 	free_init_pages("unused decrypted", vaddr, vaddr_end);
  }
  
- /* Override for DMA direct allocation check - ARCH_HAS_FORCE_DMA_UNENCRYPTED */
-diff --git a/arch/x86/mm/mem_encrypt_identity.c b/arch/x86/mm/mem_encrypt_identity.c
-index e2b0e2ac07bb..68d75379e06a 100644
---- a/arch/x86/mm/mem_encrypt_identity.c
-+++ b/arch/x86/mm/mem_encrypt_identity.c
-@@ -540,6 +540,9 @@ void __init sme_enable(struct boot_params *bp)
- 		if (!(msr & MSR_AMD64_SEV_ENABLED))
- 			return;
- 
-+		/* Save SEV_STATUS to avoid reading MSR again */
-+		sev_status = msr;
++static void print_mem_encrypt_feature_info(void)
++{
++	pr_info("AMD Memory Encryption Features active:");
 +
- 		/* SEV state cannot be controlled by a command line option */
- 		sme_me_mask = me_mask;
- 		sev_enabled = true;
++	/* Secure Memory Encryption */
++	if (sme_active()) {
++		/*
++		 * SME is mutually exclusive with any of the SEV
++		 * features below.
++		 */
++		pr_cont(" SME\n");
++		return;
++	}
++
++	/* Secure Encrypted Virtualization */
++	if (sev_active())
++		pr_cont(" SEV");
++
++	/* Encrypted Register State */
++	if (sev_es_active())
++		pr_cont(" SEV-ES");
++
++	pr_cont("\n");
++}
++
+ /* Architecture __weak replacement functions */
+ void __init mem_encrypt_init(void)
+ {
+@@ -422,8 +447,6 @@ void __init mem_encrypt_init(void)
+ 	if (sev_active())
+ 		static_branch_enable(&sev_enable_key);
+ 
+-	pr_info("AMD %s active\n",
+-		sev_active() ? "Secure Encrypted Virtualization (SEV)"
+-			     : "Secure Memory Encryption (SME)");
++	print_mem_encrypt_feature_info();
+ }
+ 
 -- 
 2.28.0
 
