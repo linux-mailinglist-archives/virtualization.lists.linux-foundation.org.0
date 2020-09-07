@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id A274625FB59
-	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:28:02 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id A9BA825FB4E
+	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:27:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1660F871B0;
-	Mon,  7 Sep 2020 13:28:01 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3765C8681B;
+	Mon,  7 Sep 2020 13:27:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0ElNvCEBl9Wi; Mon,  7 Sep 2020 13:27:59 +0000 (UTC)
+	with ESMTP id 4-4kKvOfckFY; Mon,  7 Sep 2020 13:27:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C02E48719A;
-	Mon,  7 Sep 2020 13:27:57 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E88C8867E8;
+	Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9175FC0051;
-	Mon,  7 Sep 2020 13:27:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DB734C0859;
+	Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 089D6C0895
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6BB12C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:52 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id E674187196
+ by silver.osuosl.org (Postfix) with ESMTP id 44CE320522
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:51 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vov81jrX5g5o
+ with ESMTP id P3nnwE6YODuL
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:46 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 637B587199
+ by silver.osuosl.org (Postfix) with ESMTPS id A5CB920508
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:45 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549add56.dip0.t-ipconnect.de
  [84.154.221.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id DD13A3AA1;
- Mon,  7 Sep 2020 15:17:14 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 708EA3AA3;
+ Mon,  7 Sep 2020 15:17:15 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v7 62/72] x86/paravirt: Allow hypervisor specific VMMCALL
- handling under SEV-ES
-Date: Mon,  7 Sep 2020 15:16:03 +0200
-Message-Id: <20200907131613.12703-63-joro@8bytes.org>
+Subject: [PATCH v7 63/72] x86/kvm: Add KVM specific VMMCALL handling under
+ SEV-ES
+Date: Mon,  7 Sep 2020 15:16:04 +0200
+Message-Id: <20200907131613.12703-64-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200907131613.12703-1-joro@8bytes.org>
 References: <20200907131613.12703-1-joro@8bytes.org>
@@ -83,87 +83,74 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Joerg Roedel <jroedel@suse.de>
+From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Add two new paravirt callbacks to provide hypervisor specific processor
-state in the GHCB and to copy state from the hypervisor back to the
-processor.
+Implement the callbacks to copy the processor state required by KVM to
+the GHCB.
 
+Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
+[ jroedel@suse.de: - Split out of a larger patch
+                   - Adapt to different callback functions ]
+Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/x86_init.h | 16 +++++++++++++++-
- arch/x86/kernel/sev-es.c        | 12 ++++++++++++
- 2 files changed, 27 insertions(+), 1 deletion(-)
+ arch/x86/kernel/kvm.c | 35 +++++++++++++++++++++++++++++------
+ 1 file changed, 29 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/include/asm/x86_init.h b/arch/x86/include/asm/x86_init.h
-index 6807153c0410..0304e2931cd3 100644
---- a/arch/x86/include/asm/x86_init.h
-+++ b/arch/x86/include/asm/x86_init.h
-@@ -4,8 +4,10 @@
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 08320b0b2b27..0f9597275e9c 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -36,6 +36,8 @@
+ #include <asm/hypervisor.h>
+ #include <asm/tlb.h>
+ #include <asm/cpuidle_haltpoll.h>
++#include <asm/ptrace.h>
++#include <asm/svm.h>
  
- #include <asm/bootparam.h>
+ DEFINE_STATIC_KEY_FALSE(kvm_async_pf_enabled);
  
-+struct ghcb;
- struct mpc_bus;
- struct mpc_cpu;
-+struct pt_regs;
- struct mpc_table;
- struct cpuinfo_x86;
- 
-@@ -236,10 +238,22 @@ struct x86_legacy_features {
- /**
-  * struct x86_hyper_runtime - x86 hypervisor specific runtime callbacks
-  *
-- * @pin_vcpu:		pin current vcpu to specified physical cpu (run rarely)
-+ * @pin_vcpu:			pin current vcpu to specified physical
-+ *				cpu (run rarely)
-+ * @sev_es_hcall_prepare:	Load additional hypervisor-specific
-+ *				state into the GHCB when doing a VMMCALL under
-+ *				SEV-ES. Called from the #VC exception handler.
-+ * @sev_es_hcall_finish:	Copies state from the GHCB back into the
-+ *				processor (or pt_regs). Also runs checks on the
-+ *				state returned from the hypervisor after a
-+ *				VMMCALL under SEV-ES.  Needs to return 'false'
-+ *				if the checks fail.  Called from the #VC
-+ *				exception handler.
-  */
- struct x86_hyper_runtime {
- 	void (*pin_vcpu)(int cpu);
-+	void (*sev_es_hcall_prepare)(struct ghcb *ghcb, struct pt_regs *regs);
-+	bool (*sev_es_hcall_finish)(struct ghcb *ghcb, struct pt_regs *regs);
- };
- 
- /**
-diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 3eea4e910fc1..9814ac99aea1 100644
---- a/arch/x86/kernel/sev-es.c
-+++ b/arch/x86/kernel/sev-es.c
-@@ -897,6 +897,9 @@ static enum es_result vc_handle_vmmcall(struct ghcb *ghcb,
- 	ghcb_set_rax(ghcb, ctxt->regs->ax);
- 	ghcb_set_cpl(ghcb, user_mode(ctxt->regs) ? 3 : 0);
- 
-+	if (x86_platform.hyper.sev_es_hcall_prepare)
-+		x86_platform.hyper.sev_es_hcall_prepare(ghcb, ctxt->regs);
-+
- 	ret = sev_es_ghcb_hv_call(ghcb, ctxt, SVM_EXIT_VMMCALL, 0, 0);
- 	if (ret != ES_OK)
- 		return ret;
-@@ -906,6 +909,15 @@ static enum es_result vc_handle_vmmcall(struct ghcb *ghcb,
- 
- 	ctxt->regs->ax = ghcb->save.rax;
- 
-+	/*
-+	 * Call sev_es_hcall_finish() after regs->ax is already set.
-+	 * This allows the hypervisor handler to overwrite it again if
-+	 * necessary.
-+	 */
-+	if (x86_platform.hyper.sev_es_hcall_finish &&
-+	    !x86_platform.hyper.sev_es_hcall_finish(ghcb, ctxt->regs))
-+		return ES_VMM_ERROR;
-+
- 	return ES_OK;
+@@ -746,13 +748,34 @@ static void __init kvm_init_platform(void)
+ 	x86_platform.apic_post_init = kvm_apic_init;
  }
  
++#if defined(CONFIG_AMD_MEM_ENCRYPT)
++static void kvm_sev_es_hcall_prepare(struct ghcb *ghcb, struct pt_regs *regs)
++{
++	/* RAX and CPL are already in the GHCB */
++	ghcb_set_rbx(ghcb, regs->bx);
++	ghcb_set_rcx(ghcb, regs->cx);
++	ghcb_set_rdx(ghcb, regs->dx);
++	ghcb_set_rsi(ghcb, regs->si);
++}
++
++static bool kvm_sev_es_hcall_finish(struct ghcb *ghcb, struct pt_regs *regs)
++{
++	/* No checking of the return state needed */
++	return true;
++}
++#endif
++
+ const __initconst struct hypervisor_x86 x86_hyper_kvm = {
+-	.name			= "KVM",
+-	.detect			= kvm_detect,
+-	.type			= X86_HYPER_KVM,
+-	.init.guest_late_init	= kvm_guest_init,
+-	.init.x2apic_available	= kvm_para_available,
+-	.init.init_platform	= kvm_init_platform,
++	.name				= "KVM",
++	.detect				= kvm_detect,
++	.type				= X86_HYPER_KVM,
++	.init.guest_late_init		= kvm_guest_init,
++	.init.x2apic_available		= kvm_para_available,
++	.init.init_platform		= kvm_init_platform,
++#if defined(CONFIG_AMD_MEM_ENCRYPT)
++	.runtime.sev_es_hcall_prepare	= kvm_sev_es_hcall_prepare,
++	.runtime.sev_es_hcall_finish	= kvm_sev_es_hcall_finish,
++#endif
+ };
+ 
+ static __init int activate_jump_labels(void)
 -- 
 2.28.0
 
