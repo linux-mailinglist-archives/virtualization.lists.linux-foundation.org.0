@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BAEF25FB21
-	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:17:05 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C45F25FB22
+	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:17:07 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A542A85F3A;
-	Mon,  7 Sep 2020 13:17:03 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 10775867A9;
+	Mon,  7 Sep 2020 13:17:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PDUS-1x6c8oD; Mon,  7 Sep 2020 13:16:58 +0000 (UTC)
+	with ESMTP id 1V+QlGRYY3i8; Mon,  7 Sep 2020 13:17:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7273885FD6;
+	by whitealder.osuosl.org (Postfix) with ESMTP id C5B5C85335;
 	Mon,  7 Sep 2020 13:16:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 42566C0859;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B1239C0859;
 	Mon,  7 Sep 2020 13:16:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BF643C0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8B42EC0051
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:16:56 +0000 (UTC)
+ Mon,  7 Sep 2020 13:16:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id BAE4B85FB6
+ by hemlock.osuosl.org (Postfix) with ESMTP id 7AA118714E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:16:56 +0000 (UTC)
+ Mon,  7 Sep 2020 13:16:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GceIlwYcJy9p
+ with ESMTP id g2TUSGDTwV83
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:16:55 +0000 (UTC)
+ Mon,  7 Sep 2020 13:16:57 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 909A885F93
+ by hemlock.osuosl.org (Postfix) with ESMTPS id F199287141
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:16:55 +0000 (UTC)
+ Mon,  7 Sep 2020 13:16:56 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549add56.dip0.t-ipconnect.de
  [84.154.221.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 5A0B0FC7;
+ by theia.8bytes.org (Postfix) with ESMTPSA id D4441F70;
  Mon,  7 Sep 2020 15:16:52 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v7 20/72] x86/boot/compressed/64: Call
- set_sev_encryption_mask() earlier
-Date: Mon,  7 Sep 2020 15:15:21 +0200
-Message-Id: <20200907131613.12703-21-joro@8bytes.org>
+Subject: [PATCH v7 21/72] x86/boot/compressed/64: Check return value of
+ kernel_ident_mapping_init()
+Date: Mon,  7 Sep 2020 15:15:22 +0200
+Message-Id: <20200907131613.12703-22-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200907131613.12703-1-joro@8bytes.org>
 References: <20200907131613.12703-1-joro@8bytes.org>
@@ -85,52 +85,39 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Call set_sev_encryption_mask() while still on the stage 1 #VC-handler,
-because the stage 2 handler needs the kernel's own page-tables to be
-set up, to which calling set_sev_encryption_mask() is a prerequisite.
+The function can fail to create an identity mapping, check for that
+and bail out if it happens.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/boot/compressed/head_64.S      | 9 ++++++++-
- arch/x86/boot/compressed/ident_map_64.c | 3 ---
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ arch/x86/boot/compressed/ident_map_64.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/boot/compressed/head_64.S b/arch/x86/boot/compressed/head_64.S
-index 37c8c2c8f8b6..1c80f1738fd9 100644
---- a/arch/x86/boot/compressed/head_64.S
-+++ b/arch/x86/boot/compressed/head_64.S
-@@ -533,9 +533,16 @@ SYM_FUNC_START_LOCAL_NOALIGN(.Lrelocated)
- 	rep	stosq
- 
- /*
-- * Load stage2 IDT and switch to our own page-table
-+ * If running as an SEV guest, the encryption mask is required in the
-+ * page-table setup code below. When the guest also has SEV-ES enabled
-+ * set_sev_encryption_mask() will cause #VC exceptions, but the stage2
-+ * handler can't map its GHCB because the page-table is not set up yet.
-+ * So set up the encryption mask here while still on the stage1 #VC
-+ * handler. Then load stage2 IDT and switch to the kernel's own
-+ * page-table.
-  */
- 	pushq	%rsi
-+	call	set_sev_encryption_mask
- 	call	load_stage2_idt
- 	call	initialize_identity_maps
- 	popq	%rsi
 diff --git a/arch/x86/boot/compressed/ident_map_64.c b/arch/x86/boot/compressed/ident_map_64.c
-index 62e42c11a336..b4f2a5f503cd 100644
+index b4f2a5f503cd..aa91bebc0fe9 100644
 --- a/arch/x86/boot/compressed/ident_map_64.c
 +++ b/arch/x86/boot/compressed/ident_map_64.c
-@@ -105,9 +105,6 @@ static void add_identity_map(unsigned long start, unsigned long end)
- /* Locates and clears a region for a new top level page table. */
- void initialize_identity_maps(void)
+@@ -91,6 +91,8 @@ static struct x86_mapping_info mapping_info;
+  */
+ static void add_identity_map(unsigned long start, unsigned long end)
  {
--	/* If running as an SEV guest, the encryption mask is required. */
--	set_sev_encryption_mask();
--
- 	/* Exclude the encryption mask from __PHYSICAL_MASK */
- 	physical_mask &= ~sme_me_mask;
++	int ret;
++
+ 	/* Align boundary to 2M. */
+ 	start = round_down(start, PMD_SIZE);
+ 	end = round_up(end, PMD_SIZE);
+@@ -98,8 +100,9 @@ static void add_identity_map(unsigned long start, unsigned long end)
+ 		return;
  
+ 	/* Build the mapping. */
+-	kernel_ident_mapping_init(&mapping_info, (pgd_t *)top_level_pgt,
+-				  start, end);
++	ret = kernel_ident_mapping_init(&mapping_info, (pgd_t *)top_level_pgt, start, end);
++	if (ret)
++		error("Error: kernel_ident_mapping_init() failed\n");
+ }
+ 
+ /* Locates and clears a region for a new top level page table. */
 -- 
 2.28.0
 
