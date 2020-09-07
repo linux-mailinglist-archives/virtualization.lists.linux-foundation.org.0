@@ -1,55 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1FAB25FB2F
-	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:17:39 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 5292B8670C;
-	Mon,  7 Sep 2020 13:17:38 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id n9Lw1-BIQUr8; Mon,  7 Sep 2020 13:17:36 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 916E786787;
-	Mon,  7 Sep 2020 13:17:36 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7887EC0051;
-	Mon,  7 Sep 2020 13:17:36 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 40D97C0051
- for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:35 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8716425FB35
+	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:18:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 1C3BE20398
- for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:35 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 17FA720525;
+	Mon,  7 Sep 2020 13:18:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JIerc71FO-Fv
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1fOZnJlvSyxy; Mon,  7 Sep 2020 13:18:07 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id ECEF7230F3;
+	Mon,  7 Sep 2020 13:17:06 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D3F89C0051;
+	Mon,  7 Sep 2020 13:17:06 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 99E08C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:29 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 9639485F3A
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  7 Sep 2020 13:17:03 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id BdpwbWx7JEag
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  7 Sep 2020 13:17:02 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 136EB1FD7D
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id B55A185FD0
  for <virtualization@lists.linux-foundation.org>;
  Mon,  7 Sep 2020 13:17:00 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549add56.dip0.t-ipconnect.de
  [84.154.221.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 7EE22FDC;
- Mon,  7 Sep 2020 15:16:57 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 077E11CA;
+ Mon,  7 Sep 2020 15:16:58 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v7 30/72] x86/head/64: Load GDT after switch to virtual
- addresses
-Date: Mon,  7 Sep 2020 15:15:31 +0200
-Message-Id: <20200907131613.12703-31-joro@8bytes.org>
+Subject: [PATCH v7 31/72] x86/head/64: Load segment registers earlier
+Date: Mon,  7 Sep 2020 15:15:32 +0200
+Message-Id: <20200907131613.12703-32-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200907131613.12703-1-joro@8bytes.org>
 References: <20200907131613.12703-1-joro@8bytes.org>
@@ -85,49 +84,86 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Load the GDT right after switching to virtual addresses to make sure
-there is a defined GDT for exception handling.
+Make sure segments are properly set up before setting up an IDT and
+doing anything that might cause a #VC exception. This is later needed
+for early exception handling.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 Reviewed-by: Kees Cook <keescook@chromium.org>
 ---
- arch/x86/kernel/head_64.S | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ arch/x86/kernel/head_64.S | 52 +++++++++++++++++++--------------------
+ 1 file changed, 26 insertions(+), 26 deletions(-)
 
 diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index 2b2e91627221..03b03f266dc1 100644
+index 03b03f266dc1..f402087a02ac 100644
 --- a/arch/x86/kernel/head_64.S
 +++ b/arch/x86/kernel/head_64.S
-@@ -158,6 +158,14 @@ SYM_CODE_START(secondary_startup_64)
- 1:
- 	UNWIND_HINT_EMPTY
+@@ -166,6 +166,32 @@ SYM_CODE_START(secondary_startup_64)
+ 	 */
+ 	lgdt	early_gdt_descr(%rip)
  
++	/* set up data segments */
++	xorl %eax,%eax
++	movl %eax,%ds
++	movl %eax,%ss
++	movl %eax,%es
++
 +	/*
-+	 * We must switch to a new descriptor in kernel space for the GDT
-+	 * because soon the kernel won't have access anymore to the userspace
-+	 * addresses where we're currently running on. We have to do that here
-+	 * because in 32bit we couldn't load a 64bit linear address.
++	 * We don't really need to load %fs or %gs, but load them anyway
++	 * to kill any stale realmode selectors.  This allows execution
++	 * under VT hardware.
 +	 */
-+	lgdt	early_gdt_descr(%rip)
++	movl %eax,%fs
++	movl %eax,%gs
++
++	/* Set up %gs.
++	 *
++	 * The base of %gs always points to fixed_percpu_data. If the
++	 * stack protector canary is enabled, it is located at %gs:40.
++	 * Note that, on SMP, the boot cpu uses init data section until
++	 * the per cpu areas are set up.
++	 */
++	movl	$MSR_GS_BASE,%ecx
++	movl	initial_gs(%rip),%eax
++	movl	initial_gs+4(%rip),%edx
++	wrmsr
 +
  	/* Check if nx is implemented */
  	movl	$0x80000001, %eax
  	cpuid
-@@ -185,14 +193,6 @@ SYM_CODE_START(secondary_startup_64)
+@@ -193,32 +219,6 @@ SYM_CODE_START(secondary_startup_64)
  	pushq $0
  	popfq
  
--	/*
--	 * We must switch to a new descriptor in kernel space for the GDT
--	 * because soon the kernel won't have access anymore to the userspace
--	 * addresses where we're currently running on. We have to do that here
--	 * because in 32bit we couldn't load a 64bit linear address.
--	 */
--	lgdt	early_gdt_descr(%rip)
+-	/* set up data segments */
+-	xorl %eax,%eax
+-	movl %eax,%ds
+-	movl %eax,%ss
+-	movl %eax,%es
 -
- 	/* set up data segments */
- 	xorl %eax,%eax
- 	movl %eax,%ds
+-	/*
+-	 * We don't really need to load %fs or %gs, but load them anyway
+-	 * to kill any stale realmode selectors.  This allows execution
+-	 * under VT hardware.
+-	 */
+-	movl %eax,%fs
+-	movl %eax,%gs
+-
+-	/* Set up %gs.
+-	 *
+-	 * The base of %gs always points to fixed_percpu_data. If the
+-	 * stack protector canary is enabled, it is located at %gs:40.
+-	 * Note that, on SMP, the boot cpu uses init data section until
+-	 * the per cpu areas are set up.
+-	 */
+-	movl	$MSR_GS_BASE,%ecx
+-	movl	initial_gs(%rip),%eax
+-	movl	initial_gs+4(%rip),%edx
+-	wrmsr
+-
+ 	/* rsi is pointer to real mode structure with interesting info.
+ 	   pass it to C */
+ 	movq	%rsi, %rdi
 -- 
 2.28.0
 
