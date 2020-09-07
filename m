@@ -1,54 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD6AF25FB3D
-	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:18:55 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 69FE525FB23
+	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:17:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 817CB20534;
-	Mon,  7 Sep 2020 13:18:54 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E16AD87175;
+	Mon,  7 Sep 2020 13:17:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CGk61hSf6uiU; Mon,  7 Sep 2020 13:18:44 +0000 (UTC)
+	with ESMTP id g3LeNUGM5fQL; Mon,  7 Sep 2020 13:17:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id C406621526;
-	Mon,  7 Sep 2020 13:17:39 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 773A187181;
+	Mon,  7 Sep 2020 13:17:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A7BAFC0859;
-	Mon,  7 Sep 2020 13:17:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6D7ECC0859;
+	Mon,  7 Sep 2020 13:17:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 772F6C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F042DC0891
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:38 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 4D12420398
+ by fraxinus.osuosl.org (Postfix) with ESMTP id DEC5485F56
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:38 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id J3b9rFFMGjYd
+ with ESMTP id xgmnHcOKdwlA
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:17:31 +0000 (UTC)
+ Mon,  7 Sep 2020 13:17:01 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by silver.osuosl.org (Postfix) with ESMTPS id 92648226E9
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 8DB1885FAD
  for <virtualization@lists.linux-foundation.org>;
  Mon,  7 Sep 2020 13:17:00 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549add56.dip0.t-ipconnect.de
  [84.154.221.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 7E97AFD7;
+ by theia.8bytes.org (Postfix) with ESMTPSA id 00BC5FDA;
  Mon,  7 Sep 2020 15:16:56 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v7 28/72] x86/idt: Split idt_data setup out of set_intr_gate()
-Date: Mon,  7 Sep 2020 15:15:29 +0200
-Message-Id: <20200907131613.12703-29-joro@8bytes.org>
+Subject: [PATCH v7 29/72] x86/head/64: Install startup GDT
+Date: Mon,  7 Sep 2020 15:15:30 +0200
+Message-Id: <20200907131613.12703-30-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200907131613.12703-1-joro@8bytes.org>
 References: <20200907131613.12703-1-joro@8bytes.org>
@@ -84,56 +84,102 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-The code to setup idt_data is needed for early exception handling, but
-set_intr_gate() can't be used that early because it has pv-ops in its
-code path, which don't work that early.
-
-Split out the idt_data initialization part from set_intr_gate() so
-that it can be used separately.
+Handling exceptions during boot requires a working GDT. The kernel GDT
+can't be used on the direct mapping, so load a startup GDT and setup
+segments.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
-Reviewed-by: Kees Cook <keescook@chromium.org>
 ---
- arch/x86/kernel/idt.c | 22 ++++++++++++++--------
- 1 file changed, 14 insertions(+), 8 deletions(-)
+ arch/x86/include/asm/setup.h |  1 +
+ arch/x86/kernel/head64.c     | 33 +++++++++++++++++++++++++++++++++
+ arch/x86/kernel/head_64.S    | 14 ++++++++++++++
+ 3 files changed, 48 insertions(+)
 
-diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
-index 7ecf9babf0cb..53946c104fa0 100644
---- a/arch/x86/kernel/idt.c
-+++ b/arch/x86/kernel/idt.c
-@@ -205,18 +205,24 @@ idt_setup_from_table(gate_desc *idt, const struct idt_data *t, int size, bool sy
- 	}
- }
+diff --git a/arch/x86/include/asm/setup.h b/arch/x86/include/asm/setup.h
+index 84b645cc8bc9..5c2fd05bd52c 100644
+--- a/arch/x86/include/asm/setup.h
++++ b/arch/x86/include/asm/setup.h
+@@ -48,6 +48,7 @@ extern void reserve_standard_io_resources(void);
+ extern void i386_reserve_resources(void);
+ extern unsigned long __startup_64(unsigned long physaddr, struct boot_params *bp);
+ extern unsigned long __startup_secondary_64(void);
++extern void startup_64_setup_env(unsigned long physbase);
+ extern int early_make_pgtable(unsigned long address);
  
-+static void init_idt_data(struct idt_data *data, unsigned int n,
-+			  const void *addr)
+ #ifdef CONFIG_X86_INTEL_MID
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index cbb71c1b574f..8c82be44be94 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -61,6 +61,24 @@ unsigned long vmemmap_base __ro_after_init = __VMEMMAP_BASE_L4;
+ EXPORT_SYMBOL(vmemmap_base);
+ #endif
+ 
++/*
++ * GDT used on the boot CPU before switching to virtual addresses.
++ */
++static struct desc_struct startup_gdt[GDT_ENTRIES] = {
++	[GDT_ENTRY_KERNEL32_CS]         = GDT_ENTRY_INIT(0xc09b, 0, 0xfffff),
++	[GDT_ENTRY_KERNEL_CS]           = GDT_ENTRY_INIT(0xa09b, 0, 0xfffff),
++	[GDT_ENTRY_KERNEL_DS]           = GDT_ENTRY_INIT(0xc093, 0, 0xfffff),
++};
++
++/*
++ * Address needs to be set at runtime because it references the startup_gdt
++ * while the kernel still uses a direct mapping.
++ */
++static struct desc_ptr startup_gdt_descr = {
++	.size = sizeof(startup_gdt),
++	.address = 0,
++};
++
+ #define __head	__section(.head.text)
+ 
+ static void __head *fixup_pointer(void *ptr, unsigned long physaddr)
+@@ -489,3 +507,18 @@ void __init x86_64_start_reservations(char *real_mode_data)
+ 
+ 	start_kernel();
+ }
++
++/*
++ * Setup boot CPU state needed before kernel switches to virtual addresses.
++ */
++void __head startup_64_setup_env(unsigned long physbase)
 +{
-+	BUG_ON(n > 0xFF);
++	/* Load GDT */
++	startup_gdt_descr.address = (unsigned long)fixup_pointer(startup_gdt, physbase);
++	native_load_gdt(&startup_gdt_descr);
 +
-+	memset(data, 0, sizeof(*data));
-+	data->vector	= n;
-+	data->addr	= addr;
-+	data->segment	= __KERNEL_CS;
-+	data->bits.type	= GATE_INTERRUPT;
-+	data->bits.p	= 1;
++	/* New GDT is live - reload data segment registers */
++	asm volatile("movl %%eax, %%ds\n"
++		     "movl %%eax, %%ss\n"
++		     "movl %%eax, %%es\n" : : "a"(__KERNEL_DS) : "memory");
 +}
+diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+index 16da4ac01597..2b2e91627221 100644
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -73,6 +73,20 @@ SYM_CODE_START_NOALIGN(startup_64)
+ 	/* Set up the stack for verify_cpu(), similar to initial_stack below */
+ 	leaq	(__end_init_task - SIZEOF_PTREGS)(%rip), %rsp
+ 
++	leaq	_text(%rip), %rdi
++	pushq	%rsi
++	call	startup_64_setup_env
++	popq	%rsi
 +
- static __init void set_intr_gate(unsigned int n, const void *addr)
- {
- 	struct idt_data data;
++	/* Now switch to __KERNEL_CS so IRET works reliably */
++	pushq	$__KERNEL_CS
++	leaq	.Lon_kernel_cs(%rip), %rax
++	pushq	%rax
++	lretq
++
++.Lon_kernel_cs:
++	UNWIND_HINT_EMPTY
++
+ 	/* Sanitize CPU configuration */
+ 	call verify_cpu
  
--	BUG_ON(n > 0xFF);
--
--	memset(&data, 0, sizeof(data));
--	data.vector	= n;
--	data.addr	= addr;
--	data.segment	= __KERNEL_CS;
--	data.bits.type	= GATE_INTERRUPT;
--	data.bits.p	= 1;
-+	init_idt_data(&data, n, addr);
- 
- 	idt_setup_from_table(idt_table, &data, 1, false);
- }
 -- 
 2.28.0
 
