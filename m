@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 411D425FB55
-	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:28:01 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF73D25FB4F
+	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:27:57 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E6B7186861;
-	Mon,  7 Sep 2020 13:27:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 59CDA86200;
+	Mon,  7 Sep 2020 13:27:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yz86ek7rsArg; Mon,  7 Sep 2020 13:27:55 +0000 (UTC)
+	with ESMTP id oKwU_2ecZgFD; Mon,  7 Sep 2020 13:27:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3649A867FF;
-	Mon,  7 Sep 2020 13:27:53 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8B236860FF;
+	Mon,  7 Sep 2020 13:27:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1DCAFC0051;
-	Mon,  7 Sep 2020 13:27:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4FAD1C0891;
+	Mon,  7 Sep 2020 13:27:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A2BE2C08A5
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 64C65C0895
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8C57587188
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4E1C785FFC
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id X6jFLpZqwzBM
+ with ESMTP id nn3ZAemZwbFJ
  for <virtualization@lists.linux-foundation.org>;
  Mon,  7 Sep 2020 13:27:47 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7657487186
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 7260E85FD6
  for <virtualization@lists.linux-foundation.org>;
  Mon,  7 Sep 2020 13:27:47 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549add56.dip0.t-ipconnect.de
  [84.154.221.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 27013100F;
+ by theia.8bytes.org (Postfix) with ESMTPSA id A4F581011;
  Mon,  7 Sep 2020 15:17:03 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v7 41/72] x86/sev-es: Setup per-cpu GHCBs for the runtime
+Subject: [PATCH v7 42/72] x86/sev-es: Allocate and Map IST stack for #VC
  handler
-Date: Mon,  7 Sep 2020 15:15:42 +0200
-Message-Id: <20200907131613.12703-42-joro@8bytes.org>
+Date: Mon,  7 Sep 2020 15:15:43 +0200
+Message-Id: <20200907131613.12703-43-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200907131613.12703-1-joro@8bytes.org>
 References: <20200907131613.12703-1-joro@8bytes.org>
@@ -83,135 +83,215 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tom Lendacky <thomas.lendacky@amd.com>
+From: Joerg Roedel <jroedel@suse.de>
 
-The runtime handler needs a GHCB per CPU. Set them up and map them
-unencrypted.
+Allocate and map an IST stack and an additional fall-back stack for
+the #VC handler.  The memory for the stacks is allocated only when
+SEV-ES is active.
 
-Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
+The #VC handler needs to use an IST stack because it could be raised
+from kernel space with unsafe stack, e.g. in the SYSCALL entry path.
+
+Since the #VC exception can be nested, the #VC handler switches back to
+the interrupted stack when entered from kernel space. If switching back
+is not possible the fall-back stack is used.
+
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/mem_encrypt.h |  2 ++
- arch/x86/kernel/sev-es.c           | 56 +++++++++++++++++++++++++++++-
- arch/x86/kernel/traps.c            |  3 ++
- 3 files changed, 60 insertions(+), 1 deletion(-)
+ arch/x86/include/asm/cpu_entry_area.h | 33 +++++++++++++++++----------
+ arch/x86/include/asm/page_64_types.h  |  1 +
+ arch/x86/kernel/cpu/common.c          |  2 ++
+ arch/x86/kernel/dumpstack_64.c        |  8 +++++--
+ arch/x86/kernel/sev-es.c              | 33 +++++++++++++++++++++++++++
+ 5 files changed, 63 insertions(+), 14 deletions(-)
 
-diff --git a/arch/x86/include/asm/mem_encrypt.h b/arch/x86/include/asm/mem_encrypt.h
-index 4e72b73a9cb5..c9f5df0a1c10 100644
---- a/arch/x86/include/asm/mem_encrypt.h
-+++ b/arch/x86/include/asm/mem_encrypt.h
-@@ -49,6 +49,7 @@ void __init mem_encrypt_free_decrypted_mem(void);
- /* Architecture __weak replacement functions */
- void __init mem_encrypt_init(void);
+diff --git a/arch/x86/include/asm/cpu_entry_area.h b/arch/x86/include/asm/cpu_entry_area.h
+index 8902fdb7de13..3d52b094850a 100644
+--- a/arch/x86/include/asm/cpu_entry_area.h
++++ b/arch/x86/include/asm/cpu_entry_area.h
+@@ -11,25 +11,29 @@
+ #ifdef CONFIG_X86_64
  
-+void __init sev_es_init_vc_handling(void);
- bool sme_active(void);
- bool sev_active(void);
- bool sev_es_active(void);
-@@ -72,6 +73,7 @@ static inline void __init sme_early_init(void) { }
- static inline void __init sme_encrypt_kernel(struct boot_params *bp) { }
- static inline void __init sme_enable(struct boot_params *bp) { }
+ /* Macro to enforce the same ordering and stack sizes */
+-#define ESTACKS_MEMBERS(guardsize)		\
+-	char	DF_stack_guard[guardsize];	\
+-	char	DF_stack[EXCEPTION_STKSZ];	\
+-	char	NMI_stack_guard[guardsize];	\
+-	char	NMI_stack[EXCEPTION_STKSZ];	\
+-	char	DB_stack_guard[guardsize];	\
+-	char	DB_stack[EXCEPTION_STKSZ];	\
+-	char	MCE_stack_guard[guardsize];	\
+-	char	MCE_stack[EXCEPTION_STKSZ];	\
+-	char	IST_top_guard[guardsize];	\
++#define ESTACKS_MEMBERS(guardsize, optional_stack_size)		\
++	char	DF_stack_guard[guardsize];			\
++	char	DF_stack[EXCEPTION_STKSZ];			\
++	char	NMI_stack_guard[guardsize];			\
++	char	NMI_stack[EXCEPTION_STKSZ];			\
++	char	DB_stack_guard[guardsize];			\
++	char	DB_stack[EXCEPTION_STKSZ];			\
++	char	MCE_stack_guard[guardsize];			\
++	char	MCE_stack[EXCEPTION_STKSZ];			\
++	char	VC_stack_guard[guardsize];			\
++	char	VC_stack[optional_stack_size];			\
++	char	VC2_stack_guard[guardsize];			\
++	char	VC2_stack[optional_stack_size];			\
++	char	IST_top_guard[guardsize];			\
  
-+static inline void sev_es_init_vc_handling(void) { }
- static inline bool sme_active(void) { return false; }
- static inline bool sev_active(void) { return false; }
- static inline bool sev_es_active(void) { return false; }
+ /* The exception stacks' physical storage. No guard pages required */
+ struct exception_stacks {
+-	ESTACKS_MEMBERS(0)
++	ESTACKS_MEMBERS(0, 0)
+ };
+ 
+ /* The effective cpu entry area mapping with guard pages. */
+ struct cea_exception_stacks {
+-	ESTACKS_MEMBERS(PAGE_SIZE)
++	ESTACKS_MEMBERS(PAGE_SIZE, EXCEPTION_STKSZ)
+ };
+ 
+ /*
+@@ -40,6 +44,8 @@ enum exception_stack_ordering {
+ 	ESTACK_NMI,
+ 	ESTACK_DB,
+ 	ESTACK_MCE,
++	ESTACK_VC,
++	ESTACK_VC2,
+ 	N_EXCEPTION_STACKS
+ };
+ 
+@@ -139,4 +145,7 @@ static inline struct entry_stack *cpu_entry_stack(int cpu)
+ #define __this_cpu_ist_top_va(name)					\
+ 	CEA_ESTACK_TOP(__this_cpu_read(cea_exception_stacks), name)
+ 
++#define __this_cpu_ist_bottom_va(name)					\
++	CEA_ESTACK_BOT(__this_cpu_read(cea_exception_stacks), name)
++
+ #endif
+diff --git a/arch/x86/include/asm/page_64_types.h b/arch/x86/include/asm/page_64_types.h
+index 288b065955b7..d0c6c10c18a0 100644
+--- a/arch/x86/include/asm/page_64_types.h
++++ b/arch/x86/include/asm/page_64_types.h
+@@ -28,6 +28,7 @@
+ #define	IST_INDEX_NMI		1
+ #define	IST_INDEX_DB		2
+ #define	IST_INDEX_MCE		3
++#define	IST_INDEX_VC		4
+ 
+ /*
+  * Set __PAGE_OFFSET to the most negative possible address +
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index 8aa20bc2f1ca..1d65365363a1 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -1821,6 +1821,8 @@ static inline void tss_setup_ist(struct tss_struct *tss)
+ 	tss->x86_tss.ist[IST_INDEX_NMI] = __this_cpu_ist_top_va(NMI);
+ 	tss->x86_tss.ist[IST_INDEX_DB] = __this_cpu_ist_top_va(DB);
+ 	tss->x86_tss.ist[IST_INDEX_MCE] = __this_cpu_ist_top_va(MCE);
++	/* Only mapped when SEV-ES is active */
++	tss->x86_tss.ist[IST_INDEX_VC] = __this_cpu_ist_top_va(VC);
+ }
+ 
+ #else /* CONFIG_X86_64 */
+diff --git a/arch/x86/kernel/dumpstack_64.c b/arch/x86/kernel/dumpstack_64.c
+index 4a94d38cd141..c49cf594714b 100644
+--- a/arch/x86/kernel/dumpstack_64.c
++++ b/arch/x86/kernel/dumpstack_64.c
+@@ -24,11 +24,13 @@ static const char * const exception_stack_names[] = {
+ 		[ ESTACK_NMI	]	= "NMI",
+ 		[ ESTACK_DB	]	= "#DB",
+ 		[ ESTACK_MCE	]	= "#MC",
++		[ ESTACK_VC	]	= "#VC",
++		[ ESTACK_VC2	]	= "#VC2",
+ };
+ 
+ const char *stack_type_name(enum stack_type type)
+ {
+-	BUILD_BUG_ON(N_EXCEPTION_STACKS != 4);
++	BUILD_BUG_ON(N_EXCEPTION_STACKS != 6);
+ 
+ 	if (type == STACK_TYPE_IRQ)
+ 		return "IRQ";
+@@ -79,6 +81,8 @@ struct estack_pages estack_pages[CEA_ESTACK_PAGES] ____cacheline_aligned = {
+ 	EPAGERANGE(NMI),
+ 	EPAGERANGE(DB),
+ 	EPAGERANGE(MCE),
++	EPAGERANGE(VC),
++	EPAGERANGE(VC2),
+ };
+ 
+ static bool in_exception_stack(unsigned long *stack, struct stack_info *info)
+@@ -88,7 +92,7 @@ static bool in_exception_stack(unsigned long *stack, struct stack_info *info)
+ 	struct pt_regs *regs;
+ 	unsigned int k;
+ 
+-	BUILD_BUG_ON(N_EXCEPTION_STACKS != 4);
++	BUILD_BUG_ON(N_EXCEPTION_STACKS != 6);
+ 
+ 	begin = (unsigned long)__this_cpu_read(cea_exception_stacks);
+ 	/*
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index bb3e702a71eb..0f28bb1c0022 100644
+index 0f28bb1c0022..5541788420ce 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -8,8 +8,13 @@
-  */
- 
- #include <linux/sched/debug.h>	/* For show_regs() */
--#include <linux/kernel.h>
-+#include <linux/percpu-defs.h>
-+#include <linux/mem_encrypt.h>
- #include <linux/printk.h>
-+#include <linux/mm_types.h>
-+#include <linux/set_memory.h>
-+#include <linux/memblock.h>
-+#include <linux/kernel.h>
+@@ -17,6 +17,7 @@
+ #include <linux/kernel.h>
  #include <linux/mm.h>
  
++#include <asm/cpu_entry_area.h>
  #include <asm/sev-es.h>
-@@ -29,6 +34,13 @@ static struct ghcb boot_ghcb_page __bss_decrypted __aligned(PAGE_SIZE);
-  */
- static struct ghcb __initdata *boot_ghcb;
- 
-+/* #VC handler runtime per-cpu data */
-+struct sev_es_runtime_data {
-+	struct ghcb ghcb_page;
-+};
+ #include <asm/insn-eval.h>
+ #include <asm/fpu/internal.h>
+@@ -37,10 +38,41 @@ static struct ghcb __initdata *boot_ghcb;
+ /* #VC handler runtime per-cpu data */
+ struct sev_es_runtime_data {
+ 	struct ghcb ghcb_page;
 +
-+static DEFINE_PER_CPU(struct sev_es_runtime_data*, runtime_data);
++	/* Physical storage for the per-cpu IST stack of the #VC handler */
++	char ist_stack[EXCEPTION_STKSZ] __aligned(PAGE_SIZE);
++
++	/*
++	 * Physical storage for the per-cpu fall-back stack of the #VC handler.
++	 * The fall-back stack is used when it is not safe to switch back to the
++	 * interrupted stack in the #VC entry code.
++	 */
++	char fallback_stack[EXCEPTION_STKSZ] __aligned(PAGE_SIZE);
+ };
+ 
+ static DEFINE_PER_CPU(struct sev_es_runtime_data*, runtime_data);
+ 
++static void __init setup_vc_stacks(int cpu)
++{
++	struct sev_es_runtime_data *data;
++	struct cpu_entry_area *cea;
++	unsigned long vaddr;
++	phys_addr_t pa;
++
++	data = per_cpu(runtime_data, cpu);
++	cea  = get_cpu_entry_area(cpu);
++
++	/* Map #VC IST stack */
++	vaddr = CEA_ESTACK_BOT(&cea->estacks, VC);
++	pa    = __pa(data->ist_stack);
++	cea_set_pte((void *)vaddr, pa, PAGE_KERNEL);
++
++	/* Map VC fall-back stack */
++	vaddr = CEA_ESTACK_BOT(&cea->estacks, VC2);
++	pa    = __pa(data->fallback_stack);
++	cea_set_pte((void *)vaddr, pa, PAGE_KERNEL);
++}
 +
  /* Needed in vc_early_forward_exception */
  void do_early_exception(struct pt_regs *regs, int trapnr);
  
-@@ -198,6 +210,48 @@ static bool __init sev_es_setup_ghcb(void)
- 	return true;
+@@ -249,6 +281,7 @@ void __init sev_es_init_vc_handling(void)
+ 	for_each_possible_cpu(cpu) {
+ 		alloc_runtime_data(cpu);
+ 		init_ghcb(cpu);
++		setup_vc_stacks(cpu);
+ 	}
  }
  
-+static void __init alloc_runtime_data(int cpu)
-+{
-+	struct sev_es_runtime_data *data;
-+
-+	data = memblock_alloc(sizeof(*data), PAGE_SIZE);
-+	if (!data)
-+		panic("Can't allocate SEV-ES runtime data");
-+
-+	per_cpu(runtime_data, cpu) = data;
-+}
-+
-+static void __init init_ghcb(int cpu)
-+{
-+	struct sev_es_runtime_data *data;
-+	int err;
-+
-+	data = per_cpu(runtime_data, cpu);
-+
-+	err = early_set_memory_decrypted((unsigned long)&data->ghcb_page,
-+					 sizeof(data->ghcb_page));
-+	if (err)
-+		panic("Can not map GHCBs unencrypted");
-+
-+	memset(&data->ghcb_page, 0, sizeof(data->ghcb_page));
-+}
-+
-+void __init sev_es_init_vc_handling(void)
-+{
-+	int cpu;
-+
-+	BUILD_BUG_ON((offsetof(struct sev_es_runtime_data, ghcb_page) % PAGE_SIZE) != 0);
-+
-+	if (!sev_es_active())
-+		return;
-+
-+	/* Initialize per-cpu GHCB pages */
-+	for_each_possible_cpu(cpu) {
-+		alloc_runtime_data(cpu);
-+		init_ghcb(cpu);
-+	}
-+}
-+
- static void __init vc_early_forward_exception(struct es_em_ctxt *ctxt)
- {
- 	int trapnr = ctxt->fi.vector;
-diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
-index df9c6554f83e..e121e7c5f831 100644
---- a/arch/x86/kernel/traps.c
-+++ b/arch/x86/kernel/traps.c
-@@ -1082,6 +1082,9 @@ void __init trap_init(void)
- 	/* Init cpu_entry_area before IST entries are set up */
- 	setup_cpu_entry_areas();
- 
-+	/* Init GHCB memory pages when running as an SEV-ES guest */
-+	sev_es_init_vc_handling();
-+
- 	idt_setup_traps();
- 
- 	/*
 -- 
 2.28.0
 
