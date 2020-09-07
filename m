@@ -2,53 +2,53 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BA9D25FB4B
-	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:27:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CCC0125FB63
+	for <lists.virtualization@lfdr.de>; Mon,  7 Sep 2020 15:28:07 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 315A3860C4;
-	Mon,  7 Sep 2020 13:27:50 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8BA51860EA;
+	Mon,  7 Sep 2020 13:28:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8PM3-O1Miyjk; Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
+	with ESMTP id U9avszTb8RxN; Mon,  7 Sep 2020 13:27:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5454886090;
-	Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3948B86197;
+	Mon,  7 Sep 2020 13:27:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2F6F9C0051;
-	Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 32261C0051;
+	Mon,  7 Sep 2020 13:27:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 74275C0859
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 348C7C0894
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:46 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 70B74867B7
+ by hemlock.osuosl.org (Postfix) with ESMTP id 20046871A0
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:46 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WouWSwpogbdu
+ with ESMTP id vcHK-pZG1XEu
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:45 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id A67D68679D
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 3C27E87190
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Sep 2020 13:27:45 +0000 (UTC)
+ Mon,  7 Sep 2020 13:27:49 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549add56.dip0.t-ipconnect.de
  [84.154.221.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 992521824;
- Mon,  7 Sep 2020 15:17:11 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 1F7C22CBB;
+ Mon,  7 Sep 2020 15:17:12 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v7 57/72] x86/sev-es: Handle MONITOR/MONITORX Events
-Date: Mon,  7 Sep 2020 15:15:58 +0200
-Message-Id: <20200907131613.12703-58-joro@8bytes.org>
+Subject: [PATCH v7 58/72] x86/sev-es: Handle MWAIT/MWAITX Events
+Date: Mon,  7 Sep 2020 15:15:59 +0200
+Message-Id: <20200907131613.12703-59-joro@8bytes.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200907131613.12703-1-joro@8bytes.org>
 References: <20200907131613.12703-1-joro@8bytes.org>
@@ -84,7 +84,7 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Implement a handler for #VC exceptions caused by MONITOR and MONITORX
+Implement a handler for #VC exceptions caused by MWAIT and MWAITX
 instructions.
 
 Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
@@ -92,36 +92,33 @@ Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
 Co-developed-by: Joerg Roedel <jroedel@suse.de>
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ arch/x86/kernel/sev-es.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 7fb17e71ff05..847a578d5158 100644
+index 847a578d5158..0d0b6e15f7d9 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -872,6 +872,16 @@ static enum es_result vc_handle_rdpmc(struct ghcb *ghcb, struct es_em_ctxt *ctxt
+@@ -882,6 +882,13 @@ static enum es_result vc_handle_monitor(struct ghcb *ghcb,
  	return ES_OK;
  }
  
-+static enum es_result vc_handle_monitor(struct ghcb *ghcb,
-+					struct es_em_ctxt *ctxt)
++static enum es_result vc_handle_mwait(struct ghcb *ghcb,
++				      struct es_em_ctxt *ctxt)
 +{
-+	/*
-+	 * Treat it as a NOP and do not leak a physical address to the
-+	 * hypervisor
-+	 */
++	/* Treat the same as MONITOR/MONITORX */
 +	return ES_OK;
 +}
 +
  static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
  					 struct ghcb *ghcb,
  					 unsigned long exit_code)
-@@ -908,6 +918,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
- 	case SVM_EXIT_WBINVD:
- 		result = vc_handle_wbinvd(ghcb, ctxt);
+@@ -921,6 +928,9 @@ static enum es_result vc_handle_exitcode(struct es_em_ctxt *ctxt,
+ 	case SVM_EXIT_MONITOR:
+ 		result = vc_handle_monitor(ghcb, ctxt);
  		break;
-+	case SVM_EXIT_MONITOR:
-+		result = vc_handle_monitor(ghcb, ctxt);
++	case SVM_EXIT_MWAIT:
++		result = vc_handle_mwait(ghcb, ctxt);
 +		break;
  	case SVM_EXIT_NPF:
  		result = vc_handle_mmio(ghcb, ctxt);
