@@ -1,104 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F675260DAA
-	for <lists.virtualization@lfdr.de>; Tue,  8 Sep 2020 10:35:45 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48CF8260F19
+	for <lists.virtualization@lfdr.de>; Tue,  8 Sep 2020 11:58:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DA0048723F;
-	Tue,  8 Sep 2020 08:35:43 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 84E20844E4;
+	Tue,  8 Sep 2020 09:58:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3QlzMFaWirCE; Tue,  8 Sep 2020 08:35:43 +0000 (UTC)
+	with ESMTP id G5Xe_9gklWyw; Tue,  8 Sep 2020 09:58:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 568BD8723D;
-	Tue,  8 Sep 2020 08:35:43 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D526C8411F;
+	Tue,  8 Sep 2020 09:58:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 31430C0052;
-	Tue,  8 Sep 2020 08:35:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B5276C0051;
+	Tue,  8 Sep 2020 09:58:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 235F8C0052
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5EA14C0051
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 08:35:41 +0000 (UTC)
+ Tue,  8 Sep 2020 09:58:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id EA8262051A
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4D4858665E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 08:35:40 +0000 (UTC)
+ Tue,  8 Sep 2020 09:58:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wafy1tQGxF+l
+ with ESMTP id eG-UFJxxAYdW
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 08:35:40 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by silver.osuosl.org (Postfix) with ESMTPS id B3A97203E6
+ Tue,  8 Sep 2020 09:58:24 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+ [209.85.208.67])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 46A7486637
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 08:35:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599554136;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=+MY+j0iaLoq2hQdX3yS+SdSeiGMuMtARblbd8qJTfIk=;
- b=KYobp+izMjIsLYbetyGO8qyRENFEdEg4kk9uSq/1MtELgCj+boPgqz/TgJzDv51kOTqt/X
- 6p20QeGLhZrKJ2AN8czM8Cprxm3dVsdpvU6aEdR4FgOT4yDCqNd0SpC4xFCcNMk8E32a0p
- UKqGxhlU3dFs60xRABAVMb80lChMzv8=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-21-6imHe5FqMQGdHnS5fMJVuA-1; Tue, 08 Sep 2020 04:35:34 -0400
-X-MC-Unique: 6imHe5FqMQGdHnS5fMJVuA-1
-Received: by mail-wr1-f70.google.com with SMTP id s8so6670934wrb.15
+ Tue,  8 Sep 2020 09:58:24 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id w1so15394251edr.3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 08 Sep 2020 01:35:34 -0700 (PDT)
+ Tue, 08 Sep 2020 02:58:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=aLJYrm5bOjZd8IZxBRURG7tcIZly4NiWd1EjKr3Vqfg=;
+ b=b6cEBE6njyXvZevcnqFZzEoXBFtDdCvYCkNrDwZNfhuKbJExzPQU7/msU4sYTd9qen
+ t7N65xdspMnc5iK2UaZ6awIAJhnUswLYotvlUeI5TKUX2QzHS9UNyOVSGdyB4cwZxZVy
+ 3sn3/rJhRkWOVW8TWAIcE8fuE9DhfQvgPVt+M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=+MY+j0iaLoq2hQdX3yS+SdSeiGMuMtARblbd8qJTfIk=;
- b=IZVT5P3qfav+nA600dfAEjA9ZYoICgcj/iDtG3HfjeG0h4vgSNdqbQSUvHGFx5MCU1
- oLdjXqxJwWDGS4z3yptyR6sRPF5sNHFKWtTD6QZXSQbYY2F/oCK+H8gXvfz2Od4mHLpA
- N6+BkNFRXvi/oS/L25iFJHkQBjPj4XJinSoT8JuFZqRVgaOaRT3YCsHXlsliogst12sV
- 5iySpGIWlXcKCn3nDdqJ29chnoHAg6zxyE34+GhJjLtdMCQQDf/3dTK8XbVpZWR/i7jG
- zV3lARX4YNxEjhgSLzAypFl3t3hxnizntfOECDDIRyx28j48N7RkhE6xH+RG9IMV9Rn/
- j75A==
-X-Gm-Message-State: AOAM5311PxkGwe1K95EvyoIo1XxZbvrTYhiwGe7irVRSgbCa7GJW4xvZ
- ffmC3IIqW9HQs78AuJ7iB4E9g2Us2q3TroC3vo5yBMuJC9uSFa8tG+rACvKM1pMkmTNuTka6+EY
- w8jmoKmjOpNG5FAK+zvKGNWPObqfIrKhWDch5XZXPdg==
-X-Received: by 2002:a7b:c059:: with SMTP id u25mr3173543wmc.103.1599554133720; 
- Tue, 08 Sep 2020 01:35:33 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxI7qjqWRvqDDMKuSEyexs2ZtKt48S7kwb/PYSoSmDiwm5Mm57vBJ7GtHojpCcdWEA5RCWEdA==
-X-Received: by 2002:a7b:c059:: with SMTP id u25mr3173527wmc.103.1599554133531; 
- Tue, 08 Sep 2020 01:35:33 -0700 (PDT)
-Received: from redhat.com ([147.161.15.98])
- by smtp.gmail.com with ESMTPSA id z203sm34774917wmc.31.2020.09.08.01.35.28
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=aLJYrm5bOjZd8IZxBRURG7tcIZly4NiWd1EjKr3Vqfg=;
+ b=S1gEWef5P1FLDzR9K1CHZvZL679clb6EU4SD0RD5BH73kHNZulR59/0onsawvpMcbF
+ C1hVtRN+ec65TA6EKoglrfHIpA+FlrR2L4/6iODVMq38tKCSIzpWP+Qpcg6WNlY/kRYg
+ GEYrP0wWkpHmKFTb7/NR++lNwyrAF8c5Gbu8gE2eyYb+1i+u47uU0o+xZSuFYsZ7dw1b
+ zoe4+2lQz1Rfw0mKmQRnOOQ5mEqiYWE2KlaI7VMdY0gbz+QVQGuM94JjDeXgdaTW2mWo
+ 99WsdlOkazbwEgzkO3o5qQbLzqEMEbTNreXyMCk914Y3AVWTWRNaDOv7FIvNV8v8XLVE
+ 1IRQ==
+X-Gm-Message-State: AOAM532Z7ND7tvmhlutkSfK+FIEq9eCKoENvsQpoXY5pvzPOEOgggtI7
+ BWs1D9JWoo868PoM1WfNIOKEFH+Wb7KNXjOb
+X-Google-Smtp-Source: ABdhPJw/Z7glRjkptNRj0qyVEzDSlDhIfCzudDaFL00qxvdRc+SQk3yofJBPi3m6TSbiWuo2ewZk7w==
+X-Received: by 2002:a05:6000:83:: with SMTP id
+ m3mr25405078wrx.165.1599555443634; 
+ Tue, 08 Sep 2020 01:57:23 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id i16sm29552687wrq.73.2020.09.08.01.57.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Sep 2020 01:35:32 -0700 (PDT)
-Date: Tue, 8 Sep 2020 04:35:25 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [PATCH v11 0/2] s390: virtio: let arch validate VIRTIO features
-Message-ID: <20200908043503-mutt-send-email-mst@kernel.org>
-References: <1599471547-28631-1-git-send-email-pmorel@linux.ibm.com>
- <20200908003951.233e47f3.pasic@linux.ibm.com>
- <20200908085521.4db22680.cohuck@redhat.com>
+ Tue, 08 Sep 2020 01:57:22 -0700 (PDT)
+Date: Tue, 8 Sep 2020 10:57:21 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Subject: Re: [PATCH] drm/virtio: drop quirks handling
+Message-ID: <20200908085721.GJ2352366@phenom.ffwll.local>
+Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
+ dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20200908064741.1010-1-kraxel@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200908085521.4db22680.cohuck@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0.002
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: gor@linux.ibm.com, linux-s390@vger.kernel.org, frankja@linux.ibm.com,
- Pierre Morel <pmorel@linux.ibm.com>, thomas.lendacky@amd.com,
- linuxram@us.ibm.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Halil Pasic <pasic@linux.ibm.com>,
- borntraeger@de.ibm.com, kvm@vger.kernel.org, hca@linux.ibm.com,
- david@gibson.dropbear.id.au
+In-Reply-To: <20200908064741.1010-1-kraxel@redhat.com>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -115,30 +104,115 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Sep 08, 2020 at 08:55:21AM +0200, Cornelia Huck wrote:
-> On Tue, 8 Sep 2020 00:39:51 +0200
-> Halil Pasic <pasic@linux.ibm.com> wrote:
-> 
-> > On Mon,  7 Sep 2020 11:39:05 +0200
-> > Pierre Morel <pmorel@linux.ibm.com> wrote:
-> > 
-> > > Hi all,
-> > > 
-> > > The goal of the series is to give a chance to the architecture
-> > > to validate VIRTIO device features.  
-> > 
-> > Michael, is this going in via your tree?
-> > 
-> 
-> I believe Michael's tree is the right place for this, but I can also
-> queue it if I get an ack on patch 1.
+On Tue, Sep 08, 2020 at 08:47:41AM +0200, Gerd Hoffmann wrote:
+> These days dma ops can be overridden per device, and the virtio core
 
-I think Halil pointed out some minor issues, so a new version is in
-order.
+"can be overridden" or "are"? The comment above vring_use_dma_api()
+suggests that's not yet done. If that's wrong then I think updating the
+comment would be really good.
+-Daniel
+
+> uses that to handle the dma quirks transparently for the rest of the
+> kernel.  So we can drop the virtio_has_dma_quirk() checks, just use
+> the dma api unconditionally and depend on the virtio core having setup
+> dma_ops as needed.
+> 
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_object.c | 19 ++++++-------------
+>  drivers/gpu/drm/virtio/virtgpu_vq.c     | 16 ++++++----------
+>  2 files changed, 12 insertions(+), 23 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+> index 729f98ad7c02..9c35ce64ff9e 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_object.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+> @@ -141,7 +141,6 @@ static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
+>  					struct virtio_gpu_mem_entry **ents,
+>  					unsigned int *nents)
+>  {
+> -	bool use_dma_api = !virtio_has_dma_quirk(vgdev->vdev);
+>  	struct virtio_gpu_object_shmem *shmem = to_virtio_gpu_shmem(bo);
+>  	struct scatterlist *sg;
+>  	int si, ret;
+> @@ -162,15 +161,11 @@ static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
+>  		return -EINVAL;
+>  	}
+>  
+> -	if (use_dma_api) {
+> -		shmem->mapped = dma_map_sg(vgdev->vdev->dev.parent,
+> -					   shmem->pages->sgl,
+> -					   shmem->pages->nents,
+> -					   DMA_TO_DEVICE);
+> -		*nents = shmem->mapped;
+> -	} else {
+> -		*nents = shmem->pages->nents;
+> -	}
+> +	shmem->mapped = dma_map_sg(vgdev->vdev->dev.parent,
+> +				   shmem->pages->sgl,
+> +				   shmem->pages->nents,
+> +				   DMA_TO_DEVICE);
+> +	*nents = shmem->mapped;
+>  
+>  	*ents = kmalloc_array(*nents, sizeof(struct virtio_gpu_mem_entry),
+>  			      GFP_KERNEL);
+> @@ -180,9 +175,7 @@ static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
+>  	}
+>  
+>  	for_each_sg(shmem->pages->sgl, sg, *nents, si) {
+> -		(*ents)[si].addr = cpu_to_le64(use_dma_api
+> -					       ? sg_dma_address(sg)
+> -					       : sg_phys(sg));
+> +		(*ents)[si].addr = cpu_to_le64(sg_dma_address(sg));
+>  		(*ents)[si].length = cpu_to_le32(sg->length);
+>  		(*ents)[si].padding = 0;
+>  	}
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_vq.c b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> index c93c2db35aaf..1c1d2834547d 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_vq.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_vq.c
+> @@ -599,13 +599,11 @@ void virtio_gpu_cmd_transfer_to_host_2d(struct virtio_gpu_device *vgdev,
+>  	struct virtio_gpu_object *bo = gem_to_virtio_gpu_obj(objs->objs[0]);
+>  	struct virtio_gpu_transfer_to_host_2d *cmd_p;
+>  	struct virtio_gpu_vbuffer *vbuf;
+> -	bool use_dma_api = !virtio_has_dma_quirk(vgdev->vdev);
+>  	struct virtio_gpu_object_shmem *shmem = to_virtio_gpu_shmem(bo);
+>  
+> -	if (use_dma_api)
+> -		dma_sync_sg_for_device(vgdev->vdev->dev.parent,
+> -				       shmem->pages->sgl, shmem->pages->nents,
+> -				       DMA_TO_DEVICE);
+> +	dma_sync_sg_for_device(vgdev->vdev->dev.parent,
+> +			       shmem->pages->sgl, shmem->pages->nents,
+> +			       DMA_TO_DEVICE);
+>  
+>  	cmd_p = virtio_gpu_alloc_cmd(vgdev, &vbuf, sizeof(*cmd_p));
+>  	memset(cmd_p, 0, sizeof(*cmd_p));
+> @@ -1015,13 +1013,11 @@ void virtio_gpu_cmd_transfer_to_host_3d(struct virtio_gpu_device *vgdev,
+>  	struct virtio_gpu_object *bo = gem_to_virtio_gpu_obj(objs->objs[0]);
+>  	struct virtio_gpu_transfer_host_3d *cmd_p;
+>  	struct virtio_gpu_vbuffer *vbuf;
+> -	bool use_dma_api = !virtio_has_dma_quirk(vgdev->vdev);
+>  	struct virtio_gpu_object_shmem *shmem = to_virtio_gpu_shmem(bo);
+>  
+> -	if (use_dma_api)
+> -		dma_sync_sg_for_device(vgdev->vdev->dev.parent,
+> -				       shmem->pages->sgl, shmem->pages->nents,
+> -				       DMA_TO_DEVICE);
+> +	dma_sync_sg_for_device(vgdev->vdev->dev.parent,
+> +			       shmem->pages->sgl, shmem->pages->nents,
+> +			       DMA_TO_DEVICE);
+>  
+>  	cmd_p = virtio_gpu_alloc_cmd(vgdev, &vbuf, sizeof(*cmd_p));
+>  	memset(cmd_p, 0, sizeof(*cmd_p));
+> -- 
+> 2.27.0
+> 
 
 -- 
-MST
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
