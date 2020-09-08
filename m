@@ -1,84 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAA07260ED0
-	for <lists.virtualization@lfdr.de>; Tue,  8 Sep 2020 11:39:24 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40E91260F3F
+	for <lists.virtualization@lfdr.de>; Tue,  8 Sep 2020 12:04:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5038986433;
-	Tue,  8 Sep 2020 09:39:23 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 11EF8273E3;
+	Tue,  8 Sep 2020 10:04:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aq30x1QUHz5J; Tue,  8 Sep 2020 09:39:22 +0000 (UTC)
+	with ESMTP id 33YTYH7dmr0b; Tue,  8 Sep 2020 10:04:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id EC765868C8;
-	Tue,  8 Sep 2020 09:39:22 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id B5B9A273B5;
+	Tue,  8 Sep 2020 10:04:10 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D10C8C0051;
-	Tue,  8 Sep 2020 09:39:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 90D6BC0051;
+	Tue,  8 Sep 2020 10:04:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 39BBFC0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 25BD3C0051
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 09:39:22 +0000 (UTC)
+ Tue,  8 Sep 2020 10:04:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 32EE98726C
+ by hemlock.osuosl.org (Postfix) with ESMTP id 1475B87271
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 09:39:22 +0000 (UTC)
+ Tue,  8 Sep 2020 10:04:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8pRcF727zuv9
+ with ESMTP id k7XldV3gpW0s
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 09:39:21 +0000 (UTC)
+ Tue,  8 Sep 2020 10:04:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id D676587267
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 6F8CB871E0
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 09:39:20 +0000 (UTC)
+ Tue,  8 Sep 2020 10:04:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599557959;
+ s=mimecast20190719; t=1599559447;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=0KEVHWP2GiLQz9DhPmZh/HeQE3DHcZKHvJrF/RegTIU=;
- b=QUfq8M92LX7WvSdzzdvWIMmeoKsqcIvz+fQGzdV63UccYDv5SvGJzvo8OVGEldAXJCw4yv
- bqJ3Vgf244u/ZXuXRvzBYn56BUB0awbalnHQSD3gxzhTzP+82Hp0x1WrM4Pdr7dtjQA4EO
- H+lpTm6Sjv/V/FgMJJe/DPiFqSgSTTM=
+ bh=huJspaVKs2soWVBG7ypNpD3pCie9PJMElLgmWSCDlpg=;
+ b=fSTZxvFGlALxnKrauUCM/MNlb1zAjkFHpBnopMQgw0UsJ98IzB+Qpz7NnGUhM9NPeh4TDr
+ wj0MGGGYZRT3RDuLdBCXkbJrzBwtVN2WQ4OXGDXTg92ajsDHyuhlF165YBnXGLpbIC/Qr+
+ 3NTpbp8wHJx3bTxL3eIWXmSqnJ1ZJl8=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-119-FQLYQ8IjMDq3GhQpyAEKYw-1; Tue, 08 Sep 2020 05:39:18 -0400
-X-MC-Unique: FQLYQ8IjMDq3GhQpyAEKYw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ us-mta-410-1GwrGC8JO-KOM_F9MMjh6g-1; Tue, 08 Sep 2020 06:04:03 -0400
+X-MC-Unique: 1GwrGC8JO-KOM_F9MMjh6g-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 856CF802B61;
- Tue,  8 Sep 2020 09:39:16 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7B5A8801AE0;
+ Tue,  8 Sep 2020 10:04:02 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-112-56.ams2.redhat.com
  [10.36.112.56])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 59DF060C15;
- Tue,  8 Sep 2020 09:39:13 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 32E505C1BB;
+ Tue,  8 Sep 2020 10:04:02 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 95CBC204AE; Tue,  8 Sep 2020 11:39:12 +0200 (CEST)
+ id 41EEF1FCF5; Tue,  8 Sep 2020 12:04:01 +0200 (CEST)
+Date: Tue, 8 Sep 2020 12:04:01 +0200
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH 3/3] drm/qxl: handle shadow in primary destroy
-Date: Tue,  8 Sep 2020 11:39:12 +0200
-Message-Id: <20200908093912.26792-4-kraxel@redhat.com>
-In-Reply-To: <20200908093912.26792-1-kraxel@redhat.com>
-References: <20200908093912.26792-1-kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org, David Airlie <airlied@linux.ie>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] drm/virtio: drop quirks handling
+Message-ID: <20200908100401.q7quz5m7m42wvobj@sirius.home.kraxel.org>
+References: <20200908064741.1010-1-kraxel@redhat.com>
+ <20200908085721.GJ2352366@phenom.ffwll.local>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20200908085721.GJ2352366@phenom.ffwll.local>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,29 +93,16 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-qxl_primary_atomic_disable must check whenever the framebuffer bo has a
-shadow surface and in case it has check the shadow primary status.
+On Tue, Sep 08, 2020 at 10:57:21AM +0200, Daniel Vetter wrote:
+> On Tue, Sep 08, 2020 at 08:47:41AM +0200, Gerd Hoffmann wrote:
+> > These days dma ops can be overridden per device, and the virtio core
+> 
+> "can be overridden" or "are"?
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/qxl/qxl_display.c | 2 ++
- 1 file changed, 2 insertions(+)
+Didn't happen yet, so scratch this one for now ...
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 85dcb7fe56a9..3dcbb359e0f5 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -560,6 +560,8 @@ static void qxl_primary_atomic_disable(struct drm_plane *plane,
- 	if (old_state->fb) {
- 		struct qxl_bo *bo = gem_to_qxl_bo(old_state->fb->obj[0]);
- 
-+		if (bo->shadow)
-+			bo = bo->shadow;
- 		if (bo->is_primary) {
- 			qxl_io_destroy_primary(qdev);
- 			bo->is_primary = false;
--- 
-2.27.0
+take care,
+  Gerd
 
 _______________________________________________
 Virtualization mailing list
