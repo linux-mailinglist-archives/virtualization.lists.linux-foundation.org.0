@@ -1,72 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D69B8260F9D
-	for <lists.virtualization@lfdr.de>; Tue,  8 Sep 2020 12:26:38 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F84626102C
+	for <lists.virtualization@lfdr.de>; Tue,  8 Sep 2020 12:43:31 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 82973864B8;
-	Tue,  8 Sep 2020 10:26:37 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 9AA5720378;
+	Tue,  8 Sep 2020 10:43:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iY6zewqLdLrP; Tue,  8 Sep 2020 10:26:36 +0000 (UTC)
+	with ESMTP id 3j2gpiPq6O8x; Tue,  8 Sep 2020 10:43:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DF25886450;
-	Tue,  8 Sep 2020 10:26:36 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3C42320395;
+	Tue,  8 Sep 2020 10:43:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A8941C089E;
-	Tue,  8 Sep 2020 10:26:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1EA40C0051;
+	Tue,  8 Sep 2020 10:43:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7E427C0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F1918C0051
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 10:26:35 +0000 (UTC)
+ Tue,  8 Sep 2020 10:43:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 72E4086970
+ by hemlock.osuosl.org (Postfix) with ESMTP id E027F87230
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 10:26:35 +0000 (UTC)
+ Tue,  8 Sep 2020 10:43:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WiLGfEz5fWac
+ with ESMTP id tS6Xdx8sUpnR
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 10:26:35 +0000 (UTC)
+ Tue,  8 Sep 2020 10:43:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by whitealder.osuosl.org (Postfix) with ESMTPS id CA248868D2
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 2AC1C8722F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Sep 2020 10:26:34 +0000 (UTC)
+ Tue,  8 Sep 2020 10:43:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599560793;
+ s=mimecast20190719; t=1599561803;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=/KOriR+VEZ7gA1SpfolsqjUm8noGS6C7tD+HJO4p2YE=;
- b=NoJRbk+1ZUzcweHLqdSkjk+ZzkkyPH3eVCOsWAVZli2PS3WlcTMCNwUrYC1/k0xKjUk+Vr
- G263oXN5M4lPV1pZMDQujLst0VCs4qtAmL7fN51EAySih/j6lza5zuVETNY+LDAQJ96Fgr
- 8QhvLhy9P6gyarmjoX3Ihng8VIUn9wQ=
+ bh=l4/ltR0takQSBEuseO4C/TI1qwbhIf200Q7x15+sBvI=;
+ b=ZfI7/y8ZMiZnbfo6xJx+v3DfxmuCXiVtbVCF/8fCSzsDY0xKgbUQ4FvXJrO0ucOFZWTzT9
+ +Nv/kUTnZwhMZBykTLqqF5C6gpjQy4vsvzvfBB/VxTZyW6uZ2qLi4cNzVayWQMtSsCXiN9
+ ZkPdjS0IXc2QsX18q25aLo/AtYcn1Ak=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-544-oOXip1n-O5mzOnM1lfaCCg-1; Tue, 08 Sep 2020 06:26:31 -0400
-X-MC-Unique: oOXip1n-O5mzOnM1lfaCCg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-337-pmqp9rEkNKWzMqUG6vBAHA-1; Tue, 08 Sep 2020 06:43:20 -0400
+X-MC-Unique: pmqp9rEkNKWzMqUG6vBAHA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E22F018B9F07;
- Tue,  8 Sep 2020 10:26:29 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 545E110082E6;
+ Tue,  8 Sep 2020 10:43:18 +0000 (UTC)
 Received: from [10.36.115.46] (ovpn-115-46.ams2.redhat.com [10.36.115.46])
- by smtp.corp.redhat.com (Postfix) with ESMTP id F34803A40;
- Tue,  8 Sep 2020 10:26:26 +0000 (UTC)
-Subject: Re: [PATCH v1 5/5] hv_balloon: try to merge system ram resources
-To: Wei Liu <wei.liu@kernel.org>
-References: <20200821103431.13481-1-david@redhat.com>
- <20200821103431.13481-6-david@redhat.com>
- <20200904173006.e65qow53ietxzpne@liuwe-devbox-debian-v2>
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B4B085C1BB;
+ Tue,  8 Sep 2020 10:43:12 +0000 (UTC)
+Subject: Re: [PATCH v5 0/6] mm / virtio-mem: support ZONE_MOVABLE
+To: Andrew Morton <akpm@linux-foundation.org>
+References: <20200816125333.7434-1-david@redhat.com>
+ <552a2a55-6082-d286-1cd4-7f7e368eebb4@redhat.com>
+ <bb7cad5a-daa3-132e-1bc1-19110476b55e@redhat.com>
+ <20200821135507.cc20edbdd11205257cfd86e5@linux-foundation.org>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -113,20 +114,19 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat GmbH
-Message-ID: <9637a510-707d-b444-b5aa-004683d926c6@redhat.com>
-Date: Tue, 8 Sep 2020 12:26:26 +0200
+Message-ID: <0c826000-da05-bfcd-ffe1-75c2d16564ce@redhat.com>
+Date: Tue, 8 Sep 2020 12:43:11 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200904173006.e65qow53ietxzpne@liuwe-devbox-debian-v2>
+In-Reply-To: <20200821135507.cc20edbdd11205257cfd86e5@linux-foundation.org>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>, linux-hyperv@vger.kernel.org,
- Michal Hocko <mhocko@suse.com>, Stephen Hemminger <sthemmin@microsoft.com>,
- Baoquan He <bhe@redhat.com>, Haiyang Zhang <haiyangz@microsoft.com>,
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Michal Hocko <mhocko@suse.com>,
+ Baoquan He <bhe@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, Wei Yang <richardw.yang@linux.intel.com>,
- xen-devel@lists.xenproject.org, Andrew Morton <akpm@linux-foundation.org>
+ linux-mm@kvack.org, Qian Cai <cai@lca.pw>, Mike Rapoport <rppt@linux.ibm.com>,
+ Mike Rapoport <rppt@kernel.org>, Mike Kravetz <mike.kravetz@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -143,45 +143,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 04.09.20 19:30, Wei Liu wrote:
-> On Fri, Aug 21, 2020 at 12:34:31PM +0200, David Hildenbrand wrote:
->> Let's use the new mechanism to merge system ram resources below the
->> root. We are the only one hotplugging system ram, e.g., DIMMs don't apply,
->> so this is safe to be used.
->>
->> Cc: Andrew Morton <akpm@linux-foundation.org>
->> Cc: Michal Hocko <mhocko@suse.com>
->> Cc: "K. Y. Srinivasan" <kys@microsoft.com>
->> Cc: Haiyang Zhang <haiyangz@microsoft.com>
->> Cc: Stephen Hemminger <sthemmin@microsoft.com>
->> Cc: Wei Liu <wei.liu@kernel.org>
->> Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
->> Cc: Baoquan He <bhe@redhat.com>
->> Cc: Wei Yang <richardw.yang@linux.intel.com>
->> Signed-off-by: David Hildenbrand <david@redhat.com>
->> ---
->>  drivers/hv/hv_balloon.c | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/drivers/hv/hv_balloon.c b/drivers/hv/hv_balloon.c
->> index 32e3bc0aa665a..49a6305f0fb73 100644
->> --- a/drivers/hv/hv_balloon.c
->> +++ b/drivers/hv/hv_balloon.c
->> @@ -745,6 +745,9 @@ static void hv_mem_hot_add(unsigned long start, unsigned long size,
->>  			has->covered_end_pfn -=  processed_pfn;
->>  			spin_unlock_irqrestore(&dm_device.ha_lock, flags);
->>  			break;
->> +		} else {
->> +			/* Try to reduce the number of system ram resources. */
->> +			merge_system_ram_resources(&iomem_resource);
->>  		}
+On 21.08.20 22:55, Andrew Morton wrote:
+> On Fri, 21 Aug 2020 10:45:33 +0200 David Hildenbrand <david@redhat.com> wrote:
 > 
-> You don't need to put the call under the "else" branch. It will have
-> broken out of the loop if ret is not zero.
+>> On 21.08.20 10:31, David Hildenbrand wrote:
+>>> On 16.08.20 14:53, David Hildenbrand wrote:
+>>>> For 5.10. Patch #1-#4,#6 have RBs or ACKs, patch #5 is virtio-mem stuff
+>>>> maintained by me. This should go via the -mm tree.
+>>>>
+>>>
+>>> @Andrew, can we give this a churn if there are no further comments? Thanks!
+>>
+>> ... I just spotted the patches in -next, strange I didn't get an email
+>> notification. Thanks :)
+> 
+> https://lore.kernel.org/mm-commits/20200819025501.gJhZlolfC%25akpm@linux-foundation.org/
+> 
+> akpm!=spam :)
 > 
 
-Agreed, thanks!
-
+I would never even dare to think that ... now I have to teach my spam
+filter some good manners ;)
 
 -- 
 Thanks,
