@@ -1,70 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9ABCD26E4CD
-	for <lists.virtualization@lfdr.de>; Thu, 17 Sep 2020 20:59:12 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id D837E26E56B
+	for <lists.virtualization@lfdr.de>; Thu, 17 Sep 2020 21:46:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 450E3876D3;
-	Thu, 17 Sep 2020 18:59:11 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 891B48738E;
+	Thu, 17 Sep 2020 19:46:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uAwO8HZUKNRF; Thu, 17 Sep 2020 18:59:10 +0000 (UTC)
+	with ESMTP id r5cOBfCTtTMn; Thu, 17 Sep 2020 19:46:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 0B226876D1;
-	Thu, 17 Sep 2020 18:59:10 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D83CF8739B;
+	Thu, 17 Sep 2020 19:46:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DB2B0C0051;
-	Thu, 17 Sep 2020 18:59:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A7049C0051;
+	Thu, 17 Sep 2020 19:46:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 83B54C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 92012C0051
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Sep 2020 18:59:08 +0000 (UTC)
+ Thu, 17 Sep 2020 19:46:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 72E1786FCC
+ by whitealder.osuosl.org (Postfix) with ESMTP id 8C65F8739B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Sep 2020 18:59:08 +0000 (UTC)
+ Thu, 17 Sep 2020 19:46:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OjvBtY7oICML
+ with ESMTP id iyoC31xGeFlu
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Sep 2020 18:59:07 +0000 (UTC)
+ Thu, 17 Sep 2020 19:46:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 6C5F286FC9
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 1DEB78738E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Sep 2020 18:59:07 +0000 (UTC)
+ Thu, 17 Sep 2020 19:46:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
- MIME-Version:Date:Message-ID:Subject:From:Cc:To:Sender:Reply-To:Content-ID:
+ MIME-Version:Date:Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:
  Content-Description:In-Reply-To:References;
- bh=dCb3Mw8emqdBD/1nF+oUHT3U3i0WT8UHhM2aFDWS07g=; b=a6AAAWT6OpuM+kWcatw3TlS2JP
- +8IS6npgj/d5gENj7cfht68AdE18jEyqNklaqeTUkp7d2dLDMsPPi+veQLTosycBB0vDYDd4A8Yyr
- tznRa1dqP11vzU13o+w8+NI0S2IwbKOxHAR6RHTudrhQhOFeRLJxOB8d7iUlNyWiPZPONYGOMMtMO
- jMNj7kl01I7FnTNmILeOSFXO2K+G4obIYF76n4aWfGHU+4d/ez4I1+WdKfY8QkAIoHxTzeSrtMWgD
- 979WzHnWW1wU6ehSV+WMb0E8LWmwYqMzX9Jd9A+0HqijmAVIwP9BMmj4KuLIubgEiqvd+S9pNQk99
- Y9x+AIAw==;
+ bh=f1R3VqxnNoImr58s5Ei6XYjbvhxFKPOcc7dIvuhbrlk=; b=PZGDndu5AS2FRze2eHvet2zuzo
+ cmdlFZAEpwsPBLMOzBqyUaDNZk7t2ToNmb+1AW/mBqBvRCp3p4HrF9F83r4BQPBZdeA9K7EK5lgeE
+ jWe6HJGT9ns8/h3ymoxMQimvbU4N8kjKwj88ARAW35nEOcq2jB6wBzStkn0jHWONvQEFnRMeOsgQa
+ 4200ap5xB0AUCC/MHgli9L7ZnBxtf3bKZUg7BLfnvk3rdmb8312swauZpsUbI/BnRhlxm0nvMJfgK
+ g92/x9EGihCuiwaiaMihocH3zzHHWTmfFjUwain8psOQnfi16CP/FYBmg1NRWQsAF2qbzn/I2Bo5l
+ lgIjYYSA==;
 Received: from [2601:1c0:6280:3f0::19c2]
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kIz7L-0000LU-Rs; Thu, 17 Sep 2020 18:58:52 +0000
-To: LKML <linux-kernel@vger.kernel.org>,
- virtualization@lists.linux-foundation.org,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>
+ id 1kIzqs-0003P2-P6; Thu, 17 Sep 2020 19:45:55 +0000
+To: virtualization@lists.linux-foundation.org,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ LKML <linux-kernel@vger.kernel.org>, Stephen Rothwell
+ <sfr@canb.auug.org.au>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Jason Wang <jasowang@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
+ Leon Romanovsky <leonro@nvidia.com>
 From: Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH -next] vdpa: mlx5: select VHOST to fix build errors
-Message-ID: <f47e2bab-c19c-fab5-cfb9-e2b5ba1be69a@infradead.org>
-Date: Thu, 17 Sep 2020 11:58:48 -0700
+Subject: [PATCH v2 -next] vdpa: mlx5: change Kconfig depends to fix build
+ errors
+Message-ID: <22a2bd60-d895-2bfb-50be-4ac3d131ed82@infradead.org>
+Date: Thu, 17 Sep 2020 12:45:51 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
 Content-Language: en-US
-Cc: Leon Romanovsky <leonro@nvidia.com>,
- Stephen Rothwell <sfr@canb.auug.org.au>, Saeed Mahameed <saeedm@nvidia.com>,
- "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,8 +84,8 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Randy Dunlap <rdunlap@infradead.org>
 
-drivers/vdpa/mlx5/ uses vhost_iotlb*() interfaces, so select
-VHOST to eliminate build errors.
+drivers/vdpa/mlx5/ uses vhost_iotlb*() interfaces, so add a dependency
+on VHOST to eliminate build errors.
 
 ld: drivers/vdpa/mlx5/core/mr.o: in function `add_direct_chain':
 mr.c:(.text+0x106): undefined reference to `vhost_iotlb_itree_first'
@@ -105,18 +106,19 @@ Cc: Saeed Mahameed <saeedm@nvidia.com>
 Cc: Leon Romanovsky <leonro@nvidia.com>
 Cc: netdev@vger.kernel.org
 ---
-Note: This patch may not be the right thing, but it fixes the build errors.
+v2: change from select to depends (Saeed)
 
- drivers/vdpa/Kconfig |    1 +
- 1 file changed, 1 insertion(+)
+ drivers/vdpa/Kconfig |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 --- linux-next-20200917.orig/drivers/vdpa/Kconfig
 +++ linux-next-20200917/drivers/vdpa/Kconfig
-@@ -32,6 +32,7 @@ config IFCVF
+@@ -31,7 +31,7 @@ config IFCVF
+ 
  config MLX5_VDPA
  	bool "MLX5 VDPA support library for ConnectX devices"
- 	depends on MLX5_CORE
-+	select VHOST
+-	depends on MLX5_CORE
++	depends on VHOST && MLX5_CORE
  	default n
  	help
  	  Support library for Mellanox VDPA drivers. Provides code that is
