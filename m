@@ -1,81 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBDED271AD1
-	for <lists.virtualization@lfdr.de>; Mon, 21 Sep 2020 08:23:13 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F6532723F7
+	for <lists.virtualization@lfdr.de>; Mon, 21 Sep 2020 14:35:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 457408715F;
-	Mon, 21 Sep 2020 06:23:12 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2552A85FC6;
+	Mon, 21 Sep 2020 12:35:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iKAp9yME1djq; Mon, 21 Sep 2020 06:23:11 +0000 (UTC)
+	with ESMTP id CH_kx2X43pyF; Mon, 21 Sep 2020 12:35:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6CB6B87164;
-	Mon, 21 Sep 2020 06:23:11 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id AF08E85FB6;
+	Mon, 21 Sep 2020 12:35:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 27CB4C0893;
-	Mon, 21 Sep 2020 06:23:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 77B37C0893;
+	Mon, 21 Sep 2020 12:35:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 39ABFC0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 16050C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Sep 2020 06:23:09 +0000 (UTC)
+ Mon, 21 Sep 2020 12:35:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 2036087160
+ by hemlock.osuosl.org (Postfix) with ESMTP id 03D638723D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Sep 2020 06:23:09 +0000 (UTC)
+ Mon, 21 Sep 2020 12:35:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WiyMEmJfkq2G
+ with ESMTP id Yxh2x8Dh3RoL
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Sep 2020 06:23:08 +0000 (UTC)
+ Mon, 21 Sep 2020 12:35:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 2AFFE8715F
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 102E787237
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Sep 2020 06:23:08 +0000 (UTC)
-IronPort-SDR: jLI7uabFWBFpBrsLr51b8JuyOkp2sCXgQLGCaWRFIvbB4sG8Z1+Pfcc52i8vSE+Jf9VGOQk9Z7
- /hW2R5H4WBAw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9750"; a="147976138"
-X-IronPort-AV: E=Sophos;i="5.77,285,1596524400"; d="scan'208";a="147976138"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Sep 2020 23:23:04 -0700
-IronPort-SDR: USb2UDAwyWhLJQWxChZgxFvSXc5aD8EZKTgGEeQPUMLqRDIxK9gy3tRuyDpL1OOMSR9aEqeLGv
- UdRLeyUYUhDg==
-X-IronPort-AV: E=Sophos;i="5.77,285,1596524400"; d="scan'208";a="485292430"
-Received: from fjanoscz-mobl1.ger.corp.intel.com (HELO ubuntu)
- ([10.249.45.119])
- by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Sep 2020 23:23:01 -0700
-Date: Mon, 21 Sep 2020 08:22:52 +0200
-From: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-To: Mathieu Poirier <mathieu.poirier@linaro.org>
-Subject: Re: [PATCH v7 3/3] vhost: add an RPMsg API
-Message-ID: <20200921062251.GA27773@ubuntu>
-References: <20200910111351.20526-1-guennadi.liakhovetski@linux.intel.com>
- <20200910111351.20526-4-guennadi.liakhovetski@linux.intel.com>
- <20200917220138.GA97950@xps15> <20200918090229.GC19246@ubuntu>
- <20200918155249.GA200851@xps15>
+ Mon, 21 Sep 2020 12:35:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1600691722;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Rwqqgkk5n+jk3i2GLt6oUS3tq+OlXcmqXoPG/Cpdq0s=;
+ b=g9bXgVhzBwYlYiIJzoNqhdS8okCejX4QfL1XwjLlanQh5VWh2cNafbfnMcz+pU9myaatI7
+ S+Hiwyq1rVmTjn0Hn86RVXdO46/FaC608GrzxCS0Ra1x1exD9JICvCjgSqvfYX8KP9w0fl
+ 34fwSYG0DjvurJtLZNvQYDOccI83vYA=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-551-Olx8DFmoNTKxsh0NaECiTA-1; Mon, 21 Sep 2020 08:35:20 -0400
+X-MC-Unique: Olx8DFmoNTKxsh0NaECiTA-1
+Received: by mail-wm1-f69.google.com with SMTP id a7so3691208wmc.2
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 21 Sep 2020 05:35:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Rwqqgkk5n+jk3i2GLt6oUS3tq+OlXcmqXoPG/Cpdq0s=;
+ b=W4tQlCyeKbXF3999+nz9FMoRygdHd0cakXyW2KFkuMVcYFJ6Kgr4Rw8G8UGUsCkoH/
+ 8FaiUba+k1VWZKusiCEnw4oJqWV2A2XmacznXCx8L+9WCbwQqVa4iKMnmGDhu5BrffDP
+ AD0COz957zUfnEauW18uuRlVKJde4pEVLLvLvdE5bvWMz3dqgPQ/j/w+EAuT8YvqKfHK
+ /THACZk+2b+9gAFJn2UHkHP/QE4qr06N9zx15qShR8VA63uGK89bvz0+dUt3ZF+NPvRj
+ Q6nTnJl9MvqxKO977vTlMQQC19wawNAQohKRLUqjKAgOf1ZqH3zSPfQIkWgkfqgNvsjq
+ weww==
+X-Gm-Message-State: AOAM532Vo6wZH7QK83tApTj8JWGZjWRTJlJW8pxriVpmCznLt2qWkChE
+ TQmeIb83nEH+jVBW2ENgVDcM+YRh79bMQLpwJodjO6ztTe/d0fUHh5JXYv9xoBLG7iIVdmsWXVE
+ YSvip5QllD+KTZGqGkJIwshNCPzrSYXEcAOnhBmHJtw==
+X-Received: by 2002:a7b:c38f:: with SMTP id s15mr30608519wmj.16.1600691719646; 
+ Mon, 21 Sep 2020 05:35:19 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxk8SI4MxU+bTgGCiPisNoMYNBLevVyLRA9Cuhq7q4wZQLmwfsI5OpJ5XpRgd2fRnEGpQ1TYA==
+X-Received: by 2002:a7b:c38f:: with SMTP id s15mr30608497wmj.16.1600691719495; 
+ Mon, 21 Sep 2020 05:35:19 -0700 (PDT)
+Received: from redhat.com (bzq-109-65-116-225.red.bezeqint.net.
+ [109.65.116.225])
+ by smtp.gmail.com with ESMTPSA id f6sm20641849wro.5.2020.09.21.05.35.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Sep 2020 05:35:18 -0700 (PDT)
+Date: Mon, 21 Sep 2020 08:35:16 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: "Zhu, Lingshan" <lingshan.zhu@intel.com>
+Subject: Re: [PATCH 1/2] vhost: remove mutex ops in vhost_set_backend_features
+Message-ID: <20200921083506-mutt-send-email-mst@kernel.org>
+References: <20200907105220.27776-1-lingshan.zhu@intel.com>
+ <20200907105220.27776-2-lingshan.zhu@intel.com>
+ <20200908080513-mutt-send-email-mst@kernel.org>
+ <34c0bc00-e5f1-1306-d705-72758c50872e@intel.com>
 MIME-Version: 1.0
+In-Reply-To: <34c0bc00-e5f1-1306-d705-72758c50872e@intel.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20200918155249.GA200851@xps15>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Ohad Ben-Cohen <ohad@wizery.com>, kvm@vger.kernel.org,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Vincent Whitchurch <vincent.whitchurch@axis.com>,
- linux-remoteproc@vger.kernel.org,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Liam Girdwood <liam.r.girdwood@linux.intel.com>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- sound-open-firmware@alsa-project.org
+Cc: netdev@vger.kernel.org, kvm@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,117 +113,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Mathieu,
-
-On Fri, Sep 18, 2020 at 09:52:49AM -0600, Mathieu Poirier wrote:
-> Good morning,
+On Tue, Sep 08, 2020 at 09:00:19PM +0800, Zhu, Lingshan wrote:
 > 
-> On Fri, Sep 18, 2020 at 11:02:29AM +0200, Guennadi Liakhovetski wrote:
-> > Hi Mathieu,
-> > 
-> > On Thu, Sep 17, 2020 at 04:01:38PM -0600, Mathieu Poirier wrote:
-> > > On Thu, Sep 10, 2020 at 01:13:51PM +0200, Guennadi Liakhovetski wrote:
-> > > > Linux supports running the RPMsg protocol over the VirtIO transport
-> > > > protocol, but currently there is only support for VirtIO clients and
-> > > > no support for VirtIO servers. This patch adds a vhost-based RPMsg
-> > > > server implementation, which makes it possible to use RPMsg over
-> > > > VirtIO between guest VMs and the host.
-> > > 
-> > > I now get the client/server concept you are describing above but that happened
-> > > only after a lot of mental gymnastics.  If you drop the whole client/server
-> > > concept and concentrate on what this patch does, things will go better.  I would
-> > > personally go with what you have in the Kconfig: 
-> > > 
-> > > > +	  Vhost RPMsg API allows vhost drivers to communicate with VirtIO
-> > > > +	  drivers on guest VMs, using the RPMsg over VirtIO protocol.
-> > > 
-> > > It is concise but describes exactly what this patch provide.
-> > 
-> > Ok, thanks, will try to improve.
-> > 
-> > > > Signed-off-by: Guennadi Liakhovetski <guennadi.liakhovetski@linux.intel.com>
-> > > > ---
-> > > >  drivers/vhost/Kconfig       |   7 +
-> > > >  drivers/vhost/Makefile      |   3 +
-> > > >  drivers/vhost/rpmsg.c       | 370 ++++++++++++++++++++++++++++++++++++
-> > > >  drivers/vhost/vhost_rpmsg.h |  74 ++++++++
-> > > >  4 files changed, 454 insertions(+)
-> > > >  create mode 100644 drivers/vhost/rpmsg.c
-> > > >  create mode 100644 drivers/vhost/vhost_rpmsg.h
-
-[snip]
-
-> > > > diff --git a/drivers/vhost/rpmsg.c b/drivers/vhost/rpmsg.c
-> > > > new file mode 100644
-> > > > index 000000000000..0ddee5b5f017
-> > > > --- /dev/null
-> > > > +++ b/drivers/vhost/rpmsg.c
-> > > > @@ -0,0 +1,370 @@
-
-[snip]
-
-> > > > +/*
-> > > > + * Return false to terminate the external loop only if we fail to obtain either
-> > > > + * a request or a response buffer
-> > > > + */
-> > > > +static bool handle_rpmsg_req_single(struct vhost_rpmsg *vr,
-> > > > +				    struct vhost_virtqueue *vq)
-> > > > +{
-> > > > +	struct vhost_rpmsg_iter iter;
-> > > > +	int ret = vhost_rpmsg_start_lock(vr, &iter, VIRTIO_RPMSG_REQUEST, -EINVAL);
-> > > > +	if (!ret)
-> > > > +		ret = vhost_rpmsg_finish_unlock(vr, &iter);
-> > > > +	if (ret < 0) {
-> > > > +		if (ret != -EAGAIN)
-> > > > +			vq_err(vq, "%s(): RPMSG processing failed %d\n",
-> > > > +			       __func__, ret);
-> > > > +		return false;
-> > > > +	}
-> > > > +
-> > > > +	if (!iter.ept->write)
-> > > > +		return true;
-> > > > +
-> > > > +	ret = vhost_rpmsg_start_lock(vr, &iter, VIRTIO_RPMSG_RESPONSE, -EINVAL);
-> > > > +	if (!ret)
-> > > > +		ret = vhost_rpmsg_finish_unlock(vr, &iter);
-> > > > +	if (ret < 0) {
-> > > > +		vq_err(vq, "%s(): RPMSG finalising failed %d\n", __func__, ret);
-> > > > +		return false;
-> > > > +	}
-> > > 
-> > > As I said before dealing with the "response" queue here seems to be introducing
-> > > coupling with vhost_rpmsg_start_lock()...  Endpoints should be doing that.
-> > 
-> > Sorry, could you elaborate a bit, what do you mean by coupling?
+> On 9/8/2020 8:05 PM, Michael S. Tsirkin wrote:
 > 
-> In function vhost_rpmsg_start_lock() the rpmsg header is prepared for a response
-> at the end of the processing associated with the reception of a
-> VIRTIO_RPMSG_REQUEST.  I assumed (perhaps wrongly) that such as response was
-> sent here.  In that case preparing the response and sending the response should
-> be done at the same place.
+>     On Mon, Sep 07, 2020 at 06:52:19PM +0800, Zhu Lingshan wrote:
+> 
+>         In vhost_vdpa ioctl SET_BACKEND_FEATURES path, currect code
+>         would try to acquire vhost dev mutex twice
+>         (first shown in vhost_vdpa_unlocked_ioctl), which can lead
+>         to a dead lock issue.
+>         This commit removed mutex operations in vhost_set_backend_features.
+>         As a compensation for vhost_net, a followinig commit will add
+>         needed mutex lock/unlock operations in a new function
+>         vhost_net_set_backend_features() which is a wrap of
+>         vhost_set_backend_features().
+> 
+>         Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
+> 
+>     I think you need to squash these two or reorder, we can't first
+>     make code racy then fix it up.
+> 
+> OK, I will send a V2 series with Jason's fixes tomorrow (handle SET/GET_BACKEND_FEATURES in vhost_vdpa ioctl than vring ioctl).
+> 
+> Thanks,
+> BR
+> Zhu Lingshan
 
-This will change in the next version, in it I'll remove response preparation from 
-request handling.
 
-> But my assumption may be completely wrong... A better question should probably
-> be why is the VIRTIO_RPMSG_RESPONSE probed in handle_rpmsg_req_single()?
-> Shouldn't this be solely concerned with handling requests from the guest?  If
-> I'm wondering what is going on I expect other people will also do the same,
-> something that could be alleviated with more comments.
+this never materialized ...
 
-My RPMsg implementation supports two modes for sending data from the host (in 
-VM terms) to guests: as responses to their requests and as asynchronous 
-messages. If there isn't a strict request-response pattern on a certain endpont, 
-you leave the .write callback NULL and then you send your messages as you please 
-independent of requests. But you can also specify a .write pointer in which case 
-after each request to generate a response.
+> 
+> 
+>         ---
+>          drivers/vhost/vhost.c | 2 --
+>          1 file changed, 2 deletions(-)
+> 
+>         diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+>         index b45519ca66a7..e03c9e6f058f 100644
+>         --- a/drivers/vhost/vhost.c
+>         +++ b/drivers/vhost/vhost.c
+>         @@ -2591,14 +2591,12 @@ void vhost_set_backend_features(struct vhost_dev *dev, u64 features)
+>                 struct vhost_virtqueue *vq;
+>                 int i;
+> 
+>         -       mutex_lock(&dev->mutex);
+>                 for (i = 0; i < dev->nvqs; ++i) {
+>                         vq = dev->vqs[i];
+>                         mutex_lock(&vq->mutex);
+>                         vq->acked_backend_features = features;
+>                         mutex_unlock(&vq->mutex);
+>                 }
+>         -       mutex_unlock(&dev->mutex);
+>          }
+>          EXPORT_SYMBOL_GPL(vhost_set_backend_features);
+> 
+>         --
+>         2.18.4
+> 
 
-In principle this response handling could be removed, but then drivers, that do 
-need to respond to requests would have to schedule an asynchronous action in 
-their .read callbacks to be triggered after request processing has completed.
-
-Thanks
-Guennadi
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
