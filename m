@@ -1,77 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 655592738D3
-	for <lists.virtualization@lfdr.de>; Tue, 22 Sep 2020 04:45:21 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C96182738E2
+	for <lists.virtualization@lfdr.de>; Tue, 22 Sep 2020 04:48:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id E8B2321FA8;
-	Tue, 22 Sep 2020 02:45:19 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 7CD87870FD;
+	Tue, 22 Sep 2020 02:48:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eGinW79PpyL9; Tue, 22 Sep 2020 02:45:18 +0000 (UTC)
+	with ESMTP id AskFaefCsqHe; Tue, 22 Sep 2020 02:48:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 21994220B2;
-	Tue, 22 Sep 2020 02:45:18 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C3FF4871FF;
+	Tue, 22 Sep 2020 02:48:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 11555C0051;
-	Tue, 22 Sep 2020 02:45:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 93A25C0051;
+	Tue, 22 Sep 2020 02:48:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 63CC7C0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E1BDCC0051
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Sep 2020 02:45:16 +0000 (UTC)
+ Tue, 22 Sep 2020 02:48:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 56C6621FA8
+ by hemlock.osuosl.org (Postfix) with ESMTP id D36C4870F7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Sep 2020 02:45:16 +0000 (UTC)
+ Tue, 22 Sep 2020 02:48:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id uD+kw0KBhwBG
+ with ESMTP id GEm3j2BFg-SC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Sep 2020 02:45:15 +0000 (UTC)
+ Tue, 22 Sep 2020 02:48:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
  [209.85.216.68])
- by silver.osuosl.org (Postfix) with ESMTPS id D26012152E
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 4FBD08705C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Sep 2020 02:45:15 +0000 (UTC)
-Received: by mail-pj1-f68.google.com with SMTP id q4so763240pjh.5
+ Tue, 22 Sep 2020 02:48:07 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id q4so765716pjh.5
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Sep 2020 19:45:15 -0700 (PDT)
+ Mon, 21 Sep 2020 19:48:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=lebGQ0WgPCez2R35wa3urhdXxY/Bn5Nlo8FdNbn1LQ8=;
- b=F6KNHlJqK33EJ5E+/k7zeZaCJ83izRgTk/OH0rK6Wm5UxIfPMEEXrWpFIJkPlLroRg
- CrwJWZJEWk2VSqH7CpBUtlcbHBVXqfBltHWW3c2BuWr8usCyOZxG1ZpiJYQeNDIJPjH5
- HM/28duZgab0NOv8QNYbA2YVMDgCPYCF3aOnIn2PF70bKoUrWRpUA1XKHyajOJZGgY4+
- Cew6hgP5iLeT09JhNDDNaql/jWDakyVk0hNk+Ue4DXRp89+WMyfGq/9dPE0uDkJufnIo
- axsuSn8vXNywEEC7GJOEK5Wxb76UcySmia6eXTN5Q8lzjpBt8cr8pAMmeW54113dnkBk
- +Dfw==
-X-Gm-Message-State: AOAM5315Wkjiq/c+2TvavTHmuWedbfTmNr/ntPzJokqYzWM5gE5w9Dmp
- CYenSqt4ByTnbmEWF48DXFHcgUgGbKw=
-X-Google-Smtp-Source: ABdhPJx1GFSufCEXFHwvrnyZqsBLdfFAJf+3amrY8P7gTNNNAQW9ZHB/Zk1bFJXKuO94vvn4SLP1aw==
-X-Received: by 2002:a17:90a:ed8e:: with SMTP id
- k14mr2003130pjy.178.1600742714879; 
- Mon, 21 Sep 2020 19:45:14 -0700 (PDT)
+ bh=3TVQRlLIwo6pFNEjT7YYd7yU5ajthHTiel3UE6DCXq4=;
+ b=AOxgb8IP9+52nwtGGP82ZzPvrnawcS3gy3+/nYm7zJXUEW8uZ6JJdsbmxBYtvgcBNS
+ H0A2Tl0m+eaQNZZqsAIahAhnz31o/Je+xmmz71PO6EwFPY+8U+4eSeVnh8PEXBYk642P
+ 7CvEc3UcIAVVTbwpr4VJPtlyWjYrvUZZxtBK4XBXLxk/F511ZxRMFlblpuW/kNV1IM37
+ m1Tkje60b3hiKgAJfuTxX4ApmpkxX5GDo7UOZOxprweh3dLeFcE9SnHmG3v0VmjKDhiC
+ 2WSi9Xnv2x1ixZ22FM0Zks4wm/t+/N8NA5BuMif8cus/eJ2GdDsV/zhTa1Sbg3o3SJpo
+ 6Fhg==
+X-Gm-Message-State: AOAM533i/e0HKEfa76SaReV9bCpTza1JBFHGvfvHtQOFjrik/16wAxUi
+ 8gn3m3TgPw6py0e1e7xbJf9eMSv3ta0=
+X-Google-Smtp-Source: ABdhPJxk5EP7QY4Q94Hxa9jFIomYpClQyz42Yh5wl7CpLijNh7pXzf5iOjaRviQwsIONP665auPvAw==
+X-Received: by 2002:a17:90a:49c8:: with SMTP id
+ l8mr1895046pjm.24.1600742886378; 
+ Mon, 21 Sep 2020 19:48:06 -0700 (PDT)
 Received: from ?IPv6:2601:647:4000:d7:5e05:892c:575b:24c7?
  ([2601:647:4000:d7:5e05:892c:575b:24c7])
- by smtp.gmail.com with ESMTPSA id a18sm12420584pgw.50.2020.09.21.19.45.13
+ by smtp.gmail.com with ESMTPSA id k5sm13599229pfp.214.2020.09.21.19.48.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Sep 2020 19:45:13 -0700 (PDT)
-Subject: Re: [PATCH 2/8] vhost: add helper to check if a vq has been setup
+ Mon, 21 Sep 2020 19:48:05 -0700 (PDT)
+Subject: Re: [PATCH 4/8] vhost scsi: fix cmd completion race
 To: Mike Christie <michael.christie@oracle.com>, martin.petersen@oracle.com,
  linux-scsi@vger.kernel.org, target-devel@vger.kernel.org, mst@redhat.com,
  jasowang@redhat.com, pbonzini@redhat.com, stefanha@redhat.com,
  virtualization@lists.linux-foundation.org
 References: <1600712588-9514-1-git-send-email-michael.christie@oracle.com>
- <1600712588-9514-3-git-send-email-michael.christie@oracle.com>
+ <1600712588-9514-5-git-send-email-michael.christie@oracle.com>
 From: Bart Van Assche <bvanassche@acm.org>
 Autocrypt: addr=bvanassche@acm.org; prefer-encrypt=mutual; keydata=
  mQENBFSOu4oBCADcRWxVUvkkvRmmwTwIjIJvZOu6wNm+dz5AF4z0FHW2KNZL3oheO3P8UZWr
@@ -96,12 +96,12 @@ Autocrypt: addr=bvanassche@acm.org; prefer-encrypt=mutual; keydata=
  //x8dLe2Fv1By4SKGhmzwH87uXxbTJAUxiWIi1np0z3/RDnoVyfmfbbL1DY7zf2hYXLLzsJR
  mSsED/1nlJ9Oq5fALdNEPgDyPUerqHxcmIub+pF0AzJoYHK5punqpqfGmqPbjxrJLPJfHVKy
  goMj5DlBMoYqEgpbwdUYkH6QdizJJCur4icy8GUNbisFYABeoJ91pnD4IGei3MTdvINSZI5e
-Message-ID: <ce73f019-a247-7913-47fd-b3e5e7bdf81f@acm.org>
-Date: Mon, 21 Sep 2020 19:45:12 -0700
+Message-ID: <cf8e5b11-dfd2-4570-1dab-25486c591dde@acm.org>
+Date: Mon, 21 Sep 2020 19:48:04 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <1600712588-9514-3-git-send-email-michael.christie@oracle.com>
+In-Reply-To: <1600712588-9514-5-git-send-email-michael.christie@oracle.com>
 Content-Language: en-US
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -120,18 +120,18 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On 2020-09-21 11:23, Mike Christie wrote:
-> +bool vhost_vq_is_setup(struct vhost_virtqueue *vq)
-> +{
-> +	if (vq->avail && vq->desc && vq->used && vhost_vq_access_ok(vq))
-> +		return true;
-> +	else
-> +		return false;
-> +}
+> We might not do the final se_cmd put from vhost_scsi_complete_cmd_work.
+> If the last put happens a little later then we could race where
+> vhost_scsi_complete_cmd_work does vhost_signal, the guest runs and sends
+> more IO, and vhost_scsi_handle_vq runs but does not find any free cmds.
+> 
+> This patch has us delay completing the cmd until the last lio core ref
+> is dropped. We then know that once we signal to the guest that the cmd
+> is completed that if it queues a new command it will find a free cmd.
 
-Has it been considered changing the body of this function into
-"return vq->avail && vq->desc && vq->used && vhost_vq_access_ok(vq)"? I'm
-concerned otherwise one or another build bot will suggest to make that
-change.
+It seems weird to me to see a reference to LIO in the description of a
+vhost patch? Since this driver supports more backends than LIO, shouldn't
+the patch description be made more generic?
 
 Thanks,
 
