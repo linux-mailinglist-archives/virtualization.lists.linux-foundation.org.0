@@ -1,83 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 002E0276735
-	for <lists.virtualization@lfdr.de>; Thu, 24 Sep 2020 05:26:32 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 23B342768D2
+	for <lists.virtualization@lfdr.de>; Thu, 24 Sep 2020 08:22:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 93FB286FDC;
-	Thu, 24 Sep 2020 03:26:31 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A48CE86931;
+	Thu, 24 Sep 2020 06:22:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RrDdiA5J1Y5x; Thu, 24 Sep 2020 03:26:30 +0000 (UTC)
+	with ESMTP id 45dBPd8JW1pG; Thu, 24 Sep 2020 06:22:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 74C6A86FE7;
-	Thu, 24 Sep 2020 03:26:30 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A16A386969;
+	Thu, 24 Sep 2020 06:22:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5D2DEC0889;
-	Thu, 24 Sep 2020 03:26:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B386C0051;
+	Thu, 24 Sep 2020 06:22:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 69FB5C0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DB86EC0051
  for <virtualization@lists.linux-foundation.org>;
- Thu, 24 Sep 2020 03:26:28 +0000 (UTC)
+ Thu, 24 Sep 2020 06:22:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 655B886ADD
+ by hemlock.osuosl.org (Postfix) with ESMTP id D709B87448
  for <virtualization@lists.linux-foundation.org>;
- Thu, 24 Sep 2020 03:26:28 +0000 (UTC)
+ Thu, 24 Sep 2020 06:22:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zUyUC7knpLWR
+ with ESMTP id yz-Lx1hjtAbT
  for <virtualization@lists.linux-foundation.org>;
- Thu, 24 Sep 2020 03:26:27 +0000 (UTC)
+ Thu, 24 Sep 2020 06:22:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 1F2DE85B9D
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A061C87425
  for <virtualization@lists.linux-foundation.org>;
- Thu, 24 Sep 2020 03:26:27 +0000 (UTC)
+ Thu, 24 Sep 2020 06:22:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1600917986;
+ s=mimecast20190719; t=1600928559;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=+rilPBAsMXt6zsUPwIDn1uxXSz7Jh7iEk8zBLOz32K4=;
- b=FLe4ILnxJRwIw7Rqrkhx28jNi3uF/qpWnnSbF7EWMzJ+V78mOxxPOoa18UC+jQRQA5D6O6
- tewdOTV1vq3CZnjGnHyTZzNOrFXLZnHQRVhwkrlmJ6XMifVDKYErOtnwTmbvU1lnZ9SQKo
- +sXGTgWCqTRSgQVTSH8L3r1hpVxE9Sk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-58-GZRxHkCyPdKAYUzKRTcoTw-1; Wed, 23 Sep 2020 23:26:23 -0400
-X-MC-Unique: GZRxHkCyPdKAYUzKRTcoTw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3830B420F0;
- Thu, 24 Sep 2020 03:26:22 +0000 (UTC)
-Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
- (ovpn-13-193.pek2.redhat.com [10.72.13.193])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3D6793782;
- Thu, 24 Sep 2020 03:26:07 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: mst@redhat.com,
-	jasowang@redhat.com
-Subject: [RFC PATCH 24/24] vdpasim: control virtqueue support
-Date: Thu, 24 Sep 2020 11:21:25 +0800
-Message-Id: <20200924032125.18619-25-jasowang@redhat.com>
-In-Reply-To: <20200924032125.18619-1-jasowang@redhat.com>
-References: <20200924032125.18619-1-jasowang@redhat.com>
+ bh=gEcu4iBOxnLTbz9gqtT1ua1Oy+okXu52tVH1BUCGzcg=;
+ b=cgrjDpQZOjCRq2+1zcwAGp7aXQjl1C1UoDLNjy4LcpopAuloL0ETdqbmS6D0/tCmH1/4Nh
+ 1H7XTPk7OVaAFtbPNRDdHsWN7KNxbFpQNbUwrKj9MX4ycvv7hS0V1UyBqU8n5mHr4oSEHo
+ FakUlbEOEMEJ6JxmXlP2GdRYOQBf55k=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-317-fQbMAIYUOmSl43uAp4xo5g-1; Thu, 24 Sep 2020 02:22:37 -0400
+X-MC-Unique: fQbMAIYUOmSl43uAp4xo5g-1
+Received: by mail-wr1-f70.google.com with SMTP id w7so827496wrp.2
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 23 Sep 2020 23:22:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=gEcu4iBOxnLTbz9gqtT1ua1Oy+okXu52tVH1BUCGzcg=;
+ b=NhcOvzTIoA0PE49aB5/bfszu+OSNfdyoY5nRiR1xUOANb9t1lgz3rTfzroycPtvOgU
+ skNYpbMs7FGEdy+H0HdhbKd0yhWAmQhBK7786mJpAUlttqm2wIf1m9tySy26/WnDA/tF
+ olAfOwEOILtxOBgrtchuc1uvWGhpp+D4MYZboOB0nCjdM8BWs1h9TvAuh+BW/fjgGK3N
+ ZgYIg34spS0JoOddQ1yGAboQG/TaKMEaQmd58pg+RWY5X8hKUE4ENITSUeCa0FrwlzeG
+ 99mUzRfDJuBDnfVS0dm5Oh5Rh1shGiXs4sU/s3fVKDxxF8Lg8WdWCW+UZxf5CmnPzdlD
+ Qbsw==
+X-Gm-Message-State: AOAM533PtCBOqGkBivmraxFJKSfY99KDFE709PAg81hUK1+BJ7shBI4j
+ hurZs/yqLVeFzTLe2sTBvefydsVDv3aeps7t8FGKwMMvcmjGtQoNwQrtIe0z3AtO6TUsIL/OADM
+ O9QKV84x9bszMvEfCW+Pm3bdhmWDJO16SLVTmzNSILw==
+X-Received: by 2002:a7b:cc09:: with SMTP id f9mr2920497wmh.93.1600928556074;
+ Wed, 23 Sep 2020 23:22:36 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzoh0ZKLW0e65cydYc7n6/Gq1PKp4GnxH32SyCB3hl8vT0YCuziH4KYTidiSZ4HMuurvOlvqg==
+X-Received: by 2002:a7b:cc09:: with SMTP id f9mr2920472wmh.93.1600928555769;
+ Wed, 23 Sep 2020 23:22:35 -0700 (PDT)
+Received: from redhat.com (bzq-79-179-71-128.red.bezeqint.net. [79.179.71.128])
+ by smtp.gmail.com with ESMTPSA id r21sm2565717wrc.70.2020.09.23.23.22.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Sep 2020 23:22:34 -0700 (PDT)
+Date: Thu, 24 Sep 2020 02:22:32 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Mike Christie <michael.christie@oracle.com>
+Subject: Re: [PATCH 3/8] vhost scsi: alloc cmds per vq instead of session
+Message-ID: <20200924022107-mutt-send-email-mst@kernel.org>
+References: <1600712588-9514-1-git-send-email-michael.christie@oracle.com>
+ <1600712588-9514-4-git-send-email-michael.christie@oracle.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: lulu@redhat.com, kvm@vger.kernel.org, netdev@vger.kernel.org,
- mhabets@solarflare.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, eperezma@redhat.com,
- hanand@xilinx.com, stefanha@redhat.com, eli@mellanox.com,
- maxime.coquelin@redhat.com, lingshan.zhu@intel.com, rob.miller@broadcom.com
+In-Reply-To: <1600712588-9514-4-git-send-email-michael.christie@oracle.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: martin.petersen@oracle.com, linux-scsi@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, target-devel@vger.kernel.org,
+ stefanha@redhat.com, pbonzini@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,402 +111,379 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch introduces the control virtqueue support for vDPA
-simulator. This is a requirement for supporting advanced features like
-multiqueue.
+On Mon, Sep 21, 2020 at 01:23:03PM -0500, Mike Christie wrote:
+> We currently are limited to 256 cmds per session. This leads to problems
+> where if the user has increased virtqueue_size to more than 2 or
+> cmd_per_lun to more than 256 vhost_scsi_get_tag can fail and the guest
+> will get IO errors.
+> 
+> This patch moves the cmd allocation to per vq so we can easily match
+> whatever the user has specified for num_queues and
+> virtqueue_size/cmd_per_lun. It also makes it easier to control how much
+> memory we preallocate. For cases, where perf is not as important and
+> we can use the current defaults (1 vq and 128 cmds per vq) memory use
+> from preallocate cmds is cut in half. For cases, where we are willing
+> to use more memory for higher perf, cmd mem use will now increase as
+> the num queues and queue depth increases.
+> 
+> Signed-off-by: Mike Christie <michael.christie@oracle.com>
+> ---
+>  drivers/vhost/scsi.c | 204 ++++++++++++++++++++++++++++++++-------------------
+>  1 file changed, 127 insertions(+), 77 deletions(-)
+> 
+> diff --git a/drivers/vhost/scsi.c b/drivers/vhost/scsi.c
+> index b22adf0..13311b8 100644
+> --- a/drivers/vhost/scsi.c
+> +++ b/drivers/vhost/scsi.c
+> @@ -52,7 +52,6 @@
+>  #define VHOST_SCSI_VERSION  "v0.1"
+>  #define VHOST_SCSI_NAMELEN 256
+>  #define VHOST_SCSI_MAX_CDB_SIZE 32
+> -#define VHOST_SCSI_DEFAULT_TAGS 256
+>  #define VHOST_SCSI_PREALLOC_SGLS 2048
+>  #define VHOST_SCSI_PREALLOC_UPAGES 2048
+>  #define VHOST_SCSI_PREALLOC_PROT_SGLS 2048
+> @@ -189,6 +188,9 @@ struct vhost_scsi_virtqueue {
+>  	 * Writers must also take dev mutex and flush under it.
+>  	 */
+>  	int inflight_idx;
+> +	struct vhost_scsi_cmd *scsi_cmds;
+> +	struct sbitmap scsi_tags;
+> +	int max_cmds;
+>  };
+>  
+>  struct vhost_scsi {
+> @@ -324,7 +326,9 @@ static void vhost_scsi_release_cmd(struct se_cmd *se_cmd)
+>  {
+>  	struct vhost_scsi_cmd *tv_cmd = container_of(se_cmd,
+>  				struct vhost_scsi_cmd, tvc_se_cmd);
+> -	struct se_session *se_sess = tv_cmd->tvc_nexus->tvn_se_sess;
+> +	struct vhost_scsi_virtqueue *svq = container_of(tv_cmd->tvc_vq,
+> +				struct vhost_scsi_virtqueue, vq);
+> +	struct vhost_scsi_inflight *inflight = tv_cmd->inflight;
+>  	int i;
+>  
+>  	if (tv_cmd->tvc_sgl_count) {
+> @@ -336,8 +340,8 @@ static void vhost_scsi_release_cmd(struct se_cmd *se_cmd)
+>  			put_page(sg_page(&tv_cmd->tvc_prot_sgl[i]));
+>  	}
+>  
+> -	vhost_scsi_put_inflight(tv_cmd->inflight);
+> -	target_free_tag(se_sess, se_cmd);
+> +	sbitmap_clear_bit(&svq->scsi_tags, se_cmd->map_tag);
+> +	vhost_scsi_put_inflight(inflight);
+>  }
+>  
+>  static u32 vhost_scsi_sess_get_index(struct se_session *se_sess)
+> @@ -566,13 +570,14 @@ static void vhost_scsi_complete_cmd_work(struct vhost_work *work)
+>  }
+>  
+>  static struct vhost_scsi_cmd *
+> -vhost_scsi_get_tag(struct vhost_virtqueue *vq, struct vhost_scsi_tpg *tpg,
+> +vhost_scsi_get_cmd(struct vhost_virtqueue *vq, struct vhost_scsi_tpg *tpg,
+>  		   unsigned char *cdb, u64 scsi_tag, u16 lun, u8 task_attr,
+>  		   u32 exp_data_len, int data_direction)
+>  {
+> +	struct vhost_scsi_virtqueue *svq = container_of(vq,
+> +					struct vhost_scsi_virtqueue, vq);
+>  	struct vhost_scsi_cmd *cmd;
+>  	struct vhost_scsi_nexus *tv_nexus;
+> -	struct se_session *se_sess;
+>  	struct scatterlist *sg, *prot_sg;
+>  	struct page **pages;
+>  	int tag, cpu;
+> @@ -582,15 +587,14 @@ static void vhost_scsi_complete_cmd_work(struct vhost_work *work)
+>  		pr_err("Unable to locate active struct vhost_scsi_nexus\n");
+>  		return ERR_PTR(-EIO);
+>  	}
+> -	se_sess = tv_nexus->tvn_se_sess;
+>  
+> -	tag = sbitmap_queue_get(&se_sess->sess_tag_pool, &cpu);
+> +	tag = sbitmap_get(&svq->scsi_tags, 0, false);
+>  	if (tag < 0) {
+>  		pr_err("Unable to obtain tag for vhost_scsi_cmd\n");
+>  		return ERR_PTR(-ENOMEM);
+>  	}
 
-A requirement for control virtqueue is to isolate its memory access
-from the rx/tx virtqueues. This is because when using vDPA device
-for VM, the control virqueue may not be assigned to VM
-directly but shadowed by userspace VMM (Qemu).
 
-The isolation is done via the virtqueue groups and ASID support in
-vDPA through vhost-vdpa. The simulator is extended to have:
+After this change, cpu is uninitialized.
 
-1) three virtqueues: RXVQ, TXVQ and CVQ (control virtqueue)
-2) two virtqueue groups: group 0 contains RX/TX, group 1 contains CVQ
-3) two address spaces and the simulator simply implements the address
-   spaces by mapping it 1:1 to IOTLB.
 
-For the VM use cases, userspace(Qemu) may set AS 0 to group 0 and AS 1
-to group 1. So we have:
-
-1) The IOTLB for virtqueue group 0 contains the mappings of guest, so
-   RX and TX can be assigned to guest directly.
-2) The IOTLB for virtqueue group 1 contains the mappings of CVQ which
-   is the buffers that allocated and managed by userspace only so that
-   guest can not access the CVQ of vhost-vdpa.
-
-For the other use cases, since AS 0 is associated to all virtqueue
-groups by default. All virtqueues share the same mapping by default.
-
-To demonstrate the function, VIRITO_NET_F_CTRL_MACADDR is
-implemented in the simulator for the driver to set mac address.
-
-Signed-off-by: Jason Wang <jasowang@redhat.com>
----
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 189 +++++++++++++++++++++++++++----
- 1 file changed, 166 insertions(+), 23 deletions(-)
-
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 66d901fb4c57..3459539c4460 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -56,14 +56,18 @@ struct vdpasim_virtqueue {
- #define VDPASIM_QUEUE_MAX 256
- #define VDPASIM_DEVICE_ID 0x1
- #define VDPASIM_VENDOR_ID 0
--#define VDPASIM_VQ_NUM 0x2
-+#define VDPASIM_VQ_NUM 0x3
-+#define VDPASIM_AS_NUM 0x2
-+#define VDPASIM_GROUP_NUM 0x2
- #define VDPASIM_NAME "vdpasim-netdev"
- 
- static u64 vdpasim_features = (1ULL << VIRTIO_F_ANY_LAYOUT) |
- 			      (1ULL << VIRTIO_F_VERSION_1)  |
- 			      (1ULL << VIRTIO_F_ACCESS_PLATFORM) |
- 			      (1ULL << VIRTIO_NET_F_MTU) |
--			      (1ULL << VIRTIO_NET_F_MAC);
-+			      (1ULL << VIRTIO_NET_F_MAC) |
-+			      (1ULL << VIRTIO_NET_F_CTRL_VQ) |
-+			      (1ULL << VIRTIO_NET_F_CTRL_MAC_ADDR);
- 
- /* State of each vdpasim device */
- struct vdpasim {
-@@ -143,11 +147,17 @@ static void vdpasim_reset(struct vdpasim *vdpasim)
- {
- 	int i;
- 
--	for (i = 0; i < VDPASIM_VQ_NUM; i++)
-+	spin_lock(&vdpasim->iommu_lock);
-+
-+	for (i = 0; i < VDPASIM_VQ_NUM; i++) {
- 		vdpasim_vq_reset(&vdpasim->vqs[i]);
-+		vringh_set_iotlb(&vdpasim->vqs[i].vring,
-+				 &vdpasim->iommu[0]);
-+	}
- 
--	spin_lock(&vdpasim->iommu_lock);
--	vhost_iotlb_reset(vdpasim->iommu);
-+	for (i = 0; i < VDPASIM_AS_NUM; i++) {
-+		vhost_iotlb_reset(&vdpasim->iommu[i]);
-+	}
- 	spin_unlock(&vdpasim->iommu_lock);
- 
- 	vdpasim->features = 0;
-@@ -187,6 +197,80 @@ static bool receive_filter(struct vdpasim *vdpasim, size_t len)
- 	return false;
- }
- 
-+virtio_net_ctrl_ack vdpasim_handle_ctrl_mac(struct vdpasim *vdpasim,
-+					    u8 cmd)
-+{
-+	struct vdpasim_virtqueue *cvq = &vdpasim->vqs[2];
-+	virtio_net_ctrl_ack status = VIRTIO_NET_ERR;
-+	size_t read;
-+
-+	switch (cmd) {
-+	case VIRTIO_NET_CTRL_MAC_ADDR_SET:
-+		read = vringh_iov_pull_iotlb(&cvq->vring, &cvq->riov,
-+					     (void *)vdpasim->config.mac,
-+					     ETH_ALEN);
-+		if (read == ETH_ALEN)
-+			status = VIRTIO_NET_OK;
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	return status;
-+}
-+
-+static void vdpasim_handle_cvq(struct vdpasim *vdpasim)
-+{
-+	struct vdpasim_virtqueue *cvq = &vdpasim->vqs[2];
-+	virtio_net_ctrl_ack status = VIRTIO_NET_ERR;
-+	struct virtio_net_ctrl_hdr ctrl;
-+	size_t read, write;
-+	int err;
-+
-+	if (!(vdpasim->features & (1ULL << VIRTIO_NET_F_CTRL_VQ)))
-+		return;
-+
-+	if (!cvq->ready)
-+		return;
-+
-+	while (true) {
-+		err = vringh_getdesc_iotlb(&cvq->vring, &cvq->riov, &cvq->wiov,
-+					   &cvq->head, GFP_ATOMIC);
-+		if (err <= 0)
-+			break;
-+
-+		read = vringh_iov_pull_iotlb(&cvq->vring, &cvq->riov, &ctrl,
-+					     sizeof(ctrl));
-+		if (read != sizeof(ctrl))
-+			break;
-+
-+		switch (ctrl.class) {
-+		case VIRTIO_NET_CTRL_MAC:
-+			status = vdpasim_handle_ctrl_mac(vdpasim, ctrl.cmd);
-+			break;
-+		default:
-+			break;
-+		}
-+
-+		/* Make sure data is wrote before advancing index */
-+		smp_wmb();
-+
-+		write = vringh_iov_push_iotlb(&cvq->vring, &cvq->wiov,
-+					      &status, sizeof (status));
-+		vringh_complete_iotlb(&cvq->vring, cvq->head, write);
-+		vringh_kiov_cleanup(&cvq->riov);
-+		vringh_kiov_cleanup(&cvq->wiov);
-+
-+		/* Make sure used is visible before rasing the interrupt. */
-+		smp_wmb();
-+
-+		local_bh_disable();
-+		if (cvq->cb)
-+			cvq->cb(cvq->private);
-+		local_bh_enable();
-+	}
-+}
-+
- static void vdpasim_work(struct work_struct *work)
- {
- 	struct vdpasim *vdpasim = container_of(work, struct
-@@ -272,7 +356,7 @@ static dma_addr_t vdpasim_map_page(struct device *dev, struct page *page,
- 				   unsigned long attrs)
- {
- 	struct vdpasim *vdpasim = dev_to_sim(dev);
--	struct vhost_iotlb *iommu = vdpasim->iommu;
-+	struct vhost_iotlb *iommu = &vdpasim->iommu[0];
- 	u64 pa = (page_to_pfn(page) << PAGE_SHIFT) + offset;
- 	int ret, perm = dir_to_perm(dir);
- 
-@@ -297,7 +381,7 @@ static void vdpasim_unmap_page(struct device *dev, dma_addr_t dma_addr,
- 			       unsigned long attrs)
- {
- 	struct vdpasim *vdpasim = dev_to_sim(dev);
--	struct vhost_iotlb *iommu = vdpasim->iommu;
-+	struct vhost_iotlb *iommu = &vdpasim->iommu[0];
- 
- 	spin_lock(&vdpasim->iommu_lock);
- 	vhost_iotlb_del_range(iommu, (u64)dma_addr,
-@@ -310,7 +394,7 @@ static void *vdpasim_alloc_coherent(struct device *dev, size_t size,
- 				    unsigned long attrs)
- {
- 	struct vdpasim *vdpasim = dev_to_sim(dev);
--	struct vhost_iotlb *iommu = vdpasim->iommu;
-+	struct vhost_iotlb *iommu = &vdpasim->iommu[0];
- 	void *addr = kmalloc(size, flag);
- 	int ret;
- 
-@@ -340,7 +424,7 @@ static void vdpasim_free_coherent(struct device *dev, size_t size,
- 				  unsigned long attrs)
- {
- 	struct vdpasim *vdpasim = dev_to_sim(dev);
--	struct vhost_iotlb *iommu = vdpasim->iommu;
-+	struct vhost_iotlb *iommu = &vdpasim->iommu[0];
- 
- 	spin_lock(&vdpasim->iommu_lock);
- 	vhost_iotlb_del_range(iommu, (u64)dma_addr,
-@@ -366,14 +450,17 @@ static struct vdpasim *vdpasim_create(void)
- 	struct vdpasim *vdpasim;
- 	struct device *dev;
- 	int ret = -ENOMEM;
-+	int i;
- 
- 	if (batch_mapping)
- 		ops = &vdpasim_net_batch_config_ops;
- 	else
- 		ops = &vdpasim_net_config_ops;
- 
-+	/* 3 virtqueues, 2 address spaces, 2 virtqueue groups */
- 	vdpasim = vdpa_alloc_device(struct vdpasim, vdpa, NULL, ops,
--				    VDPASIM_VQ_NUM, 1, 1);
-+				    VDPASIM_VQ_NUM, VDPASIM_AS_NUM,
-+				    VDPASIM_GROUP_NUM);
- 	if (!vdpasim)
- 		goto err_alloc;
- 
-@@ -385,18 +472,23 @@ static struct vdpasim *vdpasim_create(void)
- 	dev->coherent_dma_mask = DMA_BIT_MASK(64);
- 	set_dma_ops(dev, &vdpasim_dma_ops);
- 
--	vdpasim->iommu = vhost_iotlb_alloc(2048, 0);
-+	vdpasim->iommu = kmalloc_array(VDPASIM_AS_NUM,
-+				       sizeof(*vdpasim->iommu), GFP_KERNEL);
- 	if (!vdpasim->iommu)
- 		goto err_iommu;
- 
-+	for (i = 0; i < VDPASIM_AS_NUM; i++)
-+		vhost_iotlb_init(&vdpasim->iommu[i], 0, 0);
-+
- 	vdpasim->buffer = kmalloc(PAGE_SIZE, GFP_KERNEL);
- 	if (!vdpasim->buffer)
- 		goto err_iommu;
- 
- 	eth_random_addr(vdpasim->config.mac);
- 
--	vringh_set_iotlb(&vdpasim->vqs[0].vring, vdpasim->iommu);
--	vringh_set_iotlb(&vdpasim->vqs[1].vring, vdpasim->iommu);
-+	/* Make sure that default ASID is zero */
-+	for (i = 0; i < VDPASIM_VQ_NUM; i++)
-+		vringh_set_iotlb(&vdpasim->vqs[i].vring, &vdpasim->iommu[0]);
- 
- 	vdpasim->vdpa.dma_dev = dev;
- 	ret = vdpa_register_device(&vdpasim->vdpa);
-@@ -438,7 +530,14 @@ static void vdpasim_kick_vq(struct vdpa_device *vdpa, u16 idx)
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
- 	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
- 
--	if (vq->ready)
-+	if (idx == 2) {
-+		/* Kernel virtio driver will do busy waiting for the
-+		 * result, so we can't handle cvq in the workqueue.
-+		 */
-+		spin_lock(&vdpasim->lock);
-+		vdpasim_handle_cvq(vdpasim);
-+		spin_unlock(&vdpasim->lock);
-+	} else if (vq->ready)
- 		schedule_work(&vdpasim->work);
- }
- 
-@@ -504,7 +603,11 @@ static u32 vdpasim_get_vq_align(struct vdpa_device *vdpa)
- 
- static u32 vdpasim_get_vq_group(struct vdpa_device *vdpa, u16 idx)
- {
--	return 0;
-+	/* RX and TX belongs to group 0, CVQ belongs to group 1 */
-+	if (idx == 2)
-+		return 1;
-+	else
-+		return 0;
- }
- 
- static u64 vdpasim_get_features(struct vdpa_device *vdpa)
-@@ -600,20 +703,53 @@ static u32 vdpasim_get_generation(struct vdpa_device *vdpa)
- 	return vdpasim->generation;
- }
- 
-+int vdpasim_set_group_asid(struct vdpa_device *vdpa, unsigned int group,
-+			   unsigned int asid)
-+{
-+	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
-+	struct vhost_iotlb *iommu;
-+	int i;
-+
-+	if (group > VDPASIM_GROUP_NUM)
-+		return -EINVAL;
-+
-+	if (asid > VDPASIM_AS_NUM)
-+		return -EINVAL;
-+
-+	iommu = &vdpasim->iommu[asid];
-+
-+	spin_lock(&vdpasim->lock);
-+
-+	for (i = 0; i < VDPASIM_VQ_NUM; i++)
-+		if (vdpasim_get_vq_group(vdpa, i) == group)
-+			vringh_set_iotlb(&vdpasim->vqs[i].vring, iommu);
-+
-+	spin_unlock(&vdpasim->lock);
-+
-+	return 0;
-+}
-+
-+
- static int vdpasim_set_map(struct vdpa_device *vdpa, unsigned int asid,
- 			   struct vhost_iotlb *iotlb)
- {
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
- 	struct vhost_iotlb_map *map;
-+	struct vhost_iotlb *iommu;
- 	u64 start = 0ULL, last = 0ULL - 1;
- 	int ret;
- 
-+	if (asid >= VDPASIM_AS_NUM)
-+		return -EINVAL;
-+
- 	spin_lock(&vdpasim->iommu_lock);
--	vhost_iotlb_reset(vdpasim->iommu);
-+
-+	iommu = &vdpasim->iommu[asid];
-+	vhost_iotlb_reset(iommu);
- 
- 	for (map = vhost_iotlb_itree_first(iotlb, start, last); map;
- 	     map = vhost_iotlb_itree_next(map, start, last)) {
--		ret = vhost_iotlb_add_range(vdpasim->iommu, map->start,
-+		ret = vhost_iotlb_add_range(iommu, map->start,
- 					    map->last, map->addr, map->perm);
- 		if (ret)
- 			goto err;
-@@ -622,7 +758,7 @@ static int vdpasim_set_map(struct vdpa_device *vdpa, unsigned int asid,
- 	return 0;
- 
- err:
--	vhost_iotlb_reset(vdpasim->iommu);
-+	vhost_iotlb_reset(iommu);
- 	spin_unlock(&vdpasim->iommu_lock);
- 	return ret;
- }
-@@ -634,9 +770,12 @@ static int vdpasim_dma_map(struct vdpa_device *vdpa, unsigned int asid,
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
- 	int ret;
- 
-+	if (asid >= VDPASIM_AS_NUM)
-+		return -EINVAL;
-+
- 	spin_lock(&vdpasim->iommu_lock);
--	ret = vhost_iotlb_add_range(vdpasim->iommu, iova, iova + size - 1, pa,
--				    perm);
-+	ret = vhost_iotlb_add_range(&vdpasim->iommu[asid], iova,
-+				    iova + size - 1, pa, perm);
- 	spin_unlock(&vdpasim->iommu_lock);
- 
- 	return ret;
-@@ -647,8 +786,11 @@ static int vdpasim_dma_unmap(struct vdpa_device *vdpa, unsigned int asid,
- {
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
- 
-+	if (asid >= VDPASIM_AS_NUM)
-+		return -EINVAL;
-+
- 	spin_lock(&vdpasim->iommu_lock);
--	vhost_iotlb_del_range(vdpasim->iommu, iova, iova + size - 1);
-+	vhost_iotlb_del_range(&vdpasim->iommu[asid], iova, iova + size - 1);
- 	spin_unlock(&vdpasim->iommu_lock);
- 
- 	return 0;
-@@ -660,8 +802,7 @@ static void vdpasim_free(struct vdpa_device *vdpa)
- 
- 	cancel_work_sync(&vdpasim->work);
- 	kfree(vdpasim->buffer);
--	if (vdpasim->iommu)
--		vhost_iotlb_free(vdpasim->iommu);
-+	vhost_iotlb_free(vdpasim->iommu);
- }
- 
- static const struct vdpa_config_ops vdpasim_net_config_ops = {
-@@ -686,6 +827,7 @@ static const struct vdpa_config_ops vdpasim_net_config_ops = {
- 	.get_config             = vdpasim_get_config,
- 	.set_config             = vdpasim_set_config,
- 	.get_generation         = vdpasim_get_generation,
-+	.set_group_asid         = vdpasim_set_group_asid,
- 	.dma_map                = vdpasim_dma_map,
- 	.dma_unmap              = vdpasim_dma_unmap,
- 	.free                   = vdpasim_free,
-@@ -713,6 +855,7 @@ static const struct vdpa_config_ops vdpasim_net_batch_config_ops = {
- 	.get_config             = vdpasim_get_config,
- 	.set_config             = vdpasim_set_config,
- 	.get_generation         = vdpasim_get_generation,
-+	.set_group_asid         = vdpasim_set_group_asid,
- 	.set_map                = vdpasim_set_map,
- 	.free                   = vdpasim_free,
- };
--- 
-2.20.1
+>  
+> -	cmd = &((struct vhost_scsi_cmd *)se_sess->sess_cmd_map)[tag];
+> +	cmd = &svq->scsi_cmds[tag];
+>  	sg = cmd->tvc_sgl;
+>  	prot_sg = cmd->tvc_prot_sgl;
+>  	pages = cmd->tvc_upages;
+> @@ -1065,11 +1069,11 @@ static void vhost_scsi_submission_work(struct work_struct *work)
+>  				scsi_command_size(cdb), VHOST_SCSI_MAX_CDB_SIZE);
+>  				goto err;
+>  		}
+> -		cmd = vhost_scsi_get_tag(vq, tpg, cdb, tag, lun, task_attr,
+> +		cmd = vhost_scsi_get_cmd(vq, tpg, cdb, tag, lun, task_attr,
+>  					 exp_data_len + prot_bytes,
+>  					 data_direction);
+>  		if (IS_ERR(cmd)) {
+> -			vq_err(vq, "vhost_scsi_get_tag failed %ld\n",
+> +			vq_err(vq, "vhost_scsi_get_cmd failed %ld\n",
+>  			       PTR_ERR(cmd));
+>  			goto err;
+>  		}
+> @@ -1373,6 +1377,83 @@ static void vhost_scsi_flush(struct vhost_scsi *vs)
+>  		wait_for_completion(&old_inflight[i]->comp);
+>  }
+>  
+> +static void vhost_scsi_destroy_vq_cmds(struct vhost_virtqueue *vq)
+> +{
+> +	struct vhost_scsi_virtqueue *svq = container_of(vq,
+> +					struct vhost_scsi_virtqueue, vq);
+> +	struct vhost_scsi_cmd *tv_cmd;
+> +	unsigned int i;
+> +
+> +	if (!svq->scsi_cmds)
+> +		return;
+> +
+> +	for (i = 0; i < svq->max_cmds; i++) {
+> +		tv_cmd = &svq->scsi_cmds[i];
+> +
+> +		kfree(tv_cmd->tvc_sgl);
+> +		kfree(tv_cmd->tvc_prot_sgl);
+> +		kfree(tv_cmd->tvc_upages);
+> +	}
+> +
+> +	sbitmap_free(&svq->scsi_tags);
+> +	kfree(svq->scsi_cmds);
+> +	svq->scsi_cmds = NULL;
+> +}
+> +
+> +static int vhost_scsi_setup_vq_cmds(struct vhost_virtqueue *vq, int max_cmds)
+> +{
+> +	struct vhost_scsi_virtqueue *svq = container_of(vq,
+> +					struct vhost_scsi_virtqueue, vq);
+> +	struct vhost_scsi_cmd *tv_cmd;
+> +	unsigned int i;
+> +
+> +	if (svq->scsi_cmds)
+> +		return 0;
+> +
+> +	if (sbitmap_init_node(&svq->scsi_tags, max_cmds, -1, GFP_KERNEL,
+> +			      NUMA_NO_NODE))
+> +		return -ENOMEM;
+> +	svq->max_cmds = max_cmds;
+> +
+> +	svq->scsi_cmds = kcalloc(max_cmds, sizeof(*tv_cmd), GFP_KERNEL);
+> +	if (!svq->scsi_cmds) {
+> +		sbitmap_free(&svq->scsi_tags);
+> +		return -ENOMEM;
+> +	}
+> +
+> +	for (i = 0; i < max_cmds; i++) {
+> +		tv_cmd = &svq->scsi_cmds[i];
+> +
+> +		tv_cmd->tvc_sgl = kcalloc(VHOST_SCSI_PREALLOC_SGLS,
+> +					  sizeof(struct scatterlist),
+> +					  GFP_KERNEL);
+> +		if (!tv_cmd->tvc_sgl) {
+> +			pr_err("Unable to allocate tv_cmd->tvc_sgl\n");
+> +			goto out;
+> +		}
+> +
+> +		tv_cmd->tvc_upages = kcalloc(VHOST_SCSI_PREALLOC_UPAGES,
+> +					     sizeof(struct page *),
+> +					     GFP_KERNEL);
+> +		if (!tv_cmd->tvc_upages) {
+> +			pr_err("Unable to allocate tv_cmd->tvc_upages\n");
+> +			goto out;
+> +		}
+> +
+> +		tv_cmd->tvc_prot_sgl = kcalloc(VHOST_SCSI_PREALLOC_PROT_SGLS,
+> +					       sizeof(struct scatterlist),
+> +					       GFP_KERNEL);
+> +		if (!tv_cmd->tvc_prot_sgl) {
+> +			pr_err("Unable to allocate tv_cmd->tvc_prot_sgl\n");
+> +			goto out;
+> +		}
+> +	}
+> +	return 0;
+> +out:
+> +	vhost_scsi_destroy_vq_cmds(vq);
+> +	return -ENOMEM;
+> +}
+> +
+>  /*
+>   * Called from vhost_scsi_ioctl() context to walk the list of available
+>   * vhost_scsi_tpg with an active struct vhost_scsi_nexus
+> @@ -1427,10 +1508,9 @@ static void vhost_scsi_flush(struct vhost_scsi *vs)
+>  
+>  		if (!strcmp(tv_tport->tport_name, t->vhost_wwpn)) {
+>  			if (vs->vs_tpg && vs->vs_tpg[tpg->tport_tpgt]) {
+> -				kfree(vs_tpg);
+>  				mutex_unlock(&tpg->tv_tpg_mutex);
+>  				ret = -EEXIST;
+> -				goto out;
+> +				goto undepend;
+>  			}
+>  			/*
+>  			 * In order to ensure individual vhost-scsi configfs
+> @@ -1442,9 +1522,8 @@ static void vhost_scsi_flush(struct vhost_scsi *vs)
+>  			ret = target_depend_item(&se_tpg->tpg_group.cg_item);
+>  			if (ret) {
+>  				pr_warn("target_depend_item() failed: %d\n", ret);
+> -				kfree(vs_tpg);
+>  				mutex_unlock(&tpg->tv_tpg_mutex);
+> -				goto out;
+> +				goto undepend;
+>  			}
+>  			tpg->tv_tpg_vhost_count++;
+>  			tpg->vhost_scsi = vs;
+> @@ -1457,6 +1536,16 @@ static void vhost_scsi_flush(struct vhost_scsi *vs)
+>  	if (match) {
+>  		memcpy(vs->vs_vhost_wwpn, t->vhost_wwpn,
+>  		       sizeof(vs->vs_vhost_wwpn));
+> +
+> +		for (i = VHOST_SCSI_VQ_IO; i < VHOST_SCSI_MAX_VQ; i++) {
+> +			vq = &vs->vqs[i].vq;
+> +			if (!vhost_vq_is_setup(vq))
+> +				continue;
+> +
+> +			if (vhost_scsi_setup_vq_cmds(vq, vq->num))
+> +				goto destroy_vq_cmds;
+> +		}
+> +
+>  		for (i = 0; i < VHOST_SCSI_MAX_VQ; i++) {
+>  			vq = &vs->vqs[i].vq;
+>  			mutex_lock(&vq->mutex);
+> @@ -1476,7 +1565,22 @@ static void vhost_scsi_flush(struct vhost_scsi *vs)
+>  	vhost_scsi_flush(vs);
+>  	kfree(vs->vs_tpg);
+>  	vs->vs_tpg = vs_tpg;
+> +	goto out;
+>  
+> +destroy_vq_cmds:
+> +	for (i--; i >= VHOST_SCSI_VQ_IO; i--) {
+> +		if (!vhost_vq_get_backend(&vs->vqs[i].vq))
+> +			vhost_scsi_destroy_vq_cmds(&vs->vqs[i].vq);
+> +	}
+> +undepend:
+> +	for (i = 0; i < VHOST_SCSI_MAX_TARGET; i++) {
+> +		tpg = vs_tpg[i];
+> +		if (tpg) {
+> +			tpg->tv_tpg_vhost_count--;
+> +			target_undepend_item(&tpg->se_tpg.tpg_group.cg_item);
+> +		}
+> +	}
+> +	kfree(vs_tpg);
+>  out:
+>  	mutex_unlock(&vs->dev.mutex);
+>  	mutex_unlock(&vhost_scsi_mutex);
+> @@ -1549,6 +1653,12 @@ static void vhost_scsi_flush(struct vhost_scsi *vs)
+>  			mutex_lock(&vq->mutex);
+>  			vhost_vq_set_backend(vq, NULL);
+>  			mutex_unlock(&vq->mutex);
+> +			/*
+> +			 * Make sure cmds are not running before tearing them
+> +			 * down.
+> +			 */
+> +			vhost_scsi_flush(vs);
+> +			vhost_scsi_destroy_vq_cmds(vq);
+>  		}
+>  	}
+>  	/*
+> @@ -1842,23 +1952,6 @@ static void vhost_scsi_port_unlink(struct se_portal_group *se_tpg,
+>  	mutex_unlock(&vhost_scsi_mutex);
+>  }
+>  
+> -static void vhost_scsi_free_cmd_map_res(struct se_session *se_sess)
+> -{
+> -	struct vhost_scsi_cmd *tv_cmd;
+> -	unsigned int i;
+> -
+> -	if (!se_sess->sess_cmd_map)
+> -		return;
+> -
+> -	for (i = 0; i < VHOST_SCSI_DEFAULT_TAGS; i++) {
+> -		tv_cmd = &((struct vhost_scsi_cmd *)se_sess->sess_cmd_map)[i];
+> -
+> -		kfree(tv_cmd->tvc_sgl);
+> -		kfree(tv_cmd->tvc_prot_sgl);
+> -		kfree(tv_cmd->tvc_upages);
+> -	}
+> -}
+> -
+>  static ssize_t vhost_scsi_tpg_attrib_fabric_prot_type_store(
+>  		struct config_item *item, const char *page, size_t count)
+>  {
+> @@ -1898,45 +1991,6 @@ static ssize_t vhost_scsi_tpg_attrib_fabric_prot_type_show(
+>  	NULL,
+>  };
+>  
+> -static int vhost_scsi_nexus_cb(struct se_portal_group *se_tpg,
+> -			       struct se_session *se_sess, void *p)
+> -{
+> -	struct vhost_scsi_cmd *tv_cmd;
+> -	unsigned int i;
+> -
+> -	for (i = 0; i < VHOST_SCSI_DEFAULT_TAGS; i++) {
+> -		tv_cmd = &((struct vhost_scsi_cmd *)se_sess->sess_cmd_map)[i];
+> -
+> -		tv_cmd->tvc_sgl = kcalloc(VHOST_SCSI_PREALLOC_SGLS,
+> -					  sizeof(struct scatterlist),
+> -					  GFP_KERNEL);
+> -		if (!tv_cmd->tvc_sgl) {
+> -			pr_err("Unable to allocate tv_cmd->tvc_sgl\n");
+> -			goto out;
+> -		}
+> -
+> -		tv_cmd->tvc_upages = kcalloc(VHOST_SCSI_PREALLOC_UPAGES,
+> -					     sizeof(struct page *),
+> -					     GFP_KERNEL);
+> -		if (!tv_cmd->tvc_upages) {
+> -			pr_err("Unable to allocate tv_cmd->tvc_upages\n");
+> -			goto out;
+> -		}
+> -
+> -		tv_cmd->tvc_prot_sgl = kcalloc(VHOST_SCSI_PREALLOC_PROT_SGLS,
+> -					       sizeof(struct scatterlist),
+> -					       GFP_KERNEL);
+> -		if (!tv_cmd->tvc_prot_sgl) {
+> -			pr_err("Unable to allocate tv_cmd->tvc_prot_sgl\n");
+> -			goto out;
+> -		}
+> -	}
+> -	return 0;
+> -out:
+> -	vhost_scsi_free_cmd_map_res(se_sess);
+> -	return -ENOMEM;
+> -}
+> -
+>  static int vhost_scsi_make_nexus(struct vhost_scsi_tpg *tpg,
+>  				const char *name)
+>  {
+> @@ -1960,12 +2014,9 @@ static int vhost_scsi_make_nexus(struct vhost_scsi_tpg *tpg,
+>  	 * struct se_node_acl for the vhost_scsi struct se_portal_group with
+>  	 * the SCSI Initiator port name of the passed configfs group 'name'.
+>  	 */
+> -	tv_nexus->tvn_se_sess = target_setup_session(&tpg->se_tpg,
+> -					VHOST_SCSI_DEFAULT_TAGS,
+> -					sizeof(struct vhost_scsi_cmd),
+> +	tv_nexus->tvn_se_sess = target_setup_session(&tpg->se_tpg, 0, 0,
+>  					TARGET_PROT_DIN_PASS | TARGET_PROT_DOUT_PASS,
+> -					(unsigned char *)name, tv_nexus,
+> -					vhost_scsi_nexus_cb);
+> +					(unsigned char *)name, tv_nexus, NULL);
+>  	if (IS_ERR(tv_nexus->tvn_se_sess)) {
+>  		mutex_unlock(&tpg->tv_tpg_mutex);
+>  		kfree(tv_nexus);
+> @@ -2015,7 +2066,6 @@ static int vhost_scsi_drop_nexus(struct vhost_scsi_tpg *tpg)
+>  		" %s Initiator Port: %s\n", vhost_scsi_dump_proto_id(tpg->tport),
+>  		tv_nexus->tvn_se_sess->se_node_acl->initiatorname);
+>  
+> -	vhost_scsi_free_cmd_map_res(se_sess);
+>  	/*
+>  	 * Release the SCSI I_T Nexus to the emulated vhost Target Port
+>  	 */
+> -- 
+> 1.8.3.1
 
 _______________________________________________
 Virtualization mailing list
