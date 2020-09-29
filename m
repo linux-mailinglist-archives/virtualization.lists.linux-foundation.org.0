@@ -2,83 +2,100 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C076F27BA96
-	for <lists.virtualization@lfdr.de>; Tue, 29 Sep 2020 04:00:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7FC227BC9B
+	for <lists.virtualization@lfdr.de>; Tue, 29 Sep 2020 07:55:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 0B932866B2;
-	Tue, 29 Sep 2020 02:00:34 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 6277B85D5F;
+	Tue, 29 Sep 2020 05:55:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3FWRunGYUrti; Tue, 29 Sep 2020 02:00:32 +0000 (UTC)
+	with ESMTP id KHAemiPX+DeT; Tue, 29 Sep 2020 05:55:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2194A8669D;
-	Tue, 29 Sep 2020 02:00:32 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id CC44F860CE;
+	Tue, 29 Sep 2020 05:55:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E37DBC016F;
-	Tue, 29 Sep 2020 02:00:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AC2B3C0051;
+	Tue, 29 Sep 2020 05:55:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 36155C016F
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 74C1AC0051
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 02:00:30 +0000 (UTC)
+ Tue, 29 Sep 2020 05:55:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 1F0E986174
+ by hemlock.osuosl.org (Postfix) with ESMTP id 5D0F186F8F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 02:00:30 +0000 (UTC)
+ Tue, 29 Sep 2020 05:55:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fLRSSZSMI9eE
+ with ESMTP id ZLiZGYEtDtZF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 02:00:28 +0000 (UTC)
+ Tue, 29 Sep 2020 05:55:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
- [209.85.215.193])
- by whitealder.osuosl.org (Postfix) with ESMTPS id D32A684B82
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 4AB8B86F74
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 02:00:28 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id 34so2524428pgo.13
+ Tue, 29 Sep 2020 05:55:23 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1601358922;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=CU6DE2cx0I1FLYs8fHE6zj6vjwpo9LDCmZqFve4flUg=;
+ b=EoKpJqC0nzClsUNxNS9oqV4foiJbYij+YK60wRR+YLTFvakKv/OzJ9aI9b6Yx5tivN0S39
+ rl3uLCoUvHgk3P1SDvxlf11zF2cNEA6xXMcZbwYEiSdhzrLfs5hVk1ZhUg76hy/REIzNtY
+ t7km5YjyydssV9Z2oc6ACcwwYzK0K7o=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-392-6y7oEAjJMDShPxClneaLLA-1; Tue, 29 Sep 2020 01:55:19 -0400
+X-MC-Unique: 6y7oEAjJMDShPxClneaLLA-1
+Received: by mail-wr1-f70.google.com with SMTP id v5so1296591wrr.0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 28 Sep 2020 19:00:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=KZ5xri8CQiZYZj5fH/BoFFdOUERtgpkqpdPrf8thG10=;
- b=falqCPFRNf4yuXs1tPP0AWaCUb9J9ze+NW/b219ZjILt2GTS3g3X0Jv0vSqGL1URZz
- Avazh/aSyNL0TEww1UyaGRV2bKrxl/tCnWZZ+CoZgXU+UwX0juTHPqgyUfSlkaGZrHTc
- AenTdX/6qPw6U2hJN0+5/9qH8wExSDe2Ln47DS1SVeHhgmDjvgatN2/rizaGrkiJR3MS
- QedeszadGVIroIVVa4osksE8agcll8/mGdbrW/wWNC5MSL9Xjd0H/53lL0oX5GMlLSg7
- aErt073q2Oz8YTIVQFz4hFIwXYqxf9IRICfn3ehyIuTq8qhom0uyl7bh8vpwZMjpUR/E
- J3Nw==
+ Mon, 28 Sep 2020 22:55:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=KZ5xri8CQiZYZj5fH/BoFFdOUERtgpkqpdPrf8thG10=;
- b=JGtj//wvBGqBAerdEirDpTu6CfyL6RhO31Wqm/b7nZniOTzDe7rIFU3leGoegPKgKK
- 5hvcoB3SCapFIKyQCRxNposFlHKWggDOnU0JXq8uZGH8JnwWRjLCJjl5LxmuSLmIsYFo
- 47vxaqE1nkeXGpaU17yR92k184rs8O4pHxKLx8QrEcyE/JSxu0Omp8+qcN0vi5/Wmnca
- 5kWE8TBRYHeLrU45v/+rexrBwEHIT7V/jIbVZzTNFxCuF9qZGBGlhNMhrAak+ky52wBo
- JZC1e/Bmg0+shG7nxz+tV4Mi0mBC793NnHHRyY+3yF2l0niK7dmQQdym6DZ5X10H7hCv
- FPvQ==
-X-Gm-Message-State: AOAM5325ZS/N2hI6GTekKHiVpGr0qUMW4GHqekpgrwEbBLz3fdjiqXJY
- ACY4YPnJb+mqgtP7y3uPgM8=
-X-Google-Smtp-Source: ABdhPJwS7R20w5F0VpaYUmjll5GcEfWdzUhSgZ4eWTqyCvOG1XTY5MXYyKKK6VNYsyF84hW4pidqkg==
-X-Received: by 2002:a63:801:: with SMTP id 1mr1497724pgi.48.1601344828521;
- Mon, 28 Sep 2020 19:00:28 -0700 (PDT)
-Received: from localhost.localdomain ([50.236.19.102])
- by smtp.gmail.com with ESMTPSA id e21sm2567486pgi.91.2020.09.28.19.00.18
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 28 Sep 2020 19:00:27 -0700 (PDT)
-From: xiangxia.m.yue@gmail.com
-To: jasowang@redhat.com,
-	mst@redhat.com,
-	willemb@google.com
-Subject: [PATCH net v2] virtio-net: don't disable guest csum when disable LRO
-Date: Tue, 29 Sep 2020 09:58:06 +0800
-Message-Id: <20200929015806.19171-1-xiangxia.m.yue@gmail.com>
-X-Mailer: git-send-email 2.15.0
-Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=CU6DE2cx0I1FLYs8fHE6zj6vjwpo9LDCmZqFve4flUg=;
+ b=Wiig5xcRAhmjN5qnNhiqQGCbvE7COHJ/rkiyaIoI45NfW6nrT2VwX/0FfFycBcZ1lp
+ 3/quKYfzODjHxas/h5uI/79ShrifCVwAzHr9wXQ+mPEgjNARQHiCHdWy3g0tX1bFKbS8
+ GlfHAC9v1qbDK/06zDm0cX4APbKszAl6En+ftvdvgigAxEWnoTNL1AEEbVT6MGF/bTSS
+ mGGjFxvCtuP0PRgQ6ZWVXQwtoXoAxS61aeEnPV9wsE6Wo56p1bQrF0m34VS2uP0ETJ8D
+ kjHCJv5AZukhw3j1sI9S1AY4sq7qMpE2O3yUhC25IGd8RDSJEYhlaSUqvngiaFEWFiDI
+ JmxQ==
+X-Gm-Message-State: AOAM532ytbrhPODNdmGeZB3kGzb5KxpoKb9mO2op7792uM2yclo72oUI
+ p5o6XdSeaEkHKyENbylzLdZl90luRLllDkRu9p61ub8ETjYnjLMHkrMl9s4h00S0moJokycKlIq
+ 7DrZWHv+eoPMRA4hyQ7IdW02S0/6aHpYDg3Nl5MDn+Q==
+X-Received: by 2002:a1c:b103:: with SMTP id a3mr2656566wmf.68.1601358918055;
+ Mon, 28 Sep 2020 22:55:18 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzxsOwwngwmhGeReV8HiZ7hkWkrIf0RVPILaTaEu1hmMo4H1fr7U3ZGwgZqxZtONPMxJ+qfaw==
+X-Received: by 2002:a1c:b103:: with SMTP id a3mr2656544wmf.68.1601358917787;
+ Mon, 28 Sep 2020 22:55:17 -0700 (PDT)
+Received: from redhat.com (bzq-79-179-71-128.red.bezeqint.net. [79.179.71.128])
+ by smtp.gmail.com with ESMTPSA id w14sm4153307wrk.95.2020.09.28.22.55.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Sep 2020 22:55:16 -0700 (PDT)
+Date: Tue, 29 Sep 2020 01:55:13 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Tonghao Zhang <xiangxia.m.yue@gmail.com>
+Subject: Re: [PATCH 2/2] virtio-net: ethtool configurable RXCSUM
+Message-ID: <20200929015427-mutt-send-email-mst@kernel.org>
+References: <20200928033915.82810-1-xiangxia.m.yue@gmail.com>
+ <20200928033915.82810-2-xiangxia.m.yue@gmail.com>
+ <20200928152142-mutt-send-email-mst@kernel.org>
+ <CAMDZJNVUVm9y2NV5ZGHzrPoEaDF4PZEGWVFEx9g6sF3U-1Rm0Q@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMDZJNVUVm9y2NV5ZGHzrPoEaDF4PZEGWVFEx9g6sF3U-1Rm0Q@mail.gmail.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Linux Kernel Network Developers <netdev@vger.kernel.org>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,58 +107,118 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tonghao Zhang <xiangxia.m.yue@gmail.com>
+On Tue, Sep 29, 2020 at 09:45:24AM +0800, Tonghao Zhang wrote:
+> On Tue, Sep 29, 2020 at 3:25 AM Michael S. Tsirkin <mst@redhat.com> wrote:
+> >
+> > On Mon, Sep 28, 2020 at 11:39:15AM +0800, xiangxia.m.yue@gmail.com wrote:
+> > > From: Tonghao Zhang <xiangxia.m.yue@gmail.com>
+> > >
+> > > Allow user configuring RXCSUM separately with ethtool -K,
+> > > reusing the existing virtnet_set_guest_offloads helper
+> > > that configures RXCSUM for XDP. This is conditional on
+> > > VIRTIO_NET_F_CTRL_GUEST_OFFLOADS.
+> > >
+> > > Cc: Michael S. Tsirkin <mst@redhat.com>
+> > > Cc: Jason Wang <jasowang@redhat.com>
+> > > Signed-off-by: Tonghao Zhang <xiangxia.m.yue@gmail.com>
+> > > ---
+> > >  drivers/net/virtio_net.c | 40 ++++++++++++++++++++++++++++------------
+> > >  1 file changed, 28 insertions(+), 12 deletions(-)
+> > >
+> > > diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> > > index 21b71148c532..2e3af0b2c281 100644
+> > > --- a/drivers/net/virtio_net.c
+> > > +++ b/drivers/net/virtio_net.c
+> > > @@ -68,6 +68,8 @@ static const unsigned long guest_offloads[] = {
+> > >                               (1ULL << VIRTIO_NET_F_GUEST_ECN)  | \
+> > >                               (1ULL << VIRTIO_NET_F_GUEST_UFO))
+> > >
+> > > +#define GUEST_OFFLOAD_CSUM_MASK (1ULL << VIRTIO_NET_F_GUEST_CSUM)
+> > > +
+> > >  struct virtnet_stat_desc {
+> > >       char desc[ETH_GSTRING_LEN];
+> > >       size_t offset;
+> > > @@ -2526,25 +2528,37 @@ static int virtnet_set_features(struct net_device *dev,
+> > >                               netdev_features_t features)
+> > >  {
+> > >       struct virtnet_info *vi = netdev_priv(dev);
+> > > -     u64 offloads;
+> > > +     u64 offloads = vi->guest_offloads &
+> > > +                    vi->guest_offloads_capable;
+> > >       int err;
+> > >
+> > > -     if ((dev->features ^ features) & NETIF_F_LRO) {
+> > > -             if (vi->xdp_queue_pairs)
+> > > -                     return -EBUSY;
+> > > +     /* Don't allow configuration while XDP is active. */
+> > > +     if (vi->xdp_queue_pairs)
+> > > +             return -EBUSY;
+> > >
+> > > +     if ((dev->features ^ features) & NETIF_F_LRO) {
+> > >               if (features & NETIF_F_LRO)
+> > > -                     offloads = vi->guest_offloads_capable;
+> > > +                     offloads |= GUEST_OFFLOAD_LRO_MASK;
+> > >               else
+> > > -                     offloads = vi->guest_offloads_capable &
+> > > -                                ~GUEST_OFFLOAD_LRO_MASK;
+> > > +                     offloads &= ~GUEST_OFFLOAD_LRO_MASK;
+> > > +     }
+> > >
+> > > -             err = virtnet_set_guest_offloads(vi, offloads);
+> > > -             if (err)
+> > > -                     return err;
+> > > -             vi->guest_offloads = offloads;
+> > > +     if ((dev->features ^ features) & NETIF_F_RXCSUM) {
+> > > +             if (features & NETIF_F_RXCSUM)
+> > > +                     offloads |= GUEST_OFFLOAD_CSUM_MASK;
+> > > +             else
+> > > +                     offloads &= ~GUEST_OFFLOAD_CSUM_MASK;
+> > >       }
+> > >
+> > > +     if (offloads == (vi->guest_offloads &
+> > > +                      vi->guest_offloads_capable))
+> > > +             return 0;
+> >
+> > Hmm, what exactly does this do?
+> If the features(lro, rxcsum) we supported, are not changed, it is not
+> necessary to invoke virtnet_set_guest_offloads.
 
-Open vSwitch and Linux bridge will disable LRO of the interface
-when this interface added to them. Now when disable the LRO, the
-virtio-net csum is disable too. That drops the forwarding performance.
+okay, could you describe the cases where this triggers in a bit more
+detail pls?
 
-Fixes: a02e8964eaf9 ("virtio-net: ethtool configurable LRO")
-Cc: Michael S. Tsirkin <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Willem de Bruijn <willemb@google.com>
-Signed-off-by: Tonghao Zhang <xiangxia.m.yue@gmail.com>
----
-v2:
-* change the fix-tag
----
- drivers/net/virtio_net.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 7145c83c6c8c..21b71148c532 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -63,6 +63,11 @@ static const unsigned long guest_offloads[] = {
- 	VIRTIO_NET_F_GUEST_CSUM
- };
- 
-+#define GUEST_OFFLOAD_LRO_MASK ((1ULL << VIRTIO_NET_F_GUEST_TSO4) | \
-+				(1ULL << VIRTIO_NET_F_GUEST_TSO6) | \
-+				(1ULL << VIRTIO_NET_F_GUEST_ECN)  | \
-+				(1ULL << VIRTIO_NET_F_GUEST_UFO))
-+
- struct virtnet_stat_desc {
- 	char desc[ETH_GSTRING_LEN];
- 	size_t offset;
-@@ -2531,7 +2536,8 @@ static int virtnet_set_features(struct net_device *dev,
- 		if (features & NETIF_F_LRO)
- 			offloads = vi->guest_offloads_capable;
- 		else
--			offloads = 0;
-+			offloads = vi->guest_offloads_capable &
-+				   ~GUEST_OFFLOAD_LRO_MASK;
- 
- 		err = virtnet_set_guest_offloads(vi, offloads);
- 		if (err)
--- 
-2.23.0
+> > > +
+> > > +     err = virtnet_set_guest_offloads(vi, offloads);
+> > > +     if (err)
+> > > +             return err;
+> > > +
+> > > +     vi->guest_offloads = offloads;
+> > >       return 0;
+> > >  }
+> > >
+> > > @@ -3013,8 +3027,10 @@ static int virtnet_probe(struct virtio_device *vdev)
+> > >       if (virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO4) ||
+> > >           virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO6))
+> > >               dev->features |= NETIF_F_LRO;
+> > > -     if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS))
+> > > +     if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS)) {
+> > > +             dev->hw_features |= NETIF_F_RXCSUM;
+> > >               dev->hw_features |= NETIF_F_LRO;
+> > > +     }
+> > >
+> > >       dev->vlan_features = dev->features;
+> > >
+> > > --
+> > > 2.23.0
+> >
+> 
+> 
+> -- 
+> Best regards, Tonghao
 
 _______________________________________________
 Virtualization mailing list
