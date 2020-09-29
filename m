@@ -1,86 +1,101 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A718E27C1AB
-	for <lists.virtualization@lfdr.de>; Tue, 29 Sep 2020 11:51:32 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id D428B20797;
-	Tue, 29 Sep 2020 09:51:30 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tTNxzLVeJHqF; Tue, 29 Sep 2020 09:51:27 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 78A4920773;
-	Tue, 29 Sep 2020 09:51:27 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B0D4C016F;
-	Tue, 29 Sep 2020 09:51:27 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8FC1CC016F
- for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 09:51:25 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C5B827C300
+	for <lists.virtualization@lfdr.de>; Tue, 29 Sep 2020 13:00:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 7948C86DF1
- for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 09:51:25 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 46E4286F9A;
+	Tue, 29 Sep 2020 11:00:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id pOsUi2IB7zAo; Tue, 29 Sep 2020 11:00:07 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id A434286F89;
+	Tue, 29 Sep 2020 11:00:07 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8B2C2C0051;
+	Tue, 29 Sep 2020 11:00:07 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7A5C9C0051
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 29 Sep 2020 11:00:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 579012049F
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 29 Sep 2020 11:00:06 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iu4Wj2sM5eOU
+ with ESMTP id aEGDxOxVBSUi
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 09:51:24 +0000 (UTC)
+ Tue, 29 Sep 2020 11:00:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7A18B86DC6
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
+ [209.85.167.65])
+ by silver.osuosl.org (Postfix) with ESMTPS id AA6EC20117
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 09:51:24 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1601373083;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Q7VcobJF6uyWmgL5vmwuoyYLR7D7rwBPhHFHQDDI+jU=;
- b=WvSTpYhmbBOKXQX9qewutzU9/aj+rMPezrax/1XhwKdE0YPBW8WZa+XwVY+PHdzp5WGLUQ
- 8Sijo9sAnKFFkWgq2VJJ1Oqtj7ihvfLnHLzo0QG0kH6lToC2AzNuBqKnQlDOwt0MvfysHo
- ++QqXROfMmWxdSVEOIzGWHt/QMHLQpA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-584-vkhqYCmMOjSawZD1UYOkUA-1; Tue, 29 Sep 2020 05:51:21 -0400
-X-MC-Unique: vkhqYCmMOjSawZD1UYOkUA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A4DC8801AE3;
- Tue, 29 Sep 2020 09:51:19 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-56.ams2.redhat.com
- [10.36.112.56])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6EDE47880B;
- Tue, 29 Sep 2020 09:51:16 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id AC8AA358099; Tue, 29 Sep 2020 11:51:15 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v2 4/4] drm/qxl: use qxl pin function
-Date: Tue, 29 Sep 2020 11:51:15 +0200
-Message-Id: <20200929095115.24430-5-kraxel@redhat.com>
-In-Reply-To: <20200929095115.24430-1-kraxel@redhat.com>
-References: <20200929095115.24430-1-kraxel@redhat.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ Tue, 29 Sep 2020 11:00:02 +0000 (UTC)
+Received: by mail-lf1-f65.google.com with SMTP id b22so4937958lfs.13
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 29 Sep 2020 04:00:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=m/8RcwvNRZX4QrC1qgXuNqwd8pHZ5jEfkIMP8FcXGzs=;
+ b=jsz6B1+YEp5B8KlbE/d0+3hD+n5mvwweCSSsHXznFq2L+MbyNhnwBbEVTadiV9A8e8
+ Hj/4Q37N4gMr3WISbfGAUlxUR7jJYV5BX7k2uQWCUyOolHRZurqdtTKtWu98cbslD4kd
+ j3VLPxLK5+IeiS53iuP6Pb2M5x1wuj8Ww0P4c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=m/8RcwvNRZX4QrC1qgXuNqwd8pHZ5jEfkIMP8FcXGzs=;
+ b=n3BJW6d7AeWYltepOagGwkLobt5NhuFlEknw2PA3oxA8xWjQfyQUzNWMakj3GlssSq
+ Mrx8P7DRPtEqisT5T+MkLkWJjLJa8z3e9X4QRv+CsTA+cSB9fNzewgrxCF0b+853gX/V
+ HMlJhiPacZs0mAxSVn0X+wj7v/ISrJba9mccbfVv1gpj3FXyL9hymMeCGCDA7kIXHUy0
+ CshpbiTz6zHVS3xVXN6lS5RI2A0LvumwAmM8wsYRzf7cYm9jWe6Vm30nruExyjbNQSRe
+ 8UEiAJzO6i/jRkHLCOCrRZmF/6UfaqKru4SVDFVHALLS0ZVVByITGwXm0iIbDqbciik/
+ 25kg==
+X-Gm-Message-State: AOAM5338c/FGyk2MC4R7giAlVDu8h0dO/H7Sosnr2w+QVNjwl5kYRhbW
+ A7qNh+P3YlObpPTY7b2mmbHwT0+TC/E1WPqv
+X-Google-Smtp-Source: ABdhPJzmw2CD/MpLrTQRlDKQtbpWYZdfZO7lS5wPv+xREi43g7gWZnZuZtDrMycOZuDAjAbXvAqStA==
+X-Received: by 2002:a5d:6552:: with SMTP id z18mr3513370wrv.32.1601376783538; 
+ Tue, 29 Sep 2020 03:53:03 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id l5sm5116546wmf.10.2020.09.29.03.53.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Sep 2020 03:53:02 -0700 (PDT)
+Date: Tue, 29 Sep 2020 12:53:00 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Subject: Re: [PATCH v2 4/4] drm/qxl: use qxl pin function
+Message-ID: <20200929105300.GM438822@phenom.ffwll.local>
+Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
+ dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ David Airlie <airlied@linux.ie>, Huang Rui <ray.huang@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, 
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20200929095115.24430-1-kraxel@redhat.com>
+ <20200929095115.24430-5-kraxel@redhat.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200929095115.24430-5-kraxel@redhat.com>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>, Huang Rui <ray.huang@amd.com>,
  Daniel Vetter <daniel@ffwll.ch>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
  Dave Airlie <airlied@redhat.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,30 +112,48 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Otherwise ttm throws a WARN because we try to pin without a reservation.
+On Tue, Sep 29, 2020 at 11:51:15AM +0200, Gerd Hoffmann wrote:
+> Otherwise ttm throws a WARN because we try to pin without a reservation.
+> 
+> Fixes: 9d36d4320462 ("drm/qxl: switch over to the new pin interface")
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/qxl/qxl_object.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
+> index d3635e3e3267..eb45267d51db 100644
+> --- a/drivers/gpu/drm/qxl/qxl_object.c
+> +++ b/drivers/gpu/drm/qxl/qxl_object.c
+> @@ -145,7 +145,7 @@ int qxl_bo_create(struct qxl_device *qdev,
+>  		return r;
+>  	}
+>  	if (pinned)
+> -		ttm_bo_pin(&bo->tbo);
+> +		qxl_bo_pin(bo);
 
-Fixes: 9d36d4320462 ("drm/qxl: switch over to the new pin interface")
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/qxl/qxl_object.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I think this is now after ttm_bo_init, and at that point the object is
+visible to lru users and everything. So I do think you need to grab locks
+here instead of just incrementing the pin count alone.
 
-diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-index d3635e3e3267..eb45267d51db 100644
---- a/drivers/gpu/drm/qxl/qxl_object.c
-+++ b/drivers/gpu/drm/qxl/qxl_object.c
-@@ -145,7 +145,7 @@ int qxl_bo_create(struct qxl_device *qdev,
- 		return r;
- 	}
- 	if (pinned)
--		ttm_bo_pin(&bo->tbo);
-+		qxl_bo_pin(bo);
- 	*bo_ptr = bo;
- 	return 0;
- }
+It's also I think a bit racy, since ttm_bo_init drops the lock, so someone
+might have snuck in and evicted the object already.
+
+I think what you need is to call ttm_bo_init_reserved, then ttm_bo_pin,
+then ttm_bo_unreserve, all explicitly.
+-Daniel
+
+>  	*bo_ptr = bo;
+>  	return 0;
+>  }
+> -- 
+> 2.27.0
+> 
+
 -- 
-2.27.0
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
