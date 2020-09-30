@@ -1,64 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 668DA27D757
-	for <lists.virtualization@lfdr.de>; Tue, 29 Sep 2020 21:54:40 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 244B486109;
-	Tue, 29 Sep 2020 19:54:38 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id acKMJBIMLbPu; Tue, 29 Sep 2020 19:54:36 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CB81886113;
-	Tue, 29 Sep 2020 19:54:36 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AD95BC016F;
-	Tue, 29 Sep 2020 19:54:36 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 20707C016F
- for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 19:54:35 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3925527DE39
+	for <lists.virtualization@lfdr.de>; Wed, 30 Sep 2020 04:05:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id F10BF203ED
- for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 19:54:34 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 5B13C2094B;
+	Wed, 30 Sep 2020 02:05:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4DvE-mBgmUUW; Wed, 30 Sep 2020 02:05:55 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id F2CBE204A0;
+	Wed, 30 Sep 2020 02:05:54 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BD17CC0051;
+	Wed, 30 Sep 2020 02:05:54 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EDEB7C0051
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 30 Sep 2020 02:05:53 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id D4EC086090
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 30 Sep 2020 02:05:53 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PH+AwdmQNAkB
+ with ESMTP id ijKtdNjm1WqX
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 19:54:33 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from shards.monkeyblade.net (shards.monkeyblade.net [23.128.96.9])
- by silver.osuosl.org (Postfix) with ESMTPS id 637C32000B
+ Wed, 30 Sep 2020 02:05:52 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+ [209.85.167.194])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 8D04886084
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Sep 2020 19:54:33 +0000 (UTC)
-Received: from localhost (unknown [IPv6:2601:601:9f00:477::3d5])
- (using TLSv1 with cipher AES256-SHA (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: davem-davemloft)
- by shards.monkeyblade.net (Postfix) with ESMTPSA id D78781443F7F5;
- Tue, 29 Sep 2020 12:37:43 -0700 (PDT)
-Date: Tue, 29 Sep 2020 12:54:26 -0700 (PDT)
-Message-Id: <20200929.125426.1971703294514859263.davem@davemloft.net>
-To: xiangxia.m.yue@gmail.com
-Subject: Re: [PATCH net v2] virtio-net: don't disable guest csum when
- disable LRO
-From: David Miller <davem@davemloft.net>
-In-Reply-To: <20200929015806.19171-1-xiangxia.m.yue@gmail.com>
-References: <20200929015806.19171-1-xiangxia.m.yue@gmail.com>
-X-Mailer: Mew version 6.8 on Emacs 27.1
-Mime-Version: 1.0
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12
- (shards.monkeyblade.net [2620:137:e000::1:9]);
- Tue, 29 Sep 2020 12:37:44 -0700 (PDT)
-Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
- willemb@google.com, mst@redhat.com
+ Wed, 30 Sep 2020 02:05:52 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id u126so7783423oif.13
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 29 Sep 2020 19:05:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id;
+ bh=T0BMwdFvGafs3VXiDpg3UXiEW7pVRzc87P0d5q2TBSw=;
+ b=rfEZt0EsfLeVlfr9Y0EFVsMkwVoZFtSaiWgPoSMR5Dys3AV0XJL8/J1SfbklZQVJO1
+ 4zLaaNyWrlO/LRAvMA783bjwht+c7XqGXmvbNW6MKrdaLJqiHV/YNGF+/PH+5Dj5uo3J
+ 74P3n7Aj+Ujms6lYPMC0Ifw9/L5QKSxCfZhnAbCFtflQ6vj5LUqdLjIzzVteJlg+Ccv3
+ B+2ZAclsEFM+pYbHpmtnufGceNqajMB9KkKghdAJqBHhNbNKtH6lquHUI4FwoVb6M7hR
+ QaqiV3RSt76Y4erhWW0bk/IuvHaS4zXP+ZSrfGXnuq0+I4rQRV1emyMdnf5XHsfGWsdi
+ p6XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=T0BMwdFvGafs3VXiDpg3UXiEW7pVRzc87P0d5q2TBSw=;
+ b=EwY0gLfPydmhkNkydM33h/nRLpYUpGYYHBktZy6HCF9fyzBfKzPkjCcTVkFNtjwOZi
+ btOKL9Vl6Yadz1bNYfVucgCqNWozNnpptnBwT0EitlILlWbhMn8iVybahZ+9dItAbSiH
+ szWkra3TxaaDiO4F583g5AT390djtz4CkmCoJ9tiZlpE94GhIqHkaNUPVEdq3NQo/cb7
+ hyjpqCIN08kghsxU2V4SonJ/2ecyCeWGr5rl7C2HGH8J+AAiWEMqp7357C57EHF5AzWT
+ mY0PRaeCIhooA8WleJGaArjQ5FcVYc8QB0yMZIpTZjFs9KUicm1dmGMKRMp1gGVHcC5P
+ eVjA==
+X-Gm-Message-State: AOAM532xDh3uTZNHMR1h0xmSB1pvNQSG7aes2+dn4r+jC6IgG1LM2SLI
+ KD9KeOiI3gyR1WrZzi2m5Rg=
+X-Google-Smtp-Source: ABdhPJwDBP1sGpK+4M36t3OTguXYgxpsLNwX0xpGzwSB2+d7eRx4I7S1neyDWbXiG5hKIHBhmo0m5g==
+X-Received: by 2002:aca:913:: with SMTP id 19mr189541oij.169.1601431551697;
+ Tue, 29 Sep 2020 19:05:51 -0700 (PDT)
+Received: from localhost.localdomain ([50.236.19.102])
+ by smtp.gmail.com with ESMTPSA id n186sm28043oob.11.2020.09.29.19.05.45
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 29 Sep 2020 19:05:50 -0700 (PDT)
+From: xiangxia.m.yue@gmail.com
+To: jasowang@redhat.com,
+	mst@redhat.com
+Subject: [PATCH net-next v2] virtio-net: ethtool configurable RXCSUM
+Date: Wed, 30 Sep 2020 10:03:00 +0800
+Message-Id: <20200930020300.62245-1-xiangxia.m.yue@gmail.com>
+X-Mailer: git-send-email 2.15.0
+Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,27 +89,129 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: xiangxia.m.yue@gmail.com
-Date: Tue, 29 Sep 2020 09:58:06 +0800
+From: Tonghao Zhang <xiangxia.m.yue@gmail.com>
 
-> From: Tonghao Zhang <xiangxia.m.yue@gmail.com>
-> 
-> Open vSwitch and Linux bridge will disable LRO of the interface
-> when this interface added to them. Now when disable the LRO, the
-> virtio-net csum is disable too. That drops the forwarding performance.
-> 
-> Fixes: a02e8964eaf9 ("virtio-net: ethtool configurable LRO")
-> Cc: Michael S. Tsirkin <mst@redhat.com>
-> Cc: Jason Wang <jasowang@redhat.com>
-> Cc: Willem de Bruijn <willemb@google.com>
-> Signed-off-by: Tonghao Zhang <xiangxia.m.yue@gmail.com>
+Allow user configuring RXCSUM separately with ethtool -K,
+reusing the existing virtnet_set_guest_offloads helper
+that configures RXCSUM for XDP. This is conditional on
+VIRTIO_NET_F_CTRL_GUEST_OFFLOADS.
 
-Applied and queued up for -stable, thank you.
+If Rx checksum is disabled, LRO should also be disabled.
+
+Cc: Michael S. Tsirkin <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Signed-off-by: Tonghao Zhang <xiangxia.m.yue@gmail.com>
+---
+v2:
+* LRO depends the rx csum
+* remove the unnecessary check
+---
+ drivers/net/virtio_net.c | 49 ++++++++++++++++++++++++++++++----------
+ 1 file changed, 37 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index 21b71148c532..5407a0106771 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -68,6 +68,8 @@ static const unsigned long guest_offloads[] = {
+ 				(1ULL << VIRTIO_NET_F_GUEST_ECN)  | \
+ 				(1ULL << VIRTIO_NET_F_GUEST_UFO))
+ 
++#define GUEST_OFFLOAD_CSUM_MASK (1ULL << VIRTIO_NET_F_GUEST_CSUM)
++
+ struct virtnet_stat_desc {
+ 	char desc[ETH_GSTRING_LEN];
+ 	size_t offset;
+@@ -2522,29 +2524,49 @@ static int virtnet_get_phys_port_name(struct net_device *dev, char *buf,
+ 	return 0;
+ }
+ 
++static netdev_features_t virtnet_fix_features(struct net_device *netdev,
++					      netdev_features_t features)
++{
++	/* If Rx checksum is disabled, LRO should also be disabled.
++	 * That is life. :)
++	 */
++	if (!(features & NETIF_F_RXCSUM))
++		features &= ~NETIF_F_LRO;
++
++	return features;
++}
++
+ static int virtnet_set_features(struct net_device *dev,
+ 				netdev_features_t features)
+ {
+ 	struct virtnet_info *vi = netdev_priv(dev);
+-	u64 offloads;
++	u64 offloads = vi->guest_offloads &
++		       vi->guest_offloads_capable;
+ 	int err;
+ 
+-	if ((dev->features ^ features) & NETIF_F_LRO) {
+-		if (vi->xdp_queue_pairs)
+-			return -EBUSY;
++	/* Don't allow configuration while XDP is active. */
++	if (vi->xdp_queue_pairs)
++		return -EBUSY;
+ 
++	if ((dev->features ^ features) & NETIF_F_LRO) {
+ 		if (features & NETIF_F_LRO)
+-			offloads = vi->guest_offloads_capable;
++			offloads |= GUEST_OFFLOAD_LRO_MASK;
+ 		else
+-			offloads = vi->guest_offloads_capable &
+-				   ~GUEST_OFFLOAD_LRO_MASK;
++			offloads &= ~GUEST_OFFLOAD_LRO_MASK;
++	}
+ 
+-		err = virtnet_set_guest_offloads(vi, offloads);
+-		if (err)
+-			return err;
+-		vi->guest_offloads = offloads;
++	if ((dev->features ^ features) & NETIF_F_RXCSUM) {
++		if (features & NETIF_F_RXCSUM)
++			offloads |= GUEST_OFFLOAD_CSUM_MASK;
++		else
++			offloads &= ~GUEST_OFFLOAD_CSUM_MASK;
+ 	}
+ 
++	err = virtnet_set_guest_offloads(vi, offloads);
++	if (err)
++		return err;
++
++	vi->guest_offloads = offloads;
+ 	return 0;
+ }
+ 
+@@ -2563,6 +2585,7 @@ static const struct net_device_ops virtnet_netdev = {
+ 	.ndo_features_check	= passthru_features_check,
+ 	.ndo_get_phys_port_name	= virtnet_get_phys_port_name,
+ 	.ndo_set_features	= virtnet_set_features,
++	.ndo_fix_features	= virtnet_fix_features,
+ };
+ 
+ static void virtnet_config_changed_work(struct work_struct *work)
+@@ -3013,8 +3036,10 @@ static int virtnet_probe(struct virtio_device *vdev)
+ 	if (virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO4) ||
+ 	    virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO6))
+ 		dev->features |= NETIF_F_LRO;
+-	if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS))
++	if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS)) {
++		dev->hw_features |= NETIF_F_RXCSUM;
+ 		dev->hw_features |= NETIF_F_LRO;
++	}
+ 
+ 	dev->vlan_features = dev->features;
+ 
+-- 
+2.23.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
