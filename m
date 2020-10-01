@@ -1,94 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50F0728090B
-	for <lists.virtualization@lfdr.de>; Thu,  1 Oct 2020 23:04:34 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 108BA86440;
-	Thu,  1 Oct 2020 21:04:33 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pJvtfBV86brI; Thu,  1 Oct 2020 21:04:28 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C15FA86433;
-	Thu,  1 Oct 2020 21:04:28 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9BE83C0051;
-	Thu,  1 Oct 2020 21:04:28 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 62E44C0051
- for <virtualization@lists.linux-foundation.org>;
- Thu,  1 Oct 2020 21:04:26 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72730280AA6
+	for <lists.virtualization@lfdr.de>; Fri,  2 Oct 2020 00:59:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4B5AD87247
- for <virtualization@lists.linux-foundation.org>;
- Thu,  1 Oct 2020 21:04:26 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id DCC55872EE;
+	Thu,  1 Oct 2020 22:59:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MqvDBOK4mL+C
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5Lc-YbpTbDtR; Thu,  1 Oct 2020 22:59:43 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id E11DA872EC;
+	Thu,  1 Oct 2020 22:59:43 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C29E2C0051;
+	Thu,  1 Oct 2020 22:59:43 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A61B0C0051
  for <virtualization@lists.linux-foundation.org>;
- Thu,  1 Oct 2020 21:04:25 +0000 (UTC)
+ Thu,  1 Oct 2020 22:59:42 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 9BD1686A10
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  1 Oct 2020 22:59:42 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Z32eqNOj7cnz
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  1 Oct 2020 22:59:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from aserp2130.oracle.com (aserp2130.oracle.com [141.146.126.79])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7CAE087245
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 89A1286A0D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  1 Oct 2020 21:04:25 +0000 (UTC)
+ Thu,  1 Oct 2020 22:59:41 +0000 (UTC)
 Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
- by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 091KxsDO134203;
- Thu, 1 Oct 2020 21:04:23 GMT
+ by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 091MrsHD167363;
+ Thu, 1 Oct 2020 22:59:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id; s=corp-2020-01-29;
- bh=psKHLwlrFnxpk4filOU3TTmpxQHb0b69PVNTvjogups=;
- b=EacuwJtxAfsknP7HzOdgm3XqyjlNyaNpQRUktQIdX/TkN3uSCXdS2ZjaFi0xEZX/0UqY
- dFy2WzKubjSG16Cek5OcrUseL8KsEiU4r747AKrP4uQsFKnu35Xhs6h7G0ljl+fm+oS5
- /ryNydy0M1NHm5A+ol2hykJ3fefhgTCryYB2aWKKZBxIVljvcZ6gAJBiesu1WaGPT+Y0
- D3+Uqze3S6NpNKjG7nX8HmqiN1l+uBWJa9lT4gXFToJ3u5BCnwRf8tRQspXTy2o2uMxn
- ASEvQmEAf3HA6doZhhsuK20WNKUzW2YP/dvqKTnSfgMraUA7xP3VF2WeE3HTlN7ACgKf Pg== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by aserp2130.oracle.com with ESMTP id 33su5b8gdr-1
+ bh=vEPBYhSXye04MgPYucd/wpb879n10z8HePSUZrjurvY=;
+ b=XvRhjiEgp7f5W9VWS2xE59DqK2gVrTMeNXW76UWDlAOx0lXm61oqzgDAbIutSRd/UVVP
+ D8iKId1byiB6P9JGKCVLDgcJst5nowyHqoJSB2CWU+bLQswovCDLAodPUBSwOTfZ8XXl
+ 27ny9FAoD/nxKbD4P1XOmR0hxWcuXxyAjmqm31LS7unXiu0fuh8xaVxWQL5y2hTC9Ijc
+ jgoFid1AWtSlNCNOzaDU4FpwX5yPr8s97ScslFHutzNf9zPg79D6ecn4tPlFM4UYd1Ys
+ 2rNrubUd3g+JO2sXTMfQOf4Q5lnhEY9KVH3Tw7JQPm212aAQEDbEKB1+73SQ8nlJEzmJ Hg== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by aserp2130.oracle.com with ESMTP id 33su5b8v2r-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 01 Oct 2020 21:04:23 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 091L0rr5061947;
- Thu, 1 Oct 2020 21:04:22 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
- by userp3020.oracle.com with ESMTP id 33tfdwep9y-1
+ Thu, 01 Oct 2020 22:59:37 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 091MuXwE061026;
+ Thu, 1 Oct 2020 22:59:37 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by aserp3020.oracle.com with ESMTP id 33tfj28wxp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 01 Oct 2020 21:04:22 +0000
-Received: from abhmp0002.oracle.com (abhmp0002.oracle.com [141.146.116.8])
- by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 091L4LfC010817;
- Thu, 1 Oct 2020 21:04:21 GMT
+ Thu, 01 Oct 2020 22:59:36 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 091MxaW3018534;
+ Thu, 1 Oct 2020 22:59:36 GMT
 Received: from ban25x6uut24.us.oracle.com (/10.153.73.24)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Thu, 01 Oct 2020 14:04:20 -0700
+ with ESMTP ; Thu, 01 Oct 2020 15:59:35 -0700
 From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: tiwei.bie@intel.com, lingshan.zhu@intel.com, mst@redhat.com,
- jasowang@redhat.com
-Subject: [PATCH] vhost-vdpa: fix page pinning leakage in error path
-Date: Thu,  1 Oct 2020 16:23:19 -0400
-Message-Id: <1601583799-15274-1-git-send-email-si-wei.liu@oracle.com>
+To: mst@redhat.com, jasowang@redhat.com, lingshan.zhu@intel.com
+Subject: [PATCH v2] vhost-vdpa: fix page pinning leakage in error path
+Date: Thu,  1 Oct 2020 18:18:35 -0400
+Message-Id: <1601590715-17303-1-git-send-email-si-wei.liu@oracle.com>
 X-Mailer: git-send-email 1.8.3.1
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9761
  signatures=668680
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
- phishscore=0
- adultscore=0 malwarescore=0 spamscore=0 mlxscore=0 bulkscore=0
- suspectscore=2 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2010010169
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ mlxlogscore=999 bulkscore=0
+ phishscore=0 malwarescore=0 adultscore=0 suspectscore=2 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
+ definitions=main-2010010184
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9761
  signatures=668680
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
  suspectscore=2
- lowpriorityscore=0 spamscore=0 clxscore=1011 mlxscore=0 impostorscore=0
+ lowpriorityscore=0 spamscore=0 clxscore=1015 mlxscore=0 impostorscore=0
  malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 priorityscore=1501
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2010010169
+ definitions=main-2010010184
 Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
  boris.ostrovsky@oracle.com, linux-kernel@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -120,9 +119,12 @@ region. This way it's easier to track and account the
 pages already mapped, particularly for clean-up in the
 error path.
 
-Fixes: 20453a45fb06 ("vhost: introduce vDPA-based backend")
+Fixes: 4c8cf31885f6 ("vhost: introduce vDPA-based backend")
 Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
 ---
+Changes in v2:
+- Fix incorrect target SHA1 referenced
+
  drivers/vhost/vdpa.c | 121 +++++++++++++++++++++++++++++++--------------------
  1 file changed, 73 insertions(+), 48 deletions(-)
 
