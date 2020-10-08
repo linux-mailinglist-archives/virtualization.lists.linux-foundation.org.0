@@ -1,74 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD47F2879BF
-	for <lists.virtualization@lfdr.de>; Thu,  8 Oct 2020 18:13:29 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7989E287CBE
+	for <lists.virtualization@lfdr.de>; Thu,  8 Oct 2020 22:01:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6C156874E8;
-	Thu,  8 Oct 2020 16:13:28 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3034E87112;
+	Thu,  8 Oct 2020 20:01:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id o3lcIblbED8S; Thu,  8 Oct 2020 16:13:27 +0000 (UTC)
+	with ESMTP id BQGndag-HUWA; Thu,  8 Oct 2020 20:01:02 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DF0E0874E5;
-	Thu,  8 Oct 2020 16:13:27 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8318387124;
+	Thu,  8 Oct 2020 20:01:02 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BFBF2C0051;
-	Thu,  8 Oct 2020 16:13:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 72B4FC0051;
+	Thu,  8 Oct 2020 20:01:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6F84EC0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 68194C0051
  for <virtualization@lists.linux-foundation.org>;
- Thu,  8 Oct 2020 16:13:26 +0000 (UTC)
+ Thu,  8 Oct 2020 20:01:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 6B93686C19
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 6172D86D6E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  8 Oct 2020 16:13:26 +0000 (UTC)
+ Thu,  8 Oct 2020 20:01:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZSTzWAydA3zT
+ with ESMTP id nF8XvYv6PQ7Y
  for <virtualization@lists.linux-foundation.org>;
- Thu,  8 Oct 2020 16:13:26 +0000 (UTC)
+ Thu,  8 Oct 2020 20:01:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id DE53086BE2
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id C8D4986D42
  for <virtualization@lists.linux-foundation.org>;
- Thu,  8 Oct 2020 16:13:25 +0000 (UTC)
+ Thu,  8 Oct 2020 20:01:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1602173604;
+ s=mimecast20190719; t=1602187259;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=M5rKlvyqoDFzwipoeIl60H9emhyCrrxKsQPGoqtwZ9M=;
- b=faGQqAfLdLptiGPjQZVUVqrXwZe72f2c2SoysRWD8AgDApRhyx5T9JeQZjS8p5nESVjnf9
- Dki479dSDSg5NtYNXPAgpDmhqQkyqd7/gXV+4FsJuoo5wwXKImQWMncLjyj16mZy2fkbez
- TEHDcZoCfkWIcGpOz0GL4VX4NeXLO08=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-9-j20hkdD8N7KaClBXpnB_5A-1; Thu, 08 Oct 2020 12:13:22 -0400
-X-MC-Unique: j20hkdD8N7KaClBXpnB_5A-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 33A1387952A;
- Thu,  8 Oct 2020 16:13:20 +0000 (UTC)
-Received: from steredhat.redhat.com (ovpn-112-116.ams2.redhat.com
- [10.36.112.116])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2B8855C1BD;
- Thu,  8 Oct 2020 16:13:11 +0000 (UTC)
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: mst@redhat.com
-Subject: [PATCH] vringh: fix __vringh_iov() when riov and wiov are different
-Date: Thu,  8 Oct 2020 18:13:11 +0200
-Message-Id: <20201008161311.114398-1-sgarzare@redhat.com>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=N7ZjK4P1j2h8bXH0yXST1ACz87+diWlu/RJO8+yMMIg=;
+ b=QGBbzFWFFuENGZejdGWF1t8W0SauljiH5+Rtd5fk3cqYtARLD1c1k4XFI674IhiNibDsPY
+ HWItUrN7e2D2hQQAriPIJCzFP+IqU0wOxTJKfDWfO1J+uuJkADZ0GyFfUjeXaD2/jyBqbf
+ OI08x7FM7bQiCe2mGiOHezFbCd3tNXI=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-281-UYJjPdgvOdS2LgQSottzHw-1; Thu, 08 Oct 2020 16:00:58 -0400
+X-MC-Unique: UYJjPdgvOdS2LgQSottzHw-1
+Received: by mail-wm1-f70.google.com with SMTP id y83so3499265wmc.8
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 08 Oct 2020 13:00:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=N7ZjK4P1j2h8bXH0yXST1ACz87+diWlu/RJO8+yMMIg=;
+ b=m9CR2EgU2UW226ssjulSHNjXKVjY1m8jq0ul2+iNCzMXFmNCU3+9D12dbtLX2BweLZ
+ yOeBTiXVzj2RhLpFcGK3lO7xzBPXP+vuE3VPhaUJgNRKgV+QCP1YcpLsEHlVcHvwnjCK
+ Dm66GsUg5eE7z1YnH6FRCokJh4//Yp/cwZceK+UzWzO7dQS/1GogLnjLdNG+ER+jJ61h
+ IFUnSGJhUKgTXP9hU954UElWyViobqdGx34TksKRwjOllm9w9QqL2vBlDJQsrZjcgPk8
+ 7RN3XSI7IIHbZdoRP1nZ36I+IEUJ8nnOFmZumqzAkfos3Bvf0Q2gUzIEqReEd+jfCfUh
+ juZQ==
+X-Gm-Message-State: AOAM533eWJdKxzM28aZQAqieKbsxa+5IPqrnlwqOi7wEkfkFdkXwXYkn
+ 0sv34pzBPfQKaUCNi5wh6zq9xJsYUj8SnPpp5qQtp6zrmPr+N0Kfme7NMJ9uHqylOk+rhfXiPvG
+ BipUFTWwRUTaR8IED+cinruQhIjJ2zeUa/eb6UtIkyQ==
+X-Received: by 2002:adf:8562:: with SMTP id 89mr10925395wrh.214.1602187256865; 
+ Thu, 08 Oct 2020 13:00:56 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxWrfSGm9ixOxCPW8QdF5CAdI6tKiof9TUB2EwQFmEeCUUsDhhAjPVtVpxFRSxH/O9OPV7uVw==
+X-Received: by 2002:adf:8562:: with SMTP id 89mr10925375wrh.214.1602187256545; 
+ Thu, 08 Oct 2020 13:00:56 -0700 (PDT)
+Received: from redhat.com (bzq-79-179-71-128.red.bezeqint.net. [79.179.71.128])
+ by smtp.gmail.com with ESMTPSA id w11sm8493631wrs.26.2020.10.08.13.00.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Oct 2020 13:00:55 -0700 (PDT)
+Date: Thu, 8 Oct 2020 16:00:51 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Stefano Garzarella <sgarzare@redhat.com>
+Subject: Re: [PATCH] vringh: fix __vringh_iov() when riov and wiov are
+ different
+Message-ID: <20201008160035-mutt-send-email-mst@kernel.org>
+References: <20201008161311.114398-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+In-Reply-To: <20201008161311.114398-1-sgarzare@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
  Rusty Russell <rusty@rustcorp.com.au>, linux-kernel@vger.kernel.org,
  stable@vger.kernel.org, virtualization@lists.linux-foundation.org
@@ -88,50 +111,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-If riov and wiov are both defined and they point to different
-objects, only riov is initialized. If the wiov is not initialized
-by the caller, the function fails returning -EINVAL and printing
-"Readable desc 0x... after writable" error message.
+On Thu, Oct 08, 2020 at 06:13:11PM +0200, Stefano Garzarella wrote:
+> If riov and wiov are both defined and they point to different
+> objects, only riov is initialized. If the wiov is not initialized
+> by the caller, the function fails returning -EINVAL and printing
+> "Readable desc 0x... after writable" error message.
+> 
+> Let's replace the 'else if' clause with 'if' to initialize both
+> riov and wiov if they are not NULL.
+> 
+> As checkpatch pointed out, we also avoid crashing the kernel
+> when riov and wiov are both NULL, replacing BUG() with WARN_ON()
+> and returning -EINVAL.
+> 
+> Fixes: f87d0fbb5798 ("vringh: host-side implementation of virtio rings.")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 
-Let's replace the 'else if' clause with 'if' to initialize both
-riov and wiov if they are not NULL.
+Can you add more detail please? when does this trigger?
 
-As checkpatch pointed out, we also avoid crashing the kernel
-when riov and wiov are both NULL, replacing BUG() with WARN_ON()
-and returning -EINVAL.
-
-Fixes: f87d0fbb5798 ("vringh: host-side implementation of virtio rings.")
-Cc: stable@vger.kernel.org
-Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
----
- drivers/vhost/vringh.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/vhost/vringh.c b/drivers/vhost/vringh.c
-index e059a9a47cdf..8bd8b403f087 100644
---- a/drivers/vhost/vringh.c
-+++ b/drivers/vhost/vringh.c
-@@ -284,13 +284,14 @@ __vringh_iov(struct vringh *vrh, u16 i,
- 	desc_max = vrh->vring.num;
- 	up_next = -1;
- 
-+	/* You must want something! */
-+	if (WARN_ON(!riov && !wiov))
-+		return -EINVAL;
-+
- 	if (riov)
- 		riov->i = riov->used = 0;
--	else if (wiov)
-+	if (wiov)
- 		wiov->i = wiov->used = 0;
--	else
--		/* You must want something! */
--		BUG();
- 
- 	for (;;) {
- 		void *addr;
--- 
-2.26.2
+> ---
+>  drivers/vhost/vringh.c | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/vhost/vringh.c b/drivers/vhost/vringh.c
+> index e059a9a47cdf..8bd8b403f087 100644
+> --- a/drivers/vhost/vringh.c
+> +++ b/drivers/vhost/vringh.c
+> @@ -284,13 +284,14 @@ __vringh_iov(struct vringh *vrh, u16 i,
+>  	desc_max = vrh->vring.num;
+>  	up_next = -1;
+>  
+> +	/* You must want something! */
+> +	if (WARN_ON(!riov && !wiov))
+> +		return -EINVAL;
+> +
+>  	if (riov)
+>  		riov->i = riov->used = 0;
+> -	else if (wiov)
+> +	if (wiov)
+>  		wiov->i = wiov->used = 0;
+> -	else
+> -		/* You must want something! */
+> -		BUG();
+>  
+>  	for (;;) {
+>  		void *addr;
+> -- 
+> 2.26.2
 
 _______________________________________________
 Virtualization mailing list
