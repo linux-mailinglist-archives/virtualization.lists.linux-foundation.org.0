@@ -1,73 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C768728B526
-	for <lists.virtualization@lfdr.de>; Mon, 12 Oct 2020 14:55:25 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id EC64C28B529
+	for <lists.virtualization@lfdr.de>; Mon, 12 Oct 2020 14:55:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 7D8F4874BC;
-	Mon, 12 Oct 2020 12:55:24 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9FAF085F7F;
+	Mon, 12 Oct 2020 12:55:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SRVQ7W0Qgxt0; Mon, 12 Oct 2020 12:55:23 +0000 (UTC)
+	with ESMTP id gadI_0YMjAky; Mon, 12 Oct 2020 12:55:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id EBBCD87472;
-	Mon, 12 Oct 2020 12:55:23 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3ACC185FA7;
+	Mon, 12 Oct 2020 12:55:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D6D88C07FF;
-	Mon, 12 Oct 2020 12:55:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 165DEC0051;
+	Mon, 12 Oct 2020 12:55:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4DA0CC0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8424FC0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 12:55:22 +0000 (UTC)
+ Mon, 12 Oct 2020 12:55:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 46516874BF
+ by hemlock.osuosl.org (Postfix) with ESMTP id 72447874BF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 12:55:22 +0000 (UTC)
+ Mon, 12 Oct 2020 12:55:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KjtHV-3R4zfX
+ with ESMTP id gZYPlQcasYyp
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 12:55:21 +0000 (UTC)
+ Mon, 12 Oct 2020 12:55:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 7A671874BB
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 86A2A87472
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 12:55:21 +0000 (UTC)
+ Mon, 12 Oct 2020 12:55:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1602507320;
+ s=mimecast20190719; t=1602507324;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7uNq+DgFx1awbtxRCO5i53i4OzQ+SF2JZ2u66Xi43bM=;
- b=gw6wzoCyOKndojGss0fHhCRqiqmz96pLbWtkpMS7gsn1LWCVgZQ9RVbyEHt1xXWlaXwlyM
- sky5taVQKtteS/eWiiy5hSHDlrs9RY9Utz+R66jkot6pm/4psoH0SgTw5UuSYuOubJfClH
- +sAmCaM/F13Vv2XX/gaKoFurwJnuVOk=
+ bh=Nfx3E1E8CtjMuP9lMG33p0/a9KgSIqjdfK7bGnmRDXs=;
+ b=PUdDC81bhydJiU6k2YE9dpKMtSKokfocQJRgqXY3ZXVyhptBJaeZeyBAEG1ByE8pSXKEJM
+ eS6sbOcuI3rknCNXUMwSjZWqate18EG4OyPgZ2nAfPtU1F8uj1HtHLrCLQ84LseeQoppZZ
+ DE/fBmjKcFskCInb3STrcGllg31laXU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-398-qnEyoJ0YOFmFIFcl_UGbGQ-1; Mon, 12 Oct 2020 08:55:15 -0400
-X-MC-Unique: qnEyoJ0YOFmFIFcl_UGbGQ-1
+ us-mta-518-OQI5yNW_MnGAQ8K74Zdxcg-1; Mon, 12 Oct 2020 08:55:20 -0400
+X-MC-Unique: OQI5yNW_MnGAQ8K74Zdxcg-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
  [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6722164144;
- Mon, 12 Oct 2020 12:55:14 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 866281005E5D;
+ Mon, 12 Oct 2020 12:55:19 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-113-251.ams2.redhat.com [10.36.113.251])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C1C6460C07;
- Mon, 12 Oct 2020 12:55:09 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DF04E60C07;
+ Mon, 12 Oct 2020 12:55:14 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v1 13/29] virtio-mem: factor out handling of fake-offline
- pages in memory notifier
-Date: Mon, 12 Oct 2020 14:53:07 +0200
-Message-Id: <20201012125323.17509-14-david@redhat.com>
+Subject: [PATCH v1 14/29] virtio-mem: retry fake-offlining via
+ alloc_contig_range() on ZONE_MOVABLE
+Date: Mon, 12 Oct 2020 14:53:08 +0200
+Message-Id: <20201012125323.17509-15-david@redhat.com>
 In-Reply-To: <20201012125323.17509-1-david@redhat.com>
 References: <20201012125323.17509-1-david@redhat.com>
 MIME-Version: 1.0
@@ -92,135 +92,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's factor out the core pieces and place the implementation next to
-virtio_mem_fake_offline(). We'll reuse this functionality soon.
+ZONE_MOVABLE is supposed to give some guarantees, yet,
+alloc_contig_range() isn't prepared to properly deal with some racy
+cases properly (e.g., temporary page pinning when exiting processed, PCP).
+
+Retry 5 times for now. There is certainly room for improvement in the
+future.
 
 Cc: "Michael S. Tsirkin" <mst@redhat.com>
 Cc: Jason Wang <jasowang@redhat.com>
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 73 +++++++++++++++++++++++++------------
- 1 file changed, 50 insertions(+), 23 deletions(-)
+ drivers/virtio/virtio_mem.c | 37 ++++++++++++++++++++++++++-----------
+ 1 file changed, 26 insertions(+), 11 deletions(-)
 
 diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index d132bc54ef57..a2124892e510 100644
+index a2124892e510..faeb759687fe 100644
 --- a/drivers/virtio/virtio_mem.c
 +++ b/drivers/virtio/virtio_mem.c
-@@ -168,6 +168,10 @@ static LIST_HEAD(virtio_mem_devices);
+@@ -823,19 +823,34 @@ static void virtio_mem_fake_online(unsigned long pfn, unsigned long nr_pages)
+  */
+ static int virtio_mem_fake_offline(unsigned long pfn, unsigned long nr_pages)
+ {
+-	int rc;
++	const bool is_movable = zone_idx(page_zone(pfn_to_page(pfn))) ==
++				ZONE_MOVABLE;
++	int rc, retry_count;
  
- static void virtio_mem_online_page_cb(struct page *page, unsigned int order);
- static void virtio_mem_retry(struct virtio_mem *vm);
-+static void virtio_mem_fake_offline_going_offline(unsigned long pfn,
-+						  unsigned long nr_pages);
-+static void virtio_mem_fake_offline_cancel_offline(unsigned long pfn,
-+						   unsigned long nr_pages);
+-	rc = alloc_contig_range(pfn, pfn + nr_pages, MIGRATE_MOVABLE,
+-				GFP_KERNEL);
+-	if (rc == -ENOMEM)
+-		/* whoops, out of memory */
+-		return rc;
+-	if (rc)
+-		return -EBUSY;
++	/*
++	 * TODO: We want an alloc_contig_range() mode that tries to allocate
++	 * harder (e.g., dealing with temporarily pinned pages, PCP), especially
++	 * with ZONE_MOVABLE. So for now, retry a couple of times with
++	 * ZONE_MOVABLE before giving up - because that zone is supposed to give
++	 * some guarantees.
++	 */
++	for (retry_count = 0; retry_count < 5; retry_count++) {
++		rc = alloc_contig_range(pfn, pfn + nr_pages, MIGRATE_MOVABLE,
++					GFP_KERNEL);
++		if (rc == -ENOMEM)
++			/* whoops, out of memory */
++			return rc;
++		else if (rc && !is_movable)
++			break;
++		else if (rc)
++			continue;
+ 
+-	virtio_mem_set_fake_offline(pfn, nr_pages, true);
+-	adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
+-	return 0;
++		virtio_mem_set_fake_offline(pfn, nr_pages, true);
++		adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
++		return 0;
++	}
++
++	return -EBUSY;
+ }
  
  /*
-  * Register a virtio-mem device so it will be considered for the online_page
-@@ -604,27 +608,15 @@ static void virtio_mem_notify_going_offline(struct virtio_mem *vm,
- 					    unsigned long mb_id)
- {
- 	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size);
--	struct page *page;
- 	unsigned long pfn;
--	int sb_id, i;
-+	int sb_id;
- 
- 	for (sb_id = 0; sb_id < vm->nb_sb_per_mb; sb_id++) {
- 		if (virtio_mem_mb_test_sb_plugged(vm, mb_id, sb_id, 1))
- 			continue;
--		/*
--		 * Drop our reference to the pages so the memory can get
--		 * offlined and add the unplugged pages to the managed
--		 * page counters (so offlining code can correctly subtract
--		 * them again).
--		 */
- 		pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
- 			       sb_id * vm->subblock_size);
--		adjust_managed_page_count(pfn_to_page(pfn), nr_pages);
--		for (i = 0; i < nr_pages; i++) {
--			page = pfn_to_page(pfn + i);
--			if (WARN_ON(!page_ref_dec_and_test(page)))
--				dump_page(page, "unplugged page referenced");
--		}
-+		virtio_mem_fake_offline_going_offline(pfn, nr_pages);
- 	}
- }
- 
-@@ -633,21 +625,14 @@ static void virtio_mem_notify_cancel_offline(struct virtio_mem *vm,
- {
- 	const unsigned long nr_pages = PFN_DOWN(vm->subblock_size);
- 	unsigned long pfn;
--	int sb_id, i;
-+	int sb_id;
- 
- 	for (sb_id = 0; sb_id < vm->nb_sb_per_mb; sb_id++) {
- 		if (virtio_mem_mb_test_sb_plugged(vm, mb_id, sb_id, 1))
- 			continue;
--		/*
--		 * Get the reference we dropped when going offline and
--		 * subtract the unplugged pages from the managed page
--		 * counters.
--		 */
- 		pfn = PFN_DOWN(virtio_mem_mb_id_to_phys(mb_id) +
- 			       sb_id * vm->subblock_size);
--		adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
--		for (i = 0; i < nr_pages; i++)
--			page_ref_inc(pfn_to_page(pfn + i));
-+		virtio_mem_fake_offline_cancel_offline(pfn, nr_pages);
- 	}
- }
- 
-@@ -853,6 +838,48 @@ static int virtio_mem_fake_offline(unsigned long pfn, unsigned long nr_pages)
- 	return 0;
- }
- 
-+/*
-+ * Handle fake-offline pages when memory is going offline - such that the
-+ * pages can be skipped by mm-core when offlining.
-+ */
-+static void virtio_mem_fake_offline_going_offline(unsigned long pfn,
-+						  unsigned long nr_pages)
-+{
-+	struct page *page;
-+	unsigned long i;
-+
-+	/*
-+	 * Drop our reference to the pages so the memory can get offlined
-+	 * and add the unplugged pages to the managed page counters (so
-+	 * offlining code can correctly subtract them again).
-+	 */
-+	adjust_managed_page_count(pfn_to_page(pfn), nr_pages);
-+	/* Drop our reference to the pages so the memory can get offlined. */
-+	for (i = 0; i < nr_pages; i++) {
-+		page = pfn_to_page(pfn + i);
-+		if (WARN_ON(!page_ref_dec_and_test(page)))
-+			dump_page(page, "fake-offline page referenced");
-+	}
-+}
-+
-+/*
-+ * Handle fake-offline pages when memory offlining is canceled - to undo
-+ * what we did in virtio_mem_fake_offline_going_offline().
-+ */
-+static void virtio_mem_fake_offline_cancel_offline(unsigned long pfn,
-+						   unsigned long nr_pages)
-+{
-+	unsigned long i;
-+
-+	/*
-+	 * Get the reference we dropped when going offline and subtract the
-+	 * unplugged pages from the managed page counters.
-+	 */
-+	adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
-+	for (i = 0; i < nr_pages; i++)
-+		page_ref_inc(pfn_to_page(pfn + i));
-+}
-+
- static void virtio_mem_online_page_cb(struct page *page, unsigned int order)
- {
- 	const unsigned long addr = page_to_phys(page);
 -- 
 2.26.2
 
