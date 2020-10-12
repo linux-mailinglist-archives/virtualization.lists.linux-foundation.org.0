@@ -2,83 +2,77 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BF2E28AB93
-	for <lists.virtualization@lfdr.de>; Mon, 12 Oct 2020 04:03:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C26428AC45
+	for <lists.virtualization@lfdr.de>; Mon, 12 Oct 2020 04:45:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 80A2920452;
-	Mon, 12 Oct 2020 02:03:46 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 87F8B20501;
+	Mon, 12 Oct 2020 02:45:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hAg3tx2VX0BE; Mon, 12 Oct 2020 02:03:44 +0000 (UTC)
+	with ESMTP id cSU4aG-XxHq8; Mon, 12 Oct 2020 02:45:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id BFCF3203FE;
-	Mon, 12 Oct 2020 02:03:44 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 640B62051F;
+	Mon, 12 Oct 2020 02:45:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A073CC0051;
-	Mon, 12 Oct 2020 02:03:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 405F8C0895;
+	Mon, 12 Oct 2020 02:45:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9BBFEC0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4A8CDC0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 02:03:42 +0000 (UTC)
+ Mon, 12 Oct 2020 02:45:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 76C7F203FE
+ by hemlock.osuosl.org (Postfix) with ESMTP id 2B42F873C9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 02:03:42 +0000 (UTC)
+ Mon, 12 Oct 2020 02:45:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fvU7GIwjQBJw
+ with ESMTP id dDB627n7Orq3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 02:03:41 +0000 (UTC)
+ Mon, 12 Oct 2020 02:45:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
- [209.85.167.193])
- by silver.osuosl.org (Postfix) with ESMTPS id 41B3E2001F
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id F19D587108
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 02:03:41 +0000 (UTC)
-Received: by mail-oi1-f193.google.com with SMTP id 16so17126573oix.9
- for <virtualization@lists.linux-foundation.org>;
- Sun, 11 Oct 2020 19:03:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=j13Tylr9YBkdZ0Q6y1P4zQEjpOu1kWVXCB0vaRAU130=;
- b=ACNIBePjoAnvCfSd8s6z6kT8Js7T1Vq8g5oAhpnPtxIFeCpdFE4v/k2DUyARLJ53k7
- Fi/I672QmETEm/7L59US6zBtJgm5feW8XfCvfGsnr53Ybbw5ONXV0UDxa9U1OC2ogGPo
- D0Oi5XUTwPgOil4yyxWQiKvHzigAjPtRyAXivyL0A8Rh0Nq4JCkXCqgb3DCAuruzZy4b
- EjDhj4RGTAfmlBlGiUYBvE0OOHC4khrVj/N064OEuklRLtIsE7eocTE8JrhFKkYV6UQu
- 0AeuKbw2UOX+EQN9u+aCXtqbmPqvp57iOEdrzVgHNYvviyHdM+UUixpdeeqZ3bfXhemR
- P3aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=j13Tylr9YBkdZ0Q6y1P4zQEjpOu1kWVXCB0vaRAU130=;
- b=d1hDLvlFcRlbzGXExB3Uig/JvSmQD7Y12dKlp57f0hKuNbfOltDsTe6AYts4tHhTPO
- 93NZmC9cNfycKbCqYY0QHMK7EpAEUcZVZgfwPOvvgIgc/15bUvUiSTp1rkBqSp9lKHCa
- hwA5J6Y72JLtwWoIwKdv7UO4HSi3EJVtWOjxRwvcb50FzUC8GmCWoOq55A7/dnPkO04f
- 5qulZUZTD6UDAO4CTa+iIU/yDEtg1pf+nFvAkbVTmQPvXRcqA79orTPM6glr66TKrs/0
- hISRikq02R7BeO+XYSplzCnJ+JKe4VlMjtf1cA+jk+keLUkCi/zKXoYmnS3dmOetnbOl
- 7u4A==
-X-Gm-Message-State: AOAM532fEsU2dk54I5vbd5/9TyL7TT5gvtUTfEquBuwFVUD9/jxJsAjI
- buHXjedyDG7taJRFCEgk13E=
-X-Google-Smtp-Source: ABdhPJzbSZngaFCV4YYKgEgA+zeTPsGl4ocGWWpONXc9jQ04lXVYHQZD/kFhwp5l2bt+VbTQZSy97g==
-X-Received: by 2002:aca:3a57:: with SMTP id h84mr9778654oia.95.1602468220426; 
- Sun, 11 Oct 2020 19:03:40 -0700 (PDT)
-Received: from localhost.localdomain ([50.236.19.102])
- by smtp.gmail.com with ESMTPSA id t12sm1560471oth.13.2020.10.11.19.03.04
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 11 Oct 2020 19:03:39 -0700 (PDT)
-From: xiangxia.m.yue@gmail.com
-To: jasowang@redhat.com,
-	mst@redhat.com,
-	willemb@google.com
-Subject: [PATCH net-next v3] virtio-net: ethtool configurable RXCSUM
-Date: Mon, 12 Oct 2020 09:58:20 +0800
-Message-Id: <20201012015820.62042-1-xiangxia.m.yue@gmail.com>
-X-Mailer: git-send-email 2.15.0
-Cc: netdev@vger.kernel.org, virtualization@lists.linux-foundation.org
+ Mon, 12 Oct 2020 02:45:30 +0000 (UTC)
+IronPort-SDR: XPRKijZA9ZT9/Su/VCaRk5bUx9ldghTJ+PKDMgpglZalOITpL/IpuD+atwOoXgrUi8iNTtXV0f
+ i6ZhVDHX6OUQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9771"; a="229864768"
+X-IronPort-AV: E=Sophos;i="5.77,365,1596524400"; 
+ d="scan'208,217";a="229864768"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 Oct 2020 19:45:21 -0700
+IronPort-SDR: qwvm1pyGtSlhZuclBUcQ4I72778xdi3ObhLfQJByy8okodaJOyeHsN0uWT8tpuYtF8dk+OqN4F
+ a1AQEdqXFlIg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.77,365,1596524400"; 
+ d="scan'208,217";a="299146390"
+Received: from unknown (HELO [10.239.154.47]) ([10.239.154.47])
+ by fmsmga008.fm.intel.com with ESMTP; 11 Oct 2020 19:45:16 -0700
+Subject: Re: [PATCH v3] i2c: virtio: add a virtio i2c frontend driver
+To: Jason Wang <jasowang@redhat.com>, linux-i2c@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
+References: <1350309657ab0c7b9f97e7a5c71d084f88caa549.1600743079.git.jie.deng@intel.com>
+ <958b69c3-0321-d5cb-4c12-702795925583@redhat.com>
+From: Jie Deng <jie.deng@intel.com>
+Message-ID: <2dc4bd12-9f23-7caa-b1ec-f3403d36e065@intel.com>
+Date: Mon, 12 Oct 2020 10:45:16 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Firefox/78.0 Thunderbird/78.2.2
+MIME-Version: 1.0
+In-Reply-To: <958b69c3-0321-d5cb-4c12-702795925583@redhat.com>
+Content-Language: en-US
+Cc: Sergey.Semin@baikalelectronics.ru, bjorn.andersson@linaro.org,
+ loic.poulain@linaro.org, yu1.wang@intel.com, mst@redhat.com, krzk@kernel.org,
+ tali.perry1@gmail.com, wsa@kernel.org, wsa+renesas@sang-engineering.com,
+ jarkko.nikula@linux.intel.com, rppt@kernel.org, shuo.a.liu@intel.com,
+ andriy.shevchenko@linux.intel.com, conghui.chen@intel.com, jdelvare@suse.de
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,127 +84,343 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6879545460114193807=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Tonghao Zhang <xiangxia.m.yue@gmail.com>
+This is a multi-part message in MIME format.
+--===============6879545460114193807==
+Content-Type: multipart/alternative;
+ boundary="------------0D99ECCE2C2D8963B2CCD197"
+Content-Language: en-US
 
-Allow user configuring RXCSUM separately with ethtool -K,
-reusing the existing virtnet_set_guest_offloads helper
-that configures RXCSUM for XDP. This is conditional on
-VIRTIO_NET_F_CTRL_GUEST_OFFLOADS.
+This is a multi-part message in MIME format.
+--------------0D99ECCE2C2D8963B2CCD197
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-If Rx checksum is disabled, LRO should also be disabled.
 
-Cc: Michael S. Tsirkin <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Willem de Bruijn <willemb@google.com>
-Signed-off-by: Tonghao Zhang <xiangxia.m.yue@gmail.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
----
- drivers/net/virtio_net.c | 48 ++++++++++++++++++++++++++++++----------
- 1 file changed, 36 insertions(+), 12 deletions(-)
+On 2020/10/10 11:14, Jason Wang wrote:
+>
+>> +
+>> +        virtqueue_kick(vq);
+>> +
+>> +        time_left = wait_for_completion_timeout(&vi->completion, 
+>> adap->timeout);
+>> +        if (!time_left) {
+>> +            dev_err(&adap->dev, "msg[%d]: addr=0x%x timeout.\n", i, 
+>> msgs[i].addr);
+>> +            break;
+>> +        }
+>
+>
+> You don't set error number here. Is this intended?
+>
+> And using a timeout here is not good, and if the request is finished 
+> just after the timeout, in the next xfer you may hit the following check.
+>
+> It's better to use either interrupt here.
+>
+Could you check the I2C drivers in the kernel ? The 
+"wait_for_completion_timeout" mechanism
+is commonly used by I2C bus drivers in their i2c_algorithm.master_xfer.
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 21b71148c532..d2d2c4a53cf2 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -68,6 +68,8 @@ static const unsigned long guest_offloads[] = {
- 				(1ULL << VIRTIO_NET_F_GUEST_ECN)  | \
- 				(1ULL << VIRTIO_NET_F_GUEST_UFO))
- 
-+#define GUEST_OFFLOAD_CSUM_MASK (1ULL << VIRTIO_NET_F_GUEST_CSUM)
-+
- struct virtnet_stat_desc {
- 	char desc[ETH_GSTRING_LEN];
- 	size_t offset;
-@@ -2522,29 +2524,48 @@ static int virtnet_get_phys_port_name(struct net_device *dev, char *buf,
- 	return 0;
- }
- 
-+static netdev_features_t virtnet_fix_features(struct net_device *netdev,
-+					      netdev_features_t features)
-+{
-+	/* If Rx checksum is disabled, LRO should also be disabled. */
-+	if (!(features & NETIF_F_RXCSUM))
-+		features &= ~NETIF_F_LRO;
-+
-+	return features;
-+}
-+
- static int virtnet_set_features(struct net_device *dev,
- 				netdev_features_t features)
- {
- 	struct virtnet_info *vi = netdev_priv(dev);
--	u64 offloads;
-+	u64 offloads = vi->guest_offloads;
- 	int err;
- 
--	if ((dev->features ^ features) & NETIF_F_LRO) {
--		if (vi->xdp_queue_pairs)
--			return -EBUSY;
-+	/* Don't allow configuration while XDP is active. */
-+	if (vi->xdp_queue_pairs)
-+		return -EBUSY;
- 
-+	if ((dev->features ^ features) & NETIF_F_LRO) {
- 		if (features & NETIF_F_LRO)
--			offloads = vi->guest_offloads_capable;
-+			offloads |= GUEST_OFFLOAD_LRO_MASK &
-+				    vi->guest_offloads_capable;
- 		else
--			offloads = vi->guest_offloads_capable &
--				   ~GUEST_OFFLOAD_LRO_MASK;
-+			offloads &= ~GUEST_OFFLOAD_LRO_MASK;
-+	}
- 
--		err = virtnet_set_guest_offloads(vi, offloads);
--		if (err)
--			return err;
--		vi->guest_offloads = offloads;
-+	if ((dev->features ^ features) & NETIF_F_RXCSUM) {
-+		if (features & NETIF_F_RXCSUM)
-+			offloads |= GUEST_OFFLOAD_CSUM_MASK &
-+				    vi->guest_offloads_capable;
-+		else
-+			offloads &= ~GUEST_OFFLOAD_CSUM_MASK;
- 	}
- 
-+	err = virtnet_set_guest_offloads(vi, offloads);
-+	if (err)
-+		return err;
-+
-+	vi->guest_offloads = offloads;
- 	return 0;
- }
- 
-@@ -2563,6 +2584,7 @@ static const struct net_device_ops virtnet_netdev = {
- 	.ndo_features_check	= passthru_features_check,
- 	.ndo_get_phys_port_name	= virtnet_get_phys_port_name,
- 	.ndo_set_features	= virtnet_set_features,
-+	.ndo_fix_features	= virtnet_fix_features,
- };
- 
- static void virtnet_config_changed_work(struct work_struct *work)
-@@ -3013,8 +3035,10 @@ static int virtnet_probe(struct virtio_device *vdev)
- 	if (virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO4) ||
- 	    virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO6))
- 		dev->features |= NETIF_F_LRO;
--	if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS))
-+	if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS)) {
-+		dev->hw_features |= NETIF_F_RXCSUM;
- 		dev->hw_features |= NETIF_F_LRO;
-+	}
- 
- 	dev->vlan_features = dev->features;
- 
--- 
-2.23.0
+
+>
+>> +
+>> +        vmsg = (struct virtio_i2c_msg *)virtqueue_get_buf(vq, &len);
+>> +        /* vmsg should point to the same address with &vi->vmsg */
+>> +        if ((!vmsg) || (vmsg != &vi->vmsg)) {
+>> +            dev_err(&adap->dev, "msg[%d]: addr=0x%x virtqueue 
+>> error.\n",
+>> +                i, msgs[i].addr);
+>> +            break;
+>> +        }
+>
+>
+> So I think we can remove this check. Consider only one descriptor will 
+> be used at most, unless there's a bug in the device (and no other 
+> driver to the similar check), we should not hit this.
+>
+> Btw, as I replied in the previous version, the device should be 
+> cacpable of dealing of a batch of requests through the virtqueue, 
+> otherwise it's meaningless to use a queue here.
+>
+We should not assume there is no bug in the device. I don't think we can 
+remove this check if we want our code to be robust.
+As I said, currently, we are using the virtqueue to send the msg one by 
+one to the backend. The mechanism is described in the spec.
+
+Thanks.
+
+
+>
+>> +
+>>
+>> +
+>> +#ifndef _UAPI_LINUX_VIRTIO_I2C_H
+>> +#define _UAPI_LINUX_VIRTIO_I2C_H
+>> +
+>> +#include <linux/types.h>
+>> +#include <linux/virtio_ids.h>
+>> +#include <linux/virtio_config.h>
+>> +
+>> +/**
+>> + * struct virtio_i2c_hdr - the virtio I2C message header structure
+>> + * @addr: i2c_msg addr, the slave address
+>> + * @flags: i2c_msg flags
+>> + * @len: i2c_msg len
+>> + */
+>> +struct virtio_i2c_hdr {
+>> +    __le16 addr;
+>> +    __le16 flags;
+>> +    __le16 len;
+>> +};
+>
+>
+> I'm afraid this is not complete. E.g the status is missed.
+>
+> I suspect what virtio-scsi use is better. Which split the in from the 
+> out instead of reusing the same buffer. And it can ease the uAPI 
+> header export.
+>
+> Thanks
+>
+>
+
+I think following definition in uAPI for the status is enough.
+There is no need to provide a "u8" status in the structure.
+
+/* The final status written by the device */
+#define VIRTIO_I2C_MSG_OK    0
+#define VIRTIO_I2C_MSG_ERR    1
+
+You can see an example in virtio_blk.
+
+In the spec:
+
+struct virtio_blk_req {
+le32 type;
+le32 reserved;
+le64 sector;
+u8 data[];
+u8 status;
+};
+
+In virtio_blk.h, there is only following definitions.
+
+#define VIRTIO_BLK_S_OK        0
+#define VIRTIO_BLK_S_IOERR    1
+#define VIRTIO_BLK_S_UNSUPP    2
+
+Thanks.
+
+
+
+
+--------------0D99ECCE2C2D8963B2CCD197
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2020/10/10 11:14, Jason Wang wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:958b69c3-0321-d5cb-4c12-702795925583@redhat.com">
+      <br>
+      <blockquote type="cite">+
+        <br>
+        +        virtqueue_kick(vq);
+        <br>
+        +
+        <br>
+        +        time_left =
+        wait_for_completion_timeout(&amp;vi-&gt;completion,
+        adap-&gt;timeout);
+        <br>
+        +        if (!time_left) {
+        <br>
+        +            dev_err(&amp;adap-&gt;dev, "msg[%d]: addr=0x%x
+        timeout.\n", i, msgs[i].addr);
+        <br>
+        +            break;
+        <br>
+        +        }
+        <br>
+      </blockquote>
+      <br>
+      <br>
+      You don't set error number here. Is this intended?
+      <br>
+      <br>
+      And using a timeout here is not good, and if the request is
+      finished just after the timeout, in the next xfer you may hit the
+      following check.
+      <br>
+      <br>
+      It's better to use either interrupt here.
+      <br>
+      <br>
+    </blockquote>
+    Could you check the I2C drivers in the kernel ? The
+    "wait_for_completion_timeout" mechanism<br>
+    is commonly used by I2C bus drivers in their
+    i2c_algorithm.master_xfer.<br>
+    <p><br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:958b69c3-0321-d5cb-4c12-702795925583@redhat.com">
+      <br>
+      <blockquote type="cite">+
+        <br>
+        +        vmsg = (struct virtio_i2c_msg *)virtqueue_get_buf(vq,
+        &amp;len);
+        <br>
+        +        /* vmsg should point to the same address with
+        &amp;vi-&gt;vmsg */
+        <br>
+        +        if ((!vmsg) || (vmsg != &amp;vi-&gt;vmsg)) {
+        <br>
+        +            dev_err(&amp;adap-&gt;dev, "msg[%d]: addr=0x%x
+        virtqueue error.\n",
+        <br>
+        +                i, msgs[i].addr);
+        <br>
+        +            break;
+        <br>
+        +        }
+        <br>
+      </blockquote>
+      <br>
+      <br>
+      So I think we can remove this check. Consider only one descriptor
+      will be used at most, unless there's a bug in the device (and no
+      other driver to the similar check), we should not hit this.
+      <br>
+      <br>
+      Btw, as I replied in the previous version, the device should be
+      cacpable of dealing of a batch of requests through the virtqueue,
+      otherwise it's meaningless to use a queue here.
+      <br>
+      <br>
+    </blockquote>
+    We should not assume there is no bug in the device. I don't think we
+    can remove this check if we want our code to be robust. <br>
+    As I said, currently, we are using the virtqueue to send the msg one
+    by one to the backend. The mechanism is described in the spec.
+    <p>Thanks.<br>
+    </p>
+    <p><br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:958b69c3-0321-d5cb-4c12-702795925583@redhat.com">
+      <br>
+      <blockquote type="cite">+
+        <br>
+        <br>
+        +
+        <br>
+        +#ifndef _UAPI_LINUX_VIRTIO_I2C_H
+        <br>
+        +#define _UAPI_LINUX_VIRTIO_I2C_H
+        <br>
+        +
+        <br>
+        +#include &lt;linux/types.h&gt;
+        <br>
+        +#include &lt;linux/virtio_ids.h&gt;
+        <br>
+        +#include &lt;linux/virtio_config.h&gt;
+        <br>
+        +
+        <br>
+        +/**
+        <br>
+        + * struct virtio_i2c_hdr - the virtio I2C message header
+        structure
+        <br>
+        + * @addr: i2c_msg addr, the slave address
+        <br>
+        + * @flags: i2c_msg flags
+        <br>
+        + * @len: i2c_msg len
+        <br>
+        + */
+        <br>
+        +struct virtio_i2c_hdr {
+        <br>
+        +    __le16 addr;
+        <br>
+        +    __le16 flags;
+        <br>
+        +    __le16 len;
+        <br>
+        +};
+        <br>
+      </blockquote>
+      <br>
+      <br>
+      I'm afraid this is not complete. E.g the status is missed.
+      <br>
+      <br>
+      I suspect what virtio-scsi use is better. Which split the in from
+      the out instead of reusing the same buffer. And it can ease the
+      uAPI header export.
+      <br>
+      <br>
+      Thanks
+      <br>
+      <br>
+      <br>
+    </blockquote>
+    <p><br>
+      I think following definition in uAPI for the status is enough.<br>
+      There is no need to provide a "u8" status in the structure.<br>
+    </p>
+    <p>/* The final status written by the device */<br>
+      #define VIRTIO_I2C_MSG_OK    0<br>
+      #define VIRTIO_I2C_MSG_ERR    1</p>
+    <p>You can see an example in virtio_blk.</p>
+    <p>In the spec:</p>
+    <p><span class="fontstyle0"><span class="fontstyle0">struct
+          virtio_blk_req {<br>
+          le32 type;<br>
+          le32 reserved;<br>
+          le64 sector;<br>
+          u8 data[];<br>
+          u8 status;<br>
+          };</span></span></p>
+    <p><span class="fontstyle0"><span class="fontstyle0">In
+          virtio_blk.h, there is only following </span></span><span
+        class="fontstyle0"><span class="fontstyle0">definitions. </span></span></p>
+    <p><span class="fontstyle0"><span class="fontstyle0">#define
+          VIRTIO_BLK_S_OK        0<br>
+          #define VIRTIO_BLK_S_IOERR    1<br>
+          #define VIRTIO_BLK_S_UNSUPP    2</span></span><br>
+    </p>
+    <p>Thanks.</p>
+    <p><br>
+    </p>
+    <br>
+  </body>
+</html>
+
+--------------0D99ECCE2C2D8963B2CCD197--
+
+--===============6879545460114193807==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============6879545460114193807==--
