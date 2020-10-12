@@ -1,81 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AA0628C445
-	for <lists.virtualization@lfdr.de>; Mon, 12 Oct 2020 23:47:09 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CC6928C48A
+	for <lists.virtualization@lfdr.de>; Tue, 13 Oct 2020 00:12:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B3D6A86BBF;
-	Mon, 12 Oct 2020 21:47:07 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id C88DB274E3;
+	Mon, 12 Oct 2020 22:12:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MQjihqCRbFKz; Mon, 12 Oct 2020 21:47:06 +0000 (UTC)
+	with ESMTP id 02de+95uQHRp; Mon, 12 Oct 2020 22:12:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2E9FB86CC3;
-	Mon, 12 Oct 2020 21:47:06 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 565A82051A;
+	Mon, 12 Oct 2020 22:12:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0A663C0051;
-	Mon, 12 Oct 2020 21:47:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 332A1C0051;
+	Mon, 12 Oct 2020 22:12:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9D571C0051
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CD1C4C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 21:47:04 +0000 (UTC)
+ Mon, 12 Oct 2020 22:12:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8DC7886BBF
+ by silver.osuosl.org (Postfix) with ESMTP id AB09A20461
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 21:47:04 +0000 (UTC)
+ Mon, 12 Oct 2020 22:12:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id jpkj7oueGgCs
+ with ESMTP id YZdnjRhRTtjR
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 21:47:03 +0000 (UTC)
+ Mon, 12 Oct 2020 22:12:46 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
- [209.85.166.66])
- by whitealder.osuosl.org (Postfix) with ESMTPS id ADC4886BBE
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+ [209.85.166.68])
+ by silver.osuosl.org (Postfix) with ESMTPS id 5439220348
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 21:47:03 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id k6so19226937ior.2
+ Mon, 12 Oct 2020 22:12:46 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id 67so19341777iob.8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Oct 2020 14:47:03 -0700 (PDT)
+ Mon, 12 Oct 2020 15:12:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=h+F8apYj2Plr5dGtsp4Sn87icM0Gt/ZYiDUCGu5uXTA=;
- b=sYImlSuWHY/0f/jfbP/5+gVgcuqOAtQjUMnXMHXED5umjtE3LPslOSL7etCXMHOofP
- OCpa+2Sz42CDxUNykjUuDhWyt5vFu1VQ2q4mLxaSnkvM0BeJYsRX2yVIf69oRTE9T67o
- HRSY3XMYMW81cX286ZryHP3m3P/6kZ5ItQS7iUkubm19T+mUJGaXaGWyUNZdJtMqQgmL
- zSpO8tHo17YhrEljp7eptvHzAhmOHFf/hJvg/N0IaJaR5HkeDupWi3U14lijEclKn9qq
- MEwXGSOFD9iX8EgjReyyv2j7VDxt6rk3rEUTRz5EOYXiuvy4JelYIs/WB2F89KX73aVI
- Mp9w==
+ :cc; bh=6GZ3bPMspww2V+Ym0Qh7X9pkgI/IU9Jbpf7mzdOQus0=;
+ b=bfJwjbcd5PfSUcnm5iNF1BFJezZAWaVv8f4NLYg36c21R35nOTPcbZgGSeAP/BN0YC
+ lArmVDHnZ5+zDU4S/jy3q0/lyq09lQDp6In3uxoRVf9QoEhNVCbeiBmEhgiAO4kHrK9B
+ Hq7VkFhxWsNwnniQIXjcTgqlMxhRpcwPgURREjSvx7Dig8vrhb+HCgy+t8JOknv+TuVK
+ SodLcbqfh2IHcOVQgsCI818lRf3F8KtPBlaBu5QgIDdgNJy8y66xgSpWB+1KJX5j86Gr
+ jqyxILPzfhjLTUnkww//qeHeGNTskcutRLhjmBzZq5YXYW7gvwoYKQoL3WOILki0xJ0v
+ VmPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=h+F8apYj2Plr5dGtsp4Sn87icM0Gt/ZYiDUCGu5uXTA=;
- b=BSLMcJbPCW9DtYbEwcrvZ8eSD9tMWf0FpVq54v7+enTipYf7TlZ9xzk4cETGfxxIpC
- 2fU9qXw7eChJz8el5sN5FbiZdKp1V7wCB5xwBdoUK+I+RozA+6wVMuZI0q78Ml2dOp0M
- luIH73XfTMRi1teO/arQn4jUs/Auzi6LQDIh5NA3X4OD1cKXQyAistoz77Uiyuk/yFmj
- hpMl+bwc4Kk4MzYsOwTMuHCOa17D44nJtZ8K+UYL16KqjZ2JeHt4XpvLwLDxJDWGgfeZ
- 72V7IX8oDLCSJfTqbWxkiDAipUvdBkjGx/tfsfIDWXKut3eeXvd+JNbz/f5Kn2Q0MUOF
- 5mqw==
-X-Gm-Message-State: AOAM530fhsQLyoJSk9n5wAexBem9bbghevtDIzIVj7yiVejxiznb7rLS
- PJZeCAX7GXKW+NDl2etwUdm9odcFe3SUMeghLrE=
-X-Google-Smtp-Source: ABdhPJz+y8paHziZjzqkLnzbjCoDFkO2pq2nRDQe31YPP796UzqDxRo9ZdyGommWTE6TqDzyP+Mz9TyqV84szZZPZVw=
-X-Received: by 2002:a02:94cd:: with SMTP id x71mr20173978jah.124.1602539222864; 
- Mon, 12 Oct 2020 14:47:02 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=6GZ3bPMspww2V+Ym0Qh7X9pkgI/IU9Jbpf7mzdOQus0=;
+ b=o0ae/j0eyI3j52NkQrN2HshtANcY8xPqKAZki0S0v9pME/2CkWOJCYER5sVY/zLuYw
+ Vzyhl/oehLTxcDmf9xvzyKTJo6EuyEy9M83g/ZN2io68Kekz+dHXQ3DiMeNT6rg6E2Ro
+ aFXqfc5XKdpj3a5s81fU4L3ouXunGZrgAP3HkQR1ceS7YkM4m+3dujoXmzJRbPotm8rK
+ G4hirJL8rvTR0amRfEtj1G0CoTABIXe0ZMvCNHUIbO5Bj4R9Z+6T2Nzbx4zPx3GX9Fdz
+ s2h/FdNR8vSg5W0H7GEqiYNVOBix1KD24w53I5HeGOhmdYJYxzzIMSWuASm6qYqEdBQR
+ bdew==
+X-Gm-Message-State: AOAM531p0/3afbj8JmRIbDoqXU4t2Du7/XtJIy6Spec2H2cybB+8/Tj1
+ fVdRS+CnhaLA5gLJZOrCBshXqv52HHkT2tUlhIA=
+X-Google-Smtp-Source: ABdhPJyFc4ostSbxsypN1wGndFqR3BXYLSDhPoPs1FLqkP0180PUNcs1Rg52RMqlZV96tqBaaMtbT66MdYmI0R8n1vU=
+X-Received: by 2002:a05:6638:159:: with SMTP id
+ y25mr21753172jao.131.1602540765537; 
+ Mon, 12 Oct 2020 15:12:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20201010103854.66746-1-songmuchun@bytedance.com>
  <CAM_iQpUQXctR8UBNRP6td9dWTA705tP5fWKj4yZe9gOPTn_8oQ@mail.gmail.com>
  <CAMZfGtUhVx_iYY3bJZRY5s1PG0N1mCsYGS9Oku8cTqPiMDze-g@mail.gmail.com>
-In-Reply-To: <CAMZfGtUhVx_iYY3bJZRY5s1PG0N1mCsYGS9Oku8cTqPiMDze-g@mail.gmail.com>
+ <CANn89iKprp7WYeZy4RRO5jHykprnSCcVBc7Tk14Ui_MA9OK7Fg@mail.gmail.com>
+ <CAMZfGtXVKER_GM-wwqxrUshDzcEg9FkS3x_BaMTVyeqdYPGSkw@mail.gmail.com>
+ <9262ea44-fc3a-0b30-54dd-526e16df85d1@gmail.com>
+ <CAMZfGtVF6OjNuJFUExRMY1k-EaDS744=nKy6_a2cYdrJRncTgQ@mail.gmail.com>
+In-Reply-To: <CAMZfGtVF6OjNuJFUExRMY1k-EaDS744=nKy6_a2cYdrJRncTgQ@mail.gmail.com>
 From: Cong Wang <xiyou.wangcong@gmail.com>
-Date: Mon, 12 Oct 2020 14:46:51 -0700
-Message-ID: <CAM_iQpXLX1xXN02idk-yU1T=AGb9JmGiLkfRGCJOxjCw-OWpfQ@mail.gmail.com>
+Date: Mon, 12 Oct 2020 15:12:34 -0700
+Message-ID: <CAM_iQpUgy7MDka8A44U=pLGDOwqn8YhXMp8rgs8LCJBHb5DXYA@mail.gmail.com>
 Subject: Re: [External] Re: [PATCH] mm: proc: add Sock to /proc/meminfo
 To: Muchun Song <songmuchun@bytedance.com>
 Cc: Miaohe Lin <linmiaohe@huawei.com>, Feng Tang <feng.tang@intel.com>,
@@ -87,8 +91,9 @@ Cc: Miaohe Lin <linmiaohe@huawei.com>, Feng Tang <feng.tang@intel.com>,
  Michel Lespinasse <walken@google.com>, Will Deacon <will@kernel.org>,
  Steffen Klassert <steffen.klassert@secunet.com>, dave@stgolabs.net,
  Herbert Xu <herbert@gondor.apana.org.au>,
- Daniel Borkmann <daniel@iogearbox.net>, rafael@kernel.org, decui@microsoft.com,
- Peter Zijlstra <peterz@infradead.org>, Sami Tolvanen <samitolvanen@google.com>,
+ Eric Dumazet <eric.dumazet@gmail.com>, rafael@kernel.org,
+ Dexuan Cui <decui@microsoft.com>, Peter Zijlstra <peterz@infradead.org>,
+ Sami Tolvanen <samitolvanen@google.com>,
  Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>, Paolo Abeni <pabeni@redhat.com>,
  Alexey Dobriyan <adobriyan@gmail.com>, Pablo Neira Ayuso <pablo@netfilter.org>,
  "Eric W. Biederman" <ebiederm@xmission.com>, Kees Cook <keescook@chromium.org>,
@@ -97,6 +102,7 @@ Cc: Miaohe Lin <linmiaohe@huawei.com>, Feng Tang <feng.tang@intel.com>,
  virtualization@lists.linux-foundation.org, chenqiwu@xiaomi.com,
  Martin KaFai Lau <kafai@fb.com>, Jakub Sitnicki <jakub@cloudflare.com>,
  christophe.leroy@c-s.fr, Willem de Bruijn <willemb@google.com>,
+ Daniel Borkmann <daniel@iogearbox.net>,
  Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
  Greg KH <gregkh@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>,
  Florian Westphal <fw@strlen.de>, gustavoars@kernel.org,
@@ -116,68 +122,33 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gU3VuLCBPY3QgMTEsIDIwMjAgYXQgOToyMiBQTSBNdWNodW4gU29uZyA8c29uZ211Y2h1bkBi
-eXRlZGFuY2UuY29tPiB3cm90ZToKPgo+IE9uIE1vbiwgT2N0IDEyLCAyMDIwIGF0IDI6MzkgQU0g
-Q29uZyBXYW5nIDx4aXlvdS53YW5nY29uZ0BnbWFpbC5jb20+IHdyb3RlOgo+ID4KPiA+IE9uIFNh
-dCwgT2N0IDEwLCAyMDIwIGF0IDM6MzkgQU0gTXVjaHVuIFNvbmcgPHNvbmdtdWNodW5AYnl0ZWRh
-bmNlLmNvbT4gd3JvdGU6Cj4gPiA+Cj4gPiA+IFRoZSBhbW91bnQgb2YgbWVtb3J5IGFsbG9jYXRl
-ZCB0byBzb2NrZXRzIGJ1ZmZlciBjYW4gYmVjb21lIHNpZ25pZmljYW50Lgo+ID4gPiBIb3dldmVy
-LCB3ZSBkbyBub3QgZGlzcGxheSB0aGUgYW1vdW50IG9mIG1lbW9yeSBjb25zdW1lZCBieSBzb2Nr
-ZXRzCj4gPiA+IGJ1ZmZlci4gSW4gdGhpcyBjYXNlLCBrbm93aW5nIHdoZXJlIHRoZSBtZW1vcnkg
-aXMgY29uc3VtZWQgYnkgdGhlIGtlcm5lbAo+ID4KPiA+IFdlIGRvIGl0IHZpYSBgc3MgLW1gLiBJ
-cyBpdCBub3Qgc3VmZmljaWVudD8gQW5kIGlmIG5vdCwgd2h5IG5vdCBhZGRpbmcgaXQgdGhlcmUK
-PiA+IHJhdGhlciB0aGFuIC9wcm9jL21lbWluZm8/Cj4KPiBJZiB0aGUgc3lzdGVtIGhhcyBsaXR0
-bGUgZnJlZSBtZW1vcnksIHdlIGNhbiBrbm93IHdoZXJlIHRoZSBtZW1vcnkgaXMgdmlhCj4gL3By
-b2MvbWVtaW5mby4gSWYgYSBsb3Qgb2YgbWVtb3J5IGlzIGNvbnN1bWVkIGJ5IHNvY2tldCBidWZm
-ZXIsIHdlIGNhbm5vdAo+IGtub3cgaXQgd2hlbiB0aGUgU29jayBpcyBub3Qgc2hvd24gaW4gdGhl
-IC9wcm9jL21lbWluZm8uIElmIHRoZSB1bmF3YXJlIHVzZXIKPiBjYW4ndCB0aGluayBvZiB0aGUg
-c29ja2V0IGJ1ZmZlciwgbmF0dXJhbGx5IHRoZXkgd2lsbCBub3QgYHNzIC1tYC4gVGhlCj4gZW5k
-IHJlc3VsdAoKSW50ZXJlc3RpbmcsIHdlIGFscmVhZHkgaGF2ZSBhIGZldyBjb3VudGVycyByZWxh
-dGVkIHRvIHNvY2tldCBidWZmZXJzLAphcmUgeW91IHNheWluZyB0aGVzZSBhcmUgbm90IGFjY291
-bnRlZCBpbiAvcHJvYy9tZW1pbmZvIGVpdGhlcj8KSWYgeWVzLCB3aHkgYXJlIHBhZ2UgZnJhZ3Mg
-c28gc3BlY2lhbCBoZXJlPyBJZiBub3QsIHRoZXkgYXJlIG1vcmUKaW1wb3J0YW50IHRoYW4gcGFn
-ZSBmcmFncywgc28geW91IHByb2JhYmx5IHdhbnQgdG8gZGVhbCB3aXRoIHRoZW0KZmlyc3QuCgoK
-PiBpcyB0aGF0IHdlIHN0aWxsIGRvbuKAmXQga25vdyB3aGVyZSB0aGUgbWVtb3J5IGlzIGNvbnN1
-bWVkLiBBbmQgd2UgYWRkIHRoZQo+IFNvY2sgdG8gdGhlIC9wcm9jL21lbWluZm8ganVzdCBsaWtl
-IHRoZSBtZW1jZyBkb2VzKCdzb2NrJyBpdGVtIGluIHRoZSBjZ3JvdXAKPiB2MiBtZW1vcnkuc3Rh
-dCkuIFNvIEkgdGhpbmsgdGhhdCBhZGRpbmcgdG8gL3Byb2MvbWVtaW5mbyBpcyBzdWZmaWNpZW50
-LgoKSXQgbG9va3MgbGlrZSBhY3R1YWxseSB0aGUgc29ja2V0IHBhZ2UgZnJhZyBpcyBhbHJlYWR5
-IGFjY291bnRlZCwKZm9yIGV4YW1wbGUsIHRoZSB0Y3Bfc2VuZG1zZ19sb2NrZWQoKToKCiAgICAg
-ICAgICAgICAgICAgICAgICAgIGNvcHkgPSBtaW5fdChpbnQsIGNvcHksIHBmcmFnLT5zaXplIC0g
-cGZyYWctPm9mZnNldCk7CgogICAgICAgICAgICAgICAgICAgICAgICBpZiAoIXNrX3dtZW1fc2No
-ZWR1bGUoc2ssIGNvcHkpKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdvdG8gd2Fp
-dF9mb3JfbWVtb3J5OwoKCj4KPiA+Cj4gPiA+ICBzdGF0aWMgaW5saW5lIHZvaWQgX19za2JfZnJh
-Z191bnJlZihza2JfZnJhZ190ICpmcmFnKQo+ID4gPiAgewo+ID4gPiAtICAgICAgIHB1dF9wYWdl
-KHNrYl9mcmFnX3BhZ2UoZnJhZykpOwo+ID4gPiArICAgICAgIHN0cnVjdCBwYWdlICpwYWdlID0g
-c2tiX2ZyYWdfcGFnZShmcmFnKTsKPiA+ID4gKwo+ID4gPiArICAgICAgIGlmIChwdXRfcGFnZV90
-ZXN0emVybyhwYWdlKSkgewo+ID4gPiArICAgICAgICAgICAgICAgZGVjX3NvY2tfbm9kZV9wYWdl
-X3N0YXRlKHBhZ2UpOwo+ID4gPiArICAgICAgICAgICAgICAgX19wdXRfcGFnZShwYWdlKTsKPiA+
-ID4gKyAgICAgICB9Cj4gPiA+ICB9Cj4gPgo+ID4gWW91IG1peCBzb2NrZXQgcGFnZSBmcmFnIHdp
-dGggc2tiIGZyYWcgYXQgbGVhc3QsIG5vdCBzdXJlIHRoaXMgaXMgZXhhY3RseQo+ID4gd2hhdCB5
-b3Ugd2FudCwgYmVjYXVzZSBjbGVhcmx5IHNrYiBwYWdlIGZyYWdzIGFyZSBmcmVxdWVudGx5IHVz
-ZWQKPiA+IGJ5IG5ldHdvcmsgZHJpdmVycyByYXRoZXIgdGhhbiBzb2NrZXRzLgo+ID4KPiA+IEFs
-c28sIHdoaWNoIG9uZSBtYXRjaGVzIHRoaXMgZGVjX3NvY2tfbm9kZV9wYWdlX3N0YXRlKCk/IENs
-ZWFybHkKPiA+IG5vdCBza2JfZmlsbF9wYWdlX2Rlc2MoKSBvciBfX3NrYl9mcmFnX3JlZigpLgo+
-Cj4gWWVhaCwgd2UgY2FsbCBpbmNfc29ja19ub2RlX3BhZ2Vfc3RhdGUoKSBpbiB0aGUgc2tiX3Bh
-Z2VfZnJhZ19yZWZpbGwoKS4KCkhvdyBpcyBza2JfcGFnZV9mcmFnX3JlZmlsbCgpIHBvc3NpYmx5
-IHBhaXJlZCB3aXRoIF9fc2tiX2ZyYWdfdW5yZWYoKT8KCj4gU28gaWYgc29tZW9uZSBnZXRzIHRo
-ZSBwYWdlIHJldHVybmVkIGJ5IHNrYl9wYWdlX2ZyYWdfcmVmaWxsKCksIGl0IG11c3QKPiBwdXQg
-dGhlIHBhZ2UgdmlhIF9fc2tiX2ZyYWdfdW5yZWYoKS9za2JfZnJhZ191bnJlZigpLiBXZSB1c2Ug
-UEdfcHJpdmF0ZQo+IHRvIGluZGljYXRlIHRoYXQgd2UgbmVlZCB0byBkZWMgdGhlIG5vZGUgcGFn
-ZSBzdGF0ZSB3aGVuIHRoZSByZWZjb3VudCBvZgo+IHBhZ2UgcmVhY2hlcyB6ZXJvLgoKc2tiX3Bh
-Z2VfZnJhZ19yZWZpbGwoKSBpcyBjYWxsZWQgb24gZnJhZ3Mgbm90IHdpdGhpbiBhbiBza2IsIGZv
-ciBpbnN0YW5jZSwKc2tfcGFnZV9mcmFnX3JlZmlsbCgpIHVzZXMgaXQgZm9yIGEgcGVyLXNvY2tl
-dCBvciBwZXItcHJvY2VzcyBwYWdlIGZyYWcuCkJ1dCwgX19za2JfZnJhZ191bnJlZigpIGlzIHNw
-ZWNpZmljYWxseSB1c2VkIGZvciBza2IgZnJhZ3MsIHdoaWNoIGFyZQpzdXBwb3NlZCB0byBiZSBm
-aWxsZWQgYnkgc2tiX2ZpbGxfcGFnZV9kZXNjKCkgKHBhZ2UgaXMgYWxsb2NhdGVkIGJ5IGRyaXZl
-cikuCgpUaGV5IGFyZSBkaWZmZXJlbnQgdGhpbmdzIHlvdSBhcmUgbWl4aW5nIHRoZW0gdXAsIHdo
-aWNoIGxvb2tzIGNsZWFybHkKd3Jvbmcgb3IgYXQgbGVhc3QgbWlzbGVhZGluZy4KClRoYW5rcy4K
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6
-YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24u
-b3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3Zp
-cnR1YWxpemF0aW9u
+On Mon, Oct 12, 2020 at 2:53 AM Muchun Song <songmuchun@bytedance.com> wrote:
+> We are not complaining about TCP using too much memory, but how do
+> we know that TCP uses a lot of memory. When I firstly face this problem,
+> I do not know who uses the 25GB memory and it is not shown in the /proc/meminfo.
+> If we can know the amount memory of the socket buffer via /proc/meminfo, we
+> may not need to spend a lot of time troubleshooting this problem. Not everyone
+> knows that a lot of memory may be used here. But I believe many people
+> should know /proc/meminfo to confirm memory users.
+
+Well, I'd bet networking people know `ss -m` better than /proc/meminfo,
+generally speaking.
+
+The practice here is that if you want some networking-specific counters,
+add it to where networking people know better, that is, `ss -m` or /proc/net/...
+
+Or maybe the problem you described is not specific to networking at all,
+there must be some other places where pages are allocated but not charged.
+If so, adding a general mm counter in /proc/meminfo makes sense, but
+it won't be specific to networking.
+
+Thanks.
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
