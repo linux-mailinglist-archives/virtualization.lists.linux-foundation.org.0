@@ -1,72 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 556DD28EEA1
-	for <lists.virtualization@lfdr.de>; Thu, 15 Oct 2020 10:37:23 +0200 (CEST)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6993F28EECC
+	for <lists.virtualization@lfdr.de>; Thu, 15 Oct 2020 10:50:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 90DE5204FB;
-	Thu, 15 Oct 2020 08:37:21 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 299E586E57;
+	Thu, 15 Oct 2020 08:50:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id c3en+gqDT4DI; Thu, 15 Oct 2020 08:37:19 +0000 (UTC)
+	with ESMTP id 0SLoW4fOVKTI; Thu, 15 Oct 2020 08:50:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id CF8152E603;
-	Thu, 15 Oct 2020 08:37:18 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 21A4287458;
+	Thu, 15 Oct 2020 08:50:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A1CDAC0051;
-	Thu, 15 Oct 2020 08:37:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ECC65C0051;
+	Thu, 15 Oct 2020 08:50:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2EDD5C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E47DBC0051
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Oct 2020 08:37:17 +0000 (UTC)
+ Thu, 15 Oct 2020 08:50:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 10A242044F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id D2DA283509
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Oct 2020 08:37:17 +0000 (UTC)
+ Thu, 15 Oct 2020 08:50:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ACbBzCH3suQN
+ with ESMTP id vVvAwb7her54
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Oct 2020 08:37:16 +0000 (UTC)
+ Thu, 15 Oct 2020 08:50:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by silver.osuosl.org (Postfix) with ESMTPS id 3150820445
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6C76C8356D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Oct 2020 08:37:16 +0000 (UTC)
+ Thu, 15 Oct 2020 08:50:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1602751034;
+ s=mimecast20190719; t=1602751838;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=pO0ibnNrDLjDn1P7EsCwSJbYkhZUZwInicnNbMXQlaA=;
- b=G5RFNrKIIg4YMKqJSR5q+GoolcDVniQJkcfQfO5lY+zXDTuX3TMzzszbviIxECTeJrsnxI
- kyv1MEY32BkpmXOy1feZFiNtVHBv/rB20sPw/4ng/16nkLL09zvjJug0dVzdVSFkmCzfmw
- LBSkpaqQ4SkIRVIjFiPaEBfaQLei+d0=
+ bh=8g0dEJ4HjLmnMAQQi1r5OiIA7ugQGWhb4UgQjxmr0MY=;
+ b=JUjtrFvNIO5+om5o9tWlwIQtHN8gDLaJX9/GFekAxSJruYu/6qUG2DS27guo8R6A332FeY
+ AZL24lvgDoU57g/6/m7GEFvrDZzLpZfwPRpV1IPa8WChkwibAWnP7KsNYYOgiMK37WXfl3
+ nlAAxiPXB8ESPCL4uAb1n1ZrsVMmJds=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-545-WXa44SQ5OOuHOxandjBvYw-1; Thu, 15 Oct 2020 04:37:12 -0400
-X-MC-Unique: WXa44SQ5OOuHOxandjBvYw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ us-mta-457-QmxSiLYUMiaS3T7c_0bKaw-1; Thu, 15 Oct 2020 04:50:34 -0400
+X-MC-Unique: QmxSiLYUMiaS3T7c_0bKaw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 54230425D5;
- Thu, 15 Oct 2020 08:37:11 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 990B0190A3E4;
+ Thu, 15 Oct 2020 08:50:32 +0000 (UTC)
 Received: from [10.36.114.207] (ovpn-114-207.ams2.redhat.com [10.36.114.207])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 57F2F6EF71;
- Thu, 15 Oct 2020 08:37:06 +0000 (UTC)
-Subject: Re: [PATCH v1 06/29] virtio-mem: generalize virtio_mem_owned_mb()
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0865A100238E;
+ Thu, 15 Oct 2020 08:50:27 +0000 (UTC)
+Subject: Re: [PATCH v1 05/29] virtio-mem: generalize check for added memory
 To: Wei Yang <richard.weiyang@linux.alibaba.com>
 References: <20201012125323.17509-1-david@redhat.com>
- <20201012125323.17509-7-david@redhat.com>
- <20201015083234.GF86495@L-31X9LVDL-1304.local>
+ <20201012125323.17509-6-david@redhat.com>
+ <20201015082808.GE86495@L-31X9LVDL-1304.local>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -113,14 +113,14 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat GmbH
-Message-ID: <a36e7757-13c2-f84e-09a6-6db6516b9ba1@redhat.com>
-Date: Thu, 15 Oct 2020 10:37:04 +0200
+Message-ID: <994394f3-c16d-911c-c9fc-d2280f32e7b1@redhat.com>
+Date: Thu, 15 Oct 2020 10:50:27 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20201015083234.GF86495@L-31X9LVDL-1304.local>
+In-Reply-To: <20201015082808.GE86495@L-31X9LVDL-1304.local>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
  "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
@@ -141,40 +141,137 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 15.10.20 10:32, Wei Yang wrote:
-> On Mon, Oct 12, 2020 at 02:53:00PM +0200, David Hildenbrand wrote:
->> Avoid using memory block ids. Rename it to virtio_mem_contains_range().
+On 15.10.20 10:28, Wei Yang wrote:
+> On Mon, Oct 12, 2020 at 02:52:59PM +0200, David Hildenbrand wrote:
+>> Let's check by traversing busy system RAM resources instead, to avoid
+>> relying on memory block states.
+>>
+>> Don't use walk_system_ram_range(), as that works on pages and we want to
+>> use the bare addresses we have easily at hand.
 >>
 >> Cc: "Michael S. Tsirkin" <mst@redhat.com>
 >> Cc: Jason Wang <jasowang@redhat.com>
 >> Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 >> Signed-off-by: David Hildenbrand <david@redhat.com>
 >> ---
->> drivers/virtio/virtio_mem.c | 9 +++++----
->> 1 file changed, 5 insertions(+), 4 deletions(-)
+>> drivers/virtio/virtio_mem.c | 19 +++++++++++++++----
+>> 1 file changed, 15 insertions(+), 4 deletions(-)
 >>
 >> diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
->> index 6bbd1cfd10d3..821143db14fe 100644
+>> index b3eebac7191f..6bbd1cfd10d3 100644
 >> --- a/drivers/virtio/virtio_mem.c
 >> +++ b/drivers/virtio/virtio_mem.c
->> @@ -500,12 +500,13 @@ static bool virtio_mem_overlaps_range(struct virtio_mem *vm,
+>> @@ -1749,6 +1749,20 @@ static void virtio_mem_delete_resource(struct virtio_mem *vm)
+>> 	vm->parent_resource = NULL;
 >> }
 >>
->> /*
->> - * Test if a virtio-mem device owns a memory block. Can be called from
->> + * Test if a virtio-mem device contains a given range. Can be called from
->>  * (notifier) callbacks lockless.
->>  */
->> -static bool virtio_mem_owned_mb(struct virtio_mem *vm, unsigned long mb_id)
->> +static bool virtio_mem_contains_range(struct virtio_mem *vm, uint64_t start,
->> +				      uint64_t size)
+>> +static int virtio_mem_range_has_system_ram(struct resource *res, void *arg)
+>> +{
+>> +	return 1;
+>> +}
+>> +
+>> +static bool virtio_mem_has_memory_added(struct virtio_mem *vm)
+>> +{
+>> +	const unsigned long flags = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
+>> +
+>> +	return walk_iomem_res_desc(IORES_DESC_NONE, flags, vm->addr,
+>> +				   vm->addr + vm->region_size, NULL,
+>> +				   virtio_mem_range_has_system_ram) == 1;
+>> +}
+>> +
+>> static int virtio_mem_probe(struct virtio_device *vdev)
 >> {
->> -	return mb_id >= vm->first_mb_id && mb_id <= vm->last_mb_id;
->> +	return start >= vm->addr && start + size <= vm->addr + vm->region_size;
+>> 	struct virtio_mem *vm;
+>> @@ -1870,10 +1884,7 @@ static void virtio_mem_remove(struct virtio_device *vdev)
+>> 	 * the system. And there is no way to stop the driver/device from going
+>> 	 * away. Warn at least.
+>> 	 */
+>> -	if (vm->nb_mb_state[VIRTIO_MEM_MB_STATE_OFFLINE] ||
+>> -	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_OFFLINE_PARTIAL] ||
+>> -	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE] ||
+>> -	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL]) {
+>> +	if (virtio_mem_has_memory_added(vm)) {
 > 
-> Do we have some reason to do this change?
+> I am not sure this would be more efficient.
 
-Big Block Mode :)
+In general, no. However, this is a preparation for Big Block Mode, which
+won't have memory block states.
+
+(this path only triggers when unloading the driver - which most probably
+only ever happens during my testing ... :) and we don't really care
+about performance there)
+
+> 
+>> 		dev_warn(&vdev->dev, "device still has system memory added\n");
+>> 	} else {
+>> 		virtio_mem_delete_resource(vm);
+> 
+> BTW, I got one question during review.
+> 
+> Per my understanding, there are 4 states of a virtio memory block
+> 
+>   * OFFLINE[_PARTIAL]
+>   * ONLINE[_PARTIAL]
+> 
+> While, if my understanding is correct, those two offline states are transient.
+> If the required range is onlined, the state would be change to
+> ONLINE[_PARTIAL] respectively. If it is not, the state is reverted to UNUSED
+> or PLUGGED.
+
+Very right.
+
+> 
+> What I am lost is why you do virtio_mem_mb_remove() on OFFLINE_PARTIAL memory
+> block? Since we wait for the workqueue finish its job.
+
+That's an interesting corner case. Assume you have a 128MB memory block
+but only 64MB are plugged.
+
+As long as we have our online_pages callback in place, we can hinder the
+unplugged 64MB from getting exposed to the buddy
+(virtio_mem_online_page_cb()). However, once we unloaded the driver,
+this is no longer the case. If someone would online that memory block,
+we would expose unplugged memory to the buddy - very bad.
+
+So we have to remove these partially plugged, offline memory blocks when
+losing control over them.
+
+I tried to document that via:
+
+"After we unregistered our callbacks, user space can online partially
+plugged offline blocks. Make sure to remove them."
+
+> 
+> Also, during virtio_mem_remove(), we just handle OFFLINE_PARTIAL memory block.
+> How about memory block in other states? It is not necessary to remove
+> ONLINE[_PARTIAL] memroy blocks?
+
+Blocks that are fully plugged (ONLINE or OFFLINE) can get
+onlined/offlined without us having to care. Works fine - we only have to
+care about partially plugged blocks.
+
+While we *could* unplug OFFLINE blocks, there is no way we can
+deterministically offline+remove ONLINE blocks. So that memory has to
+stay, even after we unloaded the driver (similar to the dax/kmem driver).
+
+ONLINE_PARTIAL is already taken care of: it cannot get offlined anymore,
+as we still hold references to these struct pages
+(virtio_mem_set_fake_offline()), and as we no longer have the memory
+notifier in place, we can no longer agree to offline this memory (when
+going_offline).
+
+I tried to document that via
+
+"After we unregistered our callbacks, user space can no longer offline
+partially plugged online memory blocks. No need to worry about them."
+
+
+> 
+> Thanks in advance, since I may missed some concepts.
+
+(force) driver unloading is a complicated corner case.
+
+Thanks!
 
 -- 
 Thanks,
