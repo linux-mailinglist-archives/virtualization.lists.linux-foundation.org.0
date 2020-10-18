@@ -1,90 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 704EF2916F1
-	for <lists.virtualization@lfdr.de>; Sun, 18 Oct 2020 12:31:43 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A72B291718
+	for <lists.virtualization@lfdr.de>; Sun, 18 Oct 2020 13:03:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C10BD876F6;
-	Sun, 18 Oct 2020 10:31:41 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 60F0D8726A;
+	Sun, 18 Oct 2020 11:03:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xyY5PJg1WxMk; Sun, 18 Oct 2020 10:31:40 +0000 (UTC)
+	with ESMTP id GtpLGdusNa_i; Sun, 18 Oct 2020 11:03:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 8983687465;
-	Sun, 18 Oct 2020 10:31:40 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 77E7E87247;
+	Sun, 18 Oct 2020 11:03:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5BAF1C0051;
-	Sun, 18 Oct 2020 10:31:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 395A9C0051;
+	Sun, 18 Oct 2020 11:03:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 79268C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EB232C0051
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Oct 2020 10:31:38 +0000 (UTC)
+ Sun, 18 Oct 2020 11:03:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 659CA87269
+ by whitealder.osuosl.org (Postfix) with ESMTP id CFAB387601
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Oct 2020 10:31:38 +0000 (UTC)
+ Sun, 18 Oct 2020 11:03:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YQw-hW3K5p46
+ with ESMTP id LfLOly6hFj4Y
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Oct 2020 10:31:36 +0000 (UTC)
+ Sun, 18 Oct 2020 11:03:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 2F79887256
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id A808D875D5
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Oct 2020 10:31:36 +0000 (UTC)
+ Sun, 18 Oct 2020 11:03:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1603017094;
+ s=mimecast20190719; t=1603019006;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=Jmp8YCoG/WrNynJOk5e9pIS3/VMDiD36mwPrboLfjZc=;
- b=aXOupLf9eDr1vZfqnr8iwAB4s8yksuLdVRPOrNuGXs64cpyS8T9okfz3hAkCWVPAahFrtG
- YFypVn8oyvia+vGRahFq9KLblYjA3tqJLem0zkiKe87EUyDSLEBP/dwS/kUq1VfgaT1JgC
- iv4CMjVzZyYcjcKowJ5nDEdud/IY40M=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-160-WK9j2fOQMTGGLs0-NTtt5w-1; Sun, 18 Oct 2020 06:31:33 -0400
-X-MC-Unique: WK9j2fOQMTGGLs0-NTtt5w-1
-Received: by mail-wr1-f72.google.com with SMTP id t17so6021191wrm.13
+ bh=MJ6BzLjbDTsug3CqNe/ce+OSC+Izok5rhoFFYaIASks=;
+ b=B0qFrI6Z9rCItmzo9cPb1ltzwUA9x/juGIf0KoxXYPwkBvd2cFeTt7sZLGFSSDa19Q2NbT
+ i1EKg+GpYDLwfo4475DBkxXD+T3NnDnJle0wt/qrXiQc3XRc0nPaIEzyGJFotTWpNuCfjY
+ zTaXsyHtJy5K3NRguJuozGyLRmiq/Zc=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-289-olrya89kP2CSpbjkTjH7kw-1; Sun, 18 Oct 2020 07:03:25 -0400
+X-MC-Unique: olrya89kP2CSpbjkTjH7kw-1
+Received: by mail-wr1-f71.google.com with SMTP id 33so5982404wrf.22
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Oct 2020 03:31:33 -0700 (PDT)
+ Sun, 18 Oct 2020 04:03:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
  :content-disposition;
- bh=Jmp8YCoG/WrNynJOk5e9pIS3/VMDiD36mwPrboLfjZc=;
- b=TMwOjMIRIcmXKxLlM1k3z7giDBGBFX5CGJTKq6nCIh7mbevUbKocb9v4KsTt/EhOeJ
- f2F+WugmC4mpsEX0v98DOCD6gxz/Bgb6Jq1GuL+OGimuqnnW1sF/oa+7weAdbFw64YBY
- ou1sDXpdN7gDqBU5gkDm+G4wmgED0Oo76yRUgH/V2nmssxkYKmFWZCFPEw2eZgEWk193
- Nuyz7AFt7y/jHGHlPgbAqiwq+IABBDcYig3ErTnCj3lOYeIz5J2aB1kOIyjvfjFCA6NL
- jli429t05v8BMXO1OK52QtCLuXQBJaOm8C4NhmOT5U+oHL6LIp3qH6rDIpGwJEC/Nea2
- o7fA==
-X-Gm-Message-State: AOAM532MKNhLHBW5tgL0h6tpLvNt3JGrXYzS5tM8POMhx0Hf/S7WWD+x
- uObwqF8ifaQJ5qoeUP3gQtlFWVYQmP1zTi/A6PKPLntQD5EPde5dMTVXKGOuw94Xn/CUjFSgoOR
- fMLAIdlWqPs3VH7CS8De/9HR+2JN3LFnIDDwxMPPHdw==
-X-Received: by 2002:adf:fc83:: with SMTP id g3mr14230132wrr.200.1603017089692; 
- Sun, 18 Oct 2020 03:31:29 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzFgBYW13xTtas95AM+GAmL+tmojRa7wsy3ERg/R+Ej3Bo2glQw7VO5gvpuElbr4/ySC8xwhw==
-X-Received: by 2002:adf:fc83:: with SMTP id g3mr14230106wrr.200.1603017089391; 
- Sun, 18 Oct 2020 03:31:29 -0700 (PDT)
+ bh=MJ6BzLjbDTsug3CqNe/ce+OSC+Izok5rhoFFYaIASks=;
+ b=T1oNEaUWdbHnjWzs1izpTTGrjSKvI77pqCcVqozvxKDLQrhV+UG0902ID5eciKhopd
+ Mms42f0zj4tcNPPnDFEMrDCESV16aNURDkE42CblW7N2/tnerjIXvBx/G5Zg0QAYVmUi
+ 2i9ScNpvvPehA5Jq0ZxKl1nOSmKrou1pEh0Fh6FxGUzoyA3ZiPAJ7vroHFoxMPRg9asA
+ hvmqOcwowNmwZ/Jt+EIYmyFjOqofdJ1b+DtVsrvM/diiEzfvOil46vG9/sETB2r/v+9h
+ arRHIrZ5ni6Hul/GnJRBfwLmiqRukSX4rBAw5wBI2E6INWuj7CYmcGGUHNkPOhSS/lLr
+ 4U1g==
+X-Gm-Message-State: AOAM5334cvrasBF5KdKpHCO3J+UdtAAfpOYmnwP3OnMzfO6DvZ8uysDi
+ xk1jP6ICd2d/6Fo7qfr+rZOrTRIO9NQiLjWdAZqOjopJVRc7xbdq7uN5qMFwGICSF7WJ3FYNoX9
+ nFcyIlzhYNlmsSi16Pv/NDvKbLGJMOkCdj0/EgFCYfw==
+X-Received: by 2002:a1c:7518:: with SMTP id o24mr12923411wmc.137.1603018635190; 
+ Sun, 18 Oct 2020 03:57:15 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyhBChsRcKi1HmmVluBqKWN4RWPYG/xwhYJgweQn6/dfxmiCpXiUvFB+vKqcsTdGqpZVszT3A==
+X-Received: by 2002:a1c:7518:: with SMTP id o24mr12923391wmc.137.1603018634956; 
+ Sun, 18 Oct 2020 03:57:14 -0700 (PDT)
 Received: from redhat.com (bzq-79-176-118-93.red.bezeqint.net. [79.176.118.93])
- by smtp.gmail.com with ESMTPSA id v6sm6947001wrp.69.2020.10.18.03.31.27
+ by smtp.gmail.com with ESMTPSA id h3sm13108268wrw.78.2020.10.18.03.57.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Oct 2020 03:31:28 -0700 (PDT)
-Date: Sun, 18 Oct 2020 06:31:26 -0400
+ Sun, 18 Oct 2020 03:57:14 -0700 (PDT)
+Date: Sun, 18 Oct 2020 06:57:10 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH] Revert "virtio-net: ethtool configurable RXCSUM"
+Subject: [PATCH net repost] Revert "virtio-net: ethtool configurable RXCSUM"
 Message-ID: <20201018103122.454967-1-mst@redhat.com>
 MIME-Version: 1.0
 X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
-X-Mutt-Fcc: =sent
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -209,6 +208,10 @@ Fixes: 3618ad2a7c0e7 ("virtio-net: ethtool configurable RXCSUM")
 Reported-by: kernel test robot <lkp@intel.com>
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
+
+Reposting with net tag
+
+
  drivers/net/virtio_net.c | 50 +++++++++++-----------------------------
  1 file changed, 13 insertions(+), 37 deletions(-)
 
