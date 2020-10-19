@@ -1,84 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6510C292E96
-	for <lists.virtualization@lfdr.de>; Mon, 19 Oct 2020 21:42:33 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78D2129320B
+	for <lists.virtualization@lfdr.de>; Tue, 20 Oct 2020 01:37:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 5A38C87476;
-	Mon, 19 Oct 2020 19:42:31 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id DDE152E0F9;
+	Mon, 19 Oct 2020 23:37:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pTtPf-GOcEwV; Mon, 19 Oct 2020 19:42:30 +0000 (UTC)
+	with ESMTP id YsDKIsQ76XOR; Mon, 19 Oct 2020 23:37:02 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A498B87480;
-	Mon, 19 Oct 2020 19:42:30 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id EC84E2E152;
+	Mon, 19 Oct 2020 23:37:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8073FC0051;
-	Mon, 19 Oct 2020 19:42:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BB091C0051;
+	Mon, 19 Oct 2020 23:37:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 073F0C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6864BC0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Oct 2020 19:42:29 +0000 (UTC)
+ Mon, 19 Oct 2020 23:37:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id F2AF886A9D
+ by whitealder.osuosl.org (Postfix) with ESMTP id 6319C86E98
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Oct 2020 19:42:28 +0000 (UTC)
+ Mon, 19 Oct 2020 23:37:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kSG0QbdNv5xW
+ with ESMTP id F0m5uBPUNDSy
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Oct 2020 19:42:27 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
- [209.85.214.196])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 9981D86A95
+ Mon, 19 Oct 2020 23:36:59 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+ [209.85.210.194])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id BA0A486B88
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Oct 2020 19:42:27 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id bf6so330450plb.4
+ Mon, 19 Oct 2020 23:36:59 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id j18so37592pfa.0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Oct 2020 12:42:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=no6WOfZDuAXhTDfVia9Vunkz4L7BthY0F8m0jo4//vs=;
- b=vqIoQqfPtCUD7ceHGEmbvFqqUZd/9dE0IpLQQ4p4nyONBXQMSFxBG5OzgCaJfT8eu8
- Ez0DMwUntzcU9c2WJzs/WqMvxG3bzlj0mstlcz+E4fW0gt02sZNjrL1HdU6SHVwmCE5R
- WFeHYzJRJuPZspqj8YJ2wlUmUN4Mc8MNrI6kLekCJ8yejCepkvkgEUeb7TbpDze1NnEh
- TP2SjhqdakZDUedR00qYjd62k5W2m7FgfHIpcuS/rhjqMGxVL3Apppn+UDRO/ftdIfoh
- duvoKavmXDacw9mysFV+xdp1Tg4QxCPiDxNSeCeZyO+34Y2S1kYSdX61NJzSKhmGsX5T
- HLpA==
+ Mon, 19 Oct 2020 16:36:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=KZcwJitFojA7RhzeD/UU8gbzehCBdvf6g5ia0ZYCrq4=;
+ b=R0THCPfeT+NjRv5n7wRuWr3+iQQVH5mYQugrcFEorv7jMlZOJpq4gWO8x2sltRZ1S3
+ 8+uXkfK+0xraFRPc7RLEyC+L1Eqn+lwfgcQ60rCu3Ir6T0iqCUlHxkXPI8IxQxljNihW
+ MxA7dERE+Fo0B6yhfEPLGm6gbjuMrGvt0ee7i4ozPAa6C0OwTV1SJBaz+sj8rzyyiIix
+ DQ1LhxNguLsVQ2r9xWcmCur9QDHoeimXQtC/UVpN+4Yl8O9ZbpYKUwlrKFZtzYHwjpgZ
+ iC+kREvCZvwgmOBCIm7DmgxG6/6ncKrp6QDCnbxkp/qIzrhuMyauJsg53LWTp//HSslk
+ z+3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=no6WOfZDuAXhTDfVia9Vunkz4L7BthY0F8m0jo4//vs=;
- b=AypW1E6/0YKonUxuyLjfXnECx76XaunJ5bcRNY6IBaqway3JaopOC96TjwB58MoE/F
- YFTKpe42SXJwyynymGOC+zC5Ivq3aJigZNdBSQu33SNNkHCPGnetmOCPbphX85b1rfH3
- BwhTI+CG8Txmo4XkjTpFoRs5j2RA1FvxZZCNOXFJp4jbQeId+JRzS+/gkJBuIxin+dRo
- +fuSBXUGXp6Wy2SFNJPEL1b143/3NIi0QAJmtUdXcOV12DhtoVPJGjmrgwHjAidPi8o/
- tAIX10RB/EpezSkpJknHWVLrkISWUXIPaEvdS0ZK0IYnbe9AIku61slBax4ST8Z2pvXP
- lr2Q==
-X-Gm-Message-State: AOAM5309KSDt2TmGG3AE5GRzpUV+mMS6XHB59WtIRAlA9/HhFdul/Daj
- GWfF6QmOAB40yYIEDN3rlMWUPSoqDvAI55MWa3Yemw==
-X-Google-Smtp-Source: ABdhPJxy4K+2uRaBuhFTeTSlHPetqrP1uAAP7dKvm6UBZz10SCa23PJUxb54E5JJmlle9J/y892Qp+TTrKvO4GeNXIk=
-X-Received: by 2002:a17:90a:ee87:: with SMTP id i7mr921476pjz.25.1603136546933; 
- Mon, 19 Oct 2020 12:42:26 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=KZcwJitFojA7RhzeD/UU8gbzehCBdvf6g5ia0ZYCrq4=;
+ b=nEjLCm9LX09itOBFq9XDHC90fuZXlCOowDj1kVlPkv2S4e8IfpRAaTw77HOT7JriZC
+ LnJYdmoXBg9nQwMvxIeuAGhP63wp9z3K5hmmMUscRo5poJl9dAo4419nouP8ww3tkWrW
+ kbXWGjAcEqDM8TawS28eCnuV4P/pkMOJnBRpQyl6qC1iwE2iO27nkH+I+9POA83/KFYD
+ ltWjl/9Kh/ZeEwQq1G9HYUyE/pAHGCIWxGY/9KOE/jxJL9fmkGisfwDhNPPTl/9A07YK
+ zPIBfvnRRh8GgD8425BBJGUHhMnLog/GcsqKK4uCLT1Rap+HGN+UCea0/MFQmBehAaP2
+ 6rUQ==
+X-Gm-Message-State: AOAM532YuzmzO6feMep961KaN4lECj1URPDa96ECrkLcCFRT5TCH2wsI
+ T6IU9EN2Ya+9B/5rHKyDaHlMn7sJuPyqkA==
+X-Google-Smtp-Source: ABdhPJwE/qhLAedndnNRaUrUDMs331Onaq8Iz+VDEVRJN+4h4B5ckC67pNXDnvS9MRF/DxLJjNlnIQ==
+X-Received: by 2002:a6b:5019:: with SMTP id e25mr44377iob.123.1603148748578;
+ Mon, 19 Oct 2020 16:05:48 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-156-34-48-30.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [156.34.48.30])
+ by smtp.gmail.com with ESMTPSA id u8sm7938ilm.36.2020.10.19.16.05.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Oct 2020 16:05:47 -0700 (PDT)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1kUeDq-002hRf-LL; Mon, 19 Oct 2020 20:05:46 -0300
+Date: Mon, 19 Oct 2020 20:05:46 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Nick Desaulniers <ndesaulniers@google.com>
+Subject: Re: [RFC] treewide: cleanup unreachable breaks
+Message-ID: <20201019230546.GH36674@ziepe.ca>
 References: <20201017160928.12698-1-trix@redhat.com>
  <20201018054332.GB593954@kroah.com>
-In-Reply-To: <20201018054332.GB593954@kroah.com>
-Date: Mon, 19 Oct 2020 12:42:15 -0700
-Message-ID: <CAKwvOdkR_Ttfo7_JKUiZFVqr=Uh=4b05KCPCSuzwk=zaWtA2_Q@mail.gmail.com>
-Subject: Re: [RFC] treewide: cleanup unreachable breaks
-To: Tom Rix <trix@redhat.com>
+ <CAKwvOdkR_Ttfo7_JKUiZFVqr=Uh=4b05KCPCSuzwk=zaWtA2_Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAKwvOdkR_Ttfo7_JKUiZFVqr=Uh=4b05KCPCSuzwk=zaWtA2_Q@mail.gmail.com>
 Cc: alsa-devel@alsa-project.org,
  clang-built-linux <clang-built-linux@googlegroups.com>,
  Greg KH <gregkh@linuxfoundation.org>, linux-iio@vger.kernel.org,
- nouveau@lists.freedesktop.org, storagedev@microchip.com,
+ Tom Rix <trix@redhat.com>, storagedev@microchip.com, linux-pci@vger.kernel.org,
  dri-devel <dri-devel@lists.freedesktop.org>,
  virtualization@lists.linux-foundation.org, keyrings@vger.kernel.org,
  linux-mtd@lists.infradead.org, ath10k@lists.infradead.org,
@@ -88,7 +100,7 @@ Cc: alsa-devel@alsa-project.org,
  linux-nvdimm <linux-nvdimm@lists.01.org>,
  amd-gfx list <amd-gfx@lists.freedesktop.org>, linux-acpi@vger.kernel.org,
  intel-wired-lan@lists.osuosl.org, industrypack-devel@lists.sourceforge.net,
- linux-pci@vger.kernel.org, spice-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
  MPT-FusionLinux.pdl@broadcom.com, linux-media@vger.kernel.org,
  linux-serial@vger.kernel.org, linux-nfc@lists.01.org, linux-pm@vger.kernel.org,
  linux-can@vger.kernel.org, linux-block@vger.kernel.org,
@@ -114,61 +126,44 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Nick Desaulniers via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Nick Desaulniers <ndesaulniers@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sat, Oct 17, 2020 at 10:43 PM Greg KH <gregkh@linuxfoundation.org> wrote:
->
-> On Sat, Oct 17, 2020 at 09:09:28AM -0700, trix@redhat.com wrote:
-> > From: Tom Rix <trix@redhat.com>
+On Mon, Oct 19, 2020 at 12:42:15PM -0700, Nick Desaulniers wrote:
+> On Sat, Oct 17, 2020 at 10:43 PM Greg KH <gregkh@linuxfoundation.org> wrote:
 > >
-> > This is a upcoming change to clean up a new warning treewide.
-> > I am wondering if the change could be one mega patch (see below) or
-> > normal patch per file about 100 patches or somewhere half way by collecting
-> > early acks.
->
-> Please break it up into one-patch-per-subsystem, like normal, and get it
-> merged that way.
->
-> Sending us a patch, without even a diffstat to review, isn't going to
-> get you very far...
+> > On Sat, Oct 17, 2020 at 09:09:28AM -0700, trix@redhat.com wrote:
+> > > From: Tom Rix <trix@redhat.com>
+> > >
+> > > This is a upcoming change to clean up a new warning treewide.
+> > > I am wondering if the change could be one mega patch (see below) or
+> > > normal patch per file about 100 patches or somewhere half way by collecting
+> > > early acks.
+> >
+> > Please break it up into one-patch-per-subsystem, like normal, and get it
+> > merged that way.
+> >
+> > Sending us a patch, without even a diffstat to review, isn't going to
+> > get you very far...
+> 
+> Tom,
+> If you're able to automate this cleanup, I suggest checking in a
+> script that can be run on a directory.  Then for each subsystem you
+> can say in your commit "I ran scripts/fix_whatever.py on this subdir."
+>  Then others can help you drive the tree wide cleanup.  Then we can
+> enable -Wunreachable-code-break either by default, or W=2 right now
+> might be a good idea.
 
-Tom,
-If you're able to automate this cleanup, I suggest checking in a
-script that can be run on a directory.  Then for each subsystem you
-can say in your commit "I ran scripts/fix_whatever.py on this subdir."
- Then others can help you drive the tree wide cleanup.  Then we can
-enable -Wunreachable-code-break either by default, or W=2 right now
-might be a good idea.
+I remember using clang-modernize in the past to fix issues very
+similar to this, if clang machinery can generate the warning, can't
+something like clang-tidy directly generate the patch?
 
-Ah, George (gbiv@, cc'ed), did an analysis recently of
-`-Wunreachable-code-loop-increment`, `-Wunreachable-code-break`, and
-`-Wunreachable-code-return` for Android userspace.  From the review:
-```
-Spoilers: of these, it seems useful to turn on
--Wunreachable-code-loop-increment and -Wunreachable-code-return by
-default for Android
-...
-While these conventions about always having break arguably became
-obsolete when we enabled -Wfallthrough, my sample turned up zero
-potential bugs caught by this warning, and we'd need to put a lot of
-effort into getting a clean tree. So this warning doesn't seem to be
-worth it.
-```
-Looks like there's an order of magnitude of `-Wunreachable-code-break`
-than the other two.
+You can send me a patch for drivers/infiniband/* as well
 
-We probably should add all 3 to W=2 builds (wrapped in cc-option).
-I've filed https://github.com/ClangBuiltLinux/linux/issues/1180 to
-follow up on.
--- 
 Thanks,
-~Nick Desaulniers
+Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
