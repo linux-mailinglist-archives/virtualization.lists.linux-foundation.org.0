@@ -1,184 +1,109 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06C162938ED
-	for <lists.virtualization@lfdr.de>; Tue, 20 Oct 2020 12:11:52 +0200 (CEST)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A875B293EDF
+	for <lists.virtualization@lfdr.de>; Tue, 20 Oct 2020 16:39:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B34C987258;
-	Tue, 20 Oct 2020 10:11:50 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id ED29C2041F;
+	Tue, 20 Oct 2020 14:39:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7tg9iJ00IlyE; Tue, 20 Oct 2020 10:11:49 +0000 (UTC)
+	with ESMTP id sSdJ0xIblLac; Tue, 20 Oct 2020 14:39:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 77FB98725D;
-	Tue, 20 Oct 2020 10:11:49 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 9913020413;
+	Tue, 20 Oct 2020 14:39:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 48191C0891;
-	Tue, 20 Oct 2020 10:11:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6ED99C0051;
+	Tue, 20 Oct 2020 14:39:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6E6D7C0052
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 15700C0051
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Oct 2020 10:11:47 +0000 (UTC)
+ Tue, 20 Oct 2020 14:39:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 5BDBA87258
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 02F3185BD1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Oct 2020 10:11:47 +0000 (UTC)
+ Tue, 20 Oct 2020 14:39:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3aqV91Ew33QK
+ with ESMTP id Q2meNV1y4UEn
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Oct 2020 10:11:46 +0000 (UTC)
-X-Greylist: delayed 00:35:24 by SQLgrey-1.7.6
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 1C8C687256
+ Tue, 20 Oct 2020 14:39:11 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 93B8D85B3D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Oct 2020 10:11:46 +0000 (UTC)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 09K9XZtl125605; Tue, 20 Oct 2020 05:35:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=subject : to : cc :
- references : from : message-id : date : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=pp1;
- bh=IE4tSXNgZJ/A/OkRNfld13XIrViGk4gj+u3fpAw7zwQ=;
- b=pA5FpX/SYFNG/j4PAa+nQoVumZiyGb3JF90uyEIknSgtd12LVxc04HsJI9owM/yssY5r
- FjKCGGXswJSADXtQhevOFhsag0y+6qhwG7rA0L1AA7/x6kzLfOzbp77Kd/dTjqmI3xa6
- GIkg4ISNyPriW1nYiPSlQO8JsDe5ysRFgavViGKLjd9jN3shFUq1pbTNNKng6/1yP9lP
- p4BGaYoYZ+StGxPgu1VxDCACzmY5L3BpN5nRhEhU25EH7SRFelnVkXVYdX6OQt80B3EZ
- gtnXDjCT2EBSFzk/wxtQSB41XU6HNDr4sGRekg2HbZcNiUCSBhRMKdNw6Ja/r3V8pgdl kw== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 349vw0h2rk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 20 Oct 2020 05:35:43 -0400
-Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 09K9Xh4u126306;
- Tue, 20 Oct 2020 05:35:42 -0400
-Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.102])
- by mx0a-001b2d01.pphosted.com with ESMTP id 349vw0h2p0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 20 Oct 2020 05:35:42 -0400
-Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
- by ppma06ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 09K9RkDC007087;
- Tue, 20 Oct 2020 09:35:39 GMT
-Received: from b06cxnps3075.portsmouth.uk.ibm.com
- (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
- by ppma06ams.nl.ibm.com with ESMTP id 347qvhb2hf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 20 Oct 2020 09:35:39 +0000
-Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
- [9.149.105.61])
- by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 09K9ZbfV27001324
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 20 Oct 2020 09:35:37 GMT
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2E3DD11C04A;
- Tue, 20 Oct 2020 09:35:37 +0000 (GMT)
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id CEF2C11C050;
- Tue, 20 Oct 2020 09:35:35 +0000 (GMT)
-Received: from oc7455500831.ibm.com (unknown [9.145.169.37])
- by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue, 20 Oct 2020 09:35:35 +0000 (GMT)
-Subject: Re: [PATCH] drivers/virt: vmgenid: add vm generation id driver
-To: Alexander Graf <graf@amazon.de>, "Jason A. Donenfeld" <Jason@zx2c4.com>,
- Jann Horn <jannh@google.com>
-References: <788878CE-2578-4991-A5A6-669DCABAC2F2@amazon.com>
- <CAG48ez0EanBvDyfthe+hAP0OC8iGLNSq2e5wJVz-=ENNGF97_w@mail.gmail.com>
- <20201017033606.GA14014@1wt.eu>
- <CAG48ez0x2S9XuCrANAQbXNi8Jjwm822-fnQSmr-Zr07JgrEs1g@mail.gmail.com>
- <6CC3DB03-27BA-4F5E-8ADA-BE605D83A85C@amazon.com>
- <CAG48ez1ZtvjOs2CEq8-EMosPCd_o7WQ3Mz_+1mDe7OrH2arxFA@mail.gmail.com>
- <20201017053712.GA14105@1wt.eu>
- <CAG48ez1h0ynXfGap_KiHiPVTfcB8NBQJ-2dnj08ZNfuhrW0jWA@mail.gmail.com>
- <20201017064442.GA14117@1wt.eu>
- <CAG48ez3pXLC+eqAXDCniM0a+5yP2XJODDkZqiUTZUOttCE_LbA@mail.gmail.com>
- <CAHmME9qHGSF8w3DoyCP+ud_N0MAJ5_8zsUWx=rxQB1mFnGcu9w@mail.gmail.com>
- <aacdff7a-2af1-4f46-6ab2-2a9d5b865d35@amazon.de>
-From: Christian Borntraeger <borntraeger@de.ibm.com>
-Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
- xsFNBE6cPPgBEAC2VpALY0UJjGmgAmavkL/iAdqul2/F9ONz42K6NrwmT+SI9CylKHIX+fdf
- J34pLNJDmDVEdeb+brtpwC9JEZOLVE0nb+SR83CsAINJYKG3V1b3Kfs0hydseYKsBYqJTN2j
- CmUXDYq9J7uOyQQ7TNVoQejmpp5ifR4EzwIFfmYDekxRVZDJygD0wL/EzUr8Je3/j548NLyL
- 4Uhv6CIPf3TY3/aLVKXdxz/ntbLgMcfZsDoHgDk3lY3r1iwbWwEM2+eYRdSZaR4VD+JRD7p8
- 0FBadNwWnBce1fmQp3EklodGi5y7TNZ/CKdJ+jRPAAnw7SINhSd7PhJMruDAJaUlbYaIm23A
- +82g+IGe4z9tRGQ9TAflezVMhT5J3ccu6cpIjjvwDlbxucSmtVi5VtPAMTLmfjYp7VY2Tgr+
- T92v7+V96jAfE3Zy2nq52e8RDdUo/F6faxcumdl+aLhhKLXgrozpoe2nL0Nyc2uqFjkjwXXI
- OBQiaqGeWtxeKJP+O8MIpjyGuHUGzvjNx5S/592TQO3phpT5IFWfMgbu4OreZ9yekDhf7Cvn
- /fkYsiLDz9W6Clihd/xlpm79+jlhm4E3xBPiQOPCZowmHjx57mXVAypOP2Eu+i2nyQrkapaY
- IdisDQfWPdNeHNOiPnPS3+GhVlPcqSJAIWnuO7Ofw1ZVOyg/jwARAQABzUNDaHJpc3RpYW4g
- Qm9ybnRyYWVnZXIgKDJuZCBJQk0gYWRkcmVzcykgPGJvcm50cmFlZ2VyQGxpbnV4LmlibS5j
- b20+wsF5BBMBAgAjBQJdP/hMAhsDBwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQEXu8
- gLWmHHy/pA/+JHjpEnd01A0CCyfVnb5fmcOlQ0LdmoKWLWPvU840q65HycCBFTt6V62cDljB
- kXFFxMNA4y/2wqU0H5/CiL963y3gWIiJsZa4ent+KrHl5GK1nIgbbesfJyA7JqlB0w/E/SuY
- NRQwIWOo/uEvOgXnk/7+rtvBzNaPGoGiiV1LZzeaxBVWrqLtmdi1iulW/0X/AlQPuF9dD1Px
- hx+0mPjZ8ClLpdSp5d0yfpwgHtM1B7KMuQPQZGFKMXXTUd3ceBUGGczsgIMipZWJukqMJiJj
- QIMH0IN7XYErEnhf0GCxJ3xAn/J7iFpPFv8sFZTvukntJXSUssONnwiKuld6ttUaFhSuSoQg
- OFYR5v7pOfinM0FcScPKTkrRsB5iUvpdthLq5qgwdQjmyINt3cb+5aSvBX2nNN135oGOtlb5
- tf4dh00kUR8XFHRrFxXx4Dbaw4PKgV3QLIHKEENlqnthH5t0tahDygQPnSucuXbVQEcDZaL9
- WgJqlRAAj0pG8M6JNU5+2ftTFXoTcoIUbb0KTOibaO9zHVeGegwAvPLLNlKHiHXcgLX1tkjC
- DrvE2Z0e2/4q7wgZgn1kbvz7ZHQZB76OM2mjkFu7QNHlRJ2VXJA8tMXyTgBX6kq1cYMmd/Hl
- OhFrAU3QO1SjCsXA2CDk9MM1471mYB3CTXQuKzXckJnxHkHOwU0ETpw8+AEQAJjyNXvMQdJN
- t07BIPDtbAQk15FfB0hKuyZVs+0lsjPKBZCamAAexNRk11eVGXK/YrqwjChkk60rt3q5i42u
- PpNMO9aS8cLPOfVft89Y654Qd3Rs1WRFIQq9xLjdLfHh0i0jMq5Ty+aiddSXpZ7oU6E+ud+X
- Czs3k5RAnOdW6eV3+v10sUjEGiFNZwzN9Udd6PfKET0J70qjnpY3NuWn5Sp1ZEn6lkq2Zm+G
- 9G3FlBRVClT30OWeiRHCYB6e6j1x1u/rSU4JiNYjPwSJA8EPKnt1s/Eeq37qXXvk+9DYiHdT
- PcOa3aNCSbIygD3jyjkg6EV9ZLHibE2R/PMMid9FrqhKh/cwcYn9FrT0FE48/2IBW5mfDpAd
- YvpawQlRz3XJr2rYZJwMUm1y+49+1ZmDclaF3s9dcz2JvuywNq78z/VsUfGz4Sbxy4ShpNpG
- REojRcz/xOK+FqNuBk+HoWKw6OxgRzfNleDvScVmbY6cQQZfGx/T7xlgZjl5Mu/2z+ofeoxb
- vWWM1YCJAT91GFvj29Wvm8OAPN/+SJj8LQazd9uGzVMTz6lFjVtH7YkeW/NZrP6znAwv5P1a
- DdQfiB5F63AX++NlTiyA+GD/ggfRl68LheSskOcxDwgI5TqmaKtX1/8RkrLpnzO3evzkfJb1
- D5qh3wM1t7PZ+JWTluSX8W25ABEBAAHCwV8EGAECAAkFAk6cPPgCGwwACgkQEXu8gLWmHHz8
- 2w//VjRlX+tKF3szc0lQi4X0t+pf88uIsvR/a1GRZpppQbn1jgE44hgF559K6/yYemcvTR7r
- 6Xt7cjWGS4wfaR0+pkWV+2dbw8Xi4DI07/fN00NoVEpYUUnOnupBgychtVpxkGqsplJZQpng
- v6fauZtyEcUK3dLJH3TdVQDLbUcL4qZpzHbsuUnTWsmNmG4Vi0NsEt1xyd/Wuw+0kM/oFEH1
- 4BN6X9xZcG8GYUbVUd8+bmio8ao8m0tzo4pseDZFo4ncDmlFWU6hHnAVfkAs4tqA6/fl7RLN
- JuWBiOL/mP5B6HDQT9JsnaRdzqF73FnU2+WrZPjinHPLeE74istVgjbowvsgUqtzjPIG5pOj
- cAsKoR0M1womzJVRfYauWhYiW/KeECklci4TPBDNx7YhahSUlexfoftltJA8swRshNA/M90/
- i9zDo9ySSZHwsGxG06ZOH5/MzG6HpLja7g8NTgA0TD5YaFm/oOnsQVsf2DeAGPS2xNirmknD
- jaqYefx7yQ7FJXXETd2uVURiDeNEFhVZWb5CiBJM5c6qQMhmkS4VyT7/+raaEGgkEKEgHOWf
- ZDP8BHfXtszHqI3Fo1F4IKFo/AP8GOFFxMRgbvlAs8z/+rEEaQYjxYJqj08raw6P4LFBqozr
- nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
-Message-ID: <2e505365-db4a-6054-8bc8-f9a81978c6d4@de.ibm.com>
-Date: Tue, 20 Oct 2020 11:35:35 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
-In-Reply-To: <aacdff7a-2af1-4f46-6ab2-2a9d5b865d35@amazon.de>
-Content-Language: en-US
-X-TM-AS-GCONF: 00
-X-Proofpoint-UnRewURL: 0 URL was un-rewritten
+ Tue, 20 Oct 2020 14:39:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1603204750;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=C6tHkoMwRyczlYLoN6tbu8ZV93hRsh5e+vVvwIoEmfQ=;
+ b=XAOnXO6vkmf9LANkX+ExEYwDtKtJo5JXL5J7Eo5ciNvjVsUU4Q5krbhUdTupZL5vjgXF3q
+ ZXFQPSWlwh7i2W5Om0MwFmjluR6uAqytwTUUh/fuBD3PnDuGiUjR58JMpfQBP9U7NSSKu9
+ fb7tSNyDEcN2QuGwWcEna1KUIoGuTXg=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-13-Gcd20XktNW-b5bnaA15nRg-1; Tue, 20 Oct 2020 10:39:08 -0400
+X-MC-Unique: Gcd20XktNW-b5bnaA15nRg-1
+Received: by mail-wr1-f71.google.com with SMTP id t3so917404wrq.2
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 20 Oct 2020 07:39:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=C6tHkoMwRyczlYLoN6tbu8ZV93hRsh5e+vVvwIoEmfQ=;
+ b=Y2ChJYTh+mo6cczvJgRxqmC4R6u+HakHjjVjqVobBHF3Ta0bbxIZq/ufuMyp5OT9Tm
+ tDbILXJtx7sUNgnzzxrq8QlkLMjhdXpxU+I7Uffzn3ulysgn0i+hC+/WXPBH/l1T8qpg
+ sqIdjbUyGWCDQR1ZqOGnzlGq0b7tbmwYhy7hLY/09p9d/HgDznWtAh/NFPZpkAdgCbqL
+ 0EnmZUTPD+ZIpTBARbgM8nHqvjoPceqoHzXuSzi4PJE6gMueSI0WKZNyHi4aWHza53WU
+ kHID7I58ftwtuLQZ6Z2GsTiE1XZJ+l9/Da180YWl05k3Uum2YOSk3heBiMRoWv6XVvEm
+ SdLQ==
+X-Gm-Message-State: AOAM533S0ne07mMOmWA6u3YZ9DkVxLsGFHQhB1ha5K/GTV+PTb1vV/62
+ PIh4nLk6bFKB+8PNvOj7lGvr2Yj7H6Mh7CUc5Ba+Ze4FcpfRI4abXV4JSmPe+9FRpqqEvcxdpqc
+ Df2FsXWXy4i/++Qcq6Q/Beidmk2zbXZx/rn3h7wjX7w==
+X-Received: by 2002:a05:600c:296:: with SMTP id
+ 22mr3213209wmk.134.1603204747089; 
+ Tue, 20 Oct 2020 07:39:07 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwe+ftxaspmxxnPpzcvDfDhSCdYyXL92Ygf85TD1u3vZHXHOFcofDkD7EwmcXMp+xtWl9ZKCw==
+X-Received: by 2002:a05:600c:258:: with SMTP id
+ 24mr2364091wmj.167.1603193788779; 
+ Tue, 20 Oct 2020 04:36:28 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-219-234.inter.net.il. [80.230.219.234])
+ by smtp.gmail.com with ESMTPSA id
+ t6sm2774785wre.30.2020.10.20.04.36.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Oct 2020 04:36:27 -0700 (PDT)
+Date: Tue, 20 Oct 2020 07:36:22 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH net v2] Revert "virtio-net: ethtool configurable RXCSUM"
+Message-ID: <20201020073540-mutt-send-email-mst@kernel.org>
+References: <20201018103122.454967-1-mst@redhat.com>
+ <a061697d-844d-bb98-7009-69760fe9918c@redhat.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-10-20_04:2020-10-20,
- 2020-10-20 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0
- lowpriorityscore=0 clxscore=1011 malwarescore=0 impostorscore=0
- bulkscore=0 spamscore=0 priorityscore=1501 mlxscore=0 adultscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2010200064
-Cc: KVM list <kvm@vger.kernel.org>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, ghammer@redhat.com,
- "Weiss, Radu" <raduweis@amazon.com>, Qemu Developers <qemu-devel@nongnu.org>,
- "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
- Pavel Machek <pavel@ucw.cz>, linux-s390 <linux-s390@vger.kernel.org>,
- Colm MacCarthaigh <colmmacc@amazon.com>, Jonathan Corbet <corbet@lwn.net>,
- mpe@ellerman.id.au, "Michael S. Tsirkin" <mst@redhat.com>,
- Eric Biggers <ebiggers@kernel.org>, "Singh, Balbir" <sblbir@amazon.com>,
- bonzini@gnu.org, oridgar@gmail.com, "Catangiu,
- Adrian Costin" <acatan@amazon.com>, Andy Lutomirski <luto@kernel.org>,
- Michal Hocko <mhocko@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- kernel list <linux-kernel@vger.kernel.org>,
- Linux API <linux-api@vger.kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
- Willy Tarreau <w@1wt.eu>, "Woodhouse, David" <dwmw@amazon.co.uk>
+In-Reply-To: <a061697d-844d-bb98-7009-69760fe9918c@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Willem de Bruijn <willemb@google.com>, kernel test robot <lkp@intel.com>,
+ Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
+ bpf@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
+ linux-kernel@vger.kernel.org, Alexei Starovoitov <ast@kernel.org>,
+ Jakub Kicinski <kuba@kernel.org>, virtualization@lists.linux-foundation.org,
+ "David S. Miller" <davem@davemloft.net>,
+ Jesper Dangaard Brouer <hawk@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -190,174 +115,162 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-
-
-On 17.10.20 20:09, Alexander Graf wrote:
-> Hi Jason,
-> 
-> On 17.10.20 15:24, Jason A. Donenfeld wrote:
->>
->> After discussing this offline with Jann a bit, I have a few general
->> comments on the design of this.
->>
->> First, the UUID communicated by the hypervisor should be consumed by
->> the kernel -- added as another input to the rng -- and then userspace
-> 
-> We definitely want a kernel internal notifier as well, yes :).
-> 
->> should be notified that it should reseed any userspace RNGs that it
->> may have, without actually communicating that UUID to userspace. IOW,
-> 
-> I also tend to agree that it makes sense to disconnect the actual UUID we receive from the notification to user space. This would allow us to create a generic mechanism for VM save/restore cycles across different hypervisors. Let me add PPC and s390x people to the CC list to see whether they have anything remotely similar to the VmGenID mechanism. For x86 and aarch64, the ACPI and memory based VmGenID implemented here is the most obvious option to implement IMHO. It's also already implemented in all major hypervisors.
-
-Hmm, what we do have configurations (e.g. stfle bits) and we do have a notification mechanism via sclp that notifies guests when things change.
-As of today neither KVM nor Linux implement the sclp change notification mechanism, but I do see value in such a thing.
-
-> 
->> I agree with Jann there. Then, it's the functioning of this
->> notification mechanism to userspace that is interesting to me.
-> 
-> Absolutely! Please have a look at the previous discussion here:
-> 
-> 
-> https://lore.kernel.org/linux-pm/B7793B7A-3660-4769-9B9A-FFCF250728BB@amazon.com/
-> 
-> The user space interface is absolutely what this is about.
-
-Yes. Passing a notification to userspace is essential. Where I do not see a solution yet is the race between notification and
-already running with the old knowledge.
-> 
->> There are a few design goals of notifying userspace: it should be
->> fast, because people who are using userspace RNGs are usually doing so
->> in the first place to completely avoid syscall overhead for whatever
->> high performance application they have - e.g. I recall conversations
->> with Colm about his TLS implementation needing to make random IVs
->> _really_ fast. It should also happen as early as possible, with no
->> race or as minimal as possible race window, so that userspace doesn't
->> begin using old randomness and then switch over after the damage is
->> already done.
-> 
-> There are multiple facets and different types of consumers here. For a user space RNG, I agree that fast and as race free as possible is key. That's what the mmap interface is there for.
-> 
-> There are applications way beyond that though. What do you do with applications that already consumed randomness? For example a cached pool of SSL keys. Or a higher level language primitive that consumes randomness and caches its seed somewhere in an internal data structure. Or even worse: your system's host ssh key.
-> 
-> For those types of events, an mmap (or vDSO) interface does not work. We need to actively allow user space applications to readjust to the new environment - either internally (the language primitive case) or through a system event, maybe even as systemd trigger (the ssh host key case).
-> 
-> To give everyone enough time before we consider a system as "updated to the new environment", we have the callback logic with the "Orchestrator" that can check whether all listeners to system wide updates confirms they adjusted themselves.
-> 
-> That's what the rest of the logic is there for: A read+poll interface and all of the orchestration logic. It's not for the user space RNG case, it's for all of its downstream users.
-> 
->> I'm also not wedded to using Microsoft's proprietary hypervisor design
->> for this. If we come up with a better interface, I don't think it's
->> asking too much to implement that and reasonably expect for Microsoft
->> to catch up. Maybe someone here will find that controversial, but
->> whatever -- discussing ideal designs does not seem out of place or
->> inappropriate for how we usually approach things in the kernel, and a
->> closed source hypervisor coming along shouldn't disrupt that.
-> 
-> The main bonus point on this interface is that Hyper-V, VMware and QEMU implement it already. It would be a very natural for into the ecosystem. I agree though that we shouldn't have our user space interface necessarily dictated by it: Other hypervisors may implement different ways such as a simple edge IRQ that gets triggered whenever the VM gets resumed.
-> 
->> So, anyway, here are a few options with some pros and cons for the
->> kernel notifying userspace that its RNG should reseed.
-> 
-> I can only stress again that we should not be laser focused on the RNG case. In a lot of cases, data has already been generated by the RNG before the snapshot and needs to be reinitialized after the snapshot. In other cases such as system UUIDs, it's completely orthogonal to the RNG.
-> 
->>
->> 1. SIGRND - a new signal. Lol.
-> 
-> Doable, but a lot of plumbing in user space. It's also not necessarily a good for for event notification in most user space applications.
-> 
->>
->> 2. Userspace opens a file descriptor that it can epoll on. Pros are
->> that many notification mechanisms already use this. Cons is that this
->> requires syscall and might be more racy than we want. Another con is
->> that this a new thing for userspace programs to do.
-> 
-> That's part of what this patch does, right? This patch implements read+poll as well as mmap() for high speed reads.
-> 
->> 3. We stick an atomic counter in the vDSO, Jann's suggestion. Pros are
->> that this is extremely fast, and also simple to use and implement.
->> There are enough sequence points in typical crypto programs that
->> checking to see whether this counter has changed before doing whatever
->> operation seems easy enough. Cons are that typically we've been
->> conservative about adding things to the vDSO, and this is also a new
->> thing for userspace programs to do.
-> 
-> The big con is that its use is going to be super limited to applications that can be adapted to check their "vm generation" through a vDSO call / read every time they consume data that may potentially need to be regenerated.
-> 
-> This probably works for the pure RNG case. It falls apart for more sophisticated things such as "redo my ssh host keys and restart the service" or "regenerate my samba machine uuid".
-> 
->> 4. We already have a mechanism for this kind of thing, because the
->> same issue comes up when fork()ing. The solution was MADV_WIPEONFORK,
->> where userspace marks a page to be zeroed when forking, for the
->> purposes of the RNG being notified when its world gets split in two.
->> This is basically the same thing as we're discussing here with guest
->> snapshots, except it's on the system level rather than the process
->> level, and a system has many processes. But the problem space is still
->> almost the same, and we could simply reuse that same mechanism. There
->> are a few implementation strategies for that:
-> 
-> Yup, that's where we started from :). And then we ran into resistance by the mm people (on CC here). And then we looked at the problem more in depth and checked what it would take to for example implement this for user space RNGs in Java. It's ... more complicated than one may think at first.
-> 
->> 4a. We mess with the PTEs of all processes' pages that are
->> MADV_WIPEONFORK, like fork does now, when the hypervisor notifies us
->> to do so. Then we wind up reusing the already existing logic for
->> userspace RNGs. Cons might be that this usually requires semaphores,
->> and we're in irq context, so we'd have to hoist to a workqueue, which
->> means either more wake up latency, or a larger race window.
->>
->> 4b. We just memzero all processes' pages that are MADV_WIPEONFORK,
->> when the hypervisor notifies us to do so. Then we wind up reusing the
->> already existing logic for userspace RNGs.
->>
->> 4c. The guest kernel maintains an array of physical addresses that are
->> MADV_WIPEONFORK. The hypervisor knows about this array and its
->> location through whatever protocol, and before resuming a
->> moved/snapshotted/duplicated VM, it takes the responsibility for
->> memzeroing this memory. The huge pro here would be that this
->> eliminates all races, and reduces complexity quite a bit, because the
->> hypervisor can perfectly synchronize its bringup (and SMP bringup)
->> with this, and it can even optimize things like on-disk memory
->> snapshots to simply not write out those pages to disk.
->>
->> A 4c-like approach seems like it'd be a lot of bang for the buck -- we
->> reuse the existing mechanism (MADV_WIPEONFORK), so there's no new
->> userspace API to deal with, and it'd be race free, and eliminate a lot
->> of kernel complexity.
->>
->> But 4b and 3 don't seem too bad either.
->>
->> Any thoughts on 4c? Is that utterly insane, or does that actually get
->> us somewhere close to what we want?
-> 
-> All of the options for "4" are possible and have an RFC out. Please check out the discussion linked above :).
-> 
-> The problem with anything that relies on close loop reads (options 3+4) is not going to work well with the more sophisticated use case of derived data.
-> 
-> IMHO it will boil down to "both". We will need a high-speed interface that with close-to-0 overhead tells you either the generation ID or clears pages (options 3+4) as well as something that is bigger for applications that can either intrinsically (sshd) or by system design (Java) not adopt the mechanisms above easily.
-> 
-> That said, we need to start somewhere. I don't mind which angle we start from. But this is a real world problem and one that will only become more prevalent over time as VMs are used for more than only your traditional enterprise hardware consolidation.
-> 
-> 
-> Alex
-> 
-> 
-> 
-> Amazon Development Center Germany GmbH
-> Krausenstr. 38
-> 10117 Berlin
-> Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-> Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-> Sitz: Berlin
-> Ust-ID: DE 289 237 879
-> 
-> 
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gVHVlLCBPY3QgMjAsIDIwMjAgYXQgMDI6MTM6MDZQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
+ZToKPiAKPiBPbiAyMDIwLzEwLzIwIOS4iuWNiDE6MzIsIE1pY2hhZWwgUy4gVHNpcmtpbiB3cm90
+ZToKPiA+IFRoaXMgcmV2ZXJ0cyBjb21taXQgMzYxOGFkMmE3YzBlNzhlNDI1ODM4NjM5NGQ1ZDVm
+OTJhM2RiY2NmOC4KPiA+IAo+ID4gV2hlbiB0aGUgZGV2aWNlIGRvZXMgbm90IGhhdmUgYSBjb250
+cm9sIHZxIChlLmcuIHdoZW4gdXNpbmcgYQo+ID4gdmVyc2lvbiBvZiBRRU1VIGJhc2VkIG9uIHVw
+c3RyZWFtIHYwLjEwIG9yIG9sZGVyLCBvciB3aGVuIHNwZWNpZnlpbmcKPiA+IGN0cmxfdnE9b2Zm
+LGN0cmxfcng9b2ZmLGN0cmxfdmxhbj1vZmYsY3RybF9yeF9leHRyYT1vZmYsY3RybF9tYWNfYWRk
+cj1vZmYKPiA+IGZvciB0aGUgZGV2aWNlIG9uIHRoZSBRRU1VIGNvbW1hbmQgbGluZSksIHRoYXQg
+Y29tbWl0IGNhdXNlcyBhIGNyYXNoOgo+ID4gCj4gPiBbICAgNzIuMjI5MTcxXSBrZXJuZWwgQlVH
+IGF0IGRyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYzoxNjY3IQo+ID4gWyAgIDcyLjIzMDI2Nl0gaW52
+YWxpZCBvcGNvZGU6IDAwMDAgWyMxXSBQUkVFTVBUIFNNUAo+ID4gWyAgIDcyLjIzMTE3Ml0gQ1BV
+OiAwIFBJRDogMSBDb21tOiBzd2FwcGVyLzAgTm90IHRhaW50ZWQgNS45LjAtcmM4LTAyOTM0LWcz
+NjE4YWQyYTdjMGU3ICMxCj4gPiBbICAgNzIuMjMxMTcyXSBFSVA6IHZpcnRuZXRfc2VuZF9jb21t
+YW5kKzB4MTIwLzB4MTQwCj4gPiBbICAgNzIuMjMxMTcyXSBDb2RlOiAwMCAwZiA5NCBjMCA4YiA3
+ZCBmMCA2NSAzMyAzZCAxNCAwMCAwMCAwMCA3NSAxYyA4ZCA2NSBmNCA1YiA1ZSA1ZiA1ZCBjMyA2
+NiA5MCBiZSAwMSAwMCAwMCAwMCBlOSA2ZSBmZiBmZiBmZiA4ZCBiNiAwMAo+ID4gKzAwIDAwIDAw
+IDwwZj4gMGIgZTggZDkgYmIgODIgMDAgZWIgMTcgOGQgYjQgMjYgMDAgMDAgMDAgMDAgOGQgYjQg
+MjYgMDAgMDAgMDAKPiA+IFsgICA3Mi4yMzExNzJdIEVBWDogMDAwMDAwMGQgRUJYOiBmNzI4OTVj
+MCBFQ1g6IDAwMDAwMDE3IEVEWDogMDAwMDAwMTEKPiA+IFsgICA3Mi4yMzExNzJdIEVTSTogZjcx
+OTc4MDAgRURJOiBlZDY5YmQwMCBFQlA6IGVkNjliY2Y0IEVTUDogZWQ2OWJjOTgKPiA+IFsgICA3
+Mi4yMzExNzJdIERTOiAwMDdiIEVTOiAwMDdiIEZTOiAwMGQ4IEdTOiAwMGUwIFNTOiAwMDY4IEVG
+TEFHUzogMDAwMTAyNDYKPiA+IFsgICA3Mi4yMzExNzJdIENSMDogODAwNTAwMzMgQ1IyOiAwMDAw
+MDAwMCBDUjM6IDAyYzg0MDAwIENSNDogMDAwNDA2ZjAKPiA+IFsgICA3Mi4yMzExNzJdIENhbGwg
+VHJhY2U6Cj4gPiBbICAgNzIuMjMxMTcyXSAgPyBfX3ZpcnRfYWRkcl92YWxpZCsweDQ1LzB4NjAK
+PiA+IFsgICA3Mi4yMzExNzJdICA/IF9fX2NhY2hlX2ZyZWUrMHg1MWYvMHg3NjAKPiA+IFsgICA3
+Mi4yMzExNzJdICA/IGtvYmplY3RfdWV2ZW50X2VudisweGY0LzB4NTYwCj4gPiBbICAgNzIuMjMx
+MTcyXSAgdmlydG5ldF9zZXRfZ3Vlc3Rfb2ZmbG9hZHMrMHg0ZC8weDgwCj4gPiBbICAgNzIuMjMx
+MTcyXSAgdmlydG5ldF9zZXRfZmVhdHVyZXMrMHg4NS8weDEyMAo+ID4gWyAgIDcyLjIzMTE3Ml0g
+ID8gdmlydG5ldF9zZXRfZ3Vlc3Rfb2ZmbG9hZHMrMHg4MC8weDgwCj4gPiBbICAgNzIuMjMxMTcy
+XSAgX19uZXRkZXZfdXBkYXRlX2ZlYXR1cmVzKzB4MjdhLzB4OGUwCj4gPiBbICAgNzIuMjMxMTcy
+XSAgPyBrb2JqZWN0X3VldmVudCsweGEvMHgyMAo+ID4gWyAgIDcyLjIzMTE3Ml0gID8gbmV0ZGV2
+X3JlZ2lzdGVyX2tvYmplY3QrMHgxMmMvMHgxNjAKPiA+IFsgICA3Mi4yMzExNzJdICByZWdpc3Rl
+cl9uZXRkZXZpY2UrMHg0ZmUvMHg3NDAKPiA+IFsgICA3Mi4yMzExNzJdICByZWdpc3Rlcl9uZXRk
+ZXYrMHgxYy8weDQwCj4gPiBbICAgNzIuMjMxMTcyXSAgdmlydG5ldF9wcm9iZSsweDcyOC8weGI2
+MAo+ID4gWyAgIDcyLjIzMTE3Ml0gID8gX3Jhd19zcGluX3VubG9jaysweDFkLzB4NDAKPiA+IFsg
+ICA3Mi4yMzExNzJdICA/IHZpcnRpb192ZHBhX2dldF9zdGF0dXMrMHgxYy8weDIwCj4gPiBbICAg
+NzIuMjMxMTcyXSAgdmlydGlvX2Rldl9wcm9iZSsweDFjNi8weDI3MQo+ID4gWyAgIDcyLjIzMTE3
+Ml0gIHJlYWxseV9wcm9iZSsweDE5NS8weDJlMAo+ID4gWyAgIDcyLjIzMTE3Ml0gIGRyaXZlcl9w
+cm9iZV9kZXZpY2UrMHgyNi8weDYwCj4gPiBbICAgNzIuMjMxMTcyXSAgZGV2aWNlX2RyaXZlcl9h
+dHRhY2grMHg0OS8weDYwCj4gPiBbICAgNzIuMjMxMTcyXSAgX19kcml2ZXJfYXR0YWNoKzB4NDYv
+MHhjMAo+ID4gWyAgIDcyLjIzMTE3Ml0gID8gZGV2aWNlX2RyaXZlcl9hdHRhY2grMHg2MC8weDYw
+Cj4gPiBbICAgNzIuMjMxMTcyXSAgYnVzX2FkZF9kcml2ZXIrMHgxOTcvMHgxYzAKPiA+IFsgICA3
+Mi4yMzExNzJdICBkcml2ZXJfcmVnaXN0ZXIrMHg2Ni8weGMwCj4gPiBbICAgNzIuMjMxMTcyXSAg
+cmVnaXN0ZXJfdmlydGlvX2RyaXZlcisweDFiLzB4NDAKPiA+IFsgICA3Mi4yMzExNzJdICB2aXJ0
+aW9fbmV0X2RyaXZlcl9pbml0KzB4NjEvMHg4Ngo+ID4gWyAgIDcyLjIzMTE3Ml0gID8gdmV0aF9p
+bml0KzB4MTQvMHgxNAo+ID4gWyAgIDcyLjIzMTE3Ml0gIGRvX29uZV9pbml0Y2FsbCsweDc2LzB4
+MmU0Cj4gPiBbICAgNzIuMjMxMTcyXSAgPyByZGluaXRfc2V0dXArMHgyYS8weDJhCj4gPiBbICAg
+NzIuMjMxMTcyXSAgZG9faW5pdGNhbGxzKzB4YjIvMHhkNQo+ID4gWyAgIDcyLjIzMTE3Ml0gIGtl
+cm5lbF9pbml0X2ZyZWVhYmxlKzB4MTRmLzB4MTc5Cj4gPiBbICAgNzIuMjMxMTcyXSAgPyByZXN0
+X2luaXQrMHgxMDAvMHgxMDAKPiA+IFsgICA3Mi4yMzExNzJdICBrZXJuZWxfaW5pdCsweGQvMHhl
+MAo+ID4gWyAgIDcyLjIzMTE3Ml0gIHJldF9mcm9tX2ZvcmsrMHgxYy8weDMwCj4gPiBbICAgNzIu
+MjMxMTcyXSBNb2R1bGVzIGxpbmtlZCBpbjoKPiA+IFsgICA3Mi4yNjk1NjNdIC0tLVsgZW5kIHRy
+YWNlIGE2ZWJjNGFmZWEwZTZjYjEgXS0tLQo+ID4gCj4gPiBUaGUgcmVhc29uIGlzIHRoYXQgdmly
+dG5ldF9zZXRfZmVhdHVyZXMgbm93IGNhbGxzIHZpcnRuZXRfc2V0X2d1ZXN0X29mZmxvYWRzCj4g
+PiB1bmNvbmRpdGlvbmFsbHksIGl0IHVzZWQgdG8gb25seSBjYWxsIGl0IHdoZW4gdGhlcmUgaXMg
+c29tZXRoaW5nCj4gPiB0byBjb25maWd1cmUuCj4gPiAKPiA+IElmIGRldmljZSBkb2VzIG5vdCBo
+YXZlIGEgY29udHJvbCB2cSwgZXZlcnl0aGluZyBicmVha3MuCj4gPiAKPiA+IExvb2tpbmcgYXQg
+dGhpcyBzb21lIG1vcmUsIEkgbm90aWNlZCB0aGF0IGl0J3Mgbm90IHJlYWxseSBjaGVja2luZyB0
+aGUKPiA+IGhhcmR3YXJlIHRvbyBtdWNoLiBFLmcuCj4gPiAKPiA+ICAgICAgICAgIGlmICgoZGV2
+LT5mZWF0dXJlcyBeIGZlYXR1cmVzKSAmIE5FVElGX0ZfTFJPKSB7Cj4gPiAgICAgICAgICAgICAg
+ICAgIGlmIChmZWF0dXJlcyAmIE5FVElGX0ZfTFJPKQo+ID4gICAgICAgICAgICAgICAgICAgICAg
+ICAgIG9mZmxvYWRzIHw9IEdVRVNUX09GRkxPQURfTFJPX01BU0sgJgo+ID4gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHZpLT5ndWVzdF9vZmZsb2Fkc19jYXBhYmxlOwo+ID4g
+ICAgICAgICAgICAgICAgICBlbHNlCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgb2ZmbG9h
+ZHMgJj0gfkdVRVNUX09GRkxPQURfTFJPX01BU0s7Cj4gPiAgICAgICAgICB9Cj4gPiAKPiA+IGFu
+ZAo+ID4gCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoMVVMTCA8PCBWSVJU
+SU9fTkVUX0ZfR1VFU1RfVFNPNikgfCBcCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAoMVVMTCA8PCBWSVJUSU9fTkVUX0ZfR1VFU1RfRUNOKSAgfCBcCj4gPiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAoMVVMTCA8PCBWSVJUSU9fTkVUX0ZfR1VFU1RfVUZPKSkK
+PiA+IAo+ID4gQnV0IHRoZXJlJ3Mgbm8gZ3VhcmFudGVlIHRoYXQgZS5nLiBWSVJUSU9fTkVUX0Zf
+R1VFU1RfVFNPNiBpcyBzZXQuCj4gPiAKPiA+IElmIGl0IGlzbid0IGNvbW1hbmQgc2hvdWxkIG5v
+dCBzZW5kIGl0Lgo+ID4gCj4gPiBGdXJ0aGVyCj4gPiAKPiA+IHN0YXRpYyBpbnQgdmlydG5ldF9z
+ZXRfZmVhdHVyZXMoc3RydWN0IG5ldF9kZXZpY2UgKmRldiwKPiA+ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIG5ldGRldl9mZWF0dXJlc190IGZlYXR1cmVzKQo+ID4gewo+ID4gICAg
+ICAgICAgc3RydWN0IHZpcnRuZXRfaW5mbyAqdmkgPSBuZXRkZXZfcHJpdihkZXYpOwo+ID4gICAg
+ICAgICAgdTY0IG9mZmxvYWRzID0gdmktPmd1ZXN0X29mZmxvYWRzOwo+ID4gCj4gPiBzZWVtcyB3
+cm9uZyBzaW5jZSBndWVzdF9vZmZsb2FkcyBpcyB6ZXJvIGluaXRpYWxpemVkLAo+IAo+IAo+IEkn
+bSBub3Qgc3VyZSBJIGdldCBoZXJlLgo+IAo+IERpZCB5b3UgbWVhbiB2aS0+Z3Vlc3Rfb2ZmbG9h
+ZHM/Cj4gCj4gV2UgaW5pdGlhbGl6ZSBpdCBkdXJpbmcgcHJvYmUKPiAKPiDCoMKgwqAgZm9yIChp
+ID0gMDsgaSA8IEFSUkFZX1NJWkUoZ3Vlc3Rfb2ZmbG9hZHMpOyBpKyspCj4gwqDCoMKgIMKgwqDC
+oCBpZiAodmlydGlvX2hhc19mZWF0dXJlKHZpLT52ZGV2LCBndWVzdF9vZmZsb2Fkc1tpXSkpCj4g
+wqDCoMKgIMKgwqDCoCDCoMKgwqAgc2V0X2JpdChndWVzdF9vZmZsb2Fkc1tpXSwgJnZpLT5ndWVz
+dF9vZmZsb2Fkcyk7Cj4gCgpHb29kIHBvaW50LCB3aWxsIGRyb3AgdGhpcyBwYXJ0LgoKCj4gPiBp
+dCBkb2VzIG5vdCByZWZsZWN0IHRoZSBzdGF0ZSBhZnRlciByZXNldCB3aGljaCBjb21lcyBmcm9t
+Cj4gPiB0aGUgZmVhdHVyZXMuCj4gPiAKPiA+IFJldmVydCB0aGUgb3JpZ2luYWwgY29tbWl0IGZv
+ciBub3cuCj4gPiAKPiA+IENjOiBUb25naGFvIFpoYW5nIDx4aWFuZ3hpYS5tLnl1ZUBnbWFpbC5j
+b20+Cj4gPiBDYzogV2lsbGVtIGRlIEJydWlqbiA8d2lsbGVtYkBnb29nbGUuY29tPgo+ID4gRml4
+ZXM6IDM2MThhZDJhN2MwZTcgKCJ2aXJ0aW8tbmV0OiBldGh0b29sIGNvbmZpZ3VyYWJsZSBSWENT
+VU0iKQo+ID4gUmVwb3J0ZWQtYnk6IGtlcm5lbCB0ZXN0IHJvYm90IDxsa3BAaW50ZWwuY29tPgo+
+ID4gU2lnbmVkLW9mZi1ieTogTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNvbT4KPiA+
+IC0tLQo+ID4gCj4gPiBjaGFuZ2VzIGZyb20gdjE6Cj4gPiAJLSBjbGFyaWZ5IGhvdyB0byByZXBy
+b2R1Y2UgdGhlIGJ1ZyBpbiB0aGUgbG9nCj4gPiAKPiA+IAo+ID4gICBkcml2ZXJzL25ldC92aXJ0
+aW9fbmV0LmMgfCA1MCArKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4g
+PiAgIDEgZmlsZSBjaGFuZ2VkLCAxMyBpbnNlcnRpb25zKCspLCAzNyBkZWxldGlvbnMoLSkKPiA+
+IAo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYyBiL2RyaXZlcnMvbmV0
+L3ZpcnRpb19uZXQuYwo+ID4gaW5kZXggZDJkMmM0YTUzY2YyLi4yMWI3MTE0OGM1MzIgMTAwNjQ0
+Cj4gPiAtLS0gYS9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMKPiA+ICsrKyBiL2RyaXZlcnMvbmV0
+L3ZpcnRpb19uZXQuYwo+ID4gQEAgLTY4LDggKzY4LDYgQEAgc3RhdGljIGNvbnN0IHVuc2lnbmVk
+IGxvbmcgZ3Vlc3Rfb2ZmbG9hZHNbXSA9IHsKPiA+ICAgCQkJCSgxVUxMIDw8IFZJUlRJT19ORVRf
+Rl9HVUVTVF9FQ04pICB8IFwKPiA+ICAgCQkJCSgxVUxMIDw8IFZJUlRJT19ORVRfRl9HVUVTVF9V
+Rk8pKQo+ID4gLSNkZWZpbmUgR1VFU1RfT0ZGTE9BRF9DU1VNX01BU0sgKDFVTEwgPDwgVklSVElP
+X05FVF9GX0dVRVNUX0NTVU0pCj4gPiAtCj4gPiAgIHN0cnVjdCB2aXJ0bmV0X3N0YXRfZGVzYyB7
+Cj4gPiAgIAljaGFyIGRlc2NbRVRIX0dTVFJJTkdfTEVOXTsKPiA+ICAgCXNpemVfdCBvZmZzZXQ7
+Cj4gPiBAQCAtMjUyNCw0OCArMjUyMiwyOSBAQCBzdGF0aWMgaW50IHZpcnRuZXRfZ2V0X3BoeXNf
+cG9ydF9uYW1lKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYsIGNoYXIgKmJ1ZiwKPiA+ICAgCXJldHVy
+biAwOwo+ID4gICB9Cj4gPiAtc3RhdGljIG5ldGRldl9mZWF0dXJlc190IHZpcnRuZXRfZml4X2Zl
+YXR1cmVzKHN0cnVjdCBuZXRfZGV2aWNlICpuZXRkZXYsCj4gPiAtCQkJCQkgICAgICBuZXRkZXZf
+ZmVhdHVyZXNfdCBmZWF0dXJlcykKPiA+IC17Cj4gPiAtCS8qIElmIFJ4IGNoZWNrc3VtIGlzIGRp
+c2FibGVkLCBMUk8gc2hvdWxkIGFsc28gYmUgZGlzYWJsZWQuICovCj4gPiAtCWlmICghKGZlYXR1
+cmVzICYgTkVUSUZfRl9SWENTVU0pKQo+ID4gLQkJZmVhdHVyZXMgJj0gfk5FVElGX0ZfTFJPOwo+
+ID4gLQo+ID4gLQlyZXR1cm4gZmVhdHVyZXM7Cj4gPiAtfQo+ID4gLQo+ID4gICBzdGF0aWMgaW50
+IHZpcnRuZXRfc2V0X2ZlYXR1cmVzKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYsCj4gPiAgIAkJCQlu
+ZXRkZXZfZmVhdHVyZXNfdCBmZWF0dXJlcykKPiA+ICAgewo+ID4gICAJc3RydWN0IHZpcnRuZXRf
+aW5mbyAqdmkgPSBuZXRkZXZfcHJpdihkZXYpOwo+ID4gLQl1NjQgb2ZmbG9hZHMgPSB2aS0+Z3Vl
+c3Rfb2ZmbG9hZHM7Cj4gPiArCXU2NCBvZmZsb2FkczsKPiA+ICAgCWludCBlcnI7Cj4gPiAtCS8q
+IERvbid0IGFsbG93IGNvbmZpZ3VyYXRpb24gd2hpbGUgWERQIGlzIGFjdGl2ZS4gKi8KPiA+IC0J
+aWYgKHZpLT54ZHBfcXVldWVfcGFpcnMpCj4gPiAtCQlyZXR1cm4gLUVCVVNZOwo+ID4gLQo+ID4g
+ICAJaWYgKChkZXYtPmZlYXR1cmVzIF4gZmVhdHVyZXMpICYgTkVUSUZfRl9MUk8pIHsKPiA+ICsJ
+CWlmICh2aS0+eGRwX3F1ZXVlX3BhaXJzKQo+ID4gKwkJCXJldHVybiAtRUJVU1k7Cj4gPiArCj4g
+PiAgIAkJaWYgKGZlYXR1cmVzICYgTkVUSUZfRl9MUk8pCj4gPiAtCQkJb2ZmbG9hZHMgfD0gR1VF
+U1RfT0ZGTE9BRF9MUk9fTUFTSyAmCj4gPiAtCQkJCSAgICB2aS0+Z3Vlc3Rfb2ZmbG9hZHNfY2Fw
+YWJsZTsKPiA+ICsJCQlvZmZsb2FkcyA9IHZpLT5ndWVzdF9vZmZsb2Fkc19jYXBhYmxlOwo+ID4g
+ICAJCWVsc2UKPiA+IC0JCQlvZmZsb2FkcyAmPSB+R1VFU1RfT0ZGTE9BRF9MUk9fTUFTSzsKPiA+
+ICsJCQlvZmZsb2FkcyA9IHZpLT5ndWVzdF9vZmZsb2Fkc19jYXBhYmxlICYKPiA+ICsJCQkJICAg
+fkdVRVNUX09GRkxPQURfTFJPX01BU0s7Cj4gPiArCj4gPiArCQllcnIgPSB2aXJ0bmV0X3NldF9n
+dWVzdF9vZmZsb2Fkcyh2aSwgb2ZmbG9hZHMpOwo+ID4gKwkJaWYgKGVycikKPiA+ICsJCQlyZXR1
+cm4gZXJyOwo+ID4gKwkJdmktPmd1ZXN0X29mZmxvYWRzID0gb2ZmbG9hZHM7Cj4gPiAgIAl9Cj4g
+PiAtCWlmICgoZGV2LT5mZWF0dXJlcyBeIGZlYXR1cmVzKSAmIE5FVElGX0ZfUlhDU1VNKSB7Cj4g
+PiAtCQlpZiAoZmVhdHVyZXMgJiBORVRJRl9GX1JYQ1NVTSkKPiA+IC0JCQlvZmZsb2FkcyB8PSBH
+VUVTVF9PRkZMT0FEX0NTVU1fTUFTSyAmCj4gPiAtCQkJCSAgICB2aS0+Z3Vlc3Rfb2ZmbG9hZHNf
+Y2FwYWJsZTsKPiA+IC0JCWVsc2UKPiA+IC0JCQlvZmZsb2FkcyAmPSB+R1VFU1RfT0ZGTE9BRF9D
+U1VNX01BU0s7Cj4gPiAtCX0KPiA+IC0KPiA+IC0JZXJyID0gdmlydG5ldF9zZXRfZ3Vlc3Rfb2Zm
+bG9hZHModmksIG9mZmxvYWRzKTsKPiA+IC0JaWYgKGVycikKPiA+IC0JCXJldHVybiBlcnI7Cj4g
+PiAtCj4gPiAtCXZpLT5ndWVzdF9vZmZsb2FkcyA9IG9mZmxvYWRzOwo+ID4gICAJcmV0dXJuIDA7
+Cj4gPiAgIH0KPiA+IEBAIC0yNTg0LDcgKzI1NjMsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IG5l
+dF9kZXZpY2Vfb3BzIHZpcnRuZXRfbmV0ZGV2ID0gewo+ID4gICAJLm5kb19mZWF0dXJlc19jaGVj
+awk9IHBhc3N0aHJ1X2ZlYXR1cmVzX2NoZWNrLAo+ID4gICAJLm5kb19nZXRfcGh5c19wb3J0X25h
+bWUJPSB2aXJ0bmV0X2dldF9waHlzX3BvcnRfbmFtZSwKPiA+ICAgCS5uZG9fc2V0X2ZlYXR1cmVz
+CT0gdmlydG5ldF9zZXRfZmVhdHVyZXMsCj4gPiAtCS5uZG9fZml4X2ZlYXR1cmVzCT0gdmlydG5l
+dF9maXhfZmVhdHVyZXMsCj4gPiAgIH07Cj4gPiAgIHN0YXRpYyB2b2lkIHZpcnRuZXRfY29uZmln
+X2NoYW5nZWRfd29yayhzdHJ1Y3Qgd29ya19zdHJ1Y3QgKndvcmspCj4gPiBAQCAtMzAzNSwxMCAr
+MzAxMyw4IEBAIHN0YXRpYyBpbnQgdmlydG5ldF9wcm9iZShzdHJ1Y3QgdmlydGlvX2RldmljZSAq
+dmRldikKPiA+ICAgCWlmICh2aXJ0aW9faGFzX2ZlYXR1cmUodmRldiwgVklSVElPX05FVF9GX0dV
+RVNUX1RTTzQpIHx8Cj4gPiAgIAkgICAgdmlydGlvX2hhc19mZWF0dXJlKHZkZXYsIFZJUlRJT19O
+RVRfRl9HVUVTVF9UU082KSkKPiA+ICAgCQlkZXYtPmZlYXR1cmVzIHw9IE5FVElGX0ZfTFJPOwo+
+ID4gLQlpZiAodmlydGlvX2hhc19mZWF0dXJlKHZkZXYsIFZJUlRJT19ORVRfRl9DVFJMX0dVRVNU
+X09GRkxPQURTKSkgewo+ID4gLQkJZGV2LT5od19mZWF0dXJlcyB8PSBORVRJRl9GX1JYQ1NVTTsK
+PiA+ICsJaWYgKHZpcnRpb19oYXNfZmVhdHVyZSh2ZGV2LCBWSVJUSU9fTkVUX0ZfQ1RSTF9HVUVT
+VF9PRkZMT0FEUykpCj4gPiAgIAkJZGV2LT5od19mZWF0dXJlcyB8PSBORVRJRl9GX0xSTzsKPiA+
+IC0JfQo+ID4gICAJZGV2LT52bGFuX2ZlYXR1cmVzID0gZGV2LT5mZWF0dXJlczsKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1h
+aWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRw
+czovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXph
+dGlvbg==
