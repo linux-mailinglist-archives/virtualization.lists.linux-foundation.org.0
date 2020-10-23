@@ -1,79 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14DE8297263
-	for <lists.virtualization@lfdr.de>; Fri, 23 Oct 2020 17:34:46 +0200 (CEST)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 502C4297284
+	for <lists.virtualization@lfdr.de>; Fri, 23 Oct 2020 17:39:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C525A20C41;
-	Fri, 23 Oct 2020 15:34:43 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4AD36873A7;
+	Fri, 23 Oct 2020 15:39:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rh2EuEafppJM; Fri, 23 Oct 2020 15:34:42 +0000 (UTC)
+	with ESMTP id R-MODCZbyt5Z; Fri, 23 Oct 2020 15:39:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 18EEC2107F;
-	Fri, 23 Oct 2020 15:34:42 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CC6FF86FD7;
+	Fri, 23 Oct 2020 15:39:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 00AA1C0051;
-	Fri, 23 Oct 2020 15:34:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B73E7C0051;
+	Fri, 23 Oct 2020 15:39:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 56AA9C0051
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1DD12C0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 15:34:40 +0000 (UTC)
+ Fri, 23 Oct 2020 15:39:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 51D1486B04
+ by silver.osuosl.org (Postfix) with ESMTP id EAFF52107F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 15:34:40 +0000 (UTC)
+ Fri, 23 Oct 2020 15:39:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QQVoLbWE6WJV
+ with ESMTP id 2adD-KkUWV29
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 15:34:39 +0000 (UTC)
+ Fri, 23 Oct 2020 15:39:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 7C89A86A37
+ by silver.osuosl.org (Postfix) with ESMTPS id 3058E2079D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 15:34:39 +0000 (UTC)
+ Fri, 23 Oct 2020 15:39:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1603467278;
+ s=mimecast20190719; t=1603467539;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ADAkD04qBn0B56sR0AT6lBpOwDqugN8IZrafwTxz76g=;
- b=HCRqLcHW4q7ojaBs/4C0/84Dp2HbLv7HMxp7zvjs/yIkjeIR/qlZft4/myReBLuvvvLo5t
- /5NiC/INXHJvr5/SKWTKPSagnwlWlgyIK7bOcxhMv1fK5CbHNpHpXJlF/gLs5WOvF8zxoW
- AS40EkvGNfrvW3+/jbSYyuo5X8EXxdM=
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=J409roG8zhXcXXCErK007R3MrYblBFNCZHcPyX0EW1c=;
+ b=ato4djoxJfdL0DPdufQLUuA2IuDBu0X8yUSJyklvDkNC6173YgfMrb8eJggCJjth2SQWkM
+ X8oija8Vnn9wN8n8oxEfeN5QNNaZY0NDcsm/k5flYvWWPYxf0sE3w/6DgmjuTF3juHA0JO
+ wlB54QYgwWpzWbEi7i5wcSqJR7F0rmw=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-234-6fLU9xqyN5Wrrt4Zl_bywg-1; Fri, 23 Oct 2020 11:34:33 -0400
-X-MC-Unique: 6fLU9xqyN5Wrrt4Zl_bywg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ us-mta-190-WxrfRJEEOtWeuf0CbspCdA-1; Fri, 23 Oct 2020 11:38:56 -0400
+X-MC-Unique: WxrfRJEEOtWeuf0CbspCdA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CB22818B9F09;
- Fri, 23 Oct 2020 15:34:31 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B8F7E80400B;
+ Fri, 23 Oct 2020 15:38:53 +0000 (UTC)
 Received: from redhat.com (ovpn-113-117.ams2.redhat.com [10.36.113.117])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 3C41070597;
- Fri, 23 Oct 2020 15:34:28 +0000 (UTC)
-Date: Fri, 23 Oct 2020 11:34:25 -0400
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 948346EF5D;
+ Fri, 23 Oct 2020 15:38:34 +0000 (UTC)
+Date: Fri, 23 Oct 2020 11:38:32 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Dan Carpenter <dan.carpenter@oracle.com>
-Subject: Re: [PATCH net] vhost_vdpa: Return -EFUALT if copy_from_user() fails
-Message-ID: <20201023113326-mutt-send-email-mst@kernel.org>
-References: <20201023120853.GI282278@mwanda>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: [GIT PULL] vhost,vdpa,virtio: cleanups, fixes
+Message-ID: <20201023113832-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201023120853.GI282278@mwanda>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
- kernel-janitors@vger.kernel.org, virtualization@lists.linux-foundation.org,
- kuba@kernel.org
+X-Mutt-Fcc: =sent
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: pankaj.gupta.linux@gmail.com, pmorel@linux.ibm.com, kvm@vger.kernel.org,
+ netdev@vger.kernel.org, mst@redhat.com, linux-kernel@vger.kernel.org,
+ rikard.falkeborn@gmail.com, virtualization@lists.linux-foundation.org,
+ li.wang@windriver.com, borntraeger@de.ibm.com, stable@vger.kernel.org,
+ tiantao6@hisilicon.com, elic@nvidia.com, lingshan.zhu@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,50 +90,76 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Oct 23, 2020 at 03:08:53PM +0300, Dan Carpenter wrote:
-> The copy_to/from_user() functions return the number of bytes which we
-> weren't able to copy but the ioctl should return -EFAULT if they fail.
-> 
-> Fixes: a127c5bbb6a8 ("vhost-vdpa: fix backend feature ioctls")
-> Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+Was holding out for a couple of big new features including vop and rpmsg
+support for 1.0, but it looks like they won't make it in time.
+virtio i2c might be ready soon but that's a new driver so
+if it's ready soon it's probably ok to merge outside the merge
+window ... we'll see.
 
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Needed for stable I guess.
+The following changes since commit bbf5c979011a099af5dc76498918ed7df445635b:
 
-> ---
->  drivers/vhost/vdpa.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-> index 62a9bb0efc55..c94a97b6bd6d 100644
-> --- a/drivers/vhost/vdpa.c
-> +++ b/drivers/vhost/vdpa.c
-> @@ -428,12 +428,11 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
->  	void __user *argp = (void __user *)arg;
->  	u64 __user *featurep = argp;
->  	u64 features;
-> -	long r;
-> +	long r = 0;
->  
->  	if (cmd == VHOST_SET_BACKEND_FEATURES) {
-> -		r = copy_from_user(&features, featurep, sizeof(features));
-> -		if (r)
-> -			return r;
-> +		if (copy_from_user(&features, featurep, sizeof(features)))
-> +			return -EFAULT;
->  		if (features & ~VHOST_VDPA_BACKEND_FEATURES)
->  			return -EOPNOTSUPP;
->  		vhost_set_backend_features(&v->vdev, features);
-> @@ -476,7 +475,8 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
->  		break;
->  	case VHOST_GET_BACKEND_FEATURES:
->  		features = VHOST_VDPA_BACKEND_FEATURES;
-> -		r = copy_to_user(featurep, &features, sizeof(features));
-> +		if (copy_to_user(featurep, &features, sizeof(features)))
-> +			r = -EFAULT;
->  		break;
->  	default:
->  		r = vhost_dev_ioctl(&v->vdev, cmd, argp);
+  Linux 5.9 (2020-10-11 14:15:50 -0700)
+
+are available in the Git repository at:
+
+  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
+
+for you to fetch changes up to 88a0d60c6445f315fbcfff3db792021bb3a67b28:
+
+  MAINTAINERS: add URL for virtio-mem (2020-10-21 10:48:11 -0400)
+
+----------------------------------------------------------------
+vhost,vdpa,virtio: cleanups, fixes
+
+A very quiet cycle, no new features.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+----------------------------------------------------------------
+David Hildenbrand (1):
+      MAINTAINERS: add URL for virtio-mem
+
+Eli Cohen (3):
+      vdpa/mlx5: Make use of a specific 16 bit endianness API
+      vdpa/mlx5: Fix failure to bring link up
+      vdpa/mlx5: Setup driver only if VIRTIO_CONFIG_S_DRIVER_OK
+
+Li Wang (1):
+      vhost: reduce stack usage in log_used
+
+Pierre Morel (2):
+      virtio: let arch advertise guest's memory access restrictions
+      s390: virtio: PV needs VIRTIO I/O device protection
+
+Rikard Falkeborn (3):
+      virtio-balloon: Constify id_table
+      virtio_input: Constify id_table
+      virtio-mem: Constify mem_id_table
+
+Stefano Garzarella (1):
+      vringh: fix __vringh_iov() when riov and wiov are different
+
+Tian Tao (1):
+      vhost_vdpa: Fix duplicate included kernel.h
+
+Zhu Lingshan (1):
+      vhost_vdpa: remove unnecessary spin_lock in vhost_vring_call
+
+ MAINTAINERS                       |  1 +
+ arch/s390/Kconfig                 |  1 +
+ arch/s390/mm/init.c               | 11 +++++++++++
+ drivers/vdpa/mlx5/net/mlx5_vnet.c | 12 ++++++++++--
+ drivers/vhost/vdpa.c              |  9 +--------
+ drivers/vhost/vhost.c             |  5 +----
+ drivers/vhost/vhost.h             |  2 +-
+ drivers/vhost/vringh.c            |  9 +++++----
+ drivers/virtio/Kconfig            |  6 ++++++
+ drivers/virtio/virtio.c           | 15 +++++++++++++++
+ drivers/virtio/virtio_balloon.c   |  2 +-
+ drivers/virtio/virtio_input.c     |  2 +-
+ drivers/virtio/virtio_mem.c       |  2 +-
+ include/linux/virtio_config.h     | 10 ++++++++++
+ 14 files changed, 65 insertions(+), 22 deletions(-)
 
 _______________________________________________
 Virtualization mailing list
