@@ -1,82 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85918296BA4
-	for <lists.virtualization@lfdr.de>; Fri, 23 Oct 2020 11:01:25 +0200 (CEST)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B6E33296B9E
+	for <lists.virtualization@lfdr.de>; Fri, 23 Oct 2020 11:01:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 4561386C7B;
-	Fri, 23 Oct 2020 09:01:24 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 41240877BB;
+	Fri, 23 Oct 2020 09:01:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id b0WnPWTliNRe; Fri, 23 Oct 2020 09:01:23 +0000 (UTC)
+	with ESMTP id 4KmYclvmJ9Kw; Fri, 23 Oct 2020 09:01:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id B43E586C7C;
-	Fri, 23 Oct 2020 09:01:23 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C303D877B9;
+	Fri, 23 Oct 2020 09:01:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 888A2C0051;
-	Fri, 23 Oct 2020 09:01:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 99EDBC0051;
+	Fri, 23 Oct 2020 09:01:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 57321C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BE595C0051
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 09:01:21 +0000 (UTC)
+ Fri, 23 Oct 2020 09:01:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 5073587293
+ by whitealder.osuosl.org (Postfix) with ESMTP id B9D2886842
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 09:01:21 +0000 (UTC)
+ Fri, 23 Oct 2020 09:01:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Le0xTI8G3P4q
+ with ESMTP id fUtVpTQy-J2I
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 09:01:20 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id BAAFF87286
+ Fri, 23 Oct 2020 09:01:05 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 069CA867BB
  for <virtualization@lists.linux-foundation.org>;
- Fri, 23 Oct 2020 09:01:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1603443679;
+ Fri, 23 Oct 2020 09:01:04 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:105:465:1:1:0])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4CHdW06q6WzQlWP;
+ Fri, 23 Oct 2020 11:01:00 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kaemmelot.de;
+ s=MBO0001; t=1603443659;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SLiwxv/22iGCcdvl9AAdgeJKpXrOBQqld4y3h6tdebI=;
- b=UrLgiv15DnWn3vMvQotJVPI0hFdfMWjU6HgxOBTus5QBLnPq27bvaOmrWrEwdwE24InuFH
- K3s+sOPxS7V2AbH0HAb1PKJEUGFyQOcHGJRvyCQvSjKoJzossojuOBL94QfDu6MjS2hzQG
- 6Y3ulxaO2sa0RUAFZqVD/GWxLgNRO2E=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-96-XpJaC8BDMymu96E7IzaFPw-1; Fri, 23 Oct 2020 05:01:17 -0400
-X-MC-Unique: XpJaC8BDMymu96E7IzaFPw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CFD5F804B78;
- Fri, 23 Oct 2020 09:01:15 +0000 (UTC)
-Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
- (ovpn-13-85.pek2.redhat.com [10.72.13.85])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 852B65B4A1;
- Fri, 23 Oct 2020 09:01:07 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: mst@redhat.com, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org
-Subject: [PATCH V4 3/3] vdpa_sim: implement get_iova_range()
-Date: Fri, 23 Oct 2020 17:00:43 +0800
-Message-Id: <20201023090043.14430-4-jasowang@redhat.com>
-In-Reply-To: <20201023090043.14430-1-jasowang@redhat.com>
-References: <20201023090043.14430-1-jasowang@redhat.com>
+ bh=/OlMEH0NvEnXxnTruitfKNNAO+3J0q+uQpeoqS8Vv18=;
+ b=iFcSluT8XYIrwCkR3ZzKqlyXoJNEz4a0at/B/gPmdvRZ+OTsjx4MOWeyKsP/3BLC15GbrT
+ fr2I/+AVvWZRwY1kcIl8tixiFc1z9wg0lV+Cr2iFrHAG427hGq2Qx/Iut/RQ1D1+JpXql1
+ PaBo9e1KatCzqtfy2dGP2it03IXtuIpu29tuVOpdC8+jQKY/h1aQV2nE6ZVFxltGfm/4BA
+ qL0o188Q0iOaWbKussDLsyn60k/vOszsVtrFGfRghOjKLfrSUWt0aA2DiirhSxbgNtcoLR
+ G7SWRAjwsdX4xdfcIWNYR5W/hkgj5fELw+j16KxcfDc4QDiqFkxKnc4T86BuuA==
+Received: from smtp1.mailbox.org ([80.241.60.240])
+ by spamfilter03.heinlein-hosting.de (spamfilter03.heinlein-hosting.de
+ [80.241.56.117]) (amavisd-new, port 10030)
+ with ESMTP id sINjbdp6fDBc; Fri, 23 Oct 2020 11:00:55 +0200 (CEST)
+Date: Fri, 23 Oct 2020 11:00:54 +0200 (CEST)
+From: Sebastian Hofmann <sebastian@kaemmelot.de>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Message-ID: <1419750420.56704.1603443654667@office.mailbox.org>
+In-Reply-To: <20201022073716-mutt-send-email-mst@kernel.org>
+References: <1075010014.50900.1603293266000@office.mailbox.org>
+ <20201022073716-mutt-send-email-mst@kernel.org>
+Subject: Re: [PATCH] virtio_ring: use DMA when memory encryption is active
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: shahafs@mellanox.com, lulu@redhat.com, saugatm@xilinx.com,
- mhabets@solarflare.com, vmireyno@marvell.com, gdawar@xilinx.com,
- eperezma@redhat.com, hanand@xilinx.com, zhangweining@ruijie.com.cn,
- eli@mellanox.com, lingshan.zhu@intel.com, rob.miller@broadcom.com
+X-Priority: 3
+Importance: Normal
+X-MBO-SPAM-Probability: 
+X-Rspamd-Score: -5.10 / 15.00 / 15.00
+X-Rspamd-Queue-Id: EE44917DC
+X-Rspamd-UID: 2d696f
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,60 +89,47 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This implements a sample get_iova_range() for the simulator which
-advertise [0, ULLONG_MAX] as the valid range.
-
-Signed-off-by: Jason Wang <jasowang@redhat.com>
----
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 62d640327145..ff6c9fd8d879 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -574,6 +574,16 @@ static u32 vdpasim_get_generation(struct vdpa_device *vdpa)
- 	return vdpasim->generation;
- }
- 
-+static struct vdpa_iova_range vdpasim_get_iova_range(struct vdpa_device *vdpa)
-+{
-+	struct vdpa_iova_range range = {
-+		.first = 0ULL,
-+		.last = ULLONG_MAX,
-+	};
-+
-+	return range;
-+}
-+
- static int vdpasim_set_map(struct vdpa_device *vdpa,
- 			   struct vhost_iotlb *iotlb)
- {
-@@ -657,6 +667,7 @@ static const struct vdpa_config_ops vdpasim_net_config_ops = {
- 	.get_config             = vdpasim_get_config,
- 	.set_config             = vdpasim_set_config,
- 	.get_generation         = vdpasim_get_generation,
-+	.get_iova_range         = vdpasim_get_iova_range,
- 	.dma_map                = vdpasim_dma_map,
- 	.dma_unmap              = vdpasim_dma_unmap,
- 	.free                   = vdpasim_free,
-@@ -683,6 +694,7 @@ static const struct vdpa_config_ops vdpasim_net_batch_config_ops = {
- 	.get_config             = vdpasim_get_config,
- 	.set_config             = vdpasim_set_config,
- 	.get_generation         = vdpasim_get_generation,
-+	.get_iova_range         = vdpasim_get_iova_range,
- 	.set_map                = vdpasim_set_map,
- 	.free                   = vdpasim_free,
- };
--- 
-2.20.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+PiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29tPiBoYXQgYW0gMjIuMTAuMjAyMCAx
+MzozOSBnZXNjaHJpZWJlbjoKPiAKPiAgCj4gT24gV2VkLCBPY3QgMjEsIDIwMjAgYXQgMDU6MTQ6
+MjVQTSArMDIwMCwgU2ViYXN0aWFuIEhvZm1hbm4gd3JvdGU6Cj4gPiB2aXJ0aW9fcmluZyBkb2Vz
+IG5vdCB3b3JrIHdpdGggYWN0aXZlIG1lbW9yeSBlbmNyeXB0aW9uIGJlY2F1c2UgdGhlIGhvc3Qg
+Y2Fubm90IHJlYWQgaXQuIEZpeCB0aGlzIGJ5IGVuZm9yY2luZyB0aGUgdXNlIG9mIERNQSB3aGlj
+aCB1c2VzIHNoYXJlZCAodW5lbmNyeXB0ZWQpIG1lbW9yeSBwYWdlcy4KPiA+IAo+ID4gU2lnbmVk
+LW9mZi1ieTogU2ViYXN0aWFuIEhvZm1hbm4gPHNlYmFzdGlhbkBrYWVtbWVsb3QuZGU+Cj4gCj4g
+Cj4gU29ycnksIG5vLgo+IGhvc3Qgd2hpY2ggY2FuIG5vdCBhY2Nlc3MgYWxsIG9mIGRyaXZlciBt
+ZW1vcnkgbXVzdCBzZXQgVklSVElPX0ZfQUNDRVNTX1BMQVRGT1JNLgo+IAo+IE5vdCB3b3J0aCBp
+dCB0byB3b3JrIGFyb3VuZCBicm9rZW4gaG9zdHMuCj4gCj4gWGVuIGlzIGFuIGV4Y2VwdGlvbiB3
+ZSBjYXJyeSBhcm91bmQgc2luY2UgaXQgcHJlZGF0ZXMgdGhlCj4gaW50cm9kdWN0aW9uIG9mIFZJ
+UlRJT19GX0FDQ0VTU19QTEFURk9STS4KPiAKPiAKClRoYW5rcyBmb3IgcG9pbnRpbmcgb3V0IFZJ
+UlRJT19GX0FDQ0VTU19QTEFURk9STSB3aGljaCBJIHdhcyBub3QgYXdhcmUgb2YuIE1heWJlIHRo
+YXQgcGF0Y2ggd2FzIGEgYml0IG5hw692ZS4KCkJhc2ljYWxseSBJJ20gbG9va2luZyBmb3IgYSB3
+YXkgdG8gdXNlIHZzb2NrIHdpdGggcWVtdSBvbiBBTUQgU0VWLiBXaGVuIEkgdHJ5IHRvIHVzZSBJ
+T01NVSBmb3IgdnNvY2sgSSBnZXQgYW4gRU9QTk9UU1VQUCBvdXQgb2Ygdmhvc3RfdnNvY2tfc2V0
+X2ZlYXR1cmVzLgoKSXMgdGhlcmUgYSByZWFzb24gd2h5IHZob3N0X3Zzb2NrX3NldF9mZWF0dXJl
+cyBkb2Vzbid0IHVzZSB2aG9zdF9pbml0X2RldmljZV9pb3RsYiBhcyBkb25lIGluIHRoZSBuZXQg
+ZGV2aWNlPyBCZWNhdXNlIHRoYXQgd291bGQgaGF2ZSBiZWVuIG15IG5leHQgYXR0ZW1wdC4KSSB3
+b3VsZCBhcHByZWNpYXRlIGEgc2hvcnQgY29tbWVudCBvbiB0aGlzIGlkZWEgb3IgYSByZWNvbW1l
+bmRhdGlvbiBmb3IgYW5vdGhlciBzb2x1dGlvbiB0aGF0IGlzIGJldHRlciB0aGFuIHRoZSBwYXRj
+aCBiZWxvdy4KCj4gPiAtLS0KPiA+ICBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jIHwgNSAr
+KysrKwo+ID4gIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKykKPiA+IAo+ID4gZGlmZiAt
+LWdpdCBhL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19yaW5nLmMgYi9kcml2ZXJzL3ZpcnRpby92aXJ0
+aW9fcmluZy5jCj4gPiBpbmRleCBiZWNjNzc2OTc5NjAuLjhjNjhjNDc1ZWMyMSAxMDA2NDQKPiA+
+IC0tLSBhL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19yaW5nLmMKPiA+ICsrKyBiL2RyaXZlcnMvdmly
+dGlvL3ZpcnRpb19yaW5nLmMKPiA+IEBAIC0xMiw2ICsxMiw3IEBACj4gPiAgI2luY2x1ZGUgPGxp
+bnV4L2hydGltZXIuaD4KPiA+ICAjaW5jbHVkZSA8bGludXgvZG1hLW1hcHBpbmcuaD4KPiA+ICAj
+aW5jbHVkZSA8eGVuL3hlbi5oPgo+ID4gKyNpbmNsdWRlIDxsaW51eC9tZW1fZW5jcnlwdC5oPgo+
+ID4gIAo+ID4gICNpZmRlZiBERUJVRwo+ID4gIC8qIEZvciBkZXZlbG9wbWVudCwgd2Ugd2FudCB0
+byBjcmFzaCB3aGVuZXZlciB0aGUgcmluZyBpcyBzY3Jld2VkLiAqLwo+ID4gQEAgLTI1NSw2ICsy
+NTYsMTAgQEAgc3RhdGljIGJvb2wgdnJpbmdfdXNlX2RtYV9hcGkoc3RydWN0IHZpcnRpb19kZXZp
+Y2UgKnZkZXYpCj4gPiAgCWlmICh4ZW5fZG9tYWluKCkpCj4gPiAgCQlyZXR1cm4gdHJ1ZTsKPiA+
+ICAKPiA+ICsJLyogTWVtb3J5IGVuY3J5cHRpb24gcmVxdWlyZXMgRE1BICovCj4gPiArCWlmICht
+ZW1fZW5jcnlwdF9hY3RpdmUoKSkKPiA+ICsJCXJldHVybiB0cnVlOwo+ID4gKwo+ID4gIAlyZXR1
+cm4gZmFsc2U7Cj4gPiAgfQo+ID4gIAo+ID4gLS0gCj4gPiAyLjI1LjEKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBs
+aXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlz
+dHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
