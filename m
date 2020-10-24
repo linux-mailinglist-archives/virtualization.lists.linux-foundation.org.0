@@ -1,84 +1,57 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 980D3297BCB
-	for <lists.virtualization@lfdr.de>; Sat, 24 Oct 2020 12:19:54 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 71A64875FB;
-	Sat, 24 Oct 2020 10:19:52 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mc3ZBcyKivI3; Sat, 24 Oct 2020 10:19:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BB785876C7;
-	Sat, 24 Oct 2020 10:19:51 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A589AC0051;
-	Sat, 24 Oct 2020 10:19:51 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 777A1C0051
- for <virtualization@lists.linux-foundation.org>;
- Sat, 24 Oct 2020 10:19:49 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D184297E91
+	for <lists.virtualization@lfdr.de>; Sat, 24 Oct 2020 22:59:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 6212B86913
- for <virtualization@lists.linux-foundation.org>;
- Sat, 24 Oct 2020 10:19:49 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id BBC9884F6F;
+	Sat, 24 Oct 2020 20:59:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xLWkhgSAEOJV; Sat, 24 Oct 2020 20:59:18 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 69F7686AD7;
+	Sat, 24 Oct 2020 20:59:18 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 53BE1C088B;
+	Sat, 24 Oct 2020 20:59:18 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 53904C0051
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 24 Oct 2020 20:59:17 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 4669487455
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 24 Oct 2020 20:59:17 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Vmsy+s4T0g7e
+ with ESMTP id lRdNRgqGH3cQ
  for <virtualization@lists.linux-foundation.org>;
- Sat, 24 Oct 2020 10:19:48 +0000 (UTC)
+ Sat, 24 Oct 2020 20:59:13 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by whitealder.osuosl.org (Postfix) with ESMTPS id CB15A86951
+Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
+ [5.45.125.222])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7222C87484
  for <virtualization@lists.linux-foundation.org>;
- Sat, 24 Oct 2020 10:19:47 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [80.241.60.241])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4CJHCN55BhzQjgg;
- Sat, 24 Oct 2020 12:19:44 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kaemmelot.de;
- s=MBO0001; t=1603534782;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jKWx+wLniVAIaNCmkh1y1nhXy0dRNCvWfQdlge8InaI=;
- b=zFVbRcS8B4DIG8+hm2VIJBL0GbVepClsPypOa+ADYFkUZ7PavppuFfVmSEpoWESZNo4Lgx
- 8ec9jSepSPlvGtggoGu/EdfKtifwu47cw8LsnoxUFJIEoIFUrTQYjsd1z7qmUSwBdlEqhX
- uA1kjdFmBXECG6gEMMy2rHUVHzob+sDdqSvx/mPSow4ak9ZUIH4/ieJK0xPE01QLL0vb33
- JkkJr+2SgrFKQU8yEow4HkUsKAc1s7sMb0zlgp0K5XXvk0LbOM0HyuiL4mLW22q52R+ZbT
- W9tRtmeqsHoaSkru5E2bkjznYf5Oo6s1plczIfmbLiLNqjKqx9xyzYi4ghazvA==
-Received: from smtp2.mailbox.org ([80.241.60.241])
- by gerste.heinlein-support.de (gerste.heinlein-support.de [91.198.250.173])
- (amavisd-new, port 10030)
- with ESMTP id pVX8kkf02hR3; Sat, 24 Oct 2020 12:19:41 +0200 (CEST)
-Date: Sat, 24 Oct 2020 12:19:40 +0200 (CEST)
-From: Sebastian Hofmann <sebastian@kaemmelot.de>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Message-ID: <101970867.58284.1603534780574@office.mailbox.org>
-In-Reply-To: <20201023114903-mutt-send-email-mst@kernel.org>
-References: <1075010014.50900.1603293266000@office.mailbox.org>
- <20201022073716-mutt-send-email-mst@kernel.org>
- <1419750420.56704.1603443654667@office.mailbox.org>
- <20201023114903-mutt-send-email-mst@kernel.org>
-Subject: Re: [PATCH] virtio_ring: use DMA when memory encryption is active
+ Sat, 24 Oct 2020 20:59:13 +0000 (UTC)
+Received: from [37.189.17.205] (helo=LAPTOP-EPOV2LRR)
+ by s052d7dde.fastvps-server.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <marle@saisti.eu>) id 1kWPZW-0004VO-AX
+ for virtualization@lists.linux-foundation.org; Sat, 24 Oct 2020 22:51:26 +0300
+From: "Maria Lemos" <marialemos72@gmail.com>
+Subject: Call for Workshops Proposals - CISTI'2021, Chaves, Portugal
+To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-X-Priority: 3
-Importance: Normal
-X-MBO-SPAM-Probability: 
-X-Rspamd-Score: -6.42 / 15.00 / 15.00
-X-Rspamd-Queue-Id: A6E7516FD
-X-Rspamd-UID: aa51a9
-Cc: virtualization@lists.linux-foundation.org
+Date: Sat, 24 Oct 2020 20:51:25 +0100
+Message-ID: <17356466079953@gmail-com>
+X-Antivirus: AVG (VPS 201023-4, 23/10/2020), Outbound message
+X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,71 +63,330 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Reply-To: cistiforever@gmail.com
+Content-Type: multipart/mixed; boundary="===============4242595742256594882=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-PiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29tPiBoYXQgYW0gMjMuMTAuMjAyMCAx
-Nzo0OSBnZXNjaHJpZWJlbjoKPiAKPiAgCj4gT24gRnJpLCBPY3QgMjMsIDIwMjAgYXQgMTE6MDA6
-NTRBTSArMDIwMCwgU2ViYXN0aWFuIEhvZm1hbm4gd3JvdGU6Cj4gPiA+IE1pY2hhZWwgUy4gVHNp
-cmtpbiA8bXN0QHJlZGhhdC5jb20+IGhhdCBhbSAyMi4xMC4yMDIwIDEzOjM5IGdlc2NocmllYmVu
-Ogo+ID4gPiAKPiA+ID4gIAo+ID4gPiBPbiBXZWQsIE9jdCAyMSwgMjAyMCBhdCAwNToxNDoyNVBN
-ICswMjAwLCBTZWJhc3RpYW4gSG9mbWFubiB3cm90ZToKPiA+ID4gPiB2aXJ0aW9fcmluZyBkb2Vz
-IG5vdCB3b3JrIHdpdGggYWN0aXZlIG1lbW9yeSBlbmNyeXB0aW9uIGJlY2F1c2UgdGhlIGhvc3Qg
-Y2Fubm90IHJlYWQgaXQuIEZpeCB0aGlzIGJ5IGVuZm9yY2luZyB0aGUgdXNlIG9mIERNQSB3aGlj
-aCB1c2VzIHNoYXJlZCAodW5lbmNyeXB0ZWQpIG1lbW9yeSBwYWdlcy4KPiA+ID4gPiAKPiA+ID4g
-PiBTaWduZWQtb2ZmLWJ5OiBTZWJhc3RpYW4gSG9mbWFubiA8c2ViYXN0aWFuQGthZW1tZWxvdC5k
-ZT4KPiA+ID4gCj4gPiA+IAo+ID4gPiBTb3JyeSwgbm8uCj4gPiA+IGhvc3Qgd2hpY2ggY2FuIG5v
-dCBhY2Nlc3MgYWxsIG9mIGRyaXZlciBtZW1vcnkgbXVzdCBzZXQgVklSVElPX0ZfQUNDRVNTX1BM
-QVRGT1JNLgo+ID4gPiAKPiA+ID4gTm90IHdvcnRoIGl0IHRvIHdvcmsgYXJvdW5kIGJyb2tlbiBo
-b3N0cy4KPiA+ID4gCj4gPiA+IFhlbiBpcyBhbiBleGNlcHRpb24gd2UgY2FycnkgYXJvdW5kIHNp
-bmNlIGl0IHByZWRhdGVzIHRoZQo+ID4gPiBpbnRyb2R1Y3Rpb24gb2YgVklSVElPX0ZfQUNDRVNT
-X1BMQVRGT1JNLgo+ID4gPiAKPiA+ID4gCj4gPiAKPiA+IFRoYW5rcyBmb3IgcG9pbnRpbmcgb3V0
-IFZJUlRJT19GX0FDQ0VTU19QTEFURk9STSB3aGljaCBJIHdhcyBub3QgYXdhcmUgb2YuIE1heWJl
-IHRoYXQgcGF0Y2ggd2FzIGEgYml0IG5hw4PCr3ZlLgo+ID4gCj4gPiBCYXNpY2FsbHkgSSdtIGxv
-b2tpbmcgZm9yIGEgd2F5IHRvIHVzZSB2c29jayB3aXRoIHFlbXUgb24gQU1EIFNFVi4gV2hlbiBJ
-IHRyeSB0byB1c2UgSU9NTVUgZm9yIHZzb2NrIEkgZ2V0IGFuIEVPUE5PVFNVUFAgb3V0IG9mIHZo
-b3N0X3Zzb2NrX3NldF9mZWF0dXJlcy4KPiA+IAo+ID4gSXMgdGhlcmUgYSByZWFzb24gd2h5IHZo
-b3N0X3Zzb2NrX3NldF9mZWF0dXJlcyBkb2Vzbid0IHVzZSB2aG9zdF9pbml0X2RldmljZV9pb3Rs
-YiBhcyBkb25lIGluIHRoZSBuZXQgZGV2aWNlPyBCZWNhdXNlIHRoYXQgd291bGQgaGF2ZSBiZWVu
-IG15IG5leHQgYXR0ZW1wdC4KPiA+IEkgd291bGQgYXBwcmVjaWF0ZSBhIHNob3J0IGNvbW1lbnQg
-b24gdGhpcyBpZGVhIG9yIGEgcmVjb21tZW5kYXRpb24gZm9yIGFub3RoZXIgc29sdXRpb24gdGhh
-dCBpcyBiZXR0ZXIgdGhhbiB0aGUgcGF0Y2ggYmVsb3cuCj4gCj4gTm90IHN1cmUgSSB1bmRlcnN0
-YW5kIHRoZSBwcm9ibGVtLiBBcmUgeW91IHVzaW5nIHFlbXU/IElmIHNvIGp1c3QgYWRkCj4gaW9t
-bXVfcGxhdGZvcm09b24gYW5kIHlvdSBhcmUgZG9uZS4KPiAKClRoYXQgd291bGQgYmUgbmljZSwg
-YnV0IG9uY2UgSSBzZXQgaW9tbXVfcGxhdGZvcm09b24gKHVzaW5nIExpbnV4IDUuNCBhcyBob3N0
-IGFuZCBndWVzdCwgcWVtdSA1LjEuMCk6CnFlbXUtc3lzdGVtLXg4Nl82NCAtZW5hYmxlLWt2bSAt
-Y3B1IGhvc3QgLW1hY2hpbmUgcTM1IC1ub2dyYXBoaWMgLW5vLXVzZXItY29uZmlnIC1ub2RlZmF1
-bHRzIC1zZXJpYWwgc3RkaW8gXAotZ2xvYmFsIHZpcnRpby1tbWlvLmZvcmNlLWxlZ2FjeT1vZmYg
-XAotZGV2aWNlIHZob3N0LXZzb2NrLXBjaSxndWVzdC1jaWQ9MyxkaXNhYmxlLWxlZ2FjeT1vbixp
-b21tdV9wbGF0Zm9ybT1vbiBcCi1vYmplY3Qgc2V2LWd1ZXN0LGlkPXNldjAsY2JpdHBvcz00Nyxy
-ZWR1Y2VkLXBoeXMtYml0cz01IFwKLW1hY2hpbmUgZHVtcC1ndWVzdC1jb3JlPW9mZixtZW1vcnkt
-ZW5jcnlwdGlvbj1zZXYwIFwKW3NvbWUgbW9yZSBhcmd1bWVudHMuLi5dCgouLi4KcWVtdS1zeXN0
-ZW0teDg2XzY0OiB2aG9zdF9zZXRfZmVhdHVyZXMgZmFpbGVkOiBPcGVyYXRpb24gbm90IHN1cHBv
-cnRlZCAoOTUpCnFlbXUtc3lzdGVtLXg4Nl82NDogRXJyb3Igc3RhcnRpbmcgdmhvc3Q6IDk1Ci4u
-LgoKVGhlcmVmb3JlIG15IHF1ZXN0aW9uIGlmIGl0IHdvdWxkIGJlIGVub3VnaCB0byB1c2Ugdmhv
-c3RfaW5pdF9kZXZpY2VfaW90bGIgaW5zdGVhZCBvZiByZXR1cm5pbmcgRU9QTk9UU1VQUCBpbiB2
-aG9zdF92c29ja19zZXRfZmVhdHVyZXMgd2hlbiBWSVJUSU9fRl9BQ0NFU1NfUExBVEZPUk0gaXMg
-cGFzc2VkLiBFcXVpdmFsZW50IHRvIHdoYXQgSSBzZWUgaW4gdmhvc3RfbmV0X3NldF9mZWF0dXJl
-cy4KT3IgbWF5YmUgSSdtIG1pc3Npbmcgc29tZXRoaW5nIGltcG9ydGFudD8KCj4gPiA+ID4gLS0t
-Cj4gPiA+ID4gIGRyaXZlcnMvdmlydGlvL3ZpcnRpb19yaW5nLmMgfCA1ICsrKysrCj4gPiA+ID4g
-IDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKykKPiA+ID4gPiAKPiA+ID4gPiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYyBiL2RyaXZlcnMvdmlydGlvL3ZpcnRp
-b19yaW5nLmMKPiA+ID4gPiBpbmRleCBiZWNjNzc2OTc5NjAuLjhjNjhjNDc1ZWMyMSAxMDA2NDQK
-PiA+ID4gPiAtLS0gYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jCj4gPiA+ID4gKysrIGIv
-ZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYwo+ID4gPiA+IEBAIC0xMiw2ICsxMiw3IEBACj4g
-PiA+ID4gICNpbmNsdWRlIDxsaW51eC9ocnRpbWVyLmg+Cj4gPiA+ID4gICNpbmNsdWRlIDxsaW51
-eC9kbWEtbWFwcGluZy5oPgo+ID4gPiA+ICAjaW5jbHVkZSA8eGVuL3hlbi5oPgo+ID4gPiA+ICsj
-aW5jbHVkZSA8bGludXgvbWVtX2VuY3J5cHQuaD4KPiA+ID4gPiAgCj4gPiA+ID4gICNpZmRlZiBE
-RUJVRwo+ID4gPiA+ICAvKiBGb3IgZGV2ZWxvcG1lbnQsIHdlIHdhbnQgdG8gY3Jhc2ggd2hlbmV2
-ZXIgdGhlIHJpbmcgaXMgc2NyZXdlZC4gKi8KPiA+ID4gPiBAQCAtMjU1LDYgKzI1NiwxMCBAQCBz
-dGF0aWMgYm9vbCB2cmluZ191c2VfZG1hX2FwaShzdHJ1Y3QgdmlydGlvX2RldmljZSAqdmRldikK
-PiA+ID4gPiAgCWlmICh4ZW5fZG9tYWluKCkpCj4gPiA+ID4gIAkJcmV0dXJuIHRydWU7Cj4gPiA+
-ID4gIAo+ID4gPiA+ICsJLyogTWVtb3J5IGVuY3J5cHRpb24gcmVxdWlyZXMgRE1BICovCj4gPiA+
-ID4gKwlpZiAobWVtX2VuY3J5cHRfYWN0aXZlKCkpCj4gPiA+ID4gKwkJcmV0dXJuIHRydWU7Cj4g
-PiA+ID4gKwo+ID4gPiA+ICAJcmV0dXJuIGZhbHNlOwo+ID4gPiA+ICB9Cj4gPiA+ID4gIAo+ID4g
-PiA+IC0tIAo+ID4gPiA+IDIuMjUuMQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25A
-bGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24u
-b3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+This is a multi-part message in MIME format
+
+--===============4242595742256594882==
+Content-Type: multipart/alternative; charset=utf-8; boundary="eqn9r7a2yc5yZLZftZzqgCStr=_ov2EZlR"
+
+This is a multi-part message in MIME format
+
+--eqn9r7a2yc5yZLZftZzqgCStr=_ov2EZlR
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+* Articles indexed by Scopus, WoS, Inspec, Google Scholar, etc.
+
+* Conference with a Google Scholar H5-Index =3D 17
+
+* Conference with a SCImago H-Index =3D 13
+
+ 
+
+---------------------------------------------------------------------------=
+-----------------------
+
+Call for Workshops Proposals
+
+CISTI'2021 - 16th Iberian Conference on Information Systems and Technologie=
+s
+
+23 - 26 June 2021, Chaves, Portugal
+
+http://cisti.eu/ <http://cisti.eu/>
+
+---------------------------------------------------------------------------=
+-------------------------
+
+ 
+
+Workshop Format
+
+The Information Systems and Technologies research and industrial community =
+is invited to submit proposals of Workshops for CISTI 2021 =E2=80=93 16th I=
+berian Conference on Information Systems and Technologies to be held at Cha=
+ves, Portugal, June 23=E2=80=9326, 2021. Two types of Workshops may be prop=
+osed: Regular Workshops and Project Workshops.
+
+Regular Workshops should focus on a specific scientific subject on the scop=
+e of CISTI 2021 but not directly included on the main conference areas. Eac=
+h regular workshop will be coordinated by an Organizing Committee composed =
+of, at least, two researchers in the field, preferably from different insti=
+tutions and different countries. The organizers should create an internatio=
+nal Program Committee for the Workshop, with recognized researchers within =
+the specific Workshop scientific area. Each workshop should have at least 1=
+0 submissions and 5 accepted papers in order to be conducted at CISTI.
+
+Project Workshops are intended to promote the dissemination and facilitate =
+the future exploitation of EU Latin-American and national project results s=
+uch as EU/FP7, EU/Horizon2020, CSIC, FCT, QREN, Portugal 2020, Fund. Gulben=
+kian, CYTED, CAPES, CNPq, FINEP and other Projects/funding sources. The res=
+ults to be disseminated may be preliminary project results (for unfinished =
+projects) or the project final results (for already finished projects). Eac=
+h project workshop should be directly related to a Project funded in a comp=
+etitive manner by a National/International Science Organization. The Worksh=
+op should be coordinated by an Organizing Committee composed by at least tw=
+o researchers including the Principal Investigator of the project. Each Wor=
+kshop will have 1 article offered for 10 articles with paid registration, 2=
+ articles offered for 20 articles with paid registration, and 3 articles of=
+fered for 40 articles with paid registration. The selection of Workshops wi=
+ll be performed by CISTI 2021 Conference Chairs. Workshops full papers will=
+ be published in the conference main proceedings in specific Workshop chapt=
+ers. Proceedings will be submitted for indexation by ISI, SCOPUS, EI-Conpen=
+dex, INSPEC and Google Scholar. Detailed and up-to-date information may be =
+found at CISTI 2021 website: http://www.cisti.eu/ <http://www.cisti.eu/>.
+
+ 
+
+Workshop Organization 
+
+The Organizing Committee of each Workshop will be responsible for:
+
+* Producing and distributing the Workshop Call for Papers (CFP); 
+* Coordinating the review and selection process for the papers submitted to=
+ the Workshop, as Workshop chairs (on the paper submission system installed=
+ for all the Workshops); 
+* Delivering the final versions of the papers accepted for the Workshop in =
+accordance with the guidelines and deadlines defined by CISTI 2021 organize=
+rs; 
+* Coordinating and chairing the Workshop sessions at the conference. 
+
+
+CISTI 2021 organizers reserve the right to cancel any Workshop if deadlines=
+ are missed or if the number of registered attendees is too low to support =
+the costs associated with the Workshop.
+
+ 
+
+Proposal Contents
+
+Regular Workshop proposals should contain the following information:
+
+* Workshop title; 
+* Brief description of the specific scientific scope of the Workshop; 
+* List of topics of interest (max 15 topics); 
+* Reasons the Workshop should be held within CISTI=E2=80=992021; 
+* Name, postal address, phone and email of all the members of the Workshop =
+Organizing Committee; 
+* Proposal for the Workshop Program Committee (Names and affiliations). 
+
+
+Project Workshop proposals should contain the following information:
+
+* Workshop title; 
+* Project Title, Reference, Principal Investigator, Funding Organization, T=
+otal Funding, Consortium, Abstract and Objectives; 
+* Reasons the Workshop should be held within CISTI=E2=80=992021; 
+* Name, postal address, phone and email of all the members of the Workshop =
+Organizing Committee. 
+
+
+Proposals should be submitted electronically (in Word or compatible format)=
+ at https://easychair.org/conferences/?conf=3Dcisti2021workshops <https://e=
+asychair.org/conferences/?conf=3Dcisti2021workshops>, in English, Portugues=
+e and/or Spanish, by November 1, 2020.
+
+ 
+
+Important Dates
+
+* Deadline for Workshop proposals: November 1, 2020 
+* Notification of Workshop acceptance: November 8, 2020 
+* Deadline for paper submission: February 28, 2021 
+* Notification of paper acceptance: March 28, 2021 
+* Deadline for final versions and conference registration: April 11, 2021 
+* Deadline for Workshop final papers delivery to CISTI organizers: April 11=
+, 2021 
+* Conference dates: June 23-26, 2021 
+
+
+ 
+
+Website of CISTI'2021: http://cisti.eu/ <http://cisti.eu/>
+
+ 
+
+--
+
+CISTI'2021 Tema
+
+http://cisti.eu/ <http://cisti.eu/>
+
+
+-- 
+This email has been checked for viruses by AVG.
+https://www.avg.com
+
+--eqn9r7a2yc5yZLZftZzqgCStr=_ov2EZlR
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html>
+  <head>
+    <title></title>
+    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
+" />
+  </head>
+  <body>
+    <p>* Articles indexed by Scopus, WoS, Inspec, Google Scholar, etc.</p>
+    <p>* Conference with a Google Scholar H5-Index =3D 17</p>
+    <p>* Conference with a SCImago H-Index =3D 13</p>
+    <p>&nbsp;</p>
+    <p>--------------------------------------------------------------------=
+------------------------------</p>
+    <p>Call for Workshops Proposals</p>
+    <p><strong>CISTI'2021 - 16th Iberian Conference on Information Systems =
+and Technologies</strong></p>
+    <p>23 - 26 June 2021, Chaves, Portugal</p>
+    <p><a href=3D"http://cisti.eu/">http://cisti.eu/</a></p>
+    <p>--------------------------------------------------------------------=
+--------------------------------</p>
+    <p>&nbsp;</p>
+    <div itemprop=3D"articleBody">
+      <p><strong>Workshop Format</strong></p>
+      <p>The Information Systems and Technologies research and industrial c=
+ommunity is invited to submit proposals of Workshops for CISTI 2021 &ndash;=
+ 16th Iberian Conference on Information Systems and Technologies to be held=
+ at Chaves, Portugal, June 23&ndash;26, 2021. Two types of Workshops may be=
+ proposed: Regular Workshops and Project Workshops.</p>
+      <p>Regular Workshops should focus on a specific scientific subject on=
+ the scope of CISTI 2021 but not directly included on the main conference a=
+reas. Each regular workshop will be coordinated by an Organizing Committee =
+composed of, at least, two researchers in the field, preferably from differ=
+ent institutions and different countries. The organizers should create an i=
+nternational Program Committee for the Workshop, with recognized researcher=
+s within the specific Workshop scientific area. Each workshop should have a=
+t least 10 submissions and 5 accepted papers in order to be conducted at CI=
+STI.</p>
+      <p>Project Workshops are intended to promote the dissemination and fa=
+cilitate the future exploitation of EU Latin-American and national project =
+results such as EU/FP7, EU/Horizon2020, CSIC, FCT, QREN, Portugal 2020, Fun=
+d. Gulbenkian, CYTED, CAPES, CNPq, FINEP and other Projects/funding sources=
+=2E The results to be disseminated may be preliminary project results (for =
+unfinished projects) or the project final results (for already finished pro=
+jects). Each project workshop should be directly related to a Project funde=
+d in a competitive manner by a National/International Science Organization.=
+ The Workshop should be coordinated by an Organizing Committee composed by =
+at least two researchers including the Principal Investigator of the projec=
+t. Each Workshop will have 1 article offered for 10 articles with paid regi=
+stration, 2 articles offered for 20 articles with paid registration, and 3 =
+articles offered for 40 articles with paid registration. The selection of W=
+orkshops will be performed by CISTI 2021 Conference Chairs. Workshops full =
+papers will be published in the conference main proceedings in specific Wor=
+kshop chapters. Proceedings will be submitted for indexation by ISI, SCOPUS=
+, EI-Conpendex, INSPEC and Google Scholar. Detailed and up-to-date informat=
+ion may be found at CISTI 2021 website: <a href=3D"http://www.cisti.eu/">ht=
+tp://www.cisti.eu/</a>.</p>
+      <p>&nbsp;</p>
+      <p><strong>Workshop Organization </strong></p>
+      <p>The Organizing Committee of each Workshop will be responsible for:=
+</p>
+      <ul>
+        <li>Producing and distributing the Workshop Call for Papers (CFP); =
+</li>
+        <li>Coordinating the review and selection process for the papers su=
+bmitted to the Workshop, as Workshop chairs (on the paper submission system=
+ installed for all the Workshops); </li>
+        <li>Delivering the final versions of the papers accepted for the Wo=
+rkshop in accordance with the guidelines and deadlines defined by CISTI 202=
+1 organizers; </li>
+        <li>Coordinating and chairing the Workshop sessions at the conferen=
+ce. </li>
+      </ul>
+      <p>CISTI 2021 organizers reserve the right to cancel any Workshop if =
+deadlines are missed or if the number of registered attendees is too low to=
+ support the costs associated with the Workshop.</p>
+      <p>&nbsp;</p>
+      <p><strong>Proposal Contents</strong></p>
+      <p>Regular Workshop proposals should contain the following informatio=
+n:</p>
+      <ul>
+        <li>Workshop title; </li>
+        <li>Brief description of the specific scientific scope of the Works=
+hop; </li>
+        <li>List of topics of interest (max 15 topics); </li>
+        <li>Reasons the Workshop should be held within CISTI&rsquo;2021; </=
+li>
+        <li>Name, postal address, phone and email of all the members of the=
+ Workshop Organizing Committee; </li>
+        <li>Proposal for the Workshop Program Committee (Names and affiliat=
+ions). </li>
+      </ul>
+      <p>Project Workshop proposals should contain the following informatio=
+n:</p>
+      <ul>
+        <li>Workshop title; </li>
+        <li>Project Title, Reference, Principal Investigator, Funding Organ=
+ization, Total Funding, Consortium, Abstract and Objectives; </li>
+        <li>Reasons the Workshop should be held within CISTI&rsquo;2021; </=
+li>
+        <li>Name, postal address, phone and email of all the members of the=
+ Workshop Organizing Committee. </li>
+      </ul>
+      <p>Proposals should be submitted electronically (in Word or compatibl=
+e format) at <a href=3D"https://easychair.org/conferences/?conf=3Dcisti2021=
+workshops" rel=3D"noopener noreferrer" target=3D"_blank"><strong>https://ea=
+sychair.org/conferences/?conf=3Dcisti2021workshops</strong></a>, in English=
+, Portuguese and/or Spanish, by November 1, 2020.</p>
+      <p>&nbsp;</p>
+      <p><strong>Important Dates</strong></p>
+      <ul>
+        <li>Deadline for Workshop proposals: November 1, 2020 </li>
+        <li>Notification of Workshop acceptance: November 8, 2020 </li>
+        <li>Deadline for paper submission: February 28, 2021 </li>
+        <li>Notification of paper acceptance: March 28, 2021 </li>
+        <li>Deadline for final versions and conference registration: April =
+11, 2021 </li>
+        <li>Deadline for Workshop final papers delivery to CISTI organizers=
+: April 11, 2021 </li>
+        <li>Conference dates: June 23-26, 2021 </li>
+      </ul>
+    </div>
+    <p>&nbsp;</p>
+    <p><strong>Website of CISTI'2021</strong>: <a href=3D"http://cisti.eu/"=
+>http://cisti.eu/</a></p>
+    <p>&nbsp;</p>
+    <p>--</p>
+    <p>CISTI'2021 Tema</p>
+    <p><a href=3D"http://cisti.eu/">http://cisti.eu/</a></p>
+  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br />
+<table style=3D"border-top: 1px solid #D3D4DE;">
+	<tr>
+        <td style=3D"width: 55px; padding-top: 13px;"><a href=3D"http://www=
+=2Eavg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaig=
+n=3Dsig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"http=
+s://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=
+=3D""  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></=
+a></td>
+		<td style=3D"width: 470px; padding-top: 12px; color: #41424e; font-size: =
+13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virus-=
+free. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_=
+source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
+"_blank" style=3D"color: #4453ea;">www.avg.com</a>
+		</td>
+	</tr>
+</table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" heigh=
+t=3D"1"> </a></div></body>
+</html>
+
+--eqn9r7a2yc5yZLZftZzqgCStr=_ov2EZlR--
+
+
+--===============4242595742256594882==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============4242595742256594882==--
+
