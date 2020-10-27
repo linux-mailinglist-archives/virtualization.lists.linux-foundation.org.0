@@ -1,75 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CA41298BB8
-	for <lists.virtualization@lfdr.de>; Mon, 26 Oct 2020 12:19:42 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id EAC9029A2C4
+	for <lists.virtualization@lfdr.de>; Tue, 27 Oct 2020 03:44:55 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1AEE1857D0;
-	Mon, 26 Oct 2020 11:19:41 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id AC4A385E51;
+	Tue, 27 Oct 2020 02:44:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IVPnaHDOacGb; Mon, 26 Oct 2020 11:19:38 +0000 (UTC)
+	with ESMTP id f_A8fOIkWTQA; Tue, 27 Oct 2020 02:44:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 5EBD0867CD;
-	Mon, 26 Oct 2020 11:19:38 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9A6F685C54;
+	Tue, 27 Oct 2020 02:44:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 447E7C0051;
-	Mon, 26 Oct 2020 11:19:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7168FC0051;
+	Tue, 27 Oct 2020 02:44:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 46E25C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 95BE9C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Oct 2020 11:19:36 +0000 (UTC)
+ Tue, 27 Oct 2020 02:44:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 35BE58723C
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 78AFF85B2F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Oct 2020 11:19:36 +0000 (UTC)
+ Tue, 27 Oct 2020 02:44:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id y7ep4t7gAU64
+ with ESMTP id ckIykOCGe-GU
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Oct 2020 11:19:35 +0000 (UTC)
+ Tue, 27 Oct 2020 02:44:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 1CE678723E
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 8233985B0D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Oct 2020 11:19:35 +0000 (UTC)
-Received: from localhost (unknown [213.57.247.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ Tue, 27 Oct 2020 02:44:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1603766688;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+oPgZQ9kwH3Dhos275y17fQzttSlkylt7q9lLolsmfA=;
+ b=CVamtyBPyV04smcjE9sjABzOPWyzzjDor/ndOdEKby699p0A1I1/TsMtx+MpHxpTSFyXOU
+ 2PWrWtJA6SPE5tVsDsP2puJjdpRYy55mk1n+eRiNS0ZURbjeeerZELA+2FI8UFVgRGHBE0
+ CZp+FqrUA9vaMAuLvfh3vonZ1lButNE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-98-c6rnTZ4DMlqFQsDprG0VmQ-1; Mon, 26 Oct 2020 22:44:43 -0400
+X-MC-Unique: c6rnTZ4DMlqFQsDprG0VmQ-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3E7E222460;
- Mon, 26 Oct 2020 11:19:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603711174;
- bh=ECLdZtZi2ZiOf9v9nodXdxHO9s/+UDT9bsbzqmbZ1B4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=OxOr+Z9qI2rXrmjPgKu6fHJYkS4h8AYdk/UN1r18CGYQGd4G7hZuG9nCQ60iVSdyB
- Q3KVFdRdJKR2dcMcIEJfOcZRP/1Z/OdKF4QulAz1VxwjviDG9j3xFhrvpyVQM4qxpt
- MveqhpaozPeXZCfhf5hg/L+NahN7ubqDQacO3teM=
-From: Leon Romanovsky <leon@kernel.org>
-To: Doug Ledford <dledford@redhat.com>,
-	Jason Gunthorpe <jgg@nvidia.com>
-Subject: [PATCH mlx5-next 11/11] RDMA/mlx5: Remove IB representors dead code
-Date: Mon, 26 Oct 2020 13:18:49 +0200
-Message-Id: <20201026111849.1035786-12-leon@kernel.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201026111849.1035786-1-leon@kernel.org>
-References: <20201026111849.1035786-1-leon@kernel.org>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6935F186DD2E;
+ Tue, 27 Oct 2020 02:44:42 +0000 (UTC)
+Received: from [10.72.13.117] (ovpn-13-117.pek2.redhat.com [10.72.13.117])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D146F62A0B;
+ Tue, 27 Oct 2020 02:44:25 +0000 (UTC)
+Subject: Re: [PATCH] vdpa/mlx5: Fix error return in map_direct_mr()
+To: Jing Xiangfeng <jingxiangfeng@huawei.com>, mst@redhat.com,
+ eli@mellanox.com, parav@mellanox.com, alex.dewar@gmx.co.uk
+References: <20201026070637.164321-1-jingxiangfeng@huawei.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <8e37340d-2b4f-caaf-3277-32a697b2d204@redhat.com>
+Date: Tue, 27 Oct 2020 10:44:15 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Cc: pierre-louis.bossart@linux.intel.com, alsa-devel@alsa-project.org,
- kiran.patil@intel.com, "Michael S. Tsirkin" <mst@redhat.com>,
- linux-rdma@vger.kernel.org, netdev@vger.kernel.org,
- ranjani.sridharan@linux.intel.com, virtualization@lists.linux-foundation.org,
- fred.oh@linux.intel.com, tiwai@suse.de, broonie@kernel.org,
- Parav Pandit <parav@nvidia.com>, Roi Dayan <roid@nvidia.com>,
- shiraz.saleem@intel.com, Jakub Kicinski <kuba@kernel.org>,
- dan.j.williams@intel.com, Leon Romanovsky <leonro@nvidia.com>,
- Saeed Mahameed <saeedm@nvidia.com>, linux-kernel@vger.kernel.org,
- "David S . Miller" <davem@davemloft.net>
+In-Reply-To: <20201026070637.164321-1-jingxiangfeng@huawei.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,168 +87,36 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Leon Romanovsky <leonro@nvidia.com>
-
-Delete dead code.
-
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/infiniband/hw/mlx5/ib_rep.c           | 31 +++++--------------
- drivers/infiniband/hw/mlx5/ib_rep.h           | 31 -------------------
- drivers/net/ethernet/mellanox/mlx5/core/dev.c |  4 +--
- 3 files changed, 9 insertions(+), 57 deletions(-)
-
-diff --git a/drivers/infiniband/hw/mlx5/ib_rep.c b/drivers/infiniband/hw/mlx5/ib_rep.c
-index 9810bdd7f3bc..a1a9450ed92c 100644
---- a/drivers/infiniband/hw/mlx5/ib_rep.c
-+++ b/drivers/infiniband/hw/mlx5/ib_rep.c
-@@ -13,7 +13,7 @@ mlx5_ib_set_vport_rep(struct mlx5_core_dev *dev, struct mlx5_eswitch_rep *rep)
- 	struct mlx5_ib_dev *ibdev;
- 	int vport_index;
-
--	ibdev = mlx5_ib_get_uplink_ibdev(dev->priv.eswitch);
-+	ibdev = mlx5_eswitch_uplink_get_proto_dev(dev->priv.eswitch, REP_IB);
- 	vport_index = rep->vport_index;
-
- 	ibdev->port[vport_index].rep = rep;
-@@ -74,6 +74,11 @@ mlx5_ib_vport_rep_load(struct mlx5_core_dev *dev, struct mlx5_eswitch_rep *rep)
- 	return ret;
- }
-
-+static void *mlx5_ib_rep_to_dev(struct mlx5_eswitch_rep *rep)
-+{
-+	return rep->rep_data[REP_IB].priv;
-+}
-+
- static void
- mlx5_ib_vport_rep_unload(struct mlx5_eswitch_rep *rep)
- {
-@@ -91,40 +96,18 @@ mlx5_ib_vport_rep_unload(struct mlx5_eswitch_rep *rep)
- 		__mlx5_ib_remove(dev, dev->profile, MLX5_IB_STAGE_MAX);
- }
-
--static void *mlx5_ib_vport_get_proto_dev(struct mlx5_eswitch_rep *rep)
--{
--	return mlx5_ib_rep_to_dev(rep);
--}
--
- static const struct mlx5_eswitch_rep_ops rep_ops = {
- 	.load = mlx5_ib_vport_rep_load,
- 	.unload = mlx5_ib_vport_rep_unload,
--	.get_proto_dev = mlx5_ib_vport_get_proto_dev,
-+	.get_proto_dev = mlx5_ib_rep_to_dev,
- };
-
--struct mlx5_ib_dev *mlx5_ib_get_rep_ibdev(struct mlx5_eswitch *esw,
--					  u16 vport_num)
--{
--	return mlx5_eswitch_get_proto_dev(esw, vport_num, REP_IB);
--}
--
- struct net_device *mlx5_ib_get_rep_netdev(struct mlx5_eswitch *esw,
- 					  u16 vport_num)
- {
- 	return mlx5_eswitch_get_proto_dev(esw, vport_num, REP_ETH);
- }
-
--struct mlx5_ib_dev *mlx5_ib_get_uplink_ibdev(struct mlx5_eswitch *esw)
--{
--	return mlx5_eswitch_uplink_get_proto_dev(esw, REP_IB);
--}
--
--struct mlx5_eswitch_rep *mlx5_ib_vport_rep(struct mlx5_eswitch *esw,
--					   u16 vport_num)
--{
--	return mlx5_eswitch_vport_rep(esw, vport_num);
--}
--
- struct mlx5_flow_handle *create_flow_rule_vport_sq(struct mlx5_ib_dev *dev,
- 						   struct mlx5_ib_sq *sq,
- 						   u16 port)
-diff --git a/drivers/infiniband/hw/mlx5/ib_rep.h b/drivers/infiniband/hw/mlx5/ib_rep.h
-index 93f562735e89..ce1dcb105dbd 100644
---- a/drivers/infiniband/hw/mlx5/ib_rep.h
-+++ b/drivers/infiniband/hw/mlx5/ib_rep.h
-@@ -12,11 +12,6 @@
- extern const struct mlx5_ib_profile raw_eth_profile;
-
- #ifdef CONFIG_MLX5_ESWITCH
--struct mlx5_ib_dev *mlx5_ib_get_rep_ibdev(struct mlx5_eswitch *esw,
--					  u16 vport_num);
--struct mlx5_ib_dev *mlx5_ib_get_uplink_ibdev(struct mlx5_eswitch *esw);
--struct mlx5_eswitch_rep *mlx5_ib_vport_rep(struct mlx5_eswitch *esw,
--					   u16 vport_num);
- int mlx5r_rep_init(void);
- void mlx5r_rep_cleanup(void);
- struct mlx5_flow_handle *create_flow_rule_vport_sq(struct mlx5_ib_dev *dev,
-@@ -25,26 +20,6 @@ struct mlx5_flow_handle *create_flow_rule_vport_sq(struct mlx5_ib_dev *dev,
- struct net_device *mlx5_ib_get_rep_netdev(struct mlx5_eswitch *esw,
- 					  u16 vport_num);
- #else /* CONFIG_MLX5_ESWITCH */
--static inline
--struct mlx5_ib_dev *mlx5_ib_get_rep_ibdev(struct mlx5_eswitch *esw,
--					  u16 vport_num)
--{
--	return NULL;
--}
--
--static inline
--struct mlx5_ib_dev *mlx5_ib_get_uplink_ibdev(struct mlx5_eswitch *esw)
--{
--	return NULL;
--}
--
--static inline
--struct mlx5_eswitch_rep *mlx5_ib_vport_rep(struct mlx5_eswitch *esw,
--					   u16 vport_num)
--{
--	return NULL;
--}
--
- static inline int mlx5r_rep_init(void) { return 0; }
- static inline void mlx5r_rep_cleanup(void) {}
- static inline
-@@ -62,10 +37,4 @@ struct net_device *mlx5_ib_get_rep_netdev(struct mlx5_eswitch *esw,
- 	return NULL;
- }
- #endif
--
--static inline
--struct mlx5_ib_dev *mlx5_ib_rep_to_dev(struct mlx5_eswitch_rep *rep)
--{
--	return rep->rep_data[REP_IB].priv;
--}
- #endif /* __MLX5_IB_REP_H__ */
-diff --git a/drivers/net/ethernet/mellanox/mlx5/core/dev.c b/drivers/net/ethernet/mellanox/mlx5/core/dev.c
-index 842b6f8ae457..ca65a143e4ed 100644
---- a/drivers/net/ethernet/mellanox/mlx5/core/dev.c
-+++ b/drivers/net/ethernet/mellanox/mlx5/core/dev.c
-@@ -198,14 +198,14 @@ enum {
- 	MLX5_INTERFACE_PROTOCOL_MPIB,
- 	MLX5_INTERFACE_PROTOCOL_IB,
-
--	MLX5_INTERFACE_PROTOCOL_VDPA,
-+	MLX5_INTERFACE_PROTOCOL_VNET,
- };
-
- static const struct mlx5_adev_device {
- 	const char *suffix;
- 	bool (*is_supported)(struct mlx5_core_dev *dev);
- } mlx5_adev_devices[] = {
--	[MLX5_INTERFACE_PROTOCOL_VDPA] = { .suffix = "vnet",
-+	[MLX5_INTERFACE_PROTOCOL_VNET] = { .suffix = "vnet",
- 					   .is_supported = &is_vnet_supported },
- 	[MLX5_INTERFACE_PROTOCOL_IB] = { .suffix = "rdma",
- 					 .is_supported = &is_ib_supported },
---
-2.26.2
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDIwMjAvMTAvMjYg5LiL5Y2IMzowNiwgSmluZyBYaWFuZ2Zlbmcgd3JvdGU6Cj4gRml4IHRv
+IHJldHVybiB0aGUgdmFyaWFibGUgImVyciIgZnJvbSB0aGUgZXJyb3IgaGFuZGxpbmcgY2FzZSBp
+bnN0ZWFkCj4gb2YgInJldCIuCj4KPiBGaXhlczogOTRhYmJjY2RmMjkxICgidmRwYS9tbHg1OiBB
+ZGQgc2hhcmVkIG1lbW9yeSByZWdpc3RyYXRpb24gY29kZSIpCj4gU2lnbmVkLW9mZi1ieTogSmlu
+ZyBYaWFuZ2ZlbmcgPGppbmd4aWFuZ2ZlbmdAaHVhd2VpLmNvbT4KPiAtLS0KPiAgIGRyaXZlcnMv
+dmRwYS9tbHg1L2NvcmUvbXIuYyB8IDUgKystLS0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2Vy
+dGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92ZHBhL21s
+eDUvY29yZS9tci5jIGIvZHJpdmVycy92ZHBhL21seDUvY29yZS9tci5jCj4gaW5kZXggZWYxYzU1
+MGY4MjY2Li40YjYxOTU2NjZjNTggMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92ZHBhL21seDUvY29y
+ZS9tci5jCj4gKysrIGIvZHJpdmVycy92ZHBhL21seDUvY29yZS9tci5jCj4gQEAgLTIzOSw3ICsy
+MzksNiBAQCBzdGF0aWMgaW50IG1hcF9kaXJlY3RfbXIoc3RydWN0IG1seDVfdmRwYV9kZXYgKm12
+ZGV2LCBzdHJ1Y3QgbWx4NV92ZHBhX2RpcmVjdF9tcgo+ICAgCXU2NCBwYWVuZDsKPiAgIAlzdHJ1
+Y3Qgc2NhdHRlcmxpc3QgKnNnOwo+ICAgCXN0cnVjdCBkZXZpY2UgKmRtYSA9IG12ZGV2LT5tZGV2
+LT5kZXZpY2U7Cj4gLQlpbnQgcmV0Owo+ICAgCj4gICAJZm9yIChtYXAgPSB2aG9zdF9pb3RsYl9p
+dHJlZV9maXJzdChpb3RsYiwgbXItPnN0YXJ0LCBtci0+ZW5kIC0gMSk7Cj4gICAJICAgICBtYXA7
+IG1hcCA9IHZob3N0X2lvdGxiX2l0cmVlX25leHQobWFwLCBzdGFydCwgbXItPmVuZCAtIDEpKSB7
+Cj4gQEAgLTI3Nyw4ICsyNzYsOCBAQCBzdGF0aWMgaW50IG1hcF9kaXJlY3RfbXIoc3RydWN0IG1s
+eDVfdmRwYV9kZXYgKm12ZGV2LCBzdHJ1Y3QgbWx4NV92ZHBhX2RpcmVjdF9tcgo+ICAgZG9uZToK
+PiAgIAltci0+bG9nX3NpemUgPSBsb2dfZW50aXR5X3NpemU7Cj4gICAJbXItPm5zZyA9IG5zZzsK
+PiAtCXJldCA9IGRtYV9tYXBfc2dfYXR0cnMoZG1hLCBtci0+c2dfaGVhZC5zZ2wsIG1yLT5uc2cs
+IERNQV9CSURJUkVDVElPTkFMLCAwKTsKPiAtCWlmICghcmV0KQo+ICsJZXJyID0gZG1hX21hcF9z
+Z19hdHRycyhkbWEsIG1yLT5zZ19oZWFkLnNnbCwgbXItPm5zZywgRE1BX0JJRElSRUNUSU9OQUws
+IDApOwo+ICsJaWYgKCFlcnIpCj4gICAJCWdvdG8gZXJyX21hcDsKPiAgIAo+ICAgCWVyciA9IGNy
+ZWF0ZV9kaXJlY3RfbXIobXZkZXYsIG1yKTsKCgpBY2tlZC1ieTogSmFzb24gV2FuZyA8amFzb3dh
+bmdAcmVkaGF0LmNvbT4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMu
+bGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21h
+aWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
