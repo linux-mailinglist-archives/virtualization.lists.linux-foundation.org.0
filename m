@@ -1,97 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2F5C29B669
-	for <lists.virtualization@lfdr.de>; Tue, 27 Oct 2020 16:28:58 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 96A0429BDFD
+	for <lists.virtualization@lfdr.de>; Tue, 27 Oct 2020 17:50:51 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A17AC872E6;
-	Tue, 27 Oct 2020 15:28:57 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 5A3D385F52;
+	Tue, 27 Oct 2020 16:50:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3nBlO+MEN7ZX; Tue, 27 Oct 2020 15:28:57 +0000 (UTC)
+	with ESMTP id mBjguLvZAvd3; Tue, 27 Oct 2020 16:50:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 266DB872ED;
-	Tue, 27 Oct 2020 15:28:57 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0C3CB85FB2;
+	Tue, 27 Oct 2020 16:50:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0684DC0051;
-	Tue, 27 Oct 2020 15:28:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D3CD1C0051;
+	Tue, 27 Oct 2020 16:50:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4980FC0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 79574C0051
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Oct 2020 15:28:55 +0000 (UTC)
+ Tue, 27 Oct 2020 16:50:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4570887286
+ by whitealder.osuosl.org (Postfix) with ESMTP id 71C41860A8
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Oct 2020 15:28:55 +0000 (UTC)
+ Tue, 27 Oct 2020 16:50:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id b8ub7DOCy5Y2
+ with ESMTP id MPvlogptL-n1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Oct 2020 15:28:54 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 91AF687031
+ Tue, 27 Oct 2020 16:50:46 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from smtprelay.hostedemail.com (smtprelay0236.hostedemail.com
+ [216.40.44.236])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 8080986064
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Oct 2020 15:28:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1603812533;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=mlWO+8V1OcYguip2KBsMhYWBSFJwL/+zUDmEZaIbfJ4=;
- b=StVGGlOwtyvhP/3laWCb2RdgGghjqmvxjiuHFj/uDWwEjrCRxo7uHo6sUFMQvND77hfAIR
- WT+QPVvEaaNvCs0H1I+oBxeYYl4txCa4sKLUKeeaDhXUa9wrQBJu873e7nvCjUgmu/lwoJ
- vqz4OB+guTB2fYykjJQ83Q6BhRTKL1Y=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-21-h0qCXRVPPjKAyKByW_F01A-1; Tue, 27 Oct 2020 11:28:48 -0400
-X-MC-Unique: h0qCXRVPPjKAyKByW_F01A-1
-Received: by mail-wm1-f69.google.com with SMTP id s25so710919wmj.7
- for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Oct 2020 08:28:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=mlWO+8V1OcYguip2KBsMhYWBSFJwL/+zUDmEZaIbfJ4=;
- b=FNBMjoHp5yI1rn5bd8PgC1msrSSXF3yMxKqSJAehRlOh/jcOx4KMY+tHGbR8m2bD8K
- 33iR+sdaf3gRHRZtBBCnnS/GPR0NOz5Vvtbnb34InXOwjcffFNutspved/EqW1AwwDlM
- Ac9ErrrpN4Dr8AaqVrKGLylWi8IhUnB3NM9xK0ImfM4yL/jggYRMTADhyU3VEbuLEeE2
- nThZ+SLaDCqSR084SWUjB4GM/Vcp9zB4sMhb67SUxnVenBtyhSXAj1BYvtXETsI+b+1c
- C16LH8/3p7BT4ssOf8A2bWHmEoP18jdrHFfZ/o/u/4nFVB2xdR4diaytXG3Yq3GSixFW
- JBiw==
-X-Gm-Message-State: AOAM533hHl4mFrg1iGCWLMv77Vp6Uy/5Qjm1VO9zANFLhzp1vhSsY4S8
- YfYg0thpBA8syWq9U0j2cAyyC4w0EjKbD1PJ7Tt5ttXxpB1wAwzsbpi1tG3rHtnt50UXHkwKSvq
- r5zJ+gEeWeQHaLrUpG89djkV83UGdQQ051Hi809byDg==
-X-Received: by 2002:a1c:2cd7:: with SMTP id s206mr3177554wms.182.1603812526986; 
- Tue, 27 Oct 2020 08:28:46 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyuH3n7lQ9eR5dnqf6yc1oFeHmyleXhbTjubsRyj6zs3Jak/y/oaUl12gqM18qHQ8tFGKD6AA==
-X-Received: by 2002:a1c:2cd7:: with SMTP id s206mr3177537wms.182.1603812526789; 
- Tue, 27 Oct 2020 08:28:46 -0700 (PDT)
-Received: from redhat.com (bzq-109-65-21-184.red.bezeqint.net. [109.65.21.184])
- by smtp.gmail.com with ESMTPSA id 3sm2370433wmd.19.2020.10.27.08.28.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2020 08:28:45 -0700 (PDT)
-Date: Tue, 27 Oct 2020 11:28:40 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
+ Tue, 27 Oct 2020 16:50:46 +0000 (UTC)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
+ [216.40.38.60])
+ by smtprelay04.hostedemail.com (Postfix) with ESMTP id 86139180A7FE0;
+ Tue, 27 Oct 2020 16:50:43 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 2, 0, 0, , d41d8cd98f00b204, joe@perches.com, ,
+ RULES_HIT:41:69:355:379:599:800:960:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2553:2559:2562:2828:3138:3139:3140:3141:3142:3353:3622:3865:3866:3870:3872:3874:4321:4605:5007:6742:6743:7576:7903:8603:10004:10400:10848:11026:11232:11473:11658:11914:12043:12296:12297:12438:12555:12740:12760:12895:12986:13069:13311:13357:13439:14096:14097:14181:14659:14721:21080:21451:21627:21990:30012:30054:30090:30091,
+ 0, RBL:none, CacheIP:none, Bayesian:0.5, 0.5, 0.5, Netcheck:none,
+ DomainCache:0, MSF:not bulk, SPF:, MSBL:0, DNSBL:none, Custom_rules:0:0:0,
+ LFtime:30, LUA_SUMMARY:none
+X-HE-Tag: bag02_2a11e012727d
+X-Filterd-Recvd-Size: 4083
+Received: from XPS-9350.home (unknown [47.151.133.149])
+ (Authenticated sender: joe@perches.com)
+ by omf19.hostedemail.com (Postfix) with ESMTPA;
+ Tue, 27 Oct 2020 16:50:38 +0000 (UTC)
+Message-ID: <685d850347a1191bba8ba7766fc409b140d18f03.camel@perches.com>
 Subject: Re: [PATCH 3/8] vhost: vringh: use krealloc_array()
-Message-ID: <20201027112607-mutt-send-email-mst@kernel.org>
+From: Joe Perches <joe@perches.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>, Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Tue, 27 Oct 2020 09:50:36 -0700
+In-Reply-To: <20201027112607-mutt-send-email-mst@kernel.org>
 References: <20201027121725.24660-1-brgl@bgdev.pl>
  <20201027121725.24660-4-brgl@bgdev.pl>
+ <20201027112607-mutt-send-email-mst@kernel.org>
+User-Agent: Evolution 3.38.1-1 
 MIME-Version: 1.0
-In-Reply-To: <20201027121725.24660-4-brgl@bgdev.pl>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
 Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org,
  David Airlie <airlied@linux.ie>, Gustavo Padovan <gustavo@padovan.org>,
  Linus Walleij <linus.walleij@linaro.org>, dri-devel@lists.freedesktop.org,
@@ -112,7 +86,7 @@ Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org,
  Takashi Iwai <tiwai@suse.com>, linux-kernel@vger.kernel.org,
  Pekka Enberg <penberg@kernel.org>, James Morse <james.morse@arm.com>,
  Daniel Vetter <daniel@ffwll.ch>, Andrew Morton <akpm@linux-foundation.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -129,40 +103,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Oct 27, 2020 at 01:17:20PM +0100, Bartosz Golaszewski wrote:
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Tue, 2020-10-27 at 11:28 -0400, Michael S. Tsirkin wrote:
+> On Tue, Oct 27, 2020 at 01:17:20PM +0100, Bartosz Golaszewski wrote:
+> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> > 
+> > Use the helper that checks for overflows internally instead of manually
+> > calculating the size of the new array.
+> > 
+> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > 
-> Use the helper that checks for overflows internally instead of manually
-> calculating the size of the new array.
-> 
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> No problem with the patch, it does introduce some symmetry in the code.
 
-No problem with the patch, it does introduce some symmetry in the code.
+Perhaps more symmetry by using kmemdup
+---
+ drivers/vhost/vringh.c | 23 ++++++++++-------------
+ 1 file changed, 10 insertions(+), 13 deletions(-)
 
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-
-
-
-> ---
->  drivers/vhost/vringh.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/vhost/vringh.c b/drivers/vhost/vringh.c
-> index 8bd8b403f087..08a0e1c842df 100644
-> --- a/drivers/vhost/vringh.c
-> +++ b/drivers/vhost/vringh.c
-> @@ -198,7 +198,8 @@ static int resize_iovec(struct vringh_kiov *iov, gfp_t gfp)
->  
->  	flag = (iov->max_num & VRINGH_IOV_ALLOCATED);
->  	if (flag)
-> -		new = krealloc(iov->iov, new_num * sizeof(struct iovec), gfp);
-> +		new = krealloc_array(iov->iov, new_num,
-> +				     sizeof(struct iovec), gfp);
->  	else {
->  		new = kmalloc_array(new_num, sizeof(struct iovec), gfp);
->  		if (new) {
-> -- 
-> 2.29.1
+diff --git a/drivers/vhost/vringh.c b/drivers/vhost/vringh.c
+index 8bd8b403f087..99222a3651cd 100644
+--- a/drivers/vhost/vringh.c
++++ b/drivers/vhost/vringh.c
+@@ -191,26 +191,23 @@ static int move_to_indirect(const struct vringh *vrh,
+ static int resize_iovec(struct vringh_kiov *iov, gfp_t gfp)
+ {
+ 	struct kvec *new;
+-	unsigned int flag, new_num = (iov->max_num & ~VRINGH_IOV_ALLOCATED) * 2;
++	size_t new_num = (iov->max_num & ~VRINGH_IOV_ALLOCATED) * 2;
++	size_t size;
+ 
+ 	if (new_num < 8)
+ 		new_num = 8;
+ 
+-	flag = (iov->max_num & VRINGH_IOV_ALLOCATED);
+-	if (flag)
+-		new = krealloc(iov->iov, new_num * sizeof(struct iovec), gfp);
+-	else {
+-		new = kmalloc_array(new_num, sizeof(struct iovec), gfp);
+-		if (new) {
+-			memcpy(new, iov->iov,
+-			       iov->max_num * sizeof(struct iovec));
+-			flag = VRINGH_IOV_ALLOCATED;
+-		}
+-	}
++	if (unlikely(check_mul_overflow(new_num, sizeof(struct iovec), &size)))
++		return -ENOMEM;
++
++	if (iov->max_num & VRINGH_IOV_ALLOCATED)
++		new = krealloc(iov->iov, size, gfp);
++	else
++		new = kmemdup(iov->iov, size, gfp);
+ 	if (!new)
+ 		return -ENOMEM;
+ 	iov->iov = new;
+-	iov->max_num = (new_num | flag);
++	iov->max_num = new_num | VRINGH_IOV_ALLOCATED;
+ 	return 0;
+ }
+ 
+ 
 
 _______________________________________________
 Virtualization mailing list
