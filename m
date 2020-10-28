@@ -1,114 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 818EC29D165
-	for <lists.virtualization@lfdr.de>; Wed, 28 Oct 2020 19:01:25 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CE11B29D1BE
+	for <lists.virtualization@lfdr.de>; Wed, 28 Oct 2020 20:35:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 9926386F99;
-	Wed, 28 Oct 2020 18:01:23 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 60CDC864DA;
+	Wed, 28 Oct 2020 19:35:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id E8hk3BInrDIO; Wed, 28 Oct 2020 18:01:23 +0000 (UTC)
+	with ESMTP id j_pDGvB0x99Q; Wed, 28 Oct 2020 19:35:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id EFA4C86F88;
-	Wed, 28 Oct 2020 18:01:22 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BC81686505;
+	Wed, 28 Oct 2020 19:35:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C80B7C1AD7;
-	Wed, 28 Oct 2020 18:01:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9576FC0859;
+	Wed, 28 Oct 2020 19:35:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3DB7AC0051
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D1C32C0051
  for <virtualization@lists.linux-foundation.org>;
- Wed, 28 Oct 2020 18:01:22 +0000 (UTC)
+ Wed, 28 Oct 2020 19:35:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 2308786BC1
+ by silver.osuosl.org (Postfix) with ESMTP id B536B2094E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 28 Oct 2020 18:01:22 +0000 (UTC)
+ Wed, 28 Oct 2020 19:35:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QwJfRchLEdKM
+ with ESMTP id 0D56gIlTALvg
  for <virtualization@lists.linux-foundation.org>;
- Wed, 28 Oct 2020 18:01:21 +0000 (UTC)
+ Wed, 28 Oct 2020 19:35:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 2B40C8598B
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id 312FC2039C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 28 Oct 2020 18:01:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1603908079;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=5Nk2LjAqH68iPpRMmd15ZYH8jce4ByIolJyVBRLfJOQ=;
- b=gqH/JArjHAOtNxrZDd0KeDgGida6k8cN8zNPiZ/PWkK6p589Xe0dUC5AebTIvvsdII5mEQ
- jSOKVu9zzRT2hZBiG8EHkM+3TcATYF8LwlNl40UOcaaIVGu9bhAEPdTqoQVDhNwDNdcPHX
- 4GYf83j2SAqcvWED/l5NX1BCpczF3Dk=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-375-FTBxzHMfNAit5yGLg8ElLg-1; Wed, 28 Oct 2020 14:01:17 -0400
-X-MC-Unique: FTBxzHMfNAit5yGLg8ElLg-1
-Received: by mail-wr1-f72.google.com with SMTP id w1so147003wrr.5
- for <virtualization@lists.linux-foundation.org>;
- Wed, 28 Oct 2020 11:01:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=5Nk2LjAqH68iPpRMmd15ZYH8jce4ByIolJyVBRLfJOQ=;
- b=jPbazgCqakL3rDmHXKJIgaylqiAXb9e4TK3l2gMFBWniTqxY0EVoVpTd9pYb85P32H
- 5WX5hLvth0nOk1RynwqqZgXXXJB3dPWroQjhoyaH7VYKlWokP7Ae3u9w7fiWuR/pZdM6
- djQUVVN8f/BZCEXGc4vL4xZcqzXE4fKPic7rYAide55VcJ86D4Jri/J7NwLsNuOezNta
- 0JLp/tNKXYL8gfu1cz60H45gIYfpykd4hYL6PIjFx3YMMIe17RnGaCZmvxw9Bf3kNBI4
- CESNNP8OAkrls7lypNfBXR6+c4rn/eXyW93QZxJ6pWzZNpsKRoM1kVHIFgCDJ+yTycNT
- QAFA==
-X-Gm-Message-State: AOAM53070rP76lM9BHzNw0MN9kzMoeKIl04bDwRIHA1JpjzBQpQv4i/K
- v9U1xR3q7Eu5jhcl4bAR1STg8lKyEsKg1cD1/gT8APAjZT0P0hf+T3Nx14yNJ4k+I05QmcnTNcw
- PYchmXQAkvohNwtoXZdN9iTrFxNJNuaiirbKtA6+Ivw==
-X-Received: by 2002:adf:e9c6:: with SMTP id l6mr525238wrn.257.1603908076672;
- Wed, 28 Oct 2020 11:01:16 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzS4a2Tb6jVLditxSIK/2tiQlDfblWIHCJN1cagQ8Ey8zoitAc/WOhLkPDuLKeb4iVg6mXqJg==
-X-Received: by 2002:adf:e9c6:: with SMTP id l6mr525205wrn.257.1603908076449;
- Wed, 28 Oct 2020 11:01:16 -0700 (PDT)
-Received: from redhat.com (bzq-79-176-118-93.red.bezeqint.net. [79.176.118.93])
- by smtp.gmail.com with ESMTPSA id a17sm440271wra.29.2020.10.28.11.01.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2020 11:01:15 -0700 (PDT)
-Date: Wed, 28 Oct 2020 14:01:11 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alexander Graf <graf@amazon.com>
-Subject: Re: [PATCH 2/2] virtio: let virtio use DMA API when guest RAM is
- protected
-Message-ID: <20201028135103-mutt-send-email-mst@kernel.org>
-References: <20200220160606.53156-1-pasic@linux.ibm.com>
- <20200220160606.53156-3-pasic@linux.ibm.com>
- <20200220161309.GB12709@lst.de>
- <20200221153340.4cdcde81.pasic@linux.ibm.com>
- <20200222140408-mutt-send-email-mst@kernel.org>
- <20200224171657.GB7278@lst.de>
- <691d8c8e-665c-b05f-383f-78377fcf6741@amazon.com>
+ Wed, 28 Oct 2020 19:35:29 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E95D4B90E;
+ Wed, 28 Oct 2020 19:35:26 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+ daniel@ffwll.ch, sam@ravnborg.org, alexander.deucher@amd.com,
+ christian.koenig@amd.com, kraxel@redhat.com, l.stach@pengutronix.de,
+ linux+etnaviv@armlinux.org.uk, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ yuq825@gmail.com, bskeggs@redhat.com, robh@kernel.org,
+ tomeu.vizoso@collabora.com, steven.price@arm.com,
+ alyssa.rosenzweig@collabora.com, hjc@rock-chips.com, heiko@sntech.de,
+ hdegoede@redhat.com, sean@poorly.run, eric@anholt.net,
+ oleksandr_andrushchenko@epam.com, ray.huang@amd.com,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com, luben.tuikov@amd.com,
+ apaneers@amd.com, linus.walleij@linaro.org, melissa.srw@gmail.com,
+ chris@chris-wilson.co.uk, miaoqinglang@huawei.com
+Subject: [PATCH v6 00/10] Support GEM object mappings from I/O memory
+Date: Wed, 28 Oct 2020 20:35:11 +0100
+Message-Id: <20201028193521.2489-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-In-Reply-To: <691d8c8e-665c-b05f-383f-78377fcf6741@amazon.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: linux-s390@vger.kernel.org, Janosch Frank <frankja@linux.ibm.com>,
- "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
- Cornelia Huck <cohuck@redhat.com>, Ram Pai <linuxram@us.ibm.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- iommu@lists.linux-foundation.org, David Gibson <david@gibson.dropbear.id.au>,
- Michael Mueller <mimu@linux.ibm.com>,
- Viktor Mihajlovski <mihajlov@linux.ibm.com>,
- Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>,
- Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ xen-devel@lists.xenproject.org, spice-devel@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -125,75 +85,132 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Oct 28, 2020 at 03:24:03PM +0100, Alexander Graf wrote:
-> On 24.02.20 18:16, Christoph Hellwig wrote:
-> > On Sat, Feb 22, 2020 at 02:07:58PM -0500, Michael S. Tsirkin wrote:
-> > > On Fri, Feb 21, 2020 at 03:33:40PM +0100, Halil Pasic wrote:
-> > > > AFAIU you have a positive attitude towards the idea, that
-> > > > !F_VIRTIO_PLATFORM implies 'no DMA API is used by virtio'
-> > > > should be scrapped.
-> > > > 
-> > > > I would like to accomplish that without adverse effects to virtio-ccw
-> > > > (because caring for virtio-ccw is a part of job description).
-> > > > 
-> > > > Regards,
-> > > > Halil
-> > > 
-> > > It is possible, in theory. IIRC the main challenge is that DMA API
-> > > has overhead of indirect function calls even when all it
-> > > does it return back the PA without changes.
-> > 
-> > That overhead is gone now, the DMA direct calls are direct calls these
-> > days.
-> 
-> Michael, would that mitigate your concerns to just always use the DMA API?
-> If not, wouldn't it make sense to benchmark and pinpoint Christoph to paths
-> that do slow things down, so we can finally move virtio into a world where
-> it doesn't bypass the kernel DMA infrastructure.
-> 
-> 
-> Alex
+DRM's fbdev console uses regular load and store operations to update
+framebuffer memory. The bochs driver on sparc64 requires the use of
+I/O-specific load and store operations. We have a workaround, but need
+a long-term solution to the problem.
 
+This patchset changes GEM's vmap/vunmap interfaces to forward pointers
+of type struct dma_buf_map and updates the generic fbdev emulation to
+use them correctly. This enables I/O-memory operations on all framebuffers
+that require and support them.
 
-There's no specific concern really. One can in theory move the code
-handling !VIRTIO_F_ACCESS_PLATFORM such that instead of having a branch
-in virtio code, you instead override platform DMA API and then use DMA
-API unconditionally.
+Patches #1 to #4 prepare VRAM helpers and drivers.
 
-The gain from that will probably be marginal, but maybe I'm wrong.
-Let's see the patches.
+Next is the update of the GEM vmap functions. Patch #5 adds vmap and vunmap
+that is usable with TTM-based GEM drivers, and patch #6 updates GEM's
+vmap/vunmap callback to forward instances of type struct dma_buf_map. While
+the patch touches many files throughout the DRM modules, the applied changes
+are mostly trivial interface fixes. Several TTM-based GEM drivers now use
+the new vmap code. Patch #7 updates GEM's internal vmap/vunmap functions to
+forward struct dma_buf_map.
 
-We still need to do the override when !VIRTIO_F_ACCESS_PLATFORM,
-according to spec. Encrypted hypervisors still need to set
-VIRTIO_F_ACCESS_PLATFORM.
+With struct dma_buf_map propagated through the layers, patches #8 to #10
+convert DRM clients and generic fbdev emulation to use it. Updating the
+fbdev framebuffer will select the correct functions, either for system or
+I/O memory.
 
+v6:
+	* don't call page_to_phys() on fbdev framebuffers in I/O memory;
+	  warn instead (Daniel)
+v5:
+	* rebase onto latest TTM changes (Christian)
+	* support TTM premapped memory correctly (Christian)
+	* implement fb_read/fb_write internally (Sam, Daniel)
+	* cleanups
+v4:
+	* provide TTM vmap/vunmap plus GEM helpers and convert drivers
+	  over (Christian, Daniel)
+	* remove several empty functions
+	* more TODOs and documentation (Daniel)
+v3:
+	* recreate the whole patchset on top of struct dma_buf_map
+v2:
+	* RFC patchset
 
-Is VIRTIO_F_ACCESS_PLATFORM a good default? Need to support
-legacy guests does not allow that at the qemu level, we
-need to be conservative there. But yes, if you have a very
-modern guest then it might be a good idea to just always
-enable VIRTIO_F_ACCESS_PLATFORM. I say might since unfortunately
-most people only use VIRTIO_F_ACCESS_PLATFORM with
-vIOMMU, using it without VIRTIO_F_ACCESS_PLATFORM is supported
-but is a path less well trodden. Benchmarking that,
-fixing issues that surface if any would be imho effort
-well spent, and would be a prerequisite to making it
-a default in a production system.
+Thomas Zimmermann (10):
+  drm/vram-helper: Remove invariant parameters from internal kmap
+    function
+  drm/cma-helper: Remove empty drm_gem_cma_prime_vunmap()
+  drm/etnaviv: Remove empty etnaviv_gem_prime_vunmap()
+  drm/exynos: Remove empty exynos_drm_gem_prime_{vmap,vunmap}()
+  drm/ttm: Add vmap/vunmap to TTM and TTM GEM helpers
+  drm/gem: Use struct dma_buf_map in GEM vmap ops and convert GEM
+    backends
+  drm/gem: Update internal GEM vmap/vunmap interfaces to use struct
+    dma_buf_map
+  drm/gem: Store client buffer mappings as struct dma_buf_map
+  dma-buf-map: Add memcpy and pointer-increment interfaces
+  drm/fb_helper: Support framebuffers in I/O memory
 
+ Documentation/gpu/todo.rst                  |  37 ++-
+ drivers/gpu/drm/Kconfig                     |   2 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  36 ---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |   2 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c     |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.h  |   1 -
+ drivers/gpu/drm/ast/ast_cursor.c            |  27 +-
+ drivers/gpu/drm/ast/ast_drv.h               |   7 +-
+ drivers/gpu/drm/bochs/bochs_kms.c           |   1 -
+ drivers/gpu/drm/drm_client.c                |  38 +--
+ drivers/gpu/drm/drm_fb_helper.c             | 257 ++++++++++++++++++--
+ drivers/gpu/drm/drm_gem.c                   |  29 ++-
+ drivers/gpu/drm/drm_gem_cma_helper.c        |  27 +-
+ drivers/gpu/drm/drm_gem_shmem_helper.c      |  48 ++--
+ drivers/gpu/drm/drm_gem_ttm_helper.c        |  38 +++
+ drivers/gpu/drm/drm_gem_vram_helper.c       | 117 ++++-----
+ drivers/gpu/drm/drm_internal.h              |   5 +-
+ drivers/gpu/drm/drm_prime.c                 |  14 +-
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h       |   3 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c       |   1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  12 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.c     |  12 -
+ drivers/gpu/drm/exynos/exynos_drm_gem.h     |   2 -
+ drivers/gpu/drm/lima/lima_gem.c             |   6 +-
+ drivers/gpu/drm/lima/lima_sched.c           |  11 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c      |  10 +-
+ drivers/gpu/drm/nouveau/Kconfig             |   1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.h        |   2 -
+ drivers/gpu/drm/nouveau/nouveau_gem.c       |   6 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.h       |   2 -
+ drivers/gpu/drm/nouveau/nouveau_prime.c     |  20 --
+ drivers/gpu/drm/panfrost/panfrost_perfcnt.c |  14 +-
+ drivers/gpu/drm/qxl/qxl_display.c           |  11 +-
+ drivers/gpu/drm/qxl/qxl_draw.c              |  14 +-
+ drivers/gpu/drm/qxl/qxl_drv.h               |  11 +-
+ drivers/gpu/drm/qxl/qxl_object.c            |  31 ++-
+ drivers/gpu/drm/qxl/qxl_object.h            |   2 +-
+ drivers/gpu/drm/qxl/qxl_prime.c             |  12 +-
+ drivers/gpu/drm/radeon/radeon.h             |   1 -
+ drivers/gpu/drm/radeon/radeon_gem.c         |   7 +-
+ drivers/gpu/drm/radeon/radeon_prime.c       |  20 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  22 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.h |   4 +-
+ drivers/gpu/drm/tiny/cirrus.c               |  10 +-
+ drivers/gpu/drm/tiny/gm12u320.c             |  10 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c           |  72 ++++++
+ drivers/gpu/drm/udl/udl_modeset.c           |   8 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c       |  11 +-
+ drivers/gpu/drm/vc4/vc4_bo.c                |   7 +-
+ drivers/gpu/drm/vc4/vc4_drv.h               |   2 +-
+ drivers/gpu/drm/vgem/vgem_drv.c             |  16 +-
+ drivers/gpu/drm/vkms/vkms_plane.c           |  15 +-
+ drivers/gpu/drm/vkms/vkms_writeback.c       |  22 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.c     |  18 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.h     |   6 +-
+ include/drm/drm_client.h                    |   7 +-
+ include/drm/drm_gem.h                       |   5 +-
+ include/drm/drm_gem_cma_helper.h            |   3 +-
+ include/drm/drm_gem_shmem_helper.h          |   4 +-
+ include/drm/drm_gem_ttm_helper.h            |   6 +
+ include/drm/drm_gem_vram_helper.h           |  14 +-
+ include/drm/drm_mode_config.h               |  12 -
+ include/drm/ttm/ttm_bo_api.h                |  28 +++
+ include/linux/dma-buf-map.h                 |  93 ++++++-
+ 64 files changed, 859 insertions(+), 438 deletions(-)
 
-> 
-> 
-> 
-> 
-> Amazon Development Center Germany GmbH
-> Krausenstr. 38
-> 10117 Berlin
-> Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-> Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-> Sitz: Berlin
-> Ust-ID: DE 289 237 879
-> 
-> 
+--
+2.29.0
 
 _______________________________________________
 Virtualization mailing list
