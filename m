@@ -2,72 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C768829EBC0
-	for <lists.virtualization@lfdr.de>; Thu, 29 Oct 2020 13:21:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6298429EBC1
+	for <lists.virtualization@lfdr.de>; Thu, 29 Oct 2020 13:21:07 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7B56986B51;
-	Thu, 29 Oct 2020 12:21:04 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id DB00E86B9E;
+	Thu, 29 Oct 2020 12:21:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ymUIBNUCeHd2; Thu, 29 Oct 2020 12:21:04 +0000 (UTC)
+	with ESMTP id brsvFdpQLDnx; Thu, 29 Oct 2020 12:21:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 17DC686B9E;
-	Thu, 29 Oct 2020 12:21:04 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 67AAA86BA5;
+	Thu, 29 Oct 2020 12:21:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EC761C0051;
-	Thu, 29 Oct 2020 12:21:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3EA32C0051;
+	Thu, 29 Oct 2020 12:21:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6CCD8C1AD7
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8BFEDC0051
  for <virtualization@lists.linux-foundation.org>;
- Thu, 29 Oct 2020 12:21:00 +0000 (UTC)
+ Thu, 29 Oct 2020 12:21:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 583B186AE9
+ by silver.osuosl.org (Postfix) with ESMTP id 07F722270C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 29 Oct 2020 12:21:00 +0000 (UTC)
+ Thu, 29 Oct 2020 12:21:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dbKrrurC9SNF
+ with ESMTP id OIyrNEJ3WnBl
  for <virtualization@lists.linux-foundation.org>;
- Thu, 29 Oct 2020 12:20:59 +0000 (UTC)
+ Thu, 29 Oct 2020 12:21:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 2672A864C4
+ by silver.osuosl.org (Postfix) with ESMTPS id 6EDE521561
  for <virtualization@lists.linux-foundation.org>;
- Thu, 29 Oct 2020 12:20:58 +0000 (UTC)
+ Thu, 29 Oct 2020 12:21:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1603974057;
+ s=mimecast20190719; t=1603974061;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uu1tSUlQesEvUDOvu71K/Re9PS7yCI/Ckixv81heB68=;
- b=ZARaOZwXk2tdvQ87DctXpNfKApSyyKozzfPjo/sdgrxK4B0q7n76fnlHRHgbn2caUs9asd
- xQsRe0PkINLkYkj/FQnRqkp3KzKhV96J1rPMKB5q/WxgCXo0FBPJZsLr6dvrw9NeC6oP4c
- 5b9IGamyi2KmJBpamkUZSmKBBU1Ef4U=
+ bh=yhuU63QYYA1pfwdAnRMuQGZDltzslJa5sQvMjC4VHB4=;
+ b=GloO3Nsp0RAf+cvhVeLQ/Md6/IWXWwazqRsIu42wwFwWjb9a0TgISlSAQAv3K2kJ2YawAs
+ +t3oHtYyzBvycbSsjuUPKuTxStCI2zW6DnvckZ3Hi82ZLQhErpSG3kX3XUZ1DPFsYH181c
+ gywN9UXAWT+DHYhsUTtXL6m28nO71fk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-398-JN7Y5NHFNI29WG7XpYQt1g-1; Thu, 29 Oct 2020 08:20:55 -0400
-X-MC-Unique: JN7Y5NHFNI29WG7XpYQt1g-1
+ us-mta-362-lFnQ0bnJOYGjYECIeoQ01w-1; Thu, 29 Oct 2020 08:20:57 -0400
+X-MC-Unique: lFnQ0bnJOYGjYECIeoQ01w-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9152287952A;
- Thu, 29 Oct 2020 12:20:54 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8EB4010199A7;
+ Thu, 29 Oct 2020 12:20:56 +0000 (UTC)
 Received: from thinkpad.redhat.com (ovpn-113-197.ams2.redhat.com
  [10.36.113.197])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2BD3B6266E;
- Thu, 29 Oct 2020 12:20:52 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E9DC26266E;
+ Thu, 29 Oct 2020 12:20:54 +0000 (UTC)
 From: Laurent Vivier <lvivier@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 1/2] vdpasim: fix MAC address configuration
-Date: Thu, 29 Oct 2020 13:20:49 +0100
-Message-Id: <20201029122050.776445-2-lvivier@redhat.com>
+Subject: [PATCH 2/2] vdpasim: allow to assign a MAC address
+Date: Thu, 29 Oct 2020 13:20:50 +0100
+Message-Id: <20201029122050.776445-3-lvivier@redhat.com>
 In-Reply-To: <20201029122050.776445-1-lvivier@redhat.com>
 References: <20201029122050.776445-1-lvivier@redhat.com>
 MIME-Version: 1.0
@@ -91,36 +91,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vdpa_sim generates a ramdom MAC address but it is never used by upper
-layers because the VIRTIO_NET_F_MAC bit is not set in the features list.
+Add macaddr parameter to the module to set the MAC address to use
 
-Because of that, virtio-net always regenerates a random MAC address each
-time it is loaded whereas the address should only change on vdpa_sim
-load/unload.
-
-Fix that by adding VIRTIO_NET_F_MAC in the features list of vdpa_sim.
-
-Fixes: 2c53d0f64c06 ("vdpasim: vDPA device simulator")
-Cc: jasowang@redhat.com
 Signed-off-by: Laurent Vivier <lvivier@redhat.com>
 ---
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/vdpa/vdpa_sim/vdpa_sim.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 2629911c29bb..7f8ebc9924ac 100644
+index 7f8ebc9924ac..9cf7079ee185 100644
 --- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
 +++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -60,7 +60,8 @@ struct vdpasim_virtqueue {
+@@ -38,6 +38,10 @@ static int batch_mapping = 1;
+ module_param(batch_mapping, int, 0444);
+ MODULE_PARM_DESC(batch_mapping, "Batched mapping 1 -Enable; 0 - Disable");
  
- static u64 vdpasim_features = (1ULL << VIRTIO_F_ANY_LAYOUT) |
- 			      (1ULL << VIRTIO_F_VERSION_1)  |
--			      (1ULL << VIRTIO_F_ACCESS_PLATFORM);
-+			      (1ULL << VIRTIO_F_ACCESS_PLATFORM) |
-+			      (1ULL << VIRTIO_NET_F_MAC);
++static char *macaddr;
++module_param(macaddr, charp, 0);
++MODULE_PARM_DESC(macaddr, "Ethernet MAC address");
++
+ struct vdpasim_virtqueue {
+ 	struct vringh vring;
+ 	struct vringh_kiov iov;
+@@ -373,7 +377,15 @@ static struct vdpasim *vdpasim_create(void)
+ 	if (!vdpasim->buffer)
+ 		goto err_iommu;
  
- /* State of each vdpasim device */
- struct vdpasim {
+-	eth_random_addr(vdpasim->config.mac);
++	if (macaddr) {
++		mac_pton(macaddr, vdpasim->config.mac);
++		if (!is_valid_ether_addr(vdpasim->config.mac)) {
++			ret = -EADDRNOTAVAIL;
++			goto err_iommu;
++		}
++	} else {
++		eth_random_addr(vdpasim->config.mac);
++	}
+ 
+ 	vringh_set_iotlb(&vdpasim->vqs[0].vring, vdpasim->iommu);
+ 	vringh_set_iotlb(&vdpasim->vqs[1].vring, vdpasim->iommu);
 -- 
 2.26.2
 
