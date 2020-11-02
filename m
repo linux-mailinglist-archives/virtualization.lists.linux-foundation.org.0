@@ -1,93 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E76A2A2F5E
-	for <lists.virtualization@lfdr.de>; Mon,  2 Nov 2020 17:09:47 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C77C52A30BE
+	for <lists.virtualization@lfdr.de>; Mon,  2 Nov 2020 18:03:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 31D71872D7;
-	Mon,  2 Nov 2020 16:09:46 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 817AA868C5;
+	Mon,  2 Nov 2020 17:03:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UH2rudc21xEF; Mon,  2 Nov 2020 16:09:45 +0000 (UTC)
+	with ESMTP id FZA+EQTv4qvC; Mon,  2 Nov 2020 17:03:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A27A587284;
-	Mon,  2 Nov 2020 16:09:45 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 2AD2986A91;
+	Mon,  2 Nov 2020 17:03:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6D250C0051;
-	Mon,  2 Nov 2020 16:09:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0C8FDC0051;
+	Mon,  2 Nov 2020 17:03:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2B0A8C0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 574D5C0051
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Nov 2020 16:09:44 +0000 (UTC)
+ Mon,  2 Nov 2020 17:03:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 189C785D7E
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 4413E86ACF
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Nov 2020 16:09:44 +0000 (UTC)
+ Mon,  2 Nov 2020 17:03:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4byeHplRRCZf
+ with ESMTP id pd0YHGwTIAZj
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Nov 2020 16:09:43 +0000 (UTC)
+ Mon,  2 Nov 2020 17:03:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 954E486957
+Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1724B8688F
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Nov 2020 16:09:23 +0000 (UTC)
-IronPort-SDR: +Jc57TwikFgO6i8BrzP/x9Zpo5umNgT+A4m5NJmdpnhoFZub6cJBXB0LA7Rcdq/xefoP5MSeLQ
- AEmZlx/Af1ow==
-X-IronPort-AV: E=McAfee;i="6000,8403,9793"; a="168124211"
-X-IronPort-AV: E=Sophos;i="5.77,445,1596524400"; d="scan'208";a="168124211"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Nov 2020 08:09:23 -0800
-IronPort-SDR: uAmx+dUdaysdZ8K1ZgB/geKvq5lS0JI21tbuv4XFXThi2WCN7w4HiDrVU0NNXviB6iE/0DR06f
- TbeWixYEDTxw==
-X-IronPort-AV: E=Sophos;i="5.77,445,1596524400"; d="scan'208";a="352851467"
-Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
- by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Nov 2020 08:09:15 -0800
-Received: from andy by smile with local (Exim 4.94)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1kZcPQ-003FnO-49; Mon, 02 Nov 2020 18:10:16 +0200
-Date: Mon, 2 Nov 2020 18:10:16 +0200
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: Re: [PATCH v2 8/8] dma-buf: use krealloc_array()
-Message-ID: <20201102161016.GN4077@smile.fi.intel.com>
-References: <20201102152037.963-1-brgl@bgdev.pl>
- <20201102152037.963-9-brgl@bgdev.pl>
+ Mon,  2 Nov 2020 17:03:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+ :Reply-To:Content-ID:Content-Description;
+ bh=8R9siPqKWQkaZsoyJP4hgDCdyshjHYVTZKbppBnGdqc=; b=FAzSHDs6kcdBpZZIh++eooksKw
+ JVNWWK0TevpgD757i9gABdsindQ0fmCtpQo5XottcABwgUduPrbJxKSB1jB8jBdMSgmrAjjmcZP/W
+ pibknGDMZ0EB5qklmGUbijqLs1qdiJiBluQUIpkHCueBTWJXVZPAaG2pqDQlz/vgcKjViduh46tap
+ HcqzHO54V61MlXc25/YkDJS1v51/kimxezVLx+AAj/LaK668hQm9LPzz4qfxsFBFzkyKhRWkZaglj
+ 61CTWeIiIpbolBzVuokLoPjGdtIj0+VMSqBI3QghKU07/98DkgoBJoy5J2jh/eWBQPribDUOpkgvi
+ zCZVKCPw==;
+Received: from [2601:1c0:6280:3f0::60d5]
+ by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1kZdEg-0002QW-QC; Mon, 02 Nov 2020 17:03:15 +0000
+Subject: Re: linux-next: Tree for Nov 2 [drivers/vdpa/vdpa_sim/vdpa_sim.ko]
+To: Stephen Rothwell <sfr@canb.auug.org.au>,
+ Linux Next Mailing List <linux-next@vger.kernel.org>
+References: <20201102162845.3eb6598e@canb.auug.org.au>
+From: Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <d3d50a94-cdc5-572b-e9ca-3ee5638d21ee@infradead.org>
+Date: Mon, 2 Nov 2020 09:03:10 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201102152037.963-9-brgl@bgdev.pl>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org,
- "Michael S . Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
- Gustavo Padovan <gustavo@padovan.org>,
- Linus Walleij <linus.walleij@linaro.org>, dri-devel@lists.freedesktop.org,
- Jaroslav Kysela <perex@perex.cz>, linux-mm@kvack.org,
- Christoph Lameter <cl@linux.com>, Sumit Semwal <sumit.semwal@linaro.org>,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- David Rientjes <rientjes@google.com>,
- virtualization@lists.linux-foundation.org, linux-media@vger.kernel.org,
- Robert Richter <rric@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, linaro-mm-sig@lists.linaro.org,
- linux-gpio@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Joonsoo Kim <iamjoonsoo.kim@lge.com>, linux-edac@vger.kernel.org,
- Tony Luck <tony.luck@intel.com>, netdev@vger.kernel.org,
- Takashi Iwai <tiwai@suse.com>, linux-kernel@vger.kernel.org,
- Pekka Enberg <penberg@kernel.org>, James Morse <james.morse@arm.com>,
- Daniel Vetter <daniel@ffwll.ch>, Andrew Morton <akpm@linux-foundation.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20201102162845.3eb6598e@canb.auug.org.au>
+Content-Language: en-US
+Cc: virtualization@lists.linux-foundation.org,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,25 +82,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Nov 02, 2020 at 04:20:37PM +0100, Bartosz Golaszewski wrote:
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On 11/1/20 9:28 PM, Stephen Rothwell wrote:
+> Hi all,
 > 
-> Use the helper that checks for overflows internally instead of manually
-> calculating the size of the new array.
+> Changes since 20201030:
+> 
 
-...
+on x86_64:
 
-> +		nfences = krealloc_array(fences, i,
-> +					 sizeof(*fences), GFP_KERNEL);
+when CONFIG_NET is not enabled:
 
-On 80 position is closing parenthesis, which, I think, makes it okay to put on
-one line.
+ERROR: modpost: "mac_pton" [drivers/vdpa/vdpa_sim/vdpa_sim.ko] undefined!
+
+
+Should VDPA_SIM, IFCVF, MLX5_VDPA_NET depend on NET or NETDEVICES?
+
+
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+~Randy
+Reported-by: Randy Dunlap <rdunlap@infradead.org>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
