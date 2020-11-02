@@ -1,76 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 640562A2163
-	for <lists.virtualization@lfdr.de>; Sun,  1 Nov 2020 21:16:28 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 020682A2482
+	for <lists.virtualization@lfdr.de>; Mon,  2 Nov 2020 06:56:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 145AC86C4A;
-	Sun,  1 Nov 2020 20:16:27 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7B423204E6;
+	Mon,  2 Nov 2020 05:56:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Xnb49otrwCWF; Sun,  1 Nov 2020 20:16:26 +0000 (UTC)
+	with ESMTP id wf5yRGXJpA9I; Mon,  2 Nov 2020 05:56:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 82E8286C73;
-	Sun,  1 Nov 2020 20:16:26 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 7A87E204D8;
+	Mon,  2 Nov 2020 05:56:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6E232C0051;
-	Sun,  1 Nov 2020 20:16:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4DD12C0051;
+	Mon,  2 Nov 2020 05:56:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 857A7C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EDEC0C0051
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Nov 2020 20:16:24 +0000 (UTC)
+ Mon,  2 Nov 2020 05:56:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 8160287328
+ by whitealder.osuosl.org (Postfix) with ESMTP id D86D186A3F
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Nov 2020 20:16:24 +0000 (UTC)
+ Mon,  2 Nov 2020 05:56:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7WvTFOaniqAT
+ with ESMTP id fCJK0LYZ4IcU
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Nov 2020 20:16:23 +0000 (UTC)
+ Mon,  2 Nov 2020 05:56:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id D429C8732A
+ by whitealder.osuosl.org (Postfix) with ESMTPS id F2EAB86A36
  for <virtualization@lists.linux-foundation.org>;
- Sun,  1 Nov 2020 20:16:23 +0000 (UTC)
+ Mon,  2 Nov 2020 05:56:30 +0000 (UTC)
 Received: from localhost (host-213-179-129-39.customer.m-online.net
  [213.179.129.39])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F1A5A22253;
- Sun,  1 Nov 2020 20:16:22 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C7DC820870;
+ Mon,  2 Nov 2020 05:56:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1604261783;
- bh=Q9+DNPy01/d6QOTNLTpXmnb96hr2wRSaRSliuVZgSfw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=HuM41gDsnUSP+oOKwGhvqCR8H8RP66Er0wiLHxdgacfs+Gpf9awx8liietvFpcOOk
- MxaypMf0W+Y5cv14JFrH03yAeA87saQiAmXDqQiSlPJoXafF6nFNnXrVlxihv3dXNz
- hGoki06zj7bh2hXPgvc/ArR1dcSypdVPpu3MfidA=
+ s=default; t=1604296590;
+ bh=H4bxrHgb7QzAd4s6R7ZAcPSYQsd0k6a8eql72d8Wh3g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=IVgUDyjOS+GO22O0osaO3K3VzLaZ5+NfqDzIdn3mEMC6Vw5Yp7Pm/EgRYKkZQqnLK
+ R1Gw0mAB9KsxH2iSTGv+VOVRvic3kO2Q+DRP+NkrKNolUy5EZgtKHfaAXdGEBNeGb7
+ 7kW+SggiAe5YWsZ2eXZnpDk8Hnz9ZN5kCTnuZ+Jo=
+Date: Mon, 2 Nov 2020 07:56:26 +0200
 From: Leon Romanovsky <leon@kernel.org>
-To: Doug Ledford <dledford@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>,
- gregkh <gregkh@linuxfoundation.org>
-Subject: [PATCH mlx5-next v1 11/11] RDMA/mlx5: Remove IB representors dead code
-Date: Sun,  1 Nov 2020 22:15:42 +0200
-Message-Id: <20201101201542.2027568-12-leon@kernel.org>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201101201542.2027568-1-leon@kernel.org>
+To: Parav Pandit <parav@nvidia.com>
+Subject: Re: [PATCH mlx5-next v1 03/11] net/mlx5_core: Clean driver version
+ and name
+Message-ID: <20201102055626.GD5429@unreal>
 References: <20201101201542.2027568-1-leon@kernel.org>
+ <20201101201542.2027568-4-leon@kernel.org>
+ <BY5PR12MB4322B244D7AEBDCED43B906EDC100@BY5PR12MB4322.namprd12.prod.outlook.com>
 MIME-Version: 1.0
-Cc: pierre-louis.bossart@linux.intel.com, alsa-devel@alsa-project.org,
- kiran.patil@intel.com, "Michael S. Tsirkin" <mst@redhat.com>,
- linux-rdma@vger.kernel.org, netdev@vger.kernel.org,
- ranjani.sridharan@linux.intel.com, virtualization@lists.linux-foundation.org,
- fred.oh@linux.intel.com, tiwai@suse.de, broonie@kernel.org,
- Parav Pandit <parav@nvidia.com>, Roi Dayan <roid@nvidia.com>,
- shiraz.saleem@intel.com, Jakub Kicinski <kuba@kernel.org>,
- dan.j.williams@intel.com, Leon Romanovsky <leonro@nvidia.com>,
- Saeed Mahameed <saeedm@nvidia.com>, linux-kernel@vger.kernel.org,
- "David S . Miller" <davem@davemloft.net>
+Content-Disposition: inline
+In-Reply-To: <BY5PR12MB4322B244D7AEBDCED43B906EDC100@BY5PR12MB4322.namprd12.prod.outlook.com>
+Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, "tiwai@suse.de" <tiwai@suse.de>,
+ "ranjani.sridharan@linux.intel.com" <ranjani.sridharan@linux.intel.com>,
+ "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
+ "pierre-louis.bossart@linux.intel.com" <pierre-louis.bossart@linux.intel.com>,
+ "fred.oh@linux.intel.com" <fred.oh@linux.intel.com>,
+ Doug Ledford <dledford@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Jakub Kicinski <kuba@kernel.org>,
+ "kiran.patil@intel.com" <kiran.patil@intel.com>,
+ "broonie@kernel.org" <broonie@kernel.org>, Roi Dayan <roid@nvidia.com>,
+ "dan.j.williams@intel.com" <dan.j.williams@intel.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "shiraz.saleem@intel.com" <shiraz.saleem@intel.com>,
+ gregkh <gregkh@linuxfoundation.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ Saeed Mahameed <saeedm@nvidia.com>, "David S . Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,140 +97,188 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Leon Romanovsky <leonro@nvidia.com>
+On Mon, Nov 02, 2020 at 05:07:59AM +0000, Parav Pandit wrote:
+>
+>
+> > From: Leon Romanovsky <leon@kernel.org>
+> > Sent: Monday, November 2, 2020 1:46 AM
+> >
+> > From: Leon Romanovsky <leonro@nvidia.com>
+> >
+> > Remove exposed driver version as it was done in other drivers, so module
+> > version will work correctly by displaying the kernel version for which it is
+> > compiled.
+> >
+> > And move mlx5_core module name to general include, so auxiliary drivers
+> > will be able to use it as a basis for a name in their device ID tables.
+> >
+> > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+> > ---
+> >  drivers/net/ethernet/mellanox/mlx5/core/devlink.c     |  2 +-
+> >  drivers/net/ethernet/mellanox/mlx5/core/en_ethtool.c  |  4 +---
+> >  drivers/net/ethernet/mellanox/mlx5/core/en_rep.c      |  1 -
+> >  .../net/ethernet/mellanox/mlx5/core/ipoib/ethtool.c   |  2 +-
+> >  drivers/net/ethernet/mellanox/mlx5/core/main.c        | 11 +++++++----
+> >  drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h   |  3 ---
+> >  include/linux/mlx5/driver.h                           |  2 ++
+> >  7 files changed, 12 insertions(+), 13 deletions(-)
+> >
+> > diff --git a/drivers/net/ethernet/mellanox/mlx5/core/devlink.c
+> > b/drivers/net/ethernet/mellanox/mlx5/core/devlink.c
+> > index a28f95df2901..1a351e2f6ace 100644
+> > --- a/drivers/net/ethernet/mellanox/mlx5/core/devlink.c
+> > +++ b/drivers/net/ethernet/mellanox/mlx5/core/devlink.c
+> > @@ -52,7 +52,7 @@ mlx5_devlink_info_get(struct devlink *devlink, struct
+> > devlink_info_req *req,
+> >  	u32 running_fw, stored_fw;
+> >  	int err;
+> >
+> > -	err = devlink_info_driver_name_put(req, DRIVER_NAME);
+> > +	err = devlink_info_driver_name_put(req, KBUILD_MODNAME);
+> >  	if (err)
+> >  		return err;
+> >
+> > diff --git a/drivers/net/ethernet/mellanox/mlx5/core/en_ethtool.c
+> > b/drivers/net/ethernet/mellanox/mlx5/core/en_ethtool.c
+> > index d25a56ec6876..bcff18a87bcd 100644
+> > --- a/drivers/net/ethernet/mellanox/mlx5/core/en_ethtool.c
+> > +++ b/drivers/net/ethernet/mellanox/mlx5/core/en_ethtool.c
+> > @@ -40,9 +40,7 @@ void mlx5e_ethtool_get_drvinfo(struct mlx5e_priv
+> > *priv,  {
+> >  	struct mlx5_core_dev *mdev = priv->mdev;
+> >
+> > -	strlcpy(drvinfo->driver, DRIVER_NAME, sizeof(drvinfo->driver));
+> > -	strlcpy(drvinfo->version, DRIVER_VERSION,
+> > -		sizeof(drvinfo->version));
+> > +	strlcpy(drvinfo->driver, KBUILD_MODNAME, sizeof(drvinfo-
+> > >driver));
+> >  	snprintf(drvinfo->fw_version, sizeof(drvinfo->fw_version),
+> >  		 "%d.%d.%04d (%.16s)",
+> >  		 fw_rev_maj(mdev), fw_rev_min(mdev),
+> > fw_rev_sub(mdev), diff --git
+> > a/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c
+> > b/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c
+> > index 67247c33b9fd..ef2f8889ba0f 100644
+> > --- a/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c
+> > +++ b/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c
+> > @@ -64,7 +64,6 @@ static void mlx5e_rep_get_drvinfo(struct net_device
+> > *dev,
+> >
+> >  	strlcpy(drvinfo->driver, mlx5e_rep_driver_name,
+> >  		sizeof(drvinfo->driver));
+> > -	strlcpy(drvinfo->version, UTS_RELEASE, sizeof(drvinfo->version));
+> >  	snprintf(drvinfo->fw_version, sizeof(drvinfo->fw_version),
+> >  		 "%d.%d.%04d (%.16s)",
+> >  		 fw_rev_maj(mdev), fw_rev_min(mdev),
+> > diff --git a/drivers/net/ethernet/mellanox/mlx5/core/ipoib/ethtool.c
+> > b/drivers/net/ethernet/mellanox/mlx5/core/ipoib/ethtool.c
+> > index cac8f085b16d..97d96fc38a65 100644
+> > --- a/drivers/net/ethernet/mellanox/mlx5/core/ipoib/ethtool.c
+> > +++ b/drivers/net/ethernet/mellanox/mlx5/core/ipoib/ethtool.c
+> > @@ -39,7 +39,7 @@ static void mlx5i_get_drvinfo(struct net_device *dev,
+> >  	struct mlx5e_priv *priv = mlx5i_epriv(dev);
+> >
+> >  	mlx5e_ethtool_get_drvinfo(priv, drvinfo);
+> > -	strlcpy(drvinfo->driver, DRIVER_NAME "[ib_ipoib]",
+> > +	strlcpy(drvinfo->driver, KBUILD_MODNAME "[ib_ipoib]",
+> >  		sizeof(drvinfo->driver));
+> >  }
+> >
+> > diff --git a/drivers/net/ethernet/mellanox/mlx5/core/main.c
+> > b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+> > index 71e210f22f69..9827127cb674 100644
+> > --- a/drivers/net/ethernet/mellanox/mlx5/core/main.c
+> > +++ b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+> > @@ -77,7 +77,6 @@
+> >  MODULE_AUTHOR("Eli Cohen <eli@mellanox.com>");
+> > MODULE_DESCRIPTION("Mellanox 5th generation network adapters
+> > (ConnectX series) core driver");  MODULE_LICENSE("Dual BSD/GPL"); -
+> > MODULE_VERSION(DRIVER_VERSION);
+> >
+> >  unsigned int mlx5_core_debug_mask;
+> >  module_param_named(debug_mask, mlx5_core_debug_mask, uint, 0644);
+> > @@ -228,7 +227,7 @@ static void mlx5_set_driver_version(struct
+> > mlx5_core_dev *dev)
+> >  	strncat(string, ",", remaining_size);
+> >
+> >  	remaining_size = max_t(int, 0, driver_ver_sz - strlen(string));
+> > -	strncat(string, DRIVER_NAME, remaining_size);
+> > +	strncat(string, KBUILD_MODNAME, remaining_size);
+> >
+> >  	remaining_size = max_t(int, 0, driver_ver_sz - strlen(string));
+> >  	strncat(string, ",", remaining_size);
+> > @@ -313,7 +312,7 @@ static int request_bar(struct pci_dev *pdev)
+> >  		return -ENODEV;
+> >  	}
+> >
+> > -	err = pci_request_regions(pdev, DRIVER_NAME);
+> > +	err = pci_request_regions(pdev, KBUILD_MODNAME);
+> >  	if (err)
+> >  		dev_err(&pdev->dev, "Couldn't get PCI resources,
+> > aborting\n");
+> >
+> > @@ -1617,7 +1616,7 @@ void mlx5_recover_device(struct mlx5_core_dev
+> > *dev)  }
+> >
+> >  static struct pci_driver mlx5_core_driver = {
+> > -	.name           = DRIVER_NAME,
+> > +	.name           = KBUILD_MODNAME,
+> >  	.id_table       = mlx5_core_pci_table,
+> >  	.probe          = init_one,
+> >  	.remove         = remove_one,
+> > @@ -1643,6 +1642,10 @@ static int __init init(void)  {
+> >  	int err;
+> >
+> > +	WARN_ONCE(strcmp(MLX5_ADEV_NAME, KBUILD_MODNAME) ||
+> > +		  strlen(MLX5_ADEV_NAME) != strlen(KBUILD_MODNAME),
+> > +		  "mlx5_core name not in sync with kernel module name");
+> > +
+> In which case, both the strings are same but their length not?
+> You likely don't need the string length check.
 
-Delete dead code.
+Yes, I was overzealous, I'll remove when will apply the series.
 
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/infiniband/hw/mlx5/ib_rep.c | 31 +++++++----------------------
- drivers/infiniband/hw/mlx5/ib_rep.h | 31 -----------------------------
- 2 files changed, 7 insertions(+), 55 deletions(-)
+>
+> >  	get_random_bytes(&sw_owner_id, sizeof(sw_owner_id));
+> >
+> >  	mlx5_core_verify_params();
+> > diff --git a/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h
+> > b/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h
+> > index 8cec85ab419d..b285f1515e4e 100644
+> > --- a/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h
+> > +++ b/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h
+> > @@ -42,9 +42,6 @@
+> >  #include <linux/mlx5/fs.h>
+> >  #include <linux/mlx5/driver.h>
+> >
+> > -#define DRIVER_NAME "mlx5_core"
+> > -#define DRIVER_VERSION "5.0-0"
+> > -
+> >  extern uint mlx5_core_debug_mask;
+> >
+> >  #define mlx5_core_dbg(__dev, format, ...)				\
+> > diff --git a/include/linux/mlx5/driver.h b/include/linux/mlx5/driver.h index
+> > 317257f8e0ad..ed1d030658d2 100644
+> > --- a/include/linux/mlx5/driver.h
+> > +++ b/include/linux/mlx5/driver.h
+> > @@ -56,6 +56,8 @@
+> >  #include <linux/ptp_clock_kernel.h>
+> >  #include <net/devlink.h>
+> >
+> > +#define MLX5_ADEV_NAME "mlx5_core"
+> > +
+> >  enum {
+> >  	MLX5_BOARD_ID_LEN = 64,
+> >  };
+> > --
+> > 2.28.0
+>
+>
+> Other than strlen removal check,
+> Reviewed-by: Parav Pandit <parav@nvidia.com>
+>
 
-diff --git a/drivers/infiniband/hw/mlx5/ib_rep.c b/drivers/infiniband/hw/mlx5/ib_rep.c
-index 9810bdd7f3bc..a1a9450ed92c 100644
---- a/drivers/infiniband/hw/mlx5/ib_rep.c
-+++ b/drivers/infiniband/hw/mlx5/ib_rep.c
-@@ -13,7 +13,7 @@ mlx5_ib_set_vport_rep(struct mlx5_core_dev *dev, struct mlx5_eswitch_rep *rep)
- 	struct mlx5_ib_dev *ibdev;
- 	int vport_index;
-
--	ibdev = mlx5_ib_get_uplink_ibdev(dev->priv.eswitch);
-+	ibdev = mlx5_eswitch_uplink_get_proto_dev(dev->priv.eswitch, REP_IB);
- 	vport_index = rep->vport_index;
-
- 	ibdev->port[vport_index].rep = rep;
-@@ -74,6 +74,11 @@ mlx5_ib_vport_rep_load(struct mlx5_core_dev *dev, struct mlx5_eswitch_rep *rep)
- 	return ret;
- }
-
-+static void *mlx5_ib_rep_to_dev(struct mlx5_eswitch_rep *rep)
-+{
-+	return rep->rep_data[REP_IB].priv;
-+}
-+
- static void
- mlx5_ib_vport_rep_unload(struct mlx5_eswitch_rep *rep)
- {
-@@ -91,40 +96,18 @@ mlx5_ib_vport_rep_unload(struct mlx5_eswitch_rep *rep)
- 		__mlx5_ib_remove(dev, dev->profile, MLX5_IB_STAGE_MAX);
- }
-
--static void *mlx5_ib_vport_get_proto_dev(struct mlx5_eswitch_rep *rep)
--{
--	return mlx5_ib_rep_to_dev(rep);
--}
--
- static const struct mlx5_eswitch_rep_ops rep_ops = {
- 	.load = mlx5_ib_vport_rep_load,
- 	.unload = mlx5_ib_vport_rep_unload,
--	.get_proto_dev = mlx5_ib_vport_get_proto_dev,
-+	.get_proto_dev = mlx5_ib_rep_to_dev,
- };
-
--struct mlx5_ib_dev *mlx5_ib_get_rep_ibdev(struct mlx5_eswitch *esw,
--					  u16 vport_num)
--{
--	return mlx5_eswitch_get_proto_dev(esw, vport_num, REP_IB);
--}
--
- struct net_device *mlx5_ib_get_rep_netdev(struct mlx5_eswitch *esw,
- 					  u16 vport_num)
- {
- 	return mlx5_eswitch_get_proto_dev(esw, vport_num, REP_ETH);
- }
-
--struct mlx5_ib_dev *mlx5_ib_get_uplink_ibdev(struct mlx5_eswitch *esw)
--{
--	return mlx5_eswitch_uplink_get_proto_dev(esw, REP_IB);
--}
--
--struct mlx5_eswitch_rep *mlx5_ib_vport_rep(struct mlx5_eswitch *esw,
--					   u16 vport_num)
--{
--	return mlx5_eswitch_vport_rep(esw, vport_num);
--}
--
- struct mlx5_flow_handle *create_flow_rule_vport_sq(struct mlx5_ib_dev *dev,
- 						   struct mlx5_ib_sq *sq,
- 						   u16 port)
-diff --git a/drivers/infiniband/hw/mlx5/ib_rep.h b/drivers/infiniband/hw/mlx5/ib_rep.h
-index 93f562735e89..ce1dcb105dbd 100644
---- a/drivers/infiniband/hw/mlx5/ib_rep.h
-+++ b/drivers/infiniband/hw/mlx5/ib_rep.h
-@@ -12,11 +12,6 @@
- extern const struct mlx5_ib_profile raw_eth_profile;
-
- #ifdef CONFIG_MLX5_ESWITCH
--struct mlx5_ib_dev *mlx5_ib_get_rep_ibdev(struct mlx5_eswitch *esw,
--					  u16 vport_num);
--struct mlx5_ib_dev *mlx5_ib_get_uplink_ibdev(struct mlx5_eswitch *esw);
--struct mlx5_eswitch_rep *mlx5_ib_vport_rep(struct mlx5_eswitch *esw,
--					   u16 vport_num);
- int mlx5r_rep_init(void);
- void mlx5r_rep_cleanup(void);
- struct mlx5_flow_handle *create_flow_rule_vport_sq(struct mlx5_ib_dev *dev,
-@@ -25,26 +20,6 @@ struct mlx5_flow_handle *create_flow_rule_vport_sq(struct mlx5_ib_dev *dev,
- struct net_device *mlx5_ib_get_rep_netdev(struct mlx5_eswitch *esw,
- 					  u16 vport_num);
- #else /* CONFIG_MLX5_ESWITCH */
--static inline
--struct mlx5_ib_dev *mlx5_ib_get_rep_ibdev(struct mlx5_eswitch *esw,
--					  u16 vport_num)
--{
--	return NULL;
--}
--
--static inline
--struct mlx5_ib_dev *mlx5_ib_get_uplink_ibdev(struct mlx5_eswitch *esw)
--{
--	return NULL;
--}
--
--static inline
--struct mlx5_eswitch_rep *mlx5_ib_vport_rep(struct mlx5_eswitch *esw,
--					   u16 vport_num)
--{
--	return NULL;
--}
--
- static inline int mlx5r_rep_init(void) { return 0; }
- static inline void mlx5r_rep_cleanup(void) {}
- static inline
-@@ -62,10 +37,4 @@ struct net_device *mlx5_ib_get_rep_netdev(struct mlx5_eswitch *esw,
- 	return NULL;
- }
- #endif
--
--static inline
--struct mlx5_ib_dev *mlx5_ib_rep_to_dev(struct mlx5_eswitch_rep *rep)
--{
--	return rep->rep_data[REP_IB].priv;
--}
- #endif /* __MLX5_IB_REP_H__ */
---
-2.28.0
-
+Thanks
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
