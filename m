@@ -1,67 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B06E2A4246
-	for <lists.virtualization@lfdr.de>; Tue,  3 Nov 2020 11:34:12 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C7132A424F
+	for <lists.virtualization@lfdr.de>; Tue,  3 Nov 2020 11:34:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CA49286E50;
-	Tue,  3 Nov 2020 10:34:10 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 509E986079;
+	Tue,  3 Nov 2020 10:34:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xEHY9bRUO4+T; Tue,  3 Nov 2020 10:34:09 +0000 (UTC)
+	with ESMTP id BgstGdaJJYaH; Tue,  3 Nov 2020 10:34:12 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 1F7E787098;
-	Tue,  3 Nov 2020 10:34:09 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A538786101;
+	Tue,  3 Nov 2020 10:34:12 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0AA32C0051;
-	Tue,  3 Nov 2020 10:34:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7DEB4C0051;
+	Tue,  3 Nov 2020 10:34:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B57C8C0051
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0BFC5C0051
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 10:34:07 +0000 (UTC)
+ Tue,  3 Nov 2020 10:34:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 82B772076F
+ by whitealder.osuosl.org (Postfix) with ESMTP id 0082686DE4
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 10:34:07 +0000 (UTC)
+ Tue,  3 Nov 2020 10:34:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9FhK+91a04q0
+ with ESMTP id K9FtSb-wKSVi
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 10:34:06 +0000 (UTC)
+ Tue,  3 Nov 2020 10:34:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by silver.osuosl.org (Postfix) with ESMTPS id 2594520768
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 099A986AB6
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 10:34:06 +0000 (UTC)
-Message-Id: <20201103095859.538827102@linutronix.de>
+ Tue,  3 Nov 2020 10:34:08 +0000 (UTC)
+Message-Id: <20201103095859.632601906@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1604399639;
+ s=2020; t=1604399640;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=37l2/9hMoX995irJwwZT0VNkjmk/OwZo72GhT72QTX4=;
- b=UCiLeToK4AIC+9Dmx7LG5rV2mjuvYVd6Coif2Sdjhi7Si2K86UL165usKvCu+1M57a5ZTs
- 3lGdAzYJonKcTuvyMgrOXNx+UrIY8LVcTVNso2JLtpbkE1oygEe/wl748JnAW6AS6EsTrD
- c2VWZi0Trd4Jp1S58g19SzXtzA+u8eA2qRCth6y4qBL25KfIk14Y8/pIC7Pk9xx9opLe+Y
- fYTupCtZR4FQC2/b1qBabqi8Jfeh2ZKqUrq+V0zmNc17uiUhxxjlvxwBR152OCIcLA02mF
- vb+4tkvTlRO1TXdeUxGxjDkLW4Yer0R+EYHQyA+pAWiyVIPp/wbrw75o+T0ZJw==
+ bh=BkU+tnLkRKR9tWKe3hevtehunqdIqgczXq1AHqpv3q4=;
+ b=KJf8zms3zcTUg/g/XiQKKwBV2+EGVfb2u6h4vllDaW1ez/6EBzhuUPcV5jYjkgK7/2tTNT
+ qa9meb2s93/KBKnvJtf7CaHAT8ZFpd7v/uDOmyc6h4+65DvAL8nMOPTgxeMwXec71wKviC
+ gz+l4oJdNdRF681hb02MgaZ8n1LTFM12pOX0R3Y6kTHEtlSnwJNnKuWAQNeTkLaIi8i7t3
+ B7yCZDHpTZLzl/MKlFABrQ2M+t1vry/EDo/Dfbd7n6CnEj3z8AhqyHdXDUxHJtlLsKb9Iy
+ +K2WT76685XP/mxAZ6mzKSlMAP/ZbKhBPVY2/azsvsrUQ/qHyD8kIOTXSXqhkQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1604399639;
+ s=2020e; t=1604399640;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=37l2/9hMoX995irJwwZT0VNkjmk/OwZo72GhT72QTX4=;
- b=iNcZKx8Fg9QYlTcIp7Z3u6IBgHA5T+EwXNMLuSSTvrJb/3r4DH72OAUwbFyp58bawCPYfQ
- dJ5wikkjaG3JOhAw==
-Date: Tue, 03 Nov 2020 10:27:41 +0100
+ bh=BkU+tnLkRKR9tWKe3hevtehunqdIqgczXq1AHqpv3q4=;
+ b=VFptQlcVWRmmzZcgWUr7xM35WWw+Igz4v/KmNvEZ7Y4AvSm9gz9Y19AW04WlVkG++aOR3h
+ ADLKc+FsTUi0cTDA==
+Date: Tue, 03 Nov 2020 10:27:42 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Subject: [patch V3 29/37] ARM: mm: Replace kmap_atomic_pfn()
+Subject: [patch V3 30/37] highmem: Remove kmap_atomic_pfn()
 References: <20201103092712.714480842@linutronix.de>
 MIME-Version: 1.0
 Cc: Juri Lelli <juri.lelli@redhat.com>, linux-aio@kvack.org,
@@ -117,65 +117,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-There is no requirement to disable pagefaults and preemption for these
-cache management mappings.
-
-Replace kmap_atomic_pfn() with kmap_local_pfn(). This allows to remove
-kmap_atomic_pfn() in the next step.
+No more users.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Russell King <linux@armlinux.org.uk>
-Cc: linux-arm-kernel@lists.infradead.org
 ---
 V3: New patch
 ---
- arch/arm/mm/cache-feroceon-l2.c |    6 +++---
- arch/arm/mm/cache-xsc3l2.c      |    4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ include/linux/highmem-internal.h |   12 ------------
+ 1 file changed, 12 deletions(-)
 
---- a/arch/arm/mm/cache-feroceon-l2.c
-+++ b/arch/arm/mm/cache-feroceon-l2.c
-@@ -49,9 +49,9 @@ static inline unsigned long l2_get_va(un
- 	 * we simply install a virtual mapping for it only for the
- 	 * TLB lookup to occur, hence no need to flush the untouched
- 	 * memory mapping afterwards (note: a cache flush may happen
--	 * in some circumstances depending on the path taken in kunmap_atomic).
-+	 * in some circumstances depending on the path taken in kunmap_local).
- 	 */
--	void *vaddr = kmap_atomic_pfn(paddr >> PAGE_SHIFT);
-+	void *vaddr = kmap_local_pfn(paddr >> PAGE_SHIFT);
- 	return (unsigned long)vaddr + (paddr & ~PAGE_MASK);
- #else
- 	return __phys_to_virt(paddr);
-@@ -61,7 +61,7 @@ static inline unsigned long l2_get_va(un
- static inline void l2_put_va(unsigned long vaddr)
- {
- #ifdef CONFIG_HIGHMEM
--	kunmap_atomic((void *)vaddr);
-+	kunmap_local((void *)vaddr);
- #endif
+--- a/include/linux/highmem-internal.h
++++ b/include/linux/highmem-internal.h
+@@ -99,13 +99,6 @@ static inline void *kmap_atomic(struct p
+ 	return kmap_atomic_prot(page, kmap_prot);
  }
  
---- a/arch/arm/mm/cache-xsc3l2.c
-+++ b/arch/arm/mm/cache-xsc3l2.c
-@@ -59,7 +59,7 @@ static inline void l2_unmap_va(unsigned
+-static inline void *kmap_atomic_pfn(unsigned long pfn)
+-{
+-	preempt_disable();
+-	pagefault_disable();
+-	return __kmap_local_pfn_prot(pfn, kmap_prot);
+-}
+-
+ static inline void __kunmap_atomic(void *addr)
  {
- #ifdef CONFIG_HIGHMEM
- 	if (va != -1)
--		kunmap_atomic((void *)va);
-+		kunmap_local((void *)va);
- #endif
+ 	kunmap_local_indexed(addr);
+@@ -193,11 +186,6 @@ static inline void *kmap_atomic_prot(str
+ 	return kmap_atomic(page);
  }
  
-@@ -75,7 +75,7 @@ static inline unsigned long l2_map_va(un
- 		 * in place for it.
- 		 */
- 		l2_unmap_va(prev_va);
--		va = (unsigned long)kmap_atomic_pfn(pa >> PAGE_SHIFT);
-+		va = (unsigned long)kmap_local_pfn(pa >> PAGE_SHIFT);
- 	}
- 	return va + (pa_offset >> (32 - PAGE_SHIFT));
- #else
+-static inline void *kmap_atomic_pfn(unsigned long pfn)
+-{
+-	return kmap_atomic(pfn_to_page(pfn));
+-}
+-
+ static inline void __kunmap_atomic(void *addr)
+ {
+ #ifdef ARCH_HAS_FLUSH_ON_KUNMAP
 
 _______________________________________________
 Virtualization mailing list
