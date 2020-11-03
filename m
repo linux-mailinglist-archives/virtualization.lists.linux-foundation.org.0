@@ -2,66 +2,66 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 985462A4200
-	for <lists.virtualization@lfdr.de>; Tue,  3 Nov 2020 11:33:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 904BC2A4203
+	for <lists.virtualization@lfdr.de>; Tue,  3 Nov 2020 11:33:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 2C10C86079;
-	Tue,  3 Nov 2020 10:33:31 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 3B76D8609D;
+	Tue,  3 Nov 2020 10:33:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3RVLgrO7KXwr; Tue,  3 Nov 2020 10:33:30 +0000 (UTC)
+	with ESMTP id H-9ZJ1FFOUB9; Tue,  3 Nov 2020 10:33:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id B436286088;
-	Tue,  3 Nov 2020 10:33:30 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 1C17D860AE;
+	Tue,  3 Nov 2020 10:33:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 98DFBC0051;
-	Tue,  3 Nov 2020 10:33:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EECADC0889;
+	Tue,  3 Nov 2020 10:33:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 61D06C0051
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E9927C0051
  for <virtualization@lists.linux-foundation.org>;
  Tue,  3 Nov 2020 10:33:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 4897C86DB2
+ by fraxinus.osuosl.org (Postfix) with ESMTP id D6E5D86079
  for <virtualization@lists.linux-foundation.org>;
  Tue,  3 Nov 2020 10:33:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 56XuhNxPvDgI
+ with ESMTP id 1XzN0cFLReX9
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 10:33:27 +0000 (UTC)
+ Tue,  3 Nov 2020 10:33:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 4074586D48
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 146E986044
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 10:33:27 +0000 (UTC)
-Message-Id: <20201103095856.732891880@linutronix.de>
+ Tue,  3 Nov 2020 10:33:29 +0000 (UTC)
+Message-Id: <20201103095856.870272797@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1604399605;
+ s=2020; t=1604399606;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=3HwBsgFv26sFcL/ZrR5QT7IdhKdyl722jNSTyAsMfhU=;
- b=rvT54BmES001fwkPfhre2195ODFh8EFwDZYAlKQRhVHUBxAXrQ4jz+GuDaq+7kANpwhtIs
- Odqznja1AON6wOyHEpYXOzN884r1utS39bCLsxNEulHhg56wkK85myPaXmlcyC0Iwy9aJH
- 7H/5d1lmCAyZsRrJM2yBsjEdO5LEmhyrq2wZg4iXyHs50gJQuJK3//uDTtWi4cGXwQajhE
- 6zcImoXr01WpyQwaIvad1lc/klKtM4lT0KI/sOHFnGRyhXmWoqmmzQFg3YIBBqGRZ2BmRY
- OjwLotmGcs5kT4ELYX86H43ZMMJAy6wm+tJXkQgUfKkVJUPub5l/USgVgx610A==
+ bh=mHGaObavEXdpklPpAdB/Vc9tQphwJ4HtjtNI7fLm1v8=;
+ b=IBayNHLC8hDXJPq5spbDcH2wKyiWbuyexwHwfVt89VcAakRhxfizYqbQCAAKER9L/0L/m1
+ Kn6tmBkR3xWZrx6tJ/BA5rsYN4HGNPFD48Ua4frK3vrnlVg9aLM4m5aIJw9ym5mSbN61k5
+ EHHJS0+GcvKD5mXRHapBzJaiaTtrRGQL9/oIkA+EXvVydTfP9WAjd4wBDbJghjylU6Hl+v
+ cbUiIXxIilBIpfO0gAqBvTDU+ZaYnr+9b9dZHzEpb1hZtXN8oqnkWtU4heJMQKd9pbhu3F
+ Udw+2wxDQStY2AooCfpVR6WbhoIEGNiJw2A//IRPpAYo18WAjI/Kj422cg4K+A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1604399605;
+ s=2020e; t=1604399606;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=3HwBsgFv26sFcL/ZrR5QT7IdhKdyl722jNSTyAsMfhU=;
- b=lkKBWdK1CIWHPlUI77sykNxUAemFnakZTPVr751NgUw5N/WO+Qg52P9pTni6F4JYuE0eLl
- 4W0KlbICECLDLgCA==
-Date: Tue, 03 Nov 2020 10:27:14 +0100
+ bh=mHGaObavEXdpklPpAdB/Vc9tQphwJ4HtjtNI7fLm1v8=;
+ b=ZQ5pkdX4DsEbSRpww8iUtueplpi1akZRVpDjtrypi3SvuIOi8H/SrYDmUdCkGKxD3wiqTh
+ yikxYY0p6mIHukBQ==
+Date: Tue, 03 Nov 2020 10:27:15 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Subject: [patch V3 02/37] highmem: Remove unused functions
+Subject: [patch V3 03/37] fs: Remove asm/kmap_types.h includes
 References: <20201103092712.714480842@linutronix.de>
 MIME-Version: 1.0
 Cc: Juri Lelli <juri.lelli@redhat.com>, linux-aio@kvack.org,
@@ -70,7 +70,7 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-aio@kvack.org,
  Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Ben Segall <bsegall@google.com>, Chris Mason <clm@fb.com>,
+ Ben Segall <bsegall@google.com>, linux-mm@kvack.org,
  Huang Rui <ray.huang@amd.com>, Paul Mackerras <paulus@samba.org>,
  Daniel Bristot de Oliveira <bristot@redhat.com>, sparclinux@vger.kernel.org,
  Vincent Chen <deanbo422@gmail.com>, Christoph Hellwig <hch@lst.de>,
@@ -94,7 +94,7 @@ Cc: Juri Lelli <juri.lelli@redhat.com>, linux-aio@kvack.org,
  Jani Nikula <jani.nikula@linux.intel.com>, Chris Zankel <chris@zankel.net>,
  Michal Simek <monstr@monstr.eu>,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Nick Hu <nickhu@andestech.com>, linux-mm@kvack.org,
+ Nick Hu <nickhu@andestech.com>, Chris Mason <clm@fb.com>,
  Vineet Gupta <vgupta@synopsys.com>, linux-mips@vger.kernel.org,
  Christian Koenig <christian.koenig@amd.com>, Benjamin LaHaise <bcrl@kvack.org>,
  Daniel Vetter <daniel@ffwll.ch>, linux-fsdevel@vger.kernel.org,
@@ -117,39 +117,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Nothing uses totalhigh_pages_dec() and totalhigh_pages_set().
+Historical leftovers from the time where kmap() had fixed slots.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Alexander Viro <viro@zeniv.linux.org.uk>
+Cc: Benjamin LaHaise <bcrl@kvack.org>
+Cc: linux-fsdevel@vger.kernel.org
+Cc: linux-aio@kvack.org
+Cc: Chris Mason <clm@fb.com>
+Cc: Josef Bacik <josef@toxicpanda.com>
+Cc: David Sterba <dsterba@suse.com>
+Cc: linux-btrfs@vger.kernel.org
 ---
-V3: New patch
----
- include/linux/highmem.h |   10 ----------
- 1 file changed, 10 deletions(-)
+ fs/aio.c         |    1 -
+ fs/btrfs/ctree.h |    1 -
+ 2 files changed, 2 deletions(-)
 
---- a/include/linux/highmem.h
-+++ b/include/linux/highmem.h
-@@ -104,21 +104,11 @@ static inline void totalhigh_pages_inc(v
- 	atomic_long_inc(&_totalhigh_pages);
- }
+--- a/fs/aio.c
++++ b/fs/aio.c
+@@ -43,7 +43,6 @@
+ #include <linux/mount.h>
+ #include <linux/pseudo_fs.h>
  
--static inline void totalhigh_pages_dec(void)
--{
--	atomic_long_dec(&_totalhigh_pages);
--}
--
- static inline void totalhigh_pages_add(long count)
- {
- 	atomic_long_add(count, &_totalhigh_pages);
- }
+-#include <asm/kmap_types.h>
+ #include <linux/uaccess.h>
+ #include <linux/nospec.h>
  
--static inline void totalhigh_pages_set(long val)
--{
--	atomic_long_set(&_totalhigh_pages, val);
--}
--
- void kmap_flush_unused(void);
- 
- struct page *kmap_to_page(void *addr);
+--- a/fs/btrfs/ctree.h
++++ b/fs/btrfs/ctree.h
+@@ -17,7 +17,6 @@
+ #include <linux/wait.h>
+ #include <linux/slab.h>
+ #include <trace/events/btrfs.h>
+-#include <asm/kmap_types.h>
+ #include <asm/unaligned.h>
+ #include <linux/pagemap.h>
+ #include <linux/btrfs.h>
 
 _______________________________________________
 Virtualization mailing list
