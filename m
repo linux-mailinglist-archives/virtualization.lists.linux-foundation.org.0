@@ -1,86 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF32C2A3F98
-	for <lists.virtualization@lfdr.de>; Tue,  3 Nov 2020 10:05:18 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D2652A4014
+	for <lists.virtualization@lfdr.de>; Tue,  3 Nov 2020 10:30:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 5AB4685F8E;
-	Tue,  3 Nov 2020 09:05:17 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1300286C40;
+	Tue,  3 Nov 2020 09:30:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id i5dZI7dsOpBC; Tue,  3 Nov 2020 09:05:16 +0000 (UTC)
+	with ESMTP id XZkc9dveQ8pu; Tue,  3 Nov 2020 09:30:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C8CC58577C;
-	Tue,  3 Nov 2020 09:05:16 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 374D386C53;
+	Tue,  3 Nov 2020 09:30:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8FDB8C0051;
-	Tue,  3 Nov 2020 09:05:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1DC72C0889;
+	Tue,  3 Nov 2020 09:30:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EA705C0051
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B6B6DC0889
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 09:05:14 +0000 (UTC)
+ Tue,  3 Nov 2020 09:30:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E598885773
+ by hemlock.osuosl.org (Postfix) with ESMTP id A1D4887212
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 09:05:14 +0000 (UTC)
+ Tue,  3 Nov 2020 09:30:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id puvDYwG_rjkK
+ with ESMTP id gnN3MZML6OCJ
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 09:05:14 +0000 (UTC)
+ Tue,  3 Nov 2020 09:30:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 4174D8557E
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 0A09587171
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Nov 2020 09:05:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1604394313;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NCLuRFwSBz7lCHK9Xxh7qpGQtAw7uNBdQ5Y4F/GcLRE=;
- b=bOoDSURfuiKVuCuityHb0l5MLp9SxE4oHhjRwpeiBhEgEtjFfTCEBuikAD5+J4RcO+W4+W
- e72DioWrZ38hAFbTRovksXKxcRpVLvJmhHG5WkeGaYELhFBcjVT42SeB49qzNkYHnpgks1
- S+RUYUNJqEBMi5mlcZl5CgIFpwez1rU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-547-QnBW_FxePh-2eshNLH4Rrw-1; Tue, 03 Nov 2020 04:05:09 -0500
-X-MC-Unique: QnBW_FxePh-2eshNLH4Rrw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 23D0C106B816;
- Tue,  3 Nov 2020 09:05:08 +0000 (UTC)
-Received: from [10.72.13.208] (ovpn-13-208.pek2.redhat.com [10.72.13.208])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2F47D21E97;
- Tue,  3 Nov 2020 09:04:32 +0000 (UTC)
-Subject: Re: [PATCH] vhost/vsock: add IOTLB API support
-To: Stefano Garzarella <sgarzare@redhat.com>
-References: <20201029174351.134173-1-sgarzare@redhat.com>
- <751cc074-ae68-72c8-71de-a42458058761@redhat.com>
- <20201030105422.ju2aj2bmwsckdufh@steredhat>
- <278f4732-e561-2b4f-03ee-b26455760b01@redhat.com>
- <20201102171104.eiovmkj23fle5ioj@steredhat>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <8648a2e3-1052-3b5b-11ce-87628ac8dd33@redhat.com>
-Date: Tue, 3 Nov 2020 17:04:23 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Tue,  3 Nov 2020 09:30:20 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AEF6BAF5B;
+ Tue,  3 Nov 2020 09:30:18 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+ daniel@ffwll.ch, sam@ravnborg.org, alexander.deucher@amd.com,
+ christian.koenig@amd.com, kraxel@redhat.com, l.stach@pengutronix.de,
+ linux+etnaviv@armlinux.org.uk, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ yuq825@gmail.com, bskeggs@redhat.com, robh@kernel.org,
+ tomeu.vizoso@collabora.com, steven.price@arm.com,
+ alyssa.rosenzweig@collabora.com, hjc@rock-chips.com, heiko@sntech.de,
+ hdegoede@redhat.com, sean@poorly.run, eric@anholt.net,
+ oleksandr_andrushchenko@epam.com, ray.huang@amd.com,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com, luben.tuikov@amd.com,
+ apaneers@amd.com, linus.walleij@linaro.org, melissa.srw@gmail.com,
+ chris@chris-wilson.co.uk, miaoqinglang@huawei.com
+Subject: [PATCH v7 00/10] Support GEM object mappings from I/O memory
+Date: Tue,  3 Nov 2020 10:30:05 +0100
+Message-Id: <20201103093015.1063-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-In-Reply-To: <20201102171104.eiovmkj23fle5ioj@steredhat>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Stefan Hajnoczi <stefanha@redhat.com>
+Cc: linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ xen-devel@lists.xenproject.org, spice-devel@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,74 +80,151 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMTEvMyDkuIrljYgxOjExLCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6Cj4gT24g
-RnJpLCBPY3QgMzAsIDIwMjAgYXQgMDc6NDQ6NDNQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90ZToK
-Pj4KPj4gT24gMjAyMC8xMC8zMCDkuIvljYg2OjU0LCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6
-Cj4+PiBPbiBGcmksIE9jdCAzMCwgMjAyMCBhdCAwNjowMjoxOFBNICswODAwLCBKYXNvbiBXYW5n
-IHdyb3RlOgo+Pj4+Cj4+Pj4gT24gMjAyMC8xMC8zMCDkuIrljYgxOjQzLCBTdGVmYW5vIEdhcnph
-cmVsbGEgd3JvdGU6Cj4+Pj4+IFRoaXMgcGF0Y2ggZW5hYmxlcyB0aGUgSU9UTEIgQVBJIHN1cHBv
-cnQgZm9yIHZob3N0LXZzb2NrIGRldmljZXMsCj4+Pj4+IGFsbG93aW5nIHRoZSB1c2Vyc3BhY2Ug
-dG8gZW11bGF0ZSBhbiBJT01NVSBmb3IgdGhlIGd1ZXN0Lgo+Pj4+Pgo+Pj4+PiBUaGVzZSBjaGFu
-Z2VzIHdlcmUgbWFkZSBmb2xsb3dpbmcgdmhvc3QtbmV0LCBpbiBkZXRhaWxzIHRoaXMgcGF0Y2g6
-Cj4+Pj4+IC0gZXhwb3NlcyBWSVJUSU9fRl9BQ0NFU1NfUExBVEZPUk0gZmVhdHVyZSBhbmQgaW5p
-dHMgdGhlIGlvdGxiCj4+Pj4+IMKgIGRldmljZSBpZiB0aGUgZmVhdHVyZSBpcyBhY2tlZAo+Pj4+
-PiAtIGltcGxlbWVudHMgVkhPU1RfR0VUX0JBQ0tFTkRfRkVBVFVSRVMgYW5kCj4+Pj4+IMKgIFZI
-T1NUX1NFVF9CQUNLRU5EX0ZFQVRVUkVTIGlvY3Rscwo+Pj4+PiAtIGNhbGxzIHZxX21ldGFfcHJl
-ZmV0Y2goKSBiZWZvcmUgdnEgcHJvY2Vzc2luZyB0byBwcmVmZXRjaCB2cQo+Pj4+PiDCoCBtZXRh
-ZGF0YSBhZGRyZXNzIGluIElPVExCCj4+Pj4+IC0gcHJvdmlkZXMgLnJlYWRfaXRlciwgLndyaXRl
-X2l0ZXIsIGFuZCAucG9sbCBjYWxsYmFja3MgZm9yIHRoZQo+Pj4+PiDCoCBjaGFyZGV2OyB0aGV5
-IGFyZSB1c2VkIGJ5IHRoZSB1c2Vyc3BhY2UgdG8gZXhjaGFuZ2UgSU9UTEIgbWVzc2FnZXMKPj4+
-Pj4KPj4+Pj4gVGhpcyBwYXRjaCB3YXMgdGVzdGVkIHdpdGggUUVNVSBhbmQgYSBwYXRjaCBhcHBs
-aWVkIFsxXSB0byBmaXggYQo+Pj4+PiBzaW1wbGUgaXNzdWU6Cj4+Pj4+IMKgwqDCoCAkIHFlbXUg
-LU0gcTM1LGFjY2VsPWt2bSxrZXJuZWwtaXJxY2hpcD1zcGxpdCBcCj4+Pj4+IMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIC1kcml2ZSBmaWxlPWZlZG9yYS5xY293Mixmb3JtYXQ9cWNvdzIsaWY9dmlydGlv
-IFwKPj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqAgLWRldmljZSBpbnRlbC1pb21tdSxpbnRyZW1h
-cD1vbiBcCj4+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgIC1kZXZpY2Ugdmhvc3QtdnNvY2stcGNp
-LGd1ZXN0LWNpZD0zLGlvbW11X3BsYXRmb3JtPW9uCj4+Pj4KPj4+Pgo+Pj4+IFBhdGNoIGxvb2tz
-IGdvb2QsIGJ1dCBhIHF1ZXN0aW9uOgo+Pj4+Cj4+Pj4gSXQgbG9va3MgdG8gbWUgeW91IGRvbid0
-IGVuYWJsZSBBVFMgd2hpY2ggbWVhbnMgdmhvc3Qgd29uJ3QgZ2V0IGFueSAKPj4+PiBpbnZhbGlk
-YXRpb24gcmVxdWVzdCBvciBkaWQgSSBtaXNzIGFueXRoaW5nPwo+Pj4+Cj4+Pgo+Pj4gWW91J3Jl
-IHJpZ2h0LCBJIGRpZG4ndCBzZWUgaW52YWxpZGF0aW9uIHJlcXVlc3RzLCBvbmx5IG1pc3MgYW5k
-IAo+Pj4gdXBkYXRlcy4KPj4+IE5vdyBJIGhhdmUgdHJpZWQgdG8gZW5hYmxlICdhdHMnIGFuZCAn
-ZGV2aWNlLWlvdGxiJyBidXQgSSBzdGlsbCAKPj4+IGRvbid0IHNlZSBhbnkgaW52YWxpZGF0aW9u
-Lgo+Pj4KPj4+IEhvdyBjYW4gSSB0ZXN0IGl0PyAoU29ycnkgYnV0IEkgZG9uJ3QgaGF2ZSBtdWNo
-IGV4cGVyaWVuY2UgeWV0IHdpdGggCj4+PiB2SU9NTVUpCj4+Cj4+Cj4+IEkgZ3Vlc3MgaXQncyBi
-ZWNhdXNlIHRoZSBiYXRjaGVkIHVubWFwLiBNYXliZSB5b3UgY2FuIHRyeSB0byB1c2UgCj4+ICJp
-bnRlbF9pb21tdT1zdHJpY3QiIGluIGd1ZXN0IGtlcm5lbCBjb21tYW5kIGxpbmUgdG8gc2VlIGlm
-IGl0IHdvcmtzLgo+Pgo+PiBCdHcsIG1ha2Ugc3VyZSB0aGUgcWVtdSBjb250YWlucyB0aGUgcGF0
-Y2ggWzFdLiBPdGhlcndpc2UgQVRTIHdvbid0IAo+PiBiZSBlbmFibGVkIGZvciByZWNlbnQgTGlu
-dXggS2VybmVsIGluIHRoZSBndWVzdC4KPgo+IFRoZSBwcm9ibGVtIHdhcyBteSBrZXJuZWwsIGl0
-IHdhcyBidWlsdCB3aXRoIGEgdGlueSBjb25maWd1cmF0aW9uLgo+IFVzaW5nIGZlZG9yYSBzdG9j
-ayBrZXJuZWwgSSBjYW4gc2VlIHRoZSAnaW52YWxpZGF0ZScgcmVxdWVzdHMsIGJ1dCBJIAo+IGFs
-c28gaGFkIHRoZSBmb2xsb3dpbmcgaXNzdWVzLgo+Cj4gRG8gdGhleSBtYWtlIHlvdSByaW5nIGFu
-eSBiZWxscz8KPgo+ICQgLi9xZW11IC1tIDRHIC1zbXAgNCAtTSBxMzUsYWNjZWw9a3ZtLGtlcm5l
-bC1pcnFjaGlwPXNwbGl0IFwKPiDCoMKgwqAgLWRyaXZlIGZpbGU9ZmVkb3JhLnFjb3cyLGZvcm1h
-dD1xY293MixpZj12aXJ0aW8gXAo+IMKgwqDCoCAtZGV2aWNlIGludGVsLWlvbW11LGludHJlbWFw
-PW9uLGRldmljZS1pb3RsYj1vbiBcCj4gwqDCoMKgIC1kZXZpY2Ugdmhvc3QtdnNvY2stcGNpLGd1
-ZXN0LWNpZD02LGlvbW11X3BsYXRmb3JtPW9uLGF0cz1vbixpZD12MQo+Cj4gwqDCoMKgIHFlbXUt
-c3lzdGVtLXg4Nl82NDogdnRkX2lvdmFfdG9fc2xwdGU6IGRldGVjdGVkIElPVkEgb3ZlcmZsb3cg
-wqDCoMKgIAo+IChpb3ZhPTB4MWQ0MDAwMDAzMGMwKQoKCkl0J3MgYSBoaW50IHRoYXQgSU9WQSBl
-eGNlZWRzIHRoZSBBVy4gSXQgbWlnaHQgYmUgd29ydGggdG8gY2hlY2sgd2hldGhlciAKdGhlIG1p
-c3NlZCBJT1ZBIHJlcG9ydGVkIGZyb20gSU9UTEIgaXMgbGVnYWwuCgpUaGFua3MKCgo+IHFlbXUt
-c3lzdGVtLXg4Nl82NDogdnRkX2lvbW11X3RyYW5zbGF0ZTogZGV0ZWN0ZWQgdHJhbnNsYXRpb24g
-ZmFpbHVyZSAKPiAoZGV2PTAwOjAzOjAwLCBpb3ZhPTB4MWQ0MDAwMDAzMGMwKQo+IMKgwqDCoCBx
-ZW11LXN5c3RlbS14ODZfNjQ6IE5ldyBmYXVsdCBpcyBub3QgcmVjb3JkZWQgZHVlIHRvIGNvbXBy
-ZXNzaW9uIAo+IG9mIMKgwqDCoCBmYXVsdHMKPgo+IEd1ZXN0IGtlcm5lbCBtZXNzYWdlczoKPiDC
-oMKgwqAgW8KgwqAgNDQuOTQwODcyXSBETUFSOiBEUkhEOiBoYW5kbGluZyBmYXVsdCBzdGF0dXMg
-cmVnIDIKPiDCoMKgwqAgW8KgwqAgNDQuOTQxOTg5XSBETUFSOiBbRE1BIFJlYWRdIFJlcXVlc3Qg
-ZGV2aWNlIFswMDowMy4wXSBQQVNJRCDCoMKgwqAgCj4gZmZmZmZmZmYgZmF1bHQgYWRkciBmZmZm
-ODhXCj4gwqDCoMKgIFvCoMKgIDQ5Ljc4NTg4NF0gRE1BUjogRFJIRDogaGFuZGxpbmcgZmF1bHQg
-c3RhdHVzIHJlZyAyCj4gwqDCoMKgIFvCoMKgIDQ5Ljc4ODg3NF0gRE1BUjogW0RNQSBSZWFkXSBS
-ZXF1ZXN0IGRldmljZSBbMDA6MDMuMF0gUEFTSUQgwqDCoMKgIAo+IGZmZmZmZmZmIGZhdWx0IGFk
-ZHIgZmZmZjg4Vwo+Cj4KPiBRRU1VOiBiMTQ5ZGVhNTVjIE1lcmdlIHJlbW90ZS10cmFja2luZyBi
-cmFuY2ggCj4gJ3JlbW90ZXMvY3NjaG9lbmViZWNrL3RhZ3MvcHVsbC05cC0yMDIwMTEwMicgaW50
-byBzdGFnaW5nCj4KPiBMaW51eCBndWVzdDogNS44LjE2LTIwMC5mYzMyLng4Nl82NAo+Cj4KPiBU
-aGFua3MsCj4gU3RlZmFubwo+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlz
-dHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3Jn
-L21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+DRM's fbdev console uses regular load and store operations to update
+framebuffer memory. The bochs driver on sparc64 requires the use of
+I/O-specific load and store operations. We have a workaround, but need
+a long-term solution to the problem.
+
+This patchset changes GEM's vmap/vunmap interfaces to forward pointers
+of type struct dma_buf_map and updates the generic fbdev emulation to
+use them correctly. This enables I/O-memory operations on all framebuffers
+that require and support them.
+
+Patches #1 to #4 prepare VRAM helpers and drivers.
+
+Next is the update of the GEM vmap functions. Patch #5 adds vmap and vunmap
+that is usable with TTM-based GEM drivers, and patch #6 updates GEM's
+vmap/vunmap callback to forward instances of type struct dma_buf_map. While
+the patch touches many files throughout the DRM modules, the applied changes
+are mostly trivial interface fixes. Several TTM-based GEM drivers now use
+the new vmap code. Patch #7 updates GEM's internal vmap/vunmap functions to
+forward struct dma_buf_map.
+
+With struct dma_buf_map propagated through the layers, patches #8 to #10
+convert DRM clients and generic fbdev emulation to use it. Updating the
+fbdev framebuffer will select the correct functions, either for system or
+I/O memory.
+
+There is also a set of IGT testcases for fbdev at [1]. Reading and writting
+fbdev device files has several corner cases near the EOF that the tests cover
+as well. The original fbdev code has different semantics with the different
+implementations (sys, cfb). Patch #10 and the testcases intend to harmonize
+the behaviour and serve as a reference.
+
+v7:
+	* return number of read/written bytes in fbdev code; if any
+	* init QXL cursor from BO buffer (kernel test robot)
+	* use min_t(size_t,) (kernel test robot)
+v6:
+	* don't call page_to_phys() on fbdev framebuffers in I/O memory;
+	  warn instead (Daniel)
+v5:
+	* rebase onto latest TTM changes (Christian)
+	* support TTM premapped memory correctly (Christian)
+	* implement fb_read/fb_write internally (Sam, Daniel)
+	* cleanups
+v4:
+	* provide TTM vmap/vunmap plus GEM helpers and convert drivers
+	  over (Christian, Daniel)
+	* remove several empty functions
+	* more TODOs and documentation (Daniel)
+v3:
+	* recreate the whole patchset on top of struct dma_buf_map
+v2:
+	* RFC patchset
+
+[1] https://gitlab.freedesktop.org/tzimmermann/igt-gpu-tools/-/merge_requests/1
+
+Thomas Zimmermann (10):
+  drm/vram-helper: Remove invariant parameters from internal kmap
+    function
+  drm/cma-helper: Remove empty drm_gem_cma_prime_vunmap()
+  drm/etnaviv: Remove empty etnaviv_gem_prime_vunmap()
+  drm/exynos: Remove empty exynos_drm_gem_prime_{vmap,vunmap}()
+  drm/ttm: Add vmap/vunmap to TTM and TTM GEM helpers
+  drm/gem: Use struct dma_buf_map in GEM vmap ops and convert GEM
+    backends
+  drm/gem: Update internal GEM vmap/vunmap interfaces to use struct
+    dma_buf_map
+  drm/gem: Store client buffer mappings as struct dma_buf_map
+  dma-buf-map: Add memcpy and pointer-increment interfaces
+  drm/fb_helper: Support framebuffers in I/O memory
+
+ Documentation/gpu/todo.rst                  |  37 ++-
+ drivers/gpu/drm/Kconfig                     |   2 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  36 ---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |   2 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c     |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.h  |   1 -
+ drivers/gpu/drm/ast/ast_cursor.c            |  27 +--
+ drivers/gpu/drm/ast/ast_drv.h               |   7 +-
+ drivers/gpu/drm/bochs/bochs_kms.c           |   1 -
+ drivers/gpu/drm/drm_client.c                |  38 +--
+ drivers/gpu/drm/drm_fb_helper.c             | 250 ++++++++++++++++++--
+ drivers/gpu/drm/drm_gem.c                   |  29 ++-
+ drivers/gpu/drm/drm_gem_cma_helper.c        |  27 +--
+ drivers/gpu/drm/drm_gem_shmem_helper.c      |  48 ++--
+ drivers/gpu/drm/drm_gem_ttm_helper.c        |  38 +++
+ drivers/gpu/drm/drm_gem_vram_helper.c       | 117 +++++----
+ drivers/gpu/drm/drm_internal.h              |   5 +-
+ drivers/gpu/drm/drm_prime.c                 |  14 +-
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h       |   3 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c       |   1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  12 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.c     |  12 -
+ drivers/gpu/drm/exynos/exynos_drm_gem.h     |   2 -
+ drivers/gpu/drm/lima/lima_gem.c             |   6 +-
+ drivers/gpu/drm/lima/lima_sched.c           |  11 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c      |  10 +-
+ drivers/gpu/drm/nouveau/Kconfig             |   1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.h        |   2 -
+ drivers/gpu/drm/nouveau/nouveau_gem.c       |   6 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.h       |   2 -
+ drivers/gpu/drm/nouveau/nouveau_prime.c     |  20 --
+ drivers/gpu/drm/panfrost/panfrost_perfcnt.c |  14 +-
+ drivers/gpu/drm/qxl/qxl_display.c           |  15 +-
+ drivers/gpu/drm/qxl/qxl_draw.c              |  14 +-
+ drivers/gpu/drm/qxl/qxl_drv.h               |  11 +-
+ drivers/gpu/drm/qxl/qxl_object.c            |  31 ++-
+ drivers/gpu/drm/qxl/qxl_object.h            |   2 +-
+ drivers/gpu/drm/qxl/qxl_prime.c             |  12 +-
+ drivers/gpu/drm/radeon/radeon.h             |   1 -
+ drivers/gpu/drm/radeon/radeon_gem.c         |   7 +-
+ drivers/gpu/drm/radeon/radeon_prime.c       |  20 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  22 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.h |   4 +-
+ drivers/gpu/drm/tiny/cirrus.c               |  10 +-
+ drivers/gpu/drm/tiny/gm12u320.c             |  10 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c           |  72 ++++++
+ drivers/gpu/drm/udl/udl_modeset.c           |   8 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c       |  11 +-
+ drivers/gpu/drm/vc4/vc4_bo.c                |   7 +-
+ drivers/gpu/drm/vc4/vc4_drv.h               |   2 +-
+ drivers/gpu/drm/vgem/vgem_drv.c             |  16 +-
+ drivers/gpu/drm/vkms/vkms_plane.c           |  15 +-
+ drivers/gpu/drm/vkms/vkms_writeback.c       |  22 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.c     |  18 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.h     |   6 +-
+ include/drm/drm_client.h                    |   7 +-
+ include/drm/drm_gem.h                       |   5 +-
+ include/drm/drm_gem_cma_helper.h            |   3 +-
+ include/drm/drm_gem_shmem_helper.h          |   4 +-
+ include/drm/drm_gem_ttm_helper.h            |   6 +
+ include/drm/drm_gem_vram_helper.h           |  14 +-
+ include/drm/drm_mode_config.h               |  12 -
+ include/drm/ttm/ttm_bo_api.h                |  28 +++
+ include/linux/dma-buf-map.h                 |  93 +++++++-
+ 64 files changed, 856 insertions(+), 438 deletions(-)
+
+--
+2.29.0
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
