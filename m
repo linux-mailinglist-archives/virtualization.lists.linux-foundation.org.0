@@ -1,83 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DFC32A5CC4
-	for <lists.virtualization@lfdr.de>; Wed,  4 Nov 2020 03:42:27 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 92D7D2A608D
+	for <lists.virtualization@lfdr.de>; Wed,  4 Nov 2020 10:33:56 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 0C42D214FD;
-	Wed,  4 Nov 2020 02:42:26 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 2055786479;
+	Wed,  4 Nov 2020 09:33:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id k5Dl-xWN3eIe; Wed,  4 Nov 2020 02:42:25 +0000 (UTC)
+	with ESMTP id L9NK0DR24s4w; Wed,  4 Nov 2020 09:33:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 45C5720438;
-	Wed,  4 Nov 2020 02:42:25 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A07C386456;
+	Wed,  4 Nov 2020 09:33:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2483FC0051;
-	Wed,  4 Nov 2020 02:42:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7A166C0889;
+	Wed,  4 Nov 2020 09:33:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 363DEC0051
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D8F34C0051
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Nov 2020 02:42:23 +0000 (UTC)
+ Wed,  4 Nov 2020 09:33:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 19A9620438
+ by silver.osuosl.org (Postfix) with ESMTP id B41EE2049B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Nov 2020 02:42:23 +0000 (UTC)
+ Wed,  4 Nov 2020 09:33:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AfiqzvB3I+UY
+ with ESMTP id 83WSnjLT+Ok7
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Nov 2020 02:42:21 +0000 (UTC)
+ Wed,  4 Nov 2020 09:33:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by silver.osuosl.org (Postfix) with ESMTPS id 6A6D7203F8
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
+ [209.85.208.52])
+ by silver.osuosl.org (Postfix) with ESMTPS id B3CB220445
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Nov 2020 02:42:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1604457740;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Rb8Gi0pri/Bf4YFmm+SGx2KisIIUt6r7oMKw9nSOZYs=;
- b=Z1SqT1bjWmmZRmbHINUP+MO1+llAwXiRmK6N3KaRtNEP2xos+u5Y35jUg71OW8tQHOQeGV
- /X45vmYhSFyF6xLkyjJsmDwjcoCQd4+sL+v3V3cLnoZ5LQJtnhAhJuK+TYx44pIm2/jceC
- hhf84ruF6NEkScRKdBw/ihLY+bSbqkE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-7-drJiGjQeNYWSXNx9kF-Zkg-1; Tue, 03 Nov 2020 21:42:18 -0500
-X-MC-Unique: drJiGjQeNYWSXNx9kF-Zkg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4EC3C800400;
- Wed,  4 Nov 2020 02:42:17 +0000 (UTC)
-Received: from [10.72.13.133] (ovpn-13-133.pek2.redhat.com [10.72.13.133])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C829C194B9;
- Wed,  4 Nov 2020 02:42:11 +0000 (UTC)
-Subject: Re: [PATCH 2/2] vhost-vdpa: fix page pinning leakage in error path
- (rework)
-To: Si-Wei Liu <si-wei.liu@oracle.com>, mst@redhat.com, lingshan.zhu@intel.com
-References: <1604043944-4897-1-git-send-email-si-wei.liu@oracle.com>
- <1604043944-4897-2-git-send-email-si-wei.liu@oracle.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <77a2aefe-ccad-bd51-3721-1139d4e535d7@redhat.com>
-Date: Wed, 4 Nov 2020 10:42:10 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Wed,  4 Nov 2020 09:33:49 +0000 (UTC)
+Received: by mail-ed1-f52.google.com with SMTP id p93so21718603edd.7
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 04 Nov 2020 01:33:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=1DyDheOb7hdP2j6+U4rmaA8px4hw4FKnG8K+MWzcbCY=;
+ b=EQSmu7gHVfLkVF8VHKlfv0z9wC3WTiS8thx/WbFlnXuy03FTmdr6eI7gSMK+hKzlOX
+ vzXdLk5eTEGMKBtye7uzKns5a1uXsQk7lWH2DdYAG9+bYlF2w9/MZ2e6ljk/mYqzjheB
+ Olzmy9gyhEiX/6VLDcVwgs0Kuq+TF92bkOXzRshy5jkEtiac+3anQExlCRjj0lcuyk2l
+ bRBKsOEM6ACzPe9fg5WRTAtzBUk1JKwQIdm2COAEQToBI8cSMpnuMkDNNSdThGhdp8wA
+ 0RIm6Pt8ng8j6NtVGkN8ALssajF5YOmP3ktUcTM6jdAydebyKA9Mcf7CzAgNYMJX6urQ
+ fvHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=1DyDheOb7hdP2j6+U4rmaA8px4hw4FKnG8K+MWzcbCY=;
+ b=LBPuZ/0HsyR8rEuZB373cmKwYrX2BMex/g4jKo2iCJ90MaBmXI1kOT9mFaB0RZ5NAo
+ VBLKO8yJGfbPvH9O86OWOQxn+JTbbprfQwcHKIe4jiX7aLGzzpdic9F2eHuAIRTp7R9o
+ QZ1NsGHoggyzvAQnvX/WUJstMf2o6zkMbH7QsttteYcL6VpuBDIKoPf3bPPN1wOzaqJ6
+ geYREd0OXpXRuufO5RRSR/uN1jdOkemZoHCa0Na5mFCeded+m8udgALbLnSUp2rLAl4u
+ dTuQCbhtY0EZ0j7S5WbsFrjUhofQl47GrfC+8dWt38DCZRqGWn5uKECUCb+a3jUeZwBz
+ mUyw==
+X-Gm-Message-State: AOAM530s9IaBY8qIit2oyaZ7g+E+56MQZOXNX/PkzLsPTovpTECK1Pl5
+ t2A6lT6NcT3CH7S/tydkEkcilQ==
+X-Google-Smtp-Source: ABdhPJxwJwBOkJVz8J2LWuNKj/Ohtfm5+UYk8BmI+7+MjrwC4ykaiVvXA9wdH6bYcYvQ5FP9G4l5OQ==
+X-Received: by 2002:aa7:da44:: with SMTP id w4mr14267958eds.131.1604482428113; 
+ Wed, 04 Nov 2020 01:33:48 -0800 (PST)
+Received: from myrica ([2001:1715:4e26:a7e0:116c:c27a:3e7f:5eaf])
+ by smtp.gmail.com with ESMTPSA id b12sm726638edn.86.2020.11.04.01.33.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Nov 2020 01:33:47 -0800 (PST)
+Date: Wed, 4 Nov 2020 10:33:28 +0100
+From: Jean-Philippe Brucker <jean-philippe@linaro.org>
+To: Al Stone <ahs3@redhat.com>
+Subject: Re: [PATCH v3 0/6] Add virtio-iommu built-in topology
+Message-ID: <20201104093328.GA505400@myrica>
+References: <20200821131540.2801801-1-jean-philippe@linaro.org>
+ <ab2a1668-e40c-c8f0-b77b-abadeceb4b82@redhat.com>
+ <20200924045958-mutt-send-email-mst@kernel.org>
+ <20200924092129.GH27174@8bytes.org>
+ <20200924053159-mutt-send-email-mst@kernel.org>
+ <d54b674e-2626-fc73-d663-136573c32b8a@redhat.com>
+ <20201002182348.GO138842@redhat.com>
+ <e8a37837-30d0-d7cc-496a-df4c12fff1da@redhat.com>
+ <20201103200904.GA1557194@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <1604043944-4897-2-git-send-email-si-wei.liu@oracle.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: virtualization@lists.linux-foundation.org, boris.ostrovsky@oracle.com,
- linux-kernel@vger.kernel.org
+Content-Disposition: inline
+In-Reply-To: <20201103200904.GA1557194@redhat.com>
+Cc: virtio-dev@lists.oasis-open.org, lorenzo.pieralisi@arm.com,
+ "Michael S. Tsirkin" <mst@redhat.com>, linux-pci@vger.kernel.org,
+ Joerg Roedel <joro@8bytes.org>, virtualization@lists.linux-foundation.org,
+ Auger Eric <eric.auger@redhat.com>, iommu@lists.linux-foundation.org,
+ sebastien.boeuf@intel.com, bhelgaas@google.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,96 +105,44 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMTAvMzAg5LiL5Y2IMzo0NSwgU2ktV2VpIExpdSB3cm90ZToKPiBQaW5uZWQgcGFn
-ZXMgYXJlIG5vdCBwcm9wZXJseSBhY2NvdW50ZWQgcGFydGljdWxhcmx5IHdoZW4KPiBtYXBwaW5n
-IGVycm9yIG9jY3VycyBvbiBJT1RMQiB1cGRhdGUuIENsZWFuIHVwIGRhbmdsaW5nCj4gcGlubmVk
-IHBhZ2VzIGZvciB0aGUgZXJyb3IgcGF0aC4KPgo+IFRoZSBtZW1vcnkgdXNhZ2UgZm9yIGJvb2tr
-ZWVwaW5nIHBpbm5lZCBwYWdlcyBpcyByZXZlcnRlZAo+IHRvIHdoYXQgaXQgd2FzIGJlZm9yZTog
-b25seSBvbmUgc2luZ2xlIGZyZWUgcGFnZSBpcyBuZWVkZWQuCj4gVGhpcyBoZWxwcyByZWR1Y2Ug
-dGhlIGhvc3QgbWVtb3J5IGRlbWFuZCBmb3IgVk0gd2l0aCBhIGxhcmdlCj4gYW1vdW50IG9mIG1l
-bW9yeSwgb3IgaW4gdGhlIHNpdHVhdGlvbiB3aGVyZSBob3N0IGlzIHJ1bm5pbmcKPiBzaG9ydCBv
-ZiBmcmVlIG1lbW9yeS4KPgo+IEZpeGVzOiA0YzhjZjMxODg1ZjYgKCJ2aG9zdDogaW50cm9kdWNl
-IHZEUEEtYmFzZWQgYmFja2VuZCIpCj4gU2lnbmVkLW9mZi1ieTogU2ktV2VpIExpdSA8c2ktd2Vp
-LmxpdUBvcmFjbGUuY29tPgo+IC0tLQo+ICAgZHJpdmVycy92aG9zdC92ZHBhLmMgfCA2NCArKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tCj4gICAxIGZp
-bGUgY2hhbmdlZCwgNDYgaW5zZXJ0aW9ucygrKSwgMTggZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy92aG9zdC92ZHBhLmMgYi9kcml2ZXJzL3Zob3N0L3ZkcGEuYwo+IGluZGV4
-IGI2ZDkwMTYuLjhkYTg1NTggMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92aG9zdC92ZHBhLmMKPiAr
-KysgYi9kcml2ZXJzL3Zob3N0L3ZkcGEuYwo+IEBAIC01NjAsNiArNTYwLDggQEAgc3RhdGljIGlu
-dCB2aG9zdF92ZHBhX21hcChzdHJ1Y3Qgdmhvc3RfdmRwYSAqdiwKPiAgIAo+ICAgCWlmIChyKQo+
-ICAgCQl2aG9zdF9pb3RsYl9kZWxfcmFuZ2UoZGV2LT5pb3RsYiwgaW92YSwgaW92YSArIHNpemUg
-LSAxKTsKPiArCWVsc2UKPiArCQlhdG9taWM2NF9hZGQoc2l6ZSA+PiBQQUdFX1NISUZULCAmZGV2
-LT5tbS0+cGlubmVkX3ZtKTsKPiAgIAo+ICAgCXJldHVybiByOwo+ICAgfQo+IEBAIC01OTEsMTQg
-KzU5MywxNiBAQCBzdGF0aWMgaW50IHZob3N0X3ZkcGFfcHJvY2Vzc19pb3RsYl91cGRhdGUoc3Ry
-dWN0IHZob3N0X3ZkcGEgKnYsCj4gICAJdW5zaWduZWQgbG9uZyBsaXN0X3NpemUgPSBQQUdFX1NJ
-WkUgLyBzaXplb2Yoc3RydWN0IHBhZ2UgKik7Cj4gICAJdW5zaWduZWQgaW50IGd1cF9mbGFncyA9
-IEZPTExfTE9OR1RFUk07Cj4gICAJdW5zaWduZWQgbG9uZyBucGFnZXMsIGN1cl9iYXNlLCBtYXBf
-cGZuLCBsYXN0X3BmbiA9IDA7Cj4gLQl1bnNpZ25lZCBsb25nIGxvY2tlZCwgbG9ja19saW1pdCwg
-cGlubmVkLCBpOwo+ICsJdW5zaWduZWQgbG9uZyBsb2NrX2xpbWl0LCBzejJwaW4sIG5jaHVua3Ms
-IGk7Cj4gICAJdTY0IGlvdmEgPSBtc2ctPmlvdmE7Cj4gKwlsb25nIHBpbm5lZDsKPiAgIAlpbnQg
-cmV0ID0gMDsKPiAgIAo+ICAgCWlmICh2aG9zdF9pb3RsYl9pdHJlZV9maXJzdChpb3RsYiwgbXNn
-LT5pb3ZhLAo+ICAgCQkJCSAgICBtc2ctPmlvdmEgKyBtc2ctPnNpemUgLSAxKSkKPiAgIAkJcmV0
-dXJuIC1FRVhJU1Q7Cj4gICAKPiArCS8qIExpbWl0IHRoZSB1c2Ugb2YgbWVtb3J5IGZvciBib29r
-a2VlcGluZyAqLwo+ICAgCXBhZ2VfbGlzdCA9IChzdHJ1Y3QgcGFnZSAqKikgX19nZXRfZnJlZV9w
-YWdlKEdGUF9LRVJORUwpOwo+ICAgCWlmICghcGFnZV9saXN0KQo+ICAgCQlyZXR1cm4gLUVOT01F
-TTsKPiBAQCAtNjA3LDUyICs2MTEsNjQgQEAgc3RhdGljIGludCB2aG9zdF92ZHBhX3Byb2Nlc3Nf
-aW90bGJfdXBkYXRlKHN0cnVjdCB2aG9zdF92ZHBhICp2LAo+ICAgCQlndXBfZmxhZ3MgfD0gRk9M
-TF9XUklURTsKPiAgIAo+ICAgCW5wYWdlcyA9IFBBR0VfQUxJR04obXNnLT5zaXplICsgKGlvdmEg
-JiB+UEFHRV9NQVNLKSkgPj4gUEFHRV9TSElGVDsKPiAtCWlmICghbnBhZ2VzKQo+IC0JCXJldHVy
-biAtRUlOVkFMOwo+ICsJaWYgKCFucGFnZXMpIHsKPiArCQlyZXQgPSAtRUlOVkFMOwo+ICsJCWdv
-dG8gZnJlZTsKPiArCX0KPiAgIAo+ICAgCW1tYXBfcmVhZF9sb2NrKGRldi0+bW0pOwo+ICAgCj4g
-LQlsb2NrZWQgPSBhdG9taWM2NF9hZGRfcmV0dXJuKG5wYWdlcywgJmRldi0+bW0tPnBpbm5lZF92
-bSk7Cj4gICAJbG9ja19saW1pdCA9IHJsaW1pdChSTElNSVRfTUVNTE9DSykgPj4gUEFHRV9TSElG
-VDsKPiAtCj4gLQlpZiAobG9ja2VkID4gbG9ja19saW1pdCkgewo+ICsJaWYgKG5wYWdlcyArIGF0
-b21pYzY0X3JlYWQoJmRldi0+bW0tPnBpbm5lZF92bSkgPiBsb2NrX2xpbWl0KSB7Cj4gICAJCXJl
-dCA9IC1FTk9NRU07Cj4gLQkJZ290byBvdXQ7Cj4gKwkJZ290byB1bmxvY2s7Cj4gICAJfQo+ICAg
-Cj4gICAJY3VyX2Jhc2UgPSBtc2ctPnVhZGRyICYgUEFHRV9NQVNLOwo+ICAgCWlvdmEgJj0gUEFH
-RV9NQVNLOwo+ICsJbmNodW5rcyA9IDA7Cj4gICAKPiAgIAl3aGlsZSAobnBhZ2VzKSB7Cj4gLQkJ
-cGlubmVkID0gbWluX3QodW5zaWduZWQgbG9uZywgbnBhZ2VzLCBsaXN0X3NpemUpOwo+IC0JCXJl
-dCA9IHBpbl91c2VyX3BhZ2VzKGN1cl9iYXNlLCBwaW5uZWQsCj4gLQkJCQkgICAgIGd1cF9mbGFn
-cywgcGFnZV9saXN0LCBOVUxMKTsKPiAtCQlpZiAocmV0ICE9IHBpbm5lZCkKPiArCQlzejJwaW4g
-PSBtaW5fdCh1bnNpZ25lZCBsb25nLCBucGFnZXMsIGxpc3Rfc2l6ZSk7Cj4gKwkJcGlubmVkID0g
-cGluX3VzZXJfcGFnZXMoY3VyX2Jhc2UsIHN6MnBpbiwKPiArCQkJCQlndXBfZmxhZ3MsIHBhZ2Vf
-bGlzdCwgTlVMTCk7Cj4gKwkJaWYgKHN6MnBpbiAhPSBwaW5uZWQpIHsKPiArCQkJaWYgKHBpbm5l
-ZCA8IDApIHsKPiArCQkJCXJldCA9IHBpbm5lZDsKPiArCQkJfSBlbHNlIHsKPiArCQkJCXVucGlu
-X3VzZXJfcGFnZXMocGFnZV9saXN0LCBwaW5uZWQpOwo+ICsJCQkJcmV0ID0gLUVOT01FTTsKPiAr
-CQkJfQo+ICAgCQkJZ290byBvdXQ7Cj4gKwkJfQo+ICsJCW5jaHVua3MrKzsKPiAgIAo+ICAgCQlp
-ZiAoIWxhc3RfcGZuKQo+ICAgCQkJbWFwX3BmbiA9IHBhZ2VfdG9fcGZuKHBhZ2VfbGlzdFswXSk7
-Cj4gICAKPiAtCQlmb3IgKGkgPSAwOyBpIDwgcmV0OyBpKyspIHsKPiArCQlmb3IgKGkgPSAwOyBp
-IDwgcGlubmVkOyBpKyspIHsKPiAgIAkJCXVuc2lnbmVkIGxvbmcgdGhpc19wZm4gPSBwYWdlX3Rv
-X3BmbihwYWdlX2xpc3RbaV0pOwo+ICAgCQkJdTY0IGNzaXplOwo+ICAgCj4gICAJCQlpZiAobGFz
-dF9wZm4gJiYgKHRoaXNfcGZuICE9IGxhc3RfcGZuICsgMSkpIHsKPiAgIAkJCQkvKiBQaW4gYSBj
-b250aWd1b3VzIGNodW5rIG9mIG1lbW9yeSAqLwo+ICAgCQkJCWNzaXplID0gKGxhc3RfcGZuIC0g
-bWFwX3BmbiArIDEpIDw8IFBBR0VfU0hJRlQ7Cj4gLQkJCQlpZiAodmhvc3RfdmRwYV9tYXAodiwg
-aW92YSwgY3NpemUsCj4gLQkJCQkJCSAgIG1hcF9wZm4gPDwgUEFHRV9TSElGVCwKPiAtCQkJCQkJ
-ICAgbXNnLT5wZXJtKSkKPiArCQkJCXJldCA9IHZob3N0X3ZkcGFfbWFwKHYsIGlvdmEsIGNzaXpl
-LAo+ICsJCQkJCQkgICAgIG1hcF9wZm4gPDwgUEFHRV9TSElGVCwKPiArCQkJCQkJICAgICBtc2ct
-PnBlcm0pOwo+ICsJCQkJaWYgKHJldCkKPiAgIAkJCQkJZ290byBvdXQ7Cj4gKwo+ICAgCQkJCW1h
-cF9wZm4gPSB0aGlzX3BmbjsKPiAgIAkJCQlpb3ZhICs9IGNzaXplOwo+ICsJCQkJbmNodW5rcyA9
-IDA7Cj4gICAJCQl9Cj4gICAKPiAgIAkJCWxhc3RfcGZuID0gdGhpc19wZm47Cj4gICAJCX0KPiAg
-IAo+IC0JCWN1cl9iYXNlICs9IHJldCA8PCBQQUdFX1NISUZUOwo+IC0JCW5wYWdlcyAtPSByZXQ7
-Cj4gKwkJY3VyX2Jhc2UgKz0gcGlubmVkIDw8IFBBR0VfU0hJRlQ7Cj4gKwkJbnBhZ2VzIC09IHBp
-bm5lZDsKPiAgIAl9Cj4gICAKPiAgIAkvKiBQaW4gdGhlIHJlc3QgY2h1bmsgKi8KPiBAQCAtNjYw
-LDEwICs2NzYsMjIgQEAgc3RhdGljIGludCB2aG9zdF92ZHBhX3Byb2Nlc3NfaW90bGJfdXBkYXRl
-KHN0cnVjdCB2aG9zdF92ZHBhICp2LAo+ICAgCQkJICAgICBtYXBfcGZuIDw8IFBBR0VfU0hJRlQs
-IG1zZy0+cGVybSk7Cj4gICBvdXQ6Cj4gICAJaWYgKHJldCkgewo+ICsJCWlmIChuY2h1bmtzICYm
-IGxhc3RfcGZuKSB7CgoKQ2FuIHdlIGRlY3JlYXNlIG5wYWdlcyB3aGVyZSB5b3UgZGlkICJuY2h1
-bmtzKysiIHRoZW4gd2UgY2FuIGNoZWNrIApucGFnZXMgaGVyZSBpbnN0ZWFkPwoKVGhhbmtzCgoK
-PiArCQkJdW5zaWduZWQgbG9uZyBwZm47Cj4gKwo+ICsJCQkvKgo+ICsJCQkgKiBVbnBpbiB0aGUg
-b3V0c3RhbmRpbmcgcGFnZXMgd2hpY2ggYXJlIHVubWFwcGVkLgo+ICsJCQkgKiBNYXBwZWQgcGFn
-ZXMgYXJlIGFjY291bnRlZCBpbiB2ZHBhX21hcCgpLCB0aHVzCj4gKwkJCSAqIHdpbGwgYmUgaGFu
-ZGxlZCBieSB2ZHBhX3VubWFwKCkuCj4gKwkJCSAqLwo+ICsJCQlmb3IgKHBmbiA9IG1hcF9wZm47
-IHBmbiA8PSBsYXN0X3BmbjsgcGZuKyspCj4gKwkJCQl1bnBpbl91c2VyX3BhZ2UocGZuX3RvX3Bh
-Z2UocGZuKSk7Cj4gKwkJfQo+ICAgCQl2aG9zdF92ZHBhX3VubWFwKHYsIG1zZy0+aW92YSwgbXNn
-LT5zaXplKTsKPiAtCQlhdG9taWM2NF9zdWIobnBhZ2VzLCAmZGV2LT5tbS0+cGlubmVkX3ZtKTsK
-PiAgIAl9Cj4gK3VubG9jazoKPiAgIAltbWFwX3JlYWRfdW5sb2NrKGRldi0+bW0pOwo+ICtmcmVl
-Ogo+ICAgCWZyZWVfcGFnZSgodW5zaWduZWQgbG9uZylwYWdlX2xpc3QpOwo+ICAgCXJldHVybiBy
-ZXQ7Cj4gICB9CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgt
-Zm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4v
-bGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+Hi Al,
+
+On Tue, Nov 03, 2020 at 01:09:04PM -0700, Al Stone wrote:
+> So, there are some questions about the VIOT definition and I just
+> don't know enough to be able to answer them.  One of the ASWG members
+> is trying to understand the semantics behind the subtables.
+
+Thanks for the update. We dropped subtables a few versions ago, though, do
+you have the latest v8?
+https://jpbrucker.net/virtio-iommu/viot/viot-v8.pdf
+
+> Is there a particular set of people, or mailing lists, that I can
+> point to to get the questions answered?  Ideally it would be one
+> of the public lists where it has already been discussed, but an
+> individual would be fine, too.  No changes have been proposed, just
+> some questions asked.
+
+For a public list, I suggest iommu@lists.linux-foundation.org if we should
+pick only one (otherwise add virtualization@lists.linux-foundation.org and
+virtio-dev@lists.oasis-open.org). I'm happy to answer any question, and
+the folks on here are a good set to Cc:
+
+eric.auger@redhat.com
+jean-philippe@linaro.org
+joro@8bytes.org
+kevin.tian@intel.com
+lorenzo.pieralisi@arm.com
+mst@redhat.com
+sebastien.boeuf@intel.com
+
+Thanks,
+Jean
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
