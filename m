@@ -1,68 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08D0C2A780C
-	for <lists.virtualization@lfdr.de>; Thu,  5 Nov 2020 08:32:21 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id BE09F2A7843
+	for <lists.virtualization@lfdr.de>; Thu,  5 Nov 2020 08:49:28 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id C0DED87037;
-	Thu,  5 Nov 2020 07:32:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 5909384AC4;
+	Thu,  5 Nov 2020 07:49:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iaTxh5BqS3qH; Thu,  5 Nov 2020 07:32:19 +0000 (UTC)
+	with ESMTP id HZu7V96Tcmfc; Thu,  5 Nov 2020 07:49:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 3A00687035;
-	Thu,  5 Nov 2020 07:32:19 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 9239384AB2;
+	Thu,  5 Nov 2020 07:49:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1DA01C0889;
-	Thu,  5 Nov 2020 07:32:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 699B6C088B;
+	Thu,  5 Nov 2020 07:49:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C0E9DC0889
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 83194C0889
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Nov 2020 07:32:16 +0000 (UTC)
+ Thu,  5 Nov 2020 07:49:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 9570020767
+ by hemlock.osuosl.org (Postfix) with ESMTP id 7180987051
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Nov 2020 07:32:16 +0000 (UTC)
+ Thu,  5 Nov 2020 07:49:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SZAWwazT+zCc
+ with ESMTP id NG3lEK7hRaDY
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Nov 2020 07:32:15 +0000 (UTC)
+ Thu,  5 Nov 2020 07:49:24 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by silver.osuosl.org (Postfix) with ESMTPS id E3D0020373
+Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com
+ [209.85.218.67])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 99EC48704C
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Nov 2020 07:32:14 +0000 (UTC)
-Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 930A420936;
- Thu,  5 Nov 2020 07:32:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1604561534;
- bh=95POjnfgmnBfa+PcIUbO71yIixyEwcBCZu8ONi41qSI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=v7jixjnRS8IofHWpcD2+DxxCXJ90U/evKE0DUQul2JT/Y8H+g7nVaRbkifKy48xox
- VDGBlpUHfWervGmkwxAM0ACUtpdpFRRs9k0EqAwpLdfoM3L9+GBIUBILJMUGPAe8zd
- NU6sc18Y6rTq9FYLuezM9oiY3jBE5sPskCQybDUw=
-Date: Thu, 5 Nov 2020 08:33:02 +0100
-From: gregkh <gregkh@linuxfoundation.org>
-To: Dan Williams <dan.j.williams@intel.com>
-Subject: Re: [PATCH mlx5-next v1 06/11] vdpa/mlx5: Connect mlx5_vdpa to
- auxiliary bus
-Message-ID: <20201105073302.GA3415673@kroah.com>
+ Thu,  5 Nov 2020 07:49:24 +0000 (UTC)
+Received: by mail-ej1-f67.google.com with SMTP id k3so1199191ejj.10
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 04 Nov 2020 23:49:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=intel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=HiHN7cEc9FvAFXuwqXLWF0XbMGI5NJnlheI3AC/p0Rk=;
+ b=sDW2kw2WIZtOBBqP3OLvBf0PZR4l//kVfPnpgjZLMq0vnE4tjG4Ig8z5tff+gOMOP0
+ snGDBlsMM8PeDWRiOvFXKxwsoy/1Xtb6Xcc7mo4BQMPh/IrM38WXigtT7wQwr6ggUOjR
+ dnfFwV5wvxh5jl5IGJroHGHpfEDC4ES+wgWgBUaJCOqtZ8QG5P0CUCQzNp78U2eeV7O5
+ yCCmjn+yqQ4xcVOlwAcacEw2ny9JMCkuwMdXa4VYdR8fSYj/JM2Oeviqgge95DNvbHBt
+ rfnzbtVc3h3BTVvE+MV5I+onfG+QEpeqBoYtXw43J1bzbdBKp+zHOxdL3J2AqKAJxUFO
+ MhFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=HiHN7cEc9FvAFXuwqXLWF0XbMGI5NJnlheI3AC/p0Rk=;
+ b=mzJhyqRHrC2aRHC7poVJSRsDJ+nEhuRGgzkhzrnR/SBXLqU2Eb6Y+B48yih0h9k2y3
+ s4veRJC2289Wu7itLPtaJow3sPLGtmu8YL/4Cdt9BxsYVOpBkIXvKSGgHtKVnVuN8s/6
+ IXR2Kqv4rr/hzVgIfwzackv3l+X7Imm9++9ZQThOhohORk8uat+GfCzPznG7XzDs2Rjf
+ hGjW4BrySnVEwkyBVyKrI5JYJhTarU5UUrasOMWEEG8KH/+vMDcrXC4FTuJ6nTGmlPSR
+ 9LIZkcObQcBIhVZAj1RQbW0Yfx5CfR+OPMdqX0KuTXDUw5NKOoGbxci6R7G9GLR2UITB
+ 4d5g==
+X-Gm-Message-State: AOAM530uwbLW6qv5+IFfm4KO33c3EfXnkOS6ZEZwTXBQRUD67FqR9FVM
+ zLslt+0rBs0kEWjprMDtDlJGims1Temw92IHOmfekw==
+X-Google-Smtp-Source: ABdhPJzMyeNcHa42GSktT9mkjMahMnmlITf9LkRgdVukR/ujD9xIfq3TSrJb0lT83dAIiwc3ssEcu4HrZhS0QU6AnNw=
+X-Received: by 2002:a17:906:4306:: with SMTP id
+ j6mr1091381ejm.523.1604562563054; 
+ Wed, 04 Nov 2020 23:49:23 -0800 (PST)
+MIME-Version: 1.0
 References: <20201101201542.2027568-1-leon@kernel.org>
  <20201101201542.2027568-7-leon@kernel.org>
  <20201103154525.GO36674@ziepe.ca>
  <CAPcyv4jP9nFAGdvB7agg3x7Y7moHGcxLd5=f5=5CXnJRUf3n9w@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAPcyv4jP9nFAGdvB7agg3x7Y7moHGcxLd5=f5=5CXnJRUf3n9w@mail.gmail.com>
+ <20201105073302.GA3415673@kroah.com>
+In-Reply-To: <20201105073302.GA3415673@kroah.com>
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Wed, 4 Nov 2020 23:49:11 -0800
+Message-ID: <CAPcyv4iJZNsf9fnx2BkyCG9ECm85mFshaoxaZ3=kzMz-2-hCQQ@mail.gmail.com>
+Subject: Re: [PATCH mlx5-next v1 06/11] vdpa/mlx5: Connect mlx5_vdpa to
+ auxiliary bus
+To: gregkh <gregkh@linuxfoundation.org>
 Cc: alsa-devel@alsa-project.org, "Michael S. Tsirkin" <mst@redhat.com>,
  Takashi Iwai <tiwai@suse.de>,
  Ranjani Sridharan <ranjani.sridharan@linux.intel.com>,
@@ -93,56 +112,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Nov 04, 2020 at 03:21:23PM -0800, Dan Williams wrote:
-> On Tue, Nov 3, 2020 at 7:45 AM Jason Gunthorpe <jgg@ziepe.ca> wrote:
-> [..]
-> > > +MODULE_DEVICE_TABLE(auxiliary, mlx5v_id_table);
-> > > +
-> > > +static struct auxiliary_driver mlx5v_driver = {
-> > > +     .name = "vnet",
-> > > +     .probe = mlx5v_probe,
-> > > +     .remove = mlx5v_remove,
-> > > +     .id_table = mlx5v_id_table,
-> > > +};
+On Wed, Nov 4, 2020 at 11:32 PM gregkh <gregkh@linuxfoundation.org> wrote:
+>
+> On Wed, Nov 04, 2020 at 03:21:23PM -0800, Dan Williams wrote:
+> > On Tue, Nov 3, 2020 at 7:45 AM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+> > [..]
+> > > > +MODULE_DEVICE_TABLE(auxiliary, mlx5v_id_table);
+> > > > +
+> > > > +static struct auxiliary_driver mlx5v_driver = {
+> > > > +     .name = "vnet",
+> > > > +     .probe = mlx5v_probe,
+> > > > +     .remove = mlx5v_remove,
+> > > > +     .id_table = mlx5v_id_table,
+> > > > +};
+> > >
+> > > It is hard to see from the diff, but when this patch is applied the
+> > > vdpa module looks like I imagined things would look with the auxiliary
+> > > bus. It is very similar in structure to a PCI driver with the probe()
+> > > function cleanly registering with its subsystem. This is what I'd like
+> > > to see from the new Intel RDMA driver.
+> > >
+> > > Greg, I think this patch is the best clean usage example.
+> > >
+> > > I've looked over this series and it has the right idea and
+> > > parts. There is definitely more that can be done to improve mlx5 in
+> > > this area, but this series is well scoped and cleans a good part of
+> > > it.
 > >
-> > It is hard to see from the diff, but when this patch is applied the
-> > vdpa module looks like I imagined things would look with the auxiliary
-> > bus. It is very similar in structure to a PCI driver with the probe()
-> > function cleanly registering with its subsystem. This is what I'd like
-> > to see from the new Intel RDMA driver.
+> > Greg?
 > >
-> > Greg, I think this patch is the best clean usage example.
+> > I know you alluded to going your own way if the auxiliary bus patches
+> > did not shape up soon, but it seems they have and the stakeholders
+> > have reached this consensus point.
 > >
-> > I've looked over this series and it has the right idea and
-> > parts. There is definitely more that can be done to improve mlx5 in
-> > this area, but this series is well scoped and cleans a good part of
-> > it.
-> 
-> Greg?
-> 
-> I know you alluded to going your own way if the auxiliary bus patches
-> did not shape up soon, but it seems they have and the stakeholders
-> have reached this consensus point.
-> 
-> Were there any additional changes you wanted to see happen? I'll go
-> give the final set another once over, but David has been diligently
-> fixing up all the declared major issues so I expect to find at most
-> minor incremental fixups.
+> > Were there any additional changes you wanted to see happen? I'll go
+> > give the final set another once over, but David has been diligently
+> > fixing up all the declared major issues so I expect to find at most
+> > minor incremental fixups.
+>
+> This is in my to-review pile, along with a load of other stuff at the
+> moment:
+>         $ ~/bin/mdfrm -c ~/mail/todo/
+>         1709 messages in /home/gregkh/mail/todo/
+>
+> So give me a chance.  There is no rush on my side for this given the
+> huge delays that have happened here on the authorship side many times in
+> the past :)
 
-This is in my to-review pile, along with a load of other stuff at the
-moment:
-	$ ~/bin/mdfrm -c ~/mail/todo/
-	1709 messages in /home/gregkh/mail/todo/
+Sure, I was more looking to confirm that it's worth continuing to
+polish this set given your mention of possibly going a different
+direction.
 
-So give me a chance.  There is no rush on my side for this given the
-huge delays that have happened here on the authorship side many times in
-the past :)
+> If you can review it, or anyone else, that is always most appreciated.
 
-If you can review it, or anyone else, that is always most appreciated.
-
-thanks,
-
-greg k-h
+Thanks, will do.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
