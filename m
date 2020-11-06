@@ -1,78 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D398E2A8FE2
-	for <lists.virtualization@lfdr.de>; Fri,  6 Nov 2020 08:06:03 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E24F62A9132
+	for <lists.virtualization@lfdr.de>; Fri,  6 Nov 2020 09:24:53 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 905D3871BE;
-	Fri,  6 Nov 2020 07:06:02 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7D1EC868E2;
+	Fri,  6 Nov 2020 08:24:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sX4bfnCcUu-l; Fri,  6 Nov 2020 07:06:01 +0000 (UTC)
+	with ESMTP id YVj5Kr5Argrk; Fri,  6 Nov 2020 08:24:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DDB99871CF;
-	Fri,  6 Nov 2020 07:06:01 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D4B1A868D7;
+	Fri,  6 Nov 2020 08:24:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C12ADC0889;
-	Fri,  6 Nov 2020 07:06:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 99E2AC0889;
+	Fri,  6 Nov 2020 08:24:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BD9E2C0889
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 47478C0889
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Nov 2020 07:05:59 +0000 (UTC)
+ Fri,  6 Nov 2020 08:24:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id A314D871A7
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3B910868D0
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Nov 2020 07:05:59 +0000 (UTC)
+ Fri,  6 Nov 2020 08:24:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8uWoIOr4x2tE
+ with ESMTP id TNDYeCQ9fhBY
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Nov 2020 07:05:58 +0000 (UTC)
+ Fri,  6 Nov 2020 08:24:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 70AB5870DF
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 3A2C4868BB
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Nov 2020 07:05:58 +0000 (UTC)
-Received: from localhost (searspoint.nvidia.com [216.228.112.21])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ Fri,  6 Nov 2020 08:24:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1604651087;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=29qfegGrh7AruURuvpgC8HtdchFL+7zQsPXILi0X3v4=;
+ b=YPH2/oAlqvoc5NHN/oy92a2TlYwJ2voYeGwHuI/0RJ2VFp7bVGhgChIWB/eVdwbCoyTlXM
+ tPy+q0n6VyQkb5GSHLBJaPxveQfakZHOTnwWG8nYTLLoGMSNBNn0snVT4vGqLVbxm+aFWE
+ KlhXc0xRG/6LuQ8SIxNlNu/BT4BSzWE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-155-ah-6QZFOO9-4DqOVgv1XMw-1; Fri, 06 Nov 2020 03:24:46 -0500
+X-MC-Unique: ah-6QZFOO9-4DqOVgv1XMw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6D5BA221FE;
- Fri,  6 Nov 2020 07:05:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1604646357;
- bh=NcentItc4GzP7DMUGCOjybP9u3nED8AkeAk+ghWanY8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=WeQA5GCo1OiQ1S6XtvtUVHunQH7CB+jf6nhafOK25CaY7SOsjWWUXWSJTXufQ/GuX
- LsOp24B2uwbjJacAax4MwryzJX6VOHqIaoqxNPHG9ye7oPP/P7SCzGEIZXBAu0IGyo
- jpWetcwbyQsUe42ZWwf7KowqZsGWui5Y9hyxhSz8=
-Date: Fri, 6 Nov 2020 09:05:52 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Jason Gunthorpe <jgg@nvidia.com>, Saeed Mahameed <saeed@kernel.org>
-Subject: Re: [PATCH mlx5-next v1 04/11] vdpa/mlx5: Make hardware definitions
- visible to all mlx5 devices
-Message-ID: <20201106070552.GE5475@unreal>
-References: <20201101201542.2027568-1-leon@kernel.org>
- <20201101201542.2027568-5-leon@kernel.org>
- <8a8e75215a5d3d8cfa9c3c6747325dbbf965811f.camel@kernel.org>
- <20201105203657.GR2620339@nvidia.com>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A301B1009E39;
+ Fri,  6 Nov 2020 08:24:44 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-114-66.ams2.redhat.com
+ [10.36.114.66])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 055505578B;
+ Fri,  6 Nov 2020 08:24:42 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id D5F6A11AB5; Fri,  6 Nov 2020 09:24:41 +0100 (CET)
+Date: Fri, 6 Nov 2020 09:24:41 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Deepak R Varma <mh12gx2825@gmail.com>
+Subject: Re: [PATCH] drm/qxl: replace idr_init() by idr_init_base()
+Message-ID: <20201106082441.x2e5mmycikwd22pj@sirius.home.kraxel.org>
+References: <20201105185016.GA71797@localhost>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201105203657.GR2620339@nvidia.com>
-Cc: pierre-louis.bossart@linux.intel.com, alsa-devel@alsa-project.org,
- kiran.patil@intel.com, "Michael S. Tsirkin" <mst@redhat.com>,
- linux-rdma@vger.kernel.org, gregkh <gregkh@linuxfoundation.org>,
- ranjani.sridharan@linux.intel.com, Roi Dayan <roid@nvidia.com>,
- virtualization@lists.linux-foundation.org, fred.oh@linux.intel.com,
- tiwai@suse.de, Doug Ledford <dledford@redhat.com>, broonie@kernel.org,
- Parav Pandit <parav@nvidia.com>, netdev@vger.kernel.org,
- Jakub Kicinski <kuba@kernel.org>, dan.j.williams@intel.com,
- shiraz.saleem@intel.com, "David S . Miller" <davem@davemloft.net>,
- linux-kernel@vger.kernel.org
+In-Reply-To: <20201105185016.GA71797@localhost>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,54 +94,22 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Nov 05, 2020 at 04:36:57PM -0400, Jason Gunthorpe wrote:
-> On Thu, Nov 05, 2020 at 12:31:52PM -0800, Saeed Mahameed wrote:
-> > On Sun, 2020-11-01 at 22:15 +0200, Leon Romanovsky wrote:
-> > > From: Leon Romanovsky <leonro@nvidia.com>
-> > >
-> > > Move mlx5_vdpa IFC header file to the general include folder, so
-> > > mlx5_core will be able to reuse it to check if VDPA is supported
-> > > prior to creating an auxiliary device.
-> > >
-> >
-> > I don't really like this, the whole idea of aux devices is that they
-> > get to do own logic and hide details, now we are exposing aux
-> > specific stuff to the bus ..  let's figure a way to avoid such
-> > exposure as we discussed yesterday.
->
-> Not quite, the idea is we get to have a cleaner split between the two
-> sides.
->
-> The device side is responsible for things centric to the device, like
-> "does this device actually exists" which is what is_supported is
-> doing.
->
-> The driver side holds the driver specific logic.
->
-> > is_supported check shouldn't belong to mlx5_core and each aux device
-> > (en/ib/vdpa) should implement own is_supported op and keep the details
-> > hidden in the aux driver like it was before this patch.
->
-> No, it really should be in the device side.
->
-> Part of the point here is to properly fix module loading. That means
-> the core driver must only create devices that can actually have a
-> driver bound to them because creating a device triggers module
-> loading.
->
-> For instance we do not want to auto load vdpa modules on every mlx5
-> system for no reason, that is not clean at all.
+On Fri, Nov 06, 2020 at 12:20:16AM +0530, Deepak R Varma wrote:
+> idr_init() uses base 0 which is an invalid identifier for this driver.
+> The idr_alloc for this driver uses 1 as start value for ID range. The
+> new function idr_init_base allows IDR to set the ID lookup from base 1.
+> This avoids all lookups that otherwise starts from 0 since 0 is always
+> unused / available.
+> 
+> References: commit 6ce711f27500 ("idr: Make 1-based IDRs more efficient")
+> 
+> Signed-off-by: Deepak R Varma <mh12gx2825@gmail.com>
 
-Saeed,
+Pushed to drm-misc-next.
 
-Jason gave very good example and it is not far from the real life requirement.
-We have an internal task to make sure that mlx5_vdpa is loaded without any
-other mlx5_* modules (ib and eth). This series solves it naturally.
+thanks,
+  Gerd
 
-Thanks
-
->
-> Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
