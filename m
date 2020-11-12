@@ -1,108 +1,108 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1F112B085B
-	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 16:27:23 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A5462B0870
+	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 16:31:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A4297877F5;
-	Thu, 12 Nov 2020 15:27:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id B459A87146;
+	Thu, 12 Nov 2020 15:31:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id d0Kih0ndGaNr; Thu, 12 Nov 2020 15:27:22 +0000 (UTC)
+	with ESMTP id n7uoknrJbt0u; Thu, 12 Nov 2020 15:31:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1B86E877D1;
-	Thu, 12 Nov 2020 15:27:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 087A687159;
+	Thu, 12 Nov 2020 15:31:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F02ADC016F;
-	Thu, 12 Nov 2020 15:27:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D255BC016F;
+	Thu, 12 Nov 2020 15:31:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 07CCDC016F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F086AC016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 15:27:21 +0000 (UTC)
+ Thu, 12 Nov 2020 15:31:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id ECF7A87132
+ by whitealder.osuosl.org (Postfix) with ESMTP id E191487135
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 15:27:20 +0000 (UTC)
+ Thu, 12 Nov 2020 15:31:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IBdpAat2-W0J
+ with ESMTP id ZgAxzZr0bX8Y
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 15:27:20 +0000 (UTC)
+ Thu, 12 Nov 2020 15:31:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 23D9F87088
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 56D2587132
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 15:27:20 +0000 (UTC)
+ Thu, 12 Nov 2020 15:31:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1605194839;
+ s=mimecast20190719; t=1605195063;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=EToCEhKZCbY5qYquKZLEYM9Zxm5PVC8drZdaa3o0iK0=;
- b=PuQBexc5JbCrk+JoA+JCE26rlSNwjZWYKXfp2JIqlFW2U0Q+t88K8pzkGhK0ymQVlV/tGX
- guXj3F218sMNcTOKRsrx1mh+KaLBihj3UZTh1BqNRC8pfLV3oX1fsv7nFVCpwN4Qbmje18
- 0roGsJf6NJ9LJngCi4+ySlIWN2/yKyM=
+ bh=XHp7Bo10vm0UfwNZa83vSvzkaRjk9257JvNRreDbMPA=;
+ b=Vrvz+NsPN9uNUq4lzcKkf8LCw48MoU6+Pta8F4tYeXk/SiM7P8qnDEuuV613OC9cluyyqn
+ EiqiY0+++mc41Z3odwBT3yZx2m7U1HvTz0D8gTZpOqx7GCHJctNS71Bzk+UsaY9lQgG+nl
+ 6FclgK9GsjlFHlcvXV2L0Yx+yrYmY+4=
 Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
  [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-40-FKQHAsR0NFqyeDywu1br7g-1; Thu, 12 Nov 2020 10:27:17 -0500
-X-MC-Unique: FKQHAsR0NFqyeDywu1br7g-1
-Received: by mail-wr1-f72.google.com with SMTP id 67so2096798wra.2
+ us-mta-465-f0ixWdjoPKSWXiDCvdslHg-1; Thu, 12 Nov 2020 10:31:00 -0500
+X-MC-Unique: f0ixWdjoPKSWXiDCvdslHg-1
+Received: by mail-wr1-f72.google.com with SMTP id k1so2080066wrg.12
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 07:27:17 -0800 (PST)
+ Thu, 12 Nov 2020 07:31:00 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:in-reply-to:references:date
  :message-id:mime-version;
- bh=EToCEhKZCbY5qYquKZLEYM9Zxm5PVC8drZdaa3o0iK0=;
- b=B+iGOqQzJiKcquSIfgbw6PK4LoDoXdaJI8eDl6OhZFAQjb9Cji42Zfy8b5PiQD/viz
- TAwzNkX1kvVQLJP2ET5nBLgUGzlVCR5UXVtgafCi+ep34sDumPm719RXasbH+tKfiQEJ
- GMOeubOqmeyA2t1jfYpsGu8s4hTlTWKNPDeIrjM9o2jP1yKg3T5V37Y275U5L6BeEkjD
- LpTNeg5aUWN/C7OP/ZSFjZmu2GN8BayftxD4XAVgmhYEPEwuiv4tTi+WnUfnVuHRxHrZ
- 7IO9fnsyiAmV4qHSyVnOQLFg8thqLdIvhCTyksh/pxIuNaPNKwSF7wBqy+pmnx5N6aGY
- EAtA==
-X-Gm-Message-State: AOAM532bOgDH9p3vB4txihLK20J9iEAhVdiXICrAlzMcsffvg/lGNeQg
- 1/iVhGfq+7xbRJA9J9Urs60l2byAyXmx1J13EdzdnGoYC2qi+dIEFUaOcEHinp4oAtuuBSQ2gty
- sDH1cl93K8sn0iIpZYCDIJlqUFzLRxA3pi9PDfvnCKA==
-X-Received: by 2002:adf:e44f:: with SMTP id t15mr57359wrm.380.1605194836254;
- Thu, 12 Nov 2020 07:27:16 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwAEjBmoTH4/mr7/4f2REbvjuU/hHE1H+2TbgcnFk0M+o34TM33nSDmKd9yjYVLC54SujLB8w==
-X-Received: by 2002:adf:e44f:: with SMTP id t15mr57335wrm.380.1605194836113;
- Thu, 12 Nov 2020 07:27:16 -0800 (PST)
+ bh=XHp7Bo10vm0UfwNZa83vSvzkaRjk9257JvNRreDbMPA=;
+ b=Ybxqwo0fDHyTWpK/Ksv241kD7QpUL096R7LyFzr+P/WWJaGMKg3MJiqZTZ5Wzw9kni
+ uKVLZcBhBZXh88si/YAZRoz6/Vol73ArI0dmzXMUszp6nLyyg+iXQzIZAQB1JifZgFlw
+ GDgoVP9pkCQaf+v/Ptj5+TjD4ogFXZr+FSUAvUGwiqUBhUr1BrUE7A0qbCJmXhdw0ZUA
+ oid4RSWLNp4eulQbIY4eLUYC99EoaLzUfQ9EJDRgYwEnAxOqh8zKMTW8SniwEw5/qRxI
+ TsFXu7nSDUcg+8H5XGa7/vKV9SalJVA0exhsgClVJevG7DqrK6gTSU48Gixs1KAP7LiY
+ KZMQ==
+X-Gm-Message-State: AOAM5319vQFVsd03ngv/NRH/1C++d61B3vfUNunBELIOGhz4CEWcNdIf
+ 8TqsvIfpOoh5iI8cegjEnoVeJYjQqrv8x7UsRLdqOCLK29g7yMHm6L4G7hBbOzp+r4WfZfAFtgS
+ Z2KIoLcNi7g08dqRQKMRn0WOkhyHGUYssv+rlzUdOJw==
+X-Received: by 2002:adf:f542:: with SMTP id j2mr56196wrp.107.1605195059653;
+ Thu, 12 Nov 2020 07:30:59 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJz1OngyKpQAS+Q4bbI3Hywakt2LTSLrDkVsSOy8wiQ/1aW5MGElsPEZVtZPjFlyvRpBGUIsaQ==
+X-Received: by 2002:adf:f542:: with SMTP id j2mr56174wrp.107.1605195059474;
+ Thu, 12 Nov 2020 07:30:59 -0800 (PST)
 Received: from vitty.brq.redhat.com (g-server-2.ign.cz. [91.219.240.2])
- by smtp.gmail.com with ESMTPSA id a9sm7378333wrp.21.2020.11.12.07.27.14
+ by smtp.gmail.com with ESMTPSA id c129sm7158288wmd.7.2020.11.12.07.30.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Nov 2020 07:27:15 -0800 (PST)
+ Thu, 12 Nov 2020 07:30:58 -0800 (PST)
 From: Vitaly Kuznetsov <vkuznets@redhat.com>
 To: Wei Liu <wei.liu@kernel.org>, Linux on Hyper-V List
  <linux-hyperv@vger.kernel.org>
-Subject: Re: [PATCH v2 04/17] iommu/hyperv: don't setup IRQ remapping when
+Subject: Re: [PATCH v2 05/17] clocksource/hyperv: use MSR-based access if
  running as root
-In-Reply-To: <20201105165814.29233-5-wei.liu@kernel.org>
+In-Reply-To: <20201105165814.29233-6-wei.liu@kernel.org>
 References: <20201105165814.29233-1-wei.liu@kernel.org>
- <20201105165814.29233-5-wei.liu@kernel.org>
-Date: Thu, 12 Nov 2020 16:27:14 +0100
-Message-ID: <87ft5ey4rx.fsf@vitty.brq.redhat.com>
+ <20201105165814.29233-6-wei.liu@kernel.org>
+Date: Thu, 12 Nov 2020 16:30:57 +0100
+Message-ID: <87d00iy4lq.fsf@vitty.brq.redhat.com>
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=vkuznets@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Cc: Wei Liu <wei.liu@kernel.org>, Joerg Roedel <jroedel@suse.de>,
- Stephen Hemminger <sthemmin@microsoft.com>,
+Cc: Wei Liu <wei.liu@kernel.org>, Stephen Hemminger <sthemmin@microsoft.com>,
  Haiyang Zhang <haiyangz@microsoft.com>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>,
  Linux Kernel List <linux-kernel@vger.kernel.org>,
- Michael Kelley <mikelley@microsoft.com>, "open list:IOMMU
- DRIVERS" <iommu@lists.linux-foundation.org>,
+ Michael Kelley <mikelley@microsoft.com>,
  Nuno Das Neves <nunodasneves@linux.microsoft.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>,
  virtualization@lists.linux-foundation.org,
- Vineeth Pillai <viremana@linux.microsoft.com>, Joerg Roedel <joro@8bytes.org>
+ Vineeth Pillai <viremana@linux.microsoft.com>,
+ Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -121,43 +121,30 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 Wei Liu <wei.liu@kernel.org> writes:
 
-> The IOMMU code needs more work. We're sure for now the IRQ remapping
-> hooks are not applicable when Linux is the root.
-
-Super-nitpick: I would suggest we always say 'root partition' as 'root'
-has a 'slightly different' meaning in Linux and this commit message may
-sound confusing to an unprepared reader.
-
->
 > Signed-off-by: Wei Liu <wei.liu@kernel.org>
-> Acked-by: Joerg Roedel <jroedel@suse.de>
-> ---
->  drivers/iommu/hyperv-iommu.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/iommu/hyperv-iommu.c b/drivers/iommu/hyperv-iommu.c
-> index e09e2d734c57..8d3ce3add57d 100644
-> --- a/drivers/iommu/hyperv-iommu.c
-> +++ b/drivers/iommu/hyperv-iommu.c
-> @@ -20,6 +20,7 @@
->  #include <asm/io_apic.h>
->  #include <asm/irq_remapping.h>
->  #include <asm/hypervisor.h>
-> +#include <asm/mshyperv.h>
->  
->  #include "irq_remapping.h"
->  
-> @@ -143,7 +144,7 @@ static int __init hyperv_prepare_irq_remapping(void)
->  	int i;
->  
->  	if (!hypervisor_is_type(X86_HYPER_MS_HYPERV) ||
-> -	    !x2apic_supported())
-> +	    !x2apic_supported() || hv_root_partition)
->  		return -ENODEV;
->  
->  	fn = irq_domain_alloc_named_id_fwnode("HYPERV-IR", 0);
 
-Reviewed-by: Vitaly Kuznetsov <vkuznets@redhat.com>
+In the missing commit message I'd like to see why we don't use 'TSC
+page' clocksource for the root partition. My guess would be that it's
+not available and actually we're supposed to use raw TSC value (because
+root partitions never migrate) but please spell it out.
+
+> ---
+>  drivers/clocksource/hyperv_timer.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/drivers/clocksource/hyperv_timer.c b/drivers/clocksource/hyperv_timer.c
+> index ba04cb381cd3..269a691bd2c4 100644
+> --- a/drivers/clocksource/hyperv_timer.c
+> +++ b/drivers/clocksource/hyperv_timer.c
+> @@ -426,6 +426,9 @@ static bool __init hv_init_tsc_clocksource(void)
+>  	if (!(ms_hyperv.features & HV_MSR_REFERENCE_TSC_AVAILABLE))
+>  		return false;
+>  
+> +	if (hv_root_partition)
+> +		return false;
+> +
+>  	hv_read_reference_counter = read_hv_clock_tsc;
+>  	phys_addr = virt_to_phys(hv_get_tsc_page());
 
 -- 
 Vitaly
