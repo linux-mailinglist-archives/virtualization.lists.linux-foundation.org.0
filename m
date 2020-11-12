@@ -1,72 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57A242B06AA
-	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 14:39:08 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A2F82B06AD
+	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 14:39:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 06F3286BCB;
-	Thu, 12 Nov 2020 13:39:07 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 4F7198709E;
+	Thu, 12 Nov 2020 13:39:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JRFSdx9PYeTd; Thu, 12 Nov 2020 13:39:06 +0000 (UTC)
+	with ESMTP id hkIVw1x5ir8t; Thu, 12 Nov 2020 13:39:12 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 7F67C86CDE;
-	Thu, 12 Nov 2020 13:39:06 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D71C987075;
+	Thu, 12 Nov 2020 13:39:12 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 639F8C016F;
-	Thu, 12 Nov 2020 13:39:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AF9B9C088B;
+	Thu, 12 Nov 2020 13:39:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EE99BC016F
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 72368C016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:39:04 +0000 (UTC)
+ Thu, 12 Nov 2020 13:39:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id DE578877B6
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 6F0C0870CF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:39:04 +0000 (UTC)
+ Thu, 12 Nov 2020 13:39:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JdHokoIuUT-3
+ with ESMTP id jhZpAWif3gQi
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:39:04 +0000 (UTC)
+ Thu, 12 Nov 2020 13:39:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 46230877B2
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 9ED2987075
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:39:04 +0000 (UTC)
+ Thu, 12 Nov 2020 13:39:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1605188343;
+ s=mimecast20190719; t=1605188348;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Vdbw4BBnAlXbecdd3kz0Gf6U85wgo73x2VHWlqh8gqU=;
- b=dS9s3rYZOxh+L5NRp8y9k6L5oOZ/Qyqym9W3YYJM8qZNLAokKsCis8WPCEsMQ1/rVYJECP
- 1yt41Bfze4XOLel4UH0il4hZaXYqoK88l0Mb7krqpytE89yPf4Z9crhSfawQMWDUuewDLa
- Nbk2ZWMDa5asAHz8uJZQ4B7eTfiL+8g=
+ bh=LRGJVK4/DWh0ybsvg3iyxiy6aEFUSz59akgT5h3oPBs=;
+ b=WrOkoE2HFrN4vXOyaxnfjNH7/shNvAu8OJafJOe7hiuadvfmO/z83hHVP2IeT6tO6p24L/
+ OFznVNFm9e4DtMKafhh6nZeWelDpLQg72tpcNinma0XZp6lQIffz+wfCprcp/pTozv7b/w
+ y8418bFw7j0A4BjPLfS6JPsBfYJ517U=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-116-BYRt4WzrNyuEdueCGAxQeA-1; Thu, 12 Nov 2020 08:39:01 -0500
-X-MC-Unique: BYRt4WzrNyuEdueCGAxQeA-1
+ us-mta-119-75tC-WQaPHyz9okuNBx7Vw-1; Thu, 12 Nov 2020 08:39:06 -0500
+X-MC-Unique: 75tC-WQaPHyz9okuNBx7Vw-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7F976801FD4;
- Thu, 12 Nov 2020 13:39:00 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 91064809DC0;
+ Thu, 12 Nov 2020 13:39:05 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-115-61.ams2.redhat.com [10.36.115.61])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AF55075132;
- Thu, 12 Nov 2020 13:38:55 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D1E6A55765;
+ Thu, 12 Nov 2020 13:39:00 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 12/29] virtio-mem: generalize virtio_mem_owned_mb()
-Date: Thu, 12 Nov 2020 14:37:58 +0100
-Message-Id: <20201112133815.13332-13-david@redhat.com>
+Subject: [PATCH v2 13/29] virtio-mem: generalize virtio_mem_overlaps_range()
+Date: Thu, 12 Nov 2020 14:37:59 +0100
+Message-Id: <20201112133815.13332-14-david@redhat.com>
 In-Reply-To: <20201112133815.13332-1-david@redhat.com>
 References: <20201112133815.13332-1-david@redhat.com>
 MIME-Version: 1.0
@@ -90,7 +90,8 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Avoid using memory block ids. Rename it to virtio_mem_contains_range().
+Avoid using memory block ids. While at it, use uint64_t for
+address/size.
 
 This is a preparation for Big Block Mode (BBM).
 
@@ -100,39 +101,31 @@ Cc: Jason Wang <jasowang@redhat.com>
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ drivers/virtio/virtio_mem.c | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index 3731097cd9e8..2193c5172195 100644
+index 2193c5172195..bd76aa79a82e 100644
 --- a/drivers/virtio/virtio_mem.c
 +++ b/drivers/virtio/virtio_mem.c
-@@ -512,12 +512,13 @@ static bool virtio_mem_overlaps_range(struct virtio_mem *vm,
+@@ -501,14 +501,10 @@ static int virtio_mem_translate_node_id(struct virtio_mem *vm, uint16_t node_id)
+  * Test if a virtio-mem device overlaps with the given range. Can be called
+  * from (notifier) callbacks lockless.
+  */
+-static bool virtio_mem_overlaps_range(struct virtio_mem *vm,
+-				      unsigned long start, unsigned long size)
++static bool virtio_mem_overlaps_range(struct virtio_mem *vm, uint64_t start,
++				      uint64_t size)
+ {
+-	unsigned long dev_start = virtio_mem_mb_id_to_phys(vm->first_mb_id);
+-	unsigned long dev_end = virtio_mem_mb_id_to_phys(vm->last_mb_id) +
+-				memory_block_size_bytes();
+-
+-	return start < dev_end && dev_start < start + size;
++	return start < vm->addr + vm->region_size && vm->addr < start + size;
  }
  
  /*
-- * Test if a virtio-mem device owns a memory block. Can be called from
-+ * Test if a virtio-mem device contains a given range. Can be called from
-  * (notifier) callbacks lockless.
-  */
--static bool virtio_mem_owned_mb(struct virtio_mem *vm, unsigned long mb_id)
-+static bool virtio_mem_contains_range(struct virtio_mem *vm, uint64_t start,
-+				      uint64_t size)
- {
--	return mb_id >= vm->first_mb_id && mb_id <= vm->last_mb_id;
-+	return start >= vm->addr && start + size <= vm->addr + vm->region_size;
- }
- 
- static int virtio_mem_notify_going_online(struct virtio_mem *vm,
-@@ -871,7 +872,7 @@ static void virtio_mem_online_page_cb(struct page *page, unsigned int order)
- 	 */
- 	rcu_read_lock();
- 	list_for_each_entry_rcu(vm, &virtio_mem_devices, next) {
--		if (!virtio_mem_owned_mb(vm, mb_id))
-+		if (!virtio_mem_contains_range(vm, addr, PFN_PHYS(1 << order)))
- 			continue;
- 
- 		sb_id = virtio_mem_phys_to_sb_id(vm, addr);
 -- 
 2.26.2
 
