@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C1F32AFFBB
-	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 07:40:36 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65D702AFFC1
+	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 07:40:41 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id F38F786D69;
-	Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 801C686DD9;
+	Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bpDMyqjOUd5D; Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
+	with ESMTP id wwryexTWaKuU; Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 61F7086B83;
-	Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 254F586DD6;
+	Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3FD41C016F;
-	Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B438C08A1;
+	Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 003F8C016F
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D6F10C016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 06:40:31 +0000 (UTC)
+ Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id E14E186D60
+ by hemlock.osuosl.org (Postfix) with ESMTP id B4C8A8765B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 06:40:31 +0000 (UTC)
+ Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ev6Ffy76fXqx
+ with ESMTP id TIHjx4h3yYPB
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Nov 2020 06:40:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 6DCC586B83
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id DC48187657
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Nov 2020 06:40:31 +0000 (UTC)
 Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5facd8e20000>; Wed, 11 Nov 2020 22:40:35 -0800
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B5facd8e60000>; Wed, 11 Nov 2020 22:40:38 -0800
 Received: from sw-mtx-036.mtx.labs.mlnx (10.124.1.5) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 12 Nov
  2020 06:40:30 +0000
 From: Parav Pandit <parav@nvidia.com>
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH 1/7] vdpa: Add missing comment for virtqueue count
-Date: Thu, 12 Nov 2020 08:39:59 +0200
-Message-ID: <20201112064005.349268-2-parav@nvidia.com>
+Subject: [PATCH 2/7] vdpa: Use simpler version of ida allocation
+Date: Thu, 12 Nov 2020 08:40:00 +0200
+Message-ID: <20201112064005.349268-3-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201112064005.349268-1-parav@nvidia.com>
 References: <20201112064005.349268-1-parav@nvidia.com>
@@ -58,16 +58,16 @@ X-Originating-IP: [10.124.1.5]
 X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
  HQMAIL107.nvidia.com (172.20.187.13)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1605163235; bh=HisUjgRvMY7IXIfftOHpd8Quijdl8ayptoeXWTLZhqk=;
+ t=1605163239; bh=obxQ+8CkZMWkGpFrT7wuL+J6qEJIL2OCsM+PzwuIu98=;
  h=From:To:CC:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
  References:MIME-Version:Content-Transfer-Encoding:Content-Type:
  X-Originating-IP:X-ClientProxiedBy;
- b=KxXa+3kCgPdsl+h2Y9LwzJBS64fxr3cEEoLD58Fk5z4CkZOjbXuLvymJmP55+LLRu
- oNefKcm+45oYNv8wbRBW2KM49LkhydGcG4IzduPqqbdgEmLiSMC8d+vdxrhRry/TW1
- uTeXG0wTy1kGXCQ+wtQbVUmZPogLBTBAXEkFhhqu5EKDqYOSRaBo3pcPR1QoXqIoKp
- RwnnHnDWgqkB97q94er1C98zlFpftcU10K+2COwlT8uZH23NHu6QjvntEu6CRZZtx8
- 4R24h0yDTeisVc7dvf1VdkRkb2mlzn/Yy7B4MhlKk791GSBSvYe9sBqlRWAF5oSH0o
- H5cA1JCUrtB4g==
+ b=FTdm7feQL1zGlazsOD1efEw5oJ8haRvqmBTGZcs2EC3wm3StoPvxSn3AkbbEigwC6
+ KegA4W+NIxFwo2LjwiJ11Zl8u9UBgESdg4GR13HMYeyOSWWXdPGOvqKZtEEsIc0sju
+ M33ikb6LGk9DQryqPmSr0QKGg2cGf9V2la6RbnlCxdG3aS7ojfa5r+delagU1zS3BW
+ 7vIm+rizY/4v3NUvnXDgWgXsHVWuFlCb4WTp1/pc6Zn7Vje6+TK/pn3xi/Zl2Uso4W
+ oi5sBsQU8lclXIJp+0hO3jvqEKeLZQ/Fge4Ugtdt/gvSLfBAhp2H5HthHt69PL0Yco
+ 6Nt4z3fsGAFNA==
 Cc: netdev@vger.kernel.org, elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -85,27 +85,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add missing comment for number of virtqueue.
+vdpa doesn't have any specific need to define start and end range of the
+device index.
+Hence use the simper version of the ida allocator.
 
 Signed-off-by: Parav Pandit <parav@nvidia.com>
 Reviewed-by: Eli Cohen <elic@nvidia.com>
 Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- include/linux/vdpa.h | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/vdpa/vdpa.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
-index 30bc7a7223bb..0fefeb976877 100644
---- a/include/linux/vdpa.h
-+++ b/include/linux/vdpa.h
-@@ -42,6 +42,7 @@ struct vdpa_vq_state {
-  * @config: the configuration ops for this device.
-  * @index: device index
-  * @features_valid: were features initialized? for legacy guests
-+ * @nvqs: maximum number of supported virtqueues
-  */
- struct vdpa_device {
- 	struct device dev;
+diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
+index a69ffc991e13..c0825650c055 100644
+--- a/drivers/vdpa/vdpa.c
++++ b/drivers/vdpa/vdpa.c
+@@ -89,7 +89,7 @@ struct vdpa_device *__vdpa_alloc_device(struct device *parent,
+ 	if (!vdev)
+ 		goto err;
+ 
+-	err = ida_simple_get(&vdpa_index_ida, 0, 0, GFP_KERNEL);
++	err = ida_alloc(&vdpa_index_ida, GFP_KERNEL);
+ 	if (err < 0)
+ 		goto err_ida;
+ 
 -- 
 2.26.2
 
