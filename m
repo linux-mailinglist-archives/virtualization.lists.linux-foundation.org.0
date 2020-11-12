@@ -1,78 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3F0B2B06A7
-	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 14:39:01 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E61F82B06A9
+	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 14:39:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 8FEC6877B3;
-	Thu, 12 Nov 2020 13:39:00 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 9B9AF870D6;
+	Thu, 12 Nov 2020 13:39:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uzsWEhwfl31D; Thu, 12 Nov 2020 13:39:00 +0000 (UTC)
+	with ESMTP id yONyDq48WcMX; Thu, 12 Nov 2020 13:39:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id D88EE877B6;
-	Thu, 12 Nov 2020 13:38:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 35E7B870CF;
+	Thu, 12 Nov 2020 13:39:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D1326C088B;
-	Thu, 12 Nov 2020 13:38:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2612BC016F;
+	Thu, 12 Nov 2020 13:39:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0B5BFC016F
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B0B0EC016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:38:59 +0000 (UTC)
+ Thu, 12 Nov 2020 13:39:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 06A20870FC
+ by silver.osuosl.org (Postfix) with ESMTP id 978982E1D9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:38:59 +0000 (UTC)
+ Thu, 12 Nov 2020 13:39:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nh+AYZZrc82l
+ with ESMTP id rjRxCu5FAjBh
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:38:58 +0000 (UTC)
+ Thu, 12 Nov 2020 13:39:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 3DD66870E5
+ by silver.osuosl.org (Postfix) with ESMTPS id CC17F2E1B9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 13:38:58 +0000 (UTC)
+ Thu, 12 Nov 2020 13:38:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1605188337;
+ s=mimecast20190719; t=1605188338;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=s7b/l63zYUaR+OsccnXVvZ/uAYcvm6kvDksVTa1Mbhc=;
- b=QpLxOCK42KkRMngF7D57VFnVqFHpfbg7CbWaPBy4PjJ2HnjGhzlnVYMNz9ucZAie08Y1eV
- PUyy1J8pDgV6iP340m4CcCCn4z/ml1cLGsnk6Wt9y8u7FPcnkGHhFAUIXxpQqS/qvQVIjt
- X9pEN2L8ydSASkXc7u4UKqeeGaiQbJ4=
+ bh=1/nNt7biy+blXgzIzbt4CpC5LP6Jojqi23BTUap8oBc=;
+ b=aoPDq1x2TXVD94Tzrw/tAXTgjbtJl/BUkKY5DmSXyvz6b1RWfVFy+RKsEOoxVo8dk9E0Jh
+ 5+C9H7PGmi8rfm3mTBtjA6eew20t7XZHy50WiqX7kjkDYiq6wijPfGVft6cGbLJFY3jWcp
+ eIKUHpWS177idTBxI1Nm8qsTFefFqUU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-19-IhACjZgxNUGOglFtNSkyqg-1; Thu, 12 Nov 2020 08:38:54 -0500
-X-MC-Unique: IhACjZgxNUGOglFtNSkyqg-1
+ us-mta-155-5Fh2xBDQNl2QNPWUNGhIQg-1; Thu, 12 Nov 2020 08:38:57 -0500
+X-MC-Unique: 5Fh2xBDQNl2QNPWUNGhIQg-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5257018BA282;
- Thu, 12 Nov 2020 13:38:53 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6083A802B47;
+ Thu, 12 Nov 2020 13:38:55 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-115-61.ams2.redhat.com [10.36.115.61])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C589655765;
- Thu, 12 Nov 2020 13:38:51 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A272055765;
+ Thu, 12 Nov 2020 13:38:53 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 10/29] virtio-mem: retry fake-offlining via
- alloc_contig_range() on ZONE_MOVABLE
-Date: Thu, 12 Nov 2020 14:37:56 +0100
-Message-Id: <20201112133815.13332-11-david@redhat.com>
+Subject: [PATCH v2 11/29] virtio-mem: generalize check for added memory
+Date: Thu, 12 Nov 2020 14:37:57 +0100
+Message-Id: <20201112133815.13332-12-david@redhat.com>
 In-Reply-To: <20201112133815.13332-1-david@redhat.com>
 References: <20201112133815.13332-1-david@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ Wei Yang <richard.weiyang@linux.alibaba.com>,
  "Michael S . Tsirkin" <mst@redhat.com>,
  virtualization@lists.linux-foundation.org, linux-mm@kvack.org
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -91,71 +91,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-ZONE_MOVABLE is supposed to give some guarantees, yet,
-alloc_contig_range() isn't prepared to properly deal with some racy
-cases properly (e.g., temporary page pinning when exiting processed, PCP).
+Let's check by traversing busy system RAM resources instead, to avoid
+relying on memory block states.
 
-Retry 5 times for now. There is certainly room for improvement in the
-future.
+Don't use walk_system_ram_range(), as that works on pages and we want to
+use the bare addresses we have easily at hand.
 
+This is a preparation for Big Block Mode (BBM), which won't have memory
+block states.
+
+Reviewed-by: Wei Yang <richard.weiyang@linux.alibaba.com>
 Cc: "Michael S. Tsirkin" <mst@redhat.com>
 Cc: Jason Wang <jasowang@redhat.com>
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 37 ++++++++++++++++++++++++++-----------
- 1 file changed, 26 insertions(+), 11 deletions(-)
+ drivers/virtio/virtio_mem.c | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index c24055248f9d..2f1ce4d4781b 100644
+index 2f1ce4d4781b..3731097cd9e8 100644
 --- a/drivers/virtio/virtio_mem.c
 +++ b/drivers/virtio/virtio_mem.c
-@@ -784,19 +784,34 @@ static void virtio_mem_fake_online(unsigned long pfn, unsigned long nr_pages)
-  */
- static int virtio_mem_fake_offline(unsigned long pfn, unsigned long nr_pages)
- {
--	int rc;
-+	const bool is_movable = zone_idx(page_zone(pfn_to_page(pfn))) ==
-+				ZONE_MOVABLE;
-+	int rc, retry_count;
- 
--	rc = alloc_contig_range(pfn, pfn + nr_pages, MIGRATE_MOVABLE,
--				GFP_KERNEL);
--	if (rc == -ENOMEM)
--		/* whoops, out of memory */
--		return rc;
--	if (rc)
--		return -EBUSY;
-+	/*
-+	 * TODO: We want an alloc_contig_range() mode that tries to allocate
-+	 * harder (e.g., dealing with temporarily pinned pages, PCP), especially
-+	 * with ZONE_MOVABLE. So for now, retry a couple of times with
-+	 * ZONE_MOVABLE before giving up - because that zone is supposed to give
-+	 * some guarantees.
-+	 */
-+	for (retry_count = 0; retry_count < 5; retry_count++) {
-+		rc = alloc_contig_range(pfn, pfn + nr_pages, MIGRATE_MOVABLE,
-+					GFP_KERNEL);
-+		if (rc == -ENOMEM)
-+			/* whoops, out of memory */
-+			return rc;
-+		else if (rc && !is_movable)
-+			break;
-+		else if (rc)
-+			continue;
- 
--	virtio_mem_set_fake_offline(pfn, nr_pages, true);
--	adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
--	return 0;
-+		virtio_mem_set_fake_offline(pfn, nr_pages, true);
-+		adjust_managed_page_count(pfn_to_page(pfn), -nr_pages);
-+		return 0;
-+	}
-+
-+	return -EBUSY;
+@@ -1833,6 +1833,20 @@ static void virtio_mem_delete_resource(struct virtio_mem *vm)
+ 	vm->parent_resource = NULL;
  }
  
- /*
++static int virtio_mem_range_has_system_ram(struct resource *res, void *arg)
++{
++	return 1;
++}
++
++static bool virtio_mem_has_memory_added(struct virtio_mem *vm)
++{
++	const unsigned long flags = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
++
++	return walk_iomem_res_desc(IORES_DESC_NONE, flags, vm->addr,
++				   vm->addr + vm->region_size, NULL,
++				   virtio_mem_range_has_system_ram) == 1;
++}
++
+ static int virtio_mem_probe(struct virtio_device *vdev)
+ {
+ 	struct virtio_mem *vm;
+@@ -1954,10 +1968,7 @@ static void virtio_mem_remove(struct virtio_device *vdev)
+ 	 * the system. And there is no way to stop the driver/device from going
+ 	 * away. Warn at least.
+ 	 */
+-	if (vm->nb_mb_state[VIRTIO_MEM_MB_STATE_OFFLINE] ||
+-	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_OFFLINE_PARTIAL] ||
+-	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE] ||
+-	    vm->nb_mb_state[VIRTIO_MEM_MB_STATE_ONLINE_PARTIAL]) {
++	if (virtio_mem_has_memory_added(vm)) {
+ 		dev_warn(&vdev->dev, "device still has system memory added\n");
+ 	} else {
+ 		virtio_mem_delete_resource(vm);
 -- 
 2.26.2
 
