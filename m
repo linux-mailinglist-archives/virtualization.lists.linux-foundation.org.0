@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65D702AFFC1
-	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 07:40:41 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 39BF62AFFBD
+	for <lists.virtualization@lfdr.de>; Thu, 12 Nov 2020 07:40:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 801C686DD9;
-	Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A57B986D60;
+	Thu, 12 Nov 2020 06:40:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wwryexTWaKuU; Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
+	with ESMTP id 6kj1O5h91iIq; Thu, 12 Nov 2020 06:40:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 254F586DD6;
-	Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C74A786D67;
+	Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B438C08A1;
-	Thu, 12 Nov 2020 06:40:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BB52EC0889;
+	Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D6F10C016F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 55FFDC016F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
+ Thu, 12 Nov 2020 06:40:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id B4C8A8765B
+ by whitealder.osuosl.org (Postfix) with ESMTP id 511F986D5F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 06:40:34 +0000 (UTC)
+ Thu, 12 Nov 2020 06:40:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TIHjx4h3yYPB
+ with ESMTP id AoF9OJrAczJ6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 06:40:31 +0000 (UTC)
+ Thu, 12 Nov 2020 06:40:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by hemlock.osuosl.org (Postfix) with ESMTPS id DC48187657
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 7376686B83
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Nov 2020 06:40:31 +0000 (UTC)
+ Thu, 12 Nov 2020 06:40:32 +0000 (UTC)
 Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5facd8e60000>; Wed, 11 Nov 2020 22:40:38 -0800
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B5facd8da0001>; Wed, 11 Nov 2020 22:40:26 -0800
 Received: from sw-mtx-036.mtx.labs.mlnx (10.124.1.5) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 12 Nov
- 2020 06:40:30 +0000
+ 2020 06:40:31 +0000
 From: Parav Pandit <parav@nvidia.com>
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH 2/7] vdpa: Use simpler version of ida allocation
-Date: Thu, 12 Nov 2020 08:40:00 +0200
-Message-ID: <20201112064005.349268-3-parav@nvidia.com>
+Subject: [PATCH 3/7] vdpa: Extend routine to accept vdpa device name
+Date: Thu, 12 Nov 2020 08:40:01 +0200
+Message-ID: <20201112064005.349268-4-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201112064005.349268-1-parav@nvidia.com>
 References: <20201112064005.349268-1-parav@nvidia.com>
@@ -58,16 +58,16 @@ X-Originating-IP: [10.124.1.5]
 X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
  HQMAIL107.nvidia.com (172.20.187.13)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1605163239; bh=obxQ+8CkZMWkGpFrT7wuL+J6qEJIL2OCsM+PzwuIu98=;
+ t=1605163226; bh=1Lj3uhvlUAqek+U0OdG3uZU0WHYgkHYKA+te4VxyX1E=;
  h=From:To:CC:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
  References:MIME-Version:Content-Transfer-Encoding:Content-Type:
  X-Originating-IP:X-ClientProxiedBy;
- b=FTdm7feQL1zGlazsOD1efEw5oJ8haRvqmBTGZcs2EC3wm3StoPvxSn3AkbbEigwC6
- KegA4W+NIxFwo2LjwiJ11Zl8u9UBgESdg4GR13HMYeyOSWWXdPGOvqKZtEEsIc0sju
- M33ikb6LGk9DQryqPmSr0QKGg2cGf9V2la6RbnlCxdG3aS7ojfa5r+delagU1zS3BW
- 7vIm+rizY/4v3NUvnXDgWgXsHVWuFlCb4WTp1/pc6Zn7Vje6+TK/pn3xi/Zl2Uso4W
- oi5sBsQU8lclXIJp+0hO3jvqEKeLZQ/Fge4Ugtdt/gvSLfBAhp2H5HthHt69PL0Yco
- 6Nt4z3fsGAFNA==
+ b=cEorBUDR3PYSlNlGuqprm/ZQA+sNHw6jvxe2MPOXD8048lm87mGGTavVjF84lwzVP
+ E05iOwzIWDbutAuK6qR5rlmBdcmai5D3kBd+k9jeaeeHHiALHG5iiiA3l9cDEuOoWL
+ LG/zYST3ul1ErB6tn9VBZGqysBT5ONPH5ieA9ZQ8Rnwz7ZIyLyZNy5ksdmCoe5kz5h
+ AikyuODijgWo7jVhCEJ8FNKkkjq67vaGSnFmSF85PTjInBkXt88vESuZ2jJhoZWMwG
+ 9SB2OBcUmO6Slzjbf7huP+E6wxEfwYfWlj1r9vD/VGoDIfcb3m9oJyeQyoMc41yJ/5
+ yCcnI6d0TyBiw==
 Cc: netdev@vger.kernel.org, elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -85,30 +85,177 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vdpa doesn't have any specific need to define start and end range of the
-device index.
-Hence use the simper version of the ida allocator.
+In a subsequent patch, when user initiated command creates a vdpa device,
+the user chooses the name of the vdpa device.
+To support it, extend the device allocation API to consider this name
+specified by the caller driver.
+
+Split the device unregistration to device delete and device put so that
+device can be removed from the list after its deleted.
 
 Signed-off-by: Parav Pandit <parav@nvidia.com>
 Reviewed-by: Eli Cohen <elic@nvidia.com>
 Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/vdpa/vdpa.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/vdpa/ifcvf/ifcvf_main.c   |  2 +-
+ drivers/vdpa/mlx5/net/mlx5_vnet.c |  2 +-
+ drivers/vdpa/vdpa.c               | 36 +++++++++++++++++++++++++++----
+ drivers/vdpa/vdpa_sim/vdpa_sim.c  |  2 +-
+ include/linux/vdpa.h              |  7 +++---
+ 5 files changed, 38 insertions(+), 11 deletions(-)
 
+diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c b/drivers/vdpa/ifcvf/ifcvf_main.c
+index 8b4028556cb6..23474af7da40 100644
+--- a/drivers/vdpa/ifcvf/ifcvf_main.c
++++ b/drivers/vdpa/ifcvf/ifcvf_main.c
+@@ -439,7 +439,7 @@ static int ifcvf_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 
+ 	adapter = vdpa_alloc_device(struct ifcvf_adapter, vdpa,
+ 				    dev, &ifc_vdpa_ops,
+-				    IFCVF_MAX_QUEUE_PAIRS * 2);
++				    IFCVF_MAX_QUEUE_PAIRS * 2, NULL);
+ 	if (adapter == NULL) {
+ 		IFCVF_ERR(pdev, "Failed to allocate vDPA structure");
+ 		return -ENOMEM;
+diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+index 5316e51e72d4..cf9fc51071c8 100644
+--- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
++++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+@@ -1958,7 +1958,7 @@ static int mlx5v_probe(struct auxiliary_device *adev,
+ 	max_vqs = min_t(u32, max_vqs, MLX5_MAX_SUPPORTED_VQS);
+ 
+ 	ndev = vdpa_alloc_device(struct mlx5_vdpa_net, mvdev.vdev, mdev->device, &mlx5_vdpa_ops,
+-				 2 * mlx5_vdpa_max_qps(max_vqs));
++				 2 * mlx5_vdpa_max_qps(max_vqs), NULL);
+ 	if (IS_ERR(ndev))
+ 		return PTR_ERR(ndev);
+ 
 diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index a69ffc991e13..c0825650c055 100644
+index c0825650c055..3c9cade05233 100644
 --- a/drivers/vdpa/vdpa.c
 +++ b/drivers/vdpa/vdpa.c
-@@ -89,7 +89,7 @@ struct vdpa_device *__vdpa_alloc_device(struct device *parent,
- 	if (!vdev)
- 		goto err;
+@@ -12,6 +12,8 @@
+ #include <linux/slab.h>
+ #include <linux/vdpa.h>
  
--	err = ida_simple_get(&vdpa_index_ida, 0, 0, GFP_KERNEL);
-+	err = ida_alloc(&vdpa_index_ida, GFP_KERNEL);
- 	if (err < 0)
- 		goto err_ida;
++/* A global mutex that protects vdpa parent and device level operations. */
++static DEFINE_MUTEX(vdpa_dev_mutex);
+ static DEFINE_IDA(vdpa_index_ida);
  
+ static int vdpa_dev_probe(struct device *d)
+@@ -63,6 +65,7 @@ static void vdpa_release_dev(struct device *d)
+  * @config: the bus operations that is supported by this device
+  * @nvqs: number of virtqueues supported by this device
+  * @size: size of the parent structure that contains private data
++ * @name: name of the vdpa device; optional.
+  *
+  * Driver should use vdpa_alloc_device() wrapper macro instead of
+  * using this directly.
+@@ -72,8 +75,7 @@ static void vdpa_release_dev(struct device *d)
+  */
+ struct vdpa_device *__vdpa_alloc_device(struct device *parent,
+ 					const struct vdpa_config_ops *config,
+-					int nvqs,
+-					size_t size)
++					int nvqs, size_t size, const char *name)
+ {
+ 	struct vdpa_device *vdev;
+ 	int err = -EINVAL;
+@@ -101,7 +103,10 @@ struct vdpa_device *__vdpa_alloc_device(struct device *parent,
+ 	vdev->features_valid = false;
+ 	vdev->nvqs = nvqs;
+ 
+-	err = dev_set_name(&vdev->dev, "vdpa%u", vdev->index);
++	if (name)
++		err = dev_set_name(&vdev->dev, "%s", name);
++	else
++		err = dev_set_name(&vdev->dev, "vdpa%u", vdev->index);
+ 	if (err)
+ 		goto err_name;
+ 
+@@ -118,6 +123,13 @@ struct vdpa_device *__vdpa_alloc_device(struct device *parent,
+ }
+ EXPORT_SYMBOL_GPL(__vdpa_alloc_device);
+ 
++static int vdpa_name_match(struct device *dev, const void *data)
++{
++	struct vdpa_device *vdev = container_of(dev, struct vdpa_device, dev);
++
++	return (strcmp(dev_name(&vdev->dev), data) == 0);
++}
++
+ /**
+  * vdpa_register_device - register a vDPA device
+  * Callers must have a succeed call of vdpa_alloc_device() before.
+@@ -127,7 +139,21 @@ EXPORT_SYMBOL_GPL(__vdpa_alloc_device);
+  */
+ int vdpa_register_device(struct vdpa_device *vdev)
+ {
+-	return device_add(&vdev->dev);
++	struct device *dev;
++	int err;
++
++	mutex_lock(&vdpa_dev_mutex);
++	dev = bus_find_device(&vdpa_bus, NULL, dev_name(&vdev->dev), vdpa_name_match);
++	if (dev) {
++		put_device(dev);
++		err = -EEXIST;
++		goto name_err;
++	}
++
++	err = device_add(&vdev->dev);
++name_err:
++	mutex_unlock(&vdpa_dev_mutex);
++	return err;
+ }
+ EXPORT_SYMBOL_GPL(vdpa_register_device);
+ 
+@@ -137,7 +163,9 @@ EXPORT_SYMBOL_GPL(vdpa_register_device);
+  */
+ void vdpa_unregister_device(struct vdpa_device *vdev)
+ {
++	mutex_lock(&vdpa_dev_mutex);
+ 	device_unregister(&vdev->dev);
++	mutex_unlock(&vdpa_dev_mutex);
+ }
+ EXPORT_SYMBOL_GPL(vdpa_unregister_device);
+ 
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+index 6a90fdb9cbfc..aed1bb7770ab 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+@@ -357,7 +357,7 @@ static struct vdpasim *vdpasim_create(void)
+ 	else
+ 		ops = &vdpasim_net_config_ops;
+ 
+-	vdpasim = vdpa_alloc_device(struct vdpasim, vdpa, NULL, ops, VDPASIM_VQ_NUM);
++	vdpasim = vdpa_alloc_device(struct vdpasim, vdpa, NULL, ops, VDPASIM_VQ_NUM, NULL);
+ 	if (!vdpasim)
+ 		goto err_alloc;
+ 
+diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
+index 0fefeb976877..5700baa22356 100644
+--- a/include/linux/vdpa.h
++++ b/include/linux/vdpa.h
+@@ -245,15 +245,14 @@ struct vdpa_config_ops {
+ 
+ struct vdpa_device *__vdpa_alloc_device(struct device *parent,
+ 					const struct vdpa_config_ops *config,
+-					int nvqs,
+-					size_t size);
++					int nvqs, size_t size, const char *name);
+ 
+-#define vdpa_alloc_device(dev_struct, member, parent, config, nvqs)   \
++#define vdpa_alloc_device(dev_struct, member, parent, config, nvqs, name)   \
+ 			  container_of(__vdpa_alloc_device( \
+ 				       parent, config, nvqs, \
+ 				       sizeof(dev_struct) + \
+ 				       BUILD_BUG_ON_ZERO(offsetof( \
+-				       dev_struct, member))), \
++				       dev_struct, member)), name), \
+ 				       dev_struct, member)
+ 
+ int vdpa_register_device(struct vdpa_device *vdev);
 -- 
 2.26.2
 
