@@ -1,64 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 283A42B62A5
-	for <lists.virtualization@lfdr.de>; Tue, 17 Nov 2020 14:32:07 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id A24812B65C2
+	for <lists.virtualization@lfdr.de>; Tue, 17 Nov 2020 15:01:01 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B2A2287060;
-	Tue, 17 Nov 2020 13:32:05 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 23B5284E8F;
+	Tue, 17 Nov 2020 14:01:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ets0ty7YjQjA; Tue, 17 Nov 2020 13:32:04 +0000 (UTC)
+	with ESMTP id areVEQYY7Dww; Tue, 17 Nov 2020 14:00:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id DD8358700D;
-	Tue, 17 Nov 2020 13:32:04 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 17D3B84F4F;
+	Tue, 17 Nov 2020 14:00:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B3D07C07FF;
-	Tue, 17 Nov 2020 13:32:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D4BC5C07FF;
+	Tue, 17 Nov 2020 14:00:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 39B6CC0800
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6A160C07FF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Nov 2020 13:32:02 +0000 (UTC)
+ Tue, 17 Nov 2020 14:00:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 281438499E
+ by silver.osuosl.org (Postfix) with ESMTP id 6AE8C2011A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Nov 2020 13:32:02 +0000 (UTC)
+ Tue, 17 Nov 2020 14:00:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hLFGQtJFnmq2
+ with ESMTP id q-b9M5j7Ldj6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Nov 2020 13:32:01 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3E50E85A92
+ Tue, 17 Nov 2020 14:00:54 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ by silver.osuosl.org (Postfix) with ESMTPS id 9FD3C1FF98
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Nov 2020 13:32:01 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A359FB0BE;
- Tue, 17 Nov 2020 13:31:58 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, yuq825@gmail.com, robh@kernel.org,
- tomeu.vizoso@collabora.com, steven.price@arm.com,
- alyssa.rosenzweig@collabora.com, sean@poorly.run, eric@anholt.net,
- kraxel@redhat.com, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com,
- hamohammed.sa@gmail.com, hdegoede@redhat.com
-Subject: [PATCH v3 2/2] drm/shmem-helper: Removed
- drm_gem_shmem_create_object_cached()
-Date: Tue, 17 Nov 2020 14:31:56 +0100
-Message-Id: <20201117133156.26822-3-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201117133156.26822-1-tzimmermann@suse.de>
-References: <20201117133156.26822-1-tzimmermann@suse.de>
+ Tue, 17 Nov 2020 14:00:53 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 0AHDvZEd013952; Tue, 17 Nov 2020 15:00:35 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=STMicroelectronics;
+ bh=jVvnEkcOSvoJYeMhxUbGozS73QUI6vmOLenEHz6g06g=;
+ b=PV53Thje8eJpmKTSC2cAgUMoiFddEJyTaK/9fQINegu38IY7vRUIFI0+oEQe68cMI19o
+ Sq0f0SLQjhlUsmSD+LIZZifim2jYCFDLswqi0OzPFQIYcctRMVMRdNA4aRlEaF6etNL6
+ om7jCXTF4P6+fjNI71mjOhxaQb7u9tfLlzuOXpY0hkmKrDO3FakqSr+uMS97yfZhTJBU
+ qdGO1kpKnzVIvhYuraB8vl/ADVgs3oBq5KeRoFRGqx+H0ISWPgh7U8Y80fVgiz0/rhq5
+ VWxIq646yI60DUdZtJNOVZZDWG0th1TDV7SPU4tFiORSQJ024rKEZgwJbZ1UJ2J9dpOF hw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 34t5k51mxd-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 17 Nov 2020 15:00:35 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AA2FB10002A;
+ Tue, 17 Nov 2020 15:00:33 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag3node1.st.com [10.75.127.7])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6DD5B205D19;
+ Tue, 17 Nov 2020 15:00:33 +0100 (CET)
+Received: from lmecxl0889.lme.st.com (10.75.127.47) by SFHDAG3NODE1.st.com
+ (10.75.127.7) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 17 Nov
+ 2020 15:00:32 +0100
+Subject: Re: [PATCH virtio] virtio: virtio_console: fix DMA memory allocation
+ for rproc serial
+To: Christoph Hellwig <hch@infradead.org>
+References: <AOKowLclCbOCKxyiJ71WeNyuAAj2q8EUtxrXbyky5E@cp7-web-042.plabs.ch>
+ <20201116091950.GA30524@infradead.org>
+ <ca183081-5a9f-0104-bf79-5fea544c9271@st.com>
+ <20201116162844.GB16619@infradead.org> <20201116163907.GA19209@infradead.org>
+From: Arnaud POULIQUEN <arnaud.pouliquen@st.com>
+Message-ID: <79d2eb78-caad-9c0d-e130-51e628cedaaa@st.com>
+Date: Tue, 17 Nov 2020 15:00:32 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Cc: Thomas Zimmermann <tzimmermann@suse.de>, lima@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+In-Reply-To: <20201116163907.GA19209@infradead.org>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG3NODE1.st.com
+ (10.75.127.7)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
+ definitions=2020-11-17_03:2020-11-17,
+ 2020-11-17 signatures=0
+Cc: Ohad Ben-Cohen <ohad@wizery.com>, Arnd Bergmann <arnd@arndb.de>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>, Amit Shah <amit@kernel.org>,
+ Alexander Lobakin <alobakin@pm.me>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ "linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "stable@vger.kernel.org" <stable@vger.kernel.org>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>, Suman Anna <s-anna@ti.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,109 +113,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Cached page mappings are now the default for SHMEM GEM objects. Remove
-the obsolete create function for cached mappings.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/drm_gem_shmem_helper.c | 26 --------------------------
- drivers/gpu/drm/mgag200/mgag200_drv.c  |  1 -
- drivers/gpu/drm/udl/udl_drv.c          |  2 --
- drivers/gpu/drm/vkms/vkms_drv.c        |  1 -
- include/drm/drm_gem_shmem_helper.h     |  3 ---
- 5 files changed, 33 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-index b1c7a316f232..9825c378dfa6 100644
---- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-+++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-@@ -479,32 +479,6 @@ bool drm_gem_shmem_purge(struct drm_gem_object *obj)
- }
- EXPORT_SYMBOL(drm_gem_shmem_purge);
- 
--/**
-- * drm_gem_shmem_create_object_cached - Create a shmem buffer object with
-- *                                      cached mappings
-- * @dev: DRM device
-- * @size: Size of the object to allocate
-- *
-- * By default, shmem buffer objects use writecombine mappings. This
-- * function implements struct drm_driver.gem_create_object for shmem
-- * buffer objects with cached mappings.
-- *
-- * Returns:
-- * A struct drm_gem_shmem_object * on success or NULL negative on failure.
-- */
--struct drm_gem_object *
--drm_gem_shmem_create_object_cached(struct drm_device *dev, size_t size)
--{
--	struct drm_gem_shmem_object *shmem;
--
--	shmem = kzalloc(sizeof(*shmem), GFP_KERNEL);
--	if (!shmem)
--		return NULL;
--
--	return &shmem->base;
--}
--EXPORT_SYMBOL(drm_gem_shmem_create_object_cached);
--
- /**
-  * drm_gem_shmem_dumb_create - Create a dumb shmem buffer object
-  * @file: DRM file structure to create the dumb buffer for
-diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.c b/drivers/gpu/drm/mgag200/mgag200_drv.c
-index 0f07f259503d..a977c9f49719 100644
---- a/drivers/gpu/drm/mgag200/mgag200_drv.c
-+++ b/drivers/gpu/drm/mgag200/mgag200_drv.c
-@@ -37,7 +37,6 @@ static const struct drm_driver mgag200_driver = {
- 	.major = DRIVER_MAJOR,
- 	.minor = DRIVER_MINOR,
- 	.patchlevel = DRIVER_PATCHLEVEL,
--	.gem_create_object = drm_gem_shmem_create_object_cached,
- 	DRM_GEM_SHMEM_DRIVER_OPS,
- };
- 
-diff --git a/drivers/gpu/drm/udl/udl_drv.c b/drivers/gpu/drm/udl/udl_drv.c
-index b5a8dd9fdf02..9269092697d8 100644
---- a/drivers/gpu/drm/udl/udl_drv.c
-+++ b/drivers/gpu/drm/udl/udl_drv.c
-@@ -38,8 +38,6 @@ static const struct drm_driver driver = {
- 	.driver_features = DRIVER_ATOMIC | DRIVER_GEM | DRIVER_MODESET,
- 
- 	/* GEM hooks */
--	.gem_create_object = drm_gem_shmem_create_object_cached,
--
- 	.fops = &udl_driver_fops,
- 	DRM_GEM_SHMEM_DRIVER_OPS,
- 
-diff --git a/drivers/gpu/drm/vkms/vkms_drv.c b/drivers/gpu/drm/vkms/vkms_drv.c
-index 1a1b5bc8e121..d4d39227f2ed 100644
---- a/drivers/gpu/drm/vkms/vkms_drv.c
-+++ b/drivers/gpu/drm/vkms/vkms_drv.c
-@@ -82,7 +82,6 @@ static const struct drm_driver vkms_driver = {
- 	.driver_features	= DRIVER_MODESET | DRIVER_ATOMIC | DRIVER_GEM,
- 	.release		= vkms_release,
- 	.fops			= &vkms_driver_fops,
--	.gem_create_object = drm_gem_shmem_create_object_cached,
- 	DRM_GEM_SHMEM_DRIVER_OPS,
- 
- 	.name			= DRIVER_NAME,
-diff --git a/include/drm/drm_gem_shmem_helper.h b/include/drm/drm_gem_shmem_helper.h
-index f32801db3203..434328d8a0d9 100644
---- a/include/drm/drm_gem_shmem_helper.h
-+++ b/include/drm/drm_gem_shmem_helper.h
-@@ -133,9 +133,6 @@ drm_gem_shmem_create_with_handle(struct drm_file *file_priv,
- 				 struct drm_device *dev, size_t size,
- 				 uint32_t *handle);
- 
--struct drm_gem_object *
--drm_gem_shmem_create_object_cached(struct drm_device *dev, size_t size);
--
- int drm_gem_shmem_dumb_create(struct drm_file *file, struct drm_device *dev,
- 			      struct drm_mode_create_dumb *args);
- 
--- 
-2.29.2
+On 11/16/20 5:39 PM, Christoph Hellwig wrote:
+> Btw, I also still don't understand why remoteproc is using
+> dma_declare_coherent_memory to start with.  The virtio code has exactly
+> one call to dma_alloc_coherent vring_alloc_queue, a function that
+> already switches between two different allocators.  Why can't we just
+> add a third allocator specifically for these remoteproc memory carveouts
+> and bypass dma_declare_coherent_memory entirely?
+> 
 
+The dma_declare_coherent_memory allows to associate vdev0buffer memory region
+to the remoteproc virtio device (vdev parent). This region is used to allocated
+the rpmsg buffers.
+The memory for the rpmsg buffer is allocated by the rpmsg_virtio device in
+rpmsg_virtio_bus[1]. The size depends on the total size needed for the rpmsg
+buffers.
+
+The vrings are allocated directly by the remoteproc device.
+
+[1]
+https://elixir.bootlin.com/linux/v5.10-rc3/source/drivers/rpmsg/virtio_rpmsg_bus.c#L925
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
