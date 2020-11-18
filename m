@@ -1,86 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 419542B7A7D
-	for <lists.virtualization@lfdr.de>; Wed, 18 Nov 2020 10:40:08 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 595F18720B;
-	Wed, 18 Nov 2020 09:40:06 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dtbAJyznHp4L; Wed, 18 Nov 2020 09:40:06 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id EA627871FA;
-	Wed, 18 Nov 2020 09:40:05 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BD15FC07FF;
-	Wed, 18 Nov 2020 09:40:05 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F2D5CC07FF
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 09:40:04 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1E532B7AB8
+	for <lists.virtualization@lfdr.de>; Wed, 18 Nov 2020 10:54:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id CBD11204F5
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 09:40:04 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 8D56A204F5;
+	Wed, 18 Nov 2020 09:54:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id u0S3HkjND0zM
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UWB-U58wZvGB; Wed, 18 Nov 2020 09:54:18 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id CE83A204A3;
+	Wed, 18 Nov 2020 09:54:18 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AE656C07FF;
+	Wed, 18 Nov 2020 09:54:18 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 893AAC07FF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 09:40:03 +0000 (UTC)
+ Wed, 18 Nov 2020 09:54:17 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 76C4C83500
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 18 Nov 2020 09:54:17 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id um9_f14XIzvq
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 18 Nov 2020 09:54:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by silver.osuosl.org (Postfix) with ESMTPS id AB7EB20497
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 3CE9A832C6
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 09:40:03 +0000 (UTC)
+ Wed, 18 Nov 2020 09:54:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1605692402;
+ s=mimecast20190719; t=1605693254;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8YUHjCb6T+duwkVVqtutOFcmHYQOlclmLV2nizfmVHg=;
- b=HiRVW2xjpKa/i9erD3sDc184C+ca06hvsYxY3j6UIPh/URFmbJa/VRs0pnT5bAQON3B87g
- hisHCgUD/tkZzFSQmoSIVP1hBg4TeAwgodWhsImfdjGD+FHKzrPiUWmDTJoXbo+MGnfiYN
- yRZF5Mvtz75c5XIlIneqmQSm4BBg/EE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-462-eJe0u6hPPU2DjFdLdYSYRg-1; Wed, 18 Nov 2020 04:40:00 -0500
-X-MC-Unique: eJe0u6hPPU2DjFdLdYSYRg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C2459100855E;
- Wed, 18 Nov 2020 09:39:58 +0000 (UTC)
-Received: from [10.72.12.138] (ovpn-12-138.pek2.redhat.com [10.72.12.138])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D14E655762;
- Wed, 18 Nov 2020 09:39:52 +0000 (UTC)
-Subject: Re: [PATCH net] vhost_vdpa: Return -EFUALT if copy_from_user() fails
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20201023120853.GI282278@mwanda>
- <20201023113326-mutt-send-email-mst@kernel.org>
- <4485cc8d-ac69-c725-8493-eda120e29c41@redhat.com>
- <e7242333-b364-c2d8-53f5-1f688fc4d0b5@redhat.com>
- <20201118035912-mutt-send-email-mst@kernel.org>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <4ac146a2-a3db-abc7-73a0-98f71119de3d@redhat.com>
-Date: Wed, 18 Nov 2020 17:39:51 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ bh=HkvlidDT7RuDykKbMhHuxkrrFtoJAiVcxN+jntjGpQI=;
+ b=RUKigu6a6BcFBb+9KtUs2MQBtHwJr4KuXNmxYWe3NEWhjNXy9O9/VhIdeKsObMTn3qMaAs
+ ANzZjrnCCDJcfAx8WLoaze2LR76rEnHJnnNrVhwJwGtLmsxTSqCv8XmkXZgJsmkR+vLtSF
+ bU4wv05YcHcEz7UOZ5GdsmP2GI8hCFk=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-360-5xFpsERMOterzDmnRFAfcg-1; Wed, 18 Nov 2020 04:54:12 -0500
+X-MC-Unique: 5xFpsERMOterzDmnRFAfcg-1
+Received: by mail-wr1-f70.google.com with SMTP id w6so713663wrk.1
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 18 Nov 2020 01:54:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=HkvlidDT7RuDykKbMhHuxkrrFtoJAiVcxN+jntjGpQI=;
+ b=ZfNGseevgXXAzcZESnmct2mYLc8OOxqt/kbnUAs8yXOmrlea+ZT7ifzfdqDG9JSUwP
+ uM3iVX3yK2eXH2+EAUG/luNQdoeS+hBEQ/pBpx0WVcHxScjC/Ad4DWze5MSyCLmGUiL3
+ 0tWAnBC4RGKF/WOlYOqpbHvgjfhwSSsUHZzdXIyv/U25jayaLaqhk2ziazhzJuB/mF8q
+ vfdwkXjJ++p61vZwdQxtUgrr2VUljg6fWcoFSrXt3OJKhetBivMqlr5sc6SYfJ3Co8uG
+ FutK2a3Hw4X+aTGX51KvrCAx64SXkaYAxcTutMDnQRkPQ12yXdaOdKxdyXxnKnNbMMAy
+ yvMw==
+X-Gm-Message-State: AOAM531YZIDUN/MJD/ATf12fpUoDq4J8O4HCl9Ii2q1aJcn+HJ/A2/4N
+ 1+/lEnte348pxbjQRLFK33PrR/ZwXdrMWpD3fKESZcquV60uJ2hEJV6tqJPLyoNoyQpmsTuP3Gg
+ 4u4o3/LrS3IZkVYZSswPx7BWxj1ACxqdeO8VenEURZA==
+X-Received: by 2002:a7b:c255:: with SMTP id b21mr3661686wmj.72.1605693251510; 
+ Wed, 18 Nov 2020 01:54:11 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwbXLTxAGOnZyxxbLSLJq6x1VIfry0wChmfEQrkgNC9lF4UHuYFsROS0Onu2BcX6Xl3sE+plg==
+X-Received: by 2002:a7b:c255:: with SMTP id b21mr3661670wmj.72.1605693251346; 
+ Wed, 18 Nov 2020 01:54:11 -0800 (PST)
+Received: from redhat.com (bzq-109-67-54-78.red.bezeqint.net. [109.67.54.78])
+ by smtp.gmail.com with ESMTPSA id
+ o13sm2811565wmc.44.2020.11.18.01.54.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Nov 2020 01:54:10 -0800 (PST)
+Date: Wed, 18 Nov 2020 04:54:07 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Mike Christie <michael.christie@oracle.com>
+Subject: Re: [PATCH 00/10] vhost/qemu: thread per IO SCSI vq
+Message-ID: <20201118044620-mutt-send-email-mst@kernel.org>
+References: <1605223150-10888-1-git-send-email-michael.christie@oracle.com>
+ <20201117164043.GS131917@stefanha-x1.localdomain>
+ <b3343762-bb11-b750-46ec-43b5556f2b8e@oracle.com>
 MIME-Version: 1.0
-In-Reply-To: <20201118035912-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
- kernel-janitors@vger.kernel.org, virtualization@lists.linux-foundation.org,
- kuba@kernel.org, Dan Carpenter <dan.carpenter@oracle.com>
+In-Reply-To: <b3343762-bb11-b750-46ec-43b5556f2b8e@oracle.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: fam@euphon.net, linux-scsi@vger.kernel.org, qemu-devel@nongnu.org,
+ virtualization@lists.linux-foundation.org, target-devel@vger.kernel.org,
+ Stefan Hajnoczi <stefanha@redhat.com>, pbonzini@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,32 +108,59 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMTEvMTgg5LiL5Y2INDo1OSwgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+IE9u
-IFdlZCwgTm92IDE4LCAyMDIwIGF0IDAyOjA4OjE3UE0gKzA4MDAsIEphc29uIFdhbmcgd3JvdGU6
-Cj4+IE9uIDIwMjAvMTAvMjYg5LiK5Y2IMTA6NTksIEphc29uIFdhbmcgd3JvdGU6Cj4+PiBPbiAy
-MDIwLzEwLzIzIOS4i+WNiDExOjM0LCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4+Pj4gT24g
-RnJpLCBPY3QgMjMsIDIwMjAgYXQgMDM6MDg6NTNQTSArMDMwMCwgRGFuIENhcnBlbnRlciB3cm90
-ZToKPj4+Pj4gVGhlIGNvcHlfdG8vZnJvbV91c2VyKCkgZnVuY3Rpb25zIHJldHVybiB0aGUgbnVt
-YmVyIG9mIGJ5dGVzIHdoaWNoIHdlCj4+Pj4+IHdlcmVuJ3QgYWJsZSB0byBjb3B5IGJ1dCB0aGUg
-aW9jdGwgc2hvdWxkIHJldHVybiAtRUZBVUxUIGlmIHRoZXkgZmFpbC4KPj4+Pj4KPj4+Pj4gRml4
-ZXM6IGExMjdjNWJiYjZhOCAoInZob3N0LXZkcGE6IGZpeCBiYWNrZW5kIGZlYXR1cmUgaW9jdGxz
-IikKPj4+Pj4gU2lnbmVkLW9mZi1ieTogRGFuIENhcnBlbnRlciA8ZGFuLmNhcnBlbnRlckBvcmFj
-bGUuY29tPgo+Pj4+IEFja2VkLWJ5OiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29t
-Pgo+Pj4+IE5lZWRlZCBmb3Igc3RhYmxlIEkgZ3Vlc3MuCj4+Pgo+Pj4gQWdyZWUuCj4+Pgo+Pj4g
-QWNrZWQtYnk6IEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+Cj4+Cj4+IEhpIE1pY2hh
-ZWwuCj4+Cj4+IEkgZG9uJ3Qgc2VlIHRoaXMgaW4geW91ciB0cmVlLCBwbGVhc2UgY29uc2lkZXIg
-dG8gbWVyZ2UuCj4+Cj4+IFRoYW5rcwo+Pgo+IEkgZG8gc2VlIGl0IHRoZXJlOgo+Cj4gY29tbWl0
-IDc5MjI0NjBlMzNjODFmNDFlMGQyNDIxNDE3MjI4YjMyZTZmZGJlOTQKPiBBdXRob3I6IERhbiBD
-YXJwZW50ZXIgPGRhbi5jYXJwZW50ZXJAb3JhY2xlLmNvbT4KPiBEYXRlOiAgIEZyaSBPY3QgMjMg
-MTU6MDg6NTMgMjAyMCArMDMwMAo+Cj4gICAgICB2aG9zdF92ZHBhOiBSZXR1cm4gLUVGQVVMVCBp
-ZiBjb3B5X2Zyb21fdXNlcigpIGZhaWxzCj4gICAgICAKPiB0aGUgcmVhc29uIHlvdSBjYW4ndCBm
-aW5kIGl0IGlzIHByb2JhYmx5IGJlY2F1c2UgSSBmaXhlZCB1cAo+IGEgdHlwbyBpbiB0aGUgc3Vi
-amVjdC4KCgpJIHNlZSB0aGF0LgoKVGhhbmtzCgoKPgo+CgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmly
-dHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51
-eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Tue, Nov 17, 2020 at 01:13:14PM -0600, Mike Christie wrote:
+> On 11/17/20 10:40 AM, Stefan Hajnoczi wrote:
+> > On Thu, Nov 12, 2020 at 05:18:59PM -0600, Mike Christie wrote:
+> >> The following kernel patches were made over Michael's vhost branch:
+> >>
+> >> https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git/log/?h=vhost
+> >>
+> >> and the vhost-scsi bug fix patchset:
+> >>
+> >> https://lore.kernel.org/linux-scsi/20201112170008.GB1555653@stefanha-x1.localdomain/T/#t
+> >>
+> >> And the qemu patch was made over the qemu master branch.
+> >>
+> >> vhost-scsi currently supports multiple queues with the num_queues
+> >> setting, but we end up with a setup where the guest's scsi/block
+> >> layer can do a queue per vCPU and the layers below vhost can do
+> >> a queue per CPU. vhost-scsi will then do a num_queue virtqueues,
+> >> but all IO gets set on and completed on a single vhost-scsi thread.
+> >> After 2 - 4 vqs this becomes a bottleneck.
+> >>
+> >> This patchset allows us to create a worker thread per IO vq, so we
+> >> can better utilize multiple CPUs with the multiple queues. It
+> >> implments Jason's suggestion to create the initial worker like
+> >> normal, then create the extra workers for IO vqs with the
+> >> VHOST_SET_VRING_ENABLE ioctl command added in this patchset.
+> > 
+> > How does userspace find out the tids and set their CPU affinity?
+> > 
+> 
+> When we create the worker thread we add it to the device owner's cgroup,
+> so we end up inheriting those settings like affinity.
+> 
+> However, are you more asking about finer control like if the guest is
+> doing mq, and the mq hw queue is bound to cpu0, it would perform
+> better if we could bind vhost vq's worker thread to cpu0? I think the
+> problem might is if you are in the cgroup then we can't set a specific
+> threads CPU affinity to just one specific CPU. So you can either do
+> cgroups or not.
+
+Something we wanted to try for a while is to allow userspace
+to create threads for us, then specify which vqs it processes.
+
+That would address this set of concerns ...
+
+-- 
+MST
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
