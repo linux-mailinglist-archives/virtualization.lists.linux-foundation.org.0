@@ -1,99 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id C915C2B79AE
-	for <lists.virtualization@lfdr.de>; Wed, 18 Nov 2020 09:56:38 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 43C46204F9;
-	Wed, 18 Nov 2020 08:56:37 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UjOACVYE+tkm; Wed, 18 Nov 2020 08:56:34 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id C5C94204F5;
-	Wed, 18 Nov 2020 08:56:34 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9E56FC07FF;
-	Wed, 18 Nov 2020 08:56:34 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 68CD1C07FF
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 08:56:31 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 871D52B79BE
+	for <lists.virtualization@lfdr.de>; Wed, 18 Nov 2020 10:00:07 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 6AC5B84E5E
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 08:56:31 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 1B3AA85549;
+	Wed, 18 Nov 2020 09:00:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JedkIfIwHUP5
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id P-ENFglYz-u0; Wed, 18 Nov 2020 09:00:04 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 82AE685773;
+	Wed, 18 Nov 2020 09:00:04 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4F7F4C07FF;
+	Wed, 18 Nov 2020 09:00:04 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B6028C07FF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 08:56:30 +0000 (UTC)
+ Wed, 18 Nov 2020 09:00:02 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 69225867A1
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 18 Nov 2020 09:00:02 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id st6S0f+gqlTi
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 18 Nov 2020 08:59:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 5827E84E34
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 552CF86672
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 08:56:30 +0000 (UTC)
+ Wed, 18 Nov 2020 08:59:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1605689789;
+ s=mimecast20190719; t=1605689998;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=oE/IfWvNx94tBWY03gu3UuKE9ZiNz0WGz4c8BQhvfUg=;
- b=fWnmsIYFi8//KB1kpoGwjshzZ/xz6UFejcisRyhYX3yNq4pJGzEYFdHxzwWThsRwZsWwUH
- IYToonZWiHqu0d949YpQdbF8+PQluB+/oiaLv7/VmM+ywfev1MgRN2HGQA6jIkyD6glggj
- kCIrqIkesoJf0uKum6hwoYSjB2U06kI=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-546-OfCRyfhnOV2iEtly_PIr2Q-1; Wed, 18 Nov 2020 03:56:27 -0500
-X-MC-Unique: OfCRyfhnOV2iEtly_PIr2Q-1
-Received: by mail-wm1-f70.google.com with SMTP id j62so746229wma.4
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Nov 2020 00:56:27 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=oE/IfWvNx94tBWY03gu3UuKE9ZiNz0WGz4c8BQhvfUg=;
- b=H9CO8NaHSL9qgYrzAgGvYWNHo8YMX3HwFyIlZaMF2FvZBo4NhINZ8091DWXPaYrjqe
- VmaZjZzEVG23J5XZ3boMESOAbbtA5S57AAFvI8920Byn/WSG1HmuvLNfbpqHe07/UK6F
- KLCzanaI+4auHuSoZWrRTgvww1ITPdPH4nZx2UISXcmBqVmeVSv8h0r4yef+MOSbpo29
- l3N3eK81OKPJIcPvc6rHIV04MMyHyZntxKEfqcdJiSoGaapoP1cB+nSOmgQJJ8sd0lia
- klgyDNFDn+L0cXl1xF65CH4c8PUXWsp2D3y3/9r0gvpR6Iix3X3XTR2b4AYymQyPQygf
- 4y6A==
-X-Gm-Message-State: AOAM533ob8FTayxhOQhKpJLO2wMyOfI1k5ulsmHmujLHN7RDkmUj+9uc
- oRuroSHBHiO08AbiSqUgsi4qpWCJSJoCJi/wJOp72JgQdII5PaRzVyy9dsYv8yuLNDqCQaL865X
- /BWIz+eQ32DCO+btLJcRhQEo5tBTrordutgJt/UIIfg==
-X-Received: by 2002:adf:e6cf:: with SMTP id y15mr3897456wrm.403.1605689786263; 
- Wed, 18 Nov 2020 00:56:26 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxueBisSh/Mu4b5J73GuuCPae8P0OUrhxdSJAhejf3LKVsO4+2I2VmxbqVKsBNYXWpdkhzG3w==
-X-Received: by 2002:adf:e6cf:: with SMTP id y15mr3897444wrm.403.1605689786105; 
- Wed, 18 Nov 2020 00:56:26 -0800 (PST)
-Received: from redhat.com (bzq-109-67-54-78.red.bezeqint.net. [109.67.54.78])
- by smtp.gmail.com with ESMTPSA id
- u81sm2799177wmb.27.2020.11.18.00.56.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Nov 2020 00:56:25 -0800 (PST)
-Date: Wed, 18 Nov 2020 03:56:22 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Mike Christie <michael.christie@oracle.com>
-Subject: Re: [PATCH 1/1] vhost scsi: fix lun reset completion handling
-Message-ID: <20201118035452-mutt-send-email-mst@kernel.org>
-References: <1605680660-3671-1-git-send-email-michael.christie@oracle.com>
+ bh=Gxx/VvkoJZ4QkIxP+qyRXmDmA8Z61VJCEEV8lV2lfkE=;
+ b=CUQenL0tsEeJCscxfnIkkjF1lMlx2bL6H9BP7i1XTjxW4zP/61+bUovGUtY5wpzTTnA2Xt
+ ue7uEjde/qz3KmbYWL8ijPHsCpzOtM8kIkk0ZAbIZF3Irn+WOeOThp4OHe/7wQp3J0tUOM
+ GrweTCVd/WycaLRkk4gHL+uY2hdgdcg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-20-RRR1uNM8PaKjgEH3DAAXIA-1; Wed, 18 Nov 2020 03:59:54 -0500
+X-MC-Unique: RRR1uNM8PaKjgEH3DAAXIA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AD26110074B1;
+ Wed, 18 Nov 2020 08:59:52 +0000 (UTC)
+Received: from [10.36.114.231] (ovpn-114-231.ams2.redhat.com [10.36.114.231])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CD2C360C43;
+ Wed, 18 Nov 2020 08:59:46 +0000 (UTC)
+Subject: Re: [PATCH v2 27/29] mm/memory_hotplug: extend
+ offline_and_remove_memory() to handle more than one memory block
+To: Andrew Morton <akpm@linux-foundation.org>
+References: <20201112133815.13332-1-david@redhat.com>
+ <20201112133815.13332-28-david@redhat.com>
+ <20201117205301.bcef9773f3557a764d17b8df@linux-foundation.org>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat GmbH
+Message-ID: <842683af-0a1e-78ea-5b94-178eaf8f3239@redhat.com>
+Date: Wed, 18 Nov 2020 09:59:45 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <1605680660-3671-1-git-send-email-michael.christie@oracle.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: target-devel@vger.kernel.org, linux-scsi@vger.kernel.org,
- stefanha@redhat.com, virtualization@lists.linux-foundation.org
+In-Reply-To: <20201117205301.bcef9773f3557a764d17b8df@linux-foundation.org>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ Wei Yang <richard.weiyang@linux.alibaba.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ Michal Hocko <mhocko@kernel.org>, Oscar Salvador <osalvador@suse.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,61 +94,58 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Nov 18, 2020 at 12:24:20AM -0600, Mike Christie wrote:
-> vhost scsi owns the scsi se_cmd but lio frees the se_cmd->se_tmr
-> before calling release_cmd, so while with normal cmd completion we
-> can access the se_cmd from the vhost work, we can't do the same with
-> se_cmd->se_tmr. This has us copy the tmf response in
-> vhost_scsi_queue_tm_rsp to our internal vhost-scsi tmf struct for
-> when it gets sent to the guest from our worker thread.
+On 18.11.20 05:53, Andrew Morton wrote:
+> On Thu, 12 Nov 2020 14:38:13 +0100 David Hildenbrand <david@redhat.com> wrote:
 > 
-> Signed-off-by: Mike Christie <michael.christie@oracle.com>
-
-Is this a fix for
-    vhost scsi: Add support for LUN resets.
-
-If so pls add a Fixes: tag.
-
-> ---
->  drivers/vhost/scsi.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>> virtio-mem soon wants to use offline_and_remove_memory() memory that
+>> exceeds a single Linux memory block (memory_block_size_bytes()). Let's
+>> remove that restriction.
+>>
+>> Let's remember the old state and try to restore that if anything goes
+>> wrong. While re-onlining can, in general, fail, it's highly unlikely to
+>> happen (usually only when a notifier fails to allocate memory, and these
+>> are rather rare).
+>>
+>> This will be used by virtio-mem to offline+remove memory ranges that are
+>> bigger than a single memory block - for example, with a device block
+>> size of 1 GiB (e.g., gigantic pages in the hypervisor) and a Linux memory
+>> block size of 128MB.
+>>
+>> While we could compress the state into 2 bit, using 8 bit is much
+>> easier.
+>>
+>> This handling is similar, but different to acpi_scan_try_to_offline():
+>>
+>> a) We don't try to offline twice. I am not sure if this CONFIG_MEMCG
+>> optimization is still relevant - it should only apply to ZONE_NORMAL
+>> (where we have no guarantees). If relevant, we can always add it.
+>>
+>> b) acpi_scan_try_to_offline() simply onlines all memory in case
+>> something goes wrong. It doesn't restore previous online type. Let's do
+>> that, so we won't overwrite what e.g., user space configured.
+>>
+>> ...
+>>
 > 
-> diff --git a/drivers/vhost/scsi.c b/drivers/vhost/scsi.c
-> index f22fce5..6ff8a5096 100644
-> --- a/drivers/vhost/scsi.c
-> +++ b/drivers/vhost/scsi.c
-> @@ -220,6 +220,7 @@ struct vhost_scsi_tmf {
->  	struct list_head queue_entry;
->  
->  	struct se_cmd se_cmd;
-> +	u8 scsi_resp;
->  	struct vhost_scsi_inflight *inflight;
->  	struct iovec resp_iov;
->  	int in_iovs;
-> @@ -426,6 +427,7 @@ static void vhost_scsi_queue_tm_rsp(struct se_cmd *se_cmd)
->  	struct vhost_scsi_tmf *tmf = container_of(se_cmd, struct vhost_scsi_tmf,
->  						  se_cmd);
->  
-> +	tmf->scsi_resp = se_cmd->se_tmr_req->response;
->  	transport_generic_free_cmd(&tmf->se_cmd, 0);
->  }
->  
-> @@ -1183,7 +1185,7 @@ static void vhost_scsi_tmf_resp_work(struct vhost_work *work)
->  						  vwork);
->  	int resp_code;
->  
-> -	if (tmf->se_cmd.se_tmr_req->response == TMR_FUNCTION_COMPLETE)
-> +	if (tmf->scsi_resp == TMR_FUNCTION_COMPLETE)
->  		resp_code = VIRTIO_SCSI_S_FUNCTION_SUCCEEDED;
->  	else
->  		resp_code = VIRTIO_SCSI_S_FUNCTION_REJECTED;
-> -- 
-> 1.8.3.1
+> uint8_t is a bit of a mouthful.  u8 is less typing ;)  Doesn't matter.
+
+In case I have to resend, I'll change it :)
+
+> 
+> Acked-by: Andrew Morton <akpm@linux-foundation.org>
+
+Thanks!
+
+
+-- 
+Thanks,
+
+David / dhildenb
 
 _______________________________________________
 Virtualization mailing list
