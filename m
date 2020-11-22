@@ -2,85 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 437FB2BC6C6
-	for <lists.virtualization@lfdr.de>; Sun, 22 Nov 2020 17:17:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4E462BC894
+	for <lists.virtualization@lfdr.de>; Sun, 22 Nov 2020 20:23:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D9A16868EB;
-	Sun, 22 Nov 2020 16:17:09 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1FAE686899;
+	Sun, 22 Nov 2020 19:23:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OquDfpaiuct7; Sun, 22 Nov 2020 16:17:09 +0000 (UTC)
+	with ESMTP id 0VBJxYpvFpkm; Sun, 22 Nov 2020 19:23:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 45032868E9;
-	Sun, 22 Nov 2020 16:17:09 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id ECD3586885;
+	Sun, 22 Nov 2020 19:23:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3BE32C0052;
-	Sun, 22 Nov 2020 16:17:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B99DDC0891;
+	Sun, 22 Nov 2020 19:23:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DEE77C1D9F
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Nov 2020 16:17:07 +0000 (UTC)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4BA10C0052;
+ Sun, 22 Nov 2020 19:23:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 2F12A2037E
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Nov 2020 16:17:07 +0000 (UTC)
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 3DF5185D54;
+ Sun, 22 Nov 2020 19:23:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id LC79yrz2JJdH
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Nov 2020 16:17:05 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
- [209.85.210.193])
- by silver.osuosl.org (Postfix) with ESMTPS id C842720371
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Nov 2020 16:17:05 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id v12so12547888pfm.13
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Nov 2020 08:17:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=9LoGd3XD212DnUOzzxWdBwAHKcFiABUM1eku/Z5s9PQ=;
- b=ECdUiFozoGotedNMltHxGvt7ELeQp/og9KGaJat0+erwcdPPWVCrU8KkW+JV4RYPeo
- GTWUobzmr0s313q/lzhn4jF5RxJP4nhZO/aj20hZaH8d/g/a456RbO+LKniOS4LntN7M
- GHx9cYZv8xWYKIg8n9C3ZJn+Q+L/6/s35hbx0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=9LoGd3XD212DnUOzzxWdBwAHKcFiABUM1eku/Z5s9PQ=;
- b=UQat7ylNm5QnkEON2Sg+w8kGkknmWshc7VyuOUqy8gH3FKU5NHUeI3tigJpw7Dh9hk
- Vii/Bg6RD1rN3EYn4/iOzRg82RyS3XK/hGTHrJ8Nxx/SewY5HwLiYHALf2h5ngw+liBX
- dkweIqmt5ySk48KdnD4CQcmF4H771s+MlvUOju70266LT45a3EukwvLRgCXmoMmSLTLr
- 65rZRjKx8lkNiGY3btx1G4v0sPTYcH1O0rUpKvVSakJShiDQ8zpkcEbxv0qPWwIC3VSq
- /JUb4i9+xhYXrF2DS+fmDCWLWHTZrxEzhaYXn0CQhmias24WO9O0T3VQ1mkK7D/n+mri
- St3w==
-X-Gm-Message-State: AOAM532PgFb3Xq9gBCFTFKX130QyW7/RyINiTsll+GIwIfPT3eqxGDDk
- 3is6VbYBBsbpQlJB88TTUKbCOg==
-X-Google-Smtp-Source: ABdhPJzjrfS3ZVuiz5fqtjIAbZtKQ5pfqPy3q+oKf7VtoFjoXLjA79CcRlXr5vTeWnitsMgA/HY0Vg==
-X-Received: by 2002:a63:1d0b:: with SMTP id d11mr21383404pgd.368.1606061825374; 
- Sun, 22 Nov 2020 08:17:05 -0800 (PST)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id k4sm9841327pfg.130.2020.11.22.08.17.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Nov 2020 08:17:04 -0800 (PST)
-Date: Sun, 22 Nov 2020 08:17:03 -0800
-From: Kees Cook <keescook@chromium.org>
-To: Jakub Kicinski <kuba@kernel.org>
+ with ESMTP id CWLTPTS6mt2r; Sun, 22 Nov 2020 19:23:05 +0000 (UTC)
+X-Greylist: delayed 00:57:12 by SQLgrey-1.7.6
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from smtprelay.hostedemail.com (smtprelay0122.hostedemail.com
+ [216.40.44.122])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1517A85DD8;
+ Sun, 22 Nov 2020 19:23:05 +0000 (UTC)
+Received: from smtprelay.hostedemail.com (10.5.19.251.rfc1918.com
+ [10.5.19.251])
+ by smtpgrave01.hostedemail.com (Postfix) with ESMTP id 09E161813A06C;
+ Sun, 22 Nov 2020 19:23:02 +0000 (UTC)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
+ [216.40.38.60])
+ by smtprelay06.hostedemail.com (Postfix) with ESMTP id 8A2DD18221869;
+ Sun, 22 Nov 2020 19:22:59 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 50, 0, 0, , d41d8cd98f00b204, joe@perches.com, ,
+ RULES_HIT:41:355:379:599:967:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1539:1593:1594:1711:1730:1747:1777:1792:2194:2199:2393:2525:2560:2563:2682:2685:2828:2859:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3352:3622:3865:3866:3871:3873:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4250:4321:5007:6742:6743:7903:8985:9025:9108:10004:10400:10848:11232:11658:11914:12043:12297:12555:12740:12760:12895:13069:13311:13357:13439:14181:14659:14721:21080:21450:21499:21627:30054:30091,
+ 0, RBL:none, CacheIP:none, Bayesian:0.5, 0.5, 0.5, Netcheck:none,
+ DomainCache:0, MSF:not bulk, SPF:, MSBL:0, DNSBL:none, Custom_rules:0:0:0,
+ LFtime:2, LUA_SUMMARY:none
+X-HE-Tag: curve68_4013d692735f
+X-Filterd-Recvd-Size: 4350
+Received: from XPS-9350.home (unknown [47.151.128.180])
+ (Authenticated sender: joe@perches.com)
+ by omf17.hostedemail.com (Postfix) with ESMTPA;
+ Sun, 22 Nov 2020 19:22:48 +0000 (UTC)
+Message-ID: <d8d1e9add08cdd4158405e77762d4946037208f8.camel@perches.com>
 Subject: Re: [PATCH 000/141] Fix fall-through warnings for Clang
-Message-ID: <202011220816.8B6591A@keescook>
+From: Joe Perches <joe@perches.com>
+To: James Bottomley <James.Bottomley@HansenPartnership.com>, Kees Cook
+ <keescook@chromium.org>, Jakub Kicinski <kuba@kernel.org>
+Date: Sun, 22 Nov 2020 11:22:47 -0800
+In-Reply-To: <0147972a72bc13f3629de8a32dee6f1f308994b5.camel@HansenPartnership.com>
 References: <cover.1605896059.git.gustavoars@kernel.org>
  <20201120105344.4345c14e@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
  <202011201129.B13FDB3C@keescook>
  <20201120115142.292999b2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+ <202011220816.8B6591A@keescook>
+ <9b57fd4914b46f38d54087d75e072d6e947cb56d.camel@HansenPartnership.com>
+ <ca071decb87cc7e905411423c05a48f9fd2f58d7.camel@perches.com>
+ <0147972a72bc13f3629de8a32dee6f1f308994b5.camel@HansenPartnership.com>
+User-Agent: Evolution 3.38.1-1 
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201120115142.292999b2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
 Cc: alsa-devel@alsa-project.org, linux-atm-general@lists.sourceforge.net,
  reiserfs-devel@vger.kernel.org, linux-iio@vger.kernel.org,
  linux-wireless@vger.kernel.org, linux-fbdev@vger.kernel.org,
@@ -117,8 +108,8 @@ Cc: alsa-devel@alsa-project.org, linux-atm-general@lists.sourceforge.net,
  linux-renesas-soc@vger.kernel.org, linux-sctp@vger.kernel.org,
  linux-usb@vger.kernel.org, netfilter-devel@vger.kernel.org,
  linux-crypto@vger.kernel.org, patches@opensource.cirrus.com,
- Joe Perches <joe@perches.com>, linux-integrity@vger.kernel.org,
- target-devel@vger.kernel.org, linux-hardening@vger.kernel.org
+ linux-integrity@vger.kernel.org, target-devel@vger.kernel.org,
+ linux-hardening@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -135,47 +126,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Nov 20, 2020 at 11:51:42AM -0800, Jakub Kicinski wrote:
-> On Fri, 20 Nov 2020 11:30:40 -0800 Kees Cook wrote:
-> > On Fri, Nov 20, 2020 at 10:53:44AM -0800, Jakub Kicinski wrote:
-> > > On Fri, 20 Nov 2020 12:21:39 -0600 Gustavo A. R. Silva wrote:  
-> > > > This series aims to fix almost all remaining fall-through warnings in
-> > > > order to enable -Wimplicit-fallthrough for Clang.
-> > > > 
-> > > > In preparation to enable -Wimplicit-fallthrough for Clang, explicitly
-> > > > add multiple break/goto/return/fallthrough statements instead of just
-> > > > letting the code fall through to the next case.
-> > > > 
-> > > > Notice that in order to enable -Wimplicit-fallthrough for Clang, this
-> > > > change[1] is meant to be reverted at some point. So, this patch helps
-> > > > to move in that direction.
-> > > > 
-> > > > Something important to mention is that there is currently a discrepancy
-> > > > between GCC and Clang when dealing with switch fall-through to empty case
-> > > > statements or to cases that only contain a break/continue/return
-> > > > statement[2][3][4].  
-> > > 
-> > > Are we sure we want to make this change? Was it discussed before?
-> > > 
-> > > Are there any bugs Clangs puritanical definition of fallthrough helped
-> > > find?
-> > > 
-> > > IMVHO compiler warnings are supposed to warn about issues that could
-> > > be bugs. Falling through to default: break; can hardly be a bug?!  
+On Sun, 2020-11-22 at 11:12 -0800, James Bottomley wrote:
+> On Sun, 2020-11-22 at 10:25 -0800, Joe Perches wrote:
+> > On Sun, 2020-11-22 at 10:21 -0800, James Bottomley wrote:
+> > > Please tell me our reward for all this effort isn't a single
+> > > missing error print.
 > > 
-> > It's certainly a place where the intent is not always clear. I think
-> > this makes all the cases unambiguous, and doesn't impact the machine
-> > code, since the compiler will happily optimize away any behavioral
-> > redundancy.
+> > There were quite literally dozens of logical defects found
+> > by the fallthrough additions.  Very few were logging only.
 > 
-> If none of the 140 patches here fix a real bug, and there is no change
-> to machine code then it sounds to me like a W=2 kind of a warning.
+> So can you give us the best examples (or indeed all of them if someone
+> is keeping score)?  hopefully this isn't a US election situation ...
 
-FWIW, this series has found at least one bug so far:
-https://lore.kernel.org/lkml/CAFCwf11izHF=g1mGry1fE5kvFFFrxzhPSM6qKAO8gxSp=Kr_CQ@mail.gmail.com/
+Gustavo?  Are you running for congress now?
 
--- 
-Kees Cook
+https://lwn.net/Articles/794944/
+
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
