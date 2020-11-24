@@ -2,79 +2,58 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4A822C211C
-	for <lists.virtualization@lfdr.de>; Tue, 24 Nov 2020 10:26:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B659C2C2447
+	for <lists.virtualization@lfdr.de>; Tue, 24 Nov 2020 12:38:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 7F6D485A37;
-	Tue, 24 Nov 2020 09:26:30 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B5EEA85C4F;
+	Tue, 24 Nov 2020 11:38:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FuiaRQHIAsNN; Tue, 24 Nov 2020 09:26:29 +0000 (UTC)
+	with ESMTP id 7F4ow62RaTQH; Tue, 24 Nov 2020 11:38:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C872D85A00;
-	Tue, 24 Nov 2020 09:26:29 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6B01A85BB8;
+	Tue, 24 Nov 2020 11:38:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A6792C0052;
-	Tue, 24 Nov 2020 09:26:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 32868C0052;
+	Tue, 24 Nov 2020 11:38:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 72F3AC0052
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9AA16C0052
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Nov 2020 09:26:28 +0000 (UTC)
+ Tue, 24 Nov 2020 11:38:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 4E478204D4
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 8964685579
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Nov 2020 09:26:28 +0000 (UTC)
+ Tue, 24 Nov 2020 11:38:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xoBgzcuIrb4L
+ with ESMTP id p6_ukVDXV7xv
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Nov 2020 09:26:26 +0000 (UTC)
+ Tue, 24 Nov 2020 11:38:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by silver.osuosl.org (Postfix) with ESMTPS id 6042E203DB
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 129F085572
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Nov 2020 09:26:26 +0000 (UTC)
-Received: from localhost (searspoint.nvidia.com [216.228.112.21])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EA8D32076B;
- Tue, 24 Nov 2020 09:26:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1606209985;
- bh=eIrBvn6VIWhITdI4WjRtSSOqgfi0NiymQmtvmzBl3bg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=2eMylOdZtU6X8AOAcTgyLTdXy6WLXnN6oFZXs+DEEh9lpjzgjqVVx5O2kZb2bStkN
- /Q4/xCyLcpBQdykEOebV/RwfSRBioFTCqzqqYbkqO5SQMnsW7CPmMYoT3x0DymRzA9
- SCGa6Kc6oWnyChsjbERzLAa4UZhhhDNBNgGf2v60=
-Date: Tue, 24 Nov 2020 11:26:21 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: netconsole deadlock with virtnet
-Message-ID: <20201124092621.GH3159@unreal>
-References: <93b42091-66f2-bb92-6822-473167b2698d@redhat.com>
- <20201118091257.2ee6757a@gandalf.local.home>
- <20201123110855.GD3159@unreal>
- <20201123093128.701cf81b@gandalf.local.home>
- <20201123105252.1c295138@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <20201123140934.38748be3@gandalf.local.home>
- <20201123112130.759b9487@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <1133f1a4-6772-8aa3-41dd-edbc1ee76cee@redhat.com>
- <20201124080152.GG3159@unreal>
- <6f046c51-cdcc-77f9-4859-2508d08126f8@redhat.com>
+ Tue, 24 Nov 2020 11:38:29 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 00416AC2D;
+ Tue, 24 Nov 2020 11:38:26 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@linux.ie,
+	daniel@ffwll.ch
+Subject: [PATCH 00/15] drm: Move struct drm_device.pdev to legacy
+Date: Tue, 24 Nov 2020 12:38:09 +0100
+Message-Id: <20201124113824.19994-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6f046c51-cdcc-77f9-4859-2508d08126f8@redhat.com>
-Cc: Petr Mladek <pmladek@suse.com>, John Ogness <john.ogness@linutronix.de>,
- "Michael S. Tsirkin" <mst@redhat.com>, netdev <netdev@vger.kernel.org>,
- Amit Shah <amit@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
- virtualization@lists.linux-foundation.org,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Ran Rozenstein <ranro@nvidia.com>, Itay Aveksis <itayav@nvidia.com>,
- Jakub Kicinski <kuba@kernel.org>
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ amd-gfx@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ spice-devel@lists.freedesktop.org, intel-gvt-dev@lists.freedesktop.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,69 +65,187 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVHVlLCBOb3YgMjQsIDIwMjAgYXQgMDQ6NTc6MjNQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPgo+IE9uIDIwMjAvMTEvMjQg5LiL5Y2INDowMSwgTGVvbiBSb21hbm92c2t5IHdyb3RlOgo+
-ID4gT24gVHVlLCBOb3YgMjQsIDIwMjAgYXQgMTE6MjI6MDNBTSArMDgwMCwgSmFzb24gV2FuZyB3
-cm90ZToKPiA+ID4gT24gMjAyMC8xMS8yNCDkuIrljYgzOjIxLCBKYWt1YiBLaWNpbnNraSB3cm90
-ZToKPiA+ID4gPiBPbiBNb24sIDIzIE5vdiAyMDIwIDE0OjA5OjM0IC0wNTAwIFN0ZXZlbiBSb3N0
-ZWR0IHdyb3RlOgo+ID4gPiA+ID4gT24gTW9uLCAyMyBOb3YgMjAyMCAxMDo1Mjo1MiAtMDgwMAo+
-ID4gPiA+ID4gSmFrdWIgS2ljaW5za2kgPGt1YmFAa2VybmVsLm9yZz4gd3JvdGU6Cj4gPiA+ID4g
-Pgo+ID4gPiA+ID4gPiBPbiBNb24sIDIzIE5vdiAyMDIwIDA5OjMxOjI4IC0wNTAwIFN0ZXZlbiBS
-b3N0ZWR0IHdyb3RlOgo+ID4gPiA+ID4gPiA+IE9uIE1vbiwgMjMgTm92IDIwMjAgMTM6MDg6NTUg
-KzAyMDAKPiA+ID4gPiA+ID4gPiBMZW9uIFJvbWFub3Zza3kgPGxlb25Aa2VybmVsLm9yZz4gd3Jv
-dGU6Cj4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiA+ICAgIFsgICAxMC4wMjgwMjRdIENoYWlu
-IGV4aXN0cyBvZjoKPiA+ID4gPiA+ID4gPiA+ICAgIFsgICAxMC4wMjgwMjVdICAgY29uc29sZV9v
-d25lciAtLT4gdGFyZ2V0X2xpc3RfbG9jayAtLT4gX3htaXRfRVRIRVIjMgo+ID4gPiA+ID4gPiA+
-IE5vdGUsIHRoZSBwcm9ibGVtIGlzIHRoYXQgd2UgaGF2ZSBhIGxvY2F0aW9uIHRoYXQgZ3JhYnMg
-dGhlIHhtaXRfbG9jayB3aGlsZQo+ID4gPiA+ID4gPiA+IGhvbGRpbmcgdGFyZ2V0X2xpc3RfbG9j
-ayAoYW5kIHBvc3NpYmx5IGNvbnNvbGVfb3duZXIpLgo+ID4gPiA+ID4gPiBXZWxsLCBpdCB0cnlf
-bG9ja3MgdGhlIHhtaXRfbG9jay4gRG9lcyBsb2NrZGVwIHVuZGVyc3RhbmQgdHJ5LWxvY2tzPwo+
-ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiAobm90IHRoYXQgSSBjb25kb25lIHRoZSBzaGVuYW5pZ2Fu
-cyB0aGF0IGFyZSBnb2luZyBvbiBoZXJlKQo+ID4gPiA+ID4gRG9lcyBpdD8KPiA+ID4gPiA+Cj4g
-PiA+ID4gPiAJdmlydG5ldF9wb2xsX3R4KCkgewo+ID4gPiA+ID4gCQlfX25ldGlmX3R4X2xvY2so
-KSB7Cj4gPiA+ID4gPiAJCQlzcGluX2xvY2soJnR4cS0+X3htaXRfbG9jayk7Cj4gPiA+ID4gVW1w
-Zi4gUmlnaHQuIEkgd2FzIGxvb2tpbmcgYXQgdmlydG5ldF9wb2xsX2NsZWFudHgoKQo+ID4gPiA+
-Cj4gPiA+ID4gPiBUaGF0IGxvb2tzIGxpa2Ugd2UgY2FuIGhhdmU6Cj4gPiA+ID4gPgo+ID4gPiA+
-ID4KPiA+ID4gPiA+IAlDUFUwCQlDUFUxCj4gPiA+ID4gPiAJLS0tLQkJLS0tLQo+ID4gPiA+ID4g
-ICAgICBsb2NrKHhtaXRfbG9jaykKPiA+ID4gPiA+Cj4gPiA+ID4gPiAJCSAgICBsb2NrKGNvbnNv
-bGUpCj4gPiA+ID4gPiAJCSAgICBsb2NrKHRhcmdldF9saXN0X2xvY2spCj4gPiA+ID4gPiAJCSAg
-ICBfX25ldGlmX3R4X2xvY2soKQo+ID4gPiA+ID4gCQkgICAgICAgIGxvY2soeG1pdF9sb2NrKTsK
-PiA+ID4gPiA+Cj4gPiA+ID4gPiAJCQlbQkxPQ0tFRF0KPiA+ID4gPiA+Cj4gPiA+ID4gPiAgICAg
-IDxpbnRlcnJ1cHQ+Cj4gPiA+ID4gPiAgICAgIGxvY2soY29uc29sZSkKPiA+ID4gPiA+Cj4gPiA+
-ID4gPiAgICAgIFtCTE9DS0VEXQo+ID4gPiA+ID4KPiA+ID4gPiA+Cj4gPiA+ID4gPgo+ID4gPiA+
-ID4gICAgREVBRExPQ0suCj4gPiA+ID4gPgo+ID4gPiA+ID4KPiA+ID4gPiA+IFNvIHdoZXJlIGlz
-IHRoZSB0cnlsb2NrIGhlcmU/Cj4gPiA+ID4gPgo+ID4gPiA+ID4gUGVyaGFwcyB5b3UgbmVlZCB0
-aGUgdHJ5bG9jayBpbiB2aXJ0bmV0X3BvbGxfdHgoKT8KPiA+ID4gPiBUaGF0IGNvdWxkIHdvcmsu
-IEJlc3QgaWYgd2UgdXNlZCBub3JtYWwgbG9jayBpZiAhIWJ1ZGdldCwgYW5kIHRyeWxvY2sKPiA+
-ID4gPiB3aGVuIGJ1ZGdldCBpcyAwLiBCdXQgbWF5YmUgdGhhdCdzIHRvbyBoYWlyeS4KPiA+ID4K
-PiA+ID4gSWYgd2UgdXNlIHRyeWxvY2ssIHdlIHByb2JhYmx5IGxvc2Uob3IgZGVsYXkpIHR4IG5v
-dGlmaWNhdGlvbiB0aGF0IG1heSBoYXZlCj4gPiA+IHNpZGUgZWZmZWN0cyB0byB0aGUgc3RhY2su
-Cj4gPiA+Cj4gPiA+Cj4gPiA+ID4gSSdtIGFzc3VtaW5nIGFsbCB0aGlzIHRyaWNraW5lc3MgY29t
-ZXMgZnJvbSB2aXJ0cXVldWVfZ2V0X2J1ZigpIG5lZWRpbmcKPiA+ID4gPiBsb2NraW5nIHZzIHRo
-ZSBUWCBwYXRoPyBJdCdzIHByZXR0eSB1bnVzdWFsIGZvciB0aGUgY29tcGxldGlvbiBwYXRoIHRv
-Cj4gPiA+ID4gbmVlZCBsb2NraW5nIHZzIHhtaXQgcGF0aC4KPiA+ID4KPiA+ID4gVHdvIHJlYXNv
-bnMgZm9yIGRvaW5nIHRoaXM6Cj4gPiA+Cj4gPiA+IDEpIEZvciBzb21lIGhpc3RvcmljYWwgcmVh
-c29uLCB3ZSB0cnkgdG8gZnJlZSB0cmFuc21pdHRlZCB0eCBwYWNrZXRzIGluIHhtaXQKPiA+ID4g
-KHNlZSBmcmVlX29sZF94bWl0X3NrYnMoKSBpbiBzdGFydF94bWl0KCkpLCB3ZSBjYW4gcHJvYmFi
-bHkgcmVtb3ZlIHRoaXMgaWYKPiA+ID4gd2UgcmVtb3ZlIHRoZSBub24gdHggaW50ZXJydXB0IG1v
-ZGUuCj4gPiA+IDIpIHZpcnRpbyBjb3JlIHJlcXVpcmVzIHZpcnRxdWV1ZV9nZXRfYnVmKCkgdG8g
-YmUgc3luY2hyb25pemVkIHdpdGgKPiA+ID4gdmlydHF1ZXVlX2FkZCgpLCB3ZSBwcm9iYWJseSBj
-YW4gc29sdmUgdGhpcyBidXQgaXQgcmVxdWlyZXMgc29tZSBub24gdHJpdmlhbAo+ID4gPiByZWZh
-Y3RvcmluZyBpbiB0aGUgdmlydGlvIGNvcmUKPiA+IFNvIGhvdyB3aWxsIHdlIHNvbHZlIG91ciBs
-b2NrZGVwIGlzc3Vlcz8KPiA+Cj4gPiBUaGFua3MKPgo+Cj4gSXQncyBub3QgY2xlYXIgdG8gbWUg
-dGhhdCB3aGV0aGVyIGl0J3MgYSB2aXJ0aW8tbmV0IHNwZWNpZmljIGlzc3VlLiBFLmcgdGhlCj4g
-YWJvdmUgZGVhZGxvY2sgbG9va3MgbGlrZSBhIGdlbmVyaWMgaXNzdWUgc28gd29ya2Fyb3VuZCBp
-dCB2aWEgdmlydGlvLW5ldAo+IG1heSBub3QgaGVscCBmb3Igb3RoZXIgZHJpdmVycy4KCkl0IGlz
-IGhhcmQgdG8gc2F5LCBubyBvbmUgZWxzZSBjb21wbGFpbmVkIGV4Y2VwdCBtZSB3aG8gaXMgdXNp
-bmcgdmlydGlvIDopLgoKVGhhbmtzCgo+Cj4gVGhhbmtzCj4KPgo+ID4KPiA+ID4gQnR3LCBoYXZl
-IGEgcXVpY2sgc2VhcmNoLCB0aGVyZSBhcmUgc2V2ZXJhbCBvdGhlciBkcml2ZXJzIHRoYXQgdXNl
-cyB0eCBsb2NrCj4gPiA+IGluIHRoZSB0eCBOQVBJLgo+ID4gPgo+ID4gPiBUaGFua3MKPiA+ID4K
-PgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFs
-aXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlv
-bi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8v
-dmlydHVhbGl6YXRpb24=
+The pdev field in struct drm_device points to a PCI device structure and
+goes back to UMS-only days when all DRM drivers where for PCI devices.
+Meanwhile we also support USB, SPI and platform devices. Each of those
+uses the generic device stored in struct drm_device.dev.
+
+To reduce duplications and remove the special case of PCI, this patchset
+converts all modesetting drivers from pdev to dev and makes pdev a field
+for legacy UMS drivers.
+
+For PCI devices, the pointer in struct drm_device.dev can be upcasted to
+struct pci_device; or tested for PCI with dev_is_pci(). In several places
+the code can use the dev field directly.
+
+After converting all drivers and the DRM core, the pdev fields becomes
+only relevant for legacy drivers. In a later patchset, we may want to
+convert these as well and remove pdev entirely.
+
+The patchset touches many files, but the individual changes are mostly
+trivial. I suggest to merge each driver's patch through the respective
+tree and later the rest through drm-misc-next.
+
+Thomas Zimmermann (15):
+  drm/amdgpu: Remove references to struct drm_device.pdev
+  drm/ast: Remove references to struct drm_device.pdev
+  drm/bochs: Remove references to struct drm_device.pdev
+  drm/cirrus: Remove references to struct drm_device.pdev
+  drm/gma500: Remove references to struct drm_device.pdev
+  drm/hibmc: Remove references to struct drm_device.pdev
+  drm/i915: Remove references to struct drm_device.pdev
+  drm/mgag200: Remove references to struct drm_device.pdev
+  drm/nouveau: Remove references to struct drm_device.pdev
+  drm/qxl: Remove references to struct drm_device.pdev
+  drm/radeon: Remove references to struct drm_device.pdev
+  drm/vboxvideo: Remove references to struct drm_device.pdev
+  drm/virtgpu: Remove references to struct drm_device.pdev
+  drm/vmwgfx: Remove references to struct drm_device.pdev
+  drm: Upcast struct drm_device.dev to struct pci_device; replace pdev
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    | 23 +++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_fb.c        |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       | 10 +--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_i2c.c       |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c       | 10 +--
+ drivers/gpu/drm/ast/ast_drv.c                 |  4 +-
+ drivers/gpu/drm/ast/ast_main.c                | 25 +++---
+ drivers/gpu/drm/ast/ast_mm.c                  | 17 ++--
+ drivers/gpu/drm/ast/ast_mode.c                |  5 +-
+ drivers/gpu/drm/ast/ast_post.c                |  8 +-
+ drivers/gpu/drm/bochs/bochs_drv.c             |  1 -
+ drivers/gpu/drm/bochs/bochs_hw.c              |  4 +-
+ drivers/gpu/drm/drm_agpsupport.c              |  9 +-
+ drivers/gpu/drm/drm_bufs.c                    |  4 +-
+ drivers/gpu/drm/drm_edid.c                    |  7 +-
+ drivers/gpu/drm/drm_irq.c                     | 12 +--
+ drivers/gpu/drm/drm_pci.c                     | 26 +++---
+ drivers/gpu/drm/drm_vm.c                      |  2 +-
+ drivers/gpu/drm/gma500/cdv_device.c           | 30 ++++---
+ drivers/gpu/drm/gma500/cdv_intel_crt.c        |  3 +-
+ drivers/gpu/drm/gma500/cdv_intel_lvds.c       |  4 +-
+ drivers/gpu/drm/gma500/framebuffer.c          |  9 +-
+ drivers/gpu/drm/gma500/gma_device.c           |  3 +-
+ drivers/gpu/drm/gma500/gma_display.c          |  4 +-
+ drivers/gpu/drm/gma500/gtt.c                  | 20 +++--
+ drivers/gpu/drm/gma500/intel_bios.c           |  6 +-
+ drivers/gpu/drm/gma500/intel_gmbus.c          |  4 +-
+ drivers/gpu/drm/gma500/intel_i2c.c            |  2 +-
+ drivers/gpu/drm/gma500/mdfld_device.c         |  4 +-
+ drivers/gpu/drm/gma500/mdfld_dsi_dpi.c        |  8 +-
+ drivers/gpu/drm/gma500/mid_bios.c             |  9 +-
+ drivers/gpu/drm/gma500/oaktrail_device.c      |  5 +-
+ drivers/gpu/drm/gma500/oaktrail_lvds.c        |  2 +-
+ drivers/gpu/drm/gma500/oaktrail_lvds_i2c.c    |  2 +-
+ drivers/gpu/drm/gma500/opregion.c             |  3 +-
+ drivers/gpu/drm/gma500/power.c                | 13 +--
+ drivers/gpu/drm/gma500/psb_drv.c              | 16 ++--
+ drivers/gpu/drm/gma500/psb_drv.h              |  8 +-
+ drivers/gpu/drm/gma500/psb_intel_lvds.c       |  6 +-
+ drivers/gpu/drm/gma500/psb_intel_sdvo.c       |  2 +-
+ drivers/gpu/drm/gma500/tc35876x-dsi-lvds.c    | 36 ++++----
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   | 10 +--
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_i2c.c   |  2 +-
+ drivers/gpu/drm/hisilicon/hibmc/hibmc_ttm.c   |  4 +-
+ drivers/gpu/drm/i915/display/intel_bios.c     |  2 +-
+ drivers/gpu/drm/i915/display/intel_cdclk.c    | 14 +--
+ drivers/gpu/drm/i915/display/intel_csr.c      |  2 +-
+ drivers/gpu/drm/i915/display/intel_dsi_vbt.c  |  2 +-
+ drivers/gpu/drm/i915/display/intel_fbdev.c    |  2 +-
+ drivers/gpu/drm/i915/display/intel_gmbus.c    |  2 +-
+ .../gpu/drm/i915/display/intel_lpe_audio.c    |  5 +-
+ drivers/gpu/drm/i915/display/intel_opregion.c |  6 +-
+ drivers/gpu/drm/i915/display/intel_overlay.c  |  2 +-
+ drivers/gpu/drm/i915/display/intel_panel.c    |  4 +-
+ drivers/gpu/drm/i915/display/intel_quirks.c   |  2 +-
+ drivers/gpu/drm/i915/display/intel_sdvo.c     |  2 +-
+ drivers/gpu/drm/i915/display/intel_vga.c      |  8 +-
+ drivers/gpu/drm/i915/gem/i915_gem_phys.c      |  6 +-
+ drivers/gpu/drm/i915/gem/i915_gem_shmem.c     |  2 +-
+ drivers/gpu/drm/i915/gt/intel_engine_cs.c     |  2 +-
+ drivers/gpu/drm/i915/gt/intel_ggtt.c          | 10 +--
+ drivers/gpu/drm/i915/gt/intel_ppgtt.c         |  2 +-
+ drivers/gpu/drm/i915/gt/intel_rc6.c           |  4 +-
+ drivers/gpu/drm/i915/gt/intel_reset.c         |  6 +-
+ drivers/gpu/drm/i915/gvt/cfg_space.c          |  5 +-
+ drivers/gpu/drm/i915/gvt/firmware.c           | 10 +--
+ drivers/gpu/drm/i915/gvt/gtt.c                | 12 +--
+ drivers/gpu/drm/i915/gvt/gvt.c                |  6 +-
+ drivers/gpu/drm/i915/gvt/kvmgt.c              |  4 +-
+ drivers/gpu/drm/i915/i915_debugfs.c           |  2 +-
+ drivers/gpu/drm/i915/i915_drv.c               | 20 ++---
+ drivers/gpu/drm/i915/i915_drv.h               |  2 +-
+ drivers/gpu/drm/i915/i915_gem_gtt.c           |  4 +-
+ drivers/gpu/drm/i915/i915_getparam.c          |  5 +-
+ drivers/gpu/drm/i915/i915_gpu_error.c         |  2 +-
+ drivers/gpu/drm/i915/i915_irq.c               |  6 +-
+ drivers/gpu/drm/i915/i915_pmu.c               |  5 +-
+ drivers/gpu/drm/i915/i915_suspend.c           |  4 +-
+ drivers/gpu/drm/i915/i915_switcheroo.c        |  4 +-
+ drivers/gpu/drm/i915/i915_vgpu.c              |  2 +-
+ drivers/gpu/drm/i915/intel_device_info.c      |  2 +-
+ drivers/gpu/drm/i915/intel_region_lmem.c      |  8 +-
+ drivers/gpu/drm/i915/intel_runtime_pm.c       |  2 +-
+ drivers/gpu/drm/i915/intel_uncore.c           |  4 +-
+ .../gpu/drm/i915/selftests/mock_gem_device.c  |  1 -
+ drivers/gpu/drm/i915/selftests/mock_gtt.c     |  2 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.c         | 20 +++--
+ drivers/gpu/drm/mgag200/mgag200_i2c.c         |  2 +-
+ drivers/gpu/drm/mgag200/mgag200_mm.c          | 10 ++-
+ drivers/gpu/drm/nouveau/dispnv04/arb.c        | 12 +--
+ drivers/gpu/drm/nouveau/dispnv04/disp.h       | 14 +--
+ drivers/gpu/drm/nouveau/dispnv04/hw.c         | 10 ++-
+ drivers/gpu/drm/nouveau/nouveau_abi16.c       |  7 +-
+ drivers/gpu/drm/nouveau/nouveau_acpi.c        |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_bios.c        | 11 ++-
+ drivers/gpu/drm/nouveau/nouveau_connector.c   | 10 ++-
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |  5 +-
+ drivers/gpu/drm/nouveau/nouveau_fbcon.c       |  6 +-
+ drivers/gpu/drm/nouveau/nouveau_vga.c         | 20 +++--
+ drivers/gpu/drm/qxl/qxl_drv.c                 |  2 +-
+ drivers/gpu/drm/qxl/qxl_ioctl.c               |  3 +-
+ drivers/gpu/drm/qxl/qxl_irq.c                 |  3 +-
+ drivers/gpu/drm/qxl/qxl_kms.c                 |  1 -
+ drivers/gpu/drm/radeon/atombios_encoders.c    |  6 +-
+ drivers/gpu/drm/radeon/r100.c                 | 27 +++---
+ drivers/gpu/drm/radeon/radeon.h               | 32 +++----
+ drivers/gpu/drm/radeon/radeon_atombios.c      | 89 ++++++++++---------
+ drivers/gpu/drm/radeon/radeon_bios.c          |  6 +-
+ drivers/gpu/drm/radeon/radeon_combios.c       | 55 ++++++------
+ drivers/gpu/drm/radeon/radeon_cs.c            |  3 +-
+ drivers/gpu/drm/radeon/radeon_device.c        | 17 ++--
+ drivers/gpu/drm/radeon/radeon_display.c       |  2 +-
+ drivers/gpu/drm/radeon/radeon_drv.c           |  3 +-
+ drivers/gpu/drm/radeon/radeon_fb.c            |  2 +-
+ drivers/gpu/drm/radeon/radeon_gem.c           |  6 +-
+ drivers/gpu/drm/radeon/radeon_i2c.c           |  2 +-
+ drivers/gpu/drm/radeon/radeon_irq_kms.c       |  2 +-
+ drivers/gpu/drm/radeon/radeon_kms.c           | 20 ++---
+ .../gpu/drm/radeon/radeon_legacy_encoders.c   |  6 +-
+ drivers/gpu/drm/radeon/rs780_dpm.c            |  7 +-
+ drivers/gpu/drm/tiny/cirrus.c                 |  1 -
+ drivers/gpu/drm/vboxvideo/vbox_drv.c          | 11 +--
+ drivers/gpu/drm/vboxvideo/vbox_irq.c          |  4 +-
+ drivers/gpu/drm/vboxvideo/vbox_main.c         |  8 +-
+ drivers/gpu/drm/vboxvideo/vbox_ttm.c          |  7 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.c          |  1 -
+ drivers/gpu/drm/vmwgfx/vmwgfx_cmdbuf.c        |  8 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           | 27 +++---
+ drivers/gpu/drm/vmwgfx/vmwgfx_fb.c            |  2 +-
+ include/drm/drm_device.h                      | 12 ++-
+ 132 files changed, 584 insertions(+), 507 deletions(-)
+
+--
+2.29.2
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
