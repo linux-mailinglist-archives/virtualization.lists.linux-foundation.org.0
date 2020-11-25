@@ -1,107 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E5FD2C3C44
-	for <lists.virtualization@lfdr.de>; Wed, 25 Nov 2020 10:39:47 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CE592C3D5A
+	for <lists.virtualization@lfdr.de>; Wed, 25 Nov 2020 11:12:03 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 2C80F27484;
-	Wed, 25 Nov 2020 09:39:45 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C8E2D86E15;
+	Wed, 25 Nov 2020 10:12:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0Cz5Ulo77EG8; Wed, 25 Nov 2020 09:39:36 +0000 (UTC)
+	with ESMTP id jhtePrc5V9px; Wed, 25 Nov 2020 10:11:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 410BD27419;
-	Wed, 25 Nov 2020 09:39:36 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D902686E29;
+	Wed, 25 Nov 2020 10:11:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 28810C0052;
-	Wed, 25 Nov 2020 09:39:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C14D3C0891;
+	Wed, 25 Nov 2020 10:11:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AEC8EC0052
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4FF9EC0052
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:39:34 +0000 (UTC)
+ Wed, 25 Nov 2020 10:11:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 95B9987434
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 3F8E686B89
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:39:34 +0000 (UTC)
+ Wed, 25 Nov 2020 10:11:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id sD1aF2q2fgE1
+ with ESMTP id KH521f9Cpown
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:39:33 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id EE8C587433
+ Wed, 25 Nov 2020 10:11:52 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx01.bbu.dsd.mx.bitdefender.com
+ (mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id AEEE386B8D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:39:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1606297171;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=vLAe9WsMJa4w6mGB+nZbn05U5f9ZhXoUHhlb18I67WM=;
- b=N8LfA6fJUsnckPhWmlbKQQx1u9wjEdivRybRwkNQJtLInXUpN8olFOMDaND8bBVoh8TzCW
- Zis1CNex0n5wtqnUqniopC1Epo5zY1u9xwuR9zucRYLwhmQZ3Zpv0UcXO0EfI5ChHgWWOV
- TacjUh43LtK4X8T+ucmfPOLpzwivsWk=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-13-HhYJSPLOPsSTXhfzDEf0Rw-1; Wed, 25 Nov 2020 04:39:28 -0500
-X-MC-Unique: HhYJSPLOPsSTXhfzDEf0Rw-1
-Received: by mail-wr1-f69.google.com with SMTP id l5so561426wrn.18
- for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 01:39:28 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=vLAe9WsMJa4w6mGB+nZbn05U5f9ZhXoUHhlb18I67WM=;
- b=Ndky3uA59EgnHPYjz4KTeDBKrJnfJeBYbH5LPwcR6EYgRgirWGI51mp/2DlYIdGYdc
- xQrZw1CwgeixkAoS4qQUupFfeRkfqM1frJAzktwEYX1mJn1wUxuFzG6QyjJ57AZvFqCR
- vLvuKiNCicME4XFPAcI+WRUVgqXMn92k1IT46lyFL3tnOT05P0UiO3Mwu9TQX8q0zj77
- 0hG7ZB2oKq+YHQMN2ju9WYk+ieKbPkXg0eVGmTyhNZemFuXrTddk/YjpoPQfv8sY6EU2
- xjBx/HA3jmSUp280IydjdVTvtk+LWwgjxl9iKiONdL6LT4LEOCMGcAlNUBLpI0gMJ4sc
- SjXQ==
-X-Gm-Message-State: AOAM533LX29IGghoug6LfajuRS0cyukkUMIUjEJ3JkMrJIrXx5cAUypf
- rEVPzjbl5JXCPJIJRFPlxxS4gGdqH8l5+qJfCVy0nDOws2HKboVXkvVnqzKemLzQDu6a04xCaM+
- vM8PAswCy6om6AASzGfIGf0ckreBreN/FJgowWH60Pg==
-X-Received: by 2002:a05:6000:10d2:: with SMTP id
- b18mr3091884wrx.344.1606297167323; 
- Wed, 25 Nov 2020 01:39:27 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzvXC32/ddlvJ4NJFERmkr2++TuEfCzuPoAuQSQtQVzeuZ3OA+94pX0QNprI5nIOlJQnFOknw==
-X-Received: by 2002:a05:6000:10d2:: with SMTP id
- b18mr3091860wrx.344.1606297167062; 
- Wed, 25 Nov 2020 01:39:27 -0800 (PST)
-Received: from redhat.com (bzq-79-176-44-197.red.bezeqint.net. [79.176.44.197])
- by smtp.gmail.com with ESMTPSA id c17sm4088789wro.19.2020.11.25.01.39.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2020 01:39:26 -0800 (PST)
-Date: Wed, 25 Nov 2020 04:39:23 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Martin Wilck <mwilck@suse.com>
-Subject: Re: [PATCH v3] virtio-rng: return available data with O_NONBLOCK
-Message-ID: <20201125043726-mutt-send-email-mst@kernel.org>
-References: <20200811142821.12323-1-mwilck@suse.com>
- <4ae4f348-c186-f7e4-f7e3-b1f1e4a4b408@redhat.com>
- <20200826082613-mutt-send-email-mst@kernel.org>
- <519e0296a7d61d5e9e8d258a855eb42a57c641c5.camel@suse.com>
- <a5d4bcd3-e468-e818-3bd2-3a1b0fa172d8@redhat.com>
- <20200908101413-mutt-send-email-mst@kernel.org>
- <0a5fcbc9bb6eef521c627035687de4654a1dd740.camel@suse.com>
+ Wed, 25 Nov 2020 10:11:51 +0000 (UTC)
+Received: from smtp.bitdefender.com (smtp01.buh.bitdefender.com [10.17.80.75])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
+ 4645A305D461; Wed, 25 Nov 2020 11:35:49 +0200 (EET)
+Received: from localhost.localdomain (unknown [91.199.104.27])
+ by smtp.bitdefender.com (Postfix) with ESMTPSA id 278B63072784;
+ Wed, 25 Nov 2020 11:35:49 +0200 (EET)
+From: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>
+To: kvm@vger.kernel.org
+Subject: [PATCH v10 40/81] KVM: introspection: add KVMI_VM_EVENT_UNHOOK
+Date: Wed, 25 Nov 2020 11:35:19 +0200
+Message-Id: <20201125093600.2766-41-alazar@bitdefender.com>
+In-Reply-To: <20201125093600.2766-1-alazar@bitdefender.com>
+References: <20201125093600.2766-1-alazar@bitdefender.com>
 MIME-Version: 1.0
-In-Reply-To: <0a5fcbc9bb6eef521c627035687de4654a1dd740.camel@suse.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- qemu-devel@nongnu.org, virtualization@lists.linux-foundation.org,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
+Cc: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,308 +66,194 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Sep 08, 2020 at 05:33:40PM +0200, Martin Wilck wrote:
-> On Tue, 2020-09-08 at 10:14 -0400, Michael S. Tsirkin wrote:
-> > On Mon, Aug 31, 2020 at 02:37:26PM +0200, Laurent Vivier wrote:
-> > > On 28/08/2020 23:34, Martin Wilck wrote:
-> > > > On Wed, 2020-08-26 at 08:26 -0400, Michael S. Tsirkin wrote:
-> > > > > On Tue, Aug 11, 2020 at 04:42:32PM +0200, Laurent Vivier wrote:
-> > > > > > On 11/08/2020 16:28, mwilck@suse.com wrote:
-> > > > > > > From: Martin Wilck <mwilck@suse.com>
-> > > > > > > 
-> > > > > > > If a program opens /dev/hwrng with O_NONBLOCK and uses
-> > > > > > > poll() and
-> > > > > > > non-blocking read() to retrieve random data, it ends up in
-> > > > > > > a
-> > > > > > > tight
-> > > > > > > loop with poll() always returning POLLIN and read()
-> > > > > > > returning
-> > > > > > > EAGAIN.
-> > > > > > > This repeats forever until some process makes a blocking
-> > > > > > > read()
-> > > > > > > call.
-> > > > > > > The reason is that virtio_read() always returns 0 in non-
-> > > > > > > blocking 
-> > > > > > > mode,
-> > > > > > > even if data is available. Worse, it fetches random data
-> > > > > > > from the
-> > > > > > > hypervisor after every non-blocking call, without ever
-> > > > > > > using this
-> > > > > > > data.
-> > > > > > > 
-> > > > > > > The following test program illustrates the behavior and can
-> > > > > > > be
-> > > > > > > used
-> > > > > > > for testing and experiments. The problem will only be seen
-> > > > > > > if all
-> > > > > > > tasks use non-blocking access; otherwise the blocking reads
-> > > > > > > will
-> > > > > > > "recharge" the random pool and cause other, non-blocking
-> > > > > > > reads to
-> > > > > > > succeed at least sometimes.
-> > > > > > > 
-> > > > > > > /* Whether to use non-blocking mode in a task, problem
-> > > > > > > occurs if
-> > > > > > > CONDITION is 1 */
-> > > > > > > //#define CONDITION (getpid() % 2 != 0)
-> > > > > > > 
-> > > > > > > static volatile sig_atomic_t stop;
-> > > > > > > static void handler(int sig __attribute__((unused))) { stop
-> > > > > > > = 1;
-> > > > > > > }
-> > > > > > > 
-> > > > > > > static void loop(int fd, int sec)
-> > > > > > > {
-> > > > > > > 	struct pollfd pfd = { .fd = fd, .events  = POLLIN, };
-> > > > > > > 	unsigned long errors = 0, eagains = 0, bytes = 0, succ
-> > > > > > > = 0;
-> > > > > > > 	int size, rc, rd;
-> > > > > > > 
-> > > > > > > 	srandom(getpid());
-> > > > > > > 	if (CONDITION && fcntl(fd, F_SETFL, fcntl(fd, F_GETFL)
-> > > > > > > |
-> > > > > > > O_NONBLOCK) == -1)
-> > > > > > > 		perror("fcntl");
-> > > > > > > 	size = MINBUFSIZ + random() % (MAXBUFSIZ - MINBUFSIZ +
-> > > > > > > 1);
-> > > > > > > 
-> > > > > > > 	for(;;) {
-> > > > > > > 		char buf[size];
-> > > > > > > 
-> > > > > > > 		if (stop)
-> > > > > > > 			break;
-> > > > > > > 		rc = poll(&pfd, 1, sec);
-> > > > > > > 		if (rc > 0) {
-> > > > > > > 			rd = read(fd, buf, sizeof(buf));
-> > > > > > > 			if (rd == -1 && errno == EAGAIN)
-> > > > > > > 				eagains++;
-> > > > > > > 			else if (rd == -1)
-> > > > > > > 				errors++;
-> > > > > > > 			else {
-> > > > > > > 				succ++;
-> > > > > > > 				bytes += rd;
-> > > > > > > 				write(1, buf, sizeof(buf));
-> > > > > > > 			}
-> > > > > > > 		} else if (rc == -1) {
-> > > > > > > 			if (errno != EINTR)
-> > > > > > > 				perror("poll");
-> > > > > > > 			break;
-> > > > > > > 		} else
-> > > > > > > 			fprintf(stderr, "poll: timeout\n");
-> > > > > > > 	}
-> > > > > > > 	fprintf(stderr,
-> > > > > > > 		"pid %d %sblocking, bufsize %d, %d seconds, %lu
-> > > > > > > bytes
-> > > > > > > read, %lu success, %lu eagain, %lu errors\n",
-> > > > > > > 		getpid(), CONDITION ? "non-" : "", size, sec,
-> > > > > > > bytes,
-> > > > > > > succ, eagains, errors);
-> > > > > > > }
-> > > > > > > 
-> > > > > > > int main(void)
-> > > > > > > {
-> > > > > > > 	int fd;
-> > > > > > > 
-> > > > > > > 	fork(); fork();
-> > > > > > > 	fd = open("/dev/hwrng", O_RDONLY);
-> > > > > > > 	if (fd == -1) {
-> > > > > > > 		perror("open");
-> > > > > > > 		return 1;
-> > > > > > > 	};
-> > > > > > > 	signal(SIGALRM, handler);
-> > > > > > > 	alarm(SECONDS);
-> > > > > > > 	loop(fd, SECONDS);
-> > > > > > > 	close(fd);
-> > > > > > > 	wait(NULL);
-> > > > > > > 	return 0;
-> > > > > > > }
-> > > > > > > 
-> > > > > > > void loop(int fd)
-> > > > > > > {
-> > > > > > >         struct pollfd pfd0 = { .fd = fd, .events  = POLLIN,
-> > > > > > > };
-> > > > > > >         int rc;
-> > > > > > >         unsigned int n;
-> > > > > > > 
-> > > > > > >         for (n = LOOPS; n > 0; n--) {
-> > > > > > >                 struct pollfd pfd = pfd0;
-> > > > > > >                 char buf[SIZE];
-> > > > > > > 
-> > > > > > >                 rc = poll(&pfd, 1, 1);
-> > > > > > >                 if (rc > 0) {
-> > > > > > >                         int rd = read(fd, buf,
-> > > > > > > sizeof(buf));
-> > > > > > > 
-> > > > > > >                         if (rd == -1)
-> > > > > > >                                 perror("read");
-> > > > > > >                         else
-> > > > > > >                                 printf("read %d bytes\n",
-> > > > > > > rd);
-> > > > > > >                 } else if (rc == -1)
-> > > > > > >                         perror("poll");
-> > > > > > >                 else
-> > > > > > >                         fprintf(stderr, "timeout\n");
-> > > > > > > 
-> > > > > > >         }
-> > > > > > > }
-> > > > > > > 
-> > > > > > > int main(void)
-> > > > > > > {
-> > > > > > >         int fd;
-> > > > > > > 
-> > > > > > >         fd = open("/dev/hwrng", O_RDONLY|O_NONBLOCK);
-> > > > > > >         if (fd == -1) {
-> > > > > > >                 perror("open");
-> > > > > > >                 return 1;
-> > > > > > >         };
-> > > > > > >         loop(fd);
-> > > > > > >         close(fd);
-> > > > > > >         return 0;
-> > > > > > > }
-> > > > > > > 
-> > > > > > > This can be observed in the real word e.g. with nested
-> > > > > > > qemu/KVM
-> > > > > > > virtual
-> > > > > > > machines, if both the "outer" and "inner" VMs have a
-> > > > > > > virtio-rng
-> > > > > > > device.
-> > > > > > > If the "inner" VM requests random data, qemu running in the
-> > > > > > > "outer" VM
-> > > > > > > uses this device in a non-blocking manner like the test
-> > > > > > > program
-> > > > > > > above.
-> > > > > > > 
-> > > > > > > Fix it by returning available data if a previous hypervisor
-> > > > > > > call
-> > > > > > > has
-> > > > > > > completed. I tested this patch with the program above, and
-> > > > > > > with
-> > > > > > > rng-tools.
-> > > > > > > 
-> > > > > > > v2 -> v3: Simplified the implementation as suggested by
-> > > > > > > Laurent
-> > > > > > > Vivier
-> > > > > > > 
-> > > > > > > Signed-off-by: Martin Wilck <mwilck@suse.com>
-> > > > > > > ---
-> > > > > > >  drivers/char/hw_random/virtio-rng.c | 4 ++--
-> > > > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > > > > > 
-> > > > > > > diff --git a/drivers/char/hw_random/virtio-rng.c
-> > > > > > > b/drivers/char/hw_random/virtio-rng.c
-> > > > > > > index a90001e02bf7..8eaeceecb41e 100644
-> > > > > > > --- a/drivers/char/hw_random/virtio-rng.c
-> > > > > > > +++ b/drivers/char/hw_random/virtio-rng.c
-> > > > > > > @@ -65,7 +65,7 @@ static int virtio_read(struct hwrng *rng,
-> > > > > > > void
-> > > > > > > *buf, size_t size, bool wait)
-> > > > > > >  		register_buffer(vi, buf, size);
-> > > > > > >  	}
-> > > > > > >  
-> > > > > > > -	if (!wait)
-> > > > > > > +	if (!wait && !completion_done(&vi->have_data))
-> > > > > > >  		return 0;
-> > > > > > >  
-> > > > > > >  	ret = wait_for_completion_killable(&vi->have_data);
-> > > > > > > @@ -74,7 +74,7 @@ static int virtio_read(struct hwrng *rng,
-> > > > > > > void
-> > > > > > > *buf, size_t size, bool wait)
-> > > > > > >  
-> > > > > > >  	vi->busy = false;
-> > > > > > >  
-> > > > > > > -	return vi->data_avail;
-> > > > > > > +	return min_t(size_t, size, vi->data_avail);
-> > > > > > >  }
-> > > > > > >  
-> > > > > > >  static void virtio_cleanup(struct hwrng *rng)
-> > > > > > > 
-> > > > > > 
-> > > > > > Reviewed-by: Laurent Vivier <lvivier@redhat.com>
-> > > > > 
-> > > > > Laurent didn't we agree the real fix is private buffers in the
-> > > > > driver,
-> > > > > and copying out from there?
-> > > > > 
-> > > > 
-> > > > Can we perhaps proceed with this for now? AFAICS the private
-> > > > buffer
-> > > > implementation would be a larger effort, while we have the issues
-> > > > with
-> > > > nested VMs getting no entropy today.
-> > > > 
-> > > 
-> > > I agree. I think it's important to have a simple and quick fix for
-> > > the
-> > > problem reported by Martin.
-> > > 
-> > > We need the private buffers but not sure how long it will take to
-> > > have
-> > > them included in the kernel and how many new bugs will be
-> > > introduced
-> > > doing that as the code is hard to understand and the core is shared
-> > > with
-> > > several other hardware backends that can be impacted by the changes
-> > > needed.
-> > > 
-> > > Thanks,
-> > > Laurent
-> > 
-> > However I am not sure with the patch applies we never return
-> > the same buffer to userspace twice, e.g. if one is
-> > non blocking another blocking. Doing that would be a bug.
-> > 
-> 
-> As Laurent mentioned in 
-> https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg02039.html,
-> there are only 2 different buffers that may be passed to virtio_read(),
-> rng_buffer and rng_fillbuf.
-> The latter is only used in blocking mode.
-> 
-> AFAICS there's just one problematic situation: 
-> 
->  1 a user space process reads random data without blocking and runs
-> register_buffer(), gets no data, releases reading_mutex
->  2 the hwrng kthread grabs the mutex and makes a sync call, vi->busy is
-> still set, so no new completion is initialized.
->  3 hwrng calls wait_for_completion_killable() and sees the completion
->    that had been initialized by the user space process previously,
->  4 hwrng "thinks" it got some positive randomness, but random data have
->    actually been written into rng_buffer, not rng_fillbuff.
-> 
-> This is indeed bad, but it can happen with the current code as well.
-> Actually, it's more likely to happen with the current code, because
-> asynchronous callers might hang forever trying to get entropy,
-> making this scenario more likely (if there's a process, like nested
-> qemu, that would keep calling . So this wouldn't be a regression caused
-> by my patch, AFAICT.
-> 
-> How can we avoid this problem entirely? A) With private buffers, of
-> course. B) Another, a bit hackish, approach would be to remember the
-> active "buffer" pointer in virtio_rng, and restart the IO when a
-> another buffer is passed down. C) Finally, we could modify
-> virtio_read() such that blocking calls always re-initialize the buffer;
-> they'd then have to wait for a potential already running IO from a
-> previous, non-blocking access to finish first.
-> 
-> But I believe this is something which could (and should) be done
-> independently. Alternatively, I could add B) or C). A) I'd rather leave
-> to Laurent.
-> 
-> Regards,
-> Martin
-
-Of the simple solutions, C seems cleanest.
-Laurent, any interest in working on A meanwhile?
-
--- 
-MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+VGhpcyBldmVudCBpcyBzZW50IHdoZW4gdGhlIGd1ZXN0IGlzIGFib3V0IHRvIGJlCnBhdXNlZC9z
+dXNwZW5kZWQvbWlncmF0ZWQuIFRoZSBpbnRyb3NwZWN0aW9uIHRvb2wgaGFzIHRoZSBjaGFuY2Ug
+dG8KcmVtb3ZlIGl0cyBob29rcyAoZS5nLiBicmVha3BvaW50cykgd2hpbGUgdGhlIGd1ZXN0IGlz
+IHN0aWxsIHJ1bm5pbmcuCgpTaWduZWQtb2ZmLWJ5OiBBZGFsYmVydCBMYXrEg3IgPGFsYXphckBi
+aXRkZWZlbmRlci5jb20+Ci0tLQogRG9jdW1lbnRhdGlvbi92aXJ0L2t2bS9rdm1pLnJzdCAgICAg
+ICAgICAgICAgIHwgMzEgKysrKysrKysrCiBhcmNoL3g4Ni9rdm0vTWFrZWZpbGUgICAgICAgICAg
+ICAgICAgICAgICAgICAgfCAgMiArLQogYXJjaC94ODYva3ZtL2t2bWkuYyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHwgMTAgKysrCiBpbmNsdWRlL2xpbnV4L2t2bWlfaG9zdC5oICAgICAgICAg
+ICAgICAgICAgICAgfCAgMiArCiBpbmNsdWRlL3VhcGkvbGludXgva3ZtaS5oICAgICAgICAgICAg
+ICAgICAgICAgfCAgOSArKysKIC4uLi90ZXN0aW5nL3NlbGZ0ZXN0cy9rdm0veDg2XzY0L2t2bWlf
+dGVzdC5jICB8IDY4ICsrKysrKysrKysrKysrKysrKy0KIHZpcnQva3ZtL2ludHJvc3BlY3Rpb24v
+a3ZtaS5jICAgICAgICAgICAgICAgICB8IDEzICsrKy0KIHZpcnQva3ZtL2ludHJvc3BlY3Rpb24v
+a3ZtaV9pbnQuaCAgICAgICAgICAgICB8ICAzICsKIHZpcnQva3ZtL2ludHJvc3BlY3Rpb24va3Zt
+aV9tc2cuYyAgICAgICAgICAgICB8IDQyICsrKysrKysrKysrLQogOSBmaWxlcyBjaGFuZ2VkLCAx
+NzMgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNo
+L3g4Ni9rdm0va3ZtaS5jCgpkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi92aXJ0L2t2bS9rdm1p
+LnJzdCBiL0RvY3VtZW50YXRpb24vdmlydC9rdm0va3ZtaS5yc3QKaW5kZXggMzM0OTBiYzlkMWMx
+Li5lOWM0MGM3YWUxNTQgMTAwNjQ0Ci0tLSBhL0RvY3VtZW50YXRpb24vdmlydC9rdm0va3ZtaS5y
+c3QKKysrIGIvRG9jdW1lbnRhdGlvbi92aXJ0L2t2bS9rdm1pLnJzdApAQCAtMzMxLDMgKzMzMSwz
+NCBAQCBUaGlzIGNvbW1hbmQgaXMgYWx3YXlzIGFsbG93ZWQuCiAJfTsKIAogUmV0dXJucyB0aGUg
+bnVtYmVyIG9mIG9ubGluZSB2Q1BVcy4KKworRXZlbnRzCis9PT09PT0KKworVGhlIFZNIGludHJv
+c3BlY3Rpb24gZXZlbnRzIGFyZSBzZW50IHVzaW5nIHRoZSBLVk1JX1ZNX0VWRU5UIG1lc3NhZ2Ug
+aWQuCitUaGUgbWVzc2FnZSBkYXRhIGJlZ2lucyB3aXRoIGEgY29tbW9uIHN0cnVjdHVyZSBoYXZp
+bmcgdGhlIGV2ZW50IGlkOjoKKworCXN0cnVjdCBrdm1pX2V2ZW50X2hkciB7CisJCV9fdTE2IGV2
+ZW50OworCQlfX3UxNiBwYWRkaW5nWzNdOworCX07CisKK1NwZWNpZmljIGV2ZW50IGRhdGEgY2Fu
+IGZvbGxvdyB0aGlzIGNvbW1vbiBzdHJ1Y3R1cmUuCisKKzEuIEtWTUlfVk1fRVZFTlRfVU5IT09L
+CistLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQorCis6QXJjaGl0ZWN0dXJlczogYWxsCis6VmVyc2lv
+bnM6ID49IDEKKzpBY3Rpb25zOiBub25lCis6UGFyYW1ldGVyczoKKworOjoKKworCXN0cnVjdCBr
+dm1pX2V2ZW50X2hkcjsKKworOlJldHVybnM6IG5vbmUKKworVGhpcyBldmVudCBpcyBzZW50IHdo
+ZW4gdGhlIGRldmljZSBtYW5hZ2VyIGhhcyB0byBwYXVzZS9zdG9wL21pZ3JhdGUgdGhlCitndWVz
+dCAoc2VlICoqVW5ob29raW5nKiopLiAgVGhlIGludHJvc3BlY3Rpb24gdG9vbCBoYXMgYSBjaGFu
+Y2UgdG8gdW5ob29rCithbmQgY2xvc2UgdGhlIEtWTUkgY2hhbm5lbCAoc2lnbmFsaW5nIHRoYXQg
+dGhlIG9wZXJhdGlvbiBjYW4gcHJvY2VlZCkuCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9rdm0vTWFr
+ZWZpbGUgYi9hcmNoL3g4Ni9rdm0vTWFrZWZpbGUKaW5kZXggZGI0MTIxYjQxMTJkLi44ZmFkNDA2
+NDliY2YgMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L2t2bS9NYWtlZmlsZQorKysgYi9hcmNoL3g4Ni9r
+dm0vTWFrZWZpbGUKQEAgLTE0LDcgKzE0LDcgQEAga3ZtLXkJCQkrPSAkKEtWTSkva3ZtX21haW4u
+byAkKEtWTSkvY29hbGVzY2VkX21taW8ubyBcCiAJCQkJJChLVk0pL2V2ZW50ZmQubyAkKEtWTSkv
+aXJxY2hpcC5vICQoS1ZNKS92ZmlvLm8gXAogCQkJCSQoS1ZNKS9kaXJ0eV9yaW5nLm8KIGt2bS0k
+KENPTkZJR19LVk1fQVNZTkNfUEYpCSs9ICQoS1ZNKS9hc3luY19wZi5vCi1rdm0tJChDT05GSUdf
+S1ZNX0lOVFJPU1BFQ1RJT04pICs9ICQoS1ZNSSkva3ZtaS5vICQoS1ZNSSkva3ZtaV9tc2cubwor
+a3ZtLSQoQ09ORklHX0tWTV9JTlRST1NQRUNUSU9OKSArPSAkKEtWTUkpL2t2bWkubyAkKEtWTUkp
+L2t2bWlfbXNnLm8ga3ZtaS5vCiAKIGt2bS15CQkJKz0geDg2Lm8gZW11bGF0ZS5vIGk4MjU5Lm8g
+aXJxLm8gbGFwaWMubyBcCiAJCQkgICBpODI1NC5vIGlvYXBpYy5vIGlycV9jb21tLm8gY3B1aWQu
+byBwbXUubyBtdHJyLm8gXApkaWZmIC0tZ2l0IGEvYXJjaC94ODYva3ZtL2t2bWkuYyBiL2FyY2gv
+eDg2L2t2bS9rdm1pLmMKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMDAwMDAwLi4z
+NTc0MmQ5MjdiZTUKLS0tIC9kZXYvbnVsbAorKysgYi9hcmNoL3g4Ni9rdm0va3ZtaS5jCkBAIC0w
+LDAgKzEsMTAgQEAKKy8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wCisvKgorICog
+S1ZNIGludHJvc3BlY3Rpb24gLSB4ODYKKyAqCisgKiBDb3B5cmlnaHQgKEMpIDIwMTktMjAyMCBC
+aXRkZWZlbmRlciBTLlIuTC4KKyAqLworCit2b2lkIGt2bWlfYXJjaF9pbml0X3ZjcHVfZXZlbnRz
+X21hc2sodW5zaWduZWQgbG9uZyAqc3VwcG9ydGVkKQoreworfQpkaWZmIC0tZ2l0IGEvaW5jbHVk
+ZS9saW51eC9rdm1pX2hvc3QuaCBiL2luY2x1ZGUvbGludXgva3ZtaV9ob3N0LmgKaW5kZXggODFl
+YWM5ZjUzYTNmLi42NDc2YzdkNmE0ZDMgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgva3ZtaV9o
+b3N0LmgKKysrIGIvaW5jbHVkZS9saW51eC9rdm1pX2hvc3QuaApAQCAtMTcsNiArMTcsOCBAQCBz
+dHJ1Y3Qga3ZtX2ludHJvc3BlY3Rpb24gewogCiAJdW5zaWduZWQgbG9uZyAqY21kX2FsbG93X21h
+c2s7CiAJdW5zaWduZWQgbG9uZyAqZXZlbnRfYWxsb3dfbWFzazsKKworCWF0b21pY190IGV2X3Nl
+cTsKIH07CiAKIGludCBrdm1pX3ZlcnNpb24odm9pZCk7CmRpZmYgLS1naXQgYS9pbmNsdWRlL3Vh
+cGkvbGludXgva3ZtaS5oIGIvaW5jbHVkZS91YXBpL2xpbnV4L2t2bWkuaAppbmRleCBlMDZhN2I4
+MGQ0ZDkuLjE4ZmI1MTA3OGQ0OCAxMDA2NDQKLS0tIGEvaW5jbHVkZS91YXBpL2xpbnV4L2t2bWku
+aAorKysgYi9pbmNsdWRlL3VhcGkvbGludXgva3ZtaS5oCkBAIC0xNyw2ICsxNyw4IEBAIGVudW0g
+ewogI2RlZmluZSBLVk1JX1ZDUFVfTUVTU0FHRV9JRChpZCkgKCgoaWQpIDw8IDEpIHwgMSkKIAog
+ZW51bSB7CisJS1ZNSV9WTV9FVkVOVCA9IEtWTUlfVk1fTUVTU0FHRV9JRCgwKSwKKwogCUtWTUlf
+R0VUX1ZFUlNJT04gICAgICA9IEtWTUlfVk1fTUVTU0FHRV9JRCgxKSwKIAlLVk1JX1ZNX0NIRUNL
+X0NPTU1BTkQgPSBLVk1JX1ZNX01FU1NBR0VfSUQoMiksCiAJS1ZNSV9WTV9DSEVDS19FVkVOVCAg
+ID0gS1ZNSV9WTV9NRVNTQUdFX0lEKDMpLApAQCAtMzMsNiArMzUsOCBAQCBlbnVtIHsKICNkZWZp
+bmUgS1ZNSV9WQ1BVX0VWRU5UX0lEKGlkKSAoKChpZCkgPDwgMSkgfCAxKQogCiBlbnVtIHsKKwlL
+Vk1JX1ZNX0VWRU5UX1VOSE9PSyA9IEtWTUlfVk1fRVZFTlRfSUQoMCksCisKIAlLVk1JX05FWFRf
+Vk1fRVZFTlQKIH07CiAKQEAgLTczLDQgKzc3LDkgQEAgc3RydWN0IGt2bWlfdm1fZ2V0X2luZm9f
+cmVwbHkgewogCV9fdTMyIHBhZGRpbmdbM107CiB9OwogCitzdHJ1Y3Qga3ZtaV9ldmVudF9oZHIg
+eworCV9fdTE2IGV2ZW50OworCV9fdTE2IHBhZGRpbmdbM107Cit9OworCiAjZW5kaWYgLyogX1VB
+UElfX0xJTlVYX0tWTUlfSCAqLwpkaWZmIC0tZ2l0IGEvdG9vbHMvdGVzdGluZy9zZWxmdGVzdHMv
+a3ZtL3g4Nl82NC9rdm1pX3Rlc3QuYyBiL3Rvb2xzL3Rlc3Rpbmcvc2VsZnRlc3RzL2t2bS94ODZf
+NjQva3ZtaV90ZXN0LmMKaW5kZXggZDYwZWUyM2ZhODMzLi4wMWIyNjAzNzljMmEgMTAwNjQ0Ci0t
+LSBhL3Rvb2xzL3Rlc3Rpbmcvc2VsZnRlc3RzL2t2bS94ODZfNjQva3ZtaV90ZXN0LmMKKysrIGIv
+dG9vbHMvdGVzdGluZy9zZWxmdGVzdHMva3ZtL3g4Nl82NC9rdm1pX3Rlc3QuYwpAQCAtNjgsNiAr
+NjgsMTEgQEAgc3RhdGljIHZvaWQgc2V0X2V2ZW50X3Blcm0oc3RydWN0IGt2bV92bSAqdm0sIF9f
+czMyIGlkLCBfX3UzMiBhbGxvdywKIAkJICJLVk1fSU5UUk9TUEVDVElPTl9FVkVOVCIpOwogfQog
+CitzdGF0aWMgdm9pZCBkaXNhbGxvd19ldmVudChzdHJ1Y3Qga3ZtX3ZtICp2bSwgX19zMzIgZXZl
+bnRfaWQpCit7CisJc2V0X2V2ZW50X3Blcm0odm0sIGV2ZW50X2lkLCAwLCAwKTsKK30KKwogc3Rh
+dGljIHZvaWQgYWxsb3dfZXZlbnQoc3RydWN0IGt2bV92bSAqdm0sIF9fczMyIGV2ZW50X2lkKQog
+ewogCXNldF9ldmVudF9wZXJtKHZtLCBldmVudF9pZCwgMSwgMCk7CkBAIC0yOTEsMTEgKzI5Niwx
+NiBAQCBzdGF0aWMgdm9pZCBjbWRfdm1fY2hlY2tfZXZlbnQoX191MTYgaWQsIGludCBleHBlY3Rl
+ZF9lcnIpCiAJCQlleHBlY3RlZF9lcnIpOwogfQogCi1zdGF0aWMgdm9pZCB0ZXN0X2NtZF92bV9j
+aGVja19ldmVudCh2b2lkKQorc3RhdGljIHZvaWQgdGVzdF9jbWRfdm1fY2hlY2tfZXZlbnQoc3Ry
+dWN0IGt2bV92bSAqdm0pCiB7Ci0JX191MTYgaW52YWxpZF9pZCA9IDB4ZmZmZjsKKwlfX3UxNiB2
+YWxpZF9pZCA9IEtWTUlfVk1fRVZFTlRfVU5IT09LLCBpbnZhbGlkX2lkID0gMHhmZmZmOwogCiAJ
+Y21kX3ZtX2NoZWNrX2V2ZW50KGludmFsaWRfaWQsIC1LVk1fRU5PRU5UKTsKKwljbWRfdm1fY2hl
+Y2tfZXZlbnQodmFsaWRfaWQsIDApOworCisJZGlzYWxsb3dfZXZlbnQodm0sIHZhbGlkX2lkKTsK
+KwljbWRfdm1fY2hlY2tfZXZlbnQodmFsaWRfaWQsIC1LVk1fRVBFUk0pOworCWFsbG93X2V2ZW50
+KHZtLCB2YWxpZF9pZCk7CiB9CiAKIHN0YXRpYyB2b2lkIHRlc3RfY21kX3ZtX2dldF9pbmZvKHZv
+aWQpCkBAIC0zMTIsNiArMzIyLDU3IEBAIHN0YXRpYyB2b2lkIHRlc3RfY21kX3ZtX2dldF9pbmZv
+KHZvaWQpCiAJcHJfZGVidWcoInZjcHUgY291bnQ6ICV1XG4iLCBycGwudmNwdV9jb3VudCk7CiB9
+CiAKK3N0YXRpYyB2b2lkIHRyaWdnZXJfZXZlbnRfdW5ob29rX25vdGlmaWNhdGlvbihzdHJ1Y3Qg
+a3ZtX3ZtICp2bSkKK3sKKwlpbnQgcjsKKworCXIgPSBpb2N0bCh2bS0+ZmQsIEtWTV9JTlRST1NQ
+RUNUSU9OX1BSRVVOSE9PSywgTlVMTCk7CisJVEVTVF9BU1NFUlQociA9PSAwLAorCQkiS1ZNX0lO
+VFJPU1BFQ1RJT05fUFJFVU5IT09LIGZhaWxlZCwgZXJybm8gJWQgKCVzKVxuIiwKKwkJZXJybm8s
+IHN0cmVycm9yKGVycm5vKSk7Cit9CisKK3N0YXRpYyB2b2lkIHJlY2VpdmVfZXZlbnQoc3RydWN0
+IGt2bWlfbXNnX2hkciAqbXNnX2hkciwgdTE2IG1zZ19pZCwKKwkJCSAgc3RydWN0IGt2bWlfZXZl
+bnRfaGRyICpldl9oZHIsIHUxNiBldmVudF9pZCwKKwkJCSAgc2l6ZV90IGV2X3NpemUpCit7CisJ
+c2l6ZV90IHRvX3JlYWQgPSBldl9zaXplOworCisJcmVjZWl2ZV9kYXRhKG1zZ19oZHIsIHNpemVv
+ZigqbXNnX2hkcikpOworCisJVEVTVF9BU1NFUlQobXNnX2hkci0+aWQgPT0gbXNnX2lkLAorCQki
+VW5leHBlY3RlZCBtZXNzYWdlcyBpZCAlZCwgZXhwZWN0ZWQgJWRcbiIsCisJCW1zZ19oZHItPmlk
+LCBtc2dfaWQpOworCisJaWYgKHRvX3JlYWQgPiBtc2dfaGRyLT5zaXplKQorCQl0b19yZWFkID0g
+bXNnX2hkci0+c2l6ZTsKKworCXJlY2VpdmVfZGF0YShldl9oZHIsIHRvX3JlYWQpOworCVRFU1Rf
+QVNTRVJUKGV2X2hkci0+ZXZlbnQgPT0gZXZlbnRfaWQsCisJCSJVbmV4cGVjdGVkIGV2ZW50ICVk
+LCBleHBlY3RlZCAlZFxuIiwKKwkJZXZfaGRyLT5ldmVudCwgZXZlbnRfaWQpOworCisJVEVTVF9B
+U1NFUlQobXNnX2hkci0+c2l6ZSA9PSBldl9zaXplLAorCQkiSW52YWxpZCBldmVudCBzaXplICVk
+LCBleHBlY3RlZCAlemQgYnl0ZXNcbiIsCisJCW1zZ19oZHItPnNpemUsIGV2X3NpemUpOworfQor
+CitzdGF0aWMgdm9pZCByZWNlaXZlX3ZtX2V2ZW50X3VuaG9vayh2b2lkKQoreworCXN0cnVjdCBr
+dm1pX21zZ19oZHIgbXNnX2hkcjsKKwlzdHJ1Y3Qga3ZtaV9ldmVudF9oZHIgZXZfaGRyOworCisJ
+cmVjZWl2ZV9ldmVudCgmbXNnX2hkciwgS1ZNSV9WTV9FVkVOVCwKKwkJICAgICAgJmV2X2hkciwg
+S1ZNSV9WTV9FVkVOVF9VTkhPT0ssIHNpemVvZihldl9oZHIpKTsKK30KKworc3RhdGljIHZvaWQg
+dGVzdF9ldmVudF91bmhvb2soc3RydWN0IGt2bV92bSAqdm0pCit7CisJdHJpZ2dlcl9ldmVudF91
+bmhvb2tfbm90aWZpY2F0aW9uKHZtKTsKKworCXJlY2VpdmVfdm1fZXZlbnRfdW5ob29rKCk7Cit9
+CisKIHN0YXRpYyB2b2lkIHRlc3RfaW50cm9zcGVjdGlvbihzdHJ1Y3Qga3ZtX3ZtICp2bSkKIHsK
+IAlzZXR1cF9zb2NrZXQoKTsKQEAgLTMyMCw4ICszODEsOSBAQCBzdGF0aWMgdm9pZCB0ZXN0X2lu
+dHJvc3BlY3Rpb24oc3RydWN0IGt2bV92bSAqdm0pCiAJdGVzdF9jbWRfaW52YWxpZCgpOwogCXRl
+c3RfY21kX2dldF92ZXJzaW9uKCk7CiAJdGVzdF9jbWRfdm1fY2hlY2tfY29tbWFuZCh2bSk7Ci0J
+dGVzdF9jbWRfdm1fY2hlY2tfZXZlbnQoKTsKKwl0ZXN0X2NtZF92bV9jaGVja19ldmVudCh2bSk7
+CiAJdGVzdF9jbWRfdm1fZ2V0X2luZm8oKTsKKwl0ZXN0X2V2ZW50X3VuaG9vayh2bSk7CiAKIAl1
+bmhvb2tfaW50cm9zcGVjdGlvbih2bSk7CiB9CmRpZmYgLS1naXQgYS92aXJ0L2t2bS9pbnRyb3Nw
+ZWN0aW9uL2t2bWkuYyBiL3ZpcnQva3ZtL2ludHJvc3BlY3Rpb24va3ZtaS5jCmluZGV4IDcyZGQ0
+MTkxNTA0OC4uMzc0NmZkMjQzYmQ4IDEwMDY0NAotLS0gYS92aXJ0L2t2bS9pbnRyb3NwZWN0aW9u
+L2t2bWkuYworKysgYi92aXJ0L2t2bS9pbnRyb3NwZWN0aW9uL2t2bWkuYwpAQCAtMTcsNiArMTcs
+OCBAQAogCiBzdGF0aWMgREVDTEFSRV9CSVRNQVAoS3ZtaV9hbHdheXNfYWxsb3dlZF9jb21tYW5k
+cywgS1ZNSV9OVU1fQ09NTUFORFMpOwogc3RhdGljIERFQ0xBUkVfQklUTUFQKEt2bWlfa25vd25f
+ZXZlbnRzLCBLVk1JX05VTV9FVkVOVFMpOworc3RhdGljIERFQ0xBUkVfQklUTUFQKEt2bWlfa25v
+d25fdm1fZXZlbnRzLCBLVk1JX05VTV9FVkVOVFMpOworc3RhdGljIERFQ0xBUkVfQklUTUFQKEt2
+bWlfa25vd25fdmNwdV9ldmVudHMsIEtWTUlfTlVNX0VWRU5UUyk7CiAKIHN0YXRpYyBzdHJ1Y3Qg
+a21lbV9jYWNoZSAqbXNnX2NhY2hlOwogCkBAIC03Niw3ICs3OCwxNCBAQCBzdGF0aWMgdm9pZCBr
+dm1pX2luaXRfYWx3YXlzX2FsbG93ZWRfY29tbWFuZHModm9pZCkKIAogc3RhdGljIHZvaWQga3Zt
+aV9pbml0X2tub3duX2V2ZW50cyh2b2lkKQogewotCWJpdG1hcF96ZXJvKEt2bWlfa25vd25fZXZl
+bnRzLCBLVk1JX05VTV9FVkVOVFMpOworCWJpdG1hcF96ZXJvKEt2bWlfa25vd25fdm1fZXZlbnRz
+LCBLVk1JX05VTV9FVkVOVFMpOworCXNldF9iaXQoS1ZNSV9WTV9FVkVOVF9VTkhPT0ssIEt2bWlf
+a25vd25fdm1fZXZlbnRzKTsKKworCWJpdG1hcF96ZXJvKEt2bWlfa25vd25fdmNwdV9ldmVudHMs
+IEtWTUlfTlVNX0VWRU5UUyk7CisJa3ZtaV9hcmNoX2luaXRfdmNwdV9ldmVudHNfbWFzayhLdm1p
+X2tub3duX3ZjcHVfZXZlbnRzKTsKKworCWJpdG1hcF9vcihLdm1pX2tub3duX2V2ZW50cywgS3Zt
+aV9rbm93bl92bV9ldmVudHMsCisJCSAgS3ZtaV9rbm93bl92Y3B1X2V2ZW50cywgS1ZNSV9OVU1f
+RVZFTlRTKTsKIH0KIAogaW50IGt2bWlfaW5pdCh2b2lkKQpAQCAtMTMwLDYgKzEzOSw4IEBAIGt2
+bWlfYWxsb2Moc3RydWN0IGt2bSAqa3ZtLCBjb25zdCBzdHJ1Y3Qga3ZtX2ludHJvc3BlY3Rpb25f
+aG9vayAqaG9vaykKIAliaXRtYXBfY29weShrdm1pLT5jbWRfYWxsb3dfbWFzaywgS3ZtaV9hbHdh
+eXNfYWxsb3dlZF9jb21tYW5kcywKIAkJICAgIEtWTUlfTlVNX0NPTU1BTkRTKTsKIAorCWF0b21p
+Y19zZXQoJmt2bWktPmV2X3NlcSwgMCk7CisKIAlrdm1pLT5rdm0gPSBrdm07CiAKIAlyZXR1cm4g
+a3ZtaTsKZGlmZiAtLWdpdCBhL3ZpcnQva3ZtL2ludHJvc3BlY3Rpb24va3ZtaV9pbnQuaCBiL3Zp
+cnQva3ZtL2ludHJvc3BlY3Rpb24va3ZtaV9pbnQuaAppbmRleCBlZjQ4NTBlOGJmYWUuLjU3YzIy
+ZjIwZTc0ZiAxMDA2NDQKLS0tIGEvdmlydC9rdm0vaW50cm9zcGVjdGlvbi9rdm1pX2ludC5oCisr
+KyBiL3ZpcnQva3ZtL2ludHJvc3BlY3Rpb24va3ZtaV9pbnQuaApAQCAtMjcsNCArMjcsNyBAQCBi
+b29sIGt2bWlfaXNfY29tbWFuZF9hbGxvd2VkKHN0cnVjdCBrdm1faW50cm9zcGVjdGlvbiAqa3Zt
+aSwgdTE2IGlkKTsKIGJvb2wga3ZtaV9pc19ldmVudF9hbGxvd2VkKHN0cnVjdCBrdm1faW50cm9z
+cGVjdGlvbiAqa3ZtaSwgdTE2IGlkKTsKIGJvb2wga3ZtaV9pc19rbm93bl9ldmVudCh1MTYgaWQp
+OwogCisvKiBhcmNoICovCit2b2lkIGt2bWlfYXJjaF9pbml0X3ZjcHVfZXZlbnRzX21hc2sodW5z
+aWduZWQgbG9uZyAqc3VwcG9ydGVkKTsKKwogI2VuZGlmCmRpZmYgLS1naXQgYS92aXJ0L2t2bS9p
+bnRyb3NwZWN0aW9uL2t2bWlfbXNnLmMgYi92aXJ0L2t2bS9pbnRyb3NwZWN0aW9uL2t2bWlfbXNn
+LmMKaW5kZXggNTEzNjgxMjkwMzA1Li40YWNkYjU5NTMwMWQgMTAwNjQ0Ci0tLSBhL3ZpcnQva3Zt
+L2ludHJvc3BlY3Rpb24va3ZtaV9tc2cuYworKysgYi92aXJ0L2t2bS9pbnRyb3NwZWN0aW9uL2t2
+bWlfbXNnLmMKQEAgLTE4Niw3ICsxODYsNyBAQCBzdGF0aWMgYm9vbCBpc192bV9tZXNzYWdlKHUx
+NiBpZCkKIAogc3RhdGljIGJvb2wgaXNfdm1fY29tbWFuZCh1MTYgaWQpCiB7Ci0JcmV0dXJuIGlz
+X3ZtX21lc3NhZ2UoaWQpOworCXJldHVybiBpc192bV9tZXNzYWdlKGlkKSAmJiBpZCAhPSBLVk1J
+X1ZNX0VWRU5UOwogfQogCiBzdGF0aWMgc3RydWN0IGt2bWlfbXNnX2hkciAqa3ZtaV9tc2dfcmVj
+dihzdHJ1Y3Qga3ZtX2ludHJvc3BlY3Rpb24gKmt2bWkpCkBAIC0yNjEsNyArMjYxLDQ1IEBAIGJv
+b2wga3ZtaV9tc2dfcHJvY2VzcyhzdHJ1Y3Qga3ZtX2ludHJvc3BlY3Rpb24gKmt2bWkpCiAJcmV0
+dXJuIGVyciA9PSAwOwogfQogCitzdGF0aWMgdm9pZCBrdm1pX2ZpbGxfZXZfbXNnX2hkcihzdHJ1
+Y3Qga3ZtX2ludHJvc3BlY3Rpb24gKmt2bWksCisJCQkJIHN0cnVjdCBrdm1pX21zZ19oZHIgKm1z
+Z19oZHIsCisJCQkJIHN0cnVjdCBrdm1pX2V2ZW50X2hkciAqZXZfaGRyLAorCQkJCSB1MTYgbXNn
+X2lkLCB1MzIgbXNnX3NlcSwKKwkJCQkgc2l6ZV90IG1zZ19zaXplLCB1MTYgZXZfaWQpCit7CisJ
+bWVtc2V0KG1zZ19oZHIsIDAsIHNpemVvZigqbXNnX2hkcikpOworCW1zZ19oZHItPmlkID0gbXNn
+X2lkOworCW1zZ19oZHItPnNlcSA9IG1zZ19zZXE7CisJbXNnX2hkci0+c2l6ZSA9IG1zZ19zaXpl
+IC0gc2l6ZW9mKCptc2dfaGRyKTsKKworCW1lbXNldChldl9oZHIsIDAsIHNpemVvZigqZXZfaGRy
+KSk7CisJZXZfaGRyLT5ldmVudCA9IGV2X2lkOworfQorCitzdGF0aWMgdm9pZCBrdm1pX2ZpbGxf
+dm1fZXZlbnQoc3RydWN0IGt2bV9pbnRyb3NwZWN0aW9uICprdm1pLAorCQkJICAgICAgIHN0cnVj
+dCBrdm1pX21zZ19oZHIgKm1zZ19oZHIsCisJCQkgICAgICAgc3RydWN0IGt2bWlfZXZlbnRfaGRy
+ICpldl9oZHIsCisJCQkgICAgICAgdTE2IGV2X2lkLCBzaXplX3QgbXNnX3NpemUpCit7CisJdTMy
+IG1zZ19zZXEgPSBhdG9taWNfaW5jX3JldHVybigma3ZtaS0+ZXZfc2VxKTsKKworCWt2bWlfZmls
+bF9ldl9tc2dfaGRyKGt2bWksIG1zZ19oZHIsIGV2X2hkciwgS1ZNSV9WTV9FVkVOVCwKKwkJCSAg
+ICAgbXNnX3NlcSwgbXNnX3NpemUsIGV2X2lkKTsKK30KKwogaW50IGt2bWlfbXNnX3NlbmRfdW5o
+b29rKHN0cnVjdCBrdm1faW50cm9zcGVjdGlvbiAqa3ZtaSkKIHsKLQlyZXR1cm4gLTE7CisJc3Ry
+dWN0IGt2bWlfbXNnX2hkciBtc2dfaGRyOworCXN0cnVjdCBrdm1pX2V2ZW50X2hkciBldl9oZHI7
+CisJc3RydWN0IGt2ZWMgdmVjW10gPSB7CisJCXsuaW92X2Jhc2UgPSAmbXNnX2hkciwgLmlvdl9s
+ZW4gPSBzaXplb2YobXNnX2hkcil9LAorCQl7Lmlvdl9iYXNlID0gJmV2X2hkciwgIC5pb3ZfbGVu
+ID0gc2l6ZW9mKGV2X2hkcikgfSwKKwl9OworCXNpemVfdCBtc2dfc2l6ZSA9IHNpemVvZihtc2df
+aGRyKSArIHNpemVvZihldl9oZHIpOworCXNpemVfdCBuID0gQVJSQVlfU0laRSh2ZWMpOworCisJ
+a3ZtaV9maWxsX3ZtX2V2ZW50KGt2bWksICZtc2dfaGRyLCAmZXZfaGRyLAorCQkJICAgS1ZNSV9W
+TV9FVkVOVF9VTkhPT0ssIG1zZ19zaXplKTsKKworCXJldHVybiBrdm1pX3NvY2tfd3JpdGUoa3Zt
+aSwgdmVjLCBuLCBtc2dfc2l6ZSk7CiB9Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlv
+bkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlv
+bi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
