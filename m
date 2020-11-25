@@ -1,63 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 405612C3CEE
-	for <lists.virtualization@lfdr.de>; Wed, 25 Nov 2020 10:52:12 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 910802C3C39
+	for <lists.virtualization@lfdr.de>; Wed, 25 Nov 2020 10:35:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 85188874C6;
-	Wed, 25 Nov 2020 09:52:10 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3A27886D16;
+	Wed, 25 Nov 2020 09:35:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XtJB2LwZF7DC; Wed, 25 Nov 2020 09:52:03 +0000 (UTC)
+	with ESMTP id dgQuiK5k8Wpm; Wed, 25 Nov 2020 09:35:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 53721874C5;
-	Wed, 25 Nov 2020 09:52:02 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C93FD86D46;
+	Wed, 25 Nov 2020 09:35:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2AD0EC163C;
-	Wed, 25 Nov 2020 09:52:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 832C6C0052;
+	Wed, 25 Nov 2020 09:35:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B48F9C1DA0
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3F67FC0052
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:51:57 +0000 (UTC)
+ Wed, 25 Nov 2020 09:35:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 8DA7D27516
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 256FC86972
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:51:57 +0000 (UTC)
+ Wed, 25 Nov 2020 09:35:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wnrvB5nIeW6I
+ with ESMTP id JzFykqfZmoBj
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:51:57 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mx01.bbu.dsd.mx.bitdefender.com
- (mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
- by silver.osuosl.org (Postfix) with ESMTPS id B834D275B0
+ Wed, 25 Nov 2020 09:35:19 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id B0A2986969
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 Nov 2020 09:51:56 +0000 (UTC)
-Received: from smtp.bitdefender.com (smtp01.buh.bitdefender.com [10.17.80.75])
- by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
- 12720305D50D; Wed, 25 Nov 2020 11:35:47 +0200 (EET)
-Received: from localhost.localdomain (unknown [91.199.104.27])
- by smtp.bitdefender.com (Postfix) with ESMTPSA id DF9403072785;
- Wed, 25 Nov 2020 11:35:46 +0200 (EET)
-From: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>
-To: kvm@vger.kernel.org
-Subject: [PATCH v10 27/81] KVM: x86: page track: provide all callbacks with
- the guest virtual address
-Date: Wed, 25 Nov 2020 11:35:06 +0200
-Message-Id: <20201125093600.2766-28-alazar@bitdefender.com>
-In-Reply-To: <20201125093600.2766-1-alazar@bitdefender.com>
-References: <20201125093600.2766-1-alazar@bitdefender.com>
+ Wed, 25 Nov 2020 09:35:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1606296917;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=pwNmN2CPDqtDA/hh/EG7Lb7u72HnkbvU+HhgkZVizPM=;
+ b=LxMEIrKq0c0klfsl42CTYRuX5ETSMQm71Ya7U1X3QDS77xsxzYXNV2udoiFb3bYPaGUz3S
+ TdU60ET8syq5Kf//ffmXIVhnqYed99kd4B139bDOaDgQtVlyS3d67n5wSpdy+YQwOiJMrf
+ aRwnX1xTHTwmCUcFNSLHtTmWkG3rYnw=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-236-Kx0zzqwjN7yyoRTHds82Xw-1; Wed, 25 Nov 2020 04:35:16 -0500
+X-MC-Unique: Kx0zzqwjN7yyoRTHds82Xw-1
+Received: by mail-wr1-f71.google.com with SMTP id p16so566182wrx.4
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 25 Nov 2020 01:35:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=pwNmN2CPDqtDA/hh/EG7Lb7u72HnkbvU+HhgkZVizPM=;
+ b=ZZLAqqvEj+6zgN2vbaa2peiaJYHqc8AL892OY3jAMzBBNlJRR3Es9hq5+wg3op3qL4
+ /YwtgaTNd/l5Xl9EgBmF6hHC7nU6osMBo9fVGabGQRvfNm+7p2lgCDB68YFiUlQ5An2o
+ vZMmQ91vLwswp+zIF7dz7TPPWPatnFahQyGvF5wW4iDlZ2G/oGvhNSI9FGa3Y9iWrwh6
+ g7fPPd7DwlsUsJd7Xol0UlgukmnBQ0geksEFs1nlz9ufH7vAwyMAsapJbE8vW+RIYW2y
+ vTHLspCXSw8XXZwzB6JFKz/FstnHD6YTgXLm/fRBfkBot77zp2k2e0QFVm/lGNN0TjhA
+ HcWQ==
+X-Gm-Message-State: AOAM533zHrkcv/ayKWji9+xrTme5Xm7cHR2esPfS1l53HpAziWhhqVUZ
+ PfJkV5oFQtKYewG0UHXk8X7Egq9azWw4mJzEhhHyvhTkWdG+JptZxdKbhGP+d3ES6aUh3lmUuPq
+ LY9gNsPr+E3ha5j5gkkHwKitWioMgGdGHeYPuyyhaGw==
+X-Received: by 2002:a1c:7719:: with SMTP id t25mr2834289wmi.59.1606296911604; 
+ Wed, 25 Nov 2020 01:35:11 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyVYPtrIA7igYROsuEPeVUWGafRAf5uVYdn9uHl0nWRkgmXgdA+scQNnRfd57Pu9bTZtsnduA==
+X-Received: by 2002:a1c:7719:: with SMTP id t25mr2834257wmi.59.1606296911240; 
+ Wed, 25 Nov 2020 01:35:11 -0800 (PST)
+Received: from redhat.com (bzq-79-176-44-197.red.bezeqint.net. [79.176.44.197])
+ by smtp.gmail.com with ESMTPSA id l24sm3690799wrb.28.2020.11.25.01.35.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Nov 2020 01:35:10 -0800 (PST)
+Date: Wed, 25 Nov 2020 04:35:07 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jie Deng <jie.deng@intel.com>
+Subject: Re: [PATCH v4] i2c: virtio: add a virtio i2c frontend driver
+Message-ID: <20201125043422-mutt-send-email-mst@kernel.org>
+References: <7c5e44c534b3fd07b855af22d8d4b78bc44cd7a4.1602465440.git.jie.deng@intel.com>
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Mihai=20Don=C8=9Bu?= <mdontu@bitdefender.com>,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <7c5e44c534b3fd07b855af22d8d4b78bc44cd7a4.1602465440.git.jie.deng@intel.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Sergey.Semin@baikalelectronics.ru, bjorn.andersson@linaro.org,
+ loic.poulain@linaro.org, tali.perry1@gmail.com, yu1.wang@intel.com,
+ linux-kernel@vger.kernel.org, krzk@kernel.org,
+ virtualization@lists.linux-foundation.org, wsa@kernel.org,
+ wsa+renesas@sang-engineering.com, jarkko.nikula@linux.intel.com,
+ linux-i2c@vger.kernel.org, rppt@kernel.org, shuo.a.liu@intel.com,
+ andriy.shevchenko@linux.intel.com, conghui.chen@intel.com, jdelvare@suse.de
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,137 +109,420 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-RnJvbTogTWloYWkgRG9uyJt1IDxtZG9udHVAYml0ZGVmZW5kZXIuY29tPgoKVGhpcyBpcyBuZWVk
-ZWQgYmVjYXVzZSB0aGUgZW11bGF0b3IgY2FsbHMgdGhlIHBhZ2UgdHJhY2tpbmcgY29kZQppcnJl
-c3BlY3RpdmUgb2YgdGhlIGN1cnJlbnQgVk0tZXhpdCByZWFzb24gb3IgYXZhaWxhYmxlIGluZm9y
-bWF0aW9uLgoKU2lnbmVkLW9mZi1ieTogTWloYWkgRG9uyJt1IDxtZG9udHVAYml0ZGVmZW5kZXIu
-Y29tPgpTaWduZWQtb2ZmLWJ5OiBBZGFsYmVydCBMYXrEg3IgPGFsYXphckBiaXRkZWZlbmRlci5j
-b20+Ci0tLQogYXJjaC94ODYvaW5jbHVkZS9hc20va3ZtX2hvc3QuaCAgICAgICB8ICAyICstCiBh
-cmNoL3g4Ni9pbmNsdWRlL2FzbS9rdm1fcGFnZV90cmFjay5oIHwgMTAgKysrKysrLS0tLQogYXJj
-aC94ODYva3ZtL21tdS9tbXUuYyAgICAgICAgICAgICAgICB8ICAyICstCiBhcmNoL3g4Ni9rdm0v
-bW11L3BhZ2VfdHJhY2suYyAgICAgICAgIHwgIDYgKysrLS0tCiBhcmNoL3g4Ni9rdm0veDg2LmMg
-ICAgICAgICAgICAgICAgICAgIHwgMTYgKysrKysrKystLS0tLS0tLQogZHJpdmVycy9ncHUvZHJt
-L2k5MTUvZ3Z0L2t2bWd0LmMgICAgICB8ICAyICstCiA2IGZpbGVzIGNoYW5nZWQsIDIwIGluc2Vy
-dGlvbnMoKyksIDE4IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2FyY2gveDg2L2luY2x1ZGUv
-YXNtL2t2bV9ob3N0LmggYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9rdm1faG9zdC5oCmluZGV4IDdk
-YzFlYmFjOGQ5MS4uMDM0MjgzNWE3OWQyIDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9pbmNsdWRlL2Fz
-bS9rdm1faG9zdC5oCisrKyBiL2FyY2gveDg2L2luY2x1ZGUvYXNtL2t2bV9ob3N0LmgKQEAgLTEz
-OTYsNyArMTM5Niw3IEBAIHZvaWQga3ZtX21tdV9jaGFuZ2VfbW11X3BhZ2VzKHN0cnVjdCBrdm0g
-Kmt2bSwgdW5zaWduZWQgbG9uZyBrdm1fbnJfbW11X3BhZ2VzKTsKIGludCBsb2FkX3BkcHRycyhz
-dHJ1Y3Qga3ZtX3ZjcHUgKnZjcHUsIHN0cnVjdCBrdm1fbW11ICptbXUsIHVuc2lnbmVkIGxvbmcg
-Y3IzKTsKIGJvb2wgcGRwdHJzX2NoYW5nZWQoc3RydWN0IGt2bV92Y3B1ICp2Y3B1KTsKIAotaW50
-IGVtdWxhdG9yX3dyaXRlX3BoeXMoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsCitp
-bnQgZW11bGF0b3Jfd3JpdGVfcGh5cyhzdHJ1Y3Qga3ZtX3ZjcHUgKnZjcHUsIGdwYV90IGdwYSwg
-Z3ZhX3QgZ3ZhLAogCQkJICBjb25zdCB2b2lkICp2YWwsIGludCBieXRlcyk7CiAKIHN0cnVjdCBr
-dm1faXJxX21hc2tfbm90aWZpZXIgewpkaWZmIC0tZ2l0IGEvYXJjaC94ODYvaW5jbHVkZS9hc20v
-a3ZtX3BhZ2VfdHJhY2suaCBiL2FyY2gveDg2L2luY2x1ZGUvYXNtL2t2bV9wYWdlX3RyYWNrLmgK
-aW5kZXggODdiZDYwMjVkOTFkLi45YTI2MWU0NjNlYjMgMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L2lu
-Y2x1ZGUvYXNtL2t2bV9wYWdlX3RyYWNrLmgKKysrIGIvYXJjaC94ODYvaW5jbHVkZS9hc20va3Zt
-X3BhZ2VfdHJhY2suaApAQCAtMjgsMTIgKzI4LDE0IEBAIHN0cnVjdCBrdm1fcGFnZV90cmFja19u
-b3RpZmllcl9ub2RlIHsKIAkgKgogCSAqIEB2Y3B1OiB0aGUgdmNwdSB3aGVyZSB0aGUgd3JpdGUg
-YWNjZXNzIGhhcHBlbmVkLgogCSAqIEBncGE6IHRoZSBwaHlzaWNhbCBhZGRyZXNzIHdyaXR0ZW4g
-YnkgZ3Vlc3QuCisJICogQGd2YTogdGhlIHZpcnR1YWwgYWRkcmVzcyB3cml0dGVuIGJ5IGd1ZXN0
-LgogCSAqIEBuZXc6IHRoZSBkYXRhIHdhcyB3cml0dGVuIHRvIHRoZSBhZGRyZXNzLgogCSAqIEBi
-eXRlczogdGhlIHdyaXR0ZW4gbGVuZ3RoLgogCSAqIEBub2RlOiB0aGlzIG5vZGUKIAkgKi8KLQl2
-b2lkICgqdHJhY2tfd3JpdGUpKHN0cnVjdCBrdm1fdmNwdSAqdmNwdSwgZ3BhX3QgZ3BhLCBjb25z
-dCB1OCAqbmV3LAotCQkJICAgIGludCBieXRlcywgc3RydWN0IGt2bV9wYWdlX3RyYWNrX25vdGlm
-aWVyX25vZGUgKm5vZGUpOworCXZvaWQgKCp0cmFja193cml0ZSkoc3RydWN0IGt2bV92Y3B1ICp2
-Y3B1LCBncGFfdCBncGEsIGd2YV90IGd2YSwKKwkJCSAgICBjb25zdCB1OCAqbmV3LCBpbnQgYnl0
-ZXMsCisJCQkgICAgc3RydWN0IGt2bV9wYWdlX3RyYWNrX25vdGlmaWVyX25vZGUgKm5vZGUpOwog
-CS8qCiAJICogSXQgaXMgY2FsbGVkIHdoZW4gbWVtb3J5IHNsb3QgaXMgYmVpbmcgbW92ZWQgb3Ig
-cmVtb3ZlZAogCSAqIHVzZXJzIGNhbiBkcm9wIHdyaXRlLXByb3RlY3Rpb24gZm9yIHRoZSBwYWdl
-cyBpbiB0aGF0IG1lbW9yeSBzbG90CkBAIC02OCw3ICs3MCw3IEBAIGt2bV9wYWdlX3RyYWNrX3Jl
-Z2lzdGVyX25vdGlmaWVyKHN0cnVjdCBrdm0gKmt2bSwKIHZvaWQKIGt2bV9wYWdlX3RyYWNrX3Vu
-cmVnaXN0ZXJfbm90aWZpZXIoc3RydWN0IGt2bSAqa3ZtLAogCQkJCSAgIHN0cnVjdCBrdm1fcGFn
-ZV90cmFja19ub3RpZmllcl9ub2RlICpuKTsKLXZvaWQga3ZtX3BhZ2VfdHJhY2tfd3JpdGUoc3Ry
-dWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsIGNvbnN0IHU4ICpuZXcsCi0JCQkgIGludCBi
-eXRlcyk7Cit2b2lkIGt2bV9wYWdlX3RyYWNrX3dyaXRlKHN0cnVjdCBrdm1fdmNwdSAqdmNwdSwg
-Z3BhX3QgZ3BhLCBndmFfdCBndmEsCisJCQkgIGNvbnN0IHU4ICpuZXcsIGludCBieXRlcyk7CiB2
-b2lkIGt2bV9wYWdlX3RyYWNrX2ZsdXNoX3Nsb3Qoc3RydWN0IGt2bSAqa3ZtLCBzdHJ1Y3Qga3Zt
-X21lbW9yeV9zbG90ICpzbG90KTsKICNlbmRpZgpkaWZmIC0tZ2l0IGEvYXJjaC94ODYva3ZtL21t
-dS9tbXUuYyBiL2FyY2gveDg2L2t2bS9tbXUvbW11LmMKaW5kZXggNWRmZTBlZGUwZTgxLi4xNjMx
-ZTIzNjcwODUgMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L2t2bS9tbXUvbW11LmMKKysrIGIvYXJjaC94
-ODYva3ZtL21tdS9tbXUuYwpAQCAtNDk2Myw3ICs0OTYzLDcgQEAgc3RhdGljIGNvbnN0IHVuaW9u
-IGt2bV9tbXVfcGFnZV9yb2xlIHJvbGVfaWduID0gewogCS5pbnZhbGlkID0gMHgxLAogfTsKIAot
-c3RhdGljIHZvaWQga3ZtX21tdV9wdGVfd3JpdGUoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFf
-dCBncGEsCitzdGF0aWMgdm9pZCBrdm1fbW11X3B0ZV93cml0ZShzdHJ1Y3Qga3ZtX3ZjcHUgKnZj
-cHUsIGdwYV90IGdwYSwgZ3ZhX3QgZ3ZhLAogCQkJICAgICAgY29uc3QgdTggKm5ldywgaW50IGJ5
-dGVzLAogCQkJICAgICAgc3RydWN0IGt2bV9wYWdlX3RyYWNrX25vdGlmaWVyX25vZGUgKm5vZGUp
-CiB7CmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9rdm0vbW11L3BhZ2VfdHJhY2suYyBiL2FyY2gveDg2
-L2t2bS9tbXUvcGFnZV90cmFjay5jCmluZGV4IDg0NDNhNjc1NzE1Yi4uZDdhNTkxYTg1YWY4IDEw
-MDY0NAotLS0gYS9hcmNoL3g4Ni9rdm0vbW11L3BhZ2VfdHJhY2suYworKysgYi9hcmNoL3g4Ni9r
-dm0vbW11L3BhZ2VfdHJhY2suYwpAQCAtMjE2LDggKzIxNiw4IEBAIEVYUE9SVF9TWU1CT0xfR1BM
-KGt2bV9wYWdlX3RyYWNrX3VucmVnaXN0ZXJfbm90aWZpZXIpOwogICogVGhlIG5vZGUgc2hvdWxk
-IGZpZ3VyZSBvdXQgaWYgdGhlIHdyaXR0ZW4gcGFnZSBpcyB0aGUgb25lIHRoYXQgbm9kZSBpcwog
-ICogaW50ZXJlc3RlZCBpbiBieSBpdHNlbGYuCiAgKi8KLXZvaWQga3ZtX3BhZ2VfdHJhY2tfd3Jp
-dGUoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsIGNvbnN0IHU4ICpuZXcsCi0JCQkg
-IGludCBieXRlcykKK3ZvaWQga3ZtX3BhZ2VfdHJhY2tfd3JpdGUoc3RydWN0IGt2bV92Y3B1ICp2
-Y3B1LCBncGFfdCBncGEsIGd2YV90IGd2YSwKKwkJCSAgY29uc3QgdTggKm5ldywgaW50IGJ5dGVz
-KQogewogCXN0cnVjdCBrdm1fcGFnZV90cmFja19ub3RpZmllcl9oZWFkICpoZWFkOwogCXN0cnVj
-dCBrdm1fcGFnZV90cmFja19ub3RpZmllcl9ub2RlICpuOwpAQCAtMjMyLDcgKzIzMiw3IEBAIHZv
-aWQga3ZtX3BhZ2VfdHJhY2tfd3JpdGUoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEs
-IGNvbnN0IHU4ICpuZXcsCiAJaGxpc3RfZm9yX2VhY2hfZW50cnlfc3JjdShuLCAmaGVhZC0+dHJh
-Y2tfbm90aWZpZXJfbGlzdCwgbm9kZSwKIAkJCQlzcmN1X3JlYWRfbG9ja19oZWxkKCZoZWFkLT50
-cmFja19zcmN1KSkKIAkJaWYgKG4tPnRyYWNrX3dyaXRlKQotCQkJbi0+dHJhY2tfd3JpdGUodmNw
-dSwgZ3BhLCBuZXcsIGJ5dGVzLCBuKTsKKwkJCW4tPnRyYWNrX3dyaXRlKHZjcHUsIGdwYSwgZ3Zh
-LCBuZXcsIGJ5dGVzLCBuKTsKIAlzcmN1X3JlYWRfdW5sb2NrKCZoZWFkLT50cmFja19zcmN1LCBp
-ZHgpOwogfQogCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9rdm0veDg2LmMgYi9hcmNoL3g4Ni9rdm0v
-eDg2LmMKaW5kZXggZjQ4NjAzYzhlNDRkLi5jMmYxM2EyNzU0NDggMTAwNjQ0Ci0tLSBhL2FyY2gv
-eDg2L2t2bS94ODYuYworKysgYi9hcmNoL3g4Ni9rdm0veDg2LmMKQEAgLTYxMTUsNyArNjExNSw3
-IEBAIHN0YXRpYyBpbnQgdmNwdV9tbWlvX2d2YV90b19ncGEoc3RydWN0IGt2bV92Y3B1ICp2Y3B1
-LCB1bnNpZ25lZCBsb25nIGd2YSwKIAlyZXR1cm4gdmNwdV9pc19tbWlvX2dwYSh2Y3B1LCBndmEs
-ICpncGEsIHdyaXRlKTsKIH0KIAotaW50IGVtdWxhdG9yX3dyaXRlX3BoeXMoc3RydWN0IGt2bV92
-Y3B1ICp2Y3B1LCBncGFfdCBncGEsCitpbnQgZW11bGF0b3Jfd3JpdGVfcGh5cyhzdHJ1Y3Qga3Zt
-X3ZjcHUgKnZjcHUsIGdwYV90IGdwYSwgZ3ZhX3QgZ3ZhLAogCQkJY29uc3Qgdm9pZCAqdmFsLCBp
-bnQgYnl0ZXMpCiB7CiAJaW50IHJldDsKQEAgLTYxMjMsMTQgKzYxMjMsMTQgQEAgaW50IGVtdWxh
-dG9yX3dyaXRlX3BoeXMoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsCiAJcmV0ID0g
-a3ZtX3ZjcHVfd3JpdGVfZ3Vlc3QodmNwdSwgZ3BhLCB2YWwsIGJ5dGVzKTsKIAlpZiAocmV0IDwg
-MCkKIAkJcmV0dXJuIDA7Ci0Ja3ZtX3BhZ2VfdHJhY2tfd3JpdGUodmNwdSwgZ3BhLCB2YWwsIGJ5
-dGVzKTsKKwlrdm1fcGFnZV90cmFja193cml0ZSh2Y3B1LCBncGEsIGd2YSwgdmFsLCBieXRlcyk7
-CiAJcmV0dXJuIDE7CiB9CiAKIHN0cnVjdCByZWFkX3dyaXRlX2VtdWxhdG9yX29wcyB7CiAJaW50
-ICgqcmVhZF93cml0ZV9wcmVwYXJlKShzdHJ1Y3Qga3ZtX3ZjcHUgKnZjcHUsIHZvaWQgKnZhbCwK
-IAkJCQkgIGludCBieXRlcyk7Ci0JaW50ICgqcmVhZF93cml0ZV9lbXVsYXRlKShzdHJ1Y3Qga3Zt
-X3ZjcHUgKnZjcHUsIGdwYV90IGdwYSwKKwlpbnQgKCpyZWFkX3dyaXRlX2VtdWxhdGUpKHN0cnVj
-dCBrdm1fdmNwdSAqdmNwdSwgZ3BhX3QgZ3BhLCBndmFfdCBndmEsCiAJCQkJICB2b2lkICp2YWws
-IGludCBieXRlcyk7CiAJaW50ICgqcmVhZF93cml0ZV9tbWlvKShzdHJ1Y3Qga3ZtX3ZjcHUgKnZj
-cHUsIGdwYV90IGdwYSwKIAkJCSAgICAgICBpbnQgYnl0ZXMsIHZvaWQgKnZhbCk7CkBAIC02MTUx
-LDE2ICs2MTUxLDE2IEBAIHN0YXRpYyBpbnQgcmVhZF9wcmVwYXJlKHN0cnVjdCBrdm1fdmNwdSAq
-dmNwdSwgdm9pZCAqdmFsLCBpbnQgYnl0ZXMpCiAJcmV0dXJuIDA7CiB9CiAKLXN0YXRpYyBpbnQg
-cmVhZF9lbXVsYXRlKHN0cnVjdCBrdm1fdmNwdSAqdmNwdSwgZ3BhX3QgZ3BhLAorc3RhdGljIGlu
-dCByZWFkX2VtdWxhdGUoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsIGd2YV90IGd2
-YSwKIAkJCXZvaWQgKnZhbCwgaW50IGJ5dGVzKQogewogCXJldHVybiAha3ZtX3ZjcHVfcmVhZF9n
-dWVzdCh2Y3B1LCBncGEsIHZhbCwgYnl0ZXMpOwogfQogCi1zdGF0aWMgaW50IHdyaXRlX2VtdWxh
-dGUoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsCitzdGF0aWMgaW50IHdyaXRlX2Vt
-dWxhdGUoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsIGd2YV90IGd2YSwKIAkJCSB2
-b2lkICp2YWwsIGludCBieXRlcykKIHsKLQlyZXR1cm4gZW11bGF0b3Jfd3JpdGVfcGh5cyh2Y3B1
-LCBncGEsIHZhbCwgYnl0ZXMpOworCXJldHVybiBlbXVsYXRvcl93cml0ZV9waHlzKHZjcHUsIGdw
-YSwgZ3ZhLCB2YWwsIGJ5dGVzKTsKIH0KIAogc3RhdGljIGludCB3cml0ZV9tbWlvKHN0cnVjdCBr
-dm1fdmNwdSAqdmNwdSwgZ3BhX3QgZ3BhLCBpbnQgYnl0ZXMsIHZvaWQgKnZhbCkKQEAgLTYyMjgs
-NyArNjIyOCw3IEBAIHN0YXRpYyBpbnQgZW11bGF0b3JfcmVhZF93cml0ZV9vbmVwYWdlKHVuc2ln
-bmVkIGxvbmcgYWRkciwgdm9pZCAqdmFsLAogCQkJcmV0dXJuIFg4NkVNVUxfUFJPUEFHQVRFX0ZB
-VUxUOwogCX0KIAotCWlmICghcmV0ICYmIG9wcy0+cmVhZF93cml0ZV9lbXVsYXRlKHZjcHUsIGdw
-YSwgdmFsLCBieXRlcykpCisJaWYgKCFyZXQgJiYgb3BzLT5yZWFkX3dyaXRlX2VtdWxhdGUodmNw
-dSwgZ3BhLCBhZGRyLCB2YWwsIGJ5dGVzKSkKIAkJcmV0dXJuIFg4NkVNVUxfQ09OVElOVUU7CiAK
-IAkvKgpAQCAtNjM5Nyw3ICs2Mzk3LDcgQEAgc3RhdGljIGludCBlbXVsYXRvcl9jbXB4Y2hnX2Vt
-dWxhdGVkKHN0cnVjdCB4ODZfZW11bGF0ZV9jdHh0ICpjdHh0LAogCWlmICghZXhjaGFuZ2VkKQog
-CQlyZXR1cm4gWDg2RU1VTF9DTVBYQ0hHX0ZBSUxFRDsKIAotCWt2bV9wYWdlX3RyYWNrX3dyaXRl
-KHZjcHUsIGdwYSwgbmV3LCBieXRlcyk7CisJa3ZtX3BhZ2VfdHJhY2tfd3JpdGUodmNwdSwgZ3Bh
-LCBhZGRyLCBuZXcsIGJ5dGVzKTsKIAogCXJldHVybiBYODZFTVVMX0NPTlRJTlVFOwogCmRpZmYg
-LS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vaTkxNS9ndnQva3ZtZ3QuYyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9pOTE1L2d2dC9rdm1ndC5jCmluZGV4IGFkOGE5ZGY0OWYyOS4uNGUzNzBiMjE2MzY1IDEwMDY0
-NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vaTkxNS9ndnQva3ZtZ3QuYworKysgYi9kcml2ZXJzL2dw
-dS9kcm0vaTkxNS9ndnQva3ZtZ3QuYwpAQCAtMTc0OSw3ICsxNzQ5LDcgQEAgc3RhdGljIGludCBr
-dm1ndF9wYWdlX3RyYWNrX3JlbW92ZSh1bnNpZ25lZCBsb25nIGhhbmRsZSwgdTY0IGdmbikKIAly
-ZXR1cm4gMDsKIH0KIAotc3RhdGljIHZvaWQga3ZtZ3RfcGFnZV90cmFja193cml0ZShzdHJ1Y3Qg
-a3ZtX3ZjcHUgKnZjcHUsIGdwYV90IGdwYSwKK3N0YXRpYyB2b2lkIGt2bWd0X3BhZ2VfdHJhY2tf
-d3JpdGUoc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBncGFfdCBncGEsIGd2YV90IGd2YSwKIAkJY29u
-c3QgdTggKnZhbCwgaW50IGxlbiwKIAkJc3RydWN0IGt2bV9wYWdlX3RyYWNrX25vdGlmaWVyX25v
-ZGUgKm5vZGUpCiB7Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51
-eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1h
-bi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Mon, Oct 12, 2020 at 09:55:55AM +0800, Jie Deng wrote:
+> Add an I2C bus driver for virtio para-virtualization.
+> 
+> The controller can be emulated by the backend driver in
+> any device model software by following the virtio protocol.
+> 
+> This driver communicates with the backend driver through a
+> virtio I2C message structure which includes following parts:
+> 
+> - Header: i2c_msg addr, flags, len.
+> - Data buffer: the pointer to the I2C msg data.
+> - Status: the processing result from the backend.
+> 
+> People may implement different backend drivers to emulate
+> different controllers according to their needs. A backend
+> example can be found in the device model of the open source
+> project ACRN. For more information, please refer to
+> https://projectacrn.org.
+> 
+> The virtio device ID 34 is used for this I2C adpter since IDs
+> before 34 have been reserved by other virtio devices.
+> 
+> Co-developed-by: Conghui Chen <conghui.chen@intel.com>
+> Signed-off-by: Conghui Chen <conghui.chen@intel.com>
+> Signed-off-by: Jie Deng <jie.deng@intel.com>
+> Reviewed-by: Shuo Liu <shuo.a.liu@intel.com>
+> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+
+I assume this will be updated once the specification is acked
+by the virtio tc. Holding off on this one for now since
+we know there will be host/guest ABI changes.
+
+> ---
+> The device ID request:
+>         https://github.com/oasis-tcs/virtio-spec/issues/85
+> 
+> The specification:
+> 	https://lists.oasis-open.org/archives/virtio-comment/202009/msg00021.html
+> 
+> Changes in v4:
+> 	- Use (!(vmsg && vmsg == &vi->vmsg)) instead of ((!vmsg) || (vmsg != &vi->vmsg))
+> 
+> Changes in v3:
+>         - Move the interface into uAPI according to Jason.
+>         - Fix issues reported by Dan Carpenter.
+> 	- Fix typo reported by Randy.
+> 
+> Changes in v2:
+>         - Addressed comments received from Michael, Andy and Jason.
+> 
+>  drivers/i2c/busses/Kconfig      |  11 ++
+>  drivers/i2c/busses/Makefile     |   3 +
+>  drivers/i2c/busses/i2c-virtio.c | 256 ++++++++++++++++++++++++++++++++++++++++
+>  include/uapi/linux/virtio_i2c.h |  31 +++++
+>  include/uapi/linux/virtio_ids.h |   1 +
+>  5 files changed, 302 insertions(+)
+>  create mode 100644 drivers/i2c/busses/i2c-virtio.c
+>  create mode 100644 include/uapi/linux/virtio_i2c.h
+> 
+> diff --git a/drivers/i2c/busses/Kconfig b/drivers/i2c/busses/Kconfig
+> index 293e7a0..f2f6543 100644
+> --- a/drivers/i2c/busses/Kconfig
+> +++ b/drivers/i2c/busses/Kconfig
+> @@ -21,6 +21,17 @@ config I2C_ALI1535
+>  	  This driver can also be built as a module.  If so, the module
+>  	  will be called i2c-ali1535.
+>  
+> +config I2C_VIRTIO
+> +	tristate "Virtio I2C Adapter"
+> +	depends on VIRTIO
+> +	help
+> +	  If you say yes to this option, support will be included for the virtio
+> +	  I2C adapter driver. The hardware can be emulated by any device model
+> +	  software according to the virtio protocol.
+> +
+> +	  This driver can also be built as a module. If so, the module
+> +	  will be called i2c-virtio.
+> +
+>  config I2C_ALI1563
+>  	tristate "ALI 1563"
+>  	depends on PCI
+> diff --git a/drivers/i2c/busses/Makefile b/drivers/i2c/busses/Makefile
+> index 19aff0e..821acfa 100644
+> --- a/drivers/i2c/busses/Makefile
+> +++ b/drivers/i2c/busses/Makefile
+> @@ -6,6 +6,9 @@
+>  # ACPI drivers
+>  obj-$(CONFIG_I2C_SCMI)		+= i2c-scmi.o
+>  
+> +# VIRTIO I2C host controller driver
+> +obj-$(CONFIG_I2C_VIRTIO)	+= i2c-virtio.o
+> +
+>  # PC SMBus host controller drivers
+>  obj-$(CONFIG_I2C_ALI1535)	+= i2c-ali1535.o
+>  obj-$(CONFIG_I2C_ALI1563)	+= i2c-ali1563.o
+> diff --git a/drivers/i2c/busses/i2c-virtio.c b/drivers/i2c/busses/i2c-virtio.c
+> new file mode 100644
+> index 0000000..36d8c68
+> --- /dev/null
+> +++ b/drivers/i2c/busses/i2c-virtio.c
+> @@ -0,0 +1,256 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Virtio I2C Bus Driver
+> + *
+> + * Copyright (c) 2020 Intel Corporation. All rights reserved.
+> + */
+> +
+> +#include <linux/acpi.h>
+> +#include <linux/completion.h>
+> +#include <linux/err.h>
+> +#include <linux/i2c.h>
+> +#include <linux/io.h>
+> +#include <linux/jiffies.h>
+> +#include <linux/kernel.h>
+> +#include <linux/module.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/wait.h>
+> +
+> +#include <linux/virtio.h>
+> +#include <linux/virtio_i2c.h>
+> +
+> +/**
+> + * struct virtio_i2c_msg - the virtio I2C message structure
+> + * @hdr: the virtio I2C message header
+> + * @buf: virtio I2C message data buffer
+> + * @status: the processing result from the backend
+> + */
+> +struct virtio_i2c_msg {
+> +	struct virtio_i2c_hdr hdr;
+> +	u8 *buf;
+> +	u8 status;
+> +};
+> +
+> +/**
+> + * struct virtio_i2c - virtio I2C data
+> + * @vdev: virtio device for this controller
+> + * @completion: completion of virtio I2C message
+> + * @vmsg: the virtio I2C message for communication
+> + * @adap: I2C adapter for this controller
+> + * @i2c_lock: lock for virtqueue processing
+> + * @vq: the virtio virtqueue for communication
+> + */
+> +struct virtio_i2c {
+> +	struct virtio_device *vdev;
+> +	struct completion completion;
+> +	struct virtio_i2c_msg vmsg;
+> +	struct i2c_adapter adap;
+> +	struct mutex i2c_lock;
+> +	struct virtqueue *vq;
+> +};
+> +
+> +static void virtio_i2c_msg_done(struct virtqueue *vq)
+> +{
+> +	struct virtio_i2c *vi = vq->vdev->priv;
+> +
+> +	complete(&vi->completion);
+> +}
+> +
+> +static int virtio_i2c_add_msg(struct virtqueue *vq,
+> +			      struct virtio_i2c_msg *vmsg,
+> +			      struct i2c_msg *msg)
+> +{
+> +	struct scatterlist *sgs[3], hdr, bout, bin, status;
+> +	int outcnt = 0, incnt = 0;
+> +
+> +	if (!msg->len)
+> +		return -EINVAL;
+> +
+> +	vmsg->hdr.addr = cpu_to_le16(msg->addr);
+> +	vmsg->hdr.flags = cpu_to_le16(msg->flags);
+> +	vmsg->hdr.len = cpu_to_le16(msg->len);
+> +
+> +	vmsg->buf = kzalloc(msg->len, GFP_KERNEL);
+> +	if (!vmsg->buf)
+> +		return -ENOMEM;
+> +
+> +	sg_init_one(&hdr, &vmsg->hdr, sizeof(struct virtio_i2c_hdr));
+> +	sgs[outcnt++] = &hdr;
+> +	if (msg->flags & I2C_M_RD) {
+> +		sg_init_one(&bin, vmsg->buf, msg->len);
+> +		sgs[outcnt + incnt++] = &bin;
+> +	} else {
+> +		memcpy(vmsg->buf, msg->buf, msg->len);
+> +		sg_init_one(&bout, vmsg->buf, msg->len);
+> +		sgs[outcnt++] = &bout;
+> +	}
+> +	sg_init_one(&status, &vmsg->status, sizeof(vmsg->status));
+> +	sgs[outcnt + incnt++] = &status;
+> +
+> +	return virtqueue_add_sgs(vq, sgs, outcnt, incnt, vmsg, GFP_KERNEL);
+> +}
+> +
+> +static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
+> +{
+> +	struct virtio_i2c *vi = i2c_get_adapdata(adap);
+> +	struct virtqueue *vq = vi->vq;
+> +	struct virtio_i2c_msg *vmsg;
+> +	unsigned long time_left;
+> +	int len, i, ret = 0;
+> +
+> +	mutex_lock(&vi->i2c_lock);
+> +	vmsg = &vi->vmsg;
+> +	vmsg->buf = NULL;
+> +
+> +	for (i = 0; i < num; i++) {
+> +		ret = virtio_i2c_add_msg(vq, vmsg, &msgs[i]);
+> +		if (ret) {
+> +			dev_err(&adap->dev, "failed to add msg[%d] to virtqueue.\n", i);
+> +			break;
+> +		}
+> +
+> +		virtqueue_kick(vq);
+> +
+> +		time_left = wait_for_completion_timeout(&vi->completion, adap->timeout);
+> +		if (!time_left) {
+> +			dev_err(&adap->dev, "msg[%d]: addr=0x%x timeout.\n", i, msgs[i].addr);
+> +			break;
+> +		}
+> +
+> +		vmsg = (struct virtio_i2c_msg *)virtqueue_get_buf(vq, &len);
+> +		/* vmsg should point to the same address with &vi->vmsg */
+> +		if (!(vmsg && vmsg == &vi->vmsg)) {
+> +			dev_err(&adap->dev, "msg[%d]: addr=0x%x virtqueue error.\n",
+> +				i, msgs[i].addr);
+> +			break;
+> +		}
+> +
+> +		if (vmsg->status != VIRTIO_I2C_MSG_OK) {
+> +			dev_err(&adap->dev, "msg[%d]: addr=0x%x error=%d.\n",
+> +				i, msgs[i].addr, vmsg->status);
+> +			break;
+> +		}
+> +
+> +		if ((msgs[i].flags & I2C_M_RD) && msgs[i].len)
+> +			memcpy(msgs[i].buf, vmsg->buf, msgs[i].len);
+> +
+> +		kfree(vmsg->buf);
+> +		vmsg->buf = NULL;
+> +
+> +		reinit_completion(&vi->completion);
+> +	}
+> +
+> +	mutex_unlock(&vi->i2c_lock);
+> +	kfree(vi->vmsg.buf);
+> +	vi->vmsg.buf = NULL;
+> +	return ((ret < 0) ? ret : i);
+> +}
+> +
+> +static void virtio_i2c_del_vqs(struct virtio_device *vdev)
+> +{
+> +	vdev->config->reset(vdev);
+> +	vdev->config->del_vqs(vdev);
+> +}
+> +
+> +static int virtio_i2c_setup_vqs(struct virtio_i2c *vi)
+> +{
+> +	struct virtio_device *vdev = vi->vdev;
+> +
+> +	vi->vq = virtio_find_single_vq(vdev, virtio_i2c_msg_done, "msg");
+> +	return PTR_ERR_OR_ZERO(vi->vq);
+> +}
+> +
+> +static u32 virtio_i2c_func(struct i2c_adapter *adap)
+> +{
+> +	return I2C_FUNC_I2C | I2C_FUNC_SMBUS_EMUL;
+> +}
+> +
+> +static struct i2c_algorithm virtio_algorithm = {
+> +	.master_xfer = virtio_i2c_xfer,
+> +	.functionality = virtio_i2c_func,
+> +};
+> +
+> +static struct i2c_adapter virtio_adapter = {
+> +	.owner = THIS_MODULE,
+> +	.name = "Virtio I2C Adapter",
+> +	.class = I2C_CLASS_DEPRECATED,
+> +	.algo = &virtio_algorithm,
+> +};
+> +
+> +static int virtio_i2c_probe(struct virtio_device *vdev)
+> +{
+> +	struct device *pdev = vdev->dev.parent;
+> +	struct virtio_i2c *vi;
+> +	int ret;
+> +
+> +	vi = devm_kzalloc(&vdev->dev, sizeof(*vi), GFP_KERNEL);
+> +	if (!vi)
+> +		return -ENOMEM;
+> +
+> +	vdev->priv = vi;
+> +	vi->vdev = vdev;
+> +
+> +	mutex_init(&vi->i2c_lock);
+> +	init_completion(&vi->completion);
+> +
+> +	ret = virtio_i2c_setup_vqs(vi);
+> +	if (ret)
+> +		return ret;
+> +
+> +	vi->adap = virtio_adapter;
+> +	i2c_set_adapdata(&vi->adap, vi);
+> +	vi->adap.dev.parent = &vdev->dev;
+> +	/* Setup ACPI node for slave devices which will be probed through ACPI */
+> +	ACPI_COMPANION_SET(&vi->adap.dev, ACPI_COMPANION(pdev));
+> +	vi->adap.timeout = HZ / 10;
+> +
+> +	ret = i2c_add_adapter(&vi->adap);
+> +	if (ret) {
+> +		virtio_i2c_del_vqs(vdev);
+> +		dev_err(&vdev->dev, "failed to add virtio-i2c adapter.\n");
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static void virtio_i2c_remove(struct virtio_device *vdev)
+> +{
+> +	struct virtio_i2c *vi = vdev->priv;
+> +
+> +	i2c_del_adapter(&vi->adap);
+> +	virtio_i2c_del_vqs(vdev);
+> +}
+> +
+> +static struct virtio_device_id id_table[] = {
+> +	{ VIRTIO_ID_I2C_ADPTER, VIRTIO_DEV_ANY_ID },
+> +	{}
+> +};
+> +MODULE_DEVICE_TABLE(virtio, id_table);
+> +
+> +static int __maybe_unused virtio_i2c_freeze(struct virtio_device *vdev)
+> +{
+> +	virtio_i2c_del_vqs(vdev);
+> +	return 0;
+> +}
+> +
+> +static int __maybe_unused virtio_i2c_restore(struct virtio_device *vdev)
+> +{
+> +	return virtio_i2c_setup_vqs(vdev->priv);
+> +}
+> +
+> +static struct virtio_driver virtio_i2c_driver = {
+> +	.id_table	= id_table,
+> +	.probe		= virtio_i2c_probe,
+> +	.remove		= virtio_i2c_remove,
+> +	.driver	= {
+> +		.name	= "i2c_virtio",
+> +	},
+> +#ifdef CONFIG_PM_SLEEP
+> +	.freeze = virtio_i2c_freeze,
+> +	.restore = virtio_i2c_restore,
+> +#endif
+> +};
+> +module_virtio_driver(virtio_i2c_driver);
+> +
+> +MODULE_DESCRIPTION("Virtio i2c bus driver");
+> +MODULE_LICENSE("GPL");
+> diff --git a/include/uapi/linux/virtio_i2c.h b/include/uapi/linux/virtio_i2c.h
+> new file mode 100644
+> index 0000000..7413e45
+> --- /dev/null
+> +++ b/include/uapi/linux/virtio_i2c.h
+> @@ -0,0 +1,31 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
+> +/*
+> + * Definitions for virtio I2C Adpter
+> + *
+> + * Copyright (c) 2020 Intel Corporation. All rights reserved.
+> + */
+> +
+> +#ifndef _UAPI_LINUX_VIRTIO_I2C_H
+> +#define _UAPI_LINUX_VIRTIO_I2C_H
+> +
+> +#include <linux/types.h>
+> +#include <linux/virtio_ids.h>
+> +#include <linux/virtio_config.h>
+> +
+> +/**
+> + * struct virtio_i2c_hdr - the virtio I2C message header structure
+> + * @addr: i2c_msg addr, the slave address
+> + * @flags: i2c_msg flags
+> + * @len: i2c_msg len
+> + */
+> +struct virtio_i2c_hdr {
+> +	__le16 addr;
+> +	__le16 flags;
+> +	__le16 len;
+> +};
+> +
+> +/* The final status written by the device */
+> +#define VIRTIO_I2C_MSG_OK	0
+> +#define VIRTIO_I2C_MSG_ERR	1
+> +
+> +#endif /* _UAPI_LINUX_VIRTIO_I2C_H */
+> diff --git a/include/uapi/linux/virtio_ids.h b/include/uapi/linux/virtio_ids.h
+> index b052355..398ef2d 100644
+> --- a/include/uapi/linux/virtio_ids.h
+> +++ b/include/uapi/linux/virtio_ids.h
+> @@ -48,5 +48,6 @@
+>  #define VIRTIO_ID_FS           26 /* virtio filesystem */
+>  #define VIRTIO_ID_PMEM         27 /* virtio pmem */
+>  #define VIRTIO_ID_MAC80211_HWSIM 29 /* virtio mac80211-hwsim */
+> +#define VIRTIO_ID_I2C_ADPTER   34 /* virtio i2c adpter */
+>  
+>  #endif /* _LINUX_VIRTIO_IDS_H */
+> -- 
+> 2.7.4
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
