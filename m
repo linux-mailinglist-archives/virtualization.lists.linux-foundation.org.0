@@ -1,73 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id B32282C5766
-	for <lists.virtualization@lfdr.de>; Thu, 26 Nov 2020 15:52:01 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 68B0E875AF;
-	Thu, 26 Nov 2020 14:52:00 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id N3uUhE9hYDFE; Thu, 26 Nov 2020 14:52:00 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id EFB91875AB;
-	Thu, 26 Nov 2020 14:51:59 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D2906C0052;
-	Thu, 26 Nov 2020 14:51:59 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8A48DC1836
- for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Nov 2020 14:51:58 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4297E2C5769
+	for <lists.virtualization@lfdr.de>; Thu, 26 Nov 2020 15:52:08 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 86A3E877C1
- for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Nov 2020 14:51:58 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E79AE877DD;
+	Thu, 26 Nov 2020 14:52:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KeWaV9K8jmX2
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 8HgW6vWz-arL; Thu, 26 Nov 2020 14:52:05 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id 80C07877E1;
+	Thu, 26 Nov 2020 14:52:05 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5CAFCC0052;
+	Thu, 26 Nov 2020 14:52:05 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F0070C1D9F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Nov 2020 14:51:57 +0000 (UTC)
+ Thu, 26 Nov 2020 14:52:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id D589D2E242
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 26 Nov 2020 14:52:03 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id qy28hRImuCJF
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 26 Nov 2020 14:52:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id AB123877B7
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by silver.osuosl.org (Postfix) with ESMTPS id B5D692E243
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Nov 2020 14:51:57 +0000 (UTC)
+ Thu, 26 Nov 2020 14:52:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1606402316;
+ s=mimecast20190719; t=1606402320;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zgeuJHqaj3U5wNqlggBJs76w7QiOxVJJ27PT5+3lfuM=;
- b=OwQ6GEtwiOXCXOSpDVcp1h/yPzaVmVSOkZ3vFsuGdJil7AEtvkuCqZv4opK9UkvN+2uKBY
- lhvI4y7TPQtzLQ5oSjIt1rPEVKhhXD3srxPzvesHky+XUSQwWCCvjYyT91s827l8XbUN6D
- rmX84QVV3E8MQWjdsQeGazUh+svHxhc=
+ bh=Yd5o1ZhT6n3IllGPM9QevybiC1ZAZ/hson6rMvA9R3Y=;
+ b=J+tA97uL+uV21kizknVIkGjhr0tQF7ulLU4oV/wOXmF4cZdjo4XH2FB7jkZza4JZbVpWjN
+ kzmQJ14suG0plylaxYcJJTOJNTvmAnP0AdsrEiopPsHZgcNfBNpkA7XJrsWoy3KCTaxxVq
+ RQoyY4xq44i/aiSkerzoLeICEtKfy10=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-456-jKWCr-bYNNC1mwQ2urLg7Q-1; Thu, 26 Nov 2020 09:51:54 -0500
-X-MC-Unique: jKWCr-bYNNC1mwQ2urLg7Q-1
+ us-mta-431-PX7VQgOZO52-vMZDb_ZqFg-1; Thu, 26 Nov 2020 09:51:56 -0500
+X-MC-Unique: PX7VQgOZO52-vMZDb_ZqFg-1
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 22810180E48E;
- Thu, 26 Nov 2020 14:51:53 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3D87E1E7DB;
+ Thu, 26 Nov 2020 14:51:55 +0000 (UTC)
 Received: from steredhat.redhat.com (ovpn-113-252.ams2.redhat.com
  [10.36.113.252])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5003B60855;
- Thu, 26 Nov 2020 14:51:51 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7673E60855;
+ Thu, 26 Nov 2020 14:51:53 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v2 13/17] vdpa_sim: set vringh notify callback
-Date: Thu, 26 Nov 2020 15:49:46 +0100
-Message-Id: <20201126144950.92850-14-sgarzare@redhat.com>
+Subject: [PATCH v2 14/17] vdpa_sim: use kvmalloc to allocate vdpasim->buffer
+Date: Thu, 26 Nov 2020 15:49:47 +0100
+Message-Id: <20201126144950.92850-15-sgarzare@redhat.com>
 In-Reply-To: <20201126144950.92850-1-sgarzare@redhat.com>
 References: <20201126144950.92850-1-sgarzare@redhat.com>
 MIME-Version: 1.0
@@ -91,62 +91,39 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Instead of calling the vq callback directly, we can leverage the
-vringh_notify() function, adding vdpasim_vq_notify() and setting it
-in the vringh notify callback.
+The next patch will make the buffer size configurable from each
+device.
+Since the buffer could be larger than a page, we use kvmalloc()
+instead of kmalloc().
 
-Suggested-by: Jason Wang <jasowang@redhat.com>
+Acked-by: Jason Wang <jasowang@redhat.com>
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 21 +++++++++++++++++----
- 1 file changed, 17 insertions(+), 4 deletions(-)
+ drivers/vdpa/vdpa_sim/vdpa_sim.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 8b87ce0485b6..4327efd6d41e 100644
+index 4327efd6d41e..3bcf622949c8 100644
 --- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
 +++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -120,6 +120,17 @@ static struct vdpasim *dev_to_sim(struct device *dev)
- 	return vdpa_to_sim(vdpa);
- }
+@@ -405,7 +405,7 @@ static struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr)
+ 	if (!vdpasim->iommu)
+ 		goto err_iommu;
  
-+static void vdpasim_vq_notify(struct vringh *vring)
-+{
-+	struct vdpasim_virtqueue *vq =
-+		container_of(vring, struct vdpasim_virtqueue, vring);
-+
-+	if (!vq->cb)
-+		return;
-+
-+	vq->cb(vq->private);
-+}
-+
- static void vdpasim_queue_ready(struct vdpasim *vdpasim, unsigned int idx)
- {
- 	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
-@@ -131,6 +142,8 @@ static void vdpasim_queue_ready(struct vdpasim *vdpasim, unsigned int idx)
- 			  (uintptr_t)vq->driver_addr,
- 			  (struct vring_used *)
- 			  (uintptr_t)vq->device_addr);
-+
-+	vq->vring.notify = vdpasim_vq_notify;
- }
+-	vdpasim->buffer = kmalloc(PAGE_SIZE, GFP_KERNEL);
++	vdpasim->buffer = kvmalloc(PAGE_SIZE, GFP_KERNEL);
+ 	if (!vdpasim->buffer)
+ 		goto err_iommu;
  
- static void vdpasim_vq_reset(struct vdpasim *vdpasim,
-@@ -220,10 +233,10 @@ static void vdpasim_net_work(struct work_struct *work)
- 		smp_wmb();
+@@ -686,7 +686,7 @@ static void vdpasim_free(struct vdpa_device *vdpa)
+ 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
  
- 		local_bh_disable();
--		if (txq->cb)
--			txq->cb(txq->private);
--		if (rxq->cb)
--			rxq->cb(rxq->private);
-+		if (vringh_need_notify_iotlb(&txq->vring) > 0)
-+			vringh_notify(&txq->vring);
-+		if (vringh_need_notify_iotlb(&rxq->vring) > 0)
-+			vringh_notify(&rxq->vring);
- 		local_bh_enable();
- 
- 		if (++pkts > 4) {
+ 	cancel_work_sync(&vdpasim->work);
+-	kfree(vdpasim->buffer);
++	kvfree(vdpasim->buffer);
+ 	if (vdpasim->iommu)
+ 		vhost_iotlb_free(vdpasim->iommu);
+ 	kfree(vdpasim->vqs);
 -- 
 2.26.2
 
