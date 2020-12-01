@@ -1,65 +1,59 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D5592C9E58
-	for <lists.virtualization@lfdr.de>; Tue,  1 Dec 2020 10:50:31 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7753D2C9F62
+	for <lists.virtualization@lfdr.de>; Tue,  1 Dec 2020 11:36:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id EE9AF87CD2;
-	Tue,  1 Dec 2020 09:50:29 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id BCB2C2E14A;
+	Tue,  1 Dec 2020 10:36:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lZdwawzNI4GR; Tue,  1 Dec 2020 09:50:28 +0000 (UTC)
+	with ESMTP id s+rSVX8AqtpE; Tue,  1 Dec 2020 10:35:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id D5AC087CB7;
-	Tue,  1 Dec 2020 09:50:28 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 0154D2E138;
+	Tue,  1 Dec 2020 10:35:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AE0BBC0052;
-	Tue,  1 Dec 2020 09:50:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B9F0FC163C;
+	Tue,  1 Dec 2020 10:35:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A61FEC0052
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C288CC0052
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Dec 2020 09:50:26 +0000 (UTC)
+ Tue,  1 Dec 2020 10:35:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id A11EC874D4
+ by whitealder.osuosl.org (Postfix) with ESMTP id B03B98737C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Dec 2020 09:50:26 +0000 (UTC)
+ Tue,  1 Dec 2020 10:35:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PWtlPJz59ROj
+ with ESMTP id 7l54WRSRVfxr
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Dec 2020 09:50:24 +0000 (UTC)
+ Tue,  1 Dec 2020 10:35:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by hemlock.osuosl.org (Postfix) with ESMTPS id B77E6874C1
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4006987338
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Dec 2020 09:50:23 +0000 (UTC)
+ Tue,  1 Dec 2020 10:35:50 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8C5F8AC65;
- Tue,  1 Dec 2020 09:50:21 +0000 (UTC)
-To: Sam Ravnborg <sam@ravnborg.org>
-References: <20201124113824.19994-1-tzimmermann@suse.de>
- <20201124113824.19994-10-tzimmermann@suse.de>
- <20201124214208.GB93095@ravnborg.org>
+ by mx2.suse.de (Postfix) with ESMTP id CF874ACC1;
+ Tue,  1 Dec 2020 10:35:48 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 09/15] drm/nouveau: Remove references to struct
- drm_device.pdev
-Message-ID: <77dcf689-d22c-5ae8-8c46-10ce7a546a63@suse.de>
-Date: Tue, 1 Dec 2020 10:50:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
+To: airlied@linux.ie,
+	daniel@ffwll.ch
+Subject: [PATCH v2 00/20] drm: Move struct drm_device.pdev to legacy
+Date: Tue,  1 Dec 2020 11:35:22 +0100
+Message-Id: <20201201103542.2182-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-In-Reply-To: <20201124214208.GB93095@ravnborg.org>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, amd-gfx@lists.freedesktop.org,
- daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
- intel-gvt-dev@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ amd-gfx@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ spice-devel@lists.freedesktop.org, intel-gvt-dev@lists.freedesktop.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,259 +65,196 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3563482581291003900=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============3563482581291003900==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="4bE8wtoD18K52eefsY2TD0VT1msAv6pGQ"
+The pdev field in struct drm_device points to a PCI device structure and
+goes back to UMS-only days when all DRM drivers were for PCI devices.
+Meanwhile we also support USB, SPI and platform devices. Each of those
+uses the generic device stored in struct drm_device.dev.
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---4bE8wtoD18K52eefsY2TD0VT1msAv6pGQ
-Content-Type: multipart/mixed; boundary="h9BtDHO1BkSllNSHbFLWYUa8dv8v2U8Rv";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Sam Ravnborg <sam@ravnborg.org>
-Cc: airlied@linux.ie, daniel@ffwll.ch, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, amd-gfx@lists.freedesktop.org,
- spice-devel@lists.freedesktop.org, intel-gvt-dev@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>
-Message-ID: <77dcf689-d22c-5ae8-8c46-10ce7a546a63@suse.de>
-Subject: Re: [PATCH 09/15] drm/nouveau: Remove references to struct
- drm_device.pdev
-References: <20201124113824.19994-1-tzimmermann@suse.de>
- <20201124113824.19994-10-tzimmermann@suse.de>
- <20201124214208.GB93095@ravnborg.org>
-In-Reply-To: <20201124214208.GB93095@ravnborg.org>
+To reduce duplication and remove the special case of PCI, this patchset
+converts all modesetting drivers from pdev to dev and makes pdev a field
+for legacy UMS drivers.
 
---h9BtDHO1BkSllNSHbFLWYUa8dv8v2U8Rv
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+For PCI devices, the pointer in struct drm_device.dev can be upcasted to
+struct pci_device; or tested for PCI with dev_is_pci(). In several places
+the code can use the dev field directly.
 
-Hi Sam
+After converting all drivers and the DRM core, the pdev fields becomes
+only relevant for legacy drivers. In a later patchset, we may want to
+convert these as well and remove pdev entirely.
 
-Am 24.11.20 um 22:42 schrieb Sam Ravnborg:
-> Hi Thomas.
->=20
-> On Tue, Nov 24, 2020 at 12:38:18PM +0100, Thomas Zimmermann wrote:
->> Using struct drm_device.pdev is deprecated. Convert nouveau to struct
->> drm_device.dev. No functional changes.
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> Cc: Ben Skeggs <bskeggs@redhat.com>
->=20
-> Suggestion to an alternative implmentation below.
->=20
->> ---
->>   drivers/gpu/drm/nouveau/dispnv04/arb.c      | 12 +++++++-----
->>   drivers/gpu/drm/nouveau/dispnv04/disp.h     | 14 ++++++++------
->>   drivers/gpu/drm/nouveau/dispnv04/hw.c       | 10 ++++++----
->>   drivers/gpu/drm/nouveau/nouveau_abi16.c     |  7 ++++---
->>   drivers/gpu/drm/nouveau/nouveau_acpi.c      |  2 +-
->>   drivers/gpu/drm/nouveau/nouveau_bios.c      | 11 ++++++++---
->>   drivers/gpu/drm/nouveau/nouveau_connector.c | 10 ++++++----
->>   drivers/gpu/drm/nouveau/nouveau_drm.c       |  5 ++---
->>   drivers/gpu/drm/nouveau/nouveau_fbcon.c     |  6 ++++--
->>   drivers/gpu/drm/nouveau/nouveau_vga.c       | 20 ++++++++++++-------=
--
->>   10 files changed, 58 insertions(+), 39 deletions(-)
->>
->=20
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/=
-nouveau/nouveau_bios.c
->> index d204ea8a5618..7cc683b8dc7a 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
->> @@ -110,6 +110,9 @@ static int call_lvds_manufacturer_script(struct dr=
-m_device *dev, struct dcb_outp
->>   	struct nvbios *bios =3D &drm->vbios;
->>   	uint8_t sub =3D bios->data[bios->fp.xlated_entry + script] + (bios-=
->fp.link_c_increment && dcbent->or & DCB_OUTPUT_C ? 1 : 0);
->>   	uint16_t scriptofs =3D ROM16(bios->data[bios->init_script_tbls_ptr =
-+ sub * 2]);
->> +#ifdef __powerpc__
->> +	struct pci_dev *pdev =3D to_pci_dev(dev->dev);
->> +#endif
-> Or
-> 	int device =3D 0;
->>  =20
->>   	if (!bios->fp.xlated_entry || !sub || !scriptofs)
->>   		return -EINVAL;
->> @@ -123,8 +126,8 @@ static int call_lvds_manufacturer_script(struct dr=
-m_device *dev, struct dcb_outp
->>   #ifdef __powerpc__
->>   	/* Powerbook specific quirks */
-> 	device =3D to_pci_dev(dev->dev)->device;
-> 	if (script =3D=3D LVDS_RESET && (device =3D=3D 0x0179 || device =3D=3D=
- 0x0189 || device =3D=3D 0x0329))
+The patchset touches many files, but the individual changes are mostly
+trivial. I suggest to merge each driver's patch through the respective
+tree and later the rest through drm-misc-next.
 
-I see the point, but I'm trying to not change the existing=20
-implementation too much.
+v2:
+	* move whitespace fixes into separate patches (Alex, Sam)
+	* move i915 gt/ and gvt/ changes into separate patches (Joonas)
 
->=20
->>   	if (script =3D=3D LVDS_RESET &&
->> -	    (dev->pdev->device =3D=3D 0x0179 || dev->pdev->device =3D=3D 0x0=
-189 ||
->> -	     dev->pdev->device =3D=3D 0x0329))
->> +	    (pdev->device =3D=3D 0x0179 || pdev->device =3D=3D 0x0189 ||
->> +	     pdev->device =3D=3D 0x0329))
->>   		nv_write_tmds(dev, dcbent->or, 0, 0x02, 0x72);
->>   #endif
->>  =20
->=20
->=20
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c b/drivers/gpu/drm=
-/nouveau/nouveau_fbcon.c
->> index 24ec5339efb4..4fc0fa696461 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
->> @@ -396,7 +396,9 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,=
+Thomas Zimmermann (20):
+  drm/amdgpu: Fix trailing whitespaces
+  drm/amdgpu: Remove references to struct drm_device.pdev
+  drm/ast: Remove references to struct drm_device.pdev
+  drm/bochs: Remove references to struct drm_device.pdev
+  drm/cirrus: Remove references to struct drm_device.pdev
+  drm/gma500: Fix trailing whitespaces
+  drm/gma500: Remove references to struct drm_device.pdev
+  drm/hibmc: Remove references to struct drm_device.pdev
+  drm/i915: Remove references to struct drm_device.pdev
+  drm/i915/gt: Remove references to struct drm_device.pdev
+  drm/i915/gvt: Remove references to struct drm_device.pdev
+  drm/mgag200: Remove references to struct drm_device.pdev
+  drm/nouveau: Remove references to struct drm_device.pdev
+  drm/qxl: Remove references to struct drm_device.pdev
+  drm/radeon: Fix trailing whitespaces
+  drm/radeon: Remove references to struct drm_device.pdev
+  drm/vboxvideo: Remove references to struct drm_device.pdev
+  drm/virtgpu: Remove references to struct drm_device.pdev
+  drm/vmwgfx: Remove references to struct drm_device.pdev
+  drm: Upcast struct drm_device.dev to struct pci_device; replace pdev
 
->>   	NV_INFO(drm, "allocated %dx%d fb: 0x%llx, bo %p\n",
->>   		fb->width, fb->height, nvbo->offset, nvbo);
->>  =20
->> -	vga_switcheroo_client_fb_set(dev->pdev, info);
->> +	if (dev_is_pci(dev->dev))
->> +		vga_switcheroo_client_fb_set(to_pci_dev(dev->dev), info);
->> +
-> I cannot see why dev_is_pci() is needed here.
-> So I am obviously missing something :-(
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    | 23 +++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_fb.c        |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       | 10 +--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_i2c.c       |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c       | 10 +--
+ drivers/gpu/drm/ast/ast_drv.c                 |  4 +-
+ drivers/gpu/drm/ast/ast_main.c                | 25 +++---
+ drivers/gpu/drm/ast/ast_mm.c                  | 17 ++--
+ drivers/gpu/drm/ast/ast_mode.c                |  5 +-
+ drivers/gpu/drm/ast/ast_post.c                |  8 +-
+ drivers/gpu/drm/bochs/bochs_drv.c             |  1 -
+ drivers/gpu/drm/bochs/bochs_hw.c              |  4 +-
+ drivers/gpu/drm/drm_agpsupport.c              |  9 +-
+ drivers/gpu/drm/drm_bufs.c                    |  4 +-
+ drivers/gpu/drm/drm_edid.c                    |  7 +-
+ drivers/gpu/drm/drm_irq.c                     | 12 +--
+ drivers/gpu/drm/drm_pci.c                     | 26 +++---
+ drivers/gpu/drm/drm_vm.c                      |  2 +-
+ drivers/gpu/drm/gma500/cdv_device.c           | 30 ++++---
+ drivers/gpu/drm/gma500/cdv_intel_crt.c        |  3 +-
+ drivers/gpu/drm/gma500/cdv_intel_lvds.c       |  4 +-
+ drivers/gpu/drm/gma500/framebuffer.c          |  9 +-
+ drivers/gpu/drm/gma500/gma_device.c           |  3 +-
+ drivers/gpu/drm/gma500/gma_display.c          |  4 +-
+ drivers/gpu/drm/gma500/gtt.c                  | 20 +++--
+ drivers/gpu/drm/gma500/intel_bios.c           |  6 +-
+ drivers/gpu/drm/gma500/intel_gmbus.c          |  4 +-
+ drivers/gpu/drm/gma500/intel_i2c.c            |  2 +-
+ drivers/gpu/drm/gma500/mdfld_device.c         |  4 +-
+ drivers/gpu/drm/gma500/mdfld_dsi_dpi.c        |  8 +-
+ drivers/gpu/drm/gma500/mid_bios.c             |  9 +-
+ drivers/gpu/drm/gma500/oaktrail_device.c      |  5 +-
+ drivers/gpu/drm/gma500/oaktrail_lvds.c        |  2 +-
+ drivers/gpu/drm/gma500/oaktrail_lvds_i2c.c    |  2 +-
+ drivers/gpu/drm/gma500/opregion.c             |  3 +-
+ drivers/gpu/drm/gma500/power.c                | 13 +--
+ drivers/gpu/drm/gma500/psb_drv.c              | 16 ++--
+ drivers/gpu/drm/gma500/psb_drv.h              |  8 +-
+ drivers/gpu/drm/gma500/psb_intel_lvds.c       |  6 +-
+ drivers/gpu/drm/gma500/psb_intel_sdvo.c       |  2 +-
+ drivers/gpu/drm/gma500/tc35876x-dsi-lvds.c    | 36 ++++----
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   | 10 +--
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_i2c.c   |  2 +-
+ drivers/gpu/drm/hisilicon/hibmc/hibmc_ttm.c   |  4 +-
+ drivers/gpu/drm/i915/display/intel_bios.c     |  2 +-
+ drivers/gpu/drm/i915/display/intel_cdclk.c    | 14 +--
+ drivers/gpu/drm/i915/display/intel_csr.c      |  2 +-
+ drivers/gpu/drm/i915/display/intel_dsi_vbt.c  |  2 +-
+ drivers/gpu/drm/i915/display/intel_fbdev.c    |  2 +-
+ drivers/gpu/drm/i915/display/intel_gmbus.c    |  2 +-
+ .../gpu/drm/i915/display/intel_lpe_audio.c    |  5 +-
+ drivers/gpu/drm/i915/display/intel_opregion.c |  6 +-
+ drivers/gpu/drm/i915/display/intel_overlay.c  |  2 +-
+ drivers/gpu/drm/i915/display/intel_panel.c    |  4 +-
+ drivers/gpu/drm/i915/display/intel_quirks.c   |  2 +-
+ drivers/gpu/drm/i915/display/intel_sdvo.c     |  2 +-
+ drivers/gpu/drm/i915/display/intel_vga.c      |  8 +-
+ drivers/gpu/drm/i915/gem/i915_gem_phys.c      |  6 +-
+ drivers/gpu/drm/i915/gem/i915_gem_shmem.c     |  2 +-
+ drivers/gpu/drm/i915/gt/intel_engine_cs.c     |  2 +-
+ drivers/gpu/drm/i915/gt/intel_ggtt.c          | 10 +--
+ drivers/gpu/drm/i915/gt/intel_ppgtt.c         |  2 +-
+ drivers/gpu/drm/i915/gt/intel_rc6.c           |  4 +-
+ drivers/gpu/drm/i915/gt/intel_reset.c         |  6 +-
+ drivers/gpu/drm/i915/gvt/cfg_space.c          |  5 +-
+ drivers/gpu/drm/i915/gvt/firmware.c           | 10 +--
+ drivers/gpu/drm/i915/gvt/gtt.c                | 12 +--
+ drivers/gpu/drm/i915/gvt/gvt.c                |  6 +-
+ drivers/gpu/drm/i915/gvt/kvmgt.c              |  4 +-
+ drivers/gpu/drm/i915/i915_debugfs.c           |  2 +-
+ drivers/gpu/drm/i915/i915_drv.c               | 20 ++---
+ drivers/gpu/drm/i915/i915_drv.h               |  2 +-
+ drivers/gpu/drm/i915/i915_gem_gtt.c           |  4 +-
+ drivers/gpu/drm/i915/i915_getparam.c          |  5 +-
+ drivers/gpu/drm/i915/i915_gpu_error.c         |  2 +-
+ drivers/gpu/drm/i915/i915_irq.c               |  6 +-
+ drivers/gpu/drm/i915/i915_pmu.c               |  5 +-
+ drivers/gpu/drm/i915/i915_suspend.c           |  4 +-
+ drivers/gpu/drm/i915/i915_switcheroo.c        |  4 +-
+ drivers/gpu/drm/i915/i915_vgpu.c              |  2 +-
+ drivers/gpu/drm/i915/intel_device_info.c      |  2 +-
+ drivers/gpu/drm/i915/intel_region_lmem.c      |  8 +-
+ drivers/gpu/drm/i915/intel_runtime_pm.c       |  2 +-
+ drivers/gpu/drm/i915/intel_uncore.c           |  4 +-
+ .../gpu/drm/i915/selftests/mock_gem_device.c  |  1 -
+ drivers/gpu/drm/i915/selftests/mock_gtt.c     |  2 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.c         | 20 +++--
+ drivers/gpu/drm/mgag200/mgag200_i2c.c         |  2 +-
+ drivers/gpu/drm/mgag200/mgag200_mm.c          | 10 ++-
+ drivers/gpu/drm/nouveau/dispnv04/arb.c        | 12 +--
+ drivers/gpu/drm/nouveau/dispnv04/disp.h       | 14 +--
+ drivers/gpu/drm/nouveau/dispnv04/hw.c         | 10 ++-
+ drivers/gpu/drm/nouveau/nouveau_abi16.c       |  7 +-
+ drivers/gpu/drm/nouveau/nouveau_acpi.c        |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_bios.c        | 11 ++-
+ drivers/gpu/drm/nouveau/nouveau_connector.c   | 10 ++-
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |  5 +-
+ drivers/gpu/drm/nouveau/nouveau_fbcon.c       |  6 +-
+ drivers/gpu/drm/nouveau/nouveau_vga.c         | 20 +++--
+ drivers/gpu/drm/qxl/qxl_drv.c                 |  2 +-
+ drivers/gpu/drm/qxl/qxl_ioctl.c               |  3 +-
+ drivers/gpu/drm/qxl/qxl_irq.c                 |  3 +-
+ drivers/gpu/drm/qxl/qxl_kms.c                 |  1 -
+ drivers/gpu/drm/radeon/atombios_encoders.c    |  6 +-
+ drivers/gpu/drm/radeon/r100.c                 | 27 +++---
+ drivers/gpu/drm/radeon/radeon.h               | 32 +++----
+ drivers/gpu/drm/radeon/radeon_atombios.c      | 89 ++++++++++---------
+ drivers/gpu/drm/radeon/radeon_bios.c          |  6 +-
+ drivers/gpu/drm/radeon/radeon_combios.c       | 55 ++++++------
+ drivers/gpu/drm/radeon/radeon_cs.c            |  3 +-
+ drivers/gpu/drm/radeon/radeon_device.c        | 17 ++--
+ drivers/gpu/drm/radeon/radeon_display.c       |  2 +-
+ drivers/gpu/drm/radeon/radeon_drv.c           |  3 +-
+ drivers/gpu/drm/radeon/radeon_fb.c            |  2 +-
+ drivers/gpu/drm/radeon/radeon_gem.c           |  6 +-
+ drivers/gpu/drm/radeon/radeon_i2c.c           |  2 +-
+ drivers/gpu/drm/radeon/radeon_irq_kms.c       |  2 +-
+ drivers/gpu/drm/radeon/radeon_kms.c           | 20 ++---
+ .../gpu/drm/radeon/radeon_legacy_encoders.c   |  6 +-
+ drivers/gpu/drm/radeon/rs780_dpm.c            |  7 +-
+ drivers/gpu/drm/tiny/cirrus.c                 |  1 -
+ drivers/gpu/drm/vboxvideo/vbox_drv.c          | 11 +--
+ drivers/gpu/drm/vboxvideo/vbox_irq.c          |  4 +-
+ drivers/gpu/drm/vboxvideo/vbox_main.c         |  8 +-
+ drivers/gpu/drm/vboxvideo/vbox_ttm.c          |  7 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.c          |  1 -
+ drivers/gpu/drm/vmwgfx/vmwgfx_cmdbuf.c        |  8 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           | 27 +++---
+ drivers/gpu/drm/vmwgfx/vmwgfx_fb.c            |  2 +-
+ include/drm/drm_device.h                      | 12 ++-
+ 132 files changed, 584 insertions(+), 507 deletions(-)
 
-vga_switcheroo_client_fb_set() expects a PCI device. It's a bit of a=20
-stretch, but at least it is possible to pass NULL for non-PCI devices.=20
-Passing the upcasted dev->dev is just garbage.
-
-As the VGA switcheroo is only relevant for PCI devices, I added the=20
-branching to make this work reliably.
-
-Best regards
-Thomas
-
->=20
->>   	return 0;
->>  =20
->>   out_unlock:
->> @@ -548,7 +550,7 @@ nouveau_fbcon_init(struct drm_device *dev)
->>   	int ret;
->>  =20
->>   	if (!dev->mode_config.num_crtc ||
->> -	    (dev->pdev->class >> 8) !=3D PCI_CLASS_DISPLAY_VGA)
->> +	    (to_pci_dev(dev->dev)->class >> 8) !=3D PCI_CLASS_DISPLAY_VGA)
->>   		return 0;
->>  =20
->>   	fbcon =3D kzalloc(sizeof(struct nouveau_fbdev), GFP_KERNEL);
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/n=
-ouveau/nouveau_vga.c
->> index c85dd8afa3c3..7c4b374b3eca 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_vga.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
->> @@ -87,18 +87,20 @@ nouveau_vga_init(struct nouveau_drm *drm)
->>   {
->>   	struct drm_device *dev =3D drm->dev;
->>   	bool runtime =3D nouveau_pmops_runtime();
->> +	struct pci_dev *pdev;
->>  =20
->>   	/* only relevant for PCI devices */
->> -	if (!dev->pdev)
->> +	if (!dev_is_pci(dev->dev))
->>   		return;
->> +	pdev =3D to_pci_dev(dev->dev);
->>  =20
->> -	vga_client_register(dev->pdev, dev, NULL, nouveau_vga_set_decode);
->> +	vga_client_register(pdev, dev, NULL, nouveau_vga_set_decode);
->>  =20
->>   	/* don't register Thunderbolt eGPU with vga_switcheroo */
->> -	if (pci_is_thunderbolt_attached(dev->pdev))
->> +	if (pci_is_thunderbolt_attached(pdev))
->>   		return;
->>  =20
->> -	vga_switcheroo_register_client(dev->pdev, &nouveau_switcheroo_ops, r=
-untime);
->> +	vga_switcheroo_register_client(pdev, &nouveau_switcheroo_ops, runtim=
-e);
->>  =20
->>   	if (runtime && nouveau_is_v1_dsm() && !nouveau_is_optimus())
->>   		vga_switcheroo_init_domain_pm_ops(drm->dev->dev, &drm->vga_pm_doma=
-in);
->> @@ -109,17 +111,19 @@ nouveau_vga_fini(struct nouveau_drm *drm)
->>   {
->>   	struct drm_device *dev =3D drm->dev;
->>   	bool runtime =3D nouveau_pmops_runtime();
->> +	struct pci_dev *pdev;
->>  =20
->>   	/* only relevant for PCI devices */
->> -	if (!dev->pdev)
->> +	if (!dev_is_pci(dev->dev))
->>   		return;
->> +	pdev =3D to_pci_dev(dev->dev);
->>  =20
->> -	vga_client_register(dev->pdev, NULL, NULL, NULL);
->> +	vga_client_register(pdev, NULL, NULL, NULL);
->>  =20
->> -	if (pci_is_thunderbolt_attached(dev->pdev))
->> +	if (pci_is_thunderbolt_attached(pdev))
->>   		return;
->>  =20
->> -	vga_switcheroo_unregister_client(dev->pdev);
->> +	vga_switcheroo_unregister_client(pdev);
->>   	if (runtime && nouveau_is_v1_dsm() && !nouveau_is_optimus())
->>   		vga_switcheroo_fini_domain_pm_ops(drm->dev->dev);
->>   }
->> --=20
->> 2.29.2
->>
->> _______________________________________________
->> dri-devel mailing list
->> dri-devel@lists.freedesktop.org
->> https://lists.freedesktop.org/mailman/listinfo/dri-devel
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---h9BtDHO1BkSllNSHbFLWYUa8dv8v2U8Rv--
-
---4bE8wtoD18K52eefsY2TD0VT1msAv6pGQ
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAl/GEdsFAwAAAAAACgkQlh/E3EQov+Df
-kRAAvj2+LkBCXz/2aIbjZjTpvfqk5RKkEA3ePFiR6UttUmznYEPIJkPmdsqr2JNUU5YI85JJRvM7
-7/QvWO4KXVqYbbPAzFhdHqySRrSnWpV89jseDccMSnjcHEKc1cNj386s3YDWeJ3/pmAuysLnOU30
-bTdrdkKpYL4CvHWI6RQyGG/5D65TteLwDT6ZAXThOVthuraz2XvGwt2pOhVSiwX1mNfibm2lQ0G6
-7b7sv+5l5sKaq5uETZi4iW++TmdotLrd40VioW/dttTfBwtfiIFHZm2jcO8Kb0+WkpZ4JKEDPZT2
-nfxMeK2euCeehZYCWFz4xlDg3SiBAbTTB2uhasE7McPPA25P3MoR4d8Ivf237PbA1EVSGNuTshKU
-zc4S9Rnw6zyqD9lc5rlofsyDUrESgMGQlbneHb52dUwFxIcgfdvg3nitUSBGw9deFIRDd6Rjrbu+
-+ns4Z223cVq+TEmRNSERvAxVwCDlSN2x7Q0U4P0MIBd/4cPKsmwOvjZlWlGMfpTKlfkhWyMVV0aZ
-mK6WZxRrV827KprLxdT9vSGLlPNEbYYOz1dqRsaRgtSk+XhplfGJwPBnsbPiUVt7NlOGmltFHFl8
-8+vR4ygf4RBTIO4Y23B8ba2NwuvqxMEo9asKO0hZ1IqPbQQYYRZnkqXtZtKMlIo7TUb41I8gNFHR
-Yc4=
-=91fY
------END PGP SIGNATURE-----
-
---4bE8wtoD18K52eefsY2TD0VT1msAv6pGQ--
-
---===============3563482581291003900==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+--
+2.29.2
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============3563482581291003900==--
