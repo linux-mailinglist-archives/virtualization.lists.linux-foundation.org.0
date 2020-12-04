@@ -2,66 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFF552CF19F
-	for <lists.virtualization@lfdr.de>; Fri,  4 Dec 2020 17:12:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 746B42CF2B1
+	for <lists.virtualization@lfdr.de>; Fri,  4 Dec 2020 18:08:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 9A15B87CAF;
-	Fri,  4 Dec 2020 16:12:21 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1FA8187D28;
+	Fri,  4 Dec 2020 17:08:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IU3KyVMLL8ap; Fri,  4 Dec 2020 16:12:21 +0000 (UTC)
+	with ESMTP id lAxPWrieDvKs; Fri,  4 Dec 2020 17:08:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 13C5E87CAD;
-	Fri,  4 Dec 2020 16:12:21 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8165387D27;
+	Fri,  4 Dec 2020 17:08:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E0F36C013B;
-	Fri,  4 Dec 2020 16:12:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 44242C013B;
+	Fri,  4 Dec 2020 17:08:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 407C7C013B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 86113C013B
  for <virtualization@lists.linux-foundation.org>;
- Fri,  4 Dec 2020 16:12:19 +0000 (UTC)
+ Fri,  4 Dec 2020 17:08:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 2E39D87CAB
+ by hemlock.osuosl.org (Postfix) with ESMTP id 73AF387D22
  for <virtualization@lists.linux-foundation.org>;
- Fri,  4 Dec 2020 16:12:19 +0000 (UTC)
+ Fri,  4 Dec 2020 17:08:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YL3yeBTaP+BY
+ with ESMTP id bLIoPLj1IPiQ
  for <virtualization@lists.linux-foundation.org>;
- Fri,  4 Dec 2020 16:12:18 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from smtprelay.hostedemail.com (smtprelay0184.hostedemail.com
- [216.40.44.184])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 4E0CF87CA7
+ Fri,  4 Dec 2020 17:08:23 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 7FE6287D23
  for <virtualization@lists.linux-foundation.org>;
- Fri,  4 Dec 2020 16:12:18 +0000 (UTC)
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
- [216.40.38.60])
- by smtprelay04.hostedemail.com (Postfix) with ESMTP id 24D69180A9F34;
- Fri,  4 Dec 2020 16:12:17 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 10, 1, 0, , d41d8cd98f00b204, joe@perches.com, ,
- RULES_HIT:41:355:379:599:967:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2525:2553:2560:2563:2682:2685:2828:2859:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3353:3622:3865:3866:3867:3868:3870:3871:3872:3873:3874:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4250:4321:5007:6119:6248:6691:7903:8957:9025:10004:10400:10848:11232:11658:11914:12043:12297:12438:12555:12660:12740:12760:12895:13069:13311:13357:13439:13845:14096:14097:14181:14659:14721:14777:21080:21433:21450:21451:21627:21811:21889:21990:30054:30056:30090:30091,
- 0, RBL:none, CacheIP:none, Bayesian:0.5, 0.5, 0.5, Netcheck:none,
- DomainCache:0, MSF:not bulk, SPF:, MSBL:0, DNSBL:none, Custom_rules:0:0:0,
- LFtime:1, LUA_SUMMARY:none
-X-HE-Tag: hen76_3903285273c5
-X-Filterd-Recvd-Size: 3208
-Received: from XPS-9350.home (unknown [47.151.137.21])
- (Authenticated sender: joe@perches.com)
- by omf18.hostedemail.com (Postfix) with ESMTPA;
- Fri,  4 Dec 2020 16:12:14 +0000 (UTC)
-Message-ID: <235b856857d912d93ea00685b20baa5b66800c83.camel@perches.com>
-Subject: Re: [PATCH AUTOSEL 5.9 22/33] vhost scsi: add lun parser helper
-From: Joe Perches <joe@perches.com>
-To: Sasha Levin <sashal@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
- James Bottomley <James.Bottomley@HansenPartnership.com>
-Date: Fri, 04 Dec 2020 08:12:13 -0800
-In-Reply-To: <20201204154911.GZ643756@sasha-vm>
+ Fri,  4 Dec 2020 17:08:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1607101702;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bJC4mvE44d2tsq5NOZBG+niQorIGdoMkDibEH0VVAX0=;
+ b=WF+2o4PxPsTOnOxG9d2GC/gbCuaMaUI8f+okZO84VtrSLs5TdRZqL+ts+ZgLxcTqqUts+r
+ 0XOqIs0mIz9NWDYncagChfPyLwyZcckKrL8iXtau+Scbc53FOth6U5vKpRSho6ae5O1K1L
+ 56seTKDS/LM5QGZPt2lkEyxINOx/mS8=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-26-oIRTdh9ZM9mIHtp61I1sEw-1; Fri, 04 Dec 2020 12:08:17 -0500
+X-MC-Unique: oIRTdh9ZM9mIHtp61I1sEw-1
+Received: by mail-ed1-f72.google.com with SMTP id dc6so2583739edb.14
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 04 Dec 2020 09:08:16 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:to:cc:references:from:subject:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=bJC4mvE44d2tsq5NOZBG+niQorIGdoMkDibEH0VVAX0=;
+ b=lfOLmAoXb9gQQbAUbdoAiRMflolOI4aZcr4M2jTZkqBh5JO8s5B6Hm2Ys0xR80snWn
+ BWO6rbS6rz+Ps6Qx+DuHxMzmvzY558HhzG1ARrzidmSraMjOmZSispoxEutBosWo4nRk
+ NNNS0yHUl2dFkk5TuhAumbGQlw5A6vGnNMXYuXkKDwgrIxpr/mGOOvyFjKfMCtxYtBFX
+ 5k+U17ZCLKezBfhJG0sSDe/VVm68Od+vEszJQMYEbThzGQgGHd6QJqtciNeCsBCy6Ufp
+ R1HmOn5UHdII8iVxYHaIX3n4FVnzxkgd8ziMARm+7rHMHIFUDATLHRDuU/sT/zZn4HM1
+ jIIg==
+X-Gm-Message-State: AOAM530/jr8z9BsM+9hoekYXmWrByNuRK8qbV5pczugCbhdJ64XU0+Nl
+ dmkFqOgWAR17MIJN0H+tg+d0PpdBcDNp9t1wPQkNyIe03IudGtpZUsfBN8fOSKZY+lmKSA/v0DX
+ u0cHXMl4iDzd1bPwQnUWx2g19uOyHNJx1GT2m0z3TYA==
+X-Received: by 2002:a50:fc8b:: with SMTP id f11mr8619715edq.11.1607101695794; 
+ Fri, 04 Dec 2020 09:08:15 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxlThmZUI57vW3KxIu7u8q5x2MUMq+MpfrShE4TQuVtlbHO9ZY1dP69sAeG/4NiTeBY0Zgf4A==
+X-Received: by 2002:a50:fc8b:: with SMTP id f11mr8619692edq.11.1607101695613; 
+ Fri, 04 Dec 2020 09:08:15 -0800 (PST)
+Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a?
+ ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+ by smtp.gmail.com with ESMTPSA id t8sm3642431eju.69.2020.12.04.09.08.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Dec 2020 09:08:14 -0800 (PST)
+To: Sasha Levin <sashal@kernel.org>
 References: <20201129041314.GO643756@sasha-vm>
  <7a4c3d84-8ff7-abd9-7340-3a6d7c65cfa7@redhat.com>
  <20201129210650.GP643756@sasha-vm>
@@ -73,8 +93,19 @@ References: <20201129041314.GO643756@sasha-vm>
  <20201130235959.GS643756@sasha-vm>
  <6c49ded5-bd8f-f219-0c51-3500fd751633@redhat.com>
  <20201204154911.GZ643756@sasha-vm>
-User-Agent: Evolution 3.38.1-1 
+From: Paolo Bonzini <pbonzini@redhat.com>
+Subject: Re: [PATCH AUTOSEL 5.9 22/33] vhost scsi: add lun parser helper
+Message-ID: <d071d714-3ebd-6929-3f3b-c941cce109f8@redhat.com>
+Date: Fri, 4 Dec 2020 18:08:13 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
+In-Reply-To: <20201204154911.GZ643756@sasha-vm>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbonzini@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Cc: kvm@vger.kernel.org, "Michael S . Tsirkin" <mst@redhat.com>,
  netdev@vger.kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org,
  virtualization@lists.linux-foundation.org,
@@ -91,50 +122,45 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, 2020-12-04 at 10:49 -0500, Sasha Levin wrote:
-> On Fri, Dec 04, 2020 at 09:27:28AM +0100, Paolo Bonzini wrote:
-> > On 01/12/20 00:59, Sasha Levin wrote:
-> > > 
-> > > It's quite easy to NAK a patch too, just reply saying "no" and it'll be
-> > > dropped (just like this patch was dropped right after your first reply)
-> > > so the burden on maintainers is minimal.
-> > 
-> > The maintainers are _already_ marking patches with "Cc: stable".  That 
-> 
-> They're not, though. Some forget, some subsystems don't mark anything,
-> some don't mark it as it's not stable material when it lands in their
-> tree but then it turns out to be one if it sits there for too long.
-> 
-> > (plus backports) is where the burden on maintainers should start and 
-> > end.  I don't see the need to second guess them.
-> 
-> This is similar to describing our CI infrastructure as "second
-> guessing": why are we second guessing authors and maintainers who are
-> obviously doing the right thing by testing their patches and reporting
-> issues to them?
-> 
-> Are you saying that you have always gotten stable tags right? never
-> missed a stable tag where one should go?
-
-I think this simply adds to the burden of being a maintainer
-without all that much value.
-
-I think the primary value here would be getting people to upgrade to
-current versions rather than backporting to nominally stable and
-relatively actively changed old versions.
-
-This is very much related to this thread about trivial patches
-and maintainer burdening:
-
-https://lore.kernel.org/lkml/1c7d7fde126bc0acf825766de64bf2f9b888f216.camel@HansenPartnership.com/
-
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gMDQvMTIvMjAgMTY6NDksIFNhc2hhIExldmluIHdyb3RlOgo+IE9uIEZyaSwgRGVjIDA0LCAy
+MDIwIGF0IDA5OjI3OjI4QU0gKzAxMDAsIFBhb2xvIEJvbnppbmkgd3JvdGU6Cj4+IE9uIDAxLzEy
+LzIwIDAwOjU5LCBTYXNoYSBMZXZpbiB3cm90ZToKPj4+Cj4+PiBJdCdzIHF1aXRlIGVhc3kgdG8g
+TkFLIGEgcGF0Y2ggdG9vLCBqdXN0IHJlcGx5IHNheWluZyAibm8iIGFuZCBpdCdsbCBiZQo+Pj4g
+ZHJvcHBlZCAoanVzdCBsaWtlIHRoaXMgcGF0Y2ggd2FzIGRyb3BwZWQgcmlnaHQgYWZ0ZXIgeW91
+ciBmaXJzdCByZXBseSkKPj4+IHNvIHRoZSBidXJkZW4gb24gbWFpbnRhaW5lcnMgaXMgbWluaW1h
+bC4KPj4KPj4gVGhlIG1haW50YWluZXJzIGFyZSBfYWxyZWFkeV8gbWFya2luZyBwYXRjaGVzIHdp
+dGggIkNjOiBzdGFibGUiLsKgIFRoYXQgCj4gCj4gVGhleSdyZSBub3QsIHRob3VnaC4gU29tZSBm
+b3JnZXQsIHNvbWUgc3Vic3lzdGVtcyBkb24ndCBtYXJrIGFueXRoaW5nLAo+IHNvbWUgZG9uJ3Qg
+bWFyayBpdCBhcyBpdCdzIG5vdCBzdGFibGUgbWF0ZXJpYWwgd2hlbiBpdCBsYW5kcyBpbiB0aGVp
+cgo+IHRyZWUgYnV0IHRoZW4gaXQgdHVybnMgb3V0IHRvIGJlIG9uZSBpZiBpdCBzaXRzIHRoZXJl
+IGZvciB0b28gbG9uZy4KClRoYXQgbWVhbnMgc29tZSBzdWJzeXN0ZW1zIHdpbGwgYmUgd29yc2Ug
+YXMgZmFyIGFzIHN0YWJsZSByZWxlYXNlIApzdXBwb3J0IGdvZXMuICBUaGF0J3Mgbm90IGEgcHJv
+YmxlbToKCi0gc29tZSBzdWJzeXN0ZW1zIGhhdmUgcGVvcGxlIHBhaWQgdG8gZG8gYmFja3BvcnRz
+IHRvIExUUyByZWxlYXNlcyB3aGVuIApwYXRjaGVzIGRvbid0IGFwcGx5OyBvdGhlcnMgZG9uJ3Qs
+IGlmIHRoZSBwYXRjaCBkb2Vzbid0IGFwcGx5IHRoZSBidWcgaXMgCnNpbXBseSBub3QgZml4ZWQg
+aW4gTFRTIHJlbGVhc2VzCgotIHNvbWUgc3Vic3lzdGVtcyBhcmUgd29yc2UgdGhhbiBvdGhlcnMg
+ZXZlbiBpbiAibm9ybWFsIiByZWxlYXNlcyA6KQoKPj4gKHBsdXMgYmFja3BvcnRzKSBpcyB3aGVy
+ZSB0aGUgYnVyZGVuIG9uIG1haW50YWluZXJzIHNob3VsZCBzdGFydCBhbmQgCj4+IGVuZC7CoCBJ
+IGRvbid0IHNlZSB0aGUgbmVlZCB0byBzZWNvbmQgZ3Vlc3MgdGhlbS4KPiAKPiBUaGlzIGlzIHNp
+bWlsYXIgdG8gZGVzY3JpYmluZyBvdXIgQ0kgaW5mcmFzdHJ1Y3R1cmUgYXMgInNlY29uZAo+IGd1
+ZXNzaW5nIjogd2h5IGFyZSB3ZSBzZWNvbmQgZ3Vlc3NpbmcgYXV0aG9ycyBhbmQgbWFpbnRhaW5l
+cnMgd2hvIGFyZQo+IG9idmlvdXNseSBkb2luZyB0aGUgcmlnaHQgdGhpbmcgYnkgdGVzdGluZyB0
+aGVpciBwYXRjaGVzIGFuZCByZXBvcnRpbmcKPiBpc3N1ZXMgdG8gdGhlbT8KCk5vLCBpdCdzIG5v
+dCB0aGUgc2FtZS4gIENJIGhlbHBzIGZpbmRpbmcgYnVncyBiZWZvcmUgeW91IGhhdmUgdG8gd2Fz
+dGUgCnRpbWUgc3BlbmRpbmcgYmlzZWN0aW5nIHJlZ3Jlc3Npb25zIGFjcm9zcyB0aG91c2FuZHMg
+b2YgY29tbWl0cy4gIFRoZSAKbGFjayBvZiBzdGFibGUgdGFncyBfY2FuXyBjZXJ0YWlubHkgYmUg
+YSBwcm9ibGVtLCBidXQgaXQgc29sdmVzIGl0c2VsZiAKc29vbmVyIG9yIGxhdGVyIHdoZW4gcGVv
+cGxlIHVwZ3JhZGUgdGhlaXIga2VybmVsLgoKPiBBcmUgeW91IHNheWluZyB0aGF0IHlvdSBoYXZl
+IGFsd2F5cyBnb3R0ZW4gc3RhYmxlIHRhZ3MgcmlnaHQ/IG5ldmVyCj4gbWlzc2VkIGEgc3RhYmxl
+IHRhZyB3aGVyZSBvbmUgc2hvdWxkIGdvPwoKT2YgY291cnNlIEkgZGlkLCBqdXN0IGxpa2UgSSBo
+YXZlIGludHJvZHVjZWQgYnVncy4gIEJ1dCBhdCBsZWFzdCBJIHRyeSAKdG8gZG8gbXkgYmVzdCBi
+b3RoIGF0IGFkZGluZyBzdGFibGUgdGFncyBhbmQgYXQgbm90IGludHJvZHVjaW5nIGJ1Z3MuCgpQ
+YW9sbwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmly
+dHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5k
+YXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3ZpcnR1YWxpemF0aW9u
