@@ -1,102 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C94E2D17B6
-	for <lists.virtualization@lfdr.de>; Mon,  7 Dec 2020 18:42:43 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7226D2D1AC5
+	for <lists.virtualization@lfdr.de>; Mon,  7 Dec 2020 21:46:29 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id E5F1486EDC;
-	Mon,  7 Dec 2020 17:42:41 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 22D6887986;
+	Mon,  7 Dec 2020 20:46:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0VmFAbGhcld0; Mon,  7 Dec 2020 17:42:40 +0000 (UTC)
+	with ESMTP id cAcjJRZvDx0B; Mon,  7 Dec 2020 20:46:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C52CD86E97;
-	Mon,  7 Dec 2020 17:42:40 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 883F88790A;
+	Mon,  7 Dec 2020 20:46:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A1DA4C013B;
-	Mon,  7 Dec 2020 17:42:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 64DC8C013B;
+	Mon,  7 Dec 2020 20:46:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 65510C013B
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 27548C013B
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Dec 2020 17:42:39 +0000 (UTC)
+ Mon,  7 Dec 2020 20:46:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 5F49786E57
+ by hemlock.osuosl.org (Postfix) with ESMTP id 1464887899
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Dec 2020 17:42:39 +0000 (UTC)
+ Mon,  7 Dec 2020 20:46:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oFsr8gwYkS5B
+ with ESMTP id yYnzk8XdQkO0
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Dec 2020 17:42:38 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
- [209.85.208.66])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id C12C086E4C
+ Mon,  7 Dec 2020 20:46:14 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mx01.bbu.dsd.mx.bitdefender.com
+ (mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id B2A4B87895
  for <virtualization@lists.linux-foundation.org>;
- Mon,  7 Dec 2020 17:42:37 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id q16so14601162edv.10
- for <virtualization@lists.linux-foundation.org>;
- Mon, 07 Dec 2020 09:42:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=mq8NM1bE2akKplJdl1Dq9pIrf37eZ1c662uiTUaXVd8=;
- b=UO0DMOXJ564lPXCQ3QeKCEYsm+qs6EWwHCdb4Dytr1pqf0oMJrE3OUfdwxiDzazbYO
- cnh+8Cpp70M0K/miVknDpbAq03n4r8scIALOPVpyP7hq2+J7B6VAq9HiNLVHTCQQXboB
- l9jBaV3UI7vTmurBackdZeUIiXje+dV/RDldpX9xd24fzlHsuBRzLpKQcO3wUoqfKRgp
- NDGtmlzThhjABfYeKslwiVA0JeyTUAafCJE6i05G6/8iAn4/B5B9gIVTuG1r69XhTXfF
- RblpTfikRFx1yCfgd7v/MOsN5zmcswXghp+OHd6mJXLtIAfqCbBSNcAMTfmgjQhTNIEv
- 8tSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=mq8NM1bE2akKplJdl1Dq9pIrf37eZ1c662uiTUaXVd8=;
- b=mzWEK11ivANHl8ILWewZ4gON8qsx6tSOn4Z86jLM/lQwhgSot/Nj+6pm9eYUYpjiID
- rSDUSxhYQqIcKMaRhsr46okyNDh58UzTGX3wlx0qbVoyY8xeXW46w+NY5wo2YlBWBMrp
- ds5tF83nCb/j033VggD0cYuFRcPsUNtzjn+caY839cCMqFVlVasXLjKayQEz7pGGPnDM
- yx1drofvqFX7J2j1DWpTfbRUzwTl0YIwiCHFnZBT4nhW/XKWJdU/beA7Ml8Ln8Q1f5cQ
- t+YpnFdZg9ajZbQGXETHYMSq+KKAUqKhyDIc94lERsSyYb2eaX9i86zHLutTT6twEx7O
- ctfg==
-X-Gm-Message-State: AOAM531bKFJtKxQUWxayUk5DdDO1JTmW6l9plZlKpSbUWoDzVeIoZdba
- uZSrVEoYGrAy+OUVmDScCI0=
-X-Google-Smtp-Source: ABdhPJy7+IEKb9uzYTmTc5pViy/GvuWuhCq5qtrc08HdUt26qDDUsNUD/XGUmJoaUCOKu46EfQ8gsA==
-X-Received: by 2002:a50:f299:: with SMTP id f25mr6660415edm.133.1607362955995; 
- Mon, 07 Dec 2020 09:42:35 -0800 (PST)
-Received: from localhost ([51.15.41.238])
- by smtp.gmail.com with ESMTPSA id q4sm10802329ejc.78.2020.12.07.09.42.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Dec 2020 09:42:34 -0800 (PST)
-Date: Mon, 7 Dec 2020 17:42:33 +0000
-From: Stefan Hajnoczi <stefanha@gmail.com>
-To: Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>
-Subject: Re: [RFC PATCH 07/27] vhost: Route guest->host notification through
- qemu
-Message-ID: <20201207174233.GN203660@stefanha-x1.localdomain>
-References: <20201120185105.279030-1-eperezma@redhat.com>
- <20201120185105.279030-8-eperezma@redhat.com>
+ Mon,  7 Dec 2020 20:46:13 +0000 (UTC)
+Received: from smtp.bitdefender.com (smtp01.buh.bitdefender.com [10.17.80.75])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
+ D92AF30462D3; Mon,  7 Dec 2020 22:46:11 +0200 (EET)
+Received: from localhost.localdomain (unknown [91.199.104.27])
+ by smtp.bitdefender.com (Postfix) with ESMTPSA id 6C0163072784;
+ Mon,  7 Dec 2020 22:46:11 +0200 (EET)
+From: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>
+To: kvm@vger.kernel.org
+Subject: [PATCH v11 00/81] VM introspection
+Date: Mon,  7 Dec 2020 22:45:01 +0200
+Message-Id: <20201207204622.15258-1-alazar@bitdefender.com>
 MIME-Version: 1.0
-In-Reply-To: <20201120185105.279030-8-eperezma@redhat.com>
-Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
- qemu-devel@nongnu.org, Daniel Daly <dandaly0@gmail.com>,
- virtualization@lists.linux-foundation.org, Liran Alon <liralon@gmail.com>,
- Eli Cohen <eli@mellanox.com>, Nitin Shrivastav <nitin.shrivastav@broadcom.com>,
- Alex Barba <alex.barba@broadcom.com>,
- Christophe Fontaine <cfontain@redhat.com>, Lee Ballard <ballle98@gmail.com>,
- Lars Ganrot <lars.ganrot@gmail.com>, Rob Miller <rob.miller@broadcom.com>,
- Howard Cai <howard.cai@gmail.com>, Parav Pandit <parav@mellanox.com>,
- vm <vmireyno@marvell.com>, Salil Mehta <mehta.salil.lnk@gmail.com>,
- Stephen Finucane <stephenfin@redhat.com>, Xiao W Wang <xiao.w.wang@intel.com>,
- Sean Mooney <smooney@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- Jim Harford <jim.harford@broadcom.com>,
- Dmytro Kazantsev <dmytro.kazantsev@gmail.com>, Siwei Liu <loseweigh@gmail.com>,
- Harpreet Singh Anand <hanand@xilinx.com>, Michael Lilja <ml@napatech.com>,
- Max Gurtovoy <maxgu14@gmail.com>
+Cc: Tamas K Lengyel <tamas@tklengyel.com>, Wanpeng Li <wanpengli@tencent.com>,
+ Yu C Zhang <yu.c.zhang@intel.com>, Edwin Zhai <edwin.zhai@intel.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ =?UTF-8?q?Samuel=20Laur=C3=A9n?= <samuel.lauren@iki.fi>,
+ virtualization@lists.linux-foundation.org,
+ =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>,
+ Weijiang Yang <weijiang.yang@intel.com>,
+ Patrick Colp <patrick.colp@oracle.com>,
+ Mathieu Tarral <mathieu.tarral@protonmail.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Sean Christopherson <seanjc@google.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Joerg Roedel <joro@8bytes.org>,
+ Jim Mattson <jmattson@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,414 +75,163 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6022805275913316177=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-
---===============6022805275913316177==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="8MZM6zh5Bb05FW+3"
-Content-Disposition: inline
-
-
---8MZM6zh5Bb05FW+3
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Nov 20, 2020 at 07:50:45PM +0100, Eugenio P=E9rez wrote:
-> Signed-off-by: Eugenio P=E9rez <eperezma@redhat.com>
-> ---
->  hw/virtio/vhost-sw-lm-ring.h |  26 +++++++++
->  include/hw/virtio/vhost.h    |   3 ++
->  hw/virtio/vhost-sw-lm-ring.c |  60 +++++++++++++++++++++
->  hw/virtio/vhost.c            | 100 +++++++++++++++++++++++++++++++++--
->  hw/virtio/meson.build        |   2 +-
->  5 files changed, 187 insertions(+), 4 deletions(-)
->  create mode 100644 hw/virtio/vhost-sw-lm-ring.h
->  create mode 100644 hw/virtio/vhost-sw-lm-ring.c
->=20
-> diff --git a/hw/virtio/vhost-sw-lm-ring.h b/hw/virtio/vhost-sw-lm-ring.h
-> new file mode 100644
-> index 0000000000..86dc081b93
-> --- /dev/null
-> +++ b/hw/virtio/vhost-sw-lm-ring.h
-> @@ -0,0 +1,26 @@
-> +/*
-> + * vhost software live migration ring
-> + *
-> + * SPDX-FileCopyrightText: Red Hat, Inc. 2020
-> + * SPDX-FileContributor: Author: Eugenio P=E9rez <eperezma@redhat.com>
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#ifndef VHOST_SW_LM_RING_H
-> +#define VHOST_SW_LM_RING_H
-> +
-> +#include "qemu/osdep.h"
-> +
-> +#include "hw/virtio/virtio.h"
-> +#include "hw/virtio/vhost.h"
-> +
-> +typedef struct VhostShadowVirtqueue VhostShadowVirtqueue;
-
-Here it's called a shadow virtqueue while the file calls it a
-sw-lm-ring. Please use a single name.
-
-> +
-> +bool vhost_vring_kick(VhostShadowVirtqueue *vq);
-
-vhost_shadow_vq_kick()?
-
-> +
-> +VhostShadowVirtqueue *vhost_sw_lm_shadow_vq(struct vhost_dev *dev, int i=
-dx);
-
-vhost_dev_get_shadow_vq()? This could be in include/hw/virtio/vhost.h
-with the other vhost_dev_*() functions.
-
-> +
-> +void vhost_sw_lm_shadow_vq_free(VhostShadowVirtqueue *vq);
-
-Hmm...now I wonder what the lifecycle is. Does vhost_sw_lm_shadow_vq()
-allocate it?
-
-Please add doc comments explaining these functions either in this header
-file or in vhost-sw-lm-ring.c.
-
-> +
-> +#endif
-> diff --git a/include/hw/virtio/vhost.h b/include/hw/virtio/vhost.h
-> index b5b7496537..93cc3f1ae3 100644
-> --- a/include/hw/virtio/vhost.h
-> +++ b/include/hw/virtio/vhost.h
-> @@ -54,6 +54,8 @@ struct vhost_iommu {
->      QLIST_ENTRY(vhost_iommu) iommu_next;
->  };
-> =20
-> +typedef struct VhostShadowVirtqueue VhostShadowVirtqueue;
-> +
->  typedef struct VhostDevConfigOps {
->      /* Vhost device config space changed callback
->       */
-> @@ -83,6 +85,7 @@ struct vhost_dev {
->      bool started;
->      bool log_enabled;
->      uint64_t log_size;
-> +    VhostShadowVirtqueue *sw_lm_shadow_vq[2];
-
-The hardcoded 2 is probably for single-queue virtio-net? I guess this
-will eventually become VhostShadowVirtqueue *shadow_vqs or
-VhostShadowVirtqueue **shadow_vqs, depending on whether each one should
-be allocated individually.
-
->      VirtIOHandleOutput sw_lm_vq_handler;
->      Error *migration_blocker;
->      const VhostOps *vhost_ops;
-> diff --git a/hw/virtio/vhost-sw-lm-ring.c b/hw/virtio/vhost-sw-lm-ring.c
-> new file mode 100644
-> index 0000000000..0192e77831
-> --- /dev/null
-> +++ b/hw/virtio/vhost-sw-lm-ring.c
-> @@ -0,0 +1,60 @@
-> +/*
-> + * vhost software live migration ring
-> + *
-> + * SPDX-FileCopyrightText: Red Hat, Inc. 2020
-> + * SPDX-FileContributor: Author: Eugenio P=E9rez <eperezma@redhat.com>
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#include "hw/virtio/vhost-sw-lm-ring.h"
-> +#include "hw/virtio/vhost.h"
-> +
-> +#include "standard-headers/linux/vhost_types.h"
-> +#include "standard-headers/linux/virtio_ring.h"
-> +
-> +#include "qemu/event_notifier.h"
-> +
-> +typedef struct VhostShadowVirtqueue {
-> +    EventNotifier hdev_notifier;
-> +    VirtQueue *vq;
-> +} VhostShadowVirtqueue;
-> +
-> +static inline bool vhost_vring_should_kick(VhostShadowVirtqueue *vq)
-> +{
-> +    return virtio_queue_get_used_notify_split(vq->vq);
-> +}
-> +
-> +bool vhost_vring_kick(VhostShadowVirtqueue *vq)
-> +{
-> +    return vhost_vring_should_kick(vq) ? event_notifier_set(&vq->hdev_no=
-tifier)
-> +                                       : true;
-> +}
-
-How is the return value used? event_notifier_set() returns -errno so
-this function returns false on success, and true when notifications are
-disabled or event_notifier_set() failed. I'm not sure this return value
-can be used for anything.
-
-> +
-> +VhostShadowVirtqueue *vhost_sw_lm_shadow_vq(struct vhost_dev *dev, int i=
-dx)
-
-I see now that this function allocates the VhostShadowVirtqueue. Maybe
-adding _new() to the name would make that clear?
-
-> +{
-> +    struct vhost_vring_file file =3D {
-> +        .index =3D idx
-> +    };
-> +    VirtQueue *vq =3D virtio_get_queue(dev->vdev, idx);
-> +    VhostShadowVirtqueue *svq;
-> +    int r;
-> +
-> +    svq =3D g_new0(VhostShadowVirtqueue, 1);
-> +    svq->vq =3D vq;
-> +
-> +    r =3D event_notifier_init(&svq->hdev_notifier, 0);
-> +    assert(r =3D=3D 0);
-> +
-> +    file.fd =3D event_notifier_get_fd(&svq->hdev_notifier);
-> +    r =3D dev->vhost_ops->vhost_set_vring_kick(dev, &file);
-> +    assert(r =3D=3D 0);
-> +
-> +    return svq;
-> +}
-
-I guess there are assumptions about the status of the device? Does the
-virtqueue need to be disabled when this function is called?
-
-> +
-> +void vhost_sw_lm_shadow_vq_free(VhostShadowVirtqueue *vq)
-> +{
-> +    event_notifier_cleanup(&vq->hdev_notifier);
-> +    g_free(vq);
-> +}
-> diff --git a/hw/virtio/vhost.c b/hw/virtio/vhost.c
-> index 9cbd52a7f1..a55b684b5f 100644
-> --- a/hw/virtio/vhost.c
-> +++ b/hw/virtio/vhost.c
-> @@ -13,6 +13,8 @@
->   * GNU GPL, version 2 or (at your option) any later version.
->   */
-> =20
-> +#include "hw/virtio/vhost-sw-lm-ring.h"
-> +
->  #include "qemu/osdep.h"
->  #include "qapi/error.h"
->  #include "hw/virtio/vhost.h"
-> @@ -61,6 +63,20 @@ bool vhost_has_free_slot(void)
->      return slots_limit > used_memslots;
->  }
-> =20
-> +static struct vhost_dev *vhost_dev_from_virtio(const VirtIODevice *vdev)
-> +{
-> +    struct vhost_dev *hdev;
-> +
-> +    QLIST_FOREACH(hdev, &vhost_devices, entry) {
-> +        if (hdev->vdev =3D=3D vdev) {
-> +            return hdev;
-> +        }
-> +    }
-> +
-> +    assert(hdev);
-> +    return NULL;
-> +}
-> +
->  static bool vhost_dev_can_log(const struct vhost_dev *hdev)
->  {
->      return hdev->features & (0x1ULL << VHOST_F_LOG_ALL);
-> @@ -148,6 +164,12 @@ static int vhost_sync_dirty_bitmap(struct vhost_dev =
-*dev,
->      return 0;
->  }
-> =20
-> +static void vhost_log_sync_nop(MemoryListener *listener,
-> +                               MemoryRegionSection *section)
-> +{
-> +    return;
-> +}
-> +
->  static void vhost_log_sync(MemoryListener *listener,
->                            MemoryRegionSection *section)
->  {
-> @@ -928,6 +950,71 @@ static void vhost_log_global_stop(MemoryListener *li=
-stener)
->      }
->  }
-> =20
-> +static void handle_sw_lm_vq(VirtIODevice *vdev, VirtQueue *vq)
-> +{
-> +    struct vhost_dev *hdev =3D vhost_dev_from_virtio(vdev);
-
-If this lookup becomes a performance bottleneck there are other options
-for determining the vhost_dev. For example VirtIODevice could have a
-field for stashing the vhost_dev pointer.
-
-> +    uint16_t idx =3D virtio_get_queue_index(vq);
-> +
-> +    VhostShadowVirtqueue *svq =3D hdev->sw_lm_shadow_vq[idx];
-> +
-> +    vhost_vring_kick(svq);
-> +}
-
-I'm a confused. Do we need to pop elements from vq and push equivalent
-elements onto svq before kicking? Either a todo comment is missing or I
-misunderstand how this works.
-
-> +
-> +static int vhost_sw_live_migration_stop(struct vhost_dev *dev)
-> +{
-> +    int idx;
-> +
-> +    vhost_dev_enable_notifiers(dev, dev->vdev);
-> +    for (idx =3D 0; idx < dev->nvqs; ++idx) {
-> +        vhost_sw_lm_shadow_vq_free(dev->sw_lm_shadow_vq[idx]);
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int vhost_sw_live_migration_start(struct vhost_dev *dev)
-> +{
-> +    int idx;
-> +
-> +    for (idx =3D 0; idx < dev->nvqs; ++idx) {
-> +        dev->sw_lm_shadow_vq[idx] =3D vhost_sw_lm_shadow_vq(dev, idx);
-> +    }
-> +
-> +    vhost_dev_disable_notifiers(dev, dev->vdev);
-
-There is a race condition if the guest kicks the vq while this is
-happening. The shadow vq hdev_notifier needs to be set so the vhost
-device checks the virtqueue for requests that slipped in during the
-race window.
-
-> +
-> +    return 0;
-> +}
-> +
-> +static int vhost_sw_live_migration_enable(struct vhost_dev *dev,
-> +                                          bool enable_lm)
-> +{
-> +    if (enable_lm) {
-> +        return vhost_sw_live_migration_start(dev);
-> +    } else {
-> +        return vhost_sw_live_migration_stop(dev);
-> +    }
-> +}
-> +
-> +static void vhost_sw_lm_global_start(MemoryListener *listener)
-> +{
-> +    int r;
-> +
-> +    r =3D vhost_migration_log(listener, true, vhost_sw_live_migration_en=
-able);
-> +    if (r < 0) {
-> +        abort();
-> +    }
-> +}
-> +
-> +static void vhost_sw_lm_global_stop(MemoryListener *listener)
-> +{
-> +    int r;
-> +
-> +    r =3D vhost_migration_log(listener, false, vhost_sw_live_migration_e=
-nable);
-> +    if (r < 0) {
-> +        abort();
-> +    }
-> +}
-> +
->  static void vhost_log_start(MemoryListener *listener,
->                              MemoryRegionSection *section,
->                              int old, int new)
-> @@ -1334,9 +1421,14 @@ int vhost_dev_init(struct vhost_dev *hdev, void *o=
-paque,
->          .region_nop =3D vhost_region_addnop,
->          .log_start =3D vhost_log_start,
->          .log_stop =3D vhost_log_stop,
-> -        .log_sync =3D vhost_log_sync,
-> -        .log_global_start =3D vhost_log_global_start,
-> -        .log_global_stop =3D vhost_log_global_stop,
-> +        .log_sync =3D !vhost_dev_can_log(hdev) ?
-> +                    vhost_log_sync_nop :
-> +                    vhost_log_sync,
-
-Why is this change necessary now? It's not clear to me why it was
-previously okay to call vhost_log_sync().
-
-> +        .log_global_start =3D !vhost_dev_can_log(hdev) ?
-> +                            vhost_sw_lm_global_start :
-> +                            vhost_log_global_start,
-> +        .log_global_stop =3D !vhost_dev_can_log(hdev) ? vhost_sw_lm_glob=
-al_stop :
-> +                                                      vhost_log_global_s=
-top,
->          .eventfd_add =3D vhost_eventfd_add,
->          .eventfd_del =3D vhost_eventfd_del,
->          .priority =3D 10
-> @@ -1364,6 +1456,8 @@ int vhost_dev_init(struct vhost_dev *hdev, void *op=
-aque,
->              error_free(hdev->migration_blocker);
->              goto fail_busyloop;
->          }
-> +    } else {
-> +        hdev->sw_lm_vq_handler =3D handle_sw_lm_vq;
->      }
-> =20
->      hdev->mem =3D g_malloc0(offsetof(struct vhost_memory, regions));
-> diff --git a/hw/virtio/meson.build b/hw/virtio/meson.build
-> index fbff9bc9d4..17419cb13e 100644
-> --- a/hw/virtio/meson.build
-> +++ b/hw/virtio/meson.build
-> @@ -11,7 +11,7 @@ softmmu_ss.add(when: 'CONFIG_ALL', if_true: files('vhos=
-t-stub.c'))
-> =20
->  virtio_ss =3D ss.source_set()
->  virtio_ss.add(files('virtio.c'))
-> -virtio_ss.add(when: 'CONFIG_VHOST', if_true: files('vhost.c', 'vhost-bac=
-kend.c'))
-> +virtio_ss.add(when: 'CONFIG_VHOST', if_true: files('vhost.c', 'vhost-bac=
-kend.c', 'vhost-sw-lm-ring.c'))
->  virtio_ss.add(when: 'CONFIG_VHOST_USER', if_true: files('vhost-user.c'))
->  virtio_ss.add(when: 'CONFIG_VHOST_VDPA', if_true: files('vhost-vdpa.c'))
->  virtio_ss.add(when: 'CONFIG_VIRTIO_BALLOON', if_true: files('virtio-ball=
-oon.c'))
-> --=20
-> 2.18.4
->=20
-
---8MZM6zh5Bb05FW+3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl/OaYkACgkQnKSrs4Gr
-c8iEswf/etvUvTrUil9p4TKYwAwjQvB7prmFUDbZsEbaAxQ86BKvb7Yfnh2rlCSM
-c7vW5iFraTfx99tpn8E5OtWUGQu4Gr9eWOBt7sCPo2mv7+HnL3kwNrAPKo8Qv3JN
-n149BZ9+rVcyENSo33LlveV0tp31hGZg+lVvjxq8b5pYJN9ACYh5fosDfW8l8wkN
-ha6nTL90z0GpfPuXderOpMhm9aTFpM/3QS8CcweC/VEMG+ThrMbSVHMRSQdP4sVa
-DOkYpMh1gY1oaDLy0LXMcU5YzD8QbB3oT9BhhPjjt1qNdwWGYwWVXsoQ0Nl5RM0w
-LVKr8Uh2aFycabSOVLUsjBqa2RSSFg==
-=OGl0
------END PGP SIGNATURE-----
-
---8MZM6zh5Bb05FW+3--
-
---===============6022805275913316177==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6022805275913316177==--
+VGhlcmUgYXJlIG5vIG1ham9yIGNoYW5nZXMgZnJvbSB0aGUgcHJldmlvdXMgdmVyc2lvbiAodjEw
+KSwgZXhjZXB0IG9uCnBhdGNoIDQ5LCB0byBhdm9pZCBhIHBvc3NpYmxlIGNhc2Ugb2Ygc3RhY2sg
+Y29ycnVwdGlvbi4KCkNoYW5nZXMgc2luY2UgdjEwIChodHRwczovL2xvcmUua2VybmVsLm9yZy9r
+dm0vMjAyMDExMjUwOTM2MDAuMjc2Ni0xLWFsYXphckBiaXRkZWZlbmRlci5jb20vKToKICAtIGZp
+eCB0aGUgZXZlbnQgcmVwbHkgdmFsaWRhdGlvbgogIC0gZml4IHRoZSBjb21waWxlLXRpbWUgd2Fy
+bmluZ3MgcmVwb3J0ZWQgYnkgImtlcm5lbCB0ZXN0IHJvYm90IDxsa3BAaW50ZWwuY29tPiIKICAt
+IHNlbmQgdGhlIGVycm9yIGNvZGUgKEtWTV9FTk9NRU0pIHdoZW4gdGhlIG1lbW9yeSBhbGxvY2F0
+aW9uIGZhaWxzCiAgICB3aGlsZSBoYW5kbGluZyB0aGUgS1ZNSV9WQ1BVX0dFVF9YU0FWRSBjb21t
+YW5kCgpBZGFsYmVydCBMYXrEg3IgKDI0KToKICBLVk06IFVBUEk6IGFkZCBlcnJvciBjb2RlcyB1
+c2VkIGJ5IHRoZSBWTSBpbnRyb3NwZWN0aW9uIGNvZGUKICBLVk06IGFkZCBrdm1fdmNwdV9raWNr
+X2FuZF93YWl0KCkKICBLVk06IGRvYzogZml4IHRoZSBoeXBlcmNhbGxzIG51bWJlcmluZwogIEtW
+TTogeDg2OiBhZGQga3ZtX3g4Nl9vcHMuY29udHJvbF9jcjNfaW50ZXJjZXB0KCkKICBLVk06IHg4
+NjogYWRkIGt2bV94ODZfb3BzLmRlc2NfY3RybF9zdXBwb3J0ZWQoKQogIEtWTTogeDg2OiBhZGQg
+a3ZtX3g4Nl9vcHMuY29udHJvbF9kZXNjX2ludGVyY2VwdCgpCiAgS1ZNOiB4ODY6IGV4cG9ydCBr
+dm1fdmNwdV9pb2N0bF94ODZfc2V0X3hzYXZlKCkKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCBo
+b29rL3VuaG9vayBpb2N0bHMKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCBwZXJtaXNzaW9uIGFj
+Y2VzcyBpb2N0bHMKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCB0aGUgcmVhZC9kaXNwYXRjaCBt
+ZXNzYWdlIGZ1bmN0aW9uCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9HRVRfVkVSU0lP
+TgogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTUlfVk1fQ0hFQ0tfQ09NTUFORCBhbmQgS1ZN
+SV9WTV9DSEVDS19FVkVOVAogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTV9JTlRST1NQRUNU
+SU9OX1BSRVVOSE9PSwogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTUlfVk1fRVZFTlRfVU5I
+T09LCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9WTV9DT05UUk9MX0VWRU5UUwogIEtW
+TTogaW50cm9zcGVjdGlvbjogYWRkIGEgam9icyBsaXN0IHRvIGV2ZXJ5IGludHJvc3BlY3RlZCB2
+Q1BVCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9WTV9QQVVTRV9WQ1BVCiAgS1ZNOiBp
+bnRyb3NwZWN0aW9uOiBhZGQgc3VwcG9ydCBmb3IgdkNQVSBldmVudHMKICBLVk06IGludHJvc3Bl
+Y3Rpb246IGFkZCBLVk1JX1ZDUFVfRVZFTlRfUEFVU0UKICBLVk06IGludHJvc3BlY3Rpb246IGFk
+ZCBLVk1JX1ZNX0NPTlRST0xfQ0xFQU5VUAogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTUlf
+VkNQVV9HRVRfWENSCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9WQ1BVX1NFVF9YU0FW
+RQogIEtWTTogaW50cm9zcGVjdGlvbjogZXh0ZW5kIEtWTUlfR0VUX1ZFUlNJT04gd2l0aCBzdHJ1
+Y3Qga3ZtaV9mZWF0dXJlcwogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTUlfVkNQVV9UUkFO
+U0xBVEVfR1ZBCgpNYXJpYW4gUm90YXJpdSAoMSk6CiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQg
+S1ZNSV9WQ1BVX0dFVF9DUFVJRAoKTWloYWkgRG9uyJt1ICgzMyk6CiAgS1ZNOiB4ODY6IGFkZCBr
+dm1fYXJjaF92Y3B1X2dldF9yZWdzKCkgYW5kIGt2bV9hcmNoX3ZjcHVfZ2V0X3NyZWdzKCkKICBL
+Vk06IHg4NjogYXZvaWQgaW5qZWN0aW5nICNQRiB3aGVuIGVtdWxhdGUgdGhlIFZNQ0FMTCBpbnN0
+cnVjdGlvbgogIEtWTTogeDg2OiBhZGQga3ZtX3g4Nl9vcHMuY29udHJvbF9tc3JfaW50ZXJjZXB0
+KCkKICBLVk06IHg4Njogdm14OiB1c2UgYSBzeW1ib2xpYyBjb25zdGFudCB3aGVuIGNoZWNraW5n
+IHRoZSBleGl0CiAgICBxdWFsaWZpY2F0aW9ucwogIEtWTTogeDg2OiBzYXZlIHRoZSBlcnJvciBj
+b2RlIGR1cmluZyBFUFQvTlBGIGV4aXRzIGhhbmRsaW5nCiAgS1ZNOiB4ODY6IGFkZCBrdm1feDg2
+X29wcy5mYXVsdF9nbGEoKQogIEtWTTogeDg2OiBleHRlbmQga3ZtX21tdV9ndmFfdG9fZ3BhX3N5
+c3RlbSgpIHdpdGggdGhlICdhY2Nlc3MnCiAgICBwYXJhbWV0ZXIKICBLVk06IHg4NjogcGFnZSB0
+cmFjazogcHJvdmlkZSBhbGwgY2FsbGJhY2tzIHdpdGggdGhlIGd1ZXN0IHZpcnR1YWwKICAgIGFk
+ZHJlc3MKICBLVk06IHg4NjogcGFnZSB0cmFjazogYWRkIHRyYWNrX2NyZWF0ZV9zbG90KCkgY2Fs
+bGJhY2sKICBLVk06IHg4NjogcGFnZV90cmFjazogYWRkIHN1cHBvcnQgZm9yIHByZXJlYWQsIHBy
+ZXdyaXRlIGFuZCBwcmVleGVjCiAgS1ZNOiB4ODY6IHdpcmUgaW4gdGhlIHByZXJlYWQvcHJld3Jp
+dGUvcHJlZXhlYyBwYWdlIHRyYWNrZXJzCiAgS1ZNOiBpbnRyb2R1Y2UgVk0gaW50cm9zcGVjdGlv
+bgogIEtWTTogaW50cm9zcGVjdGlvbjogYWRkIEtWTUlfVk1fR0VUX0lORk8KICBLVk06IGludHJv
+c3BlY3Rpb246IGFkZCBLVk1JX1ZNX1JFQURfUEhZU0lDQUwvS1ZNSV9WTV9XUklURV9QSFlTSUNB
+TAogIEtWTTogaW50cm9zcGVjdGlvbjogaGFuZGxlIHZDUFUgaW50cm9zcGVjdGlvbiByZXF1ZXN0
+cwogIEtWTTogaW50cm9zcGVjdGlvbjogaGFuZGxlIHZDUFUgY29tbWFuZHMKICBLVk06IGludHJv
+c3BlY3Rpb246IGFkZCBLVk1JX1ZDUFVfR0VUX0lORk8KICBLVk06IGludHJvc3BlY3Rpb246IGFk
+ZCB0aGUgY3Jhc2ggYWN0aW9uIGhhbmRsaW5nIG9uIHRoZSBldmVudCByZXBseQogIEtWTTogaW50
+cm9zcGVjdGlvbjogYWRkIEtWTUlfVkNQVV9DT05UUk9MX0VWRU5UUwogIEtWTTogaW50cm9zcGVj
+dGlvbjogYWRkIEtWTUlfVkNQVV9HRVRfUkVHSVNURVJTCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBh
+ZGQgS1ZNSV9WQ1BVX1NFVF9SRUdJU1RFUlMKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCBLVk1J
+X1ZDUFVfRVZFTlRfSFlQRVJDQUxMCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9WQ1BV
+X0VWRU5UX0JSRUFLUE9JTlQKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCBLVk1JX1ZDUFVfQ09O
+VFJPTF9DUiBhbmQgS1ZNSV9WQ1BVX0VWRU5UX0NSCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQg
+S1ZNSV9WQ1BVX0lOSkVDVF9FWENFUFRJT04gKwogICAgS1ZNSV9WQ1BVX0VWRU5UX1RSQVAKICBL
+Vk06IGludHJvc3BlY3Rpb246IGFkZCBLVk1JX1ZDUFVfRVZFTlRfWFNFVEJWCiAgS1ZNOiBpbnRy
+b3NwZWN0aW9uOiBhZGQgS1ZNSV9WQ1BVX0dFVF9YU0FWRQogIEtWTTogaW50cm9zcGVjdGlvbjog
+YWRkIEtWTUlfVkNQVV9HRVRfTVRSUl9UWVBFCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZN
+SV9WQ1BVX0NPTlRST0xfTVNSIGFuZCBLVk1JX1ZDUFVfRVZFTlRfTVNSCiAgS1ZNOiBpbnRyb3Nw
+ZWN0aW9uOiBhZGQgS1ZNSV9WTV9TRVRfUEFHRV9BQ0NFU1MKICBLVk06IGludHJvc3BlY3Rpb246
+IGFkZCBLVk1JX1ZDUFVfRVZFTlRfUEYKICBLVk06IGludHJvc3BlY3Rpb246IGVtdWxhdGUgYSBn
+dWVzdCBwYWdlIHRhYmxlIHdhbGsgb24gU1BUIHZpb2xhdGlvbnMKICAgIGR1ZSB0byBBL0QgYml0
+IHVwZGF0ZXMKICBLVk06IHg4NjogY2FsbCB0aGUgcGFnZSB0cmFja2luZyBjb2RlIG9uIGVtdWxh
+dGlvbiBmYWlsdXJlCgpNaXJjZWEgQ8OucmphbGl1ICgyKToKICBLVk06IHg4NjogZGlzYWJsZSBn
+cGFfYXZhaWxhYmxlIG9wdGltaXphdGlvbiBmb3IgZmV0Y2ggYW5kIHBhZ2Utd2FsawogICAgU1BU
+IHZpb2xhdGlvbnMKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCB2Q1BVIHJlbGF0ZWQgZGF0YQoK
+TmljdciZb3IgQ8OuyJt1ICgxOSk6CiAgS1ZNOiB4ODY6IGFkZCBrdm1fYXJjaF92Y3B1X3NldF9y
+ZWdzKCkKICBLVk06IHg4NjogYWRkIGt2bV94ODZfb3BzLmJwX2ludGVyY2VwdGVkKCkKICBLVk06
+IHg4NjogYWRkIGt2bV94ODZfb3BzLmNyM193cml0ZV9pbnRlcmNlcHRlZCgpCiAgS1ZNOiBzdm06
+IGFkZCBzdXBwb3J0IGZvciBkZXNjcmlwdG9yLXRhYmxlIFZNLWV4aXRzCiAgS1ZNOiB4ODY6IGFk
+ZCBrdm1feDg2X29wcy5kZXNjX2ludGVyY2VwdGVkKCkKICBLVk06IHg4NjogYWRkIGt2bV94ODZf
+b3BzLm1zcl93cml0ZV9pbnRlcmNlcHRlZCgpCiAgS1ZNOiB4ODY6IHN2bTogdXNlIHRoZSB2bXgg
+Y29udmVudGlvbiB0byBjb250cm9sIHRoZSBNU1IgaW50ZXJjZXB0aW9uCiAgS1ZNOiB4ODY6IGFk
+ZCBrdm1feDg2X29wcy5jb250cm9sX3NpbmdsZXN0ZXAoKQogIEtWTTogeDg2OiBleHBvcnQga3Zt
+X2FyY2hfdmNwdV9zZXRfZ3Vlc3RfZGVidWcoKQogIEtWTTogeDg2OiBleHBvcnQga3ZtX2luamVj
+dF9wZW5kaW5nX2V4Y2VwdGlvbigpCiAgS1ZNOiB4ODY6IGV4cG9ydCBrdm1fdmNwdV9pb2N0bF94
+ODZfZ2V0X3hzYXZlKCkKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCBjbGVhbnVwIHN1cHBvcnQg
+Zm9yIHZDUFVzCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiByZXN0b3JlIHRoZSBzdGF0ZSBvZiAjQlAg
+aW50ZXJjZXB0aW9uIG9uIHVuaG9vawogIEtWTTogaW50cm9zcGVjdGlvbjogcmVzdG9yZSB0aGUg
+c3RhdGUgb2YgQ1IzIGludGVyY2VwdGlvbiBvbiB1bmhvb2sKICBLVk06IGludHJvc3BlY3Rpb246
+IGFkZCBLVk1JX1ZDUFVfRVZFTlRfREVTQ1JJUFRPUgogIEtWTTogaW50cm9zcGVjdGlvbjogcmVz
+dG9yZSB0aGUgc3RhdGUgb2YgZGVzY3JpcHRvci10YWJsZSByZWdpc3RlcgogICAgaW50ZXJjZXB0
+aW9uIG9uIHVuaG9vawogIEtWTTogaW50cm9zcGVjdGlvbjogcmVzdG9yZSB0aGUgc3RhdGUgb2Yg
+TVNSIGludGVyY2VwdGlvbiBvbiB1bmhvb2sKICBLVk06IGludHJvc3BlY3Rpb246IGFkZCBLVk1J
+X1ZDUFVfQ09OVFJPTF9TSU5HTEVTVEVQCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9W
+Q1BVX0VWRU5UX1NJTkdMRVNURVAKCsiYdGVmYW4gyJhpY2xlcnUgKDIpOgogIEtWTTogYWRkIGt2
+bV9nZXRfbWF4X2dmbigpCiAgS1ZNOiBpbnRyb3NwZWN0aW9uOiBhZGQgS1ZNSV9WTV9HRVRfTUFY
+X0dGTgoKIERvY3VtZW50YXRpb24vdmlydC9rdm0vYXBpLnJzdCAgICAgICAgICAgICAgICB8ICAx
+NTkgKysKIERvY3VtZW50YXRpb24vdmlydC9rdm0vaHlwZXJjYWxscy5yc3QgICAgICAgICB8ICAg
+MzkgKy0KIERvY3VtZW50YXRpb24vdmlydC9rdm0va3ZtaS5yc3QgICAgICAgICAgICAgICB8IDE1
+NzMgKysrKysrKysrKysrKwogYXJjaC94ODYvaW5jbHVkZS9hc20va3ZtX2hvc3QuaCAgICAgICAg
+ICAgICAgIHwgICA0NiArLQogYXJjaC94ODYvaW5jbHVkZS9hc20va3ZtX3BhZ2VfdHJhY2suaCAg
+ICAgICAgIHwgICA3MSArLQogYXJjaC94ODYvaW5jbHVkZS9hc20va3ZtaV9ob3N0LmggICAgICAg
+ICAgICAgIHwgIDExMCArCiBhcmNoL3g4Ni9pbmNsdWRlL2FzbS92bXguaCAgICAgICAgICAgICAg
+ICAgICAgfCAgICAyICsKIGFyY2gveDg2L2luY2x1ZGUvdWFwaS9hc20va3ZtaS5oICAgICAgICAg
+ICAgICB8ICAxNjcgKysKIGFyY2gveDg2L2t2bS9LY29uZmlnICAgICAgICAgICAgICAgICAgICAg
+ICAgICB8ICAgIDkgKwogYXJjaC94ODYva3ZtL01ha2VmaWxlICAgICAgICAgICAgICAgICAgICAg
+ICAgIHwgICAgMiArCiBhcmNoL3g4Ni9rdm0vZW11bGF0ZS5jICAgICAgICAgICAgICAgICAgICAg
+ICAgfCAgICA0ICsKIGFyY2gveDg2L2t2bS9rdm1fZW11bGF0ZS5oICAgICAgICAgICAgICAgICAg
+ICB8ICAgIDEgKwogYXJjaC94ODYva3ZtL2t2bWkuYyAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHwgMTEzMSArKysrKysrKysrCiBhcmNoL3g4Ni9rdm0va3ZtaS5oICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgfCAgIDI0ICsKIGFyY2gveDg2L2t2bS9rdm1pX21zZy5jICAgICAgICAgICAgICAg
+ICAgICAgICB8ICA0NTYgKysrKwogYXJjaC94ODYva3ZtL21tdS9tbXUuYyAgICAgICAgICAgICAg
+ICAgICAgICAgIHwgIDE0MCArLQogYXJjaC94ODYva3ZtL21tdS9tbXVfaW50ZXJuYWwuaCAgICAg
+ICAgICAgICAgIHwgICAgNCArCiBhcmNoL3g4Ni9rdm0vbW11L3BhZ2VfdHJhY2suYyAgICAgICAg
+ICAgICAgICAgfCAgMTQ2ICstCiBhcmNoL3g4Ni9rdm0vbW11L3NwdGUuYyAgICAgICAgICAgICAg
+ICAgICAgICAgfCAgIDE3ICsKIGFyY2gveDg2L2t2bS9zdm0vc3ZtLmMgICAgICAgICAgICAgICAg
+ICAgICAgICB8ICAyODggKystCiBhcmNoL3g4Ni9rdm0vc3ZtL3N2bS5oICAgICAgICAgICAgICAg
+ICAgICAgICAgfCAgICA3ICsKIGFyY2gveDg2L2t2bS92bXgvY2FwYWJpbGl0aWVzLmggICAgICAg
+ICAgICAgICB8ICAgIDcgKy0KIGFyY2gveDg2L2t2bS92bXgvdm14LmMgICAgICAgICAgICAgICAg
+ICAgICAgICB8ICAxNjggKy0KIGFyY2gveDg2L2t2bS92bXgvdm14LmggICAgICAgICAgICAgICAg
+ICAgICAgICB8ICAgIDQgLQogYXJjaC94ODYva3ZtL3g4Ni5jICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHwgIDMwMiArKy0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d2dC9rdm1ndC5jICAgICAg
+ICAgICAgICB8ICAgIDIgKy0KIGluY2x1ZGUvbGludXgva3ZtX2hvc3QuaCAgICAgICAgICAgICAg
+ICAgICAgICB8ICAgMTYgKwogaW5jbHVkZS9saW51eC9rdm1pX2hvc3QuaCAgICAgICAgICAgICAg
+ICAgICAgIHwgIDExMCArCiBpbmNsdWRlL3VhcGkvbGludXgva3ZtLmggICAgICAgICAgICAgICAg
+ICAgICAgfCAgIDIwICsKIGluY2x1ZGUvdWFwaS9saW51eC9rdm1fcGFyYS5oICAgICAgICAgICAg
+ICAgICB8ICAgIDUgKwogaW5jbHVkZS91YXBpL2xpbnV4L2t2bWkuaCAgICAgICAgICAgICAgICAg
+ICAgIHwgIDI0NSArKwogdG9vbHMvdGVzdGluZy9zZWxmdGVzdHMva3ZtL01ha2VmaWxlICAgICAg
+ICAgIHwgICAgMSArCiAuLi4vdGVzdGluZy9zZWxmdGVzdHMva3ZtL3g4Nl82NC9rdm1pX3Rlc3Qu
+YyAgfCAyMDA1ICsrKysrKysrKysrKysrKysrCiB2aXJ0L2t2bS9pbnRyb3NwZWN0aW9uL2t2bWku
+YyAgICAgICAgICAgICAgICAgfCAxMjY0ICsrKysrKysrKysrCiB2aXJ0L2t2bS9pbnRyb3NwZWN0
+aW9uL2t2bWlfaW50LmggICAgICAgICAgICAgfCAgMTI5ICsrCiB2aXJ0L2t2bS9pbnRyb3NwZWN0
+aW9uL2t2bWlfbXNnLmMgICAgICAgICAgICAgfCAgOTE1ICsrKysrKysrCiB2aXJ0L2t2bS9rdm1f
+bWFpbi5jICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDk4ICsKIDM3IGZpbGVzIGNoYW5n
+ZWQsIDk1MjUgaW5zZXJ0aW9ucygrKSwgMTYyIGRlbGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAw
+NjQ0IERvY3VtZW50YXRpb24vdmlydC9rdm0va3ZtaS5yc3QKIGNyZWF0ZSBtb2RlIDEwMDY0NCBh
+cmNoL3g4Ni9pbmNsdWRlL2FzbS9rdm1pX2hvc3QuaAogY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gv
+eDg2L2luY2x1ZGUvdWFwaS9hc20va3ZtaS5oCiBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC94ODYv
+a3ZtL2t2bWkuYwogY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gveDg2L2t2bS9rdm1pLmgKIGNyZWF0
+ZSBtb2RlIDEwMDY0NCBhcmNoL3g4Ni9rdm0va3ZtaV9tc2cuYwogY3JlYXRlIG1vZGUgMTAwNjQ0
+IGluY2x1ZGUvbGludXgva3ZtaV9ob3N0LmgKIGNyZWF0ZSBtb2RlIDEwMDY0NCBpbmNsdWRlL3Vh
+cGkvbGludXgva3ZtaS5oCiBjcmVhdGUgbW9kZSAxMDA2NDQgdG9vbHMvdGVzdGluZy9zZWxmdGVz
+dHMva3ZtL3g4Nl82NC9rdm1pX3Rlc3QuYwogY3JlYXRlIG1vZGUgMTAwNjQ0IHZpcnQva3ZtL2lu
+dHJvc3BlY3Rpb24va3ZtaS5jCiBjcmVhdGUgbW9kZSAxMDA2NDQgdmlydC9rdm0vaW50cm9zcGVj
+dGlvbi9rdm1pX2ludC5oCiBjcmVhdGUgbW9kZSAxMDA2NDQgdmlydC9rdm0vaW50cm9zcGVjdGlv
+bi9rdm1pX21zZy5jCgoKYmFzZS1jb21taXQ6IGRjOTI0YjA2MjQ4OGEwMzc2YWFlNDFkM2UwYTI3
+ZGM5OWY4NTJhNWUKQ0M6IEVkd2luIFpoYWkgPGVkd2luLnpoYWlAaW50ZWwuY29tPgpDQzogSmFu
+IEtpc3prYSA8amFuLmtpc3prYUBzaWVtZW5zLmNvbT4KQ0M6IEtvbnJhZCBSemVzenV0ZWsgV2ls
+ayA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4KQ0M6IE1hdGhpZXUgVGFycmFsIDxtYXRoaWV1LnRh
+cnJhbEBwcm90b25tYWlsLmNvbT4KQ0M6IFBhdHJpY2sgQ29scCA8cGF0cmljay5jb2xwQG9yYWNs
+ZS5jb20+CkNDOiBTYW11ZWwgTGF1csOpbiA8c2FtdWVsLmxhdXJlbkBpa2kuZmk+CkNDOiBTdGVm
+YW4gSGFqbm9jemkgPHN0ZWZhbmhhQHJlZGhhdC5jb20+CkNDOiBUYW1hcyBLIExlbmd5ZWwgPHRh
+bWFzQHRrbGVuZ3llbC5jb20+CkNDOiBXZWlqaWFuZyBZYW5nIDx3ZWlqaWFuZy55YW5nQGludGVs
+LmNvbT4KQ0M6IFl1IEMgWmhhbmcgPHl1LmMuemhhbmdAaW50ZWwuY29tPgpDQzogU2VhbiBDaHJp
+c3RvcGhlcnNvbiA8c2VhbmpjQGdvb2dsZS5jb20+CkNDOiBKb2VyZyBSb2VkZWwgPGpvcm9AOGJ5
+dGVzLm9yZz4KQ0M6IFZpdGFseSBLdXpuZXRzb3YgPHZrdXpuZXRzQHJlZGhhdC5jb20+CkNDOiBX
+YW5wZW5nIExpIDx3YW5wZW5nbGlAdGVuY2VudC5jb20+CkNDOiBKaW0gTWF0dHNvbiA8am1hdHRz
+b25AZ29vZ2xlLmNvbT4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxp
+bnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
