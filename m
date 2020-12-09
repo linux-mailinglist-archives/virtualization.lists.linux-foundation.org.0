@@ -1,68 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24CDE2D48AD
-	for <lists.virtualization@lfdr.de>; Wed,  9 Dec 2020 19:15:32 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A33F2D4982
+	for <lists.virtualization@lfdr.de>; Wed,  9 Dec 2020 19:54:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D7DBF87434;
-	Wed,  9 Dec 2020 18:15:30 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 4B9B687A61;
+	Wed,  9 Dec 2020 18:54:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TpasJxNiZXHc; Wed,  9 Dec 2020 18:15:30 +0000 (UTC)
+	with ESMTP id clULq7tW5Ls6; Wed,  9 Dec 2020 18:54:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 203DC87483;
-	Wed,  9 Dec 2020 18:15:30 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 9DBC387A69;
+	Wed,  9 Dec 2020 18:54:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0265CC013B;
-	Wed,  9 Dec 2020 18:15:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7F5FCC013B;
+	Wed,  9 Dec 2020 18:54:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 02DAFC013B
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E6DEBC013B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 18:15:29 +0000 (UTC)
+ Wed,  9 Dec 2020 18:54:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id F22C887479
+ by whitealder.osuosl.org (Postfix) with ESMTP id E0C1B86DB1
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 18:15:28 +0000 (UTC)
+ Wed,  9 Dec 2020 18:54:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KWybq971B77m
+ with ESMTP id bybe7ttR4mdb
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 18:15:27 +0000 (UTC)
+ Wed,  9 Dec 2020 18:54:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by fraxinus.osuosl.org (Postfix) with ESMTP id AE00A87434
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 12B0B86DAF
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 18:15:26 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0928F1FB;
- Wed,  9 Dec 2020 10:15:26 -0800 (PST)
-Received: from C02TD0UTHF1T.local (unknown [10.57.26.40])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B118B3F68F;
- Wed,  9 Dec 2020 10:15:22 -0800 (PST)
-Date: Wed, 9 Dec 2020 18:15:14 +0000
-From: Mark Rutland <mark.rutland@arm.com>
-To: Peter Zijlstra <peterz@infradead.org>
+ Wed,  9 Dec 2020 18:54:30 +0000 (UTC)
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1607540067;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=7Uu7pkTsDY6PR0uRw8JT+RVlLSz62Q8pgzg6y5Vv+F8=;
+ b=ZKyRHF02e6C/n1mUBKn5ZR+XVl6dDjKmAKKg5N6crtAg3HJ2EOJsCCYkTM8vHNeLb8e1EE
+ woT+FRsq9wRBfKR1H/jU/h5ITtu8upRL+qht0KlSG2FPcGkAH50CYTjWzYIsGM1MBx+iWY
+ ZvsmEPNQYKrYuTvetq+cnT9AM+zSzfv26zNUDqMcYYy5Az+ooZ8kxUTRgcQxFQ6FrUZZA7
+ tY++O41Ru5wCUH11xGUu3nNNoe1jAmst2c8vb9fs1ROv5DpuiAJAfEGvFi7t2m4iBw9m+F
+ U7kRP7HRP7vVZzw7D+fjTVnk7dQ2NJnIZPMHxtpdBE5YJPwHXnrxOYNyE+5jUA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1607540067;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=7Uu7pkTsDY6PR0uRw8JT+RVlLSz62Q8pgzg6y5Vv+F8=;
+ b=c0VvWr+XQ1eFIDzaipp+m6QkbNpqK8MTFWzd5nGNoue3bmiiBo/fQBptKc2vv17Tly9FpG
+ ckQTiaR3Qc/ZrSAA==
+To: Mark Rutland <mark.rutland@arm.com>, Peter Zijlstra <peterz@infradead.org>
 Subject: Re: [PATCH v2 05/12] x86: rework arch_local_irq_restore() to not use
  popf
-Message-ID: <20201209181514.GA14235@C02TD0UTHF1T.local>
+In-Reply-To: <20201209181514.GA14235@C02TD0UTHF1T.local>
 References: <20201120114630.13552-1-jgross@suse.com>
  <20201120114630.13552-6-jgross@suse.com>
  <20201120115943.GD3021@hirez.programming.kicks-ass.net>
+ <20201209181514.GA14235@C02TD0UTHF1T.local>
+Date: Wed, 09 Dec 2020 19:54:26 +0100
+Message-ID: <87tusuzu71.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201120115943.GD3021@hirez.programming.kicks-ass.net>
 Cc: Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>, "VMware,
  Inc." <pv-drivers@vmware.com>, x86@kernel.org, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org, Ingo Molnar <mingo@redhat.com>,
  Borislav Petkov <bp@alien8.de>, luto@kernel.org,
  "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
- Thomas Gleixner <tglx@linutronix.de>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -80,104 +92,135 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Nov 20, 2020 at 12:59:43PM +0100, Peter Zijlstra wrote:
-> On Fri, Nov 20, 2020 at 12:46:23PM +0100, Juergen Gross wrote:
-> > +static __always_inline void arch_local_irq_restore(unsigned long flags)
-> > +{
-> > +	if (!arch_irqs_disabled_flags(flags))
-> > +		arch_local_irq_enable();
-> > +}
-> 
-> If someone were to write horrible code like:
-> 
-> 	local_irq_disable();
+On Wed, Dec 09 2020 at 18:15, Mark Rutland wrote:
+> In arch/x86/kernel/apic/io_apic.c's timer_irq_works() we do:
+>
 > 	local_irq_save(flags);
 > 	local_irq_enable();
+>
+> 	[ trigger an IRQ here ]
+>
 > 	local_irq_restore(flags);
-> 
-> we'd be up some creek without a paddle... now I don't _think_ we have
-> genius code like that, but I'd feel saver if we can haz an assertion in
-> there somewhere...
+>
+> ... and in check_timer() we call that a number of times after either a
+> local_irq_save() or local_irq_disable(), eventually trailing with a
+> local_irq_disable() that will balance things up before calling
+> local_irq_restore().
+>
+> I guess that timer_irq_works() should instead do:
+>
+> 	local_irq_save(flags);
+> 	local_irq_enable();
+> 	...
+> 	local_irq_disable();
+> 	local_irq_restore(flags);
+>
+> ... assuming we consider that legitimate?
 
-I've cobbled that together locally (i'll post it momentarily), and gave it a
-spin on both arm64 and x86, whereupon it exploded at boot time on x86.
+Nah. That's old and insane gunk.
 
-In arch/x86/kernel/apic/io_apic.c's timer_irq_works() we do:
+Thanks,
 
-	local_irq_save(flags);
-	local_irq_enable();
+        tglx
+---
+ arch/x86/kernel/apic/io_apic.c |   22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
 
-	[ trigger an IRQ here ]
-
-	local_irq_restore(flags);
-
-... and in check_timer() we call that a number of times after either a
-local_irq_save() or local_irq_disable(), eventually trailing with a
-local_irq_disable() that will balance things up before calling
-local_irq_restore().
-
-I guess that timer_irq_works() should instead do:
-
-	local_irq_save(flags);
-	local_irq_enable();
-	...
-	local_irq_disable();
-	local_irq_restore(flags);
-
-... assuming we consider that legitimate?
-
-With that, and all the calls to local_irq_disable() in check_timer() removed
-(diff below) I get a clean boot under QEMU with the assertion hacked in and
-DEBUG_LOCKDEP enabled.
-
-Thanks
-Mark.
-
----->8----
-diff --git a/arch/x86/kernel/apic/io_apic.c b/arch/x86/kernel/apic/io_apic.c
-index 7b3c7e0d4a09..e79e665a3aeb 100644
 --- a/arch/x86/kernel/apic/io_apic.c
 +++ b/arch/x86/kernel/apic/io_apic.c
-@@ -1631,6 +1631,7 @@ static int __init timer_irq_works(void)
-        else
-                delay_without_tsc();
+@@ -1618,21 +1618,16 @@ static void __init delay_without_tsc(voi
+ static int __init timer_irq_works(void)
+ {
+ 	unsigned long t1 = jiffies;
+-	unsigned long flags;
  
-+       local_irq_disable();
-        local_irq_restore(flags);
+ 	if (no_timer_check)
+ 		return 1;
  
-        /*
-@@ -2191,7 +2192,6 @@ static inline void __init check_timer(void)
-                        goto out;
-                }
-                panic_if_irq_remap("timer doesn't work through Interrupt-remapped IO-APIC");
--               local_irq_disable();
-                clear_IO_APIC_pin(apic1, pin1);
-                if (!no_pin1)
-                        apic_printk(APIC_QUIET, KERN_ERR "..MP-BIOS bug: "
-@@ -2215,7 +2215,6 @@ static inline void __init check_timer(void)
-                /*
-                 * Cleanup, just in case ...
-                 */
--               local_irq_disable();
-                legacy_pic->mask(0);
-                clear_IO_APIC_pin(apic2, pin2);
-                apic_printk(APIC_QUIET, KERN_INFO "....... failed.\n");
-@@ -2232,7 +2231,6 @@ static inline void __init check_timer(void)
-                apic_printk(APIC_QUIET, KERN_INFO "..... works.\n");
-                goto out;
-        }
--       local_irq_disable();
-        legacy_pic->mask(0);
-        apic_write(APIC_LVT0, APIC_LVT_MASKED | APIC_DM_FIXED | cfg->vector);
-        apic_printk(APIC_QUIET, KERN_INFO "..... failed.\n");
-@@ -2251,7 +2249,6 @@ static inline void __init check_timer(void)
-                apic_printk(APIC_QUIET, KERN_INFO "..... works.\n");
-                goto out;
-        }
--       local_irq_disable();
-        apic_printk(APIC_QUIET, KERN_INFO "..... failed :(.\n");
-        if (apic_is_x2apic_enabled())
-                apic_printk(APIC_QUIET, KERN_INFO
+-	local_save_flags(flags);
+ 	local_irq_enable();
+-
+ 	if (boot_cpu_has(X86_FEATURE_TSC))
+ 		delay_with_tsc();
+ 	else
+ 		delay_without_tsc();
+ 
+-	local_irq_restore(flags);
+-
+ 	/*
+ 	 * Expect a few ticks at least, to be sure some possible
+ 	 * glue logic does not lock up after one or two first
+@@ -1641,10 +1636,10 @@ static int __init timer_irq_works(void)
+ 	 * least one tick may be lost due to delays.
+ 	 */
+ 
+-	/* jiffies wrap? */
+-	if (time_after(jiffies, t1 + 4))
+-		return 1;
+-	return 0;
++	local_irq_disable();
++
++	/* Did jiffies advance? */
++	return time_after(jiffies, t1 + 4);
+ }
+ 
+ /*
+@@ -2117,13 +2112,12 @@ static inline void __init check_timer(vo
+ 	struct irq_cfg *cfg = irqd_cfg(irq_data);
+ 	int node = cpu_to_node(0);
+ 	int apic1, pin1, apic2, pin2;
+-	unsigned long flags;
+ 	int no_pin1 = 0;
+ 
+ 	if (!global_clock_event)
+ 		return;
+ 
+-	local_irq_save(flags);
++	local_irq_disable();
+ 
+ 	/*
+ 	 * get/set the timer IRQ vector:
+@@ -2191,7 +2185,6 @@ static inline void __init check_timer(vo
+ 			goto out;
+ 		}
+ 		panic_if_irq_remap("timer doesn't work through Interrupt-remapped IO-APIC");
+-		local_irq_disable();
+ 		clear_IO_APIC_pin(apic1, pin1);
+ 		if (!no_pin1)
+ 			apic_printk(APIC_QUIET, KERN_ERR "..MP-BIOS bug: "
+@@ -2215,7 +2208,6 @@ static inline void __init check_timer(vo
+ 		/*
+ 		 * Cleanup, just in case ...
+ 		 */
+-		local_irq_disable();
+ 		legacy_pic->mask(0);
+ 		clear_IO_APIC_pin(apic2, pin2);
+ 		apic_printk(APIC_QUIET, KERN_INFO "....... failed.\n");
+@@ -2232,7 +2224,6 @@ static inline void __init check_timer(vo
+ 		apic_printk(APIC_QUIET, KERN_INFO "..... works.\n");
+ 		goto out;
+ 	}
+-	local_irq_disable();
+ 	legacy_pic->mask(0);
+ 	apic_write(APIC_LVT0, APIC_LVT_MASKED | APIC_DM_FIXED | cfg->vector);
+ 	apic_printk(APIC_QUIET, KERN_INFO "..... failed.\n");
+@@ -2251,7 +2242,6 @@ static inline void __init check_timer(vo
+ 		apic_printk(APIC_QUIET, KERN_INFO "..... works.\n");
+ 		goto out;
+ 	}
+-	local_irq_disable();
+ 	apic_printk(APIC_QUIET, KERN_INFO "..... failed :(.\n");
+ 	if (apic_is_x2apic_enabled())
+ 		apic_printk(APIC_QUIET, KERN_INFO
+@@ -2260,7 +2250,7 @@ static inline void __init check_timer(vo
+ 	panic("IO-APIC + timer doesn't work!  Boot with apic=debug and send a "
+ 		"report.  Then try booting with the 'noapic' option.\n");
+ out:
+-	local_irq_restore(flags);
++	local_irq_enable();
+ }
+ 
+ /*
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
