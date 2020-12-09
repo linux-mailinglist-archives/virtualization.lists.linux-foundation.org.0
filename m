@@ -1,80 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2E0E2D43DD
-	for <lists.virtualization@lfdr.de>; Wed,  9 Dec 2020 15:05:49 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id AB0992D441E
+	for <lists.virtualization@lfdr.de>; Wed,  9 Dec 2020 15:25:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2BCFC87031;
-	Wed,  9 Dec 2020 14:05:48 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 08D9887A3C;
+	Wed,  9 Dec 2020 14:25:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vd6Xsi5xs+EP; Wed,  9 Dec 2020 14:05:47 +0000 (UTC)
+	with ESMTP id lhMILhB2NvYi; Wed,  9 Dec 2020 14:25:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id A137787022;
-	Wed,  9 Dec 2020 14:05:47 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D791E87A29;
+	Wed,  9 Dec 2020 14:25:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 72004C013B;
-	Wed,  9 Dec 2020 14:05:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BAE55C0FA7;
+	Wed,  9 Dec 2020 14:25:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8F403C013B
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 89D99C013B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 14:05:46 +0000 (UTC)
+ Wed,  9 Dec 2020 14:25:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 7CD1687031
+ by silver.osuosl.org (Postfix) with ESMTP id 5DB762E244
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 14:05:46 +0000 (UTC)
+ Wed,  9 Dec 2020 14:25:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OR56QqpCKZMY
+ with ESMTP id rZBOHUQ+UdFr
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 14:05:43 +0000 (UTC)
+ Wed,  9 Dec 2020 14:25:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 3D1DC87022
+ by silver.osuosl.org (Postfix) with ESMTPS id 47A3E2010F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Dec 2020 14:05:43 +0000 (UTC)
+ Wed,  9 Dec 2020 14:25:32 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1607522741; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=uXgDSSgnRzBGDMdctLYaRQ+Qn2PprXJNdztVTKfo77c=;
- b=VBLFnGdFLTZejaes667CEyWZxD0WAgEJ51z5oj3X8hKrujSoQO3KE8O+t/PTAzZi9+s3+H
- s0Ej2Glu5ccJ8u9gsnr256lA8K5pMwj5Xsyx4FqRkAfCEtHb/xtCrk2T3NVppdMovVrLTa
- 7NxlwD+oCqy1r458bCjBnqoIF2sArLY=
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D0203ACEB;
- Wed,  9 Dec 2020 14:05:40 +0000 (UTC)
-Subject: Re: [PATCH v2 05/12] x86: rework arch_local_irq_restore() to not use
- popf
-To: Mark Rutland <mark.rutland@arm.com>, Andy Lutomirski <luto@kernel.org>
-References: <20201120114630.13552-1-jgross@suse.com>
- <20201120114630.13552-6-jgross@suse.com>
- <20201120115943.GD3021@hirez.programming.kicks-ass.net>
- <eb05e878-6334-8d19-496b-6572df67fc56@suse.com>
- <CALCETrXOGhXoOJpzhAMqD7iibi09WzbGk9SWVH7JzA=d5uarWA@mail.gmail.com>
- <20201209132710.GA8566@C02TD0UTHF1T.local>
- <20201209140221.GA9087@C02TD0UTHF1T.local>
-Message-ID: <a37be173-6702-5523-8757-2b5a1b4ae311@suse.com>
-Date: Wed, 9 Dec 2020 15:05:39 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.0
+ by mx2.suse.de (Postfix) with ESMTP id C8C76AD57;
+ Wed,  9 Dec 2020 14:25:30 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: daniel@ffwll.ch, christian.koenig@amd.com, airlied@linux.ie,
+ sumit.semwal@linaro.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, kraxel@redhat.com, hdegoede@redhat.com,
+ sean@poorly.run, eric@anholt.net, sam@ravnborg.org
+Subject: [PATCH v3 0/8] drm: Support short-term vmap via vmap_local
+Date: Wed,  9 Dec 2020 15:25:19 +0100
+Message-Id: <20201209142527.26415-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-In-Reply-To: <20201209140221.GA9087@C02TD0UTHF1T.local>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>, X86 ML <x86@kernel.org>,
- LKML <linux-kernel@vger.kernel.org>,
- Linux Virtualization <virtualization@lists.linux-foundation.org>, "VMware,
- Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Thomas Gleixner <tglx@linutronix.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: linaro-mm-sig@lists.linaro.org, virtualization@lists.linux-foundation.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
+ linux-media@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,234 +66,93 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Content-Type: multipart/mixed; boundary="===============8543237368879776538=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============8543237368879776538==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="SbHnCuqvhr456hxBGyZfmnROM8i0IqhVV"
+(was: drm/vram-helper: Lock GEM BOs while they are mapped)
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---SbHnCuqvhr456hxBGyZfmnROM8i0IqhVV
-Content-Type: multipart/mixed; boundary="3SWBQ2CGRPlIb6qugl6p4NZVoXATi0Vjq";
- protected-headers="v1"
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Mark Rutland <mark.rutland@arm.com>, Andy Lutomirski <luto@kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "VMware, Inc." <pv-drivers@vmware.com>, X86 ML <x86@kernel.org>,
- LKML <linux-kernel@vger.kernel.org>,
- Linux Virtualization <virtualization@lists.linux-foundation.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- "H. Peter Anvin" <hpa@zytor.com>, xen-devel
- <xen-devel@lists.xenproject.org>, Thomas Gleixner <tglx@linutronix.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Message-ID: <a37be173-6702-5523-8757-2b5a1b4ae311@suse.com>
-Subject: Re: [PATCH v2 05/12] x86: rework arch_local_irq_restore() to not use
- popf
-References: <20201120114630.13552-1-jgross@suse.com>
- <20201120114630.13552-6-jgross@suse.com>
- <20201120115943.GD3021@hirez.programming.kicks-ass.net>
- <eb05e878-6334-8d19-496b-6572df67fc56@suse.com>
- <CALCETrXOGhXoOJpzhAMqD7iibi09WzbGk9SWVH7JzA=d5uarWA@mail.gmail.com>
- <20201209132710.GA8566@C02TD0UTHF1T.local>
- <20201209140221.GA9087@C02TD0UTHF1T.local>
-In-Reply-To: <20201209140221.GA9087@C02TD0UTHF1T.local>
+GEM VRAM helpers used to pin the BO in their implementation of vmap, so
+that they could not be relocated. In recent discussions, [1][2] it became
+clear that this is incorrect for in-kernel use cases, such as fbdev
+emulation; which should rather depend on the reservation lock to prevent
+relocation.
 
---3SWBQ2CGRPlIb6qugl6p4NZVoXATi0Vjq
-Content-Type: multipart/mixed;
- boundary="------------11CE66C562C189ECDCC48235"
-Content-Language: en-US
+This patchset addresses the issue by introducing the new interfaces
+vmap_local and vunmap_local throughout dma-buf and GEM. It further adds
+support to DRM's CMA, SHMEM and VRAM helpers and finally converts fbdev
+emulation to the new interface.
 
-This is a multi-part message in MIME format.
---------------11CE66C562C189ECDCC48235
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Patches 1 and 2 prepare the ast cursor code for the later changes.
 
-On 09.12.20 15:02, Mark Rutland wrote:
-> On Wed, Dec 09, 2020 at 01:27:10PM +0000, Mark Rutland wrote:
->> On Sun, Nov 22, 2020 at 01:44:53PM -0800, Andy Lutomirski wrote:
->>> On Sat, Nov 21, 2020 at 10:55 PM J=C3=BCrgen Gro=C3=9F <jgross@suse.c=
-om> wrote:
->>>> On 20.11.20 12:59, Peter Zijlstra wrote:
->>>>> If someone were to write horrible code like:
->>>>>
->>>>>        local_irq_disable();
->>>>>        local_irq_save(flags);
->>>>>        local_irq_enable();
->>>>>        local_irq_restore(flags);
->>>>>
->>>>> we'd be up some creek without a paddle... now I don't _think_ we ha=
-ve
->>>>> genius code like that, but I'd feel saver if we can haz an assertio=
-n in
->>>>> there somewhere...
->=20
->> I was just talking to Peter on IRC about implementing the same thing f=
-or
->> arm64, so could we put this in the generic irqflags code? IIUC we can
->> use raw_irqs_disabled() to do the check.
->>
->> As this isn't really entry specific (and IIUC the cases this should
->> catch would break lockdep today), maybe we should add a new
->> DEBUG_IRQFLAGS for this, that DEBUG_LOCKDEP can also select?
->>
->> Something like:
->>
->> #define local_irq_restore(flags)                               \
->>         do {                                                    \
->>                 if (!raw_irqs_disabled_flags(flags)) {          \
->>                         trace_hardirqs_on();                    \
->>                 } else if (IS_ENABLED(CONFIG_DEBUG_IRQFLAGS) {  \
->>                         if (unlikely(raw_irqs_disabled())       \
->=20
-> Whoops; that should be !raw_irqs_disabled().
->=20
->>                                 warn_bogus_irqrestore();        \
->>                 }                                               \
->>                 raw_local_irq_restore(flags);                   \
->>          } while (0)
->>
->> ... perhaps? (ignoring however we deal with once-ness).
->=20
-> If no-one shouts in the next day or two I'll spin this as its own patch=
-=2E
+Patches 3 and 4 add the vmap_local infrastructure throughout dma-buf,
+GEM and PRIME.
 
-Fine with me. So I'll just ignore a potential error case in my patch.
+Patches 5 to 7 add implementations of vmap_local to DRM's various GEM
+helper libraries. Due to the simple nature of these libraries, existing
+vmap code can be reused easily. Several drivers are updateed as well to
+use the new interfaces.
 
-Thanks,
+Patch 8 converts generic fbdev emulation to use vmap_local. Only DRM
+drivers that use GEM helpers currently use fbdev emulation, so patches
+5 to 7 covered all necessary instances.
 
+I smoke-tested the patchset with ast (VRAM helpers), mgag200 (SHMEM) and
+vc4 (CMA). I also tested with a version of radeon (raw TTM) that has been
+converted to generic fbdev emulation.
 
-Juergen
+v3:
+	* rewrite patchset around vmap_local
+v2:
+	* make importers acquire resv locks by themselves
+	* document dma-buf vamp/vunmap ops
 
+[1] https://patchwork.freedesktop.org/patch/400054/?series=83765&rev=1
+[2] https://patchwork.freedesktop.org/patch/405407/?series=84401&rev=2
 
---------------11CE66C562C189ECDCC48235
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Thomas Zimmermann (8):
+  drm/ast: Don't pin cursor source BO explicitly during update
+  drm/ast: Only map cursor BOs during updates
+  dma-buf: Add vmap_local and vnumap_local operations
+  drm/gem: Create infrastructure for GEM vmap_local
+  drm/cma-helper: Provide a vmap function for short-term mappings
+  drm/shmem-helper: Provide a vmap function for short-term mappings
+  drm/vram-helper: Provide a vmap function for short-term mappings
+  drm/fb-helper: Move BO locking from DRM client to fbdev damage worker
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+ drivers/dma-buf/dma-buf.c              |  80 ++++++++++++++
+ drivers/gpu/drm/ast/ast_cursor.c       |  70 +++++++-----
+ drivers/gpu/drm/ast/ast_drv.h          |   2 -
+ drivers/gpu/drm/drm_client.c           |  91 ++++++++++++++++
+ drivers/gpu/drm/drm_fb_helper.c        |  41 +++----
+ drivers/gpu/drm/drm_gem.c              |  28 +++++
+ drivers/gpu/drm/drm_gem_cma_helper.c   |  35 ++++++
+ drivers/gpu/drm/drm_gem_shmem_helper.c |  71 ++++++++++++-
+ drivers/gpu/drm/drm_gem_vram_helper.c  | 142 ++++++++++++++++---------
+ drivers/gpu/drm/drm_internal.h         |   2 +
+ drivers/gpu/drm/drm_prime.c            |  39 +++++++
+ drivers/gpu/drm/mgag200/mgag200_mode.c |  16 ++-
+ drivers/gpu/drm/tiny/cirrus.c          |  10 +-
+ drivers/gpu/drm/tiny/gm12u320.c        |  14 ++-
+ drivers/gpu/drm/udl/udl_modeset.c      |  18 ++--
+ drivers/gpu/drm/vboxvideo/vbox_mode.c  |  15 +--
+ drivers/gpu/drm/vc4/vc4_bo.c           |  13 +++
+ drivers/gpu/drm/vc4/vc4_drv.h          |   1 +
+ drivers/gpu/drm/virtio/virtgpu_prime.c |   2 +
+ include/drm/drm_client.h               |   4 +
+ include/drm/drm_gem.h                  |  20 ++++
+ include/drm/drm_gem_cma_helper.h       |   1 +
+ include/drm/drm_gem_shmem_helper.h     |   2 +
+ include/drm/drm_gem_vram_helper.h      |   2 +
+ include/drm/drm_prime.h                |   2 +
+ include/linux/dma-buf.h                |  34 ++++++
+ 26 files changed, 635 insertions(+), 120 deletions(-)
 
-xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
-cWx
-w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
-f8Z
-d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
-9bf
-IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
-G7/
-377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
-3Jv
-c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
-QIe
-AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
-hpw
-dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
-MbD
-1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
-oPH
-Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
-5QL
-+qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
-2Vu
-IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
-QoL
-BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
-Wf0
-teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
-/nu
-AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
-ITT
-d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
-XBK
-7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
-80h
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
-AcD
-AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
-FOX
-gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
-jnD
-kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
-N51
-N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
-otu
-fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
-tqS
-EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
-hsD
-BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
-g3O
-ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
-dM7
-wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
-D+j
-LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
-V2x
-AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
-Eaw
-QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
-nHI
-s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
-wgn
-BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
-bVF
-LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
-pEd
-IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
-QAB
-wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
-Tbe
-8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
-vJz
-Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
-VGi
-wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
-svi
-uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
-zXs
-ZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------11CE66C562C189ECDCC48235--
-
---3SWBQ2CGRPlIb6qugl6p4NZVoXATi0Vjq--
-
---SbHnCuqvhr456hxBGyZfmnROM8i0IqhVV
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAl/Q2bMFAwAAAAAACgkQsN6d1ii/Ey+M
-Sgf/YvUCb1mTnblXUk7krczQ1ATvqpRzUPkRKWI/gbHwiba2E6IgZu9qI9rnOGU2XftlrlseQrYY
-TgBQ6ElRBxmD7UwTQHYEo8sGuk4aRzlqWFZLiOQhYPhqFc8uv3eWlZWVcplQH9mer1rAZS4Z0tCR
-Rbh4HJa+Qmfhh0n0L+kBDWzNfll7LrjnV21sZLSSzSDLsDxObqi4yRoM+Mr/0wLovtHHb3oVIE3y
-q87ZQjcZeCZZYcwIYLQrhpIPtU5b7rrYB5kLEyKHus+S+B+PciDn7QYEvbfIddjOmaIMB8VWIIC4
-Ir1NaFfvEJlgYdw15YRsTmU/yqkiTZ3/cp4vlaFqKw==
-=ZFoe
------END PGP SIGNATURE-----
-
---SbHnCuqvhr456hxBGyZfmnROM8i0IqhVV--
-
---===============8543237368879776538==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+--
+2.29.2
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8543237368879776538==--
