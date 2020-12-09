@@ -1,95 +1,101 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 568A22D366C
-	for <lists.virtualization@lfdr.de>; Tue,  8 Dec 2020 23:47:21 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id E340E86EDB;
-	Tue,  8 Dec 2020 22:47:19 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4-z4OWnE1HCO; Tue,  8 Dec 2020 22:47:19 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 6C37186ED2;
-	Tue,  8 Dec 2020 22:47:19 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 40C44C013B;
-	Tue,  8 Dec 2020 22:47:19 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6FA39C013B
- for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Dec 2020 22:47:17 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3763C2D3BA2
+	for <lists.virtualization@lfdr.de>; Wed,  9 Dec 2020 07:46:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 6BE82873AD
- for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Dec 2020 22:47:17 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C801D8710B;
+	Wed,  9 Dec 2020 06:46:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dvm3xlXHchAy; Wed,  9 Dec 2020 06:46:35 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by hemlock.osuosl.org (Postfix) with ESMTP id 044B687007;
+	Wed,  9 Dec 2020 06:46:35 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DA1CBC1DA2;
+	Wed,  9 Dec 2020 06:46:34 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 429ABC013B
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  9 Dec 2020 06:46:33 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by silver.osuosl.org (Postfix) with ESMTP id 216D5203A8
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  9 Dec 2020 06:46:33 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id G2b6C4RBCvCq
+ with ESMTP id feijZrKsFCdh
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Dec 2020 22:47:17 +0000 (UTC)
+ Wed,  9 Dec 2020 06:46:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
- [209.85.167.194])
- by hemlock.osuosl.org (Postfix) with ESMTPS id DB5B18739F
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by silver.osuosl.org (Postfix) with ESMTPS id 115AA20385
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Dec 2020 22:47:16 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id s75so355843oih.1
+ Wed,  9 Dec 2020 06:46:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1607496390;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=JWegwtDJ2omVRz2Kp6FHFNujjEo+eYTsjLuIyLZ+Tmg=;
+ b=RrKhhwk2BZZKdUur+g/oi6un9ZRdnfcEzLso7rP8hOE2eAU4Wvp9GHWBbB3vEXc1fbr1B8
+ Fw9mc7MoVRHGeiJ4wQq2oYMHoKpcaRfdSiuu2IaaDGbfozOOo6SDrX0GdJwIcXLdlmnNM/
+ TB7a+IONKavJzmchVKXENSpu9eO6EvY=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-523-h4lrl4Y-Mfubv5fsP5l5sA-1; Wed, 09 Dec 2020 01:46:28 -0500
+X-MC-Unique: h4lrl4Y-Mfubv5fsP5l5sA-1
+Received: by mail-wr1-f72.google.com with SMTP id 91so262096wrk.17
  for <virtualization@lists.linux-foundation.org>;
- Tue, 08 Dec 2020 14:47:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=u5UkKTVdVSQdzgLxe0Sijc9KEJH+Y+fH21l3fscA5vs=;
- b=g139F4IDeHgHKJHGAegseG7moYs36Ptas3/bhdgZbuWODhpJYEC3bRoSoX4mahPpZF
- CTgZYCdywqaiwldwn+JhNBIuhHu3JKvCMCNnhKb+w9xguXJc8d9f5ug6LT2wtrErEqg3
- hUZ6RkorqceD+3Iy5LXW8rV1YEYLsnW7dQfWQxtvDKGIo6Ft4p9y1mPCQ8mYhf2kEpIf
- TmCveENINZk+ANva2SY5iswWbb/8Wnj9cXVMC3OtOcT9mJT+InGKIXbCoWtZNsa8+/2R
- Ts/JqcJXs2j+mU/Hn7ZThyzPChd5si0MgALfey+lJ6Y5iWpMnh29pbOWUXcjM3Z4BU6/
- g+Bw==
+ Tue, 08 Dec 2020 22:46:28 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=u5UkKTVdVSQdzgLxe0Sijc9KEJH+Y+fH21l3fscA5vs=;
- b=nI2EZUWSGsi2aOejHfoyTT6UYqku7eB8JHLYVqmHysyxBSmYLA4w8G/pqdEqhYtua1
- uCzP1LX6M0ChA4i05YPVbsAz+qTiAo6Wn/ZLUWTVmSMkLlwAnwsDDKf6tUpzFTn2gCh5
- RvCdAKCcn/Lx0Y3xJ9X3iVVyY8mEAEjd4W7zcVfyuKKE0gb6j2H9rkp2lAm9rcz9OaFQ
- T9ESy/Ns/xgYHN1wizC3lOJdp8jfgmx7NRtGM3TGfmOWq5OKhEyo8uVAL/M7SUFqpH+N
- v+a+RdgKB5lCO5HlB/9qmiSNQSAZ1+8/D0uDD7k6sjWsev3avn+W4Z9j1UAk+Bj90PdW
- oYCg==
-X-Gm-Message-State: AOAM5301aGf+iWRH7mo7YtsAp01FdsueuC0u6/6qaSRv0S45yDqDNYyc
- pxOCZ1kNFYWoLX6SwdbUtxI=
-X-Google-Smtp-Source: ABdhPJwSB4hWMNVXjX4Ea5vURzGXJi/XgHT08yVWomFi+EIMWtOjHX0E2mjpzO3VnHkPUX0tFwkEJQ==
-X-Received: by 2002:a05:6808:9a:: with SMTP id
- s26mr123604oic.124.1607467636251; 
- Tue, 08 Dec 2020 14:47:16 -0800 (PST)
-Received: from Davids-MacBook-Pro.local ([8.48.134.51])
- by smtp.googlemail.com with ESMTPSA id j11sm82418oos.47.2020.12.08.14.47.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Dec 2020 14:47:15 -0800 (PST)
-Subject: Re: [PATCH 0/7] Introduce vdpa management tool
-To: Jason Wang <jasowang@redhat.com>, Parav Pandit <parav@nvidia.com>,
- virtualization@lists.linux-foundation.org,
- Stephen Hemminger <stephen@networkplumber.org>
-References: <20201112064005.349268-1-parav@nvidia.com>
- <5b2235f6-513b-dbc9-3670-e4c9589b4d1f@redhat.com>
-From: David Ahern <dsahern@gmail.com>
-Message-ID: <831884f7-365d-b974-0bc5-f72729add98f@gmail.com>
-Date: Tue, 8 Dec 2020 15:47:11 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.5.1
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=JWegwtDJ2omVRz2Kp6FHFNujjEo+eYTsjLuIyLZ+Tmg=;
+ b=mYFor6gMZDVgjYddKbsjW+mI55CaQXM8ARv/8slErtMFAyVrbaPemc6cYUNSUhMSOD
+ YqlngFSr1zcONrAJBaklcXdXiD6tS0HQ1qLDnFUO8g1UKS9VkVRa32S0bE1RHcIBck3a
+ HMyov8IO8cMmANlL8Lzjk3tLgDIcDD1MUvA3Xp1QpuhWRveBwvq3Rds/Twr6FxhT6NbY
+ Qx94H9PtcFcAW+WY+cfcul13wYlRn+0Vd4Rrt3bB3d5MImj2dppOTGyf+OnyTLNUsmG3
+ dvIYgkM7UzqCJZVSnm6kPv4S8n5ert5AVYnlx8tckrXcLIFtpZzIkukfsgueSUAe5LiE
+ lmiQ==
+X-Gm-Message-State: AOAM530/52A3kn11MvbJ5cUSiMI4pe6AhPWDyyhMJgxuL93Gh+U0gT4z
+ eZThGRq/DiieS2Cdw6LyQtyqtgVltKKLQLmq347aO5NuGZapUyKjeaV4eZ+QBm3q+28t9PoyN4S
+ Ml43sFkjUGyTMFSRafRklg4fXt88GeuEnWD3zXlI83Q==
+X-Received: by 2002:a5d:4d88:: with SMTP id b8mr903706wru.134.1607496387253;
+ Tue, 08 Dec 2020 22:46:27 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwnALlGGbRyalUyQiiAMD7PPni/fY1a6aRhLxMF3Q+mP8mccZfLMhdqrEwUXVX4ohHXuNvquQ==
+X-Received: by 2002:a5d:4d88:: with SMTP id b8mr903690wru.134.1607496387039;
+ Tue, 08 Dec 2020 22:46:27 -0800 (PST)
+Received: from redhat.com (bzq-79-176-44-197.red.bezeqint.net. [79.176.44.197])
+ by smtp.gmail.com with ESMTPSA id j13sm1379338wmi.36.2020.12.08.22.46.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Dec 2020 22:46:25 -0800 (PST)
+Date: Wed, 9 Dec 2020 01:46:22 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Eli Cohen <elic@nvidia.com>
+Subject: Re: [PATCH] vdpa/mlx5: Use write memory barrier after updating CQ
+ index
+Message-ID: <20201209014547-mutt-send-email-mst@kernel.org>
+References: <20201206105719.123753-1-elic@nvidia.com>
+ <20201208164356-mutt-send-email-mst@kernel.org>
+ <20201209060230.GA57362@mtl-vdi-166.wap.labs.mlnx>
 MIME-Version: 1.0
-In-Reply-To: <5b2235f6-513b-dbc9-3670-e4c9589b4d1f@redhat.com>
-Content-Language: en-US
-Cc: netdev@vger.kernel.org, elic@nvidia.com,
- =?UTF-8?B?6LCi5rC45ZCJ?= <xieyongji@bytedance.com>, mst@redhat.com
+In-Reply-To: <20201209060230.GA57362@mtl-vdi-166.wap.labs.mlnx>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: linux-kernel@vger.kernel.org, lulu@redhat.com,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,18 +112,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 11/26/20 8:53 PM, Jason Wang wrote:
-> 1. Where does userspace vdpa tool reside which users can use?
-> Ans: vdpa tool can possibly reside in iproute2 [1] as it enables user to
-> create vdpa net devices.
+On Wed, Dec 09, 2020 at 08:02:30AM +0200, Eli Cohen wrote:
+> On Tue, Dec 08, 2020 at 04:45:04PM -0500, Michael S. Tsirkin wrote:
+> > On Sun, Dec 06, 2020 at 12:57:19PM +0200, Eli Cohen wrote:
+> > > Make sure to put write memory barrier after updating CQ consumer index
+> > > so the hardware knows that there are available CQE slots in the queue.
+> > > 
+> > > Failure to do this can cause the update of the RX doorbell record to get
+> > > updated before the CQ consumer index resulting in CQ overrun.
+> > > 
+> > > Change-Id: Ib0ae4c118cce524c9f492b32569179f3c1f04cc1
+> > > Fixes: 1a86b377aa21 ("vdpa/mlx5: Add VDPA driver for supported mlx5 devices")
+> > > Signed-off-by: Eli Cohen <elic@nvidia.com>
+> > 
+> > Aren't both memory writes?
+> 
+> Not sure what exactly you mean here.
 
-iproute2 package is fine with us, but there are some expectations:
-syntax, command options and documentation need to be consistent with
-other iproute2 commands (this thread suggests it will be but just being
-clear), and it needs to re-use code as much as possible (e.g., json
-functions). If there is overlap with other tools (devlink, dcb, etc),
-you should refactor into common code used by all. Petr Machata has done
-this quite a bit for dcb and is a good example to follow.
+Both updates are CPU writes into RAM that hardware then reads
+using DMA.
+
+> > And given that, isn't dma_wmb() sufficient here?
+> 
+> I agree that dma_wmb() is more appropriate here.
+> 
+> > 
+> > 
+> > > ---
+> > >  drivers/vdpa/mlx5/net/mlx5_vnet.c | 5 +++++
+> > >  1 file changed, 5 insertions(+)
+> > > 
+> > > diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+> > > index 1f4089c6f9d7..295f46eea2a5 100644
+> > > --- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
+> > > +++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+> > > @@ -478,6 +478,11 @@ static int mlx5_vdpa_poll_one(struct mlx5_vdpa_cq *vcq)
+> > >  static void mlx5_vdpa_handle_completions(struct mlx5_vdpa_virtqueue *mvq, int num)
+> > >  {
+> > >  	mlx5_cq_set_ci(&mvq->cq.mcq);
+> > > +
+> > > +	/* make sure CQ cosumer update is visible to the hardware before updating
+> > > +	 * RX doorbell record.
+> > > +	 */
+> > > +	wmb();
+> > >  	rx_post(&mvq->vqqp, num);
+> > >  	if (mvq->event_cb.callback)
+> > >  		mvq->event_cb.callback(mvq->event_cb.private);
+> > > -- 
+> > > 2.27.0
+> > 
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
