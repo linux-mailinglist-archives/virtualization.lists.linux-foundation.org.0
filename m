@@ -1,73 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C1632DAF3C
-	for <lists.virtualization@lfdr.de>; Tue, 15 Dec 2020 15:45:17 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFD2E2DAF3D
+	for <lists.virtualization@lfdr.de>; Tue, 15 Dec 2020 15:45:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id E30898768B;
-	Tue, 15 Dec 2020 14:45:15 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 761CF2E144;
+	Tue, 15 Dec 2020 14:45:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZmbEJv47+m-h; Tue, 15 Dec 2020 14:45:15 +0000 (UTC)
+	with ESMTP id q2VMWCspLJNC; Tue, 15 Dec 2020 14:45:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 60E7087688;
-	Tue, 15 Dec 2020 14:45:15 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 87B452150A;
+	Tue, 15 Dec 2020 14:45:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 43D1BC013B;
-	Tue, 15 Dec 2020 14:45:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 727CCC013B;
+	Tue, 15 Dec 2020 14:45:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6B103C013B
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 185B1C013B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Dec 2020 14:45:13 +0000 (UTC)
+ Tue, 15 Dec 2020 14:45:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 5A57A86F99
+ by silver.osuosl.org (Postfix) with ESMTP id EEF322150A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Dec 2020 14:45:13 +0000 (UTC)
+ Tue, 15 Dec 2020 14:45:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gE+3Y9zfv+EJ
+ with ESMTP id 8jK9JyefWL9H
  for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Dec 2020 14:45:12 +0000 (UTC)
+ Tue, 15 Dec 2020 14:45:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 778DA86614
+ by silver.osuosl.org (Postfix) with ESMTPS id 0C367207B0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Dec 2020 14:45:12 +0000 (UTC)
+ Tue, 15 Dec 2020 14:45:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1608043511;
+ s=mimecast20190719; t=1608043516;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uNX8o+4Ncn++H4+ueZCcZznxPRMkkHJmv0MdQ+/5MZg=;
- b=L50YbPT/6Jdsmy1WxPMRlJn8GTh+Myx4kdnJg57mixW4LWSyp6vGWVbUqDcoAnsomZHE1i
- 3/BAtWRBLmAcsbtvSiY0MDbM+7thv1wmRjUzayOW2tQPOky0OwmJ88dvVQ4auE0seSy/0o
- Q7YmNR+5BJ9U8rQQHU8PnPoJYT0NpGk=
+ bh=9F5ax3wxxKnYiaE8zVcc5355IGbGaIsPxUJUJWPdgeU=;
+ b=jEHMQdNxByhe0NuCbtBzEZHtWo1LVlya/A9W3WRxhzSMvlM6WMFFo+cO91HaKEp24EQzog
+ V5S0ZtcrelF6NW6bX6fVmJzsj0I4LEKU2T3IpdCd5srkFdiMI8vfkmhShZYsZIKZ77s0cr
+ 2N3w9doOBLqjUfPzYgUO4K50L8+Xih4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-378-3hL8X79TPN6ygMcEC_OOTw-1; Tue, 15 Dec 2020 09:45:09 -0500
-X-MC-Unique: 3hL8X79TPN6ygMcEC_OOTw-1
+ us-mta-52-vTW-QsZwNDiQt6mv3qkHiA-1; Tue, 15 Dec 2020 09:45:14 -0500
+X-MC-Unique: vTW-QsZwNDiQt6mv3qkHiA-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
  [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 85BA859;
- Tue, 15 Dec 2020 14:45:08 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1C1D6801AC1;
+ Tue, 15 Dec 2020 14:45:13 +0000 (UTC)
 Received: from steredhat.redhat.com (ovpn-115-49.ams2.redhat.com
  [10.36.115.49])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A2AF960C0F;
- Tue, 15 Dec 2020 14:44:56 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E426B60C0F;
+ Tue, 15 Dec 2020 14:45:08 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v4 12/18] vdpa_sim: add get_config callback in vdpasim_dev_attr
-Date: Tue, 15 Dec 2020 15:42:50 +0100
-Message-Id: <20201215144256.155342-13-sgarzare@redhat.com>
+Subject: [PATCH v4 13/18] vdpa_sim: add set_config callback in vdpasim_dev_attr
+Date: Tue, 15 Dec 2020 15:42:51 +0100
+Message-Id: <20201215144256.155342-14-sgarzare@redhat.com>
 In-Reply-To: <20201215144256.155342-1-sgarzare@redhat.com>
 References: <20201215144256.155342-1-sgarzare@redhat.com>
 MIME-Version: 1.0
@@ -93,115 +93,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The get_config callback can be used by the device to fill the
-config structure.
-The callback will be invoked in vdpasim_get_config() before copying
-bytes into caller buffer.
+The set_config callback can be used by the device to parse the
+config structure modified by the driver.
 
-Move vDPA-net config updates from vdpasim_set_features() in the
-new vdpasim_net_get_config() callback.
-This is safe since in vdpa_get_config() we already check that
-.set_features() callback is called before .get_config().
+The callback will be invoked, if set, in vdpasim_set_config() after
+copying bytes from caller buffer into vdpasim->config buffer.
 
+Acked-by: Jason Wang <jasowang@redhat.com>
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
-v4:
-- explained in the commit message that the moving is safe [Jason]
-
-v3:
-- checked if get_config callback is set before call it
----
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 35 +++++++++++++++++++-------------
- 1 file changed, 21 insertions(+), 14 deletions(-)
+ drivers/vdpa/vdpa_sim/vdpa_sim.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 4a0a6cadb9ff..5eadcd19ab6f 100644
+index 5eadcd19ab6f..e219aa852ef8 100644
 --- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
 +++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -68,6 +68,8 @@ struct vdpasim_virtqueue {
- #define VDPASIM_NET_FEATURES	(VDPASIM_FEATURES | \
- 				 (1ULL << VIRTIO_NET_F_MAC))
- 
-+struct vdpasim;
-+
- struct vdpasim_dev_attr {
- 	u64 supported_features;
- 	size_t config_size;
-@@ -75,6 +77,7 @@ struct vdpasim_dev_attr {
- 	u32 id;
+@@ -78,6 +78,7 @@ struct vdpasim_dev_attr {
  
  	work_func_t work_fn;
-+	void (*get_config)(struct vdpasim *vdpasim, void *config);
+ 	void (*get_config)(struct vdpasim *vdpasim, void *config);
++	void (*set_config)(struct vdpasim *vdpasim, const void *config);
  };
  
  /* State of each vdpasim device */
-@@ -530,8 +533,6 @@ static u64 vdpasim_get_features(struct vdpa_device *vdpa)
- static int vdpasim_set_features(struct vdpa_device *vdpa, u64 features)
+@@ -606,7 +607,15 @@ static void vdpasim_get_config(struct vdpa_device *vdpa, unsigned int offset,
+ static void vdpasim_set_config(struct vdpa_device *vdpa, unsigned int offset,
+ 			     const void *buf, unsigned int len)
  {
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
--	struct virtio_net_config *config =
--		(struct virtio_net_config *)vdpasim->config;
- 
- 	/* DMA mapping must be done by driver */
- 	if (!(features & (1ULL << VIRTIO_F_ACCESS_PLATFORM)))
-@@ -539,16 +540,6 @@ static int vdpasim_set_features(struct vdpa_device *vdpa, u64 features)
- 
- 	vdpasim->features = features & vdpasim->dev_attr.supported_features;
- 
--	/* We generally only know whether guest is using the legacy interface
--	 * here, so generally that's the earliest we can set config fields.
--	 * Note: We actually require VIRTIO_F_ACCESS_PLATFORM above which
--	 * implies VIRTIO_F_VERSION_1, but let's not try to be clever here.
--	 */
--
--	config->mtu = cpu_to_vdpasim16(vdpasim, 1500);
--	config->status = cpu_to_vdpasim16(vdpasim, VIRTIO_NET_S_LINK_UP);
--	memcpy(config->mac, macaddr_buf, ETH_ALEN);
--
- 	return 0;
- }
- 
-@@ -603,8 +594,13 @@ static void vdpasim_get_config(struct vdpa_device *vdpa, unsigned int offset,
- {
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
- 
--	if (offset + len < vdpasim->dev_attr.config_size)
--		memcpy(buf, vdpasim->config + offset, len);
+-	/* No writable config supportted by vdpasim */
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
++
 +	if (offset + len > vdpasim->dev_attr.config_size)
 +		return;
 +
-+	if (vdpasim->dev_attr.get_config)
-+		vdpasim->dev_attr.get_config(vdpasim, vdpasim->config);
++	memcpy(vdpasim->config + offset, buf, len);
 +
-+	memcpy(buf, vdpasim->config + offset, len);
++	if (vdpasim->dev_attr.set_config)
++		vdpasim->dev_attr.set_config(vdpasim, vdpasim->config);
  }
  
- static void vdpasim_set_config(struct vdpa_device *vdpa, unsigned int offset,
-@@ -747,6 +743,16 @@ static const struct vdpa_config_ops vdpasim_batch_config_ops = {
- 	.free                   = vdpasim_free,
- };
- 
-+static void vdpasim_net_get_config(struct vdpasim *vdpasim, void *config)
-+{
-+	struct virtio_net_config *net_config =
-+		(struct virtio_net_config *)config;
-+
-+	net_config->mtu = cpu_to_vdpasim16(vdpasim, 1500);
-+	net_config->status = cpu_to_vdpasim16(vdpasim, VIRTIO_NET_S_LINK_UP);
-+	memcpy(net_config->mac, macaddr_buf, ETH_ALEN);
-+}
-+
- static int __init vdpasim_dev_init(void)
- {
- 	struct vdpasim_dev_attr dev_attr = {};
-@@ -755,6 +761,7 @@ static int __init vdpasim_dev_init(void)
- 	dev_attr.supported_features = VDPASIM_NET_FEATURES;
- 	dev_attr.nvqs = VDPASIM_VQ_NUM;
- 	dev_attr.config_size = sizeof(struct virtio_net_config);
-+	dev_attr.get_config = vdpasim_net_get_config;
- 	dev_attr.work_fn = vdpasim_net_work;
- 
- 	vdpasim_dev = vdpasim_create(&dev_attr);
+ static u32 vdpasim_get_generation(struct vdpa_device *vdpa)
 -- 
 2.26.2
 
