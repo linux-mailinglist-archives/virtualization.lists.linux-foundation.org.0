@@ -1,86 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61DDB2DCE06
-	for <lists.virtualization@lfdr.de>; Thu, 17 Dec 2020 10:03:17 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D36A2DCE54
+	for <lists.virtualization@lfdr.de>; Thu, 17 Dec 2020 10:32:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 079B02E28A;
-	Thu, 17 Dec 2020 09:03:15 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 0067B87A5A;
+	Thu, 17 Dec 2020 09:31:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DF5tAGD6gZgU; Thu, 17 Dec 2020 09:03:11 +0000 (UTC)
+	with ESMTP id 42yTpKSaTRuL; Thu, 17 Dec 2020 09:31:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 63F5F2E248;
-	Thu, 17 Dec 2020 09:03:11 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id C8E8687A5D;
+	Thu, 17 Dec 2020 09:31:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2DFC7C088E;
-	Thu, 17 Dec 2020 09:03:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A39A3C013B;
+	Thu, 17 Dec 2020 09:31:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BA7F8C013B
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2545EC088E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Dec 2020 09:03:09 +0000 (UTC)
+ Thu, 17 Dec 2020 09:31:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id A4E8387555
+ by silver.osuosl.org (Postfix) with ESMTP id 002122E28C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Dec 2020 09:03:09 +0000 (UTC)
+ Thu, 17 Dec 2020 09:31:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3kAwrExz-T5h
+ with ESMTP id 6ty5mEf4R5am
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Dec 2020 09:03:08 +0000 (UTC)
+ Thu, 17 Dec 2020 09:31:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 91C8C87554
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id E6E782E289
  for <virtualization@lists.linux-foundation.org>;
- Thu, 17 Dec 2020 09:03:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1608195787;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=N7BMLAt3Nkb4GWZAxfBiiUdsoewOzT4BGc7hVKvcSzc=;
- b=DQldMh+Hs8uJuUhnTtjwGK5c/K0Wrfm+/Mwbe6V1QOSLBiy7hHEI3/+W9hMXElQZVwi3AN
- 3S/h1gLW1/Lz8/0LBqvFSeF53tuCQQ7hdRPDIUzNpWAU7bq0vbelbTn3rOzZylI+ebJCQ6
- f2YuYfM3i7rbtL4O5hrNUWtQikJcYJM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-55-6rdIExmXMbSqGRSDQB8yNA-1; Thu, 17 Dec 2020 04:03:05 -0500
-X-MC-Unique: 6rdIExmXMbSqGRSDQB8yNA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 81710190A7A4;
- Thu, 17 Dec 2020 09:03:03 +0000 (UTC)
-Received: from [10.72.12.223] (ovpn-12-223.pek2.redhat.com [10.72.12.223])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A76125D9C0;
- Thu, 17 Dec 2020 09:02:50 +0000 (UTC)
-Subject: Re: [PATCH 00/21] Control VQ support in vDPA
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20201216064818.48239-1-jasowang@redhat.com>
- <20201216044051-mutt-send-email-mst@kernel.org>
- <aa061fcb-9395-3a1b-5d6e-76b5454dfb6c@redhat.com>
- <20201217025410-mutt-send-email-mst@kernel.org>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <61b60985-142b-10f2-58b8-1d9f57c0cfca@redhat.com>
-Date: Thu, 17 Dec 2020 17:02:49 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20201217025410-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: kvm@vger.kernel.org, lulu@redhat.com, netdev@vger.kernel.org,
+ Thu, 17 Dec 2020 09:31:48 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1608197506; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=E7FpqkqnD5unmDeE4sjWFYeLFL2ZgXDe6/5+3YmBT64=;
+ b=a9yFTfK79u+NFXUZ4zWV8aHPpDUcRPDVvBCcSa9sHMiOYeRnwQj4sILTaezMzm4EYJQG+K
+ gWtQy41s+pv/TtoyNIh8/P2b5G/eZiIFhJyS9RJs098dCw6tqaN2AHvfO5MUEHUwEaUz34
+ +nKJxIVkWwafsJ2frUmJ4ePnkcxTR4M=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 44FF5B1A1;
+ Thu, 17 Dec 2020 09:31:46 +0000 (UTC)
+To: xen-devel@lists.xenproject.org, x86@kernel.org,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- eperezma@redhat.com, stefanha@redhat.com, eli@mellanox.com,
- lingshan.zhu@intel.com, rob.miller@broadcom.com
+ linux-hyperv@vger.kernel.org, kvm@vger.kernel.org
+Subject: [PATCH v3 00/15] x86: major paravirt cleanup
+Date: Thu, 17 Dec 2020 10:31:18 +0100
+Message-Id: <20201217093133.1507-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Cc: Juri Lelli <juri.lelli@redhat.com>, Wanpeng Li <wanpengli@tencent.com>,
+ "VMware, Inc." <pv-drivers@vmware.com>, Ben Segall <bsegall@google.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Wei Liu <wei.liu@kernel.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Stephen Hemminger <sthemmin@microsoft.com>, Joerg Roedel <joro@8bytes.org>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>,
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Mel Gorman <mgorman@suse.de>, Haiyang Zhang <haiyangz@microsoft.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Borislav Petkov <bp@alien8.de>,
+ Andy Lutomirski <luto@kernel.org>, Josh Poimboeuf <jpoimboe@redhat.com>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Dietmar Eggemann <dietmar.eggemann@arm.com>, Jim Mattson <jmattson@google.com>,
+ Juergen Gross <jgross@suse.com>, Sean Christopherson <seanjc@google.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Daniel Bristot de Oliveira <bristot@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,150 +84,97 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+From: Juergen Gross via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Juergen Gross <jgross@suse.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMTIvMTcg5LiL5Y2IMzo1OCwgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+IE9u
-IFRodSwgRGVjIDE3LCAyMDIwIGF0IDExOjMwOjE4QU0gKzA4MDAsIEphc29uIFdhbmcgd3JvdGU6
-Cj4+IE9uIDIwMjAvMTIvMTYg5LiL5Y2INTo0NywgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+
-Pj4gT24gV2VkLCBEZWMgMTYsIDIwMjAgYXQgMDI6NDc6NTdQTSArMDgwMCwgSmFzb24gV2FuZyB3
-cm90ZToKPj4+PiBIaSBBbGw6Cj4+Pj4KPj4+PiBUaGlzIHNlcmllcyB0cmllcyB0byBhZGQgdGhl
-IHN1cHBvcnQgZm9yIGNvbnRyb2wgdmlydHF1ZXVlIGluIHZEUEEuCj4+Pj4KPj4+PiBDb250cm9s
-IHZpcnRxdWV1ZSBpcyB1c2VkIGJ5IG5ldHdvcmtpbmcgZGV2aWNlIGZvciBhY2NlcHRpbmcgdmFy
-aW91cwo+Pj4+IGNvbW1hbmRzIGZyb20gdGhlIGRyaXZlci4gSXQncyBhIG11c3QgdG8gc3VwcG9y
-dCBtdWx0aXF1ZXVlIGFuZCBvdGhlcgo+Pj4+IGNvbmZpZ3VyYXRpb25zLgo+Pj4+Cj4+Pj4gV2hl
-biB1c2VkIGJ5IHZob3N0LXZEUEEgYnVzIGRyaXZlciBmb3IgVk0sIHRoZSBjb250cm9sIHZpcnRx
-dWV1ZQo+Pj4+IHNob3VsZCBiZSBzaGFkb3dlZCB2aWEgdXNlcnNwYWNlIFZNTSAoUWVtdSkgaW5z
-dGVhZCBvZiBiZWluZyBhc3NpZ25lZAo+Pj4+IGRpcmVjdGx5IHRvIEd1ZXN0LiBUaGlzIGlzIGJl
-Y2F1c2UgUWVtdSBuZWVkcyB0byBrbm93IHRoZSBkZXZpY2Ugc3RhdGUKPj4+PiBpbiBvcmRlciB0
-byBzdGFydCBhbmQgc3RvcCBkZXZpY2UgY29ycmVjdGx5IChlLmcgZm9yIExpdmUgTWlncmF0aW9u
-KS4KPj4+Pgo+Pj4+IFRoaXMgcmVxdWllcyB0byBpc29sYXRlIHRoZSBtZW1vcnkgbWFwcGluZyBm
-b3IgY29udHJvbCB2aXJ0cXVldWUKPj4+PiBwcmVzZW50ZWQgYnkgdmhvc3QtdkRQQSB0byBwcmV2
-ZW50IGd1ZXN0IGZyb20gYWNjZXNpbmcgaXQgZGlyZWN0bHkuCj4+Pj4gVG8gYWNoaWV2ZSB0aGlz
-LCB2RFBBIGludHJvZHVjZSB0d28gbmV3IGFic3RyYWN0aW9uczoKPj4+Pgo+Pj4+IC0gYWRkcmVz
-cyBzcGFjZTogaWRlbnRpZmllZCB0aHJvdWdoIGFkZHJlc3Mgc3BhY2UgaWQgKEFTSUQpIGFuZCBh
-IHNldAo+Pj4+ICAgICAgICAgICAgICAgICAgICBvZiBtZW1vcnkgbWFwcGluZyBpbiBtYWludGFp
-bmVkCj4+Pj4gLSB2aXJ0cXVldWUgZ3JvdXA6IHRoZSBtaW5pbWFsIHNldCBvZiB2aXJ0cXVldWVz
-IHRoYXQgbXVzdCBzaGFyZSBhbgo+Pj4+ICAgICAgICAgICAgICAgICAgICBhZGRyZXNzIHNwYWNl
-Cj4+PiBIb3cgd2lsbCB0aGlzIHN1cHBvcnQgdGhlIHByZXR0eSBjb21tb24gY2FzZSB3aGVyZSBj
-b250cm9sIHZxCj4+PiBpcyBwcm9ncmFtbWVkIGJ5IHRoZSBrZXJuZWwgdGhyb3VnaCB0aGUgUEYs
-IGFuZCBvdGhlcnMgYnkgdGhlIFZGcz8KPj4KPj4gSW4gdGhpcyBjYXNlLCB0aGUgVkYgcGFyZW50
-IG5lZWQgdG8gcHJvdmlkZSBhIHNvZnR3YXJlIGNvbnRyb2wgdnEgYW5kIGRlY29kZQo+PiB0aGUg
-Y29tbWFuZCB0aGVuIHNlbmQgdGhlbSB0byBWRi4KPgo+IEJ1dCBob3cgZG9lcyB0aGF0IHRpZSB0
-byB0aGUgYWRkcmVzcyBzcGFjZSBpbmZyYXN0cnVjdHVyZT8KCgpJbiB0aGlzIGNhc2UsIGFkZHJl
-c3Mgc3BhY2UgaXMgbm90IGEgbXVzdC4gQnV0IHRoZSBpZGVhIGlzIHRvIG1ha2UgCmNvbnRyb2wg
-dnEgd29ya3MgZm9yIGFsbCB0eXBlcyBvZiBoYXJkd2FyZToKCjEpIGNvbnRyb2wgdmlydHF1ZXVl
-IGlzIGltcGxlbWVudGVkIHZpYSBWRi9QRiBjb21tdW5pY2F0aW9uCjIpIGNvbnRyb2wgdmlydHF1
-ZXVlIGlzIGltcGxlbWVudGVkIGJ5IFZGIGJ1dCBub3QgdGhyb3VnaCBETUEKMykgY29udHJvbCB2
-aXJ0cXVldWUgaXMgaW1wbGVtZW50ZWQgYnkgVkYgRE1BLCBpdCBjb3VsZCBiZSBlaXRoZXIgYSAK
-aGFyZHdhcmUgY29udHJvbCB2aXJ0cXVldWUgb3Igb3RoZXIgdHlwZSBvZiBETUEKClRoZSBhZGRy
-ZXNzIHNwYWNlIGlzIGEgbXVzdCBmb3IgMykgdG8gd29yayBhbmQgY2FuIHdvcmsgZm9yIGJvdGgg
-MSkgYW5kIDIpLgoKCj4KPgo+Cj4+Pgo+Pj4gSSBhY3R1YWxseSB0aG91Z2h0IHRoZSB3YXkgdG8g
-c3VwcG9ydCBpdCBpcyBieSBleHBvc2luZwo+Pj4gc29tZXRoaW5nIGxpa2UgYW4gImluamVjdCBi
-dWZmZXJzIiBBUEkgd2hpY2ggc2VuZHMgZGF0YSB0byBhIGdpdmVuIFZRLgo+Pj4gTWF5YmUgYW4g
-aW9jdGwsIGFuZCBtYXliZSBkb3duIHRoZSByb2FkIHVpbyByaW5nIGNhbiBzdXBwb3J0IGJhdGNo
-aW5nCj4+PiB0aGVzZSAuLi4uCj4+Cj4+IFNvIHRoZSB2aXJ0dXF1ZXVlIGFsbG93cyB0aGUgcmVx
-dWVzdCB0byBiZSBwcm9jZXNzZWQgYXN5bmNocm9ub3VzbHkgKGUuZwo+PiBkcml2ZXIgbWF5IGNo
-b29zZSB0byB1c2UgaW50ZXJydXB0IGZvciBjb250cm9sIHZxKS4gVGhpcyBtZWFucyB3ZSBuZWVk
-IHRvCj4+IHN1cHBvcnQgdGhhdCBpbiB1QVBJIGxldmVsLgo+IEkgZG9uJ3QgdGhpbmsgd2UgbmVl
-ZCB0byBtYWtlIGl0IGFzeW5jLCBqdXN0IGEgcmVndWxhciBpb2N0bCB3aWxsIGRvLgo+IEluIGZh
-Y3Qgbm8gZ3Vlc3QgdXNlcyB0aGUgYXN5bmNocm9ub3VzIHByb3BlcnR5LgoKCkl0IHdhcyBub3Qg
-Zm9yYmlkZGVuIGJ5IHRoZSBzcGVjIHRoZW4gd2UgbmVlZCB0byBzdXBwb3J0IHRoYXQuIEUuZyB3
-ZSAKY2FuIG5vdCBhc3N1bWUgZHJpdmVyIGRvZXNuJ3QgYXNzaWduIGludGVycnVwdCBmb3IgY3Zx
-LgoKCj4KPgo+PiBBbmQgaWYgd2UgbWFuYWdlIHRvIGRvIHRoYXQsIGl0J3MganVzdCBhbm90aGVy
-Cj4+IHR5cGUgb2YgdmlydHF1ZXVlLgo+Pgo+PiBGb3IgdmlydGlvLXZEUEEsIHRoaXMgYWxzbyBt
-ZWFucyB0aGUgZXh0ZW5zaW9ucyBmb3IgcXVldWUgcHJvY2Vzc2luZyB3aGljaAo+PiBpcyBhIGZ1
-bmN0aW9uYWwgZHVwbGljYXRpb24uCj4gSSBkb24ndCBzZWUgd2h5LCBqdXN0IHNlbmQgaXQgdG8g
-dGhlIGFjdHVhbCBjb250cm9sIHZxIDopCgoKQnV0IGluIHRoZSBjYXNlIHlvdSd2ZSBwb2ludGVk
-IG91dCwgdGhlcmUncyBubyBoYXJkd2FyZSBjb250cm9sIHZxIGluIGZhY3QuCgoKPgo+PiBVc2lu
-ZyB3aGF0IHByb3Bvc2VkIGluIHRoaXMgc2VyaWVzLCB3ZSBkb24ndAo+PiBuZWVkIGFueSBjaGFu
-Z2VzIGZvciBrZXJuZWwgdmlydGlvIGRyaXZlcnMuCj4+Cj4+IFdoYXQncyBtb3JlIGltcG9ydGFu
-dCwgdGhpcyBzZXJpZXMgY291bGQgYmUgdXNlZCBmb3IgZnV0dXJlIGZlYXR1cmVzIHRoYXQKPj4g
-cmVxdWlyZXMgRE1BIGlzb2xhdGlvbiBiZXR3ZWVuIHZpcnRxdWV1ZXM6Cj4+Cj4+IC0gcmVwb3J0
-IGRpcnR5IHBhZ2VzIHZpYSB2aXJ0cXVldWUKPj4gLSBzdWIgZnVuY3Rpb24gbGV2ZWwgZGV2aWNl
-IHNsaWNpbmcKPgo+IEkgYWdyZWUgdGhlc2UgYXJlIG5pY2UgdG8gaGF2ZSwgYnV0IEkgYW0gbm90
-IHN1cmUgYmFzaWMgY29udHJvbCB2cSBtdXN0Cj4gYmUgdGllZCB0byB0aGF0LgoKCklmIHRoZSBj
-b250cm9sIHZpcnRxdWV1ZSBpcyBpbXBsZW1lbnRlZCB2aWEgRE1BIHRocm91Z2ggVkYsIGl0IGxv
-b2tzIApsaWtlIGEgbXVzdC4KClRoYW5rcwoKCj4KPj4gLi4uCj4+Cj4+IFRoYW5rcwo+Pgo+Pgo+
-Pj4KPj4+PiBEZXZpY2UgbmVlZHMgdG8gYWR2ZXJ0aXNlIHRoZSBmb2xsb3dpbmcgYXR0cmlidXRl
-cyB0byB2RFBBOgo+Pj4+Cj4+Pj4gLSB0aGUgbnVtYmVyIG9mIGFkZHJlc3Mgc3BhY2VzIHN1cHBv
-cnRlZCBpbiB0aGUgZGV2aWNlCj4+Pj4gLSB0aGUgbnVtYmVyIG9mIHZpcnRxdWV1ZSBncm91cHMg
-c3VwcG9ydGVkIGluIHRoZSBkZXZpY2UKPj4+PiAtIHRoZSBtYXBwaW5ncyBmcm9tIGEgc3BlY2lm
-aWMgdmlydHF1ZXVlIHRvIGl0cyB2aXJ0cXVldWUgZ3JvdXBzCj4+Pj4KPj4+PiBUaGUgbWFwcGlu
-Z3MgZnJvbSB2aXJ0cXVldWUgdG8gdmlydHF1ZXVlIGdyb3VwcyBpcyBmaXhlZCBhbmQgZGVmaW5l
-ZAo+Pj4+IGJ5IHZEUEEgZGV2aWNlIGRyaXZlci4gRS5nOgo+Pj4+Cj4+Pj4gLSBGb3IgdGhlIGRl
-dmljZSB0aGF0IGhhcyBoYXJkd2FyZSBBU0lEIHN1cHBvcnQsIGl0IGNhbiBzaW1wbHkKPj4+PiAg
-ICAgYWR2ZXJ0aXNlIGEgcGVyIHZpcnRxdWV1ZSB2aXJ0cXVldWUgZ3JvdXAuCj4+Pj4gLSBGb3Ig
-dGhlIGRldmljZSB0aGF0IGRvZXMgbm90IGhhdmUgaGFyZHdhcmUgQVNJRCBzdXBwb3J0LCBpdCBj
-YW4KPj4+PiAgICAgc2ltcGx5IGFkdmVydGlzZSBhIHNpbmdsZSB2aXJ0cXVldWUgZ3JvdXAgdGhh
-dCBjb250YWlucyBhbGwKPj4+PiAgICAgdmlydHF1ZXVlcy4gT3IgaWYgaXQgd2FudHMgYSBzb2Z0
-d2FyZSBlbXVsYXRlZCBjb250cm9sIHZpcnRxdWV1ZSwgaXQKPj4+PiAgICAgY2FuIGFkdmVydGlz
-ZSB0d28gdmlydHF1ZXVlIGdyb3Vwcywgb25lIGlzIGZvciBjdnEsIGFub3RoZXIgaXMgZm9yCj4+
-Pj4gICAgIHRoZSByZXN0IHZpcnRxdWV1ZXMuCj4+Pj4KPj4+PiB2RFBBIGFsc28gYWxsb3cgdG8g
-Y2hhbmdlIHRoZSBhc3NvY2lhdGlvbiBiZXR3ZWVuIHZpcnRxdWV1ZSBncm91cCBhbmQKPj4+PiBh
-ZGRyZXNzIHNwYWNlLiBTbyBpbiB0aGUgY2FzZSBvZiBjb250cm9sIHZpcnRxdWV1ZSwgdXNlcnNw
-YWNlCj4+Pj4gVk1NKFFlbXUpIG1heSB1c2UgYSBkZWRpY2F0ZWQgYWRkcmVzcyBzcGFjZSBmb3Ig
-dGhlIGNvbnRyb2wgdmlydHF1ZXVlCj4+Pj4gZ3JvdXAgdG8gaXNvbGF0ZSB0aGUgbWVtb3J5IG1h
-cHBpbmcuCj4+Pj4KPj4+PiBUaGUgdmhvc3Qvdmhvc3QtdkRQQSBpcyBhbHNvIGV4dGVuZCBmb3Ig
-dGhlIHVzZXJzcGFjZSB0bzoKPj4+Pgo+Pj4+IC0gcXVlcnkgdGhlIG51bWJlciBvZiB2aXJ0cXVl
-dWUgZ3JvdXBzIGFuZCBhZGRyZXNzIHNwYWNlcyBzdXBwb3J0ZWQgYnkKPj4+PiAgICAgdGhlIGRl
-dmljZQo+Pj4+IC0gcXVlcnkgdGhlIHZpcnRxdWV1ZSBncm91cCBmb3IgYSBzcGVjaWZpYyB2aXJ0
-cXVldWUKPj4+PiAtIGFzc29jYWl0ZSBhIHZpcnRxdWV1ZSBncm91cCB3aXRoIGFuIGFkZHJlc3Mg
-c3BhY2UKPj4+PiAtIHNlbmQgQVNJRCBiYXNlZCBJT1RMQiBjb21tYW5kcwo+Pj4+Cj4+Pj4gVGhp
-cyB3aWxsIGhlbHAgdXNlcnNwYWNlIFZNTShRZW11KSB0byBkZXRlY3Qgd2hldGhlciB0aGUgY29u
-dHJvbCB2cQo+Pj4+IGNvdWxkIGJlIHN1cHBvcnRlZCBhbmQgaXNvbGF0ZSBtZW1vcnkgbWFwcGlu
-Z3Mgb2YgY29udHJvbCB2aXJ0cXVldWUKPj4+PiBmcm9tIHRoZSBvdGhlcnMuCj4+Pj4KPj4+PiBU
-byBkZW1vbnN0cmF0ZSB0aGUgdXNhZ2UsIHZEUEEgc2ltdWxhdG9yIGlzIGV4dGVuZGVkIHRvIHN1
-cHBvcnQKPj4+PiBzZXR0aW5nIE1BQyBhZGRyZXNzIHZpYSBhIGVtdWxhdGVkIGNvbnRyb2wgdmly
-dHF1ZXVlLgo+Pj4+Cj4+Pj4gUGxlYXNlIHJldmlldy4KPj4+Pgo+Pj4+IENoYW5nZXMgc2luY2Ug
-UkZDOgo+Pj4+Cj4+Pj4gLSB0d2VhayB2aG9zdCB1QVBJIGRvY3VtZW50YXRpb24KPj4+PiAtIHN3
-aXRjaCB0byB1c2UgZGV2aWNlIHNwZWNpZmljIElPVExCIHJlYWxseSBpbiBwYXRjaCA0Cj4+Pj4g
-LSB0d2VhayB0aGUgY29tbWl0IGxvZwo+Pj4+IC0gZml4IHRoYXQgQVNJRCBpbiB2aG9zdCBpcyBj
-bGFpbWVkIHRvIGJlIDMyIGFjdHVhbGx5IGJ1dCAxNmJpdAo+Pj4+ICAgICBhY3R1YWxseQo+Pj4+
-IC0gZml4IHVzZSBhZnRlciBmcmVlIHdoZW4gdXNpbmcgQVNJRCB3aXRoIElPVExCIGJhdGNoaW5n
-IHJlcXVlc3RzCj4+Pj4gLSBzd2l0Y2ggdG8gdXNlIFN0ZWZhbm8ncyBwYXRjaCBmb3IgaGF2aW5n
-IHNlcGFyYXRlZCBpb3YKPj4+PiAtIHJlbW92ZSB1bnVzZWQgInVzZWRfYXMiIHZhcmlhYmxlCj4+
-Pj4gLSBmaXggdGhlIGlvdGxiL2FzaWQgY2hlY2tpbmcgaW4gdmhvc3RfdmRwYV91bm1hcCgpCj4+
-Pj4KPj4+PiBUaGFua3MKPj4+Pgo+Pj4+IEphc29uIFdhbmcgKDIwKToKPj4+PiAgICAgdmhvc3Q6
-IG1vdmUgdGhlIGJhY2tlbmQgZmVhdHVyZSBiaXRzIHRvIHZob3N0X3R5cGVzLmgKPj4+PiAgICAg
-dmlydGlvLXZkcGE6IGRvbid0IHNldCBjYWxsYmFjayBpZiB2aXJ0aW8gZG9lc24ndCBuZWVkIGl0
-Cj4+Pj4gICAgIHZob3N0LXZkcGE6IHBhc3NpbmcgaW90bGIgdG8gSU9NTVUgbWFwcGluZyBoZWxw
-ZXJzCj4+Pj4gICAgIHZob3N0LXZkcGE6IHN3aXRjaCB0byB1c2Ugdmhvc3QtdmRwYSBzcGVjaWZp
-YyBJT1RMQgo+Pj4+ICAgICB2ZHBhOiBhZGQgdGhlIG1pc3NpbmcgY29tbWVudCBmb3IgbnZxcyBp
-biBzdHJ1Y3QgdmRwYV9kZXZpY2UKPj4+PiAgICAgdmRwYTogaW50cm9kdWNlIHZpcnRxdWV1ZSBn
-cm91cHMKPj4+PiAgICAgdmRwYTogbXVsdGlwbGUgYWRkcmVzcyBzcGFjZXMgc3VwcG9ydAo+Pj4+
-ICAgICB2ZHBhOiBpbnRyb2R1Y2UgY29uZmlnIG9wZXJhdGlvbnMgZm9yIGFzc29jaWF0aW5nIEFT
-SUQgdG8gYSB2aXJ0cXVldWUKPj4+PiAgICAgICBncm91cAo+Pj4+ICAgICB2aG9zdF9pb3RsYjog
-c3BsaXQgb3V0IElPVExCIGluaXRpYWxpemF0aW9uCj4+Pj4gICAgIHZob3N0OiBzdXBwb3J0IEFT
-SUQgaW4gSU9UTEIgQVBJCj4+Pj4gICAgIHZob3N0LXZkcGE6IGludHJvZHVjZSBhc2lkIGJhc2Vk
-IElPVExCCj4+Pj4gICAgIHZob3N0LXZkcGE6IGludHJvZHVjZSB1QVBJIHRvIGdldCB0aGUgbnVt
-YmVyIG9mIHZpcnRxdWV1ZSBncm91cHMKPj4+PiAgICAgdmhvc3QtdmRwYTogaW50cm9kdWNlIHVB
-UEkgdG8gZ2V0IHRoZSBudW1iZXIgb2YgYWRkcmVzcyBzcGFjZXMKPj4+PiAgICAgdmhvc3QtdmRw
-YTogdUFQSSB0byBnZXQgdmlydHF1ZXVlIGdyb3VwIGlkCj4+Pj4gICAgIHZob3N0LXZkcGE6IGlu
-dHJvZHVjZSB1QVBJIHRvIHNldCBncm91cCBBU0lECj4+Pj4gICAgIHZob3N0LXZkcGE6IHN1cHBv
-cnQgQVNJRCBiYXNlZCBJT1RMQiBBUEkKPj4+PiAgICAgdmRwYV9zaW06IGFkdmVydGlzZSBWSVJU
-SU9fTkVUX0ZfTVRVCj4+Pj4gICAgIHZkcGFfc2ltOiBmYWN0b3Igb3V0IGJ1ZmZlciBjb21wbGV0
-aW9uIGxvZ2ljCj4+Pj4gICAgIHZkcGFfc2ltOiBmaWx0ZXIgZGVzdGluYXRpb24gbWFjIGFkZHJl
-c3MKPj4+PiAgICAgdmRwYXNpbTogY29udHJvbCB2aXJ0cXVldWUgc3VwcG9ydAo+Pj4+Cj4+Pj4g
-U3RlZmFubyBHYXJ6YXJlbGxhICgxKToKPj4+PiAgICAgdmRwYV9zaW06IHNwbGl0IHZkcGFzaW1f
-dmlydHF1ZXVlJ3MgaW92IGZpZWxkIGluIG91dF9pb3YgYW5kIGluX2lvdgo+Pj4+Cj4+Pj4gICAg
-ZHJpdmVycy92ZHBhL2lmY3ZmL2lmY3ZmX21haW4uYyAgIHwgICA5ICstCj4+Pj4gICAgZHJpdmVy
-cy92ZHBhL21seDUvbmV0L21seDVfdm5ldC5jIHwgIDExICstCj4+Pj4gICAgZHJpdmVycy92ZHBh
-L3ZkcGEuYyAgICAgICAgICAgICAgIHwgICA4ICstCj4+Pj4gICAgZHJpdmVycy92ZHBhL3ZkcGFf
-c2ltL3ZkcGFfc2ltLmMgIHwgMjkyICsrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLQo+Pj4+
-ICAgIGRyaXZlcnMvdmhvc3QvaW90bGIuYyAgICAgICAgICAgICB8ICAyMyArKy0KPj4+PiAgICBk
-cml2ZXJzL3Zob3N0L3ZkcGEuYyAgICAgICAgICAgICAgfCAyNDYgKysrKysrKysrKysrKysrKysr
-KystLS0tLQo+Pj4+ICAgIGRyaXZlcnMvdmhvc3Qvdmhvc3QuYyAgICAgICAgICAgICB8ICAyMyAr
-Ky0KPj4+PiAgICBkcml2ZXJzL3Zob3N0L3Zob3N0LmggICAgICAgICAgICAgfCAgIDQgKy0KPj4+
-PiAgICBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fdmRwYS5jICAgICAgfCAgIDIgKy0KPj4+PiAgICBp
-bmNsdWRlL2xpbnV4L3ZkcGEuaCAgICAgICAgICAgICAgfCAgNDIgKysrKy0KPj4+PiAgICBpbmNs
-dWRlL2xpbnV4L3Zob3N0X2lvdGxiLmggICAgICAgfCAgIDIgKwo+Pj4+ICAgIGluY2x1ZGUvdWFw
-aS9saW51eC92aG9zdC5oICAgICAgICB8ICAyNSArKy0KPj4+PiAgICBpbmNsdWRlL3VhcGkvbGlu
-dXgvdmhvc3RfdHlwZXMuaCAgfCAgMTAgKy0KPj4+PiAgICAxMyBmaWxlcyBjaGFuZ2VkLCA1NjEg
-aW5zZXJ0aW9ucygrKSwgMTM2IGRlbGV0aW9ucygtKQo+Pj4+Cj4+Pj4gLS0gCj4+Pj4gMi4yNS4x
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFs
-aXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlv
-bi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8v
-dmlydHVhbGl6YXRpb24=
+This is a major cleanup of the paravirt infrastructure aiming at
+eliminating all custom code patching via paravirt patching.
+
+This is achieved by using ALTERNATIVE instead, leading to the ability
+to give objtool access to the patched in instructions.
+
+In order to remove most of the 32-bit special handling from pvops the
+time related operations are switched to use static_call() instead.
+
+At the end of this series all paravirt patching has to do is to
+replace indirect calls with direct ones. In a further step this could
+be switched to static_call(), too, but that would require a major
+header file disentangling.
+
+Changes in V3:
+- added patches 7 and 12
+- addressed all comments
+
+Changes in V2:
+- added patches 5-12
+
+Juergen Gross (14):
+  x86/xen: use specific Xen pv interrupt entry for MCE
+  x86/xen: use specific Xen pv interrupt entry for DF
+  x86/pv: switch SWAPGS to ALTERNATIVE
+  x86/xen: drop USERGS_SYSRET64 paravirt call
+  x86: rework arch_local_irq_restore() to not use popf
+  x86/paravirt: switch time pvops functions to use static_call()
+  x86/alternative: support "not feature" and ALTERNATIVE_TERNARY
+  x86: add new features for paravirt patching
+  x86/paravirt: remove no longer needed 32-bit pvops cruft
+  x86/paravirt: simplify paravirt macros
+  x86/paravirt: switch iret pvops to ALTERNATIVE
+  x86/paravirt: add new macros PVOP_ALT* supporting pvops in
+    ALTERNATIVEs
+  x86/paravirt: switch functions with custom code to ALTERNATIVE
+  x86/paravirt: have only one paravirt patch function
+
+Peter Zijlstra (1):
+  objtool: Alternatives vs ORC, the hard way
+
+ arch/x86/Kconfig                       |   1 +
+ arch/x86/entry/entry_32.S              |   4 +-
+ arch/x86/entry/entry_64.S              |  26 ++-
+ arch/x86/include/asm/alternative-asm.h |   3 +
+ arch/x86/include/asm/alternative.h     |   7 +
+ arch/x86/include/asm/cpufeatures.h     |   2 +
+ arch/x86/include/asm/idtentry.h        |   6 +
+ arch/x86/include/asm/irqflags.h        |  51 ++----
+ arch/x86/include/asm/mshyperv.h        |  11 --
+ arch/x86/include/asm/paravirt.h        | 157 ++++++------------
+ arch/x86/include/asm/paravirt_time.h   |  38 +++++
+ arch/x86/include/asm/paravirt_types.h  | 220 +++++++++----------------
+ arch/x86/kernel/Makefile               |   3 +-
+ arch/x86/kernel/alternative.c          |  59 ++++++-
+ arch/x86/kernel/asm-offsets.c          |   7 -
+ arch/x86/kernel/asm-offsets_64.c       |   3 -
+ arch/x86/kernel/cpu/vmware.c           |   5 +-
+ arch/x86/kernel/irqflags.S             |  11 --
+ arch/x86/kernel/kvm.c                  |   3 +-
+ arch/x86/kernel/kvmclock.c             |   3 +-
+ arch/x86/kernel/paravirt.c             |  83 +++-------
+ arch/x86/kernel/paravirt_patch.c       | 109 ------------
+ arch/x86/kernel/tsc.c                  |   3 +-
+ arch/x86/xen/enlighten_pv.c            |  36 ++--
+ arch/x86/xen/irq.c                     |  23 ---
+ arch/x86/xen/time.c                    |  12 +-
+ arch/x86/xen/xen-asm.S                 |  52 +-----
+ arch/x86/xen/xen-ops.h                 |   3 -
+ drivers/clocksource/hyperv_timer.c     |   5 +-
+ drivers/xen/time.c                     |   3 +-
+ kernel/sched/sched.h                   |   1 +
+ tools/objtool/check.c                  | 180 ++++++++++++++++++--
+ tools/objtool/check.h                  |   5 +
+ tools/objtool/orc_gen.c                | 178 +++++++++++++-------
+ 34 files changed, 627 insertions(+), 686 deletions(-)
+ create mode 100644 arch/x86/include/asm/paravirt_time.h
+ delete mode 100644 arch/x86/kernel/paravirt_patch.c
+
+-- 
+2.26.2
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
