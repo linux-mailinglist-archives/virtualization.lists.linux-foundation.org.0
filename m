@@ -1,94 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44B812E309F
-	for <lists.virtualization@lfdr.de>; Sun, 27 Dec 2020 10:40:01 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id F043186FC5;
-	Sun, 27 Dec 2020 09:39:57 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aCHvLortqOAC; Sun, 27 Dec 2020 09:39:57 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 4733286FC1;
-	Sun, 27 Dec 2020 09:39:57 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1B1E7C0891;
-	Sun, 27 Dec 2020 09:39:57 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5381BC0891
- for <virtualization@lists.linux-foundation.org>;
- Sun, 27 Dec 2020 09:39:56 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06F232E30A0
+	for <lists.virtualization@lfdr.de>; Sun, 27 Dec 2020 10:40:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 2993F204D2
- for <virtualization@lists.linux-foundation.org>;
- Sun, 27 Dec 2020 09:39:56 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 3AF49204DE;
+	Sun, 27 Dec 2020 09:40:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dNQugyEytffl
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id M+NiRGDcbTEN; Sun, 27 Dec 2020 09:40:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id 709DF204DA;
+	Sun, 27 Dec 2020 09:40:28 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5AAD1C0891;
+	Sun, 27 Dec 2020 09:40:28 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 46777C0891
  for <virtualization@lists.linux-foundation.org>;
- Sun, 27 Dec 2020 09:39:55 +0000 (UTC)
+ Sun, 27 Dec 2020 09:40:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 35ED286FC5
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 27 Dec 2020 09:40:27 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id lZfqthOSQv2r
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 27 Dec 2020 09:40:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by silver.osuosl.org (Postfix) with ESMTPS id C72B120020
+ by hemlock.osuosl.org (Postfix) with ESMTPS id E5E9886FC3
  for <virtualization@lists.linux-foundation.org>;
- Sun, 27 Dec 2020 09:39:54 +0000 (UTC)
+ Sun, 27 Dec 2020 09:40:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1609061993;
+ s=mimecast20190719; t=1609062024;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=SDEqYZRZclqBhMldoq9bY6xgs7Lh4HmudHFX/7CD63k=;
- b=Xg0MTzu0OkTDG5MebEuND3HUhiKzJm2dbqYEV65q9qPzVpqwR/wCVNecYOze8pAMYGHXK6
- +zhdVtaPO3HCmT2zKAWB6rKdDL9FEyDBLHcPpMltlcT08PPFUvHo7qyf1WulkzKEv77zIJ
- 7GigvMtouHmXmmW83EOClh5q886nlQE=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-134-P0f9_okhMkKGZHBvD0jtVg-1; Sun, 27 Dec 2020 04:39:51 -0500
-X-MC-Unique: P0f9_okhMkKGZHBvD0jtVg-1
-Received: by mail-wm1-f70.google.com with SMTP id k67so5385246wmk.5
+ bh=Ba+iHfK0bJtNwDKtVlH80Ke13TbgM723LjJZBC9s0JU=;
+ b=NR/m0dQaRouQFBDKKFzF0lCQMAIre5uibWHWS507zwuQo9POa8RBy3Pesrf+08JbCe6fDk
+ 56hz+9NkUDZ79m8vwUI3V9uyn42NhVhzGyZ+PJy5cMdc7FfopXNzDasACbmV6EXJf5reCd
+ GlOFI8Kz7wLn2XeFjjF+hcvjsDcA+sw=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-198-eyHe99DeMXSFOx24sOOgTA-1; Sun, 27 Dec 2020 04:40:22 -0500
+X-MC-Unique: eyHe99DeMXSFOx24sOOgTA-1
+Received: by mail-wr1-f72.google.com with SMTP id g16so4977901wrv.1
  for <virtualization@lists.linux-foundation.org>;
- Sun, 27 Dec 2020 01:39:51 -0800 (PST)
+ Sun, 27 Dec 2020 01:40:22 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=SDEqYZRZclqBhMldoq9bY6xgs7Lh4HmudHFX/7CD63k=;
- b=sCakmhdTI7i0Q/8uYuKsHPF6RhoviaVA2xpGOsfj6bvMZPtVHPN+tb9YR/jifSqBNm
- +YBs/L7Py96AMEUVrqPUg/POPaODjaIwdx4RaIVANiVxDcRa7DcgNQaVE+UutkjVdplR
- /98CQcV1boR48C7XayurEf/ttbf5MUDpqe0+Qc8gT9hYFjofywZl/SVGOyEgXynZS7Fl
- nhqTc82LMfoXx+Y2CFvW/cl8Ofp1DEvGVVdStjN4rd7Mm/0ntlvhr128UeGaNeidM38Z
- 7MFQSJ/tFEkJ3QJDaM4nySHCgr9QkSZ0ejIYD3WKFEqpkTdGq3q5tCOI2xESC6YKRE8B
- 6h1w==
-X-Gm-Message-State: AOAM5315iKGfhCWOTiK1uPSjqd0Qu78VpaUCjdL4wd2xdHDg4n1gQWxA
- 7H5y+C4lhNHiUf4jR81keLWr4q2KIGcXaZnJfhtqFNwNJ3LhAXQJWDoPzV7RIkWzZyaLbiuz8W5
- WDm2ikHsrO+WUIBHIXFU4qy9ZumqtvpRDBGNTVKoOfw==
-X-Received: by 2002:a1c:7d88:: with SMTP id
- y130mr15488444wmc.158.1609061990188; 
- Sun, 27 Dec 2020 01:39:50 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzyGtuwxz5HGvWvcbVAvqWIfomIkgczDaTC3a9t3mqTRPR8mdFVT51IpWw97J793o5pGcfjMQ==
-X-Received: by 2002:a1c:7d88:: with SMTP id
- y130mr15488419wmc.158.1609061989905; 
- Sun, 27 Dec 2020 01:39:49 -0800 (PST)
+ bh=Ba+iHfK0bJtNwDKtVlH80Ke13TbgM723LjJZBC9s0JU=;
+ b=W1bm+QuKlGfq7rqQ1Kt10bwCcCM7NPD8Rd9v+ky6/UB8oIBMj94K243/PL/KaLtffd
+ isq787ReTwqaEzD2lnD+2jxlJlzs0Pkvy3qaIxHx4lIJupGtnKRv1V6ig1cKVZikdzIc
+ NSuPvZXmF972zwKj9QiJ38lhHDbC9sSC4/6JfE3PkWSXEDoUW7GqKO8AH1naaB0ntII1
+ atuuNMWuBy0KVSYG9XNMB896amitKRprDDZpWAUk7AbWPV3ps4D15vWrWedOMHB76rwH
+ apfuXoy6tm79t2pSEK0ECX9gUsqhcU66VrKYsP+2MSJX4NzpPvQ2Blzps3XSU6TgynhP
+ B3Tg==
+X-Gm-Message-State: AOAM531WqX/DTLWi6veV94/tFQzaeW/IqeWR/3UGA8vG1BmyPgOAE8yF
+ HE4UcoE+13Rpq0IN2XyTSS62BIOSHuTx2cTClXsYJ1aA/sxQpI8f47LNh+yrUd09Aj+zKpFJTng
+ cAfk5f9AJu5nOdaf6zuz4jeZAuirkf9fhwjOoQcfmRQ==
+X-Received: by 2002:a1c:204e:: with SMTP id g75mr15980190wmg.100.1609062021402; 
+ Sun, 27 Dec 2020 01:40:21 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyn868LZXUswFzyOxoPt97OHLb1MgVvijGp9IAQ57ejvsHPsC2xdjBSXRQPWvCCGJfMwTu/Cg==
+X-Received: by 2002:a1c:204e:: with SMTP id g75mr15980178wmg.100.1609062021283; 
+ Sun, 27 Dec 2020 01:40:21 -0800 (PST)
 Received: from redhat.com (bzq-79-178-32-166.red.bezeqint.net. [79.178.32.166])
- by smtp.gmail.com with ESMTPSA id j7sm14708444wmb.40.2020.12.27.01.39.47
+ by smtp.gmail.com with ESMTPSA id o83sm14758474wme.21.2020.12.27.01.40.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Dec 2020 01:39:48 -0800 (PST)
-Date: Sun, 27 Dec 2020 04:39:45 -0500
+ Sun, 27 Dec 2020 01:40:20 -0800 (PST)
+Date: Sun, 27 Dec 2020 04:40:17 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: wangyunjian <wangyunjian@huawei.com>
-Subject: Re: [PATCH net] tun: fix return value when the number of iovs
+Subject: Re: [PATCH net v2] tun: fix return value when the number of iovs
  exceeds MAX_SKB_FRAGS
-Message-ID: <20201227043940-mutt-send-email-mst@kernel.org>
-References: <1608810533-8308-1-git-send-email-wangyunjian@huawei.com>
+Message-ID: <20201227044010-mutt-send-email-mst@kernel.org>
+References: <1608864736-24332-1-git-send-email-wangyunjian@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <1608810533-8308-1-git-send-email-wangyunjian@huawei.com>
+In-Reply-To: <1608864736-24332-1-git-send-email-wangyunjian@huawei.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -113,18 +111,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Dec 24, 2020 at 07:48:53PM +0800, wangyunjian wrote:
+On Fri, Dec 25, 2020 at 10:52:16AM +0800, wangyunjian wrote:
 > From: Yunjian Wang <wangyunjian@huawei.com>
 > 
 > Currently the tun_napi_alloc_frags() function returns -ENOMEM when the
 > number of iovs exceeds MAX_SKB_FRAGS + 1. However this is inappropriate,
 > we should use -EMSGSIZE instead of -ENOMEM.
 > 
+> The following distinctions are matters:
+> 1. the caller need to drop the bad packet when -EMSGSIZE is returned,
+>    which means meeting a persistent failure.
+> 2. the caller can try again when -ENOMEM is returned, which means
+>    meeting a transient failure.
+> 
 > Fixes: 90e33d459407 ("tun: enable napi_gro_frags() for TUN/TAP driver")
 > Signed-off-by: Yunjian Wang <wangyunjian@huawei.com>
+> Acked-by: Willem de Bruijn <willemb@google.com>
 
 Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
+> ---
+> v2:
+>   * update commit log suggested by Willem de Bruijn
 > ---
 >  drivers/net/tun.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
