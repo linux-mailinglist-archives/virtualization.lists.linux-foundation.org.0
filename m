@@ -1,94 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D116B2E3713
-	for <lists.virtualization@lfdr.de>; Mon, 28 Dec 2020 13:19:58 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 8E6E085A5A;
-	Mon, 28 Dec 2020 12:19:57 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gu6rs6Ky9pBN; Mon, 28 Dec 2020 12:19:56 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id D098B85531;
-	Mon, 28 Dec 2020 12:19:56 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A72FFC0891;
-	Mon, 28 Dec 2020 12:19:56 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7CFDFC0891
- for <virtualization@lists.linux-foundation.org>;
- Mon, 28 Dec 2020 12:19:55 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAFEC2E664B
+	for <lists.virtualization@lfdr.de>; Mon, 28 Dec 2020 17:12:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 41A2920464
- for <virtualization@lists.linux-foundation.org>;
- Mon, 28 Dec 2020 12:19:55 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 4E35622CCE;
+	Mon, 28 Dec 2020 16:12:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id G4cyMBHhSMJ8
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id z9Ut7xnsQb+C; Mon, 28 Dec 2020 16:12:02 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by silver.osuosl.org (Postfix) with ESMTP id DB4C422D10;
+	Mon, 28 Dec 2020 16:12:02 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BC41AC0891;
+	Mon, 28 Dec 2020 16:12:02 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9D9AFC0891
  for <virtualization@lists.linux-foundation.org>;
- Mon, 28 Dec 2020 12:19:54 +0000 (UTC)
+ Mon, 28 Dec 2020 16:12:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 8C7DE86AA2
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 28 Dec 2020 16:12:01 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8zx+wsXxwm0n
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 28 Dec 2020 16:11:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by silver.osuosl.org (Postfix) with ESMTPS id E71FD20457
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 4D41286A7C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 28 Dec 2020 12:19:53 +0000 (UTC)
+ Mon, 28 Dec 2020 16:11:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1609157992;
+ s=mimecast20190719; t=1609171917;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=BFLa7/fMJxMD+hmxL9RGelfjAN9ACxv2rYzNAsWqtCs=;
- b=eKftgFOkYd+JHHJ/JZSFqJnq5ALyn/AEwmm8NdmPkCggoOcjF8o0Uk//resjiMcWZcXm+R
- Ue4P8AjbKwt0q8tjIlkuY8yC+EvIrBRWdzifBCKLiZgoL14aDh+r5SLFrnBBB9tJnGVTLB
- r8Ma+6dQMgZGwbsqRiIAdiI6JVoAwRw=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-308-va--Fv9-Njm69KlEUmxOuw-1; Mon, 28 Dec 2020 07:19:50 -0500
-X-MC-Unique: va--Fv9-Njm69KlEUmxOuw-1
-Received: by mail-wr1-f71.google.com with SMTP id u3so6274615wri.19
+ bh=uvKCkMpLbJBEy4PbLRQSRYxBLiCodoQvuCZpQ8VRVZ4=;
+ b=dh3JXaJ/tp9KLKSDrAAuMrV0DTYhV4QmPZo9M9DtLFZEBC3AbPbaDWaQJ9qzEX/LUQV6KR
+ MImMyZB3WX2ZjL8w+lOMGc7VnfoppExpl8N5yG9f9+4almd3XkWB0Q/2iPsHJLKFfikMX6
+ socBcFgg6YotCvrO9wZNc847L4ZyXdI=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-192-7hg54z-mOe6v9OOzg2XDTg-1; Mon, 28 Dec 2020 11:11:55 -0500
+X-MC-Unique: 7hg54z-mOe6v9OOzg2XDTg-1
+Received: by mail-wr1-f69.google.com with SMTP id b8so6503285wrv.14
  for <virtualization@lists.linux-foundation.org>;
- Mon, 28 Dec 2020 04:19:50 -0800 (PST)
+ Mon, 28 Dec 2020 08:11:55 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=BFLa7/fMJxMD+hmxL9RGelfjAN9ACxv2rYzNAsWqtCs=;
- b=ovJTx2AM2bTWr7qBtZHzgAFtCARTIrCk0hn0kSTpbF0/URNuV8DSsVvd1z+OXG+YhE
- qmBHMYoVkrgEvL4Cy6ika5iUnSlyo2cqoRFyJmq4vb+u5oAj/y+cnJiLXIA4O5IYKg8g
- BmVmbVyVgc/GRcBVcuokrwpHpnfq2uKGW0jcX1tJc62+JDZKi8dxSHYoaXmgc2XtbmC4
- FaO7GiRoUorl2aCkW6qfYsfiVl43fY04JGCas/Sin0C/1yamwjTnmIrxIfKeqwjqtUqF
- TFYGRneybW7pQz1EaD15x2yiB/+0t0YeA3TC+MizrhzIxO48rn2/k6CIQlm9mpmfLIzW
- YoTA==
-X-Gm-Message-State: AOAM531b+5WEhVaLEOQa+5e2MuMEV1CC191v1l7YmDp/+PpTLfGSO3tn
- 9Lo7ExWLv1Np04rdt3CwYTRha2+QWAqMWpDnMmB6yOdZIEkaU1ZiS0aqaGqXp0DpPaJj6QDm3dO
- E4/45/GbpoZkcEWoudGddWFKcqBdk0tIqduYXfOpuFg==
-X-Received: by 2002:adf:9546:: with SMTP id 64mr51864088wrs.343.1609157989160; 
- Mon, 28 Dec 2020 04:19:49 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzQuAj8JtF1rda3DQCqKrOZND9lbHxggLWIfd1KjoHhcs91SFpo39C2HjpJzys8kW5RxrTRng==
-X-Received: by 2002:adf:9546:: with SMTP id 64mr51864079wrs.343.1609157989021; 
- Mon, 28 Dec 2020 04:19:49 -0800 (PST)
+ bh=uvKCkMpLbJBEy4PbLRQSRYxBLiCodoQvuCZpQ8VRVZ4=;
+ b=MhoS1y4/t7tcodpqJe76D2iVH5d9XOysKeHbZ1eQ9hoibmOax5Wz26/TOIwI1iCc01
+ fYkN1dxHcVugQKH5gUcRoyjjn1CCxj74lcJOj1DpWSXa+wpMQZWWA/PfWmI2mDf219Fu
+ ADa+jzmc/pnI4quna4ZdSwzlxgl6wQPWIrRJ96hRB7xzsKnnzFuusEztyva3dT/mBlDm
+ StVJksP22liJeMsQ7x++67ENoXIeq2MndWxNfAD9NHq0RFbB1Mc3gGojmQR2lGIzpjUY
+ 7N+aHhbM0kZaxYk/2QkTKxkzaLc1TcwXpaDQjVGksfmBoWbyscBOvOBvXEN1bmFsM7dF
+ EBhw==
+X-Gm-Message-State: AOAM532ADOWe4oRQ8AeVGMWRj4WvlhVALhPiTdJuti3pPgbOkfgsLaMW
+ a9dVeMGefzEgEO/1J4Qjr0iVXuKGoa5yS62mIPgEc4Z+z+KLmSWDR2r64N7I74zXpBrkDidZvjS
+ uLliisQiV9oZ8N9qbW8i/qWTRH2Q73xnCx3ZRVO84Lw==
+X-Received: by 2002:a1c:7218:: with SMTP id n24mr21030864wmc.186.1609171914410; 
+ Mon, 28 Dec 2020 08:11:54 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyNOK/usBQvgTV6OkzrGuYREHCDYCUHLEQZiVe+l+R8T4qY+OyVyQWCp96GFBrHRx0AxH7vHQ==
+X-Received: by 2002:a1c:7218:: with SMTP id n24mr21030845wmc.186.1609171914257; 
+ Mon, 28 Dec 2020 08:11:54 -0800 (PST)
 Received: from redhat.com (bzq-79-178-32-166.red.bezeqint.net. [79.178.32.166])
- by smtp.gmail.com with ESMTPSA id h3sm20098736wmm.4.2020.12.28.04.19.46
+ by smtp.gmail.com with ESMTPSA id o124sm20561561wmb.5.2020.12.28.08.11.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Dec 2020 04:19:47 -0800 (PST)
-Date: Mon, 28 Dec 2020 07:19:45 -0500
+ Mon, 28 Dec 2020 08:11:53 -0800 (PST)
+Date: Mon, 28 Dec 2020 11:11:50 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: wangyunjian <wangyunjian@huawei.com>
 Subject: Re: [PATCH net v5 2/2] vhost_net: fix tx queue stuck when sendmsg
  fails
-Message-ID: <20201228071824-mutt-send-email-mst@kernel.org>
+Message-ID: <20201228111139-mutt-send-email-mst@kernel.org>
 References: <1608881073-19004-1-git-send-email-wangyunjian@huawei.com>
  <20201227061916-mutt-send-email-mst@kernel.org>
- <34EFBCA9F01B0748BEB6B629CE643AE60DBA7B3C@DGGEMM533-MBX.china.huawei.com>
+ <34EFBCA9F01B0748BEB6B629CE643AE60DBA8C53@DGGEMM533-MBX.china.huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <34EFBCA9F01B0748BEB6B629CE643AE60DBA7B3C@DGGEMM533-MBX.china.huawei.com>
+In-Reply-To: <34EFBCA9F01B0748BEB6B629CE643AE60DBA8C53@DGGEMM533-MBX.china.huawei.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -117,7 +117,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Dec 28, 2020 at 11:55:36AM +0000, wangyunjian wrote:
+On Mon, Dec 28, 2020 at 01:27:42PM +0000, wangyunjian wrote:
 > > -----Original Message-----
 > > From: Michael S. Tsirkin [mailto:mst@redhat.com]
 > > Sent: Sunday, December 27, 2020 7:21 PM
@@ -140,17 +140,6 @@ On Mon, Dec 28, 2020 at 11:55:36AM +0000, wangyunjian wrote:
 > > So not making progress on a bad packet has some advantages, e.g. this is
 > > easier to debug.
 > > When is it important to drop the packet and continue?
-> 
-> In the case, the VM will not be able to send packets persistently. Services of VM
-> are affected.
-> 
-> Thanks
-
-
-Well VM can always harm itself right? Just halt the CPU, services will
-be affected ;)
-
-
 > > 
 > > 
 > > > To fix this issue:
@@ -163,8 +152,12 @@ be affected ;)
 > > 
 > > I'd just drop this tag, looks more like a feature than a bug ...
 > 
-> OK
+> Do these two patches need to be sent separately?
 > 
+> Thanks
+
+Makes sense to me.
+
 > > 
 > > 
 > > > Signed-off-by: Yunjian Wang <wangyunjian@huawei.com>
