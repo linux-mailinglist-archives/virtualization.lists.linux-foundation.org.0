@@ -1,83 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB7572E8F87
-	for <lists.virtualization@lfdr.de>; Mon,  4 Jan 2021 04:28:26 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4116C2E8F8B
+	for <lists.virtualization@lfdr.de>; Mon,  4 Jan 2021 04:32:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 5DFB520517;
-	Mon,  4 Jan 2021 03:28:25 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7C91E85E6F;
+	Mon,  4 Jan 2021 03:32:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id I9GBirTYs4FI; Mon,  4 Jan 2021 03:28:24 +0000 (UTC)
+	with ESMTP id s1WDeFFv-4Rf; Mon,  4 Jan 2021 03:32:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id BA09B20513;
-	Mon,  4 Jan 2021 03:28:24 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 5CAE185DFF;
+	Mon,  4 Jan 2021 03:32:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8CE66C013A;
-	Mon,  4 Jan 2021 03:28:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 45BA9C013A;
+	Mon,  4 Jan 2021 03:32:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 014ECC013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8C42C013A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:28:22 +0000 (UTC)
+ Mon,  4 Jan 2021 03:32:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id DC20F8680C
+ by whitealder.osuosl.org (Postfix) with ESMTP id CCC3286821
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:28:22 +0000 (UTC)
+ Mon,  4 Jan 2021 03:32:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iIGhlB7XG8Mn
+ with ESMTP id 5YUlOzzVlg0M
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:28:22 +0000 (UTC)
+ Mon,  4 Jan 2021 03:32:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id E690586803
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id A93468680C
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:28:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1609730900;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GJJfwwJvIQfLkVSCQiPAwQXYX1m/CER5+zYYRij6ymg=;
- b=hLh+cqyad8loNSR6nMgFQPaoXKXvxzud1jZt4v+AqGAGiTHhKIBsUBxMe9NKHEUUECCh7q
- 6vdQEXVx5baa1XmuMpKfjeazICibwMNO3gO5jbBJp4DoTndQWBdcVKVWaUZyjv3MxA1r0I
- T/6VVjwAtovUanV/Y2L1F5644UQ9PFU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-578-F31XkmCWPxag_wRJA-zYGg-1; Sun, 03 Jan 2021 22:28:19 -0500
-X-MC-Unique: F31XkmCWPxag_wRJA-zYGg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1D7D2107ACE3;
- Mon,  4 Jan 2021 03:28:18 +0000 (UTC)
-Received: from [10.72.13.221] (ovpn-13-221.pek2.redhat.com [10.72.13.221])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D24801346D;
- Mon,  4 Jan 2021 03:28:06 +0000 (UTC)
-Subject: Re: [PATCH V2 19/19] vdpa: introduce virtio pci driver
-To: Stefano Garzarella <sgarzare@redhat.com>
-References: <20201204040353.21679-1-jasowang@redhat.com>
- <20201204040353.21679-20-jasowang@redhat.com>
- <20201204152043.ewqlwviaf33wwiyx@steredhat>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <a17bd160-eda2-af4f-e465-23d29ca0580a@redhat.com>
-Date: Mon, 4 Jan 2021 11:28:05 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Mon,  4 Jan 2021 03:32:17 +0000 (UTC)
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B5ff28c410000>; Sun, 03 Jan 2021 19:32:17 -0800
+Received: from sw-mtx-036.mtx.labs.mlnx (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Mon, 4 Jan 2021 03:32:16 +0000
+From: Parav Pandit <parav@nvidia.com>
+To: <virtualization@lists.linux-foundation.org>
+Subject: [PATCH linux-next v2 0/7] Introduce vdpa management tool
+Date: Mon, 4 Jan 2021 05:31:34 +0200
+Message-ID: <20210104033141.105876-1-parav@nvidia.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201112064005.349268-1-parav@nvidia.com>
+References: <20201112064005.349268-1-parav@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20201204152043.ewqlwviaf33wwiyx@steredhat>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Cc: shahafs@mellanox.com, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org, mst@redhat.com
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1609731137; bh=VWEj3029SIsYfpGWtDFsCRPZSRP9LMEAt5loHvhcasc=;
+ h=From:To:CC:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
+ References:MIME-Version:Content-Transfer-Encoding:Content-Type:
+ X-Originating-IP:X-ClientProxiedBy;
+ b=kMiVmC46jABVP0jOWmjkk/q+dGVtAM/KfzMKcVsb2HbHVMOaCbhGeFfHg0hyVuivf
+ 5R6nu+38FL3tpbYKbxyOOR/LIFJe9zSAap2VFvtWQ7SC2/40g8I3Q8MizkMVOeXu60
+ uPJt56CZxA+amLzU/M4HYEvy0opJV/+1cvCvCwTJWEzvbHuDwAsKcMyRBCqaGF4iCn
+ 7/zUCn9TKIaAjdrnmUy84uM8y9VjR9rRXGtAe/0+Vl44i/CvwdDMJKuXLrDlczUuw9
+ eCIrL6QElViK0W2ZFXjAWJrcWC1Ew0HmHQh6Nmnftw4bdXrCWdEur0Z38wiWiH8Q4r
+ EeIcB0p3gwRJQ==
+Cc: netdev@vger.kernel.org, elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,26 +80,242 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjAvMTIvNCDkuIvljYgxMToyMCwgU3RlZmFubyBHYXJ6YXJlbGxhIHdyb3RlOgo+PiAr
-I2RlZmluZSBWUF9WRFBBX1FVRVVFX01BWCAyNTYKPj4gKyNkZWZpbmUgVlBfVkRQQV9EUklWRVJf
-TkFNRSAidnBfdmRwYSIKPj4gKwo+PiArc3RydWN0IHZwX3ZyaW5nIHsKPj4gK8KgwqDCoCB2b2lk
-IF9faW9tZW0gKm5vdGlmeTsKPj4gK8KgwqDCoCBjaGFyIG1zaXhfbmFtZVsyNTZdOwo+Cj4gQ2Fu
-IHdlIHVzZSBhIG1hY3JvIGZvciB0aGUgbXNpeF9uYW1lIHNpemUsIHNpbmNlIHdlIHVzZSAyNTYg
-aW4gCj4gbXVsdGlwbGUgcGxhY2VzPwoKClllcywgd2lsbCBzd2l0Y2ggdG8gdXNlIGEgbWFjcm8u
-CgoKPgo+PiArwqDCoMKgIHN0cnVjdCB2ZHBhX2NhbGxiYWNrIGNiOwo+PiArwqDCoMKgIGludCBp
-cnE7Cj4+ICt9Owo+PiArCj4+ICtzdHJ1Y3QgdnBfdmRwYSB7Cj4+ICvCoMKgwqAgc3RydWN0IHZk
-cGFfZGV2aWNlIHZkcGE7Cj4+ICvCoMKgwqAgc3RydWN0IHZpcnRpb19wY2lfbW9kZXJuX2Rldmlj
-ZSBtZGV2Owo+PiArwqDCoMKgIHN0cnVjdCB2cF92cmluZyAqdnJpbmc7Cj4+ICvCoMKgwqAgc3Ry
-dWN0IHZkcGFfY2FsbGJhY2sgY2I7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXgo+IEl0IGlzIG5vdCByZWxldmFudCwgYnV0ICdjb25m
-aWdfY2InIGlzIG1heWJlIGNsZWFyZXIgdG8gcmVhZC4KPgoKV2lsbCBjaGFuZ2UgdG8gY29uZmln
-X2NiLgoKCj4gVGhlIHJlc3QgbG9va3MgZ29vZC4KCgpUaGFua3MKCgo+Cj4gVGhhbmtzLAo+IFN0
-ZWZhbm8gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpW
-aXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91
-bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlz
-dGluZm8vdmlydHVhbGl6YXRpb24=
+This patchset covers user requirements for managing existing vdpa devices,
+using a tool and its internal design notes for kernel drivers.
+
+Background and user requirements:
+----------------------------------
+(1) Currently VDPA device is created by driver when driver is loaded.
+However, user should have a choice when to create or not create a vdpa device
+for the underlying management device.
+
+For example, mlx5 PCI VF and subfunction device supports multiple classes of
+device such netdev, vdpa, rdma. Howevever it is not required to always created
+vdpa device for such device.
+
+(2) In another use case, a device may support creating one or multiple vdpa
+device of same or different class such as net and block.
+Creating vdpa devices at driver load time further limits this use case.
+
+(3) A user should be able to monitor and query vdpa queue level or device level
+statistics for a given vdpa device.
+
+(4) A user should be able to query what class of vdpa devices are supported
+by its management device.
+
+(5) A user should be able to view supported features and negotiated features
+of the vdpa device.
+
+(6) A user should be able to create a vdpa device in vendor agnostic manner
+using single tool.
+
+Hence, it is required to have a tool through which user can create one or more
+vdpa devices from a management device which addresses above user requirements.
+
+Example devices:
+----------------
+ +-----------+ +-----------+ +---------+ +--------+ +-----------+ 
+ |vdpa dev 0 | |vdpa dev 1 | |rdma dev | |netdev  | |vdpa dev 3 |
+ |type=net   | |type=net   | |mlx5_0   | |ens3f0  | |type=net   |
+ +----+------+ +-----+-----+ +----+----+ +-----+--+ +----+------+
+      |              |            |            |         |
+      |              |            |            |         |
+ +----+-----+        |       +----+----+       |    +----+----+
+ |  mlx5    +--------+       |mlx5     +-------+    |mlx5     |
+ |pci vf 2  |                |pci vf 4 |            |pci sf 8 |
+ |03:00:2   |                |03:00.4  |            |mlx5_sf.8|
+ +----+-----+                +----+----+            +----+----+
+      |                           |                      |
+      |                      +----+-----+                |
+      +----------------------+mlx5      +----------------+
+                             |pci pf 0  |
+                             |03:00.0   |
+                             +----------+
+
+vdpa tool:
+----------
+vdpa tool is a tool to create, delete vdpa devices from a management device.
+It is a tool that enables user to query statistics, features and may be more
+attributes in future.
+
+vdpa tool command draft:
+------------------------
+(a) List management devices which support creating vdpa devices.
+It also shows which class types supported by this management device.
+In below command example four management devices support vdpa device creation.
+First is PCI VF whose bdf is 03.00:2.
+Second is PCI VF whose name is 03:00.4.
+Third is PCI SF whose name is mlx5_core.sf.8
+
+$ vdpa mgmtdev list
+vdpasim_net
+  supported_classes
+    net
+pci/0000:03.00:0
+  supported_classes
+    net
+pci/0000:03.00:4
+  supported_classes
+    net
+auxiliary/mlx5_core.sf.8
+  supported_classes
+    net
+
+(b) Now add a vdpa device of networking class and show the device.
+$ vdpa dev add mgmtdev pci/0000:03.00:0 name foo0
+
+$ vdpa dev show foo0
+foo0: mgmtdev pci/0000:03.00:2 type network vendor_id 0 max_vqs 2 max_vq_size 256
+
+(c) Show features of a vdpa device
+$ vdpa dev features show foo0
+supported
+  iommu platform
+  version 1
+
+(d) Dump vdpa device statistics
+$ vdpa dev stats show foo0
+kickdoorbells 10
+wqes 100
+
+(e) Now delete a vdpa device previously created.
+$ vdpa dev del foo0
+
+vdpa tool support in this patchset:
+-----------------------------------
+vdpa tool is created to create, delete and query vdpa devices.
+examples:
+Show vdpa management device that supports creating, deleting vdpa devices.
+
+$ vdpa mgmtdev show
+vdpasim_net:
+  supported_classes
+    net
+
+$ vdpa mgmtdev show -jp
+{
+    "show": {
+       "vdpasim_net": {
+          "supported_classes": {
+             "net"
+        }
+    }
+}
+
+Create a vdpa device of type networking named as "foo2" from the
+management device vdpasim:
+
+$ vdpa dev add mgmtdev vdpasim type net name foo2
+
+Show the newly created vdpa device by its name:
+$ vdpa dev show foo2
+foo2: type network mgmtdev vdpasim vendor_id 0 max_vqs 2 max_vq_size 256
+
+$ vdpa dev show foo2 -jp
+{
+    "dev": {
+        "foo2": {
+            "type": "network",
+            "mgmtdev": "vdpasim_net",
+            "vendor_id": 0,
+            "max_vqs": 2,
+            "max_vq_size": 256
+        }
+    }
+}
+
+Delete the vdpa device after its use:
+$ vdpa dev del foo2
+
+vdpa tool support by kernel:
+----------------------------
+vdpa tool user interface will be supported by existing vdpa kernel framework,
+i.e. drivers/vdpa/vdpa.c It services user command through a netlink interface.
+
+Each management device registers supported callback operations with vdpa
+subsystem through which vdpa device(s) can be managed.
+
+Patch summary:
+--------------
+Patch-1 Makes mac address array static
+Patch-2 adds module parameter to avoid breaking backward compatibility
+        for default device
+Patch-3 Extends API to accept vdpa device name
+Patch-4 Defines management device interface
+Patch-5 Extends netlink interface to add, delete vdpa devices
+Patch-6 Extends netlink interface to query vdpa device attributes
+Patch-7 Extends vdpa_sim_net driver to add/delete simulated vdpa devices
+
+FAQs:
+-----
+1. Where does userspace vdpa tool reside which users can use?
+Ans: vdpa tool can possibly reside in iproute2 [1] as it enables user to
+handler vdpa network devices.
+
+2. Why not create and delete vdpa device using sysfs/configfs?
+Ans:
+(a) A device creation may involve passing one or more attributes.
+Passing multiple attributes and returning error code and more verbose
+information for invalid attributes cannot be handled by sysfs/configfs.
+
+(b) netlink framework is rich that enables user space and kernel driver to
+provide nested attributes.
+
+(c) Exposing device specific file under sysfs without net namespace
+awareness exposes details to multiple containers. Instead exposing
+attributes via a netlink socket secures the communication channel with kernel.
+
+(d) netlink socket interface enables to run syscaller kernel tests.
+
+3. Why not use ioctl() interface?
+Ans: ioctl() interface replicates the necessary plumbing which already
+exists through netlink socket.
+
+4. What happens when one or more user created vdpa devices exist for a
+management PCI VF or SF and such management device is removed?
+Ans: All user created vdpa devices are removed that belong to a
+management device.
+
+[1] git://git.kernel.org/pub/scm/network/iproute2/iproute2-next.git
+
+Next steps:
+-----------
+(a) Post this patchset and iproute2/vdpa inclusion, remaining two drivers
+will be coverted to support vdpa tool instead of creating unmanaged default
+device on driver load.
+(b) More net specific parameters such as mac, mtu will be added.
+(c) Features bits get and set interface will be added.
+
+Parav Pandit (7):
+  vdpa_sim_net: Make mac address array static
+  vdpa_sim_net: Add module param to disable default vdpa net device
+  vdpa: Extend routine to accept vdpa device name
+  vdpa: Define vdpa mgmt device, ops and a netlink interface
+  vdpa: Enable a user to add and delete a vdpa device
+  vdpa: Enable user to query vdpa device info
+  vdpa_sim_net: Add support for user supported devices
+
+ drivers/vdpa/Kconfig                 |   1 +
+ drivers/vdpa/ifcvf/ifcvf_main.c      |   2 +-
+ drivers/vdpa/mlx5/net/mlx5_vnet.c    |   2 +-
+ drivers/vdpa/vdpa.c                  | 503 ++++++++++++++++++++++++++-
+ drivers/vdpa/vdpa_sim/vdpa_sim.c     |   3 +-
+ drivers/vdpa/vdpa_sim/vdpa_sim.h     |   2 +
+ drivers/vdpa/vdpa_sim/vdpa_sim_net.c | 135 ++++++-
+ include/linux/vdpa.h                 |  44 ++-
+ include/uapi/linux/vdpa.h            |  40 +++
+ 9 files changed, 707 insertions(+), 25 deletions(-)
+ create mode 100644 include/uapi/linux/vdpa.h
+
+-- 
+2.26.2
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
