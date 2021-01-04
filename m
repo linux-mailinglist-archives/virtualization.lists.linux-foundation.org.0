@@ -2,75 +2,75 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F2892E8F8F
-	for <lists.virtualization@lfdr.de>; Mon,  4 Jan 2021 04:32:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A3B62E9079
+	for <lists.virtualization@lfdr.de>; Mon,  4 Jan 2021 07:55:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id B8D648708D;
-	Mon,  4 Jan 2021 03:32:32 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D304686F9F;
+	Mon,  4 Jan 2021 06:55:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Mm9se6vBp6b2; Mon,  4 Jan 2021 03:32:32 +0000 (UTC)
+	with ESMTP id QRH2j4K7+-UK; Mon,  4 Jan 2021 06:55:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1BDC887090;
-	Mon,  4 Jan 2021 03:32:32 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id E331786F3F;
+	Mon,  4 Jan 2021 06:55:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E829AC013A;
-	Mon,  4 Jan 2021 03:32:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B9B6AC013A;
+	Mon,  4 Jan 2021 06:55:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BADBEC013A
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D49ACC013A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:32:28 +0000 (UTC)
+ Mon,  4 Jan 2021 06:55:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id AE6E22051F
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C1052859E3
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:32:28 +0000 (UTC)
+ Mon,  4 Jan 2021 06:55:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id R06JZw7PgS7y
+ with ESMTP id sbmf32wyXlXd
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:32:24 +0000 (UTC)
+ Mon,  4 Jan 2021 06:55:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by silver.osuosl.org (Postfix) with ESMTPS id 950EF1FEF0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 08FF785624
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Jan 2021 03:32:24 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5ff28c480000>; Sun, 03 Jan 2021 19:32:24 -0800
-Received: from sw-mtx-036.mtx.labs.mlnx (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 4 Jan 2021 03:32:23 +0000
-From: Parav Pandit <parav@nvidia.com>
-To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH linux-next v2 7/7] vdpa_sim_net: Add support for user
- supported devices
-Date: Mon, 4 Jan 2021 05:31:41 +0200
-Message-ID: <20210104033141.105876-8-parav@nvidia.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210104033141.105876-1-parav@nvidia.com>
-References: <20201112064005.349268-1-parav@nvidia.com>
- <20210104033141.105876-1-parav@nvidia.com>
+ Mon,  4 Jan 2021 06:55:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1609743314;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=UAzO6IPOfba8T/LupAj9FrEly/L1acxCYUKfdREpa0A=;
+ b=As3aQVZQq22RLEDZ3TlM4ldtSp3TdYkSOxoHHJpb3OJ55XxQ29Z2IJqj9Sh7gPcZKBMioV
+ DG3Y9b5KKefTUfMfdGXbYCWJ7Xqy0VDenab8QKwmT1oBqSX9J2iOGpkKpmvQFP7RH0Q7Fq
+ xhCgB3r7GeQkt/wEnzVjY7EC0Ky6qsA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-216-LKHfDSYnPiSkIlE2NtzhcQ-1; Mon, 04 Jan 2021 01:55:12 -0500
+X-MC-Unique: LKHfDSYnPiSkIlE2NtzhcQ-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5F15F107ACE3;
+ Mon,  4 Jan 2021 06:55:11 +0000 (UTC)
+Received: from jason-ThinkPad-X1-Carbon-6th.redhat.com
+ (ovpn-13-91.pek2.redhat.com [10.72.13.91])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id ABBFD10016FA;
+ Mon,  4 Jan 2021 06:55:05 +0000 (UTC)
+From: Jason Wang <jasowang@redhat.com>
+To: mst@redhat.com, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org
+Subject: [PATCH V3 00/19] vDPA driver for virtio-pci device
+Date: Mon,  4 Jan 2021 14:54:44 +0800
+Message-Id: <20210104065503.199631-1-jasowang@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1609731144; bh=sOQV4nudA1BXJOUqsZ0mGzsnDoZQc9SZHPbEt9crKvw=;
- h=From:To:CC:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
- References:MIME-Version:Content-Transfer-Encoding:Content-Type:
- X-Originating-IP:X-ClientProxiedBy;
- b=LAVShhn0J2anGnPqp39XzFWNib4ynQq584B6B6HD3EAjXEinHvgUQ3JvEkhYSIVAP
- iKcJBnf0VeYsRiOHB9L5TBTJZzKPXCDDdY9/3JFdd6Z5R1f0nfJVW4PtlT7/EO3ifL
- kfRjPFTsYiUzAYhfqFaQ9evr/CW+YJ/dDkFGwpnz5JzFQykYEIXRa7s5uR2wfrJ2OC
- gFm4glm5nlmyC++UIzvgu5i2+F6JKkhMJUQ7u2McX9ZLoQc21pryjc/oDfnRN0iPnD
- XKhzarABTygNgTPUodWrHpwq5KRrjCVph5LVbBMRlVGfu+Zk8guwN2pEOKp2ptsIl2
- pVyfUcTb0lxBg==
-Cc: netdev@vger.kernel.org, elic@nvidia.com, mst@redhat.com
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Cc: shahafs@mellanox.com, rdunlap@infradead.org, lulu@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,216 +87,81 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Enable user to create vdpasim net simulate devices.
+Hi all:
 
-Show vdpa management device that supports creating, deleting vdpa devices.
+This series tries to implement a vDPA driver for virtio-pci device
+which will bridge between vDPA bus and virtio-pci device.
 
-$ vdpa mgmtdev show
-vdpasim_net:
-  supported_classes
-    net
+This could be used for future feature prototyping and testing.
 
-$ vdpa mgmtdev show -jp
-{
-    "show": {
-        "vdpasim_net": {
-            "supported_classes": {
-              "net"
-        }
-    }
-}
+Please review
 
-Create a vdpa device of type networking named as "foo2" from
-the management device vdpasim:
+Changes since V2:
 
-$ vdpa dev add mgmtdev vdpasim_net name foo2
+- tweak config prompt
+- switch from 'cb' to 'config_cb' for vp_vdpa config interrupt
+- use a macro for vp_vdpa msix name length
 
-Show the newly created vdpa device by its name:
-$ vdpa dev show foo2
-foo2: type network mgmtdev vdpasim_net vendor_id 0 max_vqs 2 max_vq_size 256
+Changes since V1:
 
-$ vdpa dev show foo2 -jp
-{
-    "dev": {
-        "foo2": {
-            "type": "network",
-            "mgmtdev": "vdpasim_net",
-            "vendor_id": 0,
-            "max_vqs": 2,
-            "max_vq_size": 256
-        }
-    }
-}
+- don't try to use devres for virtio-pci core
+- tweak the commit log
+- split the patches furtherly to ease the reviewing
 
-Delete the vdpa device after its use:
-$ vdpa dev del foo2
+Changes since RFC:
 
-Signed-off-by: Parav Pandit <parav@nvidia.com>
-Reviewed-by: Eli Cohen <elic@nvidia.com>
-Acked-by: Jason Wang <jasowang@redhat.com>
----
-Changelog:
-v1->v2:
- - rebased
----
- drivers/vdpa/vdpa_sim/vdpa_sim.c     |  3 +-
- drivers/vdpa/vdpa_sim/vdpa_sim.h     |  2 +
- drivers/vdpa/vdpa_sim/vdpa_sim_net.c | 92 ++++++++++++++++++++++++++++
- 3 files changed, 96 insertions(+), 1 deletion(-)
+- Split common codes from virito-pci and share it with vDPA driver
+- Use dynamic id in order to be less confusing with virtio-pci driver
+- No feature whitelist, supporting any features (mq, config etc)
 
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index db1636a99ba4..d5942842432d 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -235,7 +235,7 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr)
- 		ops = &vdpasim_config_ops;
- 
- 	vdpasim = vdpa_alloc_device(struct vdpasim, vdpa, NULL, ops,
--				    dev_attr->nvqs, NULL);
-+				    dev_attr->nvqs, dev_attr->name);
- 	if (!vdpasim)
- 		goto err_alloc;
- 
-@@ -249,6 +249,7 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr)
- 	if (dma_set_mask_and_coherent(dev, DMA_BIT_MASK(64)))
- 		goto err_iommu;
- 	set_dma_ops(dev, &vdpasim_dma_ops);
-+	vdpasim->vdpa.mdev = dev_attr->mgmt_dev;
- 
- 	vdpasim->config = kzalloc(dev_attr->config_size, GFP_KERNEL);
- 	if (!vdpasim->config)
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.h b/drivers/vdpa/vdpa_sim/vdpa_sim.h
-index b02142293d5b..6d75444f9948 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim.h
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.h
-@@ -33,6 +33,8 @@ struct vdpasim_virtqueue {
- };
- 
- struct vdpasim_dev_attr {
-+	struct vdpa_mgmt_dev *mgmt_dev;
-+	const char *name;
- 	u64 supported_features;
- 	size_t config_size;
- 	size_t buffer_size;
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-index 34155831538c..b795e02bdad0 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-@@ -162,6 +162,94 @@ static void vdpasim_net_default_dev_unregister(void)
- 	vdpa_unregister_device(vdpa);
- }
- 
-+static void vdpasim_net_mgmtdev_release(struct device *dev)
-+{
-+}
-+
-+static struct device vdpasim_net_mgmtdev = {
-+	.init_name = "vdpasim_net",
-+	.release = vdpasim_net_mgmtdev_release,
-+};
-+
-+static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name)
-+{
-+	struct vdpasim_dev_attr dev_attr = {};
-+	struct vdpasim *simdev;
-+	int ret;
-+
-+	dev_attr.mgmt_dev = mdev;
-+	dev_attr.name = name;
-+	dev_attr.id = VIRTIO_ID_NET;
-+	dev_attr.supported_features = VDPASIM_NET_FEATURES;
-+	dev_attr.nvqs = VDPASIM_NET_VQ_NUM;
-+	dev_attr.config_size = sizeof(struct virtio_net_config);
-+	dev_attr.get_config = vdpasim_net_get_config;
-+	dev_attr.work_fn = vdpasim_net_work;
-+	dev_attr.buffer_size = PAGE_SIZE;
-+
-+	simdev = vdpasim_create(&dev_attr);
-+	if (IS_ERR(simdev))
-+		return PTR_ERR(simdev);
-+
-+	ret = _vdpa_register_device(&simdev->vdpa);
-+	if (ret)
-+		goto reg_err;
-+
-+	return 0;
-+
-+reg_err:
-+	put_device(&simdev->vdpa.dev);
-+	return ret;
-+}
-+
-+static void vdpasim_net_dev_del(struct vdpa_mgmt_dev *mdev,
-+				struct vdpa_device *dev)
-+{
-+	struct vdpasim *simdev = container_of(dev, struct vdpasim, vdpa);
-+
-+	_vdpa_unregister_device(&simdev->vdpa);
-+}
-+
-+static const struct vdpa_mgmtdev_ops vdpasim_net_mgmtdev_ops = {
-+	.dev_add = vdpasim_net_dev_add,
-+	.dev_del = vdpasim_net_dev_del
-+};
-+
-+static struct virtio_device_id id_table[] = {
-+	{ VIRTIO_ID_NET, VIRTIO_DEV_ANY_ID },
-+	{ 0 },
-+};
-+
-+static struct vdpa_mgmt_dev mgmt_dev = {
-+	.device = &vdpasim_net_mgmtdev,
-+	.id_table = id_table,
-+	.ops = &vdpasim_net_mgmtdev_ops,
-+};
-+
-+static int vdpasim_net_mgmtdev_init(void)
-+{
-+	int ret;
-+
-+	ret = device_register(&vdpasim_net_mgmtdev);
-+	if (ret)
-+		return ret;
-+
-+	ret = vdpa_mgmtdev_register(&mgmt_dev);
-+	if (ret)
-+		goto parent_err;
-+	return 0;
-+
-+parent_err:
-+	device_unregister(&vdpasim_net_mgmtdev);
-+	return ret;
-+}
-+
-+static void vdpasim_net_mgmtdev_cleanup(void)
-+{
-+	vdpa_mgmtdev_unregister(&mgmt_dev);
-+	device_unregister(&vdpasim_net_mgmtdev);
-+}
-+
- static int __init vdpasim_net_init(void)
- {
- 	int ret = 0;
-@@ -176,6 +264,8 @@ static int __init vdpasim_net_init(void)
- 
- 	if (default_device)
- 		ret = vdpasim_net_default_dev_register();
-+	else
-+		ret = vdpasim_net_mgmtdev_init();
- 	return ret;
- }
- 
-@@ -183,6 +273,8 @@ static void __exit vdpasim_net_exit(void)
- {
- 	if (default_device)
- 		vdpasim_net_default_dev_unregister();
-+	else
-+		vdpasim_net_mgmtdev_cleanup();
- }
- 
- module_init(vdpasim_net_init);
+Thanks
+
+Jason Wang (19):
+  virtio-pci: do not access iomem via struct virtio_pci_device directly
+  virtio-pci: split out modern device
+  virtio-pci-modern: factor out modern device initialization logic
+  virtio-pci-modern: introduce vp_modern_remove()
+  virtio-pci-modern: introduce helper to set config vector
+  virtio-pci-modern: introduce helpers for setting and getting status
+  virtio-pci-modern: introduce helpers for setting and getting features
+  virtio-pci-modern: introduce vp_modern_generation()
+  virtio-pci-modern: introduce vp_modern_set_queue_vector()
+  virtio-pci-modern: introduce vp_modern_queue_address()
+  virtio-pci-modern: introduce helper to set/get queue_enable
+  virtio-pci-modern: introduce helper for setting/geting queue size
+  virtio-pci-modern: introduce helper for getting queue nums
+  virtio-pci-modern: introduce helper to get notification offset
+  virito-pci-modern: rename map_capability() to
+    vp_modern_map_capability()
+  virtio-pci: introduce modern device module
+  vdpa: set the virtqueue num during register
+  virtio_vdpa: don't warn when fail to disable vq
+  vdpa: introduce virtio pci driver
+
+ drivers/vdpa/Kconfig                   |   6 +
+ drivers/vdpa/Makefile                  |   1 +
+ drivers/vdpa/ifcvf/ifcvf_main.c        |   5 +-
+ drivers/vdpa/mlx5/net/mlx5_vnet.c      |   5 +-
+ drivers/vdpa/vdpa.c                    |   8 +-
+ drivers/vdpa/vdpa_sim/vdpa_sim.c       |   4 +-
+ drivers/vdpa/virtio_pci/Makefile       |   2 +
+ drivers/vdpa/virtio_pci/vp_vdpa.c      | 456 +++++++++++++++++++
+ drivers/virtio/Kconfig                 |  10 +-
+ drivers/virtio/Makefile                |   1 +
+ drivers/virtio/virtio_pci_common.h     |  22 +-
+ drivers/virtio/virtio_pci_modern.c     | 506 +++------------------
+ drivers/virtio/virtio_pci_modern_dev.c | 599 +++++++++++++++++++++++++
+ drivers/virtio/virtio_vdpa.c           |   3 +-
+ include/linux/vdpa.h                   |   7 +-
+ include/linux/virtio_pci_modern.h      | 111 +++++
+ 16 files changed, 1274 insertions(+), 472 deletions(-)
+ create mode 100644 drivers/vdpa/virtio_pci/Makefile
+ create mode 100644 drivers/vdpa/virtio_pci/vp_vdpa.c
+ create mode 100644 drivers/virtio/virtio_pci_modern_dev.c
+ create mode 100644 include/linux/virtio_pci_modern.h
+
 -- 
-2.26.2
+2.25.1
 
 _______________________________________________
 Virtualization mailing list
