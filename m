@@ -1,60 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 347C32EEFD2
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 181B12EEFD1
 	for <lists.virtualization@lfdr.de>; Fri,  8 Jan 2021 10:43:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 9C1572E120;
-	Fri,  8 Jan 2021 09:43:51 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 05F438730B;
+	Fri,  8 Jan 2021 09:43:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gvCTI0XsGVZt; Fri,  8 Jan 2021 09:43:48 +0000 (UTC)
+	with ESMTP id ggGuQKtqoQBb; Fri,  8 Jan 2021 09:43:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id EDB48204F2;
-	Fri,  8 Jan 2021 09:43:47 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 2C9D7870F7;
+	Fri,  8 Jan 2021 09:43:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A6D09C013A;
-	Fri,  8 Jan 2021 09:43:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1B5B2C013A;
+	Fri,  8 Jan 2021 09:43:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 967F2C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9EDD5C088B
  for <virtualization@lists.linux-foundation.org>;
  Fri,  8 Jan 2021 09:43:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 8526586D08
+ by whitealder.osuosl.org (Postfix) with ESMTP id 8B9DD870F7
  for <virtualization@lists.linux-foundation.org>;
  Fri,  8 Jan 2021 09:43:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7tl6lmJr7xIb
+ with ESMTP id GmeBlzOWdMV1
  for <virtualization@lists.linux-foundation.org>;
  Fri,  8 Jan 2021 09:43:45 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 0D0DF86CF9
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 828E9870BE
  for <virtualization@lists.linux-foundation.org>;
- Fri,  8 Jan 2021 09:43:44 +0000 (UTC)
+ Fri,  8 Jan 2021 09:43:45 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 6C4A7ACC6;
- Fri,  8 Jan 2021 09:43:43 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0EF9EAD2B;
+ Fri,  8 Jan 2021 09:43:44 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: sumit.semwal@linaro.org, christian.koenig@amd.com, airlied@redhat.com,
  daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
  kraxel@redhat.com, hdegoede@redhat.com, sean@poorly.run, eric@anholt.net,
  sam@ravnborg.org
-Subject: [PATCH v4 00/13] drm: Support short-term vmap via vmap_local
-Date: Fri,  8 Jan 2021 10:43:27 +0100
-Message-Id: <20210108094340.15290-1-tzimmermann@suse.de>
+Subject: [PATCH v4 01/13] dma-buf: Add vmap_local and vnumap_local operations
+Date: Fri,  8 Jan 2021 10:43:28 +0100
+Message-Id: <20210108094340.15290-2-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210108094340.15290-1-tzimmermann@suse.de>
+References: <20210108094340.15290-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-Cc: linaro-mm-sig@lists.linaro.org, virtualization@lists.linux-foundation.org,
- Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
- linux-media@vger.kernel.org
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, linux-media@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,92 +73,174 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-GEM VRAM helpers used to pin the BO in their implementation of vmap, so
-that they could not be relocated. In recent discussions, [1][2] it became
-clear that this is incorrect for in-kernel use cases, such as fbdev
-emulation; which should rather depend on the reservation lock to prevent
-relocation.
+The existing dma-buf calls dma_buf_vmap() and dma_buf_vunmap() are
+allowed to pin the buffer or acquire the buffer's reservation object
+lock.
 
-This patchset addresses the issue by introducing the new interfaces
-vmap_local and vunmap_local throughout dma-buf and GEM. It further adds
-support to DRM's CMA, SHMEM and VRAM helpers and finally converts fbdev
-emulation to the new interface.
+This is a problem for callers that only require a short-term mapping
+of the buffer without the pinning, or callers that have special locking
+requirements. These may suffer from unnecessary overhead or interfere
+with regular pin operations.
 
-Patches 1 and 2 add the vmap_local infrastructure throughout dma-buf,
-GEM and PRIME.
-
-Patches 3 to 11 add implementations of vmap_local to DRM's various GEM
-helper libraries. Due to the simple nature of these libraries, existing
-vmap code can be reused easily. Several drivers are updated as well to
-use the new interfaces.
-
-Patch 12 converts generic fbdev emulation to use vmap_local. Only DRM
-drivers that use GEM helpers currently use fbdev emulation, so patches
-3 to 11 covered all necessary instances.
-
-Finally patch 13 removes drm_gem_vram_vmap() functionality, which is now
-unused.
-
-I smoke-tested the patchset with ast (VRAM helpers), mgag200 (SHMEM) and
-vc4 (CMA). I also tested with a version of radeon (raw TTM) that had been
-converted to generic fbdev emulation.
+The new interfaces dma_buf_vmap_local(), dma_buf_vunmapo_local(), and
+their rsp callbacks in struct dma_buf_ops provide an alternative without
+pinning or reservation locking. Callers are responsible for these
+operations.
 
 v4:
-	* move driver changes out of SHMEM and VRAM patches (Daniel)
-	* call dma_buf_vmap_local() in SHMEM implementation (Daniel)
-	* remove unused drm_gem_vram_vmap() functionality
 	* update documentation (Daniel)
-v3:
-	* rewrite patchset around vmap_local
-v2:
-	* make importers acquire resv locks by themselves
-	* document dma-buf vmap/vunmap ops
 
-[1] https://patchwork.freedesktop.org/patch/400054/?series=83765&rev=1
-[2] https://patchwork.freedesktop.org/patch/405407/?series=84401&rev=2
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Suggested-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+---
+ drivers/dma-buf/dma-buf.c | 81 +++++++++++++++++++++++++++++++++++++++
+ include/linux/dma-buf.h   | 34 ++++++++++++++++
+ 2 files changed, 115 insertions(+)
 
-Thomas Zimmermann (13):
-  dma-buf: Add vmap_local and vnumap_local operations
-  drm/gem: Create infrastructure for GEM vmap_local
-  drm/cma-helper: Provide a vmap function for short-term mappings
-  drm/shmem-helper: Provide a vmap function for short-term mappings
-  drm/mgag200: Use drm_gem_shmem_vmap_local() in damage handling
-  drm/cirrus: Use drm_gem_shmem_vmap_local() in damage handling
-  drm/gm12u320: Use drm_gem_shmem_vmap_local() in damage handling
-  drm/udl: Use drm_gem_shmem_vmap_local() in damage handling
-  drm/vram-helper: Provide a vmap function for short-term mappings
-  drm/ast: Use drm_gem_vram_vmap_local() in cursor update
-  drm/vboxvideo: Use drm_gem_vram_vmap_local() in cursor update
-  drm/fb-helper: Move BO locking from DRM client to fbdev damage worker
-  drm/vram-helper: Remove unused drm_gem_vram_{vmap,vunmap}()
-
- drivers/dma-buf/dma-buf.c              |  81 ++++++++++++++
- drivers/gpu/drm/ast/ast_cursor.c       |  37 +++++--
- drivers/gpu/drm/drm_client.c           |  94 +++++++++++++++++
- drivers/gpu/drm/drm_fb_helper.c        |  41 ++++----
- drivers/gpu/drm/drm_gem.c              |  28 +++++
- drivers/gpu/drm/drm_gem_cma_helper.c   |  27 +++++
- drivers/gpu/drm/drm_gem_shmem_helper.c |  90 ++++++++++++++--
- drivers/gpu/drm/drm_gem_vram_helper.c  | 139 ++++++++-----------------
- drivers/gpu/drm/drm_internal.h         |   2 +
- drivers/gpu/drm/drm_prime.c            |  39 +++++++
- drivers/gpu/drm/mgag200/mgag200_mode.c |  16 ++-
- drivers/gpu/drm/tiny/cirrus.c          |  10 +-
- drivers/gpu/drm/tiny/gm12u320.c        |  14 ++-
- drivers/gpu/drm/udl/udl_modeset.c      |  18 ++--
- drivers/gpu/drm/vboxvideo/vbox_mode.c  |  15 +--
- drivers/gpu/drm/vc4/vc4_bo.c           |   1 +
- drivers/gpu/drm/virtio/virtgpu_prime.c |   2 +
- include/drm/drm_client.h               |   4 +
- include/drm/drm_gem.h                  |  21 ++++
- include/drm/drm_gem_cma_helper.h       |   1 +
- include/drm/drm_gem_shmem_helper.h     |   2 +
- include/drm/drm_gem_vram_helper.h      |   4 +-
- include/drm/drm_prime.h                |   2 +
- include/linux/dma-buf.h                |  34 ++++++
- 24 files changed, 566 insertions(+), 156 deletions(-)
-
---
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index b8465243eca2..01f9c74d97fa 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -1295,6 +1295,87 @@ void dma_buf_vunmap(struct dma_buf *dmabuf, struct dma_buf_map *map)
+ }
+ EXPORT_SYMBOL_GPL(dma_buf_vunmap);
+ 
++/**
++ * dma_buf_vmap_local - Create virtual mapping for the buffer object into kernel
++ * address space.
++ * @dmabuf:	[in]	buffer to vmap
++ * @map:	[out]	returns the vmap pointer
++ *
++ * Unlike dma_buf_vmap() this is a short term mapping and will not pin
++ * the buffer. The struct dma_resv for the @dmabuf must be locked until
++ * dma_buf_vunmap_local() is called.
++ *
++ * Returns:
++ * 0 on success, or a negative errno code otherwise.
++ */
++int dma_buf_vmap_local(struct dma_buf *dmabuf, struct dma_buf_map *map)
++{
++	struct dma_buf_map ptr;
++	int ret = 0;
++
++	dma_buf_map_clear(map);
++
++	if (WARN_ON(!dmabuf))
++		return -EINVAL;
++
++	dma_resv_assert_held(dmabuf->resv);
++
++	if (!dmabuf->ops->vmap_local)
++		return -EINVAL;
++
++	mutex_lock(&dmabuf->lock);
++	if (dmabuf->vmapping_counter) {
++		dmabuf->vmapping_counter++;
++		BUG_ON(dma_buf_map_is_null(&dmabuf->vmap_ptr));
++		*map = dmabuf->vmap_ptr;
++		goto out_unlock;
++	}
++
++	BUG_ON(dma_buf_map_is_set(&dmabuf->vmap_ptr));
++
++	ret = dmabuf->ops->vmap_local(dmabuf, &ptr);
++	if (WARN_ON_ONCE(ret))
++		goto out_unlock;
++
++	dmabuf->vmap_ptr = ptr;
++	dmabuf->vmapping_counter = 1;
++
++	*map = dmabuf->vmap_ptr;
++
++out_unlock:
++	mutex_unlock(&dmabuf->lock);
++	return ret;
++}
++EXPORT_SYMBOL_GPL(dma_buf_vmap_local);
++
++/**
++ * dma_buf_vunmap_local - Unmap a vmap obtained by dma_buf_vmap_local.
++ * @dmabuf:	[in]	buffer to vunmap
++ * @map:	[in]	vmap pointer to vunmap
++ *
++ * Release a mapping established with dma_buf_vmap_local().
++ */
++void dma_buf_vunmap_local(struct dma_buf *dmabuf, struct dma_buf_map *map)
++{
++	if (WARN_ON(!dmabuf))
++		return;
++
++	dma_resv_assert_held(dmabuf->resv);
++
++	BUG_ON(dma_buf_map_is_null(&dmabuf->vmap_ptr));
++	BUG_ON(dmabuf->vmapping_counter == 0);
++	BUG_ON(!dma_buf_map_is_equal(&dmabuf->vmap_ptr, map));
++
++	mutex_lock(&dmabuf->lock);
++	if (--dmabuf->vmapping_counter == 0) {
++		if (dmabuf->ops->vunmap_local)
++			dmabuf->ops->vunmap_local(dmabuf, map);
++		dma_buf_map_clear(&dmabuf->vmap_ptr);
++	}
++	mutex_unlock(&dmabuf->lock);
++}
++EXPORT_SYMBOL_GPL(dma_buf_vunmap_local);
++
+ #ifdef CONFIG_DEBUG_FS
+ static int dma_buf_debug_show(struct seq_file *s, void *unused)
+ {
+diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+index 628681bf6c99..aeed754b5467 100644
+--- a/include/linux/dma-buf.h
++++ b/include/linux/dma-buf.h
+@@ -264,6 +264,38 @@ struct dma_buf_ops {
+ 
+ 	int (*vmap)(struct dma_buf *dmabuf, struct dma_buf_map *map);
+ 	void (*vunmap)(struct dma_buf *dmabuf, struct dma_buf_map *map);
++
++	/**
++	 * @vmap_local:
++	 *
++	 * Creates a virtual mapping for the buffer into kernel address space.
++	 *
++	 * This callback establishes short-term mappings for situations where
++	 * callers only use the buffer for a bounded amount of time; such as
++	 * updates to the framebuffer or reading back contained information.
++	 * In contrast to the regular @vmap callback, vmap_local does never pin
++	 * the buffer to a specific domain or acquire the buffer's reservation
++	 * lock.
++	 *
++	 * This is called with the &dma_buf.resv object locked. Callers must hold
++	 * the lock until after removing the mapping with @vunmap_local.
++	 *
++	 * This callback is optional.
++	 *
++	 * Returns:
++	 *
++	 * 0 on success or a negative error code on failure.
++	 */
++	int (*vmap_local)(struct dma_buf *dmabuf, struct dma_buf_map *map);
++
++	/**
++	 * @vunmap_local:
++	 *
++	 * Removes a virtual mapping that was established by @vmap_local.
++	 *
++	 * This callback is optional.
++	 */
++	void (*vunmap_local)(struct dma_buf *dmabuf, struct dma_buf_map *map);
+ };
+ 
+ /**
+@@ -501,4 +533,6 @@ int dma_buf_mmap(struct dma_buf *, struct vm_area_struct *,
+ 		 unsigned long);
+ int dma_buf_vmap(struct dma_buf *dmabuf, struct dma_buf_map *map);
+ void dma_buf_vunmap(struct dma_buf *dmabuf, struct dma_buf_map *map);
++int dma_buf_vmap_local(struct dma_buf *dmabuf, struct dma_buf_map *map);
++void dma_buf_vunmap_local(struct dma_buf *dmabuf, struct dma_buf_map *map);
+ #endif /* __DMA_BUF_H__ */
+-- 
 2.29.2
 
 _______________________________________________
