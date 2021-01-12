@@ -2,77 +2,77 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EF3B2F3B5D
-	for <lists.virtualization@lfdr.de>; Tue, 12 Jan 2021 21:06:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99E6E2F3B69
+	for <lists.virtualization@lfdr.de>; Tue, 12 Jan 2021 21:12:03 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9EABB85329;
-	Tue, 12 Jan 2021 20:06:14 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 4DAD0857A4;
+	Tue, 12 Jan 2021 20:12:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 72NzOTM4K6Sk; Tue, 12 Jan 2021 20:06:13 +0000 (UTC)
+	with ESMTP id XgGhs8RtE76g; Tue, 12 Jan 2021 20:12:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 3D0AE8527D;
-	Tue, 12 Jan 2021 20:06:13 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DA2EB8527D;
+	Tue, 12 Jan 2021 20:12:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 09C74C013A;
-	Tue, 12 Jan 2021 20:06:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C39B5C013A;
+	Tue, 12 Jan 2021 20:12:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4D239C013A
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A9DC0C013A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:11 +0000 (UTC)
+ Tue, 12 Jan 2021 20:12:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 409A1848F4
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 992F085722
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:11 +0000 (UTC)
+ Tue, 12 Jan 2021 20:12:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id y1S-iVU90OWS
+ with ESMTP id RrbpyOiR6oQv
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:08 +0000 (UTC)
-X-Greylist: delayed 00:17:41 by SQLgrey-1.7.6
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com
- [209.85.218.49])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 95CEA8442D
+ Tue, 12 Jan 2021 20:12:00 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com
+ [209.85.218.50])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id AD4668522B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:08 +0000 (UTC)
-Received: by mail-ej1-f49.google.com with SMTP id ga15so5291542ejb.4
+ Tue, 12 Jan 2021 20:11:59 +0000 (UTC)
+Received: by mail-ej1-f50.google.com with SMTP id q22so5325586eja.2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 12:06:08 -0800 (PST)
+ Tue, 12 Jan 2021 12:11:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=daynix-com.20150623.gappssmtp.com; s=20150623;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=vbacyc4brsO7fCWWmN34VX2kLRLEZOENYLDCsoU/LjI=;
- b=frDPSNM1J/dOImSb6yTvFEc5DFfgGXbEaLLgKaM0mONN1LJTeaMDvsD7N43EhUuKwM
- OzKSpdv9zyp8xkewtP83v/WGTWyMClGmamwcnslMUaaz1lav+C2aXiTjba4BdOhqxWXs
- YOItPqRzhgs4NU2YffFSmcJDQxMpi6pdbU7itsTGkKpcxuOJWziSQooRJUBKdpBzUYxD
- xIoivLmBPS3zxn3DPlnmaHb6St45vGGHON4Tw0XUnv4jTlfHbt6WSZPGEcTHqdLKQA8A
- oh9+TRaqxpOgBEf5HrtBEHkkj3ACTaqZOa/BiIncvZJTrHDMblqXE+TF/HZ3Eh4T7R9X
- TU4w==
+ bh=vUG4KrkwS/48VCqb3gPEYEavBv7WJyPV6SrQz/KaLAM=;
+ b=xXVp4dUFwGopoDHrk5N2q6tlpNzp6UcAVfATe6wqsrEI6AsT8zMquFk3s5PrenaRNS
+ HsXPG8kYC0iqaJhsbWLQQVLvJzZ9fyG5MMwDHgKfhYHzVUADW8tULfPsAXPKdSzmExXs
+ xGkgY8UjXhz4pr/tWYY6LIg0OPuFo4/wilerVoD5vOLJ7+xE3zVBI8l4tgeDUNGcSQS2
+ w9lpFADgtL5YNaNmRW34ldPIRi8yBgvDVWpenxM8ASJiWwqp+czbRrxXsd0c45UYufcX
+ ORCyuOBerYo0JFSjBUJNikFQv/KEcc3YsnoAYO8aGPrCVo2pExXlWpwTZijTWq2Ccxf6
+ uguA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=vbacyc4brsO7fCWWmN34VX2kLRLEZOENYLDCsoU/LjI=;
- b=Irsgm5VIbb5btncWH6Ikpg81EMf0lYWAo5UGNRBm4ON+YkqZoshlip2IJHGL5kZ/O0
- toDnwbjBaTNC7jfez2QXcFI9r0+1c4zLjDItus7zXU/LgtxgG2nIIe0TCrGQb32uasjH
- I19fYjRX7Py+oZ8qQjXTC8zxyeJ9CNLX7cFAY/b9/WKyFhp39DfJx0SlWQ9h8iKAQn4C
- lFulfL6BJ0isi0EzsQbEkzvZ0qrObFBvIxR3pK68slc8u5nBahAP24HwurfgYBBOtuDZ
- HngY63bb9m++YwoaR70UO9dlnPz3lSFO7qF5ufWVXoip0VJl5WpNpCWPCAZPK/CgmFgu
- RUFg==
-X-Gm-Message-State: AOAM532ETy/QgShtXKCwghva/9VuVyPbe92dDA+ZfIr2RZqjmeyXvMK3
- D4w1i0GiTSoASHbLl8Qx5huNWj1NA9XGmrDu
-X-Google-Smtp-Source: ABdhPJzR2K4OZsCoyd0N4J9iZegxzvR23ddSEOzUWZ1flur5F4V7qRoMhDvf+/K03T/6v7gHKGCucw==
-X-Received: by 2002:adf:df08:: with SMTP id y8mr431800wrl.278.1610480533859;
- Tue, 12 Jan 2021 11:42:13 -0800 (PST)
+ bh=vUG4KrkwS/48VCqb3gPEYEavBv7WJyPV6SrQz/KaLAM=;
+ b=WO26Lk/satx/EJzOaHvYpkDRZZEDL+eXrsDfTu8Q0h2soAevFGYx1cV8uwMGTg7e6z
+ pGAGBugYt0Hw6kE3aQvttjKsaHN9/hn/WM35otWh6RWTDVUhTiwWNqNrR5O1TtEoDUcX
+ gwAxFEb70SVvCap4o6/dZoDAAmErmJTwP6NIY7qz5+N2U69ygV7ggG+sDMWCyrCydI6J
+ 4s/QTJ4qL9klNxyPjdFUJsAXmnx2mW/BoK2+tJyvGxm+gj1L1vYVebw5ii8UACjlcUnl
+ XTfzT8uFjHkalomwNK98v9sHqUuaaFFsyAjH4G6SnCU/zdP/39271xRd7jjFT8GPHhvg
+ GfOQ==
+X-Gm-Message-State: AOAM531SCeXxOCoxs7p7L13HfRg6+HadpF5sxZVdMd2eJGOfHjPeXHL2
+ hhGkFcyg1ff5kmR1Px6gsA5ntNLBURsvgkG8
+X-Google-Smtp-Source: ABdhPJzCa62kAiSj5dwvAhD+eWjgsemDiqG4ohfKFPsazH9lExZh5CateUK1KDaOpknKxeSQxHaBJA==
+X-Received: by 2002:a5d:69c2:: with SMTP id s2mr454259wrw.36.1610480536897;
+ Tue, 12 Jan 2021 11:42:16 -0800 (PST)
 Received: from f2.redhat.com (bzq-79-183-72-147.red.bezeqint.net.
  [79.183.72.147])
- by smtp.gmail.com with ESMTPSA id z63sm4885315wme.8.2021.01.12.11.42.10
+ by smtp.gmail.com with ESMTPSA id z63sm4885315wme.8.2021.01.12.11.42.13
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 12 Jan 2021 11:42:13 -0800 (PST)
+ Tue, 12 Jan 2021 11:42:16 -0800 (PST)
 From: Yuri Benditovich <yuri.benditovich@daynix.com>
 To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
  ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org, kafai@fb.com,
@@ -84,9 +84,9 @@ To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
  pabeni@redhat.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
  bpf@vger.kernel.org
-Subject: [RFC PATCH 6/7] tun: populate hash in virtio-net header when needed
-Date: Tue, 12 Jan 2021 21:41:42 +0200
-Message-Id: <20210112194143.1494-7-yuri.benditovich@daynix.com>
+Subject: [RFC PATCH 7/7] tun: report new tun feature IFF_HASH
+Date: Tue, 12 Jan 2021 21:41:43 +0200
+Message-Id: <20210112194143.1494-8-yuri.benditovich@daynix.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210112194143.1494-1-yuri.benditovich@daynix.com>
 References: <20210112194143.1494-1-yuri.benditovich@daynix.com>
@@ -108,72 +108,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-If the BPF program populated the hash in the skb the tun
-propagates the hash value and hash report type to the
-respective fields of virtio-net header.
+IFF_HASH feature indicates that the tun supports
+TUNSETHASHPOPULATION ioctl and can propagate the hash
+data to the virtio-net packet.
 
 Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
 ---
- drivers/net/tun.c | 25 ++++++++++++++++++++++---
- 1 file changed, 22 insertions(+), 3 deletions(-)
+ drivers/net/tun.c           | 2 +-
+ include/uapi/linux/if_tun.h | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/net/tun.c b/drivers/net/tun.c
-index 45f4f04a4a3e..214feb0b16fb 100644
+index 214feb0b16fb..b46aa8941a9d 100644
 --- a/drivers/net/tun.c
 +++ b/drivers/net/tun.c
-@@ -556,15 +556,20 @@ static u16 tun_ebpf_select_queue(struct tun_struct *tun, struct sk_buff *skb)
- {
- 	struct tun_prog *prog;
- 	u32 numqueues;
--	u16 ret = 0;
-+	u32 ret = 0;
+@@ -88,7 +88,7 @@ static void tun_default_link_ksettings(struct net_device *dev,
+ #define TUN_VNET_LE     0x80000000
+ #define TUN_VNET_BE     0x40000000
  
- 	numqueues = READ_ONCE(tun->numqueues);
- 	if (!numqueues)
- 		return 0;
+-#define TUN_FEATURES (IFF_NO_PI | IFF_ONE_QUEUE | IFF_VNET_HDR | \
++#define TUN_FEATURES (IFF_NO_PI | IFF_ONE_QUEUE | IFF_VNET_HDR | IFF_HASH |\
+ 		      IFF_MULTI_QUEUE | IFF_NAPI | IFF_NAPI_FRAGS)
  
- 	prog = rcu_dereference(tun->steering_prog);
--	if (prog)
-+	if (prog) {
- 		ret = bpf_prog_run_clear_cb(prog->prog, skb);
-+		if (tun->bpf_populates_hash) {
-+			*skb_hash_report_type(skb) = (__u8)(ret >> 16);
-+			ret &= 0xffff;
-+		}
-+	}
- 
- 	return ret % numqueues;
- }
-@@ -2062,6 +2067,7 @@ static ssize_t tun_put_user(struct tun_struct *tun,
- 
- 	if (vnet_hdr_sz) {
- 		struct virtio_net_hdr gso;
-+		__u16 extra_copy = 0;
- 
- 		if (iov_iter_count(iter) < vnet_hdr_sz)
- 			return -EINVAL;
-@@ -2085,7 +2091,20 @@ static ssize_t tun_put_user(struct tun_struct *tun,
- 		if (copy_to_iter(&gso, sizeof(gso), iter) != sizeof(gso))
- 			return -EFAULT;
- 
--		iov_iter_advance(iter, vnet_hdr_sz - sizeof(gso));
-+		if (tun->bpf_populates_hash &&
-+		    vnet_hdr_sz >= sizeof(struct virtio_net_hdr_v1_hash)) {
-+			struct virtio_net_hdr_v1_hash hdr;
-+
-+			hdr.hdr.num_buffers = 0;
-+			hdr.hash_value = cpu_to_le32(skb_get_hash(skb));
-+			hdr.hash_report = cpu_to_le16(*skb_hash_report_type(skb));
-+			hdr.padding = 0;
-+			extra_copy = sizeof(hdr) - sizeof(gso);
-+			if (copy_to_iter(&hdr.hdr.num_buffers, extra_copy, iter) != extra_copy)
-+				return -EFAULT;
-+		}
-+
-+		iov_iter_advance(iter, vnet_hdr_sz - sizeof(gso) - extra_copy);
- 	}
- 
- 	if (vlan_hlen) {
+ #define GOODCOPY_LEN 128
+diff --git a/include/uapi/linux/if_tun.h b/include/uapi/linux/if_tun.h
+index 0fd43533da26..116b84ede3a0 100644
+--- a/include/uapi/linux/if_tun.h
++++ b/include/uapi/linux/if_tun.h
+@@ -73,6 +73,7 @@
+ #define IFF_ONE_QUEUE	0x2000
+ #define IFF_VNET_HDR	0x4000
+ #define IFF_TUN_EXCL	0x8000
++#define IFF_HASH	0x0080
+ #define IFF_MULTI_QUEUE 0x0100
+ #define IFF_ATTACH_QUEUE 0x0200
+ #define IFF_DETACH_QUEUE 0x0400
 -- 
 2.17.1
 
