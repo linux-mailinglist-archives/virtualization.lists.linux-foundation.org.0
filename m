@@ -2,92 +2,92 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 424402F32BF
-	for <lists.virtualization@lfdr.de>; Tue, 12 Jan 2021 15:16:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C23782F3ABC
+	for <lists.virtualization@lfdr.de>; Tue, 12 Jan 2021 20:42:01 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 974F48668A;
-	Tue, 12 Jan 2021 14:16:34 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1796E86004;
+	Tue, 12 Jan 2021 19:42:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PYPB4dclP96X; Tue, 12 Jan 2021 14:16:31 +0000 (UTC)
+	with ESMTP id 8YOGdFJvJq6t; Tue, 12 Jan 2021 19:41:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 5AEB686726;
-	Tue, 12 Jan 2021 14:16:31 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3F65985FED;
+	Tue, 12 Jan 2021 19:41:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 40753C0893;
-	Tue, 12 Jan 2021 14:16:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 221E4C013A;
+	Tue, 12 Jan 2021 19:41:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A34F6C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 53065C013A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 14:16:29 +0000 (UTC)
+ Tue, 12 Jan 2021 19:41:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 6966D203B2
+ by whitealder.osuosl.org (Postfix) with ESMTP id 3338F85F96
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 14:16:29 +0000 (UTC)
+ Tue, 12 Jan 2021 19:41:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SkxHTzWl25m9
+ with ESMTP id bsyhA4Oag4dz
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 14:16:27 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
- [209.85.221.42])
- by silver.osuosl.org (Postfix) with ESMTPS id 9314920363
+ Tue, 12 Jan 2021 19:41:56 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 5E92C85C20
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 14:16:26 +0000 (UTC)
-Received: by mail-wr1-f42.google.com with SMTP id w5so2634387wrm.11
+ Tue, 12 Jan 2021 19:41:56 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id r4so3221078wmh.5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 06:16:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=Prnr0+6Urue1zAMiVvDW0sUf6OaDts+n+p+OkRBVM10=;
- b=jmtvoPOohzNYhniuBZhlVYp0Z1JPk5R2SANyv/ncOb7eU8f8H4i+SJKxVzstRypyL/
- T85MtZn0vIsR19oP3kne7AVEMgUpm+p1zy95vMtfJtyBLZSKOUD4Bp7mC8iOV9hWcU1C
- ABndfuHaJPDJBwwsWwViDHhR6MYYdmlMWJVQ8=
+ Tue, 12 Jan 2021 11:41:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=from:to:cc:subject:date:message-id;
+ bh=9oioH7fTimHXbwiOIluI6SOkD883+857JncYScStEP4=;
+ b=JmO6IQKgjQY+7ho4ih3Bdmj0eRPnup/UlujCGZhO4AJhanp3QH0J71/SQjiI8RlftE
+ LxVkn1U86G3tkyTL1V1ekzv7AG4aQUuBC1r0RvRBoERwudQRkTXIem4aavnr56WrANo8
+ gOtBpR9pRxwKu1xDJhfk/82GSYbgzv2ibgNt5w0f4THTbGm6h2zSgqNsqz15NEjpA55j
+ jhso19OBmu3jzIh6d8tb1TXJSzru4eS/fD3T3nWv1umUB8RNCOvvnnPdOKeCNLkCN3mh
+ BIGrXTEThybGX1OaJSNIbNpsSW/dNQUVwxByoyviBmYkIkBVcUXJ03lrcjitMvDn4T//
+ igkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=Prnr0+6Urue1zAMiVvDW0sUf6OaDts+n+p+OkRBVM10=;
- b=edoFH5xNXSpYed06opB45l2dgeln3ynZ9EoqPBbAb7UufCGI9T9FbjsLQkG2S+zFw2
- Nokr3hX5zpLD+dP/FDOGRxm3MpIDT3bPDYTgvTCQeIdyn25r4YSIZugd5Fk6xT7DJBLv
- 1ytmyoVnBB/lvcxktl+ekiJZ6XdM8T7SrP2J1m1B675sbgowhh00SBFI/INBE/Q45uvu
- EBOt1oV4GmZo3LDExV7G90ekW6Bcq63U+yXLH0gXY8IHSTe6EdBzKdzQdIICN1hk5XEl
- y7QcIpEepyurfKXV1xN3154oUVVnrzp7ZKbJRxsWvGocFGxuMUVJb5WCeMs+9Ulrgn6Z
- SoTQ==
-X-Gm-Message-State: AOAM531xMAo2kqdA5h2tz8GfbedCJ7FuQUDD+1llvWwDYQ1sR2bsF5tj
- Aoyfi2nRY6JZ/BLFcCJ+Qy/FZQ==
-X-Google-Smtp-Source: ABdhPJwh+DTohrD8kLI6DhEiy6OafV9c6n0LcEPUIeOBGEyStkhQTddGcY9cuzkMqf/zCUf356YwEw==
-X-Received: by 2002:a5d:40ce:: with SMTP id b14mr4533605wrq.350.1610460984751; 
- Tue, 12 Jan 2021 06:16:24 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id w8sm5149155wrl.91.2021.01.12.06.16.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Jan 2021 06:16:23 -0800 (PST)
-Date: Tue, 12 Jan 2021 15:16:21 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH v4 04/13] drm/shmem-helper: Provide a vmap function for
- short-term mappings
-Message-ID: <X/2vNTyVUyGTp5eI@phenom.ffwll.local>
-References: <20210108094340.15290-1-tzimmermann@suse.de>
- <20210108094340.15290-5-tzimmermann@suse.de>
- <X/yB3LC79f/zWTwG@phenom.ffwll.local>
- <8d81f20b-3dc1-475b-2ee5-cff901db33c5@suse.de>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <8d81f20b-3dc1-475b-2ee5-cff901db33c5@suse.de>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-Cc: sean@poorly.run, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org,
- hdegoede@redhat.com, Daniel Vetter <daniel@ffwll.ch>, airlied@redhat.com,
- sam@ravnborg.org, christian.koenig@amd.com, linux-media@vger.kernel.org
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=9oioH7fTimHXbwiOIluI6SOkD883+857JncYScStEP4=;
+ b=hZTZZh5CWpFCXdrf4jvH+NDbcmCIg+prjXvc8myp9UlRNkEFHSyFJY9bqyeLfPUm+V
+ MEiDQIarmlLnd6X5V2wEJHRFU7a5Az6+MZIMpVa8bOWWtWJKXR2s5e+KDtbJrKqkKT2K
+ EPBPpjDsXq2CMJL+wTxdMQpi7ht+aOCAPXiXqgNYBSCb0DxezHGCekCU6FAiLDRk1Llv
+ sivgl1WXpLHEkLk4OtSGoRqz3xelQZpXvEzVNfBjzJ5vgEYl6MkbOvTWU87sBCVP1k6w
+ b60V9T7lholWtqg39eQw66SshtwzHk1dyEpXohVpsnOMocqAAVVk6BspDI87YVUvV8HR
+ lSWw==
+X-Gm-Message-State: AOAM5309B+Z2r459lEZJe7samOFBI4u7AW0NGEBCCU6nXHbBtRdSWkzs
+ P4FHyAau3ZPUMJ9+8YrFl6lndQ==
+X-Google-Smtp-Source: ABdhPJxLSdWWpfIxaQGNHeFfQoIuyfHcKNbVYBL99mebz4m6+1+6/6514Is75EyggDSS6XrPJMXKGw==
+X-Received: by 2002:a1c:b742:: with SMTP id h63mr780567wmf.122.1610480514861; 
+ Tue, 12 Jan 2021 11:41:54 -0800 (PST)
+Received: from f2.redhat.com (bzq-79-183-72-147.red.bezeqint.net.
+ [79.183.72.147])
+ by smtp.gmail.com with ESMTPSA id z63sm4885315wme.8.2021.01.12.11.41.51
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 12 Jan 2021 11:41:54 -0800 (PST)
+From: Yuri Benditovich <yuri.benditovich@daynix.com>
+To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
+ ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org, kafai@fb.com,
+ songliubraving@fb.com, yhs@fb.com, john.fastabend@gmail.com,
+ kpsingh@kernel.org, rdunlap@infradead.org, willemb@google.com,
+ gustavoars@kernel.org, herbert@gondor.apana.org.au,
+ steffen.klassert@secunet.com, nogikh@google.com, pablo@netfilter.org,
+ decui@microsoft.com, cai@lca.pw, jakub@cloudflare.com, elver@google.com,
+ pabeni@redhat.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ bpf@vger.kernel.org
+Subject: [RFC PATCH 0/7] Support for virtio-net hash reporting
+Date: Tue, 12 Jan 2021 21:41:36 +0200
+Message-Id: <20210112194143.1494-1-yuri.benditovich@daynix.com>
+X-Mailer: git-send-email 2.17.1
+Cc: yan@daynix.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,363 +99,54 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jan 12, 2021 at 02:11:24PM +0100, Thomas Zimmermann wrote:
-> Hi
-> =
+Existing TUN module is able to use provided "steering eBPF" to
+calculate per-packet hash and derive the destination queue to
+place the packet to. The eBPF uses mapped configuration data
+containing a key for hash calculation and indirection table
+with array of queues' indices.
 
-> Am 11.01.21 um 17:50 schrieb Daniel Vetter:
-> > On Fri, Jan 08, 2021 at 10:43:31AM +0100, Thomas Zimmermann wrote:
-> > > Implementations of the vmap/vunmap GEM callbacks may perform pinning
-> > > of the BO and may acquire the associated reservation object's lock.
-> > > Callers that only require a mapping of the contained memory can thus
-> > > interfere with other tasks that require exact pinning, such as scanou=
-t.
-> > > This is less of an issue with private SHMEM buffers, but may happen
-> > > with imported ones.
-> > > =
+This series of patches adds support for virtio-net hash reporting
+feature as defined in virtio specification. It extends the TUN module
+and the "steering eBPF" as follows:
 
-> > > Therefore provide the new interfaces drm_gem_shmem_vmap_local() and
-> > > drm_gem_shmem_vunmap_local(), which only perform the vmap/vunmap
-> > > operations. Callers have to hold the reservation lock while the mappi=
-ng
-> > > persists.
-> > > =
+Extended steering eBPF calculates the hash value and hash type, keeps
+hash value in the skb->hash and returns index of destination virtqueue
+and the type of the hash. TUN module keeps returned hash type in
+(currently unused) field of the skb. 
+skb->__unused renamed to 'hash_report_type'.
 
-> > > This patch also connects GEM SHMEM helpers to GEM object functions wi=
-th
-> > > equivalent functionality.
-> > > =
+When TUN module is called later to allocate and fill the virtio-net
+header and push it to destination virtqueue it populates the hash
+and the hash type into virtio-net header.
 
-> > > v4:
-> > > 	* call dma_buf_{vmap,vunmap}_local() where necessary (Daniel)
-> > > 	* move driver changes into separate patches (Daniel)
-> > > =
+VHOST driver is made aware of respective virtio-net feature that
+extends the virtio-net header to report the hash value and hash report
+type.
 
-> > > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> > > ---
-> > >   drivers/gpu/drm/drm_gem_shmem_helper.c | 90 +++++++++++++++++++++++=
----
-> > >   include/drm/drm_gem_shmem_helper.h     |  2 +
-> > >   2 files changed, 84 insertions(+), 8 deletions(-)
-> > > =
+Yuri Benditovich (7):
+  skbuff: define field for hash report type
+  vhost: support for hash report virtio-net feature
+  tun: allow use of BPF_PROG_TYPE_SCHED_CLS program type
+  tun: free bpf_program by bpf_prog_put instead of bpf_prog_destroy
+  tun: add ioctl code TUNSETHASHPOPULATION
+  tun: populate hash in virtio-net header when needed
+  tun: report new tun feature IFF_HASH
 
-> > > diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm=
-/drm_gem_shmem_helper.c
-> > > index 9825c378dfa6..298832b2b43b 100644
-> > > --- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-> > > +++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> > > @@ -32,6 +32,8 @@ static const struct drm_gem_object_funcs drm_gem_sh=
-mem_funcs =3D {
-> > >   	.get_sg_table =3D drm_gem_shmem_get_sg_table,
-> > >   	.vmap =3D drm_gem_shmem_vmap,
-> > >   	.vunmap =3D drm_gem_shmem_vunmap,
-> > > +	.vmap_local =3D drm_gem_shmem_vmap_local,
-> > > +	.vunmap_local =3D drm_gem_shmem_vunmap_local,
-> > >   	.mmap =3D drm_gem_shmem_mmap,
-> > >   };
-> > > @@ -261,7 +263,8 @@ void drm_gem_shmem_unpin(struct drm_gem_object *o=
-bj)
-> > >   }
-> > >   EXPORT_SYMBOL(drm_gem_shmem_unpin);
-> > > -static int drm_gem_shmem_vmap_locked(struct drm_gem_shmem_object *sh=
-mem, struct dma_buf_map *map)
-> > > +static int drm_gem_shmem_vmap_locked(struct drm_gem_shmem_object *sh=
-mem, struct dma_buf_map *map,
-> > > +				     bool local)
-> > =
+ drivers/net/tun.c           | 43 +++++++++++++++++++++++++++++++------
+ drivers/vhost/net.c         | 37 ++++++++++++++++++++++++-------
+ include/linux/skbuff.h      |  7 +++++-
+ include/uapi/linux/if_tun.h |  2 ++
+ 4 files changed, 74 insertions(+), 15 deletions(-)
 
-> > This is a bit spaghetti and also has the problem that we're not changing
-> > shmem->vmap_use_count under different locks, depending upon which path
-> > we're taking.
-> > =
+-- 
+2.17.1
 
-> > I think the cleanest would be if we pull the if (import_attach) case out
-> > of the _locked() version completely, for all cases, and also outside of
-> > the shmem->vmap_lock. This means no caching of vmaps in the shmem layer
-> > anymore for imported buffers, but this is no longer a problem: We cache
-> > them in the exporters instead (I think at least, if not maybe need to f=
-ix
-> > that where it's expensive).
-> =
-
-> If we do that, what protects shmem->vaddr from concurrent access near line
-> 281? would it be kept NULL then?
-> =
-
-> Also, we have some stats in debugfs (see drm_gem_shmem_print_info) which
-> would be incorrect (or misleading at least).
-
-We'd need to disable all that for pass-through vmap of imported objects.
-
-> Given all that, would it be possible to remove vmap_lock in favor of taki=
-ng
-> the resv lock in vmap/vunmap?
-
-All possible (and imo long-term desirable), the trouble is in rolling it
-out. I've looked at rolling out dma_resv as the one and only lock for
-shmem helpers before, and gave up. Exynos is the worst (but not the only)
-offender:
-- it has it's own per-object lock
-- that per-object lock is taken most often before calling into various
-  vfuncs, which means for a gradual transition the dma_resv lock would
-  nest within that existing per-object lock (until we've completely
-  replaced it)
-- but exynos also uses dma_resv already as an outermost lock in its
-  command submission path
-
-iow as soon as you add dma_resv_lock anywhere in shmem helpers, we've
-angered lockdep with a deadlock.
-
-That means the only path I think is feasible is adding dma_resv lock to
-all drivers paths first, _outside_ of any existing driver specific
-per-object locks. Then remove the driver-specific object locks, and only
-then can we sprinkle dma_resv_assert_locked all over shmem helpers.
-
-Ofc any driver without per-driver locks of their own could directly switch
-over to dma_resv lock, but until we've converted over all the drivers with
-their own locking shmem helpers would be stuck where they are right now.
-
-I gave up :-/ But maybe if you only try to tackle vmap it might be
-feasible, since a lot fewer callers.
-
-Cheers, Daniel
-
-> =
-
-> Best regards
-> Thomas
-> =
-
-> > =
-
-> > Other option would be to unly pull it out for the _vmap_local case, but
-> > that's a bit ugly because no longer symmetrical in the various paths.
-> > =
-
-> > >   {
-> > >   	struct drm_gem_object *obj =3D &shmem->base;
-> > >   	int ret =3D 0;
-> > > @@ -272,7 +275,10 @@ static int drm_gem_shmem_vmap_locked(struct drm_=
-gem_shmem_object *shmem, struct
-> > >   	}
-> > >   	if (obj->import_attach) {
-> > > -		ret =3D dma_buf_vmap(obj->import_attach->dmabuf, map);
-> > > +		if (local)
-> > > +			ret =3D dma_buf_vmap_local(obj->import_attach->dmabuf, map);
-> > > +		else
-> > > +			ret =3D dma_buf_vmap(obj->import_attach->dmabuf, map);
-> > >   		if (!ret) {
-> > >   			if (WARN_ON(map->is_iomem)) {
-> > >   				ret =3D -EIO;
-> > > @@ -313,7 +319,7 @@ static int drm_gem_shmem_vmap_locked(struct drm_g=
-em_shmem_object *shmem, struct
-> > >   	return ret;
-> > >   }
-> > > -/*
-> > > +/**
-> > >    * drm_gem_shmem_vmap - Create a virtual mapping for a shmem GEM ob=
-ject
-> > >    * @shmem: shmem GEM object
-> > >    * @map: Returns the kernel virtual address of the SHMEM GEM object=
-'s backing
-> > > @@ -339,15 +345,53 @@ int drm_gem_shmem_vmap(struct drm_gem_object *o=
-bj, struct dma_buf_map *map)
-> > >   	ret =3D mutex_lock_interruptible(&shmem->vmap_lock);
-> > >   	if (ret)
-> > >   		return ret;
-> > > -	ret =3D drm_gem_shmem_vmap_locked(shmem, map);
-> > > +	ret =3D drm_gem_shmem_vmap_locked(shmem, map, false);
-> > >   	mutex_unlock(&shmem->vmap_lock);
-> > >   	return ret;
-> > >   }
-> > >   EXPORT_SYMBOL(drm_gem_shmem_vmap);
-> > > +/**
-> > > + * drm_gem_shmem_vmap_local - Create a virtual mapping for a shmem G=
-EM object
-> > > + * @shmem: shmem GEM object
-> > > + * @map: Returns the kernel virtual address of the SHMEM GEM object'=
-s backing
-> > > + *       store.
-> > > + *
-> > > + * This function makes sure that a contiguous kernel virtual address=
- mapping
-> > > + * exists for the buffer backing the shmem GEM object.
-> > > + *
-> > > + * The function is called with the BO's reservation object locked. C=
-allers must
-> > > + * hold the lock until after unmapping the buffer.
-> > > + *
-> > > + * This function can be used to implement &drm_gem_object_funcs.vmap=
-_local. But
-> > > + * it can also be called by drivers directly, in which case it will =
-hide the
-> > > + * differences between dma-buf imported and natively allocated objec=
-ts.
-> > =
-
-> > So for the other callbacks I tried to make sure we have different entry
-> > points for this, since it's not really the same thing and because of the
-> > locking mess we have with dma_resv_lock vs various pre-existing local
-> > locking scheme, it's easy to get a mess.
-> > =
-
-> > I think the super clean version here would be to also export just the
-> > internal stuff for the ->v(un)map_local hooks, but that's maybe a bit t=
-oo
-> > much boilerplate for no real gain.
-> > -Daniel
-> > =
-
-> > > + *
-> > > + * Acquired mappings should be cleaned up by calling drm_gem_shmem_v=
-unmap_local().
-> > > + *
-> > > + * Returns:
-> > > + * 0 on success or a negative error code on failure.
-> > > + */
-> > > +int drm_gem_shmem_vmap_local(struct drm_gem_object *obj, struct dma_=
-buf_map *map)
-> > > +{
-> > > +	struct drm_gem_shmem_object *shmem =3D to_drm_gem_shmem_obj(obj);
-> > > +	int ret;
-> > > +
-> > > +	dma_resv_assert_held(obj->resv);
-> > > +
-> > > +	ret =3D mutex_lock_interruptible(&shmem->vmap_lock);
-> > > +	if (ret)
-> > > +		return ret;
-> > > +	ret =3D drm_gem_shmem_vmap_locked(shmem, map, true);
-> > > +	mutex_unlock(&shmem->vmap_lock);
-> > > +
-> > > +	return ret;
-> > > +}
-> > > +EXPORT_SYMBOL(drm_gem_shmem_vmap_local);
-> > > +
-> > >   static void drm_gem_shmem_vunmap_locked(struct drm_gem_shmem_object=
- *shmem,
-> > > -					struct dma_buf_map *map)
-> > > +					struct dma_buf_map *map, bool local)
-> > >   {
-> > >   	struct drm_gem_object *obj =3D &shmem->base;
-> > > @@ -358,7 +402,10 @@ static void drm_gem_shmem_vunmap_locked(struct d=
-rm_gem_shmem_object *shmem,
-> > >   		return;
-> > >   	if (obj->import_attach)
-> > > -		dma_buf_vunmap(obj->import_attach->dmabuf, map);
-> > > +		if (local)
-> > > +			dma_buf_vunmap_local(obj->import_attach->dmabuf, map);
-> > > +		else
-> > > +			dma_buf_vunmap(obj->import_attach->dmabuf, map);
-> > >   	else
-> > >   		vunmap(shmem->vaddr);
-> > > @@ -366,7 +413,7 @@ static void drm_gem_shmem_vunmap_locked(struct dr=
-m_gem_shmem_object *shmem,
-> > >   	drm_gem_shmem_put_pages(shmem);
-> > >   }
-> > > -/*
-> > > +/**
-> > >    * drm_gem_shmem_vunmap - Unmap a virtual mapping fo a shmem GEM ob=
-ject
-> > >    * @shmem: shmem GEM object
-> > >    * @map: Kernel virtual address where the SHMEM GEM object was mapp=
-ed
-> > > @@ -384,11 +431,38 @@ void drm_gem_shmem_vunmap(struct drm_gem_object=
- *obj, struct dma_buf_map *map)
-> > >   	struct drm_gem_shmem_object *shmem =3D to_drm_gem_shmem_obj(obj);
-> > >   	mutex_lock(&shmem->vmap_lock);
-> > > -	drm_gem_shmem_vunmap_locked(shmem, map);
-> > > +	drm_gem_shmem_vunmap_locked(shmem, map, false);
-> > >   	mutex_unlock(&shmem->vmap_lock);
-> > >   }
-> > >   EXPORT_SYMBOL(drm_gem_shmem_vunmap);
-> > > +/**
-> > > + * drm_gem_shmem_vunmap_local - Unmap a virtual mapping fo a shmem G=
-EM object
-> > > + * @shmem: shmem GEM object
-> > > + * @map: Kernel virtual address where the SHMEM GEM object was mapped
-> > > + *
-> > > + * This function cleans up a kernel virtual address mapping acquired=
- by
-> > > + * drm_gem_shmem_vmap_local(). The mapping is only removed when the =
-use count
-> > > + * drops to zero.
-> > > + *
-> > > + * The function is called with the BO's reservation object locked.
-> > > + *
-> > > + * This function can be used to implement &drm_gem_object_funcs.vmap=
-_local.
-> > > + * But it can also be called by drivers directly, in which case it w=
-ill hide
-> > > + * the differences between dma-buf imported and natively allocated o=
-bjects.
-> > > + */
-> > > +void drm_gem_shmem_vunmap_local(struct drm_gem_object *obj, struct d=
-ma_buf_map *map)
-> > > +{
-> > > +	struct drm_gem_shmem_object *shmem =3D to_drm_gem_shmem_obj(obj);
-> > > +
-> > > +	dma_resv_assert_held(obj->resv);
-> > > +
-> > > +	mutex_lock(&shmem->vmap_lock);
-> > > +	drm_gem_shmem_vunmap_locked(shmem, map, true);
-> > > +	mutex_unlock(&shmem->vmap_lock);
-> > > +}
-> > > +EXPORT_SYMBOL(drm_gem_shmem_vunmap_local);
-> > > +
-> > >   struct drm_gem_shmem_object *
-> > >   drm_gem_shmem_create_with_handle(struct drm_file *file_priv,
-> > >   				 struct drm_device *dev, size_t size,
-> > > diff --git a/include/drm/drm_gem_shmem_helper.h b/include/drm/drm_gem=
-_shmem_helper.h
-> > > index 434328d8a0d9..3f59bdf749aa 100644
-> > > --- a/include/drm/drm_gem_shmem_helper.h
-> > > +++ b/include/drm/drm_gem_shmem_helper.h
-> > > @@ -114,7 +114,9 @@ void drm_gem_shmem_put_pages(struct drm_gem_shmem=
-_object *shmem);
-> > >   int drm_gem_shmem_pin(struct drm_gem_object *obj);
-> > >   void drm_gem_shmem_unpin(struct drm_gem_object *obj);
-> > >   int drm_gem_shmem_vmap(struct drm_gem_object *obj, struct dma_buf_m=
-ap *map);
-> > > +int drm_gem_shmem_vmap_local(struct drm_gem_object *obj, struct dma_=
-buf_map *map);
-> > >   void drm_gem_shmem_vunmap(struct drm_gem_object *obj, struct dma_bu=
-f_map *map);
-> > > +void drm_gem_shmem_vunmap_local(struct drm_gem_object *obj, struct d=
-ma_buf_map *map);
-> > >   int drm_gem_shmem_madvise(struct drm_gem_object *obj, int madv);
-> > > -- =
-
-> > > 2.29.2
-> > > =
-
-> > =
-
-> =
-
-> -- =
-
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
-> (HRB 36809, AG N=FCrnberg)
-> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
-> =
-
-
-
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
