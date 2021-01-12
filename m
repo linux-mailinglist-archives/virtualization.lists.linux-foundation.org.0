@@ -1,78 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD6152F3B5E
-	for <lists.virtualization@lfdr.de>; Tue, 12 Jan 2021 21:06:56 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8ABEE2F3B67
+	for <lists.virtualization@lfdr.de>; Tue, 12 Jan 2021 21:11:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C7AF1203C4;
-	Tue, 12 Jan 2021 20:06:54 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id D6A7087014;
+	Tue, 12 Jan 2021 20:11:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vahidn0S3spW; Tue, 12 Jan 2021 20:06:52 +0000 (UTC)
+	with ESMTP id 3EF6EfyNahPu; Tue, 12 Jan 2021 20:11:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 7817E20459;
-	Tue, 12 Jan 2021 20:06:52 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 575938702B;
+	Tue, 12 Jan 2021 20:11:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B380C08A1;
-	Tue, 12 Jan 2021 20:06:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 35F03C013A;
+	Tue, 12 Jan 2021 20:11:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 79539C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8CDB9C013A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:50 +0000 (UTC)
+ Tue, 12 Jan 2021 20:11:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 4E75A2044D
+ by whitealder.osuosl.org (Postfix) with ESMTP id 81A738575A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:48 +0000 (UTC)
+ Tue, 12 Jan 2021 20:11:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id isXy-pH0PDUi
+ with ESMTP id hRjUpvKLL6Cx
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:47 +0000 (UTC)
-X-Greylist: delayed 00:18:54 by SQLgrey-1.7.6
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
- [209.85.208.46])
- by silver.osuosl.org (Postfix) with ESMTPS id 262A420354
+ Tue, 12 Jan 2021 20:11:01 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
+ [209.85.218.53])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 948B18527D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 20:06:47 +0000 (UTC)
-Received: by mail-ed1-f46.google.com with SMTP id g24so3736641edw.9
+ Tue, 12 Jan 2021 20:11:01 +0000 (UTC)
+Received: by mail-ej1-f53.google.com with SMTP id ga15so5309210ejb.4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Jan 2021 12:06:47 -0800 (PST)
+ Tue, 12 Jan 2021 12:11:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=daynix-com.20150623.gappssmtp.com; s=20150623;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=RENS1yiCoqDoLkKN/GRTnjThUIFO+qOBX6TnsDEXMJ4=;
- b=M/GX6JJ7p2H2eTx80N54RrcrNovJmEJksJOoBQDaMLSzid6cmcZm7fhz67QqX1fL5P
- IdT39n+3quPjJon55Yrm52XJi48JC4N264PIWrap0CYeK86yDZZ+zEJcTwiKudRaOcu3
- wXoQ+xjsPaLtUxHrXSVu9o7ZzQRgJuokj+6KBtBcm0Zx+B7h8aZiYqFXJ3KjMQQyb1JP
- VOmGW/qJxnsFSZUkpX//QYy9P3sHgwODGlbccFdfwVkGYWPx3MNPz+nieZ4tlIyY6yLl
- osKVjKeNCMT8VtZGL5mmwM64fXLfHfr+b+cGMxg0fdz/BywiQ1W/2QgZOf6jp8KNqTTi
- Chyw==
+ bh=u0kBDkZSof0LwbMWuYCOPhj4hHVMvwb36KmGU51ii7Y=;
+ b=qXPm6RRC85TTK9KaSiUv157OWNC4uLnK5R55zCcddSz/OH6u6hYx1S9F76b6fwU3/m
+ L5598+Ur8w96+Gg+RoiczvrXtQYRI8O+fGupwlj+IkNmOGSHUsW9Tf1BtX3kiNe71Rgx
+ WKTBblBdOSXaDLvovQo/HLN7qCMsRVlCKSDg9YBktWJQB59pnUT8dN+HdiYyVYBkhQuJ
+ CvKCRk6Kcw/A1SvK/Qud7BzT6mgq06tzFkvkVxffAFW66gfIBLQhmu6VrRnGc6K1j6UJ
+ Fl4DWwsqoJ4iK+vFlmlYQCh6SYdu4g5kQNpVx2IBQVS/3tq45sNhLUGPnbg8Ifcy6piT
+ l22A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=RENS1yiCoqDoLkKN/GRTnjThUIFO+qOBX6TnsDEXMJ4=;
- b=lBkxaxKMedJRliUA3vuEPvy9vi73ejeA3ou+b6A1Uw/MCyn2N8lNuyhIlx4xGED5g0
- ASNcENsmLJN7Tozp5CJldcrH6FHteAsRKmSGKkGtise1ViZ2dPAUqNif1I9wi710Sgm6
- DOzQ9JjD7mjojpuP1uh9mP5pnCYR7Ta8IP17BmYuH48kbHvupbSu8+odwLNOYtaZDOHX
- h24HjoBKCJe6Gh1e2m2xw+5R6dBDJeWG9kLh6qYQ8T/PusMkyeF1CPpoWiZIbt1WMWEe
- TaKa3thZA4MhyM9ZRdCtofERwRbw4W8vt3fwTQ7yNNUPhEWkXvSR6KqVse4l9Iog6gFp
- Na/Q==
-X-Gm-Message-State: AOAM530ENhsPORPpEYILV9YdEztek9oAH0rI6Pz+UTwNJ2rWiQ1Bkpo3
- s5j93/YJOfOn8cKq/pH5mlE8LOE1wXUNa2Wc
-X-Google-Smtp-Source: ABdhPJy88KkYeCfk/twqMv7qxLAVLrtcCRDSJ2F4RxIb3LJRD8cqoUZ55scrlMHcmG48qxh7J7CDhQ==
-X-Received: by 2002:a5d:604b:: with SMTP id j11mr437008wrt.406.1610480524252; 
- Tue, 12 Jan 2021 11:42:04 -0800 (PST)
+ bh=u0kBDkZSof0LwbMWuYCOPhj4hHVMvwb36KmGU51ii7Y=;
+ b=uFGaulJ7EXtQ29Tb24R/q93u3sXqDloSuWEUstxPZZe7mVvG+5Z2OYZrE77onkV1NY
+ yTej+0TkdMxf/odK7u3bIXU+RklttCXzPELA1oxQvcJtn3IGBO3sFX0VJ6/8Xp2QTgod
+ lsyxcDGd9piXWJT9m4bnBH6xIGncWQGHzUPkwGyNPEk/rKJofgnFkrnW+n5izyFYmLhw
+ CeVHe8RN5sfoI7dU8Dbk7OYtSxHuFARXMB5i5nDna6SWk/ESrqlHZhrH84qjG8x6S9kT
+ OBPrYIp7itkjLuWEoydoKzJIQVIq8hLEr/DUyCCviCFVx2jwJ1USlN6UyXlGF29nvmA/
+ oNCw==
+X-Gm-Message-State: AOAM531mCcNfjqETU5gR9OMrYCxCPNomvK0FlMjivkRlo6yceOLM4N+A
+ /Vm7zWgrPIDx3BhWFa1IMJa1ZpdCa1yFTQnu
+X-Google-Smtp-Source: ABdhPJwQIJTkLLUDMFNxy3mBWVt2sZtp82KzceRnAi/2Dy2UB4frEHQodHJV577V0ALRuxgqVPsWHg==
+X-Received: by 2002:a5d:674b:: with SMTP id l11mr423783wrw.247.1610480527197; 
+ Tue, 12 Jan 2021 11:42:07 -0800 (PST)
 Received: from f2.redhat.com (bzq-79-183-72-147.red.bezeqint.net.
  [79.183.72.147])
- by smtp.gmail.com with ESMTPSA id z63sm4885315wme.8.2021.01.12.11.42.01
+ by smtp.gmail.com with ESMTPSA id z63sm4885315wme.8.2021.01.12.11.42.04
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 12 Jan 2021 11:42:03 -0800 (PST)
+ Tue, 12 Jan 2021 11:42:06 -0800 (PST)
 From: Yuri Benditovich <yuri.benditovich@daynix.com>
 To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
  ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org, kafai@fb.com,
@@ -84,9 +84,10 @@ To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
  pabeni@redhat.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
  bpf@vger.kernel.org
-Subject: [RFC PATCH 3/7] tun: allow use of BPF_PROG_TYPE_SCHED_CLS program type
-Date: Tue, 12 Jan 2021 21:41:39 +0200
-Message-Id: <20210112194143.1494-4-yuri.benditovich@daynix.com>
+Subject: [RFC PATCH 4/7] tun: free bpf_program by bpf_prog_put instead of
+ bpf_prog_destroy
+Date: Tue, 12 Jan 2021 21:41:40 +0200
+Message-Id: <20210112194143.1494-5-yuri.benditovich@daynix.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210112194143.1494-1-yuri.benditovich@daynix.com>
 References: <20210112194143.1494-1-yuri.benditovich@daynix.com>
@@ -108,27 +109,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This program type can set skb hash value. It will be useful
-when the tun will support hash reporting feature if virtio-net.
+The module never creates the bpf program with bpf_prog_create
+so it shouldn't free it with bpf_prog_destroy.
+The program is obtained by bpf_prog_get and should be freed
+by bpf_prog_put. For BPF_PROG_TYPE_SOCKET_FILTER both
+methods do the same but for other program types they don't.
 
 Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
 ---
- drivers/net/tun.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/net/tun.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/net/tun.c b/drivers/net/tun.c
-index 7959b5c2d11f..455f7afc1f36 100644
+index 455f7afc1f36..18c1baf1a6c1 100644
 --- a/drivers/net/tun.c
 +++ b/drivers/net/tun.c
-@@ -2981,6 +2981,8 @@ static int tun_set_ebpf(struct tun_struct *tun, struct tun_prog __rcu **prog_p,
- 		prog = NULL;
- 	} else {
- 		prog = bpf_prog_get_type(fd, BPF_PROG_TYPE_SOCKET_FILTER);
-+		if (IS_ERR(prog))
-+			prog = bpf_prog_get_type(fd, BPF_PROG_TYPE_SCHED_CLS);
- 		if (IS_ERR(prog))
- 			return PTR_ERR(prog);
- 	}
+@@ -2218,7 +2218,7 @@ static void tun_prog_free(struct rcu_head *rcu)
+ {
+ 	struct tun_prog *prog = container_of(rcu, struct tun_prog, rcu);
+ 
+-	bpf_prog_destroy(prog->prog);
++	bpf_prog_put(prog->prog);
+ 	kfree(prog);
+ }
+ 
 -- 
 2.17.1
 
