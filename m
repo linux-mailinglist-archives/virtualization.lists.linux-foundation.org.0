@@ -1,90 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB86E2FC578
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 01:15:01 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4281C2FC607
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 01:45:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BEAAC86F99;
-	Wed, 20 Jan 2021 00:14:59 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id F396A859D6;
+	Wed, 20 Jan 2021 00:45:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zJEJK9Ksj4o2; Wed, 20 Jan 2021 00:14:56 +0000 (UTC)
+	with ESMTP id 0iqGRZYmQM5i; Wed, 20 Jan 2021 00:45:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 136BB86FA1;
-	Wed, 20 Jan 2021 00:14:56 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A102D85C11;
+	Wed, 20 Jan 2021 00:45:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DE039C013A;
-	Wed, 20 Jan 2021 00:14:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8355DC013A;
+	Wed, 20 Jan 2021 00:45:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CE714C013A
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 61E5EC1E71
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 00:14:53 +0000 (UTC)
+ Wed, 20 Jan 2021 00:45:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id C3B3E86F8F
+ by silver.osuosl.org (Postfix) with ESMTP id 4AEA020427
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 00:14:53 +0000 (UTC)
+ Wed, 20 Jan 2021 00:45:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Awfbfcg3V1W0
+ with ESMTP id CSzBZKXqAoaY
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 00:14:52 +0000 (UTC)
+ Wed, 20 Jan 2021 00:45:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by hemlock.osuosl.org (Postfix) with ESMTPS id D5D0886F8D
+Received: from mx1.opensynergy.com (mx1.opensynergy.com [217.66.60.4])
+ by silver.osuosl.org (Postfix) with ESMTPS id F184A20470
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 00:14:52 +0000 (UTC)
-IronPort-SDR: ++x2X5yQKTHmqYHuLM75uFsBqYqGuP/TV3h5lhlKKH22ePIZ1+gS0lsbkI5hJrNWydGCEL9C0+
- kzQZBrzwHzAQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9869"; a="176447470"
-X-IronPort-AV: E=Sophos;i="5.79,359,1602572400"; d="scan'208";a="176447470"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2021 16:14:50 -0800
-IronPort-SDR: jgFWRhZEtk36yrNAm0zdpaObTL6Ej/nLYui9dA2xZSEVMV7qUN0wNLfNzTF+4uPqhkoV2RTEQy
- F1EOwuF2+0+A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.79,359,1602572400"; d="scan'208";a="353963107"
-Received: from orsmsx604.amr.corp.intel.com ([10.22.229.17])
- by orsmga006.jf.intel.com with ESMTP; 19 Jan 2021 16:14:50 -0800
-Received: from orsmsx610.amr.corp.intel.com (10.22.229.23) by
- ORSMSX604.amr.corp.intel.com (10.22.229.17) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Tue, 19 Jan 2021 16:14:50 -0800
-Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
- ORSMSX610.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Tue, 19 Jan 2021 16:14:49 -0800
-Received: from orsmsx611.amr.corp.intel.com ([10.22.229.24]) by
- ORSMSX611.amr.corp.intel.com ([10.22.229.24]) with mapi id 15.01.1713.004;
- Tue, 19 Jan 2021 16:14:49 -0800
-From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-To: Alex Williamson <alex.williamson@redhat.com>
-Subject: RE: [RFC 3/3] vfio: Share the KVM instance with Vdmabuf
-Thread-Topic: [RFC 3/3] vfio: Share the KVM instance with Vdmabuf
-Thread-Index: AQHW7j6Sb7QSbmMgzEq63xXMOAt6Q6ovnEqA///v1aA=
-Date: Wed, 20 Jan 2021 00:14:49 +0000
-Message-ID: <b4a93e926d424ff199ab91ff88399087@intel.com>
-References: <20210119082812.822291-1-vivek.kasireddy@intel.com>
- <20210119082812.822291-4-vivek.kasireddy@intel.com>
- <20210119083955.1cc9eae3@omen.home.shazbot.org>
-In-Reply-To: <20210119083955.1cc9eae3@omen.home.shazbot.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.5.1.3
-dlp-reaction: no-action
-x-originating-ip: [10.22.254.132]
+ Wed, 20 Jan 2021 00:45:24 +0000 (UTC)
+Received: from SR-MAILGATE-02.opensynergy.com (localhost.localdomain
+ [127.0.0.1])
+ by mx1.opensynergy.com (Proxmox) with ESMTP id 7EA2AA13B0;
+ Wed, 20 Jan 2021 01:37:01 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opensynergy.com;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:from:from:message-id:mime-version:reply-to:subject:subject
+ :to:to; s=srmailgate02; bh=g3peVLu/aEuE3zFN78uiHYXZs/lCyoR9D8SzT
+ duAw8k=; b=mkyAGhl2jWeIn8aNb2TP5Oss8ufW4W6HuAgCnNCr52wtQe6hCk7Uy
+ UN+7gIj3g6rJ4rJtak9LTd/DdfJ2tMOMGIGnnmAMs7JcwiobToyTL7jueJTw/AG/
+ WXWL1HmD2MYs3SdbRT6l7NkdNAZWCdjsQSvcnEEhfEo7VX4PErCdCW7L4BPdoU3E
+ 9vtgkwxnOJIt3B0dwAEE2RZxRyVFdWuqHNHstVuI2b6+qMOO9UF7+8NXsSaCqDmg
+ kx7o+Yc5678s8egVNx9eqbHB63YxyaNW5PeRfuMTghWEFPkakGtFi5dD5jEJQlm4
+ f3dp2nRG+cnTlUq7St2vk3ZarHWvZ96Ng==
+From: Anton Yakovlev <anton.yakovlev@opensynergy.com>
+To: <virtualization@lists.linux-foundation.org>,
+ <alsa-devel@alsa-project.org>, <virtio-dev@lists.oasis-open.org>
+Subject: [PATCH 0/7] ALSA: add virtio sound driver
+Date: Wed, 20 Jan 2021 01:36:28 +0100
+Message-ID: <20210120003638.3339987-1-anton.yakovlev@opensynergy.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-Cc: "Kim, Dongwon" <dongwon.kim@intel.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
+X-ClientProxiedBy: SR-MAIL-02.open-synergy.com (10.26.10.22) To
+ SR-MAIL-01.open-synergy.com (10.26.10.21)
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Takashi Iwai <tiwai@suse.com>,
+ linux-kernel@vger.kernel.org, Jaroslav Kysela <perex@perex.cz>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,95 +80,70 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Alex,
+This series implements a driver part of the virtio sound device
+specification v8 [1].
 
-> -----Original Message-----
-> From: Alex Williamson <alex.williamson@redhat.com>
-> Sent: Tuesday, January 19, 2021 7:40 AM
-> To: Kasireddy, Vivek <vivek.kasireddy@intel.com>
-> Cc: virtualization@lists.linux-foundation.org; Kim, Dongwon <dongwon.kim@intel.com>
-> Subject: Re: [RFC 3/3] vfio: Share the KVM instance with Vdmabuf
-> 
-> On Tue, 19 Jan 2021 00:28:12 -0800
-> Vivek Kasireddy <vivek.kasireddy@intel.com> wrote:
-> 
-> > Getting a copy of the KVM instance is necessary for mapping Guest
-> > pages in the Host.
-> >
-> > TODO: Instead of invoking the symbol directly, there needs to be a
-> > better way of getting a copy of the KVM instance probably by using
-> > other notifiers. However, currently, KVM shares its instance only
-> > with VFIO and therefore we are compelled to bind the passthrough'd
-> > device to vfio-pci.
-> 
-> Yeah, this is a bad solution, sorry, vfio is not going to gratuitously
-> call out to vhost to share a kvm pointer.  I'd prefer to get rid of
-> vfio having any knowledge or visibility of the kvm pointer.  Thanks,
+The driver supports PCM playback and capture substreams, jack and
+channel map controls. A message-based transport is used to write/read
+PCM frames to/from a device.
 
-[Kasireddy, Vivek] I agree that this is definitely not ideal as I recognize it
-in the TODO. However, it looks like VFIO also gets a copy of the KVM 
-pointer in a similar manner:
+The series is based (and was actually tested) on Linus's master
+branch [2], on top of
 
-virt/kvm/vfio.c
+commit 1e2a199f6ccd ("Merge tag 'spi-fix-v5.11-rc4' of ...")
 
-static void kvm_vfio_group_set_kvm(struct vfio_group *group, struct kvm *kvm)
-{
-        void (*fn)(struct vfio_group *, struct kvm *);
+As a device part was used OpenSynergy proprietary implementation.
 
-        fn = symbol_get(vfio_group_set_kvm);
-        if (!fn)
-                return;
+Any comments are very welcome.
 
-        fn(group, kvm);
+[1] https://lists.oasis-open.org/archives/virtio-dev/202003/msg00185.html
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 
-        symbol_put(vfio_group_set_kvm);
-}
 
-With this patch, I am not suggesting that this is a precedent that should be followed 
-but it appears there doesn't seem to be an alternative way of getting a copy of the KVM 
-pointer that is clean and elegant -- unless I have not looked hard enough. I guess we
-could create a notifier chain with callbacks for VFIO and Vhost that KVM would call 
-but this would mean modifying KVM.
+Anton Yakovlev (7):
+  uapi: virtio_ids: add a sound device type ID from OASIS spec
+  uapi: virtio_snd: add the sound device header file
+  ALSA: virtio: add virtio sound driver
+  ALSA: virtio: handling control and I/O messages for the PCM device
+  ALSA: virtio: PCM substream operators
+  ALSA: virtio: introduce jack support
+  ALSA: virtio: introduce device suspend/resume support
 
-Also, if I understand correctly, if VFIO does not want to share the KVM pointer with
-VFIO groups, then I think it would break stuff like mdev which counts on it. 
+ MAINTAINERS                     |   8 +
+ include/uapi/linux/virtio_ids.h |   1 +
+ include/uapi/linux/virtio_snd.h | 361 +++++++++++++++++++
+ sound/Kconfig                   |   2 +
+ sound/Makefile                  |   3 +-
+ sound/virtio/Kconfig            |  10 +
+ sound/virtio/Makefile           |  13 +
+ sound/virtio/virtio_card.c      | 593 ++++++++++++++++++++++++++++++++
+ sound/virtio/virtio_card.h      | 121 +++++++
+ sound/virtio/virtio_chmap.c     | 237 +++++++++++++
+ sound/virtio/virtio_ctl_msg.c   | 293 ++++++++++++++++
+ sound/virtio/virtio_ctl_msg.h   | 122 +++++++
+ sound/virtio/virtio_jack.c      | 255 ++++++++++++++
+ sound/virtio/virtio_pcm.c       | 582 +++++++++++++++++++++++++++++++
+ sound/virtio/virtio_pcm.h       | 132 +++++++
+ sound/virtio/virtio_pcm_msg.c   | 317 +++++++++++++++++
+ sound/virtio/virtio_pcm_ops.c   | 524 ++++++++++++++++++++++++++++
+ 17 files changed, 3573 insertions(+), 1 deletion(-)
+ create mode 100644 include/uapi/linux/virtio_snd.h
+ create mode 100644 sound/virtio/Kconfig
+ create mode 100644 sound/virtio/Makefile
+ create mode 100644 sound/virtio/virtio_card.c
+ create mode 100644 sound/virtio/virtio_card.h
+ create mode 100644 sound/virtio/virtio_chmap.c
+ create mode 100644 sound/virtio/virtio_ctl_msg.c
+ create mode 100644 sound/virtio/virtio_ctl_msg.h
+ create mode 100644 sound/virtio/virtio_jack.c
+ create mode 100644 sound/virtio/virtio_pcm.c
+ create mode 100644 sound/virtio/virtio_pcm.h
+ create mode 100644 sound/virtio/virtio_pcm_msg.c
+ create mode 100644 sound/virtio/virtio_pcm_ops.c
 
-Thanks,
-Vivek
+-- 
+2.30.0
 
-> Alex
-> 
-> > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> > ---
-> >  drivers/vfio/vfio.c | 9 +++++++++
-> >  1 file changed, 9 insertions(+)
-> >
-> > diff --git a/drivers/vfio/vfio.c b/drivers/vfio/vfio.c
-> > index 4ad8a35667a7..9fb11b1ad3cd 100644
-> > --- a/drivers/vfio/vfio.c
-> > +++ b/drivers/vfio/vfio.c
-> > @@ -2213,11 +2213,20 @@ static int vfio_unregister_iommu_notifier(struct vfio_group
-> *group,
-> >  	return ret;
-> >  }
-> >
-> > +extern void vhost_vdmabuf_get_kvm(unsigned long action, void *data);
-> >  void vfio_group_set_kvm(struct vfio_group *group, struct kvm *kvm)
-> >  {
-> > +	void (*fn)(unsigned long, void *);
-> > +
-> >  	group->kvm = kvm;
-> >  	blocking_notifier_call_chain(&group->notifier,
-> >  				VFIO_GROUP_NOTIFY_SET_KVM, kvm);
-> > +
-> > +	fn = symbol_get(vhost_vdmabuf_get_kvm);
-> > +	if (fn) {
-> > +		fn(VFIO_GROUP_NOTIFY_SET_KVM, kvm);
-> > +		symbol_put(vhost_vdmabuf_get_kvm);
-> > +	}
-> >  }
-> >  EXPORT_SYMBOL_GPL(vfio_group_set_kvm);
-> >
 
 _______________________________________________
 Virtualization mailing list
