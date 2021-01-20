@@ -2,70 +2,99 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74D632FD205
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 14:56:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 270E62FD357
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 16:00:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 35EB486A98;
-	Wed, 20 Jan 2021 13:56:30 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id D7C5C8697D;
+	Wed, 20 Jan 2021 15:00:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rDtRQEBYqaQn; Wed, 20 Jan 2021 13:56:23 +0000 (UTC)
+	with ESMTP id gh5wzm+b33en; Wed, 20 Jan 2021 15:00:23 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C03EA86AB8;
-	Wed, 20 Jan 2021 13:56:12 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 24DA186410;
+	Wed, 20 Jan 2021 15:00:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AB70AC0FA8;
-	Wed, 20 Jan 2021 13:56:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F13ADC08A1;
+	Wed, 20 Jan 2021 15:00:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AFF9FC013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4CC03C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:56:11 +0000 (UTC)
+ Wed, 20 Jan 2021 15:00:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 9D74E86A10
+ by whitealder.osuosl.org (Postfix) with ESMTP id 39C8A86410
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:56:11 +0000 (UTC)
+ Wed, 20 Jan 2021 15:00:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IZ8ndOFw6TTY
+ with ESMTP id r6fkRrOl5RgU
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:56:08 +0000 (UTC)
+ Wed, 20 Jan 2021 15:00:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5112F86A0B
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id D564A85D21
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:56:05 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1611150964; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ Wed, 20 Jan 2021 15:00:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1611154818;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=HDYs6VbGDnWZYsEki4BzG/PNLn2WC6ya6CsM5mbOuJY=;
- b=FKvo5dHePvf/Iy5vDesynUxnhGCwWKjMBjeow2jwcPN14AC7GRped6hdBgQWc4F+06wzcd
- ImhFcR0RfQGPtMcu2YwunhvvkqLJVX+PGIWJgev3HjN+OE1dihKM1P51c7qzkt+fe5YOzL
- nXtgTXxyFEhmDS1KBx6rEo6idBcr/ws=
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E4E98AC4F;
- Wed, 20 Jan 2021 13:56:03 +0000 (UTC)
-To: xen-devel@lists.xenproject.org, x86@kernel.org,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v4 15/15] x86/paravirt: have only one paravirt patch function
-Date: Wed, 20 Jan 2021 14:55:55 +0100
-Message-Id: <20210120135555.32594-16-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210120135555.32594-1-jgross@suse.com>
-References: <20210120135555.32594-1-jgross@suse.com>
+ bh=9pDvwWZLbTOJS6GMMwEHxHLJ6cBw1mbVBDvHP/BK4iw=;
+ b=YYtpOMPX2cAnOuWYC/hISAbzsYfS4tfaZtOBdnQqwzGnCVkUBpbqkGBlGAxE12I5gC9vh3
+ DGLumtLX7PBjnXxKFBz9xEL5WO1f6UyUysATU94sGKVd3I6NAqBws3ebWeYJQdiUyy5icy
+ jS2eZiMQ8cvCq9govAhogcickO4m8Do=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-34-PQxwWoCQOLOZNx21ffkFdA-1; Wed, 20 Jan 2021 10:00:16 -0500
+X-MC-Unique: PQxwWoCQOLOZNx21ffkFdA-1
+Received: by mail-wr1-f72.google.com with SMTP id w5so11551588wrl.9
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 20 Jan 2021 07:00:16 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=9pDvwWZLbTOJS6GMMwEHxHLJ6cBw1mbVBDvHP/BK4iw=;
+ b=trScyfP2pgtyRVXZfh7JeOhTt9MUo1RKVM0la77pbM+oLWIrLebw510uF8ZrHNt4pq
+ PNZNN9HjJiBxJNP54kkwPWkeUO83DNC6neWJOhWvC5A3c5s+JYiDnzlwSKhGANdBEcHX
+ 5G6r9KwUCb29laZNb4VcAJ2dyqa+mbEYyp1I8q+tE7yz2AwBg5FlWKyeGekdHdfV1HuK
+ LU2xAUFf71pl5AAET+MRtbf52tt37hfpEskNh2ODAhjWM5guyeEHUFUWxC29BBuTz6dx
+ tdcb1ts0rOyqoH5G13piKfhMNB4GRiZB3rVntBqkVnaM0sDQzOK9x2YB/pCoUKiKqOJ6
+ hUvg==
+X-Gm-Message-State: AOAM5332pC0Vp5drFr1zH7UzcD3nXFAkgTyRzFhq6o0igBDSyJPX5dso
+ Qw+5ElUu47IGFoTFKTFYmw2CUBUWoDb3S2gMrUaR4bzIjMLYSmKKdhw1D+Qskc2elbrw/vT0sGG
+ zXwG/L/6VSYNGLnYXzGSGMjwz0yWnoDRLCqk7oWNsrA==
+X-Received: by 2002:adf:a3c3:: with SMTP id m3mr9998566wrb.105.1611154815133; 
+ Wed, 20 Jan 2021 07:00:15 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJz0QOeG2rwtzdFS2q5IkPnDfNwnd37D/c1xEe4LIR954SOp4UKw2bGMW6TQ4t2nxv76OnMmYQ==
+X-Received: by 2002:adf:a3c3:: with SMTP id m3mr9998535wrb.105.1611154814870; 
+ Wed, 20 Jan 2021 07:00:14 -0800 (PST)
+Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
+ [79.34.249.199])
+ by smtp.gmail.com with ESMTPSA id a16sm3671045wrr.89.2021.01.20.07.00.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Jan 2021 07:00:14 -0800 (PST)
+Date: Wed, 20 Jan 2021 16:00:11 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>,
+ virtualization@lists.linux-foundation.org
+Subject: Re: [PATCH v2] vdpa_sim: use iova module to allocate IOVA addresses
+Message-ID: <20210120150011.dzzvzi6t4dvfy2w3@steredhat>
+References: <20201223090608.24163-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, "VMware,
- Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>,
- Thomas Gleixner <tglx@linutronix.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
+In-Reply-To: <20201223090608.24163-1-sgarzare@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Max Gurtovoy <mgurtovoy@nvidia.com>, Laurent Vivier <lvivier@redhat.com>,
+ linux-kernel@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,186 +106,257 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Juergen Gross via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Juergen Gross <jgross@suse.com>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-There is no need any longer to have different paravirt patch functions
-for native and Xen. Eliminate native_patch() and rename
-paravirt_patch_default() to paravirt_patch().
+Hi Michael,
+I'm restarting the work on vdpa-blk simulator, and this patch is needed 
+to have it working properly.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V3:
-- remove paravirt_patch_insns() (kernel test robot)
----
- arch/x86/include/asm/paravirt_types.h | 19 +------------------
- arch/x86/kernel/Makefile              |  3 +--
- arch/x86/kernel/alternative.c         |  2 +-
- arch/x86/kernel/paravirt.c            | 20 ++------------------
- arch/x86/kernel/paravirt_patch.c      | 11 -----------
- arch/x86/xen/enlighten_pv.c           |  1 -
- 6 files changed, 5 insertions(+), 51 deletions(-)
- delete mode 100644 arch/x86/kernel/paravirt_patch.c
+Do you plan to queue this patch or would you prefer that I include it in 
+my next vdpa-blk-sim series?
 
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 588ff14ce969..62efbf8bd8f0 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -68,19 +68,6 @@ struct pv_info {
- 	const char *name;
- };
- 
--struct pv_init_ops {
--	/*
--	 * Patch may replace one of the defined code sequences with
--	 * arbitrary code, subject to the same register constraints.
--	 * This generally means the code is not free to clobber any
--	 * registers other than EAX.  The patch function should return
--	 * the number of bytes of code generated, as we nop pad the
--	 * rest in generic code.
--	 */
--	unsigned (*patch)(u8 type, void *insn_buff,
--			  unsigned long addr, unsigned len);
--} __no_randomize_layout;
--
- #ifdef CONFIG_PARAVIRT_XXL
- struct pv_lazy_ops {
- 	/* Set deferred update mode, used for batching operations. */
-@@ -276,7 +263,6 @@ struct pv_lock_ops {
-  * number for each function using the offset which we use to indicate
-  * what to patch. */
- struct paravirt_patch_template {
--	struct pv_init_ops	init;
- 	struct pv_cpu_ops	cpu;
- 	struct pv_irq_ops	irq;
- 	struct pv_mmu_ops	mmu;
-@@ -317,10 +303,7 @@ extern void (*paravirt_iret)(void);
- /* Simple instruction patching code. */
- #define NATIVE_LABEL(a,x,b) "\n\t.globl " a #x "_" #b "\n" a #x "_" #b ":\n\t"
- 
--unsigned paravirt_patch_default(u8 type, void *insn_buff, unsigned long addr, unsigned len);
--unsigned paravirt_patch_insns(void *insn_buff, unsigned len, const char *start, const char *end);
--
--unsigned native_patch(u8 type, void *insn_buff, unsigned long addr, unsigned len);
-+unsigned paravirt_patch(u8 type, void *insn_buff, unsigned long addr, unsigned len);
- 
- int paravirt_disable_iospace(void);
- 
-diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
-index 5eeb808eb024..853a83503120 100644
---- a/arch/x86/kernel/Makefile
-+++ b/arch/x86/kernel/Makefile
-@@ -35,7 +35,6 @@ KASAN_SANITIZE_sev-es.o					:= n
- KCSAN_SANITIZE := n
- 
- OBJECT_FILES_NON_STANDARD_test_nx.o			:= y
--OBJECT_FILES_NON_STANDARD_paravirt_patch.o		:= y
- 
- ifdef CONFIG_FRAME_POINTER
- OBJECT_FILES_NON_STANDARD_ftrace_$(BITS).o		:= y
-@@ -122,7 +121,7 @@ obj-$(CONFIG_AMD_NB)		+= amd_nb.o
- obj-$(CONFIG_DEBUG_NMI_SELFTEST) += nmi_selftest.o
- 
- obj-$(CONFIG_KVM_GUEST)		+= kvm.o kvmclock.o
--obj-$(CONFIG_PARAVIRT)		+= paravirt.o paravirt_patch.o
-+obj-$(CONFIG_PARAVIRT)		+= paravirt.o
- obj-$(CONFIG_PARAVIRT_SPINLOCKS)+= paravirt-spinlocks.o
- obj-$(CONFIG_PARAVIRT_CLOCK)	+= pvclock.o
- obj-$(CONFIG_X86_PMEM_LEGACY_DEVICE) += pmem.o
-diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 221acb2b868a..fb0b83c85de7 100644
---- a/arch/x86/kernel/alternative.c
-+++ b/arch/x86/kernel/alternative.c
-@@ -613,7 +613,7 @@ void __init_or_module apply_paravirt(struct paravirt_patch_site *start,
- 		BUG_ON(p->len > MAX_PATCH_LEN);
- 		/* prep the buffer with the original instructions */
- 		memcpy(insn_buff, p->instr, p->len);
--		used = pv_ops.init.patch(p->type, insn_buff, (unsigned long)p->instr, p->len);
-+		used = paravirt_patch(p->type, insn_buff, (unsigned long)p->instr, p->len);
- 
- 		BUG_ON(used > p->len);
- 
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index 082954930809..3d7b989ed6be 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -99,8 +99,8 @@ void __init native_pv_lock_init(void)
- 		static_branch_disable(&virt_spin_lock_key);
- }
- 
--unsigned paravirt_patch_default(u8 type, void *insn_buff,
--				unsigned long addr, unsigned len)
-+unsigned int paravirt_patch(u8 type, void *insn_buff, unsigned long addr,
-+			    unsigned int len)
- {
- 	/*
- 	 * Neat trick to map patch type back to the call within the
-@@ -121,19 +121,6 @@ unsigned paravirt_patch_default(u8 type, void *insn_buff,
- 	return ret;
- }
- 
--unsigned paravirt_patch_insns(void *insn_buff, unsigned len,
--			      const char *start, const char *end)
--{
--	unsigned insn_len = end - start;
--
--	/* Alternative instruction is too large for the patch site and we cannot continue: */
--	BUG_ON(insn_len > len || start == NULL);
--
--	memcpy(insn_buff, start, insn_len);
--
--	return insn_len;
--}
--
- struct static_key paravirt_steal_enabled;
- struct static_key paravirt_steal_rq_enabled;
- 
-@@ -255,9 +242,6 @@ struct pv_info pv_info = {
- #define PTE_IDENT	__PV_IS_CALLEE_SAVE(_paravirt_ident_64)
- 
- struct paravirt_patch_template pv_ops = {
--	/* Init ops. */
--	.init.patch		= native_patch,
--
- 	/* Cpu ops. */
- 	.cpu.io_delay		= native_io_delay,
- 
-diff --git a/arch/x86/kernel/paravirt_patch.c b/arch/x86/kernel/paravirt_patch.c
-deleted file mode 100644
-index 10543dcc8211..000000000000
---- a/arch/x86/kernel/paravirt_patch.c
-+++ /dev/null
-@@ -1,11 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--#include <linux/stringify.h>
--
--#include <asm/paravirt.h>
--#include <asm/asm-offsets.h>
--
--unsigned int native_patch(u8 type, void *insn_buff, unsigned long addr,
--			  unsigned int len)
--{
--	return paravirt_patch_default(type, insn_buff, addr, len);
--}
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 4716383c64a9..66f83de4d9e0 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1218,7 +1218,6 @@ asmlinkage __visible void __init xen_start_kernel(void)
- 
- 	/* Install Xen paravirt ops */
- 	pv_info = xen_info;
--	pv_ops.init.patch = paravirt_patch_default;
- 	pv_ops.cpu = xen_cpu_ops;
- 	paravirt_iret = xen_iret;
- 	xen_init_irq_ops();
--- 
-2.26.2
+Thanks,
+Stefano
+
+On Wed, Dec 23, 2020 at 10:06:08AM +0100, Stefano Garzarella wrote:
+>The identical mapping used until now created issues when mapping
+>different virtual pages with the same physical address.
+>To solve this issue, we can use the iova module, to handle the IOVA
+>allocation.
+>For simplicity we use an IOVA allocator with byte granularity.
+>
+>We add two new functions, vdpasim_map_range() and vdpasim_unmap_range(),
+>to handle the IOVA allocation and the registration into the IOMMU/IOTLB.
+>These functions are used by dma_map_ops callbacks.
+>
+>Acked-by: Jason Wang <jasowang@redhat.com>
+>Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+>---
+>v2:
+>- used ULONG_MAX instead of ~0UL [Jason]
+>- fixed typos in comment and patch description [Jason]
+>---
+> drivers/vdpa/vdpa_sim/vdpa_sim.h |   2 +
+> drivers/vdpa/vdpa_sim/vdpa_sim.c | 108 +++++++++++++++++++------------
+> drivers/vdpa/Kconfig             |   1 +
+> 3 files changed, 69 insertions(+), 42 deletions(-)
+>
+>diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.h b/drivers/vdpa/vdpa_sim/vdpa_sim.h
+>index b02142293d5b..6efe205e583e 100644
+>--- a/drivers/vdpa/vdpa_sim/vdpa_sim.h
+>+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.h
+>@@ -6,6 +6,7 @@
+> #ifndef _VDPA_SIM_H
+> #define _VDPA_SIM_H
+>
+>+#include <linux/iova.h>
+> #include <linux/vringh.h>
+> #include <linux/vdpa.h>
+> #include <linux/virtio_byteorder.h>
+>@@ -55,6 +56,7 @@ struct vdpasim {
+> 	/* virtio config according to device type */
+> 	void *config;
+> 	struct vhost_iotlb *iommu;
+>+	struct iova_domain iova;
+> 	void *buffer;
+> 	u32 status;
+> 	u32 generation;
+>diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+>index b3fcc67bfdf0..edc930719fb8 100644
+>--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
+>+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+>@@ -17,6 +17,7 @@
+> #include <linux/vringh.h>
+> #include <linux/vdpa.h>
+> #include <linux/vhost_iotlb.h>
+>+#include <linux/iova.h>
+>
+> #include "vdpa_sim.h"
+>
+>@@ -128,30 +129,57 @@ static int dir_to_perm(enum dma_data_direction dir)
+> 	return perm;
+> }
+>
+>+static dma_addr_t vdpasim_map_range(struct vdpasim *vdpasim, phys_addr_t paddr,
+>+				    size_t size, unsigned int perm)
+>+{
+>+	struct iova *iova;
+>+	dma_addr_t dma_addr;
+>+	int ret;
+>+
+>+	/* We set the limit_pfn to the maximum (ULONG_MAX - 1) */
+>+	iova = alloc_iova(&vdpasim->iova, size, ULONG_MAX - 1, true);
+>+	if (!iova)
+>+		return DMA_MAPPING_ERROR;
+>+
+>+	dma_addr = iova_dma_addr(&vdpasim->iova, iova);
+>+
+>+	spin_lock(&vdpasim->iommu_lock);
+>+	ret = vhost_iotlb_add_range(vdpasim->iommu, (u64)dma_addr,
+>+				    (u64)dma_addr + size - 1, (u64)paddr, perm);
+>+	spin_unlock(&vdpasim->iommu_lock);
+>+
+>+	if (ret) {
+>+		__free_iova(&vdpasim->iova, iova);
+>+		return DMA_MAPPING_ERROR;
+>+	}
+>+
+>+	return dma_addr;
+>+}
+>+
+>+static void vdpasim_unmap_range(struct vdpasim *vdpasim, dma_addr_t dma_addr,
+>+				size_t size)
+>+{
+>+	spin_lock(&vdpasim->iommu_lock);
+>+	vhost_iotlb_del_range(vdpasim->iommu, (u64)dma_addr,
+>+			      (u64)dma_addr + size - 1);
+>+	spin_unlock(&vdpasim->iommu_lock);
+>+
+>+	free_iova(&vdpasim->iova, iova_pfn(&vdpasim->iova, dma_addr));
+>+}
+>+
+> static dma_addr_t vdpasim_map_page(struct device *dev, struct page *page,
+> 				   unsigned long offset, size_t size,
+> 				   enum dma_data_direction dir,
+> 				   unsigned long attrs)
+> {
+> 	struct vdpasim *vdpasim = dev_to_sim(dev);
+>-	struct vhost_iotlb *iommu = vdpasim->iommu;
+>-	u64 pa = (page_to_pfn(page) << PAGE_SHIFT) + offset;
+>-	int ret, perm = dir_to_perm(dir);
+>+	phys_addr_t paddr = page_to_phys(page) + offset;
+>+	int perm = dir_to_perm(dir);
+>
+> 	if (perm < 0)
+> 		return DMA_MAPPING_ERROR;
+>
+>-	/* For simplicity, use identical mapping to avoid e.g iova
+>-	 * allocator.
+>-	 */
+>-	spin_lock(&vdpasim->iommu_lock);
+>-	ret = vhost_iotlb_add_range(iommu, pa, pa + size - 1,
+>-				    pa, dir_to_perm(dir));
+>-	spin_unlock(&vdpasim->iommu_lock);
+>-	if (ret)
+>-		return DMA_MAPPING_ERROR;
+>-
+>-	return (dma_addr_t)(pa);
+>+	return vdpasim_map_range(vdpasim, paddr, size, perm);
+> }
+>
+> static void vdpasim_unmap_page(struct device *dev, dma_addr_t dma_addr,
+>@@ -159,12 +187,8 @@ static void vdpasim_unmap_page(struct device *dev, dma_addr_t dma_addr,
+> 			       unsigned long attrs)
+> {
+> 	struct vdpasim *vdpasim = dev_to_sim(dev);
+>-	struct vhost_iotlb *iommu = vdpasim->iommu;
+>
+>-	spin_lock(&vdpasim->iommu_lock);
+>-	vhost_iotlb_del_range(iommu, (u64)dma_addr,
+>-			      (u64)dma_addr + size - 1);
+>-	spin_unlock(&vdpasim->iommu_lock);
+>+	vdpasim_unmap_range(vdpasim, dma_addr, size);
+> }
+>
+> static void *vdpasim_alloc_coherent(struct device *dev, size_t size,
+>@@ -172,27 +196,22 @@ static void *vdpasim_alloc_coherent(struct device *dev, size_t size,
+> 				    unsigned long attrs)
+> {
+> 	struct vdpasim *vdpasim = dev_to_sim(dev);
+>-	struct vhost_iotlb *iommu = vdpasim->iommu;
+>-	void *addr = kmalloc(size, flag);
+>-	int ret;
+>+	phys_addr_t paddr;
+>+	void *addr;
+>
+>-	spin_lock(&vdpasim->iommu_lock);
+>+	addr = kmalloc(size, flag);
+> 	if (!addr) {
+> 		*dma_addr = DMA_MAPPING_ERROR;
+>-	} else {
+>-		u64 pa = virt_to_phys(addr);
+>-
+>-		ret = vhost_iotlb_add_range(iommu, (u64)pa,
+>-					    (u64)pa + size - 1,
+>-					    pa, VHOST_MAP_RW);
+>-		if (ret) {
+>-			*dma_addr = DMA_MAPPING_ERROR;
+>-			kfree(addr);
+>-			addr = NULL;
+>-		} else
+>-			*dma_addr = (dma_addr_t)pa;
+>+		return NULL;
+>+	}
+>+
+>+	paddr = virt_to_phys(addr);
+>+
+>+	*dma_addr = vdpasim_map_range(vdpasim, paddr, size, VHOST_MAP_RW);
+>+	if (*dma_addr == DMA_MAPPING_ERROR) {
+>+		kfree(addr);
+>+		return NULL;
+> 	}
+>-	spin_unlock(&vdpasim->iommu_lock);
+>
+> 	return addr;
+> }
+>@@ -202,14 +221,10 @@ static void vdpasim_free_coherent(struct device *dev, size_t size,
+> 				  unsigned long attrs)
+> {
+> 	struct vdpasim *vdpasim = dev_to_sim(dev);
+>-	struct vhost_iotlb *iommu = vdpasim->iommu;
+>
+>-	spin_lock(&vdpasim->iommu_lock);
+>-	vhost_iotlb_del_range(iommu, (u64)dma_addr,
+>-			      (u64)dma_addr + size - 1);
+>-	spin_unlock(&vdpasim->iommu_lock);
+>+	vdpasim_unmap_range(vdpasim, dma_addr, size);
+>
+>-	kfree(phys_to_virt((uintptr_t)dma_addr));
+>+	kfree(vaddr);
+> }
+>
+> static const struct dma_map_ops vdpasim_dma_ops = {
+>@@ -270,6 +285,13 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr)
+> 	for (i = 0; i < dev_attr->nvqs; i++)
+> 		vringh_set_iotlb(&vdpasim->vqs[i].vring, vdpasim->iommu);
+>
+>+	ret = iova_cache_get();
+>+	if (ret)
+>+		goto err_iommu;
+>+
+>+	/* For simplicity we use an IOVA allocator with byte granularity */
+>+	init_iova_domain(&vdpasim->iova, 1, 0);
+>+
+> 	vdpasim->vdpa.dma_dev = dev;
+>
+> 	return vdpasim;
+>@@ -540,6 +562,8 @@ static void vdpasim_free(struct vdpa_device *vdpa)
+> 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
+>
+> 	cancel_work_sync(&vdpasim->work);
+>+	put_iova_domain(&vdpasim->iova);
+>+	iova_cache_put();
+> 	kvfree(vdpasim->buffer);
+> 	if (vdpasim->iommu)
+> 		vhost_iotlb_free(vdpasim->iommu);
+>diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
+>index 92a6396f8a73..8965e3717231 100644
+>--- a/drivers/vdpa/Kconfig
+>+++ b/drivers/vdpa/Kconfig
+>@@ -13,6 +13,7 @@ config VDPA_SIM
+> 	depends on RUNTIME_TESTING_MENU && HAS_DMA
+> 	select DMA_OPS
+> 	select VHOST_RING
+>+	select IOMMU_IOVA
+> 	help
+> 	  Enable this module to support vDPA device simulators. These devices
+> 	  are used for testing, prototyping and development of vDPA.
+>-- 
+>2.26.2
+>
 
 _______________________________________________
 Virtualization mailing list
