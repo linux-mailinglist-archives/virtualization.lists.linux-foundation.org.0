@@ -1,89 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADCE52FD153
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 14:33:59 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B08AC2FD1F5
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 14:56:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2D2D387113;
-	Wed, 20 Jan 2021 13:33:57 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id CF84186A04;
+	Wed, 20 Jan 2021 13:56:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id byvb4PcW+7QF; Wed, 20 Jan 2021 13:33:56 +0000 (UTC)
+	with ESMTP id zcPxe-4GLbzq; Wed, 20 Jan 2021 13:56:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id F206B870FE;
-	Wed, 20 Jan 2021 13:33:55 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id DED4B86A1D;
+	Wed, 20 Jan 2021 13:56:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D280BC013A;
-	Wed, 20 Jan 2021 13:33:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B6099C013A;
+	Wed, 20 Jan 2021 13:56:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 144DFC013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E32E1C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:33:54 +0000 (UTC)
+ Wed, 20 Jan 2021 13:56:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id E300020410
+ by silver.osuosl.org (Postfix) with ESMTP id 8B2172076F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:33:53 +0000 (UTC)
+ Wed, 20 Jan 2021 13:56:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MZoLwXeTbE4v
+ with ESMTP id 7so6jO-gNw7u
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:33:52 +0000 (UTC)
+ Wed, 20 Jan 2021 13:56:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by silver.osuosl.org (Postfix) with ESMTPS id 00E7D203C3
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by silver.osuosl.org (Postfix) with ESMTPS id BA99C203E1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 13:33:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1611149630;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=TuZhxXX0vx11B3Qj3wPxkPeJCMw+rTZdku7noaOiFM4=;
- b=XSA7EfN7vUqjqjuzrZYo6VdrQNeH6AoYH+KhryY/Wy2h62Xyj7QKjT13tjlvn0dx39+IFI
- gCZLS70oRtpyLKn+dB74SLMYT0QBBneNLk+0PrEPzkM3zmKdO5EDKxzxYGd08co/IBZtmI
- ATDLgGrepUDtOrYg7yBdDyY8hwuAPv8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-298-Cf47LavbMFGCejYLZROe5w-1; Wed, 20 Jan 2021 08:33:48 -0500
-X-MC-Unique: Cf47LavbMFGCejYLZROe5w-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1AF84107ACE3;
- Wed, 20 Jan 2021 13:33:47 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-182.ams2.redhat.com
- [10.36.112.182])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 857A610023B6;
- Wed, 20 Jan 2021 13:33:46 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id E6BAF18000B3; Wed, 20 Jan 2021 14:33:44 +0100 (CET)
-Date: Wed, 20 Jan 2021 14:33:44 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Yiwei Zhang <zzyiwei@android.com>
-Subject: Re: [PATCH v2] drm/virtio: Track total GPU memory for virtio driver
-Message-ID: <20210120133344.7kln44nbwb5rjjgu@sirius.home.kraxel.org>
-References: <CAKB3++adfpdBHFEyGZ3v2V6zyW+ayg86CLDRKx1ty+OytjYFNw@mail.gmail.com>
- <20210118234057.270930-1-zzyiwei@android.com>
- <CAKMK7uE+7S5q8bU0ibyepb8yQL3QYNjZE+Jwf13+bVfAmoSuhw@mail.gmail.com>
- <CAKB3++aNtrjzFoq4icMWSUvXw7bL69FRM+9t69firXHkiuTwDQ@mail.gmail.com>
- <YAfzxS95Yy86qnBi@phenom.ffwll.local>
- <CAKB3++ZYacAN2ZVSGGm0uEDQtowcS9LDPPYCqt6Pj+-WEFxMSQ@mail.gmail.com>
+ Wed, 20 Jan 2021 13:56:01 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1611150960; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=+aDp550Lm+rofMztKr13LGN261/aN33kUiCXnXHZSts=;
+ b=u4mfyPjhhiICRVasCe0gx5uHwLGuJfO0Nwh5LmCImg6SvGFgunQvHFOMzVuArWuXyLPN7Q
+ 4VZ3QphBnnd7lfNQ+5cqvlSCQ1z2HTK1jtA49OjLiu40GNx+iyhykAfICdGYMvGmMsI5V7
+ u7RmQtSlG0WNBRDlF79PQzqxwc1CKgo=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id D8566ADD3;
+ Wed, 20 Jan 2021 13:55:59 +0000 (UTC)
+To: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ x86@kernel.org, virtualization@lists.linux-foundation.org,
+ linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
+ clang-built-linux@googlegroups.com
+Subject: [PATCH v4 00/15] x86: major paravirt cleanup
+Date: Wed, 20 Jan 2021 14:55:40 +0100
+Message-Id: <20210120135555.32594-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKB3++ZYacAN2ZVSGGm0uEDQtowcS9LDPPYCqt6Pj+-WEFxMSQ@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: David Airlie <airlied@linux.ie>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
- NET..." <virtualization@lists.linux-foundation.org>,
- Daniel Vetter <daniel@ffwll.ch>, Android Kernel Team <kernel-team@android.com>
+Cc: Wanpeng Li <wanpengli@tencent.com>, Peter Zijlstra <peterz@infradead.org>,
+ Michal Hocko <mhocko@kernel.org>, Nathan Chancellor <natechancellor@gmail.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Wei Liu <wei.liu@kernel.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Stephen Hemminger <sthemmin@microsoft.com>, Joerg Roedel <joro@8bytes.org>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>, Ard Biesheuvel <ardb@kernel.org>,
+ "VMware, Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
+ Mel Gorman <mgorman@suse.de>, "Paul E . McKenney" <paulmck@kernel.org>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Jason Baron <jbaron@akamai.com>, Borislav Petkov <bp@alien8.de>,
+ Andy Lutomirski <luto@kernel.org>, Josh Poimboeuf <jpoimboe@redhat.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Jim Mattson <jmattson@google.com>, Juergen Gross <jgross@suse.com>,
+ Sean Christopherson <seanjc@google.com>,
+ Nick Desaulniers <ndesaulniers@google.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,94 +85,105 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Juergen Gross via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Juergen Gross <jgross@suse.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-  Hi,
+[Resend due to all the Cc:'s missing]
 
-> > > > > +       select TRACE_GPU_MEM
+This is a major cleanup of the paravirt infrastructure aiming at
+eliminating all custom code patching via paravirt patching.
 
-> > > > > +#ifdef CONFIG_TRACE_GPU_MEM
+This is achieved by using ALTERNATIVE instead, leading to the ability
+to give objtool access to the patched in instructions.
 
-That doesn't make sense btw.
+In order to remove most of the 32-bit special handling from pvops the
+time related operations are switched to use static_call() instead.
 
-> > > > > +#ifdef CONFIG_TRACE_GPU_MEM
-> > > > > +static inline void virtio_gpu_trace_total_mem(struct virtio_gpu_device *vgdev,
-> > > > > +                                             s64 delta)
-> > > > > +{
-> > > > > +       u64 total_mem = atomic64_add_return(delta, &vgdev->total_mem);
-> > > > > +
-> > > > > +       trace_gpu_mem_total(0, 0, total_mem);
+At the end of this series all paravirt patching has to do is to
+replace indirect calls with direct ones. In a further step this could
+be switched to static_call(), too, but that would require a major
+header file disentangling.
 
-Hmm, so no per process tracking (pid arg hard-coded to zero)?
-Any plans for that?
-The cgroups patches mentioned by Daniel should address that btw.
+For a clean build without any objtool warnings a modified objtool is
+required. Currently this is available in the "tip" tree in the
+objtool/core branch.
 
-The gpu_id is hardcoded to zero too.  Shouldn't that be something like
-the minor number of the drm device?  Or maybe something else in case you
-need drm and non-drm gpu devices work side-by-side?
+Changes in V4:
+- fixed several build failures
+- removed objtool patch, as objtool patches are in tip now
+- added patch 1 for making usage of static_call easier
+- even more cleanup
 
-> > > Thanks for your reply! Android Cuttlefish virtual platform is using
-> > > the virtio-gpu driver, and we currently are carrying this small patch
-> > > at the downstream side. This is essential for us because:
-> > > (1) Android has deprecated debugfs on production devices already
+Changes in V3:
+- added patches 7 and 12
+- addressed all comments
 
-IIRC there have been discussions about a statfs, so you can export stats
-with a sane interface without also enabling all the power provided by
-debugfs, exactly because of the concerns to do that on production
-systems.
+Changes in V2:
+- added patches 5-12
 
-Not sure what the state is, seems to not be upstream yet.  That would be
-(beside cgroups) another thing to look at.
+Juergen Gross (14):
+  x86/xen: use specific Xen pv interrupt entry for MCE
+  x86/xen: use specific Xen pv interrupt entry for DF
+  x86/pv: switch SWAPGS to ALTERNATIVE
+  x86/xen: drop USERGS_SYSRET64 paravirt call
+  x86: rework arch_local_irq_restore() to not use popf
+  x86/paravirt: switch time pvops functions to use static_call()
+  x86/alternative: support "not feature" and ALTERNATIVE_TERNARY
+  x86: add new features for paravirt patching
+  x86/paravirt: remove no longer needed 32-bit pvops cruft
+  x86/paravirt: simplify paravirt macros
+  x86/paravirt: switch iret pvops to ALTERNATIVE
+  x86/paravirt: add new macros PVOP_ALT* supporting pvops in
+    ALTERNATIVEs
+  x86/paravirt: switch functions with custom code to ALTERNATIVE
+  x86/paravirt: have only one paravirt patch function
 
-> > > Android relies on this tracepoint + eBPF to make the GPU memory totals
-> > > available at runtime on production devices, which has been enforced
-> > > already. Not only game developers can have a reliable kernel total GPU
-> > > memory to look at, but also Android leverages this to take GPU memory
-> > > usage out from the system lost ram.
+Peter Zijlstra (1):
+  static_call: Pull some static_call declarations to the type headers
 
-Sounds like you define "gpu memory" as "system memory used to store gpu
-data".  Is that correct?  What about device memory?
+ arch/x86/Kconfig                        |   1 +
+ arch/x86/entry/entry_32.S               |   4 +-
+ arch/x86/entry/entry_64.S               |  28 ++-
+ arch/x86/include/asm/alternative-asm.h  |   4 +
+ arch/x86/include/asm/alternative.h      |   7 +
+ arch/x86/include/asm/cpufeatures.h      |   2 +
+ arch/x86/include/asm/idtentry.h         |   6 +
+ arch/x86/include/asm/irqflags.h         |  53 ++----
+ arch/x86/include/asm/mshyperv.h         |   2 +-
+ arch/x86/include/asm/paravirt.h         | 197 ++++++++------------
+ arch/x86/include/asm/paravirt_types.h   | 227 +++++++++---------------
+ arch/x86/kernel/Makefile                |   3 +-
+ arch/x86/kernel/alternative.c           |  49 ++++-
+ arch/x86/kernel/asm-offsets.c           |   7 -
+ arch/x86/kernel/asm-offsets_64.c        |   3 -
+ arch/x86/kernel/cpu/vmware.c            |   5 +-
+ arch/x86/kernel/irqflags.S              |  11 --
+ arch/x86/kernel/kvm.c                   |   2 +-
+ arch/x86/kernel/kvmclock.c              |   2 +-
+ arch/x86/kernel/paravirt-spinlocks.c    |   9 +
+ arch/x86/kernel/paravirt.c              |  83 +++------
+ arch/x86/kernel/paravirt_patch.c        | 109 ------------
+ arch/x86/kernel/tsc.c                   |   2 +-
+ arch/x86/xen/enlighten_pv.c             |  36 ++--
+ arch/x86/xen/irq.c                      |  23 ---
+ arch/x86/xen/time.c                     |  11 +-
+ arch/x86/xen/xen-asm.S                  |  52 +-----
+ arch/x86/xen/xen-ops.h                  |   3 -
+ drivers/clocksource/hyperv_timer.c      |   5 +-
+ drivers/xen/time.c                      |   2 +-
+ include/linux/static_call.h             |  20 ---
+ include/linux/static_call_types.h       |  27 +++
+ tools/include/linux/static_call_types.h |  27 +++
+ 33 files changed, 376 insertions(+), 646 deletions(-)
+ delete mode 100644 arch/x86/kernel/paravirt_patch.c
 
-> > > I'm not sure whether the other DRM drivers would like to integrate
-> > > this tracepoint(maybe upstream drivers will move away from debugfs
-> > > later as well?), but at least we hope virtio-gpu can take this.
-
-Well, it is basically the same for all drivers using the gem shmem
-helpers.  So I see little reason why we should do that at virtio-gpu
-level.
-
-> Android GPU vendors have integrated this tracepoint to track gpu
-> memory usage total(mapped into the gpu address space), which consists
-> of below:
-> (1) directly allocated via physical page allocator
-> (2) imported external memory backed by dma-bufs
-> (3) allocated exportable memory backed by dma-bufs
-
-Hmm, the tracepoint doesn't track which of the three groups the memory
-belongs to.  Which I think is important, specifically group (2) because
-that might already be accounted for by the exporting driver ...
-
-> Our Android kernel team is leading the other side of effort to help
-> remove the dma-bufs overlap(those mapped into a gpu device) as a joint
-> effort, so that we can accurately explain the memory usage of the
-> entire Android system.
-
-I suspect once you figured that you'll notice that this little hack is
-rather incomplete.
-
-> For virtio-gpu, since that's used by our reference platform
-> Cuttlefish(Cloud Android), we have to integrate the same tracepoint as
-> well to enforce the use of this tracepoint and the eBPF stuff built on
-> top to support runtime query of gpu memory on production devices. For
-> virtio-gpu at this moment, we only want to track GEM allocations since
-> PRIME import is currently not supported/used in Cuttlefish. That's all
-> we are doing in this small patch.
-
-take care,
-  Gerd
+-- 
+2.26.2
 
 _______________________________________________
 Virtualization mailing list
