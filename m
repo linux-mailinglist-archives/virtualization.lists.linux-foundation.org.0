@@ -1,89 +1,57 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 057BE2FCF24
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 12:34:01 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF8A52FD049
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 13:51:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A233887060;
-	Wed, 20 Jan 2021 11:33:59 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 69FFE203DC;
+	Wed, 20 Jan 2021 12:51:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ri+uVTfleJES; Wed, 20 Jan 2021 11:33:57 +0000 (UTC)
+	with ESMTP id Cq6f13+GMPuL; Wed, 20 Jan 2021 12:50:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id A726187053;
-	Wed, 20 Jan 2021 11:33:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 753D2203B9;
+	Wed, 20 Jan 2021 12:50:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9024FC088B;
-	Wed, 20 Jan 2021 11:33:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 440B4C013A;
+	Wed, 20 Jan 2021 12:50:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D2F33C013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 93FB1C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 11:33:56 +0000 (UTC)
+ Wed, 20 Jan 2021 12:50:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id CDF5A85E77
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 6E15085F2D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 11:33:56 +0000 (UTC)
+ Wed, 20 Jan 2021 12:50:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QhmDNpnryLov
+ with ESMTP id EKLDJpvjuV1k
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 11:33:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 0706E85E69
+ Wed, 20 Jan 2021 12:50:09 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
+ [5.45.125.222])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 87E3785E60
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 11:33:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1611142434;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UUX//Uf+V6l0OJyZxkhQnjE+0KPFHbcXgQTrdUt5Ypg=;
- b=QnlGRhNmR8Z2A1flHEv2whf68A0l/W+8a2XlvaB3R1pHkk7hIMgcFrxF2sHc9RV7wco2vL
- 5OfWKJYb7RsMEaNtYITQp15sqfg1HCjFqN75Eva3/G91RUlWWdcLMJ/fwZpZkmHa38jxTt
- qjKSPo/Z9O/I1+d2SGsKKbdKV9L6Wng=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-229-CFemLnO9OUWF2i6KPxc-_g-1; Wed, 20 Jan 2021 06:33:52 -0500
-X-MC-Unique: CFemLnO9OUWF2i6KPxc-_g-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9EDD11007245;
- Wed, 20 Jan 2021 11:33:42 +0000 (UTC)
-Received: from [10.36.115.161] (ovpn-115-161.ams2.redhat.com [10.36.115.161])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7D3085F9B5;
- Wed, 20 Jan 2021 11:33:38 +0000 (UTC)
-Subject: Re: [PATCH] virtio-mem: Assign boolean values to a bool variable
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <1611129031-82818-1-git-send-email-abaci-bugfix@linux.alibaba.com>
- <81a1817d-a1f5-dfca-550c-3e3f62cf3a9d@redhat.com>
- <20210120045736-mutt-send-email-mst@kernel.org>
- <da2cb3fb-0ea5-5afd-afb5-a9e7f474e148@redhat.com>
- <20210120060301-mutt-send-email-mst@kernel.org>
- <a61b016e-7896-134c-a1be-8ff8e8e6fbe2@redhat.com>
- <20210120063209-mutt-send-email-mst@kernel.org>
-From: David Hildenbrand <david@redhat.com>
-Organization: Red Hat GmbH
-Message-ID: <486f9996-377d-0901-838b-8a4a1747d128@redhat.com>
-Date: Wed, 20 Jan 2021 12:33:37 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
+ Wed, 20 Jan 2021 12:50:07 +0000 (UTC)
+Received: from [37.189.17.205] (helo=LAPTOP-EPOV2LRR)
+ by s052d7dde.fastvps-server.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <marle@saisti.eu>) id 1l2CGA-0007gT-UM
+ for virtualization@lists.linux-foundation.org; Wed, 20 Jan 2021 15:06:51 +0300
+From: "ML" <marialemos72@gmail.com>
+Subject: Doctoral Symposium - CISTI 2021, Chaves, Portugal
+To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-In-Reply-To: <20210120063209-mutt-send-email-mst@kernel.org>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: Tian Tao <tiantao6@hisilicon.com>,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
- Jiapeng Zhong <abaci-bugfix@linux.alibaba.com>
+Date: Wed, 20 Jan 2021 12:06:51 +0000
+Message-ID: <1651271960531@gmail-com>
+X-Antivirus: AVG (VPS 210119-6, 19/01/2021), Outbound message
+X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,31 +63,542 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: cistiforever@gmail.com
+Content-Type: multipart/mixed; boundary="===============9120043526789958109=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
->>> Want to send your ack on this one?
->>
->> Sure
->>
->> Acked-by: David Hildenbrand <david@redhat.com>
-> 
-> 
-> Added yours and the original Signed-off-by.
-> 
-> Thanks!
+This is a multi-part message in MIME format
 
-Thanks Michael!
+--===============9120043526789958109==
+Content-Type: multipart/alternative; charset=utf-8; boundary="q48AiKyJ9KOXWpGrq6Pep8=_Ayx8qiBc7D"
+
+This is a multi-part message in MIME format
+
+--q48AiKyJ9KOXWpGrq6Pep8=_Ayx8qiBc7D
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+------------------------------    ------------------------------    -------=
+-----------------------    ---------- 
+Doctoral Symposium 
+
+CISTI 2021 - 16th Iberian Conference on Information Systems and Technologie=
+s, Chaves, Portugal, 23 - 26 June 2021
+
+http://www.cisti.eu/ <http://www.cisti.eu/>
+
+------------------------------    ------------------------------    -------=
+-----------------------    --------- 
+ 
+
+The purpose of CISTI'2021=E2=80=99s Doctoral Symposium is to provide gradua=
+te students a setting where they can, informally, expose and discuss their =
+work, collecting valuable expert opinions and sharing new ideas, methods an=
+d applications. The Doctoral Symposium is an excellent opportunity for PhD =
+students to present and discuss their work in a Workshop format. Each prese=
+ntation will be evaluated by a panel composed by at least three Information=
+ Systems and Technologies experts.
+
+ 
+
+Contributions Submission 
+
+The Doctoral Symposium is opened to PhD students whose research area includ=
+es the themes proposed for this Conference. Submissions must include an ext=
+ended abstract (maximum 4 pages), following the Conference style guide. All=
+ selected contributions will be published with the Conference Proceedings i=
+n electronic format with ISBN. These contributions will be available in the=
+ IEEE Xplore Digital Library and will be sent for indexing in ISI, Scopus, =
+EI-Compendex, INSPEC and Google Scholar.
+
+Submissions must include the field, the PhD institution and the number of m=
+onths devoted to the development of the work. Additionally, they should inc=
+lude in a clear and succinct manner:
+
+   =E2=80=A2    The problem approached and its significance or relevance 
+   =E2=80=A2    The research objectives and related investigation topics 
+   =E2=80=A2    A brief display of what is already known 
+   =E2=80=A2    A proposed solution methodology for the problem 
+   =E2=80=A2    Expected results 
+
+ 
+
+Important Dates 
+
+Paper submission: February 14, 2021
+
+Notification of acceptance: March 28, 2021
+
+Submission of accepted papers: April 11, 2021
+
+Payment of registration, to ensure the inclusion of an accepted paper in th=
+e conference proceedings: April 11, 2021
+
+ 
+
+Organizing Committee 
+
+=C3=81lvaro Rocha, ISEG, Universidade de Lisboa
+
+Francisco Garc=C3=ADa-Pe=C3=B1alvo, Universidad de Salamanca
+
+ 
+
+Scientific Committee 
+
+Francisco Garc=C3=ADa-Pe=C3=B1alvo, Universidad de Salamanca (Chair)
+
+A. Augusto Sousa, FEUP, Universidade do Porto
+
+Ad=C3=A9rito Fernandes-Marcos, Universidade Aberta
+
+Adolfo Lozano Tello, Universidad de Extremadura
+
+Alicia Garc=C3=ADa Holgado, Universidad de Salamanca
+
+=C3=81lvaro Rocha, ISEG, Universidade de Lisboa
+
+Ana Am=C3=A9lia Carvalho, Universidade de Coimbra
+
+Ant=C3=B3nio Palma do Reis, ISEG, Universidade de Lisboa
+
+Arnaldo Martins, Universidade de Aveiro
+
+Borja Bordel, Universidad Polit=C3=A9cnica de Madrid
+
+Br=C3=A1ulio Alturas, ISCTE - Instituto Universit=C3=A1rio de Lisboa
+
+Carina Soledad Gonz=C3=A1lez, Universidad de La Laguna
+
+Carlos Costa, ISEG, Universidade de Lisboa
+
+Carlos Ferr=C3=A1s Sexto, Universidad de Santiago de Compostela
+
+Cesar Collazos, Universidad del Cauca
+
+Daniel Amo, La Salle, Universidad Ramon Llull
+
+David Fonseca, La Salle, Universitat Ramon Llull
+
+Eduardo S=C3=A1nchez Vila, Universidade de Santiago de Compostela
+
+Fernando Moreira, Universidade Portucalense
+
+Fernando Ramos, Universidade de Aveiro
+
+Francisco Restivo, Universidade Cat=C3=B3lica Portuguesa
+
+Gon=C3=A7alo Paiva Dias, Universidade de Aveiro
+
+Jo=C3=A3o Costa, Universidade de Coimbra
+
+Jo=C3=A3o Manuel R.S. Tavares, FEUP, Universidade do Porto
+
+Jo=C3=A3o Pascoal Faria, FEUP, Universidade do Porto
+
+Jos=C3=A9 Machado, Universidade do Minho
+
+Luis Camarinha-Matos, FCT, Universidade NOVA de Lisboa
+
+Lu=C3=ADs Paulo Reis, FEUP, Universidade do Porto
+
+Marcelo Marciszack, Universidad Tecnol=C3=B3gica Nacional
+
+Marco Painho, NOVA IMS
+
+Mar=C3=ADa J Lado, Universidade de Vigo
+
+Mar=C3=ADa Pilar Mareca Lopez, Universidad Polit=C3=A9cnica de Madrid
+
+M=C3=A1rio Piattini, Universidad de Castilla-La Mancha
+
+Martin Llamas Nistal, Universidad de Vigo
+
+Miguel Casquilho, IST, Universidade de Lisboa
+
+Miguel de Castro Neto, NOVA IMS
+
+Miguel Ram=C3=B3n Gonz=C3=A1lez-Castro, ENCE
+
+Nelson Rocha, Universidade de Aveiro
+
+=C3=93scar Mealha, Universidade de Aveiro
+
+Paulo Pinto, FCT, Universidade Nova de Lisboa
+
+Ramiro Gon=C3=A7alves, Universidade de Tr=C3=A1s-os-Montes e Alto Douro
+
+Tomas San Feliu, Universidad Polit=C3=A9cnica de Madrid
+
+Vitor Santos, NOVA IMS
+
+ 
+
+Website of CISTI'2021: http://www.cisti.eu/ <http://www.cisti.eu/>
+
+ 
+
+CISTI 2021 Team
+
+http://www.cisti.eu/ <http://www.cisti.eu/>
 
 
 -- 
-Thanks,
+This email has been checked for viruses by AVG.
+https://www.avg.com
 
-David / dhildenb
+--q48AiKyJ9KOXWpGrq6Pep8=_Ayx8qiBc7D
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html>
+  <head>
+    <title></title>
+    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
+" />
+  </head>
+  <body>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">------------------------------ 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;------------------------------ 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;------------------------------ 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;---------- 
+    </p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%"><strong>Doctoral Symposium</strong> </p>=
+
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">CISTI 2021 - 16th Iberian Conference on =
+Information Systems and Technologies, Chaves, Portugal, 23 - 26 June 2021</=
+p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%"><a href=3D"http://www.cisti.eu/" target=
+=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttp://w=
+ww.cisti.eu/&source=3Dgmail&ust=3D1606828157836000&usg=3DAFQjCNHYuKquL9ivSq=
+eC_9iq3du8iRglzg">http://www.cisti.eu/</a></p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">------------------------------ 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;------------------------------ 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;------------------------------ 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;--------- 
+    </p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp;</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">The purpose of CISTI'2021&rsquo;s Doctor=
+al Symposium is to provide graduate students a setting where they can, info=
+rmally, expose and discuss their work, collecting valuable expert opinions =
+and sharing new ideas, methods and applications. The Doctoral Symposium is =
+an excellent opportunity for PhD students to present and discuss their work=
+ in a Workshop format. Each presentation will be evaluated by a panel compo=
+sed by at least three Information Systems and Technologies experts.</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp;</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%"><strong>Contributions Submission</strong=
+> </p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">The Doctoral Symposium is opened to PhD =
+students whose research area includes the themes proposed for this Conferen=
+ce. Submissions must include an extended abstract (maximum 4 pages), follow=
+ing the Conference style guide. All selected contributions will be publishe=
+d with the Conference Proceedings in electronic format with ISBN. These con=
+tributions will be available in the IEEE Xplore Digital Library and will be=
+ sent for indexing in ISI, Scopus, EI-Compendex, INSPEC and Google Scholar.=
+</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Submissions must include the field, the =
+PhD institution and the number of months devoted to the development of the =
+work. Additionally, they should include in a clear and succinct manner:</p>=
+
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp; &nbsp;&bull; &nbsp; &nbsp;The pro=
+blem approached and its significance or relevance <br />&nbsp; &nbsp;&bull;=
+ &nbsp; &nbsp;The research objectives and related investigation topics <br =
+/>&nbsp; &nbsp;&bull; &nbsp; &nbsp;A brief display of what is already known=
+ <br />&nbsp; &nbsp;&bull; &nbsp; &nbsp;A proposed solution methodology for=
+ the problem <br />&nbsp; &nbsp;&bull; &nbsp; &nbsp;Expected results </p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp;</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%"><strong>Important Dates</strong> </p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Paper submission: February 14, 2021</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Notification of acceptance: March 28, 20=
+21</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Submission of accepted papers: April 11,=
+ 2021</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Payment of registration, to ensure the i=
+nclusion of an accepted paper in the conference proceedings: April 11, 2021=
+</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp;</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%"><strong>Organizing Committee</strong> </=
+p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&Aacute;lvaro Rocha, ISEG, Universidade =
+de Lisboa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Francisco Garc&iacute;a-Pe&ntilde;alvo, =
+Universidad de Salamanca</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp;</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%"><strong>Scientific Committee</strong> </=
+p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Francisco Garc&iacute;a-Pe&ntilde;alvo, =
+Universidad de Salamanca (Chair)</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">A. Augusto Sousa, FEUP, Universidade do =
+Porto</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Ad&eacute;rito Fernandes-Marcos, Univers=
+idade Aberta</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Adolfo Lozano Tello, Universidad de Extr=
+emadura</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Alicia Garc&iacute;a Holgado, Universida=
+d de Salamanca</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&Aacute;lvaro Rocha, ISEG, Universidade =
+de Lisboa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Ana Am&eacute;lia Carvalho, Universidade=
+ de Coimbra</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Ant&oacute;nio Palma do Reis, ISEG, Univ=
+ersidade de Lisboa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Arnaldo Martins, Universidade de Aveiro<=
+/p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Borja Bordel, Universidad Polit&eacute;c=
+nica de Madrid</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Br&aacute;ulio Alturas, ISCTE - Institut=
+o Universit&aacute;rio de Lisboa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Carina Soledad Gonz&aacute;lez, Universi=
+dad de La Laguna</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Carlos Costa, ISEG, Universidade de Lisb=
+oa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Carlos Ferr&aacute;s Sexto, Universidad =
+de Santiago de Compostela</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Cesar Collazos, Universidad del Cauca</p=
+>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Daniel Amo, La Salle, Universidad Ramon =
+Llull</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">David Fonseca, La Salle, Universitat Ram=
+on Llull</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Eduardo S&aacute;nchez Vila, Universidad=
+e de Santiago de Compostela</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Fernando Moreira, Universidade Portucale=
+nse</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Fernando Ramos, Universidade de Aveiro</=
+p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Francisco Restivo, Universidade Cat&oacu=
+te;lica Portuguesa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Gon&ccedil;alo Paiva Dias, Universidade =
+de Aveiro</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Jo&atilde;o Costa, Universidade de Coimb=
+ra</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Jo&atilde;o Manuel R.S. Tavares, FEUP, U=
+niversidade do Porto</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Jo&atilde;o Pascoal Faria, FEUP, Univers=
+idade do Porto</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Jos&eacute; Machado, Universidade do Min=
+ho</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Luis Camarinha-Matos, FCT, Universidade =
+NOVA de Lisboa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Lu&iacute;s Paulo Reis, FEUP, Universida=
+de do Porto</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Marcelo Marciszack, Universidad Tecnol&o=
+acute;gica Nacional</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Marco Painho, NOVA IMS</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Mar&iacute;a J Lado, Universidade de Vig=
+o</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Mar&iacute;a Pilar Mareca Lopez, Univers=
+idad Polit&eacute;cnica de Madrid</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">M&aacute;rio Piattini, Universidad de Ca=
+stilla-La Mancha</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Martin Llamas Nistal, Universidad de Vig=
+o</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Miguel Casquilho, IST, Universidade de L=
+isboa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Miguel de Castro Neto, NOVA IMS</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Miguel Ram&oacute;n Gonz&aacute;lez-Cast=
+ro, ENCE</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Nelson Rocha, Universidade de Aveiro</p>=
+
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&Oacute;scar Mealha, Universidade de Ave=
+iro</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Paulo Pinto, FCT, Universidade Nova de L=
+isboa</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Ramiro Gon&ccedil;alves, Universidade de=
+ Tr&aacute;s-os-Montes e Alto Douro</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Tomas San Feliu, Universidad Polit&eacut=
+e;cnica de Madrid</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Vitor Santos, NOVA IMS</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp;</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">Website of CISTI'2021: <a href=3D"http:/=
+/www.cisti.eu/" target=3D"_blank" data-saferedirecturl=3D"https://www.googl=
+e.com/url?q=3Dhttp://www.cisti.eu/&source=3Dgmail&ust=3D1606828157836000&us=
+g=3DAFQjCNHYuKquL9ivSqeC_9iq3du8iRglzg">http://www.cisti.eu/</a></p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">&nbsp;</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%">CISTI 2021 Team</p>
+    <p style=3D"font-size: 16px; overflow: hidden; font-family: Arial; colo=
+r: rgb(109,109,109); padding-bottom: 0px; text-align: left; padding-top: 0p=
+x; margin: 0px; line-height: 200%"><a href=3D"http://www.cisti.eu/" target=
+=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttp://w=
+ww.cisti.eu/&source=3Dgmail&ust=3D1606828157836000&usg=3DAFQjCNHYuKquL9ivSq=
+eC_9iq3du8iRglzg">http://www.cisti.eu/</a></p>
+  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br />
+<table style=3D"border-top: 1px solid #D3D4DE;">
+	<tr>
+        <td style=3D"width: 55px; padding-top: 13px;"><a href=3D"http://www=
+=2Eavg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaig=
+n=3Dsig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"http=
+s://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=
+=3D""  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></=
+a></td>
+		<td style=3D"width: 470px; padding-top: 12px; color: #41424e; font-size: =
+13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virus-=
+free. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_=
+source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
+"_blank" style=3D"color: #4453ea;">www.avg.com</a>
+		</td>
+	</tr>
+</table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" heigh=
+t=3D"1"> </a></div></body>
+</html>
+
+--q48AiKyJ9KOXWpGrq6Pep8=_Ayx8qiBc7D--
+
+
+--===============9120043526789958109==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============9120043526789958109==--
+
