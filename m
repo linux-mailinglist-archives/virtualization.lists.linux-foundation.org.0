@@ -1,93 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E60C12FD508
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 17:14:11 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id E3ECA2FD5AD
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 17:32:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 67CBF2036D;
-	Wed, 20 Jan 2021 16:14:10 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8029A870D6;
+	Wed, 20 Jan 2021 16:32:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PHINz9DG46Sx; Wed, 20 Jan 2021 16:14:09 +0000 (UTC)
+	with ESMTP id 0SvMhFMVdEUf; Wed, 20 Jan 2021 16:32:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id E49BB20341;
-	Wed, 20 Jan 2021 16:14:08 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A92FC870E5;
+	Wed, 20 Jan 2021 16:32:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B2B8DC013A;
-	Wed, 20 Jan 2021 16:14:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 867F0C013A;
+	Wed, 20 Jan 2021 16:32:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C3927C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 38807C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:14:06 +0000 (UTC)
+ Wed, 20 Jan 2021 16:32:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id A9BFA81B19
+ by whitealder.osuosl.org (Postfix) with ESMTP id 2041C866B0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:14:06 +0000 (UTC)
+ Wed, 20 Jan 2021 16:32:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id saVyp9SmV0On
+ with ESMTP id ryk2vgEDMmA8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:14:05 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
- [209.85.208.53])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 1D2F3847C3
+ Wed, 20 Jan 2021 16:32:07 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from EX13-EDG-OU-001.vmware.com (ex13-edg-ou-001.vmware.com
+ [208.91.0.189])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 7410E866AE
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:14:05 +0000 (UTC)
-Received: by mail-ed1-f53.google.com with SMTP id n6so11326822edt.10
- for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 08:14:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=soleen.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Q3YaCJQ8LfKzkGjKHvvi/q44WKBCWlUY5g3M93ES9N4=;
- b=Qt+31s0k7Mjn6X5fLAPTZQBwGj66PX2q4gx9kZJM9UU0Fj9zKf9iGeB0nLS2LYGKMg
- LWmex1RpYlfY9c7UusCIbs5ju8pv3J++sSocIjMB0TZeXaiOMpwKWUVIWcYTMDBCKshV
- KjCry0XhhdgozhMjbeK7T8OsOyK3HHOJ+FpG/iMZXDHOmzjR91e20ux83TWKRlkXNvni
- weYgzqBxlQMq5jxc7aAh1xOhFkoVzr449eIWCGojiBzCQMwEra67oRs/VMHKqTTvdp1/
- WqdjBF3YCBKno8Fy90iju+Cvm4YwOeOtDaQ98rEw5RykZWJLVHF0vaAlgEtzzw2llV+X
- YTzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Q3YaCJQ8LfKzkGjKHvvi/q44WKBCWlUY5g3M93ES9N4=;
- b=n0Z6M5WD+PQ02y9D0DaIsonY45KD/23EbxBA0sTlq8qPtJ+dHfRhMQMcuKWZ5X/IUK
- fscWKUf+kf8KlUX/Kg7/9wJQuf4PyfKbQpbu46j/pjqkPKWvGqegtUvmookoJ1Kw530/
- s2J2RM+7wTzC5ctl2ZhlDhQKAxG+OvOPOY3ZtChZMBcR5lnr8NmBlrQYuAqxhQOY0tWH
- FDFGzQ11pPVk5sgZ5wyG8HyVherR3/+4c4z0Lqps9agBwaR1SrJ35EYkrTUMJxmn4q/z
- QPiW58YOC12PYv80/X/4m+9HZxve2+flY6nFrpVFMzXIyLVp5ZP5YREs9rBttUmyVDe8
- BozQ==
-X-Gm-Message-State: AOAM530ibVvVIscBa/Ld7O4F8Sam9iQYRvt2cuClMJRtolCmt45Fj3o1
- hbp3mO0rR6GSRG1j7vq7jGFIq4CT6/cgWTUOrPFDOg==
-X-Google-Smtp-Source: ABdhPJwSZ/KSHBr1sBpNSdWGO8It3AqUEuSIdP5w2bhyco9/KW73LkGrKMnaE5mNEUQEA2lqr+GLf+3ATR5p3G98/nA=
-X-Received: by 2002:aa7:d803:: with SMTP id v3mr7702645edq.153.1611159243691; 
- Wed, 20 Jan 2021 08:14:03 -0800 (PST)
+ Wed, 20 Jan 2021 16:32:07 +0000 (UTC)
+Received: from sc9-mailhost1.vmware.com (10.113.161.71) by
+ EX13-EDG-OU-001.vmware.com (10.113.208.155) with Microsoft SMTP Server id
+ 15.0.1156.6; Wed, 20 Jan 2021 08:31:59 -0800
+Received: from sc-dbc2115.eng.vmware.com (sc-dbc2115.eng.vmware.com
+ [10.182.28.6])
+ by sc9-mailhost1.vmware.com (Postfix) with ESMTP id 67BC5207BD;
+ Wed, 20 Jan 2021 08:32:04 -0800 (PST)
+From: Jorgen Hansen <jhansen@vmware.com>
+To: <linux-kernel@vger.kernel.org>, <virtualization@lists.linux-foundation.org>
+Subject: [PATCH v2 0/3] VMCI: Queue pair bug fixes
+Date: Wed, 20 Jan 2021 08:32:04 -0800
+Message-ID: <1611160324-30066-1-git-send-email-jhansen@vmware.com>
+X-Mailer: git-send-email 2.6.2
 MIME-Version: 1.0
-References: <20210120120058.29138-1-wei.liu@kernel.org>
- <20210120120058.29138-6-wei.liu@kernel.org>
-In-Reply-To: <20210120120058.29138-6-wei.liu@kernel.org>
-From: Pavel Tatashin <pasha.tatashin@soleen.com>
-Date: Wed, 20 Jan 2021 11:13:28 -0500
-Message-ID: <CA+CK2bBTjUWEOrFKi4pYpEe355sve6b7AjKGc7cQRRe3c-DTrQ@mail.gmail.com>
-Subject: Re: [PATCH v5 05/16] clocksource/hyperv: use MSR-based access if
- running as root
-To: Wei Liu <wei.liu@kernel.org>
-Cc: Linux on Hyper-V List <linux-hyperv@vger.kernel.org>,
- Stephen Hemminger <sthemmin@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Daniel Lezcano <daniel.lezcano@linaro.org>,
- Linux Kernel List <linux-kernel@vger.kernel.org>,
- Michael Kelley <mikelley@microsoft.com>,
- Nuno Das Neves <nunodasneves@linux.microsoft.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>,
- virtualization@lists.linux-foundation.org,
- Vineeth Pillai <viremana@linux.microsoft.com>,
- Thomas Gleixner <tglx@linutronix.de>
+Received-SPF: None (EX13-EDG-OU-001.vmware.com: jhansen@vmware.com does not
+ designate permitted sender hosts)
+Cc: pv-drivers@vmware.com, gregkh@linuxfoundation.org,
+ Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,37 +73,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jan 20, 2021 at 7:01 AM Wei Liu <wei.liu@kernel.org> wrote:
->
-> When Linux runs as the root partition, the setup required for TSC page
-> is different.
+This series contains three bug fixes for the queue pair
+implementation in the VMCI driver.
 
-Why would we need a TSC page as a clock source for root partition at
-all? I think the above can be removed.
+v1 -> v2:
+  - format patches as a series
+  - use min_t instead of min to ensure size_t comparison
+    (issue pointed out by kernel test robot <lkp@intel.com>)
 
- Luckily Linux also has access to the MSR based
-> clocksource. We can just disable the TSC page clocksource if Linux is
-> the root partition.
->
-> Signed-off-by: Wei Liu <wei.liu@kernel.org>
-> Acked-by: Daniel Lezcano <daniel.lezcano@linaro.org>
-> ---
->  drivers/clocksource/hyperv_timer.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/drivers/clocksource/hyperv_timer.c b/drivers/clocksource/hyperv_timer.c
-> index ba04cb381cd3..269a691bd2c4 100644
-> --- a/drivers/clocksource/hyperv_timer.c
-> +++ b/drivers/clocksource/hyperv_timer.c
-> @@ -426,6 +426,9 @@ static bool __init hv_init_tsc_clocksource(void)
->         if (!(ms_hyperv.features & HV_MSR_REFERENCE_TSC_AVAILABLE))
->                 return false;
->
-> +       if (hv_root_partition)
-> +               return false;
-> +
+Jorgen Hansen (3):
+  VMCI: Stop log spew when qp allocation isn't possible
+  VMCI: Use set_page_dirty_lock() when unregistering guest memory
+  VMCI: Enforce queuepair max size for IOCTL_VMCI_QUEUEPAIR_ALLOC
 
-Reviewed-by: Pavel Tatashin <pasha.tatashin@soleen.com>
+ drivers/misc/vmw_vmci/vmci_queue_pair.c | 16 ++++++++++------
+ include/linux/vmw_vmci_defs.h           |  4 ++--
+ 2 files changed, 12 insertions(+), 8 deletions(-)
+
+-- 
+2.6.2
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
