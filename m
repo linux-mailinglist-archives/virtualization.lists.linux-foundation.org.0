@@ -2,91 +2,92 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 725F22FD500
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 17:10:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E60C12FD508
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 17:14:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C400120341;
-	Wed, 20 Jan 2021 16:10:00 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 67CBF2036D;
+	Wed, 20 Jan 2021 16:14:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sxs+1rxyRpRX; Wed, 20 Jan 2021 16:10:00 +0000 (UTC)
+	with ESMTP id PHINz9DG46Sx; Wed, 20 Jan 2021 16:14:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 384BE2010B;
-	Wed, 20 Jan 2021 16:10:00 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id E49BB20341;
+	Wed, 20 Jan 2021 16:14:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 13867C013A;
-	Wed, 20 Jan 2021 16:10:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B2B8DC013A;
+	Wed, 20 Jan 2021 16:14:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 04FE9C013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C3927C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:09:58 +0000 (UTC)
+ Wed, 20 Jan 2021 16:14:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 00651848A0
+ by fraxinus.osuosl.org (Postfix) with ESMTP id A9BFA81B19
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:09:58 +0000 (UTC)
+ Wed, 20 Jan 2021 16:14:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kkxJeEqjoqsU
+ with ESMTP id saVyp9SmV0On
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:09:56 +0000 (UTC)
+ Wed, 20 Jan 2021 16:14:05 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
- [209.85.208.44])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 9B09B847C3
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+ [209.85.208.53])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1D2F3847C3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 16:09:11 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id p22so26368179edu.11
+ Wed, 20 Jan 2021 16:14:05 +0000 (UTC)
+Received: by mail-ed1-f53.google.com with SMTP id n6so11326822edt.10
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 08:09:11 -0800 (PST)
+ Wed, 20 Jan 2021 08:14:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=soleen.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uFPoWmdT1E7447c/foHDjqNJuO8UPeUXJAj8ZTCeNuI=;
- b=bNp4m8GXBuiU/FXyjO9D9cA/C4gIGIPznUcpKtSxPEKyebwvVQ+aRwdeBURGW60Aqn
- LWDM8IY14JaXyGVpmy9pspE7lfObh3UXUk1T9JUoE9m742jY/UWqwZOuCBJ1bPyIODGl
- UnlPbfbmqFegwGszXH5A2WM1t7WLON4F/hTTf41tPfVOHi9uvgUn8pBT7w/CdD4OSxCR
- Pj4XoIeByZmeoQNQ4FhMnueL2wZ9/ttGENz2s0DHc9xIW18UNCzE7rgOV30lEB4IWM6K
- z43ISZVwDPuNuqM8j3RZAlGmRUAK0i/ai2ThrTF7kmw/zPRYVf/biTfeZ/ArEDWa+95U
- iDfA==
+ :cc; bh=Q3YaCJQ8LfKzkGjKHvvi/q44WKBCWlUY5g3M93ES9N4=;
+ b=Qt+31s0k7Mjn6X5fLAPTZQBwGj66PX2q4gx9kZJM9UU0Fj9zKf9iGeB0nLS2LYGKMg
+ LWmex1RpYlfY9c7UusCIbs5ju8pv3J++sSocIjMB0TZeXaiOMpwKWUVIWcYTMDBCKshV
+ KjCry0XhhdgozhMjbeK7T8OsOyK3HHOJ+FpG/iMZXDHOmzjR91e20ux83TWKRlkXNvni
+ weYgzqBxlQMq5jxc7aAh1xOhFkoVzr449eIWCGojiBzCQMwEra67oRs/VMHKqTTvdp1/
+ WqdjBF3YCBKno8Fy90iju+Cvm4YwOeOtDaQ98rEw5RykZWJLVHF0vaAlgEtzzw2llV+X
+ YTzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=uFPoWmdT1E7447c/foHDjqNJuO8UPeUXJAj8ZTCeNuI=;
- b=V1qzvBgFX3PkQcmYvvHAPnTtSiKW/vVD+ZF8647NC1ixiCN3SJomLhe7zjoXSTtScN
- w0Fzs/GcLdrwrH8ID2OvTZxmlSEwf9rgtJIWRCeeMskh/52Q0GvWZuNfNFvj+Zo514PY
- WMW2VqZfhNSNlld+4XI478kIH5XiskhACOoIsMGh0M8jc+JapKopm0DrQc4Gvuvut55s
- Quu6nfL4yjRW6mthZzm9oeL9D+OKwvVRbJseR2dirW0hanfryOT7SHg/TV0c9zwyqMvP
- fjLVArB5B+bPDZ8P8yJ9rA5l+YKNALcox5Tje1IrMUfYbOMB35FFnKMDWVWoOlNmym2M
- LHSw==
-X-Gm-Message-State: AOAM531+VEHJpfv54SbNgg2wum188iDBQpp3xKnIJFp2v3+qmuuYrp1a
- 93iAXdmqA4CJPMDBeVjoFEas/pAu408JukUi6HtpJQ==
-X-Google-Smtp-Source: ABdhPJzzrx43U/MRM+U+2IS6fjT5/s61ISkHSJJW/uV0YTHN3o25ui9xpDMoE2/qruoEGyRFVzUk7yyVBnemuDxnOFQ=
-X-Received: by 2002:aa7:d803:: with SMTP id v3mr7685979edq.153.1611158950213; 
- Wed, 20 Jan 2021 08:09:10 -0800 (PST)
+ bh=Q3YaCJQ8LfKzkGjKHvvi/q44WKBCWlUY5g3M93ES9N4=;
+ b=n0Z6M5WD+PQ02y9D0DaIsonY45KD/23EbxBA0sTlq8qPtJ+dHfRhMQMcuKWZ5X/IUK
+ fscWKUf+kf8KlUX/Kg7/9wJQuf4PyfKbQpbu46j/pjqkPKWvGqegtUvmookoJ1Kw530/
+ s2J2RM+7wTzC5ctl2ZhlDhQKAxG+OvOPOY3ZtChZMBcR5lnr8NmBlrQYuAqxhQOY0tWH
+ FDFGzQ11pPVk5sgZ5wyG8HyVherR3/+4c4z0Lqps9agBwaR1SrJ35EYkrTUMJxmn4q/z
+ QPiW58YOC12PYv80/X/4m+9HZxve2+flY6nFrpVFMzXIyLVp5ZP5YREs9rBttUmyVDe8
+ BozQ==
+X-Gm-Message-State: AOAM530ibVvVIscBa/Ld7O4F8Sam9iQYRvt2cuClMJRtolCmt45Fj3o1
+ hbp3mO0rR6GSRG1j7vq7jGFIq4CT6/cgWTUOrPFDOg==
+X-Google-Smtp-Source: ABdhPJwSZ/KSHBr1sBpNSdWGO8It3AqUEuSIdP5w2bhyco9/KW73LkGrKMnaE5mNEUQEA2lqr+GLf+3ATR5p3G98/nA=
+X-Received: by 2002:aa7:d803:: with SMTP id v3mr7702645edq.153.1611159243691; 
+ Wed, 20 Jan 2021 08:14:03 -0800 (PST)
 MIME-Version: 1.0
 References: <20210120120058.29138-1-wei.liu@kernel.org>
- <20210120120058.29138-5-wei.liu@kernel.org>
-In-Reply-To: <20210120120058.29138-5-wei.liu@kernel.org>
+ <20210120120058.29138-6-wei.liu@kernel.org>
+In-Reply-To: <20210120120058.29138-6-wei.liu@kernel.org>
 From: Pavel Tatashin <pasha.tatashin@soleen.com>
-Date: Wed, 20 Jan 2021 11:08:34 -0500
-Message-ID: <CA+CK2bByGvCr_H3_wv_3-vAOONhRenonFNeHff5UdeFLDxSoUw@mail.gmail.com>
-Subject: Re: [PATCH v5 04/16] iommu/hyperv: don't setup IRQ remapping when
+Date: Wed, 20 Jan 2021 11:13:28 -0500
+Message-ID: <CA+CK2bBTjUWEOrFKi4pYpEe355sve6b7AjKGc7cQRRe3c-DTrQ@mail.gmail.com>
+Subject: Re: [PATCH v5 05/16] clocksource/hyperv: use MSR-based access if
  running as root
 To: Wei Liu <wei.liu@kernel.org>
 Cc: Linux on Hyper-V List <linux-hyperv@vger.kernel.org>,
- Joerg Roedel <jroedel@suse.de>, Stephen Hemminger <sthemmin@microsoft.com>,
- Will Deacon <will@kernel.org>, Haiyang Zhang <haiyangz@microsoft.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>,
  Linux Kernel List <linux-kernel@vger.kernel.org>,
  Michael Kelley <mikelley@microsoft.com>,
- "open list:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
  Nuno Das Neves <nunodasneves@linux.microsoft.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>,
  virtualization@lists.linux-foundation.org,
- Vineeth Pillai <viremana@linux.microsoft.com>, Joerg Roedel <joro@8bytes.org>
+ Vineeth Pillai <viremana@linux.microsoft.com>,
+ Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,35 +106,33 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On Wed, Jan 20, 2021 at 7:01 AM Wei Liu <wei.liu@kernel.org> wrote:
 >
-> The IOMMU code needs more work. We're sure for now the IRQ remapping
-> hooks are not applicable when Linux is the root partition.
+> When Linux runs as the root partition, the setup required for TSC page
+> is different.
+
+Why would we need a TSC page as a clock source for root partition at
+all? I think the above can be removed.
+
+ Luckily Linux also has access to the MSR based
+> clocksource. We can just disable the TSC page clocksource if Linux is
+> the root partition.
 >
 > Signed-off-by: Wei Liu <wei.liu@kernel.org>
-> Acked-by: Joerg Roedel <jroedel@suse.de>
-> Reviewed-by: Vitaly Kuznetsov <vkuznets@redhat.com>
+> Acked-by: Daniel Lezcano <daniel.lezcano@linaro.org>
 > ---
->  drivers/iommu/hyperv-iommu.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  drivers/clocksource/hyperv_timer.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/drivers/iommu/hyperv-iommu.c b/drivers/iommu/hyperv-iommu.c
-> index 1d21a0b5f724..b7db6024e65c 100644
-> --- a/drivers/iommu/hyperv-iommu.c
-> +++ b/drivers/iommu/hyperv-iommu.c
-> @@ -20,6 +20,7 @@
->  #include <asm/io_apic.h>
->  #include <asm/irq_remapping.h>
->  #include <asm/hypervisor.h>
-> +#include <asm/mshyperv.h>
+> diff --git a/drivers/clocksource/hyperv_timer.c b/drivers/clocksource/hyperv_timer.c
+> index ba04cb381cd3..269a691bd2c4 100644
+> --- a/drivers/clocksource/hyperv_timer.c
+> +++ b/drivers/clocksource/hyperv_timer.c
+> @@ -426,6 +426,9 @@ static bool __init hv_init_tsc_clocksource(void)
+>         if (!(ms_hyperv.features & HV_MSR_REFERENCE_TSC_AVAILABLE))
+>                 return false;
 >
->  #include "irq_remapping.h"
->
-> @@ -122,7 +123,7 @@ static int __init hyperv_prepare_irq_remapping(void)
->
->         if (!hypervisor_is_type(X86_HYPER_MS_HYPERV) ||
->             x86_init.hyper.msi_ext_dest_id() ||
-> -           !x2apic_supported())
-> +           !x2apic_supported() || hv_root_partition)
->                 return -ENODEV;
+> +       if (hv_root_partition)
+> +               return false;
+> +
 
 Reviewed-by: Pavel Tatashin <pasha.tatashin@soleen.com>
 _______________________________________________
