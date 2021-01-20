@@ -1,42 +1,42 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4D752FCEDD
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 12:12:59 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id E27A52FCED8
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jan 2021 12:12:55 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 447F786948;
-	Wed, 20 Jan 2021 11:12:58 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 746C286FAF;
+	Wed, 20 Jan 2021 11:12:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id s8wQRnnIZz91; Wed, 20 Jan 2021 11:12:56 +0000 (UTC)
+	with ESMTP id JO+6NDGg6Gcv; Wed, 20 Jan 2021 11:12:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 775CA869B3;
-	Wed, 20 Jan 2021 11:12:56 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 1231186FC9;
+	Wed, 20 Jan 2021 11:12:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 56C55C013A;
-	Wed, 20 Jan 2021 11:12:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CFE88C013A;
+	Wed, 20 Jan 2021 11:12:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DA7CBC088B
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CA852C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 11:12:53 +0000 (UTC)
+ Wed, 20 Jan 2021 11:12:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id BD012203DF
+ by fraxinus.osuosl.org (Postfix) with ESMTP id C601984BDF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jan 2021 11:12:53 +0000 (UTC)
+ Wed, 20 Jan 2021 11:12:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Tk9GXv-2aOIC
+ with ESMTP id 25BzRv64f3SO
  for <virtualization@lists.linux-foundation.org>;
  Wed, 20 Jan 2021 11:12:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by silver.osuosl.org (Postfix) with ESMTPS id 4ED46203BF
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 19420848A5
  for <virtualization@lists.linux-foundation.org>;
  Wed, 20 Jan 2021 11:12:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
@@ -45,35 +45,35 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pW7S5BR/oz31kBJ4qqUftWtIKqk6Gjd3VXDhM7F8wlk=;
- b=LCfsKf6SQnlENRXim+CSqMcpmwP7H2Xf+s0MB4jRgCvY3gP26uxkPe1XEv60cNulf7BCHM
- Zzg5Lm/ap39H0JdhrVP+uHYp55Z/m7QjYNEdmy5dKP0Zjer7nnFjZNyXY7fIC2i854Zd57
- E5/maR9S5Sy2vIDca99/MfoldoisOaQ=
+ bh=21kTSpbci/GKul+97WxXMOEIvXz0qLwA8h+cgydNMqY=;
+ b=aIl5yaqDeCAReMAGgNDLlr5DI4JyhFCSjVA24U7/usmZAqPWCBhIgSQsqPWkJpT9UByeFY
+ RHhoJVLozR0UN+RkQoo7STYQV3afBbMczd+mtdorSdJIqYnyYWqSqZN07bvbnNSFw2hLKx
+ Q9mTEfFO8sos2ILywKtIT942JtqLtWk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-475-BzTxaFA9MfOPVBO_lG72Jg-1; Wed, 20 Jan 2021 06:12:49 -0500
-X-MC-Unique: BzTxaFA9MfOPVBO_lG72Jg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-276-9qzIsPB5PO-xzJ3SUkDKcQ-1; Wed, 20 Jan 2021 06:12:49 -0500
+X-MC-Unique: 9qzIsPB5PO-xzJ3SUkDKcQ-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D3BC58018A4;
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EFE1A107ACE6;
  Wed, 20 Jan 2021 11:12:47 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-112-182.ams2.redhat.com
  [10.36.112.182])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 3F2F070498;
- Wed, 20 Jan 2021 11:12:42 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id DA8797095E;
+ Wed, 20 Jan 2021 11:12:43 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 0C3BC180039F; Wed, 20 Jan 2021 12:12:41 +0100 (CET)
+ id 2829618003A0; Wed, 20 Jan 2021 12:12:41 +0100 (CET)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v3 2/4] drm/qxl: unpin release objects
-Date: Wed, 20 Jan 2021 12:12:38 +0100
-Message-Id: <20210120111240.2509679-3-kraxel@redhat.com>
+Subject: [PATCH v3 3/4] drm/qxl: release shadow on shutdown
+Date: Wed, 20 Jan 2021 12:12:39 +0100
+Message-Id: <20210120111240.2509679-4-kraxel@redhat.com>
 In-Reply-To: <20210120111240.2509679-1-kraxel@redhat.com>
 References: <20210120111240.2509679-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
@@ -95,26 +95,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Balances the qxl_create_bo(..., pinned=true, ...);
-call in qxl_release_bo_alloc().
+In case we have a shadow surface on shutdown release
+it so it doesn't leak.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/gpu/drm/qxl/qxl_release.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/qxl/qxl_display.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
-index 0fcfc952d5e9..add979cba11b 100644
---- a/drivers/gpu/drm/qxl/qxl_release.c
-+++ b/drivers/gpu/drm/qxl/qxl_release.c
-@@ -166,6 +166,7 @@ qxl_release_free_list(struct qxl_release *release)
- 		entry = container_of(release->bos.next,
- 				     struct qxl_bo_list, tv.head);
- 		bo = to_qxl_bo(entry->tv.bo);
-+		bo->tbo.pin_count = 0; /* ttm_bo_unpin(&bo->tbo); */
- 		qxl_bo_unref(&bo);
- 		list_del(&entry->tv.head);
- 		kfree(entry);
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index 38d6b596094d..60331e31861a 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1229,5 +1229,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+ 
+ void qxl_modeset_fini(struct qxl_device *qdev)
+ {
++	if (qdev->dumb_shadow_bo) {
++		drm_gem_object_put(&qdev->dumb_shadow_bo->tbo.base);
++		qdev->dumb_shadow_bo = NULL;
++	}
+ 	qxl_destroy_monitors_object(qdev);
+ }
 -- 
 2.29.2
 
