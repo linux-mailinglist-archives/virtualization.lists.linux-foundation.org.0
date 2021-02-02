@@ -1,99 +1,147 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 432A430C0D3
-	for <lists.virtualization@lfdr.de>; Tue,  2 Feb 2021 15:08:42 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 03A3A30C1B7
+	for <lists.virtualization@lfdr.de>; Tue,  2 Feb 2021 15:34:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id BC42A20387;
-	Tue,  2 Feb 2021 14:08:40 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A8AFD8666D;
+	Tue,  2 Feb 2021 14:34:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BGV9K+WfVO61; Tue,  2 Feb 2021 14:08:39 +0000 (UTC)
+	with ESMTP id TFwrXJyG7eof; Tue,  2 Feb 2021 14:34:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 918EC2037A;
-	Tue,  2 Feb 2021 14:08:39 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A6B2185EA5;
+	Tue,  2 Feb 2021 14:34:10 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 60942C013A;
-	Tue,  2 Feb 2021 14:08:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 69A06C013A;
+	Tue,  2 Feb 2021 14:34:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7EF82C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 274B4C013A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:08:38 +0000 (UTC)
+ Tue,  2 Feb 2021 14:34:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by silver.osuosl.org (Postfix) with ESMTP id 50A052037A
+ by whitealder.osuosl.org (Postfix) with ESMTP id 14EBF84AE7
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:08:38 +0000 (UTC)
+ Tue,  2 Feb 2021 14:34:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id foaYwlrLhnJ1
+ with ESMTP id qDbiGATT2fGe
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:08:36 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by silver.osuosl.org (Postfix) with ESMTPS id 1DD722038D
+ Tue,  2 Feb 2021 14:34:05 +0000 (UTC)
+X-Greylist: delayed 00:23:19 by SQLgrey-1.7.6
+Received: from gateway32.websitewelcome.com (gateway32.websitewelcome.com
+ [192.185.145.187])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 3DE328011C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:08:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612274915;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=mirZa3yUEq++3JqI3oR6Gzaq1R19rjhpMm3CizTMdhM=;
- b=iSmy2nU4fKTL4XjvRaktj/PxYx5WZnxPDsfMPEcM9Use0x/3YO/4acx0MAqKCc7ePsxatO
- U3zOvM0M9C/LzIU2t0H+qnHDbbzhEYe4JMwvwva/nE2ZDYwHmj4A6bQVyIJtXQyXPGRDhj
- Xqthzjau0bLXrt1XO7DHnVrGzdTcMTM=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-512-Q0--T42vMBeQcvLo4iQzvw-1; Tue, 02 Feb 2021 09:08:32 -0500
-X-MC-Unique: Q0--T42vMBeQcvLo4iQzvw-1
-Received: by mail-wr1-f72.google.com with SMTP id h18so12658436wrr.5
+ Tue,  2 Feb 2021 14:34:05 +0000 (UTC)
+Received: from cm16.websitewelcome.com (cm16.websitewelcome.com [100.42.49.19])
+ by gateway32.websitewelcome.com (Postfix) with ESMTP id 58FD1ABEBE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 02 Feb 2021 06:08:32 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=mirZa3yUEq++3JqI3oR6Gzaq1R19rjhpMm3CizTMdhM=;
- b=Gw18wyAb8JUb8Un7UhuXemQ/h0i+A7osnhl/t2kHpxoksEFx9kdAXT4exYoM/p89oZ
- AqrDzcp2eHMauJQsPm350byqD8fofBH7V8hoduXa7TtyaFbUyCnvRPdxsASJmgMzTOFr
- No8kDwzUe/pt+9FC9jbYKhIdkcROnN+SH/+o44tecsc33LBeV5xvbysr9/nu3HIztDoC
- 6S7XPNl62EAKfyK0WHd8+nm87J+3uID5knz9eh+01Y25hsvPJs5TGriZqz80aF/ixVX2
- ho79RqM5Gs4XOufJgfCQaxXrUtu5cvG7F7ICZDiR16pvAdRZITnoLdt0hfbr4YB39yn4
- xsjA==
-X-Gm-Message-State: AOAM530MurScsApKYJR5joNo4kFZmK0CatsFnrdtgToOpXHx/BGuyDAe
- PlNrmHMEjNTglCMg1h4tdTIDvofkaOm7IymB2Sl3yoAbK2yte7m8FSVfMrFVCsUW2bZvWakpa8o
- SIByz8+NV/iH6ep1XmvnEEPe2IlPFwW3pXfufdqXecg==
-X-Received: by 2002:adf:ef03:: with SMTP id e3mr24504229wro.98.1612274911068; 
- Tue, 02 Feb 2021 06:08:31 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzZRkxiviUbtukpHiXMaZugKQ5wX+jo3TqMX5lDlVQwa7h3bPyo3TcCw4rmgquEI1Yqy1k4hw==
-X-Received: by 2002:adf:ef03:: with SMTP id e3mr24504206wro.98.1612274910855; 
- Tue, 02 Feb 2021 06:08:30 -0800 (PST)
-Received: from redhat.com (bzq-79-177-39-148.red.bezeqint.net. [79.177.39.148])
- by smtp.gmail.com with ESMTPSA id p18sm3197717wmc.31.2021.02.02.06.08.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Feb 2021 06:08:29 -0800 (PST)
-Date: Tue, 2 Feb 2021 09:08:27 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-Subject: Re: [PATCH rfc 2/3] virtio-net: support receive timestamp
-Message-ID: <20210202090724-mutt-send-email-mst@kernel.org>
-References: <20201228162233.2032571-1-willemdebruijn.kernel@gmail.com>
- <20201228162233.2032571-3-willemdebruijn.kernel@gmail.com>
+ Tue,  2 Feb 2021 08:08:59 -0600 (CST)
+Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
+ id 6wMUlFpHEHPnU6wMUlqSsH; Tue, 02 Feb 2021 08:08:58 -0600
+X-Authority-Reason: nr=8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=C3XhUBXVHzGKu9gvPWMGABm5abN0CUO1QrXaobnAmQw=; b=OeqB5GwK3pRQzUouuotG0BU2dz
+ YwM0b/gLsvYLu/iVhRSLeiS7ZExVVsWtQVIENmnEcDJxlcwhYXJj9mmLxld6kPx7in+gizp5DPQkH
+ vUyrCeH82nFvaMoaGKJzw/9dSXYefk8TLYTzZ4VtIXhdafHAScEMKaJnYSZgmH7ue2rKgKdrYnp2h
+ yX2VE6GcaL29I9tqElASP2HfouwDIgQJx85P9ROVtF9yScft3b7dPqbUcBWuEbddCkkXhOM2qzJIo
+ JfwSgcfhdOZlyFp/NnwJ2HuHcRg+Uv5OvtGKYjpl/dbpgJZFgDd1wyN4MFbDU4s77ts7/sXXPcPZB
+ baT5bfsA==;
+Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:37658
+ helo=[192.168.15.8])
+ by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.93)
+ (envelope-from <gustavo@embeddedor.com>)
+ id 1l6wMT-001SA6-TU; Tue, 02 Feb 2021 08:08:57 -0600
+Subject: Re: [PATCH 136/141] virtio_net: Fix fall-through warnings for Clang
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>
+References: <cover.1605896059.git.gustavoars@kernel.org>
+ <cb9b9534572bc476f4fb7b49a73dc8646b780c84.1605896060.git.gustavoars@kernel.org>
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+Autocrypt: addr=gustavo@embeddedor.com; keydata=
+ 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
+ VtSixD1uOgytAP7RWS474w==
+Message-ID: <968a2162-c97a-cf6d-d6b0-58ea87d2887f@embeddedor.com>
+Date: Tue, 2 Feb 2021 08:08:54 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201228162233.2032571-3-willemdebruijn.kernel@gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: netdev@vger.kernel.org, Willem de Bruijn <willemb@google.com>,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <cb9b9534572bc476f4fb7b49a73dc8646b780c84.1605896060.git.gustavoars@kernel.org>
+Content-Language: en-US
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - lists.linux-foundation.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 187.162.31.110
+X-Source-L: No
+X-Exim-ID: 1l6wMT-001SA6-TU
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 187-162-31-110.static.axtel.net ([192.168.15.8])
+ [187.162.31.110]:37658
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 81
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+Cc: netdev@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,127 +158,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Dec 28, 2020 at 11:22:32AM -0500, Willem de Bruijn wrote:
-> From: Willem de Bruijn <willemb@google.com>
+Hi all,
+
+Who can take this? :)
+
+Thanks
+--
+Gustavo
+
+On 11/20/20 12:40, Gustavo A. R. Silva wrote:
+> In preparation to enable -Wimplicit-fallthrough for Clang, fix a warning
+> by explicitly adding a goto statement instead of letting the code fall
+> through to the next case.
 > 
-> Add optional PTP hardware timestamp offload for virtio-net.
-> 
-> Accurate RTT measurement requires timestamps close to the wire.
-> Introduce virtio feature VIRTIO_NET_F_RX_TSTAMP. If negotiated, the
-> virtio-net header is expanded with room for a timestamp. A host may
-> pass receive timestamps for all or some packets. A timestamp is valid
-> if non-zero.
-> 
-> The timestamp straddles (virtual) hardware domains. Like PTP, use
-> international atomic time (CLOCK_TAI) as global clock base. It is
-> guest responsibility to sync with host, e.g., through kvm-clock.
-> 
-> Signed-off-by: Willem de Bruijn <willemb@google.com>
+> Link: https://github.com/KSPP/linux/issues/115
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 > ---
->  drivers/net/virtio_net.c        | 20 +++++++++++++++++++-
->  include/uapi/linux/virtio_net.h | 12 ++++++++++++
->  2 files changed, 31 insertions(+), 1 deletion(-)
+>  drivers/net/virtio_net.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
 > diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-> index b917b7333928..57744bb6a141 100644
+> index 21b71148c532..fd326dc586aa 100644
 > --- a/drivers/net/virtio_net.c
 > +++ b/drivers/net/virtio_net.c
-> @@ -204,6 +204,9 @@ struct virtnet_info {
->  	/* Guest will pass tx path info to the host */
->  	bool has_tx_hash;
->  
-> +	/* Host will pass CLOCK_TAI receive time to the guest */
-> +	bool has_rx_tstamp;
-> +
->  	/* Has control virtqueue */
->  	bool has_cvq;
->  
-> @@ -292,6 +295,13 @@ static inline struct virtio_net_hdr_mrg_rxbuf *skb_vnet_hdr(struct sk_buff *skb)
->  	return (struct virtio_net_hdr_mrg_rxbuf *)skb->cb;
->  }
->  
-> +static inline struct virtio_net_hdr_v12 *skb_vnet_hdr_12(struct sk_buff *skb)
-> +{
-> +	BUILD_BUG_ON(sizeof(struct virtio_net_hdr_v12) > sizeof(skb->cb));
-> +
-> +	return (void *)skb->cb;
-> +}
-> +
->  /*
->   * private is used to chain pages for big packets, put the whole
->   * most recent used list in the beginning for reuse
-> @@ -1082,6 +1092,9 @@ static void receive_buf(struct virtnet_info *vi, struct receive_queue *rq,
->  		goto frame_err;
->  	}
->  
-> +	if (vi->has_rx_tstamp)
-> +		skb_hwtstamps(skb)->hwtstamp = ns_to_ktime(skb_vnet_hdr_12(skb)->tstamp);
-> +
->  	skb_record_rx_queue(skb, vq2rxq(rq->vq));
->  	skb->protocol = eth_type_trans(skb, dev);
->  	pr_debug("Receiving skb proto 0x%04x len %i type %i\n",
-> @@ -3071,6 +3084,11 @@ static int virtnet_probe(struct virtio_device *vdev)
->  		vi->hdr_len = sizeof(struct virtio_net_hdr_v1_hash);
->  	}
->  
-> +	if (virtio_has_feature(vdev, VIRTIO_NET_F_RX_TSTAMP)) {
-> +		vi->has_rx_tstamp = true;
-> +		vi->hdr_len = sizeof(struct virtio_net_hdr_v12);
-> +	}
-> +
->  	if (virtio_has_feature(vdev, VIRTIO_F_ANY_LAYOUT) ||
->  	    virtio_has_feature(vdev, VIRTIO_F_VERSION_1))
->  		vi->any_header_sg = true;
-> @@ -3261,7 +3279,7 @@ static struct virtio_device_id id_table[] = {
->  	VIRTIO_NET_F_CTRL_MAC_ADDR, \
->  	VIRTIO_NET_F_MTU, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS, \
->  	VIRTIO_NET_F_SPEED_DUPLEX, VIRTIO_NET_F_STANDBY, \
-> -	VIRTIO_NET_F_TX_HASH
-> +	VIRTIO_NET_F_TX_HASH, VIRTIO_NET_F_RX_TSTAMP
->  
->  static unsigned int features[] = {
->  	VIRTNET_FEATURES,
-> diff --git a/include/uapi/linux/virtio_net.h b/include/uapi/linux/virtio_net.h
-> index f6881b5b77ee..0ffe2eeebd4a 100644
-> --- a/include/uapi/linux/virtio_net.h
-> +++ b/include/uapi/linux/virtio_net.h
-> @@ -57,6 +57,7 @@
->  					 * Steering */
->  #define VIRTIO_NET_F_CTRL_MAC_ADDR 23	/* Set MAC address */
->  
-> +#define VIRTIO_NET_F_RX_TSTAMP	  55	/* Host sends TAI receive time */
->  #define VIRTIO_NET_F_TX_HASH	  56	/* Guest sends hash report */
->  #define VIRTIO_NET_F_HASH_REPORT  57	/* Supports hash report */
->  #define VIRTIO_NET_F_RSS	  60	/* Supports RSS RX steering */
-> @@ -182,6 +183,17 @@ struct virtio_net_hdr_v1_hash {
->  	};
->  };
->  
-> +struct virtio_net_hdr_v12 {
-> +	struct virtio_net_hdr_v1 hdr;
-> +	struct {
-> +		__le32 value;
-> +		__le16 report;
-> +		__le16 flow_state;
-> +	} hash;
-> +	__virtio32 reserved;
-
-
-Does endian-ness matter? If not - just u32?
-
-> +	__virtio64 tstamp;
-> +};
-> +
-
-Given it's only available in modern devices, I think we
-can make this __le64 tstamp.
-
->  #ifndef VIRTIO_NET_NO_LEGACY
->  /* This header comes first in the scatter-gather list.
->   * For legacy virtio, if VIRTIO_F_ANY_LAYOUT is not negotiated, it must
-> -- 
-> 2.29.2.729.g45daf8777d-goog
-
+> @@ -732,6 +732,7 @@ static struct sk_buff *receive_small(struct net_device *dev,
+>  			fallthrough;
+>  		case XDP_ABORTED:
+>  			trace_xdp_exception(vi->dev, xdp_prog, act);
+> +			goto err_xdp;
+>  		case XDP_DROP:
+>  			goto err_xdp;
+>  		}
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
