@@ -1,93 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id B137A30C0EA
-	for <lists.virtualization@lfdr.de>; Tue,  2 Feb 2021 15:11:41 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 71D1985A5A;
-	Tue,  2 Feb 2021 14:11:40 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RgBGJfqqPfbq; Tue,  2 Feb 2021 14:11:39 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0ECF8850D6;
-	Tue,  2 Feb 2021 14:11:39 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E60F7C013A;
-	Tue,  2 Feb 2021 14:11:38 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 33EB6C013A
- for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:11:37 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CE9930C1F6
+	for <lists.virtualization@lfdr.de>; Tue,  2 Feb 2021 15:38:32 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 21ED284BF1
- for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:11:37 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 81DBE85540;
+	Tue,  2 Feb 2021 14:38:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rxWsSdCoCSqh; Tue,  2 Feb 2021 14:38:29 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by whitealder.osuosl.org (Postfix) with ESMTP id CCEAA85810;
+	Tue,  2 Feb 2021 14:38:29 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A2817C013A;
+	Tue,  2 Feb 2021 14:38:29 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 66F52C013A
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  2 Feb 2021 14:38:28 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by hemlock.osuosl.org (Postfix) with ESMTP id 527B4861A2
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  2 Feb 2021 14:38:28 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Afsv+I1DhQ3p
+ with ESMTP id IADc8pwjN8Kl
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:11:35 +0000 (UTC)
+ Tue,  2 Feb 2021 14:38:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 2114584B89
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com
+ [209.85.218.41])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 0EBFB86135
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Feb 2021 14:11:34 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id l12so1535542wmq.2
+ Tue,  2 Feb 2021 14:38:26 +0000 (UTC)
+Received: by mail-ej1-f41.google.com with SMTP id lg21so2996662ejb.3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 02 Feb 2021 06:11:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=nNUotO5RGkqjnMAKfih0mDKNZwfN8WA2MKXbQdWQwII=;
- b=gXHqLI0koSbEE8gy/dWeNdoPMKa6qwjJp/K27iGcTda8+4K1udNDzYV4UCHXqvfiEe
- 8STPzP5aLZCDibLuuyYZMusSRgXxr8fwj9vs4vYfcQREMnrUvG2HXxacNrVXl9hst3Ld
- nWRrHi9f242PVwqKR5XMY0Ms7ad4a0HJtIpb8=
+ Tue, 02 Feb 2021 06:38:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=sJBLZtGoam24iH2FvzLjuKUNzi7tkEBGkd3QuKnfqzM=;
+ b=nTpvMjoaKg7z31XgCm+eqDiAo1l3Yh1WP+BjxPxK8f2kk9sZmuD0sNs0AQKV9louDI
+ OTc1XZEJfAIY5g8f46ylTRIgtOr1yUKSxNDoIr9BiqEAXt4grBAykEvbu20d9nl23yld
+ eV2jP0APc50wwBzUnFRVOqsKuO1Bq4vSNjDqvyD9jVRdejRtaO8qkJFG6bSKk0TYqP4D
+ 62XeHumgJjmFL9rNMSvFeehQ7PGA0w2kKuK9eEPDXd0qhLtCENLB0fmSLEWbOHbO4oGj
+ sfZaCuxSqyL10A5F7PG8vs7FZOy+0PUuy7n4AU9KGWFSVUz2aAkCExSvdkOhYE8M/ix/
+ bA+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=nNUotO5RGkqjnMAKfih0mDKNZwfN8WA2MKXbQdWQwII=;
- b=M198HfExUNWCHkkTjsLwyfuBPIifruME+qhQJg5RyIcY1vck+FEOk6SCC3i8TnAWdr
- OL7hhhQowJAETYVUXA5V7mc5dB9zdlm9pCeexLzxRv9GZMqrLRGqaIK9Ke09pN+kSA4g
- dXAo0Jiyd0IBgv0OnAOGOokYalV1Em0nJo6edo9eKVaqdrRLhKIGM3ydQ/L7HapkhAyR
- 0PGdiW5eg+6C9CpGOKsIeyTJrpW5X8B2uUf6rpQ/0jkjLl/POHnELsMdRGef1sgKisLF
- FJ0nUz3OR+U5eaPGdUiLqhCroGnLgh92UF2v4I49OY9d8czcOH/tmcEAdFwY3Ec8LW8+
- zRXQ==
-X-Gm-Message-State: AOAM530Jhtm+3Qwqea0p06APxsTNnhNJSPbxtorOdGVjcX6i30yPuRAy
- 4XJNzXa4hxQfIfPITTG9si/0EA==
-X-Google-Smtp-Source: ABdhPJyKbCZyvz/F7BjnngYPMyYGLYOF0G/H26ZKHIgPG3MddYAgM4IDB8oQ1Wh+DC6w7Sd+YiS7JQ==
-X-Received: by 2002:a1c:2c89:: with SMTP id s131mr3841413wms.176.1612275093141; 
- Tue, 02 Feb 2021 06:11:33 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id u10sm3201892wmj.40.2021.02.02.06.11.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Feb 2021 06:11:32 -0800 (PST)
-Date: Tue, 2 Feb 2021 15:11:30 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH v4 04/13] drm/shmem-helper: Provide a vmap function for
- short-term mappings
-Message-ID: <YBldkhUXF+SFPaSy@phenom.ffwll.local>
-References: <20210108094340.15290-1-tzimmermann@suse.de>
- <20210108094340.15290-5-tzimmermann@suse.de>
- <X/yB3LC79f/zWTwG@phenom.ffwll.local>
- <006b7d47-e7dd-8fa6-6cf1-eff194d7b30f@suse.de>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=sJBLZtGoam24iH2FvzLjuKUNzi7tkEBGkd3QuKnfqzM=;
+ b=HmPslZlp4p+/D04F1kcu6cdfsf8fsYiEJI//hAvbXOZ2SN9qw1aWLqeXPpH63w4TSX
+ JpCbqIe9ypL+ZDmiBNw43mMEX4bM93h67a/oQ/9VjiTRy8WcOs7pG8nIlVUmukhREK49
+ N+PhWWD7W4pDZokSUeNopHLYl11WKr6pVOGcA8W/JlIK2VEF4bNCwAMr5OuKDtRRKmQc
+ ic+ZnJp8JPSovCwSiNDHEn9UAHiR/PWnjzk1CdkodghwibbbMC1CwG0DtsKjfGI+eIdf
+ xLoChe8tQYE+CRCI4HuRn/uM9vuprED6VOSdV/dL0Wr4LT8tFFyEfsqbHZPe5fRpsHUn
+ 9OOg==
+X-Gm-Message-State: AOAM532zHkl4eIheTgO/43/80yzUeVq2PWY1r2ZRCpn+hL1hpjq84RR/
+ OS77NlXClnJq26p6hZ2xA/yd/9TZjgJfz2zPdx8=
+X-Google-Smtp-Source: ABdhPJz7Wkol/Clz5Me9ulCgBXb4UGPaU7Uh1nT5QODx6s1RWG7NxLiq5yPvsaPsLBOaJ6Jv+lOfvqON2cJRkpWN6Ig=
+X-Received: by 2002:a17:906:4dc5:: with SMTP id
+ f5mr10797619ejw.11.1612276704131; 
+ Tue, 02 Feb 2021 06:38:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <006b7d47-e7dd-8fa6-6cf1-eff194d7b30f@suse.de>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-Cc: sean@poorly.run, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org,
- hdegoede@redhat.com, Daniel Vetter <daniel@ffwll.ch>, airlied@redhat.com,
- sam@ravnborg.org, christian.koenig@amd.com, linux-media@vger.kernel.org
+References: <20210129002136.70865-1-weiwan@google.com>
+ <a0b2cb8d-eb8f-30fb-2a22-678e6dd2f58f@redhat.com>
+In-Reply-To: <a0b2cb8d-eb8f-30fb-2a22-678e6dd2f58f@redhat.com>
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+Date: Tue, 2 Feb 2021 09:37:46 -0500
+Message-ID: <CAF=yD-+aPBF2RaCR8L5orTM37bf7Z4Z8Qko2D2LZjOz0khHTUg@mail.gmail.com>
+Subject: Re: [PATCH net] virtio-net: suppress bad irq warning for tx napi
+To: Jason Wang <jasowang@redhat.com>
+Cc: Willem de Bruijn <willemb@google.com>,
+ Network Development <netdev@vger.kernel.org>,
+ virtualization@lists.linux-foundation.org, Jakub Kicinski <kuba@kernel.org>,
+ Wei Wang <weiwan@google.com>, David Miller <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,343 +93,128 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jan 27, 2021 at 01:08:05PM +0100, Thomas Zimmermann wrote:
-> Hi
-> =
-
-> Am 11.01.21 um 17:50 schrieb Daniel Vetter:
-> > On Fri, Jan 08, 2021 at 10:43:31AM +0100, Thomas Zimmermann wrote:
-> > > Implementations of the vmap/vunmap GEM callbacks may perform pinning
-> > > of the BO and may acquire the associated reservation object's lock.
-> > > Callers that only require a mapping of the contained memory can thus
-> > > interfere with other tasks that require exact pinning, such as scanou=
-t.
-> > > This is less of an issue with private SHMEM buffers, but may happen
-> > > with imported ones.
-> > > =
-
-> > > Therefore provide the new interfaces drm_gem_shmem_vmap_local() and
-> > > drm_gem_shmem_vunmap_local(), which only perform the vmap/vunmap
-> > > operations. Callers have to hold the reservation lock while the mappi=
-ng
-> > > persists.
-> > > =
-
-> > > This patch also connects GEM SHMEM helpers to GEM object functions wi=
-th
-> > > equivalent functionality.
-> > > =
-
-> > > v4:
-> > > 	* call dma_buf_{vmap,vunmap}_local() where necessary (Daniel)
-> > > 	* move driver changes into separate patches (Daniel)
-> > > =
-
-> > > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> > > ---
-> > >   drivers/gpu/drm/drm_gem_shmem_helper.c | 90 +++++++++++++++++++++++=
----
-> > >   include/drm/drm_gem_shmem_helper.h     |  2 +
-> > >   2 files changed, 84 insertions(+), 8 deletions(-)
-> > > =
-
-> > > diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm=
-/drm_gem_shmem_helper.c
-> > > index 9825c378dfa6..298832b2b43b 100644
-> > > --- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-> > > +++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> > > @@ -32,6 +32,8 @@ static const struct drm_gem_object_funcs drm_gem_sh=
-mem_funcs =3D {
-> > >   	.get_sg_table =3D drm_gem_shmem_get_sg_table,
-> > >   	.vmap =3D drm_gem_shmem_vmap,
-> > >   	.vunmap =3D drm_gem_shmem_vunmap,
-> > > +	.vmap_local =3D drm_gem_shmem_vmap_local,
-> > > +	.vunmap_local =3D drm_gem_shmem_vunmap_local,
-> > >   	.mmap =3D drm_gem_shmem_mmap,
-> > >   };
-> > > @@ -261,7 +263,8 @@ void drm_gem_shmem_unpin(struct drm_gem_object *o=
-bj)
-> > >   }
-> > >   EXPORT_SYMBOL(drm_gem_shmem_unpin);
-> > > -static int drm_gem_shmem_vmap_locked(struct drm_gem_shmem_object *sh=
-mem, struct dma_buf_map *map)
-> > > +static int drm_gem_shmem_vmap_locked(struct drm_gem_shmem_object *sh=
-mem, struct dma_buf_map *map,
-> > > +				     bool local)
-> > =
-
-> > This is a bit spaghetti and also has the problem that we're not changing
-> > shmem->vmap_use_count under different locks, depending upon which path
-> > we're taking.
-> > =
-
-> > I think the cleanest would be if we pull the if (import_attach) case out
-> > of the _locked() version completely, for all cases, and also outside of
-> > the shmem->vmap_lock. This means no caching of vmaps in the shmem layer
-> > anymore for imported buffers, but this is no longer a problem: We cache
-> > them in the exporters instead (I think at least, if not maybe need to f=
-ix
-> > that where it's expensive).
-> =
-
-> There's no vmap refcounting in amdgpu AFAICT. So importing pages from the=
-re
-> into an SHMEM object has the potential of breaking. IIRC same fro radeon =
-and
-> nouveau.
-
-As long as the pinning is refcounted I think it should be fine, it's just
-that if you have multiple vmaps (e.g. 2 udl devices plugged in) we'll set
-up 2 vmaps. Which is a point pointless, but not really harmful. At least
-on 64bit where there's enough virtual address space.
-
-> So I'm somewhat reluctant to making this change. I guess I'll look elsewh=
-ere
-> first to fix some of the locking issues (e.g., my recent ast cursor
-> patches).
-
-If this would break for amdgpu/radeon/nouveau then we already have a bug,
-since 2 udl devices can provoke this issue already as-is. So I don't think
-this should be a blocker.
--Daniel
-
-> =
-
-> Best regards
-> Thomas
-> =
-
-> > =
-
-> > Other option would be to unly pull it out for the _vmap_local case, but
-> > that's a bit ugly because no longer symmetrical in the various paths.
-> > =
-
-> > >   {
-> > >   	struct drm_gem_object *obj =3D &shmem->base;
-> > >   	int ret =3D 0;
-> > > @@ -272,7 +275,10 @@ static int drm_gem_shmem_vmap_locked(struct drm_=
-gem_shmem_object *shmem, struct
-> > >   	}
-> > >   	if (obj->import_attach) {
-> > > -		ret =3D dma_buf_vmap(obj->import_attach->dmabuf, map);
-> > > +		if (local)
-> > > +			ret =3D dma_buf_vmap_local(obj->import_attach->dmabuf, map);
-> > > +		else
-> > > +			ret =3D dma_buf_vmap(obj->import_attach->dmabuf, map);
-> > >   		if (!ret) {
-> > >   			if (WARN_ON(map->is_iomem)) {
-> > >   				ret =3D -EIO;
-> > > @@ -313,7 +319,7 @@ static int drm_gem_shmem_vmap_locked(struct drm_g=
-em_shmem_object *shmem, struct
-> > >   	return ret;
-> > >   }
-> > > -/*
-> > > +/**
-> > >    * drm_gem_shmem_vmap - Create a virtual mapping for a shmem GEM ob=
-ject
-> > >    * @shmem: shmem GEM object
-> > >    * @map: Returns the kernel virtual address of the SHMEM GEM object=
-'s backing
-> > > @@ -339,15 +345,53 @@ int drm_gem_shmem_vmap(struct drm_gem_object *o=
-bj, struct dma_buf_map *map)
-> > >   	ret =3D mutex_lock_interruptible(&shmem->vmap_lock);
-> > >   	if (ret)
-> > >   		return ret;
-> > > -	ret =3D drm_gem_shmem_vmap_locked(shmem, map);
-> > > +	ret =3D drm_gem_shmem_vmap_locked(shmem, map, false);
-> > >   	mutex_unlock(&shmem->vmap_lock);
-> > >   	return ret;
-> > >   }
-> > >   EXPORT_SYMBOL(drm_gem_shmem_vmap);
-> > > +/**
-> > > + * drm_gem_shmem_vmap_local - Create a virtual mapping for a shmem G=
-EM object
-> > > + * @shmem: shmem GEM object
-> > > + * @map: Returns the kernel virtual address of the SHMEM GEM object'=
-s backing
-> > > + *       store.
-> > > + *
-> > > + * This function makes sure that a contiguous kernel virtual address=
- mapping
-> > > + * exists for the buffer backing the shmem GEM object.
-> > > + *
-> > > + * The function is called with the BO's reservation object locked. C=
-allers must
-> > > + * hold the lock until after unmapping the buffer.
-> > > + *
-> > > + * This function can be used to implement &drm_gem_object_funcs.vmap=
-_local. But
-> > > + * it can also be called by drivers directly, in which case it will =
-hide the
-> > > + * differences between dma-buf imported and natively allocated objec=
-ts.
-> > =
-
-> > So for the other callbacks I tried to make sure we have different entry
-> > points for this, since it's not really the same thing and because of the
-> > locking mess we have with dma_resv_lock vs various pre-existing local
-> > locking scheme, it's easy to get a mess.
-> > =
-
-> > I think the super clean version here would be to also export just the
-> > internal stuff for the ->v(un)map_local hooks, but that's maybe a bit t=
-oo
-> > much boilerplate for no real gain.
-> > -Daniel
-> > =
-
-> > > + *
-> > > + * Acquired mappings should be cleaned up by calling drm_gem_shmem_v=
-unmap_local().
-> > > + *
-> > > + * Returns:
-> > > + * 0 on success or a negative error code on failure.
-> > > + */
-> > > +int drm_gem_shmem_vmap_local(struct drm_gem_object *obj, struct dma_=
-buf_map *map)
-> > > +{
-> > > +	struct drm_gem_shmem_object *shmem =3D to_drm_gem_shmem_obj(obj);
-> > > +	int ret;
-> > > +
-> > > +	dma_resv_assert_held(obj->resv);
-> > > +
-> > > +	ret =3D mutex_lock_interruptible(&shmem->vmap_lock);
-> > > +	if (ret)
-> > > +		return ret;
-> > > +	ret =3D drm_gem_shmem_vmap_locked(shmem, map, true);
-> > > +	mutex_unlock(&shmem->vmap_lock);
-> > > +
-> > > +	return ret;
-> > > +}
-> > > +EXPORT_SYMBOL(drm_gem_shmem_vmap_local);
-> > > +
-> > >   static void drm_gem_shmem_vunmap_locked(struct drm_gem_shmem_object=
- *shmem,
-> > > -					struct dma_buf_map *map)
-> > > +					struct dma_buf_map *map, bool local)
-> > >   {
-> > >   	struct drm_gem_object *obj =3D &shmem->base;
-> > > @@ -358,7 +402,10 @@ static void drm_gem_shmem_vunmap_locked(struct d=
-rm_gem_shmem_object *shmem,
-> > >   		return;
-> > >   	if (obj->import_attach)
-> > > -		dma_buf_vunmap(obj->import_attach->dmabuf, map);
-> > > +		if (local)
-> > > +			dma_buf_vunmap_local(obj->import_attach->dmabuf, map);
-> > > +		else
-> > > +			dma_buf_vunmap(obj->import_attach->dmabuf, map);
-> > >   	else
-> > >   		vunmap(shmem->vaddr);
-> > > @@ -366,7 +413,7 @@ static void drm_gem_shmem_vunmap_locked(struct dr=
-m_gem_shmem_object *shmem,
-> > >   	drm_gem_shmem_put_pages(shmem);
-> > >   }
-> > > -/*
-> > > +/**
-> > >    * drm_gem_shmem_vunmap - Unmap a virtual mapping fo a shmem GEM ob=
-ject
-> > >    * @shmem: shmem GEM object
-> > >    * @map: Kernel virtual address where the SHMEM GEM object was mapp=
-ed
-> > > @@ -384,11 +431,38 @@ void drm_gem_shmem_vunmap(struct drm_gem_object=
- *obj, struct dma_buf_map *map)
-> > >   	struct drm_gem_shmem_object *shmem =3D to_drm_gem_shmem_obj(obj);
-> > >   	mutex_lock(&shmem->vmap_lock);
-> > > -	drm_gem_shmem_vunmap_locked(shmem, map);
-> > > +	drm_gem_shmem_vunmap_locked(shmem, map, false);
-> > >   	mutex_unlock(&shmem->vmap_lock);
-> > >   }
-> > >   EXPORT_SYMBOL(drm_gem_shmem_vunmap);
-> > > +/**
-> > > + * drm_gem_shmem_vunmap_local - Unmap a virtual mapping fo a shmem G=
-EM object
-> > > + * @shmem: shmem GEM object
-> > > + * @map: Kernel virtual address where the SHMEM GEM object was mapped
-> > > + *
-> > > + * This function cleans up a kernel virtual address mapping acquired=
- by
-> > > + * drm_gem_shmem_vmap_local(). The mapping is only removed when the =
-use count
-> > > + * drops to zero.
-> > > + *
-> > > + * The function is called with the BO's reservation object locked.
-> > > + *
-> > > + * This function can be used to implement &drm_gem_object_funcs.vmap=
-_local.
-> > > + * But it can also be called by drivers directly, in which case it w=
-ill hide
-> > > + * the differences between dma-buf imported and natively allocated o=
-bjects.
-> > > + */
-> > > +void drm_gem_shmem_vunmap_local(struct drm_gem_object *obj, struct d=
-ma_buf_map *map)
-> > > +{
-> > > +	struct drm_gem_shmem_object *shmem =3D to_drm_gem_shmem_obj(obj);
-> > > +
-> > > +	dma_resv_assert_held(obj->resv);
-> > > +
-> > > +	mutex_lock(&shmem->vmap_lock);
-> > > +	drm_gem_shmem_vunmap_locked(shmem, map, true);
-> > > +	mutex_unlock(&shmem->vmap_lock);
-> > > +}
-> > > +EXPORT_SYMBOL(drm_gem_shmem_vunmap_local);
-> > > +
-> > >   struct drm_gem_shmem_object *
-> > >   drm_gem_shmem_create_with_handle(struct drm_file *file_priv,
-> > >   				 struct drm_device *dev, size_t size,
-> > > diff --git a/include/drm/drm_gem_shmem_helper.h b/include/drm/drm_gem=
-_shmem_helper.h
-> > > index 434328d8a0d9..3f59bdf749aa 100644
-> > > --- a/include/drm/drm_gem_shmem_helper.h
-> > > +++ b/include/drm/drm_gem_shmem_helper.h
-> > > @@ -114,7 +114,9 @@ void drm_gem_shmem_put_pages(struct drm_gem_shmem=
-_object *shmem);
-> > >   int drm_gem_shmem_pin(struct drm_gem_object *obj);
-> > >   void drm_gem_shmem_unpin(struct drm_gem_object *obj);
-> > >   int drm_gem_shmem_vmap(struct drm_gem_object *obj, struct dma_buf_m=
-ap *map);
-> > > +int drm_gem_shmem_vmap_local(struct drm_gem_object *obj, struct dma_=
-buf_map *map);
-> > >   void drm_gem_shmem_vunmap(struct drm_gem_object *obj, struct dma_bu=
-f_map *map);
-> > > +void drm_gem_shmem_vunmap_local(struct drm_gem_object *obj, struct d=
-ma_buf_map *map);
-> > >   int drm_gem_shmem_madvise(struct drm_gem_object *obj, int madv);
-> > > -- =
-
-> > > 2.29.2
-> > > =
-
-> > =
-
-> =
-
-> -- =
-
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
-> (HRB 36809, AG N=FCrnberg)
-> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
-> =
-
-
-
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gTW9uLCBGZWIgMSwgMjAyMSBhdCAxMDowOSBQTSBKYXNvbiBXYW5nIDxqYXNvd2FuZ0ByZWRo
+YXQuY29tPiB3cm90ZToKPgo+Cj4gT24gMjAyMS8xLzI5IOS4iuWNiDg6MjEsIFdlaSBXYW5nIHdy
+b3RlOgo+ID4gV2l0aCB0aGUgaW1wbGVtZW50YXRpb24gb2YgbmFwaS10eCBpbiB2aXJ0aW8gZHJp
+dmVyLCB3ZSBjbGVhbiB0eAo+ID4gZGVzY3JpcHRvcnMgZnJvbSByeCBuYXBpIGhhbmRsZXIsIGZv
+ciB0aGUgcHVycG9zZSBvZiByZWR1Y2luZyB0eAo+ID4gY29tcGxldGUgaW50ZXJydXB0cy4gQnV0
+IHRoaXMgY291bGQgaW50cm9kdWNlIGEgcmFjZSB3aGVyZSB0eCBjb21wbGV0ZQo+ID4gaW50ZXJy
+dXB0IGhhcyBiZWVuIHJhaXNlZCwgYnV0IHRoZSBoYW5kbGVyIGZvdW5kIHRoZXJlIGlzIG5vIHdv
+cmsgdG8gZG8KPiA+IGJlY2F1c2Ugd2UgaGF2ZSBkb25lIHRoZSB3b3JrIGluIHRoZSBwcmV2aW91
+cyByeCBpbnRlcnJ1cHQgaGFuZGxlci4KPiA+IFRoaXMgY291bGQgbGVhZCB0byB0aGUgZm9sbG93
+aW5nIHdhcm5pbmcgbXNnOgo+ID4gWyAzNTg4LjAxMDc3OF0gaXJxIDM4OiBub2JvZHkgY2FyZWQg
+KHRyeSBib290aW5nIHdpdGggdGhlCj4gPiAiaXJxcG9sbCIgb3B0aW9uKQo+ID4gWyAzNTg4LjAx
+NzkzOF0gQ1BVOiA0IFBJRDogMCBDb21tOiBzd2FwcGVyLzQgTm90IHRhaW50ZWQKPiA+IDUuMy4w
+LTE5LWdlbmVyaWMgIzIwfjE4LjA0LjItVWJ1bnR1Cj4gPiBbIDM1ODguMDE3OTQwXSBDYWxsIFRy
+YWNlOgo+ID4gWyAzNTg4LjAxNzk0Ml0gIDxJUlE+Cj4gPiBbIDM1ODguMDE3OTUxXSAgZHVtcF9z
+dGFjaysweDYzLzB4ODUKPiA+IFsgMzU4OC4wMTc5NTNdICBfX3JlcG9ydF9iYWRfaXJxKzB4MzUv
+MHhjMAo+ID4gWyAzNTg4LjAxNzk1NV0gIG5vdGVfaW50ZXJydXB0KzB4MjRiLzB4MmEwCj4gPiBb
+IDM1ODguMDE3OTU2XSAgaGFuZGxlX2lycV9ldmVudF9wZXJjcHUrMHg1NC8weDgwCj4gPiBbIDM1
+ODguMDE3OTU3XSAgaGFuZGxlX2lycV9ldmVudCsweDNiLzB4NjAKPiA+IFsgMzU4OC4wMTc5NThd
+ICBoYW5kbGVfZWRnZV9pcnErMHg4My8weDFhMAo+ID4gWyAzNTg4LjAxNzk2MV0gIGhhbmRsZV9p
+cnErMHgyMC8weDMwCj4gPiBbIDM1ODguMDE3OTY0XSAgZG9fSVJRKzB4NTAvMHhlMAo+ID4gWyAz
+NTg4LjAxNzk2Nl0gIGNvbW1vbl9pbnRlcnJ1cHQrMHhmLzB4Zgo+ID4gWyAzNTg4LjAxNzk2Nl0g
+IDwvSVJRPgo+ID4gWyAzNTg4LjAxNzk4OV0gaGFuZGxlcnM6Cj4gPiBbIDM1ODguMDIwMzc0XSBb
+PDAwMDAwMDAwMWI5ZjFkYTg+XSB2cmluZ19pbnRlcnJ1cHQKPiA+IFsgMzU4OC4wMjUwOTldIERp
+c2FibGluZyBJUlEgIzM4Cj4gPgo+ID4gVGhpcyBwYXRjaCBhZGRzIGEgbmV3IHBhcmFtIHRvIHN0
+cnVjdCB2cmluZ192aXJ0cXVldWUsIGFuZCB3ZSBzZXQgaXQgZm9yCj4gPiB0eCB2aXJ0cXVldWVz
+IGlmIG5hcGktdHggaXMgZW5hYmxlZCwgdG8gc3VwcHJlc3MgdGhlIHdhcm5pbmcgaW4gc3VjaAo+
+ID4gY2FzZS4KPiA+Cj4gPiBGaXhlczogN2IwNDExZWY0YWE2ICgidmlydGlvLW5ldDogY2xlYW4g
+dHggZGVzY3JpcHRvcnMgZnJvbSByeCBuYXBpIikKPiA+IFJlcG9ydGVkLWJ5OiBSaWNrIEpvbmVz
+IDxqb25lc3JpY2tAZ29vZ2xlLmNvbT4KPiA+IFNpZ25lZC1vZmYtYnk6IFdlaSBXYW5nIDx3ZWl3
+YW5AZ29vZ2xlLmNvbT4KPiA+IFNpZ25lZC1vZmYtYnk6IFdpbGxlbSBkZSBCcnVpam4gPHdpbGxl
+bWJAZ29vZ2xlLmNvbT4KPgo+Cj4gUGxlYXNlIHVzZSBnZXRfbWFpbnRhaW5lci5wbCB0byBtYWtl
+IHN1cmUgTWljaGFlbCBhbmQgbWUgd2VyZSBjY2VkLgoKV2lsbCBkby4gU29ycnkgYWJvdXQgdGhh
+dC4gSSBzdWdnZXN0ZWQganVzdCB0aGUgdmlydHVhbGl6YXRpb24gbGlzdCwgbXkgYmFkLgoKPgo+
+ID4gLS0tCj4gPiAgIGRyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYyAgICAgfCAxOSArKysrKysrKysr
+KysrKy0tLS0tCj4gPiAgIGRyaXZlcnMvdmlydGlvL3ZpcnRpb19yaW5nLmMgfCAxNiArKysrKysr
+KysrKysrKysrCj4gPiAgIGluY2x1ZGUvbGludXgvdmlydGlvLmggICAgICAgfCAgMiArKwo+ID4g
+ICAzIGZpbGVzIGNoYW5nZWQsIDMyIGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pCj4gPgo+
+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYyBiL2RyaXZlcnMvbmV0L3Zp
+cnRpb19uZXQuYwo+ID4gaW5kZXggNTA4NDA4ZmJlNzhmLi5lOWEzZjMwODY0ZTggMTAwNjQ0Cj4g
+PiAtLS0gYS9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMKPiA+ICsrKyBiL2RyaXZlcnMvbmV0L3Zp
+cnRpb19uZXQuYwo+ID4gQEAgLTEzMDMsMTMgKzEzMDMsMjIgQEAgc3RhdGljIHZvaWQgdmlydG5l
+dF9uYXBpX3R4X2VuYWJsZShzdHJ1Y3QgdmlydG5ldF9pbmZvICp2aSwKPiA+ICAgICAgICAgICAg
+ICAgcmV0dXJuOwo+ID4gICAgICAgfQo+ID4KPiA+ICsgICAgIC8qIFdpdGggbmFwaV90eCBlbmFi
+bGVkLCBmcmVlX29sZF94bWl0X3NrYnMoKSBjb3VsZCBiZSBjYWxsZWQgZnJvbQo+ID4gKyAgICAg
+ICogcnggbmFwaSBoYW5kbGVyLiBTZXQgd29ya19zdGVhbCB0byBzdXBwcmVzcyBiYWQgaXJxIHdh
+cm5pbmcgZm9yCj4gPiArICAgICAgKiBJUlFfTk9ORSBjYXNlIGZyb20gdHggY29tcGxldGUgaW50
+ZXJydXB0IGhhbmRsZXIuCj4gPiArICAgICAgKi8KPiA+ICsgICAgIHZpcnRxdWV1ZV9zZXRfd29y
+a19zdGVhbCh2cSwgdHJ1ZSk7Cj4gPiArCj4gPiAgICAgICByZXR1cm4gdmlydG5ldF9uYXBpX2Vu
+YWJsZSh2cSwgbmFwaSk7Cj4KPgo+IERvIHdlIG5lZWQgdG8gZm9yY2UgdGhlIG9yZGVyaW5nIGJl
+dHdlZW4gc3RlYWwgc2V0IGFuZCBuYXBpIGVuYWJsZT8KClRoZSB3YXJuaW5nIG9ubHkgb2NjdXJz
+IGFmdGVyIG9uZSBodW5kcmVkIHNwdXJpb3VzIGludGVycnVwdHMsIHNvIG5vdApyZWFsbHkuCgo+
+Cj4gPiAgIH0KPiA+Cj4gPiAtc3RhdGljIHZvaWQgdmlydG5ldF9uYXBpX3R4X2Rpc2FibGUoc3Ry
+dWN0IG5hcGlfc3RydWN0ICpuYXBpKQo+ID4gK3N0YXRpYyB2b2lkIHZpcnRuZXRfbmFwaV90eF9k
+aXNhYmxlKHN0cnVjdCB2aXJ0cXVldWUgKnZxLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHN0cnVjdCBuYXBpX3N0cnVjdCAqbmFwaSkKPiA+ICAgewo+ID4gLSAgICAgaWYg
+KG5hcGktPndlaWdodCkKPiA+ICsgICAgIGlmIChuYXBpLT53ZWlnaHQpIHsKPiA+ICAgICAgICAg
+ICAgICAgbmFwaV9kaXNhYmxlKG5hcGkpOwo+ID4gKyAgICAgICAgICAgICB2aXJ0cXVldWVfc2V0
+X3dvcmtfc3RlYWwodnEsIGZhbHNlKTsKPiA+ICsgICAgIH0KPiA+ICAgfQo+ID4KPiA+ICAgc3Rh
+dGljIHZvaWQgcmVmaWxsX3dvcmsoc3RydWN0IHdvcmtfc3RydWN0ICp3b3JrKQo+ID4gQEAgLTE4
+MzUsNyArMTg0NCw3IEBAIHN0YXRpYyBpbnQgdmlydG5ldF9jbG9zZShzdHJ1Y3QgbmV0X2Rldmlj
+ZSAqZGV2KQo+ID4gICAgICAgZm9yIChpID0gMDsgaSA8IHZpLT5tYXhfcXVldWVfcGFpcnM7IGkr
+Kykgewo+ID4gICAgICAgICAgICAgICB4ZHBfcnhxX2luZm9fdW5yZWcoJnZpLT5ycVtpXS54ZHBf
+cnhxKTsKPiA+ICAgICAgICAgICAgICAgbmFwaV9kaXNhYmxlKCZ2aS0+cnFbaV0ubmFwaSk7Cj4g
+PiAtICAgICAgICAgICAgIHZpcnRuZXRfbmFwaV90eF9kaXNhYmxlKCZ2aS0+c3FbaV0ubmFwaSk7
+Cj4gPiArICAgICAgICAgICAgIHZpcnRuZXRfbmFwaV90eF9kaXNhYmxlKHZpLT5zcVtpXS52cSwg
+JnZpLT5zcVtpXS5uYXBpKTsKPiA+ICAgICAgIH0KPiA+Cj4gPiAgICAgICByZXR1cm4gMDsKPiA+
+IEBAIC0yMzE1LDcgKzIzMjQsNyBAQCBzdGF0aWMgdm9pZCB2aXJ0bmV0X2ZyZWV6ZV9kb3duKHN0
+cnVjdCB2aXJ0aW9fZGV2aWNlICp2ZGV2KQo+ID4gICAgICAgaWYgKG5ldGlmX3J1bm5pbmcodmkt
+PmRldikpIHsKPiA+ICAgICAgICAgICAgICAgZm9yIChpID0gMDsgaSA8IHZpLT5tYXhfcXVldWVf
+cGFpcnM7IGkrKykgewo+ID4gICAgICAgICAgICAgICAgICAgICAgIG5hcGlfZGlzYWJsZSgmdmkt
+PnJxW2ldLm5hcGkpOwo+ID4gLSAgICAgICAgICAgICAgICAgICAgIHZpcnRuZXRfbmFwaV90eF9k
+aXNhYmxlKCZ2aS0+c3FbaV0ubmFwaSk7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgdmlydG5l
+dF9uYXBpX3R4X2Rpc2FibGUodmktPnNxW2ldLnZxLCAmdmktPnNxW2ldLm5hcGkpOwo+ID4gICAg
+ICAgICAgICAgICB9Cj4gPiAgICAgICB9Cj4gPiAgIH0KPiA+IEBAIC0yNDQwLDcgKzI0NDksNyBA
+QCBzdGF0aWMgaW50IHZpcnRuZXRfeGRwX3NldChzdHJ1Y3QgbmV0X2RldmljZSAqZGV2LCBzdHJ1
+Y3QgYnBmX3Byb2cgKnByb2csCj4gPiAgICAgICBpZiAobmV0aWZfcnVubmluZyhkZXYpKSB7Cj4g
+PiAgICAgICAgICAgICAgIGZvciAoaSA9IDA7IGkgPCB2aS0+bWF4X3F1ZXVlX3BhaXJzOyBpKysp
+IHsKPiA+ICAgICAgICAgICAgICAgICAgICAgICBuYXBpX2Rpc2FibGUoJnZpLT5ycVtpXS5uYXBp
+KTsKPiA+IC0gICAgICAgICAgICAgICAgICAgICB2aXJ0bmV0X25hcGlfdHhfZGlzYWJsZSgmdmkt
+PnNxW2ldLm5hcGkpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHZpcnRuZXRfbmFwaV90eF9k
+aXNhYmxlKHZpLT5zcVtpXS52cSwgJnZpLT5zcVtpXS5uYXBpKTsKPiA+ICAgICAgICAgICAgICAg
+fQo+ID4gICAgICAgfQo+ID4KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9f
+cmluZy5jIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYwo+ID4gaW5kZXggNzFlMTZiNTNl
+OWMxLi5mN2M1ZDY5N2MzMDIgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9f
+cmluZy5jCj4gPiArKysgYi9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jCj4gPiBAQCAtMTA1
+LDYgKzEwNSw5IEBAIHN0cnVjdCB2cmluZ192aXJ0cXVldWUgewo+ID4gICAgICAgLyogSG9zdCBw
+dWJsaXNoZXMgYXZhaWwgZXZlbnQgaWR4ICovCj4gPiAgICAgICBib29sIGV2ZW50Owo+ID4KPiA+
+ICsgICAgIC8qIFR4IHNpZGUgbmFwaSB3b3JrIGNvdWxkIGJlIGRvbmUgZnJvbSByeCBzaWRlLiAq
+Lwo+ID4gKyAgICAgYm9vbCB3b3JrX3N0ZWFsOwo+Cj4KPiBTbyB2cmluZ192cml0cXVldWUgaXMg
+YSBnZW5lcmFsIHN0cnVjdHVyZSwgbGV0J3MgYXZvaWQgbWVudGlvbmluZwo+IG5ldHdvcmsgc3Bl
+Y2lmaWMgc3R1ZmZzIGhlcmUuIEFuZCB3ZSBuZWVkIGEgYmV0dGVyIG5hbWUgbGlrZQo+ICJub19p
+bnRlcnJ1cHRfY2hlY2siPwo+Cj4gQW5kIHdlIG5lZWQgYSBzZXBhcmF0ZSBwYXRjaCBmb3Igdmly
+dGlvIGNvcmUgY2hhbmdlcy4KCkFjay4gV2lsbCBjaGFuZ2UuCgo+Cj4gPiArCj4gPiAgICAgICAv
+KiBIZWFkIG9mIGZyZWUgYnVmZmVyIGxpc3QuICovCj4gPiAgICAgICB1bnNpZ25lZCBpbnQgZnJl
+ZV9oZWFkOwo+ID4gICAgICAgLyogTnVtYmVyIHdlJ3ZlIGFkZGVkIHNpbmNlIGxhc3Qgc3luYy4g
+Ki8KPiA+IEBAIC0xNjA0LDYgKzE2MDcsNyBAQCBzdGF0aWMgc3RydWN0IHZpcnRxdWV1ZSAqdnJp
+bmdfY3JlYXRlX3ZpcnRxdWV1ZV9wYWNrZWQoCj4gPiAgICAgICB2cS0+bm90aWZ5ID0gbm90aWZ5
+Owo+ID4gICAgICAgdnEtPndlYWtfYmFycmllcnMgPSB3ZWFrX2JhcnJpZXJzOwo+ID4gICAgICAg
+dnEtPmJyb2tlbiA9IGZhbHNlOwo+ID4gKyAgICAgdnEtPndvcmtfc3RlYWwgPSBmYWxzZTsKPiA+
+ICAgICAgIHZxLT5sYXN0X3VzZWRfaWR4ID0gMDsKPiA+ICAgICAgIHZxLT5udW1fYWRkZWQgPSAw
+Owo+ID4gICAgICAgdnEtPnBhY2tlZF9yaW5nID0gdHJ1ZTsKPiA+IEBAIC0yMDM4LDYgKzIwNDIs
+OSBAQCBpcnFyZXR1cm5fdCB2cmluZ19pbnRlcnJ1cHQoaW50IGlycSwgdm9pZCAqX3ZxKQo+ID4K
+PiA+ICAgICAgIGlmICghbW9yZV91c2VkKHZxKSkgewo+ID4gICAgICAgICAgICAgICBwcl9kZWJ1
+ZygidmlydHF1ZXVlIGludGVycnVwdCB3aXRoIG5vIHdvcmsgZm9yICVwXG4iLCB2cSk7Cj4KPgo+
+IERvIHdlIHN0aWxsIG5lZWQgdG8ga2VlcCB0aGlzIHdhcm5pbmc/CgpDb21lIHRvIHRoaW5rIG9m
+IGl0LCBJIHdvdWxkIHNheSBubywgaW4gdGhpcyBjYXNlLgoKPgo+Cj4gPiArICAgICAgICAgICAg
+IGlmICh2cS0+d29ya19zdGVhbCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICByZXR1cm4gSVJR
+X0hBTkRMRUQ7Cj4KPgo+IFNvIEkgd29uZGVyIGluc3RlYWQgb2YgZG9pbmcgdHJpY2sgbGlrZSB0
+aGlzLCBtYXliZSBpdCdzIHRpbWUgdG8gdW5pZnkKPiBUWC9SWCBOQVBJIHdpdGggdGhlIGhlbHAg
+b2ZbMV0gKHZpcnRpby1uZXQgdXNlIHF1ZXVlIHBhaXJzKS4KPgo+IFRoYW5rcwo+Cj4gWzFdIGh0
+dHBzOi8vbGttbC5vcmcvbGttbC8yMDE0LzEyLzI1LzE2OQoKSW50ZXJlc3RpbmcgaWRlYS4gSXQg
+ZG9lcyBzb3VuZCBsaWtlIGEgZ29vZCBmaXQgZm9yIHRoaXMgbW9kZWwuIFRoZQpwYXRjaCBpbiB0
+aGUgRml4ZXMgbGluZSBwcm92ZWQgZWZmZWN0aXZlIGF0IHN1cHByZXNzaW5nIHVubmVjZXNzYXJ5
+IFRYCmludGVycnVwdHMgd2hlbiBwcm9jZXNzaW5nIGluIFJYIGludGVycnVwdCBoYW5kbGVyLiBT
+byBub3Qgc3VyZSBob3cKbXVjaCB3aWxsIGhlbHAgaW4gcHJhY3RpY2UuIE1pZ2h0IGJlIGEgbmlj
+ZSBwcm9qZWN0IHRvIGV2YWx1YXRlCnNlcGFyYXRlIGZvciBuZXQtbmV4dCBhdCBzb21lIHBvaW50
+LgoKVGhhbmtzIGZvciB0aGUgcmV2aWV3IQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRp
+b25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRp
+b24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
