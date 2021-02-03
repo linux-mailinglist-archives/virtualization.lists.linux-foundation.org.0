@@ -1,60 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1B9530DAA8
-	for <lists.virtualization@lfdr.de>; Wed,  3 Feb 2021 14:11:00 +0100 (CET)
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08BFF30DADF
+	for <lists.virtualization@lfdr.de>; Wed,  3 Feb 2021 14:17:47 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 85E048708A;
-	Wed,  3 Feb 2021 13:10:59 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 9CDC6228DC;
+	Wed,  3 Feb 2021 13:17:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sOg+IjTtUY05; Wed,  3 Feb 2021 13:10:57 +0000 (UTC)
+	with ESMTP id yL5+nFf1lu9C; Wed,  3 Feb 2021 13:17:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id BE99E87109;
-	Wed,  3 Feb 2021 13:10:57 +0000 (UTC)
+	by silver.osuosl.org (Postfix) with ESMTP id 67929204F3;
+	Wed,  3 Feb 2021 13:17:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A3DA2C013A;
-	Wed,  3 Feb 2021 13:10:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4E749C0174;
+	Wed,  3 Feb 2021 13:17:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B4ED7C013A
+Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B2144C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 13:10:54 +0000 (UTC)
+ Wed,  3 Feb 2021 13:17:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id A3E2185F51
+ by silver.osuosl.org (Postfix) with ESMTP id 66CF121FA8
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 13:10:54 +0000 (UTC)
+ Wed,  3 Feb 2021 13:17:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from silver.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NiyLKsnY1QWV
+ with ESMTP id g6Cc+DNz0Gee
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 13:10:54 +0000 (UTC)
+ Wed,  3 Feb 2021 13:16:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id AE65085F32
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by silver.osuosl.org (Postfix) with ESMTPS id F11A92001A
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 13:10:53 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 492E5B133;
- Wed,  3 Feb 2021 13:10:52 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kraxel@redhat.com, hdegoede@redhat.com,
- sean@poorly.run, sam@ravnborg.org, noralf@tronnes.org
-Subject: [PATCH 6/6] drm/udl: Move vmap out of commit tail
-Date: Wed,  3 Feb 2021 14:10:46 +0100
-Message-Id: <20210203131046.22371-7-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210203131046.22371-1-tzimmermann@suse.de>
-References: <20210203131046.22371-1-tzimmermann@suse.de>
+ Wed,  3 Feb 2021 13:16:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612358183;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1oIZf7f/oo6PVRncKORJAVfkEWNMyNF7ALcrFfX4auY=;
+ b=REkkBzWUuAzBTsUD7A4P2gnAdbd4q5JQBQCqdyC+ntZ1Y0bMP4oktTpn3rQAuePZDl9Xgf
+ CMgHRBkoaKqKMgI06fpF/f3uYBy8wvzvaBQ8tY3/97YaIylZh3cO9r7JZ25+6iGmR8tWRY
+ iaLhP3aTiIoZT3nytWBLLkuZpB645tE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-327-JFJDJwHVPEiCvFEyGgQmkQ-1; Wed, 03 Feb 2021 08:16:21 -0500
+X-MC-Unique: JFJDJwHVPEiCvFEyGgQmkQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4C06A80196F;
+ Wed,  3 Feb 2021 13:16:20 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-113-27.ams2.redhat.com
+ [10.36.113.27])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 238724D;
+ Wed,  3 Feb 2021 13:16:16 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 442921800853; Wed,  3 Feb 2021 14:16:15 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v5 1/6] drm/qxl: use drmm_mode_config_init
+Date: Wed,  3 Feb 2021 14:16:10 +0100
+Message-Id: <20210203131615.1714021-2-kraxel@redhat.com>
+In-Reply-To: <20210203131615.1714021-1-kraxel@redhat.com>
+References: <20210203131615.1714021-1-kraxel@redhat.com>
 MIME-Version: 1.0
-Cc: Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel.vetter@ffwll.ch>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,153 +97,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Vmap operations may acquire the dmabuf reservation lock, which is not
-allowed within atomic commit-tail functions. Therefore move vmap and
-vunmap from the damage handler into prepare_fb and cleanup_fb callbacks.
-
-The mapping is provided as GEM SHMEM shadow plane. The enable and prepare
-callbacks use the established mapping for damage handling.
-
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/udl/Kconfig       |  1 +
- drivers/gpu/drm/udl/udl_modeset.c | 36 +++++++++++++------------------
- 2 files changed, 16 insertions(+), 21 deletions(-)
+ drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/udl/Kconfig b/drivers/gpu/drm/udl/Kconfig
-index 1f497d8f1ae5..1b46d93ca61c 100644
---- a/drivers/gpu/drm/udl/Kconfig
-+++ b/drivers/gpu/drm/udl/Kconfig
-@@ -5,6 +5,7 @@ config DRM_UDL
- 	depends on USB
- 	depends on USB_ARCH_HAS_HCD
- 	select DRM_GEM_SHMEM_HELPER
-+	select DRM_GEM_SHMEM_KMS_HELPER
- 	select DRM_KMS_HELPER
- 	help
- 	  This is a KMS driver for the USB displaylink video adapters.
-diff --git a/drivers/gpu/drm/udl/udl_modeset.c b/drivers/gpu/drm/udl/udl_modeset.c
-index 9d34ec9d03f6..974dffe86a44 100644
---- a/drivers/gpu/drm/udl/udl_modeset.c
-+++ b/drivers/gpu/drm/udl/udl_modeset.c
-@@ -17,6 +17,7 @@
- #include <drm/drm_fourcc.h>
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_gem_shmem_helper.h>
-+#include <drm/drm_gem_shmem_kms_helper.h>
- #include <drm/drm_modeset_helper_vtables.h>
- #include <drm/drm_vblank.h>
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index 012bce0cdb65..38d6b596094d 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1195,7 +1195,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+ 	int i;
+ 	int ret;
  
-@@ -266,18 +267,17 @@ static int udl_aligned_damage_clip(struct drm_rect *clip, int x, int y,
- 	return 0;
- }
+-	drm_mode_config_init(&qdev->ddev);
++	ret = drmm_mode_config_init(&qdev->ddev);
++	if (ret)
++		return ret;
  
--static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
--			     int width, int height)
-+static int udl_handle_damage(struct drm_framebuffer *fb, const struct dma_buf_map *map,
-+			     int x, int y, int width, int height)
+ 	ret = qxl_create_monitors_object(qdev);
+ 	if (ret)
+@@ -1228,5 +1230,4 @@ int qxl_modeset_init(struct qxl_device *qdev)
+ void qxl_modeset_fini(struct qxl_device *qdev)
  {
- 	struct drm_device *dev = fb->dev;
- 	struct dma_buf_attachment *import_attach = fb->obj[0]->import_attach;
-+	void *vaddr = map->vaddr; /* TODO: Use mapping abstraction properly */
- 	int i, ret, tmp_ret;
- 	char *cmd;
- 	struct urb *urb;
- 	struct drm_rect clip;
- 	int log_bpp;
--	struct dma_buf_map map;
--	void *vaddr;
- 
- 	ret = udl_log_cpp(fb->format->cpp[0]);
- 	if (ret < 0)
-@@ -297,17 +297,10 @@ static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
- 			return ret;
- 	}
- 
--	ret = drm_gem_shmem_vmap(fb->obj[0], &map);
--	if (ret) {
--		DRM_ERROR("failed to vmap fb\n");
--		goto out_dma_buf_end_cpu_access;
--	}
--	vaddr = map.vaddr; /* TODO: Use mapping abstraction properly */
--
- 	urb = udl_get_urb(dev);
- 	if (!urb) {
- 		ret = -ENOMEM;
--		goto out_drm_gem_shmem_vunmap;
-+		goto out_dma_buf_end_cpu_access;
- 	}
- 	cmd = urb->transfer_buffer;
- 
-@@ -320,7 +313,7 @@ static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
- 				       &cmd, byte_offset, dev_byte_offset,
- 				       byte_width);
- 		if (ret)
--			goto out_drm_gem_shmem_vunmap;
-+			goto out_dma_buf_end_cpu_access;
- 	}
- 
- 	if (cmd > (char *)urb->transfer_buffer) {
-@@ -336,8 +329,6 @@ static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
- 
- 	ret = 0;
- 
--out_drm_gem_shmem_vunmap:
--	drm_gem_shmem_vunmap(fb->obj[0], &map);
- out_dma_buf_end_cpu_access:
- 	if (import_attach) {
- 		tmp_ret = dma_buf_end_cpu_access(import_attach->dmabuf,
-@@ -375,6 +366,8 @@ udl_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 	struct drm_framebuffer *fb = plane_state->fb;
- 	struct udl_device *udl = to_udl(dev);
- 	struct drm_display_mode *mode = &crtc_state->mode;
-+	struct drm_gem_shmem_shadow_plane_state *shadow_plane_state =
-+		to_drm_gem_shmem_shadow_plane_state(plane_state);
- 	char *buf;
- 	char *wrptr;
- 	int color_depth = UDL_COLOR_DEPTH_16BPP;
-@@ -400,7 +393,7 @@ udl_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 
- 	udl->mode_buf_len = wrptr - buf;
- 
--	udl_handle_damage(fb, 0, 0, fb->width, fb->height);
-+	udl_handle_damage(fb, &shadow_plane_state->map[0], 0, 0, fb->width, fb->height);
- 
- 	if (!crtc_state->mode_changed)
- 		return;
-@@ -435,6 +428,8 @@ udl_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 			       struct drm_plane_state *old_plane_state)
- {
- 	struct drm_plane_state *state = pipe->plane.state;
-+	struct drm_gem_shmem_shadow_plane_state *shadow_plane_state =
-+		to_drm_gem_shmem_shadow_plane_state(state);
- 	struct drm_framebuffer *fb = state->fb;
- 	struct drm_rect rect;
- 
-@@ -442,17 +437,16 @@ udl_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 		return;
- 
- 	if (drm_atomic_helper_damage_merged(old_plane_state, state, &rect))
--		udl_handle_damage(fb, rect.x1, rect.y1, rect.x2 - rect.x1,
--				  rect.y2 - rect.y1);
-+		udl_handle_damage(fb, &shadow_plane_state->map[0], rect.x1, rect.y1,
-+				  rect.x2 - rect.x1, rect.y2 - rect.y1);
+ 	qxl_destroy_monitors_object(qdev);
+-	drm_mode_config_cleanup(&qdev->ddev);
  }
- 
--static const
--struct drm_simple_display_pipe_funcs udl_simple_display_pipe_funcs = {
-+static const struct drm_simple_display_pipe_funcs udl_simple_display_pipe_funcs = {
- 	.mode_valid = udl_simple_display_pipe_mode_valid,
- 	.enable = udl_simple_display_pipe_enable,
- 	.disable = udl_simple_display_pipe_disable,
- 	.update = udl_simple_display_pipe_update,
--	.prepare_fb = drm_gem_fb_simple_display_pipe_prepare_fb,
-+	DRM_GEM_SHMEM_SIMPLE_DISPLAY_PIPE_SHADOW_PLANE_FUNCS,
- };
- 
- /*
 -- 
-2.30.0
+2.29.2
 
 _______________________________________________
 Virtualization mailing list
