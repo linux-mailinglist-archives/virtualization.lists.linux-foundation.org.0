@@ -1,82 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BF0430DC90
-	for <lists.virtualization@lfdr.de>; Wed,  3 Feb 2021 15:22:59 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB8B530DCA9
+	for <lists.virtualization@lfdr.de>; Wed,  3 Feb 2021 15:25:29 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 8ADBC85F8A;
-	Wed,  3 Feb 2021 14:22:57 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 09B2887113;
+	Wed,  3 Feb 2021 14:25:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0yEgljnbzc_H; Wed,  3 Feb 2021 14:22:56 +0000 (UTC)
+	with ESMTP id W5vkbwlMD7TO; Wed,  3 Feb 2021 14:25:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id EE4C485F90;
-	Wed,  3 Feb 2021 14:22:56 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id A336D870BD;
+	Wed,  3 Feb 2021 14:25:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D3EB0C013A;
-	Wed,  3 Feb 2021 14:22:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78CA6C0FA7;
+	Wed,  3 Feb 2021 14:25:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BC820C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2B75BC013A
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 14:22:54 +0000 (UTC)
+ Wed,  3 Feb 2021 14:25:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id AB27985F8B
+ by whitealder.osuosl.org (Postfix) with ESMTP id 155D586927
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 14:22:54 +0000 (UTC)
+ Wed,  3 Feb 2021 14:25:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qJ7-5gB5Kvzp
+ with ESMTP id L4tRoY8T+Uyv
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 14:22:54 +0000 (UTC)
+ Wed,  3 Feb 2021 14:25:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id F2F4D85F8A
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 62F4A868F1
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Feb 2021 14:22:53 +0000 (UTC)
+ Wed,  3 Feb 2021 14:25:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612362172;
+ s=mimecast20190719; t=1612362324;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=3xWLX20KnSq7G5ofmlPC/VwP2FA7d4Kic/EX2+ofCBw=;
- b=AOjdZwmGDebJeLrviHUKHrBT4QappkOKkKcB81wl9hh0N9zR8CbTnPka6imHv4YXKtA53v
- 9dFef45KdKURiGNL8us/wkKWLR/CvdMGgkwDQiD4M26mJLE6a4DH/8tDRKS/r2Hz5LkztV
- 6KEbZg6Ul4pzZv3U1N1NdpnHQTRR+hk=
+ bh=OxfTFr0q8Tf9h3gAFIf04FpqXe2AG8QXR8Ik/VWm3BI=;
+ b=hetCHUn52rkt9xojH+nnvcw9E5N27snlHmqe+G6vfxVKMhU2Uhpw28DB7EPi6kXpExPPPs
+ 2vnZjktdWAxKlVWfMKqxfF4lcNTauLJQOoYOa71wSijtz6Zko8tfIVwG+iMig8lR6sc2xd
+ RLJfW9TFImqF7g2Q5UQkBJHycqAMZ1s=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-244-XA9H55P5NW2AW_YuhKhu5g-1; Wed, 03 Feb 2021 09:22:49 -0500
-X-MC-Unique: XA9H55P5NW2AW_YuhKhu5g-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-565-o1In-4mkPJKDqZcQ64ryKg-1; Wed, 03 Feb 2021 09:25:22 -0500
+X-MC-Unique: o1In-4mkPJKDqZcQ64ryKg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9E784107ACE8;
- Wed,  3 Feb 2021 14:22:47 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1C661196632D;
+ Wed,  3 Feb 2021 14:25:21 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-113-27.ams2.redhat.com
  [10.36.113.27])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 436F61002391;
- Wed,  3 Feb 2021 14:22:44 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B7FE95B692;
+ Wed,  3 Feb 2021 14:25:17 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 0EAA01800853; Wed,  3 Feb 2021 15:22:39 +0100 (CET)
-Date: Wed, 3 Feb 2021 15:22:39 +0100
+ id 0A44A1800853; Wed,  3 Feb 2021 15:25:16 +0100 (CET)
+Date: Wed, 3 Feb 2021 15:25:16 +0100
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
-Subject: Re: [PATCH RESEND v3] virtio-input: add multi-touch support
-Message-ID: <20210203142239.7lknkkg4zx5kuaf2@sirius.home.kraxel.org>
-References: <20210115002623.8576-1-vasyl.vavrychuk@opensynergy.com>
+To: Colin Xu <colin.xu@intel.com>
+Subject: Re: [PATCH V2] virtio_input: Prevent EV_MSC/MSC_TIMESTAMP loop storm
+ for MT.
+Message-ID: <20210203142516.uzinnnkngahqfhdn@sirius.home.kraxel.org>
+References: <20210202001923.6227-1-colin.xu@intel.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210115002623.8576-1-vasyl.vavrychuk@opensynergy.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Henrik Rydberg <rydberg@bitmath.org>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Mathias Crombez <mathias.crombez@faurecia.com>, linux-input@vger.kernel.org
+In-Reply-To: <20210202001923.6227-1-colin.xu@intel.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Cc: virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
+ mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,27 +93,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jan 15, 2021 at 02:26:23AM +0200, Vasyl Vavrychuk wrote:
-> From: Mathias Crombez <mathias.crombez@faurecia.com>
-> 
-> Without multi-touch slots allocated, ABS_MT_SLOT events will be lost by
-> input_handle_abs_event.
-> 
-> Implementation is based on uinput_create_device.
-> 
-> Signed-off-by: Mathias Crombez <mathias.crombez@faurecia.com>
-> Co-developed-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
-> Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
-> ---
-> v2: fix patch corrupted by corporate email server
-> v3: use number of slots from the host
-> 
-> Resend since to feedback.
-> 
->  drivers/virtio/virtio_input.c | 11 ++++++++++-
->  1 file changed, 10 insertions(+), 1 deletion(-)
+  Hi,
 
-Have no test hardware, the logic looks sane though.
+> +	/*
+> +	 * Since 29cc309d8bf1 (HID: hid-multitouch: forward MSC_TIMESTAMP),
+> +	 * EV_MSC/MSC_TIMESTAMP is added to each before EV_SYN event.
+> +	 * EV_MSC is configured as INPUT_PASS_TO_ALL.
+> +	 * In case of touch device:
+> +	 *   BE pass EV_MSC/MSC_TIMESTAMP to FE on receiving event from evdev.
+> +	 *   FE pass EV_MSC/MSC_TIMESTAMP back to BE.
+> +	 *   BE writes EV_MSC/MSC_TIMESTAMP to evdev due to INPUT_PASS_TO_ALL.
+> +	 *   BE receives extra EV_MSC/MSC_TIMESTAMP and pass to FE.
+> +	 *   >>> Each new frame becomes larger and larger.
+> +	 * Disable EV_MSC/MSC_TIMESTAMP forwarding for MT.
+> +	 */
+> +	if (vi->idev->mt && type == EV_MSC && code == MSC_TIMESTAMP)
+> +		return 0;
+> +
 
 Reviewed-by: Gerd Hoffmann <kraxel@redhat.com>
 
