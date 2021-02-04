@@ -1,129 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3110230FA3A
-	for <lists.virtualization@lfdr.de>; Thu,  4 Feb 2021 18:54:06 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C8F1630FB08
+	for <lists.virtualization@lfdr.de>; Thu,  4 Feb 2021 19:17:59 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id 252022D3FC;
-	Thu,  4 Feb 2021 17:54:04 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id E706A86C89;
+	Thu,  4 Feb 2021 18:17:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LqPvusu51EOy; Thu,  4 Feb 2021 17:54:02 +0000 (UTC)
+	with ESMTP id v-F2sNkCczm4; Thu,  4 Feb 2021 18:17:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id CDBC3291FC;
-	Thu,  4 Feb 2021 17:54:02 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 410FE86C35;
+	Thu,  4 Feb 2021 18:17:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 96A0CC013A;
-	Thu,  4 Feb 2021 17:54:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 25118C013A;
+	Thu,  4 Feb 2021 18:17:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0A462C013A;
- Thu,  4 Feb 2021 17:54:01 +0000 (UTC)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1339FC013A
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Feb 2021 18:17:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E3CCF8685E;
- Thu,  4 Feb 2021 17:54:00 +0000 (UTC)
+ by hemlock.osuosl.org (Postfix) with ESMTP id 0C5648721A
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Feb 2021 18:17:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6zJuv9oNO5RI; Thu,  4 Feb 2021 17:53:59 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2124.outbound.protection.outlook.com [40.107.94.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 99A958685B;
- Thu,  4 Feb 2021 17:53:59 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dzkTqxjUGoR5kW1t64coOS5sOmoX5ToSYa6uRLcdQcn/5JeKd7IFwQph66g2RTkoCWhgjlZxsb0QYLnUEnZ1F+kxvaHwaJfzXMOTRmeSVRawTTN71baG8KPxJKgzzw3+ISDNlga64YJrc7Rlh+mws7qje02OpSeDpVdA2ZW0Csn8PojG+sGUA5FOyq+Z1XvRjyneJcDoR9hoRJ40ISyNn9UYAGK+/9iMtDAWBRsyHKjE8MXOG0YHO0bt7KvFDhKbQPHK+iQrDNcoDuYOQYfXhsIzEPulmC/SbpMGriJLyGt4NhEcD1e4gzCIohFp47/Qv/kkksiKqMAJrxzvbPi16Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8a15breN6v7/6RZ8assTbzjyUpkox5g6VCUQvJu3rxI=;
- b=Xfb8fi7XM4sk9PdswCAzVYQr2D/CwphQ8TajTGJQRvoCeAcWyIby6rqIBQDo8W8F/fk+Out6Jl/EHTBqKe0/LOEdLWRbbHnaCGm4Cc0/OP5xvgcJFhfP6c0e/oxaIU7SdxPSNkh6+YBCX0pSEENo9GRDW1xVpqcPXM+ERuf0qgz4QMGEi6J0NGrsv+Cgf3UlZZvkmJ3MBcqIWEQG5+UkE5CQ9h0sTcSOyLUYSaPLiFjCljuaFTD6Fel6Gc8fNBQhfsKNNvEJYm2cwzez5GjNuuT/Ni7CZ8W1Zd3KYxE2SH1SxI/olFXPS9zMlgJsqgmbBFbiJcW/UyelkpbIlhzhww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microsoft.com; dmarc=pass action=none
- header.from=microsoft.com; dkim=pass header.d=microsoft.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8a15breN6v7/6RZ8assTbzjyUpkox5g6VCUQvJu3rxI=;
- b=HAIv6KsykTy+BBqf7BWzhkOCa5jHRLFnehMCcQ+pXbDZsh5bb+BZ1hF4vk5aohgIFsTDL8oUF2/fyTy4mkdcqnOosx5LiCSG/IaYHAGSwK0koFhXB66Sr3e7eW518zxSx6sQpI+vZhpGnmIhU9iO9jLOPceoPIlTcFj/KHfjnXk=
-Received: from (2603:10b6:301:7c::11) by
- MWHPR2101MB0873.namprd21.prod.outlook.com (2603:10b6:301:7e::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.6; Thu, 4 Feb
- 2021 17:53:55 +0000
-Received: from MWHPR21MB1593.namprd21.prod.outlook.com
- ([fe80::9c8:94c9:faf1:17c2]) by MWHPR21MB1593.namprd21.prod.outlook.com
- ([fe80::9c8:94c9:faf1:17c2%9]) with mapi id 15.20.3846.006; Thu, 4 Feb 2021
- 17:53:55 +0000
-To: Wei Liu <wei.liu@kernel.org>, Linux on Hyper-V List
- <linux-hyperv@vger.kernel.org>
-Subject: RE: [PATCH v6 16/16] iommu/hyperv: setup an IO-APIC IRQ remapping
- domain for root partition
-Thread-Topic: [PATCH v6 16/16] iommu/hyperv: setup an IO-APIC IRQ remapping
- domain for root partition
-Thread-Index: AQHW+j31sX8XTKaHaEW+K0rkDWqrRapISLLw
-Date: Thu, 4 Feb 2021 17:53:55 +0000
-Message-ID: <MWHPR21MB159329D4EA13215C208D7828D7B39@MWHPR21MB1593.namprd21.prod.outlook.com>
-References: <20210203150435.27941-1-wei.liu@kernel.org>
- <20210203150435.27941-17-wei.liu@kernel.org>
-In-Reply-To: <20210203150435.27941-17-wei.liu@kernel.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Enabled=true;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SetDate=2021-02-04T17:53:53Z; 
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Method=Standard;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Name=Internal;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SiteId=72f988bf-86f1-41af-91ab-2d7cd011db47;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ActionId=ef2c78a6-f632-4744-a1c1-679068bd2287;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ContentBits=0
-authentication-results: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=microsoft.com;
-x-originating-ip: [24.22.167.197]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 949aa3eb-507f-490e-508e-08d8c935d74c
-x-ms-traffictypediagnostic: MWHPR2101MB0873:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MWHPR2101MB087360720F5F0F8A1F0C540AD7B39@MWHPR2101MB0873.namprd21.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:1051;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: eguCWD75ZeKlC1x8rCdqJn75BSg1oU9+ceoFGDP5Ju7lTd38Si02+u46gaQRz2ie551/P6t2rbBAN4KjWv73mXLYQCavJeWRD6+H5ODmvaovjhL56LPFCQTELuNlwJIsvgBxJKz/wupM3uDkJogXaLF7nzafJTZj/MR+QB6QNz5ov2R98Fy8FJ2UOmas1ARKuw11Ft3ec42WMbr5MNrvNUtUURRB6lHbmSdfPpqkh35NBQ5dOMxkKhmiOqPZtZxbpJ5LUwcKCYD/fmi3WUSjNode3ycf/793pFWG3ghDaPRjCVVdIi8l+gQPRbqcmnmEWX9om9mGlr+krD2bsD3CjjH2HdpdgxFG1dtGlUo9BOFjFRqzJvf81lz0f8joD59eRvgE6C2mX9Y2NNSpNzosAzCBI2Bbzvwwq8lfE5tfz9qFZwPETHJhylW8HTx+LsLtA2URJNeswke3TyCApsfFdYe1Pov9a6l8CVwXccqCex9dTeOJYtOvwFIGEtBIsKJcMiwOGBS7UwY1ttkWXvaVBQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MWHPR21MB1593.namprd21.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(396003)(376002)(39860400002)(366004)(136003)(346002)(6506007)(8676002)(33656002)(66556008)(26005)(82950400001)(8990500004)(66476007)(82960400001)(186003)(86362001)(2906002)(7696005)(10290500003)(4744005)(316002)(66446008)(76116006)(4326008)(110136005)(478600001)(55016002)(52536014)(7416002)(71200400001)(8936002)(64756008)(83380400001)(54906003)(66946007)(9686003)(5660300002);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata: z1FZG/qVdzvPmsdw0RBb+ElltqpJLNjstJNUsWY9cDuDrHPdgecDMmvQzWwbRHmjh8gTSEVzP7jOZ55k4DH/uQiucvw+Q1fD1bfnEX80ofuCli8cZcOTyaYVLp65MXaKBdRfS/R2Y9l5phQtAPoGtLIMSWHAAQT0VXOOX2TiGoAoALKJd/LsXJ4JLLXslVfV3gIOnpKNSDnsFim2jFMZGjLd5dupqNPssgjn9mlzn1Go1zWc1g3jpXkpblMYpoFAtB3OzBiz1VaipZTBxQJdrYdkXEEJFTJmvGPwgB+EAAL6+xDp6q2D+Glph1y9e0LQVk+0BX+bBhUnqUizT+Dtb43b7YCqaN3RnEk1l8d9+nie2sk02JSgjCSEqPhfPN1JmM8LcF/MhEZJu3uqECpzRdOliinX9lpA7qPNshb63orlcXNXVGN3RZCPlEBZeU4AiRFs1PzgsDsXoatfZcRfoB47Sc9ucRktctxlSbJzdVC+/Z556VI7vmRThRGmq9g+/zMASW1+Ro7HgMLle6w13ymKQOkRFsDVlLqfMuHdWoJDUOlTK6fgfh6RyEN9DXZm5ztYnH2rgUmLebGAgRyEUejB9HKWTzmHfhcbCC80kUFApzT6qE3MpjVcFtwmLy5nH3rE7on7AoW/LQb/OLkiwrp10d7knbFU59xlPcs5GAF8qzSBPId4P5kVSVaIjBSUTLAJks0mugwReKv1X3cWgTpoIT9bwc7KRTqg9MrYGVc=
+ with ESMTP id tiZqV4zkXvp1
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Feb 2021 18:17:53 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A7EE087215
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Feb 2021 18:17:52 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 9FFB2AF19;
+ Thu,  4 Feb 2021 18:17:50 +0000 (UTC)
+Subject: Re: [PATCH v6 05/10] drm/qxl: release shadow on shutdown
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+References: <20210204145712.1531203-1-kraxel@redhat.com>
+ <20210204145712.1531203-6-kraxel@redhat.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <bcb00728-5798-aa19-0bf2-b52829916353@suse.de>
+Date: Thu, 4 Feb 2021 19:17:49 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-X-OriginatorOrg: microsoft.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR21MB1593.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 949aa3eb-507f-490e-508e-08d8c935d74c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Feb 2021 17:53:55.3368 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 72f988bf-86f1-41af-91ab-2d7cd011db47
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: WyxcVU5EQHqyF1Nzke/qbyUVZXNeLMmsPIkHC849qCzSS4GCVlIpHf6jYD9Ja6Fq995VazWiXmci5Ovx/ho3AY3ExV3rS1FYJN5JbFe4mkE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR2101MB0873
-Cc: Stephen Hemminger <sthemmin@microsoft.com>,
- "pasha.tatashin@soleen.com" <pasha.tatashin@soleen.com>,
- Will Deacon <will@kernel.org>, Haiyang Zhang <haiyangz@microsoft.com>,
- "maintainer:X86 ARCHITECTURE \(32-BIT AND 64-BIT\)" <x86@kernel.org>,
- Linux Kernel List <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "open list:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, "H. Peter
- Anvin" <hpa@zytor.com>, Nuno Das Neves <nunodasneves@linux.microsoft.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>,
- Vineeth Pillai <viremana@linux.microsoft.com>,
- Thomas Gleixner <tglx@linutronix.de>, Joerg Roedel <joro@8bytes.org>
+In-Reply-To: <20210204145712.1531203-6-kraxel@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -135,33 +69,112 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Michael Kelley via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Michael Kelley <mikelley@microsoft.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6377153626540784609=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Wei Liu <wei.liu@kernel.org> Sent: Wednesday, February 3, 2021 7:05 AM
-> 
-> Just like MSI/MSI-X, IO-APIC interrupts are remapped by Microsoft
-> Hypervisor when Linux runs as the root partition. Implement an IRQ
-> domain to handle mapping and unmapping of IO-APIC interrupts.
-> 
-> Signed-off-by: Wei Liu <wei.liu@kernel.org>
-> ---
-> v6:
-> 1. Simplify code due to changes in a previous patch.
-> ---
->  arch/x86/hyperv/irqdomain.c     |  25 +++++
->  arch/x86/include/asm/mshyperv.h |   4 +
->  drivers/iommu/hyperv-iommu.c    | 177 +++++++++++++++++++++++++++++++-
->  3 files changed, 203 insertions(+), 3 deletions(-)
-> 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============6377153626540784609==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf"
 
-Reviewed-by: Michael Kelley <mikelley@microsoft.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf
+Content-Type: multipart/mixed; boundary="Pt9hD2fxGYr4bNM5i7RjcBEacqKwJegvC";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, open list
+ <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+Message-ID: <bcb00728-5798-aa19-0bf2-b52829916353@suse.de>
+Subject: Re: [PATCH v6 05/10] drm/qxl: release shadow on shutdown
+References: <20210204145712.1531203-1-kraxel@redhat.com>
+ <20210204145712.1531203-6-kraxel@redhat.com>
+In-Reply-To: <20210204145712.1531203-6-kraxel@redhat.com>
+
+--Pt9hD2fxGYr4bNM5i7RjcBEacqKwJegvC
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Am 04.02.21 um 15:57 schrieb Gerd Hoffmann:
+> In case we have a shadow surface on shutdown release
+> it so it doesn't leak.
+>=20
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+
+> ---
+>   drivers/gpu/drm/qxl/qxl_display.c | 4 ++++
+>   1 file changed, 4 insertions(+)
+>=20
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qx=
+l_display.c
+> index 38d6b596094d..60331e31861a 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -1229,5 +1229,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+>  =20
+>   void qxl_modeset_fini(struct qxl_device *qdev)
+>   {
+> +	if (qdev->dumb_shadow_bo) {
+> +		drm_gem_object_put(&qdev->dumb_shadow_bo->tbo.base);
+> +		qdev->dumb_shadow_bo =3D NULL;
+> +	}
+>   	qxl_destroy_monitors_object(qdev);
+>   }
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--Pt9hD2fxGYr4bNM5i7RjcBEacqKwJegvC--
+
+--7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcOk0FAwAAAAAACgkQlh/E3EQov+Bf
+pxAAzhS9yhz/7odXPF65ASlBgs72y2q/jr9c8XrWtKuF+dnkmjfzmTs57Mb1tt2uLEJezZliNmhd
+Tk6Pz22ASPfstmuLFw3gRbwT1gjjwMIzZJzH5FqSFNHFGMhwtMWY8kNbDNGPTkjc/4ON+DTQ4Hj1
+AM6TLilIZVzM/uNZ04oOnpllo1Zpe7mntkS0/hL20vK5HXb0IuEiRLCowCGTu+4zqZJtGxcqaa0/
+IckeSfvu9BDGKI3MNZvxRMZGkjZpPZX7r/yN7qy6TbsNraGX22jNAPgEx3E0eIJR9NGwC+qxm3J3
+CAcd6IGMHhNPtkb/28Vg6+UsBYb5wL0d3PdXUjsAgZ94R/dc21bBb7+9cF+NqkovM/M44ieISjJr
+aqUJj5M3mtw02bXdTZUtSfdbdWAtpGnCQFTQgQtzOn8G19hc2rHDmcUSbqCYuipmyhLIQQAN43Jt
+XBJ9c9LvgLCQUYeGsROLUpTBS8YcCO/pYd0jSLrpNpGzokrXuiJC+Z24+QMWNULtUSukAASKMgnH
+mi3QEIkULGM8A447WcSYG+IiK0AEaLyhal9xaI1nR1Ie5dH10sOZmdUYKhZZqKuiQvy3wCg+b78U
+b6Ll7UXhqLSbi4en9av9ZABOWSXdSWZ4npX3HbYiAhDXsx4/rDCTq0u9ZQqkdVxTSlVZl7QMo1kn
+nFw=
+=qOcx
+-----END PGP SIGNATURE-----
+
+--7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf--
+
+--===============6377153626540784609==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============6377153626540784609==--
