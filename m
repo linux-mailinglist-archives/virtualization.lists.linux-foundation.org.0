@@ -1,60 +1,101 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C3D0310CF2
-	for <lists.virtualization@lfdr.de>; Fri,  5 Feb 2021 16:06:50 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id CBF3C310D20
+	for <lists.virtualization@lfdr.de>; Fri,  5 Feb 2021 16:25:13 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id BE072203DC;
-	Fri,  5 Feb 2021 15:06:48 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7416B87277;
+	Fri,  5 Feb 2021 15:25:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eG5pCjp6WA5I; Fri,  5 Feb 2021 15:06:44 +0000 (UTC)
+	with ESMTP id L7-p-qusjQB9; Fri,  5 Feb 2021 15:25:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 0492E203BA;
-	Fri,  5 Feb 2021 15:06:40 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 8C574872D4;
+	Fri,  5 Feb 2021 15:25:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id ECAD5C0FA7;
-	Fri,  5 Feb 2021 15:06:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6A017C013A;
+	Fri,  5 Feb 2021 15:25:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 80386C1E6F
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7364DC013A
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Feb 2021 15:06:38 +0000 (UTC)
+ Fri,  5 Feb 2021 15:25:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 4B5758709C
+ by whitealder.osuosl.org (Postfix) with ESMTP id 59AFC872BD
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Feb 2021 15:06:38 +0000 (UTC)
+ Fri,  5 Feb 2021 15:25:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Yr8ek8YEnqEa
+ with ESMTP id M8G+Ht4IUfPU
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Feb 2021 15:06:36 +0000 (UTC)
+ Fri,  5 Feb 2021 15:25:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 128C887035
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id B4E9C87277
  for <virtualization@lists.linux-foundation.org>;
- Fri,  5 Feb 2021 15:06:36 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9FDDFAC43;
- Fri,  5 Feb 2021 15:06:34 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kraxel@redhat.com, hdegoede@redhat.com,
- sean@poorly.run, sam@ravnborg.org, noralf@tronnes.org
-Subject: [PATCH v2 7/7] drm/udl: Move vmap out of commit tail
-Date: Fri,  5 Feb 2021 16:06:28 +0100
-Message-Id: <20210205150628.28072-8-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210205150628.28072-1-tzimmermann@suse.de>
-References: <20210205150628.28072-1-tzimmermann@suse.de>
+ Fri,  5 Feb 2021 15:25:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612538707;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=YxfECkOsSZ1stOC425/5nMxggTO4yyHeVSunIkBmhLY=;
+ b=TypJtOjri3qX3l269J4f/my3c4RAJMBE5Rnwao9A+RjGJupobe89Dk8ujRD0xt0NZD6FXd
+ fGBgcBvqO0Vo5xT8SUTkcQ5kUeS4E5MHhpV1ii7U4DfVqVX09FfJRWyaUo/zs95SI5OjFu
+ Q/WrsE7RyOx53KLc8oUVMkJrW/7sPwA=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-359-Ei0X9bSZNo6qJ-SrWQj4_Q-1; Fri, 05 Feb 2021 10:25:05 -0500
+X-MC-Unique: Ei0X9bSZNo6qJ-SrWQj4_Q-1
+Received: by mail-wm1-f70.google.com with SMTP id b62so3950798wmc.5
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 05 Feb 2021 07:25:05 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=YxfECkOsSZ1stOC425/5nMxggTO4yyHeVSunIkBmhLY=;
+ b=gfqhY7qPfyXV+M/RCid0/AjWwnuB6Wt4QNUun23zyjPt/bHosJvZRb1ikP4A/uCV0I
+ hlxWYcMTkKJS7q3mpekpaRLhD2yO6YDQor98PdZY4bhWL9VoddwIpMbkUjh2EbSsamQy
+ hU4a8K/OkrAF+ME2Wf0jDRVwvAF04zRO/bxX5NeQ/Jvy05dDHKQ4DVJURVnAa/hFbTXc
+ WmsDivhZO3Hb8Fy3Wd9Cwn+whhrfXCfg/0J1Xtfy0YzzFzHKB64OxjaIs18GJmsR1v4I
+ WcifzdTKlJ8L0yEp3y+fH7/zVo4MusfC4m3P+XwVeF4F0Jvy/NcdGF372i03PVYMQ7Nx
+ cgSg==
+X-Gm-Message-State: AOAM530S+VTDuZG6VWh3+X0Kxfp4mPkFDEVCcQ382Jqq/MK9LLERl0QM
+ ZW5zCy2VDOW3mmZAJc4eG3t3EM2t3j0jzYJHVwlAiPvU7HVKxXGjpPgu1E1cXOD0qAqP2H4GFpH
+ JImrmtaGQGInw6P0MhhqTvu3GUMvwRYHs2xIuwIjrQQ==
+X-Received: by 2002:a05:6000:41:: with SMTP id
+ k1mr5536466wrx.386.1612538704681; 
+ Fri, 05 Feb 2021 07:25:04 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwxh9sPVEw44Ux+BaaaaDLWX/oOyRAPVDo/jFYvRscnoIbqqTxP54NPPzP3n77CaXR4yrWtdw==
+X-Received: by 2002:a05:6000:41:: with SMTP id
+ k1mr5536451wrx.386.1612538704557; 
+ Fri, 05 Feb 2021 07:25:04 -0800 (PST)
+Received: from redhat.com (bzq-79-180-2-31.red.bezeqint.net. [79.180.2.31])
+ by smtp.gmail.com with ESMTPSA id d9sm13031562wrq.74.2021.02.05.07.25.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Feb 2021 07:25:03 -0800 (PST)
+Date: Fri, 5 Feb 2021 10:24:59 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V3 18/19] virtio_vdpa: don't warn when fail to disable vq
+Message-ID: <20210205102442-mutt-send-email-mst@kernel.org>
+References: <20210104065503.199631-1-jasowang@redhat.com>
+ <20210104065503.199631-19-jasowang@redhat.com>
 MIME-Version: 1.0
-Cc: Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <20210104065503.199631-19-jasowang@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: shahafs@mellanox.com, lulu@redhat.com, rdunlap@infradead.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,140 +112,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Vmap operations may acquire the dmabuf reservation lock, which is not
-allowed within atomic commit-tail functions. Therefore move vmap and
-vunmap from the damage handler into prepare_fb and cleanup_fb callbacks.
+On Mon, Jan 04, 2021 at 02:55:02PM +0800, Jason Wang wrote:
+> There's no guarantee that the device can disable a specific virtqueue
+> through set_vq_ready(). One example is the modern virtio-pci
+> device. So this patch removes the warning.
+> 
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
 
-The mapping is provided as GEM shadow-buffered plane. The functions in
-the commit tail use the pre-established mapping for damage handling.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Tested-by: Gerd Hoffmann <kraxel@redhat.com>
-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/udl/udl_modeset.c | 34 ++++++++++++-------------------
- 1 file changed, 13 insertions(+), 21 deletions(-)
+Do we need the read as a kind of flush though?
 
-diff --git a/drivers/gpu/drm/udl/udl_modeset.c b/drivers/gpu/drm/udl/udl_modeset.c
-index 9d34ec9d03f6..8d98bf69d075 100644
---- a/drivers/gpu/drm/udl/udl_modeset.c
-+++ b/drivers/gpu/drm/udl/udl_modeset.c
-@@ -15,6 +15,7 @@
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_damage_helper.h>
- #include <drm/drm_fourcc.h>
-+#include <drm/drm_gem_atomic_helper.h>
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_gem_shmem_helper.h>
- #include <drm/drm_modeset_helper_vtables.h>
-@@ -266,18 +267,17 @@ static int udl_aligned_damage_clip(struct drm_rect *clip, int x, int y,
- 	return 0;
- }
- 
--static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
--			     int width, int height)
-+static int udl_handle_damage(struct drm_framebuffer *fb, const struct dma_buf_map *map,
-+			     int x, int y, int width, int height)
- {
- 	struct drm_device *dev = fb->dev;
- 	struct dma_buf_attachment *import_attach = fb->obj[0]->import_attach;
-+	void *vaddr = map->vaddr; /* TODO: Use mapping abstraction properly */
- 	int i, ret, tmp_ret;
- 	char *cmd;
- 	struct urb *urb;
- 	struct drm_rect clip;
- 	int log_bpp;
--	struct dma_buf_map map;
--	void *vaddr;
- 
- 	ret = udl_log_cpp(fb->format->cpp[0]);
- 	if (ret < 0)
-@@ -297,17 +297,10 @@ static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
- 			return ret;
- 	}
- 
--	ret = drm_gem_shmem_vmap(fb->obj[0], &map);
--	if (ret) {
--		DRM_ERROR("failed to vmap fb\n");
--		goto out_dma_buf_end_cpu_access;
--	}
--	vaddr = map.vaddr; /* TODO: Use mapping abstraction properly */
--
- 	urb = udl_get_urb(dev);
- 	if (!urb) {
- 		ret = -ENOMEM;
--		goto out_drm_gem_shmem_vunmap;
-+		goto out_dma_buf_end_cpu_access;
- 	}
- 	cmd = urb->transfer_buffer;
- 
-@@ -320,7 +313,7 @@ static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
- 				       &cmd, byte_offset, dev_byte_offset,
- 				       byte_width);
- 		if (ret)
--			goto out_drm_gem_shmem_vunmap;
-+			goto out_dma_buf_end_cpu_access;
- 	}
- 
- 	if (cmd > (char *)urb->transfer_buffer) {
-@@ -336,8 +329,6 @@ static int udl_handle_damage(struct drm_framebuffer *fb, int x, int y,
- 
- 	ret = 0;
- 
--out_drm_gem_shmem_vunmap:
--	drm_gem_shmem_vunmap(fb->obj[0], &map);
- out_dma_buf_end_cpu_access:
- 	if (import_attach) {
- 		tmp_ret = dma_buf_end_cpu_access(import_attach->dmabuf,
-@@ -375,6 +366,7 @@ udl_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 	struct drm_framebuffer *fb = plane_state->fb;
- 	struct udl_device *udl = to_udl(dev);
- 	struct drm_display_mode *mode = &crtc_state->mode;
-+	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
- 	char *buf;
- 	char *wrptr;
- 	int color_depth = UDL_COLOR_DEPTH_16BPP;
-@@ -400,7 +392,7 @@ udl_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 
- 	udl->mode_buf_len = wrptr - buf;
- 
--	udl_handle_damage(fb, 0, 0, fb->width, fb->height);
-+	udl_handle_damage(fb, &shadow_plane_state->map[0], 0, 0, fb->width, fb->height);
- 
- 	if (!crtc_state->mode_changed)
- 		return;
-@@ -435,6 +427,7 @@ udl_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 			       struct drm_plane_state *old_plane_state)
- {
- 	struct drm_plane_state *state = pipe->plane.state;
-+	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(state);
- 	struct drm_framebuffer *fb = state->fb;
- 	struct drm_rect rect;
- 
-@@ -442,17 +435,16 @@ udl_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 		return;
- 
- 	if (drm_atomic_helper_damage_merged(old_plane_state, state, &rect))
--		udl_handle_damage(fb, rect.x1, rect.y1, rect.x2 - rect.x1,
--				  rect.y2 - rect.y1);
-+		udl_handle_damage(fb, &shadow_plane_state->map[0], rect.x1, rect.y1,
-+				  rect.x2 - rect.x1, rect.y2 - rect.y1);
- }
- 
--static const
--struct drm_simple_display_pipe_funcs udl_simple_display_pipe_funcs = {
-+static const struct drm_simple_display_pipe_funcs udl_simple_display_pipe_funcs = {
- 	.mode_valid = udl_simple_display_pipe_mode_valid,
- 	.enable = udl_simple_display_pipe_enable,
- 	.disable = udl_simple_display_pipe_disable,
- 	.update = udl_simple_display_pipe_update,
--	.prepare_fb = drm_gem_fb_simple_display_pipe_prepare_fb,
-+	DRM_GEM_SIMPLE_DISPLAY_PIPE_SHADOW_PLANE_FUNCS,
- };
- 
- /*
--- 
-2.30.0
+> ---
+>  drivers/virtio/virtio_vdpa.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+> 
+> diff --git a/drivers/virtio/virtio_vdpa.c b/drivers/virtio/virtio_vdpa.c
+> index 4a9ddb44b2a7..e28acf482e0c 100644
+> --- a/drivers/virtio/virtio_vdpa.c
+> +++ b/drivers/virtio/virtio_vdpa.c
+> @@ -225,9 +225,8 @@ static void virtio_vdpa_del_vq(struct virtqueue *vq)
+>  	list_del(&info->node);
+>  	spin_unlock_irqrestore(&vd_dev->lock, flags);
+>  
+> -	/* Select and deactivate the queue */
+> +	/* Select and deactivate the queue (best effort) */
+>  	ops->set_vq_ready(vdpa, index, 0);
+> -	WARN_ON(ops->get_vq_ready(vdpa, index));
+>  
+>  	vring_del_virtqueue(vq);
+>  
+> -- 
+> 2.25.1
 
 _______________________________________________
 Virtualization mailing list
