@@ -1,99 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from silver.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A132311D66
-	for <lists.virtualization@lfdr.de>; Sat,  6 Feb 2021 14:17:43 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id BF9723120D9
+	for <lists.virtualization@lfdr.de>; Sun,  7 Feb 2021 03:21:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by silver.osuosl.org (Postfix) with ESMTP id C4DD92044F;
-	Sat,  6 Feb 2021 13:17:41 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 7541286919;
+	Sun,  7 Feb 2021 02:21:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from silver.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UDjjodHBeEsG; Sat,  6 Feb 2021 13:17:37 +0000 (UTC)
+	with ESMTP id svp4jXWaq4LV; Sun,  7 Feb 2021 02:21:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by silver.osuosl.org (Postfix) with ESMTP id 40C6D20404;
-	Sat,  6 Feb 2021 13:17:37 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 527198691C;
+	Sun,  7 Feb 2021 02:21:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1219EC013A;
-	Sat,  6 Feb 2021 13:17:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 20B80C013A;
+	Sun,  7 Feb 2021 02:21:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C8017C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BDAC7C013A
  for <virtualization@lists.linux-foundation.org>;
- Sat,  6 Feb 2021 13:17:35 +0000 (UTC)
+ Sun,  7 Feb 2021 02:21:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id B7181872FA
+ by whitealder.osuosl.org (Postfix) with ESMTP id A81118691C
  for <virtualization@lists.linux-foundation.org>;
- Sat,  6 Feb 2021 13:17:35 +0000 (UTC)
+ Sun,  7 Feb 2021 02:21:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ToXfUANuRv+B
+ with ESMTP id CIvev4sg4fSj
  for <virtualization@lists.linux-foundation.org>;
- Sat,  6 Feb 2021 13:17:14 +0000 (UTC)
+ Sun,  7 Feb 2021 02:21:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 60A6F872E1
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+ [209.85.215.175])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 06EBA86919
  for <virtualization@lists.linux-foundation.org>;
- Sat,  6 Feb 2021 13:17:14 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 116DAA7b058414;
- Sat, 6 Feb 2021 13:17:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=mime-version :
- message-id : date : from : to : cc : subject : references : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2020-01-29;
- bh=iBieoUlmovjvu5MaIJ9cX8BhQE205Z9HXYbmJPk/bDk=;
- b=qS/UJStC/nkTVP/7CzekK8ci4FqXC+RyAqJRpDbmo9Xv+t4hMztZTr4iUy6llQ/LjW9M
- 3NH+O+TFJQdKARJ6YpvnKfGpLxl3mv+4Fo4HiXkvJXarBX+0OEROCCuEvaglUbQFROvu
- oWuXhPwM1rKlnyYK1nytJ8fqOfa5uYr0Y2oIBJ1mYBaZgwZUtIBumykl7xdYBpU9CNFA
- JLgEh8n/cbGYPIjPDOqJUUrykouJUMGff33r1svR6q0H05AYdc+d9TTPYgv0G3hKOfSg
- VXBaHNKK2uqQg61uC3MKrifipl87bsThi52vgkphIn4rBJ1bQrWnb5T2kqjVLP7rVisk jQ== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by userp2130.oracle.com with ESMTP id 36hjhqgn9f-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 06 Feb 2021 13:17:12 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 116DARWr028459;
- Sat, 6 Feb 2021 13:17:09 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
- by userp3020.oracle.com with ESMTP id 36hjeh3f5y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 06 Feb 2021 13:17:09 +0000
-Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
- by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 116DH89E018854;
- Sat, 6 Feb 2021 13:17:08 GMT
-Received: from ban25x6uut24.us.oracle.com (/10.153.73.24) by default (Oracle
- Beehive Gateway v4.0) with ESMTP ; Sat, 06 Feb 2021 05:16:17 -0800
+ Sun,  7 Feb 2021 02:21:07 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id n10so7959596pgl.10
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 06 Feb 2021 18:21:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=vRl839H4B+mxYDenDA16eRhD9TENdd+1sYt4/bsdS5E=;
+ b=eYLGvVAYqIDoa9RmWv8aGH67NAHRzz/FzrZKKgVb+k30I4ECErKCy5F/CM3OYHQJH2
+ VQGTPS72G3rh08PTusanJ2RPnLjcc4pqYcmD+uYxxHvKFN0xXNGdnPJQQb+WNd2AGXqO
+ URTkwz1OWAsIUlG4f9QxaIssIZDZ143Lg11j8AM7iPOzKawOXgjfrosLJi2QfnSB3lgQ
+ UPGacLyyXuPgafUtuDxCkgi552avR2tala+TcC46V82gQH9dDMKV3MIUPO0XodAJz/Kz
+ O1k9Y7JznYOIEqi7ldkWvVvTTwZuQ9NhkDlHVaUJOp86mNNJhuaZLS/OXoy3Sl3MDC0P
+ Rf3Q==
+X-Gm-Message-State: AOAM533PbiOZoQD11bkOPJr7rF46PPUwlaakkTz8JtMQwHFqt45rRzXM
+ mJzRvb8MCxdRovGH9BkarjiMY8iXbLg=
+X-Google-Smtp-Source: ABdhPJx6vTQo7mESg+A9IbIFkQIw9J3WMrk2kfxnrZBw3pzABcHGC7foI/5nrEimPKT3KQwSMxMHqA==
+X-Received: by 2002:aa7:961b:0:b029:1db:532c:9030 with SMTP id
+ q27-20020aa7961b0000b02901db532c9030mr2566771pfg.30.1612664466124; 
+ Sat, 06 Feb 2021 18:21:06 -0800 (PST)
+Received: from ?IPv6:2601:647:4000:d7:7d2:d17b:df07:7747?
+ ([2601:647:4000:d7:7d2:d17b:df07:7747])
+ by smtp.gmail.com with ESMTPSA id r68sm3415446pfc.49.2021.02.06.18.21.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 06 Feb 2021 18:21:05 -0800 (PST)
+Subject: Re: [PATCH 08/11] target iblock: add backend plug/unplug callouts
+To: Chaitanya Kulkarni <Chaitanya.Kulkarni@wdc.com>,
+ Mike Christie <michael.christie@oracle.com>,
+ "martin.petersen@oracle.com" <martin.petersen@oracle.com>,
+ "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+ "target-devel@vger.kernel.org" <target-devel@vger.kernel.org>,
+ "mst@redhat.com" <mst@redhat.com>, "jasowang@redhat.com"
+ <jasowang@redhat.com>, "stefanha@redhat.com" <stefanha@redhat.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>
+References: <20210204113513.93204-1-michael.christie@oracle.com>
+ <20210204113513.93204-9-michael.christie@oracle.com>
+ <BYAPR04MB496546E04938C9B78B71401586B09@BYAPR04MB4965.namprd04.prod.outlook.com>
+From: Bart Van Assche <bvanassche@acm.org>
+Message-ID: <19d5fe27-cf06-72b0-5351-5b41f711d2b5@acm.org>
+Date: Sat, 6 Feb 2021 18:21:03 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-Message-ID: <1612614564-4220-3-git-send-email-si-wei.liu@oracle.com>
-Date: Sat, 6 Feb 2021 04:29:24 -0800 (PST)
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: mst@redhat.com, jasowang@redhat.com, elic@nvidia.com
-Subject: [PATCH 3/3] mlx5_vdpa: defer clear_virtqueues to until DRIVER_OK
-References: <1612614564-4220-1-git-send-email-si-wei.liu@oracle.com>
-In-Reply-To: <1612614564-4220-1-git-send-email-si-wei.liu@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-X-Proofpoint-IMR: 1
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9886
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- suspectscore=0
- adultscore=0 phishscore=0 bulkscore=0 mlxlogscore=999 spamscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2102060093
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9886
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- impostorscore=0
- priorityscore=1501 bulkscore=0 suspectscore=0 mlxscore=0 phishscore=0
- lowpriorityscore=0 mlxlogscore=999 clxscore=1015 spamscore=0 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2102060093
-Cc: si-wei.liu@oracle.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <BYAPR04MB496546E04938C9B78B71401586B09@BYAPR04MB4965.namprd04.prod.outlook.com>
+Content-Language: en-US
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,48 +102,22 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-While virtq is stopped,  get_vq_state() is supposed to
-be  called to  get  sync'ed  with  the latest internal
-avail_index from device. The saved avail_index is used
-to restate  the virtq  once device is started.  Commit
-b35ccebe3ef7 introduced the clear_virtqueues() routine
-to  reset  the saved  avail_index,  however, the index
-gets cleared a bit earlier before get_vq_state() tries
-to read it. This would cause consistency problems when
-virtq is restarted, e.g. through a series of link down
-and link up events. We  could  defer  the  clearing of
-avail_index  to  until  the  device  is to be started,
-i.e. until  VIRTIO_CONFIG_S_DRIVER_OK  is set again in
-set_status().
+On 2/6/21 5:06 PM, Chaitanya Kulkarni wrote:
+> On 2/4/21 03:40, Mike Christie wrote:
+>>  
+>> +	ib_dev->ibd_plug = kcalloc(nr_cpu_ids, sizeof(*ib_dev->ibd_plug),
+>> +				   GFP_KERNEL);
+> I'd actually prefer struct xxx in sizeof, but maybe that is just my
+> preference.
+> Not sure what is the standard practice in target code.
 
-Fixes: b35ccebe3ef7 ("vdpa/mlx5: Restore the hardware used index after change map")
-Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
----
- drivers/vdpa/mlx5/net/mlx5_vnet.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The above code is easier to verify than the suggested alternative. With
+the alternative one has to look up the definition of ibd_plug to verify
+correctness of the code. The above code can be verified without having
+to look up the definition of the ibd_plug member.
 
-diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-index aa6f8cd..444ab58 100644
---- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
-+++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-@@ -1785,7 +1785,6 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
- 	if (!status) {
- 		mlx5_vdpa_info(mvdev, "performing device reset\n");
- 		teardown_driver(ndev);
--		clear_virtqueues(ndev);
- 		mlx5_vdpa_destroy_mr(&ndev->mvdev);
- 		ndev->mvdev.status = 0;
- 		++mvdev->generation;
-@@ -1794,6 +1793,7 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
- 
- 	if ((status ^ ndev->mvdev.status) & VIRTIO_CONFIG_S_DRIVER_OK) {
- 		if (status & VIRTIO_CONFIG_S_DRIVER_OK) {
-+			clear_virtqueues(ndev);
- 			err = setup_driver(ndev);
- 			if (err) {
- 				mlx5_vdpa_warn(mvdev, "failed to setup driver\n");
--- 
-1.8.3.1
+Bart.
+
 
 _______________________________________________
 Virtualization mailing list
