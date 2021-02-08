@@ -2,82 +2,83 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBF87313E2C
-	for <lists.virtualization@lfdr.de>; Mon,  8 Feb 2021 19:56:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D2F0313E2D
+	for <lists.virtualization@lfdr.de>; Mon,  8 Feb 2021 19:56:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 59E4185DFC;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 8F1B185DFD;
 	Mon,  8 Feb 2021 18:56:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fA26hh_Z2ieR; Mon,  8 Feb 2021 18:56:11 +0000 (UTC)
+	with ESMTP id O5T0xW8TJZ0l; Mon,  8 Feb 2021 18:56:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 077A185E69;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6CBFD85E85;
 	Mon,  8 Feb 2021 18:56:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DDCBDC1DA9;
-	Mon,  8 Feb 2021 18:56:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3E70DC013A;
+	Mon,  8 Feb 2021 18:56:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 37D43C013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4A536C0891
  for <virtualization@lists.linux-foundation.org>;
  Mon,  8 Feb 2021 18:56:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 064328695A
+ by whitealder.osuosl.org (Postfix) with ESMTP id 20EC386963
  for <virtualization@lists.linux-foundation.org>;
  Mon,  8 Feb 2021 18:56:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lm8i3xS3tdTZ
+ with ESMTP id wRk24LOpxNVl
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Feb 2021 18:56:06 +0000 (UTC)
+ Mon,  8 Feb 2021 18:56:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com
- [209.85.219.45])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 998D186963
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+ [209.85.222.180])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id C6B2F869A4
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Feb 2021 18:56:06 +0000 (UTC)
-Received: by mail-qv1-f45.google.com with SMTP id a1so7423427qvd.13
+ Mon,  8 Feb 2021 18:56:07 +0000 (UTC)
+Received: by mail-qk1-f180.google.com with SMTP id u20so15516004qku.7
  for <virtualization@lists.linux-foundation.org>;
- Mon, 08 Feb 2021 10:56:06 -0800 (PST)
+ Mon, 08 Feb 2021 10:56:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=SlFTIukFGMkw2OKGh13o3RxnKgGPrgHC1zxY8/NglTM=;
- b=SmManNau/yVkSieMx4AJ2MuyWqQ9HhPoPAh6toxhVSZddXA20Rkt+6GqluzJFpaRt/
- qN43Ekq0uJpn40vzcaqAqWUW/xE0WYr96BupaTOGHdeLo1xbJFsZARcQS5+lWga80oww
- zJig+1oJKw7O705kvDlb1HMBu0Fad9q1wlvFzUSExZEi6c22me71rRjwC2K7jmAaQi4I
- ZIIaE154GVHCR3WQrZfdhr1YZTY7NfKDWgk2C9gUVY2+wiebzcv1TV3jHMx6lLE5CuLp
- rLHt+2LrJnbzhxDu6of2n4Edl0iNMMne3TUIH9hpciMYtbtpX5bqSSHwXNjh+jrnexGu
- bEgA==
+ bh=V5SXxqRn9iChNkelA4Lz5t2Lq5FsheIFJl6lMmqNafs=;
+ b=k1RlK0+rIiwKwfG+r9ciIyMYKAWET+IcMxexNzwQ+6z4uvYmVm0UL9tmzMKzLCn0r5
+ MENfN1EXiEQTscopjRumoVdOW1lKWWj4fEVTwe2Hqrf9FD08Cp6diJio+rxvIxngxUCC
+ m6pes9Awe+fNvUqENRRffwYQHGecfMZ4Qmn46xJvm+oFVCGJrZlnfHj9RLogA5D0ZQEz
+ onLIh5gMZg5ENRcaSB5EcFMY0OIoMLlmgFhBl8NWczXYnHyCNPfiARsRf1wlTIXDs1rt
+ CYuyUQgOa2xHtTfCgnCzjNDo1hiiLpBXscWeJQV5KOrUgPLho2xqhVhXRizC9D+VJMma
+ cJYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=SlFTIukFGMkw2OKGh13o3RxnKgGPrgHC1zxY8/NglTM=;
- b=k04p4A2ZvuhOMayMTdeG+mRuSG3a8pcFaqX9CQWg1nkkmOmrrALCIeisPS3LyOgsD3
- 1KsqTaqjvylw7n2TGdFJkQUPR5IXNc/gqRVgUBGfda9SjPEYtXyS29qClq5o1qRreilx
- tI6o4yLL/lDyh2WNOA2+yPwurGZr1DItZI/SCLiTDd1FbbHYkjvmjSDnrMWjs0bHdqXG
- T+nqfVA8TxL7BvmIddbLw6EovcwAtHRUdQ1VGSlnTs2XP/IrlqJv7AQE9VA23owZmeXN
- odoFtv2fB/z3qWK0pnlSqyd21O3af2B0SJYVEXuBPJWSBRGgkG/f0Y8V95E2n5oNzvJS
- qSfw==
-X-Gm-Message-State: AOAM5328TjisO5L23j7vbaquDi+z4bMz0iALv/OyGemWV15KlAt/yv22
- V6ctLFkgqcUB4MfxUGxYTjo8KJ8dqvQ=
-X-Google-Smtp-Source: ABdhPJzPoHHvBqxCa8V0IRqT8YWCiCMF2H/S/6nVea2y4QUfXDo2I3x7BHG2o/EHP+OeOaB1RbXzzw==
-X-Received: by 2002:a0c:dd8b:: with SMTP id v11mr17411146qvk.31.1612810565070; 
- Mon, 08 Feb 2021 10:56:05 -0800 (PST)
+ bh=V5SXxqRn9iChNkelA4Lz5t2Lq5FsheIFJl6lMmqNafs=;
+ b=YKXZ2myR+DtXZJI6ruz14v7J8FTr+T05w0wmYEYTdNafHuhTxVCRqMFGZNvWYfX9o3
+ 2H5uvyhEhWuzbFE+NLwtYiJTyua97oVDVaBZKqItjjROpVhd73zSJT2zMJEwY9yHvJM9
+ IYy5iVWlfFhkuWpCOw56Wpx49iyJk3zN7vkCTvXTXElg2Bw2IoUc0X4JrR6n0yCbHq3r
+ SksV4O1JX6Qee7RJiUSxFjLyW0CH9lcrvE2ItHUYL+0FeWGtmbvr8+RFdvOdAFuBiWfC
+ s3/yUSomDDu3L8sMr4Js5M2STfhWd/qlDeG66L3LnOU3zFR6dXJqFH53nyNKbJoWMapx
+ tBKw==
+X-Gm-Message-State: AOAM532/yGNEP+bp4HVb+gcm69Ovg+kdjJW2XQgArUt7B3LXnNFjBGbp
+ gdlOTk95irKu+gBB3HFS7nnGM3yw8Iw=
+X-Google-Smtp-Source: ABdhPJx2Vzz3BN3fufrvFs0gfLszLO304XiNcsw2UEPhzqYAxQtPHMyuALjvbbug6pZAp9GoEaItqw==
+X-Received: by 2002:a05:620a:8dc:: with SMTP id
+ z28mr1023748qkz.404.1612810566558; 
+ Mon, 08 Feb 2021 10:56:06 -0800 (PST)
 Received: from willemb.nyc.corp.google.com
  ([2620:0:1003:312:f109:45d3:805f:3b83])
- by smtp.gmail.com with ESMTPSA id q25sm17370744qkq.32.2021.02.08.10.56.03
+ by smtp.gmail.com with ESMTPSA id q25sm17370744qkq.32.2021.02.08.10.56.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Feb 2021 10:56:04 -0800 (PST)
+ Mon, 08 Feb 2021 10:56:05 -0800 (PST)
 From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH RFC v2 3/4] virtio-net: support transmit timestamp
-Date: Mon,  8 Feb 2021 13:55:57 -0500
-Message-Id: <20210208185558.995292-4-willemdebruijn.kernel@gmail.com>
+Subject: [PATCH RFC v2 4/4] virtio-net: support future packet transmit time
+Date: Mon,  8 Feb 2021 13:55:58 -0500
+Message-Id: <20210208185558.995292-5-willemdebruijn.kernel@gmail.com>
 X-Mailer: git-send-email 2.30.0.478.g8a0d178c01-goog
 In-Reply-To: <20210208185558.995292-1-willemdebruijn.kernel@gmail.com>
 References: <20210208185558.995292-1-willemdebruijn.kernel@gmail.com>
@@ -102,235 +103,88 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Willem de Bruijn <willemb@google.com>
 
-Add optional PTP hardware tx timestamp offload for virtio-net.
+Add optional transmit time (SO_TXTIME) offload for virtio-net.
 
-Accurate RTT measurement requires timestamps close to the wire.
-Introduce virtio feature VIRTIO_NET_F_TX_TSTAMP, the transmit
-equivalent to VIRTIO_NET_F_RX_TSTAMP.
+The Linux TCP/IP stack tries to avoid bursty transmission and network
+congestion through pacing: computing an skb delivery time based on
+congestion information. Userspace protocol implementations can achieve
+the same with SO_TXTIME. This may also reduce scheduling jitter and
+improve RTT estimation.
 
-The driver sets VIRTIO_NET_HDR_F_TSTAMP to request a timestamp
-returned on completion. If the feature is negotiated, the device
-either places the timestamp or clears the feature bit.
+Pacing can be implemented in ETF or FQ qdiscs or offloaded to NIC
+hardware. Allow virtio-net driver to offload for the same reasons.
 
 The timestamp straddles (virtual) hardware domains. Like PTP, use
 international atomic time (CLOCK_TAI) as global clock base. The driver
 must sync with the device, e.g., through kvm-clock.
 
-Modify can_push to ensure that on tx completion the header, and thus
-timestamp, is in a predicatable location at skb_vnet_hdr.
-
-RFC: this implementation relies on the device writing to the buffer.
-That breaks DMA_TO_DEVICE semantics. For now, disable when DMA is on.
-The virtio changes should be a separate patch at the least.
-
-Tested: modified txtimestamp.c to with h/w timestamping:
-  -       sock_opt = SOF_TIMESTAMPING_SOFTWARE |
-  +       sock_opt = SOF_TIMESTAMPING_RAW_HARDWARE |
-  + do_test(family, SOF_TIMESTAMPING_TX_HARDWARE);
+Changes RFC - RFCv2
+  - rename from transmit timestamp to future packet transmit time
+  - convert cpu_to_virtioXX to cpu_to_leXX
 
 Signed-off-by: Willem de Bruijn <willemb@google.com>
 ---
- drivers/net/virtio_net.c        | 61 ++++++++++++++++++++++++++++-----
- drivers/virtio/virtio_ring.c    |  3 +-
- include/linux/virtio.h          |  1 +
+ drivers/net/virtio_net.c        | 13 ++++++++++++-
  include/uapi/linux/virtio_net.h |  1 +
- 4 files changed, 56 insertions(+), 10 deletions(-)
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index ac44c5efa0bc..fc8ecd3a333a 100644
+index fc8ecd3a333a..c09d19b97f42 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -210,6 +210,12 @@ struct virtnet_info {
- 	/* Device will pass rx timestamp. Requires has_rx_tstamp */
- 	bool enable_rx_tstamp;
+@@ -216,6 +216,9 @@ struct virtnet_info {
+ 	/* Device will pass tx timestamp. Requires has_tx_tstamp */
+ 	bool enable_tx_tstamp;
  
-+	/* Device can pass CLOCK_TAI transmit time to the driver */
-+	bool has_tx_tstamp;
-+
-+	/* Device will pass tx timestamp. Requires has_tx_tstamp */
-+	bool enable_tx_tstamp;
++	/* Driver will pass CLOCK_TAI delivery time to the device */
++	bool has_tx_time;
 +
  	/* Has control virtqueue */
  	bool has_cvq;
  
-@@ -1401,6 +1407,20 @@ static int virtnet_receive(struct receive_queue *rq, int budget,
- 	return stats.packets;
- }
- 
-+static void virtnet_record_tx_tstamp(const struct send_queue *sq,
-+				     struct sk_buff *skb)
-+{
-+	const struct virtio_net_hdr_hash_ts *h = skb_vnet_hdr_ht(skb);
-+	const struct virtnet_info *vi = sq->vq->vdev->priv;
-+	struct skb_shared_hwtstamps ts;
-+
-+	if (h->hdr.flags & VIRTIO_NET_HDR_F_TSTAMP &&
-+	    vi->enable_tx_tstamp) {
-+		ts.hwtstamp = ns_to_ktime(le64_to_cpu(h->tstamp));
-+		skb_tstamp_tx(skb, &ts);
-+	}
-+}
-+
- static void free_old_xmit_skbs(struct send_queue *sq, bool in_napi)
- {
- 	unsigned int len;
-@@ -1412,6 +1432,7 @@ static void free_old_xmit_skbs(struct send_queue *sq, bool in_napi)
- 		if (likely(!is_xdp_frame(ptr))) {
- 			struct sk_buff *skb = ptr;
- 
-+			virtnet_record_tx_tstamp(sq, skb);
- 			pr_debug("Sent skb %p\n", skb);
- 
- 			bytes += skb->len;
-@@ -1558,7 +1579,7 @@ static int xmit_skb(struct send_queue *sq, struct sk_buff *skb)
- 	struct virtio_net_hdr_mrg_rxbuf *hdr;
- 	const unsigned char *dest = ((struct ethhdr *)skb->data)->h_dest;
- 	struct virtnet_info *vi = sq->vq->vdev->priv;
--	struct virtio_net_hdr_v1_hash *ht;
-+	struct virtio_net_hdr_hash_ts *ht;
- 	int num_sg;
- 	unsigned hdr_len = vi->hdr_len;
- 	bool can_push;
-@@ -1567,7 +1588,8 @@ static int xmit_skb(struct send_queue *sq, struct sk_buff *skb)
- 
- 	can_push = vi->any_header_sg &&
- 		!((unsigned long)skb->data & (__alignof__(*hdr) - 1)) &&
--		!skb_header_cloned(skb) && skb_headroom(skb) >= hdr_len;
-+		!skb_header_cloned(skb) && skb_headroom(skb) >= hdr_len &&
-+		!vi->enable_tx_tstamp;
- 	/* Even if we can, don't push here yet as this would skew
- 	 * csum_start offset below. */
- 	if (can_push)
-@@ -1588,10 +1610,12 @@ static int xmit_skb(struct send_queue *sq, struct sk_buff *skb)
- 		u16 report = skb->l4_hash ? VIRTIO_NET_HASH_REPORT_L4 :
- 					    VIRTIO_NET_HASH_REPORT_OTHER;
- 
--		ht->hash_value = cpu_to_le32(skb->hash);
--		ht->hash_report = cpu_to_le16(report);
--		ht->hash_state = cpu_to_le16(VIRTIO_NET_HASH_STATE_DEFAULT);
-+		ht->hash.value = cpu_to_le32(skb->hash);
-+		ht->hash.report = cpu_to_le16(report);
-+		ht->hash.flow_state = cpu_to_le16(VIRTIO_NET_HASH_STATE_DEFAULT);
+@@ -1616,6 +1619,8 @@ static int xmit_skb(struct send_queue *sq, struct sk_buff *skb)
  	}
-+	if (vi->enable_tx_tstamp && skb_shinfo(skb)->tx_flags & SKBTX_HW_TSTAMP)
-+		ht->hdr.flags |= VIRTIO_NET_HDR_F_TSTAMP;
+ 	if (vi->enable_tx_tstamp && skb_shinfo(skb)->tx_flags & SKBTX_HW_TSTAMP)
+ 		ht->hdr.flags |= VIRTIO_NET_HDR_F_TSTAMP;
++	if (vi->has_tx_time && skb->tstamp)
++		ht->tstamp = cpu_to_le64(skb->tstamp);
  
  	sg_init_table(sq->sg, skb_shinfo(skb)->nr_frags + (can_push ? 1 : 2));
  	if (can_push) {
-@@ -2307,7 +2331,13 @@ static int virtnet_get_ts_info(struct net_device *dev,
- 		info->rx_filters = HWTSTAMP_FILTER_NONE;
- 	}
- 
--	info->tx_types = HWTSTAMP_TX_OFF;
-+	if (vi->has_tx_tstamp) {
-+		info->so_timestamping |= SOF_TIMESTAMPING_TX_HARDWARE |
-+					 SOF_TIMESTAMPING_RAW_HARDWARE;
-+		info->tx_types = HWTSTAMP_TX_ON;
-+	} else {
-+		info->tx_types = HWTSTAMP_TX_OFF;
-+	}
- 
- 	return 0;
- }
-@@ -2616,7 +2646,8 @@ static int virtnet_ioctl_set_hwtstamp(struct net_device *dev, struct ifreq *ifr)
- 		return -EFAULT;
- 	if (tsconf.flags)
- 		return -EINVAL;
--	if (tsconf.tx_type != HWTSTAMP_TX_OFF)
-+	if (tsconf.tx_type != HWTSTAMP_TX_OFF &&
-+	    tsconf.tx_type != HWTSTAMP_TX_ON)
- 		return -ERANGE;
- 	if (tsconf.rx_filter != HWTSTAMP_FILTER_NONE &&
- 	    tsconf.rx_filter != HWTSTAMP_FILTER_ALL)
-@@ -2627,6 +2658,11 @@ static int virtnet_ioctl_set_hwtstamp(struct net_device *dev, struct ifreq *ifr)
- 	else
- 		vi->enable_rx_tstamp = tsconf.rx_filter == HWTSTAMP_FILTER_ALL;
- 
-+	if (!vi->has_tx_tstamp)
-+		tsconf.tx_type = HWTSTAMP_TX_OFF;
-+	else
-+		vi->enable_tx_tstamp = tsconf.tx_type == HWTSTAMP_TX_ON;
-+
- 	if (copy_to_user(ifr->ifr_data, &tsconf, sizeof(tsconf)))
- 		return -EFAULT;
- 
-@@ -2641,7 +2677,8 @@ static int virtnet_ioctl_get_hwtstamp(struct net_device *dev, struct ifreq *ifr)
- 	tsconf.flags = 0;
- 	tsconf.rx_filter = vi->enable_rx_tstamp ? HWTSTAMP_FILTER_ALL :
- 						  HWTSTAMP_FILTER_NONE;
--	tsconf.tx_type = HWTSTAMP_TX_OFF;
-+	tsconf.tx_type = vi->enable_tx_tstamp ? HWTSTAMP_TX_ON :
-+						HWTSTAMP_TX_OFF;
- 
- 	if (copy_to_user(ifr->ifr_data, &tsconf, sizeof(tsconf)))
- 		return -EFAULT;
-@@ -3178,6 +3215,12 @@ static int virtnet_probe(struct virtio_device *vdev)
+@@ -3221,6 +3226,11 @@ static int virtnet_probe(struct virtio_device *vdev)
  		vi->hdr_len = sizeof(struct virtio_net_hdr_hash_ts);
  	}
  
-+	if (virtio_has_feature(vdev, VIRTIO_NET_F_TX_TSTAMP) &&
-+	    !vring_use_dma_api(vdev)) {
-+		vi->has_tx_tstamp = true;
++	if (virtio_has_feature(vdev, VIRTIO_NET_F_TX_TIME)) {
++		vi->has_tx_time = true;
 +		vi->hdr_len = sizeof(struct virtio_net_hdr_hash_ts);
 +	}
 +
  	if (virtio_has_feature(vdev, VIRTIO_F_ANY_LAYOUT) ||
  	    virtio_has_feature(vdev, VIRTIO_F_VERSION_1))
  		vi->any_header_sg = true;
-@@ -3369,7 +3412,7 @@ static struct virtio_device_id id_table[] = {
+@@ -3412,7 +3422,8 @@ static struct virtio_device_id id_table[] = {
  	VIRTIO_NET_F_CTRL_MAC_ADDR, \
  	VIRTIO_NET_F_MTU, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS, \
  	VIRTIO_NET_F_SPEED_DUPLEX, VIRTIO_NET_F_STANDBY, \
--	VIRTIO_NET_F_TX_HASH, VIRTIO_NET_F_RX_TSTAMP
-+	VIRTIO_NET_F_TX_HASH, VIRTIO_NET_F_RX_TSTAMP, VIRTIO_NET_F_TX_TSTAMP
+-	VIRTIO_NET_F_TX_HASH, VIRTIO_NET_F_RX_TSTAMP, VIRTIO_NET_F_TX_TSTAMP
++	VIRTIO_NET_F_TX_HASH, VIRTIO_NET_F_RX_TSTAMP, VIRTIO_NET_F_TX_TSTAMP, \
++	VIRTIO_NET_F_TX_TIME
  
  static unsigned int features[] = {
  	VIRTNET_FEATURES,
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 71e16b53e9c1..cf5d5d1f9b14 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -238,7 +238,7 @@ static inline bool virtqueue_use_indirect(struct virtqueue *_vq,
-  * unconditionally on data path.
-  */
- 
--static bool vring_use_dma_api(struct virtio_device *vdev)
-+bool vring_use_dma_api(struct virtio_device *vdev)
- {
- 	if (!virtio_has_dma_quirk(vdev))
- 		return true;
-@@ -257,6 +257,7 @@ static bool vring_use_dma_api(struct virtio_device *vdev)
- 
- 	return false;
- }
-+EXPORT_SYMBOL_GPL(vring_use_dma_api);
- 
- size_t virtio_max_dma_size(struct virtio_device *vdev)
- {
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index 55ea329fe72a..5289e2812e95 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -140,6 +140,7 @@ int virtio_device_freeze(struct virtio_device *dev);
- int virtio_device_restore(struct virtio_device *dev);
- #endif
- 
-+bool vring_use_dma_api(struct virtio_device *vdev);
- size_t virtio_max_dma_size(struct virtio_device *vdev);
- 
- #define virtio_device_for_each_vq(vdev, vq) \
 diff --git a/include/uapi/linux/virtio_net.h b/include/uapi/linux/virtio_net.h
-index a5c84410cf92..b5d6f0c6cead 100644
+index b5d6f0c6cead..7ca99a2ee1a3 100644
 --- a/include/uapi/linux/virtio_net.h
 +++ b/include/uapi/linux/virtio_net.h
 @@ -57,6 +57,7 @@
  					 * Steering */
  #define VIRTIO_NET_F_CTRL_MAC_ADDR 23	/* Set MAC address */
  
-+#define VIRTIO_NET_F_TX_TSTAMP	  54	/* Device sends TAI transmit time */
++#define VIRTIO_NET_F_TX_TIME	  53	/* Driver sets TAI delivery time */
+ #define VIRTIO_NET_F_TX_TSTAMP	  54	/* Device sends TAI transmit time */
  #define VIRTIO_NET_F_RX_TSTAMP	  55	/* Device sends TAI receive time */
  #define VIRTIO_NET_F_TX_HASH	  56	/* Driver sends hash report */
- #define VIRTIO_NET_F_HASH_REPORT  57	/* Supports hash report */
 -- 
 2.30.0.478.g8a0d178c01-goog
 
