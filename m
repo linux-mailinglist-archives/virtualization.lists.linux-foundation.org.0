@@ -2,105 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8D0C31540E
-	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 17:39:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE12B315963
+	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 23:24:56 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6035C6F5AA
-	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 16:39:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 516206F4A4
+	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 22:24:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6pXInbG1zqVI for <lists.virtualization@lfdr.de>;
-	Tue,  9 Feb 2021 16:39:16 +0000 (UTC)
+	with ESMTP id ekeIJGRXFYXi for <lists.virtualization@lfdr.de>;
+	Tue,  9 Feb 2021 22:24:52 +0000 (UTC)
 Received: by smtp3.osuosl.org (Postfix, from userid 1001)
-	id E45736F573; Tue,  9 Feb 2021 16:39:15 +0000 (UTC)
+	id E91816F581; Tue,  9 Feb 2021 22:24:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9DF6D6F185;
-	Tue,  9 Feb 2021 16:39:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AAE176E7E7;
+	Tue,  9 Feb 2021 22:24:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5E8D0C013A;
-	Tue,  9 Feb 2021 16:39:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6DE86C0174;
+	Tue,  9 Feb 2021 22:24:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8B6FEC013A
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0A11FC013A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 16:39:05 +0000 (UTC)
+ Tue,  9 Feb 2021 22:24:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 7FA8B86144
+ by hemlock.osuosl.org (Postfix) with ESMTP id EB1CC8725C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 16:39:05 +0000 (UTC)
+ Tue,  9 Feb 2021 22:24:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iD-9l-nP6DIw
+ with ESMTP id D3oVeeZhCW2B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 16:39:02 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 901D68613E
+ Tue,  9 Feb 2021 22:24:38 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
+ [5.45.125.222])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id A1BE98712E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 16:39:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612888741;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=j18aWEf5CADfmqMvOrXJkqA0qqCkiJleoTu3goUeHSM=;
- b=AjNTNrcJ2Fb1zlzA0SPp1dNydBJfYoax3n20rnBX6SRC4il/BLHHv+3Ds9BkvR2VTqy3/G
- Y0rKUCmBrRg1jT0PG+AJe2DN8DyCUH0ERc+aJmSs/gDinhm6JRO76SmFkSRTYDlRbMFygb
- i8S4ONclZvvBt7cUCpVfZgqalMLDxIo=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-343-3zHlsT7xPM-4NPMl8PSV7g-1; Tue, 09 Feb 2021 11:38:59 -0500
-X-MC-Unique: 3zHlsT7xPM-4NPMl8PSV7g-1
-Received: by mail-wr1-f69.google.com with SMTP id j8so17577931wrx.17
- for <virtualization@lists.linux-foundation.org>;
- Tue, 09 Feb 2021 08:38:59 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=j18aWEf5CADfmqMvOrXJkqA0qqCkiJleoTu3goUeHSM=;
- b=aqjudqlhqaHTLTIDpZYVHFH/O0lTkn407dQb83O21fZAxT3Mr0w79GJJ67h8ky8/d4
- 20GyqtmeySqkRBYZGNSwKbhA4lKceAO6zzMlpOZIYNnUstG7FKInXIh1+0Ucxx5NFzU4
- igBqxwmUDtXIykO/kFR/gTRG90eHUo+aTKNthEUxmEBFzwvhB2TzOSBa+B+cNV058iZp
- dtYuWA439PigM3ojezhqIaxD3GcFZYshVgVVpE8iJSAeImvQ9tOW8n6p18B1orRgmrQb
- rd9xullqQspBGFr+WyQiB7nYBOB2GT1J5BOyLqjwpAu9HaIFGYMU4OwxG9Kj4u/p6P3R
- 9+Nw==
-X-Gm-Message-State: AOAM533uQBLGiAPupdjfKfEEzncePioggV4Tjs4rQY8isR4BxEGzo4wb
- gdn7LyH28PGECzOl7kIW9fPebnDvA1thFCJ2Bi7zExCOOxmPlw6kps33XHa6bT8shlBq9U0PeX/
- VOFPIKO9mVh79lO57iJsvAPBBJS0adAbfdL1/pUG0uw==
-X-Received: by 2002:a5d:690b:: with SMTP id t11mr26608186wru.12.1612888738146; 
- Tue, 09 Feb 2021 08:38:58 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzRKdJBQCdmzziwPcmnK3944oxwc/YSEzg8BUmyrortM8c8BTMwCWv53TxFKLYzqUjxjED4bg==
-X-Received: by 2002:a5d:690b:: with SMTP id t11mr26608156wru.12.1612888737904; 
- Tue, 09 Feb 2021 08:38:57 -0800 (PST)
-Received: from redhat.com (bzq-79-180-2-31.red.bezeqint.net. [79.180.2.31])
- by smtp.gmail.com with ESMTPSA id v5sm17877825wro.71.2021.02.09.08.38.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Feb 2021 08:38:57 -0800 (PST)
-Date: Tue, 9 Feb 2021 11:38:54 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH RFC v2 3/4] virtio-net: support transmit timestamp
-Message-ID: <20210209113643-mutt-send-email-mst@kernel.org>
-References: <20210208185558.995292-1-willemdebruijn.kernel@gmail.com>
- <20210208185558.995292-4-willemdebruijn.kernel@gmail.com>
- <6bfdf48d-c780-bc65-b0b9-24a33f18827b@redhat.com>
+ Tue,  9 Feb 2021 22:24:37 +0000 (UTC)
+Received: from bl22-68-231.dsl.telepac.pt ([2.83.68.231] helo=LAPTOP-EPOV2LRR)
+ by s052d7dde.fastvps-server.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <marle@saisti.eu>) id 1l9auU-0002ZA-OD
+ for virtualization@lists.linux-foundation.org; Wed, 10 Feb 2021 00:51:02 +0300
+From: "Lemos" <marialemos72@gmail.com>
+Subject: CISTI'2021 - 16th Iberian Conference on IST | Deadline: 21th of
+ February
+To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-In-Reply-To: <6bfdf48d-c780-bc65-b0b9-24a33f18827b@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Willem de Bruijn <willemb@google.com>, netdev@vger.kernel.org,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, richardcochran@gmail.com,
- virtualization@lists.linux-foundation.org
+Date: Tue, 9 Feb 2021 21:51:03 +0000
+Message-ID: <2932283613453@gmail-com>
+X-Antivirus: AVG (VPS 210209-2, 09/02/2021), Outbound message
+X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,192 +67,392 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Reply-To: cistiforever@gmail.com
+Content-Type: multipart/mixed; boundary="===============1718362361475615335=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVHVlLCBGZWIgMDksIDIwMjEgYXQgMDE6NDU6MTFQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIxLzIvOSDkuIrljYgyOjU1LCBXaWxsZW0gZGUgQnJ1aWpuIHdyb3RlOgo+
-ID4gRnJvbTogV2lsbGVtIGRlIEJydWlqbiA8d2lsbGVtYkBnb29nbGUuY29tPgo+ID4gCj4gPiBB
-ZGQgb3B0aW9uYWwgUFRQIGhhcmR3YXJlIHR4IHRpbWVzdGFtcCBvZmZsb2FkIGZvciB2aXJ0aW8t
-bmV0Lgo+ID4gCj4gPiBBY2N1cmF0ZSBSVFQgbWVhc3VyZW1lbnQgcmVxdWlyZXMgdGltZXN0YW1w
-cyBjbG9zZSB0byB0aGUgd2lyZS4KPiA+IEludHJvZHVjZSB2aXJ0aW8gZmVhdHVyZSBWSVJUSU9f
-TkVUX0ZfVFhfVFNUQU1QLCB0aGUgdHJhbnNtaXQKPiA+IGVxdWl2YWxlbnQgdG8gVklSVElPX05F
-VF9GX1JYX1RTVEFNUC4KPiA+IAo+ID4gVGhlIGRyaXZlciBzZXRzIFZJUlRJT19ORVRfSERSX0Zf
-VFNUQU1QIHRvIHJlcXVlc3QgYSB0aW1lc3RhbXAKPiA+IHJldHVybmVkIG9uIGNvbXBsZXRpb24u
-IElmIHRoZSBmZWF0dXJlIGlzIG5lZ290aWF0ZWQsIHRoZSBkZXZpY2UKPiA+IGVpdGhlciBwbGFj
-ZXMgdGhlIHRpbWVzdGFtcCBvciBjbGVhcnMgdGhlIGZlYXR1cmUgYml0Lgo+ID4gCj4gPiBUaGUg
-dGltZXN0YW1wIHN0cmFkZGxlcyAodmlydHVhbCkgaGFyZHdhcmUgZG9tYWlucy4gTGlrZSBQVFAs
-IHVzZQo+ID4gaW50ZXJuYXRpb25hbCBhdG9taWMgdGltZSAoQ0xPQ0tfVEFJKSBhcyBnbG9iYWwg
-Y2xvY2sgYmFzZS4gVGhlIGRyaXZlcgo+ID4gbXVzdCBzeW5jIHdpdGggdGhlIGRldmljZSwgZS5n
-LiwgdGhyb3VnaCBrdm0tY2xvY2suCj4gPiAKPiA+IE1vZGlmeSBjYW5fcHVzaCB0byBlbnN1cmUg
-dGhhdCBvbiB0eCBjb21wbGV0aW9uIHRoZSBoZWFkZXIsIGFuZCB0aHVzCj4gPiB0aW1lc3RhbXAs
-IGlzIGluIGEgcHJlZGljYXRhYmxlIGxvY2F0aW9uIGF0IHNrYl92bmV0X2hkci4KPiA+IAo+ID4g
-UkZDOiB0aGlzIGltcGxlbWVudGF0aW9uIHJlbGllcyBvbiB0aGUgZGV2aWNlIHdyaXRpbmcgdG8g
-dGhlIGJ1ZmZlci4KPiA+IFRoYXQgYnJlYWtzIERNQV9UT19ERVZJQ0Ugc2VtYW50aWNzLiBGb3Ig
-bm93LCBkaXNhYmxlIHdoZW4gRE1BIGlzIG9uLgo+ID4gVGhlIHZpcnRpbyBjaGFuZ2VzIHNob3Vs
-ZCBiZSBhIHNlcGFyYXRlIHBhdGNoIGF0IHRoZSBsZWFzdC4KPiA+IAo+ID4gVGVzdGVkOiBtb2Rp
-ZmllZCB0eHRpbWVzdGFtcC5jIHRvIHdpdGggaC93IHRpbWVzdGFtcGluZzoKPiA+ICAgIC0gICAg
-ICAgc29ja19vcHQgPSBTT0ZfVElNRVNUQU1QSU5HX1NPRlRXQVJFIHwKPiA+ICAgICsgICAgICAg
-c29ja19vcHQgPSBTT0ZfVElNRVNUQU1QSU5HX1JBV19IQVJEV0FSRSB8Cj4gPiAgICArIGRvX3Rl
-c3QoZmFtaWx5LCBTT0ZfVElNRVNUQU1QSU5HX1RYX0hBUkRXQVJFKTsKPiA+IAo+ID4gU2lnbmVk
-LW9mZi1ieTogV2lsbGVtIGRlIEJydWlqbiA8d2lsbGVtYkBnb29nbGUuY29tPgo+ID4gLS0tCj4g
-PiAgIGRyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYyAgICAgICAgfCA2MSArKysrKysrKysrKysrKysr
-KysrKysrKysrKysrLS0tLS0KPiA+ICAgZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYyAgICB8
-ICAzICstCj4gPiAgIGluY2x1ZGUvbGludXgvdmlydGlvLmggICAgICAgICAgfCAgMSArCj4gPiAg
-IGluY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fbmV0LmggfCAgMSArCj4gPiAgIDQgZmlsZXMgY2hh
-bmdlZCwgNTYgaW5zZXJ0aW9ucygrKSwgMTAgZGVsZXRpb25zKC0pCj4gPiAKPiA+IGRpZmYgLS1n
-aXQgYS9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMgYi9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMK
-PiA+IGluZGV4IGFjNDRjNWVmYTBiYy4uZmM4ZWNkM2EzMzNhIDEwMDY0NAo+ID4gLS0tIGEvZHJp
-dmVycy9uZXQvdmlydGlvX25ldC5jCj4gPiArKysgYi9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMK
-PiA+IEBAIC0yMTAsNiArMjEwLDEyIEBAIHN0cnVjdCB2aXJ0bmV0X2luZm8gewo+ID4gICAJLyog
-RGV2aWNlIHdpbGwgcGFzcyByeCB0aW1lc3RhbXAuIFJlcXVpcmVzIGhhc19yeF90c3RhbXAgKi8K
-PiA+ICAgCWJvb2wgZW5hYmxlX3J4X3RzdGFtcDsKPiA+ICsJLyogRGV2aWNlIGNhbiBwYXNzIENM
-T0NLX1RBSSB0cmFuc21pdCB0aW1lIHRvIHRoZSBkcml2ZXIgKi8KPiA+ICsJYm9vbCBoYXNfdHhf
-dHN0YW1wOwo+ID4gKwo+ID4gKwkvKiBEZXZpY2Ugd2lsbCBwYXNzIHR4IHRpbWVzdGFtcC4gUmVx
-dWlyZXMgaGFzX3R4X3RzdGFtcCAqLwo+ID4gKwlib29sIGVuYWJsZV90eF90c3RhbXA7Cj4gPiAr
-Cj4gPiAgIAkvKiBIYXMgY29udHJvbCB2aXJ0cXVldWUgKi8KPiA+ICAgCWJvb2wgaGFzX2N2cTsK
-PiA+IEBAIC0xNDAxLDYgKzE0MDcsMjAgQEAgc3RhdGljIGludCB2aXJ0bmV0X3JlY2VpdmUoc3Ry
-dWN0IHJlY2VpdmVfcXVldWUgKnJxLCBpbnQgYnVkZ2V0LAo+ID4gICAJcmV0dXJuIHN0YXRzLnBh
-Y2tldHM7Cj4gPiAgIH0KPiA+ICtzdGF0aWMgdm9pZCB2aXJ0bmV0X3JlY29yZF90eF90c3RhbXAo
-Y29uc3Qgc3RydWN0IHNlbmRfcXVldWUgKnNxLAo+ID4gKwkJCQkgICAgIHN0cnVjdCBza19idWZm
-ICpza2IpCj4gPiArewo+ID4gKwljb25zdCBzdHJ1Y3QgdmlydGlvX25ldF9oZHJfaGFzaF90cyAq
-aCA9IHNrYl92bmV0X2hkcl9odChza2IpOwo+ID4gKwljb25zdCBzdHJ1Y3QgdmlydG5ldF9pbmZv
-ICp2aSA9IHNxLT52cS0+dmRldi0+cHJpdjsKPiA+ICsJc3RydWN0IHNrYl9zaGFyZWRfaHd0c3Rh
-bXBzIHRzOwo+ID4gKwo+ID4gKwlpZiAoaC0+aGRyLmZsYWdzICYgVklSVElPX05FVF9IRFJfRl9U
-U1RBTVAgJiYKPiA+ICsJICAgIHZpLT5lbmFibGVfdHhfdHN0YW1wKSB7Cj4gPiArCQl0cy5od3Rz
-dGFtcCA9IG5zX3RvX2t0aW1lKGxlNjRfdG9fY3B1KGgtPnRzdGFtcCkpOwo+ID4gKwkJc2tiX3Rz
-dGFtcF90eChza2IsICZ0cyk7Cj4gCj4gCj4gVGhpcyBwcm9iYWJseSB3b24ndCB3b3JrIHNpbmNl
-IHRoZSBidWZmZXIgaXMgcmVhZC1vbmx5IGZyb20gdGhlIGRldmljZS4gKFNlZQo+IHZpcnRxdWV1
-ZV9hZGRfb3V0YnVmKCkpLgo+IAo+IEFub3RoZXIgaXNzdWUgdGhhdCBJIHZhZ3VlbHkgcmVtZW1i
-ZXIgdGhhdCB0aGUgdmlydGlvIHNwZWMgZm9yYmlkcyBvdXQKPiBidWZmZXIgYWZ0ZXIgaW4gYnVm
-ZmVyLgoKQm90aCBEcml2ZXIgUmVxdWlyZW1lbnRzOiBNZXNzYWdlIEZyYW1pbmcgYW5kIERyaXZl
-ciBSZXF1aXJlbWVudHM6IFNjYXR0ZXItR2F0aGVyIFN1cHBvcnQKaGF2ZSB0aGlzIHN0YXRlbWVu
-dDoKCglUaGUgZHJpdmVyIE1VU1QgcGxhY2UgYW55IGRldmljZS13cml0YWJsZSBkZXNjcmlwdG9y
-IGVsZW1lbnRzIGFmdGVyIGFueSBkZXZpY2UtcmVhZGFibGUgZGVzY3JpcHRvciBlbGUtCgltZW50
-cy4KCgpzaW1pbGFybHkKCkRldmljZSBSZXF1aXJlbWVudHM6IFRoZSBWaXJ0cXVldWUgRGVzY3Jp
-cHRvciBUYWJsZQoJQSBkZXZpY2UgTVVTVCBOT1Qgd3JpdGUgdG8gYSBkZXZpY2UtcmVhZGFibGUg
-YnVmZmVyLCBhbmQgYSBkZXZpY2UgU0hPVUxEIE5PVCByZWFkIGEgZGV2aWNlLXdyaXRhYmxlCgli
-dWZmZXIuCgoKCj4gCj4gPiArCX0KPiA+ICt9Cj4gPiArCj4gPiAgIHN0YXRpYyB2b2lkIGZyZWVf
-b2xkX3htaXRfc2ticyhzdHJ1Y3Qgc2VuZF9xdWV1ZSAqc3EsIGJvb2wgaW5fbmFwaSkKPiA+ICAg
-ewo+ID4gICAJdW5zaWduZWQgaW50IGxlbjsKPiA+IEBAIC0xNDEyLDYgKzE0MzIsNyBAQCBzdGF0
-aWMgdm9pZCBmcmVlX29sZF94bWl0X3NrYnMoc3RydWN0IHNlbmRfcXVldWUgKnNxLCBib29sIGlu
-X25hcGkpCj4gPiAgIAkJaWYgKGxpa2VseSghaXNfeGRwX2ZyYW1lKHB0cikpKSB7Cj4gPiAgIAkJ
-CXN0cnVjdCBza19idWZmICpza2IgPSBwdHI7Cj4gPiArCQkJdmlydG5ldF9yZWNvcmRfdHhfdHN0
-YW1wKHNxLCBza2IpOwo+ID4gICAJCQlwcl9kZWJ1ZygiU2VudCBza2IgJXBcbiIsIHNrYik7Cj4g
-PiAgIAkJCWJ5dGVzICs9IHNrYi0+bGVuOwo+ID4gQEAgLTE1NTgsNyArMTU3OSw3IEBAIHN0YXRp
-YyBpbnQgeG1pdF9za2Ioc3RydWN0IHNlbmRfcXVldWUgKnNxLCBzdHJ1Y3Qgc2tfYnVmZiAqc2ti
-KQo+ID4gICAJc3RydWN0IHZpcnRpb19uZXRfaGRyX21yZ19yeGJ1ZiAqaGRyOwo+ID4gICAJY29u
-c3QgdW5zaWduZWQgY2hhciAqZGVzdCA9ICgoc3RydWN0IGV0aGhkciAqKXNrYi0+ZGF0YSktPmhf
-ZGVzdDsKPiA+ICAgCXN0cnVjdCB2aXJ0bmV0X2luZm8gKnZpID0gc3EtPnZxLT52ZGV2LT5wcml2
-Owo+ID4gLQlzdHJ1Y3QgdmlydGlvX25ldF9oZHJfdjFfaGFzaCAqaHQ7Cj4gPiArCXN0cnVjdCB2
-aXJ0aW9fbmV0X2hkcl9oYXNoX3RzICpodDsKPiA+ICAgCWludCBudW1fc2c7Cj4gPiAgIAl1bnNp
-Z25lZCBoZHJfbGVuID0gdmktPmhkcl9sZW47Cj4gPiAgIAlib29sIGNhbl9wdXNoOwo+ID4gQEAg
-LTE1NjcsNyArMTU4OCw4IEBAIHN0YXRpYyBpbnQgeG1pdF9za2Ioc3RydWN0IHNlbmRfcXVldWUg
-KnNxLCBzdHJ1Y3Qgc2tfYnVmZiAqc2tiKQo+ID4gICAJY2FuX3B1c2ggPSB2aS0+YW55X2hlYWRl
-cl9zZyAmJgo+ID4gICAJCSEoKHVuc2lnbmVkIGxvbmcpc2tiLT5kYXRhICYgKF9fYWxpZ25vZl9f
-KCpoZHIpIC0gMSkpICYmCj4gPiAtCQkhc2tiX2hlYWRlcl9jbG9uZWQoc2tiKSAmJiBza2JfaGVh
-ZHJvb20oc2tiKSA+PSBoZHJfbGVuOwo+ID4gKwkJIXNrYl9oZWFkZXJfY2xvbmVkKHNrYikgJiYg
-c2tiX2hlYWRyb29tKHNrYikgPj0gaGRyX2xlbiAmJgo+ID4gKwkJIXZpLT5lbmFibGVfdHhfdHN0
-YW1wOwo+ID4gICAJLyogRXZlbiBpZiB3ZSBjYW4sIGRvbid0IHB1c2ggaGVyZSB5ZXQgYXMgdGhp
-cyB3b3VsZCBza2V3Cj4gPiAgIAkgKiBjc3VtX3N0YXJ0IG9mZnNldCBiZWxvdy4gKi8KPiA+ICAg
-CWlmIChjYW5fcHVzaCkKPiA+IEBAIC0xNTg4LDEwICsxNjEwLDEyIEBAIHN0YXRpYyBpbnQgeG1p
-dF9za2Ioc3RydWN0IHNlbmRfcXVldWUgKnNxLCBzdHJ1Y3Qgc2tfYnVmZiAqc2tiKQo+ID4gICAJ
-CXUxNiByZXBvcnQgPSBza2ItPmw0X2hhc2ggPyBWSVJUSU9fTkVUX0hBU0hfUkVQT1JUX0w0IDoK
-PiA+ICAgCQkJCQkgICAgVklSVElPX05FVF9IQVNIX1JFUE9SVF9PVEhFUjsKPiA+IC0JCWh0LT5o
-YXNoX3ZhbHVlID0gY3B1X3RvX2xlMzIoc2tiLT5oYXNoKTsKPiA+IC0JCWh0LT5oYXNoX3JlcG9y
-dCA9IGNwdV90b19sZTE2KHJlcG9ydCk7Cj4gPiAtCQlodC0+aGFzaF9zdGF0ZSA9IGNwdV90b19s
-ZTE2KFZJUlRJT19ORVRfSEFTSF9TVEFURV9ERUZBVUxUKTsKPiA+ICsJCWh0LT5oYXNoLnZhbHVl
-ID0gY3B1X3RvX2xlMzIoc2tiLT5oYXNoKTsKPiA+ICsJCWh0LT5oYXNoLnJlcG9ydCA9IGNwdV90
-b19sZTE2KHJlcG9ydCk7Cj4gPiArCQlodC0+aGFzaC5mbG93X3N0YXRlID0gY3B1X3RvX2xlMTYo
-VklSVElPX05FVF9IQVNIX1NUQVRFX0RFRkFVTFQpOwo+ID4gICAJfQo+ID4gKwlpZiAodmktPmVu
-YWJsZV90eF90c3RhbXAgJiYgc2tiX3NoaW5mbyhza2IpLT50eF9mbGFncyAmIFNLQlRYX0hXX1RT
-VEFNUCkKPiA+ICsJCWh0LT5oZHIuZmxhZ3MgfD0gVklSVElPX05FVF9IRFJfRl9UU1RBTVA7Cj4g
-PiAgIAlzZ19pbml0X3RhYmxlKHNxLT5zZywgc2tiX3NoaW5mbyhza2IpLT5ucl9mcmFncyArIChj
-YW5fcHVzaCA/IDEgOiAyKSk7Cj4gPiAgIAlpZiAoY2FuX3B1c2gpIHsKPiA+IEBAIC0yMzA3LDcg
-KzIzMzEsMTMgQEAgc3RhdGljIGludCB2aXJ0bmV0X2dldF90c19pbmZvKHN0cnVjdCBuZXRfZGV2
-aWNlICpkZXYsCj4gPiAgIAkJaW5mby0+cnhfZmlsdGVycyA9IEhXVFNUQU1QX0ZJTFRFUl9OT05F
-Owo+ID4gICAJfQo+ID4gLQlpbmZvLT50eF90eXBlcyA9IEhXVFNUQU1QX1RYX09GRjsKPiA+ICsJ
-aWYgKHZpLT5oYXNfdHhfdHN0YW1wKSB7Cj4gPiArCQlpbmZvLT5zb190aW1lc3RhbXBpbmcgfD0g
-U09GX1RJTUVTVEFNUElOR19UWF9IQVJEV0FSRSB8Cj4gPiArCQkJCQkgU09GX1RJTUVTVEFNUElO
-R19SQVdfSEFSRFdBUkU7Cj4gPiArCQlpbmZvLT50eF90eXBlcyA9IEhXVFNUQU1QX1RYX09OOwo+
-ID4gKwl9IGVsc2Ugewo+ID4gKwkJaW5mby0+dHhfdHlwZXMgPSBIV1RTVEFNUF9UWF9PRkY7Cj4g
-PiArCX0KPiA+ICAgCXJldHVybiAwOwo+ID4gICB9Cj4gPiBAQCAtMjYxNiw3ICsyNjQ2LDggQEAg
-c3RhdGljIGludCB2aXJ0bmV0X2lvY3RsX3NldF9od3RzdGFtcChzdHJ1Y3QgbmV0X2RldmljZSAq
-ZGV2LCBzdHJ1Y3QgaWZyZXEgKmlmcikKPiA+ICAgCQlyZXR1cm4gLUVGQVVMVDsKPiA+ICAgCWlm
-ICh0c2NvbmYuZmxhZ3MpCj4gPiAgIAkJcmV0dXJuIC1FSU5WQUw7Cj4gPiAtCWlmICh0c2NvbmYu
-dHhfdHlwZSAhPSBIV1RTVEFNUF9UWF9PRkYpCj4gPiArCWlmICh0c2NvbmYudHhfdHlwZSAhPSBI
-V1RTVEFNUF9UWF9PRkYgJiYKPiA+ICsJICAgIHRzY29uZi50eF90eXBlICE9IEhXVFNUQU1QX1RY
-X09OKQo+ID4gICAJCXJldHVybiAtRVJBTkdFOwo+ID4gICAJaWYgKHRzY29uZi5yeF9maWx0ZXIg
-IT0gSFdUU1RBTVBfRklMVEVSX05PTkUgJiYKPiA+ICAgCSAgICB0c2NvbmYucnhfZmlsdGVyICE9
-IEhXVFNUQU1QX0ZJTFRFUl9BTEwpCj4gPiBAQCAtMjYyNyw2ICsyNjU4LDExIEBAIHN0YXRpYyBp
-bnQgdmlydG5ldF9pb2N0bF9zZXRfaHd0c3RhbXAoc3RydWN0IG5ldF9kZXZpY2UgKmRldiwgc3Ry
-dWN0IGlmcmVxICppZnIpCj4gPiAgIAllbHNlCj4gPiAgIAkJdmktPmVuYWJsZV9yeF90c3RhbXAg
-PSB0c2NvbmYucnhfZmlsdGVyID09IEhXVFNUQU1QX0ZJTFRFUl9BTEw7Cj4gPiArCWlmICghdmkt
-Pmhhc190eF90c3RhbXApCj4gPiArCQl0c2NvbmYudHhfdHlwZSA9IEhXVFNUQU1QX1RYX09GRjsK
-PiA+ICsJZWxzZQo+ID4gKwkJdmktPmVuYWJsZV90eF90c3RhbXAgPSB0c2NvbmYudHhfdHlwZSA9
-PSBIV1RTVEFNUF9UWF9PTjsKPiA+ICsKPiA+ICAgCWlmIChjb3B5X3RvX3VzZXIoaWZyLT5pZnJf
-ZGF0YSwgJnRzY29uZiwgc2l6ZW9mKHRzY29uZikpKQo+ID4gICAJCXJldHVybiAtRUZBVUxUOwo+
-ID4gQEAgLTI2NDEsNyArMjY3Nyw4IEBAIHN0YXRpYyBpbnQgdmlydG5ldF9pb2N0bF9nZXRfaHd0
-c3RhbXAoc3RydWN0IG5ldF9kZXZpY2UgKmRldiwgc3RydWN0IGlmcmVxICppZnIpCj4gPiAgIAl0
-c2NvbmYuZmxhZ3MgPSAwOwo+ID4gICAJdHNjb25mLnJ4X2ZpbHRlciA9IHZpLT5lbmFibGVfcnhf
-dHN0YW1wID8gSFdUU1RBTVBfRklMVEVSX0FMTCA6Cj4gPiAgIAkJCQkJCSAgSFdUU1RBTVBfRklM
-VEVSX05PTkU7Cj4gPiAtCXRzY29uZi50eF90eXBlID0gSFdUU1RBTVBfVFhfT0ZGOwo+ID4gKwl0
-c2NvbmYudHhfdHlwZSA9IHZpLT5lbmFibGVfdHhfdHN0YW1wID8gSFdUU1RBTVBfVFhfT04gOgo+
-ID4gKwkJCQkJCUhXVFNUQU1QX1RYX09GRjsKPiA+ICAgCWlmIChjb3B5X3RvX3VzZXIoaWZyLT5p
-ZnJfZGF0YSwgJnRzY29uZiwgc2l6ZW9mKHRzY29uZikpKQo+ID4gICAJCXJldHVybiAtRUZBVUxU
-Owo+ID4gQEAgLTMxNzgsNiArMzIxNSwxMiBAQCBzdGF0aWMgaW50IHZpcnRuZXRfcHJvYmUoc3Ry
-dWN0IHZpcnRpb19kZXZpY2UgKnZkZXYpCj4gPiAgIAkJdmktPmhkcl9sZW4gPSBzaXplb2Yoc3Ry
-dWN0IHZpcnRpb19uZXRfaGRyX2hhc2hfdHMpOwo+ID4gICAJfQo+ID4gKwlpZiAodmlydGlvX2hh
-c19mZWF0dXJlKHZkZXYsIFZJUlRJT19ORVRfRl9UWF9UU1RBTVApICYmCj4gPiArCSAgICAhdnJp
-bmdfdXNlX2RtYV9hcGkodmRldikpIHsKPiA+ICsJCXZpLT5oYXNfdHhfdHN0YW1wID0gdHJ1ZTsK
-PiA+ICsJCXZpLT5oZHJfbGVuID0gc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fbmV0X2hkcl9oYXNoX3Rz
-KTsKPiA+ICsJfQo+ID4gKwo+ID4gICAJaWYgKHZpcnRpb19oYXNfZmVhdHVyZSh2ZGV2LCBWSVJU
-SU9fRl9BTllfTEFZT1VUKSB8fAo+ID4gICAJICAgIHZpcnRpb19oYXNfZmVhdHVyZSh2ZGV2LCBW
-SVJUSU9fRl9WRVJTSU9OXzEpKQo+ID4gICAJCXZpLT5hbnlfaGVhZGVyX3NnID0gdHJ1ZTsKPiA+
-IEBAIC0zMzY5LDcgKzM0MTIsNyBAQCBzdGF0aWMgc3RydWN0IHZpcnRpb19kZXZpY2VfaWQgaWRf
-dGFibGVbXSA9IHsKPiA+ICAgCVZJUlRJT19ORVRfRl9DVFJMX01BQ19BRERSLCBcCj4gPiAgIAlW
-SVJUSU9fTkVUX0ZfTVRVLCBWSVJUSU9fTkVUX0ZfQ1RSTF9HVUVTVF9PRkZMT0FEUywgXAo+ID4g
-ICAJVklSVElPX05FVF9GX1NQRUVEX0RVUExFWCwgVklSVElPX05FVF9GX1NUQU5EQlksIFwKPiA+
-IC0JVklSVElPX05FVF9GX1RYX0hBU0gsIFZJUlRJT19ORVRfRl9SWF9UU1RBTVAKPiA+ICsJVklS
-VElPX05FVF9GX1RYX0hBU0gsIFZJUlRJT19ORVRfRl9SWF9UU1RBTVAsIFZJUlRJT19ORVRfRl9U
-WF9UU1RBTVAKPiA+ICAgc3RhdGljIHVuc2lnbmVkIGludCBmZWF0dXJlc1tdID0gewo+ID4gICAJ
-VklSVE5FVF9GRUFUVVJFUywKPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9f
-cmluZy5jIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX3JpbmcuYwo+ID4gaW5kZXggNzFlMTZiNTNl
-OWMxLi5jZjVkNWQxZjliMTQgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9f
-cmluZy5jCj4gPiArKysgYi9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jCj4gPiBAQCAtMjM4
-LDcgKzIzOCw3IEBAIHN0YXRpYyBpbmxpbmUgYm9vbCB2aXJ0cXVldWVfdXNlX2luZGlyZWN0KHN0
-cnVjdCB2aXJ0cXVldWUgKl92cSwKPiA+ICAgICogdW5jb25kaXRpb25hbGx5IG9uIGRhdGEgcGF0
-aC4KPiA+ICAgICovCj4gPiAtc3RhdGljIGJvb2wgdnJpbmdfdXNlX2RtYV9hcGkoc3RydWN0IHZp
-cnRpb19kZXZpY2UgKnZkZXYpCj4gPiArYm9vbCB2cmluZ191c2VfZG1hX2FwaShzdHJ1Y3Qgdmly
-dGlvX2RldmljZSAqdmRldikKPiA+ICAgewo+ID4gICAJaWYgKCF2aXJ0aW9faGFzX2RtYV9xdWly
-ayh2ZGV2KSkKPiA+ICAgCQlyZXR1cm4gdHJ1ZTsKPiA+IEBAIC0yNTcsNiArMjU3LDcgQEAgc3Rh
-dGljIGJvb2wgdnJpbmdfdXNlX2RtYV9hcGkoc3RydWN0IHZpcnRpb19kZXZpY2UgKnZkZXYpCj4g
-PiAgIAlyZXR1cm4gZmFsc2U7Cj4gPiAgIH0KPiA+ICtFWFBPUlRfU1lNQk9MX0dQTCh2cmluZ191
-c2VfZG1hX2FwaSk7Cj4gPiAgIHNpemVfdCB2aXJ0aW9fbWF4X2RtYV9zaXplKHN0cnVjdCB2aXJ0
-aW9fZGV2aWNlICp2ZGV2KQo+ID4gICB7Cj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC92
-aXJ0aW8uaCBiL2luY2x1ZGUvbGludXgvdmlydGlvLmgKPiA+IGluZGV4IDU1ZWEzMjlmZTcyYS4u
-NTI4OWUyODEyZTk1IDEwMDY0NAo+ID4gLS0tIGEvaW5jbHVkZS9saW51eC92aXJ0aW8uaAo+ID4g
-KysrIGIvaW5jbHVkZS9saW51eC92aXJ0aW8uaAo+ID4gQEAgLTE0MCw2ICsxNDAsNyBAQCBpbnQg
-dmlydGlvX2RldmljZV9mcmVlemUoc3RydWN0IHZpcnRpb19kZXZpY2UgKmRldik7Cj4gPiAgIGlu
-dCB2aXJ0aW9fZGV2aWNlX3Jlc3RvcmUoc3RydWN0IHZpcnRpb19kZXZpY2UgKmRldik7Cj4gPiAg
-ICNlbmRpZgo+ID4gK2Jvb2wgdnJpbmdfdXNlX2RtYV9hcGkoc3RydWN0IHZpcnRpb19kZXZpY2Ug
-KnZkZXYpOwo+ID4gICBzaXplX3QgdmlydGlvX21heF9kbWFfc2l6ZShzdHJ1Y3QgdmlydGlvX2Rl
-dmljZSAqdmRldik7Cj4gPiAgICNkZWZpbmUgdmlydGlvX2RldmljZV9mb3JfZWFjaF92cSh2ZGV2
-LCB2cSkgXAo+ID4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fbmV0Lmgg
-Yi9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX25ldC5oCj4gPiBpbmRleCBhNWM4NDQxMGNmOTIu
-LmI1ZDZmMGM2Y2VhZCAxMDA2NDQKPiA+IC0tLSBhL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9f
-bmV0LmgKPiA+ICsrKyBiL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fbmV0LmgKPiA+IEBAIC01
-Nyw2ICs1Nyw3IEBACj4gPiAgIAkJCQkJICogU3RlZXJpbmcgKi8KPiA+ICAgI2RlZmluZSBWSVJU
-SU9fTkVUX0ZfQ1RSTF9NQUNfQUREUiAyMwkvKiBTZXQgTUFDIGFkZHJlc3MgKi8KPiA+ICsjZGVm
-aW5lIFZJUlRJT19ORVRfRl9UWF9UU1RBTVAJICA1NAkvKiBEZXZpY2Ugc2VuZHMgVEFJIHRyYW5z
-bWl0IHRpbWUgKi8KPiA+ICAgI2RlZmluZSBWSVJUSU9fTkVUX0ZfUlhfVFNUQU1QCSAgNTUJLyog
-RGV2aWNlIHNlbmRzIFRBSSByZWNlaXZlIHRpbWUgKi8KPiAKPiAKPiBJIHdvbmRlciBob3cgbXVj
-aCB2YWx1ZSB0byBzcGxpdCBpbnRvIHR3byBmZWF0dXJlcy4KPiAKPiBUaGFua3MKPiAKPiAKPiA+
-ICAgI2RlZmluZSBWSVJUSU9fTkVUX0ZfVFhfSEFTSAkgIDU2CS8qIERyaXZlciBzZW5kcyBoYXNo
-IHJlcG9ydCAqLwo+ID4gICAjZGVmaW5lIFZJUlRJT19ORVRfRl9IQVNIX1JFUE9SVCAgNTcJLyog
-U3VwcG9ydHMgaGFzaCByZXBvcnQgKi8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlv
-bkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlv
-bi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+This is a multi-part message in MIME format
+
+--===============1718362361475615335==
+Content-Type: multipart/alternative; charset=utf-8; boundary="eGT9Z=_2msp4N8yokq2a5WkW2Zj9kMoQ2a"
+
+This is a multi-part message in MIME format
+
+--eGT9Z=_2msp4N8yokq2a5WkW2Zj9kMoQ2a
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+* Published by IEEE
+* Google Scholar H-Index =3D 17
+* SCIMago H-Index =3D 13
+* Indexed in Scopus, WoS, Ei-Compendex, Inspec, etc
+
+
+-------------------------------------     ---------------------------------=
+---     ------------------------------ 
+CISTI'2021 - 16th Iberian Conference on Information Systems and Technologie=
+s
+23 - 26 June 2021 | Chaves, Portugal
+http://cisti.eu/ <http://cisti.eu/>
+-----------------------------------     -----------------------------------=
+--     ------------------------------- 
+
+
+We are pleased to invite the academic and business community to submit thei=
+r papers to CISTI'2021 - 16th Iberian Conference on Information Systems and=
+ Technologies, to be held in Chaves, Portugal, between the 23th and 26th of=
+ June 2021. Authors are encouraged to submit original scientific contributi=
+ons such as state-of-art reviews and new research perspectives, groundbreak=
+ing ideas and/or architectures, solutions and/or applications for real prob=
+lems, empirical and/or evaluation works, case studies, etc., in conformity =
+with the themes of this Conference.
+
+Four types of papers can be submitted:
+
+Full paper: Finished or consolidated R&D works, to be included in one of th=
+e Conference themes. These papers are assigned  a 6-page limit.
+
+Short paper: Ongoing works with relevant preliminary results, opened to dis=
+cussion. These papers are assigned a 4-page limit.
+
+Poster paper: Initial work with relevant ideas, opened to discussion. These=
+ papers are assigned a 2-page limit.
+
+Company paper: Companies' papers  that show practical experience, R & D, to=
+ols, etc., focused in some topics of the conference. These articles are abs=
+tracts with a maximum of 2 pages.
+
+Papers submitted for the Scientific Committee=E2=80=99s evaluation must not=
+ include any information leading to the authors=E2=80=99 identification. Th=
+erefore, the authors=E2=80=99 names, affiliations and bibliographic referen=
+ces should not be included in the early version. This information should on=
+ly be included in the final version.
+
+Submitted papers must not have been published and must not be under review =
+for any other conference and national or international publication.
+
+Papers must comply with the format standard <http://cisti.eu/2017/images/te=
+mplates.zip> and be written in Portuguese, Spanish or English.
+
+All papers will be subjected to a =E2=80=9Cblind review=E2=80=9D by at leas=
+t two members of the Scientific Committee.
+
+Full papers can be accepted as short papers or poster papers only. Similarl=
+y, short papers can be accepted as poster papers only. In these two cases, =
+the authors will be allowed to maintain the original number of pages in the=
+ proceedings publication.
+
+The authors of accepted poster papers must also build and print a poster to=
+ be exhibited during the Conference. This poster must follow an A1 or A2 ve=
+rtical format. The Conference includes Work Sessions where these posters ar=
+e presented and orally discussed, with a 5-minute limit per poster.
+
+The authors of accepted full papers will dispose of a 15-minute presentatio=
+n in the Conference Work Session, and approximately 5 minutes of discussion=
+ will follow each presentation. The authors of accepted short papers and co=
+mpany papers will dispose of an 11-minute presentation in the Conference Wo=
+rk Session, and approximately 4 minutes of discussion will follow each pres=
+entation.
+
+ 
+
+Themes
+
+Submitted papers must follow the main themes proposed for the Conference (t=
+he topics proposed in each theme constitute a mere framework reference; the=
+y are not intended as restrictive):
+
+A) OMIS - Organizational Models and Information Systems
+
+B) KMDSS - Knowledge Management and Decision Support Systems
+
+C) SSAAT - Software Systems, Architectures, Applications and Tools
+
+D) CNMPS - Computer Networks, Mobility and Pervasive Systems
+
+E) HCC - Human Centered Computing
+
+F) HIS - Health Informatics
+
+G) ITE - Information Technologies in Education
+
+
+H) AEC =E2=80=93 Architecture and Engineering of Construction
+
+ 
+
+Publication and Indexing
+
+To ensure that the contribution (full paper, short paper, symposium doctora=
+l paper) is published in the Proceedings, at least one of the authors must =
+be fully registered by the 11th of April, and the paper must comply with th=
+e suggested layout and page-limit. Additionally, all recommended modificati=
+ons must be addressed by the authors before they submit the final version.
+
+No more than one paper per registration will be published in the Conference=
+ Proceedings. An extra fee must be paid for publication of additional paper=
+s, with a maximum of one additional paper per registration.
+
+Full and short papers, including symposium doctoral papers, will be submitt=
+ed for inclusion/indexing into IEEE XPlore, ISI, SCOPUS, EI-Compendex, INSP=
+EC and Google Scholar.
+
+The best articles will be selected for publication in the following journal=
+s and books:
+
+- Journal of Information Systems Engineering & Management (JISEM <http://ww=
+w.lectitojournals.com/journal-for-information-systems-engineering-managemen=
+t>)
+
+- Journal on Advances in Theoretical and Applied Informatics (JADI <http://=
+revista.univem.edu.br/index.php/jadi>)
+
+- International Journal of Information Systems and Software Engineering for=
+ Big Companies (IJISEBC <http://www.uajournals.com/ijisebc/>)
+
+- Journal of Information and Operations Management Education (IJIOME <https=
+://www.inderscience.com/jhome.php?jcode=3Dijiome>)
+
+- Revista Ib=C3=A9rica de Sistemas e Tecnologias de Informa=C3=A7=C3=A3o (R=
+ISTI <http://www.risti.xyz/>)
+
+ 
+
+Important Dates
+
+Paper submission: February 21, 2021
+
+Notification of acceptance: March 28, 2021
+
+Submission of accepted papers: April 11, 2021
+
+Payment of registration, to ensure the inclusion of an accepted paper in th=
+e conference proceedings: April 11, 2021
+
+ 
+
+We are counting on you. Submit your contribution.
+
+
+
+
+
+
+
+Website of CISTI'2021: http://cisti.eu/ <http://cisti.eu/> 
+
+
+CISTI'2021 Team
+http://cisti.eu/ <http://cisti.eu/>
+ 
+
+ 
+
+
+-- 
+This email has been checked for viruses by AVG.
+https://www.avg.com
+
+--eGT9Z=_2msp4N8yokq2a5WkW2Zj9kMoQ2a
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html>
+  <head>
+    <title></title>
+    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
+" />
+  </head>
+  <body>
+    <div dir=3D"ltr">
+      <div>* Published by&nbsp;IEEE</div>
+      <div>* Google Scholar H-Index =3D 17</div>
+      <div>* SCIMago H-Index =3D 13</div>
+      <div>* Indexed in Scopus, WoS, Ei-Compendex, Inspec, etc</div>
+    </div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr">------------------------------------- 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;&nbsp;----------------------------------=
+-- 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;&nbsp;------------------------------ 
+    </div>
+    <div dir=3D"ltr">CISTI'2021 - 16th Iberian Conference on Information Sy=
+stems and Technologies<br />23&nbsp;-&nbsp;26&nbsp;June 2021 | Chaves, Port=
+ugal</div>
+    <div dir=3D"ltr"><a href=3D"http://cisti.eu/">http://cisti.eu/</a></div=
+>
+    <div dir=3D"ltr">----------------------------------- 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;&nbsp;----------------------------------=
+--- 
+      <wbr>&nbsp;</wbr>&nbsp;&nbsp;&nbsp;------------------------------- 
+    </div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr" itemprop=3D"articleBody">
+      <p>We are pleased to invite the academic and business community to su=
+bmit their papers to CISTI'2021 - 16th Iberian Conference on Information Sy=
+stems and Technologies, to be held in Chaves, Portugal, between the 23th an=
+d 26th of June 2021. Authors are encouraged to submit original scientific c=
+ontributions such as state-of-art reviews and new research perspectives, gr=
+oundbreaking ideas and/or architectures, solutions and/or applications for =
+real problems, empirical and/or evaluation works, case studies, etc., in co=
+nformity with the themes of this Conference.</p>
+      <p>Four types of papers can be submitted:</p>
+      <p>Full paper: Finished or consolidated R&amp;D works, to be included=
+ in one of the Conference themes. These papers are assigned&nbsp; a 6-page =
+limit.<br /><br />Short paper: Ongoing works with relevant preliminary resu=
+lts, opened to discussion. These papers are assigned a 4-page limit.<br /><=
+br />Poster paper: Initial work with relevant ideas, opened to discussion. =
+These papers are assigned a 2-page limit.<br /><br />Company paper: Compani=
+es' papers&nbsp; that show practical experience, R &amp; D, tools, etc., fo=
+cused in some topics of the conference. These articles are abstracts with a=
+ maximum of 2 pages.</p>
+      <p>Papers submitted for the Scientific Committee&rsquo;s evaluation m=
+ust not include any information leading to the authors&rsquo; identificatio=
+n. Therefore, the authors&rsquo; names, affiliations and bibliographic refe=
+rences should not be included in the early version. This information should=
+ only be included in the final version.</p>
+      <p>Submitted papers must not have been published and must not be unde=
+r review for any other conference and national or international publication=
+=2E</p>
+      <p>Papers must comply with the&nbsp;<strong><a href=3D"http://cisti.e=
+u/2017/images/templates.zip" rel=3D"noopener noreferrer" target=3D"_blank">=
+format standard</a></strong>&nbsp;and be written in Portuguese, Spanish or =
+English.</p>
+      <p>All papers will be subjected to a &ldquo;blind review&rdquo; by at=
+ least two members of the Scientific Committee.</p>
+      <p>Full papers can be accepted as short papers or poster papers only.=
+ Similarly, short papers can be accepted as poster papers only. In these tw=
+o cases, the authors will be allowed to maintain the original number of pag=
+es in the proceedings publication.</p>
+      <p>The authors of accepted poster papers must also build and print a =
+poster to be exhibited during the Conference. This poster must follow an A1=
+ or A2 vertical format. The Conference includes Work Sessions where these p=
+osters are presented and orally discussed, with a 5-minute limit per poster=
+=2E</p>
+      <p>The authors of accepted full papers will dispose of a 15-minute pr=
+esentation in the Conference Work Session, and approximately 5 minutes of d=
+iscussion will follow each presentation. The authors of accepted short pape=
+rs and company papers will dispose of an 11-minute presentation in the Conf=
+erence Work Session, and approximately 4 minutes of discussion will follow =
+each presentation.</p>
+      <p>&nbsp;</p>
+      <p><strong>Themes</strong></p>
+      <p>Submitted papers must follow the main themes proposed for the Conf=
+erence (the topics proposed in each theme constitute a mere framework refer=
+ence; they are not intended as restrictive):</p>
+      <p><em>A) OMIS - Organizational Models and Information Systems</em></=
+p>
+      <p><em>B) KMDSS - Knowledge Management and Decision Support Systems</=
+em></p>
+      <p><em>C) SSAAT - Software Systems, Architectures, Applications and T=
+ools</em></p>
+      <p><em>D) CNMPS - Computer Networks, Mobility and Pervasive Systems</=
+em></p>
+      <p><em>E) HCC - Human Centered Computing</em></p>
+      <p><em>F) HIS - Health Informatics</em></p>
+      <p><em>G) ITE - Information Technologies in Education<br /></em></p>
+      <p><em><span lang=3D"EN-US">H) AEC &ndash; Architecture and Engineeri=
+ng of Construction</span></em></p>
+      <p><strong>&nbsp;</strong></p>
+      <p><strong>Publication and Indexing</strong></p>
+      <p>To ensure that the contribution (full paper, short paper, symposiu=
+m doctoral paper) is published in the Proceedings, at least one of the auth=
+ors must be fully registered by the 11th of April, and the paper must compl=
+y with the suggested layout and page-limit. Additionally, all recommended m=
+odifications must be addressed by the authors before they submit the final =
+version.</p>
+      <p>No more than one paper per registration will be published in the C=
+onference Proceedings. An extra fee must be paid for publication of additio=
+nal papers, with a maximum of one additional paper per registration.</p>
+      <p>Full and short papers, including symposium doctoral papers, will b=
+e submitted for inclusion/indexing into IEEE XPlore, ISI, SCOPUS, EI-Compen=
+dex, INSPEC and Google Scholar.</p>
+      <p><span lang=3D"en" id=3D"result_box"><span>The best articles will b=
+e selected for publication in the following journals and books:</span></spa=
+n></p>
+      <p>- Journal of Information Systems Engineering &amp; Management (<a =
+href=3D"http://www.lectitojournals.com/journal-for-information-systems-engi=
+neering-management" rel=3D"noopener noreferrer" target=3D"_blank">JISEM</a>=
+)</p>
+      <p>- Journal on Advances in Theoretical and Applied Informatics (<a h=
+ref=3D"http://revista.univem.edu.br/index.php/jadi" rel=3D"noopener norefer=
+rer" target=3D"_blank">JADI</a>)</p>
+      <p>-&nbsp;<span lang=3D"EN-US">International Journal of Information S=
+ystems and Software Engineering for Big Companies (<a href=3D"http://www.ua=
+journals.com/ijisebc/" rel=3D"noopener noreferrer" target=3D"_blank">IJISEB=
+C</a>)</span></p>
+      <p><span lang=3D"EN-US">- Journal of Information and Operations Manag=
+ement Education (<a href=3D"https://www.inderscience.com/jhome.php?jcode=3D=
+ijiome" rel=3D"noopener noreferrer" target=3D"_blank">IJIOME</a>)</span></p=
+>
+      <p>- Revista Ib&eacute;rica de Sistemas e Tecnologias de Informa&cced=
+il;&atilde;o (<a href=3D"http://www.risti.xyz/" rel=3D"noopener noreferrer"=
+ target=3D"_blank">RISTI</a>)</p>
+      <p>&nbsp;</p>
+      <p><strong>Important Dates</strong></p>
+      <p><span class=3D"hps">Paper</span>&nbsp;<span class=3D"hps">submissi=
+on:</span>&nbsp;<span class=3D"hps">February</span> 21, <span class=3D"hps"=
+>2021</span><br /><br /><span class=3D"hps">Notification of</span>&nbsp;<sp=
+an class=3D"hps">acceptance</span>: March 28,&nbsp;<span class=3D"hps">2021=
+</span><br /><br /><span class=3D"hps">Submission of</span>&nbsp;<span clas=
+s=3D"hps">accepted</span>&nbsp;<span class=3D"hps">papers</span>: April 11,=
+&nbsp;<span class=3D"hps">2021</span><br /><br /><span class=3D"hps">Paymen=
+t of</span>&nbsp;<span class=3D"hps">registration</span>,&nbsp;<span class=
+=3D"hps">to</span>&nbsp;<span class=3D"hps">ensure</span>&nbsp;<span class=
+=3D"hps">the</span>&nbsp;<span class=3D"hps">inclusion</span>&nbsp;<span cl=
+ass=3D"hps">of an</span>&nbsp;<span class=3D"hps">accepted paper</span>&nbs=
+p;<span class=3D"hps">in the&nbsp;</span><span class=3D"hps">conference</sp=
+an>&nbsp;<span class=3D"hps">proceedings</span>: April <span class=3D"hps">=
+11</span>,&nbsp;<span class=3D"hps">2021</span></p>
+      <p>&nbsp;</p>
+      <p><em><strong>We are counting on you. Submit your contribution.</str=
+ong></em></p>
+    </div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr"><br /></div>
+    <div dir=3D"ltr">Website of CISTI'2021: <a href=3D"http://cisti.eu/">ht=
+tp://cisti.eu/</a>&nbsp;<br /><br /></div>
+    <div dir=3D"ltr">CISTI'2021 Team</div>
+    <div dir=3D"ltr"><a href=3D"http://cisti.eu/">http://cisti.eu/</a></div=
+>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br />
+<table style=3D"border-top: 1px solid #D3D4DE;">
+	<tr>
+        <td style=3D"width: 55px; padding-top: 13px;"><a href=3D"http://www=
+=2Eavg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaig=
+n=3Dsig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"http=
+s://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=
+=3D""  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></=
+a></td>
+		<td style=3D"width: 470px; padding-top: 12px; color: #41424e; font-size: =
+13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virus-=
+free. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_=
+source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
+"_blank" style=3D"color: #4453ea;">www.avg.com</a>
+		</td>
+	</tr>
+</table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" heigh=
+t=3D"1"> </a></div></body>
+</html>
+
+--eGT9Z=_2msp4N8yokq2a5WkW2Zj9kMoQ2a--
+
+
+--===============1718362361475615335==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============1718362361475615335==--
+
