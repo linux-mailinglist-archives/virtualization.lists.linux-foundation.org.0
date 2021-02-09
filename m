@@ -1,71 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E882314F3D
-	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 13:41:15 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA739314FB8
+	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 14:04:47 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1CF5587327;
-	Tue,  9 Feb 2021 12:41:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 62AAD6F892
+	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 13:04:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1sfJ4d8CobBL; Tue,  9 Feb 2021 12:41:13 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9_fvF197CbwO for <lists.virtualization@lfdr.de>;
+	Tue,  9 Feb 2021 13:04:45 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+	id 0CC2D6F8A1; Tue,  9 Feb 2021 13:04:45 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 7906B87336;
-	Tue,  9 Feb 2021 12:41:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D18926F742;
+	Tue,  9 Feb 2021 13:04:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 61FA0C013A;
-	Tue,  9 Feb 2021 12:41:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9479BC013A;
+	Tue,  9 Feb 2021 13:04:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1DAF3C013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7736BC013A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 12:41:12 +0000 (UTC)
+ Tue,  9 Feb 2021 13:04:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 09B70862D4
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 66559855C6
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 12:41:12 +0000 (UTC)
+ Tue,  9 Feb 2021 13:04:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3rRT7MLy466K
+ with ESMTP id ihTflpanv4C6
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 12:41:11 +0000 (UTC)
+ Tue,  9 Feb 2021 13:04:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mx1.opensynergy.com (mx1.opensynergy.com [217.66.60.4])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 47D4C8647E
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 619FA848FA
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 12:41:11 +0000 (UTC)
-Received: from SR-MAILGATE-02.opensynergy.com (localhost.localdomain
- [127.0.0.1])
- by mx1.opensynergy.com (Proxmox) with ESMTP id E2B93A15F7;
- Tue,  9 Feb 2021 13:41:09 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opensynergy.com;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:from:from:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=srmailgate02; bh=Kf3NoYTKMR9c
- KxKhivPIKRwuTjyeEW86UKMD9wJXhYg=; b=SXWaVvwzKI9BNgLAL1EQJKR211hc
- WyuKWuvWAt8HwBQixKM8+xr3ts9WmVli/4LZxvHOzxHlTRFoOt3K4Pz7fMauc3AN
- 0s3OXtUGmp66Bw95Q23lLFt17F1WzD+RgA9IAohvA9TiW5kwZDglCiYFCBOspHnU
- 9t31Z9QwKJBnM2ANTtckNlk/3PahJLCErR0mxe+IyzGvTvSgegZgtH762bqw950d
- XOD1aQn7vHzyXQyCcd10Ey2+hJn4+0YBqqQZ/J5h5Y2haL8Og+azF+aDIo+MsrOV
- GmjrRJ09V/vAVC+CfC5ni4+EAS5CeJT/A4ukHDLAmFLUH0T4eJ4QHSJM9A==
-From: Anton Yakovlev <anton.yakovlev@opensynergy.com>
-To: <virtualization@lists.linux-foundation.org>,
- <alsa-devel@alsa-project.org>, <virtio-dev@lists.oasis-open.org>
-Subject: [PATCH v3 9/9] ALSA: virtio: introduce device suspend/resume support
-Date: Tue, 9 Feb 2021 13:40:10 +0100
-Message-ID: <20210209124011.1224628-10-anton.yakovlev@opensynergy.com>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210209124011.1224628-1-anton.yakovlev@opensynergy.com>
-References: <20210209124011.1224628-1-anton.yakovlev@opensynergy.com>
+ Tue,  9 Feb 2021 13:04:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612875872;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=YlDBN62QT+LjsTA/QUxGQGe58lH6AMBqtq7gFGvrAJU=;
+ b=NMT656npJF8K+cYccJYSzLgrUH5QmACN1deE61dczkyduSPMAcZruEFND1zmfUWWNVdFBr
+ N0qDmJXY+ao5eSkiRxYQVlNU6FYsPBHma3flbrpy3dj84307Hj47HLqhkjFxzntWDh8nVz
+ V1JqBp1dlW0R0KM6rafh1BwTnzZ82Q4=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-236-pd-1B7gDOE69sUq46q66OA-1; Tue, 09 Feb 2021 08:04:30 -0500
+X-MC-Unique: pd-1B7gDOE69sUq46q66OA-1
+Received: by mail-ed1-f69.google.com with SMTP id p18so17472284edr.20
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 09 Feb 2021 05:04:30 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:in-reply-to:references:date
+ :message-id:mime-version;
+ bh=YlDBN62QT+LjsTA/QUxGQGe58lH6AMBqtq7gFGvrAJU=;
+ b=URH0oq1Vum7M/5CkvGrlHi6Ur9wAPE5223fXzZHxp0jLm6b8PjXks/SQ10LQ+1wlqg
+ 7M2J+uby0+w2rMcECRAaOsVgU7jzMrfAZeKTLN9Y9rjlZk4kxNnpaCQyNUcMPlFHp75L
+ h7vcCwgohaRJn7GS+SiYzd3gAY7bWFvVPks8+yaZl3FtxRxjg5bA2vNOHcoQFf/+Fzft
+ yR5JSPRpuTqlKTnzJe2GNEWBC9u6h8Pbsnunl1zXsxQajjA0hLV96w0zW08X9Ob4aH9q
+ Tav2glEKQlPQN1HpxczNX2rxUf4Hl+0c3MNc8Wl/NxvXFm9PgWxNcUs7yrSD8iaU9Dmp
+ YXPg==
+X-Gm-Message-State: AOAM531iLhD/hXXlYjaSatoAEdtNa7pnCu3fNTkbbH8YlCcZOA6G9Ckx
+ eQj/Dc98saTFzpeVOzByzqIJkVjz79Hr+jEVsla0C02zTYgNnxsgO4xzDv7/pgW6FJv25SX3yxR
+ UrkEwTbn8pw06uIPU8zGzDJr3bPk48inzYdki3CWlUw==
+X-Received: by 2002:a05:6402:104e:: with SMTP id
+ e14mr23107268edu.316.1612875869256; 
+ Tue, 09 Feb 2021 05:04:29 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyo4HIuR+0T9rUcQDNRaZ095+7jSeihXr6nVh2iiZp6SzMTP3xc+j9f2+Ss547tuohb9vi9EQ==
+X-Received: by 2002:a05:6402:104e:: with SMTP id
+ e14mr23107248edu.316.1612875869035; 
+ Tue, 09 Feb 2021 05:04:29 -0800 (PST)
+Received: from vitty.brq.redhat.com (g-server-2.ign.cz. [91.219.240.2])
+ by smtp.gmail.com with ESMTPSA id a25sm11417578eds.48.2021.02.09.05.04.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Feb 2021 05:04:28 -0800 (PST)
+From: Vitaly Kuznetsov <vkuznets@redhat.com>
+To: Nuno Das Neves <nunodasneves@linux.microsoft.com>,
+ linux-hyperv@vger.kernel.org
+Subject: Re: [RFC PATCH 01/18] x86/hyperv: convert hyperv statuses to linux
+ error codes
+In-Reply-To: <1605918637-12192-2-git-send-email-nunodasneves@linux.microsoft.com>
+References: <1605918637-12192-1-git-send-email-nunodasneves@linux.microsoft.com>
+ <1605918637-12192-2-git-send-email-nunodasneves@linux.microsoft.com>
+Date: Tue, 09 Feb 2021 14:04:27 +0100
+Message-ID: <871rdpo0is.fsf@vitty.brq.redhat.com>
 MIME-Version: 1.0
-X-ClientProxiedBy: SR-MAIL-02.open-synergy.com (10.26.10.22) To
- SR-MAIL-01.open-synergy.com (10.26.10.21)
-Cc: linux-kernel@vger.kernel.org, Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>, "Michael S. Tsirkin" <mst@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=vkuznets@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: wei.liu@kernel.org, linux-kernel@vger.kernel.org, mikelley@microsoft.com,
+ nunodasneves@linux.microsoft.com, sunilmut@microsoft.com,
+ virtualization@lists.linux-foundation.org, viremana@linux.microsoft.com,
+ ligrassi@microsoft.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,184 +118,142 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-All running PCM substreams are stopped on device suspend and restarted
-on device resume.
+Nuno Das Neves <nunodasneves@linux.microsoft.com> writes:
 
-Signed-off-by: Anton Yakovlev <anton.yakovlev@opensynergy.com>
----
- sound/virtio/virtio_card.c    | 57 +++++++++++++++++++++++++++++++++++
- sound/virtio/virtio_pcm.c     |  1 +
- sound/virtio/virtio_pcm_ops.c | 44 ++++++++++++++++++++-------
- 3 files changed, 91 insertions(+), 11 deletions(-)
+> Return linux-friendly error codes from hypercall wrapper functions.
+> This will be needed in the mshv module.
+>
+> Signed-off-by: Nuno Das Neves <nunodasneves@linux.microsoft.com>
+> ---
+>  arch/x86/hyperv/hv_proc.c         | 30 ++++++++++++++++++++++++++---
+>  arch/x86/include/asm/mshyperv.h   |  1 +
+>  include/asm-generic/hyperv-tlfs.h | 32 +++++++++++++++++++++----------
+>  3 files changed, 50 insertions(+), 13 deletions(-)
+>
+> diff --git a/arch/x86/hyperv/hv_proc.c b/arch/x86/hyperv/hv_proc.c
+> index 0fd972c9129a..8f86f8e86748 100644
+> --- a/arch/x86/hyperv/hv_proc.c
+> +++ b/arch/x86/hyperv/hv_proc.c
+> @@ -18,6 +18,30 @@
+>  #define HV_DEPOSIT_MAX_ORDER (8)
+>  #define HV_DEPOSIT_MAX (1 << HV_DEPOSIT_MAX_ORDER)
+>  
+> +int hv_status_to_errno(int hv_status)
+> +{
+> +	switch (hv_status) {
+> +	case HV_STATUS_SUCCESS:
+> +		return 0;
+> +	case HV_STATUS_INVALID_PARAMETER:
+> +	case HV_STATUS_UNKNOWN_PROPERTY:
+> +	case HV_STATUS_PROPERTY_VALUE_OUT_OF_RANGE:
+> +	case HV_STATUS_INVALID_VP_INDEX:
+> +	case HV_STATUS_INVALID_REGISTER_VALUE:
+> +	case HV_STATUS_INVALID_LP_INDEX:
+> +		return EINVAL;
+> +	case HV_STATUS_ACCESS_DENIED:
+> +	case HV_STATUS_OPERATION_DENIED:
+> +		return EACCES;
+> +	case HV_STATUS_NOT_ACKNOWLEDGED:
+> +	case HV_STATUS_INVALID_VP_STATE:
+> +	case HV_STATUS_INVALID_PARTITION_STATE:
+> +		return EBADFD;
+> +	}
+> +	return ENOTRECOVERABLE;
+> +}
+> +EXPORT_SYMBOL_GPL(hv_status_to_errno);
+> +
+>  /*
+>   * Deposits exact number of pages
+>   * Must be called with interrupts enabled
+> @@ -99,7 +123,7 @@ int hv_call_deposit_pages(int node, u64 partition_id, u32 num_pages)
+>  
+>  	if (status != HV_STATUS_SUCCESS) {
+>  		pr_err("Failed to deposit pages: %d\n", status);
+> -		ret = status;
+> +		ret = -hv_status_to_errno(status);
 
-diff --git a/sound/virtio/virtio_card.c b/sound/virtio/virtio_card.c
-index 787a4dec1da8..1f0a0fa7bbc0 100644
---- a/sound/virtio/virtio_card.c
-+++ b/sound/virtio/virtio_card.c
-@@ -373,6 +373,59 @@ static void virtsnd_config_changed(struct virtio_device *vdev)
- 			 "sound device configuration was changed\n");
- }
- 
-+#ifdef CONFIG_PM_SLEEP
-+/**
-+ * virtsnd_freeze() - Suspend device.
-+ * @vdev: VirtIO parent device.
-+ *
-+ * Context: Any context.
-+ * Return: 0 on success, -errno on failure.
-+ */
-+static int virtsnd_freeze(struct virtio_device *vdev)
-+{
-+	struct virtio_snd *snd = vdev->priv;
-+
-+	/* Stop all the virtqueues. */
-+	vdev->config->reset(vdev);
-+	vdev->config->del_vqs(vdev);
-+
-+	virtsnd_ctl_msg_cancel_all(snd);
-+
-+	kfree(snd->event_msgs);
-+
-+	/*
-+	 * If the virtsnd_restore() fails before re-allocating events, then we
-+	 * get a dangling pointer here.
-+	 */
-+	snd->event_msgs = NULL;
-+
-+	return 0;
-+}
-+
-+/**
-+ * virtsnd_restore() - Resume device.
-+ * @vdev: VirtIO parent device.
-+ *
-+ * Context: Any context.
-+ * Return: 0 on success, -errno on failure.
-+ */
-+static int virtsnd_restore(struct virtio_device *vdev)
-+{
-+	struct virtio_snd *snd = vdev->priv;
-+	int rc;
-+
-+	rc = virtsnd_find_vqs(snd);
-+	if (rc)
-+		return rc;
-+
-+	virtio_device_ready(vdev);
-+
-+	virtsnd_enable_event_vq(snd);
-+
-+	return 0;
-+}
-+#endif /* CONFIG_PM_SLEEP */
-+
- static const struct virtio_device_id id_table[] = {
- 	{ VIRTIO_ID_SOUND, VIRTIO_DEV_ANY_ID },
- 	{ 0 },
-@@ -386,6 +439,10 @@ static struct virtio_driver virtsnd_driver = {
- 	.probe = virtsnd_probe,
- 	.remove = virtsnd_remove,
- 	.config_changed = virtsnd_config_changed,
-+#ifdef CONFIG_PM_SLEEP
-+	.freeze = virtsnd_freeze,
-+	.restore = virtsnd_restore,
-+#endif
- };
- 
- static int __init init(void)
-diff --git a/sound/virtio/virtio_pcm.c b/sound/virtio/virtio_pcm.c
-index 1d98de878385..401d4c975d2b 100644
---- a/sound/virtio/virtio_pcm.c
-+++ b/sound/virtio/virtio_pcm.c
-@@ -109,6 +109,7 @@ static int virtsnd_pcm_build_hw(struct virtio_pcm_substream *vss,
- 		SNDRV_PCM_INFO_BATCH |
- 		SNDRV_PCM_INFO_BLOCK_TRANSFER |
- 		SNDRV_PCM_INFO_INTERLEAVED |
-+		SNDRV_PCM_INFO_RESUME |
- 		SNDRV_PCM_INFO_PAUSE;
- 
- 	if (!info->channels_min || info->channels_min > info->channels_max) {
-diff --git a/sound/virtio/virtio_pcm_ops.c b/sound/virtio/virtio_pcm_ops.c
-index c2224f5461c4..207f4877a5ec 100644
---- a/sound/virtio/virtio_pcm_ops.c
-+++ b/sound/virtio/virtio_pcm_ops.c
-@@ -220,6 +220,10 @@ static int virtsnd_pcm_hw_params(struct snd_pcm_substream *substream,
- 	if (rc)
- 		return rc;
- 
-+	/* If messages have already been allocated before, do nothing. */
-+	if (runtime->status->state == SNDRV_PCM_STATE_SUSPENDED)
-+		return 0;
-+
- 	return virtsnd_pcm_msg_alloc(vss, periods, period_bytes);
- }
- 
-@@ -260,19 +264,21 @@ static int virtsnd_pcm_prepare(struct snd_pcm_substream *substream)
- 	}
- 
- 	spin_lock_irqsave(&vss->lock, flags);
--	/*
--	 * Since I/O messages are asynchronous, they can be completed
--	 * when the runtime structure no longer exists. Since each
--	 * completion implies incrementing the hw_ptr, we cache all the
--	 * current values needed to compute the new hw_ptr value.
--	 */
--	vss->frame_bytes = runtime->frame_bits >> 3;
--	vss->period_size = runtime->period_size;
--	vss->buffer_size = runtime->buffer_size;
-+	if (runtime->status->state != SNDRV_PCM_STATE_SUSPENDED) {
-+		/*
-+		 * Since I/O messages are asynchronous, they can be completed
-+		 * when the runtime structure no longer exists. Since each
-+		 * completion implies incrementing the hw_ptr, we cache all the
-+		 * current values needed to compute the new hw_ptr value.
-+		 */
-+		vss->frame_bytes = runtime->frame_bits >> 3;
-+		vss->period_size = runtime->period_size;
-+		vss->buffer_size = runtime->buffer_size;
- 
--	vss->hw_ptr = 0;
-+		vss->hw_ptr = 0;
-+		vss->msg_last_enqueued = -1;
-+	}
- 	vss->xfer_xrun = false;
--	vss->msg_last_enqueued = -1;
- 	vss->msg_count = 0;
- 	spin_unlock_irqrestore(&vss->lock, flags);
- 
-@@ -302,6 +308,21 @@ static int virtsnd_pcm_trigger(struct snd_pcm_substream *substream, int command)
- 	int rc;
- 
- 	switch (command) {
-+	case SNDRV_PCM_TRIGGER_RESUME: {
-+		/*
-+		 * We restart the substream by executing the standard command
-+		 * sequence.
-+		 */
-+		rc = virtsnd_pcm_hw_params(substream, NULL);
-+		if (rc)
-+			return rc;
-+
-+		rc = virtsnd_pcm_prepare(substream);
-+		if (rc)
-+			return rc;
-+
-+		fallthrough;
-+	}
- 	case SNDRV_PCM_TRIGGER_START:
- 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE: {
- 		struct virtio_snd_queue *queue = virtsnd_pcm_queue(vss);
-@@ -328,6 +349,7 @@ static int virtsnd_pcm_trigger(struct snd_pcm_substream *substream, int command)
- 
- 		return virtsnd_ctl_msg_send_sync(snd, msg);
- 	}
-+	case SNDRV_PCM_TRIGGER_SUSPEND:
- 	case SNDRV_PCM_TRIGGER_STOP:
- 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH: {
- 		spin_lock_irqsave(&vss->lock, flags);
+"-hv_status_to_errno" looks weird, could we just return
+'-EINVAL'/'-EACCES'/... from hv_status_to_errno() instead?
+
+>  		goto err_free_allocations;
+>  	}
+>  
+> @@ -155,7 +179,7 @@ int hv_call_add_logical_proc(int node, u32 lp_index, u32 apic_id)
+>  			if (status != HV_STATUS_SUCCESS) {
+>  				pr_err("%s: cpu %u apic ID %u, %d\n", __func__,
+>  				       lp_index, apic_id, status);
+> -				ret = status;
+> +				ret = -hv_status_to_errno(status);
+>  			}
+>  			break;
+>  		}
+> @@ -203,7 +227,7 @@ int hv_call_create_vp(int node, u64 partition_id, u32 vp_index, u32 flags)
+>  			if (status != HV_STATUS_SUCCESS) {
+>  				pr_err("%s: vcpu %u, lp %u, %d\n", __func__,
+>  				       vp_index, flags, status);
+> -				ret = status;
+> +				ret = -hv_status_to_errno(status);
+>  			}
+>  			break;
+>  		}
+> diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
+> index cbee72550a12..eb75faa4d4c5 100644
+> --- a/arch/x86/include/asm/mshyperv.h
+> +++ b/arch/x86/include/asm/mshyperv.h
+> @@ -243,6 +243,7 @@ int hyperv_flush_guest_mapping_range(u64 as,
+>  int hyperv_fill_flush_guest_mapping_list(
+>  		struct hv_guest_mapping_flush_list *flush,
+>  		u64 start_gfn, u64 end_gfn);
+> +int hv_status_to_errno(int hv_status);
+>  
+>  extern bool hv_root_partition;
+>  
+> diff --git a/include/asm-generic/hyperv-tlfs.h b/include/asm-generic/hyperv-tlfs.h
+> index dd385c6a71b5..445244192fa4 100644
+> --- a/include/asm-generic/hyperv-tlfs.h
+> +++ b/include/asm-generic/hyperv-tlfs.h
+> @@ -181,16 +181,28 @@ enum HV_GENERIC_SET_FORMAT {
+>  #define HV_HYPERCALL_REP_START_MASK	GENMASK_ULL(59, 48)
+>  
+>  /* hypercall status code */
+> -#define HV_STATUS_SUCCESS			0
+> -#define HV_STATUS_INVALID_HYPERCALL_CODE	2
+> -#define HV_STATUS_INVALID_HYPERCALL_INPUT	3
+> -#define HV_STATUS_INVALID_ALIGNMENT		4
+> -#define HV_STATUS_INVALID_PARAMETER		5
+> -#define HV_STATUS_OPERATION_DENIED		8
+> -#define HV_STATUS_INSUFFICIENT_MEMORY		11
+> -#define HV_STATUS_INVALID_PORT_ID		17
+> -#define HV_STATUS_INVALID_CONNECTION_ID		18
+> -#define HV_STATUS_INSUFFICIENT_BUFFERS		19
+> +#define HV_STATUS_SUCCESS			0x0
+> +#define HV_STATUS_INVALID_HYPERCALL_CODE	0x2
+> +#define HV_STATUS_INVALID_HYPERCALL_INPUT	0x3
+> +#define HV_STATUS_INVALID_ALIGNMENT		0x4
+> +#define HV_STATUS_INVALID_PARAMETER		0x5
+> +#define HV_STATUS_ACCESS_DENIED			0x6
+> +#define HV_STATUS_INVALID_PARTITION_STATE	0x7
+> +#define HV_STATUS_OPERATION_DENIED		0x8
+> +#define HV_STATUS_UNKNOWN_PROPERTY		0x9
+> +#define HV_STATUS_PROPERTY_VALUE_OUT_OF_RANGE	0xA
+> +#define HV_STATUS_INSUFFICIENT_MEMORY		0xB
+> +#define HV_STATUS_INVALID_PARTITION_ID		0xD
+> +#define HV_STATUS_INVALID_VP_INDEX		0xE
+> +#define HV_STATUS_NOT_FOUND			0x10
+> +#define HV_STATUS_INVALID_PORT_ID		0x11
+> +#define HV_STATUS_INVALID_CONNECTION_ID		0x12
+> +#define HV_STATUS_INSUFFICIENT_BUFFERS		0x13
+> +#define HV_STATUS_NOT_ACKNOWLEDGED		0x14
+> +#define HV_STATUS_INVALID_VP_STATE		0x15
+> +#define HV_STATUS_NO_RESOURCES			0x1D
+> +#define HV_STATUS_INVALID_LP_INDEX		0x41
+> +#define HV_STATUS_INVALID_REGISTER_VALUE	0x50
+>  
+>  /*
+>   * The Hyper-V TimeRefCount register and the TSC
+
 -- 
-2.30.0
-
+Vitaly
 
 _______________________________________________
 Virtualization mailing list
