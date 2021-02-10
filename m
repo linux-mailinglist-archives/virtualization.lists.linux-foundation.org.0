@@ -1,102 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F24C317284
-	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 22:40:53 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 543E43172AD
+	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 22:50:07 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0113E86C6E;
-	Wed, 10 Feb 2021 21:40:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C41276F5DE
+	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 21:50:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WCGbBKj6grIy; Wed, 10 Feb 2021 21:40:51 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id fs9S1d3uIf1B for <lists.virtualization@lfdr.de>;
+	Wed, 10 Feb 2021 21:50:04 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+	id 973906F516; Wed, 10 Feb 2021 21:50:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 4FD1C86C76;
-	Wed, 10 Feb 2021 21:40:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1A2B16F51C;
+	Wed, 10 Feb 2021 21:49:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 25CBFC013A;
-	Wed, 10 Feb 2021 21:40:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EAFD3C0891;
+	Wed, 10 Feb 2021 21:49:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 28C3EC013A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 30B94C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:40:50 +0000 (UTC)
+ Wed, 10 Feb 2021 21:49:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 16EA487274
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0E7BC6F56D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:40:50 +0000 (UTC)
+ Wed, 10 Feb 2021 21:49:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GMIn+psejMQe
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id doOFyrEfem1C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:40:49 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 0047587275
+ Wed, 10 Feb 2021 21:49:54 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+ id 1EBA66F516; Wed, 10 Feb 2021 21:49:54 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D5D906F516
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:40:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612993247;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=hi2X5jnGRi7KT3vlKkAdXUsSwPyG3HDv963BA62z9vA=;
- b=eJL7ugOUp7s+KcTQpPwggPLWMJSnIA9yHBlEjQTw+UalyYlDocjgMzYnnEUsak4m9LZcnQ
- haYBadVrPfo0skkUNK6Uwq8gSqiwuoQl7MAZzd8tpGyMxaLA9MdUJFRc++VOfgxadNMIzr
- bp+BwA3AbQfrsoQ3MIttuKBr/PGVl4E=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-409-gKIENTXiMwCD7oGMII5Ivg-1; Wed, 10 Feb 2021 16:40:46 -0500
-X-MC-Unique: gKIENTXiMwCD7oGMII5Ivg-1
-Received: by mail-wm1-f71.google.com with SMTP id n17so1543085wmk.3
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 13:40:46 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=hi2X5jnGRi7KT3vlKkAdXUsSwPyG3HDv963BA62z9vA=;
- b=lf3lj/xsKQY1pJvSXf9YdCMK7/QjyVnvU4cezBvDrxI7Fe/AS8qyWIrFu1sUWARf6K
- c93939iinnDOaHHW7cTMjSctOVUrOUBk/1KPKjzUUdy007H+vbgTN6PxcYQh92bKqdYH
- mD7kswXiPybHccKQq0ZAq57pvqEc1g5M89Yz6tfE+X+JXz+e2g2S5NUkJ9E/QV5bXfgR
- vmnPSil/WbjC0F9zYgMq6BXw0at/oybdGDMJqvyP4kGPnKHBRU2FIzc2PXGfdKFsLC0W
- 3mB/GoAyuUMJO3JFuGwLRYUJKG9/lev7GEzZD/lmhTZZZepg9vs8bNDHCfhN3O+p+KS+
- FMkA==
-X-Gm-Message-State: AOAM5319QhSLoB5ttTuZF/cyzmfOY/+WYLXzWSObZH5pONjfQxNfZgfT
- kmNxrYF8AE4pc2i+D5y7xmRFSFRBueWUFWydOP4D/TOiB5K9g3H87mpYf8dffVfwyO4hp+9zlww
- kMLYzOBIk80WWjAO8g4nC+xWeO+9ikGDYlAluyTd6wg==
-X-Received: by 2002:a1c:c903:: with SMTP id f3mr1050590wmb.69.1612993245120;
- Wed, 10 Feb 2021 13:40:45 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwEZ8liZuKYUAcB0H7NMYB9jERfv/Iy/eLiiOFihgo+hWnxXSocQL+S/PQhfhUBwNqqpOQigQ==
-X-Received: by 2002:a1c:c903:: with SMTP id f3mr1050574wmb.69.1612993244940;
- Wed, 10 Feb 2021 13:40:44 -0800 (PST)
-Received: from redhat.com (bzq-79-180-2-31.red.bezeqint.net. [79.180.2.31])
- by smtp.gmail.com with ESMTPSA id j185sm5103692wma.1.2021.02.10.13.40.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Feb 2021 13:40:44 -0800 (PST)
-Date: Wed, 10 Feb 2021 16:40:41 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH netdev] virtio-net: support XDP_TX when not more queues
-Message-ID: <20210210163945-mutt-send-email-mst@kernel.org>
-References: <81abae33fc8dbec37ef0061ff6f6fd696b484a3e.1610523188.git.xuanzhuo@linux.alibaba.com>
+ Wed, 10 Feb 2021 21:49:52 +0000 (UTC)
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11ALjOiM090661;
+ Wed, 10 Feb 2021 21:49:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=mime-version :
+ message-id : date : from : to : cc : subject : content-type :
+ content-transfer-encoding; s=corp-2020-01-29;
+ bh=Tdndnpd4eEExL2M0vXU8tvqQad0Lunj0ISddzhpccyE=;
+ b=d7zvhFgaPGvV2yvUgnNVbXqvrSPC/c8VNfwGrudzxt8Phy9o4eJC32mqC3zzYIVECc2R
+ 1Nm2Molv8569RL54H/LFumt8ZJiPS3R5c1OHTLu3rfsmGCQRgbjqOq6+FeY+/riiWNXR
+ SvJD+P73BGc8wOTMdW4h9x4EDcptGNBDdhvYIkYC1ViOvHkYTpKvCIJ2mb5iCW8sPejN
+ HrqEYpiv/vqsRu14l50dF1/+FOXZM4ZJrxvp2PSGpltwlIPr0kdbtRW0kex47zno8boS
+ mh4M/cOYmn0VdrZ9OWstGfmlitkw/F3QGl1nIRh7Ws7TspfsmUPwpyNmjYj1OKl2OEK0 2w== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by aserp2120.oracle.com with ESMTP id 36m4upurgx-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 10 Feb 2021 21:49:51 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11ALk1vB104194;
+ Wed, 10 Feb 2021 21:49:48 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3030.oracle.com with ESMTP id 36j4pqpxrs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 10 Feb 2021 21:49:47 +0000
+Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 11ALnjtO002810;
+ Wed, 10 Feb 2021 21:49:45 GMT
+Received: from ban25x6uut24.us.oracle.com (/10.153.73.24) by default (Oracle
+ Beehive Gateway v4.0) with ESMTP ; Wed, 10 Feb 2021 13:48:42 -0800
 MIME-Version: 1.0
-In-Reply-To: <81abae33fc8dbec37ef0061ff6f6fd696b484a3e.1610523188.git.xuanzhuo@linux.alibaba.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
- John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
- virtualization@lists.linux-foundation.org, dust.li@linux.alibaba.com,
- Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
- "David S. Miller" <davem@davemloft.net>
+Message-ID: <1612993680-29454-1-git-send-email-si-wei.liu@oracle.com>
+Date: Wed, 10 Feb 2021 13:47:57 -0800 (PST)
+From: Si-Wei Liu <si-wei.liu@oracle.com>
+To: mst@redhat.com, jasowang@redhat.com, elic@nvidia.com
+Subject: [PATCH v2 0/3] mlx5_vdpa bug fixes
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-IMR: 1
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9891
+ signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ adultscore=0
+ mlxlogscore=999 malwarescore=0 bulkscore=0 phishscore=0 spamscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2102100189
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9891
+ signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 mlxscore=0
+ mlxlogscore=999 spamscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ suspectscore=0 adultscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2102100189
+Cc: si-wei.liu@oracle.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,157 +113,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jan 13, 2021 at 04:08:57PM +0800, Xuan Zhuo wrote:
-> The number of queues implemented by many virtio backends is limited,
-> especially some machines have a large number of CPUs. In this case, it
-> is often impossible to allocate a separate queue for XDP_TX.
-> 
-> This patch allows XDP_TX to run by reuse the existing SQ with
-> __netif_tx_lock() hold when there are not enough queues.
-> 
-> Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-> Reviewed-by: Dust Li <dust.li@linux.alibaba.com>
+This set attempts to fix a few independent issues recently found
+in mlx5_vdpa driver. Please find details for each in the commit
+message.
 
-I'd like to get some advice on whether this is ok from some
-XDP experts - previously my understanding was that it is
-preferable to disable XDP for such devices than
-use locks on XDP fast path.
+Patch 1 and patch 3 are already Ack'ed by Jason Wang. Patch 2 is
+reworked to move virtio feature capability query to mlx5v_probe()
+as suggested by Eli.
 
-> ---
->  drivers/net/virtio_net.c | 47 +++++++++++++++++++++++++++++++++++------------
->  1 file changed, 35 insertions(+), 12 deletions(-)
-> 
-> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-> index ba8e637..7a3b2a7 100644
-> --- a/drivers/net/virtio_net.c
-> +++ b/drivers/net/virtio_net.c
-> @@ -195,6 +195,9 @@ struct virtnet_info {
->  	/* # of XDP queue pairs currently used by the driver */
->  	u16 xdp_queue_pairs;
->  
-> +	/* xdp_queue_pairs may be 0, when xdp is already loaded. So add this. */
-> +	bool xdp_enabled;
-> +
->  	/* I like... big packets and I cannot lie! */
->  	bool big_packets;
->  
-> @@ -481,14 +484,34 @@ static int __virtnet_xdp_xmit_one(struct virtnet_info *vi,
->  	return 0;
->  }
->  
-> -static struct send_queue *virtnet_xdp_sq(struct virtnet_info *vi)
-> +static struct send_queue *virtnet_get_xdp_sq(struct virtnet_info *vi)
->  {
->  	unsigned int qp;
-> +	struct netdev_queue *txq;
-> +
-> +	if (vi->curr_queue_pairs > nr_cpu_ids) {
-> +		qp = vi->curr_queue_pairs - vi->xdp_queue_pairs + smp_processor_id();
-> +	} else {
-> +		qp = smp_processor_id() % vi->curr_queue_pairs;
-> +		txq = netdev_get_tx_queue(vi->dev, qp);
-> +		__netif_tx_lock(txq, raw_smp_processor_id());
-> +	}
->  
-> -	qp = vi->curr_queue_pairs - vi->xdp_queue_pairs + smp_processor_id();
->  	return &vi->sq[qp];
->  }
->  
-> +static void virtnet_put_xdp_sq(struct virtnet_info *vi)
-> +{
-> +	unsigned int qp;
-> +	struct netdev_queue *txq;
-> +
-> +	if (vi->curr_queue_pairs <= nr_cpu_ids) {
-> +		qp = smp_processor_id() % vi->curr_queue_pairs;
-> +		txq = netdev_get_tx_queue(vi->dev, qp);
-> +		__netif_tx_unlock(txq);
-> +	}
-> +}
-> +
->  static int virtnet_xdp_xmit(struct net_device *dev,
->  			    int n, struct xdp_frame **frames, u32 flags)
->  {
-> @@ -512,7 +535,7 @@ static int virtnet_xdp_xmit(struct net_device *dev,
->  	if (!xdp_prog)
->  		return -ENXIO;
->  
-> -	sq = virtnet_xdp_sq(vi);
-> +	sq = virtnet_get_xdp_sq(vi);
->  
->  	if (unlikely(flags & ~XDP_XMIT_FLAGS_MASK)) {
->  		ret = -EINVAL;
-> @@ -560,12 +583,13 @@ static int virtnet_xdp_xmit(struct net_device *dev,
->  	sq->stats.kicks += kicks;
->  	u64_stats_update_end(&sq->stats.syncp);
->  
-> +	virtnet_put_xdp_sq(vi);
->  	return ret;
->  }
->  
->  static unsigned int virtnet_get_headroom(struct virtnet_info *vi)
->  {
-> -	return vi->xdp_queue_pairs ? VIRTIO_XDP_HEADROOM : 0;
-> +	return vi->xdp_enabled ? VIRTIO_XDP_HEADROOM : 0;
->  }
->  
->  /* We copy the packet for XDP in the following cases:
-> @@ -1457,12 +1481,13 @@ static int virtnet_poll(struct napi_struct *napi, int budget)
->  		xdp_do_flush();
->  
->  	if (xdp_xmit & VIRTIO_XDP_TX) {
-> -		sq = virtnet_xdp_sq(vi);
-> +		sq = virtnet_get_xdp_sq(vi);
->  		if (virtqueue_kick_prepare(sq->vq) && virtqueue_notify(sq->vq)) {
->  			u64_stats_update_begin(&sq->stats.syncp);
->  			sq->stats.kicks++;
->  			u64_stats_update_end(&sq->stats.syncp);
->  		}
-> +		virtnet_put_xdp_sq(vi);
->  	}
->  
->  	return received;
-> @@ -2416,12 +2441,8 @@ static int virtnet_xdp_set(struct net_device *dev, struct bpf_prog *prog,
->  		xdp_qp = nr_cpu_ids;
->  
->  	/* XDP requires extra queues for XDP_TX */
-> -	if (curr_qp + xdp_qp > vi->max_queue_pairs) {
-> -		NL_SET_ERR_MSG_MOD(extack, "Too few free TX rings available");
-> -		netdev_warn(dev, "request %i queues but max is %i\n",
-> -			    curr_qp + xdp_qp, vi->max_queue_pairs);
-> -		return -ENOMEM;
-> -	}
-> +	if (curr_qp + xdp_qp > vi->max_queue_pairs)
-> +		xdp_qp = 0;
->  
->  	old_prog = rtnl_dereference(vi->rq[0].xdp_prog);
->  	if (!prog && !old_prog)
-> @@ -2453,12 +2474,14 @@ static int virtnet_xdp_set(struct net_device *dev, struct bpf_prog *prog,
->  	netif_set_real_num_rx_queues(dev, curr_qp + xdp_qp);
->  	vi->xdp_queue_pairs = xdp_qp;
->  
-> +	vi->xdp_enabled = false;
->  	if (prog) {
->  		for (i = 0; i < vi->max_queue_pairs; i++) {
->  			rcu_assign_pointer(vi->rq[i].xdp_prog, prog);
->  			if (i == 0 && !old_prog)
->  				virtnet_clear_guest_offloads(vi);
->  		}
-> +		vi->xdp_enabled = true;
->  	}
->  
->  	for (i = 0; i < vi->max_queue_pairs; i++) {
-> @@ -2526,7 +2549,7 @@ static int virtnet_set_features(struct net_device *dev,
->  	int err;
->  
->  	if ((dev->features ^ features) & NETIF_F_LRO) {
-> -		if (vi->xdp_queue_pairs)
-> +		if (vi->xdp_enabled)
->  			return -EBUSY;
->  
->  		if (features & NETIF_F_LRO)
-> -- 
-> 1.8.3.1
+--
+v1->v2: move feature capability query to probing (Eli)
+
+Si-Wei Liu (3):
+  vdpa/mlx5: should exclude header length and fcs from mtu
+  vdpa/mlx5: fix feature negotiation across device reset
+  vdpa/mlx5: defer clear_virtqueues to until DRIVER_OK
+
+ drivers/vdpa/mlx5/core/mlx5_vdpa.h |  4 ++++
+ drivers/vdpa/mlx5/net/mlx5_vnet.c  | 42 +++++++++++++++++++++++++++-----------
+ 2 files changed, 34 insertions(+), 12 deletions(-)
+
+-- 
+1.8.3.1
 
 _______________________________________________
 Virtualization mailing list
